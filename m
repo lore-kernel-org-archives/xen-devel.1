@@ -2,43 +2,45 @@ Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65F7DC2BBCA
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FF09C0007A
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:46:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 52FE322AA8
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:41:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52FE322AA8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id C0E49207A4
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:46:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0E49207A4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43675.78523 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43690.78534 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpnF-0005Kk-Rf; Thu, 03 Dec 2020 14:41:13 +0000
+	id 1kkpsV-0005r5-FW; Thu, 03 Dec 2020 14:46:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43675.78523; Thu, 03 Dec 2020 14:41:13 +0000
+Received: by outflank-mailman (output) from mailman id 43690.78534; Thu, 03 Dec 2020 14:46:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpnF-0005Kd-NK; Thu, 03 Dec 2020 14:41:13 +0000
-Received: by outflank-mailman (input) for mailman id 43675;
- Thu, 03 Dec 2020 14:41:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ho2W=FH=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1kkpnE-0005Ia-BI
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:41:12 +0000
-Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id eee0cced-9aa4-4e40-b8a4-305ce3a4e205;
- Thu, 03 Dec 2020 14:41:10 +0000 (UTC)
-Received: by mail-wm1-x343.google.com with SMTP id a3so4123647wmb.5
- for <xen-devel@lists.xenproject.org>; Thu, 03 Dec 2020 06:41:10 -0800 (PST)
+	id 1kkpsV-0005qy-CK; Thu, 03 Dec 2020 14:46:39 +0000
+Received: by outflank-mailman (input) for mailman id 43690;
+ Thu, 03 Dec 2020 14:46:37 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=vSHx=FH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kkpsT-0005qt-JJ
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:46:37 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 09e44b4f-6d99-4718-a99f-02da3d06edf6;
+ Thu, 03 Dec 2020 14:46:35 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E28BDAC65;
+ Thu,  3 Dec 2020 14:46:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,87 +52,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eee0cced-9aa4-4e40-b8a4-305ce3a4e205
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=HK1V8/imb7tnSnJOei6g4pqy91wESKuWzAGgLPwjHwg=;
-        b=SZHioIOn5tVu6tr8ybd3wXB3XD17SHBvvUHrKmgn5nzUUr9WTl3tW9lNsgArUvLm3Q
-         ZV3GxTDDTFehHtJdjsdJ5BNTTDJaCL5oRK9ZHNQw7fD5ihGhnx3tj9FufdD8WFm0sSpf
-         8wVZjOPbIlVKMR7eCcx6dZz9Q9ot/QzVGKf3h+GM8CZJ7F5TkJaIUYVlMIPi1JIsT72I
-         0J4+XFIg8yOWuRaGYxiD+tmLahsIKO+2kjlhnSjzQTkCiv3eLv9xpvctn97rsCcp3FDZ
-         2XLnBvymwoxiob6wEQ4XHV1Hok+273jGdjVGI6NOtSYSKpT1Szhun0oekITnZhntGX4o
-         G01A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=HK1V8/imb7tnSnJOei6g4pqy91wESKuWzAGgLPwjHwg=;
-        b=F1QV2XpWOcbkvlQaMt5/dBVRPmiz/+qaQAeERyMDwT2LTXOQtz+ORHJXzbOd9uV7CG
-         SmJtaYL0nxaRbAnZYcq3AeV6Qo8QZBHx4b4c+LaZdZMX59M1OXfT7NQXNeip7eapJxep
-         3mI98r0O4WL2CKEhcSwwUthEh/ydfrjlZ6o4BMp4QxD8xVn1Elrkhc+A21jySSqri/hv
-         S5/rzjKxwKAlo38FljQpxJcmkta0PNIldIaQfphcpOYBdoGowfHrenkKc3tVGJ0nKSyx
-         Z9T6ewwVsnySFpiP3xf8kL3e7QdljAJZHMuhf5FOPxI04HxuXQcPCSahboqZwEfG0jki
-         Km8Q==
-X-Gm-Message-State: AOAM532AkROkozVAq36uPiAXIJQtznQXuN8BwX/RGpfT3rgAUmZDeVVY
-	wbBe9O5+C3n0UILWETqVvIyEsKmPXeaHX71SB8c=
-X-Google-Smtp-Source: ABdhPJz6l0FDh5GRb5vo96+kF3as3jgAwFUvAeJUW0gxT8LtGN2Hm+Rzn0Pgu341aLOD4TUKSaHHGmoYiW7hs+0kvzo=
-X-Received: by 2002:a1c:4e0a:: with SMTP id g10mr3733729wmh.51.1607006469731;
- Thu, 03 Dec 2020 06:41:09 -0800 (PST)
+X-Inumbo-ID: 09e44b4f-6d99-4718-a99f-02da3d06edf6
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1607006795; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zkQN/tCRpveejzo9EbHpCmPYU5dLT2Jsg3nQVkFEQZQ=;
+	b=K8lUnQ2+KQSkixgnsDn4EWpBvOmzl+JwiDSeTOFcNdjVpffJ2MWo5oRvuxBsEacTp/5A8k
+	Ju5A/NKvTeTCrbYb+yiXBtoxxa2yCr0DgtLvikHHp6CBIk0lBshx1OJtlNDUj5JVqEHbNP
+	md8yQjlvXO0H1ut66WpN1Gm/qJhEvDE=
+Subject: Re: [PATCH v2 15/17] xen/cpupool: add cpupool directories
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Dario Faggioli <dfaggioli@suse.com>,
+ xen-devel@lists.xenproject.org
+References: <20201201082128.15239-1-jgross@suse.com>
+ <20201201082128.15239-16-jgross@suse.com>
+ <89f52bed-c611-70c5-1349-63838530debd@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <0613c7e2-724a-e16c-91f7-f99298d04ab2@suse.com>
+Date: Thu, 3 Dec 2020 15:46:34 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-References: <9d7a052a-6222-80ff-cbf1-612d4ca50c2a@suse.com>
- <d821c715-966a-b48b-a877-c5dac36822f0@suse.com> <17c90493-b438-fbc1-ca10-3bc4d89c4e5e@xen.org>
- <7a768bcd-80c1-d193-8796-7fb6720fa22a@suse.com>
-In-Reply-To: <7a768bcd-80c1-d193-8796-7fb6720fa22a@suse.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Thu, 3 Dec 2020 09:40:34 -0500
-Message-ID: <CABfawh=t+TK+Bm3JUee+ZZ7SSPRLtgnq162Sk17cKNKqJMRreA@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] evtchn: don't call Xen consumer callback with
- per-channel lock held
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Tamas K Lengyel <lengyelt@ainfosec.com>, 
-	Petre Ovidiu PIRCALABU <ppircalabu@bitdefender.com>, Alexandru Isaila <aisaila@bitdefender.com>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <89f52bed-c611-70c5-1349-63838530debd@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 3, 2020 at 5:09 AM Jan Beulich <jbeulich@suse.com> wrote:
->
-> On 02.12.2020 22:10, Julien Grall wrote:
-> > On 23/11/2020 13:30, Jan Beulich wrote:
-> >> While there don't look to be any problems with this right now, the lock
-> >> order implications from holding the lock can be very difficult to follow
-> >> (and may be easy to violate unknowingly). The present callbacks don't
-> >> (and no such callback should) have any need for the lock to be held.
-> >>
-> >> However, vm_event_disable() frees the structures used by respective
-> >> callbacks and isn't otherwise synchronized with invocations of these
-> >> callbacks, so maintain a count of in-progress calls, for evtchn_close()
-> >> to wait to drop to zero before freeing the port (and dropping the lock).
-> >
-> > AFAICT, this callback is not the only place where the synchronization is
-> > missing in the VM event code.
-> >
-> > For instance, vm_event_put_request() can also race against
-> > vm_event_disable().
-> >
-> > So shouldn't we handle this issue properly in VM event?
->
-> I suppose that's a question to the VM event folks rather than me?
+On 02.12.2020 16:46, Jürgen Groß wrote:
+> On 01.12.20 09:21, Juergen Gross wrote:
+>> @@ -1003,12 +1006,131 @@ static struct notifier_block cpu_nfb = {
+>>       .notifier_call = cpu_callback
+>>   };
+>>   
+>> +#ifdef CONFIG_HYPFS
+>> +static const struct hypfs_entry *cpupool_pooldir_enter(
+>> +    const struct hypfs_entry *entry);
+>> +
+>> +static struct hypfs_funcs cpupool_pooldir_funcs = {
+>> +    .enter = cpupool_pooldir_enter,
+>> +    .exit = hypfs_node_exit,
+>> +    .read = hypfs_read_dir,
+>> +    .write = hypfs_write_deny,
+>> +    .getsize = hypfs_getsize,
+>> +    .findentry = hypfs_dir_findentry,
+>> +};
+>> +
+>> +static HYPFS_VARDIR_INIT(cpupool_pooldir, "%u", &cpupool_pooldir_funcs);
+>> +
+>> +static const struct hypfs_entry *cpupool_pooldir_enter(
+>> +    const struct hypfs_entry *entry)
+>> +{
+>> +    return &cpupool_pooldir.e;
+>> +}
+> I have found a more generic way to handle entering a dyndir node,
+> resulting in no need to have cpupool_pooldir_enter() and
+> cpupool_pooldir_funcs.
+> 
+> This will add some more lines to the previous patch, but less than
+> saved here.
 
-IMHO it would obviously be better if the Xen side could handle
-situations like these gracefully. OTOH it is also reasonable to expect
-the privileged toolstack to perform its own sanity checks before
-disabling. Like right now for disabling vm_event we first pause the
-VM, process all remaining events that were on the ring, and only then
-disable the interface. This avoids the race condition mentioned above
-(among other issues). It's not perfect - we ran into problems where
-event replies don't have the desired effect because the VM is paused -
-but for the most part doing this is sufficient. So I don't consider
-this to be a priority at the moment. That said, if anyone is so
-inclined to fix this up, I would be happy to review & ack.
+Which may then mean it's not a good use of time to look at v2 patch
+14, considering there's a lot of other stuff in need of looking at?
 
-Tamas
+Jan
 
