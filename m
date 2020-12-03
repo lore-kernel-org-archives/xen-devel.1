@@ -7,36 +7,35 @@ X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F094FC64E7C
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 01:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABC19C64E7C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 01:59:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 724E220B80
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 01:59:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 724E220B80
+	by mail.kernel.org (Postfix) with ESMTPS id 463B720B80
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 01:59:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 463B720B80
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43068.77470 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43069.77472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkdtS-0007PY-O6; Thu, 03 Dec 2020 01:58:50 +0000
+	id 1kkdtS-0007Pn-Tc; Thu, 03 Dec 2020 01:58:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43068.77470; Thu, 03 Dec 2020 01:58:50 +0000
+Received: by outflank-mailman (output) from mailman id 43069.77472; Thu, 03 Dec 2020 01:58:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkdtS-0007PP-H0; Thu, 03 Dec 2020 01:58:50 +0000
-Received: by outflank-mailman (input) for mailman id 43068;
+	id 1kkdtS-0007Pc-PA; Thu, 03 Dec 2020 01:58:50 +0000
+Received: by outflank-mailman (input) for mailman id 43069;
  Thu, 03 Dec 2020 01:58:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fvcX=FH=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1kkdtR-0007PG-Ag
+ id 1kkdtR-0007PF-DT
  for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 01:58:49 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e775cbf0-7adc-46fb-9b14-6f05a26a7c43;
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id c04a0f03-97b9-44fe-ad2b-dab1b271e495;
  Thu, 03 Dec 2020 01:58:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -49,117 +48,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e775cbf0-7adc-46fb-9b14-6f05a26a7c43
+X-Inumbo-ID: c04a0f03-97b9-44fe-ad2b-dab1b271e495
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1606960728;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=81Rw3lZq98mQJyaIkQSLoiys0ZES5ImYdbwUcQDOUUM=;
-  b=MJsw8CDw+JS4C8KZAwdh25fwGlMR616zTUq1whLTv/7cZZ4rBaJRSppy
-   mIaYA2tZifi+W+hRx5NLOijG6urwJZwCGU8957wSjFt3/yIxC7VSVmYpK
-   i67LkoccBLSmcukELsRKoPfUOIFWqfAolHfM8Yu2VjNMPdrA9PxoI7BBQ
-   U=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QbsnmMv0btZoWs0MjOnZTuPOXXG4Sau6n2H6oj8ItV0G3cT4fCUauXYIOkTZU9N+h8/8soDNkQ
- LO5oSZ0gddmvSsHxmauHCYgkonA2BQAZgom2HEX5i55utTSe/sozu6bRd6OL4r8qGpzsPUtjqJ
- bLQu8Xp5Cz2vr+lBd0gImyt99IN0NAG2vr98aZfADxjAPj5t8aRpJ2hL640o0Q5KMLnXBnD2Tm
- wpvJz3X2sBr4XnGM71+qdFv/pfF3sknr/Tzlg527B0aWxa/X/uRpYSWqwyp0wabpRLFishOCBa
- G7U=
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=xpXNv8lFLeP6swaENV8AzRveAAHRAeWFit3RYlXNouM=;
+  b=AUFQR/ptsKzA1KMFj5Rz3kdqq2Y3z6RvkkdZdnQ5gMffrydcuNmSYCKr
+   4WuEBbaXaj1nke8BG9iv5RDHjXNyoNeZVSl4j+PC/+zgKvt1JbSTGq6gI
+   7X1aYhyjTgwZIERMa6edfCw8fYMSVnvVGo+fVsIonOtvM1ncmWYJBvs67
+   E=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: HVkxNvIiq6a4s2clRs+HH8oSk97EohkIr13j11evyH4DuYDWiKPQr998784+E2rINRJJ0W5hS0
+ WE/0yNecMujb2oUQByIVuAfSvjKFocldevmaBPxynSoBe3CyHmR2iMVb2U9/R/CQ1Zr1ryEtv6
+ yOSiwezK8+etdg630vE+D1696juM1XFRiOobKO0SEiso5ot8g5EbtKcYf9KV0pd3BJxS9aOiHa
+ 7gaJcmUR8St3a0DNtXuw23GV3DKMU3dI2gQ0WqYigpU/Jig9nCNtTsOps31xZ8X5UG/wAyPWW1
+ nTM=
 X-SBRS: None
-X-MesageID: 32749603
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 33596934
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.78,388,1599537600"; 
-   d="scan'208";a="32749603"
+   d="scan'208";a="33596934"
 From: Igor Druzhinin <igor.druzhinin@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>,
 	<iwj@xenproject.org>, <jbeulich@suse.com>, <julien@xen.org>,
 	<sstabellini@kernel.org>, <wl@xen.org>, <roger.pau@citrix.com>, "Igor
  Druzhinin" <igor.druzhinin@citrix.com>
-Subject: [PATCH v2 2/2] x86/IRQ: allocate guest array of max size only for shareable IRQs
-Date: Thu, 3 Dec 2020 01:58:26 +0000
-Message-ID: <1606960706-21274-2-git-send-email-igor.druzhinin@citrix.com>
+Subject: [PATCH v2 1/2] x86/IRQ: make max number of guests for a shared IRQ configurable
+Date: Thu, 3 Dec 2020 01:58:25 +0000
+Message-ID: <1606960706-21274-1-git-send-email-igor.druzhinin@citrix.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1606960706-21274-1-git-send-email-igor.druzhinin@citrix.com>
-References: <1606960706-21274-1-git-send-email-igor.druzhinin@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-... and increase default "irq_max_guests" to 32.
+... and increase the default to 16.
 
-It's not necessary to have an array of a size more than 1 for non-shareable
-IRQs and it might impact scalability in case of high "irq_max_guests"
-values being used - every IRQ in the system including MSIs would be
-supplied with an array of that size.
+Current limit of 7 is too restrictive for modern systems where one GSI
+could be shared by potentially many PCI INTx sources where each of them
+corresponds to a device passed through to its own guest. Some systems do not
+apply due dilligence in swizzling INTx links in case e.g. INTA is declared as
+interrupt pin for the majority of PCI devices behind a single router,
+resulting in overuse of a GSI.
 
-Since it's now less impactful to use higher "irq_max_guests" value - bump
-the default to 32. That should give more headroom for future systems.
+Introduce a new command line option to configure that limit and dynamically
+allocate an array of the necessary size. Set the default size now to 16 which
+is higher than 7 but could later be increased even more if necessary.
 
 Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
 ---
 
-New in v2.
-This is suggested by Jan and is optional for me.
+Changes in v2:
+- introduced a command line option as suggested
+- set the default limit to 16 for now
 
 ---
- docs/misc/xen-command-line.pandoc | 2 +-
- xen/arch/x86/irq.c                | 7 ++++---
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ docs/misc/xen-command-line.pandoc |  9 +++++++++
+ xen/arch/x86/irq.c                | 19 +++++++++++++------
+ 2 files changed, 22 insertions(+), 6 deletions(-)
 
 diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index f5f230c..dea2a22 100644
+index b4a0d60..f5f230c 100644
 --- a/docs/misc/xen-command-line.pandoc
 +++ b/docs/misc/xen-command-line.pandoc
-@@ -1644,7 +1644,7 @@ This option is ignored in **pv-shim** mode.
- ### irq_max_guests (x86)
+@@ -1641,6 +1641,15 @@ This option is ignored in **pv-shim** mode.
+ ### nr_irqs (x86)
  > `= <integer>`
  
--> Default: `16`
-+> Default: `32`
++### irq_max_guests (x86)
++> `= <integer>`
++
++> Default: `16`
++
++Maximum number of guests IRQ could be shared between, i.e. a limit on
++the number of guests it is possible to start each having assigned a device
++sharing a common interrupt line.  Accepts values between 1 and 255.
++
+ ### numa (x86)
+ > `= on | off | fake=<integer> | noacpi`
  
- Maximum number of guests IRQ could be shared between, i.e. a limit on
- the number of guests it is possible to start each having assigned a device
 diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index 5ae9846..70b7a53 100644
+index 8d1f9a9..5ae9846 100644
 --- a/xen/arch/x86/irq.c
 +++ b/xen/arch/x86/irq.c
-@@ -440,7 +440,7 @@ int __init init_irq_data(void)
+@@ -42,6 +42,10 @@ integer_param("nr_irqs", nr_irqs);
+ int __read_mostly opt_irq_vector_map = OPT_IRQ_VECTOR_MAP_DEFAULT;
+ custom_param("irq_vector_map", parse_irq_vector_map_param);
+ 
++/* Max number of guests IRQ could be shared with */
++static unsigned int __read_mostly irq_max_guests;
++integer_param("irq_max_guests", irq_max_guests);
++
+ vmask_t global_used_vector_map;
+ 
+ struct irq_desc __read_mostly *irq_desc = NULL;
+@@ -435,6 +439,9 @@ int __init init_irq_data(void)
+     for ( ; irq < nr_irqs; irq++ )
          irq_to_desc(irq)->irq = irq;
  
-     if ( !irq_max_guests || irq_max_guests > 255)
--        irq_max_guests = 16;
-+        irq_max_guests = 32;
- 
++    if ( !irq_max_guests || irq_max_guests > 255)
++        irq_max_guests = 16;
++
  #ifdef CONFIG_PV
      /* Never allocate the hypercall vector or Linux/BSD fast-trap vector. */
-@@ -1540,6 +1540,7 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
-     unsigned int        irq;
-     struct irq_desc         *desc;
-     irq_guest_action_t *action, *newaction = NULL;
-+    unsigned int        max_nr_guests = will_share ? irq_max_guests : 1;
-     int                 rc = 0;
+     set_bit(LEGACY_SYSCALL_VECTOR, used_vectors);
+@@ -1028,7 +1035,6 @@ int __init setup_irq(unsigned int irq, unsigned int irqflags,
+  * HANDLING OF GUEST-BOUND PHYSICAL IRQS
+  */
  
-     WARN_ON(!spin_is_locked(&v->domain->event_lock));
-@@ -1571,7 +1572,7 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+-#define IRQ_MAX_GUESTS 7
+ typedef struct {
+     u8 nr_guests;
+     u8 in_flight;
+@@ -1039,7 +1045,7 @@ typedef struct {
+ #define ACKTYPE_EOI    2     /* EOI on the CPU that was interrupted  */
+     cpumask_var_t cpu_eoi_map; /* CPUs that need to EOI this interrupt */
+     struct timer eoi_timer;
+-    struct domain *guest[IRQ_MAX_GUESTS];
++    struct domain *guest[];
+ } irq_guest_action_t;
+ 
+ /*
+@@ -1564,7 +1570,8 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+         if ( newaction == NULL )
          {
              spin_unlock_irq(&desc->lock);
-             if ( (newaction = xmalloc_bytes(sizeof(irq_guest_action_t) +
--                  irq_max_guests * sizeof(action->guest[0]))) != NULL &&
-+                  max_nr_guests * sizeof(action->guest[0]))) != NULL &&
+-            if ( (newaction = xmalloc(irq_guest_action_t)) != NULL &&
++            if ( (newaction = xmalloc_bytes(sizeof(irq_guest_action_t) +
++                  irq_max_guests * sizeof(action->guest[0]))) != NULL &&
                   zalloc_cpumask_var(&newaction->cpu_eoi_map) )
                  goto retry;
              xfree(newaction);
-@@ -1640,7 +1641,7 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+@@ -1633,11 +1640,11 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
          goto retry;
      }
  
--    if ( action->nr_guests == irq_max_guests )
-+    if ( action->nr_guests == max_nr_guests )
+-    if ( action->nr_guests == IRQ_MAX_GUESTS )
++    if ( action->nr_guests == irq_max_guests )
      {
          printk(XENLOG_G_INFO "Cannot bind IRQ%d to dom%d. "
-                "Already at max share %u, increase with irq_max_guests= option.\n",
+-               "Already at max share.\n",
+-               pirq->pirq, v->domain->domain_id);
++               "Already at max share %u, increase with irq_max_guests= option.\n",
++               pirq->pirq, v->domain->domain_id, irq_max_guests);
+         rc = -EBUSY;
+         goto unlock_out;
+     }
 -- 
 2.7.4
 
