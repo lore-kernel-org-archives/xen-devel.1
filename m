@@ -2,46 +2,75 @@ Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB734C83012
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48817C63777
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:57:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3029F20671
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:42:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3029F20671
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id C26BC20872
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:57:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C26BC20872
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43408.78043 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43436.78073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kknw0-0005yr-W2; Thu, 03 Dec 2020 12:42:09 +0000
+	id 1kkoAu-0007XP-PI; Thu, 03 Dec 2020 12:57:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43408.78043; Thu, 03 Dec 2020 12:42:08 +0000
+Received: by outflank-mailman (output) from mailman id 43436.78073; Thu, 03 Dec 2020 12:57:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kknw0-0005yN-Ja; Thu, 03 Dec 2020 12:42:08 +0000
-Received: by outflank-mailman (input) for mailman id 43408;
- Thu, 03 Dec 2020 12:42:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kknvz-0005xT-Qp
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 12:42:07 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kknvy-00046E-NK; Thu, 03 Dec 2020 12:42:06 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com
- ([86.183.162.145] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kknvy-00015A-FT; Thu, 03 Dec 2020 12:42:06 +0000
+	id 1kkoAu-0007XI-Lb; Thu, 03 Dec 2020 12:57:32 +0000
+Received: by outflank-mailman (input) for mailman id 43436;
+ Thu, 03 Dec 2020 12:57:31 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Lp8G=FH=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
+ id 1kkoAt-0007XD-BF
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 12:57:31 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (unknown
+ [40.107.7.71]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6d420663-49d3-401a-bc84-1e510e77ee18;
+ Thu, 03 Dec 2020 12:57:28 +0000 (UTC)
+Received: from AS8PR04CA0028.eurprd04.prod.outlook.com (2603:10a6:20b:310::33)
+ by VI1PR08MB4224.eurprd08.prod.outlook.com (2603:10a6:803:bc::32)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.17; Thu, 3 Dec
+ 2020 12:57:26 +0000
+Received: from VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:310:cafe::b1) by AS8PR04CA0028.outlook.office365.com
+ (2603:10a6:20b:310::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.17 via Frontend
+ Transport; Thu, 3 Dec 2020 12:57:25 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT035.mail.protection.outlook.com (10.152.18.110) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3632.17 via Frontend Transport; Thu, 3 Dec 2020 12:57:25 +0000
+Received: ("Tessian outbound 6af064f543d4:v71");
+ Thu, 03 Dec 2020 12:57:24 +0000
+Received: from 24564b47310b.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ EBBF56B8-8F59-4D44-8175-956248CF8379.1; 
+ Thu, 03 Dec 2020 12:57:08 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 24564b47310b.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 03 Dec 2020 12:57:08 +0000
+Received: from DB7PR08MB3500.eurprd08.prod.outlook.com (2603:10a6:10:49::10)
+ by DB6PR0801MB2119.eurprd08.prod.outlook.com (2603:10a6:4:34::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.22; Thu, 3 Dec
+ 2020 12:57:05 +0000
+Received: from DB7PR08MB3500.eurprd08.prod.outlook.com
+ ([fe80::21f3:34c:8f7e:42ef]) by DB7PR08MB3500.eurprd08.prod.outlook.com
+ ([fe80::21f3:34c:8f7e:42ef%2]) with mapi id 15.20.3611.032; Thu, 3 Dec 2020
+ 12:57:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,254 +82,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=yJbK+YZtuE0HTqrQU4QFK2ag5uh4t73qAq6ThSOAdyw=; b=eKUdkgqtJyfjtmonjYjyorCeu3
-	ABafYeN9MyRFS86S/K/zCCiqsIOQHiW6P/sAbg9E8Ovb0INx+5rtUK53pwHL41yo1/a57jsil11lL
-	GDMQxLmvXId8JpTBXBGj+p9nglTAedkLaKTk5ha/KP2dr/O3CnwMLgLXpoNkFRdfWy9k=;
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v5 3/4] libxl: introduce a 'libxl_xen_abi_features' enumeration...
-Date: Thu,  3 Dec 2020 12:41:58 +0000
-Message-Id: <20201203124159.3688-4-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201203124159.3688-1-paul@xen.org>
-References: <20201203124159.3688-1-paul@xen.org>
+X-Inumbo-ID: 6d420663-49d3-401a-bc84-1e510e77ee18
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=glmXbc+pwXkEkBwx0IrBVP6cHdvjkgZ8tsP4AEr4lIc=;
+ b=hFu4KpI++Qm2FS1G1v4gPGB1OBgmmG24sB645AEjuzzHOwTEOIhxwSY8vQzVJg12iRlaNXBJKlUH8O/XdkIya4/GW/+QwwU7pD7d1TAM7TyyuzY+CKa3yWtAiLPnz7QzQu0TebqvQ4Eqtm7bQwxB95jrjfi0m3M8dAeDDUiZxkA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
+ action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 202d5570b031ef18
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lTry7acv2usk0+sECMXUYVTbsK2dKplcguUlSGIPD3sjcRCLC9F9591c+hVoxCJPUDhwkBSWhbLJSr4PFGXnvmQvY27Osn9GAm6epmT6oIAmQzwFVXeKX/rhnvJniMvehKyffYbYrsxdhCgqravfwYEvh2v+If8XERfg809tdMmuJFqM+S6qZK3/x58Le+zxQjqxgUxnqatb0A33EVOY5qKlq78HdJwGM26phhmJtBwk6pIrz3qWvFCnFj+orMV2DwqFhpLtVXE4P2mIhQ4pa+Aaa6JvBbRxQQ9KImzfTroDiEBNflWSjvLeIbnU3pElznXHhl4cqHsf0q3DK6JjkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=glmXbc+pwXkEkBwx0IrBVP6cHdvjkgZ8tsP4AEr4lIc=;
+ b=dw1dDliY07EHyiNZXFTATQ+yR1Z+Dq5DXdh6IeF9KXyjMcEw+iNgW1UK6tPZPOVt3OcHvSwY0QRVk+fKNZfe3NzGGZMmYRMNjVcah0TCgAhcNkzEMaAm++AAp+xsKhCizj/z8pRTRURk5P7fZ3Ebx9fqL71rBXPnWSbHZodJqUteYtoaLjp8wqRBz8DenvIMHcfH+pG1eQlgNSwHVUUM6yjXt09ErgV+3c0ewdM6SDMlrJX02BZUiorMXx7b6dK7S+JPuyTDqWrMCpFabyCwVA3o+woCr29cFNF/WZ3op3jgw9GwJXuuTMHVi/WvYqUMgHXhjPrsRYEOO70lDGbGqQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=glmXbc+pwXkEkBwx0IrBVP6cHdvjkgZ8tsP4AEr4lIc=;
+ b=hFu4KpI++Qm2FS1G1v4gPGB1OBgmmG24sB645AEjuzzHOwTEOIhxwSY8vQzVJg12iRlaNXBJKlUH8O/XdkIya4/GW/+QwwU7pD7d1TAM7TyyuzY+CKa3yWtAiLPnz7QzQu0TebqvQ4Eqtm7bQwxB95jrjfi0m3M8dAeDDUiZxkA=
+From: Rahul Singh <Rahul.Singh@arm.com>
+To: Julien Grall <julien@xen.org>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Bertrand Marquis <Bertrand.Marquis@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v2 3/8] xen/arm: revert patch related to XArray
+Thread-Topic: [PATCH v2 3/8] xen/arm: revert patch related to XArray
+Thread-Index: AQHWxBX3rCwwjKDJrkuX4ODVkz/db6nj2uAAgAGEjAA=
+Date: Thu, 3 Dec 2020 12:57:05 +0000
+Message-ID: <2B1A7090-F07C-4DF9-BDEC-6E5A2D715DB4@arm.com>
+References: <cover.1606406359.git.rahul.singh@arm.com>
+ <612c1adabc1c26a539abf0dc05ea20b51e66e85f.1606406359.git.rahul.singh@arm.com>
+ <266b918c-b9c4-e067-b8dc-4e879c913af5@xen.org>
+In-Reply-To: <266b918c-b9c4-e067-b8dc-4e879c913af5@xen.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
+x-originating-ip: [217.140.99.251]
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 59d3e2e9-1b2d-4458-d15e-08d8978afb74
+x-ms-traffictypediagnostic: DB6PR0801MB2119:|VI1PR08MB4224:
+x-ms-exchange-transport-forked: True
+X-Microsoft-Antispam-PRVS:
+	<VI1PR08MB42240F19F8CEBE19E1CB685EFCF20@VI1PR08MB4224.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ mCLUFCUA6v+DZYPEWBQ7G7UxmtMvVp5B7SfXRxrDuCHpuCPlcevGsDlQv0DRmfG9R8xSbyvdeajhQjhBWFccBvYUoeUgl4eMSWMlyxlNNHTTpGX4hapDuMbU2YYksgUdXSfZRz4OIWNBDRPKwhFZJfl/qR4qTubmTRp4hZ8Y7KY4pNdLxaAEMVkXwOiscPvHaMD0gBtwvjgvrvOoQlgI+DB+OKFqGhRW9zQHVcyRzkkEVDGFCfoHU0fnjB91a75Ti0+iAFoZIn3LoAo3nHO28BqQ4QSf9fX0pe9DtDoh7K6gjpAM3FPrWf3YHXRHIXUY2fvrAkkI0A6xToTPYCDKn1lcuAhTxF+LAfZP8ux21ITb/on4N6Nfu/MYyfq0b0yS
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR08MB3500.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(346002)(366004)(136003)(376002)(396003)(86362001)(478600001)(83380400001)(36756003)(6916009)(4326008)(5660300002)(2616005)(8936002)(4744005)(8676002)(54906003)(71200400001)(2906002)(316002)(186003)(6506007)(26005)(6512007)(66446008)(64756008)(6486002)(66946007)(66476007)(91956017)(76116006)(66556008)(53546011)(33656002)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata:
+ =?us-ascii?Q?wXwMeKWl+u9CXa9j/BqWovsSrEjKiWRzz8yjYYNID1Ti6ijKOFZo46AgyroR?=
+ =?us-ascii?Q?TQJ5u/f+LD/DH5UCt1qc+P+k9ssCsL6+rb8AUpM0IHxnlWvuNM5U3zMBQr9T?=
+ =?us-ascii?Q?VNKIIHiBb8g9i+y+layFaQftGM7WGea3gwbZq17wrwFv5YzogfsaUggUUfOJ?=
+ =?us-ascii?Q?Cw3DPeRm2IVHCjhYb5pYcsImiZ4rixW+LNm+PH1UWEjoPjj5gi0UUZsdzpTG?=
+ =?us-ascii?Q?ju/xKIH6lgHSc6gaDFpPI5ofJ7GmcmhG3zJj/U/XW2ODDqG2h3R5DZeEzk5B?=
+ =?us-ascii?Q?pvenGFTed2XJcgqGh5zDmUlfBZt9FbcxjoyviKvTf5Orj5C1U3LgTVt8zJKt?=
+ =?us-ascii?Q?utnuzPpAVEcP5hdp/Mq99Bj9NA5Z8cpfBEC1AYmbMyochLHlgmP3YiFQ5iNw?=
+ =?us-ascii?Q?FDiMJfG2TP8JmsbYgPFiR6KmX6UdXLOlOJi3hhnTLueq+g/2GRsNB0mvX+2Y?=
+ =?us-ascii?Q?LWMCp0sCepzE+92OQlCwPH5tbWCBzb4uyqM+bvoVX4la/oGv/zz/zYAsFEqS?=
+ =?us-ascii?Q?z8QYT8A+7xDf9SBc7itrJu/NDo1t9prjigIKI/XMAXFXV5DESx4LT7soe7vI?=
+ =?us-ascii?Q?2bsdFS49jNjy6VzSz05g4Y5KxxPDzH8OMuWuwWBd7ngtsiEtM1EO3CSOvRyQ?=
+ =?us-ascii?Q?yCvfdyw/z9giDfp7i7xI+mWutAHlW1Bcmjo+7MiikPK5oOctL9Wc9CGe/UqW?=
+ =?us-ascii?Q?yKpYSeYOIgEfUYosbcBtNDTSaLzV/urmfUOXRmq8fRYm7olFl8P+B6COc7NH?=
+ =?us-ascii?Q?FyDEc1Oda+38kbdJ7Y4EDUH836kt4WcrjoN5sBzJZKJBdvBEq7B1DY5WBOJ/?=
+ =?us-ascii?Q?SGNogS4c86RlKyVuu+kDmQIYNH05twUSxX5tod0G5kAPBqDCU5wQghr4utgc?=
+ =?us-ascii?Q?8LpMu1HB8kP+yV4pZOnCijab18QtoxugPzvcaNWou3surnStrGxtWmpVwkr7?=
+ =?us-ascii?Q?IKsZtrV+OfKzBdjdPbBwRC5xzBiAROEu+g+44zqYOT5rxDoKsU6Sn5eA+uAZ?=
+ =?us-ascii?Q?hMxk?=
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <553694E2A5AE774F84C8E786654269A7@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0801MB2119
+Original-Authentication-Results: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	745f7346-13c0-4949-ee3f-08d8978aef78
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	4s/L8vUmUfb+8/QS+GFPYgvvRyokVTqxfx43T3TmnKFL375Lz0xrb5Fm2LXcjaIViQZO66O+qgfvPb+Rq9smdcViuQlCMLeg8svD21AxzxjLoZ+KDHwI5RjtoXW/W9CslZ5pjnEr7u7C4niOr0oVtAxNai59kneYXxM/JbxRHUb3m3DLzKTfBYEkXPRIcISLJnOG4tIAdogYV5sdkGF3+r7Ycp5BSDGDq4bDuRvRA85ATIdCiyQVSR5f/2Q/1UH7c8MFalbtVjtjQ3bqYBQvuQKxZo91CJU+diWDJ5GwypMle5UPiX7k1w2SG1DoFylts58y2gnBf51HziuGPWUm429n5lLL/TkJSBpikl8xTzfB39x+r3m1FZ/DOxquMxW09pTP7UYwXgRqfzvxAoQfEg==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(346002)(136003)(376002)(39860400002)(396003)(46966005)(8936002)(82310400003)(83380400001)(8676002)(2906002)(6862004)(478600001)(4326008)(107886003)(86362001)(186003)(336012)(26005)(53546011)(2616005)(6512007)(81166007)(6486002)(6506007)(47076004)(5660300002)(82740400003)(36756003)(70586007)(33656002)(316002)(70206006)(54906003)(4744005)(356005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2020 12:57:25.1473
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59d3e2e9-1b2d-4458-d15e-08d8978afb74
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4224
 
-From: Paul Durrant <pdurrant@amazon.com>
+Hello Julien,
 
-... and bitmaps to enable or disable fetaures.
+> On 2 Dec 2020, at 1:46 pm, Julien Grall <julien@xen.org> wrote:
+>=20
+> Hi Rahul,
+>=20
+> On 26/11/2020 17:02, Rahul Singh wrote:
+>> XArray is not implemented in XEN revert the patch that introduce the
+>> XArray code in SMMUv3 driver.
+>=20
+> Similar to the atomic revert, you are explaining why the revert but not t=
+he consequences. I think this is quite important to have them outline in th=
+e commit message as it looks like it means the SMMU driver would not scale.
 
-This patch adds a new 'libxl_xen_abi_features' enumeration into the IDL which
-specifies features of the Xen ABI which may be optionally enabled or disabled
-via new 'feature_enable' and 'feature_disable' bitaps added into
-'libxl_domain_build_info'.
+Ok I will add.
+>=20
+>> Once XArray is implemented in XEN this patch can be added in XEN.
+>=20
+> What's the plan for that?
 
-The initially defined features are enabled by default (for relevant
-architectures) and so the corresponding flags in
-'struct xen_domctl_createdomain' are set if they are missing from
-'disable_features' rather than if they are present in 'enable_features'.
-Checks are, however, added to make sure that features are not specifically
-enabled in cases where they are not supported.
+As of now there is no plan for Xarray from our side. =20
+Do we have requirement for Xarray implementation in XEN ?
 
-NOTE: A subsequent patch will add an option into xl.cfg(5) to control whether
-      Xen ABI features are enabled or disabled.
+Regards,
+Rahul
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
-
-v5:
- - New in v5
----
- tools/include/libxl.h            | 10 ++++++++++
- tools/libs/light/libxl_arm.c     | 22 +++++++++++++++-------
- tools/libs/light/libxl_create.c  | 32 +++++++++++++++++++++++++++++++-
- tools/libs/light/libxl_types.idl |  7 +++++++
- tools/libs/light/libxl_x86.c     | 14 ++++++++++++--
- 5 files changed, 75 insertions(+), 10 deletions(-)
-
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index eaffccb30f37..b328a5621e6f 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -451,6 +451,16 @@
-  */
- #define LIBXL_HAVE_VIRIDIAN_EX_PROCESSOR_MASKS 1
- 
-+/*
-+ * LIBXL_HAVE_BUILDINFO_XEN_ABI_FEATURE indicates that the
-+ * libxl_xen_abi_feature enumeration is defined and that
-+ * libxl_domain_build_info has feature_enable and _disable bitmaps
-+ * of the specified width. These bitmaps are used to enable or disable
-+ * features of the Xen ABI (enumerated by the new type) for a domain.
-+ */
-+#define LIBXL_HAVE_BUILDINFO_XEN_ABI_FEATURE 1
-+#define LIBXL_BUILDINFO_FEATURE_ENABLE_DISABLE_WIDTH 64
-+
- /*
-  * libxl ABI compatibility
-  *
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 66e8a065fe67..69676340a661 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -28,19 +28,27 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-     unsigned int i;
-     uint32_t vuart_irq;
-     bool vuart_enabled = false;
-+    libxl_domain_build_info *b_info = &d_config->b_info;
-+    libxl_xen_abi_feature f = LIBXL_XEN_ABI_FEATURE_EVTCHN_UPCALL;
-+
-+    if (libxl_bitmap_test(&b_info->feature_enable, f)) {
-+        LOG(ERROR, "unsupported Xen ABI feature '%s'",
-+            libxl_xen_abi_feature_to_string(f));
-+        return ERROR_FAIL;
-+    }
- 
-     /*
-      * If pl011 vuart is enabled then increment the nr_spis to allow allocation
-      * of SPI VIRQ for pl011.
-      */
--    if (d_config->b_info.arch_arm.vuart == LIBXL_VUART_TYPE_SBSA_UART) {
-+    if (b_info->arch_arm.vuart == LIBXL_VUART_TYPE_SBSA_UART) {
-         nr_spis += (GUEST_VPL011_SPI - 32) + 1;
-         vuart_irq = GUEST_VPL011_SPI;
-         vuart_enabled = true;
-     }
- 
--    for (i = 0; i < d_config->b_info.num_irqs; i++) {
--        uint32_t irq = d_config->b_info.irqs[i];
-+    for (i = 0; i < b_info->num_irqs; i++) {
-+        uint32_t irq = b_info->irqs[i];
-         uint32_t spi;
- 
-         /*
-@@ -72,7 +80,7 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-     config->arch.nr_spis = nr_spis;
-     LOG(DEBUG, " - Allocate %u SPIs", nr_spis);
- 
--    switch (d_config->b_info.arch_arm.gic_version) {
-+    switch (b_info->arch_arm.gic_version) {
-     case LIBXL_GIC_VERSION_DEFAULT:
-         config->arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
-         break;
-@@ -84,11 +92,11 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         break;
-     default:
-         LOG(ERROR, "Unknown GIC version %d",
--            d_config->b_info.arch_arm.gic_version);
-+            b_info->arch_arm.gic_version);
-         return ERROR_FAIL;
-     }
- 
--    switch (d_config->b_info.tee) {
-+    switch (b_info->tee) {
-     case LIBXL_TEE_TYPE_NONE:
-         config->arch.tee_type = XEN_DOMCTL_CONFIG_TEE_NONE;
-         break;
-@@ -97,7 +105,7 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         break;
-     default:
-         LOG(ERROR, "Unknown TEE type %d",
--            d_config->b_info.tee);
-+            b_info->tee);
-         return ERROR_FAIL;
-     }
- 
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 3ca9f00d6d83..8cf7fd5f6d1b 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -587,6 +587,7 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-     struct xs_permissions noperm[1];
-     xs_transaction_t t = 0;
-     libxl_vminfo *vm_list;
-+    libxl_xen_abi_feature f;
- 
-     /* convenience aliases */
-     libxl_domain_create_info *info = &d_config->c_info;
-@@ -607,9 +608,38 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-             .max_evtchn_port = b_info->event_channels,
-             .max_grant_frames = b_info->max_grant_frames,
-             .max_maptrack_frames = b_info->max_maptrack_frames,
--            .flags = XEN_DOMCTL_CDF_evtchn_fifo,
-         };
- 
-+        libxl_for_each_set_bit(f, b_info->feature_enable) {
-+            if (!libxl_xen_abi_feature_to_string(f)) { /* check validity */
-+                LOGED(ERROR, *domid, "unknown Xen ABI feature enabled");
-+                rc = ERROR_FAIL;
-+                goto out;
-+            }
-+            if (libxl_bitmap_test(&b_info->feature_disable, f)) {
-+                LOGED(ERROR, *domid, "Xen ABI feature '%s' both enabled and disabled",
-+                      libxl_xen_abi_feature_to_string(f));
-+                rc = ERROR_FAIL;
-+                goto out;
-+            }
-+            LOGD(DETAIL, *domid, "enable feature: '%s'",
-+                 libxl_xen_abi_feature_to_string(f));
-+        }
-+
-+        libxl_for_each_set_bit(f, b_info->feature_disable) {
-+            if (!libxl_xen_abi_feature_to_string(f)) { /* check validity */
-+                LOGED(ERROR, *domid, "unknown Xen ABI feature disabled");
-+                rc = ERROR_FAIL;
-+                goto out;
-+            }
-+            LOGD(DETAIL, *domid, "disable feature: '%s'",
-+                 libxl_xen_abi_feature_to_string(f));
-+        }
-+
-+        if (!libxl_bitmap_test(&b_info->feature_disable,
-+                               LIBXL_XEN_ABI_FEATURE_EVTCHN_FIFO))
-+            create.flags |= XEN_DOMCTL_CDF_evtchn_fifo;
-+
-         if (info->type != LIBXL_DOMAIN_TYPE_PV) {
-             create.flags |= XEN_DOMCTL_CDF_hvm;
- 
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 05324736b744..3c50724b64cd 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -477,6 +477,11 @@ libxl_tee_type = Enumeration("tee_type", [
-     (1, "optee")
-     ], init_val = "LIBXL_TEE_TYPE_NONE")
- 
-+libxl_xen_abi_feature = Enumeration("xen_abi_feature", [
-+    (0, "evtchn_fifo"),
-+    (1, "evtchn_upcall")
-+    ])
-+
- libxl_rdm_reserve = Struct("rdm_reserve", [
-     ("strategy",    libxl_rdm_reserve_strategy),
-     ("policy",      libxl_rdm_reserve_policy),
-@@ -559,6 +564,8 @@ libxl_domain_build_info = Struct("domain_build_info",[
-     ("apic",             libxl_defbool),
-     ("dm_restrict",      libxl_defbool),
-     ("tee",              libxl_tee_type),
-+    ("feature_enable",   libxl_bitmap),
-+    ("feature_disable",  libxl_bitmap),
-     ("u", KeyedUnion(None, libxl_domain_type, "type",
-                 [("hvm", Struct(None, [("firmware",         string),
-                                        ("bios",             libxl_bios_type),
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index f7217b422404..39a9d3cbf9f8 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -6,9 +6,19 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-                                       struct xen_domctl_createdomain *config)
- {
-     libxl_domain_create_info *info = &d_config->c_info;
-+    libxl_domain_build_info *b_info = &d_config->b_info;
-+    libxl_xen_abi_feature f = LIBXL_XEN_ABI_FEATURE_EVTCHN_UPCALL;
- 
--    if (info->type == LIBXL_DOMAIN_TYPE_HVM)
--        config->flags |= XEN_DOMCTL_CDF_evtchn_upcall;
-+    if (info->type != LIBXL_DOMAIN_TYPE_HVM &&
-+        libxl_bitmap_test(&b_info->feature_enable, f)) {
-+        LOG(ERROR, "unsupported Xen ABI feature '%s'",
-+            libxl_xen_abi_feature_to_string(f));
-+        return ERROR_FAIL;
-+    }
-+
-+    if (info->type == LIBXL_DOMAIN_TYPE_HVM &&
-+        !libxl_bitmap_test(&b_info->feature_disable, f))
-+            config->flags |= XEN_DOMCTL_CDF_evtchn_upcall;
- 
-     switch(info->type) {
-     case LIBXL_DOMAIN_TYPE_HVM:
--- 
-2.20.1
+>=20
+> Cheers,
+>=20
+> --=20
+> Julien Grall
 
 
