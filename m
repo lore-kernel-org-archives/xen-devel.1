@@ -2,46 +2,47 @@ Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47FF1C47436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E25EC1B087
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:56:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC130208A3
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:31:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC130208A3
+	by mail.kernel.org (Postfix) with ESMTPS id 3D95620850
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:30:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D95620850
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43592.78359 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43589.78319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpdA-0002SX-JY; Thu, 03 Dec 2020 14:30:48 +0000
+	id 1kkpd8-0002Ok-NR; Thu, 03 Dec 2020 14:30:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43592.78359; Thu, 03 Dec 2020 14:30:48 +0000
+Received: by outflank-mailman (output) from mailman id 43589.78319; Thu, 03 Dec 2020 14:30:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpdA-0002S2-7t; Thu, 03 Dec 2020 14:30:48 +0000
-Received: by outflank-mailman (input) for mailman id 43592;
+	id 1kkpd8-0002Od-Jh; Thu, 03 Dec 2020 14:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 43589;
  Thu, 03 Dec 2020 14:30:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kkpd7-0002Nj-QW
+ (envelope-from <paul@xen.org>) id 1kkpd7-0002NJ-Gk
  for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:30:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpd6-0006Tt-LU; Thu, 03 Dec 2020 14:30:44 +0000
+ id 1kkpd6-0006Tr-Gg; Thu, 03 Dec 2020 14:30:44 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpYR-00015c-KY; Thu, 03 Dec 2020 14:25:55 +0000
+ id 1kkpYV-00015c-KX; Thu, 03 Dec 2020 14:25:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,20 +57,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=+I+oSnidyg1ISOevzaYtma9ci/Jizf+9o1lZCYeCrsI=; b=yojnqqLPemmjav7fDjhKaIbsrS
-	mIozyrPhFWiysXb0VElZ8Omr2FqrBOsrSElnZOcRzUq+sj/LfyJGx9Rt+lEBWdDgE/YViF4+5hHUP
-	rC/gHozviR4/LjOze4TmHoe0wC/9Dn9VnBh/Ol5z6BRdKnzhVNubXhlfN9BrV6HnDrOA=;
+	bh=uI/MuEj5MaCfoy0lewt6fPzqPiSYJFMNZ2+WVHHc/hI=; b=zHZAsVK4d05F96UGEQsnVsTuTx
+	U9vRtYwSSLAF5tX2+qCODD6o8gZV5sXtnLvORbUeZ4NTPCezmJc8SsA+0U1B0gvCzc0NJWigZdoVF
+	oM1dLs7/XhIRt6cNRgnqPhSPfQMgX8v+UL4RQwMFDtKznCPsOdPQL+PwgShE0wnE5jIw=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Christian Lindig <christian.lindig@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	David Scott <dave@recoil.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v5 19/23] libxl: modify libxl_device_pci_assignable_add/remove/list/list_free()...
-Date: Thu,  3 Dec 2020 14:25:30 +0000
-Message-Id: <20201203142534.4017-20-paul@xen.org>
+Subject: [PATCH v5 23/23] xl / libxl: support 'xl pci-attach/detach' by name
+Date: Thu,  3 Dec 2020 14:25:34 +0000
+Message-Id: <20201203142534.4017-24-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201203142534.4017-1-paul@xen.org>
 References: <20201203142534.4017-1-paul@xen.org>
@@ -78,779 +77,208 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... to use 'libxl_pci_bdf' rather than 'libxl_device_pci'.
+This patch adds a 'name' field into the idl for 'libxl_device_pci' and
+libxlu_pci_parse_spec_string() is modified to parse the new 'name'
+parameter of PCI_SPEC_STRING detailed in the updated documention in
+xl-pci-configuration(5).
 
-This patch modifies the API and callers accordingly. It also modifies
-several internal functions in libxl_pci.c that support the API to also use
-'libxl_pci_bdf'.
-
-NOTE: The OCaml bindings are adjusted to contain the interface change. It
-      should therefore not affect compatibility with OCaml-based utilities.
+If the 'name' field is non-NULL then both libxl_device_pci_add() and
+libxl_device_pci_remove() will use it to look up the device BDF in
+the list of assignable devices.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Acked-by: Christian Lindig <christian.lindig@citrix.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
-Cc: David Scott <dave@recoil.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/include/libxl.h                |  15 +-
- tools/libs/light/libxl_pci.c         | 213 +++++++++++++++------------
- tools/ocaml/libs/xl/xenlight_stubs.c |  15 +-
- tools/xl/xl_pci.c                    |  32 ++--
- 4 files changed, 156 insertions(+), 119 deletions(-)
+ tools/include/libxl.h            |  6 +++
+ tools/libs/light/libxl_pci.c     | 67 +++++++++++++++++++++++++++++---
+ tools/libs/light/libxl_types.idl |  1 +
+ tools/libs/util/libxlu_pci.c     |  7 +++-
+ 4 files changed, 75 insertions(+), 6 deletions(-)
 
 diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 5edacccbd1da..5703fdf367c5 100644
+index 4025d3a3d437..5b55a2015533 100644
 --- a/tools/include/libxl.h
 +++ b/tools/include/libxl.h
-@@ -469,6 +469,13 @@
+@@ -484,6 +484,12 @@
   */
- #define LIBXL_HAVE_PCI_BDF 1
+ #define LIBXL_HAVE_PCI_ASSIGNABLE_NAME 1
  
 +/*
-+ * LIBXL_HAVE_PCI_ASSIGNABLE_BDF indicates that the
-+ * libxl_device_pci_assignable_add/remove/list/list_free() functions all
-+ * use the 'libxl_pci_bdf' type rather than 'libxl_device_pci' type.
++ * LIBXL_HAVE_DEVICE_PCI_NAME indicates that the 'name' field of
++ * libxl_device_pci is defined.
 + */
-+#define LIBXL_HAVE_PCI_ASSIGNABLE_BDF 1
++#define LIBXL_HAVE_DEVICE_PCI_NAME 1
 +
  /*
   * libxl ABI compatibility
   *
-@@ -2378,10 +2385,10 @@ int libxl_device_events_handler(libxl_ctx *ctx,
-  * added or is not bound, the functions will emit a warning but return
-  * SUCCESS.
-  */
--int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
--int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
--libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num);
--void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num);
-+int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf, int rebind);
-+int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf, int rebind);
-+libxl_pci_bdf *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num);
-+void libxl_device_pci_assignable_list_free(libxl_pci_bdf *list, int num);
- 
- /* CPUID handling */
- int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str);
 diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index e0bcab4ee840..eecbd6efb694 100644
+index e62383dd7b8f..74c3db26df05 100644
 --- a/tools/libs/light/libxl_pci.c
 +++ b/tools/libs/light/libxl_pci.c
-@@ -25,26 +25,33 @@
- #define PCI_BDF_XSPATH         "%04x-%02x-%02x-%01x"
- #define PCI_PT_QDEV_ID         "pci-pt-%02x_%02x.%01x"
- 
--static unsigned int pci_encode_bdf(libxl_device_pci *pci)
-+static unsigned int pci_encode_bdf(libxl_pci_bdf *pcibdf)
+@@ -60,6 +60,10 @@ static void libxl_create_pci_backend_device(libxl__gc *gc,
+                                             int num,
+                                             const libxl_device_pci *pci)
  {
-     unsigned int value;
- 
--    value = pci->bdf.domain << 16;
--    value |= (pci->bdf.bus & 0xff) << 8;
--    value |= (pci->bdf.dev & 0x1f) << 3;
--    value |= (pci->bdf.func & 0x7);
-+    value = pcibdf->domain << 16;
-+    value |= (pcibdf->bus & 0xff) << 8;
-+    value |= (pcibdf->dev & 0x1f) << 3;
-+    value |= (pcibdf->func & 0x7);
- 
-     return value;
- }
- 
-+static void pcibdf_struct_fill(libxl_pci_bdf *pcibdf, unsigned int domain,
-+                               unsigned int bus, unsigned int dev,
-+                               unsigned int func)
-+{
-+    pcibdf->domain = domain;
-+    pcibdf->bus = bus;
-+    pcibdf->dev = dev;
-+    pcibdf->func = func;
-+}
-+
- static void pci_struct_fill(libxl_device_pci *pci, unsigned int domain,
-                             unsigned int bus, unsigned int dev,
-                             unsigned int func, unsigned int vdevfn)
- {
--    pci->bdf.domain = domain;
--    pci->bdf.bus = bus;
--    pci->bdf.dev = dev;
--    pci->bdf.func = func;
-+    pcibdf_struct_fill(&pci->bdf, domain, bus, dev, func);
-     pci->vdevfn = vdevfn;
- }
- 
-@@ -350,8 +357,8 @@ static bool is_pci_in_array(libxl_device_pci *pcis, int num,
- }
- 
- /* Write the standard BDF into the sysfs path given by sysfs_path. */
--static int sysfs_write_bdf(libxl__gc *gc, const char * sysfs_path,
--                           libxl_device_pci *pci)
-+static int sysfs_write_bdf(libxl__gc *gc, const char *sysfs_path,
-+                           libxl_pci_bdf *pcibdf)
- {
-     int rc, fd;
-     char *buf;
-@@ -362,8 +369,8 @@ static int sysfs_write_bdf(libxl__gc *gc, const char * sysfs_path,
-         return ERROR_FAIL;
-     }
- 
--    buf = GCSPRINTF(PCI_BDF, pci->bdf.domain, pci->bdf.bus,
--                    pci->bdf.dev, pci->bdf.func);
-+    buf = GCSPRINTF(PCI_BDF, pcibdf->domain, pcibdf->bus,
-+                    pcibdf->dev, pcibdf->func);
-     rc = write(fd, buf, strlen(buf));
-     /* Annoying to have two if's, but we need the errno */
-     if (rc < 0)
-@@ -378,22 +385,22 @@ static int sysfs_write_bdf(libxl__gc *gc, const char * sysfs_path,
- 
- #define PCI_INFO_PATH "/libxl/pci"
- 
--static char *pci_info_xs_path(libxl__gc *gc, libxl_device_pci *pci,
-+static char *pci_info_xs_path(libxl__gc *gc, libxl_pci_bdf *pcibdf,
-                               const char *node)
- {
-     return node ?
-         GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH"/%s",
--                  pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func,
-+                  pcibdf->domain, pcibdf->bus, pcibdf->dev, pcibdf->func,
-                   node) :
-         GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH,
--                  pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func);
-+                  pcibdf->domain, pcibdf->bus, pcibdf->dev, pcibdf->func);
- }
- 
- 
--static int pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
-+static int pci_info_xs_write(libxl__gc *gc, libxl_pci_bdf *pcibdf,
-                               const char *node, const char *val)
- {
--    char *path = pci_info_xs_path(gc, pci, node);
-+    char *path = pci_info_xs_path(gc, pcibdf, node);
-     int rc = libxl__xs_printf(gc, XBT_NULL, path, "%s", val);
- 
-     if (rc) LOGE(WARN, "Write of %s to node %s failed.", val, path);
-@@ -401,28 +408,28 @@ static int pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
-     return rc;
- }
- 
--static char *pci_info_xs_read(libxl__gc *gc, libxl_device_pci *pci,
-+static char *pci_info_xs_read(libxl__gc *gc, libxl_pci_bdf *pcibdf,
-                               const char *node)
- {
--    char *path = pci_info_xs_path(gc, pci, node);
-+    char *path = pci_info_xs_path(gc, pcibdf, node);
- 
-     return libxl__xs_read(gc, XBT_NULL, path);
- }
- 
--static void pci_info_xs_remove(libxl__gc *gc, libxl_device_pci *pci,
-+static void pci_info_xs_remove(libxl__gc *gc, libxl_pci_bdf *pcibdf,
-                                const char *node)
- {
--    char *path = pci_info_xs_path(gc, pci, node);
-+    char *path = pci_info_xs_path(gc, pcibdf, node);
-     libxl_ctx *ctx = libxl__gc_owner(gc);
- 
-     /* Remove the xenstore entry */
-     xs_rm(ctx->xsh, XBT_NULL, path);
- }
- 
--libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-+libxl_pci_bdf *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
- {
-     GC_INIT(ctx);
--    libxl_device_pci *pcis = NULL, *new;
-+    libxl_pci_bdf *pcibdfs = NULL, *new;
-     struct dirent *de;
-     DIR *dir;
- 
-@@ -443,15 +450,15 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-         if (sscanf(de->d_name, PCI_BDF, &dom, &bus, &dev, &func) != 4)
-             continue;
- 
--        new = realloc(pcis, ((*num) + 1) * sizeof(*new));
-+        new = realloc(pcibdfs, ((*num) + 1) * sizeof(*new));
-         if (NULL == new)
-             continue;
- 
--        pcis = new;
--        new = pcis + *num;
-+        pcibdfs = new;
-+        new = pcibdfs + *num;
- 
--        libxl_device_pci_init(new);
--        pci_struct_fill(new, dom, bus, dev, func, 0);
-+        libxl_pci_bdf_init(new);
-+        pcibdf_struct_fill(new, dom, bus, dev, func);
- 
-         if (pci_info_xs_read(gc, new, "domid")) /* already assigned */
-             continue;
-@@ -462,32 +469,32 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-     closedir(dir);
- out:
-     GC_FREE;
--    return pcis;
-+    return pcibdfs;
- }
- 
--void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num)
-+void libxl_device_pci_assignable_list_free(libxl_pci_bdf *list, int num)
- {
-     int i;
- 
-     for (i = 0; i < num; i++)
--        libxl_device_pci_dispose(&list[i]);
-+        libxl_pci_bdf_dispose(&list[i]);
- 
-     free(list);
- }
- 
- /* Unbind device from its current driver, if any.  If driver_path is non-NULL,
-  * store the path to the original driver in it. */
--static int sysfs_dev_unbind(libxl__gc *gc, libxl_device_pci *pci,
-+static int sysfs_dev_unbind(libxl__gc *gc, libxl_pci_bdf *pcibdf,
-                             char **driver_path)
- {
-     char * spath, *dp = NULL;
-     struct stat st;
- 
-     spath = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/driver",
--                           pci->bdf.domain,
--                           pci->bdf.bus,
--                           pci->bdf.dev,
--                           pci->bdf.func);
-+                           pcibdf->domain,
-+                           pcibdf->bus,
-+                           pcibdf->dev,
-+                           pcibdf->func);
-     if ( !lstat(spath, &st) ) {
-         /* Find the canonical path to the driver. */
-         dp = libxl__zalloc(gc, PATH_MAX);
-@@ -501,7 +508,7 @@ static int sysfs_dev_unbind(libxl__gc *gc, libxl_device_pci *pci,
- 
-         /* Unbind from the old driver */
-         spath = GCSPRINTF("%s/unbind", dp);
--        if ( sysfs_write_bdf(gc, spath, pci) < 0 ) {
-+        if ( sysfs_write_bdf(gc, spath, pcibdf) < 0 ) {
-             LOGE(ERROR, "Couldn't unbind device");
-             return -1;
-         }
-@@ -639,8 +646,8 @@ bool libxl__is_igd_vga_passthru(libxl__gc *gc,
-  * already exist.
-  */
- 
--/* Scan through /sys/.../pciback/slots looking for pci's BDF */
--static int pciback_dev_has_slot(libxl__gc *gc, libxl_device_pci *pci)
-+/* Scan through /sys/.../pciback/slots looking for BDF */
-+static int pciback_dev_has_slot(libxl__gc *gc, libxl_pci_bdf *pcibdf)
- {
-     FILE *f;
-     int rc = 0;
-@@ -654,10 +661,10 @@ static int pciback_dev_has_slot(libxl__gc *gc, libxl_device_pci *pci)
-     }
- 
-     while (fscanf(f, "%x:%x:%x.%d\n", &dom, &bus, &dev, &func) == 4) {
--        if (dom == pci->bdf.domain
--            && bus == pci->bdf.bus
--            && dev == pci->bdf.dev
--            && func == pci->bdf.func) {
-+        if (dom == pcibdf->domain
-+            && bus == pcibdf->bus
-+            && dev == pcibdf->dev
-+            && func == pcibdf->func) {
-             rc = 1;
-             goto out;
-         }
-@@ -667,7 +674,7 @@ out:
-     return rc;
- }
- 
--static int pciback_dev_is_assigned(libxl__gc *gc, libxl_device_pci *pci)
-+static int pciback_dev_is_assigned(libxl__gc *gc, libxl_pci_bdf *pcibdf)
- {
-     char * spath;
-     int rc;
-@@ -683,8 +690,8 @@ static int pciback_dev_is_assigned(libxl__gc *gc, libxl_device_pci *pci)
-     }
- 
-     spath = GCSPRINTF(SYSFS_PCIBACK_DRIVER"/"PCI_BDF,
--                      pci->bdf.domain, pci->bdf.bus,
--                      pci->bdf.dev, pci->bdf.func);
-+                      pcibdf->domain, pcibdf->bus,
-+                      pcibdf->dev, pcibdf->func);
-     rc = lstat(spath, &st);
- 
-     if( rc == 0 )
-@@ -695,40 +702,40 @@ static int pciback_dev_is_assigned(libxl__gc *gc, libxl_device_pci *pci)
-     return -1;
- }
- 
--static int pciback_dev_assign(libxl__gc *gc, libxl_device_pci *pci)
-+static int pciback_dev_assign(libxl__gc *gc, libxl_pci_bdf *pcibdf)
- {
-     int rc;
- 
--    if ( (rc = pciback_dev_has_slot(gc, pci)) < 0 ) {
-+    if ( (rc = pciback_dev_has_slot(gc, pcibdf)) < 0 ) {
-         LOGE(ERROR, "Error checking for pciback slot");
-         return ERROR_FAIL;
-     } else if (rc == 0) {
-         if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/new_slot",
--                             pci) < 0 ) {
-+                             pcibdf) < 0 ) {
-             LOGE(ERROR, "Couldn't bind device to pciback!");
-             return ERROR_FAIL;
-         }
-     }
- 
--    if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/bind", pci) < 0 ) {
-+    if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/bind", pcibdf) < 0 ) {
-         LOGE(ERROR, "Couldn't bind device to pciback!");
-         return ERROR_FAIL;
-     }
-     return 0;
- }
- 
--static int pciback_dev_unassign(libxl__gc *gc, libxl_device_pci *pci)
-+static int pciback_dev_unassign(libxl__gc *gc, libxl_pci_bdf *pcibdf)
- {
-     /* Remove from pciback */
--    if ( sysfs_dev_unbind(gc, pci, NULL) < 0 ) {
-+    if ( sysfs_dev_unbind(gc, pcibdf, NULL) < 0 ) {
-         LOG(ERROR, "Couldn't unbind device!");
-         return ERROR_FAIL;
-     }
- 
-     /* Remove slot if necessary */
--    if ( pciback_dev_has_slot(gc, pci) > 0 ) {
-+    if ( pciback_dev_has_slot(gc, pcibdf) > 0 ) {
-         if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/remove_slot",
--                             pci) < 0 ) {
-+                             pcibdf) < 0 ) {
-             LOGE(ERROR, "Couldn't remove pciback slot");
-             return ERROR_FAIL;
-         }
-@@ -737,7 +744,7 @@ static int pciback_dev_unassign(libxl__gc *gc, libxl_device_pci *pci)
- }
- 
- static int libxl__device_pci_assignable_add(libxl__gc *gc,
--                                            libxl_device_pci *pci,
-+                                            libxl_pci_bdf *pcibdf,
-                                             int rebind)
- {
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-@@ -747,10 +754,10 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     struct stat st;
- 
-     /* Local copy for convenience */
--    dom = pci->bdf.domain;
--    bus = pci->bdf.bus;
--    dev = pci->bdf.dev;
--    func = pci->bdf.func;
-+    dom = pcibdf->domain;
-+    bus = pcibdf->bus;
-+    dev = pcibdf->dev;
-+    func = pcibdf->func;
- 
-     /* See if the device exists */
-     spath = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF, dom, bus, dev, func);
-@@ -760,7 +767,7 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     }
- 
-     /* Check to see if it's already assigned to pciback */
--    rc = pciback_dev_is_assigned(gc, pci);
-+    rc = pciback_dev_is_assigned(gc, pcibdf);
-     if ( rc < 0 ) {
-         return ERROR_FAIL;
-     }
-@@ -770,7 +777,7 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     }
- 
-     /* Check to see if there's already a driver that we need to unbind from */
--    if ( sysfs_dev_unbind(gc, pci, &driver_path ) ) {
-+    if ( sysfs_dev_unbind(gc, pcibdf, &driver_path ) ) {
-         LOG(ERROR, "Couldn't unbind "PCI_BDF" from driver",
-             dom, bus, dev, func);
-         return ERROR_FAIL;
-@@ -779,9 +786,9 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     /* Store driver_path for rebinding to dom0 */
-     if ( rebind ) {
-         if ( driver_path ) {
--            pci_info_xs_write(gc, pci, "driver_path", driver_path);
-+            pci_info_xs_write(gc, pcibdf, "driver_path", driver_path);
-         } else if ( (driver_path =
--                     pci_info_xs_read(gc, pci, "driver_path")) != NULL ) {
-+                     pci_info_xs_read(gc, pcibdf, "driver_path")) != NULL ) {
-             LOG(INFO, PCI_BDF" not bound to a driver, will be rebound to %s",
-                 dom, bus, dev, func, driver_path);
-         } else {
-@@ -789,10 +796,10 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-                 dom, bus, dev, func);
-         }
-     } else {
--        pci_info_xs_remove(gc, pci, "driver_path");
-+        pci_info_xs_remove(gc, pcibdf, "driver_path");
-     }
- 
--    if ( pciback_dev_assign(gc, pci) ) {
-+    if ( pciback_dev_assign(gc, pcibdf) ) {
-         LOG(ERROR, "Couldn't bind device to pciback!");
-         return ERROR_FAIL;
-     }
-@@ -803,7 +810,7 @@ quarantine:
-      * so always pass XEN_DOMCTL_DEV_RDM_RELAXED to avoid assignment being
-      * unnecessarily denied.
-      */
--    rc = xc_assign_device(ctx->xch, DOMID_IO, pci_encode_bdf(pci),
-+    rc = xc_assign_device(ctx->xch, DOMID_IO, pci_encode_bdf(pcibdf),
-                           XEN_DOMCTL_DEV_RDM_RELAXED);
-     if ( rc < 0 ) {
-         LOG(ERROR, "failed to quarantine "PCI_BDF, dom, bus, dev, func);
-@@ -814,7 +821,7 @@ quarantine:
- }
- 
- static int libxl__device_pci_assignable_remove(libxl__gc *gc,
--                                               libxl_device_pci *pci,
-+                                               libxl_pci_bdf *pcibdf,
-                                                int rebind)
- {
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-@@ -822,24 +829,24 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
-     char *driver_path;
- 
-     /* De-quarantine */
--    rc = xc_deassign_device(ctx->xch, DOMID_IO, pci_encode_bdf(pci));
-+    rc = xc_deassign_device(ctx->xch, DOMID_IO, pci_encode_bdf(pcibdf));
-     if ( rc < 0 ) {
--        LOG(ERROR, "failed to de-quarantine "PCI_BDF, pci->bdf.domain, pci->bdf.bus,
--            pci->bdf.dev, pci->bdf.func);
-+        LOG(ERROR, "failed to de-quarantine "PCI_BDF, pcibdf->domain,
-+            pcibdf->bus, pcibdf->dev, pcibdf->func);
-         return ERROR_FAIL;
-     }
- 
-     /* Unbind from pciback */
--    if ( (rc = pciback_dev_is_assigned(gc, pci)) < 0 ) {
-+    if ( (rc = pciback_dev_is_assigned(gc, pcibdf)) < 0 ) {
-         return ERROR_FAIL;
-     } else if ( rc ) {
--        pciback_dev_unassign(gc, pci);
-+        pciback_dev_unassign(gc, pcibdf);
-     } else {
-         LOG(WARN, "Not bound to pciback");
-     }
- 
-     /* Rebind if necessary */
--    driver_path = pci_info_xs_read(gc, pci, "driver_path");
-+    driver_path = pci_info_xs_read(gc, pcibdf, "driver_path");
- 
-     if ( driver_path ) {
-         if ( rebind ) {
-@@ -847,12 +854,12 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
- 
-             if ( sysfs_write_bdf(gc,
-                                  GCSPRINTF("%s/bind", driver_path),
--                                 pci) < 0 ) {
-+                                 pcibdf) < 0 ) {
-                 LOGE(ERROR, "Couldn't bind device to %s", driver_path);
-                 return -1;
-             }
- 
--            pci_info_xs_remove(gc, pci, "driver_path");
-+            pci_info_xs_remove(gc, pcibdf, "driver_path");
-         }
-     } else {
-         if ( rebind ) {
-@@ -864,26 +871,26 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
-     return 0;
- }
- 
--int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci,
-+int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-                                     int rebind)
- {
-     GC_INIT(ctx);
-     int rc;
- 
--    rc = libxl__device_pci_assignable_add(gc, pci, rebind);
-+    rc = libxl__device_pci_assignable_add(gc, pcibdf, rebind);
- 
-     GC_FREE;
-     return rc;
- }
- 
- 
--int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci,
-+int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-                                        int rebind)
- {
-     GC_INIT(ctx);
-     int rc;
- 
--    rc = libxl__device_pci_assignable_remove(gc, pci, rebind);
-+    rc = libxl__device_pci_assignable_remove(gc, pcibdf, rebind);
- 
-     GC_FREE;
-     return rc;
-@@ -1385,7 +1392,7 @@ static void pci_add_dm_done(libxl__egc *egc,
-     /* Don't restrict writes to the PCI config space from this VM */
-     if (pci->permissive) {
-         if ( sysfs_write_bdf(gc, SYSFS_PCIBACK_DRIVER"/permissive",
--                             pci) < 0 ) {
-+                             &pci->bdf) < 0 ) {
-             LOGD(ERROR, domainid, "Setting permissive for device");
-             rc = ERROR_FAIL;
-             goto out;
-@@ -1401,7 +1408,8 @@ out_no_irq:
-             rc = ERROR_FAIL;
-             goto out;
-         }
--        r = xc_assign_device(ctx->xch, domid, pci_encode_bdf(pci), flag);
-+        r = xc_assign_device(ctx->xch, domid, pci_encode_bdf(&pci->bdf),
-+                             flag);
-         if (r < 0 && (hvm || errno != ENOSYS)) {
-             LOGED(ERROR, domainid, "xc_assign_device failed");
-             rc = ERROR_FAIL;
-@@ -1480,15 +1488,28 @@ int libxl_device_pci_add(libxl_ctx *ctx, uint32_t domid,
-     return AO_INPROGRESS;
- }
- 
--static bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
-+static int is_bdf_in_array(libxl_pci_bdf *pcibdfs, int num,
-+                           libxl_pci_bdf *pcibdf)
- {
--    libxl_device_pci *pcis;
-+    int i;
-+
-+    for(i = 0; i < num; i++) {
-+        if (COMPARE_BDF(pcibdf, &pcibdfs[i]))
-+            break;
++    if (pci->name) {
++        flexarray_append(back, GCSPRINTF("name-%d", num));
++        flexarray_append(back, GCSPRINTF("%s", pci->name));
 +    }
-+
-+    return i < num;
-+}
-+
-+static bool is_bdf_assignable(libxl_ctx *ctx, libxl_pci_bdf *pcibdf)
-+{
-+    libxl_pci_bdf *pcibdfs;
-     int num;
-     bool assignable;
+     flexarray_append(back, GCSPRINTF("key-%d", num));
+     flexarray_append(back, GCSPRINTF(PCI_BDF, pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func));
+     flexarray_append(back, GCSPRINTF("dev-%d", num));
+@@ -284,6 +288,7 @@ retry_transaction:
  
--    pcis = libxl_device_pci_assignable_list(ctx, &num);
--    assignable = is_pci_in_array(pcis, num, pci);
--    libxl_device_pci_assignable_list_free(pcis, num);
-+    pcibdfs = libxl_device_pci_assignable_list(ctx, &num);
-+    assignable = is_bdf_in_array(pcibdfs, num, pcibdf);
-+    libxl_device_pci_assignable_list_free(pcibdfs, num);
- 
-     return assignable;
- }
-@@ -1523,7 +1544,8 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
+ retry_transaction2:
+     t = xs_transaction_start(ctx->xsh);
++    xs_rm(ctx->xsh, t, GCSPRINTF("%s/name-%d", be_path, i));
+     xs_rm(ctx->xsh, t, GCSPRINTF("%s/state-%d", be_path, i));
+     xs_rm(ctx->xsh, t, GCSPRINTF("%s/key-%d", be_path, i));
+     xs_rm(ctx->xsh, t, GCSPRINTF("%s/dev-%d", be_path, i));
+@@ -322,6 +327,12 @@ retry_transaction2:
+             xs_write(ctx->xsh, t, GCSPRINTF("%s/vdevfn-%d", be_path, j - 1), tmp, strlen(tmp));
+             xs_rm(ctx->xsh, t, tmppath);
+         }
++        tmppath = GCSPRINTF("%s/name-%d", be_path, j);
++        tmp = libxl__xs_read(gc, t, tmppath);
++        if (tmp) {
++            xs_write(ctx->xsh, t, GCSPRINTF("%s/name-%d", be_path, j - 1), tmp, strlen(tmp));
++            xs_rm(ctx->xsh, t, tmppath);
++        }
+     }
+     if (!xs_transaction_end(ctx->xsh, t, 0))
+         if (errno == EAGAIN)
+@@ -1619,6 +1630,23 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
+     pas->starting = starting;
      pas->callback = device_pci_add_stubdom_done;
  
++    if (pci->name) {
++        libxl_pci_bdf *pcibdf =
++            libxl_device_pci_assignable_name2bdf(CTX, pci->name);
++
++        if (!pcibdf) {
++            rc = ERROR_FAIL;
++            goto out;
++        }
++
++        LOGD(DETAIL, domid, "'%s' -> %04x:%02x:%02x.%u", pci->name,
++             pcibdf->domain, pcibdf->bus, pcibdf->dev, pcibdf->func);
++
++        libxl_pci_bdf_copy(CTX, &pci->bdf, pcibdf);
++        libxl_pci_bdf_dispose(pcibdf);
++        free(pcibdf);
++    }
++
      if (libxl__domain_type(gc, domid) == LIBXL_DOMAIN_TYPE_HVM) {
--        rc = xc_test_assign_device(ctx->xch, domid, pci_encode_bdf(pci));
-+        rc = xc_test_assign_device(ctx->xch, domid,
-+                                   pci_encode_bdf(&pci->bdf));
-         if (rc) {
-             LOGD(ERROR, domid,
-                  "PCI device %04x:%02x:%02x.%u %s?",
-@@ -1537,20 +1559,20 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     rc = libxl__device_pci_setdefault(gc, domid, pci, !starting);
-     if (rc) goto out;
+         rc = xc_test_assign_device(ctx->xch, domid,
+                                    pci_encode_bdf(&pci->bdf));
+@@ -1767,11 +1795,19 @@ static void device_pci_add_done(libxl__egc *egc,
+     libxl_device_pci *pci = &pas->pci;
  
--    if (pci->seize && !pciback_dev_is_assigned(gc, pci)) {
--        rc = libxl__device_pci_assignable_add(gc, pci, 1);
-+    if (pci->seize && !pciback_dev_is_assigned(gc, &pci->bdf)) {
-+        rc = libxl__device_pci_assignable_add(gc, &pci->bdf, 1);
-         if ( rc )
-             goto out;
-     }
- 
--    if (!libxl_pci_assignable(ctx, pci)) {
-+    if (!is_bdf_assignable(ctx, &pci->bdf)) {
-         LOGD(ERROR, domid, "PCI device %x:%x:%x.%x is not assignable",
-              pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func);
-         rc = ERROR_FAIL;
-         goto out;
-     }
- 
--    rc = pci_info_xs_write(gc, pci, "domid", GCSPRINTF("%u", domid));
-+    rc = pci_info_xs_write(gc, &pci->bdf, "domid", GCSPRINTF("%u", domid));
-     if (rc) goto out;
- 
-     libxl__device_pci_reset(gc, pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func);
-@@ -1674,7 +1696,7 @@ static void device_pci_add_done(libxl__egc *egc,
-              "PCI device %x:%x:%x.%x (rc %d)",
-              pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func,
-              rc);
--        pci_info_xs_remove(gc, pci, "domid");
-+        pci_info_xs_remove(gc, &pci->bdf, "domid");
+     if (rc) {
+-        LOGD(ERROR, domid,
+-             "libxl__device_pci_add  failed for "
+-             "PCI device %x:%x:%x.%x (rc %d)",
+-             pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func,
+-             rc);
++        if (pci->name) {
++            LOGD(ERROR, domid,
++                 "libxl__device_pci_add failed for "
++                 "PCI device '%s' (rc %d)",
++                 pci->name,
++                 rc);
++        } else {
++            LOGD(ERROR, domid,
++                 "libxl__device_pci_add failed for "
++                 "PCI device %x:%x:%x.%x (rc %d)",
++                 pci->bdf.domain, pci->bdf.bus, pci->bdf.dev, pci->bdf.func,
++                 rc);
++        }
+         pci_info_xs_remove(gc, &pci->bdf, "domid");
      }
      libxl_device_pci_dispose(pci);
-     aodev->rc = rc;
-@@ -2114,7 +2136,8 @@ static void pci_remove_detached(libxl__egc *egc,
+@@ -2288,6 +2324,23 @@ static void libxl__device_pci_remove_common(libxl__egc *egc,
+     libxl__ev_time_init(&prs->timeout);
+     libxl__ev_time_init(&prs->retry_timer);
+ 
++    if (pci->name) {
++        libxl_pci_bdf *pcibdf =
++            libxl_device_pci_assignable_name2bdf(CTX, pci->name);
++
++        if (!pcibdf) {
++            rc = ERROR_FAIL;
++            goto out;
++        }
++
++        LOGD(DETAIL, domid, "'%s' -> %04x:%02x:%02x.%u", pci->name,
++             pcibdf->domain, pcibdf->bus, pcibdf->dev, pcibdf->func);
++
++        libxl_pci_bdf_copy(CTX, &prs->pci.bdf, pcibdf);
++        libxl_pci_bdf_dispose(pcibdf);
++        free(pcibdf);
++    }
++
+     prs->orig_vdev = pci->vdevfn & ~7U;
+ 
+     if ( pci->vfunc_mask == LIBXL_PCI_FUNC_ALL ) {
+@@ -2422,6 +2475,10 @@ static int libxl__device_pci_from_xs_be(libxl__gc *gc,
+         } while ((p = strtok_r(NULL, ",=", &saveptr)) != NULL);
      }
  
-     if (!isstubdom) {
--        rc = xc_deassign_device(CTX->xch, domid, pci_encode_bdf(pci));
-+        rc = xc_deassign_device(CTX->xch, domid,
-+                                pci_encode_bdf(&pci->bdf));
-         if (rc < 0 && (prs->hvm || errno != ENOSYS))
-             LOGED(ERROR, domainid, "xc_deassign_device failed");
-     }
-@@ -2243,7 +2266,7 @@ out:
-     libxl__ev_time_deregister(gc, &prs->timeout);
-     libxl__ev_time_deregister(gc, &prs->retry_timer);
- 
--    if (!rc) pci_info_xs_remove(gc, pci, "domid");
-+    if (!rc) pci_info_xs_remove(gc, &pci->bdf, "domid");
- 
-     libxl_device_pci_dispose(pci);
-     aodev->rc = rc;
-diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
-index 352a00134d70..2388f238697c 100644
---- a/tools/ocaml/libs/xl/xenlight_stubs.c
-+++ b/tools/ocaml/libs/xl/xenlight_stubs.c
-@@ -840,7 +840,7 @@ value stub_xl_device_pci_assignable_add(value ctx, value info, value rebind)
- 	device_pci_val(CTX, &c_info, info);
- 
- 	caml_enter_blocking_section();
--	ret = libxl_device_pci_assignable_add(CTX, &c_info, c_rebind);
-+	ret = libxl_device_pci_assignable_add(CTX, &c_info.bdf, c_rebind);
- 	caml_leave_blocking_section();
- 
- 	libxl_device_pci_dispose(&c_info);
-@@ -861,7 +861,7 @@ value stub_xl_device_pci_assignable_remove(value ctx, value info, value rebind)
- 	device_pci_val(CTX, &c_info, info);
- 
- 	caml_enter_blocking_section();
--	ret = libxl_device_pci_assignable_remove(CTX, &c_info, c_rebind);
-+	ret = libxl_device_pci_assignable_remove(CTX, &c_info.bdf, c_rebind);
- 	caml_leave_blocking_section();
- 
- 	libxl_device_pci_dispose(&c_info);
-@@ -876,7 +876,7 @@ value stub_xl_device_pci_assignable_list(value ctx)
- {
- 	CAMLparam1(ctx);
- 	CAMLlocal2(list, temp);
--	libxl_device_pci *c_list;
-+	libxl_pci_bdf *c_list;
- 	int i, nb;
- 	uint32_t c_domid;
- 
-@@ -889,11 +889,18 @@ value stub_xl_device_pci_assignable_list(value ctx)
- 
- 	list = temp = Val_emptylist;
- 	for (i = 0; i < nb; i++) {
-+		libxl_device_pci pci;
++    s = libxl__xs_read(gc, XBT_NULL, GCSPRINTF("%s/name-%d", be_path, nr));
++    if (s)
++        pci->name = strdup(s);
 +
-+		libxl_device_pci_init(&pci);
-+		libxl_pci_bdf_copy(CTX, &pci.bdf, &c_list[i]);
-+
- 		list = caml_alloc_small(2, Tag_cons);
- 		Field(list, 0) = Val_int(0);
- 		Field(list, 1) = temp;
- 		temp = list;
--		Store_field(list, 0, Val_device_pci(&c_list[i]));
-+		Store_field(list, 0, Val_device_pci(&pci));
-+
-+		libxl_device_pci_dispose(&pci);
- 	}
- 	libxl_device_pci_assignable_list_free(c_list, nb);
- 
-diff --git a/tools/xl/xl_pci.c b/tools/xl/xl_pci.c
-index 9c24496cb2dd..37708b4eb14d 100644
---- a/tools/xl/xl_pci.c
-+++ b/tools/xl/xl_pci.c
-@@ -154,19 +154,19 @@ int main_pciattach(int argc, char **argv)
- 
- static void pciassignable_list(void)
- {
--    libxl_device_pci *pcis;
-+    libxl_pci_bdf *pcibdfs;
-     int num, i;
- 
--    pcis = libxl_device_pci_assignable_list(ctx, &num);
-+    pcibdfs = libxl_device_pci_assignable_list(ctx, &num);
- 
--    if ( pcis == NULL )
-+    if ( pcibdfs == NULL )
-         return;
-     for (i = 0; i < num; i++) {
-         printf("%04x:%02x:%02x.%01x\n",
--               pcis[i].bdf.domain, pcis[i].bdf.bus, pcis[i].bdf.dev,
--               pcis[i].bdf.func);
-+               pcibdfs[i].domain, pcibdfs[i].bus, pcibdfs[i].dev,
-+               pcibdfs[i].func);
-     }
--    libxl_device_pci_assignable_list_free(pcis, num);
-+    libxl_device_pci_assignable_list_free(pcibdfs, num);
+     return 0;
  }
  
- int main_pciassignable_list(int argc, char **argv)
-@@ -183,24 +183,24 @@ int main_pciassignable_list(int argc, char **argv)
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 2c441142fba6..44bad36f1c4c 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -778,6 +778,7 @@ libxl_pci_bdf = Struct("pci_bdf", [
  
- static int pciassignable_add(const char *bdf, int rebind)
+ libxl_device_pci = Struct("device_pci", [
+     ("bdf", libxl_pci_bdf),
++    ("name", string),
+     ("vdevfn", uint32),
+     ("vfunc_mask", uint32),
+     ("msitranslate", bool),
+diff --git a/tools/libs/util/libxlu_pci.c b/tools/libs/util/libxlu_pci.c
+index a8b6ce542736..543a1f80e99e 100644
+--- a/tools/libs/util/libxlu_pci.c
++++ b/tools/libs/util/libxlu_pci.c
+@@ -151,6 +151,7 @@ int xlu_pci_parse_spec_string(XLU_Config *cfg, libxl_device_pci *pcidev,
  {
--    libxl_device_pci pci;
-+    libxl_pci_bdf pcibdf;
-     XLU_Config *config;
-     int r = 0;
+     const char *ptr = str;
+     bool bdf_present = false;
++    bool name_present = false;
+     int ret;
  
--    libxl_device_pci_init(&pci);
-+    libxl_pci_bdf_init(&pcibdf);
- 
-     config = xlu_cfg_init(stderr, "command line");
-     if (!config) { perror("xlu_cfg_init"); exit(-1); }
- 
--    if (xlu_pci_parse_bdf(config, &pci.bdf, bdf)) {
-+    if (xlu_pci_parse_bdf(config, &pcibdf, bdf)) {
-         fprintf(stderr, "pci-assignable-add: malformed BDF \"%s\"\n", bdf);
-         exit(2);
+     /* Attempt to parse 'bdf' as positional parameter */
+@@ -193,6 +194,10 @@ int xlu_pci_parse_spec_string(XLU_Config *cfg, libxl_device_pci *pcidev,
+             pcidev->power_mgmt = atoi(val);
+         } else if (!strcmp(key, "rdm_policy")) {
+             ret = parse_rdm_policy(cfg, &pcidev->rdm_policy, val);
++        } else if (!strcmp(key, "name")) {
++            name_present = true;
++            pcidev->name = strdup(val);
++            if (!pcidev->name) ret = ERROR_NOMEM;
+         } else {
+             XLU__PCI_ERR(cfg, "Unknown PCI_SPEC_STRING option: %s", key);
+             ret = ERROR_INVAL;
+@@ -205,7 +210,7 @@ int xlu_pci_parse_spec_string(XLU_Config *cfg, libxl_device_pci *pcidev,
+             return ret;
      }
  
--    if (libxl_device_pci_assignable_add(ctx, &pci, rebind))
-+    if (libxl_device_pci_assignable_add(ctx, &pcibdf, rebind))
-         r = 1;
+-    if (!bdf_present)
++    if (!(bdf_present ^ name_present))
+         return ERROR_INVAL;
  
--    libxl_device_pci_dispose(&pci);
-+    libxl_pci_bdf_dispose(&pcibdf);
-     xlu_cfg_destroy(config);
- 
-     return r;
-@@ -225,24 +225,24 @@ int main_pciassignable_add(int argc, char **argv)
- 
- static int pciassignable_remove(const char *bdf, int rebind)
- {
--    libxl_device_pci pci;
-+    libxl_pci_bdf pcibdf;
-     XLU_Config *config;
-     int r = 0;
- 
--    libxl_device_pci_init(&pci);
-+    libxl_pci_bdf_init(&pcibdf);
- 
-     config = xlu_cfg_init(stderr, "command line");
-     if (!config) { perror("xlu_cfg_init"); exit(-1); }
- 
--    if (xlu_pci_parse_bdf(config, &pci.bdf, bdf)) {
-+    if (xlu_pci_parse_bdf(config, &pcibdf, bdf)) {
-         fprintf(stderr, "pci-assignable-remove: malformed BDF \"%s\"\n", bdf);
-         exit(2);
-     }
- 
--    if (libxl_device_pci_assignable_remove(ctx, &pci, rebind))
-+    if (libxl_device_pci_assignable_remove(ctx, &pcibdf, rebind))
-         r = 1;
- 
--    libxl_device_pci_dispose(&pci);
-+    libxl_pci_bdf_dispose(&pcibdf);
-     xlu_cfg_destroy(config);
- 
-     return r;
+     return 0;
 -- 
 2.20.1
 
