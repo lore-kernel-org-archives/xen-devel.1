@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FE68C4361A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 812F1C0007A
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 15:01:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17066207C5
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:25:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17066207C5
+	by mail.kernel.org (Postfix) with ESMTPS id 625A1207B0
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:25:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 625A1207B0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43538.78294 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43534.78247 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpYJ-0000jc-DC; Thu, 03 Dec 2020 14:25:47 +0000
+	id 1kkpYE-0000YR-Vm; Thu, 03 Dec 2020 14:25:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43538.78294; Thu, 03 Dec 2020 14:25:47 +0000
+Received: by outflank-mailman (output) from mailman id 43534.78247; Thu, 03 Dec 2020 14:25:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpYJ-0000jN-3K; Thu, 03 Dec 2020 14:25:47 +0000
-Received: by outflank-mailman (input) for mailman id 43538;
- Thu, 03 Dec 2020 14:25:45 +0000
+	id 1kkpYE-0000Y7-Qk; Thu, 03 Dec 2020 14:25:42 +0000
+Received: by outflank-mailman (input) for mailman id 43534;
+ Thu, 03 Dec 2020 14:25:41 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kkpYH-0000eN-Bg
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:25:45 +0000
+ (envelope-from <paul@xen.org>) id 1kkpYD-0000TU-3O
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:25:41 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpYG-0006ML-8r; Thu, 03 Dec 2020 14:25:44 +0000
+ id 1kkpYC-0006Ll-8v; Thu, 03 Dec 2020 14:25:40 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpYG-00015c-1G; Thu, 03 Dec 2020 14:25:44 +0000
+ id 1kkpYC-00015c-1G; Thu, 03 Dec 2020 14:25:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,18 +56,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=8cQqWT9GuCPGDfS/ArV0IseEaCV4r+yxTp71Fb3v4Rk=; b=4sXRpP4Q92mHROeIPXs8K+Rts6
-	N+iKtn3Qh2RTlK6mX9Bx8Go5zahnKeFs9O+MdL9LhunnQWB+TrVHXfTRZBWnqPqKxeE7wfLqw27oY
-	c0rix4Fle3K4h+pqS4/2JKkUxxhnIgRSlDjQFf4ZBkZvwnUdXH8IGfYnSS4X5DfqiV00=;
+	bh=iIlzPHbL10Svk6/AmKBREvAXRObwBdrHx3jozrlvASg=; b=lhwOG2wyTl1S2qFrZMBGHwJ50c
+	pnGrwy/pisuAViCxiirEBiNChTApt5k7beBEWVVSQ9rwerCiTYaAaG3ArpGYMWV7mUvbXER9mOXij
+	tXRz8R2K5HLujumisZUgSuYyx3N8YmGZr1We/O6QrBaxOswifEsa3cb6mGcwkO0NFxOM=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v5 08/23] libxl: generalise 'driver_path' xenstore access functions in libxl_pci.c
-Date: Thu,  3 Dec 2020 14:25:19 +0000
-Message-Id: <20201203142534.4017-9-paul@xen.org>
+Subject: [PATCH v5 04/23] libxl: add/recover 'rdm_policy' to/from PCI backend in xenstore
+Date: Thu,  3 Dec 2020 14:25:15 +0000
+Message-Id: <20201203142534.4017-5-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201203142534.4017-1-paul@xen.org>
 References: <20201203142534.4017-1-paul@xen.org>
@@ -76,19 +76,8 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-For the purposes of re-binding a device to its previous driver
-libxl__device_pci_assignable_add() writes the driver path into xenstore.
-This path is then read back in libxl__device_pci_assignable_remove().
-
-The functions that support this writing to and reading from xenstore are
-currently dedicated for this purpose and hence the node name 'driver_path'
-is hard-coded. This patch generalizes these utility functions and passes
-'driver_path' as an argument. Subsequent patches will invoke them to
-access other nodes.
-
-NOTE: Because functions will have a broader use (other than storing a
-      driver path in lieu of pciback) the base xenstore path is also
-      changed from '/libxl/pciback' to '/libxl/pci'.
+Other parameters, such as 'msitranslate' and 'permissive' are dealt with
+but 'rdm_policy' appears to be have been completely missed.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
@@ -96,128 +85,36 @@ Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 ---
- tools/libs/light/libxl_pci.c | 66 +++++++++++++++++-------------------
- 1 file changed, 32 insertions(+), 34 deletions(-)
+ tools/libs/light/libxl_pci.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 31eaa95923c4..57cf6ffc85de 100644
+index aa7633dfef16..a06c88076519 100644
 --- a/tools/libs/light/libxl_pci.c
 +++ b/tools/libs/light/libxl_pci.c
-@@ -737,48 +737,46 @@ static int pciback_dev_unassign(libxl__gc *gc, libxl_device_pci *pci)
-     return 0;
+@@ -61,9 +61,9 @@ static void libxl_create_pci_backend_device(libxl__gc *gc,
+         flexarray_append_pair(back, GCSPRINTF("vdevfn-%d", num), GCSPRINTF("%x", pci->vdevfn));
+     flexarray_append(back, GCSPRINTF("opts-%d", num));
+     flexarray_append(back,
+-              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d",
+-                             pci->msitranslate, pci->power_mgmt,
+-                             pci->permissive));
++              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d,rdm_policy=%s",
++                        pci->msitranslate, pci->power_mgmt,
++                        pci->permissive, libxl_rdm_reserve_policy_to_string(pci->rdm_policy)));
+     flexarray_append_pair(back, GCSPRINTF("state-%d", num), GCSPRINTF("%d", XenbusStateInitialising));
  }
  
--#define PCIBACK_INFO_PATH "/libxl/pciback"
-+#define PCI_INFO_PATH "/libxl/pci"
- 
--static void pci_assignable_driver_path_write(libxl__gc *gc,
--                                            libxl_device_pci *pci,
--                                            char *driver_path)
-+static char *pci_info_xs_path(libxl__gc *gc, libxl_device_pci *pci,
-+                              const char *node)
- {
--    char *path;
-+    return node ?
-+        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH"/%s",
-+                  pci->domain, pci->bus, pci->dev, pci->func,
-+                  node) :
-+        GCSPRINTF(PCI_INFO_PATH"/"PCI_BDF_XSPATH,
-+                  pci->domain, pci->bus, pci->dev, pci->func);
-+}
- 
--    path = GCSPRINTF(PCIBACK_INFO_PATH"/"PCI_BDF_XSPATH"/driver_path",
--                     pci->domain,
--                     pci->bus,
--                     pci->dev,
--                     pci->func);
--    if ( libxl__xs_printf(gc, XBT_NULL, path, "%s", driver_path) < 0 ) {
--        LOGE(WARN, "Write of %s to node %s failed.", driver_path, path);
-+
-+static void pci_info_xs_write(libxl__gc *gc, libxl_device_pci *pci,
-+                              const char *node, const char *val)
-+{
-+    char *path = pci_info_xs_path(gc, pci, node);
-+
-+    if ( libxl__xs_printf(gc, XBT_NULL, path, "%s", val) < 0 ) {
-+        LOGE(WARN, "Write of %s to node %s failed.", val, path);
-     }
- }
- 
--static char * pci_assignable_driver_path_read(libxl__gc *gc,
--                                              libxl_device_pci *pci)
-+static char *pci_info_xs_read(libxl__gc *gc, libxl_device_pci *pci,
-+                              const char *node)
- {
--    return libxl__xs_read(gc, XBT_NULL,
--                          GCSPRINTF(
--                           PCIBACK_INFO_PATH "/" PCI_BDF_XSPATH "/driver_path",
--                           pci->domain,
--                           pci->bus,
--                           pci->dev,
--                           pci->func));
-+    char *path = pci_info_xs_path(gc, pci, node);
-+
-+    return libxl__xs_read(gc, XBT_NULL, path);
- }
- 
--static void pci_assignable_driver_path_remove(libxl__gc *gc,
--                                              libxl_device_pci *pci)
-+static void pci_info_xs_remove(libxl__gc *gc, libxl_device_pci *pci,
-+                               const char *node)
- {
-+    char *path = pci_info_xs_path(gc, pci, node);
-     libxl_ctx *ctx = libxl__gc_owner(gc);
- 
-     /* Remove the xenstore entry */
--    xs_rm(ctx->xsh, XBT_NULL,
--          GCSPRINTF(PCIBACK_INFO_PATH "/" PCI_BDF_XSPATH,
--                    pci->domain,
--                    pci->bus,
--                    pci->dev,
--                    pci->func) );
-+    xs_rm(ctx->xsh, XBT_NULL, path);
- }
- 
- static int libxl__device_pci_assignable_add(libxl__gc *gc,
-@@ -824,9 +822,9 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     /* Store driver_path for rebinding to dom0 */
-     if ( rebind ) {
-         if ( driver_path ) {
--            pci_assignable_driver_path_write(gc, pci, driver_path);
-+            pci_info_xs_write(gc, pci, "driver_path", driver_path);
-         } else if ( (driver_path =
--                     pci_assignable_driver_path_read(gc, pci)) != NULL ) {
-+                     pci_info_xs_read(gc, pci, "driver_path")) != NULL ) {
-             LOG(INFO, PCI_BDF" not bound to a driver, will be rebound to %s",
-                 dom, bus, dev, func, driver_path);
-         } else {
-@@ -834,7 +832,7 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-                 dom, bus, dev, func);
-         }
-     } else {
--        pci_assignable_driver_path_remove(gc, pci);
-+        pci_info_xs_remove(gc, pci, "driver_path");
-     }
- 
-     if ( pciback_dev_assign(gc, pci) ) {
-@@ -884,7 +882,7 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
-     }
- 
-     /* Rebind if necessary */
--    driver_path = pci_assignable_driver_path_read(gc, pci);
-+    driver_path = pci_info_xs_read(gc, pci, "driver_path");
- 
-     if ( driver_path ) {
-         if ( rebind ) {
-@@ -897,7 +895,7 @@ static int libxl__device_pci_assignable_remove(libxl__gc *gc,
-                 return -1;
+@@ -2374,6 +2374,9 @@ static int libxl__device_pci_from_xs_be(libxl__gc *gc,
+             } else if (!strcmp(p, "permissive")) {
+                 p = strtok_r(NULL, ",=", &saveptr);
+                 pci->permissive = atoi(p);
++            } else if (!strcmp(p, "rdm_policy")) {
++                p = strtok_r(NULL, ",=", &saveptr);
++                libxl_rdm_reserve_policy_from_string(p, &pci->rdm_policy);
              }
- 
--            pci_assignable_driver_path_remove(gc, pci);
-+            pci_info_xs_remove(gc, pci, "driver_path");
-         }
-     } else {
-         if ( rebind ) {
+         } while ((p = strtok_r(NULL, ",=", &saveptr)) != NULL);
+     }
 -- 
 2.20.1
 
