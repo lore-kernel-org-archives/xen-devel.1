@@ -2,46 +2,44 @@ Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC5B4C47436
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 15:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0AE6C433FE
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 15:09:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ECAB7207B5
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:25:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ECAB7207B5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 57BA421D94
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 15:09:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57BA421D94
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43536.78271 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43732.78565 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpYH-0000dx-8R; Thu, 03 Dec 2020 14:25:45 +0000
+	id 1kkqEB-0008BH-OX; Thu, 03 Dec 2020 15:09:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43536.78271; Thu, 03 Dec 2020 14:25:45 +0000
+Received: by outflank-mailman (output) from mailman id 43732.78565; Thu, 03 Dec 2020 15:09:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpYH-0000do-21; Thu, 03 Dec 2020 14:25:45 +0000
-Received: by outflank-mailman (input) for mailman id 43536;
- Thu, 03 Dec 2020 14:25:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kkqEB-0008BA-LA; Thu, 03 Dec 2020 15:09:03 +0000
+Received: by outflank-mailman (input) for mailman id 43732;
+ Thu, 03 Dec 2020 15:09:02 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kkpYF-0000Yk-1S
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:25:43 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kkpYE-0006M4-8v; Thu, 03 Dec 2020 14:25:42 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com
- ([86.183.162.145] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kkpYE-00015c-1F; Thu, 03 Dec 2020 14:25:42 +0000
+ (envelope-from <SRS0=vSHx=FH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kkqEA-0008B5-2X
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 15:09:02 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 18f79b02-6b1e-48a9-bd20-206abfa09bd4;
+ Thu, 03 Dec 2020 15:09:01 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 83195AC65;
+ Thu,  3 Dec 2020 15:09:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,81 +51,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=jrF8G4x0cfVSYo8Z0ZIBCjNYH5IUMK69nM2Ctnos49g=; b=pquTNGyeVIvIKiyqidIYP09jgi
-	cQPO4ovoCgdCJOLbNSmQy2vUGAOiKhKGGlPjIrTG9DxYpl80yAXt8vuMG8rhAm/EhEE7Qbz6LM14d
-	Ksbfz9u9i1dHvcrc8QkeQ3Sln/Vj4sJ13VUCHkmKl2wCqR01gnvTF8RfhnLXCYyeKuFM=;
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v5 06/23] libxl: remove extraneous arguments to do_pci_remove() in libxl_pci.c
-Date: Thu,  3 Dec 2020 14:25:17 +0000
-Message-Id: <20201203142534.4017-7-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201203142534.4017-1-paul@xen.org>
-References: <20201203142534.4017-1-paul@xen.org>
+X-Inumbo-ID: 18f79b02-6b1e-48a9-bd20-206abfa09bd4
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1607008140; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=I5UIsF9sXAtXCzAtuI+A+nPX35jXeoAr0MhfRJx9RzA=;
+	b=WsQMwAni4+N4f5bMcesMYaqH8z/JkljNA210SbDeooYdDiADe7bJR8LZa76DXr/eTmQX7o
+	8663IbNjL42IK90KSaNcNMIB7pLZvPcfZNFXka/y7G9/Zi78g7YC637sUnOWF1NvBClrks
+	ktxaf2oHpjf0I+ypxIImhYbgMAJEAms=
+Subject: Re: [PATCH v2 13/17] xen/hypfs: support dynamic hypfs nodes
+To: Juergen Gross <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+References: <20201201082128.15239-1-jgross@suse.com>
+ <20201201082128.15239-14-jgross@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <a02fe2e6-428f-9bea-0108-92fa03729420@suse.com>
+Date: Thu, 3 Dec 2020 16:08:59 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201201082128.15239-14-jgross@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 01.12.2020 09:21, Juergen Gross wrote:
+> Add a HYPFS_VARDIR_INIT() macro for initializing such a directory
+> statically, taking a struct hypfs_funcs pointer as parameter additional
+> to those of HYPFS_DIR_INIT().
+> 
+> Modify HYPFS_VARSIZE_INIT() to take the function vector pointer as an
+> additional parameter as this will be needed for dynamical entries.
+> 
+> For being able to let the generic hypfs coding continue to work on
+> normal struct hypfs_entry entities even for dynamical nodes add some
+> infrastructure for allocating a working area for the current hypfs
+> request in order to store needed information for traversing the tree.
+> This area is anchored in a percpu pointer and can be retrieved by any
+> level of the dynamic entries. The normal way to handle allocation and
+> freeing is to allocate the data in the enter() callback of a node and
+> to free it in the related exit() callback.
+> 
+> Add a hypfs_add_dyndir() function for adding a dynamic directory
+> template to the tree, which is needed for having the correct reference
+> to its position in hypfs.
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+> V2:
+> - switch to xzalloc_bytes() in hypfs_alloc_dyndata() (Jan Beulich)
+> - carved out from previous patch
+> - use enter() and exit() callbacks for allocating and freeing
+>   dyndata memory
 
-Both 'domid' and 'pci' are available in 'pci_remove_state' so there is no
-need to also pass them as separate arguments.
+I can't seem to be able to spot what this describes, and the
+respective part of the description therefore also remains unclear
+to me. Not the least again when considering multi-level templates,
+where potentially each of the handlers may want to allocate dyndata,
+yet only one party can at a time.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
----
- tools/libs/light/libxl_pci.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+> - add hypfs_add_dyndir()
 
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 35ee810d5df3..23f3f78992fd 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -1871,14 +1871,14 @@ static void pci_remove_stubdom_done(libxl__egc *egc,
- static void pci_remove_done(libxl__egc *egc,
-     pci_remove_state *prs, int rc);
- 
--static void do_pci_remove(libxl__egc *egc, uint32_t domid,
--                          libxl_device_pci *pci, int force,
--                          pci_remove_state *prs)
-+static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
- {
-     STATE_AO_GC(prs->aodev->ao);
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-     libxl_device_pci *assigned;
-+    uint32_t domid = prs->domid;
-     libxl_domain_type type = libxl__domain_type(gc, domid);
-+    libxl_device_pci *pci = prs->pci;
-     int rc, num;
-     uint32_t domainid = domid;
- 
-@@ -2275,7 +2275,6 @@ static void device_pci_remove_common_next(libxl__egc *egc,
-     EGC_GC;
- 
-     /* Convenience aliases */
--    libxl_domid domid = prs->domid;
-     libxl_device_pci *const pci = prs->pci;
-     libxl__ao_device *const aodev = prs->aodev;
-     const unsigned int pfunc_mask = prs->pfunc_mask;
-@@ -2293,7 +2292,7 @@ static void device_pci_remove_common_next(libxl__egc *egc,
-             } else {
-                 pci->vdevfn = orig_vdev;
-             }
--            do_pci_remove(egc, domid, pci, prs->force, prs);
-+            do_pci_remove(egc, prs);
-             return;
-         }
-     }
--- 
-2.20.1
+Overall this patch adds a lot of (for now) dead code, which makes it
+hard to judge whether this is what's needed. I guess I'll again
+learn more by reding further patches.
 
+Jan
 
