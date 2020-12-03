@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EBE5C63777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0D6EC83013
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:42:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8F3EB20671
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:42:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F3EB20671
+	by mail.kernel.org (Postfix) with ESMTPS id 7FB3321D91
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 12:42:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7FB3321D91
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43407.78034 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43409.78058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kknw0-0005xn-B1; Thu, 03 Dec 2020 12:42:08 +0000
+	id 1kknw2-00062D-B8; Thu, 03 Dec 2020 12:42:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43407.78034; Thu, 03 Dec 2020 12:42:08 +0000
+Received: by outflank-mailman (output) from mailman id 43409.78058; Thu, 03 Dec 2020 12:42:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kknw0-0005xg-6x; Thu, 03 Dec 2020 12:42:08 +0000
-Received: by outflank-mailman (input) for mailman id 43407;
- Thu, 03 Dec 2020 12:42:07 +0000
+	id 1kknw2-000621-7d; Thu, 03 Dec 2020 12:42:10 +0000
+Received: by outflank-mailman (input) for mailman id 43409;
+ Thu, 03 Dec 2020 12:42:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kknvz-0005wR-5p
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 12:42:07 +0000
+ (envelope-from <paul@xen.org>) id 1kknw0-0005yS-JC
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 12:42:08 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kknvx-000469-PG; Thu, 03 Dec 2020 12:42:05 +0000
+ id 1kknvz-00046M-Nc; Thu, 03 Dec 2020 12:42:07 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kknvx-00015A-FJ; Thu, 03 Dec 2020 12:42:05 +0000
+ id 1kknvz-00015A-Fm; Thu, 03 Dec 2020 12:42:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,208 +54,172 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=lmkdn59hshdmAjDQmfZLDVWbGtLlFRpvq2lkuaCfgJY=; b=lnfsOqa1+UyaBlTlxXau6pCzBV
-	Cmfflqq2/JrDMV/gHL2vnO6Hd1dVp7LZHeKXBThMnOcj1mAmAgP3xe3TMgUCcihcaPefdpoPRNw9p
-	SmtW9xPEAtzVbf1g8Umd5YTlCiEMcCC7IPjBBVQgOMwbLbqeGf0NDkpGveQglSpOkft8=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=CGl8BZR/+SpIqigLmobGcANzj6zAGuP+UKJDCJC+Ltg=; b=SbbI6XX5sX2gwuUxhWLZLT1pAX
+	4ZL8iL+x0MoLHveAY1p0FQnICSlV/ZcM/nIq3r996pGP3fUHPfGg0mJ7ieDkLcD8k9KmOrqQi6zyN
+	I4gxHGQd/gRl5BZpvbYI+vxBZKnK8rPcIE4sGGTHyZI5PEaumxUs1Gt4GFyU53cZHGhs=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 2/4] domctl: introduce a new domain create flag, XEN_DOMCTL_CDF_evtchn_upcall, ...
-Date: Thu,  3 Dec 2020 12:41:57 +0000
-Message-Id: <20201203124159.3688-3-paul@xen.org>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v5 4/4] xl: introduce a 'xen-abi-features' option...
+Date: Thu,  3 Dec 2020 12:41:59 +0000
+Message-Id: <20201203124159.3688-5-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201203124159.3688-1-paul@xen.org>
 References: <20201203124159.3688-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-...to control the visibility of the per-vCPU upcall feature for HVM guests.
-
-Commit 04447f4453c0 ("x86/hvm: add per-vcpu evtchn upcalls") added a mechanism
-by which x86 HVM guests can register a vector for each vCPU which will be used
-by Xen to signal event channels on that vCPU.
-
-This facility (an HVMOP hypercall) appeared in a uncontrolled fashion which
-has implications for the behaviour of OS when moving from an older Xen to a
-newer Xen. For instance, the OS may be aware of the per-vCPU upcall feature
-but support for it is buggy. In this case the OS will function perfectly well
-on the older Xen, but fail (in a potentially non-obvious way) on the newer
-Xen.
-
-To maintain compatibility it is necessary to make Xen behave as it did
-before the new hypercall was added and hence the code in this patch ensures
-that, if XEN_DOMCTL_CDF_evtchn_upcall is not set, the hypercall will again
-result in -ENOSYS being returned to the guest.
-
-NOTE: To maintain current behavior, until a tool-stack option is added to
-      control the flag, it is unconditionally set for x86 HVM domains. A
-      subsequent patch will introduce such tool-stack control.
+... to control which features of the Xen ABI are enabled in
+'libxl_domain_build_info', and hence exposed to the guest.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Christian Lindig <christian.lindig@citrix.com>
-Cc: David Scott <dave@recoil.org>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
 
 v5:
  - New in v5
 ---
- tools/libs/light/libxl_x86.c    | 7 ++++++-
- tools/ocaml/libs/xc/xenctrl.ml  | 1 +
- tools/ocaml/libs/xc/xenctrl.mli | 1 +
- xen/arch/x86/domain.c           | 8 ++++++++
- xen/arch/x86/hvm/hvm.c          | 3 +++
- xen/arch/x86/setup.c            | 1 +
- xen/common/domain.c             | 3 ++-
- xen/include/public/domctl.h     | 4 +++-
- 8 files changed, 25 insertions(+), 3 deletions(-)
+ docs/man/xl.cfg.5.pod.in | 50 ++++++++++++++++++++++++++++++++++++++++
+ tools/xl/xl_parse.c      | 50 ++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 98 insertions(+), 2 deletions(-)
 
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index 86d272999d67..f7217b422404 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -5,7 +5,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-                                       libxl_domain_config *d_config,
-                                       struct xen_domctl_createdomain *config)
- {
--    switch(d_config->c_info.type) {
-+    libxl_domain_create_info *info = &d_config->c_info;
+diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
+index 3f0f8de1e988..b42ab8ba9f60 100644
+--- a/docs/man/xl.cfg.5.pod.in
++++ b/docs/man/xl.cfg.5.pod.in
+@@ -1649,6 +1649,56 @@ This feature is a B<technology preview>.
+ 
+ =back
+ 
++=item B<xen_abi_features=[ "STRING", "STRING", ...]>
 +
-+    if (info->type == LIBXL_DOMAIN_TYPE_HVM)
-+        config->flags |= XEN_DOMCTL_CDF_evtchn_upcall;
++The features of the Xen ABI exposed to the guest. The following features
++may be specified:
 +
-+    switch(info->type) {
-     case LIBXL_DOMAIN_TYPE_HVM:
-         config->arch.emulation_flags = (XEN_X86_EMU_ALL & ~XEN_X86_EMU_VPCI);
-         break;
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index fa5c7b7eb0a2..04284c364108 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -66,6 +66,7 @@ type domain_create_flag =
- 	| CDF_IOMMU
- 	| CDF_NESTED_VIRT
- 	| CDF_EVTCHN_FIFO
-+	| CDF_EVTCHN_UPCALL
++=over 4
++
++=item B<evtchn_fifo>
++
++A new event channel ABI was introduced in Xen 4.4. Moving a guest from an
++earlier Xen to Xen 4.4 onwards may expose bugs in the guest support for
++this ABI. Disabling this feature hides the ABI from the guest and hence
++may be used as a workaround for such bugs.
++
++The festure is enabled by default.
++
++=item B<evcthn_upcall>
++
++B<x86 HVM only>. A new hypercall to specify per-VCPU interrupt vectors to use
++for event channel upcalls in HVM guests was added in Xen 4.6. Moving a guest
++from an earlier Xen to Xen 4.6 onwards may expose bugs in the guest support
++for this hypercall. Disabling this feature hides the hypercall from the
++guest and hence may be used as a workaround for such bugs.
++
++The festure is enabled by default for B<x86 HVM> guests. Note that it is
++considered an error to enable this feature for B<Arm> or B<x86 PV> guests.
++
++=item B<all>
++
++This is a special value that enables all available features.
++
++=back
++
++Features can be disabled by prefixing the name with '!'. So, for example,
++to enable all features except B<evtchn_upcall>, specify:
++
++=over 4
++
++B<xen-abi-features=[ "all", "!evtchn_upcall" ]>
++
++=back
++
++Or, to simply enable default features except B<evtchn_fifo>, specify:
++
++=over 4
++
++B<xen-abi-features=[ "!evtchn_fifo" ]>
++
++=back
++
+ =back
  
- type domain_create_iommu_opts =
- 	| IOMMU_NO_SHAREPT
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index a872002d90cc..e40759464ae5 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -59,6 +59,7 @@ type domain_create_flag =
-   | CDF_IOMMU
-   | CDF_NESTED_VIRT
-   | CDF_EVTCHN_FIFO
-+  | CDF_EVTCHN_UPCALL
+ =head2 Paravirtualised (PV) Guest Specific Options
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index cae8eb679c5a..566e09f938f4 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1216,8 +1216,9 @@ void parse_config_data(const char *config_source,
+     XLU_ConfigList *cpus, *vbds, *nics, *pcis, *cvfbs, *cpuids, *vtpms,
+                    *usbctrls, *usbdevs, *p9devs, *vdispls, *pvcallsifs_devs;
+     XLU_ConfigList *channels, *ioports, *irqs, *iomem, *viridian, *dtdevs,
+-                   *mca_caps;
+-    int num_ioports, num_irqs, num_iomem, num_cpus, num_viridian, num_mca_caps;
++                   *mca_caps, *features;
++    int num_ioports, num_irqs, num_iomem, num_cpus, num_viridian, num_mca_caps,
++        num_features;
+     int pci_power_mgmt = 0;
+     int pci_msitranslate = 0;
+     int pci_permissive = 0;
+@@ -2737,6 +2738,51 @@ skip_usbdev:
+     xlu_cfg_get_defbool(config, "xend_suspend_evtchn_compat",
+                         &c_info->xend_suspend_evtchn_compat, 0);
  
- type domain_create_iommu_opts =
-   | IOMMU_NO_SHAREPT
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 1b894d0124d7..e7f83880219d 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -662,11 +662,19 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-     }
- 
-     if ( !hvm )
++    switch (xlu_cfg_get_list(config, "xen_abi_features",
++                             &features, &num_features, 1))
 +    {
-+        if ( config->flags & XEN_DOMCTL_CDF_evtchn_upcall )
-+        {
-+            dprintk(XENLOG_INFO, "Per-vCPU event channel vector only supported for HVM guests\n");
-+            return -EINVAL;
++    case 0: /* Success */
++        if (num_features) {
++            libxl_bitmap_alloc(ctx, &b_info->feature_enable,
++                               LIBXL_BUILDINFO_FEATURE_ENABLE_DISABLE_WIDTH);
++            libxl_bitmap_alloc(ctx, &b_info->feature_disable,
++                               LIBXL_BUILDINFO_FEATURE_ENABLE_DISABLE_WIDTH);
 +        }
++        for (i = 0; i < num_features; i++) {
++            if (strcmp(buf, "all") == 0)
++                libxl_bitmap_set_any(&b_info->feature_enable);
++            else {
++                libxl_bitmap *s = &b_info->feature_enable;
++                libxl_bitmap *r = &b_info->feature_disable;
++                libxl_xen_abi_feature f;
 +
-         /*
-          * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear
-          * for HVM guests.
-          */
-         config->flags |= XEN_DOMCTL_CDF_oos_off;
++                buf = xlu_cfg_get_listitem(features, i);
++
++                if (*buf == '!') {
++                    s = &b_info->feature_disable;
++                    r = &b_info->feature_enable;
++                    buf++;
++                }
++
++                e = libxl_xen_abi_feature_from_string(buf, &f);
++                if (e) {
++                    fprintf(stderr,
++                            "xl: Unknown Xen ABI feature '%s'\n",
++                            buf);
++                    exit(-ERROR_FAIL);
++                }
++
++                libxl_bitmap_set(s, f);
++                libxl_bitmap_reset(r, f);
++            }
++        }
++        break;
++    case ESRCH: break; /* Option not present */
++    default:
++        fprintf(stderr,"xl: Unable to parse Xen ABI features.\n");
++        exit(-ERROR_FAIL);
 +    }
- 
-     if ( nested_virt && !hap )
-     {
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 54e32e4fe85c..7ffc42a7282e 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -4037,6 +4037,9 @@ static int hvmop_set_evtchn_upcall_vector(
-     struct domain *d = current->domain;
-     struct vcpu *v;
- 
-+    if ( !(d->options & XEN_DOMCTL_CDF_evtchn_upcall) )
-+        return -ENOSYS;
 +
-     if ( !is_hvm_domain(d) )
-         return -EINVAL;
- 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index e558241c73da..3ff9a25eede6 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -751,6 +751,7 @@ static struct domain *__init create_dom0(const module_t *image,
-     if ( opt_dom0_pvh )
-     {
-         dom0_cfg.flags |= (XEN_DOMCTL_CDF_hvm |
-+                           XEN_DOMCTL_CDF_evtchn_upcall |
-                            ((hvm_hap_supported() && !opt_dom0_shadow) ?
-                             XEN_DOMCTL_CDF_hap : 0));
- 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 28592c7c8486..1ff2603425a3 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -307,7 +307,8 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-          ~(XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap |
-            XEN_DOMCTL_CDF_s3_integrity | XEN_DOMCTL_CDF_oos_off |
-            XEN_DOMCTL_CDF_xs_domain | XEN_DOMCTL_CDF_iommu |
--           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_evtchn_fifo) )
-+           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_evtchn_fifo |
-+           XEN_DOMCTL_CDF_evtchn_upcall ) )
-     {
-         dprintk(XENLOG_INFO, "Unknown CDF flags %#x\n", config->flags);
-         return -EINVAL;
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index f7149c81a7c2..f5fe43a55662 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -72,9 +72,11 @@ struct xen_domctl_createdomain {
- #define XEN_DOMCTL_CDF_nested_virt    (1U << _XEN_DOMCTL_CDF_nested_virt)
- #define _XEN_DOMCTL_CDF_evtchn_fifo   7
- #define XEN_DOMCTL_CDF_evtchn_fifo    (1U << _XEN_DOMCTL_CDF_evtchn_fifo)
-+#define _XEN_DOMCTL_CDF_evtchn_upcall 8
-+#define XEN_DOMCTL_CDF_evtchn_upcall  (1U << _XEN_DOMCTL_CDF_evtchn_upcall)
- 
- /* Max XEN_DOMCTL_CDF_* constant.  Used for ABI checking. */
--#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_evtchn_fifo
-+#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_evtchn_upcall
- 
-     uint32_t flags;
+     xlu_cfg_destroy(config);
+ }
  
 -- 
 2.20.1
