@@ -2,44 +2,46 @@ Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF50DC47437
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E914CC4361B
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:56:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 329E121972
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:32:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 329E121972
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 157F120822
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:30:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 157F120822
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43656.78487 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43590.78324 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpet-000483-6o; Thu, 03 Dec 2020 14:32:35 +0000
+	id 1kkpd9-0002PC-0l; Thu, 03 Dec 2020 14:30:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43656.78487; Thu, 03 Dec 2020 14:32:35 +0000
+Received: by outflank-mailman (output) from mailman id 43590.78324; Thu, 03 Dec 2020 14:30:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpet-00047u-3N; Thu, 03 Dec 2020 14:32:35 +0000
-Received: by outflank-mailman (input) for mailman id 43656;
- Thu, 03 Dec 2020 14:32:33 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kkpd8-0002P1-Rh; Thu, 03 Dec 2020 14:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 43590;
+ Thu, 03 Dec 2020 14:30:45 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vSHx=FH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kkper-00047f-5L
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:32:33 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5f7de066-6fba-487a-822d-6fce65ccd27b;
- Thu, 03 Dec 2020 14:32:32 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8D2E9ABE9;
- Thu,  3 Dec 2020 14:32:31 +0000 (UTC)
+ (envelope-from <paul@xen.org>) id 1kkpd7-0002NR-JX
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:30:45 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kkpd6-0006Tx-QY; Thu, 03 Dec 2020 14:30:44 +0000
+Received: from host86-183-162-145.range86-183.btcentralplus.com
+ ([86.183.162.145] helo=u2f063a87eabd5f.home)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kkpYL-00015c-E8; Thu, 03 Dec 2020 14:25:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,55 +53,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f7de066-6fba-487a-822d-6fce65ccd27b
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1607005951; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=D590jycdEqjmqOLf5UnHRlb2s9jIT0LQnoieX8G9a+0=;
-	b=gf7kiDQkuPQi8T2d1GxRwF9QKoicFnQWwpGlls3mvUKES0wCtEnie23zN9fe1jmCMOoSXu
-	RXyAdNr6sJd3uRDC0yLuFJWSUs3O8AUhXsNDal1PiGSqwXOv5W/WSe6k/EdfQYOBDfLp47
-	07oGw1ybrh1WL28LhfE9mSii+xgxjqQ=
-Subject: Re: [ANNOUNCE] Call for agenda items for December 2020 Community Call
- @ 16:00 UTC
-To: George Dunlap <George.Dunlap@citrix.com>
-Cc: "open list:X86" <xen-devel@lists.xenproject.org>
-References: <6A1AC739-EB53-4996-A99B-EE68358E70DB@citrix.com>
- <6da4cd56-7364-bc6e-24d8-02976dbd637d@suse.com>
- <49AA35F9-5056-4D42-AE1D-5A478B0CDF7B@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6173e857-2486-08b8-e0b1-93b400e8c9ba@suse.com>
-Date: Thu, 3 Dec 2020 15:32:31 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=EMfCtlWlj+oMHa2Vf4m6cYy+TLLLFhjiF/PO4Sb4syk=; b=t3/M/JAYEx+h9b/w9pWt9ns2f6
+	Se6y7trFmulmjUo6/7mpGgIUdPzIFfpZXHGPZNvzJnaKRExXNEEvCU4iqjg8ktZ/hIrPIZHzLyiRM
+	Qtp67+pI7x+eBhpBs2eKVoB20e1Mow+6N75kiWVfFQL8Pr/JXfXFGFrdMx4dGEVmwpv0=;
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v5 13/23] libxl: use COMPARE_PCI() macro is_pci_in_array()...
+Date: Thu,  3 Dec 2020 14:25:24 +0000
+Message-Id: <20201203142534.4017-14-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201203142534.4017-1-paul@xen.org>
+References: <20201203142534.4017-1-paul@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <49AA35F9-5056-4D42-AE1D-5A478B0CDF7B@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 30.11.2020 13:16, George Dunlap wrote:
->> On Nov 30, 2020, at 10:25 AM, Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 27.11.2020 12:52, George Dunlap wrote:
->>> The proposed agenda is in https://cryptpad.fr/pad/#/2/pad/edit/OPN55rXaOncupuWuHxtddzWJ/ and you can edit to add items.  Alternatively, you can reply to this mail directly.
->>
->> The "New series / series requiring attention" section is gone. Was
->> this intentional? If not, I would have wanted to propose that items
->> from that list which we didn't get to on the previous call be
->> automatically propagated. According to my observation it is more
->> likely than not that nothing would have changed in their status.
->> Hence it may be easier to take one off the list if indeed it has
->> got unstalled.
-> 
-> Oops — I meant to delete the content, but not the header.
-> 
-> Hopefully “not getting to that part of the call” should be rare; but yes, copying it over (perhaps with a color to indicate that it’s been carried over from last time) sounds reasonable.  I’ll do that.
+From: Paul Durrant <pdurrant@amazon.com>
 
-Seeing that it didn't happen for today's meeting, I've blindly copied
-over the previous meeting's section, before adding new items there.
+... rather than an open-coded equivalent.
 
-Jan
+This patch tidies up the is_pci_in_array() function, making it take a single
+'libxl_device_pci' argument rather than separate domain, bus, device and
+function arguments. The already-available COMPARE_PCI() macro can then be
+used and it is also modified to return 'bool' rather than 'int'.
+
+The patch also modifies libxl_pci_assignable() to use is_pci_in_array() rather
+than a separate open-coded equivalent, and also modifies it to return a
+'bool' rather than an 'int'.
+
+NOTE: The COMPARE_PCI() macro is also fixed to include the 'domain' in its
+      comparison, which should always have been the case.
+
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>
+---
+ tools/libs/light/libxl_internal.h |  7 +++---
+ tools/libs/light/libxl_pci.c      | 38 +++++++++++--------------------
+ 2 files changed, 17 insertions(+), 28 deletions(-)
+
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index ecee61b5419c..02f8a3179c44 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -4746,9 +4746,10 @@ void libxl__xcinfo2xlinfo(libxl_ctx *ctx,
+  * devices have same identifier. */
+ #define COMPARE_DEVID(a, b) ((a)->devid == (b)->devid)
+ #define COMPARE_DISK(a, b) (!strcmp((a)->vdev, (b)->vdev))
+-#define COMPARE_PCI(a, b) ((a)->func == (b)->func &&    \
+-                           (a)->bus == (b)->bus &&      \
+-                           (a)->dev == (b)->dev)
++#define COMPARE_PCI(a, b) ((a)->domain == (b)->domain && \
++                           (a)->bus == (b)->bus &&       \
++                           (a)->dev == (b)->dev &&       \
++                           (a)->func == (b)->func)
+ #define COMPARE_USB(a, b) ((a)->ctrl == (b)->ctrl && \
+                            (a)->port == (b)->port)
+ #define COMPARE_USBCTRL(a, b) ((a)->devid == (b)->devid)
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index e42c2ba56b73..4bf4a168e032 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -336,24 +336,17 @@ retry_transaction2:
+     return 0;
+ }
+ 
+-static int is_pci_in_array(libxl_device_pci *assigned, int num_assigned,
+-                           int dom, int bus, int dev, int func)
++static bool is_pci_in_array(libxl_device_pci *pcis, int num,
++                            libxl_device_pci *pci)
+ {
+     int i;
+ 
+-    for(i = 0; i < num_assigned; i++) {
+-        if ( assigned[i].domain != dom )
+-            continue;
+-        if ( assigned[i].bus != bus )
+-            continue;
+-        if ( assigned[i].dev != dev )
+-            continue;
+-        if ( assigned[i].func != func )
+-            continue;
+-        return 1;
++    for (i = 0; i < num; i++) {
++        if (COMPARE_PCI(pci, &pcis[i]))
++            break;
+     }
+ 
+-    return 0;
++    return i < num;
+ }
+ 
+ /* Write the standard BDF into the sysfs path given by sysfs_path. */
+@@ -1487,21 +1480,17 @@ int libxl_device_pci_add(libxl_ctx *ctx, uint32_t domid,
+     return AO_INPROGRESS;
+ }
+ 
+-static int libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
++static bool libxl_pci_assignable(libxl_ctx *ctx, libxl_device_pci *pci)
+ {
+     libxl_device_pci *pcis;
+-    int num, i;
++    int num;
++    bool assignable;
+ 
+     pcis = libxl_device_pci_assignable_list(ctx, &num);
+-    for (i = 0; i < num; i++) {
+-        if (pcis[i].domain == pci->domain &&
+-            pcis[i].bus == pci->bus &&
+-            pcis[i].dev == pci->dev &&
+-            pcis[i].func == pci->func)
+-            break;
+-    }
++    assignable = is_pci_in_array(pcis, num, pci);
+     libxl_device_pci_assignable_list_free(pcis, num);
+-    return i != num;
++
++    return assignable;
+ }
+ 
+ static void device_pci_add_stubdom_wait(libxl__egc *egc,
+@@ -1834,8 +1823,7 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
+         goto out_fail;
+     }
+ 
+-    attached = is_pci_in_array(pcis, num, pci->domain,
+-                               pci->bus, pci->dev, pci->func);
++    attached = is_pci_in_array(pcis, num, pci);
+     libxl_device_pci_list_free(pcis, num);
+ 
+     rc = ERROR_INVAL;
+-- 
+2.20.1
+
 
