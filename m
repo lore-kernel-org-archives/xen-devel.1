@@ -2,46 +2,46 @@ Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD023C193FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFC28C1B087
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 15:01:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5615B207A9
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:25:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5615B207A9
+	by mail.kernel.org (Postfix) with ESMTPS id A0732207B3
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 14:25:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0732207B3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43535.78251 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43530.78199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpYF-0000Zc-Gh; Thu, 03 Dec 2020 14:25:43 +0000
+	id 1kkpY9-0000Ql-89; Thu, 03 Dec 2020 14:25:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43535.78251; Thu, 03 Dec 2020 14:25:43 +0000
+Received: by outflank-mailman (output) from mailman id 43530.78199; Thu, 03 Dec 2020 14:25:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkpYF-0000ZD-9B; Thu, 03 Dec 2020 14:25:43 +0000
-Received: by outflank-mailman (input) for mailman id 43535;
- Thu, 03 Dec 2020 14:25:42 +0000
+	id 1kkpY9-0000Qe-4g; Thu, 03 Dec 2020 14:25:37 +0000
+Received: by outflank-mailman (input) for mailman id 43530;
+ Thu, 03 Dec 2020 14:25:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kkpYE-0000WJ-3Q
- for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:25:42 +0000
+ (envelope-from <paul@xen.org>) id 1kkpY8-0000QZ-5G
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 14:25:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpYD-0006Lv-9H; Thu, 03 Dec 2020 14:25:41 +0000
+ id 1kkpY7-0006LH-Qf; Thu, 03 Dec 2020 14:25:35 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kkpYD-00015c-1G; Thu, 03 Dec 2020 14:25:41 +0000
+ id 1kkpY7-00015c-Gs; Thu, 03 Dec 2020 14:25:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,123 +54,77 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=0AyOqDJsHZVempffCeuXOX5SYYaKuAxFB7OmnpHONLE=; b=yJbt2LN08Ynu0/wKnSQK3Ftfh3
-	8604GMya913fAaxc8KMWVelVSCCfXefVUYr7wVz5ngT8bK0j3+lpA+uTBd1YRq5ECyRmOxu3lRFM+
-	rDBaqWrHnXk2PKkOwmtv6LE/BQC9hufMCIV+QEHu34SZMqjLRMP5Ch5l5qhce2VvLOVw=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:Cc:To:From; bh=sOVGNlxZA253QNyLwDoA0fXRW+6qHDxeO7BrGEiay3g=; b=2WLHyC
+	BtCak28PDg8o7CoSLJSYwMmL+Tp0NrQs8PIc24kkXXwPkaVx4f6e08CtTnw4xNyvVi+vbF5getldg
+	kg37vkOyBpHgY+brkDUh/bsuLx9kMvPwMege8vdRpnHQYVWiG9LVBJaHTK3De8Q464efD58VNDfAx
+	zPssWSsGEqA=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v5 05/23] libxl: s/detatched/detached in libxl_pci.c
-Date: Thu,  3 Dec 2020 14:25:16 +0000
-Message-Id: <20201203142534.4017-6-paul@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>
+Subject: [PATCH v5 00/23] xl / libxl: named PCI pass-through devices
+Date: Thu,  3 Dec 2020 14:25:11 +0000
+Message-Id: <20201203142534.4017-1-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201203142534.4017-1-paul@xen.org>
-References: <20201203142534.4017-1-paul@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Simply spelling correction. Purely cosmetic fix.
+Paul Durrant (23):
+  xl / libxl: s/pcidev/pci and remove DEFINE_DEVICE_TYPE_STRUCT_X
+  libxl: make libxl__device_list() work correctly for
+    LIBXL__DEVICE_KIND_PCI...
+  libxl: Make sure devices added by pci-attach are reflected in the
+    config
+  libxl: add/recover 'rdm_policy' to/from PCI backend in xenstore
+  libxl: s/detatched/detached in libxl_pci.c
+  libxl: remove extraneous arguments to do_pci_remove() in libxl_pci.c
+  libxl: stop using aodev->device_config in libxl__device_pci_add()...
+  libxl: generalise 'driver_path' xenstore access functions in
+    libxl_pci.c
+  libxl: remove unnecessary check from libxl__device_pci_add()
+  libxl: remove get_all_assigned_devices() from libxl_pci.c
+  libxl: make sure callers of libxl_device_pci_list() free the list
+    after use
+  libxl: add libxl_device_pci_assignable_list_free()...
+  libxl: use COMPARE_PCI() macro is_pci_in_array()...
+  docs/man: extract documentation of PCI_SPEC_STRING from the xl.cfg
+    manpage...
+  docs/man: improve documentation of PCI_SPEC_STRING...
+  docs/man: fix xl(1) documentation for 'pci' operations
+  libxl: introduce 'libxl_pci_bdf' in the idl...
+  libxlu: introduce xlu_pci_parse_spec_string()
+  libxl: modify
+    libxl_device_pci_assignable_add/remove/list/list_free()...
+  docs/man: modify xl(1) in preparation for naming of assignable devices
+  xl / libxl: support naming of assignable devices
+  docs/man: modify xl-pci-configuration(5) to add 'name' field to
+    PCI_SPEC_STRING
+  xl / libxl: support 'xl pci-attach/detach' by name
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
----
- tools/libs/light/libxl_pci.c | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+ docs/man/xl-pci-configuration.5.pod  |  218 ++++++
+ docs/man/xl.1.pod.in                 |   39 +-
+ docs/man/xl.cfg.5.pod.in             |   68 +-
+ tools/golang/xenlight/helpers.gen.go |   77 +-
+ tools/golang/xenlight/types.gen.go   |    8 +-
+ tools/include/libxl.h                |   67 +-
+ tools/include/libxlutil.h            |    8 +-
+ tools/libs/light/libxl_create.c      |    6 +-
+ tools/libs/light/libxl_device.c      |   70 +-
+ tools/libs/light/libxl_dm.c          |   18 +-
+ tools/libs/light/libxl_internal.h    |   55 +-
+ tools/libs/light/libxl_pci.c         | 1048 ++++++++++++++------------
+ tools/libs/light/libxl_types.idl     |   19 +-
+ tools/libs/util/libxlu_pci.c         |  379 +++++-----
+ tools/ocaml/libs/xl/xenlight_stubs.c |   19 +-
+ tools/xl/xl_cmdtable.c               |   16 +-
+ tools/xl/xl_parse.c                  |   28 +-
+ tools/xl/xl_pci.c                    |  159 ++--
+ tools/xl/xl_sxp.c                    |   12 +-
+ 19 files changed, 1376 insertions(+), 938 deletions(-)
+ create mode 100644 docs/man/xl-pci-configuration.5.pod
 
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index a06c88076519..35ee810d5df3 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -1864,7 +1864,7 @@ static void pci_remove_qmp_query_cb(libxl__egc *egc,
-     libxl__ev_qmp *qmp, const libxl__json_object *response, int rc);
- static void pci_remove_timeout(libxl__egc *egc,
-     libxl__ev_time *ev, const struct timeval *requested_abs, int rc);
--static void pci_remove_detatched(libxl__egc *egc,
-+static void pci_remove_detached(libxl__egc *egc,
-     pci_remove_state *prs, int rc);
- static void pci_remove_stubdom_done(libxl__egc *egc,
-     libxl__ao_device *aodev);
-@@ -1978,7 +1978,7 @@ skip1:
- skip_irq:
-     rc = 0;
- out_fail:
--    pci_remove_detatched(egc, prs, rc); /* must be last */
-+    pci_remove_detached(egc, prs, rc); /* must be last */
- }
- 
- static void pci_remove_qemu_trad_watch_state_cb(libxl__egc *egc,
-@@ -2002,7 +2002,7 @@ static void pci_remove_qemu_trad_watch_state_cb(libxl__egc *egc,
-     rc = qemu_pci_remove_xenstore(gc, domid, pci, prs->force);
- 
- out:
--    pci_remove_detatched(egc, prs, rc);
-+    pci_remove_detached(egc, prs, rc);
- }
- 
- static void pci_remove_qmp_device_del(libxl__egc *egc,
-@@ -2028,7 +2028,7 @@ static void pci_remove_qmp_device_del(libxl__egc *egc,
-     return;
- 
- out:
--    pci_remove_detatched(egc, prs, rc);
-+    pci_remove_detached(egc, prs, rc);
- }
- 
- static void pci_remove_qmp_device_del_cb(libxl__egc *egc,
-@@ -2051,7 +2051,7 @@ static void pci_remove_qmp_device_del_cb(libxl__egc *egc,
-     return;
- 
- out:
--    pci_remove_detatched(egc, prs, rc);
-+    pci_remove_detached(egc, prs, rc);
- }
- 
- static void pci_remove_qmp_retry_timer_cb(libxl__egc *egc, libxl__ev_time *ev,
-@@ -2067,7 +2067,7 @@ static void pci_remove_qmp_retry_timer_cb(libxl__egc *egc, libxl__ev_time *ev,
-     return;
- 
- out:
--    pci_remove_detatched(egc, prs, rc);
-+    pci_remove_detached(egc, prs, rc);
- }
- 
- static void pci_remove_qmp_query_cb(libxl__egc *egc,
-@@ -2127,7 +2127,7 @@ static void pci_remove_qmp_query_cb(libxl__egc *egc,
-     }
- 
- out:
--    pci_remove_detatched(egc, prs, rc); /* must be last */
-+    pci_remove_detached(egc, prs, rc); /* must be last */
- }
- 
- static void pci_remove_timeout(libxl__egc *egc, libxl__ev_time *ev,
-@@ -2146,12 +2146,12 @@ static void pci_remove_timeout(libxl__egc *egc, libxl__ev_time *ev,
-     /* If we timed out, we might still want to keep destroying the device
-      * (when force==true), so let the next function decide what to do on
-      * error */
--    pci_remove_detatched(egc, prs, rc);
-+    pci_remove_detached(egc, prs, rc);
- }
- 
--static void pci_remove_detatched(libxl__egc *egc,
--                                 pci_remove_state *prs,
--                                 int rc)
-+static void pci_remove_detached(libxl__egc *egc,
-+                                pci_remove_state *prs,
-+                                int rc)
- {
-     STATE_AO_GC(prs->aodev->ao);
-     int stubdomid = 0;
 -- 
 2.20.1
 
