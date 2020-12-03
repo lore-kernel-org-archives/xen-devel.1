@@ -1,49 +1,43 @@
-Return-Path: <SRS0=2fhb=FG=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=y3rP=FH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABB88C6369E
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 23:31:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F094FC64E7C
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 01:59:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A9B7217A0
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Dec 2020 23:31:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A9B7217A0
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 724E220B80
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Dec 2020 01:59:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 724E220B80
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.43035.77425 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.43068.77470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkbaW-0005vb-7E; Wed, 02 Dec 2020 23:31:08 +0000
+	id 1kkdtS-0007PY-O6; Thu, 03 Dec 2020 01:58:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 43035.77425; Wed, 02 Dec 2020 23:31:08 +0000
+Received: by outflank-mailman (output) from mailman id 43068.77470; Thu, 03 Dec 2020 01:58:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kkbaW-0005vU-2J; Wed, 02 Dec 2020 23:31:08 +0000
-Received: by outflank-mailman (input) for mailman id 43035;
- Wed, 02 Dec 2020 23:31:06 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kkbaU-0005vM-Kq; Wed, 02 Dec 2020 23:31:06 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kkbaU-0006gp-BD; Wed, 02 Dec 2020 23:31:06 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kkbaU-000588-1G; Wed, 02 Dec 2020 23:31:06 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kkbaU-0004jQ-0j; Wed, 02 Dec 2020 23:31:06 +0000
+	id 1kkdtS-0007PP-H0; Thu, 03 Dec 2020 01:58:50 +0000
+Received: by outflank-mailman (input) for mailman id 43068;
+ Thu, 03 Dec 2020 01:58:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=fvcX=FH=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
+ id 1kkdtR-0007PG-Ag
+ for xen-devel@lists.xenproject.org; Thu, 03 Dec 2020 01:58:49 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e775cbf0-7adc-46fb-9b14-6f05a26a7c43;
+ Thu, 03 Dec 2020 01:58:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,86 +49,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=LUev0f1o1cDEs4P3LR+xf5zTzPORjd7ZaRSZg3JNB4s=; b=KAul2qOnFz93i9+i0mmpln4r1Q
-	yQWdMkB6Sixc5qSDW1k7IrM1VwO/SvOenG7cwVGcWmf/bncE0hew9CFftKtiFUUHkaI2wsBJrvmfb
-	iwUpfMdZUoumegI7i0InhAB67rDHOd3BsYCUBPpJzZjdyFX8NGr7DBdgDZHHGjU3N6Wk=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-157163-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: e775cbf0-7adc-46fb-9b14-6f05a26a7c43
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1606960728;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=81Rw3lZq98mQJyaIkQSLoiys0ZES5ImYdbwUcQDOUUM=;
+  b=MJsw8CDw+JS4C8KZAwdh25fwGlMR616zTUq1whLTv/7cZZ4rBaJRSppy
+   mIaYA2tZifi+W+hRx5NLOijG6urwJZwCGU8957wSjFt3/yIxC7VSVmYpK
+   i67LkoccBLSmcukELsRKoPfUOIFWqfAolHfM8Yu2VjNMPdrA9PxoI7BBQ
+   U=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: QbsnmMv0btZoWs0MjOnZTuPOXXG4Sau6n2H6oj8ItV0G3cT4fCUauXYIOkTZU9N+h8/8soDNkQ
+ LO5oSZ0gddmvSsHxmauHCYgkonA2BQAZgom2HEX5i55utTSe/sozu6bRd6OL4r8qGpzsPUtjqJ
+ bLQu8Xp5Cz2vr+lBd0gImyt99IN0NAG2vr98aZfADxjAPj5t8aRpJ2hL640o0Q5KMLnXBnD2Tm
+ wpvJz3X2sBr4XnGM71+qdFv/pfF3sknr/Tzlg527B0aWxa/X/uRpYSWqwyp0wabpRLFishOCBa
+ G7U=
+X-SBRS: None
+X-MesageID: 32749603
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,388,1599537600"; 
+   d="scan'208";a="32749603"
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>,
+	<iwj@xenproject.org>, <jbeulich@suse.com>, <julien@xen.org>,
+	<sstabellini@kernel.org>, <wl@xen.org>, <roger.pau@citrix.com>, "Igor
+ Druzhinin" <igor.druzhinin@citrix.com>
+Subject: [PATCH v2 2/2] x86/IRQ: allocate guest array of max size only for shareable IRQs
+Date: Thu, 3 Dec 2020 01:58:26 +0000
+Message-ID: <1606960706-21274-2-git-send-email-igor.druzhinin@citrix.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1606960706-21274-1-git-send-email-igor.druzhinin@citrix.com>
+References: <1606960706-21274-1-git-send-email-igor.druzhinin@citrix.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 157163: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=aec46884784c2494a30221da775d4ac2c43a4d42
-X-Osstest-Versions-That:
-    xen=cabf60fc32d4cfa1d74a2bdfcdb294a31da5d68e
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 02 Dec 2020 23:31:06 +0000
+Content-Type: text/plain
 
-flight 157163 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157163/
+... and increase default "irq_max_guests" to 32.
 
-Failures :-/ but no regressions.
+It's not necessary to have an array of a size more than 1 for non-shareable
+IRQs and it might impact scalability in case of high "irq_max_guests"
+values being used - every IRQ in the system including MSIs would be
+supplied with an array of that size.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+Since it's now less impactful to use higher "irq_max_guests" value - bump
+the default to 32. That should give more headroom for future systems.
 
-version targeted for testing:
- xen                  aec46884784c2494a30221da775d4ac2c43a4d42
-baseline version:
- xen                  cabf60fc32d4cfa1d74a2bdfcdb294a31da5d68e
+Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
+---
 
-Last test of basis   157157  2020-12-02 10:00:26 Z    0 days
-Testing same since   157163  2020-12-02 19:01:29 Z    0 days    1 attempts
+New in v2.
+This is suggested by Jan and is optional for me.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Julien Grall <jgrall@amazon.com>
+---
+ docs/misc/xen-command-line.pandoc | 2 +-
+ xen/arch/x86/irq.c                | 7 ++++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index f5f230c..dea2a22 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -1644,7 +1644,7 @@ This option is ignored in **pv-shim** mode.
+ ### irq_max_guests (x86)
+ > `= <integer>`
+ 
+-> Default: `16`
++> Default: `32`
+ 
+ Maximum number of guests IRQ could be shared between, i.e. a limit on
+ the number of guests it is possible to start each having assigned a device
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 5ae9846..70b7a53 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -440,7 +440,7 @@ int __init init_irq_data(void)
+         irq_to_desc(irq)->irq = irq;
+ 
+     if ( !irq_max_guests || irq_max_guests > 255)
+-        irq_max_guests = 16;
++        irq_max_guests = 32;
+ 
+ #ifdef CONFIG_PV
+     /* Never allocate the hypercall vector or Linux/BSD fast-trap vector. */
+@@ -1540,6 +1540,7 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+     unsigned int        irq;
+     struct irq_desc         *desc;
+     irq_guest_action_t *action, *newaction = NULL;
++    unsigned int        max_nr_guests = will_share ? irq_max_guests : 1;
+     int                 rc = 0;
+ 
+     WARN_ON(!spin_is_locked(&v->domain->event_lock));
+@@ -1571,7 +1572,7 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+         {
+             spin_unlock_irq(&desc->lock);
+             if ( (newaction = xmalloc_bytes(sizeof(irq_guest_action_t) +
+-                  irq_max_guests * sizeof(action->guest[0]))) != NULL &&
++                  max_nr_guests * sizeof(action->guest[0]))) != NULL &&
+                  zalloc_cpumask_var(&newaction->cpu_eoi_map) )
+                 goto retry;
+             xfree(newaction);
+@@ -1640,7 +1641,7 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+         goto retry;
+     }
+ 
+-    if ( action->nr_guests == irq_max_guests )
++    if ( action->nr_guests == max_nr_guests )
+     {
+         printk(XENLOG_G_INFO "Cannot bind IRQ%d to dom%d. "
+                "Already at max share %u, increase with irq_max_guests= option.\n",
+-- 
+2.7.4
 
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   cabf60fc32..aec4688478  aec46884784c2494a30221da775d4ac2c43a4d42 -> smoke
 
