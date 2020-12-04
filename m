@@ -2,46 +2,46 @@ Return-Path: <SRS0=weQ1=FI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 987E6C433FE
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE08DC4361A
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:53:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1F0ED227BF
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:53:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1F0ED227BF
+	by mail.kernel.org (Postfix) with ESMTPS id 64B5422838
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:53:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 64B5422838
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.44153.79166 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.44154.79179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl6pm-0006Mr-4r; Fri, 04 Dec 2020 08:52:58 +0000
+	id 1kl6pn-0006Of-CT; Fri, 04 Dec 2020 08:52:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 44153.79166; Fri, 04 Dec 2020 08:52:58 +0000
+Received: by outflank-mailman (output) from mailman id 44154.79179; Fri, 04 Dec 2020 08:52:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl6pm-0006Mi-1m; Fri, 04 Dec 2020 08:52:58 +0000
-Received: by outflank-mailman (input) for mailman id 44153;
- Fri, 04 Dec 2020 08:52:57 +0000
+	id 1kl6pn-0006OX-9Q; Fri, 04 Dec 2020 08:52:59 +0000
+Received: by outflank-mailman (input) for mailman id 44154;
+ Fri, 04 Dec 2020 08:52:58 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kl6pl-0006MW-Cw
- for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 08:52:57 +0000
+ (envelope-from <paul@xen.org>) id 1kl6pm-0006O4-M1
+ for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 08:52:58 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kl6pl-00048k-4A; Fri, 04 Dec 2020 08:52:57 +0000
+ id 1kl6pm-00048r-7N; Fri, 04 Dec 2020 08:52:58 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=u2f063a87eabd5f.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kl6pk-00081O-Ru; Fri, 04 Dec 2020 08:52:57 +0000
+ id 1kl6pl-00081O-VI; Fri, 04 Dec 2020 08:52:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +55,79 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=EQfXIx5Zj7Jggd0RKO1e+/5rvXiVA7UtKvrBeCYH6zw=; b=AQ6h9RaoJRVPPLMe+YVFivbe8p
-	zIKXJ6XT6vR8PzX7wCoAjY2zFc87bUubJ5exPftq4kPzzUk9j9ohfAnxQ0rWLP2onBLuVKo7AF9Al
-	eBCePA29ZW26Wm/KuL0ZIWYtv327kkfXg+2nKF+IQqk2ac34mxB5EvXo5Mussvshe4zA=;
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=yaMWoBKVxWVw7Z8qM/NkeD5nD3ZYv/c7zC/niSnkkOE=; b=KshhxBEgHpzYHBUii9lBAMJfY+
+	uN9Nd35uC5ZdIID9uZDKOL4oZgKvwqYteu6Y8J/99Ivr3tFqgAlVyXiXORzhYbSE19+4UEm03FbU8
+	vomxFx4HeyWLe7ocO1mnaeUBwj8YP9aFC/0FsZxuKKgbAnyoXZp7yGSOpKmGT0a/+qcM=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>
-Subject: [PATCH v5 00/11] viridian: add support for ExProcessorMasks
-Date: Fri,  4 Dec 2020 08:52:44 +0000
-Message-Id: <20201204085255.26216-1-paul@xen.org>
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Wei Liu <wl@xen.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v5 01/11] viridian: don't blindly write to 32-bit registers if 'mode' is invalid
+Date: Fri,  4 Dec 2020 08:52:45 +0000
+Message-Id: <20201204085255.26216-2-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201204085255.26216-1-paul@xen.org>
+References: <20201204085255.26216-1-paul@xen.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Paul Durrant (11):
-  viridian: don't blindly write to 32-bit registers if 'mode' is invalid
-  viridian: move flush hypercall implementation into separate function
-  viridian: move IPI hypercall implementation into separate function
-  viridian: introduce a per-cpu hypercall_vpmask and accessor
-    functions...
-  viridian: use hypercall_vpmask in hvcall_ipi()
-  viridian: use softirq batching in hvcall_ipi()
-  viridian: add ExProcessorMasks variants of the flush hypercalls
-  viridian: add ExProcessorMasks variant of the IPI hypercall
-  viridian: log initial invocation of each type of hypercall
-  viridian: add a new '_HVMPV_ex_processor_masks' bit into
-    HVM_PARAM_VIRIDIAN...
-  xl / libxl: add 'ex_processor_mask' into
-    'libxl_viridian_enlightenment'
+If hvm_guest_x86_mode() returns something other than 8 or 4 then
+viridian_hypercall() will return immediately but, on the way out, will write
+back status as if 'mode' was 4. This patch simply makes it leave the registers
+alone.
 
- docs/man/xl.cfg.5.pod.in             |   8 +
- tools/include/libxl.h                |   7 +
- tools/libs/light/libxl_types.idl     |   1 +
- tools/libs/light/libxl_x86.c         |   3 +
- xen/arch/x86/hvm/viridian/viridian.c | 604 +++++++++++++++++++++------
- xen/include/asm-x86/hvm/viridian.h   |  10 +
- xen/include/public/hvm/params.h      |   7 +-
- 7 files changed, 516 insertions(+), 124 deletions(-)
+NOTE: The formatting of the 'out' label and the switch statement are also
+      adjusted as per CODING_STYLE.
 
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+---
+Cc: Wei Liu <wl@xen.org>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+
+v5:
+ - Fixed yet another CODING_STYLE violation.
+
+v4:
+ - Fixed another CODING_STYLE violation.
+
+v2:
+ - New in v2
+---
+ xen/arch/x86/hvm/viridian/viridian.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
+index dc7183a54627..3dbb5c2d4cc1 100644
+--- a/xen/arch/x86/hvm/viridian/viridian.c
++++ b/xen/arch/x86/hvm/viridian/viridian.c
+@@ -692,13 +692,15 @@ int viridian_hypercall(struct cpu_user_regs *regs)
+         break;
+     }
+ 
+-out:
++ out:
+     output.result = status;
+-    switch (mode) {
++    switch ( mode )
++    {
+     case 8:
+         regs->rax = output.raw;
+         break;
+-    default:
++
++    case 4:
+         regs->rdx = output.raw >> 32;
+         regs->rax = (uint32_t)output.raw;
+         break;
 -- 
 2.20.1
 
