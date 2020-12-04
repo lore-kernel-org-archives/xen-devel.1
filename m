@@ -2,46 +2,44 @@ Return-Path: <SRS0=weQ1=FI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57D03C4361B
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83294C4361A
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:59:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 00570227BF
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:53:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00570227BF
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 1DF3D2255F
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 08:59:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DF3D2255F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.44164.79270 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.44220.79286 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl6px-0006lp-LS; Fri, 04 Dec 2020 08:53:09 +0000
+	id 1kl6vc-0007kT-Tc; Fri, 04 Dec 2020 08:59:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 44164.79270; Fri, 04 Dec 2020 08:53:09 +0000
+Received: by outflank-mailman (output) from mailman id 44220.79286; Fri, 04 Dec 2020 08:59:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl6px-0006ku-3R; Fri, 04 Dec 2020 08:53:09 +0000
-Received: by outflank-mailman (input) for mailman id 44164;
- Fri, 04 Dec 2020 08:53:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kl6vc-0007kM-Qb; Fri, 04 Dec 2020 08:59:00 +0000
+Received: by outflank-mailman (input) for mailman id 44220;
+ Fri, 04 Dec 2020 08:58:59 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kl6pv-0006fg-5V
- for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 08:53:07 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kl6pv-0004A1-0R; Fri, 04 Dec 2020 08:53:07 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com
- ([86.183.162.145] helo=u2f063a87eabd5f.home)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kl6pu-00081O-P7; Fri, 04 Dec 2020 08:53:06 +0000
+ (envelope-from <SRS0=c9tS=FI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kl6vb-0007kH-AJ
+ for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 08:58:59 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6c7b661c-fb8e-41ed-82a6-d8adc48280cf;
+ Fri, 04 Dec 2020 08:58:58 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 85EE1ACC6;
+ Fri,  4 Dec 2020 08:58:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,140 +51,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=hKsDOrpgiJSDA+ammFrF07gmisbXWrRCPKTZaRZM/PU=; b=PqaHCFE1LPrk7HnD2c1OEv7J/E
-	0b34JrxmglfSclnRKx86yjDeRwJB4FAzShN68tZWbct3X8oRmNBYKIBHAT38QTmjY25AyiosPP9To
-	LFkh8JGW4U6VmJpxjF2a7/pPEZiunbeFQGxBGb2IoeW9oU2c7Yrx96zge2CR73L5eR9Q=;
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Wei Liu <wl@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v5 09/11] viridian: log initial invocation of each type of hypercall
-Date: Fri,  4 Dec 2020 08:52:53 +0000
-Message-Id: <20201204085255.26216-10-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201204085255.26216-1-paul@xen.org>
-References: <20201204085255.26216-1-paul@xen.org>
+X-Inumbo-ID: 6c7b661c-fb8e-41ed-82a6-d8adc48280cf
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1607072337; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nOSvgadS6oqi9y2g+N25P/SfFQDdmEoS8APBzeBXww8=;
+	b=RI9BaDaPX/DSW/U7jZ6oiAbr8uqV6kZuHHaAlLWBFZ+PSKCW3fjmDOWv1XJcQ/UB0yRfsI
+	LFSKsQoa2OzB4TltMGs9e6tS9LdPzolTMyqGUKgmx/W/yefz8wlI9uOo5tTdmu4bV/I3JY
+	mXO0x7Q/lwgvdJifpOMhNxK5iWUteCE=
+Subject: Re: [PATCH v2 11/17] xen/hypfs: add getsize() and findentry()
+ callbacks to hypfs_funcs
+To: Juergen Gross <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
+References: <20201201082128.15239-1-jgross@suse.com>
+ <20201201082128.15239-12-jgross@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <57d62a37-b953-a4fa-8c73-79336d634cb0@suse.com>
+Date: Fri, 4 Dec 2020 09:58:58 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201201082128.15239-12-jgross@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 01.12.2020 09:21, Juergen Gross wrote:
+> @@ -197,28 +235,12 @@ static struct hypfs_entry *hypfs_get_entry_rel(struct hypfs_entry_dir *dir,
+>              end = strchr(path, '\0');
+>          name_len = end - path;
+>  
+> -        again = false;
+> +        entry = dir->e.funcs->findentry(dir, path, name_len);
+> +        if ( IS_ERR(entry) || !*end )
+> +            return entry;
+>  
+> -        list_for_each_entry ( entry, &dir->dirlist, list )
+> -        {
+> -            int cmp = strncmp(path, entry->name, name_len);
+> -            struct hypfs_entry_dir *d = container_of(entry,
+> -                                                     struct hypfs_entry_dir, e);
+> -
+> -            if ( cmp < 0 )
+> -                return ERR_PTR(-ENOENT);
+> -            if ( !cmp && strlen(entry->name) == name_len )
+> -            {
+> -                if ( !*end )
+> -                    return entry;
+> -
+> -                again = true;
+> -                dir = d;
+> -                path = end + 1;
+> -
+> -                break;
+> -            }
+> -        }
+> +        path = end + 1;
+> +        dir = container_of(entry, struct hypfs_entry_dir, e);
+>      }
 
-To make is simpler to observe which viridian hypercalls are issued by a
-particular Windows guest, this patch adds a per-domain mask to track them.
-Each type of hypercall causes a different bit to be set in the mask and
-when the bit transitions from clear to set, a log line is emitted showing
-the name of the hypercall and the domain that issued it.
+Looking at patch 15 my understanding is that "dir" may get invalidated
+by the call to the ->findentry() hook above. That is, use of dir has
+to be avoided between the two calls. This isn't at all obvious, so I
+wonder whether at least a comment wouldn't want adding to avoid future
+mistakes.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Wei Liu <wl@xen.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+And of course the same comment applies to the IS_ERR() use here vs NULL
+coming back that I already gave for the ->enter() call site.
 
-v2:
- - Use DECLARE_BITMAP() for 'hypercall_flags'
- - Use an enum for _HCALL_* values
----
- xen/arch/x86/hvm/viridian/viridian.c | 21 +++++++++++++++++++++
- xen/include/asm-x86/hvm/viridian.h   | 10 ++++++++++
- 2 files changed, 31 insertions(+)
-
-diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index 5e4a2fa53ad4..efd8e3a900c3 100644
---- a/xen/arch/x86/hvm/viridian/viridian.c
-+++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -933,6 +933,7 @@ int viridian_hypercall(struct cpu_user_regs *regs)
- {
-     struct vcpu *curr = current;
-     struct domain *currd = curr->domain;
-+    struct viridian_domain *vd = currd->arch.hvm.viridian;
-     int mode = hvm_guest_x86_mode(curr);
-     unsigned long input_params_gpa, output_params_gpa;
-     int rc = 0;
-@@ -962,6 +963,10 @@ int viridian_hypercall(struct cpu_user_regs *regs)
-     switch ( input.call_code )
-     {
-     case HVCALL_NOTIFY_LONG_SPIN_WAIT:
-+        if ( !test_and_set_bit(_HCALL_spin_wait, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "d%d: VIRIDIAN HVCALL_NOTIFY_LONG_SPIN_WAIT\n",
-+                   currd->domain_id);
-+
-         /*
-          * See section 14.5.1 of the specification.
-          */
-@@ -970,22 +975,38 @@ int viridian_hypercall(struct cpu_user_regs *regs)
- 
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE:
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_LIST:
-+        if ( !test_and_set_bit(_HCALL_flush, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE/LIST\n",
-+                   currd);
-+
-         rc = hvcall_flush(&input, &output, input_params_gpa,
-                           output_params_gpa);
-         break;
- 
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE_EX:
-     case HVCALL_FLUSH_VIRTUAL_ADDRESS_LIST_EX:
-+        if ( !test_and_set_bit(_HCALL_flush_ex, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_FLUSH_VIRTUAL_ADDRESS_SPACE/LIST_EX\n",
-+                   currd);
-+
-         rc = hvcall_flush_ex(&input, &output, input_params_gpa,
-                              output_params_gpa);
-         break;
- 
-     case HVCALL_SEND_IPI:
-+        if ( !test_and_set_bit(_HCALL_ipi, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_SEND_IPI\n",
-+                   currd);
-+
-         rc = hvcall_ipi(&input, &output, input_params_gpa,
-                         output_params_gpa);
-         break;
- 
-     case HVCALL_SEND_IPI_EX:
-+        if ( !test_and_set_bit(_HCALL_ipi_ex, vd->hypercall_flags) )
-+            printk(XENLOG_G_INFO "%pd: VIRIDIAN HVCALL_SEND_IPI_EX\n",
-+                   currd);
-+
-         rc = hvcall_ipi_ex(&input, &output, input_params_gpa,
-                            output_params_gpa);
-         break;
-diff --git a/xen/include/asm-x86/hvm/viridian.h b/xen/include/asm-x86/hvm/viridian.h
-index cbf77d9c760b..4c8ff6e80b6f 100644
---- a/xen/include/asm-x86/hvm/viridian.h
-+++ b/xen/include/asm-x86/hvm/viridian.h
-@@ -55,10 +55,20 @@ struct viridian_time_ref_count
-     int64_t off;
- };
- 
-+enum {
-+    _HCALL_spin_wait,
-+    _HCALL_flush,
-+    _HCALL_flush_ex,
-+    _HCALL_ipi,
-+    _HCALL_ipi_ex,
-+    _HCALL_nr /* must be last */
-+};
-+
- struct viridian_domain
- {
-     union hv_guest_os_id guest_os_id;
-     union hv_vp_assist_page_msr hypercall_gpa;
-+    DECLARE_BITMAP(hypercall_flags, _HCALL_nr);
-     struct viridian_time_ref_count time_ref_count;
-     struct viridian_page reference_tsc;
- };
--- 
-2.20.1
-
+Jan
 
