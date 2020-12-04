@@ -2,46 +2,45 @@ Return-Path: <SRS0=weQ1=FI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 024E9C4361B
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 09:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3319DC4361A
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 09:06:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 905C1222B6
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 09:00:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 905C1222B6
+	by mail.kernel.org (Postfix) with ESMTPS id B2D952255F
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 09:06:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B2D952255F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.44225.79306 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.44237.79323 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl6xK-00009R-OU; Fri, 04 Dec 2020 09:00:46 +0000
+	id 1kl727-0000df-9s; Fri, 04 Dec 2020 09:05:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 44225.79306; Fri, 04 Dec 2020 09:00:46 +0000
+Received: by outflank-mailman (output) from mailman id 44237.79323; Fri, 04 Dec 2020 09:05:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl6xK-00009H-HN; Fri, 04 Dec 2020 09:00:46 +0000
-Received: by outflank-mailman (input) for mailman id 44225;
- Fri, 04 Dec 2020 09:00:45 +0000
+	id 1kl727-0000dY-6Y; Fri, 04 Dec 2020 09:05:43 +0000
+Received: by outflank-mailman (input) for mailman id 44237;
+ Fri, 04 Dec 2020 09:05:42 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kl6xJ-00008k-Mi
- for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 09:00:45 +0000
+ (envelope-from <julien@xen.org>) id 1kl726-0000dT-0z
+ for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 09:05:42 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kl6xI-0004P3-Jy; Fri, 04 Dec 2020 09:00:44 +0000
-Received: from host86-183-162-145.range86-183.btcentralplus.com
- ([86.183.162.145] helo=u2f063a87eabd5f.home)
+ (envelope-from <julien@xen.org>)
+ id 1kl724-0004XG-KS; Fri, 04 Dec 2020 09:05:40 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1kl6pw-00081O-8u; Fri, 04 Dec 2020 08:53:08 +0000
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kl724-0000e0-F6; Fri, 04 Dec 2020 09:05:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,100 +53,93 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=J/9PuceCgCRlAlZXFD/ir5Ro6bbX2Egg10HbABKGdYw=; b=LI6eqTxBu+gcE3HIy0b4ZdcAot
-	jGhA7w7d1qxEAPeKHblHOYZkxCDcLqW5L7ttFgZQAUD7fKO7Ol+Jm1IHnBjHJnlMhaXltkNXHIOKm
-	Z9mzneCIyDaZWDdMO3DqPNlCkmdbsyYm/B/4PhV7aD1XmZqbXfyG9bjuN/bp9f1cShL8=;
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: Paul Durrant <pdurrant@amazon.com>,
-	Wei Liu <wl@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 10/11] viridian: add a new '_HVMPV_ex_processor_masks' bit into HVM_PARAM_VIRIDIAN...
-Date: Fri,  4 Dec 2020 08:52:54 +0000
-Message-Id: <20201204085255.26216-11-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20201204085255.26216-1-paul@xen.org>
-References: <20201204085255.26216-1-paul@xen.org>
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=A/FoQA/sadJy6m4W7CwLip1NCAOD/yNDGZPhkRJBuRQ=; b=PtBcDVh3D2h2/ZKPr5mYzYBKeB
+	qP6yRvbTZ0YxF8+OP4OxABWJh1kQZJXPKxods4ilhxw5xuCgdbF5oDAj1t0ZY47rxLxO05Dr6we2+
+	CbHSXVK4a3jiazyBC1Inybgnp7sMHVZTh2P7eUxvIurUY4Mwk5vs5OH4/R1sptK5R4Sk=;
+Subject: Re: [PATCH v2 7/8] xen/arm: Remove Linux specific code that is not
+ usable in XEN
+To: Rahul Singh <Rahul.Singh@arm.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1606406359.git.rahul.singh@arm.com>
+ <1d9da8ed4845aeb9e86a5ce6750b811bd7e2020e.1606406359.git.rahul.singh@arm.com>
+ <cd74f2a7-7836-ef90-9cd8-857068adb0f5@xen.org>
+ <51C0C24A-3CE6-48A3-85F5-14F010409DC3@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <b87e9293-77bb-2c43-63d0-8d54d5fc9a7e@xen.org>
+Date: Fri, 4 Dec 2020 09:05:38 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <51C0C24A-3CE6-48A3-85F5-14F010409DC3@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-From: Paul Durrant <pdurrant@amazon.com>
+Hi Rahul,
 
-... and advertise ExProcessorMasks support if it is set.
+On 03/12/2020 14:33, Rahul Singh wrote:
+>> On 2 Dec 2020, at 2:45 pm, Julien Grall <julien@xen.org> wrote:
+>>> -
+>>> -static struct iommu_device *arm_smmu_probe_device(struct device *dev)
+>>> -{
+>>
+>> Most of the code here looks useful to Xen. I think you want to keep the code and re-use it afterwards.
+> 
+> Ok. I removed the code here and added the XEN compatible code to add devices in next patch.
+> I will keep it in this patch and will modifying the code to make XEN compatible.
 
-Support is advertised by setting bit 11 in CPUID:40000004:EAX.
+In general, it is prefer if the code the code rather than dropping in 
+patch A and then add it again differently patch B. This makes easier to 
+check that the code outcome of the function is mostly the same.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Wei Liu <wl@xen.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
----
- xen/arch/x86/hvm/viridian/viridian.c | 3 +++
- xen/include/public/hvm/params.h      | 7 ++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
+>>> -static struct iommu_ops arm_smmu_ops = {
+>>> -	.capable		= arm_smmu_capable,
+>>> -	.domain_alloc		= arm_smmu_domain_alloc,
+>>> -	.domain_free		= arm_smmu_domain_free,
+>>> -	.attach_dev		= arm_smmu_attach_dev,
+>>> -	.map			= arm_smmu_map,
+>>> -	.unmap			= arm_smmu_unmap,
+>>> -	.flush_iotlb_all	= arm_smmu_flush_iotlb_all,
+>>> -	.iotlb_sync		= arm_smmu_iotlb_sync,
+>>> -	.iova_to_phys		= arm_smmu_iova_to_phys,
+>>> -	.probe_device		= arm_smmu_probe_device,
+>>> -	.release_device		= arm_smmu_release_device,
+>>> -	.device_group		= arm_smmu_device_group,
+>>> -	.domain_get_attr	= arm_smmu_domain_get_attr,
+>>> -	.domain_set_attr	= arm_smmu_domain_set_attr,
+>>> -	.of_xlate		= arm_smmu_of_xlate,
+>>> -	.get_resv_regions	= arm_smmu_get_resv_regions,
+>>> -	.put_resv_regions	= generic_iommu_put_resv_regions,
+>>> -	.pgsize_bitmap		= -1UL, /* Restricted during device attach */
+>>> -};
+>>> -
+>>>   /* Probing and initialisation functions */
+>>>   static int arm_smmu_init_one_queue(struct arm_smmu_device *smmu,
+>>>   				   struct arm_smmu_queue *q,
+>>> @@ -2406,7 +2032,6 @@ static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
+>>>   	switch (FIELD_GET(IDR0_STALL_MODEL, reg)) {
+>>>   	case IDR0_STALL_MODEL_FORCE:
+>>>   		smmu->features |= ARM_SMMU_FEAT_STALL_FORCE;
+>>> -		fallthrough;
+>>
+>> We should keep all the fallthrough documented. So I think we want to introduce the fallthrough in Xen as well.
+> 
+> Ok I will keep fallthrough documented in this patch.
+> 
+> fallthrough implementation in XEN should be another patch. I am not sure when we can implement but we will try to implement.
 
-diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index efd8e3a900c3..ed978047c12f 100644
---- a/xen/arch/x86/hvm/viridian/viridian.c
-+++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -84,6 +84,7 @@ typedef union _HV_CRASH_CTL_REG_CONTENTS
- #define CPUID4A_MSR_BASED_APIC         (1 << 3)
- #define CPUID4A_RELAX_TIMER_INT        (1 << 5)
- #define CPUID4A_SYNTHETIC_CLUSTER_IPI  (1 << 10)
-+#define CPUID4A_EX_PROCESSOR_MASKS     (1 << 11)
- 
- /* Viridian CPUID leaf 6: Implementation HW features detected and in use */
- #define CPUID6A_APIC_OVERLAY    (1 << 0)
-@@ -197,6 +198,8 @@ void cpuid_viridian_leaves(const struct vcpu *v, uint32_t leaf,
-             res->a |= CPUID4A_MSR_BASED_APIC;
-         if ( viridian_feature_mask(d) & HVMPV_hcall_ipi )
-             res->a |= CPUID4A_SYNTHETIC_CLUSTER_IPI;
-+        if ( viridian_feature_mask(d) & HVMPV_ex_processor_masks )
-+            res->a |= CPUID4A_EX_PROCESSOR_MASKS;
- 
-         /*
-          * This value is the recommended number of attempts to try to
-diff --git a/xen/include/public/hvm/params.h b/xen/include/public/hvm/params.h
-index 0e3fdca09646..3b0a0f45da53 100644
---- a/xen/include/public/hvm/params.h
-+++ b/xen/include/public/hvm/params.h
-@@ -164,6 +164,10 @@
- #define _HVMPV_hcall_ipi 9
- #define HVMPV_hcall_ipi (1 << _HVMPV_hcall_ipi)
- 
-+/* Enable ExProcessorMasks */
-+#define _HVMPV_ex_processor_masks 10
-+#define HVMPV_ex_processor_masks (1 << _HVMPV_ex_processor_masks)
-+
- #define HVMPV_feature_mask \
-         (HVMPV_base_freq | \
-          HVMPV_no_freq | \
-@@ -174,7 +178,8 @@
-          HVMPV_crash_ctl | \
-          HVMPV_synic | \
-          HVMPV_stimer | \
--         HVMPV_hcall_ipi)
-+         HVMPV_hcall_ipi | \
-+         HVMPV_ex_processor_masks)
- 
- #endif
- 
+Yes, I didn't ask to implement "fallthrough" in this patch, but instead 
+as a pre-requirement patch.
+
+I would implement it in include/xen/compiler.h.
+
+Cheers,
+
 -- 
-2.20.1
-
+Julien Grall
 
