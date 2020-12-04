@@ -2,47 +2,48 @@ Return-Path: <SRS0=weQ1=FI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A5E2C4361A
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 11:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1122FC433FE
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 11:47:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B43DC22AAD
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 11:46:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B43DC22AAD
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id BC8B422A84
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Dec 2020 11:47:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC8B422A84
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.44623.79965 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.44629.79977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl9Xp-000621-HD; Fri, 04 Dec 2020 11:46:37 +0000
+	id 1kl9Yw-0006AE-RF; Fri, 04 Dec 2020 11:47:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 44623.79965; Fri, 04 Dec 2020 11:46:37 +0000
+Received: by outflank-mailman (output) from mailman id 44629.79977; Fri, 04 Dec 2020 11:47:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kl9Xp-00061u-Cq; Fri, 04 Dec 2020 11:46:37 +0000
-Received: by outflank-mailman (input) for mailman id 44623;
- Fri, 04 Dec 2020 11:46:36 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kl9Yw-0006A7-O1; Fri, 04 Dec 2020 11:47:46 +0000
+Received: by outflank-mailman (input) for mailman id 44629;
+ Fri, 04 Dec 2020 11:47:45 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=neyb=FI=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kl9Xo-00061o-40
- for xen-devel@lists.xenproject.org; Fri, 04 Dec 2020 11:46:36 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [85.215.255.22])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6a03de6a-97f9-4014-a523-00ca7aa6cad0;
- Fri, 04 Dec 2020 11:46:35 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.3.4 DYNA|AUTH)
- with ESMTPSA id 60a649wB4BkVehO
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Fri, 4 Dec 2020 12:46:31 +0100 (CET)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kl9Yv-00069y-4R; Fri, 04 Dec 2020 11:47:45 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kl9Yv-0000J2-1w; Fri, 04 Dec 2020 11:47:45 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kl9Yu-0000x8-Qf; Fri, 04 Dec 2020 11:47:44 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kl9Yu-0001aE-Q9; Fri, 04 Dec 2020 11:47:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,68 +55,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6a03de6a-97f9-4014-a523-00ca7aa6cad0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1607082394;
-	s=strato-dkim-0002; d=aepfle.de;
-	h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
-	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=UYWOVuXTVQU+lMoeG4W1DhXH+0cEFiffhkNGmz61YEE=;
-	b=h7nWQg/qDUSGZoQKzXI7JMwk/Sl9DShffIBfNTHPLHW8SPWgXYKWgMuCzrWjPq/GAB
-	2zRhyOOCg8Bc25nhynuxo29ynBqTJFy3mOxpLr+l0bHBJI0jwxdfBllmrhAUlDhz32lw
-	JuOPORIwzkeVALLD0d4+jtzs30j9Ihx4PVun0VXVh+0up6A12UP2pIe4IZTG9P7S8BeR
-	jnQkiLs7sWSFGvgydkmVeLd0M2cEH7bestitoPVG4IOrQoxcdUbmo2v8NjaqZ9i5mzLe
-	kfeLEfmmTcjXt2zdWKFeEsGBT9OluQEclLLQF0MAlMUopMjcNeNQ2dj++i9irhUUg5Wf
-	EjJA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDXdoX8l8pYAcz5OTW+uX"
-X-RZG-CLASS-ID: mo00
-Date: Fri, 4 Dec 2020 12:46:20 +0100
-From: Olaf Hering <olaf@aepfle.de>
-To: Wei Liu <wl@xen.org>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>
-Subject: Re: [PATCH v2] tools/hotplug: allow tuning of xenwatchdogd
- arguments
-Message-ID: <20201204124620.5ed9f6a0.olaf@aepfle.de>
-In-Reply-To: <20201204105315.avponbzbotrabf4c@liuwe-devbox-debian-v2>
-References: <20201203063436.4503-1-olaf@aepfle.de>
-	<20201204105315.avponbzbotrabf4c@liuwe-devbox-debian-v2>
-X-Mailer: Claws Mail 2020.08.19 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=7Y3ovhtYrYFlXqK4yDQ6vI7wsedMpQ6vWGNKB46xuuU=; b=uSBSAFQWVN1sWFmZIsZD+kl56M
+	XOlH+Zj49XbbsAmGhnCoQrtlA4coGahfdTahN5vyNdq38wCspO6SB9D3jKCX33dw97AzdmKHAfYXY
+	t5G7GxMEBmGqjY2vk8jGiI4AIHqYsSW6qZRFi5LWJYNJ2dddxRR4HhoB37C0KvoggrWE=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-157194-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/hcbqnFuPMNexsyyn7XCds9E"; protocol="application/pgp-signature"
+Subject: [ovmf test] 157194: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=31e8a47b62a4f3dc45d8f9bbf3529a188e867a87
+X-Osstest-Versions-That:
+    ovmf=6af76adbbfccd31f4f8753fb0ddbbd9f4372f572
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 04 Dec 2020 11:47:44 +0000
 
---Sig_/hcbqnFuPMNexsyyn7XCds9E
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+flight 157194 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/157194/
 
-Am Fri, 4 Dec 2020 10:53:15 +0000
-schrieb Wei Liu <wl@xen.org>:
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 31e8a47b62a4f3dc45d8f9bbf3529a188e867a87
+baseline version:
+ ovmf                 6af76adbbfccd31f4f8753fb0ddbbd9f4372f572
 
-> Did you accidentally swap 15 and 30 in XENWATCHDOGD_ARGS above?
+Last test of basis   157191  2020-12-04 01:39:45 Z    0 days
+Testing same since   157194  2020-12-04 04:16:55 Z    0 days    1 attempts
 
-This is indeed a mistake. Thanks for spotting.
+------------------------------------------------------------
+People who touched revisions under test:
+  Vitaly Cheptsov <cheptsov@ispras.ru>
 
-Olaf
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
---Sig_/hcbqnFuPMNexsyyn7XCds9E
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
 
------BEGIN PGP SIGNATURE-----
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl/KIYwACgkQ86SN7mm1
-DoAZsw/9FfBYCrm22IjEpdE3ab0+/8tkE4bnYI4GvLmtGFLggR+b/8mRByCUlJZe
-7fnxZQ4pJZs1xD8O76h137Uka5A9vTKNZj03bKIZ/2ZbmAyWuwwbqV7JBLoZUnd1
-OgPM/rzNk0l2TSTa51hnoN4k9FGbaVzfYotb2ujWCs1uuJZEV5JSg7TFSaCgiXtk
-xjtuIKVFtVcZOFtAkTxpSUpFc94EVy+gJhYq8d7ceZb0XxQMvg5INLPCwh5utmnJ
-KZ/B9Ihf+9cpQYRKMqpWoQWB8tHMaNPNHuBV5KGKe8dcv4IoeeLm8TNS6Yw8bBZg
-DGGDgnmIrX9VjBVK0mS7JOQ8rJ0/NJHuHDmAfJi2nL5GWvngqmx5FnR6WnCInsmG
-HqbLziqfyQRTPOjXpdWwOLUe5LX/yf3AvY3AoB27xnUZGebVat3VS9tvTCsIPKZZ
-xbsz9EO+ASlKBNJJp4dPSK+q6JoNntB0KnRrY46zw++GNo5O9Tb7tVnjioLjoaJI
-ZosPDbLKHX8GJTPlrReCu1wh2TrbwkAUGAegesf6xecAXfpFyt+MO1ZVXTZupwpL
-ezD16/Oji0JcJJqq1N4RvWGV+M9pF89beKSKhMC+qvhvBfpjPyieSzQzOz1M2Sb6
-1EyQVLA7tHIpn+FUOEbAEkW8S47rteHSoDo+nrxu1xp9AYGBm3k=
-=+xAV
------END PGP SIGNATURE-----
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
---Sig_/hcbqnFuPMNexsyyn7XCds9E--
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   6af76adbbf..31e8a47b62  31e8a47b62a4f3dc45d8f9bbf3529a188e867a87 -> xen-tested-master
 
