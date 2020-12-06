@@ -7,36 +7,46 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB1F2C433FE
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:08:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7BF8C433FE
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:55:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6217D2311B
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:08:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6217D2311B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 642AD22D08
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:55:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 642AD22D08
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.45737.81155 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.45757.81209 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1klyRy-0000zx-KE; Sun, 06 Dec 2020 18:07:58 +0000
+	id 1klzC2-0005jh-A2; Sun, 06 Dec 2020 18:55:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 45737.81155; Sun, 06 Dec 2020 18:07:58 +0000
+Received: by outflank-mailman (output) from mailman id 45757.81209; Sun, 06 Dec 2020 18:55:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1klyRy-0000zq-Gm; Sun, 06 Dec 2020 18:07:58 +0000
-Received: by outflank-mailman (input) for mailman id 45737;
- Sun, 06 Dec 2020 18:07:56 +0000
+	id 1klzC2-0005jY-65; Sun, 06 Dec 2020 18:55:34 +0000
+Received: by outflank-mailman (input) for mailman id 45757;
+ Sun, 06 Dec 2020 18:55:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hZbG=FK=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1klyRw-0000zg-Gh
- for xen-devel@lists.xenproject.org; Sun, 06 Dec 2020 18:07:56 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 946a5f03-3572-4cb1-900d-f03293bcd297;
- Sun, 06 Dec 2020 18:07:55 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=PoKi=FK=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1klzC0-0005ic-Lj
+ for xen-devel@lists.xenproject.org; Sun, 06 Dec 2020 18:55:32 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id fa5d5863-28a5-4171-8c2d-6245d167b2af;
+ Sun, 06 Dec 2020 18:55:31 +0000 (UTC)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-92-zS-F1DX3OMGr4O9orLkbUg-1; Sun, 06 Dec 2020 13:55:30 -0500
+Received: by mail-wm1-f71.google.com with SMTP id r5so4360870wma.2
+ for <xen-devel@lists.xenproject.org>; Sun, 06 Dec 2020 10:55:29 -0800 (PST)
+Received: from localhost.localdomain (101.red-88-21-206.staticip.rima-tde.net.
+ [88.21.206.101])
+ by smtp.gmail.com with ESMTPSA id i5sm12530329wrw.45.2020.12.06.10.55.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 06 Dec 2020 10:55:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,163 +58,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 946a5f03-3572-4cb1-900d-f03293bcd297
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1607278074;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=MQBlZ1unAHl3xhYSGHiFx1nWofa1ttfc/pz0nrz8Db0=;
-  b=Fmg3tmX0n1QiDLMXdFUHqFO9XgQiiFvYJLiVYaVYW/f851RZjdtq+eQY
-   d+a1rDvdsVjbuw0AYKQQ2OA+CkMSZLYk6fX5ejPzJLzHZKnw5enCk+pF0
-   w5QEpfBR0yU7pnWWN1GVo/hzk66R5pTLcByZhfKBbOhYoWDLtd+4xPnx2
-   4=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: JuzEmUbSliWrhIawRwrK/2vFOaFvg5JFBZDXYUxf66XViuTVgotwRByk/7ZzwKhvA9oNG1szJ8
- 8B0i/V812EmqnZiqxKzCmFjWpiTj9LohTm3Nxs448O124n4zXk95gx0WNaoj/omA2j7yVPf5I5
- EQCFgu3scYXcNMdSKi9Zn8KAvmmCOu4CfNwghZx7WvA3EREvmYavy1gS3yh57sXhAlaRWcY2xM
- AzCNIegbylTG+wev7P4dtW1U2+zdaFdp8cFVNYTd7QXkBDVt6zWzaaaAu2rUvDle3XXgrdaZNo
- s9E=
-X-SBRS: 5.1
-X-MesageID: 32966870
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,397,1599537600"; 
-   d="scan'208";a="32966870"
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>,
-	<iwj@xenproject.org>, <jbeulich@suse.com>, <julien@xen.org>,
-	<sstabellini@kernel.org>, <wl@xen.org>, <roger.pau@citrix.com>, "Igor
- Druzhinin" <igor.druzhinin@citrix.com>
-Subject: [PATCH v3 1/2] x86/IRQ: make max number of guests for a shared IRQ configurable
-Date: Sun, 6 Dec 2020 17:43:06 +0000
-Message-ID: <1607276587-19231-1-git-send-email-igor.druzhinin@citrix.com>
-X-Mailer: git-send-email 2.7.4
+X-Inumbo-ID: fa5d5863-28a5-4171-8c2d-6245d167b2af
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1607280931;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zj+VAsR2ZoGWNnB8pF1RFhJWmR0T2bfs3Brc/xrE4Jk=;
+	b=eOjZ2gvY9aHksYNUJDp52FT47A5P6K4RubxOFKoEd9HpdjDLpHaWtEioazmo8xDuzBtTI+
+	Yr1kKKbRgBovNZ4Qfi8Zd0MoI94kziJAyqLrHfDD1jrNKm9zs8d/k/kUpOx7zwlMr+MK12
+	Je077ACTFDNQmt35UwBDGJaLxibUXQA=
+X-MC-Unique: zS-F1DX3OMGr4O9orLkbUg-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=zj+VAsR2ZoGWNnB8pF1RFhJWmR0T2bfs3Brc/xrE4Jk=;
+        b=XyI+UkARtPK1QFUZcgLv5Q/89csM6Y4NGgwq3gG8sYto/yyuq7gv4DYeRe0lp1zIS6
+         pOfFnH5QtI8jlEkgirecbW2p38HJPZnyeJ5Y4ySbLjtXZOoeKDLsErAF+kH9guHayJ9J
+         2RHv+OTBKQkVyp/aFruJpHHESlMtGYGTmgPFr1ZGd3juXRG15eqxRJptGdaL0EuMX4tx
+         bIpJyUuxxSgleDd1DgAuNEGTyaj7sv6mtgKd7yPY0Mkt//LavVJgUSxu5Cdr0g+OfL7v
+         UD/wGndrnZ482a9Jl5iHlczrdRh0PA++e5mS6vz9HoQ2LU0F9v0enJ1RBxQDcJHPa/Nk
+         MUBw==
+X-Gm-Message-State: AOAM533fq4CrCt7ISCguoM9cNX0cs0epbapd5A8fCvIRNxbUtyDPQl1A
+	bWPjlQ8TI/iGYuAKMTeYBi3X3RNBM+yR0zYC88ASu6Cpr+xtAagLhqVIhnedc+sQNqcafglkFkk
+	GdKnap0W403jkM7ygEuWbmXiJtuc=
+X-Received: by 2002:a1c:a501:: with SMTP id o1mr9847440wme.44.1607280928821;
+        Sun, 06 Dec 2020 10:55:28 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyjfkR9jOQCSNmbsQLisARRNPGgWAcGrUN24/vbSdXT+mIj5Zt7/jygW8L9ukGbdalO0fSF2A==
+X-Received: by 2002:a1c:a501:: with SMTP id o1mr9847417wme.44.1607280928628;
+        Sun, 06 Dec 2020 10:55:28 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+	xen-devel@lists.xenproject.org,
+	kvm@vger.kernel.org,
+	Wainer dos Santos Moschetta <wainersm@redhat.com>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Willian Rampazzo <wrampazz@redhat.com>,
+	Paul Durrant <paul@xen.org>,
+	Huacai Chen <chenhc@lemote.com>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Claudio Fontana <cfontana@suse.de>,
+	Halil Pasic <pasic@linux.ibm.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Cornelia Huck <cohuck@redhat.com>,
+	David Gibson <david@gibson.dropbear.id.au>,
+	Thomas Huth <thuth@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	qemu-s390x@nongnu.org,
+	Aurelien Jarno <aurelien@aurel32.net>,
+	qemu-arm@nongnu.org
+Subject: [PATCH 3/8] gitlab-ci: Add KVM X86 cross-build jobs
+Date: Sun,  6 Dec 2020 19:55:03 +0100
+Message-Id: <20201206185508.3545711-4-philmd@redhat.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201206185508.3545711-1-philmd@redhat.com>
+References: <20201206185508.3545711-1-philmd@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-... and increase the default to 16.
+Cross-build x86 target with only KVM accelerator enabled.
 
-Current limit of 7 is too restrictive for modern systems where one GSI
-could be shared by potentially many PCI INTx sources where each of them
-corresponds to a device passed through to its own guest. Some systems do not
-apply due dilligence in swizzling INTx links in case e.g. INTA is declared as
-interrupt pin for the majority of PCI devices behind a single router,
-resulting in overuse of a GSI.
-
-Introduce a new command line option to configure that limit and dynamically
-allocate an array of the necessary size. Set the default size now to 16 which
-is higher than 7 but could later be increased even more if necessary.
-
-Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
+ .gitlab-ci.d/crossbuilds-kvm-x86.yml | 6 ++++++
+ .gitlab-ci.yml                       | 1 +
+ MAINTAINERS                          | 1 +
+ 3 files changed, 8 insertions(+)
+ create mode 100644 .gitlab-ci.d/crossbuilds-kvm-x86.yml
 
-Changes in v2:
-- introduced a command line option as suggested
-- set initial default limit to 16
-
-Changes in v3:
-- changed option name to us - instead of _
-- used uchar instead of uint to utilize integer_param overflow handling logic
-- used xmalloc_flex_struct
-- restructured printk as suggested
-
----
- docs/misc/xen-command-line.pandoc | 10 ++++++++++
- xen/arch/x86/irq.c                | 22 +++++++++++++++-------
- 2 files changed, 25 insertions(+), 7 deletions(-)
-
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index b4a0d60..53e676b 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -1641,6 +1641,16 @@ This option is ignored in **pv-shim** mode.
- ### nr_irqs (x86)
- > `= <integer>`
+diff --git a/.gitlab-ci.d/crossbuilds-kvm-x86.yml b/.gitlab-ci.d/crossbuilds-kvm-x86.yml
+new file mode 100644
+index 00000000000..9719a19d143
+--- /dev/null
++++ b/.gitlab-ci.d/crossbuilds-kvm-x86.yml
+@@ -0,0 +1,6 @@
++cross-amd64-kvm:
++  extends: .cross_accel_build_job
++  variables:
++    IMAGE: debian-amd64-cross
++    TARGETS: i386-softmmu,x86_64-softmmu
++    ACCEL_CONFIGURE_OPTS: --disable-tcg
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index d0173e82b16..cdfa1f82a3d 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -12,6 +12,7 @@ include:
+   - local: '/.gitlab-ci.d/opensbi.yml'
+   - local: '/.gitlab-ci.d/containers.yml'
+   - local: '/.gitlab-ci.d/crossbuilds.yml'
++  - local: '/.gitlab-ci.d/crossbuilds-kvm-x86.yml'
  
-+### irq-max-guests (x86)
-+> `= <integer>`
-+
-+> Default: `16`
-+
-+Maximum number of guests any individual IRQ could be shared between,
-+i.e. a limit on the number of guests it is possible to start each having
-+assigned a device sharing a common interrupt line.  Accepts values between
-+1 and 255.
-+
- ### numa (x86)
- > `= on | off | fake=<integer> | noacpi`
+ .native_build_job_template: &native_build_job_definition
+   stage: build
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 68bc160f41b..8d7e2fdb7e2 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -427,6 +427,7 @@ L: kvm@vger.kernel.org
+ S: Supported
+ F: target/i386/kvm.c
+ F: scripts/kvm/vmxcap
++F: .gitlab-ci.d/crossbuilds-kvm-x86.yml
  
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index 8d1f9a9..4fd0578 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -42,6 +42,10 @@ integer_param("nr_irqs", nr_irqs);
- int __read_mostly opt_irq_vector_map = OPT_IRQ_VECTOR_MAP_DEFAULT;
- custom_param("irq_vector_map", parse_irq_vector_map_param);
- 
-+/* Max number of guests IRQ could be shared with */
-+static unsigned char __read_mostly irq_max_guests;
-+integer_param("irq-max-guests", irq_max_guests);
-+
- vmask_t global_used_vector_map;
- 
- struct irq_desc __read_mostly *irq_desc = NULL;
-@@ -435,6 +439,9 @@ int __init init_irq_data(void)
-     for ( ; irq < nr_irqs; irq++ )
-         irq_to_desc(irq)->irq = irq;
- 
-+    if ( !irq_max_guests )
-+        irq_max_guests = 16;
-+
- #ifdef CONFIG_PV
-     /* Never allocate the hypercall vector or Linux/BSD fast-trap vector. */
-     set_bit(LEGACY_SYSCALL_VECTOR, used_vectors);
-@@ -1028,7 +1035,6 @@ int __init setup_irq(unsigned int irq, unsigned int irqflags,
-  * HANDLING OF GUEST-BOUND PHYSICAL IRQS
-  */
- 
--#define IRQ_MAX_GUESTS 7
- typedef struct {
-     u8 nr_guests;
-     u8 in_flight;
-@@ -1039,7 +1045,7 @@ typedef struct {
- #define ACKTYPE_EOI    2     /* EOI on the CPU that was interrupted  */
-     cpumask_var_t cpu_eoi_map; /* CPUs that need to EOI this interrupt */
-     struct timer eoi_timer;
--    struct domain *guest[IRQ_MAX_GUESTS];
-+    struct domain *guest[];
- } irq_guest_action_t;
- 
- /*
-@@ -1564,7 +1570,8 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
-         if ( newaction == NULL )
-         {
-             spin_unlock_irq(&desc->lock);
--            if ( (newaction = xmalloc(irq_guest_action_t)) != NULL &&
-+            if ( (newaction = xmalloc_flex_struct(irq_guest_action_t, guest,
-+                                                  irq_max_guests)) != NULL &&
-                  zalloc_cpumask_var(&newaction->cpu_eoi_map) )
-                 goto retry;
-             xfree(newaction);
-@@ -1633,11 +1640,12 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
-         goto retry;
-     }
- 
--    if ( action->nr_guests == IRQ_MAX_GUESTS )
-+    if ( action->nr_guests == irq_max_guests )
-     {
--        printk(XENLOG_G_INFO "Cannot bind IRQ%d to dom%d. "
--               "Already at max share.\n",
--               pirq->pirq, v->domain->domain_id);
-+        printk(XENLOG_G_INFO
-+               "Cannot bind IRQ%d to dom%pd: already at max share %u ",
-+               pirq->pirq, v->domain, irq_max_guests);
-+        printk("(increase with irq-max-guests= option)\n");
-         rc = -EBUSY;
-         goto unlock_out;
-     }
+ Guest CPU Cores (other accelerators)
+ ------------------------------------
 -- 
-2.7.4
+2.26.2
 
 
