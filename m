@@ -4,49 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
+	TVD_PH_BODY_ACCOUNTS_PRE,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B56AC4167B
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C148C433FE
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:55:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5013E22D08
+	by mail.kernel.org (Postfix) with ESMTPS id C02EA22D08
 	for <xen-devel@archiver.kernel.org>; Sun,  6 Dec 2020 18:55:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5013E22D08
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C02EA22D08
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.45756.81197 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.45754.81172 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1klzBw-0005f1-1T; Sun, 06 Dec 2020 18:55:28 +0000
+	id 1klzBp-0005bO-FN; Sun, 06 Dec 2020 18:55:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 45756.81197; Sun, 06 Dec 2020 18:55:27 +0000
+Received: by outflank-mailman (output) from mailman id 45754.81172; Sun, 06 Dec 2020 18:55:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1klzBv-0005et-T3; Sun, 06 Dec 2020 18:55:27 +0000
-Received: by outflank-mailman (input) for mailman id 45756;
- Sun, 06 Dec 2020 18:55:26 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1klzBp-0005bH-CH; Sun, 06 Dec 2020 18:55:21 +0000
+Received: by outflank-mailman (input) for mailman id 45754;
+ Sun, 06 Dec 2020 18:55:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=PoKi=FK=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1klzBu-0005bW-L3
- for xen-devel@lists.xenproject.org; Sun, 06 Dec 2020 18:55:26 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 9e4ae0b5-f640-46e1-9212-963813a10a1a;
- Sun, 06 Dec 2020 18:55:26 +0000 (UTC)
+ id 1klzBn-0005bC-Sq
+ for xen-devel@lists.xenproject.org; Sun, 06 Dec 2020 18:55:20 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 313033da-c4fb-4255-ab08-62eeb1e8d5fd;
+ Sun, 06 Dec 2020 18:55:16 +0000 (UTC)
 Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
  [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-151-k4hPAIXZONqWfVhOYJ2A7A-1; Sun, 06 Dec 2020 13:55:24 -0500
-Received: by mail-wm1-f71.google.com with SMTP id z12so4305120wmf.9
- for <xen-devel@lists.xenproject.org>; Sun, 06 Dec 2020 10:55:23 -0800 (PST)
+ us-mta-580-mF2-PuzSM4G6JWuqSeM5Ag-1; Sun, 06 Dec 2020 13:55:13 -0500
+Received: by mail-wm1-f71.google.com with SMTP id o203so3252682wmo.3
+ for <xen-devel@lists.xenproject.org>; Sun, 06 Dec 2020 10:55:13 -0800 (PST)
 Received: from localhost.localdomain (101.red-88-21-206.staticip.rima-tde.net.
  [88.21.206.101])
- by smtp.gmail.com with ESMTPSA id m8sm11324488wmc.27.2020.12.06.10.55.21
+ by smtp.gmail.com with ESMTPSA id a62sm4051738wmh.40.2020.12.06.10.55.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Dec 2020 10:55:22 -0800 (PST)
+ Sun, 06 Dec 2020 10:55:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,37 +60,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e4ae0b5-f640-46e1-9212-963813a10a1a
+X-Inumbo-ID: 313033da-c4fb-4255-ab08-62eeb1e8d5fd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607280925;
+	s=mimecast20190719; t=1607280916;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=r0Lqr22l7ATKhofbc7EdyOSapxnrV+ynGfxlD6q9jNk=;
-	b=SSnMWYCsfN1oznTMN5e15j3msdb78/4wuJHDZJ3IjSJEqQglO8DyMUIEBmhwVjg/Epa5tu
-	6qhnX6SOH82ORSDjgM9XAZkp1VinVgATzFdXRr+OEq6XSgAhS1CuCCzhgYu4jgniL6t3Vy
-	6vPfZEEvJ0lreixQMVUmvjlz1T0R7Fc=
-X-MC-Unique: k4hPAIXZONqWfVhOYJ2A7A-1
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=oz3755FMu8d1x8s9I95QQZsr6H/EfAu6k1jRrCig21A=;
+	b=XyghoQpJOR7foFreAGe7UDE001khSSSlAROjw6uvCKkckAFGGEcV5IPsSmM7gGJmntHc6M
+	2Sf9i2HM5letzyg2Zn0pLuaQGVKTVfL+zG5Ds6wGSy8h2+GR/WWanJ1kkbf4b2igTxKCV3
+	tzHo0duse6WOtB4RdKMpiUNeatJ4BYU=
+X-MC-Unique: mF2-PuzSM4G6JWuqSeM5Ag-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=r0Lqr22l7ATKhofbc7EdyOSapxnrV+ynGfxlD6q9jNk=;
-        b=QR/y8tPSng0WSDfnSMIkbg4AdA06u61Lm85CdOvA6fhXZ4BXuvK3GOlGgE/Ppdh42n
-         iJORxAKPKeiD3xpZS5+srmTIfgZP+2EhQd5gSYPVAcDdYB9qK/gQLCCJ5TrsM2S4FTtO
-         NSinYqZgx1JZnriB2V8PePHCzHjYX3vFh00GwzaKOqLfbjLlxtTUQoVV7bWoirG7hclX
-         v7UjTYgawLWYUOaLci3V2Lw9ZNLHIrEWFUnEq+r7UWhBMEKUxZalZYOhB4is+8y0yKJa
-         wAvReuhU5ok0i7rgO/P/CJXGJnMMi8q39t5wg5Nl2AiTHy4A0vSwPt5QntFx9TRC2y6W
-         0noA==
-X-Gm-Message-State: AOAM533ZbU1aRWkCHdWBXOY93P7FW+sRamOVB14RR/sAYoBf+2gpqou0
-	CwmMCFkehMlcuq0glCJ/6LgXAg/5PVwhusxbAa+NEnV2CG/gZwkVj8Ksa4pTZOrb/UUI8xw1E20
-	amPRqMdVCMxMT6/BKddaE4djc0a4=
-X-Received: by 2002:a1c:e084:: with SMTP id x126mr14748217wmg.109.1607280923046;
-        Sun, 06 Dec 2020 10:55:23 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzUdCKKWJAWPI622MaP/oFwVO6CryrIW/lu5gCYVi0AVbbug+7fy7NlRBDMxgrTLJyAtgWuOA==
-X-Received: by 2002:a1c:e084:: with SMTP id x126mr14748201wmg.109.1607280922898;
-        Sun, 06 Dec 2020 10:55:22 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=5L9zYVEk7UDV9e8J6jUWmDLNneFBSRjTDjE9eeZGMJ4=;
+        b=lsA7Zn4glSovlTTSegGdRcOaJUw+RxxcSWf+oMEkweHDGZ3BQDvmC7NIM1IvX7h4iO
+         Fq1qOki4N1fdaGZgZ2UwOXCcA7vmeRwC8e7LRAr69vkV/aVGEcLOX3CAKTxjDooZ/wpa
+         mK3xOyzDFmrv3O/iSg6PnxFEDZUQClKZ2o9FSqFxlw3vW4/3WVNo0uqM3ZCHrA2BJyod
+         v5vBjF02maABIF5Y9lh8q0FU0/QzqfLMQnhm9su6O9VxaWxw31Z8C8872OwbiNa4MUmD
+         9Wv2n0oXgsXHpa59/Ytk4OuPD/Iln6YIseYyikUpdjeJtb3Quf40+5sj/+9xf+9FvnjL
+         IIeA==
+X-Gm-Message-State: AOAM532AlsoHGrXNRdT7HHvMwVn8Ur1bkJDjzXbNM851vJgaJIZwujwq
+	0Xs1nbKj5HvwuawzxpbMblLqKIaVvpb7ZqIxNQdq6zCMvKOLFKVRM1pt7xcZfmnoR0Ujv7s5p31
+	66wJOeZzbOu+Rx9cJvTRQp2ZXRIE=
+X-Received: by 2002:a1c:6056:: with SMTP id u83mr14528865wmb.90.1607280911972;
+        Sun, 06 Dec 2020 10:55:11 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyCSZGi5rbiGoVRoGKRNGTcTbBvyODVVSoiL6GLaxlOiqbwRFYQlZdlM1E+jjVm6ac4G5YFvw==
+X-Received: by 2002:a1c:6056:: with SMTP id u83mr14528834wmb.90.1607280911735;
+        Sun, 06 Dec 2020 10:55:11 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
@@ -115,52 +116,83 @@ Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
 	qemu-s390x@nongnu.org,
 	Aurelien Jarno <aurelien@aurel32.net>,
 	qemu-arm@nongnu.org
-Subject: [PATCH 2/8] gitlab-ci: Introduce 'cross_accel_build_job' template
-Date: Sun,  6 Dec 2020 19:55:02 +0100
-Message-Id: <20201206185508.3545711-3-philmd@redhat.com>
+Subject: [PATCH 0/8] gitlab-ci: Add accelerator-specific Linux jobs
+Date: Sun,  6 Dec 2020 19:55:00 +0100
+Message-Id: <20201206185508.3545711-1-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201206185508.3545711-1-philmd@redhat.com>
-References: <20201206185508.3545711-1-philmd@redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Introduce a job template to cross-build accelerator specific
-jobs (enable a specific accelerator, disabling the others).
-
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
- .gitlab-ci.d/crossbuilds.yml | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
-index 099949aaef3..be63b209c5b 100644
---- a/.gitlab-ci.d/crossbuilds.yml
-+++ b/.gitlab-ci.d/crossbuilds.yml
-@@ -13,6 +13,18 @@
-           xtensa-softmmu"
-     - make -j$(expr $(nproc) + 1) all check-build
- 
-+.cross_accel_build_job:
-+  stage: build
-+  image: $CI_REGISTRY_IMAGE/qemu/$IMAGE:latest
-+  timeout: 30m
-+  script:
-+    - mkdir build
-+    - cd build
-+    - PKG_CONFIG_PATH=$PKG_CONFIG_PATH
-+      ../configure --enable-werror $QEMU_CONFIGURE_OPTS --disable-tools
-+        --enable-${ACCEL:-kvm} --target-list="$TARGETS" $ACCEL_CONFIGURE_OPTS
-+    - make -j$(expr $(nproc) + 1) all check-build
-+
- .cross_user_build_job:
-   stage: build
-   image: $CI_REGISTRY_IMAGE/qemu/$IMAGE:latest
--- 
-2.26.2
+Hi,=0D
+=0D
+I was custom to use Travis-CI for testing KVM builds on s390x/ppc=0D
+with the Travis-CI jobs.=0D
+=0D
+During October Travis-CI became unusable for me (extremely slow,=0D
+see [1]). Then my free Travis account got updated to the new=0D
+"10K credit minutes allotment" [2] which I burned without reading=0D
+the notification email in time (I'd burn them eventually anyway).=0D
+=0D
+Today Travis-CI is pointless to me. While I could pay to run my=0D
+QEMU jobs, I don't think it is fair for an Open Source project to=0D
+ask its forks to pay for a service.=0D
+=0D
+As we want forks to run some CI before contributing patches, and=0D
+we have cross-build Docker images available for Linux hosts, I=0D
+added some cross KVM/Xen build jobs to Gitlab-CI.=0D
+=0D
+Cross-building doesn't have the same coverage as native building,=0D
+as we can not run the tests. But this is still useful to get link=0D
+failures.=0D
+=0D
+Each job is added in its own YAML file, so it is easier to notify=0D
+subsystem maintainers in case of troubles.=0D
+=0D
+Resulting pipeline:=0D
+https://gitlab.com/philmd/qemu/-/pipelines/225948077=0D
+=0D
+Regards,=0D
+=0D
+Phil.=0D
+=0D
+[1] https://travis-ci.community/t/build-delays-for-open-source-project/1027=
+2=0D
+[2] https://blog.travis-ci.com/2020-11-02-travis-ci-new-billing=0D
+=0D
+Philippe Mathieu-Daud=C3=A9 (8):=0D
+  gitlab-ci: Replace YAML anchors by extends (cross_system_build_job)=0D
+  gitlab-ci: Introduce 'cross_accel_build_job' template=0D
+  gitlab-ci: Add KVM X86 cross-build jobs=0D
+  gitlab-ci: Add KVM ARM cross-build jobs=0D
+  gitlab-ci: Add KVM s390x cross-build jobs=0D
+  gitlab-ci: Add KVM PPC cross-build jobs=0D
+  gitlab-ci: Add KVM MIPS cross-build jobs=0D
+  gitlab-ci: Add Xen cross-build jobs=0D
+=0D
+ .gitlab-ci.d/crossbuilds-kvm-arm.yml   |  5 +++=0D
+ .gitlab-ci.d/crossbuilds-kvm-mips.yml  |  5 +++=0D
+ .gitlab-ci.d/crossbuilds-kvm-ppc.yml   |  5 +++=0D
+ .gitlab-ci.d/crossbuilds-kvm-s390x.yml |  6 +++=0D
+ .gitlab-ci.d/crossbuilds-kvm-x86.yml   |  6 +++=0D
+ .gitlab-ci.d/crossbuilds-xen.yml       | 14 +++++++=0D
+ .gitlab-ci.d/crossbuilds.yml           | 52 ++++++++++++++++----------=0D
+ .gitlab-ci.yml                         |  6 +++=0D
+ MAINTAINERS                            |  6 +++=0D
+ 9 files changed, 85 insertions(+), 20 deletions(-)=0D
+ create mode 100644 .gitlab-ci.d/crossbuilds-kvm-arm.yml=0D
+ create mode 100644 .gitlab-ci.d/crossbuilds-kvm-mips.yml=0D
+ create mode 100644 .gitlab-ci.d/crossbuilds-kvm-ppc.yml=0D
+ create mode 100644 .gitlab-ci.d/crossbuilds-kvm-s390x.yml=0D
+ create mode 100644 .gitlab-ci.d/crossbuilds-kvm-x86.yml=0D
+ create mode 100644 .gitlab-ci.d/crossbuilds-xen.yml=0D
+=0D
+--=20=0D
+2.26.2=0D
+=0D
 
 
