@@ -2,55 +2,45 @@ Return-Path: <SRS0=Mf7K=FL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB072C4361B
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2939C433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:44:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 606BB2333F
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:41:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 606BB2333F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id 440B523340
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:44:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 440B523340
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.46343.82251 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.46356.82265 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmEtE-0000iZ-N1; Mon, 07 Dec 2020 11:41:12 +0000
+	id 1kmEwf-0000yC-8S; Mon, 07 Dec 2020 11:44:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 46343.82251; Mon, 07 Dec 2020 11:41:12 +0000
+Received: by outflank-mailman (output) from mailman id 46356.82265; Mon, 07 Dec 2020 11:44:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmEtE-0000iR-Ii; Mon, 07 Dec 2020 11:41:12 +0000
-Received: by outflank-mailman (input) for mailman id 46343;
- Mon, 07 Dec 2020 11:41:11 +0000
+	id 1kmEwf-0000y5-5N; Mon, 07 Dec 2020 11:44:45 +0000
+Received: by outflank-mailman (input) for mailman id 46356;
+ Mon, 07 Dec 2020 11:44:44 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=AUZZ=FL=redhat.com=thuth@srs-us1.protection.inumbo.net>)
- id 1kmEtD-0000i1-Fs
- for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 11:41:11 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id e61e124e-7348-4e8c-8f41-671d1a0d8443;
- Mon, 07 Dec 2020 11:41:11 +0000 (UTC)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-286-A-HOIe1IPsKJsI0zvd0r6w-1; Mon, 07 Dec 2020 06:41:09 -0500
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A9CE0107ACE8;
- Mon,  7 Dec 2020 11:41:07 +0000 (UTC)
-Received: from thuth.remote.csb (ovpn-112-85.ams2.redhat.com [10.36.112.85])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 231B85D9DC;
- Mon,  7 Dec 2020 11:40:53 +0000 (UTC)
+ (envelope-from <SRS0=3bhA=FL=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kmEwe-0000y0-Cq
+ for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 11:44:44 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6c49290a-7c2e-4553-bfcd-80fa9f212a94;
+ Mon, 07 Dec 2020 11:44:43 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 33570AD1E;
+ Mon,  7 Dec 2020 11:44:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,71 +52,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e61e124e-7348-4e8c-8f41-671d1a0d8443
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607341270;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+X-Inumbo-ID: 6c49290a-7c2e-4553-bfcd-80fa9f212a94
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1607341482; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CoKqcZfYBnXMQMOGUtw8RaWj33ktvmZ2VgJzuFiWcTA=;
-	b=Z/A3nsSdLNrceb8kWBoVnTq3nU9PlVlMYd69wtRUwZLju1cWAClOrFBIBpxdgD7nm+47xJ
-	1HgxmnwmEilFt1ZGuYIny5f0OwhkbWNITFzLSKKrSYkwEg3Dn4ZMNT0QfJnlIANqvdmPSa
-	t0Q5FCQy9qR0ZITHGJnWfxcXyhkZCvc=
-X-MC-Unique: A-HOIe1IPsKJsI0zvd0r6w-1
-Subject: Re: [PATCH v2 4/5] gitlab-ci: Add KVM s390x cross-build jobs
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Cornelia Huck <cohuck@redhat.com>, Claudio Fontana <cfontana@suse.de>,
- Willian Rampazzo <wrampazz@redhat.com>, qemu-s390x@nongnu.org,
- Anthony Perard <anthony.perard@citrix.com>,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
- Marcelo Tosatti <mtosatti@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- kvm@vger.kernel.org, Stefano Stabellini <sstabellini@kernel.org>
-References: <20201207112353.3814480-1-philmd@redhat.com>
- <20201207112353.3814480-5-philmd@redhat.com>
-From: Thomas Huth <thuth@redhat.com>
-Message-ID: <0a0c2002-64e1-0a6d-d520-144b70f2590a@redhat.com>
-Date: Mon, 7 Dec 2020 12:40:52 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
+	bh=X7gxFAF+E4uaedP2zYxSsqrZhMulAqRne8iVEz2bgZY=;
+	b=CtTV8RCxk3tggl/lac+/3m7f1OH3h8jTcezcHMI7mtxx+olPOerv+IetTCINc9YyZlp7Cp
+	s0r5vlkzTVwuxMzTK5sptgzjp4utuuc+mCINlFzvCGvIwJLtmISenjsBS6vyhKplGIDW5R
+	9tcEbfJiuTy3wsSzSJxmJx8NTt3RwxU=
+Subject: Re: [PATCH v3 1/2] x86/IRQ: make max number of guests for a shared
+ IRQ configurable
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Cc: andrew.cooper3@citrix.com, george.dunlap@citrix.com, iwj@xenproject.org,
+ julien@xen.org, sstabellini@kernel.org, wl@xen.org, roger.pau@citrix.com,
+ xen-devel@lists.xenproject.org
+References: <1607276587-19231-1-git-send-email-igor.druzhinin@citrix.com>
+ <dc023b15-9e28-322c-aa86-165459e65d77@suse.com>
+ <7b5c1a4e-fef7-3534-c717-335c025ea6b6@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <44a36706-bfc6-062b-49c8-06dfe999b164@suse.com>
+Date: Mon, 7 Dec 2020 12:44:44 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-In-Reply-To: <20201207112353.3814480-5-philmd@redhat.com>
+In-Reply-To: <7b5c1a4e-fef7-3534-c717-335c025ea6b6@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Content-Transfer-Encoding: 7bit
 
-On 07/12/2020 12.23, Philippe Mathieu-Daudé wrote:
-> Cross-build s390x target with only KVM accelerator enabled.
+On 07.12.2020 12:28, Igor Druzhinin wrote:
+> On 07/12/2020 09:43, Jan Beulich wrote:
+>> On 06.12.2020 18:43, Igor Druzhinin wrote:
+>>> @@ -1633,11 +1640,12 @@ int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
+>>>          goto retry;
+>>>      }
+>>>  
+>>> -    if ( action->nr_guests == IRQ_MAX_GUESTS )
+>>> +    if ( action->nr_guests == irq_max_guests )
+>>>      {
+>>> -        printk(XENLOG_G_INFO "Cannot bind IRQ%d to dom%d. "
+>>> -               "Already at max share.\n",
+>>> -               pirq->pirq, v->domain->domain_id);
+>>> +        printk(XENLOG_G_INFO
+>>> +               "Cannot bind IRQ%d to dom%pd: already at max share %u ",
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-> ---
->  .gitlab-ci.d/crossbuilds.yml | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+> I noticed it just now but could you also remove stray "dom" left in this line while commiting.
+
+Oh, sure.
+
+>>> +               pirq->pirq, v->domain, irq_max_guests);
+>>> +        printk("(increase with irq-max-guests= option)\n");
+>>
+>> Now two separate printk()s are definitely worse. Then putting the
+>> part of the format string inside the parentheses on a separate line
+>> would still be better (and perhaps a sensible compromise with the
+>> grep-ability desire).
 > 
-> diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
-> index d8685ade376..7a94a66b4b3 100644
-> --- a/.gitlab-ci.d/crossbuilds.yml
-> +++ b/.gitlab-ci.d/crossbuilds.yml
-> @@ -1,4 +1,3 @@
-> -
->  .cross_system_build_job:
->    stage: build
->    image: $CI_REGISTRY_IMAGE/qemu/$IMAGE:latest
-> @@ -120,6 +119,13 @@ cross-s390x-user:
->    variables:
->      IMAGE: debian-s390x-cross
->  
-> +cross-s390x-kvm:
+> Now I'm confused because you asked me not to split the format string between the lines which
+> wouldn't be possible without splitting printk's. I didn't really want to drop anything
+> informative.
 
-I'd still prefer "-no-tcg" or maybe "-kvm-only" ... but that's just a matter
-of taste, so:
+"Not splitting" really was meant in the sense of the words: No
+splitting at all. Even less so across multiple printk()-s. But
+since the line would get really long, I can live with the
+outlined compromise.
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-
+Jan
 
