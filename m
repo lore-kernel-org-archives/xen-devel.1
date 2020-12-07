@@ -2,45 +2,52 @@ Return-Path: <SRS0=Mf7K=FL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 567E8C4361B
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2070BC433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:24:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EB3DC2310B
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:19:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB3DC2310B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id B53432310B
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 11:24:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B53432310B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.46258.82080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.46266.82104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmEXn-0004oa-N9; Mon, 07 Dec 2020 11:19:03 +0000
+	id 1kmEcl-0005qm-MU; Mon, 07 Dec 2020 11:24:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 46258.82080; Mon, 07 Dec 2020 11:19:03 +0000
+Received: by outflank-mailman (output) from mailman id 46266.82104; Mon, 07 Dec 2020 11:24:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmEXn-0004oT-Jm; Mon, 07 Dec 2020 11:19:03 +0000
-Received: by outflank-mailman (input) for mailman id 46258;
- Mon, 07 Dec 2020 11:19:02 +0000
+	id 1kmEcl-0005qf-Ja; Mon, 07 Dec 2020 11:24:11 +0000
+Received: by outflank-mailman (input) for mailman id 46266;
+ Mon, 07 Dec 2020 11:24:09 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=3bhA=FL=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kmEXm-0004oN-4N
- for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 11:19:02 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id acbb9e91-c40e-4b5e-a515-1d342ff0842a;
- Mon, 07 Dec 2020 11:19:00 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D0D6FAC9A;
- Mon,  7 Dec 2020 11:18:59 +0000 (UTC)
+ (envelope-from <SRS0=7Pxd=FL=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1kmEcj-0005oS-Jx
+ for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 11:24:09 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 45bbaa15-1bce-4220-9995-bfb0d29a3ca6;
+ Mon, 07 Dec 2020 11:24:05 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-262-RUVXkkTgOOeyigoxdyCdaQ-1; Mon, 07 Dec 2020 06:24:03 -0500
+Received: by mail-wr1-f70.google.com with SMTP id j5so2673264wro.12
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Dec 2020 03:24:03 -0800 (PST)
+Received: from localhost.localdomain (101.red-88-21-206.staticip.rima-tde.net.
+ [88.21.206.101])
+ by smtp.gmail.com with ESMTPSA id k11sm13362266wmj.42.2020.12.07.03.24.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Dec 2020 03:24:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,54 +59,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: acbb9e91-c40e-4b5e-a515-1d342ff0842a
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1607339939; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
+X-Inumbo-ID: 45bbaa15-1bce-4220-9995-bfb0d29a3ca6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1607340245;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=vKOtYRaxp5uzQ4H36SeAPcpXGVYMTxCAX57B+h/k7Nc=;
-	b=Gqb6qVt4Ga9/aaj85RZ6gaw/YuL2ttuIuKDUlqN8yh+scVmDZb5bIDL5wG52X9BBSLUWYF
-	OUH+ZZQO7WQXwhh2KxPme92TeotcZcyyojwL+INsdljivwvxiKLdGa4FpwT+hbz2pFqdqI
-	rX9YxiXe+4rj+d64/xJbK2lMZaI3f2Y=
-Subject: Re: [PATCH V3 02/23] x86/ioreq: Add IOREQ_STATUS_* #define-s and
- update code for moving
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
-References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
- <1606732298-22107-3-git-send-email-olekstysh@gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <78632ed3-e4d4-7b4c-fd0a-504b6b26e78a@suse.com>
-Date: Mon, 7 Dec 2020 12:19:02 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+	bh=U6QCRjxKvIwhYoV/41s2s2+6dI4wCbnqhxRPlqlth8U=;
+	b=EfzQpQ/kqV49/D6sGFTAsOqsOLFZiRI2HKbkO+YuCnpL5UmPxJVmcpQyIpWrAOg2QMSpnF
+	1/k90VajmPa2g2TPI5nIS809Km5vRJ5nnV5BwbaaBjyoWGJEq+73dWNZKyL9fWN6Z3RKGw
+	dkU9z6fFhaV/DULnOwAUXui7lob1Ubg=
+X-MC-Unique: RUVXkkTgOOeyigoxdyCdaQ-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=U6QCRjxKvIwhYoV/41s2s2+6dI4wCbnqhxRPlqlth8U=;
+        b=kXpfBmBZ1l4yCLwL2/JgGNV4fi/Dz408TViGA+hLTx+QmIWBYVnxz+0r10ZA1x9L46
+         3wFpymw38B1MC4rHUIrQvioYK7JBzUdUT6RLuRqdVbsldpALsRxB/dYYFVjKFWA/bVU9
+         fE67PKq/cijKTJb1rIveBSDsbPmzwzUg0qb3V8Dou0gvuIMYoR4TLiq57K9urRflafLn
+         hEH2B/L+yOO+skYtGaTUZ2WgcwDRg5K47/iqB90PIpbUSo1wqcLuS4B32iZE/wmxC1sn
+         NeRMd7J283Wg4YCVcOI++qNb0NP+ZewOisgieXij9fHCiXRffG2aKt/nnF1+wBH38dIT
+         cEdg==
+X-Gm-Message-State: AOAM53253XMOitZJRDBENSjPFj9bUU940PdTMGd0Xi0olC7J+L4vA6wM
+	b6VuIDmK9UJuah0VxBWcSMigrrFMubq/eeB42qKOBj4639zgUBllRJssqwf60hwGKVmBfeH5Tkt
+	G9DdCtysNHSSFlwiDO1YiRHhWOU4=
+X-Received: by 2002:a1c:4907:: with SMTP id w7mr10183699wma.175.1607340242504;
+        Mon, 07 Dec 2020 03:24:02 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyUOPOj91GL2D5bWSF19z1crpAKZX/6htMwNjDW7CLNGlfCM/ktiYiE4SKzGGKVP6p9Vp9lvg==
+X-Received: by 2002:a1c:4907:: with SMTP id w7mr10183684wma.175.1607340242361;
+        Mon, 07 Dec 2020 03:24:02 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Halil Pasic <pasic@linux.ibm.com>,
+	Thomas Huth <thuth@redhat.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Cornelia Huck <cohuck@redhat.com>,
+	Claudio Fontana <cfontana@suse.de>,
+	Willian Rampazzo <wrampazz@redhat.com>,
+	qemu-s390x@nongnu.org,
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Wainer dos Santos Moschetta <wainersm@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	Paul Durrant <paul@xen.org>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	kvm@vger.kernel.org,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 1/5] gitlab-ci: Document 'build-tcg-disabled' is a KVM X86 job
+Date: Mon,  7 Dec 2020 12:23:49 +0100
+Message-Id: <20201207112353.3814480-2-philmd@redhat.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201207112353.3814480-1-philmd@redhat.com>
+References: <20201207112353.3814480-1-philmd@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <1606732298-22107-3-git-send-email-olekstysh@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 30.11.2020 11:31, Oleksandr Tyshchenko wrote:
-> --- a/xen/include/asm-x86/hvm/ioreq.h
-> +++ b/xen/include/asm-x86/hvm/ioreq.h
-> @@ -74,6 +74,10 @@ unsigned int hvm_broadcast_ioreq(ioreq_t *p, bool buffered);
->  
->  void hvm_ioreq_init(struct domain *d);
->  
-> +#define IOREQ_STATUS_HANDLED     X86EMUL_OKAY
-> +#define IOREQ_STATUS_UNHANDLED   X86EMUL_UNHANDLEABLE
-> +#define IOREQ_STATUS_RETRY       X86EMUL_RETRY
+Document what this job cover (build X86 targets with
+KVM being the single accelerator available).
 
-This correlation may not be altered. I think a comment is needed
-to this effect, to avoid someone trying to subsequently fold the
-x86 and (to be introduced) Arm ones. With that
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ .gitlab-ci.yml | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Jan
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index d0173e82b16..ee31b1020fe 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -220,6 +220,11 @@ build-disabled:
+       s390x-softmmu i386-linux-user
+     MAKE_CHECK_ARGS: check-qtest SPEED=slow
+ 
++# This jobs explicitly disable TCG (--disable-tcg), KVM is detected by
++# the configure script. The container doesn't contain Xen headers so
++# Xen accelerator is not detected / selected. As result it build the
++# i386-softmmu and x86_64-softmmu with KVM being the single accelerator
++# available.
+ build-tcg-disabled:
+   <<: *native_build_job_definition
+   variables:
+-- 
+2.26.2
+
 
