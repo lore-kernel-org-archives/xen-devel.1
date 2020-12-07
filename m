@@ -2,44 +2,49 @@ Return-Path: <SRS0=Mf7K=FL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2720C433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 12:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AA5EC4361B
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 12:13:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C0B623370
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 12:12:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C0B623370
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id B7F8223370
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 12:13:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7F8223370
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.46430.82397 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.46437.82409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmFMw-00058i-BP; Mon, 07 Dec 2020 12:11:54 +0000
+	id 1kmFNs-0005Fy-LD; Mon, 07 Dec 2020 12:12:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 46430.82397; Mon, 07 Dec 2020 12:11:54 +0000
+Received: by outflank-mailman (output) from mailman id 46437.82409; Mon, 07 Dec 2020 12:12:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmFMw-00058b-8D; Mon, 07 Dec 2020 12:11:54 +0000
-Received: by outflank-mailman (input) for mailman id 46430;
- Mon, 07 Dec 2020 12:11:53 +0000
+	id 1kmFNs-0005Fr-I8; Mon, 07 Dec 2020 12:12:52 +0000
+Received: by outflank-mailman (input) for mailman id 46437;
+ Mon, 07 Dec 2020 12:12:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=3bhA=FL=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kmFMv-00058W-JZ
- for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 12:11:53 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=e0y+=FL=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1kmFNq-0005Fi-Ua
+ for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 12:12:51 +0000
+Received: from mail-wr1-x42a.google.com (unknown [2a00:1450:4864:20::42a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e6bc98ff-3335-452a-9eea-70babb9d82a6;
- Mon, 07 Dec 2020 12:11:52 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 02EBCB255;
- Mon,  7 Dec 2020 12:11:52 +0000 (UTC)
+ id 97a4b626-0258-45a9-a088-68496a6e2f7c;
+ Mon, 07 Dec 2020 12:12:50 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id a12so5733125wrv.8
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Dec 2020 04:12:50 -0800 (PST)
+Received: from CBGR90WXYV0 (host86-183-162-145.range86-183.btcentralplus.com.
+ [86.183.162.145])
+ by smtp.gmail.com with ESMTPSA id o67sm13871553wmo.31.2020.12.07.04.12.47
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 07 Dec 2020 04:12:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,101 +56,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6bc98ff-3335-452a-9eea-70babb9d82a6
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1607343112; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=lDueH7u8nvXIG/owt6SkFbkbWaonZLRfmo97yC7B5BA=;
-	b=nSvlFxjD30qoimRcPrxyg4qyWWqeqZqJuim3eU/BhcArl6vXlfv8oHtdZSiNgBXLtQ4l3u
-	AReidgwNmkoGDGFKAUlPo41psqQ0D/OQR4ScJW0ZRTBkXoEupRxYuWJZX+tkaR8+VjnBIv
-	ccgzd62S5rVkSggOb20xL+vFOfE+jS8=
-Subject: Re: [PATCH V3 10/23] xen/mm: Make x86's XENMEM_resource_ioreq_server
- handling common
-From: Jan Beulich <jbeulich@suse.com>
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: Julien Grall <julien.grall@arm.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
- Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- xen-devel@lists.xenproject.org
-References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
- <1606732298-22107-11-git-send-email-olekstysh@gmail.com>
- <4f9a68ad-c663-d7a1-9194-4ad28958b077@suse.com>
-Message-ID: <39ee3665-48f2-334d-e7a0-2e1a17bccd23@suse.com>
-Date: Mon, 7 Dec 2020 13:11:54 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+X-Inumbo-ID: 97a4b626-0258-45a9-a088-68496a6e2f7c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+         :mime-version:content-transfer-encoding:content-language
+         :thread-index;
+        bh=YT62w/XHXRRVTJ4fKfvousr9yOLU+/nzOSs+DxN/Mms=;
+        b=AUOwDd+TSzMZ4IH9hg4fW22gyiEBty0t/YKhqxKxSBvnri3envWVsRrlGS1PgrSK1L
+         9oY9pnBkhpZ5U/I55KxOnsOGWkTt4OXrRLXcws5jHUjYy6PTQMAxa56xH/OLm7ZpK/cX
+         z1KMqtBEtfvOz557ld4XbqG+IDdFEyC2SmjGofJE8j8ohYefu+vaYmn28YL2ctKq9Kpu
+         /P36FlchjxaqrEGUseZLnnfDtg0EIwCISFMqBqwpMRkZjhcYSRZXOt+hTynhwj+Lxx85
+         4hsd845jsBIyCMG6K7dN/D5GmYhSBubFyuBbW62JX8PwjKykfoR07xyWRE03xAaoNJlA
+         sgFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+         :subject:date:message-id:mime-version:content-transfer-encoding
+         :content-language:thread-index;
+        bh=YT62w/XHXRRVTJ4fKfvousr9yOLU+/nzOSs+DxN/Mms=;
+        b=YgrJCh8ZK4MEq35gsR+IlibMOFaRxak1dz0qU8HwV567NdYyqSkDuNUyT0OB6DT/Tm
+         aYl9dcAj5DuXbBWRWOkjCBtn6nZOUHFRkxgCBRTpb3i1vcDSlQmEzisfKiFK7mTptoI5
+         zZDsWp1xXbNQ9XKIp+c4AWP59qBIyc1t+D/vzrcO3iaUcIrXmI2xibEEfJQkf6wKTZ2m
+         lWSc1OI62nFbL+kLU3WOmz/KvcLfUaaO7mQuCIxU1KNdvYOC7AF4AaE2oXkdSTZpFkVY
+         NKOT/VSLcprxuN7fZZe3JS4FL7pNKAqUonaL7MWYgm0TEhPaHm7GwkCg/KAmsEj0qEhm
+         UhqQ==
+X-Gm-Message-State: AOAM532fUHTbp3J7SALQiJcbhYUv54SzJiIgRUBaTyY/e4ZpScbUi1QC
+	sfVSNKDUDkARhP9QFQNr4MU=
+X-Google-Smtp-Source: ABdhPJz8BeY2CzQTjM0tEIsz0yTG3SYohbJ5bKXMzd0dRndUxPyiJS0VwbMmkRdTyn2x4EMAPVjUgQ==
+X-Received: by 2002:adf:a3ca:: with SMTP id m10mr19324499wrb.228.1607343169274;
+        Mon, 07 Dec 2020 04:12:49 -0800 (PST)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+Reply-To: <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>,
+	"'Oleksandr Tyshchenko'" <olekstysh@gmail.com>
+Cc: "'Oleksandr Tyshchenko'" <oleksandr_tyshchenko@epam.com>,
+	"'Andrew Cooper'" <andrew.cooper3@citrix.com>,
+	"'George Dunlap'" <george.dunlap@citrix.com>,
+	"'Ian Jackson'" <iwj@xenproject.org>,
+	"'Julien Grall'" <julien@xen.org>,
+	"'Stefano Stabellini'" <sstabellini@kernel.org>,
+	"'Wei Liu'" <wl@xen.org>,
+	=?utf-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>,
+	"'Julien Grall'" <julien.grall@arm.com>,
+	<xen-devel@lists.xenproject.org>
+References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com> <1606732298-22107-9-git-send-email-olekstysh@gmail.com> <5b5011b7-5b8f-79cd-d8dc-c276ba1f9e37@suse.com>
+In-Reply-To: <5b5011b7-5b8f-79cd-d8dc-c276ba1f9e37@suse.com>
+Subject: RE: [PATCH V3 08/23] xen/ioreq: Move x86's ioreq_server to struct domain
+Date: Mon, 7 Dec 2020 12:12:47 -0000
+Message-ID: <0d0601d6cc92$47392ff0$d5ab8fd0$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <4f9a68ad-c663-d7a1-9194-4ad28958b077@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQKk0D4Qme59XF0a0h96d36zIOxDhQJGmzfoAf5XvzyoLVwsAA==
 
-On 07.12.2020 12:35, Jan Beulich wrote:
+> -----Original Message-----
+> From: Jan Beulich <jbeulich@suse.com>
+> Sent: 07 December 2020 12:05
+> To: Oleksandr Tyshchenko <olekstysh@gmail.com>; Paul Durrant =
+<paul@xen.org>
+> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>; Andrew =
+Cooper <andrew.cooper3@citrix.com>;
+> George Dunlap <george.dunlap@citrix.com>; Ian Jackson =
+<iwj@xenproject.org>; Julien Grall
+> <julien@xen.org>; Stefano Stabellini <sstabellini@kernel.org>; Wei Liu =
+<wl@xen.org>; Roger Pau Monn=C3=A9
+> <roger.pau@citrix.com>; Julien Grall <julien.grall@arm.com>; =
+xen-devel@lists.xenproject.org
+> Subject: Re: [PATCH V3 08/23] xen/ioreq: Move x86's ioreq_server to =
+struct domain
+>=20
 > On 30.11.2020 11:31, Oleksandr Tyshchenko wrote:
->> --- a/xen/arch/x86/mm.c
->> +++ b/xen/arch/x86/mm.c
->> @@ -4699,50 +4699,6 @@ int xenmem_add_to_physmap_one(
->>      return rc;
->>  }
->>  
->> -int arch_acquire_resource(struct domain *d, unsigned int type,
->> -                          unsigned int id, unsigned long frame,
->> -                          unsigned int nr_frames, xen_pfn_t mfn_list[])
->> -{
->> -    int rc;
->> -
->> -    switch ( type )
->> -    {
->> -#ifdef CONFIG_HVM
->> -    case XENMEM_resource_ioreq_server:
->> -    {
->> -        ioservid_t ioservid = id;
->> -        unsigned int i;
->> -
->> -        rc = -EINVAL;
->> -        if ( !is_hvm_domain(d) )
->> -            break;
->> -
->> -        if ( id != (unsigned int)ioservid )
->> -            break;
->> -
->> -        rc = 0;
->> -        for ( i = 0; i < nr_frames; i++ )
->> -        {
->> -            mfn_t mfn;
->> -
->> -            rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
->> -            if ( rc )
->> -                break;
->> -
->> -            mfn_list[i] = mfn_x(mfn);
->> -        }
->> -        break;
->> -    }
->> -#endif
->> -
->> -    default:
->> -        rc = -EOPNOTSUPP;
->> -        break;
->> -    }
->> -
->> -    return rc;
->> -}
-> 
-> Can't this be accompanied by removal of the xen/ioreq.h inclusion?
-> (I'm only looking at patch 4 right now, but the renaming there made
-> the soon to be unnecessary #include quite apparent.)
+> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> >
+> > The IOREQ is a common feature now and this struct will be used
+> > on Arm as is. Move it to common struct domain. This also
+> > significantly reduces the layering violation in the common code
+> > (*arch.hvm* usage).
+> >
+> > We don't move ioreq_gfn since it is not used in the common code
+> > (the "legacy" mechanism is x86 specific).
+> >
+> > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>=20
+> Applicable parts
+> Acked-by: Jan Beulich <jbeulich@suse.com>
+> yet with a question, but maybe more to Paul than to you:
+>=20
+> > --- a/xen/include/asm-x86/hvm/domain.h
+> > +++ b/xen/include/asm-x86/hvm/domain.h
+> > @@ -63,8 +63,6 @@ struct hvm_pi_ops {
+> >      void (*vcpu_block)(struct vcpu *);
+> >  };
+> >
+> > -#define MAX_NR_IOREQ_SERVERS 8
+> > -
+> >  struct hvm_domain {
+> >      /* Guest page range used for non-default ioreq servers */
+> >      struct {
+> > @@ -73,12 +71,6 @@ struct hvm_domain {
+> >          unsigned long legacy_mask; /* indexed by HVM param number =
+*/
+> >      } ioreq_gfn;
+> >
+> > -    /* Lock protects all other values in the sub-struct and the =
+default */
+> > -    struct {
+> > -        spinlock_t              lock;
+> > -        struct ioreq_server *server[MAX_NR_IOREQ_SERVERS];
+> > -    } ioreq_server;
+> > -
+> >      /* Cached CF8 for guest PCI config cycles */
+> >      uint32_t                pci_cf8;
+> >
+> > --- a/xen/include/xen/sched.h
+> > +++ b/xen/include/xen/sched.h
+> > @@ -316,6 +316,8 @@ struct sched_unit {
+> >
+> >  struct evtchn_port_ops;
+> >
+> > +#define MAX_NR_IOREQ_SERVERS 8
+> > +
+> >  struct domain
+> >  {
+> >      domid_t          domain_id;
+> > @@ -523,6 +525,14 @@ struct domain
+> >      /* Argo interdomain communication support */
+> >      struct argo_domain *argo;
+> >  #endif
+> > +
+> > +#ifdef CONFIG_IOREQ_SERVER
+> > +    /* Lock protects all other values in the sub-struct and the =
+default */
+> > +    struct {
+> > +        spinlock_t              lock;
+> > +        struct ioreq_server     *server[MAX_NR_IOREQ_SERVERS];
+> > +    } ioreq_server;
+> > +#endif
+>=20
+> The comment gets merely moved, but what "default" does it talk about?
+> Is this a stale part which would better be dropped at this occasion?
+>=20
 
-And then, now that I've looked at this patch as a whole,
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Yes, I think that is a stale part of the comment from the days of the =
+default ioreq server. It can be dropped.
 
-Jan
+  Paul
+
+> Jan
+
 
