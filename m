@@ -7,46 +7,46 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D644EC4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1709AC4361B
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:15:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 86F04233FB
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:15:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86F04233FB
+	by mail.kernel.org (Postfix) with ESMTPS id B427A230FA
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:15:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B427A230FA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.46526.82572 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.46528.82595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmGMJ-0004DD-15; Mon, 07 Dec 2020 13:15:19 +0000
+	id 1kmGMR-0004Lb-La; Mon, 07 Dec 2020 13:15:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 46526.82572; Mon, 07 Dec 2020 13:15:19 +0000
+Received: by outflank-mailman (output) from mailman id 46528.82595; Mon, 07 Dec 2020 13:15:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmGMI-0004D4-UJ; Mon, 07 Dec 2020 13:15:18 +0000
-Received: by outflank-mailman (input) for mailman id 46526;
- Mon, 07 Dec 2020 13:15:17 +0000
+	id 1kmGMR-0004LQ-HU; Mon, 07 Dec 2020 13:15:27 +0000
+Received: by outflank-mailman (input) for mailman id 46528;
+ Mon, 07 Dec 2020 13:15:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7Pxd=FL=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kmGMH-0004AL-Nr
- for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 13:15:17 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ id 1kmGMQ-0004Kw-S5
+ for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 13:15:26 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id ce195ad8-dc95-405d-a39b-eba0d1d404d3;
- Mon, 07 Dec 2020 13:15:15 +0000 (UTC)
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-462-3jHvaCrGM4ix7YMFTP9OAA-1; Mon, 07 Dec 2020 08:15:14 -0500
-Received: by mail-wm1-f70.google.com with SMTP id g198so4096852wme.7
- for <xen-devel@lists.xenproject.org>; Mon, 07 Dec 2020 05:15:13 -0800 (PST)
+ id 05d4123c-6f27-4e73-9918-471cb0d4d66d;
+ Mon, 07 Dec 2020 13:15:26 +0000 (UTC)
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-153-yXxLE-j9PEW_K9JRFbeE9A-1; Mon, 07 Dec 2020 08:15:24 -0500
+Received: by mail-wm1-f71.google.com with SMTP id r1so5333112wmn.8
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Dec 2020 05:15:23 -0800 (PST)
 Received: from localhost.localdomain (101.red-88-21-206.staticip.rima-tde.net.
  [88.21.206.101])
- by smtp.gmail.com with ESMTPSA id k18sm2265572wrd.45.2020.12.07.05.15.11
+ by smtp.gmail.com with ESMTPSA id b3sm14942829wrp.57.2020.12.07.05.15.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Dec 2020 05:15:11 -0800 (PST)
+ Mon, 07 Dec 2020 05:15:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,37 +58,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce195ad8-dc95-405d-a39b-eba0d1d404d3
+X-Inumbo-ID: 05d4123c-6f27-4e73-9918-471cb0d4d66d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607346915;
+	s=mimecast20190719; t=1607346926;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=DUD443fjC7TlYCq2Zs7qkYPHzlFo7vsq2RAf28zHG0Y=;
-	b=b49Y+4DyR6uXgzYr3drfs9eM2NaovpAiJryrok+zE1zpgP+0GZJlY/9Apr+vIgcT8Xveo7
-	jbAkDr/2jZGDMDIb95XFKAd+21AM+VaEWpYUvgc8DOa8nclMXIV3lg9Dzf2dkKPa5In1yf
-	QnNEFAFVp14994KiswEMc6UsNe7OdU0=
-X-MC-Unique: 3jHvaCrGM4ix7YMFTP9OAA-1
+	bh=LrpyM62Xrmp0dmj6zHS9IbusrVswsePAgvUQq8W1ha4=;
+	b=iYVyhUlO7Zg+2vqUm7Wcdm4bsG18bLtBV4hSs+wqhvKK6vb9+sutl90vA4N8eMqEZi4iUC
+	NsK9NTsM+q9TxAnVPZ3XS3syAmz13qNdVHLg4ikUy4q5IUeFiO3w2zJPiE5IP2iHbJfE+x
+	QiF4zHRa+QkUI/H9qRAfFzIvfzaeRCc=
+X-MC-Unique: yXxLE-j9PEW_K9JRFbeE9A-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=DUD443fjC7TlYCq2Zs7qkYPHzlFo7vsq2RAf28zHG0Y=;
-        b=FgcJ+ktQ2c9T7D/4Pmw0aIg71534K1f3viN1MjIDLKTLeBSRcEwzqjtX857mIHZiQ0
-         kJL3k4XYy4mlaHZuhWuWDzQ6ORYtP1/YRFmSGn8zXHbMh3XpvzzkSv5fHX5R5Z3N/Men
-         aWhVdnXlBtne/6skXyYDIeQMOv9KWfZoIY+pcGXmTMwGmO0KPDRcbZYxp6/OpHvh48y7
-         8F4NGJ7gcXogGfqfd7AP9JZCf/qHViLnVBuvfCk56dYV47Uzu7WxkukaRpd0cEmg4QOB
-         CYmQowiRy33pQqddSWkeScwy9BC0OwSc8VjhPgyvr/oH13KU0Iz/g81Dxd/IXHioccAK
-         EhiA==
-X-Gm-Message-State: AOAM533AR709HvD9jAJT7ZVz7MvuhCNf4KwW/S6bDNCpFIPSn+X8LEhf
-	hq+YPnz2Aw+MvdS6F71ouutp/xfv9a4Pnu/eXP5Wpdwt10XP4nYHTwrPIKFN3n/KU/wAwWb7qg2
-	LK9TewN05c0HjATJIJlt9WL2zzzg=
-X-Received: by 2002:a1c:c2d4:: with SMTP id s203mr18470517wmf.58.1607346912730;
-        Mon, 07 Dec 2020 05:15:12 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJx0KSXp7DP6CDis0L6tP1I2Gzz9cpg1u4ccuV+5/oiKxMdma/cepl4uO8AaAxQi4CtlwH61VQ==
-X-Received: by 2002:a1c:c2d4:: with SMTP id s203mr18470485wmf.58.1607346912558;
-        Mon, 07 Dec 2020 05:15:12 -0800 (PST)
+        bh=LrpyM62Xrmp0dmj6zHS9IbusrVswsePAgvUQq8W1ha4=;
+        b=WMxefesltkcxcYVz6hF+2jd85EvOYEod6DRS0/jQ2ywyqXZdYeOJ9uglUeHFqlpOUG
+         JZyfyIVq4eh7eK2dJb1WcN2dcr5BIBwb9dhJe4n9P8NbrKKxxe/ur+Gn8/D0RaGAzBiU
+         otZuwZeJiH/ClNqgOxNP6gMIWplFpUghI1MvVrthf5TtG+FdbMH2Z6fdOR924f1sUn46
+         hmVp1d9qc0qWk5gjC7+tH9MG5oeCSNGJCnSqsmO3QIgnb5wM481a/IW0os28R4pXbnp9
+         mBcE6/I42GICCFNl5nbS0DG1KA2D4lbFMMBO0B5Xauo4JYanFOUiHyTq0rKfqtMRc7Eo
+         BYmA==
+X-Gm-Message-State: AOAM5311QqzjLk4M1Cp4YT7XI+BQ3etMJNMKdFQXgOW81MPD9c3jSFVW
+	YtMHbdM6a41FtJBbj21H+hMxTU46nPjktWE3zjDswL2k13bd5KKhDXxUIs1jUwUonVf27DaAQky
+	8931faT1dVwvdJlgMfixJJS6u7Fk=
+X-Received: by 2002:adf:eec6:: with SMTP id a6mr7411041wrp.239.1607346923077;
+        Mon, 07 Dec 2020 05:15:23 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwrSsP/k6tbNGXTd5ADaSfYhwBX1LosPwHROoqvLj3ywUi8jkYDiFzi1eqHTc0kTww1719V1w==
+X-Received: by 2002:adf:eec6:: with SMTP id a6mr7411023wrp.239.1607346922931;
+        Mon, 07 Dec 2020 05:15:22 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>,
@@ -108,9 +108,9 @@ Cc: Thomas Huth <thuth@redhat.com>,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
 	Claudio Fontana <cfontana@suse.de>,
 	Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH v3 1/5] gitlab-ci: Document 'build-tcg-disabled' is a KVM X86 job
-Date: Mon,  7 Dec 2020 14:14:59 +0100
-Message-Id: <20201207131503.3858889-2-philmd@redhat.com>
+Subject: [PATCH v3 3/5] gitlab-ci: Introduce 'cross_accel_build_job' template
+Date: Mon,  7 Dec 2020 14:15:01 +0100
+Message-Id: <20201207131503.3858889-4-philmd@redhat.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201207131503.3858889-1-philmd@redhat.com>
 References: <20201207131503.3858889-1-philmd@redhat.com>
@@ -122,31 +122,49 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Document what this job cover (build X86 targets with
-KVM being the single accelerator available).
+Introduce a job template to cross-build accelerator specific
+jobs (enable a specific accelerator, disabling the others).
+
+The specific accelerator is selected by the $ACCEL environment
+variable (default to KVM).
+
+Extra options such disabling other accelerators are passed
+via the $ACCEL_CONFIGURE_OPTS environment variable.
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- .gitlab-ci.yml | 5 +++++
- 1 file changed, 5 insertions(+)
+ .gitlab-ci.d/crossbuilds.yml | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index d0173e82b16..ee31b1020fe 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -220,6 +220,11 @@ build-disabled:
-       s390x-softmmu i386-linux-user
-     MAKE_CHECK_ARGS: check-qtest SPEED=slow
+diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
+index 099949aaef3..b59516301f4 100644
+--- a/.gitlab-ci.d/crossbuilds.yml
++++ b/.gitlab-ci.d/crossbuilds.yml
+@@ -13,6 +13,23 @@
+           xtensa-softmmu"
+     - make -j$(expr $(nproc) + 1) all check-build
  
-+# This jobs explicitly disable TCG (--disable-tcg), KVM is detected by
-+# the configure script. The container doesn't contain Xen headers so
-+# Xen accelerator is not detected / selected. As result it build the
-+# i386-softmmu and x86_64-softmmu with KVM being the single accelerator
-+# available.
- build-tcg-disabled:
-   <<: *native_build_job_definition
-   variables:
++# Job to cross-build specific accelerators.
++#
++# Set the $ACCEL variable to select the specific accelerator (default to
++# KVM), and set extra options (such disabling other accelerators) via the
++# $ACCEL_CONFIGURE_OPTS variable.
++.cross_accel_build_job:
++  stage: build
++  image: $CI_REGISTRY_IMAGE/qemu/$IMAGE:latest
++  timeout: 30m
++  script:
++    - mkdir build
++    - cd build
++    - PKG_CONFIG_PATH=$PKG_CONFIG_PATH
++      ../configure --enable-werror $QEMU_CONFIGURE_OPTS --disable-tools
++        --enable-${ACCEL:-kvm} $ACCEL_CONFIGURE_OPTS
++    - make -j$(expr $(nproc) + 1) all check-build
++
+ .cross_user_build_job:
+   stage: build
+   image: $CI_REGISTRY_IMAGE/qemu/$IMAGE:latest
 -- 
 2.26.2
 
