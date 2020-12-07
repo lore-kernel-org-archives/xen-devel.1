@@ -2,44 +2,43 @@ Return-Path: <SRS0=Mf7K=FL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98EBBC4361B
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:31:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99AFAC433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:31:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 55A00233A0
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:31:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55A00233A0
+	by mail.kernel.org (Postfix) with ESMTPS id 4E0E8233A0
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:31:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E0E8233A0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.46567.82644 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.46566.82632 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmGb3-0006eu-4e; Mon, 07 Dec 2020 13:30:33 +0000
+	id 1kmGb1-0006e0-TV; Mon, 07 Dec 2020 13:30:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 46567.82644; Mon, 07 Dec 2020 13:30:33 +0000
+Received: by outflank-mailman (output) from mailman id 46566.82632; Mon, 07 Dec 2020 13:30:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmGb3-0006en-0w; Mon, 07 Dec 2020 13:30:33 +0000
-Received: by outflank-mailman (input) for mailman id 46567;
- Mon, 07 Dec 2020 13:30:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kmGb1-0006dt-Ov; Mon, 07 Dec 2020 13:30:31 +0000
+Received: by outflank-mailman (input) for mailman id 46566;
+ Mon, 07 Dec 2020 13:30:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=DX/D=FL=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kmGb1-0006do-Ju
- for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 13:30:31 +0000
+ id 1kmGb0-0006dg-TL
+ for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 13:30:30 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dd845fb6-9b2c-47e7-b339-d9698956272a;
- Mon, 07 Dec 2020 13:30:30 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 71266572-2b70-4f48-9a71-f1b698e0947e;
+ Mon, 07 Dec 2020 13:30:29 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5E70EAD09;
+ by mx2.suse.de (Postfix) with ESMTP id 04B78AB63;
  Mon,  7 Dec 2020 13:30:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,237 +51,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd845fb6-9b2c-47e7-b339-d9698956272a
+X-Inumbo-ID: 71266572-2b70-4f48-9a71-f1b698e0947e
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1607347829; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=qO8uDSCaCVklC/1884Z3m6tRv+wQIAXdoqVmyxZTomc=;
-	b=Lqq67VCQiRnET2stayy3VmJFaL/+SiunSGCMyjY+/iAT69IgVj1Po9szzlkif8CQKoFjJw
-	O421QkLOJd619Fb3UmAxypDynmuGG8KeDiysJD/h1VK+iW+mTfloQjJWku0CVt7Mb7pfrj
-	jAbOZY6dksmrkLKftV+hq5yZbqKd2ME=
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=TlW6LRYzNqv2k8YiMXo4C8ho53DA5MhvO4sDaaIu7G8=;
+	b=Isny2xaeNXr0QwvWgDPZvWhlph9aEdARWAGMR8XD8mIwJQVGDRljPeuqNDCgqaNncogi7U
+	kExKzaMsp3RukRSg9ga3/hbaAlEjkMHMsOZBAa9to1CWegHsRMFs8r6bfuK7vxPsMa92G0
+	EoXiC//R5iM0/X6/MTVWmbjDGY0eTzI=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-scsi@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jens Axboe <axboe@kernel.dk>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 2/2] xen: don't use page->lru for ZONE_DEVICE memory
-Date: Mon,  7 Dec 2020 14:30:24 +0100
-Message-Id: <20201207133024.16621-3-jgross@suse.com>
+Subject: [PATCH 0/2] xen: fix using ZONE_DEVICE memory for foreign mappings
+Date: Mon,  7 Dec 2020 14:30:22 +0100
+Message-Id: <20201207133024.16621-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201207133024.16621-1-jgross@suse.com>
-References: <20201207133024.16621-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit 9e2369c06c8a18 ("xen: add helpers to allocate unpopulated
-memory") introduced usage of ZONE_DEVICE memory for foreign memory
-mappings.
+Fix an issue found in dom0 when running on a host with NVMe.
 
-Unfortunately this collides with using page->lru for Xen backend
-private page caches.
+Juergen Gross (2):
+  xen: add helpers for caching grant mapping pages
+  xen: don't use page->lru for ZONE_DEVICE memory
 
-Fix that by using page->zone_device_data instead.
+ drivers/block/xen-blkback/blkback.c |  89 ++++----------------
+ drivers/block/xen-blkback/common.h  |   4 +-
+ drivers/block/xen-blkback/xenbus.c  |   6 +-
+ drivers/xen/grant-table.c           | 123 ++++++++++++++++++++++++++++
+ drivers/xen/unpopulated-alloc.c     |  20 +++--
+ drivers/xen/xen-scsiback.c          |  60 +++-----------
+ include/xen/grant_table.h           |  17 ++++
+ 7 files changed, 182 insertions(+), 137 deletions(-)
 
-Fixes: 9e2369c06c8a18 ("xen: add helpers to allocate unpopulated memory")
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- drivers/xen/grant-table.c       | 65 +++++++++++++++++++++++++++++----
- drivers/xen/unpopulated-alloc.c | 20 +++++-----
- include/xen/grant_table.h       |  4 ++
- 3 files changed, 73 insertions(+), 16 deletions(-)
-
-diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
-index e2e42912f241..696663a439fe 100644
---- a/drivers/xen/grant-table.c
-+++ b/drivers/xen/grant-table.c
-@@ -813,10 +813,63 @@ int gnttab_alloc_pages(int nr_pages, struct page **pages)
- }
- EXPORT_SYMBOL_GPL(gnttab_alloc_pages);
- 
-+#ifdef CONFIG_XEN_UNPOPULATED_ALLOC
-+static inline void cache_init(struct gnttab_page_cache *cache)
-+{
-+	cache->pages = NULL;
-+}
-+
-+static inline bool cache_empty(struct gnttab_page_cache *cache)
-+{
-+	return !cache->pages;
-+}
-+
-+static inline struct page *cache_deq(struct gnttab_page_cache *cache)
-+{
-+	struct page *page;
-+
-+	page = cache->pages;
-+	cache->pages = page->zone_device_data;
-+
-+	return page;
-+}
-+
-+static inline void cache_enq(struct gnttab_page_cache *cache, struct page *page)
-+{
-+	page->zone_device_data = cache->pages;
-+	cache->pages = page;
-+}
-+#else
-+static inline void cache_init(struct gnttab_page_cache *cache)
-+{
-+	INIT_LIST_HEAD(&cache->pages);
-+}
-+
-+static inline bool cache_empty(struct gnttab_page_cache *cache)
-+{
-+	return list_empty(&cache->pages);
-+}
-+
-+static inline struct page *cache_deq(struct gnttab_page_cache *cache)
-+{
-+	struct page *page;
-+
-+	page = list_first_entry(&cache->pages, struct page, lru);
-+	list_del(&page[0]->lru);
-+
-+	return page;
-+}
-+
-+static inline void cache_enq(struct gnttab_page_cache *cache, struct page *page)
-+{
-+	list_add(&page->lru, &cache->pages);
-+}
-+#endif
-+
- void gnttab_page_cache_init(struct gnttab_page_cache *cache)
- {
- 	spin_lock_init(&cache->lock);
--	INIT_LIST_HEAD(&cache->pages);
-+	cache_init(cache);
- 	cache->num_pages = 0;
- }
- EXPORT_SYMBOL_GPL(gnttab_page_cache_init);
-@@ -827,13 +880,12 @@ int gnttab_page_cache_get(struct gnttab_page_cache *cache, struct page **page)
- 
- 	spin_lock_irqsave(&cache->lock, flags);
- 
--	if (list_empty(&cache->pages)) {
-+	if (cache_empty(cache)) {
- 		spin_unlock_irqrestore(&cache->lock, flags);
- 		return gnttab_alloc_pages(1, page);
- 	}
- 
--	page[0] = list_first_entry(&cache->pages, struct page, lru);
--	list_del(&page[0]->lru);
-+	page[0] = cache_deq(cache);
- 	cache->num_pages--;
- 
- 	spin_unlock_irqrestore(&cache->lock, flags);
-@@ -851,7 +903,7 @@ void gnttab_page_cache_put(struct gnttab_page_cache *cache, struct page **page,
- 	spin_lock_irqsave(&cache->lock, flags);
- 
- 	for (i = 0; i < num; i++)
--		list_add(&page[i]->lru, &cache->pages);
-+		cache_enq(cache, page[i]);
- 	cache->num_pages += num;
- 
- 	spin_unlock_irqrestore(&cache->lock, flags);
-@@ -867,8 +919,7 @@ void gnttab_page_cache_shrink(struct gnttab_page_cache *cache, unsigned int num)
- 	spin_lock_irqsave(&cache->lock, flags);
- 
- 	while (cache->num_pages > num) {
--		page[i] = list_first_entry(&cache->pages, struct page, lru);
--		list_del(&page[i]->lru);
-+		page[i] = cache_deq(cache);
- 		cache->num_pages--;
- 		if (++i == ARRAY_SIZE(page)) {
- 			spin_unlock_irqrestore(&cache->lock, flags);
-diff --git a/drivers/xen/unpopulated-alloc.c b/drivers/xen/unpopulated-alloc.c
-index 8c512ea550bb..7762c1bb23cb 100644
---- a/drivers/xen/unpopulated-alloc.c
-+++ b/drivers/xen/unpopulated-alloc.c
-@@ -12,7 +12,7 @@
- #include <xen/xen.h>
- 
- static DEFINE_MUTEX(list_lock);
--static LIST_HEAD(page_list);
-+static struct page *page_list;
- static unsigned int list_count;
- 
- static int fill_list(unsigned int nr_pages)
-@@ -84,7 +84,8 @@ static int fill_list(unsigned int nr_pages)
- 		struct page *pg = virt_to_page(vaddr + PAGE_SIZE * i);
- 
- 		BUG_ON(!virt_addr_valid(vaddr + PAGE_SIZE * i));
--		list_add(&pg->lru, &page_list);
-+		pg->zone_device_data = page_list;
-+		page_list = pg;
- 		list_count++;
- 	}
- 
-@@ -118,12 +119,10 @@ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages)
- 	}
- 
- 	for (i = 0; i < nr_pages; i++) {
--		struct page *pg = list_first_entry_or_null(&page_list,
--							   struct page,
--							   lru);
-+		struct page *pg = page_list;
- 
- 		BUG_ON(!pg);
--		list_del(&pg->lru);
-+		page_list = pg->zone_device_data;
- 		list_count--;
- 		pages[i] = pg;
- 
-@@ -134,7 +133,8 @@ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages)
- 				unsigned int j;
- 
- 				for (j = 0; j <= i; j++) {
--					list_add(&pages[j]->lru, &page_list);
-+					pages[j]->zone_device_data = page_list;
-+					page_list = pages[j];
- 					list_count++;
- 				}
- 				goto out;
-@@ -160,7 +160,8 @@ void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages)
- 
- 	mutex_lock(&list_lock);
- 	for (i = 0; i < nr_pages; i++) {
--		list_add(&pages[i]->lru, &page_list);
-+		pages[i]->zone_device_data = page_list;
-+		page_list = pages[i];
- 		list_count++;
- 	}
- 	mutex_unlock(&list_lock);
-@@ -189,7 +190,8 @@ static int __init init(void)
- 			struct page *pg =
- 				pfn_to_page(xen_extra_mem[i].start_pfn + j);
- 
--			list_add(&pg->lru, &page_list);
-+			pg->zone_device_data = page_list;
-+			page_list = pg;
- 			list_count++;
- 		}
- 	}
-diff --git a/include/xen/grant_table.h b/include/xen/grant_table.h
-index c6ef8ffc1a09..b9c937b3a149 100644
---- a/include/xen/grant_table.h
-+++ b/include/xen/grant_table.h
-@@ -200,7 +200,11 @@ void gnttab_free_pages(int nr_pages, struct page **pages);
- 
- struct gnttab_page_cache {
- 	spinlock_t		lock;
-+#ifdef CONFIG_XEN_UNPOPULATED_ALLOC
-+	struct page		*pages;
-+#else
- 	struct list_head	pages;
-+#endif
- 	unsigned int		num_pages;
- };
- 
 -- 
 2.26.2
 
