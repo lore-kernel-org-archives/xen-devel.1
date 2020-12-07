@@ -2,51 +2,45 @@ Return-Path: <SRS0=Mf7K=FL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2065BC433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98EBBC4361B
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:31:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D787C230FA
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:15:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D787C230FA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id 55A00233A0
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Dec 2020 13:31:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55A00233A0
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.46534.82620 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.46567.82644 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmGMe-0004Y1-A0; Mon, 07 Dec 2020 13:15:40 +0000
+	id 1kmGb3-0006eu-4e; Mon, 07 Dec 2020 13:30:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 46534.82620; Mon, 07 Dec 2020 13:15:40 +0000
+Received: by outflank-mailman (output) from mailman id 46567.82644; Mon, 07 Dec 2020 13:30:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmGMe-0004Xr-6F; Mon, 07 Dec 2020 13:15:40 +0000
-Received: by outflank-mailman (input) for mailman id 46534;
- Mon, 07 Dec 2020 13:15:38 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kmGb3-0006en-0w; Mon, 07 Dec 2020 13:30:33 +0000
+Received: by outflank-mailman (input) for mailman id 46567;
+ Mon, 07 Dec 2020 13:30:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=7Pxd=FL=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1kmGMc-0004Wp-DA
- for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 13:15:38 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 63393922-353a-4e65-bb1e-5e7fdb9f805a;
- Mon, 07 Dec 2020 13:15:37 +0000 (UTC)
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-561-4cPFA0F1OAGALI0DNt7TYw-1; Mon, 07 Dec 2020 08:15:35 -0500
-Received: by mail-wr1-f72.google.com with SMTP id n13so4827371wrs.10
- for <xen-devel@lists.xenproject.org>; Mon, 07 Dec 2020 05:15:35 -0800 (PST)
-Received: from localhost.localdomain (101.red-88-21-206.staticip.rima-tde.net.
- [88.21.206.101])
- by smtp.gmail.com with ESMTPSA id c190sm14567845wme.19.2020.12.07.05.15.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Dec 2020 05:15:33 -0800 (PST)
+ (envelope-from <SRS0=DX/D=FL=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kmGb1-0006do-Ju
+ for xen-devel@lists.xenproject.org; Mon, 07 Dec 2020 13:30:31 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id dd845fb6-9b2c-47e7-b339-d9698956272a;
+ Mon, 07 Dec 2020 13:30:30 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5E70EAD09;
+ Mon,  7 Dec 2020 13:30:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,99 +52,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63393922-353a-4e65-bb1e-5e7fdb9f805a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607346937;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+X-Inumbo-ID: dd845fb6-9b2c-47e7-b339-d9698956272a
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1607347829; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6EJ4iyK07Ty3dzRyIkzOuiJNHq5RuTRyKsBVarixwBA=;
-	b=ZL/h83rGNOMGpjTRKxZRwckMp5/hshrf+qb5BGg/Io6IiMEt6z8MBeTBZXayDbkoru0Qwc
-	uKE83oTv3hoeoEdcGXKYKw0ozzafexk+3XS5Iz4xlFTSlQXJz56vj33ygsHjQVkRwtlv+m
-	n/KMhdIM4tzaIeqfSm1MWGH15C+kn3U=
-X-MC-Unique: 4cPFA0F1OAGALI0DNt7TYw-1
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6EJ4iyK07Ty3dzRyIkzOuiJNHq5RuTRyKsBVarixwBA=;
-        b=oYZK2owXKJxg2CEFDxOEWsy1S+cMRQCWKc05E9WESXHXSuYWq6Qs46WMKjh/rV6QR3
-         qnrrMtyuVz0/UiFUF4BnAPkjwh2/e+K+jLc37lNWEzU+FkAa8SoxsUSb+5lIm9bz8GER
-         xYqwFyB/JFBs6umalRGOXGPe9eqaC7GzGkqmM2ySJBD9YUR4qWRulzGrp14wMyNejANM
-         wDldif0zTwbRxfbOSwi4BcpyfWL4NpyTN3dfh/2fYLeIUPlh4q5Hw/0Y5JWDwjgTIE7i
-         WoUh8cbRvwYFwpk8bPcqVd2QZf08sGbyuRqyuyDbZNmHRtspDg/LzA7GCFW/bZNMCFaR
-         7t/w==
-X-Gm-Message-State: AOAM5327Lk2BhYz+XQL2xnIh2w9YOq8VeQYMn7PAcVJiz8Y2MsAP3eom
-	LqVENJ372aMNi4VMbfLvpmZPDVbVojf+Akp8XyKPzWJHwqtif/qJck5+46KzYErBNrjW4OJp1Xy
-	ikFi6d4mPIGBEhFX2K8wCJDocNhY=
-X-Received: by 2002:a5d:4c49:: with SMTP id n9mr20011860wrt.30.1607346934123;
-        Mon, 07 Dec 2020 05:15:34 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJx9XTTmfTlfqcd6ffk3O9VyZaaUJTIkcE7tELrfEhCU+PvMWzkv9xF2oA2F54WLRjz0+k84yQ==
-X-Received: by 2002:a5d:4c49:: with SMTP id n9mr20011839wrt.30.1607346933986;
-        Mon, 07 Dec 2020 05:15:33 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Thomas Huth <thuth@redhat.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Marcelo Tosatti <mtosatti@redhat.com>,
-	kvm@vger.kernel.org,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
-	qemu-s390x@nongnu.org,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Willian Rampazzo <wrampazz@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Cornelia Huck <cohuck@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Claudio Fontana <cfontana@suse.de>,
-	Wainer dos Santos Moschetta <wainersm@redhat.com>
-Subject: [PATCH v3 5/5] gitlab-ci: Add Xen cross-build jobs
-Date: Mon,  7 Dec 2020 14:15:03 +0100
-Message-Id: <20201207131503.3858889-6-philmd@redhat.com>
+	bh=qO8uDSCaCVklC/1884Z3m6tRv+wQIAXdoqVmyxZTomc=;
+	b=Lqq67VCQiRnET2stayy3VmJFaL/+SiunSGCMyjY+/iAT69IgVj1Po9szzlkif8CQKoFjJw
+	O421QkLOJd619Fb3UmAxypDynmuGG8KeDiysJD/h1VK+iW+mTfloQjJWku0CVt7Mb7pfrj
+	jAbOZY6dksmrkLKftV+hq5yZbqKd2ME=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 2/2] xen: don't use page->lru for ZONE_DEVICE memory
+Date: Mon,  7 Dec 2020 14:30:24 +0100
+Message-Id: <20201207133024.16621-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201207131503.3858889-1-philmd@redhat.com>
-References: <20201207131503.3858889-1-philmd@redhat.com>
+In-Reply-To: <20201207133024.16621-1-jgross@suse.com>
+References: <20201207133024.16621-1-jgross@suse.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Cross-build ARM and X86 targets with only Xen accelerator enabled.
+Commit 9e2369c06c8a18 ("xen: add helpers to allocate unpopulated
+memory") introduced usage of ZONE_DEVICE memory for foreign memory
+mappings.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Unfortunately this collides with using page->lru for Xen backend
+private page caches.
+
+Fix that by using page->zone_device_data instead.
+
+Fixes: 9e2369c06c8a18 ("xen: add helpers to allocate unpopulated memory")
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- .gitlab-ci.d/crossbuilds.yml | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ drivers/xen/grant-table.c       | 65 +++++++++++++++++++++++++++++----
+ drivers/xen/unpopulated-alloc.c | 20 +++++-----
+ include/xen/grant_table.h       |  4 ++
+ 3 files changed, 73 insertions(+), 16 deletions(-)
 
-diff --git a/.gitlab-ci.d/crossbuilds.yml b/.gitlab-ci.d/crossbuilds.yml
-index 51896bbc9fb..bd6473a75a7 100644
---- a/.gitlab-ci.d/crossbuilds.yml
-+++ b/.gitlab-ci.d/crossbuilds.yml
-@@ -134,3 +134,17 @@ cross-win64-system:
-   extends: .cross_system_build_job
-   variables:
-     IMAGE: fedora-win64-cross
+diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
+index e2e42912f241..696663a439fe 100644
+--- a/drivers/xen/grant-table.c
++++ b/drivers/xen/grant-table.c
+@@ -813,10 +813,63 @@ int gnttab_alloc_pages(int nr_pages, struct page **pages)
+ }
+ EXPORT_SYMBOL_GPL(gnttab_alloc_pages);
+ 
++#ifdef CONFIG_XEN_UNPOPULATED_ALLOC
++static inline void cache_init(struct gnttab_page_cache *cache)
++{
++	cache->pages = NULL;
++}
 +
-+cross-amd64-xen-only:
-+  extends: .cross_accel_build_job
-+  variables:
-+    IMAGE: debian-amd64-cross
-+    ACCEL: xen
-+    ACCEL_CONFIGURE_OPTS: --disable-tcg --disable-kvm
++static inline bool cache_empty(struct gnttab_page_cache *cache)
++{
++	return !cache->pages;
++}
 +
-+cross-arm64-xen-only:
-+  extends: .cross_accel_build_job
-+  variables:
-+    IMAGE: debian-arm64-cross
-+    ACCEL: xen
-+    ACCEL_CONFIGURE_OPTS: --disable-tcg --disable-kvm
++static inline struct page *cache_deq(struct gnttab_page_cache *cache)
++{
++	struct page *page;
++
++	page = cache->pages;
++	cache->pages = page->zone_device_data;
++
++	return page;
++}
++
++static inline void cache_enq(struct gnttab_page_cache *cache, struct page *page)
++{
++	page->zone_device_data = cache->pages;
++	cache->pages = page;
++}
++#else
++static inline void cache_init(struct gnttab_page_cache *cache)
++{
++	INIT_LIST_HEAD(&cache->pages);
++}
++
++static inline bool cache_empty(struct gnttab_page_cache *cache)
++{
++	return list_empty(&cache->pages);
++}
++
++static inline struct page *cache_deq(struct gnttab_page_cache *cache)
++{
++	struct page *page;
++
++	page = list_first_entry(&cache->pages, struct page, lru);
++	list_del(&page[0]->lru);
++
++	return page;
++}
++
++static inline void cache_enq(struct gnttab_page_cache *cache, struct page *page)
++{
++	list_add(&page->lru, &cache->pages);
++}
++#endif
++
+ void gnttab_page_cache_init(struct gnttab_page_cache *cache)
+ {
+ 	spin_lock_init(&cache->lock);
+-	INIT_LIST_HEAD(&cache->pages);
++	cache_init(cache);
+ 	cache->num_pages = 0;
+ }
+ EXPORT_SYMBOL_GPL(gnttab_page_cache_init);
+@@ -827,13 +880,12 @@ int gnttab_page_cache_get(struct gnttab_page_cache *cache, struct page **page)
+ 
+ 	spin_lock_irqsave(&cache->lock, flags);
+ 
+-	if (list_empty(&cache->pages)) {
++	if (cache_empty(cache)) {
+ 		spin_unlock_irqrestore(&cache->lock, flags);
+ 		return gnttab_alloc_pages(1, page);
+ 	}
+ 
+-	page[0] = list_first_entry(&cache->pages, struct page, lru);
+-	list_del(&page[0]->lru);
++	page[0] = cache_deq(cache);
+ 	cache->num_pages--;
+ 
+ 	spin_unlock_irqrestore(&cache->lock, flags);
+@@ -851,7 +903,7 @@ void gnttab_page_cache_put(struct gnttab_page_cache *cache, struct page **page,
+ 	spin_lock_irqsave(&cache->lock, flags);
+ 
+ 	for (i = 0; i < num; i++)
+-		list_add(&page[i]->lru, &cache->pages);
++		cache_enq(cache, page[i]);
+ 	cache->num_pages += num;
+ 
+ 	spin_unlock_irqrestore(&cache->lock, flags);
+@@ -867,8 +919,7 @@ void gnttab_page_cache_shrink(struct gnttab_page_cache *cache, unsigned int num)
+ 	spin_lock_irqsave(&cache->lock, flags);
+ 
+ 	while (cache->num_pages > num) {
+-		page[i] = list_first_entry(&cache->pages, struct page, lru);
+-		list_del(&page[i]->lru);
++		page[i] = cache_deq(cache);
+ 		cache->num_pages--;
+ 		if (++i == ARRAY_SIZE(page)) {
+ 			spin_unlock_irqrestore(&cache->lock, flags);
+diff --git a/drivers/xen/unpopulated-alloc.c b/drivers/xen/unpopulated-alloc.c
+index 8c512ea550bb..7762c1bb23cb 100644
+--- a/drivers/xen/unpopulated-alloc.c
++++ b/drivers/xen/unpopulated-alloc.c
+@@ -12,7 +12,7 @@
+ #include <xen/xen.h>
+ 
+ static DEFINE_MUTEX(list_lock);
+-static LIST_HEAD(page_list);
++static struct page *page_list;
+ static unsigned int list_count;
+ 
+ static int fill_list(unsigned int nr_pages)
+@@ -84,7 +84,8 @@ static int fill_list(unsigned int nr_pages)
+ 		struct page *pg = virt_to_page(vaddr + PAGE_SIZE * i);
+ 
+ 		BUG_ON(!virt_addr_valid(vaddr + PAGE_SIZE * i));
+-		list_add(&pg->lru, &page_list);
++		pg->zone_device_data = page_list;
++		page_list = pg;
+ 		list_count++;
+ 	}
+ 
+@@ -118,12 +119,10 @@ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages)
+ 	}
+ 
+ 	for (i = 0; i < nr_pages; i++) {
+-		struct page *pg = list_first_entry_or_null(&page_list,
+-							   struct page,
+-							   lru);
++		struct page *pg = page_list;
+ 
+ 		BUG_ON(!pg);
+-		list_del(&pg->lru);
++		page_list = pg->zone_device_data;
+ 		list_count--;
+ 		pages[i] = pg;
+ 
+@@ -134,7 +133,8 @@ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages)
+ 				unsigned int j;
+ 
+ 				for (j = 0; j <= i; j++) {
+-					list_add(&pages[j]->lru, &page_list);
++					pages[j]->zone_device_data = page_list;
++					page_list = pages[j];
+ 					list_count++;
+ 				}
+ 				goto out;
+@@ -160,7 +160,8 @@ void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages)
+ 
+ 	mutex_lock(&list_lock);
+ 	for (i = 0; i < nr_pages; i++) {
+-		list_add(&pages[i]->lru, &page_list);
++		pages[i]->zone_device_data = page_list;
++		page_list = pages[i];
+ 		list_count++;
+ 	}
+ 	mutex_unlock(&list_lock);
+@@ -189,7 +190,8 @@ static int __init init(void)
+ 			struct page *pg =
+ 				pfn_to_page(xen_extra_mem[i].start_pfn + j);
+ 
+-			list_add(&pg->lru, &page_list);
++			pg->zone_device_data = page_list;
++			page_list = pg;
+ 			list_count++;
+ 		}
+ 	}
+diff --git a/include/xen/grant_table.h b/include/xen/grant_table.h
+index c6ef8ffc1a09..b9c937b3a149 100644
+--- a/include/xen/grant_table.h
++++ b/include/xen/grant_table.h
+@@ -200,7 +200,11 @@ void gnttab_free_pages(int nr_pages, struct page **pages);
+ 
+ struct gnttab_page_cache {
+ 	spinlock_t		lock;
++#ifdef CONFIG_XEN_UNPOPULATED_ALLOC
++	struct page		*pages;
++#else
+ 	struct list_head	pages;
++#endif
+ 	unsigned int		num_pages;
+ };
+ 
 -- 
 2.26.2
 
