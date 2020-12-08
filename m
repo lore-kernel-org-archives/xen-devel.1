@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A5FAC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EDF5C19437
 	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23C6E23BAD
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23C6E23BAD
+	by mail.kernel.org (Postfix) with ESMTPS id CA95423BAB
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA95423BAB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.47690.84455 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.47686.84415 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmihG-0000wY-Mp; Tue, 08 Dec 2020 19:30:50 +0000
+	id 1kmihC-0000iu-6Q; Tue, 08 Dec 2020 19:30:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 47690.84455; Tue, 08 Dec 2020 19:30:50 +0000
+Received: by outflank-mailman (output) from mailman id 47686.84415; Tue, 08 Dec 2020 19:30:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmihG-0000vx-90; Tue, 08 Dec 2020 19:30:50 +0000
-Received: by outflank-mailman (input) for mailman id 47690;
- Tue, 08 Dec 2020 19:30:47 +0000
+	id 1kmihC-0000ii-2H; Tue, 08 Dec 2020 19:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 47686;
+ Tue, 08 Dec 2020 19:30:44 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kmihD-0000me-Rc
- for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 19:30:47 +0000
+ (envelope-from <paul@xen.org>) id 1kmihA-0000fk-F1
+ for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 19:30:44 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmihD-0007Lr-3J; Tue, 08 Dec 2020 19:30:47 +0000
+ id 1kmih9-0007LM-AX; Tue, 08 Dec 2020 19:30:43 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=desktop.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmihC-0001p0-S0; Tue, 08 Dec 2020 19:30:47 +0000
+ id 1kmih9-0001p0-2U; Tue, 08 Dec 2020 19:30:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,18 +56,19 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=PWEJza/r2oRNQ2L9vbvH4x3sSK+2PBgCX1brH2xdXO4=; b=HHKbrMRjImxkQgQAxgoYtuuAkK
-	GipesqIQm+HUBkbFZ8A2LveyGLCka5/dk0P4VFfDelXj/oY5rSbcNdQaZ6LxehkQYxCk7yl3WY76/
-	CEfiVCKdmDPagpOjOIz8lfJQ8aWhXhXk/f+HaTB65qP1FbGWWrB8tacX7ULuBUtDatOo=;
+	bh=ksPadBrGqHahICVt3GhGrqsoWKZBYE1bmDQJ3Zcn3LQ=; b=5Z/dwt9+QRVw8sUtsbwUS3/Y/7
+	VL75Y2FmpZXqSRzR2TYjR+IufvJqWkCxE8uVgGcDBlzsPtZfbQ2FTYVOxVIToPsAbuBxAc6pYbQtF
+	i4FX0TzBbZvEtwyFgWMHh9DXhKjaiM6s+px+WOmY8azThfL8/rM4YuMfVsdBckM2vqUQ=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
 	Wei Liu <wl@xen.org>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: [PATCH v6 07/25] libxl: remove extraneous arguments to do_pci_remove() in libxl_pci.c
-Date: Tue,  8 Dec 2020 19:30:15 +0000
-Message-Id: <20201208193033.11306-8-paul@xen.org>
+	Ian Jackson <iwj@xenproject.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v6 03/25] libxl: make libxl__device_list() work correctly for LIBXL__DEVICE_KIND_PCI...
+Date: Tue,  8 Dec 2020 19:30:11 +0000
+Message-Id: <20201208193033.11306-4-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201208193033.11306-1-paul@xen.org>
 References: <20201208193033.11306-1-paul@xen.org>
@@ -76,57 +77,229 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-Both 'domid' and 'pci' are available in 'pci_remove_state' so there is no
-need to also pass them as separate arguments.
+... devices.
+
+Currently there is an assumption built into libxl__device_list() that device
+backends are fully enumarated under the '/libxl' path in xenstore. This is
+not the case for PCI backend devices, which are only properly enumerated
+under '/local/domain/0/backend'.
+
+This patch adds a new get_path() method to libxl__device_type to allow a
+backend implementation (such as PCI) to specify the xenstore path where
+devices are enumerated and modifies libxl__device_list() to use this method
+if it is available. Also, if the get_num() method is defined then the
+from_xenstore() method expects to be passed the backend path without the device
+number concatenated, so this issue is also rectified.
+
+Having made libxl__device_list() work correctly, this patch removes the
+open-coded libxl_pci_device_pci_list() in favour of an evaluation of the
+LIBXL_DEFINE_DEVICE_LIST() macro. This has the side-effect of also defining
+libxl_pci_device_pci_list_free() which will be used in subsequent patches.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
 Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
----
- tools/libs/light/libxl_pci.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+Cc: Anthony PERARD <anthony.perard@citrix.com>
 
+v3:
+ - New in v3 (replacing "libxl: use LIBXL_DEFINE_DEVICE_LIST for pci devices")
+---
+ tools/include/libxl.h             |  7 ++++
+ tools/libs/light/libxl_device.c   | 66 ++++++++++++++++---------------
+ tools/libs/light/libxl_internal.h |  2 +
+ tools/libs/light/libxl_pci.c      | 29 ++++----------
+ 4 files changed, 52 insertions(+), 52 deletions(-)
+
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 733263522bd9..bb7fc893fc13 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -451,6 +451,12 @@
+  */
+ #define LIBXL_HAVE_VIRIDIAN_EX_PROCESSOR_MASKS 1
+ 
++/*
++ * LIBXL_HAVE_DEVICE_PCI_LIST_FREE indicates that the
++ * libxl_device_pci_list_free() function is defined.
++ */
++#define LIBXL_HAVE_DEVICE_PCI_LIST_FREE 1
++
+ /*
+  * libxl ABI compatibility
+  *
+@@ -2321,6 +2327,7 @@ int libxl_device_pci_destroy(libxl_ctx *ctx, uint32_t domid,
+ 
+ libxl_device_pci *libxl_device_pci_list(libxl_ctx *ctx, uint32_t domid,
+                                         int *num);
++void libxl_device_pci_list_free(libxl_device_pci* list, int num);
+ 
+ /*
+  * Turns the current process into a backend device service daemon
+diff --git a/tools/libs/light/libxl_device.c b/tools/libs/light/libxl_device.c
+index e081faf9a94e..ac173a043d31 100644
+--- a/tools/libs/light/libxl_device.c
++++ b/tools/libs/light/libxl_device.c
+@@ -2011,7 +2011,7 @@ void *libxl__device_list(libxl__gc *gc, const libxl__device_type *dt,
+     void *r = NULL;
+     void *list = NULL;
+     void *item = NULL;
+-    char *libxl_path;
++    char *path;
+     char **dir = NULL;
+     unsigned int ndirs = 0;
+     unsigned int ndevs = 0;
+@@ -2019,42 +2019,46 @@ void *libxl__device_list(libxl__gc *gc, const libxl__device_type *dt,
+ 
+     *num = 0;
+ 
+-    libxl_path = GCSPRINTF("%s/device/%s",
+-                           libxl__xs_libxl_path(gc, domid),
+-                           libxl__device_kind_to_string(dt->type));
+-
+-    dir = libxl__xs_directory(gc, XBT_NULL, libxl_path, &ndirs);
++    if (dt->get_path) {
++        rc = dt->get_path(gc, domid, &path);
++        if (rc) goto out;
++    } else {
++        path = GCSPRINTF("%s/device/%s",
++                         libxl__xs_libxl_path(gc, domid),
++                         libxl__device_kind_to_string(dt->type));
++    }
+ 
+-    if (dir && ndirs) {
+-        if (dt->get_num) {
+-            if (ndirs != 1) {
+-                LOGD(ERROR, domid, "multiple entries in %s\n", libxl_path);
+-                rc = ERROR_FAIL;
+-                goto out;
+-            }
+-            rc = dt->get_num(gc, GCSPRINTF("%s/%s", libxl_path, *dir), &ndevs);
+-            if (rc) goto out;
+-        } else {
++    if (dt->get_num) {
++        rc = dt->get_num(gc, path, &ndevs);
++        if (rc) goto out;
++    } else {
++        dir = libxl__xs_directory(gc, XBT_NULL, path, &ndirs);
++        if (dir && ndirs)
+             ndevs = ndirs;
+-        }
+-        list = libxl__malloc(NOGC, dt->dev_elem_size * ndevs);
+-        item = list;
++    }
+ 
+-        while (*num < ndevs) {
+-            dt->init(item);
++    if (!ndevs)
++        return NULL;
+ 
+-            if (dt->from_xenstore) {
+-                int nr = dt->get_num ? *num : atoi(*dir);
+-                char *device_libxl_path = GCSPRINTF("%s/%s", libxl_path, *dir);
+-                rc = dt->from_xenstore(gc, device_libxl_path, nr, item);
+-                if (rc) goto out;
+-            }
++    list = libxl__malloc(NOGC, dt->dev_elem_size * ndevs);
++    item = list;
+ 
+-            item = (uint8_t *)item + dt->dev_elem_size;
+-            ++(*num);
+-            if (!dt->get_num)
+-                ++dir;
++    while (*num < ndevs) {
++        dt->init(item);
++
++        if (dt->from_xenstore) {
++            int nr = dt->get_num ? *num : atoi(*dir);
++            char *device_path = dt->get_num ? path :
++                GCSPRINTF("%s/%d", path, nr);
++
++            rc = dt->from_xenstore(gc, device_path, nr, item);
++            if (rc) goto out;
+         }
++
++        item = (uint8_t *)item + dt->dev_elem_size;
++        ++(*num);
++        if (!dt->get_num)
++            ++dir;
+     }
+ 
+     r = list;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index c2c5a9b92673..d0c23def3c3e 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -3917,6 +3917,7 @@ typedef int (*device_dm_needed_fn_t)(void *, unsigned);
+ typedef void (*device_update_config_fn_t)(libxl__gc *, void *, void *);
+ typedef int (*device_update_devid_fn_t)(libxl__gc *, uint32_t, void *);
+ typedef int (*device_get_num_fn_t)(libxl__gc *, const char *, unsigned int *);
++typedef int (*device_get_path_fn_t)(libxl__gc *, uint32_t, char **);
+ typedef int (*device_from_xenstore_fn_t)(libxl__gc *, const char *,
+                                          libxl_devid, void *);
+ typedef int (*device_set_xenstore_config_fn_t)(libxl__gc *, uint32_t, void *,
+@@ -3941,6 +3942,7 @@ struct libxl__device_type {
+     device_update_config_fn_t       update_config;
+     device_update_devid_fn_t        update_devid;
+     device_get_num_fn_t             get_num;
++    device_get_path_fn_t            get_path;
+     device_from_xenstore_fn_t       from_xenstore;
+     device_set_xenstore_config_fn_t set_xenstore_config;
+ };
 diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index b6d3bd29b718..bcc4d2ef9686 100644
+index 3340076d2cb3..d536702ac420 100644
 --- a/tools/libs/light/libxl_pci.c
 +++ b/tools/libs/light/libxl_pci.c
-@@ -1871,14 +1871,14 @@ static void pci_remove_stubdom_done(libxl__egc *egc,
- static void pci_remove_done(libxl__egc *egc,
-     pci_remove_state *prs, int rc);
+@@ -2393,29 +2393,13 @@ static int libxl__device_pci_get_num(libxl__gc *gc, const char *be_path,
+     return rc;
+ }
  
--static void do_pci_remove(libxl__egc *egc, uint32_t domid,
--                          libxl_device_pci *pci, int force,
--                          pci_remove_state *prs)
-+static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
+-libxl_device_pci *libxl_device_pci_list(libxl_ctx *ctx, uint32_t domid, int *num)
++static int libxl__device_pci_get_path(libxl__gc *gc, uint32_t domid,
++                                      char **path)
  {
-     STATE_AO_GC(prs->aodev->ao);
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-     libxl_device_pci *assigned;
-+    uint32_t domid = prs->domid;
-     libxl_domain_type type = libxl__domain_type(gc, domid);
-+    libxl_device_pci *pci = prs->pci;
-     int rc, num;
-     uint32_t domainid = domid;
+-    GC_INIT(ctx);
+-    char *be_path;
+-    unsigned int n, i;
+-    libxl_device_pci *pcis = NULL;
+-
+-    *num = 0;
+-
+-    be_path = libxl__domain_device_backend_path(gc, 0, domid, 0,
+-                                                LIBXL__DEVICE_KIND_PCI);
+-    if (libxl__device_pci_get_num(gc, be_path, &n))
+-        goto out;
++    *path = libxl__domain_device_backend_path(gc, 0, domid, 0,
++                                              LIBXL__DEVICE_KIND_PCI);
  
-@@ -2275,7 +2275,6 @@ static void device_pci_remove_common_next(libxl__egc *egc,
-     EGC_GC;
+-    pcis = calloc(n, sizeof(libxl_device_pci));
+-
+-    for (i = 0; i < n; i++)
+-        libxl__device_pci_from_xs_be(gc, be_path, i, pcis + i);
+-
+-    *num = n;
+-out:
+-    GC_FREE;
+-    return pcis;
++    return 0;
+ }
  
-     /* Convenience aliases */
--    libxl_domid domid = prs->domid;
-     libxl_device_pci *const pci = prs->pci;
-     libxl__ao_device *const aodev = prs->aodev;
-     const unsigned int pfunc_mask = prs->pfunc_mask;
-@@ -2293,7 +2292,7 @@ static void device_pci_remove_common_next(libxl__egc *egc,
-             } else {
-                 pci->vdevfn = orig_vdev;
-             }
--            do_pci_remove(egc, domid, pci, prs->force, prs);
-+            do_pci_remove(egc, prs);
-             return;
-         }
-     }
+ void libxl__device_pci_destroy_all(libxl__egc *egc, uint32_t domid,
+@@ -2492,10 +2476,13 @@ static int libxl_device_pci_compare(const libxl_device_pci *d1,
+     return COMPARE_PCI(d1, d2);
+ }
+ 
++LIBXL_DEFINE_DEVICE_LIST(pci)
++
+ #define libxl__device_pci_update_devid NULL
+ 
+ DEFINE_DEVICE_TYPE_STRUCT(pci, PCI, pcidevs,
+     .get_num = libxl__device_pci_get_num,
++    .get_path = libxl__device_pci_get_path,
+     .from_xenstore = libxl__device_pci_from_xs_be,
+ );
+ 
 -- 
 2.20.1
 
