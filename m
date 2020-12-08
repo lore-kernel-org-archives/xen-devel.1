@@ -2,45 +2,46 @@ Return-Path: <SRS0=Dhy5=FM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2AF1C433FE
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACA5EC4167B
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3002823B28
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:06:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3002823B28
+	by mail.kernel.org (Postfix) with ESMTPS id 56F6223BAB
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 56F6223BAB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.47675.84368 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.47688.84440 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmiJA-0006Ow-UT; Tue, 08 Dec 2020 19:05:56 +0000
+	id 1kmihF-0000tN-AO; Tue, 08 Dec 2020 19:30:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 47675.84368; Tue, 08 Dec 2020 19:05:56 +0000
+Received: by outflank-mailman (output) from mailman id 47688.84440; Tue, 08 Dec 2020 19:30:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmiJA-0006Op-R5; Tue, 08 Dec 2020 19:05:56 +0000
-Received: by outflank-mailman (input) for mailman id 47675;
- Tue, 08 Dec 2020 19:05:55 +0000
+	id 1kmihF-0000tE-3d; Tue, 08 Dec 2020 19:30:49 +0000
+Received: by outflank-mailman (input) for mailman id 47688;
+ Tue, 08 Dec 2020 19:30:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1kmiJ9-0006Ok-6y
- for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 19:05:55 +0000
+ (envelope-from <paul@xen.org>) id 1kmihC-0000j9-9G
+ for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 19:30:46 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kmiJ5-0006qq-7n; Tue, 08 Dec 2020 19:05:51 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ (envelope-from <paul@xen.org>)
+ id 1kmihB-0007Lc-9h; Tue, 08 Dec 2020 19:30:45 +0000
+Received: from host86-183-162-145.range86-183.btcentralplus.com
+ ([86.183.162.145] helo=desktop.home)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1kmiJ4-0000M6-SJ; Tue, 08 Dec 2020 19:05:51 +0000
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1kmihB-0001p0-1c; Tue, 08 Dec 2020 19:30:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,116 +54,68 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=SPGXI9Cv/DwjHDru6Ui2XCxKm7d0JIz04c5newoCBdg=; b=Y9fZJs8q0IEOdzo8FTUFeFVTHW
-	7cSfw82iJUA1zETFydhmwhq+ZpCwlt2iy97auQNOhBmIFYxQJ1fM3Ri2B1Wcy2AiFUAQOXSTlTdsR
-	bkyXoa//eSwOCWTZTBOO6cyXzMaPfOJteLco1XkS5YQwU/smSDI07Xx8B9RIKg/KfuWc=;
-Subject: Re: [PATCH v2 8/8] xen/arm: Add support for SMMUv3 driver
-To: Rahul Singh <Rahul.Singh@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1606406359.git.rahul.singh@arm.com>
- <de2101687020d18172a2b153f8977a5116d0cd66.1606406359.git.rahul.singh@arm.com>
- <a67bb114-a4a9-651a-338b-123b350ac4b3@xen.org>
- <9C890E87-D438-4232-8647-8EC64FF32C42@arm.com>
- <bb6a710e-4a7a-5db2-fece-b5845e06d092@xen.org>
- <9F9A955B-815C-4771-9EC0-073E9CF3E995@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <156ab0f5-e46d-6b96-7ff1-28ad3a748950@xen.org>
-Date: Tue, 8 Dec 2020 19:05:48 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.5.1
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=GW8F74uuKnBsl/QhgvU4YWCjBsqUt8SG+nfW/x6vTeU=; b=qzD4mITNZ6VcGw1+bulyKQf8t2
+	UbzOveql4qDDGq0xkUmFTBMO5yVsDrzhD1Dbg3RNl8xUbIlT1XjvWCbb9Gj9ry7rtHCIYYKPa/VS5
+	+AzrFzoGUy7ThoppnCBlecRBqJUnx38nx8qv1SSLQ+0RyvrJnTZ139Rm74CadnkOTh1M=;
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Wei Liu <wl@xen.org>,
+	Ian Jackson <iwj@xenproject.org>
+Subject: [PATCH v6 05/25] libxl: add/recover 'rdm_policy' to/from PCI backend in xenstore
+Date: Tue,  8 Dec 2020 19:30:13 +0000
+Message-Id: <20201208193033.11306-6-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20201208193033.11306-1-paul@xen.org>
+References: <20201208193033.11306-1-paul@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <9F9A955B-815C-4771-9EC0-073E9CF3E995@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+From: Paul Durrant <pdurrant@amazon.com>
 
+Other parameters, such as 'msitranslate' and 'permissive' are dealt with
+but 'rdm_policy' appears to be have been completely missed.
 
-On 07/12/2020 18:42, Rahul Singh wrote:
-> Hello Julien,
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Acked-by: Wei Liu <wl@xen.org>
+---
+Cc: Ian Jackson <iwj@xenproject.org>
+---
+ tools/libs/light/libxl_pci.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-Hi,
-
-> 
->> On 7 Dec 2020, at 5:39 pm, Julien Grall <julien@xen.org> wrote:
->>
->>
->>
->> On 07/12/2020 12:12, Rahul Singh wrote:
->>>>> +typedef paddr_t dma_addr_t;
->>>>> +typedef unsigned int gfp_t;
->>>>> +
->>>>> +#define platform_device device
->>>>> +
->>>>> +#define GFP_KERNEL 0
->>>>> +
->>>>> +/* Alias to Xen device tree helpers */
->>>>> +#define device_node dt_device_node
->>>>> +#define of_phandle_args dt_phandle_args
->>>>> +#define of_device_id dt_device_match
->>>>> +#define of_match_node dt_match_node
->>>>> +#define of_property_read_u32(np, pname, out) (!dt_property_read_u32(np, pname, out))
->>>>> +#define of_property_read_bool dt_property_read_bool
->>>>> +#define of_parse_phandle_with_args dt_parse_phandle_with_args
->>>>> +
->>>>> +/* Alias to Xen lock functions */
->>>>> +#define mutex spinlock
->>>>> +#define mutex_init spin_lock_init
->>>>> +#define mutex_lock spin_lock
->>>>> +#define mutex_unlock spin_unlock
->>>>
->>>> Hmm... mutex are not spinlock. Can you explain why this is fine to switch to spinlock?
->>> Yes mutex are not spinlock. As mutex is not implemented in XEN I thought of using spinlock in place of mutex as this is the only locking mechanism available in XEN.
->>> Let me know if there is another blocking lock available in XEN. I will check if we can use that.
->>
->> There are no blocking lock available in Xen so far. However, if Linux were using mutex instead of spinlock, then it likely means they operations in the critical section can be long running.
-> 
-> Yes you are right Linux is using mutex when attaching a device to the SMMU as this operation might take longer time.
->>
->> How did you came to the conclusion that using spinlock in the SMMU driver would be fine?
-> 
-> Mutex is replaced by spinlock  in the SMMU driver when there is a request to assign a device to the guest. As we are in user context at that time its ok to use spinlock.
-
-I am not sure to understand what you mean by "user context" here. Can 
-you clarify it?
-
-> As per my understanding there is one scenario when CPU will spin when there is a request from the user at the same time to assign another device to the SMMU and I think that is very rare.
-
-What "user" are you referring to?
-
-> 
-> Please suggest how we can proceed on this.
-
-I am guessing that what you are saying is the request to 
-assign/de-assign device will be issued by the toolstack and therefore 
-they should be trusted.
-
-My concern here is not about someone waiting on the lock to be released. 
-It is more the fact that using a mutex() is an insight that the 
-operation protected can be long. Depending on the length, this may 
-result to unwanted side effect (e.g. other vCPU not scheduled, RCU stall 
-in dom0, watchdog hit...).
-
-I recall a discussion from a couple of years ago mentioning that STE 
-programming operations can take quite a long time. So I would like to 
-understand how long the operation is meant to last.
-
-For a tech preview, this is probably OK to replace the mutex with an 
-spinlock. But I would not want this to go past the tech preview stage 
-without a proper analysis.
-
-Stefano, what do you think?
-
-Cheers,
-
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index 3f85f0d7620e..2a5a4db976e1 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -61,9 +61,9 @@ static void libxl_create_pci_backend_device(libxl__gc *gc,
+         flexarray_append_pair(back, GCSPRINTF("vdevfn-%d", num), GCSPRINTF("%x", pci->vdevfn));
+     flexarray_append(back, GCSPRINTF("opts-%d", num));
+     flexarray_append(back,
+-              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d",
+-                             pci->msitranslate, pci->power_mgmt,
+-                             pci->permissive));
++              GCSPRINTF("msitranslate=%d,power_mgmt=%d,permissive=%d,rdm_policy=%s",
++                        pci->msitranslate, pci->power_mgmt,
++                        pci->permissive, libxl_rdm_reserve_policy_to_string(pci->rdm_policy)));
+     flexarray_append_pair(back, GCSPRINTF("state-%d", num), GCSPRINTF("%d", XenbusStateInitialising));
+ }
+ 
+@@ -2374,6 +2374,9 @@ static int libxl__device_pci_from_xs_be(libxl__gc *gc,
+             } else if (!strcmp(p, "permissive")) {
+                 p = strtok_r(NULL, ",=", &saveptr);
+                 pci->permissive = atoi(p);
++            } else if (!strcmp(p, "rdm_policy")) {
++                p = strtok_r(NULL, ",=", &saveptr);
++                libxl_rdm_reserve_policy_from_string(p, &pci->rdm_policy);
+             }
+         } while ((p = strtok_r(NULL, ",=", &saveptr)) != NULL);
+     }
 -- 
-Julien Grall
+2.20.1
+
 
