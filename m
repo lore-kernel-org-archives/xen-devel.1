@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A17C19437
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3DD9C4361B
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D42E723C40
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D42E723C40
+	by mail.kernel.org (Postfix) with ESMTPS id 69FD523C40
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69FD523C40
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.47771.84640 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.47760.84512 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmjAO-0005IJ-Pf; Tue, 08 Dec 2020 20:00:56 +0000
+	id 1kmjAE-0004qE-IA; Tue, 08 Dec 2020 20:00:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 47771.84640; Tue, 08 Dec 2020 20:00:56 +0000
+Received: by outflank-mailman (output) from mailman id 47760.84512; Tue, 08 Dec 2020 20:00:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmjAO-0005H0-3E; Tue, 08 Dec 2020 20:00:56 +0000
-Received: by outflank-mailman (input) for mailman id 47771;
- Tue, 08 Dec 2020 20:00:46 +0000
+	id 1kmjAE-0004q2-EX; Tue, 08 Dec 2020 20:00:46 +0000
+Received: by outflank-mailman (input) for mailman id 47760;
+ Tue, 08 Dec 2020 20:00:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kmjAE-0004ph-0u
- for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 20:00:46 +0000
+ (envelope-from <paul@xen.org>) id 1kmjAD-0004oq-Iz
+ for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 20:00:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmjAD-00086U-2S; Tue, 08 Dec 2020 20:00:45 +0000
+ id 1kmjAC-00086G-Nq; Tue, 08 Dec 2020 20:00:44 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=desktop.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmihH-0001p0-Hc; Tue, 08 Dec 2020 19:30:51 +0000
+ id 1kmihL-0001p0-BW; Tue, 08 Dec 2020 19:30:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,19 +56,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=JrM/ntLiiP2bhtck3185mew5Px47koc4HiV7GFFcjR4=; b=RCxDmlYtfDlShoJNgqqQhGRC/K
-	+EC9OxNj1OESZtWMkku0W0BCNiG3fiDS+PpE7+U4FGTwePL+hbhe6knMyxcWCokvstCCXrigXzZWO
-	BElmxg2gL4mcomUqNVz62xHeUus2qDuk9uA8nF1OLBAvW7W/QqBwNAkFmrJZAmxkhCrc=;
+	bh=Kp5JHM/PcDPgoyQFpS4CPrVmdU0OAzBzGq/q/o/48HU=; b=RwuXlpVlGqqwSfs9ckruZrDqFD
+	c7NWlIYHncocBbwbUaf7sSbkXzqOZiFW5VsVz3PrS6OiqyckaYsi/KW5Z+v9bPqm05nHRVE2uKQnx
+	pP1OR8hKo4CSiBDHjvE3K7nbIX/GFrLm7g9w3jENbMvRX5PEU4EwBTmN47EOXHcKCxCY=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
 	Wei Liu <wl@xen.org>,
-	Ian Jackson <iwj@xenproject.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v6 12/25] libxl: make sure callers of libxl_device_pci_list() free the list after use
-Date: Tue,  8 Dec 2020 19:30:20 +0000
-Message-Id: <20201208193033.11306-13-paul@xen.org>
+	Ian Jackson <iwj@xenproject.org>
+Subject: [PATCH v6 16/25] docs/man: improve documentation of PCI_SPEC_STRING...
+Date: Tue,  8 Dec 2020 19:30:24 +0000
+Message-Id: <20201208193033.11306-17-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201208193033.11306-1-paul@xen.org>
 References: <20201208193033.11306-1-paul@xen.org>
@@ -77,290 +75,240 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-A previous patch introduced libxl_device_pci_list_free() which should be used
-by callers of libxl_device_pci_list() to properly dispose of the exported
-'libxl_device_pci' types and the free the memory holding them. Whilst all
-current callers do ensure the memory is freed, only the code in xl's
-pcilist() function actually calls libxl_device_pci_dispose(). As it stands
-this laxity does not lead to any memory leaks, but the simple addition of
-.e.g. a 'string' into the idl definition of 'libxl_device_pci' would lead
-to leaks.
+... and prepare for adding support for non-positional parsing of 'bdf' and
+'vslot' in a subsequent patch.
 
-This patch makes sure all callers of libxl_device_pci_list() can call
-libxl_device_pci_list_free() by keeping copies of 'libxl_device_pci'
-structures inline in 'pci_add_state' and 'pci_remove_state' (and also making
-sure these are properly disposed at the end of the operations) rather
-than keeping pointers to the structures returned by libxl_device_pci_list().
+Also document 'BDF' as a first-class parameter type and fix the documentation
+to state that the default value of 'rdm_policy' is actually 'strict', not
+'relaxed', as can be seen in libxl__device_pci_setdefault().
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/light/libxl_pci.c | 68 ++++++++++++++++++++----------------
- tools/xl/xl_pci.c            |  3 +-
- 2 files changed, 38 insertions(+), 33 deletions(-)
+ docs/man/xl-pci-configuration.5.pod | 177 +++++++++++++++++++++++-----
+ 1 file changed, 148 insertions(+), 29 deletions(-)
 
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 37a6ec9eb443..c555f3ed29c4 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -1025,7 +1025,7 @@ typedef struct pci_add_state {
-     libxl__xswait_state xswait;
-     libxl__ev_qmp qmp;
-     libxl__ev_time timeout;
--    libxl_device_pci *pci;
-+    libxl_device_pci pci;
-     libxl_domid pci_domid;
- } pci_add_state;
+diff --git a/docs/man/xl-pci-configuration.5.pod b/docs/man/xl-pci-configuration.5.pod
+index 72a27bd95dec..4dd73bc498d6 100644
+--- a/docs/man/xl-pci-configuration.5.pod
++++ b/docs/man/xl-pci-configuration.5.pod
+@@ -6,32 +6,105 @@ xl-pci-configuration - XL PCI Configuration Syntax
  
-@@ -1097,7 +1097,7 @@ static void pci_add_qemu_trad_watch_state_cb(libxl__egc *egc,
+ =head1 SYNTAX
  
-     /* Convenience aliases */
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
+-This document specifies the format for B<PCI_SPEC_STRING> which is used by
+-the L<xl.cfg(5)> pci configuration option, and related L<xl(1)> commands.
++This document specifies the format for B<BDF> and B<PCI_SPEC_STRING> which are
++used by the L<xl.cfg(5)> pci configuration option, and related L<xl(1)>
++commands.
  
-     rc = check_qemu_running(gc, domid, xswa, rc, state);
-     if (rc == ERROR_NOT_READY)
-@@ -1118,7 +1118,7 @@ static void pci_add_qmp_device_add(libxl__egc *egc, pci_add_state *pas)
- 
-     /* Convenience aliases */
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
-     libxl__ev_qmp *const qmp = &pas->qmp;
- 
-     rc = libxl__ev_time_register_rel(ao, &pas->timeout,
-@@ -1199,7 +1199,7 @@ static void pci_add_qmp_query_pci_cb(libxl__egc *egc,
-     int dev_slot, dev_func;
- 
-     /* Convenience aliases */
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     if (rc) goto out;
- 
-@@ -1300,7 +1300,7 @@ static void pci_add_dm_done(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     bool starting = pas->starting;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
-     bool hvm = libxl__domain_type(gc, domid) == LIBXL_DOMAIN_TYPE_HVM;
- 
-     libxl__ev_qmp_dispose(gc, &pas->qmp);
-@@ -1516,7 +1516,10 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     GCNEW(pas);
-     pas->aodev = aodev;
-     pas->domid = domid;
--    pas->pci = pci;
+-Each B<PCI_SPEC_STRING> has the form of
+-B<[DDDD:]BB:DD.F[@VSLOT],KEY=VALUE,KEY=VALUE,...> where:
++A B<BDF> has the following form:
 +
-+    libxl_device_pci_copy(CTX, &pas->pci, pci);
-+    pci = &pas->pci;
++    [DDDD:]BB:SS.F
 +
-     pas->starting = starting;
-     pas->callback = device_pci_add_stubdom_done;
- 
-@@ -1555,12 +1558,6 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
- 
-     stubdomid = libxl_get_stubdom_id(ctx, domid);
-     if (stubdomid != 0) {
--        libxl_device_pci *pci_s;
--
--        GCNEW(pci_s);
--        libxl_device_pci_init(pci_s);
--        libxl_device_pci_copy(CTX, pci_s, pci);
--        pas->pci = pci_s;
-         pas->callback = device_pci_add_stubdom_wait;
- 
-         do_pci_add(egc, stubdomid, pas); /* must be last */
-@@ -1619,7 +1616,7 @@ static void device_pci_add_stubdom_done(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     if (rc) goto out;
- 
-@@ -1670,7 +1667,7 @@ static void device_pci_add_done(libxl__egc *egc,
-     EGC_GC;
-     libxl__ao_device *aodev = pas->aodev;
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = pas->pci;
-+    libxl_device_pci *pci = &pas->pci;
- 
-     if (rc) {
-         LOGD(ERROR, domid,
-@@ -1680,6 +1677,7 @@ static void device_pci_add_done(libxl__egc *egc,
-              rc);
-         pci_info_xs_remove(gc, pci, "domid");
-     }
-+    libxl_device_pci_dispose(pci);
-     aodev->rc = rc;
-     aodev->callback(egc, aodev);
- }
-@@ -1770,7 +1768,7 @@ static int qemu_pci_remove_xenstore(libxl__gc *gc, uint32_t domid,
- typedef struct pci_remove_state {
-     libxl__ao_device *aodev;
-     libxl_domid domid;
--    libxl_device_pci *pci;
-+    libxl_device_pci pci;
-     bool force;
-     bool hvm;
-     unsigned int orig_vdev;
-@@ -1812,23 +1810,26 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
- {
-     STATE_AO_GC(prs->aodev->ao);
-     libxl_ctx *ctx = libxl__gc_owner(gc);
--    libxl_device_pci *assigned;
-+    libxl_device_pci *pcis;
-+    bool attached;
-     uint32_t domid = prs->domid;
-     libxl_domain_type type = libxl__domain_type(gc, domid);
--    libxl_device_pci *pci = prs->pci;
-+    libxl_device_pci *pci = &prs->pci;
-     int rc, num;
-     uint32_t domainid = domid;
- 
--    assigned = libxl_device_pci_list(ctx, domid, &num);
--    if (assigned == NULL) {
-+    pcis = libxl_device_pci_list(ctx, domid, &num);
-+    if (!pcis) {
-         rc = ERROR_FAIL;
-         goto out_fail;
-     }
--    libxl__ptr_add(gc, assigned);
++B<DDDD> is the domain number, B<BB> is the bus number, B<SS> is the device (or
++slot) number, and B<F> is the function number. This is the same scheme as
++used in the output of L<lspci(1)> for the device in question. By default
++L<lspci(1)> will omit the domain (B<DDDD>) if it is zero and hence a zero
++value for domain may also be omitted when specifying a B<BDF>.
 +
-+    attached = is_pci_in_array(pcis, num, pci->domain,
-+                               pci->bus, pci->dev, pci->func);
-+    libxl_device_pci_list_free(pcis, num);
- 
-     rc = ERROR_INVAL;
--    if ( !is_pci_in_array(assigned, num, pci->domain,
--                          pci->bus, pci->dev, pci->func) ) {
-+    if (!attached) {
-         LOGD(ERROR, domainid, "PCI device not attached to this domain");
-         goto out_fail;
-     }
-@@ -1928,7 +1929,7 @@ static void pci_remove_qemu_trad_watch_state_cb(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl_domid domid = prs->domid;
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     rc = check_qemu_running(gc, domid, xswa, rc, state);
-     if (rc == ERROR_NOT_READY)
-@@ -1950,7 +1951,7 @@ static void pci_remove_qmp_device_del(libxl__egc *egc,
-     int rc;
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     rc = libxl__ev_time_register_rel(ao, &prs->timeout,
-                                      pci_remove_timeout,
-@@ -2020,7 +2021,7 @@ static void pci_remove_qmp_query_cb(libxl__egc *egc,
- 
-     /* Convenience aliases */
-     libxl__ao *const ao = prs->aodev->ao;
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     if (rc) goto out;
- 
-@@ -2075,7 +2076,7 @@ static void pci_remove_timeout(libxl__egc *egc, libxl__ev_time *ev,
-     pci_remove_state *prs = CONTAINER_OF(ev, *prs, timeout);
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
- 
-     LOGD(WARN, prs->domid, "timed out waiting for DM to remove "
-          PCI_PT_QDEV_ID, pci->bus, pci->dev, pci->func);
-@@ -2096,7 +2097,7 @@ static void pci_remove_detached(libxl__egc *egc,
-     bool isstubdom;
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
-     libxl_domid domid = prs->domid;
- 
-     /* Cleaning QMP states ASAP */
-@@ -2159,7 +2160,7 @@ static void pci_remove_done(libxl__egc *egc,
- 
-     if (rc) goto out;
- 
--    libxl__device_pci_remove_xenstore(gc, prs->domid, prs->pci);
-+    libxl__device_pci_remove_xenstore(gc, prs->domid, &prs->pci);
- out:
-     device_pci_remove_common_next(egc, prs, rc);
- }
-@@ -2177,7 +2178,10 @@ static void libxl__device_pci_remove_common(libxl__egc *egc,
-     GCNEW(prs);
-     prs->aodev = aodev;
-     prs->domid = domid;
--    prs->pci = pci;
++Each B<PCI_SPEC_STRING> has the one of the forms:
 +
-+    libxl_device_pci_copy(CTX, &prs->pci, pci);
-+    pci = &prs->pci;
++=over 4
 +
-     prs->force = force;
-     libxl__xswait_init(&prs->xswait);
-     libxl__ev_qmp_init(&prs->qmp);
-@@ -2212,7 +2216,7 @@ static void device_pci_remove_common_next(libxl__egc *egc,
-     EGC_GC;
- 
-     /* Convenience aliases */
--    libxl_device_pci *const pci = prs->pci;
-+    libxl_device_pci *const pci = &prs->pci;
-     libxl__ao_device *const aodev = prs->aodev;
-     const unsigned int pfunc_mask = prs->pfunc_mask;
-     const unsigned int orig_vdev = prs->orig_vdev;
-@@ -2243,6 +2247,7 @@ out:
- 
-     if (!rc) pci_info_xs_remove(gc, pci, "domid");
- 
-+    libxl_device_pci_dispose(pci);
-     aodev->rc = rc;
-     aodev->callback(egc, aodev);
- }
-@@ -2357,7 +2362,6 @@ void libxl__device_pci_destroy_all(libxl__egc *egc, uint32_t domid,
-     pcis = libxl_device_pci_list(CTX, domid, &num);
-     if ( pcis == NULL )
-         return;
--    libxl__ptr_add(gc, pcis);
- 
-     for (i = 0; i < num; i++) {
-         /* Force remove on shutdown since, on HVM, qemu will not always
-@@ -2368,6 +2372,8 @@ void libxl__device_pci_destroy_all(libxl__egc *egc, uint32_t domid,
-         libxl__device_pci_remove_common(egc, domid, pcis + i, true,
-                                         aodev);
-     }
++    [<bdf>[@<vslot>,][<key>=<value>,]*
++    [<key>=<value>,]*
 +
-+    libxl_device_pci_list_free(pcis, num);
- }
++=back
++
++For example, these strings are equivalent:
  
- int libxl__grant_vga_iomem_permission(libxl__gc *gc, const uint32_t domid,
-diff --git a/tools/xl/xl_pci.c b/tools/xl/xl_pci.c
-index 34fcf5a4fadf..7c0f102ac7b7 100644
---- a/tools/xl/xl_pci.c
-+++ b/tools/xl/xl_pci.c
-@@ -35,9 +35,8 @@ static void pcilist(uint32_t domid)
-         printf("%02x.%01x %04x:%02x:%02x.%01x\n",
-                (pcis[i].vdevfn >> 3) & 0x1f, pcis[i].vdevfn & 0x7,
-                pcis[i].domain, pcis[i].bus, pcis[i].dev, pcis[i].func);
--        libxl_device_pci_dispose(&pcis[i]);
-     }
--    free(pcis);
-+    libxl_device_pci_list_free(pcis, num);
- }
+ =over 4
  
- int main_pcilist(int argc, char **argv)
+-=item B<[DDDD:]BB:DD.F>
++    36:00.0@20,seize=1
++    36:00.0,vslot=20,seize=1
++    bdf=36:00.0,vslot=20,seize=1
+ 
+-Identifies the PCI device from the host perspective in the domain
+-(B<DDDD>), Bus (B<BB>), Device (B<DD>) and Function (B<F>) syntax. This is
+-the same scheme as used in the output of B<lspci(1)> for the device in
+-question.
++=back
++
++More formally, the string is a series of comma-separated keyword/value
++pairs, flags and positional parameters.  Parameters which are not bare
++keywords and which do not contain "=" symbols are assigned to the
++positional parameters, in the order specified below.  The positional
++parameters may also be specified by name.
++
++Each parameter may be specified at most once, either as a positional
++parameter or a named parameter.  Default values apply if the parameter
++is not specified, or if it is specified with an empty value (whether
++positionally or explicitly).
++
++B<NOTE>: In context of B<xl pci-detach> (see L<xl(1)>), parameters other than
++B<bdf> will be ignored.
++
++=head1 Positional Parameters
++
++=over 4
++
++=item B<bdf>=I<BDF>
++
++=over 4
+ 
+-Note: by default B<lspci(1)> will omit the domain (B<DDDD>) if it
+-is zero and it is optional here also. You may specify the function
+-(B<F>) as B<*> to indicate all functions.
++=item Description
+ 
+-=item B<@VSLOT>
++This identifies the PCI device from the host perspective.
+ 
+-Specifies the virtual slot where the guest will see this
+-device. This is equivalent to the B<DD> which the guest sees. In a
+-guest B<DDDD> and B<BB> are C<0000:00>.
++In the context of a B<PCI_SPEC_STRING> you may specify the function (B<F>) as
++B<*> to indicate all functions of a multi-function device.
+ 
+-=item B<permissive=BOOLEAN>
++=item Default Value
++
++None. This parameter is mandatory as it identifies the device.
++
++=back
++
++=item B<vslot>=I<NUMBER>
++
++=over 4
++
++=item Description
++
++Specifies the virtual slot (device) number where the guest will see this
++device. For example, running L<lspci(1)> in a Linux guest where B<vslot>
++was specified as C<8> would identify the device as C<00:08.0>. Virtual domain
++and bus numbers are always 0.
++
++B<NOTE:> This parameter is always parsed as a hexidecimal value.
++
++=item Default Value
++
++None. This parameter is not mandatory. An available B<vslot> will be selected
++if this parameter is not specified.
++
++=back
++
++=back
++
++=head1 Other Parameters and Flags
++
++=over 4
++
++=item B<permissive>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ By default pciback only allows PV guests to write "known safe" values
+ into PCI configuration space, likewise QEMU (both qemu-xen and
+@@ -46,33 +119,79 @@ more control over the device, which may have security or stability
+ implications.  It is recommended to only enable this option for
+ trusted VMs under administrator's control.
+ 
+-=item B<msitranslate=BOOLEAN>
++=item Default Value
++
++0
++
++=back
++
++=item B<msitranslate>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ Specifies that MSI-INTx translation should be turned on for the PCI
+ device. When enabled, MSI-INTx translation will always enable MSI on
+-the PCI device regardless of whether the guest uses INTx or MSI. Some
+-device drivers, such as NVIDIA's, detect an inconsistency and do not
++the PCI device regardless of whether the guest uses INTx or MSI.
++
++=item Default Value
++
++Some device drivers, such as NVIDIA's, detect an inconsistency and do not
+ function when this option is enabled. Therefore the default is false (0).
+ 
+-=item B<seize=BOOLEAN>
++=back
++
++=item B<seize>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+-Tells B<xl> to automatically attempt to re-assign a device to
+-pciback if it is not already assigned.
++Tells L<xl(1)> to automatically attempt to make the device assignable to
++guests if that has not already been done by the B<pci-assignable-add>
++command.
+ 
+-B<WARNING:> If you set this option, B<xl> will gladly re-assign a critical
++B<WARNING:> If you set this option, L<xl> will gladly re-assign a critical
+ system device, such as a network or a disk controller being used by
+ dom0 without confirmation.  Please use with care.
+ 
+-=item B<power_mgmt=BOOLEAN>
++=item Default Value
++
++0
++
++=back
++
++=item B<power_mgmt>=I<BOOLEAN>
++
++=over 4
++
++=item Description
+ 
+ B<(HVM only)> Specifies that the VM should be able to program the
+-D0-D3hot power management states for the PCI device. The default is false (0).
++D0-D3hot power management states for the PCI device.
++
++=item Default Value
++
++0
+ 
+-=item B<rdm_policy=STRING>
++=back
++
++=item B<rdm_policy>=I<STRING>
++
++=over 4
++
++=item Description
+ 
+ B<(HVM/x86 only)> This is the same as the policy setting inside the B<rdm>
+-option but just specific to a given device. The default is "relaxed".
++option in L<xl.cfg(5)> but just specific to a given device.
+ 
+-Note: this would override global B<rdm> option.
++B<NOTE>: This overrides the global B<rdm> option.
++
++=item Default Value
++
++"strict"
++
++=back
+ 
+ =back
 -- 
 2.20.1
 
