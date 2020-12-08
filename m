@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8569FC4167B
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BF5DC19437
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 398A823C40
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 398A823C40
+	by mail.kernel.org (Postfix) with ESMTPS id C18F723C40
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 20:01:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C18F723C40
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.47766.84577 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.47772.84659 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmjAI-0004zB-Mr; Tue, 08 Dec 2020 20:00:50 +0000
+	id 1kmjAS-0005Pb-H6; Tue, 08 Dec 2020 20:01:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 47766.84577; Tue, 08 Dec 2020 20:00:50 +0000
+Received: by outflank-mailman (output) from mailman id 47772.84659; Tue, 08 Dec 2020 20:01:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmjAI-0004yQ-3r; Tue, 08 Dec 2020 20:00:50 +0000
-Received: by outflank-mailman (input) for mailman id 47766;
- Tue, 08 Dec 2020 20:00:45 +0000
+	id 1kmjAQ-0005OB-LH; Tue, 08 Dec 2020 20:00:58 +0000
+Received: by outflank-mailman (input) for mailman id 47772;
+ Tue, 08 Dec 2020 20:00:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kmjAD-0004pG-NT
- for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 20:00:45 +0000
+ (envelope-from <paul@xen.org>) id 1kmjAE-0004pj-1u
+ for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 20:00:46 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmjAC-00086M-TG; Tue, 08 Dec 2020 20:00:44 +0000
+ id 1kmjAD-00086s-B8; Tue, 08 Dec 2020 20:00:45 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=desktop.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmihQ-0001p0-OP; Tue, 08 Dec 2020 19:31:00 +0000
+ id 1kmihO-0001p0-Uv; Tue, 08 Dec 2020 19:30:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,18 +56,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=Ys3y67RaqaXIN5X7X+CEx/lpFH/KIEaBqkv7RhCev3w=; b=gjhvluOV6aC2KdnKGAZACFnyMU
-	nyxcR2eTaiUWLCy9OTGdiB1TD6pksTH2nvHdnHbDczzMEku+k5HEmAbt4N0ZUwiyYKMsMu3hRz3+b
-	FT4FgdnK6QVnIORwlRvTvWUQVEmaSya8jMrKJmIGvZYNXwq/rWXoHYPrlnETEFn1AyrA=;
+	bh=kHLySQ+itOx1hiauIp8pIwnhad1Xuv7b9R5clDzcs+U=; b=6LKp47s9wKFE4yMHdI3ddHL7em
+	G7Q9FNCvKRA1VkFCJG0xOSdrFHvt9gCr4kMyaKyWXCVzt33c0fFeQ8+S49JocEA7I1eBUJTPKa5lA
+	/aJ1wQ4jhEIgAZI8oVw9jCMm9Nd2IxknhewWE17k7mSIf7FfyUcDGoI+BuEFTPgGd1w8=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v6 22/25] libxl: introduce libxl_pci_bdf_assignable_add/remove/list/list_free(), ...
-Date: Tue,  8 Dec 2020 19:30:30 +0000
-Message-Id: <20201208193033.11306-23-paul@xen.org>
+	Ian Jackson <iwj@xenproject.org>
+Subject: [PATCH v6 20/25] docs/man: modify xl(1) in preparation for naming of assignable devices
+Date: Tue,  8 Dec 2020 19:30:28 +0000
+Message-Id: <20201208193033.11306-21-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201208193033.11306-1-paul@xen.org>
 References: <20201208193033.11306-1-paul@xen.org>
@@ -76,389 +75,65 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-which support naming and use 'libxl_pci_bdf' rather than 'libxl_device_pci',
-as replacements for libxl_device_pci_assignable_add/remove/list/list_free().
-
-libxl_pci_bdf_assignable_add() takes a 'name' parameter which is stored in
-xenstore and facilitates two addtional functions added by this patch:
-libxl_pci_bdf_assignable_name2bdf() and libxl_pci_bdf_assignable_bdf2name().
-Currently there are no callers of these two functions. They will be added in
-a subsequent patch.
-
-libxl_device_pci_assignable_add/remove/list/list_free() are left in place
-for compatibility but are re-implemented in terms of the newly introduced
-functions.
+A subsequent patch will introduce code to allow a name to be specified to
+'xl pci-assignable-add' such that the assignable device may be referred to
+by than name in subsequent operations.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Acked-by: Wei Liu <wl@xen.org>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Wei Liu <wl@xen.org>
-Cc: Anthony PERARD <anthony.perard@citrix.com>
-
-v6:
- - New in v6 (replacing remaining code from "libxl: modify
-   libxl_device_pci_assignable_add/remove/list/list_free()...")
 ---
- tools/include/libxl.h        |  36 ++++++--
- tools/libs/light/libxl_pci.c | 166 ++++++++++++++++++++++++++++++-----
- 2 files changed, 171 insertions(+), 31 deletions(-)
+ docs/man/xl.1.pod.in | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 1fa4c5806df9..fda611f88960 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -469,6 +469,13 @@
-  */
- #define LIBXL_HAVE_PCI_BDF 1
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index af31d2b5727a..f4779d8fd654 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -1595,19 +1595,23 @@ List virtual network interfaces for a domain.
  
-+/*
-+ * LIBXL_HAVE_PCI_ASSIGNABLE_BDF indicates that the
-+ * libxl_pci_bdf_assignable_add/remove/list/list_free() functions all
-+ * exist.
-+ */
-+#define LIBXL_HAVE_PCI_ASSIGNABLE_BDF 1
-+
- /*
-  * libxl ABI compatibility
-  *
-@@ -2357,9 +2364,9 @@ int libxl_device_events_handler(libxl_ctx *ctx,
-                                 LIBXL_EXTERNAL_CALLERS_ONLY;
+ =over 4
  
- /*
-- * Functions related to making devices assignable -- that is, bound to
-- * the pciback driver, ready to be given to a guest via
-- * libxl_pci_device_add.
-+ * Functions related to making PCI devices with the specified BDF
-+ * assignable -- that is, bound to the pciback driver, ready to be given to
-+ * a guest via libxl_pci_device_add.
-  *
-  * - ..._add() will unbind the device from its current driver (if
-  * already bound) and re-bind it to pciback; at that point it will be
-@@ -2371,16 +2378,31 @@ int libxl_device_events_handler(libxl_ctx *ctx,
-  * rebind is non-zero, attempt to assign it back to the driver
-  * from whence it came.
-  *
-- * - ..._list() will return a list of the PCI devices available to be
-+ * - ..._list() will return a list of the PCI BDFs available to be
-  * assigned.
-  *
-  * add and remove are idempotent: if the device in question is already
-  * added or is not bound, the functions will emit a warning but return
-  * SUCCESS.
-  */
--int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
--int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci, int rebind);
--libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num);
-+int libxl_pci_bdf_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-+                                 const char *name, int rebind);
-+int libxl_pci_bdf_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-+                                    int rebind);
-+libxl_pci_bdf *libxl_pci_bdf_assignable_list(libxl_ctx *ctx, int *num);
-+void libxl_pci_bdf_assignable_list_free(libxl_pci_bdf *list, int num);
-+libxl_pci_bdf *libxl_pci_bdf_assignable_name2bdf(libxl_ctx *ctx,
-+                                                 const char *name);
-+char *libxl_pci_bdf_assignable_bdf2name(libxl_ctx *ctx,
-+                                        libxl_pci_bdf *pcibdf);
-+
-+/* Compatibility functions - Use libxl_pci_bdf_assignable_* instead */
-+int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci,
-+                                    int rebind);
-+int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci,
-+                                       int rebind);
-+libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx,
-+                                                   int *num);
- void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num);
+-=item B<pci-assignable-list>
++=item B<pci-assignable-list> [I<-n>]
  
- /* CPUID handling */
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 448fe969514b..e11574e73f59 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -426,10 +426,10 @@ static void pci_info_xs_remove(libxl__gc *gc, libxl_pci_bdf *pcibdf,
-     xs_rm(ctx->xsh, XBT_NULL, path);
- }
+ List all the B<BDF> of assignable PCI devices. See
+-L<xl-pci-configuration(5)> for more information.
++L<xl-pci-configuration(5)> for more information. If the -n option is
++specified then any name supplied when the device was made assignable
++will also be displayed.
  
--libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-+libxl_pci_bdf *libxl_pci_bdf_assignable_list(libxl_ctx *ctx, int *num)
- {
-     GC_INIT(ctx);
--    libxl_device_pci *pcis = NULL, *new;
-+    libxl_pci_bdf *pcibdfs = NULL, *new;
-     struct dirent *de;
-     DIR *dir;
+ These are devices in the system which are configured to be
+ available for passthrough and are bound to a suitable PCI
+ backend driver in domain 0 rather than a real driver.
  
-@@ -450,17 +450,17 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-         if (sscanf(de->d_name, PCI_BDF, &dom, &bus, &dev, &func) != 4)
-             continue;
+-=item B<pci-assignable-add> I<BDF>
++=item B<pci-assignable-add> [I<-n NAME>] I<BDF>
  
--        new = realloc(pcis, ((*num) + 1) * sizeof(*new));
-+        new = realloc(pcibdfs, ((*num) + 1) * sizeof(*new));
-         if (NULL == new)
-             continue;
+ Make the device at B<BDF> assignable to guests. See
+-L<xl-pci-configuration(5)> for more information.
++L<xl-pci-configuration(5)> for more information. If the -n option is
++supplied then the assignable device entry will the named with the
++given B<NAME>.
  
--        pcis = new;
--        new = pcis + *num;
-+        pcibdfs = new;
-+        new = pcibdfs + *num;
+ This will bind the device to the pciback driver and assign it to the
+ "quarantine domain".  If it is already bound to a driver, it will
+@@ -1622,10 +1626,11 @@ not to do this on a device critical to domain 0's operation, such as
+ storage controllers, network interfaces, or GPUs that are currently
+ being used.
  
--        libxl_device_pci_init(new);
--        pcibdf_struct_fill(&new->bdf, dom, bus, dev, func);
-+        libxl_pci_bdf_init(new);
-+        pcibdf_struct_fill(new, dom, bus, dev, func);
+-=item B<pci-assignable-remove> [I<-r>] I<BDF>
++=item B<pci-assignable-remove> [I<-r>] I<BDF>|I<NAME>
  
--        if (pci_info_xs_read(gc, &new->bdf, "domid")) /* already assigned */
-+        if (pci_info_xs_read(gc, new, "domid")) /* already assigned */
-             continue;
+-Make the device at B<BDF> not assignable to guests. See
+-L<xl-pci-configuration(5)> for more information.
++Make a device non-assignable to guests. The device may be identified
++either by its B<BDF> or the B<NAME> supplied when the device was made
++assignable. See L<xl-pci-configuration(5)> for more information.
  
-         (*num)++;
-@@ -469,15 +469,15 @@ libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx, int *num)
-     closedir(dir);
- out:
-     GC_FREE;
--    return pcis;
-+    return pcibdfs;
- }
- 
--void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num)
-+void libxl_pci_bdf_assignable_list_free(libxl_pci_bdf *list, int num)
- {
-     int i;
- 
-     for (i = 0; i < num; i++)
--        libxl_device_pci_dispose(&list[i]);
-+        libxl_pci_bdf_dispose(&list[i]);
- 
-     free(list);
- }
-@@ -745,6 +745,7 @@ static int pciback_dev_unassign(libxl__gc *gc, libxl_pci_bdf *pcibdf)
- 
- static int libxl__pci_bdf_assignable_add(libxl__gc *gc,
-                                          libxl_pci_bdf *pcibdf,
-+                                         const char *name,
-                                          int rebind)
- {
-     libxl_ctx *ctx = libxl__gc_owner(gc);
-@@ -753,6 +754,23 @@ static int libxl__pci_bdf_assignable_add(libxl__gc *gc,
-     int rc;
-     struct stat st;
- 
-+    /* Sanitise any name that was passed */
-+    if (name) {
-+        unsigned int i, n = strlen(name);
-+
-+        if (n > 64) { /* Reasonable upper bound on name length */
-+            LOG(ERROR, "Name too long");
-+            return ERROR_FAIL;
-+        }
-+
-+        for (i = 0; i < n; i++) {
-+            if (!isgraph(name[i])) {
-+                LOG(ERROR, "Names may only include printable characters");
-+                return ERROR_FAIL;
-+            }
-+        }
-+    }
-+
-     /* Local copy for convenience */
-     dom = pcibdf->domain;
-     bus = pcibdf->bus;
-@@ -773,7 +791,7 @@ static int libxl__pci_bdf_assignable_add(libxl__gc *gc,
-     }
-     if ( rc ) {
-         LOG(WARN, PCI_BDF" already assigned to pciback", dom, bus, dev, func);
--        goto quarantine;
-+        goto name;
-     }
- 
-     /* Check to see if there's already a driver that we need to unbind from */
-@@ -804,7 +822,12 @@ static int libxl__pci_bdf_assignable_add(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
- 
--quarantine:
-+name:
-+    if (name)
-+        pci_info_xs_write(gc, pcibdf, "name", name);
-+    else
-+        pci_info_xs_remove(gc, pcibdf, "name");
-+
-     /*
-      * DOMID_IO is just a sentinel domain, without any actual mappings,
-      * so always pass XEN_DOMCTL_DEV_RDM_RELAXED to avoid assignment being
-@@ -868,34 +891,87 @@ static int libxl__pci_bdf_assignable_remove(libxl__gc *gc,
-         }
-     }
- 
-+    pci_info_xs_remove(gc, pcibdf, "name");
-+
-     return 0;
- }
- 
--int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci,
--                                    int rebind)
-+int libxl_pci_bdf_assignable_add(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-+                                 const char *name, int rebind)
- {
-     GC_INIT(ctx);
-     int rc;
- 
--    rc = libxl__pci_bdf_assignable_add(gc, &pci->bdf, rebind);
-+    rc = libxl__pci_bdf_assignable_add(gc, pcibdf, name, rebind);
- 
-     GC_FREE;
-     return rc;
- }
- 
- 
--int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci,
--                                       int rebind)
-+int libxl_pci_bdf_assignable_remove(libxl_ctx *ctx, libxl_pci_bdf *pcibdf,
-+                                    int rebind)
- {
-     GC_INIT(ctx);
-     int rc;
- 
--    rc = libxl__pci_bdf_assignable_remove(gc, &pci->bdf, rebind);
-+    rc = libxl__pci_bdf_assignable_remove(gc, pcibdf, rebind);
- 
-     GC_FREE;
-     return rc;
- }
- 
-+libxl_pci_bdf *libxl_pci_bdf_assignable_name2bdf(libxl_ctx *ctx,
-+                                                 const char *name)
-+{
-+    GC_INIT(ctx);
-+    char **bdfs;
-+    libxl_pci_bdf *pcibdf = NULL;
-+    unsigned int i, n;
-+
-+    bdfs = libxl__xs_directory(gc, XBT_NULL, PCI_INFO_PATH, &n);
-+    if (!n)
-+        goto out;
-+
-+    pcibdf = calloc(1, sizeof(*pcibdf));
-+    if (!pcibdf)
-+        goto out;
-+
-+    for (i = 0; i < n; i++) {
-+        unsigned dom, bus, dev, func;
-+        const char *tmp;
-+
-+        if (sscanf(bdfs[i], PCI_BDF_XSPATH, &dom, &bus, &dev, &func) != 4)
-+            continue;
-+
-+        pcibdf_struct_fill(pcibdf, dom, bus, dev, func);
-+
-+        tmp = pci_info_xs_read(gc, pcibdf, "name");
-+        if (tmp && !strcmp(tmp, name))
-+            goto out;
-+    }
-+
-+    free(pcibdf);
-+    pcibdf = NULL;
-+
-+out:
-+    GC_FREE;
-+    return pcibdf;
-+}
-+
-+char *libxl_pci_bdf_assignable_bdf2name(libxl_ctx *ctx,
-+                                        libxl_pci_bdf *pcibdf)
-+{
-+    GC_INIT(ctx);
-+    char *name = NULL, *tmp = pci_info_xs_read(gc, pcibdf, "name");
-+
-+    if (tmp)
-+        name = strdup(tmp);
-+
-+    GC_FREE;
-+    return name;
-+}
-+
- /*
-  * This function checks that all functions of a device are bound to pciback
-  * driver. It also initialises a bit-mask of which function numbers are present
-@@ -1490,17 +1566,17 @@ int libxl_device_pci_add(libxl_ctx *ctx, uint32_t domid,
- 
- static bool is_bdf_assignable(libxl_ctx *ctx, libxl_pci_bdf *pcibdf)
- {
--    libxl_device_pci *pcis;
-+    libxl_pci_bdf *pcibdfs;
-     int num, i;
- 
--    pcis = libxl_device_pci_assignable_list(ctx, &num);
-+    pcibdfs = libxl_pci_bdf_assignable_list(ctx, &num);
- 
-     for (i = 0; i < num; i++) {
--        if (COMPARE_BDF(pcibdf, &pcis[i].bdf))
-+        if (COMPARE_BDF(pcibdf, &pcibdfs[i]))
-             break;
-     }
- 
--    libxl_device_pci_assignable_list_free(pcis, num);
-+    libxl_pci_bdf_assignable_list_free(pcibdfs, num);
- 
-     return i < num;
- }
-@@ -1551,7 +1627,7 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     if (rc) goto out;
- 
-     if (pci->seize && !pciback_dev_is_assigned(gc, &pci->bdf)) {
--        rc = libxl__pci_bdf_assignable_add(gc, &pci->bdf, 1);
-+        rc = libxl__pci_bdf_assignable_add(gc, &pci->bdf, NULL, 1);
-         if ( rc )
-             goto out;
-     }
-@@ -2449,6 +2525,48 @@ DEFINE_DEVICE_TYPE_STRUCT(pci, PCI, pcidevs,
-     .from_xenstore = libxl__device_pci_from_xs_be,
- );
- 
-+int libxl_device_pci_assignable_add(libxl_ctx *ctx, libxl_device_pci *pci,
-+                                    int rebind)
-+{
-+    return libxl_pci_bdf_assignable_add(ctx, &pci->bdf, NULL, rebind);
-+}
-+
-+int libxl_device_pci_assignable_remove(libxl_ctx *ctx, libxl_device_pci *pci,
-+                                       int rebind)
-+{
-+    return libxl_pci_bdf_assignable_remove(ctx, &pci->bdf, rebind);
-+}
-+
-+libxl_device_pci *libxl_device_pci_assignable_list(libxl_ctx *ctx,
-+                                                   int *num)
-+{
-+    libxl_pci_bdf *pcibdfs = libxl_pci_bdf_assignable_list(ctx, num);
-+    libxl_device_pci *pcis;
-+    unsigned int i;
-+
-+    if (!pcibdfs)
-+        return NULL;
-+
-+    pcis = calloc(*num, sizeof(*pcis));
-+    if (!pcis) {
-+        libxl_pci_bdf_assignable_list_free(pcibdfs, *num);
-+        return NULL;
-+    }
-+
-+    for (i = 0; i < *num; i++) {
-+        libxl_device_pci_init(&pcis[i]);
-+        libxl_pci_bdf_copy(ctx, &pcis[i].bdf, &pcibdfs[i]);
-+    }
-+
-+    libxl_pci_bdf_assignable_list_free(pcibdfs, *num);
-+    return pcis;
-+}
-+
-+void libxl_device_pci_assignable_list_free(libxl_device_pci *list, int num)
-+{
-+    libxl_device_pci_list_free(list, num);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
+ This will at least unbind the device from pciback, and
+ re-assign it from the "quarantine domain" back to domain 0.  If the -r
 -- 
 2.20.1
 
