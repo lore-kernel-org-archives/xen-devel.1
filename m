@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EF20C4361B
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 327CCC2BB40
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D852823BAB
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D852823BAB
+	by mail.kernel.org (Postfix) with ESMTPS id DBDD423BAB
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Dec 2020 19:31:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DBDD423BAB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.47691.84467 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.47685.84400 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmihH-0000yf-M3; Tue, 08 Dec 2020 19:30:51 +0000
+	id 1kmihA-0000g8-S4; Tue, 08 Dec 2020 19:30:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 47691.84467; Tue, 08 Dec 2020 19:30:51 +0000
+Received: by outflank-mailman (output) from mailman id 47685.84400; Tue, 08 Dec 2020 19:30:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmihH-0000yD-22; Tue, 08 Dec 2020 19:30:51 +0000
-Received: by outflank-mailman (input) for mailman id 47691;
- Tue, 08 Dec 2020 19:30:48 +0000
+	id 1kmihA-0000fm-GA; Tue, 08 Dec 2020 19:30:44 +0000
+Received: by outflank-mailman (input) for mailman id 47685;
+ Tue, 08 Dec 2020 19:30:43 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>) id 1kmihE-0000sP-Lu
- for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 19:30:48 +0000
+ (envelope-from <paul@xen.org>) id 1kmih9-0000f4-8j
+ for xen-devel@lists.xenproject.org; Tue, 08 Dec 2020 19:30:43 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmihE-0007M1-0G; Tue, 08 Dec 2020 19:30:48 +0000
+ id 1kmih8-0007LB-BI; Tue, 08 Dec 2020 19:30:42 +0000
 Received: from host86-183-162-145.range86-183.btcentralplus.com
  ([86.183.162.145] helo=desktop.home)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1kmihD-0001p0-Os; Tue, 08 Dec 2020 19:30:47 +0000
+ id 1kmih8-0001p0-2Y; Tue, 08 Dec 2020 19:30:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,18 +56,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=+dD0y2vMDsFbroYpFk5v6m+aYVM8RV4tZrBb3da8/jw=; b=TlA2ilgu/AUIE/KCSL4zXASUlb
-	WxqaveG4IPdmWcdkPTk0st60CuH58cBDtw9D9m0JueDWcNFL7eXBlxm3+BPhjuXJfA1bE37bgsAzR
-	3WMBgWS5wjZ4pjtLgMH7xq0CBZkHppZAUONPZc6rMO7vX4oqieQDp6dH0Tc0+UAPgXKY=;
+	bh=riw3MyToWucKYseT/Zi4z6kwfCRW/U/hR5lNoqu9wNw=; b=wM0QsmSD20dySYYbE3Jg39hB0c
+	OInlEuQXAzvj69pClMJ3pA9VryqeWHC5CxOyUUB7C6XqEkGKktQ064sQVqwCqJt162B91W5cOKz1z
+	8Td0Vp47SoA75TW9lvTDagv/x7DmCjKvjddBYFa9YHbE+Ud+h2sMbiHrmz2vTN1V821g=;
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Paul Durrant <pdurrant@amazon.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: [PATCH v6 08/25] libxl: stop using aodev->device_config in libxl__device_pci_add()...
-Date: Tue,  8 Dec 2020 19:30:16 +0000
-Message-Id: <20201208193033.11306-9-paul@xen.org>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v6 02/25] xl: s/pcidev/pci where possible
+Date: Tue,  8 Dec 2020 19:30:10 +0000
+Message-Id: <20201208193033.11306-3-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20201208193033.11306-1-paul@xen.org>
 References: <20201208193033.11306-1-paul@xen.org>
@@ -76,110 +76,246 @@ Content-Transfer-Encoding: 8bit
 
 From: Paul Durrant <pdurrant@amazon.com>
 
-... to hold a pointer to the device.
+To improve naming consistency, replaces occurrences of 'pcidev' with 'pci'.
+The only remaining use of the term should be in relation to
+'libxl_domain_config' where there are fields named 'pcidevs' and 'num_pcidevs'.
 
-There is already a 'pci' field in 'pci_add_state' so simply use that from
-the start. This also allows the 'pci' (#3) argument to be dropped from
-do_pci_add().
-
-NOTE: This patch also changes the type of the 'pci_domid' field in
-      'pci_add_state' from 'int' to 'libxl_domid' which is more appropriate
-      given what the field is used for.
+Purely cosmetic. No functional change.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Acked-by: Wei Liu <wl@xen.org>
 ---
 Cc: Ian Jackson <iwj@xenproject.org>
----
- tools/libs/light/libxl_pci.c | 19 +++++++------------
- 1 file changed, 7 insertions(+), 12 deletions(-)
+Cc: Wei Liu <wl@xen.org>
+Cc: Anthony PERARD <anthony.perard@citrix.com>
 
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index bcc4d2ef9686..be2145222d2b 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -1074,7 +1074,7 @@ typedef struct pci_add_state {
-     libxl__ev_qmp qmp;
-     libxl__ev_time timeout;
-     libxl_device_pci *pci;
--    int pci_domid;
-+    libxl_domid pci_domid;
- } pci_add_state;
- 
- static void pci_add_qemu_trad_watch_state_cb(libxl__egc *egc,
-@@ -1091,7 +1091,6 @@ static void pci_add_dm_done(libxl__egc *,
- 
- static void do_pci_add(libxl__egc *egc,
-                        libxl_domid domid,
--                       libxl_device_pci *pci,
-                        pci_add_state *pas)
- {
-     STATE_AO_GC(pas->aodev->ao);
-@@ -1101,7 +1100,6 @@ static void do_pci_add(libxl__egc *egc,
-     /* init pci_add_state */
-     libxl__xswait_init(&pas->xswait);
-     libxl__ev_qmp_init(&pas->qmp);
--    pas->pci = pci;
-     pas->pci_domid = domid;
-     libxl__ev_time_init(&pas->timeout);
- 
-@@ -1564,13 +1562,10 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-     int stubdomid = 0;
-     pci_add_state *pas;
- 
--    /* Store *pci to be used by callbacks */
--    aodev->device_config = pci;
--    aodev->device_type = &libxl__pci_devtype;
+v6:
+ - New in v6 (split out from "xl / libxl: s/pcidev/pci and remove
+   DEFINE_DEVICE_TYPE_STRUCT_X")
+---
+ tools/xl/xl_parse.c | 22 +++++++--------
+ tools/xl/xl_pci.c   | 68 ++++++++++++++++++++++-----------------------
+ 2 files changed, 45 insertions(+), 45 deletions(-)
+
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index cae8eb679c5a..4ebf39620ae7 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -1473,21 +1473,21 @@ void parse_config_data(const char *config_source,
+         d_config->num_pcidevs = 0;
+         d_config->pcidevs = NULL;
+         for(i = 0; (buf = xlu_cfg_get_listitem (pcis, i)) != NULL; i++) {
+-            libxl_device_pci *pcidev;
 -
-     GCNEW(pas);
-     pas->aodev = aodev;
-     pas->domid = domid;
-+    pas->pci = pci;
-     pas->starting = starting;
-     pas->callback = device_pci_add_stubdom_done;
+-            pcidev = ARRAY_EXTEND_INIT_NODEVID(d_config->pcidevs,
+-                                               d_config->num_pcidevs,
+-                                               libxl_device_pci_init);
+-            pcidev->msitranslate = pci_msitranslate;
+-            pcidev->power_mgmt = pci_power_mgmt;
+-            pcidev->permissive = pci_permissive;
+-            pcidev->seize = pci_seize;
++            libxl_device_pci *pci;
++
++            pci = ARRAY_EXTEND_INIT_NODEVID(d_config->pcidevs,
++                                            d_config->num_pcidevs,
++                                            libxl_device_pci_init);
++            pci->msitranslate = pci_msitranslate;
++            pci->power_mgmt = pci_power_mgmt;
++            pci->permissive = pci_permissive;
++            pci->seize = pci_seize;
+             /*
+              * Like other pci option, the per-device policy always follows
+              * the global policy by default.
+              */
+-            pcidev->rdm_policy = b_info->u.hvm.rdm.policy;
+-            e = xlu_pci_parse_bdf(config, pcidev, buf);
++            pci->rdm_policy = b_info->u.hvm.rdm.policy;
++            e = xlu_pci_parse_bdf(config, pci, buf);
+             if (e) {
+                 fprintf(stderr,
+                         "unable to parse PCI BDF `%s' for passthrough\n",
+diff --git a/tools/xl/xl_pci.c b/tools/xl/xl_pci.c
+index 58345bdae213..34fcf5a4fadf 100644
+--- a/tools/xl/xl_pci.c
++++ b/tools/xl/xl_pci.c
+@@ -24,20 +24,20 @@
  
-@@ -1624,9 +1619,10 @@ void libxl__device_pci_add(libxl__egc *egc, uint32_t domid,
-         GCNEW(pci_s);
-         libxl_device_pci_init(pci_s);
-         libxl_device_pci_copy(CTX, pci_s, pci);
-+        pas->pci = pci_s;
-         pas->callback = device_pci_add_stubdom_wait;
+ static void pcilist(uint32_t domid)
+ {
+-    libxl_device_pci *pcidevs;
++    libxl_device_pci *pcis;
+     int num, i;
  
--        do_pci_add(egc, stubdomid, pci_s, pas); /* must be last */
-+        do_pci_add(egc, stubdomid, pas); /* must be last */
+-    pcidevs = libxl_device_pci_list(ctx, domid, &num);
+-    if (pcidevs == NULL)
++    pcis = libxl_device_pci_list(ctx, domid, &num);
++    if (pcis == NULL)
          return;
+     printf("Vdev Device\n");
+     for (i = 0; i < num; i++) {
+         printf("%02x.%01x %04x:%02x:%02x.%01x\n",
+-               (pcidevs[i].vdevfn >> 3) & 0x1f, pcidevs[i].vdevfn & 0x7,
+-               pcidevs[i].domain, pcidevs[i].bus, pcidevs[i].dev, pcidevs[i].func);
+-        libxl_device_pci_dispose(&pcidevs[i]);
++               (pcis[i].vdevfn >> 3) & 0x1f, pcis[i].vdevfn & 0x7,
++               pcis[i].domain, pcis[i].bus, pcis[i].dev, pcis[i].func);
++        libxl_device_pci_dispose(&pcis[i]);
+     }
+-    free(pcidevs);
++    free(pcis);
+ }
+ 
+ int main_pcilist(int argc, char **argv)
+@@ -57,28 +57,28 @@ int main_pcilist(int argc, char **argv)
+ 
+ static int pcidetach(uint32_t domid, const char *bdf, int force)
+ {
+-    libxl_device_pci pcidev;
++    libxl_device_pci pci;
+     XLU_Config *config;
+     int r = 0;
+ 
+-    libxl_device_pci_init(&pcidev);
++    libxl_device_pci_init(&pci);
+ 
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_inig"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pcidev, bdf)) {
++    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+         fprintf(stderr, "pci-detach: malformed BDF specification \"%s\"\n", bdf);
+         exit(2);
+     }
+     if (force) {
+-        if (libxl_device_pci_destroy(ctx, domid, &pcidev, 0))
++        if (libxl_device_pci_destroy(ctx, domid, &pci, 0))
+             r = 1;
+     } else {
+-        if (libxl_device_pci_remove(ctx, domid, &pcidev, 0))
++        if (libxl_device_pci_remove(ctx, domid, &pci, 0))
+             r = 1;
      }
  
-@@ -1681,9 +1677,8 @@ static void device_pci_add_stubdom_done(libxl__egc *egc,
-     int i;
+-    libxl_device_pci_dispose(&pcidev);
++    libxl_device_pci_dispose(&pci);
+     xlu_cfg_destroy(config);
  
-     /* Convenience aliases */
--    libxl__ao_device *aodev = pas->aodev;
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = aodev->device_config;
-+    libxl_device_pci *pci = pas->pci;
+     return r;
+@@ -108,24 +108,24 @@ int main_pcidetach(int argc, char **argv)
  
-     if (rc) goto out;
+ static int pciattach(uint32_t domid, const char *bdf, const char *vs)
+ {
+-    libxl_device_pci pcidev;
++    libxl_device_pci pci;
+     XLU_Config *config;
+     int r = 0;
  
-@@ -1718,7 +1713,7 @@ static void device_pci_add_stubdom_done(libxl__egc *egc,
-                 pci->vdevfn = orig_vdev;
-             }
-             pas->callback = device_pci_add_done;
--            do_pci_add(egc, domid, pci, pas); /* must be last */
-+            do_pci_add(egc, domid, pas); /* must be last */
-             return;
-         }
+-    libxl_device_pci_init(&pcidev);
++    libxl_device_pci_init(&pci);
+ 
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_inig"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pcidev, bdf)) {
++    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+         fprintf(stderr, "pci-attach: malformed BDF specification \"%s\"\n", bdf);
+         exit(2);
      }
-@@ -1734,7 +1729,7 @@ static void device_pci_add_done(libxl__egc *egc,
-     EGC_GC;
-     libxl__ao_device *aodev = pas->aodev;
-     libxl_domid domid = pas->domid;
--    libxl_device_pci *pci = aodev->device_config;
-+    libxl_device_pci *pci = pas->pci;
  
-     if (rc) {
-         LOGD(ERROR, domid,
+-    if (libxl_device_pci_add(ctx, domid, &pcidev, 0))
++    if (libxl_device_pci_add(ctx, domid, &pci, 0))
+         r = 1;
+ 
+-    libxl_device_pci_dispose(&pcidev);
++    libxl_device_pci_dispose(&pci);
+     xlu_cfg_destroy(config);
+ 
+     return r;
+@@ -155,19 +155,19 @@ int main_pciattach(int argc, char **argv)
+ 
+ static void pciassignable_list(void)
+ {
+-    libxl_device_pci *pcidevs;
++    libxl_device_pci *pcis;
+     int num, i;
+ 
+-    pcidevs = libxl_device_pci_assignable_list(ctx, &num);
++    pcis = libxl_device_pci_assignable_list(ctx, &num);
+ 
+-    if ( pcidevs == NULL )
++    if ( pcis == NULL )
+         return;
+     for (i = 0; i < num; i++) {
+         printf("%04x:%02x:%02x.%01x\n",
+-               pcidevs[i].domain, pcidevs[i].bus, pcidevs[i].dev, pcidevs[i].func);
+-        libxl_device_pci_dispose(&pcidevs[i]);
++               pcis[i].domain, pcis[i].bus, pcis[i].dev, pcis[i].func);
++        libxl_device_pci_dispose(&pcis[i]);
+     }
+-    free(pcidevs);
++    free(pcis);
+ }
+ 
+ int main_pciassignable_list(int argc, char **argv)
+@@ -184,24 +184,24 @@ int main_pciassignable_list(int argc, char **argv)
+ 
+ static int pciassignable_add(const char *bdf, int rebind)
+ {
+-    libxl_device_pci pcidev;
++    libxl_device_pci pci;
+     XLU_Config *config;
+     int r = 0;
+ 
+-    libxl_device_pci_init(&pcidev);
++    libxl_device_pci_init(&pci);
+ 
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_init"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pcidev, bdf)) {
++    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+         fprintf(stderr, "pci-assignable-add: malformed BDF specification \"%s\"\n", bdf);
+         exit(2);
+     }
+ 
+-    if (libxl_device_pci_assignable_add(ctx, &pcidev, rebind))
++    if (libxl_device_pci_assignable_add(ctx, &pci, rebind))
+         r = 1;
+ 
+-    libxl_device_pci_dispose(&pcidev);
++    libxl_device_pci_dispose(&pci);
+     xlu_cfg_destroy(config);
+ 
+     return r;
+@@ -226,24 +226,24 @@ int main_pciassignable_add(int argc, char **argv)
+ 
+ static int pciassignable_remove(const char *bdf, int rebind)
+ {
+-    libxl_device_pci pcidev;
++    libxl_device_pci pci;
+     XLU_Config *config;
+     int r = 0;
+ 
+-    libxl_device_pci_init(&pcidev);
++    libxl_device_pci_init(&pci);
+ 
+     config = xlu_cfg_init(stderr, "command line");
+     if (!config) { perror("xlu_cfg_init"); exit(-1); }
+ 
+-    if (xlu_pci_parse_bdf(config, &pcidev, bdf)) {
++    if (xlu_pci_parse_bdf(config, &pci, bdf)) {
+         fprintf(stderr, "pci-assignable-remove: malformed BDF specification \"%s\"\n", bdf);
+         exit(2);
+     }
+ 
+-    if (libxl_device_pci_assignable_remove(ctx, &pcidev, rebind))
++    if (libxl_device_pci_assignable_remove(ctx, &pci, rebind))
+         r = 1;
+ 
+-    libxl_device_pci_dispose(&pcidev);
++    libxl_device_pci_dispose(&pci);
+     xlu_cfg_destroy(config);
+ 
+     return r;
 -- 
 2.20.1
 
