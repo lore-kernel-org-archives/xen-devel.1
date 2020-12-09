@@ -2,47 +2,45 @@ Return-Path: <SRS0=Zv5g=FN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC502C4361B
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 10:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 132ABC433FE
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 11:17:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1D47123B79
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 10:15:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D47123B79
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
+	by mail.kernel.org (Postfix) with ESMTPS id AF47F23407
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 11:17:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF47F23407
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.48089.85069 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.48137.85106 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmwVI-0005so-OC; Wed, 09 Dec 2020 10:15:24 +0000
+	id 1kmxSu-0003QK-2U; Wed, 09 Dec 2020 11:17:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 48089.85069; Wed, 09 Dec 2020 10:15:24 +0000
+Received: by outflank-mailman (output) from mailman id 48137.85106; Wed, 09 Dec 2020 11:17:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmwVI-0005sh-Ke; Wed, 09 Dec 2020 10:15:24 +0000
-Received: by outflank-mailman (input) for mailman id 48089;
- Wed, 09 Dec 2020 10:15:23 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XdhY=FN=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
- id 1kmwVH-0005sc-Rn
- for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 10:15:23 +0000
-Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9a19bfb3-1449-46c5-abf3-6a32558b0c5f;
- Wed, 09 Dec 2020 10:15:22 +0000 (UTC)
-Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
- by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
- 0B9AFHiF026674
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
- Wed, 9 Dec 2020 11:15:18 +0100 (MET)
-Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
- id A99752E93A2; Wed,  9 Dec 2020 11:15:12 +0100 (MET)
+	id 1kmxSt-0003QD-V2; Wed, 09 Dec 2020 11:16:59 +0000
+Received: by outflank-mailman (input) for mailman id 48137;
+ Wed, 09 Dec 2020 11:16:58 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1kmxSs-0003Q8-1q
+ for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 11:16:58 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kmxSq-0005rB-07; Wed, 09 Dec 2020 11:16:56 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kmxSp-0003EZ-N4; Wed, 09 Dec 2020 11:16:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,95 +52,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a19bfb3-1449-46c5-abf3-6a32558b0c5f
-Date: Wed, 9 Dec 2020 11:15:12 +0100
-From: Manuel Bouyer <bouyer@antioche.eu.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org
-Subject: Re: dom0 PV looping on search_pre_exception_table()
-Message-ID: <20201209101512.GA1299@antioche.eu.org>
-References: <20201208175738.GA3390@antioche.eu.org>
- <e73cc71d-c1a6-87c8-1b82-5d70d4f52eaa@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=LMVuGsN2J17uA7dGWuaJGpfZYc8eBmei0dEK7x+yVzM=; b=ayjfQT22rZNujy9mpFgu1SekJ1
+	RPxQ/vlQns4WVyhRomGGK/Mg/a2CDgF7sILKhdph05lF2FilgnbO9/7qhAadeJnpxGtPJLHEpMRW0
+	LN1Dpq0IQu6lRbB5BI9MaBhMBAtMN9vDo31X9GLwwHq6YlO8hWfsuLOcoCtX6njInJWc=;
+Subject: Re: [PATCH v3 3/5] evtchn: convert vIRQ lock to an r/w one
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <9d7a052a-6222-80ff-cbf1-612d4ca50c2a@suse.com>
+ <d2461bd6-fb2f-447f-11c6-bd8afd573d7b@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <c11437e3-58f2-6dd3-45ae-9fd5f1d97e59@xen.org>
+Date: Wed, 9 Dec 2020 11:16:53 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e73cc71d-c1a6-87c8-1b82-5d70d4f52eaa@citrix.com>
-X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Wed, 09 Dec 2020 11:15:18 +0100 (MET)
+In-Reply-To: <d2461bd6-fb2f-447f-11c6-bd8afd573d7b@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 08, 2020 at 06:13:46PM +0000, Andrew Cooper wrote:
-> On 08/12/2020 17:57, Manuel Bouyer wrote:
-> > Hello,
-> > for the first time I tried to boot a xen kernel from devel with
-> > a NetBSD PV dom0. The kernel boots, but when the first userland prcess
-> > is launched, it seems to enter a loop involving search_pre_exception_table()
-> > (I see an endless stream from the dprintk() at arch/x86/extable.c:202)
-> >
-> > With xen 4.13 I see it, but exactly once:
-> > (XEN) extable.c:202: Pre-exception: ffff82d08038c304 -> ffff82d08038c8c8
-> >
-> > with devel:
-> > (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> > (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> > (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> > (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> > (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> > [...]
-> >
-> > the dom0 kernel is the same.
-> >
-> > At first glance it looks like a fault in the guest is not handled at it should,
-> > and the userland process keeps faulting on the same address.
-> >
-> > Any idea what to look at ?
-> 
-> That is a reoccurring fault on IRET back to guest context, and is
-> probably caused by some unwise-in-hindsight cleanup which doesn't
-> escalate the failure to the failsafe callback.
-> 
-> This ought to give something useful to debug with:
+Hi Jan,
 
-thanks, I got:
-(XEN) IRET fault: #PF[0000]                                                 
-(XEN) domain_crash called from extable.c:209                                
-(XEN) Domain 0 (vcpu#0) crashed on cpu#0:                                   
-(XEN) ----[ Xen-4.15-unstable  x86_64  debug=y   Tainted:   C   ]----       
-(XEN) CPU:    0                                                             
-(XEN) RIP:    0047:[<00007f7e184007d0>]                                     
-(XEN) RFLAGS: 0000000000000202   EM: 0   CONTEXT: pv guest (d0v0)           
-(XEN) rax: ffff82d04038c309   rbx: 0000000000000000   rcx: 000000000000e008 
-(XEN) rdx: 0000000000010086   rsi: ffff83007fcb7f78   rdi: 000000000000e010 
-(XEN) rbp: 0000000000000000   rsp: 00007f7fff53e3e0   r8:  0000000e00000000 
-(XEN) r9:  0000000000000000   r10: 0000000000000000   r11: 0000000000000000 
-(XEN) r12: 0000000000000000   r13: 0000000000000000   r14: 0000000000000000 
-(XEN) r15: 0000000000000000   cr0: 0000000080050033   cr4: 0000000000002660 
-(XEN) cr3: 0000000079cdb000   cr2: 00007f7fff53e3e0                         
-(XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: ffffffff80cf2dc0    
-(XEN) ds: 0023   es: 0023   fs: 0000   gs: 0000   ss: 003f   cs: 0047       
-(XEN) Guest stack trace from rsp=00007f7fff53e3e0:          
-(XEN)    0000000000000001 00007f7fff53e8f8 0000000000000000 0000000000000000
-(XEN)    0000000000000003 000000004b600040 0000000000000004 0000000000000038
-(XEN)    0000000000000005 0000000000000008 0000000000000006 0000000000001000
-(XEN)    0000000000000007 00007f7e18400000 0000000000000008 0000000000000000
-(XEN)    0000000000000009 000000004b601cd0 00000000000007d0 0000000000000000
-(XEN)    00000000000007d1 0000000000000000 00000000000007d2 0000000000000000
-(XEN)    00000000000007d3 0000000000000000 000000000000000d 00007f7fff53f000
-(XEN)    00000000000007de 00007f7fff53e4e0 0000000000000000 0000000000000000
-(XEN)    6e692f6e6962732f 0000000000007469 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
-(XEN) Hardware Dom0 crashed: rebooting machine in 5 seconds.
+On 23/11/2020 13:28, Jan Beulich wrote:
+> There's no need to serialize all sending of vIRQ-s; all that's needed
+> is serialization against the closing of the respective event channels
+> (so far by means of a barrier). To facilitate the conversion, switch to
+> an ordinary write locked region in evtchn_close().
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
 
 -- 
-Manuel Bouyer <bouyer@antioche.eu.org>
-     NetBSD: 26 ans d'experience feront toujours la difference
---
+Julien Grall
 
