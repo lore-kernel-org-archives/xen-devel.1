@@ -2,41 +2,42 @@ Return-Path: <SRS0=Zv5g=FN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BE1EC433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 21:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8B55C4167B
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 21:07:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4DE7A22CB1
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 21:06:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4DE7A22CB1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 826E322CB1
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 21:07:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 826E322CB1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.48736.86231 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.48746.86243 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kn6fI-0002dN-7t; Wed, 09 Dec 2020 21:06:24 +0000
+	id 1kn6g8-0002rO-JP; Wed, 09 Dec 2020 21:07:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 48736.86231; Wed, 09 Dec 2020 21:06:24 +0000
+Received: by outflank-mailman (output) from mailman id 48746.86243; Wed, 09 Dec 2020 21:07:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kn6fI-0002dG-4s; Wed, 09 Dec 2020 21:06:24 +0000
-Received: by outflank-mailman (input) for mailman id 48736;
- Wed, 09 Dec 2020 21:06:22 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kn6g8-0002rH-Fi; Wed, 09 Dec 2020 21:07:16 +0000
+Received: by outflank-mailman (input) for mailman id 48746;
+ Wed, 09 Dec 2020 21:07:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/xMB=FN=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kn6fG-0002ct-SD
- for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 21:06:22 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6c220ae2-0492-4fe7-8304-fe5a6c5f792c;
- Wed, 09 Dec 2020 21:06:22 +0000 (UTC)
+ <SRS0=/1wO=FN=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
+ id 1kn6g7-0002r0-Af
+ for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 21:07:15 +0000
+Received: from galois.linutronix.de (unknown [193.142.43.55])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 5ec88874-25f3-4748-be12-9189e4afa396;
+ Wed, 09 Dec 2020 21:07:13 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,66 +49,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c220ae2-0492-4fe7-8304-fe5a6c5f792c
-Date: Wed, 9 Dec 2020 13:06:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1607547981;
-	bh=fxnAYyY+AG6VQmt5QhJC+mLiy8etXez1tkgPfJl8ATs=;
-	h=From:To:cc:Subject:In-Reply-To:References:From;
-	b=hLTu/ACjH6add2oLNh8TiioJeZgNt3UPjIMMJc0WjZlNh8D5NNsUZlbfc+UGbMrjj
-	 ndi9+guX639tQAsTz9s8pibq6ISqxlBer7pq1vwP1xaoW3hczEanZH7L5gYKilxP9N
-	 n+WBwmjrZcIUNPOfcj4Og++JQt8YFhjOg9yCm02uaeqKyiiFj5+95mIuk2LDZ2KWip
-	 CCD1MrvbOqGwRPqlvV/Fzgp6fU/AkrWKB8uANdlbUURryHmJ8ykx/RkJr8OyA/W2uj
-	 tln6qif5gVWx9+VSdgfKGuwuwaUo5AjS5e8viuOv20nR8Li9EOvfUFI7fMKGYU33FB
-	 uporSGxT7dNFQ==
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-cc: xen-devel@lists.xenproject.org, 
-    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v3 7/7] xen/arm: Activate TID3 in HCR_EL2
-In-Reply-To: <956cf336ffce24f0cabfc7a98ae855bc71d5f028.1607524536.git.bertrand.marquis@arm.com>
-Message-ID: <alpine.DEB.2.21.2012091157200.20986@sstabellini-ThinkPad-T480s>
-References: <cover.1607524536.git.bertrand.marquis@arm.com> <956cf336ffce24f0cabfc7a98ae855bc71d5f028.1607524536.git.bertrand.marquis@arm.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 5ec88874-25f3-4748-be12-9189e4afa396
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1607548032;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L7i3CPNAPt2KU+IZb9dhE7iSR6cyuRM8HyieTAr/YYg=;
+	b=kq1OHmCQNTXmjFxRiiYQCtMcgHsW2nl9XwXEhd2UDC34JY4VqsuqNqWdgTS3YK0B2HTN0a
+	GLiGRqcl4feIgRGti60S5LHayQAwiZFaJ2AcyKwnEyQbepXQ2jz8X8vNbxqDaot95wevaf
+	Lz67AUgT8+6fwzbCvE7SbExB3ThHr/fHr+UAilkliO85KAQIMK7eww5bH7SAetpnob4Kqc
+	q6ySWnueDo4tqYCw7qzFmoI9zbcSv58CxsWPgdnODOP/uZ4j59J5/wPRhcDpcZpcic0r+V
+	wcfFMs/wLf2fAEfHBp8cin02bVRhQTrk424mMLHkmAmUY5hzxKqvWbPQgnwCnw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1607548032;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=L7i3CPNAPt2KU+IZb9dhE7iSR6cyuRM8HyieTAr/YYg=;
+	b=htO3ZaH9N+kRa526lyS/ICS9mPFUq9txIKXd3dIhl9PtBy0srICRWtTNhIRq5W11XlRqAu
+	yEM17S/seRxu7uBg==
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, x86@kernel.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+Cc: peterz@infradead.org, luto@kernel.org, Juergen Gross <jgross@suse.com>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>, Deep Shah <sdeep@vmware.com>, "VMware\, Inc." <pv-drivers@vmware.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 03/12] x86/pv: switch SWAPGS to ALTERNATIVE
+In-Reply-To: <20201120114630.13552-4-jgross@suse.com>
+References: <20201120114630.13552-1-jgross@suse.com> <20201120114630.13552-4-jgross@suse.com>
+Date: Wed, 09 Dec 2020 22:07:12 +0100
+Message-ID: <871rfylmdb.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain
 
-On Wed, 9 Dec 2020, Bertrand Marquis wrote:
-> Activate TID3 bit in HSR register when starting a guest.
-> This will trap all coprecessor ID registers so that we can give to guest
-> values corresponding to what they can actually use and mask some
-> features to guests even though they would be supported by the underlying
-> hardware (like SVE or MPAM).
-> 
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+On Fri, Nov 20 2020 at 12:46, Juergen Gross wrote:
+> SWAPGS is used only for interrupts coming from user mode or for
+> returning to user mode. So there is no reason to use the PARAVIRT
+> framework, as it can easily be replaced by an ALTERNATIVE depending
+> on X86_FEATURE_XENPV.
+>
+> There are several instances using the PV-aware SWAPGS macro in paths
+> which are never executed in a Xen PV guest. Replace those with the
+> plain swapgs instruction. For SWAPGS_UNSAFE_STACK the same applies.
+>
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Acked-by: Andy Lutomirski <luto@kernel.org>
+> Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-
-
-> ---
-> Changes in V2: Rebase
-> Changes in V3: Rebase
-> 
-> ---
->  xen/arch/arm/traps.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-> index 28d9d64558..c1a9ad6056 100644
-> --- a/xen/arch/arm/traps.c
-> +++ b/xen/arch/arm/traps.c
-> @@ -98,7 +98,7 @@ register_t get_default_hcr_flags(void)
->  {
->      return  (HCR_PTW|HCR_BSU_INNER|HCR_AMO|HCR_IMO|HCR_FMO|HCR_VM|
->               (vwfi != NATIVE ? (HCR_TWI|HCR_TWE) : 0) |
-> -             HCR_TSC|HCR_TAC|HCR_SWIO|HCR_TIDCP|HCR_FB|HCR_TSW);
-> +             HCR_TID3|HCR_TSC|HCR_TAC|HCR_SWIO|HCR_TIDCP|HCR_FB|HCR_TSW);
->  }
->  
->  static enum {
-> -- 
-> 2.17.1
-> 
+Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
 
