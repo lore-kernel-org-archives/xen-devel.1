@@ -2,47 +2,45 @@ Return-Path: <SRS0=Zv5g=FN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99C41C433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 09:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0384CC4361B
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 09:53:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8CB8C23407
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 09:49:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8CB8C23407
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9DF8523407
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 09:53:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DF8523407
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.48068.85033 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.48076.85045 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmw66-0002lb-UO; Wed, 09 Dec 2020 09:49:22 +0000
+	id 1kmwA5-0003iS-Ff; Wed, 09 Dec 2020 09:53:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 48068.85033; Wed, 09 Dec 2020 09:49:22 +0000
+Received: by outflank-mailman (output) from mailman id 48076.85045; Wed, 09 Dec 2020 09:53:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmw66-0002lU-Ql; Wed, 09 Dec 2020 09:49:22 +0000
-Received: by outflank-mailman (input) for mailman id 48068;
- Wed, 09 Dec 2020 09:49:22 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XdhY=FN=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
- id 1kmw66-0002lP-2X
- for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 09:49:22 +0000
-Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c6572575-c20b-4e6b-b715-acfde1cdd48a;
- Wed, 09 Dec 2020 09:49:19 +0000 (UTC)
-Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
- by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
- 0B99nAfK029140
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
- Wed, 9 Dec 2020 10:49:10 +0100 (MET)
-Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
- id E0FA42E93A2; Wed,  9 Dec 2020 10:49:04 +0100 (MET)
+	id 1kmwA5-0003iL-Cd; Wed, 09 Dec 2020 09:53:29 +0000
+Received: by outflank-mailman (input) for mailman id 48076;
+ Wed, 09 Dec 2020 09:53:28 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1kmwA3-0003iG-VM
+ for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 09:53:28 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kmwA2-000424-W3; Wed, 09 Dec 2020 09:53:26 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kmwA2-0004aI-Nk; Wed, 09 Dec 2020 09:53:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,62 +52,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6572575-c20b-4e6b-b715-acfde1cdd48a
-Date: Wed, 9 Dec 2020 10:49:04 +0100
-From: Manuel Bouyer <bouyer@antioche.eu.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=CnzN0qywqES9bUxXUiV2DG77UGN62F8l63o8oWlkDBA=; b=XKxOQiFCukGOeXckYI/KSJPyil
+	JV/PjG7IjycEtANuFobDgY+TXmMDVwc23HoHqTds9wuGJwyRb6067QSUuPgWNgPdI3+YfYUNm//yx
+	a+OVQT7aHwtNO87l0ebx4pIirraYkKLyL+leLYo/L8ub9o9tg2BGw8OzbmpTBzv1DvjU=;
+Subject: Re: [PATCH v3 1/5] evtchn: drop acquiring of per-channel lock from
+ send_guest_{global,vcpu}_virq()
 To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Subject: Re: dom0 PV looping on search_pre_exception_table()
-Message-ID: <20201209094904.GC1469@antioche.eu.org>
-References: <20201208175738.GA3390@antioche.eu.org>
- <e73cc71d-c1a6-87c8-1b82-5d70d4f52eaa@citrix.com>
- <cf1f85eb-1aa2-c3fa-680c-ea5ba5f68647@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <9d7a052a-6222-80ff-cbf1-612d4ca50c2a@suse.com>
+ <d709a9c3-dbe2-65c6-2c2f-6a12f486335d@suse.com>
+ <70170293-a9a7-282a-dde6-7ed73fc2da48@xen.org>
+ <c15b1e7e-ed9c-b597-2fc1-b8cf89999c55@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <f14d147b-b218-a2ab-0b9e-06ece58d58e4@xen.org>
+Date: Wed, 9 Dec 2020 09:53:24 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cf1f85eb-1aa2-c3fa-680c-ea5ba5f68647@suse.com>
-X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Wed, 09 Dec 2020 10:49:11 +0100 (MET)
+In-Reply-To: <c15b1e7e-ed9c-b597-2fc1-b8cf89999c55@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On Wed, Dec 09, 2020 at 09:39:49AM +0100, Jan Beulich wrote:
-> On 08.12.2020 19:13, Andrew Cooper wrote:
-> > On 08/12/2020 17:57, Manuel Bouyer wrote:
-> >> Hello,
-> >> for the first time I tried to boot a xen kernel from devel with
-> >> a NetBSD PV dom0. The kernel boots, but when the first userland prcess
-> >> is launched, it seems to enter a loop involving search_pre_exception_table()
-> >> (I see an endless stream from the dprintk() at arch/x86/extable.c:202)
-> >>
-> >> With xen 4.13 I see it, but exactly once:
-> >> (XEN) extable.c:202: Pre-exception: ffff82d08038c304 -> ffff82d08038c8c8
-> >>
-> >> with devel:
-> >> (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> >> (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> >> (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> >> (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> >> (XEN) extable.c:202: Pre-exception: ffff82d040393309 -> ffff82d0403938c8        
-> >> [...]
-> >>
-> >> the dom0 kernel is the same.
-> >>
-> >> At first glance it looks like a fault in the guest is not handled at it should,
-> >> and the userland process keeps faulting on the same address.
-> >>
-> >> Any idea what to look at ?
-> > 
-> > That is a reoccurring fault on IRET back to guest context, and is
-> > probably caused by some unwise-in-hindsight cleanup which doesn't
-> > escalate the failure to the failsafe callback.
+Hi Jan,
+
+On 03/12/2020 09:46, Jan Beulich wrote:
+> On 02.12.2020 20:03, Julien Grall wrote:
+>> On 23/11/2020 13:28, Jan Beulich wrote:
+>>> The per-vCPU virq_lock, which is being held anyway, together with there
+>>> not being any call to evtchn_port_set_pending() when v->virq_to_evtchn[]
+>>> is zero, provide sufficient guarantees.
+>>
+>> I agree that the per-vCPU virq_lock is going to be sufficient, however
+>> dropping the lock also means the event channel locking is more complex
+>> to understand (the long comment that was added proves it).
+>>
+>> In fact, the locking in the event channel code was already proven to be
+>> quite fragile, therefore I think this patch is not worth the risk.
 > 
-> But is this a 32-bit Dom0? 64-bit ones get well-known selectors
-> installed for CS and SS by create_bounce_frame(), and we don't
-> permit registration of non-canonical trap handler entry point
-> addresses.
+> I agree this is a very reasonable position to take. I probably
+> would even have remained silent if in the meantime the
+> spin_lock()s there hadn't changed to read_trylock()s. I really
+> think we want to limit this unusual locking model to where we
+> strictly need it.
 
-No, it's a 64bits dom0.
+While I appreciate that the current locking is unusual, we should follow 
+the same model everywhere rather than having a dozen of way to lock the 
+same structure.
+
+The rationale is quite simple, if you have one way to lock a structure, 
+then there are less chance to screw up.
+
+The only reason I would be willing to diverge from statement is if the 
+performance are significantly improved.
+
+Cheers,
 
 -- 
-Manuel Bouyer <bouyer@antioche.eu.org>
-     NetBSD: 26 ans d'experience feront toujours la difference
---
+Julien Grall
 
