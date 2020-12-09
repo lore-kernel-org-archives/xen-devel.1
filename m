@@ -2,42 +2,45 @@ Return-Path: <SRS0=Zv5g=FN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65E8DC433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 23:35:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2821C4361B
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 23:38:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 22E5E2313E
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 23:35:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22E5E2313E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 95317233EF
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 23:38:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 95317233EF
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.48866.86453 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.48871.86465 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kn8zE-0001y3-RW; Wed, 09 Dec 2020 23:35:08 +0000
+	id 1kn92U-000299-Ac; Wed, 09 Dec 2020 23:38:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 48866.86453; Wed, 09 Dec 2020 23:35:08 +0000
+Received: by outflank-mailman (output) from mailman id 48871.86465; Wed, 09 Dec 2020 23:38:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kn8zE-0001xw-OQ; Wed, 09 Dec 2020 23:35:08 +0000
-Received: by outflank-mailman (input) for mailman id 48866;
- Wed, 09 Dec 2020 23:35:07 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/xMB=FN=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kn8zD-0001xr-Mw
- for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 23:35:07 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b6ff657a-6697-45ce-9138-c05a936da4ef;
- Wed, 09 Dec 2020 23:35:07 +0000 (UTC)
+	id 1kn92U-000292-78; Wed, 09 Dec 2020 23:38:30 +0000
+Received: by outflank-mailman (input) for mailman id 48871;
+ Wed, 09 Dec 2020 23:38:29 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1kn92T-00028w-Aw
+ for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 23:38:29 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kn92R-0005Iy-RM; Wed, 09 Dec 2020 23:38:27 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kn92R-0002ao-IM; Wed, 09 Dec 2020 23:38:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,64 +52,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b6ff657a-6697-45ce-9138-c05a936da4ef
-Date: Wed, 9 Dec 2020 15:35:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1607556906;
-	bh=YoVLcOmgtgdXh5DDh0RvYgaGpz4Ay9q2qHzeVVTt8vg=;
-	h=From:To:cc:Subject:In-Reply-To:References:From;
-	b=afrq+N/w2XDVFCf4axW1W9X5d/bV4XE2CgoKQbVvj7wjO3JxR3DpMcTtFEZzvfASE
-	 OfORAofcNOZQeLCQX2E5VHdjvrHmF3mbjeg7BxenYzWbuZiECFlvAOAChJfM9Y9RKB
-	 bzWyWRTTEYc1Qui6waJga0IPUD1F3BoYgwQPap4bPPU51bRcvoTfmohiMA6fNpZVOo
-	 upm701jDTarenQfmqUtXrQfHk9kbKKauR5DNTp3SfcpYT5+81sWzbuPwMMtnFEHfS6
-	 tgdMTkOCsvDALI/ohl6JrJlw9fj1ZctGtcUtrHHiKsGD1ev4BVS+imha1OciqwubhU
-	 v1N3INidYbJ1g==
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Stefano Stabellini <sstabellini@kernel.org>
-cc: Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org, 
-    Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-    Julien Grall <julien@xen.org>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH V3 15/23] xen/arm: Stick around in leave_hypervisor_to_guest
- until I/O has completed
-In-Reply-To: <alpine.DEB.2.21.2012091432450.20986@sstabellini-ThinkPad-T480s>
-Message-ID: <alpine.DEB.2.21.2012091521480.20986@sstabellini-ThinkPad-T480s>
-References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com> <1606732298-22107-16-git-send-email-olekstysh@gmail.com> <alpine.DEB.2.21.2012091432450.20986@sstabellini-ThinkPad-T480s>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=OPfKh88rj2a43wotGM9GnLojN6RW6OzBmxRIlQMO0ow=; b=Tj1RNt9rtiwE/t7B60/2RrwZRe
+	fyrYX52R9FirDFXSJ+TVQ8FelYy0UUPuTxXGg9IRV3lTcNTx/Ok8nzZ9udBx2zKMRe9+M7LZhiVaT
+	6STZeAIL/bWfGrr7MDEb6grdeNwu00Uzd+sSROX4/rEpJXFh6jlMKjJZ+PX3rTWj9H+U=;
+Subject: Re: [PATCH V3 15/23] xen/arm: Stick around in
+ leave_hypervisor_to_guest until I/O has completed
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <olekstysh@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Julien Grall <julien.grall@arm.com>
+References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
+ <1606732298-22107-16-git-send-email-olekstysh@gmail.com>
+ <alpine.DEB.2.21.2012091432450.20986@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien@xen.org>
+Message-ID: <fa447d9c-d601-eee7-1cc2-d595c7c2edf9@xen.org>
+Date: Wed, 9 Dec 2020 23:38:25 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <alpine.DEB.2.21.2012091432450.20986@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On Wed, 9 Dec 2020, Stefano Stabellini wrote:
+Hi Stefano,
+
+On 09/12/2020 23:18, Stefano Stabellini wrote:
 > On Mon, 30 Nov 2020, Oleksandr Tyshchenko wrote:
-> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> > 
-> > This patch adds proper handling of return value of
-> > vcpu_ioreq_handle_completion() which involves using a loop
-> > in leave_hypervisor_to_guest().
-> > 
-> > The reason to use an unbounded loop here is the fact that vCPU
-> > shouldn't continue until an I/O has completed. In Xen case, if an I/O
-> > never completes then it most likely means that something went horribly
-> > wrong with the Device Emulator. And it is most likely not safe to
-> > continue. So letting the vCPU to spin forever if I/O never completes
-> > is a safer action than letting it continue and leaving the guest in
-> > unclear state and is the best what we can do for now.
-> > 
-> > This wouldn't be an issue for Xen as do_softirq() would be called at
-> > every loop. In case of failure, the guest will crash and the vCPU
-> > will be unscheduled.
-> 
+>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>
+>> This patch adds proper handling of return value of
+>> vcpu_ioreq_handle_completion() which involves using a loop
+>> in leave_hypervisor_to_guest().
+>>
+>> The reason to use an unbounded loop here is the fact that vCPU
+>> shouldn't continue until an I/O has completed. In Xen case, if an I/O
+>> never completes then it most likely means that something went horribly
+>> wrong with the Device Emulator. And it is most likely not safe to
+>> continue. So letting the vCPU to spin forever if I/O never completes
+>> is a safer action than letting it continue and leaving the guest in
+>> unclear state and is the best what we can do for now.
+>>
+>> This wouldn't be an issue for Xen as do_softirq() would be called at
+>> every loop. In case of failure, the guest will crash and the vCPU
+>> will be unscheduled.
+>
 > Imagine that we have two guests: one that requires an ioreq server and
 > one that doesn't. If I am not mistaken this loop could potentially spin
 > forever on a pcpu, thus preventing any other guest being scheduled, even
 > if the other guest doesn't need any ioreq servers.
+
+That's not correct. At every loop we will call check_for_pcpu_work() 
+that will process pending softirqs. If the rescheduling is necessary 
+(might be set by a timer or by a caller in check_for_vcpu_work()), then 
+the vCPU will be descheduled to give place to someone else.
+
 > 
 > 
 > My other concern is that we are busy-looping. Could we call something
 > like wfi() or do_idle() instead? The ioreq server event notification of
 > completion should wake us up?
+
+There are no busy loop here. If the IOREQ has not yet handled the I/O we 
+will block the vCPU until an event notification is received (see the 
+call to wait_on_xen_event_channel()).
+
+This loop make sure that all the vPCU works are done before we return to 
+the guest.
+
+The worse that can happen here if the vCPU will never run again if the 
+IOREQ server is been naughty.
+
 > 
 > Following this line of thinking, I am wondering if instead of the
 > busy-loop we should call vcpu_block_unless_event_pending(current) in
@@ -114,22 +135,20 @@ On Wed, 9 Dec 2020, Stefano Stabellini wrote:
 > equivalent) calls xenevtchn_notify which ends up waking up the domU
 > vcpu. Would that work?
 
-I read now Julien's reply: we are already doing something similar to
-what I suggested with the following call chain:
+vcpu_block_unless_event_pending() will not block if there are interrupts 
+pending. However, here we really want to block until the I/O has been 
+completed. So vcpu_block_unless_event_pending() is not the right approach.
 
-check_for_vcpu_work -> vcpu_ioreq_handle_completion -> wait_for_io -> wait_on_xen_event_channel
+The IOREQ code is using wait_on_xen_event_channel(). Yet, this can still 
+"exit" early if an event has been received. But this doesn't mean the 
+I/O has completed. So we need to check if the I/O has completed and wait 
+again if it hasn't.
 
-So the busy-loop here is only a safety-belt in cause of a spurious
-wake-up, in which case we are going to call again check_for_vcpu_work,
-potentially causing a guest reschedule.
+I seem to keep having to explain how the code works. So maybe we want to 
+update the commit message with more details?
 
-Then, this is fine and addresses both my concerns. Maybe let's add a note
-in the commit message about it.
+Cheers,
 
-
-I am also wondering if there is any benefit in calling wait_for_io()
-earlier, maybe from try_handle_mmio if IO_RETRY?
-leave_hypervisor_to_guest is very late for that. In any case, it is not
-an important optimization (if it is even an optimization at all) so it
-is fine to leave it as is.
+-- 
+Julien Grall
 
