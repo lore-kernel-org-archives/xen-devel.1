@@ -2,48 +2,45 @@ Return-Path: <SRS0=Zv5g=FN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C82AC433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 11:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE008C4361B
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 11:54:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C44B32054F
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 11:52:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C44B32054F
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 60CD2221FA
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 11:54:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 60CD2221FA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.48182.85193 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.48188.85208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmy0j-0007rs-Vn; Wed, 09 Dec 2020 11:51:57 +0000
+	id 1kmy31-00081m-DV; Wed, 09 Dec 2020 11:54:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 48182.85193; Wed, 09 Dec 2020 11:51:57 +0000
+Received: by outflank-mailman (output) from mailman id 48188.85208; Wed, 09 Dec 2020 11:54:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kmy0j-0007rl-ST; Wed, 09 Dec 2020 11:51:57 +0000
-Received: by outflank-mailman (input) for mailman id 48182;
- Wed, 09 Dec 2020 11:51:56 +0000
+	id 1kmy31-00081f-A7; Wed, 09 Dec 2020 11:54:19 +0000
+Received: by outflank-mailman (input) for mailman id 48188;
+ Wed, 09 Dec 2020 11:54:18 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kmy0i-0007rd-Qw; Wed, 09 Dec 2020 11:51:56 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>) id 1kmy30-00081a-5j
+ for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 11:54:18 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kmy0i-0006aE-JP; Wed, 09 Dec 2020 11:51:56 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kmy0i-0007Im-AS; Wed, 09 Dec 2020 11:51:56 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kmy0i-0005mW-9y; Wed, 09 Dec 2020 11:51:56 +0000
+ (envelope-from <julien@xen.org>)
+ id 1kmy2x-0006cV-OR; Wed, 09 Dec 2020 11:54:15 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kmy2x-0006Ab-H2; Wed, 09 Dec 2020 11:54:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,74 +52,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=bvO+xI7xBp2p21S6ekC0CX4GVA1fdwUdAZ2bMYnEk8I=; b=1KZwPLYXGYqUypeA07/4PTVTmX
-	KZJ4yZMQxWivSXc8MKJQuYpHh29r6sr0EWSivzFx9tD7hxd6ZeHQx5gGA9Qs8CsnRzugwUDdwBCw0
-	qjfOROZeOjRMW+5ExDEGTSzp09Av2Hsv0p8iwZQ0ElAQ4VIyI08Ak5tRlVwyE7EqI+50=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-157338-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=PZbvjGYPW+C80/qudm7L2NIELdMPGmRcgxQGTG5ezS0=; b=QdfpBPlyKvVVOJRp0xSTjqEFfy
+	W24rD7BZOwTS4tDQW1/Cc5oG0sbDHwNGwFpTbAdjIUvG+bBtHlgHmMdxqBR4Wl1eCdcqWEiNNMnQg
+	emvHnXYrO8TRir5ARPDrI6fRmlYsD+C0rcFv6js0JBysFmHLjEE5NvlGbD/DyMq3ezso=;
+Subject: Re: [PATCH v3 4/5] evtchn: convert domain event lock to an r/w one
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <9d7a052a-6222-80ff-cbf1-612d4ca50c2a@suse.com>
+ <a333387e-f9e5-7051-569a-1a9a37da53ca@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <074be931-54b0-1b0f-72d8-5bd577884814@xen.org>
+Date: Wed, 9 Dec 2020 11:54:13 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Subject: [ovmf test] 157338: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=7061294be500de021bef3d4bc5218134d223315f
-X-Osstest-Versions-That:
-    ovmf=cee5b0441af39dd6f76cc4e0447a1c7f788cbb00
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 09 Dec 2020 11:51:56 +0000
+In-Reply-To: <a333387e-f9e5-7051-569a-1a9a37da53ca@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-flight 157338 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157338/
+Hi Jan,
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 7061294be500de021bef3d4bc5218134d223315f
-baseline version:
- ovmf                 cee5b0441af39dd6f76cc4e0447a1c7f788cbb00
+On 23/11/2020 13:29, Jan Beulich wrote:
+> @@ -620,7 +620,7 @@ int evtchn_close(struct domain *d1, int
+>       long           rc = 0;
+>   
+>    again:
+> -    spin_lock(&d1->event_lock);
+> +    write_lock(&d1->event_lock);
+>   
+>       if ( !port_is_valid(d1, port1) )
+>       {
+> @@ -690,13 +690,11 @@ int evtchn_close(struct domain *d1, int
+>                   BUG();
+>   
+>               if ( d1 < d2 )
+> -            {
+> -                spin_lock(&d2->event_lock);
+> -            }
+> +                read_lock(&d2->event_lock);
 
-Last test of basis   157333  2020-12-08 22:41:46 Z    0 days
-Testing same since   157338  2020-12-09 03:48:15 Z    0 days    1 attempts
+This change made me realized that I don't quite understand how the 
+rwlock is meant to work for event_lock. I was actually expecting this to 
+be a write_lock() given there are state changed in the d2 events.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Guo Dong <guo.dong@intel.com>
+Could you outline how a developper can find out whether he/she should 
+use read_lock or write_lock?
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+[...]
 
+> --- a/xen/common/rwlock.c
+> +++ b/xen/common/rwlock.c
+> @@ -102,6 +102,14 @@ void queue_write_lock_slowpath(rwlock_t
+>       spin_unlock(&lock->lock);
+>   }
+>   
+> +void _rw_barrier(rwlock_t *lock)
+> +{
+> +    check_barrier(&lock->lock.debug);
+> +    smp_mb();
+> +    while ( _rw_is_locked(lock) )
+> +        arch_lock_relax();
+> +    smp_mb();
+> +}
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+As I pointed out when this implementation was first proposed (see [1]), 
+there is a risk that the loop will never exit.
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+I think the following implementation would be better (although it is ugly):
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+write_lock();
+/* do nothing */
+write_unlock();
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+This will act as a barrier between lock held before and after the call.
 
+As an aside, I think the introduction of rw_barrier() deserve to be a in 
+separate patch to help the review.
 
-Pushing revision :
+Cheers,
 
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   cee5b0441a..7061294be5  7061294be500de021bef3d4bc5218134d223315f -> xen-tested-master
+-- 
+Julien Grall
 
