@@ -7,44 +7,43 @@ X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0401C4361B
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 16:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D7FC4167B
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 16:35:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9A03123B51
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 16:35:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A03123B51
+	by mail.kernel.org (Postfix) with ESMTPS id 2741D239E5
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Dec 2020 16:35:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2741D239E5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.48539.85874 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.48538.85862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kn2Qh-0007Ic-6p; Wed, 09 Dec 2020 16:35:03 +0000
+	id 1kn2Qf-0007GW-OE; Wed, 09 Dec 2020 16:35:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 48539.85874; Wed, 09 Dec 2020 16:35:03 +0000
+Received: by outflank-mailman (output) from mailman id 48538.85862; Wed, 09 Dec 2020 16:35:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kn2Qh-0007IU-2q; Wed, 09 Dec 2020 16:35:03 +0000
-Received: by outflank-mailman (input) for mailman id 48539;
- Wed, 09 Dec 2020 16:35:01 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kn2Qf-0007GP-Km; Wed, 09 Dec 2020 16:35:01 +0000
+Received: by outflank-mailman (input) for mailman id 48538;
+ Wed, 09 Dec 2020 16:35:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hiOm=FN=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1kn2Qf-0007Ej-Oe
- for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 16:35:01 +0000
+ id 1kn2Qe-0007Fp-Fg
+ for xen-devel@lists.xenproject.org; Wed, 09 Dec 2020 16:35:00 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id ac6edc1e-1ffb-419b-90c9-721a0d2890e0;
- Wed, 09 Dec 2020 16:34:56 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 01d21cba-7b66-414c-baeb-6ed292fe766b;
+ Wed, 09 Dec 2020 16:34:59 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A3F241042;
- Wed,  9 Dec 2020 08:34:56 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4C7A21FB;
+ Wed,  9 Dec 2020 08:34:59 -0800 (PST)
 Received: from e109506-lin.cambridge.arm.com (e109506-lin.cambridge.arm.com
  [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F046C3F68F;
- Wed,  9 Dec 2020 08:34:55 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 99C683F68F;
+ Wed,  9 Dec 2020 08:34:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,116 +55,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac6edc1e-1ffb-419b-90c9-721a0d2890e0
+X-Inumbo-ID: 01d21cba-7b66-414c-baeb-6ed292fe766b
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 2/7] xen/arm: Add arm64 ID registers definitions
-Date: Wed,  9 Dec 2020 16:30:55 +0000
-Message-Id: <96a970e5e5d2f1b1bd0e50327857de6a8c8441f7.1607524536.git.bertrand.marquis@arm.com>
+Subject: [PATCH v3 5/7] xen/arm: Add handler for cp15 ID registers
+Date: Wed,  9 Dec 2020 16:30:58 +0000
+Message-Id: <5a36325410f485dbdddc0f6088378cacc54c5243.1607524536.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1607524536.git.bertrand.marquis@arm.com>
 References: <cover.1607524536.git.bertrand.marquis@arm.com>
 In-Reply-To: <cover.1607524536.git.bertrand.marquis@arm.com>
 References: <cover.1607524536.git.bertrand.marquis@arm.com>
 
-Add coprocessor registers definitions for all ID registers trapped
-through the TID3 bit of HSR.
-Those are the one that will be emulated in Xen to only publish to guests
-the features that are supported by Xen and that are accessible to
-guests.
-Also define a case to catch all reserved registers that should be
-handled as RAZ.
+Add support for emulation of cp15 based ID registers (on arm32 or when
+running a 32bit guest on arm64).
+The handlers are returning the values stored in the guest_cpuinfo
+structure for known registers and RAZ for all reserved registers.
+In the current status the MVFR registers are no supported.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
 Changes in V2: Rebase
 Changes in V3:
-  Add case definition for reserved registers.
+  Add case definition for reserved registers
+  Add handling of reserved registers as RAZ.
+  Fix code style in GENERATE_TID3_INFO declaration
 
 ---
- xen/include/asm-arm/arm64/hsr.h | 66 +++++++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+ xen/arch/arm/vcpreg.c        | 39 ++++++++++++++++++++++++++++++++++++
+ xen/include/asm-arm/cpregs.h | 25 +++++++++++++++++++++++
+ 2 files changed, 64 insertions(+)
 
-diff --git a/xen/include/asm-arm/arm64/hsr.h b/xen/include/asm-arm/arm64/hsr.h
-index ca931dd2fe..ffe0f0007e 100644
---- a/xen/include/asm-arm/arm64/hsr.h
-+++ b/xen/include/asm-arm/arm64/hsr.h
-@@ -110,6 +110,72 @@
- #define HSR_SYSREG_CNTP_CTL_EL0   HSR_SYSREG(3,3,c14,c2,1)
- #define HSR_SYSREG_CNTP_CVAL_EL0  HSR_SYSREG(3,3,c14,c2,2)
+diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
+index cdc91cdf5b..d371a1c38c 100644
+--- a/xen/arch/arm/vcpreg.c
++++ b/xen/arch/arm/vcpreg.c
+@@ -155,6 +155,14 @@ TVM_REG32(CONTEXTIDR, CONTEXTIDR_EL1)
+         break;                                                      \
+     }
  
-+/* Those registers are used when HCR_EL2.TID3 is set */
-+#define HSR_SYSREG_ID_PFR0_EL1    HSR_SYSREG(3,0,c0,c1,0)
-+#define HSR_SYSREG_ID_PFR1_EL1    HSR_SYSREG(3,0,c0,c1,1)
-+#define HSR_SYSREG_ID_PFR2_EL1    HSR_SYSREG(3,0,c0,c3,4)
-+#define HSR_SYSREG_ID_DFR0_EL1    HSR_SYSREG(3,0,c0,c1,2)
-+#define HSR_SYSREG_ID_DFR1_EL1    HSR_SYSREG(3,0,c0,c3,5)
-+#define HSR_SYSREG_ID_AFR0_EL1    HSR_SYSREG(3,0,c0,c1,3)
-+#define HSR_SYSREG_ID_MMFR0_EL1   HSR_SYSREG(3,0,c0,c1,4)
-+#define HSR_SYSREG_ID_MMFR1_EL1   HSR_SYSREG(3,0,c0,c1,5)
-+#define HSR_SYSREG_ID_MMFR2_EL1   HSR_SYSREG(3,0,c0,c1,6)
-+#define HSR_SYSREG_ID_MMFR3_EL1   HSR_SYSREG(3,0,c0,c1,7)
-+#define HSR_SYSREG_ID_MMFR4_EL1   HSR_SYSREG(3,0,c0,c2,6)
-+#define HSR_SYSREG_ID_MMFR5_EL1   HSR_SYSREG(3,0,c0,c3,6)
-+#define HSR_SYSREG_ID_ISAR0_EL1   HSR_SYSREG(3,0,c0,c2,0)
-+#define HSR_SYSREG_ID_ISAR1_EL1   HSR_SYSREG(3,0,c0,c2,1)
-+#define HSR_SYSREG_ID_ISAR2_EL1   HSR_SYSREG(3,0,c0,c2,2)
-+#define HSR_SYSREG_ID_ISAR3_EL1   HSR_SYSREG(3,0,c0,c2,3)
-+#define HSR_SYSREG_ID_ISAR4_EL1   HSR_SYSREG(3,0,c0,c2,4)
-+#define HSR_SYSREG_ID_ISAR5_EL1   HSR_SYSREG(3,0,c0,c2,5)
-+#define HSR_SYSREG_ID_ISAR6_EL1   HSR_SYSREG(3,0,c0,c2,7)
-+#define HSR_SYSREG_MVFR0_EL1      HSR_SYSREG(3,0,c0,c3,0)
-+#define HSR_SYSREG_MVFR1_EL1      HSR_SYSREG(3,0,c0,c3,1)
-+#define HSR_SYSREG_MVFR2_EL1      HSR_SYSREG(3,0,c0,c3,2)
++/* Macro to generate easily case for ID co-processor emulation */
++#define GENERATE_TID3_INFO(reg, field, offset)                      \
++    case HSR_CPREG32(reg):                                          \
++    {                                                               \
++        return handle_ro_read_val(regs, regidx, cp32.read, hsr,     \
++                          1, guest_cpuinfo.field.bits[offset]);     \
++    }
 +
-+#define HSR_SYSREG_ID_AA64PFR0_EL1   HSR_SYSREG(3,0,c0,c4,0)
-+#define HSR_SYSREG_ID_AA64PFR1_EL1   HSR_SYSREG(3,0,c0,c4,1)
-+#define HSR_SYSREG_ID_AA64DFR0_EL1   HSR_SYSREG(3,0,c0,c5,0)
-+#define HSR_SYSREG_ID_AA64DFR1_EL1   HSR_SYSREG(3,0,c0,c5,1)
-+#define HSR_SYSREG_ID_AA64ISAR0_EL1  HSR_SYSREG(3,0,c0,c6,0)
-+#define HSR_SYSREG_ID_AA64ISAR1_EL1  HSR_SYSREG(3,0,c0,c6,1)
-+#define HSR_SYSREG_ID_AA64MMFR0_EL1  HSR_SYSREG(3,0,c0,c7,0)
-+#define HSR_SYSREG_ID_AA64MMFR1_EL1  HSR_SYSREG(3,0,c0,c7,1)
-+#define HSR_SYSREG_ID_AA64MMFR2_EL1  HSR_SYSREG(3,0,c0,c7,2)
-+#define HSR_SYSREG_ID_AA64AFR0_EL1   HSR_SYSREG(3,0,c0,c5,4)
-+#define HSR_SYSREG_ID_AA64AFR1_EL1   HSR_SYSREG(3,0,c0,c5,5)
-+#define HSR_SYSREG_ID_AA64ZFR0_EL1   HSR_SYSREG(3,0,c0,c4,4)
+ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
+ {
+     const struct hsr_cp32 cp32 = hsr.cp32;
+@@ -286,6 +294,37 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
+          */
+         return handle_raz_wi(regs, regidx, cp32.read, hsr, 1);
+ 
++    /*
++     * HCR_EL2.TID3
++     *
++     * This is trapping most Identification registers used by a guest
++     * to identify the processor features
++     */
++    GENERATE_TID3_INFO(ID_PFR0, pfr32, 0)
++    GENERATE_TID3_INFO(ID_PFR1, pfr32, 1)
++    GENERATE_TID3_INFO(ID_PFR2, pfr32, 2)
++    GENERATE_TID3_INFO(ID_DFR0, dbg32, 0)
++    GENERATE_TID3_INFO(ID_DFR1, dbg32, 1)
++    GENERATE_TID3_INFO(ID_AFR0, aux32, 0)
++    GENERATE_TID3_INFO(ID_MMFR0, mm32, 0)
++    GENERATE_TID3_INFO(ID_MMFR1, mm32, 1)
++    GENERATE_TID3_INFO(ID_MMFR2, mm32, 2)
++    GENERATE_TID3_INFO(ID_MMFR3, mm32, 3)
++    GENERATE_TID3_INFO(ID_MMFR4, mm32, 4)
++    GENERATE_TID3_INFO(ID_MMFR5, mm32, 5)
++    GENERATE_TID3_INFO(ID_ISAR0, isa32, 0)
++    GENERATE_TID3_INFO(ID_ISAR1, isa32, 1)
++    GENERATE_TID3_INFO(ID_ISAR2, isa32, 2)
++    GENERATE_TID3_INFO(ID_ISAR3, isa32, 3)
++    GENERATE_TID3_INFO(ID_ISAR4, isa32, 4)
++    GENERATE_TID3_INFO(ID_ISAR5, isa32, 5)
++    GENERATE_TID3_INFO(ID_ISAR6, isa32, 6)
++    /* MVFR registers are in cp10 no cp15 */
 +
++    HSR_CPREG32_TID3_RESERVED_CASE:
++        /* Handle all reserved registers as RAZ */
++        return handle_ro_raz(regs, regidx, cp32.read, hsr, 1);
++
+     /*
+      * HCR_EL2.TIDCP
+      *
+diff --git a/xen/include/asm-arm/cpregs.h b/xen/include/asm-arm/cpregs.h
+index 2690ddeb7a..5cb1ad5cbe 100644
+--- a/xen/include/asm-arm/cpregs.h
++++ b/xen/include/asm-arm/cpregs.h
+@@ -133,6 +133,31 @@
+ #define VPIDR           p15,4,c0,c0,0   /* Virtualization Processor ID Register */
+ #define VMPIDR          p15,4,c0,c0,5   /* Virtualization Multiprocessor ID Register */
+ 
 +/*
 + * Those cases are catching all Reserved registers trapped by TID3 which
 + * currently have no assignment.
 + * HCR.TID3 is trapping all registers in the group 3:
-+ * Op0 == 3, op1 == 0, CRn == c0,CRm == {c1-c7}, op2 == {0-7}.
++ * coproc == p15, opc1 == 0, CRn == c0, CRm == {c2-c7}, opc2 == {0-7}.
 + */
-+#define HSR_SYSREG_TID3_RESERVED_CASE  case HSR_SYSREG(3,0,c0,c3,3): \
-+                                       case HSR_SYSREG(3,0,c0,c3,7): \
-+                                       case HSR_SYSREG(3,0,c0,c4,2): \
-+                                       case HSR_SYSREG(3,0,c0,c4,3): \
-+                                       case HSR_SYSREG(3,0,c0,c4,5): \
-+                                       case HSR_SYSREG(3,0,c0,c4,6): \
-+                                       case HSR_SYSREG(3,0,c0,c4,7): \
-+                                       case HSR_SYSREG(3,0,c0,c5,2): \
-+                                       case HSR_SYSREG(3,0,c0,c5,3): \
-+                                       case HSR_SYSREG(3,0,c0,c5,6): \
-+                                       case HSR_SYSREG(3,0,c0,c5,7): \
-+                                       case HSR_SYSREG(3,0,c0,c6,2): \
-+                                       case HSR_SYSREG(3,0,c0,c6,3): \
-+                                       case HSR_SYSREG(3,0,c0,c6,4): \
-+                                       case HSR_SYSREG(3,0,c0,c6,5): \
-+                                       case HSR_SYSREG(3,0,c0,c6,6): \
-+                                       case HSR_SYSREG(3,0,c0,c6,7): \
-+                                       case HSR_SYSREG(3,0,c0,c7,3): \
-+                                       case HSR_SYSREG(3,0,c0,c7,4): \
-+                                       case HSR_SYSREG(3,0,c0,c7,5): \
-+                                       case HSR_SYSREG(3,0,c0,c7,6): \
-+                                       case HSR_SYSREG(3,0,c0,c7,7)
++#define HSR_CPREG32_TID3_CASES(REG)     case HSR_CPREG32(p15,0,c0,REG,0): \
++                                        case HSR_CPREG32(p15,0,c0,REG,1): \
++                                        case HSR_CPREG32(p15,0,c0,REG,2): \
++                                        case HSR_CPREG32(p15,0,c0,REG,3): \
++                                        case HSR_CPREG32(p15,0,c0,REG,4): \
++                                        case HSR_CPREG32(p15,0,c0,REG,5): \
++                                        case HSR_CPREG32(p15,0,c0,REG,6): \
++                                        case HSR_CPREG32(p15,0,c0,REG,7)
 +
- #endif /* __ASM_ARM_ARM64_HSR_H */
- 
- /*
++#define HSR_CPREG32_TID3_RESERVED_CASE  case HSR_CPREG32(p15,0,c0,c3,0): \
++                                        case HSR_CPREG32(p15,0,c0,c3,1): \
++                                        case HSR_CPREG32(p15,0,c0,c3,2): \
++                                        case HSR_CPREG32(p15,0,c0,c3,3): \
++                                        case HSR_CPREG32(p15,0,c0,c3,7): \
++                                        HSR_CPREG32_TID3_CASES(c4): \
++                                        HSR_CPREG32_TID3_CASES(c5): \
++                                        HSR_CPREG32_TID3_CASES(c6): \
++                                        HSR_CPREG32_TID3_CASES(c7)
++
+ /* CP15 CR1: System Control Registers */
+ #define SCTLR           p15,0,c1,c0,0   /* System Control Register */
+ #define ACTLR           p15,0,c1,c0,1   /* Auxiliary Control Register */
 -- 
 2.17.1
 
