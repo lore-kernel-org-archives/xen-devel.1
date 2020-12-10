@@ -2,45 +2,41 @@ Return-Path: <SRS0=O1tB=FO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85DF4C4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 18:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA27AC4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3052D22AAF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 18:50:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3052D22AAF
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 72CCD23DC4
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 72CCD23DC4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49678.87831 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49699.87892 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knR19-0002DF-AW; Thu, 10 Dec 2020 18:50:19 +0000
+	id 1knRpc-0007VO-HW; Thu, 10 Dec 2020 19:42:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49678.87831; Thu, 10 Dec 2020 18:50:19 +0000
+Received: by outflank-mailman (output) from mailman id 49699.87892; Thu, 10 Dec 2020 19:42:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knR19-0002D8-7a; Thu, 10 Dec 2020 18:50:19 +0000
-Received: by outflank-mailman (input) for mailman id 49678;
- Thu, 10 Dec 2020 18:50:17 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1knR17-0002D3-KN
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 18:50:17 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1knR16-0006ao-2W; Thu, 10 Dec 2020 18:50:16 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1knR15-0004L6-Lc; Thu, 10 Dec 2020 18:50:15 +0000
+	id 1knRpc-0007VD-Dm; Thu, 10 Dec 2020 19:42:28 +0000
+Received: by outflank-mailman (input) for mailman id 49699;
+ Thu, 10 Dec 2020 19:42:27 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
+ id 1knRpb-0007NY-HA
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:27 +0000
+Received: from galois.linutronix.de (unknown [193.142.43.55])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 69ccdec6-8894-415f-87fd-d3c42a288a22;
+ Thu, 10 Dec 2020 19:42:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,235 +48,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=XDwWIjmn41xeSxXSoYg5HaOcihHdudMxNY5/au0DBj0=; b=ABYRR+2viglG8M5ct3QeoaHbPd
-	J+8+PlXA2A2JZtUzciwKlAWhplQVmbdk4rk7PlY5MyGit+ubb/IHHXQFtJHXJNYuhp+FrOKR0mZrO
-	ynEzijvJ8RxAm9tqREteYn/J2Z0IhyTjuW2MpmQFTYOP3VbSYMltjnAhMaGgBL1NX5VQ=;
-Subject: Re: [PATCH V3 21/23] xen/arm: Add mapcache invalidation handling
-To: Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: xen-devel@lists.xenproject.org,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Julien Grall <julien.grall@arm.com>
-References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
- <1606732298-22107-22-git-send-email-olekstysh@gmail.com>
- <alpine.DEB.2.21.2012091822300.20986@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <a6897469-f031-e49d-0b4c-b1aa10d66d6d@xen.org>
-Date: Thu, 10 Dec 2020 18:50:13 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.5.1
+X-Inumbo-ID: 69ccdec6-8894-415f-87fd-d3c42a288a22
+Message-Id: <20201210194042.703779349@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1607629337;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:  references:references;
+	bh=xNUoZoBVroF7IJy3X8hhV7V+S/ANMxwK+r48iZvHH7k=;
+	b=SuZCyt4zlNSkg7Jh6xjd5t+bljnkIDhiuE1rhn/qKeMG+ite6vJEiEbNofXy6Jc8tYg+0b
+	IECvv2LjnWcGzCS6R2c2tg4sgQpGcjXByKLBZPL7Xs4OwNUUaKF820w3Ic1JKPFWbxYaV/
+	zQxlwp4rnzD+WzTiaw91J+4L7iQQ+SR32KSqZT854CLAJKIIUHqBcwUh01vq4gYJysHS9U
+	2YuIdbPutXAYf6qxYXI8k/N2s6EcL8OojQbYBV3yqFeMwoY5o0cLfzqE9P8/gw+P+igDVq
+	lKj3W3wk7xu1ziy9h34ybqOITt3G9Oy0XdV3S2Ut5Fvm8NWwxziMLNP2XRk3vg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1607629337;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:  references:references;
+	bh=xNUoZoBVroF7IJy3X8hhV7V+S/ANMxwK+r48iZvHH7k=;
+	b=VHoSRskFC2dXgfT8CV99ZHE5BpRPUfLU6nfE7o3PMPrsIEKWqDmtgbLpWFRMlRZjjTeINe
+	qsFjW8cMZ9WikxCw==
+Date: Thu, 10 Dec 2020 20:25:38 +0100
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>,
+ Marc Zyngier <maz@kernel.org>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>,
+ afzal mohammed <afzal.mohd.ma@gmail.com>,
+ linux-parisc@vger.kernel.org,
+ Russell King <linux@armlinux.org.uk>,
+ linux-arm-kernel@lists.infradead.org,
+ Mark Rutland <mark.rutland@arm.com>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Will Deacon <will@kernel.org>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Heiko Carstens <hca@linux.ibm.com>,
+ linux-s390@vger.kernel.org,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ Chris Wilson <chris@chris-wilson.co.uk>,
+ Wambui Karuga <wambui.karugax@gmail.com>,
+ intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ linux-gpio@vger.kernel.org,
+ Lee Jones <lee.jones@linaro.org>,
+ Jon Mason <jdmason@kudzu.us>,
+ Dave Jiang <dave.jiang@intel.com>,
+ Allen Hubbe <allenbh@gmail.com>,
+ linux-ntb@googlegroups.com,
+ Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+ Rob Herring <robh@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Michal Simek <michal.simek@xilinx.com>,
+ linux-pci@vger.kernel.org,
+ Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Tariq Toukan <tariqt@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>,
+ netdev@vger.kernel.org,
+ linux-rdma@vger.kernel.org,
+ Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leon@kernel.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+Subject: [patch 02/30] genirq: Move status flag checks to core
+References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2012091822300.20986@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-transfer-encoding: 8-bit
 
-Hi Stefano,
+These checks are used by modules and prevent the removal of the export of
+irq_to_desc(). Move the accessor into the core.
 
-On 10/12/2020 02:30, Stefano Stabellini wrote:
-> On Mon, 30 Nov 2020, Oleksandr Tyshchenko wrote:
->> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>
->> We need to send mapcache invalidation request to qemu/demu everytime
->> the page gets removed from a guest.
->>
->> At the moment, the Arm code doesn't explicitely remove the existing
->> mapping before inserting the new mapping. Instead, this is done
->> implicitely by __p2m_set_entry().
->>
->> So we need to recognize a case when old entry is a RAM page *and*
->> the new MFN is different in order to set the corresponding flag.
->> The most suitable place to do this is p2m_free_entry(), there
->> we can find the correct leaf type. The invalidation request
->> will be sent in do_trap_hypercall() later on.
-> 
-> Why is it sent in do_trap_hypercall() ?
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+---
+ include/linux/irqdesc.h |   17 +++++------------
+ kernel/irq/manage.c     |   17 +++++++++++++++++
+ 2 files changed, 22 insertions(+), 12 deletions(-)
 
-I believe this is following the approach used by x86. There are actually 
-some discussion about it (see [1]).
+--- a/include/linux/irqdesc.h
++++ b/include/linux/irqdesc.h
+@@ -223,28 +223,21 @@ irq_set_chip_handler_name_locked(struct
+ 	data->chip = chip;
+ }
+ 
++bool irq_check_status_bit(unsigned int irq, unsigned int bitmask);
++
+ static inline bool irq_balancing_disabled(unsigned int irq)
+ {
+-	struct irq_desc *desc;
+-
+-	desc = irq_to_desc(irq);
+-	return desc->status_use_accessors & IRQ_NO_BALANCING_MASK;
++	return irq_check_status_bit(irq, IRQ_NO_BALANCING_MASK);
+ }
+ 
+ static inline bool irq_is_percpu(unsigned int irq)
+ {
+-	struct irq_desc *desc;
+-
+-	desc = irq_to_desc(irq);
+-	return desc->status_use_accessors & IRQ_PER_CPU;
++	return irq_check_status_bit(irq, IRQ_PER_CPU);
+ }
+ 
+ static inline bool irq_is_percpu_devid(unsigned int irq)
+ {
+-	struct irq_desc *desc;
+-
+-	desc = irq_to_desc(irq);
+-	return desc->status_use_accessors & IRQ_PER_CPU_DEVID;
++	return irq_check_status_bit(irq, IRQ_PER_CPU_DEVID);
+ }
+ 
+ static inline void
+--- a/kernel/irq/manage.c
++++ b/kernel/irq/manage.c
+@@ -2769,3 +2769,23 @@ bool irq_has_action(unsigned int irq)
+ 	return res;
+ }
+ EXPORT_SYMBOL_GPL(irq_has_action);
++
++/**
++ * irq_check_status_bit - Check whether bits in the irq descriptor status are set
++ * @irq:	The linux irq number
++ * @bitmask:	The bitmask to evaluate
++ *
++ * Returns: True if one of the bits in @bitmask is set
++ */
++bool irq_check_status_bit(unsigned int irq, unsigned int bitmask)
++{
++	struct irq_desc *desc;
++	bool res = false;
++
++	rcu_read_lock();
++	desc = irq_to_desc(irq);
++	if (desc)
++		res = !!(desc->status_use_accessors & bitmask);
++	rcu_read_unlock();
++	return res;
++}
 
-Leaving aside the toolstack case for now, AFAIK, the only way a guest 
-can modify its p2m is via an hypercall. Do you have an example otherwise?
-
-When sending the invalidation request, the vCPU will be blocked until 
-all the IOREQ server have acknowledged the invalidation. So the 
-hypercall seems to be the best position to do it.
-
-Alternatively, we could use check_for_vcpu_work() to check if the 
-mapcache needs to be invalidated. The inconvenience is we would execute 
-a few more instructions in each entry/exit path.
-
-> 
-> 
->> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->> CC: Julien Grall <julien.grall@arm.com>
->>
->> ---
->> Please note, this is a split/cleanup/hardening of Julien's PoC:
->> "Add support for Guest IO forwarding to a device emulator"
->>
->> Changes V1 -> V2:
->>     - new patch, some changes were derived from (+ new explanation):
->>       xen/ioreq: Make x86's invalidate qemu mapcache handling common
->>     - put setting of the flag into __p2m_set_entry()
->>     - clarify the conditions when the flag should be set
->>     - use domain_has_ioreq_server()
->>     - update do_trap_hypercall() by adding local variable
->>
->> Changes V2 -> V3:
->>     - update patch description
->>     - move check to p2m_free_entry()
->>     - add a comment
->>     - use "curr" instead of "v" in do_trap_hypercall()
->> ---
->> ---
->>   xen/arch/arm/p2m.c   | 24 ++++++++++++++++--------
->>   xen/arch/arm/traps.c | 13 ++++++++++---
->>   2 files changed, 26 insertions(+), 11 deletions(-)
->>
->> diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
->> index 5b8d494..9674f6f 100644
->> --- a/xen/arch/arm/p2m.c
->> +++ b/xen/arch/arm/p2m.c
->> @@ -1,6 +1,7 @@
->>   #include <xen/cpu.h>
->>   #include <xen/domain_page.h>
->>   #include <xen/iocap.h>
->> +#include <xen/ioreq.h>
->>   #include <xen/lib.h>
->>   #include <xen/sched.h>
->>   #include <xen/softirq.h>
->> @@ -749,17 +750,24 @@ static void p2m_free_entry(struct p2m_domain *p2m,
->>       if ( !p2m_is_valid(entry) )
->>           return;
->>   
->> -    /* Nothing to do but updating the stats if the entry is a super-page. */
->> -    if ( p2m_is_superpage(entry, level) )
->> +    if ( p2m_is_superpage(entry, level) || (level == 3) )
->>       {
->> -        p2m->stats.mappings[level]--;
->> -        return;
->> -    }
->> +#ifdef CONFIG_IOREQ_SERVER
->> +        /*
->> +         * If this gets called (non-recursively) then either the entry
->> +         * was replaced by an entry with a different base (valid case) or
->> +         * the shattering of a superpage was failed (error case).
->> +         * So, at worst, the spurious mapcache invalidation might be sent.
->> +         */
->> +        if ( domain_has_ioreq_server(p2m->domain) &&
->> +             (p2m->domain == current->domain) && p2m_is_ram(entry.p2m.type) )
->> +            p2m->domain->mapcache_invalidate = true;
-> 
-> Why the (p2m->domain == current->domain) check? Shouldn't we set
-> mapcache_invalidate to true anyway? What happens if p2m->domain !=
-> current->domain? We wouldn't want the domain to lose the
-> mapcache_invalidate notification.
-
-This is also discussed in [1]. :) The main question is why would a 
-toolstack/device model modify the guest memory after boot?
-
-If we assume it does, then the device model would need to pause the 
-domain before modifying the RAM.
-
-We also need to make sure that all the IOREQ servers have invalidated
-the mapcache before the domain run again.
-
-This would require quite a bit of work. I am not sure the effort is 
-worth if there are no active users today.
-
-> 
-> 
->> +#endif
->>   
->> -    if ( level == 3 )
->> -    {
->>           p2m->stats.mappings[level]--;
->> -        p2m_put_l3_page(entry);
->> +        /* Nothing to do if the entry is a super-page. */
->> +        if ( level == 3 )
->> +            p2m_put_l3_page(entry);
->>           return;
->>       }
->>   
->> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
->> index b6077d2..151c626 100644
->> --- a/xen/arch/arm/traps.c
->> +++ b/xen/arch/arm/traps.c
->> @@ -1443,6 +1443,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
->>                                 const union hsr hsr)
->>   {
->>       arm_hypercall_fn_t call = NULL;
->> +    struct vcpu *curr = current;
-> 
-> Is this just to save 3 characters?
-
-Because current is not cheap to read and the compiler cannot optimize it 
-(we obfuscate it as this is a per-cpu variable). So we commonly store 
-'current'  in a local variable if there are multiple use.
-
-> 
-> 
->>       BUILD_BUG_ON(NR_hypercalls < ARRAY_SIZE(arm_hypercall_table) );
->>   
->> @@ -1459,7 +1460,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
->>           return;
->>       }
->>   
->> -    current->hcall_preempted = false;
->> +    curr->hcall_preempted = false;
->>   
->>       perfc_incra(hypercalls, *nr);
->>       call = arm_hypercall_table[*nr].fn;
->> @@ -1472,7 +1473,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
->>       HYPERCALL_RESULT_REG(regs) = call(HYPERCALL_ARGS(regs));
->>   
->>   #ifndef NDEBUG
->> -    if ( !current->hcall_preempted )
->> +    if ( !curr->hcall_preempted )
->>       {
->>           /* Deliberately corrupt parameter regs used by this hypercall. */
->>           switch ( arm_hypercall_table[*nr].nr_args ) {
->> @@ -1489,8 +1490,14 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
->>   #endif
->>   
->>       /* Ensure the hypercall trap instruction is re-executed. */
->> -    if ( current->hcall_preempted )
->> +    if ( curr->hcall_preempted )
->>           regs->pc -= 4;  /* re-execute 'hvc #XEN_HYPERCALL_TAG' */
->> +
->> +#ifdef CONFIG_IOREQ_SERVER
->> +    if ( unlikely(curr->domain->mapcache_invalidate) &&
->> +         test_and_clear_bool(curr->domain->mapcache_invalidate) )
->> +        ioreq_signal_mapcache_invalidate();
-> 
-> Why not just:
-> 
-> if ( unlikely(test_and_clear_bool(curr->domain->mapcache_invalidate)) )
->      ioreq_signal_mapcache_invalidate();
-> 
-
-This seems to match the x86 code. My guess is they tried to prevent the 
-cost of the atomic operation if there is no chance mapcache_invalidate 
-is true.
-
-I am split whether the first check is worth it. The atomic operation 
-should be uncontended most of the time, so it should be quick. But it 
-will always be slower than just a read because there is always a store 
-involved.
-
-On a related topic, Jan pointed out that the invalidation would not work 
-properly if you have multiple vCPU modifying the P2M at the same time.
-
-Cheers,
-
-[1] 
-https://lore.kernel.org/xen-devel/f92f62bf-2f8d-34db-4be5-d3e6a4b9d580@suse.com/
-
--- 
-Julien Grall
 
