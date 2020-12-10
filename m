@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3368C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 699E2C433E6
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0B7720784
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0B7720784
+	by mail.kernel.org (Postfix) with ESMTPS id 106B9225AB
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 106B9225AB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61618.108505 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61626.108526 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYoj-00023q-MG; Mon, 04 Jan 2021 22:59:13 +0000
+	id 1kwYon-0002BT-Ii; Mon, 04 Jan 2021 22:59:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61618.108505; Mon, 04 Jan 2021 22:59:13 +0000
+Received: by outflank-mailman (output) from mailman id 61626.108526; Mon, 04 Jan 2021 22:59:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYoj-00023e-GA; Mon, 04 Jan 2021 22:59:13 +0000
-Received: by outflank-mailman (input) for mailman id 61618;
- Mon, 04 Jan 2021 22:59:12 +0000
+	id 1kwYon-0002Aw-6T; Mon, 04 Jan 2021 22:59:17 +0000
+Received: by outflank-mailman (input) for mailman id 61626;
+ Mon, 04 Jan 2021 22:59:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Wh7t=GH=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kwYid-0000oY-UU
- for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:52:55 +0000
+ id 1kwYi9-0000oY-TA
+ for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:52:25 +0000
 Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0b44001d-3b0d-4343-ad88-190b0f2e10c3;
- Mon, 04 Jan 2021 22:52:36 +0000 (UTC)
+ id 91638428-f27c-4490-b226-9fd16a395869;
+ Mon, 04 Jan 2021 22:52:14 +0000 (UTC)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MqR80071482
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104Mq4co071457
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Mon, 4 Jan 2021 17:52:33 -0500 (EST) (envelope-from ehem@m5p.com)
+ Mon, 4 Jan 2021 17:52:10 -0500 (EST) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 104MqRWR071481;
- Mon, 4 Jan 2021 14:52:27 -0800 (PST) (envelope-from ehem)
+ by m5p.com (8.15.2/8.15.2/Submit) id 104Mq4G4071456;
+ Mon, 4 Jan 2021 14:52:04 -0800 (PST) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,8 +55,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b44001d-3b0d-4343-ad88-190b0f2e10c3
-Message-Id: <73e9c064c46da42fcd6cf30372049eceb0fc404f.1608663694.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 91638428-f27c-4490-b226-9fd16a395869
+Message-Id: <b0211ac6542435ac2a2987e1e573150c21b1d719.1608663694.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1608663694.git.ehem+xen@m5p.com>
 References: <cover.1608663694.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -64,87 +64,331 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Date: Sat, 12 Dec 2020 20:42:33 -0800
-Subject: [WIP PATCH 12/16] WIP: UNTESTED: tools/xl: Replace remaining options
- with format()
+Date: Thu, 10 Dec 2020 15:09:06 -0800
+Subject: [WIP PATCH 09/16] WIP: tools/xl: Implement generalized output
+ formatting for `xl list`
 
-format() is meant to be a powerful tool, sweep the remaining bits
-away.  Unfortunately I am unable to test this portion.
+Implement a generalized output formatting function for the `xl list`
+subcommands.  Notably `xl list` and `xl vm-list` could make use of
+alternative output list formats.
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/xl/xl_list.c | 44 ++++++++------------------------------------
- 1 file changed, 8 insertions(+), 36 deletions(-)
+I'm a bit unsure of #include <xen-tools/libs.h>.  When looking for an
+implementation of ARRAY_SIZE(), that was the header I found.  I can
+readily write it myself, but rather than inlining, I looked for a copy in
+a header and found that.
+---
+ tools/xl/xl_list.c | 285 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 285 insertions(+)
 
 diff --git a/tools/xl/xl_list.c b/tools/xl/xl_list.c
-index 10d076864e..ee20d2feee 100644
+index e30536fd9a..1c04f2126b 100644
 --- a/tools/xl/xl_list.c
 +++ b/tools/xl/xl_list.c
-@@ -371,56 +371,28 @@ static void list_domains(bool verbose, bool context, bool claim, bool numa,
-     int i;
-     const char lead[] = "%-40n %5i %5m %5v     %s  %8.1t";
+@@ -14,10 +14,14 @@
  
--    libxl_bitmap nodemap;
--    libxl_physinfo physinfo;
--
--    libxl_bitmap_init(&nodemap);
--    libxl_physinfo_init(&physinfo);
--
-     format(formats, lead, NULL);
-     if (verbose) {
-         format(formats, " %u %r %16l", NULL);
-     } else if (context) format(formats, " %16l", NULL);
--    if (claim) printf("  Claimed");
--    if (cpupool) printf("         Cpupool");
--    if (numa) {
--        if (libxl_node_bitmap_alloc(ctx, &nodemap, 0)) {
--            fprintf(stderr, "libxl_node_bitmap_alloc_failed.\n");
--            exit(EXIT_FAILURE);
--        }
--        if (libxl_get_physinfo(ctx, &physinfo) != 0) {
--            fprintf(stderr, "libxl_physinfo failed.\n");
--            libxl_bitmap_dispose(&nodemap);
--            exit(EXIT_FAILURE);
--        }
--
--        printf(" NODE Affinity");
--    }
-+    if (claim) format(formats, " %5c", NULL);
-+    if (cpupool) format(formats, " %16p", NULL);
-+    if (numa) format(formats, " %A", NULL);
-     printf("\n");
-     for (i = 0; i < nb_domain; i++) {
-         format(formats, lead, info + i);
-         if (verbose)
-             format(formats, " %u %r", info + i);
-         if (claim)
--            printf(" %5lu", (unsigned long)info[i].outstanding_memkb / 1024);
-+            format(formats, " %5c", info + i);
-         if (verbose || context)
-             format(formats, " %16l", info + i);
--        if (cpupool) {
--            char *poolname = libxl_cpupoolid_to_name(ctx, info[i].cpupool);
--            printf("%16s", poolname);
--            free(poolname);
--        }
--        if (numa) {
--            libxl_domain_get_nodeaffinity(ctx, info[i].domid, &nodemap);
--
--            putchar(' ');
--            print_bitmap(nodemap.map, physinfo.nr_nodes, stdout);
--        }
-+        if (cpupool)
-+            format(formats, " %16p", info + i);
-+        if (numa)
-+            format(formats, " %A", info + i);
-         putchar('\n');
-     }
--
--    libxl_bitmap_dispose(&nodemap);
--    libxl_physinfo_dispose(&physinfo);
- }
+ #define _GNU_SOURCE
+ 
++#include <ctype.h>
+ #include <inttypes.h>
+ #include <stdlib.h>
++#include <stddef.h>
+ #include <unistd.h>
+ 
++#include <xen-tools/libs.h>
++
+ #include <libxl.h>
+ #include <libxl_utils.h>
+ 
+@@ -25,6 +29,287 @@
+ #include "xl_utils.h"
  
  
++struct format_entry;
++
++typedef void (format_function_t)(const struct format_entry *,
++                                 const void *, const char *, size_t);
++
++typedef struct format_entry {
++    char *const header;
++    char formatc[3];
++    format_function_t *formatf;
++    ptrdiff_t offset;
++    union {
++        int i;
++        unsigned long lu;
++        float f;
++        void *v;
++        char *(*xlfunc)(libxl_ctx *, uint32_t);
++    } extra;
++} format_table_t['z' - 'A' + 1];
++
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wformat-nonliteral"
++
++static void format_normal(const struct format_entry *entry,
++                          const void *info, const char *format,
++                          size_t len)
++{
++    char *buf = alloca(len + 3);
++    memcpy(buf, format, len);
++    if (info) {
++        const char *str;
++        int i;
++        unsigned long lu;
++        float f;
++        strcpy(buf + len, entry->formatc);
++        switch (entry->formatc[0]) {
++        case 's':
++            str = ((char **)info)[entry->offset];
++            if (!str) str = "-";
++            printf(buf, str);
++            break;
++        case 'f':
++            f = ((float *)info)[entry->offset];
++            if (entry->extra.f != 0) f /= entry->extra.f;
++            printf(buf, f);
++            break;
++        case 'l':
++            lu = ((unsigned long *)info)[entry->offset];
++            if (entry->extra.lu) lu /= entry->extra.lu;
++            printf(buf, lu);
++            break;
++        case 'd':
++        default:
++            i = ((int *)info)[entry->offset];
++            if (entry->extra.i) i /= entry->extra.i;
++            printf(buf, i);
++            break;
++        }
++    } else {
++        if (entry->formatc[0] == 'f') {
++            char *tmp;
++            buf[len] = '\0';
++            if ((tmp = rindex(buf, '.')))
++                len = tmp - buf - 1;
++        }
++        strcpy(buf + len, "s");
++        printf(buf, entry->header);
++    }
++}
++
++static void format_allocstr(const struct format_entry *entry,
++                            const void *info, const char *format,
++                            size_t len)
++{
++    char *fmt = alloca(len + 2);
++    char *outbuf;
++    memcpy(fmt, format, len);
++    strcpy(fmt + len, "s");
++
++    if (info) {
++        outbuf = entry->extra.xlfunc(ctx, ((uint32_t *)info)[entry->offset]);
++        printf(fmt, outbuf);
++        free(outbuf);
++    } else printf(fmt, entry->header);
++}
++
++static void format_uuid(const struct format_entry *entry,
++                        const void *info, const char *format,
++                        size_t len)
++{
++    if (info) printf(LIBXL_UUID_FMT, LIBXL_UUID_BYTES(*(libxl_uuid *)((char *)info + entry->offset)));
++    else fputs(entry->header, stdout);
++}
++
++static void format_time(const struct format_entry *entry,
++                        const void *_info, const char *format,
++                        size_t len)
++{
++    const libxl_dominfo *info = _info;
++    char *fmt = alloca(len + 2);
++    memcpy(fmt, format, len);
++
++    if (info) {
++        strcpy(fmt + len, "f");
++        printf(fmt, ((float)info->cpu_time / 1e9));
++    } else {
++        char *tmp;
++        if (!(tmp = index(fmt, '.'))) tmp = fmt + len;
++        strcpy(tmp, "s");
++        printf(fmt, entry->header);
++    }
++}
++
++static void format_state(const struct format_entry *entry,
++                         const void *_info, const char *format,
++                         size_t len)
++{
++    const libxl_dominfo *info = _info;
++    if (info) {
++        const char shutdown_reason_letters[] = "-rscwS";
++        libxl_shutdown_reason shutdown_reason;
++        static const char letters[] = "rbps";
++        int i;
++	const bool *flags;
++
++	flags = &info->running;
++        for (i = 0; i < strlen(letters); ++i)
++            putchar(flags[i] ? letters[i] : '-');
++
++        shutdown_reason = info->shutdown ? info->shutdown_reason : 0;
++        putchar((shutdown_reason >= 0 &&
++            shutdown_reason < sizeof(shutdown_reason_letters)-1
++            ? shutdown_reason_letters[shutdown_reason] : '?'));
++
++        putchar(info->dying ? 'd' : '-');
++    } else printf("%6s", entry->header);
++}
++
++static void format_reason(const struct format_entry *entry,
++                          const void *_info, const char *format,
++                          size_t len)
++{
++    const libxl_dominfo *info = _info;
++    const char *output = entry->header;
++    if (info) {
++        if (info->shutdown) {
++            printf("%8x", info->shutdown_reason);
++            return;
++        }
++        output = "-";
++    }
++    printf("%8s", output);
++}
++
++static void format_memory(const struct format_entry *entry,
++                          const void *_info, const char *format,
++                          size_t len)
++{
++    const libxl_dominfo *info = _info;
++    char *fmt = alloca(len + 3);
++    memcpy(fmt, format, len);
++    if (info) {
++        strcpy(fmt + len, entry->formatc);
++        printf(fmt, (info->current_memkb + info->outstanding_memkb) >> 10);
++    } else {
++        strcpy(fmt + len, "s");
++        printf(fmt, "Mem");
++    }
++}
++
++static void format_node(const struct format_entry *entry,
++                        const void *_info, const char *format,
++                        size_t len)
++{
++    const libxl_dominfo *info = _info;
++    static bool need_init = true;
++    static libxl_bitmap nodemap;
++    static libxl_physinfo physinfo;
++
++    if (need_init) {
++        libxl_bitmap_init(&nodemap);
++        libxl_physinfo_init(&physinfo);
++        need_init = false;
++
++        if (libxl_node_bitmap_alloc(ctx, &nodemap, 0)) {
++            fprintf(stderr, "libxl_node_bitmap_alloc_failed.\n");
++            exit(EXIT_FAILURE);
++        }
++        if (libxl_get_physinfo(ctx, &physinfo) != 0) {
++            fprintf(stderr, "libxl_physinfo failed.\n");
++            libxl_bitmap_dispose(&nodemap);
++            exit(EXIT_FAILURE);
++        }
++    }
++
++    if (info) {
++        libxl_domain_get_nodeaffinity(ctx, info->domid, &nodemap);
++
++        putchar(' ');
++        print_bitmap(nodemap.map, physinfo.nr_nodes, stdout);
++    } else fputs(entry->header, stdout);
++
++#if 0
++    /* unfortunately these get leaked on exit */
++    libxl_bitmap_dispose(&nodemap);
++    libxl_physinfo_dispose(&physinfo);
++#endif
++}
++
++#pragma GCC diagnostic pop
++
++static bool isfmtchar(int c)
++{
++    const bool opts[] = {
++        ['0'] = true,
++        ['1'] = true,
++        ['2'] = true,
++        ['3'] = true,
++        ['4'] = true,
++        ['5'] = true,
++        ['6'] = true,
++        ['7'] = true,
++        ['8'] = true,
++        ['9'] = true,
++        ['.'] = true,
++        ['#'] = true,
++        ['-'] = true,
++        ['+'] = true,
++        [' '] = true,
++        ['\''] = true,
++    };
++    if ((unsigned int)c < ARRAY_SIZE(opts) && opts[c]) return true;
++    else return false;
++}
++
++static void format(const format_table_t fmttab, const char *fmt,
++                   const void *info)
++{
++    while (fmt[0]) {
++        if (fmt[0] == '\\') {
++            switch (fmt[1]) {
++            case 0:
++                /* Uhm... */
++                return;
++            case '0':
++                putchar(0);
++                break;
++            case 'n':
++                fputs("\n", stdout);
++                break;
++            case 't':
++                putchar('\t');
++                break;
++            default:
++                putchar(fmt[1]);
++            }
++            fmt+=2;
++        } else if (fmt[0] == '%') {
++            size_t len=1;
++            unsigned char entryn;
++
++            while (isfmtchar(fmt[len])) ++len;
++
++            entryn = fmt[len] - 'A';
++            if (entryn < sizeof(format_table_t) / sizeof(fmttab[0]) &&
++                    fmttab[entryn].formatf)
++                fmttab[entryn].formatf(fmttab + entryn, info, fmt, len);
++            else {
++                fprintf(stderr, "Invalid conversion character \'%c\'\n",
++                        entryn);
++                exit(EXIT_FAILURE);
++            }
++
++            fmt += len + 1;
++        } else {
++            putchar(*fmt);
++            ++fmt;
++        }
++    }
++}
++
++
+ static void list_vm(void)
+ {
+     libxl_vminfo *info;
 -- 
 
 
