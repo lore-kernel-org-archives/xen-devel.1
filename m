@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01655C4361B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 546C2C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B9F1A22571
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9F1A22571
+	by mail.kernel.org (Postfix) with ESMTPS id E63E022571
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E63E022571
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49810.88184 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49822.88204 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRyF-0002aL-Fg; Thu, 10 Dec 2020 19:51:23 +0000
+	id 1knRyL-0002qX-0n; Thu, 10 Dec 2020 19:51:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49810.88184; Thu, 10 Dec 2020 19:51:23 +0000
+Received: by outflank-mailman (output) from mailman id 49822.88204; Thu, 10 Dec 2020 19:51:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRyE-0002Ys-Ii; Thu, 10 Dec 2020 19:51:22 +0000
-Received: by outflank-mailman (input) for mailman id 49810;
- Thu, 10 Dec 2020 19:51:20 +0000
+	id 1knRyK-0002qN-S2; Thu, 10 Dec 2020 19:51:28 +0000
+Received: by outflank-mailman (input) for mailman id 49822;
+ Thu, 10 Dec 2020 19:51:27 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRr7-0007OY-GF
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:44:01 +0000
+ id 1knRqO-0007OY-EG
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:16 +0000
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id afefd95e-536b-426d-976d-9d470fe98d83;
- Thu, 10 Dec 2020 19:42:53 +0000 (UTC)
+ id bc48ef13-6c2c-4973-826d-9ac63d48cf28;
+ Thu, 10 Dec 2020 19:42:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,32 +49,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afefd95e-536b-426d-976d-9d470fe98d83
-Message-Id: <20201210194045.551428291@linutronix.de>
+X-Inumbo-ID: bc48ef13-6c2c-4973-826d-9ac63d48cf28
+Message-Id: <20201210194044.473308721@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629372;
+	s=2020; t=1607629358;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=MtNO1nEPKIMiQX4klZrvOfUrY/ABsFwlxtMkntNh7CA=;
-	b=KaxGnHH1MXTqooatghPE8cM6xpnGF4ig0d4EAWoirBaHpwaLjagwuDN+X7ntrzOWzhHJCE
-	Ez3+VuPBK6N8THRx/c/U7BpDe7lSNCEOKsSoZIfAKG42zMl8uOqZUH0n+L+DqNCVrKQYTB
-	oVBRlbi3XFzHShM0wZtfud+2wylFkbDbo+6w0T9nxHjXspQdXCx5rbXqQ/f7LVGQLOgMGC
-	ENEQVPteM32WIaUIGu6797s46NpYcBHdeeyuJOYmvSReU4vykWzWq+/LUSyXrR2XMumg3x
-	6Lu7jqz9tqhbcJsc0jSPa7puNiljDv9N6eQVXNVG6wM/APWxN3QkWoq0IdHFkw==
+	bh=hb66G/YKxZssYUpIlaqnSR4ZW1k+vqs7JSWYZ8olni4=;
+	b=JDGcEIf6xGhVDkvwWeMQLx9FUu/IsKss78ihAlKadMjAIf3dHANCzucDD5C2rHnEBhKkDC
+	fs0LpWbG65iC+gn0dqp5B//hOUr0DzpNnSBFKb88Vue5ngozd1tGLn7CtzLKEI29imO25z
+	joiUdDjr1d2lfyigu/UfV0ehuoSmHFo9AhA/FqDn1vazpBLlgf2ND1DS3dxniHAdDnilk3
+	1qIkGuqztzebcid1bBRJTHx9CoWTI1/9XLZXX10DwpIeYbsmtua3l8q5FWiIGABqtq0mdG
+	+jGGNyapUz+w2HLUzMDsdOexP4c9y0H7CnIR6EVRiH9/1y/HRKjopWTfNI7hPQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629372;
+	s=2020e; t=1607629358;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=MtNO1nEPKIMiQX4klZrvOfUrY/ABsFwlxtMkntNh7CA=;
-	b=v3GGn2bgoc9w48TBOZdjXg19jWm2bAJN6nmZaIKef4PpZW9mfQUCKMWPL0d+8SCh8ofn/B
-	albFJ36DV6NevuBw==
-Date: Thu, 10 Dec 2020 20:26:06 +0100
+	bh=hb66G/YKxZssYUpIlaqnSR4ZW1k+vqs7JSWYZ8olni4=;
+	b=Fyn3b5Uer8Bt9xBrcUD7/wbs4Zq09nDfu7V/W/qeQGG6ZMTLCbkszqx6GueqYSkgtweAWi
+	EEbLWcn1hOF4e1Aw==
+Date: Thu, 10 Dec 2020 20:25:55 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
  Marc Zyngier <maz@kernel.org>,
+ Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+ Rob Herring <robh@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ linux-pci@vger.kernel.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>,
  afzal mohammed <afzal.mohd.ma@gmail.com>,
@@ -105,13 +111,7 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Dave Jiang <dave.jiang@intel.com>,
  Allen Hubbe <allenbh@gmail.com>,
  linux-ntb@googlegroups.com,
- Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
- Rob Herring <robh@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>,
  Michal Simek <michal.simek@xilinx.com>,
- linux-pci@vger.kernel.org,
- Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
  Tariq Toukan <tariqt@nvidia.com>,
  "David S. Miller" <davem@davemloft.net>,
  Jakub Kicinski <kuba@kernel.org>,
@@ -123,29 +123,63 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject: [patch 30/30] genirq: Remove export of irq_to_desc()
+Subject: [patch 19/30] PCI: mobiveil: Use irq_data_get_irq_chip_data()
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-No more (ab)use in modules finally. Remove the export so there won't come
-new ones.
+Going through a full irq descriptor lookup instead of just using the proper
+helper function which provides direct access is suboptimal.
+
+In fact it _is_ wrong because the chip callback needs to get the chip data
+which is relevant for the chip while using the irq descriptor variant
+returns the irq chip data of the top level chip of a hierarchy. It does not
+matter in this case because the chip is the top level chip, but that
+doesn't make it more correct.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>
+Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+Cc: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>
+Cc: Rob Herring <robh@kernel.org>
+Cc: Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-pci@vger.kernel.org
 ---
- kernel/irq/irqdesc.c |    1 -
- 1 file changed, 1 deletion(-)
+ drivers/pci/controller/mobiveil/pcie-mobiveil-host.c |    8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
---- a/kernel/irq/irqdesc.c
-+++ b/kernel/irq/irqdesc.c
-@@ -352,7 +352,6 @@ struct irq_desc *irq_to_desc(unsigned in
- {
- 	return radix_tree_lookup(&irq_desc_tree, irq);
- }
--EXPORT_SYMBOL(irq_to_desc);
+--- a/drivers/pci/controller/mobiveil/pcie-mobiveil-host.c
++++ b/drivers/pci/controller/mobiveil/pcie-mobiveil-host.c
+@@ -306,13 +306,11 @@ int mobiveil_host_init(struct mobiveil_p
  
- static void delete_irq_desc(unsigned int irq)
+ static void mobiveil_mask_intx_irq(struct irq_data *data)
  {
+-	struct irq_desc *desc = irq_to_desc(data->irq);
+-	struct mobiveil_pcie *pcie;
++	struct mobiveil_pcie *pcie = irq_data_get_irq_chip_data(data);
+ 	struct mobiveil_root_port *rp;
+ 	unsigned long flags;
+ 	u32 mask, shifted_val;
+ 
+-	pcie = irq_desc_get_chip_data(desc);
+ 	rp = &pcie->rp;
+ 	mask = 1 << ((data->hwirq + PAB_INTX_START) - 1);
+ 	raw_spin_lock_irqsave(&rp->intx_mask_lock, flags);
+@@ -324,13 +322,11 @@ static void mobiveil_mask_intx_irq(struc
+ 
+ static void mobiveil_unmask_intx_irq(struct irq_data *data)
+ {
+-	struct irq_desc *desc = irq_to_desc(data->irq);
+-	struct mobiveil_pcie *pcie;
++	struct mobiveil_pcie *pcie = irq_data_get_irq_chip_data(data);
+ 	struct mobiveil_root_port *rp;
+ 	unsigned long flags;
+ 	u32 shifted_val, mask;
+ 
+-	pcie = irq_desc_get_chip_data(desc);
+ 	rp = &pcie->rp;
+ 	mask = 1 << ((data->hwirq + PAB_INTX_START) - 1);
+ 	raw_spin_lock_irqsave(&rp->intx_mask_lock, flags);
 
 
