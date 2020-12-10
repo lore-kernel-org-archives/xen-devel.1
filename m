@@ -3,40 +3,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA27AC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0699C4361B
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 72CCD23DC4
+	by mail.kernel.org (Postfix) with ESMTPS id 63DD323D3C
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 72CCD23DC4
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 63DD323D3C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49699.87892 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49695.87844 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRpc-0007VO-HW; Thu, 10 Dec 2020 19:42:28 +0000
+	id 1knRpT-0007Nk-EC; Thu, 10 Dec 2020 19:42:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49699.87892; Thu, 10 Dec 2020 19:42:28 +0000
+Received: by outflank-mailman (output) from mailman id 49695.87844; Thu, 10 Dec 2020 19:42:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRpc-0007VD-Dm; Thu, 10 Dec 2020 19:42:28 +0000
-Received: by outflank-mailman (input) for mailman id 49699;
- Thu, 10 Dec 2020 19:42:27 +0000
+	id 1knRpT-0007Nd-9e; Thu, 10 Dec 2020 19:42:19 +0000
+Received: by outflank-mailman (input) for mailman id 49695;
+ Thu, 10 Dec 2020 19:42:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRpb-0007NY-HA
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:27 +0000
+ id 1knRpR-0007NY-MO
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:18 +0000
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 69ccdec6-8894-415f-87fd-d3c42a288a22;
- Thu, 10 Dec 2020 19:42:18 +0000 (UTC)
+ id 0c0734a9-a88a-4caa-a14b-9c0be355e987;
+ Thu, 10 Dec 2020 19:42:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,28 +48,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 69ccdec6-8894-415f-87fd-d3c42a288a22
-Message-Id: <20201210194042.703779349@linutronix.de>
+X-Inumbo-ID: 0c0734a9-a88a-4caa-a14b-9c0be355e987
+Message-Id: <20201210192536.118432146@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629337;
+	s=2020; t=1607629334;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=xNUoZoBVroF7IJy3X8hhV7V+S/ANMxwK+r48iZvHH7k=;
-	b=SuZCyt4zlNSkg7Jh6xjd5t+bljnkIDhiuE1rhn/qKeMG+ite6vJEiEbNofXy6Jc8tYg+0b
-	IECvv2LjnWcGzCS6R2c2tg4sgQpGcjXByKLBZPL7Xs4OwNUUaKF820w3Ic1JKPFWbxYaV/
-	zQxlwp4rnzD+WzTiaw91J+4L7iQQ+SR32KSqZT854CLAJKIIUHqBcwUh01vq4gYJysHS9U
-	2YuIdbPutXAYf6qxYXI8k/N2s6EcL8OojQbYBV3yqFeMwoY5o0cLfzqE9P8/gw+P+igDVq
-	lKj3W3wk7xu1ziy9h34ybqOITt3G9Oy0XdV3S2Ut5Fvm8NWwxziMLNP2XRk3vg==
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=dqmaBUU1aX3t41xhFMZZXhwmlvXhIHW8LZkxAL3qIuw=;
+	b=h/TAwStAiTk4XvWiKPBPyDEOx218hZJC1vmF2rxVMRIvmco9q+UXf8EllPz4AjaFdOly7G
+	LH+a53gOb/6x23hHUexy7zt6RJrXCLvlfH0RT7UmulMioZYuYNOHYckgeF+NjT2uTUeh+Y
+	x4QOtIuHWxwLs6LKhedv+5hufAepZeedXGgORll6jDA+oynwB+JjiqXx/tgkxTCP8dbJ6L
+	eWUOoe8IS6Z7h2dgCBQQBehNHm1Tfe56GXWt3TBc5qz2bsl6Xo6wT+1/DTPysSy3XD7/6K
+	p0j9T2Hw/f1US+iZCI2FQmyJpu2ijKWYz9OMLgGwEfvXwTDnGAF9V1bHZmS/0A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629337;
+	s=2020e; t=1607629334;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=xNUoZoBVroF7IJy3X8hhV7V+S/ANMxwK+r48iZvHH7k=;
-	b=VHoSRskFC2dXgfT8CV99ZHE5BpRPUfLU6nfE7o3PMPrsIEKWqDmtgbLpWFRMlRZjjTeINe
-	qsFjW8cMZ9WikxCw==
-Date: Thu, 10 Dec 2020 20:25:38 +0100
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=dqmaBUU1aX3t41xhFMZZXhwmlvXhIHW8LZkxAL3qIuw=;
+	b=njYD6xBoyWobXQbQRXgtO58qqL+V8jLaqaWB6hUvHzVko4O9Y0w527+7oT5RC78ucYDSLL
+	sPAJGjvbV9zCgIAw==
+Date: Thu, 10 Dec 2020 20:25:36 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -122,82 +122,66 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject: [patch 02/30] genirq: Move status flag checks to core
-References: <20201210192536.118432146@linutronix.de>
+Subject: [patch 00/30] genirq: Treewide hunt for irq descriptor abuse and
+ assorted fixes
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-transfer-encoding: 8-bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-These checks are used by modules and prevent the removal of the export of
-irq_to_desc(). Move the accessor into the core.
-
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
----
- include/linux/irqdesc.h |   17 +++++------------
- kernel/irq/manage.c     |   17 +++++++++++++++++
- 2 files changed, 22 insertions(+), 12 deletions(-)
-
---- a/include/linux/irqdesc.h
-+++ b/include/linux/irqdesc.h
-@@ -223,28 +223,21 @@ irq_set_chip_handler_name_locked(struct
- 	data->chip = chip;
- }
- 
-+bool irq_check_status_bit(unsigned int irq, unsigned int bitmask);
-+
- static inline bool irq_balancing_disabled(unsigned int irq)
- {
--	struct irq_desc *desc;
--
--	desc = irq_to_desc(irq);
--	return desc->status_use_accessors & IRQ_NO_BALANCING_MASK;
-+	return irq_check_status_bit(irq, IRQ_NO_BALANCING_MASK);
- }
- 
- static inline bool irq_is_percpu(unsigned int irq)
- {
--	struct irq_desc *desc;
--
--	desc = irq_to_desc(irq);
--	return desc->status_use_accessors & IRQ_PER_CPU;
-+	return irq_check_status_bit(irq, IRQ_PER_CPU);
- }
- 
- static inline bool irq_is_percpu_devid(unsigned int irq)
- {
--	struct irq_desc *desc;
--
--	desc = irq_to_desc(irq);
--	return desc->status_use_accessors & IRQ_PER_CPU_DEVID;
-+	return irq_check_status_bit(irq, IRQ_PER_CPU_DEVID);
- }
- 
- static inline void
---- a/kernel/irq/manage.c
-+++ b/kernel/irq/manage.c
-@@ -2769,3 +2769,23 @@ bool irq_has_action(unsigned int irq)
- 	return res;
- }
- EXPORT_SYMBOL_GPL(irq_has_action);
-+
-+/**
-+ * irq_check_status_bit - Check whether bits in the irq descriptor status are set
-+ * @irq:	The linux irq number
-+ * @bitmask:	The bitmask to evaluate
-+ *
-+ * Returns: True if one of the bits in @bitmask is set
-+ */
-+bool irq_check_status_bit(unsigned int irq, unsigned int bitmask)
-+{
-+	struct irq_desc *desc;
-+	bool res = false;
-+
-+	rcu_read_lock();
-+	desc = irq_to_desc(irq);
-+	if (desc)
-+		res = !!(desc->status_use_accessors & bitmask);
-+	rcu_read_unlock();
-+	return res;
-+}
-
+QSByZWNlbnQgcmVxdWVzdCB0byBleHBvcnQga3N0YXRfaXJxcygpIHBvaW50ZWQgdG8gYSBjb3B5
+IG9mIHRoZSBzYW1lIGluCnRoZSBpOTE1IGNvZGUsIHdoaWNoIG1hZGUgbWUgbG9vayBmb3IgZnVy
+dGhlciB1c2FnZSBvZiBpcnEgZGVzY3JpcHRvcnMgaW4KZHJpdmVycy4KClRoZSB1c2FnZSBpbiBk
+cml2ZXJzIHJhbmdlcyBmcm9tIGNyZWF0aXZlIHRvIGJyb2tlbiBpbiBhbGwgY29sb3Vycy4KCmly
+cWRlc2MuaCBjbGVhcmx5IHNheXMgdGhhdCB0aGlzIGlzIGNvcmUgZnVuY3Rpb25hbGl0eSBhbmQg
+dGhlIGZhY3QgQyBkb2VzCm5vdCBhbGxvdyBmdWxsIGVuY2Fwc3VsYXRpb24gaXMgbm90IGEganVz
+dGlmaWNhdGlvbiB0byBmaWRkbGUgd2l0aCBpdCBqdXN0CmJlY2F1c2UuIEl0IHRvb2sgdXMgYSBs
+b3Qgb2YgZWZmb3J0IHRvIG1ha2UgdGhlIGNvcmUgZnVuY3Rpb25hbGl0eSBwcm92aWRlCndoYXQg
+ZHJpdmVycyBuZWVkLgoKSWYgdGhlcmUgaXMgYSBzaG9ydGNvbWluZywgaXQncyBub3QgYXNrZWQg
+dG9vIG11Y2ggdG8gdGFsayB0byB0aGUgcmVsZXZhbnQKbWFpbnRhaW5lcnMgaW5zdGVhZCBvZiBn
+b2luZyBvZmYgYW5kIGZpZGRsaW5nIHdpdGggdGhlIGd1dHMgb2YgaW50ZXJydXB0CmRlc2NyaXB0
+b3JzIGFuZCBvZnRlbiBlbm91Z2ggd2l0aG91dCB1bmRlcnN0YW5kaW5nIGxpZmV0aW1lIGFuZCBs
+b2NraW5nCnJ1bGVzLgoKQXMgcGVvcGxlIGluc2lzdCBvbiBub3QgcmVzcGVjdGluZyBib3VuZGFy
+aWVzLCB0aGlzIHNlcmllcyBjbGVhbnMgdXAgdGhlCihhYil1c2UgYW5kIGF0IHRoZSBlbmQgcmVt
+b3ZlcyB0aGUgZXhwb3J0IG9mIGlycV90b19kZXNjKCkgdG8gbWFrZSBpdCBhdApsZWFzdCBoYXJk
+ZXIuIEFsbCBsZWdpdGltYXRlIHVzZXJzIG9mIHRoaXMgYXJlIGJ1aWx0IGluLgoKV2hpbGUgYXQg
+aXQgSSBzdHVtYmxlZCBvdmVyIHNvbWUgb3RoZXIgb2RkaXRpZXMgcmVsYXRlZCB0byBpbnRlcnJ1
+cHQKY291bnRpbmcgYW5kIGNsZWFuZWQgdGhlbSB1cCBhcyB3ZWxsLgoKVGhlIHNlcmllcyBhcHBs
+aWVzIG9uIHRvcCBvZgoKICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJu
+ZWwvZ2l0L3RpcC90aXAuZ2l0IGlycS9jb3JlCgphbmQgaXMgYWxzbyBhdmFpbGFibGUgZnJvbSBn
+aXQ6CgogIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90Z2x4
+L2RldmVsLmdpdCBnZW5pcnEKClRoYW5rcywKCgl0Z2x4Ci0tLQogYXJjaC9hbHBoYS9rZXJuZWwv
+c3lzX2plbnNlbi5jICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDIgCiBhcmNoL2FybS9rZXJu
+ZWwvc21wLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAgMiAKIGFyY2gvcGFy
+aXNjL2tlcm5lbC9pcnEuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA3IAogYXJj
+aC9zMzkwL2tlcm5lbC9pcnEuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDIg
+CiBhcmNoL3g4Ni9rZXJuZWwvdG9wb2xvZ3kuYyAgICAgICAgICAgICAgICAgICAgICAgICAgIHwg
+ICAgMSAKIGFyY2gvYXJtNjQva2VybmVsL3NtcC5jICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgfCAgICAyIAogZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9scGVfYXVkaW8u
+YyAgICAgICB8ICAgIDQgCiBkcml2ZXJzL2dwdS9kcm0vaTkxNS9pOTE1X2lycS5jICAgICAgICAg
+ICAgICAgICAgICAgIHwgICAzNCArKysKIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfcG11LmMg
+ICAgICAgICAgICAgICAgICAgICAgfCAgIDE4IC0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVf
+cG11LmggICAgICAgICAgICAgICAgICAgICAgfCAgICA4IAogZHJpdmVycy9tZmQvYWI4NTAwLWRl
+YnVnZnMuYyAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMTYgLQogZHJpdmVycy9uZXQvZXRo
+ZXJuZXQvbWVsbGFub3gvbWx4NC9lbl9jcS5jICAgICAgICAgICB8ICAgIDggCiBkcml2ZXJzL25l
+dC9ldGhlcm5ldC9tZWxsYW5veC9tbHg0L2VuX3J4LmMgICAgICAgICAgIHwgICAgNiAKIGRyaXZl
+cnMvbmV0L2V0aGVybmV0L21lbGxhbm94L21seDQvbWx4NF9lbi5oICAgICAgICAgfCAgICAzIAog
+ZHJpdmVycy9uZXQvZXRoZXJuZXQvbWVsbGFub3gvbWx4NS9jb3JlL2VuLmggICAgICAgICB8ICAg
+IDIgCiBkcml2ZXJzL25ldC9ldGhlcm5ldC9tZWxsYW5veC9tbHg1L2NvcmUvZW5fbWFpbi5jICAg
+IHwgICAgMiAKIGRyaXZlcnMvbmV0L2V0aGVybmV0L21lbGxhbm94L21seDUvY29yZS9lbl90eHJ4
+LmMgICAgfCAgICA2IAogZHJpdmVycy9udGIvbXNpLmMgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB8ICAgIDQgCiBkcml2ZXJzL3BjaS9jb250cm9sbGVyL21vYml2ZWlsL3BjaWUt
+bW9iaXZlaWwtaG9zdC5jIHwgICAgOCAKIGRyaXZlcnMvcGNpL2NvbnRyb2xsZXIvcGNpZS14aWxp
+bngtbndsLmMgICAgICAgICAgICAgfCAgICA4IAogZHJpdmVycy9waW5jdHJsL25vbWFkaWsvcGlu
+Y3RybC1ub21hZGlrLmMgICAgICAgICAgICB8ICAgIDMgCiBkcml2ZXJzL3hlbi9ldmVudHMvZXZl
+bnRzX2Jhc2UuYyAgICAgICAgICAgICAgICAgICAgIHwgIDE3MiArKysrKysrKysrKy0tLS0tLS0t
+CiBkcml2ZXJzL3hlbi9ldnRjaG4uYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwg
+ICAzNCAtLS0KIGluY2x1ZGUvbGludXgvaW50ZXJydXB0LmggICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgfCAgICAxIAogaW5jbHVkZS9saW51eC9pcnEuaCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB8ICAgIDcgCiBpbmNsdWRlL2xpbnV4L2lycWRlc2MuaCAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHwgICA0MCArLS0tCiBpbmNsdWRlL2xpbnV4L2tlcm5lbF9zdGF0Lmgg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAgMSAKIGtlcm5lbC9pcnEvaXJxZGVzYy5jICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDQyICsrLS0KIGtlcm5lbC9pcnEvbWFu
+YWdlLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDM3ICsrKysKIGtlcm5l
+bC9pcnEvcHJvYy5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA1IAog
+MzAgZmlsZXMgY2hhbmdlZCwgMjYzIGluc2VydGlvbnMoKyksIDIyMiBkZWxldGlvbnMoLSkKCgo=
 
