@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,TVD_SPACE_RATIO,
-	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70E49C4361B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A56FC4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 06A9F22571
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06A9F22571
+	by mail.kernel.org (Postfix) with ESMTPS id E1E3F22571
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1E3F22571
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49772.88064 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49768.88043 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRxv-0001hs-Eg; Thu, 10 Dec 2020 19:51:03 +0000
+	id 1knRxu-0001g0-F8; Thu, 10 Dec 2020 19:51:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49772.88064; Thu, 10 Dec 2020 19:51:03 +0000
+Received: by outflank-mailman (output) from mailman id 49768.88043; Thu, 10 Dec 2020 19:51:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRxu-0001hM-Vv; Thu, 10 Dec 2020 19:51:02 +0000
-Received: by outflank-mailman (input) for mailman id 49772;
- Thu, 10 Dec 2020 19:51:01 +0000
+	id 1knRxu-0001fj-78; Thu, 10 Dec 2020 19:51:02 +0000
+Received: by outflank-mailman (input) for mailman id 49768;
+ Thu, 10 Dec 2020 19:51:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRr3-0007NY-Jj
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:57 +0000
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ id 1knRrN-0007NY-KY
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:44:17 +0000
+Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1eb2b85e-8e26-421b-abcf-ae18cb7e2d27;
- Thu, 10 Dec 2020 19:42:45 +0000 (UTC)
+ id c030df19-1f76-46a7-946f-e083156fa1d2;
+ Thu, 10 Dec 2020 19:42:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,28 +48,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1eb2b85e-8e26-421b-abcf-ae18cb7e2d27
-Message-Id: <20201210194044.972064156@linutronix.de>
+X-Inumbo-ID: c030df19-1f76-46a7-946f-e083156fa1d2
+Message-Id: <20201210194045.360198201@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629364;
+	s=2020; t=1607629369;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=9YlyTwMk4Mbfk7ZW8GDEykvPqsqe5qocY/DN2nXVexA=;
-	b=hVw3OYCTWsMz0Aw61IHODSqZTydWtjxPDClGGC7iGCBQqFWidRe56rShTgIEwhvft2xxVQ
-	M/YlcKaOAyEQXPl7Q3R3E32QqIuTfXQ19MYqHX2sGJ83TqbX6MyS7Wtr2e++pcbRAgNdOI
-	cVxo/p5uF7/AAg7bzLR09pxbrsczA1ufWBrFzi+yYRMMnxIdHGVV8b25XSGFqMhhM/ZLfS
-	qYZkmMDMAVG+a+Dk/ioVTw4ujul3+CsBK60KEwLQOzocKe9FTUxmnyQhV7MVP4FyuTzzdh
-	Mx0/OtbsUm0nXPbmcxdV1KpjnJXXPfi7+2ISytWZAwaHiml7fGtt4XCeI+DnvA==
+	bh=ZlPg9sxtWavWNstOnduWAE0LJ88d0safrspZWU+Bxkw=;
+	b=K1DERQLLdTNr2zHRckKSlzdGpOu3K2YNmRf/Fd+Me9xL7e1+z/WEZj2/ktZthj5jq1hRc5
+	H3K05V2lxe1VMwzID4A3YLY85G8CYSpDrmB064IUNRFZIZdMGhdgfMMXJmC2dwy27hx5dv
+	+8AXgD/DGykOcBz1Xa8j76SRM06+jkTJXOvxx9wVIyXxp695f6gHDGbeeV9JlTl+CV+qJz
+	iigE2xdn6yZ1PRpeA5+aMqV0fQZ1NATjbH3H6LTr2G8vwxub7OglAIb7biMKHi/AyccluD
+	JT3nn4CWSg161dQ9jAMQEsqATs9zRWVAVD7sNovXx4fL9L9H47Prx2LPtWUjvw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629364;
+	s=2020e; t=1607629369;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=9YlyTwMk4Mbfk7ZW8GDEykvPqsqe5qocY/DN2nXVexA=;
-	b=TDoY6kDn3fqOFjjhxcsd3OY1zWrz3aQ6qRhKrymB7SphyJoO4N2U2VRY7uCgEKkn/QVPql
-	uhJWWeP2DlMdL5CA==
-Date: Thu, 10 Dec 2020 20:26:00 +0100
+	bh=ZlPg9sxtWavWNstOnduWAE0LJ88d0safrspZWU+Bxkw=;
+	b=5OkxueAP7qHY2hZdC3q6dEaDkreK0XDmJgigYgkjGtvPF1gC/y/J1hb+Pc7lUaZciQOAo7
+	alJrfrmEbNVTr+Cw==
+Date: Thu, 10 Dec 2020 20:26:04 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -122,11 +122,17 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  linux-rdma@vger.kernel.org,
  Saeed Mahameed <saeedm@nvidia.com>,
  Leon Romanovsky <leon@kernel.org>
-Subject: [patch 24/30] xen/events: Remove unused bind_evtchn_to_irq_lateeoi()
+Subject: [patch 28/30] xen/events: Reduce irq_info::spurious_cnt storage size
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
+
+To prepare for interrupt spreading reduce the storage size of
+irq_info::spurious_cnt to u8 so the required flag for the spreading logic
+will not increase the storage size.
+
+Protect the usage site against overruns.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
@@ -134,23 +140,32 @@ Cc: Juergen Gross <jgross@suse.com>
 Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: xen-devel@lists.xenproject.org
 ---
- drivers/xen/events/events_base.c |    6 ------
- 1 file changed, 6 deletions(-)
+ drivers/xen/events/events_base.c |    8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
 --- a/drivers/xen/events/events_base.c
 +++ b/drivers/xen/events/events_base.c
-@@ -1132,12 +1132,6 @@ int bind_evtchn_to_irq(evtchn_port_t evt
- }
- EXPORT_SYMBOL_GPL(bind_evtchn_to_irq);
+@@ -95,7 +95,7 @@ struct irq_info {
+ 	struct list_head list;
+ 	struct list_head eoi_list;
+ 	short refcnt;
+-	short spurious_cnt;
++	u8 spurious_cnt;
+ 	enum xen_irq_type type; /* type */
+ 	unsigned irq;
+ 	evtchn_port_t evtchn;   /* event channel */
+@@ -528,8 +528,10 @@ static void xen_irq_lateeoi_locked(struc
+ 		return;
  
--int bind_evtchn_to_irq_lateeoi(evtchn_port_t evtchn)
--{
--	return bind_evtchn_to_irq_chip(evtchn, &xen_lateeoi_chip);
--}
--EXPORT_SYMBOL_GPL(bind_evtchn_to_irq_lateeoi);
--
- static int bind_ipi_to_irq(unsigned int ipi, unsigned int cpu)
- {
- 	struct evtchn_bind_ipi bind_ipi;
+ 	if (spurious) {
+-		if ((1 << info->spurious_cnt) < (HZ << 2))
+-			info->spurious_cnt++;
++		if ((1 << info->spurious_cnt) < (HZ << 2)) {
++			if (info->spurious_cnt != 0xFF)
++				info->spurious_cnt++;
++		}
+ 		if (info->spurious_cnt > 1) {
+ 			delay = 1 << (info->spurious_cnt - 2);
+ 			if (delay > HZ)
 
 
