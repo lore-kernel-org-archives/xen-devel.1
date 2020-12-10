@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A56FC4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D16B7C0018C
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E1E3F22571
+	by mail.kernel.org (Postfix) with ESMTPS id 891DB22571
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1E3F22571
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 891DB22571
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49768.88043 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49767.88036 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRxu-0001g0-F8; Thu, 10 Dec 2020 19:51:02 +0000
+	id 1knRxu-0001fQ-3w; Thu, 10 Dec 2020 19:51:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49768.88043; Thu, 10 Dec 2020 19:51:02 +0000
+Received: by outflank-mailman (output) from mailman id 49767.88036; Thu, 10 Dec 2020 19:51:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRxu-0001fj-78; Thu, 10 Dec 2020 19:51:02 +0000
-Received: by outflank-mailman (input) for mailman id 49768;
+	id 1knRxt-0001f0-V3; Thu, 10 Dec 2020 19:51:01 +0000
+Received: by outflank-mailman (input) for mailman id 49767;
  Thu, 10 Dec 2020 19:51:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRrN-0007NY-KY
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:44:17 +0000
+ id 1knRqo-0007NY-J8
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:42 +0000
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c030df19-1f76-46a7-946f-e083156fa1d2;
- Thu, 10 Dec 2020 19:42:50 +0000 (UTC)
+ id 2580f224-7954-42ab-86fd-075f962e19d9;
+ Thu, 10 Dec 2020 19:42:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,36 +48,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c030df19-1f76-46a7-946f-e083156fa1d2
-Message-Id: <20201210194045.360198201@linutronix.de>
+X-Inumbo-ID: 2580f224-7954-42ab-86fd-075f962e19d9
+Message-Id: <20201210194044.876342330@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629369;
+	s=2020; t=1607629363;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=ZlPg9sxtWavWNstOnduWAE0LJ88d0safrspZWU+Bxkw=;
-	b=K1DERQLLdTNr2zHRckKSlzdGpOu3K2YNmRf/Fd+Me9xL7e1+z/WEZj2/ktZthj5jq1hRc5
-	H3K05V2lxe1VMwzID4A3YLY85G8CYSpDrmB064IUNRFZIZdMGhdgfMMXJmC2dwy27hx5dv
-	+8AXgD/DGykOcBz1Xa8j76SRM06+jkTJXOvxx9wVIyXxp695f6gHDGbeeV9JlTl+CV+qJz
-	iigE2xdn6yZ1PRpeA5+aMqV0fQZ1NATjbH3H6LTr2G8vwxub7OglAIb7biMKHi/AyccluD
-	JT3nn4CWSg161dQ9jAMQEsqATs9zRWVAVD7sNovXx4fL9L9H47Prx2LPtWUjvw==
+	bh=55TI7XJ63kr4B6KmttDRntIShtWEHQxTpDKUCCh7MMo=;
+	b=DfHk2d4rsQCFRfxdAyxTdTyPSpwg7z0Sncg8I+9KfdVXncJCTb3XmwedEonMAdLY68Ijgw
+	OqDECUKDGXVJ2e3I3uLB0GGar87pY3Yal2dFSEkuxLqu7+aFvat4rMB4RZqE4KrUhBk+R3
+	gBmBzJxqdxsXIuyqJJAGw8Y30tyckVylqCLBgGNvi3gs7yKm4ZK17JvWGG44C/46sWyxXQ
+	Ej9ZSopIvaJHIfeR+E9sAafcWAL7WpVPwj+5hDUZlquKEkpvZ61FA9B4DGvqfEnbmzwFaO
+	eXj8bg+XHOWux9C1y9WQO9G2xEkTNlYuLikm/MUzYuUvhCxBqpZY2adGCKTIQA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629369;
+	s=2020e; t=1607629363;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=ZlPg9sxtWavWNstOnduWAE0LJ88d0safrspZWU+Bxkw=;
-	b=5OkxueAP7qHY2hZdC3q6dEaDkreK0XDmJgigYgkjGtvPF1gC/y/J1hb+Pc7lUaZciQOAo7
-	alJrfrmEbNVTr+Cw==
-Date: Thu, 10 Dec 2020 20:26:04 +0100
+	bh=55TI7XJ63kr4B6KmttDRntIShtWEHQxTpDKUCCh7MMo=;
+	b=eULJnI7rz5dW6ohKtM1f3ZResXMDuJkA8Ky9aCIj2PXNOKCWiuy+1w37KELJ76tMak6jIr
+	Gp7eoIGkDj0U4pDA==
+Date: Thu, 10 Dec 2020 20:25:59 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
  Marc Zyngier <maz@kernel.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org,
+ Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leon@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>,
+ netdev@vger.kernel.org,
+ linux-rdma@vger.kernel.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>,
  afzal mohammed <afzal.mohd.ma@gmail.com>,
@@ -116,56 +118,45 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
  Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
  Tariq Toukan <tariqt@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>,
- Jakub Kicinski <kuba@kernel.org>,
- netdev@vger.kernel.org,
- linux-rdma@vger.kernel.org,
- Saeed Mahameed <saeedm@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>
-Subject: [patch 28/30] xen/events: Reduce irq_info::spurious_cnt storage size
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+Subject: [patch 23/30] net/mlx5: Use effective interrupt affinity
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-To prepare for interrupt spreading reduce the storage size of
-irq_info::spurious_cnt to u8 so the required flag for the spreading logic
-will not increase the storage size.
+Using the interrupt affinity mask for checking locality is not really
+working well on architectures which support effective affinity masks.
 
-Protect the usage site against overruns.
+The affinity mask is either the system wide default or set by user space,
+but the architecture can or even must reduce the mask to the effective set,
+which means that checking the affinity mask itself does not really tell
+about the actual target CPUs.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+Cc: Saeed Mahameed <saeedm@nvidia.com>
+Cc: Leon Romanovsky <leon@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: netdev@vger.kernel.org
+Cc: linux-rdma@vger.kernel.org
 ---
- drivers/xen/events/events_base.c |    8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ drivers/net/ethernet/mellanox/mlx5/core/en_main.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -95,7 +95,7 @@ struct irq_info {
- 	struct list_head list;
- 	struct list_head eoi_list;
- 	short refcnt;
--	short spurious_cnt;
-+	u8 spurious_cnt;
- 	enum xen_irq_type type; /* type */
- 	unsigned irq;
- 	evtchn_port_t evtchn;   /* event channel */
-@@ -528,8 +528,10 @@ static void xen_irq_lateeoi_locked(struc
- 		return;
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
+@@ -1998,7 +1998,7 @@ static int mlx5e_open_channel(struct mlx
+ 	c->num_tc   = params->num_tc;
+ 	c->xdp      = !!params->xdp_prog;
+ 	c->stats    = &priv->channel_stats[ix].ch;
+-	c->aff_mask = irq_get_affinity_mask(irq);
++	c->aff_mask = irq_get_effective_affinity_mask(irq);
+ 	c->lag_port = mlx5e_enumerate_lag_port(priv->mdev, ix);
  
- 	if (spurious) {
--		if ((1 << info->spurious_cnt) < (HZ << 2))
--			info->spurious_cnt++;
-+		if ((1 << info->spurious_cnt) < (HZ << 2)) {
-+			if (info->spurious_cnt != 0xFF)
-+				info->spurious_cnt++;
-+		}
- 		if (info->spurious_cnt > 1) {
- 			delay = 1 << (info->spurious_cnt - 2);
- 			if (delay > HZ)
+ 	netif_napi_add(netdev, &c->napi, mlx5e_napi_poll, 64);
 
 
