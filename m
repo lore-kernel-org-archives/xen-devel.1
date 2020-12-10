@@ -5,38 +5,39 @@ X-Spam-Level:
 X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F6A4C4361B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0AADC433FE
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5E1E422571
+	by mail.kernel.org (Postfix) with ESMTPS id 9BE6E22E00
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5E1E422571
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9BE6E22E00
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49805.88168 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49808.88174 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRyD-0002VC-7p; Thu, 10 Dec 2020 19:51:21 +0000
+	id 1knRyD-0002Wd-UB; Thu, 10 Dec 2020 19:51:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49805.88168; Thu, 10 Dec 2020 19:51:21 +0000
+Received: by outflank-mailman (output) from mailman id 49808.88174; Thu, 10 Dec 2020 19:51:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRyC-0002UJ-Qu; Thu, 10 Dec 2020 19:51:20 +0000
-Received: by outflank-mailman (input) for mailman id 49805;
- Thu, 10 Dec 2020 19:51:18 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1knRyD-0002Vz-F2; Thu, 10 Dec 2020 19:51:21 +0000
+Received: by outflank-mailman (input) for mailman id 49808;
+ Thu, 10 Dec 2020 19:51:19 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRqK-0007NY-Ig
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:12 +0000
+ id 1knRqd-0007OY-FL
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:31 +0000
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fe533430-b33d-4087-a011-f3a1e3dfc651;
- Thu, 10 Dec 2020 19:42:34 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 25096ef7-a62d-487a-be20-cccc8d207e0d;
+ Thu, 10 Dec 2020 19:42:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,40 +49,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fe533430-b33d-4087-a011-f3a1e3dfc651
-Message-Id: <20201210194044.065003856@linutronix.de>
+X-Inumbo-ID: 25096ef7-a62d-487a-be20-cccc8d207e0d
+Message-Id: <20201210194045.065115500@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629353;
+	s=2020; t=1607629366;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=fEH7SfFXgNBjB2KnJKxA/TzRUtcjVN/8Utn6le7GAgY=;
-	b=jLhcNWAI6/f0h7r8+rFxJO/huD0wZGw+D4hiyZeoGMMj1an/mYZLtmxjGnZ/aSu9ajxbNk
-	p75pL7pZYF9lDXL6k6cLxjzZOwC5q8ecIjJ39xF/dSPObsyqM+yudoL9yN0v7780Bn5yyF
-	/Ve3t66EmBeMbc9BsRyBF2dkjfBuqeDKx8lYvDouLXZuAf0vFtIPH5zU4jlfdixs/IVdOS
-	vmsr5U63fIVzglTEhwYSxzXESekgTuzdOHcprErKfUMwbSexx9oDdfFa+4Z1VcZaNX5rSu
-	6l8HXwdp3e4RNwPr1pyTZfpMenA4zfmUQEoZ4/oyxWsRJm8zIR/y6ojvGi9aNQ==
+	bh=tEVls3jI8V5LtEBTs0cm0Szr6SDBh3GYqdx/X7n2UZY=;
+	b=bwVQ7gaQwvbfHTgP7MZDc/YhDLMbL2OEi1WnGDxUtEPa/zAOSNbqLaLeQTtD11Dg5082Qp
+	Qz2zPtGhojJeSFokGiFaFmgg8DCDEwh1sTNplvk+ABtrVMp4PQqBe9MzYq5Rmcua4Vok7H
+	MC3M8vw+sJGbud8ji2De2+9/N0C9SKASfhkEKBqszbBCF+wOvRW/V0B92szqDuXVqeCKre
+	YRoIqIe820JAXb6fr66VrfJCEVfdlAwTC/JagtnRSgmfc3XazagnRYgk6a6iOnmsLRNX1p
+	MVTREOpKae1E6DDuEk9FawkuR3E7r4E4WNu7go88D2q5JTNminPamGP01SwVTQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629353;
+	s=2020e; t=1607629366;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=fEH7SfFXgNBjB2KnJKxA/TzRUtcjVN/8Utn6le7GAgY=;
-	b=vcq9ylrl3bvEPVRyLq7+7uNgnxo0i4JU/giqH4jOxFiIi2uv7Mz1SZNae4Tgp0yDwrMR2T
-	GgsHxKk5w8TyzfBQ==
-Date: Thu, 10 Dec 2020 20:25:51 +0100
+	bh=tEVls3jI8V5LtEBTs0cm0Szr6SDBh3GYqdx/X7n2UZY=;
+	b=oavywJTHDWv3olwcxAvfm8NfynriH4GVMpKUR3SAwF8GgtSSOX9oqiCpUNJcYYnYuyj2zl
+	2KDiXd1knCZbiIAw==
+Date: Thu, 10 Dec 2020 20:26:01 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
  Marc Zyngier <maz@kernel.org>,
- Linus Walleij <linus.walleij@linaro.org>,
- linux-arm-kernel@lists.infradead.org,
- linux-gpio@vger.kernel.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>,
  afzal mohammed <afzal.mohd.ma@gmail.com>,
  linux-parisc@vger.kernel.org,
  Russell King <linux@armlinux.org.uk>,
+ linux-arm-kernel@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Catalin Marinas <catalin.marinas@arm.com>,
  Will Deacon <will@kernel.org>,
@@ -99,6 +102,8 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ linux-gpio@vger.kernel.org,
  Lee Jones <lee.jones@linaro.org>,
  Jon Mason <jdmason@kudzu.us>,
  Dave Jiang <dave.jiang@intel.com>,
@@ -117,45 +122,105 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  netdev@vger.kernel.org,
  linux-rdma@vger.kernel.org,
  Saeed Mahameed <saeedm@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-Subject: [patch 15/30] pinctrl: nomadik: Use irq_has_action()
+ Leon Romanovsky <leon@kernel.org>
+Subject: [patch 25/30] xen/events: Remove disfunct affinity spreading
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-Let the core code do the fiddling with irq_desc.
+This function can only ever work when the event channels:
+
+  - are already established
+  - interrupts assigned to them
+  - the affinity has been set by user space already
+
+because any newly set up event channel is forced to be bound to CPU0 and
+the affinity mask of the interrupt is forced to contain cpumask_of(0).
+
+As the CPU0 enforcement was in place _before_ this was implemented it's
+entirely unclear how that can ever have worked at all.
+
+Remove it as preparation for doing it proper.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Linus Walleij <linus.walleij@linaro.org>
-Cc: linux-arm-kernel@lists.infradead.org
-Cc: linux-gpio@vger.kernel.org
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
 ---
- drivers/pinctrl/nomadik/pinctrl-nomadik.c |    3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/xen/events/events_base.c |    9 ---------
+ drivers/xen/evtchn.c             |   34 +---------------------------------
+ 2 files changed, 1 insertion(+), 42 deletions(-)
 
---- a/drivers/pinctrl/nomadik/pinctrl-nomadik.c
-+++ b/drivers/pinctrl/nomadik/pinctrl-nomadik.c
-@@ -948,7 +948,6 @@ static void nmk_gpio_dbg_show_one(struct
- 			   (mode < 0) ? "unknown" : modes[mode]);
- 	} else {
- 		int irq = chip->to_irq(chip, offset);
--		struct irq_desc	*desc = irq_to_desc(irq);
- 		const int pullidx = pull ? 1 : 0;
- 		int val;
- 		static const char * const pulls[] = {
-@@ -969,7 +968,7 @@ static void nmk_gpio_dbg_show_one(struct
- 		 * This races with request_irq(), set_irq_type(),
- 		 * and set_irq_wake() ... but those are "rare".
- 		 */
--		if (irq > 0 && desc && desc->action) {
-+		if (irq > 0 && irq_has_action(irq)) {
- 			char *trigger;
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -1696,15 +1696,6 @@ static int set_affinity_irq(struct irq_d
+ 	return ret;
+ }
  
- 			if (nmk_chip->edge_rising & BIT(offset))
+-/* To be called with desc->lock held. */
+-int xen_set_affinity_evtchn(struct irq_desc *desc, unsigned int tcpu)
+-{
+-	struct irq_data *d = irq_desc_get_irq_data(desc);
+-
+-	return set_affinity_irq(d, cpumask_of(tcpu), false);
+-}
+-EXPORT_SYMBOL_GPL(xen_set_affinity_evtchn);
+-
+ static void enable_dynirq(struct irq_data *data)
+ {
+ 	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
+--- a/drivers/xen/evtchn.c
++++ b/drivers/xen/evtchn.c
+@@ -421,36 +421,6 @@ static void evtchn_unbind_from_user(stru
+ 	del_evtchn(u, evtchn);
+ }
+ 
+-static DEFINE_PER_CPU(int, bind_last_selected_cpu);
+-
+-static void evtchn_bind_interdom_next_vcpu(evtchn_port_t evtchn)
+-{
+-	unsigned int selected_cpu, irq;
+-	struct irq_desc *desc;
+-	unsigned long flags;
+-
+-	irq = irq_from_evtchn(evtchn);
+-	desc = irq_to_desc(irq);
+-
+-	if (!desc)
+-		return;
+-
+-	raw_spin_lock_irqsave(&desc->lock, flags);
+-	selected_cpu = this_cpu_read(bind_last_selected_cpu);
+-	selected_cpu = cpumask_next_and(selected_cpu,
+-			desc->irq_common_data.affinity, cpu_online_mask);
+-
+-	if (unlikely(selected_cpu >= nr_cpu_ids))
+-		selected_cpu = cpumask_first_and(desc->irq_common_data.affinity,
+-				cpu_online_mask);
+-
+-	this_cpu_write(bind_last_selected_cpu, selected_cpu);
+-
+-	/* unmask expects irqs to be disabled */
+-	xen_set_affinity_evtchn(desc, selected_cpu);
+-	raw_spin_unlock_irqrestore(&desc->lock, flags);
+-}
+-
+ static long evtchn_ioctl(struct file *file,
+ 			 unsigned int cmd, unsigned long arg)
+ {
+@@ -508,10 +478,8 @@ static long evtchn_ioctl(struct file *fi
+ 			break;
+ 
+ 		rc = evtchn_bind_to_user(u, bind_interdomain.local_port);
+-		if (rc == 0) {
++		if (rc == 0)
+ 			rc = bind_interdomain.local_port;
+-			evtchn_bind_interdom_next_vcpu(rc);
+-		}
+ 		break;
+ 	}
+ 
 
 
