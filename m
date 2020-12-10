@@ -2,47 +2,48 @@ Return-Path: <SRS0=O1tB=FO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 953AEC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F08E7C4361B
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 16:57:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B6A22067B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 16:57:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B6A22067B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9175D221E3
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 16:57:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9175D221E3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49554.87643 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49555.87655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knPG4-0005kI-Op; Thu, 10 Dec 2020 16:57:36 +0000
+	id 1knPGH-0005my-11; Thu, 10 Dec 2020 16:57:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49554.87643; Thu, 10 Dec 2020 16:57:36 +0000
+Received: by outflank-mailman (output) from mailman id 49555.87655; Thu, 10 Dec 2020 16:57:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knPG4-0005kB-Ku; Thu, 10 Dec 2020 16:57:36 +0000
-Received: by outflank-mailman (input) for mailman id 49554;
- Thu, 10 Dec 2020 16:57:34 +0000
+	id 1knPGG-0005mr-Tz; Thu, 10 Dec 2020 16:57:48 +0000
+Received: by outflank-mailman (input) for mailman id 49555;
+ Thu, 10 Dec 2020 16:57:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BLK9=FO=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1knPG2-0005k6-FB
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 16:57:34 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 99e105ad-f3fa-46c1-9e26-d6f7d887b8f1;
- Thu, 10 Dec 2020 16:57:32 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9956930E;
- Thu, 10 Dec 2020 08:57:32 -0800 (PST)
-Received: from scm-wfh-server-rahsin01.stack04.eu02.mi.arm.com (unknown
- [10.58.246.76])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 14FBC3F66B;
- Thu, 10 Dec 2020 08:57:30 -0800 (PST)
+ <SRS0=ykji=FO=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1knPGG-0005mY-0k
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 16:57:48 +0000
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 799aad02-ea0a-46dd-a737-9bbf727e7e1a;
+ Thu, 10 Dec 2020 16:57:47 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id u18so9218616lfd.9
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Dec 2020 08:57:46 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id m21sm581989lfh.234.2020.12.10.08.57.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Dec 2020 08:57:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,74 +55,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99e105ad-f3fa-46c1-9e26-d6f7d887b8f1
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v3 0/8] xen/arm: Add support for SMMUv3 driver
-Date: Thu, 10 Dec 2020 16:56:58 +0000
-Message-Id: <cover.1607617848.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.17.1
+X-Inumbo-ID: 799aad02-ea0a-46dd-a737-9bbf727e7e1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=9veu/89fdLOXOwROQXRtrg7V3t8PiokUD1pb3Hncd5Q=;
+        b=In7p5uj+XFf3tXocsuDz8ouvSKm/8bZjO5FcEZT/b0NK7VUv3v23wVpwTY1zbDtbsy
+         6WYfYwRAnV+zGpXTDxSDtyZ+SNtaoMCrrXl4tsoAJ/6xZ7craqXa7SldWxWlXy5ntITX
+         UHefaZx+WSrRSkTim2ZA1PeIHfiFpZ9MYEERAQwIRWZZBe4e5WEXpMl0D2q9exM+FLGM
+         cX1yUazWa7FpthsJL6LZhK38qq1ru5uQbg8K39G1305+IGlFLU22svsvhF77MyVnD4Q4
+         aXgqqsiwPUido/lyXjqThqPlhdacCiGh9QoKfZZk7Gi5raOJW1QZ+UrKI4mvJ9pg9vUD
+         B2jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=9veu/89fdLOXOwROQXRtrg7V3t8PiokUD1pb3Hncd5Q=;
+        b=nDXb/DxM6FNe+lOUGI9Rvos8qIvZjYz5JQAfkCusRLvbJ4cCyC9LNZJI5ZSJ60VfYz
+         diTGDb0ulp912Jcl7uGKm1gKppmZOISD3h2nxxBTyRpCABTAJIebuJqO5t/rJ+DDHGYO
+         YrldWufHtWgfckuQrNRD5fQqAQztK2+EApbrDK3D9sU0zi3cXfrWJskmA4GJqgZze+F/
+         crcpFhf7Y5uCpCMrogqQxr1en/IGtr9SqxksTgJp+fyk7SmImI7cbySwcmSFwc0lzzsr
+         t04ENNdw45PpwXPz9mHI6tVNvP1f1K0GYOJNb5yUbF1RdP36J3AGJQg/Y1lpjPNQupHJ
+         bSMQ==
+X-Gm-Message-State: AOAM530ycM6X6tHU98RRtMkmxOnczTF19D+tDiXaGxKZt4fXMGTU2vnU
+	+E2ig8rVbvsZL0C5W2rdm5HGoJsO88c1oQ==
+X-Google-Smtp-Source: ABdhPJyFSwyEiwnn3G6isxehumFtenn+UsTTokHJUVstFVwcJs3deSHagC6X0x1sA5mSYceuuP9QMg==
+X-Received: by 2002:ac2:5462:: with SMTP id e2mr3225826lfn.552.1607619465716;
+        Thu, 10 Dec 2020 08:57:45 -0800 (PST)
+Subject: Re: [PATCH V3 17/23] xen/ioreq: Introduce domain_has_ioreq_server()
+To: paul@xen.org
+Cc: 'Jan Beulich' <jbeulich@suse.com>,
+ 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>,
+ 'Stefano Stabellini' <sstabellini@kernel.org>,
+ 'Julien Grall' <julien@xen.org>,
+ 'Volodymyr Babchuk' <Volodymyr_Babchuk@epam.com>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>,
+ 'Ian Jackson' <iwj@xenproject.org>, 'Wei Liu' <wl@xen.org>,
+ 'Julien Grall' <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
+ <1606732298-22107-18-git-send-email-olekstysh@gmail.com>
+ <3bb4c3b5-a46a-ba31-292f-5c6ba49fa9be@suse.com>
+ <6026b7f3-ae6e-f98f-be65-27d7f729a37f@gmail.com>
+ <18bfd9b1-3e6a-8119-efd0-c82ad7ae681d@gmail.com>
+ <0d6c01d6cd9a$666326c0$33297440$@xen.org>
+ <57bfc007-e400-6777-0075-827daa8acf0e@gmail.com>
+ <0d7201d6ce09$e13dce80$a3b96b80$@xen.org>
+ <96b9b843-f4fe-834a-f17b-d75198aa0dab@gmail.com>
+ <002401d6cecf$ce472710$6ad57530$@xen.org>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <1c012758-7121-5702-038e-4510f3cf1b0b@gmail.com>
+Date: Thu, 10 Dec 2020 18:57:44 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <002401d6cecf$ce472710$6ad57530$@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-This patch series is v3 of the work to add support for the SMMUv3 driver.
 
-Approach taken is to first merge the Linux copy of the SMMUv3 driver
-(tag v5.8.18) and then modify the driver to build on XEN.
+On 10.12.20 10:38, Paul Durrant wrote:
 
-MSI and PCI ATS functionality are not supported. Code is not tested and
-compiled. Code is guarded by the flag CONFIG_PCI_ATS and CONFIG_MSI to compile
-the driver.
+Hi Paul.
 
-Code specific to Linux is removed from the driver to avoid dead code.
+>> -----Original Message-----
+>> From: Oleksandr <olekstysh@gmail.com>
+>> Sent: 09 December 2020 20:36
+>> To: paul@xen.org
+>> Cc: 'Jan Beulich' <jbeulich@suse.com>; 'Oleksandr Tyshchenko' <oleksandr_tyshchenko@epam.com>;
+>> 'Stefano Stabellini' <sstabellini@kernel.org>; 'Julien Grall' <julien@xen.org>; 'Volodymyr Babchuk'
+>> <Volodymyr_Babchuk@epam.com>; 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap'
+>> <george.dunlap@citrix.com>; 'Ian Jackson' <iwj@xenproject.org>; 'Wei Liu' <wl@xen.org>; 'Julien Grall'
+>> <julien.grall@arm.com>; xen-devel@lists.xenproject.org
+>> Subject: Re: [PATCH V3 17/23] xen/ioreq: Introduce domain_has_ioreq_server()
+>>
+>>
+>> Hi Paul.
+>>
+>>
+>>>>>>>> On 30.11.2020 11:31, Oleksandr Tyshchenko wrote:
+>>>>>>>>> --- a/xen/include/xen/ioreq.h
+>>>>>>>>> +++ b/xen/include/xen/ioreq.h
+>>>>>>>>> @@ -55,6 +55,20 @@ struct ioreq_server {
+>>>>>>>>>          uint8_t                bufioreq_handling;
+>>>>>>>>>      };
+>>>>>>>>>      +/*
+>>>>>>>>> + * This should only be used when d == current->domain and it's not
+>>>>>>>>> paused,
+>>>>>>>> Is the "not paused" part really relevant here? Besides it being rare
+>>>>>>>> that the current domain would be paused (if so, it's in the process
+>>>>>>>> of having all its vCPU-s scheduled out), does this matter at all?do
+>>>>>>>> any extra actionsdo any extra actions
+>>>>>>> No, it isn't relevant, I will drop it.
+>>>>>>>
+>>>>>>>
+>>>>>>>> Apart from this the patch looks okay to me, but I'm not sure it
+>>>>>>>> addresses Paul's concerns. Iirc he had suggested to switch back to
+>>>>>>>> a list if doing a swipe over the entire array is too expensive in
+>>>>>>>> this specific case.
+>>>>>>> We would like to avoid to do any extra actions in
+>>>>>>> leave_hypervisor_to_guest() if possible.
+>>>>>>> But not only there, the logic whether we check/set
+>>>>>>> mapcache_invalidation variable could be avoided if a domain doesn't
+>>>>>>> use IOREQ server...
+>>>>>> Are you OK with this patch (common part of it)?
+>>>>> How much of a performance benefit is this? The array is small to simply counting the non-NULL
+>>>> entries should be pretty quick.
+>>>> I didn't perform performance measurements on how much this call consumes.
+>>>> In our system we run three domains. The emulator is in DomD only, so I
+>>>> would like to avoid to call vcpu_ioreq_handle_completion() for every
+>>>> Dom0/DomU's vCPUs
+>>>> if there is no real need to do it.
+>>> This is not relevant to the domain that the emulator is running in; it's concerning the domains
+>> which the emulator is servicing. How many of those are there?
+>> Err, yes, I wasn't precise when providing an example.
+>> Single emulator is running in DomD and servicing DomU. So with the
+>> helper in place the vcpu_ioreq_handle_completion() gets only called for
+>> DomU vCPUs (as expected).
+>> Without an optimization the vcpu_ioreq_handle_completion() gets called
+>> for _all_ vCPUs, and I see it as an extra action for Dom0, DomD vCPUs.
+>>
+>>
+>>>> On Arm vcpu_ioreq_handle_completion()
+>>>> is called with IRQ enabled, so the call is accompanied with
+>>>> corresponding irq_enable/irq_disable.
+>>>> These unneeded actions could be avoided by using this simple one-line
+>>>> helper...
+>>>>
+>>> The helper may be one line but there is more to the patch than that. I still think you could just
+>> walk the array in the helper rather than keeping a running occupancy count.
+>>
+>> OK, is the implementation below close to what you propose? If yes, I
+>> will update a helper and drop nr_servers variable.
+>>
+>> bool domain_has_ioreq_server(const struct domain *d)
+>> {
+>>       const struct ioreq_server *s;
+>>       unsigned int id;
+>>
+>>       FOR_EACH_IOREQ_SERVER(d, id, s)
+>>           return true;
+>>
+>>       return false;
+>> }
+> Yes, that's what I had in mind.
+>
+>    Paul
 
-Driver is currently supported as tech preview.
+Thank you for the clarification.
 
-Following functionality should be supported before driver is out for tech
-preview
-1. Investigate the timing analysis of using spin lock in place of mutex when
-   attaching a  device to SMMU.
-2. Merged the latest Linux SMMUv3 driver code once atomic operation is
-   available in XEN.
-3. PCI ATS and MSI interrupts should be supported.
-4. Investigate side-effect of using tasklet in place of threaded IRQ and fix
-   if any.
-5. fallthorugh keyword should be supported.
-6. Implement the ffsll function in bitops.h file.
-
-Rahul Singh (8):
-  xen/arm: Import the SMMUv3 driver from Linux
-  xen/arm: revert atomic operation related command-queue insertion patch
-  xen/arm: revert patch related to XArray
-  xen/arm: Remove support for Stage-1 translation on SMMUv3.
-  xen/device-tree: Add dt_property_match_string helper
-  xen/arm: Remove Linux specific code that is not usable in XEN
-  xen/arm: Add support for SMMUv3 driver
-  xen/arm: smmuv3: Remove linux compatibility functions.
-
- MAINTAINERS                           |    6 +
- SUPPORT.md                            |    1 +
- xen/common/device_tree.c              |   27 +
- xen/drivers/passthrough/Kconfig       |   11 +
- xen/drivers/passthrough/arm/Makefile  |    1 +
- xen/drivers/passthrough/arm/smmu-v3.c | 3316 +++++++++++++++++++++++++
- xen/include/xen/device_tree.h         |   12 +
- 7 files changed, 3374 insertions(+)
- create mode 100644 xen/drivers/passthrough/arm/smmu-v3.c
 
 -- 
-2.17.1
+Regards,
+
+Oleksandr Tyshchenko
 
 
