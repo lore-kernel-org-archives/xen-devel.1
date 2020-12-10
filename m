@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63C49C3526A
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E16A9C4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F6DD23D23
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F6DD23D23
+	by mail.kernel.org (Postfix) with ESMTPS id 81F4923D23
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81F4923D23
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49701.87909 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49700.87904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRph-0007dr-N6; Thu, 10 Dec 2020 19:42:33 +0000
+	id 1knRph-0007cW-7L; Thu, 10 Dec 2020 19:42:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49701.87909; Thu, 10 Dec 2020 19:42:33 +0000
+Received: by outflank-mailman (output) from mailman id 49700.87904; Thu, 10 Dec 2020 19:42:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRph-0007de-Gd; Thu, 10 Dec 2020 19:42:33 +0000
-Received: by outflank-mailman (input) for mailman id 49701;
- Thu, 10 Dec 2020 19:42:32 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1knRph-0007cN-1X; Thu, 10 Dec 2020 19:42:33 +0000
+Received: by outflank-mailman (input) for mailman id 49700;
+ Thu, 10 Dec 2020 19:42:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRpg-0007NY-HN
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:32 +0000
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2184410b-89a9-439f-b41e-9435301c810d;
- Thu, 10 Dec 2020 19:42:20 +0000 (UTC)
+ id 1knRpf-0007OY-Cn
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:31 +0000
+Received: from galois.linutronix.de (unknown [193.142.43.55])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 37bf2da7-5f6e-44d6-b7ea-6278350e7d51;
+ Thu, 10 Dec 2020 19:42:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,28 +49,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2184410b-89a9-439f-b41e-9435301c810d
-Message-Id: <20201210194042.967177918@linutronix.de>
+X-Inumbo-ID: 37bf2da7-5f6e-44d6-b7ea-6278350e7d51
+Message-Id: <20201210194043.362094758@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629339;
+	s=2020; t=1607629344;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=gYsowh6i1mqGXNg6FrEIlf+Px9WkTuZjYPGZA4AoQf4=;
-	b=gQRR2ovC6G1wG0/hHfvHA26mBklNiMZtkvMBYZWjgQshlf7o+cIXoD11qJjLT48W0LHgJA
-	5Zvfg1News0uQs48erbM5kmDtHengxfmuqG2DKGnaIJ04vg1FJ7jnVpZXG8cNwMy19OeFP
-	iPFhPWqfd87RfMeVK3ZgF11+LhI8jQI6rRQAPId6pBGrjdbz5+dRwipziIghpyTp0+nYcu
-	/rMQolvJykCdajiQdhpg5/73/PAnO6jEv3XXq/Rv9w9yxTGzkAvSFeWdlWRlX1S05CmH1R
-	pxA14gUUPV2LrG7qMC56g75TqBVjQeX4kqlFmRI413CglTnFsrbWRi0PstpOew==
+	bh=xI8ipC8kVjJGltjSHu5Mwub/dbA42XKOSuIg0xDxbuM=;
+	b=D/de10U4HoG38vblr7IeySKjPU1LbUwG6rWRmeGYZrTiPhh//Hh7l/GxJreJ0rFcvzRPJy
+	uoauNylV8dWf/MoltroGmVGhvJ2oJ5Y1i1Hdh3B/UY4mD9pwH+y7Dg4V+Vuar0V4FZXmUS
+	6T9k0+65HYvYSEKNJ4TVXxdcFWWUmHXiCvk5q873lejGHd1ZF8kDnbNFZOuvndA/bZ6hqk
+	upKi4g8D5MCEBYYTgyELzJKcRa+JlxwqpINFEbwiyouRus62LMleSD5uCsPspz8eEzaopF
+	eLafHsQRj846r/5tje8mdg+dCV5YsColFl6docNWF4RiFgqrORcZz2o154ST/Q==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629339;
+	s=2020e; t=1607629344;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=gYsowh6i1mqGXNg6FrEIlf+Px9WkTuZjYPGZA4AoQf4=;
-	b=rxr0RqK5G71Mdyjh0pmNkfya7BLBal4i+pBNw5B4iIspa3uaIBOFXW7QFkpv0Ae/Yof/mz
-	NtSLBAk6jBeGNuDQ==
-Date: Thu, 10 Dec 2020 20:25:40 +0100
+	bh=xI8ipC8kVjJGltjSHu5Mwub/dbA42XKOSuIg0xDxbuM=;
+	b=uhk8uY0rFu42URnjai4w+dmeZE7ul5z78imfPTBVOwBrf5zNSXRAMP26aad4ZYcrnfPUQU
+	IQRkkJ1oiqPOXJDw==
+Date: Thu, 10 Dec 2020 20:25:44 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -122,35 +123,54 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject: [patch 04/30] genirq: Provide irq_get_effective_affinity()
+Subject: [patch 08/30] genirq: Provide kstat_irqdesc_cpu()
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-Provide an accessor to the effective interrupt affinity mask. Going to be
-used to replace open coded fiddling with the irq descriptor.
+Most users of kstat_irqs_cpu() have the irq descriptor already. No point in
+calling into the core code and looking it up once more.
+
+Use it in per_cpu_count_show() to start with.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- include/linux/irq.h |    7 +++++++
- 1 file changed, 7 insertions(+)
+ include/linux/irqdesc.h |    6 ++++++
+ kernel/irq/irqdesc.c    |    4 ++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
---- a/include/linux/irq.h
-+++ b/include/linux/irq.h
-@@ -907,6 +907,13 @@ struct cpumask *irq_data_get_effective_a
- }
+--- a/include/linux/irqdesc.h
++++ b/include/linux/irqdesc.h
+@@ -113,6 +113,12 @@ static inline void irq_unlock_sparse(voi
+ extern struct irq_desc irq_desc[NR_IRQS];
  #endif
  
-+static inline struct cpumask *irq_get_effective_affinity_mask(unsigned int irq)
++static inline unsigned int irq_desc_kstat_cpu(struct irq_desc *desc,
++					      unsigned int cpu)
 +{
-+	struct irq_data *d = irq_get_irq_data(irq);
-+
-+	return d ? irq_data_get_effective_affinity_mask(d) : NULL;
++	return desc->kstat_irqs ? *per_cpu_ptr(desc->kstat_irqs, cpu) : 0;
 +}
 +
- unsigned int arch_dynirq_lower_bound(unsigned int from);
+ static inline struct irq_desc *irq_data_to_desc(struct irq_data *data)
+ {
+ 	return container_of(data->common, struct irq_desc, irq_common_data);
+--- a/kernel/irq/irqdesc.c
++++ b/kernel/irq/irqdesc.c
+@@ -147,12 +147,12 @@ static ssize_t per_cpu_count_show(struct
+ 				  struct kobj_attribute *attr, char *buf)
+ {
+ 	struct irq_desc *desc = container_of(kobj, struct irq_desc, kobj);
+-	int cpu, irq = desc->irq_data.irq;
+ 	ssize_t ret = 0;
+ 	char *p = "";
++	int cpu;
  
- int __irq_alloc_descs(int irq, unsigned int from, unsigned int cnt, int node,
+ 	for_each_possible_cpu(cpu) {
+-		unsigned int c = kstat_irqs_cpu(irq, cpu);
++		unsigned int c = irq_desc_kstat_cpu(desc, cpu);
+ 
+ 		ret += scnprintf(buf + ret, PAGE_SIZE - ret, "%s%u", p, c);
+ 		p = ",";
 
 
