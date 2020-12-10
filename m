@@ -2,43 +2,41 @@ Return-Path: <SRS0=O1tB=FO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED autolearn=ham autolearn_force=no
-	version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36A06C433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2458EC4361B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2EE023D23
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2EE023D23
+	by mail.kernel.org (Postfix) with ESMTPS id CF34823DC4
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:42:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF34823DC4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49708.87952 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49709.87964 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRpr-0007wC-5Q; Thu, 10 Dec 2020 19:42:43 +0000
+	id 1knRps-0007zT-Kf; Thu, 10 Dec 2020 19:42:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49708.87952; Thu, 10 Dec 2020 19:42:43 +0000
+Received: by outflank-mailman (output) from mailman id 49709.87964; Thu, 10 Dec 2020 19:42:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRpq-0007vn-UL; Thu, 10 Dec 2020 19:42:42 +0000
-Received: by outflank-mailman (input) for mailman id 49708;
- Thu, 10 Dec 2020 19:42:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1knRps-0007zL-FB; Thu, 10 Dec 2020 19:42:44 +0000
+Received: by outflank-mailman (input) for mailman id 49709;
+ Thu, 10 Dec 2020 19:42:42 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRpp-0007OY-Cs
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:41 +0000
+ id 1knRpq-0007NY-Hc
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:42:42 +0000
 Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 41499f2c-83a5-41a7-9bc2-45586ee5240f;
- Thu, 10 Dec 2020 19:42:29 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8510efe7-e1de-4095-840d-46e2bdeb12cf;
+ Thu, 10 Dec 2020 19:42:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,28 +48,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 41499f2c-83a5-41a7-9bc2-45586ee5240f
-Message-Id: <20201210194043.659522455@linutronix.de>
+X-Inumbo-ID: 8510efe7-e1de-4095-840d-46e2bdeb12cf
+Message-Id: <20201210194043.268774449@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629348;
+	s=2020; t=1607629343;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=b1npAX3rdKpi0zxYsfY5Z+OgET1V6fz47IjXP2N2S30=;
-	b=XVTknQmD0+t9vnaeIeIdlOsx1km0mt60yX3sLzQQo1Ss1/zAJ0V4dKHa6DvwjgOabag8/L
-	cdAIIF6lZarTaeoLKetYm0pzGwl8kcckN80Dn3W3jMGiKQboR+gMBzt00I83ziyHabYe8b
-	NtMvjO2a5WGqd9peY6AIorbHYlQYKzPUUQ5sgSHC+l4y5YIFim4X7GOcwjhvZ7Git47A37
-	gmcxNDaJq1jS9foBWYoWsrYgrXjv0vr506Cf/8Zt24Pt75S4yTc5RSKsMNiLugnEQs66lu
-	JY2BKtk7vw81ebNMg9AR+ndNy6um/c3Nr6OXjzxeLIyPUkLePe2OzZqJJSi+0A==
+	bh=KtzFp0nR+dJW1v891+1wc4D+KUTADWJVxpq6j1ykdfo=;
+	b=BwWrBYP0c3Z0lFh3V6qC90H7c5G9PHEfLbQKd0hztOiqwJ4kBCiNk+VDHIcCk1P/HxJJE+
+	zt6CbhOUy0zFcpFdRmOFsyfb9chR0Qx1RUaHNJMzGPe4/YSaExFvgbHq6rbAS7kLyxP5tj
+	50aob2dpVHhgmHdoE9LrAgft46kAteQH0u20dVmWOXNd76SQCmuGq0ygZQrP10YFFulxyu
+	/qBwgM/QVkALrmRL+BjjJvZRX8irP6Tqn07c/GO5qIfUgWd74BWRs6KIHsrquTbtL84IH6
+	+M3rrImgxsn11U5KirO7h0p+JsOWwXjhPDlffX4TftaAXSN1Xiplo1xF1UMXlQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629348;
+	s=2020e; t=1607629343;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=b1npAX3rdKpi0zxYsfY5Z+OgET1V6fz47IjXP2N2S30=;
-	b=WNYux1er1Ehidg7p8CyS69i/jC/6HS8muln7aTCmBy2Y4C4fUCVrgJw4x7KlJp6BDc2l6Z
-	2PdGgfz2rCEe0FAA==
-Date: Thu, 10 Dec 2020 20:25:47 +0100
+	bh=KtzFp0nR+dJW1v891+1wc4D+KUTADWJVxpq6j1ykdfo=;
+	b=YlMcwWy3vQ5LbjypUKpYuIGaMi15XbC955aXBdrVoJspoFoOrPcJRpjqt+rHhF7aRCDnxi
+	VzPUfEGKZfuiRjBQ==
+Date: Thu, 10 Dec 2020 20:25:43 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
@@ -124,34 +122,67 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject:
- [patch 11/30] parisc/irq: Use irq_desc_kstat_cpu() in show_interrupts()
+Subject: [patch 07/30] genirq: Make kstat_irqs() static
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-The irq descriptor is already there, no need to look it up again.
+No more users outside the core code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
-Cc: Helge Deller <deller@gmx.de>
-Cc: afzal mohammed <afzal.mohd.ma@gmail.com>
-Cc: linux-parisc@vger.kernel.org
 ---
- arch/parisc/kernel/irq.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/linux/kernel_stat.h |    1 -
+ kernel/irq/irqdesc.c        |   19 ++++++-------------
+ 2 files changed, 6 insertions(+), 14 deletions(-)
 
---- a/arch/parisc/kernel/irq.c
-+++ b/arch/parisc/kernel/irq.c
-@@ -218,7 +218,7 @@ int show_interrupts(struct seq_file *p,
- 		seq_printf(p, "%3d: ", i);
+--- a/include/linux/kernel_stat.h
++++ b/include/linux/kernel_stat.h
+@@ -67,7 +67,6 @@ static inline unsigned int kstat_softirq
+ /*
+  * Number of interrupts per specific IRQ source, since bootup
+  */
+-extern unsigned int kstat_irqs(unsigned int irq);
+ extern unsigned int kstat_irqs_usr(unsigned int irq);
  
- 		for_each_online_cpu(j)
--			seq_printf(p, "%10u ", kstat_irqs_cpu(i, j));
-+			seq_printf(p, "%10u ", irq_desc_kstat_cpu(desc, j));
+ /*
+--- a/kernel/irq/irqdesc.c
++++ b/kernel/irq/irqdesc.c
+@@ -924,15 +924,7 @@ static bool irq_is_nmi(struct irq_desc *
+ 	return desc->istate & IRQS_NMI;
+ }
  
- 		seq_printf(p, " %14s", irq_desc_get_chip(desc)->name);
- #ifndef PARISC_IRQ_CR16_COUNTS
+-/**
+- * kstat_irqs - Get the statistics for an interrupt
+- * @irq:	The interrupt number
+- *
+- * Returns the sum of interrupt counts on all cpus since boot for
+- * @irq. The caller must ensure that the interrupt is not removed
+- * concurrently.
+- */
+-unsigned int kstat_irqs(unsigned int irq)
++static unsigned int kstat_irqs(unsigned int irq)
+ {
+ 	struct irq_desc *desc = irq_to_desc(irq);
+ 	unsigned int sum = 0;
+@@ -951,13 +943,14 @@ unsigned int kstat_irqs(unsigned int irq
+ }
+ 
+ /**
+- * kstat_irqs_usr - Get the statistics for an interrupt
++ * kstat_irqs_usr - Get the statistics for an interrupt from thread context
+  * @irq:	The interrupt number
+  *
+  * Returns the sum of interrupt counts on all cpus since boot for @irq.
+- * Contrary to kstat_irqs() this can be called from any context.
+- * It uses rcu since a concurrent removal of an interrupt descriptor is
+- * observing an rcu grace period before delayed_free_desc()/irq_kobj_release().
++ *
++ * It uses rcu to protect the access since a concurrent removal of an
++ * interrupt descriptor is observing an rcu grace period before
++ * delayed_free_desc()/irq_kobj_release().
+  */
+ unsigned int kstat_irqs_usr(unsigned int irq)
+ {
 
 
