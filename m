@@ -2,44 +2,44 @@ Return-Path: <SRS0=O1tB=FO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DATE_IN_PAST_03_06,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D550DC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 11:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89F7BC4361B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 11:44:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 81FD023D57
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 11:43:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81FD023D57
+	by mail.kernel.org (Postfix) with ESMTPS id 2011723AC4
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 11:44:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2011723AC4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49112.86841 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49117.86854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knKLr-0001BP-BR; Thu, 10 Dec 2020 11:43:15 +0000
+	id 1knKMQ-0001Ho-LQ; Thu, 10 Dec 2020 11:43:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49112.86841; Thu, 10 Dec 2020 11:43:15 +0000
+Received: by outflank-mailman (output) from mailman id 49117.86854; Thu, 10 Dec 2020 11:43:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knKLr-0001BI-8a; Thu, 10 Dec 2020 11:43:15 +0000
-Received: by outflank-mailman (input) for mailman id 49112;
- Thu, 10 Dec 2020 11:43:14 +0000
+	id 1knKMQ-0001Hh-IQ; Thu, 10 Dec 2020 11:43:50 +0000
+Received: by outflank-mailman (input) for mailman id 49117;
+ Thu, 10 Dec 2020 11:43:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=wUnW=FO=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1knKLq-0001BD-Hb
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 11:43:14 +0000
+ (envelope-from <SRS0=PZm+=FO=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1knKMP-0001HR-4z
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 11:43:49 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 47aa3161-e3fd-4813-bf34-523b5cf023db;
- Thu, 10 Dec 2020 11:43:13 +0000 (UTC)
+ id 98f57eb2-0890-4db2-b73e-490f65edc755;
+ Thu, 10 Dec 2020 11:43:46 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id DB7F3ACE0;
- Thu, 10 Dec 2020 11:43:11 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9360AAE95;
+ Thu, 10 Dec 2020 11:43:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,95 +51,210 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47aa3161-e3fd-4813-bf34-523b5cf023db
+X-Inumbo-ID: 98f57eb2-0890-4db2-b73e-490f65edc755
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1607600592; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1607600625; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=rHv+vrHEFSnyiqfyOw9O5XBc5B+d/fjAEKvyLvCM0lM=;
-	b=kQCIyifVts2rpvwOjc76Imytuj+L6BlkEke93rCarW/DCzlGbZujZM213j3JzrgnW+NQPR
-	kfL85k548bNxIg7eGOwGtn1165K+KYLxQcudt4IeWwFdnwoc27KUA0jubuoxyuWheohUU9
-	lvSsjJuVuozOIdqE2Q4KsiCEVcwWRPE=
-Subject: Re: dom0 PV looping on search_pre_exception_table()
-To: Manuel Bouyer <bouyer@antioche.eu.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org
-References: <20201209101512.GA1299@antioche.eu.org>
- <3f7e50bb-24ad-1e32-9ea1-ba87007d3796@citrix.com>
- <20201209135908.GA4269@antioche.eu.org>
- <c612616a-3fcd-be93-7594-20c0c3b71b7a@citrix.com>
- <20201209154431.GA4913@antioche.eu.org>
- <52e1b10d-75d4-63ac-f91e-cb8f0dcca493@citrix.com>
- <20201209163049.GA6158@antioche.eu.org>
- <30a71c9d-3eff-3727-9c61-e387b5bccc95@citrix.com>
- <20201209185714.GS1469@antioche.eu.org>
- <6c06abf1-7efe-f02c-536a-337a2704e265@citrix.com>
- <20201210095139.GA455@antioche.eu.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <27f113f3-01a3-e5a4-eea5-e593693625fe@suse.com>
-Date: Thu, 10 Dec 2020 11:41:03 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+	bh=6mV0b3KCapS7XDKLmQWqZDjFDGoUzXK8ZrY2OYAWHlI=;
+	b=XHGRAks3Xnqi0IX6tqmwlqlfkYrQUsaskh+uBOr6JLT0gLc01GQjH4Ey5xhRZ1TgrEB5Pe
+	LEZqfuWzTZkzRWcW0kd6PiscybdODUsGQytHkASh0gbJ//AOisLgWp94/vg2rue5SHNMOP
+	9nDE8djrej3eCsMFkgCsPzpbJJwBa6c=
+Subject: Re: [PATCH RFC 0/3] xen: add hypfs per-domain abi-features
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: paul@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <20201209161618.309-1-jgross@suse.com>
+ <a2270efd-19d4-5d5e-2e8b-4696ba9751ab@xen.org>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <b2118f4d-07c5-abae-2b1b-ac8f45c02563@suse.com>
+Date: Thu, 10 Dec 2020 08:49:44 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201210095139.GA455@antioche.eu.org>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <a2270efd-19d4-5d5e-2e8b-4696ba9751ab@xen.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="eKJZfniLu9P811YC41rrKKDkfBQt0nHGW"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--eKJZfniLu9P811YC41rrKKDkfBQt0nHGW
+Content-Type: multipart/mixed; boundary="evVRhgtOv3cpflGTJuugJMPibqU1vSPSY";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: paul@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Message-ID: <b2118f4d-07c5-abae-2b1b-ac8f45c02563@suse.com>
+Subject: Re: [PATCH RFC 0/3] xen: add hypfs per-domain abi-features
+References: <20201209161618.309-1-jgross@suse.com>
+ <a2270efd-19d4-5d5e-2e8b-4696ba9751ab@xen.org>
+In-Reply-To: <a2270efd-19d4-5d5e-2e8b-4696ba9751ab@xen.org>
+
+--evVRhgtOv3cpflGTJuugJMPibqU1vSPSY
+Content-Type: multipart/mixed;
+ boundary="------------E677FE150D0E218282CED8EE"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 
-On 10.12.2020 10:51, Manuel Bouyer wrote:
-> On Wed, Dec 09, 2020 at 07:08:41PM +0000, Andrew Cooper wrote:
->> Oh of course - we don't follow the exit-to-guest path on the way out here.
->>
->> As a gross hack to check that we've at least diagnosed the issue
->> appropriately, could you modify NetBSD to explicitly load the %ss
->> selector into %es (or any other free segment) before first entering user
->> context?
-> 
-> If I understood it properly, the user %ss is loaded by Xen from the
-> trapframe when the guest swictes from kernel to user mode, isn't it ?
-> So you mean setting %es to the same value in the trapframe ?
-> 
-> Actually I used %fs because %es is set equal to %ds.
-> Xen 4.13 boots fine with this change, but with 4.15 I get a loop of:
-> 
-> 
-> (XEN) *** LDT: gl1e 0000000000000000 not present                               
-> (XEN) *** pv_map_ldt_shadow_page(0x40) failed                                  
-> [  12.3586540] Process (pid 1) got sig 11                                      
-> 
-> which means that the dom0 gets the trap, and decides that the fault address
-> is not mapped. Without the change the dom0 doesn't show the
-> "Process (pid 1) got sig 11"
-> 
-> I activated the NetBSD trap debug code, and this shows:
-> [   6.7165877] kern.module.path=/stand/amd64-xen/9.1/modules                    (XEN) *** LDT: gl1e 0000000000000000 not present                                
-> (XEN) *** pv_map_ldt_shadow_page(0x40) failed                                   
-> [   6.9462322] pid 1.1 (init): signal 11 code=1 (trap 0x6) @rip 0x7f7ef0c007d0 a
-> ddr 0xffffbd800000a040 error=14
-> [   7.0647896] trapframe 0xffffbd80381cff00
-> [   7.1126288] rip 0x00007f7ef0c007d0  rsp 0x00007f7fff10aa30  rfl 0x00000000000
-> 00202
-> [   7.2041518] rdi 000000000000000000  rsi 000000000000000000  rdx 0000000000000
-> 00000
-> [   7.2956758] rcx 000000000000000000  r8  000000000000000000  r9  0000000000000
-> 00000
-> [   7.3872013] r10 000000000000000000  r11 000000000000000000  r12 0000000000000
-> 00000
-> [   7.4787216] r13 000000000000000000  r14 000000000000000000  r15 0000000000000
-> 00000
-> [   7.5702439] rbp 000000000000000000  rbx 0x00007f7fff10afe0  rax 0000000000000
-> 00000
-> [   7.6617663] cs 0x47  ds 0x23  es 0x23  fs 0000  gs 0000  ss 0x3f
-> [   7.7345663] fsbase 000000000000000000 gsbase 000000000000000000
-> 
-> so it looks like something resets %fs to 0 ...
-> 
-> Anyway the fault address 0xffffbd800000a040 is in the hypervisor's range,
-> isn't it ?
+This is a multi-part message in MIME format.
+--------------E677FE150D0E218282CED8EE
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-No, the hypervisor range is 0xffff800000000000-0xffff880000000000.
+On 09.12.20 17:24, Julien Grall wrote:
+> Hi,
+>=20
+> On 09/12/2020 16:16, Juergen Gross wrote:
+>> This small series is meant as an example how to add further dynamical
+>> directories to hypfs. It can be used to replace Paul's current approac=
+h
+>> to specify ABI-features via domain create flags and replace those by
+>> hypfs nodes.
+>=20
+> This can only work if all the ABI-features are not required at the time=
+=20
+> of creating the domain.
 
-Jan
+Yes. In case there is some further initialization needed this has to be
+done later depending on the setting.
+
+> Those features should also be set only once. Furthermore, HYPFS is so=20
+> far meant to be optional.
+
+"set once" isn't the point. They should not be able to change after the
+domain has been started, and that is covered.
+
+>=20
+> So it feels to me Paul's approach is leaner and better for the=20
+> ABI-features purpose.
+
+Depends.
+
+My approach doesn't need any tools side changes after first
+implementation when adding new abi-features. And it isn't expanding an
+unstable interface.
+
+In the end this is the reason I marked this series as RFC. If using
+flags is preferred, fine.
+
+
+Juergen
+
+--------------E677FE150D0E218282CED8EE
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------E677FE150D0E218282CED8EE--
+
+--evVRhgtOv3cpflGTJuugJMPibqU1vSPSY--
+
+--eKJZfniLu9P811YC41rrKKDkfBQt0nHGW
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl/R0xgFAwAAAAAACgkQsN6d1ii/Ey8t
+eQgAiamucRYpdredgK4K3hsG4B/19DPFEkjE5aLRSl4wNLQDL9nsjXVBtbFxv1JIBOnCqgR4w3Kg
+ljxqxSCqPKeV/b1xOqylrJrcG2Llgn6Y7qlXXw2PUkYBGC9HGfZnbopYQeEE4JgXQDQuf4BQPYG4
+u91fn2TwFNaWgjvSZxLHmpi2PDAJUic46dEqYvIeOqjbh31k/NR1HmFE0DmW+HwqHZiBd4u+A8dz
+SPdvdgOMEXdTpQhg/tvQZw4rXuHtu6EhcHIm0PLezEShgRTUAujcLt4ywrx4+9qufse/lNZWVx+n
+/YFqCXkmJ/3J6JAbgas67RNOpoC6OZ13zRKMmPpI+w==
+=rFyB
+-----END PGP SIGNATURE-----
+
+--eKJZfniLu9P811YC41rrKKDkfBQt0nHGW--
 
