@@ -5,38 +5,38 @@ X-Spam-Level:
 X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44380C433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F6A4C4361B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD8CD22571
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD8CD22571
+	by mail.kernel.org (Postfix) with ESMTPS id 5E1E422571
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5E1E422571
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49801.88157 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49805.88168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRyB-0002QL-K4; Thu, 10 Dec 2020 19:51:19 +0000
+	id 1knRyD-0002VC-7p; Thu, 10 Dec 2020 19:51:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49801.88157; Thu, 10 Dec 2020 19:51:19 +0000
+Received: by outflank-mailman (output) from mailman id 49805.88168; Thu, 10 Dec 2020 19:51:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRyB-0002Ps-7o; Thu, 10 Dec 2020 19:51:19 +0000
-Received: by outflank-mailman (input) for mailman id 49801;
- Thu, 10 Dec 2020 19:51:17 +0000
+	id 1knRyC-0002UJ-Qu; Thu, 10 Dec 2020 19:51:20 +0000
+Received: by outflank-mailman (input) for mailman id 49805;
+ Thu, 10 Dec 2020 19:51:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRqZ-0007NY-It
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:27 +0000
+ id 1knRqK-0007NY-Ig
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:12 +0000
 Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4c6e5196-7580-4ef1-982b-c587c955aa15;
- Thu, 10 Dec 2020 19:42:40 +0000 (UTC)
+ id fe533430-b33d-4087-a011-f3a1e3dfc651;
+ Thu, 10 Dec 2020 19:42:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,43 +48,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c6e5196-7580-4ef1-982b-c587c955aa15
-Message-Id: <20201210194044.580936243@linutronix.de>
+X-Inumbo-ID: fe533430-b33d-4087-a011-f3a1e3dfc651
+Message-Id: <20201210194044.065003856@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629359;
+	s=2020; t=1607629353;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=KrhhIjbt5v6ZrRAi/JobWuMkwODXuYkNejeEJ8r5wYA=;
-	b=O2jdDNolMgwdeqbdehl1p9TNp5CMFEegQIULELNgmYRztgIcL4c3f02Qf6SlZ5l3g40OIQ
-	RgS4jJlX+w2xWwCBcvE8uOXoWkE+AICi/Nh5GaOHSq9qtJLjJ382ImsNRhJ2OXUKqHjpIF
-	I8MjuSPpVTKBCKMHB0jWJJqdHHehIe0RI7sKzCawI6DUxBj2zGutPRs1VZRztMy0HnwSsf
-	OI5cZWwaKtKyxElh00AwZXcb13cApJGdpe1cNRwNFz3Ty/Mas6lCOq0rRGjsr5nCkNgDIf
-	ZfeC1Cgjfe3pwIQtGOuNMnkwwWQv4/tiKJan+K2zSJCygXvLKALGPkNvkXEO8Q==
+	bh=fEH7SfFXgNBjB2KnJKxA/TzRUtcjVN/8Utn6le7GAgY=;
+	b=jLhcNWAI6/f0h7r8+rFxJO/huD0wZGw+D4hiyZeoGMMj1an/mYZLtmxjGnZ/aSu9ajxbNk
+	p75pL7pZYF9lDXL6k6cLxjzZOwC5q8ecIjJ39xF/dSPObsyqM+yudoL9yN0v7780Bn5yyF
+	/Ve3t66EmBeMbc9BsRyBF2dkjfBuqeDKx8lYvDouLXZuAf0vFtIPH5zU4jlfdixs/IVdOS
+	vmsr5U63fIVzglTEhwYSxzXESekgTuzdOHcprErKfUMwbSexx9oDdfFa+4Z1VcZaNX5rSu
+	6l8HXwdp3e4RNwPr1pyTZfpMenA4zfmUQEoZ4/oyxWsRJm8zIR/y6ojvGi9aNQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629359;
+	s=2020e; t=1607629353;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=KrhhIjbt5v6ZrRAi/JobWuMkwODXuYkNejeEJ8r5wYA=;
-	b=AYssMWVwzMPlm7xFPvozIcusMMzaZeOC4IJgbRnnFFntYh+XGLTcZ4I1FH/Z2XIwzAjKaN
-	H21cttJmA1LtW+AQ==
-Date: Thu, 10 Dec 2020 20:25:56 +0100
+	bh=fEH7SfFXgNBjB2KnJKxA/TzRUtcjVN/8Utn6le7GAgY=;
+	b=vcq9ylrl3bvEPVRyLq7+7uNgnxo0i4JU/giqH4jOxFiIi2uv7Mz1SZNae4Tgp0yDwrMR2T
+	GgsHxKk5w8TyzfBQ==
+Date: Thu, 10 Dec 2020 20:25:51 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
  Marc Zyngier <maz@kernel.org>,
- Tariq Toukan <tariqt@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>,
- Jakub Kicinski <kuba@kernel.org>,
- netdev@vger.kernel.org,
- linux-rdma@vger.kernel.org,
+ Linus Walleij <linus.walleij@linaro.org>,
+ linux-arm-kernel@lists.infradead.org,
+ linux-gpio@vger.kernel.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>,
  afzal mohammed <afzal.mohd.ma@gmail.com>,
  linux-parisc@vger.kernel.org,
  Russell King <linux@armlinux.org.uk>,
- linux-arm-kernel@lists.infradead.org,
  Mark Rutland <mark.rutland@arm.com>,
  Catalin Marinas <catalin.marinas@arm.com>,
  Will Deacon <will@kernel.org>,
@@ -102,8 +99,6 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- linux-gpio@vger.kernel.org,
  Lee Jones <lee.jones@linaro.org>,
  Jon Mason <jdmason@kudzu.us>,
  Dave Jiang <dave.jiang@intel.com>,
@@ -116,105 +111,51 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  linux-pci@vger.kernel.org,
  Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
  Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Tariq Toukan <tariqt@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>,
+ netdev@vger.kernel.org,
+ linux-rdma@vger.kernel.org,
  Saeed Mahameed <saeedm@nvidia.com>,
  Leon Romanovsky <leon@kernel.org>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
  Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject: [patch 20/30] net/mlx4: Replace irq_to_desc() abuse
+Subject: [patch 15/30] pinctrl: nomadik: Use irq_has_action()
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-No driver has any business with the internals of an interrupt
-descriptor. Storing a pointer to it just to use yet another helper at the
-actual usage site to retrieve the affinity mask is creative at best. Just
-because C does not allow encapsulation does not mean that the kernel has no
-limits.
-
-Retrieve a pointer to the affinity mask itself and use that. It's still
-using an interface which is usually not for random drivers, but definitely
-less hideous than the previous hack.
+Let the core code do the fiddling with irq_desc.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Tariq Toukan <tariqt@nvidia.com>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org
-Cc: linux-rdma@vger.kernel.org
+Cc: Linus Walleij <linus.walleij@linaro.org>
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-gpio@vger.kernel.org
 ---
- drivers/net/ethernet/mellanox/mlx4/en_cq.c   |    8 +++-----
- drivers/net/ethernet/mellanox/mlx4/en_rx.c   |    6 +-----
- drivers/net/ethernet/mellanox/mlx4/mlx4_en.h |    3 ++-
- 3 files changed, 6 insertions(+), 11 deletions(-)
+ drivers/pinctrl/nomadik/pinctrl-nomadik.c |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
---- a/drivers/net/ethernet/mellanox/mlx4/en_cq.c
-+++ b/drivers/net/ethernet/mellanox/mlx4/en_cq.c
-@@ -90,7 +90,7 @@ int mlx4_en_activate_cq(struct mlx4_en_p
- 			int cq_idx)
- {
- 	struct mlx4_en_dev *mdev = priv->mdev;
--	int err = 0;
-+	int irq, err = 0;
- 	int timestamp_en = 0;
- 	bool assigned_eq = false;
- 
-@@ -116,10 +116,8 @@ int mlx4_en_activate_cq(struct mlx4_en_p
- 
- 			assigned_eq = true;
- 		}
--
--		cq->irq_desc =
--			irq_to_desc(mlx4_eq_get_irq(mdev->dev,
--						    cq->vector));
-+		irq = mlx4_eq_get_irq(mdev->dev, cq->vector);
-+		cq->aff_mask = irq_get_affinity_mask(irq);
+--- a/drivers/pinctrl/nomadik/pinctrl-nomadik.c
++++ b/drivers/pinctrl/nomadik/pinctrl-nomadik.c
+@@ -948,7 +948,6 @@ static void nmk_gpio_dbg_show_one(struct
+ 			   (mode < 0) ? "unknown" : modes[mode]);
  	} else {
- 		/* For TX we use the same irq per
- 		ring we assigned for the RX    */
---- a/drivers/net/ethernet/mellanox/mlx4/en_rx.c
-+++ b/drivers/net/ethernet/mellanox/mlx4/en_rx.c
-@@ -959,8 +959,6 @@ int mlx4_en_poll_rx_cq(struct napi_struc
+ 		int irq = chip->to_irq(chip, offset);
+-		struct irq_desc	*desc = irq_to_desc(irq);
+ 		const int pullidx = pull ? 1 : 0;
+ 		int val;
+ 		static const char * const pulls[] = {
+@@ -969,7 +968,7 @@ static void nmk_gpio_dbg_show_one(struct
+ 		 * This races with request_irq(), set_irq_type(),
+ 		 * and set_irq_wake() ... but those are "rare".
+ 		 */
+-		if (irq > 0 && desc && desc->action) {
++		if (irq > 0 && irq_has_action(irq)) {
+ 			char *trigger;
  
- 	/* If we used up all the quota - we're probably not done yet... */
- 	if (done == budget || !clean_complete) {
--		const struct cpumask *aff;
--		struct irq_data *idata;
- 		int cpu_curr;
- 
- 		/* in case we got here because of !clean_complete */
-@@ -969,10 +967,8 @@ int mlx4_en_poll_rx_cq(struct napi_struc
- 		INC_PERF_COUNTER(priv->pstats.napi_quota);
- 
- 		cpu_curr = smp_processor_id();
--		idata = irq_desc_get_irq_data(cq->irq_desc);
--		aff = irq_data_get_affinity_mask(idata);
- 
--		if (likely(cpumask_test_cpu(cpu_curr, aff)))
-+		if (likely(cpumask_test_cpu(cpu_curr, cq->aff_mask)))
- 			return budget;
- 
- 		/* Current cpu is not according to smp_irq_affinity -
---- a/drivers/net/ethernet/mellanox/mlx4/mlx4_en.h
-+++ b/drivers/net/ethernet/mellanox/mlx4/mlx4_en.h
-@@ -46,6 +46,7 @@
- #endif
- #include <linux/cpu_rmap.h>
- #include <linux/ptp_clock_kernel.h>
-+#include <linux/irq.h>
- #include <net/xdp.h>
- 
- #include <linux/mlx4/device.h>
-@@ -380,7 +381,7 @@ struct mlx4_en_cq {
- 	struct mlx4_cqe *buf;
- #define MLX4_EN_OPCODE_ERROR	0x1e
- 
--	struct irq_desc *irq_desc;
-+	const struct cpumask *aff_mask;
- };
- 
- struct mlx4_en_port_profile {
+ 			if (nmk_chip->edge_rising & BIT(offset))
 
 
