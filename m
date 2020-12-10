@@ -5,39 +5,38 @@ X-Spam-Level:
 X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9138AC4361B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40AF9C4167B
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5835122EBF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5835122EBF
+	by mail.kernel.org (Postfix) with ESMTPS id EC6AC22E00
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EC6AC22E00
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49779.88108 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49782.88119 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRxz-0001tt-Nb; Thu, 10 Dec 2020 19:51:07 +0000
+	id 1knRy2-0001zm-0K; Thu, 10 Dec 2020 19:51:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49779.88108; Thu, 10 Dec 2020 19:51:07 +0000
+Received: by outflank-mailman (output) from mailman id 49782.88119; Thu, 10 Dec 2020 19:51:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRxz-0001tW-HF; Thu, 10 Dec 2020 19:51:07 +0000
-Received: by outflank-mailman (input) for mailman id 49779;
- Thu, 10 Dec 2020 19:51:06 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1knRy1-0001zW-Sc; Thu, 10 Dec 2020 19:51:09 +0000
+Received: by outflank-mailman (input) for mailman id 49782;
+ Thu, 10 Dec 2020 19:51:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRqT-0007OY-EY
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:21 +0000
-Received: from galois.linutronix.de (unknown [193.142.43.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6cc394ac-31c7-4a10-9ba6-c8a1e38799fb;
- Thu, 10 Dec 2020 19:42:42 +0000 (UTC)
+ id 1knRrS-0007NY-Kl
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:44:22 +0000
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b58d9fd9-7213-43af-b0be-ae6ae89e5ab1;
+ Thu, 10 Dec 2020 19:42:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,37 +48,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6cc394ac-31c7-4a10-9ba6-c8a1e38799fb
-Message-Id: <20201210194044.672935978@linutronix.de>
+X-Inumbo-ID: b58d9fd9-7213-43af-b0be-ae6ae89e5ab1
+Message-Id: <20201210194045.457218278@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629361;
+	s=2020; t=1607629371;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=Qj+nUJLINsvJ1wGGRtokQbSqazbntoaovZZiHCUfEoU=;
-	b=mj3Kocu4reYCYLMxNnXCB7pRMj/V2SipP9aFrWWSpDZJXbRGUx/etWSEc4UA9axZe8vH6Z
-	zCNVDaK1BEFqY4IWswwKyY8R7IgAyKxoeqPwRK9IXNNmGiGmnhY15xlempvvXuPFw2/rOc
-	mTCNzl+Tvzsv8H1Zumi6u4b7ahs/w0J8EI2jeDxL0Y5ZADiAONcn7tXXZuRD+mnMyLrQkH
-	8jP8OkOSyfio3wKvjr3Z/OVEvqX5ZlAghchZfn24t0pny2f/12ifma3CZVk+AVM0PtaOxp
-	ZDpdmrDdGhcDUTfi8/G7SVOrzhh/vhKhIeACLrs9VfJAm1rl5JDinUE3lR6YsQ==
+	bh=DeAXpsHXHZePk9yJlBEnvP07GAeQwVu3hbsEAC1KvV4=;
+	b=1ftX1NujPl+Xx3UaWEfCXjp+Nmg07+hPgK1Itu5O9SNBHoe9yl+RQXJ/2O1zp6IsfiLibV
+	HNI3oNJClnToZKNFBhedsy/3BepLS3TXsVRVkXB5G9+wE4lEck2qZ5nIFKfa87g0ab144q
+	Y8XYj/VugkwqMCvECW/TpEV1x4HCWrFdBzkevGfKqOFN0SaDM1/ov3Gwx/TBks3pXmGNrv
+	6QLKNAZhpAG6K+WVzFwjUhr3/uI//AlEz6mL833Dkg8c8/wOmAQ4fMPk7JfBTna6uA13Ka
+	n+R9468jt6R90wHee6UQ35MxaJ9NecvbD7sk9TpDtngv50OniDJk+BnWh4ozJQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629361;
+	s=2020e; t=1607629371;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=Qj+nUJLINsvJ1wGGRtokQbSqazbntoaovZZiHCUfEoU=;
-	b=BJ2Ps/crskKu+hAqmkYsokffZfoswWJHgtK94U0YlOuWVRLji6xjfgt0Ui2ooTzFtjd00H
-	sqLSJBfAAw+mcaDw==
-Date: Thu, 10 Dec 2020 20:25:57 +0100
+	bh=DeAXpsHXHZePk9yJlBEnvP07GAeQwVu3hbsEAC1KvV4=;
+	b=RL8ukeyN4bqd9Ll57DRL2wfv9LwNl4AYd7GzKiPBhSvQTs7EEhPh2RseLXs/41XjAQfiFB
+	9Mcn1n8WsG2pJ9Ag==
+Date: Thu, 10 Dec 2020 20:26:05 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
  Marc Zyngier <maz@kernel.org>,
- Tariq Toukan <tariqt@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>,
- Jakub Kicinski <kuba@kernel.org>,
- netdev@vger.kernel.org,
- linux-rdma@vger.kernel.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>,
  afzal mohammed <afzal.mohd.ma@gmail.com>,
@@ -117,46 +115,165 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  linux-pci@vger.kernel.org,
  Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
  Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Tariq Toukan <tariqt@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>,
+ netdev@vger.kernel.org,
+ linux-rdma@vger.kernel.org,
  Saeed Mahameed <saeedm@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-Subject: [patch 21/30] net/mlx4: Use effective interrupt affinity
+ Leon Romanovsky <leon@kernel.org>
+Subject: [patch 29/30] xen/events: Implement irq distribution
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-Using the interrupt affinity mask for checking locality is not really
-working well on architectures which support effective affinity masks.
-
-The affinity mask is either the system wide default or set by user space,
-but the architecture can or even must reduce the mask to the effective set,
-which means that checking the affinity mask itself does not really tell
-about the actual target CPUs.
+Keep track of the assignments of event channels to CPUs and select the
+online CPU with the least assigned channels in the affinity mask which is
+handed to irq_chip::irq_set_affinity() from the core code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Tariq Toukan <tariqt@nvidia.com>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org
-Cc: linux-rdma@vger.kernel.org
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
 ---
- drivers/net/ethernet/mellanox/mlx4/en_cq.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/xen/events/events_base.c |   72 ++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 64 insertions(+), 8 deletions(-)
 
---- a/drivers/net/ethernet/mellanox/mlx4/en_cq.c
-+++ b/drivers/net/ethernet/mellanox/mlx4/en_cq.c
-@@ -117,7 +117,7 @@ int mlx4_en_activate_cq(struct mlx4_en_p
- 			assigned_eq = true;
- 		}
- 		irq = mlx4_eq_get_irq(mdev->dev, cq->vector);
--		cq->aff_mask = irq_get_affinity_mask(irq);
-+		cq->aff_mask = irq_get_effective_affinity_mask(irq);
- 	} else {
- 		/* For TX we use the same irq per
- 		ring we assigned for the RX    */
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -96,6 +96,7 @@ struct irq_info {
+ 	struct list_head eoi_list;
+ 	short refcnt;
+ 	u8 spurious_cnt;
++	u8 is_accounted;
+ 	enum xen_irq_type type; /* type */
+ 	unsigned irq;
+ 	evtchn_port_t evtchn;   /* event channel */
+@@ -161,6 +162,9 @@ static DEFINE_PER_CPU(int [NR_VIRQS], vi
+ /* IRQ <-> IPI mapping */
+ static DEFINE_PER_CPU(int [XEN_NR_IPIS], ipi_to_irq) = {[0 ... XEN_NR_IPIS-1] = -1};
+ 
++/* Event channel distribution data */
++static atomic_t channels_on_cpu[NR_CPUS];
++
+ static int **evtchn_to_irq;
+ #ifdef CONFIG_X86
+ static unsigned long *pirq_eoi_map;
+@@ -257,6 +261,32 @@ static void set_info_for_irq(unsigned in
+ 		irq_set_chip_data(irq, info);
+ }
+ 
++/* Per CPU channel accounting */
++static void channels_on_cpu_dec(struct irq_info *info)
++{
++	if (!info->is_accounted)
++		return;
++
++	info->is_accounted = 0;
++
++	if (WARN_ON_ONCE(info->cpu >= nr_cpu_ids))
++		return;
++
++	WARN_ON_ONCE(!atomic_add_unless(&channels_on_cpu[info->cpu], -1 , 0));
++}
++
++static void channels_on_cpu_inc(struct irq_info *info)
++{
++	if (WARN_ON_ONCE(info->cpu >= nr_cpu_ids))
++		return;
++
++	if (WARN_ON_ONCE(!atomic_add_unless(&channels_on_cpu[info->cpu], 1,
++					    INT_MAX)))
++		return;
++
++	info->is_accounted = 1;
++}
++
+ /* Constructors for packed IRQ information. */
+ static int xen_irq_info_common_setup(struct irq_info *info,
+ 				     unsigned irq,
+@@ -339,6 +369,7 @@ static void xen_irq_info_cleanup(struct
+ {
+ 	set_evtchn_to_irq(info->evtchn, -1);
+ 	info->evtchn = 0;
++	channels_on_cpu_dec(info);
+ }
+ 
+ /*
+@@ -449,7 +480,9 @@ static void bind_evtchn_to_cpu(evtchn_po
+ 
+ 	xen_evtchn_port_bind_to_cpu(evtchn, cpu, info->cpu);
+ 
++	channels_on_cpu_dec(info);
+ 	info->cpu = cpu;
++	channels_on_cpu_inc(info);
+ }
+ 
+ /**
+@@ -622,11 +655,6 @@ static void xen_irq_init(unsigned irq)
+ {
+ 	struct irq_info *info;
+ 
+-#ifdef CONFIG_SMP
+-	/* By default all event channels notify CPU#0. */
+-	cpumask_copy(irq_get_affinity_mask(irq), cpumask_of(0));
+-#endif
+-
+ 	info = kzalloc(sizeof(*info), GFP_KERNEL);
+ 	if (info == NULL)
+ 		panic("Unable to allocate metadata for IRQ%d\n", irq);
+@@ -1691,10 +1719,34 @@ static int xen_rebind_evtchn_to_cpu(evtc
+ 	return 0;
+ }
+ 
++/*
++ * Find the CPU within @dest mask which has the least number of channels
++ * assigned. This is not precise as the per cpu counts can be modified
++ * concurrently.
++ */
++static unsigned int select_target_cpu(const struct cpumask *dest)
++{
++	unsigned int cpu, best_cpu = UINT_MAX, minch = UINT_MAX;
++
++	for_each_cpu_and(cpu, dest, cpu_online_mask) {
++		unsigned int curch = atomic_read(&channels_on_cpu[cpu]);
++
++		if (curch < minch) {
++			minch = curch;
++			best_cpu = cpu;
++		}
++	}
++
++	/* If this happens accounting is screwed up */
++	if (WARN_ON_ONCE(best_cpu == UINT_MAX))
++		best_cpu = cpumask_first(dest);
++	return best_cpu;
++}
++
+ static int set_affinity_irq(struct irq_data *data, const struct cpumask *dest,
+ 			    bool force)
+ {
+-	unsigned tcpu = cpumask_first_and(dest, cpu_online_mask);
++	unsigned int tcpu = select_target_cpu(dest);
+ 	int ret;
+ 
+ 	ret = xen_rebind_evtchn_to_cpu(evtchn_from_irq(data->irq), tcpu);
+@@ -1922,8 +1974,12 @@ void xen_irq_resume(void)
+ 	xen_evtchn_resume();
+ 
+ 	/* No IRQ <-> event-channel mappings. */
+-	list_for_each_entry(info, &xen_irq_list_head, list)
+-		info->evtchn = 0; /* zap event-channel binding */
++	list_for_each_entry(info, &xen_irq_list_head, list) {
++		/* Zap event-channel binding */
++		info->evtchn = 0;
++		/* Adjust accounting */
++		channels_on_cpu_dec(info);
++	}
+ 
+ 	clear_evtchn_to_irq_all();
+ 
 
 
