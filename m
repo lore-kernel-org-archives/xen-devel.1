@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94483C433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:43:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4ABAC433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5BA3923D23
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:43:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BA3923D23
+	by mail.kernel.org (Postfix) with ESMTPS id 6FDDF22571
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Dec 2020 19:51:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FDDF22571
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49734.88024 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.49769.88050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRqC-000073-QJ; Thu, 10 Dec 2020 19:43:04 +0000
+	id 1knRxu-0001gu-Pk; Thu, 10 Dec 2020 19:51:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49734.88024; Thu, 10 Dec 2020 19:43:04 +0000
+Received: by outflank-mailman (output) from mailman id 49769.88050; Thu, 10 Dec 2020 19:51:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knRqC-00006r-L6; Thu, 10 Dec 2020 19:43:04 +0000
-Received: by outflank-mailman (input) for mailman id 49734;
- Thu, 10 Dec 2020 19:43:02 +0000
+	id 1knRxu-0001gT-Gv; Thu, 10 Dec 2020 19:51:02 +0000
+Received: by outflank-mailman (input) for mailman id 49769;
+ Thu, 10 Dec 2020 19:51:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hbU1=FO=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1knRqA-0007NY-IT
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:02 +0000
-Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ id 1knRqe-0007NY-It
+ for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:43:32 +0000
+Received: from galois.linutronix.de (unknown [193.142.43.55])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e9ad1c39-8968-41d0-afa8-7407fe036899;
- Thu, 10 Dec 2020 19:42:33 +0000 (UTC)
+ id d13a7557-b416-4829-9e73-f83499976b25;
+ Thu, 10 Dec 2020 19:42:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,40 +48,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e9ad1c39-8968-41d0-afa8-7407fe036899
-Message-Id: <20201210194043.957046529@linutronix.de>
+X-Inumbo-ID: d13a7557-b416-4829-9e73-f83499976b25
+Message-Id: <20201210194044.769458162@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1607629352;
+	s=2020; t=1607629362;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=aHjBasf7kS/mugPgGoqzaKHWX8S9MZAhVf8pOv9wzqI=;
-	b=hIJe5uDFg4eKtha16rd5RMgP75gihkgyuo+wu9nJj9lb1QxB+dyj8VagUmUhTQC26INyeG
-	8XIXTkbYJX+KGxPBwbTjWFL8gH8tKgvYA0sd+Cbqs0pmZohafXQRaBxZ4X0LrRHAFHI+fK
-	34Ah/yU2AM+9WMw+oDh09bmBmxCAcLljD/Ywf7QGigq/72RSIaYCWXy9MRJcPUHTzSLEcU
-	hQensxz9JJtZ3t/2uwIx4+1Y2fv0/x2+3nAGVvooEgtnvb2OUreKFZUgUZSfzBs+FE+M45
-	5E1wbC+M9uufcsBkYfGEAcb5u4V11lC9yi8KNKp2A+CRv838rNvetMOidgM8lg==
+	bh=VOaf/d7D7QtaaC+WU1sXZf5eTJVDFk9LK/s7Au7CufU=;
+	b=ebvAKnU9U5xxsuTyZRRyBD/pSxlAzqV321cu/1PSB+S30uzHIXKjKJyuLWtBWcYVZXlybn
+	NBr9KiI1e9paQHPvIfvkgD6mJDZPhiGb5TN5PvcTekgbiahpQ8LQMlSJSX4xpUxk9f2Ol5
+	F8oNCSe1H+ais24JO9t2IwvShGuXdvh8ES7plOqYyAwLRKf0TojyhsFUMV5kjVjEtAGPaz
+	UOL8zFfw66+Fs8FOPny2ek7maFNW7ZTVUGseqbCjWR7MjO0q/MLzWc7S4CWwTTyNrDt17N
+	pAxkdJedoxJwP4qnw1l3YgNebMwtGsjkmDdMWwXGJEDNlPXObkHeBB1kSiRQpQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1607629352;
+	s=2020e; t=1607629362;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=aHjBasf7kS/mugPgGoqzaKHWX8S9MZAhVf8pOv9wzqI=;
-	b=A/zWaVNR4ntcGYc6FuYZaabTLVIc+ZQNDV6wELc3l8+V7v8iKaL/rxgSQB4qy+gMpZm5QC
-	1is0DPvmHcXJQvCg==
-Date: Thu, 10 Dec 2020 20:25:50 +0100
+	bh=VOaf/d7D7QtaaC+WU1sXZf5eTJVDFk9LK/s7Au7CufU=;
+	b=W/Zofh+C9ibp8KsiLJ6iyTc3jKq0LDlUAeV1W45RXNpyPicUPyvAT+QSfrk4IRw9rtLo2E
+	zAcfM77lXBTE8oDg==
+Date: Thu, 10 Dec 2020 20:25:58 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>,
  Marc Zyngier <maz@kernel.org>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>,
- intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>,
  afzal mohammed <afzal.mohd.ma@gmail.com>,
@@ -94,9 +86,17 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>,
  linux-s390@vger.kernel.org,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>,
  Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
  Chris Wilson <chris@chris-wilson.co.uk>,
  Wambui Karuga <wambui.karugax@gmail.com>,
+ intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Linus Walleij <linus.walleij@linaro.org>,
  linux-gpio@vger.kernel.org,
  Lee Jones <lee.jones@linaro.org>,
@@ -122,189 +122,66 @@ Cc: Peter Zijlstra <peterz@infradead.org>,
  Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
-Subject: [patch 14/30] drm/i915/pmu: Replace open coded kstat_irqs() copy
+Subject: [patch 22/30] net/mlx5: Replace irq_to_desc() abuse
 References: <20201210192536.118432146@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-transfer-encoding: 8-bit
 
-Driver code has no business with the internals of the irq descriptor.
+No driver has any business with the internals of an interrupt
+descriptor. Storing a pointer to it just to use yet another helper at the
+actual usage site to retrieve the affinity mask is creative at best. Just
+because C does not allow encapsulation does not mean that the kernel has no
+limits.
 
-Aside of that the count is per interrupt line and therefore takes
-interrupts from other devices into account which share the interrupt line
-and are not handled by the graphics driver.
-
-Replace it with a pmu private count which only counts interrupts which
-originate from the graphics card.
-
-To avoid atomics or heuristics of some sort make the counter field
-'unsigned long'. That limits the count to 4e9 on 32bit which is a lot and
-postprocessing can easily deal with the occasional wraparound.
+Retrieve a pointer to the affinity mask itself and use that. It's still
+using an interface which is usually not for random drivers, but definitely
+less hideous than the previous hack.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: intel-gfx@lists.freedesktop.org
-Cc: dri-devel@lists.freedesktop.org
 ---
- drivers/gpu/drm/i915/i915_irq.c |   34 ++++++++++++++++++++++++++++++++++
- drivers/gpu/drm/i915/i915_pmu.c |   18 +-----------------
- drivers/gpu/drm/i915/i915_pmu.h |    8 ++++++++
- 3 files changed, 43 insertions(+), 17 deletions(-)
+ drivers/net/ethernet/mellanox/mlx5/core/en.h      |    2 +-
+ drivers/net/ethernet/mellanox/mlx5/core/en_main.c |    2 +-
+ drivers/net/ethernet/mellanox/mlx5/core/en_txrx.c |    6 +-----
+ 3 files changed, 3 insertions(+), 7 deletions(-)
 
---- a/drivers/gpu/drm/i915/i915_irq.c
-+++ b/drivers/gpu/drm/i915/i915_irq.c
-@@ -60,6 +60,24 @@
-  * and related files, but that will be described in separate chapters.
-  */
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en.h
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en.h
+@@ -669,7 +669,7 @@ struct mlx5e_channel {
+ 	spinlock_t                 async_icosq_lock;
  
-+/*
-+ * Interrupt statistic for PMU. Increments the counter only if the
-+ * interrupt originated from the the GPU so interrupts from a device which
-+ * shares the interrupt line are not accounted.
-+ */
-+static inline void pmu_irq_stats(struct drm_i915_private *priv,
-+				 irqreturn_t res)
-+{
-+	if (unlikely(res != IRQ_HANDLED))
-+		return;
-+
-+	/*
-+	 * A clever compiler translates that into INC. A not so clever one
-+	 * should at least prevent store tearing.
-+	 */
-+	WRITE_ONCE(priv->pmu.irq_count, priv->pmu.irq_count + 1);
-+}
-+
- typedef bool (*long_pulse_detect_func)(enum hpd_pin pin, u32 val);
+ 	/* data path - accessed per napi poll */
+-	struct irq_desc *irq_desc;
++	const struct cpumask	  *aff_mask;
+ 	struct mlx5e_ch_stats     *stats;
  
- static const u32 hpd_ilk[HPD_NUM_PINS] = {
-@@ -1599,6 +1617,8 @@ static irqreturn_t valleyview_irq_handle
- 		valleyview_pipestat_irq_handler(dev_priv, pipe_stats);
- 	} while (0);
+ 	/* control */
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
+@@ -1998,7 +1998,7 @@ static int mlx5e_open_channel(struct mlx
+ 	c->num_tc   = params->num_tc;
+ 	c->xdp      = !!params->xdp_prog;
+ 	c->stats    = &priv->channel_stats[ix].ch;
+-	c->irq_desc = irq_to_desc(irq);
++	c->aff_mask = irq_get_affinity_mask(irq);
+ 	c->lag_port = mlx5e_enumerate_lag_port(priv->mdev, ix);
  
-+	pmu_irq_stats(dev_priv, ret);
-+
- 	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
- 
- 	return ret;
-@@ -1676,6 +1696,8 @@ static irqreturn_t cherryview_irq_handle
- 		valleyview_pipestat_irq_handler(dev_priv, pipe_stats);
- 	} while (0);
- 
-+	pmu_irq_stats(dev_priv, ret);
-+
- 	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
- 
- 	return ret;
-@@ -2103,6 +2125,8 @@ static irqreturn_t ilk_irq_handler(int i
- 	if (sde_ier)
- 		raw_reg_write(regs, SDEIER, sde_ier);
- 
-+	pmu_irq_stats(i915, ret);
-+
- 	/* IRQs are synced during runtime_suspend, we don't require a wakeref */
- 	enable_rpm_wakeref_asserts(&i915->runtime_pm);
- 
-@@ -2419,6 +2443,8 @@ static irqreturn_t gen8_irq_handler(int
- 
- 	gen8_master_intr_enable(regs);
- 
-+	pmu_irq_stats(dev_priv, IRQ_HANDLED);
-+
- 	return IRQ_HANDLED;
- }
- 
-@@ -2514,6 +2540,8 @@ static __always_inline irqreturn_t
- 
- 	gen11_gu_misc_irq_handler(gt, gu_misc_iir);
- 
-+	pmu_irq_stats(i915, IRQ_HANDLED);
-+
- 	return IRQ_HANDLED;
- }
- 
-@@ -3688,6 +3716,8 @@ static irqreturn_t i8xx_irq_handler(int
- 		i8xx_pipestat_irq_handler(dev_priv, iir, pipe_stats);
- 	} while (0);
- 
-+	pmu_irq_stats(dev_priv, ret);
-+
- 	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
- 
- 	return ret;
-@@ -3796,6 +3826,8 @@ static irqreturn_t i915_irq_handler(int
- 		i915_pipestat_irq_handler(dev_priv, iir, pipe_stats);
- 	} while (0);
- 
-+	pmu_irq_stats(dev_priv, ret);
-+
- 	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
- 
- 	return ret;
-@@ -3941,6 +3973,8 @@ static irqreturn_t i965_irq_handler(int
- 		i965_pipestat_irq_handler(dev_priv, iir, pipe_stats);
- 	} while (0);
- 
-+	pmu_irq_stats(dev_priv, IRQ_HANDLED);
-+
- 	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
- 
- 	return ret;
---- a/drivers/gpu/drm/i915/i915_pmu.c
-+++ b/drivers/gpu/drm/i915/i915_pmu.c
-@@ -423,22 +423,6 @@ static enum hrtimer_restart i915_sample(
- 	return HRTIMER_RESTART;
- }
- 
--static u64 count_interrupts(struct drm_i915_private *i915)
--{
--	/* open-coded kstat_irqs() */
--	struct irq_desc *desc = irq_to_desc(i915->drm.pdev->irq);
--	u64 sum = 0;
--	int cpu;
--
--	if (!desc || !desc->kstat_irqs)
--		return 0;
--
--	for_each_possible_cpu(cpu)
--		sum += *per_cpu_ptr(desc->kstat_irqs, cpu);
--
--	return sum;
--}
--
- static void i915_pmu_event_destroy(struct perf_event *event)
+ 	netif_napi_add(netdev, &c->napi, mlx5e_napi_poll, 64);
+--- a/drivers/net/ethernet/mellanox/mlx5/core/en_txrx.c
++++ b/drivers/net/ethernet/mellanox/mlx5/core/en_txrx.c
+@@ -40,12 +40,8 @@
+ static inline bool mlx5e_channel_no_affinity_change(struct mlx5e_channel *c)
  {
- 	struct drm_i915_private *i915 =
-@@ -581,7 +565,7 @@ static u64 __i915_pmu_event_read(struct
- 				   USEC_PER_SEC /* to MHz */);
- 			break;
- 		case I915_PMU_INTERRUPTS:
--			val = count_interrupts(i915);
-+			val = READ_ONCE(pmu->irq_count);
- 			break;
- 		case I915_PMU_RC6_RESIDENCY:
- 			val = get_rc6(&i915->gt);
---- a/drivers/gpu/drm/i915/i915_pmu.h
-+++ b/drivers/gpu/drm/i915/i915_pmu.h
-@@ -108,6 +108,14 @@ struct i915_pmu {
- 	 */
- 	ktime_t sleep_last;
- 	/**
-+	 * @irq_count: Number of interrupts
-+	 *
-+	 * Intentionally unsigned long to avoid atomics or heuristics on 32bit.
-+	 * 4e9 interrupts are a lot and postprocessing can really deal with an
-+	 * occasional wraparound easily. It's 32bit after all.
-+	 */
-+	unsigned long irq_count;
-+	/**
- 	 * @events_attr_group: Device events attribute group.
- 	 */
- 	struct attribute_group events_attr_group;
+ 	int current_cpu = smp_processor_id();
+-	const struct cpumask *aff;
+-	struct irq_data *idata;
+ 
+-	idata = irq_desc_get_irq_data(c->irq_desc);
+-	aff = irq_data_get_affinity_mask(idata);
+-	return cpumask_test_cpu(current_cpu, aff);
++	return cpumask_test_cpu(current_cpu, c->aff_mask);
+ }
+ 
+ static void mlx5e_handle_tx_dim(struct mlx5e_txqsq *sq)
 
 
