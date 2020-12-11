@@ -2,49 +2,45 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 511B6C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A163C4361B
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E4B0D206F8
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E4B0D206F8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=ACULAB.COM
+	by mail.kernel.org (Postfix) with ESMTPS id 2C7A0206F8
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C7A0206F8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50647.89370 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50663.89397 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knjGK-0007ox-SG; Fri, 11 Dec 2020 14:19:12 +0000
+	id 1knjQN-0000cE-5a; Fri, 11 Dec 2020 14:29:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50647.89370; Fri, 11 Dec 2020 14:19:12 +0000
+Received: by outflank-mailman (output) from mailman id 50663.89397; Fri, 11 Dec 2020 14:29:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knjGK-0007oq-OY; Fri, 11 Dec 2020 14:19:12 +0000
-Received: by outflank-mailman (input) for mailman id 50647;
- Fri, 11 Dec 2020 14:19:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Aoib=FP=aculab.com=david.laight@srs-us1.protection.inumbo.net>)
- id 1knjGK-0007ol-2S
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 14:19:12 +0000
-Received: from eu-smtp-delivery-151.mimecast.com (unknown [185.58.86.151])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 504687d0-e28a-4fed-a5ed-2672fa0832d0;
- Fri, 11 Dec 2020 14:19:11 +0000 (UTC)
-Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- uk-mta-53-s0AncPC_O7qxZEyLU7X13A-1; Fri, 11 Dec 2020 14:19:07 +0000
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
- Server (TLS) id 15.0.1347.2; Fri, 11 Dec 2020 14:19:05 +0000
-Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
- AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
- Fri, 11 Dec 2020 14:19:05 +0000
+	id 1knjQN-0000c7-2M; Fri, 11 Dec 2020 14:29:35 +0000
+Received: by outflank-mailman (input) for mailman id 50663;
+ Fri, 11 Dec 2020 14:29:33 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1knjQL-0000bz-Na
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 14:29:33 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1knjQH-0007YB-VR; Fri, 11 Dec 2020 14:29:29 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1knjQH-0006jH-Nv; Fri, 11 Dec 2020 14:29:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,118 +52,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 504687d0-e28a-4fed-a5ed-2672fa0832d0
-X-MC-Unique: s0AncPC_O7qxZEyLU7X13A-1
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Thomas Gleixner' <tglx@linutronix.de>, Tvrtko Ursulin
-	<tvrtko.ursulin@linux.intel.com>, LKML <linux-kernel@vger.kernel.org>
-CC: Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>, Jani
- Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen
-	<joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
-	"intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "James
- E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Helge Deller
-	<deller@gmx.de>, afzal mohammed <afzal.mohd.ma@gmail.com>,
-	"linux-parisc@vger.kernel.org" <linux-parisc@vger.kernel.org>, Russell King
-	<linux@armlinux.org.uk>, "linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, Mark Rutland <mark.rutland@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
-	Christian Borntraeger <borntraeger@de.ibm.com>, Heiko Carstens
-	<hca@linux.ibm.com>, "linux-s390@vger.kernel.org"
-	<linux-s390@vger.kernel.org>, Pankaj Bharadiya
-	<pankaj.laxminarayan.bharadiya@intel.com>, Chris Wilson
-	<chris@chris-wilson.co.uk>, Wambui Karuga <wambui.karugax@gmail.com>, "Linus
- Walleij" <linus.walleij@linaro.org>, "linux-gpio@vger.kernel.org"
-	<linux-gpio@vger.kernel.org>, Lee Jones <lee.jones@linaro.org>, Jon Mason
-	<jdmason@kudzu.us>, Dave Jiang <dave.jiang@intel.com>, Allen Hubbe
-	<allenbh@gmail.com>, "linux-ntb@googlegroups.com"
-	<linux-ntb@googlegroups.com>, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, "Michal
- Simek" <michal.simek@xilinx.com>, "linux-pci@vger.kernel.org"
-	<linux-pci@vger.kernel.org>, Karthikeyan Mitran
-	<m.karthikeyan@mobiveil.co.in>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, "Tariq
- Toukan" <tariqt@nvidia.com>, "David S. Miller" <davem@davemloft.net>, "Jakub
- Kicinski" <kuba@kernel.org>, "netdev@vger.kernel.org"
-	<netdev@vger.kernel.org>, "linux-rdma@vger.kernel.org"
-	<linux-rdma@vger.kernel.org>, Saeed Mahameed <saeedm@nvidia.com>, "Leon
- Romanovsky" <leon@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: RE: [patch 14/30] drm/i915/pmu: Replace open coded kstat_irqs() copy
-Thread-Topic: [patch 14/30] drm/i915/pmu: Replace open coded kstat_irqs() copy
-Thread-Index: AQHWz72qwjNpP0n0UkWT70W8RrLS8qnx7xrw
-Date: Fri, 11 Dec 2020 14:19:05 +0000
-Message-ID: <d6cbfa118490459bb0671394f00323fc@AcuMS.aculab.com>
-References: <20201210192536.118432146@linutronix.de>
- <20201210194043.957046529@linutronix.de>
- <ad05af1a-5463-2a80-0887-7629721d6863@linux.intel.com>
- <87y2i4h54i.fsf@nanos.tec.linutronix.de>
-In-Reply-To: <87y2i4h54i.fsf@nanos.tec.linutronix.de>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=QAvuEyVoXxjXe/JQfwr5Wkh2jPuI7x0e83APCvioKjY=; b=CnplNqXsDHJwa2Dh5oeDrTlf3J
+	Wee/RRdilYzOSJd9RXDtXPw2Gu+a6zqhUvWmIrav8/E64/eKjdHOJ+Ba2ENrf6JaZm4uhXN0egqpq
+	59zmG4T2h2KI67Pp68BwIuWRta2Pp4S7Q7AXmqWtld/iODgw1Mh8CCu6mQPzI9/JBvPY=;
+Subject: Re: [PATCH v3 0/8] xen/arm: Add support for SMMUv3 driver
+To: Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
+ Paul Durrant <paul@xen.org>
+References: <cover.1607617848.git.rahul.singh@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <ea121c23-4deb-c566-4d1d-bb9dd4959015@xen.org>
+Date: Fri, 11 Dec 2020 14:29:27 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <cover.1607617848.git.rahul.singh@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-From: Thomas Gleixner
-> Sent: 11 December 2020 12:58
-..
-> > After my failed hasty sketch from last night I had a different one whic=
-h
-> > was kind of heuristics based (re-reading the upper dword and retrying i=
-f
-> > it changed on 32-bit).
->=20
-> The problem is that there will be two seperate modifications for the low
-> and high word. Several ways how the compiler can translate this, but the
-> problem is the same for all of them:
->=20
-> CPU 0                           CPU 1
->         load low
->         load high
->         add  low, 1
->         addc high, 0
->         store low               load high
-> --> NMI                         load low
->                                 load high and compare
->         store high
->=20
-> You can't catch that. If this really becomes an issue you need a
-> sequence counter around it.
+Hi Rahul,
 
-Or just two copies of the high word.
-Provided the accesses are sequenced:
-writer:
-=09load high:low
-=09add small_value,high:low
-=09store high
-=09store low
-=09store high_copy
-reader:
-=09load high_copy
-=09load low
-=09load high
-=09if (high !=3D high_copy)
-=09=09low =3D 0;
+On 10/12/2020 16:56, Rahul Singh wrote:
+> This patch series is v3 of the work to add support for the SMMUv3 driver.
+> 
+> Approach taken is to first merge the Linux copy of the SMMUv3 driver
+> (tag v5.8.18) and then modify the driver to build on XEN.
+> 
+> MSI and PCI ATS functionality are not supported. Code is not tested and
+> compiled. Code is guarded by the flag CONFIG_PCI_ATS and CONFIG_MSI to compile
+> the driver.
+> 
+> Code specific to Linux is removed from the driver to avoid dead code.
+> 
+> Driver is currently supported as tech preview.
+> 
+> Following functionality should be supported before driver is out for tech
+> preview
+> 1. Investigate the timing analysis of using spin lock in place of mutex when
+>     attaching a  device to SMMU.
+> 2. Merged the latest Linux SMMUv3 driver code once atomic operation is
+>     available in XEN.
+> 3. PCI ATS and MSI interrupts should be supported.
+> 4. Investigate side-effect of using tasklet in place of threaded IRQ and fix
+>     if any.
+In your last e-mail, you wrote that you would investigate and then come 
+back to use. It wasn't clear that this meant you will not deal with it 
+in this series.
 
-The read value is always stale, so it probably doesn't
-matter that the value you have is one that is between the
-value when you started and that when you finished.
+> 5. fallthorugh keyword should be supported.
 
-=09David
+This one should really be done now... It is not a complicated one...
 
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1=
-PT, UK
-Registration No: 1397386 (Wales)
+> 6. Implement the ffsll function in bitops.h file.
 
+... same here.
+
+Cheers,
+
+-- 
+Julien Grall
 
