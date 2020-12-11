@@ -2,76 +2,45 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 665BDC4361B
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20826C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:50:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F192D23F2B
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:47:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F192D23F2B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id A1CF723EF1
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:49:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A1CF723EF1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50375.89011 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50384.89022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knfxU-0000zn-QY; Fri, 11 Dec 2020 10:47:32 +0000
+	id 1knfzd-0001Dl-87; Fri, 11 Dec 2020 10:49:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50375.89011; Fri, 11 Dec 2020 10:47:32 +0000
+Received: by outflank-mailman (output) from mailman id 50384.89022; Fri, 11 Dec 2020 10:49:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knfxU-0000ze-Ms; Fri, 11 Dec 2020 10:47:32 +0000
-Received: by outflank-mailman (input) for mailman id 50375;
- Fri, 11 Dec 2020 10:47:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mmUI=FP=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1knfxT-0000zP-LS
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 10:47:31 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (unknown
- [40.107.20.74]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0ffe559c-faa2-41a2-8854-333585e44b95;
- Fri, 11 Dec 2020 10:47:30 +0000 (UTC)
-Received: from AS8PR04CA0059.eurprd04.prod.outlook.com (2603:10a6:20b:312::34)
- by DBBPR08MB4346.eurprd08.prod.outlook.com (2603:10a6:10:ca::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.13; Fri, 11 Dec
- 2020 10:47:28 +0000
-Received: from VE1EUR03FT056.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:312:cafe::b3) by AS8PR04CA0059.outlook.office365.com
- (2603:10a6:20b:312::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.13 via Frontend
- Transport; Fri, 11 Dec 2020 10:47:28 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT056.mail.protection.outlook.com (10.152.19.28) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3654.12 via Frontend Transport; Fri, 11 Dec 2020 10:47:28 +0000
-Received: ("Tessian outbound 6af064f543d4:v71");
- Fri, 11 Dec 2020 10:47:27 +0000
-Received: from ea805283bef2.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- C6E95099-EF90-498D-B83E-AF5D53533BB4.1; 
- Fri, 11 Dec 2020 10:46:50 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ea805283bef2.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Fri, 11 Dec 2020 10:46:50 +0000
-Received: from DB7PR08MB3500.eurprd08.prod.outlook.com (2603:10a6:10:49::10)
- by DBBPR08MB4629.eurprd08.prod.outlook.com (2603:10a6:10:f4::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.12; Fri, 11 Dec
- 2020 10:46:48 +0000
-Received: from DB7PR08MB3500.eurprd08.prod.outlook.com
- ([fe80::11cb:318b:f0a0:f125]) by DB7PR08MB3500.eurprd08.prod.outlook.com
- ([fe80::11cb:318b:f0a0:f125%5]) with mapi id 15.20.3654.013; Fri, 11 Dec 2020
- 10:46:48 +0000
+	id 1knfzd-0001De-5C; Fri, 11 Dec 2020 10:49:45 +0000
+Received: by outflank-mailman (input) for mailman id 50384;
+ Fri, 11 Dec 2020 10:49:43 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1knfzb-0001DZ-26
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 10:49:43 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1knfza-0002sk-69; Fri, 11 Dec 2020 10:49:42 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1knfzZ-0007xN-N2; Fri, 11 Dec 2020 10:49:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -83,181 +52,377 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0ffe559c-faa2-41a2-8854-333585e44b95
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5zLMZpv/HzrZx5MO2wX7WXWcoDxwiaK0i66zyzHvxlM=;
- b=MxWq9U2gBwp+03VgqYJwJxqHcXf8mJUUsD0+MZ+BvfURFoxilYkKvs88n0zhbiq/WFhlco/zTmBKox+oe1jZt/CKuBRKQsSFYwUWJOJ7BWN3DDZOPQyx+qIi0+UBLFBL7PwbBbQXKTGsuvScH4h3ZiZPM9PFckuXg57Mx82PFKU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 5db55475e6605dc3
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NAq2xfMuabPgpev0p8URFxz5/xeHeEI/Ex07pMxUREFNKxBIp4ZPPYQz/joVYjlMgWBhy6rW6P/1fs21GHEDZKF3IbFmi9VXEkj9XMQpfQPmXFs7I9rJTryF9/C3bwms0MraIcbyBKcG+YvRwJWk8gqGlRx/4gIH/HJhGK2h9wrIqXMy6k0Q2Ys3sjLIWU9b3DQhRHkyJIrUSE1DurtwfqtVxq1yH/MfD23nrvEgvOsh2sX+ifxLUbGFz71CRMztD5g3dt7HR+fyfmfmMCfOdKNzMM7fc6UBJjZVVxY4YhJaWv07XyJCaFnvY9XKqaaBxUIGimAqtQx/Ygd5Msp7jQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5zLMZpv/HzrZx5MO2wX7WXWcoDxwiaK0i66zyzHvxlM=;
- b=WWoPgKPBTzOXPFct3aqAJdGIspt+hspK6GsLCO3X3J0a+D8dg/PEzmAQsGkp3BahQMJ3bT7kCW+MCmlD78FwVHjrAt5o59svTg+WNcCz01hWjEayU5Ku1re6XiVMT6FesBkLZ1myvX1mLW4W7Klw15EnULFa5z+nPcALgO7mgtm6lEUQQkDOqnwYSzrZxnncsVCMnvHoxpirbdKGHH1FLR9PbI6uDYJ33xlMlRf155r6E4nARuNCVSnLPuFZcmPr6Owehi3MOGo7Qe6lJWtQpMD1AMtijD1vNyksUmjaYWAd03n6JlTEbr1BTHo5s1wUxySvk7JYN+b8HrogmOwVIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5zLMZpv/HzrZx5MO2wX7WXWcoDxwiaK0i66zyzHvxlM=;
- b=MxWq9U2gBwp+03VgqYJwJxqHcXf8mJUUsD0+MZ+BvfURFoxilYkKvs88n0zhbiq/WFhlco/zTmBKox+oe1jZt/CKuBRKQsSFYwUWJOJ7BWN3DDZOPQyx+qIi0+UBLFBL7PwbBbQXKTGsuvScH4h3ZiZPM9PFckuXg57Mx82PFKU=
-From: Rahul Singh <Rahul.Singh@arm.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Bertrand Marquis <Bertrand.Marquis@arm.com>, Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v3 4/8] xen/arm: Remove support for Stage-1 translation on
- SMMUv3.
-Thread-Topic: [PATCH v3 4/8] xen/arm: Remove support for Stage-1 translation
- on SMMUv3.
-Thread-Index: AQHWzxXY77Y6xwXFHEep3JN+7VkcoanxG7eAgACb9YA=
-Date: Fri, 11 Dec 2020 10:46:48 +0000
-Message-ID: <0904E964-5987-4972-A643-A0FE43F5A99E@arm.com>
-References: <cover.1607617848.git.rahul.singh@arm.com>
- <a5e3509bbc4ce21e0d9d176d7a2984ef40ad0ae3.1607617848.git.rahul.singh@arm.com>
- <alpine.DEB.2.21.2012101532110.6285@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2012101532110.6285@sstabellini-ThinkPad-T480s>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-Authentication-Results-Original: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=arm.com;
-x-originating-ip: [217.140.99.251]
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 56e3bae8-81f0-456e-61f9-08d89dc2274b
-x-ms-traffictypediagnostic: DBBPR08MB4629:|DBBPR08MB4346:
-x-ms-exchange-transport-forked: True
-X-Microsoft-Antispam-PRVS:
-	<DBBPR08MB4346966ED762BB53D8A8D2CEFCCA0@DBBPR08MB4346.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:8273;OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- gLg8oquWBQ6OQ9gymBK+vsEdZeLu2+9tZeSCecUXHJMx6h856XPM+T1TpgHz21xZ0csNVoluBczmuEIkgpvULy2aCYQA9+D6A/2xWASE7GNRxgl8FrMasXyksjEk2MlCnFMarITP39I0Ijw7DrjkkaZS3pnJt2zBAZMZv02VpzKfBw7skopQtt681O+ySL1K3b64r9cqeoMNG4vP1/KtX7SXI4xuHQzS6P6CNlSUNbdN/BlJ6xK3xLB1lAobCzXbHxbPiC1mmqhOwzlFCwrlNRm8vYKa0aA+2+gewQOnxbf74IPUdlI2o86ICcQEiolt0Yz5WJRj1oCXZiRMJmSx0gv9f9Hnrr8oZTxlgdlziXXFj3fqUqEC7RWe0hTtEXiU
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB7PR08MB3500.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(396003)(346002)(39850400004)(136003)(2616005)(26005)(186003)(64756008)(66556008)(316002)(66446008)(6916009)(5660300002)(83380400001)(91956017)(8676002)(66476007)(6486002)(66946007)(71200400001)(54906003)(6506007)(53546011)(36756003)(86362001)(4326008)(8936002)(76116006)(2906002)(478600001)(33656002)(6512007)(45980500001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata:
- =?us-ascii?Q?YvSkXY9EVbILUu29chIexfNaycfwKQr5ulMELIRA8oVGTZQluVglp5Ytub53?=
- =?us-ascii?Q?Ksyq3vpziXYlSHljvGPcSYqtcYHPOL7Z3AnnNjOCf4G7fjp2qSc26CljJVR/?=
- =?us-ascii?Q?daFp4x2TTLonFy435ssxo8/yCwGQalylh2A7306hQPM50qKlA/7pS4FPnHgh?=
- =?us-ascii?Q?d4VwW0Ca6+TAggdY2SsnhXCVqgv6owS/Tg1SHkhf6LnKEulnUyQVzX93i3Ig?=
- =?us-ascii?Q?3QBGl1sKM+eP9bXMzgSP9e80nLcsnPhX/kp8iQLF82QVUL37tgQAiOZqL/cJ?=
- =?us-ascii?Q?+td8OOqg5x+23LZd70QlPPmWHcafVcBdzSTK02yeGH3Kyyx3AtTX+AOygrr8?=
- =?us-ascii?Q?zccRNEd7raSdUwJob/8jDTjAIZuvc3H2vKiCC642Aojugv+A8iR4cXhP7otp?=
- =?us-ascii?Q?FWdXZF7GqqetcZqJ7xo8cJaIewcGVPflAVhwMmG7K+kkYOiGIEdeAWLyXb1I?=
- =?us-ascii?Q?zLaQ2mabMwIW0gGRAZ9KKhidIw7WpnzBpEAmcqIykE38IeLI8ZQYFaefjcdr?=
- =?us-ascii?Q?GY168Y+KQCs6IFGZbGwKB3rmmMsusNkm8/WPjhd2VhhFQPYeSgNtNiOEEpBA?=
- =?us-ascii?Q?OJN8jhPEwjTbSLTJx1r6xqlphTZ8bCGCXU6mxeYolQ/+zrt6z/Bep0HcdSza?=
- =?us-ascii?Q?/x4p6PUPkCCHCMM21KxmFdBHZQbNR0jQj2P9t1BO7I7kpfSMeB1j8AMyKUHI?=
- =?us-ascii?Q?9jpTn71JiNx62qOzehLrc61g1iSqTIWILjGFRLQI3WB7lfZ9tmfb703mqHEW?=
- =?us-ascii?Q?Gz3DQYPmS2EerQxJ/yxe6d7ztZWIImou15QY4LSc/5niLsPYRsjCKLDjiksb?=
- =?us-ascii?Q?LWH80R2KfS4ez9dTppLcRZtCpaGGArICBXTqkyfThdUfWJ2rG+jgIy/An1yn?=
- =?us-ascii?Q?QbEGaUZNfIONIGui2kpA9uZAhCZGP3l5odr6KlK+7rKP41moJLVYYvnQSgiE?=
- =?us-ascii?Q?bg1+TcX0CdmSboQATFbJVkrFeoUPnUy4x+NjcvpbVYPy7O32QQ/ayDNbNT4R?=
- =?us-ascii?Q?tMFY?=
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <EFAFE71D63E0B54E933B0FA654546243@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=kUtO6OUIZS+BF3kaegfDuyN/BVTedtpv0m//7v4jA3s=; b=gFguw8J3IuHCrGphGyv9BWyyC8
+	R4ZhdNhuYMpmLXXgMyhILmnJpz9z87Egn6h0VFpN0r7UUoa/Oid0mENFK2rqn9TfmQ3++VqSNDgvg
+	y2XJ6fEMTTGadR61HcjpXlTFHD8Y6B1VJ7sGksj6AMrzeCTThscR11WPxSpbn1b3598Y=;
+Subject: Re: [PATCH v3] xen: add support for automatic debug key actions in
+ case of crash
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ xen-devel@lists.xenproject.org
+References: <20201126080340.6154-1-jgross@suse.com>
+ <22190c77-eb35-5b72-7d72-34800c3f052f@suse.com>
+ <98c45abd-8796-088c-e2a6-9ad494beeb9e@xen.org>
+ <59f126a3-f716-345b-b464-746e6156c15a@suse.com>
+ <1e305cf6-aa14-54cc-a77d-88bb38ba4c6e@xen.org>
+ <7271b2f4-816a-5541-5402-50ea29218d81@suse.com>
+ <077f3e02-0e07-1549-cc41-62b42177e19c@suse.com>
+ <699e48ea-8807-a1f3-d2b9-dc918913ede8@xen.org>
+ <18959d53-30d9-b702-81df-8a4051d61fb2@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <ece0eb78-4e5f-2c2d-598d-aaf126fbcd23@xen.org>
+Date: Fri, 11 Dec 2020 10:49:39 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB4629
-Original-Authentication-Results: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- VE1EUR03FT056.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	18a42812-31bf-4bee-5d25-08d89dc20fab
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	Dmdg6zBFZcBzBC/itgBJ/WQbDcdOUly9BlnTJSdw6p3yP7/PuoZx2oS4i+eOEgH2Evzs4KlnnJDCKfZZU5WtAv4xzvVTvOJ6wITJqIfz6Up8Tn/LlnnlRMr7lhWAGehsoX1892w1EKOjhtkqlnUoZLxtAdn0kev4aUAF52GKvbNhIC/ZcpOPDv1OG9/MNyAxkSfxuJP957ScHUXFaX0Y2U2IsbuC9CF9F7XRrcdTyfMC7QeieDzzv/mQzeqcYlyflsrUF0+kVyMs2hyWwxAAyWe0Fdpv3zsxVdmvz54DF4/vl11OMj9G1pidTgTM2XVSuEfhRt5N0tdJ4G8Gk7EIBB0Ueiu+A2OLVOdTYmfFoYjuVtEHkAVIs1uN5rk+jyfgpxeOsy8jobI1JfONgN8Xmw==
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(136003)(346002)(39850400004)(396003)(376002)(46966005)(82740400003)(53546011)(82310400003)(81166007)(83380400001)(70206006)(6506007)(2616005)(8936002)(107886003)(70586007)(2906002)(6486002)(186003)(8676002)(6512007)(33656002)(54906003)(36756003)(26005)(86362001)(4326008)(356005)(6862004)(478600001)(316002)(5660300002)(47076004)(336012);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2020 10:47:28.0143
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56e3bae8-81f0-456e-61f9-08d89dc2274b
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	VE1EUR03FT056.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB4346
+In-Reply-To: <18959d53-30d9-b702-81df-8a4051d61fb2@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-Hello Stefano,
 
-> On 11 Dec 2020, at 1:28 am, Stefano Stabellini <sstabellini@kernel.org> w=
-rote:
->=20
-> On Thu, 10 Dec 2020, Rahul Singh wrote:
->> @@ -2087,29 +1693,8 @@ static int arm_smmu_domain_finalise(struct iommu_=
-domain *domain,
->> 	}
->>=20
->> 	/* Restrict the stage to what we can actually support */
->> -	if (!(smmu->features & ARM_SMMU_FEAT_TRANS_S1))
->> -		smmu_domain->stage =3D ARM_SMMU_DOMAIN_S2;
->> -	if (!(smmu->features & ARM_SMMU_FEAT_TRANS_S2))
->> -		smmu_domain->stage =3D ARM_SMMU_DOMAIN_S1;
->> -
->> -	switch (smmu_domain->stage) {
->> -	case ARM_SMMU_DOMAIN_S1:
->> -		ias =3D (smmu->features & ARM_SMMU_FEAT_VAX) ? 52 : 48;
->> -		ias =3D min_t(unsigned long, ias, VA_BITS);
->> -		oas =3D smmu->ias;
->> -		fmt =3D ARM_64_LPAE_S1;
->> -		finalise_stage_fn =3D arm_smmu_domain_finalise_s1;
->> -		break;
->> -	case ARM_SMMU_DOMAIN_NESTED:
->> -	case ARM_SMMU_DOMAIN_S2:
->> -		ias =3D smmu->ias;
->> -		oas =3D smmu->oas;
->> -		fmt =3D ARM_64_LPAE_S2;
->> -		finalise_stage_fn =3D arm_smmu_domain_finalise_s2;
->> -		break;
->> -	default:
->> -		return -EINVAL;
->> -	}
->> +	smmu_domain->stage =3D ARM_SMMU_DOMAIN_S2;
+
+On 11/12/2020 10:38, Jürgen Groß wrote:
+> On 11.12.20 11:22, Julien Grall wrote:
+>> Hi,
+>>
+>> On 11/12/2020 07:24, Jan Beulich wrote:
+>>> On 11.12.2020 08:02, Jürgen Groß wrote:
+>>>> On 10.12.20 21:51, Julien Grall wrote:
+>>>>> Hi Jan,
+>>>>>
+>>>>> On 09/12/2020 14:29, Jan Beulich wrote:
+>>>>>> On 09.12.2020 13:11, Julien Grall wrote:
+>>>>>>> On 26/11/2020 11:20, Jan Beulich wrote:
+>>>>>>>> On 26.11.2020 09:03, Juergen Gross wrote:
+>>>>>>>>> When the host crashes it would sometimes be nice to have 
+>>>>>>>>> additional
+>>>>>>>>> debug data available which could be produced via debug keys, but
+>>>>>>>>> halting the server for manual intervention might be impossible 
+>>>>>>>>> due to
+>>>>>>>>> the need to reboot/kexec rather sooner than later.
+>>>>>>>>>
+>>>>>>>>> Add support for automatic debug key actions in case of crashes 
+>>>>>>>>> which
+>>>>>>>>> can be activated via boot- or runtime-parameter.
+>>>>>>>>>
+>>>>>>>>> Depending on the type of crash the desired data might be 
+>>>>>>>>> different, so
+>>>>>>>>> support different settings for the possible types of crashes.
+>>>>>>>>>
+>>>>>>>>> The parameter is "crash-debug" with the following syntax:
+>>>>>>>>>
+>>>>>>>>>      crash-debug-<type>=<string>
+>>>>>>>>>
+>>>>>>>>> with <type> being one of:
+>>>>>>>>>
+>>>>>>>>>      panic, hwdom, watchdog, kexeccmd, debugkey
+>>>>>>>>>
+>>>>>>>>> and <string> a sequence of debug key characters with '+' having 
+>>>>>>>>> the
+>>>>>>>>> special semantics of a 10 millisecond pause.
+>>>>>>>>>
+>>>>>>>>> So "crash-debug-watchdog=0+0qr" would result in special output 
+>>>>>>>>> in case
+>>>>>>>>> of watchdog triggered crash (dom0 state, 10 ms pause, dom0 state,
+>>>>>>>>> domain info, run queues).
+>>>>>>>>>
+>>>>>>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>>>>>>>> ---
+>>>>>>>>> V2:
+>>>>>>>>> - switched special character '.' to '+' (Jan Beulich)
+>>>>>>>>> - 10 ms instead of 1 s pause (Jan Beulich)
+>>>>>>>>> - added more text to the boot parameter description (Jan Beulich)
+>>>>>>>>>
+>>>>>>>>> V3:
+>>>>>>>>> - added const (Jan Beulich)
+>>>>>>>>> - thorough test of crash reason parameter (Jan Beulich)
+>>>>>>>>> - kexeccmd case should depend on CONFIG_KEXEC (Jan Beulich)
+>>>>>>>>> - added dummy get_irq_regs() helper on Arm
+>>>>>>>>>
+>>>>>>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>>>>>>>
+>>>>>>>> Except for the Arm aspect, where I'm not sure using
+>>>>>>>> guest_cpu_user_regs() is correct in all cases,
+>>>>>>>
+>>>>>>> I am not entirely sure to understand what get_irq_regs() is 
+>>>>>>> supposed to
+>>>>>>> returned on x86. Is it the registers saved from the most recent
+>>>>>>> exception?
+>>>>>>
+>>>>>> An interrupt (not an exception) sets the underlying per-CPU
+>>>>>> variable, such that interested parties will know the real
+>>>>>> context is not guest or "normal" Xen code, but an IRQ.
+>>>>>
+>>>>> Thanks for the explanation. I am a bit confused to why we need to 
+>>>>> give a
+>>>>> regs to handle_keypress() because no-one seems to use it. Do you 
+>>>>> have an
+>>>>> explanation?
+>>>>
+>>>> dump_registers() (key 'd') is using it.
+>>>>
+>>>>>
+>>>>> To add to the confusion, it looks like that get_irqs_regs() may return
+>>>>> NULL. So sometimes we may pass guest_cpu_regs() (which may contain
+>>>>> garbagge or a set too far).
+>>>>
+>>>> I guess this is a best effort approach.
+>>>
+>>> Indeed. If there are ways to make it "more best", we should of
+>>> course follow them. (Except before Dom0 starts, I'm afraid I
+>>> don't see though where garbage would come from. And even then,
+>>> just like for the idle vCPU-s, it shouldn't really be garbage,
+>>> or else this suggests missing initialization somewhere.)
+>>
+>> So I decided to mimick what 'd' does to see what happen if this is 
+>> called early boot.
+>>
+>>
+>> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+>> index 7fcff9af2a7e..9d33507a26eb 100644
+>> --- a/xen/arch/arm/setup.c
+>> +++ b/xen/arch/arm/setup.c
+>> @@ -857,6 +857,8 @@ void __init start_xen(unsigned long boot_phys_offset,
+>>        */
+>>       system_state = SYS_STATE_boot;
+>>
+>> +    dump_execstate(guest_cpu_user_regs());
 >> +
->=20
-> Last time we agreed on adding an error message?
+>>       vm_init();
+>>
+>>       if ( acpi_disabled )
+>> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+>> index 30d6f375a3af..50fcf2e8d70e 100644
+>> --- a/xen/arch/x86/setup.c
+>> +++ b/xen/arch/x86/setup.c
+>> @@ -1678,6 +1678,7 @@ void __init noreturn __start_xen(unsigned long 
+>> mbi_p)
+>>           end_boot_allocator();
+>>
+>>       system_state = SYS_STATE_boot;
+>> +    dump_execstate(guest_cpu_user_regs());
+>>       /*
+>>        * No calls involving ACPI code should go between the setting of
+>>        * SYS_STATE_boot and vm_init() (or else acpi_os_{,un}map_memory()
+>>
+>> It leads to crash on both Arm and x86.
+>>
+>> For the Arm crash:
+>>
+>> (XEN) Data Abort Trap. Syndrome=0x1c08006
+>> (XEN) Walking Hypervisor VA 0x10 on CPU0 via TTBR 0x0000000065a7f000
+>> (XEN) 0TH[0x0] = 0x0000000065a7ef7f
+>> (XEN) 1ST[0x0] = 0x0000000065a7bf7f
+>> (XEN) 2ND[0x0] = 0x0000000000000000
+>> (XEN) CPU0: Unexpected Trap: Data Abort
+>> (XEN) ----[ Xen-4.15-unstable  arm64  debug=y   Not tainted ]----
+>> (XEN) CPU:    0
+>> (XEN) PC:     0000000000219674 dump_execstate+0x58/0x1ec
+>> (XEN) LR:     00000000002d77dc
+>> (XEN) SP:     000000000030fdc0
+>> (XEN) CPSR:   800003c9 MODE:64-bit EL2h (Hypervisor, handler)
+>> (XEN)      X0: 0000000000000000  X1: 0000000000000000  X2: 
+>> 0000000000007fff
+>> (XEN)      X3: 00000000002b7198  X4: 0000000000000080  X5: 
+>> 00000000002e9a68
+>> (XEN)      X6: 0080808080808080  X7: fefefefefefeff09  X8: 
+>> 7f7f7f7f7f7f7f7f
+>> (XEN)      X9: 717164616f726051 X10: 7f7f7f7f7f7f7f7f X11: 
+>> 0101010101010101
+>> (XEN)     X12: 0000000000000008 X13: 00000000002b9a48 X14: 
+>> 0000000000000000
+>> (XEN)     X15: 0000000000400000 X16: 00000000002ba000 X17: 
+>> 00000000002b9000
+>> (XEN)     X18: 00000000002b9000 X19: 0000000000000000 X20: 
+>> 000000000030feb0
+>> (XEN)     X21: 0000000080000000 X22: 00000000002f0d30 X23: 
+>> 00000000002f1d68
+>> (XEN)     X24: 00000000002f0eb8 X25: 0000000040000000 X26: 
+>> 0000000080000000
+>> (XEN)     X27: 0000000000000018 X28: 000000000003f970  FP: 
+>> 000000000030fdc0
+>> (XEN)
+>> (XEN)   VTCR_EL2: 00000000
+>> (XEN)  VTTBR_EL2: 0000000000000000
+>> (XEN)
+>> (XEN)  SCTLR_EL2: 30cd183d
+>> (XEN)    HCR_EL2: 0000000000000038
+>> (XEN)  TTBR0_EL2: 0000000065a7f000
+>> (XEN)
+>> (XEN)    ESR_EL2: 97c08006
+>> (XEN)  HPFAR_EL2: 0000000000000000
+>> (XEN)    FAR_EL2: 0000000000000010
+>> (XEN)
+>> (XEN) Xen stack trace from sp=000000000030fdc0:
+>> (XEN)    000000000030fdf0 00000000002d77dc 0000000000080000 
+>> 000000007fffc000
+>> (XEN)    0000000080000000 00000000002f0d30 000000007f68b250 
+>> 00000000002001b8
+>> (XEN)    0000000065932000 0000000065732000 00000000784f9000 
+>> 0000000000000000
+>> (XEN)    0000000000400000 0000000065a2ad30 0000000000000630 
+>> 0000000000000001
+>> (XEN)    0000000000000001 0000000000000001 0000000000000000 
+>> 0000000000003000
+>> (XEN)    00000000784f9000 00000000002bc8e4 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000300000000 0000000000000000 
+>> 00000040ffffffff
+>> (XEN)    00000000ffffffff 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN) Xen call trace:
+>> (XEN)    [<0000000000219674>] dump_execstate+0x58/0x1ec (PC)
+>> (XEN)    [<00000000002d77dc>] start_xen+0x3d0/0xcf8 (LR)
+>> (XEN)    [<00000000002d77dc>] start_xen+0x3d0/0xcf8
+>> (XEN)    [<00000000002001b8>] arm64/head.o#primary_switched+0x10/0x30
+>> (XEN)
+>> (XEN)
+>> (XEN) ****************************************
+>> (XEN) Panic on CPU 0:
+>> (XEN) CPU0: Unexpected Trap: Data Abort
+>> (XEN) ****************************************
+>>
+>> For the x86 crash:
+>>
+>> (XEN) Early fatal page fault at e008:ffff82d0402188b4 
+>> (cr2=0000000000000010, ec=0000)
+>> (XEN) ----[ Xen-4.15-unstable  x86_64  debug=y   Tainted:   C   ]----
+>> (XEN) CPU:    0
+>> (XEN) RIP:    e008:[<ffff82d0402188b4>] dump_execstate+0x42/0x167
+>> (XEN) RFLAGS: 0000000000010086   CONTEXT: hypervisor
+>> (XEN) rax: 0000000000000000   rbx: 0000000000000000   rcx: 
+>> 0000000000000000
+>> (XEN) rdx: ffff82d0404affff   rsi: 000000000000000a   rdi: 
+>> ffff82d0404afef8
+>> (XEN) rbp: ffff82d0404afd90   rsp: ffff82d0404afd80   r8:  
+>> 0000000000000004
+>> (XEN) r9:  0101010101010101   r10: 0f0f0f0f0f0f0f0f   r11: 
+>> 5555555555555555
+>> (XEN) r12: ffff82d0404afef8   r13: 0000000000800163   r14: 
+>> ffff83000009dfb0
+>> (XEN) r15: 0000000000000002   cr0: 0000000080050033   cr4: 
+>> 00000000000000a0
+>> (XEN) cr3: 00000000bfa9e000   cr2: 0000000000000010
+>> (XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 
+>> 0000000000000000
+>> (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
+>> (XEN) Xen code around <ffff82d0402188b4> (dump_execstate+0x42/0x167):
+>> (XEN)  ff 7f 00 00 48 8b 40 c9 <48> 8b 40 10 66 81 38 ff 7f 75 49 3b 
+>> 1d 23 18 27
+>> (XEN) Xen stack trace from rsp=ffff82d0404afd80:
+>> (XEN)    000000000023ffff 00000000000005ed ffff82d0404afee8 
+>> ffff82d0404378cb
+>> (XEN)    0000000000000002 0000000000000002 0000000000000002 
+>> 0000000000000001
+>> (XEN)    0000000000000001 0000000000000001 0000000000000001 
+>> 0000000000000000
+>> (XEN)    00000000000001ff 0000000002a45fff 0000000000240000 
+>> 0000000002a45000
+>> (XEN)    0000000000100000 0000000000000000 00000000000001ff 
+>> ffff82d040475c80
+>> (XEN)    ffff82d000800163 ffff83000009dee0 ffff83000009dfb0 
+>> 0000000000200001
+>> (XEN)    0000000100000000 0000000100000000 ffff83000009df80 
+>> 642ded38bf9fe4f3
+>> (XEN)    bf9fed3500000000 bfaafe980009df73 0009df73bf9fe7ea 
+>> 00000004bf9fed31
+>> (XEN)    bfaafeb00009df01 0000000800000000 000000010000006e 
+>> 0000000000000003
+>> (XEN)    00000000000002f8 ffff82d0405b0000 ffff82d0404b0000 
+>> 0000000000000002
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 ffff82d04020012f 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN)    0000e01000000000 0000000000000000 0000000000000000 
+>> 00000000000000a0
+>> (XEN)    0000000000000000 0000000000000000 0000000000000000 
+>> 0000000000000000
+>> (XEN) Xen call trace:
+>> (XEN)    [<ffff82d0402188b4>] R dump_execstate+0x42/0x167
+>> (XEN)    [<ffff82d0404378cb>] F __start_xen+0x1e10/0x2906
+>> (XEN)    [<ffff82d04020012f>] F __high_start+0x8f/0x91
+>> (XEN)
+>> (XEN) Pagetable walk from 0000000000000010:
+>> (XEN)  L4[0x000] = 00000000bfa54063 ffffffffffffffff
+>> (XEN)  L3[0x000] = 00000000bfa50063 ffffffffffffffff
+>> (XEN)  L2[0x000] = 00000000bfa4f063 ffffffffffffffff
+>> (XEN)  L1[0x000] = 0000000000000000 ffffffffffffffff
+>> (XEN)
+>> (XEN) ****************************************
+>> (XEN) Panic on CPU 0:
+>> (XEN) FATAL TRAP: vec 14, #PF[0000] IN INTERRUPT CONTEXT
+>> (XEN) ****************************************
+>> (XEN)
+>> (XEN) Reboot in five seconds...
+>>
+>> So I think guest_cpu_user_regs() is not quite yet ready to be called 
+>> from panic().
+> 
+> guest_cpu_user_regs() isn't the problem, but dump_execstate().
+> 
+> This is one of the caveats from the added boot parameter doc: some debug
+> keys might lead to problems. 'd' seems to be such a key when used for
+> the panic() case and the panic() happens in early boot.
 
-Yes I added in next patch to report error if Stage-2 is not supported=20
+Right, I think we should be clearer in the documentation about the keys 
+we know works.
 
-if (reg & IDR0_S2P)                                                        =
-=20
-        smmu->features |=3D ARM_SMMU_FEAT_TRANS_S2;                        =
-      =20
-                                                                           =
-    =20
-    if (!(reg & IDR0_S2P)) {                                               =
-    =20
-        dev_err(smmu->dev, "no stage-2 translation support!\n");           =
-    =20
-        return -ENXIO;                                                     =
-    =20
-    }
+> 
+>>
+>> A different approach my be to generate an exception and call the 
+>> keyhandler from there. At least you know that the register would 
+>> always be accurate.
+> 
+> Or dump_execstate() is modified to accept NULL for regs and it will do
+> nothing in case guest_cpu_user_regs() isn't valid (a test for idle vcpu
+> might be the easiest way to determine that).
 
+So Jan pointed out that current may not be initialized properly in early 
+boot. So we possibly want to use "system_state" instead.
 
-Regards,
-Rahul
+Cheers,
 
+-- 
+Julien Grall
 
