@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-17.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6132C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 01:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E146C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 01:28:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5BA8F23DE5
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 01:28:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BA8F23DE5
+	by mail.kernel.org (Postfix) with ESMTPS id E264E23C18
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 01:28:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E264E23C18
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50007.88417 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50010.88453 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knXED-0005X0-7I; Fri, 11 Dec 2020 01:28:13 +0000
+	id 1knXEV-0005gP-Fz; Fri, 11 Dec 2020 01:28:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50007.88417; Fri, 11 Dec 2020 01:28:13 +0000
+Received: by outflank-mailman (output) from mailman id 50010.88453; Fri, 11 Dec 2020 01:28:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knXED-0005Wt-40; Fri, 11 Dec 2020 01:28:13 +0000
-Received: by outflank-mailman (input) for mailman id 50007;
- Fri, 11 Dec 2020 01:28:12 +0000
+	id 1knXEV-0005gD-CV; Fri, 11 Dec 2020 01:28:31 +0000
+Received: by outflank-mailman (input) for mailman id 50010;
+ Fri, 11 Dec 2020 01:28:30 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZKjA=FP=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1knXEC-0005Wo-Ao
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 01:28:12 +0000
+ id 1knXEU-0005fg-Kh
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 01:28:30 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4ca4f1bd-7ed1-452e-8eee-3f1e5d78b21b;
- Fri, 11 Dec 2020 01:28:10 +0000 (UTC)
+ id 11b4fba2-6a62-49e6-ad3a-2fc04b26061f;
+ Fri, 11 Dec 2020 01:28:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,220 +49,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ca4f1bd-7ed1-452e-8eee-3f1e5d78b21b
-Date: Thu, 10 Dec 2020 17:28:08 -0800 (PST)
+X-Inumbo-ID: 11b4fba2-6a62-49e6-ad3a-2fc04b26061f
+Date: Thu, 10 Dec 2020 17:28:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1607650089;
-	bh=JYKEvDuAO0Y0F/aSvrNNpAay9WTmDH0IzHxldVuOBp4=;
+	s=k20201202; t=1607650108;
+	bh=MD8MZlK61mbrRNToR8OyiHXQadaLJYv/gx2kWam42NE=;
 	h=From:To:cc:Subject:In-Reply-To:References:From;
-	b=f1nJkFa8PK7RsNVu4hsGzc4JD/E8e4/AnQ8orxl5RN0GDfGpTS9Zs002lCYWiX6W9
-	 5jAUNZbdNUi4ui1TL+leDPEfuo9K/QxF1B0nIrmc/9cdb/3yJnLf5X8oUL9VbivHh5
-	 wlKC3Ixt5vPuiBHn4taRtYHWqhe4VXE9wokFZ1S5/raCnJINKlBda9/RmVjN1EaGKn
-	 gPJ5m8ky4RcCKVlo4wU1FDuwbIjF11vAbmQmDoJc3RRZtmuI0ApWOSO4xKePLeYwjK
-	 jMPLoze7jItn1x13msN30kF/grGdoLAk6aqacsX1A0GbM/3jsyL02j9PpIRwCBFgQo
-	 fuTd/tZMjx1+w==
+	b=JmY5KvRgQluqLPdGuU2taLyrAwFT472aMRHf/i75MUjrFc1ZEfCR95NgeRQ3TagFV
+	 hYZKyy0du7kNZ3rBRHzpTI/SCm0kR92iPGuJz9jgAXX547BQj5tkUlrBSbHuAAuLS+
+	 kW4zsylGMhsdPr/CKzZeRVjI0Wl1Tw+LQx4gfZbO1OtB0eYBcPWXax+TVcCnxD2aW7
+	 /UjQX0tabTZJqXiAORxoK3thDHmVqa3lkJrp3plBMVOcwfL0nD9VutvNNidk4/CHfr
+	 mxsBicPgxwNmrhZC8yOD1xhEv/IX6vL/2jjNqP2oD5yRRBJxqBooqQ61j4ttc3HLQ/
+	 qGI+gf9UmV1ag==
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org, 
-    Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH V3 21/23] xen/arm: Add mapcache invalidation handling
-In-Reply-To: <a6897469-f031-e49d-0b4c-b1aa10d66d6d@xen.org>
-Message-ID: <alpine.DEB.2.21.2012101443060.20986@sstabellini-ThinkPad-T480s>
-References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com> <1606732298-22107-22-git-send-email-olekstysh@gmail.com> <alpine.DEB.2.21.2012091822300.20986@sstabellini-ThinkPad-T480s> <a6897469-f031-e49d-0b4c-b1aa10d66d6d@xen.org>
+To: Rahul Singh <rahul.singh@arm.com>
+cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v3 3/8] xen/arm: revert patch related to XArray
+In-Reply-To: <ca988f0f6c66a2e35d06c07e226d0145c1320611.1607617848.git.rahul.singh@arm.com>
+Message-ID: <alpine.DEB.2.21.2012101529400.6285@sstabellini-ThinkPad-T480s>
+References: <cover.1607617848.git.rahul.singh@arm.com> <ca988f0f6c66a2e35d06c07e226d0145c1320611.1607617848.git.rahul.singh@arm.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Thu, 10 Dec 2020, Julien Grall wrote:
-> On 10/12/2020 02:30, Stefano Stabellini wrote:
-> > On Mon, 30 Nov 2020, Oleksandr Tyshchenko wrote:
-> > > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> > > 
-> > > We need to send mapcache invalidation request to qemu/demu everytime
-> > > the page gets removed from a guest.
-> > > 
-> > > At the moment, the Arm code doesn't explicitely remove the existing
-> > > mapping before inserting the new mapping. Instead, this is done
-> > > implicitely by __p2m_set_entry().
-> > > 
-> > > So we need to recognize a case when old entry is a RAM page *and*
-> > > the new MFN is different in order to set the corresponding flag.
-> > > The most suitable place to do this is p2m_free_entry(), there
-> > > we can find the correct leaf type. The invalidation request
-> > > will be sent in do_trap_hypercall() later on.
-> > 
-> > Why is it sent in do_trap_hypercall() ?
+On Thu, 10 Dec 2020, Rahul Singh wrote:
+> XArray is not implemented in XEN revert the patch that introduce the
+> XArray code in SMMUv3 driver.
 > 
-> I believe this is following the approach used by x86. There are actually some
-> discussion about it (see [1]).
+> XArray is added in preparation for sharing some ASIDs with the CPU,
 > 
-> Leaving aside the toolstack case for now, AFAIK, the only way a guest can
-> modify its p2m is via an hypercall. Do you have an example otherwise?
-
-OK this is a very important assumption. We should write it down for sure.
-I think it is true today on ARM.
-
-
-> When sending the invalidation request, the vCPU will be blocked until all the
-> IOREQ server have acknowledged the invalidation. So the hypercall seems to be
-> the best position to do it.
+> As XEN support only Stage-2 translation, ASID is used for Stage-1
+> translation there is no consequences of reverting this patch for XEN.
 > 
-> Alternatively, we could use check_for_vcpu_work() to check if the mapcache
-> needs to be invalidated. The inconvenience is we would execute a few more
-> instructions in each entry/exit path.
-
-Yeah it would be more natural to call it from check_for_vcpu_work(). If
-we put it between #ifdef CONFIG_IOREQ_SERVER it wouldn't be bad. But I
-am not a fan of increasing the instructions on the exit path either.
-From this point of view, putting it at the end of do_trap_hypercall is a
-nice trick actually. Let's just make sure it has a good comment on top.
-
-
-> > > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> > > CC: Julien Grall <julien.grall@arm.com>
-> > > 
-> > > ---
-> > > Please note, this is a split/cleanup/hardening of Julien's PoC:
-> > > "Add support for Guest IO forwarding to a device emulator"
-> > > 
-> > > Changes V1 -> V2:
-> > >     - new patch, some changes were derived from (+ new explanation):
-> > >       xen/ioreq: Make x86's invalidate qemu mapcache handling common
-> > >     - put setting of the flag into __p2m_set_entry()
-> > >     - clarify the conditions when the flag should be set
-> > >     - use domain_has_ioreq_server()
-> > >     - update do_trap_hypercall() by adding local variable
-> > > 
-> > > Changes V2 -> V3:
-> > >     - update patch description
-> > >     - move check to p2m_free_entry()
-> > >     - add a comment
-> > >     - use "curr" instead of "v" in do_trap_hypercall()
-> > > ---
-> > > ---
-> > >   xen/arch/arm/p2m.c   | 24 ++++++++++++++++--------
-> > >   xen/arch/arm/traps.c | 13 ++++++++++---
-> > >   2 files changed, 26 insertions(+), 11 deletions(-)
-> > > 
-> > > diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-> > > index 5b8d494..9674f6f 100644
-> > > --- a/xen/arch/arm/p2m.c
-> > > +++ b/xen/arch/arm/p2m.c
-> > > @@ -1,6 +1,7 @@
-> > >   #include <xen/cpu.h>
-> > >   #include <xen/domain_page.h>
-> > >   #include <xen/iocap.h>
-> > > +#include <xen/ioreq.h>
-> > >   #include <xen/lib.h>
-> > >   #include <xen/sched.h>
-> > >   #include <xen/softirq.h>
-> > > @@ -749,17 +750,24 @@ static void p2m_free_entry(struct p2m_domain *p2m,
-> > >       if ( !p2m_is_valid(entry) )
-> > >           return;
-> > >   -    /* Nothing to do but updating the stats if the entry is a
-> > > super-page. */
-> > > -    if ( p2m_is_superpage(entry, level) )
-> > > +    if ( p2m_is_superpage(entry, level) || (level == 3) )
-> > >       {
-> > > -        p2m->stats.mappings[level]--;
-> > > -        return;
-> > > -    }
-> > > +#ifdef CONFIG_IOREQ_SERVER
-> > > +        /*
-> > > +         * If this gets called (non-recursively) then either the entry
-> > > +         * was replaced by an entry with a different base (valid case) or
-> > > +         * the shattering of a superpage was failed (error case).
-> > > +         * So, at worst, the spurious mapcache invalidation might be
-> > > sent.
-> > > +         */
-> > > +        if ( domain_has_ioreq_server(p2m->domain) &&
-> > > +             (p2m->domain == current->domain) &&
-> > > p2m_is_ram(entry.p2m.type) )
-> > > +            p2m->domain->mapcache_invalidate = true;
-> > 
-> > Why the (p2m->domain == current->domain) check? Shouldn't we set
-> > mapcache_invalidate to true anyway? What happens if p2m->domain !=
-> > current->domain? We wouldn't want the domain to lose the
-> > mapcache_invalidate notification.
+> Once XArray is implemented in XEN this patch can be added in XEN if XEN
+> supports Stage-1 translation.
 > 
-> This is also discussed in [1]. :) The main question is why would a
-> toolstack/device model modify the guest memory after boot?
+> Reverted the commit 0299a1a81ca056e79c1a7fb751f936ec0d5c7afe
 > 
-> If we assume it does, then the device model would need to pause the domain
-> before modifying the RAM.
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
+> ---
+> Changes in v3:
+>  - Added consequences of reverting this patch in commit message
 > 
-> We also need to make sure that all the IOREQ servers have invalidated
-> the mapcache before the domain run again.
+> ---
+>  xen/drivers/passthrough/arm/smmu-v3.c | 27 +++++++++------------------
+>  1 file changed, 9 insertions(+), 18 deletions(-)
 > 
-> This would require quite a bit of work. I am not sure the effort is worth if
-> there are no active users today.
-
-OK, that explains why we think p2m->domain == current->domain, but why
-do we need to have a check for it right here?
-
-In other words, we don't think it is realistc to get here with
-p2m->domain != current->domain, but let's say that we do somehow. What's
-the best course of action? Probably, set mapcache_invalidate to true and
-possibly print a warning?
-
-Leaving mapcache_invalidate to false doesn't seem to be what we want to
-do?
-
- 
-> > >       BUILD_BUG_ON(NR_hypercalls < ARRAY_SIZE(arm_hypercall_table) );
-> > >   @@ -1459,7 +1460,7 @@ static void do_trap_hypercall(struct cpu_user_regs
-> > > *regs, register_t *nr,
-> > >           return;
-> > >       }
-> > >   -    current->hcall_preempted = false;
-> > > +    curr->hcall_preempted = false;
-> > >         perfc_incra(hypercalls, *nr);
-> > >       call = arm_hypercall_table[*nr].fn;
-> > > @@ -1472,7 +1473,7 @@ static void do_trap_hypercall(struct cpu_user_regs
-> > > *regs, register_t *nr,
-> > >       HYPERCALL_RESULT_REG(regs) = call(HYPERCALL_ARGS(regs));
-> > >     #ifndef NDEBUG
-> > > -    if ( !current->hcall_preempted )
-> > > +    if ( !curr->hcall_preempted )
-> > >       {
-> > >           /* Deliberately corrupt parameter regs used by this hypercall.
-> > > */
-> > >           switch ( arm_hypercall_table[*nr].nr_args ) {
-> > > @@ -1489,8 +1490,14 @@ static void do_trap_hypercall(struct cpu_user_regs
-> > > *regs, register_t *nr,
-> > >   #endif
-> > >         /* Ensure the hypercall trap instruction is re-executed. */
-> > > -    if ( current->hcall_preempted )
-> > > +    if ( curr->hcall_preempted )
-> > >           regs->pc -= 4;  /* re-execute 'hvc #XEN_HYPERCALL_TAG' */
-> > > +
-> > > +#ifdef CONFIG_IOREQ_SERVER
-> > > +    if ( unlikely(curr->domain->mapcache_invalidate) &&
-> > > +         test_and_clear_bool(curr->domain->mapcache_invalidate) )
-> > > +        ioreq_signal_mapcache_invalidate();
-> > 
-> > Why not just:
-> > 
-> > if ( unlikely(test_and_clear_bool(curr->domain->mapcache_invalidate)) )
-> >      ioreq_signal_mapcache_invalidate();
-> > 
+> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+> index 8b7747ed38..7b29ead48c 100644
+> --- a/xen/drivers/passthrough/arm/smmu-v3.c
+> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
+> @@ -625,6 +625,7 @@ struct arm_smmu_device {
+>  
+>  #define ARM_SMMU_MAX_ASIDS		(1 << 16)
+>  	unsigned int			asid_bits;
+> +	DECLARE_BITMAP(asid_map, ARM_SMMU_MAX_ASIDS);
+>  
+>  #define ARM_SMMU_MAX_VMIDS		(1 << 16)
+>  	unsigned int			vmid_bits;
+> @@ -690,8 +691,6 @@ struct arm_smmu_option_prop {
+>  	const char *prop;
+>  };
+>  
+> -static DEFINE_XARRAY_ALLOC1(asid_xa);
+> -
+>  static struct arm_smmu_option_prop arm_smmu_options[] = {
+>  	{ ARM_SMMU_OPT_SKIP_PREFETCH, "hisilicon,broken-prefetch-cmd" },
+>  	{ ARM_SMMU_OPT_PAGE0_REGS_ONLY, "cavium,cn9900-broken-page1-regspace"},
+> @@ -1346,14 +1345,6 @@ static void arm_smmu_free_cd_tables(struct arm_smmu_domain *smmu_domain)
+>  	cdcfg->cdtab = NULL;
+>  }
+>  
+> -static void arm_smmu_free_asid(struct arm_smmu_ctx_desc *cd)
+> -{
+> -	if (!cd->asid)
+> -		return;
+> -
+> -	xa_erase(&asid_xa, cd->asid);
+> -}
+> -
+>  /* Stream table manipulation functions */
+>  static void
+>  arm_smmu_write_strtab_l1_desc(__le64 *dst, struct arm_smmu_strtab_l1_desc *desc)
+> @@ -1988,9 +1979,10 @@ static void arm_smmu_domain_free(struct iommu_domain *domain)
+>  	if (smmu_domain->stage == ARM_SMMU_DOMAIN_S1) {
+>  		struct arm_smmu_s1_cfg *cfg = &smmu_domain->s1_cfg;
+>  
+> -		if (cfg->cdcfg.cdtab)
+> +		if (cfg->cdcfg.cdtab) {
+>  			arm_smmu_free_cd_tables(smmu_domain);
+> -		arm_smmu_free_asid(&cfg->cd);
+> +			arm_smmu_bitmap_free(smmu->asid_map, cfg->cd.asid);
+> +		}
+>  	} else {
+>  		struct arm_smmu_s2_cfg *cfg = &smmu_domain->s2_cfg;
+>  		if (cfg->vmid)
+> @@ -2005,15 +1997,14 @@ static int arm_smmu_domain_finalise_s1(struct arm_smmu_domain *smmu_domain,
+>  				       struct io_pgtable_cfg *pgtbl_cfg)
+>  {
+>  	int ret;
+> -	u32 asid;
+> +	int asid;
+>  	struct arm_smmu_device *smmu = smmu_domain->smmu;
+>  	struct arm_smmu_s1_cfg *cfg = &smmu_domain->s1_cfg;
+>  	typeof(&pgtbl_cfg->arm_lpae_s1_cfg.tcr) tcr = &pgtbl_cfg->arm_lpae_s1_cfg.tcr;
+>  
+> -	ret = xa_alloc(&asid_xa, &asid, &cfg->cd,
+> -		       XA_LIMIT(1, (1 << smmu->asid_bits) - 1), GFP_KERNEL);
+> -	if (ret)
+> -		return ret;
+> +	asid = arm_smmu_bitmap_alloc(smmu->asid_map, smmu->asid_bits);
+> +	if (asid < 0)
+> +		return asid;
+>  
+>  	cfg->s1cdmax = master->ssid_bits;
+>  
+> @@ -2046,7 +2037,7 @@ static int arm_smmu_domain_finalise_s1(struct arm_smmu_domain *smmu_domain,
+>  out_free_cd_tables:
+>  	arm_smmu_free_cd_tables(smmu_domain);
+>  out_free_asid:
+> -	arm_smmu_free_asid(&cfg->cd);
+> +	arm_smmu_bitmap_free(smmu->asid_map, asid);
+>  	return ret;
+>  }
+>  
+> -- 
+> 2.17.1
 > 
-> This seems to match the x86 code. My guess is they tried to prevent the cost
-> of the atomic operation if there is no chance mapcache_invalidate is true.
-> 
-> I am split whether the first check is worth it. The atomic operation should be
-> uncontended most of the time, so it should be quick. But it will always be
-> slower than just a read because there is always a store involved.
-
-I am not a fun of optimizations with unclear benefits :-)
-
-
-> On a related topic, Jan pointed out that the invalidation would not work
-> properly if you have multiple vCPU modifying the P2M at the same time.
-
-Uhm, yes.
 
