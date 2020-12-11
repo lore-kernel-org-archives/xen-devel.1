@@ -2,45 +2,48 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DA97C4361B
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 13:57:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B907C4361B
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 18F9523ECD
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 13:57:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18F9523ECD
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 041B8206B2
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 041B8206B2
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50629.89337 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50696.89450 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knivN-0005Uu-Ll; Fri, 11 Dec 2020 13:57:33 +0000
+	id 1knjaL-00027m-45; Fri, 11 Dec 2020 14:39:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50629.89337; Fri, 11 Dec 2020 13:57:33 +0000
+Received: by outflank-mailman (output) from mailman id 50696.89450; Fri, 11 Dec 2020 14:39:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knivN-0005Un-I5; Fri, 11 Dec 2020 13:57:33 +0000
-Received: by outflank-mailman (input) for mailman id 50629;
- Fri, 11 Dec 2020 13:57:31 +0000
+	id 1knjaL-00027f-1A; Fri, 11 Dec 2020 14:39:53 +0000
+Received: by outflank-mailman (input) for mailman id 50696;
+ Fri, 11 Dec 2020 14:39:51 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1knivL-0005Ui-Rw
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 13:57:31 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1knjaJ-00027X-Mx; Fri, 11 Dec 2020 14:39:51 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1knivK-0006nl-Q2; Fri, 11 Dec 2020 13:57:30 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1knivK-0004OD-JE; Fri, 11 Dec 2020 13:57:30 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1knjaJ-0007lB-HD; Fri, 11 Dec 2020 14:39:51 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1knjaJ-0008FQ-9V; Fri, 11 Dec 2020 14:39:51 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1knjaJ-0000Xl-8a; Fri, 11 Dec 2020 14:39:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,45 +55,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=8u4AlIr54MyFnBOLLT1YxcwplyAh8qmp63OX2KUl6xA=; b=AWp6dcRI+8Dk1si+csAZ/wR2L5
-	7Z/GarNkPRZaPA9d0/LK+k0xtFcCia3tYwZvhi1Md8sc8HHTH20oWtmCQ1v0ZzTLmT/w+/AHDbpge
-	TT6kRRxFH1LpKveK48CHZRka4s2SHQZIj5EKGtyJLHKjkD223xDM8ImQhSVDyP5NwurQ=;
-Subject: Re: [PATCH v3 8/8] xen/arm: smmuv3: Remove linux compatibility
- functions.
-To: Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1607617848.git.rahul.singh@arm.com>
- <c38df3122a9e74e2324936c8bd36d372cdc3009a.1607617848.git.rahul.singh@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <aa6fbfa5-3afa-776e-287c-177932fd4764@xen.org>
-Date: Fri, 11 Dec 2020 13:57:28 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.5.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=EBGm4vB9uFQav9uYvV8AujFowBK/dJ0aIDQVne3Qslg=; b=jdkwdeFqimR9Zo2cdCTgu7vR/e
+	pRxaQgGmHBNJ+PDeA9E8kQV+MvVbStpvpFiYgyIazNVZ9J1dRmqMdiKFzGhyc0N8N34ml4q+zvFmo
+	ZiR/0a/FVzkkubGOYXTD/Tc+9eMZ/pFUpPwpx7tbDHlwjLe5fcxa0YKy7v2PXfzQUu0s=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-157416-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <c38df3122a9e74e2324936c8bd36d372cdc3009a.1607617848.git.rahul.singh@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Subject: [ovmf test] 157416: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+X-Osstest-Versions-This:
+    ovmf=d4633b36b94f7b4a1f41901657cbbff452173d35
+X-Osstest-Versions-That:
+    ovmf=f95e80d832e923046c92cd6f0b8208cec147138e
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 11 Dec 2020 14:39:51 +0000
 
-Hi Rahul,
+flight 157416 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/157416/
 
-On 10/12/2020 16:57, Rahul Singh wrote:
-> Replace all Linux compatible device tree handling function with the XEN
-> functions.
+Regressions :-(
 
-Right, but they were introduced in the previous patch. I dislike the 
-idea to add code for removing afterwards (in some cases you actually do 
-the renaming directly...).
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
+ test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
 
-So I would rather move this patch before patch #7 so we don't undo what 
-we just did.
+version targeted for testing:
+ ovmf                 d4633b36b94f7b4a1f41901657cbbff452173d35
+baseline version:
+ ovmf                 f95e80d832e923046c92cd6f0b8208cec147138e
 
-Cheers,
+Last test of basis   157345  2020-12-09 12:40:46 Z    2 days
+Failing since        157348  2020-12-09 15:39:39 Z    1 days   12 attempts
+Testing same since   157402  2020-12-11 03:39:45 Z    0 days    5 attempts
 
--- 
-Julien Grall
+------------------------------------------------------------
+People who touched revisions under test:
+  Abner Chang <abner.chang@hpe.com>
+  Fan Wang <fan.wang@intel.com>
+  Jiaxin Wu <jiaxin.wu@intel.com>
+  Marc Moisson-Franckhauser <marc.moisson-franckhauser@arm.com>
+  Pierre Gondois <Pierre.Gondois@arm.com>
+  Rebecca Cran <rebecca@nuviainc.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Siyuan Fu <siyuan.fu@intel.com>
+  Ting Ye <ting.ye@intel.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 360 lines long.)
 
