@@ -2,49 +2,45 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_CR_TRAILER,
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A7C6C1B0D9
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40121C4361B
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:22:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8243522D72
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:13:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8243522D72
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id A3CE523DE3
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:22:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3CE523DE3
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50306.88918 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50321.88929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knfQl-0005Ye-7z; Fri, 11 Dec 2020 10:13:43 +0000
+	id 1knfZ3-0006cI-5b; Fri, 11 Dec 2020 10:22:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50306.88918; Fri, 11 Dec 2020 10:13:43 +0000
+Received: by outflank-mailman (output) from mailman id 50321.88929; Fri, 11 Dec 2020 10:22:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knfQl-0005YW-42; Fri, 11 Dec 2020 10:13:43 +0000
-Received: by outflank-mailman (input) for mailman id 50306;
- Fri, 11 Dec 2020 10:13:41 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=riDw=FP=linux.intel.com=tvrtko.ursulin@srs-us1.protection.inumbo.net>)
- id 1knfQj-0005Xv-5B
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 10:13:41 +0000
-Received: from mga14.intel.com (unknown [192.55.52.115])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c62624c6-125c-4083-ae3a-8b632c09ba5d;
- Fri, 11 Dec 2020 10:13:40 +0000 (UTC)
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Dec 2020 02:13:38 -0800
-Received: from ynaki-mobl1.ger.corp.intel.com (HELO [10.214.252.46])
- ([10.214.252.46])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Dec 2020 02:13:24 -0800
+	id 1knfZ3-0006cB-2Y; Fri, 11 Dec 2020 10:22:17 +0000
+Received: by outflank-mailman (input) for mailman id 50321;
+ Fri, 11 Dec 2020 10:22:16 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1knfZ1-0006c5-W2
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 10:22:16 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1knfZ0-0002Jh-Tn; Fri, 11 Dec 2020 10:22:14 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1knfZ0-0006Jt-IO; Fri, 11 Dec 2020 10:22:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,268 +52,288 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c62624c6-125c-4083-ae3a-8b632c09ba5d
-IronPort-SDR: MgrogHbCDcqKd4MJcKL5V92Lj0EAhxjNUtf16Ksen8CIJC2PbPspAJEp6RSXlKS1bIqBbDWp3Z
- /5x64WaKNpFw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9831"; a="173644269"
-X-IronPort-AV: E=Sophos;i="5.78,411,1599548400"; 
-   d="scan'208";a="173644269"
-IronPort-SDR: RsQ7lmI/Ay9vaPccFC88f8JfxCXrqcVSXV/MMPaui8twEB+RtpNdJLZX44RdUN4vBcYtBFso8b
- xcHG9HzNR9pw==
-X-IronPort-AV: E=Sophos;i="5.78,411,1599548400"; 
-   d="scan'208";a="321689328"
-Subject: Re: [patch 14/30] drm/i915/pmu: Replace open coded kstat_irqs() copy
-To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>, afzal mohammed <afzal.mohd.ma@gmail.com>,
- linux-parisc@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
- linux-arm-kernel@lists.infradead.org, Mark Rutland <mark.rutland@arm.com>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Heiko Carstens <hca@linux.ibm.com>, linux-s390@vger.kernel.org,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- Chris Wilson <chris@chris-wilson.co.uk>,
- Wambui Karuga <wambui.karugax@gmail.com>,
- Linus Walleij <linus.walleij@linaro.org>, linux-gpio@vger.kernel.org,
- Lee Jones <lee.jones@linaro.org>, Jon Mason <jdmason@kudzu.us>,
- Dave Jiang <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>,
- linux-ntb@googlegroups.com, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Michal Simek <michal.simek@xilinx.com>, linux-pci@vger.kernel.org,
- Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tariq Toukan <tariqt@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>,
- netdev@vger.kernel.org, linux-rdma@vger.kernel.org,
- Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
- <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=9D9zK/DCg+E/AQjA1XGoo+bvPPsN7UhLV3z8DTBQOis=; b=jlJ9D2VpCAPHcxXt8crEyZOnza
+	40GtPeFW0GLNbSE5iBuvIWni8+nl+OrmCtTTwNcGBSax63emB3kwzrtA72XYBe2REZBcS1Gd5HpvN
+	3R1YHDZj9834fdiLOaCvt4gqL8CUEHl3vzScxfdk81Vk6BQM92D24ZGMh3O9w2lhBMr4=;
+Subject: Re: [PATCH v3] xen: add support for automatic debug key actions in
+ case of crash
+To: Jan Beulich <jbeulich@suse.com>, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
+ <jgross@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  xen-devel@lists.xenproject.org
-References: <20201210192536.118432146@linutronix.de>
- <20201210194043.957046529@linutronix.de>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-Message-ID: <ad05af1a-5463-2a80-0887-7629721d6863@linux.intel.com>
-Date: Fri, 11 Dec 2020 10:13:21 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+References: <20201126080340.6154-1-jgross@suse.com>
+ <22190c77-eb35-5b72-7d72-34800c3f052f@suse.com>
+ <98c45abd-8796-088c-e2a6-9ad494beeb9e@xen.org>
+ <59f126a3-f716-345b-b464-746e6156c15a@suse.com>
+ <1e305cf6-aa14-54cc-a77d-88bb38ba4c6e@xen.org>
+ <7271b2f4-816a-5541-5402-50ea29218d81@suse.com>
+ <077f3e02-0e07-1549-cc41-62b42177e19c@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <699e48ea-8807-a1f3-d2b9-dc918913ede8@xen.org>
+Date: Fri, 11 Dec 2020 10:22:12 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-In-Reply-To: <20201210194043.957046529@linutronix.de>
+In-Reply-To: <077f3e02-0e07-1549-cc41-62b42177e19c@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
+Hi,
 
-On 10/12/2020 19:25, Thomas Gleixner wrote:
-> Driver code has no business with the internals of the irq descriptor.
+On 11/12/2020 07:24, Jan Beulich wrote:
+> On 11.12.2020 08:02, Jürgen Groß wrote:
+>> On 10.12.20 21:51, Julien Grall wrote:
+>>> Hi Jan,
+>>>
+>>> On 09/12/2020 14:29, Jan Beulich wrote:
+>>>> On 09.12.2020 13:11, Julien Grall wrote:
+>>>>> On 26/11/2020 11:20, Jan Beulich wrote:
+>>>>>> On 26.11.2020 09:03, Juergen Gross wrote:
+>>>>>>> When the host crashes it would sometimes be nice to have additional
+>>>>>>> debug data available which could be produced via debug keys, but
+>>>>>>> halting the server for manual intervention might be impossible due to
+>>>>>>> the need to reboot/kexec rather sooner than later.
+>>>>>>>
+>>>>>>> Add support for automatic debug key actions in case of crashes which
+>>>>>>> can be activated via boot- or runtime-parameter.
+>>>>>>>
+>>>>>>> Depending on the type of crash the desired data might be different, so
+>>>>>>> support different settings for the possible types of crashes.
+>>>>>>>
+>>>>>>> The parameter is "crash-debug" with the following syntax:
+>>>>>>>
+>>>>>>>      crash-debug-<type>=<string>
+>>>>>>>
+>>>>>>> with <type> being one of:
+>>>>>>>
+>>>>>>>      panic, hwdom, watchdog, kexeccmd, debugkey
+>>>>>>>
+>>>>>>> and <string> a sequence of debug key characters with '+' having the
+>>>>>>> special semantics of a 10 millisecond pause.
+>>>>>>>
+>>>>>>> So "crash-debug-watchdog=0+0qr" would result in special output in case
+>>>>>>> of watchdog triggered crash (dom0 state, 10 ms pause, dom0 state,
+>>>>>>> domain info, run queues).
+>>>>>>>
+>>>>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>>>>>> ---
+>>>>>>> V2:
+>>>>>>> - switched special character '.' to '+' (Jan Beulich)
+>>>>>>> - 10 ms instead of 1 s pause (Jan Beulich)
+>>>>>>> - added more text to the boot parameter description (Jan Beulich)
+>>>>>>>
+>>>>>>> V3:
+>>>>>>> - added const (Jan Beulich)
+>>>>>>> - thorough test of crash reason parameter (Jan Beulich)
+>>>>>>> - kexeccmd case should depend on CONFIG_KEXEC (Jan Beulich)
+>>>>>>> - added dummy get_irq_regs() helper on Arm
+>>>>>>>
+>>>>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>>>>>
+>>>>>> Except for the Arm aspect, where I'm not sure using
+>>>>>> guest_cpu_user_regs() is correct in all cases,
+>>>>>
+>>>>> I am not entirely sure to understand what get_irq_regs() is supposed to
+>>>>> returned on x86. Is it the registers saved from the most recent
+>>>>> exception?
+>>>>
+>>>> An interrupt (not an exception) sets the underlying per-CPU
+>>>> variable, such that interested parties will know the real
+>>>> context is not guest or "normal" Xen code, but an IRQ.
+>>>
+>>> Thanks for the explanation. I am a bit confused to why we need to give a
+>>> regs to handle_keypress() because no-one seems to use it. Do you have an
+>>> explanation?
+>>
+>> dump_registers() (key 'd') is using it.
+>>
+>>>
+>>> To add to the confusion, it looks like that get_irqs_regs() may return
+>>> NULL. So sometimes we may pass guest_cpu_regs() (which may contain
+>>> garbagge or a set too far).
+>>
+>> I guess this is a best effort approach.
 > 
-> Aside of that the count is per interrupt line and therefore takes
-> interrupts from other devices into account which share the interrupt line
-> and are not handled by the graphics driver.
-> 
-> Replace it with a pmu private count which only counts interrupts which
-> originate from the graphics card.
-> 
-> To avoid atomics or heuristics of some sort make the counter field
-> 'unsigned long'. That limits the count to 4e9 on 32bit which is a lot and
-> postprocessing can easily deal with the occasional wraparound.
+> Indeed. If there are ways to make it "more best", we should of
+> course follow them. (Except before Dom0 starts, I'm afraid I
+> don't see though where garbage would come from. And even then,
+> just like for the idle vCPU-s, it shouldn't really be garbage,
+> or else this suggests missing initialization somewhere.)
 
-After my failed hasty sketch from last night I had a different one which 
-was kind of heuristics based (re-reading the upper dword and retrying if 
-it changed on 32-bit). But you are right - it is okay to at least start 
-like this today and if later there is a need we can either do that or 
-deal with wrap at PMU read time.
+So I decided to mimick what 'd' does to see what happen if this is 
+called early boot.
 
-So thanks for dealing with it, some small comments below but overall it 
-is fine.
 
-> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: dri-devel@lists.freedesktop.org
-> ---
->   drivers/gpu/drm/i915/i915_irq.c |   34 ++++++++++++++++++++++++++++++++++
->   drivers/gpu/drm/i915/i915_pmu.c |   18 +-----------------
->   drivers/gpu/drm/i915/i915_pmu.h |    8 ++++++++
->   3 files changed, 43 insertions(+), 17 deletions(-)
-> 
-> --- a/drivers/gpu/drm/i915/i915_irq.c
-> +++ b/drivers/gpu/drm/i915/i915_irq.c
-> @@ -60,6 +60,24 @@
->    * and related files, but that will be described in separate chapters.
->    */
->   
-> +/*
-> + * Interrupt statistic for PMU. Increments the counter only if the
-> + * interrupt originated from the the GPU so interrupts from a device which
-> + * shares the interrupt line are not accounted.
-> + */
-> +static inline void pmu_irq_stats(struct drm_i915_private *priv,
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 7fcff9af2a7e..9d33507a26eb 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -857,6 +857,8 @@ void __init start_xen(unsigned long boot_phys_offset,
+       */
+      system_state = SYS_STATE_boot;
 
-We never use priv as a local name, it should be either i915 or dev_priv.
++    dump_execstate(guest_cpu_user_regs());
++
+      vm_init();
 
-> +				 irqreturn_t res)
-> +{
-> +	if (unlikely(res != IRQ_HANDLED))
-> +		return;
-> +
-> +	/*
-> +	 * A clever compiler translates that into INC. A not so clever one
-> +	 * should at least prevent store tearing.
-> +	 */
-> +	WRITE_ONCE(priv->pmu.irq_count, priv->pmu.irq_count + 1);
+      if ( acpi_disabled )
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 30d6f375a3af..50fcf2e8d70e 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1678,6 +1678,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+          end_boot_allocator();
 
-Curious, probably more educational for me - given x86_32 and x86_64, and 
-the context of it getting called, what is the difference from just doing 
-irq_count++?
+      system_state = SYS_STATE_boot;
++    dump_execstate(guest_cpu_user_regs());
+      /*
+       * No calls involving ACPI code should go between the setting of
+       * SYS_STATE_boot and vm_init() (or else acpi_os_{,un}map_memory()
 
-> +}
-> +
->   typedef bool (*long_pulse_detect_func)(enum hpd_pin pin, u32 val);
->   
->   static const u32 hpd_ilk[HPD_NUM_PINS] = {
-> @@ -1599,6 +1617,8 @@ static irqreturn_t valleyview_irq_handle
->   		valleyview_pipestat_irq_handler(dev_priv, pipe_stats);
->   	} while (0);
->   
-> +	pmu_irq_stats(dev_priv, ret);
-> +
->   	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
->   
->   	return ret;
-> @@ -1676,6 +1696,8 @@ static irqreturn_t cherryview_irq_handle
->   		valleyview_pipestat_irq_handler(dev_priv, pipe_stats);
->   	} while (0);
->   
-> +	pmu_irq_stats(dev_priv, ret);
-> +
->   	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
->   
->   	return ret;
-> @@ -2103,6 +2125,8 @@ static irqreturn_t ilk_irq_handler(int i
->   	if (sde_ier)
->   		raw_reg_write(regs, SDEIER, sde_ier);
->   
-> +	pmu_irq_stats(i915, ret);
-> +
->   	/* IRQs are synced during runtime_suspend, we don't require a wakeref */
->   	enable_rpm_wakeref_asserts(&i915->runtime_pm);
->   
-> @@ -2419,6 +2443,8 @@ static irqreturn_t gen8_irq_handler(int
->   
->   	gen8_master_intr_enable(regs);
->   
-> +	pmu_irq_stats(dev_priv, IRQ_HANDLED);
-> +
->   	return IRQ_HANDLED;
->   }
->   
-> @@ -2514,6 +2540,8 @@ static __always_inline irqreturn_t
->   
->   	gen11_gu_misc_irq_handler(gt, gu_misc_iir);
->   
-> +	pmu_irq_stats(i915, IRQ_HANDLED);
-> +
->   	return IRQ_HANDLED;
->   }
->   
-> @@ -3688,6 +3716,8 @@ static irqreturn_t i8xx_irq_handler(int
->   		i8xx_pipestat_irq_handler(dev_priv, iir, pipe_stats);
->   	} while (0);
->   
-> +	pmu_irq_stats(dev_priv, ret);
-> +
->   	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
->   
->   	return ret;
-> @@ -3796,6 +3826,8 @@ static irqreturn_t i915_irq_handler(int
->   		i915_pipestat_irq_handler(dev_priv, iir, pipe_stats);
->   	} while (0);
->   
-> +	pmu_irq_stats(dev_priv, ret);
-> +
->   	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
->   
->   	return ret;
-> @@ -3941,6 +3973,8 @@ static irqreturn_t i965_irq_handler(int
->   		i965_pipestat_irq_handler(dev_priv, iir, pipe_stats);
->   	} while (0);
->   
-> +	pmu_irq_stats(dev_priv, IRQ_HANDLED);
-> +
->   	enable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
->   
->   	return ret;
-> --- a/drivers/gpu/drm/i915/i915_pmu.c
-> +++ b/drivers/gpu/drm/i915/i915_pmu.c
-> @@ -423,22 +423,6 @@ static enum hrtimer_restart i915_sample(
->   	return HRTIMER_RESTART;
->   }
+It leads to crash on both Arm and x86.
 
-In this file you can also drop the #include <linux/irq.h> line.
+For the Arm crash:
 
->   
-> -static u64 count_interrupts(struct drm_i915_private *i915)
-> -{
-> -	/* open-coded kstat_irqs() */
-> -	struct irq_desc *desc = irq_to_desc(i915->drm.pdev->irq);
-> -	u64 sum = 0;
-> -	int cpu;
-> -
-> -	if (!desc || !desc->kstat_irqs)
-> -		return 0;
-> -
-> -	for_each_possible_cpu(cpu)
-> -		sum += *per_cpu_ptr(desc->kstat_irqs, cpu);
-> -
-> -	return sum;
-> -}
-> -
->   static void i915_pmu_event_destroy(struct perf_event *event)
->   {
->   	struct drm_i915_private *i915 =
-> @@ -581,7 +565,7 @@ static u64 __i915_pmu_event_read(struct
->   				   USEC_PER_SEC /* to MHz */);
->   			break;
->   		case I915_PMU_INTERRUPTS:
-> -			val = count_interrupts(i915);
-> +			val = READ_ONCE(pmu->irq_count);
+(XEN) Data Abort Trap. Syndrome=0x1c08006
+(XEN) Walking Hypervisor VA 0x10 on CPU0 via TTBR 0x0000000065a7f000
+(XEN) 0TH[0x0] = 0x0000000065a7ef7f
+(XEN) 1ST[0x0] = 0x0000000065a7bf7f
+(XEN) 2ND[0x0] = 0x0000000000000000
+(XEN) CPU0: Unexpected Trap: Data Abort
+(XEN) ----[ Xen-4.15-unstable  arm64  debug=y   Not tainted ]----
+(XEN) CPU:    0
+(XEN) PC:     0000000000219674 dump_execstate+0x58/0x1ec
+(XEN) LR:     00000000002d77dc
+(XEN) SP:     000000000030fdc0
+(XEN) CPSR:   800003c9 MODE:64-bit EL2h (Hypervisor, handler)
+(XEN)      X0: 0000000000000000  X1: 0000000000000000  X2: 0000000000007fff
+(XEN)      X3: 00000000002b7198  X4: 0000000000000080  X5: 00000000002e9a68
+(XEN)      X6: 0080808080808080  X7: fefefefefefeff09  X8: 7f7f7f7f7f7f7f7f
+(XEN)      X9: 717164616f726051 X10: 7f7f7f7f7f7f7f7f X11: 0101010101010101
+(XEN)     X12: 0000000000000008 X13: 00000000002b9a48 X14: 0000000000000000
+(XEN)     X15: 0000000000400000 X16: 00000000002ba000 X17: 00000000002b9000
+(XEN)     X18: 00000000002b9000 X19: 0000000000000000 X20: 000000000030feb0
+(XEN)     X21: 0000000080000000 X22: 00000000002f0d30 X23: 00000000002f1d68
+(XEN)     X24: 00000000002f0eb8 X25: 0000000040000000 X26: 0000000080000000
+(XEN)     X27: 0000000000000018 X28: 000000000003f970  FP: 000000000030fdc0
+(XEN)
+(XEN)   VTCR_EL2: 00000000
+(XEN)  VTTBR_EL2: 0000000000000000
+(XEN)
+(XEN)  SCTLR_EL2: 30cd183d
+(XEN)    HCR_EL2: 0000000000000038
+(XEN)  TTBR0_EL2: 0000000065a7f000
+(XEN)
+(XEN)    ESR_EL2: 97c08006
+(XEN)  HPFAR_EL2: 0000000000000000
+(XEN)    FAR_EL2: 0000000000000010
+(XEN)
+(XEN) Xen stack trace from sp=000000000030fdc0:
+(XEN)    000000000030fdf0 00000000002d77dc 0000000000080000 000000007fffc000
+(XEN)    0000000080000000 00000000002f0d30 000000007f68b250 00000000002001b8
+(XEN)    0000000065932000 0000000065732000 00000000784f9000 0000000000000000
+(XEN)    0000000000400000 0000000065a2ad30 0000000000000630 0000000000000001
+(XEN)    0000000000000001 0000000000000001 0000000000000000 0000000000003000
+(XEN)    00000000784f9000 00000000002bc8e4 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000300000000 0000000000000000 00000040ffffffff
+(XEN)    00000000ffffffff 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN) Xen call trace:
+(XEN)    [<0000000000219674>] dump_execstate+0x58/0x1ec (PC)
+(XEN)    [<00000000002d77dc>] start_xen+0x3d0/0xcf8 (LR)
+(XEN)    [<00000000002d77dc>] start_xen+0x3d0/0xcf8
+(XEN)    [<00000000002001b8>] arm64/head.o#primary_switched+0x10/0x30
+(XEN)
+(XEN)
+(XEN) ****************************************
+(XEN) Panic on CPU 0:
+(XEN) CPU0: Unexpected Trap: Data Abort
+(XEN) ****************************************
 
-I guess same curiosity about READ_ONCE like in the increment site.
+For the x86 crash:
 
->   			break;
->   		case I915_PMU_RC6_RESIDENCY:
->   			val = get_rc6(&i915->gt);
-> --- a/drivers/gpu/drm/i915/i915_pmu.h
-> +++ b/drivers/gpu/drm/i915/i915_pmu.h
-> @@ -108,6 +108,14 @@ struct i915_pmu {
->   	 */
->   	ktime_t sleep_last;
->   	/**
-> +	 * @irq_count: Number of interrupts
-> +	 *
-> +	 * Intentionally unsigned long to avoid atomics or heuristics on 32bit.
-> +	 * 4e9 interrupts are a lot and postprocessing can really deal with an
-> +	 * occasional wraparound easily. It's 32bit after all.
-> +	 */
-> +	unsigned long irq_count;
-> +	/**
->   	 * @events_attr_group: Device events attribute group.
->   	 */
->   	struct attribute_group events_attr_group;
-> 
+(XEN) Early fatal page fault at e008:ffff82d0402188b4 
+(cr2=0000000000000010, ec=0000)
+(XEN) ----[ Xen-4.15-unstable  x86_64  debug=y   Tainted:   C   ]----
+(XEN) CPU:    0
+(XEN) RIP:    e008:[<ffff82d0402188b4>] dump_execstate+0x42/0x167
+(XEN) RFLAGS: 0000000000010086   CONTEXT: hypervisor
+(XEN) rax: 0000000000000000   rbx: 0000000000000000   rcx: 0000000000000000
+(XEN) rdx: ffff82d0404affff   rsi: 000000000000000a   rdi: ffff82d0404afef8
+(XEN) rbp: ffff82d0404afd90   rsp: ffff82d0404afd80   r8:  0000000000000004
+(XEN) r9:  0101010101010101   r10: 0f0f0f0f0f0f0f0f   r11: 5555555555555555
+(XEN) r12: ffff82d0404afef8   r13: 0000000000800163   r14: ffff83000009dfb0
+(XEN) r15: 0000000000000002   cr0: 0000000080050033   cr4: 00000000000000a0
+(XEN) cr3: 00000000bfa9e000   cr2: 0000000000000010
+(XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
+(XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: e008
+(XEN) Xen code around <ffff82d0402188b4> (dump_execstate+0x42/0x167):
+(XEN)  ff 7f 00 00 48 8b 40 c9 <48> 8b 40 10 66 81 38 ff 7f 75 49 3b 1d 
+23 18 27
+(XEN) Xen stack trace from rsp=ffff82d0404afd80:
+(XEN)    000000000023ffff 00000000000005ed ffff82d0404afee8 ffff82d0404378cb
+(XEN)    0000000000000002 0000000000000002 0000000000000002 0000000000000001
+(XEN)    0000000000000001 0000000000000001 0000000000000001 0000000000000000
+(XEN)    00000000000001ff 0000000002a45fff 0000000000240000 0000000002a45000
+(XEN)    0000000000100000 0000000000000000 00000000000001ff ffff82d040475c80
+(XEN)    ffff82d000800163 ffff83000009dee0 ffff83000009dfb0 0000000000200001
+(XEN)    0000000100000000 0000000100000000 ffff83000009df80 642ded38bf9fe4f3
+(XEN)    bf9fed3500000000 bfaafe980009df73 0009df73bf9fe7ea 00000004bf9fed31
+(XEN)    bfaafeb00009df01 0000000800000000 000000010000006e 0000000000000003
+(XEN)    00000000000002f8 ffff82d0405b0000 ffff82d0404b0000 0000000000000002
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 ffff82d04020012f 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN)    0000e01000000000 0000000000000000 0000000000000000 00000000000000a0
+(XEN)    0000000000000000 0000000000000000 0000000000000000 0000000000000000
+(XEN) Xen call trace:
+(XEN)    [<ffff82d0402188b4>] R dump_execstate+0x42/0x167
+(XEN)    [<ffff82d0404378cb>] F __start_xen+0x1e10/0x2906
+(XEN)    [<ffff82d04020012f>] F __high_start+0x8f/0x91
+(XEN)
+(XEN) Pagetable walk from 0000000000000010:
+(XEN)  L4[0x000] = 00000000bfa54063 ffffffffffffffff
+(XEN)  L3[0x000] = 00000000bfa50063 ffffffffffffffff
+(XEN)  L2[0x000] = 00000000bfa4f063 ffffffffffffffff
+(XEN)  L1[0x000] = 0000000000000000 ffffffffffffffff
+(XEN)
+(XEN) ****************************************
+(XEN) Panic on CPU 0:
+(XEN) FATAL TRAP: vec 14, #PF[0000] IN INTERRUPT CONTEXT
+(XEN) ****************************************
+(XEN)
+(XEN) Reboot in five seconds...
 
-Regards,
+So I think guest_cpu_user_regs() is not quite yet ready to be called 
+from panic().
 
-Tvrtko
+A different approach my be to generate an exception and call the 
+keyhandler from there. At least you know that the register would always 
+be accurate.
+
+Cheers,
+
+-- 
+Julien Grall
 
