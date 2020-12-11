@@ -2,41 +2,61 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 743CDC4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D3CC433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 13A0F206B2
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13A0F206B2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 14D2D206B2
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 15:00:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14D2D206B2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50640.89357 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50676.89427 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knjDv-0007en-Dg; Fri, 11 Dec 2020 14:16:43 +0000
+	id 1knjSH-0001eS-Vb; Fri, 11 Dec 2020 14:31:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50640.89357; Fri, 11 Dec 2020 14:16:43 +0000
+Received: by outflank-mailman (output) from mailman id 50676.89427; Fri, 11 Dec 2020 14:31:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knjDv-0007eg-Ah; Fri, 11 Dec 2020 14:16:43 +0000
-Received: by outflank-mailman (input) for mailman id 50640;
- Fri, 11 Dec 2020 14:16:42 +0000
+	id 1knjSH-0001eL-RT; Fri, 11 Dec 2020 14:31:33 +0000
+Received: by outflank-mailman (input) for mailman id 50676;
+ Fri, 11 Dec 2020 14:31:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Nv6e=FP=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1knjDu-0007ea-Ac
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 14:16:42 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ <SRS0=cAXP=FP=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1knjSG-0001bD-DI
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 14:31:32 +0000
+Received: from userp2130.oracle.com (unknown [156.151.31.86])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d12eb43e-2f46-4a07-8aeb-58085b813241;
- Fri, 11 Dec 2020 14:16:40 +0000 (UTC)
+ id e159b767-0166-4098-b978-6e322948493a;
+ Fri, 11 Dec 2020 14:31:31 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BBEK3q4153543;
+ Fri, 11 Dec 2020 14:29:21 GMT
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by userp2130.oracle.com with ESMTP id 3581mratkd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 11 Dec 2020 14:29:21 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BBEPIII069767;
+ Fri, 11 Dec 2020 14:29:20 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3030.oracle.com with ESMTP id 358kstfcjw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 11 Dec 2020 14:29:20 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0BBETD7i006093;
+ Fri, 11 Dec 2020 14:29:13 GMT
+Received: from [10.39.222.144] (/10.39.222.144)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Fri, 11 Dec 2020 06:29:13 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,140 +68,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d12eb43e-2f46-4a07-8aeb-58085b813241
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1607696200;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=8H42SUW0bR+8N2cMiG0OFcydNJK4AD9EAmy9cNPqMes=;
-  b=QxJtiGo33lnCKH0ix7z83xnvm1wNLPujhUocW8KSYQIcMIaufICcv0XC
-   0EhMCX10iOVitVaHwwz8uF9xc2oU7vqNdCaNGQ0W23LjM0WaoQx5vL+bj
-   LhL1XdvPbYWrPpfrHiysa+r2mjPNkowZ2sdCvUE7TGH5Bf8bazvpzvu53
-   I=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: K/hnHrSfABfZTpsNhA/pGdRyqzpZOXPhq4DhGpjVbeyslbvyAzd555Hm/LJfPGmox3HTuwdg0B
- 9Z7WudJnerU5NJImmkowFvFY77OTACjec7QwG9FK1GKfACUzuWs6Kw5tgFybJ5KnSq9+xkYqGQ
- 3eNrwh9MDHkpxez4suqGwhE9g4GVv5goSUca0JDb8jKTjGN2Zu/u2HPt2susyjNerec37Mlf6C
- UaqviWFTx5e2fN8PMELHvoyP4H5A6jbq/b+Fh8k+LHb0sO6Utz6oBIy/FezKO3dDTtVt/6GyI2
- OO4=
-X-SBRS: 5.2
-X-MesageID: 33012202
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,411,1599537600"; 
-   d="scan'208";a="33012202"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Manuel Bouyer
-	<bouyer@antioche.eu.org>
-Subject: [PATCH] Revert "x86/mm: drop guest_get_eff_l1e()"
-Date: Fri, 11 Dec 2020 14:16:15 +0000
-Message-ID: <20201211141615.12489-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+X-Inumbo-ID: e159b767-0166-4098-b978-6e322948493a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=XwmNJXsce0biO7XLe+zGaIsjtrmRfK/vTz0mYn6nQBU=;
+ b=bR7yH4+1kTFS/uaRb9qwsHTyFm2EoNVmWnQB/6uOrO708u+eqNtBobFpmn1ttrRdH1ys
+ eWZmcv+9rBDGS0S9dxVH7WJEjVIq3kan/8A2J+2JEfl4cmi6SdTHDxhFZ9FOjgghK0i/
+ gSlqjyBs3FtwP3+ZAOMx//Xrh2s4GGZVNmZZvw8Dg7A8ucgqyFuZ1jZz6HYR0R/QX3KB
+ jq1go8jZfLC3JdZILS9AqGFwicAYPALMmwsEwRd+5bZO9goG03a6o19lTH5pgGTEdXEs
+ I4ECgSmCCiTYqeMDSavCaEpGT9QkWsYwEp7lVPsTzWiLDfHkK38lg3Q5ATAnYCJ8Q3TZ zQ== 
+Subject: Re: [patch 27/30] xen/events: Only force affinity mask for percpu
+ interrupts
+To: Thomas Gleixner <tglx@linutronix.de>,
+        =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
+ <jgross@suse.com>,
+        LKML <linux-kernel@vger.kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        xen-devel@lists.xenproject.org,
+        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+        Helge Deller <deller@gmx.de>, afzal mohammed <afzal.mohd.ma@gmail.com>,
+        linux-parisc@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
+        linux-arm-kernel@lists.infradead.org,
+        Mark Rutland <mark.rutland@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>, linux-s390@vger.kernel.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>, David Airlie <airlied@linux.ie>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+        Chris Wilson <chris@chris-wilson.co.uk>,
+        Wambui Karuga <wambui.karugax@gmail.com>,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+        Linus Walleij <linus.walleij@linaro.org>, linux-gpio@vger.kernel.org,
+        Lee Jones <lee.jones@linaro.org>, Jon Mason <jdmason@kudzu.us>,
+        Dave Jiang <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>,
+        linux-ntb@googlegroups.com,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+        Michal Simek <michal.simek@xilinx.com>, linux-pci@vger.kernel.org,
+        Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
+        Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tariq Toukan <tariqt@nvidia.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>, netdev@vger.kernel.org,
+        linux-rdma@vger.kernel.org, Saeed Mahameed <saeedm@nvidia.com>,
+        Leon Romanovsky <leon@kernel.org>
+References: <20201210192536.118432146@linutronix.de>
+ <20201210194045.250321315@linutronix.de>
+ <7f7af60f-567f-cdef-f8db-8062a44758ce@oracle.com>
+ <2164a0ce-0e0d-c7dc-ac97-87c8f384ad82@suse.com>
+ <871rfwiknd.fsf@nanos.tec.linutronix.de>
+From: boris.ostrovsky@oracle.com
+Organization: Oracle Corporation
+Message-ID: <9806692f-24a3-4b6f-ae55-86bd66481271@oracle.com>
+Date: Fri, 11 Dec 2020 09:29:09 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <871rfwiknd.fsf@nanos.tec.linutronix.de>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9831 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 suspectscore=0
+ bulkscore=0 malwarescore=0 phishscore=0 mlxscore=0 spamscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2012110094
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9831 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 mlxlogscore=999
+ clxscore=1015 malwarescore=0 priorityscore=1501 adultscore=0
+ lowpriorityscore=0 phishscore=0 spamscore=0 impostorscore=0 mlxscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2012110093
 
-This reverts commit 9ff9705647646aa937b5f5c1426a64c69a62b3bd.
 
-The change is only correct in the original context of XSA-286, where Xen's use
-of the linear pagetables were dropped.  However, performance problems
-interfered with that plan, and XSA-286 was fixed differently.
+On 12/11/20 7:37 AM, Thomas Gleixner wrote:
+> On Fri, Dec 11 2020 at 13:10, Jürgen Groß wrote:
+>> On 11.12.20 00:20, boris.ostrovsky@oracle.com wrote:
+>>> On 12/10/20 2:26 PM, Thomas Gleixner wrote:
+>>>> All event channel setups bind the interrupt on CPU0 or the target CPU for
+>>>> percpu interrupts and overwrite the affinity mask with the corresponding
+>>>> cpumask. That does not make sense.
+>>>>
+>>>> The XEN implementation of irqchip::irq_set_affinity() already picks a
+>>>> single target CPU out of the affinity mask and the actual target is stored
+>>>> in the effective CPU mask, so destroying the user chosen affinity mask
+>>>> which might contain more than one CPU is wrong.
+>>>>
+>>>> Change the implementation so that the channel is bound to CPU0 at the XEN
+>>>> level and leave the affinity mask alone. At startup of the interrupt
+>>>> affinity will be assigned out of the affinity mask and the XEN binding will
+>>>> be updated.
+>>>
+>>> If that's the case then I wonder whether we need this call at all and instead bind at startup time.
+>> After some discussion with Thomas on IRC and xen-devel archaeology the
+>> result is: this will be needed especially for systems running on a
+>> single vcpu (e.g. small guests), as the .irq_set_affinity() callback
+>> won't be called in this case when starting the irq.
 
-This broke Xen's lazy faulting of the LDT for 64bit PV guests when an access
-was first encountered in user context.  Xen would proceed to read the
-registered LDT virtual address out of the user pagetables, not the kernel
-pagetables.
 
-Given the nature of the bug, it would have also interfered with the IO
-permisison bitmap functionality of userspace, which similarly needs to read
-data using the kernel pagetables.
+On UP are we not then going to end up with an empty affinity mask? Or are we guaranteed to have it set to 1 by interrupt generic code?
 
-Reported-by: Manuel Bouyer <bouyer@antioche.eu.org>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Tested-by: Manuel Bouyer <bouyer@antioche.eu.org>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Manuel Bouyer <bouyer@antioche.eu.org>
 
-There is also a bug with Xen's IRET handling, but that has been broken forever
-and is much more complicated to fix.  I'll put it on my TODO list, but no idea
-when I'll get around to addressing it.
----
- xen/arch/x86/pv/mm.c            | 21 +++++++++++++++++++++
- xen/arch/x86/pv/mm.h            |  7 ++-----
- xen/arch/x86/pv/ro-page-fault.c |  2 +-
- 3 files changed, 24 insertions(+), 6 deletions(-)
+This is actually why I brought this up in the first place --- a potential mismatch between the affinity mask and Xen-specific data (e.g. info->cpu and then protocol-specific data in event channel code). Even if they are re-synchronized later, at startup time (for SMP).
 
-diff --git a/xen/arch/x86/pv/mm.c b/xen/arch/x86/pv/mm.c
-index 5d74d11cba..14cb0f2d4e 100644
---- a/xen/arch/x86/pv/mm.c
-+++ b/xen/arch/x86/pv/mm.c
-@@ -56,6 +56,27 @@ l1_pgentry_t *map_guest_l1e(unsigned long linear, mfn_t *gl1mfn)
- }
- 
- /*
-+ * Read the guest's l1e that maps this address, from the kernel-mode
-+ * page tables.
-+ */
-+static l1_pgentry_t guest_get_eff_kern_l1e(unsigned long linear)
-+{
-+    struct vcpu *curr = current;
-+    const bool user_mode = !(curr->arch.flags & TF_kernel_mode);
-+    l1_pgentry_t l1e;
-+
-+    if ( user_mode )
-+        toggle_guest_pt(curr);
-+
-+    l1e = guest_get_eff_l1e(linear);
-+
-+    if ( user_mode )
-+        toggle_guest_pt(curr);
-+
-+    return l1e;
-+}
-+
-+/*
-  * Map a guest's LDT page (covering the byte at @offset from start of the LDT)
-  * into Xen's virtual range.  Returns true if the mapping changed, false
-  * otherwise.
-diff --git a/xen/arch/x86/pv/mm.h b/xen/arch/x86/pv/mm.h
-index 2a21859dd4..b1b66e46c8 100644
---- a/xen/arch/x86/pv/mm.h
-+++ b/xen/arch/x86/pv/mm.h
-@@ -5,11 +5,8 @@ l1_pgentry_t *map_guest_l1e(unsigned long linear, mfn_t *gl1mfn);
- 
- int new_guest_cr3(mfn_t mfn);
- 
--/*
-- * Read the guest's l1e that maps this address, from the kernel-mode
-- * page tables.
-- */
--static inline l1_pgentry_t guest_get_eff_kern_l1e(unsigned long linear)
-+/* Read a PV guest's l1e that maps this linear address. */
-+static inline l1_pgentry_t guest_get_eff_l1e(unsigned long linear)
- {
-     l1_pgentry_t l1e;
- 
-diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
-index 8d0007ede5..7f6fbc92fb 100644
---- a/xen/arch/x86/pv/ro-page-fault.c
-+++ b/xen/arch/x86/pv/ro-page-fault.c
-@@ -342,7 +342,7 @@ int pv_ro_page_fault(unsigned long addr, struct cpu_user_regs *regs)
-     bool mmio_ro;
- 
-     /* Attempt to read the PTE that maps the VA being accessed. */
--    pte = guest_get_eff_kern_l1e(addr);
-+    pte = guest_get_eff_l1e(addr);
- 
-     /* We are only looking for read-only mappings */
-     if ( ((l1e_get_flags(pte) & (_PAGE_PRESENT | _PAGE_RW)) != _PAGE_PRESENT) )
--- 
-2.11.0
 
+I don't see anything that would cause a problem right now but I worry that this inconsistency may come up at some point.
+
+
+-boris
+
+
+> That's right, but not limited to ARM. The same problem exists on x86 UP.
+> So yes, the call makes sense, but the changelog is not really useful.
+> Let me add a comment to this.
+>
+> Thanks,
+>
+>         tglx
+>
 
