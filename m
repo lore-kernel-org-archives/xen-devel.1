@@ -2,54 +2,41 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59FBCC4361B
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 22:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C032C4167B
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 22:07:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 03AB223E20
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 22:07:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03AB223E20
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id E32DB23D50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 22:07:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E32DB23D50
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50930.89789 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50932.89801 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knqZO-0006qe-6g; Fri, 11 Dec 2020 22:07:22 +0000
+	id 1knqZS-0006tZ-L9; Fri, 11 Dec 2020 22:07:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50930.89789; Fri, 11 Dec 2020 22:07:22 +0000
+Received: by outflank-mailman (output) from mailman id 50932.89801; Fri, 11 Dec 2020 22:07:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knqZO-0006qX-2w; Fri, 11 Dec 2020 22:07:22 +0000
-Received: by outflank-mailman (input) for mailman id 50930;
- Fri, 11 Dec 2020 22:07:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1knqZS-0006tQ-Gl; Fri, 11 Dec 2020 22:07:26 +0000
+Received: by outflank-mailman (input) for mailman id 50932;
+ Fri, 11 Dec 2020 22:07:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8Vdm=FP=redhat.com=ehabkost@srs-us1.protection.inumbo.net>)
- id 1knqZM-0006qM-ON
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 22:07:20 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id ad07fcae-a49e-428d-9bc2-121e19c1c9c6;
- Fri, 11 Dec 2020 22:07:19 +0000 (UTC)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-513-UpP2mNjkPBywjRPvEBuG2A-1; Fri, 11 Dec 2020 17:07:15 -0500
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B9232C292;
- Fri, 11 Dec 2020 22:07:12 +0000 (UTC)
-Received: from localhost (ovpn-116-160.rdu2.redhat.com [10.10.116.160])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EB9BF5D9E2;
- Fri, 11 Dec 2020 22:07:04 +0000 (UTC)
+ <SRS0=YvCS=FP=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
+ id 1knqZR-0006s6-K5
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 22:07:25 +0000
+Received: from galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1c146a60-1cb4-4cb1-8ed7-f25d7d461d55;
+ Fri, 11 Dec 2020 22:07:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,711 +48,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad07fcae-a49e-428d-9bc2-121e19c1c9c6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607724439;
+X-Inumbo-ID: 1c146a60-1cb4-4cb1-8ed7-f25d7d461d55
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1607724443;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=liR73qHgx91bdEvSe0pRJgUhS7neRyLuX3mOz/BU+gI=;
-	b=eg1tAX/G2AAy/coUwyuoVaHmJ4QWjK+OCIsXL2HEzBwN/WBmRBRO4VqxiTiQReCWDi1Ss+
-	kQjMExMTfoJLXRqX/wtrkceiht6Ik3h7bxKzuRRTkg/MH1HNvsxWMtUg/MgTcwNJdfLAb5
-	Clkdj/9Q5KZhQn7Zda1Ijjn3C4OCB8s=
-X-MC-Unique: UpP2mNjkPBywjRPvEBuG2A-1
-From: Eduardo Habkost <ehabkost@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	Stefan Berger <stefanb@linux.ibm.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	"Daniel P. Berrange" <berrange@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
-	John Snow <jsnow@redhat.com>,
-	Kevin Wolf <kwolf@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Stefan Berger <stefanb@linux.vnet.ibm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Max Reitz <mreitz@redhat.com>,
-	Cornelia Huck <cohuck@redhat.com>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Richard Henderson <rth@twiddle.net>,
-	David Hildenbrand <david@redhat.com>,
-	Thomas Huth <thuth@redhat.com>,
-	Matthew Rosato <mjrosato@linux.ibm.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Artyom Tarasenko <atar4qemu@gmail.com>,
-	xen-devel@lists.xenproject.org,
-	qemu-block@nongnu.org,
-	qemu-s390x@nongnu.org
-Subject: [PATCH v4 23/32] qdev: Move dev->realized check to qdev_property_set()
-Date: Fri, 11 Dec 2020 17:05:20 -0500
-Message-Id: <20201211220529.2290218-24-ehabkost@redhat.com>
-In-Reply-To: <20201211220529.2290218-1-ehabkost@redhat.com>
-References: <20201211220529.2290218-1-ehabkost@redhat.com>
+	bh=uE5KR5qlfz+ztx9s8pbRCB1Be+kxvrwztlDzBEoJCeU=;
+	b=upIVkJhj5g1RmAalIreFExmj0QWc7xxC7dfgYyTKQ7/s1CPaLrvswCn2cis9a5ELIHv+rz
+	IPyhjuoIqfAMI+60hoe1U1U27IhweRJLvNYpN7cTAqQ0o0KlM2VdD+/ibGw4UCrbJtLWLY
+	inuTJUAvrZhdYHuTfLNeogwgdoyl5SGN/dy3kNNRxVqcfza2kw+U/H2LlJBjtaANpZFTIZ
+	ptr78MOU90DKS42tb76OuG8X418bmY7SaqmPbyqibyrcTnWO7/ljKjMmuQI0HfaTAZd7Ho
+	gSP1o6so90u917yflugfQ7VOzMuRufMAcgTvFJSwBRyBFBjjIC3oXcfJ628ySQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1607724443;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=uE5KR5qlfz+ztx9s8pbRCB1Be+kxvrwztlDzBEoJCeU=;
+	b=6l4EGHeIGgEoz1BM8xIprj71LYQ/8TNyn+KsbwNoVJfPjiraGOnwYmma/niMdHbbcB5BbA
+	SooB9xEZT4EUdpBw==
+To: Andy Shevchenko <andy.shevchenko@gmail.com>
+Cc: LKML <linux-kernel@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>, "James E.J.
+ Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, afzal mohammed <afzal.mohd.ma@gmail.com>, linux-parisc@vger.kernel.org, Russell King <linux@armlinux.org.uk>, linux-arm Mailing List <linux-arm-kernel@lists.infradead.org>, Mark
+ Rutland <mark.rutland@arm.com>, Catalin Marinas <catalin.marinas@arm.com>,
+ Will Deacon <will@kernel.org>, Christian Borntraeger
+ <borntraeger@de.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
+ linux-s390@vger.kernel.org, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi
+ <rodrigo.vivi@intel.com>, David Airlie <airlied@linux.ie>, Daniel Vetter
+ <daniel@ffwll.ch>, Pankaj Bharadiya
+ <pankaj.laxminarayan.bharadiya@intel.com>, Chris Wilson
+ <chris@chris-wilson.co.uk>, Wambui Karuga <wambui.karugax@gmail.com>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, dri-devel
+ <dri-devel@lists.freedesktop.org>, Tvrtko Ursulin
+ <tvrtko.ursulin@linux.intel.com>, Linus Walleij
+ <linus.walleij@linaro.org>, "open list\:GPIO SUBSYSTEM"
+ <linux-gpio@vger.kernel.org>, Lee Jones <lee.jones@linaro.org>, Jon Mason
+ <jdmason@kudzu.us>, Dave Jiang <dave.jiang@intel.com>, Allen Hubbe
+ <allenbh@gmail.com>, linux-ntb@googlegroups.com, Lorenzo Pieralisi
+ <lorenzo.pieralisi@arm.com>, Rob Herring <robh@kernel.org>, Bjorn Helgaas
+ <bhelgaas@google.com>, Michal Simek <michal.simek@xilinx.com>, linux-pci
+ <linux-pci@vger.kernel.org>, Karthikeyan Mitran
+ <m.karthikeyan@mobiveil.co.in>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tariq
+ Toukan <tariqt@nvidia.com>, "David S. Miller" <davem@davemloft.net>, Jakub
+ Kicinski <kuba@kernel.org>, netdev <netdev@vger.kernel.org>, "open
+ list\:HFI1 DRIVER" <linux-rdma@vger.kernel.org>, Saeed Mahameed
+ <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Boris Ostrovsky
+ <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Subject: Re: [patch 03/30] genirq: Move irq_set_lockdep_class() to core
+In-Reply-To: <87h7osgifc.fsf@nanos.tec.linutronix.de>
+References: <20201210192536.118432146@linutronix.de> <20201210194042.860029489@linutronix.de> <CAHp75Vc-2OjE2uwvNRiyLMQ8GSN3P7SehKD-yf229_7ocaktiw@mail.gmail.com> <87h7osgifc.fsf@nanos.tec.linutronix.de>
+Date: Fri, 11 Dec 2020 23:07:22 +0100
+Message-ID: <87360cgfol.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Every single qdev property setter function manually checks
-dev->realized.  We can just check dev->realized inside
-qdev_property_set() instead.
+On Fri, Dec 11 2020 at 22:08, Thomas Gleixner wrote:
 
-The check is being added as a separate function
-(qdev_prop_allow_set()) because it will become a callback later.
+> On Fri, Dec 11 2020 at 19:53, Andy Shevchenko wrote:
+>
+>> On Thu, Dec 10, 2020 at 10:14 PM Thomas Gleixner <tglx@linutronix.de> wrote:
+>>>
+>>> irq_set_lockdep_class() is used from modules and requires irq_to_desc() to
+>>> be exported. Move it into the core code which lifts another requirement for
+>>> the export.
+>>
+>> ...
+>>
+>>> +       if (IS_ENABLED(CONFIG_LOCKDEP))
+>>> +               __irq_set_lockdep_class(irq, lock_class, request_class);
+>
+> You are right. Let me fix that.
 
-Reviewed-by: Stefan Berger <stefanb@linux.ibm.com>
-Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
----
-Changes v1 -> v2:
-* Removed unused variable at xen_block_set_vdev()
-* Redone patch after changes in the previous patches in the
-  series
----
-Cc: Stefan Berger <stefanb@linux.vnet.ibm.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Anthony Perard <anthony.perard@citrix.com>
-Cc: Paul Durrant <paul@xen.org>
-Cc: Kevin Wolf <kwolf@redhat.com>
-Cc: Max Reitz <mreitz@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: "Daniel P. Berrangé" <berrange@redhat.com>
-Cc: Eduardo Habkost <ehabkost@redhat.com>
-Cc: Cornelia Huck <cohuck@redhat.com>
-Cc: Halil Pasic <pasic@linux.ibm.com>
-Cc: Christian Borntraeger <borntraeger@de.ibm.com>
-Cc: Richard Henderson <rth@twiddle.net>
-Cc: David Hildenbrand <david@redhat.com>
-Cc: Thomas Huth <thuth@redhat.com>
-Cc: Matthew Rosato <mjrosato@linux.ibm.com>
-Cc: Alex Williamson <alex.williamson@redhat.com>
-Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Cc: Artyom Tarasenko <atar4qemu@gmail.com>
-Cc: qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org
-Cc: qemu-block@nongnu.org
-Cc: qemu-s390x@nongnu.org
----
- backends/tpm/tpm_util.c          |   6 --
- hw/block/xen-block.c             |   6 --
- hw/core/qdev-properties-system.c |  70 ----------------------
- hw/core/qdev-properties.c        | 100 ++++++-------------------------
- hw/s390x/css.c                   |   6 --
- hw/s390x/s390-pci-bus.c          |   6 --
- hw/vfio/pci-quirks.c             |   6 --
- target/sparc/cpu.c               |   6 --
- 8 files changed, 18 insertions(+), 188 deletions(-)
+No. I have to correct myself. You're wrong.
 
-diff --git a/backends/tpm/tpm_util.c b/backends/tpm/tpm_util.c
-index a5d997e7dc..39b45fa46d 100644
---- a/backends/tpm/tpm_util.c
-+++ b/backends/tpm/tpm_util.c
-@@ -46,16 +46,10 @@ static void get_tpm(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_tpm(Object *obj, Visitor *v, const char *name, void *opaque,
-                     Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     TPMBackend *s, **be = qdev_get_prop_ptr(obj, prop);
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 905e4acd97..bd1aef63a7 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -395,17 +395,11 @@ static int vbd_name_to_disk(const char *name, const char **endp,
- static void xen_block_set_vdev(Object *obj, Visitor *v, const char *name,
-                                void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     XenBlockVdev *vdev = qdev_get_prop_ptr(obj, prop);
-     char *str, *p;
-     const char *end;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-diff --git a/hw/core/qdev-properties-system.c b/hw/core/qdev-properties-system.c
-index 42529c3b65..f31aea3de1 100644
---- a/hw/core/qdev-properties-system.c
-+++ b/hw/core/qdev-properties-system.c
-@@ -94,11 +94,6 @@ static void set_drive_helper(Object *obj, Visitor *v, const char *name,
-     bool blk_created = false;
-     int ret;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -230,17 +225,11 @@ static void get_chr(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_chr(Object *obj, Visitor *v, const char *name, void *opaque,
-                     Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     CharBackend *be = qdev_get_prop_ptr(obj, prop);
-     Chardev *s;
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -311,18 +300,12 @@ static void get_mac(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_mac(Object *obj, Visitor *v, const char *name, void *opaque,
-                     Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     MACAddr *mac = qdev_get_prop_ptr(obj, prop);
-     int i, pos;
-     char *str;
-     const char *p;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -390,7 +373,6 @@ static void get_netdev(Object *obj, Visitor *v, const char *name,
- static void set_netdev(Object *obj, Visitor *v, const char *name,
-                        void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     NICPeers *peers_ptr = qdev_get_prop_ptr(obj, prop);
-     NetClientState **ncs = peers_ptr->ncs;
-@@ -398,11 +380,6 @@ static void set_netdev(Object *obj, Visitor *v, const char *name,
-     int queues, err = 0, i = 0;
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -469,18 +446,12 @@ static void get_audiodev(Object *obj, Visitor *v, const char* name,
- static void set_audiodev(Object *obj, Visitor *v, const char* name,
-                          void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     QEMUSoundCard *card = qdev_get_prop_ptr(obj, prop);
-     AudioState *state;
-     int err = 0;
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -582,11 +553,6 @@ static void set_blocksize(Object *obj, Visitor *v, const char *name,
-     uint64_t value;
-     Error *local_err = NULL;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_size(v, name, &value, errp)) {
-         return;
-     }
-@@ -686,7 +652,6 @@ static void get_reserved_region(Object *obj, Visitor *v, const char *name,
- static void set_reserved_region(Object *obj, Visitor *v, const char *name,
-                                 void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     ReservedRegion *rr = qdev_get_prop_ptr(obj, prop);
-     Error *local_err = NULL;
-@@ -694,11 +659,6 @@ static void set_reserved_region(Object *obj, Visitor *v, const char *name,
-     char *str;
-     int ret;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_str(v, name, &str, &local_err);
-     if (local_err) {
-         error_propagate(errp, local_err);
-@@ -754,17 +714,11 @@ const PropertyInfo qdev_prop_reserved_region = {
- static void set_pci_devfn(Object *obj, Visitor *v, const char *name,
-                           void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     int32_t value, *ptr = qdev_get_prop_ptr(obj, prop);
-     unsigned int slot, fn, n;
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, NULL)) {
-         if (!visit_type_int32(v, name, &value, errp)) {
-             return;
-@@ -848,7 +802,6 @@ static void get_pci_host_devaddr(Object *obj, Visitor *v, const char *name,
- static void set_pci_host_devaddr(Object *obj, Visitor *v, const char *name,
-                                  void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     PCIHostDeviceAddress *addr = qdev_get_prop_ptr(obj, prop);
-     char *str, *p;
-@@ -857,11 +810,6 @@ static void set_pci_host_devaddr(Object *obj, Visitor *v, const char *name,
-     unsigned long dom = 0, bus = 0;
-     unsigned int slot = 0, func = 0;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -972,16 +920,10 @@ static void get_prop_pcielinkspeed(Object *obj, Visitor *v, const char *name,
- static void set_prop_pcielinkspeed(Object *obj, Visitor *v, const char *name,
-                                    void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     PCIExpLinkSpeed *p = qdev_get_prop_ptr(obj, prop);
-     int speed;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_enum(v, name, &speed, prop->info->enum_table,
-                          errp)) {
-         return;
-@@ -1057,16 +999,10 @@ static void get_prop_pcielinkwidth(Object *obj, Visitor *v, const char *name,
- static void set_prop_pcielinkwidth(Object *obj, Visitor *v, const char *name,
-                                    void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     PCIExpLinkWidth *p = qdev_get_prop_ptr(obj, prop);
-     int width;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_enum(v, name, &width, prop->info->enum_table,
-                          errp)) {
-         return;
-@@ -1129,16 +1065,10 @@ static void get_uuid(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_uuid(Object *obj, Visitor *v, const char *name, void *opaque,
-                     Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     QemuUUID *uuid = qdev_get_prop_ptr(obj, prop);
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index b924f13d58..92f48ecbf2 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -24,6 +24,19 @@ void qdev_prop_set_after_realize(DeviceState *dev, const char *name,
-     }
- }
- 
-+/* returns: true if property is allowed to be set, false otherwise */
-+static bool qdev_prop_allow_set(Object *obj, const char *name,
-+                                Error **errp)
-+{
-+    DeviceState *dev = DEVICE(obj);
-+
-+    if (dev->realized) {
-+        qdev_prop_set_after_realize(dev, name, errp);
-+        return false;
-+    }
-+    return true;
-+}
-+
- void qdev_prop_allow_set_link_before_realize(const Object *obj,
-                                              const char *name,
-                                              Object *val, Error **errp)
-@@ -65,6 +78,11 @@ static void field_prop_set(Object *obj, Visitor *v, const char *name,
-                            void *opaque, Error **errp)
- {
-     Property *prop = opaque;
-+
-+    if (!qdev_prop_allow_set(obj, name, errp)) {
-+        return;
-+    }
-+
-     return prop->info->set(obj, v, name, opaque, errp);
- }
- 
-@@ -90,15 +108,9 @@ void qdev_propinfo_get_enum(Object *obj, Visitor *v, const char *name,
- void qdev_propinfo_set_enum(Object *obj, Visitor *v, const char *name,
-                             void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     int *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_enum(v, name, ptr, prop->info->enum_table, errp);
- }
- 
-@@ -148,15 +160,9 @@ static void prop_get_bit(Object *obj, Visitor *v, const char *name,
- static void prop_set_bit(Object *obj, Visitor *v, const char *name,
-                          void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     bool value;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_bool(v, name, &value, errp)) {
-         return;
-     }
-@@ -208,15 +214,9 @@ static void prop_get_bit64(Object *obj, Visitor *v, const char *name,
- static void prop_set_bit64(Object *obj, Visitor *v, const char *name,
-                            void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     bool value;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_bool(v, name, &value, errp)) {
-         return;
-     }
-@@ -245,15 +245,9 @@ static void get_bool(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_bool(Object *obj, Visitor *v, const char *name, void *opaque,
-                      Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     bool *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_bool(v, name, ptr, errp);
- }
- 
-@@ -278,15 +272,9 @@ static void get_uint8(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_uint8(Object *obj, Visitor *v, const char *name, void *opaque,
-                       Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint8_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_uint8(v, name, ptr, errp);
- }
- 
-@@ -323,15 +311,9 @@ static void get_uint16(Object *obj, Visitor *v, const char *name,
- static void set_uint16(Object *obj, Visitor *v, const char *name,
-                        void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint16_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_uint16(v, name, ptr, errp);
- }
- 
-@@ -356,15 +338,9 @@ static void get_uint32(Object *obj, Visitor *v, const char *name,
- static void set_uint32(Object *obj, Visitor *v, const char *name,
-                        void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint32_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_uint32(v, name, ptr, errp);
- }
- 
-@@ -380,15 +356,9 @@ void qdev_propinfo_get_int32(Object *obj, Visitor *v, const char *name,
- static void set_int32(Object *obj, Visitor *v, const char *name, void *opaque,
-                       Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     int32_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_int32(v, name, ptr, errp);
- }
- 
-@@ -420,15 +390,9 @@ static void get_uint64(Object *obj, Visitor *v, const char *name,
- static void set_uint64(Object *obj, Visitor *v, const char *name,
-                        void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint64_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_uint64(v, name, ptr, errp);
- }
- 
-@@ -444,15 +408,9 @@ static void get_int64(Object *obj, Visitor *v, const char *name,
- static void set_int64(Object *obj, Visitor *v, const char *name,
-                       void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     int64_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_int64(v, name, ptr, errp);
- }
- 
-@@ -495,16 +453,10 @@ static void get_string(Object *obj, Visitor *v, const char *name,
- static void set_string(Object *obj, Visitor *v, const char *name,
-                        void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     char **ptr = qdev_get_prop_ptr(obj, prop);
-     char *str;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-@@ -545,16 +497,10 @@ void qdev_propinfo_get_size32(Object *obj, Visitor *v, const char *name,
- static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
-                        Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint32_t *ptr = qdev_get_prop_ptr(obj, prop);
-     uint64_t value;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_size(v, name, &value, errp)) {
-         return;
-     }
-@@ -621,10 +567,6 @@ static void set_prop_arraylen(Object *obj, Visitor *v, const char *name,
-     const char *arrayname;
-     int i;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
-     if (*alenptr) {
-         error_setg(errp, "array size property %s may not be set more than once",
-                    name);
-@@ -864,15 +806,9 @@ static void get_size(Object *obj, Visitor *v, const char *name, void *opaque,
- static void set_size(Object *obj, Visitor *v, const char *name, void *opaque,
-                      Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint64_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     visit_type_size(v, name, ptr, errp);
- }
- 
-diff --git a/hw/s390x/css.c b/hw/s390x/css.c
-index 7a44320d12..496e2c5801 100644
---- a/hw/s390x/css.c
-+++ b/hw/s390x/css.c
-@@ -2372,18 +2372,12 @@ static void get_css_devid(Object *obj, Visitor *v, const char *name,
- static void set_css_devid(Object *obj, Visitor *v, const char *name,
-                           void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     CssDevId *dev_id = qdev_get_prop_ptr(obj, prop);
-     char *str;
-     int num, n1, n2;
-     unsigned int cssid, ssid, devid;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_str(v, name, &str, errp)) {
-         return;
-     }
-diff --git a/hw/s390x/s390-pci-bus.c b/hw/s390x/s390-pci-bus.c
-index 8b6be1197b..30511f620e 100644
---- a/hw/s390x/s390-pci-bus.c
-+++ b/hw/s390x/s390-pci-bus.c
-@@ -1338,16 +1338,10 @@ static void s390_pci_get_fid(Object *obj, Visitor *v, const char *name,
- static void s390_pci_set_fid(Object *obj, Visitor *v, const char *name,
-                          void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     S390PCIBusDevice *zpci = S390_PCI_DEVICE(obj);
-     Property *prop = opaque;
-     uint32_t *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_uint32(v, name, ptr, errp)) {
-         return;
-     }
-diff --git a/hw/vfio/pci-quirks.c b/hw/vfio/pci-quirks.c
-index 53569925a2..802979635c 100644
---- a/hw/vfio/pci-quirks.c
-+++ b/hw/vfio/pci-quirks.c
-@@ -1498,15 +1498,9 @@ static void set_nv_gpudirect_clique_id(Object *obj, Visitor *v,
-                                        const char *name, void *opaque,
-                                        Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
-     uint8_t value, *ptr = qdev_get_prop_ptr(obj, prop);
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_uint8(v, name, &value, errp)) {
-         return;
-     }
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index 92534bcd18..b730146bbe 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -798,17 +798,11 @@ static void sparc_get_nwindows(Object *obj, Visitor *v, const char *name,
- static void sparc_set_nwindows(Object *obj, Visitor *v, const char *name,
-                                void *opaque, Error **errp)
- {
--    DeviceState *dev = DEVICE(obj);
-     const int64_t min = MIN_NWINDOWS;
-     const int64_t max = MAX_NWINDOWS;
-     SPARCCPU *cpu = SPARC_CPU(obj);
-     int64_t value;
- 
--    if (dev->realized) {
--        qdev_prop_set_after_realize(dev, name, errp);
--        return;
--    }
--
-     if (!visit_type_int(v, name, &value, errp)) {
-         return;
-     }
--- 
-2.28.0
+The inline is evaluated in the compilation units which include that
+header and because the function declaration is unconditional it is
+happy.
 
+Now the optimizer stage makes the whole thing a NOOP if CONFIG_LOCKDEP=n
+and thereby drops the reference to the function which makes it not
+required for linking.
+
+So in the file where the function is implemented:
+
+#ifdef CONFIG_LOCKDEP
+void __irq_set_lockdep_class(....)
+{
+}
+#endif
+
+The whole block is either discarded because CONFIG_LOCKDEP is not
+defined or compile if it is defined which makes it available for the
+linker.
+
+And in the latter case the optimizer keeps the call in the inline (it
+optimizes the condition away because it's always true).
+
+So in both cases the compiler and the linker are happy and everything
+works as expected.
+
+It would fail if the header file had the following:
+
+#ifdef CONFIG_LOCKDEP
+void __irq_set_lockdep_class(....);
+#endif
+
+Because then it would complain about the missing function prototype when
+it evaluates the inline.
+
+Thanks,
+
+        tglx
 
