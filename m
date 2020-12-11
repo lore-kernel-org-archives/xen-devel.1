@@ -2,49 +2,45 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91860C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 05:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E83A2C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 05:10:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D3AF23E25
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 05:09:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D3AF23E25
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9D2B223E25
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 05:10:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9D2B223E25
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.49763.88603 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50109.88627 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knafx-0004kA-9Z; Fri, 11 Dec 2020 05:09:05 +0000
+	id 1knahb-0005f5-1C; Fri, 11 Dec 2020 05:10:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 49763.88603; Fri, 11 Dec 2020 05:09:05 +0000
+Received: by outflank-mailman (output) from mailman id 50109.88627; Fri, 11 Dec 2020 05:10:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knafx-0004k3-6W; Fri, 11 Dec 2020 05:09:05 +0000
-Received: by outflank-mailman (input) for mailman id 49763;
- Thu, 10 Dec 2020 19:48:37 +0000
+	id 1knaha-0005ey-SF; Fri, 11 Dec 2020 05:10:46 +0000
+Received: by outflank-mailman (input) for mailman id 50109;
+ Fri, 11 Dec 2020 05:10:45 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wOlC=FO=linux.intel.com=ville.syrjala@srs-us1.protection.inumbo.net>)
- id 1knRvZ-0000un-MH
- for xen-devel@lists.xenproject.org; Thu, 10 Dec 2020 19:48:37 +0000
-Received: from mga01.intel.com (unknown [192.55.52.88])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=XUOP=FP=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1knahZ-0005d2-JH
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 05:10:45 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ab5e9545-d521-4670-870c-f0eb8c2bab29;
- Thu, 10 Dec 2020 19:48:36 +0000 (UTC)
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Dec 2020 11:48:35 -0800
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by orsmga007.jf.intel.com with SMTP; 10 Dec 2020 11:48:24 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Thu, 10 Dec 2020 21:48:23 +0200
+ id bc0a885a-a840-4914-9d8f-436b4e632912;
+ Fri, 11 Dec 2020 05:10:44 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 89C2DAB91;
+ Fri, 11 Dec 2020 05:10:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,110 +52,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab5e9545-d521-4670-870c-f0eb8c2bab29
-IronPort-SDR: Nx7/L+qSs5ThlOXQ/aWPO/3NjhsyncLbEhNNbJObB5FwFT7XloKPmLy4/poBFCb74p+KqtCL5v
- OpkCtW/FSZ4Q==
-X-IronPort-AV: E=McAfee;i="6000,8403,9831"; a="192650837"
-X-IronPort-AV: E=Sophos;i="5.78,409,1599548400"; 
-   d="scan'208";a="192650837"
-IronPort-SDR: Qef2UfSDuwyPiJ27NUpAFZLQLjXKYRK609+0x1abl5RvYR7KCkszp/IICW7DO8jsBWdQpq5EWc
- XoQtIWeVTwmw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.78,409,1599548400"; 
-   d="scan'208";a="376070310"
-Date: Thu, 10 Dec 2020 21:48:23 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Thomas Gleixner <tglx@linutronix.de>
-Cc: LKML <linux-kernel@vger.kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	dri-devel@lists.freedesktop.org,
-	Chris Wilson <chris@chris-wilson.co.uk>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	netdev@vger.kernel.org, Will Deacon <will@kernel.org>,
-	Michal Simek <michal.simek@xilinx.com>,
-	Rob Herring <robh@kernel.org>, linux-s390@vger.kernel.org,
-	afzal mohammed <afzal.mohd.ma@gmail.com>,
-	Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-	Dave Jiang <dave.jiang@intel.com>, xen-devel@lists.xenproject.org,
-	Leon Romanovsky <leon@kernel.org>, linux-rdma@vger.kernel.org,
-	Marc Zyngier <maz@kernel.org>, Helge Deller <deller@gmx.de>,
-	Russell King <linux@armlinux.org.uk>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	linux-pci@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>,
-	Heiko Carstens <hca@linux.ibm.com>,
-	Wambui Karuga <wambui.karugax@gmail.com>,
-	Allen Hubbe <allenbh@gmail.com>, Juergen Gross <jgross@suse.com>,
-	intel-gfx@lists.freedesktop.org, linux-gpio@vger.kernel.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Lee Jones <lee.jones@linaro.org>,
-	linux-arm-kernel@lists.infradead.org,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	David Airlie <airlied@linux.ie>, linux-parisc@vger.kernel.org,
-	Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
-	Tariq Toukan <tariqt@nvidia.com>, Jon Mason <jdmason@kudzu.us>,
-	linux-ntb@googlegroups.com, Saeed Mahameed <saeedm@nvidia.com>,
-	"David S. Miller" <davem@davemloft.net>
-Subject: Re: [Intel-gfx] [patch 13/30] drm/i915/lpe_audio: Remove pointless
- irq_to_desc() usage
-Message-ID: <X9J7h+myHaraeoKH@intel.com>
-References: <20201210192536.118432146@linutronix.de>
- <20201210194043.862572239@linutronix.de>
+X-Inumbo-ID: bc0a885a-a840-4914-9d8f-436b4e632912
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1607663443; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Tw8WaYEedOoP6uhdqQDj4FZ0EAnAR9qHZSp5wafjsIg=;
+	b=RSe3GVINPA6mwnWqpxRj8C9UTL+BPcbllw0Jd3tlnuM7c4kwSeqEQEIxImNXBlC8vx+2u1
+	lA6EJ0XwdoFW1xEM2TtixXyMKKnxqwvVltg4iWOvd6RBHTgkMnSUT7RGpYUltKe435KCOq
+	6Dor5nBpZV8g2Lp2ly+q87J7HUENxLQ=
+Subject: Re: x86/ioapic: Cleanup the timer_works() irqflags mess
+To: Thomas Gleixner <tglx@linutronix.de>, Mark Rutland <mark.rutland@arm.com>
+Cc: Peter Zijlstra <peterz@infradead.org>, xen-devel@lists.xenproject.org,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, luto@kernel.org,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ "H. Peter Anvin" <hpa@zytor.com>, Deep Shah <sdeep@vmware.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <20201120114630.13552-1-jgross@suse.com>
+ <20201120114630.13552-6-jgross@suse.com>
+ <20201120115943.GD3021@hirez.programming.kicks-ass.net>
+ <20201209181514.GA14235@C02TD0UTHF1T.local>
+ <87tusuzu71.fsf@nanos.tec.linutronix.de>
+ <20201210111008.GB88655@C02TD0UTHF1T.local>
+ <87k0tpju47.fsf@nanos.tec.linutronix.de>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <0a90cfff-05d6-1475-43f8-e41b5af24281@suse.com>
+Date: Fri, 11 Dec 2020 06:10:42 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20201210194043.862572239@linutronix.de>
-X-Patchwork-Hint: comment
+In-Reply-To: <87k0tpju47.fsf@nanos.tec.linutronix.de>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="ut1CfDbO7XZTjsKp0jfE35exNGTBAXJ4U"
 
-On Thu, Dec 10, 2020 at 08:25:49PM +0100, Thomas Gleixner wrote:
-> Nothing uses the result and nothing should ever use it in driver code.
-> 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--ut1CfDbO7XZTjsKp0jfE35exNGTBAXJ4U
+Content-Type: multipart/mixed; boundary="FClLxLK0RQjd7JNbzYVWLfCZWmbD9gnXP";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Thomas Gleixner <tglx@linutronix.de>, Mark Rutland <mark.rutland@arm.com>
+Cc: Peter Zijlstra <peterz@infradead.org>, xen-devel@lists.xenproject.org,
+ x86@kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, luto@kernel.org,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ "H. Peter Anvin" <hpa@zytor.com>, Deep Shah <sdeep@vmware.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Message-ID: <0a90cfff-05d6-1475-43f8-e41b5af24281@suse.com>
+Subject: Re: x86/ioapic: Cleanup the timer_works() irqflags mess
+References: <20201120114630.13552-1-jgross@suse.com>
+ <20201120114630.13552-6-jgross@suse.com>
+ <20201120115943.GD3021@hirez.programming.kicks-ass.net>
+ <20201209181514.GA14235@C02TD0UTHF1T.local>
+ <87tusuzu71.fsf@nanos.tec.linutronix.de>
+ <20201210111008.GB88655@C02TD0UTHF1T.local>
+ <87k0tpju47.fsf@nanos.tec.linutronix.de>
+In-Reply-To: <87k0tpju47.fsf@nanos.tec.linutronix.de>
+
+--FClLxLK0RQjd7JNbzYVWLfCZWmbD9gnXP
+Content-Type: multipart/mixed;
+ boundary="------------3B73900FA14EEF59C60EECEC"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------3B73900FA14EEF59C60EECEC
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+On 10.12.20 21:15, Thomas Gleixner wrote:
+> Mark tripped over the creative irqflags handling in the IO-APIC timer
+> delivery check which ends up doing:
+>=20
+>          local_irq_save(flags);
+> 	local_irq_enable();
+>          local_irq_restore(flags);
+>=20
+> which triggered a new consistency check he's working on required for
+> replacing the POPF based restore with a conditional STI.
+>=20
+> That code is a historical mess and none of this is needed. Make it
+> straightforward use local_irq_disable()/enable() as that's all what is
+> required. It is invoked from interrupt enabled code nowadays.
+>=20
+> Reported-by: Mark Rutland <mark.rutland@arm.com>
 > Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> Cc: Jani Nikula <jani.nikula@linux.intel.com>
-> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>
-> Cc: Chris Wilson <chris@chris-wilson.co.uk>
-> Cc: Wambui Karuga <wambui.karugax@gmail.com>
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: dri-devel@lists.freedesktop.org
+> Tested-by: Mark Rutland <mark.rutland@arm.com>
 
-Reviewed-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 
-> ---
->  drivers/gpu/drm/i915/display/intel_lpe_audio.c |    4 ----
->  1 file changed, 4 deletions(-)
-> 
-> --- a/drivers/gpu/drm/i915/display/intel_lpe_audio.c
-> +++ b/drivers/gpu/drm/i915/display/intel_lpe_audio.c
-> @@ -297,13 +297,9 @@ int intel_lpe_audio_init(struct drm_i915
->   */
->  void intel_lpe_audio_teardown(struct drm_i915_private *dev_priv)
->  {
-> -	struct irq_desc *desc;
-> -
->  	if (!HAS_LPE_AUDIO(dev_priv))
->  		return;
->  
-> -	desc = irq_to_desc(dev_priv->lpe_audio.irq);
-> -
->  	lpe_audio_platdev_destroy(dev_priv);
->  
->  	irq_free_desc(dev_priv->lpe_audio.irq);
-> 
-> _______________________________________________
-> Intel-gfx mailing list
-> Intel-gfx@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/intel-gfx
 
--- 
-Ville Syrjälä
-Intel
+Juergen
+
+--------------3B73900FA14EEF59C60EECEC
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------3B73900FA14EEF59C60EECEC--
+
+--FClLxLK0RQjd7JNbzYVWLfCZWmbD9gnXP--
+
+--ut1CfDbO7XZTjsKp0jfE35exNGTBAXJ4U
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl/S/1IFAwAAAAAACgkQsN6d1ii/Ey8w
+Zwf9FLP8Fj1JNG2NYn58CzNrRiyr6YDBpKBiJh+uBmcJAAc34XAwkzDVUYbbaFsr12h2bICSlnJ8
+jEN0pu4X53sJVw2xxOEfx2HlGI/ksGGRhrAFARK/h8staI70tGsbSOHJQNJCbmZKHOn55OkNQR0H
+yA4TBnoai2gnYd1Tc96EnKJ40Pch1hg2X3C+9sWGqwd31dbv0wsnLeMOiORzwikM8mIVKrzutkCC
+p8AySw3U0kMObQPydcJO3Ub4msqzkccfByYDWWOCsEi+1kfIEYqv28eTTfRW5FMYpQF0VCRSkQec
+oU3arD7srQaZGLOwwClaEpgS3z5yk8VDOxX++d8Eiw==
+=eb6p
+-----END PGP SIGNATURE-----
+
+--ut1CfDbO7XZTjsKp0jfE35exNGTBAXJ4U--
 
