@@ -2,45 +2,47 @@ Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BE21C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7733C4361B
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:47:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A9FCD23F2B
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:44:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A9FCD23F2B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0A7D623F2B
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 10:47:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0A7D623F2B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50368.88986 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50373.88998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knfu9-0000nU-0a; Fri, 11 Dec 2020 10:44:05 +0000
+	id 1knfxM-0000wm-Gw; Fri, 11 Dec 2020 10:47:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50368.88986; Fri, 11 Dec 2020 10:44:04 +0000
+Received: by outflank-mailman (output) from mailman id 50373.88998; Fri, 11 Dec 2020 10:47:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knfu8-0000nN-Tx; Fri, 11 Dec 2020 10:44:04 +0000
-Received: by outflank-mailman (input) for mailman id 50368;
- Fri, 11 Dec 2020 10:44:04 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9HZb=FP=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1knfu8-0000nI-8Y
- for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 10:44:04 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e3b31482-37fe-4b26-b446-1148c34d401a;
- Fri, 11 Dec 2020 10:44:03 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 285D1AC94;
- Fri, 11 Dec 2020 10:44:02 +0000 (UTC)
+	id 1knfxM-0000wf-Dw; Fri, 11 Dec 2020 10:47:24 +0000
+Received: by outflank-mailman (input) for mailman id 50373;
+ Fri, 11 Dec 2020 10:47:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=b3T3=FP=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1knfxL-0000wa-85
+ for xen-devel@lists.xenproject.org; Fri, 11 Dec 2020 10:47:23 +0000
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id cfca412b-e517-43ac-89d2-b59cd233735d;
+ Fri, 11 Dec 2020 10:47:21 +0000 (UTC)
+Received: from sandettie.soc.lip6.fr (82-64-3-41.subs.proxad.net [82.64.3.41])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTPS id
+ 0BBAlDDN005781
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+ Fri, 11 Dec 2020 11:47:14 +0100 (MET)
+Received: by sandettie.soc.lip6.fr (Postfix, from userid 373)
+ id 233432E946C; Fri, 11 Dec 2020 11:47:08 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,142 +54,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3b31482-37fe-4b26-b446-1148c34d401a
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1607683442; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=n27DzJ9lj/58T4Dlyk07z/5g/H0Ws6ihMzbTX8GAOps=;
-	b=tSHxly/hrZ96yHIc1jT834Ej1qTU6u7G/TQ4vKV3bTrkysTMcD9MJFZdmChW0Yg+wAcvoe
-	o5W+JSDdQmJA8muKsTQdyYTdSwOZAyukFKTBYhpPCZqP/+GivpjHuu5OOa74bjHwjNmZ2x
-	WHFY8oT9bRG6hlKIj8BQJOIgUgx1IqA=
-Subject: Re: [PATCH v3] xen: add support for automatic debug key actions in
- case of crash
-To: Julien Grall <julien@xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
- <jgross@suse.com>
-References: <20201126080340.6154-1-jgross@suse.com>
- <22190c77-eb35-5b72-7d72-34800c3f052f@suse.com>
- <98c45abd-8796-088c-e2a6-9ad494beeb9e@xen.org>
- <59f126a3-f716-345b-b464-746e6156c15a@suse.com>
- <1e305cf6-aa14-54cc-a77d-88bb38ba4c6e@xen.org>
- <7271b2f4-816a-5541-5402-50ea29218d81@suse.com>
- <077f3e02-0e07-1549-cc41-62b42177e19c@suse.com>
- <699e48ea-8807-a1f3-d2b9-dc918913ede8@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <9f377d5e-da9c-1300-8010-099ea57b020c@suse.com>
-Date: Fri, 11 Dec 2020 11:44:01 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+X-Inumbo-ID: cfca412b-e517-43ac-89d2-b59cd233735d
+Date: Fri, 11 Dec 2020 11:47:08 +0100
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org
+Subject: Re: dom0 PV looping on search_pre_exception_table()
+Message-ID: <20201211104708.GD1423@antioche.eu.org>
+References: <20201209163049.GA6158@antioche.eu.org>
+ <30a71c9d-3eff-3727-9c61-e387b5bccc95@citrix.com>
+ <20201209185714.GS1469@antioche.eu.org>
+ <6c06abf1-7efe-f02c-536a-337a2704e265@citrix.com>
+ <20201210095139.GA455@antioche.eu.org>
+ <4c3bff12-821b-83fb-e054-61b07b97fa70@citrix.com>
+ <20201210170319.GG455@antioche.eu.org>
+ <ed06a0f4-8468-addf-2797-be3ba3a2d607@citrix.com>
+ <20201210173551.GJ455@antioche.eu.org>
+ <b60639d9-5c27-ab86-eb97-f8627b3b32d2@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <699e48ea-8807-a1f3-d2b9-dc918913ede8@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <b60639d9-5c27-ab86-eb97-f8627b3b32d2@citrix.com>
+X-Greylist: Sender succeeded STARTTLS authentication, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Fri, 11 Dec 2020 11:47:14 +0100 (MET)
 
-On 11.12.2020 11:22, Julien Grall wrote:
-> Hi,
+On Thu, Dec 10, 2020 at 09:01:12PM +0000, Andrew Cooper wrote:
+> I've repro'd the problem.
 > 
-> On 11/12/2020 07:24, Jan Beulich wrote:
->> On 11.12.2020 08:02, JÃ¼rgen GroÃŸ wrote:
->>> On 10.12.20 21:51, Julien Grall wrote:
->>>> Hi Jan,
->>>>
->>>> On 09/12/2020 14:29, Jan Beulich wrote:
->>>>> On 09.12.2020 13:11, Julien Grall wrote:
->>>>>> On 26/11/2020 11:20, Jan Beulich wrote:
->>>>>>> On 26.11.2020 09:03, Juergen Gross wrote:
->>>>>>>> When the host crashes it would sometimes be nice to have additional
->>>>>>>> debug data available which could be produced via debug keys, but
->>>>>>>> halting the server for manual intervention might be impossible due to
->>>>>>>> the need to reboot/kexec rather sooner than later.
->>>>>>>>
->>>>>>>> Add support for automatic debug key actions in case of crashes which
->>>>>>>> can be activated via boot- or runtime-parameter.
->>>>>>>>
->>>>>>>> Depending on the type of crash the desired data might be different, so
->>>>>>>> support different settings for the possible types of crashes.
->>>>>>>>
->>>>>>>> The parameter is "crash-debug" with the following syntax:
->>>>>>>>
->>>>>>>>  Â Â Â  crash-debug-<type>=<string>
->>>>>>>>
->>>>>>>> with <type> being one of:
->>>>>>>>
->>>>>>>>  Â Â Â  panic, hwdom, watchdog, kexeccmd, debugkey
->>>>>>>>
->>>>>>>> and <string> a sequence of debug key characters with '+' having the
->>>>>>>> special semantics of a 10 millisecond pause.
->>>>>>>>
->>>>>>>> So "crash-debug-watchdog=0+0qr" would result in special output in case
->>>>>>>> of watchdog triggered crash (dom0 state, 10 ms pause, dom0 state,
->>>>>>>> domain info, run queues).
->>>>>>>>
->>>>>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
->>>>>>>> ---
->>>>>>>> V2:
->>>>>>>> - switched special character '.' to '+' (Jan Beulich)
->>>>>>>> - 10 ms instead of 1 s pause (Jan Beulich)
->>>>>>>> - added more text to the boot parameter description (Jan Beulich)
->>>>>>>>
->>>>>>>> V3:
->>>>>>>> - added const (Jan Beulich)
->>>>>>>> - thorough test of crash reason parameter (Jan Beulich)
->>>>>>>> - kexeccmd case should depend on CONFIG_KEXEC (Jan Beulich)
->>>>>>>> - added dummy get_irq_regs() helper on Arm
->>>>>>>>
->>>>>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
->>>>>>>
->>>>>>> Except for the Arm aspect, where I'm not sure using
->>>>>>> guest_cpu_user_regs() is correct in all cases,
->>>>>>
->>>>>> I am not entirely sure to understand what get_irq_regs() is supposed to
->>>>>> returned on x86. Is it the registers saved from the most recent
->>>>>> exception?
->>>>>
->>>>> An interrupt (not an exception) sets the underlying per-CPU
->>>>> variable, such that interested parties will know the real
->>>>> context is not guest or "normal" Xen code, but an IRQ.
->>>>
->>>> Thanks for the explanation. I am a bit confused to why we need to give a
->>>> regs to handle_keypress() because no-one seems to use it. Do you have an
->>>> explanation?
->>>
->>> dump_registers() (key 'd') is using it.
->>>
->>>>
->>>> To add to the confusion, it looks like that get_irqs_regs() may return
->>>> NULL. So sometimes we may pass guest_cpu_regs() (which may contain
->>>> garbagge or a set too far).
->>>
->>> I guess this is a best effort approach.
->>
->> Indeed. If there are ways to make it "more best", we should of
->> course follow them. (Except before Dom0 starts, I'm afraid I
->> don't see though where garbage would come from. And even then,
->> just like for the idle vCPU-s, it shouldn't really be garbage,
->> or else this suggests missing initialization somewhere.)
+> When I modify Xen to explicitly demand-map the LDT in the MMUEXT_SET_LDT
+> hypercall, everything works fine.
 > 
-> So I decided to mimick what 'd' does to see what happen if this is 
-> called early boot.
+> Specifically, this delta:
+> 
+> diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+> index 723cc1070f..71a791d877 100644
+> --- a/xen/arch/x86/mm.c
+> +++ b/xen/arch/x86/mm.c
+> @@ -3742,12 +3742,31 @@ long do_mmuext_op(
+>              else if ( (curr->arch.pv.ldt_ents != ents) ||
+>                        (curr->arch.pv.ldt_base != ptr) )
+>              {
+> +                unsigned int err = 0, tmp;
+> +
+>                  if ( pv_destroy_ldt(curr) )
+>                      flush_tlb_local();
+>  
+>                  curr->arch.pv.ldt_base = ptr;
+>                  curr->arch.pv.ldt_ents = ents;
+>                  load_LDT(curr);
+> +
+> +                printk("Probe new LDT\n");
+> +                asm volatile (
+> +                    "mov %%es, %[tmp];\n\t"
+> +                    "1: mov %[sel], %%es;\n\t"
+> +                    "mov %[tmp], %%es;\n\t"
+> +                    "2:\n\t"
+> +                    ".section .fixup,\"ax\"\n"
+> +                    "3: mov $1, %[err];\n\t"
+> +                    "jmp 2b\n\t"
+> +                    ".previous\n\t"
+> +                    _ASM_EXTABLE(1b, 3b)
+> +                    : [err] "+r" (err),
+> +                      [tmp] "=&r" (tmp)
+> +                    : [sel] "r" (0x3f)
+> +                    : "memory");
+> +                printk("  => err %u\n", err);
+>              }
+>              break;
+>          }
+> 
+> Which stashes %es, explicitly loads init's %ss selector to trigger the
+> #PF and Xen's lazy mapping, then restores %es.
 
-But this isn't really relevant here: If you need to deal with a
-crash during boot, just don't specify these command line options
-(and that's on top of JÃ¼rgen's indication that 'd' may not be
-very useful to specify here anyway, albeit now that I think
-about this I'm not so sure anymore - panic() only logs the local
-CPUs registers iirc, while 'd' would log everyone's). Of course
-JÃ¼rgen could go and limit honoring of the option to sufficiently
-high SYS_STATE_*. In particular at least the x86 crash you've
-observed is - afaict - from the is_idle_vcpu(current) check in
-dump_execstate(), which requires init_idle_domain() to have run
-before.
+Yes, this works for dom0 too, I have it running multiuser
 
-Jan
+> [...]
+> 
+> Presumably you've got no Meltdown mitigations going on within the NetBSD
+> kernel?  (I suspect not, seeing as changing Xen changes the behaviour,
+> but it is worth asking).
+
+No, there's no Meltdown mitigations for PV in NetBSD. as I see it,
+for amd64 at last, the Xen kernel has to do it anyway, so it's not usefull
+to implement it in the guest's kernel. Did I miss something ?
+
+-- 
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
