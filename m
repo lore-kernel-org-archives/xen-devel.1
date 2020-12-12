@@ -1,49 +1,44 @@
-Return-Path: <SRS0=Z24W=FP=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=zDgU=FQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DC5AC433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 23:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8747C433FE
+	for <xen-devel@archiver.kernel.org>; Sat, 12 Dec 2020 00:46:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2B4B7221E3
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Dec 2020 23:57:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B4B7221E3
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 670FA2064A
+	for <xen-devel@archiver.kernel.org>; Sat, 12 Dec 2020 00:46:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 670FA2064A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.50974.89860 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.50995.89891 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knsHs-0001FM-Uk; Fri, 11 Dec 2020 23:57:24 +0000
+	id 1knt34-0006vj-2y; Sat, 12 Dec 2020 00:46:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 50974.89860; Fri, 11 Dec 2020 23:57:24 +0000
+Received: by outflank-mailman (output) from mailman id 50995.89891; Sat, 12 Dec 2020 00:46:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1knsHs-0001FF-RG; Fri, 11 Dec 2020 23:57:24 +0000
-Received: by outflank-mailman (input) for mailman id 50974;
- Fri, 11 Dec 2020 23:57:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1knsHr-0001F7-KX; Fri, 11 Dec 2020 23:57:23 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1knsHr-00035Y-8V; Fri, 11 Dec 2020 23:57:23 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1knsHr-0005or-1v; Fri, 11 Dec 2020 23:57:23 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1knsHr-0001pa-1N; Fri, 11 Dec 2020 23:57:23 +0000
+	id 1knt33-0006vc-VH; Sat, 12 Dec 2020 00:46:09 +0000
+Received: by outflank-mailman (input) for mailman id 50995;
+ Sat, 12 Dec 2020 00:46:09 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=LQi2=FQ=linaro.org=linus.walleij@srs-us1.protection.inumbo.net>)
+ id 1knt33-0006vX-4M
+ for xen-devel@lists.xenproject.org; Sat, 12 Dec 2020 00:46:09 +0000
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4e356da6-78e4-4518-9378-652cf0adb003;
+ Sat, 12 Dec 2020 00:46:05 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id o17so12969551lfg.4
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Dec 2020 16:46:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,196 +50,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Message-Id:Subject:To;
-	bh=3ld2xvypCZxJvMWa5rduiip4qnouATZwstt2kV2XV20=; b=QE6z1orn8Y8oMHCYN1AAcsGkTY
-	CqDnzEW3dt5JBnMt5uAJ4Dc6Fanc+f/9jXn3yVieIfmcSU/NgxS2DKK/VUYtGp2xQzKcCM/Mqcxpx
-	WyFSzWYhBRcpZIoOZ/p1I4xdN4V0P+qxIyn4093X8d2sf+cHd8W+85/uqCNee/sct2dY=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Subject: [ovmf bisection] complete test-amd64-amd64-xl-qemuu-ovmf-amd64
-Message-Id: <E1knsHr-0001pa-1N@osstest.test-lab.xenproject.org>
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 11 Dec 2020 23:57:23 +0000
+X-Inumbo-ID: 4e356da6-78e4-4518-9378-652cf0adb003
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=1p8BkEtCdcNBP/TpCqa88TfNrEdwTBnXM61elkmQDlU=;
+        b=vPmJzs+nnMzMYiLeSl4C70AwwAUmtSXcRtz7EHFhXOG3+HSYoFdEGzQYdbnIfuLhe1
+         cpLA6/bKDco/ZW56K0yojauLy12p9RMJ4MYQUMAZkQKn1JGQikvuaZfR0PCAwR/VHwqu
+         l8KSlmgfW9XQH81QbMWcZWDg6fTfP5u9gInsHFToPISthtmCvix2Zi4MyAVk8WOEDUbJ
+         6rVaVkrA8lMaHHNzl8tzPLP3FKzwRwCbx4UWePv66IKRrK3BWVszh2/HuHa0/BXzK05/
+         +RmxfJa60vjGUHEMlcdmB6LQFBStfB7tIZX79j1mfET935nYYecl+y81TGJ83zzfgTnD
+         hTzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=1p8BkEtCdcNBP/TpCqa88TfNrEdwTBnXM61elkmQDlU=;
+        b=nbxWiA5Aef52js6Bi4Q/c0Z2LNkPj1Gn8iMf4MBWHlBaVoInSrcFyqwIJ+BAFgcmVc
+         4ju4mmPY9IGTMxyATXutHFp7KcqBlb6dMgk3oCNi4/WKcoO4vkxmFskTHpYAZXnR8/dz
+         G48xowDq78JLNDg9jVae6EjjK/aK73L0eP7QAa6g3h8Yo0mZ0sNNQdWhtAHprNDGTst7
+         BNrj9i83Mc9m8+QTJ730w7OmpCPqfU1KoIddimcVHvfVO7ci2dfIZhGxCnULaIuMl9w+
+         WrnNtf5dC3UzYJIz2C6LwVr5YkzTG74Bs4J/XwCOddd+ENUoPo+HUs5A921/7ZpmzJkk
+         QV4g==
+X-Gm-Message-State: AOAM533/Z1SDCokQGKmqCpNOxESdw7w6DcM6j3WAZZYWAF79QdzOe4OQ
+	vLs0P1mwygNTxF0oJ7m45ftighCyRv1d8om2g92Q/Q==
+X-Google-Smtp-Source: ABdhPJw+G3KfJG3M7IoDnPiDCepv2YgkNV/jArpapqMifWmjCRwgJbTiMDpguzIYWZxJHM0zdf1udksfd+uvUSH+FdI=
+X-Received: by 2002:a05:651c:205b:: with SMTP id t27mr2692550ljo.368.1607733964618;
+ Fri, 11 Dec 2020 16:46:04 -0800 (PST)
+MIME-Version: 1.0
+References: <20201210192536.118432146@linutronix.de> <20201210194044.065003856@linutronix.de>
+In-Reply-To: <20201210194044.065003856@linutronix.de>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Sat, 12 Dec 2020 01:45:53 +0100
+Message-ID: <CACRpkdbKZzaTq+Am6q38Ya5wuUjiMbLE5g2i8bb_mJEWTkXgCg@mail.gmail.com>
+Subject: Re: [patch 15/30] pinctrl: nomadik: Use irq_has_action()
+To: Thomas Gleixner <tglx@linutronix.de>
+Cc: LKML <linux-kernel@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Marc Zyngier <maz@kernel.org>, Linux ARM <linux-arm-kernel@lists.infradead.org>, 
+	"open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>, 
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
+	afzal mohammed <afzal.mohd.ma@gmail.com>, linux-parisc@vger.kernel.org, 
+	Russell King <linux@armlinux.org.uk>, Mark Rutland <mark.rutland@arm.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
+	Christian Borntraeger <borntraeger@de.ibm.com>, Heiko Carstens <hca@linux.ibm.com>, linux-s390@vger.kernel.org, 
+	Jani Nikula <jani.nikula@linux.intel.com>, 
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, 
+	David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, 
+	Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>, 
+	Chris Wilson <chris@chris-wilson.co.uk>, Wambui Karuga <wambui.karugax@gmail.com>, 
+	intel-gfx <intel-gfx@lists.freedesktop.org>, 
+	"open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>, 
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Lee Jones <lee.jones@linaro.org>, 
+	Jon Mason <jdmason@kudzu.us>, Dave Jiang <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>, 
+	linux-ntb@googlegroups.com, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>, 
+	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Michal Simek <michal.simek@xilinx.com>, linux-pci <linux-pci@vger.kernel.org>, 
+	Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+	Tariq Toukan <tariqt@nvidia.com>, "David S. Miller" <davem@davemloft.net>, 
+	Jakub Kicinski <kuba@kernel.org>, netdev <netdev@vger.kernel.org>, linux-rdma@vger.kernel.org, 
+	Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
 
-branch xen-unstable
-xenbranch xen-unstable
-job test-amd64-amd64-xl-qemuu-ovmf-amd64
-testid debian-hvm-install
+On Thu, Dec 10, 2020 at 8:42 PM Thomas Gleixner <tglx@linutronix.de> wrote:
 
-Tree: linux git://xenbits.xen.org/linux-pvops.git
-Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
-Tree: ovmf https://github.com/tianocore/edk2.git
-Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-Tree: seabios git://xenbits.xen.org/osstest/seabios.git
-Tree: xen git://xenbits.xen.org/xen.git
+> Let the core code do the fiddling with irq_desc.
+>
+> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Linus Walleij <linus.walleij@linaro.org>
+> Cc: linux-arm-kernel@lists.infradead.org
+> Cc: linux-gpio@vger.kernel.org
 
-*** Found and reproduced problem changeset ***
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
 
-  Bug is in tree:  ovmf https://github.com/tianocore/edk2.git
-  Bug introduced:  cee5b0441af39dd6f76cc4e0447a1c7f788cbb00
-  Bug not present: 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970
-  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/157448/
+I suppose you will funnel this directly to Torvalds, else tell me and
+I'll apply it to my tree.
 
-
-  commit cee5b0441af39dd6f76cc4e0447a1c7f788cbb00
-  Author: Guo Dong <guo.dong@intel.com>
-  Date:   Wed Dec 2 14:18:18 2020 -0700
-  
-      UefiCpuPkg/CpuDxe: Fix boot error
-      
-      REF: https://bugzilla.tianocore.org/show_bug.cgi?id=3084
-      
-      When DXE drivers are dispatched above 4GB memory and
-      the system is already in 64bit mode, the address
-      setCodeSelectorLongJump in stack will be override
-      by parameter. so change to use 64bit address and
-      jump to qword address.
-      
-      Signed-off-by: Guo Dong <guo.dong@intel.com>
-      Reviewed-by: Ray Ni <ray.ni@intel.com>
-      Reviewed-by: Eric Dong <eric.dong@intel.com>
-
-
-For bisection revision-tuple graph see:
-   http://logs.test-lab.xenproject.org/osstest/results/bisect/ovmf/test-amd64-amd64-xl-qemuu-ovmf-amd64.debian-hvm-install.html
-Revision IDs in each graph node refer, respectively, to the Trees above.
-
-----------------------------------------
-Running cs-bisection-step --graph-out=/home/logs/results/bisect/ovmf/test-amd64-amd64-xl-qemuu-ovmf-amd64.debian-hvm-install --summary-out=tmp/157448.bisection-summary --basis-template=157345 --blessings=real,real-bisect,real-retry ovmf test-amd64-amd64-xl-qemuu-ovmf-amd64 debian-hvm-install
-Searching for failure / basis pass:
- 157416 fail [host=pinot0] / 157394 [host=elbling1] 157390 [host=elbling0] 157383 [host=albana0] 157366 [host=godello1] 157354 [host=godello0] 157348 [host=fiano0] 157345 [host=huxelrebe0] 157338 [host=chardonnay1] 157333 [host=chardonnay0] 157323 [host=rimava1] 157255 [host=huxelrebe1] 157214 [host=elbling1] 157204 [host=godello0] 157194 [host=elbling0] 157191 [host=fiano1] 157184 [host=albana0] 157178 [host=albana1] 157167 [host=godello1] 157117 [host=pinot1] 157104 [host=huxelrebe1] 157060 [h\
- ost=huxelrebe0] 157055 [host=godello0] 157042 ok.
-Failure / basis pass flights: 157416 / 157042
-(tree with no url: minios)
-Tree: linux git://xenbits.xen.org/linux-pvops.git
-Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
-Tree: ovmf https://github.com/tianocore/edk2.git
-Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-Tree: seabios git://xenbits.xen.org/osstest/seabios.git
-Tree: xen git://xenbits.xen.org/xen.git
-Latest c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 d4633b36b94f7b4a1f41901657cbbff452173d35 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
-Basis pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 872f953262d68a11da7bc2fb3ded16df234b8700 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 181f2c224ccd0a2900d6ae94ec390a546731f593
-Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/linux-pvops.git#c3038e718a19fc596f7b1baba0f83d5146dc7784-c3038e718a19fc596f7b1baba0f83d5146dc7784 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 https://github.com/tianocore/edk2.git#872f953262d68a11da7bc2fb3ded16df234b8700-d4633b36b94f7b4a1f41901657cbbff452173d35 git://xenbits.xen.org/qemu-xen-traditional.git#3d273dd05e51e5a1ffba3d98c743\
- 7ee84e8f8764-3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 git://xenbits.xen.org/qemu-xen.git#7ea428895af2840d85c524f0bd11a38aac308308-7ea428895af2840d85c524f0bd11a38aac308308 git://xenbits.xen.org/osstest/seabios.git#748d619be3282fba35f99446098ac2d0579f6063-748d619be3282fba35f99446098ac2d0579f6063 git://xenbits.xen.org/xen.git#181f2c224ccd0a2900d6ae94ec390a546731f593-777e3590f154e6a8af560dd318b9465fa168db20
-Loaded 10001 nodes in revision graph
-Searching for test results:
- 157042 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 872f953262d68a11da7bc2fb3ded16df234b8700 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 181f2c224ccd0a2900d6ae94ec390a546731f593
- 157055 [host=godello0]
- 157060 [host=huxelrebe0]
- 157104 [host=huxelrebe1]
- 157117 [host=pinot1]
- 157167 [host=godello1]
- 157178 [host=albana1]
- 157184 [host=albana0]
- 157191 [host=fiano1]
- 157194 [host=elbling0]
- 157204 [host=godello0]
- 157214 [host=elbling1]
- 157255 [host=huxelrebe1]
- 157323 [host=rimava1]
- 157333 [host=chardonnay0]
- 157338 [host=chardonnay1]
- 157345 [host=huxelrebe0]
- 157348 [host=fiano0]
- 157354 [host=godello0]
- 157366 [host=godello1]
- 157383 [host=albana0]
- 157390 [host=elbling0]
- 157394 [host=elbling1]
- 157399 []
- 157402 []
- 157406 []
- 157410 []
- 157412 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 d4633b36b94f7b4a1f41901657cbbff452173d35 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157415 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 872f953262d68a11da7bc2fb3ded16df234b8700 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 181f2c224ccd0a2900d6ae94ec390a546731f593
- 157419 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 d4633b36b94f7b4a1f41901657cbbff452173d35 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157427 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 97e2b622d1f32ba35194dbca104c3bf918bf3271 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 728acba1ba4ad6f9b69fd6929362a9750fe4dbe8
- 157432 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157416 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 d4633b36b94f7b4a1f41901657cbbff452173d35 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157434 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 c5d970a01e76c1a20f6bb009b32e479ad2444548 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157436 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 d315bd2286cde306f1ef5256026038e610505cca 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157440 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 f95e80d832e923046c92cd6f0b8208cec147138e 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157441 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 cee5b0441af39dd6f76cc4e0447a1c7f788cbb00 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157444 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157445 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 cee5b0441af39dd6f76cc4e0447a1c7f788cbb00 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157446 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
- 157448 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 cee5b0441af39dd6f76cc4e0447a1c7f788cbb00 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
-Searching for interesting versions
- Result found: flight 157042 (pass), for basis pass
- For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20, results HASH(0x55d11c590470) HASH(0x55d11c58de68) HASH(0x55d11c598938) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1\
- e6a472b0eb9558310b518f0dfcd8860 97e2b622d1f32ba35194dbca104c3bf918bf3271 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 728acba1ba4ad6f9b69fd6929362a9750fe4dbe8, results HASH(0x55d11c592c20) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 872f953262d68a11da7bc2fb3ded16df234b8700 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0\
- bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 181f2c224ccd0a2900d6ae94ec390a546731f593, results HASH(0x55d11c5970b0) HASH(0x55d11c5953a8) Result found: flight 157412 (fail), for basis failure (at ancestor ~5611)
- Repro found: flight 157415 (pass), for basis pass
- Repro found: flight 157416 (fail), for basis failure
- 0 revisions at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 7ea428895af2840d85c524f0bd11a38aac308308 748d619be3282fba35f99446098ac2d0579f6063 777e3590f154e6a8af560dd318b9465fa168db20
-No revisions left to test, checking graph state.
- Result found: flight 157432 (pass), for last pass
- Result found: flight 157441 (fail), for first failure
- Repro found: flight 157444 (pass), for last pass
- Repro found: flight 157445 (fail), for first failure
- Repro found: flight 157446 (pass), for last pass
- Repro found: flight 157448 (fail), for first failure
-
-*** Found and reproduced problem changeset ***
-
-  Bug is in tree:  ovmf https://github.com/tianocore/edk2.git
-  Bug introduced:  cee5b0441af39dd6f76cc4e0447a1c7f788cbb00
-  Bug not present: 8e4cb8fbceb84b66b3b2fc45b9e93d70f732e970
-  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/157448/
-
-
-  commit cee5b0441af39dd6f76cc4e0447a1c7f788cbb00
-  Author: Guo Dong <guo.dong@intel.com>
-  Date:   Wed Dec 2 14:18:18 2020 -0700
-  
-      UefiCpuPkg/CpuDxe: Fix boot error
-      
-      REF: https://bugzilla.tianocore.org/show_bug.cgi?id=3084
-      
-      When DXE drivers are dispatched above 4GB memory and
-      the system is already in 64bit mode, the address
-      setCodeSelectorLongJump in stack will be override
-      by parameter. so change to use 64bit address and
-      jump to qword address.
-      
-      Signed-off-by: Guo Dong <guo.dong@intel.com>
-      Reviewed-by: Ray Ni <ray.ni@intel.com>
-      Reviewed-by: Eric Dong <eric.dong@intel.com>
-
-Revision graph left in /home/logs/results/bisect/ovmf/test-amd64-amd64-xl-qemuu-ovmf-amd64.debian-hvm-install.{dot,ps,png,html,svg}.
-----------------------------------------
-157448: tolerable ALL FAIL
-
-flight 157448 ovmf real-bisect [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157448/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed,
-including tests which could not be run:
- test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail baseline untested
-
-
-jobs:
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
+Yours,
+Linus Walleij
 
