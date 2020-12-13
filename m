@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A102C433E9
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3368C433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EF6D620784
+	by mail.kernel.org (Postfix) with ESMTPS id A0B7720784
 	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:59:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF6D620784
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0B7720784
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61608.108481 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61618.108505 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYoh-00020p-SI; Mon, 04 Jan 2021 22:59:11 +0000
+	id 1kwYoj-00023q-MG; Mon, 04 Jan 2021 22:59:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61608.108481; Mon, 04 Jan 2021 22:59:11 +0000
+Received: by outflank-mailman (output) from mailman id 61618.108505; Mon, 04 Jan 2021 22:59:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYoh-00020i-Ni; Mon, 04 Jan 2021 22:59:11 +0000
-Received: by outflank-mailman (input) for mailman id 61608;
- Mon, 04 Jan 2021 22:59:10 +0000
+	id 1kwYoj-00023e-GA; Mon, 04 Jan 2021 22:59:13 +0000
+Received: by outflank-mailman (input) for mailman id 61618;
+ Mon, 04 Jan 2021 22:59:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Wh7t=GH=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kwYjH-0000oY-Vq
- for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:53:36 +0000
+ id 1kwYid-0000oY-UU
+ for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:52:55 +0000
 Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 21118051-e2b3-41c1-a8c5-e610e60ebd68;
- Mon, 04 Jan 2021 22:53:05 +0000 (UTC)
+ id 0b44001d-3b0d-4343-ad88-190b0f2e10c3;
+ Mon, 04 Jan 2021 22:52:36 +0000 (UTC)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MqumN071518
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MqR80071482
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Mon, 4 Jan 2021 17:53:02 -0500 (EST) (envelope-from ehem@m5p.com)
+ Mon, 4 Jan 2021 17:52:33 -0500 (EST) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 104MqulQ071517;
- Mon, 4 Jan 2021 14:52:56 -0800 (PST) (envelope-from ehem)
+ by m5p.com (8.15.2/8.15.2/Submit) id 104MqRWR071481;
+ Mon, 4 Jan 2021 14:52:27 -0800 (PST) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,8 +55,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 21118051-e2b3-41c1-a8c5-e610e60ebd68
-Message-Id: <7335199fc01d8dc6bf524cd764ed8e9107066380.1608663694.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 0b44001d-3b0d-4343-ad88-190b0f2e10c3
+Message-Id: <73e9c064c46da42fcd6cf30372049eceb0fc404f.1608663694.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1608663694.git.ehem+xen@m5p.com>
 References: <cover.1608663694.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -64,63 +64,86 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Date: Sat, 19 Dec 2020 23:43:08 -0800
-Subject: [WIP PATCH 16/16] WIP: tools/xl: Enhance "vm-list" command
+Date: Sat, 12 Dec 2020 20:42:33 -0800
+Subject: [WIP PATCH 12/16] WIP: UNTESTED: tools/xl: Replace remaining options
+ with format()
 
-Add several features to specify output.  Allow omitting potentially
-unneeded lines and add argument for exact line format.
+format() is meant to be a powerful tool, sweep the remaining bits
+away.  Unfortunately I am unable to test this portion.
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/xl/xl_list.c | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+ tools/xl/xl_list.c | 44 ++++++++------------------------------------
+ 1 file changed, 8 insertions(+), 36 deletions(-)
 
 diff --git a/tools/xl/xl_list.c b/tools/xl/xl_list.c
-index 58809aa10b..ef44466017 100644
+index 10d076864e..ee20d2feee 100644
 --- a/tools/xl/xl_list.c
 +++ b/tools/xl/xl_list.c
-@@ -500,18 +500,28 @@ int main_list(int argc, char **argv)
- int main_vm_list(int argc, char **argv)
- {
-     const char *formatstr = "%u %5i %n\n";
-+    bool dom0 = true;
-+    bool header = true;
-     int opt;
-     static const struct option opts[] = {
-         {"format", 0, 0, 'F'},
-+        {"no-domain0", 0, 0, '0'},
-+        {"no-header", 0, 0, 'H'},
-     };
+@@ -371,56 +371,28 @@ static void list_domains(bool verbose, bool context, bool claim, bool numa,
+     int i;
+     const char lead[] = "%-40n %5i %5m %5v     %s  %8.1t";
  
-     libxl_vminfo *info;
-     int nb_vm, i;
- 
--    SWITCH_FOREACH_OPT(opt, "F:", opts, "vm-list", 0) {
-+    SWITCH_FOREACH_OPT(opt, "0F:H", opts, "vm-list", 0) {
-+    case '0':
-+        dom0 = false;
-+        break;
-     case 'F':
-         formatstr = optarg;
-         break;
-+    case 'H':
-+        header = false;
-+        break;
+-    libxl_bitmap nodemap;
+-    libxl_physinfo physinfo;
+-
+-    libxl_bitmap_init(&nodemap);
+-    libxl_physinfo_init(&physinfo);
+-
+     format(formats, lead, NULL);
+     if (verbose) {
+         format(formats, " %u %r %16l", NULL);
+     } else if (context) format(formats, " %16l", NULL);
+-    if (claim) printf("  Claimed");
+-    if (cpupool) printf("         Cpupool");
+-    if (numa) {
+-        if (libxl_node_bitmap_alloc(ctx, &nodemap, 0)) {
+-            fprintf(stderr, "libxl_node_bitmap_alloc_failed.\n");
+-            exit(EXIT_FAILURE);
+-        }
+-        if (libxl_get_physinfo(ctx, &physinfo) != 0) {
+-            fprintf(stderr, "libxl_physinfo failed.\n");
+-            libxl_bitmap_dispose(&nodemap);
+-            exit(EXIT_FAILURE);
+-        }
+-
+-        printf(" NODE Affinity");
+-    }
++    if (claim) format(formats, " %5c", NULL);
++    if (cpupool) format(formats, " %16p", NULL);
++    if (numa) format(formats, " %A", NULL);
+     printf("\n");
+     for (i = 0; i < nb_domain; i++) {
+         format(formats, lead, info + i);
+         if (verbose)
+             format(formats, " %u %r", info + i);
+         if (claim)
+-            printf(" %5lu", (unsigned long)info[i].outstanding_memkb / 1024);
++            format(formats, " %5c", info + i);
+         if (verbose || context)
+             format(formats, " %16l", info + i);
+-        if (cpupool) {
+-            char *poolname = libxl_cpupoolid_to_name(ctx, info[i].cpupool);
+-            printf("%16s", poolname);
+-            free(poolname);
+-        }
+-        if (numa) {
+-            libxl_domain_get_nodeaffinity(ctx, info[i].domid, &nodemap);
+-
+-            putchar(' ');
+-            print_bitmap(nodemap.map, physinfo.nr_nodes, stdout);
+-        }
++        if (cpupool)
++            format(formats, " %16p", info + i);
++        if (numa)
++            format(formats, " %A", info + i);
+         putchar('\n');
      }
+-
+-    libxl_bitmap_dispose(&nodemap);
+-    libxl_physinfo_dispose(&physinfo);
+ }
  
-     info = libxl_list_vm(ctx, &nb_vm);
-@@ -521,10 +531,10 @@ int main_vm_list(int argc, char **argv)
-         exit(EXIT_FAILURE);
-     }
- 
--    format(formats_vm, formatstr, NULL);
-+    if (header) format(formats_vm, formatstr, NULL);
- 
-     for (i = 0; i < nb_vm; i++)
--        format(formats_vm, formatstr, info + i);
-+        if (info[i].domid || dom0) format(formats_vm, formatstr, info + i);
- 
-     libxl_vminfo_list_free(info, nb_vm);
  
 -- 
 
