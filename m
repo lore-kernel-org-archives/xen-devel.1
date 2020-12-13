@@ -6,43 +6,43 @@ X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
 	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7320C433FE
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 07:25:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12BE2C433FE
+	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 08:27:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6B9C723137
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 07:25:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B9C723137
+	by mail.kernel.org (Postfix) with ESMTPS id A4FCD22D72
+	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 08:27:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4FCD22D72
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.51482.90421 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.51501.90441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koLkx-0005vI-TY; Sun, 13 Dec 2020 07:25:23 +0000
+	id 1koMik-0003yG-PN; Sun, 13 Dec 2020 08:27:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 51482.90421; Sun, 13 Dec 2020 07:25:23 +0000
+Received: by outflank-mailman (output) from mailman id 51501.90441; Sun, 13 Dec 2020 08:27:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koLkx-0005vB-QA; Sun, 13 Dec 2020 07:25:23 +0000
-Received: by outflank-mailman (input) for mailman id 51482;
- Sun, 13 Dec 2020 07:25:22 +0000
+	id 1koMik-0003y9-MS; Sun, 13 Dec 2020 08:27:10 +0000
+Received: by outflank-mailman (input) for mailman id 51501;
+ Sun, 13 Dec 2020 08:27:09 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1koLkw-0005v3-K0; Sun, 13 Dec 2020 07:25:22 +0000
+ id 1koMij-0003y1-2i; Sun, 13 Dec 2020 08:27:09 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1koLkw-00033v-Bq; Sun, 13 Dec 2020 07:25:22 +0000
+ id 1koMii-0004rB-T7; Sun, 13 Dec 2020 08:27:08 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1koLkw-0004BG-3g; Sun, 13 Dec 2020 07:25:22 +0000
+ id 1koMii-0005qI-Kz; Sun, 13 Dec 2020 08:27:08 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1koLkw-0004Od-3C; Sun, 13 Dec 2020 07:25:22 +0000
+ id 1koMii-0006BC-Ka; Sun, 13 Dec 2020 08:27:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,49 +57,35 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=TCIvHygaGmK9zMcpdfNRKwLHT+AkoUZFFTPqserummY=; b=jFTP/NEE3UEgsabdAMIk33u05z
-	9tLS+Bvo870g6jacIm48/oboujfFBbOEhQcdwa6kFIjSDIUIZ/iok7xmE+AnTYSAqjz7oHYBQZtwI
-	zN5q8DzeXQLnAD/EjYFCbAXSr8rGU105F370GEl5HFt8gHRBzfYTDHspKhu2EbdJro7o=;
+	bh=j1160LEsQJ1knliO2OfQWvS4UAE8MDdD5XGyKeDUn8Q=; b=mVOQmx7unnnwP836nDSZGRab/s
+	yBt2Zys7JdtI//hav77CZxlR8ANVE1DM3cC5pUqD4g/B48lvZlp7lOGgMgOCrzLXhXPght+Dr9gUR
+	MIxkVeps3aaZNEweEIk7sbKbOh089v7j5Una64g/6/POyMQCEoWIiEDrVYGfN9msb7R0=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-157486-mainreport@xen.org>
+Message-ID: <osstest-157488-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 157486: regressions - FAIL
+Subject: [ovmf test] 157488: regressions - FAIL
 X-Osstest-Failures:
-    ovmf:build-amd64:xen-build:fail:regression
-    ovmf:build-i386:xen-build:fail:regression
-    ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-i386-xsm:xen-build:fail:regression
-    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
 X-Osstest-Versions-This:
     ovmf=d4633b36b94f7b4a1f41901657cbbff452173d35
 X-Osstest-Versions-That:
     ovmf=f95e80d832e923046c92cd6f0b8208cec147138e
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 13 Dec 2020 07:25:22 +0000
+Date: Sun, 13 Dec 2020 08:27:08 +0000
 
-flight 157486 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157486/
+flight 157488 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/157488/
 
 Regressions :-(
 
 Tests which did not succeed and are blocking,
 including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 157345
- build-i386                    6 xen-build                fail REGR. vs. 157345
- build-amd64-xsm               6 xen-build                fail REGR. vs. 157345
- build-i386-xsm                6 xen-build                fail REGR. vs. 157345
-
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
+ test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
 
 version targeted for testing:
  ovmf                 d4633b36b94f7b4a1f41901657cbbff452173d35
@@ -107,8 +93,8 @@ baseline version:
  ovmf                 f95e80d832e923046c92cd6f0b8208cec147138e
 
 Last test of basis   157345  2020-12-09 12:40:46 Z    3 days
-Failing since        157348  2020-12-09 15:39:39 Z    3 days   27 attempts
-Testing same since   157402  2020-12-11 03:39:45 Z    2 days   20 attempts
+Failing since        157348  2020-12-09 15:39:39 Z    3 days   28 attempts
+Testing same since   157402  2020-12-11 03:39:45 Z    2 days   21 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -123,16 +109,16 @@ People who touched revisions under test:
   Ting Ye <ting.ye@intel.com>
 
 jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
  build-amd64-pvops                                            pass    
  build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
 
 
 ------------------------------------------------------------
