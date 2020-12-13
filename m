@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E06B5C4167B
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 12:09:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 341FDC0018C
+	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 12:09:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F58C22203
+	by mail.kernel.org (Postfix) with ESMTPS id EEEBD22203
 	for <xen-devel@archiver.kernel.org>; Sun, 13 Dec 2020 12:09:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F58C22203
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEEBD22203
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.51588.90591 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.51583.90574 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koQC2-000144-Av; Sun, 13 Dec 2020 12:09:38 +0000
+	id 1koQC1-00012n-J9; Sun, 13 Dec 2020 12:09:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 51588.90591; Sun, 13 Dec 2020 12:09:38 +0000
+Received: by outflank-mailman (output) from mailman id 51583.90574; Sun, 13 Dec 2020 12:09:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koQC2-00013r-2l; Sun, 13 Dec 2020 12:09:38 +0000
-Received: by outflank-mailman (input) for mailman id 51588;
- Sun, 13 Dec 2020 11:34:10 +0000
+	id 1koQC1-00012g-FR; Sun, 13 Dec 2020 12:09:37 +0000
+Received: by outflank-mailman (input) for mailman id 51583;
+ Sun, 13 Dec 2020 11:24:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7Nq2=FR=gmail.com=ttoukan.linux@srs-us1.protection.inumbo.net>)
- id 1koPdi-0006Bt-El
- for xen-devel@lists.xenproject.org; Sun, 13 Dec 2020 11:34:10 +0000
-Received: from mail-ej1-x644.google.com (unknown [2a00:1450:4864:20::644])
+ id 1koPU3-0005D3-AJ
+ for xen-devel@lists.xenproject.org; Sun, 13 Dec 2020 11:24:11 +0000
+Received: from mail-ej1-x642.google.com (unknown [2a00:1450:4864:20::642])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3fc9ef54-38a7-43ef-b2ce-9294d4b6af47;
- Sun, 13 Dec 2020 11:34:09 +0000 (UTC)
-Received: by mail-ej1-x644.google.com with SMTP id ce23so18611951ejb.8
- for <xen-devel@lists.xenproject.org>; Sun, 13 Dec 2020 03:34:09 -0800 (PST)
+ id 6f4dcfac-4207-437f-a444-4abf79e277e2;
+ Sun, 13 Dec 2020 11:24:10 +0000 (UTC)
+Received: by mail-ej1-x642.google.com with SMTP id g20so18639388ejb.1
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Dec 2020 03:24:10 -0800 (PST)
 Received: from [192.168.0.107] ([77.127.34.194])
- by smtp.gmail.com with ESMTPSA id r21sm1242331eds.91.2020.12.13.03.34.02
+ by smtp.gmail.com with ESMTPSA id de12sm12533753edb.82.2020.12.13.03.24.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 13 Dec 2020 03:34:08 -0800 (PST)
+ Sun, 13 Dec 2020 03:24:08 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,38 +55,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3fc9ef54-38a7-43ef-b2ce-9294d4b6af47
+X-Inumbo-ID: 6f4dcfac-4207-437f-a444-4abf79e277e2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=32JDNSeqhHqyIaOh/qzFvhnj5b/m+w8QZFr6dtEN8Bw=;
-        b=dTA8b5OUH5yKZKYvrwD8FPaAH1qo6ziTqTgli2eWV/QQwwjrj5RItxhiVtWCYn5J4r
-         iU5u2+H3CEqrvgOG4ifSiMinjtA03OpWth2tg99EZKrbp/XHweTnJDEVAsFXw8BEi/2k
-         62/n48qL7LWG8Lg/TWLV8Ekvi2YV2XdqZDT6dMQ7h03xg9aGRIuNRGCnlY5Zc5d3YnN9
-         nNHTJNN2xuMH7nQvu9FSiVhtrlE/Mw87dMJ3GteW8ox/7IYneqfAWtuLpskhNM3GN80O
-         a83qBHYHs8rA5sz+ldeezNiCzs60YSlz4P6KTdIerqBLo/hvBarQx+UVsAPAPvEcyL2G
-         H9Ew==
+        bh=IW66fMc7VTs1PtxS+22ry7ms1/9mizOXCdVTfKV5hpo=;
+        b=bQn+oB1JoyeFOF0nG/mlAluMS+9oNaqRxA17ZBM9Oe3AOE8/JG6goH/EB1c4QkEda4
+         T1lTzWqlfslNfkdjp202c07yMWPNGbIBbpqQZ+AzfJmqs+Kgj+dLxGZ+wWZGA5mc0NdB
+         BijFlgEZnvzEJb3MGQPxQa2/dgeJuYhDvxuwz6QAxAIoRHfwl22d5quEoZXOhJp6a+qE
+         ETivnglunAiRLTbK3ng7taHfwUqrNTJL3Mef8dDWPaAGgN2enm8bDppfomcBBDdM6fOw
+         jt/C5/9LwS2YQBDgMwgsJ0z4C3ZaAE2+qiQJ4375nfTotPFrKA5zulfu7Q8I9D/Awk7+
+         1yaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=32JDNSeqhHqyIaOh/qzFvhnj5b/m+w8QZFr6dtEN8Bw=;
-        b=rUlC+0T/RWlO6cPdXx6eva7Dcjdw75EJ2gAfM7taCYhiSEn44PfrLJfxRVXVfzwSi3
-         8UeUfBa9amnMb8oGGYpWNSOmQXGsRh3rqoOLswLxBgg9zDOazhK4IARuyzLa+M5p92AP
-         6ulpTcpnXOetZ2FRNHFuoRfGL3xPoMDZFCmPwStZ9aBmvHImFn0yL+73mfAPfcbu5Arx
-         2fFJplneKPbHi7Wz40wWGlhsj66CKnli7JJrKHuAtg5miJEGyXRckSaUpNousxlS/E0P
-         Rz39yE+Pj1Gd+++04r3Ct96wxeqKVXS72pSpmiW8GGhVn7GfXeqdgt3u6EZz62tpaGBb
-         5usQ==
-X-Gm-Message-State: AOAM531Sa0Blfw1s52tSk6P5hZzYYyWkkOSY5owFLTtbpWMRQ89G5oJb
-	9pWHW9sajEX9KBEWSJRW2J3cv8w4yqrQeg==
-X-Google-Smtp-Source: ABdhPJy0f+aRaj1FvtAzME5ZsGleR5z0tMVYyWtlz18MxubIwHyo0udN2mZLmYeJ/0XwIck0k7j0dQ==
-X-Received: by 2002:a17:906:85cf:: with SMTP id i15mr10621618ejy.373.1607859248729;
-        Sun, 13 Dec 2020 03:34:08 -0800 (PST)
-Subject: Re: [patch 22/30] net/mlx5: Replace irq_to_desc() abuse
+        bh=IW66fMc7VTs1PtxS+22ry7ms1/9mizOXCdVTfKV5hpo=;
+        b=fYuwQNwZpAFqycgRUxR3vGff2Pbk4h7lh+vUcQwXP2j1HaAWxLN7o39qw6Oadyke1y
+         E2K2G+sE4GBaJPm3ioUT+/sdhHW/yEQD11g5hdR/RmEQ9rXEQkVg2N17e27hyqFSh485
+         AwRhh4W/fcRCRmPGSSihCI3aR0OXufBzOZFfcprt/Pn1pAaSfvswdwKTytyRf9j2aSHK
+         4vWfjrZXdZptzOddR/DSKudShAyHTA6R65l34wXGD2xeL4QCI88WmcfjJq9L016eHZtg
+         Bnu7CtmR8nccXbwvMaLL7zRZuZH+89N1P3c+mqgvWM37oNMJgmmbcqvFyqQ8r1crxNkL
+         XHPg==
+X-Gm-Message-State: AOAM532OUATXIkkDxQvthKow/a0sZYcnT3ffF0TEpqe1cLrF96J9U0Ra
+	QqFPguek1PzHWLqQ87Ytd8OIlmSB/DvZ8w==
+X-Google-Smtp-Source: ABdhPJynlxi2QKNBVsllMFmw4nuD/o/QttB0CiO5OzyzZ7oeGscU5QYtBXumKqp3eM2r1PK4665luQ==
+X-Received: by 2002:a17:906:a2d0:: with SMTP id by16mr18015254ejb.207.1607858649230;
+        Sun, 13 Dec 2020 03:24:09 -0800 (PST)
+Subject: Re: [patch 20/30] net/mlx4: Replace irq_to_desc() abuse
 To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
 Cc: Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
+ Tariq Toukan <tariqt@nvidia.com>, "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>, netdev@vger.kernel.org,
+ linux-rdma@vger.kernel.org,
  "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
  Helge Deller <deller@gmx.de>, afzal mohammed <afzal.mohd.ma@gmail.com>,
  linux-parisc@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
@@ -110,22 +113,20 @@ Cc: Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
  Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
  Michal Simek <michal.simek@xilinx.com>, linux-pci@vger.kernel.org,
  Karthikeyan Mitran <m.karthikeyan@mobiveil.co.in>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tariq Toukan <tariqt@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>,
- netdev@vger.kernel.org, linux-rdma@vger.kernel.org,
- Saeed Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leon@kernel.org>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
  <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
  xen-devel@lists.xenproject.org
 References: <20201210192536.118432146@linutronix.de>
- <20201210194044.769458162@linutronix.de>
+ <20201210194044.580936243@linutronix.de>
 From: Tariq Toukan <ttoukan.linux@gmail.com>
-Message-ID: <02be0e10-f2b5-7cbb-3271-4d872616ffd4@gmail.com>
-Date: Sun, 13 Dec 2020 13:34:01 +0200
+Message-ID: <01e427f9-7238-d6a8-25ec-8585914d32df@gmail.com>
+Date: Sun, 13 Dec 2020 13:24:00 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.1
 MIME-Version: 1.0
-In-Reply-To: <20201210194044.769458162@linutronix.de>
+In-Reply-To: <20201210194044.580936243@linutronix.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -144,14 +145,19 @@ On 12/10/2020 9:25 PM, Thomas Gleixner wrote:
 > less hideous than the previous hack.
 > 
 > Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Tariq Toukan <tariqt@nvidia.com>
+> Cc: "David S. Miller" <davem@davemloft.net>
+> Cc: Jakub Kicinski <kuba@kernel.org>
+> Cc: netdev@vger.kernel.org
+> Cc: linux-rdma@vger.kernel.org
 > ---
->   drivers/net/ethernet/mellanox/mlx5/core/en.h      |    2 +-
->   drivers/net/ethernet/mellanox/mlx5/core/en_main.c |    2 +-
->   drivers/net/ethernet/mellanox/mlx5/core/en_txrx.c |    6 +-----
->   3 files changed, 3 insertions(+), 7 deletions(-)
+>   drivers/net/ethernet/mellanox/mlx4/en_cq.c   |    8 +++-----
+>   drivers/net/ethernet/mellanox/mlx4/en_rx.c   |    6 +-----
+>   drivers/net/ethernet/mellanox/mlx4/mlx4_en.h |    3 ++-
+>   3 files changed, 6 insertions(+), 11 deletions(-)
 > 
 
 Reviewed-by: Tariq Toukan <tariqt@nvidia.com>
 
-Thanks.
+Thanks for your patch.
 
