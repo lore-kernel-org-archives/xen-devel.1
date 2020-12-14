@@ -2,54 +2,56 @@ Return-Path: <SRS0=B7AJ=FS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BD7AC2BB48
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6EA2C4361B
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 19:05:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DDD70224D1
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DDD70224D1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3B21220798
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 19:05:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B21220798
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52465.91866 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52623.91902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshw-0003mG-LT; Mon, 14 Dec 2020 18:36:28 +0000
+	id 1kot9p-00089u-Kt; Mon, 14 Dec 2020 19:05:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52465.91866; Mon, 14 Dec 2020 18:36:28 +0000
+Received: by outflank-mailman (output) from mailman id 52623.91902; Mon, 14 Dec 2020 19:05:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshv-0003ks-PK; Mon, 14 Dec 2020 18:36:27 +0000
-Received: by outflank-mailman (input) for mailman id 52465;
- Mon, 14 Dec 2020 17:06:44 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=O6EJ=FS=redhat.com=slp@srs-us1.protection.inumbo.net>)
- id 1korJ6-0001xX-BH
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 17:06:44 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id d7c0dce5-848f-4709-b476-4e994209fe41;
- Mon, 14 Dec 2020 17:06:43 +0000 (UTC)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-499-761DnAutO9qHxmbuLzXzFA-1; Mon, 14 Dec 2020 12:06:39 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A75508AB3B9;
- Mon, 14 Dec 2020 17:06:22 +0000 (UTC)
-Received: from toolbox.redhat.com (ovpn-112-231.rdu2.redhat.com
- [10.10.112.231])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 72BDC62A25;
- Mon, 14 Dec 2020 17:06:19 +0000 (UTC)
+	id 1kot9p-00089n-H6; Mon, 14 Dec 2020 19:05:17 +0000
+Received: by outflank-mailman (input) for mailman id 52623;
+ Mon, 14 Dec 2020 19:05:16 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=WSiX=FS=amazon.com=prvs=61050d9d8=havanur@srs-us1.protection.inumbo.net>)
+ id 1kot9o-00089a-B7
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 19:05:16 +0000
+Received: from smtp-fw-9103.amazon.com (unknown [207.171.188.200])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 531771dc-ed0b-4804-9dec-e1b215fc8a0d;
+ Mon, 14 Dec 2020 19:05:15 +0000 (UTC)
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-1e-c7c08562.us-east-1.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9103.sea19.amazon.com with ESMTP;
+ 14 Dec 2020 19:05:07 +0000
+Received: from EX13D05EUC004.ant.amazon.com
+ (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
+ by email-inbound-relay-1e-c7c08562.us-east-1.amazon.com (Postfix) with ESMTPS
+ id 71B74240CB5; Mon, 14 Dec 2020 19:05:06 +0000 (UTC)
+Received: from EX13D36EUC004.ant.amazon.com (10.43.164.126) by
+ EX13D05EUC004.ant.amazon.com (10.43.164.38) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Mon, 14 Dec 2020 19:05:05 +0000
+Received: from EX13D36EUC004.ant.amazon.com ([10.43.164.126]) by
+ EX13D36EUC004.ant.amazon.com ([10.43.164.126]) with mapi id 15.00.1497.006;
+ Mon, 14 Dec 2020 19:05:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,277 +61,119 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d7c0dce5-848f-4709-b476-4e994209fe41
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607965603;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=399Y9fIGtHICB7zQVl2y/q4KwqXDdZ2nv2mnaFw6NX8=;
-	b=ZChTdDjNcRvbYd+NUF68br9MV+RSDoVzS55RPFrBdR8jNQHTk+MBVi35kLHmGvR25RIBIv
-	1qxJ0eN90i8PlZO+mz2B0OAAi4Ga89Y55VtLcCRvG9J5CPgeIssPk2UZlXyTVRM5YDyZDj
-	DJrDhtNGwu/JqgExCOyRsS+UcFbCFiU=
-X-MC-Unique: 761DnAutO9qHxmbuLzXzFA-1
-From: Sergio Lopez <slp@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Kevin Wolf <kwolf@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	qemu-block@nongnu.org,
-	Anthony Perard <anthony.perard@citrix.com>,
-	xen-devel@lists.xenproject.org,
-	Paul Durrant <paul@xen.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Stefan Hajnoczi <stefanha@redhat.com>,
-	Fam Zheng <fam@euphon.net>,
-	Eric Blake <eblake@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Max Reitz <mreitz@redhat.com>,
-	Sergio Lopez <slp@redhat.com>
-Subject: [PATCH v2 3/4] nbd/server: Quiesce coroutines on context switch
-Date: Mon, 14 Dec 2020 18:05:18 +0100
-Message-Id: <20201214170519.223781-4-slp@redhat.com>
-In-Reply-To: <20201214170519.223781-1-slp@redhat.com>
-References: <20201214170519.223781-1-slp@redhat.com>
+X-Inumbo-ID: 531771dc-ed0b-4804-9dec-e1b215fc8a0d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1607972715; x=1639508715;
+  h=from:to:cc:date:message-id:references:in-reply-to:
+   content-id:content-transfer-encoding:mime-version:subject;
+  bh=5MmXiqh799VlqIO+guYJDr322v3Amqz5ACpbnNbbumc=;
+  b=s7afBT8nyVGraVf51+CjQxMo0k1/a3NMSYshHuHmxHM/qc7fRG/u15Jd
+   PkCEWT1vVZ2lZn1F1NqRcYwPjlRrq75UU2b+U8BReqJq49turSuKe5LJ9
+   U92qraFJ//DNmVrkKu0oEA6tbM/tmrMWoulAD9WbP6zcBCaNvWvTkDDTU
+   0=;
+X-IronPort-AV: E=Sophos;i="5.78,420,1599523200"; 
+   d="scan'208";a="902983114"
+Subject: Re: [XEN PATCH v1 1/1] Invalidate cache for cpus affinitized to the domain
+Thread-Topic: [XEN PATCH v1 1/1] Invalidate cache for cpus affinitized to the domain
+From: "Shamsundara Havanur, Harsha" <havanur@amazon.com>
+To: "jbeulich@suse.com" <jbeulich@suse.com>, "julien@xen.org"
+	<julien@xen.org>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>
+CC: "Wieczorkiewicz, Pawel" <wipawel@amazon.de>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"paul@xen.org" <paul@xen.org>
+Thread-Index: AQHWz7MJSRGqvamGtEii6iRZ4MXyYqn2TWsAgAAJiICAABlGgIAAVTOAgAAzPQA=
+Date: Mon, 14 Dec 2020 19:05:05 +0000
+Message-ID: <eef19ecad32ac9379b6535ec2a4b444e78b29058.camel@amazon.com>
+References: <cover.1607686878.git.havanur@amazon.com>
+	 <aad47c43b7cd7a391492b8be7b881cd37e9764c7.1607686878.git.havanur@amazon.com>
+	 <149f7f6e-0ff4-affc-b65d-0f880fa27b13@suse.com>
+	 <81b5d64b0a08d217e0ae53606cd1b8afd59283e4.camel@amazon.com>
+	 <bf70db2d-cf03-11cb-887e-aa38094b3d5f@xen.org>
+	 <607cba7c-15b6-0197-6000-cc823038d320@citrix.com>
+In-Reply-To: <607cba7c-15b6-0197-6000-cc823038d320@citrix.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.43.166.16]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <E9D2D7CF32CAFC408ACAFB4DD175F725@amazon.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=slp@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"
+Precedence: Bulk
 
-When switching between AIO contexts we need to me make sure that both
-recv_coroutine and send_coroutine are not scheduled to run. Otherwise,
-QEMU may crash while attaching the new context with an error like
-this one:
-
-aio_co_schedule: Co-routine was already scheduled in 'aio_co_schedule'
-
-To achieve this we need a local implementation of
-'qio_channel_readv_all_eof' named 'nbd_read_eof' (a trick already done
-by 'nbd/client.c') that allows us to interrupt the operation and to
-know when recv_coroutine is yielding.
-
-With this in place, we delegate detaching the AIO context to the
-owning context with a BH ('nbd_aio_detach_bh') scheduled using
-'aio_wait_bh_oneshot'. This BH signals that we need to quiesce the
-channel by setting 'client->quiescing' to 'true', and either waits for
-the coroutine to finish using AIO_WAIT_WHILE or, if it's yielding in
-'nbd_read_eof', actively enters the coroutine to interrupt it.
-
-RHBZ: https://bugzilla.redhat.com/show_bug.cgi?id=1900326
-Signed-off-by: Sergio Lopez <slp@redhat.com>
-Reviewed-by: Eric Blake <eblake@redhat.com>
----
- nbd/server.c | 120 +++++++++++++++++++++++++++++++++++++++++++++------
- 1 file changed, 106 insertions(+), 14 deletions(-)
-
-diff --git a/nbd/server.c b/nbd/server.c
-index 613ed2634a..7229f487d2 100644
---- a/nbd/server.c
-+++ b/nbd/server.c
-@@ -132,6 +132,9 @@ struct NBDClient {
-     CoMutex send_lock;
-     Coroutine *send_coroutine;
- 
-+    bool read_yielding;
-+    bool quiescing;
-+
-     QTAILQ_ENTRY(NBDClient) next;
-     int nb_requests;
-     bool closing;
-@@ -1352,14 +1355,60 @@ static coroutine_fn int nbd_negotiate(NBDClient *client, Error **errp)
-     return 0;
- }
- 
--static int nbd_receive_request(QIOChannel *ioc, NBDRequest *request,
-+/* nbd_read_eof
-+ * Tries to read @size bytes from @ioc. This is a local implementation of
-+ * qio_channel_readv_all_eof. We have it here because we need it to be
-+ * interruptible and to know when the coroutine is yielding.
-+ * Returns 1 on success
-+ *         0 on eof, when no data was read (errp is not set)
-+ *         negative errno on failure (errp is set)
-+ */
-+static inline int coroutine_fn
-+nbd_read_eof(NBDClient *client, void *buffer, size_t size, Error **errp)
-+{
-+    bool partial = false;
-+
-+    assert(size);
-+    while (size > 0) {
-+        struct iovec iov = { .iov_base = buffer, .iov_len = size };
-+        ssize_t len;
-+
-+        len = qio_channel_readv(client->ioc, &iov, 1, errp);
-+        if (len == QIO_CHANNEL_ERR_BLOCK) {
-+            client->read_yielding = true;
-+            qio_channel_yield(client->ioc, G_IO_IN);
-+            client->read_yielding = false;
-+            if (client->quiescing) {
-+                return -EAGAIN;
-+            }
-+            continue;
-+        } else if (len < 0) {
-+            return -EIO;
-+        } else if (len == 0) {
-+            if (partial) {
-+                error_setg(errp,
-+                           "Unexpected end-of-file before all bytes were read");
-+                return -EIO;
-+            } else {
-+                return 0;
-+            }
-+        }
-+
-+        partial = true;
-+        size -= len;
-+        buffer = (uint8_t *) buffer + len;
-+    }
-+    return 1;
-+}
-+
-+static int nbd_receive_request(NBDClient *client, NBDRequest *request,
-                                Error **errp)
- {
-     uint8_t buf[NBD_REQUEST_SIZE];
-     uint32_t magic;
-     int ret;
- 
--    ret = nbd_read(ioc, buf, sizeof(buf), "request", errp);
-+    ret = nbd_read_eof(client, buf, sizeof(buf), errp);
-     if (ret < 0) {
-         return ret;
-     }
-@@ -1480,11 +1529,37 @@ static void blk_aio_attached(AioContext *ctx, void *opaque)
- 
-     QTAILQ_FOREACH(client, &exp->clients, next) {
-         qio_channel_attach_aio_context(client->ioc, ctx);
-+
-+        assert(client->recv_coroutine == NULL);
-+        assert(client->send_coroutine == NULL);
-+
-+        if (client->quiescing) {
-+            client->quiescing = false;
-+            nbd_client_receive_next_request(client);
-+        }
-+    }
-+}
-+
-+static void nbd_aio_detach_bh(void *opaque)
-+{
-+    NBDExport *exp = opaque;
-+    NBDClient *client;
-+
-+    QTAILQ_FOREACH(client, &exp->clients, next) {
-+        qio_channel_detach_aio_context(client->ioc);
-+        client->quiescing = true;
-+
-         if (client->recv_coroutine) {
--            aio_co_schedule(ctx, client->recv_coroutine);
-+            if (client->read_yielding) {
-+                qemu_aio_coroutine_enter(exp->common.ctx,
-+                                         client->recv_coroutine);
-+            } else {
-+                AIO_WAIT_WHILE(exp->common.ctx, client->recv_coroutine != NULL);
-+            }
-         }
-+
-         if (client->send_coroutine) {
--            aio_co_schedule(ctx, client->send_coroutine);
-+            AIO_WAIT_WHILE(exp->common.ctx, client->send_coroutine != NULL);
-         }
-     }
- }
-@@ -1492,13 +1567,10 @@ static void blk_aio_attached(AioContext *ctx, void *opaque)
- static void blk_aio_detach(void *opaque)
- {
-     NBDExport *exp = opaque;
--    NBDClient *client;
- 
-     trace_nbd_blk_aio_detach(exp->name, exp->common.ctx);
- 
--    QTAILQ_FOREACH(client, &exp->clients, next) {
--        qio_channel_detach_aio_context(client->ioc);
--    }
-+    aio_wait_bh_oneshot(exp->common.ctx, nbd_aio_detach_bh, exp);
- 
-     exp->common.ctx = NULL;
- }
-@@ -2151,20 +2223,23 @@ static int nbd_co_send_bitmap(NBDClient *client, uint64_t handle,
- 
- /* nbd_co_receive_request
-  * Collect a client request. Return 0 if request looks valid, -EIO to drop
-- * connection right away, and any other negative value to report an error to
-- * the client (although the caller may still need to disconnect after reporting
-- * the error).
-+ * connection right away, -EAGAIN to indicate we were interrupted and the
-+ * channel should be quiesced, and any other negative value to report an error
-+ * to the client (although the caller may still need to disconnect after
-+ * reporting the error).
-  */
- static int nbd_co_receive_request(NBDRequestData *req, NBDRequest *request,
-                                   Error **errp)
- {
-     NBDClient *client = req->client;
-     int valid_flags;
-+    int ret;
- 
-     g_assert(qemu_in_coroutine());
-     assert(client->recv_coroutine == qemu_coroutine_self());
--    if (nbd_receive_request(client->ioc, request, errp) < 0) {
--        return -EIO;
-+    ret = nbd_receive_request(client, request, errp);
-+    if (ret < 0) {
-+        return  ret;
-     }
- 
-     trace_nbd_co_receive_request_decode_type(request->handle, request->type,
-@@ -2507,6 +2582,17 @@ static coroutine_fn void nbd_trip(void *opaque)
-         return;
-     }
- 
-+    if (client->quiescing) {
-+        /*
-+         * We're switching between AIO contexts. Don't attempt to receive a new
-+         * request and kick the main context which may be waiting for us.
-+         */
-+        nbd_client_put(client);
-+        client->recv_coroutine = NULL;
-+        aio_wait_kick();
-+        return;
-+    }
-+
-     req = nbd_request_get(client);
-     ret = nbd_co_receive_request(req, &request, &local_err);
-     client->recv_coroutine = NULL;
-@@ -2519,6 +2605,11 @@ static coroutine_fn void nbd_trip(void *opaque)
-         goto done;
-     }
- 
-+    if (ret == -EAGAIN) {
-+        assert(client->quiescing);
-+        goto done;
-+    }
-+
-     nbd_client_receive_next_request(client);
-     if (ret == -EIO) {
-         goto disconnect;
-@@ -2565,7 +2656,8 @@ disconnect:
- 
- static void nbd_client_receive_next_request(NBDClient *client)
- {
--    if (!client->recv_coroutine && client->nb_requests < MAX_NBD_REQUESTS) {
-+    if (!client->recv_coroutine && client->nb_requests < MAX_NBD_REQUESTS &&
-+        !client->quiescing) {
-         nbd_client_get(client);
-         client->recv_coroutine = qemu_coroutine_create(nbd_trip, client);
-         aio_co_schedule(client->exp->common.ctx, client->recv_coroutine);
--- 
-2.26.2
-
+T24gTW9uLCAyMDIwLTEyLTE0IGF0IDE2OjAxICswMDAwLCBBbmRyZXcgQ29vcGVyIHdyb3RlOg0K
+PiBDQVVUSU9OOiBUaGlzIGVtYWlsIG9yaWdpbmF0ZWQgZnJvbSBvdXRzaWRlIG9mIHRoZSBvcmdh
+bml6YXRpb24uIERvDQo+IG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVz
+cyB5b3UgY2FuIGNvbmZpcm0gdGhlIHNlbmRlcg0KPiBhbmQga25vdyB0aGUgY29udGVudCBpcyBz
+YWZlLg0KPiANCj4gDQo+IA0KPiBPbiAxNC8xMi8yMDIwIDEwOjU2LCBKdWxpZW4gR3JhbGwgd3Jv
+dGU6DQo+ID4gSGkgSGFyc2hhLA0KPiA+IA0KPiA+IE9uIDE0LzEyLzIwMjAgMDk6MjYsIFNoYW1z
+dW5kYXJhIEhhdmFudXIsIEhhcnNoYSB3cm90ZToNCj4gPiA+IE9uIE1vbiwgMjAyMC0xMi0xNCBh
+dCAwOTo1MiArMDEwMCwgSmFuIEJldWxpY2ggd3JvdGU6DQo+ID4gPiA+IENBVVRJT046IFRoaXMg
+ZW1haWwgb3JpZ2luYXRlZCBmcm9tIG91dHNpZGUgb2YgdGhlDQo+ID4gPiA+IG9yZ2FuaXphdGlv
+bi4gRG8NCj4gPiA+ID4gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNz
+IHlvdSBjYW4gY29uZmlybSB0aGUNCj4gPiA+ID4gc2VuZGVyDQo+ID4gPiA+IGFuZCBrbm93IHRo
+ZSBjb250ZW50IGlzIHNhZmUuDQo+ID4gPiA+IA0KPiA+ID4gPiANCj4gPiA+ID4gDQo+ID4gPiA+
+IE9uIDExLjEyLjIwMjAgMTI6NDQsIEhhcnNoYSBTaGFtc3VuZGFyYSBIYXZhbnVyIHdyb3RlOg0K
+PiA+ID4gPiA+IEEgSFZNIGRvbWFpbiBmbHVzaGVzIGNhY2hlIG9uIGFsbCB0aGUgY3B1cyB1c2lu
+Zw0KPiA+ID4gPiA+IGBmbHVzaF9hbGxgIG1hY3JvIHdoaWNoIHVzZXMgY3B1X29ubGluZV9tYXAs
+IGR1cmluZw0KPiA+ID4gPiA+IGkpIGNyZWF0aW9uIG9mIGEgbmV3IGRvbWFpbg0KPiA+ID4gPiA+
+IGlpKSB3aGVuIGRldmljZS1tb2RlbCBvcCBpcyBwZXJmb3JtZWQNCj4gPiA+ID4gPiBpaWkpIHdo
+ZW4gZG9tYWluIGlzIGRlc3RydWN0ZWQuDQo+ID4gPiA+ID4gDQo+ID4gPiA+ID4gVGhpcyB0cmln
+Z2VycyBJUEkgb24gYWxsIHRoZSBjcHVzLCB0aHVzIGFmZmVjdGluZyBvdGhlcg0KPiA+ID4gPiA+
+IGRvbWFpbnMgdGhhdCBhcmUgcGlubmVkIHRvIGRpZmZlcmVudCBwY3B1cy4gVGhpcyBwYXRjaA0K
+PiA+ID4gPiA+IHJlc3RyaWN0cyBjYWNoZSBmbHVzaCB0byB0aGUgc2V0IG9mIGNwdXMgYWZmaW5p
+dGl6ZWQgdG8NCj4gPiA+ID4gPiB0aGUgY3VycmVudCBkb21haW4gdXNpbmcgYGRvbWFpbi0+ZGly
+dHlfY3B1bWFza2AuDQo+ID4gPiA+IA0KPiA+ID4gPiBCdXQgdGhlbiB5b3UgbmVlZCB0byBlZmZl
+Y3QgY2FjaGUgZmx1c2hpbmcgd2hlbiBhIENQVSBnZXRzDQo+ID4gPiA+IHRha2VuIG91dCBvZiBk
+b21haW4tPmRpcnR5X2NwdW1hc2suIEkgZG9uJ3QgdGhpbmsgeW91L3dlIHdhbnQNCj4gPiA+ID4g
+dG8gZG8gdGhhdC4NCj4gPiA+ID4gDQo+ID4gPiANCj4gPiA+IElmIHdlIGRvIG5vdCByZXN0cmlj
+dCwgaXQgY291bGQgbGVhZCB0byBEb1MgYXR0YWNrLCB3aGVyZSBhDQo+ID4gPiBtYWxpY2lvdXMN
+Cj4gPiA+IGd1ZXN0IGNvdWxkIGtlZXAgd3JpdGluZyB0byBNVFJSIHJlZ2lzdGVycyBvciBkbyBh
+IGNhY2hlIGZsdXNoDQo+ID4gPiB0aHJvdWdoDQo+ID4gPiBETSBPcCBhbmQga2VlcCBzZW5kaW5n
+IElQSXMgdG8gb3RoZXIgbmVpZ2hib3JpbmcgZ3Vlc3RzLg0KPiA+IA0KPiA+IEkgc2F3IEphbiBh
+bHJlYWR5IGFuc3dlcmVkIGFib3V0IHRoZSBhbGxlZ2VkIERvUywgc28gSSB3aWxsIGp1c3QNCj4g
+PiBmb2N1cw0KPiA+IG9uIHRoZSByZXNvbHV0aW9uLg0KPiA+IA0KPiA+IEkgYWdyZWUgdGhhdCBp
+biB0aGUgaWRlYWwgc2l0dWF0aW9uIHdlIHdhbnQgdG8gbGltaXQgdGhlIGltcGFjdCBvbg0KPiA+
+IHRoZQ0KPiA+IG90aGVyIHZDUFVzLiBIb3dldmVyLCB3ZSBhbHNvIG5lZWQgdG8gbWFrZSBzdXJl
+IHRoZSBjdXJlIGlzIG5vdA0KPiA+IHdvcnNlDQo+ID4gdGhhbiB0aGUgc3ltcHRvbXMuDQo+IA0K
+PiBBbmQgc3BlY2lmaWNhbGx5LCBvbmx5IGEgY2hhbmdlIHdoaWNoIGlzIGNvcnJlY3QuICBUaGlz
+IHBhdGNoIHZlcnkNCj4gZGVmaW5pdGVseSBpc24ndC4NCj4gDQo+IExpbmVzIGNhbiBnZXQgY2Fj
+aGVkIG9uIG90aGVyIGNwdXMgZnJvbSwgZS5nLiBxZW11IG1hcHBpbmdzIGFuZCBQVg0KPiBiYWNr
+ZW5kcy4NCj4gDQo+ID4gDQo+ID4gVGhlIGNhY2hlIGZsdXNoIGNhbm5vdCBiZSByZXN0cmljdGVk
+IGluIGFsbCB0aGUgcGlubmluZyBzaXR1YXRpb24NCj4gPiBiZWNhdXNlIHBpbm5pbmcgZG9lc24n
+dCBpbXBseSB0aGUgcENQVSB3aWxsIGJlIGRlZGljYXRlZCB0byBhIGdpdmVuDQo+ID4gdkNQVSBv
+ciBldmVuIHRoZSB2Q1BVIHdpbGwgc3RpY2sgb24gcENQVSAod2UgbWF5IGFsbG93IGZsb2F0aW5n
+IG9uDQo+ID4gYQ0KPiA+IE5VTUEgc29ja2V0KS4gQWx0aG91Z2ggeW91ciBzZXR1cCBtYXkgb2Zm
+ZXIgdGhpcyBndWFyYW50ZWUuDQo+ID4gDQo+ID4gTXkga25vd2xlZGdlIGluIHRoaXMgYXJlYSBp
+cyBxdWl0ZSBsaW1pdGVkLiBCdXQgYmVsb3cgYSBmZXcNCj4gPiBxdWVzdGlvbg0KPiA+IHRoYXQg
+aG9wZWZ1bGx5IHdpbGwgaGVscCB0byBtYWtlIGEgZGVjaXNpb24uDQo+ID4gDQo+ID4gVGhlIGZp
+cnN0IHF1ZXN0aW9uIHRvIGFuc3dlciBpczogY2FuIHRoZSBmbHVzaCBjYW4gYmUgcmVzdHJpY3Rl
+ZCBpbg0KPiA+IGENCj4gPiBzZXR1cCB3aGVyZSBlYWNoIHZDUFVzIGFyZSBydW5uaW5nIG9uIGEg
+ZGVjaWNhdGVkIHBDUFUgKGkuZQ0KPiA+IHBhcnRpb25uZWQNCj4gPiBzeXN0ZW0pPw0KPiANCj4g
+Tm90IHJlYWxseS4gIExpbmVzIGNhbiBiZWNvbWUgY2FjaGVkIGV2ZW4gZnJvbSBzcGVjdWxhdGlv
+biBpbiB0aGUNCj4gZGlyZWN0bWFwLg0KPiANCj4gSWYgeW91IG5lZWQgdG8gZmx1c2ggdGhlIGNh
+Y2hlcyAoYW5kIGRvbid0IGhhdmUgYSB2aXJ0dWFsIG1hcHBpbmcgdG8NCj4gaXNzdWUgY2xmbHVz
+aC9jbGZsdXNob3B0L2Nsd2Igb3ZlciksIGl0IG11c3QgYmUgb24gYWxsIENQVXMuDQoNCklmIGxp
+bmVzIGFyZSBjYWNoZWQgZHVlIHRvIGFnZ3Jlc3NpdmUgc3BlY3VsYXRpb24gZnJvbSBhIGRpZmZl
+cmVudA0KZ3Vlc3QsIHdvdWxkbid0IHRoZXkgYmUgaW52YWxpZGF0ZWQgYXQgdGhlIHNwZWN1bGF0
+aW9uIGJvdW5kYXJ5LCBzaW5jZQ0KaXQncyBhIHdyb25nIHNwZWN1bGF0aW9uPyBXb3VsZCBpdCBz
+dGlsbCByZXF1aXJlIHRvIGJlIGZsdXNoZWQNCmV4cGxpY2l0bHk/DQoNCi1IYXJzaGENCg0KPiAN
+Cj4gPiBJZiB0aGUgYW5zd2VyIGlzIHllcywgdGhlbiB3ZSBzaG91bGQgZmlndXJlIG91dCB3aGV0
+aGVyIHVzaW5nDQo+ID4gZG9tYWluLT5kaXJ0eV9jcHVtYXNrIHdvdWxkIGFsd2F5cyBiZSBjb3Jy
+ZWN0PyBGb3IgaW5zdGFuY2UsIGEgdkNQVQ0KPiA+IG1heSBub3QgaGF2ZSB5ZXQgcnVuLCBzbyBj
+YW4gd2UgY29uc2lkZXIgdGhlIGFzc29jaWF0ZWQgcENQVSBjYWNoZQ0KPiA+IHdvdWxkIGJlIGNv
+bnNpc3RlbnQ/DQo+ID4gDQo+ID4gQW5vdGhlciBsaW5lIG9mIHF1ZXN0aW9uIGlzIHdoYXQgY2Fu
+IHdlIGRvIG9uIHN5c3RlbSBzdXBwb3J0aW5nDQo+ID4gc2VsZi1zbm9vcGluZz8gSU9XLCB3b3Vs
+ZCBpdCBiZSBwb3NzaWJsZSB0byByZXN0cmljdCB0aGUgZmx1c2ggZm9yDQo+ID4gYWxsDQo+ID4g
+dGhlIHNldHVwPw0KPiANCj4gUmlnaHQgLSB0aGlzIGlzIHRoZSBhdmVudWUgd2hpY2ggb3VnaHQg
+dG8gYmUgaW52ZXN0aWdhdGVkLiAgKFdvcmtpbmcpDQo+IHNlbGYtbm9vcCBvdWdodCB0byByZW1v
+dmUgdGhlIG5lZWQgZm9yIHNvbWUgb2YgdGhlc2UgY2FjaGUgZmx1c2hlcy4NCj4gT3RoZXJzIGxv
+b2sgbGlrZSB0aGV5J3JlIG5vdCBjb3JyZWN0IHRvIGJlZ2luIHdpdGguICBPdGhlcnMsIHN1Y2gg
+YXMNCj4gdGhlDQo+IHdiaW52ZCBpbnRlcmNlcHRzIGFic29sdXRlbHkgbXVzdCBzdGF5IGFzIHRo
+ZXkgYXJlLg0KPiANCj4gfkFuZHJldw0K
 
