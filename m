@@ -6,44 +6,44 @@ X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
 	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7AF0C2BB40
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03008C2BB48
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 861F622525
+	by mail.kernel.org (Postfix) with ESMTPS id 8612822512
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 861F622525
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8612822512
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=netbsd.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52384.91594 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52395.91668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshG-0001r1-Aj; Mon, 14 Dec 2020 18:35:46 +0000
+	id 1koshL-00022k-05; Mon, 14 Dec 2020 18:35:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52384.91594; Mon, 14 Dec 2020 18:35:46 +0000
+Received: by outflank-mailman (output) from mailman id 52395.91668; Mon, 14 Dec 2020 18:35:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshF-0001qp-Ub; Mon, 14 Dec 2020 18:35:45 +0000
-Received: by outflank-mailman (input) for mailman id 52384;
- Mon, 14 Dec 2020 16:37:00 +0000
+	id 1koshK-00021l-5H; Mon, 14 Dec 2020 18:35:50 +0000
+Received: by outflank-mailman (input) for mailman id 52395;
+ Mon, 14 Dec 2020 16:39:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nuho=FS=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1koqqK-0006vN-Ii
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 16:37:00 +0000
+ id 1koqqj-0006vN-JB
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 16:37:25 +0000
 Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 850d1873-3bc1-4c17-8819-5aba59513026;
+ id 3cc2c6c1-de36-4084-bf41-baca4af23928;
  Mon, 14 Dec 2020 16:36:34 +0000 (UTC)
 Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 0BEGaXNY025686;
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 0BEGaXZL001596;
  Mon, 14 Dec 2020 17:36:33 +0100 (CET)
 Received: from borneo.soc.lip6.fr (borneo [132.227.103.47])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 0BEGaXTu001450;
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 0BEGaX6L007339;
  Mon, 14 Dec 2020 17:36:33 +0100 (MET)
 Received: by borneo.soc.lip6.fr (Postfix, from userid 373)
- id 59050AAC67; Mon, 14 Dec 2020 17:36:33 +0100 (MET)
+ id ADC85AAC68; Mon, 14 Dec 2020 17:36:33 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,13 +55,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 850d1873-3bc1-4c17-8819-5aba59513026
+X-Inumbo-ID: 3cc2c6c1-de36-4084-bf41-baca4af23928
 From: Manuel Bouyer <bouyer@netbsd.org>
 To: xen-devel@lists.xenproject.org
 Cc: Manuel Bouyer <bouyer@netbsd.org>
-Subject: [PATCH 10/24] Make libs/evtchn build on NetBSD
-Date: Mon, 14 Dec 2020 17:36:09 +0100
-Message-Id: <20201214163623.2127-11-bouyer@netbsd.org>
+Subject: [PATCH 15/24] Make libs/light build on NetBSD
+Date: Mon, 14 Dec 2020 17:36:14 +0100
+Message-Id: <20201214163623.2127-16-bouyer@netbsd.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201214163623.2127-1-bouyer@netbsd.org>
 References: <20201214163623.2127-1-bouyer@netbsd.org>
@@ -71,44 +71,36 @@ X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.li
 X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
 ---
- tools/libs/evtchn/netbsd.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/libs/light/libxl_dm.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/tools/libs/evtchn/netbsd.c b/tools/libs/evtchn/netbsd.c
-index 8b8545d2f9..6d4ce28011 100644
---- a/tools/libs/evtchn/netbsd.c
-+++ b/tools/libs/evtchn/netbsd.c
-@@ -25,10 +25,10 @@
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index 5948ace60d..c93bdf2cc9 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -3659,6 +3659,14 @@ static int kill_device_model_uid_child(libxl__destroy_devicemodel_state *ddms,
  
- #include <sys/ioctl.h>
+     LOGD(DEBUG, domid, "DM reaper: calling setresuid(%d, %d, 0)",
+          reaper_uid, dm_kill_uid);
++#ifdef __NetBSD__
++    r = setuid(dm_kill_uid);
++    if (r) {
++        LOGED(ERROR, domid, "setuid to %d", dm_kill_uid);
++        rc = rc ?: ERROR_FAIL;
++        goto out;
++    }
++#else /* __NetBSD__ */
+     r = setresuid(reaper_uid, dm_kill_uid, 0);
+     if (r) {
+         LOGED(ERROR, domid, "setresuid to (%d, %d, 0)",
+@@ -3666,6 +3674,7 @@ static int kill_device_model_uid_child(libxl__destroy_devicemodel_state *ddms,
+         rc = rc ?: ERROR_FAIL;
+         goto out;
+     }
++#endif /* __NetBSD__ */
  
--#include <xen/sys/evtchn.h>
--
- #include "private.h"
- 
-+#include <xen/xenio3.h>
-+
- #define EVTCHN_DEV_NAME  "/dev/xenevt"
- 
- int osdep_evtchn_open(xenevtchn_handle *xce)
-@@ -131,7 +131,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
-     int fd = xce->fd;
-     evtchn_port_t port;
- 
--    if ( read_exact(fd, (char *)&port, sizeof(port)) == -1 )
-+    if ( read(fd, (char *)&port, sizeof(port)) == -1 )
-         return -1;
- 
-     return port;
-@@ -140,7 +140,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
- int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- {
-     int fd = xce->fd;
--    return write_exact(fd, (char *)&port, sizeof(port));
-+    return write(fd, (char *)&port, sizeof(port));
- }
- 
- /*
+     /*
+      * And kill everyone but me.
 -- 
 2.28.0
 
