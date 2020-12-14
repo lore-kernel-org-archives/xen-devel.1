@@ -6,44 +6,44 @@ X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
 	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 804BEC4361B
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34471C2BB40
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 43653224D1
+	by mail.kernel.org (Postfix) with ESMTPS id E2226224D1
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 43653224D1
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2226224D1
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=netbsd.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52415.91773 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52418.91786 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshg-00031u-VX; Mon, 14 Dec 2020 18:36:12 +0000
+	id 1koshj-0003A9-LI; Mon, 14 Dec 2020 18:36:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52415.91773; Mon, 14 Dec 2020 18:36:12 +0000
+Received: by outflank-mailman (output) from mailman id 52418.91786; Mon, 14 Dec 2020 18:36:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshe-0002zv-VH; Mon, 14 Dec 2020 18:36:10 +0000
-Received: by outflank-mailman (input) for mailman id 52415;
- Mon, 14 Dec 2020 16:39:12 +0000
+	id 1koshi-000381-15; Mon, 14 Dec 2020 18:36:14 +0000
+Received: by outflank-mailman (input) for mailman id 52418;
+ Mon, 14 Dec 2020 16:39:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nuho=FS=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1koqr3-0006vN-K2
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 16:37:45 +0000
+ id 1koqrI-0006vN-Kd
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 16:38:00 +0000
 Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5a4bbe2a-34ba-49bf-b439-89a8eb3a5f4a;
- Mon, 14 Dec 2020 16:36:34 +0000 (UTC)
+ id 66502db2-5ab0-4a6e-a577-5b48f32b7801;
+ Mon, 14 Dec 2020 16:36:35 +0000 (UTC)
 Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 0BEGaXws020700;
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 0BEGaXBI008620;
  Mon, 14 Dec 2020 17:36:33 +0100 (CET)
 Received: from borneo.soc.lip6.fr (borneo [132.227.103.47])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 0BEGaXU0001450;
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 0BEGaXb6020782;
  Mon, 14 Dec 2020 17:36:33 +0100 (MET)
 Received: by borneo.soc.lip6.fr (Postfix, from userid 373)
- id BE55BAAC66; Mon, 14 Dec 2020 17:36:33 +0100 (MET)
+ id E6B77AAC66; Mon, 14 Dec 2020 17:36:33 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,13 +55,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a4bbe2a-34ba-49bf-b439-89a8eb3a5f4a
+X-Inumbo-ID: 66502db2-5ab0-4a6e-a577-5b48f32b7801
 From: Manuel Bouyer <bouyer@netbsd.org>
 To: xen-devel@lists.xenproject.org
 Cc: Manuel Bouyer <bouyer@netbsd.org>
-Subject: [PATCH 16/24] Switch NetBSD to QEMU_XEN (!traditional)
-Date: Mon, 14 Dec 2020 17:36:15 +0100
-Message-Id: <20201214163623.2127-17-bouyer@netbsd.org>
+Subject: [PATCH 18/24] xeneventchn_stubs.c doens't need xen/sys/evtchn.h (NetBSD fix)
+Date: Mon, 14 Dec 2020 17:36:17 +0100
+Message-Id: <20201214163623.2127-19-bouyer@netbsd.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201214163623.2127-1-bouyer@netbsd.org>
 References: <20201214163623.2127-1-bouyer@netbsd.org>
@@ -71,22 +71,21 @@ X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.li
 X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
 ---
- tools/libs/light/libxl_netbsd.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/ocaml/libs/eventchn/xeneventchn_stubs.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/tools/libs/light/libxl_netbsd.c b/tools/libs/light/libxl_netbsd.c
-index e66a393d7f..31334f932c 100644
---- a/tools/libs/light/libxl_netbsd.c
-+++ b/tools/libs/light/libxl_netbsd.c
-@@ -110,7 +110,7 @@ out:
+diff --git a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
+index ba40078d09..f889a7a2e4 100644
+--- a/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
++++ b/tools/ocaml/libs/eventchn/xeneventchn_stubs.c
+@@ -22,7 +22,6 @@
+ #include <stdint.h>
+ #include <sys/ioctl.h>
+ #include <xen/xen.h>
+-#include <xen/sys/evtchn.h>
+ #include <xenevtchn.h>
  
- libxl_device_model_version libxl__default_device_model(libxl__gc *gc)
- {
--    return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL;
-+    return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
- }
- 
- int libxl__pci_numdevs(libxl__gc *gc)
+ #define CAML_NAME_SPACE
 -- 
 2.28.0
 
