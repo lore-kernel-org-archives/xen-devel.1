@@ -2,44 +2,44 @@ Return-Path: <SRS0=B7AJ=FS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17E25C2BB40
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 07:56:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B946FC4361B
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 08:05:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BB01D229C5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 07:56:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB01D229C5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6A834225AC
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 08:05:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6A834225AC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.51922.90829 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.51946.90880 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koiiS-00085B-PO; Mon, 14 Dec 2020 07:56:20 +0000
+	id 1koirC-0001bl-10; Mon, 14 Dec 2020 08:05:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 51922.90829; Mon, 14 Dec 2020 07:56:20 +0000
+Received: by outflank-mailman (output) from mailman id 51946.90880; Mon, 14 Dec 2020 08:05:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koiiS-000854-Kx; Mon, 14 Dec 2020 07:56:20 +0000
-Received: by outflank-mailman (input) for mailman id 51922;
- Mon, 14 Dec 2020 07:56:19 +0000
+	id 1koirB-0001be-Tl; Mon, 14 Dec 2020 08:05:21 +0000
+Received: by outflank-mailman (input) for mailman id 51946;
+ Mon, 14 Dec 2020 08:05:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XC/h=FS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1koiiR-00084u-39
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 07:56:19 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=K590=FS=gmail.com=marcandre.lureau@srs-us1.protection.inumbo.net>)
+ id 1koirA-0001bZ-5M
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 08:05:20 +0000
+Received: from mail-ej1-x644.google.com (unknown [2a00:1450:4864:20::644])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 04d04060-3d0f-4ddf-96bd-56a524aa508e;
- Mon, 14 Dec 2020 07:56:18 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 41D90AC10;
- Mon, 14 Dec 2020 07:56:17 +0000 (UTC)
+ id 9972717d-5d78-4853-ae96-9d20773f3514;
+ Mon, 14 Dec 2020 08:05:19 +0000 (UTC)
+Received: by mail-ej1-x644.google.com with SMTP id q22so3509953eja.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Dec 2020 00:05:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,90 +51,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04d04060-3d0f-4ddf-96bd-56a524aa508e
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1607932577; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=M+3a3E8bow1XpCbEoYeJd2DUDpP7T6AQXwF6GP582zA=;
-	b=Qvs2RwsUE39y6vI3cPpHrlaAursFOniDfvKEMCna0UL/iCcmwyCplpS+cx3+5LKjJ876+2
-	A6WWSKDSyHk/Rw2emh1aLL9gcUNbrus7SsPqGyt2sUOFJD/XPazuCjqyK2AUdR2LxgB9I3
-	15lk7CxfG0dd+FvqUc5wJ6Oyc6931aA=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 0/3] xen: add support for automatic debug key actions in case of crash
-Date: Mon, 14 Dec 2020 08:56:12 +0100
-Message-Id: <20201214075615.25038-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+X-Inumbo-ID: 9972717d-5d78-4853-ae96-9d20773f3514
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=TiB2F/QWVAlfD2IsKZXhLFiZ75QHq0FFdQ/Lizli0g0=;
+        b=F315ig/6/Gu7lB+D3/eCEGRGZzsyMTap3fAtk2tQ6P6Vkm6DEJK15FNnVvp+jcjujD
+         liTiZGjVI7uNM6WbG2ZYdCjObA9P6KKY9/b0f59rKrPIkStxpyIh/NncDp242+VgBmvd
+         /KJlqgHxBNhrr4y/RVZyDMBjYn2aU3JMZa0J7xmyhVvBe9crJTCIjg39wsbnTFBgl89J
+         nWn7w83o/TFQhoXB313BkvWEgzVRDFgSWDBGg83JL/JbTKtsOexswDFm/K2wTqOyRCCv
+         MqIzh6tZuacUZEokI5s1Wwx9/4kNP8vr4/csavrGM9gm61kIO19ZHdpjQXH9ueNQNxXN
+         /lgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=TiB2F/QWVAlfD2IsKZXhLFiZ75QHq0FFdQ/Lizli0g0=;
+        b=HvlDIeTB2pUtLPQi81tqiGtIelknn6BgqfX6mqTV1AHBdgNWgfAdi3x/A4x85vL+ek
+         D+9Y/+bA03Oj4+C8MTjknNLyiMnlQe/VD9qen+u/nFe2Jbw34UojuYa6wN3poZIBVy8o
+         Mr2qrT/n9K6gYdsbx3bRbxj0u/wpmoNV9sqoInL4yhEoYJElVEWVqk/AuoxBwSdKgiwb
+         pmHOlpGm8ITHXe53a503ASAuvKjwHGn5g94/CJwlf4iUOx9Q3Rnr+XQgEHDgh9YLV2AM
+         R51OG1GqhBTqPotpF/ZZ09BcHL2QIp4QS+GvP+spwD5GSZPZ7lMkHuVbWf01M+01MMSp
+         pjMA==
+X-Gm-Message-State: AOAM532iHADdkzDIlHiIAbUlrVU5ji/c3ERAr/mlJgl5Dlb0e36XyMoW
+	zfdM2H3pK6PzjytWSEHbhKKtDBrWUTSwIj9oLI4=
+X-Google-Smtp-Source: ABdhPJznfNt7s53g5IQ7FIyvHkE8ul5p+FofIGYKbfcP6yJUlWHy0cPXR1+relJpFBG9qlDzAUw/X9v5sYr7YLru7eo=
+X-Received: by 2002:a17:906:9452:: with SMTP id z18mr12709453ejx.389.1607933118217;
+ Mon, 14 Dec 2020 00:05:18 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20201210134752.780923-1-marcandre.lureau@redhat.com> <20201210134752.780923-14-marcandre.lureau@redhat.com>
+In-Reply-To: <20201210134752.780923-14-marcandre.lureau@redhat.com>
+From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
+Date: Mon, 14 Dec 2020 12:05:05 +0400
+Message-ID: <CAJ+F1C+_CE5uaQ7QMkaca498WFcRWSb+zez2zwi_BqUMCTK2zA@mail.gmail.com>
+Subject: Re: [PATCH v3 13/13] compiler.h: remove QEMU_GNUC_PREREQ
+To: QEMU <qemu-devel@nongnu.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Paul Durrant <paul@xen.org>, Richard Henderson <richard.henderson@linaro.org>, 
+	Laurent Vivier <laurent@vivier.eu>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>, 
+	"open list:ARM" <qemu-arm@nongnu.org>, Gerd Hoffmann <kraxel@redhat.com>, 
+	Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, 
+	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Content-Type: multipart/alternative; boundary="0000000000005583ba05b6681a42"
 
-When the host crashes it would sometimes be nice to have additional
-debug data available which could be produced via debug keys, but
-halting the server for manual intervention might be impossible due to
-the need to reboot/kexec rather sooner than later.
+--0000000000005583ba05b6681a42
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add support for automatic debug key actions in case of crashes which
-can be activated via boot- or runtime-parameter.
+Hi
 
-Changes in V4:
-- addressed comments (now patch 3)
-- added patches 1 and 2
+On Thu, Dec 10, 2020 at 6:07 PM <marcandre.lureau@redhat.com> wrote:
 
-Some further remarks to the new patches added:
+> From: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+>
+> When needed, the G_GNUC_CHECK_VERSION() glib macro can be used instead.
+>
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> ---
+>  include/qemu/compiler.h    | 11 -----------
+>  scripts/cocci-macro-file.h |  1 -
+>  2 files changed, 12 deletions(-)
+>
+> diff --git a/include/qemu/compiler.h b/include/qemu/compiler.h
+> index 5e6cf2c8e8..1b9e58e82b 100644
+> --- a/include/qemu/compiler.h
+> +++ b/include/qemu/compiler.h
+> @@ -11,17 +11,6 @@
+>  #define QEMU_STATIC_ANALYSIS 1
+>  #endif
+>
+>
+> -/*----------------------------------------------------------------------=
+------
+> -| The macro QEMU_GNUC_PREREQ tests for minimum version of the GNU C
+> compiler.
+> -| The code is a copy of SOFTFLOAT_GNUC_PREREQ, see softfloat-macros.h.
+>
+> -*-----------------------------------------------------------------------=
+-----*/
+> -#if defined(__GNUC__) && defined(__GNUC_MINOR__)
+> -# define QEMU_GNUC_PREREQ(maj, min) \
+> -         ((__GNUC__ << 16) + __GNUC_MINOR__ >=3D ((maj) << 16) + (min))
+> -#else
+> -# define QEMU_GNUC_PREREQ(maj, min) 0
+> -#endif
+> -
+>  #define QEMU_NORETURN __attribute__ ((__noreturn__))
+>
+>  #define QEMU_WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+> diff --git a/scripts/cocci-macro-file.h b/scripts/cocci-macro-file.h
+> index c6bbc05ba3..20eea6b708 100644
+> --- a/scripts/cocci-macro-file.h
+> +++ b/scripts/cocci-macro-file.h
+> @@ -19,7 +19,6 @@
+>   */
+>
+>  /* From qemu/compiler.h */
+> -#define QEMU_GNUC_PREREQ(maj, min) 1
+>  #define QEMU_NORETURN __attribute__ ((__noreturn__))
+>  #define QEMU_WARN_UNUSED_RESULT __attribute__((warn_unused_result))
+>  #define QEMU_SENTINEL __attribute__((sentinel))
+>
 
-Patch 1 adds Arm support for run_in_exception_handler(). Constructing
-the related bug_frame is unfortunately not as easy as on x86.
+ping, thanks
 
-I have verified that %c in inline assembly isn't supported by gcc 7 for
-arm64, so this was the only way I've found to support this feature. In
-theory it might be possible to add a variable referencing the called
-function and to discard that variable again when linking, but I'd like
-to add this more intrusive modification only if really wanted.
+--=20
+Marc-Andr=C3=A9 Lureau
 
-There is more potential for unifying struct bug_frame between x86 and
-Arm, either by:
-- using the Arm layout on x86, too (resulting in a grow of the bugframe
-  data for the cases without messages)
-- trying to construct the data in C instead of inline assembly, which
-  will need to either keep the x86 assembler BUG_FRAME construction, or
-  to add a few functions issuing the ASSERT/BUG/WARN which would then
-  need to be called from *.S files.
+--0000000000005583ba05b6681a42
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Patch 2 opens up more potential for simplification: in theory there is
-no need any more to call any key handler with the regs parameter,
-allowing to use the same prototype for all handlers. The downside would
-be to have an additional irq frame on the stack for the dump_registers()
-and the do_debug_key() handlers. In case this is acceptable I'd be
-happy to send a related cleanup patch.
+<div dir=3D"ltr"><div dir=3D"ltr">Hi<br></div><br><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Dec 10, 2020 at 6:07 PM &lt=
+;<a href=3D"mailto:marcandre.lureau@redhat.com">marcandre.lureau@redhat.com=
+</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
+From: Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.lureau@redhat.=
+com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt;<br>
+<br>
+When needed, the G_GNUC_CHECK_VERSION() glib macro can be used instead.<br>
+<br>
+Signed-off-by: Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.lurea=
+u@redhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt;<br>
+---<br>
+=C2=A0include/qemu/compiler.h=C2=A0 =C2=A0 | 11 -----------<br>
+=C2=A0scripts/cocci-macro-file.h |=C2=A0 1 -<br>
+=C2=A02 files changed, 12 deletions(-)<br>
+<br>
+diff --git a/include/qemu/compiler.h b/include/qemu/compiler.h<br>
+index 5e6cf2c8e8..1b9e58e82b 100644<br>
+--- a/include/qemu/compiler.h<br>
++++ b/include/qemu/compiler.h<br>
+@@ -11,17 +11,6 @@<br>
+=C2=A0#define QEMU_STATIC_ANALYSIS 1<br>
+=C2=A0#endif<br>
+<br>
+-/*------------------------------------------------------------------------=
+----<br>
+-| The macro QEMU_GNUC_PREREQ tests for minimum version of the GNU C compil=
+er.<br>
+-| The code is a copy of SOFTFLOAT_GNUC_PREREQ, see softfloat-macros.h.<br>
+-*-------------------------------------------------------------------------=
+---*/<br>
+-#if defined(__GNUC__) &amp;&amp; defined(__GNUC_MINOR__)<br>
+-# define QEMU_GNUC_PREREQ(maj, min) \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0((__GNUC__ &lt;&lt; 16) + __GNUC_MINOR__=
+ &gt;=3D ((maj) &lt;&lt; 16) + (min))<br>
+-#else<br>
+-# define QEMU_GNUC_PREREQ(maj, min) 0<br>
+-#endif<br>
+-<br>
+=C2=A0#define QEMU_NORETURN __attribute__ ((__noreturn__))<br>
+<br>
+=C2=A0#define QEMU_WARN_UNUSED_RESULT __attribute__((warn_unused_result))<b=
+r>
+diff --git a/scripts/cocci-macro-file.h b/scripts/cocci-macro-file.h<br>
+index c6bbc05ba3..20eea6b708 100644<br>
+--- a/scripts/cocci-macro-file.h<br>
++++ b/scripts/cocci-macro-file.h<br>
+@@ -19,7 +19,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0/* From qemu/compiler.h */<br>
+-#define QEMU_GNUC_PREREQ(maj, min) 1<br>
+=C2=A0#define QEMU_NORETURN __attribute__ ((__noreturn__))<br>
+=C2=A0#define QEMU_WARN_UNUSED_RESULT __attribute__((warn_unused_result))<b=
+r>
+=C2=A0#define QEMU_SENTINEL __attribute__((sentinel))<br></blockquote><div>=
+<br></div><div>ping, thanks <br></div></div><br>-- <br><div dir=3D"ltr" cla=
+ss=3D"gmail_signature">Marc-Andr=C3=A9 Lureau<br></div></div>
 
-Juergen Gross (3):
-  xen/arm: add support for run_in_exception_handler()
-  xen: enable keyhandlers to work without register set specified
-  xen: add support for automatic debug key actions in case of crash
-
- docs/misc/xen-command-line.pandoc | 41 +++++++++++++++++
- xen/arch/arm/traps.c              | 10 ++++-
- xen/common/kexec.c                |  8 ++--
- xen/common/keyhandler.c           | 73 +++++++++++++++++++++++++++++--
- xen/common/shutdown.c             |  4 +-
- xen/drivers/char/console.c        |  2 +-
- xen/drivers/char/ns16550.c        |  3 +-
- xen/include/asm-arm/bug.h         | 32 +++++++++-----
- xen/include/xen/kexec.h           | 10 ++++-
- xen/include/xen/keyhandler.h      | 10 +++++
- 10 files changed, 169 insertions(+), 24 deletions(-)
-
--- 
-2.26.2
-
+--0000000000005583ba05b6681a42--
 
