@@ -2,48 +2,55 @@ Return-Path: <SRS0=B7AJ=FS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E979C4361B
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDE0AC4361B
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 49C59224D1
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49C59224D1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=netbsd.org
+	by mail.kernel.org (Postfix) with ESMTPS id 90EA3224D1
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 90EA3224D1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52421.91821 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52463.91851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshq-0003RX-3D; Mon, 14 Dec 2020 18:36:22 +0000
+	id 1koshv-0003he-1M; Mon, 14 Dec 2020 18:36:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52421.91821; Mon, 14 Dec 2020 18:36:21 +0000
+Received: by outflank-mailman (output) from mailman id 52463.91851; Mon, 14 Dec 2020 18:36:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kosho-0003QQ-Fp; Mon, 14 Dec 2020 18:36:20 +0000
-Received: by outflank-mailman (input) for mailman id 52421;
- Mon, 14 Dec 2020 16:39:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Nuho=FS=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1koqrX-0006vN-LY
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 16:38:15 +0000
-Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fcbac439-46ba-41f8-8fb9-3b1a9d40e0c3;
- Mon, 14 Dec 2020 16:36:35 +0000 (UTC)
-Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 0BEGaYjL018346;
- Mon, 14 Dec 2020 17:36:34 +0100 (CET)
-Received: from borneo.soc.lip6.fr (borneo [132.227.103.47])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 0BEGaYxR010544;
- Mon, 14 Dec 2020 17:36:34 +0100 (MET)
-Received: by borneo.soc.lip6.fr (Postfix, from userid 373)
- id 44A4CAAC66; Mon, 14 Dec 2020 17:36:34 +0100 (MET)
+	id 1koshu-0003g8-5h; Mon, 14 Dec 2020 18:36:26 +0000
+Received: by outflank-mailman (input) for mailman id 52463;
+ Mon, 14 Dec 2020 17:06:38 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=O6EJ=FS=redhat.com=slp@srs-us1.protection.inumbo.net>)
+ id 1korJ0-0001x2-3B
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 17:06:38 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 9ad1bd6e-18cc-453b-bac9-306d71786958;
+ Mon, 14 Dec 2020 17:06:37 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-244-D0CmhjvTOY6pEL_0tz-PPA-1; Mon, 14 Dec 2020 12:06:33 -0500
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7C6511012EA3;
+ Mon, 14 Dec 2020 17:06:19 +0000 (UTC)
+Received: from toolbox.redhat.com (ovpn-112-231.rdu2.redhat.com
+ [10.10.112.231])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A9AEB5D6AB;
+ Mon, 14 Dec 2020 17:05:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +62,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fcbac439-46ba-41f8-8fb9-3b1a9d40e0c3
-From: Manuel Bouyer <bouyer@netbsd.org>
-To: xen-devel@lists.xenproject.org
-Cc: Manuel Bouyer <bouyer@netbsd.org>
-Subject: [PATCH 23/24] Use xen/xenio.h on NetBSD
-Date: Mon, 14 Dec 2020 17:36:22 +0100
-Message-Id: <20201214163623.2127-24-bouyer@netbsd.org>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201214163623.2127-1-bouyer@netbsd.org>
-References: <20201214163623.2127-1-bouyer@netbsd.org>
+X-Inumbo-ID: 9ad1bd6e-18cc-453b-bac9-306d71786958
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1607965597;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/WpOYjMEI+uu6Ezu621PcgD7x1p7LtSJUlUJzLyqhGc=;
+	b=GDKALjNQdTUuK4lCz8sOK7Ds7EM8Kw3WgME4H6+oOwUCaDYsXjzGjQ6rxn81lQy3+saEZ3
+	rfdLTGdkOZMOh7w9JHKG5sSnKtqupk0VUeCHYo5HcJ1tjZ4PE2KE1vlZv+aPVirnLBGGyv
+	NuwUIM78Rklg4sjogSAFOTZzTeFjTRI=
+X-MC-Unique: D0CmhjvTOY6pEL_0tz-PPA-1
+From: Sergio Lopez <slp@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Kevin Wolf <kwolf@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	qemu-block@nongnu.org,
+	Anthony Perard <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org,
+	Paul Durrant <paul@xen.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Fam Zheng <fam@euphon.net>,
+	Eric Blake <eblake@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Max Reitz <mreitz@redhat.com>,
+	Sergio Lopez <slp@redhat.com>
+Subject: [PATCH v2 2/4] block: Avoid processing BDS twice in bdrv_set_aio_context_ignore()
+Date: Mon, 14 Dec 2020 18:05:17 +0100
+Message-Id: <20201214170519.223781-3-slp@redhat.com>
+In-Reply-To: <20201214170519.223781-1-slp@redhat.com>
+References: <20201214170519.223781-1-slp@redhat.com>
 MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=slp@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Mon, 14 Dec 2020 17:36:34 +0100 (CET)
-X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
+Content-Type: text/plain; charset="US-ASCII"
 
+While processing the parents of a BDS, one of the parents may process
+the child that's doing the tail recursion, which leads to a BDS being
+processed twice. This is especially problematic for the aio_notifiers,
+as they might attempt to work on both the old and the new AIO
+contexts.
+
+To avoid this, add the BDS pointer to the ignore list, and check the
+child BDS pointer while iterating over the children.
+
+Signed-off-by: Sergio Lopez <slp@redhat.com>
 ---
- tools/libs/ctrl/xc_private.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ block.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
-index f0b5f83ac8..68e388f488 100644
---- a/tools/libs/ctrl/xc_private.h
-+++ b/tools/libs/ctrl/xc_private.h
-@@ -39,7 +39,11 @@
- #include <xenforeignmemory.h>
- #include <xendevicemodel.h>
+diff --git a/block.c b/block.c
+index f1cedac362..bc8a66ab6e 100644
+--- a/block.c
++++ b/block.c
+@@ -6465,12 +6465,17 @@ void bdrv_set_aio_context_ignore(BlockDriverState *bs,
+     bdrv_drained_begin(bs);
  
-+#ifdef __NetBSD__
-+#include <xen/xenio.h>
-+#else
- #include <xen/sys/privcmd.h>
-+#endif
- 
- #include <xen-tools/libs.h>
- 
+     QLIST_FOREACH(child, &bs->children, next) {
+-        if (g_slist_find(*ignore, child)) {
++        if (g_slist_find(*ignore, child) || g_slist_find(*ignore, child->bs)) {
+             continue;
+         }
+         *ignore = g_slist_prepend(*ignore, child);
+         bdrv_set_aio_context_ignore(child->bs, new_context, ignore);
+     }
++    /*
++     * Add a reference to this BS to the ignore list, so its
++     * parents won't attempt to process it again.
++     */
++    *ignore = g_slist_prepend(*ignore, bs);
+     QLIST_FOREACH(child, &bs->parents, next_parent) {
+         if (g_slist_find(*ignore, child)) {
+             continue;
 -- 
-2.28.0
+2.26.2
 
 
