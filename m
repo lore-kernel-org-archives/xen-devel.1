@@ -2,53 +2,48 @@ Return-Path: <SRS0=B7AJ=FS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08A36C3527E
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 17:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1082C4361B
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 460C722516
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 17:24:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 460C722516
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6C4EF224D1
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C4EF224D1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=netbsd.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52476.91509 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52388.91618 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koraN-0003mv-9I; Mon, 14 Dec 2020 17:24:35 +0000
+	id 1koshH-0001tF-DQ; Mon, 14 Dec 2020 18:35:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52476.91509; Mon, 14 Dec 2020 17:24:35 +0000
+Received: by outflank-mailman (output) from mailman id 52388.91618; Mon, 14 Dec 2020 18:35:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koraN-0003mo-5p; Mon, 14 Dec 2020 17:24:35 +0000
-Received: by outflank-mailman (input) for mailman id 52476;
- Mon, 14 Dec 2020 17:24:34 +0000
+	id 1koshG-0001sh-Rh; Mon, 14 Dec 2020 18:35:46 +0000
+Received: by outflank-mailman (input) for mailman id 52388;
+ Mon, 14 Dec 2020 16:37:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hKoR=FS=redhat.com=ehabkost@srs-us1.protection.inumbo.net>)
- id 1koraM-0003mj-2G
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 17:24:34 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id cb2bce35-7541-4f67-9b90-134b5b10151c;
- Mon, 14 Dec 2020 17:24:33 +0000 (UTC)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-583-5mqhwgx1OAqCYa9M4ykgwA-1; Mon, 14 Dec 2020 12:24:31 -0500
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E043E107ACF5;
- Mon, 14 Dec 2020 17:24:28 +0000 (UTC)
-Received: from localhost (ovpn-116-160.rdu2.redhat.com [10.10.116.160])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6BE2410021AA;
- Mon, 14 Dec 2020 17:24:19 +0000 (UTC)
+ <SRS0=Nuho=FS=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
+ id 1koqqU-0006vN-JD
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 16:37:10 +0000
+Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id de156a27-9ec4-4675-91d3-84c974aff5bf;
+ Mon, 14 Dec 2020 16:36:34 +0000 (UTC)
+Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 0BEGaWYu006863;
+ Mon, 14 Dec 2020 17:36:32 +0100 (CET)
+Received: from borneo.soc.lip6.fr (borneo [132.227.103.47])
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 0BEGaWeD021269;
+ Mon, 14 Dec 2020 17:36:32 +0100 (MET)
+Received: by borneo.soc.lip6.fr (Postfix, from userid 373)
+ id B9906AAC67; Mon, 14 Dec 2020 17:36:32 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,103 +55,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb2bce35-7541-4f67-9b90-134b5b10151c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607966672;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=tVrw542DX2KLO2TPzENouPrv7sTLbHUO9KuI1dV/ApQ=;
-	b=YjZVnEhMg8/zcRnSWqPQqai/Fmz+TJeCXp2n0b44Wp4AwGn3giDjSfNdCzElgPc8bDHHXz
-	M9q3H4tJsByuKozGDnxwQV7dPOCNOVp3s4Sp0iVHyWhR5HCYLAAjDvoRy53PQKqO87x3cG
-	P+xx5BDLRyy7O1/e/a7QbHfEf7f/VVM=
-X-MC-Unique: 5mqhwgx1OAqCYa9M4ykgwA-1
-Date: Mon, 14 Dec 2020 12:24:18 -0500
-From: Eduardo Habkost <ehabkost@redhat.com>
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
-	Stefan Berger <stefanb@linux.ibm.com>,
-	=?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
-	"Daniel P. Berrange" <berrange@redhat.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
-	John Snow <jsnow@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
-	Eric Blake <eblake@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
-	Stefan Berger <stefanb@linux.vnet.ibm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>, Max Reitz <mreitz@redhat.com>,
-	Cornelia Huck <cohuck@redhat.com>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Richard Henderson <rth@twiddle.net>,
-	David Hildenbrand <david@redhat.com>,
-	Thomas Huth <thuth@redhat.com>,
-	Matthew Rosato <mjrosato@linux.ibm.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Artyom Tarasenko <atar4qemu@gmail.com>,
-	xen-devel@lists.xenproject.org, qemu-block@nongnu.org,
-	qemu-s390x@nongnu.org
-Subject: Re: [PATCH v4 23/32] qdev: Move dev->realized check to
- qdev_property_set()
-Message-ID: <20201214172418.GK1289986@habkost.net>
-References: <20201211220529.2290218-1-ehabkost@redhat.com>
- <20201211220529.2290218-24-ehabkost@redhat.com>
- <20201214155530.55f80cd6@redhat.com>
+X-Inumbo-ID: de156a27-9ec4-4675-91d3-84c974aff5bf
+From: Manuel Bouyer <bouyer@netbsd.org>
+To: xen-devel@lists.xenproject.org
+Cc: Manuel Bouyer <bouyer@netbsd.org>
+Subject: [PATCH 02/24] NetBSD doens't need xenbackendd with xl toolstack
+Date: Mon, 14 Dec 2020 17:36:01 +0100
+Message-Id: <20201214163623.2127-3-bouyer@netbsd.org>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20201214163623.2127-1-bouyer@netbsd.org>
+References: <20201214163623.2127-1-bouyer@netbsd.org>
 MIME-Version: 1.0
-In-Reply-To: <20201214155530.55f80cd6@redhat.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Mon, 14 Dec 2020 17:36:33 +0100 (CET)
+X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
-On Mon, Dec 14, 2020 at 03:55:30PM +0100, Igor Mammedov wrote:
-> On Fri, 11 Dec 2020 17:05:20 -0500
-> Eduardo Habkost <ehabkost@redhat.com> wrote:
-> 
-> > Every single qdev property setter function manually checks
-> > dev->realized.  We can just check dev->realized inside
-> > qdev_property_set() instead.
-> > 
-> > The check is being added as a separate function
-> > (qdev_prop_allow_set()) because it will become a callback later.
-> 
-> is callback added within this series?
-> and I'd add here what's the purpose of it.
+---
+ tools/Makefile | 1 -
+ 1 file changed, 1 deletion(-)
 
-It will be added in part 2 of the series.  See v3:
-https://lore.kernel.org/qemu-devel/20201112214350.872250-35-ehabkost@redhat.com/
-
-I don't know what else I could say about its purpose, in addition
-to what I wrote above, and the comment below[1].
-
-If you are just curious about the callback and confused because
-it is not anywhere in this series, I can just remove the
-paragraph above from the commit message.  Would that be enough?
-
-> 
-[...]
-> > +/* returns: true if property is allowed to be set, false otherwise */
-
-[1] ^^^
-
-> > +static bool qdev_prop_allow_set(Object *obj, const char *name,
-> > +                                Error **errp)
-> > +{
-> > +    DeviceState *dev = DEVICE(obj);
-> > +
-> > +    if (dev->realized) {
-> > +        qdev_prop_set_after_realize(dev, name, errp);
-> > +        return false;
-> > +    }
-> > +    return true;
-> > +}
-> > +
-
+diff --git a/tools/Makefile b/tools/Makefile
+index ed71474421..757a560be0 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -18,7 +18,6 @@ SUBDIRS-$(CONFIG_X86) += firmware
+ SUBDIRS-y += console
+ SUBDIRS-y += xenmon
+ SUBDIRS-y += xentop
+-SUBDIRS-$(CONFIG_NetBSD) += xenbackendd
+ SUBDIRS-y += libfsimage
+ SUBDIRS-$(CONFIG_Linux) += vchan
+ 
 -- 
-Eduardo
+2.28.0
 
 
