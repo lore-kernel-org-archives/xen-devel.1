@@ -2,41 +2,48 @@ Return-Path: <SRS0=B7AJ=FS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F83AC4361B
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 21:43:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1013AC2BB40
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 21:43:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 299CB22210
+	by mail.kernel.org (Postfix) with ESMTPS id 8F23D22210
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 21:43:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 299CB22210
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F23D22210
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=thesusis.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52702.92027 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52695.92007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kovcm-0006Xs-KQ; Mon, 14 Dec 2020 21:43:20 +0000
+	id 1kovcl-0006WN-U8; Mon, 14 Dec 2020 21:43:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52702.92027; Mon, 14 Dec 2020 21:43:20 +0000
+Received: by outflank-mailman (output) from mailman id 52695.92007; Mon, 14 Dec 2020 21:43:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kovcm-0006XS-Cn; Mon, 14 Dec 2020 21:43:20 +0000
-Received: by outflank-mailman (input) for mailman id 52702;
- Mon, 14 Dec 2020 21:13:12 +0000
+	id 1kovcl-0006WB-NY; Mon, 14 Dec 2020 21:43:19 +0000
+Received: by outflank-mailman (input) for mailman id 52695;
+ Mon, 14 Dec 2020 20:43:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6luh=FS=kernel.org=saeed@srs-us1.protection.inumbo.net>)
- id 1kov9c-0003j1-Pw
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 21:13:12 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1VlC=FS=vps.thesusis.net=psusi@srs-us1.protection.inumbo.net>)
+ id 1kouh3-00012R-AX
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 20:43:41 +0000
+Received: from vps.thesusis.net (unknown [34.202.238.73])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 43b336df-5a5c-4021-b07e-fe6cca59fadb;
- Mon, 14 Dec 2020 21:13:12 +0000 (UTC)
+ id eb657a85-d9a4-4d5e-8fb9-319b6080a827;
+ Mon, 14 Dec 2020 20:43:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by vps.thesusis.net (Postfix) with ESMTP id 5F65126E7D;
+ Mon, 14 Dec 2020 15:25:48 -0500 (EST)
+Received: from vps.thesusis.net ([127.0.0.1])
+ by localhost (vps.thesusis.net [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id SzwiUz0EGBcR; Mon, 14 Dec 2020 15:25:48 -0500 (EST)
+Received: by vps.thesusis.net (Postfix, from userid 1000)
+ id 2294826E79; Mon, 14 Dec 2020 15:25:48 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,119 +55,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43b336df-5a5c-4021-b07e-fe6cca59fadb
-Message-ID: <0f8eda3bbed1100c1c1f7015dd5c172f8d735c94.camel@kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1607980391;
-	bh=Pzvi/5ISTUEc02BC83hB6nniQmkTHPAhNCBBNcfKAUY=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
-	b=Ks3P3xnvXkJSp+uh7CcZoik6MJkEKtx2PvE0VYPE/pepC3FjT65YOm45Ebhka542Q
-	 KDRZnMtG6PVk8azMh03nN0D62HLqcKsXaM3NGfl0cnBfDn4M/eCG3Bapi5UEiWJojE
-	 Wz5xGjdq/ndTqDY7tNprPuvOQMJrfpTrREHq07hUDedim+JiPcYSm9y/a+CVpdgIGp
-	 tK5qViUVIaC1nIaet1VMQYFfwNA6Uv7knO5wHsw+J306Af6r5YPeiXS/tptiFYTABJ
-	 2yXmYvRm101qHL41Iu7+0L42D5JI7GLbb235mT9lCcvuGwm/DUlfBNloCq8GKc5F9/
-	 KjhGS5BzrCEJg==
-Subject: Re: [patch 22/30] net/mlx5: Replace irq_to_desc() abuse
-From: Saeed Mahameed <saeed@kernel.org>
-To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>, 
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, Helge
- Deller <deller@gmx.de>, afzal mohammed <afzal.mohd.ma@gmail.com>,
- linux-parisc@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
- linux-arm-kernel@lists.infradead.org, Mark Rutland <mark.rutland@arm.com>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Christian Borntraeger <borntraeger@de.ibm.com>, Heiko Carstens
- <hca@linux.ibm.com>, linux-s390@vger.kernel.org, Jani Nikula
- <jani.nikula@linux.intel.com>,  Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Pankaj
- Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>, Chris Wilson
- <chris@chris-wilson.co.uk>, Wambui Karuga <wambui.karugax@gmail.com>, 
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, Tvrtko
- Ursulin <tvrtko.ursulin@linux.intel.com>, Linus Walleij
- <linus.walleij@linaro.org>,  linux-gpio@vger.kernel.org, Lee Jones
- <lee.jones@linaro.org>, Jon Mason <jdmason@kudzu.us>, Dave Jiang
- <dave.jiang@intel.com>, Allen Hubbe <allenbh@gmail.com>,
- linux-ntb@googlegroups.com, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, Michal
- Simek <michal.simek@xilinx.com>,  linux-pci@vger.kernel.org, Karthikeyan
- Mitran <m.karthikeyan@mobiveil.co.in>,  Hou Zhiqiang
- <Zhiqiang.Hou@nxp.com>, Tariq Toukan <tariqt@nvidia.com>, "David S. Miller"
- <davem@davemloft.net>,  Jakub Kicinski <kuba@kernel.org>,
- netdev@vger.kernel.org, linux-rdma@vger.kernel.org, Leon Romanovsky
- <leon@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen
- Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
- xen-devel@lists.xenproject.org
-Date: Mon, 14 Dec 2020 13:13:07 -0800
-In-Reply-To: <20201210194044.769458162@linutronix.de>
-References: <20201210192536.118432146@linutronix.de>
-	 <20201210194044.769458162@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+X-Inumbo-ID: eb657a85-d9a4-4d5e-8fb9-319b6080a827
+References: <87h7oudcbx.fsf@vps.thesusis.net> <CAHD1Q_zcruQ6KVHApvhb=0+mG0m80T+tmg1UzjQBki8j+aR51A@mail.gmail.com>
+User-agent: mu4e 1.5.7; emacs 26.3
+From: Phillip Susi <phill@thesusis.net>
+To: "Guilherme G. Piccoli" <guilherme.piccoli@canonical.com>
+Cc: kexec mailing list <kexec@lists.infradead.org>, xen-devel@lists.xenproject.org
+Subject: Re: kexec not working in xen domU?
+Date: Mon, 14 Dec 2020 15:08:57 -0500
+In-reply-to: <CAHD1Q_zcruQ6KVHApvhb=0+mG0m80T+tmg1UzjQBki8j+aR51A@mail.gmail.com>
+Message-ID: <87czzcdtir.fsf@vps.thesusis.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-
-On Thu, 2020-12-10 at 20:25 +0100, Thomas Gleixner wrote:
-> No driver has any business with the internals of an interrupt
-> descriptor. Storing a pointer to it just to use yet another helper at
-> the
-> actual usage site to retrieve the affinity mask is creative at best.
-> Just
-> because C does not allow encapsulation does not mean that the kernel
-> has no
-> limits.
-> 
-
-you can't blame the developers for using stuff from include/linux/
-Not all developers are the same, and sometime we don't read in between
-the lines, you can't assume all driver developers to be expert on irq
-APIs disciplines.
-
-your rules must be programmatically expressed, for instance,
-you can just hide struct irq_desc and irq_to_desc() in kernel/irq/ and
-remove them from include/linux/ header files, if you want privacy in
-your subsystem, don't put all your header files on display under
-include/linux.
+Content-Type: text/plain
 
 
-> Retrieve a pointer to the affinity mask itself and use that. It's
-> still
-> using an interface which is usually not for random drivers, but
-> definitely
-> less hideous than the previous hack.
-> 
-> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> ---
->  drivers/net/ethernet/mellanox/mlx5/core/en.h      |    2 +-
->  drivers/net/ethernet/mellanox/mlx5/core/en_main.c |    2 +-
->  drivers/net/ethernet/mellanox/mlx5/core/en_txrx.c |    6 +-----
->  3 files changed, 3 insertions(+), 7 deletions(-)
-> 
-> --- a/drivers/net/ethernet/mellanox/mlx5/core/en.h
-> +++ b/drivers/net/ethernet/mellanox/mlx5/core/en.h
-> @@ -669,7 +669,7 @@ struct mlx5e_channel {
->  	spinlock_t                 async_icosq_lock;
->  
->  	/* data path - accessed per napi poll */
-> -	struct irq_desc *irq_desc;
-> +	const struct cpumask	  *aff_mask;
->  	struct mlx5e_ch_stats     *stats;
->  
->  	/* control */
-> --- a/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
-> +++ b/drivers/net/ethernet/mellanox/mlx5/core/en_main.c
-> @@ -1998,7 +1998,7 @@ static int mlx5e_open_channel(struct mlx
->  	c->num_tc   = params->num_tc;
->  	c->xdp      = !!params->xdp_prog;
->  	c->stats    = &priv->channel_stats[ix].ch;
-> -	c->irq_desc = irq_to_desc(irq);
-> +	c->aff_mask = irq_get_affinity_mask(irq);
+Guilherme G. Piccoli writes:
 
-as long as the affinity mask pointer stays the same for the lifetime of
-the irq vector.
+> Can you capture the serial console in a pastebin? Maybe add something
+> like "earlyprintk=ttySX", where ttySX is your known-to-work serial
+> console output. This helps to determine if it's a shutdown issue or an
+> early boot problem.
 
-Assuming that:
-Acked-by: Saeed Mahameed <saeedm@nvidia.com>
+The regular xen cosole should work for this shouldn't it?  So
+earlyprintk=hvc0 I guess?  I also threw in console=hvc0 and loglevel=7:
 
+[  184.734810] systemd-shutdown[1]: Syncing filesystems and block
+devices.
+[  185.772511] systemd-shutdown[1]: Sending SIGTERM to remaining
+processes...
+[  185.896957] systemd-shutdown[1]: Sending SIGKILL to remaining
+processes...
+[  185.901111] systemd-shutdown[1]: Unmounting file systems.
+[  185.902180] [1035]: Remounting '/' read-only in with options
+'errors=remount-ro'.
+[  185.990634] EXT4-fs (xvda1): re-mounted. Opts: errors=remount-ro
+[  186.002373] systemd-shutdown[1]: All filesystems unmounted.
+[  186.002411] systemd-shutdown[1]: Deactivating swaps.
+[  186.002502] systemd-shutdown[1]: All swaps deactivated.
+[  186.002529] systemd-shutdown[1]: Detaching loop devices.
+[  186.002699] systemd-shutdown[1]: All loop devices detached.
+[  186.002727] systemd-shutdown[1]: Stopping MD devices.
+[  186.002814] systemd-shutdown[1]: All MD devices stopped.
+[  186.002840] systemd-shutdown[1]: Detaching DM devices.
+[  186.002974] systemd-shutdown[1]: All DM devices detached.
+[  186.003017] systemd-shutdown[1]: All filesystems, swaps, loop
+devices, MD devices and DM devices detached.
+[  186.168475] systemd-shutdown[1]: Syncing filesystems and block
+devices.
+[  186.169150] systemd-shutdown[1]: Rebooting with kexec.
+[  186.418653] xenbus_probe_frontend: xenbus_frontend_dev_shutdown:
+device/vbd/5632: Initialising != Connected, skipping
+[  186.427377] kexec_core: Starting new kernel
 
 
