@@ -7,50 +7,50 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AC3FC2BB40
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE65AC4361B
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CAD6E224D1
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CAD6E224D1
+	by mail.kernel.org (Postfix) with ESMTPS id 7BF77224D1
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Dec 2020 18:36:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7BF77224D1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52461.91844 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52467.91878 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kosht-0003d8-S2; Mon, 14 Dec 2020 18:36:25 +0000
+	id 1koshy-0003sS-JE; Mon, 14 Dec 2020 18:36:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52461.91844; Mon, 14 Dec 2020 18:36:25 +0000
+Received: by outflank-mailman (output) from mailman id 52467.91878; Mon, 14 Dec 2020 18:36:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1koshs-0003bh-Fx; Mon, 14 Dec 2020 18:36:24 +0000
-Received: by outflank-mailman (input) for mailman id 52461;
- Mon, 14 Dec 2020 17:05:44 +0000
+	id 1koshx-0003r9-Sd; Mon, 14 Dec 2020 18:36:29 +0000
+Received: by outflank-mailman (input) for mailman id 52467;
+ Mon, 14 Dec 2020 17:06:51 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=O6EJ=FS=redhat.com=slp@srs-us1.protection.inumbo.net>)
- id 1korI8-0001vO-1f
- for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 17:05:44 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
+ id 1korJD-0001y4-RW
+ for xen-devel@lists.xenproject.org; Mon, 14 Dec 2020 17:06:51 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 76bc8c39-8d8b-419e-a334-5f0d38c62da0;
- Mon, 14 Dec 2020 17:05:42 +0000 (UTC)
+ id 94297bc7-4b2c-40b3-8999-002e654fcffe;
+ Mon, 14 Dec 2020 17:06:50 +0000 (UTC)
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-580-s8NqP3znNFanUNxldhXiHw-1; Mon, 14 Dec 2020 12:05:38 -0500
+ us-mta-557-_8-ouXvpNqK8vTFc4U2Pjg-1; Mon, 14 Dec 2020 12:06:47 -0500
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 548C3B8122;
- Mon, 14 Dec 2020 17:05:37 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0BAA0800685;
+ Mon, 14 Dec 2020 17:06:26 +0000 (UTC)
 Received: from toolbox.redhat.com (ovpn-112-231.rdu2.redhat.com
  [10.10.112.231])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 50A455D6AB;
- Mon, 14 Dec 2020 17:05:34 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F3A39669FC;
+ Mon, 14 Dec 2020 17:06:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,18 +62,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76bc8c39-8d8b-419e-a334-5f0d38c62da0
+X-Inumbo-ID: 94297bc7-4b2c-40b3-8999-002e654fcffe
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1607965542;
+	s=mimecast20190719; t=1607965610;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=+Eya5ky4YkXegn79a2KsK7rMFFfw80cpB9O81T1hhcs=;
-	b=D8nfXyPen1o7Wnf4yvy+Rd7RUlMUAVWGCfe9xBxy2E3ybg/9xGw3zfDtsfFHNtmg3enqjU
-	3Oz+MUgAS/NFfi74odgd45oEm9ZN17vaI04tpuPxGAeWM+ymkXjSas/nvkknBq3I2RazsO
-	s2Qv27XHqZrZg4S5HIMoRwzGsPEBhj0=
-X-MC-Unique: s8NqP3znNFanUNxldhXiHw-1
+	bh=bR0d1JArrAy1qnHujAAvCo8e9rCfTiOxzdxX6U9l434=;
+	b=A17hCsS2dLfOAdeLek1rUNWKlSiON6lRiCofKLHx/32gKFAprl3Q7BCsU4qXnAFxpiuCvX
+	w+llJLsolyD6t1Ci3p8KhnAtf7i4+RWdwmXlLOvEil/OOOpZ+t2LdrX6n5b1i64KIQjkGS
+	se/SAZIwC8lWaQ+osAjiAtu2+3aZ2oM=
+X-MC-Unique: _8-ouXvpNqK8vTFc4U2Pjg-1
 From: Sergio Lopez <slp@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Kevin Wolf <kwolf@redhat.com>,
@@ -89,9 +89,9 @@ Cc: Kevin Wolf <kwolf@redhat.com>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Max Reitz <mreitz@redhat.com>,
 	Sergio Lopez <slp@redhat.com>
-Subject: [PATCH v2 1/4] block: Honor blk_set_aio_context() context requirements
-Date: Mon, 14 Dec 2020 18:05:16 +0100
-Message-Id: <20201214170519.223781-2-slp@redhat.com>
+Subject: [PATCH v2 4/4] block: Close block exports in two steps
+Date: Mon, 14 Dec 2020 18:05:19 +0100
+Message-Id: <20201214170519.223781-5-slp@redhat.com>
 In-Reply-To: <20201214170519.223781-1-slp@redhat.com>
 References: <20201214170519.223781-1-slp@redhat.com>
 MIME-Version: 1.0
@@ -103,100 +103,152 @@ X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
 
-The documentation for bdrv_set_aio_context_ignore() states this:
+There's a cross-dependency between closing the block exports and
+draining the block layer. The latter needs that we close all export's
+client connections to ensure they won't queue more requests, but the
+exports may have coroutines yielding in the block layer, which implies
+they can't be fully closed until we drain it.
 
- * The caller must own the AioContext lock for the old AioContext of bs, but it
- * must not own the AioContext lock for new_context (unless new_context is the
- * same as the current context of bs).
+To break this cross-dependency, this change adds a "bool wait"
+argument to blk_exp_close_all() and blk_exp_close_all_type(), so
+callers can decide whether they want to wait for the exports to be
+fully quiesced, or just return after requesting them to shut down.
 
-As blk_set_aio_context() makes use of this function, this rule also
-applies to it.
+Then, in bdrv_close_all we make two calls, one without waiting to
+close all client connections, and another after draining the block
+layer, this time waiting for the exports to be fully quiesced.
 
-Fix all occurrences where this rule wasn't honored.
-
-Suggested-by: Kevin Wolf <kwolf@redhat.com>
+RHBZ: https://bugzilla.redhat.com/show_bug.cgi?id=1900505
 Signed-off-by: Sergio Lopez <slp@redhat.com>
 ---
- hw/block/dataplane/virtio-blk.c | 4 ++++
- hw/block/dataplane/xen-block.c  | 7 ++++++-
- hw/scsi/virtio-scsi.c           | 6 ++++--
- 3 files changed, 14 insertions(+), 3 deletions(-)
+ block.c                   | 20 +++++++++++++++++++-
+ block/export/export.c     | 10 ++++++----
+ blockdev-nbd.c            |  2 +-
+ include/block/export.h    |  4 ++--
+ qemu-nbd.c                |  2 +-
+ stubs/blk-exp-close-all.c |  2 +-
+ 6 files changed, 30 insertions(+), 10 deletions(-)
 
-diff --git a/hw/block/dataplane/virtio-blk.c b/hw/block/dataplane/virtio-blk.c
-index 37499c5564..e9050c8987 100644
---- a/hw/block/dataplane/virtio-blk.c
-+++ b/hw/block/dataplane/virtio-blk.c
-@@ -172,6 +172,7 @@ int virtio_blk_data_plane_start(VirtIODevice *vdev)
-     VirtIOBlockDataPlane *s = vblk->dataplane;
-     BusState *qbus = BUS(qdev_get_parent_bus(DEVICE(vblk)));
-     VirtioBusClass *k = VIRTIO_BUS_GET_CLASS(qbus);
-+    AioContext *old_context;
-     unsigned i;
-     unsigned nvqs = s->conf->num_queues;
-     Error *local_err = NULL;
-@@ -214,7 +215,10 @@ int virtio_blk_data_plane_start(VirtIODevice *vdev)
-     vblk->dataplane_started = true;
-     trace_virtio_blk_data_plane_start(s);
- 
-+    old_context = blk_get_aio_context(s->conf->conf.blk);
-+    aio_context_acquire(old_context);
-     r = blk_set_aio_context(s->conf->conf.blk, s->ctx, &local_err);
-+    aio_context_release(old_context);
-     if (r < 0) {
-         error_report_err(local_err);
-         goto fail_guest_notifiers;
-diff --git a/hw/block/dataplane/xen-block.c b/hw/block/dataplane/xen-block.c
-index 71c337c7b7..3675f8deaf 100644
---- a/hw/block/dataplane/xen-block.c
-+++ b/hw/block/dataplane/xen-block.c
-@@ -725,6 +725,7 @@ void xen_block_dataplane_start(XenBlockDataPlane *dataplane,
+diff --git a/block.c b/block.c
+index bc8a66ab6e..41db70ac07 100644
+--- a/block.c
++++ b/block.c
+@@ -4472,13 +4472,31 @@ static void bdrv_close(BlockDriverState *bs)
+ void bdrv_close_all(void)
  {
-     ERRP_GUARD();
-     XenDevice *xendev = dataplane->xendev;
-+    AioContext *old_context;
-     unsigned int ring_size;
-     unsigned int i;
+     assert(job_next(NULL) == NULL);
+-    blk_exp_close_all();
++
++    /*
++     * There's a cross-dependency between closing the block exports and
++     * draining the block layer. The latter needs that we close all export's
++     * client connections to ensure they won't queue more requests, but the
++     * exports may have coroutines yielding in the block layer, which implies
++     * they can't be fully closed until we drain it.
++     *
++     * Make a first call to close all export's client connections, without
++     * waiting for each export to be fully quiesced.
++     */
++    blk_exp_close_all(false);
  
-@@ -808,10 +809,14 @@ void xen_block_dataplane_start(XenBlockDataPlane *dataplane,
-         goto stop;
+     /* Drop references from requests still in flight, such as canceled block
+      * jobs whose AIO context has not been polled yet */
+     bdrv_drain_all();
+ 
+     blk_remove_all_bs();
++
++    /*
++     * Make a second call to shut down the exports, this time waiting for them
++     * to be fully quiesced.
++     */
++    blk_exp_close_all(true);
++
+     blockdev_close_all_bdrv_states();
+ 
+     assert(QTAILQ_EMPTY(&all_bdrv_states));
+diff --git a/block/export/export.c b/block/export/export.c
+index bad6f21b1c..0124ebd9f9 100644
+--- a/block/export/export.c
++++ b/block/export/export.c
+@@ -280,7 +280,7 @@ static bool blk_exp_has_type(BlockExportType type)
+ }
+ 
+ /* type == BLOCK_EXPORT_TYPE__MAX for all types */
+-void blk_exp_close_all_type(BlockExportType type)
++void blk_exp_close_all_type(BlockExportType type, bool wait)
+ {
+     BlockExport *exp, *next;
+ 
+@@ -293,12 +293,14 @@ void blk_exp_close_all_type(BlockExportType type)
+         blk_exp_request_shutdown(exp);
      }
  
--    aio_context_acquire(dataplane->ctx);
-+    old_context = blk_get_aio_context(dataplane->blk);
-+    aio_context_acquire(old_context);
-     /* If other users keep the BlockBackend in the iothread, that's ok */
-     blk_set_aio_context(dataplane->blk, dataplane->ctx, NULL);
-+    aio_context_release(old_context);
-+
-     /* Only reason for failure is a NULL channel */
-+    aio_context_acquire(dataplane->ctx);
-     xen_device_set_event_channel_context(xendev, dataplane->event_channel,
-                                          dataplane->ctx, &error_abort);
-     aio_context_release(dataplane->ctx);
-diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
-index 3db9a8aae9..7a347ceac5 100644
---- a/hw/scsi/virtio-scsi.c
-+++ b/hw/scsi/virtio-scsi.c
-@@ -821,15 +821,17 @@ static void virtio_scsi_hotplug(HotplugHandler *hotplug_dev, DeviceState *dev,
-     VirtIODevice *vdev = VIRTIO_DEVICE(hotplug_dev);
-     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
-     SCSIDevice *sd = SCSI_DEVICE(dev);
-+    AioContext *old_context;
-     int ret;
+-    AIO_WAIT_WHILE(NULL, blk_exp_has_type(type));
++    if (wait) {
++        AIO_WAIT_WHILE(NULL, blk_exp_has_type(type));
++    }
+ }
  
-     if (s->ctx && !s->dataplane_fenced) {
-         if (blk_op_is_blocked(sd->conf.blk, BLOCK_OP_TYPE_DATAPLANE, errp)) {
-             return;
+-void blk_exp_close_all(void)
++void blk_exp_close_all(bool wait)
+ {
+-    blk_exp_close_all_type(BLOCK_EXPORT_TYPE__MAX);
++    blk_exp_close_all_type(BLOCK_EXPORT_TYPE__MAX, wait);
+ }
+ 
+ void qmp_block_export_add(BlockExportOptions *export, Error **errp)
+diff --git a/blockdev-nbd.c b/blockdev-nbd.c
+index d8443d235b..d71d4da7c2 100644
+--- a/blockdev-nbd.c
++++ b/blockdev-nbd.c
+@@ -266,7 +266,7 @@ void qmp_nbd_server_stop(Error **errp)
+         return;
+     }
+ 
+-    blk_exp_close_all_type(BLOCK_EXPORT_TYPE_NBD);
++    blk_exp_close_all_type(BLOCK_EXPORT_TYPE_NBD, true);
+ 
+     nbd_server_free(nbd_server);
+     nbd_server = NULL;
+diff --git a/include/block/export.h b/include/block/export.h
+index 7feb02e10d..71c25928ce 100644
+--- a/include/block/export.h
++++ b/include/block/export.h
+@@ -83,7 +83,7 @@ BlockExport *blk_exp_find(const char *id);
+ void blk_exp_ref(BlockExport *exp);
+ void blk_exp_unref(BlockExport *exp);
+ void blk_exp_request_shutdown(BlockExport *exp);
+-void blk_exp_close_all(void);
+-void blk_exp_close_all_type(BlockExportType type);
++void blk_exp_close_all(bool wait);
++void blk_exp_close_all_type(BlockExportType type, bool wait);
+ 
+ #endif
+diff --git a/qemu-nbd.c b/qemu-nbd.c
+index a7075c5419..928f4466f6 100644
+--- a/qemu-nbd.c
++++ b/qemu-nbd.c
+@@ -1122,7 +1122,7 @@ int main(int argc, char **argv)
+     do {
+         main_loop_wait(false);
+         if (state == TERMINATE) {
+-            blk_exp_close_all();
++            blk_exp_close_all(true);
+             state = TERMINATED;
          }
--        virtio_scsi_acquire(s);
-+        old_context = blk_get_aio_context(sd->conf.blk);
-+        aio_context_acquire(old_context);
-         ret = blk_set_aio_context(sd->conf.blk, s->ctx, errp);
--        virtio_scsi_release(s);
-+        aio_context_release(old_context);
-         if (ret < 0) {
-             return;
-         }
+     } while (state != TERMINATED);
+diff --git a/stubs/blk-exp-close-all.c b/stubs/blk-exp-close-all.c
+index 1c71316763..ecd0ce611f 100644
+--- a/stubs/blk-exp-close-all.c
++++ b/stubs/blk-exp-close-all.c
+@@ -2,6 +2,6 @@
+ #include "block/export.h"
+ 
+ /* Only used in programs that support block exports (libblockdev.fa) */
+-void blk_exp_close_all(void)
++void blk_exp_close_all(bool wait)
+ {
+ }
 -- 
 2.26.2
 
