@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA5A5C4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13370C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E29922B51
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E29922B51
+	by mail.kernel.org (Postfix) with ESMTPS id D14EC22581
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D14EC22581
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54678.95183 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54683.95195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDTf-00020V-MV; Tue, 15 Dec 2020 16:47:07 +0000
+	id 1kpDTm-00025a-VH; Tue, 15 Dec 2020 16:47:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54678.95183; Tue, 15 Dec 2020 16:47:07 +0000
+Received: by outflank-mailman (output) from mailman id 54683.95195; Tue, 15 Dec 2020 16:47:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDTf-00020L-Ha; Tue, 15 Dec 2020 16:47:07 +0000
-Received: by outflank-mailman (input) for mailman id 54678;
- Tue, 15 Dec 2020 16:47:05 +0000
+	id 1kpDTm-00025T-R1; Tue, 15 Dec 2020 16:47:14 +0000
+Received: by outflank-mailman (input) for mailman id 54683;
+ Tue, 15 Dec 2020 16:47:13 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDK8-00066M-JH
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:37:16 +0000
+ id 1kpDK3-00066M-J8
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:37:11 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b4fc910e-a22a-4aa1-ae90-3f3d3434ab4a;
+ id 9484f92d-f7fe-4499-b74a-209d001bc347;
  Tue, 15 Dec 2020 16:36:15 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0E8A1B282;
+ by mx2.suse.de (Postfix) with ESMTP id 929D8B711;
  Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,388 +52,233 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b4fc910e-a22a-4aa1-ae90-3f3d3434ab4a
+X-Inumbo-ID: 9484f92d-f7fe-4499-b74a-209d001bc347
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1608050172; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=MSf4+puKW484kP2G0bQfIEcisU7NAj/olnxKhB+8UZ8=;
-	b=i50mjkOdP+7BifXtMXoGf6d55kFLh6ncbe1YDHsy/X3dZZclnkC3OLl2lbReNLUL65f38T
-	tDSmxxL3EW2nVCqAA+X8Quk08b7kGxqy837Xc+UtmzJOwSdKyx0WvryeKyyylpmLcFTJZM
-	yOxbqzoZNOml94++9HnrzXq+NxAvS4A=
+	bh=NilqGYTQhpkTDabJtW0PbsSjQkzIJ61e98qt7CTEwA4=;
+	b=sMeTI8HgyVysSVPzViBQusG8SejoZRzLIT8SAiJBx1tj/3vZdKYMWR3YS7EPPo7Si+K+g5
+	GhOlM5rHqlvd5ESlZvtmcrVV6YOjpEExhwbU+aU4PuHd26ssYFkTTkT06M9Q8sP5DbFc8o
+	7aC8Xvr0Y9svcUJLz+dOgefYWiiJr58=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v10 21/25] tools/xenstore: add read connection state for live update
-Date: Tue, 15 Dec 2020 17:35:59 +0100
-Message-Id: <20201215163603.21700-22-jgross@suse.com>
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH v10 23/25] tools/xenstore: add read watch state for live update
+Date: Tue, 15 Dec 2020 17:36:01 +0100
+Message-Id: <20201215163603.21700-24-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
 References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the needed functions for reading connection state for live update.
+Add reading the watch state records for live update.
 
-As the connection is identified by a unique connection id in the state
-records we need to add this to struct connection. Add a new function
-to return the connection based on a connection id.
+This requires factoring out some of the add watch functionality into a
+dedicated function.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
-V2:
-- fixed condition in introduce_domain() (Julien Grall)
-
 V4:
-- set pending data msg type to XS_INVALID (Julien Grall)
-- add buffered read data (Julien Grall)
-
-V5:
-- really read buffered read data (Julien Grall)
-- drop conn parameter from introduce_domain() (Paul Durrant)
-- split pending write data into individual buffers
+- add comment (Julien Grall)
 
 V6:
-- rename "first" to "partial" (Paul Durrant)
-
-V7:
-- use local port from connection data
-
-V8:
-- remove dom0 special handling
+- correct check_watch_path() (setting errno)
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_control.c |   1 +
- tools/xenstore/xenstored_core.c    | 102 ++++++++++++++++++++++++++++-
- tools/xenstore/xenstored_core.h    |  10 +++
- tools/xenstore/xenstored_domain.c  |  60 +++++++++++++----
- tools/xenstore/xenstored_domain.h  |   2 +
- 5 files changed, 162 insertions(+), 13 deletions(-)
+ tools/xenstore/xenstored_control.c |   2 +
+ tools/xenstore/xenstored_watch.c   | 114 +++++++++++++++++++++--------
+ tools/xenstore/xenstored_watch.h   |   2 +
+ 3 files changed, 88 insertions(+), 30 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index f6c4ab3d8a..4bf075ad79 100644
+index a978ccf17e..8a1e3b35fe 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -522,6 +522,7 @@ void lu_read_state(void)
- 			read_state_global(ctx, head + 1);
- 			break;
- 		case XS_STATE_TYPE_CONN:
-+			read_state_connection(ctx, head + 1);
+@@ -35,6 +35,7 @@ Interactive commands for Xen Store Daemon.
+ #include "xenstored_core.h"
+ #include "xenstored_control.h"
+ #include "xenstored_domain.h"
++#include "xenstored_watch.h"
+ 
+ /* Mini-OS only knows about MAP_ANON. */
+ #ifndef MAP_ANONYMOUS
+@@ -525,6 +526,7 @@ void lu_read_state(void)
+ 			read_state_connection(ctx, head + 1);
  			break;
  		case XS_STATE_TYPE_WATCH:
++			read_state_watch(ctx, head + 1);
  			break;
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 5922a03a98..2ad1cc8d44 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -1532,12 +1532,35 @@ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read)
- 	return new;
+ 		case XS_STATE_TYPE_TA:
+ 			xprintf("live-update: ignore transaction record\n");
+diff --git a/tools/xenstore/xenstored_watch.c b/tools/xenstore/xenstored_watch.c
+index 9248f08bd9..db89e0141f 100644
+--- a/tools/xenstore/xenstored_watch.c
++++ b/tools/xenstore/xenstored_watch.c
+@@ -205,6 +205,62 @@ static int destroy_watch(void *_watch)
+ 	return 0;
  }
  
-+struct connection *get_connection_by_id(unsigned int conn_id)
++static int check_watch_path(struct connection *conn, const void *ctx,
++			    char **path, bool *relative)
 +{
-+	struct connection *conn;
++	/* Check if valid event. */
++	if (strstarts(*path, "@")) {
++		*relative = false;
++		if (strlen(*path) > XENSTORE_REL_PATH_MAX)
++			goto inval;
++	} else {
++		*relative = !strstarts(*path, "/");
++		*path = canonicalize(conn, ctx, *path);
++		if (!*path)
++			return errno;
++		if (!is_valid_nodename(*path))
++			goto inval;
++	}
 +
-+	list_for_each_entry(conn, &connections, list)
-+		if (conn->conn_id == conn_id)
-+			return conn;
++	return 0;
 +
++ inval:
++	errno = EINVAL;
++	return errno;
++}
++
++static struct watch *add_watch(struct connection *conn, char *path, char *token,
++			       bool relative)
++{
++	struct watch *watch;
++
++	watch = talloc(conn, struct watch);
++	if (!watch)
++		goto nomem;
++	watch->node = talloc_strdup(watch, path);
++	watch->token = talloc_strdup(watch, token);
++	if (!watch->node || !watch->token)
++		goto nomem;
++
++	if (relative)
++		watch->relative_path = get_implicit_path(conn);
++	else
++		watch->relative_path = NULL;
++
++	INIT_LIST_HEAD(&watch->events);
++
++	domain_watch_inc(conn);
++	list_add_tail(&watch->list, &conn->watches);
++	talloc_set_destructor(watch, destroy_watch);
++
++	return watch;
++
++ nomem:
++	talloc_free(watch);
++	errno = ENOMEM;
 +	return NULL;
 +}
 +
- #ifdef NO_SOCKETS
- static void accept_connection(int sock)
+ int do_watch(struct connection *conn, struct buffered_data *in)
  {
- }
-+
-+int writefd(struct connection *conn, const void *data, unsigned int len)
-+{
-+	errno = EBADF;
-+	return -1;
-+}
-+
-+int readfd(struct connection *conn, void *data, unsigned int len)
-+{
-+	errno = EBADF;
-+	return -1;
-+}
- #else
--static int writefd(struct connection *conn, const void *data, unsigned int len)
-+int writefd(struct connection *conn, const void *data, unsigned int len)
- {
- 	int rc;
- 
-@@ -1553,7 +1576,7 @@ static int writefd(struct connection *conn, const void *data, unsigned int len)
- 	return rc;
- }
- 
--static int readfd(struct connection *conn, void *data, unsigned int len)
-+int readfd(struct connection *conn, void *data, unsigned int len)
- {
- 	int rc;
- 
-@@ -2460,6 +2483,81 @@ void read_state_global(const void *ctx, const void *state)
- 	domain_init(glb->evtchn_fd);
- }
- 
-+static void add_buffered_data(struct buffered_data *bdata,
-+			      struct connection *conn, const uint8_t *data,
-+			      unsigned int len)
-+{
-+	bdata->hdr.msg.len = len;
-+	if (len <= DEFAULT_BUFFER_SIZE)
-+		bdata->buffer = bdata->default_buffer;
-+	else
-+		bdata->buffer = talloc_array(bdata, char, len);
-+	if (!bdata->buffer)
-+		barf("error restoring buffered data");
-+
-+	memcpy(bdata->buffer, data, len);
-+
-+	/* Queue for later transmission. */
-+	list_add_tail(&bdata->list, &conn->out_list);
-+}
-+
-+void read_state_buffered_data(const void *ctx, struct connection *conn,
-+			      const struct xs_state_connection *sc)
-+{
-+	struct buffered_data *bdata;
-+	const uint8_t *data;
-+	unsigned int len;
-+	bool partial = sc->data_resp_len;
-+
-+	if (sc->data_in_len) {
-+		bdata = new_buffer(conn);
-+		if (!bdata)
-+			barf("error restoring read data");
-+		if (sc->data_in_len < sizeof(bdata->hdr)) {
-+			bdata->inhdr = true;
-+			memcpy(&bdata->hdr, sc->data, sc->data_in_len);
-+			bdata->used = sc->data_in_len;
-+		} else {
-+			bdata->inhdr = false;
-+			memcpy(&bdata->hdr, sc->data, sizeof(bdata->hdr));
-+			if (bdata->hdr.msg.len <= DEFAULT_BUFFER_SIZE)
-+				bdata->buffer = bdata->default_buffer;
-+			else
-+				bdata->buffer = talloc_array(bdata, char,
-+							bdata->hdr.msg.len);
-+			if (!bdata->buffer)
-+				barf("Error allocating in buffer");
-+			bdata->used = sc->data_in_len - sizeof(bdata->hdr);
-+			memcpy(bdata->buffer, sc->data + sizeof(bdata->hdr),
-+			       bdata->used);
-+		}
-+
-+		conn->in = bdata;
-+	}
-+
-+	for (data = sc->data + sc->data_in_len;
-+	     data < sc->data + sc->data_in_len + sc->data_out_len;
-+	     data += len) {
-+		bdata = new_buffer(conn);
-+		if (!bdata)
-+			barf("error restoring buffered data");
-+		if (partial) {
-+			bdata->inhdr = false;
-+			/* Make trace look nice. */
-+			bdata->hdr.msg.type = XS_INVALID;
-+			len = sc->data_resp_len;
-+			add_buffered_data(bdata, conn, data, len);
-+			partial = false;
-+			continue;
-+		}
-+
-+		memcpy(&bdata->hdr, data, sizeof(bdata->hdr));
-+		data += sizeof(bdata->hdr);
-+		len = bdata->hdr.msg.len;
-+		add_buffered_data(bdata, conn, data, len);
-+	}
-+}
-+
- /*
-  * Local variables:
-  *  mode: C
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 6c9d838f11..cb256626fe 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -118,6 +118,9 @@ struct connection
- 	/* Methods for communicating over this connection: write can be NULL */
- 	connwritefn_t *write;
- 	connreadfn_t *read;
-+
-+	/* Support for live update: connection id. */
-+	unsigned int conn_id;
- };
- extern struct list_head connections;
- 
-@@ -178,6 +181,7 @@ struct node *read_node(struct connection *conn, const void *ctx,
- 		       const char *name);
- 
- struct connection *new_connection(connwritefn_t *write, connreadfn_t *read);
-+struct connection *get_connection_by_id(unsigned int conn_id);
- void check_store(void);
- void corrupt(struct connection *conn, const char *fmt, ...);
- enum xs_perm_type perm_for_conn(struct connection *conn,
-@@ -229,6 +233,10 @@ void finish_daemonize(void);
- /* Open a pipe for signal handling */
- void init_pipe(int reopen_log_pipe[2]);
- 
-+int writefd(struct connection *conn, const void *data, unsigned int len);
-+int readfd(struct connection *conn, void *data, unsigned int len);
-+
-+extern struct interface_funcs socket_funcs;
- extern xengnttab_handle **xgt_handle;
- 
- int remember_string(struct hashtable *hash, const char *str);
-@@ -245,6 +253,8 @@ const char *dump_state_node_perms(FILE *fp, struct xs_state_node *sn,
- 				  unsigned int n_perms);
- 
- void read_state_global(const void *ctx, const void *state);
-+void read_state_buffered_data(const void *ctx, struct connection *conn,
-+			      const struct xs_state_connection *sc);
- 
- #endif /* _XENSTORED_CORE_H */
- 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 94dd501a3b..0cd8234bd1 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -355,7 +355,7 @@ static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
- 	return domain ? : alloc_domain(ctx, domid);
- }
- 
--static int new_domain(struct domain *domain, int port)
-+static int new_domain(struct domain *domain, int port, bool restore)
- {
- 	int rc;
- 
-@@ -369,11 +369,16 @@ static int new_domain(struct domain *domain, int port)
- 
- 	wrl_domain_new(domain);
- 
--	/* Tell kernel we're interested in this event. */
--	rc = xenevtchn_bind_interdomain(xce_handle, domain->domid, port);
--	if (rc == -1)
--		return errno;
--	domain->port = rc;
-+	if (restore)
-+		domain->port = port;
-+	else {
-+		/* Tell kernel we're interested in this event. */
-+		rc = xenevtchn_bind_interdomain(xce_handle, domain->domid,
-+						port);
-+		if (rc == -1)
-+			return errno;
-+		domain->port = rc;
-+	}
- 
- 	domain->introduced = true;
- 
-@@ -423,7 +428,7 @@ static void domain_conn_reset(struct domain *domain)
- 
- static struct domain *introduce_domain(const void *ctx,
- 				       unsigned int domid,
--				       evtchn_port_t port)
-+				       evtchn_port_t port, bool restore)
- {
- 	struct domain *domain;
- 	int rc;
-@@ -439,7 +444,7 @@ static struct domain *introduce_domain(const void *ctx,
- 					     : map_interface(domid);
- 		if (!interface)
- 			return NULL;
--		if (new_domain(domain, port)) {
-+		if (new_domain(domain, port, restore)) {
- 			rc = errno;
- 			if (is_master_domain)
- 				unmap_xenbus(interface);
-@@ -453,7 +458,7 @@ static struct domain *introduce_domain(const void *ctx,
- 		/* Now domain belongs to its connection. */
- 		talloc_steal(domain->conn, domain);
- 
--		if (!is_master_domain)
-+		if (!is_master_domain && !restore)
- 			fire_watches(NULL, ctx, "@introduceDomain", NULL,
- 				     false, NULL);
- 	} else {
-@@ -486,7 +491,7 @@ int do_introduce(struct connection *conn, struct buffered_data *in)
- 	if (port <= 0)
+ 	struct watch *watch;
+@@ -214,19 +270,9 @@ int do_watch(struct connection *conn, struct buffered_data *in)
+ 	if (get_strings(in, vec, ARRAY_SIZE(vec)) != ARRAY_SIZE(vec))
  		return EINVAL;
  
--	domain = introduce_domain(in, domid, port);
-+	domain = introduce_domain(in, domid, port, false);
- 	if (!domain)
- 		return errno;
+-	if (strstarts(vec[0], "@")) {
+-		relative = false;
+-		if (strlen(vec[0]) > XENSTORE_REL_PATH_MAX)
+-			return EINVAL;
+-		/* check if valid event */
+-	} else {
+-		relative = !strstarts(vec[0], "/");
+-		vec[0] = canonicalize(conn, in, vec[0]);
+-		if (!vec[0])
+-			return ENOMEM;
+-		if (!is_valid_nodename(vec[0]))
+-			return EINVAL;
+-	}
++	errno = check_watch_path(conn, in, &(vec[0]), &relative);
++	if (errno)
++		return errno;
  
-@@ -715,7 +720,7 @@ void dom0_init(void)
- 	if (port == -1)
- 		barf_perror("Failed to initialize dom0 port");
+ 	/* Check for duplicates. */
+ 	list_for_each_entry(watch, &conn->watches, list) {
+@@ -238,26 +284,11 @@ int do_watch(struct connection *conn, struct buffered_data *in)
+ 	if (domain_watch(conn) > quota_nb_watch_per_domain)
+ 		return E2BIG;
  
--	dom0 = introduce_domain(NULL, xenbus_master_domid(), port);
-+	dom0 = introduce_domain(NULL, xenbus_master_domid(), port, false);
- 	if (!dom0)
- 		barf_perror("Failed to initialize dom0");
+-	watch = talloc(conn, struct watch);
++	watch = add_watch(conn, vec[0], vec[1], relative);
+ 	if (!watch)
+-		return ENOMEM;
+-	watch->node = talloc_strdup(watch, vec[0]);
+-	watch->token = talloc_strdup(watch, vec[1]);
+-	if (!watch->node || !watch->token) {
+-		talloc_free(watch);
+-		return ENOMEM;
+-	}
+-	if (relative)
+-		watch->relative_path = get_implicit_path(conn);
+-	else
+-		watch->relative_path = NULL;
++		return errno;
  
-@@ -1261,6 +1266,39 @@ const char *dump_state_special_nodes(FILE *fp)
+-	INIT_LIST_HEAD(&watch->events);
+-
+-	domain_watch_inc(conn);
+-	list_add_tail(&watch->list, &conn->watches);
+ 	trace_create(watch, "watch");
+-	talloc_set_destructor(watch, destroy_watch);
+ 	send_ack(conn, XS_WATCH);
+ 
+ 	/* We fire once up front: simplifies clients and restart. */
+@@ -338,6 +369,29 @@ const char *dump_state_watches(FILE *fp, struct connection *conn,
  	return ret;
  }
  
-+void read_state_connection(const void *ctx, const void *state)
++void read_state_watch(const void *ctx, const void *state)
 +{
-+	const struct xs_state_connection *sc = state;
++	const struct xs_state_watch *sw = state;
 +	struct connection *conn;
-+	struct domain *domain, *tdomain;
++	char *path, *token;
++	bool relative;
 +
-+	if (sc->conn_type == XS_STATE_CONN_TYPE_SOCKET) {
-+		conn = new_connection(writefd, readfd);
-+		if (!conn)
-+			barf("error restoring connection");
-+		conn->fd = sc->spec.socket_fd;
-+	} else {
-+		domain = introduce_domain(ctx, sc->spec.ring.domid,
-+					  sc->spec.ring.evtchn, true);
-+		if (!domain)
-+			barf("domain allocation error");
++	conn = get_connection_by_id(sw->conn_id);
++	if (!conn)
++		barf("connection not found for read watch");
 +
-+		if (sc->spec.ring.tdomid != DOMID_INVALID) {
-+			tdomain = find_or_alloc_domain(ctx,
-+						       sc->spec.ring.tdomid);
-+			if (!tdomain)
-+				barf("target domain allocation error");
-+			talloc_reference(domain->conn, tdomain->conn);
-+			domain->conn->target = tdomain->conn;
-+		}
-+		conn = domain->conn;
-+	}
++	path = (char *)sw->data;
++	token = path + sw->path_length;
 +
-+	conn->conn_id = sc->conn_id;
++	/* Don't check success, we want the relative information only. */
++	check_watch_path(conn, ctx, &path, &relative);
++	if (!path)
++		barf("allocation error for read watch");
 +
-+	read_state_buffered_data(ctx, conn, sc);
++	if (!add_watch(conn, path, token, relative))
++		barf("error adding watch");
 +}
 +
  /*
   * Local variables:
   *  mode: C
-diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index b20269b038..8f3b4e0f8b 100644
---- a/tools/xenstore/xenstored_domain.h
-+++ b/tools/xenstore/xenstored_domain.h
-@@ -101,4 +101,6 @@ void wrl_apply_debit_trans_commit(struct connection *conn);
- const char *dump_state_connections(FILE *fp, struct connection *conn);
- const char *dump_state_special_nodes(FILE *fp);
+diff --git a/tools/xenstore/xenstored_watch.h b/tools/xenstore/xenstored_watch.h
+index 3d81645f45..0e693f0839 100644
+--- a/tools/xenstore/xenstored_watch.h
++++ b/tools/xenstore/xenstored_watch.h
+@@ -33,4 +33,6 @@ void conn_delete_all_watches(struct connection *conn);
+ const char *dump_state_watches(FILE *fp, struct connection *conn,
+ 			       unsigned int conn_id);
  
-+void read_state_connection(const void *ctx, const void *state);
++void read_state_watch(const void *ctx, const void *state);
 +
- #endif /* _XENSTORED_DOMAIN_H */
+ #endif /* _XENSTORED_WATCH_H */
 -- 
 2.26.2
 
