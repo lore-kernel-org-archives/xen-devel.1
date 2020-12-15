@@ -2,40 +2,45 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 967F9C2BB9A
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:46:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51FF0C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:46:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F07C22581
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:46:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F07C22581
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 115EF22571
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:46:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 115EF22571
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54664.95144 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54669.95155 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDSx-0001fP-F9; Tue, 15 Dec 2020 16:46:23 +0000
+	id 1kpDTJ-0001m3-Oa; Tue, 15 Dec 2020 16:46:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54664.95144; Tue, 15 Dec 2020 16:46:23 +0000
+Received: by outflank-mailman (output) from mailman id 54669.95155; Tue, 15 Dec 2020 16:46:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDSx-0001fH-Bs; Tue, 15 Dec 2020 16:46:23 +0000
-Received: by outflank-mailman (input) for mailman id 54664;
- Tue, 15 Dec 2020 16:46:21 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0G7T=FT=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kpDK2-000667-IL
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:37:10 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id daa7a249-4b04-4f2e-b2fc-307e7cd90ff9;
- Tue, 15 Dec 2020 16:36:36 +0000 (UTC)
+	id 1kpDTJ-0001lw-Ld; Tue, 15 Dec 2020 16:46:45 +0000
+Received: by outflank-mailman (input) for mailman id 54669;
+ Tue, 15 Dec 2020 16:46:45 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kpDJt-00066M-Ib
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:37:01 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ef3335b5-2c28-45c3-b9c3-4c4ff1e53e81;
+ Tue, 15 Dec 2020 16:36:15 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AA173B712;
+ Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,54 +52,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: daa7a249-4b04-4f2e-b2fc-307e7cd90ff9
-Date: Tue, 15 Dec 2020 08:36:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1608050195;
-	bh=/ci9mZ+yx/ofabk1Z8BtUgyoxeNEGUxytxqspy+rg6M=;
-	h=From:To:cc:Subject:In-Reply-To:References:From;
-	b=rlUNJ7Z5XFrkrvkJZsPgmqn9UIAsKotuT1HbiOXLB/zvvh5WtA9efww/8cg9XZ0k9
-	 uSdkD7bXpRSQFBnaHRBaJiHDzQLbrTHs4UPh3OoczpGqJLO1doqzK325p0hFt3NIDj
-	 Z3z206QE0De+nT3NibZiD75Kch2q2oacCIm1q2bTFGAt2X9L5tZfsuk/iw+OuN1IiE
-	 bikvMxx//UanYOjzQaxnhmVHWhAbCqL1ygIWpdCP7QFRBc1CYWhpaFu14A7YBT5vTo
-	 IsBtAIFiMyStnP6OeGfJUwSF5x8GNgmwsroe2/I0WmTUiE5K9dLDACvYppIq9+d01r
-	 XZTdXJIGm56rQ==
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Elliott Mitchell <ehem+xen@m5p.com>
-cc: Roman Shaposhnik <roman@zededa.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-    Oleksandr_Andrushchenko@epam.com, 
-    Xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: Xen-ARM DomUs
-In-Reply-To: <X9gcZu5uJpXx8wNn@mattapan.m5p.com>
-Message-ID: <alpine.DEB.2.21.2012150828170.4040@sstabellini-ThinkPad-T480s>
-References: <X9gcZu5uJpXx8wNn@mattapan.m5p.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: ef3335b5-2c28-45c3-b9c3-4c4ff1e53e81
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1608050172; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=FspAu+0zxN5f+kBxTUaFqpiXMEMEL35uaqc65DYbH+U=;
+	b=WYjMGffV3cHOlieIVijpD/JpBAYGwjWoFeZF+pBfxCAeriK5IAr+ISrP0xfa/hcw6SuHCt
+	jVVXGRZY/WKCML5J9L3bMHYydkYN5FEnpFZdSTQM+vHbq/qv1JjkYMn4SgqMgGmGZVsbCt
+	kV3F5wAAexfDePQ4yB2IC1tJrdS4XMI=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Julien Grall <jgrall@amazon.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH v10 24/25] tools/xenstore: handle dying domains in live update
+Date: Tue, 15 Dec 2020 17:36:02 +0100
+Message-Id: <20201215163603.21700-25-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
+References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 
-On Mon, 14 Dec 2020, Elliott Mitchell wrote:
-> Finally getting to the truly productive stages of my project with Xen on
-> ARM.
-> 
-> How many of the OSes which function as x86 DomUs for Xen, function as
-> ARM DomUs?  Getting Linux operational was straightforward, but what of
-> others?
+From: Julien Grall <jgrall@amazon.com>
 
-I know of FreeRTOS, Zephyr, VxWorks.
+A domain could just be dying when live updating Xenstore, so the case
+of not being able to map the ring page or to connect to the event
+channel must be handled gracefully.
 
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+V4:
+- new patch (Julien, I hope adding the Sob: is okay?)
 
-> The available examples seem geared towards Linux DomUs.  I'm looking at a
-> FreeBSD installation image and it appears to expect an EFI firmware.
-> Beyond having a bunch of files appearing oriented towards booting on EFI
-> I can't say much about (booting) FreeBSD/ARM DomUs.
+V10:
+- removed "XXX..." comment (Julien Grall)
 
-Running EFI firmware in a domU is possible with both Tianocore and
-U-Boot. You should be able to build the firmware and pass it as a
-kernel= binary in the xl file. Then the firmware will be able to load
-the necessary binaries from the virtual disk.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenstore/xenstored_control.c |  7 +++++++
+ tools/xenstore/xenstored_domain.c  | 25 +++++++++++++++++--------
+ tools/xenstore/xenstored_domain.h  |  2 ++
+ 3 files changed, 26 insertions(+), 8 deletions(-)
 
-I ran Tianocore this way years ago. Recently, u-boot has been ported to
-be run in a domU by Oleksandr Andrushchenko (CCed).
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 8a1e3b35fe..dee55de264 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -544,6 +544,13 @@ void lu_read_state(void)
+ 	lu_close_dump_state(&state);
+ 
+ 	talloc_free(ctx);
++
++	/*
++	 * We may have missed the VIRQ_DOM_EXC notification and a domain may
++	 * have died while we were live-updating. So check all the domains are
++	 * still alive.
++	 */
++	check_domains(true);
+ }
+ 
+ static const char *lu_activate_binary(const void *ctx)
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 0cd8234bd1..dfda90c791 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -220,7 +220,7 @@ static bool get_domain_info(unsigned int domid, xc_dominfo_t *dominfo)
+ 	       dominfo->domid == domid;
+ }
+ 
+-static void domain_cleanup(void)
++void check_domains(bool restore)
+ {
+ 	xc_dominfo_t dominfo;
+ 	struct domain *domain;
+@@ -244,7 +244,14 @@ static void domain_cleanup(void)
+ 				domain->shutdown = true;
+ 				notify = 1;
+ 			}
+-			if (!dominfo.dying)
++			/*
++			 * On Restore, we may have been unable to remap the
++			 * interface and the port. As we don't know whether
++			 * this was because of a dying domain, we need to
++			 * check if the interface and port are still valid.
++			 */
++			if (!dominfo.dying && domain->port &&
++			    domain->interface)
+ 				continue;
+ 		}
+ 		if (domain->conn) {
+@@ -270,7 +277,7 @@ void handle_event(void)
+ 		barf_perror("Failed to read from event fd");
+ 
+ 	if (port == virq_port)
+-		domain_cleanup();
++		check_domains(false);
+ 
+ 	if (xenevtchn_unmask(xce_handle, port) == -1)
+ 		barf_perror("Failed to write to event fd");
+@@ -442,14 +449,16 @@ static struct domain *introduce_domain(const void *ctx,
+ 	if (!domain->introduced) {
+ 		interface = is_master_domain ? xenbus_map()
+ 					     : map_interface(domid);
+-		if (!interface)
++		if (!interface && !restore)
+ 			return NULL;
+ 		if (new_domain(domain, port, restore)) {
+ 			rc = errno;
+-			if (is_master_domain)
+-				unmap_xenbus(interface);
+-			else
+-				unmap_interface(interface);
++			if (interface) {
++				if (is_master_domain)
++					unmap_xenbus(interface);
++				else
++					unmap_interface(interface);
++			}
+ 			errno = rc;
+ 			return NULL;
+ 		}
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index 8f3b4e0f8b..1cc1c03ed8 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -21,6 +21,8 @@
+ 
+ void handle_event(void);
+ 
++void check_domains(bool restore);
++
+ /* domid, mfn, eventchn, path */
+ int do_introduce(struct connection *conn, struct buffered_data *in);
+ 
+-- 
+2.26.2
+
 
