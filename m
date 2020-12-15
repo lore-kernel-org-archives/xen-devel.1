@@ -7,38 +7,38 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06ABDC2BB9A
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93039C2BBCA
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B7EE922581
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7EE922581
+	by mail.kernel.org (Postfix) with ESMTPS id 52DCF22573
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52DCF22573
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54535.94892 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54543.94920 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJL-0006V0-D8; Tue, 15 Dec 2020 16:36:27 +0000
+	id 1kpDJQ-0006ft-CD; Tue, 15 Dec 2020 16:36:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54535.94892; Tue, 15 Dec 2020 16:36:27 +0000
+Received: by outflank-mailman (output) from mailman id 54543.94920; Tue, 15 Dec 2020 16:36:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJL-0006Ug-7Z; Tue, 15 Dec 2020 16:36:27 +0000
-Received: by outflank-mailman (input) for mailman id 54535;
- Tue, 15 Dec 2020 16:36:25 +0000
+	id 1kpDJQ-0006ff-6q; Tue, 15 Dec 2020 16:36:32 +0000
+Received: by outflank-mailman (input) for mailman id 54543;
+ Tue, 15 Dec 2020 16:36:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDJJ-000667-GR
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:25 +0000
+ id 1kpDJO-000667-Go
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:30 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 38bf8d0a-1866-4834-915e-24fcd94ee086;
+ id ad375b72-b3e0-4ac5-a755-001c076d9bc0;
  Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8CB6CB1C4;
+ by mx2.suse.de (Postfix) with ESMTP id EFEEEB267;
  Tue, 15 Dec 2020 16:36:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -51,142 +51,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38bf8d0a-1866-4834-915e-24fcd94ee086
+X-Inumbo-ID: ad375b72-b3e0-4ac5-a755-001c076d9bc0
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608050169; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608050170; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=aNFJAE4KqQnX5IjGOaMkCIzNeyfe1g2GU9xo9W5ZYdw=;
-	b=HxoH/VKPziYS/CvlgodAP7TL52lOF7xAQhediq8DcuBxx6+7J/OmpXAidgqcRGgQr3PhbX
-	IliUzW+PJ1/zyFQV+CPzjxK4aQ8yZGAMMN/1ZCLJqo4pieME0pC+jW7jyQH7Ih8vbDBoDF
-	+JzLHnZnlnWy0M1SlVkYdW2Rx45V1d4=
+	bh=nPZAkpB2QjQ2BH5uTUJNNCYD4hmthye6v2/HhM/4weY=;
+	b=n29LNHon97XlJ3SwFAAL9se/VmJcMCOGjszGdVU/BSKULo+CzD9a4hn456b/ZUNFzgmUns
+	TpqqvWBYiD5pdGC2/DNpZ6lrTF4BgRRk3s3b9KRcLfglCFOK7CiId3/cAjFDKgnJU0jrn+
+	sOLUqhl9Oo4SzA8d59W7SO7tYMoLhrI=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v10 09/25] tools/xenstore: save new binary for live update
-Date: Tue, 15 Dec 2020 17:35:47 +0100
-Message-Id: <20201215163603.21700-10-jgross@suse.com>
+	Julien Grall <jgrall@amazon.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH v10 11/25] tools/xenstore: add the basic framework for doing the live update
+Date: Tue, 15 Dec 2020 17:35:49 +0100
+Message-Id: <20201215163603.21700-12-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
 References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Save the new binary name for the daemon case and the new kernel for
-stubdom in order to support live update of Xenstore..
+Add the main framework for executing the live update. This for now
+only defines the basic execution steps with empty dummy functions.
+This final step returning means failure, as in case of success the
+new executable will have taken over.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Paul Durrant <paul@xen.org>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_control.c | 41 +++++++++++++++++++++++++++++-
- 1 file changed, 40 insertions(+), 1 deletion(-)
+V4:
+- const (Julien Grall)
+---
+ tools/xenstore/xenstored_control.c | 39 ++++++++++++++++++++++++++++--
+ 1 file changed, 37 insertions(+), 2 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 7854b7f46f..95ac1a1648 100644
+index 2e0827b9ef..940b717741 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -1,5 +1,5 @@
- /*
--    Interactive commands for Xen Store Daemon.
-+Interactive commands for Xen Store Daemon.
-     Copyright (C) 2017 Juergen Gross, SUSE Linux GmbH
- 
-     This program is free software; you can redistribute it and/or modify
-@@ -22,6 +22,9 @@
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <sys/types.h>
-+#include <sys/stat.h>
-+#include <unistd.h>
- 
- #include "utils.h"
- #include "talloc.h"
-@@ -31,6 +34,14 @@
- struct live_update {
- 	/* For verification the correct connection is acting. */
- 	struct connection *conn;
-+
-+#ifdef __MINIOS__
-+	void *kernel;
-+	unsigned int kernel_size;
-+	unsigned int kernel_off;
-+#else
-+	char *filename;
-+#endif
- };
- 
- static struct live_update *lu_status;
-@@ -215,6 +226,13 @@ static const char *lu_binary_alloc(const void *ctx, struct connection *conn,
- 	if (ret)
- 		return ret;
- 
-+	lu_status->kernel = talloc_size(lu_status, size);
-+	if (!lu_status->kernel)
-+		return "Allocation failure.";
-+
-+	lu_status->kernel_size = size;
-+	lu_status->kernel_off = 0;
-+
- 	return NULL;
+@@ -304,9 +304,27 @@ static const char *lu_arch(const void *ctx, struct connection *conn,
  }
+ #endif
  
-@@ -224,6 +242,12 @@ static const char *lu_binary_save(const void *ctx, struct connection *conn,
- 	if (!lu_status || lu_status->conn != conn)
- 		return "Not in live-update session.";
- 
-+	if (lu_status->kernel_off + size > lu_status->kernel_size)
-+		return "Too much kernel data.";
++static const char *lu_check_lu_allowed(const void *ctx, bool force,
++				       unsigned int to)
++{
++	return NULL;
++}
 +
-+	memcpy(lu_status->kernel + lu_status->kernel_off, data, size);
-+	lu_status->kernel_off += size;
++static const char *lu_dump_state(const void *ctx, struct connection *conn)
++{
++	return NULL;
++}
 +
- 	return NULL;
- }
- 
-@@ -243,13 +267,23 @@ static const char *lu_binary(const void *ctx, struct connection *conn,
- 			     const char *filename)
++static const char *lu_activate_binary(const void *ctx)
++{
++	return "Not yet implemented.";
++}
++
+ static const char *lu_start(const void *ctx, struct connection *conn,
+ 			    bool force, unsigned int to)
  {
- 	const char *ret;
-+	struct stat statbuf;
- 
- 	syslog(LOG_INFO, "live-update: binary %s\n", filename);
- 
-+	if (stat(filename, &statbuf))
-+		return "File not accessible.";
-+	if (!(statbuf.st_mode & (S_IXOTH | S_IXGRP | S_IXUSR)))
-+		return "File not executable.";
++	const char *ret;
 +
- 	ret = lu_begin(conn);
- 	if (ret)
- 		return ret;
+ 	syslog(LOG_INFO, "live-update: start, force=%d, to=%u\n", force, to);
  
-+	lu_status->filename = talloc_strdup(lu_status, filename);
-+	if (!lu_status->filename)
-+		return "Allocation failure.";
-+
- 	return NULL;
- }
- 
-@@ -272,6 +306,11 @@ static const char *lu_start(const void *ctx, struct connection *conn,
  	if (!lu_status || lu_status->conn != conn)
- 		return "Not in live-update session.";
+@@ -317,10 +335,27 @@ static const char *lu_start(const void *ctx, struct connection *conn,
+ 		return "Kernel not complete.";
+ #endif
  
-+#ifdef __MINIOS__
-+	if (lu_status->kernel_size != lu_status->kernel_off)
-+		return "Kernel not complete.";
-+#endif
+-	/* Will be replaced by real live-update later. */
++	/* Check for state to allow live update. */
++	ret = lu_check_lu_allowed(ctx, force, to);
++	if (ret) {
++		if (!strcmp(ret, "BUSY"))
++			return ret;
++		goto out;
++	}
 +
- 	/* Will be replaced by real live-update later. */
++	/* Dump out internal state, including "OK" for live update. */
++	ret = lu_dump_state(ctx, conn);
++	if (ret)
++		goto out;
++
++	/* Perform the activation of new binary. */
++	ret = lu_activate_binary(ctx);
++	/* We will reach this point only in case of failure. */
++
++ out:
  	talloc_free(lu_status);
  
+-	return NULL;
++	return ret;
+ }
+ 
+ static int do_control_lu(void *ctx, struct connection *conn,
 -- 
 2.26.2
 
