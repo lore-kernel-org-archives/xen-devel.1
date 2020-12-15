@@ -2,48 +2,45 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4F30C4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA5A5C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 624A622571
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 624A622571
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4E29922B51
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E29922B51
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54671.95168 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54678.95183 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDTS-0001qD-41; Tue, 15 Dec 2020 16:46:54 +0000
+	id 1kpDTf-00020V-MV; Tue, 15 Dec 2020 16:47:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54671.95168; Tue, 15 Dec 2020 16:46:54 +0000
+Received: by outflank-mailman (output) from mailman id 54678.95183; Tue, 15 Dec 2020 16:47:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDTR-0001q5-Uq; Tue, 15 Dec 2020 16:46:53 +0000
-Received: by outflank-mailman (input) for mailman id 54671;
- Tue, 15 Dec 2020 16:46:52 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kpDTf-00020L-Ha; Tue, 15 Dec 2020 16:47:07 +0000
+Received: by outflank-mailman (input) for mailman id 54678;
+ Tue, 15 Dec 2020 16:47:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kpDTQ-0001pb-Ni; Tue, 15 Dec 2020 16:46:52 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kpDTQ-0003By-KB; Tue, 15 Dec 2020 16:46:52 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kpDTQ-0002a6-D9; Tue, 15 Dec 2020 16:46:52 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kpDTQ-0002XJ-Cd; Tue, 15 Dec 2020 16:46:52 +0000
+ (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kpDK8-00066M-JH
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:37:16 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b4fc910e-a22a-4aa1-ae90-3f3d3434ab4a;
+ Tue, 15 Dec 2020 16:36:15 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 0E8A1B282;
+ Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,103 +52,389 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=XwWEOjKjS14dVIZFeSIs0Gre7cB/KZ0qUMqAs8xjdHo=; b=1Ym1HsOSKUK46l8r+A4BUR7Bhg
-	EpZT2v9W6yloCD3gevvm4jehYHov4g5r4jrVVlt0OKYTEtCnhAXORI7nZGW69RHCwor3878d2Lryc
-	JdQTwI9PK8Vdnes/WSba25fUANgjhJKgF+6B7JwaUeJb8xH/EdFQGYxYK7V1axIMS83A=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-157561-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: b4fc910e-a22a-4aa1-ae90-3f3d3434ab4a
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1608050172; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=MSf4+puKW484kP2G0bQfIEcisU7NAj/olnxKhB+8UZ8=;
+	b=i50mjkOdP+7BifXtMXoGf6d55kFLh6ncbe1YDHsy/X3dZZclnkC3OLl2lbReNLUL65f38T
+	tDSmxxL3EW2nVCqAA+X8Quk08b7kGxqy837Xc+UtmzJOwSdKyx0WvryeKyyylpmLcFTJZM
+	yOxbqzoZNOml94++9HnrzXq+NxAvS4A=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v10 21/25] tools/xenstore: add read connection state for live update
+Date: Tue, 15 Dec 2020 17:35:59 +0100
+Message-Id: <20201215163603.21700-22-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
+References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 157561: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
-X-Osstest-Versions-This:
-    ovmf=5c3cdebf95bfa32c611b8e72921277401bc90fec
-X-Osstest-Versions-That:
-    ovmf=f95e80d832e923046c92cd6f0b8208cec147138e
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 15 Dec 2020 16:46:52 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 157561 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157561/
+Add the needed functions for reading connection state for live update.
 
-Regressions :-(
+As the connection is identified by a unique connection id in the state
+records we need to add this to struct connection. Add a new function
+to return the connection based on a connection id.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-i386-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
- test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+V2:
+- fixed condition in introduce_domain() (Julien Grall)
 
-version targeted for testing:
- ovmf                 5c3cdebf95bfa32c611b8e72921277401bc90fec
-baseline version:
- ovmf                 f95e80d832e923046c92cd6f0b8208cec147138e
+V4:
+- set pending data msg type to XS_INVALID (Julien Grall)
+- add buffered read data (Julien Grall)
 
-Last test of basis   157345  2020-12-09 12:40:46 Z    6 days
-Failing since        157348  2020-12-09 15:39:39 Z    6 days   49 attempts
-Testing same since   157561  2020-12-15 13:10:54 Z    0 days    1 attempts
+V5:
+- really read buffered read data (Julien Grall)
+- drop conn parameter from introduce_domain() (Paul Durrant)
+- split pending write data into individual buffers
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Abner Chang <abner.chang@hpe.com>
-  Ard Biesheuvel <ard.biesheuvel@arm.com>
-  Baraneedharan Anbazhagan <anbazhagan@hp.com>
-  Baraneedharan Anbazhagan <anbazhgan@hp.com>
-  Bret Barkelew <Bret.Barkelew@microsoft.com>
-  Chen, Christine <Yuwei.Chen@intel.com>
-  Fan Wang <fan.wang@intel.com>
-  James Bottomley <jejb@linux.ibm.com>
-  Jiaxin Wu <jiaxin.wu@intel.com>
-  Marc Moisson-Franckhauser <marc.moisson-franckhauser@arm.com>
-  Michael D Kinney <michael.d.kinney@intel.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Pierre Gondois <Pierre.Gondois@arm.com>
-  Ray Ni <ray.ni@intel.com>
-  Rebecca Cran <rebecca@nuviainc.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sean Brogan <sean.brogan@microsoft.com>
-  Sheng Wei <w.sheng@intel.com>
-  Siyuan Fu <siyuan.fu@intel.com>
-  Star Zeng <star.zeng@intel.com>
-  Ting Ye <ting.ye@intel.com>
-  Yuwei Chen <yuwei.chen@intel.com>
+V6:
+- rename "first" to "partial" (Paul Durrant)
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
+V7:
+- use local port from connection data
 
+V8:
+- remove dom0 special handling
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenstore/xenstored_control.c |   1 +
+ tools/xenstore/xenstored_core.c    | 102 ++++++++++++++++++++++++++++-
+ tools/xenstore/xenstored_core.h    |  10 +++
+ tools/xenstore/xenstored_domain.c  |  60 +++++++++++++----
+ tools/xenstore/xenstored_domain.h  |   2 +
+ 5 files changed, 162 insertions(+), 13 deletions(-)
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index f6c4ab3d8a..4bf075ad79 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -522,6 +522,7 @@ void lu_read_state(void)
+ 			read_state_global(ctx, head + 1);
+ 			break;
+ 		case XS_STATE_TYPE_CONN:
++			read_state_connection(ctx, head + 1);
+ 			break;
+ 		case XS_STATE_TYPE_WATCH:
+ 			break;
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 5922a03a98..2ad1cc8d44 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -1532,12 +1532,35 @@ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read)
+ 	return new;
+ }
+ 
++struct connection *get_connection_by_id(unsigned int conn_id)
++{
++	struct connection *conn;
++
++	list_for_each_entry(conn, &connections, list)
++		if (conn->conn_id == conn_id)
++			return conn;
++
++	return NULL;
++}
++
+ #ifdef NO_SOCKETS
+ static void accept_connection(int sock)
+ {
+ }
++
++int writefd(struct connection *conn, const void *data, unsigned int len)
++{
++	errno = EBADF;
++	return -1;
++}
++
++int readfd(struct connection *conn, void *data, unsigned int len)
++{
++	errno = EBADF;
++	return -1;
++}
+ #else
+-static int writefd(struct connection *conn, const void *data, unsigned int len)
++int writefd(struct connection *conn, const void *data, unsigned int len)
+ {
+ 	int rc;
+ 
+@@ -1553,7 +1576,7 @@ static int writefd(struct connection *conn, const void *data, unsigned int len)
+ 	return rc;
+ }
+ 
+-static int readfd(struct connection *conn, void *data, unsigned int len)
++int readfd(struct connection *conn, void *data, unsigned int len)
+ {
+ 	int rc;
+ 
+@@ -2460,6 +2483,81 @@ void read_state_global(const void *ctx, const void *state)
+ 	domain_init(glb->evtchn_fd);
+ }
+ 
++static void add_buffered_data(struct buffered_data *bdata,
++			      struct connection *conn, const uint8_t *data,
++			      unsigned int len)
++{
++	bdata->hdr.msg.len = len;
++	if (len <= DEFAULT_BUFFER_SIZE)
++		bdata->buffer = bdata->default_buffer;
++	else
++		bdata->buffer = talloc_array(bdata, char, len);
++	if (!bdata->buffer)
++		barf("error restoring buffered data");
++
++	memcpy(bdata->buffer, data, len);
++
++	/* Queue for later transmission. */
++	list_add_tail(&bdata->list, &conn->out_list);
++}
++
++void read_state_buffered_data(const void *ctx, struct connection *conn,
++			      const struct xs_state_connection *sc)
++{
++	struct buffered_data *bdata;
++	const uint8_t *data;
++	unsigned int len;
++	bool partial = sc->data_resp_len;
++
++	if (sc->data_in_len) {
++		bdata = new_buffer(conn);
++		if (!bdata)
++			barf("error restoring read data");
++		if (sc->data_in_len < sizeof(bdata->hdr)) {
++			bdata->inhdr = true;
++			memcpy(&bdata->hdr, sc->data, sc->data_in_len);
++			bdata->used = sc->data_in_len;
++		} else {
++			bdata->inhdr = false;
++			memcpy(&bdata->hdr, sc->data, sizeof(bdata->hdr));
++			if (bdata->hdr.msg.len <= DEFAULT_BUFFER_SIZE)
++				bdata->buffer = bdata->default_buffer;
++			else
++				bdata->buffer = talloc_array(bdata, char,
++							bdata->hdr.msg.len);
++			if (!bdata->buffer)
++				barf("Error allocating in buffer");
++			bdata->used = sc->data_in_len - sizeof(bdata->hdr);
++			memcpy(bdata->buffer, sc->data + sizeof(bdata->hdr),
++			       bdata->used);
++		}
++
++		conn->in = bdata;
++	}
++
++	for (data = sc->data + sc->data_in_len;
++	     data < sc->data + sc->data_in_len + sc->data_out_len;
++	     data += len) {
++		bdata = new_buffer(conn);
++		if (!bdata)
++			barf("error restoring buffered data");
++		if (partial) {
++			bdata->inhdr = false;
++			/* Make trace look nice. */
++			bdata->hdr.msg.type = XS_INVALID;
++			len = sc->data_resp_len;
++			add_buffered_data(bdata, conn, data, len);
++			partial = false;
++			continue;
++		}
++
++		memcpy(&bdata->hdr, data, sizeof(bdata->hdr));
++		data += sizeof(bdata->hdr);
++		len = bdata->hdr.msg.len;
++		add_buffered_data(bdata, conn, data, len);
++	}
++}
++
+ /*
+  * Local variables:
+  *  mode: C
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 6c9d838f11..cb256626fe 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -118,6 +118,9 @@ struct connection
+ 	/* Methods for communicating over this connection: write can be NULL */
+ 	connwritefn_t *write;
+ 	connreadfn_t *read;
++
++	/* Support for live update: connection id. */
++	unsigned int conn_id;
+ };
+ extern struct list_head connections;
+ 
+@@ -178,6 +181,7 @@ struct node *read_node(struct connection *conn, const void *ctx,
+ 		       const char *name);
+ 
+ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read);
++struct connection *get_connection_by_id(unsigned int conn_id);
+ void check_store(void);
+ void corrupt(struct connection *conn, const char *fmt, ...);
+ enum xs_perm_type perm_for_conn(struct connection *conn,
+@@ -229,6 +233,10 @@ void finish_daemonize(void);
+ /* Open a pipe for signal handling */
+ void init_pipe(int reopen_log_pipe[2]);
+ 
++int writefd(struct connection *conn, const void *data, unsigned int len);
++int readfd(struct connection *conn, void *data, unsigned int len);
++
++extern struct interface_funcs socket_funcs;
+ extern xengnttab_handle **xgt_handle;
+ 
+ int remember_string(struct hashtable *hash, const char *str);
+@@ -245,6 +253,8 @@ const char *dump_state_node_perms(FILE *fp, struct xs_state_node *sn,
+ 				  unsigned int n_perms);
+ 
+ void read_state_global(const void *ctx, const void *state);
++void read_state_buffered_data(const void *ctx, struct connection *conn,
++			      const struct xs_state_connection *sc);
+ 
+ #endif /* _XENSTORED_CORE_H */
+ 
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 94dd501a3b..0cd8234bd1 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -355,7 +355,7 @@ static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
+ 	return domain ? : alloc_domain(ctx, domid);
+ }
+ 
+-static int new_domain(struct domain *domain, int port)
++static int new_domain(struct domain *domain, int port, bool restore)
+ {
+ 	int rc;
+ 
+@@ -369,11 +369,16 @@ static int new_domain(struct domain *domain, int port)
+ 
+ 	wrl_domain_new(domain);
+ 
+-	/* Tell kernel we're interested in this event. */
+-	rc = xenevtchn_bind_interdomain(xce_handle, domain->domid, port);
+-	if (rc == -1)
+-		return errno;
+-	domain->port = rc;
++	if (restore)
++		domain->port = port;
++	else {
++		/* Tell kernel we're interested in this event. */
++		rc = xenevtchn_bind_interdomain(xce_handle, domain->domid,
++						port);
++		if (rc == -1)
++			return errno;
++		domain->port = rc;
++	}
+ 
+ 	domain->introduced = true;
+ 
+@@ -423,7 +428,7 @@ static void domain_conn_reset(struct domain *domain)
+ 
+ static struct domain *introduce_domain(const void *ctx,
+ 				       unsigned int domid,
+-				       evtchn_port_t port)
++				       evtchn_port_t port, bool restore)
+ {
+ 	struct domain *domain;
+ 	int rc;
+@@ -439,7 +444,7 @@ static struct domain *introduce_domain(const void *ctx,
+ 					     : map_interface(domid);
+ 		if (!interface)
+ 			return NULL;
+-		if (new_domain(domain, port)) {
++		if (new_domain(domain, port, restore)) {
+ 			rc = errno;
+ 			if (is_master_domain)
+ 				unmap_xenbus(interface);
+@@ -453,7 +458,7 @@ static struct domain *introduce_domain(const void *ctx,
+ 		/* Now domain belongs to its connection. */
+ 		talloc_steal(domain->conn, domain);
+ 
+-		if (!is_master_domain)
++		if (!is_master_domain && !restore)
+ 			fire_watches(NULL, ctx, "@introduceDomain", NULL,
+ 				     false, NULL);
+ 	} else {
+@@ -486,7 +491,7 @@ int do_introduce(struct connection *conn, struct buffered_data *in)
+ 	if (port <= 0)
+ 		return EINVAL;
+ 
+-	domain = introduce_domain(in, domid, port);
++	domain = introduce_domain(in, domid, port, false);
+ 	if (!domain)
+ 		return errno;
+ 
+@@ -715,7 +720,7 @@ void dom0_init(void)
+ 	if (port == -1)
+ 		barf_perror("Failed to initialize dom0 port");
+ 
+-	dom0 = introduce_domain(NULL, xenbus_master_domid(), port);
++	dom0 = introduce_domain(NULL, xenbus_master_domid(), port, false);
+ 	if (!dom0)
+ 		barf_perror("Failed to initialize dom0");
+ 
+@@ -1261,6 +1266,39 @@ const char *dump_state_special_nodes(FILE *fp)
+ 	return ret;
+ }
+ 
++void read_state_connection(const void *ctx, const void *state)
++{
++	const struct xs_state_connection *sc = state;
++	struct connection *conn;
++	struct domain *domain, *tdomain;
++
++	if (sc->conn_type == XS_STATE_CONN_TYPE_SOCKET) {
++		conn = new_connection(writefd, readfd);
++		if (!conn)
++			barf("error restoring connection");
++		conn->fd = sc->spec.socket_fd;
++	} else {
++		domain = introduce_domain(ctx, sc->spec.ring.domid,
++					  sc->spec.ring.evtchn, true);
++		if (!domain)
++			barf("domain allocation error");
++
++		if (sc->spec.ring.tdomid != DOMID_INVALID) {
++			tdomain = find_or_alloc_domain(ctx,
++						       sc->spec.ring.tdomid);
++			if (!tdomain)
++				barf("target domain allocation error");
++			talloc_reference(domain->conn, tdomain->conn);
++			domain->conn->target = tdomain->conn;
++		}
++		conn = domain->conn;
++	}
++
++	conn->conn_id = sc->conn_id;
++
++	read_state_buffered_data(ctx, conn, sc);
++}
++
+ /*
+  * Local variables:
+  *  mode: C
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index b20269b038..8f3b4e0f8b 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -101,4 +101,6 @@ void wrl_apply_debit_trans_commit(struct connection *conn);
+ const char *dump_state_connections(FILE *fp, struct connection *conn);
+ const char *dump_state_special_nodes(FILE *fp);
+ 
++void read_state_connection(const void *ctx, const void *state);
++
+ #endif /* _XENSTORED_DOMAIN_H */
+-- 
+2.26.2
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 664 lines long.)
 
