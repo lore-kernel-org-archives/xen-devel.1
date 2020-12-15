@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87EA2C4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AF7EC2BB48
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 55288223D6
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55288223D6
+	by mail.kernel.org (Postfix) with ESMTPS id 34C3D223D6
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34C3D223D6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54562.95004 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54559.94996 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJf-0007En-SP; Tue, 15 Dec 2020 16:36:47 +0000
+	id 1kpDJf-0007D6-6Y; Tue, 15 Dec 2020 16:36:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54562.95004; Tue, 15 Dec 2020 16:36:47 +0000
+Received: by outflank-mailman (output) from mailman id 54559.94996; Tue, 15 Dec 2020 16:36:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJf-0007E7-Fl; Tue, 15 Dec 2020 16:36:47 +0000
-Received: by outflank-mailman (input) for mailman id 54562;
- Tue, 15 Dec 2020 16:36:46 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kpDJe-0007Cl-Vg; Tue, 15 Dec 2020 16:36:46 +0000
+Received: by outflank-mailman (input) for mailman id 54559;
+ Tue, 15 Dec 2020 16:36:45 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDJe-00066M-Hz
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:46 +0000
+ id 1kpDJd-000667-HH
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:45 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 98f00c5d-0b3c-4ea8-a28f-445388c7de8c;
- Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 38ce364d-e14c-46cd-9ae6-d9967ea60f23;
+ Tue, 15 Dec 2020 16:36:13 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 315FBB271;
- Tue, 15 Dec 2020 16:36:10 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 17BD8B279;
+ Tue, 15 Dec 2020 16:36:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,139 +51,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98f00c5d-0b3c-4ea8-a28f-445388c7de8c
+X-Inumbo-ID: 38ce364d-e14c-46cd-9ae6-d9967ea60f23
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608050170; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608050171; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=3OGXhmDpavRgcLL+iSFnJ3xYl7jjDOEuqGoMRL/Y0AQ=;
-	b=gFVrZOXtO3pkUFa6HLadEJ50eh//1ChSYICzygJvi8f2Sw4H5IAMxKGZXR9Tv4oRCsaxLl
-	Y6RuHXQOcRob14xQBSWUzgBD3Ur9qvr+57mV19fUEhP4ey1flqIGrHwpvF4WLJVxTIHEt4
-	zX/HYtNgraWlUi0roWnKFvcm1uSFdcw=
+	bh=dvZq9ug5KV3ON4auQi7iEvSAASMBEbL1LsbwM9uHXmI=;
+	b=B7nClCsdmrLKxGBJ6gd7duXA25B84ZeoSzUu6hb/c+CMLVyISFs+6WNxo5kNJToq/IGVFk
+	Ihz4nunmvkKBez8mZ0CY5v7y9AJNNzYUVQLsVoj/8yc54PrSJ3UJ7MD2/DNeBtETf7m3Tp
+	nRnEW++D8SJzJ0z6n68OrOqmCvlTPKY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v10 12/25] tools/xenstore: allow live update only with no transaction active
-Date: Tue, 15 Dec 2020 17:35:50 +0100
-Message-Id: <20201215163603.21700-13-jgross@suse.com>
+	Julien Grall <julien.grall@amazon.com>
+Subject: [PATCH v10 16/25] tools/xenstore: handle CLOEXEC flag for local files and pipes
+Date: Tue, 15 Dec 2020 17:35:54 +0100
+Message-Id: <20201215163603.21700-17-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
 References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In order to simplify live update state dumping only allow live update
-to happen when no transaction is active.
+For support of live update the locally used files need to have the
+"close on exec" flag set. Fortunately the used Xen libraries are
+already doing this, so only the logging and tdb related files and
+pipes are affected. openlog() has the close on exec attribute, too.
 
-A timeout is used to detect guests which have a transaction active for
-longer periods of time. In case such a guest is detected when trying
-to do a live update it will be reported and the update will fail.
-
-The admin can then either use a longer timeout, or use the force flag
-to just ignore the transactions of such a guest, or kill the guest
-before retrying.
-
-Transactions that have been active for a shorter time than the timeout
-will end in the live update starting to respond "BUSY" without
-aborting the complete live update process. The xenstore-control
-program will then just repeat the live update starting until a
-different result is returned.
+In order to be able to keep the event channels open specify the
+XENEVTCHN_NO_CLOEXEC flag when calling xenevtchn_open().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Acked-by: Julien Grall <julien.grall@amazon.com>
 ---
- tools/xenstore/xenstored_control.c     | 20 +++++++++++++++++++-
- tools/xenstore/xenstored_core.h        |  1 +
- tools/xenstore/xenstored_transaction.c |  5 +++++
- 3 files changed, 25 insertions(+), 1 deletion(-)
+V4:
+- disable LU in case of O_CLOEXEC not supported (Julien Grall)
+
+V5:
+- add comment (Paul Durrant)
+
+V7:
+- set XENEVTCHN_NO_CLOEXEC
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenstore/xenstored_control.c |  6 ++++++
+ tools/xenstore/xenstored_core.c    |  6 ++++--
+ tools/xenstore/xenstored_core.h    |  8 ++++++++
+ tools/xenstore/xenstored_domain.c  |  2 +-
+ tools/xenstore/xenstored_posix.c   | 12 ++++++++++++
+ 5 files changed, 31 insertions(+), 3 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 940b717741..af64a9a2d4 100644
+index 38550a559e..437276de8d 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -22,6 +22,7 @@ Interactive commands for Xen Store Daemon.
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <time.h>
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <unistd.h>
-@@ -307,7 +308,24 @@ static const char *lu_arch(const void *ctx, struct connection *conn,
- static const char *lu_check_lu_allowed(const void *ctx, bool force,
- 				       unsigned int to)
- {
--	return NULL;
-+	char *ret = NULL;
-+	struct connection *conn;
-+	time_t now = time(NULL);
-+	bool busy = false;
-+
-+	list_for_each_entry(conn, &connections, list) {
-+		if (conn->ta_start_time - now >= to && !force) {
-+			ret = talloc_asprintf(ctx, "%s\nDomain %u: %ld s",
-+					      ret ? : "Domains with long running transactions:",
-+					      conn->id,
-+					      conn->ta_start_time - now);
-+			if (!ret)
-+				busy = true;
-+		} else if (conn->ta_start_time)
-+			busy = true;
-+	}
-+
-+	return ret ? (const char *)ret : (busy ? "BUSY" : NULL);
+@@ -41,6 +41,7 @@ Interactive commands for Xen Store Daemon.
+ #define MAP_ANONYMOUS MAP_ANON
+ #endif
+ 
++#ifndef NO_LIVE_UPDATE
+ struct live_update {
+ 	/* For verification the correct connection is acting. */
+ 	struct connection *conn;
+@@ -85,6 +86,7 @@ static const char *lu_begin(struct connection *conn)
+ 
+ 	return NULL;
+ }
++#endif
+ 
+ struct cmd_s {
+ 	char *cmd;
+@@ -209,6 +211,7 @@ static int do_control_print(void *ctx, struct connection *conn,
+ 	return 0;
  }
  
- static const char *lu_dump_state(const void *ctx, struct connection *conn)
++#ifndef NO_LIVE_UPDATE
+ static const char *lu_abort(const void *ctx, struct connection *conn)
+ {
+ 	syslog(LOG_INFO, "live-update: abort\n");
+@@ -522,6 +525,7 @@ static int do_control_lu(void *ctx, struct connection *conn,
+ 	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
+ 	return 0;
+ }
++#endif
+ 
+ static int do_control_help(void *, struct connection *, char **, int);
+ 
+@@ -529,6 +533,7 @@ static struct cmd_s cmds[] = {
+ 	{ "check", do_control_check, "" },
+ 	{ "log", do_control_log, "on|off" },
+ 
++#ifndef NO_LIVE_UPDATE
+ 	/*
+ 	 * The parameters are those of the xenstore-control utility!
+ 	 * Depending on environment (Mini-OS or daemon) the live-update
+@@ -548,6 +553,7 @@ static struct cmd_s cmds[] = {
+ 	{ "live-update", do_control_lu,
+ 		"[-c <cmdline>] [-F] [-t <timeout>] <file>\n"
+ 		"    Default timeout is 60 seconds.", 4 },
++#endif
+ #ifdef __MINIOS__
+ 	{ "memreport", do_control_memreport, "" },
+ #else
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 064109c393..0f4e10815a 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -197,7 +197,8 @@ void reopen_log(void)
+ 	if (tracefile) {
+ 		close_log();
+ 
+-		tracefd = open(tracefile, O_WRONLY|O_CREAT|O_APPEND, 0600);
++		tracefd = open(tracefile,
++			       O_WRONLY | O_CREAT | O_APPEND | O_CLOEXEC, 0600);
+ 
+ 		if (tracefd < 0)
+ 			perror("Could not open tracefile");
+@@ -1646,7 +1647,8 @@ static void setup_structure(void)
+ 	if (!(tdb_flags & TDB_INTERNAL))
+ 		unlink(tdbname);
+ 
+-	tdb_ctx = tdb_open_ex(tdbname, 7919, tdb_flags, O_RDWR|O_CREAT|O_EXCL,
++	tdb_ctx = tdb_open_ex(tdbname, 7919, tdb_flags,
++			      O_RDWR | O_CREAT | O_EXCL | O_CLOEXEC,
+ 			      0640, &tdb_logger, NULL);
+ 	if (!tdb_ctx)
+ 		barf_perror("Could not create tdb file %s", tdbname);
 diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 27826c125c..a009b182fd 100644
+index 32b306e161..e40e0e6806 100644
 --- a/tools/xenstore/xenstored_core.h
 +++ b/tools/xenstore/xenstored_core.h
-@@ -93,6 +93,7 @@ struct connection
- 	struct list_head transaction_list;
- 	uint32_t next_transaction_id;
- 	unsigned int transaction_started;
-+	time_t ta_start_time;
+@@ -35,6 +35,14 @@
+ #include "tdb.h"
+ #include "hashtable.h"
  
- 	/* The domain I'm associated with, if any. */
- 	struct domain *domain;
-diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
-index 52355f4ed8..cd07fb0f21 100644
---- a/tools/xenstore/xenstored_transaction.c
-+++ b/tools/xenstore/xenstored_transaction.c
-@@ -473,6 +473,8 @@ int do_transaction_start(struct connection *conn, struct buffered_data *in)
- 	list_add_tail(&trans->list, &conn->transaction_list);
- 	talloc_steal(conn, trans);
- 	talloc_set_destructor(trans, destroy_transaction);
-+	if (!conn->transaction_started)
-+		conn->ta_start_time = time(NULL);
- 	conn->transaction_started++;
- 	wrl_ntransactions++;
++#ifndef O_CLOEXEC
++#define O_CLOEXEC 0
++/* O_CLOEXEC support is needed for Live Update in the daemon case. */
++#ifndef __MINIOS__
++#define NO_LIVE_UPDATE
++#endif
++#endif
++
+ /* DEFAULT_BUFFER_SIZE should be large enough for each errno string. */
+ #define DEFAULT_BUFFER_SIZE 16
  
-@@ -511,6 +513,8 @@ int do_transaction_end(struct connection *conn, struct buffered_data *in)
- 	conn->transaction = NULL;
- 	list_del(&trans->list);
- 	conn->transaction_started--;
-+	if (!conn->transaction_started)
-+		conn->ta_start_time = 0;
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 919a4d98cf..38d250fbed 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -743,7 +743,7 @@ void domain_init(void)
  
- 	/* Attach transaction to in for auto-cleanup */
- 	talloc_steal(in, trans);
-@@ -589,6 +593,7 @@ void conn_delete_all_transactions(struct connection *conn)
- 	assert(conn->transaction == NULL);
+ 	talloc_set_destructor(xgt_handle, close_xgt_handle);
  
- 	conn->transaction_started = 0;
-+	conn->ta_start_time = 0;
+-	xce_handle = xenevtchn_open(NULL, 0);
++	xce_handle = xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
+ 
+ 	if (xce_handle == NULL)
+ 		barf_perror("Failed to open evtchn device");
+diff --git a/tools/xenstore/xenstored_posix.c b/tools/xenstore/xenstored_posix.c
+index 1f9603fea2..ae3e63e07f 100644
+--- a/tools/xenstore/xenstored_posix.c
++++ b/tools/xenstore/xenstored_posix.c
+@@ -90,9 +90,21 @@ void finish_daemonize(void)
+ 
+ void init_pipe(int reopen_log_pipe[2])
+ {
++	int flags;
++	unsigned int i;
++
+ 	if (pipe(reopen_log_pipe)) {
+ 		barf_perror("pipe");
+ 	}
++
++	for (i = 0; i < 2; i++) {
++		flags = fcntl(reopen_log_pipe[i], F_GETFD);
++		if (flags < 0)
++			barf_perror("pipe get flags");
++		flags |= FD_CLOEXEC;
++		if (fcntl(reopen_log_pipe[i],  F_SETFD, flags) < 0)
++			barf_perror("pipe set flags");
++	}
  }
  
- int check_transactions(struct hashtable *hash)
+ void unmap_xenbus(void *interface)
 -- 
 2.26.2
 
