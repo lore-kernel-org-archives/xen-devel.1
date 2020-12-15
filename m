@@ -2,64 +2,45 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNPARSEABLE_RELAY,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95EA1C2BB9A
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40CBEC4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4CE0822573
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:33:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4CE0822573
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	by mail.kernel.org (Postfix) with ESMTPS id E2E792255F
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2E792255F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54499.94715 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54528.94821 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDFr-0005WQ-CY; Tue, 15 Dec 2020 16:32:51 +0000
+	id 1kpDJ6-000672-7z; Tue, 15 Dec 2020 16:36:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54499.94715; Tue, 15 Dec 2020 16:32:51 +0000
+Received: by outflank-mailman (output) from mailman id 54528.94821; Tue, 15 Dec 2020 16:36:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDFr-0005WJ-9b; Tue, 15 Dec 2020 16:32:51 +0000
-Received: by outflank-mailman (input) for mailman id 54499;
- Tue, 15 Dec 2020 16:32:50 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1gTI=FT=oracle.com=konrad.wilk@srs-us1.protection.inumbo.net>)
- id 1kpDFp-0005WD-U7
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:32:50 +0000
-Received: from aserp2120.oracle.com (unknown [141.146.126.78])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ebf22e93-3046-4853-af95-96e5c538d4e1;
- Tue, 15 Dec 2020 16:32:49 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BFGK4w8157495;
- Tue, 15 Dec 2020 16:32:47 GMT
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by aserp2120.oracle.com with ESMTP id 35cntm3fp4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 15 Dec 2020 16:32:47 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BFGLBOJ119059;
- Tue, 15 Dec 2020 16:32:47 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by aserp3030.oracle.com with ESMTP id 35d7en91tn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Dec 2020 16:32:46 +0000
-Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 0BFGWkEM011567;
- Tue, 15 Dec 2020 16:32:46 GMT
-Received: from char.us.oracle.com (/10.152.32.25)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 15 Dec 2020 08:32:45 -0800
-Received: by char.us.oracle.com (Postfix, from userid 1000)
- id B54586A00F4; Tue, 15 Dec 2020 11:34:52 -0500 (EST)
+	id 1kpDJ6-00066u-3f; Tue, 15 Dec 2020 16:36:12 +0000
+Received: by outflank-mailman (input) for mailman id 54528;
+ Tue, 15 Dec 2020 16:36:11 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kpDJ5-00066M-Ii
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:11 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4a7ee2d4-cc73-4aa5-912e-16bad8b626cb;
+ Tue, 15 Dec 2020 16:36:08 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id D6D18AD5C;
+ Tue, 15 Dec 2020 16:36:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,63 +52,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ebf22e93-3046-4853-af95-96e5c538d4e1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=corp-2020-01-29;
- bh=dEzuJZYdwQshX1RFzGp+3lUMPPjUeZnIpK7xkDUWxjA=;
- b=fyerFR+RzpDkgqlU8NwrZXmLK4pxCcAiv01Dk06x0j9rVF/7Febv7M9ZaRKwVg7NlK7w
- AqnJDurlP9MG3ad2Xvi0TjtduauvbNIVRGBY2FYy/JmFhZtJupxfOeYl03s6hHkJ0Gxl
- U+CUVltwIEFOPd0yxv5KBa2Uv3Ixg9+NhQ4vG2x66YnDF0uAr7EKLvMSD6dNy8MizvMQ
- V1KEmkmVdnG9pK1hUQcUoKsoDqZiD84zN0O402Mez7EBxqHTv52s/wG0Q9Oxy4D2kV28
- GKI3qnzGDqzKa6AXtoVa1W8zv54NpZB8fZmv2toNK+c724GemOZUJ65VNA9fNbY5gYEG Gw== 
-Date: Tue, 15 Dec 2020 11:34:52 -0500
-From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-        Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: Re: [PATCH v2 4/4] livepatch: adjust a stale comment
-Message-ID: <20201215163452.GA349@char.us.oracle.com>
-References: <f4179ee3-56e4-ab18-7aae-55281c4d4412@suse.com>
- <659b188d-d26e-3351-2285-3e75197e2c5f@suse.com>
+X-Inumbo-ID: 4a7ee2d4-cc73-4aa5-912e-16bad8b626cb
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1608050167; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=NHjrhGiUQFsdbZDZFHw3I8KGLBEONfoM4zSWmLMKK4w=;
+	b=l7F07gFpB7BMP5/TheYwzFqpGp5jK/IX4hsEdhP8iQQopOTp+ucfkpYkppi2THAj2Thh15
+	Z8OwUlfeI8jweNPgbOzRlH+vu7N5acksoEF+/oNBoEnYsiSIrj9ZgYTIRZmc3RomkfHbuU
+	aXTfDV3AR4WJP9wBKDpxDulZJ3xdqHY=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Paul Durrant <paul@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v10 01/25] tools/xenstore: switch barf[_perror]() to use syslog()
+Date: Tue, 15 Dec 2020 17:35:39 +0100
+Message-Id: <20201215163603.21700-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
+References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <659b188d-d26e-3351-2285-3e75197e2c5f@suse.com>
-User-Agent: Mutt/1.9.1 (2017-09-22)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9836 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 spamscore=0 bulkscore=0
- suspectscore=0 adultscore=0 mlxscore=0 mlxlogscore=999 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2012150111
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9836 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 phishscore=0 mlxscore=0
- lowpriorityscore=0 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
- mlxlogscore=999 impostorscore=0 priorityscore=1501 clxscore=1011
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2012150111
+Content-Transfer-Encoding: 8bit
 
-On Tue, Dec 15, 2020 at 05:13:43PM +0100, Jan Beulich wrote:
-> As of 005de45c887e ("xen: do live patching only from main idle loop")
-> the comment ahead of livepatch_do_action() has been stale.
-> 
-Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+When xenstored crashes due to an unrecoverable condition it is calling
+either barf() or barf_perror() to issue a message and then exit().
 
-Thank you!
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> --- a/xen/common/livepatch.c
-> +++ b/xen/common/livepatch.c
-> @@ -1392,8 +1392,8 @@ static inline bool was_action_consistent
->  }
->  
->  /*
-> - * This function is executed having all other CPUs with no deep stack (we may
-> - * have cpu_idle on it) and IRQs disabled.
-> + * This function is executed having all other CPUs with no deep stack (when
-> + * idle) and IRQs disabled.
->   */
->  static void livepatch_do_action(void)
->  {
-> 
+Make sure the message is visible somewhere by using syslog()
+additionally to xprintf(), as the latter will be visible only with
+tracing active.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+V4:
+- new patch
+---
+ tools/xenstore/utils.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/tools/xenstore/utils.c b/tools/xenstore/utils.c
+index a1ac12584a..633ce3b4fc 100644
+--- a/tools/xenstore/utils.c
++++ b/tools/xenstore/utils.c
+@@ -3,6 +3,7 @@
+ #include <stdarg.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <syslog.h>
+ #include <errno.h>
+ #include <unistd.h>
+ #include <fcntl.h>
+@@ -35,6 +36,7 @@ void barf(const char *fmt, ...)
+ 	va_end(arglist);
+ 
+  	if (bytes >= 0) {
++		syslog(LOG_CRIT, "%s\n", str);
+ 		xprintf("%s\n", str);
+ 		free(str);
+ 	}
+@@ -54,6 +56,7 @@ void barf_perror(const char *fmt, ...)
+ 	va_end(arglist);
+ 
+  	if (bytes >= 0) {
++		syslog(LOG_CRIT, "%s: %s\n", str, strerror(err));
+ 		xprintf("%s: %s\n", str, strerror(err));
+ 		free(str);
+ 	}
+-- 
+2.26.2
+
 
