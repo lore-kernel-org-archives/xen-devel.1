@@ -2,48 +2,48 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7904FC4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 01:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03082C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 02:16:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1FA3B224D1
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 01:57:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FA3B224D1
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 949CE206D4
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 02:16:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 949CE206D4
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52800.92135 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52810.92150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kozaH-0002wO-Os; Tue, 15 Dec 2020 01:57:01 +0000
+	id 1kozsx-00057m-CT; Tue, 15 Dec 2020 02:16:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52800.92135; Tue, 15 Dec 2020 01:57:01 +0000
+Received: by outflank-mailman (output) from mailman id 52810.92150; Tue, 15 Dec 2020 02:16:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kozaH-0002wH-LR; Tue, 15 Dec 2020 01:57:01 +0000
-Received: by outflank-mailman (input) for mailman id 52800;
- Tue, 15 Dec 2020 01:56:59 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kozsx-00057f-8O; Tue, 15 Dec 2020 02:16:19 +0000
+Received: by outflank-mailman (input) for mailman id 52810;
+ Tue, 15 Dec 2020 02:16:18 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kozaF-0002w9-Nk; Tue, 15 Dec 2020 01:56:59 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kozaF-0001Ph-IN; Tue, 15 Dec 2020 01:56:59 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kozaF-0001j1-8U; Tue, 15 Dec 2020 01:56:59 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kozaF-00051c-7y; Tue, 15 Dec 2020 01:56:59 +0000
+ (envelope-from <SRS0=9m1Y=FT=m5p.com=ehem@srs-us1.protection.inumbo.net>)
+ id 1kozsw-00057a-N6
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 02:16:18 +0000
+Received: from mailhost.m5p.com (unknown [74.104.188.4])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7b173889-a453-4dec-afb5-c9e1d5981d74;
+ Tue, 15 Dec 2020 02:16:17 +0000 (UTC)
+Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 0BF2G6LU027013
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Mon, 14 Dec 2020 21:16:12 -0500 (EST) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.15.2/8.15.2/Submit) id 0BF2G67J027012;
+ Mon, 14 Dec 2020 18:16:06 -0800 (PST) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,112 +55,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=KyHO7OF3+hFGU6GVN9oREnNek32CXUCwgPqtceQGEK0=; b=IFdy0wYUefjddaptiPuIs1FcVb
-	MyE6LGVS1OBD99PVefLLfWHPVxhQa8vvtXiSbUOhyBr87QIf+N+R76KsaY+WR4HAyC7kzocRw/cU6
-	/au467/HBocIwH6veEj8XGtgeJSI/BNf4fGpJbnCmX4wdjCrWOt1NfknNobFyVSHLna0=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-157535-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 7b173889-a453-4dec-afb5-c9e1d5981d74
+Date: Mon, 14 Dec 2020 18:16:06 -0800
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Roman Shaposhnik <roman@zededa.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Julien Grall <julien@xen.org>,
+        Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Xen-ARM DomUs
+Message-ID: <X9gcZu5uJpXx8wNn@mattapan.m5p.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 157535: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:build-i386:xen-build:fail:regression
-    ovmf:build-amd64:xen-build:fail:regression
-    ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-i386-xsm:xen-build:fail:regression
-    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    ovmf=01726b6d23d4c8a870dbd5b96c0b9e3caf38ef3c
-X-Osstest-Versions-That:
-    ovmf=f95e80d832e923046c92cd6f0b8208cec147138e
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 15 Dec 2020 01:56:59 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-flight 157535 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157535/
+Finally getting to the truly productive stages of my project with Xen on
+ARM.
 
-Regressions :-(
+How many of the OSes which function as x86 DomUs for Xen, function as
+ARM DomUs?  Getting Linux operational was straightforward, but what of
+others?
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-i386                    6 xen-build                fail REGR. vs. 157345
- build-amd64                   6 xen-build                fail REGR. vs. 157345
- build-amd64-xsm               6 xen-build                fail REGR. vs. 157345
- build-i386-xsm                6 xen-build                fail REGR. vs. 157345
-
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
-
-version targeted for testing:
- ovmf                 01726b6d23d4c8a870dbd5b96c0b9e3caf38ef3c
-baseline version:
- ovmf                 f95e80d832e923046c92cd6f0b8208cec147138e
-
-Last test of basis   157345  2020-12-09 12:40:46 Z    5 days
-Failing since        157348  2020-12-09 15:39:39 Z    5 days   40 attempts
-Testing same since   157531  2020-12-14 22:40:42 Z    0 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Abner Chang <abner.chang@hpe.com>
-  Ard Biesheuvel <ard.biesheuvel@arm.com>
-  Baraneedharan Anbazhagan <anbazhagan@hp.com>
-  Baraneedharan Anbazhagan <anbazhgan@hp.com>
-  Fan Wang <fan.wang@intel.com>
-  James Bottomley <jejb@linux.ibm.com>
-  Jiaxin Wu <jiaxin.wu@intel.com>
-  Marc Moisson-Franckhauser <marc.moisson-franckhauser@arm.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Pierre Gondois <Pierre.Gondois@arm.com>
-  Ray Ni <ray.ni@intel.com>
-  Rebecca Cran <rebecca@nuviainc.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sean Brogan <sean.brogan@microsoft.com>
-  Siyuan Fu <siyuan.fu@intel.com>
-  Star Zeng <star.zeng@intel.com>
-  Ting Ye <ting.ye@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+The available examples seem geared towards Linux DomUs.  I'm looking at a
+FreeBSD installation image and it appears to expect an EFI firmware.
+Beyond having a bunch of files appearing oriented towards booting on EFI
+I can't say much about (booting) FreeBSD/ARM DomUs.
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+-- 
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
 
 
-Not pushing.
-
-(No revision log; it would be 561 lines long.)
 
