@@ -2,45 +2,46 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13370C4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16AF8C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:50:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D14EC22581
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:47:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D14EC22581
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C7F3922581
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:50:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7F3922581
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54683.95195 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54701.95206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDTm-00025a-VH; Tue, 15 Dec 2020 16:47:14 +0000
+	id 1kpDWG-0002Xp-E0; Tue, 15 Dec 2020 16:49:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54683.95195; Tue, 15 Dec 2020 16:47:14 +0000
+Received: by outflank-mailman (output) from mailman id 54701.95206; Tue, 15 Dec 2020 16:49:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDTm-00025T-R1; Tue, 15 Dec 2020 16:47:14 +0000
-Received: by outflank-mailman (input) for mailman id 54683;
- Tue, 15 Dec 2020 16:47:13 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kpDWG-0002Xi-B6; Tue, 15 Dec 2020 16:49:48 +0000
+Received: by outflank-mailman (input) for mailman id 54701;
+ Tue, 15 Dec 2020 16:49:47 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDK3-00066M-J8
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:37:11 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9484f92d-f7fe-4499-b74a-209d001bc347;
- Tue, 15 Dec 2020 16:36:15 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 929D8B711;
- Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1kpDWF-0002Xd-2P
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:49:47 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kpDWE-0003Ef-Rt; Tue, 15 Dec 2020 16:49:46 +0000
+Received: from 54-240-197-238.amazon.com ([54.240.197.238]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1kpDWE-0006pU-LP; Tue, 15 Dec 2020 16:49:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,234 +53,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9484f92d-f7fe-4499-b74a-209d001bc347
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608050172; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NilqGYTQhpkTDabJtW0PbsSjQkzIJ61e98qt7CTEwA4=;
-	b=sMeTI8HgyVysSVPzViBQusG8SejoZRzLIT8SAiJBx1tj/3vZdKYMWR3YS7EPPo7Si+K+g5
-	GhOlM5rHqlvd5ESlZvtmcrVV6YOjpEExhwbU+aU4PuHd26ssYFkTTkT06M9Q8sP5DbFc8o
-	7aC8Xvr0Y9svcUJLz+dOgefYWiiJr58=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v10 23/25] tools/xenstore: add read watch state for live update
-Date: Tue, 15 Dec 2020 17:36:01 +0100
-Message-Id: <20201215163603.21700-24-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
-References: <20201215163603.21700-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=Q56mA1p/aU6IJkPDzP6EJRxz8lUjnDr6+iHAne2CaUU=; b=DFJo+h+wrCNP6wQYfvf+228xoX
+	sfBiFjkIw41yKU7Rfrf9ubrbHZNpIc3IF6R1N5e4YUAjpMCMkLtjKB96p0VgeOanDRvyFSgyNYGr7
+	P/Y3GFkEpTbV+fN/wEgRgwyO43dk8OOQaByWEBWdCKwSe9lrJmWRz0Ils8lV1vOxt7fs=;
+Subject: Re: Xen-ARM DomUs
+To: Roman Shaposhnik <roman@zededa.com>, Elliott Mitchell <ehem+xen@m5p.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <X9gcZu5uJpXx8wNn@mattapan.m5p.com>
+ <CAMmSBy_8+PRWiSQxwRN2oB9mLmOnyoCr0mH4L-uUYhm=1GK7Xg@mail.gmail.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <5741302a-1703-7766-96a3-d0f606e9973a@xen.org>
+Date: Tue, 15 Dec 2020 16:49:45 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMmSBy_8+PRWiSQxwRN2oB9mLmOnyoCr0mH4L-uUYhm=1GK7Xg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Add reading the watch state records for live update.
+Hi,
 
-This requires factoring out some of the add watch functionality into a
-dedicated function.
+On 15/12/2020 02:35, Roman Shaposhnik wrote:
+> On Mon, Dec 14, 2020 at 6:16 PM Elliott Mitchell <ehem+xen@m5p.com> wrote:
+>>
+>> Finally getting to the truly productive stages of my project with Xen on
+>> ARM.
+>>
+>> How many of the OSes which function as x86 DomUs for Xen, function as
+>> ARM DomUs?  Getting Linux operational was straightforward, but what of
+>> others?
+> 
+> On EVE we have Windows running as a pretty much a customer-facing demo:
+>      https://wiki.lfedge.org/display/EVE/How+get+Windows+10+running+on+a+Raspberry+Pi
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
----
-V4:
-- add comment (Julien Grall)
+Are you saying that Windows is booting on top of Xen on Arm?
 
-V6:
-- correct check_watch_path() (setting errno)
+Cheers,
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- tools/xenstore/xenstored_control.c |   2 +
- tools/xenstore/xenstored_watch.c   | 114 +++++++++++++++++++++--------
- tools/xenstore/xenstored_watch.h   |   2 +
- 3 files changed, 88 insertions(+), 30 deletions(-)
-
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index a978ccf17e..8a1e3b35fe 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -35,6 +35,7 @@ Interactive commands for Xen Store Daemon.
- #include "xenstored_core.h"
- #include "xenstored_control.h"
- #include "xenstored_domain.h"
-+#include "xenstored_watch.h"
- 
- /* Mini-OS only knows about MAP_ANON. */
- #ifndef MAP_ANONYMOUS
-@@ -525,6 +526,7 @@ void lu_read_state(void)
- 			read_state_connection(ctx, head + 1);
- 			break;
- 		case XS_STATE_TYPE_WATCH:
-+			read_state_watch(ctx, head + 1);
- 			break;
- 		case XS_STATE_TYPE_TA:
- 			xprintf("live-update: ignore transaction record\n");
-diff --git a/tools/xenstore/xenstored_watch.c b/tools/xenstore/xenstored_watch.c
-index 9248f08bd9..db89e0141f 100644
---- a/tools/xenstore/xenstored_watch.c
-+++ b/tools/xenstore/xenstored_watch.c
-@@ -205,6 +205,62 @@ static int destroy_watch(void *_watch)
- 	return 0;
- }
- 
-+static int check_watch_path(struct connection *conn, const void *ctx,
-+			    char **path, bool *relative)
-+{
-+	/* Check if valid event. */
-+	if (strstarts(*path, "@")) {
-+		*relative = false;
-+		if (strlen(*path) > XENSTORE_REL_PATH_MAX)
-+			goto inval;
-+	} else {
-+		*relative = !strstarts(*path, "/");
-+		*path = canonicalize(conn, ctx, *path);
-+		if (!*path)
-+			return errno;
-+		if (!is_valid_nodename(*path))
-+			goto inval;
-+	}
-+
-+	return 0;
-+
-+ inval:
-+	errno = EINVAL;
-+	return errno;
-+}
-+
-+static struct watch *add_watch(struct connection *conn, char *path, char *token,
-+			       bool relative)
-+{
-+	struct watch *watch;
-+
-+	watch = talloc(conn, struct watch);
-+	if (!watch)
-+		goto nomem;
-+	watch->node = talloc_strdup(watch, path);
-+	watch->token = talloc_strdup(watch, token);
-+	if (!watch->node || !watch->token)
-+		goto nomem;
-+
-+	if (relative)
-+		watch->relative_path = get_implicit_path(conn);
-+	else
-+		watch->relative_path = NULL;
-+
-+	INIT_LIST_HEAD(&watch->events);
-+
-+	domain_watch_inc(conn);
-+	list_add_tail(&watch->list, &conn->watches);
-+	talloc_set_destructor(watch, destroy_watch);
-+
-+	return watch;
-+
-+ nomem:
-+	talloc_free(watch);
-+	errno = ENOMEM;
-+	return NULL;
-+}
-+
- int do_watch(struct connection *conn, struct buffered_data *in)
- {
- 	struct watch *watch;
-@@ -214,19 +270,9 @@ int do_watch(struct connection *conn, struct buffered_data *in)
- 	if (get_strings(in, vec, ARRAY_SIZE(vec)) != ARRAY_SIZE(vec))
- 		return EINVAL;
- 
--	if (strstarts(vec[0], "@")) {
--		relative = false;
--		if (strlen(vec[0]) > XENSTORE_REL_PATH_MAX)
--			return EINVAL;
--		/* check if valid event */
--	} else {
--		relative = !strstarts(vec[0], "/");
--		vec[0] = canonicalize(conn, in, vec[0]);
--		if (!vec[0])
--			return ENOMEM;
--		if (!is_valid_nodename(vec[0]))
--			return EINVAL;
--	}
-+	errno = check_watch_path(conn, in, &(vec[0]), &relative);
-+	if (errno)
-+		return errno;
- 
- 	/* Check for duplicates. */
- 	list_for_each_entry(watch, &conn->watches, list) {
-@@ -238,26 +284,11 @@ int do_watch(struct connection *conn, struct buffered_data *in)
- 	if (domain_watch(conn) > quota_nb_watch_per_domain)
- 		return E2BIG;
- 
--	watch = talloc(conn, struct watch);
-+	watch = add_watch(conn, vec[0], vec[1], relative);
- 	if (!watch)
--		return ENOMEM;
--	watch->node = talloc_strdup(watch, vec[0]);
--	watch->token = talloc_strdup(watch, vec[1]);
--	if (!watch->node || !watch->token) {
--		talloc_free(watch);
--		return ENOMEM;
--	}
--	if (relative)
--		watch->relative_path = get_implicit_path(conn);
--	else
--		watch->relative_path = NULL;
-+		return errno;
- 
--	INIT_LIST_HEAD(&watch->events);
--
--	domain_watch_inc(conn);
--	list_add_tail(&watch->list, &conn->watches);
- 	trace_create(watch, "watch");
--	talloc_set_destructor(watch, destroy_watch);
- 	send_ack(conn, XS_WATCH);
- 
- 	/* We fire once up front: simplifies clients and restart. */
-@@ -338,6 +369,29 @@ const char *dump_state_watches(FILE *fp, struct connection *conn,
- 	return ret;
- }
- 
-+void read_state_watch(const void *ctx, const void *state)
-+{
-+	const struct xs_state_watch *sw = state;
-+	struct connection *conn;
-+	char *path, *token;
-+	bool relative;
-+
-+	conn = get_connection_by_id(sw->conn_id);
-+	if (!conn)
-+		barf("connection not found for read watch");
-+
-+	path = (char *)sw->data;
-+	token = path + sw->path_length;
-+
-+	/* Don't check success, we want the relative information only. */
-+	check_watch_path(conn, ctx, &path, &relative);
-+	if (!path)
-+		barf("allocation error for read watch");
-+
-+	if (!add_watch(conn, path, token, relative))
-+		barf("error adding watch");
-+}
-+
- /*
-  * Local variables:
-  *  mode: C
-diff --git a/tools/xenstore/xenstored_watch.h b/tools/xenstore/xenstored_watch.h
-index 3d81645f45..0e693f0839 100644
---- a/tools/xenstore/xenstored_watch.h
-+++ b/tools/xenstore/xenstored_watch.h
-@@ -33,4 +33,6 @@ void conn_delete_all_watches(struct connection *conn);
- const char *dump_state_watches(FILE *fp, struct connection *conn,
- 			       unsigned int conn_id);
- 
-+void read_state_watch(const void *ctx, const void *state);
-+
- #endif /* _XENSTORED_WATCH_H */
 -- 
-2.26.2
-
+Julien Grall
 
