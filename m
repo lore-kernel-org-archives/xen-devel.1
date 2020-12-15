@@ -2,49 +2,54 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B503C4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 17:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D61BC4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 17:31:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 14EED22516
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 17:06:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14EED22516
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1C53422ADC
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 17:30:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C53422ADC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54713.95223 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54724.95248 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDls-0004Qp-UA; Tue, 15 Dec 2020 17:05:56 +0000
+	id 1kpE9r-0007I7-PP; Tue, 15 Dec 2020 17:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54713.95223; Tue, 15 Dec 2020 17:05:56 +0000
+Received: by outflank-mailman (output) from mailman id 54724.95248; Tue, 15 Dec 2020 17:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDls-0004Qi-Qj; Tue, 15 Dec 2020 17:05:56 +0000
-Received: by outflank-mailman (input) for mailman id 54713;
- Tue, 15 Dec 2020 17:05:55 +0000
+	id 1kpE9r-0007Hk-IA; Tue, 15 Dec 2020 17:30:43 +0000
+Received: by outflank-mailman (input) for mailman id 54724;
+ Tue, 15 Dec 2020 17:27:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1p51=FT=tklengyel.com=tamas@srs-us1.protection.inumbo.net>)
- id 1kpDlr-0004Qd-Ol
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 17:05:55 +0000
-Received: from MTA-08-4.privateemail.com (unknown [198.54.122.58])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 06bd5574-c4e5-4f42-9cb1-aab31d8c4919;
- Tue, 15 Dec 2020 17:05:54 +0000 (UTC)
-Received: from MTA-08.privateemail.com (localhost [127.0.0.1])
- by MTA-08.privateemail.com (Postfix) with ESMTP id 8CC20600A7
- for <xen-devel@lists.xenproject.org>; Tue, 15 Dec 2020 12:05:53 -0500 (EST)
-Received: from mail-wm1-f45.google.com (unknown [10.20.151.235])
- by MTA-08.privateemail.com (Postfix) with ESMTPA id 55951600A4
- for <xen-devel@lists.xenproject.org>; Tue, 15 Dec 2020 17:05:53 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id c133so5528204wme.4
- for <xen-devel@lists.xenproject.org>; Tue, 15 Dec 2020 09:05:53 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=LaZc=FT=redhat.com=slp@srs-us1.protection.inumbo.net>)
+ id 1kpE6U-0006Rd-8P
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 17:27:14 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id dc16ec82-ec6d-4245-929d-9f028f963ab0;
+ Tue, 15 Dec 2020 17:27:12 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-525-tUoFMpo_Oh-DKH_WWSxhMg-1; Tue, 15 Dec 2020 12:27:07 -0500
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F28C11936B9E;
+ Tue, 15 Dec 2020 17:27:00 +0000 (UTC)
+Received: from localhost (ovpn-114-253.rdu2.redhat.com [10.10.114.253])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0D5617445D;
+ Tue, 15 Dec 2020 17:26:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,31 +61,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06bd5574-c4e5-4f42-9cb1-aab31d8c4919
-X-Gm-Message-State: AOAM531fpD8zpdqXIs8FbWErLkIArskG7S0QHYjTxTaPuY1JuvzTnXEB
-	MYx/SImq8GiSH823HaidTM20tiK+QMcuoCz7CrA=
-X-Google-Smtp-Source: ABdhPJyhuozME1HLdtqWtG3JumBjmF74EPKVkLRP8xE8YvzICkdvMIeDsCReYkTjNo5dUEt6gKAwQ+89+dDqV+KIbwk=
-X-Received: by 2002:a1c:4e0a:: with SMTP id g10mr34168015wmh.51.1608051951892;
- Tue, 15 Dec 2020 09:05:51 -0800 (PST)
+X-Inumbo-ID: dc16ec82-ec6d-4245-929d-9f028f963ab0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1608053232;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=CRT2RnWTC2KUg0aduM+3r6rfK5Si5JdLSD0xOCp5zu4=;
+	b=cd4t77TpxCGRo6RsZsgGUdjAQj405bbgZT1s5KGqddrXxIopeqUcmQlEa8M0wk/fY5ncja
+	y5u9wyR68UsZfWNOT/mi0N+L15Q36zNRDwYGFCFWeuHC3AjO84W0SnP5ugs+B9RqphZSbd
+	dwe2oGB0yy8gQu9r0K2VSO9EXJ9yw6Q=
+X-MC-Unique: tUoFMpo_Oh-DKH_WWSxhMg-1
+Date: Tue, 15 Dec 2020 18:26:28 +0100
+From: Sergio Lopez <slp@redhat.com>
+To: Kevin Wolf <kwolf@redhat.com>
+Cc: qemu-devel@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>,
+	qemu-block@nongnu.org, Anthony Perard <anthony.perard@citrix.com>,
+	xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>, Fam Zheng <fam@euphon.net>,
+	Eric Blake <eblake@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	Max Reitz <mreitz@redhat.com>
+Subject: Re: [PATCH v2 4/4] block: Close block exports in two steps
+Message-ID: <20201215172628.andsendtcqcgtdkr@mhamilton>
+References: <20201214170519.223781-1-slp@redhat.com>
+ <20201214170519.223781-5-slp@redhat.com>
+ <20201215153405.GF8185@merkur.fritz.box>
 MIME-Version: 1.0
-References: <be9ce75e-9119-2b5a-9e7b-437beb7ee446@suse.com> <a9c24d20-0feb-42c8-ae2c-5cfd564157ee@suse.com>
-In-Reply-To: <a9c24d20-0feb-42c8-ae2c-5cfd564157ee@suse.com>
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Tue, 15 Dec 2020 12:05:15 -0500
-X-Gmail-Original-Message-ID: <CABfawh==44+wb0wt_NSmR_eJGfn_17BTNYLJxKvctwrhx4Hyvg@mail.gmail.com>
-Message-ID: <CABfawh==44+wb0wt_NSmR_eJGfn_17BTNYLJxKvctwrhx4Hyvg@mail.gmail.com>
-Subject: Re: [PATCH 6/6] x86/p2m: set_shared_p2m_entry() is MEM_SHARING-only
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	George Dunlap <george.dunlap@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Virus-Scanned: ClamAV using ClamSMTP
+In-Reply-To: <20201215153405.GF8185@merkur.fritz.box>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=slp@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="f2qqvpnhxsbc774i"
+Content-Disposition: inline
 
-On Tue, Dec 15, 2020 at 11:28 AM Jan Beulich <jbeulich@suse.com> wrote:
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+--f2qqvpnhxsbc774i
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Tamas K Lengyel <tamas@tklengyel.com>
+On Tue, Dec 15, 2020 at 04:34:05PM +0100, Kevin Wolf wrote:
+> Am 14.12.2020 um 18:05 hat Sergio Lopez geschrieben:
+> > There's a cross-dependency between closing the block exports and
+> > draining the block layer. The latter needs that we close all export's
+> > client connections to ensure they won't queue more requests, but the
+> > exports may have coroutines yielding in the block layer, which implies
+> > they can't be fully closed until we drain it.
+>=20
+> A coroutine that yielded must have some way to be reentered. So I guess
+> the quesiton becomes why they aren't reentered until drain. We do
+> process events:
+>=20
+>     AIO_WAIT_WHILE(NULL, blk_exp_has_type(type));
+>=20
+> So in theory, anything that would finalise the block export closing
+> should still execute.
+>=20
+> What is the difference that drain makes compared to a simple
+> AIO_WAIT_WHILE, so that coroutine are reentered during drain, but not
+> during AIO_WAIT_WHILE?
+>=20
+> This is an even more interesting question because the NBD server isn't a
+> block node nor a BdrvChildClass implementation, so it shouldn't even
+> notice a drain operation.
+
+I agree in that this deserves a deeper analysis. I'm going to drop
+this patch from the series, and will re-analyze the issue later.
+
+Thanks,
+Sergio.
+
+--f2qqvpnhxsbc774i
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEvtX891EthoCRQuii9GknjS8MAjUFAl/Y8cMACgkQ9GknjS8M
+AjUkDRAApetpCE3uZgwqDD+iYgtyPIC0m50Ehe0DFhC7yDo9Fnh5gwBkI4jetoN1
+q+eNqnBcD9hjLsTbc8ffCWVU6i8AGLA5K+usJ6Erm3iBTttHcpvG+sdSRpam3hjk
+dGXuBK9AE5PHIbSxDOCi2LuX9FCyUrCWiTAE/lnRnkNwhfsPnJcamDjIBRFPdE99
+0kDjGuL63UpVdsTAHu5B5KvSaCyY58SZk/aQLl7PIMoVIWvYuE8xBzO/MCFK6js8
+WGokHSqqIJPjoHKBLNxU2m7HCWt2E2kTxxmL21GfgdKC9vW0pxB7vXdQI8RYuM2D
+jpX9w6EMnUT+WnfUldv0qfFLE0XolM8YEw0is4Y7u8oNRHeW9hgyEM1QCnv3gdc8
+XAVgKB2X2/NPboPz9+pGsS/06RN1y6vMLA/aW0YWTcf8p8MGEpiIcR+nmX4LbFUH
+qD0a8GrpTmVOWZGGeFdiwxxlCOzvC7NftdSCaJeLjf3BxpuW8Ok8+HE11oya7iYY
+ZZvf3SHttWNdxGQCSUNCiM8Z7BkQne0sBqBw94bfRwLbh8BRhytSS6RvWxePSXKo
+k7L4Er1z9/T+8RGuIZcJ/Qmc6NOoSmYyxpJ8lhFdyLe3cIXh24Fkd5yla6Qo6HQW
+rEp1FBZcAZjS6nD8XeKXKIPkXYEuspjwv12XprG7BFT3zp0rcRE=
+=aKje
+-----END PGP SIGNATURE-----
+
+--f2qqvpnhxsbc774i--
+
 
