@@ -2,45 +2,45 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1139BC2BBCA
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86604C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B890222573
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B890222573
+	by mail.kernel.org (Postfix) with ESMTPS id 2AF6322581
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2AF6322581
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54533.94880 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54536.94900 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJG-0006Mc-VP; Tue, 15 Dec 2020 16:36:22 +0000
+	id 1kpDJM-0006WQ-5q; Tue, 15 Dec 2020 16:36:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54533.94880; Tue, 15 Dec 2020 16:36:22 +0000
+Received: by outflank-mailman (output) from mailman id 54536.94900; Tue, 15 Dec 2020 16:36:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJG-0006MQ-QW; Tue, 15 Dec 2020 16:36:22 +0000
-Received: by outflank-mailman (input) for mailman id 54533;
- Tue, 15 Dec 2020 16:36:21 +0000
+	id 1kpDJL-0006Vp-Nb; Tue, 15 Dec 2020 16:36:27 +0000
+Received: by outflank-mailman (input) for mailman id 54536;
+ Tue, 15 Dec 2020 16:36:26 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDJF-00066M-HU
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:21 +0000
+ id 1kpDJK-00066M-Hc
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:26 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0cd1ba9f-404d-4d83-925f-64f686129a6d;
- Tue, 15 Dec 2020 16:36:08 +0000 (UTC)
+ id 2dfe56c1-dc56-4768-a56d-03b25f5899e1;
+ Tue, 15 Dec 2020 16:36:09 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id AF608AC7F;
- Tue, 15 Dec 2020 16:36:07 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 3D0F7ADA2;
+ Tue, 15 Dec 2020 16:36:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,115 +52,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0cd1ba9f-404d-4d83-925f-64f686129a6d
+X-Inumbo-ID: 2dfe56c1-dc56-4768-a56d-03b25f5899e1
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608050167; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=kYVC+qKjmu1QH58TZR0/l7X0f2towWcVsvAHjXP8k6o=;
-	b=oEofi3aD1RzuCCCnkM7DE40w5NnFiOaY5aVlC6P8XioMkDfign/z1L9h8x+v9zrqK9eEAD
-	GdykhfR1mLbO9bxrN0dqZnTC0jB29oeos9EfiX1WBMRxK173cuuSe4AXHnlB+NtB3WyfdS
-	d0xsr49SxsRL/N+qhy0slWpg79WA9yU=
+	t=1608050168; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Fvbcf3En7lYu//cGgGBUZK52QcUFkax9zugp5BLC0iQ=;
+	b=lD+KAQ4aqGuvG9gAovIJkzk0naw5LkJX24Ju800aPr2HPBSwYrcWlZH3GFCGvQB4RCc+pu
+	rYbgGp8SfkUyvIi6eyuVNWKGeXvplGhfPw1vojDRFw4wForo7DaJM2QUy0/+uOgdgPRdlS
+	tz0Se5v7kqwJjPTpIVqZQS9m0p7gJgM=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v10 00/25] tools/xenstore: support live update for xenstored
-Date: Tue, 15 Dec 2020 17:35:38 +0100
-Message-Id: <20201215163603.21700-1-jgross@suse.com>
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v10 03/25] tools/xenstore: remove unused cruft from xenstored_domain.c
+Date: Tue, 15 Dec 2020 17:35:41 +0100
+Message-Id: <20201215163603.21700-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
+References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today Xenstore is not restartable. This means a Xen server needing an
-update of xenstored has to be rebooted in order to let this update
-become effective.
+domain->remote_port and restore_existing_connections() are useless and
+can be removed.
 
-This patch series is changing that: The internal state of xenstored
-(the contents of Xenstore, all connections to various clients like
-programs or other domains, and watches) is saved in a defined format
-and a new binary is being activated consuming the old state. All
-connections are being restored and the new Xenstore binary will
-continue where the old one stopped.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+---
+V7:
+- new patch
+---
+ tools/xenstore/xenstored_core.c   |  3 ---
+ tools/xenstore/xenstored_domain.c | 11 -----------
+ tools/xenstore/xenstored_domain.h |  3 ---
+ 3 files changed, 17 deletions(-)
 
-This patch series has been under (secret) development for quite some
-time. It hasn't been posted to xen-devel until now due to the various
-Xenstore related security issues which have become public only today.
-
-There will be a similar series for oxenstored posted.
-
-Xenstore-stubdom is not yet supported, but I'm planning to start
-working on that soon.
-
-Changes in V10 (for the members of the security team):
-- dropped patch 6 as requested by Andrew
-
-Juergen Gross (24):
-  tools/xenstore: switch barf[_perror]() to use syslog()
-  tools/xenstore: make set_tdb_key() non-static
-  tools/xenstore: remove unused cruft from xenstored_domain.c
-  tools/libxenevtchn: add possibility to not close file descriptor on
-    exec
-  tools/xenstore: refactor XS_CONTROL handling
-  tools/xenstore: add live update command to xenstore-control
-  tools/xenstore: add basic live-update command parsing
-  tools/xenstore: introduce live update status block
-  tools/xenstore: save new binary for live update
-  tools/xenstore: add command line handling for live update
-  tools/xenstore: add the basic framework for doing the live update
-  tools/xenstore: allow live update only with no transaction active
-  docs: update the xenstore migration stream documentation
-  tools/xenstore: add include file for state structure definitions
-  tools/xenstore: dump the xenstore state for live update
-  tools/xenstore: handle CLOEXEC flag for local files and pipes
-  tools/xenstore: split off domain introduction from do_introduce()
-  tools/xenstore: evaluate the live update flag when starting
-  tools/xenstore: read internal state when doing live upgrade
-  tools/xenstore: add reading global state for live update
-  tools/xenstore: add read connection state for live update
-  tools/xenstore: add read node state for live update
-  tools/xenstore: add read watch state for live update
-  tools/xenstore: activate new binary for live update
-
-Julien Grall (1):
-  tools/xenstore: handle dying domains in live update
-
- docs/designs/xenstore-migration.md      |  19 +-
- docs/misc/xenstore.txt                  |  21 +
- tools/include/xenevtchn.h               |  16 +-
- tools/libs/evtchn/Makefile              |   2 +-
- tools/libs/evtchn/core.c                |  45 +-
- tools/libs/evtchn/freebsd.c             |   9 +-
- tools/libs/evtchn/libxenevtchn.map      |   4 +
- tools/libs/evtchn/linux.c               |   9 +-
- tools/libs/evtchn/minios.c              |   6 +-
- tools/libs/evtchn/netbsd.c              |   2 +-
- tools/libs/evtchn/private.h             |   2 +-
- tools/libs/evtchn/solaris.c             |   2 +-
- tools/xenstore/Makefile                 |   3 +-
- tools/xenstore/include/xenstore_state.h | 131 +++++
- tools/xenstore/utils.c                  |  20 +
- tools/xenstore/utils.h                  |   6 +
- tools/xenstore/xenstore_control.c       | 332 ++++++++++++-
- tools/xenstore/xenstored_control.c      | 612 +++++++++++++++++++++++-
- tools/xenstore/xenstored_control.h      |   1 +
- tools/xenstore/xenstored_core.c         | 510 ++++++++++++++++++--
- tools/xenstore/xenstored_core.h         |  40 ++
- tools/xenstore/xenstored_domain.c       | 312 +++++++++---
- tools/xenstore/xenstored_domain.h       |  14 +-
- tools/xenstore/xenstored_posix.c        |  13 +-
- tools/xenstore/xenstored_transaction.c  |  11 +-
- tools/xenstore/xenstored_watch.c        | 171 +++++--
- tools/xenstore/xenstored_watch.h        |   5 +
- 27 files changed, 2103 insertions(+), 215 deletions(-)
- create mode 100644 tools/xenstore/include/xenstore_state.h
-
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index ab1c7835b8..50986f8b29 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -2087,9 +2087,6 @@ int main(int argc, char *argv[])
+ 	if (!no_domain_init)
+ 		domain_init();
+ 
+-	/* Restore existing connections. */
+-	restore_existing_connections();
+-
+ 	if (outputpid) {
+ 		printf("%ld\n", (long)getpid());
+ 		fflush(stdout);
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 7d348d57f3..ed8e83b06b 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -54,10 +54,6 @@ struct domain
+ 	/* Event channel port */
+ 	evtchn_port_t port;
+ 
+-	/* The remote end of the event channel, used only to validate
+-	   repeated domain introductions. */
+-	evtchn_port_t remote_port;
+-
+ 	/* Domain path in store. */
+ 	char *path;
+ 
+@@ -382,7 +378,6 @@ static int new_domain(struct domain *domain, int port)
+ 	domain->conn->domain = domain;
+ 	domain->conn->id = domain->domid;
+ 
+-	domain->remote_port = port;
+ 	domain->nbentry = 0;
+ 	domain->nbwatch = 0;
+ 
+@@ -470,7 +465,6 @@ int do_introduce(struct connection *conn, struct buffered_data *in)
+ 			xenevtchn_unbind(xce_handle, domain->port);
+ 		rc = xenevtchn_bind_interdomain(xce_handle, domid, port);
+ 		domain->port = (rc == -1) ? 0 : rc;
+-		domain->remote_port = port;
+ 	}
+ 
+ 	domain_conn_reset(domain);
+@@ -636,11 +630,6 @@ const char *get_implicit_path(const struct connection *conn)
+ 	return conn->domain->path;
+ }
+ 
+-/* Restore existing connections. */
+-void restore_existing_connections(void)
+-{
+-}
+-
+ static int set_dom_perms_default(struct node_perms *perms)
+ {
+ 	perms->num = 1;
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index 5e00087206..66e0a12654 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -47,9 +47,6 @@ void domain_init(void);
+ /* Returns the implicit path of a connection (only domains have this) */
+ const char *get_implicit_path(const struct connection *conn);
+ 
+-/* Read existing connection information from store. */
+-void restore_existing_connections(void);
+-
+ /* Can connection attached to domain read/write. */
+ bool domain_can_read(struct connection *conn);
+ bool domain_can_write(struct connection *conn);
 -- 
 2.26.2
 
