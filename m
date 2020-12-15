@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93039C2BBCA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E71CAC2BB9A
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 52DCF22573
+	by mail.kernel.org (Postfix) with ESMTPS id 9C27922573
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52DCF22573
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C27922573
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54543.94920 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54544.94932 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJQ-0006ft-CD; Tue, 15 Dec 2020 16:36:32 +0000
+	id 1kpDJR-0006j4-P6; Tue, 15 Dec 2020 16:36:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54543.94920; Tue, 15 Dec 2020 16:36:32 +0000
+Received: by outflank-mailman (output) from mailman id 54544.94932; Tue, 15 Dec 2020 16:36:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJQ-0006ff-6q; Tue, 15 Dec 2020 16:36:32 +0000
-Received: by outflank-mailman (input) for mailman id 54543;
- Tue, 15 Dec 2020 16:36:30 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kpDJR-0006ip-JB; Tue, 15 Dec 2020 16:36:33 +0000
+Received: by outflank-mailman (input) for mailman id 54544;
+ Tue, 15 Dec 2020 16:36:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDJO-000667-Go
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:30 +0000
+ id 1kpDJP-00066M-Hz
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:31 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ad375b72-b3e0-4ac5-a755-001c076d9bc0;
- Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ff984401-f548-4ba5-82c3-160735321afd;
+ Tue, 15 Dec 2020 16:36:11 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id EFEEEB267;
- Tue, 15 Dec 2020 16:36:09 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9F059ADD9;
+ Tue, 15 Dec 2020 16:36:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad375b72-b3e0-4ac5-a755-001c076d9bc0
+X-Inumbo-ID: ff984401-f548-4ba5-82c3-160735321afd
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608050170; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608050168; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nPZAkpB2QjQ2BH5uTUJNNCYD4hmthye6v2/HhM/4weY=;
-	b=n29LNHon97XlJ3SwFAAL9se/VmJcMCOGjszGdVU/BSKULo+CzD9a4hn456b/ZUNFzgmUns
-	TpqqvWBYiD5pdGC2/DNpZ6lrTF4BgRRk3s3b9KRcLfglCFOK7CiId3/cAjFDKgnJU0jrn+
-	sOLUqhl9Oo4SzA8d59W7SO7tYMoLhrI=
+	bh=FRUtFaGWgmKtjWz8l5QtTap0za2dmtwHYkudzxpjDmo=;
+	b=vSJDBkQFORKegMLskiQLhKR90P/B8rPjwSfJXHAXvwyFh+Sc8248eMX61xw4R83j0Lr5gF
+	/+Qwa2c1jlAKXYjtxk4BdqyYSUd5JSnf7I6etJiQuThluE6GkrEC5GBdUlenmMlboP4V2V
+	gaY/MNrCEO3A/oRVAaSvP/ClG26h4uY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -69,92 +70,125 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <jgrall@amazon.com>,
 	Paul Durrant <paul@xen.org>
-Subject: [PATCH v10 11/25] tools/xenstore: add the basic framework for doing the live update
-Date: Tue, 15 Dec 2020 17:35:49 +0100
-Message-Id: <20201215163603.21700-12-jgross@suse.com>
+Subject: [PATCH v10 05/25] tools/xenstore: refactor XS_CONTROL handling
+Date: Tue, 15 Dec 2020 17:35:43 +0100
+Message-Id: <20201215163603.21700-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
 References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the main framework for executing the live update. This for now
-only defines the basic execution steps with empty dummy functions.
-This final step returning means failure, as in case of success the
-new executable will have taken over.
+In order to allow control commands with binary data refactor handling
+of XS_CONTROL:
+
+- get primary command first
+- add maximum number of additional parameters to pass to command
+  handler
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Paul Durrant <paul@xen.org>
 ---
-V4:
-- const (Julien Grall)
+V2:
+- add comment regarding max_pars (Pawel Wieczorkiewicz)
+
+V3:
+- addressed Paul's comments
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenstore/xenstored_control.c | 39 ++++++++++++++++++++++++++++--
- 1 file changed, 37 insertions(+), 2 deletions(-)
+ tools/xenstore/xenstored_control.c | 34 ++++++++++++++++++++----------
+ tools/xenstore/xenstored_core.c    |  3 +--
+ tools/xenstore/xenstored_core.h    |  1 +
+ 3 files changed, 25 insertions(+), 13 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 2e0827b9ef..940b717741 100644
+index 8d48ab4820..8d29db8270 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -304,9 +304,27 @@ static const char *lu_arch(const void *ctx, struct connection *conn,
- }
- #endif
+@@ -30,6 +30,14 @@ struct cmd_s {
+ 	char *cmd;
+ 	int (*func)(void *, struct connection *, char **, int);
+ 	char *pars;
++	/*
++	 * max_pars can be used to limit the size of the parameter vector,
++	 * e.g. in case of large binary parts in the parameters.
++	 * The command is included in the count, so 1 means just the command
++	 * without any parameter.
++	 * 0 == no limit (the default)
++	 */
++	unsigned int max_pars;
+ };
  
-+static const char *lu_check_lu_allowed(const void *ctx, bool force,
-+				       unsigned int to)
-+{
-+	return NULL;
-+}
-+
-+static const char *lu_dump_state(const void *ctx, struct connection *conn)
-+{
-+	return NULL;
-+}
-+
-+static const char *lu_activate_binary(const void *ctx)
-+{
-+	return "Not yet implemented.";
-+}
-+
- static const char *lu_start(const void *ctx, struct connection *conn,
- 			    bool force, unsigned int to)
+ static int do_control_check(void *ctx, struct connection *conn,
+@@ -194,25 +202,29 @@ static int do_control_help(void *ctx, struct connection *conn,
+ 
+ int do_control(struct connection *conn, struct buffered_data *in)
  {
-+	const char *ret;
-+
- 	syslog(LOG_INFO, "live-update: start, force=%d, to=%u\n", force, to);
+-	int num;
+-	int cmd;
+-	char **vec;
++	unsigned int cmd, num, off;
++	char **vec = NULL;
  
- 	if (!lu_status || lu_status->conn != conn)
-@@ -317,10 +335,27 @@ static const char *lu_start(const void *ctx, struct connection *conn,
- 		return "Kernel not complete.";
- #endif
+ 	if (conn->id != 0)
+ 		return EACCES;
  
--	/* Will be replaced by real live-update later. */
-+	/* Check for state to allow live update. */
-+	ret = lu_check_lu_allowed(ctx, force, to);
-+	if (ret) {
-+		if (!strcmp(ret, "BUSY"))
-+			return ret;
-+		goto out;
-+	}
+-	num = xs_count_strings(in->buffer, in->used);
+-	if (num < 1)
++	off = get_string(in, 0);
++	if (!off)
++		return EINVAL;
++	for (cmd = 0; cmd < ARRAY_SIZE(cmds); cmd++)
++		if (streq(in->buffer, cmds[cmd].cmd))
++			break;
++	if (cmd == ARRAY_SIZE(cmds))
+ 		return EINVAL;
 +
-+	/* Dump out internal state, including "OK" for live update. */
-+	ret = lu_dump_state(ctx, conn);
-+	if (ret)
-+		goto out;
-+
-+	/* Perform the activation of new binary. */
-+	ret = lu_activate_binary(ctx);
-+	/* We will reach this point only in case of failure. */
-+
-+ out:
- 	talloc_free(lu_status);
++	num = xs_count_strings(in->buffer, in->used);
++	if (cmds[cmd].max_pars)
++		num = min(num, cmds[cmd].max_pars);
+ 	vec = talloc_array(in, char *, num);
+ 	if (!vec)
+ 		return ENOMEM;
+-	if (get_strings(in, vec, num) != num)
++	if (get_strings(in, vec, num) < num)
+ 		return EIO;
  
--	return NULL;
-+	return ret;
+-	for (cmd = 0; cmd < ARRAY_SIZE(cmds); cmd++)
+-		if (streq(vec[0], cmds[cmd].cmd))
+-			return cmds[cmd].func(in, conn, vec + 1, num - 1);
+-
+-	return EINVAL;
++	return cmds[cmd].func(in, conn, vec + 1, num - 1);
  }
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 50986f8b29..e1b92c3dc8 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -620,8 +620,7 @@ static struct buffered_data *new_buffer(void *ctx)
+ /* Return length of string (including nul) at this offset.
+  * If there is no nul, returns 0 for failure.
+  */
+-static unsigned int get_string(const struct buffered_data *data,
+-			       unsigned int offset)
++unsigned int get_string(const struct buffered_data *data, unsigned int offset)
+ {
+ 	const char *nul;
  
- static int do_control_lu(void *ctx, struct connection *conn,
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index fb59d862a2..27826c125c 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -142,6 +142,7 @@ const char *onearg(struct buffered_data *in);
+ /* Break input into vectors, return the number, fill in up to num of them. */
+ unsigned int get_strings(struct buffered_data *data,
+ 			 char *vec[], unsigned int num);
++unsigned int get_string(const struct buffered_data *data, unsigned int offset);
+ 
+ void send_reply(struct connection *conn, enum xsd_sockmsg_type type,
+ 		const void *data, unsigned int len);
 -- 
 2.26.2
 
