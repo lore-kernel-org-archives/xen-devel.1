@@ -2,44 +2,42 @@ Return-Path: <SRS0=ELVT=FT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E85BC4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 15:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6912BC4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 15:06:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 004A022525
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 15:04:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 004A022525
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 21E9722525
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 15:06:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 21E9722525
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54314.94285 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54319.94298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpBsA-0001MS-Vr; Tue, 15 Dec 2020 15:04:18 +0000
+	id 1kpBuE-0001VH-D7; Tue, 15 Dec 2020 15:06:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54314.94285; Tue, 15 Dec 2020 15:04:18 +0000
+Received: by outflank-mailman (output) from mailman id 54319.94298; Tue, 15 Dec 2020 15:06:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpBsA-0001ML-Sv; Tue, 15 Dec 2020 15:04:18 +0000
-Received: by outflank-mailman (input) for mailman id 54314;
- Tue, 15 Dec 2020 15:04:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpBs8-0001MG-MR
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 15:04:16 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2348941b-46a8-412d-b803-75683c9fd45f;
- Tue, 15 Dec 2020 15:04:15 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D4C48AC7F;
- Tue, 15 Dec 2020 15:04:14 +0000 (UTC)
+	id 1kpBuE-0001VA-A8; Tue, 15 Dec 2020 15:06:26 +0000
+Received: by outflank-mailman (input) for mailman id 54319;
+ Tue, 15 Dec 2020 15:06:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=6ufw=FT=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1kpBuD-0001Up-AH
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 15:06:25 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fca7ef58-875b-49d9-8b50-fdf322f7fad6;
+ Tue, 15 Dec 2020 15:06:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,137 +49,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2348941b-46a8-412d-b803-75683c9fd45f
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608044655; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=1ONxP5uPtKWFefZOyd/Uymh+C2zg0SXGzfp1xar6tXg=;
-	b=eT/aDkZ+5/0+ZflH9JfPI+zJmA6sc3gawUouS0XEtySeQ77MT4yCRKtUYqHUsNIkilx8+q
-	AGwEOoctpwnibcMFEdrJFs+38I+ab3eY/TuQQAdg7hnjNgiGLYg4yMzIqwvL9BaApF8x6E
-	caZpu2LJ7eiTqzUs9M8+0I2LerOJiTY=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH] tools/xenstore: rework path length check
-Date: Tue, 15 Dec 2020 16:04:11 +0100
-Message-Id: <20201215150411.9987-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+X-Inumbo-ID: fca7ef58-875b-49d9-8b50-fdf322f7fad6
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1608044784;
+  h=subject:to:cc:references:from:message-id:date:
+   mime-version:in-reply-to:content-transfer-encoding;
+  bh=OTpugqn7zvt2lSUnB/CR9WtOPwPJgpWceKapczBjzPk=;
+  b=LAZrZSK9k5bnVjS5KPy67xBR9xnIUwn8OkbxOmOMUGEute3Jx3wO8U5t
+   0Tc3ybKCrt9AXLmbZGV7tx5V2aI9uOXrZqIYy6RVoa9MG5N+AGjswzQPb
+   NHnEFB8e+cLU+dMc+ASb6Akv/XMIxT1zhJa+iV1lSy65V6COG5ax1t3kq
+   Y=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: I3NndTN5xR6bVHc9LXuP0BUuJmsuQnM8W8oK1XFhj8+YlyyzkFFKuoBocVuePlx7vGWzpHdye2
+ HIUTLi6k7Z/K66SFxMToP4+GgGapNxmMACLjubUt0rD3KGqWPgW16v0vG7iRB461qfM7AZW8yc
+ vhs/Q+tCda809FBenIdk1s5qwZRCwOyMPhihkWiDNiCg4EGSFMh4BFpifSKVszb5xe3TmpC42E
+ sd8Um7b1XXJV/Dw8qQHWcSY/3cdFY99ugnCzb/tpB/rQdaYjq7MSOK8hAQIIf84ZVOrDO8q4Zq
+ MSs=
+X-SBRS: 5.2
+X-MesageID: 33240661
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,421,1599537600"; 
+   d="scan'208";a="33240661"
+Subject: Re: [PATCH] tools/xenstore: rework path length check
+To: Juergen Gross <jgross@suse.com>, <xen-devel@lists.xenproject.org>
+CC: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Paul Durrant
+	<paul@xen.org>, Julien Grall <jgrall@amazon.com>
+References: <20201215150411.9987-1-jgross@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <f37930e2-10e8-69c4-5e36-4cf563b2f38e@citrix.com>
+Date: Tue, 15 Dec 2020 15:06:17 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201215150411.9987-1-jgross@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ FTLPEX02CL03.citrite.net (10.13.108.165)
 
-The different fixed limits for absolute and relative path lengths of
-Xenstore nodes make it possible to create per-domain nodes via
-absolute paths which are not accessible using relative paths, as the
-two limits differ by 1024 characters.
+On 15/12/2020 15:04, Juergen Gross wrote:
+> The different fixed limits for absolute and relative path lengths of
+> Xenstore nodes make it possible to create per-domain nodes via
+> absolute paths which are not accessible using relative paths, as the
+> two limits differ by 1024 characters.
+>
+> Instead of this weird limits use only one limit, which applies to the
+> relative path length of per-domain nodes and to the absolute path
+> length of all other nodes. This means, the path length check is
+> applied to the path after removing a possible start of
+> "/local/domain/<n>/" with <n> being a domain id.
+>
+> There has been the request to be able to limit the path lengths even
+> more, so an additional quota is added which can be applied to path
+> lengths. It is XENSTORE_REL_PATH_MAX (2048) per default, but can be
+> set to lower values. This is done via the new "-M" or "--path-max"
+> option when invoking xenstored.
+>
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Reviewed-by: Paul Durrant <paul@xen.org>
+> Acked-by: Julien Grall <jgrall@amazon.com>
 
-Instead of this weird limits use only one limit, which applies to the
-relative path length of per-domain nodes and to the absolute path
-length of all other nodes. This means, the path length check is
-applied to the path after removing a possible start of
-"/local/domain/<n>/" with <n> being a domain id.
-
-There has been the request to be able to limit the path lengths even
-more, so an additional quota is added which can be applied to path
-lengths. It is XENSTORE_REL_PATH_MAX (2048) per default, but can be
-set to lower values. This is done via the new "-M" or "--path-max"
-option when invoking xenstored.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Acked-by: Julien Grall <jgrall@amazon.com>
----
-This patch was originally thought to be part of XSA-323, but later it
-was decided not to include it, as in C Xenstored this is no security
-issue.
----
- tools/xenstore/xenstored_core.c | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
-
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 746a1247b3..3082a36d3a 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -102,6 +102,7 @@ int quota_nb_watch_per_domain = 128;
- int quota_max_entry_size = 2048; /* 2K */
- int quota_max_transaction = 10;
- int quota_nb_perms_per_node = 5;
-+int quota_max_path_len = XENSTORE_REL_PATH_MAX;
- 
- void trace(const char *fmt, ...)
- {
-@@ -734,6 +735,9 @@ static bool valid_chars(const char *node)
- 
- bool is_valid_nodename(const char *node)
- {
-+	int local_off = 0;
-+	unsigned int domid;
-+
- 	/* Must start in /. */
- 	if (!strstarts(node, "/"))
- 		return false;
-@@ -746,7 +750,10 @@ bool is_valid_nodename(const char *node)
- 	if (strstr(node, "//"))
- 		return false;
- 
--	if (strlen(node) > XENSTORE_ABS_PATH_MAX)
-+	if (sscanf(node, "/local/domain/%5u/%n", &domid, &local_off) != 1)
-+		local_off = 0;
-+
-+	if (strlen(node) > local_off + quota_max_path_len)
- 		return false;
- 
- 	return valid_chars(node);
-@@ -806,6 +813,8 @@ static struct node *get_node_canonicalized(struct connection *conn,
- 	if (!canonical_name)
- 		canonical_name = &tmp_name;
- 	*canonical_name = canonicalize(conn, ctx, name);
-+	if (!*canonical_name)
-+		return NULL;
- 	return get_node(conn, ctx, *canonical_name, perm);
- }
- 
-@@ -1926,6 +1935,7 @@ static void usage(void)
- "  -W, --watch-nb <nb>     limit the number of watches per domain,\n"
- "  -t, --transaction <nb>  limit the number of transaction allowed per domain,\n"
- "  -A, --perm-nb <nb>      limit the number of permissions per node,\n"
-+"  -M, --path-max <chars>  limit the allowed Xenstore node path length,\n"
- "  -R, --no-recovery       to request that no recovery should be attempted when\n"
- "                          the store is corrupted (debug only),\n"
- "  -I, --internal-db       store database in memory, not on disk\n"
-@@ -1947,6 +1957,7 @@ static struct option options[] = {
- 	{ "trace-file", 1, NULL, 'T' },
- 	{ "transaction", 1, NULL, 't' },
- 	{ "perm-nb", 1, NULL, 'A' },
-+	{ "path-max", 1, NULL, 'M' },
- 	{ "no-recovery", 0, NULL, 'R' },
- 	{ "internal-db", 0, NULL, 'I' },
- 	{ "verbose", 0, NULL, 'V' },
-@@ -1969,7 +1980,7 @@ int main(int argc, char *argv[])
- 	int timeout;
- 
- 
--	while ((opt = getopt_long(argc, argv, "DE:F:HNPS:t:A:T:RVW:", options,
-+	while ((opt = getopt_long(argc, argv, "DE:F:HNPS:t:A:M:T:RVW:", options,
- 				  NULL)) != -1) {
- 		switch (opt) {
- 		case 'D':
-@@ -2014,6 +2025,10 @@ int main(int argc, char *argv[])
- 		case 'A':
- 			quota_nb_perms_per_node = strtol(optarg, NULL, 10);
- 			break;
-+			quota_max_path_len = strtol(optarg, NULL, 10);
-+			quota_max_path_len = min(XENSTORE_REL_PATH_MAX,
-+						 quota_max_path_len);
-+			break;
- 		case 'e':
- 			dom0_event = strtol(optarg, NULL, 10);
- 			break;
--- 
-2.26.2
-
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
