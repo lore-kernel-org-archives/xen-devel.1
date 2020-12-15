@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6974C4361B
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 04:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E00CC4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 05:29:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F39920795
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 04:42:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F39920795
+	by mail.kernel.org (Postfix) with ESMTPS id 1461C2229C
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 05:29:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1461C2229C
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.52874.92276 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.52885.92291 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kp2Aa-0002Hj-H2; Tue, 15 Dec 2020 04:42:40 +0000
+	id 1kp2tO-0006Nd-0y; Tue, 15 Dec 2020 05:28:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 52874.92276; Tue, 15 Dec 2020 04:42:40 +0000
+Received: by outflank-mailman (output) from mailman id 52885.92291; Tue, 15 Dec 2020 05:28:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kp2Aa-0002Hc-E0; Tue, 15 Dec 2020 04:42:40 +0000
-Received: by outflank-mailman (input) for mailman id 52874;
- Tue, 15 Dec 2020 04:42:38 +0000
+	id 1kp2tN-0006NW-UK; Tue, 15 Dec 2020 05:28:57 +0000
+Received: by outflank-mailman (input) for mailman id 52885;
+ Tue, 15 Dec 2020 05:28:55 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kp2AY-0002HU-RN; Tue, 15 Dec 2020 04:42:38 +0000
+ id 1kp2tL-0006NO-UM; Tue, 15 Dec 2020 05:28:55 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kp2AY-0005Pn-Ka; Tue, 15 Dec 2020 04:42:38 +0000
+ id 1kp2tL-0006Tc-Mj; Tue, 15 Dec 2020 05:28:55 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1kp2AY-0005qP-CG; Tue, 15 Dec 2020 04:42:38 +0000
+ id 1kp2tL-00071V-Ep; Tue, 15 Dec 2020 05:28:55 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kp2AY-0003aF-Bo; Tue, 15 Dec 2020 04:42:38 +0000
+ id 1kp2tL-0001l1-EN; Tue, 15 Dec 2020 05:28:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,16 +58,16 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=b6aJuk+mCQTjLB1u522RrimxDdMppRV6PWbYivi5HYg=; b=ngKhXf4UPyi+F1d3/n0jFXo+u0
-	bM4+mioBr1pDVhI7QOHmSPEXb767B6nBF09tWftOXutXn2SvCuUjI/Ntm3cm28xhRNkHeYFVe6CMh
-	ZfezgPJe54H9qiEemAsE2iOQuAInxWwVndcipGyPxMJ8SVJqpIDmR79CgHkA626YCF3M=;
+	bh=0pLDOVGpaUKXfsOPvtSTjDubAMPpKTb6UU7/1GLBwiQ=; b=J19QYm30dH0T5qMMRnIZiWP5Lt
+	d25YC14k22SArk7+Wy5LnI4JaPYXKEZDOukXeBkjdZhfplr+zux6gaKBU2O3slkwug2xhzQ6QeFy+
+	8/0VCrY5YUNl2Z6xwXwxQX742bf8TEfnuVgvbN9ZgDRfox00k2MHIT7nwHDfj72mwY0E=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-157542-mainreport@xen.org>
+Message-ID: <osstest-157544-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 157542: regressions - FAIL
+Subject: [ovmf test] 157544: regressions - FAIL
 X-Osstest-Failures:
     ovmf:build-i386:xen-build:fail:regression
     ovmf:build-amd64:xen-build:fail:regression
@@ -82,10 +82,10 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     ovmf=f95e80d832e923046c92cd6f0b8208cec147138e
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 15 Dec 2020 04:42:38 +0000
+Date: Tue, 15 Dec 2020 05:28:55 +0000
 
-flight 157542 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/157542/
+flight 157544 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/157544/
 
 Regressions :-(
 
@@ -108,8 +108,8 @@ baseline version:
  ovmf                 f95e80d832e923046c92cd6f0b8208cec147138e
 
 Last test of basis   157345  2020-12-09 12:40:46 Z    5 days
-Failing since        157348  2020-12-09 15:39:39 Z    5 days   44 attempts
-Testing same since   157531  2020-12-14 22:40:42 Z    0 days    6 attempts
+Failing since        157348  2020-12-09 15:39:39 Z    5 days   45 attempts
+Testing same since   157531  2020-12-14 22:40:42 Z    0 days    7 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
