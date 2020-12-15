@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1CD2C2BBCA
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87EA2C4361B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 96FD8223D6
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 96FD8223D6
+	by mail.kernel.org (Postfix) with ESMTPS id 55288223D6
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Dec 2020 16:36:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55288223D6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.54557.94978 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.54562.95004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJb-00074I-DL; Tue, 15 Dec 2020 16:36:43 +0000
+	id 1kpDJf-0007En-SP; Tue, 15 Dec 2020 16:36:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 54557.94978; Tue, 15 Dec 2020 16:36:43 +0000
+Received: by outflank-mailman (output) from mailman id 54562.95004; Tue, 15 Dec 2020 16:36:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpDJb-00073m-11; Tue, 15 Dec 2020 16:36:43 +0000
-Received: by outflank-mailman (input) for mailman id 54557;
- Tue, 15 Dec 2020 16:36:41 +0000
+	id 1kpDJf-0007E7-Fl; Tue, 15 Dec 2020 16:36:47 +0000
+Received: by outflank-mailman (input) for mailman id 54562;
+ Tue, 15 Dec 2020 16:36:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2CwE=FT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpDJZ-00066M-Hy
- for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:41 +0000
+ id 1kpDJe-00066M-Hz
+ for xen-devel@lists.xenproject.org; Tue, 15 Dec 2020 16:36:46 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id edb30b2c-898a-4786-a166-5a33fabf2be1;
- Tue, 15 Dec 2020 16:36:11 +0000 (UTC)
+ id 98f00c5d-0b3c-4ea8-a28f-445388c7de8c;
+ Tue, 15 Dec 2020 16:36:12 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F269CAF73;
- Tue, 15 Dec 2020 16:36:08 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 315FBB271;
+ Tue, 15 Dec 2020 16:36:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,553 +52,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: edb30b2c-898a-4786-a166-5a33fabf2be1
+X-Inumbo-ID: 98f00c5d-0b3c-4ea8-a28f-445388c7de8c
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608050169; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608050170; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Pqaa2EAISfoqMQYdGvAptWd4x6dr6DKrqL0LaEJ013g=;
-	b=DvLlmnlO946ltBwXIbxkN5+QAUTA1nV9fl8ji2mxnxtW3FUSU67Y/rfR7kgIk/jJq8BQQf
-	EkQBTUr++toDfK6MKVxRqoL/04i0qDACbBk8XjVKoR+VkC5k2L5ocESV91eNPHv8PO8Oi1
-	RlFinGRUo0e3mazFPD6fUMHulqGrKJM=
+	bh=3OGXhmDpavRgcLL+iSFnJ3xYl7jjDOEuqGoMRL/Y0AQ=;
+	b=gFVrZOXtO3pkUFa6HLadEJ50eh//1ChSYICzygJvi8f2Sw4H5IAMxKGZXR9Tv4oRCsaxLl
+	Y6RuHXQOcRob14xQBSWUzgBD3Ur9qvr+57mV19fUEhP4ey1flqIGrHwpvF4WLJVxTIHEt4
+	zX/HYtNgraWlUi0roWnKFvcm1uSFdcw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
 	Paul Durrant <paul@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v10 06/25] tools/xenstore: add live update command to xenstore-control
-Date: Tue, 15 Dec 2020 17:35:44 +0100
-Message-Id: <20201215163603.21700-7-jgross@suse.com>
+Subject: [PATCH v10 12/25] tools/xenstore: allow live update only with no transaction active
+Date: Tue, 15 Dec 2020 17:35:50 +0100
+Message-Id: <20201215163603.21700-13-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201215163603.21700-1-jgross@suse.com>
 References: <20201215163603.21700-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the "live-update" command to xenstore-control enabling updating
-xenstored to a new version in a running Xen system.
+In order to simplify live update state dumping only allow live update
+to happen when no transaction is active.
 
-With -c <arg> it is possible to pass a different command line to the
-new instance of xenstored. This will replace the command line used
-for the invocation of the just running xenstored instance.
+A timeout is used to detect guests which have a transaction active for
+longer periods of time. In case such a guest is detected when trying
+to do a live update it will be reported and the update will fail.
 
-The running xenstored (or xenstore-stubdom) needs to support live
-updating, of course.
+The admin can then either use a longer timeout, or use the force flag
+to just ignore the transactions of such a guest, or kill the guest
+before retrying.
 
-For now just add a small dummy handler to C xenstore denying any
-live update action.
+Transactions that have been active for a shorter time than the timeout
+will end in the live update starting to respond "BUSY" without
+aborting the complete live update process. The xenstore-control
+program will then just repeat the live update starting until a
+different result is returned.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Paul Durrant <paul@xen.org>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-V2:
-- add 0 byte after kernel chunk
-- add comment regrading add_to_buf() semantics (Pawel Wieczorkiewicz)
-- use %u for unsigned in format (Pawel Wieczorkiewicz)
-- explain buffer size better (Pawel Wieczorkiewicz)
-- add loop around "-s" option for client side retry in case of timeout
+ tools/xenstore/xenstored_control.c     | 20 +++++++++++++++++++-
+ tools/xenstore/xenstored_core.h        |  1 +
+ tools/xenstore/xenstored_transaction.c |  5 +++++
+ 3 files changed, 25 insertions(+), 1 deletion(-)
 
-V3:
-- add live-update command to docs/misc/xenstore.txt (Paul Durrant)
-- fix indent (Paul Durrant)
-
-V4:
-- made several parameters const (Julien Grall)
-- added more details to xenstore.txt (Julien Grall)
-
-V5:
-- set old_binary to NULL initially (Paul Durrant)
-
-V6:
-- use strerror(errno) in error message (Julien Grall)
-
-V10:
-- make binary specification mandatory (Andrew Cooper)
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- docs/misc/xenstore.txt             |  21 ++
- tools/xenstore/Makefile            |   3 +-
- tools/xenstore/xenstore_control.c  | 332 +++++++++++++++++++++++++++--
- tools/xenstore/xenstored_control.c |  30 +++
- 4 files changed, 369 insertions(+), 17 deletions(-)
-
-diff --git a/docs/misc/xenstore.txt b/docs/misc/xenstore.txt
-index 2081f20f55..1480742330 100644
---- a/docs/misc/xenstore.txt
-+++ b/docs/misc/xenstore.txt
-@@ -317,6 +317,27 @@ CONTROL			<command>|[<parameters>|]
- 	Current commands are:
- 	check
- 		checks xenstored innards
-+	live-update|<params>|+
-+		perform a live-update of the Xenstore daemon, only to
-+		be used via xenstore-control command.
-+		<params> are implementation specific and are used for
-+		different steps of the live-update processing. Currently
-+		supported <params> are:
-+		-f <file>  specify new daemon binary
-+		-b <size>  specify size of new stubdom binary
-+		-d <chunk-size> <binary-chunk>  transfer chunk of new
-+			stubdom binary
-+		-c <pars>  specify new command line to use
-+		-s [-t <sec>] [-F]  start live update process (-t specifies
-+			timeout in seconds to wait for active transactions
-+			to finish, default is 60 seconds; -F will force
-+			live update to happen even with running transactions
-+			after timeout elapsed)
-+		-a  abort live update handling
-+		All sub-options will return "OK" in case of success or an
-+		error string in case of failure. -s can return "BUSY" in case
-+		of an active transaction, a retry of -s can be done in that
-+		case.
- 	log|on
- 		turn xenstore logging on
- 	log|off
-diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
-index 9a0f0d012d..ab89e22d3a 100644
---- a/tools/xenstore/Makefile
-+++ b/tools/xenstore/Makefile
-@@ -11,6 +11,7 @@ CFLAGS += -include $(XEN_ROOT)/tools/config.h
- CFLAGS += -I./include
- CFLAGS += $(CFLAGS_libxenevtchn)
- CFLAGS += $(CFLAGS_libxenctrl)
-+CFLAGS += $(CFLAGS_libxenguest)
- CFLAGS += $(CFLAGS_libxentoolcore)
- CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
- CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
-@@ -81,7 +82,7 @@ xenstore: xenstore_client.o
- 	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
- 
- xenstore-control: xenstore_control.o
--	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
-+	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
- 
- xs_tdb_dump: xs_tdb_dump.o utils.o tdb.o talloc.o
- 	$(CC) $^ $(LDFLAGS) -o $@ $(APPEND_LDFLAGS)
-diff --git a/tools/xenstore/xenstore_control.c b/tools/xenstore/xenstore_control.c
-index afa04495a7..5ca015a07d 100644
---- a/tools/xenstore/xenstore_control.c
-+++ b/tools/xenstore/xenstore_control.c
-@@ -1,9 +1,311 @@
-+#define _GNU_SOURCE
-+#include <stdbool.h>
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
-+#include <time.h>
-+#include <xenctrl.h>
-+#include <xenguest.h>
- 
- #include "xenstore.h"
- 
-+/* Add a string plus terminating 0 byte to buf, returning new len. */
-+static int add_to_buf(char **buf, const char *val, int len)
-+{
-+    int vallen = strlen(val) + 1;
-+
-+    if (len < 0)
-+        return -1;
-+
-+    *buf = realloc(*buf, len + vallen);
-+    if (!*buf)
-+        return -1;
-+
-+    strcpy(*buf + len, val);
-+
-+    return len + vallen;
-+}
-+
-+static int live_update_start(struct xs_handle *xsh, bool force, unsigned int to)
-+{
-+    int len = 0;
-+    char *buf = NULL, *ret;
-+    time_t time_start;
-+
-+    if (asprintf(&ret, "%u", to) < 0)
-+        return 1;
-+    len = add_to_buf(&buf, "-s", len);
-+    len = add_to_buf(&buf, "-t", len);
-+    len = add_to_buf(&buf, ret, len);
-+    free(ret);
-+    if (force)
-+        len = add_to_buf(&buf, "-F", len);
-+    if (len < 0)
-+        return 1;
-+
-+    for (time_start = time(NULL); time(NULL) - time_start < to;) {
-+        ret = xs_control_command(xsh, "live-update", buf, len);
-+        if (!ret)
-+            goto err;
-+        if (strcmp(ret, "BUSY"))
-+            break;
-+    }
-+
-+    if (strcmp(ret, "OK"))
-+        goto err;
-+
-+    free(buf);
-+    free(ret);
-+
-+    return 0;
-+
-+ err:
-+    fprintf(stderr, "Starting live update failed:\n%s\n",
-+            ret ? : strerror(errno));
-+    free(buf);
-+    free(ret);
-+
-+    return 3;
-+}
-+
-+static int live_update_cmdline(struct xs_handle *xsh, const char *cmdline)
-+{
-+    int len = 0, rc = 0;
-+    char *buf = NULL, *ret;
-+
-+    len = add_to_buf(&buf, "-c", len);
-+    len = add_to_buf(&buf, cmdline, len);
-+    if (len < 0)
-+        return 1;
-+
-+    ret = xs_control_command(xsh, "live-update", buf, len);
-+    free(buf);
-+    if (!ret || strcmp(ret, "OK")) {
-+        fprintf(stderr, "Setting update binary failed:\n%s\n",
-+                ret ? : strerror(errno));
-+        rc = 3;
-+    }
-+    free(ret);
-+
-+    return rc;
-+}
-+
-+static int send_kernel_blob(struct xs_handle *xsh, const char *binary)
-+{
-+    int rc = 0, len = 0;
-+    xc_interface *xch;
-+    struct xc_dom_image *dom;
-+    char *ret, *buf = NULL;
-+    size_t off, sz;
-+#define BLOB_CHUNK_SZ 2048
-+
-+    xch = xc_interface_open(NULL, NULL, 0);
-+    if (!xch) {
-+        fprintf(stderr, "xc_interface_open() failed\n");
-+        return 1;
-+    }
-+
-+    dom = xc_dom_allocate(xch, NULL, NULL);
-+    if (!dom) {
-+        rc = 1;
-+        goto out_close;
-+    }
-+
-+    rc = xc_dom_kernel_file(dom, binary);
-+    if (rc) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+
-+    if (asprintf(&ret, "%zu", dom->kernel_size) < 0) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+    len = add_to_buf(&buf, "-b", len);
-+    len = add_to_buf(&buf, ret, len);
-+    free(ret);
-+    if (len < 0) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+    ret = xs_control_command(xsh, "live-update", buf, len);
-+    free(buf);
-+    if (!ret || strcmp(ret, "OK")) {
-+        fprintf(stderr, "Starting live update failed:\n%s\n",
-+                ret ? : strerror(errno));
-+        rc = 3;
-+    }
-+    free(ret);
-+    if (rc)
-+        goto out_rel;
-+
-+    /* buf capable to hold "-d" <1..2048> BLOB_CHUNK_SZ and a terminating 0. */
-+    buf = malloc(3 + 5 + BLOB_CHUNK_SZ + 1);
-+    if (!buf) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+
-+    strcpy(buf, "-d");
-+    sz = BLOB_CHUNK_SZ;
-+    for (off = 0; off < dom->kernel_size; off += BLOB_CHUNK_SZ) {
-+        if (dom->kernel_size - off < BLOB_CHUNK_SZ)
-+            sz = dom->kernel_size - off;
-+        sprintf(buf + 3, "%zu", sz);
-+        len = 3 + strlen(buf + 3) + 1;
-+        memcpy(buf + len, dom->kernel_blob + off, sz);
-+        buf[len + sz] = 0;
-+        len += sz + 1;
-+        ret = xs_control_command(xsh, "live-update", buf, len);
-+        if (!ret || strcmp(ret, "OK")) {
-+            fprintf(stderr, "Transfer of new binary failed:\n%s\n",
-+                    ret ? : strerror(errno));
-+            rc = 3;
-+            free(ret);
-+            break;
-+        }
-+        free(ret);
-+    }
-+
-+    free(buf);
-+
-+ out_rel:
-+    xc_dom_release(dom);
-+
-+ out_close:
-+    xc_interface_close(xch);
-+
-+    return rc;
-+}
-+
-+/*
-+ * Live update of Xenstore stubdom
-+ *
-+ * Sequence of actions:
-+ * 1. transfer new stubdom binary
-+ *    a) specify size
-+ *    b) transfer unpacked binary in chunks
-+ * 2. transfer new cmdline (optional)
-+ * 3. start update (includes flags)
-+ */
-+static int live_update_stubdom(struct xs_handle *xsh, const char *binary,
-+                               const char *cmdline, bool force, unsigned int to)
-+{
-+    int rc;
-+
-+    rc = send_kernel_blob(xsh, binary);
-+    if (rc)
-+        goto abort;
-+
-+    if (cmdline) {
-+        rc = live_update_cmdline(xsh, cmdline);
-+        if (rc)
-+            goto abort;
-+    }
-+
-+    rc = live_update_start(xsh, force, to);
-+    if (rc)
-+        goto abort;
-+
-+    return 0;
-+
-+ abort:
-+    xs_control_command(xsh, "live-update", "-a", 3);
-+    return rc;
-+}
-+
-+/*
-+ * Live update of Xenstore daemon
-+ *
-+ * Sequence of actions:
-+ * 1. transfer new binary filename
-+ * 2. transfer new cmdline (optional)
-+ * 3. start update (includes flags)
-+ */
-+static int live_update_daemon(struct xs_handle *xsh, const char *binary,
-+                              const char *cmdline, bool force, unsigned int to)
-+{
-+    int len = 0, rc;
-+    char *buf = NULL, *ret;
-+
-+    len = add_to_buf(&buf, "-f", len);
-+    len = add_to_buf(&buf, binary, len);
-+    if (len < 0)
-+        return 1;
-+    ret = xs_control_command(xsh, "live-update", buf, len);
-+    free(buf);
-+    if (!ret || strcmp(ret, "OK")) {
-+        fprintf(stderr, "Setting update binary failed:\n%s\n",
-+                ret ? : strerror(errno));
-+        free(ret);
-+        return 3;
-+    }
-+    free(ret);
-+
-+    if (cmdline) {
-+        rc = live_update_cmdline(xsh, cmdline);
-+        if (rc)
-+            goto abort;
-+    }
-+
-+    rc = live_update_start(xsh, force, to);
-+    if (rc)
-+        goto abort;
-+
-+    return 0;
-+
-+ abort:
-+    xs_control_command(xsh, "live-update", "-a", 3);
-+    return rc;
-+}
-+
-+static int live_update(struct xs_handle *xsh, int argc, char **argv)
-+{
-+    int rc = 0;
-+    unsigned int i, to = 60;
-+    char *binary = NULL, *cmdline = NULL, *val;
-+    bool force = false;
-+
-+    for (i = 0; i < argc; i++) {
-+        if (!strcmp(argv[i], "-c")) {
-+            i++;
-+            if (i == argc) {
-+                fprintf(stderr, "Missing command line value\n");
-+                rc = 2;
-+                goto out;
-+            }
-+            cmdline = argv[i];
-+        } else if (!strcmp(argv[i], "-t")) {
-+            i++;
-+            if (i == argc) {
-+                fprintf(stderr, "Missing timeout value\n");
-+                rc = 2;
-+                goto out;
-+            }
-+            to = atoi(argv[i]);
-+        } else if (!strcmp(argv[i], "-F"))
-+            force = true;
-+        else
-+            binary = argv[i];
-+    }
-+
-+    if (!binary) {
-+        fprintf(stderr, "Missing binary specification\n");
-+        rc = 2;
-+        goto out;
-+    }
-+
-+    val = xs_read(xsh, XBT_NULL, "/tool/xenstored/domid", &i);
-+    if (val)
-+        rc = live_update_stubdom(xsh, binary, cmdline, force, to);
-+    else
-+        rc = live_update_daemon(xsh, binary, cmdline, force, to);
-+
-+    free(val);
-+
-+ out:
-+    return rc;
-+}
- 
- int main(int argc, char **argv)
- {
-@@ -20,22 +322,6 @@ int main(int argc, char **argv)
-         goto out;
-     }
- 
--    for (p = 2; p < argc; p++)
--        len += strlen(argv[p]) + 1;
--    if (len) {
--        par = malloc(len);
--        if (!par) {
--            fprintf(stderr, "Allocation error.\n");
--            rc = 1;
--            goto out;
--        }
--        len = 0;
--        for (p = 2; p < argc; p++) {
--            memcpy(par + len, argv[p], strlen(argv[p]) + 1);
--            len += strlen(argv[p]) + 1;
--        }
--    }
--
-     xsh = xs_open(0);
-     if (xsh == NULL) {
-         fprintf(stderr, "Failed to contact Xenstored.\n");
-@@ -43,6 +329,19 @@ int main(int argc, char **argv)
-         goto out;
-     }
- 
-+    if (!strcmp(argv[1], "live-update")) {
-+        rc = live_update(xsh, argc - 2, argv + 2);
-+        goto out_close;
-+    }
-+
-+    for (p = 2; p < argc; p++)
-+        len = add_to_buf(&par, argv[p], len);
-+    if (len < 0) {
-+        fprintf(stderr, "Allocation error.\n");
-+        rc = 1;
-+        goto out_close;
-+    }
-+
-     ret = xs_control_command(xsh, argv[1], par, len);
-     if (!ret) {
-         rc = 3;
-@@ -59,6 +358,7 @@ int main(int argc, char **argv)
-     } else if (strlen(ret) > 0)
-         printf("%s\n", ret);
- 
-+ out_close:
-     xs_close(xsh);
- 
-  out:
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 8d29db8270..00fda5acdb 100644
+index 940b717741..af64a9a2d4 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -149,11 +149,41 @@ static int do_control_print(void *ctx, struct connection *conn,
- 	return 0;
+@@ -22,6 +22,7 @@ Interactive commands for Xen Store Daemon.
+ #include <stdlib.h>
+ #include <string.h>
+ #include <syslog.h>
++#include <time.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+@@ -307,7 +308,24 @@ static const char *lu_arch(const void *ctx, struct connection *conn,
+ static const char *lu_check_lu_allowed(const void *ctx, bool force,
+ 				       unsigned int to)
+ {
+-	return NULL;
++	char *ret = NULL;
++	struct connection *conn;
++	time_t now = time(NULL);
++	bool busy = false;
++
++	list_for_each_entry(conn, &connections, list) {
++		if (conn->ta_start_time - now >= to && !force) {
++			ret = talloc_asprintf(ctx, "%s\nDomain %u: %ld s",
++					      ret ? : "Domains with long running transactions:",
++					      conn->id,
++					      conn->ta_start_time - now);
++			if (!ret)
++				busy = true;
++		} else if (conn->ta_start_time)
++			busy = true;
++	}
++
++	return ret ? (const char *)ret : (busy ? "BUSY" : NULL);
  }
  
-+static int do_control_lu(void *ctx, struct connection *conn,
-+			 char **vec, int num)
-+{
-+	const char *resp;
-+
-+	resp = talloc_strdup(ctx, "NYI");
-+	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
-+	return 0;
-+}
-+
- static int do_control_help(void *, struct connection *, char **, int);
+ static const char *lu_dump_state(const void *ctx, struct connection *conn)
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 27826c125c..a009b182fd 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -93,6 +93,7 @@ struct connection
+ 	struct list_head transaction_list;
+ 	uint32_t next_transaction_id;
+ 	unsigned int transaction_started;
++	time_t ta_start_time;
  
- static struct cmd_s cmds[] = {
- 	{ "check", do_control_check, "" },
- 	{ "log", do_control_log, "on|off" },
-+
-+	/*
-+	 * The parameters are those of the xenstore-control utility!
-+	 * Depending on environment (Mini-OS or daemon) the live-update
-+	 * sequence is split into several sub-operations:
-+	 * 1. Specification of new binary
-+	 *    daemon:  -f <filename>
-+	 *    Mini-OS: -b <binary-size>
-+	 *             -d <size> <data-bytes> (multiple of those)
-+	 * 2. New command-line (optional): -c <cmdline>
-+	 * 3. Start of update: -s [-F] [-t <timeout>]
-+	 * Any sub-operation needs to respond with the string "OK" in case
-+	 * of success, any other response indicates failure.
-+	 * A started live-update sequence can be aborted via "-a" (not
-+	 * needed in case of failure for the first or last live-update
-+	 * sub-operation).
-+	 */
-+	{ "live-update", do_control_lu,
-+		"[-c <cmdline>] [-F] [-t <timeout>] <file>\n"
-+		"    Default timeout is 60 seconds.", 4 },
- #ifdef __MINIOS__
- 	{ "memreport", do_control_memreport, "" },
- #else
+ 	/* The domain I'm associated with, if any. */
+ 	struct domain *domain;
+diff --git a/tools/xenstore/xenstored_transaction.c b/tools/xenstore/xenstored_transaction.c
+index 52355f4ed8..cd07fb0f21 100644
+--- a/tools/xenstore/xenstored_transaction.c
++++ b/tools/xenstore/xenstored_transaction.c
+@@ -473,6 +473,8 @@ int do_transaction_start(struct connection *conn, struct buffered_data *in)
+ 	list_add_tail(&trans->list, &conn->transaction_list);
+ 	talloc_steal(conn, trans);
+ 	talloc_set_destructor(trans, destroy_transaction);
++	if (!conn->transaction_started)
++		conn->ta_start_time = time(NULL);
+ 	conn->transaction_started++;
+ 	wrl_ntransactions++;
+ 
+@@ -511,6 +513,8 @@ int do_transaction_end(struct connection *conn, struct buffered_data *in)
+ 	conn->transaction = NULL;
+ 	list_del(&trans->list);
+ 	conn->transaction_started--;
++	if (!conn->transaction_started)
++		conn->ta_start_time = 0;
+ 
+ 	/* Attach transaction to in for auto-cleanup */
+ 	talloc_steal(in, trans);
+@@ -589,6 +593,7 @@ void conn_delete_all_transactions(struct connection *conn)
+ 	assert(conn->transaction == NULL);
+ 
+ 	conn->transaction_started = 0;
++	conn->ta_start_time = 0;
+ }
+ 
+ int check_transactions(struct hashtable *hash)
 -- 
 2.26.2
 
