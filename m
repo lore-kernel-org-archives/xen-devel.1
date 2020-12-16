@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B916DC4361B
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Dec 2020 16:17:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79522C4361B
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Dec 2020 16:24:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6DCBE23109
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Dec 2020 16:17:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6DCBE23109
+	by mail.kernel.org (Postfix) with ESMTPS id 1F1ED2335A
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Dec 2020 16:24:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1F1ED2335A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.55328.96431 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.55335.96443 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpZUY-0003y6-2H; Wed, 16 Dec 2020 16:17:30 +0000
+	id 1kpZb0-0004yL-VR; Wed, 16 Dec 2020 16:24:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 55328.96431; Wed, 16 Dec 2020 16:17:30 +0000
+Received: by outflank-mailman (output) from mailman id 55335.96443; Wed, 16 Dec 2020 16:24:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpZUX-0003xz-Uc; Wed, 16 Dec 2020 16:17:29 +0000
-Received: by outflank-mailman (input) for mailman id 55328;
- Wed, 16 Dec 2020 16:17:28 +0000
+	id 1kpZb0-0004yE-Rb; Wed, 16 Dec 2020 16:24:10 +0000
+Received: by outflank-mailman (input) for mailman id 55335;
+ Wed, 16 Dec 2020 16:24:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=DJND=FU=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kpZUV-0003xr-UY
- for xen-devel@lists.xenproject.org; Wed, 16 Dec 2020 16:17:27 +0000
+ id 1kpZaz-0004y9-Jn
+ for xen-devel@lists.xenproject.org; Wed, 16 Dec 2020 16:24:09 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 59c38dab-fbf7-4445-9458-3f2f9547e977;
- Wed, 16 Dec 2020 16:17:26 +0000 (UTC)
+ id 5a32b00a-2925-4195-a578-56f65e8e920e;
+ Wed, 16 Dec 2020 16:24:08 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 14A49AC7F;
- Wed, 16 Dec 2020 16:17:26 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9F7E7AC7F;
+ Wed, 16 Dec 2020 16:24:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,39 +51,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 59c38dab-fbf7-4445-9458-3f2f9547e977
+X-Inumbo-ID: 5a32b00a-2925-4195-a578-56f65e8e920e
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608135446; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608135847; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=eF8iye3aJJjmodiyRNp30ALVMd3SgTP6MMfVPx1JXbo=;
-	b=NtpiP/s+f+heouA/WqGKApJn6vrDzpI8PLnqLar5QEh/Kn9hJTx6zt1j2c8qDp51TYX/FA
-	jY0lkblfWlOnpbiAFqfpn6ecySlDQ8y2lkAM5FybZYWWiSoYdTI5qX037IvF+eqqwKdAzH
-	/rhgvOutzs5AmQ8qHprTcgXntSdJJnY=
-Subject: Re: [PATCH v3 2/8] xen/hypfs: switch write function handles to const
+	bh=8bCNpvRu1aaYztt7lNYPM2+/3ZIjutOceBP40ILDXYc=;
+	b=Rcvkt0nPQMiHntsr/DRTPjJyI9l/up7yGk9FflhK6CC9yXPhppMXHO2WysYUzvID+Y2dr6
+	6Mn5u/XH0/HY/65WLAvT5Wh+BQVrwWIUENN3y7FRjj4OMjY+1fsdedujJVgVa6y6gqCPqJ
+	fwIwOTrrq/vBeTVBgCqXUePGD70mAPI=
+Subject: Re: [PATCH v3 3/8] xen/hypfs: add new enter() and exit() per node
+ callbacks
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
  Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
 References: <20201209160956.32456-1-jgross@suse.com>
- <20201209160956.32456-3-jgross@suse.com>
- <bdd553b4-968a-ff71-4bac-2824f86ba869@suse.com>
+ <20201209160956.32456-4-jgross@suse.com>
+ <36469295-8c77-0e58-654a-35fd992c11a1@suse.com>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <be37658b-2a56-8506-70d0-e74328b61c5a@suse.com>
-Date: Wed, 16 Dec 2020 17:17:25 +0100
+Message-ID: <aad9131f-ca42-94b4-1ce2-18c6db0ac381@suse.com>
+Date: Wed, 16 Dec 2020 17:24:06 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.0
 MIME-Version: 1.0
-In-Reply-To: <bdd553b4-968a-ff71-4bac-2824f86ba869@suse.com>
+In-Reply-To: <36469295-8c77-0e58-654a-35fd992c11a1@suse.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="MMIz031IqXfpEShhdWMREFyWWvEkpbCLG"
+ boundary="ufMjG3EonlO7vLn4ZjMp1F7MEwBHxDMCm"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---MMIz031IqXfpEShhdWMREFyWWvEkpbCLG
-Content-Type: multipart/mixed; boundary="wCanPexOv0N3dgKkpbmAztiNGhQswaR8X";
+--ufMjG3EonlO7vLn4ZjMp1F7MEwBHxDMCm
+Content-Type: multipart/mixed; boundary="s4HuKqeIBHtLZcNXJ2v91T4sw7bLFGTcp";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 To: Jan Beulich <jbeulich@suse.com>
@@ -91,59 +92,167 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
  Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
-Message-ID: <be37658b-2a56-8506-70d0-e74328b61c5a@suse.com>
-Subject: Re: [PATCH v3 2/8] xen/hypfs: switch write function handles to const
+Message-ID: <aad9131f-ca42-94b4-1ce2-18c6db0ac381@suse.com>
+Subject: Re: [PATCH v3 3/8] xen/hypfs: add new enter() and exit() per node
+ callbacks
 References: <20201209160956.32456-1-jgross@suse.com>
- <20201209160956.32456-3-jgross@suse.com>
- <bdd553b4-968a-ff71-4bac-2824f86ba869@suse.com>
-In-Reply-To: <bdd553b4-968a-ff71-4bac-2824f86ba869@suse.com>
+ <20201209160956.32456-4-jgross@suse.com>
+ <36469295-8c77-0e58-654a-35fd992c11a1@suse.com>
+In-Reply-To: <36469295-8c77-0e58-654a-35fd992c11a1@suse.com>
 
---wCanPexOv0N3dgKkpbmAztiNGhQswaR8X
+--s4HuKqeIBHtLZcNXJ2v91T4sw7bLFGTcp
 Content-Type: multipart/mixed;
- boundary="------------8746C9B61E947DE71B19CCFE"
+ boundary="------------E1DAC578A47395658EADEB73"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------8746C9B61E947DE71B19CCFE
+--------------E1DAC578A47395658EADEB73
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 16.12.20 17:08, Jan Beulich wrote:
+On 16.12.20 17:16, Jan Beulich wrote:
 > On 09.12.2020 17:09, Juergen Gross wrote:
->> --- a/xen/include/xen/guest_access.h
->> +++ b/xen/include/xen/guest_access.h
->> @@ -26,6 +26,11 @@
->>       type *_x =3D (hnd).p;                         \
->>       (XEN_GUEST_HANDLE_PARAM(type)) { _x };      \
->>   })
->> +/* Same for casting to a const type. */
->> +#define guest_handle_const_cast(hnd, type) ({       \
->> +    const type *_x =3D (const type *)((hnd).p);       \
->> +    (XEN_GUEST_HANDLE_PARAM(const_##type)) { _x };  \
->> +})
->=20
-> Afaict this allow casting from e.g. uint to const_ulong. We
-> don't want to permit this (i.e. if really needed one is to
-> go through two steps). I think all it takes is dropping the
-> cast:
->=20
-> #define guest_handle_const_cast(hnd, type) ({      \
->      const type *_x =3D (hnd).p;                      \
->      (XEN_GUEST_HANDLE_PARAM(const_##type)) { _x }; \
-> })
->=20
-> With this
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> and I'd be okay making the adjustment while committing
-> (provided it works and I didn't overlook anything).
+>> In order to better support resource allocation and locking for dynamic=
 
-At least it is still compiling, and I guess that was the main
-concern.
+>> hypfs nodes add enter() and exit() callbacks to struct hypfs_funcs.
+>>
+>> The enter() callback is called when entering a node during hypfs user
+>> actions (traversing, reading or writing it), while the exit() callback=
+
+>> is called when leaving a node (accessing another node at the same or a=
+
+>> higher directory level, or when returning to the user).
+>>
+>> For avoiding recursion this requires a parent pointer in each node.
+>> Let the enter() callback return the entry address which is stored as
+>> the last accessed node in order to be able to use a template entry for=
+
+>> that purpose in case of dynamic entries.
+>>
+>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>> ---
+>> V2:
+>> - new patch
+>>
+>> V3:
+>> - add ASSERT(entry); (Jan Beulich)
+>>
+>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>> ---
+>>   xen/common/hypfs.c      | 80 +++++++++++++++++++++++++++++++++++++++=
+++
+>>   xen/include/xen/hypfs.h |  5 +++
+>>   2 files changed, 85 insertions(+)
+>>
+>> diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
+>> index 6f822ae097..f04934db10 100644
+>> --- a/xen/common/hypfs.c
+>> +++ b/xen/common/hypfs.c
+>> @@ -25,30 +25,40 @@ CHECK_hypfs_dirlistentry;
+>>        ROUNDUP((name_len) + 1, alignof(struct xen_hypfs_direntry)))
+>>  =20
+>>   const struct hypfs_funcs hypfs_dir_funcs =3D {
+>> +    .enter =3D hypfs_node_enter,
+>> +    .exit =3D hypfs_node_exit,
+>>       .read =3D hypfs_read_dir,
+>>       .write =3D hypfs_write_deny,
+>>       .getsize =3D hypfs_getsize,
+>>       .findentry =3D hypfs_dir_findentry,
+>>   };
+>>   const struct hypfs_funcs hypfs_leaf_ro_funcs =3D {
+>> +    .enter =3D hypfs_node_enter,
+>> +    .exit =3D hypfs_node_exit,
+>>       .read =3D hypfs_read_leaf,
+>>       .write =3D hypfs_write_deny,
+>>       .getsize =3D hypfs_getsize,
+>>       .findentry =3D hypfs_leaf_findentry,
+>>   };
+>>   const struct hypfs_funcs hypfs_leaf_wr_funcs =3D {
+>> +    .enter =3D hypfs_node_enter,
+>> +    .exit =3D hypfs_node_exit,
+>>       .read =3D hypfs_read_leaf,
+>>       .write =3D hypfs_write_leaf,
+>>       .getsize =3D hypfs_getsize,
+>>       .findentry =3D hypfs_leaf_findentry,
+>>   };
+>>   const struct hypfs_funcs hypfs_bool_wr_funcs =3D {
+>> +    .enter =3D hypfs_node_enter,
+>> +    .exit =3D hypfs_node_exit,
+>>       .read =3D hypfs_read_leaf,
+>>       .write =3D hypfs_write_bool,
+>>       .getsize =3D hypfs_getsize,
+>>       .findentry =3D hypfs_leaf_findentry,
+>>   };
+>>   const struct hypfs_funcs hypfs_custom_wr_funcs =3D {
+>> +    .enter =3D hypfs_node_enter,
+>> +    .exit =3D hypfs_node_exit,
+>>       .read =3D hypfs_read_leaf,
+>>       .write =3D hypfs_write_custom,
+>>       .getsize =3D hypfs_getsize,
+>> @@ -63,6 +73,8 @@ enum hypfs_lock_state {
+>>   };
+>>   static DEFINE_PER_CPU(enum hypfs_lock_state, hypfs_locked);
+>>  =20
+>> +static DEFINE_PER_CPU(const struct hypfs_entry *, hypfs_last_node_ent=
+ered);
+>> +
+>>   HYPFS_DIR_INIT(hypfs_root, "");
+>>  =20
+>>   static void hypfs_read_lock(void)
+>> @@ -100,11 +112,59 @@ static void hypfs_unlock(void)
+>>       }
+>>   }
+>>  =20
+>> +const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *=
+entry)
+>> +{
+>> +    return entry;
+>> +}
+>> +
+>> +void hypfs_node_exit(const struct hypfs_entry *entry)
+>> +{
+>> +}
+>> +
+>> +static int node_enter(const struct hypfs_entry *entry)
+>> +{
+>> +    const struct hypfs_entry **last =3D &this_cpu(hypfs_last_node_ent=
+ered);
+>> +
+>> +    entry =3D entry->funcs->enter(entry);
+>> +    if ( IS_ERR(entry) )
+>> +        return PTR_ERR(entry);
+>> +
+>> +    ASSERT(entry);
+>> +    ASSERT(!*last || *last =3D=3D entry->parent);
+>> +
+>> +    *last =3D entry;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static void node_exit(const struct hypfs_entry *entry)
+>> +{
+>> +    const struct hypfs_entry **last =3D &this_cpu(hypfs_last_node_ent=
+ered);
+>> +
+>> +    if ( !*last )
+>> +        return;
+>=20
+> To my question regarding this in v2 you replied
+>=20
+> "I rechecked and have found that this was a remnant from an earlier
+>   variant. *last won't ever be NULL, so the if can be dropped (a NULL
+>   will be catched by the following ASSERT())."
+>=20
+> Now this if() is still there. Why?
+
+I really thought I did remove the if(). Seems as if I did that on
+my test machine only and not in my git tree. Sorry for that.
 
 
 Juergen
 
---------------8746C9B61E947DE71B19CCFE
+--------------E1DAC578A47395658EADEB73
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -234,25 +343,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------8746C9B61E947DE71B19CCFE--
+--------------E1DAC578A47395658EADEB73--
 
---wCanPexOv0N3dgKkpbmAztiNGhQswaR8X--
+--s4HuKqeIBHtLZcNXJ2v91T4sw7bLFGTcp--
 
---MMIz031IqXfpEShhdWMREFyWWvEkpbCLG
+--ufMjG3EonlO7vLn4ZjMp1F7MEwBHxDMCm
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl/aMxUFAwAAAAAACgkQsN6d1ii/Ey/V
-Xwf/ewhGO0C2HoSru6BAk4TZ1LYIDQL97/eLHajGPH/BGT4l1/0SDeVVTc8a4/ZNdAHiP5d/Z5iI
-nEZ3OhIIhwuOuwbZ6/+qYq6vdU5oH35+4cjuYmj0K1e1x8Yd9k3xLA+MzCT7tY0WPCHfqL3ILLjp
-0vVO1gClpgESsCLJ81/w1qh/gyqMWXg3UCuuNIHIhi09mYOPKw4B8fmOAistamjgeHAiZIpCz2Gc
-pN+6kYtUQZ9hCklaPZ4Ms1Z2FBP+hWEvpS+ZvO1L7fDB3WmWTDHPCzax2gPO4Ki7NtUK74fGQhdw
-xaVwStK83imhmcE0GROkKgInlIU/6rtdooIZ6KZbaw==
-=VsSN
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl/aNKYFAwAAAAAACgkQsN6d1ii/Ey+8
+CAf/b9Uz4HkjVMPncTvi7dMhL8CO6URBZs2uBXbZZIHzEuttx5bxIU9Kzi3H7+0csDISQLo4CMCW
+VB7rJ70qa8Of2tPpCYxC5ZrtDN1qG/aszGzu7bh055NqaaluvIydU9Z/JVxCdZYmPkdInf/Jm1mZ
+fiOLHK9mEEr04KRNMqhcse3jyFsv0hO5p3UMwkp8MuuUbCWEXPi3W0ZKcGmZ7HwHucu6agTUgemv
+Cmvmt9tCkK1ce6XwbcAHf2yKUu0za2zPGwdAOi2EdDAG43NmnZ4io9PGi2fuXlIradHYgNbDNX/K
+tiIsdrs06Q5tT6yfepNCjeGkWNEcG6U8N92Ag9DGJA==
+=blsI
 -----END PGP SIGNATURE-----
 
---MMIz031IqXfpEShhdWMREFyWWvEkpbCLG--
+--ufMjG3EonlO7vLn4ZjMp1F7MEwBHxDMCm--
 
