@@ -2,45 +2,44 @@ Return-Path: <SRS0=ek7T=FV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 600BBC4361B
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 15:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41DACC4361B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 15:57:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 244E423975
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 15:54:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 244E423975
+	by mail.kernel.org (Postfix) with ESMTPS id EE21C23977
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 15:57:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE21C23977
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.56028.97763 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.56035.97787 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpvbW-0006Aa-FE; Thu, 17 Dec 2020 15:54:10 +0000
+	id 1kpveT-0006OQ-4R; Thu, 17 Dec 2020 15:57:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 56028.97763; Thu, 17 Dec 2020 15:54:10 +0000
+Received: by outflank-mailman (output) from mailman id 56035.97787; Thu, 17 Dec 2020 15:57:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpvbW-0006AT-Bc; Thu, 17 Dec 2020 15:54:10 +0000
-Received: by outflank-mailman (input) for mailman id 56028;
- Thu, 17 Dec 2020 15:54:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kpveT-0006OJ-0E; Thu, 17 Dec 2020 15:57:13 +0000
+Received: by outflank-mailman (input) for mailman id 56035;
+ Thu, 17 Dec 2020 15:57:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8YGc=FV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kpvbV-0006AO-CL
- for xen-devel@lists.xenproject.org; Thu, 17 Dec 2020 15:54:09 +0000
+ id 1kpveR-0006OD-Dq
+ for xen-devel@lists.xenproject.org; Thu, 17 Dec 2020 15:57:11 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 67f5f643-a9ef-4607-bc04-1322f2339085;
- Thu, 17 Dec 2020 15:54:08 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id c84f4168-ce21-4b98-8f7b-61f3252de7d0;
+ Thu, 17 Dec 2020 15:57:10 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 485CBAC1A;
- Thu, 17 Dec 2020 15:54:07 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id E494BAC7B;
+ Thu, 17 Dec 2020 15:57:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +51,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67f5f643-a9ef-4607-bc04-1322f2339085
+X-Inumbo-ID: c84f4168-ce21-4b98-8f7b-61f3252de7d0
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608220447; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608220630; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2DZh75jUxdp+tLWQj/5xkezmHM+AXQskTAF3Pe03PIk=;
-	b=mKR/Dxk9pmCDRuR/TSjgvyFMso4lQdP2ap91wwPYctgzoDtfFcvav47Z6sN0hOj1feNuiU
-	GhIwjPIWDCpijs+9s4lxAVuKgOZRG7I8Vkt4ZcRg/exKdwZU/xrzsMFqCKvTSszbnIgvKh
-	gKJL21ncSnsglx/k2iARa63zq4KarWw=
-Subject: Re: [PATCH v3 6/8] xen/cpupool: add cpupool directories
+	bh=TioOiW3tXkJRnbrvJbYYSVUNm2pWLcoihqS9C5v2D9o=;
+	b=gmO961GS1gnDVWqUNeQXret7ivmTtr/z9ip7xxRy2SMxKypXX/20E5IUwwpTfKoUt9QRrI
+	okcv/qa953HJVRZVJlkFRuZBagyW1DMisUHdTdj1Mi1gMX2GzrCy6cDNrru7oL6E3i0gHQ
+	D2lXCh8ZKEDPhYitNkXPy2BydHvHUoI=
+Subject: Re: [PATCH v3 7/8] xen/cpupool: add scheduling granularity entry to
+ cpupool entries
 To: Juergen Gross <jgross@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
@@ -71,24 +71,49 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Wei Liu <wl@xen.org>, Dario Faggioli <dfaggioli@suse.com>,
  xen-devel@lists.xenproject.org
 References: <20201209160956.32456-1-jgross@suse.com>
- <20201209160956.32456-7-jgross@suse.com>
+ <20201209160956.32456-8-jgross@suse.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <fc21ddcd-f263-d502-5b85-a74350c29fe3@suse.com>
-Date: Thu, 17 Dec 2020 16:54:06 +0100
+Message-ID: <9cb6325b-09c2-29b7-1a78-09465bde9473@suse.com>
+Date: Thu, 17 Dec 2020 16:57:08 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.5.1
 MIME-Version: 1.0
-In-Reply-To: <20201209160956.32456-7-jgross@suse.com>
+In-Reply-To: <20201209160956.32456-8-jgross@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
 On 09.12.2020 17:09, Juergen Gross wrote:
-> Add /cpupool/<cpupool-id> directories to hypfs. Those are completely
-> dynamic, so the related hypfs access functions need to be implemented.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> @@ -1080,6 +1092,56 @@ static struct hypfs_entry *cpupool_dir_findentry(
+>      return hypfs_gen_dyndir_id_entry(&cpupool_pooldir, id, cpupool);
+>  }
+>  
+> +static int cpupool_gran_read(const struct hypfs_entry *entry,
+> +                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
+> +{
+> +    const struct hypfs_dyndir_id *data;
+> +    const struct cpupool *cpupool;
+> +    const char *gran;
+> +
+> +    data = hypfs_get_dyndata();
+> +    cpupool = data->data;
+> +    ASSERT(cpupool);
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+With this and ...
 
+> +static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
+> +{
+> +    const struct hypfs_dyndir_id *data;
+> +    const struct cpupool *cpupool;
+> +    const char *gran;
+> +
+> +    data = hypfs_get_dyndata();
+> +    cpupool = data->data;
+> +    ASSERT(cpupool);
+
+... this ASSERT() I'd like to first settle our earlier discussion,
+before possibly giving my R-b here. No other remaining remarks from
+my side.
+
+Jan
 
