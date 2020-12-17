@@ -2,49 +2,48 @@ Return-Path: <SRS0=ek7T=FV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B240C4361B
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 08:29:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E6F2C4361B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 09:10:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1A1C4233FE
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 08:29:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A1C4233FE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id E59752388E
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 09:10:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E59752388E
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.55758.97159 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.55765.97171 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpoey-0008Hc-LT; Thu, 17 Dec 2020 08:29:16 +0000
+	id 1kppIB-0003lb-Q5; Thu, 17 Dec 2020 09:09:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 55758.97159; Thu, 17 Dec 2020 08:29:16 +0000
+Received: by outflank-mailman (output) from mailman id 55765.97171; Thu, 17 Dec 2020 09:09:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kpoey-0008HV-IE; Thu, 17 Dec 2020 08:29:16 +0000
-Received: by outflank-mailman (input) for mailman id 55758;
- Thu, 17 Dec 2020 08:29:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=epRl=FV=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1kpoex-0008HQ-0w
- for xen-devel@lists.xenproject.org; Thu, 17 Dec 2020 08:29:15 +0000
-Received: from mail-wr1-x42b.google.com (unknown [2a00:1450:4864:20::42b])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8fcaa918-b833-40fc-b20a-da12d6ffdeb8;
- Thu, 17 Dec 2020 08:29:13 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id d13so7414602wrc.13
- for <xen-devel@lists.xenproject.org>; Thu, 17 Dec 2020 00:29:13 -0800 (PST)
-Received: from CBGR90WXYV0 (host86-166-98-87.range86-166.btcentralplus.com.
- [86.166.98.87])
- by smtp.gmail.com with ESMTPSA id j10sm7635096wmj.7.2020.12.17.00.29.11
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 17 Dec 2020 00:29:12 -0800 (PST)
+	id 1kppIB-0003lU-Ml; Thu, 17 Dec 2020 09:09:47 +0000
+Received: by outflank-mailman (input) for mailman id 55765;
+ Thu, 17 Dec 2020 09:09:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kppIA-0003lM-1z; Thu, 17 Dec 2020 09:09:46 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kppI9-0003Wq-TY; Thu, 17 Dec 2020 09:09:45 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kppI9-0004Kf-Me; Thu, 17 Dec 2020 09:09:45 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kppI9-0007k6-Lr; Thu, 17 Dec 2020 09:09:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,138 +55,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8fcaa918-b833-40fc-b20a-da12d6ffdeb8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
-         :mime-version:content-transfer-encoding:content-language
-         :thread-index;
-        bh=dFnmyhGK1dH5Ahx0r85mEoGTGW27Pstio+R/BsNOdTA=;
-        b=aZ/qoCfZV0LMz++7ECSwQtJUU8Miw/ruL0JnjbNB8tBSjYS1ls707Y3IsQwf4K2zmF
-         2655pl2jyCTnO6rUM0egIYwvqREoCB14OdYT8N1+XfwrSDOwOVJP+EtbXT447jBmVu9n
-         Fo1qXoJlLYHezYMdyzh4KzzmCU2d5HONFikwXC3adIu5rVwSaHmNJFLrdi8cOMgMLhFd
-         Sjy/TG55TTvqcdOxXn283ShZlI8e4Qexp1xDv9X78OzlQlyI79iro9cEiAbfKTJ08zo3
-         18aWJ9wK6oGQHbAkuaVfGrtAo4yqmvmTX3PW2DMmQTJ2/csdndO9LPD+eNk0FKxn4btF
-         s1wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
-         :subject:date:message-id:mime-version:content-transfer-encoding
-         :content-language:thread-index;
-        bh=dFnmyhGK1dH5Ahx0r85mEoGTGW27Pstio+R/BsNOdTA=;
-        b=UEXeyEZXxuMLd6mbsPTZEoSw6bPOFmeifuj/xG+0pJlbIPwZVm1ZpfBSPKoF61bwZU
-         IaB1l/kd/O79NpHCxNZNfm1c987DrMP/IUDR9vwpO6fHEI5LsK1hVyvzQPM/1yZaNQlT
-         0acDq3CTx9kFmQhRCz/C5ziTm3AQcmTu4bVJ0PHcoUmWVEOs9+gnu/0/r9MnCCj+nyAm
-         siUDyV8eKJOX7w7ggc2aYiq5UFQ3pJc2TfoMX6j0YAZJ9wU7tq/sZgnHxGV+k7Glh/uH
-         +D1ViYGL3i9mKDcOhcOAm9wYnP5UrtKHvrylPo1DXJGVZyln3NBVEqGhHfgdiNAEyEFX
-         75xg==
-X-Gm-Message-State: AOAM533Ak8L9EOOM9ODAzBuauiEpUoP3WemIDXF5UpvGJvxNB1YEoGRj
-	0IX8gf+c6N3o91+JlAHLN6k=
-X-Google-Smtp-Source: ABdhPJym0YR7aMw1m/PlO08/3rZHiOFM5+cmmAfmRNzZpwKsQjO1c8GpGE9U20oM56Ha421hkcCiNQ==
-X-Received: by 2002:a05:6000:5:: with SMTP id h5mr42339710wrx.153.1608193752888;
-        Thu, 17 Dec 2020 00:29:12 -0800 (PST)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-Reply-To: <paul@xen.org>
-To: "'Wei Liu'" <wl@xen.org>,
-	"'Andrew Cooper'" <andrew.cooper3@citrix.com>
-Cc: "'osstest service owner'" <osstest-admin@xenproject.org>,
-	<xen-devel@lists.xenproject.org>
-References: <E1kpMXk-0006zb-Jk@osstest.test-lab.xenproject.org> <19ed8894-23f7-0f9d-f3c4-1d5ea5bc0c02@citrix.com> <20201216104357.wcggzckdii76d4iz@liuwe-devbox-debian-v2>
-In-Reply-To: <20201216104357.wcggzckdii76d4iz@liuwe-devbox-debian-v2>
-Subject: RE: [xen-unstable-smoke bisection] complete build-amd64-libvirt
-Date: Thu, 17 Dec 2020 08:29:12 -0000
-Message-ID: <00e501d6d44e$b2fa6420$18ef2c60$@xen.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=DdMvBdTDd5GazT4mUrtVJ4EIlZ8aLO3LxoONYeoPFEI=; b=uBQ8g+l94yuRQdDcCq1RQvzW32
+	d9txHGwyYZy+53MTuxnyGzdWK9ctuYTA+myANUnE6yN6WNUdOOaSvKyPG2qFMo5/MpHJooE6n9I5B
+	8OhMWfMADfYMjtUqR5W4APXJgy9yDnzxnTUIpdRhsKQSWv/cLqrtVclQpTbYFNuR09qs=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-157612-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQLfRoVMfz30YRXb6SCWrJ23es5KvwIrMUEmAlwjqk2nxdTfgA==
+Subject: [ovmf test] 157612: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+X-Osstest-Versions-This:
+    ovmf=e6ae24e1d676bb2bdc0fc715b49b04908f41fc10
+X-Osstest-Versions-That:
+    ovmf=f95e80d832e923046c92cd6f0b8208cec147138e
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 17 Dec 2020 09:09:45 +0000
 
-> -----Original Message-----
-> From: Wei Liu <wl@xen.org>
-> Sent: 16 December 2020 10:44
-> To: Andrew Cooper <andrew.cooper3@citrix.com>; Paul Durrant =
-<paul@xen.org>
-> Cc: osstest service owner <osstest-admin@xenproject.org>; =
-xen-devel@lists.xenproject.org; Paul Durrant
-> <paul@xen.org>; Wei Liu <wl@xen.org>
-> Subject: Re: [xen-unstable-smoke bisection] complete =
-build-amd64-libvirt
->=20
-> Paul, are you able to cook up a patch today? If not I will revert the
-> offending patch(es).
->=20
+flight 157612 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/157612/
 
-Sorry I was otherwise occupied yesterday. It's not so simple to avoid =
-the API change the way things are in the series... it will
-take a reasonable amount of re-factoring to avoid it. I'll re-base and =
-fix it.
+Regressions :-(
 
-  Paul
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
+ test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 157345
 
-> Wei.
->=20
-> On Wed, Dec 16, 2020 at 10:17:29AM +0000, Andrew Cooper wrote:
-> > On 16/12/2020 02:27, osstest service owner wrote:
-> > > branch xen-unstable-smoke
-> > > xenbranch xen-unstable-smoke
-> > > job build-amd64-libvirt
-> > > testid libvirt-build
-> > >
-> > > Tree: libvirt git://xenbits.xen.org/libvirt.git
-> > > Tree: libvirt_keycodemapdb =
-https://gitlab.com/keycodemap/keycodemapdb.git
-> > > Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-> > > Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-> > > Tree: xen git://xenbits.xen.org/xen.git
-> > >
-> > > *** Found and reproduced problem changeset ***
-> > >
-> > >   Bug is in tree:  xen git://xenbits.xen.org/xen.git
-> > >   Bug introduced:  929f23114061a0089e6d63d109cf6a1d03d35c71
-> > >   Bug not present: 8bc342b043a6838c03cd86039a34e3f8eea1242f
-> > >   Last fail repro: =
-http://logs.test-lab.xenproject.org/osstest/logs/157589/
-> > >
-> > >
-> > >   commit 929f23114061a0089e6d63d109cf6a1d03d35c71
-> > >   Author: Paul Durrant <pdurrant@amazon.com>
-> > >   Date:   Tue Dec 8 19:30:26 2020 +0000
-> > >
-> > >       libxl: introduce 'libxl_pci_bdf' in the idl...
-> > >
-> > >       ... and use in 'libxl_device_pci'
-> > >
-> > >       This patch is preparatory work for restricting the type =
-passed to functions
-> > >       that only require BDF information, rather than passing a =
-'libxl_device_pci'
-> > >       structure which is only partially filled. In this patch only =
-the minimal
-> > >       mechanical changes necessary to deal with the structural =
-changes are made.
-> > >       Subsequent patches will adjust the code to make better use =
-of the new type.
-> > >
-> > >       Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-> > >       Acked-by: Wei Liu <wl@xen.org>
-> > >       Acked-by: Nick Rosbrook <rosbrookn@ainfosec.com>
-> >
-> > This breaks the API.=A0 You can't make the following change in the =
-IDL.
-> >
-> > =A0libxl_device_pci =3D Struct("device_pci", [
-> > -=A0=A0=A0 ("func",=A0=A0=A0=A0=A0 uint8),
-> > -=A0=A0=A0 ("dev",=A0=A0=A0=A0=A0=A0 uint8),
-> > -=A0=A0=A0 ("bus",=A0=A0=A0=A0=A0=A0 uint8),
-> > -=A0=A0=A0 ("domain",=A0=A0=A0 integer),
-> > -=A0=A0=A0 ("vdevfn",=A0=A0=A0 uint32),
-> > +=A0=A0=A0 ("bdf", libxl_pci_bdf),
-> > +=A0=A0=A0 ("vdevfn", uint32),
-> >
-> > ~Andrew
+version targeted for testing:
+ ovmf                 e6ae24e1d676bb2bdc0fc715b49b04908f41fc10
+baseline version:
+ ovmf                 f95e80d832e923046c92cd6f0b8208cec147138e
 
+Last test of basis   157345  2020-12-09 12:40:46 Z    7 days
+Failing since        157348  2020-12-09 15:39:39 Z    7 days   51 attempts
+Testing same since   157612  2020-12-16 21:09:14 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abner Chang <abner.chang@hpe.com>
+  Ard Biesheuvel <ard.biesheuvel@arm.com>
+  Baraneedharan Anbazhagan <anbazhagan@hp.com>
+  Baraneedharan Anbazhagan <anbazhgan@hp.com>
+  Bret Barkelew <Bret.Barkelew@microsoft.com>
+  Chen, Christine <Yuwei.Chen@intel.com>
+  Fan Wang <fan.wang@intel.com>
+  James Bottomley <jejb@linux.ibm.com>
+  Jiaxin Wu <jiaxin.wu@intel.com>
+  Marc Moisson-Franckhauser <marc.moisson-franckhauser@arm.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Pierre Gondois <Pierre.Gondois@arm.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <rebecca@nuviainc.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Brogan <sean.brogan@microsoft.com>
+  Sheng Wei <w.sheng@intel.com>
+  Siyuan Fu <siyuan.fu@intel.com>
+  Star Zeng <star.zeng@intel.com>
+  Ting Ye <ting.ye@intel.com>
+  Yuwei Chen <yuwei.chen@intel.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 699 lines long.)
 
