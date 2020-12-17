@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90AD6C2BB9A
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 09:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7896C4361B
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 09:32:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5783923602
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 09:32:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5783923602
+	by mail.kernel.org (Postfix) with ESMTPS id 6BA0523602
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 09:32:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6BA0523602
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.55777.97234 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.55778.97245 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kppdf-0006e5-Vs; Thu, 17 Dec 2020 09:31:59 +0000
+	id 1kppdg-0006fm-LT; Thu, 17 Dec 2020 09:32:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 55777.97234; Thu, 17 Dec 2020 09:31:59 +0000
+Received: by outflank-mailman (output) from mailman id 55778.97245; Thu, 17 Dec 2020 09:32:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kppdf-0006dz-SC; Thu, 17 Dec 2020 09:31:59 +0000
-Received: by outflank-mailman (input) for mailman id 55777;
- Thu, 17 Dec 2020 09:31:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kppdg-0006fO-Eh; Thu, 17 Dec 2020 09:32:00 +0000
+Received: by outflank-mailman (input) for mailman id 55778;
+ Thu, 17 Dec 2020 09:31:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gjir=FV=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1kppdd-0006R7-Le
- for xen-devel@lists.xenproject.org; Thu, 17 Dec 2020 09:31:57 +0000
+ id 1kppde-0006RQ-U0
+ for xen-devel@lists.xenproject.org; Thu, 17 Dec 2020 09:31:58 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id caa6de0b-6522-49ac-a3ae-88f22672009b;
- Thu, 17 Dec 2020 09:31:48 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 45CAFB717;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 086049f7-47f3-44b6-aa81-0f5b38ce16c2;
  Thu, 17 Dec 2020 09:31:47 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 906B4B714;
+ Thu, 17 Dec 2020 09:31:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,23 +52,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: caa6de0b-6522-49ac-a3ae-88f22672009b
+X-Inumbo-ID: 086049f7-47f3-44b6-aa81-0f5b38ce16c2
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608197507; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608197506; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PWa8LXJtPmdrGF/SU7ngKGgWKwsy52HIQIMfyyd743k=;
-	b=XV18fU5jObgxzak0SuEa4O/Fu1W4msBVPVw+I4RyV0+x/g1FB+E24MhDfSXhUgrLBHkP54
-	7+VaG4EuQrH0C1QUt62IfclRgOMOUQEy2sf66NMiRuMKbqj7u6FJ1SeSNZ+V1TQCeZlso+
-	HwYGPxsv9e3fr+FOrK2wvuezZi6Mu9Y=
+	bh=bZVylN0TrlznWFey0UjP85iwRxueujMp7mhjZsmecT4=;
+	b=hByBMRgbT+XkJ9Mt7cLsI/hHSEPvITssS5RC2Blz1ZT/unuVgLjUt6TU8+pmElWYWs2JUm
+	8U39hG1KQvRe1yiCXXdOp5Ind5w328J+R0eFCO5j5WwB1UVirCnHNKBgf4ryjNGOt1Ja0/
+	CW7P5cTlVaBRnDgsnOGV+he1u6WdkdM=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
 	linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org
 Cc: Juergen Gross <jgross@suse.com>,
+	Andy Lutomirski <luto@kernel.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
@@ -76,285 +78,239 @@ Cc: Juergen Gross <jgross@suse.com>,
 	"VMware, Inc." <pv-drivers@vmware.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Andy Lutomirski <luto@kernel.org>
-Subject: [PATCH v3 05/15] x86: rework arch_local_irq_restore() to not use popf
-Date: Thu, 17 Dec 2020 10:31:23 +0100
-Message-Id: <20201217093133.1507-6-jgross@suse.com>
+	Peter Zijlstra <peterz@infradead.org>,
+	Borislav Petkov <bp@suse.de>
+Subject: [PATCH v3 03/15] x86/pv: switch SWAPGS to ALTERNATIVE
+Date: Thu, 17 Dec 2020 10:31:21 +0100
+Message-Id: <20201217093133.1507-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201217093133.1507-1-jgross@suse.com>
 References: <20201217093133.1507-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-"popf" is a rather expensive operation, so don't use it for restoring
-irq flags. Instead test whether interrupts are enabled in the flags
-parameter and enable interrupts via "sti" in that case.
+SWAPGS is used only for interrupts coming from user mode or for
+returning to user mode. So there is no reason to use the PARAVIRT
+framework, as it can easily be replaced by an ALTERNATIVE depending
+on X86_FEATURE_XENPV.
 
-This results in the restore_fl paravirt op to be no longer needed.
+There are several instances using the PV-aware SWAPGS macro in paths
+which are never executed in a Xen PV guest. Replace those with the
+plain swapgs instruction. For SWAPGS_UNSAFE_STACK the same applies.
 
-Suggested-by: Andy Lutomirski <luto@kernel.org>
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Andy Lutomirski <luto@kernel.org>
+Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Reviewed-by: Borislav Petkov <bp@suse.de>
+Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- arch/x86/include/asm/irqflags.h       | 20 ++++++-------------
- arch/x86/include/asm/paravirt.h       |  5 -----
- arch/x86/include/asm/paravirt_types.h |  7 ++-----
- arch/x86/kernel/irqflags.S            | 11 -----------
+ arch/x86/entry/entry_64.S             | 10 +++++-----
+ arch/x86/include/asm/irqflags.h       | 20 ++++++++------------
+ arch/x86/include/asm/paravirt.h       | 20 --------------------
+ arch/x86/include/asm/paravirt_types.h |  2 --
+ arch/x86/kernel/asm-offsets_64.c      |  1 -
  arch/x86/kernel/paravirt.c            |  1 -
  arch/x86/kernel/paravirt_patch.c      |  3 ---
- arch/x86/xen/enlighten_pv.c           |  2 --
- arch/x86/xen/irq.c                    | 23 ----------------------
- arch/x86/xen/xen-asm.S                | 28 ---------------------------
- arch/x86/xen/xen-ops.h                |  1 -
- 10 files changed, 8 insertions(+), 93 deletions(-)
+ arch/x86/xen/enlighten_pv.c           |  3 ---
+ 8 files changed, 13 insertions(+), 47 deletions(-)
 
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index cad08703c4ad..a876204a73e0 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -669,7 +669,7 @@ native_irq_return_ldt:
+ 	 */
+ 
+ 	pushq	%rdi				/* Stash user RDI */
+-	SWAPGS					/* to kernel GS */
++	swapgs					/* to kernel GS */
+ 	SWITCH_TO_KERNEL_CR3 scratch_reg=%rdi	/* to kernel CR3 */
+ 
+ 	movq	PER_CPU_VAR(espfix_waddr), %rdi
+@@ -699,7 +699,7 @@ native_irq_return_ldt:
+ 	orq	PER_CPU_VAR(espfix_stack), %rax
+ 
+ 	SWITCH_TO_USER_CR3_STACK scratch_reg=%rdi
+-	SWAPGS					/* to user GS */
++	swapgs					/* to user GS */
+ 	popq	%rdi				/* Restore user RDI */
+ 
+ 	movq	%rax, %rsp
+@@ -943,7 +943,7 @@ SYM_CODE_START_LOCAL(paranoid_entry)
+ 	ret
+ 
+ .Lparanoid_entry_swapgs:
+-	SWAPGS
++	swapgs
+ 
+ 	/*
+ 	 * The above SAVE_AND_SWITCH_TO_KERNEL_CR3 macro doesn't do an
+@@ -1001,7 +1001,7 @@ SYM_CODE_START_LOCAL(paranoid_exit)
+ 	jnz		restore_regs_and_return_to_kernel
+ 
+ 	/* We are returning to a context with user GSBASE */
+-	SWAPGS_UNSAFE_STACK
++	swapgs
+ 	jmp		restore_regs_and_return_to_kernel
+ SYM_CODE_END(paranoid_exit)
+ 
+@@ -1426,7 +1426,7 @@ nmi_no_fsgsbase:
+ 	jnz	nmi_restore
+ 
+ nmi_swapgs:
+-	SWAPGS_UNSAFE_STACK
++	swapgs
+ 
+ nmi_restore:
+ 	POP_REGS
 diff --git a/arch/x86/include/asm/irqflags.h b/arch/x86/include/asm/irqflags.h
-index e585a4705b8d..144d70ea4393 100644
+index 2dfc8d380dab..8c86edefa115 100644
 --- a/arch/x86/include/asm/irqflags.h
 +++ b/arch/x86/include/asm/irqflags.h
-@@ -35,15 +35,6 @@ extern __always_inline unsigned long native_save_fl(void)
- 	return flags;
- }
+@@ -131,18 +131,6 @@ static __always_inline unsigned long arch_local_irq_save(void)
+ #define SAVE_FLAGS(x)		pushfq; popq %rax
+ #endif
  
--extern inline void native_restore_fl(unsigned long flags);
--extern inline void native_restore_fl(unsigned long flags)
--{
--	asm volatile("push %0 ; popf"
--		     : /* no output */
--		     :"g" (flags)
--		     :"memory", "cc");
--}
+-#define SWAPGS	swapgs
+-/*
+- * Currently paravirt can't handle swapgs nicely when we
+- * don't have a stack we can rely on (such as a user space
+- * stack).  So we either find a way around these or just fault
+- * and emulate if a guest tries to call swapgs directly.
+- *
+- * Either way, this is a good way to document that we don't
+- * have a reliable stack. x86_64 only.
+- */
+-#define SWAPGS_UNSAFE_STACK	swapgs
 -
- static __always_inline void native_irq_disable(void)
- {
- 	asm volatile("cli": : :"memory");
-@@ -79,11 +70,6 @@ static __always_inline unsigned long arch_local_save_flags(void)
- 	return native_save_fl();
- }
- 
--static __always_inline void arch_local_irq_restore(unsigned long flags)
--{
--	native_restore_fl(flags);
--}
--
- static __always_inline void arch_local_irq_disable(void)
- {
- 	native_irq_disable();
-@@ -152,6 +138,12 @@ static __always_inline int arch_irqs_disabled(void)
+ #define INTERRUPT_RETURN	jmp native_iret
+ #define USERGS_SYSRET64				\
+ 	swapgs;					\
+@@ -170,6 +158,14 @@ static __always_inline int arch_irqs_disabled(void)
  
  	return arch_irqs_disabled_flags(flags);
  }
-+
-+static __always_inline void arch_local_irq_restore(unsigned long flags)
-+{
-+	if (!arch_irqs_disabled_flags(flags))
-+		arch_local_irq_enable();
-+}
- #else
- #ifdef CONFIG_X86_64
- #ifdef CONFIG_XEN_PV
++#else
++#ifdef CONFIG_X86_64
++#ifdef CONFIG_XEN_PV
++#define SWAPGS	ALTERNATIVE "swapgs", "", X86_FEATURE_XENPV
++#else
++#define SWAPGS	swapgs
++#endif
++#endif
+ #endif /* !__ASSEMBLY__ */
+ 
+ #endif
 diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index dd43b1100a87..4abf110e2243 100644
+index f8dce11d2bc1..f2ebe109a37e 100644
 --- a/arch/x86/include/asm/paravirt.h
 +++ b/arch/x86/include/asm/paravirt.h
-@@ -648,11 +648,6 @@ static inline notrace unsigned long arch_local_save_flags(void)
- 	return PVOP_CALLEE0(unsigned long, irq.save_fl);
- }
+@@ -776,26 +776,6 @@ extern void default_banner(void);
  
--static inline notrace void arch_local_irq_restore(unsigned long f)
--{
--	PVOP_VCALLEE1(irq.restore_fl, f);
--}
+ #ifdef CONFIG_X86_64
+ #ifdef CONFIG_PARAVIRT_XXL
+-/*
+- * If swapgs is used while the userspace stack is still current,
+- * there's no way to call a pvop.  The PV replacement *must* be
+- * inlined, or the swapgs instruction must be trapped and emulated.
+- */
+-#define SWAPGS_UNSAFE_STACK						\
+-	PARA_SITE(PARA_PATCH(PV_CPU_swapgs), swapgs)
 -
- static inline notrace void arch_local_irq_disable(void)
- {
- 	PVOP_VCALLEE0(irq.irq_disable);
+-/*
+- * Note: swapgs is very special, and in practise is either going to be
+- * implemented with a single "swapgs" instruction or something very
+- * special.  Either way, we don't need to save any registers for
+- * it.
+- */
+-#define SWAPGS								\
+-	PARA_SITE(PARA_PATCH(PV_CPU_swapgs),				\
+-		  ANNOTATE_RETPOLINE_SAFE;				\
+-		  call PARA_INDIRECT(pv_ops+PV_CPU_swapgs);		\
+-		 )
+-
+ #define USERGS_SYSRET64							\
+ 	PARA_SITE(PARA_PATCH(PV_CPU_usergs_sysret64),			\
+ 		  ANNOTATE_RETPOLINE_SAFE;				\
 diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 0169365f1403..de87087d3bde 100644
+index b6b02b7c19cc..130f428b0cc8 100644
 --- a/arch/x86/include/asm/paravirt_types.h
 +++ b/arch/x86/include/asm/paravirt_types.h
-@@ -168,16 +168,13 @@ struct pv_cpu_ops {
- struct pv_irq_ops {
- #ifdef CONFIG_PARAVIRT_XXL
- 	/*
--	 * Get/set interrupt state.  save_fl and restore_fl are only
--	 * expected to use X86_EFLAGS_IF; all other bits
--	 * returned from save_fl are undefined, and may be ignored by
--	 * restore_fl.
-+	 * Get/set interrupt state.  save_fl is expected to use X86_EFLAGS_IF;
-+	 * all other bits returned from save_fl are undefined.
- 	 *
- 	 * NOTE: These functions callers expect the callee to preserve
- 	 * more registers than the standard C calling convention.
- 	 */
- 	struct paravirt_callee_save save_fl;
--	struct paravirt_callee_save restore_fl;
- 	struct paravirt_callee_save irq_disable;
- 	struct paravirt_callee_save irq_enable;
+@@ -168,8 +168,6 @@ struct pv_cpu_ops {
+ 	   frame set up. */
+ 	void (*iret)(void);
  
-diff --git a/arch/x86/kernel/irqflags.S b/arch/x86/kernel/irqflags.S
-index 0db0375235b4..8ef35063964b 100644
---- a/arch/x86/kernel/irqflags.S
-+++ b/arch/x86/kernel/irqflags.S
-@@ -13,14 +13,3 @@ SYM_FUNC_START(native_save_fl)
- 	ret
- SYM_FUNC_END(native_save_fl)
- EXPORT_SYMBOL(native_save_fl)
+-	void (*swapgs)(void);
 -
--/*
-- * void native_restore_fl(unsigned long flags)
-- * %eax/%rdi: flags
-- */
--SYM_FUNC_START(native_restore_fl)
--	push %_ASM_ARG1
--	popf
--	ret
--SYM_FUNC_END(native_restore_fl)
--EXPORT_SYMBOL(native_restore_fl)
+ 	void (*start_context_switch)(struct task_struct *prev);
+ 	void (*end_context_switch)(struct task_struct *next);
+ #endif
+diff --git a/arch/x86/kernel/asm-offsets_64.c b/arch/x86/kernel/asm-offsets_64.c
+index 828be792231e..1354bc30614d 100644
+--- a/arch/x86/kernel/asm-offsets_64.c
++++ b/arch/x86/kernel/asm-offsets_64.c
+@@ -15,7 +15,6 @@ int main(void)
+ #ifdef CONFIG_PARAVIRT_XXL
+ 	OFFSET(PV_CPU_usergs_sysret64, paravirt_patch_template,
+ 	       cpu.usergs_sysret64);
+-	OFFSET(PV_CPU_swapgs, paravirt_patch_template, cpu.swapgs);
+ #ifdef CONFIG_DEBUG_ENTRY
+ 	OFFSET(PV_IRQ_save_fl, paravirt_patch_template, irq.save_fl);
+ #endif
 diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index 18560b71e717..c60222ab8ab9 100644
+index 6c3407ba6ee9..5e5fcf5c376d 100644
 --- a/arch/x86/kernel/paravirt.c
 +++ b/arch/x86/kernel/paravirt.c
-@@ -320,7 +320,6 @@ struct paravirt_patch_template pv_ops = {
+@@ -312,7 +312,6 @@ struct paravirt_patch_template pv_ops = {
  
- 	/* Irq ops. */
- 	.irq.save_fl		= __PV_IS_CALLEE_SAVE(native_save_fl),
--	.irq.restore_fl		= __PV_IS_CALLEE_SAVE(native_restore_fl),
- 	.irq.irq_disable	= __PV_IS_CALLEE_SAVE(native_irq_disable),
- 	.irq.irq_enable		= __PV_IS_CALLEE_SAVE(native_irq_enable),
- 	.irq.safe_halt		= native_safe_halt,
+ 	.cpu.usergs_sysret64	= native_usergs_sysret64,
+ 	.cpu.iret		= native_iret,
+-	.cpu.swapgs		= native_swapgs,
+ 
+ #ifdef CONFIG_X86_IOPL_IOPERM
+ 	.cpu.invalidate_io_bitmap	= native_tss_invalidate_io_bitmap,
 diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
-index 2fada2c347c9..abd27ec67397 100644
+index ace6e334cb39..7c518b08aa3c 100644
 --- a/arch/x86/kernel/paravirt_patch.c
 +++ b/arch/x86/kernel/paravirt_patch.c
-@@ -25,7 +25,6 @@ struct patch_xxl {
- 	const unsigned char	mmu_read_cr2[3];
- 	const unsigned char	mmu_read_cr3[3];
- 	const unsigned char	mmu_write_cr3[3];
--	const unsigned char	irq_restore_fl[2];
+@@ -28,7 +28,6 @@ struct patch_xxl {
+ 	const unsigned char	irq_restore_fl[2];
  	const unsigned char	cpu_wbinvd[2];
+ 	const unsigned char	cpu_usergs_sysret64[6];
+-	const unsigned char	cpu_swapgs[3];
  	const unsigned char	mov64[3];
  };
-@@ -37,7 +36,6 @@ static const struct patch_xxl patch_data_xxl = {
- 	.mmu_read_cr2		= { 0x0f, 0x20, 0xd0 },	// mov %cr2, %[re]ax
- 	.mmu_read_cr3		= { 0x0f, 0x20, 0xd8 },	// mov %cr3, %[re]ax
- 	.mmu_write_cr3		= { 0x0f, 0x22, 0xdf },	// mov %rdi, %cr3
--	.irq_restore_fl		= { 0x57, 0x9d },	// push %rdi; popfq
+ 
+@@ -43,7 +42,6 @@ static const struct patch_xxl patch_data_xxl = {
  	.cpu_wbinvd		= { 0x0f, 0x09 },	// wbinvd
+ 	.cpu_usergs_sysret64	= { 0x0f, 0x01, 0xf8,
+ 				    0x48, 0x0f, 0x07 },	// swapgs; sysretq
+-	.cpu_swapgs		= { 0x0f, 0x01, 0xf8 },	// swapgs
  	.mov64			= { 0x48, 0x89, 0xf8 },	// mov %rdi, %rax
  };
-@@ -71,7 +69,6 @@ unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
- 	switch (type) {
  
- #ifdef CONFIG_PARAVIRT_XXL
--	PATCH_CASE(irq, restore_fl, xxl, insn_buff, len);
- 	PATCH_CASE(irq, save_fl, xxl, insn_buff, len);
- 	PATCH_CASE(irq, irq_enable, xxl, insn_buff, len);
- 	PATCH_CASE(irq, irq_disable, xxl, insn_buff, len);
+@@ -86,7 +84,6 @@ unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
+ 	PATCH_CASE(mmu, write_cr3, xxl, insn_buff, len);
+ 
+ 	PATCH_CASE(cpu, usergs_sysret64, xxl, insn_buff, len);
+-	PATCH_CASE(cpu, swapgs, xxl, insn_buff, len);
+ 	PATCH_CASE(cpu, wbinvd, xxl, insn_buff, len);
+ #endif
+ 
 diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 5476423fc6d0..32b295cc2716 100644
+index 76616024129e..44bb18adfb51 100644
 --- a/arch/x86/xen/enlighten_pv.c
 +++ b/arch/x86/xen/enlighten_pv.c
-@@ -1022,8 +1022,6 @@ void __init xen_setup_vcpu_info_placement(void)
- 	 */
- 	if (xen_have_vcpu_info_placement) {
- 		pv_ops.irq.save_fl = __PV_IS_CALLEE_SAVE(xen_save_fl_direct);
--		pv_ops.irq.restore_fl =
--			__PV_IS_CALLEE_SAVE(xen_restore_fl_direct);
- 		pv_ops.irq.irq_disable =
- 			__PV_IS_CALLEE_SAVE(xen_irq_disable_direct);
- 		pv_ops.irq.irq_enable =
-diff --git a/arch/x86/xen/irq.c b/arch/x86/xen/irq.c
-index 850c93f346c7..dfa091d79c2e 100644
---- a/arch/x86/xen/irq.c
-+++ b/arch/x86/xen/irq.c
-@@ -42,28 +42,6 @@ asmlinkage __visible unsigned long xen_save_fl(void)
- }
- PV_CALLEE_SAVE_REGS_THUNK(xen_save_fl);
+@@ -1085,9 +1085,6 @@ static const struct pv_cpu_ops xen_cpu_ops __initconst = {
+ #endif
+ 	.io_delay = xen_io_delay,
  
--__visible void xen_restore_fl(unsigned long flags)
--{
--	struct vcpu_info *vcpu;
+-	/* Xen takes care of %gs when switching to usermode for us */
+-	.swapgs = paravirt_nop,
 -
--	/* convert from IF type flag */
--	flags = !(flags & X86_EFLAGS_IF);
--
--	/* See xen_irq_enable() for why preemption must be disabled. */
--	preempt_disable();
--	vcpu = this_cpu_read(xen_vcpu);
--	vcpu->evtchn_upcall_mask = flags;
--
--	if (flags == 0) {
--		barrier(); /* unmask then check (avoid races) */
--		if (unlikely(vcpu->evtchn_upcall_pending))
--			xen_force_evtchn_callback();
--		preempt_enable();
--	} else
--		preempt_enable_no_resched();
--}
--PV_CALLEE_SAVE_REGS_THUNK(xen_restore_fl);
--
- asmlinkage __visible void xen_irq_disable(void)
- {
- 	/* There's a one instruction preempt window here.  We need to
-@@ -118,7 +96,6 @@ static void xen_halt(void)
- 
- static const struct pv_irq_ops xen_irq_ops __initconst = {
- 	.save_fl = PV_CALLEE_SAVE(xen_save_fl),
--	.restore_fl = PV_CALLEE_SAVE(xen_restore_fl),
- 	.irq_disable = PV_CALLEE_SAVE(xen_irq_disable),
- 	.irq_enable = PV_CALLEE_SAVE(xen_irq_enable),
- 
-diff --git a/arch/x86/xen/xen-asm.S b/arch/x86/xen/xen-asm.S
-index c0630fd9f44e..1ea7e41044b5 100644
---- a/arch/x86/xen/xen-asm.S
-+++ b/arch/x86/xen/xen-asm.S
-@@ -72,34 +72,6 @@ SYM_FUNC_START(xen_save_fl_direct)
- 	ret
- SYM_FUNC_END(xen_save_fl_direct)
- 
--
--/*
-- * In principle the caller should be passing us a value return from
-- * xen_save_fl_direct, but for robustness sake we test only the
-- * X86_EFLAGS_IF flag rather than the whole byte. After setting the
-- * interrupt mask state, it checks for unmasked pending events and
-- * enters the hypervisor to get them delivered if so.
-- */
--SYM_FUNC_START(xen_restore_fl_direct)
--	FRAME_BEGIN
--	testw $X86_EFLAGS_IF, %di
--	setz PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_mask
--	/*
--	 * Preempt here doesn't matter because that will deal with any
--	 * pending interrupts.  The pending check may end up being run
--	 * on the wrong CPU, but that doesn't hurt.
--	 */
--
--	/* check for unmasked and pending */
--	cmpw $0x0001, PER_CPU_VAR(xen_vcpu_info) + XEN_vcpu_info_pending
--	jnz 1f
--	call check_events
--1:
--	FRAME_END
--	ret
--SYM_FUNC_END(xen_restore_fl_direct)
--
--
- /*
-  * Force an event check by making a hypercall, but preserve regs
-  * before making the call.
-diff --git a/arch/x86/xen/xen-ops.h b/arch/x86/xen/xen-ops.h
-index b2fd80a01a36..8d7ec49a35fb 100644
---- a/arch/x86/xen/xen-ops.h
-+++ b/arch/x86/xen/xen-ops.h
-@@ -131,7 +131,6 @@ static inline void __init xen_efi_init(struct boot_params *boot_params)
- __visible void xen_irq_enable_direct(void);
- __visible void xen_irq_disable_direct(void);
- __visible unsigned long xen_save_fl_direct(void);
--__visible void xen_restore_fl_direct(unsigned long);
- 
- __visible unsigned long xen_read_cr2(void);
- __visible unsigned long xen_read_cr2_direct(void);
+ 	.start_context_switch = paravirt_start_context_switch,
+ 	.end_context_switch = xen_end_context_switch,
+ };
 -- 
 2.26.2
 
