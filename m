@@ -2,41 +2,61 @@ Return-Path: <SRS0=cMO7=FW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E19BC4361B
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Dec 2020 18:56:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E42DC4361B
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Dec 2020 20:43:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4003C23B83
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Dec 2020 18:56:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4003C23B83
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 1CF3E23B6C
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Dec 2020 20:43:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1CF3E23B6C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.56655.99216 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.56675.99257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kqKvN-0006xX-LH; Fri, 18 Dec 2020 18:56:21 +0000
+	id 1kqMb2-00010p-Ph; Fri, 18 Dec 2020 20:43:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 56655.99216; Fri, 18 Dec 2020 18:56:21 +0000
+Received: by outflank-mailman (output) from mailman id 56675.99257; Fri, 18 Dec 2020 20:43:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kqKvN-0006xQ-IM; Fri, 18 Dec 2020 18:56:21 +0000
-Received: by outflank-mailman (input) for mailman id 56655;
- Fri, 18 Dec 2020 18:56:20 +0000
+	id 1kqMb2-00010i-Md; Fri, 18 Dec 2020 20:43:28 +0000
+Received: by outflank-mailman (input) for mailman id 56675;
+ Fri, 18 Dec 2020 20:43:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=azX+=FW=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kqKvM-0006xL-OJ
- for xen-devel@lists.xenproject.org; Fri, 18 Dec 2020 18:56:20 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=iVAa=FW=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1kqMb1-00010d-7i
+ for xen-devel@lists.xenproject.org; Fri, 18 Dec 2020 20:43:27 +0000
+Received: from userp2130.oracle.com (unknown [156.151.31.86])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e060be68-4478-4943-9ab5-721e4d779b26;
- Fri, 18 Dec 2020 18:56:20 +0000 (UTC)
+ id dacd7049-351e-4e31-bec3-e23511a2cfe3;
+ Fri, 18 Dec 2020 20:43:26 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BIKeQtL122498;
+ Fri, 18 Dec 2020 20:43:22 GMT
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by userp2130.oracle.com with ESMTP id 35cn9rv7pj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 18 Dec 2020 20:43:22 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BIKfNTm052695;
+ Fri, 18 Dec 2020 20:43:21 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3030.oracle.com with ESMTP id 35d7esqs3n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 18 Dec 2020 20:43:21 +0000
+Received: from abhmp0007.oracle.com (abhmp0007.oracle.com [141.146.116.13])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0BIKhIrT031029;
+ Fri, 18 Dec 2020 20:43:18 GMT
+Received: from [10.39.216.141] (/10.39.216.141)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Fri, 18 Dec 2020 12:43:18 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,89 +68,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e060be68-4478-4943-9ab5-721e4d779b26
-Date: Fri, 18 Dec 2020 10:56:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1608317779;
-	bh=mNsuymiy+hlbVxv5osDqiBtsrMfiVf+wAvW+nLwzmsI=;
-	h=From:To:cc:Subject:In-Reply-To:References:From;
-	b=nAmAtMWzJX6E6aXsN1korRa+N127EuOwl6yqce+Wv0dpOaeltzq+WlTjvod7OnfZf
-	 Gbr+4Ekn8ZM2JdS5CufTTVefIAAaDOhaAynwBhiLWIPDGvftTvupN6Y1+Vd0loD7v5
-	 Iy1hU3jF0Qg4aalpCP2I5gj4JLbvmEPLNDHhgVXd8grmklWLIose/89x5AEUtah5F5
-	 PLFQM6PnChv7N8F4YqgmF7RXNZUnxt6W8b4z1BoIiBsrqoXIgywG8LVnI8jvedniF3
-	 i5NYMtbn8C1Hr279+c9MDSuJaqWZTimcTExOq9DPOc07izrLzbNByCEIhBOEligrQx
-	 Q9Z1WFaulxSEw==
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
-    Rahul.Singh@arm.com, Julien Grall <jgrall@amazon.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
-    Jan Beulich <jbeulich@suse.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
-    Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] xen: Rework WARN_ON() to return whether a warning
- was triggered
-In-Reply-To: <20201218133054.7744-1-julien@xen.org>
-Message-ID: <alpine.DEB.2.21.2012181056080.4040@sstabellini-ThinkPad-T480s>
-References: <20201218133054.7744-1-julien@xen.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: dacd7049-351e-4e31-bec3-e23511a2cfe3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : from : to :
+ cc : references : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=KGkrhxqOcM6OiUfI259rBQpozA1rYuM0leg0FkluyEY=;
+ b=rcLyBy0bVLWp/07VwW2T+kZsXMYBjnoMETEee5T+PFY22SKj+Hb/zJA+ErlB/2ZDgJAZ
+ rnMldy+QF7UAr2PyhBbBS+pR1sC1avSnUM/WUvpo3p5Co1smxfgbSkLzeDT6tUytPVfg
+ sS8VChG+1R+v5JIz//1JpUkR4qighsSK3zIallKj5YT4FdHjorUXKCPk5uHTymDvS0Xn
+ 6cVaTSeRJ6vO14WzZs/9ThyG0oX9eDZmDcH1JdN0KdyLvxqmLaknvVcc1p9GuLEJEEsH
+ r8QxSiUYZfS9GlbkhLVsDIfAdm6w8rtNi2Im681v1bMs8rc5f7vd7zthFgL2Z/YeV/Sv Gw== 
+Subject: Re: XSA-351 causing Solaris-11 systems to panic during boot.
+From: boris.ostrovsky@oracle.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Cheyenne Wills <cheyenne.wills@gmail.com>
+References: <CAHpsFVc4AAm6L0rKUuV47ydOjtw7XAgFnDZxRjdCL0OHXJERDw@mail.gmail.com>
+ <7bca24cb-a3af-b54d-b224-3c2a316859dd@suse.com>
+ <4fc3532b-f53f-2a15-ce64-f857816b0566@oracle.com>
+ <f4ff3d16-40f6-e8a1-fcdd-ca52e1f52ca6@suse.com>
+ <c90622c4-f9e0-8b6d-ab46-bba0cbfc0fd9@oracle.com>
+ <0430337a-6fcd-9471-4455-838390401220@citrix.com>
+ <c6e05b63-b066-9bd0-9da1-1fc089cd1aea@oracle.com>
+Organization: Oracle Corporation
+Message-ID: <10958d4a-154f-a524-35e9-a75eaf50fe55@oracle.com>
+Date: Fri, 18 Dec 2020 15:43:16 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-
-On Fri, 18 Dec 2020, Julien Grall wrote:
-> From: Julien Grall <jgrall@amazon.com>
-> 
-> So far, our implementation of WARN_ON() cannot be used in the following
-> situation:
-> 
-> if ( WARN_ON() )
->     ...
-> 
-> This is because WARN_ON() doesn't return whether a warning has been
-> triggered. Such construciton can be handy if you want to print more
-> information and also dump the stack trace.
-> 
-> Therefore, rework the WARN_ON() implementation to return whether a
-> warning was triggered. The idea was borrowed from Linux
-> 
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> Reviewed-by: Juergen Gross <jgross@suse.com>
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <c6e05b63-b066-9bd0-9da1-1fc089cd1aea@oracle.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9839 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 spamscore=0 bulkscore=0
+ suspectscore=0 adultscore=0 mlxscore=0 mlxlogscore=999 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2012180139
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9839 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 mlxlogscore=999
+ impostorscore=0 lowpriorityscore=0 clxscore=1015 spamscore=0
+ malwarescore=0 priorityscore=1501 phishscore=0 mlxscore=0 bulkscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2012180139
 
 
-> ---
->     Changes in v2:
->         - Rework the commit message
->         - Don't use trailing underscore
->         - Add Bertrand's and Juergen's reviewed-by
-> ---
->  xen/include/xen/lib.h | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
-> index 48429b69b8df..5841bd489c35 100644
-> --- a/xen/include/xen/lib.h
-> +++ b/xen/include/xen/lib.h
-> @@ -23,7 +23,13 @@
->  #include <asm/bug.h>
->  
->  #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
-> -#define WARN_ON(p) do { if (unlikely(p)) WARN(); } while (0)
-> +#define WARN_ON(p)  ({                  \
-> +    bool ret_warn_on_ = (p);            \
-> +                                        \
-> +    if ( unlikely(ret_warn_on_) )       \
-> +        WARN();                         \
-> +    unlikely(ret_warn_on_);             \
-> +})
->  
->  /* All clang versions supported by Xen have _Static_assert. */
->  #if defined(__clang__) || \
-> -- 
-> 2.17.1
-> 
+On 12/17/20 12:49 PM, boris.ostrovsky@oracle.com wrote:
+> On 12/17/20 11:46 AM, Andrew Cooper wrote:
+>> On 17/12/2020 16:25, boris.ostrovsky@oracle.com wrote:
+>>> On 12/17/20 2:40 AM, Jan Beulich wrote:
+>>>> On 17.12.2020 02:51, boris.ostrovsky@oracle.com wrote:
+>>>> I think this is acceptable as a workaround, albeit we may want to
+>>>> consider further restricting this (at least on staging), like e.g.
+>>>> requiring a guest config setting to enable the workaround. 
+>>> Maybe, but then someone migrating from a stable release to 4.15 will have to modify guest configuration.
+>>>
+>>>
+>>>> But
+>>>> maybe this will need to be part of the MSR policy for the domain
+>>>> instead, down the road. We'll definitely want Andrew's view here.
+>>>>
+>>>> Speaking of staging - before applying anything to the stable
+>>>> branches, I think we want to have this addressed on the main
+>>>> branch. I can't see how Solaris would work there.
+>>> Indeed it won't. I'll need to do that as well (I misinterpreted the statement in the XSA about only 4.14- being vulnerable)
+>> It's hopefully obvious now why we suddenly finished the "lets turn all
+>> unknown MSRs to #GP" work at the point that we did (after dithering on
+>> the point for several years).
+>>
+>> To put it bluntly, default MSR readability was not a clever decision at all.
+>>
+>> There is a large risk that there is a similar vulnerability elsewhere,
+>> given how poorly documented the MSRs are (and one contemporary CPU I've
+>> got the manual open for has more than 6000 *documented* MSRs).  We did
+>> debate for a while whether the readability of the PPIN MSRs was a
+>> vulnerability or not, before eventually deciding not.
+
+
+Can we do something like KVM's ignore_msrs (but probably return 0 on reads to avoid leaks from the system)? It would allow to deal with cases when a guest is suddenly unable to boot after hypervisor update (especially from pre-4.14). It won't help in all cases since some MSRs may be expected to be non-zero but I think it will cover large number of them. (and it will certainly do what Jan is asking above but will not be specific to this particular breakage)
+
+
+-boris
+
+
+>> Irrespective of what we do to fix this in Xen, has anyone fixed Solaris yet?
+>
+> I am not aware of anyone working on this (not that I would be).
+>
+>
+> -boris
+>
 
