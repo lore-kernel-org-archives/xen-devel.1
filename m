@@ -1,43 +1,44 @@
-Return-Path: <SRS0=ek7T=FV=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=cMO7=FW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B775EC4361B
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 23:55:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03453C4361B
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Dec 2020 00:30:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 562F5235FD
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Dec 2020 23:55:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 562F5235FD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9534E23371
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Dec 2020 00:30:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9534E23371
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.56255.98386 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.56259.98398 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kq36e-00074S-MB; Thu, 17 Dec 2020 23:54:48 +0000
+	id 1kq3eo-00035G-F6; Fri, 18 Dec 2020 00:30:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 56255.98386; Thu, 17 Dec 2020 23:54:48 +0000
+Received: by outflank-mailman (output) from mailman id 56259.98398; Fri, 18 Dec 2020 00:30:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kq36e-00074L-J3; Thu, 17 Dec 2020 23:54:48 +0000
-Received: by outflank-mailman (input) for mailman id 56255;
- Thu, 17 Dec 2020 23:54:47 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kq3eo-000359-Be; Fri, 18 Dec 2020 00:30:06 +0000
+Received: by outflank-mailman (input) for mailman id 56259;
+ Fri, 18 Dec 2020 00:30:04 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BHja=FV=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kq36d-00074G-MW
- for xen-devel@lists.xenproject.org; Thu, 17 Dec 2020 23:54:47 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 107c4837-21a3-4778-8f39-94d815bf8c13;
- Thu, 17 Dec 2020 23:54:46 +0000 (UTC)
+ <SRS0=NeVu=FW=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
+ id 1kq3em-0002o8-De
+ for xen-devel@lists.xenproject.org; Fri, 18 Dec 2020 00:30:04 +0000
+Received: from mail-wr1-x436.google.com (unknown [2a00:1450:4864:20::436])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id c19b0671-0274-4186-a4bc-ff74f22daf12;
+ Fri, 18 Dec 2020 00:30:03 +0000 (UTC)
+Received: by mail-wr1-x436.google.com with SMTP id 91so304097wrj.7
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Dec 2020 16:30:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,75 +50,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 107c4837-21a3-4778-8f39-94d815bf8c13
-Date: Thu, 17 Dec 2020 15:54:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1608249286;
-	bh=rWfARMVooBX7b7FOUc5CYcurwjdt6QhGoSb8STsLutc=;
-	h=From:To:cc:Subject:In-Reply-To:References:From;
-	b=EkYO7jElAhAiPdLi/xFO54X+XnEgy8dmeNdgtirsCVaHcBOiXxoQfVlw66CsbyB/S
-	 nzmAlcwI/S4LrjTO4yUeSazKpZFxBZBLjrgbYasgaW7vcTvzuV4CF1Ot15g9dTZMR5
-	 yFE+5Vw8seKmkk9tM3XgAd5dp0fI0h19ZNn5bFqTheQS+Oz9kyF/V6C87vJESL8RSB
-	 iWtRRGS6O8tIUJJSaWC2++3uMuSDNeQ0YyOLI49OTuPyVHKIXQMiA7Uc0JuiwrlvIt
-	 iFwJ/g0Frkn/UDN/opAFYOv3dWpOSVDfsFR4XLLkF+yFQR0OX/cfZGITPtT5u/7fsv
-	 YbaxXyBcJ4JtQ==
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Jan Beulich <jbeulich@suse.com>
-cc: Julien Grall <julien@xen.org>, bertrand.marquis@arm.com, 
-    Rahul.Singh@arm.com, Julien Grall <jgrall@amazon.com>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
-    xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] xen: Rework WARN_ON() to return whether a warning was
- triggered
-In-Reply-To: <3f165cf8-88a4-590a-6e86-2435e8a7e554@suse.com>
-Message-ID: <alpine.DEB.2.21.2012171553340.4040@sstabellini-ThinkPad-T480s>
-References: <20201215112610.1986-1-julien@xen.org> <c5ac88e6-4e06-553d-2996-d2b027acd782@suse.com> <04455739-f07f-3da8-f764-33600a9cab6f@xen.org> <3f165cf8-88a4-590a-6e86-2435e8a7e554@suse.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: c19b0671-0274-4186-a4bc-ff74f22daf12
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=hyHN9ivFR9PDDp25TgpaViYqFJZgbegacz/Nx05KtIM=;
+        b=hmZz1LupRe5BCWEWEqPp5S5fy1uFWvckjX6rxxtPqRubFosqKb4/SrzyPkWwoDEX0j
+         OCMXeR0bGxGqXB5N9+shkTsUpMOpOvNyPxCRl7d9XYsxkagiHnQanOa14QMNzaBEPgn4
+         0BGY9girSbM1zEFGUyvvqYRN5Xk+FKZ+DrX76Meym1qEuJNuk9dNUKvocu2eZvEJ6273
+         F+E5H2qQIdF6l8WBR1OLlLleLHSEWsP53VYG0C2ocIaAOj8gM2twVrmYJcxGWeHeOis+
+         EDwazjWsPEvrAoI9ZOhyuai/Ir17nKdCd6gm/gwUFhxpthQD4F2Tj5DllqZViWegCVyY
+         69eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=hyHN9ivFR9PDDp25TgpaViYqFJZgbegacz/Nx05KtIM=;
+        b=ZhQFChbOXdKxMI1lgMZr1g+twtY3oBoQRg8BqHK108mzlG502smaboIr5n12pF7jhy
+         PIZjsMYzqykLRiEi+8FsSD02saxeD1vLdo/2KBXkss3QTDxy56I3D2xNqk+4eYViXPEt
+         ZPZeZvh8w31c6s9+J8RPla47Vkb2eWENlwdhoxdziC4jc3K04n/xYdC4ADepR8QvUX5o
+         5svBzCoN3l/hUKYhZST6oxB4GuwxDn3YzVuioEESmvY3HypdWqErs9ZoTXAxdCZv1t6b
+         XqdBtjoQfPOkOiPs+sXDbu1Kv05sx+h1sbr5ClidTJsmTmVvn9fYctRzKAPWF91JYqHW
+         7wPA==
+X-Gm-Message-State: AOAM530lycm4xJbizOU45PlyXft2Z0DQd2OCaR9cStkGDgUm91jNbv2m
+	/tCiiYjylrxGUbbaygcBXbJtFdIWmyOXfQ/vLWg=
+X-Google-Smtp-Source: ABdhPJzpyOYE1jO619sHqXkuT26r7EaN9vmUB7THeI/3KEcszuWlm51aRIMzZUmbOOW5SdvojwTCRcJDaoyJDaTm2ok=
+X-Received: by 2002:a5d:43d2:: with SMTP id v18mr1384085wrr.326.1608251402434;
+ Thu, 17 Dec 2020 16:30:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+References: <20201215112610.1986-1-julien@xen.org> <c5ac88e6-4e06-553d-2996-d2b027acd782@suse.com>
+ <04455739-f07f-3da8-f764-33600a9cab6f@xen.org> <3f165cf8-88a4-590a-6e86-2435e8a7e554@suse.com>
+ <alpine.DEB.2.21.2012171553340.4040@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2012171553340.4040@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien.grall.oss@gmail.com>
+Date: Fri, 18 Dec 2020 00:29:51 +0000
+Message-ID: <CAJ=z9a1cJ3H6U0nymU9mPcXbDcxhBmih-Jmua5ScGqeQKcVt5w@mail.gmail.com>
+Subject: Re: [PATCH] xen: Rework WARN_ON() to return whether a warning was triggered
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Jan Beulich <jbeulich@suse.com>, Bertrand Marquis <bertrand.marquis@arm.com>, 
+	Rahul Singh <Rahul.Singh@arm.com>, Julien Grall <jgrall@amazon.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, 
+	xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 15 Dec 2020, Jan Beulich wrote:
-> On 15.12.2020 14:19, Julien Grall wrote:
-> > On 15/12/2020 11:46, Jan Beulich wrote:
-> >> On 15.12.2020 12:26, Julien Grall wrote:
-> >>> --- a/xen/include/xen/lib.h
-> >>> +++ b/xen/include/xen/lib.h
-> >>> @@ -23,7 +23,13 @@
-> >>>   #include <asm/bug.h>
-> >>>   
-> >>>   #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
-> >>> -#define WARN_ON(p) do { if (unlikely(p)) WARN(); } while (0)
-> >>> +#define WARN_ON(p)  ({                  \
-> >>> +    bool __ret_warn_on = (p);           \
-> >>
-> >> Please can you avoid leading underscores here?
-> > 
-> > I can.
-> > 
-> >>
-> >>> +                                        \
-> >>> +    if ( unlikely(__ret_warn_on) )      \
-> >>> +        WARN();                         \
-> >>> +    unlikely(__ret_warn_on);            \
-> >>> +})
-> >>
-> >> Is this latter unlikely() having any effect? So far I thought it
-> >> would need to be immediately inside a control construct or be an
-> >> operand to && or ||.
-> > 
-> > The unlikely() is directly taken from the Linux implementation.
-> > 
-> > My guess is the compiler is still able to use the information for the 
-> > branch prediction in the case of:
-> > 
-> > if ( WARN_ON(...) )
-> 
-> Maybe. Or maybe not. I don't suppose the Linux commit introducing
-> it clarifies this?
+On Thu, 17 Dec 2020 at 23:54, Stefano Stabellini <sstabellini@kernel.org> wrote:
+>
+> On Tue, 15 Dec 2020, Jan Beulich wrote:
+> > On 15.12.2020 14:19, Julien Grall wrote:
+> > > On 15/12/2020 11:46, Jan Beulich wrote:
+> > >> On 15.12.2020 12:26, Julien Grall wrote:
+> > >>> --- a/xen/include/xen/lib.h
+> > >>> +++ b/xen/include/xen/lib.h
+> > >>> @@ -23,7 +23,13 @@
+> > >>>   #include <asm/bug.h>
+> > >>>
+> > >>>   #define BUG_ON(p)  do { if (unlikely(p)) BUG();  } while (0)
+> > >>> -#define WARN_ON(p) do { if (unlikely(p)) WARN(); } while (0)
+> > >>> +#define WARN_ON(p)  ({                  \
+> > >>> +    bool __ret_warn_on = (p);           \
+> > >>
+> > >> Please can you avoid leading underscores here?
+> > >
+> > > I can.
+> > >
+> > >>
+> > >>> +                                        \
+> > >>> +    if ( unlikely(__ret_warn_on) )      \
+> > >>> +        WARN();                         \
+> > >>> +    unlikely(__ret_warn_on);            \
+> > >>> +})
+> > >>
+> > >> Is this latter unlikely() having any effect? So far I thought it
+> > >> would need to be immediately inside a control construct or be an
+> > >> operand to && or ||.
+> > >
+> > > The unlikely() is directly taken from the Linux implementation.
+> > >
+> > > My guess is the compiler is still able to use the information for the
+> > > branch prediction in the case of:
+> > >
+> > > if ( WARN_ON(...) )
+> >
+> > Maybe. Or maybe not. I don't suppose the Linux commit introducing
+> > it clarifies this?
+>
+> I did a bit of digging but it looks like the unlikely has been there
+> forever. I'd just keep it as is.
 
-I did a bit of digging but it looks like the unlikely has been there
-forever. I'd just keep it as is.
+Thanks! I was planning to answer earlier on with some data but got
+preempted with some higher priority work.
+The Linux commit message is not very helpful. I will do some testing
+so I can convince Jan that compilers can be clever and make use of it.
+
+Cheers,
 
