@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B688DC433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:51:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58ED7C433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:51:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 76F142072E
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:51:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 76F142072E
+	by mail.kernel.org (Postfix) with ESMTPS id 213BE2072E
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:51:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 213BE2072E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61528.108373 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61532.108385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYhH-0000fy-Cx; Mon, 04 Jan 2021 22:51:31 +0000
+	id 1kwYhN-0000kV-MI; Mon, 04 Jan 2021 22:51:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61528.108373; Mon, 04 Jan 2021 22:51:31 +0000
+Received: by outflank-mailman (output) from mailman id 61532.108385; Mon, 04 Jan 2021 22:51:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYhH-0000fr-9F; Mon, 04 Jan 2021 22:51:31 +0000
-Received: by outflank-mailman (input) for mailman id 61528;
- Mon, 04 Jan 2021 22:51:30 +0000
+	id 1kwYhN-0000kN-Id; Mon, 04 Jan 2021 22:51:37 +0000
+Received: by outflank-mailman (input) for mailman id 61532;
+ Mon, 04 Jan 2021 22:51:36 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Wh7t=GH=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kwYhG-0000ZU-NX
- for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:51:30 +0000
+ id 1kwYhL-0000jd-Vc
+ for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:51:36 +0000
 Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 047c96d6-46a5-4970-aeab-412a4a802dc5;
- Mon, 04 Jan 2021 22:51:28 +0000 (UTC)
+ id ab6e5f3b-46a0-45dc-bb92-11cef390a97d;
+ Mon, 04 Jan 2021 22:51:34 +0000 (UTC)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MpIhj071405
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MpP0U071412
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Mon, 4 Jan 2021 17:51:23 -0500 (EST) (envelope-from ehem@m5p.com)
+ Mon, 4 Jan 2021 17:51:31 -0500 (EST) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 104MpInU071404;
- Mon, 4 Jan 2021 14:51:18 -0800 (PST) (envelope-from ehem)
+ by m5p.com (8.15.2/8.15.2/Submit) id 104MpPNH071411;
+ Mon, 4 Jan 2021 14:51:25 -0800 (PST) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,8 +56,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 047c96d6-46a5-4970-aeab-412a4a802dc5
-Message-Id: <576c76de7d4efd0ca219ec9c1b2fea2709f034ef.1608663694.git.ehem+xen@m5p.com>
+X-Inumbo-ID: ab6e5f3b-46a0-45dc-bb92-11cef390a97d
+Message-Id: <b606b67d7e0bacf9b533aa1ea582e534edfb57d8.1608663694.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1608663694.git.ehem+xen@m5p.com>
 References: <cover.1608663694.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -65,69 +65,153 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Date: Fri, 18 Dec 2020 13:32:33 -0800
-Subject: [WIP PATCH 03/16] tools/xl: Mark libxl_domain_config * arg of
- printf_info_*() const
+Date: Thu, 17 Dec 2020 17:42:42 -0800
+Subject: [WIP PATCH 04/16] tools/xl: Rename printf_info()/list_domains_details()
+ to dump_by_...()
 
-With libxl having gotten a lot more constant, now printf_info_sexp() and
-printf_info_one_json() can add consts.  May not be particularly
-important, but it is best to mark things constant when they are known to
-be so.
+printf_info()/list_domains_details() had been serving fairly similar
+purposes.  Increase their consistency (add file-handle and output_format
+arguments to list_domains_details(), reorder arguments) and then rename
+to better reflect their functionality.
+
+Both were simply outputting full domain information.  As this is more of
+a dump operation, "dump" is a better name.
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/xl/xl.h      | 2 +-
- tools/xl/xl_info.c | 2 +-
- tools/xl/xl_sxp.c  | 6 +++---
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ tools/xl/xl.h      |  8 ++++++++
+ tools/xl/xl_info.c | 30 ++++++++++++++++--------------
+ tools/xl/xl_misc.c |  5 +----
+ 3 files changed, 25 insertions(+), 18 deletions(-)
 
 diff --git a/tools/xl/xl.h b/tools/xl/xl.h
-index 06569c6c4a..ffb222d280 100644
+index ffb222d280..760c8fcf40 100644
 --- a/tools/xl/xl.h
 +++ b/tools/xl/xl.h
-@@ -299,7 +299,7 @@ typedef enum {
+@@ -299,6 +299,14 @@ typedef enum {
      DOMAIN_RESTART_SOFT_RESET,   /* Soft reset should be performed */
  } domain_restart_type;
  
--extern void printf_info_sexp(int domid, libxl_domain_config *d_config, FILE *fh);
-+extern void printf_info_sexp(int domid, const libxl_domain_config *d_config, FILE *fh);
++extern void dump_by_config(enum output_format output_format,
++                           FILE *fh,
++                           const libxl_domain_config *d_config,
++                           int domid);
++extern void dump_by_dominfo_list(enum output_format output_format,
++                                 FILE *fh,
++                                 const libxl_dominfo info[],
++                                 int nb_domain);
+ extern void printf_info_sexp(int domid, const libxl_domain_config *d_config, FILE *fh);
  extern void apply_global_affinity_masks(libxl_domain_type type,
                                          libxl_bitmap *vcpu_affinity_array,
-                                         unsigned int size);
 diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
-index ca417df8e8..cc50463df6 100644
+index cc50463df6..bc88014f10 100644
 --- a/tools/xl/xl_info.c
 +++ b/tools/xl/xl_info.c
-@@ -59,7 +59,7 @@ static int maybe_printf(const char *fmt, ...)
+@@ -94,12 +94,10 @@ out:
+     return s;
  }
  
- static yajl_gen_status printf_info_one_json(yajl_gen hand, int domid,
--                                            libxl_domain_config *d_config)
-+                                            const libxl_domain_config *d_config)
+-void printf_info(enum output_format output_format,
+-                 int domid,
+-                 libxl_domain_config *d_config, FILE *fh);
+-void printf_info(enum output_format output_format,
+-                 int domid,
+-                 libxl_domain_config *d_config, FILE *fh)
++void dump_by_config(enum output_format output_format,
++                    FILE *fh,
++                    const libxl_domain_config *const d_config,
++                    int domid)
  {
-     yajl_gen_status s;
+     if (output_format == OUTPUT_FORMAT_SXP)
+         return printf_info_sexp(domid, d_config, fh);
+@@ -438,7 +436,10 @@ static void list_domains(bool verbose, bool context, bool claim, bool numa,
+     libxl_physinfo_dispose(&physinfo);
+ }
  
-diff --git a/tools/xl/xl_sxp.c b/tools/xl/xl_sxp.c
-index 359a001570..d5b9051dfc 100644
---- a/tools/xl/xl_sxp.c
-+++ b/tools/xl/xl_sxp.c
-@@ -26,13 +26,13 @@
- /* In general you should not add new output to this function since it
-  * is intended only for legacy use.
-  */
--void printf_info_sexp(int domid, libxl_domain_config *d_config, FILE *fh)
-+void printf_info_sexp(int domid, const libxl_domain_config *d_config, FILE *fh)
+-static void list_domains_details(const libxl_dominfo *info, int nb_domain)
++void dump_by_dominfo_list(enum output_format output_format,
++                          FILE *fh,
++                          const libxl_dominfo info[],
++                          int nb_domain)
  {
-     int i;
-     libxl_dominfo info;
+     libxl_domain_config d_config;
  
--    libxl_domain_create_info *c_info = &d_config->c_info;
--    libxl_domain_build_info *b_info = &d_config->b_info;
-+    const libxl_domain_create_info *c_info = &d_config->c_info;
-+    const libxl_domain_build_info *b_info = &d_config->b_info;
+@@ -449,7 +450,7 @@ static void list_domains_details(const libxl_dominfo *info, int nb_domain)
+     const char *buf;
+     libxl_yajl_length yajl_len = 0;
  
-     fprintf(fh, "(domain\n\t(domid %d)\n", domid);
-     fprintf(fh, "\t(create_info)\n");
+-    if (default_output_format == OUTPUT_FORMAT_JSON) {
++    if (output_format == OUTPUT_FORMAT_JSON) {
+         hand = libxl_yajl_gen_alloc(NULL);
+         if (!hand) {
+             fprintf(stderr, "unable to allocate JSON generator\n");
+@@ -468,16 +469,16 @@ static void list_domains_details(const libxl_dominfo *info, int nb_domain)
+                                                  &d_config, NULL);
+         if (rc)
+             continue;
+-        if (default_output_format == OUTPUT_FORMAT_JSON)
++        if (output_format == OUTPUT_FORMAT_JSON)
+             s = printf_info_one_json(hand, info[i].domid, &d_config);
+         else
+-            printf_info_sexp(info[i].domid, &d_config, stdout);
++            printf_info_sexp(info[i].domid, &d_config, fh);
+         libxl_domain_config_dispose(&d_config);
+         if (s != yajl_gen_status_ok)
+             goto out;
+     }
+ 
+-    if (default_output_format == OUTPUT_FORMAT_JSON) {
++    if (output_format == OUTPUT_FORMAT_JSON) {
+         s = yajl_gen_array_close(hand);
+         if (s != yajl_gen_status_ok)
+             goto out;
+@@ -486,11 +487,12 @@ static void list_domains_details(const libxl_dominfo *info, int nb_domain)
+         if (s != yajl_gen_status_ok)
+             goto out;
+ 
+-        puts(buf);
++        fputs(buf, fh);
++        fputc('\n', fh);
+     }
+ 
+ out:
+-    if (default_output_format == OUTPUT_FORMAT_JSON) {
++    if (output_format == OUTPUT_FORMAT_JSON) {
+         yajl_gen_free(hand);
+         if (s != yajl_gen_status_ok)
+             fprintf(stderr,
+@@ -567,7 +569,7 @@ int main_list(int argc, char **argv)
+     }
+ 
+     if (details)
+-        list_domains_details(info, nb_domain);
++        dump_by_dominfo_list(default_output_format, stdout, info, nb_domain);
+     else
+         list_domains(verbose, context, false /* claim */, numa, cpupool,
+                      info, nb_domain);
+diff --git a/tools/xl/xl_misc.c b/tools/xl/xl_misc.c
+index 08f0fb6dc9..bcf178762b 100644
+--- a/tools/xl/xl_misc.c
++++ b/tools/xl/xl_misc.c
+@@ -256,9 +256,6 @@ int main_dump_core(int argc, char **argv)
+     return EXIT_SUCCESS;
+ }
+ 
+-extern void printf_info(enum output_format output_format,
+-                        int domid,
+-                        libxl_domain_config *d_config, FILE *fh);
+ int main_config_update(int argc, char **argv)
+ {
+     uint32_t domid;
+@@ -344,7 +341,7 @@ int main_config_update(int argc, char **argv)
+     parse_config_data(filename, config_data, config_len, &d_config);
+ 
+     if (debug || dryrun_only)
+-        printf_info(default_output_format, -1, &d_config, stdout);
++        dump_by_config(default_output_format, stdout, &d_config, -1);
+ 
+     if (!dryrun_only) {
+         fprintf(stderr, "setting dom%u configuration\n", domid);
 -- 
 
 
