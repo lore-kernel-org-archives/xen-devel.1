@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_96_XX,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C460FC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:53:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A27C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:53:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 834602074B
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:53:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 834602074B
+	by mail.kernel.org (Postfix) with ESMTPS id 4DA3F2074B
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 22:53:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4DA3F2074B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61574.108456 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61577.108469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYib-0001Ya-R3; Mon, 04 Jan 2021 22:52:53 +0000
+	id 1kwYij-0001d0-48; Mon, 04 Jan 2021 22:53:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61574.108456; Mon, 04 Jan 2021 22:52:53 +0000
+Received: by outflank-mailman (output) from mailman id 61577.108469; Mon, 04 Jan 2021 22:53:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwYib-0001YT-O8; Mon, 04 Jan 2021 22:52:53 +0000
-Received: by outflank-mailman (input) for mailman id 61574;
- Mon, 04 Jan 2021 22:52:52 +0000
+	id 1kwYij-0001ct-0j; Mon, 04 Jan 2021 22:53:01 +0000
+Received: by outflank-mailman (input) for mailman id 61577;
+ Mon, 04 Jan 2021 22:52:59 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Wh7t=GH=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1kwYia-0001Y4-5z
- for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:52:52 +0000
+ id 1kwYih-0001cF-9d
+ for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 22:52:59 +0000
 Received: from mailhost.m5p.com (unknown [74.104.188.4])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0be40137-2e97-4a36-9886-3693e0ce814a;
- Mon, 04 Jan 2021 22:52:51 +0000 (UTC)
+ id fbc95469-5e97-4dbe-a668-db3856b1b067;
+ Mon, 04 Jan 2021 22:52:58 +0000 (UTC)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MqgfU071507
+ by mailhost.m5p.com (8.15.2/8.15.2) with ESMTPS id 104MqnT7071512
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Mon, 4 Jan 2021 17:52:47 -0500 (EST) (envelope-from ehem@m5p.com)
+ Mon, 4 Jan 2021 17:52:55 -0500 (EST) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.15.2/8.15.2/Submit) id 104MqgmL071506;
- Mon, 4 Jan 2021 14:52:42 -0800 (PST) (envelope-from ehem)
+ by m5p.com (8.15.2/8.15.2/Submit) id 104MqnL5071511;
+ Mon, 4 Jan 2021 14:52:49 -0800 (PST) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,8 +56,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0be40137-2e97-4a36-9886-3693e0ce814a
-Message-Id: <23d48471e5f987736525b4d2be71419953fd4698.1608663694.git.ehem+xen@m5p.com>
+X-Inumbo-ID: fbc95469-5e97-4dbe-a668-db3856b1b067
+Message-Id: <fc15fc9a52552b8218ad5b8def88b6cf903c4a24.1608663694.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1608663694.git.ehem+xen@m5p.com>
 References: <cover.1608663694.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
@@ -65,91 +65,139 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Date: Wed, 9 Dec 2020 14:34:37 -0800
-Subject: [WIP PATCH 14/16] WIP: tools/xl: Enhance "list" command
+Date: Fri, 18 Dec 2020 23:23:36 -0800
+Subject: [WIP PATCH 15/16] WIP: tools/xl: Implement output format option for
+ "vm-list" command
 
-Add several features to specify output.  Allow omitting potentially
-unneeded lines and add argument for exact line format.
+While the "vm-list" subcommand has far fewer fields than the "list"
+subcommand, one might still desire to list a subset of the fields.
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/xl/xl_cmdtable.c |  2 ++
- tools/xl/xl_list.c     | 16 +++++++++++++---
- 2 files changed, 15 insertions(+), 3 deletions(-)
+ tools/xl/xl_cmdtable.c |  7 ++++-
+ tools/xl/xl_list.c     | 66 +++++++++++++++++++++++++-----------------
+ 2 files changed, 46 insertions(+), 27 deletions(-)
 
 diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index f44c65a3f8..91c2026bc8 100644
+index 91c2026bc8..c083566989 100644
 --- a/tools/xl/xl_cmdtable.c
 +++ b/tools/xl/xl_cmdtable.c
-@@ -53,6 +53,7 @@ struct cmd_spec cmd_table[] = {
-       &main_list, 0, 0,
-       "List information about all/some domains",
-       "[options] [Domain]\n",
-+      "-0, --no-domain0        Omit information for Domain 0\n"
-       "-F, --format            Specify output format string\n"
-       "   Similar to printf(3) formatting, conversion characters are:\n"
-       "      %A    NODE Affinity\n"
-@@ -67,6 +68,7 @@ struct cmd_spec cmd_table[] = {
-       "      %t    Time(s)\n"
-       "      %u    UUID\n"
-       "      %v    vCPUs\n"
-+      "-H, --no-header         Omit table header\n"
-       "-Z, --context           Prints out security context\n"
-       "-c, --cpupool           Prints the cpupool the domain is in\n"
-       "-l, --long              Output all VM details\n"
+@@ -256,7 +256,12 @@ struct cmd_spec cmd_table[] = {
+     { "vm-list",
+       &main_vm_list, 0, 0,
+       "List guest domains, excluding dom0, stubdoms, etc.",
+-      "",
++      "[options]\n",
++      "-F, --format            Specify output format string\n"
++      "   Similar to printf(3) formatting, conversion characters are:\n"
++      "      %i    Domain Id (%o, %x, and %X allow octal and hexadecimal)\n"
++      "      %n    Domain name\n"
++      "      %u    UUID\n"
+     },
+     { "info",
+       &main_info, 0, 0,
 diff --git a/tools/xl/xl_list.c b/tools/xl/xl_list.c
-index 3ed6da8feb..49ff2acaad 100644
+index 49ff2acaad..58809aa10b 100644
 --- a/tools/xl/xl_list.c
 +++ b/tools/xl/xl_list.c
-@@ -397,6 +397,8 @@ int main_list(int argc, char **argv)
-     bool context = false;
-     bool cpupool = false;
-     bool details = false;
-+    bool dom0 = true;
-+    bool header = true;
-     const char *formatstr = NULL;
-     bool numa = false;
-     bool verbose = false;
-@@ -405,6 +407,8 @@ int main_list(int argc, char **argv)
-         {"cpupool", 0, 0, 'c'},
-         {"format", 0, 0, 'F'},
-         {"long", 0, 0, 'l'},
-+        {"no-domain0", 0, 0, '0'},
-+        {"no-header", 0, 0, 'H'},
-         {"numa", 0, 0, 'n'},
-         {"verbose", 0, 0, 'v'},
-         COMMON_LONG_OPTS
-@@ -414,10 +418,16 @@ int main_list(int argc, char **argv)
-     libxl_dominfo *info, *info_free=0;
-     int nb_domain, rc;
+@@ -310,6 +310,7 @@ static void format(const format_table_t fmttab, const char *fmt,
+ }
  
--    SWITCH_FOREACH_OPT(opt, "F:Zchlnv", opts, "list", 0) {
-+    SWITCH_FOREACH_OPT(opt, "0F:HZchlnv", opts, "list", 0) {
-+    case '0':
-+        dom0 = false;
+ static const libxl_dominfo *_discard;
++static const libxl_vminfo *_discard_vm;
+ 
+ const format_table_t formats = {
+     ['A' - 'A'] = {"NODE Affinity",     "", format_node},
+@@ -340,6 +341,20 @@ const format_table_t formats = {
+                    (int *)&_discard->vcpu_online - (int *)_discard, {.i = 0}},
+     ['x' - 'A'] = {"ID",               "x", format_normal,
+                    (int *)&_discard->domid - (int *)_discard, {.i = 0}},
++}, formats_vm = {
++    ['X' - 'A'] = {"ID",               "X", format_normal,
++                   (int *)&_discard_vm->domid - (int *)_discard_vm, {.i = 0}},
++    ['i' - 'A'] = {"ID",               "d", format_normal,
++                   (int *)&_discard_vm->domid - (int *)_discard_vm, {.i = 0}},
++    ['n' - 'A'] = {" name",            "s", format_allocstr,
++                   (uint32_t *)&_discard_vm->domid - (uint32_t *)_discard_vm,
++                   {.xlfunc = libxl_domid_to_name}},
++    ['o' - 'A'] = {"ID",               "o", format_normal,
++                   (int *)&_discard_vm->domid - (int *)_discard_vm, {.i = 0}},
++    ['u' - 'A'] = {"UUID                                ", "", format_uuid,
++                   (char *)&_discard_vm->uuid - (char *)_discard_vm},
++    ['x' - 'A'] = {"ID",               "x", format_normal,
++                   (int *)&_discard_vm->domid - (int *)_discard_vm, {.i = 0}},
+ };
+ 
+ static char *build_list_domain_format(bool verbose, bool context, bool claim,
+@@ -368,29 +383,6 @@ static char *build_list_domain_format(bool verbose, bool context, bool claim,
+ }
+ 
+ 
+-static void list_vm(void)
+-{
+-    libxl_vminfo *info;
+-    char *domname;
+-    int nb_vm, i;
+-
+-    info = libxl_list_vm(ctx, &nb_vm);
+-
+-    if (!info) {
+-        fprintf(stderr, "libxl_list_vm failed.\n");
+-        exit(EXIT_FAILURE);
+-    }
+-    printf("UUID                                  ID    name\n");
+-    for (i = 0; i < nb_vm; i++) {
+-        domname = libxl_domid_to_name(ctx, info[i].domid);
+-        printf(LIBXL_UUID_FMT "  %d    %-30s\n", LIBXL_UUID_BYTES(info[i].uuid),
+-            info[i].domid, domname);
+-        free(domname);
+-    }
+-    libxl_vminfo_list_free(info, nb_vm);
+-}
+-
+-
+ int main_list(int argc, char **argv)
+ {
+     int opt;
+@@ -507,13 +499,35 @@ int main_list(int argc, char **argv)
+ 
+ int main_vm_list(int argc, char **argv)
+ {
++    const char *formatstr = "%u %5i %n\n";
+     int opt;
++    static const struct option opts[] = {
++        {"format", 0, 0, 'F'},
++    };
+ 
+-    SWITCH_FOREACH_OPT(opt, "", NULL, "vm-list", 0) {
+-        /* No options */
++    libxl_vminfo *info;
++    int nb_vm, i;
++
++    SWITCH_FOREACH_OPT(opt, "F:", opts, "vm-list", 0) {
++    case 'F':
++        formatstr = optarg;
 +        break;
-     case 'F':
-         formatstr = optarg;
-         break;
-+    case 'H':
-+        header = false;
-+        break;
-     case 'Z':
-         context = true;
-         break;
-@@ -476,10 +486,10 @@ int main_list(int argc, char **argv)
-             return EXIT_FAILURE;
-         }
++    }
++
++    info = libxl_list_vm(ctx, &nb_vm);
++
++    if (!info) {
++        fprintf(stderr, "libxl_list_vm failed.\n");
++        exit(EXIT_FAILURE);
+     }
  
--        format(formats, formatstr, NULL);
-+        if (header) format(formats, formatstr, NULL);
+-    list_vm();
++    format(formats_vm, formatstr, NULL);
++
++    for (i = 0; i < nb_vm; i++)
++        format(formats_vm, formatstr, info + i);
++
++    libxl_vminfo_list_free(info, nb_vm);
++
+     return EXIT_SUCCESS;
+ }
  
-         while (nb_domain) {
--            format(formats, formatstr, info);
-+            if (info->domid || dom0) format(formats, formatstr, info);
-             ++info;
-             --nb_domain;
-         }
 -- 
 
 
