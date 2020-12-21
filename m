@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66186C433E6
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Dec 2020 18:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87B70C433E9
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Dec 2020 18:16:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16A5022D08
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Dec 2020 18:16:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16A5022D08
+	by mail.kernel.org (Postfix) with ESMTPS id 478FE22D08
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Dec 2020 18:16:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 478FE22D08
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.57506.100659 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.57505.100641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krPjP-0000dZ-Eh; Mon, 21 Dec 2020 18:16:27 +0000
+	id 1krPjL-0000Zj-1C; Mon, 21 Dec 2020 18:16:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 57506.100659; Mon, 21 Dec 2020 18:16:27 +0000
+Received: by outflank-mailman (output) from mailman id 57505.100641; Mon, 21 Dec 2020 18:16:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krPjP-0000dR-Ag; Mon, 21 Dec 2020 18:16:27 +0000
-Received: by outflank-mailman (input) for mailman id 57506;
- Mon, 21 Dec 2020 18:16:26 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1krPjK-0000ZT-To; Mon, 21 Dec 2020 18:16:22 +0000
+Received: by outflank-mailman (input) for mailman id 57505;
+ Mon, 21 Dec 2020 18:16:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wm/H=FZ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1krPjN-0000Ys-W1
- for xen-devel@lists.xenproject.org; Mon, 21 Dec 2020 18:16:26 +0000
+ id 1krPjJ-0000Yt-4S
+ for xen-devel@lists.xenproject.org; Mon, 21 Dec 2020 18:16:21 +0000
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ecc297fa-f5ea-407d-8910-2d35caea21ad;
- Mon, 21 Dec 2020 18:16:21 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 499db0c6-1c04-4f23-bcff-a7f45c660f51;
+ Mon, 21 Dec 2020 18:16:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,29 +49,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ecc297fa-f5ea-407d-8910-2d35caea21ad
+X-Inumbo-ID: 499db0c6-1c04-4f23-bcff-a7f45c660f51
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1608574581;
+  d=citrix.com; s=securemail; t=1608574578;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=hRzDOLHnk7AFo9Bf3bdweZ3XGJXNV7e3/ahLcdzLXdc=;
-  b=PkeTYGYy5J+nu1yRvcPaFf1Eat/wOb5MuRUjuLPnlecyz8cWolXvkzue
-   C0o6aubhD0qn4DMCYz88QJ/ekjSdrxJqw75vgbXQTYjp+JG2qfASGQtla
-   A9w0txW93vt3ddhahEcN2cwNX9gx5lIFWO/RW5/4IcH991BptUfmu6vAH
-   8=;
+  bh=B/5dAlAFWaIIj98Nfhx+GTd6ypQExw4vEU95/xCjDHg=;
+  b=RptR4pbhuiWfugIcYa2CFotfNAbTHwPPzNr3Ie/BxtvtLbKjVoVH2Suc
+   hGwytbJmlDCwvhwTH8PqZoL4VOWEcuCUbggU3j5T0icOVGs06Je5VkPEM
+   1A1UT9Lf1LuzxkreIw60m1JM/fUUGcHD9MQnRLpgDLDA3+m5NIxyrsuiD
+   Q=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: eCvJ8vVJQ+h1Yvf02LFBLnaUX2zruNYyojZwmjDu86rPk3OsY1YAJpD8hf6UX9QXu7VM/LGXdw
- Mfq/e9i8vDhIMvhBLTTwKJPhvUGgz7+970pi2fg0mXdV+5s4Qgy/WR7kX1Qf7AVSFz1AkS53CQ
- KCfJUjFqhJsEh2izW+lDXB+pRJ9DfMX6ATET2w4pGiIbXho9dAff3jM9/1gNbbhUKq74ne7Yzo
- Sb0m3H6WQSCXKvppEvIg7wtDjbw1GRpCC0dtdeuVhNVpQi80rKMQ6z0E6ef/OQgUp85jOvyNqm
- Ebk=
+IronPort-SDR: B2W5j/M1lFQ4AS9cDmR2qgWNTidmuOzn0n9z0yNDaw/6TLT//jKQLoaUzyjGxlQZX0ekB3tpRO
+ QhE9YPWHljtcL3rJa6q43GOmj6C+EtPvZFNj5toDju/qNoArojSJ3JZLc0eapxNpVtF1Lg6AIc
+ vHqUacirXXlhjWLDaRwXjiQFQFz7ckwCFUUuVWucuDvARBuLsf5qKrvZm6R8/W4wv7bx2/1BKJ
+ VBuRPehHIlDgMFOILQXNBoQWXDJbaXFFouUz3l47EZg1HMQhZ5Gp1K5MG5KL6TsmeKN6jP+b7h
+ nwc=
 X-SBRS: 5.2
-X-MesageID: 33707602
+X-MesageID: 33707581
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.78,437,1599537600"; 
-   d="scan'208";a="33707602"
+   d="scan'208";a="33707581"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -78,9 +79,9 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/3] xen/domain: Reorder trivial initialisation in early domain_create()
-Date: Mon, 21 Dec 2020 18:14:44 +0000
-Message-ID: <20201221181446.7791-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/3] xen/evtchn: Clean up teardown handling
+Date: Mon, 21 Dec 2020 18:14:46 +0000
+Message-ID: <20201221181446.7791-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201221181446.7791-1-andrew.cooper3@citrix.com>
 References: <20201221181446.7791-1-andrew.cooper3@citrix.com>
@@ -88,7 +89,19 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This improves the robustness of the error paths.
+First of all, rename the evtchn APIs:
+ * evtchn_destroy       => evtchn_teardown
+ * evtchn_destroy_final => evtchn_destroy
+
+Move both calls into appropriate positions in domain_teardown() and
+_domain_destroy(), which avoids having different cleanup logic depending on
+the the cause of the cleanup.
+
+In particular, this avoids evtchn_teardown() (previously named
+evtchn_destroy()) being called redundantly thousands of times on a typical
+XEN_DOMCTL_destroydomain hypercall.
+
+No net change in behaviour.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -98,69 +111,148 @@ CC: Wei Liu <wl@xen.org>
 CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Julien Grall <julien@xen.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+
+RFC.  While testing this, I observed this, after faking up an -ENOMEM in
+dom0's construction:
+
+  (XEN) [2020-12-21 16:31:20] NX (Execute Disable) protection active
+  (XEN) [2020-12-21 16:33:04]
+  (XEN) [2020-12-21 16:33:04] ****************************************
+  (XEN) [2020-12-21 16:33:04] Panic on CPU 0:
+  (XEN) [2020-12-21 16:33:04] Error creating domain 0
+  (XEN) [2020-12-21 16:33:04] ****************************************
+
+XSA-344 appears to have added nearly 2 minutes of wallclock time into the
+domain_create() error path, which isn't ok.
+
+Considering that event channels haven't even been initialised in this
+particular scenario, it ought to take ~0 time.  Even if event channels have
+been initalised, none can be active as the domain isn't visible to the system.
 ---
- xen/common/domain.c | 41 ++++++++++++++++++++++-------------------
- 1 file changed, 22 insertions(+), 19 deletions(-)
+ xen/common/domain.c        | 17 ++++++++---------
+ xen/common/event_channel.c |  8 ++++----
+ xen/include/xen/sched.h    |  4 ++--
+ 3 files changed, 14 insertions(+), 15 deletions(-)
 
 diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 5ec48c3e19..ce3667f1b4 100644
+index ef1987335b..701747b9d9 100644
 --- a/xen/common/domain.c
 +++ b/xen/common/domain.c
-@@ -391,25 +391,7 @@ struct domain *domain_create(domid_t domid,
+@@ -284,6 +284,8 @@ custom_param("extra_guest_irqs", parse_extra_guest_irqs);
+  */
+ static int domain_teardown(struct domain *d)
+ {
++    int rc;
++
+     BUG_ON(!d->is_dying);
  
-     TRACE_1D(TRC_DOM0_DOM_ADD, d->domain_id);
+     /*
+@@ -313,6 +315,10 @@ static int domain_teardown(struct domain *d)
+         };
  
--    /*
--     * Allocate d->vcpu[] and set ->max_vcpus up early.  Various per-domain
--     * resources want to be sized based on max_vcpus.
--     */
--    if ( !is_system_domain(d) )
+     case 0:
++        rc = evtchn_teardown(d);
++        if ( rc )
++            return rc;
++
+     PROGRESS(done):
+         break;
+ 
+@@ -335,6 +341,8 @@ static void _domain_destroy(struct domain *d)
+     BUG_ON(!d->is_dying);
+     BUG_ON(atomic_read(&d->refcnt) != DOMAIN_DESTROYED);
+ 
++    evtchn_destroy(d);
++
+     xfree(d->pbuf);
+ 
+     argo_destroy(d);
+@@ -598,11 +606,7 @@ struct domain *domain_create(domid_t domid,
+     if ( init_status & INIT_gnttab )
+         grant_table_destroy(d);
+     if ( init_status & INIT_evtchn )
 -    {
--        err = -ENOMEM;
--        d->vcpu = xzalloc_array(struct vcpu *, config->max_vcpus);
--        if ( !d->vcpu )
--            goto fail;
--
--        d->max_vcpus = config->max_vcpus;
+-        evtchn_destroy(d);
+-        evtchn_destroy_final(d);
+         radix_tree_destroy(&d->pirq_tree, free_pirq_struct);
 -    }
--
--    lock_profile_register_struct(LOCKPROF_TYPE_PERDOM, d, domid);
--
--    if ( (err = xsm_alloc_security_domain(d)) != 0 )
--        goto fail;
--
-+    /* Trivial initialisation. */
-     atomic_set(&d->refcnt, 1);
-     RCU_READ_LOCK_INIT(&d->rcu_lock);
-     spin_lock_init_prof(d, domain_lock);
-@@ -434,6 +416,27 @@ struct domain *domain_create(domid_t domid,
-     INIT_LIST_HEAD(&d->pdev_list);
- #endif
+     if ( init_status & INIT_watchdog )
+         watchdog_domain_destroy(d);
  
-+    /* All error paths can depend on the above setup. */
-+
-+    /*
-+     * Allocate d->vcpu[] and set ->max_vcpus up early.  Various per-domain
-+     * resources want to be sized based on max_vcpus.
-+     */
-+    if ( !is_system_domain(d) )
-+    {
-+        err = -ENOMEM;
-+        d->vcpu = xzalloc_array(struct vcpu *, config->max_vcpus);
-+        if ( !d->vcpu )
-+            goto fail;
-+
-+        d->max_vcpus = config->max_vcpus;
-+    }
-+
-+    lock_profile_register_struct(LOCKPROF_TYPE_PERDOM, d, domid);
-+
-+    if ( (err = xsm_alloc_security_domain(d)) != 0 )
-+        goto fail;
-+
-     err = -ENOMEM;
-     if ( !zalloc_cpumask_var(&d->dirty_cpumask) )
-         goto fail;
+@@ -792,9 +796,6 @@ int domain_kill(struct domain *d)
+         rc = domain_teardown(d);
+         if ( rc )
+             break;
+-        rc = evtchn_destroy(d);
+-        if ( rc )
+-            break;
+         rc = domain_relinquish_resources(d);
+         if ( rc != 0 )
+             break;
+@@ -987,8 +988,6 @@ static void complete_domain_destroy(struct rcu_head *head)
+     if ( d->target != NULL )
+         put_domain(d->target);
+ 
+-    evtchn_destroy_final(d);
+-
+     radix_tree_destroy(&d->pirq_tree, free_pirq_struct);
+ 
+     xfree(d->vcpu);
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index 4a48094356..c1af54eed5 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -1401,7 +1401,7 @@ void free_xen_event_channel(struct domain *d, int port)
+     {
+         /*
+          * Make sure ->is_dying is read /after/ ->valid_evtchns, pairing
+-         * with the spin_barrier() and BUG_ON() in evtchn_destroy().
++         * with the spin_barrier() and BUG_ON() in evtchn_teardown().
+          */
+         smp_rmb();
+         BUG_ON(!d->is_dying);
+@@ -1421,7 +1421,7 @@ void notify_via_xen_event_channel(struct domain *ld, int lport)
+     {
+         /*
+          * Make sure ->is_dying is read /after/ ->valid_evtchns, pairing
+-         * with the spin_barrier() and BUG_ON() in evtchn_destroy().
++         * with the spin_barrier() and BUG_ON() in evtchn_teardown().
+          */
+         smp_rmb();
+         ASSERT(ld->is_dying);
+@@ -1499,7 +1499,7 @@ int evtchn_init(struct domain *d, unsigned int max_port)
+     return 0;
+ }
+ 
+-int evtchn_destroy(struct domain *d)
++int evtchn_teardown(struct domain *d)
+ {
+     unsigned int i;
+ 
+@@ -1534,7 +1534,7 @@ int evtchn_destroy(struct domain *d)
+ }
+ 
+ 
+-void evtchn_destroy_final(struct domain *d)
++void evtchn_destroy(struct domain *d)
+ {
+     unsigned int i, j;
+ 
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 3f35c537b8..bb22eeca38 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -142,8 +142,8 @@ struct evtchn
+ } __attribute__((aligned(64)));
+ 
+ int  evtchn_init(struct domain *d, unsigned int max_port);
+-int  evtchn_destroy(struct domain *d); /* from domain_kill */
+-void evtchn_destroy_final(struct domain *d); /* from complete_domain_destroy */
++int  evtchn_teardown(struct domain *d);
++void evtchn_destroy(struct domain *d);
+ 
+ struct waitqueue_vcpu;
+ 
 -- 
 2.11.0
 
