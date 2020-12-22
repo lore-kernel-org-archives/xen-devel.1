@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8384BC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:43:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53ACAC433E9
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:43:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3DC2B23105
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:43:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DC2B23105
+	by mail.kernel.org (Postfix) with ESMTPS id 1BBC023105
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:43:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1BBC023105
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.57961.101650 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.57963.101674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krjpB-0006cn-S3; Tue, 22 Dec 2020 15:43:45 +0000
+	id 1krjpE-0006hj-HL; Tue, 22 Dec 2020 15:43:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 57961.101650; Tue, 22 Dec 2020 15:43:45 +0000
+Received: by outflank-mailman (output) from mailman id 57963.101674; Tue, 22 Dec 2020 15:43:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krjpB-0006cg-O5; Tue, 22 Dec 2020 15:43:45 +0000
-Received: by outflank-mailman (input) for mailman id 57961;
- Tue, 22 Dec 2020 15:43:44 +0000
+	id 1krjpE-0006hY-BP; Tue, 22 Dec 2020 15:43:48 +0000
+Received: by outflank-mailman (input) for mailman id 57963;
+ Tue, 22 Dec 2020 15:43:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1krjpA-0006ab-72
- for xen-devel@lists.xenproject.org; Tue, 22 Dec 2020 15:43:44 +0000
+ (envelope-from <julien@xen.org>) id 1krjpC-0006e6-E6
+ for xen-devel@lists.xenproject.org; Tue, 22 Dec 2020 15:43:46 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1krjp9-0001pp-Qe; Tue, 22 Dec 2020 15:43:43 +0000
+ id 1krjpC-0001q2-3U; Tue, 22 Dec 2020 15:43:46 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1krjp9-0002Vd-H1; Tue, 22 Dec 2020 15:43:43 +0000
+ id 1krjpB-0002Vd-RL; Tue, 22 Dec 2020 15:43:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,66 +55,140 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=oGKgq5COKIk8NxpKicCWyg/HHbH44EXhBG+TPo1gMSg=; b=6F1sIpK8zXz525iNpH+YZy4J3
-	7CHZgeRZybwOTkVZ61q5urpWMtfSXXpDnObgRW2hK+49+shv6uDJaRniyyRhf4yEUuRbZPWTVdrkD
-	ZhrkwGNjSSbPUCzDwM4+4E6fhZ46DK1HNbyal5aytfHiXgVlbyIiiuGJC0FrLuObJsjOw=;
+	 bh=mOorAOnuty5dT4XVPxHkS2yx8rloYCwOnZM9EKJjgIk=; b=ZnR5j8EBlvK2vr5hUlW5i/rcV
+	vFAjgpRLLsxxT33LPriWdzoJlmk8Mxs4++xBSS6onpZt6PnkaU0lUdzvpZ4YvDtbGuXEOqFgSBL3Q
+	QUPEXZc5pIUociG5agRoDz1F5tSnWr8aD3p1hhih0IZIZlPbn31UKxD5zdekhhy9Ze9p8=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: hongyxia@amazon.co.uk,
 	Julien Grall <jgrall@amazon.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
 	Paul Durrant <paul@xen.org>
-Subject: [PATCH for-4.15 2/4] xen/iommu: x86: Free the IOMMU page-tables with the pgtables.lock held
-Date: Tue, 22 Dec 2020 15:43:36 +0000
-Message-Id: <20201222154338.9459-3-julien@xen.org>
+Subject: [PATCH for-4.15 4/4] xen/iommu: x86: Don't leak the IOMMU page-tables
+Date: Tue, 22 Dec 2020 15:43:38 +0000
+Message-Id: <20201222154338.9459-5-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201222154338.9459-1-julien@xen.org>
 References: <20201222154338.9459-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-The pgtables.lock is protecting access to the page list pgtables.list.
-However, iommu_free_pgtables() will not held it. I guess it was assumed
-that page-tables cannot be allocated while the domain is dying.
+The new IOMMU page-tables allocator will release the pages when
+relinquish the domain resources. However, this is not sufficient in two
+cases:
+    1) domain_relinquish_resources() is not called when the domain
+    creation fails.
+    2) There is nothing preventing page-table allocations when the
+    domain is dying.
 
-Unfortunately, there is no guarantee that iommu_map() will not be
-called while a domain is dying (it looks like to be possible from
-XEN_DOMCTL_memory_mapping). So it would be possible to be concurrently
-allocate memory and free the page-tables.
+In both cases, this can be solved by freeing the page-tables again
+when the domain destruction. Although, this may result to an high
+number of page-tables to free.
 
-Therefore, we need to held the lock when freeing the page tables.
-
-There are more issues around the IOMMU page-allocator. They will be
-handled in follow-up patches.
+In the second case, it is pointless to allow page-table allocation when
+the domain is going to die. iommu_alloc_pgtable() will now return an
+error when it is called while the domain is dying.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/drivers/passthrough/x86/iommu.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ xen/arch/x86/domain.c               |  2 +-
+ xen/drivers/passthrough/x86/iommu.c | 32 +++++++++++++++++++++++++++--
+ xen/include/asm-x86/iommu.h         |  2 +-
+ 3 files changed, 32 insertions(+), 4 deletions(-)
 
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index b9ba04633e18..1b7ee5c1a8cb 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2290,7 +2290,7 @@ int domain_relinquish_resources(struct domain *d)
+ 
+     PROGRESS(iommu_pagetables):
+ 
+-        ret = iommu_free_pgtables(d);
++        ret = iommu_free_pgtables(d, false);
+         if ( ret )
+             return ret;
+ 
 diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index cea1032b3d02..779dbb5b98ba 100644
+index 99a23177b3d2..4a083e4b8f11 100644
 --- a/xen/drivers/passthrough/x86/iommu.c
 +++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -267,13 +267,18 @@ int iommu_free_pgtables(struct domain *d)
-     struct page_info *pg;
-     unsigned int done = 0;
+@@ -149,6 +149,21 @@ int arch_iommu_domain_init(struct domain *d)
  
-+    spin_lock(&hd->arch.pgtables.lock);
-     while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
+ void arch_iommu_domain_destroy(struct domain *d)
+ {
++    struct domain_iommu *hd = dom_iommu(d);
++    int rc;
++
++    /*
++     * The relinquish code will not be executed if the domain creation
++     * failed. To avoid any memory leak, we want to free any IOMMU
++     * page-tables that may have been allocated.
++     */
++    rc = iommu_free_pgtables(d, false);
++
++    /* The preemption was disabled, so the call should never fail. */
++    if ( rc )
++        ASSERT_UNREACHABLE();
++
++    ASSERT(page_list_empty(&hd->arch.pgtables.list));
+ }
+ 
+ static bool __hwdom_init hwdom_iommu_map(const struct domain *d,
+@@ -261,7 +276,7 @@ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+         return;
+ }
+ 
+-int iommu_free_pgtables(struct domain *d)
++int iommu_free_pgtables(struct domain *d, bool preempt)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
+     struct page_info *pg;
+@@ -282,7 +297,7 @@ int iommu_free_pgtables(struct domain *d)
      {
          free_domheap_page(pg);
  
-         if ( !(++done & 0xff) && general_preempt_check() )
-+        {
-+            spin_unlock(&hd->arch.pgtables.lock);
+-        if ( !(++done & 0xff) && general_preempt_check() )
++        if ( !(++done & 0xff) && preempt && general_preempt_check() )
+         {
+             spin_unlock(&hd->arch.pgtables.lock);
              return -ERESTART;
-+        }
-     }
-+    spin_unlock(&hd->arch.pgtables.lock);
+@@ -305,6 +320,19 @@ struct page_info *iommu_alloc_pgtable(struct domain *d)
+         memflags = MEMF_node(hd->node);
+ #endif
  
-     return 0;
- }
++    /*
++     * The IOMMU page-tables are freed when relinquishing the domain, but
++     * nothing prevent allocation to happen afterwards. There is no valid
++     * reasons to continue to update the IOMMU page-tables while the
++     * domain is dying.
++     *
++     * So prevent page-table allocation when the domain is dying. Note
++     * this doesn't fully prevent the race because d->is_dying may not
++     * yet be seen.
++     */
++    if ( d->is_dying )
++        return NULL;
++
+     pg = alloc_domheap_page(NULL, memflags);
+     if ( !pg )
+         return NULL;
+diff --git a/xen/include/asm-x86/iommu.h b/xen/include/asm-x86/iommu.h
+index 970eb06ffac5..874bb5bbfbde 100644
+--- a/xen/include/asm-x86/iommu.h
++++ b/xen/include/asm-x86/iommu.h
+@@ -135,7 +135,7 @@ int pi_update_irte(const struct pi_desc *pi_desc, const struct pirq *pirq,
+         iommu_vcall(ops, sync_cache, addr, size);       \
+ })
+ 
+-int __must_check iommu_free_pgtables(struct domain *d);
++int __must_check iommu_free_pgtables(struct domain *d, bool preempt);
+ struct page_info *__must_check iommu_alloc_pgtable(struct domain *d);
+ 
+ #endif /* !__ARCH_X86_IOMMU_H__ */
 -- 
 2.17.1
 
