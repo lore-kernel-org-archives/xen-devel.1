@@ -2,46 +2,49 @@ Return-Path: <SRS0=eaQF=F2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD3ABC433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:44:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 130D8C433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:48:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8101A23105
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:44:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8101A23105
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id AEE24206EC
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:48:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AEE24206EC
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.57962.101662 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.57979.101688 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krjpD-0006es-5j; Tue, 22 Dec 2020 15:43:47 +0000
+	id 1krjtS-0007Cy-6g; Tue, 22 Dec 2020 15:48:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 57962.101662; Tue, 22 Dec 2020 15:43:47 +0000
+Received: by outflank-mailman (output) from mailman id 57979.101688; Tue, 22 Dec 2020 15:48:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krjpD-0006ed-27; Tue, 22 Dec 2020 15:43:47 +0000
-Received: by outflank-mailman (input) for mailman id 57962;
- Tue, 22 Dec 2020 15:43:45 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1krjpB-0006cH-8H
- for xen-devel@lists.xenproject.org; Tue, 22 Dec 2020 15:43:45 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1krjpA-0001pv-Q2; Tue, 22 Dec 2020 15:43:44 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1krjpA-0002Vd-Gp; Tue, 22 Dec 2020 15:43:44 +0000
+	id 1krjtS-0007Cr-3l; Tue, 22 Dec 2020 15:48:10 +0000
+Received: by outflank-mailman (input) for mailman id 57979;
+ Tue, 22 Dec 2020 15:48:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HKaq=F2=tklengyel.com=tamas@srs-us1.protection.inumbo.net>)
+ id 1krjtQ-0007Cm-NY
+ for xen-devel@lists.xenproject.org; Tue, 22 Dec 2020 15:48:08 +0000
+Received: from MTA-06-3.privateemail.com (unknown [198.54.127.59])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2c2e5fee-7d25-4964-8da7-0ae8d91e68bb;
+ Tue, 22 Dec 2020 15:48:07 +0000 (UTC)
+Received: from MTA-06.privateemail.com (localhost [127.0.0.1])
+ by MTA-06.privateemail.com (Postfix) with ESMTP id 85D1660078
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Dec 2020 10:48:06 -0500 (EST)
+Received: from mail-wr1-f41.google.com (unknown [10.20.151.226])
+ by MTA-06.privateemail.com (Postfix) with ESMTPA id 47EA860083
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Dec 2020 15:48:06 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id r3so14980023wrt.2
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Dec 2020 07:48:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,107 +56,246 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=kSPSsNxqjRsah0K2F/khe3S48PU9Vn+ea2ql+1qJVow=; b=u7zwD9TpUghLdk5/4t796dN7R
-	OOEKsJTI9epORlTXPMuVoXxnmmbIjmRfUdkldFMZAy9GA+ZhknOA4hcvMVw4n4cUV2qqawv7dMhOd
-	Of74k7GR4v8G7Rb07S7LfRq8ISeZ5tbsc5hBO8WlTOoK7umNxl8HSn0bLLoh193yGWF7c=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: hongyxia@amazon.co.uk,
-	Julien Grall <jgrall@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH for-4.15 3/4] [RFC] xen/iommu: x86: Clear the root page-table before freeing the page-tables
-Date: Tue, 22 Dec 2020 15:43:37 +0000
-Message-Id: <20201222154338.9459-4-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201222154338.9459-1-julien@xen.org>
-References: <20201222154338.9459-1-julien@xen.org>
+X-Inumbo-ID: 2c2e5fee-7d25-4964-8da7-0ae8d91e68bb
+X-Gm-Message-State: AOAM530im1YhObsMcqqppCGCKnxOUr6Ix+GVqoi2kUEKbxpP525/rXEM
+	/H9bciMbqgY6vhLsfP9jZOX4ClWt13Twn7zSmZE=
+X-Google-Smtp-Source: ABdhPJwVN0QXztzIqWecfxud2MfcmFEVd0HM5OFpRAvx25S7QIy0Dqgau5kHncjRvXYVXGMry1+8gq2Z9cNB92HWawY=
+X-Received: by 2002:adf:d082:: with SMTP id y2mr25279530wrh.301.1608652084792;
+ Tue, 22 Dec 2020 07:48:04 -0800 (PST)
+MIME-Version: 1.0
+References: <20201221181446.7791-1-andrew.cooper3@citrix.com>
+ <ac552c84-144c-c213-7985-84d92cbb5601@citrix.com> <983a3fef-c80f-ec2a-bf3c-5e054fc6a7a9@suse.com>
+ <760969b0-743e-fdd7-3577-72612e3a88b7@citrix.com>
+In-Reply-To: <760969b0-743e-fdd7-3577-72612e3a88b7@citrix.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Tue, 22 Dec 2020 10:47:27 -0500
+X-Gmail-Original-Message-ID: <CABfawh=nS2nuFEyx+7Hi5S5HUYtqXTJ6LMTLpZErs5_d22GWgQ@mail.gmail.com>
+Message-ID: <CABfawh=nS2nuFEyx+7Hi5S5HUYtqXTJ6LMTLpZErs5_d22GWgQ@mail.gmail.com>
+Subject: Re: Hypercall fault injection (Was [PATCH 0/3] xen/domain: More
+ structured teardown)
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Juergen Gross <jgross@suse.com>, 
+	Xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: multipart/alternative; boundary="00000000000014d2cc05b70f802a"
+X-Virus-Scanned: ClamAV using ClamSMTP
 
-From: Julien Grall <jgrall@amazon.com>
+--00000000000014d2cc05b70f802a
+Content-Type: text/plain; charset="UTF-8"
 
-The new per-domain IOMMU page-table allocator will now free the
-page-tables when domain's resources are relinquished. However, the root
-page-table (i.e. hd->arch.pg_maddr) will not be cleared.
+On Tue, Dec 22, 2020 at 6:14 AM Andrew Cooper <andrew.cooper3@citrix.com>
+wrote:
 
-Xen may access the IOMMU page-tables afterwards at least in the case of
-PV domain:
+> On 22/12/2020 10:00, Jan Beulich wrote:
+> > On 21.12.2020 20:36, Andrew Cooper wrote:
+> >> Hello,
+> >>
+> >> We have some very complicated hypercalls, createdomain, and max_vcpus a
+> >> close second, with immense complexity, and very hard-to-test error
+> handling.
+> >>
+> >> It is no surprise that the error handling is riddled with bugs.
+> >>
+> >> Random failures from core functions is one way, but I'm not sure that
+> >> will be especially helpful.  In particular, we'd need a way to exclude
+> >> "dom0 critical" operations so we've got a usable system to run testing
+> on.
+> >>
+> >> As an alternative, how about adding a fault_ttl field into the
+> hypercall?
+> >>
+> >> The exact paths taken in {domain,vcpu}_create() are sensitive to the
+> >> hardware, Xen Kconfig, and other parameters passed into the
+> >> hypercall(s).  The testing logic doesn't really want to care about what
+> >> failed; simply that the error was handled correctly.
+> >>
+> >> So a test for this might look like:
+> >>
+> >> cfg = { ... };
+> >> while ( xc_create_domain(xch, cfg) < 0 )
+> >>     cfg.fault_ttl++;
+> >>
+> >>
+> >> The pro's of this approach is that for a specific build of Xen on a
+> >> piece of hardware, it ought to check every failure path in
+> >> domain_create(), until the ttl finally gets higher than the number of
+> >> fail-able actions required to construct a domain.  Also, the test
+> >> doesn't need changing as the complexity of domain_create() changes.
+> >>
+> >> The main con will mostly likely be the invasiveness of code in Xen, but
+> >> I suppose any fault injection is going to be invasive to a certain
+> extent.
+> > While I like the idea in principle, the innocent looking
+> >
+> > cfg = { ... };
+> >
+> > is quite a bit of a concern here as well: Depending on the precise
+> > settings, paths taken in the hypervisor may heavily vary, and hence
+> > such a test will only end up being useful if it covers a wide
+> > variety of settings. Even if the number of tests to execute turned
+> > out to still be manageable today, it may quickly turn out not
+> > sufficiently scalable as we add new settings controllable right at
+> > domain creation (which I understand is the plan).
+>
+> Well - there are two aspects here.
+>
+> First, 99% of all VMs in practice are one of 3 or 4 configurations.  An
+> individual configuration is O(n) time complexity to test with fault_ttl,
+> depending on the size of Xen's logic, and we absolutely want to be able
+> to test these deterministically and to completion.
+>
+> For the plethora of other configurations, I agree that it is infeasible
+> to test them all.  However, a hypercall like this is easy to wire up
+> into a fuzzing harness.
+>
+> TBH, I was thinking of something like
+> https://github.com/intel/kernel-fuzzer-for-xen-project with a PVH Xen
+> and XTF "dom0" poking just this hypercall.  All the other complicated
+> bits of wiring AFL up appear to have been done.
+>
+> Perhaps when we exhaust that as a source of bugs, we move onto fuzzing
+> the L0 Xen, because running on native will give it more paths to
+> explore.  We'd need some way of reporting path/trace data back to AFL in
+> dom0 which might require a bit plumbing.
 
-(XEN) Xen call trace:
-(XEN)    [<ffff82d04025b4b2>] R iommu.c#addr_to_dma_page_maddr+0x12e/0x1d8
-(XEN)    [<ffff82d04025b695>] F iommu.c#intel_iommu_unmap_page+0x5d/0xf8
-(XEN)    [<ffff82d0402695f3>] F iommu_unmap+0x9c/0x129
-(XEN)    [<ffff82d0402696a6>] F iommu_legacy_unmap+0x26/0x63
-(XEN)    [<ffff82d04033c5c7>] F mm.c#cleanup_page_mappings+0x139/0x144
-(XEN)    [<ffff82d04033c61d>] F put_page+0x4b/0xb3
-(XEN)    [<ffff82d04033c87f>] F put_page_from_l1e+0x136/0x13b
-(XEN)    [<ffff82d04033cada>] F devalidate_page+0x256/0x8dc
-(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
-(XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
-(XEN)    [<ffff82d04033d8d6>] F mm.c#put_page_from_l2e+0x8a/0xcf
-(XEN)    [<ffff82d04033cc27>] F devalidate_page+0x3a3/0x8dc
-(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
-(XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
-(XEN)    [<ffff82d04033d807>] F mm.c#put_page_from_l3e+0x8a/0xcf
-(XEN)    [<ffff82d04033cdf0>] F devalidate_page+0x56c/0x8dc
-(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
-(XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
-(XEN)    [<ffff82d04033d6c7>] F mm.c#put_page_from_l4e+0x69/0x6d
-(XEN)    [<ffff82d04033cf24>] F devalidate_page+0x6a0/0x8dc
-(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
-(XEN)    [<ffff82d04033d92e>] F put_page_type_preemptible+0x13/0x15
-(XEN)    [<ffff82d04032598a>] F domain.c#relinquish_memory+0x1ff/0x4e9
-(XEN)    [<ffff82d0403295f2>] F domain_relinquish_resources+0x2b6/0x36a
-(XEN)    [<ffff82d040205cdf>] F domain_kill+0xb8/0x141
-(XEN)    [<ffff82d040236cac>] F do_domctl+0xb6f/0x18e5
-(XEN)    [<ffff82d04031d098>] F pv_hypercall+0x2f0/0x55f
-(XEN)    [<ffff82d04039b432>] F lstar_enter+0x112/0x120
 
-This will result to a use after-free and possibly an host crash or
-memory corruption.
+This is a pretty cool idea, I would be very interested in trying this out.
+If running Xen nested in a HVM domain is possible (my experiments with
+nested setups using Xen have only worked on ancient hw last time I tried)
+then running the fuzzer would be entirely possible using VM forks. You
+don't even need a special "dom0", you could just add the fuzzer's CPUID
+harness to Xen's hypercall handler and the only thing needed from the
+nested dom0 would be to trigger the hypercall with a normal config. The
+fuzzer would take it from there and replace the config with the fuzzed
+version directly in VM forks. Defining what to report as a "crash" to AFL
+would still need to be defined manually for Xen as the current sink points
+are Linux specific (
+https://github.com/intel/kernel-fuzzer-for-xen-project/blob/master/src/sink.h),
+but that should be straight forward.
 
-Freeing the page-tables further down in domain_relinquish_resources()
-would not work because pages may not be released until later if another
-domain hold a reference on them.
+Also, running the fuzzer with PVH guests hasn't been tested but since all
+VM forking needs is EPT it should work.
 
-Once all the PCI devices have been de-assigned, it is actually pointless
-to access modify the IOMMU page-tables. So we can simply clear the root
-page-table address.
+Tamas
 
-Fixes: 3eef6d07d722 ("x86/iommu: convert VT-d code to use new page table allocator")
-Signed-off-by: Julien Grall <jgrall@amazon.com>
+--00000000000014d2cc05b70f802a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
----
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Dec 22, 2020 at 6:14 AM Andre=
+w Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com">andrew.cooper3@ci=
+trix.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
+ft:1ex">On 22/12/2020 10:00, Jan Beulich wrote:<br>
+&gt; On 21.12.2020 20:36, Andrew Cooper wrote:<br>
+&gt;&gt; Hello,<br>
+&gt;&gt;<br>
+&gt;&gt; We have some very complicated hypercalls, createdomain, and max_vc=
+pus a<br>
+&gt;&gt; close second, with immense complexity, and very hard-to-test error=
+ handling.<br>
+&gt;&gt;<br>
+&gt;&gt; It is no surprise that the error handling is riddled with bugs.<br=
+>
+&gt;&gt;<br>
+&gt;&gt; Random failures from core functions is one way, but I&#39;m not su=
+re that<br>
+&gt;&gt; will be especially helpful.=C2=A0 In particular, we&#39;d need a w=
+ay to exclude<br>
+&gt;&gt; &quot;dom0 critical&quot; operations so we&#39;ve got a usable sys=
+tem to run testing on.<br>
+&gt;&gt;<br>
+&gt;&gt; As an alternative, how about adding a fault_ttl field into the hyp=
+ercall?<br>
+&gt;&gt;<br>
+&gt;&gt; The exact paths taken in {domain,vcpu}_create() are sensitive to t=
+he<br>
+&gt;&gt; hardware, Xen Kconfig, and other parameters passed into the<br>
+&gt;&gt; hypercall(s).=C2=A0 The testing logic doesn&#39;t really want to c=
+are about what<br>
+&gt;&gt; failed; simply that the error was handled correctly.<br>
+&gt;&gt;<br>
+&gt;&gt; So a test for this might look like:<br>
+&gt;&gt;<br>
+&gt;&gt; cfg =3D { ... };<br>
+&gt;&gt; while ( xc_create_domain(xch, cfg) &lt; 0 )<br>
+&gt;&gt; =C2=A0=C2=A0=C2=A0 cfg.fault_ttl++;<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt; The pro&#39;s of this approach is that for a specific build of Xen=
+ on a<br>
+&gt;&gt; piece of hardware, it ought to check every failure path in<br>
+&gt;&gt; domain_create(), until the ttl finally gets higher than the number=
+ of<br>
+&gt;&gt; fail-able actions required to construct a domain.=C2=A0 Also, the =
+test<br>
+&gt;&gt; doesn&#39;t need changing as the complexity of domain_create() cha=
+nges.<br>
+&gt;&gt;<br>
+&gt;&gt; The main con will mostly likely be the invasiveness of code in Xen=
+, but<br>
+&gt;&gt; I suppose any fault injection is going to be invasive to a certain=
+ extent.<br>
+&gt; While I like the idea in principle, the innocent looking<br>
+&gt;<br>
+&gt; cfg =3D { ... };<br>
+&gt;<br>
+&gt; is quite a bit of a concern here as well: Depending on the precise<br>
+&gt; settings, paths taken in the hypervisor may heavily vary, and hence<br=
+>
+&gt; such a test will only end up being useful if it covers a wide<br>
+&gt; variety of settings. Even if the number of tests to execute turned<br>
+&gt; out to still be manageable today, it may quickly turn out not<br>
+&gt; sufficiently scalable as we add new settings controllable right at<br>
+&gt; domain creation (which I understand is the plan).<br>
+<br>
+Well - there are two aspects here.<br>
+<br>
+First, 99% of all VMs in practice are one of 3 or 4 configurations.=C2=A0 A=
+n<br>
+individual configuration is O(n) time complexity to test with fault_ttl,<br=
+>
+depending on the size of Xen&#39;s logic, and we absolutely want to be able=
+<br>
+to test these deterministically and to completion.<br>
+<br>
+For the plethora of other configurations, I agree that it is infeasible<br>
+to test them all.=C2=A0 However, a hypercall like this is easy to wire up<b=
+r>
+into a fuzzing harness.<br>
+<br>
+TBH, I was thinking of something like<br>
+<a href=3D"https://github.com/intel/kernel-fuzzer-for-xen-project" rel=3D"n=
+oreferrer" target=3D"_blank">https://github.com/intel/kernel-fuzzer-for-xen=
+-project</a> with a PVH Xen<br>
+and XTF &quot;dom0&quot; poking just this hypercall.=C2=A0 All the other co=
+mplicated<br>
+bits of wiring AFL up appear to have been done.<br>
+<br>
+Perhaps when we exhaust that as a source of bugs, we move onto fuzzing<br>
+the L0 Xen, because running on native will give it more paths to<br>
+explore.=C2=A0 We&#39;d need some way of reporting path/trace data back to =
+AFL in<br>
+dom0 which might require a bit plumbing.</blockquote><div><br></div><div>Th=
+is is a pretty cool idea, I would be very interested in trying this out. If=
+ running Xen nested in a HVM domain is possible (my experiments with nested=
+ setups using Xen have only worked on ancient hw last time I tried) then ru=
+nning the fuzzer would be entirely possible using VM forks. You don&#39;t e=
+ven need a special &quot;dom0&quot;, you could just add the fuzzer&#39;s CP=
+UID harness to Xen&#39;s hypercall handler and the only thing needed from t=
+he nested dom0 would be to trigger the hypercall with a normal config. The =
+fuzzer would take it from there and replace the config with the fuzzed vers=
+ion directly in VM forks. Defining what to report as a &quot;crash&quot; to=
+ AFL would still need to be defined manually for Xen as the current sink po=
+ints are Linux specific (<a href=3D"https://github.com/intel/kernel-fuzzer-=
+for-xen-project/blob/master/src/sink.h">https://github.com/intel/kernel-fuz=
+zer-for-xen-project/blob/master/src/sink.h</a>), but that should be straigh=
+t forward.</div><div><br></div><div>Also, running the fuzzer with PVH guest=
+s hasn&#39;t been tested but since all VM forking needs is EPT it should wo=
+rk.</div><div><br></div><div>Tamas</div><div><br></div><div>=C2=A0</div></d=
+iv></div>
 
-This is an RFC because it would break AMD IOMMU driver. One option would
-be to move the call to the teardown callback earlier on. Any opinions?
----
- xen/drivers/passthrough/x86/iommu.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index 779dbb5b98ba..99a23177b3d2 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -267,6 +267,16 @@ int iommu_free_pgtables(struct domain *d)
-     struct page_info *pg;
-     unsigned int done = 0;
- 
-+    /*
-+     * Pages will be moved to the free list in a bit. So we want to
-+     * clear the root page-table to avoid any potential use after-free.
-+     *
-+     * XXX: This only code works for Intel vT-D.
-+     */
-+    spin_lock(&hd->arch.mapping_lock);
-+    hd->arch.vtd.pgd_maddr = 0;
-+    spin_unlock(&hd->arch.mapping_lock);
-+
-     spin_lock(&hd->arch.pgtables.lock);
-     while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
-     {
--- 
-2.17.1
-
+--00000000000014d2cc05b70f802a--
 
