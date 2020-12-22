@@ -2,46 +2,46 @@ Return-Path: <SRS0=eaQF=F2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88D8AC433E6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8384BC433E0
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:43:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 429B723124
+	by mail.kernel.org (Postfix) with ESMTPS id 3DC2B23105
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Dec 2020 15:43:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 429B723124
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DC2B23105
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.57959.101626 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.57961.101650 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krjpA-0006aW-8E; Tue, 22 Dec 2020 15:43:44 +0000
+	id 1krjpB-0006cn-S3; Tue, 22 Dec 2020 15:43:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 57959.101626; Tue, 22 Dec 2020 15:43:44 +0000
+Received: by outflank-mailman (output) from mailman id 57961.101650; Tue, 22 Dec 2020 15:43:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1krjpA-0006aP-3c; Tue, 22 Dec 2020 15:43:44 +0000
-Received: by outflank-mailman (input) for mailman id 57959;
- Tue, 22 Dec 2020 15:43:42 +0000
+	id 1krjpB-0006cg-O5; Tue, 22 Dec 2020 15:43:45 +0000
+Received: by outflank-mailman (input) for mailman id 57961;
+ Tue, 22 Dec 2020 15:43:44 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1krjp8-0006aF-CP
- for xen-devel@lists.xenproject.org; Tue, 22 Dec 2020 15:43:42 +0000
+ (envelope-from <julien@xen.org>) id 1krjpA-0006ab-72
+ for xen-devel@lists.xenproject.org; Tue, 22 Dec 2020 15:43:44 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1krjp7-0001pd-RN; Tue, 22 Dec 2020 15:43:41 +0000
+ id 1krjp9-0001pp-Qe; Tue, 22 Dec 2020 15:43:43 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1krjp7-0002Vd-HS; Tue, 22 Dec 2020 15:43:41 +0000
+ id 1krjp9-0002Vd-H1; Tue, 22 Dec 2020 15:43:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,50 +54,67 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=Nll9lXZt/LBrS6V2JsGc0ecRr3c0eFUXdRQAetw31cY=; b=jN8ILFaTNV7AIRUg2huK5CT/P6
-	ChxZc8Be51a+GMb57kaTzZA04VURNzXy3OALTiyNbbHadx9J18InmpAUJYidbAwfm8houbg4Ub75E
-	Gj27aDpFEv1pYaj/ZisyJoQKLD7NJ1J/zbnybgBaYjMK6t2kYA5NPg/cVEiiVERJbTu4=;
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=oGKgq5COKIk8NxpKicCWyg/HHbH44EXhBG+TPo1gMSg=; b=6F1sIpK8zXz525iNpH+YZy4J3
+	7CHZgeRZybwOTkVZ61q5urpWMtfSXXpDnObgRW2hK+49+shv6uDJaRniyyRhf4yEUuRbZPWTVdrkD
+	ZhrkwGNjSSbPUCzDwM4+4E6fhZ46DK1HNbyal5aytfHiXgVlbyIiiuGJC0FrLuObJsjOw=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: hongyxia@amazon.co.uk,
 	Julien Grall <jgrall@amazon.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH for-4.15 0/4] xen/iommu: Collection of bug fixes for IOMMU teadorwn
-Date: Tue, 22 Dec 2020 15:43:34 +0000
-Message-Id: <20201222154338.9459-1-julien@xen.org>
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH for-4.15 2/4] xen/iommu: x86: Free the IOMMU page-tables with the pgtables.lock held
+Date: Tue, 22 Dec 2020 15:43:36 +0000
+Message-Id: <20201222154338.9459-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201222154338.9459-1-julien@xen.org>
+References: <20201222154338.9459-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+The pgtables.lock is protecting access to the page list pgtables.list.
+However, iommu_free_pgtables() will not held it. I guess it was assumed
+that page-tables cannot be allocated while the domain is dying.
 
-This series is a collection of bug fixes for the IOMMU teardown code.
-All of them are candidate for 4.15 as they can either leak memory or
-lead to host crash/host corruption.
+Unfortunately, there is no guarantee that iommu_map() will not be
+called while a domain is dying (it looks like to be possible from
+XEN_DOMCTL_memory_mapping). So it would be possible to be concurrently
+allocate memory and free the page-tables.
 
-This is sent directly on xen-devel because all the issues were either
-introduced in 4.15 or happen in the domain creation code.
+Therefore, we need to held the lock when freeing the page tables.
 
-Cheers,
+There are more issues around the IOMMU page-allocator. They will be
+handled in follow-up patches.
 
-Julien Grall (4):
-  xen/iommu: Check if the IOMMU was initialized before tearing down
-  xen/iommu: x86: Free the IOMMU page-tables with the pgtables.lock held
-  [RFC] xen/iommu: x86: Clear the root page-table before freeing the
-    page-tables
-  xen/iommu: x86: Don't leak the IOMMU page-tables
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+---
+ xen/drivers/passthrough/x86/iommu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
- xen/arch/x86/domain.c               |  2 +-
- xen/drivers/passthrough/iommu.c     | 10 +++++-
- xen/drivers/passthrough/x86/iommu.c | 47 +++++++++++++++++++++++++++--
- xen/include/asm-x86/iommu.h         |  2 +-
- 4 files changed, 56 insertions(+), 5 deletions(-)
-
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index cea1032b3d02..779dbb5b98ba 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -267,13 +267,18 @@ int iommu_free_pgtables(struct domain *d)
+     struct page_info *pg;
+     unsigned int done = 0;
+ 
++    spin_lock(&hd->arch.pgtables.lock);
+     while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
+     {
+         free_domheap_page(pg);
+ 
+         if ( !(++done & 0xff) && general_preempt_check() )
++        {
++            spin_unlock(&hd->arch.pgtables.lock);
+             return -ERESTART;
++        }
+     }
++    spin_unlock(&hd->arch.pgtables.lock);
+ 
+     return 0;
+ }
 -- 
 2.17.1
 
