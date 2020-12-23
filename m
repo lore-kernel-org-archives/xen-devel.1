@@ -2,45 +2,45 @@ Return-Path: <SRS0=Rlng=F3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA2B4C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E55FFC433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:46:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 80A8520897
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:42:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 80A8520897
+	by mail.kernel.org (Postfix) with ESMTPS id 8F89B2151B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:46:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F89B2151B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58520.102997 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58524.103009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks7D3-00022E-5k; Wed, 23 Dec 2020 16:41:57 +0000
+	id 1ks7HT-0002BD-O5; Wed, 23 Dec 2020 16:46:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58520.102997; Wed, 23 Dec 2020 16:41:57 +0000
+Received: by outflank-mailman (output) from mailman id 58524.103009; Wed, 23 Dec 2020 16:46:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks7D3-000227-2i; Wed, 23 Dec 2020 16:41:57 +0000
-Received: by outflank-mailman (input) for mailman id 58520;
- Wed, 23 Dec 2020 16:41:55 +0000
+	id 1ks7HT-0002B6-Kz; Wed, 23 Dec 2020 16:46:31 +0000
+Received: by outflank-mailman (input) for mailman id 58524;
+ Wed, 23 Dec 2020 16:46:30 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zN8f=F3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ks7D1-00021o-Il
- for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:41:55 +0000
+ id 1ks7HS-0002B1-Ex
+ for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:46:30 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3b8c4c7e-fc3c-4c9b-80eb-edee12388e81;
- Wed, 23 Dec 2020 16:41:54 +0000 (UTC)
+ id d84c6b3b-2a70-4389-bbb7-42e1115897cc;
+ Wed, 23 Dec 2020 16:46:28 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7E27EACF1;
- Wed, 23 Dec 2020 16:41:53 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 23622ACF1;
+ Wed, 23 Dec 2020 16:46:28 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,83 +52,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b8c4c7e-fc3c-4c9b-80eb-edee12388e81
+X-Inumbo-ID: d84c6b3b-2a70-4389-bbb7-42e1115897cc
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1608741713; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1608741988; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=O9OOtA8Qc/tES3oyETCPx+qqFk54z+xzGKtXLHHlof8=;
-	b=vEgprFgdIii6UYfy+7T9yE8j6sxQsFoQqB5jcBFosL4nohggNofzN5fH6MTJwayS0B02LM
-	syvlsieyOXVGpd2NFvstKwCtCG1IPZdWdyt/OOswdsaJd01+19vzW364v5XLr8RS2LtRN+
-	PUfx76doQ0VciZ9+sKu9eca1mH9Ghrc=
-Subject: Re: [PATCH 4/4] tools/misc: Test for fault injection
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>, Tamas K Lengyel <tamas@tklengyel.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20201223163442.8840-1-andrew.cooper3@citrix.com>
- <20201223163442.8840-5-andrew.cooper3@citrix.com>
+	bh=Z6Z6q3jbEQA4yLYFvsAhtc7KfPVrmkYSdG6G9pWGvw4=;
+	b=LpUxgwXBFrWmwd7xBOognh5PXL8+KdzBEIaCZW2io3w5nPEHLKNlS3foQgkjv0PnS7kg58
+	uWTxSBT79pGF2q5BCpg+uevzUrj4mS5rkSeNM8ZaW8KDEtTEMT8yVwLpEwJNVgGXqjSzpv
+	a7aVe2WwHDVT1fz0nTV7dA33W3R0Yx8=
+Subject: Re: [PATCH for-4.15 3/4] [RFC] xen/iommu: x86: Clear the root
+ page-table before freeing the page-tables
+To: Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>
+Cc: hongyxia@amazon.co.uk, Julien Grall <jgrall@amazon.com>,
+ xen-devel@lists.xenproject.org
+References: <20201222154338.9459-1-julien@xen.org>
+ <20201222154338.9459-4-julien@xen.org>
+ <499e6d5a-e8ac-56db-1af9-70469b6a06b9@suse.com>
+ <8b394c44-5bdb-9d82-b211-5a4ee3473568@xen.org>
+ <19e92d90-ed9a-4bd6-79f4-b761b5a039c6@suse.com>
+ <96ce1b10-9764-b71e-ac26-982ba8dcc34d@xen.org>
+ <092e5199-7eab-2722-7f0b-43fb3c8b2065@suse.com>
+ <281188a0-f632-c0a1-4591-0a66ef0068f5@xen.org>
+ <d7b866b6-118a-f873-f8df-eb112b708fe3@suse.com>
+ <0699ad7a-7c3b-e1e8-c7f7-0bfb54d03c78@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <3fe99df6-ea2a-d877-8cb9-a4e7e84589d0@suse.com>
-Date: Wed, 23 Dec 2020 17:41:53 +0100
+Message-ID: <63091edf-a870-cac1-587a-59cb9d0f8d8d@suse.com>
+Date: Wed, 23 Dec 2020 17:46:27 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <20201223163442.8840-5-andrew.cooper3@citrix.com>
+In-Reply-To: <0699ad7a-7c3b-e1e8-c7f7-0bfb54d03c78@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 23.12.2020 17:34, Andrew Cooper wrote:
-> --- /dev/null
-> +++ b/tools/misc/xen-fault-ttl.c
-> @@ -0,0 +1,56 @@
-> +#include <stdio.h>
-> +#include <err.h>
-> +#include <string.h>
-> +#include <errno.h>
-> +
-> +#include <xenctrl.h>
-> +
-> +int main(int argc, char **argv)
-> +{
-> +    int rc;
-> +    xc_interface *xch = xc_interface_open(NULL, NULL, 0);
-> +
-> +    if ( !xch )
-> +        err(1, "xc_interface_open");
-> +
-> +    struct xen_domctl_createdomain create = {
-> +        .fault_ttl = 1,
-> +        .flags = (XEN_DOMCTL_CDF_hvm |
-> +                  XEN_DOMCTL_CDF_hap),
-> +        .max_vcpus = 1,
-> +        .max_evtchn_port = -1,
-> +        .max_grant_frames = 64,
-> +        .max_maptrack_frames = 1024,
-> +        .arch = {
-> +            .emulation_flags = XEN_X86_EMU_LAPIC,
-> +        },
-> +    };
-> +    uint32_t domid = 0;
-> +
-> +    for ( rc = 1; rc && errno == ENOMEM; create.fault_ttl++ )
-> +        rc = xc_domain_create(xch, &domid, &create);
+On 23.12.2020 17:29, Julien Grall wrote:
+> On 23/12/2020 16:24, Jan Beulich wrote:
+>> On 23.12.2020 17:16, Julien Grall wrote:
+>>> On 23/12/2020 16:11, Jan Beulich wrote:
+>>>> On 23.12.2020 16:16, Julien Grall wrote:
+>>>>> On 23/12/2020 15:00, Jan Beulich wrote:
+>>>>>> On 23.12.2020 15:56, Julien Grall wrote:
+>>>>>>> On 23/12/2020 14:12, Jan Beulich wrote:
+>>>>>>>> On 22.12.2020 16:43, Julien Grall wrote:
+>>>>>>>>> This is an RFC because it would break AMD IOMMU driver. One option would
+>>>>>>>>> be to move the call to the teardown callback earlier on. Any opinions?
+>>
+>> Please note this (in your original submission). I simply ...
+>>
+>>>>>>>> We already have
+>>>>>>>>
+>>>>>>>> static void amd_iommu_domain_destroy(struct domain *d)
+>>>>>>>> {
+>>>>>>>>         dom_iommu(d)->arch.amd.root_table = NULL;
+>>>>>>>> }
+>>>>>>>>
+>>>>>>>> and this function is AMD's teardown handler. Hence I suppose
+>>>>>>>> doing the same for VT-d would be quite reasonable. And really
+>>>>>>>> VT-d's iommu_domain_teardown() also already has
+>>>>>>>>
+>>>>>>>>         hd->arch.vtd.pgd_maddr = 0;
+>>>>>>>
+>>>>>>> Let me have a look if that works.
+>>>>>>>
+>>>>>>>>
+>>>>>>>> I guess what's missing is prevention of the root table
+>>>>>>>> getting re-setup.
+>>>>>>>
+>>>>>>> This is taken care in the follow-up patch by forbidding page-table
+>>>>>>> allocation. I can mention it in the commit message.
+>>>>>>
+>>>>>> My expectation is that with that subsequent change the change here
+>>>>>> (or any variant of it) would become unnecessary.
+>>>>>
+>>>>> I am not be sure. iommu_unmap() would still get called from put_page().
+>>>>> Are you suggesting to gate the code if d->is_dying as well?
+>>>>
+>>>> Unmap shouldn't be allocating any memory right now, as in
+>>>> non-shared-page-table mode we don't install any superpages
+>>>> (unless I misremember).
+>>>
+>>> It doesn't allocate memory, but it will try to access the IOMMU
+>>> page-tables (see more below).
+>>>
+>>>>
+>>>>> Even if this patch is deemed to be unecessary to fix the issue.
+>>>>> This issue was quite hard to chase/reproduce.
+>>>>>
+>>>>> I think it would still be good to harden the code by zeroing
+>>>>> hd->arch.vtd.pgd_maddr to avoid anyone else wasting 2 days because the
+>>>>> pointer was still "valid".
+>>>>
+>>>> But my point was that this zeroing already happens.
+>>>> What I
+>>>> suspect is that it gets re-populated after it was zeroed,
+>>>> because of page table manipulation that shouldn't be
+>>>> occurring anymore for a dying domain.
+>>>
+>>> AFAICT, the zeroing is happening in ->teardown() helper.
+>>>
+>>> It is only called when the domain is fully destroyed (see call in
+>>> arch_domain_destroy()). This will happen much after relinquishing the code.
+>>>
+>>> Could you clarify why you think it is already zeroed and by who?
+>>
+>> ... trusted you on what you stated there. But perhaps I somehow
+>> misunderstood that sentence to mean you want to put your addition
+>> into the teardown functions, when apparently you meant to invoke
+>> them earlier in the process. Without clearly identifying why this
+>> would be a safe thing to do, I couldn't imagine that's what you
+>> suggest as alternative. 
+> 
+> This was a wording issue. I meant moving ->teardown() before (or calling 
+> from) iommu_free_pgtables().
+> 
+> Shall I introduce a new callback then?
 
-The very first time you get here, how does errno end up being
-set to ENOMEM? To me
-
-    do {
-        create.fault_ttl++;
-        rc = xc_domain_create(xch, &domid, &create);
-    } while ( rc && errno == ENOMEM );
-
-would seem more natural (and also avoid the somewhat odd
-"rc = 1").
+Earlier zeroing won't help unless you prevent re-population, or
+unless you make the code capable of telling "still zero" from
+"already zero". But I have to admit I'd like to also have Paul's
+opinion on the matter.
 
 Jan
+
+>> This is because the interdependencies of
+>> the IOMMU code are pretty hard to follow at times, and hence any
+>> such re-ordering has a fair risk of breaking something elsewhere.
+> 
+> Right, this is another reason to try to get most of my fix 
+> self-contained rather relying on top-layer call to protect against a 
+> domain dying.
+> 
+> Cheers,
+> 
+
 
