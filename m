@@ -2,45 +2,42 @@ Return-Path: <SRS0=Rlng=F3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7FFEC433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:30:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97BB4C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 53B4F20897
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:30:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53B4F20897
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4C98F222BB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4C98F222BB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58492.102914 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58498.102938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks71I-00084f-6O; Wed, 23 Dec 2020 16:29:48 +0000
+	id 1ks76V-0000Xt-1d; Wed, 23 Dec 2020 16:35:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58492.102914; Wed, 23 Dec 2020 16:29:48 +0000
+Received: by outflank-mailman (output) from mailman id 58498.102938; Wed, 23 Dec 2020 16:35:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks71I-00084X-35; Wed, 23 Dec 2020 16:29:48 +0000
-Received: by outflank-mailman (input) for mailman id 58492;
- Wed, 23 Dec 2020 16:29:47 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ks71G-00084S-Tp
- for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:29:46 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ks71G-0002Rp-GM; Wed, 23 Dec 2020 16:29:46 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ks71G-0008Th-94; Wed, 23 Dec 2020 16:29:46 +0000
+	id 1ks76U-0000Xm-UI; Wed, 23 Dec 2020 16:35:10 +0000
+Received: by outflank-mailman (input) for mailman id 58498;
+ Wed, 23 Dec 2020 16:35:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0ifz=F3=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1ks76T-0000XT-JQ
+ for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:09 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7a4fefce-e134-48d8-8e6e-ee2771c0087a;
+ Wed, 23 Dec 2020 16:35:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,130 +49,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=zeydQ+mP2CjwOQrSIub+z6mwj76ksAUVMoPrCWTWidg=; b=AtULZQvtKbonL+eY5gTo4uoRoO
-	GNKXfO1sSUeEqj7xfQJV/LGDONIEb7Wcbmmmnw03T0JTR3uE0Lyc7EXR/H5b9acjAxT1G4PeQenXR
-	i+Ds606o4MH8HsKGMIAlduc+EzO/0LGEMSBHtNnVpmbubxYGu2rCv22QPrTHyUHmlVD4=;
-Subject: Re: [PATCH for-4.15 3/4] [RFC] xen/iommu: x86: Clear the root
- page-table before freeing the page-tables
-To: Jan Beulich <jbeulich@suse.com>
-Cc: hongyxia@amazon.co.uk, Julien Grall <jgrall@amazon.com>,
- Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org
-References: <20201222154338.9459-1-julien@xen.org>
- <20201222154338.9459-4-julien@xen.org>
- <499e6d5a-e8ac-56db-1af9-70469b6a06b9@suse.com>
- <8b394c44-5bdb-9d82-b211-5a4ee3473568@xen.org>
- <19e92d90-ed9a-4bd6-79f4-b761b5a039c6@suse.com>
- <96ce1b10-9764-b71e-ac26-982ba8dcc34d@xen.org>
- <092e5199-7eab-2722-7f0b-43fb3c8b2065@suse.com>
- <281188a0-f632-c0a1-4591-0a66ef0068f5@xen.org>
- <d7b866b6-118a-f873-f8df-eb112b708fe3@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <0699ad7a-7c3b-e1e8-c7f7-0bfb54d03c78@xen.org>
-Date: Wed, 23 Dec 2020 16:29:44 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.6.0
+X-Inumbo-ID: 7a4fefce-e134-48d8-8e6e-ee2771c0087a
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1608741308;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=mIHqFXZKILQ2PSe2CqBuCc+ylOQGqiB+Dim1E7v3fY8=;
+  b=WkE9fwTVcyLFjX/EI973IXox2c9pLJdNO57vvGgTJARIhW5hgFuzQG5V
+   XkrHo7Vms8wGKB+KJIoLM0J5uav9q3HwCfKdAtRudpekuDK/AXmyJAEMj
+   x6tzRvDGUVzPNROoFk2+cUrhZ7YjJ50D8wCyTriz9I4o5llrCNdDa1zRz
+   A=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: UwZgj87PZM7v3t9dGeOvfWHE/mUNZGCeT53o7uemvG8vc3yvXqwO3G70+qQ+Wu0OGDHrhLXkWF
+ QvlgSamH7GIOFgWyzWn4r9ssVvDjxuJj8fm9XPeoO7FAPZvpf6eZM1Q0v/1Z3Skxj2iMJyzuHL
+ YboTG/z/gC3qnsjxNrhzGk7AVLtZ25XvMxupuqpWjapIRWkholW9km0W78ANwapUMM0pA9dh6i
+ /9WFsUEPiuQCukHkLigjmtCC1Qz8i0UOpOIwosrJ8LpRSl9nZX3eQjljGZHLdt7JWZScElnI5I
+ 35M=
+X-SBRS: 5.2
+X-MesageID: 34085172
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.78,441,1599537600"; 
+   d="scan'208";a="34085172"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH 1/4] xen/dmalloc: Introduce dmalloc() APIs
+Date: Wed, 23 Dec 2020 16:34:39 +0000
+Message-ID: <20201223163442.8840-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20201223163442.8840-1-andrew.cooper3@citrix.com>
+References: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <d7b866b6-118a-f873-f8df-eb112b708fe3@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
+Wrappers for xmalloc() and friends, which track allocations tied to a specific
+domain.
 
+Check for any leaked memory at domain destruction time.
 
-On 23/12/2020 16:24, Jan Beulich wrote:
-> On 23.12.2020 17:16, Julien Grall wrote:
->> On 23/12/2020 16:11, Jan Beulich wrote:
->>> On 23.12.2020 16:16, Julien Grall wrote:
->>>> On 23/12/2020 15:00, Jan Beulich wrote:
->>>>> On 23.12.2020 15:56, Julien Grall wrote:
->>>>>> On 23/12/2020 14:12, Jan Beulich wrote:
->>>>>>> On 22.12.2020 16:43, Julien Grall wrote:
->>>>>>>> This is an RFC because it would break AMD IOMMU driver. One option would
->>>>>>>> be to move the call to the teardown callback earlier on. Any opinions?
-> 
-> Please note this (in your original submission). I simply ...
-> 
->>>>>>> We already have
->>>>>>>
->>>>>>> static void amd_iommu_domain_destroy(struct domain *d)
->>>>>>> {
->>>>>>>         dom_iommu(d)->arch.amd.root_table = NULL;
->>>>>>> }
->>>>>>>
->>>>>>> and this function is AMD's teardown handler. Hence I suppose
->>>>>>> doing the same for VT-d would be quite reasonable. And really
->>>>>>> VT-d's iommu_domain_teardown() also already has
->>>>>>>
->>>>>>>         hd->arch.vtd.pgd_maddr = 0;
->>>>>>
->>>>>> Let me have a look if that works.
->>>>>>
->>>>>>>
->>>>>>> I guess what's missing is prevention of the root table
->>>>>>> getting re-setup.
->>>>>>
->>>>>> This is taken care in the follow-up patch by forbidding page-table
->>>>>> allocation. I can mention it in the commit message.
->>>>>
->>>>> My expectation is that with that subsequent change the change here
->>>>> (or any variant of it) would become unnecessary.
->>>>
->>>> I am not be sure. iommu_unmap() would still get called from put_page().
->>>> Are you suggesting to gate the code if d->is_dying as well?
->>>
->>> Unmap shouldn't be allocating any memory right now, as in
->>> non-shared-page-table mode we don't install any superpages
->>> (unless I misremember).
->>
->> It doesn't allocate memory, but it will try to access the IOMMU
->> page-tables (see more below).
->>
->>>
->>>> Even if this patch is deemed to be unecessary to fix the issue.
->>>> This issue was quite hard to chase/reproduce.
->>>>
->>>> I think it would still be good to harden the code by zeroing
->>>> hd->arch.vtd.pgd_maddr to avoid anyone else wasting 2 days because the
->>>> pointer was still "valid".
->>>
->>> But my point was that this zeroing already happens.
->>> What I
->>> suspect is that it gets re-populated after it was zeroed,
->>> because of page table manipulation that shouldn't be
->>> occurring anymore for a dying domain.
->>
->> AFAICT, the zeroing is happening in ->teardown() helper.
->>
->> It is only called when the domain is fully destroyed (see call in
->> arch_domain_destroy()). This will happen much after relinquishing the code.
->>
->> Could you clarify why you think it is already zeroed and by who?
-> 
-> ... trusted you on what you stated there. But perhaps I somehow
-> misunderstood that sentence to mean you want to put your addition
-> into the teardown functions, when apparently you meant to invoke
-> them earlier in the process. Without clearly identifying why this
-> would be a safe thing to do, I couldn't imagine that's what you
-> suggest as alternative. 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Tamas K Lengyel <tamas@tklengyel.com>
 
-This was a wording issue. I meant moving ->teardown() before (or calling 
-from) iommu_free_pgtables().
+RFC:
+ * This probably wants to be less fatal in release builds
+ * In an ideal world, we'd also want to count the total number of bytes
+   allocated from the xmalloc heap, which would be interesting to print in the
+   'q' debugkey.  However, that data is fairly invasive to obtain.
+ * More complicated logic could track the origins of each allocation, and be
+   able to identify which one(s) leaked.
+---
+ xen/common/Makefile       |  1 +
+ xen/common/dmalloc.c      | 19 +++++++++++++++++++
+ xen/common/domain.c       |  6 ++++++
+ xen/include/xen/dmalloc.h | 29 +++++++++++++++++++++++++++++
+ xen/include/xen/sched.h   |  2 ++
+ 5 files changed, 57 insertions(+)
+ create mode 100644 xen/common/dmalloc.c
+ create mode 100644 xen/include/xen/dmalloc.h
 
-Shall I introduce a new callback then?
-
-> This is because the interdependencies of
-> the IOMMU code are pretty hard to follow at times, and hence any
-> such re-ordering has a fair risk of breaking something elsewhere.
-
-Right, this is another reason to try to get most of my fix 
-self-contained rather relying on top-layer call to protect against a 
-domain dying.
-
-Cheers,
-
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 7a4e652b57..c5d9c23fd1 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -5,6 +5,7 @@ obj-$(CONFIG_CORE_PARKING) += core_parking.o
+ obj-y += cpu.o
+ obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
+ obj-$(CONFIG_HAS_DEVICE_TREE) += device_tree.o
++obj-y += dmalloc.o
+ obj-y += domain.o
+ obj-y += event_2l.o
+ obj-y += event_channel.o
+diff --git a/xen/common/dmalloc.c b/xen/common/dmalloc.c
+new file mode 100644
+index 0000000000..e3a0e546c2
+--- /dev/null
++++ b/xen/common/dmalloc.c
+@@ -0,0 +1,19 @@
++#include <xen/dmalloc.h>
++#include <xen/sched.h>
++#include <xen/xmalloc.h>
++
++void dfree(struct domain *d, void *ptr)
++{
++    atomic_dec(&d->dalloc_heap);
++    xfree(ptr);
++}
++
++void *_dzalloc(struct domain *d, size_t size, size_t align)
++{
++    void *ptr = _xmalloc(size, align);
++
++    if ( ptr )
++        atomic_inc(&d->dalloc_heap);
++
++    return ptr;
++}
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index d151be3f36..1db1c0e70a 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -332,6 +332,8 @@ static int domain_teardown(struct domain *d)
+  */
+ static void _domain_destroy(struct domain *d)
+ {
++    int outstanding;
++
+     BUG_ON(!d->is_dying);
+     BUG_ON(atomic_read(&d->refcnt) != DOMAIN_DESTROYED);
+ 
+@@ -347,6 +349,10 @@ static void _domain_destroy(struct domain *d)
+ 
+     lock_profile_deregister_struct(LOCKPROF_TYPE_PERDOM, d);
+ 
++    outstanding = atomic_read(&d->dalloc_heap);
++    if ( outstanding )
++        panic("%pd has %d outstanding heap allocations\n", d, outstanding);
++
+     free_domain_struct(d);
+ }
+ 
+diff --git a/xen/include/xen/dmalloc.h b/xen/include/xen/dmalloc.h
+new file mode 100644
+index 0000000000..a90cf0259c
+--- /dev/null
++++ b/xen/include/xen/dmalloc.h
+@@ -0,0 +1,29 @@
++#ifndef XEN_DMALLOC_H
++#define XEN_DMALLOC_H
++
++#include <xen/types.h>
++
++struct domain;
++
++#define dzalloc_array(d, _type, _num)                                   \
++    ((_type *)_dzalloc_array(d, sizeof(_type), __alignof__(_type), _num))
++
++
++void dfree(struct domain *d, void *ptr);
++
++#define DFREE(d, p)                             \
++    do {                                        \
++        dfree(d, p);                            \
++        (p) = NULL;                             \
++    } while ( 0 )
++
++
++void *_dzalloc(struct domain *d, size_t size, size_t align);
++
++static inline void *_dzalloc_array(struct domain *d, size_t size,
++                                   size_t align, size_t num)
++{
++    return _dzalloc(d, size * num, align);
++}
++
++#endif /* XEN_DMALLOC_H */
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 3e46384a3c..8ed8b55a1e 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -349,6 +349,8 @@ struct domain
+     atomic_t         shr_pages;         /* shared pages */
+     atomic_t         paged_pages;       /* paged-out pages */
+ 
++    atomic_t         dalloc_heap;       /* Number of xmalloc-like allocations. */
++
+     /* Scheduling. */
+     void            *sched_priv;    /* scheduler-specific data */
+     struct sched_unit *sched_unit_list;
 -- 
-Julien Grall
+2.11.0
+
 
