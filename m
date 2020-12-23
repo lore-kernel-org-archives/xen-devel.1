@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FE83C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE783C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2EAA12229C
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2EAA12229C
+	by mail.kernel.org (Postfix) with ESMTPS id 71B612226A
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 71B612226A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58496.102926 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58500.102962 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks76O-0000Vd-PO; Wed, 23 Dec 2020 16:35:04 +0000
+	id 1ks76Z-0000dH-RD; Wed, 23 Dec 2020 16:35:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58496.102926; Wed, 23 Dec 2020 16:35:04 +0000
+Received: by outflank-mailman (output) from mailman id 58500.102962; Wed, 23 Dec 2020 16:35:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks76O-0000VW-M7; Wed, 23 Dec 2020 16:35:04 +0000
-Received: by outflank-mailman (input) for mailman id 58496;
- Wed, 23 Dec 2020 16:35:03 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1ks76Z-0000d8-MF; Wed, 23 Dec 2020 16:35:15 +0000
+Received: by outflank-mailman (input) for mailman id 58500;
+ Wed, 23 Dec 2020 16:35:14 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0ifz=F3=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ks76N-0000VR-Ae
- for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:03 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b8a901d4-b239-4ab3-821f-884361ec54fa;
- Wed, 23 Dec 2020 16:35:02 +0000 (UTC)
+ id 1ks76Y-0000XT-GZ
+ for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:14 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a3ad9b30-209e-4365-9cc7-725099a7b43b;
+ Wed, 23 Dec 2020 16:35:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,29 +49,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8a901d4-b239-4ab3-821f-884361ec54fa
+X-Inumbo-ID: a3ad9b30-209e-4365-9cc7-725099a7b43b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1608741302;
+  d=citrix.com; s=securemail; t=1608741309;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=J12nue8zO9s1xfEu2GlpYvaW7r0FVfxhrRgoIRus5is=;
-  b=bgpdTXCMu22X0z5pC7SfxjK8QGXdHEGp+de9mgmK5s3oC5Eo17hkqZYN
-   B6XUc2coSGTcrDbE2SCsCrOnwQOXplKtzsNT+gyvRCHX09ep4aXDUIIzH
-   kICIUV15djP+NvQgOdlBJDrRAHHN+2FqvYT0oqnvRg/bH7EBE2SdqB+Ga
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 8BUBcM15IGcJTsBlq3qedEFKzHxVzA/I0oq5XV2y2cYzzzjUoH94d8wFpBECH75fjznpvFE9ez
- i707r9ToS/uy3f0vPpQ7eIfb27+vVWeXAujFWYH1fBbR5O/dWkNZsCFb9YWhZSMnlkX21lY6xb
- +y4FK9R+6CZ8Rknb+4erqcHbIW3ch0uHrByrJC++bQiKvsOfxQFeVQsysgAHlemBUTy/aEfdUp
- oQZ8E490HoiFDsI1wzkX6nD283Dl+E4riMQ0YW2gIb8Mh8iQqbUGuD5ic8aEAwVLefSH9f4zJJ
- Nvk=
+  bh=CMpXZjooSuf3izRShMQsyPS9IRnkTZlUjBWpT0DP1So=;
+  b=hyMzwOKMxhA7UCo9DlwYJC2DFqp9rSHIDpxPc11vpwMf84PtzBXTncYf
+   XpCP3S7c+Mut+3AKwVu9IGne4AughogITLj/yvfIDSaYa5V+GgisqNzJQ
+   ygLAfEcKNBiwgOq5u6zO8+Cjk/QjEmeZSPI4f39XIWjiGAlpgsGPi2ZiE
+   E=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 4KLhY6pCuhQiyyEWtLF4uW9Mh8tQVFNJ9+5WzDNSLa9nzav2Dps4WOqWJigTKdRvXNSRos3a4s
+ UxB1L2Te3Mp2B6BzUBPZ7/g/KZLzKBDpPOIewPyGCwOG908PeIxFr/IUc84xTZKAvOeuSaXQmt
+ n5yQl8v2A33a+/FRVCgTgQ1REP2EcWbbn9aQCbzgxsQOhPp0YvQquKNycOSipMqgdkwDOT0jdI
+ TIvmyvKIt5B1Mpsp7XdZKd/C6iV/CIB4swA5d4I29r0M5grsAzkRk8C/YwcqY5W71+JJJDviGK
+ mGI=
 X-SBRS: 5.2
-X-MesageID: 33844236
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 34085173
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.78,441,1599537600"; 
-   d="scan'208";a="33844236"
+   d="scan'208";a="34085173"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -78,15 +79,17 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH 4/4] tools/misc: Test for fault injection
-Date: Wed, 23 Dec 2020 16:34:42 +0000
-Message-ID: <20201223163442.8840-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/4] xen/evtchn: Switch to dmalloc
+Date: Wed, 23 Dec 2020 16:34:40 +0000
+Message-ID: <20201223163442.8840-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 References: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+
+This causes memory allocations to be tied to domain in question.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -98,114 +101,75 @@ CC: Julien Grall <julien@xen.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
-RFC: This wants expanding to a few more "default" configurations, and then
-some thought needs putting torwards automating it.
+RFC: Likely more to convert.  This is just a minimal attempt.
 ---
- tools/misc/.gitignore      |  1 +
- tools/misc/Makefile        |  5 +++++
- tools/misc/xen-fault-ttl.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 62 insertions(+)
- create mode 100644 tools/misc/xen-fault-ttl.c
+ xen/common/event_channel.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/tools/misc/.gitignore b/tools/misc/.gitignore
-index c5fe2cfccd..8d117c3b7d 100644
---- a/tools/misc/.gitignore
-+++ b/tools/misc/.gitignore
-@@ -1 +1,2 @@
-+xen-fault-ttl
- xen-ucode
-diff --git a/tools/misc/Makefile b/tools/misc/Makefile
-index 7d37f297a9..5c1ed9a284 100644
---- a/tools/misc/Makefile
-+++ b/tools/misc/Makefile
-@@ -9,6 +9,7 @@ CFLAGS += $(CFLAGS_libxenctrl)
- CFLAGS += $(CFLAGS_libxenguest)
- CFLAGS += $(CFLAGS_xeninclude)
- CFLAGS += $(CFLAGS_libxenstore)
-+CFLAGS += -Wno-declaration-after-statement
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index 4a48094356..f0ca0933e3 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -16,6 +16,7 @@
  
- # Everything to be installed in regular bin/
- INSTALL_BIN-$(CONFIG_X86)      += xen-cpuid
-@@ -25,6 +26,7 @@ INSTALL_SBIN-$(CONFIG_X86)     += xen-lowmemd
- INSTALL_SBIN-$(CONFIG_X86)     += xen-mfndump
- INSTALL_SBIN-$(CONFIG_X86)     += xen-ucode
- INSTALL_SBIN                   += xencov
-+INSTALL_SBIN                   += xen-fault-ttl
- INSTALL_SBIN                   += xenhypfs
- INSTALL_SBIN                   += xenlockprof
- INSTALL_SBIN                   += xenperf
-@@ -76,6 +78,9 @@ distclean: clean
- xen-cpuid: xen-cpuid.o
- 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(APPEND_LDFLAGS)
+ #include "event_channel.h"
  
-+xen-fault-ttl: xen-fault-ttl.o
-+	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(APPEND_LDFLAGS)
-+
- xen-hvmctx: xen-hvmctx.o
- 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
++#include <xen/dmalloc.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/errno.h>
+@@ -153,7 +154,7 @@ static struct evtchn *alloc_evtchn_bucket(struct domain *d, unsigned int port)
+     struct evtchn *chn;
+     unsigned int i;
  
-diff --git a/tools/misc/xen-fault-ttl.c b/tools/misc/xen-fault-ttl.c
-new file mode 100644
-index 0000000000..e7953443da
---- /dev/null
-+++ b/tools/misc/xen-fault-ttl.c
-@@ -0,0 +1,56 @@
-+#include <stdio.h>
-+#include <err.h>
-+#include <string.h>
-+#include <errno.h>
-+
-+#include <xenctrl.h>
-+
-+int main(int argc, char **argv)
-+{
-+    int rc;
-+    xc_interface *xch = xc_interface_open(NULL, NULL, 0);
-+
-+    if ( !xch )
-+        err(1, "xc_interface_open");
-+
-+    struct xen_domctl_createdomain create = {
-+        .fault_ttl = 1,
-+        .flags = (XEN_DOMCTL_CDF_hvm |
-+                  XEN_DOMCTL_CDF_hap),
-+        .max_vcpus = 1,
-+        .max_evtchn_port = -1,
-+        .max_grant_frames = 64,
-+        .max_maptrack_frames = 1024,
-+        .arch = {
-+            .emulation_flags = XEN_X86_EMU_LAPIC,
-+        },
-+    };
-+    uint32_t domid = 0;
-+
-+    for ( rc = 1; rc && errno == ENOMEM; create.fault_ttl++ )
-+        rc = xc_domain_create(xch, &domid, &create);
-+
-+    if ( rc == 0 )
-+    {
-+        printf("Created d%u with fault_ttl of %u\n", domid, create.fault_ttl);
-+
-+        xc_domain_destroy(xch, domid);
-+    }
-+    else
-+        printf("Domain creation failed: %d: %s\n",
-+               -errno, strerror(errno));
-+
-+    xc_interface_close(xch);
-+
-+    return 0;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+-    chn = xzalloc_array(struct evtchn, EVTCHNS_PER_BUCKET);
++    chn = dzalloc_array(d, struct evtchn, EVTCHNS_PER_BUCKET);
+     if ( !chn )
+         return NULL;
+ 
+@@ -182,7 +183,7 @@ static void free_evtchn_bucket(struct domain *d, struct evtchn *bucket)
+     for ( i = 0; i < EVTCHNS_PER_BUCKET; i++ )
+         xsm_free_security_evtchn(bucket + i);
+ 
+-    xfree(bucket);
++    dfree(d, bucket);
+ }
+ 
+ int evtchn_allocate_port(struct domain *d, evtchn_port_t port)
+@@ -204,7 +205,7 @@ int evtchn_allocate_port(struct domain *d, evtchn_port_t port)
+ 
+         if ( !group_from_port(d, port) )
+         {
+-            grp = xzalloc_array(struct evtchn *, BUCKETS_PER_GROUP);
++            grp = dzalloc_array(d, struct evtchn *, BUCKETS_PER_GROUP);
+             if ( !grp )
+                 return -ENOMEM;
+             group_from_port(d, port) = grp;
+@@ -1488,7 +1489,7 @@ int evtchn_init(struct domain *d, unsigned int max_port)
+     write_atomic(&d->active_evtchns, 0);
+ 
+ #if MAX_VIRT_CPUS > BITS_PER_LONG
+-    d->poll_mask = xzalloc_array(unsigned long, BITS_TO_LONGS(d->max_vcpus));
++    d->poll_mask = dzalloc_array(d, unsigned long, BITS_TO_LONGS(d->max_vcpus));
+     if ( !d->poll_mask )
+     {
+         free_evtchn_bucket(d, d->evtchn);
+@@ -1545,13 +1546,12 @@ void evtchn_destroy_final(struct domain *d)
+             continue;
+         for ( j = 0; j < BUCKETS_PER_GROUP; j++ )
+             free_evtchn_bucket(d, d->evtchn_group[i][j]);
+-        xfree(d->evtchn_group[i]);
++        dfree(d, d->evtchn_group[i]);
+     }
+     free_evtchn_bucket(d, d->evtchn);
+ 
+ #if MAX_VIRT_CPUS > BITS_PER_LONG
+-    xfree(d->poll_mask);
+-    d->poll_mask = NULL;
++    DFREE(d, d->poll_mask);
+ #endif
+ }
+ 
 -- 
 2.11.0
 
