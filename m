@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97BB4C433DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FE83C433E0
 	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4C98F222BB
+	by mail.kernel.org (Postfix) with ESMTPS id 2EAA12229C
 	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4C98F222BB
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2EAA12229C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58498.102938 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58496.102926 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks76V-0000Xt-1d; Wed, 23 Dec 2020 16:35:11 +0000
+	id 1ks76O-0000Vd-PO; Wed, 23 Dec 2020 16:35:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58498.102938; Wed, 23 Dec 2020 16:35:11 +0000
+Received: by outflank-mailman (output) from mailman id 58496.102926; Wed, 23 Dec 2020 16:35:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks76U-0000Xm-UI; Wed, 23 Dec 2020 16:35:10 +0000
-Received: by outflank-mailman (input) for mailman id 58498;
- Wed, 23 Dec 2020 16:35:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ks76O-0000VW-M7; Wed, 23 Dec 2020 16:35:04 +0000
+Received: by outflank-mailman (input) for mailman id 58496;
+ Wed, 23 Dec 2020 16:35:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0ifz=F3=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ks76T-0000XT-JQ
- for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:09 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7a4fefce-e134-48d8-8e6e-ee2771c0087a;
- Wed, 23 Dec 2020 16:35:08 +0000 (UTC)
+ id 1ks76N-0000VR-Ae
+ for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:03 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b8a901d4-b239-4ab3-821f-884361ec54fa;
+ Wed, 23 Dec 2020 16:35:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,29 +48,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a4fefce-e134-48d8-8e6e-ee2771c0087a
+X-Inumbo-ID: b8a901d4-b239-4ab3-821f-884361ec54fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1608741308;
+  d=citrix.com; s=securemail; t=1608741302;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=mIHqFXZKILQ2PSe2CqBuCc+ylOQGqiB+Dim1E7v3fY8=;
-  b=WkE9fwTVcyLFjX/EI973IXox2c9pLJdNO57vvGgTJARIhW5hgFuzQG5V
-   XkrHo7Vms8wGKB+KJIoLM0J5uav9q3HwCfKdAtRudpekuDK/AXmyJAEMj
-   x6tzRvDGUVzPNROoFk2+cUrhZ7YjJ50D8wCyTriz9I4o5llrCNdDa1zRz
-   A=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: UwZgj87PZM7v3t9dGeOvfWHE/mUNZGCeT53o7uemvG8vc3yvXqwO3G70+qQ+Wu0OGDHrhLXkWF
- QvlgSamH7GIOFgWyzWn4r9ssVvDjxuJj8fm9XPeoO7FAPZvpf6eZM1Q0v/1Z3Skxj2iMJyzuHL
- YboTG/z/gC3qnsjxNrhzGk7AVLtZ25XvMxupuqpWjapIRWkholW9km0W78ANwapUMM0pA9dh6i
- /9WFsUEPiuQCukHkLigjmtCC1Qz8i0UOpOIwosrJ8LpRSl9nZX3eQjljGZHLdt7JWZScElnI5I
- 35M=
+  bh=J12nue8zO9s1xfEu2GlpYvaW7r0FVfxhrRgoIRus5is=;
+  b=bgpdTXCMu22X0z5pC7SfxjK8QGXdHEGp+de9mgmK5s3oC5Eo17hkqZYN
+   B6XUc2coSGTcrDbE2SCsCrOnwQOXplKtzsNT+gyvRCHX09ep4aXDUIIzH
+   kICIUV15djP+NvQgOdlBJDrRAHHN+2FqvYT0oqnvRg/bH7EBE2SdqB+Ga
+   U=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 8BUBcM15IGcJTsBlq3qedEFKzHxVzA/I0oq5XV2y2cYzzzjUoH94d8wFpBECH75fjznpvFE9ez
+ i707r9ToS/uy3f0vPpQ7eIfb27+vVWeXAujFWYH1fBbR5O/dWkNZsCFb9YWhZSMnlkX21lY6xb
+ +y4FK9R+6CZ8Rknb+4erqcHbIW3ch0uHrByrJC++bQiKvsOfxQFeVQsysgAHlemBUTy/aEfdUp
+ oQZ8E490HoiFDsI1wzkX6nD283Dl+E4riMQ0YW2gIb8Mh8iQqbUGuD5ic8aEAwVLefSH9f4zJJ
+ Nvk=
 X-SBRS: 5.2
-X-MesageID: 34085172
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 33844236
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.78,441,1599537600"; 
-   d="scan'208";a="34085172"
+   d="scan'208";a="33844236"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -79,20 +78,15 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH 1/4] xen/dmalloc: Introduce dmalloc() APIs
-Date: Wed, 23 Dec 2020 16:34:39 +0000
-Message-ID: <20201223163442.8840-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/4] tools/misc: Test for fault injection
+Date: Wed, 23 Dec 2020 16:34:42 +0000
+Message-ID: <20201223163442.8840-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 References: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-
-Wrappers for xmalloc() and friends, which track allocations tied to a specific
-domain.
-
-Check for any leaked memory at domain destruction time.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -104,132 +98,114 @@ CC: Julien Grall <julien@xen.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
-RFC:
- * This probably wants to be less fatal in release builds
- * In an ideal world, we'd also want to count the total number of bytes
-   allocated from the xmalloc heap, which would be interesting to print in the
-   'q' debugkey.  However, that data is fairly invasive to obtain.
- * More complicated logic could track the origins of each allocation, and be
-   able to identify which one(s) leaked.
+RFC: This wants expanding to a few more "default" configurations, and then
+some thought needs putting torwards automating it.
 ---
- xen/common/Makefile       |  1 +
- xen/common/dmalloc.c      | 19 +++++++++++++++++++
- xen/common/domain.c       |  6 ++++++
- xen/include/xen/dmalloc.h | 29 +++++++++++++++++++++++++++++
- xen/include/xen/sched.h   |  2 ++
- 5 files changed, 57 insertions(+)
- create mode 100644 xen/common/dmalloc.c
- create mode 100644 xen/include/xen/dmalloc.h
+ tools/misc/.gitignore      |  1 +
+ tools/misc/Makefile        |  5 +++++
+ tools/misc/xen-fault-ttl.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 62 insertions(+)
+ create mode 100644 tools/misc/xen-fault-ttl.c
 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 7a4e652b57..c5d9c23fd1 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -5,6 +5,7 @@ obj-$(CONFIG_CORE_PARKING) += core_parking.o
- obj-y += cpu.o
- obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
- obj-$(CONFIG_HAS_DEVICE_TREE) += device_tree.o
-+obj-y += dmalloc.o
- obj-y += domain.o
- obj-y += event_2l.o
- obj-y += event_channel.o
-diff --git a/xen/common/dmalloc.c b/xen/common/dmalloc.c
+diff --git a/tools/misc/.gitignore b/tools/misc/.gitignore
+index c5fe2cfccd..8d117c3b7d 100644
+--- a/tools/misc/.gitignore
++++ b/tools/misc/.gitignore
+@@ -1 +1,2 @@
++xen-fault-ttl
+ xen-ucode
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 7d37f297a9..5c1ed9a284 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -9,6 +9,7 @@ CFLAGS += $(CFLAGS_libxenctrl)
+ CFLAGS += $(CFLAGS_libxenguest)
+ CFLAGS += $(CFLAGS_xeninclude)
+ CFLAGS += $(CFLAGS_libxenstore)
++CFLAGS += -Wno-declaration-after-statement
+ 
+ # Everything to be installed in regular bin/
+ INSTALL_BIN-$(CONFIG_X86)      += xen-cpuid
+@@ -25,6 +26,7 @@ INSTALL_SBIN-$(CONFIG_X86)     += xen-lowmemd
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-mfndump
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-ucode
+ INSTALL_SBIN                   += xencov
++INSTALL_SBIN                   += xen-fault-ttl
+ INSTALL_SBIN                   += xenhypfs
+ INSTALL_SBIN                   += xenlockprof
+ INSTALL_SBIN                   += xenperf
+@@ -76,6 +78,9 @@ distclean: clean
+ xen-cpuid: xen-cpuid.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(APPEND_LDFLAGS)
+ 
++xen-fault-ttl: xen-fault-ttl.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(APPEND_LDFLAGS)
++
+ xen-hvmctx: xen-hvmctx.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
+diff --git a/tools/misc/xen-fault-ttl.c b/tools/misc/xen-fault-ttl.c
 new file mode 100644
-index 0000000000..e3a0e546c2
+index 0000000000..e7953443da
 --- /dev/null
-+++ b/xen/common/dmalloc.c
-@@ -0,0 +1,19 @@
-+#include <xen/dmalloc.h>
-+#include <xen/sched.h>
-+#include <xen/xmalloc.h>
++++ b/tools/misc/xen-fault-ttl.c
+@@ -0,0 +1,56 @@
++#include <stdio.h>
++#include <err.h>
++#include <string.h>
++#include <errno.h>
 +
-+void dfree(struct domain *d, void *ptr)
++#include <xenctrl.h>
++
++int main(int argc, char **argv)
 +{
-+    atomic_dec(&d->dalloc_heap);
-+    xfree(ptr);
++    int rc;
++    xc_interface *xch = xc_interface_open(NULL, NULL, 0);
++
++    if ( !xch )
++        err(1, "xc_interface_open");
++
++    struct xen_domctl_createdomain create = {
++        .fault_ttl = 1,
++        .flags = (XEN_DOMCTL_CDF_hvm |
++                  XEN_DOMCTL_CDF_hap),
++        .max_vcpus = 1,
++        .max_evtchn_port = -1,
++        .max_grant_frames = 64,
++        .max_maptrack_frames = 1024,
++        .arch = {
++            .emulation_flags = XEN_X86_EMU_LAPIC,
++        },
++    };
++    uint32_t domid = 0;
++
++    for ( rc = 1; rc && errno == ENOMEM; create.fault_ttl++ )
++        rc = xc_domain_create(xch, &domid, &create);
++
++    if ( rc == 0 )
++    {
++        printf("Created d%u with fault_ttl of %u\n", domid, create.fault_ttl);
++
++        xc_domain_destroy(xch, domid);
++    }
++    else
++        printf("Domain creation failed: %d: %s\n",
++               -errno, strerror(errno));
++
++    xc_interface_close(xch);
++
++    return 0;
 +}
 +
-+void *_dzalloc(struct domain *d, size_t size, size_t align)
-+{
-+    void *ptr = _xmalloc(size, align);
-+
-+    if ( ptr )
-+        atomic_inc(&d->dalloc_heap);
-+
-+    return ptr;
-+}
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index d151be3f36..1db1c0e70a 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -332,6 +332,8 @@ static int domain_teardown(struct domain *d)
-  */
- static void _domain_destroy(struct domain *d)
- {
-+    int outstanding;
-+
-     BUG_ON(!d->is_dying);
-     BUG_ON(atomic_read(&d->refcnt) != DOMAIN_DESTROYED);
- 
-@@ -347,6 +349,10 @@ static void _domain_destroy(struct domain *d)
- 
-     lock_profile_deregister_struct(LOCKPROF_TYPE_PERDOM, d);
- 
-+    outstanding = atomic_read(&d->dalloc_heap);
-+    if ( outstanding )
-+        panic("%pd has %d outstanding heap allocations\n", d, outstanding);
-+
-     free_domain_struct(d);
- }
- 
-diff --git a/xen/include/xen/dmalloc.h b/xen/include/xen/dmalloc.h
-new file mode 100644
-index 0000000000..a90cf0259c
---- /dev/null
-+++ b/xen/include/xen/dmalloc.h
-@@ -0,0 +1,29 @@
-+#ifndef XEN_DMALLOC_H
-+#define XEN_DMALLOC_H
-+
-+#include <xen/types.h>
-+
-+struct domain;
-+
-+#define dzalloc_array(d, _type, _num)                                   \
-+    ((_type *)_dzalloc_array(d, sizeof(_type), __alignof__(_type), _num))
-+
-+
-+void dfree(struct domain *d, void *ptr);
-+
-+#define DFREE(d, p)                             \
-+    do {                                        \
-+        dfree(d, p);                            \
-+        (p) = NULL;                             \
-+    } while ( 0 )
-+
-+
-+void *_dzalloc(struct domain *d, size_t size, size_t align);
-+
-+static inline void *_dzalloc_array(struct domain *d, size_t size,
-+                                   size_t align, size_t num)
-+{
-+    return _dzalloc(d, size * num, align);
-+}
-+
-+#endif /* XEN_DMALLOC_H */
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 3e46384a3c..8ed8b55a1e 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -349,6 +349,8 @@ struct domain
-     atomic_t         shr_pages;         /* shared pages */
-     atomic_t         paged_pages;       /* paged-out pages */
- 
-+    atomic_t         dalloc_heap;       /* Number of xmalloc-like allocations. */
-+
-     /* Scheduling. */
-     void            *sched_priv;    /* scheduler-specific data */
-     struct sched_unit *sched_unit_list;
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.11.0
 
