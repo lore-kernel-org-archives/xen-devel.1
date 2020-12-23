@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C954C433E6
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90162C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4BB862226A
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BB862226A
+	by mail.kernel.org (Postfix) with ESMTPS id 513F72226A
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Dec 2020 16:35:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 513F72226A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58499.102949 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58501.102974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks76Y-0000ap-9M; Wed, 23 Dec 2020 16:35:14 +0000
+	id 1ks76e-0000iP-4B; Wed, 23 Dec 2020 16:35:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58499.102949; Wed, 23 Dec 2020 16:35:14 +0000
+Received: by outflank-mailman (output) from mailman id 58501.102974; Wed, 23 Dec 2020 16:35:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ks76Y-0000ah-6F; Wed, 23 Dec 2020 16:35:14 +0000
-Received: by outflank-mailman (input) for mailman id 58499;
- Wed, 23 Dec 2020 16:35:13 +0000
+	id 1ks76e-0000iG-0M; Wed, 23 Dec 2020 16:35:20 +0000
+Received: by outflank-mailman (input) for mailman id 58501;
+ Wed, 23 Dec 2020 16:35:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0ifz=F3=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ks76X-0000XE-4c
- for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:13 +0000
+ id 1ks76c-0000XE-52
+ for xen-devel@lists.xenproject.org; Wed, 23 Dec 2020 16:35:18 +0000
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 82065b73-4d16-402a-9a87-7c23b59efd32;
- Wed, 23 Dec 2020 16:35:08 +0000 (UTC)
+ id 409ce93c-3858-4660-bff6-b2cbe68ad34b;
+ Wed, 23 Dec 2020 16:35:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,29 +48,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82065b73-4d16-402a-9a87-7c23b59efd32
+X-Inumbo-ID: 409ce93c-3858-4660-bff6-b2cbe68ad34b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1608741308;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=42LWWIePVgGkbX3Yus9uh6xAtV4+wGHkGPht/iiTXv4=;
-  b=d3IJCzKpSYRBh/EBrlOTi0sysJTLn9hALLtbC6AVLQti0Bo31RIoqoIq
-   P6xVbB/6nyPCBD+yCqh2a0y8gXoet8h09sjICAN8agpjMurQBMNjBKCBs
-   nfxsl2mIhsajLTJymLm6QvsTn9uAvKfrYc0mE6PNhysnQkflI6x+KADRM
-   4=;
+  d=citrix.com; s=securemail; t=1608741309;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=woFvqUrlRFwkse6aw4Hd13+wrpq/34Y+A2vX8m04mkI=;
+  b=OkJ4PAd4lJXsP1sOAd56FkZXQTWuNwgZbv91tG6BBsT2i1Qcgv8J0IKF
+   xhDFJhuhOwmCCMyHbajLZp7FnGQglyKKSosb5B1VxhdS/Pe+OCqFc2RQy
+   NayE4yiLDJuus42r4LWv27/OKEsHDx4wlGRYAe9+nOa3F/gAsXXV6JTU+
+   8=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 3aDH0fJboDmcJbf6DmZfaG4XpFr1I5ipdPzKHgk9P9ywXPB3915v9EjoBreoYaYuz4HLmkPV6h
- q1GBABUPhd9XylP9+OhOcMqkoIy3T71dOs826xG0Iy3nPEhjyRPJYgRNWrpDd98erssun9eGP3
- XES3Fr3R4v9ZjTXaeSMBCwM8XtMtAV8q+cVkeku0Hh33H9DP68hsedrpwhIcsXmalQFSx6Yovv
- J9UMdJEJ5GT6N0E9NwYBb5dMAbTsQAkM2LG5lqv4MjJLs28rUNq6rkt/QrnIfS2baIY4TPWgSZ
- des=
+IronPort-SDR: cBblqHoX7pzEwiIzuhxQ7YbYc0nU7dAt/nkNXSknMLvwDl8yrY/cZPEAYtPQ5xueh5EKRZlFBY
+ qS2W4jJ3mNvNOlx9GuDKL8RBIyRviWpVQAco+sbYwy+WZ7kQz5CJMjjB4YPTjqHpLcURJV0ggg
+ s+Za10a5BvG/ppyblp5lzA217PFnMQA36OplfyDL5hPafqfImrEexBy5IMOHWPtcyKXAh7aOYH
+ RZVdy63Fth/RZ9mh69AYkJbEC+x5n/CYcjI/+iJJ7DFNN1967BuWk9aSfO1jNoG+Que4EC2d4R
+ B6o=
 X-SBRS: 5.2
-X-MesageID: 33881652
+X-MesageID: 33881654
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.78,441,1599537600"; 
-   d="scan'208";a="33881652"
+   d="scan'208";a="33881654"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -78,111 +78,72 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
 	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
 	<Volodymyr_Babchuk@epam.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH 3/4] xen/domctl: Introduce fault_ttl
-Date: Wed, 23 Dec 2020 16:34:41 +0000
-Message-ID: <20201223163442.8840-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/4] xen: domain-tracked allocations, and fault injection
+Date: Wed, 23 Dec 2020 16:34:38 +0000
+Message-ID: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20201223163442.8840-1-andrew.cooper3@citrix.com>
-References: <20201223163442.8840-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-To inject a simulated resource failure, for testing purposes.
+This was not the christmas hacking project that I was planning to do, but it
+has had some exciting results.
 
-Given a specific set of hypercall parameters, the failure is in a repeatable
-position, for the currently booted Xen.  The exact position of failures is
-highly dependent on the build of Xen, and hardware support.
+After some discussion on an earlier thread, Tamas has successfully got fuzzing
+of Xen working via kfx, and this series is a prototype for providing better
+testing infrastructure.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Tamas K Lengyel <tamas@tklengyel.com>
+And to prove a point, this series has already found a memory leak in ARM's
+dom0less smoke test.
 
-RFC:
- * Probably wants to be Kconfig'd
- * I'm thinking of dropping handle from xen_domctl_createdomain because it's a
-   waste of valuable space.
----
- xen/common/dmalloc.c        | 8 +++++++-
- xen/common/domain.c         | 8 ++++++--
- xen/include/public/domctl.h | 1 +
- xen/include/xen/sched.h     | 1 +
- 4 files changed, 15 insertions(+), 3 deletions(-)
+From https://gitlab.com/xen-project/people/andyhhp/xen/-/jobs/929518792
 
-diff --git a/xen/common/dmalloc.c b/xen/common/dmalloc.c
-index e3a0e546c2..1f5d0f5627 100644
---- a/xen/common/dmalloc.c
-+++ b/xen/common/dmalloc.c
-@@ -10,7 +10,13 @@ void dfree(struct domain *d, void *ptr)
- 
- void *_dzalloc(struct domain *d, size_t size, size_t align)
- {
--    void *ptr = _xmalloc(size, align);
-+    void *ptr;
-+
-+    if ( atomic_read(&d->fault_ttl) &&
-+         atomic_dec_and_test(&d->fault_ttl) )
-+        return NULL;
-+
-+    ptr = _xmalloc(size, align);
- 
-     if ( ptr )
-         atomic_inc(&d->dalloc_heap);
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 1db1c0e70a..cd73321980 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -427,14 +427,18 @@ struct domain *domain_create(domid_t domid,
-     if ( (d = alloc_domain_struct()) == NULL )
-         return ERR_PTR(-ENOMEM);
- 
--    d->options = config ? config->flags : 0;
--
-     /* Sort out our idea of is_system_domain(). */
-     d->domain_id = domid;
- 
-     /* Debug sanity. */
-     ASSERT(is_system_domain(d) ? config == NULL : config != NULL);
- 
-+    if ( config )
-+    {
-+        d->options = config->flags;
-+        atomic_set(&d->fault_ttl, config->fault_ttl);
-+    }
-+
-     /* Sort out our idea of is_control_domain(). */
-     d->is_privileged = is_priv;
- 
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 666aeb71bf..aaa3d66616 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -48,6 +48,7 @@
- /* XEN_DOMCTL_createdomain */
- struct xen_domctl_createdomain {
-     /* IN parameters */
-+    uint32_t fault_ttl;
-     uint32_t ssidref;
-     xen_domain_handle_t handle;
-  /* Is this an HVM guest (as opposed to a PV guest)? */
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 8ed8b55a1e..620a9f20e5 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -349,6 +349,7 @@ struct domain
-     atomic_t         shr_pages;         /* shared pages */
-     atomic_t         paged_pages;       /* paged-out pages */
- 
-+    atomic_t         fault_ttl;         /* Time until a simulated resource failure. */
-     atomic_t         dalloc_heap;       /* Number of xmalloc-like allocations. */
- 
-     /* Scheduling. */
+  (XEN) *** Serial input to DOM0 (type 'CTRL-a' three times to switch input)
+  (XEN) Freed 328kB init memory.
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER4
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER8
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER12
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER16
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER20
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER24
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER28
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER32
+  (XEN) d0v0: vGICD: unhandled word write 0x000000ffffffff to ICACTIVER0
+  (XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=25: not implemented
+  (XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=15: not implemented
+  (XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=15: not implemented
+  (XEN)
+  (XEN) ****************************************
+  (XEN) Panic on CPU 0:
+  (XEN) d1 has 2 outstanding heap allocations
+  (XEN) ****************************************
+  (XEN)
+  (XEN) Reboot in five seconds...
+
+For some reason, neither of the evtchn default memory allocations are freed,
+but it's not clear why d1 shut down to being with.  Stefano - any ideas?
+
+Andrew Cooper (4):
+  xen/dmalloc: Introduce dmalloc() APIs
+  xen/evtchn: Switch to dmalloc
+  xen/domctl: Introduce fault_ttl
+  tools/misc: Test for fault injection
+
+ tools/misc/.gitignore       |  1 +
+ tools/misc/Makefile         |  5 ++++
+ tools/misc/xen-fault-ttl.c  | 56 +++++++++++++++++++++++++++++++++++++++++++++
+ xen/common/Makefile         |  1 +
+ xen/common/dmalloc.c        | 25 ++++++++++++++++++++
+ xen/common/domain.c         | 14 ++++++++++--
+ xen/common/event_channel.c  | 14 ++++++------
+ xen/include/public/domctl.h |  1 +
+ xen/include/xen/dmalloc.h   | 29 +++++++++++++++++++++++
+ xen/include/xen/sched.h     |  3 +++
+ 10 files changed, 140 insertions(+), 9 deletions(-)
+ create mode 100644 tools/misc/xen-fault-ttl.c
+ create mode 100644 xen/common/dmalloc.c
+ create mode 100644 xen/include/xen/dmalloc.h
+
 -- 
 2.11.0
 
