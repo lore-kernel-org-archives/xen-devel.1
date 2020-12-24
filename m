@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA875C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Dec 2020 11:54:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08B7CC433E9
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Dec 2020 11:54:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A5E2922283
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Dec 2020 11:54:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A5E2922283
+	by mail.kernel.org (Postfix) with ESMTPS id B2A4F22273
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Dec 2020 11:54:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B2A4F22273
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58702.103421 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58701.103409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ksPBq-0002aY-KN; Thu, 24 Dec 2020 11:53:54 +0000
+	id 1ksPBl-0002Xj-CU; Thu, 24 Dec 2020 11:53:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58702.103421; Thu, 24 Dec 2020 11:53:54 +0000
+Received: by outflank-mailman (output) from mailman id 58701.103409; Thu, 24 Dec 2020 11:53:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ksPBq-0002aR-HD; Thu, 24 Dec 2020 11:53:54 +0000
-Received: by outflank-mailman (input) for mailman id 58702;
- Thu, 24 Dec 2020 11:53:53 +0000
+	id 1ksPBl-0002Xc-9I; Thu, 24 Dec 2020 11:53:49 +0000
+Received: by outflank-mailman (input) for mailman id 58701;
+ Thu, 24 Dec 2020 11:53:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Kri=F4=merlin.srs.infradead.org=batv+2cb6e212460c613e05ba+6332+infradead.org+dwmw2@srs-us1.protection.inumbo.net>)
- id 1ksPBp-0002WC-8w
- for xen-devel@lists.xenproject.org; Thu, 24 Dec 2020 11:53:53 +0000
+ id 1ksPBk-0002WC-8u
+ for xen-devel@lists.xenproject.org; Thu, 24 Dec 2020 11:53:48 +0000
 Received: from merlin.infradead.org (unknown [2001:8b0:10b:1231::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b450edf5-14d2-46e0-beb6-64d5732f1582;
+ id 839ae6fa-46d6-4ec2-9691-18c61f485f5d;
  Thu, 24 Dec 2020 11:53:38 +0000 (UTC)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
  by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1ksPBO-0002az-Hj; Thu, 24 Dec 2020 11:53:26 +0000
+ id 1ksPBO-0002b1-JE; Thu, 24 Dec 2020 11:53:26 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.94 #2 (Red Hat
- Linux)) id 1ksPBN-00Er3m-GF; Thu, 24 Dec 2020 11:53:25 +0000
+ Linux)) id 1ksPBN-00Er3w-Hp; Thu, 24 Dec 2020 11:53:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: b450edf5-14d2-46e0-beb6-64d5732f1582
+X-Inumbo-ID: 839ae6fa-46d6-4ec2-9691-18c61f485f5d
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=merlin.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=zk4UYemafseG/MJkQtPNYJOGxL13WedQ005wS02nvsk=; b=YOiTNNDVcCi71gJnkmi5I3nAWT
-	/Q+4A66AfywOS5VtbWG0k9kR9csEvksh+dtmcviONDQRV0FOeJYD0jhbhteng8kgZBlfOz0TeQ55F
-	BaqqZZQltTwzcRvUPQx0i5SQLoxdMUDqQ9RnrSOsWQisrlZv9688B7ZvgZXKzf2Qt408OkxqGbFkU
-	T2u91UjRw3E7CxBwaYQVqKoBlEFVFUlAVnvunwhcfs011ctXe/fiRuOZNy1av1UuV9dwQZFscuAOi
-	srq+n/nKV5lmXdVWisRMJS/KxR50shTeTftbnTFSu9YUf08ajZl0Og9nI7nsHQzk0ZAp/WX3YjPip
-	PqCvHiZA==;
+	bh=529q7/1gaAJwNhvRKFVZNAtSN1/LIWxT+b3mgEbuAUg=; b=NICvtL4896QMhOF1HTfxSmrS72
+	p8d8PA2yocHzLDIM3daetiJEmh4/NglWvaNG3qsGW+4SHQmC4x7CZmZ6IoaALTuRJ7QntYlY52FEc
+	H/XwQaYtBOtDdYi6anterI6y7VZ3B3ASgDnJBVoIrClNAH40YAF/sGJ1FRnUmGQozDD3l51AX9i+n
+	/KQtzoyhrjDO8DFESvLXDx9r1ViHK8C9XaUhLshO7d7Etxv6iG65UXfxjPpIS/gumxmpZ43ttID3p
+	VWxOJ/vZIHR+NZl5OSv+teiaf8k3DXJKDX9n+ivm5NEfLLD0cr/6114tLiqhjAAmoIkWLBMAXhdRt
+	YAM0hMjg==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: x86@kernel.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -72,9 +72,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	jgrall@amazon.com,
 	karahmed@amazon.de,
 	xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 2/5] xen: Set platform PCI device INTX affinity to CPU0
-Date: Thu, 24 Dec 2020 11:53:20 +0000
-Message-Id: <20201224115323.3540130-3-dwmw2@infradead.org>
+Subject: [PATCH 5/5] x86/xen: Don't register PV spinlock IPI when it isn't going to be used
+Date: Thu, 24 Dec 2020 11:53:23 +0000
+Message-Id: <20201224115323.3540130-6-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201224115323.3540130-1-dwmw2@infradead.org>
 References: <20201224115323.3540130-1-dwmw2@infradead.org>
@@ -85,36 +85,45 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by merlin.
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-With INTX or GSI delivery, Xen uses the event channel structures of CPU0.
-
-If the interrupt gets handled by Linux on a different CPU, then no events
-are seen as pending. Rather than introducing locking to allow other CPUs
-to process CPU0's events, just ensure that the PCI interrupts happens
-only on CPU0.
+When xen_have_vector_callback is false, we still register the PV spinlock
+kicker IPI on the secondary CPUs. Stop doing that.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- drivers/xen/platform-pci.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/x86/xen/spinlock.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
-index 9db557b76511..18f0ed8b1f93 100644
---- a/drivers/xen/platform-pci.c
-+++ b/drivers/xen/platform-pci.c
-@@ -132,6 +132,13 @@ static int platform_pci_probe(struct pci_dev *pdev,
- 			dev_warn(&pdev->dev, "request_irq failed err=%d\n", ret);
- 			goto out;
- 		}
-+		/*
-+		 * It doesn't strictly *have* to run on CPU0 but it sure
-+		 * as hell better process the event channel ports delivered
-+		 * to CPU0.
-+		 */
-+		irq_set_affinity(pdev->irq, cpumask_of(0));
-+
- 		callback_via = get_callback_via(pdev);
- 		ret = xen_set_callback_via(callback_via);
- 		if (ret) {
+diff --git a/arch/x86/xen/spinlock.c b/arch/x86/xen/spinlock.c
+index 799f4eba0a62..b240ea483e63 100644
+--- a/arch/x86/xen/spinlock.c
++++ b/arch/x86/xen/spinlock.c
+@@ -68,7 +68,7 @@ void xen_init_lock_cpu(int cpu)
+ 	int irq;
+ 	char *name;
+ 
+-	if (!xen_pvspin)
++	if (!xen_pvspin || !xen_have_vector_callback)
+ 		return;
+ 
+ 	WARN(per_cpu(lock_kicker_irq, cpu) >= 0, "spinlock on CPU%d exists on IRQ%d!\n",
+@@ -93,7 +93,7 @@ void xen_init_lock_cpu(int cpu)
+ 
+ void xen_uninit_lock_cpu(int cpu)
+ {
+-	if (!xen_pvspin)
++	if (!xen_pvspin || !xen_have_vector_callback)
+ 		return;
+ 
+ 	unbind_from_irqhandler(per_cpu(lock_kicker_irq, cpu), NULL);
+@@ -115,7 +115,7 @@ PV_CALLEE_SAVE_REGS_THUNK(xen_vcpu_stolen);
+ void __init xen_init_spinlocks(void)
+ {
+ 	/*  Don't need to use pvqspinlock code if there is only 1 vCPU. */
+-	if (num_possible_cpus() == 1 || nopvspin)
++	if (num_possible_cpus() == 1 || nopvspin || !xen_have_vector_callback)
+ 		xen_pvspin = false;
+ 
+ 	if (!xen_pvspin) {
 -- 
 2.26.2
 
