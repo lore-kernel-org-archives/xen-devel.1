@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C27AC433DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA875C433E0
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Dec 2020 11:54:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4BDE022273
+	by mail.kernel.org (Postfix) with ESMTPS id A5E2922283
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Dec 2020 11:54:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BDE022273
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A5E2922283
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.58703.103433 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.58702.103421 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ksPBv-0002eg-UZ; Thu, 24 Dec 2020 11:53:59 +0000
+	id 1ksPBq-0002aY-KN; Thu, 24 Dec 2020 11:53:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 58703.103433; Thu, 24 Dec 2020 11:53:59 +0000
+Received: by outflank-mailman (output) from mailman id 58702.103421; Thu, 24 Dec 2020 11:53:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ksPBv-0002eX-Qg; Thu, 24 Dec 2020 11:53:59 +0000
-Received: by outflank-mailman (input) for mailman id 58703;
- Thu, 24 Dec 2020 11:53:58 +0000
+	id 1ksPBq-0002aR-HD; Thu, 24 Dec 2020 11:53:54 +0000
+Received: by outflank-mailman (input) for mailman id 58702;
+ Thu, 24 Dec 2020 11:53:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OdH5=F4=casper.srs.infradead.org=batv+cd7a9cfaa2a0215fac24+6332+infradead.org+dwmw2@srs-us1.protection.inumbo.net>)
- id 1ksPBu-0002WC-9F
- for xen-devel@lists.xenproject.org; Thu, 24 Dec 2020 11:53:58 +0000
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ <SRS0=5Kri=F4=merlin.srs.infradead.org=batv+2cb6e212460c613e05ba+6332+infradead.org+dwmw2@srs-us1.protection.inumbo.net>)
+ id 1ksPBp-0002WC-8w
+ for xen-devel@lists.xenproject.org; Thu, 24 Dec 2020 11:53:53 +0000
+Received: from merlin.infradead.org (unknown [2001:8b0:10b:1231::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a9c3c9f7-f28f-4b01-8d0b-17da43b60027;
- Thu, 24 Dec 2020 11:53:39 +0000 (UTC)
+ id b450edf5-14d2-46e0-beb6-64d5732f1582;
+ Thu, 24 Dec 2020 11:53:38 +0000 (UTC)
 Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
- by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1ksPBN-0001IL-UT; Thu, 24 Dec 2020 11:53:26 +0000
+ by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1ksPBO-0002az-Hj; Thu, 24 Dec 2020 11:53:26 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.94 #2 (Red Hat
- Linux)) id 1ksPBN-00Er3t-HI; Thu, 24 Dec 2020 11:53:25 +0000
+ Linux)) id 1ksPBN-00Er3m-GF; Thu, 24 Dec 2020 11:53:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: a9c3c9f7-f28f-4b01-8d0b-17da43b60027
+X-Inumbo-ID: b450edf5-14d2-46e0-beb6-64d5732f1582
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=merlin.20170209; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=IRb1VunvIiJxLPUFQ4utXydsXUgkW5BhNr6SXAIAjkE=; b=Z63QCpTsmbNseE3AFM3QFE8rHW
-	4QIp3TdV9LwRqaoJgFRzIRJ1v2wP0BNaTdOOYVAZvxn7gnbES94Ygsdy4hhWEPpkmm12F7KSgl0+e
-	F2W6ndobGrou3JlpyCQLKsawu19yJSEJTXYLEzp5CKoJOyzdqCjnkZeNiXm+2rHhh7gDGf9rLmdjW
-	3SFLvjf/pfKIFmh+17m2ffIMXgZ6+cnpHnKT6TEevoUipz+MSixmf3u6HxZz16859Yba1pHa1l8ML
-	4kWgCP5YlertuYHd5iDaf8vQp2UmDbaMfrTjUMBQqgrmGpUC3WOwqFQsCQESlsNhwteM5PgeCJpPt
-	BAJsowfQ==;
+	bh=zk4UYemafseG/MJkQtPNYJOGxL13WedQ005wS02nvsk=; b=YOiTNNDVcCi71gJnkmi5I3nAWT
+	/Q+4A66AfywOS5VtbWG0k9kR9csEvksh+dtmcviONDQRV0FOeJYD0jhbhteng8kgZBlfOz0TeQ55F
+	BaqqZZQltTwzcRvUPQx0i5SQLoxdMUDqQ9RnrSOsWQisrlZv9688B7ZvgZXKzf2Qt408OkxqGbFkU
+	T2u91UjRw3E7CxBwaYQVqKoBlEFVFUlAVnvunwhcfs011ctXe/fiRuOZNy1av1UuV9dwQZFscuAOi
+	srq+n/nKV5lmXdVWisRMJS/KxR50shTeTftbnTFSu9YUf08ajZl0Og9nI7nsHQzk0ZAp/WX3YjPip
+	PqCvHiZA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: x86@kernel.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -72,45 +72,49 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	jgrall@amazon.com,
 	karahmed@amazon.de,
 	xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 4/5] x86/xen: Don't register Xen IPIs when they aren't going to be used
-Date: Thu, 24 Dec 2020 11:53:22 +0000
-Message-Id: <20201224115323.3540130-5-dwmw2@infradead.org>
+Subject: [PATCH 2/5] xen: Set platform PCI device INTX affinity to CPU0
+Date: Thu, 24 Dec 2020 11:53:20 +0000
+Message-Id: <20201224115323.3540130-3-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20201224115323.3540130-1-dwmw2@infradead.org>
 References: <20201224115323.3540130-1-dwmw2@infradead.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by merlin.infradead.org. See http://www.infradead.org/rpr.html
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-In the case where xen_have_vector_callback is false, we still register
-the IPI vectors in xen_smp_intr_init() for the secondary CPUs even
-though they aren't going to be used. Stop doing that.
+With INTX or GSI delivery, Xen uses the event channel structures of CPU0.
+
+If the interrupt gets handled by Linux on a different CPU, then no events
+are seen as pending. Rather than introducing locking to allow other CPUs
+to process CPU0's events, just ensure that the PCI interrupts happens
+only on CPU0.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/xen/enlighten_hvm.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/xen/platform-pci.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/x86/xen/enlighten_hvm.c b/arch/x86/xen/enlighten_hvm.c
-index a1c07e0c888e..7a6ef517e81a 100644
---- a/arch/x86/xen/enlighten_hvm.c
-+++ b/arch/x86/xen/enlighten_hvm.c
-@@ -164,10 +164,10 @@ static int xen_cpu_up_prepare_hvm(unsigned int cpu)
- 	else
- 		per_cpu(xen_vcpu_id, cpu) = cpu;
- 	rc = xen_vcpu_setup(cpu);
--	if (rc)
-+	if (rc || !xen_have_vector_callback)
- 		return rc;
- 
--	if (xen_have_vector_callback && xen_feature(XENFEAT_hvm_safe_pvclock))
-+	if (xen_feature(XENFEAT_hvm_safe_pvclock))
- 		xen_setup_timer(cpu);
- 
- 	rc = xen_smp_intr_init(cpu);
+diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
+index 9db557b76511..18f0ed8b1f93 100644
+--- a/drivers/xen/platform-pci.c
++++ b/drivers/xen/platform-pci.c
+@@ -132,6 +132,13 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 			dev_warn(&pdev->dev, "request_irq failed err=%d\n", ret);
+ 			goto out;
+ 		}
++		/*
++		 * It doesn't strictly *have* to run on CPU0 but it sure
++		 * as hell better process the event channel ports delivered
++		 * to CPU0.
++		 */
++		irq_set_affinity(pdev->irq, cpumask_of(0));
++
+ 		callback_via = get_callback_via(pdev);
+ 		ret = xen_set_callback_via(callback_via);
+ 		if (ret) {
 -- 
 2.26.2
 
