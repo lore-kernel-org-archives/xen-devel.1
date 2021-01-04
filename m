@@ -2,41 +2,49 @@ Return-Path: <SRS0=Mbyf=GH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F70C433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22C7FC433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:41:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ADEFF20663
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:36:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADEFF20663
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D2C3F20679
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:41:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D2C3F20679
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61443.108142 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61450.108166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwTmA-0003mY-F1; Mon, 04 Jan 2021 17:36:14 +0000
+	id 1kwTrT-0004ko-DP; Mon, 04 Jan 2021 17:41:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61443.108142; Mon, 04 Jan 2021 17:36:14 +0000
+Received: by outflank-mailman (output) from mailman id 61450.108166; Mon, 04 Jan 2021 17:41:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwTmA-0003mR-By; Mon, 04 Jan 2021 17:36:14 +0000
-Received: by outflank-mailman (input) for mailman id 61443;
- Mon, 04 Jan 2021 17:36:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kwTrT-0004kh-9H; Mon, 04 Jan 2021 17:41:43 +0000
+Received: by outflank-mailman (input) for mailman id 61450;
+ Mon, 04 Jan 2021 17:41:42 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+rg9=GH=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kwTm8-0003mH-NV
- for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 17:36:12 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f621cc9d-9a52-4c64-9910-e052a1fb55d3;
- Mon, 04 Jan 2021 17:36:11 +0000 (UTC)
+ <SRS0=U5jC=GH=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
+ id 1kwTrS-0004ic-8o
+ for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 17:41:42 +0000
+Received: from mga03.intel.com (unknown [134.134.136.65])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 66f86bf9-3ef4-408e-a754-27ee9a7dfe61;
+ Mon, 04 Jan 2021 17:41:38 +0000 (UTC)
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jan 2021 09:41:37 -0800
+Received: from aparija-mobl1.amr.corp.intel.com (HELO ubuntu.localdomain)
+ ([10.212.21.134])
+ by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jan 2021 09:41:36 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,175 +56,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f621cc9d-9a52-4c64-9910-e052a1fb55d3
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1609781771;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=liyATdDrONNYFsOpRiQIOmyeOIAoiY9j4VhCpmtZF8U=;
-  b=cEnxZ9Ecmi3RRgFw1sj22Nq6DzBTAM5bokIXj9auui6hu2wsCkyHBvNw
-   8UhuhdiL2WhIytrI6rS3RfIugHbc5Fjdk7a39RU4JTT1B0cgjVuC5g2hE
-   MSHpP4Ep9WWM6R5iaB0UkJkc+ldpod9YnydN96DJBIUXAVP1b2VrBiEoY
-   Q=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 9/uWPF3lPlMH4dHF68ooGLISu1/IfndTH8pE++mUSia52tylVBkzJjr7t5Yby6USCzCVBcLg5h
- Erbck0YwZoJjnALYSc5h9sbkCISW+Kivbh8hpH493hQq9zq1cFnXhbZpI5ExlxBgT6PChdCDHB
- TydhMfvmRg+/Inol1s+uqcE2iG3tW83HqMqC+86WzVz0hV1sL1PtpNas/HjF7svA06gKBMOZop
- JySJDqZyrxSKmbNuLHB7NaKNlUXSyZwactO7gKc3ME6zTbTUOCa3oRJW2l9cgaSXTUUc31RFIq
- BWs=
-X-SBRS: 5.2
-X-MesageID: 34362033
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,474,1599537600"; 
-   d="scan'208";a="34362033"
-Subject: Re: [PATCH 0/4] xen: domain-tracked allocations, and fault injection
-To: Stefano Stabellini <sstabellini@kernel.org>, "Zheng, Fam"
-	<famzheng@amazon.com>
-CC: "roger.pau@citrix.com" <roger.pau@citrix.com>, "julien@xen.org"
-	<julien@xen.org>, "cardoe@cardoe.com" <cardoe@cardoe.com>, "wl@xen.org"
-	<wl@xen.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, "Bertrand.Marquis@arm.com"
-	<Bertrand.Marquis@arm.com>
-References: <160874604800.15699.17952392608790984041@600e7e483b3a>
- <alpine.DEB.2.21.2012231143430.4040@sstabellini-ThinkPad-T480s>
- <e7ad4670-7e7e-99f3-1800-b097b6a1695f@citrix.com>
- <alpine.DEB.2.21.2012231209170.4040@sstabellini-ThinkPad-T480s>
- <20210104093839.2tjtxyjhu4e6okra@Air-de-Roger>
- <42a74737f4f04d3f0ee21c299193a268b60f6fc8.camel@amazon.com>
- <alpine.DEB.2.21.2101040930090.3465@sstabellini-ThinkPad-T480s>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <429efe8c-7c41-b297-47a4-865b148886a3@citrix.com>
-Date: Mon, 4 Jan 2021 17:36:04 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+X-Inumbo-ID: 66f86bf9-3ef4-408e-a754-27ee9a7dfe61
+IronPort-SDR: GVV9pu2VKp8wRLfoMkTDn/NzNHn3lEOzxZoSG6DlRiomi5ZFzuHanSWIhkNYs3fTPSVuVmChVH
+ MF4cSqp8Q2qw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9854"; a="177086253"
+X-IronPort-AV: E=Sophos;i="5.78,474,1599548400"; 
+   d="scan'208";a="177086253"
+IronPort-SDR: jgwOvK7QdMxPH8k3SL4zTym+FN1PzTW/S5Go/9ajvKicPa5NW48JaqzB9rGD3OLGkLll0HusyH
+ mwlQJ6sm+8Dw==
+X-IronPort-AV: E=Sophos;i="5.78,474,1599548400"; 
+   d="scan'208";a="349597709"
+From: Tamas K Lengyel <tamas.lengyel@intel.com>
+To: xen-devel@lists.xenproject.org
+Cc: Tamas K Lengyel <tamas.lengyel@intel.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 2/2] x86/hap: Resolve mm-lock order violations when forking VMs with nested p2m
+Date: Mon,  4 Jan 2021 09:41:27 -0800
+Message-Id: <19aab6220bf191a31902488ed38c51d239572269.1609781242.git.tamas.lengyel@intel.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <6d5ca8a57a2745e933f00706bff306844611f64d.1609781242.git.tamas.lengyel@intel.com>
+References: <6d5ca8a57a2745e933f00706bff306844611f64d.1609781242.git.tamas.lengyel@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2101040930090.3465@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- FTLPEX02CL03.citrite.net (10.13.108.165)
 
-On 04/01/2021 17:30, Stefano Stabellini wrote:
-> On Mon, 4 Jan 2021, Zheng, Fam wrote:
->> On Mon, 2021-01-04 at 10:38 +0100, Roger Pau Monné wrote:
->>> On Wed, Dec 23, 2020 at 12:10:43PM -0800, Stefano Stabellini wrote:
->>>> On Wed, 23 Dec 2020, Andrew Cooper wrote:
->>>>> On 23/12/2020 19:45, Stefano Stabellini wrote:
->>>>>> On Wed, 23 Dec 2020, no-reply@patchew.org wrote:
->>>>>>> Hi,
->>>>>>>
->>>>>>> Patchew automatically ran gitlab-ci pipeline with this patch
->>>>>>> (series) applied, but the job failed. Maybe there's a bug in
->>>>>>> the patches?
->>>>>>>
->>>>>>> You can find the link to the pipeline near the end of the
->>>>>>> report below:
->>>>>>>
->>>>>>> Type: series
->>>>>>> Message-id: 20201223163442.8840-1-andrew.cooper3@citrix.com
->>>>>>> Subject: [PATCH 0/4] xen: domain-tracked allocations, and
->>>>>>> fault injection
->>>>>>>
->>>>>>> === TEST SCRIPT BEGIN ===
->>>>>>> #!/bin/bash
->>>>>>> sleep 10
->>>>>>> patchew gitlab-pipeline-check -p xen-project/patchew/xen
->>>>>>> === TEST SCRIPT END ===
->>>>>> [...]
->>>>>>
->>>>>>> === OUTPUT BEGIN ===
->>>>>>> [2020-12-23 16:38:43] Looking up pipeline...
->>>>>>> [2020-12-23 16:38:43] Found pipeline 233889763:
->>>>>>>
->>>>>>>
->> https://gitlab.com/xen-project/patchew/xen/-/pipelines/233889763
->>>>>> This seems to be a genuine failure. Looking at the alpine-3.12-
->>>>>> gcc-arm64
->>>>>> build test, the build error is appended below. This is a link
->>>>>> to the
->>>>>> failed job: 
->>>>>> https://gitlab.com/xen-project/patchew/xen/-/jobs/929842628
->>>>>>
->>>>>>
->>>>>>
->>>>>> gcc  -DBUILD_ID -fno-strict-aliasing -std=gnu99 -Wall -Wstrict-
->>>>>> prototypes -Wdeclaration-after-statement -Wno-unused-but-set-
->>>>>> variable -Wno-unused-local-typedefs   -O2 -fomit-frame-pointer
->>>>>> -D__XEN_INTERFACE_VERSION__=__XEN_LATEST_INTERFACE_VERSION__
->>>>>> -MMD -MP -MF .xen-diag.o.d -D_LARGEFILE_SOURCE
->>>>>> -D_LARGEFILE64_SOURCE   -Werror -include /builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/config.h
->>>>>> -I/builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/include
->>>>>> -I/builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/include
->>>>>> -D__XEN_TOOLS__ -I/builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/include
->>>>>> -I/builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/include
->>>>>> -I/builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/include -Wno-
->>>>>> declaration-after-statement  -c -o xen-diag.o xen-diag.c 
->>>>>> xen-fault-ttl.c: In function 'main':
->>>>>> xen-fault-ttl.c:25:14: error: 'struct xen_arch_domainconfig'
->>>>>> has no member named 'emulation_flags'
->>>>>>    25 |             .emulation_flags = XEN_X86_EMU_LAPIC,
->>>>>>       |              ^~~~~~~~~~~~~~~
->>>>>> xen-fault-ttl.c:25:32: error: 'XEN_X86_EMU_LAPIC' undeclared
->>>>>> (first use in this function)
->>>>>>    25 |             .emulation_flags = XEN_X86_EMU_LAPIC,
->>>>>>       |                                ^~~~~~~~~~~~~~~~~
->>>>>> xen-fault-ttl.c:25:32: note: each undeclared identifier is
->>>>>> reported only once for each function it appears in
->>>>>> make[4]: *** [/builds/xen-
->>>>>> project/patchew/xen/tools/misc/../../tools/Rules.mk:144: xen-
->>>>>> fault-ttl.o] Error 1
->>>>>> make[4]: *** Waiting for unfinished jobs....
->>>>>> make[4]: Leaving directory '/builds/xen-
->>>>>> project/patchew/xen/tools/misc'
->>>>>> make[3]: *** [/builds/xen-
->>>>>> project/patchew/xen/tools/../tools/Rules.mk:160: subdir-
->>>>>> install-misc] Error 2
->>>>>> make[3]: Leaving directory '/builds/xen-
->>>>>> project/patchew/xen/tools'
->>>>>> make[2]: *** [/builds/xen-
->>>>>> project/patchew/xen/tools/../tools/Rules.mk:155: subdirs-
->>>>>> install] Error 2
->>>>>> make[2]: Leaving directory '/builds/xen-
->>>>>> project/patchew/xen/tools'
->>>>>> make[1]: *** [Makefile:67: install] Error 2
->>>>>> make[1]: Leaving directory '/builds/xen-
->>>>>> project/patchew/xen/tools'
->>>>>> make: *** [Makefile:134: install-tools] Error 2
->>>>> Yeah - that is a real failure, which can be fixed with a little
->>>>> bit of
->>>>> ifdef-ary.  I'm confused as to why I didn't get that email
->>>>> directly.
->>>> It looks like patchew doesn't yet CC the original author?
->>> Where do patchew emails go? I haven't seen any of them, and they
->>> don't
->>> seem to go to xen-devel.
->> It's to limit the noise level. We intend to stablize the workflow a
->> little more esp. wrt false positives before making every reply go to
->> xen-devel. There's a few things to tweak in patchew.
->>
->> The next logical step should be including the patch author in the loop
->> I think.
-> Let's do it.
+Several lock-order violations have been encountered while attempting to fork
+VMs with nestedhvm=1 set. This patch resolves the issues.
 
-Are we sure?  The false positive rate is still very high.
+The order violations stems from a call to p2m_flush_nestedp2m being performed
+whenever the hostp2m changes. This functions always takes the p2m lock for the
+nested_p2m. However, with sharing the p2m locks always have to be taken before
+the sharing lock. To resolve this issue we avoid taking the sharing lock where
+possible (and was actually unecessary to begin with). But we also make
+p2m_flush_nestedp2m aware that the p2m lock may have already been taken and
+preemptively take all nested_p2m locks before unsharing a page where taking the
+sharing lock is necessary.
 
-There are two separate x86 randconfig failures, an ARM randconfig
-failure, and an ARM smoke test failure.
+Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
+---
+ xen/arch/x86/mm/mem_sharing.c | 43 +++++++++++++++++++++++------------
+ xen/arch/x86/mm/p2m.c         | 11 ++++++++-
+ 2 files changed, 39 insertions(+), 15 deletions(-)
 
-None of these are fair to be raised as objections to a contributor, as
-it leaves the results very noisy.
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index 4a02c7d6f2..e2f3f50eef 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -39,6 +39,7 @@
+ #include <asm/event.h>
+ #include <asm/hap.h>
+ #include <asm/hvm/hvm.h>
++#include <asm/hvm/nestedhvm.h>
+ #include <xsm/xsm.h>
+ 
+ #include <public/hvm/params.h>
+@@ -893,13 +894,11 @@ static int nominate_page(struct domain *d, gfn_t gfn,
+         goto out;
+ 
+     /*
+-     * Now that the page is validated, we can lock it. There is no
+-     * race because we're holding the p2m entry, so no one else
+-     * could be nominating this gfn.
++     * Now that the page is validated, we can make it shared. There is no race
++     * because we're holding the p2m entry, so no one else could be nominating
++     * this gfn & and it is evidently not yet shared with any other VM, thus we
++     * don't need to take the mem_sharing_page_lock here.
+      */
+-    ret = -ENOENT;
+-    if ( !mem_sharing_page_lock(page) )
+-        goto out;
+ 
+     /* Initialize the shared state */
+     ret = -ENOMEM;
+@@ -935,7 +934,6 @@ static int nominate_page(struct domain *d, gfn_t gfn,
+ 
+     *phandle = page->sharing->handle;
+     audit_add_list(page);
+-    mem_sharing_page_unlock(page);
+     ret = 0;
+ 
+ out:
+@@ -1214,7 +1212,7 @@ int __mem_sharing_unshare_page(struct domain *d,
+     p2m_type_t p2mt;
+     mfn_t mfn;
+     struct page_info *page, *old_page;
+-    int last_gfn;
++    int last_gfn, rc = 0;
+     gfn_info_t *gfn_info = NULL;
+ 
+     mfn = get_gfn(d, gfn, &p2mt);
+@@ -1226,6 +1224,15 @@ int __mem_sharing_unshare_page(struct domain *d,
+         return 0;
+     }
+ 
++    /* lock nested p2ms to avoid lock-order violation */
++    if ( unlikely(nestedhvm_enabled(d)) )
++    {
++        int i;
++
++        for ( i = 0; i < MAX_NESTEDP2M; i++ )
++            p2m_lock(d->arch.nested_p2m[i]);
++    }
++
+     page = __grab_shared_page(mfn);
+     if ( page == NULL )
+     {
+@@ -1276,9 +1283,7 @@ int __mem_sharing_unshare_page(struct domain *d,
+             put_page_alloc_ref(page);
+ 
+         put_page_and_type(page);
+-        put_gfn(d, gfn);
+-
+-        return 0;
++        goto out;
+     }
+ 
+     if ( last_gfn )
+@@ -1295,12 +1300,12 @@ int __mem_sharing_unshare_page(struct domain *d,
+         /* Undo dec of nr_saved_mfns, as the retry will decrease again. */
+         atomic_inc(&nr_saved_mfns);
+         mem_sharing_page_unlock(old_page);
+-        put_gfn(d, gfn);
+         /*
+          * Caller is responsible for placing an event
+          * in the ring.
+          */
+-        return -ENOMEM;
++        rc = -ENOMEM;
++        goto out;
+     }
+ 
+     copy_domain_page(page_to_mfn(page), page_to_mfn(old_page));
+@@ -1327,8 +1332,18 @@ int __mem_sharing_unshare_page(struct domain *d,
+      */
+     paging_mark_dirty(d, page_to_mfn(page));
+     /* We do not need to unlock a private page */
++
++ out:
++    if ( unlikely(nestedhvm_enabled(d)) )
++    {
++        int i;
++
++        for ( i = 0; i < MAX_NESTEDP2M; i++ )
++            p2m_unlock(d->arch.nested_p2m[i]);
++    }
++
+     put_gfn(d, gfn);
+-    return 0;
++    return rc;
+ }
+ 
+ int relinquish_shared_pages(struct domain *d)
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index ad4bb94514..79a2b6762b 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -1598,8 +1598,17 @@ void
+ p2m_flush_nestedp2m(struct domain *d)
+ {
+     int i;
++    struct p2m_domain *p2m;
++
+     for ( i = 0; i < MAX_NESTEDP2M; i++ )
+-        p2m_flush_table(d->arch.nested_p2m[i]);
++    {
++        p2m = d->arch.nested_p2m[i];
++
++        if ( p2m_locked_by_me(p2m) )
++            p2m_flush_table_locked(p2m);
++        else
++            p2m_flush_table(p2m);
++    }
+ }
+ 
+ void np2m_flush_base(struct vcpu *v, unsigned long np2m_base)
+-- 
+2.25.1
 
-I think we need to get to 0 known outstanding false positives before
-continuing.
-
-~Andrew
 
