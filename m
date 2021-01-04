@@ -2,49 +2,43 @@ Return-Path: <SRS0=Mbyf=GH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D89AC433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80990C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:47:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D1EC720679
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:41:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1EC720679
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3B2C02068D
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Jan 2021 17:47:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B2C02068D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61448.108154 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61456.108177 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwTrO-0004io-4M; Mon, 04 Jan 2021 17:41:38 +0000
+	id 1kwTwq-000531-80; Mon, 04 Jan 2021 17:47:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61448.108154; Mon, 04 Jan 2021 17:41:38 +0000
+Received: by outflank-mailman (output) from mailman id 61456.108177; Mon, 04 Jan 2021 17:47:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwTrO-0004ih-0g; Mon, 04 Jan 2021 17:41:38 +0000
-Received: by outflank-mailman (input) for mailman id 61448;
- Mon, 04 Jan 2021 17:41:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kwTwq-00052u-54; Mon, 04 Jan 2021 17:47:16 +0000
+Received: by outflank-mailman (input) for mailman id 61456;
+ Mon, 04 Jan 2021 17:47:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=U5jC=GH=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
- id 1kwTrN-0004ic-DT
- for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 17:41:37 +0000
-Received: from mga03.intel.com (unknown [134.134.136.65])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 55d27197-8fb0-4d87-9f86-befa8905d820;
- Mon, 04 Jan 2021 17:41:35 +0000 (UTC)
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jan 2021 09:41:34 -0800
-Received: from aparija-mobl1.amr.corp.intel.com (HELO ubuntu.localdomain)
- ([10.212.21.134])
- by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jan 2021 09:41:33 -0800
+ <SRS0=/NE+=GH=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1kwTwo-00052p-JU
+ for xen-devel@lists.xenproject.org; Mon, 04 Jan 2021 17:47:14 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 18117d55-52ae-411e-af26-c07cd488aa2e;
+ Mon, 04 Jan 2021 17:47:13 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id AA8E92068D;
+ Mon,  4 Jan 2021 17:47:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,50 +50,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55d27197-8fb0-4d87-9f86-befa8905d820
-IronPort-SDR: G+apP087tvjmLDF4225t8XljUc9lU6eZx2mE1PXzCneoV2XYz1CfepbywWHFYKXzsuWRQv1hMn
- yS/q3e065NwQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9854"; a="177086248"
-X-IronPort-AV: E=Sophos;i="5.78,474,1599548400"; 
-   d="scan'208";a="177086248"
-IronPort-SDR: NbSqJRQNaaAzCPJ/XgSgbXv/7dAzf+iT+DQw+HG2MrA2k+7I6r4HV9xCCw7YoB+uVQAPaRIZQv
- OjPTPahhb2TA==
-X-IronPort-AV: E=Sophos;i="5.78,474,1599548400"; 
-   d="scan'208";a="349597692"
-From: Tamas K Lengyel <tamas.lengyel@intel.com>
-To: xen-devel@lists.xenproject.org
-Cc: Tamas K Lengyel <tamas.lengyel@intel.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 1/2] x86/mem_sharing: copy cpuid during vm forking
-Date: Mon,  4 Jan 2021 09:41:26 -0800
-Message-Id: <6d5ca8a57a2745e933f00706bff306844611f64d.1609781242.git.tamas.lengyel@intel.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 18117d55-52ae-411e-af26-c07cd488aa2e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1609782433;
+	bh=bsUMqtT9d5OhNjicBaXI5+ixr3A5Jx8Hhh6xXWm5414=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=eN8NIO9iIR34o2GzczKLrXeS+gqgmKeEbnkvsUrmmamp38L5ccKnll+LnXF8AsBGx
+	 w8ZeULaieIDXBDomBSuyqMqwY3Zc7x/1NNLBSE3+E4z/C+iXBxS/L/wMwiEfOmvjgf
+	 9j7YuY5qXEoLHTLsK4xMTtxU1/3tYVq0nG+zJWOyKA8AoEnDOriY1xtBxOGDAYgOxz
+	 YeJoTGsTdokRowOIekiD4NDeysN9eBsDqY3FrpVwz/rvGxX6zTOHO4eXk5Y1ZkoKQ5
+	 4fbAOh2p20XvdiLwbwEDxK0Q3XT5SRgp+wqwJroCgU91fF5ukuYIwMEkNNtx/QNcHD
+	 mhsGLaJtMkbWg==
+Date: Mon, 4 Jan 2021 09:47:12 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Julien Grall <julien@xen.org>
+cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
+    Rahul.Singh@arm.com, Julien Grall <jgrall@amazon.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH] xen/serial: scif: Rework how the parameters are found
+In-Reply-To: <20201224165021.449-1-julien@xen.org>
+Message-ID: <alpine.DEB.2.21.2101040947030.3465@sstabellini-ThinkPad-T480s>
+References: <20201224165021.449-1-julien@xen.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
----
- xen/arch/x86/mm/mem_sharing.c | 1 +
- 1 file changed, 1 insertion(+)
+On Thu, 24 Dec 2020, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+> 
+> clang 11 will throw the following error while build Xen:
+> 
+> scif-uart.c:333:33: error: cast to smaller integer type 'enum port_types' from 'const void *' [-Werror,-Wvoid-pointer-to-enum-cast]
+>     uart->params = &port_params[(enum port_types)match->data];
+>                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> The error can be prevented by directly storing a pointer to the port
+> parameters rather than the a cast of the port type.
+> 
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
-index c428fd16ce..4a02c7d6f2 100644
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -1764,6 +1764,7 @@ static int fork(struct domain *cd, struct domain *d)
- 
-         domain_pause(d);
-         cd->max_pages = d->max_pages;
-+        memcpy(cd->arch.cpuid, d->arch.cpuid, sizeof(*d->arch.cpuid));
-         cd->parent = d;
-     }
- 
--- 
-2.25.1
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
+
+> ---
+> 
+> Only build tested as I don't have the HW.
+> ---
+>  xen/drivers/char/scif-uart.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/xen/drivers/char/scif-uart.c b/xen/drivers/char/scif-uart.c
+> index 9d3f66b55b67..ee204a11a471 100644
+> --- a/xen/drivers/char/scif-uart.c
+> +++ b/xen/drivers/char/scif-uart.c
+> @@ -286,8 +286,8 @@ static struct uart_driver __read_mostly scif_uart_driver = {
+>  
+>  static const struct dt_device_match scif_uart_dt_match[] __initconst =
+>  {
+> -    { .compatible = "renesas,scif",  .data = (void *)SCIF_PORT },
+> -    { .compatible = "renesas,scifa", .data = (void *)SCIFA_PORT },
+> +    { .compatible = "renesas,scif",  .data = &port_params[SCIF_PORT] },
+> +    { .compatible = "renesas,scifa", .data = &port_params[SCIFA_PORT] },
+>      { /* sentinel */ },
+>  };
+>  
+> @@ -330,7 +330,7 @@ static int __init scif_uart_init(struct dt_device_node *dev,
+>  
+>      match = dt_match_node(scif_uart_dt_match, dev);
+>      ASSERT( match );
+> -    uart->params = &port_params[(enum port_types)match->data];
+> +    uart->params = match->data;
+>  
+>      uart->vuart.base_addr  = addr;
+>      uart->vuart.size       = size;
+> -- 
+> 2.17.1
+> 
 
