@@ -2,41 +2,45 @@ Return-Path: <SRS0=UuSr=GI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE791C433DB
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A63CC433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:13:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B7EB422240
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:12:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7EB422240
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id F08B9229EF
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:13:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F08B9229EF
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61943.109302 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61947.109314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwm8K-0000vd-Sq; Tue, 05 Jan 2021 13:12:20 +0000
+	id 1kwm8n-00015q-DK; Tue, 05 Jan 2021 13:12:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61943.109302; Tue, 05 Jan 2021 13:12:20 +0000
+Received: by outflank-mailman (output) from mailman id 61947.109314; Tue, 05 Jan 2021 13:12:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwm8K-0000vV-PA; Tue, 05 Jan 2021 13:12:20 +0000
-Received: by outflank-mailman (input) for mailman id 61943;
- Tue, 05 Jan 2021 13:12:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=onuC=GI=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kwm8J-0000uk-IS
- for xen-devel@lists.xenproject.org; Tue, 05 Jan 2021 13:12:19 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 258eb589-bd80-4938-9274-6b84a6b61366;
- Tue, 05 Jan 2021 13:12:17 +0000 (UTC)
+	id 1kwm8n-00015j-9K; Tue, 05 Jan 2021 13:12:49 +0000
+Received: by outflank-mailman (input) for mailman id 61947;
+ Tue, 05 Jan 2021 13:12:48 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=hFWs=GI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1kwm8m-00015X-13
+ for xen-devel@lists.xenproject.org; Tue, 05 Jan 2021 13:12:48 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bedf2ede-ad0b-4576-825b-85acd2643572;
+ Tue, 05 Jan 2021 13:12:46 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 0DD73AD0B;
+ Tue,  5 Jan 2021 13:12:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,115 +52,239 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 258eb589-bd80-4938-9274-6b84a6b61366
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1609852337;
-  h=date:from:to:cc:subject:message-id:references:
-   content-transfer-encoding:in-reply-to:mime-version;
-  bh=JJzjdVF2VlMNFrJF2xKqvkD1NSGOLlsrHIMsWjCiJSI=;
-  b=exIUj/CW5eHgZlEC8jsZuE8TxVkFX12Yjh4A0PdsHEVgZ4zaJAekx0wx
-   kqQ2V+4YGgAHAdZx9MMEHczfxyCsPWM+uGnfDaSHCaoZpo//lARwh1Pm5
-   C0K7Q8k2hl+bDLMMG8N4B4RtIprnFjL3XekWnDUJ2kpNXkKb0KxqBQaCF
-   Q=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: m3ucHoJD55r3Vw1CdBHqyXsr/KRI6QJ921LRECvvl7y1xzQAMTe+tpEOQJwbmHr1DCDIzD05yD
- d2QGoyyPF9YXBcCNpH4zy9MxcEs4TDdcJGv9Omlw7iwR5/j2Jbdz6d7b3isA5YDV439bQfcr2A
- ifn18PVvFs0VGAFdNL+8nlKemXI1Jc2sUaJRBKp5kVZiiz6/ZfLwZ/AKqUtuzJLT9zNlVXXG9G
- r6St11ivV452cqOHdciKQf8HnFUR/A9hbcTkYx80CNnHHa43jYnnykvU8SrNvo/Wb38uZiNXQL
- Md0=
-X-SBRS: 5.2
-X-MesageID: 34415028
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.78,477,1599537600"; 
-   d="scan'208";a="34415028"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Cz3j4DLsuMeP2GtPfrd0+Naja0nOs+Xo+8B6pkZ9AJtUa4a+5AaqcAvV9d9xOQDr4T7KCz4fNAN9O4WA8MeRuB+eEiqPmeyRwPyJNDdtqdOwLVVAR+xrC/66PVGCw+oDqb/qOjl1chERN9FSNcsAGTAHcAOI4zYAoM+95nLXM8JkbIHLLsl9w126a/yUzy8dAirhyCBj0dSQXc4s500oKFu2P7Je6zGXIXsHi/MQStAF56xcDEsBjkaElspeftu6JfcdTCiYQpzb41R+IZHNlDeHOvTDxlYwBKEbPtvDfXWKZT/Jwf1vm05qXD4pyckv12g9j01NjExqbLWNBXudIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NJIMqH+zSSaz3lWxj5+X6LttCdzUqpoDWqaD2upskak=;
- b=DJPSRVd+JVN1Wo4+vKc+nzWMHYDWyYdKr+SXxeznUBKcREb0V11UdXh0vpXEq1peEJIGdf2H0qbI0g9ogTdoLva0ibSvnnAj3YSRdrNM9y4g3Y1qykwWRwp8js/ITEw7A+R3KZG/Md54vOJJ4zJyzXKYe1oQSxNmCmwR3ICaKqEoO23IfAEMf9x9Fx3kK+tIQOZmPdYbCJW0YT0ngt3XXuhmsqdfxijbPp3bP/ycCPNQK+1EpXSymPjXKpcwBCUGKuiSF4aXpKgAr+cKUhtwkN8KMPNadJVDkngRsgY3DdQrpl1leHuIVud4l/dE2FEg8KDVvQO4PC9+euM6jGcEgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NJIMqH+zSSaz3lWxj5+X6LttCdzUqpoDWqaD2upskak=;
- b=TRDA8JUClLTPhKoIVcTIUClRlc8oVKUdyIvU3XxygHkNzyZaGEmtdB+QhVx4N8f5AdsmVHPh3a9Z2PsC1NN6hxxXjMCMB9u2/xJ7JTTz4s68FDXykbQtFNMA/tGrjpS9lzA3/j4QqAxbKDw7h/pCLdhLxtZiHvQRfm+4qvbcj8Y=
-Date: Tue, 5 Jan 2021 14:12:04 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v2] vPCI/MSI-X: fold clearing of entry->updated
-Message-ID: <20210105131204.e6kboucvp2th5kor@Air-de-Roger>
-References: <f93efb14-f088-ca84-7d0a-f1b53ff6316c@suse.com>
- <e642e8f9-be34-8998-66ae-3fc64dcb16cc@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <e642e8f9-be34-8998-66ae-3fc64dcb16cc@suse.com>
-X-ClientProxiedBy: MR2P264CA0170.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501::9)
- To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
+X-Inumbo-ID: bedf2ede-ad0b-4576-825b-85acd2643572
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1609852366; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=SpxX4mM7UaE7DIJT+8KP+Q3gPOhRwR0g9uwFVjsXk70=;
+	b=khjXkNwI6PJYcqEEAgnTtfuyU4bQg64gRx9mIqjGtNOzxK5jauiEQr1naFjBQym0DkNabe
+	f5L5a/8bK6yl6n8MJfJX8veEnzlIeYcgX0s+0hYqP8Iu30TS/mG8TwhIFjcfL2bXfturYS
+	59umq4qyDlKD8nslxj9YRQbZDVEbpIo=
+Subject: [PATCH v4 08/10] evtchn: closing of ports doesn't need to hold both
+ domains' event locks
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cf0a1c24-0146-1017-7310-9536f2ed0ad1@suse.com>
+Message-ID: <495496e6-710d-bec0-cbd7-46c78f20fcf0@suse.com>
+Date: Tue, 5 Jan 2021 14:12:45 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8c922d7c-2dae-4fdb-9b08-08d8b17b8252
-X-MS-TrafficTypeDiagnostic: DM6PR03MB5067:
-X-Microsoft-Antispam-PRVS: <DM6PR03MB5067D7CDE1617A4BA37559BD8FD10@DM6PR03MB5067.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2958;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: x1608YRo/jEt+fxmZrZ0jMbU6C0CfK/ceU55v0iLpg7qmSQK52cYmvTsJNHqqLxfW7uYhr1RFJa5TBmmXU1ed3M8KjvywP3vCgyqTSjDufKfiz1/se8rE1lm6aCv9dyLeyx+UgQvwK02TkMmWgd3ArgkGRGzFouilD4L2GluJuMElpJ4uCBkQI5TJFrH7b+SdBS4BreWD5cMfiXTB7NV0sUi4m4Uc9LfY9xErCgIJU9lQiYibHXosedGM9MqFuDyWoGQLmSTX8jOq3Nu6w+Ch602m1mHZzzTHwLOElSJZ99+Gi2YqHj5tNqcw3P+TNwz6zonvWkdgdzr4Ya8LiIr3OTpFA3cNieiSo+JvdgBjvI+Pb6Nb3pVvO6MPXxsVTCgVUHV1RHYSj0wv7hNTAhvXA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(7916004)(136003)(396003)(39860400002)(346002)(366004)(376002)(6666004)(6486002)(26005)(66946007)(316002)(83380400001)(9686003)(86362001)(8676002)(2906002)(15650500001)(8936002)(4326008)(4744005)(186003)(16526019)(66476007)(5660300002)(66556008)(6496006)(478600001)(33716001)(85182001)(6916009)(956004)(1076003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?VkZuK29xYUVxMTBySHhCNmtNY3NJRGR4d2hYUTk5T1pXVnNxRThYNW4zczBK?=
- =?utf-8?B?NVVpclh3Z1pXQWo4eUhaK2Jua2N6bUhjT1lUTFZXK3V3MEhJTmhkTXhieU4y?=
- =?utf-8?B?NSswT3lBbGpxTTErQXMzazVqZEc4M1l5dXErU1M4RE8xNXdoNUpZR2RObmVk?=
- =?utf-8?B?U3I3L0J5OFIyeHh3S3l1RnJaemxwUzhlUmZreCtaVHJOazEweDhhUS9rVmdX?=
- =?utf-8?B?Z1FIbWNQbkJ3WUZWZC81THkxWnZuSGJOb3hIWW94UkFkRVZKaHRWSlpKTVlz?=
- =?utf-8?B?alJpT1BuTjNMK1R5SHBnR3MzWWtFck9oQ1lGRjRyRk5HVG9MeFp3SFVLdlJL?=
- =?utf-8?B?YTY5ZkNHdHU2aTQ5Q0RRRDlyVVdRbnBnenVvTWppeTZHSVhHbmxoQmRmYWE1?=
- =?utf-8?B?MCtmSzNlK2hnY3pSMUlxMnF5NWxvN1lSRXhZWllscmw2R2pJK0NOS3ozcDBy?=
- =?utf-8?B?b1pjempwQzNQK0VOMVJsVmFlYlZxaXhPWUlkSWNJWnl1NWVZWk1tNEwzRFJS?=
- =?utf-8?B?T2J1OXRuTjh6Qm1CTjF6dE5jRi8vMGtKdmRaa1F2Yk9uVjk1N0VmU0xZQVJE?=
- =?utf-8?B?dnR6WFBsejlwTFR4MWlCamlDRHNEYVQrUXI5WisrTE5LNGdVUjBjbStKNUh2?=
- =?utf-8?B?ckZ3bHp1VS9mN21Fa2FtbWdrb2N1ZjVYVTZLQkRzNXpyVnVxQ09GSXZlVjE3?=
- =?utf-8?B?TTUvc0tMeGlYMVhpYmNEeU56Z3RPdUwzN09qVWFVcjNLVmxReDJEMnFoY2c1?=
- =?utf-8?B?eFBxRWVNZkhLb3lPVUpab1A2UXY3UnhqUjl5R1hvazdBYVZlZWNBVSszMEVQ?=
- =?utf-8?B?aGJsdm9hQmhGVWlNWWlwd1BwZUdDcStwQXVwa2tDMm8wbTl1SWNzeCtkTzdE?=
- =?utf-8?B?N2lFT1lmSnE0M1ZZVy90d0hxZ3lFcGpkeUU5UWg2dXVxOFVmajhRWkhBMzVI?=
- =?utf-8?B?ZjBLTFFCN3BWa2JGV2gwcnc0WnNSRGQ2UCswZnorWUV4cjU4OTRHUnpkWFZF?=
- =?utf-8?B?S0RuSHJTemdVT2NHcC9EY3pOTVFLelZ0cFRadUhPVzBFZEtUZ0xobXhpVnl1?=
- =?utf-8?B?aXRUU2ZaSXFFYVVVdGhBZUl4VjdFRFp0WWNVZk1LUmozTlY4UUpUVDJqT1ND?=
- =?utf-8?B?Rmk4NjNycGh2c09oM3Fjai9vREhnQXdpK0JRWXQ0YWNtNlNsSUsxa0ZabDc2?=
- =?utf-8?B?d3d1OFArR21Hd3E1bzNOZ0RadlR3WmEwb3l1SFBpK3RzeUV0VEVHdFh6aHFh?=
- =?utf-8?B?OHhwY2hHd3VOK212TEFUTkxDM0lIRDB0Q1Z0MVA2Q01TY3ZTUGlIU0swOEV2?=
- =?utf-8?Q?VJbkFk2bi5bhATX5SRNvIkLHgwzusuzwuY?=
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jan 2021 13:12:09.7863
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c922d7c-2dae-4fdb-9b08-08d8b17b8252
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gK6XD8e8QtOAmwljp+CDMAKWUfhn9hxQ9d6hC46Gu0HnW8ldUaaMkO6f4ooU5rVhkN1R/ZQfjJdKGeBLtyypCg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5067
-X-OriginatorOrg: citrix.com
+In-Reply-To: <cf0a1c24-0146-1017-7310-9536f2ed0ad1@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 05, 2021 at 01:39:54PM +0100, Jan Beulich wrote:
-> Both call sites clear the flag after a successfull call to
-> update_entry(). This can be simplified by moving the clearing into the
-> function, onto its success path.
-> 
-> As a result of neither caller caring about update_entry()'s return value
-> anymore, the function gets switched to return void.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+The local domain's lock is needed for the port freeing, but for the
+remote side the per-channel lock is sufficient. Other logic then needs
+rearranging, though, including the early dropping of both locks (and the
+remote domain ref) in the ECS_PIRQ and ECS_VIRQ cases.
 
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Note in particular that there is no real race with evtchn_bind_vcpu():
+ECS_INTERDOMAIN and ECS_UNBOUND get treated identically there, and
+evtchn_close() doesn't care about the notification vCPU ID.
 
-Thanks, Roger.
+Note also that we can't use double_evtchn_unlock() or
+evtchn_write_unlock() when releasing locks to cover for possible races.
+See the respective code comment.
+
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+v4: New.
+
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -605,15 +605,15 @@ static long evtchn_bind_pirq(evtchn_bind
+ int evtchn_close(struct domain *d1, int port1, bool guest)
+ {
+     struct domain *d2 = NULL;
+-    struct evtchn *chn1 = _evtchn_from_port(d1, port1), *chn2;
++    struct evtchn *chn1 = _evtchn_from_port(d1, port1), *chn2 = NULL;
+     long           rc = 0;
+ 
+     if ( !chn1 )
+         return -EINVAL;
+ 
+- again:
+     write_lock(&d1->event_lock);
+ 
++ again:
+     /* Guest cannot close a Xen-attached event channel. */
+     if ( unlikely(consumer_is_xen(chn1)) && guest )
+     {
+@@ -634,6 +634,22 @@ int evtchn_close(struct domain *d1, int
+     case ECS_PIRQ: {
+         struct pirq *pirq = pirq_info(d1, chn1->u.pirq.irq);
+ 
++        /*
++         * We don't require the per-channel lock here, so in case a race
++         * happened on the interdomain path below better release both.
++         */
++        if ( unlikely(chn2) )
++        {
++            /*
++             * See evtchn_write_unlock() vs plain write_unlock() comment in
++             * ECS_INTERDOMAIN handling below.
++             */
++            write_unlock(&chn1->lock);
++            write_unlock(&chn2->lock);
++            put_domain(d2);
++            chn2 = NULL;
++        }
++
+         if ( pirq )
+         {
+             if ( !is_hvm_domain(d1) )
+@@ -653,6 +669,22 @@ int evtchn_close(struct domain *d1, int
+         struct vcpu *v;
+         unsigned long flags;
+ 
++        /*
++         * The per-channel locks nest inside the vIRQ ones, so we must release
++         * them if a race happened on the interdomain path below.
++         */
++        if ( unlikely(chn2) )
++        {
++            /*
++             * See evtchn_write_unlock() vs plain write_unlock() comment in
++             * ECS_INTERDOMAIN handling below.
++             */
++            write_unlock(&chn1->lock);
++            write_unlock(&chn2->lock);
++            put_domain(d2);
++            chn2 = NULL;
++        }
++
+         v = d1->vcpu[virq_is_global(chn1->u.virq) ? 0 : chn1->notify_vcpu_id];
+ 
+         write_lock_irqsave(&v->virq_lock, flags);
+@@ -669,63 +701,87 @@ int evtchn_close(struct domain *d1, int
+     case ECS_INTERDOMAIN:
+         if ( d2 == NULL )
+         {
+-            d2 = chn1->u.interdomain.remote_dom;
++            evtchn_write_lock(chn1);
+ 
+-            /* If we unlock d1 then we could lose d2. Must get a reference. */
+-            if ( unlikely(!get_domain(d2)) )
+-                BUG();
+-
+-            if ( d1 < d2 )
+-                write_lock(&d2->event_lock);
+-            else if ( d1 != d2 )
+-            {
+-                write_unlock(&d1->event_lock);
+-                write_lock(&d2->event_lock);
+-                goto again;
+-            }
++            if ( chn1->state == ECS_INTERDOMAIN )
++                d2 = chn1->u.interdomain.remote_dom;
++            else
++                /* See comment further down. */
++                write_unlock(&chn1->lock);
+         }
+-        else if ( d2 != chn1->u.interdomain.remote_dom )
++
++        if ( d2 != chn1->u.interdomain.remote_dom )
+         {
+             /*
+-             * We can only get here if the port was closed and re-bound after
+-             * unlocking d1 but before locking d2 above. We could retry but
+-             * it is easier to return the same error as if we had seen the
+-             * port in ECS_FREE. It must have passed through that state for
+-             * us to end up here, so it's a valid error to return.
++             * We can only get here if the port was closed and re-bound
++             * - before locking chn1 or
++             * - after unlocking chn1 but before locking both channels
++             * above.  We could retry but it is easier to return the same error
++             * as if we had seen the port in ECS_FREE.  It must have passed
++             * through that state for us to end up here, so it's a valid error
++             * to return.
+              */
++            if ( d2 && !chn2 )
++                write_unlock(&chn1->lock);
+             rc = -EINVAL;
+             goto out;
+         }
+ 
+-        chn2 = _evtchn_from_port(d2, chn1->u.interdomain.remote_port);
+-        BUG_ON(!chn2);
+-        BUG_ON(chn2->state != ECS_INTERDOMAIN);
+-        BUG_ON(chn2->u.interdomain.remote_dom != d1);
++        if ( !chn2 )
++        {
++            /* If we unlock chn1 then we could lose d2. Must get a reference. */
++            if ( unlikely(!get_domain(d2)) )
++                BUG();
+ 
+-        double_evtchn_lock(chn1, chn2);
++            chn2 = _evtchn_from_port(d2, chn1->u.interdomain.remote_port);
++            BUG_ON(!chn2);
+ 
+-        evtchn_free(d1, chn1);
++            if ( chn1 > chn2 )
++            {
++                /*
++                 * Cannot use evtchn_write_unlock() here, as its assertion
++                 * likely won't hold.  However, a race - as per the comment
++                 * below - indicates a transition through ECS_FREE must
++                 * have occurred, so the assumptions by users of
++                 * evtchn_read_trylock() still hold (i.e. they're similarly
++                 * fine to bail).
++                 */
++                write_unlock(&chn1->lock);
++                double_evtchn_lock(chn2, chn1);
++                goto again;
++            }
++
++            evtchn_write_lock(chn2);
++        }
++
++        BUG_ON(chn2->state != ECS_INTERDOMAIN);
++        BUG_ON(chn2->u.interdomain.remote_dom != d1);
+ 
+         chn2->state = ECS_UNBOUND;
+         chn2->u.unbound.remote_domid = d1->domain_id;
+ 
+-        double_evtchn_unlock(chn1, chn2);
+-
+-        goto out;
++        break;
+ 
+     default:
+         BUG();
+     }
+ 
+-    evtchn_write_lock(chn1);
++    if ( !chn2 )
++        evtchn_write_lock(chn1);
+     evtchn_free(d1, chn1);
+-    evtchn_write_unlock(chn1);
++    if ( !chn2 )
++        evtchn_write_unlock(chn1);
+ 
+  out:
+-    if ( d2 != NULL )
++    if ( chn2 )
+     {
+-        if ( d1 != d2 )
+-            write_unlock(&d2->event_lock);
++        /*
++         * See evtchn_write_unlock() vs plain write_unlock() comment in
++         * ECS_INTERDOMAIN handling above.  In principle we could use
++         * double_evtchn_unlock() on the ECS_INTERDOMAIN success path.
++         */
++        write_unlock(&chn1->lock);
++        write_unlock(&chn2->lock);
+         put_domain(d2);
+     }
+ 
+
 
