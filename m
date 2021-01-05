@@ -2,44 +2,46 @@ Return-Path: <SRS0=UuSr=GI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-24.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 246CEC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 22:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2AB6C433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 23:58:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BEA3122EBE
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 22:59:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BEA3122EBE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2E8842071A
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 23:58:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E8842071A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.62218.110066 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.62234.110089 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwvHy-00036i-Nr; Tue, 05 Jan 2021 22:58:54 +0000
+	id 1kwwDE-0000XP-EU; Tue, 05 Jan 2021 23:58:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 62218.110066; Tue, 05 Jan 2021 22:58:54 +0000
+Received: by outflank-mailman (output) from mailman id 62234.110089; Tue, 05 Jan 2021 23:58:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwvHy-00036X-KZ; Tue, 05 Jan 2021 22:58:54 +0000
-Received: by outflank-mailman (input) for mailman id 62218;
- Tue, 05 Jan 2021 22:58:53 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kwwDE-0000XI-BK; Tue, 05 Jan 2021 23:58:04 +0000
+Received: by outflank-mailman (input) for mailman id 62234;
+ Tue, 05 Jan 2021 23:58:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=z2QB=GI=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1kwvHx-00030R-CD
- for xen-devel@lists.xenproject.org; Tue, 05 Jan 2021 22:58:53 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 314513df-bb53-472b-acfb-883f77fa6ebe;
- Tue, 05 Jan 2021 22:58:48 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 38345230FA;
- Tue,  5 Jan 2021 22:58:47 +0000 (UTC)
+ <SRS0=wBUl=GI=merlin.srs.infradead.org=batv+0bced0ab9dcc91656173+6344+infradead.org+dwmw2@srs-us1.protection.inumbo.net>)
+ id 1kwwDC-0000XD-Ca
+ for xen-devel@lists.xenproject.org; Tue, 05 Jan 2021 23:58:03 +0000
+Received: from merlin.infradead.org (unknown [2001:8b0:10b:1231::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4711cb5e-3905-4f64-91be-f7748cd7014b;
+ Tue, 05 Jan 2021 23:57:58 +0000 (UTC)
+Received: from i7.infradead.org ([2001:8b0:10b:1:21e:67ff:fecb:7a92])
+ by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1kwwCz-0002IN-46; Tue, 05 Jan 2021 23:57:49 +0000
+Received: from dwoodhou by i7.infradead.org with local (Exim 4.94 #2 (Red Hat
+ Linux)) id 1kwwCx-001NAA-5k; Tue, 05 Jan 2021 23:57:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,83 +52,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 314513df-bb53-472b-acfb-883f77fa6ebe
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1609887527;
-	bh=4/ZOhJJoO9bRXaJSQwwhoEyBdlkDxu6In1n3JrReNrI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QjA3FucPSSMdpsEKnOtC/5N2O4Rc1RqXXPvaSfm3zApKm1ZwynP85am24J6LbLZ7a
-	 ZvaLwdJ5ydutqiy2lBfBFmgND5hefxmUUUtqx6iUaLqcXDjZeIGNEaBecBGsJwQd9h
-	 lDPir6fAznywebagV2gK1tfyysR+TRg65xL07FOnB/3yu/01Z5TT+mYwZI8SD0P3cp
-	 fQVJ4Le+si7kpn9CwAjHPkDG2EBvxBpMOSOMt5FBig5b1BUOc+JRNLRtAL4Mg7EwfL
-	 bYm9FLt6xE3sgbgS3RA+yHPuyHvOY5lxT8HEsdRtkTvlNb/NDSxg4SADzKtnymlJ8i
-	 qrzvsoX0FMdkw==
-From: Stefano Stabellini <sstabellini@kernel.org>
-To: andrew.cooper3@citrix.com,
-	cardoe@cardoe.com,
-	wl@xen.org
-Cc: sstabellini@kernel.org,
-	xen-devel@lists.xenproject.org,
-	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH 2/3] automation: add a job to import qemu-system-aarch64 into the pipeline
-Date: Tue,  5 Jan 2021 14:58:44 -0800
-Message-Id: <20210105225845.30346-2-sstabellini@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <alpine.DEB.2.21.2101051452480.4307@sstabellini-ThinkPad-T480s>
-References: <alpine.DEB.2.21.2101051452480.4307@sstabellini-ThinkPad-T480s>
+X-Inumbo-ID: 4711cb5e-3905-4f64-91be-f7748cd7014b
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=merlin.20170209; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=SleIGNuBIkcJy/BuzaYlQ36nlrAW+Se74wmuZZts4Ek=; b=WWlEYHCy85R/FFTF9dse/4uOWn
+	69q0oDCx3QogTFEtX3QRLMJWT+iSZCYOdDYz3gtFbc6gZf6yoaIkboa7jKyPVi9DL7QWH/qFD7Ht1
+	PRAKKvAq4XXgNJnFCRG1P/68w664Al30+sxiJ5wJgtGpdo3aXbRUkQDbH76DzWgfYLQt+XfOvIPT9
+	6jw2Kd8lkhOFtd+OWeekBy+3KbDIoq6tEW4d6xSUZE3ErutqMfAgoBpf4Ufz7K7k2u/3jIlm6Zlph
+	qQ/rzbfJjHTDI/GOUJlCTqbXxhrVdHiZW8Uo2tfuRTHBOki2CPcFbtl1GoDmWpuCR9ayYl3CXObM2
+	jqUQPZaQ==;
+From: David Woodhouse <dwmw2@infradead.org>
+To: x86@kernel.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Paul Durrant <pdurrant@amazon.com>,
+	jgrall@amazon.com,
+	karahmed@amazon.de,
+	xen-devel <xen-devel@lists.xenproject.org>
+Subject: [PATCH v2 3/5] x86/xen: Add a no_vector_callback option to test PCI INTX delivery
+Date: Tue,  5 Jan 2021 23:57:34 +0000
+Message-Id: <20210105235736.326797-4-dwmw2@infradead.org>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210105235736.326797-1-dwmw2@infradead.org>
+References: <20210105235736.326797-1-dwmw2@infradead.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Sender: David Woodhouse <dwmw2@infradead.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by merlin.infradead.org. See http://www.infradead.org/rpr.html
 
-In order to use the pre-built test-artifacts/qemu-system-aarch64 binary
-for our tests, first we need to import it into the pipeline. Let's do
-that the same way we did it for the kernel and Alpine Linux filesystem:
-by creating a special job for it.
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+It's useful to be able to test non-vector event channel delivery, to make
+sure Linux will work properly on older Xen which doesn't have it.
+
+It's also useful for those working on Xen and Xen-compatible hypervisors,
+because there are guest kernels still in active use which use PCI INTX
+even when vector delivery is available.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- automation/gitlab-ci/build.yaml | 11 +++++++++++
- automation/gitlab-ci/test.yaml  |  2 ++
- 2 files changed, 13 insertions(+)
+ Documentation/admin-guide/kernel-parameters.txt |  4 ++++
+ arch/x86/xen/enlighten_hvm.c                    | 11 ++++++++++-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index e5246828f8..db68dd0b69 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -494,3 +494,14 @@ kernel-5.9.9-arm64-export:
-   tags:
-     - arm64
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index c722ec19cd00..35b10982d363 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -3389,6 +3389,10 @@
  
-+qemu-system-aarch64-5.2.0-arm64-export:
-+  stage: build
-+  image: registry.gitlab.com/xen-project/xen/tests-artifacts/qemu-system-aarch64:5.2.0-arm64v8
-+  script:
-+    - mkdir binaries && cp /qemu-system-aarch64 binaries/qemu-system-aarch64
-+  artifacts:
-+    paths:
-+      - binaries/qemu-system-aarch64
-+  tags:
-+    - arm64
+ 	nosync		[HW,M68K] Disables sync negotiation for all devices.
+ 
++	no_vector_callback
++			[KNL,X86,XEN] Disable the vector callback for Xen
++			event channel interrupts.
 +
-diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 9448651187..91a10febbf 100644
---- a/automation/gitlab-ci/test.yaml
-+++ b/automation/gitlab-ci/test.yaml
-@@ -33,6 +33,7 @@ qemu-alpine-arm64-gcc:
-     - alpine-3.12-gcc-arm64
-     - alpine-3.12-arm64-rootfs-export
-     - kernel-5.9.9-arm64-export
-+    - qemu-system-aarch64-5.2.0-arm64-export
-   artifacts:
-     paths:
-       - smoke.serial
-@@ -56,6 +57,7 @@ qemu-smoke-arm64-gcc:
-   dependencies:
-     - debian-unstable-gcc-arm64
-     - kernel-5.9.9-arm64-export
-+    - qemu-system-aarch64-5.2.0-arm64-export
-   artifacts:
-     paths:
-       - smoke.serial
+ 	nowatchdog	[KNL] Disable both lockup detectors, i.e.
+ 			soft-lockup and NMI watchdog (hard-lockup).
+ 
+diff --git a/arch/x86/xen/enlighten_hvm.c b/arch/x86/xen/enlighten_hvm.c
+index 9e87ab010c82..a1c07e0c888e 100644
+--- a/arch/x86/xen/enlighten_hvm.c
++++ b/arch/x86/xen/enlighten_hvm.c
+@@ -188,6 +188,8 @@ static int xen_cpu_dead_hvm(unsigned int cpu)
+        return 0;
+ }
+ 
++static bool no_vector_callback __initdata;
++
+ static void __init xen_hvm_guest_init(void)
+ {
+ 	if (xen_pv_domain())
+@@ -207,7 +209,7 @@ static void __init xen_hvm_guest_init(void)
+ 
+ 	xen_panic_handler_init();
+ 
+-	if (xen_feature(XENFEAT_hvm_callback_vector))
++	if (!no_vector_callback && xen_feature(XENFEAT_hvm_callback_vector))
+ 		xen_have_vector_callback = 1;
+ 
+ 	xen_hvm_smp_init();
+@@ -233,6 +235,13 @@ static __init int xen_parse_nopv(char *arg)
+ }
+ early_param("xen_nopv", xen_parse_nopv);
+ 
++static __init int xen_parse_no_vector_callback(char *arg)
++{
++	no_vector_callback = true;
++	return 0;
++}
++early_param("no_vector_callback", xen_parse_no_vector_callback);
++
+ bool __init xen_hvm_need_lapic(void)
+ {
+ 	if (xen_pv_domain())
 -- 
-2.17.1
+2.29.2
 
 
