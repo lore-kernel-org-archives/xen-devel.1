@@ -2,44 +2,48 @@ Return-Path: <SRS0=UuSr=GI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2191FC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00814C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:38:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D80AC225AC
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:28:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D80AC225AC
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 973C922B3B
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jan 2021 13:38:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 973C922B3B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.61989.109425 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.61993.109437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwmNY-0003A6-WE; Tue, 05 Jan 2021 13:28:05 +0000
+	id 1kwmXC-0004CV-3C; Tue, 05 Jan 2021 13:38:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 61989.109425; Tue, 05 Jan 2021 13:28:04 +0000
+Received: by outflank-mailman (output) from mailman id 61993.109437; Tue, 05 Jan 2021 13:38:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kwmNY-00039z-T4; Tue, 05 Jan 2021 13:28:04 +0000
-Received: by outflank-mailman (input) for mailman id 61989;
- Tue, 05 Jan 2021 13:28:03 +0000
+	id 1kwmXC-0004CO-04; Tue, 05 Jan 2021 13:38:02 +0000
+Received: by outflank-mailman (input) for mailman id 61993;
+ Tue, 05 Jan 2021 13:38:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=hFWs=GI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kwmNX-00039a-My
- for xen-devel@lists.xenproject.org; Tue, 05 Jan 2021 13:28:03 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=LPBs=GI=tklengyel.com=tamas@srs-us1.protection.inumbo.net>)
+ id 1kwmXA-0004CJ-Cx
+ for xen-devel@lists.xenproject.org; Tue, 05 Jan 2021 13:38:00 +0000
+Received: from MTA-09-3.privateemail.com (unknown [68.65.122.19])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9cdb0b2b-bb27-4281-a91a-73622bfb28e5;
- Tue, 05 Jan 2021 13:28:03 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 37469AD19;
- Tue,  5 Jan 2021 13:28:02 +0000 (UTC)
+ id eb7e9ff7-a5d3-413c-96cd-be951f439ee8;
+ Tue, 05 Jan 2021 13:37:59 +0000 (UTC)
+Received: from MTA-09.privateemail.com (localhost [127.0.0.1])
+ by MTA-09.privateemail.com (Postfix) with ESMTP id 9916C60083
+ for <xen-devel@lists.xenproject.org>; Tue,  5 Jan 2021 08:37:58 -0500 (EST)
+Received: from mail-wr1-f41.google.com (unknown [10.20.151.236])
+ by MTA-09.privateemail.com (Postfix) with ESMTPA id 627CE60082
+ for <xen-devel@lists.xenproject.org>; Tue,  5 Jan 2021 13:37:58 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id t30so36241937wrb.0
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Jan 2021 05:37:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,71 +55,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9cdb0b2b-bb27-4281-a91a-73622bfb28e5
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1609853282; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nPT/UfF3wGO4VC1kwhZ5QPl+OnojMyi/3Y71HohCAmE=;
-	b=Adi1Q37V40SBHCxSOeWjWsurclojiCsGJisUBQ1hpaL+ukE2fgmPTxkxXD6dcMveQdy9r5
-	9h/6fHqUWZVNHZHZrv8BKmB4S+rgGU5+RB0WJzNcnDA6h02mEiFrpDJDpKGLmRXhGXsuuS
-	CNtiht2ZRmMMP3IpSj6/RBZ+YkBihE4=
-Subject: [PATCH 5/5] x86/mem-sharing: don't pointlessly use get_domain_by_id()
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Tamas K Lengyel <tamas@tklengyel.com>
-References: <3f069a0e-39a9-f5c8-154e-ac41e8b2a1c8@suse.com>
-Message-ID: <3b9757c7-d0cb-9a47-b508-71b2e3b75a68@suse.com>
-Date: Tue, 5 Jan 2021 14:28:01 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+X-Inumbo-ID: eb7e9ff7-a5d3-413c-96cd-be951f439ee8
+X-Gm-Message-State: AOAM5300jtZGVFMailh66sBWQ6HOl0mZSCU1h/2yXp33A1xtn3l0rrh8
+	ptxMWoMeB8DbNx7SgcKO5BqSVGRvNSoayuWnvX0=
+X-Google-Smtp-Source: ABdhPJyehLtdrdk329+NSNoPE6eeh8tLos7KIummUGohwoH9G8WVCic8G5n4LNiHr/ean5PYkPI0R/qolA7w9rwNG4E=
+X-Received: by 2002:adf:d082:: with SMTP id y2mr85969962wrh.301.1609853877003;
+ Tue, 05 Jan 2021 05:37:57 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <3f069a0e-39a9-f5c8-154e-ac41e8b2a1c8@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <3f069a0e-39a9-f5c8-154e-ac41e8b2a1c8@suse.com> <3b9757c7-d0cb-9a47-b508-71b2e3b75a68@suse.com>
+In-Reply-To: <3b9757c7-d0cb-9a47-b508-71b2e3b75a68@suse.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Tue, 5 Jan 2021 08:37:20 -0500
+X-Gmail-Original-Message-ID: <CABfawhncBWrKZxZCqtzYxGQ2AF=gz0Y4zpZwhvaTuEm2zJDOZg@mail.gmail.com>
+Message-ID: <CABfawhncBWrKZxZCqtzYxGQ2AF=gz0Y4zpZwhvaTuEm2zJDOZg@mail.gmail.com>
+Subject: Re: [PATCH 5/5] x86/mem-sharing: don't pointlessly use get_domain_by_id()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Virus-Scanned: ClamAV using ClamSMTP
 
-For short-lived references rcu_lock_domain_by_id() is the better
-(slightly cheaper) alternative.
+On Tue, Jan 5, 2021 at 8:28 AM Jan Beulich <jbeulich@suse.com> wrote:
+>
+> For short-lived references rcu_lock_domain_by_id() is the better
+> (slightly cheaper) alternative.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -537,7 +537,7 @@ static int audit(void)
-             p2m_type_t t;
-             mfn_t o_mfn;
- 
--            d = get_domain_by_id(g->domain);
-+            d = rcu_lock_domain_by_id(g->domain);
-             if ( d == NULL )
-             {
-                 gdprintk(XENLOG_ERR,
-@@ -562,7 +562,7 @@ static int audit(void)
-                          d, g->gfn, mfn_x(mfn), p2m_ram_shared, t);
-                 errors++;
-             }
--            put_domain(d);
-+            rcu_unlock_domain(d);
-             nr_gfns++;
-         }
-         /* The type count has an extra ref because we have locked the page */
-@@ -1043,10 +1043,10 @@ static int share_pages(struct domain *sd
-         rmap_del(gfn, cpage, 0);
-         rmap_add(gfn, spage);
-         put_count++;
--        d = get_domain_by_id(gfn->domain);
-+        d = rcu_lock_domain_by_id(gfn->domain);
-         BUG_ON(!d);
-         BUG_ON(set_shared_p2m_entry(d, gfn->gfn, smfn));
--        put_domain(d);
-+        rcu_unlock_domain(d);
-     }
-     ASSERT(list_empty(&cpage->sharing->gfns));
-     BUG_ON(!put_count);
+Acked-by: Tamas K Lengyel <tamas@tklengyel.com>
 
