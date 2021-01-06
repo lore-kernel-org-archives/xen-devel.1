@@ -2,48 +2,48 @@ Return-Path: <SRS0=pLaW=GJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62228C4332B
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BC7CC433DB
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 06:47:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F0D87227C3
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F0D87227C3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3502D22DD3
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 06:47:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3502D22DD3
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.62304.110336 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.62357.110385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx1bE-0001Aa-5X; Wed, 06 Jan 2021 05:43:12 +0000
+	id 1kx2aj-0007rg-M9; Wed, 06 Jan 2021 06:46:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 62304.110336; Wed, 06 Jan 2021 05:43:12 +0000
+Received: by outflank-mailman (output) from mailman id 62357.110385; Wed, 06 Jan 2021 06:46:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx1bD-0001AJ-R0; Wed, 06 Jan 2021 05:43:11 +0000
-Received: by outflank-mailman (input) for mailman id 62304;
- Wed, 06 Jan 2021 03:42:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mBi8=GJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1kwzi0-0005h6-Ds
- for xen-devel@lists.xenproject.org; Wed, 06 Jan 2021 03:42:04 +0000
-Received: from mail-pl1-x635.google.com (unknown [2607:f8b0:4864:20::635])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ccc18fc8-3f3e-4f31-abf4-74b673b3d06e;
- Wed, 06 Jan 2021 03:42:03 +0000 (UTC)
-Received: by mail-pl1-x635.google.com with SMTP id y8so874452plp.8
- for <xen-devel@lists.xenproject.org>; Tue, 05 Jan 2021 19:42:03 -0800 (PST)
-Received: from localhost ([2401:fa00:1:10:3e52:82ff:fe5e:cc9d])
- by smtp.gmail.com with ESMTPSA id c24sm645490pgi.71.2021.01.05.19.41.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Jan 2021 19:42:01 -0800 (PST)
+	id 1kx2aj-0007rZ-J9; Wed, 06 Jan 2021 06:46:45 +0000
+Received: by outflank-mailman (input) for mailman id 62357;
+ Wed, 06 Jan 2021 06:46:45 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kx2aj-0007rR-2y; Wed, 06 Jan 2021 06:46:45 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kx2ai-0002A8-O0; Wed, 06 Jan 2021 06:46:44 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1kx2ai-0006Rl-G2; Wed, 06 Jan 2021 06:46:44 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1kx2ai-00018S-Fa; Wed, 06 Jan 2021 06:46:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,364 +55,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ccc18fc8-3f3e-4f31-abf4-74b673b3d06e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=C4wJrXGOxQgGn7AWcQHemsUEO9lwwvSET4WpFWpbPwY=;
-        b=TacCBszXScPX762D74v8tFRfid8uZoy9Ewhv1WIXnCiKTHeqMsF3/gsK/ez6Nm9+D5
-         ZNRfylPSihDDipIm5LnWx2jdXSEWrWcm6YzF3IfFUBeMSe/mjhKtlhPWbfirAA9QZxzO
-         m3eTqq/0mBatCIinOczTbQ1MsdcHqQ/fVoY1s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=C4wJrXGOxQgGn7AWcQHemsUEO9lwwvSET4WpFWpbPwY=;
-        b=WIgjSFmKBZc01eb3zGo78+5FQ1bIercY7ftkoY/L6qI2bQGmWCa0ju4cfH8fUvHz5u
-         C/SdcOaRcpu8Dz5q+cNiPGElQAln0ldQNfJv48j9EeHymlRxve/SjoINPTs54rhiX0/X
-         Exu3O14LcV4ESVC3+bbJtxE6Fn+YJ1I5U6Gz+7QTFz9d6Ch4Iz3WQGX5Z8KKm/h6jiWv
-         h/ngm6B/zkiUwGEXWLBaoe87/NTMrFSSAH0AG/3qhQnwfG3oxuHKWgTLZZqN5X0GW3M3
-         IHET7doZLkf1C5+4irmKF9hNmGAsii2rUyfD5khNJckke58VsSIVf2Mr20BpUYUrYUPk
-         Yx7g==
-X-Gm-Message-State: AOAM5337zCHa9AWL17LeeC0F1luVnE/49gADs+pJ8Z9wLofeTE48QrPp
-	Bem5FRj3GSE+UZFv3W7bsOZ1NA==
-X-Google-Smtp-Source: ABdhPJzG9r3nJPEwoRZp7m2+d8QeYx0Am+0VGQ6z3BFwCJSpdV+bXsC0qFMiY2ZqvkX4It24DduLlw==
-X-Received: by 2002:a17:902:e9d2:b029:db:d4f6:b581 with SMTP id 18-20020a170902e9d2b02900dbd4f6b581mr2540895plk.34.1609904522345;
-        Tue, 05 Jan 2021 19:42:02 -0800 (PST)
-From: Claire Chang <tientzu@chromium.org>
-To: robh+dt@kernel.org,
-	mpe@ellerman.id.au,
-	benh@kernel.crashing.org,
-	paulus@samba.org,
-	joro@8bytes.org,
-	will@kernel.org,
-	frowand.list@gmail.com,
-	konrad.wilk@oracle.com,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	hch@lst.de,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com
-Cc: grant.likely@arm.com,
-	xypron.glpk@gmx.de,
-	treding@nvidia.com,
-	mingo@kernel.org,
-	bauerman@linux.ibm.com,
-	peterz@infradead.org,
-	gregkh@linuxfoundation.org,
-	saravanak@google.com,
-	rafael.j.wysocki@intel.com,
-	heikki.krogerus@linux.intel.com,
-	andriy.shevchenko@linux.intel.com,
-	rdunlap@infradead.org,
-	dan.j.williams@intel.com,
-	bgolaszewski@baylibre.com,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	iommu@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org,
-	tfiga@chromium.org,
-	drinkcat@chromium.org,
-	Claire Chang <tientzu@chromium.org>
-Subject: [RFC PATCH v3 4/6] swiotlb: Add restricted DMA alloc/free support.
-Date: Wed,  6 Jan 2021 11:41:22 +0800
-Message-Id: <20210106034124.30560-5-tientzu@chromium.org>
-X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
-In-Reply-To: <20210106034124.30560-1-tientzu@chromium.org>
-References: <20210106034124.30560-1-tientzu@chromium.org>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=MNwydH9sux0x+q6syuNmxwEjcChZaNFycJlpYWDdF3M=; b=Oy0bHw5UpZZB4r84tIxv10Wdvu
+	vplObKO8iwodU6aR+LBKjKNBGoP3YYEOi3iwy9Km+mngDV2oVdnV8CUGSgr8mADJl7+DxO7EsLAD0
+	8RHpnT5Rgkw110RAhLj1qYHDfmm5vudrGPaTGWS/bq/5OsHA60phb4dGluF1/iAK559Y=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-158191-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 158191: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:build-amd64:xen-build:fail:regression
+    xen-unstable-smoke:test-armhf-armhf-xl:xen-boot:fail:regression
+    xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=edf5b22022aea0a76eaeb36cc060d984340e1e18
+X-Osstest-Versions-That:
+    xen=7ba2ab495be54f608cb47440e1497b2795bd301a
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 06 Jan 2021 06:46:44 +0000
 
-Add the functions, swiotlb_alloc and swiotlb_free to support the
-memory allocation from restricted DMA pool.
+flight 158191 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/158191/
 
-Signed-off-by: Claire Chang <tientzu@chromium.org>
----
- include/linux/swiotlb.h |   6 ++
- kernel/dma/direct.c     |  12 +++
- kernel/dma/swiotlb.c    | 171 +++++++++++++++++++++++++++++-----------
- 3 files changed, 144 insertions(+), 45 deletions(-)
+Regressions :-(
 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 5135e5636042..84fe96e40685 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -68,6 +68,12 @@ extern void swiotlb_tbl_sync_single(struct device *hwdev,
- dma_addr_t swiotlb_map(struct device *dev, phys_addr_t phys,
- 		size_t size, enum dma_data_direction dir, unsigned long attrs);
- 
-+void *swiotlb_alloc(struct device *dev, size_t size, dma_addr_t *dma_handle,
-+		    unsigned long attrs);
-+
-+void swiotlb_free(struct device *dev, size_t size, void *vaddr,
-+		  dma_addr_t dma_addr, unsigned long attrs);
-+
- #ifdef CONFIG_SWIOTLB
- extern enum swiotlb_force swiotlb_force;
- 
-diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-index 30ccbc08e229..126e9b3354d6 100644
---- a/kernel/dma/direct.c
-+++ b/kernel/dma/direct.c
-@@ -137,6 +137,11 @@ void *dma_direct_alloc(struct device *dev, size_t size,
- 	void *ret;
- 	int err;
- 
-+#ifdef CONFIG_SWIOTLB
-+	if (unlikely(dev->dma_io_tlb_mem))
-+		return swiotlb_alloc(dev, size, dma_handle, attrs);
-+#endif
-+
- 	size = PAGE_ALIGN(size);
- 	if (attrs & DMA_ATTR_NO_WARN)
- 		gfp |= __GFP_NOWARN;
-@@ -246,6 +251,13 @@ void dma_direct_free(struct device *dev, size_t size,
- {
- 	unsigned int page_order = get_order(size);
- 
-+#ifdef CONFIG_SWIOTLB
-+	if (unlikely(dev->dma_io_tlb_mem)) {
-+		swiotlb_free(dev, size, cpu_addr, dma_addr, attrs);
-+		return;
-+	}
-+#endif
-+
- 	if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
- 	    !force_dma_unencrypted(dev)) {
- 		/* cpu_addr is a struct page cookie, not a kernel address */
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 1f05af09e61a..ca88ef59435d 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -459,14 +459,13 @@ static void swiotlb_bounce(phys_addr_t orig_addr, phys_addr_t tlb_addr,
- 	}
- }
- 
--phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t orig_addr,
--		size_t mapping_size, size_t alloc_size,
--		enum dma_data_direction dir, unsigned long attrs)
-+static int swiotlb_tbl_find_free_region(struct device *hwdev,
-+					dma_addr_t tbl_dma_addr,
-+					size_t alloc_size,
-+					unsigned long attrs)
- {
- 	struct io_tlb_mem *mem = get_io_tlb_mem(hwdev);
--	dma_addr_t tbl_dma_addr = phys_to_dma_unencrypted(hwdev, mem->start);
- 	unsigned long flags;
--	phys_addr_t tlb_addr;
- 	unsigned int nslots, stride, index, wrap;
- 	int i;
- 	unsigned long mask;
-@@ -477,15 +476,6 @@ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t orig_addr,
- 	if (no_iotlb_memory && !hwdev->dma_io_tlb_mem)
- 		panic("Can not allocate SWIOTLB buffer earlier and can't now provide you with the DMA bounce buffer");
- 
--	if (mem_encrypt_active())
--		pr_warn_once("Memory encryption is active and system is using DMA bounce buffers\n");
--
--	if (mapping_size > alloc_size) {
--		dev_warn_once(hwdev, "Invalid sizes (mapping: %zd bytes, alloc: %zd bytes)",
--			      mapping_size, alloc_size);
--		return (phys_addr_t)DMA_MAPPING_ERROR;
--	}
--
- 	mask = dma_get_seg_boundary(hwdev);
- 
- 	tbl_dma_addr &= mask;
-@@ -547,7 +537,6 @@ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t orig_addr,
- 				mem->list[i] = 0;
- 			for (i = index - 1; (OFFSET(i, IO_TLB_SEGSIZE) != IO_TLB_SEGSIZE - 1) && mem->list[i]; i--)
- 				mem->list[i] = ++count;
--			tlb_addr = mem->start + (index << IO_TLB_SHIFT);
- 
- 			/*
- 			 * Update the indices to avoid searching in the next
-@@ -570,45 +559,21 @@ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t orig_addr,
- 	if (!(attrs & DMA_ATTR_NO_WARN) && printk_ratelimit())
- 		dev_warn(hwdev, "swiotlb buffer is full (sz: %zd bytes), total %lu (slots), used %lu (slots)\n",
- 			 alloc_size, mem->nslabs, tmp_io_tlb_used);
--	return (phys_addr_t)DMA_MAPPING_ERROR;
-+	return -ENOMEM;
-+
- found:
- 	mem->used += nslots;
- 	spin_unlock_irqrestore(&mem->lock, flags);
- 
--	/*
--	 * Save away the mapping from the original address to the DMA address.
--	 * This is needed when we sync the memory.  Then we sync the buffer if
--	 * needed.
--	 */
--	for (i = 0; i < nslots; i++)
--		mem->orig_addr[index+i] = orig_addr + (i << IO_TLB_SHIFT);
--	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
--	    (dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL))
--		swiotlb_bounce(orig_addr, tlb_addr, mapping_size, DMA_TO_DEVICE);
--
--	return tlb_addr;
-+	return index;
- }
- 
--/*
-- * tlb_addr is the physical address of the bounce buffer to unmap.
-- */
--void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
--			      size_t mapping_size, size_t alloc_size,
--			      enum dma_data_direction dir, unsigned long attrs)
-+static void swiotlb_tbl_release_region(struct device *hwdev, int index,
-+				       size_t size)
- {
- 	struct io_tlb_mem *mem = get_io_tlb_mem(hwdev);
- 	unsigned long flags;
--	int i, count, nslots = ALIGN(alloc_size, 1 << IO_TLB_SHIFT) >> IO_TLB_SHIFT;
--	int index = (tlb_addr - mem->start) >> IO_TLB_SHIFT;
--	phys_addr_t orig_addr = mem->orig_addr[index];
--
--	/*
--	 * First, sync the memory before unmapping the entry
--	 */
--	if (orig_addr != INVALID_PHYS_ADDR &&
--	    !(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
--	    ((dir == DMA_FROM_DEVICE) || (dir == DMA_BIDIRECTIONAL)))
--		swiotlb_bounce(orig_addr, tlb_addr, mapping_size, DMA_FROM_DEVICE);
-+	int i, count, nslots = ALIGN(size, 1 << IO_TLB_SHIFT) >> IO_TLB_SHIFT;
- 
- 	/*
- 	 * Return the buffer to the free list by setting the corresponding
-@@ -640,6 +605,69 @@ void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
- 	spin_unlock_irqrestore(&mem->lock, flags);
- }
- 
-+phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t orig_addr,
-+		size_t mapping_size, size_t alloc_size,
-+		enum dma_data_direction dir, unsigned long attrs)
-+{
-+	struct io_tlb_mem *mem = get_io_tlb_mem(hwdev);
-+	dma_addr_t tbl_dma_addr = phys_to_dma_unencrypted(hwdev, mem->start);
-+	phys_addr_t tlb_addr;
-+	unsigned int nslots, index;
-+	int i;
-+
-+	if (mem_encrypt_active())
-+		pr_warn_once("Memory encryption is active and system is using DMA bounce buffers\n");
-+
-+	if (mapping_size > alloc_size) {
-+		dev_warn_once(hwdev, "Invalid sizes (mapping: %zd bytes, alloc: %zd bytes)",
-+			      mapping_size, alloc_size);
-+		return (phys_addr_t)DMA_MAPPING_ERROR;
-+	}
-+
-+	index = swiotlb_tbl_find_free_region(hwdev, tbl_dma_addr, alloc_size,
-+					     attrs);
-+	if (index < 0)
-+		return (phys_addr_t)DMA_MAPPING_ERROR;
-+
-+	tlb_addr = mem->start + (index << IO_TLB_SHIFT);
-+
-+	/*
-+	 * Save away the mapping from the original address to the DMA address.
-+	 * This is needed when we sync the memory.  Then we sync the buffer if
-+	 * needed.
-+	 */
-+	nslots = ALIGN(alloc_size, 1 << IO_TLB_SHIFT) >> IO_TLB_SHIFT;
-+	for (i = 0; i < nslots; i++)
-+		mem->orig_addr[index+i] = orig_addr + (i << IO_TLB_SHIFT);
-+	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
-+	    (dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL))
-+		swiotlb_bounce(orig_addr, tlb_addr, mapping_size, DMA_TO_DEVICE);
-+
-+	return tlb_addr;
-+}
-+
-+/*
-+ * tlb_addr is the physical address of the bounce buffer to unmap.
-+ */
-+void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
-+			      size_t mapping_size, size_t alloc_size,
-+			      enum dma_data_direction dir, unsigned long attrs)
-+{
-+	struct io_tlb_mem *mem = get_io_tlb_mem(hwdev);
-+	int index = (tlb_addr - mem->start) >> IO_TLB_SHIFT;
-+	phys_addr_t orig_addr = mem->orig_addr[index];
-+
-+	/*
-+	 * First, sync the memory before unmapping the entry
-+	 */
-+	if (orig_addr != INVALID_PHYS_ADDR &&
-+	    !(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
-+	    ((dir == DMA_FROM_DEVICE) || (dir == DMA_BIDIRECTIONAL)))
-+		swiotlb_bounce(orig_addr, tlb_addr, mapping_size, DMA_FROM_DEVICE);
-+
-+	swiotlb_tbl_release_region(hwdev, index, alloc_size);
-+}
-+
- void swiotlb_tbl_sync_single(struct device *hwdev, phys_addr_t tlb_addr,
- 			     size_t size, enum dma_data_direction dir,
- 			     enum dma_sync_target target)
-@@ -706,6 +734,59 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t paddr, size_t size,
- 	return dma_addr;
- }
- 
-+void *swiotlb_alloc(struct device *dev, size_t size, dma_addr_t *dma_handle,
-+		    unsigned long attrs)
-+{
-+	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
-+	int index;
-+	void *vaddr;
-+	phys_addr_t tlb_addr;
-+
-+	size = PAGE_ALIGN(size);
-+	index = swiotlb_tbl_find_free_region(dev, mem->start, size, attrs);
-+	if (index < 0)
-+		return NULL;
-+
-+	tlb_addr = mem->start + (index << IO_TLB_SHIFT);
-+	*dma_handle = phys_to_dma_unencrypted(dev, tlb_addr);
-+
-+	if (!dev_is_dma_coherent(dev)) {
-+		unsigned long pfn = PFN_DOWN(tlb_addr);
-+
-+		/* remove any dirty cache lines on the kernel alias */
-+		arch_dma_prep_coherent(pfn_to_page(pfn), size);
-+
-+		/* create a coherent mapping */
-+		vaddr = dma_common_contiguous_remap(
-+			pfn_to_page(pfn), size,
-+			dma_pgprot(dev, PAGE_KERNEL, attrs),
-+			__builtin_return_address(0));
-+		if (!vaddr) {
-+			swiotlb_tbl_release_region(dev, index, size);
-+			return NULL;
-+		}
-+	} else {
-+		vaddr = phys_to_virt(tlb_addr);
-+	}
-+
-+	memset(vaddr, 0, size);
-+
-+	return vaddr;
-+}
-+
-+void swiotlb_free(struct device *dev, size_t size, void *vaddr,
-+		  dma_addr_t dma_addr, unsigned long attrs)
-+{
-+	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
-+	unsigned int index;
-+
-+	if (!dev_is_dma_coherent(dev))
-+		vunmap(vaddr);
-+
-+	index = (dma_addr - mem->start) >> IO_TLB_SHIFT;
-+	swiotlb_tbl_release_region(dev, index, PAGE_ALIGN(size));
-+}
-+
- size_t swiotlb_max_mapping_size(struct device *dev)
- {
- 	return ((size_t)1 << IO_TLB_SHIFT) * IO_TLB_SEGSIZE;
--- 
-2.29.2.729.g45daf8777d-goog
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 158134
+ test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 158134
 
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  edf5b22022aea0a76eaeb36cc060d984340e1e18
+baseline version:
+ xen                  7ba2ab495be54f608cb47440e1497b2795bd301a
+
+Last test of basis   158134  2021-01-04 15:01:26 Z    1 days
+Failing since        158142  2021-01-05 02:00:25 Z    1 days    7 attempts
+Testing same since   158174  2021-01-05 22:00:25 Z    0 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Bertrand Marquis <bertrand.marquis@arm.com>
+  Jan Beulich <jbeulich@suse.com>
+  Manuel Bouyer <bouyer@antioche.eu.org>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Olaf Hering <olaf@aepfle.de>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Wei Liu <wl@xen.org>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  fail    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          blocked 
+ test-armhf-armhf-xl                                          fail    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 432 lines long.)
 
