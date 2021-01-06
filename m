@@ -2,48 +2,48 @@ Return-Path: <SRS0=pLaW=GJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D994FC433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 04:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2B0CC433DB
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 50E2A22BF3
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 04:48:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50E2A22BF3
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 881ED22CA2
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 881ED22CA2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.62325.110274 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.62306.110345 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx0jc-0003Rh-C9; Wed, 06 Jan 2021 04:47:48 +0000
+	id 1kx1bE-0001Be-Jz; Wed, 06 Jan 2021 05:43:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 62325.110274; Wed, 06 Jan 2021 04:47:48 +0000
+Received: by outflank-mailman (output) from mailman id 62306.110345; Wed, 06 Jan 2021 05:43:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx0jc-0003Ra-9B; Wed, 06 Jan 2021 04:47:48 +0000
-Received: by outflank-mailman (input) for mailman id 62325;
- Wed, 06 Jan 2021 04:47:46 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kx0ja-0003RS-Lm; Wed, 06 Jan 2021 04:47:46 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kx0ja-0008Fu-H9; Wed, 06 Jan 2021 04:47:46 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kx0ja-00088V-9B; Wed, 06 Jan 2021 04:47:46 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kx0ja-0003m2-8b; Wed, 06 Jan 2021 04:47:46 +0000
+	id 1kx1bE-0001BI-A9; Wed, 06 Jan 2021 05:43:12 +0000
+Received: by outflank-mailman (input) for mailman id 62306;
+ Wed, 06 Jan 2021 03:42:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=mBi8=GJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
+ id 1kwzi7-0005he-3a
+ for xen-devel@lists.xenproject.org; Wed, 06 Jan 2021 03:42:11 +0000
+Received: from mail-pl1-x632.google.com (unknown [2607:f8b0:4864:20::632])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b505af66-e4ae-4d63-a98a-e23d4e1b6bb8;
+ Wed, 06 Jan 2021 03:42:10 +0000 (UTC)
+Received: by mail-pl1-x632.google.com with SMTP id e2so862388plt.12
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Jan 2021 19:42:10 -0800 (PST)
+Received: from localhost ([2401:fa00:1:10:3e52:82ff:fe5e:cc9d])
+ by smtp.gmail.com with ESMTPSA id f7sm581725pjs.25.2021.01.05.19.42.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Jan 2021 19:42:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,101 +55,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=KfzGP+IsrTjttlvkDB74zPIwJWuZmPm0P3ndRelLx6o=; b=6fxOrMUJB4iA1JkcWFJGETmmVv
-	rRJagZ70UIK6zTpy4HbPTvBeJX/DpkweuqRrVGxQtMsqQfEp7+8FG9wem4LDMD9ioXfZUeuEq1bwf
-	Fo3zwn+X9S2LIzeIaw6dNdr1OW9SOYSWKe7kooKjqybY87/ypp+EIGI8J/vtwXWkWxbI=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-158179-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: b505af66-e4ae-4d63-a98a-e23d4e1b6bb8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=FZGRSIKNWZAaAhyn9I46mv2qEvPmwpxpVmXsznFggAw=;
+        b=gGxBXOihHsm3ZVDHLv31fDSdj1SXhYQbdn9k5cmAoncGt12QQUfM/c3IHcaEnDkA5J
+         ocQxp+U8gmPg/aUt1mhhV6zZJ8VXZG4qoywct4SKLATrpd2CnwkRGzp6iVjwWvWh4uPB
+         8z3i8pIB+5J9HuYE/Sxl8iNS0nIPHFjKwJX1c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=FZGRSIKNWZAaAhyn9I46mv2qEvPmwpxpVmXsznFggAw=;
+        b=PxIIMV7mvAGib28GROplbU9zOmNqgVJNWB4KrGiSEmmvqaxJr9Wc55JIePDtR//9W9
+         wLCo7HHIoVdiH8RiMFr+WIqGURNEH5AhJOULUj00ZUmONwe5+z0QJVlbFLwH1wzoM7dK
+         zHLxksbYOPDdzrgi0irw+fFtSbor/7uHFUZVghgaCpKViu6A6jopZqJTgs7pAA0Ujfn/
+         Fgypd7UlAKSimtb1n9RaGbe6vkY8WOeXzeUID21J9eSA8h4MowyigNVfdb+1Kig0z5Sl
+         /WijGUFEHI5LZ7jUgnKpPn2HiyEhiHbDZKhroI6ZSu++ADPtnnYcEnGE6vG+GrjfYksF
+         g6MQ==
+X-Gm-Message-State: AOAM530EbNUxqif5zJaxUL3IGs4ywLN3FhWpIWamcdGrolLhHiPsBOLp
+	jtotZ3GZX5OQbIRK59vUSbQgQQ==
+X-Google-Smtp-Source: ABdhPJz3c69cs7bN5kIpvTYTxsM3wMIyOYfyNKD7ypyEM9IFVwp2OokHNuXw3jIYJjMTgHoQH4pU0Q==
+X-Received: by 2002:a17:90a:5802:: with SMTP id h2mr2368082pji.68.1609904529594;
+        Tue, 05 Jan 2021 19:42:09 -0800 (PST)
+From: Claire Chang <tientzu@chromium.org>
+To: robh+dt@kernel.org,
+	mpe@ellerman.id.au,
+	benh@kernel.crashing.org,
+	paulus@samba.org,
+	joro@8bytes.org,
+	will@kernel.org,
+	frowand.list@gmail.com,
+	konrad.wilk@oracle.com,
+	boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	sstabellini@kernel.org,
+	hch@lst.de,
+	m.szyprowski@samsung.com,
+	robin.murphy@arm.com
+Cc: grant.likely@arm.com,
+	xypron.glpk@gmx.de,
+	treding@nvidia.com,
+	mingo@kernel.org,
+	bauerman@linux.ibm.com,
+	peterz@infradead.org,
+	gregkh@linuxfoundation.org,
+	saravanak@google.com,
+	rafael.j.wysocki@intel.com,
+	heikki.krogerus@linux.intel.com,
+	andriy.shevchenko@linux.intel.com,
+	rdunlap@infradead.org,
+	dan.j.williams@intel.com,
+	bgolaszewski@baylibre.com,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	iommu@lists.linux-foundation.org,
+	xen-devel@lists.xenproject.org,
+	tfiga@chromium.org,
+	drinkcat@chromium.org,
+	Claire Chang <tientzu@chromium.org>
+Subject: [RFC PATCH v3 5/6] dt-bindings: of: Add restricted DMA pool
+Date: Wed,  6 Jan 2021 11:41:23 +0800
+Message-Id: <20210106034124.30560-6-tientzu@chromium.org>
+X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
+In-Reply-To: <20210106034124.30560-1-tientzu@chromium.org>
+References: <20210106034124.30560-1-tientzu@chromium.org>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 158179: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:build-amd64:xen-build:fail:regression
-    xen-unstable-smoke:test-armhf-armhf-xl:xen-boot:fail:regression
-    xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=edf5b22022aea0a76eaeb36cc060d984340e1e18
-X-Osstest-Versions-That:
-    xen=7ba2ab495be54f608cb47440e1497b2795bd301a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 06 Jan 2021 04:47:46 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 158179 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/158179/
+Introduce the new compatible string, restricted-dma-pool, for restricted
+DMA. One can specify the address and length of the restricted DMA memory
+region by restricted-dma-pool in the device tree.
 
-Regressions :-(
+Signed-off-by: Claire Chang <tientzu@chromium.org>
+---
+ .../reserved-memory/reserved-memory.txt       | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 158134
- test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 158134
+diff --git a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
+index e8d3096d922c..44975e2a1fd2 100644
+--- a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
++++ b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
+@@ -51,6 +51,20 @@ compatible (optional) - standard definition
+           used as a shared pool of DMA buffers for a set of devices. It can
+           be used by an operating system to instantiate the necessary pool
+           management subsystem if necessary.
++        - restricted-dma-pool: This indicates a region of memory meant to be
++          used as a pool of restricted DMA buffers for a set of devices. The
++          memory region would be the only region accessible to those devices.
++          When using this, the no-map and reusable properties must not be set,
++          so the operating system can create a virtual mapping that will be used
++          for synchronization. The main purpose for restricted DMA is to
++          mitigate the lack of DMA access control on systems without an IOMMU,
++          which could result in the DMA accessing the system memory at
++          unexpected times and/or unexpected addresses, possibly leading to data
++          leakage or corruption. The feature on its own provides a basic level
++          of protection against the DMA overwriting buffer contents at
++          unexpected times. However, to protect against general data leakage and
++          system memory corruption, the system needs to provide way to restrict
++          the DMA to a predefined memory region.
+         - vendor specific string in the form <vendor>,[<device>-]<usage>
+ no-map (optional) - empty property
+     - Indicates the operating system must not create a virtual mapping
+@@ -120,6 +134,11 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
+ 			compatible = "acme,multimedia-memory";
+ 			reg = <0x77000000 0x4000000>;
+ 		};
++
++		restricted_dma_mem_reserved: restricted_dma_mem_reserved {
++			compatible = "restricted-dma-pool";
++			reg = <0x50000000 0x400000>;
++		};
+ 	};
+ 
+ 	/* ... */
+@@ -138,4 +157,9 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
+ 		memory-region = <&multimedia_reserved>;
+ 		/* ... */
+ 	};
++
++	pcie_device: pcie_device@0,0 {
++		memory-region = <&restricted_dma_mem_reserved>;
++		/* ... */
++	};
+ };
+-- 
+2.29.2.729.g45daf8777d-goog
 
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  edf5b22022aea0a76eaeb36cc060d984340e1e18
-baseline version:
- xen                  7ba2ab495be54f608cb47440e1497b2795bd301a
-
-Last test of basis   158134  2021-01-04 15:01:26 Z    1 days
-Failing since        158142  2021-01-05 02:00:25 Z    1 days    6 attempts
-Testing same since   158174  2021-01-05 22:00:25 Z    0 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Bertrand Marquis <bertrand.marquis@arm.com>
-  Jan Beulich <jbeulich@suse.com>
-  Manuel Bouyer <bouyer@antioche.eu.org>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Olaf Hering <olaf@aepfle.de>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  fail    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          blocked 
- test-armhf-armhf-xl                                          fail    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
- test-amd64-amd64-libvirt                                     blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 432 lines long.)
 
