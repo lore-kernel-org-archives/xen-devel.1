@@ -2,47 +2,48 @@ Return-Path: <SRS0=pLaW=GJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58BFFC433E6
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA9D7C433E9
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EBA2922CE3
+	by mail.kernel.org (Postfix) with ESMTPS id 8DB16227C3
 	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 05:43:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBA2922CE3
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DB16227C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.62296.110296 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.62308.110358 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx1bC-00017j-HO; Wed, 06 Jan 2021 05:43:10 +0000
+	id 1kx1bF-0001D3-5S; Wed, 06 Jan 2021 05:43:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 62296.110296; Wed, 06 Jan 2021 05:43:10 +0000
+Received: by outflank-mailman (output) from mailman id 62308.110358; Wed, 06 Jan 2021 05:43:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx1bC-00017c-EO; Wed, 06 Jan 2021 05:43:10 +0000
-Received: by outflank-mailman (input) for mailman id 62296;
- Wed, 06 Jan 2021 03:41:34 +0000
+	id 1kx1bE-0001CS-Q3; Wed, 06 Jan 2021 05:43:12 +0000
+Received: by outflank-mailman (input) for mailman id 62308;
+ Wed, 06 Jan 2021 03:42:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mBi8=GJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1kwzhW-0005dZ-6F
- for xen-devel@lists.xenproject.org; Wed, 06 Jan 2021 03:41:34 +0000
-Received: from mail-pl1-x62d.google.com (unknown [2607:f8b0:4864:20::62d])
+ id 1kwziE-0005iZ-7X
+ for xen-devel@lists.xenproject.org; Wed, 06 Jan 2021 03:42:18 +0000
+Received: from mail-pf1-x42b.google.com (unknown [2607:f8b0:4864:20::42b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3d0bc7a9-8658-415d-a8eb-662e9dc1221f;
- Wed, 06 Jan 2021 03:41:33 +0000 (UTC)
-Received: by mail-pl1-x62d.google.com with SMTP id r4so864100pls.11
- for <xen-devel@lists.xenproject.org>; Tue, 05 Jan 2021 19:41:33 -0800 (PST)
+ id ef479265-0f1c-44ef-9aa4-d83a65a3aef0;
+ Wed, 06 Jan 2021 03:42:17 +0000 (UTC)
+Received: by mail-pf1-x42b.google.com with SMTP id q22so928404pfk.12
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Jan 2021 19:42:17 -0800 (PST)
 Received: from localhost ([2401:fa00:1:10:3e52:82ff:fe5e:cc9d])
- by smtp.gmail.com with ESMTPSA id v10sm544816pjr.47.2021.01.05.19.41.26
+ by smtp.gmail.com with ESMTPSA id er23sm565730pjb.12.2021.01.05.19.42.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Jan 2021 19:41:31 -0800 (PST)
+ Tue, 05 Jan 2021 19:42:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,31 +55,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d0bc7a9-8658-415d-a8eb-662e9dc1221f
+X-Inumbo-ID: ef479265-0f1c-44ef-9aa4-d83a65a3aef0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=U3TpLfW+vImhvH0nGRTRbZCkU/q6uvDGxQ/ffdS/DVM=;
-        b=akatZ9qvuVqvk7jTIGmhjfDVt/R+fkDe7KGtuV2FiL0W9X0lfcwuxwQ5SDHkDWvo/Y
-         OU4FPQJAhXwq03c8Ys0HNgl+IupiV5k8xFok85r5ImLAz1DYG9c87lF8ePniw4ZUVnDj
-         udHjYJ0V3gqIMjH0S4jHAYa5kPGyqU1QS8adQ=
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=n/86gZ2YH2sPTM8FXS5odMzg67Ac9T6AO13ElIbtDDg=;
+        b=cO8PVUda8Bx3SiBfo8qLV3f+sGuoG1tsrJdvV5+xtnmv+FltCXbPO19IOiNV2arX1e
+         MfsIwE8A6Knc0SP2qleJACUoPMyYpzQZDZm9mnnFZGjxFwvgCZj6whF/RxWqHYYM1e+/
+         wdRgR2lnWWnPiXx/LyJKGIMg1QVQFfB7OO6nA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=U3TpLfW+vImhvH0nGRTRbZCkU/q6uvDGxQ/ffdS/DVM=;
-        b=XhgUU4Dt30pIC8yCffuXMauxktp7J6cnJV466UkfcDzKbevmzebognvIHpueLz/ckQ
-         Zqyn74lj58lJbxRzCXV00IG0LYjdh9aoSM27TKxnXMGNErWj2Ac/QEjtYAniskYKEMQr
-         XpHOCqpRJF2CHK4J/Ly43tzKSHdTJXfSOdFNchoELByuf303GdhVqJbd9XxOzuujAFO+
-         QEVS1QAEYhQzmsv3Fzmd8WT+ssF1/qT8pPB+SUFexL/833cExA0tFhsQE6vSBSXJLHsF
-         tiu/5LJ3g8y47M6mABbJK1Q2HFtc5oLQpgZoYN3X7OoVDIG2keMya3aGd9Lg/NuNdzhZ
-         yEyA==
-X-Gm-Message-State: AOAM533l+2vMHqXUZouHob1RXgrT/0tRktlXoWD2Ljqjt4NRKYszH9lS
-	pShhXIiyJHSOjha4hJR9Y4ft6w==
-X-Google-Smtp-Source: ABdhPJzMVJXWuHdnqMMSkgz9jt5n+Akn+pP0QJigxunJGEBd/ODEkJmP1Ra/LRA2SYqMSUv/fxQHkA==
-X-Received: by 2002:a17:90a:4582:: with SMTP id v2mr1714522pjg.58.1609904492458;
-        Tue, 05 Jan 2021 19:41:32 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=n/86gZ2YH2sPTM8FXS5odMzg67Ac9T6AO13ElIbtDDg=;
+        b=Askj8rLxSvDiQPR99i8LdBx+j0dgnlwqNPikteilIyYYLHM4a7hUE2kwqZsd+OYtWd
+         j9t51LIJ0ed/cmUvp21XcfqTlZn/2MVQj3/NQnI2vFgmTWe8P0OmjzRc+kFRYqfO4Fi7
+         0cw7kx6VX+z9COe59M92HPLRvGufBltG5N3I5W5x+CpzNTtv637AjQm3WXf6rI5bkkZZ
+         KTuXOSUI0eKNVxPgo39Da+MiMMVJyEJ8ymOdqF53fbwv+CGVreokie8cIjqClNGVmDgp
+         QGN2fRQuDBHIPtpDCGU+jRyk6vW6dxoZxhH6oSHm04DYJkrY4hGDxdmt5FlaUaAEEBs6
+         TaIA==
+X-Gm-Message-State: AOAM532Y+c0NeW1QXXmxF2CzRScqQGqA7htNzfsCFXoktvH9S3dfun1x
+	bjrwjHVhR5+Ecc8IMYYQBlLTlQ==
+X-Google-Smtp-Source: ABdhPJyc8aEv7i+WmUMkW4PXzO0Jf/pJZ6vWz1r98byTGcdBBPjMldkIqPaeDl28qDIQ4NNN7+TicQ==
+X-Received: by 2002:a65:6382:: with SMTP id h2mr2332953pgv.365.1609904536826;
+        Tue, 05 Jan 2021 19:42:16 -0800 (PST)
 From: Claire Chang <tientzu@chromium.org>
 To: robh+dt@kernel.org,
 	mpe@ellerman.id.au,
@@ -116,73 +117,99 @@ Cc: grant.likely@arm.com,
 	tfiga@chromium.org,
 	drinkcat@chromium.org,
 	Claire Chang <tientzu@chromium.org>
-Subject: [RFC PATCH v3 0/6] Restricted DMA
-Date: Wed,  6 Jan 2021 11:41:18 +0800
-Message-Id: <20210106034124.30560-1-tientzu@chromium.org>
+Subject: [RFC PATCH v3 6/6] of: Add plumbing for restricted DMA pool
+Date: Wed,  6 Jan 2021 11:41:24 +0800
+Message-Id: <20210106034124.30560-7-tientzu@chromium.org>
 X-Mailer: git-send-email 2.29.2.729.g45daf8777d-goog
+In-Reply-To: <20210106034124.30560-1-tientzu@chromium.org>
+References: <20210106034124.30560-1-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series implements mitigations for lack of DMA access control on
-systems without an IOMMU, which could result in the DMA accessing the
-system memory at unexpected times and/or unexpected addresses, possibly
-leading to data leakage or corruption.
+If a device is not behind an IOMMU, we look up the device node and set
+up the restricted DMA when the restricted-dma-pool is presented.
 
-For example, we plan to use the PCI-e bus for Wi-Fi and that PCI-e bus is
-not behind an IOMMU. As PCI-e, by design, gives the device full access to
-system memory, a vulnerability in the Wi-Fi firmware could easily escalate
-to a full system exploit (remote wifi exploits: [1a], [1b] that shows a
-full chain of exploits; [2], [3]).
+Signed-off-by: Claire Chang <tientzu@chromium.org>
+---
+ drivers/of/address.c    | 21 +++++++++++++++++++++
+ drivers/of/device.c     |  4 ++++
+ drivers/of/of_private.h |  5 +++++
+ 3 files changed, 30 insertions(+)
 
-To mitigate the security concerns, we introduce restricted DMA. Restricted
-DMA utilizes the existing swiotlb to bounce streaming DMA in and out of a
-specially allocated region and does memory allocation from the same region.
-The feature on its own provides a basic level of protection against the DMA
-overwriting buffer contents at unexpected times. However, to protect
-against general data leakage and system memory corruption, the system needs
-to provide a way to restrict the DMA to a predefined memory region (this is
-usually done at firmware level, e.g. in ATF on some ARM platforms).
-
-[1a] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_4.html
-[1b] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_11.html
-[2] https://blade.tencent.com/en/advisories/qualpwn/
-[3] https://www.bleepingcomputer.com/news/security/vulnerabilities-found-in-highly-popular-firmware-for-wifi-chips/
-
-Claire Chang (6):
-  swiotlb: Add io_tlb_mem struct
-  swiotlb: Add restricted DMA pool
-  swiotlb: Use restricted DMA pool if available
-  swiotlb: Add restricted DMA alloc/free support.
-  dt-bindings: of: Add restricted DMA pool
-  of: Add plumbing for restricted DMA pool
-
- .../reserved-memory/reserved-memory.txt       |  24 +
- arch/powerpc/platforms/pseries/svm.c          |   4 +-
- drivers/iommu/dma-iommu.c                     |  12 +-
- drivers/of/address.c                          |  21 +
- drivers/of/device.c                           |   4 +
- drivers/of/of_private.h                       |   5 +
- drivers/xen/swiotlb-xen.c                     |   4 +-
- include/linux/device.h                        |   4 +
- include/linux/swiotlb.h                       |  61 +-
- kernel/dma/Kconfig                            |   1 +
- kernel/dma/direct.c                           |  20 +-
- kernel/dma/direct.h                           |  10 +-
- kernel/dma/swiotlb.c                          | 576 +++++++++++-------
- 13 files changed, 514 insertions(+), 232 deletions(-)
-
+diff --git a/drivers/of/address.c b/drivers/of/address.c
+index 73ddf2540f3f..94eca8249854 100644
+--- a/drivers/of/address.c
++++ b/drivers/of/address.c
+@@ -8,6 +8,7 @@
+ #include <linux/logic_pio.h>
+ #include <linux/module.h>
+ #include <linux/of_address.h>
++#include <linux/of_reserved_mem.h>
+ #include <linux/pci.h>
+ #include <linux/pci_regs.h>
+ #include <linux/sizes.h>
+@@ -1094,3 +1095,23 @@ bool of_dma_is_coherent(struct device_node *np)
+ 	return false;
+ }
+ EXPORT_SYMBOL_GPL(of_dma_is_coherent);
++
++int of_dma_set_restricted_buffer(struct device *dev)
++{
++	struct device_node *node;
++	int count, i;
++
++	if (!dev->of_node)
++		return 0;
++
++	count = of_property_count_elems_of_size(dev->of_node, "memory-region",
++						sizeof(phandle));
++	for (i = 0; i < count; i++) {
++		node = of_parse_phandle(dev->of_node, "memory-region", i);
++		if (of_device_is_compatible(node, "restricted-dma-pool"))
++			return of_reserved_mem_device_init_by_idx(
++				dev, dev->of_node, i);
++	}
++
++	return 0;
++}
+diff --git a/drivers/of/device.c b/drivers/of/device.c
+index aedfaaafd3e7..e2c7409956ab 100644
+--- a/drivers/of/device.c
++++ b/drivers/of/device.c
+@@ -182,6 +182,10 @@ int of_dma_configure_id(struct device *dev, struct device_node *np,
+ 	arch_setup_dma_ops(dev, dma_start, size, iommu, coherent);
+ 
+ 	dev->dma_range_map = map;
++
++	if (!iommu)
++		return of_dma_set_restricted_buffer(dev);
++
+ 	return 0;
+ }
+ EXPORT_SYMBOL_GPL(of_dma_configure_id);
+diff --git a/drivers/of/of_private.h b/drivers/of/of_private.h
+index d9e6a324de0a..28a2dfa197ba 100644
+--- a/drivers/of/of_private.h
++++ b/drivers/of/of_private.h
+@@ -161,12 +161,17 @@ struct bus_dma_region;
+ #if defined(CONFIG_OF_ADDRESS) && defined(CONFIG_HAS_DMA)
+ int of_dma_get_range(struct device_node *np,
+ 		const struct bus_dma_region **map);
++int of_dma_set_restricted_buffer(struct device *dev);
+ #else
+ static inline int of_dma_get_range(struct device_node *np,
+ 		const struct bus_dma_region **map)
+ {
+ 	return -ENODEV;
+ }
++static inline int of_dma_get_restricted_buffer(struct device *dev)
++{
++	return -ENODEV;
++}
+ #endif
+ 
+ #endif /* _LINUX_OF_PRIVATE_H */
 -- 
 2.29.2.729.g45daf8777d-goog
 
-v3: 
-  Using only one reserved memory region for both streaming DMA and memory
-  allocation.
-
-v2:
-  Building on top of swiotlb.
-  https://lore.kernel.org/patchwork/cover/1280705/
-
-v1:
-  Using dma_map_ops.
-  https://lore.kernel.org/patchwork/cover/1271660/
 
