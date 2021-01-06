@@ -2,48 +2,47 @@ Return-Path: <SRS0=pLaW=GJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12631C433DB
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 11:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E87C7C433DB
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 11:59:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B32A423110
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 11:57:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B32A423110
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 79E8323110
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jan 2021 11:59:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 79E8323110
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.62459.110635 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.62457.110649 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx7RQ-0006Tr-60; Wed, 06 Jan 2021 11:57:28 +0000
+	id 1kx7T9-0006bt-HS; Wed, 06 Jan 2021 11:59:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 62459.110635; Wed, 06 Jan 2021 11:57:28 +0000
+Received: by outflank-mailman (output) from mailman id 62457.110649; Wed, 06 Jan 2021 11:59:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kx7RQ-0006Tk-23; Wed, 06 Jan 2021 11:57:28 +0000
-Received: by outflank-mailman (input) for mailman id 62459;
- Wed, 06 Jan 2021 11:57:27 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kx7RP-0006Tc-Jv; Wed, 06 Jan 2021 11:57:27 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kx7RP-0007rx-9r; Wed, 06 Jan 2021 11:57:27 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kx7RP-00060O-1A; Wed, 06 Jan 2021 11:57:27 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kx7RP-0004LQ-0g; Wed, 06 Jan 2021 11:57:27 +0000
+	id 1kx7T9-0006bm-ER; Wed, 06 Jan 2021 11:59:15 +0000
+Received: by outflank-mailman (input) for mailman id 62457;
+ Wed, 06 Jan 2021 11:54:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=8wCt=GJ=roman-x580vd=roman@srs-us1.protection.inumbo.net>)
+ id 1kx7OQ-0006PW-PT
+ for xen-devel@lists.xenproject.org; Wed, 06 Jan 2021 11:54:22 +0000
+Received: from roman-X580VD (unknown [178.151.124.169])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6dbeb541-4560-4860-9346-d070ea1399eb;
+ Wed, 06 Jan 2021 11:54:21 +0000 (UTC)
+Received: from roman-X580VD (localhost [127.0.0.1])
+ by roman-X580VD (8.15.2/8.15.2/Debian-18) with ESMTP id 106BRwKO041026;
+ Wed, 6 Jan 2021 13:27:58 +0200
+Received: (from roman@localhost)
+ by roman-X580VD (8.15.2/8.15.2/Submit) id 106BRwpL040994;
+ Wed, 6 Jan 2021 13:27:58 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,78 +54,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=+R4TKKVpkYF1uQAwSDc9Q5K96JFvGo1IPHPSQdWdHCk=; b=mTXc4wUSodjBN2B42yb7pMDBCr
-	CWk2gT42szRb5tSMu0iXKkCycTnT7cdW0zDHx+Hmh5YQabI02taDY9jVJTlrrN+szaw44WG1c0ZxZ
-	x+JmJ1fl6RYKU2QKizV9k853IZ9giJRgt9xbi5aS7SVNC9Qhd2kV13JgCmWMGJeTYkos=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-158199-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 6dbeb541-4560-4860-9346-d070ea1399eb
+From: Roman Skakun <roman_skakun@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Julien Grall <julien@xen.org>,
+        Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v1] arm/optee: Use only least 32 bits for SMC type arg according to SMCCC
+Date: Wed,  6 Jan 2021 13:26:57 +0200
+Message-Id: <123c27ed53ab50ca6f605a96002dcc7e1b7d3e6e.1609931750.git.rm.skakun@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Subject: [ovmf test] 158199: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=67e0e4caa5bacdd65327d8b302eace2d9ebd209f
-X-Osstest-Versions-That:
-    ovmf=21e1dc286e799830bb159e3afc6f1be71a3c382a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 06 Jan 2021 11:57:27 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 158199 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/158199/
+This patch added additional sanity and increases an understanding for
+getting proper value from the first argument for SMC call on aarch64
+according to SMCC Convention.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 67e0e4caa5bacdd65327d8b302eace2d9ebd209f
-baseline version:
- ovmf                 21e1dc286e799830bb159e3afc6f1be71a3c382a
+[0] ARM DEN0028B, page 12
 
-Last test of basis   158185  2021-01-06 03:31:28 Z    0 days
-Testing same since   158199  2021-01-06 08:41:02 Z    0 days    1 attempts
+Signed-off-by: Roman Skakun <roman_skakun@epam.com>
+---
+ xen/arch/arm/tee/optee.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Enze Zhu <zhuenze@byosoft.com.cn>
-  gaoliming <gaoliming@byosoft.com.cn>
-  Liming Gao <gaoliming@byosoft.com.cn>
-  Pete Batard <pete@akeo.ie>
-  Samer El-Haj-Mahmoud <Samer.El-Haj-Mahmoud@arm.com>
+diff --git a/xen/arch/arm/tee/optee.c b/xen/arch/arm/tee/optee.c
+index ee85359742..87060b52b8 100644
+--- a/xen/arch/arm/tee/optee.c
++++ b/xen/arch/arm/tee/optee.c
+@@ -1643,7 +1643,8 @@ static bool optee_handle_call(struct cpu_user_regs *regs)
+     if ( !ctx )
+         return false;
+ 
+-    switch ( get_user_reg(regs, 0) )
++    /* Only least 32 bits are significant (see ARM DEN 0028B, page 12) */
++    switch ( (uint32_t)get_user_reg(regs, 0) )
+     {
+     case OPTEE_SMC_CALLS_COUNT:
+         set_user_reg(regs, 0, OPTEE_MEDIATOR_SMC_COUNT);
+-- 
+2.25.1
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   21e1dc286e..67e0e4caa5  67e0e4caa5bacdd65327d8b302eace2d9ebd209f -> xen-tested-master
 
