@@ -2,48 +2,63 @@ Return-Path: <SRS0=InXR=GK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 584CDC433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:19:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3C93C433DB
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:35:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED3B423403
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:19:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED3B423403
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 8A5632343F
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:35:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A5632343F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.63091.111996 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.63099.112023 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kxbjx-0000Pq-43; Thu, 07 Jan 2021 20:18:37 +0000
+	id 1kxc06-0002Pc-RT; Thu, 07 Jan 2021 20:35:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 63091.111996; Thu, 07 Jan 2021 20:18:37 +0000
+Received: by outflank-mailman (output) from mailman id 63099.112023; Thu, 07 Jan 2021 20:35:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kxbjx-0000Pj-12; Thu, 07 Jan 2021 20:18:37 +0000
-Received: by outflank-mailman (input) for mailman id 63091;
- Thu, 07 Jan 2021 20:18:36 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kxbjw-0000Pb-7h; Thu, 07 Jan 2021 20:18:36 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kxbjw-0000S2-31; Thu, 07 Jan 2021 20:18:36 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kxbjv-00016i-RX; Thu, 07 Jan 2021 20:18:35 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kxbjv-0000ab-R2; Thu, 07 Jan 2021 20:18:35 +0000
+	id 1kxc06-0002PV-NL; Thu, 07 Jan 2021 20:35:18 +0000
+Received: by outflank-mailman (input) for mailman id 63099;
+ Thu, 07 Jan 2021 20:35:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=2pyT=GK=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1kxc05-0002Nv-Gz
+ for xen-devel@lists.xenproject.org; Thu, 07 Jan 2021 20:35:17 +0000
+Received: from aserp2130.oracle.com (unknown [141.146.126.79])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id dc58d9c1-b043-48ec-8ac7-10de9cae0e9a;
+ Thu, 07 Jan 2021 20:35:12 +0000 (UTC)
+Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
+ by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 107KZ0FX043493;
+ Thu, 7 Jan 2021 20:35:09 GMT
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by aserp2130.oracle.com with ESMTP id 35wcuxxk13-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 07 Jan 2021 20:35:09 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 107KYSkl084920;
+ Thu, 7 Jan 2021 20:35:09 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3020.oracle.com with ESMTP id 35w3qu7dqg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 07 Jan 2021 20:35:08 +0000
+Received: from abhmp0016.oracle.com (abhmp0016.oracle.com [141.146.116.22])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 107KZ7Be030848;
+ Thu, 7 Jan 2021 20:35:07 GMT
+Received: from ovs104.us.oracle.com (/10.149.224.204)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Thu, 07 Jan 2021 20:35:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,99 +70,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=AQYiLAPfEWlRXhl1T9h1bQ3q50UbBHfyz7rvzKa8Bag=; b=V97gg53zvb3WyDZBFvtMwTn1yG
-	PSjaaUlkXLrlkM8LdGXz76ESpGKW1stpSa9tKhuTtGJuQV6CXFMniar0dcM9niUqu/o6Cnvv+5cf+
-	nZoKRxjp5NDbT2obFlkPtsDdtb+eogEe7u1S7RXUtitPe6Hh3srutwDkzxYrHwkAIocQ=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-158256-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 158256: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:test-armhf-armhf-xl:xen-boot:fail:regression
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=994f6478a48a60e3b407c7defc2d36a80f880b04
-X-Osstest-Versions-That:
-    xen=7ba2ab495be54f608cb47440e1497b2795bd301a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 07 Jan 2021 20:18:35 +0000
+X-Inumbo-ID: dc58d9c1-b043-48ec-8ac7-10de9cae0e9a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : in-reply-to : references; s=corp-2020-01-29;
+ bh=e5kvjTNHNZ5bZzwKzEgSd2kZPMSBlSOmboG8wtJ3sfg=;
+ b=cN4Dx+o3/OP0VaT3D9MWwzuLuQMBERnsYuO0VksUB1jyDZ8v8z5N8Vts54r8gzw7ph0k
+ h8/u39QXHtgTIhFbJXLH50WvxmniWdq7qhBzRobOCXbFgk0RSHsB7+0JbAYM6eK63EEc
+ zbIy22RYAgXfeycoZ3wR8HR+U0fsuoq1yOOhHX9omSd+Ncpbz5eWXdh2ocLZi4QOmBy7
+ iJf8WcRj6Icuso+Ncxr7eXce8ZpOrrPpa/Oup+XwhCgiUhLxgEyDNbNFDJ76914FfISN
+ piv4nl4f4xkFyoI9htnL8HGH/aIA6dtVrqRPL7/BOBYRIuWp4Aot8ogCmMR9I5PjJ1ww EQ== 
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: xen-devel@lists.xenproject.org
+Cc: iwj@xenproject.org, wl@xen.org, anthony.perard@citrix.com,
+        jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com,
+        jun.nakajima@intel.com, kevin.tian@intel.com,
+        boris.ostrvsky@oracle.com
+Subject: [PATCH 2/4] x86: Introduce MSR_UNHANDLED
+Date: Thu,  7 Jan 2021 15:34:56 -0500
+Message-Id: <1610051698-23675-3-git-send-email-boris.ostrovsky@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1610051698-23675-1-git-send-email-boris.ostrovsky@oracle.com>
+References: <1610051698-23675-1-git-send-email-boris.ostrovsky@oracle.com>
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9857 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 malwarescore=0 mlxscore=0
+ spamscore=0 mlxlogscore=999 phishscore=0 bulkscore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2101070120
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9857 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 bulkscore=0
+ clxscore=1015 spamscore=0 impostorscore=0 priorityscore=1501 mlxscore=0
+ adultscore=0 mlxlogscore=999 lowpriorityscore=0 phishscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2101070120
 
-flight 158256 xen-unstable-smoke real [real]
-flight 158263 xen-unstable-smoke real-retest [real]
-http://logs.test-lab.xenproject.org/osstest/logs/158256/
-http://logs.test-lab.xenproject.org/osstest/logs/158263/
+When toolstack updates MSR policy, this MSR offset (which is an invalid
+MSR index) is used to indicate hypervisor behavior when a guest accesses
+an MSR which is not explicitly emulated.
 
-Regressions :-(
+Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+---
+ xen/include/xen/lib/x86/msr.h | 17 ++++++++++++++++-
+ xen/lib/x86/msr.c             | 16 +++++++++-------
+ 2 files changed, 25 insertions(+), 8 deletions(-)
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 158134
+diff --git a/xen/include/xen/lib/x86/msr.h b/xen/include/xen/lib/x86/msr.h
+index 48ba4a59c036..7911ae31eb48 100644
+--- a/xen/include/xen/lib/x86/msr.h
++++ b/xen/include/xen/lib/x86/msr.h
+@@ -2,8 +2,21 @@
+ #ifndef XEN_LIB_X86_MSR_H
+ #define XEN_LIB_X86_MSR_H
+ 
++/*
++ * Behavior on accesses to MSRs that are not handled by emulation:
++ *  0 = return #GP, warning emitted
++ *  1 = read as 0, writes are dropped, no warning
++ *  2 = read as 0, writes are dropped, warning emitted
++ */
++#define MSR_UNHANDLED_NEVER     0
++#define MSR_UNHANDLED_SILENT    1
++#define MSR_UNHANDLED_VERBOSE   2
++
++/* MSR that is not explicitly processed by emulation */
++#define MSR_UNHANDLED -1
++
+ /* Maximum number of MSRs written when serialising msr_policy. */
+-#define MSR_MAX_SERIALISED_ENTRIES 2
++#define MSR_MAX_SERIALISED_ENTRIES 3
+ 
+ /* MSR policy object for shared per-domain MSRs */
+ struct msr_policy
+@@ -45,6 +58,8 @@ struct msr_policy
+             bool taa_no:1;
+         };
+     } arch_caps;
++
++    uint8_t ignore_msrs;
+ };
+ 
+ #ifdef __XEN__
+diff --git a/xen/lib/x86/msr.c b/xen/lib/x86/msr.c
+index 7d71e92a380a..cf53768dfa4e 100644
+--- a/xen/lib/x86/msr.c
++++ b/xen/lib/x86/msr.c
+@@ -6,11 +6,11 @@
+  * Copy a single MSR into the provided msr_entry_buffer_t buffer, performing a
+  * boundary check against the buffer size.
+  */
+-static int copy_msr_to_buffer(uint32_t idx, uint64_t val,
++static int copy_msr_to_buffer(uint32_t idx, uint64_t val, uint32_t flags,
+                               msr_entry_buffer_t msrs,
+                               uint32_t *curr_entry, const uint32_t nr_entries)
+ {
+-    const xen_msr_entry_t ent = { .idx = idx, .val = val };
++    const xen_msr_entry_t ent = { .idx = idx, .val = val, .flags = flags };
+ 
+     if ( *curr_entry == nr_entries )
+         return -ENOBUFS;
+@@ -29,17 +29,18 @@ int x86_msr_copy_to_buffer(const struct msr_policy *p,
+     const uint32_t nr_entries = *nr_entries_p;
+     uint32_t curr_entry = 0;
+ 
+-#define COPY_MSR(idx, val)                                      \
++#define COPY_MSR(idx, val, flags)                                      \
+     ({                                                          \
+         int ret;                                                \
+                                                                 \
+         if ( (ret = copy_msr_to_buffer(                         \
+-                  idx, val, msrs, &curr_entry, nr_entries)) )   \
++                  idx, val, flags, msrs, &curr_entry, nr_entries)) )   \
+             return ret;                                         \
+     })
+ 
+-    COPY_MSR(MSR_INTEL_PLATFORM_INFO, p->platform_info.raw);
+-    COPY_MSR(MSR_ARCH_CAPABILITIES,   p->arch_caps.raw);
++    COPY_MSR(MSR_INTEL_PLATFORM_INFO, p->platform_info.raw, 0);
++    COPY_MSR(MSR_ARCH_CAPABILITIES,   p->arch_caps.raw, 0);
++    COPY_MSR(MSR_UNHANDLED, 0, p->ignore_msrs);
+ 
+ #undef COPY_MSR
+ 
+@@ -77,7 +78,7 @@ int x86_msr_copy_from_buffer(struct msr_policy *p,
+         if ( copy_from_buffer_offset(&data, msrs, i, 1) )
+             return -EFAULT;
+ 
+-        if ( data.flags ) /* .flags MBZ */
++        if ( data.idx != MSR_UNHANDLED && data.flags )
+         {
+             rc = -EINVAL;
+             goto err;
+@@ -101,6 +102,7 @@ int x86_msr_copy_from_buffer(struct msr_policy *p,
+ 
+         case MSR_INTEL_PLATFORM_INFO: ASSIGN(platform_info.raw); break;
+         case MSR_ARCH_CAPABILITIES:   ASSIGN(arch_caps.raw);     break;
++        case MSR_UNHANDLED:           p->ignore_msrs = data.flags & 0xff;       break;
+ 
+ #undef ASSIGN
+ 
+-- 
+1.8.3.1
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  994f6478a48a60e3b407c7defc2d36a80f880b04
-baseline version:
- xen                  7ba2ab495be54f608cb47440e1497b2795bd301a
-
-Last test of basis   158134  2021-01-04 15:01:26 Z    3 days
-Failing since        158142  2021-01-05 02:00:25 Z    2 days   16 attempts
-Testing same since   158256  2021-01-07 15:00:25 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Bertrand Marquis <bertrand.marquis@arm.com>
-  Jan Beulich <jbeulich@suse.com>
-  Manuel Bouyer <bouyer@antioche.eu.org>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Olaf Hering <olaf@aepfle.de>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Tamas K Lengyel <tamas.lengyel@intel.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          fail    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 554 lines long.)
 
