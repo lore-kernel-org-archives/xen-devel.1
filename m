@@ -2,63 +2,61 @@ Return-Path: <SRS0=InXR=GK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1B70C433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59706C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:37:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 46C2E23443
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:35:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46C2E23443
+	by mail.kernel.org (Postfix) with ESMTPS id 10B4C23441
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 20:37:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10B4C23441
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.63101.112035 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.63110.112047 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kxc0B-0002TT-AE; Thu, 07 Jan 2021 20:35:23 +0000
+	id 1kxc1x-0002mn-Oa; Thu, 07 Jan 2021 20:37:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 63101.112035; Thu, 07 Jan 2021 20:35:23 +0000
+Received: by outflank-mailman (output) from mailman id 63110.112047; Thu, 07 Jan 2021 20:37:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kxc0B-0002TJ-5c; Thu, 07 Jan 2021 20:35:23 +0000
-Received: by outflank-mailman (input) for mailman id 63101;
- Thu, 07 Jan 2021 20:35:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kxc1x-0002mg-Kn; Thu, 07 Jan 2021 20:37:13 +0000
+Received: by outflank-mailman (input) for mailman id 63110;
+ Thu, 07 Jan 2021 20:37:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2pyT=GK=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1kxc0A-0002Nv-H6
- for xen-devel@lists.xenproject.org; Thu, 07 Jan 2021 20:35:22 +0000
-Received: from aserp2130.oracle.com (unknown [141.146.126.79])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 046297dd-aae7-4367-bbc6-18123069346c;
- Thu, 07 Jan 2021 20:35:13 +0000 (UTC)
-Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
- by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 107KZ0FY043493;
- Thu, 7 Jan 2021 20:35:10 GMT
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by aserp2130.oracle.com with ESMTP id 35wcuxxk16-1
+ id 1kxc1w-0002mZ-7O
+ for xen-devel@lists.xenproject.org; Thu, 07 Jan 2021 20:37:12 +0000
+Received: from aserp2120.oracle.com (unknown [141.146.126.78])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 13aa0c5b-892b-4c87-bc8c-a2353e722c94;
+ Thu, 07 Jan 2021 20:37:11 +0000 (UTC)
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 107KZChT103388;
+ Thu, 7 Jan 2021 20:37:08 GMT
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by aserp2120.oracle.com with ESMTP id 35wepme7he-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 07 Jan 2021 20:35:10 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 107KYTNd084995;
- Thu, 7 Jan 2021 20:35:10 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by userp3020.oracle.com with ESMTP id 35w3qu7dqw-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 07 Jan 2021 20:35:09 +0000
-Received: from abhmp0016.oracle.com (abhmp0016.oracle.com [141.146.116.22])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 107KZ8Yu030852;
+ Thu, 07 Jan 2021 20:37:08 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 107KPSuX184448;
  Thu, 7 Jan 2021 20:35:08 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+ by userp3030.oracle.com with ESMTP id 35w3g39gah-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 07 Jan 2021 20:35:07 +0000
+Received: from abhmp0016.oracle.com (abhmp0016.oracle.com [141.146.116.22])
+ by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 107KZ6wG010963;
+ Thu, 7 Jan 2021 20:35:06 GMT
 Received: from ovs104.us.oracle.com (/10.149.224.204)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Thu, 07 Jan 2021 20:35:08 +0000
+ with ESMTP ; Thu, 07 Jan 2021 20:35:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,183 +68,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 046297dd-aae7-4367-bbc6-18123069346c
+X-Inumbo-ID: 13aa0c5b-892b-4c87-bc8c-a2353e722c94
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2020-01-29;
- bh=Bhn1XpcYtMjdOpy5EowmGrcJmomV82yzTHtsIJQu40A=;
- b=LNkPhjN/1mKq6dcW9CcPaSO7HXu8CtViKdQ9RgoO9FhFnEGnTw5eCvYCvQFCFsbnyfRs
- /r2JBsJleBpbknC1KwZxNnOoech2/uVnR6mGHBMmSFIBdHQBah+Ut6kVvLlUSm0PKJ8l
- wIThNXauAPWMMUbmN6SVilTI2e4dT06Sqyq/YBeMt5rKtR7yG+JJW+Mk5wC97XT+PhzB
- 0liLoxp78FJvIaL/Nh2kMb9yng0xeUK0N03gFDk3KxZI3Oc/iKW8I8ABt8WOcYljoHR0
- BbwBUSPU5L6zGh4AN+4hFT1o1pgJjFGjiZ2N8LZLYKhWel9Dxg3rCkXL9MjEjgJbGWuA ew== 
+ subject : date : message-id; s=corp-2020-01-29;
+ bh=YdUZlATkoOSCXxs7th/uydFcD7CVzj1ymOLdm4LTSH4=;
+ b=sj2xqtN3vmTG8b9eCZpF8RWJC0s8ChgaXAlJ175+H9Cw8JvY87a25zBvoLbf53vy6FNB
+ sEBcXzEk04H9DsKojXLQcSFztdQV5huou3JavW/F27zDE0WSeKLeW+9dR/tAj4LkwChs
+ kzmjPWJd2eDhBhenu4fHDBkcED/w7UpVHic5Qd3d9VCEKOmZITtx/dvYmwvufYtLCEsA
+ E+c/b9Aveq/GWpsHF6B/7ZwWXxMudqdqetly7nw9iL3bIHCEDtOrg2vlyG3FXbKafMnK
+ JaOJ0eTeFe9Am5tYeze4saSn4k0MneNty8NCqZl8AfScepcO4YZ7KFgz/9zrTXmLOGJf XA== 
 From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 To: xen-devel@lists.xenproject.org
 Cc: iwj@xenproject.org, wl@xen.org, anthony.perard@citrix.com,
         jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com,
         jun.nakajima@intel.com, kevin.tian@intel.com,
         boris.ostrvsky@oracle.com
-Subject: [PATCH 3/4] x86: Allow non-faulting accesses to non-emulated MSRs if policy permits this
-Date: Thu,  7 Jan 2021 15:34:57 -0500
-Message-Id: <1610051698-23675-4-git-send-email-boris.ostrovsky@oracle.com>
+Subject: [PATCH 0/4] Permit fault-less access to non-emulated MSRs
+Date: Thu,  7 Jan 2021 15:34:54 -0500
+Message-Id: <1610051698-23675-1-git-send-email-boris.ostrovsky@oracle.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1610051698-23675-1-git-send-email-boris.ostrovsky@oracle.com>
-References: <1610051698-23675-1-git-send-email-boris.ostrovsky@oracle.com>
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9857 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 malwarescore=0 mlxscore=0
- spamscore=0 mlxlogscore=999 phishscore=0 bulkscore=0 suspectscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 malwarescore=0 adultscore=0
+ phishscore=0 spamscore=0 mlxlogscore=999 suspectscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2101070119
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9857 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 bulkscore=0 spamscore=0
+ impostorscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0
+ priorityscore=1501 mlxscore=0 malwarescore=0 clxscore=1015 mlxlogscore=999
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
  definitions=main-2101070120
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9857 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 bulkscore=0
- clxscore=1015 spamscore=0 impostorscore=0 priorityscore=1501 mlxscore=0
- adultscore=0 mlxlogscore=999 lowpriorityscore=0 phishscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2101070120
 
-Starting with commit 84e848fd7a16 ("x86/hvm: disallow access to unknown MSRs")
-accesses to unhandled MSRs result in #GP sent to the guest. This caused a
-regression for Solaris who tries to acccess MSR_RAPL_POWER_UNIT and (unlike,
-for example, Linux) does not catch exceptions when accessing MSRs that
-potentially may not be present.
 
-Instead of special-casing RAPL registers we decide what to do when any
-non-emulated MSR is accessed based on ignore_msrs field of msr_policy.
+Disallowing accesses to MSRs that are not explicitly handled (done by
+commit 84e848fd7a16 ("x86/hvm: disallow access to unknown MSRs")) caused
+regression for Solaris guests who access MSR_RAPL_POWER_UNIT assuming
+it's always there.
 
-Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
----
+We can add special handling for this and other RAPL registers (and that's
+what should happen for pre-4.14 releases) but a more general solution is to
+provide an option to allow accesses to unhandled registers to proceed.
 
- xen/arch/x86/hvm/svm/svm.c     | 10 ++++------
- xen/arch/x86/hvm/vmx/vmx.c     | 10 ++++------
- xen/arch/x86/msr.c             | 20 ++++++++++++++++++++
- xen/arch/x86/pv/emul-priv-op.c |  8 ++++----
- xen/include/asm-x86/msr.h      |  3 ++-
- 5 files changed, 34 insertions(+), 17 deletions(-)
+The new option is "ignore_msrs" and it can take three values
+    never:   Issue a warning to the log and #GP to the guest. This is default.
+    silent:  MSR reads return 0, MSR writes are ignored. No warnings to the log.
+    verbose: Similar to silent but a warning is written.
 
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index b819897a4a9f..c9a93448f071 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1965,8 +1965,8 @@ static int svm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-         break;
- 
-     default:
--        gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", msr);
--        goto gpf;
-+        if ( guest_unhandled_msr(v, msr, msr_content, false) )
-+            goto gpf;
-     }
- 
-     HVM_DBG_LOG(DBG_LEVEL_MSR, "returns: ecx=%x, msr_value=%"PRIx64,
-@@ -2151,10 +2151,8 @@ static int svm_msr_write_intercept(unsigned int msr, uint64_t msr_content)
-         break;
- 
-     default:
--        gdprintk(XENLOG_WARNING,
--                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
--                 msr, msr_content);
--        goto gpf;
-+        if ( guest_unhandled_msr(v, msr, &msr_content, true) )
-+            goto gpf;
-     }
- 
-     return X86EMUL_OKAY;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 2d4475ee3de2..34524c7a6f00 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3017,8 +3017,8 @@ static int vmx_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
-             break;
-         }
- 
--        gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", msr);
--        goto gp_fault;
-+        if ( guest_unhandled_msr(curr, msr, msr_content, false) )
-+            goto gp_fault;
-     }
- 
- done:
-@@ -3319,10 +3319,8 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
-              is_last_branch_msr(msr) )
-             break;
- 
--        gdprintk(XENLOG_WARNING,
--                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
--                 msr, msr_content);
--        goto gp_fault;
-+        if ( guest_unhandled_msr(v, msr, &msr_content, true) )
-+            goto gp_fault;
-     }
- 
-     return X86EMUL_OKAY;
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index be8e36386250..e624fc8694bf 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -164,6 +164,26 @@ int init_vcpu_msr_policy(struct vcpu *v)
-     return 0;
- }
- 
-+/* Returns true if policy requires #GP to the guest. */
-+bool guest_unhandled_msr(const struct vcpu *v, uint32_t msr,
-+                         uint64_t *val, bool is_write)
-+{
-+    const struct msr_policy *mp = v->domain->arch.msr;
-+
-+    if ( unlikely(mp->ignore_msrs != MSR_UNHANDLED_NEVER) && !is_write )
-+        *val = 0;
-+
-+    if ( likely(mp->ignore_msrs != MSR_UNHANDLED_SILENT) ) {
-+        if ( is_write )
-+            gdprintk(XENLOG_WARNING, "WRMSR 0x%08x val 0x%016"PRIx64
-+                    " unimplemented\n", msr, *val);
-+        else
-+            gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", msr);
-+    }
-+
-+    return (mp->ignore_msrs == MSR_UNHANDLED_NEVER);
-+}
-+
- int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
- {
-     const struct vcpu *curr = current;
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index dbceed8a05fd..96d90eb30adc 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -984,7 +984,8 @@ static int read_msr(unsigned int reg, uint64_t *val,
-         }
-         /* fall through */
-     default:
--        gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", reg);
-+        if ( !guest_unhandled_msr(curr, reg, val, false) )
-+            return X86EMUL_OKAY;
-         break;
- 
-     normal:
-@@ -1146,9 +1147,8 @@ static int write_msr(unsigned int reg, uint64_t val,
-         }
-         /* fall through */
-     default:
--        gdprintk(XENLOG_WARNING,
--                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
--                 reg, val);
-+        if ( !guest_unhandled_msr(curr, reg, &val, true) )
-+            return X86EMUL_OKAY;
-         break;
- 
-     invalid:
-diff --git a/xen/include/asm-x86/msr.h b/xen/include/asm-x86/msr.h
-index 16f95e734428..43a48e1a50ce 100644
---- a/xen/include/asm-x86/msr.h
-+++ b/xen/include/asm-x86/msr.h
-@@ -345,5 +345,6 @@ int init_vcpu_msr_policy(struct vcpu *v);
-  */
- int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val);
- int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val);
--
-+bool guest_unhandled_msr(const struct vcpu *v, uint32_t msr,
-+                         uint64_t *val, bool is_write);
- #endif /* __ASM_MSR_H */
+
+Boris Ostrovsky (4):
+  xl: Add support for ignore_msrs option
+  x86: Introduce MSR_UNHANDLED
+  x86: Allow non-faulting accesses to non-emulated MSRs if policy
+    permits this
+  tools/libs: Apply MSR policy to a guest
+
+ docs/man/xl.cfg.5.pod.in          |  20 ++++++-
+ tools/include/xenctrl.h           |   2 +
+ tools/libs/guest/Makefile         |   1 +
+ tools/libs/guest/xg_msrs_x86.c    | 110 ++++++++++++++++++++++++++++++++++++++
+ tools/libs/light/libxl_dom.c      |   5 +-
+ tools/libs/light/libxl_internal.h |   2 +
+ tools/libs/light/libxl_types.idl  |   7 +++
+ tools/libs/light/libxl_x86.c      |   7 +++
+ tools/xl/xl_parse.c               |   7 +++
+ xen/arch/x86/hvm/svm/svm.c        |  10 ++--
+ xen/arch/x86/hvm/vmx/vmx.c        |  10 ++--
+ xen/arch/x86/msr.c                |  20 +++++++
+ xen/arch/x86/pv/emul-priv-op.c    |   8 +--
+ xen/include/asm-x86/msr.h         |   3 +-
+ xen/include/xen/lib/x86/msr.h     |  17 +++++-
+ xen/lib/x86/msr.c                 |  16 +++---
+ 16 files changed, 217 insertions(+), 28 deletions(-)
+ create mode 100644 tools/libs/guest/xg_msrs_x86.c
+
 -- 
 1.8.3.1
 
