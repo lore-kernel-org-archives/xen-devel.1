@@ -1,49 +1,43 @@
-Return-Path: <SRS0=InXR=GK=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=/Lw+=GL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C047DC433DB
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 23:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 977FFC433DB
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Jan 2021 00:47:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 68F0E23609
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jan 2021 23:46:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 68F0E23609
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4DE9823447
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Jan 2021 00:47:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4DE9823447
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.63141.112110 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.63149.112137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kxeyo-00054E-Aw; Thu, 07 Jan 2021 23:46:10 +0000
+	id 1kxfw1-0003Bz-Eg; Fri, 08 Jan 2021 00:47:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 63141.112110; Thu, 07 Jan 2021 23:46:10 +0000
+Received: by outflank-mailman (output) from mailman id 63149.112137; Fri, 08 Jan 2021 00:47:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kxeyo-000547-81; Thu, 07 Jan 2021 23:46:10 +0000
-Received: by outflank-mailman (input) for mailman id 63141;
- Thu, 07 Jan 2021 23:46:09 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kxeyn-00053z-4j; Thu, 07 Jan 2021 23:46:09 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kxeym-0003tD-Ro; Thu, 07 Jan 2021 23:46:08 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1kxeym-0002Jh-JL; Thu, 07 Jan 2021 23:46:08 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1kxeym-0004af-Io; Thu, 07 Jan 2021 23:46:08 +0000
+	id 1kxfw1-0003Bs-Ay; Fri, 08 Jan 2021 00:47:21 +0000
+Received: by outflank-mailman (input) for mailman id 63149;
+ Fri, 08 Jan 2021 00:47:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1BSv=GL=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
+ id 1kxfw0-0003Ar-NK
+ for xen-devel@lists.xenproject.org; Fri, 08 Jan 2021 00:47:20 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0592e1db-2daf-4fb4-8481-ddf20c38ec64;
+ Fri, 08 Jan 2021 00:47:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,99 +49,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=cc3/n9HhV+JFYcR2QWXBwrWWVtnKmNOBFfluAN5fiT0=; b=pjF23TEhpa54o4TVkwnVeGfVSZ
-	gUicaOaK0lITg0Igpv25uqAaXWp1pT3EN5wJXb3T+tdgLgUZc4Ux+3evEjFWUx7OhTzDdNluFZ6Zc
-	BW5As1Sy4t5BWR/d9VFZEkFr6Ov59LYRRLg0w5wKEEQLgW5ypY5dS631pNEMiK7gSYX0=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-158265-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 0592e1db-2daf-4fb4-8481-ddf20c38ec64
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1610066835;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=AjOVgnBRHW6mA8jfsxCNVWvF+SDZiBno1KSGGGCBrKU=;
+  b=JXXrwAS/COCFLDm/sP69KHauBmwOrV66GiMt64Pl+4oPZM8cGINp8gDG
+   17uNWv0wncmPnBjfzB6yRGN+B1wCU5TZe2HK4214jwcBSL9On3jjyMwzF
+   RySxUlhwzsHuzNQcIb9ztryu6VUKhTKpjUbp+JHSRCjxbWnzQELhhTWgR
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: RsX61pEuroged8+NrQDxKIntpoiZrZT/j9/fr2jqRh1K/HbYS1xQByzvkBYsYTm+GOp6YfYNdm
+ VOrOl10qV//W8fLwN0i6L6G4UzqsvqDWRgkC3nLWQLbf8/Eapgtuy6ujdUyA79COa9BNjEZsTf
+ liVtfCFemuNqiBze2Gz/NLrmVi3LnFsKaLZf5pcpWSUdmztsApdV6EP4JYwc65FddhIgeI2eAf
+ Iy9qHqG+tkPQHRRaVrxcmNASttPl65K/BQHcEll2eZJbDghGKY4678bAtT45stJyXuMQSl6Rz+
+ pG8=
+X-SBRS: 5.2
+X-MesageID: 35912825
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.79,330,1602561600"; 
+   d="scan'208";a="35912825"
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <paul@xen.org>, <wl@xen.org>, <iwj@xenproject.org>,
+	<anthony.perard@citrix.com>, <andrew.cooper3@citrix.com>,
+	<george.dunlap@citrix.com>, <jbeulich@suse.com>, <julien@xen.org>,
+	<sstabellini@kernel.org>, <roger.pau@citrix.com>, Igor Druzhinin
+	<igor.druzhinin@citrix.com>
+Subject: [PATCH 2/2] viridian: allow vCPU hotplug for Windows VMs
+Date: Fri, 8 Jan 2021 00:46:36 +0000
+Message-ID: <1610066796-17266-2-git-send-email-igor.druzhinin@citrix.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1610066796-17266-1-git-send-email-igor.druzhinin@citrix.com>
+References: <1610066796-17266-1-git-send-email-igor.druzhinin@citrix.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 158265: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:test-armhf-armhf-xl:xen-boot:fail:regression
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=994f6478a48a60e3b407c7defc2d36a80f880b04
-X-Osstest-Versions-That:
-    xen=7ba2ab495be54f608cb47440e1497b2795bd301a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 07 Jan 2021 23:46:08 +0000
+Content-Type: text/plain
 
-flight 158265 xen-unstable-smoke real [real]
-flight 158266 xen-unstable-smoke real-retest [real]
-http://logs.test-lab.xenproject.org/osstest/logs/158265/
-http://logs.test-lab.xenproject.org/osstest/logs/158266/
+If Viridian extensions are enabled, Windows wouldn't currently allow
+a hotplugged vCPU to be brought up dynamically. We need to expose a special
+bit to let the guest know we allow it. It appears we can just start exposing
+it without worrying too much about compatibility - see relevant QEMU
+discussion here:
 
-Regressions :-(
+https://patchwork.kernel.org/project/qemu-devel/patch/1455364815-19586-1-git-send-email-den@openvz.org/
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-armhf-armhf-xl           8 xen-boot                 fail REGR. vs. 158134
+Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
+---
+ xen/arch/x86/hvm/viridian/viridian.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
+index ae1ea86..76e8291 100644
+--- a/xen/arch/x86/hvm/viridian/viridian.c
++++ b/xen/arch/x86/hvm/viridian/viridian.c
+@@ -76,6 +76,7 @@ typedef union _HV_CRASH_CTL_REG_CONTENTS
+ } HV_CRASH_CTL_REG_CONTENTS;
+ 
+ /* Viridian CPUID leaf 3, Hypervisor Feature Indication */
++#define CPUID3D_CPU_DYNAMIC_PARTITIONING (1 << 3)
+ #define CPUID3D_CRASH_MSRS (1 << 10)
+ #define CPUID3D_SINT_POLLING (1 << 17)
+ 
+@@ -179,8 +180,11 @@ void cpuid_viridian_leaves(const struct vcpu *v, uint32_t leaf,
+         res->a = u.lo;
+         res->b = u.hi;
+ 
++        /* Expose ability to bring up VPs dynamically - allows vCPU hotplug */
++        res->d = CPUID3D_CPU_DYNAMIC_PARTITIONING;
++
+         if ( viridian_feature_mask(d) & HVMPV_crash_ctl )
+-            res->d = CPUID3D_CRASH_MSRS;
++            res->d |= CPUID3D_CRASH_MSRS;
+         if ( viridian_feature_mask(d) & HVMPV_synic )
+             res->d |= CPUID3D_SINT_POLLING;
+ 
+-- 
+2.7.4
 
-version targeted for testing:
- xen                  994f6478a48a60e3b407c7defc2d36a80f880b04
-baseline version:
- xen                  7ba2ab495be54f608cb47440e1497b2795bd301a
-
-Last test of basis   158134  2021-01-04 15:01:26 Z    3 days
-Failing since        158142  2021-01-05 02:00:25 Z    2 days   17 attempts
-Testing same since   158256  2021-01-07 15:00:25 Z    0 days    2 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Bertrand Marquis <bertrand.marquis@arm.com>
-  Jan Beulich <jbeulich@suse.com>
-  Manuel Bouyer <bouyer@antioche.eu.org>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Olaf Hering <olaf@aepfle.de>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Stefano Stabellini <sstabellini@kernel.org>
-  Tamas K Lengyel <tamas.lengyel@intel.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          fail    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 554 lines long.)
 
