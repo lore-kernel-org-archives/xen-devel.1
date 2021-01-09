@@ -4,41 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-17.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D966C433E9
-	for <xen-devel@archiver.kernel.org>; Sat,  9 Jan 2021 01:45:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3628C433DB
+	for <xen-devel@archiver.kernel.org>; Sat,  9 Jan 2021 01:45:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E832D2399A
-	for <xen-devel@archiver.kernel.org>; Sat,  9 Jan 2021 01:45:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E832D2399A
+	by mail.kernel.org (Postfix) with ESMTPS id 4F42F23A9B
+	for <xen-devel@archiver.kernel.org>; Sat,  9 Jan 2021 01:45:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F42F23A9B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.63955.113372 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.63960.113408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ky3J6-0008Ke-A0; Sat, 09 Jan 2021 01:44:44 +0000
+	id 1ky3JP-0008VY-5V; Sat, 09 Jan 2021 01:45:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 63955.113372; Sat, 09 Jan 2021 01:44:44 +0000
+Received: by outflank-mailman (output) from mailman id 63960.113408; Sat, 09 Jan 2021 01:45:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ky3J6-0008KX-4c; Sat, 09 Jan 2021 01:44:44 +0000
-Received: by outflank-mailman (input) for mailman id 63955;
- Sat, 09 Jan 2021 01:44:42 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1ky3JP-0008VQ-2C; Sat, 09 Jan 2021 01:45:03 +0000
+Received: by outflank-mailman (input) for mailman id 63960;
+ Sat, 09 Jan 2021 01:45:01 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=KEI1=GM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1ky3J4-0008KS-8z
- for xen-devel@lists.xenproject.org; Sat, 09 Jan 2021 01:44:42 +0000
+ id 1ky3JN-0008QN-Kn
+ for xen-devel@lists.xenproject.org; Sat, 09 Jan 2021 01:45:01 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e3a30813-12f9-49a0-96e8-05f007125935;
- Sat, 09 Jan 2021 01:44:41 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 884D123A1E;
- Sat,  9 Jan 2021 01:44:39 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 20b1fe40-7033-4fee-93d9-b0d7d85ddd50;
+ Sat, 09 Jan 2021 01:45:00 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B1DA323A1E;
+ Sat,  9 Jan 2021 01:44:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,102 +51,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3a30813-12f9-49a0-96e8-05f007125935
+X-Inumbo-ID: 20b1fe40-7033-4fee-93d9-b0d7d85ddd50
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1610156680;
-	bh=351HKwkGWVcvQsgEaoO4Vmz/waATAbhe/CLgZBfwiEw=;
+	s=k20201202; t=1610156699;
+	bh=NRJCQkuvhLeozbvyL4gm8xi+PZLU2P0FQF1Gt3t22Yw=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=NKwgJPIFzW6zmOe0NztlOV/STl1syOGwItT2n0eX8yi7cu0+H+zv//pAwI48ojiih
-	 0oyKA4i5b/iyorTGNCZ3Ryq7r+oiO5XBc72xiLO2O4gEIVjNZhafKCpLb/maWiZF0A
-	 qj26d5fbNqFcE5wLTbrmDRqbDqMu/6kRiqU8Unc0Lgl8OZM+Ub5aDSITTcKReq12PK
-	 NZUPnOfJaUzNodcxZqLD5TkxTttP5zSc5fTp9DpATozbMjdi4qKAIb0/9ljfvDSsZ6
-	 DqXrZv+mHQ3hOWOVllyoD+HyAR/tkkeFsJGpMy0KHNkg5MOCO52N72QXq1Uu2ErHlq
-	 MLSpYa2GS8iOQ==
-Date: Fri, 8 Jan 2021 17:44:38 -0800 (PST)
+	b=etUMoZ1b6q1FY4MBnCJadu07n9BuUVh+WW+8H4GmvDuXcIRod1hRii+H1IDt5uMF7
+	 +kpiY8bkxT7Y2R7Y6YFLCWaHfHgTsqXGOZC4u0ITqV6I0ZS2MEVuYdMhqrujuW1lzE
+	 kQdF6R//KFIYiOlGvBZae9nXGor98G3QR9DjaFKO5QHj4+F+CBgyhGW94rau3odE0K
+	 5dcjbmapRuDqasWG29/0Wg5kkFZ/1qyZXO/1mLdmGjUjas5JFLA1wDiHUIYJBK6Kzl
+	 /S6V/TeAAzJxhmWLK80EIkEP17iknntPoBEYgWsIUlr2LymftXjCp4CqY4mrwraAHD
+	 wF+7o6gJb4Lbw==
+Date: Fri, 8 Jan 2021 17:44:59 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: Rahul Singh <rahul.singh@arm.com>
 cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
-    Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v4 08/11] xen/compiler: import 'fallthrough' keyword from
- linux
-In-Reply-To: <aab15a158f6acb5f5a1cfd0dad1d4493b1fcace9.1610115608.git.rahul.singh@arm.com>
-Message-ID: <alpine.DEB.2.21.2101081626460.26153@sstabellini-ThinkPad-T480s>
-References: <cover.1610115608.git.rahul.singh@arm.com> <aab15a158f6acb5f5a1cfd0dad1d4493b1fcace9.1610115608.git.rahul.singh@arm.com>
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v4 10/11] xen/arm: smmuv3: Replace linux functions with
+ xen functions.
+In-Reply-To: <85c1bdd22dc6f50c9d1dfd73e0ddf83c2c307dcf.1610115608.git.rahul.singh@arm.com>
+Message-ID: <alpine.DEB.2.21.2101081611000.26153@sstabellini-ThinkPad-T480s>
+References: <cover.1610115608.git.rahul.singh@arm.com> <85c1bdd22dc6f50c9d1dfd73e0ddf83c2c307dcf.1610115608.git.rahul.singh@arm.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Fri, 8 Jan 2021, Rahul Singh wrote:
-> -Wimplicit-fallthrough warns when a switch case falls through. Warning
-> can be suppress by either adding a /* fallthrough */ comment, or by
-> using a null statement: __attribute__ ((fallthrough))
+> Replace all Linux device tree handling function with the XEN
+> functions.
 > 
-> Define the pseudo keyword 'fallthrough' for the ability to convert the
-> various case block /* fallthrough */ style comments to null statement
-> "__attribute__((__fallthrough__))"
-> 
-> In C mode, GCC supports the __fallthrough__ attribute since 7.1,
-> the same time the warning and the comment parsing were introduced.
-> 
-> fallthrough devolves to an empty "do {} while (0)" if the compiler
-> version (any version less than gcc 7) does not support the attribute.
+> Replace all Linux ktime function with the XEN time functions.
 > 
 > Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> ---
-> Changes in V4:
->  - This patch is introduce in this verison.
-> ---
->  xen/include/xen/compiler.h | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
-> 
-> diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
-> index e643e69128..0ec0b4698e 100644
-> --- a/xen/include/xen/compiler.h
-> +++ b/xen/include/xen/compiler.h
-> @@ -33,6 +33,22 @@
->  #define unreachable() __builtin_unreachable()
->  #endif
->  
-> +/*
-> + * Add the pseudo keyword 'fallthrough' so case statement blocks
-> + * must end with any of these keywords:
-> + *   break;
-> + *   fallthrough;
-> + *   goto <label>;
-> + *   return [expression];
-> + *
-> + *  gcc: https://gcc.gnu.org/onlinedocs/gcc/Statement-Attributes.html#Statement-Attributes
-> + */
-> +#if (!defined(__clang__) && (__GNUC__ >= 7))
-> +# define fallthrough        __attribute__((__fallthrough__))
-> +#else
-> +# define fallthrough        do {} while (0)  /* fallthrough */
-> +#endif
-> +
->  #ifdef __clang__
->  /* Clang can replace some vars with new automatic ones that go in .data;
->   * mark all explicit-segment vars 'used' to prevent that. */
-
-It would be nicer to use __has_attribute to check if fallthrough is
-supported by the compiler, but I wouldn't want to have to implement
-__has_attribute by hand for the old compilers that don't have it. If we
-are in doubt whether the compiler has has_attribute or not, then I think
-it is better to do what you did here and avoid the problem altogether.
-
-
-Linux states:
-
- * __has_attribute is supported on gcc >= 5, clang >= 2.9 and icc >= 17.
-
-
-Unfortunately gcc 4.9 is old but still around. I don't think we made any
-statements in Xen about gcc support >= 5. Hence, I think your patch is
-good as it is.
-
 
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
+> ---
+> Changes in v3:
+>  - This patch is introduce in this version.
+> Changes in V4:
+>  - Move this patch one patch earlier so that there is no need to remove
+>    the code.
+> ---
+>  xen/drivers/passthrough/arm/smmu-v3.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+> index f5f8b4c981..2dfadc6a65 100644
+> --- a/xen/drivers/passthrough/arm/smmu-v3.c
+> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
+> @@ -682,7 +682,7 @@ static void parse_driver_options(struct arm_smmu_device *smmu)
+>  	int i = 0;
+>  
+>  	do {
+> -		if (of_property_read_bool(smmu->dev->of_node,
+> +		if (dt_property_read_bool(smmu->dev->of_node,
+>  						arm_smmu_options[i].prop)) {
+>  			smmu->options |= arm_smmu_options[i].opt;
+>  			dev_notice(smmu->dev, "option %s\n",
+> @@ -754,17 +754,17 @@ static void queue_inc_prod(struct arm_smmu_ll_queue *q)
+>   */
+>  static int queue_poll_cons(struct arm_smmu_queue *q, bool sync, bool wfe)
+>  {
+> -	ktime_t timeout;
+> +	s_time_t timeout;
+>  	unsigned int delay = 1, spin_cnt = 0;
+>  
+>  	/* Wait longer if it's a CMD_SYNC */
+> -	timeout = ktime_add_us(ktime_get(), sync ?
+> +	timeout = NOW() + MICROSECS(sync ?
+>  					    ARM_SMMU_CMDQ_SYNC_TIMEOUT_US :
+>  					    ARM_SMMU_POLL_TIMEOUT_US);
+>  
+>  	while (queue_sync_cons_in(q),
+>  	      (sync ? !queue_empty(&q->llq) : queue_full(&q->llq))) {
+> -		if (ktime_compare(ktime_get(), timeout) > 0)
+> +		if ((NOW() > timeout) > 0)
+>  			return -ETIMEDOUT;
+>  
+>  		if (wfe) {
+> @@ -990,13 +990,13 @@ static void arm_smmu_cmdq_issue_cmd(struct arm_smmu_device *smmu,
+>   */
+>  static int __arm_smmu_sync_poll_msi(struct arm_smmu_device *smmu, u32 sync_idx)
+>  {
+> -	ktime_t timeout;
+> +	s_time_t timeout;
+>  	u32 val;
+>  
+> -	timeout = ktime_add_us(ktime_get(), ARM_SMMU_CMDQ_SYNC_TIMEOUT_US);
+> +	timeout = NOW() + MICROSECS(ARM_SMMU_CMDQ_SYNC_TIMEOUT_US);
+>  	val = smp_cond_load_acquire(&smmu->sync_count,
+>  				    (int)(VAL - sync_idx) >= 0 ||
+> -				    !ktime_before(ktime_get(), timeout));
+> +				    !(NOW() < timeout));
+>  
+>  	return (int)(val - sync_idx) < 0 ? -ETIMEDOUT : 0;
+>  }
+> @@ -2649,7 +2649,7 @@ static int arm_smmu_device_dt_probe(struct platform_device *pdev,
+>  	u32 cells;
+>  	int ret = -EINVAL;
+>  
+> -	if (of_property_read_u32(dev->of_node, "#iommu-cells", &cells))
+> +	if (!dt_property_read_u32(dev->of_node, "#iommu-cells", &cells))
+>  		dev_err(dev, "missing #iommu-cells property\n");
+>  	else if (cells != 1)
+>  		dev_err(dev, "invalid #iommu-cells value (%d)\n", cells);
+> -- 
+> 2.17.1
+> 
 
