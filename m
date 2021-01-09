@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07400C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 02:39:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.308647.524456 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0343C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 02:42:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.308664.524467 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh0Fq-0003u1-5r; Wed, 20 Apr 2022 02:39:42 +0000
+	id 1nh0Ht-0005MX-L4; Wed, 20 Apr 2022 02:41:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 308647.524456; Wed, 20 Apr 2022 02:39:42 +0000
+Received: by outflank-mailman (output) from mailman id 308664.524467; Wed, 20 Apr 2022 02:41:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh0Fq-0003tu-2T; Wed, 20 Apr 2022 02:39:42 +0000
-Received: by outflank-mailman (input) for mailman id 308647;
- Wed, 20 Apr 2022 02:39:41 +0000
+	id 1nh0Ht-0005MH-Fz; Wed, 20 Apr 2022 02:41:49 +0000
+Received: by outflank-mailman (input) for mailman id 308664;
+ Wed, 20 Apr 2022 02:41:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=80Cj=U6=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1nh0Fp-0003ta-Ac
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 02:39:41 +0000
+ id 1nh0Bd-0000eu-1j
+ for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 02:35:21 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2004098c-c053-11ec-a405-831a346695d4;
- Wed, 20 Apr 2022 04:39:40 +0200 (CEST)
+ id 85040090-c052-11ec-a405-831a346695d4;
+ Wed, 20 Apr 2022 04:35:20 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 23K2dU4r093033
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 23K2ZB2W092991
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 19 Apr 2022 22:39:36 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Tue, 19 Apr 2022 22:35:16 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 23K2dUx1093032;
- Tue, 19 Apr 2022 19:39:30 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 23K2ZBk1092990;
+ Tue, 19 Apr 2022 19:35:11 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,38 +45,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2004098c-c053-11ec-a405-831a346695d4
-Message-Id: <d8c6e2150f037253242fa5774551014b5326bbc6.1650420617.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 85040090-c052-11ec-a405-831a346695d4
+Message-Id: <f3f72c2a42a0e2b682221f7914ff90fc3365fc19.1650420617.git.ehem+xen@m5p.com>
 In-Reply-To: <cover.1650420617.git.ehem+xen@m5p.com>
 References: <cover.1650420617.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Date: Sat, 9 Jan 2021 12:20:43 -0800
-Subject: [PATCH 10/10] docs: xlexample.pvhlinux: Use similar text to other
- examples
+Date: Sat, 9 Jan 2021 14:44:07 -0800
+Subject: [PATCH 05/10] docs: xlexample.hvm: Fix maxmem value
 To: xen-devel@lists.xenproject.org
 
-Simply making the word choice match the other examples.
+HVM doesn't balloon and so it makes no sense to specify maxmem.
 
 Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 ---
- tools/examples/xlexample.pvhlinux | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/examples/xlexample.hvm | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/tools/examples/xlexample.pvhlinux b/tools/examples/xlexample.pvhlinux
-index a6a52c336c..7685fb67b6 100644
---- a/tools/examples/xlexample.pvhlinux
-+++ b/tools/examples/xlexample.pvhlinux
-@@ -5,7 +5,7 @@
- # This is a fairly minimal example of what is required for a
- # PVH Linux guest. For a more complete guide see xl.cfg(5)
+diff --git a/tools/examples/xlexample.hvm b/tools/examples/xlexample.hvm
+index 26ae1c2fb4..a6cafcbf9f 100644
+--- a/tools/examples/xlexample.hvm
++++ b/tools/examples/xlexample.hvm
+@@ -25,9 +25,9 @@ name = "example.hvm"
+ memory = 384
  
--# This configures a PVH rather than PV guest
-+# This configures a PVH guest instead of HVM or PV
- type = "pvh"
+ # Maximum memory (MB)
+-# If this is greater than `memory' then the slack will start ballooned
+-# (this assumes guest kernel support for ballooning)
+-#maxmem = 512
++# Unlike PV or PVH, HVM cannot balloon memory and hence this should match
++# `memory' or simply be left unset.
++#maxmem =
  
- # Guest name
+ # Number of VCPUS
+ vcpus = 3
 -- 
 2.30.2
 
