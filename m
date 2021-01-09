@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F5EC433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 02:31:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.308561.524367 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2E9C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 02:32:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.308571.524379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh07C-0007Le-Gr; Wed, 20 Apr 2022 02:30:46 +0000
+	id 1nh08M-00084V-U1; Wed, 20 Apr 2022 02:31:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 308561.524367; Wed, 20 Apr 2022 02:30:46 +0000
+Received: by outflank-mailman (output) from mailman id 308571.524379; Wed, 20 Apr 2022 02:31:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh07C-0007LX-E3; Wed, 20 Apr 2022 02:30:46 +0000
-Received: by outflank-mailman (input) for mailman id 308561;
- Wed, 20 Apr 2022 02:30:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nh08M-00084O-Ps; Wed, 20 Apr 2022 02:31:58 +0000
+Received: by outflank-mailman (input) for mailman id 308571;
+ Wed, 20 Apr 2022 02:31:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=80Cj=U6=m5p.com=ehem@srs-se1.protection.inumbo.net>)
- id 1nh07B-0007LR-FX
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 02:30:45 +0000
+ id 1nh08L-00084B-7s
+ for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 02:31:57 +0000
 Received: from mailhost.m5p.com (mailhost.m5p.com [74.104.188.4])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dfcb7de8-c051-11ec-8fbf-03012f2f19d4;
- Wed, 20 Apr 2022 04:30:43 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0a666418-c052-11ec-a405-831a346695d4;
+ Wed, 20 Apr 2022 04:31:55 +0200 (CEST)
 Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 23K2UTfS092930
+ by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 23K2VhCK092942
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Tue, 19 Apr 2022 22:30:35 -0400 (EDT) (envelope-from ehem@m5p.com)
+ Tue, 19 Apr 2022 22:31:49 -0400 (EDT) (envelope-from ehem@m5p.com)
 Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 23K2USH2092929;
- Tue, 19 Apr 2022 19:30:28 -0700 (PDT) (envelope-from ehem)
+ by m5p.com (8.16.1/8.15.2/Submit) id 23K2VhSj092941;
+ Tue, 19 Apr 2022 19:31:43 -0700 (PDT) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,43 +45,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dfcb7de8-c051-11ec-8fbf-03012f2f19d4
-Message-Id: <cover.1650420617.git.ehem+xen@m5p.com>
+X-Inumbo-ID: 0a666418-c052-11ec-a405-831a346695d4
+Message-Id: <c1373ba89550461f9dc3e450fc643dee187d63ba.1650420617.git.ehem+xen@m5p.com>
+In-Reply-To: <cover.1650420617.git.ehem+xen@m5p.com>
+References: <cover.1650420617.git.ehem+xen@m5p.com>
 From: Elliott Mitchell <ehem+xen@m5p.com>
 Cc: Wei Liu <wl@xen.org>
 Cc: Anthony PERARD <anthony.perard@citrix.com>
-Date: Tue, 19 Apr 2022 19:10:17 -0700
-Subject: [PATCH 00/10] Increase consistency of domain examples
+Date: Sat, 9 Jan 2021 09:52:06 -0800
+Subject: [PATCH 01/10] docs: xlexample.hvm: Mention this isn't useful for
+ other guests
 To: xen-devel@lists.xenproject.org
 
-The "xlexample.*" files have drifted apart rather distinctly.  This may
-cause puzzlement at why the distinct choices were made.  Worse, I have an
-unpleasant suspicion a naive user could benchmark with these files and
-not realize performance differences were due to different settings, not
-the domain type.
+I dislike the implication this default is valuable for all guests, need
+some mention of trade-off.
 
-I chose 3 vCPUs and 384MB of memory.  This is in-between the values
-currently in the examples.  I wonder whether I should have used the
-values from pvhlinux as those may better reflect typical small VMs now.
+Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
+---
+ tools/examples/xlexample.hvm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Elliott Mitchell (10):
-  docs: xlexample.hvm: Mention this isn't useful for other guests
-  docs: xlexample.*: Use consistent vCPU count
-  docs: xlexample.*: Use consistent initial memory
-  docs: xlexample.pvhlinux: Add commented maxmem setting
-  docs: xlexample.hvm: Fix maxmem value
-  docs: xlexample.hvm: Add reference to nographic option
-  docs: xlexample.pvhlinux: Make disk setting consistent with other
-    examples
-  docs: xlexample.hvm: Fix grammmer
-  docs: xlexample.pvlinux: Add "type" setting
-  docs: xlexample.pvhlinux: Use similar text to other examples
-
- tools/examples/xlexample.hvm      | 19 ++++++++++---------
- tools/examples/xlexample.pvhlinux | 13 +++++++++----
- tools/examples/xlexample.pvlinux  |  7 +++++--
- 3 files changed, 24 insertions(+), 15 deletions(-)
-
+diff --git a/tools/examples/xlexample.hvm b/tools/examples/xlexample.hvm
+index df9fe07653..c2db4f237a 100644
+--- a/tools/examples/xlexample.hvm
++++ b/tools/examples/xlexample.hvm
+@@ -18,7 +18,7 @@ name = "example.hvm"
+ 
+ # Enable Microsoft Hyper-V compatibile paravirtualisation /
+ # enlightenment interfaces. Turning this on can improve Windows guest
+-# performance and is therefore recommended
++# performance and is therefore recommended for Windows guests
+ #viridian = 1
+ 
+ # Initial memory allocation (MB)
 -- 
 2.30.2
 
