@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D97CC433E6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 449ABC433E9
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 044F820738
+	by mail.kernel.org (Postfix) with ESMTPS id 09E17225AB
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 044F820738
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09E17225AB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65111.115326 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65110.115314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1DW-00035a-1h; Mon, 11 Jan 2021 17:42:58 +0000
+	id 1kz1DU-00032B-HE; Mon, 11 Jan 2021 17:42:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65111.115326; Mon, 11 Jan 2021 17:42:58 +0000
+Received: by outflank-mailman (output) from mailman id 65110.115314; Mon, 11 Jan 2021 17:42:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1DV-00035L-OW; Mon, 11 Jan 2021 17:42:57 +0000
-Received: by outflank-mailman (input) for mailman id 65111;
+	id 1kz1DU-000321-C9; Mon, 11 Jan 2021 17:42:56 +0000
+Received: by outflank-mailman (input) for mailman id 65110;
  Mon, 11 Jan 2021 17:42:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1DT-0002aB-P5
+ id 1kz1DS-0002a6-WA
  for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:42:55 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.171])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 198f78cc-b29d-4b5e-8e5f-e3e29ad593e8;
- Mon, 11 Jan 2021 17:42:39 +0000 (UTC)
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.81])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 995c1bff-5d15-4f52-b935-8350b21bd9cd;
+ Mon, 11 Jan 2021 17:42:40 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgUM3M
+ with ESMTPSA id h0968ex0BHgWM3R
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:30 +0100 (CET)
+ Mon, 11 Jan 2021 18:42:32 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 198f78cc-b29d-4b5e-8e5f-e3e29ad593e8
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386958;
+X-Inumbo-ID: 995c1bff-5d15-4f52-b935-8350b21bd9cd
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386959;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
 	Subject:Sender;
-	bh=SzAeo9U5j+/DCWnLoYeNbjq7W+2fIvJs8ASb5tKPDT8=;
-	b=fIz+ftx3qk7nTOF/FAtVlrNkBf3Ka3OLC+8X8d0DWAIXn0Qob/zpENkZdpwGLw9CXO
-	+EbwjViw/QHzGRqsnZ3rqtQusJKDI0BCBMEeS+b1RO66Ga8fE4S80NcOeYe+nSGUYv0+
-	EicMRDj3LFuuAJLXpRGI0xXt7bFy9jk6U6hzrIV0R3xueSxf3TVBdcSNR53UraObFYpt
-	6p9Mns529nCm9HJQswOwHzyEss6lGlHjWWvJZMvhdRaSI4M6lxKLhniCYL85fTJtPs5W
-	v6qbnFKViLRF7rVK00QeI3YU1l1t93WcL2qJ3nGkDlEztDPZizR4rT+eASRGV9LtZJ7W
-	CUVQ==
+	bh=yv4/vNzbLjhhKaj2O8jZKB9GBNc7GvmmLKVV7dABzFU=;
+	b=lF8D0wpkkGCbRjwRjGkJAZMm66oo/3sv1k9DcojkZua3fsqAQ7Mol6A0QMmeZonhnB
+	/GxiQY9BfHjbAOqbgknuTAOhBfdi1jNZejJBBFodnLQaT72PZabkRCzUxwUShaem1i2c
+	hKwn8bMYQ0TPYZmVTJa0PjfbBy5gijg6m2lcWzCVYwXW1yL4nj4m6wbRFYW8FCE/n52h
+	a7pXx2o5rSH4gfUKcfFtKnB4EW5HQ6ajU9uov60oOHuveY/CGmKtbl6njshIzHIPfqSt
+	B/zFlKS4aCj29o812q54k56XJiQuIIdUavm5AlrfAk42gqdegXOhIsPTzw3FXVXcGjIV
+	8oHQ==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
@@ -73,151 +74,155 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210111 07/39] xl: optionally print timestamps during xl migrate
-Date: Mon, 11 Jan 2021 18:41:52 +0100
-Message-Id: <20210111174224.24714-8-olaf@aepfle.de>
+Subject: [PATCH v20210111 12/39] tools: unify type checking for data pfns in migration stream
+Date: Mon, 11 Jan 2021 18:41:57 +0100
+Message-Id: <20210111174224.24714-13-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
 References: <20210111174224.24714-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-During 'xl -v.. migrate domU host' a large amount of debug is generated.
-It is difficult to map each line to the sending and receiving side.
-Also the time spent for migration is not reported.
+Introduce a helper which decides if a given pfn type has data
+for the migration stream.
 
-With 'xl migrate -T domU host' both sides will print timestamps and
-also the pid of the invoked xl process to make it more obvious which
-side produced a given log line.
+No change in behavior intended.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- docs/man/xl.1.pod.in   |  4 ++++
- tools/xl/xl_cmdtable.c |  1 +
- tools/xl/xl_migrate.c  | 25 +++++++++++++++++++++----
- 3 files changed, 26 insertions(+), 4 deletions(-)
+ tools/libs/guest/xg_sr_common.h  | 17 ++++++++++++++++
+ tools/libs/guest/xg_sr_restore.c | 34 +++++---------------------------
+ tools/libs/guest/xg_sr_save.c    | 14 ++-----------
+ 3 files changed, 24 insertions(+), 41 deletions(-)
 
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index df98adc9e4..494a84ee13 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -475,6 +475,10 @@ domain. See the corresponding option of the I<create> subcommand.
- Send the specified <config> file instead of the file used on creation of the
- domain.
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index cc3ad1c394..70e328e951 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -455,6 +455,23 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+ /* Handle a STATIC_DATA_END record. */
+ int handle_static_data_end(struct xc_sr_context *ctx);
  
-+=item B<-T>
++static inline bool page_type_has_stream_data(uint32_t type)
++{
++    bool ret;
 +
-+Include timestamps in output.
-+
- =item B<--debug>
- 
- Display huge (!) amount of debug information during the migration process.
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 37710880d3..da0473ddfb 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -167,6 +167,7 @@ struct cmd_spec cmd_table[] = {
-       "                migrate-receive [-d -e]\n"
-       "-e              Do not wait in the background (on <host>) for the death\n"
-       "                of the domain.\n"
-+      "-T              Show timestamps during the migration process.\n"
-       "--debug         Print huge (!) amount of debug during the migration process.\n"
-       "-p              Do not unpause domain after migrating it.\n"
-       "-D              Preserve the domain id"
-diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
-index 0813beb801..856a6e2be1 100644
---- a/tools/xl/xl_migrate.c
-+++ b/tools/xl/xl_migrate.c
-@@ -32,6 +32,8 @@
- 
- #ifndef LIBXL_HAVE_NO_SUSPEND_RESUME
- 
-+static bool timestamps;
-+
- static pid_t create_migration_child(const char *rune, int *send_fd,
-                                         int *recv_fd)
- {
-@@ -187,6 +189,7 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     char rc_buf;
-     uint8_t *config_data;
-     int config_len, flags = LIBXL_SUSPEND_LIVE;
-+    unsigned xtl_flags = XTL_STDIOSTREAM_HIDE_PROGRESS;
- 
-     save_domain_core_begin(domid, preserve_domid, override_config_file,
-                            &config_data, &config_len);
-@@ -202,7 +205,9 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     migrate_do_preamble(send_fd, recv_fd, child, config_data, config_len,
-                         rune);
- 
--    xtl_stdiostream_adjust_flags(logger, XTL_STDIOSTREAM_HIDE_PROGRESS, 0);
-+    if (timestamps)
-+        xtl_flags |= XTL_STDIOSTREAM_SHOW_DATE | XTL_STDIOSTREAM_SHOW_PID;
-+    xtl_stdiostream_adjust_flags(logger, xtl_flags, 0);
- 
-     if (debug)
-         flags |= LIBXL_SUSPEND_DEBUG;
-@@ -328,6 +333,11 @@ static void migrate_receive(int debug, int daemonize, int monitor,
-     char rc_buf;
-     char *migration_domname;
-     struct domain_create dom_info;
-+    unsigned xtl_flags = 0;
-+
-+    if (timestamps)
-+        xtl_flags |= XTL_STDIOSTREAM_SHOW_DATE | XTL_STDIOSTREAM_SHOW_PID;
-+    xtl_stdiostream_adjust_flags(logger, xtl_flags, 0);
- 
-     signal(SIGPIPE, SIG_IGN);
-     /* if we get SIGPIPE we'd rather just have it as an error */
-@@ -491,7 +501,7 @@ int main_migrate_receive(int argc, char **argv)
-         COMMON_LONG_OPTS
-     };
- 
--    SWITCH_FOREACH_OPT(opt, "Fedrp", opts, "migrate-receive", 0) {
-+    SWITCH_FOREACH_OPT(opt, "FedrpT", opts, "migrate-receive", 0) {
-     case 'F':
-         daemonize = 0;
-         break;
-@@ -517,6 +527,9 @@ int main_migrate_receive(int argc, char **argv)
-     case 'p':
-         pause_after_migration = 1;
-         break;
-+    case 'T':
-+        timestamps = 1;
++    switch (type)
++    {
++    case XEN_DOMCTL_PFINFO_XTAB:
++    case XEN_DOMCTL_PFINFO_XALLOC:
++    case XEN_DOMCTL_PFINFO_BROKEN:
++        ret = false;
 +        break;
++    default:
++        ret = true;
++        break;
++    }
++    return ret;
++}
+ #endif
+ /*
+  * Local variables:
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index f1c3169229..0332ae9f32 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -152,9 +152,8 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+ 
+     for ( i = 0; i < count; ++i )
+     {
+-        if ( (!types || (types &&
+-                         (types[i] != XEN_DOMCTL_PFINFO_XTAB &&
+-                          types[i] != XEN_DOMCTL_PFINFO_BROKEN))) &&
++        if ( (!types ||
++              (types && page_type_has_stream_data(types[i]) == true)) &&
+              !pfn_is_populated(ctx, original_pfns[i]) )
+         {
+             rc = pfn_set_populated(ctx, original_pfns[i]);
+@@ -233,25 +232,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+     {
+         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+ 
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_NOTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L1TAB:
+-        case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L2TAB:
+-        case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L3TAB:
+-        case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L4TAB:
+-        case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
++        if ( page_type_has_stream_data(types[i]) == true )
+             mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
+-            break;
+-        }
      }
  
-     if (argc-optind != 0) {
-@@ -545,7 +558,7 @@ int main_migrate(int argc, char **argv)
-         COMMON_LONG_OPTS
-     };
+     /* Nothing to do? */
+@@ -271,14 +253,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
  
--    SWITCH_FOREACH_OPT(opt, "FC:s:epD", opts, "migrate", 2) {
-+    SWITCH_FOREACH_OPT(opt, "FC:s:eTpD", opts, "migrate", 2) {
-     case 'C':
-         config_filename = optarg;
-         break;
-@@ -559,6 +572,9 @@ int main_migrate(int argc, char **argv)
-         daemonize = 0;
-         monitor = 0;
-         break;
-+    case 'T':
-+        timestamps = 1;
-+        break;
-     case 'p':
-         pause_after_migration = 1;
-         break;
-@@ -592,11 +608,12 @@ int main_migrate(int argc, char **argv)
-         } else {
-             verbose_len = (minmsglevel_default - minmsglevel) + 2;
+     for ( i = 0, j = 0; i < count; ++i )
+     {
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_XTAB:
+-        case XEN_DOMCTL_PFINFO_BROKEN:
+-        case XEN_DOMCTL_PFINFO_XALLOC:
+-            /* No page data to deal with. */
++        if ( page_type_has_stream_data(types[i]) == false )
+             continue;
+-        }
+ 
+         if ( map_errs[j] )
+         {
+@@ -413,7 +389,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+             goto err;
          }
--        xasprintf(&rune, "exec %s %s xl%s%.*s migrate-receive%s%s%s",
-+        xasprintf(&rune, "exec %s %s xl%s%.*s migrate-receive%s%s%s%s",
-                   ssh_command, host,
-                   pass_tty_arg ? " -t" : "",
-                   verbose_len, verbose_buf,
-                   daemonize ? "" : " -e",
-+                  timestamps ? " -T" : "",
-                   debug ? " -d" : "",
-                   pause_after_migration ? " -p" : "");
+ 
+-        if ( type < XEN_DOMCTL_PFINFO_BROKEN )
++        if ( page_type_has_stream_data(type) == true )
+             /* NOTAB and all L1 through L4 tables (including pinned) should
+              * have a page worth of data in the record. */
+             pages_of_data++;
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 044d0ae3aa..0546d3d9e6 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -153,13 +153,8 @@ static int write_batch(struct xc_sr_context *ctx)
+             goto err;
+         }
+ 
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_BROKEN:
+-        case XEN_DOMCTL_PFINFO_XALLOC:
+-        case XEN_DOMCTL_PFINFO_XTAB:
++        if ( page_type_has_stream_data(types[i]) == false )
+             continue;
+-        }
+ 
+         mfns[nr_pages++] = mfns[i];
      }
+@@ -177,13 +172,8 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+         for ( i = 0, p = 0; i < nr_pfns; ++i )
+         {
+-            switch ( types[i] )
+-            {
+-            case XEN_DOMCTL_PFINFO_BROKEN:
+-            case XEN_DOMCTL_PFINFO_XALLOC:
+-            case XEN_DOMCTL_PFINFO_XTAB:
++            if ( page_type_has_stream_data(types[i]) == false )
+                 continue;
+-            }
+ 
+             if ( errors[p] )
+             {
 
