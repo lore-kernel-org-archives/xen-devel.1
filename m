@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A7DAC433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76038C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 40C18223E0
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40C18223E0
+	by mail.kernel.org (Postfix) with ESMTPS id 435A5223E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 435A5223E0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65230.115614 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65226.115602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Ka-0006re-PT; Mon, 11 Jan 2021 17:50:16 +0000
+	id 1kz1KX-0006mX-7d; Mon, 11 Jan 2021 17:50:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65230.115614; Mon, 11 Jan 2021 17:50:16 +0000
+Received: by outflank-mailman (output) from mailman id 65226.115602; Mon, 11 Jan 2021 17:50:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Ka-0006rU-Ly; Mon, 11 Jan 2021 17:50:16 +0000
-Received: by outflank-mailman (input) for mailman id 65230;
- Mon, 11 Jan 2021 17:50:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kz1KX-0006mO-3H; Mon, 11 Jan 2021 17:50:13 +0000
+Received: by outflank-mailman (input) for mailman id 65226;
+ Mon, 11 Jan 2021 17:50:11 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1Ev-0002aB-SL
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:44:25 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.104])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 656bd11a-fcf0-4f71-8cdd-62a1aed38957;
- Mon, 11 Jan 2021 17:42:51 +0000 (UTC)
+ id 1kz1El-0002a6-2L
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:44:15 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.81])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f70bf9f9-9d01-4a63-8e9f-ede50b08e041;
+ Mon, 11 Jan 2021 17:42:44 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHghM3r
+ with ESMTPSA id h0968ex0BHgTM3L
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:43 +0100 (CET)
+ Mon, 11 Jan 2021 18:42:29 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,189 +54,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 656bd11a-fcf0-4f71-8cdd-62a1aed38957
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386970;
+X-Inumbo-ID: f70bf9f9-9d01-4a63-8e9f-ede50b08e041
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386963;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
 	Subject:Sender;
-	bh=NczH/GYAICCIPBmta0b9hUDcufP3DKYBj+C1mc/v8to=;
-	b=LCPzP+xHi4U7QeCZCBeP8XhIsAXYefrDGcLN18ASQsq3XfQHdGOp4kW1+PhRv27CMK
-	oPBmG3ktUWJ/C/CNH7Fdk8H/rcRk+UsMisPc70hTmaftLyVs2Ghj6nCoILnTSsdAAGgJ
-	ybaT7URtbAEK1qc4gi8uxZHodHQ4o+zinhe+4H2nFBKbXky8kuyHurWx0204a6ut9App
-	zcmpWlX5XkQiN6vlDQEs06BITpyxpBmQfk3LODKr3o+5Ul2jWw5zt81+jcXXDhhEBoNU
-	MkItpVlTZVFXb2PYw2NIuwbt8qtJOby+jmffFIr9cmICJamDlKySrb/rS+371aMhkxtl
-	k7tA==
+	bh=ti8CP/B9G6c5O+6wVpkEtLXEkgdKGjEhZREHyWZEFow=;
+	b=GJjK49Yxqzkp6Pa1bPTpZFKFPvIUhTkTLoiBosEA+KkR77qS9jgqS6CLIBakywferL
+	piGWxY4ughtnGl3Cxf9UTmpkoj2sRywPTynxx04NilIyukGNgvL0s43zi/V+BbXnh1Xp
+	B4CAEsv8AiACDk98ZxbtVft716+avmcB09bELpqrUuHoA7bferUxlibQqLW/nA+4m3P/
+	wIIeQy61dYJ9/EAVgpiS7t39a5XbX6JnHFSu9AuJ0F+R1nAY4K+E4tb+N8xEMURhLe/j
+	RH6mSgPeelAdExsj7zf5z4JS6JTYu+vvnm8NiUA1i3ZFpr899rjsRAjqdON4rdPlV7Rq
+	BjSg==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210111 37/39] tools: add --max_iters to libxl_domain_suspend
-Date: Mon, 11 Jan 2021 18:42:22 +0100
-Message-Id: <20210111174224.24714-38-olaf@aepfle.de>
+Subject: [PATCH v20210111 06/39] Use XEN_SCRIPT_DIR to refer to /etc/xen/scripts
+Date: Mon, 11 Jan 2021 18:41:51 +0100
+Message-Id: <20210111174224.24714-7-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
 References: <20210111174224.24714-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Migrating a large, and potentially busy, domU will take more
-time than neccessary due to excessive number of copying iterations.
+Replace all hardcoded paths to use XEN_SCRIPT_DIR to expand the actual location.
 
-Allow to host admin to control the number of iterations which
-copy cumulated domU dirty pages to the target host.
-
-The default remains 5, which means one initial iteration to copy the
-entire domU memory, and up to 4 additional iterations to copy dirty
-memory from the still running domU. After the given number of iterations
-the domU is suspended, remaining dirty memory is copied and the domU is
-finally moved to the target host.
-
-This patch adjusts xl(1) and the libxl API.
-External users check LIBXL_HAVE_DOMAIN_SUSPEND_PROPS for the availibility
-of the new .max_iters property.
+Update .gitignore.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- docs/man/xl.1.pod.in              |  4 ++++
- tools/include/libxl.h             |  1 +
- tools/libs/light/libxl_dom_save.c |  2 +-
- tools/libs/light/libxl_domain.c   |  1 +
- tools/libs/light/libxl_internal.h |  1 +
- tools/xl/xl_cmdtable.c            |  3 ++-
- tools/xl/xl_migrate.c             | 10 +++++++++-
- 7 files changed, 19 insertions(+), 3 deletions(-)
+ .gitignore                                                  | 3 +++
+ docs/configure.ac                                           | 3 +++
+ ...k-configuration.5.pod => xl-disk-configuration.5.pod.in} | 2 +-
+ ...onfiguration.5.pod => xl-network-configuration.5.pod.in} | 4 ++--
+ docs/man/xl.1.pod.in                                        | 2 +-
+ docs/man/{xl.conf.5.pod => xl.conf.5.pod.in}                | 6 +++---
+ docs/misc/block-scripts.txt                                 | 2 +-
+ tools/xl/xl_cmdtable.c                                      | 2 +-
+ 8 files changed, 15 insertions(+), 9 deletions(-)
+ rename docs/man/{xl-disk-configuration.5.pod => xl-disk-configuration.5.pod.in} (99%)
+ rename docs/man/{xl-network-configuration.5.pod => xl-network-configuration.5.pod.in} (98%)
+ rename docs/man/{xl.conf.5.pod => xl.conf.5.pod.in} (97%)
 
+diff --git a/.gitignore b/.gitignore
+index b169d78ed7..76c13f3189 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -48,7 +48,10 @@ dist/*
+ docs/tmp.*
+ docs/html/
+ docs/man/xl.cfg.5.pod
++docs/man/xl-disk-configuration.5.pod
++docs/man/xl-network-configuration.5.pod
+ docs/man/xl.1.pod
++docs/man/xl.conf.5.pod
+ docs/man1/
+ docs/man5/
+ docs/man7/
+diff --git a/docs/configure.ac b/docs/configure.ac
+index cb5a6eaa4c..c2e5edd3b3 100644
+--- a/docs/configure.ac
++++ b/docs/configure.ac
+@@ -9,6 +9,9 @@ AC_CONFIG_FILES([
+ ../config/Docs.mk
+ man/xl.cfg.5.pod
+ man/xl.1.pod
++man/xl-disk-configuration.5.pod
++man/xl-network-configuration.5.pod
++man/xl.conf.5.pod
+ ])
+ AC_CONFIG_AUX_DIR([../])
+ 
+diff --git a/docs/man/xl-disk-configuration.5.pod b/docs/man/xl-disk-configuration.5.pod.in
+similarity index 99%
+rename from docs/man/xl-disk-configuration.5.pod
+rename to docs/man/xl-disk-configuration.5.pod.in
+index 46feedb95e..71d0e86e3d 100644
+--- a/docs/man/xl-disk-configuration.5.pod
++++ b/docs/man/xl-disk-configuration.5.pod.in
+@@ -257,7 +257,7 @@ automatically determine the most suitable backend.
+ 
+ Specifies that B<target> is not a normal host path, but rather
+ information to be interpreted by the executable program I<SCRIPT>,
+-(looked for in F</etc/xen/scripts>, if it doesn't contain a slash).
++(looked for in F<@XEN_SCRIPT_DIR@>, if it doesn't contain a slash).
+ 
+ These scripts are normally called "block-I<SCRIPT>".
+ 
+diff --git a/docs/man/xl-network-configuration.5.pod b/docs/man/xl-network-configuration.5.pod.in
+similarity index 98%
+rename from docs/man/xl-network-configuration.5.pod
+rename to docs/man/xl-network-configuration.5.pod.in
+index af058d4d3c..be8c7313aa 100644
+--- a/docs/man/xl-network-configuration.5.pod
++++ b/docs/man/xl-network-configuration.5.pod.in
+@@ -169,8 +169,8 @@ number. Likewise the default tap name is C<vifDOMID.DEVID-emu>.
+ 
+ Specifies the hotplug script to run to configure this device (e.g. to
+ add it to the relevant bridge). Defaults to
+-C<XEN_SCRIPT_DIR/vif-bridge> but can be set to any script. Some example
+-scripts are installed in C<XEN_SCRIPT_DIR>.
++C<@XEN_SCRIPT_DIR@/vif-bridge> but can be set to any script. Some example
++scripts are installed in C<@XEN_SCRIPT_DIR@>.
+ 
+ 
+ =head2 ip
 diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index e6e4e8e83a..8339bd8e6f 100644
+index 765c169ed2..df98adc9e4 100644
 --- a/docs/man/xl.1.pod.in
 +++ b/docs/man/xl.1.pod.in
-@@ -496,6 +496,10 @@ such that it will be identical on the destination host, unless that
- configuration is overridden using the B<-C> option. Note that it is not
- possible to use this option for a 'localhost' migration.
+@@ -571,7 +571,7 @@ See the corresponding option of the I<create> subcommand.
+ =item B<-N> I<netbufscript>
  
-+=item B<--max_iters> I<iterations>
-+
-+Number of copy iterations before final suspend+move (default: 5)
-+
- =back
+ Use <netbufscript> to setup network buffering instead of the
+-default script (/etc/xen/scripts/remus-netbuf-setup).
++default script (@XEN_SCRIPT_DIR@/remus-netbuf-setup).
  
- =item B<remus> [I<OPTIONS>] I<domain-id> I<host>
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 94b8f1095f..646cef28aa 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -1675,6 +1675,7 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+ =item B<-F>
  
- typedef struct {
-     uint32_t flags; /* LIBXL_SUSPEND_* */
-+    uint32_t max_iters;
- } libxl_domain_suspend_props;
- #define LIBXL_SUSPEND_DEBUG 1
- #define LIBXL_SUSPEND_LIVE 2
-diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
-index 3f3cff0342..938c0127f3 100644
---- a/tools/libs/light/libxl_dom_save.c
-+++ b/tools/libs/light/libxl_dom_save.c
-@@ -383,7 +383,7 @@ static int libxl__domain_save_precopy_policy(precopy_stats_t stats, void *user)
-          stats.iteration, stats.dirty_count, stats.total_written);
-     if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
-         goto stop_copy;
--    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
-+    if (stats.iteration >= dss->max_iters)
-         goto stop_copy;
-     return XGS_POLICY_CONTINUE_PRECOPY;
+diff --git a/docs/man/xl.conf.5.pod b/docs/man/xl.conf.5.pod.in
+similarity index 97%
+rename from docs/man/xl.conf.5.pod
+rename to docs/man/xl.conf.5.pod.in
+index dfea9d64ba..b48e99131a 100644
+--- a/docs/man/xl.conf.5.pod
++++ b/docs/man/xl.conf.5.pod.in
+@@ -107,7 +107,7 @@ Configures the default hotplug script used by virtual network devices.
  
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index 45e0c57c3a..612d3dc4ea 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -527,6 +527,7 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
-     dss->domid = domid;
-     dss->fd = fd;
-     dss->type = type;
-+    dss->max_iters = props->max_iters ?: LIBXL_XGS_POLICY_MAX_ITERATIONS;
-     dss->live = props->flags & LIBXL_SUSPEND_LIVE;
-     dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
-     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index d4cc694c01..80a31c3a88 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -3640,6 +3640,7 @@ struct libxl__domain_save_state {
-     int live;
-     int debug;
-     int checkpointed_stream;
-+    uint32_t max_iters;
-     const libxl_domain_remus_info *remus;
-     /* private */
-     int rc;
+ The old B<vifscript> option is deprecated and should not be used.
+ 
+-Default: C</etc/xen/scripts/vif-bridge>
++Default: C<@XEN_SCRIPT_DIR@/vif-bridge>
+ 
+ =item B<vif.default.bridge="NAME">
+ 
+@@ -133,13 +133,13 @@ Default: C<None>
+ 
+ Configures the default script used by Remus to setup network buffering.
+ 
+-Default: C</etc/xen/scripts/remus-netbuf-setup>
++Default: C<@XEN_SCRIPT_DIR@/remus-netbuf-setup>
+ 
+ =item B<colo.default.proxyscript="PATH">
+ 
+ Configures the default script used by COLO to setup colo-proxy.
+ 
+-Default: C</etc/xen/scripts/colo-proxy-setup>
++Default: C<@XEN_SCRIPT_DIR@/colo-proxy-setup>
+ 
+ =item B<output_format="json|sxp">
+ 
+diff --git a/docs/misc/block-scripts.txt b/docs/misc/block-scripts.txt
+index eabab100a8..8020787a52 100644
+--- a/docs/misc/block-scripts.txt
++++ b/docs/misc/block-scripts.txt
+@@ -18,7 +18,7 @@ Setup
+ 
+ It is highly recommended that custom hotplug scripts as much as
+ possible include and use the common Xen functionality.  If the script
+-is run from the normal block script location (/etc/xen/scripts by
++is run from the normal block script location (/usr/lib/xen/scripts by
+ default), then this can be done by adding the following to the top of
+ the script:
+ 
 diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index a0567169bf..75e2e4d54b 100644
+index 6ab5e47da3..37710880d3 100644
 --- a/tools/xl/xl_cmdtable.c
 +++ b/tools/xl/xl_cmdtable.c
-@@ -170,7 +170,8 @@ struct cmd_spec cmd_table[] = {
-       "-T              Show timestamps during the migration process.\n"
-       "--debug         Verify transferred domU page data.\n"
-       "-p              Do not unpause domain after migrating it.\n"
--      "-D              Preserve the domain id"
-+      "-D              Preserve the domain id\n"
-+      "--max_iters N   Number of copy iterations before final stop+move"
-     },
-     { "restore",
-       &main_restore, 0, 1,
-diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
-index fc9f69bf06..a724bc21ea 100644
---- a/tools/xl/xl_migrate.c
-+++ b/tools/xl/xl_migrate.c
-@@ -180,6 +180,7 @@ static void migrate_do_preamble(int send_fd, int recv_fd, pid_t child,
- 
- static void migrate_domain(uint32_t domid, int preserve_domid,
-                            const char *rune, int debug,
-+                           uint32_t max_iters,
-                            const char *override_config_file)
- {
-     pid_t child = -1;
-@@ -191,6 +192,7 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     int config_len;
-     libxl_domain_suspend_props props = {
-         .flags = LIBXL_SUSPEND_LIVE,
-+        .max_iters = max_iters,
-         };
-     unsigned xtl_flags = XTL_STDIOSTREAM_HIDE_PROGRESS;
- 
-@@ -555,8 +557,10 @@ int main_migrate(int argc, char **argv)
-     char *host;
-     int opt, daemonize = 1, monitor = 1, debug = 0, pause_after_migration = 0;
-     int preserve_domid = 0;
-+    uint32_t max_iters = 0;
-     static struct option opts[] = {
-         {"debug", 0, 0, 0x100},
-+        {"max_iters", 1, 0, 0x101},
-         {"live", 0, 0, 0x200},
-         COMMON_LONG_OPTS
-     };
-@@ -587,6 +591,9 @@ int main_migrate(int argc, char **argv)
-     case 0x100: /* --debug */
-         debug = 1;
-         break;
-+    case 0x101: /* --max_iters */
-+        max_iters = atoi(optarg);
-+        break;
-     case 0x200: /* --live */
-         /* ignored for compatibility with xm */
-         break;
-@@ -621,7 +628,8 @@ int main_migrate(int argc, char **argv)
-                   pause_after_migration ? " -p" : "");
-     }
- 
--    migrate_domain(domid, preserve_domid, rune, debug, config_filename);
-+    migrate_domain(domid, preserve_domid, rune, debug,
-+                   max_iters, config_filename);
-     return EXIT_SUCCESS;
- }
- 
+@@ -521,7 +521,7 @@ struct cmd_spec cmd_table[] = {
+       "-e                      Do not wait in the background (on <host>) for the death\n"
+       "                        of the domain.\n"
+       "-N <netbufscript>       Use netbufscript to setup network buffering instead of the\n"
+-      "                        default script (/etc/xen/scripts/remus-netbuf-setup).\n"
++      "                        default script (" XEN_SCRIPT_DIR "/remus-netbuf-setup).\n"
+       "-F                      Enable unsafe configurations [-b|-n|-d flags]. Use this option\n"
+       "                        with caution as failover may not work as intended.\n"
+       "-b                      Replicate memory checkpoints to /dev/null (blackhole).\n"
 
