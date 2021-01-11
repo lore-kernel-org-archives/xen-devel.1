@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 802B0C4332B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DED6C43381
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:42:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3580422AAF
+	by mail.kernel.org (Postfix) with ESMTPS id 1C2B0225AB
 	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:42:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3580422AAF
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C2B0225AB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65106.115266 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65104.115242 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1DJ-0002iB-Rq; Mon, 11 Jan 2021 17:42:45 +0000
+	id 1kz1DF-0002dA-8m; Mon, 11 Jan 2021 17:42:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65106.115266; Mon, 11 Jan 2021 17:42:45 +0000
+Received: by outflank-mailman (output) from mailman id 65104.115242; Mon, 11 Jan 2021 17:42:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1DJ-0002i4-OH; Mon, 11 Jan 2021 17:42:45 +0000
-Received: by outflank-mailman (input) for mailman id 65106;
- Mon, 11 Jan 2021 17:42:45 +0000
+	id 1kz1DF-0002d2-5I; Mon, 11 Jan 2021 17:42:41 +0000
+Received: by outflank-mailman (input) for mailman id 65104;
+ Mon, 11 Jan 2021 17:42:40 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1DI-0002a6-Vz
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:42:45 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.81])
+ id 1kz1DD-0002a6-Vw
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:42:40 +0000
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.52])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 42e1ab8f-a3ed-410c-8bef-42c6a6e81da8;
+ id f9295fc2-39d0-48f8-ad78-b3ea1c733419;
  Mon, 11 Jan 2021 17:42:36 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgTM3I
+ with ESMTPSA id h0968ex0BHgRM3G
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:29 +0100 (CET)
+ Mon, 11 Jan 2021 18:42:27 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,68 +54,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42e1ab8f-a3ed-410c-8bef-42c6a6e81da8
+X-Inumbo-ID: f9295fc2-39d0-48f8-ad78-b3ea1c733419
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386955;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
 	Subject:Sender;
-	bh=QiPerdOU9xygk7E7MXkq1VASHZU9W0Hszj+BzxbqjQo=;
-	b=A2uds57lki+sBKIERoJZ5uOmdj5dKjFGtI7lXHGcYdAWF0oli6yuz+m+bJTjF7Rs8Y
-	PcfSMc46w6/4geQCrKF2kFPQIn/XtvCZirKHoamr4BaR8RuakEholQbczxgsPSF8CR1u
-	zKA42t4ZraVAS3AzWdKzu6rrk2+TBmIuSXKSJqfgdD1yT2zZ4fppw/LDgxVxyPs52s+M
-	zxTv/YreOEaFjOgK6fvsMtpMZ/jq3F1faA22uqKOaYIGIh1gQPssXeqKYviynkW24ZtR
-	DyyVteCo+TJRwyW8+0CH65lrbICqvwZX6igydKq9Oi7pfEIcuAsftXgzjR9ZWrUyYvGG
-	qWuA==
+	bh=PqavFAEZ5cTdGstAdYlAd/8S+6nO+Bcr5/jInWJ/Ous=;
+	b=AAXwHNhnQvVF9iCbwVSmN/fYPPNSKybpg4GUuXoOmDgYhelL9S4eVf7GCIVaTMSoeK
+	BeEuMVQvqPz3iez+MWGWDeAibXl8dSkzIfST0CyBwTPHvVy+/XHMkbRiDwDqeM8NBILS
+	lzIlCH4H3DNDcIgekHUvhVmeWJtclQeMOv06P5yT36i3D86LJnu84AaCzjc9pvyvHyVk
+	fTCXLo25kGdvGocR8ezBk9dX8b3FDWikDhcvwzz4lSq7wL939aMvKYnlBwVI4rcgggT2
+	KKAs2G/Aq6X0hsoLTQ/A/XHMkzJMTZxQfiw8NS60K7rOLjm/GzxRJKvaGy0sQGYQKSGT
+	rJjg==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210111 04/39] docs: substitute XEN_CONFIG_DIR in xl.conf.5
-Date: Mon, 11 Jan 2021 18:41:49 +0100
-Message-Id: <20210111174224.24714-5-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v20210111 02/39] xl: use proper name for bash_completion file
+Date: Mon, 11 Jan 2021 18:41:47 +0100
+Message-Id: <20210111174224.24714-3-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
 References: <20210111174224.24714-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-xl(1) opens xl.conf in XEN_CONFIG_DIR.
-Substitute this variable also in the man page.
+Files in the bash-completion dirs should be named like the commands,
+without suffix. Without this change 'xl' will not be recognized as a
+command with completion support if BASH_COMPLETION_DIR is set to
+/usr/share/bash-completion/completions.
+
+Fixes commit 9136a919b19929ecb242ef327053d55d824397df
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- docs/man/xl.1.pod.in   | 2 +-
- docs/man/xl.conf.5.pod | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ tools/xl/Makefile        | 4 ++--
+ tools/xl/bash-completion | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index c7b2fcc927..765c169ed2 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -50,7 +50,7 @@ setup the bridge.
+diff --git a/tools/xl/Makefile b/tools/xl/Makefile
+index bdf67c8464..656b21c7da 100644
+--- a/tools/xl/Makefile
++++ b/tools/xl/Makefile
+@@ -45,11 +45,11 @@ install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(BASH_COMPLETION_DIR)
+ 	$(INSTALL_PROG) xl $(DESTDIR)$(sbindir)
+-	$(INSTALL_DATA) bash-completion $(DESTDIR)$(BASH_COMPLETION_DIR)/xl.sh
++	$(INSTALL_DATA) bash-completion $(DESTDIR)$(BASH_COMPLETION_DIR)/xl
  
- If you specify the amount of memory dom0 has, passing B<dom0_mem> to
- Xen, it is highly recommended to disable B<autoballoon>. Edit
--B</etc/xen/xl.conf> and set it to 0.
-+B<@XEN_CONFIG_DIR@/xl.conf> and set it to 0.
+ .PHONY: uninstall
+ uninstall:
+-	rm -f $(DESTDIR)$(BASH_COMPLETION_DIR)/xl.sh
++	rm -f $(DESTDIR)$(BASH_COMPLETION_DIR)/xl
+ 	rm -f $(DESTDIR)$(sbindir)/xl
  
- =item run xl as B<root>
+ .PHONY: clean
+diff --git a/tools/xl/bash-completion b/tools/xl/bash-completion
+index b7cd6b3992..7c6ed32f88 100644
+--- a/tools/xl/bash-completion
++++ b/tools/xl/bash-completion
+@@ -1,4 +1,4 @@
+-# Copy this file to /etc/bash_completion.d/xl.sh
++# Copy this file to /etc/bash_completion.d/xl
  
-diff --git a/docs/man/xl.conf.5.pod b/docs/man/xl.conf.5.pod
-index 41ee428744..dfea9d64ba 100644
---- a/docs/man/xl.conf.5.pod
-+++ b/docs/man/xl.conf.5.pod
-@@ -1,6 +1,6 @@
- =head1 NAME
- 
--/etc/xen/xl.conf - XL Global/Host Configuration 
-+@XEN_CONFIG_DIR@/xl.conf - XL Global/Host Configuration
- 
- =head1 DESCRIPTION
- 
+ _xl()
+ {
 
