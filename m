@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5827BC433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A236CC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:49:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0625D223E0
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:49:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0625D223E0
+	by mail.kernel.org (Postfix) with ESMTPS id 5C4A6223E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:49:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5C4A6223E0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65177.115482 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65182.115494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Jh-00053q-AY; Mon, 11 Jan 2021 17:49:21 +0000
+	id 1kz1Jn-00059o-K3; Mon, 11 Jan 2021 17:49:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65177.115482; Mon, 11 Jan 2021 17:49:21 +0000
+Received: by outflank-mailman (output) from mailman id 65182.115494; Mon, 11 Jan 2021 17:49:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Jh-00053j-6o; Mon, 11 Jan 2021 17:49:21 +0000
-Received: by outflank-mailman (input) for mailman id 65177;
- Mon, 11 Jan 2021 17:49:20 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1kz1Jn-00059e-Fb; Mon, 11 Jan 2021 17:49:27 +0000
+Received: by outflank-mailman (input) for mailman id 65182;
+ Mon, 11 Jan 2021 17:49:26 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1E7-0002aB-QN
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:43:35 +0000
+ id 1kz1Eg-0002a6-2A
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:44:10 +0000
 Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.104])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a997c43f-2cf2-4048-ad21-9913226509ea;
- Mon, 11 Jan 2021 17:42:44 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id edfd91d1-90e2-4a9b-9da3-d8e6867119a1;
+ Mon, 11 Jan 2021 17:42:49 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgbM3d
+ with ESMTPSA id h0968ex0BHggM3p
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:37 +0100 (CET)
+ Mon, 11 Jan 2021 18:42:42 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a997c43f-2cf2-4048-ad21-9913226509ea
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386963;
+X-Inumbo-ID: edfd91d1-90e2-4a9b-9da3-d8e6867119a1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386968;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
 	Subject:Sender;
-	bh=8HnEje+bi5L28ovh7GxYhMDV/iYGgk+hVnPKuTzQjbY=;
-	b=GE9mmUWcTDiEPzeGYU+3pbaO+hW4qhdcugMAYZOttT/JfHA96fscruSy2sEgN3Zxly
-	QNMr/qFA3cBIu3q3rrhn0KAKjKCY4jLQ4vfoP3VkuE7zszrNiujFC8BxtETO8jyj6/8I
-	I7svFKoJgjFyG/a79+Rfqs3fXQAKBlOAVfqoO2OmtmdRNZPkz4r2cBLpdQthwh8UXYzc
-	QaI+O/cds4xSvnfUSAnBdvqWK88Zhuf/hfsQYqF0d5mumyUODz5gqOMf57LUcCny+TLa
-	sWog8ftePycC9H/x4KRVpSH/dkfVWdpy2SAMUvauBMh2jnEai3WXLcyZJXARYqLHq6Xc
-	dbUA==
+	bh=Gzr3qB/ER0pPGA/ReU1WnH9O9LgHDHVskc4u4fK3Qng=;
+	b=pCqVYqqFo1RlkPm8ByECSG3uxqvJyUak9MWgaTy/hVcMvReN3QMrx6zkgInT3iM3wZ
+	Mlkn69M8xCskSkyUKcnNTPrREY2cFbODJuwaEk3NYDheBLLxNKvOqBHQIN9kNvFxvFTb
+	J5rJ3azU4eGgOLtfC/dqwRcF+xkFEKEentShD/7yPUV8f7IuM+aNa4YcTm7RM0cG4RPe
+	nHae4dhQYQzcDXTAXkE1wX/p8wl6g5leCOPSyLl2h75ffHHEQdTre3U5VA8LQn/8mwd/
+	2SAgAjsHni9GF0lvvijNrmnve4ow+el4xVRlYn3lMiecWlSXcpm5e7p5h7ccv3/s9wlK
+	tsdQ==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
@@ -73,66 +74,92 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210111 23/39] tools/guest: restore: move pfns array
-Date: Mon, 11 Jan 2021 18:42:08 +0100
-Message-Id: <20210111174224.24714-24-olaf@aepfle.de>
+Subject: [PATCH v20210111 35/39] tools: change struct precopy_stats to precopy_stats_t
+Date: Mon, 11 Jan 2021 18:42:20 +0100
+Message-Id: <20210111174224.24714-36-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
 References: <20210111174224.24714-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove allocation from hotpath, move pfns array into preallocated space.
+This will help libxl_save_msgs_gen.pl to copy the struct as a region of memory.
+
+No change in behavior intented.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  | 2 ++
- tools/libs/guest/xg_sr_restore.c | 6 ++----
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ tools/include/xenguest.h        | 7 +++----
+ tools/libs/guest/xg_sr_common.h | 2 +-
+ tools/libs/guest/xg_sr_save.c   | 6 +++---
+ 3 files changed, 7 insertions(+), 8 deletions(-)
 
+diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
+index 775cf34c04..b567d7e0ec 100644
+--- a/tools/include/xenguest.h
++++ b/tools/include/xenguest.h
+@@ -435,18 +435,17 @@ static inline xen_pfn_t xc_dom_p2m(struct xc_dom_image *dom, xen_pfn_t pfn)
+ struct xenevtchn_handle;
+ 
+ /* For save's precopy_policy(). */
+-struct precopy_stats
+-{
++typedef struct {
+     unsigned int iteration;
+     unsigned long total_written;
+     long dirty_count; /* -1 if unknown */
+-};
++} precopy_stats_t;
+ 
+ /*
+  * A precopy_policy callback may not be running in the same address
+  * space as libxc an so precopy_stats is passed by value.
+  */
+-typedef int (*precopy_policy_t)(struct precopy_stats, void *);
++typedef int (*precopy_policy_t)(precopy_stats_t, void *);
+ 
+ /* callbacks provided by xc_domain_save */
+ struct save_callbacks {
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 2a020fef5c..516d9b9fb5 100644
+index f76af23bcc..ba2f7e72b1 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -224,6 +224,8 @@ struct xc_sr_save_arrays {
- };
+@@ -271,7 +271,7 @@ struct xc_sr_context
+             size_t pages_sent;
+             size_t overhead_sent;
  
- struct xc_sr_restore_arrays {
-+    /* handle_page_data */
-+    xen_pfn_t pfns[MAX_BATCH_SIZE];
- };
+-            struct precopy_stats stats;
++            precopy_stats_t stats;
  
- struct xc_sr_context
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 4a9ece9681..7d1447e86c 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -315,7 +315,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-     unsigned int i, pages_of_data = 0;
-     int rc = -1;
+             unsigned int nr_batch_pfns;
+             unsigned long *deferred_pages;
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index d766384ed6..c86180730f 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -489,7 +489,7 @@ static int update_progress_string(struct xc_sr_context *ctx, char **str)
+ #define SPP_MAX_ITERATIONS      5
+ #define SPP_TARGET_DIRTY_COUNT 50
  
--    xen_pfn_t *pfns = NULL, pfn;
-+    xen_pfn_t *pfns = ctx->restore.m->pfns, pfn;
-     uint32_t *types = NULL, type;
+-static int simple_precopy_policy(struct precopy_stats stats, void *user)
++static int simple_precopy_policy(precopy_stats_t stats, void *user)
+ {
+     return ((stats.dirty_count >= 0 &&
+              stats.dirty_count < SPP_TARGET_DIRTY_COUNT) ||
+@@ -516,13 +516,13 @@ static int send_memory_live(struct xc_sr_context *ctx)
+     precopy_policy_t precopy_policy = ctx->save.callbacks->precopy_policy;
+     void *data = ctx->save.callbacks->data;
  
-     /*
-@@ -363,9 +363,8 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-         goto err;
-     }
+-    struct precopy_stats *policy_stats;
++    precopy_stats_t *policy_stats;
  
--    pfns = malloc(pages->count * sizeof(*pfns));
-     types = malloc(pages->count * sizeof(*types));
--    if ( !pfns || !types )
-+    if ( !types )
-     {
-         ERROR("Unable to allocate enough memory for %u pfns",
-               pages->count);
-@@ -412,7 +411,6 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-                            &pages->pfn[pages->count]);
-  err:
-     free(types);
--    free(pfns);
+     rc = update_progress_string(ctx, &progress_str);
+     if ( rc )
+         goto out;
  
-     return rc;
- }
+-    ctx->save.stats = (struct precopy_stats){
++    ctx->save.stats = (precopy_stats_t){
+         .dirty_count = ctx->save.p2m_size,
+     };
+     policy_stats = &ctx->save.stats;
 
