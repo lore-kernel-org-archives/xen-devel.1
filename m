@@ -2,47 +2,50 @@ Return-Path: <SRS0=O81L=GO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20AD6C433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82261C433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:48:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DFB5320738
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DFB5320738
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 46862208D5
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:48:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46862208D5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65130.115421 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65158.115434 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Du-0003vA-Bw; Mon, 11 Jan 2021 17:43:22 +0000
+	id 1kz1IJ-0004fh-39; Mon, 11 Jan 2021 17:47:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65130.115421; Mon, 11 Jan 2021 17:43:22 +0000
+Received: by outflank-mailman (output) from mailman id 65158.115434; Mon, 11 Jan 2021 17:47:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Du-0003uy-6t; Mon, 11 Jan 2021 17:43:22 +0000
-Received: by outflank-mailman (input) for mailman id 65130;
- Mon, 11 Jan 2021 17:43:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1Ds-0002a6-0n
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:43:20 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.102])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6dbb824f-9d9a-4145-870e-648cb008d29b;
- Mon, 11 Jan 2021 17:42:43 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgaM3b
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:36 +0100 (CET)
+	id 1kz1IJ-0004fa-04; Mon, 11 Jan 2021 17:47:55 +0000
+Received: by outflank-mailman (input) for mailman id 65158;
+ Mon, 11 Jan 2021 17:47:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4Ybk=GO=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
+ id 1kz1II-0004fV-3v
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:47:54 +0000
+Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id af6c737f-7ac7-451d-bbf1-1701cd28b285;
+ Mon, 11 Jan 2021 17:47:53 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id w5so624617wrm.11
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Jan 2021 09:47:53 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id v20sm26616wml.34.2021.01.11.09.47.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Jan 2021 09:47:51 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 8337D1FF7E;
+ Mon, 11 Jan 2021 17:47:50 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,111 +57,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6dbb824f-9d9a-4145-870e-648cb008d29b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386962;
-	s=strato-dkim-0002; d=aepfle.de;
-	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
-	Subject:Sender;
-	bh=8FX6A6TfSliLbBh9NN6xeSNcW9/ugcxkL/SigGC9sjw=;
-	b=Xg90vn+9QomGIc6YZHB2XRiFhDv1USjP0F5KDc6J/C7rIBuSG5MqKNtRRXsr3cY4qN
-	1xSS4NwGHKOItoeJ92yFwq/kaN6oSniK+ZZCnFp+lrjuowqRhdOysauOYmRY3EG4KQQg
-	pyj5O6kfT6EbkU4o/Y5AuXZ409YRnJSSDM3zlKl5OFNpTfIL7TwDG+eA618Y3fhn93Mn
-	dNFklOHr33zDwOCIHz20TvgvDT6CI0BSwtpUG/iE7cbalUsvSkodlHYy206qmAA9T/dz
-	6x95/0HdKOPEBiiCsRPNvDoJC/dIrKjVNQjlWwAMoloxsJzmsWCi6FXxU7SNEwkhO/B+
-	877Q==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
-X-RZG-CLASS-ID: mo00
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210111 21/39] tools/guest: save: move guest_data array
-Date: Mon, 11 Jan 2021 18:42:06 +0100
-Message-Id: <20210111174224.24714-22-olaf@aepfle.de>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
-References: <20210111174224.24714-1-olaf@aepfle.de>
+X-Inumbo-ID: af6c737f-7ac7-451d-bbf1-1701cd28b285
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=references:user-agent:from:to:cc:subject:date:in-reply-to
+         :message-id:mime-version:content-transfer-encoding;
+        bh=7PomrZU0jMeuj2pSx76rGsVMpY5/lWRJj77kNrVmTOQ=;
+        b=eN3dBxOzR44brDRBdWt3v4cXwY6j30skPdqKuTGRWe/DKoQpXBEbYCNfUfWnxSmOMu
+         XBy0JNbmcqHL9/5eTyQHRZK0TylvdmoTIQtrHYnXogIczvSNKQKMvqS2IDa41gSpOeb0
+         jCa+KqJnWspIoTNo5Vo72FWylPM+UqOOAL93Y9lhyE/E+JSasH8i1x5Qt4PEIRazuKwW
+         47iItS+Yn4S8d/GkngwvwwLE36JBsUFx206rpGBdpMxlY9JBo+PoakQ2ux2Lr1L6YVLy
+         T4Sq750nq5cgVMPwYor3Gt9Bgx5x9vcasoQAVPtwwZubrFxLtHxMm/RPTAu3LFDIRtjD
+         wmlA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
+         :in-reply-to:message-id:mime-version:content-transfer-encoding;
+        bh=7PomrZU0jMeuj2pSx76rGsVMpY5/lWRJj77kNrVmTOQ=;
+        b=sIccY6MRaPfRWb2P16h7slmR84zZfrnYwA3J8FfnkDy9K7zzmjs10vjvUb2sG7iDYN
+         OJbKhcCg4qQApPGVuSsZ8vdtaHVxcxo/n8fDPo3Vy93OtMoUcZE5OrVHpdeBN6EshO6S
+         wS9CQTa1wnedHDxWbvy98SKPJrwGoNQvi3ZcxNV64ULvolAaxPQs8FK2S5sb6nUo0/wn
+         hDyD0nUrlkeYTYV4yQF6wGgzojJrLD0egt0SF5ot19MsMBbKjgkiFE471gvDnBAjc8B6
+         FQlpX2xWdueGv/NN4vWsqVhCZhmenS9Sg16NlytDZPqbUQkUQIWe30YkrcRnUcHdrQNj
+         MM6Q==
+X-Gm-Message-State: AOAM5322MKS598OkAjfr82ZnAaLq4N1wfgYXKpZjiokxxGji5vBzaNbf
+	zvENkVNSt8K1dBFeFYJAHmmNbQ==
+X-Google-Smtp-Source: ABdhPJyEoJCuSw+5tRtzaJyx6mVyGEBtWFwj20lKG9ywN4EzrcnynxBCh/RF0f45AqXVj56ADnb/VQ==
+X-Received: by 2002:a5d:5385:: with SMTP id d5mr269757wrv.384.1610387272416;
+        Mon, 11 Jan 2021 09:47:52 -0800 (PST)
+References: <20210111152020.1422021-1-philmd@redhat.com>
+ <20210111152020.1422021-2-philmd@redhat.com>
+User-agent: mu4e 1.5.7; emacs 28.0.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Cc: qemu-devel@nongnu.org, Huacai Chen <chenhuacai@kernel.org>, Greg Kurz
+ <groug@kaod.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ qemu-trivial@nongnu.org, Amit Shah <amit@kernel.org>, Dmitry Fleytman
+ <dmitry.fleytman@gmail.com>, qemu-arm@nongnu.org, John Snow
+ <jsnow@redhat.com>, qemu-s390x@nongnu.org, Paul Durrant <paul@xen.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Eduardo Habkost
+ <ehabkost@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, Kevin Wolf
+ <kwolf@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>, Max Reitz
+ <mreitz@redhat.com>, Alex Williamson <alex.williamson@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Aleksandar Rikalo
+ <aleksandar.rikalo@syrmia.com>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Jason Wang <jasowang@redhat.com>, Peter
+ Maydell <peter.maydell@linaro.org>, =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@kaod.org>, Halil
+ Pasic <pasic@linux.ibm.com>, Fam Zheng <fam@euphon.net>,
+ qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ kvm@vger.kernel.org, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org, Cornelia Huck <cohuck@redhat.com>, David
+ Hildenbrand <david@redhat.com>, qemu-block@nongnu.org, Christian
+ Borntraeger <borntraeger@de.ibm.com>, Sunil Muthuswamy
+ <sunilmut@microsoft.com>, David Gibson <david@gibson.dropbear.id.au>,
+ Richard Henderson <richard.henderson@linaro.org>, Laurent Vivier
+ <laurent@vivier.eu>, Thomas Huth <thuth@redhat.com>, Stefan Hajnoczi
+ <stefanha@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: Re: [PATCH 1/2] sysemu/runstate: Let runstate_is_running() return bool
+Date: Mon, 11 Jan 2021 17:46:36 +0000
+In-reply-to: <20210111152020.1422021-2-philmd@redhat.com>
+Message-ID: <87o8hvnz5l.fsf@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Remove allocation from hotpath, move guest_data array into preallocated space.
 
-Because this was allocated with calloc:
-Adjust the loop to clear unused entries as needed.
+Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com> writes:
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- tools/libs/guest/xg_sr_common.h |  2 ++
- tools/libs/guest/xg_sr_save.c   | 11 ++++++-----
- 2 files changed, 8 insertions(+), 5 deletions(-)
+> runstate_check() returns a boolean. runstate_is_running()
+> returns what runstate_check() returns, also a boolean.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 81158a4f4d..33e66678c6 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -223,6 +223,8 @@ struct xc_sr_save_arrays {
-     struct iovec iov[MAX_BATCH_SIZE + 4];
-     /* write_batch */
-     uint64_t rec_pfns[MAX_BATCH_SIZE];
-+    /* write_batch: Pointers to page data to send. Mapped gfns or local allocations. */
-+    void *guest_data[MAX_BATCH_SIZE];
- };
- 
- struct xc_sr_restore_arrays {
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 0e34c4b051..a571246894 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -90,7 +90,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     xc_interface *xch = ctx->xch;
-     xen_pfn_t *mfns = ctx->save.m->mfns, *types = ctx->save.m->types;
-     void *guest_mapping = NULL;
--    void **guest_data = NULL;
-+    void **guest_data = ctx->save.m->guest_data;
-     void **local_pages = NULL;
-     int *errors = ctx->save.m->errors, rc = -1;
-     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-@@ -105,12 +105,10 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     assert(nr_pfns != 0);
- 
--    /* Pointers to page data to send.  Mapped gfns or local allocations. */
--    guest_data = calloc(nr_pfns, sizeof(*guest_data));
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = calloc(nr_pfns, sizeof(*local_pages));
- 
--    if ( !guest_data || !local_pages )
-+    if ( !local_pages )
-     {
-         ERROR("Unable to allocate arrays for a batch of %u pages",
-               nr_pfns);
-@@ -166,7 +164,10 @@ static int write_batch(struct xc_sr_context *ctx)
-         for ( i = 0, p = 0; i < nr_pfns; ++i )
-         {
-             if ( page_type_has_stream_data(types[i]) == false )
-+            {
-+                guest_data[i] = NULL;
-                 continue;
-+            }
- 
-             if ( errors[p] )
-             {
-@@ -183,6 +184,7 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-             if ( rc )
-             {
-+                guest_data[i] = NULL;
-                 if ( rc == -1 && errno == EAGAIN )
-                 {
-                     set_bit(ctx->save.m->batch_pfns[i], ctx->save.deferred_pages);
-@@ -256,7 +258,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     for ( i = 0; local_pages && i < nr_pfns; ++i )
-         free(local_pages[i]);
-     free(local_pages);
--    free(guest_data);
- 
-     return rc;
- }
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+
+--=20
+Alex Benn=C3=A9e
 
