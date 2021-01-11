@@ -1,44 +1,64 @@
-Return-Path: <SRS0=tjso=GP=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=O81L=GO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D01DFC433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 22:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82C22C433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7589B23122
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 22:14:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7589B23122
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 44ED8223E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44ED8223E0
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.66164.117411 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65214.115578 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRvl-0007H6-JO; Tue, 12 Jan 2021 22:14:25 +0000
+	id 1kz1KI-0005mm-Kw; Mon, 11 Jan 2021 17:49:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 66164.117411; Tue, 12 Jan 2021 22:14:25 +0000
+Received: by outflank-mailman (output) from mailman id 65214.115578; Mon, 11 Jan 2021 17:49:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRvl-0007Gz-GH; Tue, 12 Jan 2021 22:14:25 +0000
-Received: by outflank-mailman (input) for mailman id 66164;
- Tue, 12 Jan 2021 22:14:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DecX=GP=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
- id 1kzRvk-0007Gu-6x
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 22:14:24 +0000
-Received: from mail-ej1-x62b.google.com (unknown [2a00:1450:4864:20::62b])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a453b5fa-f9c2-4a10-bf38-12bf4d1446fa;
- Tue, 12 Jan 2021 22:14:23 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id d17so177032ejy.9
- for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 14:14:23 -0800 (PST)
+	id 1kz1KI-0005mb-EJ; Mon, 11 Jan 2021 17:49:58 +0000
+Received: by outflank-mailman (input) for mailman id 65214;
+ Mon, 11 Jan 2021 17:49:57 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1kz1G3-0002a6-4r
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:45:35 +0000
+Received: from mo4-p04-ob.smtp.rzone.de (unknown [85.215.255.123])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d6ff848c-c88a-4999-ba76-7e94e4cbaf3d;
+ Mon, 11 Jan 2021 17:44:41 +0000 (UTC)
+Received: from aepfle.de by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
+ with ESMTPSA id h0968ex0BHieM4G
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate)
+ for <xen-devel@lists.xenproject.org>;
+ Mon, 11 Jan 2021 18:44:40 +0100 (CET)
+Resent-From: Olaf Hering <olaf@aepfle.de>
+Resent-Date: Mon, 11 Jan 2021 18:44:35 +0100
+Resent-Message-ID: <X/yOg59L7nhXf8Dp@aepfle.de>
+Resent-To: xen-devel@lists.xenproject.org
+Received: from mo4-p01-ob.smtp.rzone.de ([85.215.255.50])
+ by smtpin.rzone.de (RZmta 47.12.1 OK) with ESMTPS id p0905bx0BHgR53V
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client CN "*.smtp.rzone.de",
+ Issuer "TeleSec ServerPass Class 2 CA" (verified OK (+EmiG)))
+ (Client hostname verified OK) for <olaf@aepfle.de>;
+ Mon, 11 Jan 2021 18:42:27 +0100 (CET)
+Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
+ with ESMTPSA id h0968ex0BHgQM3E
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
+ (Client did not present a certificate) for <olaf@aepfle.de>;
+ Mon, 11 Jan 2021 18:42:26 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,133 +70,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a453b5fa-f9c2-4a10-bf38-12bf4d1446fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=CT0CyhlrA5J51cvzWdJIUaqF8cJdPEmd+dU5q7+od3I=;
-        b=i/p/7DcXgOBHoKDvZo4hAw4MKtJq/o+p4nphR0xy1frw8/WW1kQdpDCjO4wk1u0KiR
-         JI92EPsPCdI0NWZYBBsetlujBl6Kr0J9iU/1jOqjyjsLJ1JTtVJ+c0EZWKM1FS6jqpRt
-         IRmuKa1yGW7evs4p2eQPe27AJO0wPogjfq5uGrIj9CHSQDmGgswG+LQwzUQ/AyxrxOoP
-         Rf+vaL4gTsJXQ0v52HYzoe4Rx8xOTIVoGAVM60rw+zP+Y7QXsfh8WnzFsD7L8bBo+2A2
-         u9VLToRNzd4IwtNl+IIT+M2DFW3yQ8n1dD58ozO6dd2zDXHMBc8DT/sN8DwWgPgTnPtN
-         Oqmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=CT0CyhlrA5J51cvzWdJIUaqF8cJdPEmd+dU5q7+od3I=;
-        b=QZH8nxzf5Tuh8qzpZRL98ztAV3DyE/wfKHarYDMlj6QW+uGFS7nmqG/Uerw9PfS+Nq
-         MehpimKiZFHLcTpodWQBaSrfBsSBANfKryWNVaEhhUpr+FXf01f8vj3pV92i1H8ADqOS
-         C9LxToX341ozEMokAN1SsDa/3l0xZ+CgC15HydPH2xrvP7zUMf1ZHHu1NrpgPlwoPdBa
-         QTjX3E9vce1lM7YQstwH2Ypv+dQJ3JS57wpbHyOZv85Vkbn7mwkjIAnJldxgP0eDbMRc
-         8KyxvY5qrmpk713bTsXr7sWpdMKTJ2Id3W5emTTxOp4QoRRWXjnGLL5yypYZFd0/Rs8R
-         Ch7g==
-X-Gm-Message-State: AOAM532YDon9PpKB1pyy0cuzJvdDwCtFrcjrbN+92V89baMKvwxeHpmB
-	j+lMcG7bTs4kiG9J3i58RSele3UjIHBLWgGX6qM=
-X-Google-Smtp-Source: ABdhPJzX9mR1hvrh0rJTyZLZDcLsSLOSrfeU9jr8xgrzkMUjHRthKdM4FwgdnsBGjJPzd39JZfBcYLsl2jEcN9l6YCk=
-X-Received: by 2002:a17:906:810:: with SMTP id e16mr681823ejd.34.1610489662248;
- Tue, 12 Jan 2021 14:14:22 -0800 (PST)
+X-Inumbo-ID: d6ff848c-c88a-4999-ba76-7e94e4cbaf3d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610387080;
+	s=strato-dkim-0002; d=aepfle.de;
+	h=Message-Id:Date:Subject:Cc:To:From:Resent-To:Resent-Date:
+	Resent-From:From:Subject:Sender;
+	bh=NEmS1FJ3QQ5M6GbPZXGsC+Wwr7yqBf8nvew/2n7hn90=;
+	b=FHVzGLRlSO1uOtemF1V8TsHjDfYP9Xin3c/TXQohdZx9XjMWwgFva7uS/bJdhROi0Z
+	GPVbUOYKYChoGDSK3XYViJKemwo0dr19dFQr/7Geq1uy8AC3hcCCPY/33+G0OkpI4ewh
+	cjCi5I/KUkU+hV9IexQbg5ZBJuAYwMUiBptaR2EggAt5aunF7Wl7NCRdi9gYmmAc/mVB
+	Q4ES+gYoNIkJdjlVywdnKyApXKnmet76hXtTqs5eWVTYGjq2dot+/rU72j5zDYJH+3KU
+	idfO1RpWUgtIonMcu8aJPln6umx2UhWMAteKQ5X/aAOJ6blNSy10DykzijHzf1AzO16q
+	iMCA==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
+X-RZG-CLASS-ID: mo00
+X-Envelope-From: <olaf@aepfle.de>
+X-Envelope-To: <olaf@aepfle.de>
+X-Delivery-Time: 1610386947
+X-UID: 548955
+ARC-Seal: i=1; a=rsa-sha256; t=1610386947; cv=none;
+	d=strato.com; s=strato-dkim-0002;
+	b=ZN6w3DGowDncfW+DX05hm5s4uwWfsGfmBzlZ8Uj3u5si1sIx3h3maM2tEtpg767J3g
+	9RLmcO8v7qpqd74fnNjkMyzNs5tPxrxXg8Z5i4EmUSeAFwHv9fyVH780iwpFQcL1xU2L
+	jGMrU2oPy5reCyIv47sLLwudXyKMYqJGI9Eh7AsbEziTLqHZ5ruugD36iy9TyncWl5hZ
+	iBUYFTO6T1T5+4xgqAZUdm1vcdThxSuzW7CDHLvCxPxU/rEh38R/rI+4C7FVBR4k8gtz
+	+k0rUKgHDI0G1egXInTr7afWutM2Yu2yyPw4zWCHBEPHkne4PLzN2XNWRIduRk8y/8WO
+	o/sw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386947;
+	s=strato-dkim-0002; d=strato.com;
+	h=Message-Id:Date:Subject:Cc:To:From:From:Subject:Sender;
+	bh=NEmS1FJ3QQ5M6GbPZXGsC+Wwr7yqBf8nvew/2n7hn90=;
+	b=g8y0sdagmzW212O7oKhzuMarccvuJ8lr82xDxdMR1lTyU79dymlFymt1B+0aLiVZhC
+	e1zR8g5Odb+X1X1K4Jx9dNdm0TOKoukvQnF5+Fr1bwN5BWt9oZy7yKyLQV2jgaDWZJTY
+	WLuqcWQ0F4XwNX6qOKcKHMC6Mqn3rc66LdrFBaCVa/FrEafT9QDKALA6cOSO92R/NL1g
+	80pdyyupaQLx1LmaXLUJnJ/je2ukpnfk3zijH5PAMiOdYRdGpjdxU1j7XRFZCpGK/hbN
+	EG+PWqfRvnuNhpGle5rMN5zBtmb0blcuhVzKpRN9IHX+oVIu/XakT+QbFE3l+Gua8ruq
+	YThQ==
+ARC-Authentication-Results: i=1; strato.com;
+	dmarc=none header.from="aepfle.de";
+	dkim=pass header.d="aepfle.de" header.s="strato-dkim-0002" header.a="rsa-sha256";
+	dkim-adsp=pass;
+	spf=none smtp.mailfrom="olaf@aepfle.de"
+X-RZG-Expurgate: clean/normal
+X-RZG-Expurgate-ID: 149500::1610386947-0000A3A5-0DBADE8E/0/0
+X-RZG-CLASS-ID: mi00
+Received-SPF: none
+	client-ip=85.215.255.50;
+	helo="mo4-p01-ob.smtp.rzone.de";
+	envelope-from="olaf@aepfle.de";
+	receiver=smtpin.rzone.de;
+	identity=mailfrom;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386947;
+	s=strato-dkim-0002; d=aepfle.de;
+	h=Message-Id:Date:Subject:Cc:To:From:From:Subject:Sender;
+	bh=NEmS1FJ3QQ5M6GbPZXGsC+Wwr7yqBf8nvew/2n7hn90=;
+	b=a5jjSWiSR3A17ueMjsbSid2pOZC+dOz+dLYcmnkqZBJQyeAiRqx6xfG6MxMlpwtJ74
+	GXc+PzSW1b36YLrED1SIXVPxrtDbH+Nmx3x6V6M6UftSuG8MjZ7KogZ1qdjGf0/Wp2Q1
+	mzR2M9CdDh8XBO/u8tiXprE4PcDOhaAEgGu5YOrHAJGGCp6bRH6yB8zqcy8VDeGhQj1m
+	Eh2Zy+XYg+QgLKWXO/k5SvBCLFkyTbsuoEFY2hewwYV1Z1R5yvMpWaUzEL76woNkqjV3
+	Wzlg9kKDieDQRL5IBnbD8A4m9bjIE2fhSVSly31uFCQyu4sXSaAdSBXEMqz78aM0J9mY
+	14sg==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
+X-RZG-CLASS-ID: mo00
+From: Olaf Hering <olaf@aepfle.de>
+To: 
+Cc: Olaf Hering <olaf@aepfle.de>
+Subject: [PATCH v20210111 00/39] leftover from 2020
+Date: Mon, 11 Jan 2021 18:41:45 +0100
+Message-Id: <20210111174224.24714-1-olaf@aepfle.de>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20210112001623.28421-1-sstabellini@kernel.org>
- <db6949f1-6b19-b1bb-9bec-8b56a2ad83a1@xen.org> <alpine.DEB.2.21.2101121015100.2495@sstabellini-ThinkPad-T480s>
- <CAJ=z9a208m_NvxgjP=9Eyr6PsJZm3DPy6BKvM1x1oZP=Ftg-ZQ@mail.gmail.com> <alpine.DEB.2.21.2101121252490.2495@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2101121252490.2495@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien.grall.oss@gmail.com>
-Date: Tue, 12 Jan 2021 22:14:11 +0000
-Message-ID: <CAJ=z9a37BLiTxKy1KDpvmYW4P-4efJjshRotZ=ds+Kj8nD2OSA@mail.gmail.com>
-Subject: Re: [PATCH] xen/arm: don't read aarch32 regs when aarch32 isn't available
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, 
-	Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, 12 Jan 2021 at 21:05, Stefano Stabellini <sstabellini@kernel.org> wrote:
->
-> On Tue, 12 Jan 2021, Julien Grall wrote:
-> > On Tue, 12 Jan 2021 at 19:09, Stefano Stabellini <sstabellini@kernel.org> wrote:
-> > >
-> > > On Tue, 12 Jan 2021, Julien Grall wrote:
-> > > > > +    aarch32 = c->pfr64.el1 == 2;
-> > > >
-> > > > This is checking that AArch32 is available in EL1. However, it may not be the
-> > > > case yet it would be available in EL0.
-> > > >
-> > > > As a consequence, 32-bit userspace wouldn't work properly after this patch.
-> > > >
-> > > > The Arm Arm mandates that if AArch32 is available at EL(n), then it must be
-> > > > available at EL(n - 1).
-> > > >
-> > > > So we should check that AArch32 is available at EL0 because this would
-> > > > cover the case where AArch32 is enabled at EL1.
-> > >
-> > > OK
-> > >
-> > >
-> > > > Furthermore, I would also like to avoid hardcoding value in the code as it is
-> > > > less readable. We already define cpu_has_el0_32 which use the boot CPU
-> > > > feature. Maybe we want to expand the macro or split it?
-> > >
-> > > I agree
-> > >
-> > > Technically, cpu_has_el0_32 works as is, because it is called after
-> > > boot_cpu_data has been updated. So we could just use it. What do you
-> > > think?
-> >
-> > I thought about that when I wrote the first e-mail. However, this
-> > would not work properly for heterogeneous platforms.
-> > There is still a risk to read garbage (or UNDEF) if the boot CPU
-> > supports AArch32 but the others.
->
-> Yeah, but that is not the kind of thing that can be actually different
-> in a heterogeneous platform, as far as I am aware?
+Various unreviewed changes.
 
-Arm CPU vendors can do a lot of interesting mix. For Samsung released
-in the past a big.LITTLE with a mix of Armv8.0 and Armv8.2 cores (see
-[1]).
-It turns out to be a massive blunder because they hack Linux to avoid
-detecting a minimum feature set. So the userspace app was trying to
-use LSE atomics on Armv8.0 (yes).
+Olaf Hering (39):
+  stubdom: fix tpm_version
+  xl: use proper name for bash_completion file
+  docs: remove stale create example from xl.1
+  docs: substitute XEN_CONFIG_DIR in xl.conf.5
+  tools: add with-xen-scriptdir configure option
+  Use XEN_SCRIPT_DIR to refer to /etc/xen/scripts
+  xl: optionally print timestamps during xl migrate
+  xl: fix description of migrate --debug
+  tools: add readv_exact to libxenctrl
+  tools: add xc_is_known_page_type to libxenctrl
+  tools: use xc_is_known_page_type
+  tools: unify type checking for data pfns in migration stream
+  tools: show migration transfer rate in send_dirty_pages
+  tools/guest: prepare to allocate arrays once
+  tools/guest: save: move batch_pfns
+  tools/guest: save: move mfns array
+  tools/guest: save: move types array
+  tools/guest: save: move errors array
+  tools/guest: save: move iov array
+  tools/guest: save: move rec_pfns array
+  tools/guest: save: move guest_data array
+  tools/guest: save: move local_pages array
+  tools/guest: restore: move pfns array
+  tools/guest: restore: move types array
+  tools/guest: restore: move mfns array
+  tools/guest: restore: move map_errs array
+  tools/guest: restore: move mfns array in populate_pfns
+  tools/guest: restore: move pfns array in populate_pfns
+  tools/guest: restore: split record processing
+  tools/guest: restore: split handle_page_data
+  tools/guest: restore: write data directly into guest
+  tools: remove tabs from code produced by libxl_save_msgs_gen.pl
+  tools: recognize LIBXL_API_VERSION for 4.15
+  tools: adjust libxl_domain_suspend to receive a struct props
+  tools: change struct precopy_stats to precopy_stats_t
+  tools: add callback to libxl for precopy_policy and precopy_stats_t
+  tools: add --max_iters to libxl_domain_suspend
+  tools: add --min_remaining to libxl_domain_suspend
+  tools: add --abort_if_busy to libxl_domain_suspend
 
-I wouldn't be surprised to see a phone with a mix of 64-bit only
-processor and one with 32-bit EL0 to run legacy apps.
+ .gitignore                                    |   3 +
+ docs/configure.ac                             |   3 +
+ ...n.5.pod => xl-disk-configuration.5.pod.in} |   2 +-
+ ....pod => xl-network-configuration.5.pod.in} |   4 +-
+ docs/man/xl.1.pod.in                          |  39 +-
+ docs/man/{xl.conf.5.pod => xl.conf.5.pod.in}  |   8 +-
+ docs/misc/block-scripts.txt                   |   2 +-
+ m4/paths.m4                                   |   8 +-
+ stubdom/vtpmmgr/vtpmmgr.h                     |   2 +-
+ tools/include/libxl.h                         |  32 +-
+ tools/include/xenguest.h                      |   7 +-
+ tools/libs/ctrl/xc_private.c                  |  55 +-
+ tools/libs/ctrl/xc_private.h                  |  34 ++
+ tools/libs/guest/xg_sr_common.c               |  33 +-
+ tools/libs/guest/xg_sr_common.h               |  88 ++-
+ tools/libs/guest/xg_sr_restore.c              | 562 ++++++++++++------
+ tools/libs/guest/xg_sr_save.c                 | 164 ++---
+ tools/libs/guest/xg_sr_save_x86_hvm.c         |   5 +-
+ tools/libs/guest/xg_sr_save_x86_pv.c          |  31 +-
+ tools/libs/light/libxl_dom_save.c             |  24 +
+ tools/libs/light/libxl_domain.c               |  10 +-
+ tools/libs/light/libxl_internal.h             |   6 +
+ tools/libs/light/libxl_save_msgs_gen.pl       |  23 +-
+ tools/libs/light/libxl_stream_write.c         |   9 +-
+ tools/libs/light/libxl_types.idl              |   1 +
+ tools/ocaml/libs/xl/xenlight_stubs.c          |   3 +-
+ tools/xl/Makefile                             |   4 +-
+ tools/xl/bash-completion                      |   2 +-
+ tools/xl/xl_cmdtable.c                        |  29 +-
+ tools/xl/xl_migrate.c                         |  79 ++-
+ tools/xl/xl_saverestore.c                     |   3 +-
+ 31 files changed, 901 insertions(+), 374 deletions(-)
+ rename docs/man/{xl-disk-configuration.5.pod => xl-disk-configuration.5.pod.in} (99%)
+ rename docs/man/{xl-network-configuration.5.pod => xl-network-configuration.5.pod.in} (98%)
+ rename docs/man/{xl.conf.5.pod => xl.conf.5.pod.in} (96%)
 
->
-> In any case, a check that takes that into consideraion would be:
->
->     aarch32_el0 = cpu_has_el0_32 &&
->                   (boot_cpu_feature64(el0) == cpu_feature64(c, el0));
-
-Why do you want to check the boot CPU feature? The per-cpu cpuinfo
-should really contain a raw copy of the ID registers of that CPU.
-
-Anything else will make our life very difficult when we try to look
-for a common set of features or want to expose big.LITTLE to a guest
-(this request comes back time to time).
-
->
-> If you have something better in mind please feel free to suggest it and
-> I'll add it to the patch. Otherwise, I'll send it with this later today
-> with a note that if you want to make a change on commit you have my
-> blessing :-)
-
-Let me start by saying that I think the existing cpu_has_* are
-misnamed because the name suggest it would check the features of the
-current CPU but they only check the boot CPU. But I am not going to
-suggest a renaming for now. The header cpufeature.h likely needs an
-overhaul.
-
-Instead I would suggest the following:
-
-Pseudo-code:
-
-#define cpu_feature64_has_el0(c) cpu_feature64(c, el0) == 2
-
-And the the code would use:
-
-aarch32_el0 = cpu_feature64_has_el0(c);
-
-[1] https://github.com/golang/go/issues/28431
 
