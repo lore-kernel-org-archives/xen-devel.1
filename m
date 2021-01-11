@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5C4FC433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A7DAC433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9808920738
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9808920738
+	by mail.kernel.org (Postfix) with ESMTPS id 40C18223E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40C18223E0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65215.115590 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65230.115614 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1KK-0005rN-Tm; Mon, 11 Jan 2021 17:50:00 +0000
+	id 1kz1Ka-0006re-PT; Mon, 11 Jan 2021 17:50:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65215.115590; Mon, 11 Jan 2021 17:50:00 +0000
+Received: by outflank-mailman (output) from mailman id 65230.115614; Mon, 11 Jan 2021 17:50:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1KK-0005rD-Pk; Mon, 11 Jan 2021 17:50:00 +0000
-Received: by outflank-mailman (input) for mailman id 65215;
- Mon, 11 Jan 2021 17:49:59 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1kz1Ka-0006rU-Ly; Mon, 11 Jan 2021 17:50:16 +0000
+Received: by outflank-mailman (input) for mailman id 65230;
+ Mon, 11 Jan 2021 17:50:15 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1Eb-0002a6-23
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:44:05 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.101])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d7e6dcb0-eb1c-4ab7-b91a-f1c06ce0161b;
- Mon, 11 Jan 2021 17:42:48 +0000 (UTC)
+ id 1kz1Ev-0002aB-SL
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:44:25 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.104])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 656bd11a-fcf0-4f71-8cdd-62a1aed38957;
+ Mon, 11 Jan 2021 17:42:51 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgeM3l
+ with ESMTPSA id h0968ex0BHghM3r
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:40 +0100 (CET)
+ Mon, 11 Jan 2021 18:42:43 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d7e6dcb0-eb1c-4ab7-b91a-f1c06ce0161b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386967;
+X-Inumbo-ID: 656bd11a-fcf0-4f71-8cdd-62a1aed38957
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386970;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
 	Subject:Sender;
-	bh=bBxHDLx7AeMPpHXep28OEFmN0H0Z0pHfYy9VAoYWQzc=;
-	b=LSKiUnZR9jv5XVA8GywjywVeLB7puA+0qUSS5ltXOOAPGUWFcoYpwTEdALq5daYn7A
-	pHB/oNTom8As00JgLtspLY4HpfvhEE/PRyYGbjSFheGTcSBt/l7TrHdTCH02Ck7dqyxC
-	0fQz6TbMpq49jVf1Gz8MrRLX2P9pLdIZChRLfFD8ElmplysVGPUjawv0wHH0LWWueKEW
-	653fGt35iyKz+LSqgHWut03GVsyesEoBZr7YpQEKc3WzcGahaRLiy/pB3PMVElI118JI
-	lQrXdkSG1El3B8UmVJ9wMBBhsFxo8mVOk0lKsqoIkMsryY/mAAznnXMvj4SXPG2XJSWR
-	FbQA==
+	bh=NczH/GYAICCIPBmta0b9hUDcufP3DKYBj+C1mc/v8to=;
+	b=LCPzP+xHi4U7QeCZCBeP8XhIsAXYefrDGcLN18ASQsq3XfQHdGOp4kW1+PhRv27CMK
+	oPBmG3ktUWJ/C/CNH7Fdk8H/rcRk+UsMisPc70hTmaftLyVs2Ghj6nCoILnTSsdAAGgJ
+	ybaT7URtbAEK1qc4gi8uxZHodHQ4o+zinhe+4H2nFBKbXky8kuyHurWx0204a6ut9App
+	zcmpWlX5XkQiN6vlDQEs06BITpyxpBmQfk3LODKr3o+5Ul2jWw5zt81+jcXXDhhEBoNU
+	MkItpVlTZVFXb2PYw2NIuwbt8qtJOby+jmffFIr9cmICJamDlKySrb/rS+371aMhkxtl
+	k7tA==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
@@ -74,186 +73,169 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210111 31/39] tools/guest: restore: write data directly into guest
-Date: Mon, 11 Jan 2021 18:42:16 +0100
-Message-Id: <20210111174224.24714-32-olaf@aepfle.de>
+Subject: [PATCH v20210111 37/39] tools: add --max_iters to libxl_domain_suspend
+Date: Mon, 11 Jan 2021 18:42:22 +0100
+Message-Id: <20210111174224.24714-38-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
 References: <20210111174224.24714-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Read incoming migration stream directly into the guest memory.
-This avoids the memory allocation and copying, and the resulting
-performance penalty.
+Migrating a large, and potentially busy, domU will take more
+time than neccessary due to excessive number of copying iterations.
+
+Allow to host admin to control the number of iterations which
+copy cumulated domU dirty pages to the target host.
+
+The default remains 5, which means one initial iteration to copy the
+entire domU memory, and up to 4 additional iterations to copy dirty
+memory from the still running domU. After the given number of iterations
+the domU is suspended, remaining dirty memory is copied and the domU is
+finally moved to the target host.
+
+This patch adjusts xl(1) and the libxl API.
+External users check LIBXL_HAVE_DOMAIN_SUSPEND_PROPS for the availibility
+of the new .max_iters property.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  |   1 +
- tools/libs/guest/xg_sr_restore.c | 132 ++++++++++++++++++++++++++++++-
- 2 files changed, 129 insertions(+), 4 deletions(-)
+ docs/man/xl.1.pod.in              |  4 ++++
+ tools/include/libxl.h             |  1 +
+ tools/libs/light/libxl_dom_save.c |  2 +-
+ tools/libs/light/libxl_domain.c   |  1 +
+ tools/libs/light/libxl_internal.h |  1 +
+ tools/xl/xl_cmdtable.c            |  3 ++-
+ tools/xl/xl_migrate.c             | 10 +++++++++-
+ 7 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 7ec8867b88..f76af23bcc 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -231,6 +231,7 @@ struct xc_sr_restore_arrays {
-     xen_pfn_t mfns[MAX_BATCH_SIZE];
-     int map_errs[MAX_BATCH_SIZE];
-     void *guest_data[MAX_BATCH_SIZE];
-+    struct iovec iov[MAX_BATCH_SIZE];
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index e6e4e8e83a..8339bd8e6f 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -496,6 +496,10 @@ such that it will be identical on the destination host, unless that
+ configuration is overridden using the B<-C> option. Note that it is not
+ possible to use this option for a 'localhost' migration.
  
-     /* populate_pfns */
-     xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 060f3d1f4e..2f575d7dd9 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -392,6 +392,122 @@ err:
-     return rc;
- }
++=item B<--max_iters> I<iterations>
++
++Number of copy iterations before final suspend+move (default: 5)
++
+ =back
  
-+/*
-+ * Handle PAGE_DATA record from the stream.
-+ * Given a list of pfns, their types, and a block of page data from the
-+ * stream, populate and record their types, map the relevant subset and copy
-+ * the data into the guest.
-+ */
-+static int handle_incoming_page_data(struct xc_sr_context *ctx,
-+                                     struct xc_sr_rhdr *rhdr)
-+{
-+    xc_interface *xch = ctx->xch;
-+    struct xc_sr_restore_arrays *m = ctx->restore.m;
-+    struct xc_sr_rec_page_data_header *pages = &m->pages;
-+    uint64_t *pfn_nums = m->pages.pfn;
-+    uint32_t i;
-+    int rc, iov_idx;
-+
-+    rc = handle_static_data_end_v2(ctx);
-+    if ( rc )
-+        goto err;
-+
-+    /* First read and verify the header */
-+    rc = read_exact(ctx->fd, pages, sizeof(*pages));
-+    if ( rc )
-+    {
-+        PERROR("Could not read rec_pfn header");
-+        goto err;
-+    }
-+
-+    if ( verify_rec_page_hdr(ctx, rhdr->length, pages) == false )
-+    {
-+        rc = -1;
-+        goto err;
-+    }
-+
-+    /* Then read and verify the incoming pfn numbers */
-+    rc = read_exact(ctx->fd, pfn_nums, sizeof(*pfn_nums) * pages->count);
-+    if ( rc )
-+    {
-+        PERROR("Could not read rec_pfn data");
-+        goto err;
-+    }
-+
-+    if ( verify_rec_page_pfns(ctx, rhdr->length, pages) == false )
-+    {
-+        rc = -1;
-+        goto err;
-+    }
-+
-+    /* Finally read and verify the incoming pfn data */
-+    rc = map_guest_pages(ctx, pages);
-+    if ( rc )
-+        goto err;
-+
-+    /* Prepare read buffers, either guest or throw away memory */
-+    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
-+    {
-+        if ( !m->guest_data[i] )
-+            continue;
-+
-+        m->iov[iov_idx].iov_len = PAGE_SIZE;
-+        if ( ctx->restore.verify )
-+            m->iov[iov_idx].iov_base = ctx->restore.verify_buf + i * PAGE_SIZE;
-+        else
-+            m->iov[iov_idx].iov_base = m->guest_data[i];
-+        iov_idx++;
-+    }
-+
-+    if ( !iov_idx )
-+        goto done;
-+
-+    rc = readv_exact(ctx->fd, m->iov, iov_idx);
-+    if ( rc )
-+    {
-+        PERROR("read of %d pages failed", iov_idx);
-+        goto err;
-+    }
-+
-+    /* Post-processing of pfn data */
-+    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
-+    {
-+        if ( !m->guest_data[i] )
-+            continue;
-+
-+        rc = ctx->restore.ops.localise_page(ctx, m->types[i], m->iov[iov_idx].iov_base);
-+        if ( rc )
-+        {
-+            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
-+                  m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+            goto err;
-+
-+        }
-+
-+        if ( ctx->restore.verify )
-+        {
-+            if ( memcmp(m->guest_data[i], m->iov[iov_idx].iov_base, PAGE_SIZE) )
-+            {
-+                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
-+                      m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+            }
-+        }
-+
-+        iov_idx++;
-+    }
-+
-+done:
-+    rc = 0;
-+
-+err:
-+    if ( ctx->restore.guest_mapping )
-+    {
-+        xenforeignmemory_unmap(xch->fmem, ctx->restore.guest_mapping, ctx->restore.nr_mapped_pages);
-+        ctx->restore.guest_mapping = NULL;
-+    }
-+    return rc;
-+}
-+
- /*
-  * Handle PAGE_DATA record from an existing buffer
-  * Given a list of pfns, their types, and a block of page data from the
-@@ -773,11 +889,19 @@ static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_s
-     struct xc_sr_record rec;
+ =item B<remus> [I<OPTIONS>] I<domain-id> I<host>
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 94b8f1095f..646cef28aa 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1675,6 +1675,7 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+ 
+ typedef struct {
+     uint32_t flags; /* LIBXL_SUSPEND_* */
++    uint32_t max_iters;
+ } libxl_domain_suspend_props;
+ #define LIBXL_SUSPEND_DEBUG 1
+ #define LIBXL_SUSPEND_LIVE 2
+diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
+index 3f3cff0342..938c0127f3 100644
+--- a/tools/libs/light/libxl_dom_save.c
++++ b/tools/libs/light/libxl_dom_save.c
+@@ -383,7 +383,7 @@ static int libxl__domain_save_precopy_policy(precopy_stats_t stats, void *user)
+          stats.iteration, stats.dirty_count, stats.total_written);
+     if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
+         goto stop_copy;
+-    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
++    if (stats.iteration >= dss->max_iters)
+         goto stop_copy;
+     return XGS_POLICY_CONTINUE_PRECOPY;
+ 
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 45e0c57c3a..612d3dc4ea 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -527,6 +527,7 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
+     dss->domid = domid;
+     dss->fd = fd;
+     dss->type = type;
++    dss->max_iters = props->max_iters ?: LIBXL_XGS_POLICY_MAX_ITERATIONS;
+     dss->live = props->flags & LIBXL_SUSPEND_LIVE;
+     dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
+     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index d4cc694c01..80a31c3a88 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -3640,6 +3640,7 @@ struct libxl__domain_save_state {
+     int live;
+     int debug;
+     int checkpointed_stream;
++    uint32_t max_iters;
+     const libxl_domain_remus_info *remus;
+     /* private */
      int rc;
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index a0567169bf..75e2e4d54b 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -170,7 +170,8 @@ struct cmd_spec cmd_table[] = {
+       "-T              Show timestamps during the migration process.\n"
+       "--debug         Verify transferred domU page data.\n"
+       "-p              Do not unpause domain after migrating it.\n"
+-      "-D              Preserve the domain id"
++      "-D              Preserve the domain id\n"
++      "--max_iters N   Number of copy iterations before final stop+move"
+     },
+     { "restore",
+       &main_restore, 0, 1,
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index fc9f69bf06..a724bc21ea 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -180,6 +180,7 @@ static void migrate_do_preamble(int send_fd, int recv_fd, pid_t child,
  
--    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
--    if ( rc )
--        return rc;
-+    switch ( rhdr->type )
-+    {
-+    case REC_TYPE_PAGE_DATA:
-+        rc = handle_incoming_page_data(ctx, rhdr);
-+        break;
-+    default:
-+        rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
-+        if ( rc == 0 )
-+            rc = process_buffered_record(ctx, &rec);;
-+        break;
-+    }
+ static void migrate_domain(uint32_t domid, int preserve_domid,
+                            const char *rune, int debug,
++                           uint32_t max_iters,
+                            const char *override_config_file)
+ {
+     pid_t child = -1;
+@@ -191,6 +192,7 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     int config_len;
+     libxl_domain_suspend_props props = {
+         .flags = LIBXL_SUSPEND_LIVE,
++        .max_iters = max_iters,
+         };
+     unsigned xtl_flags = XTL_STDIOSTREAM_HIDE_PROGRESS;
  
--    return process_buffered_record(ctx, &rec);
-+    return rc;
+@@ -555,8 +557,10 @@ int main_migrate(int argc, char **argv)
+     char *host;
+     int opt, daemonize = 1, monitor = 1, debug = 0, pause_after_migration = 0;
+     int preserve_domid = 0;
++    uint32_t max_iters = 0;
+     static struct option opts[] = {
+         {"debug", 0, 0, 0x100},
++        {"max_iters", 1, 0, 0x101},
+         {"live", 0, 0, 0x200},
+         COMMON_LONG_OPTS
+     };
+@@ -587,6 +591,9 @@ int main_migrate(int argc, char **argv)
+     case 0x100: /* --debug */
+         debug = 1;
+         break;
++    case 0x101: /* --max_iters */
++        max_iters = atoi(optarg);
++        break;
+     case 0x200: /* --live */
+         /* ignored for compatibility with xm */
+         break;
+@@ -621,7 +628,8 @@ int main_migrate(int argc, char **argv)
+                   pause_after_migration ? " -p" : "");
+     }
+ 
+-    migrate_domain(domid, preserve_domid, rune, debug, config_filename);
++    migrate_domain(domid, preserve_domid, rune, debug,
++                   max_iters, config_filename);
+     return EXIT_SUCCESS;
  }
- 
  
 
