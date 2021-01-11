@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E335FC433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92E01C433E6
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AD95020738
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD95020738
+	by mail.kernel.org (Postfix) with ESMTPS id 4607E20738
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:43:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4607E20738
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65120.115370 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65119.115362 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Df-0003Pp-ED; Mon, 11 Jan 2021 17:43:07 +0000
+	id 1kz1De-0003OM-N9; Mon, 11 Jan 2021 17:43:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65120.115370; Mon, 11 Jan 2021 17:43:07 +0000
+Received: by outflank-mailman (output) from mailman id 65119.115362; Mon, 11 Jan 2021 17:43:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1Df-0003PG-1e; Mon, 11 Jan 2021 17:43:07 +0000
-Received: by outflank-mailman (input) for mailman id 65120;
+	id 1kz1De-0003O5-HV; Mon, 11 Jan 2021 17:43:06 +0000
+Received: by outflank-mailman (input) for mailman id 65119;
  Mon, 11 Jan 2021 17:43:05 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1Dd-0002aB-PH
+ id 1kz1Dd-0002a6-0S
  for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:43:05 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.83])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 31672194-35c2-4cb9-bee4-5186c798f705;
- Mon, 11 Jan 2021 17:42:41 +0000 (UTC)
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.102])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 1f774d96-6266-4425-9a26-9e1d13d2a17f;
+ Mon, 11 Jan 2021 17:42:42 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgXM3T
+ with ESMTPSA id h0968ex0BHgYM3W
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
  (Client did not present a certificate);
- Mon, 11 Jan 2021 18:42:33 +0100 (CET)
+ Mon, 11 Jan 2021 18:42:34 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31672194-35c2-4cb9-bee4-5186c798f705
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386960;
+X-Inumbo-ID: 1f774d96-6266-4425-9a26-9e1d13d2a17f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386961;
 	s=strato-dkim-0002; d=aepfle.de;
 	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:From:
 	Subject:Sender;
-	bh=U+UL9DwFsxHDtqqeFeZS50OZtsBRz3n+B0nFT8PLWDc=;
-	b=HVB/gm42S1xNVKVs/gdlfm32ifXDyMJQYW61yb1ab8N9UsH4vbNpMDfh6OsvOMPJMD
-	7KBfwu9BPxTgH8Gc3GoW2ihZJQnz2VdT509CnGDrvaDspkYEsvayP7ekgSf7yYemOJSM
-	XCSIqHgYZZuelInrksIDy/qsECj0xTPWbuXUpKsj1U9FLj9P5CEW9dIjjC2sUFj1Z2b9
-	/FjepeENIDmqukD5cZZnqBaJSy06APwDQiwzwARLukmu7x4q1xqJydzqrBUN2BgTvWdJ
-	a88/VZ2bq9cu8rFgvXA7Y8waqehym1nMGA70p4sCrilbJKciili+BKfEd50VA/30LGz9
-	sbGw==
+	bh=GFx6OzeDNwjLW8Klv9SCvRUyVj29OFUNKKJQYpW77rw=;
+	b=DiCSwWPwtDaN9wTrbKCAOrN8wOQJTHKUH50tL4BIcvajjNQA6FwTHQ5edmkZBvTOt0
+	7kMJ/ifub+prNeokctYyoBD+j5M9xPWcNpvAe4PFgzE9pi0iKaJzbYUbU3rNROFgg+JG
+	VsD6rG+LSoI6TgrUBrjAv9Q/NXN46bYhEXDUvapnaEzehI931NgB2NbPvjVRjc5BJsgR
+	AW1aSoynd5eILKl/ifMl/NIdki1H/Ean4i/m5R5jr+eX2rPZbOJWXyy4T7myOizbUwOA
+	VHsGHC3gx5dlXraJvG8Urrxc0KbdRi7VUUan1UVw9P0btw6UTbaAJ+IcZfuHUsqifc9M
+	kIdw==
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
@@ -73,129 +74,73 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210111 14/39] tools/guest: prepare to allocate arrays once
-Date: Mon, 11 Jan 2021 18:41:59 +0100
-Message-Id: <20210111174224.24714-15-olaf@aepfle.de>
+Subject: [PATCH v20210111 17/39] tools/guest: save: move types array
+Date: Mon, 11 Jan 2021 18:42:02 +0100
+Message-Id: <20210111174224.24714-18-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210111174224.24714-1-olaf@aepfle.de>
 References: <20210111174224.24714-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The hotpath 'send_dirty_pages' is supposed to do just one thing: sending.
-The other end 'handle_page_data' is supposed to do just receiving.
-
-But instead both do other costly work like memory allocations and data moving.
-Do the allocations once, the array sizes are a compiletime constant.
-Avoid unneeded copying of data by receiving data directly into mapped guest memory.
-
-This patch is just prepartion, subsequent changes will populate the arrays.
-
-Once all changes are applied, migration of a busy HVM domU changes like that:
-
-Without this series, from sr650 to sr950 (xen-4.15.20201027T173911.16a20963b3 xen_testing):
-2020-10-29 10:23:10.711+0000: xc: show_transfer_rate: 23663128 bytes + 2879563 pages in 55.324905335 sec, 203 MiB/sec: Internal error
-2020-10-29 10:23:35.115+0000: xc: show_transfer_rate: 16829632 bytes + 2097552 pages in 24.401179720 sec, 335 MiB/sec: Internal error
-2020-10-29 10:23:59.436+0000: xc: show_transfer_rate: 16829032 bytes + 2097478 pages in 24.319025928 sec, 336 MiB/sec: Internal error
-2020-10-29 10:24:23.844+0000: xc: show_transfer_rate: 16829024 bytes + 2097477 pages in 24.406992500 sec, 335 MiB/sec: Internal error
-2020-10-29 10:24:48.292+0000: xc: show_transfer_rate: 16828912 bytes + 2097463 pages in 24.446489027 sec, 335 MiB/sec: Internal error
-2020-10-29 10:25:01.816+0000: xc: show_transfer_rate: 16836080 bytes + 2098356 pages in 13.447091818 sec, 609 MiB/sec: Internal error
-
-With this series, from sr650 to sr950 (xen-4.15.20201027T173911.16a20963b3 xen_unstable):
-2020-10-28 21:26:05.074+0000: xc: show_transfer_rate: 23663128 bytes + 2879563 pages in 52.564054368 sec, 213 MiB/sec: Internal error
-2020-10-28 21:26:23.527+0000: xc: show_transfer_rate: 16830040 bytes + 2097603 pages in 18.450592015 sec, 444 MiB/sec: Internal error
-2020-10-28 21:26:41.926+0000: xc: show_transfer_rate: 16830944 bytes + 2097717 pages in 18.397862306 sec, 445 MiB/sec: Internal error
-2020-10-28 21:27:00.339+0000: xc: show_transfer_rate: 16829176 bytes + 2097498 pages in 18.411973339 sec, 445 MiB/sec: Internal error
-2020-10-28 21:27:18.643+0000: xc: show_transfer_rate: 16828592 bytes + 2097425 pages in 18.303326695 sec, 447 MiB/sec: Internal error
-2020-10-28 21:27:26.289+0000: xc: show_transfer_rate: 16835952 bytes + 2098342 pages in 7.579846749 sec, 1081 MiB/sec: Internal error
+Remove allocation from hotpath, move types array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  | 8 ++++++++
- tools/libs/guest/xg_sr_restore.c | 8 ++++++++
- tools/libs/guest/xg_sr_save.c    | 4 +++-
- 3 files changed, 19 insertions(+), 1 deletion(-)
+ tools/libs/guest/xg_sr_common.h | 2 ++
+ tools/libs/guest/xg_sr_save.c   | 7 ++-----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index f3a7a29298..62bc87b5f4 100644
+index 0c2bef8f78..3cbadb607b 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -211,6 +211,12 @@ static inline int update_blob(struct xc_sr_blob *blob,
-     return 0;
- }
+@@ -215,6 +215,8 @@ struct xc_sr_save_arrays {
+     xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
+     /* write_batch: Mfns of the batch pfns. */
+     xen_pfn_t mfns[MAX_BATCH_SIZE];
++    /* write_batch: Types of the batch pfns. */
++    xen_pfn_t types[MAX_BATCH_SIZE];
+ };
  
-+struct xc_sr_save_arrays {
-+};
-+
-+struct xc_sr_restore_arrays {
-+};
-+
- struct xc_sr_context
- {
-     xc_interface *xch;
-@@ -248,6 +254,7 @@ struct xc_sr_context
-             unsigned long *deferred_pages;
-             unsigned long nr_deferred_pages;
-             xc_hypercall_buffer_t dirty_bitmap_hbuf;
-+            struct xc_sr_save_arrays *m;
-         } save;
- 
-         struct /* Restore data. */
-@@ -299,6 +306,7 @@ struct xc_sr_context
- 
-             /* Sender has invoked verify mode on the stream. */
-             bool verify;
-+            struct xc_sr_restore_arrays *m;
-         } restore;
-     };
- 
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 0332ae9f32..4a9ece9681 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -739,6 +739,13 @@ static int setup(struct xc_sr_context *ctx)
-     }
-     ctx->restore.allocated_rec_num = DEFAULT_BUF_RECORDS;
- 
-+    ctx->restore.m = malloc(sizeof(*ctx->restore.m));
-+    if ( !ctx->restore.m ) {
-+        ERROR("Unable to allocate memory for arrays");
-+        rc = -1;
-+        goto err;
-+    }
-+
-  err:
-     return rc;
- }
-@@ -757,6 +764,7 @@ static void cleanup(struct xc_sr_context *ctx)
-         xc_hypercall_buffer_free_pages(
-             xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->restore.p2m_size)));
- 
-+    free(ctx->restore.m);
-     free(ctx->restore.buffered_records);
-     free(ctx->restore.populated_pfns);
- 
+ struct xc_sr_restore_arrays {
 diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index da031fcfce..baaeb12762 100644
+index fd6437afc0..ff70f62b1e 100644
 --- a/tools/libs/guest/xg_sr_save.c
 +++ b/tools/libs/guest/xg_sr_save.c
-@@ -853,8 +853,9 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
-                                   sizeof(*ctx->save.batch_pfns));
-     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
-+    ctx->save.m = malloc(sizeof(*ctx->save.m));
+@@ -88,7 +88,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = ctx->save.m->mfns, *types = NULL;
++    xen_pfn_t *mfns = ctx->save.m->mfns, *types = ctx->save.m->types;
+     void *guest_mapping = NULL;
+     void **guest_data = NULL;
+     void **local_pages = NULL;
+@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
  
--    if ( !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
-+    if ( !ctx->save.m || !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
+     assert(nr_pfns != 0);
+ 
+-    /* Types of the batch pfns. */
+-    types = malloc(nr_pfns * sizeof(*types));
+     /* Errors from attempting to map the gfns. */
+     errors = malloc(nr_pfns * sizeof(*errors));
+     /* Pointers to page data to send.  Mapped gfns or local allocations. */
+@@ -116,7 +114,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* iovec[] for writev(). */
+     iov = malloc((nr_pfns + 4) * sizeof(*iov));
+ 
+-    if ( !types || !errors || !guest_data || !local_pages || !iov )
++    if ( !errors || !guest_data || !local_pages || !iov )
      {
-         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
-               " deferred pages");
-@@ -886,6 +887,7 @@ static void cleanup(struct xc_sr_context *ctx)
-                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
-     free(ctx->save.deferred_pages);
-     free(ctx->save.batch_pfns);
-+    free(ctx->save.m);
- }
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -274,7 +272,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     free(local_pages);
+     free(guest_data);
+     free(errors);
+-    free(types);
  
- /*
+     return rc;
+ }
 
