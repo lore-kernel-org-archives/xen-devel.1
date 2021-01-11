@@ -2,61 +2,48 @@ Return-Path: <SRS0=O81L=GO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DD8EC433E6
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 16:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20456C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 16:39:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 016192250E
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 16:37:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 016192250E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	by mail.kernel.org (Postfix) with ESMTPS id D4F9720B1F
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 16:39:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D4F9720B1F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65044.115101 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65051.115113 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz0Bz-0003tj-G0; Mon, 11 Jan 2021 16:37:19 +0000
+	id 1kz0EQ-00048T-SZ; Mon, 11 Jan 2021 16:39:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65044.115101; Mon, 11 Jan 2021 16:37:19 +0000
+Received: by outflank-mailman (output) from mailman id 65051.115113; Mon, 11 Jan 2021 16:39:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz0Bz-0003tc-BO; Mon, 11 Jan 2021 16:37:19 +0000
-Received: by outflank-mailman (input) for mailman id 65044;
- Mon, 11 Jan 2021 16:37:18 +0000
+	id 1kz0EQ-00048M-PD; Mon, 11 Jan 2021 16:39:50 +0000
+Received: by outflank-mailman (input) for mailman id 65051;
+ Mon, 11 Jan 2021 16:39:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cm4Z=GO=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1kz0Bx-0003tX-Rs
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 16:37:17 +0000
-Received: from aserp2120.oracle.com (unknown [141.146.126.78])
+ <SRS0=oy8T=GO=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kz0EP-00048H-Gj
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 16:39:49 +0000
+Received: from mail-ed1-x52e.google.com (unknown [2a00:1450:4864:20::52e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cdcce1ad-d7d3-43f1-a150-dbe8ec5c461c;
- Mon, 11 Jan 2021 16:37:16 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 10BGMQOr145177;
- Mon, 11 Jan 2021 16:37:13 GMT
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by aserp2120.oracle.com with ESMTP id 360kcyj4qy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 11 Jan 2021 16:37:12 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 10BGGQil018740;
- Mon, 11 Jan 2021 16:35:12 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3020.oracle.com with ESMTP id 360kf3t5vp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 11 Jan 2021 16:35:12 +0000
-Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 10BGZAZg004659;
- Mon, 11 Jan 2021 16:35:10 GMT
-Received: from [10.39.223.157] (/10.39.223.157)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Mon, 11 Jan 2021 08:35:10 -0800
+ id 4e9fbe4b-3776-4299-8f74-363055d4a5b4;
+ Mon, 11 Jan 2021 16:39:48 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id cm17so401858edb.4
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Jan 2021 08:39:48 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id rl7sm42118ejb.107.2021.01.11.08.39.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Jan 2021 08:39:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -68,103 +55,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cdcce1ad-d7d3-43f1-a150-dbe8ec5c461c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=nYnPjW8JwXe949sNMXfd5j5z3mRHCXlAxF7qyyRMPy8=;
- b=tYp2Zzi1zc0VMfOdLLI92jE+qtYEtorxECa1TVDJifcRM4SWY4kevpfNp6up9nKtOKpE
- 0IxUjjmXXlyfrsq/d45zHDehrIkb0gglbGZagSMu81A4p2Q24ux9V0UwsbzP1877IjC0
- GmAJq/sMs/Rp6Xam5uMVxGbFjPXrR+Tyk6sXZLUyhiaXL4p5895sv08RjXAUBPpCtqOa
- bLXZyKwt0nCS/0Vb971LWEOcenHrdOCeNtH26cZMoIrfEGDnfdf6L5nZYNyhtHHrVBhe
- B2r44DN+RlGr4sXWR4CQq4KbOede1LY2zxci2WeSKDtji/TEQq7yMqyy61+P11NVMzKm Uw== 
-Subject: Re: [PATCH 3/4] x86: Allow non-faulting accesses to non-emulated MSRs
- if policy permits this
-To: Jan Beulich <jbeulich@suse.com>
-Cc: iwj@xenproject.org, wl@xen.org, anthony.perard@citrix.com,
-        andrew.cooper3@citrix.com, roger.pau@citrix.com,
-        jun.nakajima@intel.com, kevin.tian@intel.com,
-        xen-devel@lists.xenproject.org
-References: <1610051698-23675-1-git-send-email-boris.ostrovsky@oracle.com>
- <1610051698-23675-4-git-send-email-boris.ostrovsky@oracle.com>
- <0e5c0b85-5e3c-676c-e402-fa06e09cf5cb@suse.com>
- <b2de26e9-24b2-efdb-4bfb-627055f008a1@oracle.com>
- <9896a1af-e4cc-b171-f7a9-e6b74976770c@suse.com>
-From: boris.ostrovsky@oracle.com
-Organization: Oracle Corporation
-Message-ID: <7e49af04-4642-84ba-35b4-e5d134ec1885@oracle.com>
-Date: Mon, 11 Jan 2021 11:35:08 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.6.0
+X-Inumbo-ID: 4e9fbe4b-3776-4299-8f74-363055d4a5b4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:from:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=2Gy7EmZI3EtcWre72ptyZVNlV/L/CJ/wfVKh+OpgwQs=;
+        b=DCpvqut1wp5FiVV4juBo6BRsQRNcvHPKFSc3L4Xs2BBHpxht/C398f6O6wXXmVgaYi
+         7yb0FbcophylIN2ERTiRV1FSnxg/m0JOSRzfnaaO8fJZCm9bBd+GE7ch33dCyLKxkOfC
+         HJPWCA5FvYmHRvOfOu1Tk/PilL8zV/veoLi2b1DicA4RhgdbPU1HBKrsOV88YIKAK0gT
+         wZf/xC+ROkaoMOZZst3/2cR+d9IdORsfhey/8ALSmbIo1UTnah0ZGKUhqUD1pDtCwwZT
+         IrlPlw6RjMqv4xCBSFXERgJuZ8JSmux9axrJZq/z2f1GFV0e6klK5LfBWv0yZ3HduODS
+         j5EA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:from:to:cc:references:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=2Gy7EmZI3EtcWre72ptyZVNlV/L/CJ/wfVKh+OpgwQs=;
+        b=gQaWvxuW8j6dIhTxGjnzoFy/BhifPsUuLL3JDKqqOSGKiWqXi8srEr6H9uClNSsvUV
+         0CTbovwu8s1VbsMhSLAqf6Nr7a+lFj5a/hAipuieBMrKCn0qju9ronUShH6FRprQI+na
+         PbIRVOdYc5faM4NOMb8Ry1xML6XYm9Jkkdto5zbupfrDcZrFI4U6oef1vL0F5R41era1
+         GZ0SJv5L0IN9BtlgoG7ysxW77zuv2A9lZoUdB5wGLsaMfeHomgM+ONyynVo8YncXqr4j
+         3fdWBnrICAsNFSeU6oXFL2YqM+EcBCodKA14gmyoG3iCXSykkRQV/VfdVpxdi7LsnqhZ
+         yQiA==
+X-Gm-Message-State: AOAM532YhFk6ztccGJJ3Sk+hU84ccTKsV2ALGiTzr55tb1S/2nDnd7pr
+	znWLK6nOMLS3EeKnZ1aGLe4=
+X-Google-Smtp-Source: ABdhPJy0llp8S53zx7rPNf/woSOZ4gfRCcX2s4x7Werj+y3za/Hg7ZXkG5tRGtpNZXvxijt1redxdQ==
+X-Received: by 2002:a50:c209:: with SMTP id n9mr165168edf.123.1610383187737;
+        Mon, 11 Jan 2021 08:39:47 -0800 (PST)
+Subject: Re: [PATCH v4 11/11] xen/arm: smmuv3: Add support for SMMUv3 driver
+From: Oleksandr <olekstysh@gmail.com>
+To: Rahul Singh <rahul.singh@arm.com>
+Cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Paul Durrant <paul@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1610115608.git.rahul.singh@arm.com>
+ <9ba174516e01e2a53390420fa957ea563219141f.1610115608.git.rahul.singh@arm.com>
+ <7762de2c-da11-5643-8f70-fdd87a7583eb@gmail.com>
+Message-ID: <81983272-f423-f24d-3094-1f4ba7568e1b@gmail.com>
+Date: Mon, 11 Jan 2021 18:39:46 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <9896a1af-e4cc-b171-f7a9-e6b74976770c@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <7762de2c-da11-5643-8f70-fdd87a7583eb@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9860 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- mlxlogscore=999 phishscore=0 bulkscore=0 spamscore=0 mlxscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2101110097
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9860 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 phishscore=0
- impostorscore=0 bulkscore=0 adultscore=0 suspectscore=0 malwarescore=0
- lowpriorityscore=0 clxscore=1015 mlxlogscore=999 mlxscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2101110097
 
 
-On 1/11/21 2:48 AM, Jan Beulich wrote:
-> On 08.01.2021 21:39, boris.ostrovsky@oracle.com wrote:
->> On 1/8/21 10:18 AM, Jan Beulich wrote:
+Hi Rahul
+
+
+>> -
+>>   static int arm_smmu_device_probe(struct platform_device *pdev)
+>>   {
+>>       int irq, ret;
+>> -    struct resource *res;
+>> -    resource_size_t ioaddr;
+>> +    paddr_t ioaddr, iosize;
+>>       struct arm_smmu_device *smmu;
+>> -    struct device *dev = &pdev->dev;
+>> -    bool bypass;
+>>   -    smmu = devm_kzalloc(dev, sizeof(*smmu), GFP_KERNEL);
+>> +    smmu = xzalloc(struct arm_smmu_device);
+>>       if (!smmu) {
+>> -        dev_err(dev, "failed to allocate arm_smmu_device\n");
+>> +        dev_err(pdev, "failed to allocate arm_smmu_device\n");
+>>           return -ENOMEM;
+>>       }
+>> -    smmu->dev = dev;
+>> +    smmu->dev = pdev;
+>>   -    if (dev->of_node) {
+>> +    if (pdev->of_node) {
+>>           ret = arm_smmu_device_dt_probe(pdev, smmu);
+>> +        if (ret)
+>> +            return -EINVAL;
+>>       } else {
+>>           ret = arm_smmu_device_acpi_probe(pdev, smmu);
+>>           if (ret == -ENODEV)
+>>               return ret;
+>>       }
+>>   -    /* Set bypass mode according to firmware probing result */
+>> -    bypass = !!ret;
+>> -
+>>       /* Base address */
+>> -    res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>> -    if (resource_size(res) < arm_smmu_resource_size(smmu)) {
+>> -        dev_err(dev, "MMIO region too small (%pr)\n", res);
+>> +    ret = dt_device_get_address(dev_to_dt(pdev), 0, &ioaddr, &iosize);
+>> +    if (ret)
+>> +        return -ENODEV;
+>> +
+>> +    if (iosize < arm_smmu_resource_size(smmu)) {
+>> +        dev_err(pdev, "MMIO region too small (%lx)\n", iosize);
+>>           return -EINVAL;
+>>       }
+>> -    ioaddr = res->start;
+>>         /*
+>>        * Don't map the IMPLEMENTATION DEFINED regions, since they may 
+>> contain
+>> -     * the PMCG registers which are reserved by the PMU driver.
+>> +     * the PMCG registers which are optional and currently not 
+>> supported.
+>>        */
+>> -    smmu->base = arm_smmu_ioremap(dev, ioaddr, ARM_SMMU_REG_SZ);
+>> +    smmu->base = ioremap_nocache(ioaddr, ARM_SMMU_REG_SZ);
+>>       if (IS_ERR(smmu->base))
+>>           return PTR_ERR(smmu->base);
+>>   -    if (arm_smmu_resource_size(smmu) > SZ_64K) {
+>> -        smmu->page1 = arm_smmu_ioremap(dev, ioaddr + SZ_64K,
+>> +    if (iosize > SZ_64K) {
+>> +        smmu->page1 = ioremap_nocache(ioaddr + SZ_64K,
+>>                              ARM_SMMU_REG_SZ);
+>>           if (IS_ERR(smmu->page1))
+>>               return PTR_ERR(smmu->page1);
+>> @@ -2765,14 +3101,262 @@ static int arm_smmu_device_probe(struct 
+>> platform_device *pdev)
+>>           return ret;
+>>         /* Reset the device */
+>> -    ret = arm_smmu_device_reset(smmu, bypass);
+>> +    ret = arm_smmu_device_reset(smmu);
+>>       if (ret)
+>>           return ret;
+>>   +    /*
+>> +     * Keep a list of all probed devices. This will be used to query
+>> +     * the smmu devices based on the fwnode.
+>> +     */
+>> +    INIT_LIST_HEAD(&smmu->devices);
+>> +
+>> +    spin_lock(&arm_smmu_devices_lock);
+>> +    list_add(&smmu->devices, &arm_smmu_devices);
+>> +    spin_unlock(&arm_smmu_devices_lock);
+
+Looks like that we need some kind of manual roll-back logic here in case 
+of error during probe (there is no real devm_*):
+
+iounmap, xfree, etc.
+
+
 >>
->>>
->>> Just to re-raise the question raised by Andrew already earlier
->>> on: Has Solaris been fixed in the meantime, or is this at least
->>> firmly planned to happen?
->> I was told they will open a bug.
-> "Will", not "did"?
-
-
-I can't say for sure, I don't have access to their bugDB, they typically keep bugs private (or so I am told). All I can say is that they are aware of this issue.
-
-
+>> +
+>>       return 0;
+>>   }
 >
->>> @@ -3319,10 +3319,8 @@ static int vmx_msr_write_intercept(unsigned int msr, uint64_t msr_content)
->>>               is_last_branch_msr(msr) )
->>>              break;
->>>  
->>> -        gdprintk(XENLOG_WARNING,
->>> -                 "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
->>> -                 msr, msr_content);
->>> -        goto gp_fault;
->>> +        if ( guest_unhandled_msr(v, msr, &msr_content, true) )
->>> +            goto gp_fault;
->>>      }
->>>  
->>>      return X86EMUL_OKAY;
->>> These functions also get used from the insn emulator, when it
->>> needs to fetch an MSR value (not necessarily in the context of
->>> emulating RDMSR or WRMSR). I wonder whether applying this
->>> behavior in that case is actually correct. It would only be if
->>> we would settle on it being a requirement that any such MSRs
->>> have to have emulation present in one of the handlers.
->>
->> Hmm.. Yes, I did not consider this. I am not convinced this will
->> always result in correct behavior for the emulator so I will
->> need to pass down a parameter. Unless there is a way to figure
->> out whether we are running in the emulator (which I don't
->> immediately see)
-> Passing a parameter for this is sort of ugly, but I presume
-> unavoidable. The more that what you need to know is not "running
-> in emulator", but "guest RDMSR/WRMSR" - this can also happen
-> through the emulator.
+-- 
+Regards,
 
-
-Right, that's what I meant.
-
-
--boris
-
+Oleksandr Tyshchenko
 
 
