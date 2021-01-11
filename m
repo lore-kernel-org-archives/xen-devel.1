@@ -2,47 +2,51 @@ Return-Path: <SRS0=O81L=GO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09D30C433E6
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 15:00:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB43C433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 15:20:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B9599227C3
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 15:00:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9599227C3
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0F6AA225AC
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 15:20:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F6AA225AC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.64936.114858 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.64949.114894 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kyygR-0001gF-Rg; Mon, 11 Jan 2021 15:00:39 +0000
+	id 1kyyzl-0003fD-5v; Mon, 11 Jan 2021 15:20:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 64936.114858; Mon, 11 Jan 2021 15:00:39 +0000
+Received: by outflank-mailman (output) from mailman id 64949.114894; Mon, 11 Jan 2021 15:20:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kyygR-0001g8-OP; Mon, 11 Jan 2021 15:00:39 +0000
-Received: by outflank-mailman (input) for mailman id 64936;
- Mon, 11 Jan 2021 15:00:38 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1kyyzl-0003f6-1t; Mon, 11 Jan 2021 15:20:37 +0000
+Received: by outflank-mailman (input) for mailman id 64949;
+ Mon, 11 Jan 2021 15:20:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kyygQ-0001g2-Fs
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 15:00:38 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kyygQ-0006KP-BX
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 15:00:38 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1kyygQ-0006kS-AU
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 15:00:38 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1kyygN-0003uB-4o; Mon, 11 Jan 2021 15:00:35 +0000
+ (envelope-from <SRS0=3k0/=GO=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1kyyzj-0003dl-US
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 15:20:35 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 3da01946-4892-4707-9f23-bff586d8be1c;
+ Mon, 11 Jan 2021 15:20:34 +0000 (UTC)
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-551-fxOlP0HeNFC9klyPomdPaA-1; Mon, 11 Jan 2021 10:20:32 -0500
+Received: by mail-ed1-f69.google.com with SMTP id e11so8394406edn.11
+ for <xen-devel@lists.xenproject.org>; Mon, 11 Jan 2021 07:20:32 -0800 (PST)
+Received: from x1w.redhat.com (129.red-88-21-205.staticip.rima-tde.net.
+ [88.21.205.129])
+ by smtp.gmail.com with ESMTPSA id c12sm76932edw.55.2021.01.11.07.20.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Jan 2021 07:20:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,32 +58,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=52iqesxvb2TX5g3pwH2QtROtLe6SDQ+EE7+0us7+jRM=; b=mQlDu1ZfUWHRBRWw0o+pyvuF8z
-	xFgVyYT2kHeMPTXrxIKWxvM4lYy7/QbmCfSkamLcoLWoMSczJuVT63jnvduVscMbHPnkRBT5k7aHD
-	r8AbWLXTGxY7MxAhZ4GCe67Tm1TAd+KEmkex+N63CORssl2EWJIXKIhUqRy/Oe2Ux3YM=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: 3da01946-4892-4707-9f23-bff586d8be1c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1610378434;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=97BNT6jh6NRO0TVk+TL23RreQDhzFRma0TINePq+NK8=;
+	b=gkISrOGj+re/41lTjOkWdcVMMaJMWpIBT1Bln1bCFxYZdv3LHcMD14FsqGWJmJJrs0v6HY
+	TQ+2qNUyLHpXS12AK3JxwGaya7Sv12ZMHIg/QECG0TxArJWnBO2P+/wXdazOkNNWD/o0Qf
+	sbIbuUKFYGtt8PUb2knBezRBaXVXfKM=
+X-MC-Unique: fxOlP0HeNFC9klyPomdPaA-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=97BNT6jh6NRO0TVk+TL23RreQDhzFRma0TINePq+NK8=;
+        b=f8RyhASFZ7P6cD2RFfIM9msx5ngDGvrQFdlFha230L9OgOIN9Sbe9geLUr2fhYrLwF
+         unGawZS4oXH/C2aqSv1zLhCX5QSdd6UzYPK3S5sfamUHcK3KulOrvfwgbgUvkN9tsbgj
+         NofvT1ZV/eC0+bZtlVDvTVX6jlCfkXQ862VKRmstigYD9gWwXzV/RnXVCsQK4aqiUJ7y
+         M+qooGa7yzBwFQ6MxUUAJY9QcmSHTJjJNRWCPzHXpCqnWy4V1jCSk1147IfJ9WHWBW52
+         Uo2IITZXCq2OLPfeGWDq334ZYi7WmKLz6gs0GaN1BbeqOv4WJC+/ebdk09LEQBXYgu1c
+         s+mg==
+X-Gm-Message-State: AOAM530M37L53Ww4hWYYkwyo6fHgkeCrRZHP4Mp8tdHM00eE5v26C4EE
+	ky87Tid5gc+114/PX4uVkSNbiVrr4cXFn52A+xDeTHLgheEFDqcOhuPWberlWzPsPI5qoYgr957
+	hautCx/Oqbdsgi6E0zoZ1WlFzzDg=
+X-Received: by 2002:aa7:cdc3:: with SMTP id h3mr14237011edw.52.1610378431357;
+        Mon, 11 Jan 2021 07:20:31 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxfzQ4g/Xi77uXbjKsyJn2nZrlWGnmTOg2kIy8FkRbXj1BTf3rxwC5MxkZMkcW73D4xDrLEXw==
+X-Received: by 2002:aa7:cdc3:: with SMTP id h3mr14236981edw.52.1610378431207;
+        Mon, 11 Jan 2021 07:20:31 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Huacai Chen <chenhuacai@kernel.org>,
+	Greg Kurz <groug@kaod.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	qemu-trivial@nongnu.org,
+	Amit Shah <amit@kernel.org>,
+	Dmitry Fleytman <dmitry.fleytman@gmail.com>,
+	qemu-arm@nongnu.org,
+	John Snow <jsnow@redhat.com>,
+	qemu-s390x@nongnu.org,
+	Paul Durrant <paul@xen.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Eduardo Habkost <ehabkost@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Kevin Wolf <kwolf@redhat.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>,
+	Max Reitz <mreitz@redhat.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Aurelien Jarno <aurelien@aurel32.net>,
+	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	=?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+	Halil Pasic <pasic@linux.ibm.com>,
+	Fam Zheng <fam@euphon.net>,
+	qemu-ppc@nongnu.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	kvm@vger.kernel.org,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org,
+	Cornelia Huck <cohuck@redhat.com>,
+	David Hildenbrand <david@redhat.com>,
+	qemu-block@nongnu.org,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	Sunil Muthuswamy <sunilmut@microsoft.com>,
+	David Gibson <david@gibson.dropbear.id.au>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Laurent Vivier <laurent@vivier.eu>,
+	Thomas Huth <thuth@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH 1/2] sysemu/runstate: Let runstate_is_running() return bool
+Date: Mon, 11 Jan 2021 16:20:19 +0100
+Message-Id: <20210111152020.1422021-2-philmd@redhat.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210111152020.1422021-1-philmd@redhat.com>
+References: <20210111152020.1422021-1-philmd@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24572.26642.803938.622698@mariner.uk.xensource.com>
-Date: Mon, 11 Jan 2021 15:00:34 +0000
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-    Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] tools/libxenstat: ensure strnlen() declaration is visible
-In-Reply-To: <ae0d2084-75d7-bcd9-33bc-54b846dd5681@suse.com>
-References: <ae0d2084-75d7-bcd9-33bc-54b846dd5681@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Jan Beulich writes ("[PATCH] tools/libxenstat: ensure strnlen() declaration is visible"):
-> Its guard was updated such that it is visible by default when POSIX 2008
-> was adopted by glibc. It's not visible by default on older glibc.
-> 
-> Fixes: 40fe714ca424 ("tools/libs/stat: use memcpy instead of strncpy in getBridge")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+runstate_check() returns a boolean. runstate_is_running()
+returns what runstate_check() returns, also a boolean.
 
-Reviewed-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ include/sysemu/runstate.h | 2 +-
+ softmmu/runstate.c        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/sysemu/runstate.h b/include/sysemu/runstate.h
+index e557f470d42..3ab35a039a0 100644
+--- a/include/sysemu/runstate.h
++++ b/include/sysemu/runstate.h
+@@ -6,7 +6,7 @@
+ 
+ bool runstate_check(RunState state);
+ void runstate_set(RunState new_state);
+-int runstate_is_running(void);
++bool runstate_is_running(void);
+ bool runstate_needs_reset(void);
+ bool runstate_store(char *str, size_t size);
+ 
+diff --git a/softmmu/runstate.c b/softmmu/runstate.c
+index 636aab0addb..c7a67147d17 100644
+--- a/softmmu/runstate.c
++++ b/softmmu/runstate.c
+@@ -217,7 +217,7 @@ void runstate_set(RunState new_state)
+     current_run_state = new_state;
+ }
+ 
+-int runstate_is_running(void)
++bool runstate_is_running(void)
+ {
+     return runstate_check(RUN_STATE_RUNNING);
+ }
+-- 
+2.26.2
+
 
