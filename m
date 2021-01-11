@@ -2,44 +2,44 @@ Return-Path: <SRS0=O81L=GO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00A2CC433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 13:22:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25E33C433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 13:31:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B9F01206CD
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 13:22:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9F01206CD
+	by mail.kernel.org (Postfix) with ESMTPS id C7FF8221EC
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 13:31:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C7FF8221EC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.64827.114605 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.64836.114618 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kyx9Q-0007aP-PQ; Mon, 11 Jan 2021 13:22:28 +0000
+	id 1kyxHt-00008i-LI; Mon, 11 Jan 2021 13:31:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 64827.114605; Mon, 11 Jan 2021 13:22:28 +0000
+Received: by outflank-mailman (output) from mailman id 64836.114618; Mon, 11 Jan 2021 13:31:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kyx9Q-0007aI-MT; Mon, 11 Jan 2021 13:22:28 +0000
-Received: by outflank-mailman (input) for mailman id 64827;
- Mon, 11 Jan 2021 13:22:27 +0000
+	id 1kyxHt-00008b-IC; Mon, 11 Jan 2021 13:31:13 +0000
+Received: by outflank-mailman (input) for mailman id 64836;
+ Mon, 11 Jan 2021 13:31:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ekcf=GO=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1kyx9P-0007aD-Oi
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 13:22:27 +0000
+ id 1kyxHs-00008W-EU
+ for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 13:31:12 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 31578468-fe18-432c-8bfb-6e2f4814acce;
- Mon, 11 Jan 2021 13:22:26 +0000 (UTC)
+ id af7a4497-36e8-49cf-abe5-c2e2e3f358ae;
+ Mon, 11 Jan 2021 13:31:11 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1631BAC95;
- Mon, 11 Jan 2021 13:22:26 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id D318FAB92;
+ Mon, 11 Jan 2021 13:31:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,89 +51,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31578468-fe18-432c-8bfb-6e2f4814acce
+X-Inumbo-ID: af7a4497-36e8-49cf-abe5-c2e2e3f358ae
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610371346; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610371870; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ce9jBy1xiKufqwkMxrp4/MUoXvNh6zc1YHJVM3UrHBY=;
-	b=S8Oq8v6FgZohtOp1OgZ0f/u50uSaC/TJRfe3hOs9Vt53G21l/lpQaG7zS0jB4beZTkumgF
-	2Di2wqYcMTGAfO05FdUvKEMUBht8oHNlMc2Cm1pNoLRk+8r7OYVtLnjRk1yTWtBel3JUUM
-	PrI/lbUQ0nIBbYq2AiBkyXhG7X9XJZo=
-Subject: Re: [PATCH 4/5] x86/PV: restrict TLB flushing after
+	bh=CmJqRfbO9GIu/BE78wUPUZSAE3wb0fspx5cHDEnD+xs=;
+	b=AUTrDBjp0rYuxKFt9G5EsdlkOZsaGkFC0oU4cGhS93GE+AsdRCIAkYz2h9599Gm2JH+HYq
+	uvGKfI8nfBQ7fdnemxyTBGs3U0U3l359skyVvg/B5YACb1rEYcwBwdPyL3Ei9P4bmOCH04
+	rZYO+xx+zJhqOwWZ2aSUR8IEKKAgiec=
+Subject: Re: [PATCH 3/5] x86/PV: _PAGE_RW changes may take fast path of
  mod_l[234]_entry()
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>
 References: <10a01f61-197b-7df4-192d-917fe135df70@suse.com>
- <eac90675-bcf3-3818-1f5f-f9825349e22c@suse.com>
- <20210111130020.ogpsylc7sh3wzb7i@Air-de-Roger>
+ <11633161-6809-db0c-44e6-e5f383f4ebd2@suse.com>
+ <20210111110841.timv43eteslr54xz@Air-de-Roger>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <2bee9e95-17f7-4089-4adf-29db50c5c4fd@suse.com>
-Date: Mon, 11 Jan 2021 14:22:25 +0100
+Message-ID: <a0e9df02-5eed-55cc-7fba-0a9acd93d15b@suse.com>
+Date: Mon, 11 Jan 2021 14:31:10 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <20210111130020.ogpsylc7sh3wzb7i@Air-de-Roger>
+In-Reply-To: <20210111110841.timv43eteslr54xz@Air-de-Roger>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 11.01.2021 14:00, Roger Pau Monné wrote:
-> On Tue, Nov 03, 2020 at 11:57:33AM +0100, Jan Beulich wrote:
->> Just like we avoid to invoke remote root pt flushes when all uses of an
->> L4 table can be accounted for locally, the same can be done for all of
->> L[234] for the linear pt flush when the table is a "free floating" one,
->> i.e. it is pinned but not hooked up anywhere. While this situation
->> doesn't occur very often, it can be observed.
->>
->> Since this breaks one of the implications of the XSA-286 fix, drop the
->> flush_root_pt_local variable again and set ->root_pgt_changed directly,
->> just like it was before that change.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 11.01.2021 12:08, Roger Pau Monné wrote:
+> On Tue, Nov 03, 2020 at 11:57:10AM +0100, Jan Beulich wrote:
+>> The only time _PAGE_RW matters when validating an L2 or higher entry is
+>> when a linear page table is tried to be installed. Therefore when we
+>> disallow such at build time, we can allow _PAGE_RW changes to take the
+>> fast paths there.
 > 
-> LGTM, so:
-> 
-> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+> I think it would be helpful to note why PDEs with linear page tables
+> aren't allowed to have the RW bit set, likely here and in the comment
+> below.
 
-Thanks.
+I've changed the description to
 
-> It would be good however if Andrew can give is opinion also, since he
-> was the one to introduce such logic, and it's not trivial.
+"The only time _PAGE_RW matters when validating an L2 or higher entry is
+ when a linear page table is tried to be installed (see the comment ahead
+ of define_get_linear_pagetable()). Therefore when we disallow such at
+ build time, we can allow _PAGE_RW changes to take the fast paths there."
 
-I can certainly wait some, also to hopefully get a comment on
-
->> ---
->> While adjusting the big comment that was added for XSA-286 I wondered
->> why it talks about the "construction of 32bit PV guests". How are 64-bit
->> PV guests different in this regard?
-
-... this, but his email troubles make it hard to judge for how
-long to wait.
-
->> @@ -4054,7 +4053,9 @@ long do_mmu_update(
->>                          break;
->>                      rc = mod_l2_entry(va, l2e_from_intpte(req.val), mfn,
->>                                        cmd == MMU_PT_UPDATE_PRESERVE_AD, v);
->> -                    if ( !rc )
->> +                    if ( !rc &&
->> +                         (page->u.inuse.type_info & PGT_count_mask) >
->> +                         1 + !!(page->u.inuse.type_info & PGT_pinned) )
-> 
-> I think adding a macro to encapsulate the added condition would make
-> the code clearer, maybe PAGETABLE_IN_USE, _LOADED or _ACTIVE?
-
-A macro or inline function may certainly be nice (indeed I did
-consider adding one), but I think here more than in some other
-cases it is crucial that the name properly reflect what it
-does. Unfortunately none of the ones you suggest nor any of the
-ones I did consider will meet this requirement. In particular,
-the check is about "is there any _other_ use". Hence I went
-with the not very fortunate redundant open-coding.
+Considering there already is a code comment explaining this, I'm
+less convinced of also editing the comment. An option might be to
+move up the #define-s next to define_get_linear_pagetable(), but
+imo this should then involve moving FASTPATH_FLAG_WHITELIST as
+well.
 
 Jan
 
