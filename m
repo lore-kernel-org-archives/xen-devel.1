@@ -2,49 +2,49 @@ Return-Path: <SRS0=tjso=GP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 954FFC433E9
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A27C4C433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5174F2311D
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5174F2311D
+	by mail.kernel.org (Postfix) with ESMTPS id 5084B2311A
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5084B2311A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65885.116858 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65886.116870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzOGO-0005Nx-Ov; Tue, 12 Jan 2021 18:19:28 +0000
+	id 1kzOGR-0005Ug-5k; Tue, 12 Jan 2021 18:19:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65885.116858; Tue, 12 Jan 2021 18:19:28 +0000
+Received: by outflank-mailman (output) from mailman id 65886.116870; Tue, 12 Jan 2021 18:19:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzOGO-0005Nf-IH; Tue, 12 Jan 2021 18:19:28 +0000
-Received: by outflank-mailman (input) for mailman id 65885;
- Tue, 12 Jan 2021 18:19:27 +0000
+	id 1kzOGQ-0005UT-Vg; Tue, 12 Jan 2021 18:19:30 +0000
+Received: by outflank-mailman (input) for mailman id 65886;
+ Tue, 12 Jan 2021 18:19:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gu5a=GP=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1kzOC5-0003Yo-0c
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 18:15:01 +0000
+ id 1kzOCt-0003Yo-24
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 18:15:51 +0000
 Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 43165549-8ff0-404b-a977-858c8a13a696;
- Tue, 12 Jan 2021 18:13:45 +0000 (UTC)
+ id d6adbe6f-995c-450a-bd66-5c9d8a11a252;
+ Tue, 12 Jan 2021 18:14:09 +0000 (UTC)
 Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10CIDgKt023989;
- Tue, 12 Jan 2021 19:13:42 +0100 (CET)
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10CIE8qP002628;
+ Tue, 12 Jan 2021 19:14:08 +0100 (CET)
 Received: from armandeche.soc.lip6.fr (armandeche [132.227.63.133])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10CIDfO6024230;
- Tue, 12 Jan 2021 19:13:41 +0100 (MET)
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10CIDpjf019847;
+ Tue, 12 Jan 2021 19:13:51 +0100 (MET)
 Received: by armandeche.soc.lip6.fr (Postfix, from userid 20331)
- id 610617218; Tue, 12 Jan 2021 19:13:41 +0100 (MET)
+ id 3259C7218; Tue, 12 Jan 2021 19:13:51 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,73 +56,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43165549-8ff0-404b-a977-858c8a13a696
+X-Inumbo-ID: d6adbe6f-995c-450a-bd66-5c9d8a11a252
 From: Manuel Bouyer <bouyer@antioche.eu.org>
 To: xen-devel@lists.xenproject.org
 Cc: Manuel Bouyer <bouyer@netbsd.org>, Ian Jackson <iwj@xenproject.org>,
-        Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH] libs/light: fix tv_sec printf format
-Date: Tue, 12 Jan 2021 19:12:34 +0100
-Message-Id: <20210112181242.1570-14-bouyer@antioche.eu.org>
+        Wei Liu <wl@xen.org>
+Subject: [PATCH] libs/store: make build without PTHREAD_STACK_MIN
+Date: Tue, 12 Jan 2021 19:12:38 +0100
+Message-Id: <20210112181242.1570-18-bouyer@antioche.eu.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210112181242.1570-1-bouyer@antioche.eu.org>
 References: <20210112181242.1570-1-bouyer@antioche.eu.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 12 Jan 2021 19:13:42 +0100 (CET)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 12 Jan 2021 19:14:08 +0100 (CET)
 X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
 From: Manuel Bouyer <bouyer@netbsd.org>
 
-Don't assume tv_sec is a unsigned long, it is 64 bits on NetBSD 32 bits.
-Use %jd and cast to (intmax_t) instead
+On NetBSD, PTHREAD_STACK_MIN is not available.
+Just use DEFAULT_THREAD_STACKSIZE if PTHREAD_STACK_MIN is not available.
 
 Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
-
 ---
- tools/libs/light/libxl_create.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/libs/store/xs.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 86f4a8369d..7199a79778 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -496,7 +496,7 @@ int libxl__domain_build(libxl__gc *gc,
-         vments[2] = "image/ostype";
-         vments[3] = "hvm";
-         vments[4] = "start_time";
--        vments[5] = GCSPRINTF("%lu.%02d", start_time.tv_sec,(int)start_time.tv_usec/10000);
-+        vments[5] = GCSPRINTF("%jd.%02d", (intmax_t)start_time.tv_sec,(int)start_time.tv_usec/10000);
+diff --git a/tools/libs/store/xs.c b/tools/libs/store/xs.c
+index 4ac73ec317..8e646b98d6 100644
+--- a/tools/libs/store/xs.c
++++ b/tools/libs/store/xs.c
+@@ -811,9 +811,13 @@ bool xs_watch(struct xs_handle *h, const char *path, const char *token)
  
-         localents = libxl__calloc(gc, 13, sizeof(char *));
-         i = 0;
-@@ -535,7 +535,7 @@ int libxl__domain_build(libxl__gc *gc,
-         vments[i++] = "image/kernel";
-         vments[i++] = (char *) state->pv_kernel.path;
-         vments[i++] = "start_time";
--        vments[i++] = GCSPRINTF("%lu.%02d", start_time.tv_sec,(int)start_time.tv_usec/10000);
-+        vments[i++] = GCSPRINTF("%jd.%02d", (intmax_t)start_time.tv_sec,(int)start_time.tv_usec/10000);
-         if (state->pv_ramdisk.path) {
-             vments[i++] = "image/ramdisk";
-             vments[i++] = (char *) state->pv_ramdisk.path;
-@@ -1502,7 +1502,7 @@ static void domcreate_stream_done(libxl__egc *egc,
-         vments[2] = "image/ostype";
-         vments[3] = "hvm";
-         vments[4] = "start_time";
--        vments[5] = GCSPRINTF("%lu.%02d", start_time.tv_sec,(int)start_time.tv_usec/10000);
-+        vments[5] = GCSPRINTF("%jd.%02d", (intmax_t)start_time.tv_sec,(int)start_time.tv_usec/10000);
-         break;
-     case LIBXL_DOMAIN_TYPE_PV:
-         vments = libxl__calloc(gc, 11, sizeof(char *));
-@@ -1512,7 +1512,7 @@ static void domcreate_stream_done(libxl__egc *egc,
-         vments[i++] = "image/kernel";
-         vments[i++] = (char *) state->pv_kernel.path;
-         vments[i++] = "start_time";
--        vments[i++] = GCSPRINTF("%lu.%02d", start_time.tv_sec,(int)start_time.tv_usec/10000);
-+        vments[i++] = GCSPRINTF("%jd.%02d", (intmax_t)start_time.tv_sec,(int)start_time.tv_usec/10000);
-         if (state->pv_ramdisk.path) {
-             vments[i++] = "image/ramdisk";
-             vments[i++] = (char *) state->pv_ramdisk.path;
+ #ifdef USE_PTHREAD
+ #define DEFAULT_THREAD_STACKSIZE (16 * 1024)
++#ifndef PTHREAD_STACK_MIN
++#define READ_THREAD_STACKSIZE DEFAULT_THREAD_STACKSIZE
++#else
+ #define READ_THREAD_STACKSIZE 					\
+ 	((DEFAULT_THREAD_STACKSIZE < PTHREAD_STACK_MIN) ? 	\
+ 	PTHREAD_STACK_MIN : DEFAULT_THREAD_STACKSIZE)
++#endif
+ 
+ 	/* We dynamically create a reader thread on demand. */
+ 	mutex_lock(&h->request_mutex);
 -- 
 2.29.2
 
