@@ -2,41 +2,48 @@ Return-Path: <SRS0=tjso=GP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDB71C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 19:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70B23C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 20:07:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 88C3523117
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 19:49:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 88C3523117
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id F161822202
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 20:07:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F161822202
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=cam.ac.uk
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65966.117004 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65996.117016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzPfU-0006bC-7U; Tue, 12 Jan 2021 19:49:28 +0000
+	id 1kzPwC-0000LG-UZ; Tue, 12 Jan 2021 20:06:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65966.117004; Tue, 12 Jan 2021 19:49:28 +0000
+Received: by outflank-mailman (output) from mailman id 65996.117016; Tue, 12 Jan 2021 20:06:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzPfU-0006b2-3K; Tue, 12 Jan 2021 19:49:28 +0000
-Received: by outflank-mailman (input) for mailman id 65966;
- Tue, 12 Jan 2021 19:49:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Zh5d=GP=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kzPfT-00064W-9x
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 19:49:27 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0d843cb8-1e7a-4e10-97f5-df9f4a6e9bae;
- Tue, 12 Jan 2021 19:49:05 +0000 (UTC)
+	id 1kzPwC-0000L9-RZ; Tue, 12 Jan 2021 20:06:44 +0000
+Received: by outflank-mailman (input) for mailman id 65996;
+ Tue, 12 Jan 2021 20:06:42 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=v4LF=GP=cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1kzPwA-0000L4-3S
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 20:06:42 +0000
+Received: from ppsw-41.csi.cam.ac.uk (unknown [131.111.8.141])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 057b7287-b5c4-49e0-98a1-9f4873397190;
+ Tue, 12 Jan 2021 20:06:40 +0000 (UTC)
+Received: from 88-111-124-141.dynamic.dsl.as9105.com ([88.111.124.141]:57544
+ helo=[192.168.1.219])
+ by ppsw-41.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.159]:465)
+ with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ id 1kzPw6-000fDW-Sk (Exim 4.92.3)
+ (return-path <amc96@cam.ac.uk>); Tue, 12 Jan 2021 20:06:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,280 +55,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0d843cb8-1e7a-4e10-97f5-df9f4a6e9bae
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610480945;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=QP34gUd0yVaYagIl+iAquadIBVEzTLaCpk9INm1PzbU=;
-  b=UiRAtP14rF8+Aaen6AXCdpOEyQquQc9B4Kkn4DecxEVE+XCf46oPhFnS
-   Mmc6ILvMLewLFugsl6mutFVlqIJH3x0R0J+etGWw7C9Io4uk/Ml3wZFEy
-   zGyduw6V0HPiZ2Xh2nebpyLPl30kaD2oeSnZpvN+VEj8IDTn/B7u1CxEk
-   o=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: hbTK65Tba221UsgBf/E7NkDFhhPx7vv8w4GZdv6KpeizVuIybV1NjGFvm6dLQzidSeN3AH8i4l
- h9C4nSyLBJdDbA//nIFpDIvIaGS9tHXlWVFgQbBKdycCS6rthe3Mpi2lKyU5UJQrBXRlhXAsZV
- xgfEuWqxXlkkr6OSl8u4PHFEgYJuQ5PstqxzpqiZK47pFlClTLvEtoe3FHfDkEXzTIdw0XW/vU
- BPUT+Jj6pU6vpiNHaUGJ/SqwUKKJtK1OX5mSTEIfhGA40HWG0aCKZZCX0FIAh8B7lowZIHwuVj
- uy4=
-X-SBRS: 5.2
-X-MesageID: 36235817
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.79,342,1602561600"; 
-   d="scan'208";a="36235817"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
-	<tamas@tklengyel.com>
-Subject: [PATCH v3 1/7] xen/gnttab: Rework resource acquisition
-Date: Tue, 12 Jan 2021 19:48:35 +0000
-Message-ID: <20210112194841.1537-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210112194841.1537-1-andrew.cooper3@citrix.com>
-References: <20210112194841.1537-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 057b7287-b5c4-49e0-98a1-9f4873397190
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=cam.ac.uk;
+	 s=20180806.ppsw; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=+Wb0un0JdqSclajHJKwiKl85g7WZnt4jTGIJY5QsrR8=; b=QW6JoWQRmGNDbFot25ialNEfib
+	J6LY7swnhNRJDRXqYpfsWgSFS7B0MEy5SibpWppaIypU3FcCnGct31NHfXdUdVikO8c68LWQJjDnO
+	wyXdludCWoCrmSAttg81B1/tbGt7KlI0eOhq6wApmIVxLS9QRneuoRh5og+43bpqQCaQ=;
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
+Subject: Re: [PATCH v2 02/11] xen/gnttab: Rework resource acquisition
+To: Jan Beulich <jbeulich@suse.com>
+Cc: 'George Dunlap' <George.Dunlap@eu.citrix.com>,
+ 'Ian Jackson' <iwj@xenproject.org>,
+ 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
+ 'Julien Grall' <julien@xen.org>,
+ =?UTF-8?B?J01pY2hhxYIgTGVzemN6ecWEc2tpJw==?= <michal.leszczynski@cert.pl>,
+ 'Hubert Jasudowicz' <hubert.jasudowicz@cert.pl>,
+ 'Tamas K Lengyel' <tamas@tklengyel.com>,
+ 'Xen-devel' <xen-devel@lists.xenproject.org>, paul@xen.org
+References: <20200922182444.12350-1-andrew.cooper3@citrix.com>
+ <20200922182444.12350-3-andrew.cooper3@citrix.com>
+ <001601d69258$4d6a7c90$e83f75b0$@xen.org>
+ <835893e1-fcd0-efa1-86ce-02af70dd1101@cam.ac.uk>
+ <6eb3bf50-d1dc-e010-16d0-261f7562a140@suse.com>
+From: Andrew Cooper <amc96@cam.ac.uk>
+Message-ID: <bfe0f28b-4e16-fb39-7aee-b8f538b6f979@cam.ac.uk>
+Date: Tue, 12 Jan 2021 20:06:38 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <6eb3bf50-d1dc-e010-16d0-261f7562a140@suse.com>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
 
-The existing logic doesn't function in the general case for mapping a guests
-grant table, due to arbitrary 32 frame limit, and the default grant table
-limit being 64.
+On 12/01/2021 08:23, Jan Beulich wrote:
+> On 11.01.2021 22:22, Andrew Cooper wrote:
+>> On 24/09/2020 10:51, Paul Durrant wrote:
+>>>> diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+>>>> index a5d3ed8bda..912f07be47 100644
+>>>> --- a/xen/common/grant_table.c
+>>>> +++ b/xen/common/grant_table.c
+>>>> @@ -4013,6 +4013,81 @@ static int gnttab_get_shared_frame_mfn(struct domain *d,
+>>>>      return 0;
+>>>>  }
+>>>>
+>>>> +int gnttab_acquire_resource(
+>>>> +    struct domain *d, unsigned int id, unsigned long frame,
+>>>> +    unsigned int nr_frames, xen_pfn_t mfn_list[])
+>>>> +{
+>>>> +    struct grant_table *gt = d->grant_table;
+>>>> +    unsigned int i = nr_frames, tot_frames;
+>>>> +    mfn_t tmp;
+>>>> +    void **vaddrs = NULL;
+>>>> +    int rc;
+>>>> +
+>>>> +    /* Input sanity. */
+>>> Nit: inconsistency with full stops on single line comments.
+>> The whole point of relaxing the style was because feedback over minutia
+>> such as this was deemed detrimental to the community.
+>>
+>> If I ever see feedback like this, I will commit commit the patch there
+>> and then.  This is the only way upstream Xen is going to turn into a
+>> less toxic environment for contributors.
+> Paul had clearly marked this as "nit". ./CODING_STYLE explicitly
+> allows omission as well as presence of a full stop here. So while
+> I agree with you that you'd be okay ignoring such a remark, I
+> also agree with Paul giving the remark if he's found a nearby
+> comment using the opposite variant.
 
-In order to start addressing this, rework the existing grant table logic by
-implementing a single gnttab_acquire_resource().  This is far more efficient
-than the previous acquire_grant_table() in memory.c because it doesn't take
-the grant table write lock, and attempt to grow the table, for every single
-frame.
+A reply like that means "this needs changing".  This is how it is read
+by people, even if it is not how it was intended.
 
-The new gnttab_acquire_resource() function subsumes the previous two
-gnttab_get_{shared,status}_frame() helpers.
+Contributors do not know CODING_STYLE off by heart, and even if they
+did, it is the responsibility of a reviewer not to mislead the
+contributor, not the contributors responsibility to challenge incorrect
+feedback.
 
-No functional change.
+As it stands, the reply requires change of something which is explicitly
+permitted under CODING_STYLE.  The change to CODING_STYLE was made
+specially to prevent feedback of this form to begin with.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
-CC: Michał Leszczyński <michal.leszczynski@cert.pl>
-CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
-CC: Tamas K Lengyel <tamas@tklengyel.com>
+This is not an ok use of anyone's time, nor is repeating the argument
+which lead to CODING_STYLE being changed to begin with.
 
-v3:
- * Fold switch statements in gnttab_acquire_resource()
----
- xen/common/grant_table.c      | 80 ++++++++++++++++++++++++++++---------------
- xen/common/memory.c           | 42 ++---------------------
- xen/include/xen/grant_table.h | 19 ++++------
- 3 files changed, 62 insertions(+), 79 deletions(-)
-
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index a5d3ed8bda..f560c250d7 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -4013,6 +4013,59 @@ static int gnttab_get_shared_frame_mfn(struct domain *d,
-     return 0;
- }
- 
-+int gnttab_acquire_resource(
-+    struct domain *d, unsigned int id, unsigned long frame,
-+    unsigned int nr_frames, xen_pfn_t mfn_list[])
-+{
-+    struct grant_table *gt = d->grant_table;
-+    unsigned int i = nr_frames, tot_frames;
-+    mfn_t tmp;
-+    void **vaddrs;
-+    int rc;
-+
-+    /* Overflow checks */
-+    if ( frame + nr_frames < frame )
-+        return -EINVAL;
-+
-+    tot_frames = frame + nr_frames;
-+    if ( tot_frames != frame + nr_frames )
-+        return -EINVAL;
-+
-+    /* Grow table if necessary. */
-+    grant_write_lock(gt);
-+    rc = -EINVAL;
-+    switch ( id )
-+    {
-+    case XENMEM_resource_grant_table_id_shared:
-+        vaddrs = gt->shared_raw;
-+        rc = gnttab_get_shared_frame_mfn(d, tot_frames - 1, &tmp);
-+        break;
-+
-+    case XENMEM_resource_grant_table_id_status:
-+        if ( gt->gt_version != 2 )
-+            break;
-+
-+        /* Check that void ** is a suitable representation for gt->status. */
-+        BUILD_BUG_ON(!__builtin_types_compatible_p(
-+                         typeof(gt->status), grant_status_t **));
-+        vaddrs = (void **)gt->status;
-+        rc = gnttab_get_status_frame_mfn(d, tot_frames - 1, &tmp);
-+        break;
-+    }
-+
-+    /* Any errors?  Bad id, or from growing the table? */
-+    if ( rc )
-+        goto out;
-+
-+    for ( i = 0; i < nr_frames; ++i )
-+        mfn_list[i] = virt_to_mfn(vaddrs[frame + i]);
-+
-+ out:
-+    grant_write_unlock(gt);
-+
-+    return rc;
-+}
-+
- int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn, mfn_t *mfn)
- {
-     int rc = 0;
-@@ -4047,33 +4100,6 @@ int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn, mfn_t *mfn)
-     return rc;
- }
- 
--int gnttab_get_shared_frame(struct domain *d, unsigned long idx,
--                            mfn_t *mfn)
--{
--    struct grant_table *gt = d->grant_table;
--    int rc;
--
--    grant_write_lock(gt);
--    rc = gnttab_get_shared_frame_mfn(d, idx, mfn);
--    grant_write_unlock(gt);
--
--    return rc;
--}
--
--int gnttab_get_status_frame(struct domain *d, unsigned long idx,
--                            mfn_t *mfn)
--{
--    struct grant_table *gt = d->grant_table;
--    int rc;
--
--    grant_write_lock(gt);
--    rc = (gt->gt_version == 2) ?
--        gnttab_get_status_frame_mfn(d, idx, mfn) : -EINVAL;
--    grant_write_unlock(gt);
--
--    return rc;
--}
--
- static void gnttab_usage_print(struct domain *rd)
- {
-     int first = 1;
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index b21b6c452d..82cf7b41ee 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1052,44 +1052,6 @@ static long xatp_permission_check(struct domain *d, unsigned int space)
-     return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
- }
- 
--static int acquire_grant_table(struct domain *d, unsigned int id,
--                               unsigned long frame,
--                               unsigned int nr_frames,
--                               xen_pfn_t mfn_list[])
--{
--    unsigned int i = nr_frames;
--
--    /* Iterate backwards in case table needs to grow */
--    while ( i-- != 0 )
--    {
--        mfn_t mfn = INVALID_MFN;
--        int rc;
--
--        switch ( id )
--        {
--        case XENMEM_resource_grant_table_id_shared:
--            rc = gnttab_get_shared_frame(d, frame + i, &mfn);
--            break;
--
--        case XENMEM_resource_grant_table_id_status:
--            rc = gnttab_get_status_frame(d, frame + i, &mfn);
--            break;
--
--        default:
--            rc = -EINVAL;
--            break;
--        }
--
--        if ( rc )
--            return rc;
--
--        ASSERT(!mfn_eq(mfn, INVALID_MFN));
--        mfn_list[i] = mfn_x(mfn);
--    }
--
--    return 0;
--}
--
- static int acquire_resource(
-     XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
- {
-@@ -1144,8 +1106,8 @@ static int acquire_resource(
-     switch ( xmar.type )
-     {
-     case XENMEM_resource_grant_table:
--        rc = acquire_grant_table(d, xmar.id, xmar.frame, xmar.nr_frames,
--                                 mfn_list);
-+        rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
-+                                     mfn_list);
-         break;
- 
-     default:
-diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
-index 98603604b8..5a2c75b880 100644
---- a/xen/include/xen/grant_table.h
-+++ b/xen/include/xen/grant_table.h
-@@ -56,10 +56,10 @@ int mem_sharing_gref_to_gfn(struct grant_table *gt, grant_ref_t ref,
- 
- int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn,
-                      mfn_t *mfn);
--int gnttab_get_shared_frame(struct domain *d, unsigned long idx,
--                            mfn_t *mfn);
--int gnttab_get_status_frame(struct domain *d, unsigned long idx,
--                            mfn_t *mfn);
-+
-+int gnttab_acquire_resource(
-+    struct domain *d, unsigned int id, unsigned long frame,
-+    unsigned int nr_frames, xen_pfn_t mfn_list[]);
- 
- #else
- 
-@@ -93,14 +93,9 @@ static inline int gnttab_map_frame(struct domain *d, unsigned long idx,
-     return -EINVAL;
- }
- 
--static inline int gnttab_get_shared_frame(struct domain *d, unsigned long idx,
--                                          mfn_t *mfn)
--{
--    return -EINVAL;
--}
--
--static inline int gnttab_get_status_frame(struct domain *d, unsigned long idx,
--                                          mfn_t *mfn)
-+static inline int gnttab_acquire_resource(
-+    struct domain *d, unsigned int id, unsigned long frame,
-+    unsigned int nr_frames, xen_pfn_t mfn_list[])
- {
-     return -EINVAL;
- }
--- 
-2.11.0
-
+~Andrew
 
