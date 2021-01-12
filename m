@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 195D7C43331
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 19:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDB71C433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 19:49:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D323923117
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 19:49:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D323923117
+	by mail.kernel.org (Postfix) with ESMTPS id 88C3523117
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 19:49:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 88C3523117
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65963.116992 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65966.117004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzPfP-0006VR-RZ; Tue, 12 Jan 2021 19:49:23 +0000
+	id 1kzPfU-0006bC-7U; Tue, 12 Jan 2021 19:49:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65963.116992; Tue, 12 Jan 2021 19:49:23 +0000
+Received: by outflank-mailman (output) from mailman id 65966.117004; Tue, 12 Jan 2021 19:49:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzPfP-0006VF-Nk; Tue, 12 Jan 2021 19:49:23 +0000
-Received: by outflank-mailman (input) for mailman id 65963;
- Tue, 12 Jan 2021 19:49:22 +0000
+	id 1kzPfU-0006b2-3K; Tue, 12 Jan 2021 19:49:28 +0000
+Received: by outflank-mailman (input) for mailman id 65966;
+ Tue, 12 Jan 2021 19:49:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Zh5d=GP=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1kzPfO-00064W-9y
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 19:49:22 +0000
+ id 1kzPfT-00064W-9x
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 19:49:27 +0000
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7eab4440-a59f-415b-afa0-34947c85bb91;
- Tue, 12 Jan 2021 19:49:04 +0000 (UTC)
+ id 0d843cb8-1e7a-4e10-97f5-df9f4a6e9bae;
+ Tue, 12 Jan 2021 19:49:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,29 +48,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7eab4440-a59f-415b-afa0-34947c85bb91
+X-Inumbo-ID: 0d843cb8-1e7a-4e10-97f5-df9f4a6e9bae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610480944;
+  d=citrix.com; s=securemail; t=1610480945;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=X/PbmeBQtvy5GUaatFDXs/925CHjaXa3SUYUSvIYvMM=;
-  b=TN21oHGZ2S5vtOKscXv5estJXUrSyeBuCrudbzB8I/1g0MqHjs8cB7X8
-   8eIKoR3oxmhGXQ3mYP0ggzD0tbE9LLN8eFJIe72F04zdvf3j3GErm4P33
-   cHMyFcOyr056sl9yAlWrYnFffj7TDJGv/YoyGvpSBqxLQaBUFIzhGeKyj
-   w=;
+  bh=QP34gUd0yVaYagIl+iAquadIBVEzTLaCpk9INm1PzbU=;
+  b=UiRAtP14rF8+Aaen6AXCdpOEyQquQc9B4Kkn4DecxEVE+XCf46oPhFnS
+   Mmc6ILvMLewLFugsl6mutFVlqIJH3x0R0J+etGWw7C9Io4uk/Ml3wZFEy
+   zGyduw6V0HPiZ2Xh2nebpyLPl30kaD2oeSnZpvN+VEj8IDTn/B7u1CxEk
+   o=;
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: erp6TVIUXQsw2FD39zaUKacuDPNFyTXqH89xkma3aulfGmx5YlkArPzhtgL5Uz3cGPV9BnoFu7
- sOfJ735l6Uzyy3TqfaogeolcLhCzovuwzLn50Ag6GzO+S2YBDDpetlZTriQ327YhgtFlobFlHn
- NT5YkPTctsYLJ+uq+TIZUvwQgALIq2KSPM5t3pYmDpAkfhTK/BB/8YdSVv/9/Pe6Ocma35So70
- PmsnMb7fyeFH4UTlus6cW4hVvPFot44oOLGmr4tIKfvOPw8RiDPva5gbJcFQk8mQyhgs611/rI
- FLU=
+IronPort-SDR: hbTK65Tba221UsgBf/E7NkDFhhPx7vv8w4GZdv6KpeizVuIybV1NjGFvm6dLQzidSeN3AH8i4l
+ h9C4nSyLBJdDbA//nIFpDIvIaGS9tHXlWVFgQbBKdycCS6rthe3Mpi2lKyU5UJQrBXRlhXAsZV
+ xgfEuWqxXlkkr6OSl8u4PHFEgYJuQ5PstqxzpqiZK47pFlClTLvEtoe3FHfDkEXzTIdw0XW/vU
+ BPUT+Jj6pU6vpiNHaUGJ/SqwUKKJtK1OX5mSTEIfhGA40HWG0aCKZZCX0FIAh8B7lowZIHwuVj
+ uy4=
 X-SBRS: 5.2
-X-MesageID: 36235816
+X-MesageID: 36235817
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,342,1602561600"; 
-   d="scan'208";a="36235816"
+   d="scan'208";a="36235817"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
@@ -80,9 +80,9 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
 	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
 	Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
 	<tamas@tklengyel.com>
-Subject: [PATCH v3 2/7] xen/memory: Fix acquire_resource size semantics
-Date: Tue, 12 Jan 2021 19:48:36 +0000
-Message-ID: <20210112194841.1537-3-andrew.cooper3@citrix.com>
+Subject: [PATCH v3 1/7] xen/gnttab: Rework resource acquisition
+Date: Tue, 12 Jan 2021 19:48:35 +0000
+Message-ID: <20210112194841.1537-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210112194841.1537-1-andrew.cooper3@citrix.com>
 References: <20210112194841.1537-1-andrew.cooper3@citrix.com>
@@ -90,27 +90,22 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Calling XENMEM_acquire_resource with a NULL frame_list is a request for the
-size of the resource, but the returned 32 is bogus.
+The existing logic doesn't function in the general case for mapping a guests
+grant table, due to arbitrary 32 frame limit, and the default grant table
+limit being 64.
 
-If someone tries to follow it for XENMEM_resource_ioreq_server, the acquire
-call will fail as IOREQ servers currently top out at 2 frames, and it is only
-half the size of the default grant table limit for guests.
+In order to start addressing this, rework the existing grant table logic by
+implementing a single gnttab_acquire_resource().  This is far more efficient
+than the previous acquire_grant_table() in memory.c because it doesn't take
+the grant table write lock, and attempt to grow the table, for every single
+frame.
 
-Also, no users actually request a resource size, because it was never wired up
-in the sole implementaion of resource acquisition in Linux.
+The new gnttab_acquire_resource() function subsumes the previous two
+gnttab_get_{shared,status}_frame() helpers.
 
-Introduce a new resource_max_frames() to calculate the size of a resource, and
-implement it the IOREQ and grant subsystems.
-
-It is impossible to guarantee that a mapping call following a successful size
-call will succeed (e.g. The target IOREQ server gets destroyed, or the domain
-switches from grant v2 to v1).  Document the restriction, and use the
-flexibility to simplify the paths to be lockless.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Ian Jackson <iwj@xenproject.org>
@@ -124,253 +119,208 @@ CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
 v3:
- * Use const struct domain *
- * Fold goto out paths
-v2:
- * Spelling fixes
- * Add more local variables.
- * Don't return any status frames on ARM where v2 support is compiled out.
+ * Fold switch statements in gnttab_acquire_resource()
 ---
- xen/arch/x86/mm.c             | 20 +++++++++++++++++
- xen/common/grant_table.c      | 23 ++++++++++++++++++++
- xen/common/memory.c           | 50 ++++++++++++++++++++++++++++++++-----------
- xen/include/asm-x86/mm.h      |  3 +++
- xen/include/public/memory.h   | 16 ++++++++++----
- xen/include/xen/grant_table.h |  8 +++++++
- xen/include/xen/mm.h          |  6 ++++++
- 7 files changed, 109 insertions(+), 17 deletions(-)
+ xen/common/grant_table.c      | 80 ++++++++++++++++++++++++++++---------------
+ xen/common/memory.c           | 42 ++---------------------
+ xen/include/xen/grant_table.h | 19 ++++------
+ 3 files changed, 62 insertions(+), 79 deletions(-)
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 63e9fae919..7a2e94cd6f 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -4587,6 +4587,26 @@ static int handle_iomem_range(unsigned long s, unsigned long e, void *p)
-     return err || s > e ? err : _handle_iomem_range(s, e, p);
- }
- 
-+unsigned int arch_resource_max_frames(
-+    const struct domain *d, unsigned int type, unsigned int id)
-+{
-+    unsigned int nr = 0;
-+
-+    switch ( type )
-+    {
-+#ifdef CONFIG_HVM
-+    case XENMEM_resource_ioreq_server:
-+        if ( !is_hvm_domain(d) )
-+            break;
-+        /* One frame for the buf-ioreq ring, and one frame per 128 vcpus. */
-+        nr = 1 + DIV_ROUND_UP(d->max_vcpus * sizeof(struct ioreq), PAGE_SIZE);
-+        break;
-+#endif
-+    }
-+
-+    return nr;
-+}
-+
- int arch_acquire_resource(struct domain *d, unsigned int type,
-                           unsigned int id, unsigned long frame,
-                           unsigned int nr_frames, xen_pfn_t mfn_list[])
 diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index f560c250d7..bd99dddbf6 100644
+index a5d3ed8bda..f560c250d7 100644
 --- a/xen/common/grant_table.c
 +++ b/xen/common/grant_table.c
-@@ -4013,6 +4013,29 @@ static int gnttab_get_shared_frame_mfn(struct domain *d,
+@@ -4013,6 +4013,59 @@ static int gnttab_get_shared_frame_mfn(struct domain *d,
      return 0;
  }
  
-+unsigned int gnttab_resource_max_frames(const struct domain *d, unsigned int id)
++int gnttab_acquire_resource(
++    struct domain *d, unsigned int id, unsigned long frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[])
 +{
-+    const struct grant_table *gt = d->grant_table;
-+    unsigned int nr = 0;
++    struct grant_table *gt = d->grant_table;
++    unsigned int i = nr_frames, tot_frames;
++    mfn_t tmp;
++    void **vaddrs;
++    int rc;
 +
-+    /* Don't need the grant lock.  This limit is fixed at domain create time. */
++    /* Overflow checks */
++    if ( frame + nr_frames < frame )
++        return -EINVAL;
++
++    tot_frames = frame + nr_frames;
++    if ( tot_frames != frame + nr_frames )
++        return -EINVAL;
++
++    /* Grow table if necessary. */
++    grant_write_lock(gt);
++    rc = -EINVAL;
 +    switch ( id )
 +    {
 +    case XENMEM_resource_grant_table_id_shared:
-+        nr = gt->max_grant_frames;
++        vaddrs = gt->shared_raw;
++        rc = gnttab_get_shared_frame_mfn(d, tot_frames - 1, &tmp);
 +        break;
 +
 +    case XENMEM_resource_grant_table_id_status:
-+        if ( GNTTAB_MAX_VERSION < 2 )
++        if ( gt->gt_version != 2 )
 +            break;
 +
-+        nr = grant_to_status_frames(gt->max_grant_frames);
++        /* Check that void ** is a suitable representation for gt->status. */
++        BUILD_BUG_ON(!__builtin_types_compatible_p(
++                         typeof(gt->status), grant_status_t **));
++        vaddrs = (void **)gt->status;
++        rc = gnttab_get_status_frame_mfn(d, tot_frames - 1, &tmp);
 +        break;
 +    }
 +
-+    return nr;
++    /* Any errors?  Bad id, or from growing the table? */
++    if ( rc )
++        goto out;
++
++    for ( i = 0; i < nr_frames; ++i )
++        mfn_list[i] = virt_to_mfn(vaddrs[frame + i]);
++
++ out:
++    grant_write_unlock(gt);
++
++    return rc;
 +}
 +
- int gnttab_acquire_resource(
-     struct domain *d, unsigned int id, unsigned long frame,
-     unsigned int nr_frames, xen_pfn_t mfn_list[])
+ int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn, mfn_t *mfn)
+ {
+     int rc = 0;
+@@ -4047,33 +4100,6 @@ int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn, mfn_t *mfn)
+     return rc;
+ }
+ 
+-int gnttab_get_shared_frame(struct domain *d, unsigned long idx,
+-                            mfn_t *mfn)
+-{
+-    struct grant_table *gt = d->grant_table;
+-    int rc;
+-
+-    grant_write_lock(gt);
+-    rc = gnttab_get_shared_frame_mfn(d, idx, mfn);
+-    grant_write_unlock(gt);
+-
+-    return rc;
+-}
+-
+-int gnttab_get_status_frame(struct domain *d, unsigned long idx,
+-                            mfn_t *mfn)
+-{
+-    struct grant_table *gt = d->grant_table;
+-    int rc;
+-
+-    grant_write_lock(gt);
+-    rc = (gt->gt_version == 2) ?
+-        gnttab_get_status_frame_mfn(d, idx, mfn) : -EINVAL;
+-    grant_write_unlock(gt);
+-
+-    return rc;
+-}
+-
+ static void gnttab_usage_print(struct domain *rd)
+ {
+     int first = 1;
 diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 82cf7b41ee..beefa6a313 100644
+index b21b6c452d..82cf7b41ee 100644
 --- a/xen/common/memory.c
 +++ b/xen/common/memory.c
-@@ -1052,6 +1052,26 @@ static long xatp_permission_check(struct domain *d, unsigned int space)
+@@ -1052,44 +1052,6 @@ static long xatp_permission_check(struct domain *d, unsigned int space)
      return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
  }
  
-+/*
-+ * Return 0 on any kind of error.  Caller converts to -EINVAL.
-+ *
-+ * All nonzero values should be repeatable (i.e. derived from some fixed
-+ * property of the domain), and describe the full resource (i.e. mapping the
-+ * result of this call will be the entire resource).
-+ */
-+static unsigned int resource_max_frames(const struct domain *d,
-+                                        unsigned int type, unsigned int id)
-+{
-+    switch ( type )
-+    {
-+    case XENMEM_resource_grant_table:
-+        return gnttab_resource_max_frames(d, id);
-+
-+    default:
-+        return arch_resource_max_frames(d, type, id);
-+    }
-+}
-+
+-static int acquire_grant_table(struct domain *d, unsigned int id,
+-                               unsigned long frame,
+-                               unsigned int nr_frames,
+-                               xen_pfn_t mfn_list[])
+-{
+-    unsigned int i = nr_frames;
+-
+-    /* Iterate backwards in case table needs to grow */
+-    while ( i-- != 0 )
+-    {
+-        mfn_t mfn = INVALID_MFN;
+-        int rc;
+-
+-        switch ( id )
+-        {
+-        case XENMEM_resource_grant_table_id_shared:
+-            rc = gnttab_get_shared_frame(d, frame + i, &mfn);
+-            break;
+-
+-        case XENMEM_resource_grant_table_id_status:
+-            rc = gnttab_get_status_frame(d, frame + i, &mfn);
+-            break;
+-
+-        default:
+-            rc = -EINVAL;
+-            break;
+-        }
+-
+-        if ( rc )
+-            return rc;
+-
+-        ASSERT(!mfn_eq(mfn, INVALID_MFN));
+-        mfn_list[i] = mfn_x(mfn);
+-    }
+-
+-    return 0;
+-}
+-
  static int acquire_resource(
      XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
  {
-@@ -1063,6 +1083,7 @@ static int acquire_resource(
-      * use-cases then per-CPU arrays or heap allocations may be required.
-      */
-     xen_pfn_t mfn_list[32];
-+    unsigned int max_frames;
-     int rc;
- 
-     /*
-@@ -1079,19 +1100,6 @@ static int acquire_resource(
-     if ( xmar.pad != 0 )
-         return -EINVAL;
- 
--    if ( guest_handle_is_null(xmar.frame_list) )
--    {
--        if ( xmar.nr_frames )
--            return -EINVAL;
--
--        xmar.nr_frames = ARRAY_SIZE(mfn_list);
--
--        if ( __copy_field_to_guest(arg, &xmar, nr_frames) )
--            return -EFAULT;
--
--        return 0;
--    }
--
-     if ( xmar.nr_frames > ARRAY_SIZE(mfn_list) )
-         return -E2BIG;
- 
-@@ -1103,6 +1111,22 @@ static int acquire_resource(
-     if ( rc )
-         goto out;
- 
-+    max_frames = resource_max_frames(d, xmar.type, xmar.id);
-+
-+    rc = -EINVAL;
-+    if ( !max_frames )
-+        goto out;
-+
-+    if ( guest_handle_is_null(xmar.frame_list) )
-+    {
-+        if ( xmar.nr_frames )
-+            goto out;
-+
-+        xmar.nr_frames = max_frames;
-+        rc = __copy_field_to_guest(arg, &xmar, nr_frames) ? -EFAULT : 0;
-+        goto out;
-+    }
-+
+@@ -1144,8 +1106,8 @@ static int acquire_resource(
      switch ( xmar.type )
      {
      case XENMEM_resource_grant_table:
-diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
-index deeba75a1c..a40a7fa024 100644
---- a/xen/include/asm-x86/mm.h
-+++ b/xen/include/asm-x86/mm.h
-@@ -639,6 +639,9 @@ static inline bool arch_mfn_in_directmap(unsigned long mfn)
-     return mfn <= (virt_to_mfn(eva - 1) + 1);
- }
+-        rc = acquire_grant_table(d, xmar.id, xmar.frame, xmar.nr_frames,
+-                                 mfn_list);
++        rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                     mfn_list);
+         break;
  
-+unsigned int arch_resource_max_frames(const struct domain *d,
-+                                      unsigned int type, unsigned int id);
-+
- int arch_acquire_resource(struct domain *d, unsigned int type,
-                           unsigned int id, unsigned long frame,
-                           unsigned int nr_frames, xen_pfn_t mfn_list[]);
-diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
-index 21d483298e..d7eb34f167 100644
---- a/xen/include/public/memory.h
-+++ b/xen/include/public/memory.h
-@@ -639,10 +639,18 @@ struct xen_mem_acquire_resource {
- #define XENMEM_resource_grant_table_id_status 1
- 
-     /*
--     * IN/OUT - As an IN parameter number of frames of the resource
--     *          to be mapped. However, if the specified value is 0 and
--     *          frame_list is NULL then this field will be set to the
--     *          maximum value supported by the implementation on return.
-+     * IN/OUT
-+     *
-+     * As an IN parameter number of frames of the resource to be mapped.
-+     *
-+     * When frame_list is NULL and nr_frames is 0, this is interpreted as a
-+     * request for the size of the resource, which shall be returned in the
-+     * nr_frames field.
-+     *
-+     * The size of a resource will never be zero, but a nonzero result doesn't
-+     * guarantee that a subsequent mapping request will be successful.  There
-+     * are further type/id specific constraints which may change between the
-+     * two calls.
-      */
-     uint32_t nr_frames;
-     uint32_t pad;
+     default:
 diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
-index 5a2c75b880..015704bebc 100644
+index 98603604b8..5a2c75b880 100644
 --- a/xen/include/xen/grant_table.h
 +++ b/xen/include/xen/grant_table.h
-@@ -57,6 +57,8 @@ int mem_sharing_gref_to_gfn(struct grant_table *gt, grant_ref_t ref,
+@@ -56,10 +56,10 @@ int mem_sharing_gref_to_gfn(struct grant_table *gt, grant_ref_t ref,
+ 
  int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn,
                       mfn_t *mfn);
- 
-+unsigned int gnttab_resource_max_frames(const struct domain *d, unsigned int id);
+-int gnttab_get_shared_frame(struct domain *d, unsigned long idx,
+-                            mfn_t *mfn);
+-int gnttab_get_status_frame(struct domain *d, unsigned long idx,
+-                            mfn_t *mfn);
 +
- int gnttab_acquire_resource(
-     struct domain *d, unsigned int id, unsigned long frame,
-     unsigned int nr_frames, xen_pfn_t mfn_list[]);
-@@ -93,6 +95,12 @@ static inline int gnttab_map_frame(struct domain *d, unsigned long idx,
++int gnttab_acquire_resource(
++    struct domain *d, unsigned int id, unsigned long frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[]);
+ 
+ #else
+ 
+@@ -93,14 +93,9 @@ static inline int gnttab_map_frame(struct domain *d, unsigned long idx,
      return -EINVAL;
  }
  
-+static inline unsigned int gnttab_resource_max_frames(
-+    const struct domain *d, unsigned int id)
-+{
-+    return 0;
-+}
-+
- static inline int gnttab_acquire_resource(
-     struct domain *d, unsigned int id, unsigned long frame,
-     unsigned int nr_frames, xen_pfn_t mfn_list[])
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index e62a5b726e..2a919fbcb4 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -703,6 +703,12 @@ static inline void put_page_alloc_ref(struct page_info *page)
+-static inline int gnttab_get_shared_frame(struct domain *d, unsigned long idx,
+-                                          mfn_t *mfn)
+-{
+-    return -EINVAL;
+-}
+-
+-static inline int gnttab_get_status_frame(struct domain *d, unsigned long idx,
+-                                          mfn_t *mfn)
++static inline int gnttab_acquire_resource(
++    struct domain *d, unsigned int id, unsigned long frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[])
+ {
+     return -EINVAL;
  }
- 
- #ifndef CONFIG_ARCH_ACQUIRE_RESOURCE
-+static inline unsigned int arch_resource_max_frames(
-+    const struct domain *d, unsigned int type, unsigned int id)
-+{
-+    return 0;
-+}
-+
- static inline int arch_acquire_resource(
-     struct domain *d, unsigned int type, unsigned int id, unsigned long frame,
-     unsigned int nr_frames, xen_pfn_t mfn_list[])
 -- 
 2.11.0
 
