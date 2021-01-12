@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3B06C433E9
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8D94C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 62EE122DFA
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62EE122DFA
+	by mail.kernel.org (Postfix) with ESMTPS id 7AD6322DFA
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AD6322DFA
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65855.116709 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65863.116738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzOFs-0004Tc-9i; Tue, 12 Jan 2021 18:18:56 +0000
+	id 1kzOG0-0004es-Up; Tue, 12 Jan 2021 18:19:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65855.116709; Tue, 12 Jan 2021 18:18:56 +0000
+Received: by outflank-mailman (output) from mailman id 65863.116738; Tue, 12 Jan 2021 18:19:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzOFs-0004TS-2p; Tue, 12 Jan 2021 18:18:56 +0000
-Received: by outflank-mailman (input) for mailman id 65855;
- Tue, 12 Jan 2021 18:18:54 +0000
+	id 1kzOG0-0004eZ-QO; Tue, 12 Jan 2021 18:19:04 +0000
+Received: by outflank-mailman (input) for mailman id 65863;
+ Tue, 12 Jan 2021 18:19:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gu5a=GP=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1kzOCy-0003Yo-2I
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 18:15:56 +0000
+ id 1kzOBv-0003Yo-0K
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 18:14:51 +0000
 Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c1e179bf-6ef8-4498-b424-c170b8a7aeda;
- Tue, 12 Jan 2021 18:14:20 +0000 (UTC)
+ id baa42764-ca05-45fb-b71c-b635a6c0f1e4;
+ Tue, 12 Jan 2021 18:13:43 +0000 (UTC)
 Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10CIEHSk021407;
- Tue, 12 Jan 2021 19:14:17 +0100 (CET)
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10CIDe8U007695;
+ Tue, 12 Jan 2021 19:13:40 +0100 (CET)
 Received: from armandeche.soc.lip6.fr (armandeche [132.227.63.133])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10CIDhQT016579;
- Tue, 12 Jan 2021 19:13:43 +0100 (MET)
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10CIDdjr023609;
+ Tue, 12 Jan 2021 19:13:39 +0100 (MET)
 Received: by armandeche.soc.lip6.fr (Postfix, from userid 20331)
- id BAE3D7218; Tue, 12 Jan 2021 19:13:43 +0100 (MET)
+ id 12B8C7218; Tue, 12 Jan 2021 19:13:39 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,86 +56,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1e179bf-6ef8-4498-b424-c170b8a7aeda
+X-Inumbo-ID: baa42764-ca05-45fb-b71c-b635a6c0f1e4
 From: Manuel Bouyer <bouyer@antioche.eu.org>
 To: xen-devel@lists.xenproject.org
 Cc: Manuel Bouyer <bouyer@netbsd.org>, Ian Jackson <iwj@xenproject.org>,
         Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH] libs/light: fix uuid on NetBSD
-Date: Tue, 12 Jan 2021 19:12:35 +0100
-Message-Id: <20210112181242.1570-15-bouyer@antioche.eu.org>
+Subject: [PATCH] libs/light: Switch NetBSD to QEMU_XEN
+Date: Tue, 12 Jan 2021 19:12:33 +0100
+Message-Id: <20210112181242.1570-13-bouyer@antioche.eu.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210112181242.1570-1-bouyer@antioche.eu.org>
 References: <20210112181242.1570-1-bouyer@antioche.eu.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 12 Jan 2021 19:14:17 +0100 (CET)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 12 Jan 2021 19:13:40 +0100 (CET)
 X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
 From: Manuel Bouyer <bouyer@netbsd.org>
 
-NetBSD uses the same uuid library as FreeBSD. As this is in a
-__FreeBSD__ || __NetBSD__ block, just drop the #ifdef __FreeBSD__
-and dead code.
+Switch NetBSD to QEMU_XEN.
+All 3 versions of libxl__default_device_model() now return
+LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN, so remove it and just set
+b_info->device_model_version to LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN in
+libxl__domain_build_info_setdefault().
 
 Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
 ---
- tools/libs/light/libxl_uuid.c | 21 ---------------------
- 1 file changed, 21 deletions(-)
+ tools/libs/light/libxl_create.c   | 2 +-
+ tools/libs/light/libxl_freebsd.c  | 5 -----
+ tools/libs/light/libxl_internal.h | 2 --
+ tools/libs/light/libxl_linux.c    | 5 -----
+ tools/libs/light/libxl_netbsd.c   | 5 -----
+ 5 files changed, 1 insertion(+), 18 deletions(-)
 
-diff --git a/tools/libs/light/libxl_uuid.c b/tools/libs/light/libxl_uuid.c
-index dadb79bad8..7b68270a33 100644
---- a/tools/libs/light/libxl_uuid.c
-+++ b/tools/libs/light/libxl_uuid.c
-@@ -82,7 +82,6 @@ void libxl_uuid_generate(libxl_uuid *uuid)
-     uuid_enc_be(uuid->uuid, &nat_uuid);
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 7199a79778..9848d65f36 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -102,7 +102,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
+                 b_info->device_model_version =
+                     LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL;
+             } else {
+-                b_info->device_model_version = libxl__default_device_model(gc);
++                b_info->device_model_version = LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
+             }
+         } else {
+             b_info->device_model_version =
+diff --git a/tools/libs/light/libxl_freebsd.c b/tools/libs/light/libxl_freebsd.c
+index f7ef4a8910..422c6b3b79 100644
+--- a/tools/libs/light/libxl_freebsd.c
++++ b/tools/libs/light/libxl_freebsd.c
+@@ -229,11 +229,6 @@ out:
+     return rc;
  }
  
--#ifdef __FreeBSD__
- int libxl_uuid_from_string(libxl_uuid *uuid, const char *in)
- {
-     uint32_t status;
-@@ -95,19 +94,6 @@ int libxl_uuid_from_string(libxl_uuid *uuid, const char *in)
- 
-     return 0;
- }
--#else
--#define LIBXL__UUID_PTRS(uuid) &uuid[0], &uuid[1], &uuid[2], &uuid[3], \
--                               &uuid[4], &uuid[5], &uuid[6], &uuid[7], \
--                               &uuid[8], &uuid[9], &uuid[10],&uuid[11], \
--                               &uuid[12],&uuid[13],&uuid[14],&uuid[15]
--int libxl_uuid_from_string(libxl_uuid *uuid, const char *in)
+-libxl_device_model_version libxl__default_device_model(libxl__gc *gc)
 -{
--    if ( sscanf(in, LIBXL_UUID_FMT, LIBXL__UUID_PTRS(uuid->uuid)) != sizeof(uuid->uuid) )
--        return -1;
--    return 0;
+-    return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
 -}
--#undef LIBXL__UUID_PTRS
--#endif
- 
- void libxl_uuid_copy(libxl_ctx *ctx_opt, libxl_uuid *dst,
-                      const libxl_uuid *src)
-@@ -120,7 +106,6 @@ void libxl_uuid_clear(libxl_uuid *uuid)
-     memset(&uuid->uuid, 0, sizeof(uuid->uuid));
- }
- 
--#ifdef __FreeBSD__
- int libxl_uuid_compare(const libxl_uuid *uuid1, const libxl_uuid *uuid2)
+-
+ int libxl__pci_numdevs(libxl__gc *gc)
  {
-     uuid_t nat_uuid1, nat_uuid2;
-@@ -130,12 +115,6 @@ int libxl_uuid_compare(const libxl_uuid *uuid1, const libxl_uuid *uuid2)
+     return ERROR_NI;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index c79523ba92..6c8b7d71a9 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -2309,8 +2309,6 @@ _hidden char *libxl__json_object_to_json(libxl__gc *gc,
+   /* Based on /local/domain/$domid/dm-version xenstore key
+    * default is qemu xen traditional */
+ _hidden int libxl__device_model_version_running(libxl__gc *gc, uint32_t domid);
+-  /* Return the system-wide default device model */
+-_hidden libxl_device_model_version libxl__default_device_model(libxl__gc *gc);
  
-     return uuid_compare(&nat_uuid1, &nat_uuid2, NULL);
+ static inline
+ bool libxl__stubdomain_is_linux_running(libxl__gc *gc, uint32_t domid)
+diff --git a/tools/libs/light/libxl_linux.c b/tools/libs/light/libxl_linux.c
+index 873b0271af..8d62dfd255 100644
+--- a/tools/libs/light/libxl_linux.c
++++ b/tools/libs/light/libxl_linux.c
+@@ -241,11 +241,6 @@ out:
+     return rc;
  }
--#else
--int libxl_uuid_compare(const libxl_uuid *uuid1, const libxl_uuid *uuid2)
+ 
+-libxl_device_model_version libxl__default_device_model(libxl__gc *gc)
 -{
--     return memcmp(uuid1->uuid, uuid2->uuid, sizeof(uuid1->uuid));
+-    return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
 -}
--#endif
- 
- const uint8_t *libxl_uuid_bytearray_const(const libxl_uuid *uuid)
+-
+ int libxl__pci_numdevs(libxl__gc *gc)
  {
+     DIR *dir;
+diff --git a/tools/libs/light/libxl_netbsd.c b/tools/libs/light/libxl_netbsd.c
+index e66a393d7f..6ad4ed34c2 100644
+--- a/tools/libs/light/libxl_netbsd.c
++++ b/tools/libs/light/libxl_netbsd.c
+@@ -108,11 +108,6 @@ out:
+     return rc;
+ }
+ 
+-libxl_device_model_version libxl__default_device_model(libxl__gc *gc)
+-{
+-    return LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL;
+-}
+-
+ int libxl__pci_numdevs(libxl__gc *gc)
+ {
+     return ERROR_NI;
 -- 
 2.29.2
 
