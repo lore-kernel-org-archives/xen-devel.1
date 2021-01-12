@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8A6DC433E9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDBFFC43381
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6CF51208B3
+	by mail.kernel.org (Postfix) with ESMTPS id 8401F21534
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CF51208B3
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8401F21534
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.66086.117303 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.66084.117289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRgs-0003na-EY; Tue, 12 Jan 2021 21:59:02 +0000
+	id 1kzRgr-0003jX-42; Tue, 12 Jan 2021 21:59:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 66086.117303; Tue, 12 Jan 2021 21:59:02 +0000
+Received: by outflank-mailman (output) from mailman id 66084.117289; Tue, 12 Jan 2021 21:59:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRgs-0003nL-4C; Tue, 12 Jan 2021 21:59:02 +0000
-Received: by outflank-mailman (input) for mailman id 66086;
- Tue, 12 Jan 2021 21:59:01 +0000
+	id 1kzRgq-0003iu-NX; Tue, 12 Jan 2021 21:59:00 +0000
+Received: by outflank-mailman (input) for mailman id 66084;
+ Tue, 12 Jan 2021 21:58:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OoN1=GP=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kzRcF-0002PK-Jm
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:54:15 +0000
-Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
+ id 1kzRdN-0002PK-K6
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:55:25 +0000
+Received: from mail-wr1-x436.google.com (unknown [2a00:1450:4864:20::436])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 672ce908-4a2c-4f0d-b403-2a40745f87d5;
- Tue, 12 Jan 2021 21:53:07 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id i63so3214347wma.4
- for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:07 -0800 (PST)
+ id aa162e05-41c1-4320-b83f-51adccf96237;
+ Tue, 12 Jan 2021 21:53:30 +0000 (UTC)
+Received: by mail-wr1-x436.google.com with SMTP id 91so10067wrj.7
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:17 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.06
+ by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.15
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 12 Jan 2021 13:53:06 -0800 (PST)
+ Tue, 12 Jan 2021 13:53:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,69 +55,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 672ce908-4a2c-4f0d-b403-2a40745f87d5
+X-Inumbo-ID: aa162e05-41c1-4320-b83f-51adccf96237
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=LLGfBggyWdYRwwW0ml3hX58E1A20s8FdtzBMFvcEooY=;
-        b=Cu6yH0wsrNVLtjzeE2TIZhrHBhX7wc3sYH+G7Kl/gEjiuAz/IZPOPt8w2NyVfM259+
-         +MTM65/Tx/3ICPcVTyjtMzg0eoryaIQmi/iN66/ET7jBm9NHVuxU0FQQAQBecwG7YVhm
-         b9WgU9CUPodfv8tYjcUPOzbd0jeJ708AX1xDLwFnY/PyyTIk/agR7skBC3xXUM29I9iy
-         V7Y/cFjAIYh4UsT/9rKd95H0TRBg+Hzew4nLYMGjDK4NaTJPSAFffvjkqT+oOlSid6LM
-         TiGK6VK4ktjqk3R2Lm50KeuanBP8M+/IQwXl3agBojvb4YECogVs5/ZLa6fYK2j3aUC/
-         DnRw==
+        bh=sScU+5oicaGgW9qBRRGxQ8d8IF93O73wsVAs5ty06UA=;
+        b=q0vahR7/hPCvHtl56HNnZkTbeu7dlQAE1RoHbqvupatJM826lo6eLq39sKNxAjep5n
+         Fuzmf+yrmXL7dL3tZ9RoqDnzBsiokBaZlygyZgNTVK48qRXIIyA5msQjtB6bM4eNERq+
+         fdayKLiqsv/w12039DKs2YrVxGN6idxmXAAEpcDSbS+yGsaUiJDFIMLdHJdzCrxHX9UE
+         hhnGCwapV/AbuBIPjTjz5XW1JbfrsaSlUdezqXWq/53OlSMnFrz1QQ09DoLrWapWdcn3
+         TG2OsA13Jihf5DbOgXcN7Y/t+kvmFC8Wqy1m/twNYFUHs0D/fJsurslDRyZus1jDfUDo
+         5MVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=LLGfBggyWdYRwwW0ml3hX58E1A20s8FdtzBMFvcEooY=;
-        b=RDNLnPdsEyrUjirgyxWGCNG7fXtwhqniPoC16ldLtNoWdtdIfbzP/w22Brpj12fc2I
-         c6g6jd0Gi3/WrKQPYKgP7o0srNE2mtLvXFWEXV7PAaYTFxLbdk1GEDiclpwnPFB0CVwV
-         +7Tpw5THC8JALObXI4Uf2cRPr5zXHcir5K1qbXnVhziIdVVoMKscGGQdIMhpyZkLP03g
-         CuQ5MfmsL9z/adYI+uFa3qxmxge4jphWbgBeitFLVjSGsJpDvY7Idutx4M68/XyEwDkR
-         fTE1ROQ7wlgad8QIsZaKcQ1szb27fqjfJ9fH5262Zfzyi0C4Aho4LcpinFMqTF5Nn4iB
-         rMug==
-X-Gm-Message-State: AOAM531E3YrpUjVsruOLEOug03a0+zxqtIIaN/InpiSRqOrD57Nre8Pr
-	Ch9RBv0HxcdRexX3sGCiQdvf9NUW0nLBuA==
-X-Google-Smtp-Source: ABdhPJwKs8f6oRDiw7sgwHGdQPLp4lt4N8HltFSQl1XLQ/oDA9QMnqcj/5Ol1jDlZ20c7w5+lfhrQQ==
-X-Received: by 2002:a1c:7c09:: with SMTP id x9mr1148510wmc.98.1610488386987;
-        Tue, 12 Jan 2021 13:53:06 -0800 (PST)
+        bh=sScU+5oicaGgW9qBRRGxQ8d8IF93O73wsVAs5ty06UA=;
+        b=BqYUFBcLrNkDEC5UHtfDWwfDLKnPxktIz3pr7YTalKU6tIyLrc64LZNSbG8xX7kLTO
+         DemZiYcwRWvA/j4TlkvRIlyQwv0DUZ6aJ6qg6lw3+1uld/5d64vj+5oAkXC+zvDtVQ94
+         NRSH2Tv++IfxnJamIQzQeVTj/zlTcsFkAm2maoptw9UAx0d0YleH6x9iQwYvrS7gXMHZ
+         JlDc9w8eUfbBzeCDjICji3cShOMI8K5LuwBJetsq7FfS69lDhIxSrzeg2TOImzWpb3SE
+         4WdrmptftuXU40Cvq40SBFefJLtpnvV2emQurM4DlLH8Q4wNcfNoJefIjboFg4dq3A/F
+         Py5g==
+X-Gm-Message-State: AOAM532tTZ89aizLlpJgXNKIDrs3D0YN3rNfuomJyOVcGWVLbLJ0Z98L
+	SGpDXlJRkbJeOKN6Wobx2iBuVim4Y8G+BQ==
+X-Google-Smtp-Source: ABdhPJy/iUFLQb6aiqG+w2JoMlszFzTv57QWfhopC1ianIyG5901PZpbjQNM0YEZWCzBovGmfr5xRw==
+X-Received: by 2002:adf:dc87:: with SMTP id r7mr784130wrj.305.1610488396744;
+        Tue, 12 Jan 2021 13:53:16 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <julien@xen.org>,
+Cc: Julien Grall <julien.grall@arm.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V4 13/24] xen/ioreq: Use guest_cmpxchg64() instead of cmpxchg()
-Date: Tue, 12 Jan 2021 23:52:21 +0200
-Message-Id: <1610488352-18494-14-git-send-email-olekstysh@gmail.com>
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V4 23/24] libxl: Introduce basic virtio-mmio support on Arm
+Date: Tue, 12 Jan 2021 23:52:31 +0200
+Message-Id: <1610488352-18494-24-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 References: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 
-The cmpxchg() in ioreq_send_buffered() operates on memory shared
-with the emulator domain (and the target domain if the legacy
-interface is used).
+This patch creates specific device node in the Guest device-tree
+with allocated MMIO range and SPI interrupt if specific 'virtio'
+property is present in domain config.
 
-In order to be on the safe side we need to switch
-to guest_cmpxchg64() to prevent a domain to DoS Xen on Arm.
-
-As there is no plan to support the legacy interface on Arm,
-we will have a page to be mapped in a single domain at the time,
-so we can use s->emulator in guest_cmpxchg64() safely.
-
-Thankfully the only user of the legacy interface is x86 so far
-and there is not concern regarding the atomics operations.
-
-Please note, that the legacy interface *must* not be used on Arm
-without revisiting the code.
-
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien.grall@arm.com>
 [On Arm only]
 Tested-by: Wei Chen <Wei.Chen@arm.com>
 
@@ -126,44 +115,171 @@ Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
 Changes RFC -> V1:
-   - new patch
+   - was squashed with:
+     "[RFC PATCH V1 09/12] libxl: Handle virtio-mmio irq in more correct way"
+     "[RFC PATCH V1 11/12] libxl: Insert "dma-coherent" property into virtio-mmio device node"
+     "[RFC PATCH V1 12/12] libxl: Fix duplicate memory node in DT"
+   - move VirtIO MMIO #define-s to xen/include/public/arch-arm.h
 
 Changes V1 -> V2:
-   - move earlier to avoid breaking arm32 compilation
-   - add an explanation to commit description and hvm_allow_set_param()
-   - pass s->emulator
+   - update the author of a patch
 
 Changes V2 -> V3:
-   - update patch description
+   - no changes
 
 Changes V3 -> V4:
-   - add Stefano's A-b
-   - drop comment from arm/hvm.c
+   - no changes
 ---
- xen/common/ioreq.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ tools/libs/light/libxl_arm.c     | 58 ++++++++++++++++++++++++++++++++++++++--
+ tools/libs/light/libxl_types.idl |  1 +
+ tools/xl/xl_parse.c              |  1 +
+ xen/include/public/arch-arm.h    |  5 ++++
+ 4 files changed, 63 insertions(+), 2 deletions(-)
 
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index d233a49..d5f4dd3 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -29,6 +29,7 @@
- #include <xen/trace.h>
- #include <xen/vpci.h>
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 66e8a06..588ee5a 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -26,8 +26,8 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+ {
+     uint32_t nr_spis = 0;
+     unsigned int i;
+-    uint32_t vuart_irq;
+-    bool vuart_enabled = false;
++    uint32_t vuart_irq, virtio_irq;
++    bool vuart_enabled = false, virtio_enabled = false;
  
-+#include <asm/guest_atomics.h>
- #include <asm/hvm/ioreq.h>
- 
- #include <public/hvm/ioreq.h>
-@@ -1185,7 +1186,7 @@ static int ioreq_send_buffered(struct ioreq_server *s, ioreq_t *p)
- 
-         new.read_pointer = old.read_pointer - n * IOREQ_BUFFER_SLOT_NUM;
-         new.write_pointer = old.write_pointer - n * IOREQ_BUFFER_SLOT_NUM;
--        cmpxchg(&pg->ptrs.full, old.full, new.full);
-+        guest_cmpxchg64(s->emulator, &pg->ptrs.full, old.full, new.full);
+     /*
+      * If pl011 vuart is enabled then increment the nr_spis to allow allocation
+@@ -39,6 +39,17 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         vuart_enabled = true;
      }
  
-     notify_via_xen_event_channel(d, s->bufioreq_evtchn);
++    /*
++     * XXX: Handle properly virtio
++     * A proper solution would be the toolstack to allocate the interrupts
++     * used by each virtio backend and let the backend now which one is used
++     */
++    if (libxl_defbool_val(d_config->b_info.arch_arm.virtio)) {
++        nr_spis += (GUEST_VIRTIO_MMIO_SPI - 32) + 1;
++        virtio_irq = GUEST_VIRTIO_MMIO_SPI;
++        virtio_enabled = true;
++    }
++
+     for (i = 0; i < d_config->b_info.num_irqs; i++) {
+         uint32_t irq = d_config->b_info.irqs[i];
+         uint32_t spi;
+@@ -58,6 +69,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+             return ERROR_FAIL;
+         }
+ 
++        /* The same check as for vpl011 */
++        if (virtio_enabled && irq == virtio_irq) {
++            LOG(ERROR, "Physical IRQ %u conflicting with virtio SPI\n", irq);
++            return ERROR_FAIL;
++        }
++
+         if (irq < 32)
+             continue;
+ 
+@@ -658,6 +675,39 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
+     return 0;
+ }
+ 
++static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
++                                 uint64_t base, uint32_t irq)
++{
++    int res;
++    gic_interrupt intr;
++    /* Placeholder for virtio@ + a 64-bit number + \0 */
++    char buf[24];
++
++    snprintf(buf, sizeof(buf), "virtio@%"PRIx64, base);
++    res = fdt_begin_node(fdt, buf);
++    if (res) return res;
++
++    res = fdt_property_compat(gc, fdt, 1, "virtio,mmio");
++    if (res) return res;
++
++    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
++                            1, base, GUEST_VIRTIO_MMIO_SIZE);
++    if (res) return res;
++
++    set_interrupt(intr, irq, 0xf, DT_IRQ_TYPE_EDGE_RISING);
++    res = fdt_property_interrupts(gc, fdt, &intr, 1);
++    if (res) return res;
++
++    res = fdt_property(fdt, "dma-coherent", NULL, 0);
++    if (res) return res;
++
++    res = fdt_end_node(fdt);
++    if (res) return res;
++
++    return 0;
++
++}
++
+ static const struct arch_info *get_arch_info(libxl__gc *gc,
+                                              const struct xc_dom_image *dom)
+ {
+@@ -961,6 +1011,9 @@ next_resize:
+         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
+             FDT( make_optee_node(gc, fdt) );
+ 
++        if (libxl_defbool_val(info->arch_arm.virtio))
++            FDT( make_virtio_mmio_node(gc, fdt, GUEST_VIRTIO_MMIO_BASE, GUEST_VIRTIO_MMIO_SPI) );
++
+         if (pfdt)
+             FDT( copy_partial_fdt(gc, fdt, pfdt) );
+ 
+@@ -1178,6 +1231,7 @@ void libxl__arch_domain_build_info_setdefault(libxl__gc *gc,
+ {
+     /* ACPI is disabled by default */
+     libxl_defbool_setdefault(&b_info->acpi, false);
++    libxl_defbool_setdefault(&b_info->arch_arm.virtio, false);
+ 
+     if (b_info->type != LIBXL_DOMAIN_TYPE_PV)
+         return;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 0532473..839df86 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -640,6 +640,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
+ 
+ 
+     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
++                               ("virtio", libxl_defbool),
+                                ("vuart", libxl_vuart_type),
+                               ])),
+     # Alternate p2m is not bound to any architecture or guest type, as it is
+diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
+index 4ebf396..2a3364b 100644
+--- a/tools/xl/xl_parse.c
++++ b/tools/xl/xl_parse.c
+@@ -2581,6 +2581,7 @@ skip_usbdev:
+     }
+ 
+     xlu_cfg_get_defbool(config, "dm_restrict", &b_info->dm_restrict, 0);
++    xlu_cfg_get_defbool(config, "virtio", &b_info->arch_arm.virtio, 0);
+ 
+     if (c_info->type == LIBXL_DOMAIN_TYPE_HVM) {
+         if (!xlu_cfg_get_string (config, "vga", &buf, 0)) {
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index c365b1b..be7595f 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -464,6 +464,11 @@ typedef uint64_t xen_callback_t;
+ #define PSCI_cpu_on      2
+ #define PSCI_migrate     3
+ 
++/* VirtIO MMIO definitions */
++#define GUEST_VIRTIO_MMIO_BASE  xen_mk_ullong(0x02000000)
++#define GUEST_VIRTIO_MMIO_SIZE  xen_mk_ullong(0x200)
++#define GUEST_VIRTIO_MMIO_SPI   33
++
+ #endif
+ 
+ #ifndef __ASSEMBLY__
 -- 
 2.7.4
 
