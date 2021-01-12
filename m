@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9AD2C433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D70A7C433E6
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 643D2221F5
+	by mail.kernel.org (Postfix) with ESMTPS id 90609221FF
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 643D2221F5
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 90609221FF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.66105.117395 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.66104.117387 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRhA-0004cx-4e; Tue, 12 Jan 2021 21:59:20 +0000
+	id 1kzRh8-0004aJ-Rt; Tue, 12 Jan 2021 21:59:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 66105.117395; Tue, 12 Jan 2021 21:59:20 +0000
+Received: by outflank-mailman (output) from mailman id 66104.117387; Tue, 12 Jan 2021 21:59:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRh9-0004bo-Cm; Tue, 12 Jan 2021 21:59:19 +0000
-Received: by outflank-mailman (input) for mailman id 66105;
- Tue, 12 Jan 2021 21:59:17 +0000
+	id 1kzRh8-0004Zc-Gu; Tue, 12 Jan 2021 21:59:18 +0000
+Received: by outflank-mailman (input) for mailman id 66104;
+ Tue, 12 Jan 2021 21:59:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OoN1=GP=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kzRct-0002PK-K1
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:54:55 +0000
-Received: from mail-wr1-x42b.google.com (unknown [2a00:1450:4864:20::42b])
+ id 1kzRdD-0002PK-KW
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:55:15 +0000
+Received: from mail-wr1-x436.google.com (unknown [2a00:1450:4864:20::436])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 89569031-775c-4f8d-9bf7-33356974a3f3;
+ id 261ce1d2-5879-425d-aa15-38c7ac3d5095;
  Tue, 12 Jan 2021 21:53:16 +0000 (UTC)
-Received: by mail-wr1-x42b.google.com with SMTP id i9so22313wrc.4
- for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:13 -0800 (PST)
+Received: by mail-wr1-x436.google.com with SMTP id m4so526wrx.9
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:15 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.12
+ by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.13
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 12 Jan 2021 13:53:12 -0800 (PST)
+ Tue, 12 Jan 2021 13:53:14 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,52 +55,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 89569031-775c-4f8d-9bf7-33356974a3f3
+X-Inumbo-ID: 261ce1d2-5879-425d-aa15-38c7ac3d5095
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=mGbtY4ekbbtE/VZfKxRi6ik4jZjcmPPDvGdUbgYeomY=;
-        b=R+KM6NJLAAKJRp7GgcdcfKDebUTS1tYsg7s8PNMs32duBdOOSHDAiFmuTxw3ljud6U
-         pz8/RAdUTkggEQoNMQZDV1+3xsHaELYNwJaky3kgjt5yhxjX8SXv0QhVg+qJrDR4LC2K
-         y7zE4YhCkRI0ezGxEwXuAy+meRrD1qFo4Mss4b+QRlQP/ewP9+OM9byYz2I+fRxd8kgV
-         edG/QgsClP883OhknDNyBhNqJev40JTtqXYVjGOd2tQCdGkxhN007bS5bFxNleEe8laP
-         OSGI61+prNTupZqWZjgWPKtBELS7zH4ko6fdOjTyht4fNH/i6ZsTw3JCXt2j5e/HhcrU
-         uNOQ==
+        bh=MIH572tckzyqDgDHK6bJ/MeONG4OmFZM99c4IxUYjYE=;
+        b=BIagn9PvZ/HwuH3xthBj4COy1oPZhIRA+YxMR8kaA4A4t5Gah8MAA0dU8NOqdojYXD
+         XpX+oDshCS9lWFklfEtfd7gJs6XwyyHlvFjrCBTVJKZwRZP4wJW/61+M62qM9KV/UmR+
+         +3qqTyNb0MjWrrxym5pc0AKVWHDcV0ek8iInuAR3yQLSzrrmK91nJqn/zPVGoljdZ0dI
+         EXhE5/JRYjGNKgTJEF4iGSu8p9POSruBePkZJMZB1DT57ftiSPMqxB/RMio97JRGdfED
+         R9IvBtv1cchXTHOhfRSGygqydA1WqYwu4c5ImoryE9MXicBhv8GrZ77KT2C/63l0cAtU
+         Zz4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=mGbtY4ekbbtE/VZfKxRi6ik4jZjcmPPDvGdUbgYeomY=;
-        b=DzaytzZpgYjAWRGGPWDgSXIjeNAyzsVvpijFJY56Q347pCkhwag9H0lxYHQqv6Mo8j
-         8T8bifzEO5lWG0plHpi+yL2Vqe8uMOvtryvW4Egurpb3OMhEU7EMEc4EVgtSzoN2wXk1
-         0yPtqIdcNwpueXDT9urwHx0kxEkkTOnPLdBBPMZgFB7Lf8TAvFq3I14NPbopkVP5cCci
-         jEV4tWKugGquGq7QcsEbbQIeXCImRg4MVgyAyDYHqSqJ8WT7ph04/+17ySENFwbl/pup
-         6mAwThOAdd3JWVYzWqgfw+lp27l7CwiF4T+quXJ7M6Kbv3S4xHhdA1ba38ksB1JztHGV
-         aQbQ==
-X-Gm-Message-State: AOAM5327G2q9ByByiurpJLIh1a2MW+dpI7jjh4nGwgcjjbBXJ5vRERkE
-	agvXpYDZ/kSdOqHo2bbZXfwasAZt8RFrBw==
-X-Google-Smtp-Source: ABdhPJz2KezndcVpBKfrPhdwl3q8eh6cVscb/37x6CQuUAYyjsjvgpDboQyklYrp6d/4BcKc77wzWg==
-X-Received: by 2002:adf:e9d2:: with SMTP id l18mr765538wrn.179.1610488392939;
-        Tue, 12 Jan 2021 13:53:12 -0800 (PST)
+        bh=MIH572tckzyqDgDHK6bJ/MeONG4OmFZM99c4IxUYjYE=;
+        b=lx5chgaAgdOPvli+0CBF5+Ew5z+wgg476GwKIPLcYj5m4J6IJuab8J1TVxVImQ41Op
+         oXeVqeLN8kCLhqQeS2zzvPqWbNFCYsFEHF961AxoBva7hLf3ybAhts3/HzOKiv9HOL1F
+         GZJ7ggKWLMQZlFLqXF/p3xgspTwPuxbLgQqTeHuisEY8mXBHvc1kSoqqErqPrDoa4fN3
+         S06OOmENwkzmrbAUpd/0gnB1iX2gTEhgG4aIBZ4Lgq9bsTY61KPRddJRUe3abUHVTCvh
+         qzDKBVZyX5ZodDapYzpWj/b7F4UZhSewPLB26hmobpyeaNKEJfwTKVTDfbQMdRxG9ezC
+         14cQ==
+X-Gm-Message-State: AOAM531TXDLcwZD6hS5vE2thJclanBrmaL/bvu1dHSeigAtiH9MRMYas
+	rCV1zfRRjySOWYGMS8n7xjRQCzkLi5bzDw==
+X-Google-Smtp-Source: ABdhPJy3JpnToaWfrCjEpOpi7uYU4eOVdsOkcmAUkT2iwJ4tj7hoOQQyRD30gOSPkpEV9rvJZG8iuw==
+X-Received: by 2002:adf:ce82:: with SMTP id r2mr795876wrn.181.1610488394917;
+        Tue, 12 Jan 2021 13:53:14 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Paul Durrant <paul@xen.org>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V4 19/24] xen/arm: io: Abstract sign-extension
-Date: Tue, 12 Jan 2021 23:52:27 +0200
-Message-Id: <1610488352-18494-20-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V4 21/24] xen/ioreq: Make x86's send_invalidate_req() common
+Date: Tue, 12 Jan 2021 23:52:29 +0200
+Message-Id: <1610488352-18494-22-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 References: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-In order to avoid code duplication (both handle_read() and
-handle_ioserv() contain the same code for the sign-extension)
-put this code to a common helper to be used for both.
+As the IOREQ is a common feature now and we also need to
+invalidate qemu/demu mapcache on Arm when the required condition
+occurs this patch moves this function to the common code
+(and remames it to ioreq_signal_mapcache_invalidate).
+This patch also moves per-domain qemu_mapcache_invalidate
+variable out of the arch sub-struct (and drops "qemu" prefix).
+
+We don't put this variable inside the #ifdef CONFIG_IOREQ_SERVER
+at the end of struct domain, but in the hole next to the group
+of 5 bools further up which is more efficient.
+
+The subsequent patch will add mapcache invalidation handling on Arm.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 CC: Julien Grall <julien.grall@arm.com>
@@ -111,131 +126,178 @@ Tested-by: Wei Chen <Wei.Chen@arm.com>
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
+Changes RFC -> V1:
+   - move send_invalidate_req() to the common code
+   - update patch subject/description
+   - move qemu_mapcache_invalidate out of the arch sub-struct,
+     update checks
+   - remove #if defined(CONFIG_ARM64) from the common code
+
 Changes V1 -> V2:
-   - new patch
+   - was split into:
+     - xen/ioreq: Make x86's send_invalidate_req() common
+     - xen/arm: Add mapcache invalidation handling
+   - update patch description/subject
+   - move Arm bits to a separate patch
+   - don't alter the common code, the flag is set by arch code
+   - rename send_invalidate_req() to send_invalidate_ioreq()
+   - guard qemu_mapcache_invalidate with CONFIG_IOREQ_SERVER
+   - use bool instead of bool_t
+   - remove blank line blank line between head comment and #include-s
 
 Changes V2 -> V3:
-   - no changes
+   - update patch description
+   - drop "qemu" prefix from the variable name
+   - rename send_invalidate_req() to ioreq_signal_mapcache_invalidate()
 
 Changes V3 -> V4:
-   - no changes here, but in new patch:
-     "xen/arm: io: Harden sign extension check"
+   - change variable location in struct domain
 ---
- xen/arch/arm/io.c           | 18 ++----------------
- xen/arch/arm/ioreq.c        | 17 +----------------
- xen/include/asm-arm/traps.h | 24 ++++++++++++++++++++++++
- 3 files changed, 27 insertions(+), 32 deletions(-)
+ xen/arch/x86/hvm/hypercall.c     |  9 +++++----
+ xen/arch/x86/hvm/io.c            | 14 --------------
+ xen/common/ioreq.c               | 14 ++++++++++++++
+ xen/include/asm-x86/hvm/domain.h |  1 -
+ xen/include/asm-x86/hvm/io.h     |  1 -
+ xen/include/xen/ioreq.h          |  1 +
+ xen/include/xen/sched.h          |  5 +++++
+ 7 files changed, 25 insertions(+), 20 deletions(-)
 
-diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
-index 9814481..307c521 100644
---- a/xen/arch/arm/io.c
-+++ b/xen/arch/arm/io.c
-@@ -24,6 +24,7 @@
- #include <asm/cpuerrata.h>
- #include <asm/current.h>
- #include <asm/mmio.h>
-+#include <asm/traps.h>
- #include <asm/hvm/ioreq.h>
+diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
+index ac573c8..6d41c56 100644
+--- a/xen/arch/x86/hvm/hypercall.c
++++ b/xen/arch/x86/hvm/hypercall.c
+@@ -20,6 +20,7 @@
+  */
+ #include <xen/lib.h>
+ #include <xen/hypercall.h>
++#include <xen/ioreq.h>
+ #include <xen/nospec.h>
  
- #include "decode.h"
-@@ -40,26 +41,11 @@ static enum io_state handle_read(const struct mmio_handler *handler,
-      * setting r).
-      */
-     register_t r = 0;
--    uint8_t size = (1 << dabt.size) * 8;
+ #include <asm/hvm/emulate.h>
+@@ -47,7 +48,7 @@ static long hvm_memory_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+         rc = compat_memory_op(cmd, arg);
  
-     if ( !handler->ops->read(v, info, &r, handler->priv) )
-         return IO_ABORT;
+     if ( (cmd & MEMOP_CMD_MASK) == XENMEM_decrease_reservation )
+-        curr->domain->arch.hvm.qemu_mapcache_invalidate = true;
++        curr->domain->mapcache_invalidate = true;
  
--    /*
--     * Sign extend if required.
--     * Note that we expect the read handler to have zeroed the bits
--     * outside the requested access size.
--     */
--    if ( dabt.sign && (r & (1UL << (size - 1))) )
--    {
--        /*
--         * We are relying on register_t using the same as
--         * an unsigned long in order to keep the 32-bit assembly
--         * code smaller.
--         */
--        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
--        r |= (~0UL) << size;
--    }
-+    r = sign_extend(dabt, r);
+     return rc;
+ }
+@@ -326,9 +327,9 @@ int hvm_hypercall(struct cpu_user_regs *regs)
  
-     set_user_reg(regs, dabt.reg, r);
+     HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu -> %lx", eax, regs->rax);
  
-diff --git a/xen/arch/arm/ioreq.c b/xen/arch/arm/ioreq.c
-index 3c4a24d..40b9e59 100644
---- a/xen/arch/arm/ioreq.c
-+++ b/xen/arch/arm/ioreq.c
-@@ -28,7 +28,6 @@ enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v)
-     const union hsr hsr = { .bits = regs->hsr };
-     const struct hsr_dabt dabt = hsr.dabt;
-     /* Code is similar to handle_read */
--    uint8_t size = (1 << dabt.size) * 8;
-     register_t r = v->io.req.data;
+-    if ( unlikely(currd->arch.hvm.qemu_mapcache_invalidate) &&
+-         test_and_clear_bool(currd->arch.hvm.qemu_mapcache_invalidate) )
+-        send_invalidate_req();
++    if ( unlikely(currd->mapcache_invalidate) &&
++         test_and_clear_bool(currd->mapcache_invalidate) )
++        ioreq_signal_mapcache_invalidate();
  
-     /* We are done with the IO */
-@@ -37,21 +36,7 @@ enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v)
-     if ( dabt.write )
-         return IO_HANDLED;
- 
--    /*
--     * Sign extend if required.
--     * Note that we expect the read handler to have zeroed the bits
--     * outside the requested access size.
--     */
--    if ( dabt.sign && (r & (1UL << (size - 1))) )
--    {
--        /*
--         * We are relying on register_t using the same as
--         * an unsigned long in order to keep the 32-bit assembly
--         * code smaller.
--         */
--        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
--        r |= (~0UL) << size;
--    }
-+    r = sign_extend(dabt, r);
- 
-     set_user_reg(regs, dabt.reg, r);
- 
-diff --git a/xen/include/asm-arm/traps.h b/xen/include/asm-arm/traps.h
-index 997c378..e301c44 100644
---- a/xen/include/asm-arm/traps.h
-+++ b/xen/include/asm-arm/traps.h
-@@ -83,6 +83,30 @@ static inline bool VABORT_GEN_BY_GUEST(const struct cpu_user_regs *regs)
-         (unsigned long)abort_guest_exit_end == regs->pc;
+     return curr->hcall_preempted ? HVM_HCALL_preempted : HVM_HCALL_completed;
+ }
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index 66a37ee..046a8eb 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -64,20 +64,6 @@ void send_timeoffset_req(unsigned long timeoff)
+         gprintk(XENLOG_ERR, "Unsuccessful timeoffset update\n");
  }
  
-+/* Check whether the sign extension is required and perform it */
-+static inline register_t sign_extend(const struct hsr_dabt dabt, register_t r)
+-/* Ask ioemu mapcache to invalidate mappings. */
+-void send_invalidate_req(void)
+-{
+-    ioreq_t p = {
+-        .type = IOREQ_TYPE_INVALIDATE,
+-        .size = 4,
+-        .dir = IOREQ_WRITE,
+-        .data = ~0UL, /* flush all */
+-    };
+-
+-    if ( ioreq_broadcast(&p, false) != 0 )
+-        gprintk(XENLOG_ERR, "Unsuccessful map-cache invalidate\n");
+-}
+-
+ bool hvm_emulate_one_insn(hvm_emulate_validate_t *validate, const char *descr)
+ {
+     struct hvm_emulate_ctxt ctxt;
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index 59f4990..050891f 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -35,6 +35,20 @@
+ #include <public/hvm/ioreq.h>
+ #include <public/hvm/params.h>
+ 
++/* Ask ioemu mapcache to invalidate mappings. */
++void ioreq_signal_mapcache_invalidate(void)
 +{
-+    uint8_t size = (1 << dabt.size) * 8;
++    ioreq_t p = {
++        .type = IOREQ_TYPE_INVALIDATE,
++        .size = 4,
++        .dir = IOREQ_WRITE,
++        .data = ~0UL, /* flush all */
++    };
 +
-+    /*
-+     * Sign extend if required.
-+     * Note that we expect the read handler to have zeroed the bits
-+     * outside the requested access size.
-+     */
-+    if ( dabt.sign && (r & (1UL << (size - 1))) )
-+    {
-+        /*
-+         * We are relying on register_t using the same as
-+         * an unsigned long in order to keep the 32-bit assembly
-+         * code smaller.
-+         */
-+        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
-+        r |= (~0UL) << size;
-+    }
-+
-+    return r;
++    if ( ioreq_broadcast(&p, false) != 0 )
++        gprintk(XENLOG_ERR, "Unsuccessful map-cache invalidate\n");
 +}
 +
- #endif /* __ASM_ARM_TRAPS__ */
- /*
-  * Local variables:
+ static void set_ioreq_server(struct domain *d, unsigned int id,
+                              struct ioreq_server *s)
+ {
+diff --git a/xen/include/asm-x86/hvm/domain.h b/xen/include/asm-x86/hvm/domain.h
+index b8be1ad..cf959f6 100644
+--- a/xen/include/asm-x86/hvm/domain.h
++++ b/xen/include/asm-x86/hvm/domain.h
+@@ -122,7 +122,6 @@ struct hvm_domain {
+ 
+     struct viridian_domain *viridian;
+ 
+-    bool_t                 qemu_mapcache_invalidate;
+     bool_t                 is_s3_suspended;
+ 
+     /*
+diff --git a/xen/include/asm-x86/hvm/io.h b/xen/include/asm-x86/hvm/io.h
+index fb64294..3da0136 100644
+--- a/xen/include/asm-x86/hvm/io.h
++++ b/xen/include/asm-x86/hvm/io.h
+@@ -97,7 +97,6 @@ bool relocate_portio_handler(
+     unsigned int size);
+ 
+ void send_timeoffset_req(unsigned long timeoff);
+-void send_invalidate_req(void);
+ bool handle_mmio_with_translation(unsigned long gla, unsigned long gpfn,
+                                   struct npfec);
+ bool handle_pio(uint16_t port, unsigned int size, int dir);
+diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
+index f0908af..dc47ec7 100644
+--- a/xen/include/xen/ioreq.h
++++ b/xen/include/xen/ioreq.h
+@@ -101,6 +101,7 @@ struct ioreq_server *ioreq_server_select(struct domain *d,
+ int ioreq_send(struct ioreq_server *s, ioreq_t *proto_p,
+                bool buffered);
+ unsigned int ioreq_broadcast(ioreq_t *p, bool buffered);
++void ioreq_signal_mapcache_invalidate(void);
+ 
+ void ioreq_domain_init(struct domain *d);
+ 
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 7aea2bb..5139b44 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -444,6 +444,11 @@ struct domain
+      * unpaused for the first time by the systemcontroller.
+      */
+     bool             creation_finished;
++    /*
++     * Indicates that mapcache invalidation request should be sent to
++     * the device emulator.
++     */
++    bool             mapcache_invalidate;
+ 
+     /* Which guest this guest has privileges on */
+     struct domain   *target;
 -- 
 2.7.4
 
