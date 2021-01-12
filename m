@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCF49C433E6
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16C0DC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 74667208B3
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 74667208B3
+	by mail.kernel.org (Postfix) with ESMTPS id B1F81208B3
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B1F81208B3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.66094.117350 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.66097.117364 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRh0-00048Y-4V; Tue, 12 Jan 2021 21:59:10 +0000
+	id 1kzRh3-0004Ir-Hw; Tue, 12 Jan 2021 21:59:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 66094.117350; Tue, 12 Jan 2021 21:59:09 +0000
+Received: by outflank-mailman (output) from mailman id 66097.117364; Tue, 12 Jan 2021 21:59:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRgy-00047D-Vt; Tue, 12 Jan 2021 21:59:08 +0000
-Received: by outflank-mailman (input) for mailman id 66094;
- Tue, 12 Jan 2021 21:59:07 +0000
+	id 1kzRh2-0004Hb-Lr; Tue, 12 Jan 2021 21:59:12 +0000
+Received: by outflank-mailman (input) for mailman id 66097;
+ Tue, 12 Jan 2021 21:59:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OoN1=GP=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kzRbv-0002PK-IB
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:53:55 +0000
-Received: from mail-wm1-x32b.google.com (unknown [2a00:1450:4864:20::32b])
+ id 1kzRce-0002PK-Ia
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:54:40 +0000
+Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 88aa00d4-4797-4f33-89e1-a41385444d37;
- Tue, 12 Jan 2021 21:53:04 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id g8so3232504wme.1
- for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:04 -0800 (PST)
+ id d38512fd-ee03-4a0f-8db0-7011a21b1bba;
+ Tue, 12 Jan 2021 21:53:11 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id y23so3504487wmi.1
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:11 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.02
+ by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.09
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 12 Jan 2021 13:53:02 -0800 (PST)
+ Tue, 12 Jan 2021 13:53:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,63 +55,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88aa00d4-4797-4f33-89e1-a41385444d37
+X-Inumbo-ID: d38512fd-ee03-4a0f-8db0-7011a21b1bba
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=FKttzyrlhs9r0a6Bqtfw7wbziiG+iHahebfFYHiHG7M=;
-        b=QY5gbz8oh+FFv7V8vWaRviWHfOCxVRY9/zex0CCji7gzYqZTK6pB674J8rGPC+7Llk
-         G8rO25rXp67hYveQYCC7kU6IiSGRytxJ28AW0s37Vx4vBVLkexkk+N+k/yatzwDDwPzx
-         BmBdZHQPZjIFGd4FAQyFhToD/h9PWuwExLWqJsFlfcdSBG96uy/CApkxLBWmqf75/hyh
-         xZJ49rDLK29VFsX+lOc/RVdqSexSZSxd4O5d2d4KZdSMusNwAhOtNJaQ/9bIj8eNwzDj
-         DHw/Ui0a6tXxrLvyAxHB+NM+0NhdWmx35RO4OhU+E2+Iay+mo9AYg/Etc2fhi3Ghuf4o
-         Pm3Q==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=yvuQXcgBTSPbANOLGJhBtlryDzUAQMb8D/9PARVMV4Q=;
+        b=FjTq0V/5W1Bj0Y9u0Xfby+RU5G1ULZqZkss5au7mvgFf/u/DTwrkemyk6XGdWrqgus
+         jS2yzvNeVpQ4P19UoiLVZUoPmOgbxaUXE0je5z809TuAnQw7RocF7f6/VD805O4vOLpD
+         FIkal3C3DX1Q0HhGAWcTWMlm8MAQxJjoayeZ/rMK4uTEW3q/5pkmnezjiLtQgbxN86ut
+         Hp75XhRJHpdcT1iftThJ1X0EgERdt0SEZdhNyBJjQFua+g/zmhwLqDg3QmnWN8BnN8HT
+         cDCGhVMN2bjdKrqbhBbIk25wQUTvFLtPQiwhXeNS0yuYjwWBykDJRYcUwIldnblGhsAQ
+         LrNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=FKttzyrlhs9r0a6Bqtfw7wbziiG+iHahebfFYHiHG7M=;
-        b=ohUWTc7eE0KVSQSS0P4UI6AisRefi//NgoB0W1UJMopJ+BMbxwWYzxC+EDO95cx13m
-         geTFu2o4dMnDNF1q0vtpsSYANf5R58Lahv9+fNRLkxKoWANCfLh5GhqEZRveXcD9boSW
-         bf1/KdNx5hDB8yl3qctXaD6PzbQuvRp8du7BPtM5zykEW2T8SCP469x9JSz/eVGSu/58
-         vL2kTzFRVx/45HzKSoq1ZoyT7d2B6AlLwG4nZVzWOrzo9Zconw0li+cEvV+hOF3voF3W
-         +FnE+oqD6y8/DM+P29cznIqOZSGHzXexQL27ClgEoGUTMZPtX4Vg/UnHVqN7V+5pIHMI
-         Nf9g==
-X-Gm-Message-State: AOAM530pWlaErp9Ah65FRl/+dstGSQuw/OQTtZumIGJbpShJ4cM+rmCG
-	rKKyo96tZGdAaf+68NMAE+D8N5lMxSWZeQ==
-X-Google-Smtp-Source: ABdhPJyRGmvztBY1ZUv8thskAilUJB9oOkmDa2dwhfjO88GtENj/dlpBZBDTz8jMyUoaOyFg41HOJA==
-X-Received: by 2002:a1c:7c19:: with SMTP id x25mr1177518wmc.94.1610488383522;
-        Tue, 12 Jan 2021 13:53:03 -0800 (PST)
+         :references:mime-version:content-transfer-encoding;
+        bh=yvuQXcgBTSPbANOLGJhBtlryDzUAQMb8D/9PARVMV4Q=;
+        b=Dvaco/JktznM4Z8mA9YNba1AfF5inrX28kOfllrxjF6bS10nMIJE+9idKq0JVVxAS4
+         NaH+ilYFbXmlzwjIUGug27oxosI6vHC1fxCAIv4azDhlItZzfQIQSDYRV8B+jO1U3sTa
+         loRD5BaLKx2TN0MiB7WOvt3jcavT+5bmjWjQs+8U2aVsAbEsXxrG4Mf4ptZWcfQyRZpk
+         9whgnlj5iZD1KIYDiyYR+ZEyRzZc0dPy9I7bilblgK83crh8RTNstzJcMpe7OgIVbkb3
+         5ZB5m/HVA5tqvRKCyMG7larlPa/wildoXbuuUFJfN5IkGVNErXrlDO3ixSBI+xvdk9Hw
+         gCLw==
+X-Gm-Message-State: AOAM531Z2F/aHixy4AlNWWDp5Dw/TniY0IW90hrPN4CpGLON9o6hl3F+
+	udfDQXFbYmX77hrQ0oPSp68ovvx0Srd/rg==
+X-Google-Smtp-Source: ABdhPJwyrNxyiy/lYTcJlKpHjqaJlg8k4XGpOiswPmNGKLwRdgLGGF4PTuxqliP0RinfNtLdGqYpHw==
+X-Received: by 2002:a1c:2155:: with SMTP id h82mr1132574wmh.132.1610488390131;
+        Tue, 12 Jan 2021 13:53:10 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Paul Durrant <paul@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V4 10/24] xen/ioreq: Move x86's io_completion/io_req fields to struct vcpu
-Date: Tue, 12 Jan 2021 23:52:18 +0200
-Message-Id: <1610488352-18494-11-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V4 16/24] xen/mm: Handle properly reference in set_foreign_p2m_entry() on Arm
+Date: Tue, 12 Jan 2021 23:52:24 +0200
+Message-Id: <1610488352-18494-17-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 References: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-The IOREQ is a common feature now and these fields will be used
-on Arm as is. Move them to common struct vcpu as a part of new
-struct vcpu_io and drop duplicating "io" prefixes. Also move
-enum hvm_io_completion to xen/sched.h and remove "hvm" prefixes.
+This patch implements reference counting of foreign entries in
+in set_foreign_p2m_entry() on Arm. This is a mandatory action if
+we want to run emulator (IOREQ server) in other than dom0 domain,
+as we can't trust it to do the right thing if it is not running
+in dom0. So we need to grab a reference on the page to avoid it
+disappearing.
 
-This patch completely removes layering violation in the common code.
+It is valid to always pass "p2m_map_foreign_rw" type to
+guest_physmap_add_entry() since the current and foreign domains
+would be always different. A case when they are equal would be
+rejected by rcu_lock_remote_domain_by_id(). Besides the similar
+comment in the code put a respective ASSERT() to catch incorrect
+usage in future.
+
+It was tested with IOREQ feature to confirm that all the pages given
+to this function belong to a domain, so we can use the same approach
+as for XENMAPSPACE_gmfn_foreign handling in xenmem_add_to_physmap_one().
+
+This involves adding an extra parameter for the foreign domain to
+set_foreign_p2m_entry() and a helper to indicate whether the arch
+supports the reference counting of foreign entries and the restriction
+for the hardware domain in the common code can be skipped for it.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 CC: Julien Grall <julien.grall@arm.com>
@@ -122,907 +140,230 @@ Tested-by: Wei Chen <Wei.Chen@arm.com>
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
+Changes RFC -> V1:
+   - new patch, was split from:
+     "[RFC PATCH V1 04/12] xen/arm: Introduce arch specific bits for IOREQ/DM features"
+   - rewrite a logic to handle properly reference in set_foreign_p2m_entry()
+     instead of treating foreign entries as p2m_ram_rw
+
 Changes V1 -> V2:
-   - new patch
+   - rebase according to the recent changes to acquire_resource()
+   - update patch description
+   - introduce arch_refcounts_p2m()
+   - add an explanation why p2m_map_foreign_rw is valid
+   - move set_foreign_p2m_entry() to p2m-common.h
+   - add const to new parameter
 
 Changes V2 -> V3:
-   - update patch according the "legacy interface" is x86 specific
    - update patch description
-   - drop the "io" prefixes from the field names
-   - wrap IO_realmode_completion
+   - rename arch_refcounts_p2m() to arch_acquire_resource_check()
+   - move comment to x86’s arch_acquire_resource_check()
+   - return rc in Arm's set_foreign_p2m_entry()
+   - put a respective ASSERT() into Arm's set_foreign_p2m_entry()
 
 Changes V3 -> V4:
-   - rename all hvm_vcpu_io locals to "hvio"
-   - rename according to the new renaming scheme IO_ -> VIO_ (io_ -> vio_)
-   - drop "io" prefix from io_completion locals
+   - update arch_acquire_resource_check() implementation on x86
+     and common code which uses it, pass struct domain to the function
+   - put ASSERT() to x86/Arm set_foreign_p2m_entry()
+   - use arch_acquire_resource_check() in p2m_add_foreign()
+     instead of open-coding it
 ---
- xen/arch/x86/hvm/emulate.c        | 210 +++++++++++++++++++-------------------
- xen/arch/x86/hvm/hvm.c            |   2 +-
- xen/arch/x86/hvm/io.c             |  32 +++---
- xen/arch/x86/hvm/ioreq.c          |   6 +-
- xen/arch/x86/hvm/svm/nestedsvm.c  |   2 +-
- xen/arch/x86/hvm/vmx/realmode.c   |   8 +-
- xen/common/ioreq.c                |  26 ++---
- xen/include/asm-x86/hvm/emulate.h |   2 +-
- xen/include/asm-x86/hvm/vcpu.h    |  11 --
- xen/include/xen/ioreq.h           |   2 +-
- xen/include/xen/sched.h           |  19 ++++
- 11 files changed, 164 insertions(+), 156 deletions(-)
+ xen/arch/arm/p2m.c           | 26 ++++++++++++++++++++++++++
+ xen/arch/x86/mm/p2m.c        |  9 ++++++---
+ xen/common/memory.c          |  9 ++-------
+ xen/include/asm-arm/p2m.h    | 19 +++++++++----------
+ xen/include/asm-x86/p2m.h    | 19 ++++++++++++++++---
+ xen/include/xen/p2m-common.h |  4 ++++
+ 6 files changed, 63 insertions(+), 23 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 4d62199..21051ce 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -140,15 +140,15 @@ static const struct hvm_io_handler ioreq_server_handler = {
-  */
- void hvmemul_cancel(struct vcpu *v)
- {
--    struct hvm_vcpu_io *vio = &v->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &v->arch.hvm.hvm_io;
- 
--    vio->io_req.state = STATE_IOREQ_NONE;
--    vio->io_completion = HVMIO_no_completion;
--    vio->mmio_cache_count = 0;
--    vio->mmio_insn_bytes = 0;
--    vio->mmio_access = (struct npfec){};
--    vio->mmio_retry = false;
--    vio->g2m_ioport = NULL;
-+    v->io.req.state = STATE_IOREQ_NONE;
-+    v->io.completion = VIO_no_completion;
-+    hvio->mmio_cache_count = 0;
-+    hvio->mmio_insn_bytes = 0;
-+    hvio->mmio_access = (struct npfec){};
-+    hvio->mmio_retry = false;
-+    hvio->g2m_ioport = NULL;
- 
-     hvmemul_cache_disable(v);
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index 4eeb867..d41c4fa 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -1380,6 +1380,32 @@ int guest_physmap_remove_page(struct domain *d, gfn_t gfn, mfn_t mfn,
+     return p2m_remove_mapping(d, gfn, (1 << page_order), mfn);
  }
-@@ -159,7 +159,7 @@ static int hvmemul_do_io(
+ 
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn)
++{
++    struct page_info *page = mfn_to_page(mfn);
++    int rc;
++
++    ASSERT(arch_acquire_resource_check(d));
++
++    if ( !get_page(page, fd) )
++        return -EINVAL;
++
++    /*
++     * It is valid to always use p2m_map_foreign_rw here as if this gets
++     * called then d != fd. A case when d == fd would be rejected by
++     * rcu_lock_remote_domain_by_id() earlier. Put a respective ASSERT()
++     * to catch incorrect usage in future.
++     */
++    ASSERT(d != fd);
++
++    rc = guest_physmap_add_entry(d, _gfn(gfn), mfn, 0, p2m_map_foreign_rw);
++    if ( rc )
++        put_page(page);
++
++    return rc;
++}
++
+ static struct page_info *p2m_allocate_root(void)
  {
-     struct vcpu *curr = current;
-     struct domain *currd = curr->domain;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct vcpu_io *vio = &curr->io;
-     ioreq_t p = {
-         .type = is_mmio ? IOREQ_TYPE_COPY : IOREQ_TYPE_PIO,
-         .addr = addr,
-@@ -184,13 +184,13 @@ static int hvmemul_do_io(
-         return X86EMUL_UNHANDLEABLE;
-     }
+     struct page_info *page;
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index 71fda06..cbeea85 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -1323,8 +1323,11 @@ static int set_typed_p2m_entry(struct domain *d, unsigned long gfn_l,
+ }
  
--    switch ( vio->io_req.state )
-+    switch ( vio->req.state )
-     {
-     case STATE_IOREQ_NONE:
-         break;
-     case STATE_IORESP_READY:
--        vio->io_req.state = STATE_IOREQ_NONE;
--        p = vio->io_req;
-+        vio->req.state = STATE_IOREQ_NONE;
-+        p = vio->req;
- 
-         /* Verify the emulation request has been correctly re-issued */
-         if ( (p.type != (is_mmio ? IOREQ_TYPE_COPY : IOREQ_TYPE_PIO)) ||
-@@ -238,7 +238,7 @@ static int hvmemul_do_io(
-     }
-     ASSERT(p.count);
- 
--    vio->io_req = p;
-+    vio->req = p;
- 
-     rc = hvm_io_intercept(&p);
- 
-@@ -247,12 +247,12 @@ static int hvmemul_do_io(
-      * our callers and mirror this into latched state.
+ /* Set foreign mfn in the given guest's p2m table. */
+-int set_foreign_p2m_entry(struct domain *d, unsigned long gfn, mfn_t mfn)
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn)
+ {
++    ASSERT(arch_acquire_resource_check(d));
++
+     return set_typed_p2m_entry(d, gfn, mfn, PAGE_ORDER_4K, p2m_map_foreign,
+                                p2m_get_hostp2m(d)->default_access);
+ }
+@@ -2579,7 +2582,7 @@ static int p2m_add_foreign(struct domain *tdom, unsigned long fgfn,
+      * hvm fixme: until support is added to p2m teardown code to cleanup any
+      * foreign entries, limit this to hardware domain only.
       */
-     ASSERT(p.count <= *reps);
--    *reps = vio->io_req.count = p.count;
-+    *reps = vio->req.count = p.count;
+-    if ( !is_hardware_domain(tdom) )
++    if ( !arch_acquire_resource_check(tdom) )
+         return -EPERM;
  
-     switch ( rc )
-     {
-     case X86EMUL_OKAY:
--        vio->io_req.state = STATE_IOREQ_NONE;
-+        vio->req.state = STATE_IOREQ_NONE;
-         break;
-     case X86EMUL_UNHANDLEABLE:
-     {
-@@ -305,7 +305,7 @@ static int hvmemul_do_io(
-                 if ( s == NULL )
-                 {
-                     rc = X86EMUL_RETRY;
--                    vio->io_req.state = STATE_IOREQ_NONE;
-+                    vio->req.state = STATE_IOREQ_NONE;
-                     break;
-                 }
- 
-@@ -316,7 +316,7 @@ static int hvmemul_do_io(
-                 if ( dir == IOREQ_READ )
-                 {
-                     rc = hvm_process_io_intercept(&ioreq_server_handler, &p);
--                    vio->io_req.state = STATE_IOREQ_NONE;
-+                    vio->req.state = STATE_IOREQ_NONE;
-                     break;
-                 }
-             }
-@@ -329,14 +329,14 @@ static int hvmemul_do_io(
-         if ( !s )
-         {
-             rc = hvm_process_io_intercept(&null_handler, &p);
--            vio->io_req.state = STATE_IOREQ_NONE;
-+            vio->req.state = STATE_IOREQ_NONE;
-         }
-         else
-         {
-             rc = hvm_send_ioreq(s, &p, 0);
-             if ( rc != X86EMUL_RETRY || currd->is_shutting_down )
--                vio->io_req.state = STATE_IOREQ_NONE;
--            else if ( !ioreq_needs_completion(&vio->io_req) )
-+                vio->req.state = STATE_IOREQ_NONE;
-+            else if ( !ioreq_needs_completion(&vio->req) )
-                 rc = X86EMUL_OKAY;
-         }
-         break;
-@@ -1005,14 +1005,14 @@ static int hvmemul_phys_mmio_access(
-  * cache indexed by linear MMIO address.
-  */
- static struct hvm_mmio_cache *hvmemul_find_mmio_cache(
--    struct hvm_vcpu_io *vio, unsigned long gla, uint8_t dir, bool create)
-+    struct hvm_vcpu_io *hvio, unsigned long gla, uint8_t dir, bool create)
- {
-     unsigned int i;
-     struct hvm_mmio_cache *cache;
- 
--    for ( i = 0; i < vio->mmio_cache_count; i ++ )
-+    for ( i = 0; i < hvio->mmio_cache_count; i ++ )
-     {
--        cache = &vio->mmio_cache[i];
-+        cache = &hvio->mmio_cache[i];
- 
-         if ( gla == cache->gla &&
-              dir == cache->dir )
-@@ -1022,13 +1022,13 @@ static struct hvm_mmio_cache *hvmemul_find_mmio_cache(
-     if ( !create )
-         return NULL;
- 
--    i = vio->mmio_cache_count;
--    if( i == ARRAY_SIZE(vio->mmio_cache) )
-+    i = hvio->mmio_cache_count;
-+    if( i == ARRAY_SIZE(hvio->mmio_cache) )
-         return NULL;
- 
--    ++vio->mmio_cache_count;
-+    ++hvio->mmio_cache_count;
- 
--    cache = &vio->mmio_cache[i];
-+    cache = &hvio->mmio_cache[i];
-     memset(cache, 0, sizeof (*cache));
- 
-     cache->gla = gla;
-@@ -1037,26 +1037,26 @@ static struct hvm_mmio_cache *hvmemul_find_mmio_cache(
-     return cache;
- }
- 
--static void latch_linear_to_phys(struct hvm_vcpu_io *vio, unsigned long gla,
-+static void latch_linear_to_phys(struct hvm_vcpu_io *hvio, unsigned long gla,
-                                  unsigned long gpa, bool_t write)
- {
--    if ( vio->mmio_access.gla_valid )
-+    if ( hvio->mmio_access.gla_valid )
-         return;
- 
--    vio->mmio_gla = gla & PAGE_MASK;
--    vio->mmio_gpfn = PFN_DOWN(gpa);
--    vio->mmio_access = (struct npfec){ .gla_valid = 1,
--                                       .read_access = 1,
--                                       .write_access = write };
-+    hvio->mmio_gla = gla & PAGE_MASK;
-+    hvio->mmio_gpfn = PFN_DOWN(gpa);
-+    hvio->mmio_access = (struct npfec){ .gla_valid = 1,
-+                                        .read_access = 1,
-+                                        .write_access = write };
- }
- 
- static int hvmemul_linear_mmio_access(
-     unsigned long gla, unsigned int size, uint8_t dir, void *buffer,
-     uint32_t pfec, struct hvm_emulate_ctxt *hvmemul_ctxt, bool_t known_gpfn)
- {
--    struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-     unsigned long offset = gla & ~PAGE_MASK;
--    struct hvm_mmio_cache *cache = hvmemul_find_mmio_cache(vio, gla, dir, true);
-+    struct hvm_mmio_cache *cache = hvmemul_find_mmio_cache(hvio, gla, dir, true);
-     unsigned int chunk, buffer_offset = 0;
-     paddr_t gpa;
-     unsigned long one_rep = 1;
-@@ -1068,7 +1068,7 @@ static int hvmemul_linear_mmio_access(
-     chunk = min_t(unsigned int, size, PAGE_SIZE - offset);
- 
-     if ( known_gpfn )
--        gpa = pfn_to_paddr(vio->mmio_gpfn) | offset;
-+        gpa = pfn_to_paddr(hvio->mmio_gpfn) | offset;
-     else
-     {
-         rc = hvmemul_linear_to_phys(gla, &gpa, chunk, &one_rep, pfec,
-@@ -1076,7 +1076,7 @@ static int hvmemul_linear_mmio_access(
-         if ( rc != X86EMUL_OKAY )
-             return rc;
- 
--        latch_linear_to_phys(vio, gla, gpa, dir == IOREQ_WRITE);
-+        latch_linear_to_phys(hvio, gla, gpa, dir == IOREQ_WRITE);
-     }
- 
-     for ( ;; )
-@@ -1122,22 +1122,22 @@ static inline int hvmemul_linear_mmio_write(
- 
- static bool known_gla(unsigned long addr, unsigned int bytes, uint32_t pfec)
- {
--    const struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
-+    const struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
- 
-     if ( pfec & PFEC_write_access )
-     {
--        if ( !vio->mmio_access.write_access )
-+        if ( !hvio->mmio_access.write_access )
-             return false;
-     }
-     else if ( pfec & PFEC_insn_fetch )
-     {
--        if ( !vio->mmio_access.insn_fetch )
-+        if ( !hvio->mmio_access.insn_fetch )
-             return false;
-     }
--    else if ( !vio->mmio_access.read_access )
-+    else if ( !hvio->mmio_access.read_access )
-             return false;
- 
--    return (vio->mmio_gla == (addr & PAGE_MASK) &&
-+    return (hvio->mmio_gla == (addr & PAGE_MASK) &&
-             (addr & ~PAGE_MASK) + bytes <= PAGE_SIZE);
- }
- 
-@@ -1145,7 +1145,7 @@ static int linear_read(unsigned long addr, unsigned int bytes, void *p_data,
-                        uint32_t pfec, struct hvm_emulate_ctxt *hvmemul_ctxt)
- {
-     pagefault_info_t pfinfo;
--    struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-     unsigned int offset = addr & ~PAGE_MASK;
-     int rc = HVMTRANS_bad_gfn_to_mfn;
- 
-@@ -1167,7 +1167,7 @@ static int linear_read(unsigned long addr, unsigned int bytes, void *p_data,
-      * we handle this access in the same way to guarantee completion and hence
-      * clean up any interim state.
+     if ( foreigndom == DOMID_XEN )
+@@ -2635,7 +2638,7 @@ static int p2m_add_foreign(struct domain *tdom, unsigned long fgfn,
+      * will update the m2p table which will result in  mfn -> gpfn of dom0
+      * and not fgfn of domU.
       */
--    if ( !hvmemul_find_mmio_cache(vio, addr, IOREQ_READ, false) )
-+    if ( !hvmemul_find_mmio_cache(hvio, addr, IOREQ_READ, false) )
-         rc = hvm_copy_from_guest_linear(p_data, addr, bytes, pfec, &pfinfo);
- 
-     switch ( rc )
-@@ -1200,7 +1200,7 @@ static int linear_write(unsigned long addr, unsigned int bytes, void *p_data,
-                         uint32_t pfec, struct hvm_emulate_ctxt *hvmemul_ctxt)
- {
-     pagefault_info_t pfinfo;
--    struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-     unsigned int offset = addr & ~PAGE_MASK;
-     int rc = HVMTRANS_bad_gfn_to_mfn;
- 
-@@ -1222,7 +1222,7 @@ static int linear_write(unsigned long addr, unsigned int bytes, void *p_data,
-      * we handle this access in the same way to guarantee completion and hence
-      * clean up any interim state.
-      */
--    if ( !hvmemul_find_mmio_cache(vio, addr, IOREQ_WRITE, false) )
-+    if ( !hvmemul_find_mmio_cache(hvio, addr, IOREQ_WRITE, false) )
-         rc = hvm_copy_to_guest_linear(addr, p_data, bytes, pfec, &pfinfo);
- 
-     switch ( rc )
-@@ -1599,7 +1599,7 @@ static int hvmemul_cmpxchg(
-     struct vcpu *curr = current;
-     unsigned long addr;
-     uint32_t pfec = PFEC_page_present | PFEC_write_access;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
+-    rc = set_foreign_p2m_entry(tdom, gpfn, mfn);
++    rc = set_foreign_p2m_entry(tdom, fdom, gpfn, mfn);
+     if ( rc )
+         gdprintk(XENLOG_WARNING, "set_foreign_p2m_entry failed. "
+                  "gpfn:%lx mfn:%lx fgfn:%lx td:%d fd:%d\n",
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 66828d9..d625a9b 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1138,12 +1138,7 @@ static int acquire_resource(
+     xen_pfn_t mfn_list[32];
      int rc;
-     void *mapping = NULL;
  
-@@ -1625,8 +1625,8 @@ static int hvmemul_cmpxchg(
-         /* Fix this in case the guest is really relying on r-m-w atomicity. */
-         return hvmemul_linear_mmio_write(addr, bytes, p_new, pfec,
-                                          hvmemul_ctxt,
--                                         vio->mmio_access.write_access &&
--                                         vio->mmio_gla == (addr & PAGE_MASK));
-+                                         hvio->mmio_access.write_access &&
-+                                         hvio->mmio_gla == (addr & PAGE_MASK));
-     }
+-    /*
+-     * FIXME: Until foreign pages inserted into the P2M are properly
+-     *        reference counted, it is unsafe to allow mapping of
+-     *        resource pages unless the caller is the hardware domain.
+-     */
+-    if ( paging_mode_translate(currd) && !is_hardware_domain(currd) )
++    if ( !arch_acquire_resource_check(currd) )
+         return -EACCES;
  
-     switch ( bytes )
-@@ -1823,7 +1823,7 @@ static int hvmemul_rep_movs(
-     struct hvm_emulate_ctxt *hvmemul_ctxt =
-         container_of(ctxt, struct hvm_emulate_ctxt, ctxt);
-     struct vcpu *curr = current;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-     unsigned long saddr, daddr, bytes;
-     paddr_t sgpa, dgpa;
-     uint32_t pfec = PFEC_page_present;
-@@ -1846,18 +1846,18 @@ static int hvmemul_rep_movs(
-     if ( hvmemul_ctxt->seg_reg[x86_seg_ss].dpl == 3 )
-         pfec |= PFEC_user_mode;
+     if ( copy_from_guest(&xmar, arg, 1) )
+@@ -1211,7 +1206,7 @@ static int acquire_resource(
  
--    if ( vio->mmio_access.read_access &&
--         (vio->mmio_gla == (saddr & PAGE_MASK)) &&
-+    if ( hvio->mmio_access.read_access &&
-+         (hvio->mmio_gla == (saddr & PAGE_MASK)) &&
-          /*
-           * Upon initial invocation don't truncate large batches just because
-           * of a hit for the translation: Doing the guest page table walk is
-           * cheaper than multiple round trips through the device model. Yet
-           * when processing a response we can always re-use the translation.
-           */
--         (vio->io_req.state == STATE_IORESP_READY ||
-+         (curr->io.req.state == STATE_IORESP_READY ||
-           ((!df || *reps == 1) &&
-            PAGE_SIZE - (saddr & ~PAGE_MASK) >= *reps * bytes_per_rep)) )
--        sgpa = pfn_to_paddr(vio->mmio_gpfn) | (saddr & ~PAGE_MASK);
-+        sgpa = pfn_to_paddr(hvio->mmio_gpfn) | (saddr & ~PAGE_MASK);
-     else
-     {
-         rc = hvmemul_linear_to_phys(saddr, &sgpa, bytes_per_rep, reps, pfec,
-@@ -1867,13 +1867,13 @@ static int hvmemul_rep_movs(
-     }
+         for ( i = 0; !rc && i < xmar.nr_frames; i++ )
+         {
+-            rc = set_foreign_p2m_entry(currd, gfn_list[i],
++            rc = set_foreign_p2m_entry(currd, d, gfn_list[i],
+                                        _mfn(mfn_list[i]));
+             /* rc should be -EIO for any iteration other than the first */
+             if ( rc && i )
+diff --git a/xen/include/asm-arm/p2m.h b/xen/include/asm-arm/p2m.h
+index 28ca9a8..4f8b3b0 100644
+--- a/xen/include/asm-arm/p2m.h
++++ b/xen/include/asm-arm/p2m.h
+@@ -161,6 +161,15 @@ typedef enum {
+ #endif
+ #include <xen/p2m-common.h>
  
-     bytes = PAGE_SIZE - (daddr & ~PAGE_MASK);
--    if ( vio->mmio_access.write_access &&
--         (vio->mmio_gla == (daddr & PAGE_MASK)) &&
-+    if ( hvio->mmio_access.write_access &&
-+         (hvio->mmio_gla == (daddr & PAGE_MASK)) &&
-          /* See comment above. */
--         (vio->io_req.state == STATE_IORESP_READY ||
-+         (curr->io.req.state == STATE_IORESP_READY ||
-           ((!df || *reps == 1) &&
-            PAGE_SIZE - (daddr & ~PAGE_MASK) >= *reps * bytes_per_rep)) )
--        dgpa = pfn_to_paddr(vio->mmio_gpfn) | (daddr & ~PAGE_MASK);
-+        dgpa = pfn_to_paddr(hvio->mmio_gpfn) | (daddr & ~PAGE_MASK);
-     else
-     {
-         rc = hvmemul_linear_to_phys(daddr, &dgpa, bytes_per_rep, reps,
-@@ -1892,14 +1892,14 @@ static int hvmemul_rep_movs(
++static inline bool arch_acquire_resource_check(struct domain *d)
++{
++    /*
++     * The reference counting of foreign entries in set_foreign_p2m_entry()
++     * is supported on Arm.
++     */
++    return true;
++}
++
+ static inline
+ void p2m_altp2m_check(struct vcpu *v, uint16_t idx)
+ {
+@@ -392,16 +401,6 @@ static inline gfn_t gfn_next_boundary(gfn_t gfn, unsigned int order)
+     return gfn_add(gfn, 1UL << order);
+ }
  
-     if ( sp2mt == p2m_mmio_dm )
-     {
--        latch_linear_to_phys(vio, saddr, sgpa, 0);
-+        latch_linear_to_phys(hvio, saddr, sgpa, 0);
-         return hvmemul_do_mmio_addr(
-             sgpa, reps, bytes_per_rep, IOREQ_READ, df, dgpa);
-     }
- 
-     if ( dp2mt == p2m_mmio_dm )
-     {
--        latch_linear_to_phys(vio, daddr, dgpa, 1);
-+        latch_linear_to_phys(hvio, daddr, dgpa, 1);
-         return hvmemul_do_mmio_addr(
-             dgpa, reps, bytes_per_rep, IOREQ_WRITE, df, sgpa);
-     }
-@@ -1992,7 +1992,7 @@ static int hvmemul_rep_stos(
-     struct hvm_emulate_ctxt *hvmemul_ctxt =
-         container_of(ctxt, struct hvm_emulate_ctxt, ctxt);
-     struct vcpu *curr = current;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-     unsigned long addr, bytes;
-     paddr_t gpa;
-     p2m_type_t p2mt;
-@@ -2004,13 +2004,13 @@ static int hvmemul_rep_stos(
-         return rc;
- 
-     bytes = PAGE_SIZE - (addr & ~PAGE_MASK);
--    if ( vio->mmio_access.write_access &&
--         (vio->mmio_gla == (addr & PAGE_MASK)) &&
-+    if ( hvio->mmio_access.write_access &&
-+         (hvio->mmio_gla == (addr & PAGE_MASK)) &&
-          /* See respective comment in MOVS processing. */
--         (vio->io_req.state == STATE_IORESP_READY ||
-+         (curr->io.req.state == STATE_IORESP_READY ||
-           ((!df || *reps == 1) &&
-            PAGE_SIZE - (addr & ~PAGE_MASK) >= *reps * bytes_per_rep)) )
--        gpa = pfn_to_paddr(vio->mmio_gpfn) | (addr & ~PAGE_MASK);
-+        gpa = pfn_to_paddr(hvio->mmio_gpfn) | (addr & ~PAGE_MASK);
-     else
-     {
-         uint32_t pfec = PFEC_page_present | PFEC_write_access;
-@@ -2103,7 +2103,7 @@ static int hvmemul_rep_stos(
-         return X86EMUL_UNHANDLEABLE;
- 
-     case p2m_mmio_dm:
--        latch_linear_to_phys(vio, addr, gpa, 1);
-+        latch_linear_to_phys(hvio, addr, gpa, 1);
-         return hvmemul_do_mmio_buffer(gpa, reps, bytes_per_rep, IOREQ_WRITE, df,
-                                       p_data);
-     }
-@@ -2613,18 +2613,18 @@ static const struct x86_emulate_ops hvm_emulate_ops_no_write = {
- };
- 
+-static inline int set_foreign_p2m_entry(struct domain *d, unsigned long gfn,
+-                                        mfn_t mfn)
+-{
+-    /*
+-     * NOTE: If this is implemented then proper reference counting of
+-     *       foreign entries will need to be implemented.
+-     */
+-    return -EOPNOTSUPP;
+-}
+-
  /*
-- * Note that passing HVMIO_no_completion into this function serves as kind
-+ * Note that passing VIO_no_completion into this function serves as kind
-  * of (but not fully) an "auto select completion" indicator.  When there's
-  * no completion needed, the passed in value will be ignored in any case.
+  * A vCPU has cache enabled only when the MMU is enabled and data cache
+  * is enabled.
+diff --git a/xen/include/asm-x86/p2m.h b/xen/include/asm-x86/p2m.h
+index 7df2878..1d64c12 100644
+--- a/xen/include/asm-x86/p2m.h
++++ b/xen/include/asm-x86/p2m.h
+@@ -382,6 +382,22 @@ struct p2m_domain {
+ #endif
+ #include <xen/p2m-common.h>
+ 
++static inline bool arch_acquire_resource_check(struct domain *d)
++{
++    /*
++     * The reference counting of foreign entries in set_foreign_p2m_entry()
++     * is not supported for translated domains on x86.
++     *
++     * FIXME: Until foreign pages inserted into the P2M are properly
++     * reference counted, it is unsafe to allow mapping of
++     * resource pages unless the caller is the hardware domain.
++     */
++    if ( paging_mode_translate(d) && !is_hardware_domain(d) )
++        return false;
++
++    return true;
++}
++
+ /*
+  * Updates vCPU's n2pm to match its np2m_base in VMCx12 and returns that np2m.
   */
- static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
-     const struct x86_emulate_ops *ops,
--    enum hvm_io_completion completion)
-+    enum vio_completion completion)
- {
-     const struct cpu_user_regs *regs = hvmemul_ctxt->ctxt.regs;
-     struct vcpu *curr = current;
-     uint32_t new_intr_shadow;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-     int rc;
+@@ -647,9 +663,6 @@ int p2m_finish_type_change(struct domain *d,
+ int p2m_is_logdirty_range(struct p2m_domain *, unsigned long start,
+                           unsigned long end);
  
-     /*
-@@ -2632,45 +2632,45 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
-      * untouched if it's already enabled, for re-execution to consume
-      * entries populated by an earlier pass.
-      */
--    if ( vio->cache->num_ents > vio->cache->max_ents )
-+    if ( hvio->cache->num_ents > hvio->cache->max_ents )
-     {
--        ASSERT(vio->io_req.state == STATE_IOREQ_NONE);
--        vio->cache->num_ents = 0;
-+        ASSERT(curr->io.req.state == STATE_IOREQ_NONE);
-+        hvio->cache->num_ents = 0;
-     }
-     else
--        ASSERT(vio->io_req.state == STATE_IORESP_READY);
-+        ASSERT(curr->io.req.state == STATE_IORESP_READY);
- 
--    hvm_emulate_init_per_insn(hvmemul_ctxt, vio->mmio_insn,
--                              vio->mmio_insn_bytes);
-+    hvm_emulate_init_per_insn(hvmemul_ctxt, hvio->mmio_insn,
-+                              hvio->mmio_insn_bytes);
- 
--    vio->mmio_retry = 0;
-+    hvio->mmio_retry = 0;
- 
-     rc = x86_emulate(&hvmemul_ctxt->ctxt, ops);
--    if ( rc == X86EMUL_OKAY && vio->mmio_retry )
-+    if ( rc == X86EMUL_OKAY && hvio->mmio_retry )
-         rc = X86EMUL_RETRY;
- 
--    if ( !ioreq_needs_completion(&vio->io_req) )
--        completion = HVMIO_no_completion;
--    else if ( completion == HVMIO_no_completion )
--        completion = (vio->io_req.type != IOREQ_TYPE_PIO ||
--                      hvmemul_ctxt->is_mem_access) ? HVMIO_mmio_completion
--                                                   : HVMIO_pio_completion;
-+    if ( !ioreq_needs_completion(&curr->io.req) )
-+        completion = VIO_no_completion;
-+    else if ( completion == VIO_no_completion )
-+        completion = (curr->io.req.type != IOREQ_TYPE_PIO ||
-+                      hvmemul_ctxt->is_mem_access) ? VIO_mmio_completion
-+                                                   : VIO_pio_completion;
- 
--    switch ( vio->io_completion = completion )
-+    switch ( curr->io.completion = completion )
-     {
--    case HVMIO_no_completion:
--    case HVMIO_pio_completion:
--        vio->mmio_cache_count = 0;
--        vio->mmio_insn_bytes = 0;
--        vio->mmio_access = (struct npfec){};
-+    case VIO_no_completion:
-+    case VIO_pio_completion:
-+        hvio->mmio_cache_count = 0;
-+        hvio->mmio_insn_bytes = 0;
-+        hvio->mmio_access = (struct npfec){};
-         hvmemul_cache_disable(curr);
-         break;
- 
--    case HVMIO_mmio_completion:
--    case HVMIO_realmode_completion:
--        BUILD_BUG_ON(sizeof(vio->mmio_insn) < sizeof(hvmemul_ctxt->insn_buf));
--        vio->mmio_insn_bytes = hvmemul_ctxt->insn_buf_bytes;
--        memcpy(vio->mmio_insn, hvmemul_ctxt->insn_buf, vio->mmio_insn_bytes);
-+    case VIO_mmio_completion:
-+    case VIO_realmode_completion:
-+        BUILD_BUG_ON(sizeof(hvio->mmio_insn) < sizeof(hvmemul_ctxt->insn_buf));
-+        hvio->mmio_insn_bytes = hvmemul_ctxt->insn_buf_bytes;
-+        memcpy(hvio->mmio_insn, hvmemul_ctxt->insn_buf, hvio->mmio_insn_bytes);
-         break;
- 
-     default:
-@@ -2716,7 +2716,7 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
- 
- int hvm_emulate_one(
-     struct hvm_emulate_ctxt *hvmemul_ctxt,
--    enum hvm_io_completion completion)
-+    enum vio_completion completion)
- {
-     return _hvm_emulate_one(hvmemul_ctxt, &hvm_emulate_ops, completion);
- }
-@@ -2754,7 +2754,7 @@ int hvm_emulate_one_mmio(unsigned long mfn, unsigned long gla)
-                           guest_cpu_user_regs());
-     ctxt.ctxt.data = &mmio_ro_ctxt;
- 
--    switch ( rc = _hvm_emulate_one(&ctxt, ops, HVMIO_no_completion) )
-+    switch ( rc = _hvm_emulate_one(&ctxt, ops, VIO_no_completion) )
-     {
-     case X86EMUL_UNHANDLEABLE:
-     case X86EMUL_UNIMPLEMENTED:
-@@ -2782,28 +2782,28 @@ void hvm_emulate_one_vm_event(enum emul_kind kind, unsigned int trapnr,
-     {
-     case EMUL_KIND_NOWRITE:
-         rc = _hvm_emulate_one(&ctx, &hvm_emulate_ops_no_write,
--                              HVMIO_no_completion);
-+                              VIO_no_completion);
-         break;
-     case EMUL_KIND_SET_CONTEXT_INSN: {
-         struct vcpu *curr = current;
--        struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+        struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
- 
--        BUILD_BUG_ON(sizeof(vio->mmio_insn) !=
-+        BUILD_BUG_ON(sizeof(hvio->mmio_insn) !=
-                      sizeof(curr->arch.vm_event->emul.insn.data));
--        ASSERT(!vio->mmio_insn_bytes);
-+        ASSERT(!hvio->mmio_insn_bytes);
- 
-         /*
-          * Stash insn buffer into mmio buffer here instead of ctx
-          * to avoid having to add more logic to hvm_emulate_one.
-          */
--        vio->mmio_insn_bytes = sizeof(vio->mmio_insn);
--        memcpy(vio->mmio_insn, curr->arch.vm_event->emul.insn.data,
--               vio->mmio_insn_bytes);
-+        hvio->mmio_insn_bytes = sizeof(hvio->mmio_insn);
-+        memcpy(hvio->mmio_insn, curr->arch.vm_event->emul.insn.data,
-+               hvio->mmio_insn_bytes);
-     }
-     /* Fall-through */
-     default:
-         ctx.set_context = (kind == EMUL_KIND_SET_CONTEXT_DATA);
--        rc = hvm_emulate_one(&ctx, HVMIO_no_completion);
-+        rc = hvm_emulate_one(&ctx, VIO_no_completion);
-     }
- 
-     switch ( rc )
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index bc96947..4ed929c 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -3800,7 +3800,7 @@ void hvm_ud_intercept(struct cpu_user_regs *regs)
-         return;
-     }
- 
--    switch ( hvm_emulate_one(&ctxt, HVMIO_no_completion) )
-+    switch ( hvm_emulate_one(&ctxt, VIO_no_completion) )
-     {
-     case X86EMUL_UNHANDLEABLE:
-     case X86EMUL_UNIMPLEMENTED:
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index ef8286b..dd733e1 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -85,7 +85,7 @@ bool hvm_emulate_one_insn(hvm_emulate_validate_t *validate, const char *descr)
- 
-     hvm_emulate_init_once(&ctxt, validate, guest_cpu_user_regs());
- 
--    switch ( rc = hvm_emulate_one(&ctxt, HVMIO_no_completion) )
-+    switch ( rc = hvm_emulate_one(&ctxt, VIO_no_completion) )
-     {
-     case X86EMUL_UNHANDLEABLE:
-         hvm_dump_emulation_state(XENLOG_G_WARNING, descr, &ctxt, rc);
-@@ -109,20 +109,20 @@ bool hvm_emulate_one_insn(hvm_emulate_validate_t *validate, const char *descr)
- bool handle_mmio_with_translation(unsigned long gla, unsigned long gpfn,
-                                   struct npfec access)
- {
--    struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
- 
--    vio->mmio_access = access.gla_valid &&
--                       access.kind == npfec_kind_with_gla
--                       ? access : (struct npfec){};
--    vio->mmio_gla = gla & PAGE_MASK;
--    vio->mmio_gpfn = gpfn;
-+    hvio->mmio_access = access.gla_valid &&
-+                        access.kind == npfec_kind_with_gla
-+                        ? access : (struct npfec){};
-+    hvio->mmio_gla = gla & PAGE_MASK;
-+    hvio->mmio_gpfn = gpfn;
-     return handle_mmio();
- }
- 
- bool handle_pio(uint16_t port, unsigned int size, int dir)
- {
-     struct vcpu *curr = current;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct vcpu_io *vio = &curr->io;
-     unsigned int data;
-     int rc;
- 
-@@ -135,8 +135,8 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
- 
-     rc = hvmemul_do_pio_buffer(port, size, dir, &data);
- 
--    if ( ioreq_needs_completion(&vio->io_req) )
--        vio->io_completion = HVMIO_pio_completion;
-+    if ( ioreq_needs_completion(&vio->req) )
-+        vio->completion = VIO_pio_completion;
- 
-     switch ( rc )
-     {
-@@ -175,7 +175,7 @@ static bool_t g2m_portio_accept(const struct hvm_io_handler *handler,
- {
-     struct vcpu *curr = current;
-     const struct hvm_domain *hvm = &curr->domain->arch.hvm;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-     struct g2m_ioport *g2m_ioport;
-     unsigned int start, end;
- 
-@@ -185,7 +185,7 @@ static bool_t g2m_portio_accept(const struct hvm_io_handler *handler,
-         end = start + g2m_ioport->np;
-         if ( (p->addr >= start) && (p->addr + p->size <= end) )
-         {
--            vio->g2m_ioport = g2m_ioport;
-+            hvio->g2m_ioport = g2m_ioport;
-             return 1;
-         }
-     }
-@@ -196,8 +196,8 @@ static bool_t g2m_portio_accept(const struct hvm_io_handler *handler,
- static int g2m_portio_read(const struct hvm_io_handler *handler,
-                            uint64_t addr, uint32_t size, uint64_t *data)
- {
--    struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
--    const struct g2m_ioport *g2m_ioport = vio->g2m_ioport;
-+    struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-+    const struct g2m_ioport *g2m_ioport = hvio->g2m_ioport;
-     unsigned int mport = (addr - g2m_ioport->gport) + g2m_ioport->mport;
- 
-     switch ( size )
-@@ -221,8 +221,8 @@ static int g2m_portio_read(const struct hvm_io_handler *handler,
- static int g2m_portio_write(const struct hvm_io_handler *handler,
-                             uint64_t addr, uint32_t size, uint64_t data)
- {
--    struct hvm_vcpu_io *vio = &current->arch.hvm.hvm_io;
--    const struct g2m_ioport *g2m_ioport = vio->g2m_ioport;
-+    struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-+    const struct g2m_ioport *g2m_ioport = hvio->g2m_ioport;
-     unsigned int mport = (addr - g2m_ioport->gport) + g2m_ioport->mport;
- 
-     switch ( size )
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 8393922..c00ee8e 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -40,11 +40,11 @@ bool arch_ioreq_complete_mmio(void)
-     return handle_mmio();
- }
- 
--bool arch_vcpu_ioreq_completion(enum hvm_io_completion io_completion)
-+bool arch_vcpu_ioreq_completion(enum vio_completion completion)
- {
--    switch ( io_completion )
-+    switch ( completion )
-     {
--    case HVMIO_realmode_completion:
-+    case VIO_realmode_completion:
-     {
-         struct hvm_emulate_ctxt ctxt;
- 
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index fcfccf7..6d90630 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1266,7 +1266,7 @@ enum hvm_intblk nsvm_intr_blocked(struct vcpu *v)
-          * Delay the injection because this would result in delivering
-          * an interrupt *within* the execution of an instruction.
-          */
--        if ( v->arch.hvm.hvm_io.io_req.state != STATE_IOREQ_NONE )
-+        if ( v->io.req.state != STATE_IOREQ_NONE )
-             return hvm_intblk_shadow;
- 
-         if ( !nv->nv_vmexit_pending && n2vmcb->exit_int_info.v )
-diff --git a/xen/arch/x86/hvm/vmx/realmode.c b/xen/arch/x86/hvm/vmx/realmode.c
-index 768f01e..cc23afa 100644
---- a/xen/arch/x86/hvm/vmx/realmode.c
-+++ b/xen/arch/x86/hvm/vmx/realmode.c
-@@ -101,7 +101,7 @@ void vmx_realmode_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt)
- 
-     perfc_incr(realmode_emulations);
- 
--    rc = hvm_emulate_one(hvmemul_ctxt, HVMIO_realmode_completion);
-+    rc = hvm_emulate_one(hvmemul_ctxt, VIO_realmode_completion);
- 
-     if ( rc == X86EMUL_UNHANDLEABLE )
-     {
-@@ -153,7 +153,7 @@ void vmx_realmode(struct cpu_user_regs *regs)
-     struct vcpu *curr = current;
-     struct hvm_emulate_ctxt hvmemul_ctxt;
-     struct segment_register *sreg;
--    struct hvm_vcpu_io *vio = &curr->arch.hvm.hvm_io;
-+    struct hvm_vcpu_io *hvio = &curr->arch.hvm.hvm_io;
-     unsigned long intr_info;
-     unsigned int emulations = 0;
- 
-@@ -188,7 +188,7 @@ void vmx_realmode(struct cpu_user_regs *regs)
- 
-         vmx_realmode_emulate_one(&hvmemul_ctxt);
- 
--        if ( vio->io_req.state != STATE_IOREQ_NONE || vio->mmio_retry )
-+        if ( curr->io.req.state != STATE_IOREQ_NONE || hvio->mmio_retry )
-             break;
- 
-         /* Stop emulating unless our segment state is not safe */
-@@ -202,7 +202,7 @@ void vmx_realmode(struct cpu_user_regs *regs)
-     }
- 
-     /* Need to emulate next time if we've started an IO operation */
--    if ( vio->io_req.state != STATE_IOREQ_NONE )
-+    if ( curr->io.req.state != STATE_IOREQ_NONE )
-         curr->arch.hvm.vmx.vmx_emulate = 1;
- 
-     if ( !curr->arch.hvm.vmx.vmx_emulate && !curr->arch.hvm.vmx.vmx_realmode )
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index 72b5da0..273683f 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -159,7 +159,7 @@ static bool hvm_wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
-         break;
-     }
- 
--    p = &sv->vcpu->arch.hvm.hvm_io.io_req;
-+    p = &sv->vcpu->io.req;
-     if ( ioreq_needs_completion(p) )
-         p->data = data;
- 
-@@ -171,10 +171,10 @@ static bool hvm_wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
- bool handle_hvm_io_completion(struct vcpu *v)
- {
-     struct domain *d = v->domain;
--    struct hvm_vcpu_io *vio = &v->arch.hvm.hvm_io;
-+    struct vcpu_io *vio = &v->io;
-     struct ioreq_server *s;
-     struct ioreq_vcpu *sv;
--    enum hvm_io_completion io_completion;
-+    enum vio_completion completion;
- 
-     if ( has_vpci(d) && vpci_process_pending(v) )
-     {
-@@ -186,29 +186,29 @@ bool handle_hvm_io_completion(struct vcpu *v)
-     if ( sv && !hvm_wait_for_io(sv, get_ioreq(s, v)) )
-         return false;
- 
--    vio->io_req.state = ioreq_needs_completion(&vio->io_req) ?
-+    vio->req.state = ioreq_needs_completion(&vio->req) ?
-         STATE_IORESP_READY : STATE_IOREQ_NONE;
- 
-     msix_write_completion(v);
-     vcpu_end_shutdown_deferral(v);
- 
--    io_completion = vio->io_completion;
--    vio->io_completion = HVMIO_no_completion;
-+    completion = vio->completion;
-+    vio->completion = VIO_no_completion;
- 
--    switch ( io_completion )
-+    switch ( completion )
-     {
--    case HVMIO_no_completion:
-+    case VIO_no_completion:
-         break;
- 
--    case HVMIO_mmio_completion:
-+    case VIO_mmio_completion:
-         return arch_ioreq_complete_mmio();
- 
--    case HVMIO_pio_completion:
--        return handle_pio(vio->io_req.addr, vio->io_req.size,
--                          vio->io_req.dir);
-+    case VIO_pio_completion:
-+        return handle_pio(vio->req.addr, vio->req.size,
-+                          vio->req.dir);
- 
-     default:
--        return arch_vcpu_ioreq_completion(io_completion);
-+        return arch_vcpu_ioreq_completion(completion);
-     }
- 
-     return true;
-diff --git a/xen/include/asm-x86/hvm/emulate.h b/xen/include/asm-x86/hvm/emulate.h
-index 1620cc7..610078b 100644
---- a/xen/include/asm-x86/hvm/emulate.h
-+++ b/xen/include/asm-x86/hvm/emulate.h
-@@ -65,7 +65,7 @@ bool __nonnull(1, 2) hvm_emulate_one_insn(
-     const char *descr);
- int hvm_emulate_one(
-     struct hvm_emulate_ctxt *hvmemul_ctxt,
--    enum hvm_io_completion completion);
-+    enum vio_completion completion);
- void hvm_emulate_one_vm_event(enum emul_kind kind,
-     unsigned int trapnr,
-     unsigned int errcode);
-diff --git a/xen/include/asm-x86/hvm/vcpu.h b/xen/include/asm-x86/hvm/vcpu.h
-index 6c1feda..8adf455 100644
---- a/xen/include/asm-x86/hvm/vcpu.h
-+++ b/xen/include/asm-x86/hvm/vcpu.h
-@@ -28,13 +28,6 @@
- #include <asm/mtrr.h>
- #include <public/hvm/ioreq.h>
- 
--enum hvm_io_completion {
--    HVMIO_no_completion,
--    HVMIO_mmio_completion,
--    HVMIO_pio_completion,
--    HVMIO_realmode_completion
--};
+-/* Set foreign entry in the p2m table (for priv-mapping) */
+-int set_foreign_p2m_entry(struct domain *d, unsigned long gfn, mfn_t mfn);
 -
- struct hvm_vcpu_asid {
-     uint64_t generation;
-     uint32_t asid;
-@@ -52,10 +45,6 @@ struct hvm_mmio_cache {
- };
+ /* Set mmio addresses in the p2m table (for pass-through) */
+ int set_mmio_p2m_entry(struct domain *d, gfn_t gfn, mfn_t mfn,
+                        unsigned int order);
+diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
+index 58031a6..b4bc709 100644
+--- a/xen/include/xen/p2m-common.h
++++ b/xen/include/xen/p2m-common.h
+@@ -3,6 +3,10 @@
  
- struct hvm_vcpu_io {
--    /* I/O request in flight to device model. */
--    enum hvm_io_completion io_completion;
--    ioreq_t                io_req;
--
-     /*
-      * HVM emulation:
-      *  Linear address @mmio_gla maps to MMIO physical frame @mmio_gpfn.
-diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index 7a90873..dffed60 100644
---- a/xen/include/xen/ioreq.h
-+++ b/xen/include/xen/ioreq.h
-@@ -105,7 +105,7 @@ void hvm_ioreq_init(struct domain *d);
- int ioreq_server_dm_op(struct xen_dm_op *op, struct domain *d, bool *const_op);
+ #include <xen/mm.h>
  
- bool arch_ioreq_complete_mmio(void);
--bool arch_vcpu_ioreq_completion(enum hvm_io_completion io_completion);
-+bool arch_vcpu_ioreq_completion(enum vio_completion completion);
- int arch_ioreq_server_map_pages(struct ioreq_server *s);
- void arch_ioreq_server_unmap_pages(struct ioreq_server *s);
- void arch_ioreq_server_enable(struct ioreq_server *s);
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index ad0d761..7aea2bb 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -147,6 +147,21 @@ void evtchn_destroy_final(struct domain *d); /* from complete_domain_destroy */
- 
- struct waitqueue_vcpu;
- 
-+enum vio_completion {
-+    VIO_no_completion,
-+    VIO_mmio_completion,
-+    VIO_pio_completion,
-+#ifdef CONFIG_X86
-+    VIO_realmode_completion,
-+#endif
-+};
++/* Set foreign entry in the p2m table */
++int set_foreign_p2m_entry(struct domain *d, const struct domain *fd,
++                          unsigned long gfn, mfn_t mfn);
 +
-+struct vcpu_io {
-+    /* I/O request in flight to device model. */
-+    enum vio_completion  completion;
-+    ioreq_t              req;
-+};
-+
- struct vcpu
- {
-     int              vcpu_id;
-@@ -258,6 +273,10 @@ struct vcpu
-     struct vpci_vcpu vpci;
- 
-     struct arch_vcpu arch;
-+
-+#ifdef CONFIG_IOREQ_SERVER
-+    struct vcpu_io io;
-+#endif
- };
- 
- struct sched_unit {
+ /* Remove a page from a domain's p2m table */
+ int __must_check
+ guest_physmap_remove_page(struct domain *d, gfn_t gfn, mfn_t mfn,
 -- 
 2.7.4
 
