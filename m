@@ -1,64 +1,48 @@
-Return-Path: <SRS0=O81L=GO=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=tjso=GP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82C22C433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEEFDC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 22:23:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44ED8223E0
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jan 2021 17:50:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44ED8223E0
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 598EB2312F
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 22:23:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 598EB2312F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65214.115578 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.66169.117424 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1KI-0005mm-Kw; Mon, 11 Jan 2021 17:49:58 +0000
+	id 1kzS4Z-0008Fw-HF; Tue, 12 Jan 2021 22:23:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65214.115578; Mon, 11 Jan 2021 17:49:58 +0000
+Received: by outflank-mailman (output) from mailman id 66169.117424; Tue, 12 Jan 2021 22:23:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kz1KI-0005mb-EJ; Mon, 11 Jan 2021 17:49:58 +0000
-Received: by outflank-mailman (input) for mailman id 65214;
- Mon, 11 Jan 2021 17:49:57 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CE/i=GO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1kz1G3-0002a6-4r
- for xen-devel@lists.xenproject.org; Mon, 11 Jan 2021 17:45:35 +0000
-Received: from mo4-p04-ob.smtp.rzone.de (unknown [85.215.255.123])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d6ff848c-c88a-4999-ba76-7e94e4cbaf3d;
- Mon, 11 Jan 2021 17:44:41 +0000 (UTC)
-Received: from aepfle.de by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHieM4G
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate)
- for <xen-devel@lists.xenproject.org>;
- Mon, 11 Jan 2021 18:44:40 +0100 (CET)
-Resent-From: Olaf Hering <olaf@aepfle.de>
-Resent-Date: Mon, 11 Jan 2021 18:44:35 +0100
-Resent-Message-ID: <X/yOg59L7nhXf8Dp@aepfle.de>
-Resent-To: xen-devel@lists.xenproject.org
-Received: from mo4-p01-ob.smtp.rzone.de ([85.215.255.50])
- by smtpin.rzone.de (RZmta 47.12.1 OK) with ESMTPS id p0905bx0BHgR53V
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client CN "*.smtp.rzone.de",
- Issuer "TeleSec ServerPass Class 2 CA" (verified OK (+EmiG)))
- (Client hostname verified OK) for <olaf@aepfle.de>;
- Mon, 11 Jan 2021 18:42:27 +0100 (CET)
-Received: from sender by smtp.strato.de (RZmta 47.12.1 SBL|AUTH)
- with ESMTPSA id h0968ex0BHgQM3E
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
- (Client did not present a certificate) for <olaf@aepfle.de>;
- Mon, 11 Jan 2021 18:42:26 +0100 (CET)
+	id 1kzS4Z-0008Fp-Dc; Tue, 12 Jan 2021 22:23:31 +0000
+Received: by outflank-mailman (input) for mailman id 66169;
+ Tue, 12 Jan 2021 22:23:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=OoN1=GP=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1kzS4X-0008Fk-Fu
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 22:23:29 +0000
+Received: from mail-wm1-x32b.google.com (unknown [2a00:1450:4864:20::32b])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d60577c6-a1b5-4951-85c6-9ee4d4ba5832;
+ Tue, 12 Jan 2021 22:23:28 +0000 (UTC)
+Received: by mail-wm1-x32b.google.com with SMTP id g8so3282746wme.1
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 14:23:28 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id n3sm6904166wrw.61.2021.01.12.14.23.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Jan 2021 14:23:26 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,155 +54,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6ff848c-c88a-4999-ba76-7e94e4cbaf3d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610387080;
-	s=strato-dkim-0002; d=aepfle.de;
-	h=Message-Id:Date:Subject:Cc:To:From:Resent-To:Resent-Date:
-	Resent-From:From:Subject:Sender;
-	bh=NEmS1FJ3QQ5M6GbPZXGsC+Wwr7yqBf8nvew/2n7hn90=;
-	b=FHVzGLRlSO1uOtemF1V8TsHjDfYP9Xin3c/TXQohdZx9XjMWwgFva7uS/bJdhROi0Z
-	GPVbUOYKYChoGDSK3XYViJKemwo0dr19dFQr/7Geq1uy8AC3hcCCPY/33+G0OkpI4ewh
-	cjCi5I/KUkU+hV9IexQbg5ZBJuAYwMUiBptaR2EggAt5aunF7Wl7NCRdi9gYmmAc/mVB
-	Q4ES+gYoNIkJdjlVywdnKyApXKnmet76hXtTqs5eWVTYGjq2dot+/rU72j5zDYJH+3KU
-	idfO1RpWUgtIonMcu8aJPln6umx2UhWMAteKQ5X/aAOJ6blNSy10DykzijHzf1AzO16q
-	iMCA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
-X-RZG-CLASS-ID: mo00
-X-Envelope-From: <olaf@aepfle.de>
-X-Envelope-To: <olaf@aepfle.de>
-X-Delivery-Time: 1610386947
-X-UID: 548955
-ARC-Seal: i=1; a=rsa-sha256; t=1610386947; cv=none;
-	d=strato.com; s=strato-dkim-0002;
-	b=ZN6w3DGowDncfW+DX05hm5s4uwWfsGfmBzlZ8Uj3u5si1sIx3h3maM2tEtpg767J3g
-	9RLmcO8v7qpqd74fnNjkMyzNs5tPxrxXg8Z5i4EmUSeAFwHv9fyVH780iwpFQcL1xU2L
-	jGMrU2oPy5reCyIv47sLLwudXyKMYqJGI9Eh7AsbEziTLqHZ5ruugD36iy9TyncWl5hZ
-	iBUYFTO6T1T5+4xgqAZUdm1vcdThxSuzW7CDHLvCxPxU/rEh38R/rI+4C7FVBR4k8gtz
-	+k0rUKgHDI0G1egXInTr7afWutM2Yu2yyPw4zWCHBEPHkne4PLzN2XNWRIduRk8y/8WO
-	o/sw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386947;
-	s=strato-dkim-0002; d=strato.com;
-	h=Message-Id:Date:Subject:Cc:To:From:From:Subject:Sender;
-	bh=NEmS1FJ3QQ5M6GbPZXGsC+Wwr7yqBf8nvew/2n7hn90=;
-	b=g8y0sdagmzW212O7oKhzuMarccvuJ8lr82xDxdMR1lTyU79dymlFymt1B+0aLiVZhC
-	e1zR8g5Odb+X1X1K4Jx9dNdm0TOKoukvQnF5+Fr1bwN5BWt9oZy7yKyLQV2jgaDWZJTY
-	WLuqcWQ0F4XwNX6qOKcKHMC6Mqn3rc66LdrFBaCVa/FrEafT9QDKALA6cOSO92R/NL1g
-	80pdyyupaQLx1LmaXLUJnJ/je2ukpnfk3zijH5PAMiOdYRdGpjdxU1j7XRFZCpGK/hbN
-	EG+PWqfRvnuNhpGle5rMN5zBtmb0blcuhVzKpRN9IHX+oVIu/XakT+QbFE3l+Gua8ruq
-	YThQ==
-ARC-Authentication-Results: i=1; strato.com;
-	dmarc=none header.from="aepfle.de";
-	dkim=pass header.d="aepfle.de" header.s="strato-dkim-0002" header.a="rsa-sha256";
-	dkim-adsp=pass;
-	spf=none smtp.mailfrom="olaf@aepfle.de"
-X-RZG-Expurgate: clean/normal
-X-RZG-Expurgate-ID: 149500::1610386947-0000A3A5-0DBADE8E/0/0
-X-RZG-CLASS-ID: mi00
-Received-SPF: none
-	client-ip=85.215.255.50;
-	helo="mo4-p01-ob.smtp.rzone.de";
-	envelope-from="olaf@aepfle.de";
-	receiver=smtpin.rzone.de;
-	identity=mailfrom;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610386947;
-	s=strato-dkim-0002; d=aepfle.de;
-	h=Message-Id:Date:Subject:Cc:To:From:From:Subject:Sender;
-	bh=NEmS1FJ3QQ5M6GbPZXGsC+Wwr7yqBf8nvew/2n7hn90=;
-	b=a5jjSWiSR3A17ueMjsbSid2pOZC+dOz+dLYcmnkqZBJQyeAiRqx6xfG6MxMlpwtJ74
-	GXc+PzSW1b36YLrED1SIXVPxrtDbH+Nmx3x6V6M6UftSuG8MjZ7KogZ1qdjGf0/Wp2Q1
-	mzR2M9CdDh8XBO/u8tiXprE4PcDOhaAEgGu5YOrHAJGGCp6bRH6yB8zqcy8VDeGhQj1m
-	Eh2Zy+XYg+QgLKWXO/k5SvBCLFkyTbsuoEFY2hewwYV1Z1R5yvMpWaUzEL76woNkqjV3
-	Wzlg9kKDieDQRL5IBnbD8A4m9bjIE2fhSVSly31uFCQyu4sXSaAdSBXEMqz78aM0J9mY
-	14sg==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS2W0g"
-X-RZG-CLASS-ID: mo00
-From: Olaf Hering <olaf@aepfle.de>
-To: 
-Cc: Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH v20210111 00/39] leftover from 2020
-Date: Mon, 11 Jan 2021 18:41:45 +0100
-Message-Id: <20210111174224.24714-1-olaf@aepfle.de>
-X-Mailer: git-send-email 2.26.2
+X-Inumbo-ID: d60577c6-a1b5-4951-85c6-9ee4d4ba5832
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:from:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=4tLhNFY5eM/BdsleL4+JFzAGJ97N80D9JBWUDFZUx1k=;
+        b=YIqCMg+PtU77zwu9Oj4PfuUZfd1/eAN10u9bs5DZzps6AaYmYgt6orL44wWfwHL4dY
+         ThnDRy2EsgMK/N0ELNjRO6cdGQkuiQFsnSENecbvHRYsMnvvVTtsvAS5b31Pb/vfer7w
+         dWINzUSwTerD+UwxopOJ4VsBWpjGX5HC7it/W6qQks/g3ziwGbQ/j070lHfUVWLiqQek
+         8Uz5e2zzuX4Ubvrt3i6Fqx/2o35iZiBnQXbMCfNEtoCSSazQ1zU1CpXH5/kCJqB7wQVo
+         9qKaDx7CpXk6uScDBRBey3RtcxMate/+AtHSIPPHG9CrgmoV7+doGFGkWsQ4egTvcnl7
+         s2mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:from:to:cc:references:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=4tLhNFY5eM/BdsleL4+JFzAGJ97N80D9JBWUDFZUx1k=;
+        b=Ryw1LSHysutICx+3z1sw59BVJLpn1x4WAuX4RnJ8iSs1dRDHyEP/fXbP/G5LfydHrP
+         2ChraZvXP7o0hBvtpW2NQrDh+6lfUzUf0Q9tssHeR85ftt+vJGUP9UI2Ti6AlsCZP/IX
+         W10ZeE/Mp/yjSHbxuD1cJDAZ6v0rmkBlP9PnBUjSqBhHNVwky7mmA1Slc4jtJTpr+1U/
+         CozdBkFKSh5i2279AKh+Q5miVPH02y7y+uLlXBwvdbxDFxFiBfheH+DlclrP35r70bdv
+         rvOal/78xKLKkr4z4dUaWbrSntYP0IzcEMA3Kw45cOoMNbiFe3BDFddUUar7nztJLhT1
+         AHng==
+X-Gm-Message-State: AOAM531AD8qdxSHOEkXRqHoSuIGTNxvalrJeUrLwq9M+vPTEO6k72R7D
+	6vyoKHphPNS2X3JUu/JbdIxhVJU2SFB27w==
+X-Google-Smtp-Source: ABdhPJzTC6/gfblUOTbiqvijeafYrWS4uD9j91I5Xm/KC+hqKqRtz8CI6dSFUPz6Jo4J+xz6LXKYMw==
+X-Received: by 2002:a1c:4489:: with SMTP id r131mr1282834wma.24.1610490207146;
+        Tue, 12 Jan 2021 14:23:27 -0800 (PST)
+Subject: Re: [PATCH V3 09/23] xen/dm: Make x86's DM feature common
+From: Oleksandr <olekstysh@gmail.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Julien Grall <julien.grall@arm.com>, Paul Durrant <paul@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org
+References: <1606732298-22107-1-git-send-email-olekstysh@gmail.com>
+ <1606732298-22107-10-git-send-email-olekstysh@gmail.com>
+ <00c3df9f-760d-bb3d-d1d6-7c7df7f0c17c@suse.com>
+ <24191fca-78e7-3e6b-ff02-c06e8ae79f56@gmail.com>
+ <7c985117-2bb4-dd5b-53cf-e217e25b2e8e@suse.com>
+ <f7d06c56-7f76-9ba7-6797-ebd9cf133479@gmail.com>
+ <94c20a50-9363-c8d1-11aa-7a35f97a03a6@gmail.com>
+ <318580a5-d02f-9663-cc58-dfad8a4f7836@suse.com>
+ <7ca63ab6-85c8-2b5a-2be9-dcb4aaed7ac3@gmail.com>
+Message-ID: <87036ec1-0bb4-43a4-60c1-25ced6ac0a97@gmail.com>
+Date: Wed, 13 Jan 2021 00:23:25 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <7ca63ab6-85c8-2b5a-2be9-dcb4aaed7ac3@gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Various unreviewed changes.
 
-Olaf Hering (39):
-  stubdom: fix tpm_version
-  xl: use proper name for bash_completion file
-  docs: remove stale create example from xl.1
-  docs: substitute XEN_CONFIG_DIR in xl.conf.5
-  tools: add with-xen-scriptdir configure option
-  Use XEN_SCRIPT_DIR to refer to /etc/xen/scripts
-  xl: optionally print timestamps during xl migrate
-  xl: fix description of migrate --debug
-  tools: add readv_exact to libxenctrl
-  tools: add xc_is_known_page_type to libxenctrl
-  tools: use xc_is_known_page_type
-  tools: unify type checking for data pfns in migration stream
-  tools: show migration transfer rate in send_dirty_pages
-  tools/guest: prepare to allocate arrays once
-  tools/guest: save: move batch_pfns
-  tools/guest: save: move mfns array
-  tools/guest: save: move types array
-  tools/guest: save: move errors array
-  tools/guest: save: move iov array
-  tools/guest: save: move rec_pfns array
-  tools/guest: save: move guest_data array
-  tools/guest: save: move local_pages array
-  tools/guest: restore: move pfns array
-  tools/guest: restore: move types array
-  tools/guest: restore: move mfns array
-  tools/guest: restore: move map_errs array
-  tools/guest: restore: move mfns array in populate_pfns
-  tools/guest: restore: move pfns array in populate_pfns
-  tools/guest: restore: split record processing
-  tools/guest: restore: split handle_page_data
-  tools/guest: restore: write data directly into guest
-  tools: remove tabs from code produced by libxl_save_msgs_gen.pl
-  tools: recognize LIBXL_API_VERSION for 4.15
-  tools: adjust libxl_domain_suspend to receive a struct props
-  tools: change struct precopy_stats to precopy_stats_t
-  tools: add callback to libxl for precopy_policy and precopy_stats_t
-  tools: add --max_iters to libxl_domain_suspend
-  tools: add --min_remaining to libxl_domain_suspend
-  tools: add --abort_if_busy to libxl_domain_suspend
+Hi Jan.
 
- .gitignore                                    |   3 +
- docs/configure.ac                             |   3 +
- ...n.5.pod => xl-disk-configuration.5.pod.in} |   2 +-
- ....pod => xl-network-configuration.5.pod.in} |   4 +-
- docs/man/xl.1.pod.in                          |  39 +-
- docs/man/{xl.conf.5.pod => xl.conf.5.pod.in}  |   8 +-
- docs/misc/block-scripts.txt                   |   2 +-
- m4/paths.m4                                   |   8 +-
- stubdom/vtpmmgr/vtpmmgr.h                     |   2 +-
- tools/include/libxl.h                         |  32 +-
- tools/include/xenguest.h                      |   7 +-
- tools/libs/ctrl/xc_private.c                  |  55 +-
- tools/libs/ctrl/xc_private.h                  |  34 ++
- tools/libs/guest/xg_sr_common.c               |  33 +-
- tools/libs/guest/xg_sr_common.h               |  88 ++-
- tools/libs/guest/xg_sr_restore.c              | 562 ++++++++++++------
- tools/libs/guest/xg_sr_save.c                 | 164 ++---
- tools/libs/guest/xg_sr_save_x86_hvm.c         |   5 +-
- tools/libs/guest/xg_sr_save_x86_pv.c          |  31 +-
- tools/libs/light/libxl_dom_save.c             |  24 +
- tools/libs/light/libxl_domain.c               |  10 +-
- tools/libs/light/libxl_internal.h             |   6 +
- tools/libs/light/libxl_save_msgs_gen.pl       |  23 +-
- tools/libs/light/libxl_stream_write.c         |   9 +-
- tools/libs/light/libxl_types.idl              |   1 +
- tools/ocaml/libs/xl/xenlight_stubs.c          |   3 +-
- tools/xl/Makefile                             |   4 +-
- tools/xl/bash-completion                      |   2 +-
- tools/xl/xl_cmdtable.c                        |  29 +-
- tools/xl/xl_migrate.c                         |  79 ++-
- tools/xl/xl_saverestore.c                     |   3 +-
- 31 files changed, 901 insertions(+), 374 deletions(-)
- rename docs/man/{xl-disk-configuration.5.pod => xl-disk-configuration.5.pod.in} (99%)
- rename docs/man/{xl-network-configuration.5.pod => xl-network-configuration.5.pod.in} (98%)
- rename docs/man/{xl.conf.5.pod => xl.conf.5.pod.in} (96%)
+
+On 07.01.21 18:49, Oleksandr wrote:
+>
+> On 07.01.21 17:01, Jan Beulich wrote:
+>
+> Hi Jan, all
+>
+>> On 07.01.2021 15:38, Oleksandr wrote:
+>>>>> Well, on v2 you replied you didn't consider the alternative. I would
+>>>>> have expected that you would at least go through this consideration
+>>>>> process, and see whether there are better reasons to stick with the
+>>>>> apparently backwards arrangement than to change to the more
+>>>>> conventional one. If there are such reasons, I would expect them to
+>>>>> be called out in reply and perhaps also in the commit message; the
+>>>>> latter because down the road more people may wonder why the more
+>>>>> narrow / special set of cases gets handled at a higher layer than
+>>>>> the wider set of remaining ones, and they would then be able to find
+>>>>> an explanation without having to resort to searching through list
+>>>>> archives.
+>>>> Ah, will investigate. Sorry for not paying enough attention to it.
+>>>> Yes, IOREQ (I mean "common") ops are 7 out of 18 right now. The
+>>>> subsequent patch is adding one more DM op - XEN_DMOP_set_irq_level.
+>>>> There are several PCI related ops which might want to be common in the
+>>>> future (but I am not sure).
+>>> I think, I can say that I have considered the alternative (doing it the
+>>> other way around), of course if I got your suggestion for V2 correctly.
+>>> Agree, the alternative is more natural, also compat_dm_op() was left in
+>>> x86 code. For me the downside is in code duplication. With the
+>>> alternative both arches have to duplicate do_dm_op() and "common" part
+>>> of dm_op()
+>>> (only "switch ( op.op )" is unique).
+>> Yes, this duplication is the main downside.
+>>
+>>> Now the question is which approach to take ("current" or "alternative")
+>>> for me to prepare for V4. Personally, I would be OK with the both (with
+>>> a little preference for "alternative").
+>> Same here. I don't think I've seen anyone else voice an opinion.
+>
+> Well, let's wait a bit for other opinions... @Julien, @Paul what do 
+> you think on that?
+>
+>
+>>
+>>> Also, If we decide to go with the alternative, should the common files
+>>> still be named dm.*?
+>> I think this should live in ioreq.c, just like e.g.
+>> iommu_do_pci_domctl() lives in passthrough/pci.c. This would then
+>> allow quite a few things to become static in that file, I believe.
+>
+> I got it. It seems yes, at least the following could became static:
+>
+> ioreq_server_create
+> ioreq_server_get_info
+> ioreq_server_map_io_range
+> ioreq_server_unmap_io_range
+> ioreq_server_set_state
+> ioreq_server_destroy
+
+
+Well, I have already pushed V4 with this "alternative" approach, let's 
+discuss there [1].
+
+
+[1] 
+https://lore.kernel.org/xen-devel/1610488352-18494-10-git-send-email-olekstysh@gmail.com/T/#mb08f75657f43df869596c5c9c30e2395a9e35c7a
+
+
+-- 
+Regards,
+
+Oleksandr Tyshchenko
 
 
