@@ -2,41 +2,44 @@ Return-Path: <SRS0=tjso=GP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7E3DC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 11:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3006C433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 12:17:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9383922226
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 11:59:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9383922226
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5210223107
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 12:17:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5210223107
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65656.116349 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65663.116360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzIKW-0000fN-7t; Tue, 12 Jan 2021 11:59:20 +0000
+	id 1kzIcD-0002Uz-Vf; Tue, 12 Jan 2021 12:17:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65656.116349; Tue, 12 Jan 2021 11:59:20 +0000
+Received: by outflank-mailman (output) from mailman id 65663.116360; Tue, 12 Jan 2021 12:17:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzIKW-0000fG-4w; Tue, 12 Jan 2021 11:59:20 +0000
-Received: by outflank-mailman (input) for mailman id 65656;
- Tue, 12 Jan 2021 11:59:19 +0000
+	id 1kzIcD-0002Us-Se; Tue, 12 Jan 2021 12:17:37 +0000
+Received: by outflank-mailman (input) for mailman id 65663;
+ Tue, 12 Jan 2021 12:17:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=59Pv=GP=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1kzIKV-0000fA-23
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 11:59:19 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=WoC4=GP=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1kzIcC-0002Un-GU
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 12:17:36 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e1616035-ed48-4864-af00-17d479447de1;
- Tue, 12 Jan 2021 11:59:17 +0000 (UTC)
+ id b3ff9415-2666-4a8e-9d42-9d44ebb1215b;
+ Tue, 12 Jan 2021 12:17:34 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5F9C5AE47;
+ Tue, 12 Jan 2021 12:17:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,195 +51,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e1616035-ed48-4864-af00-17d479447de1
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610452757;
-  h=from:to:cc:subject:date:message-id:
-   content-transfer-encoding:mime-version;
-  bh=GVEOGe6HOBcUN3W05uXHIu3680KaoPV1ahJI63NieNI=;
-  b=VtVrLAIjAUfsU97IsSd3+HZu07xy8kpi3EFcZhZ6Sdauv4AaRzve4WhT
-   fSJV3CMWATPnILu8JC1dXTK2dHZXLeffcMsW84UAVIjCljQ4CtZkE6He4
-   6pLPI0xJPd73zFSDB2tRJMvMstKGLliarf9jrZdrsEGlG+Nfdoka6C9Di
-   o=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: oJ+WmsQtwSEea3wZ3PHvu1LgnixfhLWSBP/az/mcrIwRUeu8d4x6Bg48rmra/2bpEQbLwrBa7s
- 4IteRKJoStDgtjYjAsnTLaO7v7u1Z+zgoiI3sSBYIogIFHVJUEk+pwrwHGBJGr+XmonZ1PRb7M
- 4jDePZqsGzPfbY/JA8YNOUIogw8n6RPPa6Ps5UhG97qsksL+2Q4crzIf85oJ25zcGZ24rImJrT
- zcOYlmoNeokBEV8TqxCRZTOC4sM77pa5unETVJ888vMJpb/89x6HrCu+jVJWS8WMoRRyVmCEAc
- 0bI=
-X-SBRS: 5.2
-X-MesageID: 34948028
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.79,341,1602561600"; 
-   d="scan'208";a="34948028"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Cha5r0oLiV1yOpam4G/YSwOqNyddN8H6bZgywWLIMb789GHRs1rhAgKkxM5PwenpTe/pp4D0YUDNQLv2SGstUzPOrKyX4V8Q7AC1uZFz5raZ7q3Dd45ER5vufWNwj39i+n3S/2DQwDxhNrd9v3ytSCxrkr4svcmVUWY/p2gw53w+YB11GZdrjpnOIVYPiHADgI4brNtQi9cAau7QqhAiIjbylftGArxniMvitEZd208ydBaLlT4VJbS9m7j6RtcP1LEbuDG0hjNOtjzPzLobHpGUElsbKSsIdo2eR76MeWkaguJ9nVmCciXZLE3/J9oxXRbzhrdTJoMUGA7BBMjQyQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ExJaXQE/thjDWVx76HSE5KvzYwprp3LimsMovnDmkqA=;
- b=c0Goza1eqEpGebqcs7P3nVRdC083p7drmpOp5Tryt4EA+t2RW7VAuCovTDDsFxQCfXfpqwh3dZ7GTyB95KrV7TS4Yh2pFdCdlRDPp3KVuCewKAtuvnXE/5oQo4Xl/Xsov+zMe+jmkNOsWPVSH6SKPEFIPFmn4wiRMql6On5ZThPak8lJSLDxi4xYtMHkTN6WZ57pAN6SSvJhLVYVkflMoLm+UtGSD3kOLdRYCIzBVknJ9fs2ROGNEvKD9tD9nyyG2Xv6GbUkAxh3E4on9xRpfR0LmGahJbacAvy4vA6jacne0tBaOLkkIUYQEG0d8nZhMG2FEMKokgoWgYRxDFgXeQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ExJaXQE/thjDWVx76HSE5KvzYwprp3LimsMovnDmkqA=;
- b=WkFcRfhr8fhvvbXIO9Z0GPCg/n8QOvlgCBDyot0UTkdib4TPfYjAIOEydHGxry+PvPSeLG+1wNlx5u/673eTdK8+Fm47pnXg6waqH/Mesinm2gzsov52yxond5MnQ8wKppXKfK6H7qVvS2dmFEyBtBbcrbcesqum79IX8QdJq+g=
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <linux-kernel@vger.kernel.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, <stable@vger.kernel.org>, Boris
- Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant
-	<paul.durrant@citrix.com>, <amc96@cam.ac.uk>, <andrew.cooper3@citrix.com>,
-	<xen-devel@lists.xenproject.org>
-Subject: [PATCH v2] xen/privcmd: allow fetching resource sizes
-Date: Tue, 12 Jan 2021 12:53:58 +0100
-Message-ID: <20210112115358.23346-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.29.2
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PR3PR09CA0017.eurprd09.prod.outlook.com
- (2603:10a6:102:b7::22) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+X-Inumbo-ID: b3ff9415-2666-4a8e-9d42-9d44ebb1215b
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1610453853; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=eNi+94E66uio2OkQC2ZDsis31fIDKcqJUOSlzyn0qcA=;
+	b=aH1VBqKDJ+LW343MjZUDL4/nexSBTOxJpHWwEcH0uCC9uBnfpbA8oQSZ77gstr9a6l3HNj
+	go1kToU9kqspFfyzynv5cLMe3kw2EKZ+xvoWkvgenXHa/TCulKaI6sQ6cS4uRPLgGMddwS
+	l7wUJd2nwRxpD3FA79k8um0bpVmX6os=
+Subject: Re: [PATCH v2] xen/privcmd: allow fetching resource sizes
+To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Paul Durrant <paul.durrant@citrix.com>, amc96@cam.ac.uk,
+ andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
+References: <20210112115358.23346-1-roger.pau@citrix.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <2d853ee1-b671-78ad-f634-0fd1c4f7d2ce@suse.com>
+Date: Tue, 12 Jan 2021 13:17:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d8cd1e1a-8dcd-422c-b965-08d8b6f179a4
-X-MS-TrafficTypeDiagnostic: DM6PR03MB4604:
-X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR03MB4604FD074DA5653BEF217E458FAA0@DM6PR03MB4604.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wkEI7WyUVPS8gn+DGPs4ZNtkzsiiYp4WF9zJA5LdFmTJ8i5CD5rbhRxhI1AMbA8nTyKZ/QxXH0C5LHmVWe1PCr/F9pOiX+usSGhIhBVE67HtQdmgLCnE4+jk/ijwBzyl2rm2yfwieUdwnDNBxMiTEY1yqnDNG5wjYxEPI9UVdWTz7Lb+ftGaRrUwe6EJXPx36VqyCMF9pF6vxOxGUyIq6Wx8vaBq6RBWQzftT41oFLaKtN4R6KdKAvhsFUcCCE1wED1G9/ZKxIdng40xgVxUPwZhCw+zwC0/TBBToQuvQbDuxRXkdw9N6dnOX8jpSrn6v7GK4aBbQ4qTErTfu2LDkYAaUxVaMIaHi9LApsdeqagPqWpkW3M3LAFo92iYjVp8B7xq/etgitHkBiPOwOMp7AGgr+0ijcOZ23Haq9B0gFXp7L7DRMpq4a1X+WN9SOP4
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(366004)(396003)(39860400002)(136003)(478600001)(26005)(2616005)(186003)(956004)(1076003)(5660300002)(54906003)(2906002)(6486002)(316002)(8676002)(16526019)(83380400001)(66946007)(6666004)(8936002)(86362001)(6916009)(36756003)(66476007)(4326008)(6496006)(66556008)(309714004);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?MGRrdlh0TmttaEZKSVdkWDdmaU0xZFBYOFdXc05GMnBvaEd2enVnRjFoNjVS?=
- =?utf-8?B?V1dJa3lyY05YWFg0endNZUxaL1c4NGFsVW5OZDVQQjVKZTlvOUhHYmxFUVB6?=
- =?utf-8?B?L0JyWEVmWlNiSlRncVd4WGQya2N2WDBHUWlFNTBwRHk2SDl3ZVVudkdXWFhH?=
- =?utf-8?B?NEpEQ3lUM1J4TEZaOWRkWVBqR3FQRVVSMi8xQmV3c3ZqRFJLcVBXK1NtZjJ1?=
- =?utf-8?B?bGhnWGV2cFgrTGQ3UGdlYy9FS2pEMFJHZ2tTbXFrdWlTajI2VzA0cHlITVlm?=
- =?utf-8?B?Q3RVWlFKWXF1UE5sb1lqYXJEOTNkOC9VM2dKbmx3OUROWnk1eWZoeFlDTE5y?=
- =?utf-8?B?dHNEeFY1L0MzUlRrcmhaOVFteWtBb2JCb0pTcUIxaHhNaUtzck8zWUpWOE14?=
- =?utf-8?B?aVV2NGh5Sm5xcUhmV0FPZTJNc3NPeWpad0ExZUErWU5iUldXcTBrUms5Wnlz?=
- =?utf-8?B?NHFlVjF2SHdNNUQzM2laN09JS0x1VW1nM3JnQkJKd2FCa0tyY1hUc0ZGL09x?=
- =?utf-8?B?NW9Pd2c4OTh3QTgyWXRkQ3V5OFR5T2lVV2JqTUpZemlqNDJybHdsWFZJYTcw?=
- =?utf-8?B?TjM1NWJoZ1hadTNRSFNsZjQ5eFJoQnl6NTAzdkxBNGVINXhaMzN0V0pHZkQr?=
- =?utf-8?B?TzJQb2RpcVJxOGduTHVJcmlvNHhZVXUwTnpQTllZcnRFQmg2TGtVamJja0h3?=
- =?utf-8?B?S2JPdktldVFGSXZ2VXFHSVBVNldxUFR1dUE2b1pZZk9wN0YxR0FjaDQ2RDVu?=
- =?utf-8?B?QlRGSUI5Rjk4enhpSFNnWjkya0MxcnhKVlhESXFLNlM0ZFI3a1NFZzBvdHJE?=
- =?utf-8?B?cy85M0pwbjdKb3h6NmhlMjIrWU9xcThnMTU1Q3BRLzJ5ZmllUUlvaTl0Vk51?=
- =?utf-8?B?dTFYWTYxTlVYNklJUmVMWTlPSjgzTkIzZTBjTE91R3J2MVNRY25rRk1OVlVE?=
- =?utf-8?B?d1QvWnpHQTBxb2JOU2VFNzc1OERZRWg1aDNQYkgzcHhvdlFRTXJTLzRjMVNs?=
- =?utf-8?B?ZUNlMEcwUUhrcDBLRFdmSFI1ZjYrWUJCRlNsSVkzckE2a3g5SHhvNXlSY3M3?=
- =?utf-8?B?YnJYd0l5UlR6RTZyNVFZT0RaVW9idk5xWGY2WU82OGdkNTFRM1BhSW5pYjZV?=
- =?utf-8?B?MTlsMDhOVTVYVVlxZVNJVmlDNFpvSXluSS94RXgrbUYvNmR1NTBNUVFpR2g3?=
- =?utf-8?B?R1F3Rk1NR3dnOXBWVWo3b1NvZ1pjRmppbXkxb0tmcDdrQndUU1RzZ0pSWHVz?=
- =?utf-8?B?MytidnpUQytNSFdBNlZkeG9HVXgyRWkrQmdDWmNwRVR2bUhWenlvbnFzWGtG?=
- =?utf-8?Q?fIY5pguhibR2JIH61KfZet4MNEfXU1G+uL?=
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jan 2021 11:59:11.6370
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8cd1e1a-8dcd-422c-b965-08d8b6f179a4
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IoBsu6DA4x7D7n0GE/0rCilqq8ybEhClL4/W6FAJzyz/0OCm3pnJWyYlJt/iQwlOqtQx2OJiSVH3pmbloInc+g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4604
-X-OriginatorOrg: citrix.com
+In-Reply-To: <20210112115358.23346-1-roger.pau@citrix.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="jYtKnRD9tmvDLXLmmkPIFC3p72jUfy0Qw"
 
-Allow issuing an IOCTL_PRIVCMD_MMAP_RESOURCE ioctl with num = 0 and
-addr = 0 in order to fetch the size of a specific resource.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--jYtKnRD9tmvDLXLmmkPIFC3p72jUfy0Qw
+Content-Type: multipart/mixed; boundary="B1LoI9kgvEq0QWqZ5ZOnbTlbSLww2g5kl";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Paul Durrant <paul.durrant@citrix.com>, amc96@cam.ac.uk,
+ andrew.cooper3@citrix.com, xen-devel@lists.xenproject.org
+Message-ID: <2d853ee1-b671-78ad-f634-0fd1c4f7d2ce@suse.com>
+Subject: Re: [PATCH v2] xen/privcmd: allow fetching resource sizes
+References: <20210112115358.23346-1-roger.pau@citrix.com>
+In-Reply-To: <20210112115358.23346-1-roger.pau@citrix.com>
 
-Add a shortcut to the default map resource path, since fetching the
-size requires no address to be passed in, and thus no VMA to setup.
+--B1LoI9kgvEq0QWqZ5ZOnbTlbSLww2g5kl
+Content-Type: multipart/mixed;
+ boundary="------------E8CFA5CA18BF14542689ABC5"
+Content-Language: en-US
 
-This is missing from the initial implementation, and causes issues
-when mapping resources that don't have fixed or known sizes.
+This is a multi-part message in MIME format.
+--------------E8CFA5CA18BF14542689ABC5
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Cc: stable@vger.kernel.org # >= 4.18
----
-NB: fetching the size of a resource shouldn't trigger an hypercall
-preemption, and hence I've dropped the preempt indications.
----
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Paul Durrant <paul.durrant@citrix.com>
-Cc: amc96@cam.ac.uk
-Cc: andrew.cooper3@citrix.com
-Cc: xen-devel@lists.xenproject.org
----
-Changes since v1:
- - Remove Fixes tag, add backport.
- - Make sure both addr and num are set or unset.
----
- drivers/xen/privcmd.c | 25 +++++++++++++++++++------
- 1 file changed, 19 insertions(+), 6 deletions(-)
+On 12.01.21 12:53, Roger Pau Monne wrote:
+> Allow issuing an IOCTL_PRIVCMD_MMAP_RESOURCE ioctl with num =3D 0 and
+> addr =3D 0 in order to fetch the size of a specific resource.
+>=20
+> Add a shortcut to the default map resource path, since fetching the
+> size requires no address to be passed in, and thus no VMA to setup.
+>=20
+> This is missing from the initial implementation, and causes issues
+> when mapping resources that don't have fixed or known sizes.
+>=20
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> Cc: stable@vger.kernel.org # >=3D 4.18
 
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index b0c73c58f987..720a7b7abd46 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -717,14 +717,15 @@ static long privcmd_ioctl_restrict(struct file *file, void __user *udata)
- 	return 0;
- }
- 
--static long privcmd_ioctl_mmap_resource(struct file *file, void __user *udata)
-+static long privcmd_ioctl_mmap_resource(struct file *file,
-+				struct privcmd_mmap_resource __user *udata)
- {
- 	struct privcmd_data *data = file->private_data;
- 	struct mm_struct *mm = current->mm;
- 	struct vm_area_struct *vma;
- 	struct privcmd_mmap_resource kdata;
- 	xen_pfn_t *pfns = NULL;
--	struct xen_mem_acquire_resource xdata;
-+	struct xen_mem_acquire_resource xdata = { };
- 	int rc;
- 
- 	if (copy_from_user(&kdata, udata, sizeof(kdata)))
-@@ -734,6 +735,22 @@ static long privcmd_ioctl_mmap_resource(struct file *file, void __user *udata)
- 	if (data->domid != DOMID_INVALID && data->domid != kdata.dom)
- 		return -EPERM;
- 
-+	/* Both fields must be set or unset */
-+	if (!!kdata.addr != !!kdata.num)
-+		return -EINVAL;
-+
-+	xdata.domid = kdata.dom;
-+	xdata.type = kdata.type;
-+	xdata.id = kdata.id;
-+
-+	if (!kdata.addr && !kdata.num) {
-+		/* Query the size of the resource. */
-+		rc = HYPERVISOR_memory_op(XENMEM_acquire_resource, &xdata);
-+		if (rc)
-+			return rc;
-+		return __put_user(xdata.nr_frames, &udata->num);
-+	}
-+
- 	mmap_write_lock(mm);
- 
- 	vma = find_vma(mm, kdata.addr);
-@@ -768,10 +785,6 @@ static long privcmd_ioctl_mmap_resource(struct file *file, void __user *udata)
- 	} else
- 		vma->vm_private_data = PRIV_VMA_LOCKED;
- 
--	memset(&xdata, 0, sizeof(xdata));
--	xdata.domid = kdata.dom;
--	xdata.type = kdata.type;
--	xdata.id = kdata.id;
- 	xdata.frame = kdata.idx;
- 	xdata.nr_frames = kdata.num;
- 	set_xen_guest_handle(xdata.frame_list, pfns);
--- 
-2.29.2
+Reviewed-by: Juergen Gross <jgross@suse.com>
 
+
+Juergen
+
+--------------E8CFA5CA18BF14542689ABC5
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------E8CFA5CA18BF14542689ABC5--
+
+--B1LoI9kgvEq0QWqZ5ZOnbTlbSLww2g5kl--
+
+--jYtKnRD9tmvDLXLmmkPIFC3p72jUfy0Qw
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAl/9k1wFAwAAAAAACgkQsN6d1ii/Ey/t
+TAf/bSNR706+IWIFGfbldW858fOvX2OZk0SEk8/VVvQ19exmbqLWpNVz7FKoe+vwD1Sy4dqvtozv
+xqgbwsXSWWQEODWvoZce4ffdmkWGZzxxY795AwfFMMlhpuqIUFGd1yQl1CLTJi/MVFd3KGm0ADok
+rGBxcblckAA6sZoV0oYyRtqpRNpy0rWvLl5J8jZsBLZD8xKSP3e8R0emEt2MeYRxtxNjHxVM+tHH
+p+YoksQBQIAa6NM19Z5+IQDUMNMiLC6NkXPUkKCD3jeN971TP1+YCncobUUAaNOaN5pYjBAm62nt
+S1yULIE/WrLa9vS8J+TvRNGZgX44YO3u/00Lk0pnsg==
+=hZk7
+-----END PGP SIGNATURE-----
+
+--jYtKnRD9tmvDLXLmmkPIFC3p72jUfy0Qw--
 
