@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79293C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8A6DC433E9
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 10EE121534
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10EE121534
+	by mail.kernel.org (Postfix) with ESMTPS id 6CF51208B3
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 21:59:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CF51208B3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.66073.117227 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.66086.117303 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRgl-0003Z1-Q2; Tue, 12 Jan 2021 21:58:55 +0000
+	id 1kzRgs-0003na-EY; Tue, 12 Jan 2021 21:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 66073.117227; Tue, 12 Jan 2021 21:58:55 +0000
+Received: by outflank-mailman (output) from mailman id 66086.117303; Tue, 12 Jan 2021 21:59:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzRgl-0003Yk-JU; Tue, 12 Jan 2021 21:58:55 +0000
-Received: by outflank-mailman (input) for mailman id 66073;
- Tue, 12 Jan 2021 21:58:54 +0000
+	id 1kzRgs-0003nL-4C; Tue, 12 Jan 2021 21:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 66086;
+ Tue, 12 Jan 2021 21:59:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OoN1=GP=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1kzRcj-0002PK-Ik
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:54:45 +0000
-Received: from mail-wr1-x435.google.com (unknown [2a00:1450:4864:20::435])
+ id 1kzRcF-0002PK-Jm
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 21:54:15 +0000
+Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a4b63d93-25e6-437e-b459-e0880ef941a4;
- Tue, 12 Jan 2021 21:53:15 +0000 (UTC)
-Received: by mail-wr1-x435.google.com with SMTP id i9so22270wrc.4
- for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:11 -0800 (PST)
+ id 672ce908-4a2c-4f0d-b403-2a40745f87d5;
+ Tue, 12 Jan 2021 21:53:07 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id i63so3214347wma.4
+ for <xen-devel@lists.xenproject.org>; Tue, 12 Jan 2021 13:53:07 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.10
+ by smtp.gmail.com with ESMTPSA id 138sm6574053wma.41.2021.01.12.13.53.06
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 12 Jan 2021 13:53:10 -0800 (PST)
+ Tue, 12 Jan 2021 13:53:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4b63d93-25e6-437e-b459-e0880ef941a4
+X-Inumbo-ID: 672ce908-4a2c-4f0d-b403-2a40745f87d5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=4gV1F/7iWkG+qIxLslLKVNePdnGToVQ3S9ee1k+suSE=;
-        b=VQNaOAI0D9Al/JYCJ/M+E8Vk7qpGkmtmIbHy9cv4NrB/21nCn4ce0AWcr3PSMDbyDB
-         mOzYnOEFtJMm14QcPlTzYS438qS0JgV4D413m7qTnGp252f03xJlAiv0+yXSWJccq0Rz
-         DX+cOJArZyjKLDzQFMvThYUGqc2G5kcwU2hc7OKhswI5GPAZ8FjXqQOoqIen1v6j6A1F
-         rLCB8b6Kyw8mUSHLFjXbB1II+ZEAnWoAasFX4mVIkvbo6cMDT8oR/wIuXb+CpOgdLoZT
-         Wjo05J3T+ELrpdtbt15iFAYo2ZMNQ0uY9gzauXhh8+Ik0u6h0YhDEC7M/2yfq1tEKSxt
-         9rnQ==
+        bh=LLGfBggyWdYRwwW0ml3hX58E1A20s8FdtzBMFvcEooY=;
+        b=Cu6yH0wsrNVLtjzeE2TIZhrHBhX7wc3sYH+G7Kl/gEjiuAz/IZPOPt8w2NyVfM259+
+         +MTM65/Tx/3ICPcVTyjtMzg0eoryaIQmi/iN66/ET7jBm9NHVuxU0FQQAQBecwG7YVhm
+         b9WgU9CUPodfv8tYjcUPOzbd0jeJ708AX1xDLwFnY/PyyTIk/agR7skBC3xXUM29I9iy
+         V7Y/cFjAIYh4UsT/9rKd95H0TRBg+Hzew4nLYMGjDK4NaTJPSAFffvjkqT+oOlSid6LM
+         TiGK6VK4ktjqk3R2Lm50KeuanBP8M+/IQwXl3agBojvb4YECogVs5/ZLa6fYK2j3aUC/
+         DnRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=4gV1F/7iWkG+qIxLslLKVNePdnGToVQ3S9ee1k+suSE=;
-        b=HAA+6OzNEDcWdGre5z65KZ0zrGY4oVwE+xC5zD268kJpJkOz2TVYDhclNQPj3wj4y7
-         iurI3BPAg/xdyFaXNMmklMjn9nvjV1KED1PrEalk7OAxqcGOMqhmx7UiE5Nimlfh3OGE
-         okBoMQha6JEu11nbrWpstwoZqsAtcKnzm+Ln7zjtvNIVbiteRKltRq2OZYv7Cy8d/Jlk
-         E/OnNCxlsSr8lpP3dFCPJLCMH69dfCKw7foFh63hr+WHvZn7wKvx5P/PK09jXbgdmHCS
-         oJpD0j5jtpYcGrYxtHmmeVxX5nPz/SFo3/rhO7mH2wkwCeLAq0MxEz5X9G4S3s+H9cht
-         OiZw==
-X-Gm-Message-State: AOAM5327E/ue8ROv5Gi48e27q21z/lRyNw5QW0cWfBjjbw5gJN6mqhHh
-	Z0iALEqVpBeTR96PyKKGsHhMLR8jpjsnew==
-X-Google-Smtp-Source: ABdhPJykC8uvoHTbSy7OQGfg+bnoBoG3kuupl+GfMjGsUKUEPCvBWFILb+w5JbykKR0cb7oIyjFkSQ==
-X-Received: by 2002:a5d:56c3:: with SMTP id m3mr774837wrw.419.1610488391081;
-        Tue, 12 Jan 2021 13:53:11 -0800 (PST)
+        bh=LLGfBggyWdYRwwW0ml3hX58E1A20s8FdtzBMFvcEooY=;
+        b=RDNLnPdsEyrUjirgyxWGCNG7fXtwhqniPoC16ldLtNoWdtdIfbzP/w22Brpj12fc2I
+         c6g6jd0Gi3/WrKQPYKgP7o0srNE2mtLvXFWEXV7PAaYTFxLbdk1GEDiclpwnPFB0CVwV
+         +7Tpw5THC8JALObXI4Uf2cRPr5zXHcir5K1qbXnVhziIdVVoMKscGGQdIMhpyZkLP03g
+         CuQ5MfmsL9z/adYI+uFa3qxmxge4jphWbgBeitFLVjSGsJpDvY7Idutx4M68/XyEwDkR
+         fTE1ROQ7wlgad8QIsZaKcQ1szb27fqjfJ9fH5262Zfzyi0C4Aho4LcpinFMqTF5Nn4iB
+         rMug==
+X-Gm-Message-State: AOAM531E3YrpUjVsruOLEOug03a0+zxqtIIaN/InpiSRqOrD57Nre8Pr
+	Ch9RBv0HxcdRexX3sGCiQdvf9NUW0nLBuA==
+X-Google-Smtp-Source: ABdhPJwKs8f6oRDiw7sgwHGdQPLp4lt4N8HltFSQl1XLQ/oDA9QMnqcj/5Ol1jDlZ20c7w5+lfhrQQ==
+X-Received: by 2002:a1c:7c09:: with SMTP id x9mr1148510wmc.98.1610488386987;
+        Tue, 12 Jan 2021 13:53:06 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Paul Durrant <paul@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V4 17/24] xen/ioreq: Introduce domain_has_ioreq_server()
-Date: Tue, 12 Jan 2021 23:52:25 +0200
-Message-Id: <1610488352-18494-18-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V4 13/24] xen/ioreq: Use guest_cmpxchg64() instead of cmpxchg()
+Date: Tue, 12 Jan 2021 23:52:21 +0200
+Message-Id: <1610488352-18494-14-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 References: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-This patch introduces a helper the main purpose of which is to check
-if a domain is using IOREQ server(s).
+The cmpxchg() in ioreq_send_buffered() operates on memory shared
+with the emulator domain (and the target domain if the legacy
+interface is used).
 
-On Arm the current benefit is to avoid calling vcpu_ioreq_handle_completion()
-(which implies iterating over all possible IOREQ servers anyway)
-on every return in leave_hypervisor_to_guest() if there is no active
-servers for the particular domain.
-Also this helper will be used by one of the subsequent patches on Arm.
+In order to be on the safe side we need to switch
+to guest_cmpxchg64() to prevent a domain to DoS Xen on Arm.
+
+As there is no plan to support the legacy interface on Arm,
+we will have a page to be mapped in a single domain at the time,
+so we can use s->emulator in guest_cmpxchg64() safely.
+
+Thankfully the only user of the legacy interface is x86 so far
+and there is not concern regarding the atomics operations.
+
+Please note, that the legacy interface *must* not be used on Arm
+without revisiting the code.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 CC: Julien Grall <julien.grall@arm.com>
 [On Arm only]
 Tested-by: Wei Chen <Wei.Chen@arm.com>
@@ -121,99 +129,41 @@ Changes RFC -> V1:
    - new patch
 
 Changes V1 -> V2:
-   - update patch description
-   - guard helper with CONFIG_IOREQ_SERVER
-   - remove "hvm" prefix
-   - modify helper to just return d->arch.hvm.ioreq_server.nr_servers
-   - put suitable ASSERT()s
-   - use ASSERT(d->ioreq_server.server[id] ? !s : !!s) in set_ioreq_server()
-   - remove d->ioreq_server.nr_servers = 0 from hvm_ioreq_init()
+   - move earlier to avoid breaking arm32 compilation
+   - add an explanation to commit description and hvm_allow_set_param()
+   - pass s->emulator
 
 Changes V2 -> V3:
    - update patch description
-   - remove ASSERT()s from the helper, add a comment
-   - use #ifdef CONFIG_IOREQ_SERVER inside function body
-   - use new ASSERT() construction in set_ioreq_server()
 
 Changes V3 -> V4:
-   - update patch description
-   - drop per-domain variable "nr_servers"
-   - reimplement a helper to count the non-NULL entries
-   - make the helper out-of-line
+   - add Stefano's A-b
+   - drop comment from arm/hvm.c
 ---
- xen/arch/arm/traps.c    | 15 +++++++++------
- xen/common/ioreq.c      | 16 ++++++++++++++++
- xen/include/xen/ioreq.h |  2 ++
- 3 files changed, 27 insertions(+), 6 deletions(-)
+ xen/common/ioreq.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 4a83e1e..35094d8 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -2262,14 +2262,17 @@ static bool check_for_vcpu_work(void)
-     struct vcpu *v = current;
- 
- #ifdef CONFIG_IOREQ_SERVER
--    bool handled;
-+    if ( domain_has_ioreq_server(v->domain) )
-+    {
-+        bool handled;
- 
--    local_irq_enable();
--    handled = vcpu_ioreq_handle_completion(v);
--    local_irq_disable();
-+        local_irq_enable();
-+        handled = vcpu_ioreq_handle_completion(v);
-+        local_irq_disable();
- 
--    if ( !handled )
--        return true;
-+        if ( !handled )
-+            return true;
-+    }
- #endif
- 
-     if ( likely(!v->arch.need_flush_to_ram) )
 diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index d5f4dd3..59f4990 100644
+index d233a49..d5f4dd3 100644
 --- a/xen/common/ioreq.c
 +++ b/xen/common/ioreq.c
-@@ -80,6 +80,22 @@ static ioreq_t *get_ioreq(struct ioreq_server *s, struct vcpu *v)
-     return &p->vcpu_ioreq[v->vcpu_id];
- }
+@@ -29,6 +29,7 @@
+ #include <xen/trace.h>
+ #include <xen/vpci.h>
  
-+/*
-+ * This should only be used when d == current->domain or when they're
-+ * distinct and d is paused. Otherwise the result is stale before
-+ * the caller can inspect it.
-+ */
-+bool domain_has_ioreq_server(const struct domain *d)
-+{
-+    const struct ioreq_server *s;
-+    unsigned int id;
-+
-+    FOR_EACH_IOREQ_SERVER(d, id, s)
-+        return true;
-+
-+    return false;
-+}
-+
- static struct ioreq_vcpu *get_pending_vcpu(const struct vcpu *v,
-                                            struct ioreq_server **srvp)
- {
-diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index ec7e98d..f0908af 100644
---- a/xen/include/xen/ioreq.h
-+++ b/xen/include/xen/ioreq.h
-@@ -81,6 +81,8 @@ static inline bool ioreq_needs_completion(const ioreq_t *ioreq)
- #define HANDLE_BUFIOREQ(s) \
-     ((s)->bufioreq_handling != HVM_IOREQSRV_BUFIOREQ_OFF)
++#include <asm/guest_atomics.h>
+ #include <asm/hvm/ioreq.h>
  
-+bool domain_has_ioreq_server(const struct domain *d);
-+
- bool vcpu_ioreq_pending(struct vcpu *v);
- bool vcpu_ioreq_handle_completion(struct vcpu *v);
- bool is_ioreq_server_page(struct domain *d, const struct page_info *page);
+ #include <public/hvm/ioreq.h>
+@@ -1185,7 +1186,7 @@ static int ioreq_send_buffered(struct ioreq_server *s, ioreq_t *p)
+ 
+         new.read_pointer = old.read_pointer - n * IOREQ_BUFFER_SLOT_NUM;
+         new.write_pointer = old.write_pointer - n * IOREQ_BUFFER_SLOT_NUM;
+-        cmpxchg(&pg->ptrs.full, old.full, new.full);
++        guest_cmpxchg64(s->emulator, &pg->ptrs.full, old.full, new.full);
+     }
+ 
+     notify_via_xen_event_channel(d, s->bufioreq_evtchn);
 -- 
 2.7.4
 
