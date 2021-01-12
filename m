@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7445CC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 441EEC433E6
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 326752311A
+	by mail.kernel.org (Postfix) with ESMTPS id EDACD2311A
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Jan 2021 18:19:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 326752311A
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDACD2311A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.65875.116804 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.65874.116798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzOGI-000581-IG; Tue, 12 Jan 2021 18:19:22 +0000
+	id 1kzOGI-000572-3p; Tue, 12 Jan 2021 18:19:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 65875.116804; Tue, 12 Jan 2021 18:19:22 +0000
+Received: by outflank-mailman (output) from mailman id 65874.116798; Tue, 12 Jan 2021 18:19:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1kzOGI-00057T-9T; Tue, 12 Jan 2021 18:19:22 +0000
-Received: by outflank-mailman (input) for mailman id 65875;
+	id 1kzOGH-00056t-Vc; Tue, 12 Jan 2021 18:19:21 +0000
+Received: by outflank-mailman (input) for mailman id 65874;
  Tue, 12 Jan 2021 18:19:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gu5a=GP=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1kzOBa-0003Yo-Ve
- for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 18:14:31 +0000
+ id 1kzOB6-0003Yo-UE
+ for xen-devel@lists.xenproject.org; Tue, 12 Jan 2021 18:14:00 +0000
 Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dd7948a6-efbf-4162-ba1b-ebc08799d93e;
- Tue, 12 Jan 2021 18:13:34 +0000 (UTC)
+ id daf962e1-e655-4aeb-a74b-a397aa52de59;
+ Tue, 12 Jan 2021 18:13:25 +0000 (UTC)
 Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10CIDXEi023363;
- Tue, 12 Jan 2021 19:13:33 +0100 (CET)
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10CIDOm0018700;
+ Tue, 12 Jan 2021 19:13:24 +0100 (CET)
 Received: from armandeche.soc.lip6.fr (armandeche [132.227.63.133])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10CIDWOw006995;
- Tue, 12 Jan 2021 19:13:32 +0100 (MET)
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10CIDNwJ021031;
+ Tue, 12 Jan 2021 19:13:23 +0100 (MET)
 Received: by armandeche.soc.lip6.fr (Postfix, from userid 20331)
- id 26A867218; Tue, 12 Jan 2021 19:13:32 +0100 (MET)
+ id 1995D7218; Tue, 12 Jan 2021 19:13:23 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,73 +56,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd7948a6-efbf-4162-ba1b-ebc08799d93e
+X-Inumbo-ID: daf962e1-e655-4aeb-a74b-a397aa52de59
 From: Manuel Bouyer <bouyer@antioche.eu.org>
 To: xen-devel@lists.xenproject.org
-Cc: Manuel Bouyer <bouyer@netbsd.org>, Ian Jackson <iwj@xenproject.org>,
-        Wei Liu <wl@xen.org>
-Subject: [PATCH] libs/evtchn: fix build on NetBSD.
-Date: Tue, 12 Jan 2021 19:12:30 +0100
-Message-Id: <20210112181242.1570-10-bouyer@antioche.eu.org>
+Cc: Manuel Bouyer <bouyer@netbsd.org>,
+        Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+        Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH] gdbsx: use right path for privcmd
+Date: Tue, 12 Jan 2021 19:12:28 +0100
+Message-Id: <20210112181242.1570-8-bouyer@antioche.eu.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210112181242.1570-1-bouyer@antioche.eu.org>
 References: <20210112181242.1570-1-bouyer@antioche.eu.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 12 Jan 2021 19:13:33 +0100 (CET)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 12 Jan 2021 19:13:24 +0100 (CET)
 X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
 From: Manuel Bouyer <bouyer@netbsd.org>
 
-use xenio3.h for ioctl definitions
-read_exact/write_exact seems to not be available here, which cause
-a gcc error.
-Use plain read/write, the xenevtchn interface won't do partial read/write
-on NetBSD anyway so it should be safe.
+On NetBSD the privcmd interface node is /kern/xen/privcmd
 
 Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
-Fixes: b7f76a699dc ('tools: Refactor /dev/xen/evtchn wrappers into libxenevtchn.
-')
-
 ---
- tools/libs/evtchn/netbsd.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/debugger/gdbsx/xg/xg_main.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/evtchn/netbsd.c b/tools/libs/evtchn/netbsd.c
-index 8b8545d2f9..6d4ce28011 100644
---- a/tools/libs/evtchn/netbsd.c
-+++ b/tools/libs/evtchn/netbsd.c
-@@ -25,10 +25,10 @@
+diff --git a/tools/debugger/gdbsx/xg/xg_main.c b/tools/debugger/gdbsx/xg/xg_main.c
+index ce95648e7e..83a009c195 100644
+--- a/tools/debugger/gdbsx/xg/xg_main.c
++++ b/tools/debugger/gdbsx/xg/xg_main.c
+@@ -130,11 +130,11 @@ xg_init()
+     int flags, saved_errno;
  
- #include <sys/ioctl.h>
- 
--#include <xen/sys/evtchn.h>
--
- #include "private.h"
- 
-+#include <xen/xenio3.h>
-+
- #define EVTCHN_DEV_NAME  "/dev/xenevt"
- 
- int osdep_evtchn_open(xenevtchn_handle *xce)
-@@ -131,7 +131,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
-     int fd = xce->fd;
-     evtchn_port_t port;
- 
--    if ( read_exact(fd, (char *)&port, sizeof(port)) == -1 )
-+    if ( read(fd, (char *)&port, sizeof(port)) == -1 )
-         return -1;
- 
-     return port;
-@@ -140,7 +140,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
- int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- {
-     int fd = xce->fd;
--    return write_exact(fd, (char *)&port, sizeof(port));
-+    return write(fd, (char *)&port, sizeof(port));
- }
- 
- /*
+     XGTRC("E\n");
+-    if ((_dom0_fd=open("/dev/xen/privcmd", O_RDWR)) == -1) {
+-        if ((_dom0_fd=open("/proc/xen/privcmd", O_RDWR)) == -1) {
+-            perror("Failed to open /dev/xen/privcmd or /proc/xen/privcmd\n");
+-            return -1;
+-        }
++    if ((_dom0_fd=open("/dev/xen/privcmd", O_RDWR)) == -1 &&
++        (_dom0_fd=open("/proc/xen/privcmd", O_RDWR)) == -1 &&
++	(_dom0_fd=open("/kern/xen/privcmd", O_RDWR)) == -1) {
++        perror("Failed to open /dev/xen/privcmd or /proc/xen/privcmd or /kern/xen/privcmd\n");
++        return -1;
+     }
+     /* Although we return the file handle as the 'xc handle' the API
+      * does not specify / guarentee that this integer is in fact
 -- 
 2.29.2
 
