@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55BAFC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:23:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EEE8C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:23:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17F9F23B28
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:23:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17F9F23B28
+	by mail.kernel.org (Postfix) with ESMTPS id BB14623B28
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:23:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB14623B28
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67159.119613 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67163.119624 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04TA-0000XW-8u; Thu, 14 Jan 2021 15:23:28 +0000
+	id 1l04TW-0000cs-Fi; Thu, 14 Jan 2021 15:23:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67159.119613; Thu, 14 Jan 2021 15:23:28 +0000
+Received: by outflank-mailman (output) from mailman id 67163.119624; Thu, 14 Jan 2021 15:23:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04TA-0000XP-4J; Thu, 14 Jan 2021 15:23:28 +0000
-Received: by outflank-mailman (input) for mailman id 67159;
- Thu, 14 Jan 2021 15:23:27 +0000
+	id 1l04TW-0000cl-CU; Thu, 14 Jan 2021 15:23:50 +0000
+Received: by outflank-mailman (input) for mailman id 67163;
+ Thu, 14 Jan 2021 15:23:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=J1hy=GR=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l04T9-0000XK-2N
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:23:27 +0000
+ id 1l04TV-0000cd-HI
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:23:49 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e704fada-4c4f-44c2-b0ea-03f459e5cfc0;
- Thu, 14 Jan 2021 15:23:25 +0000 (UTC)
+ id 7873b4be-a62e-4484-b1c7-c800cfe9f6eb;
+ Thu, 14 Jan 2021 15:23:48 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E8391AEAB;
- Thu, 14 Jan 2021 15:23:24 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 73EF9AC24;
+ Thu, 14 Jan 2021 15:23:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e704fada-4c4f-44c2-b0ea-03f459e5cfc0
+X-Inumbo-ID: 7873b4be-a62e-4484-b1c7-c800cfe9f6eb
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610637805; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610637827; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=gDxKZJvVeCw6bI1HCjMqfPdjKwcrVa8JpjiVL8f6Rh0=;
-	b=ZzSkq6nsz+Scy3LhPyKuoVdqOxWS3qXBq0TnaR6pYcdHxuX2j8k5+nKBqpc+JUnuEJHmvq
-	NUArRDQPF3HSQREoD2wmbhJhIFxr5VTlovo+njCIUTL2TcRqt9AnsD1vMMIQOia6bitVbM
-	DkFt088WRjeg+sa3gSE66poo5EAGYvs=
-Subject: [PATCH 1/3] gnttab: adjust pin count overflow checks
+	bh=fNiAyk16ONrTzcmz1yqaPikcT/RPQ4kXmUtWKkq/WvA=;
+	b=h3lDOjOHjMs6D4e1JWift7Ax49ulM6DdMMT08dy5atumaqpo6pJOZ8cdhWpJL6r5OnIxhd
+	t9lNFaUAus37rwej7wWbCuRbCzeG4dc6l9/5jt6F1ZrkD9lngCSIUPyezOep7+wD4zRud0
+	Y7mOJbxq9/gJAU7/IA5t9sEefz4admQ=
+Subject: [PATCH 2/3] gnttab: consolidate pin-to-status syncing
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -71,8 +71,8 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
  Wei Liu <wl@xen.org>
 References: <556c42fd-d7f8-f09f-eb3a-6b724d2b467d@suse.com>
-Message-ID: <38331526-5c24-08d4-b1b6-9baa16251c1d@suse.com>
-Date: Thu, 14 Jan 2021 16:23:25 +0100
+Message-ID: <5e84b80d-4b6f-118b-c2cb-071e6e774db5@suse.com>
+Date: Thu, 14 Jan 2021 16:23:47 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.0
 MIME-Version: 1.0
@@ -81,179 +81,220 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-It's at least odd to check counters which aren't going to be
-incremented. And it's also not helpful to use open-coded literal numbers
-in these checks.
+Forever since the fix for XSA-230 the 2nd of the comments ahead of
+fixup_status_for_copy_pin() has been stale - there's nothing specific to
+transitive grants there anymore.
 
-Calculate the increment values first and derive from them the mask to
-use in the checks.
-
-Also move the pin count checks ahead of the calculation of the status
-(and for copy also sha2) pointers: They're not needed in the failure
-cases, and this way the compiler may also have an easier time keeping
-the variables at least transiently in registers for the subsequent uses.
+Move the function up, drop the "copy" part from its name again, add a
+"readonly" parameter, and use it also on other paths having decremented
+one (or not having got to increment any) of the pin counts.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/grant_table.c
 +++ b/xen/common/grant_table.c
-@@ -323,22 +323,25 @@ shared_entry_header(struct grant_table *
- /* Active grant entry - used for shadowing GTF_permit_access grants. */
- struct active_grant_entry {
-     uint32_t      pin;    /* Reference count information:             */
-+                          /* Width of the individual counter fields.  */
-+#define GNTPIN_cntr_width    8
-+#define GNTPIN_cntr_mask     ((1U << GNTPIN_cntr_width) - 1)
-                           /* Count of writable host-CPU mappings.     */
- #define GNTPIN_hstw_shift    0
- #define GNTPIN_hstw_inc      (1U << GNTPIN_hstw_shift)
--#define GNTPIN_hstw_mask     (0xFFU << GNTPIN_hstw_shift)
-+#define GNTPIN_hstw_mask     (GNTPIN_cntr_mask << GNTPIN_hstw_shift)
-                           /* Count of read-only host-CPU mappings.    */
--#define GNTPIN_hstr_shift    8
-+#define GNTPIN_hstr_shift    (GNTPIN_hstw_shift + GNTPIN_cntr_width)
- #define GNTPIN_hstr_inc      (1U << GNTPIN_hstr_shift)
--#define GNTPIN_hstr_mask     (0xFFU << GNTPIN_hstr_shift)
-+#define GNTPIN_hstr_mask     (GNTPIN_cntr_mask << GNTPIN_hstr_shift)
-                           /* Count of writable device-bus mappings.   */
--#define GNTPIN_devw_shift    16
-+#define GNTPIN_devw_shift    (GNTPIN_hstr_shift + GNTPIN_cntr_width)
- #define GNTPIN_devw_inc      (1U << GNTPIN_devw_shift)
--#define GNTPIN_devw_mask     (0xFFU << GNTPIN_devw_shift)
-+#define GNTPIN_devw_mask     (GNTPIN_cntr_mask << GNTPIN_devw_shift)
-                           /* Count of read-only device-bus mappings.  */
--#define GNTPIN_devr_shift    24
-+#define GNTPIN_devr_shift    (GNTPIN_devw_shift + GNTPIN_cntr_width)
- #define GNTPIN_devr_inc      (1U << GNTPIN_devr_shift)
--#define GNTPIN_devr_mask     (0xFFU << GNTPIN_devr_shift)
-+#define GNTPIN_devr_mask     (GNTPIN_cntr_mask << GNTPIN_devr_shift)
+@@ -908,6 +908,25 @@ static int _set_status(const grant_entry
+         return _set_status_v2(shah, status, rd, act, readonly, mapflag, ldomid);
+ }
  
-     domid_t       domid;  /* Domain being granted access.             */
-     unsigned int  start:15; /* For sub-page grants, the start offset
-@@ -988,7 +991,8 @@ map_grant_ref(
++/*
++ * The status for a grant may indicate that we're taking more access than
++ * the pin requires.  Fix up the status to match the pin.  Called with the
++ * domain's grant table lock held at least in read mode and with the active
++ * entry lock held (iow act->pin can't change behind our backs).
++ */
++static void fixup_status_for_pin(struct domain *rd,
++                                 const struct active_grant_entry *act,
++                                 uint16_t *status, bool readonly)
++{
++    unsigned int clear_flags = act->pin ? 0 : GTF_reading;
++
++    if ( !readonly && !(act->pin & (GNTPIN_hstw_mask | GNTPIN_devw_mask)) )
++        clear_flags |= GTF_writing;
++
++    if ( clear_flags )
++        gnttab_clear_flags(rd, clear_flags, status);
++}
++
+ static struct active_grant_entry *grant_map_exists(const struct domain *ld,
+                                                    struct grant_table *rgt,
+                                                    mfn_t mfn,
+@@ -991,8 +1010,7 @@ map_grant_ref(
      mfn_t mfn;
      struct page_info *pg = NULL;
      int            rc = GNTST_okay;
--    unsigned int   cache_flags, clear_flags = 0, refcnt = 0, typecnt = 0;
-+    unsigned int   cache_flags, clear_flags = 0, refcnt = 0, typecnt = 0,
-+                   pin_incr = 0;
+-    unsigned int   cache_flags, clear_flags = 0, refcnt = 0, typecnt = 0,
+-                   pin_incr = 0;
++    unsigned int   cache_flags, refcnt = 0, typecnt = 0, pin_incr = 0;
      bool           host_map_created = false;
      struct active_grant_entry *act = NULL;
      struct grant_mapping *mt;
-@@ -998,7 +1002,14 @@ map_grant_ref(
- 
-     ld = current->domain;
- 
--    if ( unlikely((op->flags & (GNTMAP_device_map|GNTMAP_host_map)) == 0) )
-+    if ( op->flags & GNTMAP_device_map )
-+        pin_incr += (op->flags & GNTMAP_readonly) ? GNTPIN_devr_inc
-+                                                  : GNTPIN_devw_inc;
-+    if ( op->flags & GNTMAP_host_map )
-+        pin_incr += (op->flags & GNTMAP_readonly) ? GNTPIN_hstr_inc
-+                                                  : GNTPIN_hstw_inc;
-+
-+    if ( unlikely(!pin_incr) )
-     {
-         gdprintk(XENLOG_INFO, "Bad flags in grant map op: %x\n", op->flags);
-         op->status = GNTST_bad_gntref;
-@@ -1052,19 +1063,19 @@ map_grant_ref(
-     shah = shared_entry_header(rgt, ref);
-     act = active_entry_acquire(rgt, ref);
- 
--    /* Make sure we do not access memory speculatively */
--    status = evaluate_nospec(rgt->gt_version == 1) ? &shah->flags
--                                                 : &status_entry(rgt, ref);
--
-     /* If already pinned, check the active domid and avoid refcnt overflow. */
-     if ( act->pin &&
-          ((act->domid != ld->domain_id) ||
--          (act->pin & 0x80808080U) != 0 ||
-+          (act->pin & (pin_incr << (GNTPIN_cntr_width - 1))) ||
-           (act->is_sub_page)) )
-         PIN_FAIL(act_release_out, GNTST_general_error,
-                  "Bad domain (%d != %d), or risk of counter overflow %08x, or subpage %d\n",
-                  act->domid, ld->domain_id, act->pin, act->is_sub_page);
- 
-+    /* Make sure we do not access memory speculatively */
-+    status = evaluate_nospec(rgt->gt_version == 1) ? &shah->flags
-+                                                   : &status_entry(rgt, ref);
-+
-     if ( !act->pin ||
-          (!(op->flags & GNTMAP_readonly) &&
-           !(act->pin & (GNTPIN_hstw_mask|GNTPIN_devw_mask))) )
-@@ -1095,12 +1106,7 @@ map_grant_ref(
-         }
-     }
- 
--    if ( op->flags & GNTMAP_device_map )
--        act->pin += (op->flags & GNTMAP_readonly) ?
--            GNTPIN_devr_inc : GNTPIN_devw_inc;
--    if ( op->flags & GNTMAP_host_map )
--        act->pin += (op->flags & GNTMAP_readonly) ?
--            GNTPIN_hstr_inc : GNTPIN_hstw_inc;
-+    act->pin += pin_incr;
- 
-     mfn = act->mfn;
- 
-@@ -1275,13 +1281,7 @@ map_grant_ref(
-     grant_read_lock(rgt);
- 
-     act = active_entry_acquire(rgt, op->ref);
--
--    if ( op->flags & GNTMAP_device_map )
--        act->pin -= (op->flags & GNTMAP_readonly) ?
--            GNTPIN_devr_inc : GNTPIN_devw_inc;
--    if ( op->flags & GNTMAP_host_map )
--        act->pin -= (op->flags & GNTMAP_readonly) ?
--            GNTPIN_hstr_inc : GNTPIN_hstw_inc;
-+    act->pin -= pin_incr;
+@@ -1284,15 +1302,7 @@ map_grant_ref(
+     act->pin -= pin_incr;
  
   unlock_out_clear:
-     if ( !(op->flags & GNTMAP_readonly) &&
-@@ -2516,6 +2516,7 @@ acquire_grant_for_copy(
-     uint16_t trans_length;
+-    if ( !(op->flags & GNTMAP_readonly) &&
+-         !(act->pin & (GNTPIN_hstw_mask|GNTPIN_devw_mask)) )
+-        clear_flags |= GTF_writing;
+-
+-    if ( !act->pin )
+-        clear_flags |= GTF_reading;
+-
+-    if ( clear_flags )
+-        gnttab_clear_flags(rd, clear_flags, status);
++    fixup_status_for_pin(rd, act, status, op->flags & GNTMAP_readonly);
+ 
+  act_release_out:
+     active_entry_release(act);
+@@ -1507,7 +1517,6 @@ unmap_common_complete(struct gnttab_unma
+     grant_entry_header_t *sha;
+     struct page_info *pg;
+     uint16_t *status;
+-    unsigned int clear_flags = 0;
+ 
+     if ( evaluate_nospec(!op->done) )
+     {
+@@ -1566,15 +1575,7 @@ unmap_common_complete(struct gnttab_unma
+             act->pin -= GNTPIN_hstw_inc;
+     }
+ 
+-    if ( ((act->pin & (GNTPIN_devw_mask|GNTPIN_hstw_mask)) == 0) &&
+-         !(op->done & GNTMAP_readonly) )
+-        clear_flags |= GTF_writing;
+-
+-    if ( act->pin == 0 )
+-        clear_flags |= GTF_reading;
+-
+-    if ( clear_flags )
+-        gnttab_clear_flags(rd, clear_flags, status);
++    fixup_status_for_pin(rd, act, status, op->done & GNTMAP_readonly);
+ 
+     active_entry_release(act);
+     grant_read_unlock(rgt);
+@@ -2414,7 +2415,6 @@ release_grant_for_copy(
+     uint16_t *status;
+     grant_ref_t trans_gref;
+     struct domain *td;
+-    unsigned int clear_flags = 0;
+ 
+     grant_read_lock(rgt);
+ 
+@@ -2444,15 +2444,9 @@ release_grant_for_copy(
+         gnttab_mark_dirty(rd, mfn);
+ 
+         act->pin -= GNTPIN_hstw_inc;
+-        if ( !(act->pin & (GNTPIN_devw_mask|GNTPIN_hstw_mask)) )
+-            clear_flags |= GTF_writing;
+     }
+ 
+-    if ( !act->pin )
+-        clear_flags |= GTF_reading;
+-
+-    if ( clear_flags )
+-        gnttab_clear_flags(rd, clear_flags, status);
++    fixup_status_for_pin(rd, act, status, readonly);
+ 
+     active_entry_release(act);
+     grant_read_unlock(rgt);
+@@ -2469,27 +2463,6 @@ release_grant_for_copy(
+     }
+ }
+ 
+-/* The status for a grant indicates that we're taking more access than
+-   the pin requires.  Fix up the status to match the pin.  Called
+-   under the domain's grant table lock. */
+-/* Only safe on transitive grants.  Even then, note that we don't
+-   attempt to drop any pin on the referent grant. */
+-static void fixup_status_for_copy_pin(struct domain *rd,
+-                                      const struct active_grant_entry *act,
+-                                      uint16_t *status)
+-{
+-    unsigned int clear_flags = 0;
+-
+-    if ( !(act->pin & (GNTPIN_hstw_mask | GNTPIN_devw_mask)) )
+-        clear_flags |= GTF_writing;
+-
+-    if ( !act->pin )
+-        clear_flags |= GTF_reading;
+-
+-    if ( clear_flags )
+-        gnttab_clear_flags(rd, clear_flags, status);
+-}
+-
+ /*
+  * Grab a machine frame number from a grant entry and update the flags
+  * and pin count as appropriate. If rc == GNTST_okay, note that this *does*
+@@ -2517,7 +2490,6 @@ acquire_grant_for_copy(
      bool is_sub_page;
      s16 rc = GNTST_okay;
-+    unsigned int pin_incr = readonly ? GNTPIN_hstr_inc : GNTPIN_hstw_inc;
-     unsigned int clear_flags = 0;
+     unsigned int pin_incr = readonly ? GNTPIN_hstr_inc : GNTPIN_hstw_inc;
+-    unsigned int clear_flags = 0;
  
      *page = NULL;
-@@ -2530,6 +2531,14 @@ acquire_grant_for_copy(
-     shah = shared_entry_header(rgt, gref);
-     act = active_entry_acquire(rgt, gref);
  
-+    /* If already pinned, check the active domid and avoid refcnt overflow. */
-+    if ( act->pin &&
-+         ((act->domid != ldom) ||
-+          (act->pin & (pin_incr << (GNTPIN_cntr_width - 1)))) )
-+        PIN_FAIL(unlock_out, GNTST_general_error,
-+                 "Bad domain (%d != %d), or risk of counter overflow %08x\n",
-+                 act->domid, ldom, act->pin);
-+
-     if ( evaluate_nospec(rgt->gt_version == 1) )
-     {
-         sha2 = NULL;
-@@ -2541,12 +2550,6 @@ acquire_grant_for_copy(
-         status = &status_entry(rgt, gref);
-     }
+@@ -2604,8 +2576,8 @@ acquire_grant_for_copy(
  
--    /* If already pinned, check the active domid and avoid refcnt overflow. */
--    if ( act->pin && ((act->domid != ldom) || (act->pin & 0x80808080U) != 0) )
--        PIN_FAIL(unlock_out, GNTST_general_error,
--                 "Bad domain (%d != %d), or risk of counter overflow %08x\n",
--                 act->domid, ldom, act->pin);
+         if ( rc != GNTST_okay )
+         {
+-            fixup_status_for_copy_pin(rd, act, status);
+             rcu_unlock_domain(td);
++            fixup_status_for_pin(rd, act, status, readonly);
+             active_entry_release(act);
+             grant_read_unlock(rgt);
+             return rc;
+@@ -2627,8 +2599,8 @@ acquire_grant_for_copy(
+                           !act->is_sub_page)) )
+         {
+             release_grant_for_copy(td, trans_gref, readonly);
+-            fixup_status_for_copy_pin(rd, act, status);
+             rcu_unlock_domain(td);
++            fixup_status_for_pin(rd, act, status, readonly);
+             active_entry_release(act);
+             grant_read_unlock(rgt);
+             put_page(*page);
+@@ -2742,15 +2714,7 @@ acquire_grant_for_copy(
+     return rc;
+ 
+  unlock_out_clear:
+-    if ( !(readonly) &&
+-         !(act->pin & (GNTPIN_hstw_mask | GNTPIN_devw_mask)) )
+-        clear_flags |= GTF_writing;
 -
-     old_pin = act->pin;
-     if ( sha2 && (shah->flags & GTF_type_mask) == GTF_transitive )
+-    if ( !act->pin )
+-        clear_flags |= GTF_reading;
+-
+-    if ( clear_flags )
+-        gnttab_clear_flags(rd, clear_flags, status);
++    fixup_status_for_pin(rd, act, status, readonly);
+ 
+  unlock_out:
+     active_entry_release(act);
+@@ -3720,8 +3684,6 @@ gnttab_release_mappings(
+ 
+     for ( handle = 0; handle < gt->maptrack_limit; handle++ )
      {
-@@ -2728,7 +2731,7 @@ acquire_grant_for_copy(
+-        unsigned int clear_flags = 0;
+-
+         map = &maptrack_entry(gt, handle);
+         if ( !(map->flags & (GNTMAP_device_map|GNTMAP_host_map)) )
+             continue;
+@@ -3794,16 +3756,9 @@ gnttab_release_mappings(
+                     put_page(pg);
+                 }
+             }
+-
+-            if ( (act->pin & (GNTPIN_devw_mask|GNTPIN_hstw_mask)) == 0 )
+-                clear_flags |= GTF_writing;
          }
-     }
  
--    act->pin += readonly ? GNTPIN_hstr_inc : GNTPIN_hstw_inc;
-+    act->pin += pin_incr;
+-        if ( act->pin == 0 )
+-            clear_flags |= GTF_reading;
+-
+-        if ( clear_flags )
+-            gnttab_clear_flags(rd, clear_flags, status);
++        fixup_status_for_pin(rd, act, status, map->flags & GNTMAP_readonly);
  
-     *page_off = act->start;
-     *length = act->length;
+         active_entry_release(act);
+         grant_read_unlock(rgt);
 
 
