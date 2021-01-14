@@ -4,42 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FC44C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3174DC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 195AE23B44
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 195AE23B44
+	by mail.kernel.org (Postfix) with ESMTPS id C764323B40
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C764323B40
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67200.119721 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67201.119733 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04hO-0002U9-SI; Thu, 14 Jan 2021 15:38:10 +0000
+	id 1l04hT-0002Xw-6D; Thu, 14 Jan 2021 15:38:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67200.119721; Thu, 14 Jan 2021 15:38:10 +0000
+Received: by outflank-mailman (output) from mailman id 67201.119733; Thu, 14 Jan 2021 15:38:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04hO-0002U0-O1; Thu, 14 Jan 2021 15:38:10 +0000
-Received: by outflank-mailman (input) for mailman id 67200;
- Thu, 14 Jan 2021 15:38:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l04hT-0002Xo-1b; Thu, 14 Jan 2021 15:38:15 +0000
+Received: by outflank-mailman (input) for mailman id 67201;
+ Thu, 14 Jan 2021 15:38:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=P5GR=GR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l04hN-0002Sh-Jx
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:09 +0000
+ id 1l04hR-0002SV-MJ
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:13 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b7db08fb-9a29-474e-bba9-16ea968aab45;
- Thu, 14 Jan 2021 15:38:07 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d2504745-3d95-4f1d-8aa6-9c77531c1eca;
+ Thu, 14 Jan 2021 15:38:08 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 278E0AE61;
+ by mx2.suse.de (Postfix) with ESMTP id 7EEA1AEBB;
  Thu, 14 Jan 2021 15:38:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,73 +51,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7db08fb-9a29-474e-bba9-16ea968aab45
+X-Inumbo-ID: d2504745-3d95-4f1d-8aa6-9c77531c1eca
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1610638687; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=LIF6wlgKto7l14sulM2jBWZg1y3QuFNW1G+8fVgpNfk=;
-	b=NhBtRzL+b1SXThGd+WY91WfSpgyHXWezUT6Q/oTc3PO8tsZY3fgRZFIMqYGhoMPP2Xtga1
-	O9pE10CH+jlOsOAjwhaPQOUYEZCiAwbQV3GLHosaGaDS3CU571M9go7cVFJvPrp7X2kQW2
-	qxaQavOnPHLnCoPomuLgtbybD09OmcM=
+	bh=ULA5oyQ9PKQvxY0XQ311WS+tk8vKPHRD8O8PUy43dFQ=;
+	b=etqhtqGCj1/phUwMjAy/YdUqFrjO68IY6PuNwn0qBx3Ju9kKWSznIR4Ps7BD6wq2Dv9xc0
+	QDDtxxcR3b8vlqmPAWeRYnpK/WeMJK8y0jgosQ5chzRIIeZI020jxspGd7V4toxUPLc9Am
+	Bz6Bvlcij0c950hgqQM7hZ8CxGbseI8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v11 02/27] tools/libxenevtchn: rename open_flags to flags
-Date: Thu, 14 Jan 2021 16:37:38 +0100
-Message-Id: <20210114153803.2591-3-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v11 04/27] tools/libxenevtchn: propagate xenevtchn_open() flags parameter
+Date: Thu, 14 Jan 2021 16:37:40 +0100
+Message-Id: <20210114153803.2591-5-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210114153803.2591-1-jgross@suse.com>
 References: <20210114153803.2591-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Rename the xenevtchn_open() parameter open_flags to flags as it might
-be used for things not passed on to open().
+Propagate the flags parameter of xenevtchn_open() to the OS-specific
+handlers in order to enable handling them there.
 
-No functional change.
-
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V11:
-- new patch (Andrew Cooper)
+- new patch (carved out from patch 4 of V10, Andrew Cooper)
 ---
- tools/include/xenevtchn.h | 2 +-
- tools/libs/evtchn/core.c  | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ tools/libs/evtchn/core.c    | 2 +-
+ tools/libs/evtchn/freebsd.c | 2 +-
+ tools/libs/evtchn/linux.c   | 2 +-
+ tools/libs/evtchn/minios.c  | 2 +-
+ tools/libs/evtchn/netbsd.c  | 2 +-
+ tools/libs/evtchn/private.h | 2 +-
+ tools/libs/evtchn/solaris.c | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/tools/include/xenevtchn.h b/tools/include/xenevtchn.h
-index 91821ee56d..3e9b6e7323 100644
---- a/tools/include/xenevtchn.h
-+++ b/tools/include/xenevtchn.h
-@@ -67,7 +67,7 @@ struct xentoollog_logger;
-  */
- /* Currently no flags are defined */
- xenevtchn_handle *xenevtchn_open(struct xentoollog_logger *logger,
--                                 unsigned open_flags);
-+                                 unsigned int flags);
- 
- /*
-  * Close a handle previously allocated with xenevtchn_open().
 diff --git a/tools/libs/evtchn/core.c b/tools/libs/evtchn/core.c
-index 5008810f4f..50bae8ec0d 100644
+index 581a14e3df..c069d5da71 100644
 --- a/tools/libs/evtchn/core.c
 +++ b/tools/libs/evtchn/core.c
-@@ -29,7 +29,7 @@ static int all_restrict_cb(Xentoolcore__Active_Handle *ah, domid_t domid)
-     return xenevtchn_restrict(xce, domid);
+@@ -60,7 +60,7 @@ xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned int flags)
+             goto err;
+     }
+ 
+-    rc = osdep_evtchn_open(xce);
++    rc = osdep_evtchn_open(xce, flags);
+     if ( rc  < 0 )
+         goto err;
+ 
+diff --git a/tools/libs/evtchn/freebsd.c b/tools/libs/evtchn/freebsd.c
+index 554af122c8..bb601f350f 100644
+--- a/tools/libs/evtchn/freebsd.c
++++ b/tools/libs/evtchn/freebsd.c
+@@ -31,7 +31,7 @@
+ 
+ #define EVTCHN_DEV      "/dev/xen/evtchn"
+ 
+-int osdep_evtchn_open(xenevtchn_handle *xce)
++int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
+ {
+     int fd = open(EVTCHN_DEV, O_RDWR|O_CLOEXEC);
+ 
+diff --git a/tools/libs/evtchn/linux.c b/tools/libs/evtchn/linux.c
+index 4582a58ec4..62adc0e574 100644
+--- a/tools/libs/evtchn/linux.c
++++ b/tools/libs/evtchn/linux.c
+@@ -34,7 +34,7 @@
+ #define O_CLOEXEC 0
+ #endif
+ 
+-int osdep_evtchn_open(xenevtchn_handle *xce)
++int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
+ {
+     int fd = open("/dev/xen/evtchn", O_RDWR|O_CLOEXEC);
+ 
+diff --git a/tools/libs/evtchn/minios.c b/tools/libs/evtchn/minios.c
+index 8e9f77bb6b..47c153c268 100644
+--- a/tools/libs/evtchn/minios.c
++++ b/tools/libs/evtchn/minios.c
+@@ -69,7 +69,7 @@ static void port_dealloc(struct evtchn_port_info *port_info)
+     free(port_info);
  }
  
--xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned open_flags)
-+xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned int flags)
+-int osdep_evtchn_open(xenevtchn_handle *xce)
++int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
  {
-     xenevtchn_handle *xce = malloc(sizeof(*xce));
-     int rc;
+     int fd = alloc_fd(FTYPE_EVTCHN);
+ 
+diff --git a/tools/libs/evtchn/netbsd.c b/tools/libs/evtchn/netbsd.c
+index 53f9299ebb..60a9235978 100644
+--- a/tools/libs/evtchn/netbsd.c
++++ b/tools/libs/evtchn/netbsd.c
+@@ -31,7 +31,7 @@
+ 
+ #define EVTCHN_DEV_NAME  "/dev/xenevt"
+ 
+-int osdep_evtchn_open(xenevtchn_handle *xce)
++int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
+ {
+     int fd = open(EVTCHN_DEV_NAME, O_NONBLOCK|O_RDWR);
+ 
+diff --git a/tools/libs/evtchn/private.h b/tools/libs/evtchn/private.h
+index 31e595bea2..319d1996d7 100644
+--- a/tools/libs/evtchn/private.h
++++ b/tools/libs/evtchn/private.h
+@@ -14,7 +14,7 @@ struct xenevtchn_handle {
+     Xentoolcore__Active_Handle tc_ah;
+ };
+ 
+-int osdep_evtchn_open(xenevtchn_handle *xce);
++int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags);
+ int osdep_evtchn_close(xenevtchn_handle *xce);
+ int osdep_evtchn_restrict(xenevtchn_handle *xce, domid_t domid);
+ 
+diff --git a/tools/libs/evtchn/solaris.c b/tools/libs/evtchn/solaris.c
+index d87abc553c..df9579df17 100644
+--- a/tools/libs/evtchn/solaris.c
++++ b/tools/libs/evtchn/solaris.c
+@@ -29,7 +29,7 @@
+ 
+ #include "private.h"
+ 
+-int osdep_evtchn_open(xenevtchn_handle *xce)
++int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
+ {
+     int fd;
+ 
 -- 
 2.26.2
 
