@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A415C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D261C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:50:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 345AD23A50
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:50:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 345AD23A50
+	by mail.kernel.org (Postfix) with ESMTPS id 0175F23A50
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:50:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0175F23A50
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67285.119973 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67290.119985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04t6-0006fF-66; Thu, 14 Jan 2021 15:50:16 +0000
+	id 1l04tH-0006mD-FF; Thu, 14 Jan 2021 15:50:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67285.119973; Thu, 14 Jan 2021 15:50:16 +0000
+Received: by outflank-mailman (output) from mailman id 67290.119985; Thu, 14 Jan 2021 15:50:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04t6-0006f6-0h; Thu, 14 Jan 2021 15:50:16 +0000
-Received: by outflank-mailman (input) for mailman id 67285;
- Thu, 14 Jan 2021 15:50:14 +0000
+	id 1l04tH-0006m6-Ax; Thu, 14 Jan 2021 15:50:27 +0000
+Received: by outflank-mailman (input) for mailman id 67290;
+ Thu, 14 Jan 2021 15:50:26 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=P5GR=GR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l04iQ-0002Sh-KF
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:39:14 +0000
+ id 1l04iL-0002Sh-K8
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:39:09 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ecfec7a8-84de-4cba-97ea-9912c855f086;
- Thu, 14 Jan 2021 15:38:13 +0000 (UTC)
+ id b0c1634a-c2ba-430f-9cff-1b4cd6f169cd;
+ Thu, 14 Jan 2021 15:38:12 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0FCAEAF28;
- Thu, 14 Jan 2021 15:38:11 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 7312AAC24;
+ Thu, 14 Jan 2021 15:38:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,188 +52,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ecfec7a8-84de-4cba-97ea-9912c855f086
+X-Inumbo-ID: b0c1634a-c2ba-430f-9cff-1b4cd6f169cd
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610638691; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610638690; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=MVw1vj179JRzKXCrDzO0w25CFd1RFuoCwsc40azDgX4=;
-	b=Fx+SLEF1OrZAETizIC+W91U4OE3uNt11Bdc/vpOfCSQ4GAJlNqK2cRuwMp3GL2su+gEuAl
-	KZz9trbe0V6fD3/hxXAd+bR+/esTo+NJKrqnf9NpVWau28lNpBKIsZT7C/c/RictdKLDQO
-	BbZq6WUIB5Y+2Rki4nfBx20IUCPjjxw=
+	bh=1D5oDSY8IZ5xFhSEZYcvdGWsAxGnd0iV4qxpJqrypD8=;
+	b=AuAWNAilptXbhINgpMj6X/5mAzC4So8DCJ5V7bwG+8o+T7S5aYZJhD3oNhUDFdLucI8QkG
+	XDQL/AQ+NfLfMnw72Fdirp/Qec1Q2G781KaKoqMLXrpLYuPpYYaCxXwasaHs/5kXDo7sP0
+	j5uG1e+pTL+jAICH++hsYi7bEyQFb1E=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v11 21/27] tools/xenstore: read internal state when doing live upgrade
-Date: Thu, 14 Jan 2021 16:37:57 +0100
-Message-Id: <20210114153803.2591-22-jgross@suse.com>
+	Julien Grall <julien.grall@amazon.com>
+Subject: [PATCH v11 18/27] tools/xenstore: handle CLOEXEC flag for local files and pipes
+Date: Thu, 14 Jan 2021 16:37:54 +0100
+Message-Id: <20210114153803.2591-19-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210114153803.2591-1-jgross@suse.com>
 References: <20210114153803.2591-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When started due to a live upgrade read the internal state and apply
-it to the data base and internal structures.
+For support of live update the locally used files need to have the
+"close on exec" flag set. Fortunately the used Xen libraries are
+already doing this, so only the logging and tdb related files and
+pipes are affected. openlog() has the close on exec attribute, too.
 
-Add the main control functions for that.
-
-For now only handle the daemon case.
+In order to be able to keep the event channels open specify the
+XENEVTCHN_NO_CLOEXEC flag when calling xenevtchn_open().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Acked-by: Julien Grall <julien.grall@amazon.com>
 ---
 V4:
-- directly mmap dump state file (Julien Grall)
-- use syslog() instead of xprintf() (Julien Grall)
+- disable LU in case of O_CLOEXEC not supported (Julien Grall)
 
-V8:
-- remove state file after reading it (Julien Grall)
+V5:
+- add comment (Paul Durrant)
+
+V7:
+- set XENEVTCHN_NO_CLOEXEC
 ---
- tools/xenstore/xenstored_control.c | 102 ++++++++++++++++++++++++++++-
- 1 file changed, 101 insertions(+), 1 deletion(-)
+ tools/xenstore/xenstored_control.c |  6 ++++++
+ tools/xenstore/xenstored_core.c    |  6 ++++--
+ tools/xenstore/xenstored_core.h    |  8 ++++++++
+ tools/xenstore/xenstored_domain.c  |  2 +-
+ tools/xenstore/xenstored_posix.c   | 12 ++++++++++++
+ 5 files changed, 31 insertions(+), 3 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 1da74ef771..7d0faa9667 100644
+index 206948d7e5..25b407e153 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -67,6 +67,14 @@ struct live_update {
- 
- static struct live_update *lu_status;
- 
-+struct lu_dump_state {
-+	void *buf;
-+	unsigned int size;
-+#ifndef __MINIOS__
-+	int fd;
-+#endif
-+};
-+
- static int lu_destroy(void *data)
- {
- #ifdef __MINIOS__
-@@ -318,6 +326,14 @@ static void lu_dump_close(FILE *fp)
- 
- 	fclose(fp);
- }
-+
-+static void lu_get_dump_state(struct lu_dump_state *state)
-+{
-+}
-+
-+static void lu_close_dump_state(struct lu_dump_state *state)
-+{
-+}
- #else
- static const char *lu_binary(const void *ctx, struct connection *conn,
- 			     const char *filename)
-@@ -373,6 +389,50 @@ static void lu_dump_close(FILE *fp)
- {
- 	fclose(fp);
- }
-+
-+static void lu_get_dump_state(struct lu_dump_state *state)
-+{
-+	char *filename;
-+	struct stat statbuf;
-+
-+	state->size = 0;
-+
-+	filename = talloc_asprintf(NULL, "%s/state_dump", xs_daemon_rootdir());
-+	if (!filename)
-+		barf("Allocation failure");
-+
-+	state->fd = open(filename, O_RDONLY);
-+	talloc_free(filename);
-+	if (state->fd < 0)
-+		return;
-+	if (fstat(state->fd, &statbuf) != 0)
-+		goto out_close;
-+	state->size = statbuf.st_size;
-+
-+	state->buf = mmap(NULL, state->size, PROT_READ, MAP_PRIVATE,
-+			  state->fd, 0);
-+	if (state->buf == MAP_FAILED) {
-+		state->size = 0;
-+		goto out_close;
-+	}
-+
-+	return;
-+
-+ out_close:
-+	close(state->fd);
-+}
-+
-+static void lu_close_dump_state(struct lu_dump_state *state)
-+{
-+	char *filename;
-+
-+	munmap(state->buf, state->size);
-+	close(state->fd);
-+
-+	filename = talloc_asprintf(NULL, "%s/state_dump", xs_daemon_rootdir());
-+	unlink(filename);
-+	talloc_free(filename);
-+}
+@@ -41,6 +41,7 @@ Interactive commands for Xen Store Daemon.
+ #define MAP_ANONYMOUS MAP_ANON
  #endif
  
- static bool lu_check_lu_allowed(void)
-@@ -455,7 +515,47 @@ static const char *lu_dump_state(const void *ctx, struct connection *conn)
++#ifndef NO_LIVE_UPDATE
+ struct live_update {
+ 	/* For verification the correct connection is acting. */
+ 	struct connection *conn;
+@@ -90,6 +91,7 @@ static const char *lu_begin(struct connection *conn)
  
- void lu_read_state(void)
- {
--	xprintf("live-update: read state\n");
-+	struct lu_dump_state state;
-+	struct xs_state_record_header *head;
-+	void *ctx = talloc_new(NULL); /* Work context for subfunctions. */
-+	struct xs_state_preamble *pre;
-+
-+	syslog(LOG_INFO, "live-update: read state\n");
-+	lu_get_dump_state(&state);
-+	if (state.size == 0)
-+		barf_perror("No state found after live-update");
-+
-+	pre = state.buf;
-+	if (memcmp(pre->ident, XS_STATE_IDENT, sizeof(pre->ident)) ||
-+	    pre->version != htobe32(XS_STATE_VERSION) ||
-+	    pre->flags != XS_STATE_FLAGS)
-+		barf("Unknown record identifier");
-+	for (head = state.buf + sizeof(*pre);
-+	     head->type != XS_STATE_TYPE_END &&
-+		(void *)head - state.buf < state.size;
-+	     head = (void *)head + sizeof(*head) + head->length) {
-+		switch (head->type) {
-+		case XS_STATE_TYPE_GLOBAL:
-+			break;
-+		case XS_STATE_TYPE_CONN:
-+			break;
-+		case XS_STATE_TYPE_WATCH:
-+			break;
-+		case XS_STATE_TYPE_TA:
-+			xprintf("live-update: ignore transaction record\n");
-+			break;
-+		case XS_STATE_TYPE_NODE:
-+			break;
-+		default:
-+			xprintf("live-update: unknown state record %08x\n",
-+				head->type);
-+			break;
-+		}
-+	}
-+
-+	lu_close_dump_state(&state);
-+
-+	talloc_free(ctx);
+ 	return NULL;
+ }
++#endif
+ 
+ struct cmd_s {
+ 	char *cmd;
+@@ -214,6 +216,7 @@ static int do_control_print(void *ctx, struct connection *conn,
+ 	return 0;
  }
  
- static const char *lu_activate_binary(const void *ctx)
++#ifndef NO_LIVE_UPDATE
+ static const char *lu_abort(const void *ctx, struct connection *conn)
+ {
+ 	syslog(LOG_INFO, "live-update: abort\n");
+@@ -575,6 +578,7 @@ static int do_control_lu(void *ctx, struct connection *conn,
+ 	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
+ 	return 0;
+ }
++#endif
+ 
+ static int do_control_help(void *, struct connection *, char **, int);
+ 
+@@ -582,6 +586,7 @@ static struct cmd_s cmds[] = {
+ 	{ "check", do_control_check, "" },
+ 	{ "log", do_control_log, "on|off" },
+ 
++#ifndef NO_LIVE_UPDATE
+ 	/*
+ 	 * The parameters are those of the xenstore-control utility!
+ 	 * Depending on environment (Mini-OS or daemon) the live-update
+@@ -601,6 +606,7 @@ static struct cmd_s cmds[] = {
+ 	{ "live-update", do_control_lu,
+ 		"[-c <cmdline>] [-F] [-t <timeout>] <file>\n"
+ 		"    Default timeout is 60 seconds.", 4 },
++#endif
+ #ifdef __MINIOS__
+ 	{ "memreport", do_control_memreport, "" },
+ #else
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 97e7277791..b0656eb3e4 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -198,7 +198,8 @@ void reopen_log(void)
+ 	if (tracefile) {
+ 		close_log();
+ 
+-		tracefd = open(tracefile, O_WRONLY|O_CREAT|O_APPEND, 0600);
++		tracefd = open(tracefile,
++			       O_WRONLY | O_CREAT | O_APPEND | O_CLOEXEC, 0600);
+ 
+ 		if (tracefd < 0)
+ 			perror("Could not open tracefile");
+@@ -1689,7 +1690,8 @@ static void setup_structure(void)
+ 	if (!(tdb_flags & TDB_INTERNAL))
+ 		unlink(tdbname);
+ 
+-	tdb_ctx = tdb_open_ex(tdbname, 7919, tdb_flags, O_RDWR|O_CREAT|O_EXCL,
++	tdb_ctx = tdb_open_ex(tdbname, 7919, tdb_flags,
++			      O_RDWR | O_CREAT | O_EXCL | O_CLOEXEC,
+ 			      0640, &tdb_logger, NULL);
+ 	if (!tdb_ctx)
+ 		barf_perror("Could not create tdb file %s", tdbname);
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 22287ddfe9..c7567eaf0b 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -35,6 +35,14 @@
+ #include "tdb.h"
+ #include "hashtable.h"
+ 
++#ifndef O_CLOEXEC
++#define O_CLOEXEC 0
++/* O_CLOEXEC support is needed for Live Update in the daemon case. */
++#ifndef __MINIOS__
++#define NO_LIVE_UPDATE
++#endif
++#endif
++
+ /* DEFAULT_BUFFER_SIZE should be large enough for each errno string. */
+ #define DEFAULT_BUFFER_SIZE 16
+ 
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 919a4d98cf..38d250fbed 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -743,7 +743,7 @@ void domain_init(void)
+ 
+ 	talloc_set_destructor(xgt_handle, close_xgt_handle);
+ 
+-	xce_handle = xenevtchn_open(NULL, 0);
++	xce_handle = xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
+ 
+ 	if (xce_handle == NULL)
+ 		barf_perror("Failed to open evtchn device");
+diff --git a/tools/xenstore/xenstored_posix.c b/tools/xenstore/xenstored_posix.c
+index 1f9603fea2..ae3e63e07f 100644
+--- a/tools/xenstore/xenstored_posix.c
++++ b/tools/xenstore/xenstored_posix.c
+@@ -90,9 +90,21 @@ void finish_daemonize(void)
+ 
+ void init_pipe(int reopen_log_pipe[2])
+ {
++	int flags;
++	unsigned int i;
++
+ 	if (pipe(reopen_log_pipe)) {
+ 		barf_perror("pipe");
+ 	}
++
++	for (i = 0; i < 2; i++) {
++		flags = fcntl(reopen_log_pipe[i], F_GETFD);
++		if (flags < 0)
++			barf_perror("pipe get flags");
++		flags |= FD_CLOEXEC;
++		if (fcntl(reopen_log_pipe[i],  F_SETFD, flags) < 0)
++			barf_perror("pipe set flags");
++	}
+ }
+ 
+ void unmap_xenbus(void *interface)
 -- 
 2.26.2
 
