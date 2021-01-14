@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 649C3C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09A72C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:39:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2323823B40
+	by mail.kernel.org (Postfix) with ESMTPS id BFA9323B40
 	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:39:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2323823B40
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BFA9323B40
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67224.119884 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67226.119901 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04i3-0003bR-JN; Thu, 14 Jan 2021 15:38:51 +0000
+	id 1l04i6-0003iG-BC; Thu, 14 Jan 2021 15:38:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67224.119884; Thu, 14 Jan 2021 15:38:51 +0000
+Received: by outflank-mailman (output) from mailman id 67226.119901; Thu, 14 Jan 2021 15:38:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04i3-0003as-6x; Thu, 14 Jan 2021 15:38:51 +0000
-Received: by outflank-mailman (input) for mailman id 67224;
- Thu, 14 Jan 2021 15:38:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l04i6-0003hr-5p; Thu, 14 Jan 2021 15:38:54 +0000
+Received: by outflank-mailman (input) for mailman id 67226;
+ Thu, 14 Jan 2021 15:38:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=P5GR=GR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l04i1-0002Sh-Jo
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:49 +0000
+ id 1l04i5-0002SV-NR
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:53 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 54f688c4-5a7b-4232-b1bb-48d3d130c18b;
- Thu, 14 Jan 2021 15:38:10 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id eca30d00-c9ce-4baf-b5f6-7c9fdd6a2488;
+ Thu, 14 Jan 2021 15:38:14 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 39D70AF16;
- Thu, 14 Jan 2021 15:38:09 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0266FAF33;
+ Thu, 14 Jan 2021 15:38:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,189 +51,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54f688c4-5a7b-4232-b1bb-48d3d130c18b
+X-Inumbo-ID: eca30d00-c9ce-4baf-b5f6-7c9fdd6a2488
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610638689; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610638692; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2ATPpHSIhjqxOB324IDYh8lpgd0riycRlPolQ2FU7Nk=;
-	b=FCsV61u0qj5cc+qk6ztohN3L/BMeak2R35XXKwZSocj1nLYURCHC/M1S1Pm66kDq3eSf1r
-	2eZypePetyBI1MTT2f+yGy63raUC5tcNgo/UTn4sgCes2xDrSqhCKRlNsPLlAk2cl8NdnU
-	X27z9poSQ1zJdDJXZnDOVOgegDUfK4Y=
+	bh=0X3hmFb/XBB8fehaMmoNUJaLeKwPTIeZipHNdqmCPHY=;
+	b=Qs2QoYJe5ledbVHWrFWJ2JULLBfVmttgAvCIb28UofyIaXT3tnRGf62TZMG1ajRXjwGbl5
+	Ip1r55G/3QA9oLsgTJjVW93GkZoqqqPLMsRRYcAcHbd+7mEWLkFVhFIZMD+kQWwjgDldH2
+	7YzOOHdI179pJgRpWTU/mEfNJ4HyZ/E=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Julien Grall <jgrall@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v11 12/27] tools/xenstore: add support for delaying execution of a xenstore request
-Date: Thu, 14 Jan 2021 16:37:48 +0100
-Message-Id: <20210114153803.2591-13-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH v11 26/27] tools/xenstore: handle dying domains in live update
+Date: Thu, 14 Jan 2021 16:38:02 +0100
+Message-Id: <20210114153803.2591-27-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210114153803.2591-1-jgross@suse.com>
 References: <20210114153803.2591-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today a Xenstore request is processed as soon as it is seen by
-xenstored. Add the framework for being able to delay processing of a
-request if the right conditions aren't met.
+From: Julien Grall <jgrall@amazon.com>
 
-Any delayed requests are executed at the end of the main processing
-loop in xenstored. They can either delay themselves again or just do
-their job. In order to enable the possibility of a timeout, the main
-loop will be paused for max one second if any requests are delayed.
+A domain could just be dying when live updating Xenstore, so the case
+of not being able to map the ring page or to connect to the event
+channel must be handled gracefully.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
-V11:
-- new patch
----
- tools/xenstore/xenstored_core.c | 55 ++++++++++++++++++++++++++++++++-
- tools/xenstore/xenstored_core.h | 21 +++++++++++++
- 2 files changed, 75 insertions(+), 1 deletion(-)
+V4:
+- new patch (Julien, I hope adding the Sob: is okay?)
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 0dddf24327..23da8dafde 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -69,6 +69,7 @@ static int xce_pollfd_idx = -1;
- static struct pollfd *fds;
- static unsigned int current_array_size;
- static unsigned int nr_fds;
-+static unsigned int delayed_requests;
+V10:
+- removed "XXX..." comment (Julien Grall)
+---
+ tools/xenstore/xenstored_control.c |  7 +++++++
+ tools/xenstore/xenstored_domain.c  | 25 +++++++++++++++++--------
+ tools/xenstore/xenstored_domain.h  |  2 ++
+ 3 files changed, 26 insertions(+), 8 deletions(-)
+
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index ba48358c31..900b82bd40 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -561,6 +561,13 @@ void lu_read_state(void)
+ 	lu_close_dump_state(&state);
  
- static int sock = -1;
- 
-@@ -255,6 +256,46 @@ static bool write_messages(struct connection *conn)
- 	return true;
+ 	talloc_free(ctx);
++
++	/*
++	 * We may have missed the VIRQ_DOM_EXC notification and a domain may
++	 * have died while we were live-updating. So check all the domains are
++	 * still alive.
++	 */
++	check_domains(true);
  }
  
-+static int undelay_request(void *_req)
-+{
-+	struct delayed_request *req = _req;
-+
-+	list_del(&req->list);
-+	delayed_requests--;
-+
-+	return 0;
-+}
-+
-+static void call_delayed(struct delayed_request *req)
-+{
-+	if (req->func(req)) {
-+		undelay_request(req);
-+		talloc_set_destructor(req, NULL);
-+	}
-+}
-+
-+int delay_request(struct connection *conn, struct buffered_data *in,
-+		  bool (*func)(struct delayed_request *), void *data)
-+{
-+	struct delayed_request *req;
-+
-+	req = talloc(in, struct delayed_request);
-+	if (!req)
-+		return ENOMEM;
-+
-+	/* For the case of connection being closed. */
-+	talloc_set_destructor(req, undelay_request);
-+
-+	req->in = in;
-+	req->func = func;
-+	req->data = data;
-+
-+	delayed_requests++;
-+	list_add(&req->list, &conn->delayed);
-+
-+	return 0;
-+}
-+
- static int destroy_conn(void *_conn)
+ static const char *lu_activate_binary(const void *ctx)
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 6934f1bc89..cbeb2a309c 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -220,7 +220,7 @@ static bool get_domain_info(unsigned int domid, xc_dominfo_t *dominfo)
+ 	       dominfo->domid == domid;
+ }
+ 
+-static void domain_cleanup(void)
++void check_domains(bool restore)
  {
- 	struct connection *conn = _conn;
-@@ -321,7 +362,8 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
- 		memset(fds, 0, sizeof(struct pollfd) * current_array_size);
- 	nr_fds = 0;
- 
--	*ptimeout = -1;
-+	/* In case of delayed requests pause for max 1 second. */
-+	*ptimeout = delayed_requests ? 1000 : -1;
- 
- 	if (sock != -1)
- 		*p_sock_pollfd_idx = set_fd(sock, POLLIN|POLLPRI);
-@@ -1524,6 +1566,7 @@ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read)
- 	INIT_LIST_HEAD(&new->out_list);
- 	INIT_LIST_HEAD(&new->watches);
- 	INIT_LIST_HEAD(&new->transaction_list);
-+	INIT_LIST_HEAD(&new->delayed);
- 
- 	list_add_tail(&new->list, &connections);
- 	talloc_set_destructor(new, destroy_conn);
-@@ -2215,6 +2258,16 @@ int main(int argc, char *argv[])
- 			}
- 		}
- 
-+		if (delayed_requests) {
-+			list_for_each_entry(conn, &connections, list) {
-+				struct delayed_request *req, *tmp;
-+
-+				list_for_each_entry_safe(req, tmp,
-+							 &conn->delayed, list)
-+					call_delayed(req);
-+			}
-+		}
-+
- 		initialize_fds(&sock_pollfd_idx, &timeout);
- 	}
- }
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 27826c125c..d5cdf17160 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -61,6 +61,20 @@ struct buffered_data
- 	char default_buffer[DEFAULT_BUFFER_SIZE];
- };
- 
-+struct delayed_request {
-+	/* Next delayed request. */
-+	struct list_head list;
-+
-+	/* The delayed request. */
-+	struct buffered_data *in;
-+
-+	/* Function to call. */
-+	bool (*func)(struct delayed_request *req);
-+
-+	/* Further data. */
-+	void *data;
-+};
-+
- struct connection;
- typedef int connwritefn_t(struct connection *, const void *, unsigned int);
- typedef int connreadfn_t(struct connection *, void *, unsigned int);
-@@ -94,6 +108,9 @@ struct connection
- 	uint32_t next_transaction_id;
- 	unsigned int transaction_started;
- 
-+	/* List of delayed requests. */
-+	struct list_head delayed;
-+
- 	/* The domain I'm associated with, if any. */
+ 	xc_dominfo_t dominfo;
  	struct domain *domain;
+@@ -244,7 +244,14 @@ static void domain_cleanup(void)
+ 				domain->shutdown = true;
+ 				notify = 1;
+ 			}
+-			if (!dominfo.dying)
++			/*
++			 * On Restore, we may have been unable to remap the
++			 * interface and the port. As we don't know whether
++			 * this was because of a dying domain, we need to
++			 * check if the interface and port are still valid.
++			 */
++			if (!dominfo.dying && domain->port &&
++			    domain->interface)
+ 				continue;
+ 		}
+ 		if (domain->conn) {
+@@ -270,7 +277,7 @@ void handle_event(void)
+ 		barf_perror("Failed to read from event fd");
  
-@@ -177,6 +194,10 @@ bool is_valid_nodename(const char *node);
- /* Get name of parent node. */
- char *get_parent(const void *ctx, const char *node);
+ 	if (port == virq_port)
+-		domain_cleanup();
++		check_domains(false);
  
-+/* Delay a request. */
-+int delay_request(struct connection *conn, struct buffered_data *in,
-+		  bool (*func)(struct delayed_request *), void *data);
+ 	if (xenevtchn_unmask(xce_handle, port) == -1)
+ 		barf_perror("Failed to write to event fd");
+@@ -442,14 +449,16 @@ static struct domain *introduce_domain(const void *ctx,
+ 	if (!domain->introduced) {
+ 		interface = is_master_domain ? xenbus_map()
+ 					     : map_interface(domid);
+-		if (!interface)
++		if (!interface && !restore)
+ 			return NULL;
+ 		if (new_domain(domain, port, restore)) {
+ 			rc = errno;
+-			if (is_master_domain)
+-				unmap_xenbus(interface);
+-			else
+-				unmap_interface(interface);
++			if (interface) {
++				if (is_master_domain)
++					unmap_xenbus(interface);
++				else
++					unmap_interface(interface);
++			}
+ 			errno = rc;
+ 			return NULL;
+ 		}
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index 8f3b4e0f8b..1cc1c03ed8 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -21,6 +21,8 @@
+ 
+ void handle_event(void);
+ 
++void check_domains(bool restore);
 +
- /* Tracing infrastructure. */
- void trace_create(const void *data, const char *type);
- void trace_destroy(const void *data, const char *type);
+ /* domid, mfn, eventchn, path */
+ int do_introduce(struct connection *conn, struct buffered_data *in);
+ 
 -- 
 2.26.2
 
