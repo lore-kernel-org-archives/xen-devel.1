@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A351C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14EA1C433E9
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC2CA23B2F
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC2CA23B2F
+	by mail.kernel.org (Postfix) with ESMTPS id AE64523B2F
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE64523B2F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67206.119789 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67208.119805 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04he-0002qe-ES; Thu, 14 Jan 2021 15:38:26 +0000
+	id 1l04hh-0002xT-Sm; Thu, 14 Jan 2021 15:38:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67206.119789; Thu, 14 Jan 2021 15:38:26 +0000
+Received: by outflank-mailman (output) from mailman id 67208.119805; Thu, 14 Jan 2021 15:38:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04he-0002qN-5v; Thu, 14 Jan 2021 15:38:26 +0000
-Received: by outflank-mailman (input) for mailman id 67206;
- Thu, 14 Jan 2021 15:38:24 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l04hh-0002x6-MO; Thu, 14 Jan 2021 15:38:29 +0000
+Received: by outflank-mailman (input) for mailman id 67208;
+ Thu, 14 Jan 2021 15:38:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=P5GR=GR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l04hc-0002Sh-Ij
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:24 +0000
+ id 1l04hg-0002SV-Me
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:28 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e2c593fc-66b5-45df-aa7b-b094302478c0;
- Thu, 14 Jan 2021 15:38:07 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 15bb4df1-c392-4237-85e9-ea5fbb819bee;
+ Thu, 14 Jan 2021 15:38:11 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F3043AE39;
- Thu, 14 Jan 2021 15:38:06 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0A6D5AF1B;
+ Thu, 14 Jan 2021 15:38:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,634 +51,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2c593fc-66b5-45df-aa7b-b094302478c0
+X-Inumbo-ID: 15bb4df1-c392-4237-85e9-ea5fbb819bee
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610638687; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610638690; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=SXeWCVLCNKqb1BhBiMbLtSi4Q/AfWDsC5gfu3rKZsDc=;
-	b=bu39cAjn9t4Xv+wen9mSUS2t5b5MYNJTbscgiBqCCULeRnGoGCeqFjmspXml/IKPsXc3sL
-	yCHl1Ni0ikqUtD2gUfnxEOZ/W9Vl45as1oBlfX9hnXefmf+gRT9pgyTuWrFGjYR0GxGhVg
-	qxlR8spRUsbvN04CcjF9aCvMZ/5DOZg=
+	bh=TIt6mjfz4m4Lbw7qhygGZfW7PH1zNiUMYf4J84ykaIY=;
+	b=p47X1EvDX3at3+DlprW2jpxt7iHhpdwilnye7qXdmarZTcRZhOmuLsxZE4MZsPHvfSU16H
+	Kpah22ifxvsdDD5e8gv9uNFWAkdstTWg+mu8gcpnfOe6Ybn73EITKetbzKeCsbN4ibbjCl
+	rfWktpKeVn8sHmd6+E5z+7aota/gQD4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v11 01/27] tools/libxenevtchn: switch to standard xen coding style
-Date: Thu, 14 Jan 2021 16:37:37 +0100
-Message-Id: <20210114153803.2591-2-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v11 16/27] tools/xenstore: add include file for state structure definitions
+Date: Thu, 14 Jan 2021 16:37:52 +0100
+Message-Id: <20210114153803.2591-17-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210114153803.2591-1-jgross@suse.com>
 References: <20210114153803.2591-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There is a mixture of different styles in libxenevtchn. Use the
-standard xen style only.
-
-No functional change.
+Add an include file containing all structures and defines needed for
+dumping and restoring the internal Xenstore state.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-V11:
-- new patch
----
- tools/libs/evtchn/core.c    | 24 +++++----
- tools/libs/evtchn/freebsd.c | 25 +++++++---
- tools/libs/evtchn/linux.c   |  4 ++
- tools/libs/evtchn/minios.c  | 98 +++++++++++++++++++++++++++----------
- tools/libs/evtchn/netbsd.c  | 22 ++++++---
- tools/libs/evtchn/solaris.c | 12 +++--
- 6 files changed, 131 insertions(+), 54 deletions(-)
+V4:
+- drop mfn from connection record (rebase to V5 of state doc patch)
+- add #ifdef __MINIOS__ (Julien Grall)
+- correct comments (Julien Grall)
+- add data_in_len
 
-diff --git a/tools/libs/evtchn/core.c b/tools/libs/evtchn/core.c
-index aff6ecfaa0..5008810f4f 100644
---- a/tools/libs/evtchn/core.c
-+++ b/tools/libs/evtchn/core.c
-@@ -18,10 +18,11 @@
- 
- #include "private.h"
- 
--static int all_restrict_cb(Xentoolcore__Active_Handle *ah, domid_t domid) {
-+static int all_restrict_cb(Xentoolcore__Active_Handle *ah, domid_t domid)
-+{
-     xenevtchn_handle *xce = CONTAINER_OF(ah, *xce, tc_ah);
- 
--    if (xce->fd < 0)
-+    if ( xce->fd < 0 )
-         /* just in case */
-         return 0;
- 
-@@ -33,7 +34,8 @@ xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned open_flags)
-     xenevtchn_handle *xce = malloc(sizeof(*xce));
-     int rc;
- 
--    if (!xce) return NULL;
-+    if ( !xce )
-+        return NULL;
- 
-     xce->fd = -1;
-     xce->logger = logger;
-@@ -42,23 +44,26 @@ xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned open_flags)
-     xce->tc_ah.restrict_callback = all_restrict_cb;
-     xentoolcore__register_active_handle(&xce->tc_ah);
- 
--    if (!xce->logger) {
--        xce->logger = xce->logger_tofree =
--            (xentoollog_logger*)
-+    if ( !xce->logger )
-+    {
-+        xce->logger = xce->logger_tofree = (xentoollog_logger *)
-             xtl_createlogger_stdiostream(stderr, XTL_PROGRESS, 0);
--        if (!xce->logger) goto err;
-+        if ( !xce->logger )
-+            goto err;
-     }
- 
-     rc = osdep_evtchn_open(xce);
--    if ( rc  < 0 ) goto err;
-+    if ( rc  < 0 )
-+        goto err;
- 
-     return xce;
- 
--err:
-+ err:
-     xentoolcore__deregister_active_handle(&xce->tc_ah);
-     osdep_evtchn_close(xce);
-     xtl_logger_destroy(xce->logger_tofree);
-     free(xce);
+V5:
+- add data_resp_len
+
+V6:
+- add flag byte to node permissions (Julien Grall)
+- update migration document
+
+V7:
+- add evtchn_fd
+
+V8:
+- remove ro-socket and read-only connection flag
+- split off documentation part
+
+V9:
+- add htobe32() macro if needed (Wei Liu)
+---
+ tools/xenstore/include/xenstore_state.h | 131 ++++++++++++++++++++++++
+ 1 file changed, 131 insertions(+)
+ create mode 100644 tools/xenstore/include/xenstore_state.h
+
+diff --git a/tools/xenstore/include/xenstore_state.h b/tools/xenstore/include/xenstore_state.h
+new file mode 100644
+index 0000000000..d2a9307400
+--- /dev/null
++++ b/tools/xenstore/include/xenstore_state.h
+@@ -0,0 +1,131 @@
++/*
++ * Xenstore internal state dump definitions.
++ * Copyright (C) Juergen Gross, SUSE Software Solutions Germany GmbH
++ *
++ * Used for live-update and migration, possibly across Xenstore implementations.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
++ */
 +
-     return NULL;
- }
- 
-@@ -73,6 +78,7 @@ int xenevtchn_close(xenevtchn_handle *xce)
-     rc = osdep_evtchn_close(xce);
-     xtl_logger_destroy(xce->logger_tofree);
-     free(xce);
++#ifndef XENSTORE_STATE_H
++#define XENSTORE_STATE_H
 +
-     return rc;
- }
- 
-diff --git a/tools/libs/evtchn/freebsd.c b/tools/libs/evtchn/freebsd.c
-index 6564ed4c44..554af122c8 100644
---- a/tools/libs/evtchn/freebsd.c
-+++ b/tools/libs/evtchn/freebsd.c
-@@ -34,9 +34,12 @@
- int osdep_evtchn_open(xenevtchn_handle *xce)
- {
-     int fd = open(EVTCHN_DEV, O_RDWR|O_CLOEXEC);
++#include <endian.h>
++#include <sys/types.h>
 +
-     if ( fd == -1 )
-         return -1;
++#ifndef htobe32
++#if __BYTE_ORDER == __LITTLE_ENDIAN
++#define htobe32(x) __builtin_bswap32(x)
++#else
++#define htobe32(x) (x)
++#endif
++#endif
 +
-     xce->fd = fd;
++struct xs_state_preamble {
++    char ident[8];
++#define XS_STATE_IDENT    "xenstore"  /* To be used without the NUL byte. */
++    uint32_t version;                 /* Version in big endian format. */
++#define XS_STATE_VERSION  0x00000001
++    uint32_t flags;                   /* Endianess. */
++#if __BYTE_ORDER == __LITTLE_ENDIAN
++#define XS_STATE_FLAGS    0x00000000  /* Little endian. */
++#else
++#define XS_STATE_FLAGS    0x00000001  /* Big endian. */
++#endif
++};
 +
-     return 0;
- }
- 
-@@ -51,6 +54,7 @@ int osdep_evtchn_close(xenevtchn_handle *xce)
- int osdep_evtchn_restrict(xenevtchn_handle *xce, domid_t domid)
- {
-     errno = -EOPNOTSUPP;
++/*
++ * Each record is starting with xs_state_record_header.
++ * All records have a length of a multiple of 8 bytes.
++ */
 +
-     return -1;
- }
- 
-@@ -69,7 +73,8 @@ int xenevtchn_notify(xenevtchn_handle *xce, evtchn_port_t port)
-     return ioctl(fd, IOCTL_EVTCHN_NOTIFY, &notify);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce, uint32_t domid)
-+xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce,
-+                                                      uint32_t domid)
- {
-     int ret, fd = xce->fd;
-     struct ioctl_evtchn_bind_unbound_port bind;
-@@ -77,11 +82,13 @@ xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce, uin
-     bind.remote_domain = domid;
- 
-     ret = ioctl(fd, IOCTL_EVTCHN_BIND_UNBOUND_PORT, &bind);
--    return ( ret == 0 ) ? bind.port : ret;
++/* Common record layout: */
++struct xs_state_record_header {
++    uint32_t type;
++#define XS_STATE_TYPE_END        0x00000000
++#define XS_STATE_TYPE_GLOBAL     0x00000001
++#define XS_STATE_TYPE_CONN       0x00000002
++#define XS_STATE_TYPE_WATCH      0x00000003
++#define XS_STATE_TYPE_TA         0x00000004
++#define XS_STATE_TYPE_NODE       0x00000005
++    uint32_t length;         /* Length of record in bytes. */
++};
 +
-+    return ret ?: bind.port;
- }
- 
--xenevtchn_port_or_error_t
--xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint32_t domid, evtchn_port_t remote_port)
-+xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce,
-+                                                     uint32_t domid,
-+                                                     evtchn_port_t remote_port)
- {
-     int ret, fd = xce->fd;
-     struct ioctl_evtchn_bind_interdomain bind;
-@@ -90,10 +97,12 @@ xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint32_t domid, evtchn_port_t
-     bind.remote_port = remote_port;
- 
-     ret = ioctl(fd, IOCTL_EVTCHN_BIND_INTERDOMAIN, &bind);
--    return ( ret == 0 ) ? bind.port : ret;
++/* Global state of Xenstore: */
++struct xs_state_global {
++    int32_t socket_fd;      /* File descriptor for socket connections or -1. */
++    int32_t evtchn_fd;      /* File descriptor for event channel operations. */
++};
 +
-+    return ret ?: bind.port;
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned int virq)
-+xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce,
-+                                              unsigned int virq)
- {
-     int ret, fd = xce->fd;
-     struct ioctl_evtchn_bind_virq bind;
-@@ -101,7 +110,8 @@ xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned in
-     bind.virq = virq;
- 
-     ret = ioctl(fd, IOCTL_EVTCHN_BIND_VIRQ, &bind);
--    return ( ret == 0 ) ? bind.port : ret;
++/* Connection to Xenstore: */
++struct xs_state_connection {
++    uint32_t conn_id;       /* Used as reference in watch and TA records. */
++    uint16_t conn_type;
++#define XS_STATE_CONN_TYPE_RING   0
++#define XS_STATE_CONN_TYPE_SOCKET 1
++    uint16_t pad;
++    union {
++        struct {
++            uint16_t domid;  /* Domain-Id. */
++            uint16_t tdomid; /* Id of target domain or DOMID_INVALID. */
++            uint32_t evtchn; /* Event channel port. */
++        } ring;
++        int32_t socket_fd;   /* File descriptor for socket connections. */
++    } spec;
++    uint16_t data_in_len;    /* Number of unprocessed bytes read from conn. */
++    uint16_t data_resp_len;  /* Size of partial response pending for conn. */
++    uint32_t data_out_len;   /* Number of bytes not yet written to conn. */
++    uint8_t  data[];         /* Pending data (read, written) + 0-7 pad bytes. */
++};
 +
-+    return ret ?: bind.port;
- }
- 
- int xenevtchn_unbind(xenevtchn_handle *xce, evtchn_port_t port)
-@@ -131,6 +141,7 @@ int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- 
-     if ( write(fd, &port, sizeof(port)) != sizeof(port) )
-         return -1;
++/* Watch: */
++struct xs_state_watch {
++    uint32_t conn_id;       /* Connection this watch is associated with. */
++    uint16_t path_length;   /* Number of bytes of path watched (incl. 0). */
++    uint16_t token_length;  /* Number of bytes of watch token (incl. 0). */
++    uint8_t data[];         /* Path bytes, token bytes, 0-7 pad bytes. */
++};
 +
-     return 0;
- }
- 
-diff --git a/tools/libs/evtchn/linux.c b/tools/libs/evtchn/linux.c
-index 17e64aea32..4582a58ec4 100644
---- a/tools/libs/evtchn/linux.c
-+++ b/tools/libs/evtchn/linux.c
-@@ -37,9 +37,12 @@
- int osdep_evtchn_open(xenevtchn_handle *xce)
- {
-     int fd = open("/dev/xen/evtchn", O_RDWR|O_CLOEXEC);
++/* Transaction: */
++struct xs_state_transaction {
++    uint32_t conn_id;       /* Connection this TA is associated with. */
++    uint32_t ta_id;         /* Transaction Id. */
++};
 +
-     if ( fd == -1 )
-         return -1;
-+
-     xce->fd = fd;
-+
-     return 0;
- }
- 
-@@ -135,6 +138,7 @@ int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- 
-     if ( write(fd, &port, sizeof(port)) != sizeof(port) )
-         return -1;
-+
-     return 0;
- }
- 
-diff --git a/tools/libs/evtchn/minios.c b/tools/libs/evtchn/minios.c
-index 9cd7636fc5..8e9f77bb6b 100644
---- a/tools/libs/evtchn/minios.c
-+++ b/tools/libs/evtchn/minios.c
-@@ -43,22 +43,28 @@ extern void minios_evtchn_close_fd(int fd);
- extern struct wait_queue_head event_queue;
- 
- /* XXX Note: This is not threadsafe */
--static struct evtchn_port_info* port_alloc(int fd) {
-+static struct evtchn_port_info* port_alloc(int fd)
-+{
-     struct evtchn_port_info *port_info;
-+
-     port_info = malloc(sizeof(struct evtchn_port_info));
--    if (port_info == NULL)
-+    if ( port_info == NULL )
-         return NULL;
-+
-     port_info->pending = 0;
-     port_info->port = -1;
-     port_info->bound = 0;
- 
-     LIST_INSERT_HEAD(&files[fd].evtchn.ports, port_info, list);
-+
-     return port_info;
- }
- 
--static void port_dealloc(struct evtchn_port_info *port_info) {
--    if (port_info->bound)
-+static void port_dealloc(struct evtchn_port_info *port_info)
-+{
-+    if ( port_info->bound )
-         unbind_evtchn(port_info->port);
-+
-     LIST_REMOVE(port_info, list);
-     free(port_info);
- }
-@@ -66,11 +72,14 @@ static void port_dealloc(struct evtchn_port_info *port_info) {
- int osdep_evtchn_open(xenevtchn_handle *xce)
- {
-     int fd = alloc_fd(FTYPE_EVTCHN);
-+
-     if ( fd == -1 )
-         return -1;
-+
-     LIST_INIT(&files[fd].evtchn.ports);
-     xce->fd = fd;
-     printf("evtchn_open() -> %d\n", fd);
-+
-     return 0;
- }
- 
-@@ -85,12 +94,14 @@ int osdep_evtchn_close(xenevtchn_handle *xce)
- int osdep_evtchn_restrict(xenevtchn_handle *xce, domid_t domid)
- {
-     errno = -EOPNOTSUPP;
-+
-     return -1;
- }
- 
- void minios_evtchn_close_fd(int fd)
- {
-     struct evtchn_port_info *port_info, *tmp;
-+
-     LIST_FOREACH_SAFE(port_info, &files[fd].evtchn.ports, list, tmp)
-         port_dealloc(port_info);
- 
-@@ -108,10 +119,12 @@ int xenevtchn_notify(xenevtchn_handle *xce, evtchn_port_t port)
- 
-     ret = notify_remote_via_evtchn(port);
- 
--    if (ret < 0) {
-+    if (ret < 0)
-+    {
-         errno = -ret;
-         ret = -1;
-     }
-+
-     return ret;
- }
- 
-@@ -119,12 +132,15 @@ static void evtchn_handler(evtchn_port_t port, struct pt_regs *regs, void *data)
- {
-     int fd = (int)(intptr_t)data;
-     struct evtchn_port_info *port_info;
-+
-     assert(files[fd].type == FTYPE_EVTCHN);
-     mask_evtchn(port);
--    LIST_FOREACH(port_info, &files[fd].evtchn.ports, list) {
--        if (port_info->port == port)
-+    LIST_FOREACH(port_info, &files[fd].evtchn.ports, list)
-+    {
-+        if ( port_info->port == port )
-             goto found;
-     }
-+
-     printk("Unknown port for handle %d\n", fd);
-     return;
- 
-@@ -134,7 +150,8 @@ static void evtchn_handler(evtchn_port_t port, struct pt_regs *regs, void *data)
-     wake_up(&event_queue);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce, uint32_t domid)
-+xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce,
-+                                                      uint32_t domid)
- {
-     int fd = xce->fd;
-     struct evtchn_port_info *port_info;
-@@ -143,26 +160,31 @@ xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce, uin
- 
-     assert(get_current() == main_thread);
-     port_info = port_alloc(fd);
--    if (port_info == NULL)
-+    if ( port_info == NULL )
-         return -1;
- 
-     printf("xenevtchn_bind_unbound_port(%d)", domid);
--    ret = evtchn_alloc_unbound(domid, evtchn_handler, (void*)(intptr_t)fd, &port);
-+    ret = evtchn_alloc_unbound(domid, evtchn_handler,
-+                               (void *)(intptr_t)fd, &port);
-     printf(" = %d\n", ret);
- 
--    if (ret < 0) {
-+    if ( ret < 0 )
-+    {
-         port_dealloc(port_info);
-         errno = -ret;
-         return -1;
-     }
-+
-     port_info->bound = 1;
-     port_info->port = port;
-     unmask_evtchn(port);
-+
-     return port;
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint32_t domid,
--                                                  evtchn_port_t remote_port)
-+xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce,
-+                                                     uint32_t domid,
-+                                                     evtchn_port_t remote_port)
- {
-     int fd = xce->fd;
-     struct evtchn_port_info *port_info;
-@@ -171,21 +193,25 @@ xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint
- 
-     assert(get_current() == main_thread);
-     port_info = port_alloc(fd);
--    if (port_info == NULL)
-+    if ( port_info == NULL )
-         return -1;
- 
-     printf("xenevtchn_bind_interdomain(%d, %"PRId32")", domid, remote_port);
--    ret = evtchn_bind_interdomain(domid, remote_port, evtchn_handler, (void*)(intptr_t)fd, &local_port);
-+    ret = evtchn_bind_interdomain(domid, remote_port, evtchn_handler,
-+                                  (void *)(intptr_t)fd, &local_port);
-     printf(" = %d\n", ret);
- 
--    if (ret < 0) {
-+    if ( ret < 0 )
-+    {
-         port_dealloc(port_info);
-         errno = -ret;
-         return -1;
-     }
-+
-     port_info->bound = 1;
-     port_info->port = local_port;
-     unmask_evtchn(local_port);
-+
-     return local_port;
- }
- 
-@@ -194,18 +220,24 @@ int xenevtchn_unbind(xenevtchn_handle *xce, evtchn_port_t port)
-     int fd = xce->fd;
-     struct evtchn_port_info *port_info;
- 
--    LIST_FOREACH(port_info, &files[fd].evtchn.ports, list) {
--        if (port_info->port == port) {
-+    LIST_FOREACH(port_info, &files[fd].evtchn.ports, list)
-+    {
-+        if ( port_info->port == port )
-+        {
-             port_dealloc(port_info);
-             return 0;
-         }
-     }
--    printf("Warning: couldn't find port %"PRId32" for xc handle %x\n", port, fd);
-+
-+    printf("Warning: couldn't find port %"PRId32" for xc handle %x\n",
-+           port, fd);
-     errno = EINVAL;
-+
-     return -1;
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned int virq)
-+xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce,
-+                                              unsigned int virq)
- {
-     int fd = xce->fd;
-     struct evtchn_port_info *port_info;
-@@ -213,21 +245,24 @@ xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned in
- 
-     assert(get_current() == main_thread);
-     port_info = port_alloc(fd);
--    if (port_info == NULL)
-+    if ( port_info == NULL )
-         return -1;
- 
-     printf("xenevtchn_bind_virq(%d)", virq);
--    port = bind_virq(virq, evtchn_handler, (void*)(intptr_t)fd);
-+    port = bind_virq(virq, evtchn_handler, (void *)(intptr_t)fd);
-     printf(" = %d\n", port);
- 
--    if (port < 0) {
-+    if ( port < 0 )
-+    {
-         port_dealloc(port_info);
-         errno = -port;
-         return -1;
-     }
-+
-     port_info->bound = 1;
-     port_info->port = port;
-     unmask_evtchn(port);
-+
-     return port;
- }
- 
-@@ -239,26 +274,35 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
-     evtchn_port_t ret = -1;
- 
-     local_irq_save(flags);
-+
-     files[fd].read = 0;
- 
--    LIST_FOREACH(port_info, &files[fd].evtchn.ports, list) {
--        if (port_info->port != -1 && port_info->pending) {
--            if (ret == -1) {
-+    LIST_FOREACH(port_info, &files[fd].evtchn.ports, list)
-+    {
-+        if ( port_info->port != -1 && port_info->pending )
-+        {
-+            if ( ret == -1 )
-+            {
-                 ret = port_info->port;
-                 port_info->pending = 0;
--            } else {
-+            }
-+            else
-+            {
-                 files[fd].read = 1;
-                 break;
-             }
-         }
-     }
-+
-     local_irq_restore(flags);
-+
-     return ret;
- }
- 
- int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- {
-     unmask_evtchn(port);
-+
-     return 0;
- }
- 
-diff --git a/tools/libs/evtchn/netbsd.c b/tools/libs/evtchn/netbsd.c
-index 8b8545d2f9..53f9299ebb 100644
---- a/tools/libs/evtchn/netbsd.c
-+++ b/tools/libs/evtchn/netbsd.c
-@@ -34,9 +34,12 @@
- int osdep_evtchn_open(xenevtchn_handle *xce)
- {
-     int fd = open(EVTCHN_DEV_NAME, O_NONBLOCK|O_RDWR);
-+
-     if ( fd == -1 )
-         return -1;
-+
-     xce->fd = fd;
-+
-     return 0;
- }
- 
-@@ -51,6 +54,7 @@ int osdep_evtchn_close(xenevtchn_handle *xce)
- int osdep_evtchn_restrict(xenevtchn_handle *xce, domid_t domid)
- {
-     errno = -EOPNOTSUPP;
-+
-     return -1;
- }
- 
-@@ -69,7 +73,8 @@ int xenevtchn_notify(xenevtchn_handle *xce, evtchn_port_t port)
-     return ioctl(fd, IOCTL_EVTCHN_NOTIFY, &notify);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle * xce, uint32_t domid)
-+xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce,
-+                                                      uint32_t domid)
- {
-     int fd = xce->fd;
-     struct ioctl_evtchn_bind_unbound_port bind;
-@@ -78,14 +83,15 @@ xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle * xce, ui
-     bind.remote_domain = domid;
- 
-     ret = ioctl(fd, IOCTL_EVTCHN_BIND_UNBOUND_PORT, &bind);
--    if (ret == 0)
-+    if ( ret == 0 )
-         return bind.port;
-     else
-         return -1;
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint32_t domid,
--                                                  evtchn_port_t remote_port)
-+xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce,
-+                                                     uint32_t domid,
-+                                                     evtchn_port_t remote_port)
- {
-     int fd = xce->fd;
-     struct ioctl_evtchn_bind_interdomain bind;
-@@ -95,7 +101,7 @@ xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint
-     bind.remote_port = remote_port;
- 
-     ret = ioctl(fd, IOCTL_EVTCHN_BIND_INTERDOMAIN, &bind);
--    if (ret == 0)
-+    if ( ret == 0 )
-         return bind.port;
-     else
-         return -1;
-@@ -111,7 +117,8 @@ int xenevtchn_unbind(xenevtchn_handle *xce, evtchn_port_t port)
-     return ioctl(fd, IOCTL_EVTCHN_UNBIND, &unbind);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned int virq)
-+xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce,
-+                                              unsigned int virq)
- {
-     int fd = xce->fd;
-     struct ioctl_evtchn_bind_virq bind;
-@@ -120,7 +127,7 @@ xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned in
-     bind.virq = virq;
- 
-     err = ioctl(fd, IOCTL_EVTCHN_BIND_VIRQ, &bind);
--    if (err)
-+    if ( err )
-         return -1;
-     else
-         return bind.port;
-@@ -140,6 +147,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
- int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- {
-     int fd = xce->fd;
-+
-     return write_exact(fd, (char *)&port, sizeof(port));
- }
- 
-diff --git a/tools/libs/evtchn/solaris.c b/tools/libs/evtchn/solaris.c
-index dd41f62a24..d87abc553c 100644
---- a/tools/libs/evtchn/solaris.c
-+++ b/tools/libs/evtchn/solaris.c
-@@ -72,7 +72,8 @@ int xenevtchn_notify(xenevtchn_handle *xce, evtchn_port_t port)
-     return ioctl(fd, IOCTL_EVTCHN_NOTIFY, &notify);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce, uint32_t domid)
-+xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce,
-+                                                      uint32_t domid)
- {
-     int fd = xce->fd;
-     struct ioctl_evtchn_bind_unbound_port bind;
-@@ -82,8 +83,9 @@ xenevtchn_port_or_error_t xenevtchn_bind_unbound_port(xenevtchn_handle *xce, uin
-     return ioctl(fd, IOCTL_EVTCHN_BIND_UNBOUND_PORT, &bind);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint32_t domid,
--                                                  evtchn_port_t remote_port)
-+xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce,
-+                                                     uint32_t domid,
-+                                                     evtchn_port_t remote_port)
- {
-     int fd = xce->fd;
-     struct ioctl_evtchn_bind_interdomain bind;
-@@ -94,7 +96,8 @@ xenevtchn_port_or_error_t xenevtchn_bind_interdomain(xenevtchn_handle *xce, uint
-     return ioctl(fd, IOCTL_EVTCHN_BIND_INTERDOMAIN, &bind);
- }
- 
--xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce, unsigned int virq)
-+xenevtchn_port_or_error_t xenevtchn_bind_virq(xenevtchn_handle *xce,
-+                                              unsigned int virq)
- {
-     int fd = xce->fd;
-     struct ioctl_evtchn_bind_virq bind;
-@@ -128,6 +131,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
- int xenevtchn_unmask(xenevtchn_handle *xce, evtchn_port_t port)
- {
-     int fd = xce->fd;
-+
-     return write_exact(fd, (char *)&port, sizeof(port));
- }
- 
++/* Node (either XS_STATE_TYPE_NODE or XS_STATE_TYPE_TANODE[_MOD]): */
++struct xs_state_node_perm {
++    uint8_t access;         /* Access rights. */
++#define XS_STATE_NODE_PERM_NONE   'n'
++#define XS_STATE_NODE_PERM_READ   'r'
++#define XS_STATE_NODE_PERM_WRITE  'w'
++#define XS_STATE_NODE_PERM_BOTH   'b'
++    uint8_t flags;
++#define XS_STATE_NODE_PERM_IGNORE 0x01 /* Stale permission, ignore for check. */
++    uint16_t domid;         /* Domain-Id. */
++};
++struct xs_state_node {
++    uint32_t conn_id;       /* Connection in case of transaction or 0. */
++    uint32_t ta_id;         /* Transaction Id or 0. */
++    uint16_t path_len;      /* Length of path string including NUL byte. */
++    uint16_t data_len;      /* Length of node data. */
++    uint16_t ta_access;
++#define XS_STATE_NODE_TA_DELETED  0x0000
++#define XS_STATE_NODE_TA_READ     0x0001
++#define XS_STATE_NODE_TA_WRITTEN  0x0002
++    uint16_t perm_n;        /* Number of permissions (0 in TA: node deleted). */
++    /* Permissions (first is owner, has full access). */
++    struct xs_state_node_perm perms[];
++    /* Path and data follows, plus 0-7 pad bytes. */
++};
++#endif /* XENSTORE_STATE_H */
 -- 
 2.26.2
 
