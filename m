@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D857C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 26B62C433E9
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:51:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4EF2823A9F
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:51:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4EF2823A9F
+	by mail.kernel.org (Postfix) with ESMTPS id CEF9023A9F
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:51:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CEF9023A9F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67315.120009 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67316.120015 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04uI-00079o-6s; Thu, 14 Jan 2021 15:51:30 +0000
+	id 1l04uI-0007AM-KG; Thu, 14 Jan 2021 15:51:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67315.120009; Thu, 14 Jan 2021 15:51:30 +0000
+Received: by outflank-mailman (output) from mailman id 67316.120015; Thu, 14 Jan 2021 15:51:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04uI-00079h-3v; Thu, 14 Jan 2021 15:51:30 +0000
-Received: by outflank-mailman (input) for mailman id 67315;
+	id 1l04uI-0007AA-CX; Thu, 14 Jan 2021 15:51:30 +0000
+Received: by outflank-mailman (input) for mailman id 67316;
  Thu, 14 Jan 2021 15:51:28 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=P5GR=GR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l04iV-0002Sh-KN
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:39:19 +0000
+ id 1l04iG-0002Sh-K8
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:39:04 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5568daaa-4fe8-4273-87cc-70b70c2d129e;
- Thu, 14 Jan 2021 15:38:13 +0000 (UTC)
+ id 14e24599-e2b6-49e4-b10c-c01758a1667e;
+ Thu, 14 Jan 2021 15:38:11 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D2BE2AEBB;
- Thu, 14 Jan 2021 15:38:10 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id D7A9EAE61;
+ Thu, 14 Jan 2021 15:38:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,280 +52,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5568daaa-4fe8-4273-87cc-70b70c2d129e
+X-Inumbo-ID: 14e24599-e2b6-49e4-b10c-c01758a1667e
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1610638690; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=wym2G/Xk//5XesdPJcvHSPJ7QBTUZKixDiGWfwW2+Uk=;
-	b=oP0UmhDJIuH+TXXO8/CWu/+r4vXTrgtaq4lybKs9a+nYbnDNICJQu/cqCqc28RUdHivFOV
-	xE9wYmoPkDP8Q53F1xIrIrvxoJrO3SOs3P8qhFbfXR+23lLDGop3tQNWtdB9hZqhbCPm2G
-	3H7GbaI8rK8u47jKhKcCzVK63wFg+2U=
+	bh=9hLKS3tqGavquprb3POoginKf8qVTOiNwihT9d+dpjc=;
+	b=I1spA1wfRmrT8EPzJolsFnHB1Ur3rq0Jc9SEO3MkYgTmOSc1Z1mrAZzaaPhSmejg4jzsRs
+	nbahvHwTL4wmGsuaPD1mr5H6j4flgd3zH8QbWEglbpczw4zEk+qMnU4b9rL/n6U6ahR1yN
+	Ea4Luf9rV/lKjOIpxXDtZtQglrQF860=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v11 20/27] tools/xenstore: evaluate the live update flag when starting
-Date: Thu, 14 Jan 2021 16:37:56 +0100
-Message-Id: <20210114153803.2591-21-jgross@suse.com>
+Subject: [PATCH v11 15/27] docs: update the xenstore migration stream documentation
+Date: Thu, 14 Jan 2021 16:37:51 +0100
+Message-Id: <20210114153803.2591-16-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210114153803.2591-1-jgross@suse.com>
 References: <20210114153803.2591-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In the live update case several initialization steps of xenstore must
-be omitted or modified. Add the proper handling for that.
+For live update of Xenstore some records defined in the migration
+stream document need to be changed:
+
+- Support of the read-only socket has been dropped from all Xenstore
+  implementations, so ro-socket-fd in the global record can be removed.
+
+- Some guests require the event channel to Xenstore to remain the same
+  on Xenstore side, so Xenstore has to keep the event channel interface
+  open across a live update. For this purpose an evtchn-fd needs to be
+  added to the global record.
+
+- With no read-only support the flags field in the connection record
+  can be dropped.
+
+- The evtchn field in the connection record needs to be switched to
+  hold the port of the Xenstore side of the event channel.
+
+- A flags field needs to be added to permission specifiers in order to
+  be able to mark a permission as stale (XSA-322).
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V4:
-- set xprintf = trace in daemon case (Julien Grall)
-- only update /tool/xenstored node contents
-
-V7:
-- some restructuring to enable keeping event channel fd
-
 V8:
-- pass evtfd to domain_init() as parameter (Julien Grall)
-- call dom0_init() from main()
-
-V10:
-- remove support for remembering binary name (Andrew Cooper)
+- split off from following patch (Julien Grall)
 ---
- tools/xenstore/xenstored_control.c |  5 ++++
- tools/xenstore/xenstored_control.h |  1 +
- tools/xenstore/xenstored_core.c    | 44 +++++++++++++++++++++---------
- tools/xenstore/xenstored_domain.c  | 26 ++++++++----------
- tools/xenstore/xenstored_domain.h  |  3 +-
- tools/xenstore/xenstored_posix.c   |  1 -
- 6 files changed, 51 insertions(+), 29 deletions(-)
+ docs/designs/xenstore-migration.md | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 25b407e153..1da74ef771 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -453,6 +453,11 @@ static const char *lu_dump_state(const void *ctx, struct connection *conn)
- 	return ret;
- }
+diff --git a/docs/designs/xenstore-migration.md b/docs/designs/xenstore-migration.md
+index 2ce2c836f5..1a5b94b31d 100644
+--- a/docs/designs/xenstore-migration.md
++++ b/docs/designs/xenstore-migration.md
+@@ -116,7 +116,7 @@ xenstored state that needs to be restored.
+ +-------+-------+-------+-------+
+ | rw-socket-fd                  |
+ +-------------------------------+
+-| ro-socket-fd                  |
++| evtchn-fd                     |
+ +-------------------------------+
+ ```
  
-+void lu_read_state(void)
-+{
-+	xprintf("live-update: read state\n");
-+}
-+
- static const char *lu_activate_binary(const void *ctx)
- {
- 	return "Not yet implemented.";
-diff --git a/tools/xenstore/xenstored_control.h b/tools/xenstore/xenstored_control.h
-index 207e0a6fa3..aac61f0590 100644
---- a/tools/xenstore/xenstored_control.h
-+++ b/tools/xenstore/xenstored_control.h
-@@ -17,3 +17,4 @@
- */
+@@ -126,8 +126,8 @@ xenstored state that needs to be restored.
+ | `rw-socket-fd` | The file descriptor of the socket accepting  |
+ |                | read-write connections                       |
+ |                |                                              |
+-| `ro-socket-fd` | The file descriptor of the socket accepting  |
+-|                | read-only connections                        |
++| `evtchn-fd`    | The file descriptor used to communicate with |
++|                | the event channel driver                     |
  
- int do_control(struct connection *conn, struct buffered_data *in);
-+void lu_read_state(void);
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index b0656eb3e4..395a120bef 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -1680,9 +1680,10 @@ static void tdb_logger(TDB_CONTEXT *tdb, int level, const char * fmt, ...)
- 	}
- }
+ xenstored will resume in the original process context. Hence `rw-socket-fd` and
+ `ro-socket-fd` simply specify the file descriptors of the sockets. Sockets
+@@ -147,7 +147,7 @@ the domain being migrated.
+ ```
+     0       1       2       3       4       5       6       7    octet
+ +-------+-------+-------+-------+-------+-------+-------+-------+
+-| conn-id                       | conn-type     | flags         |
++| conn-id                       | conn-type     |               |
+ +-------------------------------+---------------+---------------+
+ | conn-spec
+ ...
+@@ -169,9 +169,6 @@ the domain being migrated.
+ |                | 0x0001: socket                               |
+ |                | 0x0002 - 0xFFFF: reserved for future use     |
+ |                |                                              |
+-| `flags`        | A bit-wise OR of:                            |
+-|                | 0001: read-only                              |
+-|                |                                              |
+ | `conn-spec`    | See below                                    |
+ |                |                                              |
+ | `in-data-len`  | The length (in octets) of any data read      |
+@@ -216,7 +213,7 @@ For `shared ring` connections it is as follows:
+ |           | operation [2] or DOMID_INVALID [3] otherwise      |
+ |           |                                                   |
+ | `evtchn`  | The port number of the interdomain channel used   |
+-|           | by `domid` to communicate with xenstored          |
++|           | by xenstored to communicate with `domid`          |
+ |           |                                                   |
  
--static void setup_structure(void)
-+static void setup_structure(bool live_update)
- {
- 	char *tdbname;
-+
- 	tdbname = talloc_strdup(talloc_autofree_context(), xs_daemon_tdb());
- 	if (!tdbname)
- 		barf_perror("Could not create tdbname");
-@@ -1696,14 +1697,17 @@ static void setup_structure(void)
- 	if (!tdb_ctx)
- 		barf_perror("Could not create tdb file %s", tdbname);
+ Since the ABI guarantees that entry 1 in `domid`'s grant table will always
+@@ -386,7 +383,7 @@ A node permission specifier has the following format:
+ ```
+     0       1       2       3    octet
+ +-------+-------+-------+-------+
+-| perm  | pad   | domid         |
++| perm  | flags | domid         |
+ +-------+-------+---------------+
+ ```
  
--	manual_node("/", "tool");
--	manual_node("/tool", "xenstored");
--	manual_node("/tool/xenstored", NULL);
-+	if (live_update)
-+		manual_node("/", NULL);
-+	else {
-+		manual_node("/", "tool");
-+		manual_node("/tool", "xenstored");
-+		manual_node("/tool/xenstored", NULL);
-+	}
+@@ -395,6 +392,10 @@ A node permission specifier has the following format:
+ | `perm`  | One of the ASCII values `w`, `r`, `b` or `n` as     |
+ |         | specified for the `SET_PERMS` operation [2]         |
+ |         |                                                     |
++| `flags` | A bit-wise OR of:                                   |
++|         | 0x01: stale permission, ignore when checking        |
++|         |       permissions                                   |
++|         |                                                     |
+ | `domid` | The domain-id to which the permission relates       |
  
- 	check_store();
- }
- 
--
- static unsigned int hash_from_key_fn(void *k)
- {
- 	char *str = k;
-@@ -2109,7 +2113,8 @@ int main(int argc, char *argv[])
- 
- 	if (dofork) {
- 		openlog("xenstored", 0, LOG_DAEMON);
--		daemonize();
-+		if (!live_update)
-+			daemonize();
- 	}
- 	if (pidfile)
- 		write_pidfile(pidfile);
-@@ -2124,17 +2129,20 @@ int main(int argc, char *argv[])
- 	talloc_enable_null_tracking();
- 
- #ifndef NO_SOCKETS
--	init_sockets();
-+	if (!live_update)
-+		init_sockets();
- #endif
- 
- 	init_pipe(reopen_log_pipe);
- 
- 	/* Setup the database */
--	setup_structure();
-+	setup_structure(live_update);
- 
- 	/* Listen to hypervisor. */
--	if (!no_domain_init)
--		domain_init();
-+	if (!no_domain_init && !live_update) {
-+		domain_init(-1);
-+		dom0_init();
-+	}
- 
- 	if (outputpid) {
- 		printf("%ld\n", (long)getpid());
-@@ -2142,13 +2150,21 @@ int main(int argc, char *argv[])
- 	}
- 
- 	/* redirect to /dev/null now we're ready to accept connections */
--	if (dofork)
-+	if (dofork && !live_update)
- 		finish_daemonize();
-+#ifndef __MINIOS__
-+	if (dofork)
-+		xprintf = trace;
-+#endif
- 
- 	signal(SIGHUP, trigger_reopen_log);
- 	if (tracefile)
- 		tracefile = talloc_strdup(NULL, tracefile);
- 
-+	/* Read state in case of live update. */
-+	if (live_update)
-+		lu_read_state();
-+
- 	/* Get ready to listen to the tools. */
- 	initialize_fds(&sock_pollfd_idx, &timeout);
- 
-@@ -2156,8 +2172,10 @@ int main(int argc, char *argv[])
- 	xenbus_notify_running();
- 
- #if defined(XEN_SYSTEMD_ENABLED)
--	sd_notify(1, "READY=1");
--	fprintf(stderr, SD_NOTICE "xenstored is ready\n");
-+	if (!live_update) {
-+		sd_notify(1, "READY=1");
-+		fprintf(stderr, SD_NOTICE "xenstored is ready\n");
-+	}
- #endif
- 
- 	/* Main loop. */
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 71b078caf3..775546757b 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -706,29 +706,23 @@ bool check_perms_special(const char *name, struct connection *conn)
- 	return perm_for_conn(conn, p) & XS_PERM_READ;
- }
- 
--static int dom0_init(void) 
--{ 
-+void dom0_init(void)
-+{
- 	evtchn_port_t port;
- 	struct domain *dom0;
- 
- 	port = xenbus_evtchn();
- 	if (port == -1)
--		return -1;
-+		barf_perror("Failed to initialize dom0 port");
- 
- 	dom0 = introduce_domain(NULL, xenbus_master_domid(), port);
- 	if (!dom0)
--		return -1;
-+		barf_perror("Failed to initialize dom0");
- 
- 	xenevtchn_notify(xce_handle, dom0->port);
--
--	if (set_dom_perms_default(&dom_release_perms) ||
--	    set_dom_perms_default(&dom_introduce_perms))
--		return -1;
--
--	return 0; 
- }
- 
--void domain_init(void)
-+void domain_init(int evtfd)
- {
- 	int rc;
- 
-@@ -758,13 +752,17 @@ void domain_init(void)
- 
- 	talloc_set_destructor(xgt_handle, close_xgt_handle);
- 
--	xce_handle = xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
-+	if (evtfd < 0)
-+		xce_handle = xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
-+	else
-+		xce_handle = xenevtchn_fdopen(NULL, evtfd, 0);
- 
- 	if (xce_handle == NULL)
- 		barf_perror("Failed to open evtchn device");
- 
--	if (dom0_init() != 0) 
--		barf_perror("Failed to initialize dom0 state"); 
-+	if (set_dom_perms_default(&dom_release_perms) ||
-+	    set_dom_perms_default(&dom_introduce_perms))
-+		barf_perror("Failed to set special permissions");
- 
- 	if ((rc = xenevtchn_bind_virq(xce_handle, VIRQ_DOM_EXC)) == -1)
- 		barf_perror("Failed to bind to domain exception virq port");
-diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
-index 413b974375..b20269b038 100644
---- a/tools/xenstore/xenstored_domain.h
-+++ b/tools/xenstore/xenstored_domain.h
-@@ -42,7 +42,8 @@ int do_get_domain_path(struct connection *conn, struct buffered_data *in);
- /* Allow guest to reset all watches */
- int do_reset_watches(struct connection *conn, struct buffered_data *in);
- 
--void domain_init(void);
-+void domain_init(int evtfd);
-+void dom0_init(void);
- 
- /* Returns the implicit path of a connection (only domains have this) */
- const char *get_implicit_path(const struct connection *conn);
-diff --git a/tools/xenstore/xenstored_posix.c b/tools/xenstore/xenstored_posix.c
-index ae3e63e07f..48c37ffe3e 100644
---- a/tools/xenstore/xenstored_posix.c
-+++ b/tools/xenstore/xenstored_posix.c
-@@ -85,7 +85,6 @@ void finish_daemonize(void)
- 	dup2(devnull, STDOUT_FILENO);
- 	dup2(devnull, STDERR_FILENO);
- 	close(devnull);
--	xprintf = trace;
- }
- 
- void init_pipe(int reopen_log_pipe[2])
+ Note that perm1 defines the domain owning the code. See [4] for more
 -- 
 2.26.2
 
