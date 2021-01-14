@@ -2,44 +2,45 @@ Return-Path: <SRS0=mH2p=GR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,UNWANTED_LANGUAGE_BODY,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A111C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98B85C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B689023B40
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B689023B40
+	by mail.kernel.org (Postfix) with ESMTPS id 4903923B40
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jan 2021 15:38:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4903923B40
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67217.119853 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67219.119860 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04hx-0003Q1-Tr; Thu, 14 Jan 2021 15:38:45 +0000
+	id 1l04hy-0003R6-IT; Thu, 14 Jan 2021 15:38:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67217.119853; Thu, 14 Jan 2021 15:38:45 +0000
+Received: by outflank-mailman (output) from mailman id 67219.119860; Thu, 14 Jan 2021 15:38:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l04hx-0003Pm-On; Thu, 14 Jan 2021 15:38:45 +0000
-Received: by outflank-mailman (input) for mailman id 67217;
- Thu, 14 Jan 2021 15:38:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l04hy-0003Qc-5A; Thu, 14 Jan 2021 15:38:46 +0000
+Received: by outflank-mailman (input) for mailman id 67219;
+ Thu, 14 Jan 2021 15:38:44 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=P5GR=GR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l04hv-0002SV-NG
- for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:43 +0000
+ id 1l04hw-0002Sh-JN
+ for xen-devel@lists.xenproject.org; Thu, 14 Jan 2021 15:38:44 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 947487b8-c55a-4ed2-9448-3b49d6122461;
- Thu, 14 Jan 2021 15:38:13 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9D113AF27;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c05357bf-316d-4d21-b443-9784992fea9e;
  Thu, 14 Jan 2021 15:38:10 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 7042CAED7;
+ Thu, 14 Jan 2021 15:38:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,199 +52,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 947487b8-c55a-4ed2-9448-3b49d6122461
+X-Inumbo-ID: c05357bf-316d-4d21-b443-9784992fea9e
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610638690; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610638688; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=/rmGIUwb7rQQbsNmDH/AGkcUN8zjvijT5247nfpjU8Q=;
-	b=H0QbV+fnQtY1tXh/tkxp0IaW3qf8SawL0/CYd7YwKAqJs2kWny9/osXFHsS9T8Gwj6d5Mt
-	kf+09JaqUm255xcE6/qx+qxf5x2DV1F0SUWyyqUfHVpidZR+f17GdQsmbvIhKH5QGgblkO
-	gnRTNS49OZnJveaYHYULzJSjgezuhRI=
+	bh=/nflSyskC2kS0M54iM8hYwK5qRRqM3a5TA3r174vCRE=;
+	b=L3KPxNJi/3apLs82SsjIgo5xSecUQLacvNNEwZjJUxvH2EcFMoxI6ZoMFk+1Y3vmjcIqzh
+	Q5SWa2xqsAHGFhQMGx/OrIA9BqhAAB5d4l/cmkt4lkJ3oUxyBOTIubCq2Y/Z845ue28iqf
+	FxebIEha/J1ZCsYHu9vqVYMx29Hehls=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
+	Paul Durrant <paul@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v11 19/27] tools/xenstore: split off domain introduction from do_introduce()
-Date: Thu, 14 Jan 2021 16:37:55 +0100
-Message-Id: <20210114153803.2591-20-jgross@suse.com>
+Subject: [PATCH v11 08/27] tools/xenstore: add basic live-update command parsing
+Date: Thu, 14 Jan 2021 16:37:44 +0100
+Message-Id: <20210114153803.2591-9-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210114153803.2591-1-jgross@suse.com>
 References: <20210114153803.2591-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-For live update the functionality to introduce a new domain similar to
-the XS_INTRODUCE command is needed, so split that functionality off
-into a dedicated function introduce_domain().
+Add the basic parts for parsing the live-update control command.
 
-Switch initial dom0 initialization to use this function, too.
+For now only add the parameter evaluation and calling appropriate
+functions. Those function only print a message for now and return
+success.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V8:
-- new patch
----
- tools/xenstore/xenstored_domain.c | 95 ++++++++++++++++++-------------
- 1 file changed, 55 insertions(+), 40 deletions(-)
+V2:
+- keep consistent style in lu_arch() (Pawel Wieczorkiewicz)
+- fix handling of force flag (Pawel Wieczorkiewicz)
+- use xprintf() instead of trace() for better stubdom diag
+- add conn parameter to subfunctions
 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index 38d250fbed..71b078caf3 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -326,7 +326,7 @@ static struct domain *find_domain_struct(unsigned int domid)
- 	return NULL;
+V4:
+- make several parameters/variables const (Julien Grall)
+- don't reject an option specified multiple times (Julien Grall)
+- use syslog() for messages
+---
+ tools/xenstore/xenstored_control.c | 105 ++++++++++++++++++++++++++++-
+ 1 file changed, 104 insertions(+), 1 deletion(-)
+
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 00fda5acdb..e3f0d34528 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -19,7 +19,9 @@
+ #include <errno.h>
+ #include <stdarg.h>
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <string.h>
++#include <syslog.h>
+ 
+ #include "utils.h"
+ #include "talloc.h"
+@@ -149,12 +151,113 @@ static int do_control_print(void *ctx, struct connection *conn,
+ 	return 0;
  }
  
--static struct domain *alloc_domain(void *context, unsigned int domid)
-+static struct domain *alloc_domain(const void *context, unsigned int domid)
- {
- 	struct domain *domain;
- 
-@@ -347,6 +347,14 @@ static struct domain *alloc_domain(void *context, unsigned int domid)
- 	return domain;
- }
- 
-+static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
++static const char *lu_abort(const void *ctx, struct connection *conn)
 +{
-+	struct domain *domain;
-+
-+	domain = find_domain_struct(domid);
-+	return domain ? : alloc_domain(ctx, domid);
++	syslog(LOG_INFO, "live-update: abort\n");
++	return NULL;
 +}
 +
- static int new_domain(struct domain *domain, int port)
- {
- 	int rc;
-@@ -413,52 +421,41 @@ static void domain_conn_reset(struct domain *domain)
- 	domain->interface->rsp_cons = domain->interface->rsp_prod = 0;
- }
- 
--/* domid, gfn, evtchn, path */
--int do_introduce(struct connection *conn, struct buffered_data *in)
-+static struct domain *introduce_domain(const void *ctx,
-+				       unsigned int domid,
-+				       evtchn_port_t port)
- {
- 	struct domain *domain;
--	char *vec[3];
--	unsigned int domid;
--	evtchn_port_t port;
- 	int rc;
- 	struct xenstore_domain_interface *interface;
-+	bool is_master_domain = (domid == xenbus_master_domid());
- 
--	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
--		return EINVAL;
--
--	domid = atoi(vec[0]);
--	/* Ignore the gfn, we don't need it. */
--	port = atoi(vec[2]);
--
--	/* Sanity check args. */
--	if (port <= 0)
--		return EINVAL;
--
--	domain = find_domain_struct(domid);
--
--	if (domain == NULL) {
--		/* Hang domain off "in" until we're finished. */
--		domain = alloc_domain(in, domid);
--		if (domain == NULL)
--			return ENOMEM;
--	}
-+	domain = find_or_alloc_domain(ctx, domid);
-+	if (!domain)
-+		return NULL;
- 
- 	if (!domain->introduced) {
--		interface = map_interface(domid);
-+		interface = is_master_domain ? xenbus_map()
-+					     : map_interface(domid);
- 		if (!interface)
--			return errno;
--		/* Hang domain off "in" until we're finished. */
-+			return NULL;
- 		if (new_domain(domain, port)) {
- 			rc = errno;
--			unmap_interface(interface);
--			return rc;
-+			if (is_master_domain)
-+				unmap_xenbus(interface);
-+			else
-+				unmap_interface(interface);
-+			errno = rc;
-+			return NULL;
- 		}
- 		domain->interface = interface;
- 
- 		/* Now domain belongs to its connection. */
- 		talloc_steal(domain->conn, domain);
- 
--		fire_watches(NULL, in, "@introduceDomain", NULL, false, NULL);
-+		if (!is_master_domain)
-+			fire_watches(NULL, ctx, "@introduceDomain", NULL,
-+				     false, NULL);
- 	} else {
- 		/* Use XS_INTRODUCE for recreating the xenbus event-channel. */
- 		if (domain->port)
-@@ -467,6 +464,32 @@ int do_introduce(struct connection *conn, struct buffered_data *in)
- 		domain->port = (rc == -1) ? 0 : rc;
- 	}
- 
-+	return domain;
++static const char *lu_cmdline(const void *ctx, struct connection *conn,
++			      const char *cmdline)
++{
++	syslog(LOG_INFO, "live-update: cmdline %s\n", cmdline);
++	return NULL;
 +}
 +
-+/* domid, gfn, evtchn, path */
-+int do_introduce(struct connection *conn, struct buffered_data *in)
++#ifdef __MINIOS__
++static const char *lu_binary_alloc(const void *ctx, struct connection *conn,
++				   unsigned long size)
 +{
-+	struct domain *domain;
-+	char *vec[3];
-+	unsigned int domid;
-+	evtchn_port_t port;
++	syslog(LOG_INFO, "live-update: binary size %lu\n", size);
++	return NULL;
++}
 +
-+	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
++static const char *lu_binary_save(const void *ctx, struct connection *conn,
++				  unsigned int size, const char *data)
++{
++	return NULL;
++}
++
++static const char *lu_arch(const void *ctx, struct connection *conn,
++			   char **vec, int num)
++{
++	if (num == 2 && !strcmp(vec[0], "-b"))
++		return lu_binary_alloc(ctx, conn, atol(vec[1]));
++	if (num > 2 && !strcmp(vec[0], "-d"))
++		return lu_binary_save(ctx, conn, atoi(vec[1]), vec[2]);
++
++	errno = EINVAL;
++	return NULL;
++}
++#else
++static const char *lu_binary(const void *ctx, struct connection *conn,
++			     const char *filename)
++{
++	syslog(LOG_INFO, "live-update: binary %s\n", filename);
++	return NULL;
++}
++
++static const char *lu_arch(const void *ctx, struct connection *conn,
++			   char **vec, int num)
++{
++	if (num == 2 && !strcmp(vec[0], "-f"))
++		return lu_binary(ctx, conn, vec[1]);
++
++	errno = EINVAL;
++	return NULL;
++}
++#endif
++
++static const char *lu_start(const void *ctx, struct connection *conn,
++			    bool force, unsigned int to)
++{
++	syslog(LOG_INFO, "live-update: start, force=%d, to=%u\n", force, to);
++	return NULL;
++}
++
+ static int do_control_lu(void *ctx, struct connection *conn,
+ 			 char **vec, int num)
+ {
+ 	const char *resp;
++	const char *ret = NULL;
++	unsigned int i;
++	bool force = false;
++	unsigned int to = 0;
++
++	if (num < 1)
 +		return EINVAL;
 +
-+	domid = atoi(vec[0]);
-+	/* Ignore the gfn, we don't need it. */
-+	port = atoi(vec[2]);
-+
-+	/* Sanity check args. */
-+	if (port <= 0)
-+		return EINVAL;
-+
-+	domain = introduce_domain(in, domid, port);
-+	if (!domain)
-+		return errno;
-+
- 	domain_conn_reset(domain);
++	if (!strcmp(vec[0], "-a")) {
++		if (num == 1)
++			ret = lu_abort(ctx, conn);
++		else
++			return EINVAL;
++	} else if (!strcmp(vec[0], "-c")) {
++		if (num == 2)
++			ret = lu_cmdline(ctx, conn, vec[1]);
++		else
++			return EINVAL;
++	} else if (!strcmp(vec[0], "-s")) {
++		for (i = 1; i < num; i++) {
++			if (!strcmp(vec[i], "-F"))
++				force = true;
++			else if (!strcmp(vec[i], "-t") && i < num - 1) {
++				i++;
++				to = atoi(vec[i]);
++			} else
++				return EINVAL;
++		}
++		ret = lu_start(ctx, conn, force, to);
++	} else {
++		errno = 0;
++		ret = lu_arch(ctx, conn, vec, num);
++		if (errno)
++			return errno;
++	}
  
- 	send_ack(conn, XS_INTRODUCE);
-@@ -692,17 +715,9 @@ static int dom0_init(void)
- 	if (port == -1)
- 		return -1;
- 
--	dom0 = alloc_domain(NULL, xenbus_master_domid());
-+	dom0 = introduce_domain(NULL, xenbus_master_domid(), port);
- 	if (!dom0)
- 		return -1;
--	if (new_domain(dom0, port))
--		return -1;
--
--	dom0->interface = xenbus_map();
--	if (dom0->interface == NULL)
--		return -1;
--
--	talloc_steal(dom0->conn, dom0); 
- 
- 	xenevtchn_notify(xce_handle, dom0->port);
- 
+-	resp = talloc_strdup(ctx, "NYI");
++	if (!ret)
++		ret = "OK";
++	resp = talloc_strdup(ctx, ret);
+ 	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
+ 	return 0;
+ }
 -- 
 2.26.2
 
