@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29D6FC433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 14:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94F63C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 14:32:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DF9AA224F9
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 14:32:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF9AA224F9
+	by mail.kernel.org (Postfix) with ESMTPS id 56E5A224F9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 14:32:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 56E5A224F9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68171.121997 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68174.122010 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Q8r-0002Pd-19; Fri, 15 Jan 2021 14:31:57 +0000
+	id 1l0Q8w-0002T2-Ax; Fri, 15 Jan 2021 14:32:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68171.121997; Fri, 15 Jan 2021 14:31:57 +0000
+Received: by outflank-mailman (output) from mailman id 68174.122010; Fri, 15 Jan 2021 14:32:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Q8q-0002PW-UR; Fri, 15 Jan 2021 14:31:56 +0000
-Received: by outflank-mailman (input) for mailman id 68171;
- Fri, 15 Jan 2021 14:31:55 +0000
+	id 1l0Q8w-0002Sv-6X; Fri, 15 Jan 2021 14:32:02 +0000
+Received: by outflank-mailman (input) for mailman id 68174;
+ Fri, 15 Jan 2021 14:32:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0Q8p-0002PO-PX
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 14:31:55 +0000
+ id 1l0Q8u-0002PO-Og
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 14:32:00 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 36b4893d-52ef-4ac7-b1bf-ce58877b11cd;
+ id d674c9a6-58df-464e-b78a-8aab716df457;
  Fri, 15 Jan 2021 14:31:55 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 37D88ABDA;
- Fri, 15 Jan 2021 14:31:54 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0A70BB168;
+ Fri, 15 Jan 2021 14:31:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,23 +51,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36b4893d-52ef-4ac7-b1bf-ce58877b11cd
+X-Inumbo-ID: d674c9a6-58df-464e-b78a-8aab716df457
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610721114; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610721115; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
 	bh=H7N+SEhZ45fsxR0kXGVHPeygiOlR6ozuZnfFEqaXE/o=;
-	b=h6RJLtDDTU3b1J8TKvxwOxWBRLuNzZ8TD2zsnRN0LNJobty8gVjUU/WwFbBBLPd0mEb+HT
-	8jFmPkyJVALTJ5daj+VE7YydzSWB19jdooUdm63mEJ+VGDIVA6cNtMvzvvYKC+C8rmqnHe
-	MvtZu943WLwYwpXe5ObsV6eetz03WjI=
+	b=IbFbn6E0VQ1JIr0FGb+1L05H4+AkRIjBZzzCkCLlow8Uk6C/6W9NQTMYW3ZkfSipHw0aa7
+	hGh3wt6nwAlyZfA7vljN75khYuoBMxLr1eqm7MHw6A6XxbZajWkeFGBCPcIqG8vLy5QQ8f
+	PfSpNFyqca3Mr/Xu97n0Dqu9rnm7ibA=
 From: Juergen Gross <jgross@suse.com>
 To: torvalds@linux-foundation.org
 Cc: linux-kernel@vger.kernel.org,
 	xen-devel@lists.xenproject.org,
 	boris.ostrovsky@oracle.com
 Subject: [GIT PULL] xen: branch for v5.11-rc4
-Date: Fri, 15 Jan 2021 15:31:53 +0100
-Message-Id: <20210115143153.30040-1-jgross@suse.com>
+Date: Fri, 15 Jan 2021 15:31:54 +0100
+Message-Id: <20210115143154.30095-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
