@@ -2,43 +2,43 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB8DDC43381
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B149C4332B
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5694023118
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5694023118
+	by mail.kernel.org (Postfix) with ESMTPS id 3367722597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3367722597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67714.120998 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67712.120974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KUq-0008JX-2s; Fri, 15 Jan 2021 08:30:16 +0000
+	id 1l0KUl-0008Gt-H9; Fri, 15 Jan 2021 08:30:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67714.120998; Fri, 15 Jan 2021 08:30:16 +0000
+Received: by outflank-mailman (output) from mailman id 67712.120974; Fri, 15 Jan 2021 08:30:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KUp-0008JQ-VD; Fri, 15 Jan 2021 08:30:15 +0000
-Received: by outflank-mailman (input) for mailman id 67714;
- Fri, 15 Jan 2021 08:30:14 +0000
+	id 1l0KUl-0008Gm-Ds; Fri, 15 Jan 2021 08:30:11 +0000
+Received: by outflank-mailman (input) for mailman id 67712;
+ Fri, 15 Jan 2021 08:30:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KUo-0008Gh-Ee
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:14 +0000
+ id 1l0KUj-0008Gh-K8
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:09 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f24ecc88-757a-4488-9397-2a88204bbb7f;
+ id 56707f11-4a43-46d7-a73c-badd76f8f5bb;
  Fri, 15 Jan 2021 08:30:08 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D6F45B96C;
+ by mx2.suse.de (Postfix) with ESMTP id 47370B933;
  Fri, 15 Jan 2021 08:30:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -51,313 +51,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f24ecc88-757a-4488-9397-2a88204bbb7f
+X-Inumbo-ID: 56707f11-4a43-46d7-a73c-badd76f8f5bb
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1610699407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=TDOKCm1PBekJ/I7OVe/tbhyex8V7rdSW9/SSHYEJKQE=;
-	b=R6NxtkjDSpZKiQOIQXgpnyRxDVwEyOd/MmrX3tCPvzeiogY82qn4AZFK3KMC+Ee6OCzEPR
-	HGfNLtR+ltnGxrlFx+DmJxau6B4VkIRU231uNMp13Hx1apZ4oFtUtPMQOn6b6ihCY2Bwlv
-	gbcIC5mMvGH/+3mNPhC3Dbw9k5qT8SM=
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=zJeM+Gdg2B1qmBL3okj+9gejov2FJmf6wJlxw8FMvN4=;
+	b=ngI5tmrE6naHJDDic4vk0CeYdY8U9QgVO34omlX3GG2tvWpMel9GUbwCnaT4HrHGfD2imG
+	fFp0xorpIHgofaiKDFgJi1XKqVeFtp8SpHkCyL3oLhjtjGhGkmICO6DpjrPWahmi1ywi8P
+	oJmS0PTr3ZBO5FSE+tiSAvKfAb/FLwg=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v12 05/27] tools/libxenevtchn: add possibility to not close file descriptor on exec
-Date: Fri, 15 Jan 2021 09:29:38 +0100
-Message-Id: <20210115083000.14186-6-jgross@suse.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v12 00/27] tools/xenstore: support live update for xenstored
+Date: Fri, 15 Jan 2021 09:29:33 +0100
+Message-Id: <20210115083000.14186-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
-References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today the file descriptor for the access of the event channel driver
-is being closed in case of exec(2). For the support of live update of
-a daemon using libxenevtchn this can be problematic, so add a way to
-keep that file descriptor open.
+Today Xenstore is not restartable. This means a Xen server needing an
+update of xenstored has to be rebooted in order to let this update
+become effective.
 
-Add support of a flag XENEVTCHN_NO_CLOEXEC for xenevtchn_open() which
-will result in _not_ setting O_CLOEXEC when opening the event channel
-driver node.
+This patch series is changing that: The internal state of xenstored
+(the contents of Xenstore, all connections to various clients like
+programs or other domains, and watches) is saved in a defined format
+and a new binary is being activated consuming the old state. All
+connections are being restored and the new Xenstore binary will
+continue where the old one stopped.
 
-The caller can then obtain the file descriptor via xenevtchn_fd().
+This patch series has been under (secret) development until V9.
+It has been posted to xen-devel only from V10 onwards.
 
-Add an alternative open function xenevtchn_fdopen() which takes that
-file descriptor as an additional parameter. This allows to allocate a
-xenevtchn_handle and to associate it with that file descriptor.
+There will be a similar series for oxenstored posted.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Wei Liu <wl@xen.org>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
----
-V7:
-- new patch
+Xenstore-stubdom is not yet supported, but I'm planning to start
+working on that soon.
 
-V8:
-- some minor comments by Julien Grall addressed
+Changes in V12:
+- addressed Andrew's comments (patches 1-5)
+- fixed mangled patches 12 and 13
 
-V11:
-- rename to xenevtchn_fdopen() (Andrew Cooper)
+Changes in V11:
+- dropped patches 1-3 of V10 as already appled
+- new patches 1-4 (Andrew Cooper): more libxenevtchn cleanup
+- new patch 12 (Edwin Torok): handle timeout of LU completely in
+  xenstored instead of split xenstore-control/xenstored. I've kept
+  the xenstore-control timeout handling for the case of premature
+  LU supporting downstream versions
 
-V12:
-- better comments in header file (Andrew Cooper)
-- reject flags != 0 if fdopen (Andrew Cooper)
-- style (Andrew Cooper)
----
- tools/include/xenevtchn.h          | 50 +++++++++++++++---------
- tools/libs/evtchn/Makefile         |  2 +-
- tools/libs/evtchn/core.c           | 62 ++++++++++++++++++++++--------
- tools/libs/evtchn/freebsd.c        |  7 +++-
- tools/libs/evtchn/libxenevtchn.map |  4 ++
- tools/libs/evtchn/linux.c          |  6 ++-
- tools/libs/evtchn/minios.c         |  4 ++
- 7 files changed, 97 insertions(+), 38 deletions(-)
+Changes in V10 (for the members of the security team):
+- dropped patch 6 as requested by Andrew
 
-diff --git a/tools/include/xenevtchn.h b/tools/include/xenevtchn.h
-index 3e9b6e7323..10dbe1a06e 100644
---- a/tools/include/xenevtchn.h
-+++ b/tools/include/xenevtchn.h
-@@ -42,35 +42,47 @@ struct xentoollog_logger;
-  */
- 
- /*
-- * Return a handle to the event channel driver, or NULL on failure, in
-- * which case errno will be set appropriately.
-+ * Opens the evtchn device node.  Return a handle to the event channel
-+ * driver, or NULL on failure, in which case errno will be set
-+ * appropriately.
-  *
-- * Note: After fork(2) a child process must not use any opened evtchn
-- * handle inherited from their parent, nor access any grant mapped
-- * areas associated with that handle.
-+ * On fork(2):
-  *
-- * The child must open a new handle if they want to interact with
-- * evtchn.
-+ *   After fork, a child process must not use any opened evtchn handle
-+ *   inherited from their parent.  This includes operations such as
-+ *   poll() on the underlying file descriptor.  Calling xenevtchn_close()
-+ *   is the only safe operation on a xenevtchn_handle which has been
-+ *   inherited.
-  *
-- * Calling exec(2) in a child will safely (and reliably) reclaim any
-- * allocated resources via a xenevtchn_handle in the parent.
-+ *   The child must open a new handle if they want to interact with
-+ *   evtchn.
-  *
-- * A child which does not call exec(2) may safely call
-- * xenevtchn_close() on a xenevtchn_handle inherited from their
-- * parent. This will attempt to reclaim any resources associated with
-- * that handle. Note that in some implementations this reclamation may
-- * not be completely effective, in this case any affected resources
-- * remain allocated.
-+ * On exec(2):
-  *
-- * Calling xenevtchn_close() is the only safe operation on a
-- * xenevtchn_handle which has been inherited.
-+ *   Wherever possible, the device node will be opened with O_CLOEXEC,
-+ *   so it is not inherited by the subsequent program.
-+ *
-+ *   However the XENEVTCHN_NO_CLOEXEC flag may be used to avoid opening
-+ *   the device node with O_CLOEXEC.  This is intended for use by
-+ *   daemons which support a self-reexec method of updating themselves.
-+ *
-+ *   In this case, the updated daemon should pass the underlying file
-+ *   descriptor it inherited to xenevtchn_fdopen() to reconstruct the
-+ *   library handle.
-  */
--/* Currently no flags are defined */
-+
-+/* Don't set O_CLOEXEC when opening event channel driver node. */
-+#define XENEVTCHN_NO_CLOEXEC (1U <<0)
-+
- xenevtchn_handle *xenevtchn_open(struct xentoollog_logger *logger,
-                                  unsigned int flags);
- 
-+/* Flag XENEVTCHN_NO_CLOEXEC is rejected by xenevtchn_fdopen(). */
-+xenevtchn_handle *xenevtchn_fdopen(struct xentoollog_logger *logger,
-+                                    int fd, unsigned open_flags);
-+
- /*
-- * Close a handle previously allocated with xenevtchn_open().
-+ * Close a handle previously allocated with xenevtchn_{,fd}open().
-  */
- int xenevtchn_close(xenevtchn_handle *xce);
- 
-diff --git a/tools/libs/evtchn/Makefile b/tools/libs/evtchn/Makefile
-index ad01a17b3d..b8c37b5b97 100644
---- a/tools/libs/evtchn/Makefile
-+++ b/tools/libs/evtchn/Makefile
-@@ -2,7 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR    = 1
--MINOR    = 1
-+MINOR    = 2
- 
- SRCS-y                 += core.c
- SRCS-$(CONFIG_Linux)   += linux.c
-diff --git a/tools/libs/evtchn/core.c b/tools/libs/evtchn/core.c
-index d3cc93e98f..abebf72559 100644
---- a/tools/libs/evtchn/core.c
-+++ b/tools/libs/evtchn/core.c
-@@ -30,18 +30,10 @@ static int all_restrict_cb(Xentoolcore__Active_Handle *ah, domid_t domid)
-     return xenevtchn_restrict(xce, domid);
- }
- 
--xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned int flags)
-+static xenevtchn_handle *xenevtchn_alloc_handle(xentoollog_logger *logger)
- {
--    xenevtchn_handle *xce;
--    int rc;
--
--    if ( flags )
--    {
--        errno = EINVAL;
--        return NULL;
--    }
-+    xenevtchn_handle *xce = malloc(sizeof(*xce));
- 
--    xce = malloc(sizeof(*xce));
-     if ( !xce )
-         return NULL;
- 
-@@ -60,21 +52,59 @@ xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned int flags)
-             goto err;
-     }
- 
-+    return xce;
-+
-+err:
-+    xenevtchn_close(xce);
-+    return NULL;
-+}
-+
-+xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned int flags)
-+{
-+    xenevtchn_handle *xce;
-+    int rc;
-+
-+    if ( flags & ~XENEVTCHN_NO_CLOEXEC )
-+    {
-+        errno = EINVAL;
-+        return NULL;
-+    }
-+
-+    xce = xenevtchn_alloc_handle(logger);
-+    if ( !xce )
-+        return NULL;
-+
-     rc = osdep_evtchn_open(xce, flags);
-     if ( rc < 0 )
-         goto err;
- 
-     return xce;
- 
-- err:
--    xentoolcore__deregister_active_handle(&xce->tc_ah);
--    osdep_evtchn_close(xce);
--    xtl_logger_destroy(xce->logger_tofree);
--    free(xce);
--
-+err:
-+    xenevtchn_close(xce);
-     return NULL;
- }
- 
-+xenevtchn_handle *xenevtchn_fdopen(struct xentoollog_logger *logger,
-+                                   int fd, unsigned int flags)
-+{
-+    xenevtchn_handle *xce;
-+
-+    if ( flags )
-+    {
-+        errno = EINVAL;
-+        return NULL;
-+    }
-+
-+    xce = xenevtchn_alloc_handle(logger);
-+    if ( !xce )
-+        return NULL;
-+
-+    xce->fd = fd;
-+
-+    return xce;
-+}
-+
- int xenevtchn_close(xenevtchn_handle *xce)
- {
-     int rc;
-diff --git a/tools/libs/evtchn/freebsd.c b/tools/libs/evtchn/freebsd.c
-index bb601f350f..7427ab2408 100644
---- a/tools/libs/evtchn/freebsd.c
-+++ b/tools/libs/evtchn/freebsd.c
-@@ -33,8 +33,13 @@
- 
- int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
--    int fd = open(EVTCHN_DEV, O_RDWR|O_CLOEXEC);
-+    int open_flags = O_RDWR;
-+    int fd;
- 
-+    if ( !(flags & XENEVTCHN_NO_CLOEXEC) )
-+        open_flags |= O_CLOEXEC;
-+
-+    fd = open(EVTCHN_DEV, open_flags);
-     if ( fd == -1 )
-         return -1;
- 
-diff --git a/tools/libs/evtchn/libxenevtchn.map b/tools/libs/evtchn/libxenevtchn.map
-index 33a38f953a..4c180ea65d 100644
---- a/tools/libs/evtchn/libxenevtchn.map
-+++ b/tools/libs/evtchn/libxenevtchn.map
-@@ -21,3 +21,7 @@ VERS_1.1 {
- 	global:
- 		xenevtchn_restrict;
- } VERS_1.0;
-+VERS_1.2 {
-+	global:
-+		xenevtchn_fdopen;
-+} VERS_1.1;
-diff --git a/tools/libs/evtchn/linux.c b/tools/libs/evtchn/linux.c
-index 62adc0e574..60bb75a791 100644
---- a/tools/libs/evtchn/linux.c
-+++ b/tools/libs/evtchn/linux.c
-@@ -36,8 +36,12 @@
- 
- int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
--    int fd = open("/dev/xen/evtchn", O_RDWR|O_CLOEXEC);
-+    int open_flags = O_RDWR;
-+    int fd;
- 
-+    if ( !(flags & XENEVTCHN_NO_CLOEXEC) )
-+        open_flags |= O_CLOEXEC;
-+    fd = open("/dev/xen/evtchn", open_flags);
-     if ( fd == -1 )
-         return -1;
- 
-diff --git a/tools/libs/evtchn/minios.c b/tools/libs/evtchn/minios.c
-index 3afc8e2517..57f712ade3 100644
---- a/tools/libs/evtchn/minios.c
-+++ b/tools/libs/evtchn/minios.c
-@@ -69,6 +69,10 @@ static void port_dealloc(struct evtchn_port_info *port_info)
-     free(port_info);
- }
- 
-+/*
-+ * XENEVTCHN_NO_CLOEXEC is being ignored, as there is no exec() call supported
-+ * in Mini-OS.
-+ */
- int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
-     int fd = alloc_fd(FTYPE_EVTCHN);
+Juergen Gross (26):
+  tools/libxenevtchn: switch to standard xen coding style
+  tools/libxenevtchn: rename open_flags to flags
+  tools/libxenevtchn: check xenevtchn_open() flags for not supported
+    bits
+  tools/libxenevtchn: propagate xenevtchn_open() flags parameter
+  tools/libxenevtchn: add possibility to not close file descriptor on
+    exec
+  tools/xenstore: refactor XS_CONTROL handling
+  tools/xenstore: add live update command to xenstore-control
+  tools/xenstore: add basic live-update command parsing
+  tools/xenstore: introduce live update status block
+  tools/xenstore: save new binary for live update
+  tools/xenstore: add command line handling for live update
+  tools/xenstore: add support for delaying execution of a xenstore
+    request
+  tools/xenstore: add the basic framework for doing the live update
+  tools/xenstore: allow live update only with no transaction active
+  docs: update the xenstore migration stream documentation
+  tools/xenstore: add include file for state structure definitions
+  tools/xenstore: dump the xenstore state for live update
+  tools/xenstore: handle CLOEXEC flag for local files and pipes
+  tools/xenstore: split off domain introduction from do_introduce()
+  tools/xenstore: evaluate the live update flag when starting
+  tools/xenstore: read internal state when doing live upgrade
+  tools/xenstore: add reading global state for live update
+  tools/xenstore: add read connection state for live update
+  tools/xenstore: add read node state for live update
+  tools/xenstore: add read watch state for live update
+  tools/xenstore: activate new binary for live update
+
+Julien Grall (1):
+  tools/xenstore: handle dying domains in live update
+
+ docs/designs/xenstore-migration.md      |  19 +-
+ docs/misc/xenstore.txt                  |  21 +
+ tools/include/xenevtchn.h               |  52 +-
+ tools/libs/evtchn/Makefile              |   2 +-
+ tools/libs/evtchn/core.c                |  74 ++-
+ tools/libs/evtchn/freebsd.c             |  34 +-
+ tools/libs/evtchn/libxenevtchn.map      |   4 +
+ tools/libs/evtchn/linux.c               |  12 +-
+ tools/libs/evtchn/minios.c              | 104 +++-
+ tools/libs/evtchn/netbsd.c              |  24 +-
+ tools/libs/evtchn/private.h             |   2 +-
+ tools/libs/evtchn/solaris.c             |  14 +-
+ tools/xenstore/Makefile                 |   3 +-
+ tools/xenstore/include/xenstore_state.h | 131 +++++
+ tools/xenstore/utils.c                  |  17 +
+ tools/xenstore/utils.h                  |   6 +
+ tools/xenstore/xenstore_control.c       | 333 +++++++++++-
+ tools/xenstore/xenstored_control.c      | 649 +++++++++++++++++++++++-
+ tools/xenstore/xenstored_control.h      |   1 +
+ tools/xenstore/xenstored_core.c         | 556 ++++++++++++++++++--
+ tools/xenstore/xenstored_core.h         |  59 +++
+ tools/xenstore/xenstored_domain.c       | 301 ++++++++---
+ tools/xenstore/xenstored_domain.h       |  11 +-
+ tools/xenstore/xenstored_posix.c        |  13 +-
+ tools/xenstore/xenstored_transaction.c  |   5 +
+ tools/xenstore/xenstored_watch.c        | 171 +++++--
+ tools/xenstore/xenstored_watch.h        |   5 +
+ 27 files changed, 2362 insertions(+), 261 deletions(-)
+ create mode 100644 tools/xenstore/include/xenstore_state.h
+
 -- 
 2.26.2
 
