@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A33C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6C9AC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E74A20DD4
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E74A20DD4
+	by mail.kernel.org (Postfix) with ESMTPS id 93F3320DD4
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93F3320DD4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68672.123020 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68679.123032 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Xbj-0007Ef-NN; Fri, 15 Jan 2021 22:30:15 +0000
+	id 1l0Xbt-0007OG-8N; Fri, 15 Jan 2021 22:30:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68672.123020; Fri, 15 Jan 2021 22:30:15 +0000
+Received: by outflank-mailman (output) from mailman id 68679.123032; Fri, 15 Jan 2021 22:30:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Xbj-0007EV-Jq; Fri, 15 Jan 2021 22:30:15 +0000
-Received: by outflank-mailman (input) for mailman id 68672;
- Fri, 15 Jan 2021 22:30:14 +0000
+	id 1l0Xbt-0007O8-4P; Fri, 15 Jan 2021 22:30:25 +0000
+Received: by outflank-mailman (input) for mailman id 68679;
+ Fri, 15 Jan 2021 22:30:24 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hVL8=GS=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1l0Xbi-00062b-8V
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:30:14 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ id 1l0Xbs-00062b-8r
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:30:24 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1c25cd1b-d022-4c55-b81e-1987ddc0eda6;
- Fri, 15 Jan 2021 22:29:51 +0000 (UTC)
+ id ef7b5529-d612-4839-bc0f-62c474490687;
+ Fri, 15 Jan 2021 22:29:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,38 +49,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1c25cd1b-d022-4c55-b81e-1987ddc0eda6
+X-Inumbo-ID: ef7b5529-d612-4839-bc0f-62c474490687
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610749791;
+  d=citrix.com; s=securemail; t=1610749799;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tcW6aJFjdLYT7/rMoBR/lbzSOmMTuN1isJgOl/8Ingw=;
-  b=akKWxwMIyITjsxNgoj6lcnUZVcd/siduO90sC/CSM2/QCLoXCdAhcEN0
-   ERwqdwpTRhMFj0gJQEMVhDjvV0eLeWKtYXO8O+FYa3QeC6+6mbMjey2L0
-   X38yUJbYWqYSjzFWOf1XHstjkfdBU89EWX6JvrRduSSzSZfh8QGQLDVbt
-   A=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QSb8iFPrZC3nCgPcKdjmYn5SsNfAh0MxCe+2gLLmR50bxDKGKv0z2ojfYb16wVO5I7tys1TMcv
- l9nOggz0RQr4H77k/lBFmtA2yvZkNOBj7/iWFsfsX+p6P8DrYq3u6zzqWoAVXNg8jgUrQU3wrV
- +8SsQRMlgnT5gsxYtlrYjBY5id7DBotUbLqNt9Mu0SIW4NTa4CJoHHrI7aOgFqBwGBuPSmmyj2
- UWGL2dimOLlBdaYa0UKkQiAva54vIff2xsl2/JzZ+v742yeK1U7ho6FNHEtg99gDSj4ZhXdWDk
- 85U=
+  bh=ChX2rsVn5ssD/dNJKc5/y7eY+C7iouZky4Y2USpFMDg=;
+  b=H6sUoNR2i7+FwKh1s7RElUORLN1i5UTL7SXUSmU8OMyW7NLHrAUo9pI9
+   9N9vYG6l9WEgmhNLKHK51QOMHMWU5L3GMPWDlUtfGfDs2rqQ/GW7wIy5U
+   KESqckmy5KrKdmgSf7s0yoKt2FKuTYg4aUVPVFkvhQjmLqhm7Zd6Ju2f3
+   Q=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: mHx+RKLkQwzT3oeD7dsMnyR42Pl540jrfqcz7L7sfXLrey9EYa01zjmVv4vetuOp0N8lNlWXUG
+ UczC7I/oZuEu7xb9VYVO9QS9+nyEy89N9W1YJGoC1vp/IDoQwxAN3g+u4eYnFv5FQW+8GE4Bw2
+ iEZ7VTKFerwgBtIkj4y2c/gyoAnhia0FmkOdnZHkk/iOO/FVAqVf9U5Ca+CJOett8qdCSdiz3V
+ D0b5qENmEU3sBb+AZGYy3neH6v5o9rtq4VmTZRNnco8te6VujdIjgUTu/oNUCMHpnPZzoDURY/
+ lDw=
 X-SBRS: 5.1
-X-MesageID: 35216601
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 35434458
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="35216601"
+   d="scan'208";a="35434458"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
- Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
-	<jgross@suse.com>, Pau Ruiz Safont <pau.safont@citrix.com>
-Subject: [PATCH v2 4/8] tools/ocaml/xenstored: only quit on SIGTERM when a reload is possible
-Date: Fri, 15 Jan 2021 22:28:46 +0000
-Message-ID: <023574503750d06132e3ca260848c364ff439001.1610748224.git.edvin.torok@citrix.com>
+ Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Pau Ruiz Safont
+	<pau.safont@citrix.com>
+Subject: [PATCH v2 6/8] tools/ocaml/xenstored: add cooperative live-update command
+Date: Fri, 15 Jan 2021 22:28:48 +0000
+Message-ID: <0ed42a4cb25f53620c31594de9949f150c4833cc.1610748224.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1610748224.git.edvin.torok@citrix.com>
 References: <cover.1610748224.git.edvin.torok@citrix.com>
@@ -88,23 +88,14 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Currently when oxenstored receives SIGTERM it dumps its state and quits.
-It is possible to then restart it if --restart is given, however that is
-not always safe:
+See docs/misc/xenstore.txt for documentation on live-update command.
+Validate that the binary exists and that the cmdline is valid,
+to prevent typos from taking down xenstore
+(if live-update fails there is no way back due to the use of execve).
 
-* domains could have active transactions, and after a restart they would
-either reuse transaction IDs of already open transactions, or get an
-error back that the transaction doesn't exist
-
-* there could be pending data to send to a VM still in oxenstored's
-  queue which would be lost
-
-* there could be pending input to be processed from a VM in oxenstored's
-  queue which would be lost
-
-Prevent shutting down oxenstored via SIGTERM in the above situations.
-Also ignore domains marked as bad because oxenstored would never talk
-to them again.
+Live update only proceeds if there are no active transactions,
+and no unprocess input or unflushed output.
+It is not yet possible to force the live-update.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 Reviewed-by: Pau Ruiz Safont <pau.safont@citrix.com>
@@ -114,155 +105,162 @@ Reviewed-by: Christian Lindig <christian.lindig@citrix.com>
 Changed since V1:
 * post publicly now that the XSA is out
 ---
- tools/ocaml/xenstored/connection.ml  | 35 ++++++++++++++++++++++++++++
- tools/ocaml/xenstored/connections.ml |  8 +++++++
- tools/ocaml/xenstored/xenstored.ml   | 13 +++++++++--
- tools/xenstore/xenstored_core.c      |  7 +++++-
- 4 files changed, 60 insertions(+), 3 deletions(-)
+ tools/ocaml/xenstored/process.ml | 112 +++++++++++++++++++++++++++++++
+ tools/ocaml/xenstored/stdext.ml  |   6 ++
+ 2 files changed, 118 insertions(+)
 
-diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
-index fa0d3c4d92..bd02060cd0 100644
---- a/tools/ocaml/xenstored/connection.ml
-+++ b/tools/ocaml/xenstored/connection.ml
-@@ -290,6 +290,41 @@ let has_new_output con = Xenbus.Xb.has_new_output con.xb
- let peek_output con = Xenbus.Xb.peek_output con.xb
- let do_output con = Xenbus.Xb.output con.xb
+diff --git a/tools/ocaml/xenstored/process.ml b/tools/ocaml/xenstored/process.ml
+index 437d2dcf9e..c3c5dc58c0 100644
+--- a/tools/ocaml/xenstored/process.ml
++++ b/tools/ocaml/xenstored/process.ml
+@@ -15,6 +15,7 @@
+  *)
  
-+let is_bad con = match con.dom with None -> false | Some dom -> Domain.is_bad_domain dom
+ let error fmt = Logging.error "process" fmt
++let warn fmt = Logging.warn "process" fmt
+ let info fmt = Logging.info "process" fmt
+ let debug fmt = Logging.debug "process" fmt
+ 
+@@ -84,11 +85,122 @@ let create_implicit_path t perm path =
+ 		List.iter (fun s -> Transaction.mkdir ~with_watch:false t perm s) ret
+ 	)
+ 
++module LiveUpdate = struct
++type t =
++	{ binary: string
++		; cmdline: string list
++		; deadline: float
++	; force: bool
++	; pending: bool }
 +
-+(* oxenstored currently only dumps limited information about its state.
-+   A live update is only possible if any of the state that is not dumped would be empty.
-+   Compared to https://xenbits.xen.org/docs/unstable/designs/xenstore-migration.html:
-+     * GLOBAL_DATA: not strictly needed, systemd is giving the socket FDs to us
-+     * CONNECTION_DATA: PARTIAL
-+       * for domains: PARTIAL, see Connection.dump -> Domain.dump, only if data and tdomid is empty
-+       * for sockets (Dom0 toolstack): NO
-+     * WATCH_DATA: OK, see Connection.dump
-+     * TRANSACTION_DATA: NO
-+     * NODE_DATA: OK (except for transactions), see Store.dump_fct and DB.to_channel
++let state =
++	ref
++		{ binary= Sys.executable_name
++		; cmdline= []
++		; deadline= 0.
++		; force= false
++		; pending= false }
 +
-+   Also xenstored will never talk to a Domain once it is marked as bad,
-+   so treat it as idle for live-update.
++let debug = Printf.eprintf
 +
-+   Restrictions below can be relaxed once xenstored learns to dump more
-+   of its live state in a safe way *)
-+let has_extra_connection_data con =
-+	let has_in = has_input con in
-+	let has_out = has_output con in
-+	let has_socket = con.dom = None in
-+	let has_nondefault_perms = make_perm con.dom <> con.perm in
-+	has_in || has_out
-+	|| has_socket (* dom0 sockets not dumped yet *)
-+	|| has_nondefault_perms (* set_target not dumped yet *)
++let args_of_t t = (t.binary, "--restart" :: t.cmdline)
 +
-+let has_transaction_data con =
-+	let n = number_of_transactions con in
-+	dbg "%s: number of transactions = %d" (get_domstr con) n;
-+	n > 0
++let string_of_t t =
++	let executable, rest = args_of_t t in
++	Filename.quote_command executable rest
 +
-+let prevents_live_update con = not (is_bad con)
-+	&& (has_extra_connection_data con || has_transaction_data con)
++let launch_exn t =
++	let executable, rest = args_of_t t in
++	let args = Array.of_list (executable :: rest) in
++	Unix.execv args.(0) args
 +
- let has_more_work con =
- 	has_more_input con || not (has_old_output con) && has_new_output con
- 
-diff --git a/tools/ocaml/xenstored/connections.ml b/tools/ocaml/xenstored/connections.ml
-index 6ee3552ec2..82988f7e8d 100644
---- a/tools/ocaml/xenstored/connections.ml
-+++ b/tools/ocaml/xenstored/connections.ml
-@@ -194,3 +194,11 @@ let debug cons =
- 	let anonymous = Hashtbl.fold (fun _ con accu -> Connection.debug con :: accu) cons.anonymous [] in
- 	let domains = Hashtbl.fold (fun _ con accu -> Connection.debug con :: accu) cons.domains [] in
- 	String.concat "" (domains @ anonymous)
++let validate_exn t =
++	(* --help must be last to check validity of earlier arguments *)
++	let t = {t with cmdline= t.cmdline @ ["--help"]} in
++	let cmd = string_of_t t in
++	debug "Executing %s" cmd ;
++	match Unix.fork () with
++	| 0 ->
++		 ( try launch_exn t with _ -> exit 2 )
++	| pid -> (
++	match Unix.waitpid [] pid with
++		| _, Unix.WEXITED 0 ->
++				debug "Live update validated cmdline %s" cmd;
++		t
++	| _, Unix.WEXITED n ->
++		invalid_arg (Printf.sprintf "Command %s exited with code %d" cmd n)
++	| _, Unix.WSIGNALED n ->
++		invalid_arg
++		  (Printf.sprintf "Command %s killed by ocaml signal number %d" cmd n)
++	| _, Unix.WSTOPPED n ->
++		invalid_arg
++		  (Printf.sprintf "Command %s stopped by ocaml signal number %d" cmd n)
++	)
 +
-+let filter ~f cons =
-+	let fold _ v acc = if f v then v :: acc else acc in
-+	[]
-+	|> Hashtbl.fold fold cons.anonymous
-+	|> Hashtbl.fold fold cons.domains
++let parse_live_update args =
++	try
++	(state :=
++		match args with
++		| ["-f"; file] ->
++			validate_exn {!state with binary= file}
++		| ["-a"] ->
++			debug "Live update aborted" ;
++			{!state with pending= false}
++		| "-c" :: cmdline ->
++			validate_exn {!state with cmdline}
++		| "-s" :: _ ->
++			let timeout = ref 60 in
++			let force = ref false in
++			Arg.parse_argv ~current:(ref 1) (Array.of_list args)
++				[ ( "-t"
++				, Arg.Set_int timeout
++				, "timeout in seconds to wait for active transactions to finish"
++				)
++			(*; ( "-F"
++				, Arg.Set force
++				, "force live update to happen even with running transactions \
++				   after timeout elapsed" )*) ]
++			(fun x -> raise (Arg.Bad x))
++			"live-update -s" ;
++			debug "Live update process queued" ;
++				{!state with deadline = Unix.gettimeofday () +. float !timeout
++				; force= !force; pending= true}
++		| _ ->
++			invalid_arg ("Unknown arguments: " ^ String.concat " " args)) ;
++	None
++	with
++	| Arg.Bad s | Arg.Help s | Invalid_argument s ->
++		Some s
++	| Unix.Unix_error (e, fn, args) ->
++		Some (Printf.sprintf "%s(%s): %s" fn args (Unix.error_message e))
 +
-+let prevents_quit cons = filter ~f:Connection.prevents_live_update cons
-diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
-index 39d6d767e4..6b5381962b 100644
---- a/tools/ocaml/xenstored/xenstored.ml
-+++ b/tools/ocaml/xenstored/xenstored.ml
-@@ -20,6 +20,7 @@ open Parse_arg
- open Stdext
++	let should_run cons =
++		let t = !state in
++		if t.pending then begin
++			match Connections.prevents_quit cons with
++			| [] -> true
++			| _ when Unix.gettimeofday () < t.deadline -> false
++			| l ->
++				 info "Live update timeout reached: %d active connections" (List.length l);
++				 List.iter (fun con -> warn "%s prevents live update" (Connection.get_domstr con)) l;
++				 if t.force then begin
++					 warn "Live update forced, some domain connections may break!";
++					 true
++				 end else begin
++					 warn "Live update aborted, try migrating or shutting down the domains/toolstack";
++					 state := { t with pending = false };
++					 false
++				end
++		end else false
++end
++
+ (* packets *)
+ let do_debug con t _domains cons data =
+ 	if not (Connection.is_dom0 con) && not !allow_debug
+ 	then None
+ 	else try match split None '\000' data with
++	| "live-update" :: params ->
++		LiveUpdate.parse_live_update params
+ 	| "print" :: msg :: _ ->
+ 		Logging.xb_op ~tid:0 ~ty:Xenbus.Xb.Op.Debug ~con:"=======>" msg;
+ 		None
+diff --git a/tools/ocaml/xenstored/stdext.ml b/tools/ocaml/xenstored/stdext.ml
+index 4f2f3a2c8c..e1567c4dfa 100644
+--- a/tools/ocaml/xenstored/stdext.ml
++++ b/tools/ocaml/xenstored/stdext.ml
+@@ -44,6 +44,12 @@ let default d v =
+ let maybe f v =
+ 	match v with None -> () | Some x -> f x
  
- let error fmt = Logging.error "xenstored" fmt
-+let warn fmt = Logging.warn "xenstored" fmt
- let debug fmt = Logging.debug "xenstored" fmt
- let info fmt = Logging.info "xenstored" fmt
++module Filename = struct
++	include Filename
++	let quote_command cmd args =
++		cmd :: args |> List.map quote |> String.concat " "
++end
++
+ module String = struct include String
  
-@@ -312,7 +313,9 @@ let _ =
- 	);
- 
- 	Sys.set_signal Sys.sighup (Sys.Signal_handle sighup_handler);
--	Sys.set_signal Sys.sigterm (Sys.Signal_handle (fun _ -> quit := true));
-+	Sys.set_signal Sys.sigterm (Sys.Signal_handle (fun _ ->
-+		 info "Received SIGTERM";
-+		 quit := true));
- 	Sys.set_signal Sys.sigusr1 (Sys.Signal_handle (fun _ -> sigusr1_handler store));
- 	Sys.set_signal Sys.sigpipe Sys.Signal_ignore;
- 
-@@ -424,6 +427,12 @@ let _ =
- 		);
- 		let elapsed = Unix.gettimeofday () -. now in
- 		debug "periodic_ops took %F seconds." elapsed;
-+		if !quit then
-+		(match Connections.prevents_quit cons with
-+		| [] -> ()
-+		| domains ->
-+		    List.iter (fun con -> warn "%s prevents live update" (Connection.get_domstr con)) domains
-+		);
- 		delay_next_frequent_ops_by elapsed
- 	in
- 
-@@ -475,7 +484,7 @@ let _ =
- 		in
- 
- 	Systemd.sd_notify_ready ();
--	while not !quit
-+	while not (!quit && Connections.prevents_quit cons = [])
- 	do
- 		try
- 			main_loop ()
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 50986f8b29..b9495365c4 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -1970,6 +1970,7 @@ static struct option options[] = {
- 	{ "internal-db", 0, NULL, 'I' },
- 	{ "verbose", 0, NULL, 'V' },
- 	{ "watch-nb", 1, NULL, 'W' },
-+	{ "live-update", 0, NULL, 'U' },
- 	{ NULL, 0, NULL, 0 } };
- 
- extern void dump_conn(struct connection *conn); 
-@@ -1984,11 +1985,12 @@ int main(int argc, char *argv[])
- 	bool dofork = true;
- 	bool outputpid = false;
- 	bool no_domain_init = false;
-+	bool live_update = false;
- 	const char *pidfile = NULL;
- 	int timeout;
- 
- 
--	while ((opt = getopt_long(argc, argv, "DE:F:HNPS:t:A:M:T:RVW:", options,
-+	while ((opt = getopt_long(argc, argv, "DE:F:HNPS:t:A:M:T:RVW:U", options,
- 				  NULL)) != -1) {
- 		switch (opt) {
- 		case 'D':
-@@ -2046,6 +2048,9 @@ int main(int argc, char *argv[])
- 		case 'p':
- 			priv_domid = strtol(optarg, NULL, 10);
- 			break;
-+		case 'U':
-+			live_update = true;
-+			break;
- 		}
- 	}
- 	if (optind != argc)
+ let of_char c = String.make 1 c
 -- 
 2.29.2
 
