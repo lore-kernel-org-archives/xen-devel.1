@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E02CC433E9
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47E5FC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5793F20DD4
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5793F20DD4
+	by mail.kernel.org (Postfix) with ESMTPS id 10035221ED
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10035221ED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68662.122972 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68665.122996 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0XbT-0006CZ-Sf; Fri, 15 Jan 2021 22:29:59 +0000
+	id 1l0XbZ-0006im-3n; Fri, 15 Jan 2021 22:30:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68662.122972; Fri, 15 Jan 2021 22:29:59 +0000
+Received: by outflank-mailman (output) from mailman id 68665.122996; Fri, 15 Jan 2021 22:30:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0XbT-0006CP-PL; Fri, 15 Jan 2021 22:29:59 +0000
-Received: by outflank-mailman (input) for mailman id 68662;
- Fri, 15 Jan 2021 22:29:59 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l0XbY-0006iC-Uv; Fri, 15 Jan 2021 22:30:04 +0000
+Received: by outflank-mailman (input) for mailman id 68665;
+ Fri, 15 Jan 2021 22:30:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hVL8=GS=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1l0XbT-00061Y-5d
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:29:59 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d3aabfd2-998e-4de8-9ee5-2441aabbaaf3;
+ id 1l0XbY-00062b-8M
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:30:04 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7f41701a-fcbb-470c-add1-26a4471c89b8;
  Fri, 15 Jan 2021 22:29:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,102 +49,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3aabfd2-998e-4de8-9ee5-2441aabbaaf3
+X-Inumbo-ID: 7f41701a-fcbb-470c-add1-26a4471c89b8
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1610749790;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=6dNoOpxPMfbkvAFQKGVZg+g4DArUnz6wcJHSzYnlKes=;
-  b=gms080TbWYlCG2O3cgCyEhdn2zxvN8BlmqiDjZVJd79c+b5VKVGEZYLN
-   Iw0gCpkFNQWL8xbmgIBO2AxvWYmwXHDjuhkCHExbN9+CWUEI2LV/c1L1i
-   uOoGfNs/0p12R+cfpz07XZ3PdezQ7212siISe55V4zGcqcD08aftMy9cm
-   g=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 8JIRRQ/vTnM8hZE8q0nckRqCFDUqGtRyZFzsPEFzkfGMNg4c5LceWHyUP9Jxq7zq2wErry/YY6
- p8azCp7mDxtfmHPk5pnN0E8LDinNV9HZm7OYn6Nn1wfrJiWO8n4HQMpkv3v6JsML2mAC/G/nkF
- R7HdRGjbgRQV46p7co/hjVDRB/mieTIbLw2y/Q7LIRfsOmMwVCRzSS8cl9P8ZheLCpbdcU1orK
- Vp8BlpFnAS9hMgrqkDIaa+gTHCb07n3Ot13bPjyGuR4SfgwmnyX8ZWFg2/XvL5M8zqeHQIJOdE
- his=
+  bh=n1WuQbqtmDQimGVawL4xRfbF3r1NhtY+3oJY6Ga9Pxk=;
+  b=hoPhu0u0PWQSFWTPJfAVXUnZGCf056eBBcFndzMg0CrtKa9N/rpmrUeM
+   rmJpl/6snIQ9hMSIc5Dwr4nz32n165HidOcfLA369Ayi0TqSlBVklgnxs
+   OOzeALxwaCK9B1xQNn2b9aiz6v6Yaedm3IGv8ICMG8hYXHwQTj7FvyjLk
+   Q=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: mNUn/0Dbj8QNwPFA7G1QXiAi3eGuR7FWJYXDkgMj/IprpMNZNRvtqp8WHmbPaZPNL1q4gVJGhq
+ r3Y3FEUdabxTZpSC9LGY+x+R5ZG85KufBpbnLTMAq2KJzZ3/zGnpxEt3VW+I4oMNbAkVhbyTVn
+ Lyd4u9g1qBkyRiSY6GBjScu58rVjaGFEjRvobRvNwRKZTK3DiE2lSwyriAgRH9Bza8kij4l1y2
+ qzZcNOHwx5qC9FNmaEoE5aju9ZfA/rN9rLQBNjc1Bo3Ub5QeqeWDbQo9O0JV/JbWrr14KdKXbh
+ 3xQ=
 X-SBRS: 5.1
-X-MesageID: 36511519
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 35434451
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="36511519"
+   d="scan'208";a="35434451"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
- Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
- Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Pau Ruiz Safont
-	<pau.safont@citrix.com>
-Subject: [PATCH v2 5/8] tools/ocaml/xenstored: Automatically resume when possible
-Date: Fri, 15 Jan 2021 22:28:47 +0000
-Message-ID: <d2685b9283b7658d6b0454beb35e8348d00c9ec9.1610748224.git.edvin.torok@citrix.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+	<jbeulich@suse.com>, "Julien Grall" <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>, Christian Lindig <christian.lindig@citrix.com>, David
+ Scott <dave@recoil.org>
+Subject: [PATCH v2 0/8] tools/ocaml/xenstored: implement live update
+Date: Fri, 15 Jan 2021 22:28:42 +0000
+Message-ID: <cover.1610748224.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1610748224.git.edvin.torok@citrix.com>
 References: <cover.1610748224.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Message-ID: <20210115222842.IVOQHMC-UdZO91aQpSafh91STmMLTLMMkWpMe7hgiko@z>
 
-When a `db` file exists use it to resume oxenstored.
-It will contains a xenstore tree, domain reconnection info, and watches.
+This is the oxenstored live update code that was shipped with the XSAs.
+It reuses the existing text-based dump format to ease backporting to
+old versions of Xen.
+There is a separate series that implements the C xenstored migration binary
+format on top of this.
 
-It is currently missing data about all active socket connections,
-so a toolstack should ideally be stopped and restarted too.
+Feedback welcome either on this PR or on the mailing list:
+https://github.com/edwintorok/xen/pull/1
 
-Tell systemd about oxenstored's PID and allow it to restart on success.
+Edvin Torok (1):
+  tools/ocaml/xenstored: Implement live update for socket connections
 
-This should make updating oxenstored as easy as:
-`systemctl stop -s SIGTERM xenstored` on a suitable xenstored version.
+Edwin Török (6):
+  Add workaround for xenstore-control flood issues
+  docs/designs/xenstore-migration.md: clarify that deletes are recursive
+  tools/ocaml/xenstored: only quit on SIGTERM when a reload is possible
+  tools/ocaml/xenstored: Automatically resume when possible
+  tools/ocaml/xenstored: add cooperative live-update command
+  tools/ocaml/xenstored: start live update process
 
-Signed-off-by: Edwin Török <edvin.torok@citrix.com>
-Reviewed-by: Pau Ruiz Safont <pau.safont@citrix.com>
-Reviewed-by: Christian Lindig <christian.lindig@citrix.com>
+Juergen Gross (1):
+  tools/xenstore: add live update command to xenstore-control
 
----
-Changed since V1:
-* post publicly now that the XSA is out
----
- tools/ocaml/xenstored/xenstored.ml | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ docs/designs/xenstore-migration.md   |   3 +-
+ docs/misc/xenstore.txt               |  21 ++
+ tools/ocaml/xenstored/connection.ml  |  56 ++++-
+ tools/ocaml/xenstored/connections.ml |   8 +
+ tools/ocaml/xenstored/logging.ml     |   3 +
+ tools/ocaml/xenstored/parse_arg.ml   |   4 +
+ tools/ocaml/xenstored/process.ml     | 139 +++++++++++
+ tools/ocaml/xenstored/stdext.ml      |   6 +
+ tools/ocaml/xenstored/store.ml       |   2 +-
+ tools/ocaml/xenstored/utils.ml       |  12 +
+ tools/ocaml/xenstored/xenstored.ml   | 126 +++++++---
+ tools/xenstore/Makefile              |   3 +-
+ tools/xenstore/xenstore_control.c    | 345 +++++++++++++++++++++++++--
+ tools/xenstore/xenstored_core.c      |   7 +-
+ 14 files changed, 681 insertions(+), 54 deletions(-)
 
-diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
-index 6b5381962b..500d96753b 100644
---- a/tools/ocaml/xenstored/xenstored.ml
-+++ b/tools/ocaml/xenstored/xenstored.ml
-@@ -292,9 +292,8 @@ let _ =
- 	List.iter (fun path ->
- 		Store.write store Perms.Connection.full_rights path "") Store.Path.specials;
- 
--	let filename = Paths.xen_run_stored ^ "/db" in
--	if cf.restart && Sys.file_exists filename then (
--		DB.from_file store domains cons filename;
-+	if cf.restart && Sys.file_exists Disk.xs_daemon_database then (
-+		DB.from_file store domains cons Disk.xs_daemon_database;
- 		Event.bind_dom_exc_virq eventchn
- 	) else (
- 		if !Disk.enable then (
-@@ -320,7 +319,7 @@ let _ =
- 	Sys.set_signal Sys.sigpipe Sys.Signal_ignore;
- 
- 	if cf.activate_access_log then begin
--		let post_rotate () = DB.to_file store cons (Paths.xen_run_stored ^ "/db") in
-+		let post_rotate () = DB.to_file store cons Disk.xs_daemon_database in
- 		Logging.init_access_log post_rotate
- 	end;
- 
-@@ -494,5 +493,8 @@ let _ =
- 				raise exc
- 	done;
- 	info "stopping xenstored";
--	DB.to_file store cons (Paths.xen_run_stored ^ "/db");
-+		DB.to_file store cons Disk.xs_daemon_database;
-+		(* unlink pidfile so that launch-xenstore works again *)
-+		Unixext.unlink_safe pidfile;
-+		(match cf.pidfile with Some pidfile -> Unixext.unlink_safe pidfile | None -> ());
- 	()
 -- 
 2.29.2
 
