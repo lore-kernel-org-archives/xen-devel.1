@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67A48C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A33C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1EA36221ED
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1EA36221ED
+	by mail.kernel.org (Postfix) with ESMTPS id 4E74A20DD4
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:30:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E74A20DD4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68669.123008 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68672.123020 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Xbe-00078G-Cp; Fri, 15 Jan 2021 22:30:10 +0000
+	id 1l0Xbj-0007Ef-NN; Fri, 15 Jan 2021 22:30:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68669.123008; Fri, 15 Jan 2021 22:30:10 +0000
+Received: by outflank-mailman (output) from mailman id 68672.123020; Fri, 15 Jan 2021 22:30:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Xbe-000788-8I; Fri, 15 Jan 2021 22:30:10 +0000
-Received: by outflank-mailman (input) for mailman id 68669;
- Fri, 15 Jan 2021 22:30:09 +0000
+	id 1l0Xbj-0007EV-Jq; Fri, 15 Jan 2021 22:30:15 +0000
+Received: by outflank-mailman (input) for mailman id 68672;
+ Fri, 15 Jan 2021 22:30:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hVL8=GS=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1l0Xbd-00062b-8R
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:30:09 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1l0Xbi-00062b-8V
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:30:14 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a99ab02d-4f0e-4962-a36f-76d7ea59a394;
- Fri, 15 Jan 2021 22:29:50 +0000 (UTC)
+ id 1c25cd1b-d022-4c55-b81e-1987ddc0eda6;
+ Fri, 15 Jan 2021 22:29:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,490 +49,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a99ab02d-4f0e-4962-a36f-76d7ea59a394
+X-Inumbo-ID: 1c25cd1b-d022-4c55-b81e-1987ddc0eda6
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610749790;
+  d=citrix.com; s=securemail; t=1610749791;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/5XsBUrTdTecpeweYTHsOPIvx533UyFebG9xiAWZm4o=;
-  b=S523PR3ikHZ7+pu6Yhh7EbWptRIrCQya3MIk5ARLG737ltHYZ9jEK0g3
-   P3WdNHMyUQbgsm6di+0r4LzsYgeOx9Ytz2Da6wO0vbJfFhoF+yzVNiwyQ
-   iValc2/YSi1lBPspFEAQLJNc75mEvsUgUv1J8Ki1fTRtG4PkzrYfmJL0k
-   4=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: +uE/EqKNKp6zxkGhJ1iFDx0/H3s4L/hLIdbYsNOxuclIOzTmKkH7g1lAlqt/OS6Mm1z9ukDUWp
- L51Dq689FH+nGPOeW1r8RyMmBDDHgG+kWd1nIC4LOwWRn6gZKev1gp8uFWCMSTqNFf6SJnRfv8
- LuztWlWKqlIpZVGyvEW68dX/VaobgPthen1Eri0UbZ83FP8Wg1a0FH5TIsjfC8ruN+AA+U4+zm
- 5M1Efb4fjrrQlRGtFfhN96YAlyZFTLGZFJhXnOs0D4KrPM8KalfTARsQpJZTMtOJFyA4wi8hoM
- WWs=
+  bh=tcW6aJFjdLYT7/rMoBR/lbzSOmMTuN1isJgOl/8Ingw=;
+  b=akKWxwMIyITjsxNgoj6lcnUZVcd/siduO90sC/CSM2/QCLoXCdAhcEN0
+   ERwqdwpTRhMFj0gJQEMVhDjvV0eLeWKtYXO8O+FYa3QeC6+6mbMjey2L0
+   X38yUJbYWqYSjzFWOf1XHstjkfdBU89EWX6JvrRduSSzSZfh8QGQLDVbt
+   A=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: QSb8iFPrZC3nCgPcKdjmYn5SsNfAh0MxCe+2gLLmR50bxDKGKv0z2ojfYb16wVO5I7tys1TMcv
+ l9nOggz0RQr4H77k/lBFmtA2yvZkNOBj7/iWFsfsX+p6P8DrYq3u6zzqWoAVXNg8jgUrQU3wrV
+ +8SsQRMlgnT5gsxYtlrYjBY5id7DBotUbLqNt9Mu0SIW4NTa4CJoHHrI7aOgFqBwGBuPSmmyj2
+ UWGL2dimOLlBdaYa0UKkQiAva54vIff2xsl2/JzZ+v742yeK1U7ho6FNHEtg99gDSj4ZhXdWDk
+ 85U=
 X-SBRS: 5.1
-X-MesageID: 35434452
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 35216601
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="35434452"
+   d="scan'208";a="35216601"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Juergen Gross <jgross@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
- Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Paul Durrant <paul@xen.org>, Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v2 1/8] tools/xenstore: add live update command to xenstore-control
-Date: Fri, 15 Jan 2021 22:28:43 +0000
-Message-ID: <89d027f191af20c39dbf9d37dfcd602c2669511d.1610748224.git.edvin.torok@citrix.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
+ Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>, Pau Ruiz Safont <pau.safont@citrix.com>
+Subject: [PATCH v2 4/8] tools/ocaml/xenstored: only quit on SIGTERM when a reload is possible
+Date: Fri, 15 Jan 2021 22:28:46 +0000
+Message-ID: <023574503750d06132e3ca260848c364ff439001.1610748224.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1610748224.git.edvin.torok@citrix.com>
 References: <cover.1610748224.git.edvin.torok@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Juergen Gross <jgross@suse.com>
+Currently when oxenstored receives SIGTERM it dumps its state and quits.
+It is possible to then restart it if --restart is given, however that is
+not always safe:
 
-Add the "live-update" command to xenstore-control enabling updating
-xenstored to a new version in a running Xen system.
+* domains could have active transactions, and after a restart they would
+either reuse transaction IDs of already open transactions, or get an
+error back that the transaction doesn't exist
 
-With -c <arg> it is possible to pass a different command line to the
-new instance of xenstored. This will replace the command line used
-for the invocation of the just running xenstored instance.
+* there could be pending data to send to a VM still in oxenstored's
+  queue which would be lost
 
-The running xenstored (or xenstore-stubdom) needs to support live
-updating, of course.
+* there could be pending input to be processed from a VM in oxenstored's
+  queue which would be lost
 
-For now just add a small dummy handler to C xenstore denying any
-live update action.
+Prevent shutting down oxenstored via SIGTERM in the above situations.
+Also ignore domains marked as bad because oxenstored would never talk
+to them again.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+Reviewed-by: Pau Ruiz Safont <pau.safont@citrix.com>
+Reviewed-by: Christian Lindig <christian.lindig@citrix.com>
+
 ---
- docs/misc/xenstore.txt            |  21 ++
- tools/xenstore/Makefile           |   3 +-
- tools/xenstore/xenstore_control.c | 332 ++++++++++++++++++++++++++++--
- 3 files changed, 339 insertions(+), 17 deletions(-)
+Changed since V1:
+* post publicly now that the XSA is out
+---
+ tools/ocaml/xenstored/connection.ml  | 35 ++++++++++++++++++++++++++++
+ tools/ocaml/xenstored/connections.ml |  8 +++++++
+ tools/ocaml/xenstored/xenstored.ml   | 13 +++++++++--
+ tools/xenstore/xenstored_core.c      |  7 +++++-
+ 4 files changed, 60 insertions(+), 3 deletions(-)
 
-diff --git a/docs/misc/xenstore.txt b/docs/misc/xenstore.txt
-index 2081f20f55..1480742330 100644
---- a/docs/misc/xenstore.txt
-+++ b/docs/misc/xenstore.txt
-@@ -317,6 +317,27 @@ CONTROL			<command>|[<parameters>|]
- 	Current commands are:
- 	check
- 		checks xenstored innards
-+	live-update|<params>|+
-+		perform a live-update of the Xenstore daemon, only to
-+		be used via xenstore-control command.
-+		<params> are implementation specific and are used for
-+		different steps of the live-update processing. Currently
-+		supported <params> are:
-+		-f <file>  specify new daemon binary
-+		-b <size>  specify size of new stubdom binary
-+		-d <chunk-size> <binary-chunk>  transfer chunk of new
-+			stubdom binary
-+		-c <pars>  specify new command line to use
-+		-s [-t <sec>] [-F]  start live update process (-t specifies
-+			timeout in seconds to wait for active transactions
-+			to finish, default is 60 seconds; -F will force
-+			live update to happen even with running transactions
-+			after timeout elapsed)
-+		-a  abort live update handling
-+		All sub-options will return "OK" in case of success or an
-+		error string in case of failure. -s can return "BUSY" in case
-+		of an active transaction, a retry of -s can be done in that
-+		case.
- 	log|on
- 		turn xenstore logging on
- 	log|off
-diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
-index 9a0f0d012d..ab89e22d3a 100644
---- a/tools/xenstore/Makefile
-+++ b/tools/xenstore/Makefile
-@@ -11,6 +11,7 @@ CFLAGS += -include $(XEN_ROOT)/tools/config.h
- CFLAGS += -I./include
- CFLAGS += $(CFLAGS_libxenevtchn)
- CFLAGS += $(CFLAGS_libxenctrl)
-+CFLAGS += $(CFLAGS_libxenguest)
- CFLAGS += $(CFLAGS_libxentoolcore)
- CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
- CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
-@@ -81,7 +82,7 @@ xenstore: xenstore_client.o
- 	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
+diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
+index fa0d3c4d92..bd02060cd0 100644
+--- a/tools/ocaml/xenstored/connection.ml
++++ b/tools/ocaml/xenstored/connection.ml
+@@ -290,6 +290,41 @@ let has_new_output con = Xenbus.Xb.has_new_output con.xb
+ let peek_output con = Xenbus.Xb.peek_output con.xb
+ let do_output con = Xenbus.Xb.output con.xb
  
- xenstore-control: xenstore_control.o
--	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
-+	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
++let is_bad con = match con.dom with None -> false | Some dom -> Domain.is_bad_domain dom
++
++(* oxenstored currently only dumps limited information about its state.
++   A live update is only possible if any of the state that is not dumped would be empty.
++   Compared to https://xenbits.xen.org/docs/unstable/designs/xenstore-migration.html:
++     * GLOBAL_DATA: not strictly needed, systemd is giving the socket FDs to us
++     * CONNECTION_DATA: PARTIAL
++       * for domains: PARTIAL, see Connection.dump -> Domain.dump, only if data and tdomid is empty
++       * for sockets (Dom0 toolstack): NO
++     * WATCH_DATA: OK, see Connection.dump
++     * TRANSACTION_DATA: NO
++     * NODE_DATA: OK (except for transactions), see Store.dump_fct and DB.to_channel
++
++   Also xenstored will never talk to a Domain once it is marked as bad,
++   so treat it as idle for live-update.
++
++   Restrictions below can be relaxed once xenstored learns to dump more
++   of its live state in a safe way *)
++let has_extra_connection_data con =
++	let has_in = has_input con in
++	let has_out = has_output con in
++	let has_socket = con.dom = None in
++	let has_nondefault_perms = make_perm con.dom <> con.perm in
++	has_in || has_out
++	|| has_socket (* dom0 sockets not dumped yet *)
++	|| has_nondefault_perms (* set_target not dumped yet *)
++
++let has_transaction_data con =
++	let n = number_of_transactions con in
++	dbg "%s: number of transactions = %d" (get_domstr con) n;
++	n > 0
++
++let prevents_live_update con = not (is_bad con)
++	&& (has_extra_connection_data con || has_transaction_data con)
++
+ let has_more_work con =
+ 	has_more_input con || not (has_old_output con) && has_new_output con
  
- xs_tdb_dump: xs_tdb_dump.o utils.o tdb.o talloc.o
- 	$(CC) $^ $(LDFLAGS) -o $@ $(APPEND_LDFLAGS)
-diff --git a/tools/xenstore/xenstore_control.c b/tools/xenstore/xenstore_control.c
-index afa04495a7..5ca015a07d 100644
---- a/tools/xenstore/xenstore_control.c
-+++ b/tools/xenstore/xenstore_control.c
-@@ -1,9 +1,311 @@
-+#define _GNU_SOURCE
-+#include <stdbool.h>
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
-+#include <time.h>
-+#include <xenctrl.h>
-+#include <xenguest.h>
+diff --git a/tools/ocaml/xenstored/connections.ml b/tools/ocaml/xenstored/connections.ml
+index 6ee3552ec2..82988f7e8d 100644
+--- a/tools/ocaml/xenstored/connections.ml
++++ b/tools/ocaml/xenstored/connections.ml
+@@ -194,3 +194,11 @@ let debug cons =
+ 	let anonymous = Hashtbl.fold (fun _ con accu -> Connection.debug con :: accu) cons.anonymous [] in
+ 	let domains = Hashtbl.fold (fun _ con accu -> Connection.debug con :: accu) cons.domains [] in
+ 	String.concat "" (domains @ anonymous)
++
++let filter ~f cons =
++	let fold _ v acc = if f v then v :: acc else acc in
++	[]
++	|> Hashtbl.fold fold cons.anonymous
++	|> Hashtbl.fold fold cons.domains
++
++let prevents_quit cons = filter ~f:Connection.prevents_live_update cons
+diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
+index 39d6d767e4..6b5381962b 100644
+--- a/tools/ocaml/xenstored/xenstored.ml
++++ b/tools/ocaml/xenstored/xenstored.ml
+@@ -20,6 +20,7 @@ open Parse_arg
+ open Stdext
  
- #include "xenstore.h"
+ let error fmt = Logging.error "xenstored" fmt
++let warn fmt = Logging.warn "xenstored" fmt
+ let debug fmt = Logging.debug "xenstored" fmt
+ let info fmt = Logging.info "xenstored" fmt
  
-+/* Add a string plus terminating 0 byte to buf, returning new len. */
-+static int add_to_buf(char **buf, const char *val, int len)
-+{
-+    int vallen = strlen(val) + 1;
-+
-+    if (len < 0)
-+        return -1;
-+
-+    *buf = realloc(*buf, len + vallen);
-+    if (!*buf)
-+        return -1;
-+
-+    strcpy(*buf + len, val);
-+
-+    return len + vallen;
-+}
-+
-+static int live_update_start(struct xs_handle *xsh, bool force, unsigned int to)
-+{
-+    int len = 0;
-+    char *buf = NULL, *ret;
-+    time_t time_start;
-+
-+    if (asprintf(&ret, "%u", to) < 0)
-+        return 1;
-+    len = add_to_buf(&buf, "-s", len);
-+    len = add_to_buf(&buf, "-t", len);
-+    len = add_to_buf(&buf, ret, len);
-+    free(ret);
-+    if (force)
-+        len = add_to_buf(&buf, "-F", len);
-+    if (len < 0)
-+        return 1;
-+
-+    for (time_start = time(NULL); time(NULL) - time_start < to;) {
-+        ret = xs_control_command(xsh, "live-update", buf, len);
-+        if (!ret)
-+            goto err;
-+        if (strcmp(ret, "BUSY"))
-+            break;
-+    }
-+
-+    if (strcmp(ret, "OK"))
-+        goto err;
-+
-+    free(buf);
-+    free(ret);
-+
-+    return 0;
-+
-+ err:
-+    fprintf(stderr, "Starting live update failed:\n%s\n",
-+            ret ? : strerror(errno));
-+    free(buf);
-+    free(ret);
-+
-+    return 3;
-+}
-+
-+static int live_update_cmdline(struct xs_handle *xsh, const char *cmdline)
-+{
-+    int len = 0, rc = 0;
-+    char *buf = NULL, *ret;
-+
-+    len = add_to_buf(&buf, "-c", len);
-+    len = add_to_buf(&buf, cmdline, len);
-+    if (len < 0)
-+        return 1;
-+
-+    ret = xs_control_command(xsh, "live-update", buf, len);
-+    free(buf);
-+    if (!ret || strcmp(ret, "OK")) {
-+        fprintf(stderr, "Setting update binary failed:\n%s\n",
-+                ret ? : strerror(errno));
-+        rc = 3;
-+    }
-+    free(ret);
-+
-+    return rc;
-+}
-+
-+static int send_kernel_blob(struct xs_handle *xsh, const char *binary)
-+{
-+    int rc = 0, len = 0;
-+    xc_interface *xch;
-+    struct xc_dom_image *dom;
-+    char *ret, *buf = NULL;
-+    size_t off, sz;
-+#define BLOB_CHUNK_SZ 2048
-+
-+    xch = xc_interface_open(NULL, NULL, 0);
-+    if (!xch) {
-+        fprintf(stderr, "xc_interface_open() failed\n");
-+        return 1;
-+    }
-+
-+    dom = xc_dom_allocate(xch, NULL, NULL);
-+    if (!dom) {
-+        rc = 1;
-+        goto out_close;
-+    }
-+
-+    rc = xc_dom_kernel_file(dom, binary);
-+    if (rc) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+
-+    if (asprintf(&ret, "%zu", dom->kernel_size) < 0) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+    len = add_to_buf(&buf, "-b", len);
-+    len = add_to_buf(&buf, ret, len);
-+    free(ret);
-+    if (len < 0) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+    ret = xs_control_command(xsh, "live-update", buf, len);
-+    free(buf);
-+    if (!ret || strcmp(ret, "OK")) {
-+        fprintf(stderr, "Starting live update failed:\n%s\n",
-+                ret ? : strerror(errno));
-+        rc = 3;
-+    }
-+    free(ret);
-+    if (rc)
-+        goto out_rel;
-+
-+    /* buf capable to hold "-d" <1..2048> BLOB_CHUNK_SZ and a terminating 0. */
-+    buf = malloc(3 + 5 + BLOB_CHUNK_SZ + 1);
-+    if (!buf) {
-+        rc = 1;
-+        goto out_rel;
-+    }
-+
-+    strcpy(buf, "-d");
-+    sz = BLOB_CHUNK_SZ;
-+    for (off = 0; off < dom->kernel_size; off += BLOB_CHUNK_SZ) {
-+        if (dom->kernel_size - off < BLOB_CHUNK_SZ)
-+            sz = dom->kernel_size - off;
-+        sprintf(buf + 3, "%zu", sz);
-+        len = 3 + strlen(buf + 3) + 1;
-+        memcpy(buf + len, dom->kernel_blob + off, sz);
-+        buf[len + sz] = 0;
-+        len += sz + 1;
-+        ret = xs_control_command(xsh, "live-update", buf, len);
-+        if (!ret || strcmp(ret, "OK")) {
-+            fprintf(stderr, "Transfer of new binary failed:\n%s\n",
-+                    ret ? : strerror(errno));
-+            rc = 3;
-+            free(ret);
-+            break;
-+        }
-+        free(ret);
-+    }
-+
-+    free(buf);
-+
-+ out_rel:
-+    xc_dom_release(dom);
-+
-+ out_close:
-+    xc_interface_close(xch);
-+
-+    return rc;
-+}
-+
-+/*
-+ * Live update of Xenstore stubdom
-+ *
-+ * Sequence of actions:
-+ * 1. transfer new stubdom binary
-+ *    a) specify size
-+ *    b) transfer unpacked binary in chunks
-+ * 2. transfer new cmdline (optional)
-+ * 3. start update (includes flags)
-+ */
-+static int live_update_stubdom(struct xs_handle *xsh, const char *binary,
-+                               const char *cmdline, bool force, unsigned int to)
-+{
-+    int rc;
-+
-+    rc = send_kernel_blob(xsh, binary);
-+    if (rc)
-+        goto abort;
-+
-+    if (cmdline) {
-+        rc = live_update_cmdline(xsh, cmdline);
-+        if (rc)
-+            goto abort;
-+    }
-+
-+    rc = live_update_start(xsh, force, to);
-+    if (rc)
-+        goto abort;
-+
-+    return 0;
-+
-+ abort:
-+    xs_control_command(xsh, "live-update", "-a", 3);
-+    return rc;
-+}
-+
-+/*
-+ * Live update of Xenstore daemon
-+ *
-+ * Sequence of actions:
-+ * 1. transfer new binary filename
-+ * 2. transfer new cmdline (optional)
-+ * 3. start update (includes flags)
-+ */
-+static int live_update_daemon(struct xs_handle *xsh, const char *binary,
-+                              const char *cmdline, bool force, unsigned int to)
-+{
-+    int len = 0, rc;
-+    char *buf = NULL, *ret;
-+
-+    len = add_to_buf(&buf, "-f", len);
-+    len = add_to_buf(&buf, binary, len);
-+    if (len < 0)
-+        return 1;
-+    ret = xs_control_command(xsh, "live-update", buf, len);
-+    free(buf);
-+    if (!ret || strcmp(ret, "OK")) {
-+        fprintf(stderr, "Setting update binary failed:\n%s\n",
-+                ret ? : strerror(errno));
-+        free(ret);
-+        return 3;
-+    }
-+    free(ret);
-+
-+    if (cmdline) {
-+        rc = live_update_cmdline(xsh, cmdline);
-+        if (rc)
-+            goto abort;
-+    }
-+
-+    rc = live_update_start(xsh, force, to);
-+    if (rc)
-+        goto abort;
-+
-+    return 0;
-+
-+ abort:
-+    xs_control_command(xsh, "live-update", "-a", 3);
-+    return rc;
-+}
-+
-+static int live_update(struct xs_handle *xsh, int argc, char **argv)
-+{
-+    int rc = 0;
-+    unsigned int i, to = 60;
-+    char *binary = NULL, *cmdline = NULL, *val;
-+    bool force = false;
-+
-+    for (i = 0; i < argc; i++) {
-+        if (!strcmp(argv[i], "-c")) {
-+            i++;
-+            if (i == argc) {
-+                fprintf(stderr, "Missing command line value\n");
-+                rc = 2;
-+                goto out;
-+            }
-+            cmdline = argv[i];
-+        } else if (!strcmp(argv[i], "-t")) {
-+            i++;
-+            if (i == argc) {
-+                fprintf(stderr, "Missing timeout value\n");
-+                rc = 2;
-+                goto out;
-+            }
-+            to = atoi(argv[i]);
-+        } else if (!strcmp(argv[i], "-F"))
-+            force = true;
-+        else
-+            binary = argv[i];
-+    }
-+
-+    if (!binary) {
-+        fprintf(stderr, "Missing binary specification\n");
-+        rc = 2;
-+        goto out;
-+    }
-+
-+    val = xs_read(xsh, XBT_NULL, "/tool/xenstored/domid", &i);
-+    if (val)
-+        rc = live_update_stubdom(xsh, binary, cmdline, force, to);
-+    else
-+        rc = live_update_daemon(xsh, binary, cmdline, force, to);
-+
-+    free(val);
-+
-+ out:
-+    return rc;
-+}
+@@ -312,7 +313,9 @@ let _ =
+ 	);
  
- int main(int argc, char **argv)
- {
-@@ -20,22 +322,6 @@ int main(int argc, char **argv)
-         goto out;
-     }
+ 	Sys.set_signal Sys.sighup (Sys.Signal_handle sighup_handler);
+-	Sys.set_signal Sys.sigterm (Sys.Signal_handle (fun _ -> quit := true));
++	Sys.set_signal Sys.sigterm (Sys.Signal_handle (fun _ ->
++		 info "Received SIGTERM";
++		 quit := true));
+ 	Sys.set_signal Sys.sigusr1 (Sys.Signal_handle (fun _ -> sigusr1_handler store));
+ 	Sys.set_signal Sys.sigpipe Sys.Signal_ignore;
  
--    for (p = 2; p < argc; p++)
--        len += strlen(argv[p]) + 1;
--    if (len) {
--        par = malloc(len);
--        if (!par) {
--            fprintf(stderr, "Allocation error.\n");
--            rc = 1;
--            goto out;
--        }
--        len = 0;
--        for (p = 2; p < argc; p++) {
--            memcpy(par + len, argv[p], strlen(argv[p]) + 1);
--            len += strlen(argv[p]) + 1;
--        }
--    }
--
-     xsh = xs_open(0);
-     if (xsh == NULL) {
-         fprintf(stderr, "Failed to contact Xenstored.\n");
-@@ -43,6 +329,19 @@ int main(int argc, char **argv)
-         goto out;
-     }
+@@ -424,6 +427,12 @@ let _ =
+ 		);
+ 		let elapsed = Unix.gettimeofday () -. now in
+ 		debug "periodic_ops took %F seconds." elapsed;
++		if !quit then
++		(match Connections.prevents_quit cons with
++		| [] -> ()
++		| domains ->
++		    List.iter (fun con -> warn "%s prevents live update" (Connection.get_domstr con)) domains
++		);
+ 		delay_next_frequent_ops_by elapsed
+ 	in
  
-+    if (!strcmp(argv[1], "live-update")) {
-+        rc = live_update(xsh, argc - 2, argv + 2);
-+        goto out_close;
-+    }
-+
-+    for (p = 2; p < argc; p++)
-+        len = add_to_buf(&par, argv[p], len);
-+    if (len < 0) {
-+        fprintf(stderr, "Allocation error.\n");
-+        rc = 1;
-+        goto out_close;
-+    }
-+
-     ret = xs_control_command(xsh, argv[1], par, len);
-     if (!ret) {
-         rc = 3;
-@@ -59,6 +358,7 @@ int main(int argc, char **argv)
-     } else if (strlen(ret) > 0)
-         printf("%s\n", ret);
+@@ -475,7 +484,7 @@ let _ =
+ 		in
  
-+ out_close:
-     xs_close(xsh);
+ 	Systemd.sd_notify_ready ();
+-	while not !quit
++	while not (!quit && Connections.prevents_quit cons = [])
+ 	do
+ 		try
+ 			main_loop ()
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 50986f8b29..b9495365c4 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -1970,6 +1970,7 @@ static struct option options[] = {
+ 	{ "internal-db", 0, NULL, 'I' },
+ 	{ "verbose", 0, NULL, 'V' },
+ 	{ "watch-nb", 1, NULL, 'W' },
++	{ "live-update", 0, NULL, 'U' },
+ 	{ NULL, 0, NULL, 0 } };
  
-  out:
+ extern void dump_conn(struct connection *conn); 
+@@ -1984,11 +1985,12 @@ int main(int argc, char *argv[])
+ 	bool dofork = true;
+ 	bool outputpid = false;
+ 	bool no_domain_init = false;
++	bool live_update = false;
+ 	const char *pidfile = NULL;
+ 	int timeout;
+ 
+ 
+-	while ((opt = getopt_long(argc, argv, "DE:F:HNPS:t:A:M:T:RVW:", options,
++	while ((opt = getopt_long(argc, argv, "DE:F:HNPS:t:A:M:T:RVW:U", options,
+ 				  NULL)) != -1) {
+ 		switch (opt) {
+ 		case 'D':
+@@ -2046,6 +2048,9 @@ int main(int argc, char *argv[])
+ 		case 'p':
+ 			priv_domid = strtol(optarg, NULL, 10);
+ 			break;
++		case 'U':
++			live_update = true;
++			break;
+ 		}
+ 	}
+ 	if (optind != argc)
 -- 
 2.29.2
 
