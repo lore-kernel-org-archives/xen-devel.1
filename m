@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A87CC433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:52:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49EF6C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:53:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD9C523128
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:52:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD9C523128
+	by mail.kernel.org (Postfix) with ESMTPS id 0C3C423128
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:53:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C3C423128
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68729.123152 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68733.123163 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0XxX-0001tJ-VK; Fri, 15 Jan 2021 22:52:47 +0000
+	id 1l0Xxc-0001zp-8y; Fri, 15 Jan 2021 22:52:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68729.123152; Fri, 15 Jan 2021 22:52:47 +0000
+Received: by outflank-mailman (output) from mailman id 68733.123163; Fri, 15 Jan 2021 22:52:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0XxX-0001t9-QF; Fri, 15 Jan 2021 22:52:47 +0000
-Received: by outflank-mailman (input) for mailman id 68729;
- Fri, 15 Jan 2021 22:52:46 +0000
+	id 1l0Xxc-0001ze-4u; Fri, 15 Jan 2021 22:52:52 +0000
+Received: by outflank-mailman (input) for mailman id 68733;
+ Fri, 15 Jan 2021 22:52:51 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hVL8=GS=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1l0XxW-0001jt-JH
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:52:46 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ id 1l0Xxb-0001jt-JO
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:52:51 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id cbd5bad1-0521-4255-9081-413b880163cd;
- Fri, 15 Jan 2021 22:52:42 +0000 (UTC)
+ id 4d891335-8e82-4711-b386-0ce786eecc66;
+ Fri, 15 Jan 2021 22:52:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,37 +49,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cbd5bad1-0521-4255-9081-413b880163cd
+X-Inumbo-ID: 4d891335-8e82-4711-b386-0ce786eecc66
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610751162;
+  d=citrix.com; s=securemail; t=1610751163;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=m+mU/BwTks6nFEMCGPDEd+poI05u50+/Dta57xu6Hio=;
-  b=SC4hW2RcpZDzQqkzPPKAm28RhWaIbKiZ0MFXq7bV6FmaK6dtBmcUDwq7
-   w7ZYFs5neA3Ds1JX0ViPQyHdQ0EQA9HgbDBnhqVf5SPhz20sybMfjIJOZ
-   6fBv18UnFHhkqNG4zBaKG8qh1YcS2CqwGkebxTIt4EEd6wl1Y7JvM3Jp5
-   Q=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: +/LaM1m+rcM5Pq74ZGY60/XWuFJNnjkfXHsM05xZlzUgtwMAilYZZNon8dyE9gIa6mse3zQ1m4
- OgskTagfrfHONx+iCP+6tBsPPbCvTEo7E2Qo1PNSJXX7DdpK7K2wJ5JLDvqnZrk9ncvSOqE5hV
- kU4HUUVCwYUGXEeW1ckW+zzD2rXMv6eOgk3eMxFDnsHoNhrU35JBjrctwRWiH6wQ7moClydpx1
- KSNkEg0iuiQU0jtwde1QYUZ8GqJWGvVyi3GnqXadR9SUrLjUHDIcZTzA1tiv57YvPM85beVs0H
- OTo=
+  bh=PHd8ibAmz3y4d18ZBR6evC+akkeyLiBTovT6aCSEtlo=;
+  b=aI+l2DuIzvIgz0JThekgEnOFfKK8WYs8zPbA3gMNEhPK9bPafN85zvax
+   Fk+G5ilt4WI7LDHqz6amtDQhlH/n9a5J+unxMxgxV25M+V5f0GvCUVuHq
+   XCqgB35wVUDT6yejl9K0RNjyghwx6DVPw7SHrcaa+y7B/As5F0K5iAEqo
+   8=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: MoOL9HgsoRlZpHvVYMwVg76P/8QHGE+y3iOBZGBMrY+r4560E3TbKuWHW9LEaFqBNuY6ooGuXA
+ +VzD4cDRrWYhZV19DGyaRnbfeR5RyzKMin87dONsdRaEVvxEw7J70DDm+2QxK7xczOj6Dh0Vqi
+ o5nZtjwdAz6Xi9gRHsTqz9CmgF9S36d7vxiIqFiAg4emNrMkI+Bhtd6js4M5rV6VypuXCw3L8V
+ WBD623jxKxNa/M+A9Y4M3L4XqjM1aXWA2pbWI1YROUtVdJ3AiknRjTggvbwomTBHTWiQ+fKQsY
+ 3/A=
 X-SBRS: 5.1
-X-MesageID: 35263553
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 36512267
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="35263553"
+   d="scan'208";a="36512267"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
  Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v1 3/4] tools/ocaml/xenstored: reject invalid watch paths early
-Date: Fri, 15 Jan 2021 22:29:08 +0000
-Message-ID: <2fc657a7d7af881f2c0ee437ddaec668452419fe.1610748224.git.edvin.torok@citrix.com>
+Subject: [PATCH v1 3/5] tools/ocaml/xenstored: add binary dump format support
+Date: Fri, 15 Jan 2021 22:29:02 +0000
+Message-ID: <4142c4a8c0859cace45473780a2ac63823e6af36.1610748224.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1610748224.git.edvin.torok@citrix.com>
 References: <cover.1610748224.git.edvin.torok@citrix.com>
@@ -87,69 +87,106 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Watches on invalid paths were accepted, but they would never trigger.
-The client also got no notification that its watch is bad and would
-never trigger.
-
-Found again by the structured fuzzer, due to an error on live update
-reload: the invalid watch paths would get rejected during live update
-and the list of watches would be different pre/post live update.
-
-This was found by an older version of the fuzzer:
-```
-Test live-update failed (507 shrink steps):
-[NEW; (0, None, WATCH ([""; ""], "")); (0, None, CONTROL live-update ())]
-```
-
-The testcase is watch on `//`, which is an invalid path.
-
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/ocaml/xenstored/connection.ml  | 5 ++---
- tools/ocaml/xenstored/connections.ml | 4 +++-
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ tools/ocaml/xenstored/connection.ml | 63 +++++++++++++++++++++--------
+ 1 file changed, 47 insertions(+), 16 deletions(-)
 
 diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
-index 1f9fe9e3b2..c7f22e5ee9 100644
+index 51041dde8e..1f9fe9e3b2 100644
 --- a/tools/ocaml/xenstored/connection.ml
 +++ b/tools/ocaml/xenstored/connection.ml
-@@ -163,18 +163,17 @@ let get_children_watches con path =
- let is_dom0 con =
- 	Perms.Connection.is_dom0 (get_perm con)
+@@ -17,6 +17,7 @@
+ exception End_of_file
  
--let add_watch con path token =
-+let add_watch con (path, apath) token =
- 	if !Quota.activate && !Define.maxwatch > 0 &&
- 	   not (is_dom0 con) && con.nb_watches > !Define.maxwatch then
- 		raise Quota.Limit_reached;
--	let apath = get_watch_path con path in
- 	let l = get_watches con apath in
- 	if List.exists (fun w -> w.token = token) l then
- 		raise Define.Already_exist;
- 	let watch = watch_create ~con ~token ~path in
- 	Hashtbl.replace con.watches apath (watch :: l);
- 	con.nb_watches <- con.nb_watches + 1;
--	apath, watch
-+	watch
+ open Stdext
++module LR = Disk.LiveRecord
  
- let del_watch con path token =
- 	let apath = get_watch_path con path in
-diff --git a/tools/ocaml/xenstored/connections.ml b/tools/ocaml/xenstored/connections.ml
-index 8a66eeec3a..3c7429fe7f 100644
---- a/tools/ocaml/xenstored/connections.ml
-+++ b/tools/ocaml/xenstored/connections.ml
-@@ -114,8 +114,10 @@ let key_of_path path =
- 	"" :: Store.Path.to_string_list path
+ let xenstore_payload_max = 4096 (* xen/include/public/io/xs_wire.h *)
  
- let add_watch cons con path token =
--	let apath, watch = Connection.add_watch con path token in
-+	let apath = Connection.get_watch_path con path in
-+	(* fail on invalid paths early by calling key_of_str before adding watch *)
- 	let key = key_of_str apath in
-+	let watch = Connection.add_watch con (path, apath) token in
- 	let watches =
-  		if Trie.mem cons.watches key
-  		then Trie.find cons.watches key
+@@ -77,6 +78,10 @@ let number_of_transactions con =
+ 
+ let get_domain con = con.dom
+ 
++let get_id con = match con.dom with
++| None -> 2*LR.domid_invalid + con.anonid
++| Some dom -> 1 + Domain.get_id dom
++
+ let anon_id_next = ref 1
+ 
+ let get_domstr con =
+@@ -279,6 +284,9 @@ let end_transaction con tid commit =
+ let get_transaction con tid =
+ 	Hashtbl.find con.transactions tid
+ 
++let iter_transactions con f =
++	Hashtbl.iter f con.transactions
++
+ let do_input con = Xenbus.Xb.input con.xb
+ let has_input con = Xenbus.Xb.has_in_packet con.xb
+ let has_partial_input con = match con.xb.Xenbus.Xb.partial_in with
+@@ -337,22 +345,45 @@ let incr_ops con = con.stat_nb_ops <- con.stat_nb_ops + 1
+ let stats con =
+ 	Hashtbl.length con.watches, con.stat_nb_ops
+ 
+-let dump con chan =
+-	let id = match con.dom with
+-	| Some dom ->
+-		let domid = Domain.get_id dom in
+-		(* dump domain *)
+-		Domain.dump dom chan;
+-		domid
+-	| None ->
+-		let fd = con |> get_fd |> Utils.FD.to_int in
+-		Printf.fprintf chan "socket,%d\n" fd;
+-		-fd
+-	in
+-	(* dump watches *)
+-	List.iter (fun (path, token) ->
+-		Printf.fprintf chan "watch,%d,%s,%s\n" id (Utils.hexify path) (Utils.hexify token)
+-		) (list_watches con)
++let serialize_pkt_in buf xb =
++	let open Xenbus.Xb in
++	Queue.iter (fun p -> Buffer.add_string buf (Packet.to_string p)) xb.pkt_in;
++	match xb.partial_in with
++	| NoHdr (to_read, hdrb) ->
++		(* see Xb.input *)
++		let used = Xenbus.Partial.header_size () - to_read in
++		Buffer.add_subbytes buf hdrb 0 used
++	| HaveHdr p ->
++		p |> Packet.of_partialpkt |> Packet.to_string |> Buffer.add_string buf
++
++let serialize_pkt_out buf xb =
++	let open Xenbus.Xb in
++	Buffer.add_string buf xb.partial_out;
++	Queue.iter (fun p -> Buffer.add_string buf (Packet.to_string p)) xb.pkt_out
++
++let dump con store chan =
++	let conid = get_id con in
++	let conn = match con.dom with
++	| None -> LR.Socket (get_fd con)
++	| Some dom -> LR.Domain {
++		id = Domain.get_id dom;
++		target = LR.domid_invalid;  (* TODO: we do not store this info *)
++		remote_port = Domain.get_remote_port dom
++	} in
++	let pkt_in = Buffer.create 4096 in
++	let pkt_out = Buffer.create 4096 in
++	serialize_pkt_in pkt_in con.xb;
++	serialize_pkt_out pkt_out con.xb;
++	LR.write_connection_data chan ~conid ~conn  pkt_in con.xb.partial_out pkt_out;
++
++	con |> list_watches
++	|> List.rev (* preserve order in dump/reload *)
++	|> List.iter (fun (wpath, token) ->
++		LR.write_watch_data chan ~conid ~wpath ~token
++	);
++	let conpath = get_path con in
++	iter_transactions con (fun _ txn ->
++		 Transaction.dump store conpath ~conid txn chan)
+ 
+ let debug con =
+ 	let domid = get_domstr con in
 -- 
 2.29.2
 
