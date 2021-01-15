@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9D99C433E6
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 13:26:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EF6BC433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 13:34:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 792A923359
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 13:26:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 792A923359
+	by mail.kernel.org (Postfix) with ESMTPS id DF2972339E
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 13:34:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF2972339E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68086.121802 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68096.121815 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0P7E-0002M6-7o; Fri, 15 Jan 2021 13:26:12 +0000
+	id 1l0PEm-0003QA-5J; Fri, 15 Jan 2021 13:34:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68086.121802; Fri, 15 Jan 2021 13:26:12 +0000
+Received: by outflank-mailman (output) from mailman id 68096.121815; Fri, 15 Jan 2021 13:34:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0P7E-0002Lz-4u; Fri, 15 Jan 2021 13:26:12 +0000
-Received: by outflank-mailman (input) for mailman id 68086;
- Fri, 15 Jan 2021 13:26:10 +0000
+	id 1l0PEm-0003Q3-1i; Fri, 15 Jan 2021 13:34:00 +0000
+Received: by outflank-mailman (input) for mailman id 68096;
+ Fri, 15 Jan 2021 13:33:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Nfe5=GS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l0P7C-0002Lu-EK
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 13:26:10 +0000
+ id 1l0PEl-0003Py-11
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 13:33:59 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 991092ca-4f69-417e-8182-4ac55d4d3f6b;
- Fri, 15 Jan 2021 13:26:09 +0000 (UTC)
+ id 00c6c0d2-3392-446c-8960-502ea6314198;
+ Fri, 15 Jan 2021 13:33:58 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 975FCB923;
- Fri, 15 Jan 2021 13:26:08 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 62177AC8F;
+ Fri, 15 Jan 2021 13:33:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,114 +51,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 991092ca-4f69-417e-8182-4ac55d4d3f6b
+X-Inumbo-ID: 00c6c0d2-3392-446c-8960-502ea6314198
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610717168; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610717637; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=F8jAKKzWrwAzlne3DSaM/hsdku4mtYxCzZ6ajU68+P8=;
-	b=iVCVnsV1Vcl2uTvjLYiAmZ6p/g/EEgu8hWabIkN31xnJGjeDMWEgeyBtdvA5ptpwTUPOuJ
-	9y1KHNhQjppDV8IY5BdGmks80G/WwEBldhRYozmaxMfR//TavWSQJXLVwsbTd7WJy6XLzD
-	wCmMz9K72qQY7h7hutPm+FfpqZ6B8nE=
-Subject: Re: [PATCH 1/3] gnttab: adjust pin count overflow checks
+	bh=RSwtCjUcGNOXdAEWjdamBzhznLHFLVOjFGRB3I+4Vr4=;
+	b=TUjAunVpBO1RgL9WfbZtNwnsR4dC/DVAv4K5r/uW70aBV0u77by5Y43myFpavemFzQEhss
+	mm7T0vXt0miW5ZTmDvMJmGzUiwFw2fmP8CVziQuHiQ0kdoA0Sz4mZzSXXAfCcmIHQoldvN
+	pqiQ/F32dZiMbtLStjaQvafmUMTcfpU=
+Subject: Re: [PATCH 2/3] gnttab: consolidate pin-to-status syncing
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
  <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <556c42fd-d7f8-f09f-eb3a-6b724d2b467d@suse.com>
- <38331526-5c24-08d4-b1b6-9baa16251c1d@suse.com>
- <fb12277c-beaf-2058-69ce-0c7c14bce56c@citrix.com>
+ <5e84b80d-4b6f-118b-c2cb-071e6e774db5@suse.com>
+ <7a3e008c-58cb-8bdb-ed7b-2f3a724f0358@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <cea405c4-354d-307a-4465-a9a59b1a5696@suse.com>
-Date: Fri, 15 Jan 2021 14:26:08 +0100
+Message-ID: <9e4c7449-d59b-b81f-a8aa-9565c76fe8fc@suse.com>
+Date: Fri, 15 Jan 2021 14:33:57 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <fb12277c-beaf-2058-69ce-0c7c14bce56c@citrix.com>
+In-Reply-To: <7a3e008c-58cb-8bdb-ed7b-2f3a724f0358@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 15.01.2021 14:09, Andrew Cooper wrote:
+On 15.01.2021 14:25, Andrew Cooper wrote:
 > On 14/01/2021 15:23, Jan Beulich wrote:
 >> --- a/xen/common/grant_table.c
 >> +++ b/xen/common/grant_table.c
->> @@ -323,22 +323,25 @@ shared_entry_header(struct grant_table *
->>  /* Active grant entry - used for shadowing GTF_permit_access grants. */
->>  struct active_grant_entry {
->>      uint32_t      pin;    /* Reference count information:             */
->> +                          /* Width of the individual counter fields.  */
->> +#define GNTPIN_cntr_width    8
->> +#define GNTPIN_cntr_mask     ((1U << GNTPIN_cntr_width) - 1)
->>                            /* Count of writable host-CPU mappings.     */
->>  #define GNTPIN_hstw_shift    0
->>  #define GNTPIN_hstw_inc      (1U << GNTPIN_hstw_shift)
->> -#define GNTPIN_hstw_mask     (0xFFU << GNTPIN_hstw_shift)
->> +#define GNTPIN_hstw_mask     (GNTPIN_cntr_mask << GNTPIN_hstw_shift)
->>                            /* Count of read-only host-CPU mappings.    */
->> -#define GNTPIN_hstr_shift    8
->> +#define GNTPIN_hstr_shift    (GNTPIN_hstw_shift + GNTPIN_cntr_width)
-> 
-> While this patch is by-and-large an improvement, it unfortunately
-> further hides how the pin field works, which is already clear-as-mud.
-> 
-> I'd recommend replacing the "Reference count information:" comment with:
-> 
-> /*
->  * 4x byte-wide reference counts, for {host,device}{read,write}
->  * mappings, implemented as a single 32bit presumably to optimise
->  * checking for any reference.
->  */
-> uint32_t      pin;
-
-Sure, added.
-
->> @@ -1052,19 +1063,19 @@ map_grant_ref(
->>      shah = shared_entry_header(rgt, ref);
->>      act = active_entry_acquire(rgt, ref);
+>> @@ -908,6 +908,25 @@ static int _set_status(const grant_entry
+>>          return _set_status_v2(shah, status, rd, act, readonly, mapflag, ldomid);
+>>  }
 >>  
->> -    /* Make sure we do not access memory speculatively */
->> -    status = evaluate_nospec(rgt->gt_version == 1) ? &shah->flags
->> -                                                 : &status_entry(rgt, ref);
->> -
->>      /* If already pinned, check the active domid and avoid refcnt overflow. */
->>      if ( act->pin &&
->>           ((act->domid != ld->domain_id) ||
->> -          (act->pin & 0x80808080U) != 0 ||
->> +          (act->pin & (pin_incr << (GNTPIN_cntr_width - 1))) ||
+>> +/*
+>> + * The status for a grant may indicate that we're taking more access than
+>> + * the pin requires.  Fix up the status to match the pin.
 > 
-> This, I'm afraid, is not an improvement.  What we want is:
-> 
-> #define GNTPIN_overflow_mask 0x80808080U
-> 
-> The reason for checking all at once is defence in depth (not strictly
-> necessary, but also not a problem),
+> This sentence isn't correct.  It will only clear status flags to match a
+> reduction in the pinned references.  IOW it cannot be used in the case
+> that a grant goes from unpinned to pinned.
 
-How is this not a problem? There is absolutely no reason to
-reject a request just because some unrelated field may be
-about to overflow. In fact I now think that I didn't even
-leverage the full potential - the "act->pin != old_pin" check
-could also be relaxed this way, I think. Just that it sits on
-a path we probably don't really care about very much.
+Of course not, hence "... more access than ...". But yes, I can
+replace "Fix up" by "Reduce" if you think the wording isn't
+unambiguous enough.
 
-> and in this specific example, using
-> a constant results in better code because pin_incr doesn't need
-> unspilling from stack and manipulated.
+> How about renaming to clear_status_for_pin() to make this clearer?  I
+> don't think it is worth trying to make the operation more generic.
 
-That's, I think, an acceptable price to pay for getting the
-checking correct.
+Hmm, this name would suggest to me that the function clears
+whatever the present pin count requires (e.g. acting on the
+pre-update value when the post-update one is [going to be]
+zero). Maybe reduce_status_for_pin(), matching the suggested
+comment wording change?
 
-> If you're happy with both of these suggestions, then Reviewed-by: Andrew
-> Cooper <andrew.cooper3@citrix.com> to avoid a repost.
+> If so (and with a suitable adjustment to the comment), Reviewed-by:
+> Andrew Cooper <andrew.cooper3@citrix.com>
 
-Thanks, but as per above - not yet. Plus if I made this 2nd
-suggested change, the patch would change significantly (the
-new local variable would then become pointless in at least
-acquire_grant_for_copy()), which I think would better involve
-re-posting then.
+As per above, I'll first wait for your further reply.
 
 Jan
 
