@@ -2,43 +2,44 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72EC5C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37919C433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 26C9422597
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 26C9422597
+	by mail.kernel.org (Postfix) with ESMTPS id E95E922597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E95E922597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67718.121047 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67720.121071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KUz-00005g-Ja; Fri, 15 Jan 2021 08:30:25 +0000
+	id 1l0KV4-0000Fv-LP; Fri, 15 Jan 2021 08:30:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67718.121047; Fri, 15 Jan 2021 08:30:25 +0000
+Received: by outflank-mailman (output) from mailman id 67720.121071; Fri, 15 Jan 2021 08:30:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KUz-00005U-Fo; Fri, 15 Jan 2021 08:30:25 +0000
-Received: by outflank-mailman (input) for mailman id 67718;
- Fri, 15 Jan 2021 08:30:24 +0000
+	id 1l0KV4-0000Fg-Es; Fri, 15 Jan 2021 08:30:30 +0000
+Received: by outflank-mailman (input) for mailman id 67720;
+ Fri, 15 Jan 2021 08:30:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KUy-0008Gh-FD
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:24 +0000
+ id 1l0KV3-0008Gh-FP
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:29 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6d7d75af-e952-4608-b1ca-9ceed8959f2f;
- Fri, 15 Jan 2021 08:30:13 +0000 (UTC)
+ id 376dc9d4-0c26-4f59-9a6f-0a1f6df6d6ad;
+ Fri, 15 Jan 2021 08:30:14 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0A20AB957;
+ by mx2.suse.de (Postfix) with ESMTP id 68486B95F;
  Fri, 15 Jan 2021 08:30:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -51,199 +52,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6d7d75af-e952-4608-b1ca-9ceed8959f2f
+X-Inumbo-ID: 376dc9d4-0c26-4f59-9a6f-0a1f6df6d6ad
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610699407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610699408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nVUYv9vvkBAlWYhUlIHvlIvMtiQIrIzQ7in9vX0egqc=;
-	b=V0YleC+KGw2uoheouJeItfkvOavv22BajDA0QlTYrGh2C9vMTOPerDZYlK/+C2jPajgkUi
-	/Kl96/h3w6wux+1RmiP+5OVipaDjXbRHWedkt1+nge3cA3QrDFzUCTBOdNXe4yRvABXjKP
-	waX0rl/Ra57pHZTpuYDIuxV063MJ728=
+	bh=Dqtva9i5hOWwd+C/RFxrhHjBGyOaW9BmEt02J1LO82U=;
+	b=nvyVrZGTnTv22kXzkMtZ4QopXiLwHKPd9l83UQBx0kogCA6BZ5PjVlGz/ZV2nOLUFZRZKv
+	bX4IIGQSCnnc2R5qIyn5vZ9/JcZZQ8yitODd42QeLYajsLzprSfEzHl6qZlMLR8yv9ceTD
+	xbjQcwwAEYstGN5cmZYWTg7gd02pthk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v12 12/27] tools/xenstore: add support for delaying execution of a xenstore request
-Date: Fri, 15 Jan 2021 09:29:45 +0100
-Message-Id: <20210115083000.14186-13-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	Paul Durrant <paul@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v12 21/27] tools/xenstore: read internal state when doing live upgrade
+Date: Fri, 15 Jan 2021 09:29:54 +0100
+Message-Id: <20210115083000.14186-22-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
 References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today a Xenstore request is processed as soon as it is seen by
-xenstored. Add the framework for being able to delay processing of a
-request if the right conditions aren't met.
+When started due to a live upgrade read the internal state and apply
+it to the data base and internal structures.
 
-Any delayed requests are executed at the end of the main processing
-loop in xenstored. They can either delay themselves again or just do
-their job. In order to enable the possibility of a timeout, the main
-loop will be paused for max one second if any requests are delayed.
+Add the main control functions for that.
+
+For now only handle the daemon case.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-V11:
-- new patch
+V4:
+- directly mmap dump state file (Julien Grall)
+- use syslog() instead of xprintf() (Julien Grall)
 
-V12:
-- fix mangled patch
+V8:
+- remove state file after reading it (Julien Grall)
 ---
- tools/xenstore/xenstored_core.c | 62 ++++++++++++++++++++++++++++++++-
- tools/xenstore/xenstored_core.h | 21 +++++++++++
- 2 files changed, 82 insertions(+), 1 deletion(-)
+ tools/xenstore/xenstored_control.c | 102 ++++++++++++++++++++++++++++-
+ 1 file changed, 101 insertions(+), 1 deletion(-)
 
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 0dddf24327..6f556d49ef 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -69,6 +69,7 @@ static int xce_pollfd_idx = -1;
- static struct pollfd *fds;
- static unsigned int current_array_size;
- static unsigned int nr_fds;
-+static unsigned int delayed_requests;
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 5151c1448e..3bced9e39e 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -67,6 +67,14 @@ struct live_update {
  
- static int sock = -1;
+ static struct live_update *lu_status;
  
-@@ -255,6 +256,53 @@ static bool write_messages(struct connection *conn)
- 	return true;
- }
- 
-+static int undelay_request(void *_req)
-+{
-+	struct delayed_request *req = _req;
-+
-+	list_del(&req->list);
-+	delayed_requests--;
-+
-+	return 0;
-+}
-+
-+static void call_delayed(struct connection *conn, struct delayed_request *req)
-+{
-+	assert(conn->in == NULL);
-+	conn->in = req->in;
-+
-+	if (req->func(req)) {
-+		undelay_request(req);
-+		talloc_set_destructor(req, NULL);
-+	}
-+
-+	conn->in = NULL;
-+}
-+
-+int delay_request(struct connection *conn, struct buffered_data *in,
-+		  bool (*func)(struct delayed_request *), void *data)
-+{
-+	struct delayed_request *req;
-+
-+	req = talloc(in, struct delayed_request);
-+	if (!req)
-+		return ENOMEM;
-+
-+	/* For the case of connection being closed. */
-+	talloc_set_destructor(req, undelay_request);
-+
-+	req->in = in;
-+	req->func = func;
-+	req->data = data;
-+
-+	delayed_requests++;
-+	list_add(&req->list, &conn->delayed);
-+
-+	conn->in = NULL;
-+
-+	return 0;
-+}
-+
- static int destroy_conn(void *_conn)
- {
- 	struct connection *conn = _conn;
-@@ -321,7 +369,8 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
- 		memset(fds, 0, sizeof(struct pollfd) * current_array_size);
- 	nr_fds = 0;
- 
--	*ptimeout = -1;
-+	/* In case of delayed requests pause for max 1 second. */
-+	*ptimeout = delayed_requests ? 1000 : -1;
- 
- 	if (sock != -1)
- 		*p_sock_pollfd_idx = set_fd(sock, POLLIN|POLLPRI);
-@@ -1524,6 +1573,7 @@ struct connection *new_connection(connwritefn_t *write, connreadfn_t *read)
- 	INIT_LIST_HEAD(&new->out_list);
- 	INIT_LIST_HEAD(&new->watches);
- 	INIT_LIST_HEAD(&new->transaction_list);
-+	INIT_LIST_HEAD(&new->delayed);
- 
- 	list_add_tail(&new->list, &connections);
- 	talloc_set_destructor(new, destroy_conn);
-@@ -2215,6 +2265,16 @@ int main(int argc, char *argv[])
- 			}
- 		}
- 
-+		if (delayed_requests) {
-+			list_for_each_entry(conn, &connections, list) {
-+				struct delayed_request *req, *tmp;
-+
-+				list_for_each_entry_safe(req, tmp,
-+							 &conn->delayed, list)
-+					call_delayed(conn, req);
-+			}
-+		}
-+
- 		initialize_fds(&sock_pollfd_idx, &timeout);
- 	}
- }
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 27826c125c..d5cdf17160 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -61,6 +61,20 @@ struct buffered_data
- 	char default_buffer[DEFAULT_BUFFER_SIZE];
- };
- 
-+struct delayed_request {
-+	/* Next delayed request. */
-+	struct list_head list;
-+
-+	/* The delayed request. */
-+	struct buffered_data *in;
-+
-+	/* Function to call. */
-+	bool (*func)(struct delayed_request *req);
-+
-+	/* Further data. */
-+	void *data;
++struct lu_dump_state {
++	void *buf;
++	unsigned int size;
++#ifndef __MINIOS__
++	int fd;
++#endif
 +};
 +
- struct connection;
- typedef int connwritefn_t(struct connection *, const void *, unsigned int);
- typedef int connreadfn_t(struct connection *, void *, unsigned int);
-@@ -94,6 +108,9 @@ struct connection
- 	uint32_t next_transaction_id;
- 	unsigned int transaction_started;
+ static int lu_destroy(void *data)
+ {
+ #ifdef __MINIOS__
+@@ -318,6 +326,14 @@ static void lu_dump_close(FILE *fp)
  
-+	/* List of delayed requests. */
-+	struct list_head delayed;
+ 	fclose(fp);
+ }
 +
- 	/* The domain I'm associated with, if any. */
- 	struct domain *domain;
- 
-@@ -177,6 +194,10 @@ bool is_valid_nodename(const char *node);
- /* Get name of parent node. */
- char *get_parent(const void *ctx, const char *node);
- 
-+/* Delay a request. */
-+int delay_request(struct connection *conn, struct buffered_data *in,
-+		  bool (*func)(struct delayed_request *), void *data);
++static void lu_get_dump_state(struct lu_dump_state *state)
++{
++}
 +
- /* Tracing infrastructure. */
- void trace_create(const void *data, const char *type);
- void trace_destroy(const void *data, const char *type);
++static void lu_close_dump_state(struct lu_dump_state *state)
++{
++}
+ #else
+ static const char *lu_binary(const void *ctx, struct connection *conn,
+ 			     const char *filename)
+@@ -373,6 +389,50 @@ static void lu_dump_close(FILE *fp)
+ {
+ 	fclose(fp);
+ }
++
++static void lu_get_dump_state(struct lu_dump_state *state)
++{
++	char *filename;
++	struct stat statbuf;
++
++	state->size = 0;
++
++	filename = talloc_asprintf(NULL, "%s/state_dump", xs_daemon_rootdir());
++	if (!filename)
++		barf("Allocation failure");
++
++	state->fd = open(filename, O_RDONLY);
++	talloc_free(filename);
++	if (state->fd < 0)
++		return;
++	if (fstat(state->fd, &statbuf) != 0)
++		goto out_close;
++	state->size = statbuf.st_size;
++
++	state->buf = mmap(NULL, state->size, PROT_READ, MAP_PRIVATE,
++			  state->fd, 0);
++	if (state->buf == MAP_FAILED) {
++		state->size = 0;
++		goto out_close;
++	}
++
++	return;
++
++ out_close:
++	close(state->fd);
++}
++
++static void lu_close_dump_state(struct lu_dump_state *state)
++{
++	char *filename;
++
++	munmap(state->buf, state->size);
++	close(state->fd);
++
++	filename = talloc_asprintf(NULL, "%s/state_dump", xs_daemon_rootdir());
++	unlink(filename);
++	talloc_free(filename);
++}
+ #endif
+ 
+ static bool lu_check_lu_allowed(void)
+@@ -455,7 +515,47 @@ static const char *lu_dump_state(const void *ctx, struct connection *conn)
+ 
+ void lu_read_state(void)
+ {
+-	xprintf("live-update: read state\n");
++	struct lu_dump_state state;
++	struct xs_state_record_header *head;
++	void *ctx = talloc_new(NULL); /* Work context for subfunctions. */
++	struct xs_state_preamble *pre;
++
++	syslog(LOG_INFO, "live-update: read state\n");
++	lu_get_dump_state(&state);
++	if (state.size == 0)
++		barf_perror("No state found after live-update");
++
++	pre = state.buf;
++	if (memcmp(pre->ident, XS_STATE_IDENT, sizeof(pre->ident)) ||
++	    pre->version != htobe32(XS_STATE_VERSION) ||
++	    pre->flags != XS_STATE_FLAGS)
++		barf("Unknown record identifier");
++	for (head = state.buf + sizeof(*pre);
++	     head->type != XS_STATE_TYPE_END &&
++		(void *)head - state.buf < state.size;
++	     head = (void *)head + sizeof(*head) + head->length) {
++		switch (head->type) {
++		case XS_STATE_TYPE_GLOBAL:
++			break;
++		case XS_STATE_TYPE_CONN:
++			break;
++		case XS_STATE_TYPE_WATCH:
++			break;
++		case XS_STATE_TYPE_TA:
++			xprintf("live-update: ignore transaction record\n");
++			break;
++		case XS_STATE_TYPE_NODE:
++			break;
++		default:
++			xprintf("live-update: unknown state record %08x\n",
++				head->type);
++			break;
++		}
++	}
++
++	lu_close_dump_state(&state);
++
++	talloc_free(ctx);
+ }
+ 
+ static const char *lu_activate_binary(const void *ctx)
 -- 
 2.26.2
 
