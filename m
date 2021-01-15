@@ -2,44 +2,45 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C23AC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 11:29:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 311C5C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 11:31:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DB460221F7
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 11:29:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB460221F7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id D1776221F7
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 11:31:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1776221F7
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67988.121574 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67994.121587 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0NIL-0005gx-Gy; Fri, 15 Jan 2021 11:29:33 +0000
+	id 1l0NJc-0006Zk-Tc; Fri, 15 Jan 2021 11:30:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67988.121574; Fri, 15 Jan 2021 11:29:33 +0000
+Received: by outflank-mailman (output) from mailman id 67994.121587; Fri, 15 Jan 2021 11:30:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0NIL-0005gq-Ds; Fri, 15 Jan 2021 11:29:33 +0000
-Received: by outflank-mailman (input) for mailman id 67988;
- Fri, 15 Jan 2021 11:29:32 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l0NJc-0006Zd-Oo; Fri, 15 Jan 2021 11:30:52 +0000
+Received: by outflank-mailman (input) for mailman id 67994;
+ Fri, 15 Jan 2021 11:30:51 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Nfe5=GS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l0NIK-0005gl-K8
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 11:29:32 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 84aa086e-2585-4ae5-a6e5-df0b625f1f3b;
- Fri, 15 Jan 2021 11:29:31 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 25E82AC95;
- Fri, 15 Jan 2021 11:29:31 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1l0NJb-0006ZX-4v
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 11:30:51 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1l0NJa-0002GE-Bu; Fri, 15 Jan 2021 11:30:50 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1l0NJa-0000qH-0w; Fri, 15 Jan 2021 11:30:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,63 +52,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84aa086e-2585-4ae5-a6e5-df0b625f1f3b
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610710171; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ECPRqwozacYdPeXhV3VGEcOFjF3X9wY7d51Ez0mZcsU=;
-	b=Rxcs/2FcQswcztQ6owIVaFqktbUTPoDr6GX924jf2J4+ip7wMIroYYCF01TgVKKV8z/lQ7
-	pHQk9+/cAfOQ9OFAHAfTTw0uDcCNFDgMtW0bUo1z8ni3ypxOmrqg88aroGC8lykPk6JPMP
-	4LjeVid53JongaqRwgmV2mCCsyDBiZc=
-Subject: Re: [PATCH 1/3] introduce unaligned.h
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- M A Young <m.a.young@durham.ac.uk>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <0eba95b9-66eb-2692-1da1-c27784b9f51e@suse.com>
- <12f26ab9-8a8c-19f0-ea65-8b354bd326a6@suse.com>
- <8c459039-a27a-01e5-0143-7c9b6e019e42@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b4b4b02b-f6d0-06b5-d65b-3693e16f266d@suse.com>
-Date: Fri, 15 Jan 2021 12:29:31 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=g5f7jnY4nZvxAf4z4JH59zsOZuDAjdIDX0Nkp0A9MV4=; b=2UdF7H3+yoQ2208To6dkM3iwPl
+	lOIy08lj08RGd1qs7e8bo6YasW7SXG7BbP6ldzzCYFVZ1HHC5WYENljwYR4LrNxbPXcoJ+RIw0ghQ
+	IeqX529JBjagXeWnaL3G8ka2uQ5j7J0TozKIT8XYPAVTxEfmzd94UyKunYqIafiLSqlM=;
+Subject: Re: [PATCH for-4.15 4/4] xen/iommu: x86: Don't leak the IOMMU
+ page-tables
+To: Jan Beulich <jbeulich@suse.com>
+Cc: hongyxia@amazon.co.uk, Julien Grall <jgrall@amazon.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
+ <wl@xen.org>, Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org
+References: <20201222154338.9459-1-julien@xen.org>
+ <20201222154338.9459-5-julien@xen.org>
+ <beb22b59-701e-462c-5080-e99033079204@suse.com>
+ <d62f8851-b417-b22a-4527-c2c43b536446@xen.org>
+ <e897e1bf-9c17-f8a9-274a-673ff7f1a009@suse.com>
+ <0ff629b1-25e6-6ce4-43ab-d50af52ecb8c@xen.org>
+ <a22f7364-518f-ea5f-3b87-5c0462cfc193@suse.com>
+ <b6d69d54-70cc-15a3-5d06-51b0417f959b@xen.org>
+ <a6804337-436d-4572-e643-4b8fd759c010@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <e36f0e4c-7cc2-c1f0-1a5b-bf0a495d058d@xen.org>
+Date: Fri, 15 Jan 2021 11:30:48 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <8c459039-a27a-01e5-0143-7c9b6e019e42@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <a6804337-436d-4572-e643-4b8fd759c010@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On 15.01.2021 12:13, Andrew Cooper wrote:
-> On 15/01/2021 10:05, Jan Beulich wrote:
->> Rather than open-coding commonly used constructs in yet more places when
->> pulling in zstd decompression support (and its xxhash prereq), pull out
->> the custom bits into a commonly used header (for the hypervisor build;
->> the tool stack and stubdom builds of libxenguest will still remain in
->> need of similarly taking care of). For now this is limited to x86, where
->> custom logic isn't needed (considering this is going to be used in init
->> code only, even using alternatives patching to use MOVBE doesn't seem
->> worthwhile).
+Hi Jan,
+
+On 15/01/2021 11:24, Jan Beulich wrote:
+> On 14.01.2021 19:53, Julien Grall wrote:
+>> On 23/12/2020 16:35, Jan Beulich wrote:
+>>> On 23.12.2020 17:19, Julien Grall wrote:
+>>>> On 23/12/2020 16:15, Jan Beulich wrote:
+>>>>> On 23.12.2020 17:07, Julien Grall wrote:
+>>>>>> I think I prefer the small race introduced (the pages will still be
+>>>>>> freed) over this solution.
+>>>>>
+>>>>> The "will still be freed" is because of the 2nd round of freeing
+>>>>> you add in an earlier patch? I'd prefer to avoid the race to in
+>>>>> turn avoid that 2nd round of freeing.
+>>>>
+>>>> The "2nd round" of freeing is necessary at least for the domain creation
+>>>> failure case (it would be the 1rst round).
+>>>>
+>>>> If we can avoid IOMMU page-table allocation in the domain creation path,
+>>>> then yes I agree that we want to avoid that "2nd round". Otherwise, I
+>>>> think it is best to take advantage of it.
+>>>
+>>> Well, I'm not really certain either way here. If it's really just
+>>> VMX'es APIC access page that's the problem here, custom cleanup
+>>> of this "fallout" from VMX code would certainly be an option.
 >>
->> No change in generated code.
+>>   From my testing, it looks like the VMX APIC page is the only entry
+>> added while the domain is created.
 >>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> Iirc use of include/asm-generic/ was disliked, hence the generic header
->> goes into include/xen/.
+>>> Furthermore I consider it wrong to insert this page in the IOMMU
+>>> page tables in the first place. This page overlaps with the MSI
+>>> special address range, and hence accesses will be dealt with by
+>>> interrupt remapping machinery (if enabled). If interrupt
+>>> remapping is disabled, this page should be no different for I/O
+>>> purposes than all other pages in this window - they shouldn't
+>>> be mapped at all.
+>>
+>> That's a fair point. I will have a look to see if I can avoid the IOMMU
+>> mapping for the VMX APIC page.
+>>
+>>> Perhaps, along the lines of epte_get_entry_emt(), ept_set_entry()
+>>> should gain an is_special_page() check to prevent propagation to
+>>> the IOMMU for such pages (we can't do anything about them in
+>>> shared-page-table setups)? See also the (PV related) comment in
+>>> cleanup_page_mappings(), a few lines ahead of a respective use of
+>>> is_special_page(),
+>>
+>> There seems to be a mismatch between what the comment says and the code
+>> adding the page in the IOMMU for PV domain.
+>>
+>> AFAICT, the IOMMU mapping will be added via _get_page_type():
+>>
+>>           /* Special pages should not be accessible from devices. */
+>>           struct domain *d = page_get_owner(page);
+>>
+>>           if ( d && unlikely(need_iommu_pt_sync(d)) && is_pv_domain(d) )
+>>           {
+>>               mfn_t mfn = page_to_mfn(page);
+>>
+>>               if ( (x & PGT_type_mask) == PGT_writable_page )
+>>                   rc = iommu_legacy_unmap(d, _dfn(mfn_x(mfn)),
+>>                                           1ul << PAGE_ORDER_4K);
+>>               else
+>>                   rc = iommu_legacy_map(d, _dfn(mfn_x(mfn)), mfn,
+>>                                         1ul << PAGE_ORDER_4K,
+>>                                         IOMMUF_readable | IOMMUF_writable);
+>>           }
+>>
+>> In this snippet, "special page" is interpreted as a page with no owner.
+>> However is_special_page() will return true when PGC_extra is set and the
+>> flag implies there is an owner (see assign_pages()).
+>>
+>> So it looks like to me, any pages with PGC_extra would end up to have a
+>> mapping in the IOMMU pages-tables if they are writable.
+>>
+>> This statement also seems to apply for xenheap pages shared with a
+>> domain (e.g grant-table).
+>>
+>> Did I miss anything?
 > 
-> Really?  I think its going to be the only sane way of fixing up some of
-> our header tangle.
+> First let me point out that what you quote is not what I had
+> pointed you at - you refer to _get_page_type() when I suggested
+> to look at cleanup_page_mappings(). 
+I know and that's why I pointed out the mismatch between the comments 
+(in cleanup_page_mappings()) and the code adding the mapping in the 
+IOMMU (_get_page_type()).
 
-Should have responded here too: It was me to suggest to put some
-header there when reviewing some patches a while ago, and iirc it
-was Julien who pushed back.
+I only looked at _get_page_type() because I wanted to understand how the 
+IOMMU mapping works for PV.
 
-Jan
+The important aspect for
+> special pages (here I mean ones having been subject to
+> share_xen_page_with_guest()) is that their type gets "pinned",
+> i.e. they'll never be subject to _get_page_type()'s
+> transitioning of types. As you likely will have noticed,
+> cleanup_page_mappings() also only gets called when the last
+> _general_ ref of a page got dropped, i.e. entirely unrelated
+> to type references.
+
+Ah, that makes sense. I added some debugging in the code and couldn't 
+really figure out why the transition wasn't happening.
+
+> 
+> If PGC_extra pages have a similar requirement, they may need
+> similar pinning of their types. (Maybe they do; didn't check.)
+
+I have only looked at the VMX APIC page so far. It effectively pin the 
+types.
+
+Thanks for the explanation!
+
+Cheers,
+
+-- 
+Julien Grall
 
