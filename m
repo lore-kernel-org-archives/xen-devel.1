@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33477C433DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 757EEC433E0
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DE65322C7D
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE65322C7D
+	by mail.kernel.org (Postfix) with ESMTPS id 2FEDB22597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2FEDB22597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67726.121119 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67727.121131 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KVE-0000b3-Nz; Fri, 15 Jan 2021 08:30:40 +0000
+	id 1l0KVH-0000hR-Gv; Fri, 15 Jan 2021 08:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67726.121119; Fri, 15 Jan 2021 08:30:40 +0000
+Received: by outflank-mailman (output) from mailman id 67727.121131; Fri, 15 Jan 2021 08:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KVE-0000aa-9p; Fri, 15 Jan 2021 08:30:40 +0000
-Received: by outflank-mailman (input) for mailman id 67726;
- Fri, 15 Jan 2021 08:30:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l0KVH-0000hG-6k; Fri, 15 Jan 2021 08:30:43 +0000
+Received: by outflank-mailman (input) for mailman id 67727;
+ Fri, 15 Jan 2021 08:30:41 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KVD-0008Gh-Fs
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:39 +0000
+ id 1l0KVF-0008HA-Nf
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:41 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9926760f-ac98-4180-9380-4be2dff450d1;
- Fri, 15 Jan 2021 08:30:14 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 17b8a2d1-207d-4fdc-8bba-7429192e95f2;
+ Fri, 15 Jan 2021 08:30:11 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7F23DB944;
- Fri, 15 Jan 2021 08:30:07 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id D9DF0B953;
+ Fri, 15 Jan 2021 08:30:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9926760f-ac98-4180-9380-4be2dff450d1
+X-Inumbo-ID: 17b8a2d1-207d-4fdc-8bba-7429192e95f2
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610699408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610699407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=sSnAF7fRT0i6R+7d24NOVdIRMygQrGad5fUKdqzr1pY=;
-	b=okxDcM8Ov0R+Y8piHkHPx2GuDHma6Z2tr7Lnns8sGJyPCsCv4+T0DVeCfFSIkJk8BJ1E2Q
-	MR1zXDn4y7VaFrBKig+aZbv7b328GOEXWpsyiSJM+HZTkaGykvSWgmC+n93fE6eRArlrKA
-	IQOEfuxM3oKZea5tFc+ti2fFB+9fTUw=
+	bh=aNFJAE4KqQnX5IjGOaMkCIzNeyfe1g2GU9xo9W5ZYdw=;
+	b=O/tGH7W+fw0tfTY6Tw6iMpoiYgIuv6EHFlk+fgv+IuEniKhod22Txb1GlaQqGExf/hB3ar
+	ixyj3utsuK7dAcOEQBBoqOacCoipBQNhZD/d1m1k29FNyJF5TYbJTJKb5RBMYye+mPFhYt
+	wj7/ITktlk2whOQY6Wy8wEVckWyVhkU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -69,196 +70,123 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Paul Durrant <paul@xen.org>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v12 24/27] tools/xenstore: add read node state for live update
-Date: Fri, 15 Jan 2021 09:29:57 +0100
-Message-Id: <20210115083000.14186-25-jgross@suse.com>
+Subject: [PATCH v12 10/27] tools/xenstore: save new binary for live update
+Date: Fri, 15 Jan 2021 09:29:43 +0100
+Message-Id: <20210115083000.14186-11-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
 References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the needed functions for reading node state for live update.
-
-This requires some refactoring of current node handling in Xenstore in
-order to avoid repeating the same code patterns multiple times.
+Save the new binary name for the daemon case and the new kernel for
+stubdom in order to support live update of Xenstore..
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Paul Durrant <paul@xen.org>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V4:
-- drop local node handling (Julien Grall)
-
-V5:
-- use set_tdb_key (Paul Durrant)
-
-V6:
-- add permission flag handling (Julien Grall)
----
- tools/xenstore/xenstored_control.c |   1 +
- tools/xenstore/xenstored_core.c    | 105 ++++++++++++++++++++++++++---
- tools/xenstore/xenstored_core.h    |   1 +
- 3 files changed, 96 insertions(+), 11 deletions(-)
+ tools/xenstore/xenstored_control.c | 41 +++++++++++++++++++++++++++++-
+ 1 file changed, 40 insertions(+), 1 deletion(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 7428b836a5..287417de6b 100644
+index 7854b7f46f..95ac1a1648 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -547,6 +547,7 @@ void lu_read_state(void)
- 			xprintf("live-update: ignore transaction record\n");
- 			break;
- 		case XS_STATE_TYPE_NODE:
-+			read_state_node(ctx, head + 1);
- 			break;
- 		default:
- 			xprintf("live-update: unknown state record %08x\n",
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index b2c544b165..a5c1a56c6c 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -979,13 +979,30 @@ static char *basename(const char *name)
- 	return strrchr(name, '/') + 1;
- }
- 
--static struct node *construct_node(struct connection *conn, const void *ctx,
--				   const char *name)
-+static int add_child(const void *ctx, struct node *parent, const char *name)
- {
- 	const char *base;
- 	unsigned int baselen;
-+	char *children;
-+
-+	base = basename(name);
-+	baselen = strlen(base) + 1;
-+	children = talloc_array(ctx, char, parent->childlen + baselen);
-+	if (!children)
-+		return ENOMEM;
-+	memcpy(children, parent->children, parent->childlen);
-+	memcpy(children + parent->childlen, base, baselen);
-+	parent->children = children;
-+	parent->childlen += baselen;
-+
-+	return 0;
-+}
-+
-+static struct node *construct_node(struct connection *conn, const void *ctx,
-+				   const char *name)
-+{
- 	struct node *parent, *node;
--	char *children, *parentname = get_parent(ctx, name);
-+	char *parentname = get_parent(ctx, name);
- 
- 	if (!parentname)
- 		return NULL;
-@@ -998,15 +1015,8 @@ static struct node *construct_node(struct connection *conn, const void *ctx,
- 		return NULL;
- 
- 	/* Add child to parent. */
--	base = basename(name);
--	baselen = strlen(base) + 1;
--	children = talloc_array(ctx, char, parent->childlen + baselen);
--	if (!children)
-+	if (add_child(ctx, parent, name))
- 		goto nomem;
--	memcpy(children, parent->children, parent->childlen);
--	memcpy(children + parent->childlen, base, baselen);
--	parent->children = children;
--	parent->childlen += baselen;
- 
- 	/* Allocate node */
- 	node = talloc(ctx, struct node);
-@@ -2619,6 +2629,79 @@ void read_state_buffered_data(const void *ctx, struct connection *conn,
- 	}
- }
- 
-+void read_state_node(const void *ctx, const void *state)
-+{
-+	const struct xs_state_node *sn = state;
-+	struct node *node, *parent;
-+	TDB_DATA key;
-+	char *name, *parentname;
-+	unsigned int i;
-+	struct connection conn = { .id = priv_domid };
-+
-+	name = (char *)(sn->perms + sn->perm_n);
-+	node = talloc(ctx, struct node);
-+	if (!node)
-+		barf("allocation error restoring node");
-+
-+	node->name = name;
-+	node->generation = ++generation;
-+	node->datalen = sn->data_len;
-+	node->data = name + sn->path_len;
-+	node->childlen = 0;
-+	node->children = NULL;
-+	node->perms.num = sn->perm_n;
-+	node->perms.p = talloc_array(node, struct xs_permissions,
-+				     node->perms.num);
-+	if (!node->perms.p)
-+		barf("allocation error restoring node");
-+	for (i = 0; i < node->perms.num; i++) {
-+		switch (sn->perms[i].access) {
-+		case 'r':
-+			node->perms.p[i].perms = XS_PERM_READ;
-+			break;
-+		case 'w':
-+			node->perms.p[i].perms = XS_PERM_WRITE;
-+			break;
-+		case 'b':
-+			node->perms.p[i].perms = XS_PERM_READ | XS_PERM_WRITE;
-+			break;
-+		default:
-+			node->perms.p[i].perms = XS_PERM_NONE;
-+			break;
-+		}
-+		if (sn->perms[i].flags & XS_STATE_NODE_PERM_IGNORE)
-+			node->perms.p[i].perms |= XS_PERM_IGNORE;
-+		node->perms.p[i].id = sn->perms[i].domid;
-+	}
-+
-+	if (strstarts(name, "@")) {
-+		set_perms_special(&conn, name, &node->perms);
-+		talloc_free(node);
-+		return;
-+	}
-+
-+	parentname = get_parent(node, name);
-+	if (!parentname)
-+		barf("allocation error restoring node");
-+	parent = read_node(NULL, node, parentname);
-+	if (!parent)
-+		barf("read parent error restoring node");
-+
-+	if (add_child(node, parent, name))
-+		barf("allocation error restoring node");
-+
-+	set_tdb_key(parentname, &key);
-+	if (write_node_raw(NULL, &key, parent, true))
-+		barf("write parent error restoring node");
-+
-+	set_tdb_key(name, &key);
-+	if (write_node_raw(NULL, &key, node, true))
-+		barf("write node error restoring node");
-+	domain_entry_inc(&conn, node);
-+
-+	talloc_free(node);
-+}
-+
+@@ -1,5 +1,5 @@
  /*
-  * Local variables:
-  *  mode: C
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index dcb3ad3e4b..6ac5a6fbfa 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -276,6 +276,7 @@ const char *dump_state_node_perms(FILE *fp, struct xs_state_node *sn,
- void read_state_global(const void *ctx, const void *state);
- void read_state_buffered_data(const void *ctx, struct connection *conn,
- 			      const struct xs_state_connection *sc);
-+void read_state_node(const void *ctx, const void *state);
+-    Interactive commands for Xen Store Daemon.
++Interactive commands for Xen Store Daemon.
+     Copyright (C) 2017 Juergen Gross, SUSE Linux GmbH
  
- #endif /* _XENSTORED_CORE_H */
+     This program is free software; you can redistribute it and/or modify
+@@ -22,6 +22,9 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <syslog.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <unistd.h>
+ 
+ #include "utils.h"
+ #include "talloc.h"
+@@ -31,6 +34,14 @@
+ struct live_update {
+ 	/* For verification the correct connection is acting. */
+ 	struct connection *conn;
++
++#ifdef __MINIOS__
++	void *kernel;
++	unsigned int kernel_size;
++	unsigned int kernel_off;
++#else
++	char *filename;
++#endif
+ };
+ 
+ static struct live_update *lu_status;
+@@ -215,6 +226,13 @@ static const char *lu_binary_alloc(const void *ctx, struct connection *conn,
+ 	if (ret)
+ 		return ret;
+ 
++	lu_status->kernel = talloc_size(lu_status, size);
++	if (!lu_status->kernel)
++		return "Allocation failure.";
++
++	lu_status->kernel_size = size;
++	lu_status->kernel_off = 0;
++
+ 	return NULL;
+ }
+ 
+@@ -224,6 +242,12 @@ static const char *lu_binary_save(const void *ctx, struct connection *conn,
+ 	if (!lu_status || lu_status->conn != conn)
+ 		return "Not in live-update session.";
+ 
++	if (lu_status->kernel_off + size > lu_status->kernel_size)
++		return "Too much kernel data.";
++
++	memcpy(lu_status->kernel + lu_status->kernel_off, data, size);
++	lu_status->kernel_off += size;
++
+ 	return NULL;
+ }
+ 
+@@ -243,13 +267,23 @@ static const char *lu_binary(const void *ctx, struct connection *conn,
+ 			     const char *filename)
+ {
+ 	const char *ret;
++	struct stat statbuf;
+ 
+ 	syslog(LOG_INFO, "live-update: binary %s\n", filename);
+ 
++	if (stat(filename, &statbuf))
++		return "File not accessible.";
++	if (!(statbuf.st_mode & (S_IXOTH | S_IXGRP | S_IXUSR)))
++		return "File not executable.";
++
+ 	ret = lu_begin(conn);
+ 	if (ret)
+ 		return ret;
+ 
++	lu_status->filename = talloc_strdup(lu_status, filename);
++	if (!lu_status->filename)
++		return "Allocation failure.";
++
+ 	return NULL;
+ }
+ 
+@@ -272,6 +306,11 @@ static const char *lu_start(const void *ctx, struct connection *conn,
+ 	if (!lu_status || lu_status->conn != conn)
+ 		return "Not in live-update session.";
+ 
++#ifdef __MINIOS__
++	if (lu_status->kernel_size != lu_status->kernel_off)
++		return "Kernel not complete.";
++#endif
++
+ 	/* Will be replaced by real live-update later. */
+ 	talloc_free(lu_status);
  
 -- 
 2.26.2
