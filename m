@@ -4,40 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 771C1C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 23:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92B62C433E9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 23:11:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 361AF239E5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 23:11:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 361AF239E5
+	by mail.kernel.org (Postfix) with ESMTPS id 527FA23382
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 23:11:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 527FA23382
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68830.123343 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68829.123332 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0YFQ-0005xd-5p; Fri, 15 Jan 2021 23:11:16 +0000
+	id 1l0YFL-0005vt-PR; Fri, 15 Jan 2021 23:11:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68830.123343; Fri, 15 Jan 2021 23:11:16 +0000
+Received: by outflank-mailman (output) from mailman id 68829.123332; Fri, 15 Jan 2021 23:11:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0YFQ-0005xW-2V; Fri, 15 Jan 2021 23:11:16 +0000
-Received: by outflank-mailman (input) for mailman id 68830;
- Fri, 15 Jan 2021 23:11:15 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l0YFL-0005vm-Kl; Fri, 15 Jan 2021 23:11:11 +0000
+Received: by outflank-mailman (input) for mailman id 68829;
+ Fri, 15 Jan 2021 23:11:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+hG6=GS=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l0YFP-0005x6-0S
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 23:11:15 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2b796228-0870-4944-b016-6691a0a6e58d;
- Fri, 15 Jan 2021 23:11:12 +0000 (UTC)
+ id 1l0YFK-0005vh-Gk
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 23:11:10 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 45cce534-f808-470b-90a9-362a30d291b2;
+ Fri, 15 Jan 2021 23:11:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,29 +48,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b796228-0870-4944-b016-6691a0a6e58d
+X-Inumbo-ID: 45cce534-f808-470b-90a9-362a30d291b2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610752272;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=j/WHVvAHkv12PbMXTjq4geUHeGv8Iw1BPAF0B2znkEY=;
-  b=Ue4iv2tbp25B7K++Fh5uYrjSO2o8aIUL4IqOpTrvYWtRiVBl3aSs288e
-   hBRWSM4xINlIFjFb38FoFoLC3+HnnNzaFKKFNI76ESOHoi0DVPzfI8D+x
-   8wk+R7Wmhef4nZQqzAmdqb0c6ivpIHUFxq5j6vx8lyagUY0ApO5fJAo21
-   I=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: kWw/S1F1iXVzovzmhBYHuxX6MoSiIf7KKxRMsmf5uZHzG/d9kUdgphrYdYniXZkUsRhKypqQI6
- 2KbETQnNj5vrz+Ubf0ssfNLLduxLh+3O0tz67Vr80xphsstidPidkDtZ+XtV4HbUPXJxP9IBBs
- 9w+QGYrJ3L/ZaG3quNblWD6fUI4/LzoOicuCb1U1Bce/SXGjhedm+LPdl3GSVml+QHQKteA/76
- b3dvB8Hp9FKP7RBE/oFOS91HGsQVVIKnQi6HHo+rQgV5htYWpqolURfgijO6A9u1j9Ebr9EIEm
- dNg=
+  d=citrix.com; s=securemail; t=1610752269;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=dXS/3Rq9xVyxzLPRXvqV3AmMCV9sf33JIKkKChDLoGg=;
+  b=blccXMiCyvHaDnAQHGK2DTidJzZEjaYtKx+YaMOrouHXMf64tntRSgN1
+   Pj1J8pX4MVFGWuix2LQlm//8b7ZzBQiLcrIXJWxFAvjnOzIFONLfu5PNU
+   EDnZwrsugVO0S1lsyWDuyMCHXGyvP3BVuWilcqAWvHoD8FY4Kivclg+Cu
+   c=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: uqeMXLqjdoNfVtZrUpv2fgraaZMjdZdyYMgYwj/wMu2Iw9OOwcdLIDBgPiwg9nesudjW+R8UR2
+ iRm7pIBHkGQcB6CY7h+td6xlXiKVrPOZS2/c2c92rBNIMzrAMR0xPSvksUkLUKhx229BrYl3QU
+ w3l1XJZybR7fJX/1ShELp6QMq/ohMW7VyVdPZaZVLXulGszGWz2lzUYZHxrgmnL9CR7F4W+IWI
+ 2uCKE4yy+yEWLVXpJ3E4opkYTvBmVwiZlRFQBJZOr/hBKFLVJsrZ4BHnFcWMfTZPAEtYidCWQh
+ ZyE=
 X-SBRS: 5.1
-X-MesageID: 35218330
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 35207499
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="35218330"
+   d="scan'208";a="35207499"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -82,48 +81,143 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	Piotr Krol <piotr.krol@3mdeb.co>, Krystian Hebel <krystian.hebel@3mdeb.com>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>, Rich Persaud
 	<persaur@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>
-Subject: [PATCH 0/3] x86: Initial Trenchboot/SKINIT support
-Date: Fri, 15 Jan 2021 23:10:43 +0000
-Message-ID: <20210115231046.31785-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/3] x86/smpboot: Allow making an INIT IPI conditional
+Date: Fri, 15 Jan 2021 23:10:45 +0000
+Message-ID: <20210115231046.31785-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210115231046.31785-1-andrew.cooper3@citrix.com>
+References: <20210115231046.31785-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-The Trenchboot project[0][1] project aims to develop and upstream support for
-TCG DRTM support into various open source projects in the ecosystem, to
-improve boot security.  Trenchboot has been discussed at previous
-XenSummits[2], and the work across the ecosystem is extensively blogged
-about[3].
+A subsequent change is going to introduce SKINIT support, wherein the APs will
+be already be in the wait-for-SIPI state, and an INIT must not be sent.
 
-This series forms the start of the work within Xen, and for now simply covers
-the ability to boot in the AMD SKINIT/Secure Startup environment.
+Introduce a send_INIT boolean, so we can control sending an INIT IPI
+separately from sending SIPIs.
 
-Full details are available in AMD APM Vol2 15.27 "Secure Startup with SKINIT"
+No functional change.
 
-Future work will cover related support for Intel TXT in a non-tboot system,
-and the common logic to interact with the TPM and extend the hardware measured
-chain of trust into dom0.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Marek Kasiewicz <marek.kasiewicz@3mdeb.com>
+CC: Norbert Kamiński <norbert.kaminski@3mdeb.com>
+CC: Michal Zygowski <michal.zygowski@3mdeb.com>
+CC: Piotr Krol <piotr.krol@3mdeb.co>
+CC: Krystian Hebel <krystian.hebel@3mdeb.com>
+CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+CC: Rich Persaud <persaur@gmail.com>
+CC: Christopher Clark <christopher.w.clark@gmail.com>
+---
+ xen/arch/x86/smpboot.c | 78 ++++++++++++++++++++++++++------------------------
+ 1 file changed, 41 insertions(+), 37 deletions(-)
 
-[0] https://trenchboot.org/
-[1] https://github.com/TrenchBoot/documentation
-[2] https://www.youtube.com/watch?v=SwByVrw7-08&list=PLYyw7IQjL-zFYmEoZEYswoVuXrHvXAWxj&index=13
-[3] https://blog.3mdeb.com/tags/trenchboot/
-
-Andrew Cooper (2):
-  x86/smpboot: Re-position the call to tboot_wake_ap()
-  x86/smpboot: Allow making an INIT IPI conditional
-
-Norbert Kamiński (1):
-  x86: Support booting under Secure Startup via SKINIT
-
- xen/arch/x86/cpu/common.c        | 32 +++++++++++++
- xen/arch/x86/smpboot.c           | 98 ++++++++++++++++++++++++----------------
- xen/include/asm-x86/cpufeature.h |  1 +
- xen/include/asm-x86/msr-index.h  |  1 +
- xen/include/asm-x86/processor.h  |  6 +++
- 5 files changed, 99 insertions(+), 39 deletions(-)
-
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 9eca452ce1..195e3681b4 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -424,6 +424,7 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+ {
+     unsigned long send_status = 0, accept_status = 0;
+     int maxlvt, timeout, i;
++    bool send_INIT = true;
+ 
+     /*
+      * Some versions of tboot might be able to handle the entire wake sequence
+@@ -438,49 +439,52 @@ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+     apic_write(APIC_ESR, 0);
+     apic_read(APIC_ESR);
+ 
+-    Dprintk("Asserting INIT.\n");
++    if ( send_INIT )
++    {
++        Dprintk("Asserting INIT.\n");
+ 
+-    /*
+-     * Turn INIT on target chip via IPI
+-     */
+-    apic_icr_write(APIC_INT_LEVELTRIG | APIC_INT_ASSERT | APIC_DM_INIT,
+-                   phys_apicid);
++        /*
++         * Turn INIT on target chip via IPI
++         */
++        apic_icr_write(APIC_INT_LEVELTRIG | APIC_INT_ASSERT | APIC_DM_INIT,
++                       phys_apicid);
+ 
+-    if ( !x2apic_enabled )
+-    {
+-        Dprintk("Waiting for send to finish...\n");
+-        timeout = 0;
+-        do {
+-            Dprintk("+");
+-            udelay(100);
+-            send_status = apic_read(APIC_ICR) & APIC_ICR_BUSY;
+-        } while ( send_status && (timeout++ < 1000) );
++        if ( !x2apic_enabled )
++        {
++            Dprintk("Waiting for send to finish...\n");
++            timeout = 0;
++            do {
++                Dprintk("+");
++                udelay(100);
++                send_status = apic_read(APIC_ICR) & APIC_ICR_BUSY;
++            } while ( send_status && (timeout++ < 1000) );
+ 
+-        mdelay(10);
++            mdelay(10);
+ 
+-        Dprintk("Deasserting INIT.\n");
++            Dprintk("Deasserting INIT.\n");
+ 
+-        apic_icr_write(APIC_INT_LEVELTRIG | APIC_DM_INIT, phys_apicid);
++            apic_icr_write(APIC_INT_LEVELTRIG | APIC_DM_INIT, phys_apicid);
+ 
+-        Dprintk("Waiting for send to finish...\n");
+-        timeout = 0;
+-        do {
+-            Dprintk("+");
+-            udelay(100);
+-            send_status = apic_read(APIC_ICR) & APIC_ICR_BUSY;
+-        } while ( send_status && (timeout++ < 1000) );
+-    }
+-    else if ( tboot_in_measured_env() )
+-    {
+-        /*
+-         * With tboot AP is actually spinning in a mini-guest before
+-         * receiving INIT. Upon receiving INIT ipi, AP need time to VMExit,
+-         * update VMCS to tracking SIPIs and VMResume.
+-         *
+-         * While AP is in root mode handling the INIT the CPU will drop
+-         * any SIPIs
+-         */
+-        udelay(10);
++            Dprintk("Waiting for send to finish...\n");
++            timeout = 0;
++            do {
++                Dprintk("+");
++                udelay(100);
++                send_status = apic_read(APIC_ICR) & APIC_ICR_BUSY;
++            } while ( send_status && (timeout++ < 1000) );
++        }
++        else if ( tboot_in_measured_env() )
++        {
++            /*
++             * With tboot AP is actually spinning in a mini-guest before
++             * receiving INIT. Upon receiving INIT ipi, AP need time to VMExit,
++             * update VMCS to tracking SIPIs and VMResume.
++             *
++             * While AP is in root mode handling the INIT the CPU will drop
++             * any SIPIs
++             */
++            udelay(10);
++        }
+     }
+ 
+     maxlvt = get_maxlvt();
 -- 
 2.11.0
 
