@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45489C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67E62C433E9
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D3B9822C7D
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D3B9822C7D
+	by mail.kernel.org (Postfix) with ESMTPS id 08C9C22597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08C9C22597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67715.121011 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67713.120987 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KUs-0008M7-Ck; Fri, 15 Jan 2021 08:30:18 +0000
+	id 1l0KUm-0008Hq-QF; Fri, 15 Jan 2021 08:30:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67715.121011; Fri, 15 Jan 2021 08:30:18 +0000
+Received: by outflank-mailman (output) from mailman id 67713.120987; Fri, 15 Jan 2021 08:30:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KUs-0008Ly-7w; Fri, 15 Jan 2021 08:30:18 +0000
-Received: by outflank-mailman (input) for mailman id 67715;
- Fri, 15 Jan 2021 08:30:16 +0000
+	id 1l0KUm-0008Hj-Mb; Fri, 15 Jan 2021 08:30:12 +0000
+Received: by outflank-mailman (input) for mailman id 67713;
+ Fri, 15 Jan 2021 08:30:11 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KUq-0008HA-Mc
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:16 +0000
+ id 1l0KUl-0008HA-Rj
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:11 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b0d71ecf-aa53-45e4-9446-6ffb6bf2811e;
+ id 98fc18d7-2de7-4d0b-bcae-8b0f8b99af13;
  Fri, 15 Jan 2021 08:30:08 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D7474B970;
+ by mx2.suse.de (Postfix) with ESMTP id D69D7B969;
  Fri, 15 Jan 2021 08:30:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,141 +52,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0d71ecf-aa53-45e4-9446-6ffb6bf2811e
+X-Inumbo-ID: 98fc18d7-2de7-4d0b-bcae-8b0f8b99af13
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1610699407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5tsWfbx6iMqKxvnR5GrO27JNZTi4P4HPe+MGlLpmMpw=;
-	b=ozius3sj14Z6CNa/AQRtDyLgIDs2LzM1oTDi5rZk5S5yQlA+EJAnSVEdvJ8ZHN+fpzwZNI
-	AjtOp2HDbJWkHzr6A3oVxxTic+7W2HI4fzmANe0XjUOuO4mECM4JpAHSeMxWzxFi0V1x6e
-	FLK5fM084dzMUiiw5trIPSM8eJcOlIo=
+	bh=/nflSyskC2kS0M54iM8hYwK5qRRqM3a5TA3r174vCRE=;
+	b=CS1UFCaNAo0drccJ1jYqTbKJqBwjmlj45Z1bKpDoKCE/wXjTMJ8kkUwYNK489ULfYKx/rl
+	G0xiWBNfwX6m4ErmoBL2fkNNwOHl22vzOkzt5AbpSbySv3uG39Hp/YzpYSIU/SrpcspxaC
+	SSu0SMAbHz6qDU3j6JMTB5Pu3aza+FQ=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v12 04/27] tools/libxenevtchn: propagate xenevtchn_open() flags parameter
-Date: Fri, 15 Jan 2021 09:29:37 +0100
-Message-Id: <20210115083000.14186-5-jgross@suse.com>
+	Paul Durrant <paul@xen.org>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v12 08/27] tools/xenstore: add basic live-update command parsing
+Date: Fri, 15 Jan 2021 09:29:41 +0100
+Message-Id: <20210115083000.14186-9-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
 References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Propagate the flags parameter of xenevtchn_open() to the OS-specific
-handlers in order to enable handling them there.
+Add the basic parts for parsing the live-update control command.
+
+For now only add the parameter evaluation and calling appropriate
+functions. Those function only print a message for now and return
+success.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V11:
-- new patch (carved out from patch 4 of V10, Andrew Cooper)
----
- tools/libs/evtchn/core.c    | 2 +-
- tools/libs/evtchn/freebsd.c | 2 +-
- tools/libs/evtchn/linux.c   | 2 +-
- tools/libs/evtchn/minios.c  | 2 +-
- tools/libs/evtchn/netbsd.c  | 2 +-
- tools/libs/evtchn/private.h | 2 +-
- tools/libs/evtchn/solaris.c | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+V2:
+- keep consistent style in lu_arch() (Pawel Wieczorkiewicz)
+- fix handling of force flag (Pawel Wieczorkiewicz)
+- use xprintf() instead of trace() for better stubdom diag
+- add conn parameter to subfunctions
 
-diff --git a/tools/libs/evtchn/core.c b/tools/libs/evtchn/core.c
-index 79990d0027..d3cc93e98f 100644
---- a/tools/libs/evtchn/core.c
-+++ b/tools/libs/evtchn/core.c
-@@ -60,7 +60,7 @@ xenevtchn_handle *xenevtchn_open(xentoollog_logger *logger, unsigned int flags)
-             goto err;
-     }
+V4:
+- make several parameters/variables const (Julien Grall)
+- don't reject an option specified multiple times (Julien Grall)
+- use syslog() for messages
+---
+ tools/xenstore/xenstored_control.c | 105 ++++++++++++++++++++++++++++-
+ 1 file changed, 104 insertions(+), 1 deletion(-)
+
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 00fda5acdb..e3f0d34528 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -19,7 +19,9 @@
+ #include <errno.h>
+ #include <stdarg.h>
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <string.h>
++#include <syslog.h>
  
--    rc = osdep_evtchn_open(xce);
-+    rc = osdep_evtchn_open(xce, flags);
-     if ( rc < 0 )
-         goto err;
- 
-diff --git a/tools/libs/evtchn/freebsd.c b/tools/libs/evtchn/freebsd.c
-index 554af122c8..bb601f350f 100644
---- a/tools/libs/evtchn/freebsd.c
-+++ b/tools/libs/evtchn/freebsd.c
-@@ -31,7 +31,7 @@
- 
- #define EVTCHN_DEV      "/dev/xen/evtchn"
- 
--int osdep_evtchn_open(xenevtchn_handle *xce)
-+int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
-     int fd = open(EVTCHN_DEV, O_RDWR|O_CLOEXEC);
- 
-diff --git a/tools/libs/evtchn/linux.c b/tools/libs/evtchn/linux.c
-index 4582a58ec4..62adc0e574 100644
---- a/tools/libs/evtchn/linux.c
-+++ b/tools/libs/evtchn/linux.c
-@@ -34,7 +34,7 @@
- #define O_CLOEXEC 0
- #endif
- 
--int osdep_evtchn_open(xenevtchn_handle *xce)
-+int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
-     int fd = open("/dev/xen/evtchn", O_RDWR|O_CLOEXEC);
- 
-diff --git a/tools/libs/evtchn/minios.c b/tools/libs/evtchn/minios.c
-index bbb313a521..3afc8e2517 100644
---- a/tools/libs/evtchn/minios.c
-+++ b/tools/libs/evtchn/minios.c
-@@ -69,7 +69,7 @@ static void port_dealloc(struct evtchn_port_info *port_info)
-     free(port_info);
+ #include "utils.h"
+ #include "talloc.h"
+@@ -149,12 +151,113 @@ static int do_control_print(void *ctx, struct connection *conn,
+ 	return 0;
  }
  
--int osdep_evtchn_open(xenevtchn_handle *xce)
-+int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
++static const char *lu_abort(const void *ctx, struct connection *conn)
++{
++	syslog(LOG_INFO, "live-update: abort\n");
++	return NULL;
++}
++
++static const char *lu_cmdline(const void *ctx, struct connection *conn,
++			      const char *cmdline)
++{
++	syslog(LOG_INFO, "live-update: cmdline %s\n", cmdline);
++	return NULL;
++}
++
++#ifdef __MINIOS__
++static const char *lu_binary_alloc(const void *ctx, struct connection *conn,
++				   unsigned long size)
++{
++	syslog(LOG_INFO, "live-update: binary size %lu\n", size);
++	return NULL;
++}
++
++static const char *lu_binary_save(const void *ctx, struct connection *conn,
++				  unsigned int size, const char *data)
++{
++	return NULL;
++}
++
++static const char *lu_arch(const void *ctx, struct connection *conn,
++			   char **vec, int num)
++{
++	if (num == 2 && !strcmp(vec[0], "-b"))
++		return lu_binary_alloc(ctx, conn, atol(vec[1]));
++	if (num > 2 && !strcmp(vec[0], "-d"))
++		return lu_binary_save(ctx, conn, atoi(vec[1]), vec[2]);
++
++	errno = EINVAL;
++	return NULL;
++}
++#else
++static const char *lu_binary(const void *ctx, struct connection *conn,
++			     const char *filename)
++{
++	syslog(LOG_INFO, "live-update: binary %s\n", filename);
++	return NULL;
++}
++
++static const char *lu_arch(const void *ctx, struct connection *conn,
++			   char **vec, int num)
++{
++	if (num == 2 && !strcmp(vec[0], "-f"))
++		return lu_binary(ctx, conn, vec[1]);
++
++	errno = EINVAL;
++	return NULL;
++}
++#endif
++
++static const char *lu_start(const void *ctx, struct connection *conn,
++			    bool force, unsigned int to)
++{
++	syslog(LOG_INFO, "live-update: start, force=%d, to=%u\n", force, to);
++	return NULL;
++}
++
+ static int do_control_lu(void *ctx, struct connection *conn,
+ 			 char **vec, int num)
  {
-     int fd = alloc_fd(FTYPE_EVTCHN);
+ 	const char *resp;
++	const char *ret = NULL;
++	unsigned int i;
++	bool force = false;
++	unsigned int to = 0;
++
++	if (num < 1)
++		return EINVAL;
++
++	if (!strcmp(vec[0], "-a")) {
++		if (num == 1)
++			ret = lu_abort(ctx, conn);
++		else
++			return EINVAL;
++	} else if (!strcmp(vec[0], "-c")) {
++		if (num == 2)
++			ret = lu_cmdline(ctx, conn, vec[1]);
++		else
++			return EINVAL;
++	} else if (!strcmp(vec[0], "-s")) {
++		for (i = 1; i < num; i++) {
++			if (!strcmp(vec[i], "-F"))
++				force = true;
++			else if (!strcmp(vec[i], "-t") && i < num - 1) {
++				i++;
++				to = atoi(vec[i]);
++			} else
++				return EINVAL;
++		}
++		ret = lu_start(ctx, conn, force, to);
++	} else {
++		errno = 0;
++		ret = lu_arch(ctx, conn, vec, num);
++		if (errno)
++			return errno;
++	}
  
-diff --git a/tools/libs/evtchn/netbsd.c b/tools/libs/evtchn/netbsd.c
-index 53f9299ebb..60a9235978 100644
---- a/tools/libs/evtchn/netbsd.c
-+++ b/tools/libs/evtchn/netbsd.c
-@@ -31,7 +31,7 @@
- 
- #define EVTCHN_DEV_NAME  "/dev/xenevt"
- 
--int osdep_evtchn_open(xenevtchn_handle *xce)
-+int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
-     int fd = open(EVTCHN_DEV_NAME, O_NONBLOCK|O_RDWR);
- 
-diff --git a/tools/libs/evtchn/private.h b/tools/libs/evtchn/private.h
-index 31e595bea2..319d1996d7 100644
---- a/tools/libs/evtchn/private.h
-+++ b/tools/libs/evtchn/private.h
-@@ -14,7 +14,7 @@ struct xenevtchn_handle {
-     Xentoolcore__Active_Handle tc_ah;
- };
- 
--int osdep_evtchn_open(xenevtchn_handle *xce);
-+int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags);
- int osdep_evtchn_close(xenevtchn_handle *xce);
- int osdep_evtchn_restrict(xenevtchn_handle *xce, domid_t domid);
- 
-diff --git a/tools/libs/evtchn/solaris.c b/tools/libs/evtchn/solaris.c
-index d87abc553c..df9579df17 100644
---- a/tools/libs/evtchn/solaris.c
-+++ b/tools/libs/evtchn/solaris.c
-@@ -29,7 +29,7 @@
- 
- #include "private.h"
- 
--int osdep_evtchn_open(xenevtchn_handle *xce)
-+int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
- {
-     int fd;
- 
+-	resp = talloc_strdup(ctx, "NYI");
++	if (!ret)
++		ret = "OK";
++	resp = talloc_strdup(ctx, ret);
+ 	send_reply(conn, XS_CONTROL, resp, strlen(resp) + 1);
+ 	return 0;
+ }
 -- 
 2.26.2
 
