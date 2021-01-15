@@ -2,60 +2,44 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A04FC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 13:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD0CFC433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 14:22:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 019FD208E4
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 13:44:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 019FD208E4
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=csgroup.eu
+	by mail.kernel.org (Postfix) with ESMTPS id 6462F23772
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 14:22:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6462F23772
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68076.121890 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68140.121902 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0POv-00054t-I7; Fri, 15 Jan 2021 13:44:29 +0000
+	id 1l0PzF-0000aM-Kk; Fri, 15 Jan 2021 14:22:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68076.121890; Fri, 15 Jan 2021 13:44:29 +0000
+Received: by outflank-mailman (output) from mailman id 68140.121902; Fri, 15 Jan 2021 14:22:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0POv-00054m-EG; Fri, 15 Jan 2021 13:44:29 +0000
-Received: by outflank-mailman (input) for mailman id 68076;
- Fri, 15 Jan 2021 13:14:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=LCwp=GS=csgroup.eu=christophe.leroy@srs-us1.protection.inumbo.net>)
- id 1l0Ovc-00014O-Cn
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 13:14:12 +0000
-Received: from pegase1.c-s.fr (unknown [93.17.236.30])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0dd2b73c-3bb5-4868-9466-3d773a0b7b7b;
- Fri, 15 Jan 2021 13:14:10 +0000 (UTC)
-Received: from localhost (mailhub1-int [192.168.12.234])
- by localhost (Postfix) with ESMTP id 4DHM8J2VJRz9txP4;
- Fri, 15 Jan 2021 14:14:08 +0100 (CET)
-Received: from pegase1.c-s.fr ([192.168.12.234])
- by localhost (pegase1.c-s.fr [192.168.12.234]) (amavisd-new, port 10024)
- with ESMTP id uKmPQYagKGj1; Fri, 15 Jan 2021 14:14:08 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4DHM8H75Cbz9txNX;
- Fri, 15 Jan 2021 14:14:07 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 5C6B58B829;
- Fri, 15 Jan 2021 14:14:09 +0100 (CET)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id w2ZUaBsmi8E6; Fri, 15 Jan 2021 14:14:09 +0100 (CET)
-Received: from [192.168.4.90] (unknown [192.168.4.90])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 9BAA88B81F;
- Fri, 15 Jan 2021 14:14:07 +0100 (CET)
+	id 1l0PzF-0000aF-Hc; Fri, 15 Jan 2021 14:22:01 +0000
+Received: by outflank-mailman (input) for mailman id 68140;
+ Fri, 15 Jan 2021 14:22:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Nfe5=GS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1l0PzE-0000aA-Lg
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 14:22:00 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 430f0a15-4624-4fb2-a417-ece855ceba26;
+ Fri, 15 Jan 2021 14:21:59 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9736EAC8F;
+ Fri, 15 Jan 2021 14:21:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,154 +51,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0dd2b73c-3bb5-4868-9466-3d773a0b7b7b
-X-Virus-Scanned: Debian amavisd-new at c-s.fr
-X-Virus-Scanned: amavisd-new at c-s.fr
-Subject: Re: [PATCH v2 0/7] Rid W=1 warnings in Ethernet
-To: Lee Jones <lee.jones@linaro.org>, Jakub Kicinski <kuba@kernel.org>
-Cc: Paul Durrant <paul@xen.org>, Kurt Kanzenbach <kurt@linutronix.de>,
- Alexei Starovoitov <ast@kernel.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>, Peter Cammaert
- <pc@denkart.be>, Paul Mackerras <paulus@samba.org>,
- Sukadev Bhattiprolu <sukadev@linux.ibm.com>, Wei Liu <wei.liu@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>,
- John Fastabend <john.fastabend@gmail.com>,
- Santiago Leon <santi_leon@yahoo.com>, xen-devel@lists.xenproject.org,
- Grygorii Strashko <grygorii.strashko@ti.com>,
- Thomas Falcon <tlfalcon@linux.vnet.ibm.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- Jens Osterkamp <Jens.Osterkamp@de.ibm.com>,
- Rusty Russell <rusty@rustcorp.com.au>, Daris A Nevil <dnevil@snmc.com>,
- Lijun Pan <ljp@linux.ibm.com>, Ivan Khoronzhuk <ivan.khoronzhuk@linaro.org>,
- Nicolas Pitre <nico@fluxnic.net>, Geoff Levand <geoff@infradead.org>,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- Erik Stahlman <erik@vt.edu>, John Allen <jallen@linux.vnet.ibm.com>,
- Utz Bacher <utz.bacher@de.ibm.com>, Dany Madden <drt@linux.ibm.com>,
- bpf@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- "David S. Miller" <davem@davemloft.net>, Russell King <rmk@arm.linux.org.uk>
-References: <20210113164123.1334116-1-lee.jones@linaro.org>
- <20210113183551.6551a6a2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <20210114083349.GI3975472@dell>
- <20210114091453.30177d20@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <20210114195422.GB3975472@dell> <20210115111823.GH3975472@dell>
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-Message-ID: <bc775cc3-fda3-0280-5f92-53058996f02f@csgroup.eu>
-Date: Fri, 15 Jan 2021 14:14:06 +0100
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:78.0) Gecko/20100101
+X-Inumbo-ID: 430f0a15-4624-4fb2-a417-ece855ceba26
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1610720518; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=9oqNTF4et6TgZ+0836/vWtYf6MKTLYnK0gSQLP+eu48=;
+	b=tNJ295P1qOvbucsWNpql1j2E40Izv7YasQVKtgQH63hR8yzZoFmCkCGsmlcVMaDGaJfuvo
+	4AqvVA8tFv22KL5t06wqCJtc/zzU+qTyVKx/DgLvL9qQjGUDbdMbeLBVbfiqXOXpxu9dYt
+	x3U1YlW3tvTfpbxEif4y3/hFga7gxBg=
+Subject: Re: [PATCH 1/3] gnttab: adjust pin count overflow checks
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <556c42fd-d7f8-f09f-eb3a-6b724d2b467d@suse.com>
+ <38331526-5c24-08d4-b1b6-9baa16251c1d@suse.com>
+ <fb12277c-beaf-2058-69ce-0c7c14bce56c@citrix.com>
+ <cea405c4-354d-307a-4465-a9a59b1a5696@suse.com>
+ <ab7cbe24-8a05-203d-175a-9e85d3ed1ee1@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <54c340a9-4515-e79c-84b7-44431c481fba@suse.com>
+Date: Fri, 15 Jan 2021 15:21:58 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <20210115111823.GH3975472@dell>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: fr
+In-Reply-To: <ab7cbe24-8a05-203d-175a-9e85d3ed1ee1@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-
-
-Le 15/01/2021 à 12:18, Lee Jones a écrit :
-> On Thu, 14 Jan 2021, Lee Jones wrote:
-> 
->> On Thu, 14 Jan 2021, Jakub Kicinski wrote:
->>
->>> On Thu, 14 Jan 2021 08:33:49 +0000 Lee Jones wrote:
->>>> On Wed, 13 Jan 2021, Jakub Kicinski wrote:
->>>>
->>>>> On Wed, 13 Jan 2021 16:41:16 +0000 Lee Jones wrote:
->>>>>> Resending the stragglers again.
->>>>>>
->>>>>> This set is part of a larger effort attempting to clean-up W=1
->>>>>> kernel builds, which are currently overwhelmingly riddled with
->>>>>> niggly little warnings.
->>>>>>                                                                                                                   
->>>>>> v2:
->>>>>>   - Squashed IBM patches
->>>>>>   - Fixed real issue in SMSC
->>>>>>   - Added Andrew's Reviewed-by tags on remainder
->>>>>
->>>>> Does not apply, please rebase on net-next/master.
->>>>
->>>> These are based on Tuesday's next/master.
+On 15.01.2021 14:35, Andrew Cooper wrote:
+> On 15/01/2021 13:26, Jan Beulich wrote:
+>> On 15.01.2021 14:09, Andrew Cooper wrote:
+>>> On 14/01/2021 15:23, Jan Beulich wrote:
+>>>> @@ -1052,19 +1063,19 @@ map_grant_ref(
+>>>>      shah = shared_entry_header(rgt, ref);
+>>>>      act = active_entry_acquire(rgt, ref);
+>>>>  
+>>>> -    /* Make sure we do not access memory speculatively */
+>>>> -    status = evaluate_nospec(rgt->gt_version == 1) ? &shah->flags
+>>>> -                                                 : &status_entry(rgt, ref);
+>>>> -
+>>>>      /* If already pinned, check the active domid and avoid refcnt overflow. */
+>>>>      if ( act->pin &&
+>>>>           ((act->domid != ld->domain_id) ||
+>>>> -          (act->pin & 0x80808080U) != 0 ||
+>>>> +          (act->pin & (pin_incr << (GNTPIN_cntr_width - 1))) ||
+>>> This, I'm afraid, is not an improvement.  What we want is:
 >>>
->>> What's next/master?
->>
->> I'm not sure if this is a joke, or not? :)
->>
->> next/master == Linux Next.  The daily merged repo where all of the
->> *-next branches end up to ensure interoperability.  It's also the
->> branch that is most heavily tested by the auto-builders to ensure the
->> vast majority of issues are ironed out before hitting Mainline.
->>
->>> This is net-next:
+>>> #define GNTPIN_overflow_mask 0x80808080U
 >>>
->>> https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git/
->>
->> Looks like net-next gets merged into next/master:
->>
->> commit 452958f1f3d1c8980a8414f9c37c8c6de24c7d32
->> Merge: 1eabba209a17a f50e2f9f79164
->> Author: Stephen Rothwell <sfr@canb.auug.org.au>
->> Date:   Thu Jan 14 10:35:40 2021 +1100
->>
->>      Merge remote-tracking branch 'net-next/master'
->>
->> So I'm not sure what it's conflicting with.
->>
->> Do you have patches in net-next that didn't make it into next/master
->> for some reason?
->>
->> I'll try to rebase again tomorrow.
->>
->> Hopefully I am able to reproduce your issue by then.
+>>> The reason for checking all at once is defence in depth (not strictly
+>>> necessary, but also not a problem),
+>> How is this not a problem? There is absolutely no reason to
+>> reject a request just because some unrelated field may be
+>> about to overflow. In fact I now think that I didn't even
+>> leverage the full potential - the "act->pin != old_pin" check
+>> could also be relaxed this way, I think. Just that it sits on
+>> a path we probably don't really care about very much.
 > 
-> Okay so my development branch rebased again with no issue.
+> Hmm - I see your point.  I'd missed the fact that a previous operation
+> could leave this timebomb waiting for us.  (Probably wants a note to
+> this effect in the commit message).
 
-Rebasing is not same as patches application.
+I've added half a sentence.
 
+> However we go about fixing it, "pin_incr << (GNTPIN_cntr_width - 1)" is
+> too obscure IMO.  Perhaps all we need is a
 > 
-> I also took the liberty to checkout net-next and cherry-pick the
-> patches [0], which again didn't cause a problem.
-
-Also normal, cherry-picking is not the same as applying a patch series.
-
+> #define GNTPIN_overflow_mask(x) ((x) << (GNTPIN_cntr_width - 1))
 > 
-> I'm not sure what else to suggest.  Is your local copy up-to-date?
+> but it does occur to me that this logic only works to being with when
+> pin_incr is strictly 1 in the relevant bytes.
 
-I guess so, I have the same problem as Jakub, see below. I had to use 'git am -3' to apply you 
-series. As you can see, git falls back to 3 way merge for patch 1, which means your series is close 
-to but not fully in sync with net-next.
+Perhaps
 
+#define GNTPIN_overflow_mask(x) ({ \
+    ASSERT(!((x) & ~(GNTPIN_hstw_inc | GNTPIN_hstr_inc | \
+                     GNTPIN_devw_inc | GNTPIN_devr_inc))); \
+    (x) << (GNTPIN_cntr_width - 1); \
+})
 
-[root@localhost linux-powerpc]# git remote -v
-net-next	https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git (fetch)
-net-next	https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git (push)
+? And maybe name the whole thing e.g. GNTPIN_incr2oflow_mask()
+to clarify the input is an increment (which I personally take
+to mean consisting of only values of 1, but I realize views
+may vary)?
 
-[root@localhost linux-powerpc]# git checkout net-next/master -b net-next
-Switched to a new branch 'net-next'
-
-[root@localhost linux-powerpc]# git am /root/Downloads/Rid-W-1-warnings-in-Ethernet.patch
-Applying: net: ethernet: smsc: smc91x: Fix function name in kernel-doc header
-error: patch failed: drivers/net/ethernet/smsc/smc91x.c:2192
-error: drivers/net/ethernet/smsc/smc91x.c: patch does not apply
-Patch failed at 0001 net: ethernet: smsc: smc91x: Fix function name in kernel-doc header
-hint: Use 'git am --show-current-patch' to see the failed patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
-
-[root@localhost linux-powerpc]# git am --abort
-
-[root@localhost linux-powerpc]# git am -3 /root/Downloads/Rid-W-1-warnings-in-Ethernet.patch
-Applying: net: ethernet: smsc: smc91x: Fix function name in kernel-doc header
-Using index info to reconstruct a base tree...
-M	drivers/net/ethernet/smsc/smc91x.c
-Falling back to patching base and 3-way merge...
-Auto-merging drivers/net/ethernet/smsc/smc91x.c
-Applying: net: xen-netback: xenbus: Demote nonconformant kernel-doc headers
-Applying: net: ethernet: ti: am65-cpsw-qos: Demote non-conformant function header
-Applying: net: ethernet: ti: am65-cpts: Document am65_cpts_rx_enable()'s 'en' parameter
-Applying: net: ethernet: ibm: ibmvnic: Fix some kernel-doc misdemeanours
-Applying: net: ethernet: toshiba: ps3_gelic_net: Fix some kernel-doc misdemeanours
-Applying: net: ethernet: toshiba: spider_net: Document a whole bunch of function parameters
-
-
-Christophe
+Jan
 
