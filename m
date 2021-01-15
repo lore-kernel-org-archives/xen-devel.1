@@ -2,44 +2,45 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50BACC433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC2A2C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:40:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0ED0622597
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:39:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0ED0622597
+	by mail.kernel.org (Postfix) with ESMTPS id 6AD6D22597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:40:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6AD6D22597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67796.121239 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67813.121250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Ke6-0002aT-63; Fri, 15 Jan 2021 08:39:50 +0000
+	id 1l0KeS-0003Pj-EA; Fri, 15 Jan 2021 08:40:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67796.121239; Fri, 15 Jan 2021 08:39:50 +0000
+Received: by outflank-mailman (output) from mailman id 67813.121250; Fri, 15 Jan 2021 08:40:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Ke6-0002aJ-2s; Fri, 15 Jan 2021 08:39:50 +0000
-Received: by outflank-mailman (input) for mailman id 67796;
- Fri, 15 Jan 2021 08:39:48 +0000
+	id 1l0KeS-0003PU-Ap; Fri, 15 Jan 2021 08:40:12 +0000
+Received: by outflank-mailman (input) for mailman id 67813;
+ Fri, 15 Jan 2021 08:40:10 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KW3-0008HA-PD
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:31:31 +0000
+ id 1l0KVo-0008HA-Op
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:31:16 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d03ffd5a-eac2-4136-824e-4a04e6eb56e6;
- Fri, 15 Jan 2021 08:30:16 +0000 (UTC)
+ id a413e613-d01e-4c1d-ac5b-0033c2abfbf7;
+ Fri, 15 Jan 2021 08:30:13 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 97CA9B945;
+ by mx2.suse.de (Postfix) with ESMTP id 5C5FCB95B;
  Fri, 15 Jan 2021 08:30:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,231 +53,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d03ffd5a-eac2-4136-824e-4a04e6eb56e6
+X-Inumbo-ID: a413e613-d01e-4c1d-ac5b-0033c2abfbf7
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1610699408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=chZrRINMlN9NIz5hFmosn+ti87iJeN4zUTFjHuYKE7E=;
-	b=KHQ1Q7M0X6qqMyqOHDUubODLDYskHcVgNa3DTwsCDen649F1ADI5PB6imY7EXeN+uPLWDm
-	smP2slwNoMSrSDxcAdAp12WGvGTqz1AI49v+esVRxBuqpkI72fyu62u+SfQdRwJLyuoBze
-	GM72Bk1t+4oDsbL0g2Offor/5GHLiWQ=
+	bh=/rmGIUwb7rQQbsNmDH/AGkcUN8zjvijT5247nfpjU8Q=;
+	b=sDZnKsN+Oo+HwEcF4lXkmwKBoVYX7m6vN167hC11zp7vh6kT8mNLfztmbuhkyVbj5hjKIw
+	NidBM/F8vRZfMNiiU+8eTqfAcCFxkDzyOc34PIaD7uTKcRc9dD+Ss6cus2RRWo+yJXjxqZ
+	C6N3a3FAJE8vuqoC6V5aKAz7nFrQYH0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v12 25/27] tools/xenstore: add read watch state for live update
-Date: Fri, 15 Jan 2021 09:29:58 +0100
-Message-Id: <20210115083000.14186-26-jgross@suse.com>
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v12 19/27] tools/xenstore: split off domain introduction from do_introduce()
+Date: Fri, 15 Jan 2021 09:29:52 +0100
+Message-Id: <20210115083000.14186-20-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
 References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add reading the watch state records for live update.
+For live update the functionality to introduce a new domain similar to
+the XS_INTRODUCE command is needed, so split that functionality off
+into a dedicated function introduce_domain().
 
-This requires factoring out some of the add watch functionality into a
-dedicated function.
+Switch initial dom0 initialization to use this function, too.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-V4:
-- add comment (Julien Grall)
-
-V6:
-- correct check_watch_path() (setting errno)
+V8:
+- new patch
 ---
- tools/xenstore/xenstored_control.c |   2 +
- tools/xenstore/xenstored_watch.c   | 114 +++++++++++++++++++++--------
- tools/xenstore/xenstored_watch.h   |   2 +
- 3 files changed, 88 insertions(+), 30 deletions(-)
+ tools/xenstore/xenstored_domain.c | 95 ++++++++++++++++++-------------
+ 1 file changed, 55 insertions(+), 40 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 287417de6b..b8195eed41 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -35,6 +35,7 @@ Interactive commands for Xen Store Daemon.
- #include "xenstored_core.h"
- #include "xenstored_control.h"
- #include "xenstored_domain.h"
-+#include "xenstored_watch.h"
- 
- /* Mini-OS only knows about MAP_ANON. */
- #ifndef MAP_ANONYMOUS
-@@ -542,6 +543,7 @@ void lu_read_state(void)
- 			read_state_connection(ctx, head + 1);
- 			break;
- 		case XS_STATE_TYPE_WATCH:
-+			read_state_watch(ctx, head + 1);
- 			break;
- 		case XS_STATE_TYPE_TA:
- 			xprintf("live-update: ignore transaction record\n");
-diff --git a/tools/xenstore/xenstored_watch.c b/tools/xenstore/xenstored_watch.c
-index 9248f08bd9..db89e0141f 100644
---- a/tools/xenstore/xenstored_watch.c
-+++ b/tools/xenstore/xenstored_watch.c
-@@ -205,6 +205,62 @@ static int destroy_watch(void *_watch)
- 	return 0;
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 38d250fbed..71b078caf3 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -326,7 +326,7 @@ static struct domain *find_domain_struct(unsigned int domid)
+ 	return NULL;
  }
  
-+static int check_watch_path(struct connection *conn, const void *ctx,
-+			    char **path, bool *relative)
-+{
-+	/* Check if valid event. */
-+	if (strstarts(*path, "@")) {
-+		*relative = false;
-+		if (strlen(*path) > XENSTORE_REL_PATH_MAX)
-+			goto inval;
-+	} else {
-+		*relative = !strstarts(*path, "/");
-+		*path = canonicalize(conn, ctx, *path);
-+		if (!*path)
-+			return errno;
-+		if (!is_valid_nodename(*path))
-+			goto inval;
-+	}
-+
-+	return 0;
-+
-+ inval:
-+	errno = EINVAL;
-+	return errno;
-+}
-+
-+static struct watch *add_watch(struct connection *conn, char *path, char *token,
-+			       bool relative)
-+{
-+	struct watch *watch;
-+
-+	watch = talloc(conn, struct watch);
-+	if (!watch)
-+		goto nomem;
-+	watch->node = talloc_strdup(watch, path);
-+	watch->token = talloc_strdup(watch, token);
-+	if (!watch->node || !watch->token)
-+		goto nomem;
-+
-+	if (relative)
-+		watch->relative_path = get_implicit_path(conn);
-+	else
-+		watch->relative_path = NULL;
-+
-+	INIT_LIST_HEAD(&watch->events);
-+
-+	domain_watch_inc(conn);
-+	list_add_tail(&watch->list, &conn->watches);
-+	talloc_set_destructor(watch, destroy_watch);
-+
-+	return watch;
-+
-+ nomem:
-+	talloc_free(watch);
-+	errno = ENOMEM;
-+	return NULL;
-+}
-+
- int do_watch(struct connection *conn, struct buffered_data *in)
+-static struct domain *alloc_domain(void *context, unsigned int domid)
++static struct domain *alloc_domain(const void *context, unsigned int domid)
  {
- 	struct watch *watch;
-@@ -214,19 +270,9 @@ int do_watch(struct connection *conn, struct buffered_data *in)
- 	if (get_strings(in, vec, ARRAY_SIZE(vec)) != ARRAY_SIZE(vec))
- 		return EINVAL;
+ 	struct domain *domain;
  
--	if (strstarts(vec[0], "@")) {
--		relative = false;
--		if (strlen(vec[0]) > XENSTORE_REL_PATH_MAX)
--			return EINVAL;
--		/* check if valid event */
--	} else {
--		relative = !strstarts(vec[0], "/");
--		vec[0] = canonicalize(conn, in, vec[0]);
--		if (!vec[0])
--			return ENOMEM;
--		if (!is_valid_nodename(vec[0]))
--			return EINVAL;
--	}
-+	errno = check_watch_path(conn, in, &(vec[0]), &relative);
-+	if (errno)
-+		return errno;
- 
- 	/* Check for duplicates. */
- 	list_for_each_entry(watch, &conn->watches, list) {
-@@ -238,26 +284,11 @@ int do_watch(struct connection *conn, struct buffered_data *in)
- 	if (domain_watch(conn) > quota_nb_watch_per_domain)
- 		return E2BIG;
- 
--	watch = talloc(conn, struct watch);
-+	watch = add_watch(conn, vec[0], vec[1], relative);
- 	if (!watch)
--		return ENOMEM;
--	watch->node = talloc_strdup(watch, vec[0]);
--	watch->token = talloc_strdup(watch, vec[1]);
--	if (!watch->node || !watch->token) {
--		talloc_free(watch);
--		return ENOMEM;
--	}
--	if (relative)
--		watch->relative_path = get_implicit_path(conn);
--	else
--		watch->relative_path = NULL;
-+		return errno;
- 
--	INIT_LIST_HEAD(&watch->events);
--
--	domain_watch_inc(conn);
--	list_add_tail(&watch->list, &conn->watches);
- 	trace_create(watch, "watch");
--	talloc_set_destructor(watch, destroy_watch);
- 	send_ack(conn, XS_WATCH);
- 
- 	/* We fire once up front: simplifies clients and restart. */
-@@ -338,6 +369,29 @@ const char *dump_state_watches(FILE *fp, struct connection *conn,
- 	return ret;
+@@ -347,6 +347,14 @@ static struct domain *alloc_domain(void *context, unsigned int domid)
+ 	return domain;
  }
  
-+void read_state_watch(const void *ctx, const void *state)
++static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
 +{
-+	const struct xs_state_watch *sw = state;
-+	struct connection *conn;
-+	char *path, *token;
-+	bool relative;
++	struct domain *domain;
 +
-+	conn = get_connection_by_id(sw->conn_id);
-+	if (!conn)
-+		barf("connection not found for read watch");
-+
-+	path = (char *)sw->data;
-+	token = path + sw->path_length;
-+
-+	/* Don't check success, we want the relative information only. */
-+	check_watch_path(conn, ctx, &path, &relative);
-+	if (!path)
-+		barf("allocation error for read watch");
-+
-+	if (!add_watch(conn, path, token, relative))
-+		barf("error adding watch");
++	domain = find_domain_struct(domid);
++	return domain ? : alloc_domain(ctx, domid);
 +}
 +
- /*
-  * Local variables:
-  *  mode: C
-diff --git a/tools/xenstore/xenstored_watch.h b/tools/xenstore/xenstored_watch.h
-index 3d81645f45..0e693f0839 100644
---- a/tools/xenstore/xenstored_watch.h
-+++ b/tools/xenstore/xenstored_watch.h
-@@ -33,4 +33,6 @@ void conn_delete_all_watches(struct connection *conn);
- const char *dump_state_watches(FILE *fp, struct connection *conn,
- 			       unsigned int conn_id);
+ static int new_domain(struct domain *domain, int port)
+ {
+ 	int rc;
+@@ -413,52 +421,41 @@ static void domain_conn_reset(struct domain *domain)
+ 	domain->interface->rsp_cons = domain->interface->rsp_prod = 0;
+ }
  
-+void read_state_watch(const void *ctx, const void *state);
+-/* domid, gfn, evtchn, path */
+-int do_introduce(struct connection *conn, struct buffered_data *in)
++static struct domain *introduce_domain(const void *ctx,
++				       unsigned int domid,
++				       evtchn_port_t port)
+ {
+ 	struct domain *domain;
+-	char *vec[3];
+-	unsigned int domid;
+-	evtchn_port_t port;
+ 	int rc;
+ 	struct xenstore_domain_interface *interface;
++	bool is_master_domain = (domid == xenbus_master_domid());
+ 
+-	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
+-		return EINVAL;
+-
+-	domid = atoi(vec[0]);
+-	/* Ignore the gfn, we don't need it. */
+-	port = atoi(vec[2]);
+-
+-	/* Sanity check args. */
+-	if (port <= 0)
+-		return EINVAL;
+-
+-	domain = find_domain_struct(domid);
+-
+-	if (domain == NULL) {
+-		/* Hang domain off "in" until we're finished. */
+-		domain = alloc_domain(in, domid);
+-		if (domain == NULL)
+-			return ENOMEM;
+-	}
++	domain = find_or_alloc_domain(ctx, domid);
++	if (!domain)
++		return NULL;
+ 
+ 	if (!domain->introduced) {
+-		interface = map_interface(domid);
++		interface = is_master_domain ? xenbus_map()
++					     : map_interface(domid);
+ 		if (!interface)
+-			return errno;
+-		/* Hang domain off "in" until we're finished. */
++			return NULL;
+ 		if (new_domain(domain, port)) {
+ 			rc = errno;
+-			unmap_interface(interface);
+-			return rc;
++			if (is_master_domain)
++				unmap_xenbus(interface);
++			else
++				unmap_interface(interface);
++			errno = rc;
++			return NULL;
+ 		}
+ 		domain->interface = interface;
+ 
+ 		/* Now domain belongs to its connection. */
+ 		talloc_steal(domain->conn, domain);
+ 
+-		fire_watches(NULL, in, "@introduceDomain", NULL, false, NULL);
++		if (!is_master_domain)
++			fire_watches(NULL, ctx, "@introduceDomain", NULL,
++				     false, NULL);
+ 	} else {
+ 		/* Use XS_INTRODUCE for recreating the xenbus event-channel. */
+ 		if (domain->port)
+@@ -467,6 +464,32 @@ int do_introduce(struct connection *conn, struct buffered_data *in)
+ 		domain->port = (rc == -1) ? 0 : rc;
+ 	}
+ 
++	return domain;
++}
 +
- #endif /* _XENSTORED_WATCH_H */
++/* domid, gfn, evtchn, path */
++int do_introduce(struct connection *conn, struct buffered_data *in)
++{
++	struct domain *domain;
++	char *vec[3];
++	unsigned int domid;
++	evtchn_port_t port;
++
++	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
++		return EINVAL;
++
++	domid = atoi(vec[0]);
++	/* Ignore the gfn, we don't need it. */
++	port = atoi(vec[2]);
++
++	/* Sanity check args. */
++	if (port <= 0)
++		return EINVAL;
++
++	domain = introduce_domain(in, domid, port);
++	if (!domain)
++		return errno;
++
+ 	domain_conn_reset(domain);
+ 
+ 	send_ack(conn, XS_INTRODUCE);
+@@ -692,17 +715,9 @@ static int dom0_init(void)
+ 	if (port == -1)
+ 		return -1;
+ 
+-	dom0 = alloc_domain(NULL, xenbus_master_domid());
++	dom0 = introduce_domain(NULL, xenbus_master_domid(), port);
+ 	if (!dom0)
+ 		return -1;
+-	if (new_domain(dom0, port))
+-		return -1;
+-
+-	dom0->interface = xenbus_map();
+-	if (dom0->interface == NULL)
+-		return -1;
+-
+-	talloc_steal(dom0->conn, dom0); 
+ 
+ 	xenevtchn_notify(xce_handle, dom0->port);
+ 
 -- 
 2.26.2
 
