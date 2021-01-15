@@ -2,42 +2,41 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-24.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA7CFC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B551C43381
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 839C723128
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 839C723128
+	by mail.kernel.org (Postfix) with ESMTPS id 4700D23128
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4700D23128
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68775.123244 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68784.123284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Y3U-0003CV-OG; Fri, 15 Jan 2021 22:58:56 +0000
+	id 1l0Y3a-0003QK-UA; Fri, 15 Jan 2021 22:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68775.123244; Fri, 15 Jan 2021 22:58:56 +0000
+Received: by outflank-mailman (output) from mailman id 68784.123284; Fri, 15 Jan 2021 22:59:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Y3U-0003CB-FO; Fri, 15 Jan 2021 22:58:56 +0000
-Received: by outflank-mailman (input) for mailman id 68775;
- Fri, 15 Jan 2021 22:58:55 +0000
+	id 1l0Y3a-0003Q2-PU; Fri, 15 Jan 2021 22:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 68784;
+ Fri, 15 Jan 2021 22:59:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hVL8=GS=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1l0XyM-0001Wj-1N
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:53:38 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1l0Xyb-0001Wj-20
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:53:53 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2b941d5d-5a37-4e75-91b0-a24787a7b669;
- Fri, 15 Jan 2021 22:52:40 +0000 (UTC)
+ id f837a99d-1af1-4c1c-824d-9255f0634186;
+ Fri, 15 Jan 2021 22:52:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,37 +48,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b941d5d-5a37-4e75-91b0-a24787a7b669
+X-Inumbo-ID: f837a99d-1af1-4c1c-824d-9255f0634186
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610751160;
+  d=citrix.com; s=securemail; t=1610751164;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=z+ioT6wmOyjk9o8JoO7XIs7aXHObUF73mKxWy5PYTjA=;
-  b=IRYlWZzS61/ifoPWwExZMUb/QPquUH/r6aVL2NO4E3iF+nJLjTqRLHw0
-   0gxjRJEqTDhK80ftCyVWWXI712Xc6/7qnXlOdBIKV/AmDL/SU5k06YTgZ
-   p7WJqyz5gvQMPPosAJdOTeMvkr9HHGGLs6QOBLSK6no16/ZV2qluh46Yf
-   4=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 3Zax/+P+JvMivlVNzkYK/wwIwFeJfn+UrK7Yc5WIMfMQCPW2nNaCUYMFd7wCopdRFBMU5yjBat
- 8MwtxgNHVpUygeKQ5doC9IV9o+F45WMAkY7vY/sriRV8A8zD1EVUTYLs2VgcqMGU+gFeZYRffM
- I1kG/uoHMhql03SqBqsYcaPpjS6Bdt0QqsZ/0joLqSx6GBU1NISXgQo3kNfwtBkEEjyN2Wiy8f
- wqKAlYsjljMF14zJXXum0gvre7XH5UwfnUryf3clb63AuAdEOsU0MRdm3/vwYkAguWopiGakQs
- u2o=
+  bh=Ebh7/z6kphJEF6Rxb6nhmacurC8cMZYuwIblENECTxE=;
+  b=HX1tPbTGN6I3xHzCspGXnEklPWoBBEfLzpMdFWA0fPPc/aizW3hs8KjK
+   8RDTLwNHHOwj0e8kFWipA2O1RI6d2dIQpeKfvEJm7YJqAOTs9dZWPj+sI
+   7zJYeQXXMZVK5aVWdV33JWQonM50avau3n8XUBtM2sPuiG5mmEXQP6sSg
+   M=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: ibHTxdOY10XEerFTAmHhhTKCDnAU/J5U4ykkAT7G1ZY/lwi+3HCbrMkFW9GkFslX2WHb7qNtsP
+ IfErVuBdk3msIjTdzmpgrUltAr64mWnFQDvbvgF/L6C7K1egWRQE7iDwW3RTtkcHcYeOD5LR6X
+ cRl6RRMH5EIM0ZFdpv2X0PrKDSw214iyu1/AOMX0lDPRAEmeJk1KiwVBhBmymCBfSJQvNIuOna
+ c26aNuz/oxLAKRYRwKBuuZJ353DuVKpyiusj1oPh3UZFOdAr5bIuvTspxEB2A7BKHueJjPTEaZ
+ g2s=
 X-SBRS: 5.1
-X-MesageID: 36512262
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 35206335
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="36512262"
+   d="scan'208";a="35206335"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
- Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
- Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v1 1/5] tools/ocaml: add unit test skeleton with Dune build system
-Date: Fri, 15 Jan 2021 22:29:00 +0000
-Message-ID: <58c08503e1f2c26aaba7297bf65caec25929564c.1610748224.git.edvin.torok@citrix.com>
+CC: Edvin Torok <edvint@eddie2.eng.citrite.net>, Christian Lindig
+	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Pau Ruiz Safont
+	<pau.safont@citrix.com>
+Subject: [PATCH v2 8/8] tools/ocaml/xenstored: Implement live update for socket connections
+Date: Fri, 15 Jan 2021 22:28:50 +0000
+Message-ID: <07cb0ca9b2d48c74bc499cd92d61ac9313bbbbf0.1610748224.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1610748224.git.edvin.torok@citrix.com>
 References: <cover.1610748224.git.edvin.torok@citrix.com>
@@ -87,454 +88,463 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Based on initial work by Christian Lindig
-
-Doing oxenstored development, especially fuzzing/unit tests requires
-an incremental and fast build system.
-
-Dune is the preferred upstream build system for OCaml, and has been in
-use by the XAPI project for years.
-Is is incremental and also generates editor integration files (.merlin).
-
-Usage:
-./xs-reconfigure.sh
-cd tools/ocaml
-make clean
-make check
-
-There are some other convenience targets as well:
-make dune-clean
-make dune-syntax-check
-make dune-build-oxenstored
-
-There are some files that are generated by Make, these are created
-by a 'dune-pre' target, they are too closely tied to make and
-cannot yet be generated by Dune itself.
-
-The various Makefile targets are used as entrypoints into Dune
-that set the needed env vars (for C include files and libraries)
-and ensure that the generated files are available.
-
-The unit tests do not require Xen to be available, so add mock
-eventchn and xenctrl libraries for the unit test to use,
-and copy the non-system specific modules from xenstored/ to
-xenstored/test/.
-
-Xenstored had to be split into Xenstored and Xenstored_main,
-so that we can use the functions defined in Xenstored without
-actually starting up the daemon in a unit test.
-Similarly argument parsing had to be delayed until after daemon startup.
-
-Also had to disable setrlimit when running as non-root in poll.ml.
+From: Edvin Torok <edvint@eddie2.eng.citrite.net>
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
----
- tools/ocaml/.gitignore                       |  2 +
- tools/ocaml/Makefile                         | 33 +++++++++++++
- tools/ocaml/dune-project                     |  5 ++
- tools/ocaml/libs/eventchn/dune               |  8 ++++
- tools/ocaml/libs/mmap/dune                   |  8 ++++
- tools/ocaml/libs/xb/dune                     |  7 +++
- tools/ocaml/libs/xc/dune                     |  9 ++++
- tools/ocaml/libs/xs/dune                     |  4 ++
- tools/ocaml/xen.opam                         |  0
- tools/ocaml/xenstore.opam                    |  0
- tools/ocaml/xenstored.opam                   | 18 +++++++
- tools/ocaml/xenstored/Makefile               |  3 +-
- tools/ocaml/xenstored/dune                   | 19 ++++++++
- tools/ocaml/xenstored/parse_arg.ml           |  2 +-
- tools/ocaml/xenstored/poll.ml                |  3 +-
- tools/ocaml/xenstored/test/dune              | 11 +++++
- tools/ocaml/xenstored/test/xenctrl.ml        | 48 +++++++++++++++++++
- tools/ocaml/xenstored/test/xeneventchn.ml    | 50 ++++++++++++++++++++
- tools/ocaml/xenstored/test/xenstored_test.ml |  2 +
- tools/ocaml/xenstored/xenstored.ml           |  4 +-
- 20 files changed, 231 insertions(+), 5 deletions(-)
- create mode 100644 tools/ocaml/.gitignore
- create mode 100644 tools/ocaml/dune-project
- create mode 100644 tools/ocaml/libs/eventchn/dune
- create mode 100644 tools/ocaml/libs/mmap/dune
- create mode 100644 tools/ocaml/libs/xb/dune
- create mode 100644 tools/ocaml/libs/xc/dune
- create mode 100644 tools/ocaml/libs/xs/dune
- create mode 100644 tools/ocaml/xen.opam
- create mode 100644 tools/ocaml/xenstore.opam
- create mode 100644 tools/ocaml/xenstored.opam
- create mode 100644 tools/ocaml/xenstored/dune
- create mode 100644 tools/ocaml/xenstored/test/dune
- create mode 100644 tools/ocaml/xenstored/test/xenctrl.ml
- create mode 100644 tools/ocaml/xenstored/test/xeneventchn.ml
- create mode 100644 tools/ocaml/xenstored/test/xenstored_test.ml
+Reviewed-by: Pau Ruiz Safont <pau.safont@citrix.com>
+Reviewed-by: Christian Lindig <christian.lindig@citrix.com>
 
-diff --git a/tools/ocaml/.gitignore b/tools/ocaml/.gitignore
-new file mode 100644
-index 0000000000..655e32b07c
---- /dev/null
-+++ b/tools/ocaml/.gitignore
-@@ -0,0 +1,2 @@
-+_build
-+.merlin
-diff --git a/tools/ocaml/Makefile b/tools/ocaml/Makefile
-index a7c04b6546..53dd0a0f0d 100644
---- a/tools/ocaml/Makefile
-+++ b/tools/ocaml/Makefile
-@@ -34,3 +34,36 @@ build-tools-oxenstored:
- 	$(MAKE) -s -C libs/xb
- 	$(MAKE) -s -C libs/xc
- 	$(MAKE) -C xenstored
-+
-+LIBRARY_PATH=$(XEN_libxenctrl):$(XEN_libxenguest):$(XEN_libxentoollog):$(XEN_libxencall):$(XEN_libxenevtchn):$(XEN_libxenforeignmemory):$(XEN_libxengnttab):$(XEN_libxendevicemodel):$(XEN_libxentoolcore)
-+C_INCLUDE_PATH=$(XEN_libxenctrl)/include:$(XEN_libxengnttab)/include:$(XEN_libxenevtchn)/include:$(XEN_libxentoollog)/include:$(XEN_INCLUDE)
-+
-+# Files generated by the Makefile
-+# These cannot be generated from dune, because dune cannot refer to files
-+# in the parent directory (so it couldn't copy/use Config.mk)
-+.PHONY: dune-pre
-+dune-pre:
-+	$(MAKE) -s -C ../../ build-tools-public-headers
-+	$(MAKE) -s -C libs/xs paths.ml
-+	$(MAKE) -s -C libs/xc xenctrl_abi_check.h
-+	$(MAKE) -s -C xenstored paths.ml _paths.h
-+
-+.PHONY: check
-+check: dune-pre
-+	# --force isn't necessary here if the test is deterministic
-+	OCAMLRUNPARAM=b C_INCLUDE_PATH=$(C_INCLUDE_PATH) dune runtest --profile=release --no-buffer --force
-+
-+# Convenience targets for development
-+
-+.PHONY: dune-clean
-+dune-clean:
-+	$(MAKE) clean
-+	dune clean
-+
-+.PHONY: dune-syntax-check
-+dune-syntax-check: dune-pre
-+	LIBRARY_PATH=$(LIBRARY_PATH) C_INCLUDE_PATH=$(C_INCLUDE_PATH) dune build --profile=release @check
-+
-+.PHONY: build-oxenstored-dune
-+dune-build-oxenstored: dune-pre
-+	LD_LIBRARY_PATH=$(LIBRARY_PATH) LIBRARY_PATH=$(LIBRARY_PATH) C_INCLUDE_PATH=$(C_INCLUDE_PATH) dune build --profile=release @all
-diff --git a/tools/ocaml/dune-project b/tools/ocaml/dune-project
-new file mode 100644
-index 0000000000..b41cfae68b
---- /dev/null
-+++ b/tools/ocaml/dune-project
-@@ -0,0 +1,5 @@
-+(lang dune 2.0)
-+
-+(name xen)
-+
-+(formatting disabled)
-diff --git a/tools/ocaml/libs/eventchn/dune b/tools/ocaml/libs/eventchn/dune
-new file mode 100644
-index 0000000000..e08bc76fdf
---- /dev/null
-+++ b/tools/ocaml/libs/eventchn/dune
-@@ -0,0 +1,8 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xeneventchn_stubs))
-+ (name xeneventchn)
-+ (public_name xen.eventchn)
-+ (libraries unix)
-+ (c_library_flags -lxenevtchn))
-diff --git a/tools/ocaml/libs/mmap/dune b/tools/ocaml/libs/mmap/dune
-new file mode 100644
-index 0000000000..a47de44e47
---- /dev/null
-+++ b/tools/ocaml/libs/mmap/dune
-@@ -0,0 +1,8 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xenmmap_stubs))
-+ (name xenmmap)
-+ (public_name xen.mmap)
-+ (libraries unix)
-+ (install_c_headers mmap_stubs))
-diff --git a/tools/ocaml/libs/xb/dune b/tools/ocaml/libs/xb/dune
-new file mode 100644
-index 0000000000..feb30adc01
---- /dev/null
-+++ b/tools/ocaml/libs/xb/dune
-@@ -0,0 +1,7 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xenbus_stubs xs_ring_stubs))
-+ (name xenbus)
-+ (public_name xen.bus)
-+ (libraries unix xenmmap))
-diff --git a/tools/ocaml/libs/xc/dune b/tools/ocaml/libs/xc/dune
-new file mode 100644
-index 0000000000..fb75ee8ff7
---- /dev/null
-+++ b/tools/ocaml/libs/xc/dune
-@@ -0,0 +1,9 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xenctrl_stubs))
-+ (name xenctrl)
-+ (public_name xen.ctrl)
-+ (libraries unix xenmmap)
-+ (c_library_flags -lxenctrl -lxenguest -lxencall -lxenforeignmemory
-+   -lxengnttab))
-diff --git a/tools/ocaml/libs/xs/dune b/tools/ocaml/libs/xs/dune
-new file mode 100644
-index 0000000000..c79ea75775
---- /dev/null
-+++ b/tools/ocaml/libs/xs/dune
-@@ -0,0 +1,4 @@
-+(library
-+ (name xenstore)
-+ (public_name xen.store)
-+ (libraries unix xenbus))
-diff --git a/tools/ocaml/xen.opam b/tools/ocaml/xen.opam
-new file mode 100644
-index 0000000000..e69de29bb2
-diff --git a/tools/ocaml/xenstore.opam b/tools/ocaml/xenstore.opam
-new file mode 100644
-index 0000000000..e69de29bb2
-diff --git a/tools/ocaml/xenstored.opam b/tools/ocaml/xenstored.opam
-new file mode 100644
-index 0000000000..31775a3033
---- /dev/null
-+++ b/tools/ocaml/xenstored.opam
-@@ -0,0 +1,18 @@
-+opam-version: "2.0"
-+synopsis: "In-memory key-value store for the Xen hypervisor"
-+maintainer: "lindig@gmail.com"
-+authors: "lindig@gmail.com"
-+license: "LGPL"
-+homepage: "https://github.com/lindig/xen-ocaml-tools"
-+bug-reports: "https://github.com/lindig/xen-ocaml-tools/issues"
-+depends: [
-+  "ocaml"
-+  "dune" {build}
-+  "base-unix"
-+  "crowbar" {with-test}
-+  "qcheck-core" {with-test}
-+  "qcstm" {with-test}
-+]
-+build: ["dune" "build" "-p" name "-j" jobs]
-+depexts: ["m4" "libxen-dev" "libsystemd-dev"] {os-distribution = "debian"}
-+dev-repo: "git+https://github.com/lindig/xen-ocaml-tools.git"
-diff --git a/tools/ocaml/xenstored/Makefile b/tools/ocaml/xenstored/Makefile
-index 89ec3ec76a..9d2da206d8 100644
---- a/tools/ocaml/xenstored/Makefile
-+++ b/tools/ocaml/xenstored/Makefile
-@@ -56,7 +56,8 @@ OBJS = paths \
- 	history \
- 	parse_arg \
- 	process \
--	xenstored
-+	xenstored \
-+	xenstored_main
+---
+Changed since V1
+* post publicly now that the XSA is out
+---
+ tools/ocaml/xenstored/connection.ml | 25 +++++---
+ tools/ocaml/xenstored/parse_arg.ml  |  4 ++
+ tools/ocaml/xenstored/process.ml    | 51 ++++++++++++-----
+ tools/ocaml/xenstored/store.ml      |  2 +-
+ tools/ocaml/xenstored/utils.ml      | 12 ++++
+ tools/ocaml/xenstored/xenstored.ml  | 88 +++++++++++++++++++++--------
+ 6 files changed, 138 insertions(+), 44 deletions(-)
+
+diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
+index bd02060cd0..eb23c3af7a 100644
+--- a/tools/ocaml/xenstored/connection.ml
++++ b/tools/ocaml/xenstored/connection.ml
+@@ -281,6 +281,9 @@ let get_transaction con tid =
  
- INTF = symbol.cmi trie.cmi syslog.cmi systemd.cmi poll.cmi
+ let do_input con = Xenbus.Xb.input con.xb
+ let has_input con = Xenbus.Xb.has_in_packet con.xb
++let has_partial_input con = match con.xb.Xenbus.Xb.partial_in with
++	| HaveHdr _ -> true
++	| NoHdr (n, _) -> n < Xenbus.Partial.header_size ()
+ let pop_in con = Xenbus.Xb.get_in_packet con.xb
+ let has_more_input con = Xenbus.Xb.has_more_input con.xb
  
-diff --git a/tools/ocaml/xenstored/dune b/tools/ocaml/xenstored/dune
-new file mode 100644
-index 0000000000..e59eb22638
---- /dev/null
-+++ b/tools/ocaml/xenstored/dune
-@@ -0,0 +1,19 @@
-+(executable
-+ (modes byte exe)
-+ (name xenstored)
-+ (modules (:standard \ syslog systemd))
-+ (public_name xenstored)
-+ (package xenstored)
-+ (flags (:standard -w -52))
-+ (libraries unix xen.bus xen.mmap xen.ctrl xen.eventchn xenstubs))
-+
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names syslog_stubs systemd_stubs select_stubs)
-+  (flags (-DHAVE_SYSTEMD)))
-+ (modules syslog systemd)
-+ (name xenstubs)
-+ (wrapped false)
-+ (libraries unix)
-+ (c_library_flags -lsystemd))
+@@ -309,12 +312,13 @@ let is_bad con = match con.dom with None -> false | Some dom -> Domain.is_bad_do
+    Restrictions below can be relaxed once xenstored learns to dump more
+    of its live state in a safe way *)
+ let has_extra_connection_data con =
+-	let has_in = has_input con in
++	let has_in = has_input con || has_partial_input con in
+ 	let has_out = has_output con in
+ 	let has_socket = con.dom = None in
+ 	let has_nondefault_perms = make_perm con.dom <> con.perm in
+ 	has_in || has_out
+-	|| has_socket (* dom0 sockets not dumped yet *)
++	(* TODO: what about SIGTERM, should use systemd to store FDS
++	 || has_socket (* dom0 sockets not * dumped yet *) *)
+ 	|| has_nondefault_perms (* set_target not dumped yet *)
+ 
+ let has_transaction_data con =
+@@ -337,16 +341,21 @@ let stats con =
+ 	Hashtbl.length con.watches, con.stat_nb_ops
+ 
+ let dump con chan =
+-	match con.dom with
++	let id = match con.dom with
+ 	| Some dom ->
+ 		let domid = Domain.get_id dom in
+ 		(* dump domain *)
+ 		Domain.dump dom chan;
+-		(* dump watches *)
+-		List.iter (fun (path, token) ->
+-			Printf.fprintf chan "watch,%d,%s,%s\n" domid (Utils.hexify path) (Utils.hexify token)
+-			) (list_watches con);
+-	| None -> ()
++		domid
++	| None ->
++		let fd = con |> get_fd |> Utils.FD.to_int in
++		Printf.fprintf chan "socket,%d\n" fd;
++		-fd
++	in
++	(* dump watches *)
++	List.iter (fun (path, token) ->
++		Printf.fprintf chan "watch,%d,%s,%s\n" id (Utils.hexify path) (Utils.hexify token)
++		) (list_watches con)
+ 
+ let debug con =
+ 	let domid = get_domstr con in
 diff --git a/tools/ocaml/xenstored/parse_arg.ml b/tools/ocaml/xenstored/parse_arg.ml
-index 7c0478e76a..965cb9ebeb 100644
+index 2c4b5a8528..7c0478e76a 100644
 --- a/tools/ocaml/xenstored/parse_arg.ml
 +++ b/tools/ocaml/xenstored/parse_arg.ml
-@@ -28,7 +28,7 @@ type config =
+@@ -24,6 +24,7 @@ type config =
+ 	pidfile: string option; (* old xenstored compatibility *)
+ 	tracefile: string option; (* old xenstored compatibility *)
+ 	restart: bool;
++	live_reload: bool;
  	disable_socket: bool;
  }
  
--let do_argv =
-+let do_argv () =
- 	let pidfile = ref "" and tracefile = ref "" (* old xenstored compatibility *)
- 	and domain_init = ref true
- 	and activate_access_log = ref true
-diff --git a/tools/ocaml/xenstored/poll.ml b/tools/ocaml/xenstored/poll.ml
-index 26f8620dfc..92e0717ed2 100644
---- a/tools/ocaml/xenstored/poll.ml
-+++ b/tools/ocaml/xenstored/poll.ml
-@@ -64,4 +64,5 @@ let poll_select in_fds out_fds exc_fds timeout =
- 			a r
+@@ -35,6 +36,7 @@ let do_argv =
+ 	and reraise_top_level = ref false
+ 	and config_file = ref ""
+ 	and restart = ref false
++	and live_reload = ref false
+ 	and disable_socket = ref false
+ 	in
  
- let () =
--        set_fd_limit (get_sys_fs_nr_open ())
-+        if Unix.geteuid () = 0 then
-+          set_fd_limit (get_sys_fs_nr_open ())
-diff --git a/tools/ocaml/xenstored/test/dune b/tools/ocaml/xenstored/test/dune
-new file mode 100644
-index 0000000000..2a3eb2b7df
---- /dev/null
-+++ b/tools/ocaml/xenstored/test/dune
-@@ -0,0 +1,11 @@
-+(copy_files# ../*.ml{,i})
+@@ -52,6 +54,7 @@ let do_argv =
+ 		  ("--pid-file", Arg.Set_string pidfile, ""); (* for compatibility *)
+ 		  ("-T", Arg.Set_string tracefile, ""); (* for compatibility *)
+ 		  ("--restart", Arg.Set restart, "Read database on starting");
++		  ("--live", Arg.Set live_reload, "Read live dump on startup");
+ 		  ("--disable-socket", Arg.Unit (fun () -> disable_socket := true), "Disable socket");
+ 		] in
+ 	let usage_msg = "usage : xenstored [--config-file <filename>] [--no-domain-init] [--help] [--no-fork] [--reraise-top-level] [--restart] [--disable-socket]" in
+@@ -65,5 +68,6 @@ let do_argv =
+ 		pidfile = if !pidfile <> "" then Some !pidfile else None;
+ 		tracefile = if !tracefile <> "" then Some !tracefile else None;
+ 		restart = !restart;
++		live_reload = !live_reload;
+ 		disable_socket = !disable_socket;
+ 	}
+diff --git a/tools/ocaml/xenstored/process.ml b/tools/ocaml/xenstored/process.ml
+index 3174d8ede5..dd50456ad5 100644
+--- a/tools/ocaml/xenstored/process.ml
++++ b/tools/ocaml/xenstored/process.ml
+@@ -91,19 +91,24 @@ type t =
+ 		; cmdline: string list
+ 		; deadline: float
+ 	; force: bool
++	; result: string list
+ 	; pending: bool }
+ 
+ let state =
+ 	ref
+ 		{ binary= Sys.executable_name
+-		; cmdline= []
++		; cmdline= (Sys.argv |> Array.to_list |> List.tl)
+ 		; deadline= 0.
+ 		; force= false
++		; result = []
+ 		; pending= false }
+ 
+ let debug = Printf.eprintf
+ 
+-let args_of_t t = (t.binary, "--restart" :: t.cmdline)
++let forced_args = ["--live"; "--restart"]
++let args_of_t t =
++	let filtered = List.filter (fun x -> not @@ List.mem x forced_args) t.cmdline in
++	(t.binary, forced_args @ filtered)
+ 
+ let string_of_t t =
+ 	let executable, rest = args_of_t t in
+@@ -117,12 +122,12 @@ let launch_exn t =
+ 
+ let validate_exn t =
+ 	(* --help must be last to check validity of earlier arguments *)
+-	let t = {t with cmdline= t.cmdline @ ["--help"]} in
+-	let cmd = string_of_t t in
++	let t' = {t with cmdline= t.cmdline @ ["--help"]} in
++	let cmd = string_of_t t' in
+ 	debug "Executing %s" cmd ;
+ 	match Unix.fork () with
+ 	| 0 ->
+-		 ( try launch_exn t with _ -> exit 2 )
++		 ( try launch_exn t' with _ -> exit 2 )
+ 	| pid -> (
+ 	match Unix.waitpid [] pid with
+ 		| _, Unix.WEXITED 0 ->
+@@ -146,10 +151,14 @@ let parse_live_update args =
+ 			validate_exn {!state with binary= file}
+ 		| ["-a"] ->
+ 			debug "Live update aborted" ;
+-			{!state with pending= false}
++			{!state with pending= false; result = []}
+ 		| "-c" :: cmdline ->
+-			validate_exn {!state with cmdline}
++			validate_exn {!state with cmdline = !state.cmdline @ cmdline}
+ 		| "-s" :: _ ->
++			(match !state.pending, !state.result with
++			| true, _ -> !state (* no change to state, avoid resetting timeout *)
++			| false, _ :: _ -> !state (* we got a pending result to deliver *)
++			| false, [] ->
+ 			let timeout = ref 60 in
+ 			let force = ref false in
+ 			Arg.parse_argv ~current:(ref 0) (Array.of_list args)
+@@ -165,10 +174,16 @@ let parse_live_update args =
+ 			"live-update -s" ;
+ 			debug "Live update process queued" ;
+ 				{!state with deadline = Unix.gettimeofday () +. float !timeout
+-				; force= !force; pending= true}
++				; force= !force; pending= true})
+ 		| _ ->
+ 			invalid_arg ("Unknown arguments: " ^ String.concat "," args)) ;
+-	None
++		match !state.pending, !state.result with
++		| true, _ -> Some "BUSY"
++		| false, (_ :: _ as result) ->
++				(* xenstore-control has read the result, clear it *)
++				state := { !state with result = [] };
++				Some (String.concat "\n" result)
++		| false, [] -> None
+ 	with
+ 	| Arg.Bad s | Arg.Help s | Invalid_argument s ->
+ 		Some s
+@@ -182,17 +197,27 @@ let parse_live_update args =
+ 			| [] -> true
+ 			| _ when Unix.gettimeofday () < t.deadline -> false
+ 			| l ->
+-				 info "Live update timeout reached: %d active connections" (List.length l);
+-				 List.iter (fun con -> warn "%s prevents live update" (Connection.get_domstr con)) l;
++				 warn "timeout reached: have to wait, migrate or shutdown %d domains:" (List.length l);
++				 let msgs = List.rev_map (fun con -> Printf.sprintf "%s: %d tx, in: %b, out: %b, perm: %s"
++					 (Connection.get_domstr con)
++					 (Connection.number_of_transactions con)
++					 (Connection.has_input con)
++					 (Connection.has_output con)
++					 (Connection.get_perm con |> Perms.Connection.to_string)
++					) l in
++				 List.iter (warn "Live-update: %s") msgs;
+ 				 if t.force then begin
+ 					 warn "Live update forced, some domain connections may break!";
+ 					 true
+ 				 end else begin
+-					 warn "Live update aborted, try migrating or shutting down the domains/toolstack";
+-					 state := { t with pending = false };
++					 warn "Live update aborted (see above for domains preventing it)";
++					 state := { t with pending = false; result = msgs};
+ 					 false
+ 				end
+ 		end else false
 +
-+(test
-+ (modes native)
-+ (ocamlopt_flags -afl-instrument)
-+ (name xenstored_test)
-+ (modules (:standard \ syslog systemd))
-+ (package xenstored)
-+ (flags (:standard -w -52))
-+ ;;(action (run %{test} -v --seed 364172147))
-+ (libraries unix xen.bus xen.mmap xenstubs crowbar xen.store fmt fmt.tty))
-diff --git a/tools/ocaml/xenstored/test/xenctrl.ml b/tools/ocaml/xenstored/test/xenctrl.ml
-new file mode 100644
-index 0000000000..37d6da0a47
---- /dev/null
-+++ b/tools/ocaml/xenstored/test/xenctrl.ml
-@@ -0,0 +1,48 @@
-+(*
-+ * Copyright (C) 2006-2007 XenSource Ltd.
-+ * Copyright (C) 2008      Citrix Ltd.
-+ * Author Vincent Hanquez <vincent.hanquez@eu.citrix.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License as published
-+ * by the Free Software Foundation; version 2.1 only. with the special
-+ * exception on linking described in file LICENSE.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU Lesser General Public License for more details.
-+ *)
++	let completed () =
++		state := { !state with result = ["OK"] }
+ end
+ 
+ (* packets *)
+diff --git a/tools/ocaml/xenstored/store.ml b/tools/ocaml/xenstored/store.ml
+index e20767372f..a3be2e6bbe 100644
+--- a/tools/ocaml/xenstored/store.ml
++++ b/tools/ocaml/xenstored/store.ml
+@@ -366,7 +366,7 @@ let traversal root_node f =
+ 	let rec _traversal path node =
+ 		f path node;
+ 		let node_path = Path.of_path_and_name path (Symbol.to_string node.Node.name) in
+-		List.iter (_traversal node_path) node.Node.children
++		List.iter (_traversal node_path) (List.rev node.Node.children)
+ 		in
+ 	_traversal [] root_node
+ 
+diff --git a/tools/ocaml/xenstored/utils.ml b/tools/ocaml/xenstored/utils.ml
+index eb79bf0146..6c1603c276 100644
+--- a/tools/ocaml/xenstored/utils.ml
++++ b/tools/ocaml/xenstored/utils.ml
+@@ -115,3 +115,15 @@ let path_validate path connection_path =
+ 	if len > !Define.path_max then raise Define.Invalid_path;
+ 
+ 	abs_path
 +
-+(** *)
-+type domid = int
-+
-+(* ** xenctrl.h ** *)
-+
-+
-+type domaininfo =
-+{
-+	domid             : domid;
-+	dying             : bool;
-+	shutdown          : bool;
-+	shutdown_code     : int;
-+}
-+
-+exception Error of string
-+
-+type handle = unit
-+
-+let interface_open () = ()
-+let interface_close () = ()
-+
-+let domain_getinfo () domid = {
-+  domid = domid;
-+  dying = false;
-+  shutdown = false;
-+  shutdown_code = 0;
-+}
-+
-+let devzero = Unix.openfile "/dev/zero" [] 0
-+let  nullmap () = Xenmmap.mmap devzero Xenmmap.RDWR Xenmmap.PRIVATE 4096 0
-+
-+let map_foreign_range _ _ _ _ = nullmap ()
-diff --git a/tools/ocaml/xenstored/test/xeneventchn.ml b/tools/ocaml/xenstored/test/xeneventchn.ml
-new file mode 100644
-index 0000000000..6612722dc2
---- /dev/null
-+++ b/tools/ocaml/xenstored/test/xeneventchn.ml
-@@ -0,0 +1,50 @@
-+(*
-+ * Copyright (C) 2006-2007 XenSource Ltd.
-+ * Copyright (C) 2008      Citrix Ltd.
-+ * Author Vincent Hanquez <vincent.hanquez@eu.citrix.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License as published
-+ * by the Free Software Foundation; version 2.1 only. with the special
-+ * exception on linking described in file LICENSE.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU Lesser General Public License for more details.
-+ *)
-+
-+type handle = Unix.file_descr * int ref
-+
-+let devnull = Unix.openfile "/dev/null" [] 0
-+let init () = devnull, ref 0
-+let fd (h, _) = h
-+
-+type t = int
-+
-+type virq_t =
-+  | Timer        (* #define VIRQ_TIMER      0 *)
-+  | Debug        (* #define VIRQ_DEBUG      1 *)
-+  | Console      (* #define VIRQ_CONSOLE    2 *)
-+  | Dom_exc      (* #define VIRQ_DOM_EXC    3 *)
-+  | Tbuf         (* #define VIRQ_TBUF       4 *)
-+  | Reserved_5   (* Do not use this value as it's not defined *)
-+  | Debugger     (* #define VIRQ_DEBUGGER   6 *)
-+  | Xenoprof     (* #define VIRQ_XENOPROF   7 *)
-+  | Con_ring     (* #define VIRQ_CON_RING   8 *)
-+  | Pcpu_state   (* #define VIRQ_PCPU_STATE 9 *)
-+  | Mem_event    (* #define VIRQ_MEM_EVENT  10 *)
-+  | Xc_reserved  (* #define VIRQ_XC_RESERVED 11 *)
-+  | Enomem       (* #define VIRQ_ENOMEM     12 *)
-+  | Xenpmu       (* #define VIRQ_XENPMU     13 *)
-+
-+let notify _h _ = ()
-+let bind_interdomain (_h, port) domid remote_port = incr port; !port
-+let bind_virq (_h, port) _ = incr port; !port
-+let bind_dom_exc_virq handle = bind_virq handle Dom_exc
-+let unbind _ _ = ()
-+let pending (_h, port) = !port
-+let unmask _ _ = ()
-+
-+let to_int x = x
-+let of_int x = x
-diff --git a/tools/ocaml/xenstored/test/xenstored_test.ml b/tools/ocaml/xenstored/test/xenstored_test.ml
-new file mode 100644
-index 0000000000..e86b68e867
---- /dev/null
-+++ b/tools/ocaml/xenstored/test/xenstored_test.ml
-@@ -0,0 +1,2 @@
-+open Xenstored
-+let () = ()
++module FD : sig
++     type t = Unix.file_descr
++     val of_int: int -> t
++     val to_int : t -> int
++end = struct
++    type t = Unix.file_descr
++    (* This is like Obj.magic but just for these types,
++       and relies on Unix.file_descr = int *)
++    external to_int : t -> int = "%identity"
++    external of_int : int -> t = "%identity"
++end
 diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
-index 885b397d71..e25b407303 100644
+index 22413271fb..5893af2caa 100644
 --- a/tools/ocaml/xenstored/xenstored.ml
 +++ b/tools/ocaml/xenstored/xenstored.ml
-@@ -265,8 +265,8 @@ let to_file store cons fds file =
+@@ -141,9 +141,12 @@ exception Bad_format of string
+ 
+ let dump_format_header = "$xenstored-dump-format"
+ 
+-let from_channel_f chan domain_f watch_f store_f =
++let from_channel_f chan global_f socket_f domain_f watch_f store_f =
+ 	let unhexify s = Utils.unhexify s in
+-	let getpath s = Store.Path.of_string (Utils.unhexify s) in
++	let getpath s =
++		let u = Utils.unhexify s in
++		debug "Path: %s" u;
++		Store.Path.of_string u in
+ 	let header = input_line chan in
+ 	if header <> dump_format_header then
+ 		raise (Bad_format "header");
+@@ -155,6 +158,12 @@ let from_channel_f chan domain_f watch_f store_f =
+ 			let l = String.split ',' line in
+ 			try
+ 				match l with
++				| "global" :: rw :: _ ->
++					(* there might be more parameters here,
++						e.g. a RO socket from a previous version: ignore it *)
++					global_f ~rw
++				| "socket" :: fd :: [] ->
++					socket_f ~fd:(int_of_string fd)
+ 				| "dom" :: domid :: mfn :: port :: []->
+ 					domain_f (int_of_string domid)
+ 					         (Nativeint.of_string mfn)
+@@ -175,12 +184,28 @@ let from_channel_f chan domain_f watch_f store_f =
+ 		with End_of_file ->
+ 			quit := true
+ 	done;
+-	()
++	info "Completed loading xenstore dump"
+ 
+ let from_channel store cons doms chan =
+ 	(* don't let the permission get on our way, full perm ! *)
+ 	let op = Store.get_ops store Perms.Connection.full_rights in
+-
++	let rwro = ref (None) in
++	let global_f ~rw =
++		let get_listen_sock sockfd =
++			let fd = sockfd |> int_of_string |> Utils.FD.of_int in
++			Unix.listen fd 1;
++			Some fd
++		in
++		rwro := get_listen_sock rw
++	in
++	let socket_f ~fd =
++		let ufd = Utils.FD.of_int fd in
++		let is_valid = try (Unix.fstat ufd).Unix.st_kind = Unix.S_SOCK with _ -> false in
++		if is_valid then
++			Connections.add_anonymous cons ufd
++		else
++			warn "Ignoring invalid socket FD %d" fd
++	in
+ 	let domain_f domid mfn port =
+ 		let ndom =
+ 			if domid > 0 then
+@@ -190,28 +215,38 @@ let from_channel store cons doms chan =
+ 			in
+ 		Connections.add_domain cons ndom;
+ 		in
+-	let watch_f domid path token =
+-		let con = Connections.find_domain cons domid in
+-		ignore (Connections.add_watch cons con path token)
++	let get_con id =
++		if id < 0 then Connections.find cons (Utils.FD.of_int (-id))
++		else Connections.find_domain cons id
++	in
++	let watch_f id path token =
++		ignore (Connections.add_watch cons (get_con id) path token)
+ 		in
+ 	let store_f path perms value =
+ 		op.Store.write path value;
+ 		op.Store.setperms path perms
+ 		in
+-	from_channel_f chan domain_f watch_f store_f
++	from_channel_f chan global_f socket_f domain_f watch_f store_f;
++	!rwro
+ 
+ let from_file store cons doms file =
++	info "Loading xenstore dump from %s" file;
+ 	let channel = open_in file in
+ 	finally (fun () -> from_channel store doms cons channel)
+ 	        (fun () -> close_in channel)
+ 
+-let to_channel store cons chan =
++let to_channel store cons rw chan =
+ 	let hexify s = Utils.hexify s in
+ 
+ 	fprintf chan "%s\n" dump_format_header;
++	let fdopt = function None -> -1 | Some fd ->
++		(* systemd and utils.ml sets it close on exec *)
++		Unix.clear_close_on_exec fd;
++		Utils.FD.to_int fd in
++	fprintf chan "global,%d\n" (fdopt rw);
+ 
+-	(* dump connections related to domains; domid, mfn, eventchn port, watches *)
+-	Connections.iter_domains cons (fun con -> Connection.dump con chan);
++	(* dump connections related to domains: domid, mfn, eventchn port/ sockets, and watches *)
++	Connections.iter cons (fun con -> Connection.dump con chan);
+ 
+ 	(* dump the store *)
+ 	Store.dump_fct store (fun path node ->
+@@ -224,9 +259,9 @@ let to_channel store cons chan =
+ 	()
+ 
+ 
+-let to_file store cons file =
++let to_file store cons fds file =
+ 	let channel = open_out_gen [ Open_wronly; Open_creat; Open_trunc; ] 0o600 file in
+-	finally (fun () -> to_channel store cons channel)
++	finally (fun () -> to_channel store cons fds channel)
  	        (fun () -> close_out channel)
  end
  
--let _ =
--	let cf = do_argv in
-+let main () =
-+	let cf = do_argv () in
- 	let pidfile =
- 		if Sys.file_exists (config_filename cf) then
- 			parse_config (config_filename cf)
+@@ -246,13 +281,13 @@ let _ =
+ 	);
+ 
+ 	let rw_sock =
+-		if cf.disable_socket then
++		if cf.disable_socket || cf.live_reload then
+ 			None
+ 		else
+ 			Some (Unix.handle_unix_error Utils.create_unix_socket Define.xs_daemon_socket)
+ 		in
+ 
+-	if cf.daemonize then
++	if cf.daemonize && not cf.live_reload then
+ 		Unixext.daemonize ()
+ 	else
+ 		printf "Xen Storage Daemon, version %d.%d\n%!"
+@@ -292,10 +327,15 @@ let _ =
+ 	List.iter (fun path ->
+ 		Store.write store Perms.Connection.full_rights path "") Store.Path.specials;
+ 
++	let rw_sock =
+ 	if cf.restart && Sys.file_exists Disk.xs_daemon_database then (
+-		DB.from_file store domains cons Disk.xs_daemon_database;
+-		Event.bind_dom_exc_virq eventchn
+-	) else (
++		let rwro = DB.from_file store domains cons Disk.xs_daemon_database in
++		info "Live reload: database loaded";
++		Event.bind_dom_exc_virq eventchn;
++		Process.LiveUpdate.completed ();
++		rwro
++ 	) else (
++		info "No live reload: regular startup";
+ 		if !Disk.enable then (
+ 			info "reading store from disk";
+ 			Disk.read store
+@@ -309,10 +349,13 @@ let _ =
+ 			Connections.add_domain cons (Domains.create0 domains);
+ 			Event.bind_dom_exc_virq eventchn
+ 		);
+-	);
++		rw_sock
++	) in
+ 
+ 	(* required for xenstore-control to detect availability of live-update *)
+-	Store.mkdir store Perms.Connection.full_rights (Store.Path.of_string "/tool");
++	let toolpath = Store.Path.of_string "/tool" in
++	if not (Store.path_exists store toolpath) then
++		Store.mkdir store Perms.Connection.full_rights toolpath;
+ 	Store.write store Perms.Connection.full_rights
+ 		(Store.Path.of_string "/tool/xenstored") Sys.executable_name;
+ 
+@@ -324,7 +367,7 @@ let _ =
+ 	Sys.set_signal Sys.sigpipe Sys.Signal_ignore;
+ 
+ 	if cf.activate_access_log then begin
+-		let post_rotate () = DB.to_file store cons Disk.xs_daemon_database in
++		let post_rotate () = DB.to_file store cons (None) Disk.xs_daemon_database in
+ 		Logging.init_access_log post_rotate
+ 	end;
+ 
+@@ -367,6 +410,7 @@ let _ =
+ 	let ring_scan_checker dom =
+ 		(* no need to scan domains already marked as for processing *)
+ 		if not (Domain.get_io_credit dom > 0) then
++			debug "Looking up domid %d" (Domain.get_id dom);
+ 			let con = Connections.find_domain cons (Domain.get_id dom) in
+ 			if not (Connection.has_more_work con) then (
+ 				Process.do_output store cons domains con;
+@@ -496,7 +540,7 @@ let _ =
+ 			live_update := Process.LiveUpdate.should_run cons;
+ 			if !live_update || !quit then begin
+ 				(* don't initiate live update if saving state fails *)
+-				DB.to_file store cons Disk.xs_daemon_database;
++				DB.to_file store cons (rw_sock) Disk.xs_daemon_database;
+ 				quit := true;
+ 			end
+ 		with exc ->
 -- 
 2.29.2
 
