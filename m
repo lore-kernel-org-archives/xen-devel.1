@@ -7,39 +7,38 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1947C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 145A6C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:31:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67CA322597
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:31:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67CA322597
+	by mail.kernel.org (Postfix) with ESMTPS id C2FBF22597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:31:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C2FBF22597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67737.121179 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67740.121191 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KVR-000149-IW; Fri, 15 Jan 2021 08:30:53 +0000
+	id 1l0KVU-00019V-1W; Fri, 15 Jan 2021 08:30:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67737.121179; Fri, 15 Jan 2021 08:30:53 +0000
+Received: by outflank-mailman (output) from mailman id 67740.121191; Fri, 15 Jan 2021 08:30:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KVR-00013x-DC; Fri, 15 Jan 2021 08:30:53 +0000
-Received: by outflank-mailman (input) for mailman id 67737;
- Fri, 15 Jan 2021 08:30:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l0KVT-00019M-S7; Fri, 15 Jan 2021 08:30:55 +0000
+Received: by outflank-mailman (input) for mailman id 67740;
+ Fri, 15 Jan 2021 08:30:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KVP-0008HA-Nn
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:51 +0000
+ id 1l0KVS-0008Gh-GS
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:54 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9a7677e3-ac82-400a-b15e-a8514fdffbee;
- Fri, 15 Jan 2021 08:30:13 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id acfd7906-a0f8-44f6-9433-5f2cd337fc91;
+ Fri, 15 Jan 2021 08:30:16 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 12514B981;
+ by mx2.suse.de (Postfix) with ESMTP id C920DB733;
  Fri, 15 Jan 2021 08:30:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,159 +51,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9a7677e3-ac82-400a-b15e-a8514fdffbee
+X-Inumbo-ID: acfd7906-a0f8-44f6-9433-5f2cd337fc91
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610699407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610699408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bNA7yQIV+PPc536mKzqlrDmeBTVpEgsNZ7LgNTDQBwY=;
-	b=CyLjHnWmR3AHAlN03SApDLdrVRvZSAgl/5bsjGK0r7Fs+86r+NtMdlhkvWaIaw2XaE2/zS
-	HcWB9ehgD1/z0YlOL9ka+7S9X4npVkPTe16Nyd64N/8jEe8eWUg8kBb1t88ypd7pqXl6qE
-	mcCyxkcgf4cWE/xJMDC/lB+dt1AiryI=
+	bh=s87EsQNdAKvx1lyH1QYgj42flvmI+1JRarXqGbeqazE=;
+	b=h4Ueuj6ktVUvlU9OkLdiz7S6rQoAbig8eG+Le9/7fJVdo+GjKRNcAQTNKdVbpda48o7Kl8
+	pIhtaaE/f6FHNdD2RmMQ15Lj3Qyz5T8gPOowkawF63bIjM+lA5bBkdCUCVb1CdpodWZkxp
+	06Pnb9KYB32wqCFVs35GSK5drdwnR8U=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Julien Grall <jgrall@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v12 13/27] tools/xenstore: add the basic framework for doing the live update
-Date: Fri, 15 Jan 2021 09:29:46 +0100
-Message-Id: <20210115083000.14186-14-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH v12 26/27] tools/xenstore: handle dying domains in live update
+Date: Fri, 15 Jan 2021 09:29:59 +0100
+Message-Id: <20210115083000.14186-27-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
 References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the main framework for executing the live update. This for now
-only defines the basic execution steps with empty dummy functions.
-This final step returning means failure, as in case of success the
-new executable will have taken over.
+From: Julien Grall <jgrall@amazon.com>
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+A domain could just be dying when live updating Xenstore, so the case
+of not being able to map the ring page or to connect to the event
+channel must be handled gracefully.
+
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
 V4:
-- const (Julien Grall)
+- new patch (Julien, I hope adding the Sob: is okay?)
 
-V11:
-- split lu_check_lu_allowed()
-- use delay_request() framework
-
-V12:
-- fix mangled patch
+V10:
+- removed "XXX..." comment (Julien Grall)
 ---
- tools/xenstore/xenstored_control.c | 69 +++++++++++++++++++++++++++++-
- 1 file changed, 67 insertions(+), 2 deletions(-)
+ tools/xenstore/xenstored_control.c |  7 +++++++
+ tools/xenstore/xenstored_domain.c  | 25 +++++++++++++++++--------
+ tools/xenstore/xenstored_domain.h  |  2 ++
+ 3 files changed, 26 insertions(+), 8 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 2e0827b9ef..d3da6b8111 100644
+index b8195eed41..3c212cc4d4 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -22,6 +22,7 @@ Interactive commands for Xen Store Daemon.
- #include <stdlib.h>
- #include <string.h>
- #include <syslog.h>
-+#include <time.h>
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <unistd.h>
-@@ -44,6 +45,11 @@ struct live_update {
- #endif
+@@ -561,6 +561,13 @@ void lu_read_state(void)
+ 	lu_close_dump_state(&state);
  
- 	char *cmdline;
+ 	talloc_free(ctx);
 +
-+	/* Start parameters. */
-+	bool force;
-+	unsigned int timeout;
-+	time_t started_at;
- };
- 
- static struct live_update *lu_status;
-@@ -304,6 +310,58 @@ static const char *lu_arch(const void *ctx, struct connection *conn,
++	/*
++	 * We may have missed the VIRQ_DOM_EXC notification and a domain may
++	 * have died while we were live-updating. So check all the domains are
++	 * still alive.
++	 */
++	check_domains(true);
  }
- #endif
  
-+static bool lu_check_lu_allowed(void)
-+{
-+	return true;
-+}
-+
-+static const char *lu_reject_reason(const void *ctx)
-+{
-+	return "BUSY";
-+}
-+
-+static const char *lu_dump_state(const void *ctx, struct connection *conn)
-+{
-+	return NULL;
-+}
-+
-+static const char *lu_activate_binary(const void *ctx)
-+{
-+	return "Not yet implemented.";
-+}
-+
-+static bool do_lu_start(struct delayed_request *req)
-+{
-+	time_t now = time(NULL);
-+	const char *ret;
-+	char *resp;
-+
-+	if (!lu_check_lu_allowed()) {
-+		if (now < lu_status->started_at + lu_status->timeout)
-+			return false;
-+		if (!lu_status->force) {
-+			ret = lu_reject_reason(req);
-+			goto out;
-+		}
-+	}
-+
-+	/* Dump out internal state, including "OK" for live update. */
-+	ret = lu_dump_state(req->in, lu_status->conn);
-+	if (!ret) {
-+		/* Perform the activation of new binary. */
-+		ret = lu_activate_binary(req->in);
-+	}
-+
-+	/* We will reach this point only in case of failure. */
-+ out:
-+	talloc_free(lu_status);
-+
-+	resp = talloc_strdup(req->in, ret);
-+	send_reply(lu_status->conn, XS_CONTROL, resp, strlen(resp) + 1);
-+
-+	return true;
-+}
-+
- static const char *lu_start(const void *ctx, struct connection *conn,
- 			    bool force, unsigned int to)
+ static const char *lu_activate_binary(const void *ctx)
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 6934f1bc89..cbeb2a309c 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -220,7 +220,7 @@ static bool get_domain_info(unsigned int domid, xc_dominfo_t *dominfo)
+ 	       dominfo->domid == domid;
+ }
+ 
+-static void domain_cleanup(void)
++void check_domains(bool restore)
  {
-@@ -317,8 +375,11 @@ static const char *lu_start(const void *ctx, struct connection *conn,
- 		return "Kernel not complete.";
- #endif
- 
--	/* Will be replaced by real live-update later. */
--	talloc_free(lu_status);
-+	lu_status->force = force;
-+	lu_status->timeout = to;
-+	lu_status->started_at = time(NULL);
-+
-+	errno = delay_request(conn, conn->in, do_lu_start, NULL);
- 
- 	return NULL;
- }
-@@ -356,6 +417,10 @@ static int do_control_lu(void *ctx, struct connection *conn,
- 				return EINVAL;
+ 	xc_dominfo_t dominfo;
+ 	struct domain *domain;
+@@ -244,7 +244,14 @@ static void domain_cleanup(void)
+ 				domain->shutdown = true;
+ 				notify = 1;
+ 			}
+-			if (!dominfo.dying)
++			/*
++			 * On Restore, we may have been unable to remap the
++			 * interface and the port. As we don't know whether
++			 * this was because of a dying domain, we need to
++			 * check if the interface and port are still valid.
++			 */
++			if (!dominfo.dying && domain->port &&
++			    domain->interface)
+ 				continue;
  		}
- 		ret = lu_start(ctx, conn, force, to);
-+		if (errno)
-+			return errno;
-+		if (!ret)
-+			return 0;
- 	} else {
- 		errno = 0;
- 		ret = lu_arch(ctx, conn, vec, num);
+ 		if (domain->conn) {
+@@ -270,7 +277,7 @@ void handle_event(void)
+ 		barf_perror("Failed to read from event fd");
+ 
+ 	if (port == virq_port)
+-		domain_cleanup();
++		check_domains(false);
+ 
+ 	if (xenevtchn_unmask(xce_handle, port) == -1)
+ 		barf_perror("Failed to write to event fd");
+@@ -442,14 +449,16 @@ static struct domain *introduce_domain(const void *ctx,
+ 	if (!domain->introduced) {
+ 		interface = is_master_domain ? xenbus_map()
+ 					     : map_interface(domid);
+-		if (!interface)
++		if (!interface && !restore)
+ 			return NULL;
+ 		if (new_domain(domain, port, restore)) {
+ 			rc = errno;
+-			if (is_master_domain)
+-				unmap_xenbus(interface);
+-			else
+-				unmap_interface(interface);
++			if (interface) {
++				if (is_master_domain)
++					unmap_xenbus(interface);
++				else
++					unmap_interface(interface);
++			}
+ 			errno = rc;
+ 			return NULL;
+ 		}
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index 8f3b4e0f8b..1cc1c03ed8 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -21,6 +21,8 @@
+ 
+ void handle_event(void);
+ 
++void check_domains(bool restore);
++
+ /* domid, mfn, eventchn, path */
+ int do_introduce(struct connection *conn, struct buffered_data *in);
+ 
 -- 
 2.26.2
 
