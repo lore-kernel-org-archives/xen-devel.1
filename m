@@ -2,45 +2,45 @@ Return-Path: <SRS0=GqSC=GS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37919C433E6
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A90FC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E95E922597
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E95E922597
+	by mail.kernel.org (Postfix) with ESMTPS id BF56E22597
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 08:30:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BF56E22597
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.67720.121071 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.67721.121083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KV4-0000Fv-LP; Fri, 15 Jan 2021 08:30:30 +0000
+	id 1l0KV8-0000MS-0Z; Fri, 15 Jan 2021 08:30:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 67720.121071; Fri, 15 Jan 2021 08:30:30 +0000
+Received: by outflank-mailman (output) from mailman id 67721.121083; Fri, 15 Jan 2021 08:30:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0KV4-0000Fg-Es; Fri, 15 Jan 2021 08:30:30 +0000
-Received: by outflank-mailman (input) for mailman id 67720;
- Fri, 15 Jan 2021 08:30:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l0KV7-0000ME-Qy; Fri, 15 Jan 2021 08:30:33 +0000
+Received: by outflank-mailman (input) for mailman id 67721;
+ Fri, 15 Jan 2021 08:30:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=v6X5=GS=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0KV3-0008Gh-FP
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:29 +0000
+ id 1l0KV5-0008HA-NO
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 08:30:31 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 376dc9d4-0c26-4f59-9a6f-0a1f6df6d6ad;
- Fri, 15 Jan 2021 08:30:14 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 706bb988-6d4b-4e34-a634-1d3daf47b475;
+ Fri, 15 Jan 2021 08:30:10 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 68486B95F;
- Fri, 15 Jan 2021 08:30:07 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id D6D2BB96A;
+ Fri, 15 Jan 2021 08:30:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,188 +52,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 376dc9d4-0c26-4f59-9a6f-0a1f6df6d6ad
+X-Inumbo-ID: 706bb988-6d4b-4e34-a634-1d3daf47b475
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610699408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1610699407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Dqtva9i5hOWwd+C/RFxrhHjBGyOaW9BmEt02J1LO82U=;
-	b=nvyVrZGTnTv22kXzkMtZ4QopXiLwHKPd9l83UQBx0kogCA6BZ5PjVlGz/ZV2nOLUFZRZKv
-	bX4IIGQSCnnc2R5qIyn5vZ9/JcZZQ8yitODd42QeLYajsLzprSfEzHl6qZlMLR8yv9ceTD
-	xbjQcwwAEYstGN5cmZYWTg7gd02pthk=
+	bh=O/DEREX1kMq5zoH/CbxrwUSJ5+uKCnvjpzSN2JoigQo=;
+	b=Hq87GsTw5jUuS8YCiKWxuNTNUr2XJGn3eDsQTF2hh8LRfy99wO31DrsKUdlMzR/KCuhBjq
+	kCc2TpQLn0VH+hk9aFKPXF1eEvWlpR3bUnbd8U/5MoZeQ7AaGidNhPJdoMcvIJt3KvTwc3
+	RFEYfFZ6raKoZiDrB3ztFtrLa5sTHt0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v12 21/27] tools/xenstore: read internal state when doing live upgrade
-Date: Fri, 15 Jan 2021 09:29:54 +0100
-Message-Id: <20210115083000.14186-22-jgross@suse.com>
+	Julien Grall <jgrall@amazon.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH v12 06/27] tools/xenstore: refactor XS_CONTROL handling
+Date: Fri, 15 Jan 2021 09:29:39 +0100
+Message-Id: <20210115083000.14186-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210115083000.14186-1-jgross@suse.com>
 References: <20210115083000.14186-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-When started due to a live upgrade read the internal state and apply
-it to the data base and internal structures.
+In order to allow control commands with binary data refactor handling
+of XS_CONTROL:
 
-Add the main control functions for that.
-
-For now only handle the daemon case.
+- get primary command first
+- add maximum number of additional parameters to pass to command
+  handler
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Paul Durrant <paul@xen.org>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-V4:
-- directly mmap dump state file (Julien Grall)
-- use syslog() instead of xprintf() (Julien Grall)
+V2:
+- add comment regarding max_pars (Pawel Wieczorkiewicz)
 
-V8:
-- remove state file after reading it (Julien Grall)
+V3:
+- addressed Paul's comments
 ---
- tools/xenstore/xenstored_control.c | 102 ++++++++++++++++++++++++++++-
- 1 file changed, 101 insertions(+), 1 deletion(-)
+ tools/xenstore/xenstored_control.c | 34 ++++++++++++++++++++----------
+ tools/xenstore/xenstored_core.c    |  3 +--
+ tools/xenstore/xenstored_core.h    |  1 +
+ 3 files changed, 25 insertions(+), 13 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 5151c1448e..3bced9e39e 100644
+index 8d48ab4820..8d29db8270 100644
 --- a/tools/xenstore/xenstored_control.c
 +++ b/tools/xenstore/xenstored_control.c
-@@ -67,6 +67,14 @@ struct live_update {
+@@ -30,6 +30,14 @@ struct cmd_s {
+ 	char *cmd;
+ 	int (*func)(void *, struct connection *, char **, int);
+ 	char *pars;
++	/*
++	 * max_pars can be used to limit the size of the parameter vector,
++	 * e.g. in case of large binary parts in the parameters.
++	 * The command is included in the count, so 1 means just the command
++	 * without any parameter.
++	 * 0 == no limit (the default)
++	 */
++	unsigned int max_pars;
+ };
  
- static struct live_update *lu_status;
+ static int do_control_check(void *ctx, struct connection *conn,
+@@ -194,25 +202,29 @@ static int do_control_help(void *ctx, struct connection *conn,
  
-+struct lu_dump_state {
-+	void *buf;
-+	unsigned int size;
-+#ifndef __MINIOS__
-+	int fd;
-+#endif
-+};
-+
- static int lu_destroy(void *data)
+ int do_control(struct connection *conn, struct buffered_data *in)
  {
- #ifdef __MINIOS__
-@@ -318,6 +326,14 @@ static void lu_dump_close(FILE *fp)
+-	int num;
+-	int cmd;
+-	char **vec;
++	unsigned int cmd, num, off;
++	char **vec = NULL;
  
- 	fclose(fp);
+ 	if (conn->id != 0)
+ 		return EACCES;
+ 
+-	num = xs_count_strings(in->buffer, in->used);
+-	if (num < 1)
++	off = get_string(in, 0);
++	if (!off)
++		return EINVAL;
++	for (cmd = 0; cmd < ARRAY_SIZE(cmds); cmd++)
++		if (streq(in->buffer, cmds[cmd].cmd))
++			break;
++	if (cmd == ARRAY_SIZE(cmds))
+ 		return EINVAL;
++
++	num = xs_count_strings(in->buffer, in->used);
++	if (cmds[cmd].max_pars)
++		num = min(num, cmds[cmd].max_pars);
+ 	vec = talloc_array(in, char *, num);
+ 	if (!vec)
+ 		return ENOMEM;
+-	if (get_strings(in, vec, num) != num)
++	if (get_strings(in, vec, num) < num)
+ 		return EIO;
+ 
+-	for (cmd = 0; cmd < ARRAY_SIZE(cmds); cmd++)
+-		if (streq(vec[0], cmds[cmd].cmd))
+-			return cmds[cmd].func(in, conn, vec + 1, num - 1);
+-
+-	return EINVAL;
++	return cmds[cmd].func(in, conn, vec + 1, num - 1);
  }
-+
-+static void lu_get_dump_state(struct lu_dump_state *state)
-+{
-+}
-+
-+static void lu_close_dump_state(struct lu_dump_state *state)
-+{
-+}
- #else
- static const char *lu_binary(const void *ctx, struct connection *conn,
- 			     const char *filename)
-@@ -373,6 +389,50 @@ static void lu_dump_close(FILE *fp)
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 50986f8b29..e1b92c3dc8 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -620,8 +620,7 @@ static struct buffered_data *new_buffer(void *ctx)
+ /* Return length of string (including nul) at this offset.
+  * If there is no nul, returns 0 for failure.
+  */
+-static unsigned int get_string(const struct buffered_data *data,
+-			       unsigned int offset)
++unsigned int get_string(const struct buffered_data *data, unsigned int offset)
  {
- 	fclose(fp);
- }
-+
-+static void lu_get_dump_state(struct lu_dump_state *state)
-+{
-+	char *filename;
-+	struct stat statbuf;
-+
-+	state->size = 0;
-+
-+	filename = talloc_asprintf(NULL, "%s/state_dump", xs_daemon_rootdir());
-+	if (!filename)
-+		barf("Allocation failure");
-+
-+	state->fd = open(filename, O_RDONLY);
-+	talloc_free(filename);
-+	if (state->fd < 0)
-+		return;
-+	if (fstat(state->fd, &statbuf) != 0)
-+		goto out_close;
-+	state->size = statbuf.st_size;
-+
-+	state->buf = mmap(NULL, state->size, PROT_READ, MAP_PRIVATE,
-+			  state->fd, 0);
-+	if (state->buf == MAP_FAILED) {
-+		state->size = 0;
-+		goto out_close;
-+	}
-+
-+	return;
-+
-+ out_close:
-+	close(state->fd);
-+}
-+
-+static void lu_close_dump_state(struct lu_dump_state *state)
-+{
-+	char *filename;
-+
-+	munmap(state->buf, state->size);
-+	close(state->fd);
-+
-+	filename = talloc_asprintf(NULL, "%s/state_dump", xs_daemon_rootdir());
-+	unlink(filename);
-+	talloc_free(filename);
-+}
- #endif
+ 	const char *nul;
  
- static bool lu_check_lu_allowed(void)
-@@ -455,7 +515,47 @@ static const char *lu_dump_state(const void *ctx, struct connection *conn)
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index fb59d862a2..27826c125c 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -142,6 +142,7 @@ const char *onearg(struct buffered_data *in);
+ /* Break input into vectors, return the number, fill in up to num of them. */
+ unsigned int get_strings(struct buffered_data *data,
+ 			 char *vec[], unsigned int num);
++unsigned int get_string(const struct buffered_data *data, unsigned int offset);
  
- void lu_read_state(void)
- {
--	xprintf("live-update: read state\n");
-+	struct lu_dump_state state;
-+	struct xs_state_record_header *head;
-+	void *ctx = talloc_new(NULL); /* Work context for subfunctions. */
-+	struct xs_state_preamble *pre;
-+
-+	syslog(LOG_INFO, "live-update: read state\n");
-+	lu_get_dump_state(&state);
-+	if (state.size == 0)
-+		barf_perror("No state found after live-update");
-+
-+	pre = state.buf;
-+	if (memcmp(pre->ident, XS_STATE_IDENT, sizeof(pre->ident)) ||
-+	    pre->version != htobe32(XS_STATE_VERSION) ||
-+	    pre->flags != XS_STATE_FLAGS)
-+		barf("Unknown record identifier");
-+	for (head = state.buf + sizeof(*pre);
-+	     head->type != XS_STATE_TYPE_END &&
-+		(void *)head - state.buf < state.size;
-+	     head = (void *)head + sizeof(*head) + head->length) {
-+		switch (head->type) {
-+		case XS_STATE_TYPE_GLOBAL:
-+			break;
-+		case XS_STATE_TYPE_CONN:
-+			break;
-+		case XS_STATE_TYPE_WATCH:
-+			break;
-+		case XS_STATE_TYPE_TA:
-+			xprintf("live-update: ignore transaction record\n");
-+			break;
-+		case XS_STATE_TYPE_NODE:
-+			break;
-+		default:
-+			xprintf("live-update: unknown state record %08x\n",
-+				head->type);
-+			break;
-+		}
-+	}
-+
-+	lu_close_dump_state(&state);
-+
-+	talloc_free(ctx);
- }
- 
- static const char *lu_activate_binary(const void *ctx)
+ void send_reply(struct connection *conn, enum xsd_sockmsg_type type,
+ 		const void *data, unsigned int len);
 -- 
 2.26.2
 
