@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81F7EC433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 867B7C433E6
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 36F0C23A5E
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 36F0C23A5E
+	by mail.kernel.org (Postfix) with ESMTPS id 3091123A5A
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Jan 2021 22:59:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3091123A5A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68772.123236 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68776.123253 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Y3U-0003Bk-Aa; Fri, 15 Jan 2021 22:58:56 +0000
+	id 1l0Y3V-0003Da-3l; Fri, 15 Jan 2021 22:58:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68772.123236; Fri, 15 Jan 2021 22:58:56 +0000
+Received: by outflank-mailman (output) from mailman id 68776.123253; Fri, 15 Jan 2021 22:58:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0Y3U-0003BQ-6i; Fri, 15 Jan 2021 22:58:56 +0000
-Received: by outflank-mailman (input) for mailman id 68772;
- Fri, 15 Jan 2021 22:58:54 +0000
+	id 1l0Y3U-0003DG-RV; Fri, 15 Jan 2021 22:58:56 +0000
+Received: by outflank-mailman (input) for mailman id 68776;
+ Fri, 15 Jan 2021 22:58:55 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hVL8=GS=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1l0Xyv-0001Wj-2v
- for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:54:13 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1l0XyR-0001Wj-1U
+ for xen-devel@lists.xenproject.org; Fri, 15 Jan 2021 22:53:43 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 629a213d-4dfe-4247-bf5f-c08231a24f78;
- Fri, 15 Jan 2021 22:52:49 +0000 (UTC)
+ id ced2fe17-0b7e-4cba-b8c8-82a98235f323;
+ Fri, 15 Jan 2021 22:52:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,37 +48,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 629a213d-4dfe-4247-bf5f-c08231a24f78
+X-Inumbo-ID: ced2fe17-0b7e-4cba-b8c8-82a98235f323
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1610751169;
+  d=citrix.com; s=securemail; t=1610751161;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=1fmXH+SV34jkCGcRhwIYTVVlbOpuedtyRttAjPwZ3tU=;
-  b=CcVuX5iQNs+fVN63dfSRrLsvA6q/seyVFIkFDcNfMshZNM9Zj/oeWIaT
-   yWVvjYZeLE7utfh4e4joa2CAmoq0335CYfWqitAN2fOMefSsD6hLl2lPo
-   jqTK5rmY0QcMwhqgQBBVBlwJfYe7uMgHvvgVoucDopKQIloAdzVuW8SSl
-   8=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: T6uE9a3+Hbivy7ic5p4Ho0uLZWHlEkl/q9h05/gdILwahYLCt++JDR8X6X08cYBMinvb6OivdF
- k+wPABfO6WAvOhXxAmB0ZcqtXv1dihG/xvPO1wfuV5Z9rJq3o6r9tnaDbC8UJiU/CriNC5PeKS
- 3wNLaVbm7iqU/z1uyFMTPCOOLjbEvxsTftN5AUQ8HxSYUf77VIfzRwM0dpye0XtkGw8joJBB03
- Cnye1B64S1R6F0ywp2GmreXqXGUvj0miEoHp1xoz6N3Sc1RuluJbMVIwv7NWjAgA2klCqqDRGb
- 5Tk=
+  bh=4ctOgSWO09hqKqGkR6ZkgXXqWAiaRVGebfeBTPPCY0I=;
+  b=EdTEXkyNh0I1UbsJqBGs52L8iO3xrO6xPJmkkQQVLnixFje/GBxMzSq1
+   ud463C9/yzAZE2aqy1iIQ7cVZHjiUENBx1wqPzx05SdePHpNaV+8P01tO
+   hRsIvwbjPJEDjgsuHefVCQZfIjKse4QvYlXIuj0ErUK2CP4sBsTAzDyw6
+   c=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Pn3IpfsYIeiLaqfg+u1KQDW6u72YGkslMb3EXP8c2D4Z5kRJ6tutZQgp2nt78k7Ztn5/m/sBrR
+ tLQvnTPuQkNtKQbZqWb+yX6d8eRuxZFFzJzbmAqMHAIIZT2RwVOKdRjhrPhlJKJYbjvb9uQeVy
+ DbNNxwaxQ0T40b4wX2pPFnucXRfDDcdFZCqqLS2uanX8QM4xTnU43hNIAVTlsSmlQYzHHThKpb
+ eej3rHt2ECdbMpap1B/EVqO+oRWKddqjMtUUsz3wwjoDtiu4T3RH8m8nUUi0hK1/YFRfkPgOYg
+ bPQ=
 X-SBRS: 5.1
-X-MesageID: 35435287
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 35217500
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,350,1602561600"; 
-   d="scan'208";a="35435287"
+   d="scan'208";a="35217500"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
  Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 2/2] tools/ocaml/libs/xc: backward compatible domid control at domain creation time
-Date: Fri, 15 Jan 2021 22:28:53 +0000
-Message-ID: <610924e3a2a426cfe1d7a614c095c15a095c3475.1610748224.git.edvin.torok@citrix.com>
+Subject: [PATCH v4 1/4] tools/ocaml/xenstored: replace hand rolled GC with weak GC references
+Date: Fri, 15 Jan 2021 22:28:55 +0000
+Message-ID: <c455755573a079ebad208c1933719e251b589102.1610748224.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1610748224.git.edvin.torok@citrix.com>
 References: <cover.1610748224.git.edvin.torok@citrix.com>
@@ -86,87 +86,271 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-One can specify the domid to use when creating the domain, but this was hardcoded to 0.
+The code here is attempting to reduce memory usage by sharing common
+substrings in the tree: it replaces strings with ints, and keeps a
+string->int map that gets manually garbage collected using a hand-rolled
+mark and sweep algorithm.
 
-Keep the existing `domain_create` function, and make domid an optional argument.
-When not specified default to 0.
-
-A new version of xenopsd can choose to start using this, while old versions of xenopsd will keep
-building and using the old API.
-(The ABI will change, but that changes every time a function is introduced/removed or modified)
-
-Controlling the domid can be useful during testing or migration.
+This is unnecessary: OCaml already has a mark-and-sweep Garbage
+Collector runtime, and sharing of common strings in tree nodes
+can be achieved through Weak references: if the string hasn't been seen
+yet it gets added to the Weak reference table, and if it has we use the
+entry from the table instead, thus storing a string only once.
+When the string is no longer referenced OCaml's GC will drop it from the
+weak table: there is no need to manually do a mark-and-sweep, or to tell
+OCaml when to drop it.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 Acked-by: Christian Lindig <christian.lindig@citrix.com>
----
-Changed since V1:
-* introduced an optional ?domid for better backwards compatibility
-* use CAMLparam3 because we have an additional parameter
----
- tools/ocaml/libs/xc/xenctrl.ml      | 5 ++++-
- tools/ocaml/libs/xc/xenctrl.mli     | 4 ++--
- tools/ocaml/libs/xc/xenctrl_stubs.c | 6 +++---
- 3 files changed, 9 insertions(+), 6 deletions(-)
 
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index e878699b0a..e0a47c4769 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -179,9 +179,12 @@ let with_intf f =
- 		handle := Some h;
- 		f h
+---
+Changed since V3:
+* repost after XSA to avoid conflicts
+---
+ tools/ocaml/xenstored/connection.ml |  3 --
+ tools/ocaml/xenstored/history.ml    | 14 ------
+ tools/ocaml/xenstored/store.ml      | 11 ++---
+ tools/ocaml/xenstored/symbol.ml     | 68 ++++++-----------------------
+ tools/ocaml/xenstored/symbol.mli    | 21 ++-------
+ tools/ocaml/xenstored/xenstored.ml  | 16 +------
+ 6 files changed, 24 insertions(+), 109 deletions(-)
+
+diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
+index 1cf24beafd..51041dde8e 100644
+--- a/tools/ocaml/xenstored/connection.ml
++++ b/tools/ocaml/xenstored/connection.ml
+@@ -334,9 +334,6 @@ let has_more_work con =
  
--external domain_create: handle -> domctl_create_config -> domid
-+external domain_create_stub: handle -> domid -> domctl_create_config -> domid
-        = "stub_xc_domain_create"
+ let incr_ops con = con.stat_nb_ops <- con.stat_nb_ops + 1
  
-+let domain_create handle ?(domid=0) config =
-+	domain_create_stub handle domid config
-+
- external domain_sethandle: handle -> domid -> string -> unit
-        = "stub_xc_domain_sethandle"
+-let mark_symbols con =
+-	Hashtbl.iter (fun _ t -> Store.mark_symbols (Transaction.get_store t)) con.transactions
+-
+ let stats con =
+ 	Hashtbl.length con.watches, con.stat_nb_ops
  
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index e64907df8e..84311fa33d 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -143,8 +143,8 @@ val get_handle: unit -> handle option
-  * would invalidate the handle that with_intf passes to its argument. *)
- val close_handle: unit -> unit
+diff --git a/tools/ocaml/xenstored/history.ml b/tools/ocaml/xenstored/history.ml
+index 3899353da8..ba5c9cb571 100644
+--- a/tools/ocaml/xenstored/history.ml
++++ b/tools/ocaml/xenstored/history.ml
+@@ -22,20 +22,6 @@ type history_record = {
  
--external domain_create : handle -> domctl_create_config -> domid
--  = "stub_xc_domain_create"
-+val domain_create: handle -> ?domid:int -> domctl_create_config -> domid
-+
- external domain_sethandle : handle -> domid -> string -> unit = "stub_xc_domain_sethandle"
- external domain_max_vcpus : handle -> domid -> int -> unit
-   = "stub_xc_domain_max_vcpus"
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index 94aba38a42..9a8dbe5579 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -175,9 +175,9 @@ static unsigned int ocaml_list_to_c_bitmap(value l)
- 	return val;
+ let history : history_record list ref = ref []
+ 
+-(* Called from periodic_ops to ensure we don't discard symbols that are still needed. *)
+-(* There is scope for optimisation here, since in consecutive commits one commit's `after`
+- * is the same thing as the next commit's `before`, but not all commits in history are
+- * consecutive. *)
+-let mark_symbols () =
+-	(* There are gaps where dom0's commits are missing. Otherwise we could assume that
+-	 * each element's `before` is the same thing as the next element's `after`
+-	 * since the next element is the previous commit *)
+-	List.iter (fun hist_rec ->
+-			Store.mark_symbols hist_rec.before;
+-			Store.mark_symbols hist_rec.after;
+-		)
+-		!history
+-
+ (* Keep only enough commit-history to protect the running transactions that we are still tracking *)
+ (* There is scope for optimisation here, replacing List.filter with something more efficient,
+  * probably on a different list-like structure. *)
+diff --git a/tools/ocaml/xenstored/store.ml b/tools/ocaml/xenstored/store.ml
+index a3be2e6bbe..9c226e4ef7 100644
+--- a/tools/ocaml/xenstored/store.ml
++++ b/tools/ocaml/xenstored/store.ml
+@@ -46,18 +46,18 @@ let add_child node child =
+ 
+ let exists node childname =
+ 	let childname = Symbol.of_string childname in
+-	List.exists (fun n -> n.name = childname) node.children
++	List.exists (fun n -> Symbol.equal n.name childname) node.children
+ 
+ let find node childname =
+ 	let childname = Symbol.of_string childname in
+-	List.find (fun n -> n.name = childname) node.children
++	List.find (fun n -> Symbol.equal n.name childname) node.children
+ 
+ let replace_child node child nchild =
+ 	(* this is the on-steroid version of the filter one-replace one *)
+ 	let rec replace_one_in_list l =
+ 		match l with
+ 		| []                               -> []
+-		| h :: tl when h.name = child.name -> nchild :: tl
++		| h :: tl when Symbol.equal h.name child.name -> nchild :: tl
+ 		| h :: tl                          -> h :: replace_one_in_list tl
+ 		in
+ 	{ node with children = (replace_one_in_list node.children) }
+@@ -67,7 +67,7 @@ let del_childname node childname =
+ 	let rec delete_one_in_list l =
+ 		match l with
+ 		| []                        -> raise Not_found
+-		| h :: tl when h.name = sym -> tl
++		| h :: tl when Symbol.equal h.name sym -> tl
+ 		| h :: tl                   -> h :: delete_one_in_list tl
+ 		in
+ 	{ node with children = (delete_one_in_list node.children) }
+@@ -489,9 +489,6 @@ let copy store = {
+ 	quota = Quota.copy store.quota;
  }
  
--CAMLprim value stub_xc_domain_create(value xch, value config)
-+CAMLprim value stub_xc_domain_create(value xch, value wanted_domid, value config)
- {
--	CAMLparam2(xch, config);
-+	CAMLparam3(xch, wanted_domid, config);
- 	CAMLlocal2(l, arch_domconfig);
+-let mark_symbols store =
+-	Node.recurse (fun node -> Symbol.mark_as_used node.Node.name) store.root
+-
+ let incr_transaction_coalesce store =
+ 	store.stat_transaction_coalesce <- store.stat_transaction_coalesce + 1
+ let incr_transaction_abort store =
+diff --git a/tools/ocaml/xenstored/symbol.ml b/tools/ocaml/xenstored/symbol.ml
+index 4420c6a4d7..2b41d120f6 100644
+--- a/tools/ocaml/xenstored/symbol.ml
++++ b/tools/ocaml/xenstored/symbol.ml
+@@ -14,63 +14,23 @@
+  * GNU Lesser General Public License for more details.
+  *)
  
- 	/* Mnemonics for the named fields inside domctl_create_config */
-@@ -191,7 +191,7 @@ CAMLprim value stub_xc_domain_create(value xch, value config)
- #define VAL_MAX_MAPTRACK_FRAMES Field(config, 7)
- #define VAL_ARCH                Field(config, 8)
+-type t = int
++module WeakTable = Weak.Make(struct
++    type t = string
++    let equal (x:string) (y:string) = (x = y)
++    let hash = Hashtbl.hash
++end)
  
--	uint32_t domid = 0;
-+	uint32_t domid = Int_val(wanted_domid);
- 	int result;
- 	struct xen_domctl_createdomain cfg = {
- 		.ssidref = Int32_val(VAL_SSIDREF),
+-type 'a record = { data: 'a; mutable garbage: bool }
+-let int_string_tbl : (int,string record) Hashtbl.t = Hashtbl.create 1024
+-let string_int_tbl : (string,int) Hashtbl.t = Hashtbl.create 1024
++type t = string
+ 
+-let created_counter = ref 0
+-let used_counter = ref 0
++let tbl = WeakTable.create 1024
+ 
+-let count = ref 0
+-let rec fresh () =
+-	if Hashtbl.mem int_string_tbl !count
+-	then begin
+-		incr count;
+-		fresh ()
+-	end else
+-		!count
++let of_string s = WeakTable.merge tbl s
++let to_string s = s
+ 
+-let new_record v = { data=v; garbage=false }
+-
+-let of_string name =
+-	if Hashtbl.mem string_int_tbl name
+-	then begin
+-		incr used_counter;
+-		Hashtbl.find string_int_tbl name
+-	end else begin
+-		let i = fresh () in
+-		incr created_counter;
+-		Hashtbl.add string_int_tbl name i;
+-		Hashtbl.add int_string_tbl i (new_record name);
+-		i
+-	end
+-
+-let to_string i =
+-	(Hashtbl.find int_string_tbl i).data
+-
+-let mark_all_as_unused () =
+-	Hashtbl.iter (fun _ v -> v.garbage <- true) int_string_tbl
+-
+-let mark_as_used symb =
+-	let record1 = Hashtbl.find int_string_tbl symb in
+-		record1.garbage <- false
+-
+-let garbage () =
+-	let records = Hashtbl.fold (fun symb record accu ->
+-		if record.garbage then (symb, record.data) :: accu else accu
+-	) int_string_tbl [] in
+-	let remove (int,string) =
+-		Hashtbl.remove int_string_tbl int;
+-		Hashtbl.remove string_int_tbl string
+-	in
+-	created_counter := 0;
+-	used_counter := 0;
+-	List.iter remove records
++let equal a b =
++  (* compare using physical equality, both members have to be part of the above weak table *)
++  a == b
+ 
+ let stats () =
+-	Hashtbl.length string_int_tbl
+-
+-let created () = !created_counter
+-let used () = !used_counter
++  let len, entries, _, _, _, _ = WeakTable.stats tbl in
++  len, entries
+diff --git a/tools/ocaml/xenstored/symbol.mli b/tools/ocaml/xenstored/symbol.mli
+index c3c9f6e2f8..586ab57507 100644
+--- a/tools/ocaml/xenstored/symbol.mli
++++ b/tools/ocaml/xenstored/symbol.mli
+@@ -29,24 +29,11 @@ val of_string : string -> t
+ val to_string : t -> string
+ (** Convert a symbol into a string. *)
+ 
+-(** {6 Garbage Collection} *)
+-
+-(** Symbols need to be regulary garbage collected. The following steps should be followed:
+--     mark all the knowns symbols as unused (with [mark_all_as_unused]);
+--     mark all the symbols really usefull as used (with [mark_as_used]); and
+--     finally, call [garbage] *)
+-
+-val mark_all_as_unused : unit -> unit
+-val mark_as_used : t -> unit
+-val garbage : unit -> unit
++val equal: t -> t -> bool
++(** Compare two symbols for equality *)
+ 
+ (** {6 Statistics } *)
+ 
+-val stats : unit -> int
+-(** Get the number of used symbols. *)
++val stats : unit -> int * int
++(** Get the table size and number of entries. *)
+ 
+-val created : unit -> int
+-(** Returns the number of symbols created since the last GC. *)
+-
+-val used : unit -> int
+-(** Returns the number of existing symbols used since the last GC *)
+diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
+index 5893af2caa..885b397d71 100644
+--- a/tools/ocaml/xenstored/xenstored.ml
++++ b/tools/ocaml/xenstored/xenstored.ml
+@@ -431,18 +431,6 @@ let _ =
+ 
+ 	let periodic_ops now =
+ 		debug "periodic_ops starting";
+-		(* we garbage collect the string->int dictionary after a sizeable amount of operations,
+-		 * there's no need to be really fast even if we got loose
+-		 * objects since names are often reuse.
+-		 *)
+-		if Symbol.created () > 1000 || Symbol.used () > 20000
+-		then begin
+-			Symbol.mark_all_as_unused ();
+-			Store.mark_symbols store;
+-			Connections.iter cons Connection.mark_symbols;
+-			History.mark_symbols ();
+-			Symbol.garbage ()
+-		end;
+ 
+ 		(* scan all the xs rings as a safenet for ill-behaved clients *)
+ 		if !ring_scan_interval >= 0 && now > (!last_scan_time +. float !ring_scan_interval) then
+@@ -460,11 +448,11 @@ let _ =
+ 			let (lanon, lanon_ops, lanon_watchs,
+ 			     ldom, ldom_ops, ldom_watchs) = Connections.stats cons in
+ 			let store_nodes, store_abort, store_coalesce = Store.stats store in
+-			let symtbl_len = Symbol.stats () in
++			let symtbl_len, symtbl_entries = Symbol.stats () in
+ 
+ 			info "store stat: nodes(%d) t-abort(%d) t-coalesce(%d)"
+ 			     store_nodes store_abort store_coalesce;
+-			info "sytbl stat: %d" symtbl_len;
++			info "sytbl stat: length(%d) entries(%d)" symtbl_len symtbl_entries;
+ 			info "  con stat: anonymous(%d, %d o, %d w) domains(%d, %d o, %d w)"
+ 			     lanon lanon_ops lanon_watchs ldom ldom_ops ldom_watchs;
+ 			info "  mem stat: minor(%.0f) promoted(%.0f) major(%.0f) heap(%d w, %d c) live(%d w, %d b) free(%d w, %d b)"
 -- 
 2.29.2
 
