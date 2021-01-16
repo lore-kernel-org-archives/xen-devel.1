@@ -2,48 +2,44 @@ Return-Path: <SRS0=kirF=GT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A86BC433DB
-	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 10:31:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64783C433DB
+	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 10:33:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C9EF722522
-	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 10:31:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C9EF722522
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 13AD822522
+	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 10:33:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13AD822522
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68959.123584 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68964.123599 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0irn-0005j3-Jf; Sat, 16 Jan 2021 10:31:35 +0000
+	id 1l0itu-0005r8-0z; Sat, 16 Jan 2021 10:33:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68959.123584; Sat, 16 Jan 2021 10:31:35 +0000
+Received: by outflank-mailman (output) from mailman id 68964.123599; Sat, 16 Jan 2021 10:33:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0irn-0005iw-G8; Sat, 16 Jan 2021 10:31:35 +0000
-Received: by outflank-mailman (input) for mailman id 68959;
- Sat, 16 Jan 2021 10:31:34 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1l0itt-0005r1-Tp; Sat, 16 Jan 2021 10:33:45 +0000
+Received: by outflank-mailman (input) for mailman id 68964;
+ Sat, 16 Jan 2021 10:33:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l0irm-0005io-0v; Sat, 16 Jan 2021 10:31:34 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l0irl-0000x4-Mj; Sat, 16 Jan 2021 10:31:33 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l0irl-0004km-Dl; Sat, 16 Jan 2021 10:31:33 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1l0irl-0008Tm-DH; Sat, 16 Jan 2021 10:31:33 +0000
+ (envelope-from <SRS0=czoR=GT=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1l0its-0005qw-L0
+ for xen-devel@lists.xenproject.org; Sat, 16 Jan 2021 10:33:44 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0b60d93b-0b18-4ab7-af31-101cbb20f8c6;
+ Sat, 16 Jan 2021 10:33:43 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E6D78AD26;
+ Sat, 16 Jan 2021 10:33:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,75 +51,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=F5bn1jB5H/JRfx1sMSeXtPLL7plxB0CWRsYseUFFy0c=; b=tRxJN5oV6ZliLJNeeTyi4bY3PQ
-	JdQgBAJTuqoim1rIymysfiFRpPcL3DWhCfytLzLvyYYagfADJvFpm41YPqvwjj+sWQuutarJl2PpV
-	GQ0uBO18r7sMmmtAhlx6JDbBSAXp9IjIWVhyb9ScQAoMbTNxW/QyRHnGOAL4E3pA3c6E=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-158459-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 0b60d93b-0b18-4ab7-af31-101cbb20f8c6
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1610793223; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ejIblnGVIKaqvxho3ySwDkDHenm4tozwF4FuC3LBKQo=;
+	b=c+ZAY/7RAlQLE8Lung8xyPl5Uje3LzIYh3Nwpx98EdaGULW2qbEDzjm3NWmCOIx8JTIayr
+	FfwrSlzei59t/c2SpWPCL/qiBzig2t4r9OC1pDtE35Xc+JxbIWUUW3ur6uaCVKShSVZcfi
+	SOFlN7rctJk61YUPlQCgoy/1+HRhdGg=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v6 2/3] xen: enable keyhandlers to work without register set specified
+Date: Sat, 16 Jan 2021 11:33:38 +0100
+Message-Id: <20210116103339.21708-3-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210116103339.21708-1-jgross@suse.com>
+References: <20210116103339.21708-1-jgross@suse.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 158459: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=c88736f8605eab3b0877d9301f8e845291c6fdd9
-X-Osstest-Versions-That:
-    ovmf=014b9850f2a33ae402b87c46268f4d98395d5d59
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 16 Jan 2021 10:31:33 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 158459 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/158459/
+There are only two keyhandlers which make use of the cpu_user_regs
+struct passed to them. In order to be able to call any keyhandler in
+non-interrupt contexts, too, modify those two handlers to cope with a
+NULL regs pointer by using run_in_exception_handler() in that case.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 c88736f8605eab3b0877d9301f8e845291c6fdd9
-baseline version:
- ovmf                 014b9850f2a33ae402b87c46268f4d98395d5d59
+Suggested-by: Julien Grall <julien@xen.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V4:
+- new patch
+---
+ xen/common/keyhandler.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-Last test of basis   158428  2021-01-15 01:09:40 Z    1 days
-Testing same since   158459  2021-01-16 03:39:47 Z    0 days    1 attempts
+diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
+index 68364e987d..38020a1360 100644
+--- a/xen/common/keyhandler.c
++++ b/xen/common/keyhandler.c
+@@ -181,7 +181,10 @@ static void dump_registers(unsigned char key, struct cpu_user_regs *regs)
+     cpumask_copy(&dump_execstate_mask, &cpu_online_map);
+ 
+     /* Get local execution state out immediately, in case we get stuck. */
+-    dump_execstate(regs);
++    if ( regs )
++        dump_execstate(regs);
++    else
++        run_in_exception_handler(dump_execstate);
+ 
+     /* Alt. handling: remaining CPUs are dumped asynchronously one-by-one. */
+     if ( alt_key_handling )
+@@ -481,15 +484,23 @@ static void run_all_keyhandlers(unsigned char key, struct cpu_user_regs *regs)
+     tasklet_schedule(&run_all_keyhandlers_tasklet);
+ }
+ 
+-static void do_debug_key(unsigned char key, struct cpu_user_regs *regs)
++static void do_debugger_trap_fatal(struct cpu_user_regs *regs)
+ {
+-    printk("'%c' pressed -> trapping into debugger\n", key);
+     (void)debugger_trap_fatal(0xf001, regs);
+ 
+     /* Prevent tail call optimisation, which confuses xendbg. */
+     barrier();
+ }
+ 
++static void do_debug_key(unsigned char key, struct cpu_user_regs *regs)
++{
++    printk("'%c' pressed -> trapping into debugger\n", key);
++    if ( regs )
++        do_debugger_trap_fatal(regs);
++    else
++        run_in_exception_handler(do_debugger_trap_fatal);
++}
++
+ static void do_toggle_alt_key(unsigned char key, struct cpu_user_regs *regs)
+ {
+     alt_key_handling = !alt_key_handling;
+-- 
+2.26.2
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Abner Chang <abner.chang@hpe.com>
-  Ray Ni <ray.ni@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   014b9850f2..c88736f860  c88736f8605eab3b0877d9301f8e845291c6fdd9 -> xen-tested-master
 
