@@ -2,45 +2,47 @@ Return-Path: <SRS0=kirF=GT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85C1DC433DB
-	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 10:34:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50AA9C433DB
+	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 11:25:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 41B3222522
-	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 10:34:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41B3222522
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5F5792310F
+	for <xen-devel@archiver.kernel.org>; Sat, 16 Jan 2021 11:25:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F5792310F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.68968.123635 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.68986.123647 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0iu4-0005zn-58; Sat, 16 Jan 2021 10:33:56 +0000
+	id 1l0jhh-0002jS-4b; Sat, 16 Jan 2021 11:25:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 68968.123635; Sat, 16 Jan 2021 10:33:56 +0000
+Received: by outflank-mailman (output) from mailman id 68986.123647; Sat, 16 Jan 2021 11:25:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l0iu3-0005zf-W5; Sat, 16 Jan 2021 10:33:55 +0000
-Received: by outflank-mailman (input) for mailman id 68968;
- Sat, 16 Jan 2021 10:33:55 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=czoR=GT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l0iu3-0005tA-1c
- for xen-devel@lists.xenproject.org; Sat, 16 Jan 2021 10:33:55 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ad9e1843-02ac-45c6-83c8-a64b5fda3e87;
- Sat, 16 Jan 2021 10:33:43 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A6FDBAA6F;
- Sat, 16 Jan 2021 10:33:42 +0000 (UTC)
+	id 1l0jhh-0002jL-19; Sat, 16 Jan 2021 11:25:13 +0000
+Received: by outflank-mailman (input) for mailman id 68986;
+ Sat, 16 Jan 2021 11:25:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/22O=GT=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1l0jhf-0002j0-2w
+ for xen-devel@lists.xenproject.org; Sat, 16 Jan 2021 11:25:11 +0000
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ddbb874e-dc9e-470f-9a88-759ea03614a8;
+ Sat, 16 Jan 2021 11:25:08 +0000 (UTC)
+Received: from rochebonne.antioche.eu.org (rochebonne
+ [IPv6:2001:41d0:fe9d:1100:221:70ff:fe0c:9885])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTP id 10GBP2VN004904;
+ Sat, 16 Jan 2021 12:25:02 +0100 (MET)
+Received: by rochebonne.antioche.eu.org (Postfix, from userid 1210)
+ id 55E1E281D; Sat, 16 Jan 2021 12:25:02 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,198 +54,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad9e1843-02ac-45c6-83c8-a64b5fda3e87
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610793222; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zAaEKFd+UVmLUtUOB8vH8lgK68eWLXdf9gU5ZOXZ0o4=;
-	b=YfzZXFP3iO2354hjepjAZB7ySUlQ6AmhcT3LRpS2eHVTwDFIC5XDFuRvJmSbvbYdrDAIR/
-	ZEG4XvGZSpuDtgOvnijWzh5jjse6NBsVm3tFisVbuNCa3eiI7yXms3teY4La9L1A8FLWIw
-	hM+WTtCSzUUNjxwi6fReMhM3BvGtqOo=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v6 1/3] xen/arm: add support for run_in_exception_handler()
-Date: Sat, 16 Jan 2021 11:33:37 +0100
-Message-Id: <20210116103339.21708-2-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210116103339.21708-1-jgross@suse.com>
-References: <20210116103339.21708-1-jgross@suse.com>
+X-Inumbo-ID: ddbb874e-dc9e-470f-9a88-759ea03614a8
+Date: Sat, 16 Jan 2021 12:25:02 +0100
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
+        Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH] libs/light: pass some infos to qemu
+Message-ID: <20210116112502.GA1133@antioche.eu.org>
+References: <20210112181242.1570-1-bouyer@antioche.eu.org>
+ <20210112181242.1570-17-bouyer@antioche.eu.org>
+ <20210116101606.sogfpgzg7upunua7@Air-de-Roger>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210116101606.sogfpgzg7upunua7@Air-de-Roger>
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [IPv6:2001:41d0:fe9d:1100:a00:20ff:fe1c:276e]); Sat, 16 Jan 2021 12:25:02 +0100 (MET)
 
-Add support to run a function in an exception handler for Arm. Do it
-as on x86 via a bug_frame, but pass the function pointer via a
-register (this needs to be done that way, because inline asm support
-for 32-bit Arm lacks the needed functionality to reference an
-arbitrary function via the bugframe).
+On Sat, Jan 16, 2021 at 11:16:06AM +0100, Roger Pau Monné wrote:
+> On Tue, Jan 12, 2021 at 07:12:37PM +0100, Manuel Bouyer wrote:
+> > From: Manuel Bouyer <bouyer@netbsd.org>
+> > 
+> > Pass bridge name to qemu as command line option
+> > When starting qemu, set an environnement variable XEN_DOMAIN_ID,
+> > to be used by qemu helper scripts
+> > 
+> > Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
+> > ---
+> >  tools/libs/light/libxl_dm.c | 6 ++++++
+> >  1 file changed, 6 insertions(+)
+> > 
+> > diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+> > index 3da83259c0..8866c3f5ad 100644
+> > --- a/tools/libs/light/libxl_dm.c
+> > +++ b/tools/libs/light/libxl_dm.c
+> > @@ -761,6 +761,8 @@ static int libxl__build_device_model_args_old(libxl__gc *gc,
+> >          int nr_set_cpus = 0;
+> >          char *s;
+> >  
+> > +        flexarray_append_pair(dm_envs, "XEN_DOMAIN_ID", GCSPRINTF("%d", domid));
+> > +
+> >          if (b_info->kernel) {
+> >              LOGD(ERROR, domid, "HVM direct kernel boot is not supported by "
+> >                   "qemu-xen-traditional");
+> > @@ -1547,8 +1549,10 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+> >                  flexarray_append(dm_args, "-netdev");
+> >                  flexarray_append(dm_args,
+> >                                   GCSPRINTF("type=tap,id=net%d,ifname=%s,"
+> > +					   "br=%s,"
+> >                                             "script=%s,downscript=%s",
+> >                                             nics[i].devid, ifname,
+> > +					   nics[i].bridge,
+> 
+> You have some hard tabs in there.
 
-Use the same BUGFRAME_* #defines as on x86 in order to make a future
-common header file more easily achievable.
+Yes. What's the problem ?
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V4:
-- new patch
+> 
+> Also looking at the manual the br= option seems to only be available
+> for the bridge networking mode, while here Xen is using tap instead?
 
-V5:
-- adjust BUG_FRAME() macro (Jan Beulich)
-- adjust arm linker script (Jan Beulich)
-- drop #ifdef x86 in common/virtual_region.c
+Unless I missed something, the bridge networking mode is using the
+tap interface, to connect qemu to the bridge. And indeed, the qemu-ifup
+script is doing
+exec /sbin/brconfig $2 add $1
 
-V6:
-- use register for function address (Arm32 build failure noticed by
-  Julien Grall)
----
- xen/arch/arm/traps.c            |  8 ++++++++
- xen/arch/arm/xen.lds.S          |  2 ++
- xen/common/virtual_region.c     |  2 --
- xen/include/asm-arm/arm32/bug.h |  2 ++
- xen/include/asm-arm/arm64/bug.h |  2 ++
- xen/include/asm-arm/bug.h       | 31 +++++++++++++++++++++++++------
- 6 files changed, 39 insertions(+), 8 deletions(-)
+(the script is called with: qemu-ifup <tap if> <bridge if>)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 1af1bb9f1b..d0df33b218 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -1236,6 +1236,14 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
-     if ( !bug )
-         return -ENOENT;
- 
-+    if ( id == BUGFRAME_run_fn )
-+    {
-+        void (*fn)(const struct cpu_user_regs *) = (void *)regs->BUG_FN_REG;
-+
-+        fn(regs);
-+        return 0;
-+    }
-+
-     /* WARN, BUG or ASSERT: decode the filename pointer and line number. */
-     filename = bug_file(bug);
-     if ( !is_kernel(filename) )
-diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
-index 6342ac4ead..004b182acb 100644
---- a/xen/arch/arm/xen.lds.S
-+++ b/xen/arch/arm/xen.lds.S
-@@ -49,6 +49,8 @@ SECTIONS
-        __stop_bug_frames_1 = .;
-        *(.bug_frames.2)
-        __stop_bug_frames_2 = .;
-+       *(.bug_frames.3)
-+       __stop_bug_frames_3 = .;
-        *(.rodata)
-        *(.rodata.*)
-        *(.data.rel.ro)
-diff --git a/xen/common/virtual_region.c b/xen/common/virtual_region.c
-index 4fbc02e35a..30b0b4ab9c 100644
---- a/xen/common/virtual_region.c
-+++ b/xen/common/virtual_region.c
-@@ -123,9 +123,7 @@ void __init setup_virtual_regions(const struct exception_table_entry *start,
-         __stop_bug_frames_0,
-         __stop_bug_frames_1,
-         __stop_bug_frames_2,
--#ifdef CONFIG_X86
-         __stop_bug_frames_3,
--#endif
-         NULL
-     };
- 
-diff --git a/xen/include/asm-arm/arm32/bug.h b/xen/include/asm-arm/arm32/bug.h
-index 3e66f35969..25cce151dc 100644
---- a/xen/include/asm-arm/arm32/bug.h
-+++ b/xen/include/asm-arm/arm32/bug.h
-@@ -10,4 +10,6 @@
- 
- #define BUG_INSTR ".word " __stringify(BUG_OPCODE)
- 
-+#define BUG_FN_REG r0
-+
- #endif /* __ARM_ARM32_BUG_H__ */
-diff --git a/xen/include/asm-arm/arm64/bug.h b/xen/include/asm-arm/arm64/bug.h
-index 59f664d7de..5e11c0dfd5 100644
---- a/xen/include/asm-arm/arm64/bug.h
-+++ b/xen/include/asm-arm/arm64/bug.h
-@@ -6,4 +6,6 @@
- 
- #define BUG_INSTR "brk " __stringify(BRK_BUG_FRAME_IMM)
- 
-+#define BUG_FN_REG x0
-+
- #endif /* __ARM_ARM64_BUG_H__ */
-diff --git a/xen/include/asm-arm/bug.h b/xen/include/asm-arm/bug.h
-index 36c803357c..e9341daef1 100644
---- a/xen/include/asm-arm/bug.h
-+++ b/xen/include/asm-arm/bug.h
-@@ -26,16 +26,17 @@ struct bug_frame {
- #define bug_line(b) ((b)->line)
- #define bug_msg(b) ((const char *)(b) + (b)->msg_disp)
- 
--#define BUGFRAME_warn   0
--#define BUGFRAME_bug    1
--#define BUGFRAME_assert 2
-+#define BUGFRAME_run_fn 0
-+#define BUGFRAME_warn   1
-+#define BUGFRAME_bug    2
-+#define BUGFRAME_assert 3
- 
--#define BUGFRAME_NR     3
-+#define BUGFRAME_NR     4
- 
- /* Many versions of GCC doesn't support the asm %c parameter which would
-  * be preferable to this unpleasantness. We use mergeable string
-  * sections to avoid multiple copies of the string appearing in the
-- * Xen image.
-+ * Xen image. BUGFRAME_run_fn needs to be handled separately.
-  */
- #define BUG_FRAME(type, line, file, has_msg, msg) do {                      \
-     BUILD_BUG_ON((line) >> 16);                                             \
-@@ -58,6 +59,23 @@ struct bug_frame {
-          ".popsection");                                                    \
- } while (0)
- 
-+/*
-+ * Unfortunately gcc for arm 32-bit doesn't support the "i" constraint, so
-+ * the easiest way to implement run_in_exception_handler() is to pass the
-+ * to be called function in a fixed register.
-+ */
-+#define  run_in_exception_handler(fn) do {                                  \
-+    asm ("mov " __stringify(BUG_FN_REG) ", %0\n"                            \
-+         "1:"BUG_INSTR"\n"                                                  \
-+         ".pushsection .bug_frames." __stringify(BUGFRAME_run_fn) ","       \
-+         "             \"a\", %%progbits\n"                                 \
-+         "2:\n"                                                             \
-+         ".p2align 2\n"                                                     \
-+         ".long (1b - 2b)\n"                                                \
-+         ".long 0, 0, 0\n"                                                  \
-+         ".popsection" :: "r" (fn) : __stringify(BUG_FN_REG) );             \
-+} while (0)
-+
- #define WARN() BUG_FRAME(BUGFRAME_warn, __LINE__, __FILE__, 0, "")
- 
- #define BUG() do {                                              \
-@@ -73,7 +91,8 @@ struct bug_frame {
- extern const struct bug_frame __start_bug_frames[],
-                               __stop_bug_frames_0[],
-                               __stop_bug_frames_1[],
--                              __stop_bug_frames_2[];
-+                              __stop_bug_frames_2[],
-+                              __stop_bug_frames_3[];
- 
- #endif /* __ARM_BUG_H__ */
- /*
+This is a problem that hit me when I converted NetBSD to qemu-xen:
+qemu-traditional does call the qemu-ifup script with the 2 parameters,
+while qemu-xen calls it only with the tap if. So the qemu-ifup script can't
+know to which bridge the tap interface should be attached to.
+
 -- 
-2.26.2
-
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
