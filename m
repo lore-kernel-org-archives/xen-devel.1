@@ -2,45 +2,41 @@ Return-Path: <SRS0=uD1c=GV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 522AAC4332D
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Jan 2021 11:55:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 984AFC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Jan 2021 11:58:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 009D02231F
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Jan 2021 11:55:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 009D02231F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 43A9F2231F
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Jan 2021 11:58:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 43A9F2231F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.69615.124756 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.69629.124797 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l1T84-0005ao-UY; Mon, 18 Jan 2021 11:55:28 +0000
+	id 1l1TBD-0006FH-HH; Mon, 18 Jan 2021 11:58:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 69615.124756; Mon, 18 Jan 2021 11:55:28 +0000
+Received: by outflank-mailman (output) from mailman id 69629.124797; Mon, 18 Jan 2021 11:58:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l1T84-0005aa-MD; Mon, 18 Jan 2021 11:55:28 +0000
-Received: by outflank-mailman (input) for mailman id 69615;
- Mon, 18 Jan 2021 11:55:26 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=777z=GV=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l1T82-0005WK-Ps
- for xen-devel@lists.xenproject.org; Mon, 18 Jan 2021 11:55:26 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ff53ab65-988a-48b3-9032-640508289ab6;
- Mon, 18 Jan 2021 11:55:20 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0ACB6B8E6;
- Mon, 18 Jan 2021 11:55:20 +0000 (UTC)
+	id 1l1TBD-0006FA-DS; Mon, 18 Jan 2021 11:58:43 +0000
+Received: by outflank-mailman (input) for mailman id 69629;
+ Mon, 18 Jan 2021 11:58:42 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=RMBa=GV=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1l1TBC-0006F4-D2
+ for xen-devel@lists.xenproject.org; Mon, 18 Jan 2021 11:58:42 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 80c6f93a-9c9d-4163-b9c7-7d4a283dae9a;
+ Mon, 18 Jan 2021 11:58:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,192 +48,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff53ab65-988a-48b3-9032-640508289ab6
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1610970920; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=am94U0utN2Ue9jktg4hF/gzv3ykid5UM0GvnBsWgHyU=;
-	b=ctJACRl8JO/dMrxFUYbBGG7Gg/JqVbZFv0KKRXtD/BU/OjMeA8bj47QxRh9EOppRus9tA0
-	E5QY0yTqRg1+NYEfUEbEm6cHz7QRJJOBMVBN+Nhr0gSuFGl6DanvjlevbvVVLys0XmtG+p
-	5Ws7JlUKE9hZBv3jicAUmjIVFOoZqnQ=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [PATCH v4 4/5] xen/cpupool: add scheduling granularity entry to cpupool entries
-Date: Mon, 18 Jan 2021 12:55:15 +0100
-Message-Id: <20210118115516.11001-5-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210118115516.11001-1-jgross@suse.com>
-References: <20210118115516.11001-1-jgross@suse.com>
+X-Inumbo-ID: 80c6f93a-9c9d-4163-b9c7-7d4a283dae9a
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1610971121;
+  h=subject:to:cc:references:from:message-id:date:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=SdM0rYp8YYLqpoBjSUZZbjTNORqqHSV4r82hUdgKpI0=;
+  b=BENnt6AAw/lLolhq34cGZd9evMWpMFynWgHwtLerQJHgvi2PqNm+Y71l
+   VsN8Rf/7uz57fP7EzDzNa5G0k/91AQRT6VkzmLC7iKATgmLmTnU/3uV0M
+   XDpUvh5/yXgU4SfHmgPorEEaXhrFNzJYvl3H+ZWxD0EaRUQNOT1ezpEiM
+   0=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: g0srzw0NpNe9sTNfETbDpMVn2HjR0TKn8Sf0VgCGn4J8ka/hM9RU6zIbQxgv+bDg9kWCjbG/Rg
+ ao+VaKyNTWnqdUcmEJS3OujKRqpr89PDnT5sWMFmclH0SmF8yI1E0Nhm18rGdc3kSjMTKj8hFh
+ HPyWXmgcSP76qk36Cz1H7QdTgQMP/1SYracnsCC5pjwdYuOshe16r5kEmFO6BW73hqMS3Su0Bk
+ OLBE/gRAhAXrL6vipkOga4Tvi6fXtlC5ZwofJK7JcxT4SYIMOl9LE0ThZog5yzLgQcMZiVSV93
+ cAY=
+X-SBRS: 5.2
+X-MesageID: 35284827
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.79,356,1602561600"; 
+   d="scan'208";a="35284827"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Lseb9d0iZpII43oM/LxkvP0w9oL3SYYrH9xB8aIhW/QmEbRQIwCMF9C1AuXVohBJgYgy1YVJ1p11sjoXzbaY34NJ64g6D4URhcy5ELg+1Qzo/uOPWEzKQYvbUqoKoCqp5sW1uFPgO3w5ZdAUVanAbkVGxLIXNrRoXHg3BD9bAYRB9yOZH32rUNSNBiXuAoVt5xVunRduAWu1YpAGlk2/G/AYjKgSQuczHapWDee6h+TKlqR1/yxPaxQmAMnqunGoZiyNzUpcHq6a64sk4hkTajXlpoHTcCTgDzgEsK8hn51orzxmlXJdaF/7iIBgEqRVBZo7bFTo/aJt28j/Dr6H3w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SdM0rYp8YYLqpoBjSUZZbjTNORqqHSV4r82hUdgKpI0=;
+ b=ZXbx5Cd7XiBzV4hMwvytH+nU0/0HzYWkv0NNycgzkYJSqW6bpHiS8rb/C5PXvmZKjB0s9TBQrqu2lZ3cVT7GRSJZZc8rUwXd4gE26EbLiQ+0sXytYR+1jrhoiopH38nf17BbpBNr1KD3pRzQ6s+FiHcYpsuggxy+oIhfjoc8dawBb3KhmRMIyspqCk7nwUXZfpK4wciOYVz2Wg80PYWegugKf675EhTE3rtNTRZmivUnIZu8b79tUtWB2uXhlWavVCv9dIvxqOUFfSsqDXOZjbIqON/dRJFNI7Jnnqj5xAD3EjZwtEzb8b42hmM/bBkCwzCQ7M3A8QZFJQbZGbHzKg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SdM0rYp8YYLqpoBjSUZZbjTNORqqHSV4r82hUdgKpI0=;
+ b=HxTJGgRJEK7+CTxB9VrwaLvjJW/s48NbhNnDqSXjusNf4QfCHWEKV/g7W1IwjEQ5UXgncdCBI7LNK0w/mYVWMp7JafChqgXbAHw7vd7BQqa6a0xel3KmjtgSeXzCIIld/jOKvzgGbUo9JXBQ6TLfScI2aQwVixwiNG1N3t7knNM=
+Subject: Re: [PATCH] xen/decompress: make helper symbols static
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <28f15465-bfcd-606b-eb24-42bfb990ae3d@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <b073d60c-9eb1-a161-8419-a0dfa11b4c91@citrix.com>
+Date: Mon, 18 Jan 2021 11:58:30 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
+In-Reply-To: <28f15465-bfcd-606b-eb24-42bfb990ae3d@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: LO4P123CA0380.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18f::7) To BYAPR03MB4728.namprd03.prod.outlook.com
+ (2603:10b6:a03:13a::24)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: a149ebd8-3a93-404f-a1f4-08d8bba863cd
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB5662:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <SJ0PR03MB5662164DB49695BA0235AB49BAA40@SJ0PR03MB5662.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: o3IljF8gCF4Mgwj8/QayucS2yjfTxaQJO+u06nNqQLJHifd1D25jMWnjKFUT3dWM5YETMmtnGSSTATzEQNCz5iiJ7GTp5McRdwlHXEeIFQMiK9u+fTlIfhq9z7l0DLcYUOxzPjGiRA9Hvgwbtfei5+3fnS7fjqWh7iZW9yiGLvgRo/kCE5e6AUtsBfs3FWOViYIPsrBuM5ejvssQfy3Wb0gMOwvG8vohJPoUfOhh7ORedYYXCnHGdPsOoBSJdWs5tR36xB/8Zmf7nCQ3OVna6E/0TfvAaIbwe9vMK7i52X3TWjMmoAEc1u9n7eKa4uui1D4Jqqg99WFRzTp+4uh+ySqnPNm7WWu+vqQrYm7wnMi+RdTnTNDYoeqxiMztlEH9boBf2+iRcJexNrDsFfs6CQMs29uoamc8jR3n30TiL+PP7OniCuwbsbm4zPg/Q1TEalQIx7FvuwZ0BMn93Ye7Rd72BNUjjrNg/w8VEHuLedc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB4728.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(376002)(39860400002)(396003)(346002)(86362001)(54906003)(110136005)(53546011)(26005)(316002)(6486002)(16576012)(6666004)(8936002)(31686004)(8676002)(4744005)(956004)(4326008)(478600001)(186003)(5660300002)(31696002)(16526019)(66556008)(66946007)(36756003)(66476007)(2906002)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?VGdmbklxZDRLY3lYaFl3QlFSWit3OW5ORHB0dGdWOHZLMHp1ejk1U3RuN3dQ?=
+ =?utf-8?B?K3JuV24wSnd0cEh0MmtzRFFKVlNRSDN5OThJSlBNZ09ONmQ1NDFSYVpmSWMw?=
+ =?utf-8?B?dVNTWmxuM0dMTUpqdTRwaHk1RGZXWk02OXZPM3Q2QWZ6WVhVYWtDWUl6RjhZ?=
+ =?utf-8?B?SUp1NzVYR2pjMHFlSDU3bFVnZVdRRWdpQVB6WGRKRkltN0xhejgrcEh6UWEw?=
+ =?utf-8?B?ZnRJRTNWUmxOb1BrcnFRUTRXdGdyeUNNWC9qTWoyN0VuQmg4RU9JcDY0WVAr?=
+ =?utf-8?B?aC9CSE5zV0tEQy9QWnp4dStBN3ZKRjBxSTJhY05CUmpsL3RaNFp5clk5Szcz?=
+ =?utf-8?B?RW02ZGNFZzRGL2EyY2l2VE44Y0t5NXZMNmpjMEVOQllNQVBDWis4azRZUm5N?=
+ =?utf-8?B?c0tKcUJJRHFCY0J6bElXZUhGcFBOa2QyRVdBd2dHd1lJd0plR2dFcTFhc3p0?=
+ =?utf-8?B?OFlUUk9ybnJyMmVLRFpWSGd3Y0V1ekV1V3FMWk5TZFUrd3ZMLy9zVjQrbXAv?=
+ =?utf-8?B?SS9ZRGx5UmVMQ2xqZlJyTlFDblZBTHNOd21tYTBaektIVm1paTAwNnZvQmVG?=
+ =?utf-8?B?VWZtMk5UN2YwYThJRUJiUUpqd0VveWVyMFE2VlE1ZlN1NDgrZkdxZEdOQ0tR?=
+ =?utf-8?B?YXZrVUU2OEFuUmtqdGdWSlpmdTJrUHlhcVpkdHBOeVZlR2xyUFc0UUN5U3RM?=
+ =?utf-8?B?THVZRmJnMVZHZ2lnV0lxVC9LTDc5S0VpTTJiTGltUGZzOUVyZ29iNXhtL01m?=
+ =?utf-8?B?RDFTQzNGTkhiOUswMnMvWlgyK0FJcC9aN2Q0MjkyU2RvUUp3YUtrQjZQclI3?=
+ =?utf-8?B?VC9VVE40djVIdGZBL3R4bkhsbExuVmZZZTVkMFFQQzhsOW95RHc1aGpsSlcv?=
+ =?utf-8?B?ZjZFY0dqTm8vUGp1bEFlcllIZmdZSjBxbHJMS2pGVWZsQUR2dmxTKy9wYVUz?=
+ =?utf-8?B?eHY4ZUF6VkNGcGd2UEt5MDUrMDJ1NElVN1l6NXY2OEl0em9uSXpSYy83dVpE?=
+ =?utf-8?B?amtyNGZIZ3dnOFBZVE04b1ZEb204bDRwVWdjTzN4K3E0ZXhDUjR5RGl1c1M0?=
+ =?utf-8?B?eE5TczFEN05zeUlwbjRSSTAvRkhZZEMrb0hwR29mYkhsRGdtdys0emptcjZS?=
+ =?utf-8?B?aW1zK2lwa1lQdFExc0xadllBbVdGNUMyZ1ExblM4THhweCtOUmFqamlYMHRC?=
+ =?utf-8?B?ZVRXbTllZXVQYXpHRGRwNkNuVXp6ZHIvcVJSZ0RPV3A5ajBSZFNPV2hqd0I5?=
+ =?utf-8?B?NVVwUXVhMWh0Rk41UktMTVJHOUI5WWZack1SVGt0dVdOWnZqbTB0S0VtRWNO?=
+ =?utf-8?Q?Ojp7L2NmRghVMis/9pOZmaLoLrUnHKkiDO?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: a149ebd8-3a93-404f-a1f4-08d8bba863cd
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4728.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jan 2021 11:58:37.7614
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: v/rRIpW8FYY2Iv0HG7YoGJ0lV1pOg1+JmJc3CIJBk2YPde6+mzvxO+rM3rFoz85nfT4CGcyFIZQS4SGZzyRjC4bYVFgujlFp43BcYCZ26qo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5662
+X-OriginatorOrg: citrix.com
 
-Add a "sched-gran" entry to the per-cpupool hypfs directories.
+On 18/01/2021 11:19, Jan Beulich wrote:
+> The individual decompression CUs need to only surface their top level
+> functions to other code. Arrange for everything else to be static, to
+> make sure no undue uses of that code exist or will appear without
+> explicitly noticing. (In some cases this also results in code size
+> reduction, but since this is all init-only code this probably doesn't
+> matter very much.)
+>
+> In the LZO case also take the opportunity and convert u8 where lines
+> get touched anyway.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> The downside is that the top level functions will now be non-static
+> in stubdom builds of libxenguest, but I think that's acceptable.
 
-For now make this entry read-only and let it contain one of the
-strings "cpu", "core" or "socket".
+Yeah - not something to lose sleep over.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- added const (Jan Beulich)
-- modify test in cpupool_gran_read() (Jan Beulich)
----
- docs/misc/hypfs-paths.pandoc |  4 ++
- xen/common/sched/cpupool.c   | 72 ++++++++++++++++++++++++++++++++++--
- 2 files changed, 72 insertions(+), 4 deletions(-)
-
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-index aaca1cdf92..f1ce24d7fe 100644
---- a/docs/misc/hypfs-paths.pandoc
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -184,6 +184,10 @@ A directory of all current cpupools.
- The individual cpupools. Each entry is a directory with the name being the
- cpupool-id (e.g. /cpupool/0/).
- 
-+#### /cpupool/*/sched-gran = ("cpu" | "core" | "socket")
-+
-+The scheduling granularity of a cpupool.
-+
- #### /params/
- 
- A directory of runtime parameters.
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index f293ba0cc4..e2011367bd 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -41,9 +41,10 @@ static DEFINE_SPINLOCK(cpupool_lock);
- static enum sched_gran __read_mostly opt_sched_granularity = SCHED_GRAN_cpu;
- static unsigned int __read_mostly sched_granularity = 1;
- 
-+#define SCHED_GRAN_NAME_LEN  8
- struct sched_gran_name {
-     enum sched_gran mode;
--    char name[8];
-+    char name[SCHED_GRAN_NAME_LEN];
- };
- 
- static const struct sched_gran_name sg_name[] = {
-@@ -52,7 +53,7 @@ static const struct sched_gran_name sg_name[] = {
-     {SCHED_GRAN_socket, "socket"},
- };
- 
--static void sched_gran_print(enum sched_gran mode, unsigned int gran)
-+static const char *sched_gran_get_name(enum sched_gran mode)
- {
-     const char *name = "";
-     unsigned int i;
-@@ -66,8 +67,13 @@ static void sched_gran_print(enum sched_gran mode, unsigned int gran)
-         }
-     }
- 
-+    return name;
-+}
-+
-+static void sched_gran_print(enum sched_gran mode, unsigned int gran)
-+{
-     printk("Scheduling granularity: %s, %u CPU%s per sched-resource\n",
--           name, gran, gran == 1 ? "" : "s");
-+           sched_gran_get_name(mode), gran, gran == 1 ? "" : "s");
- }
- 
- #ifdef CONFIG_HAS_SCHED_GRANULARITY
-@@ -1014,10 +1020,16 @@ static int cpupool_dir_read(const struct hypfs_entry *entry,
-                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
- {
-     int ret = 0;
--    const struct cpupool *c;
-+    struct cpupool *c;
-+    struct hypfs_dyndir_id *data;
-+
-+    data = hypfs_get_dyndata();
- 
-     list_for_each_entry(c, &cpupool_list, list)
-     {
-+        data->id = c->cpupool_id;
-+        data->data = c;
-+
-         ret = hypfs_read_dyndir_id_entry(&cpupool_pooldir, c->cpupool_id,
-                                          list_is_last(&c->list, &cpupool_list),
-                                          &uaddr);
-@@ -1080,6 +1092,56 @@ static struct hypfs_entry *cpupool_dir_findentry(
-     return hypfs_gen_dyndir_id_entry(&cpupool_pooldir, id, cpupool);
- }
- 
-+static int cpupool_gran_read(const struct hypfs_entry *entry,
-+                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+{
-+    const struct hypfs_dyndir_id *data;
-+    const struct cpupool *cpupool;
-+    const char *gran;
-+
-+    data = hypfs_get_dyndata();
-+    cpupool = data->data;
-+    ASSERT(cpupool);
-+
-+    gran = sched_gran_get_name(cpupool->gran);
-+
-+    if ( !*gran )
-+        return -ENOENT;
-+
-+    return copy_to_guest(uaddr, gran, strlen(gran) + 1) ? -EFAULT : 0;
-+}
-+
-+static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
-+{
-+    const struct hypfs_dyndir_id *data;
-+    const struct cpupool *cpupool;
-+    const char *gran;
-+
-+    data = hypfs_get_dyndata();
-+    cpupool = data->data;
-+    ASSERT(cpupool);
-+
-+    gran = sched_gran_get_name(cpupool->gran);
-+
-+    return strlen(gran) + 1;
-+}
-+
-+static const struct hypfs_funcs cpupool_gran_funcs = {
-+    .enter = hypfs_node_enter,
-+    .exit = hypfs_node_exit,
-+    .read = cpupool_gran_read,
-+    .write = hypfs_write_deny,
-+    .getsize = hypfs_gran_getsize,
-+    .findentry = hypfs_leaf_findentry,
-+};
-+
-+static HYPFS_VARSIZE_INIT(cpupool_gran, XEN_HYPFS_TYPE_STRING, "sched-gran",
-+                          0, &cpupool_gran_funcs);
-+static char granstr[SCHED_GRAN_NAME_LEN] = {
-+    [0 ... SCHED_GRAN_NAME_LEN - 2] = '?',
-+    [SCHED_GRAN_NAME_LEN - 1] = 0
-+};
-+
- static const struct hypfs_funcs cpupool_dir_funcs = {
-     .enter = cpupool_dir_enter,
-     .exit = cpupool_dir_exit,
-@@ -1095,6 +1157,8 @@ static void cpupool_hypfs_init(void)
- {
-     hypfs_add_dir(&hypfs_root, &cpupool_dir, true);
-     hypfs_add_dyndir(&cpupool_dir, &cpupool_pooldir);
-+    hypfs_string_set_reference(&cpupool_gran, granstr);
-+    hypfs_add_leaf(&cpupool_pooldir, &cpupool_gran, true);
- }
- 
- #else /* CONFIG_HYPFS */
--- 
-2.26.2
-
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>, but I really would
+like to see the STATIC and INIT defines disappear eventually.
 
