@@ -2,47 +2,45 @@ Return-Path: <SRS0=/2oJ=GW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6B8AC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 14:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 556D4C433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 15:06:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 668F322241
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 14:58:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 668F322241
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 15D73207B1
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 15:06:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 15D73207B1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.70451.126444 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.70462.126456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l1sSo-0001k4-PW; Tue, 19 Jan 2021 14:58:34 +0000
+	id 1l1sZo-0002pq-Jn; Tue, 19 Jan 2021 15:05:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 70451.126444; Tue, 19 Jan 2021 14:58:34 +0000
+Received: by outflank-mailman (output) from mailman id 70462.126456; Tue, 19 Jan 2021 15:05:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l1sSo-0001jw-MN; Tue, 19 Jan 2021 14:58:34 +0000
-Received: by outflank-mailman (input) for mailman id 70451;
- Tue, 19 Jan 2021 14:58:32 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1l1sZo-0002pj-Fg; Tue, 19 Jan 2021 15:05:48 +0000
+Received: by outflank-mailman (input) for mailman id 70462;
+ Tue, 19 Jan 2021 15:05:46 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l1sSm-0001jM-RH
- for xen-devel@lists.xenproject.org; Tue, 19 Jan 2021 14:58:32 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l1sSm-0002m8-Os
- for xen-devel@lists.xenproject.org; Tue, 19 Jan 2021 14:58:32 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l1sSm-0004Mj-Ne
- for xen-devel@lists.xenproject.org; Tue, 19 Jan 2021 14:58:32 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1l1sSi-0003Ad-Iw; Tue, 19 Jan 2021 14:58:28 +0000
+ (envelope-from <SRS0=U8Ox=GW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1l1sZm-0002pd-Ou
+ for xen-devel@lists.xenproject.org; Tue, 19 Jan 2021 15:05:46 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 52ff3055-82c5-4f57-9b4a-4e3bbf2ab1de;
+ Tue, 19 Jan 2021 15:05:45 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5D826B73F;
+ Tue, 19 Jan 2021 15:05:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,71 +52,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=8hkNMQRfShv8jpiXh8ORW4wDysG3Jiql29031sEr6/4=; b=6wTJrkvog37xxH3mIJuasdTkWC
-	vbmlX2OwIu08L+U/8W94jjtZ3Rf8TcER22rtxFiEzH/z/Hix65E0JtGyL9Vd/ofJSJ5IxbBPqLs1I
-	qfbXMwJblqKNLBJd0Wc4PqbDXnU8ObW/uc1Vi70ohLFKkkZ1v0t62kiwmjAsuMe+OUfw=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: 52ff3055-82c5-4f57-9b4a-4e3bbf2ab1de
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1611068744; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1s7T9s3ogXOgVYnB4auG5/oRmlZEx+9Nf3rz4OSI14c=;
+	b=ai7Extt+SlHx+zMuyevMMpZ/M/RERVris5tD9FUE6v4w1T4iL5xgKPMe+Uh3KhsaPWWQof
+	afz8TbLbYEcW4gTc2G00gZzFGbRGWWQiJVIdLQCui/ZqwykCGXoHOKTqUJLCJGTKO8AeJs
+	8ZucHlMn5OFXbpTYtFX4ZP/Q6gAlA1Y=
+Subject: Re: [PATCH v2] x86/CPUID: unconditionally set
+ XEN_HVM_CPUID_IOMMU_MAPPINGS
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20210119130759.98296-1-roger.pau@citrix.com>
+ <064729d2-1fe2-3169-4f4f-7c04a73e3984@suse.com>
+ <20210119143146.ktr4fh66x6cmwqbv@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <58a5bb86-c73f-f1f8-6416-a29fcb5f0536@suse.com>
+Date: Tue, 19 Jan 2021 16:05:43 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24582.62356.361386.407920@mariner.uk.xensource.com>
-Date: Tue, 19 Jan 2021 14:58:28 +0000
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-    Andrew Cooper <andrew.cooper3@citrix.com>,
-    George Dunlap <george.dunlap@citrix.com>,
-    Julien Grall <julien@xen.org>,
-    Stefano Stabellini <sstabellini@kernel.org>,
-    Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] xen/decompress: make helper symbols static
-In-Reply-To: <9d77a189-de10-b4e2-c118-580121d797a9@suse.com>
-References: <28f15465-bfcd-606b-eb24-42bfb990ae3d@suse.com>
-	<24581.45760.653861.613333@mariner.uk.xensource.com>
-	<9d77a189-de10-b4e2-c118-580121d797a9@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+In-Reply-To: <20210119143146.ktr4fh66x6cmwqbv@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Jan Beulich writes ("Re: [PATCH] xen/decompress: make helper symbols static"):
-> On 18.01.2021 17:09, Ian Jackson wrote:
-> > AFAICT, this patch
-> > 
-> > * was first posted after the last posting date for Xen 4.15.
-> > * is not a bugfix.
-> > 
-> > In which case it has missed 4.15.
-> > 
-> > Please correct me if you think I am wrong.
+On 19.01.2021 15:31, Roger Pau Monné wrote:
+> On Tue, Jan 19, 2021 at 03:26:22PM +0100, Jan Beulich wrote:
+>> On 19.01.2021 14:07, Roger Pau Monne wrote:
+>>> This is a revert of f5cfa0985673 plus a rework of the comment that
+>>> accompanies the setting of the flag so we don't forget why it needs to
+>>> be unconditionally set: it's indicating whether the version of Xen has
+>>> the original issue fixed and IOMMU entries are created for
+>>> grant/foreign maps.
+>>>
+>>> If the flag is only exposed when the IOMMU is enabled the guest could
+>>> resort to use bounce buffers when running backends as it would assume
+>>> the underlying Xen version still has the bug present and thus
+>>> grant/foreign maps cannot be used with devices.
+>>>
+>>> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+>>
+>> Acked-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> This time for real, I suppose.
 > 
-> You aren't, and I don't view this as a big problem - its more of
-> an aid to be sure no bad (unintended) references exist (Arm's
-> unhelpful re-use of xz's CRC32 function triggered the change).
+> Won't believe it until it hits the repo ;).
 
-Ah I see.  Thanks for that explanation.  Well, I might be inclined to
-grant a freeze exception on the basis that the point of this is to
-remove rather than add risk.
+There you go. But well, we can always revert ... ;-)
 
-If you think that might be sensible, would you care to provide a frank
-assessment of the risks to 4.15 of taking this patch, vs. the risks to
-4.15 of postponing it ?
-
-> I can surely hold this back until 4.16 opens, hoping it won't
-> collide with the zstd decompression work I'm now doing on the DomU
-> side (lack which, if you agree with Andrew's assessment, is more a
-> bug fix than a feature addition).
-
-I agree that zstd is a blocker for 4.15.
-
-> But yes - I will need to remind myself to filter what is eligible
-> for committing, from now on until the branch point.
-
-If there are edge cases, or things that would warrant an exception,
-please do ask me explicitly.
-
-In general my objective for the freeze policy is to try to minimise
-the number and severity of bugs in 4.15 :-) and if I think a freeze
-exception is the best way of doing that, I will grant one.
-
-Ian.
+Jan
 
