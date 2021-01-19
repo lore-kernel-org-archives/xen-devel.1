@@ -2,55 +2,48 @@ Return-Path: <SRS0=/2oJ=GW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D13C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 18:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14D85C433E6
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 18:40:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 34E2A216FD
+	by mail.kernel.org (Postfix) with ESMTPS id CA656216FD
 	for <xen-devel@archiver.kernel.org>; Tue, 19 Jan 2021 18:40:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34E2A216FD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA656216FD
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.70982.127032 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.70577.126732 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l1uis-0006P6-TX; Tue, 19 Jan 2021 17:23:18 +0000
+	id 1l1ty0-0005E3-Ca; Tue, 19 Jan 2021 16:34:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 70982.127032; Tue, 19 Jan 2021 17:23:18 +0000
+Received: by outflank-mailman (output) from mailman id 70577.126732; Tue, 19 Jan 2021 16:34:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l1uis-0006Oz-Q9; Tue, 19 Jan 2021 17:23:18 +0000
-Received: by outflank-mailman (input) for mailman id 70982;
- Tue, 19 Jan 2021 17:23:17 +0000
+	id 1l1ty0-0005Du-8S; Tue, 19 Jan 2021 16:34:52 +0000
+Received: by outflank-mailman (input) for mailman id 70577;
+ Tue, 19 Jan 2021 16:34:50 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gNnx=GW=redhat.com=lersek@srs-us1.protection.inumbo.net>)
- id 1l1uir-0006Ou-2R
- for xen-devel@lists.xenproject.org; Tue, 19 Jan 2021 17:23:17 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 68f0e4cb-7b62-4c66-a5ef-e5100cad42f3;
- Tue, 19 Jan 2021 17:23:15 +0000 (UTC)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-588-XKbPMslgMfWiL0sSQf3_nw-1; Tue, 19 Jan 2021 12:23:11 -0500
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AAB72801817;
- Tue, 19 Jan 2021 17:23:09 +0000 (UTC)
-Received: from lacos-laptop-7.usersys.redhat.com (ovpn-114-176.ams2.redhat.com
- [10.36.114.176])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 01A6027C55;
- Tue, 19 Jan 2021 17:23:07 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=g3v7=GW=xenbits.xen.org=iwj@srs-us1.protection.inumbo.net>)
+ id 1l1txy-0004wn-Ig
+ for xen-devel@lists.xen.org; Tue, 19 Jan 2021 16:34:50 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c928cbda-231e-4f7d-ba83-acdfdaf41600;
+ Tue, 19 Jan 2021 16:34:27 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1l1txT-0004vd-Jx; Tue, 19 Jan 2021 16:34:19 +0000
+Received: from iwj by xenbits.xenproject.org with local (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1l1txT-0002xV-JD; Tue, 19 Jan 2021 16:34:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,93 +55,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 68f0e4cb-7b62-4c66-a5ef-e5100cad42f3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1611076994;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=n4AgJaVSYbOzrYP4OWA69p+hsD1R3vUHkVCqHneAzhg=;
-	b=GmkzSzpGPa/swdf0IbihTf3mx88w+GATs0S/AMMWHLeqwJq5hY+tf+kDWNJjMpBtTfScQm
-	1tAWYi6OfZ4B1Lgp1F+WGibBG2TirETHAF3JpCB5uU0qAWeq+JkqvU3lm1XWlsuph6mBi4
-	au7xqo5DetxjuarQMACmqbmCCCEy5aY=
-X-MC-Unique: XKbPMslgMfWiL0sSQf3_nw-1
-Subject: Re: [edk2-devel] [PATCH] OvmfPkg/XenPlatformPei: Use CPUID to get
- physical address width on Xen
-To: devel@edk2.groups.io, anthony.perard@citrix.com
-Cc: julien@xen.org, Igor Druzhinin <igor.druzhinin@citrix.com>,
- xen-devel@lists.xenproject.org, jordan.l.justen@intel.com,
- ard.biesheuvel@arm.com
-References: <1610509335-23314-1-git-send-email-igor.druzhinin@citrix.com>
- <2a806f26-04f7-a96b-522c-118ac94df8c0@xen.org>
- <0d7ad7aa-cfa9-5f2c-26e3-6b371737f6bc@redhat.com>
- <YAcARq/M7ouaD1c1@perard.uk.xensource.com>
-From: Laszlo Ersek <lersek@redhat.com>
-Message-ID: <64eb1777-44cb-c360-2597-7e436cba1a74@redhat.com>
-Date: Tue, 19 Jan 2021 18:23:06 +0100
+X-Inumbo-ID: c928cbda-231e-4f7d-ba83-acdfdaf41600
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Date:Message-Id:Subject:CC:From:To:MIME-Version:
+	Content-Transfer-Encoding:Content-Type;
+	bh=C5UK2QtG/S7aEUEH9HsxEYXIX3VPu03wMMkvuOHpN9s=; b=r9ncFBV/rNhrGQF79pMEu4Izgc
+	AoB35AXs+zQdh8jmIGAqiDeXyocBCfOs4Tm3mYo4jyvm/4YDDwPmnUeaXpEoi7j9DmMrA3Ao7yD/t
+	tmn6B7WfftmlOqRB4lnvfVt68Ua8sg5XZ/n1QLGoPpiDhQ4y94xoN2bT/OATGzrMfmV4=;
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-In-Reply-To: <YAcARq/M7ouaD1c1@perard.uk.xensource.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lersek@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+X-Mailer: MIME-tools 5.509 (Entity 5.509)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 355 v3 (CVE-2020-29040) - stack corruption
+ from XSA-346 change
+Message-Id: <E1l1txT-0002xV-JD@xenbits.xenproject.org>
+Date: Tue, 19 Jan 2021 16:34:19 +0000
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 7bit
 
-On 01/19/21 16:52, Anthony PERARD via groups.io wrote:
-> On Tue, Jan 19, 2021 at 03:49:34PM +0100, Laszlo Ersek wrote:
->> On 01/19/21 10:37, Julien Grall wrote:
->>> Hi Igor,
->>>
->>> On 13/01/2021 03:42, Igor Druzhinin wrote:
->>>> We faced a problem with passing through a PCI device with 64GB BAR to
->>>> UEFI guest. The BAR is expectedly programmed into 64-bit PCI aperture at
->>>> 64G address which pushes physical address space to 37 bits. That is above
->>>> 36-bit width that OVMF exposes currently to a guest without tweaking
->>>> PcdPciMmio64Size knob.
->>>>
->>>> The reverse calculation using this knob was inhereted from QEMU-KVM
->>>> platform
->>>> code where it serves the purpose of finding max accessible physical
->>>> address without necessary trusting emulated CPUID physbits value (that
->>>> could
->>>> be different from host physbits). On Xen we expect to use CPUID policy
->>>> to level the data correctly to prevent situations with guest physbits >
->>>> host physbits e.g. across migrations.
->>>>
->>>> The next aspect raising concern - resource consumption for DXE IPL
->>>> page tables
->>>> and time required to map the whole address space in case of using CPUID
->>>> bits directly. That could be mitigated by enabling support for 1G pages
->>>> in DXE IPL configuration. 1G pages are available on most CPUs produced in
->>>> the last 10 years and those without don't have many phys bits.
->>>>
->>>> Remove all the redundant code now (including PcdPciMmio64.. handling
->>>> that's
->>>> not used on Xen anyway) and grab physbits directly from CPUID that should
->>>> be what baremetal UEFI systems do.
->>>>
->>>> Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
->>>
->>> Reviewed-by: Julien Grall <julien@xen.org>
->>
->> I'm going to hold this patch until Anthony responds in this thread as well:
-> 
-> This new patch is fine, I didn't notice that it was a replacement for
-> the previous one.
-> 
-> Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-[lersek@redhat.com: fix up authorship from groups.io-mangled From line]
-[lersek@redhat.com: wrap commit message at 74 characters]
+            Xen Security Advisory CVE-2020-29040 / XSA-355
+                              version 3
 
-Merged via <https://github.com/tianocore/edk2/pull/1369>, as commit
-e68c2a22caae.
+                 stack corruption from XSA-346 change
 
-Thanks
-Laszlo
+UPDATES IN VERSION 3
+====================
 
+CVE assigned.
+
+ISSUE DESCRIPTION
+=================
+
+One of the two changes for XSA-346 introduced an on-stack array.  The
+check for guarding against overrunning this array was off by one,
+allowing for corruption of the first stack slot immediately following
+this array.
+
+IMPACT
+======
+
+A malicious or buggy HVM or PVH guest can cause Xen to crash, resulting
+in a Denial of Service (DoS) to the entire host.  Privilege escalation
+as well as information leaks cannot be excluded.
+
+VULNERABLE SYSTEMS
+==================
+
+All Xen versions which have the patches for XSA-346 applied are
+vulnerable.
+
+Only x86 HVM and PVH guests can leverage the vulnerability.  Arm guests
+and x86 PV guests cannot leverage the vulnerability.
+
+Only x86 HVM and PVH guests which have physical devices passed through
+to them can leverage the vulnerability.
+
+MITIGATION
+==========
+
+Not passing through physical devices to untrusted guests will avoid
+the vulnerability.
+
+CREDITS
+=======
+
+This issue was discovered by Jan Beulich of SUSE.
+
+RESOLUTION
+==========
+
+Applying the attached patch resolves this issue.
+
+Note that patches for released versions are generally prepared to
+apply to the stable branches, and may not apply cleanly to the most
+recent release tarball.  Downstreams are encouraged to update to the
+tip of the stable branch before applying these patches.
+
+xsa355.patch           xen-unstable - Xen 4.10.x
+
+$ sha256sum xsa355*
+a93bfc376897e7cffd095d395f1a66476adb9503d7d80a59b7861e64c2675323  xsa355.meta
+dae633c11cf2eff3e304737265e18ab09213e8e4640458080a944ae7a40819a4  xsa355.patch
+$
+
+NOTE CONCERNING SHORT EMBARGO
+=============================
+
+This issue is likely to be re-discovered as the changes for XSA-346
+are deployed more widely, since the issue is also triggerable without
+any malice or bugginess.
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches and/or mitigations described above (or
+others which are substantially similar) is permitted during the
+embargo, even on public-facing systems with untrusted guest users and
+administrators.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmAHB6UMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZpMAH/AwWuyJ0tQS95kJmfCSe9gxFkIZwnoOlxAIF1fQ8
+0W7OXmgrr9giz3lVR6Kjannq3HextHuLoVttg3soJ6pCqPBOH84/k0vyHEb9ChBF
+ypkvH0iG1wnpVo+DdYOnY7OnaBHrPsB0E83WfKohP05e+Ymcroq09vKw02fR6B+z
++D3uNzbNi1kZz1DcTZFsCAmHJsc3zS+D8jyEwOFQwlVckugJ+zDuylKtSDau56CN
+WGG3nkoDldWm1687ui4stnal8WIBP6sMgErwnv9hpzfL5glc/m0PSELQ8hZgNmAX
+KMoWvdjPenwPQEhrii92P15DbXGz6uktIZFrKRgCUx2u5ss=
+=1hd2
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa355.meta"
+Content-Disposition: attachment; filename="xsa355.meta"
+Content-Transfer-Encoding: base64
+
+ewogICJYU0EiOiAzNTUsCiAgIlN1cHBvcnRlZFZlcnNpb25zIjogWwogICAg
+Im1hc3RlciIsCiAgICAiNC4xNCIsCiAgICAiNC4xMyIsCiAgICAiNC4xMiIs
+CiAgICAiNC4xMSIsCiAgICAiNC4xMCIKICBdLAogICJUcmVlcyI6IFsKICAg
+ICJ4ZW4iCiAgXSwKICAiUmVjaXBlcyI6IHsKICAgICI0LjEwIjogewogICAg
+ICAiUmVjaXBlcyI6IHsKICAgICAgICAieGVuIjogewogICAgICAgICAgIlN0
+YWJsZVJlZiI6ICIxNWIyOTgwOTcyODlmMWMxMWI5ODE0NTRhM2RjOTEyYjk1
+ZTJmNjViIiwKICAgICAgICAgICJQcmVyZXFzIjogW10sCiAgICAgICAgICAi
+UGF0Y2hlcyI6IFsKICAgICAgICAgICAgInhzYTM1NS5wYXRjaCIKICAgICAg
+ICAgIF0KICAgICAgICB9CiAgICAgIH0KICAgIH0sCiAgICAiNC4xMSI6IHsK
+ICAgICAgIlJlY2lwZXMiOiB7CiAgICAgICAgInhlbiI6IHsKICAgICAgICAg
+ICJTdGFibGVSZWYiOiAiMTQ0N2Q0NDlmYWI3ZTQ4Yzg1ZmFmODM5NTE4NDJi
+YjYwZDdkYWJlNSIsCiAgICAgICAgICAiUHJlcmVxcyI6IFtdLAogICAgICAg
+ICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAgICJ4c2EzNTUucGF0Y2giCiAg
+ICAgICAgICBdCiAgICAgICAgfQogICAgICB9CiAgICB9LAogICAgIjQuMTIi
+OiB7CiAgICAgICJSZWNpcGVzIjogewogICAgICAgICJ4ZW4iOiB7CiAgICAg
+ICAgICAiU3RhYmxlUmVmIjogIjE0YzljMGZjZWFlOTJhMThkZWRjM2YyODBl
+YmY4YjlmNTJlMzlkZTUiLAogICAgICAgICAgIlByZXJlcXMiOiBbXSwKICAg
+ICAgICAgICJQYXRjaGVzIjogWwogICAgICAgICAgICAieHNhMzU1LnBhdGNo
+IgogICAgICAgICAgXQogICAgICAgIH0KICAgICAgfQogICAgfSwKICAgICI0
+LjEzIjogewogICAgICAiUmVjaXBlcyI6IHsKICAgICAgICAieGVuIjogewog
+ICAgICAgICAgIlN0YWJsZVJlZiI6ICJkNGMwNDgzYzBiODc3NjhjZDliOTU1
+NDJlOTgxMTFlNGMwOThkNTdmIiwKICAgICAgICAgICJQcmVyZXFzIjogW10s
+CiAgICAgICAgICAiUGF0Y2hlcyI6IFsKICAgICAgICAgICAgInhzYTM1NS5w
+YXRjaCIKICAgICAgICAgIF0KICAgICAgICB9CiAgICAgIH0KICAgIH0sCiAg
+ICAiNC4xNCI6IHsKICAgICAgIlJlY2lwZXMiOiB7CiAgICAgICAgInhlbiI6
+IHsKICAgICAgICAgICJTdGFibGVSZWYiOiAiZDEwMWI0MTdiNzg0YTI2MzI2
+ZmM3ODAwYTc5Y2M1MzliYTU3MGI3OSIsCiAgICAgICAgICAiUHJlcmVxcyI6
+IFtdLAogICAgICAgICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAgICJ4c2Ez
+NTUucGF0Y2giCiAgICAgICAgICBdCiAgICAgICAgfQogICAgICB9CiAgICB9
+LAogICAgIm1hc3RlciI6IHsKICAgICAgIlJlY2lwZXMiOiB7CiAgICAgICAg
+InhlbiI6IHsKICAgICAgICAgICJTdGFibGVSZWYiOiAiYjY1OWE1Y2ViZDYx
+MWRiZTY5OGU2M2MwMzQ4NWI1ZmU4Y2Q5NjRhZCIsCiAgICAgICAgICAiUHJl
+cmVxcyI6IFtdLAogICAgICAgICAgIlBhdGNoZXMiOiBbCiAgICAgICAgICAg
+ICJ4c2EzNTUucGF0Y2giCiAgICAgICAgICBdCiAgICAgICAgfQogICAgICB9
+CiAgICB9CiAgfQp9
+
+--=separator
+Content-Type: application/octet-stream; name="xsa355.patch"
+Content-Disposition: attachment; filename="xsa355.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
+OiBtZW1vcnk6IGZpeCBvZmYtYnktb25lIGluIFhTQS0zNDYgY2hhbmdlCgpU
+aGUgY29tcGFyaXNvbiBhZ2FpbnN0IEFSUkFZX1NJWkUoKSBuZWVkcyB0byBi
+ZSA+PSBpbiBvcmRlciB0byBhdm9pZApvdmVycnVubmluZyB0aGUgcGFnZXNb
+XSBhcnJheS4KClRoaXMgaXMgWFNBLTM1NS4KCkZpeGVzOiA1Nzc3YTM3NDJk
+ODggKCJJT01NVTogaG9sZCBwYWdlIHJlZiB1bnRpbCBhZnRlciBkZWZlcnJl
+ZCBUTEIgZmx1c2giKQpTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJl
+dWxpY2hAc3VzZS5jb20+ClJldmlld2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGpn
+cmFsbEBhbWF6b24uY29tPgoKLS0tIGEveGVuL2NvbW1vbi9tZW1vcnkuYwor
+KysgYi94ZW4vY29tbW9uL21lbW9yeS5jCkBAIC04NTQsNyArODU0LDcgQEAg
+aW50IHhlbm1lbV9hZGRfdG9fcGh5c21hcChzdHJ1Y3QgZG9tYWluCiAgICAg
+ICAgICAgICArK2V4dHJhLnBwYWdlOwogCiAgICAgICAgIC8qIENoZWNrIGZv
+ciBjb250aW51YXRpb24gaWYgaXQncyBub3QgdGhlIGxhc3QgaXRlcmF0aW9u
+LiAqLwotICAgICAgICBpZiAoICgrK2RvbmUgPiBBUlJBWV9TSVpFKHBhZ2Vz
+KSAmJiBleHRyYS5wcGFnZSkgfHwKKyAgICAgICAgaWYgKCAoKytkb25lID49
+IEFSUkFZX1NJWkUocGFnZXMpICYmIGV4dHJhLnBwYWdlKSB8fAogICAgICAg
+ICAgICAgICh4YXRwLT5zaXplID4gZG9uZSAmJiBoeXBlcmNhbGxfcHJlZW1w
+dF9jaGVjaygpKSApCiAgICAgICAgIHsKICAgICAgICAgICAgIHJjID0gc3Rh
+cnQgKyBkb25lOwo=
+
+--=separator--
 
