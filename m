@@ -2,45 +2,45 @@ Return-Path: <SRS0=FMYz=GX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FE71C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1D66C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:21:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1DE6F23358
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:19:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DE6F23358
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2E89F22CE3
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:21:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E89F22CE3
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.71654.128485 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.71659.128497 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2H8l-000274-02; Wed, 20 Jan 2021 17:19:31 +0000
+	id 1l2HA8-0002xX-Ch; Wed, 20 Jan 2021 17:20:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 71654.128485; Wed, 20 Jan 2021 17:19:30 +0000
+Received: by outflank-mailman (output) from mailman id 71659.128497; Wed, 20 Jan 2021 17:20:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2H8k-00026v-Ss; Wed, 20 Jan 2021 17:19:30 +0000
-Received: by outflank-mailman (input) for mailman id 71654;
- Wed, 20 Jan 2021 17:19:29 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1l2H8j-00026U-4F
- for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 17:19:29 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l2H8h-0005mZ-V8; Wed, 20 Jan 2021 17:19:27 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l2H8h-0006G8-Ns; Wed, 20 Jan 2021 17:19:27 +0000
+	id 1l2HA8-0002xQ-8j; Wed, 20 Jan 2021 17:20:56 +0000
+Received: by outflank-mailman (input) for mailman id 71659;
+ Wed, 20 Jan 2021 17:20:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Uvzb=GX=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1l2HA7-0002xK-0W
+ for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 17:20:55 +0000
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6566d5fd-a53c-4bc5-a56c-7ba87a9e4066;
+ Wed, 20 Jan 2021 17:20:53 +0000 (UTC)
+Received: from rochebonne.antioche.eu.org (rochebonne [10.0.0.1])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTP id 10KHKk2H026027;
+ Wed, 20 Jan 2021 18:20:46 +0100 (MET)
+Received: by rochebonne.antioche.eu.org (Postfix, from userid 1210)
+ id B6C6A281D; Wed, 20 Jan 2021 18:20:46 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,44 +52,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=LQxXHCWGNzRuFjZB64Cn5r6cNJWMnGIymz3fDz8Iz0I=; b=rf/X4FPL8+7Pu8/zSBMDDlelc2
-	Zx7P6eKG2b4ogj2/p4NfrCvjV7Qc270+rCiX/EbmR1aRUGp6Vkcsf1OROtnxCZzn5JXzPTFQ0Ms7r
-	9tbchhMP7o/H5aH1SOhHhEXsUCFuZZl0l4KUWYCxv3EsTpc+UYi0RUvndnBPsFIQ5i3g=;
-Subject: Re: [XEN PATCH] xen/arm: Hide Pointer Authentication (PAC)
-To: Vladimir Murzin <vladimir.murzin@arm.com>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, Volodymyr_Babchuk@epam.com
-References: <20210120112712.9534-1-vladimir.murzin@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <af352e05-1d56-0b4b-23c6-5aa52ba2ac6b@xen.org>
-Date: Wed, 20 Jan 2021 17:19:26 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.6.1
+X-Inumbo-ID: 6566d5fd-a53c-4bc5-a56c-7ba87a9e4066
+Date: Wed, 20 Jan 2021 18:20:46 +0100
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Ian Jackson <iwj@xenproject.org>
+Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        George Dunlap <george.dunlap@citrix.com>,
+        xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
+        Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH] libs/light: make it build without setresuid()
+Message-ID: <20210120172046.GA5772@antioche.eu.org>
+References: <20210112181242.1570-1-bouyer@antioche.eu.org>
+ <20210112181242.1570-16-bouyer@antioche.eu.org>
+ <20210118181656.2abblbjg2jvhlad7@Air-de-Roger>
+ <24584.17302.958286.788145@mariner.uk.xensource.com>
+ <20210120151321.GB4175@antioche.eu.org>
+ <24584.19725.745755.464840@mariner.uk.xensource.com>
+ <20210120165615.GB5035@antioche.eu.org>
+ <24584.25612.523093.188718@mariner.uk.xensource.com>
 MIME-Version: 1.0
-In-Reply-To: <20210120112712.9534-1-vladimir.murzin@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <24584.25612.523093.188718@mariner.uk.xensource.com>
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Wed, 20 Jan 2021 18:20:47 +0100 (MET)
 
-Hi Vladimir,
-
-On 20/01/2021 11:27, Vladimir Murzin wrote:
-> The ARMv8.3 Pointer Authentication extension is not supported by Xen
-> at the moment, so do not expose that via ID register.
+On Wed, Jan 20, 2021 at 05:10:36PM +0000, Ian Jackson wrote:
+> Manuel Bouyer writes ("Re: [PATCH] libs/light: make it build without setresuid()"):
+> > On Wed, Jan 20, 2021 at 03:32:29PM +0000, Ian Jackson wrote:
+> > > Yes, the dm is qemu.  If qemu restriction is not supported, that makes
+> > > a big difference.  The complex situation here is to do with trying to
+> > > kill a possibly hostile qemu.
+> > 
+> > Hum, I'll have to check this (how to check, BTW ?).
+> > I assumed qemu was running as root but it may not be completely true.
+> > Especially as I notice, now that I'm re-reading the patch, that
+> > we're doing a kill to -1. If we were doing so as root, user processes
+> > would be killed.
 > 
-> Signed-off-by: Vladimir Murzin <vladimir.murzin@arm.com>
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> It may well be that this whole piece of code won't be executed on
+> NetBSD becauwe dm restriction will be off.
+> 
+> The background: dm restriction is a set of arrangements for trying to
+> run qemu without given it any more privilege than it needs, and
+> certainly not ultimate privilege over the host.  This is quite
+> complicated and includes running it as a non-root user, chroot, and so
+> on.
+> 
+> On Linux it's run in its own network namespace, so that a qemu
+> compromised by the guest cannot access host daemons.  IDK what
+> facilities one might want to use on NetBSD to try to contain qemu.
+> 
+> This seems to me all a matter for future work.  I'm sorry that code
+> for a feature you're not going to be benefiting from is getting in
+> your way.
 
-Reviewed-by: Julien Grall <jgrall@amazon.com>
+On NetBSD we could start with a different uid and a chroot. This would
+limit damages.
 
-As I think this one can be considered as a bug fix to the recent series 
-from Bertrand. So I will commit it without Ian's RM tag (although he did 
-gave it on IRC).
+> > > right answer.)
+> > 
+> > This would have to be checked, but I don't think a non-root process
+> > can ptrace a process whose saved-user-id is root.
+> 
+> If I remember rightly the saved-set-id is reset by setuid.  But I
+> could be wrong.  This stuff is all quite complex :-/.
 
-Cheers,
+yes, setuid() resets the saved-user-id
+
+> 
+> > Actually I think I could mimic the setresuid() with setreuid() and seteuid().
+> 
+> My last mail had in it a thing that claims to be a proof that this is
+> not possible.
+
+This code:
+        if (setreuid(375,0) < 0) {
+                err(1, "setreuid");
+        }
+        if (seteuid(374) < 0) {
+                err(1, "seteuid");
+        }
+        if (kill(-1, 9)) {
+                err(1, "kill");
+        }
+        printf("kill done\n");
+        if (seteuid(0) < 0) {
+                err(1, "setreuid2");
+        }
+        exit(0);
+
+actually works on NetBSD. processes from 375 are killed, and the
+seteuid(0) call succeeds (showing that the saved used id is still 0).
+
+> > 
+> > Actually I don't see how I could split this in a different file, without
+> > lot of duplicate code (even in just kill_device_model_uid_child(),
+> > we're talking of about 7 lines of code out of 75). So some guidance here
+> > would be welcome.
+> 
+> I think splitting it out at precisely the function needed is probably
+> better.
+> 
+> Can you try this experiment: what happens if you replace the call to
+> setresuid with abort() ?  I think you may find it all works, because
+> you're not using that code path.
+> 
+> If so then I suggest introducing
+> 
+>   int libxl__setresuid(uid_t ruid, uid_t euid, uid_t suid);
+> 
+> which would call setresuid on Linux and on NetBSD would do this
+> 
+>   assert(!"setresuid is not available on NetBSD, and dm restrction is not supported, so this code path should not have been reached")
+> 
+> What do you think ?
+
+As this is supported by Xen, I hope I can make at last run qemu with a
+non-zero uid.
 
 -- 
-Julien Grall
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
