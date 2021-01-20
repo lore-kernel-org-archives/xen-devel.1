@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E09A3C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 08:56:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88CCCC433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 08:57:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 817E122C9E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 08:56:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 817E122C9E
+	by mail.kernel.org (Postfix) with ESMTPS id 2BA5B22C9E
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 08:57:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BA5B22C9E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.71261.127466 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.71264.127479 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l29I5-0004C0-Ls; Wed, 20 Jan 2021 08:56:37 +0000
+	id 1l29In-0004Hq-Vk; Wed, 20 Jan 2021 08:57:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 71261.127466; Wed, 20 Jan 2021 08:56:37 +0000
+Received: by outflank-mailman (output) from mailman id 71264.127479; Wed, 20 Jan 2021 08:57:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l29I5-0004Bs-Ij; Wed, 20 Jan 2021 08:56:37 +0000
-Received: by outflank-mailman (input) for mailman id 71261;
- Wed, 20 Jan 2021 08:56:36 +0000
+	id 1l29In-0004Hj-Se; Wed, 20 Jan 2021 08:57:21 +0000
+Received: by outflank-mailman (input) for mailman id 71264;
+ Wed, 20 Jan 2021 08:57:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=e+JE=GX=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1l29I4-0004Bn-JX
- for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 08:56:36 +0000
-Received: from mail-ed1-x533.google.com (unknown [2a00:1450:4864:20::533])
+ id 1l29Im-0004H9-Ca
+ for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 08:57:20 +0000
+Received: from mail-ej1-x62e.google.com (unknown [2a00:1450:4864:20::62e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id faa9334b-11c6-4931-8373-d3179579781f;
- Wed, 20 Jan 2021 08:56:35 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id j13so520337edp.2
- for <xen-devel@lists.xenproject.org>; Wed, 20 Jan 2021 00:56:35 -0800 (PST)
+ id aae6d96b-00ab-4d80-9b4c-53a28cca53d9;
+ Wed, 20 Jan 2021 08:57:17 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id g3so13042841ejb.6
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Jan 2021 00:57:17 -0800 (PST)
 Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id z22sm706765edb.88.2021.01.20.00.56.33
+ by smtp.gmail.com with ESMTPSA id oq7sm599154ejb.63.2021.01.20.00.57.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Jan 2021 00:56:33 -0800 (PST)
+ Wed, 20 Jan 2021 00:57:15 -0800 (PST)
 Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id AA3201FF7E;
- Wed, 20 Jan 2021 08:56:32 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id E6BDD1FF7E;
+ Wed, 20 Jan 2021 08:57:14 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,36 +57,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: faa9334b-11c6-4931-8373-d3179579781f
+X-Inumbo-ID: aae6d96b-00ab-4d80-9b4c-53a28cca53d9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=references:user-agent:from:to:cc:subject:date:in-reply-to
          :message-id:mime-version:content-transfer-encoding;
-        bh=O7LZ1CyhGv9nOKRtBKA1vePKRSppKmv7791UCVLHNG8=;
-        b=ASK/Eo1SRlZN3h/6VrvtyZWxarariM2Q7jkcPYLjOFbsVdXcvrlqLroGLxuYXMrukK
-         sxsi8REZxDqEMj3Wwm9qi7N6jHaj+9vCFx0fjlnm6K0+EoxI5Br9b5MvFfAd9p3rSRmC
-         4+bYIffeaFldubq15q3tho7EuA0YSxlhjO4CWYobL6jJgeH+4bNpa+n0kUtpTlZJiXaB
-         hVqTmafsCSGOsSqMAe+qV3hpEA4Azf+130Xa423umYl1gRMh4T2LTBdC/tKo9bR1MyOr
-         iMH7vVzOvasSZtu9eyzvFGf23tOyktrK7iV0BtyWphEVX4Lp5PZgUgTRRjQ/TrU0fJpX
-         2mdg==
+        bh=JGTIksuqiQGNqeZN2O+R2N92WfiVGrxt7/9m4IS+T4k=;
+        b=PDHJQHYZAEpipJ54gLEdzRBW8GudRZL9Th7iMY4bgLI+NjAUPoAmFPnaiyTj9CW/ck
+         i8b+tyVHOrSWw+air8RlWhWNkiO6xys+OCJSvNqqo/sqqzqcGQ+/8yEixufvB+0PTtrR
+         reow0wyvvpEFnewPcj9sFCqHkOmdFOAaEFPMBlH0scL3Fv3gDnUa6T/dJGVcPnoItbLE
+         4ViB2k7JACYQANMDda73zLly5BcDwUbgU7oPneH+/1Tq8FzvOXNF2dnhoBslV/OBZO25
+         p8nNDdo+StRu6ii6AlTAoQE2Ee9RkX8AJ09GHu+XVyNb5pvV8G3oBXQ1PN3e0we/Z1Eu
+         4JMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
          :in-reply-to:message-id:mime-version:content-transfer-encoding;
-        bh=O7LZ1CyhGv9nOKRtBKA1vePKRSppKmv7791UCVLHNG8=;
-        b=I6+dqkC7cWi7K43a0pm4ZebxHylNbphc3fV107hXD/Ed0hX/MKOiw/9qwsyI1lweBa
-         MOAxEEm9wdenx7cYNzmF0/2qawGRyq75kXuWKsa8Weq2no5soY2LUU39t+epa1En/IhF
-         ir5Lc3Wrn0KzzidlGBoNSLQ+PcfePIO2eivbrUGG7jOeCR/6UfXo72arMwsaQjEl3KTt
-         FMZ6FA2zQ8j2xhRErcRNIEzKGSoEiYzfgMxIRR2lqSF487lX8ebUkIiHClc3xvos4fBS
-         LX++ONP2dR2ObCrJk0+gQiDvXcOYkY75h3JyFJ2tHDhhd0YgS+iJIHpqaLtSMZ0BZlY+
-         tMjg==
-X-Gm-Message-State: AOAM5300g63FUG4Nex3IuGAm82jgqC9Ng428gfE3rZ7vQ1nxRpLGgtkf
-	B4kcyhjBF5wFdtB6zJFBcHjHPw==
-X-Google-Smtp-Source: ABdhPJw4TY/ElD16elVTE7kyetDCaV0UYrAU2WK3Vfnja9er6+ksTgX9KgYwTR2n7dMfQA/oAIPVJg==
-X-Received: by 2002:a05:6402:306a:: with SMTP id bs10mr6557963edb.209.1611132994640;
-        Wed, 20 Jan 2021 00:56:34 -0800 (PST)
+        bh=JGTIksuqiQGNqeZN2O+R2N92WfiVGrxt7/9m4IS+T4k=;
+        b=dfPoHgnFWo/r/6Z1d22W103hRObA+iwuOniUEYDrhEX9Z4a/St0uDy3BB2H3bk8LjU
+         2vXDnuwo819M4NH7/pAO+gj/VfAfuRln6LJDp84Y08GwWgUHLI0cPvgCXgZWq6vlHo14
+         ApForJUdbI1h2HPMOm32PvrXZ7uKNbe2ElmdVxstgpv8HNmhx+jIa9x3/RL1iLH9lDeG
+         wPFOf1+xrC8iqipmTFBFwqXYpLrdRcRcHHzMQAFjES4uzddKbPynhG6xeS3YEdgewBbb
+         K986sWOLnMdN6LZ65nEF72BamxK2ZprgWIsOw+xdBahLGOpUrUgnqkb8Qb4wTMU+qMc0
+         Ic3g==
+X-Gm-Message-State: AOAM532wKQoVVf+BgMCCzhuO8lgTiK/oNRy68efv3fYEON3C7VulDHue
+	gvph83DXCSfwh7X+wUjr3O/eEA==
+X-Google-Smtp-Source: ABdhPJwNgzZdfu6n+BuoPmFI7M2OUhnvUFdSsmYK8Hi5CzPDGZhrTf4q6tDRgWz0uAB0+7RT57y/GQ==
+X-Received: by 2002:a17:906:6087:: with SMTP id t7mr5684041ejj.90.1611133036692;
+        Wed, 20 Jan 2021 00:57:16 -0800 (PST)
 References: <1610488352-18494-1-git-send-email-olekstysh@gmail.com>
- <1610488352-18494-6-git-send-email-olekstysh@gmail.com>
+ <1610488352-18494-7-git-send-email-olekstysh@gmail.com>
 User-agent: mu4e 1.5.7; emacs 28.0.50
 From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: Oleksandr Tyshchenko <olekstysh@gmail.com>
@@ -97,11 +97,11 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Paul Durrant
  Liu <wl@xen.org>, Julien Grall <julien@xen.org>, Stefano Stabellini
  <sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>,
  xen-devel@lists.xenproject.org
-Subject: Re: [PATCH V4 05/24] xen/ioreq: Make x86's
- hvm_ioreq_needs_completion() common
-Date: Wed, 20 Jan 2021 08:48:09 +0000
-In-reply-to: <1610488352-18494-6-git-send-email-olekstysh@gmail.com>
-Message-ID: <87v9bst29r.fsf@linaro.org>
+Subject: Re: [PATCH V4 06/24] xen/ioreq: Make x86's
+ hvm_mmio_first(last)_byte() common
+Date: Wed, 20 Jan 2021 08:57:09 +0000
+In-reply-to: <1610488352-18494-7-git-send-email-olekstysh@gmail.com>
+Message-ID: <87sg6wt28l.fsf@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -111,20 +111,15 @@ Oleksandr Tyshchenko <olekstysh@gmail.com> writes:
 
 > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 >
-> The IOREQ is a common feature now and this helper will be used
-> on Arm as is. Move it to xen/ioreq.h and remove "hvm" prefix.
+> The IOREQ is a common feature now and these helpers will be used
+> on Arm as is. Move them to xen/ioreq.h and replace "hvm" prefixes
+> with "ioreq".
 >
-> Although PIO handling on Arm is not introduced with the current series
-> (it will be implemented when we add support for vPCI), technically
-> the PIOs exist on Arm (however they are accessed the same way as MMIO)
-> and it would be better not to diverge now.
-
-I find this description a little confusing. When you say PIO do you mean
-using instructions like in/out on the x86? If so then AFAIK it's a
-legacy feature of x86 as everything I've come across since just does
-MMIO, including PCI.
-
-The code changes look fine to me though:
+> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> Reviewed-by: Paul Durrant <paul@xen.org>
+> CC: Julien Grall <julien.grall@arm.com>
+> [On Arm only]
+> Tested-by: Wei Chen <Wei.Chen@arm.com>
 
 Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
