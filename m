@@ -2,45 +2,44 @@ Return-Path: <SRS0=FMYz=GX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable
+X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D093C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 13:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5A1FC433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 14:24:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 229B32336E
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 13:56:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 229B32336E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 53DEA23383
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 14:24:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53DEA23383
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.71399.127918 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.71443.127929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2DyW-0001uq-0a; Wed, 20 Jan 2021 13:56:44 +0000
+	id 1l2EOj-0005Pw-O7; Wed, 20 Jan 2021 14:23:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 71399.127918; Wed, 20 Jan 2021 13:56:43 +0000
+Received: by outflank-mailman (output) from mailman id 71443.127929; Wed, 20 Jan 2021 14:23:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2DyV-0001ud-S6; Wed, 20 Jan 2021 13:56:43 +0000
-Received: by outflank-mailman (input) for mailman id 71399;
- Wed, 20 Jan 2021 13:56:42 +0000
+	id 1l2EOj-0005Pp-Km; Wed, 20 Jan 2021 14:23:49 +0000
+Received: by outflank-mailman (input) for mailman id 71443;
+ Wed, 20 Jan 2021 14:23:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Ap16=GX=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l2DyT-0000k4-VU
- for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 13:56:42 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=uQjw=GX=gmail.com=arthurborsboom@srs-us1.protection.inumbo.net>)
+ id 1l2EOi-0005Pk-2Y
+ for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 14:23:48 +0000
+Received: from mail-yb1-xb2c.google.com (unknown [2607:f8b0:4864:20::b2c])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id da9cc3d5-722a-460b-8a21-4e3bd6b95958;
- Wed, 20 Jan 2021 13:56:04 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 99B87AE8D;
- Wed, 20 Jan 2021 13:56:03 +0000 (UTC)
+ id 057f4de4-23dd-40d5-aed2-ec12d2189477;
+ Wed, 20 Jan 2021 14:23:46 +0000 (UTC)
+Received: by mail-yb1-xb2c.google.com with SMTP id e67so11026344ybc.12
+ for <xen-devel@lists.xenproject.org>; Wed, 20 Jan 2021 06:23:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,498 +51,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: da9cc3d5-722a-460b-8a21-4e3bd6b95958
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1611150963; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=RBKvQ1quKphV0aHG3HdcZk3u50wSNWiZ3dhB2CG4DY0=;
-	b=TusyWTvePmthSSjAT3z/dq+hIEHi+eR3tHg/E5MHQ0GEyFUNnA0rpWJbyYlS+Hq4HFhpL+
-	H6Q+r2xcbulItA04FVLvWfNIh8bMg+EVZRP5a8wjmJvt5u6SEt60XNiHrNKCVPiAVFBbAL
-	UCXNPRY2DunDZnvUIC4jkixpfZqNWK4=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Deep Shah <sdeep@vmware.com>,
-	"VMware, Inc." <pv-drivers@vmware.com>
-Subject: [PATCH v4 14/15] x86/paravirt: switch functions with custom code to ALTERNATIVE
-Date: Wed, 20 Jan 2021 14:55:54 +0100
-Message-Id: <20210120135555.32594-15-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210120135555.32594-1-jgross@suse.com>
-References: <20210120135555.32594-1-jgross@suse.com>
+X-Inumbo-ID: 057f4de4-23dd-40d5-aed2-ec12d2189477
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BvC3iJfQJi0dywgAZ4MTpCiRnZfcg7mTX0eXoTwYqpQ=;
+        b=UrhM9TT37ZoB1yPJxwAJeRVQceFwv5bi+wOMkAEzlQTDxsqcLA0x9LE9PM2E8DKyOY
+         QNOI4657/xjxM4uS+Rv1upYrUJuTOHm7e8xFnAc2bJPaiqRnA4xS6bIBPFz3O3qibjx+
+         qhWmXhSzguMFijFbMmw/RhIMKeNLTGA3np1CS8wViC5F3FkjIAhMQORX7jU6Db0MoHOT
+         gbKFL5zz/too9GEse/RCgDnRb4J3Vc3OiG1OHwUGAXTGBfY6bcM8OeS/YRcTR3DLNe5P
+         yFT9wOyVv8CRGxUX3tLq7v1UkkSeOPJo0kN+GG9wplGPMFF1EGkpoMoPQaQ9DgdcFMLV
+         fjsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BvC3iJfQJi0dywgAZ4MTpCiRnZfcg7mTX0eXoTwYqpQ=;
+        b=buRwwnuG6nOdi7HABVwDe8Zttj+whIDfBCjWJ2JVlDgL+Zp7de3H6Mr7hGRUg8w21t
+         xGGawGl7e1c5cBD96qEnmqGV5RdfFXygp/j+kT/66k9/xbf5i/mQTMGYzbU1sYTjLjEI
+         D3/PJ8NNEJS3/djV03HcHCCDdx6wtkh43xmbCnk0Fvxibw3ICclY8mAcqzgrrTMNNGu2
+         GnnRnCg4wqXHuszTtdsrkeoW4VT0OUL7dsn3HmCiVye668TsH2NIni8l157pKZt3G5L1
+         RxRwYiObwEjtZRmW4sUv3lD16ticMNy9lUBvYJtei69AmhcRNrkYuxJoCWK8eqLcFHWS
+         qxgg==
+X-Gm-Message-State: AOAM531LyllK+A7i0iURwcXnRPHW/emLjXXCMsLaOPsqkRH2JM7qcltD
+	EQvgJ9t/vUnv7avyzLApL4xNAmHYWPdSE7iC5+Y=
+X-Google-Smtp-Source: ABdhPJzxNv7uRDrnKpXdkG1M41pIUaMinwNzxUlO3eKKX6oE9q1m6wd0XfR6NmQ4eQJkrn5vlyKH6Fan5kd46VUJUtw=
+X-Received: by 2002:a25:c04f:: with SMTP id c76mr12839489ybf.443.1611152626074;
+ Wed, 20 Jan 2021 06:23:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210119105727.95173-1-roger.pau@citrix.com>
+In-Reply-To: <20210119105727.95173-1-roger.pau@citrix.com>
+From: Arthur Borsboom <arthurborsboom@gmail.com>
+Date: Wed, 20 Jan 2021 15:23:30 +0100
+Message-ID: <CALUcmUkd9Eeau6tC9ZWHbLdvHTYfY34LvK6KKpOOxreYF67Myg@mail.gmail.com>
+Subject: Re: [PATCH v2] xen-blkfront: allow discard-* nodes to be optional
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: linux-kernel@vger.kernel.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Jens Axboe <axboe@kernel.dk>, xen-devel@lists.xenproject.org, 
+	linux-block@vger.kernel.org
+Content-Type: multipart/alternative; boundary="000000000000f4c86b05b955b3e0"
 
-Instead of using paravirt patching for custom code sequences use
-ALTERNATIVE for the functions with custom code replacements.
+--000000000000f4c86b05b955b3e0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Instead of patching an ud2 instruction for unpopulated vector entries
-into the caller site, use a simple function just calling BUG() as a
-replacement.
+Hi Roger,
 
-Simplify the register defines for assembler paravirt calling, as there
-isn't much usage left.
+I have set up a test environment based on Linux 5.11.0-rc4.
+The patch did not apply clean, so I copied/pasted the patch manually.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V4:
-- fixed SAVE_FLAGS() (kernel test robot)
-- added assembler paravirt cleanup
----
- arch/x86/entry/entry_64.S             |  2 +-
- arch/x86/include/asm/irqflags.h       |  2 +-
- arch/x86/include/asm/paravirt.h       | 99 +++++++++++++--------------
- arch/x86/include/asm/paravirt_types.h |  6 --
- arch/x86/kernel/paravirt.c            | 16 ++---
- arch/x86/kernel/paravirt_patch.c      | 88 ------------------------
- 6 files changed, 56 insertions(+), 157 deletions(-)
+Without the patch the call trace (as reported) is visible in dmesg.
+With the patch the call trace in dmesg is gone, but ... (there is always a
+but) ...
 
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index ce0464d630a2..714af508fe30 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -305,7 +305,7 @@ SYM_CODE_END(ret_from_fork)
- .macro DEBUG_ENTRY_ASSERT_IRQS_OFF
- #ifdef CONFIG_DEBUG_ENTRY
- 	pushq %rax
--	SAVE_FLAGS(CLBR_RAX)
-+	SAVE_FLAGS
- 	testl $X86_EFLAGS_IF, %eax
- 	jz .Lokay_\@
- 	ud2
-diff --git a/arch/x86/include/asm/irqflags.h b/arch/x86/include/asm/irqflags.h
-index a0efbcd24b86..c5ce9845c999 100644
---- a/arch/x86/include/asm/irqflags.h
-+++ b/arch/x86/include/asm/irqflags.h
-@@ -111,7 +111,7 @@ static __always_inline unsigned long arch_local_irq_save(void)
- 
- #ifdef CONFIG_X86_64
- #ifdef CONFIG_DEBUG_ENTRY
--#define SAVE_FLAGS(x)		pushfq; popq %rax
-+#define SAVE_FLAGS		pushfq; popq %rax
- #endif
- 
- #define INTERRUPT_RETURN	jmp native_iret
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 36cd71fa097f..04b3067f31b5 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -137,7 +137,8 @@ static inline void write_cr0(unsigned long x)
- 
- static inline unsigned long read_cr2(void)
- {
--	return PVOP_CALLEE0(unsigned long, mmu.read_cr2);
-+	return PVOP_ALT_CALLEE0(unsigned long, mmu.read_cr2,
-+				"mov %%cr2, %%rax;", ~X86_FEATURE_XENPV);
- }
- 
- static inline void write_cr2(unsigned long x)
-@@ -147,12 +148,14 @@ static inline void write_cr2(unsigned long x)
- 
- static inline unsigned long __read_cr3(void)
- {
--	return PVOP_CALL0(unsigned long, mmu.read_cr3);
-+	return PVOP_ALT_CALL0(unsigned long, mmu.read_cr3,
-+			      "mov %%cr3, %%rax;", ~X86_FEATURE_XENPV);
- }
- 
- static inline void write_cr3(unsigned long x)
- {
--	PVOP_VCALL1(mmu.write_cr3, x);
-+	PVOP_ALT_VCALL1(mmu.write_cr3, x,
-+			"mov %%rdi, %%cr3", ~X86_FEATURE_XENPV);
- }
- 
- static inline void __write_cr4(unsigned long x)
-@@ -172,7 +175,7 @@ static inline void halt(void)
- 
- static inline void wbinvd(void)
- {
--	PVOP_VCALL0(cpu.wbinvd);
-+	PVOP_ALT_VCALL0(cpu.wbinvd, "wbinvd", ~X86_FEATURE_XENPV);
- }
- 
- static inline u64 paravirt_read_msr(unsigned msr)
-@@ -386,22 +389,28 @@ static inline void paravirt_release_p4d(unsigned long pfn)
- 
- static inline pte_t __pte(pteval_t val)
- {
--	return (pte_t) { PVOP_CALLEE1(pteval_t, mmu.make_pte, val) };
-+	return (pte_t) { PVOP_ALT_CALLEE1(pteval_t, mmu.make_pte, val,
-+					  "mov %%rdi, %%rax",
-+					  ~X86_FEATURE_XENPV) };
- }
- 
- static inline pteval_t pte_val(pte_t pte)
- {
--	return PVOP_CALLEE1(pteval_t, mmu.pte_val, pte.pte);
-+	return PVOP_ALT_CALLEE1(pteval_t, mmu.pte_val, pte.pte,
-+				"mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- }
- 
- static inline pgd_t __pgd(pgdval_t val)
- {
--	return (pgd_t) { PVOP_CALLEE1(pgdval_t, mmu.make_pgd, val) };
-+	return (pgd_t) { PVOP_ALT_CALLEE1(pgdval_t, mmu.make_pgd, val,
-+					  "mov %%rdi, %%rax",
-+					  ~X86_FEATURE_XENPV) };
- }
- 
- static inline pgdval_t pgd_val(pgd_t pgd)
- {
--	return PVOP_CALLEE1(pgdval_t, mmu.pgd_val, pgd.pgd);
-+	return PVOP_ALT_CALLEE1(pgdval_t, mmu.pgd_val, pgd.pgd,
-+				"mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- }
- 
- #define  __HAVE_ARCH_PTEP_MODIFY_PROT_TRANSACTION
-@@ -434,12 +443,15 @@ static inline void set_pmd(pmd_t *pmdp, pmd_t pmd)
- 
- static inline pmd_t __pmd(pmdval_t val)
- {
--	return (pmd_t) { PVOP_CALLEE1(pmdval_t, mmu.make_pmd, val) };
-+	return (pmd_t) { PVOP_ALT_CALLEE1(pmdval_t, mmu.make_pmd, val,
-+					  "mov %%rdi, %%rax",
-+					  ~X86_FEATURE_XENPV) };
- }
- 
- static inline pmdval_t pmd_val(pmd_t pmd)
- {
--	return PVOP_CALLEE1(pmdval_t, mmu.pmd_val, pmd.pmd);
-+	return PVOP_ALT_CALLEE1(pmdval_t, mmu.pmd_val, pmd.pmd,
-+				"mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- }
- 
- static inline void set_pud(pud_t *pudp, pud_t pud)
-@@ -451,14 +463,16 @@ static inline pud_t __pud(pudval_t val)
- {
- 	pudval_t ret;
- 
--	ret = PVOP_CALLEE1(pudval_t, mmu.make_pud, val);
-+	ret = PVOP_ALT_CALLEE1(pudval_t, mmu.make_pud, val,
-+			       "mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- 
- 	return (pud_t) { ret };
- }
- 
- static inline pudval_t pud_val(pud_t pud)
- {
--	return PVOP_CALLEE1(pudval_t, mmu.pud_val, pud.pud);
-+	return PVOP_ALT_CALLEE1(pudval_t, mmu.pud_val, pud.pud,
-+				"mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- }
- 
- static inline void pud_clear(pud_t *pudp)
-@@ -477,14 +491,16 @@ static inline void set_p4d(p4d_t *p4dp, p4d_t p4d)
- 
- static inline p4d_t __p4d(p4dval_t val)
- {
--	p4dval_t ret = PVOP_CALLEE1(p4dval_t, mmu.make_p4d, val);
-+	p4dval_t ret = PVOP_ALT_CALLEE1(p4dval_t, mmu.make_p4d, val,
-+					"mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- 
- 	return (p4d_t) { ret };
- }
- 
- static inline p4dval_t p4d_val(p4d_t p4d)
- {
--	return PVOP_CALLEE1(p4dval_t, mmu.p4d_val, p4d.p4d);
-+	return PVOP_ALT_CALLEE1(p4dval_t, mmu.p4d_val, p4d.p4d,
-+				"mov %%rdi, %%rax", ~X86_FEATURE_XENPV);
- }
- 
- static inline void __set_pgd(pgd_t *pgdp, pgd_t pgd)
-@@ -571,7 +587,9 @@ static __always_inline void pv_queued_spin_lock_slowpath(struct qspinlock *lock,
- 
- static __always_inline void pv_queued_spin_unlock(struct qspinlock *lock)
- {
--	PVOP_VCALLEE1(lock.queued_spin_unlock, lock);
-+	PVOP_ALT_VCALLEE1(lock.queued_spin_unlock, lock,
-+			  "movb $0, (%%" _ASM_ARG1 ");",
-+			  ~X86_FEATURE_PVUNLOCK);
- }
- 
- static __always_inline void pv_wait(u8 *ptr, u8 val)
-@@ -586,7 +604,9 @@ static __always_inline void pv_kick(int cpu)
- 
- static __always_inline bool pv_vcpu_is_preempted(long cpu)
- {
--	return PVOP_CALLEE1(bool, lock.vcpu_is_preempted, cpu);
-+	return PVOP_ALT_CALLEE1(bool, lock.vcpu_is_preempted, cpu,
-+				"xor %%" _ASM_AX ", %%" _ASM_AX ";",
-+				~X86_FEATURE_VCPUPREEMPT);
- }
- 
- void __raw_callee_save___native_queued_spin_unlock(struct qspinlock *lock);
-@@ -660,17 +680,18 @@ bool __raw_callee_save___native_vcpu_is_preempted(long cpu);
- #ifdef CONFIG_PARAVIRT_XXL
- static inline notrace unsigned long arch_local_save_flags(void)
- {
--	return PVOP_CALLEE0(unsigned long, irq.save_fl);
-+	return PVOP_ALT_CALLEE0(unsigned long, irq.save_fl,
-+				"pushf; pop %%rax;", ~X86_FEATURE_XENPV);
- }
- 
- static inline notrace void arch_local_irq_disable(void)
- {
--	PVOP_VCALLEE0(irq.irq_disable);
-+	PVOP_ALT_VCALLEE0(irq.irq_disable, "cli;", ~X86_FEATURE_XENPV);
- }
- 
- static inline notrace void arch_local_irq_enable(void)
- {
--	PVOP_VCALLEE0(irq.irq_enable);
-+	PVOP_ALT_VCALLEE0(irq.irq_enable, "sti;", ~X86_FEATURE_XENPV);
- }
- 
- static inline notrace unsigned long arch_local_irq_save(void)
-@@ -715,35 +736,9 @@ extern void default_banner(void);
- 	.popsection
- 
- 
--#define COND_PUSH(set, mask, reg)			\
--	.if ((~(set)) & mask); push %reg; .endif
--#define COND_POP(set, mask, reg)			\
--	.if ((~(set)) & mask); pop %reg; .endif
--
- #ifdef CONFIG_X86_64
- #ifdef CONFIG_PARAVIRT_XXL
- 
--#define PV_SAVE_REGS(set)			\
--	COND_PUSH(set, CLBR_RAX, rax);		\
--	COND_PUSH(set, CLBR_RCX, rcx);		\
--	COND_PUSH(set, CLBR_RDX, rdx);		\
--	COND_PUSH(set, CLBR_RSI, rsi);		\
--	COND_PUSH(set, CLBR_RDI, rdi);		\
--	COND_PUSH(set, CLBR_R8, r8);		\
--	COND_PUSH(set, CLBR_R9, r9);		\
--	COND_PUSH(set, CLBR_R10, r10);		\
--	COND_PUSH(set, CLBR_R11, r11)
--#define PV_RESTORE_REGS(set)			\
--	COND_POP(set, CLBR_R11, r11);		\
--	COND_POP(set, CLBR_R10, r10);		\
--	COND_POP(set, CLBR_R9, r9);		\
--	COND_POP(set, CLBR_R8, r8);		\
--	COND_POP(set, CLBR_RDI, rdi);		\
--	COND_POP(set, CLBR_RSI, rsi);		\
--	COND_POP(set, CLBR_RDX, rdx);		\
--	COND_POP(set, CLBR_RCX, rcx);		\
--	COND_POP(set, CLBR_RAX, rax)
--
- #define PARA_PATCH(off)		((off) / 8)
- #define PARA_SITE(ptype, ops)	_PVSITE(ptype, ops, .quad, 8)
- #define PARA_INDIRECT(addr)	*addr(%rip)
-@@ -754,12 +749,14 @@ extern void default_banner(void);
- 		X86_FEATURE_XENPV, "jmp xen_iret;", "jmp native_iret;")
- 
- #ifdef CONFIG_DEBUG_ENTRY
--#define SAVE_FLAGS(clobbers)                                        \
--	PARA_SITE(PARA_PATCH(PV_IRQ_save_fl),			    \
--		  PV_SAVE_REGS(clobbers | CLBR_CALLEE_SAVE);        \
--		  ANNOTATE_RETPOLINE_SAFE;			    \
--		  call PARA_INDIRECT(pv_ops+PV_IRQ_save_fl);	    \
--		  PV_RESTORE_REGS(clobbers | CLBR_CALLEE_SAVE);)
-+.macro PARA_IRQ_save_fl
-+	PARA_SITE(PARA_PATCH(PV_IRQ_save_fl),
-+		  ANNOTATE_RETPOLINE_SAFE;
-+		  call PARA_INDIRECT(pv_ops+PV_IRQ_save_fl);)
-+.endm
-+
-+#define SAVE_FLAGS	ALTERNATIVE "PARA_IRQ_save_fl;", "pushf; pop %rax;", \
-+				    ~X86_FEATURE_XENPV
- #endif
- #endif /* CONFIG_PARAVIRT_XXL */
- #endif	/* CONFIG_X86_64 */
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 0ed976286d49..588ff14ce969 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -3,7 +3,6 @@
- #define _ASM_X86_PARAVIRT_TYPES_H
- 
- /* Bitmask of what can be clobbered: usually at least eax. */
--#define CLBR_NONE 0
- #define CLBR_EAX  (1 << 0)
- #define CLBR_ECX  (1 << 1)
- #define CLBR_EDX  (1 << 2)
-@@ -15,7 +14,6 @@
- 
- #define CLBR_ARG_REGS	(CLBR_EAX | CLBR_EDX | CLBR_ECX)
- #define CLBR_RET_REG	(CLBR_EAX | CLBR_EDX)
--#define CLBR_SCRATCH	(0)
- #else
- #define CLBR_RAX  CLBR_EAX
- #define CLBR_RCX  CLBR_ECX
-@@ -32,12 +30,9 @@
- #define CLBR_ARG_REGS	(CLBR_RDI | CLBR_RSI | CLBR_RDX | \
- 			 CLBR_RCX | CLBR_R8 | CLBR_R9)
- #define CLBR_RET_REG	(CLBR_RAX)
--#define CLBR_SCRATCH	(CLBR_R10 | CLBR_R11)
- 
- #endif /* X86_64 */
- 
--#define CLBR_CALLEE_SAVE ((CLBR_ARG_REGS | CLBR_SCRATCH) & ~CLBR_RET_REG)
--
- #ifndef __ASSEMBLY__
- 
- #include <asm/desc_defs.h>
-@@ -322,7 +317,6 @@ extern void (*paravirt_iret)(void);
- /* Simple instruction patching code. */
- #define NATIVE_LABEL(a,x,b) "\n\t.globl " a #x "_" #b "\n" a #x "_" #b ":\n\t"
- 
--unsigned paravirt_patch_ident_64(void *insn_buff, unsigned len);
- unsigned paravirt_patch_default(u8 type, void *insn_buff, unsigned long addr, unsigned len);
- unsigned paravirt_patch_insns(void *insn_buff, unsigned len, const char *start, const char *end);
- 
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index 0553a339d850..082954930809 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -53,7 +53,10 @@ void __init default_banner(void)
- }
- 
- /* Undefined instruction for dealing with missing ops pointers. */
--static const unsigned char ud2a[] = { 0x0f, 0x0b };
-+static void paravirt_BUG(void)
-+{
-+	BUG();
-+}
- 
- struct branch {
- 	unsigned char opcode;
-@@ -107,17 +110,10 @@ unsigned paravirt_patch_default(u8 type, void *insn_buff,
- 	unsigned ret;
- 
- 	if (opfunc == NULL)
--		/* If there's no function, patch it with a ud2a (BUG) */
--		ret = paravirt_patch_insns(insn_buff, len, ud2a, ud2a+sizeof(ud2a));
-+		/* If there's no function, patch it with paravirt_BUG() */
-+		ret = paravirt_patch_call(insn_buff, paravirt_BUG, addr, len);
- 	else if (opfunc == _paravirt_nop)
- 		ret = 0;
--
--#ifdef CONFIG_PARAVIRT_XXL
--	/* identity functions just return their single argument */
--	else if (opfunc == _paravirt_ident_64)
--		ret = paravirt_patch_ident_64(insn_buff, len);
--
--#endif
- 	else
- 		/* Otherwise call the function. */
- 		ret = paravirt_patch_call(insn_buff, opfunc, addr, len);
-diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
-index abd27ec67397..10543dcc8211 100644
---- a/arch/x86/kernel/paravirt_patch.c
-+++ b/arch/x86/kernel/paravirt_patch.c
-@@ -4,96 +4,8 @@
- #include <asm/paravirt.h>
- #include <asm/asm-offsets.h>
- 
--#define PSTART(d, m)							\
--	patch_data_##d.m
--
--#define PEND(d, m)							\
--	(PSTART(d, m) + sizeof(patch_data_##d.m))
--
--#define PATCH(d, m, insn_buff, len)						\
--	paravirt_patch_insns(insn_buff, len, PSTART(d, m), PEND(d, m))
--
--#define PATCH_CASE(ops, m, data, insn_buff, len)				\
--	case PARAVIRT_PATCH(ops.m):					\
--		return PATCH(data, ops##_##m, insn_buff, len)
--
--#ifdef CONFIG_PARAVIRT_XXL
--struct patch_xxl {
--	const unsigned char	irq_irq_disable[1];
--	const unsigned char	irq_irq_enable[1];
--	const unsigned char	irq_save_fl[2];
--	const unsigned char	mmu_read_cr2[3];
--	const unsigned char	mmu_read_cr3[3];
--	const unsigned char	mmu_write_cr3[3];
--	const unsigned char	cpu_wbinvd[2];
--	const unsigned char	mov64[3];
--};
--
--static const struct patch_xxl patch_data_xxl = {
--	.irq_irq_disable	= { 0xfa },		// cli
--	.irq_irq_enable		= { 0xfb },		// sti
--	.irq_save_fl		= { 0x9c, 0x58 },	// pushf; pop %[re]ax
--	.mmu_read_cr2		= { 0x0f, 0x20, 0xd0 },	// mov %cr2, %[re]ax
--	.mmu_read_cr3		= { 0x0f, 0x20, 0xd8 },	// mov %cr3, %[re]ax
--	.mmu_write_cr3		= { 0x0f, 0x22, 0xdf },	// mov %rdi, %cr3
--	.cpu_wbinvd		= { 0x0f, 0x09 },	// wbinvd
--	.mov64			= { 0x48, 0x89, 0xf8 },	// mov %rdi, %rax
--};
--
--unsigned int paravirt_patch_ident_64(void *insn_buff, unsigned int len)
--{
--	return PATCH(xxl, mov64, insn_buff, len);
--}
--# endif /* CONFIG_PARAVIRT_XXL */
--
--#ifdef CONFIG_PARAVIRT_SPINLOCKS
--struct patch_lock {
--	unsigned char queued_spin_unlock[3];
--	unsigned char vcpu_is_preempted[2];
--};
--
--static const struct patch_lock patch_data_lock = {
--	.vcpu_is_preempted	= { 0x31, 0xc0 },	// xor %eax, %eax
--
--# ifdef CONFIG_X86_64
--	.queued_spin_unlock	= { 0xc6, 0x07, 0x00 },	// movb $0, (%rdi)
--# else
--	.queued_spin_unlock	= { 0xc6, 0x00, 0x00 },	// movb $0, (%eax)
--# endif
--};
--#endif /* CONFIG_PARAVIRT_SPINLOCKS */
--
- unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
- 			  unsigned int len)
- {
--	switch (type) {
--
--#ifdef CONFIG_PARAVIRT_XXL
--	PATCH_CASE(irq, save_fl, xxl, insn_buff, len);
--	PATCH_CASE(irq, irq_enable, xxl, insn_buff, len);
--	PATCH_CASE(irq, irq_disable, xxl, insn_buff, len);
--
--	PATCH_CASE(mmu, read_cr2, xxl, insn_buff, len);
--	PATCH_CASE(mmu, read_cr3, xxl, insn_buff, len);
--	PATCH_CASE(mmu, write_cr3, xxl, insn_buff, len);
--
--	PATCH_CASE(cpu, wbinvd, xxl, insn_buff, len);
--#endif
--
--#ifdef CONFIG_PARAVIRT_SPINLOCKS
--	case PARAVIRT_PATCH(lock.queued_spin_unlock):
--		if (pv_is_native_spin_unlock())
--			return PATCH(lock, queued_spin_unlock, insn_buff, len);
--		break;
--
--	case PARAVIRT_PATCH(lock.vcpu_is_preempted):
--		if (pv_is_native_vcpu_is_preempted())
--			return PATCH(lock, vcpu_is_preempted, insn_buff, len);
--		break;
--#endif
--	default:
--		break;
--	}
--
- 	return paravirt_patch_default(type, insn_buff, addr, len);
- }
--- 
-2.26.2
+Now the discard action returns the following.
 
+[arthur@test-arch ~]$ sudo fstrim -v /
+fstrim: /: the discard operation is not supported
+
+It might be correct, but of course I was hoping the Xen VM guest would pass
+on the discard request to the block device in the Xen VM host, which is a
+disk partition.
+Any suggestions?
+
+On Tue, 19 Jan 2021 at 11:57, Roger Pau Monne <roger.pau@citrix.com> wrote:
+
+> This is inline with the specification described in blkif.h:
+>
+>  * discard-granularity: should be set to the physical block size if
+>    node is not present.
+>  * discard-alignment, discard-secure: should be set to 0 if node not
+>    present.
+>
+> This was detected as QEMU would only create the discard-granularity
+> node but not discard-alignment, and thus the setup done in
+> blkfront_setup_discard would fail.
+>
+> Fix blkfront_setup_discard to not fail on missing nodes, and also fix
+> blkif_set_queue_limits to set the discard granularity to the physical
+> block size if none is specified in xenbus.
+>
+> Fixes: ed30bf317c5ce ('xen-blkfront: Handle discard requests.')
+> Reported-by: Arthur Borsboom <arthurborsboom@gmail.com>
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> ---
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+> Cc: "Roger Pau Monn=C3=A9" <roger.pau@citrix.com>
+> Cc: Jens Axboe <axboe@kernel.dk>
+> Cc: xen-devel@lists.xenproject.org
+> Cc: linux-block@vger.kernel.org
+> Cc: Arthur Borsboom <arthurborsboom@gmail.com>
+> ---
+> Changes since v2:
+>  - Allow all discard-* nodes to be optional.
+> ---
+>  drivers/block/xen-blkfront.c | 20 +++++++-------------
+>  1 file changed, 7 insertions(+), 13 deletions(-)
+>
+> diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+> index 5265975b3fba..e1c6798889f4 100644
+> --- a/drivers/block/xen-blkfront.c
+> +++ b/drivers/block/xen-blkfront.c
+> @@ -945,7 +945,8 @@ static void blkif_set_queue_limits(struct
+> blkfront_info *info)
+>         if (info->feature_discard) {
+>                 blk_queue_flag_set(QUEUE_FLAG_DISCARD, rq);
+>                 blk_queue_max_discard_sectors(rq, get_capacity(gd));
+> -               rq->limits.discard_granularity =3D info->discard_granular=
+ity;
+> +               rq->limits.discard_granularity =3D info->discard_granular=
+ity
+> ?:
+> +
+> info->physical_sector_size;
+>                 rq->limits.discard_alignment =3D info->discard_alignment;
+>                 if (info->feature_secdiscard)
+>                         blk_queue_flag_set(QUEUE_FLAG_SECERASE, rq);
+> @@ -2179,19 +2180,12 @@ static void blkfront_closing(struct blkfront_info
+> *info)
+>
+>  static void blkfront_setup_discard(struct blkfront_info *info)
+>  {
+> -       int err;
+> -       unsigned int discard_granularity;
+> -       unsigned int discard_alignment;
+> -
+>         info->feature_discard =3D 1;
+> -       err =3D xenbus_gather(XBT_NIL, info->xbdev->otherend,
+> -               "discard-granularity", "%u", &discard_granularity,
+> -               "discard-alignment", "%u", &discard_alignment,
+> -               NULL);
+> -       if (!err) {
+> -               info->discard_granularity =3D discard_granularity;
+> -               info->discard_alignment =3D discard_alignment;
+> -       }
+> +       info->discard_granularity =3D
+> xenbus_read_unsigned(info->xbdev->otherend,
+> +
+> "discard-granularity",
+> +                                                        0);
+> +       info->discard_alignment =3D
+> xenbus_read_unsigned(info->xbdev->otherend,
+> +
+> "discard-alignment", 0);
+>         info->feature_secdiscard =3D
+>                 !!xenbus_read_unsigned(info->xbdev->otherend,
+> "discard-secure",
+>                                        0);
+> --
+> 2.29.2
+>
+>
+
+--=20
+Arthur Borsboom
+
+--000000000000f4c86b05b955b3e0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Roger,<div><br></div><div>I have set up a test environm=
+ent based on Linux 5.11.0-rc4.</div><div>The patch did not apply clean, so =
+I copied/pasted the patch manually.</div><div><br></div><div>Without the pa=
+tch the call trace (as reported) is visible in dmesg.</div><div>With the pa=
+tch the call trace in dmesg is gone, but ... (there is always a but) ...</d=
+iv><div><br></div><div>Now the discard action returns the following.</div><=
+div><br></div>[arthur@test-arch ~]$ sudo fstrim -v /<br><div>fstrim: /: the=
+ discard operation is not supported<br></div><div><br></div><div>It might b=
+e correct, but of course I was hoping the Xen VM guest would pass on the di=
+scard request to the block device in the Xen VM host, which is a disk parti=
+tion.</div><div>Any suggestions?</div></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Tue, 19 Jan 2021 at 11:57, Roger P=
+au Monne &lt;<a href=3D"mailto:roger.pau@citrix.com">roger.pau@citrix.com</=
+a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Th=
+is is inline with the specification described in blkif.h:<br>
+<br>
+=C2=A0* discard-granularity: should be set to the physical block size if<br=
+>
+=C2=A0 =C2=A0node is not present.<br>
+=C2=A0* discard-alignment, discard-secure: should be set to 0 if node not<b=
+r>
+=C2=A0 =C2=A0present.<br>
+<br>
+This was detected as QEMU would only create the discard-granularity<br>
+node but not discard-alignment, and thus the setup done in<br>
+blkfront_setup_discard would fail.<br>
+<br>
+Fix blkfront_setup_discard to not fail on missing nodes, and also fix<br>
+blkif_set_queue_limits to set the discard granularity to the physical<br>
+block size if none is specified in xenbus.<br>
+<br>
+Fixes: ed30bf317c5ce (&#39;xen-blkfront: Handle discard requests.&#39;)<br>
+Reported-by: Arthur Borsboom &lt;<a href=3D"mailto:arthurborsboom@gmail.com=
+" target=3D"_blank">arthurborsboom@gmail.com</a>&gt;<br>
+Signed-off-by: Roger Pau Monn=C3=A9 &lt;<a href=3D"mailto:roger.pau@citrix.=
+com" target=3D"_blank">roger.pau@citrix.com</a>&gt;<br>
+---<br>
+Cc: Boris Ostrovsky &lt;<a href=3D"mailto:boris.ostrovsky@oracle.com" targe=
+t=3D"_blank">boris.ostrovsky@oracle.com</a>&gt;<br>
+Cc: Juergen Gross &lt;<a href=3D"mailto:jgross@suse.com" target=3D"_blank">=
+jgross@suse.com</a>&gt;<br>
+Cc: Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" target=
+=3D"_blank">sstabellini@kernel.org</a>&gt;<br>
+Cc: Konrad Rzeszutek Wilk &lt;<a href=3D"mailto:konrad.wilk@oracle.com" tar=
+get=3D"_blank">konrad.wilk@oracle.com</a>&gt;<br>
+Cc: &quot;Roger Pau Monn=C3=A9&quot; &lt;<a href=3D"mailto:roger.pau@citrix=
+.com" target=3D"_blank">roger.pau@citrix.com</a>&gt;<br>
+Cc: Jens Axboe &lt;<a href=3D"mailto:axboe@kernel.dk" target=3D"_blank">axb=
+oe@kernel.dk</a>&gt;<br>
+Cc: <a href=3D"mailto:xen-devel@lists.xenproject.org" target=3D"_blank">xen=
+-devel@lists.xenproject.org</a><br>
+Cc: <a href=3D"mailto:linux-block@vger.kernel.org" target=3D"_blank">linux-=
+block@vger.kernel.org</a><br>
+Cc: Arthur Borsboom &lt;<a href=3D"mailto:arthurborsboom@gmail.com" target=
+=3D"_blank">arthurborsboom@gmail.com</a>&gt;<br>
+---<br>
+Changes since v2:<br>
+=C2=A0- Allow all discard-* nodes to be optional.<br>
+---<br>
+=C2=A0drivers/block/xen-blkfront.c | 20 +++++++-------------<br>
+=C2=A01 file changed, 7 insertions(+), 13 deletions(-)<br>
+<br>
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c<br=
+>
+index 5265975b3fba..e1c6798889f4 100644<br>
+--- a/drivers/block/xen-blkfront.c<br>
++++ b/drivers/block/xen-blkfront.c<br>
+@@ -945,7 +945,8 @@ static void blkif_set_queue_limits(struct blkfront_info=
+ *info)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (info-&gt;feature_discard) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 blk_queue_flag_set(=
+QUEUE_FLAG_DISCARD, rq);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 blk_queue_max_disca=
+rd_sectors(rq, get_capacity(gd));<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rq-&gt;limits.disca=
+rd_granularity =3D info-&gt;discard_granularity;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rq-&gt;limits.disca=
+rd_granularity =3D info-&gt;discard_granularity ?:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 info-&gt;physical_sector_size;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rq-&gt;limits.disca=
+rd_alignment =3D info-&gt;discard_alignment;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (info-&gt;featur=
+e_secdiscard)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 blk_queue_flag_set(QUEUE_FLAG_SECERASE, rq);<br>
+@@ -2179,19 +2180,12 @@ static void blkfront_closing(struct blkfront_info *=
+info)<br>
+<br>
+=C2=A0static void blkfront_setup_discard(struct blkfront_info *info)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0int err;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int discard_granularity;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned int discard_alignment;<br>
+-<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 info-&gt;feature_discard =3D 1;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0err =3D xenbus_gather(XBT_NIL, info-&gt;xbdev-&=
+gt;otherend,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;discard-granu=
+larity&quot;, &quot;%u&quot;, &amp;discard_granularity,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;discard-align=
+ment&quot;, &quot;%u&quot;, &amp;discard_alignment,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0NULL);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0if (!err) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0info-&gt;discard_gr=
+anularity =3D discard_granularity;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0info-&gt;discard_al=
+ignment =3D discard_alignment;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0info-&gt;discard_granularity =3D xenbus_read_un=
+signed(info-&gt;xbdev-&gt;otherend,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;discard-granularity&=
+quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0info-&gt;discard_alignment =3D xenbus_read_unsi=
+gned(info-&gt;xbdev-&gt;otherend,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;discard-alignment&quot;, 0)=
+;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 info-&gt;feature_secdiscard =3D<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 !!xenbus_read_unsig=
+ned(info-&gt;xbdev-&gt;otherend, &quot;discard-secure&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00);<br>
+-- <br>
+2.29.2<br>
+<br>
+</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
+ class=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"lt=
+r"><div dir=3D"ltr"><div style=3D"color:rgb(136,136,136)"><font face=3D"tah=
+oma, sans-serif" size=3D"2">Arthur Borsboom</font></div><span style=3D"colo=
+r:rgb(136,136,136);font-family:Tahoma"></span></div></div></div></div></div=
+>
+
+--000000000000f4c86b05b955b3e0--
 
