@@ -2,48 +2,45 @@ Return-Path: <SRS0=FMYz=GX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8961C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97A1CC433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:58:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85246223DB
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:50:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85246223DB
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 303B0223DB
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jan 2021 17:58:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 303B0223DB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.71688.128573 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.71695.128597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2Hc5-0005nl-1n; Wed, 20 Jan 2021 17:49:49 +0000
+	id 1l2HkS-0006jn-35; Wed, 20 Jan 2021 17:58:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 71688.128573; Wed, 20 Jan 2021 17:49:49 +0000
+Received: by outflank-mailman (output) from mailman id 71695.128597; Wed, 20 Jan 2021 17:58:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2Hc4-0005ne-Ux; Wed, 20 Jan 2021 17:49:48 +0000
-Received: by outflank-mailman (input) for mailman id 71688;
- Wed, 20 Jan 2021 17:49:48 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JkA9=GX=arm.com=vladimir.murzin@srs-us1.protection.inumbo.net>)
- id 1l2Hc4-0005nZ-8l
- for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 17:49:48 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 06011854-411a-43cf-a3be-3e21f15d0994;
- Wed, 20 Jan 2021 17:49:47 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EAF4414FF;
- Wed, 20 Jan 2021 09:49:27 -0800 (PST)
-Received: from [10.57.9.138] (unknown [10.57.9.138])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EEFE43F68F;
- Wed, 20 Jan 2021 09:49:14 -0800 (PST)
+	id 1l2HkR-0006jg-W5; Wed, 20 Jan 2021 17:58:27 +0000
+Received: by outflank-mailman (input) for mailman id 71695;
+ Wed, 20 Jan 2021 17:58:27 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1l2HkR-0006jb-5k
+ for xen-devel@lists.xenproject.org; Wed, 20 Jan 2021 17:58:27 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1l2HkR-0006RG-1O; Wed, 20 Jan 2021 17:58:27 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1l2HkQ-0000nB-RW; Wed, 20 Jan 2021 17:58:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,128 +52,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06011854-411a-43cf-a3be-3e21f15d0994
-Subject: Re: [XEN PATCH] xen/arm: Hide Pointer Authentication (PAC)
-To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, Volodymyr_Babchuk@epam.com
-References: <20210120112712.9534-1-vladimir.murzin@arm.com>
- <2b70b207-4893-e08a-6fdc-52c0b5c8cc6b@xen.org>
-From: Vladimir Murzin <vladimir.murzin@arm.com>
-Message-ID: <1b1049e2-d12e-b0ba-e101-e63e5d887712@arm.com>
-Date: Wed, 20 Jan 2021 17:49:39 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=h1yYu8b0TxQp7Mz2LV1JhaBIL7uzAV77D9H/6av4Slc=; b=VLAHVujiWKlEFNSNeiKYKfGZ78
+	4GEcDAouhF1tDl+EXYqMA8UwEQQrbX8X2GbOoP+4VPKn7V5VeTIOqC6XxMcor80XCYPYMUrH0f2M0
+	S7SjaU4icmxJNWASyugAn1weOMPG7DWcYuHwVweKmjs2JNNZtFg1t582Ps6fiSsNbLCg=;
+Subject: Re: [PATCH v2] xen/arm: Using unsigned long for arm64 MPIDR mask
+To: Wei Chen <Wei.Chen@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>
+Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Penny Zheng <Penny.Zheng@arm.com>, Jiamei Xie <Jiamei.Xie@arm.com>,
+ nd <nd@arm.com>
+References: <20210108062953.2335932-1-wei.chen@arm.com>
+ <a11a8270-68ab-066f-7799-511e72869e95@xen.org>
+ <AM0PR08MB3747169FD88CFD00C5E38A039EAE0@AM0PR08MB3747.eurprd08.prod.outlook.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <bbeffe6a-beac-54f7-560d-00b99135d365@xen.org>
+Date: Wed, 20 Jan 2021 17:58:24 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <2b70b207-4893-e08a-6fdc-52c0b5c8cc6b@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <AM0PR08MB3747169FD88CFD00C5E38A039EAE0@AM0PR08MB3747.eurprd08.prod.outlook.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On 1/20/21 5:44 PM, Julien Grall wrote:
-> Hi Vladimir,
-> 
-> On 20/01/2021 11:27, Vladimir Murzin wrote:
->> The ARMv8.3 Pointer Authentication extension is not supported by Xen
->> at the moment, so do not expose that via ID register.
+On 08/01/2021 11:50, Wei Chen wrote:
+> Hi Julien
+
+Hi Wei,
+
+Sorry for the late answer. While cleaning my inbox today, I noticied 
+that I didn't reply to this thread :(.
+
+>>> integer will do unsigned extend while doing some operations
+>>> with 64-bit unsigned integer. This can lead to unexpected
+>>> result in some use cases.
+>>>
+>>> For example, in gicv3_send_sgi_list of GICv3 driver:
+>>> uint64_t cluster_id = cpu_logical_map(cpu) & ~MPIDR_AFF0_MASK;
+>>>
+>>> When MPIDR_AFF0_MASK is 0xFFU, compiler output:
+>>>       f7c: 92785c16 and x22, x0, #0xffffff00
+>>> When MPIDR_AFF0_MASK is 0xFFUL, compiler output:
+>>>       f88: 9278dc75 and x21, x3, #0xffffffffffffff00
+>>>
+>>> If cpu_logical_map(cpu) = 0x100000000UL and MPIDR_AFF0_MASK is
+>>> 0xFFU, the cluster_id returns 0. But the expected value should
+>>> be 0x100000000.
+>>>
+>>> So, in this patch, we force aarch64 to use unsigned long
+>>> as MPIDR mask to avoid such unexpected results.
 >>
->> Signed-off-by: Vladimir Murzin <vladimir.murzin@arm.com>
->> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
->> ---
->>   xen/arch/arm/cpufeature.c        |  6 +++++
->>   xen/include/asm-arm/cpufeature.h | 38 +++++++++++++++++++++++++++++++-
->>   2 files changed, 43 insertions(+), 1 deletion(-)
+>> How about the following commit message:
 >>
->> diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
->> index 99fe4db28..1d8878380 100644
->> --- a/xen/arch/arm/cpufeature.c
->> +++ b/xen/arch/arm/cpufeature.c
->> @@ -187,6 +187,12 @@ static int __init create_guest_cpuinfo(void)
->>         /* Hide MTE support as Xen does not support it */
->>       guest_cpuinfo.pfr64.mte = 0;
->> +
->> +    /* Hide PAC support as Xen does not support it */
->> +    guest_cpuinfo.isa64.apa = 0;
->> +    guest_cpuinfo.isa64.api = 0;
->> +    guest_cpuinfo.isa64.gpa = 0;
->> +    guest_cpuinfo.isa64.gpi = 0;
->>   #endif
->>         /* Hide AMU support */
->> diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
->> index c6e5711b2..43135abef 100644
->> --- a/xen/include/asm-arm/cpufeature.h
->> +++ b/xen/include/asm-arm/cpufeature.h
->> @@ -212,8 +212,44 @@ struct cpuinfo_arm {
->>           };
->>       } mm64;
->>   -    struct {
->> +    union {
->>           uint64_t bits[2];
->> +        struct {
->> +            /* ISAR0 */
->> +            unsigned long __res0:4;
->> +            unsigned long aes:4;
->> +            unsigned long sha1:4;
->> +            unsigned long sha2:4;
->> +            unsigned long crc32:4;
->> +            unsigned long atomic:4;
->> +            unsigned long __res1:4;
->> +            unsigned long rdm:4;
->> +            unsigned long sha3:4;
->> +            unsigned long sm3:4;
->> +            unsigned long sm4:4;
->> +            unsigned long dp:4;
->> +            unsigned long fhm:4;
->> +            unsigned long ts:4;
->> +            unsigned long tlb:4;
->> +            unsigned long rndr:4;
->> +
->> +            /* ISAR1 */
->> +            unsigned long dpb:4;
->> +            unsigned long apa:4;
->> +            unsigned long api:4;
->> +            unsigned long jscvt:4;
->> +            unsigned long fcma:4;
->> +            unsigned long lrcpc:4;
->> +            unsigned long gpa:4;
->> +            unsigned long gpi:4;
->> +            unsigned long frintts:4;
->> +            unsigned long sb:4;
->> +            unsigned long specres:4;
->> +            unsigned long bf16:4;
->> +            unsigned long dgh:4;
->> +            unsigned long i8mm:4;
->> +            unsigned long __res0:8;
+>> "Currently, Xen is considering that all the affinity bits are defined
+>> below 32-bit. However, Arm64 define a 3rd level affinity in bits 32-39.
+>>
+>> The function gicv3_send_sgi_list in the GICv3 driver will compute the
+>> cluser using the following code:
+>>
+>> uint64_t cluster_id = cpu_logical_map(cpu) & ~MPIDR_AFF0_MASK;
+>>
+>> Because MPIDR_AFF0_MASK is defined as a 32-bit value, we will miss out
+>> the 3rd level affinity. As a consequence, the IPI would not be sent to
+>> the correct vCPU.
+>>
+>> This particular error can be solved by switching MPIDR_AFF0_MASK to use
+>> unsigned long. However, take the opportunity to switch all the MPIDR_*
+>> define to use unsigned long to avoid anymore issue.
+>> "
+>>
+>> I can update the commit message while committing if you are happy with it.
+>>
 > 
-> This unfortunately break the build on arm64 becase __res0 is defined twiced in the structure:
-> 
-> oss/xen/xen/include/asm/cpufeature.h:251:27: error: duplicate member ‘__res0’
->              unsigned long __res0:8;
->                            ^~~~~~
-> 
+> Yes, that would be good, thank you very much : )
 
-Sorry about that, I should have double checked that patch still compiles.
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 
-> The change is trivial, so I have resolved it (see change below) and committed it:
-> 
-> diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
-> index 2baf7919615d..70cb67301f74 100644
-> --- a/xen/include/asm-arm/cpufeature.h
-> +++ b/xen/include/asm-arm/cpufeature.h
-> @@ -248,7 +248,7 @@ struct cpuinfo_arm {
->              unsigned long bf16:4;
->              unsigned long dgh:4;
->              unsigned long i8mm:4;
-> -            unsigned long __res0:8;
-> +            unsigned long __res2:8;
->          };
->      } isa64;
-> 
+And committed.
 
-LGTM, Great Thanks!
+Cheers,
 
-Vladimir
-
-> Cheers,
-> 
-
+-- 
+Julien Grall
 
