@@ -2,41 +2,48 @@ Return-Path: <SRS0=QJUc=GY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17C0DC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:53:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E040BC433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 22:46:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B9F9E2389B
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:53:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9F9E2389B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 980D623A56
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 22:46:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 980D623A56
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.72475.130511 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.72480.130524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2hsa-0000i6-Rv; Thu, 21 Jan 2021 21:52:36 +0000
+	id 1l2ihz-0005v1-PL; Thu, 21 Jan 2021 22:45:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 72475.130511; Thu, 21 Jan 2021 21:52:36 +0000
+Received: by outflank-mailman (output) from mailman id 72480.130524; Thu, 21 Jan 2021 22:45:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2hsa-0000hz-Ou; Thu, 21 Jan 2021 21:52:36 +0000
-Received: by outflank-mailman (input) for mailman id 72475;
- Thu, 21 Jan 2021 21:52:35 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rOiS=GY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l2hsZ-0000hu-9L
- for xen-devel@lists.xenproject.org; Thu, 21 Jan 2021 21:52:35 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 90c8481c-d379-4e99-bb30-9231fc32ec76;
- Thu, 21 Jan 2021 21:52:34 +0000 (UTC)
+	id 1l2ihz-0005uu-Lw; Thu, 21 Jan 2021 22:45:43 +0000
+Received: by outflank-mailman (input) for mailman id 72480;
+ Thu, 21 Jan 2021 22:45:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l2ihx-0005uT-Ly; Thu, 21 Jan 2021 22:45:41 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l2ihx-0002Mu-AI; Thu, 21 Jan 2021 22:45:41 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l2ihw-0004Jw-Vu; Thu, 21 Jan 2021 22:45:41 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1l2ihw-00080y-VR; Thu, 21 Jan 2021 22:45:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,102 +55,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90c8481c-d379-4e99-bb30-9231fc32ec76
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1611265954;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=zH10SOrS7TRCmlRhWyG1y7Y9O10ncjn3XWV3SJVhL6Y=;
-  b=gga2V/WHyJ063ht6vuo3T+EliWp00GLnNHYHpphtKa2O2DYoMCCJI/3m
-   xQ11VnurqXaZzHooEIEbQUP4AN3UprucBMyi/1adNbxyncjQ/YR3l2fP6
-   oj4WZNF065Txt/Kkiz9XJkpzKXUaG2JytecZPmTh7WXebRNJ3+65rY6ug
-   M=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Z5eoCsesdA5J0UFxtp/KuY8s6qAAYZrfcrxD/3PJKeCdae9f9Q5cx4sOQDRyplc9S/5Rx5tyNk
- FcXLVipkwbPT7CMTgSM7YnTEz8EzkaY1cZoO5MsHF7PFOnlQ8HlCdWS83L6sgAmAZTwLFAWkZE
- zqt7oOHH5k07/khV9Yjt/n4Ag9jVytHirgZbsK9cfKgKMQ6TS9SJOWkM1fBJ58NGM30SP+P24n
- PvRG7euZrF08Z5XvVF4hSMRkKYc/fV/XK+l6G3s6dH5tkYvW5/8uAZ2f7CvRGWG4Y2wOOQ+/bf
- Vqo=
-X-SBRS: 5.1
-X-MesageID: 36915711
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.79,365,1602561600"; 
-   d="scan'208";a="36915711"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Tamas K Lengyel <tamas.lengyel@intel.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>, =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?=
-	<michal.leszczynski@cert.pl>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v7 10/10] x86/vm_event: Carry Processor Trace buffer offset in vm_event
-Date: Thu, 21 Jan 2021 21:27:18 +0000
-Message-ID: <20210121212718.2441-11-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210121212718.2441-1-andrew.cooper3@citrix.com>
-References: <20210121212718.2441-1-andrew.cooper3@citrix.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=JW61RQ45RLnjPbsbAwLjP5RuyGK/7CbQAuNxioE6krQ=; b=KgUOuLOEZKG5GjvsDJRJNWWJuh
+	YN2wK0QqVTH+QBu+71gv+EOP4atDrjJWcXFztMHvDjbJXFbO7uIDbV+o0LlucvofH0kbs/T0mPQr8
+	jvsOG6DiQrLDaR+7nVgt3nPGpTSEXjfseUzx9TaHP25mFoFXIWK626xHBfRc7DvUXYms=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-158555-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 158555: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=5b4a97bbc39ed8e7eb50038b9cffe2e948e49995
+X-Osstest-Versions-That:
+    ovmf=339371ef78eb3a6f2e9848f8b058379de5e87d39
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 21 Jan 2021 22:45:40 +0000
 
-From: Tamas K Lengyel <tamas.lengyel@intel.com>
+flight 158555 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/158555/
 
-Add pt_offset field to x86 regs in vm_event. Initialized to ~0 if PT
-is not in use.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 5b4a97bbc39ed8e7eb50038b9cffe2e948e49995
+baseline version:
+ ovmf                 339371ef78eb3a6f2e9848f8b058379de5e87d39
 
-Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
-CC: Michał Leszczyński <michal.leszczynski@cert.pl>
-CC: Tamas K Lengyel <tamas@tklengyel.com>
+Last test of basis   158546  2021-01-20 20:10:42 Z    1 days
+Testing same since   158555  2021-01-21 10:39:50 Z    0 days    1 attempts
 
-v7:
- * New
----
- xen/arch/x86/vm_event.c       | 3 +++
- xen/include/public/vm_event.h | 6 ++++++
- 2 files changed, 9 insertions(+)
+------------------------------------------------------------
+People who touched revisions under test:
+  Bob Feng <bob.c.feng@intel.com>
 
-diff --git a/xen/arch/x86/vm_event.c b/xen/arch/x86/vm_event.c
-index 848d69c1b0..09dfc0924e 100644
---- a/xen/arch/x86/vm_event.c
-+++ b/xen/arch/x86/vm_event.c
-@@ -251,6 +251,9 @@ void vm_event_fill_regs(vm_event_request_t *req)
- 
-     req->data.regs.x86.shadow_gs = ctxt.shadow_gs;
-     req->data.regs.x86.dr6 = ctxt.dr6;
-+
-+    if ( hvm_vmtrace_output_position(curr, &req->data.regs.x86.pt_offset) != 1 )
-+        req->data.regs.x86.pt_offset = ~0;
- #endif
- }
- 
-diff --git a/xen/include/public/vm_event.h b/xen/include/public/vm_event.h
-index 141ea024a3..57f34bf902 100644
---- a/xen/include/public/vm_event.h
-+++ b/xen/include/public/vm_event.h
-@@ -223,6 +223,12 @@ struct vm_event_regs_x86 {
-      */
-     uint64_t npt_base;
- 
-+    /*
-+     * Current offset in the Processor Trace buffer. For Intel Processor Trace
-+     * this is MSR_RTIT_OUTPUT_MASK. Set to ~0 if no Processor Trace is active.
-+     */
-+    uint64_t pt_offset;
-+
-     uint32_t cs_base;
-     uint32_t ss_base;
-     uint32_t ds_base;
--- 
-2.11.0
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   339371ef78..5b4a97bbc3  5b4a97bbc39ed8e7eb50038b9cffe2e948e49995 -> xen-tested-master
 
