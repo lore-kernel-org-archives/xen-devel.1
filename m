@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 358BDC433E6
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:28:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 992A2C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:28:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD40823381
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:27:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD40823381
+	by mail.kernel.org (Postfix) with ESMTPS id 55CD523381
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:28:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55CD523381
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.72426.130424 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.72429.130457 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2hUc-0005B8-O8; Thu, 21 Jan 2021 21:27:50 +0000
+	id 1l2hUi-0005My-Hb; Thu, 21 Jan 2021 21:27:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 72426.130424; Thu, 21 Jan 2021 21:27:50 +0000
+Received: by outflank-mailman (output) from mailman id 72429.130457; Thu, 21 Jan 2021 21:27:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2hUc-0005Av-Ip; Thu, 21 Jan 2021 21:27:50 +0000
-Received: by outflank-mailman (input) for mailman id 72426;
- Thu, 21 Jan 2021 21:27:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l2hUi-0005MO-8u; Thu, 21 Jan 2021 21:27:56 +0000
+Received: by outflank-mailman (input) for mailman id 72429;
+ Thu, 21 Jan 2021 21:27:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rOiS=GY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l2hUb-0004xj-DS
- for xen-devel@lists.xenproject.org; Thu, 21 Jan 2021 21:27:49 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 16cfb996-d4fd-4070-967c-4b157110cdd2;
- Thu, 21 Jan 2021 21:27:39 +0000 (UTC)
+ id 1l2hUg-0004xo-Re
+ for xen-devel@lists.xenproject.org; Thu, 21 Jan 2021 21:27:54 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id cc95afc1-16c5-4671-ba77-cb1a5634bf41;
+ Thu, 21 Jan 2021 21:27:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,38 +48,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 16cfb996-d4fd-4070-967c-4b157110cdd2
+X-Inumbo-ID: cc95afc1-16c5-4671-ba77-cb1a5634bf41
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1611264459;
+  d=citrix.com; s=securemail; t=1611264461;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=r2BwqWd7NQ1mzdR8kM1P36wwz2HedhnLfyw+QNKXGLk=;
-  b=TT+KlL9d549HqmUOYL54KqyoreABqNFyTQ0xkEXO8Zhi381f23Dz8WH8
-   4XHTBqtDvypKFV9ZCILd5vsnRS/BdgFLwiogNhzFCBM2q+Rbdwjxbcj+q
-   UqF31vb0LApI0fXXtxCrYsxlKMquN0wAOVsGvb6uaE5XVyUlPaIp6iJeP
-   g=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: rgTHx5nwswuWivY0m9MruSK+ZqPzFzwki2x7fihnbWKj1XiBOOjkjfF/9PaRER3ClVBodvFDKw
- H2Yi8JNq5TGHeGeANl2hIzHIirx+cox+DoLIoC+OM4ofK6s7AlA6RHNiP0tFjXNG98DuI8YQQx
- nTcm4Ck0AJPV3MThKebFhsnz9aYcNTRMHYqcPXBIAg9HHN2rWbWFfNgP/9Ow54QFbeGFy/czpR
- e8BnR2XXlYOc8TDGRWpvYl9sebMArpiHAB36ggFYIVfDw0VO1rNP77Qt//XPeRaNKf9o6+u3VG
- Ey0=
+  bh=7e+PT6CI2IW9VvmlQDpZMLGMDO6+ZV3J/eiWjcFr53M=;
+  b=W7X4L0wRwHAzvX4XTOmnJwQg+oiApoT7yuYtw2fGxIq+dB5IiADTy9Tv
+   8Gfm3Rb+fGHe3YU0zv+OaSfI66cjTecOgVbrSofCn0klTp6KvqxK6ztCG
+   VJ/oJOIDj/S/aFGjizMS1tSMbJiMZ87boO3fKTJGW6MyPlz00kHc1FnJj
+   c=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: cQf0RDzhXE13BySs4YmNC/SPFB+uq+uBqGFBBIznYnTSz1PFgyATflfOepIImkyEfQ3cr1owSL
+ HS6M54ULfMDywoJ/mCncxx4fBRPGN6Igd7QMK5b1tMe6tavuQoaLqe4rz2fKoar+cQyw6sQtNt
+ VQcV7B25X2VmwXz7kJniMDmcl1vM6VDtwX2hCSemWt4fObPiWxrEFb7Rfsy5phJy2WdpA/e/rl
+ bLQ1zW1jeGS9Fqk+NOM0ExDXjAehnabzBOnJkImyGBm2BtX5+6RPgfdUwtk2u1513ztDR6r9YN
+ 1KY=
 X-SBRS: 5.1
-X-MesageID: 35815974
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 35977348
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,365,1602561600"; 
-   d="scan'208";a="35815974"
+   d="scan'208";a="35977348"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
+CC: Tamas K Lengyel <tamas.lengyel@intel.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v7 04/10] xen/memory: Add a vmtrace_buf resource type
-Date: Thu, 21 Jan 2021 21:27:12 +0000
-Message-ID: <20210121212718.2441-5-andrew.cooper3@citrix.com>
+	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
+	<kevin.tian@intel.com>, =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?=
+	<michal.leszczynski@cert.pl>, Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v7 09/10] xen/vmtrace: support for VM forks
+Date: Thu, 21 Jan 2021 21:27:17 +0000
+Message-ID: <20210121212718.2441-10-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210121212718.2441-1-andrew.cooper3@citrix.com>
 References: <20210121212718.2441-1-andrew.cooper3@citrix.com>
@@ -88,88 +89,107 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-From: Michał Leszczyński <michal.leszczynski@cert.pl>
+From: Tamas K Lengyel <tamas.lengyel@intel.com>
 
-Allow to map processor trace buffer using acquire_resource().
+Implement vmtrace_reset_pt function. Properly set IPT
+state for VM forks.
 
-Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
+Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
+CC: Jun Nakajima <jun.nakajima@intel.com>
+CC: Kevin Tian <kevin.tian@intel.com>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
 v7:
- * Rebase over changes elsewhere in the series
+ * New
 ---
- xen/common/memory.c         | 27 +++++++++++++++++++++++++++
- xen/include/public/memory.h |  1 +
- 2 files changed, 28 insertions(+)
+ xen/arch/x86/hvm/vmx/vmx.c    | 11 +++++++++++
+ xen/arch/x86/mm/mem_sharing.c |  3 +++
+ xen/include/asm-x86/hvm/hvm.h |  9 +++++++++
+ 3 files changed, 23 insertions(+)
 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index c89923d909..ec6a55172a 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1068,11 +1068,35 @@ static unsigned int resource_max_frames(const struct domain *d,
-     case XENMEM_resource_grant_table:
-         return gnttab_resource_max_frames(d, id);
- 
-+    case XENMEM_resource_vmtrace_buf:
-+        return d->vmtrace_frames;
-+
-     default:
-         return arch_resource_max_frames(d, type, id);
-     }
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index d4e7b50b8a..40ae398cf5 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2408,6 +2408,16 @@ static int vmtrace_output_position(struct vcpu *v, uint64_t *pos)
+     return v->arch.hvm.vmx.ipt_active;
  }
  
-+static int acquire_vmtrace_buf(
-+    struct domain *d, unsigned int id, unsigned long frame,
-+    unsigned int nr_frames, xen_pfn_t mfn_list[])
++static int vmtrace_reset(struct vcpu *v)
 +{
-+    const struct vcpu *v = domain_vcpu(d, id);
-+    unsigned int i;
-+    mfn_t mfn;
-+
-+    if ( !v || !v->vmtrace.buf ||
-+         nr_frames > d->vmtrace_frames ||
-+         (frame + nr_frames) > d->vmtrace_frames )
++    if ( !v->arch.hvm.vmx.ipt_active )
 +        return -EINVAL;
 +
-+    mfn = page_to_mfn(v->vmtrace.buf);
++    v->arch.msrs->rtit.output_offset = 0;
++    v->arch.msrs->rtit.status = 0;
++    return 0;
++}
 +
-+    for ( i = 0; i < nr_frames; i++ )
-+        mfn_list[i] = mfn_x(mfn) + frame + i;
+ static struct hvm_function_table __initdata vmx_function_table = {
+     .name                 = "VMX",
+     .cpu_up_prepare       = vmx_cpu_up_prepare,
+@@ -2467,6 +2477,7 @@ static struct hvm_function_table __initdata vmx_function_table = {
+     .vmtrace_output_position = vmtrace_output_position,
+     .vmtrace_set_option = vmtrace_set_option,
+     .vmtrace_get_option = vmtrace_get_option,
++    .vmtrace_reset = vmtrace_reset,
+     .tsc_scaling = {
+         .max_ratio = VMX_TSC_MULTIPLIER_MAX,
+     },
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index adaeab4612..fd07eb8d4d 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -1632,6 +1632,8 @@ static int copy_vcpu_settings(struct domain *cd, const struct domain *d)
+             copy_domain_page(new_vcpu_info_mfn, vcpu_info_mfn);
+         }
+ 
++        hvm_vmtrace_reset(cd_vcpu);
 +
-+    return nr_frames;
+         /*
+          * TODO: to support VMs with PV interfaces copy additional
+          * settings here, such as PV timers.
+@@ -1782,6 +1784,7 @@ static int fork(struct domain *cd, struct domain *d)
+         cd->max_pages = d->max_pages;
+         *cd->arch.cpuid = *d->arch.cpuid;
+         *cd->arch.msr = *d->arch.msr;
++        cd->vmtrace_frames = d->vmtrace_frames;
+         cd->parent = d;
+     }
+ 
+diff --git a/xen/include/asm-x86/hvm/hvm.h b/xen/include/asm-x86/hvm/hvm.h
+index 960ec03917..150746de66 100644
+--- a/xen/include/asm-x86/hvm/hvm.h
++++ b/xen/include/asm-x86/hvm/hvm.h
+@@ -219,6 +219,7 @@ struct hvm_function_table {
+     int (*vmtrace_output_position)(struct vcpu *v, uint64_t *pos);
+     int (*vmtrace_set_option)(struct vcpu *v, uint64_t key, uint64_t value);
+     int (*vmtrace_get_option)(struct vcpu *v, uint64_t key, uint64_t *value);
++    int (*vmtrace_reset)(struct vcpu *v);
+ 
+     /*
+      * Parameters and callbacks for hardware-assisted TSC scaling,
+@@ -696,6 +697,14 @@ static inline int hvm_vmtrace_get_option(
+     return -EOPNOTSUPP;
+ }
+ 
++static inline int hvm_vmtrace_reset(struct vcpu *v)
++{
++    if ( hvm_funcs.vmtrace_reset )
++        return hvm_funcs.vmtrace_reset(v);
++
++    return -EOPNOTSUPP;
 +}
 +
  /*
-  * Returns -errno on error, or positive in the range [1, nr_frames] on
-  * success.  Returning less than nr_frames contitutes a request for a
-@@ -1087,6 +1111,9 @@ static int _acquire_resource(
-     case XENMEM_resource_grant_table:
-         return gnttab_acquire_resource(d, id, frame, nr_frames, mfn_list);
- 
-+    case XENMEM_resource_vmtrace_buf:
-+        return acquire_vmtrace_buf(d, id, frame, nr_frames, mfn_list);
-+
-     default:
-         return arch_acquire_resource(d, type, id, frame, nr_frames, mfn_list);
-     }
-diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
-index c4c47a0b38..b0378bb14b 100644
---- a/xen/include/public/memory.h
-+++ b/xen/include/public/memory.h
-@@ -625,6 +625,7 @@ struct xen_mem_acquire_resource {
- 
- #define XENMEM_resource_ioreq_server 0
- #define XENMEM_resource_grant_table 1
-+#define XENMEM_resource_vmtrace_buf 2
- 
-     /*
-      * IN - a type-specific resource identifier, which must be zero
+  * This must be defined as a macro instead of an inline function,
+  * because it uses 'struct vcpu' and 'struct domain' which have
 -- 
 2.11.0
 
