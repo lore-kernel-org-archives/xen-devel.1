@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AB61C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D195C433E6
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:27:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9DCC923381
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:27:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DCC923381
+	by mail.kernel.org (Postfix) with ESMTPS id 3BA3223381
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 21:27:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3BA3223381
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.72421.130376 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.72425.130408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2hUT-0004y1-5P; Thu, 21 Jan 2021 21:27:41 +0000
+	id 1l2hUY-00054p-CI; Thu, 21 Jan 2021 21:27:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 72421.130376; Thu, 21 Jan 2021 21:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 72425.130408; Thu, 21 Jan 2021 21:27:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2hUT-0004xu-2D; Thu, 21 Jan 2021 21:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 72421;
- Thu, 21 Jan 2021 21:27:39 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l2hUY-00054a-5r; Thu, 21 Jan 2021 21:27:46 +0000
+Received: by outflank-mailman (input) for mailman id 72425;
+ Thu, 21 Jan 2021 21:27:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rOiS=GY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l2hUR-0004xj-IN
- for xen-devel@lists.xenproject.org; Thu, 21 Jan 2021 21:27:39 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0aeb351d-c53c-4014-95d2-625cc86d0797;
- Thu, 21 Jan 2021 21:27:37 +0000 (UTC)
+ id 1l2hUW-0004xo-Pn
+ for xen-devel@lists.xenproject.org; Thu, 21 Jan 2021 21:27:44 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 34d0ff5b-f912-4506-b4bd-4183fb09ef45;
+ Thu, 21 Jan 2021 21:27:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,39 +48,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0aeb351d-c53c-4014-95d2-625cc86d0797
+X-Inumbo-ID: 34d0ff5b-f912-4506-b4bd-4183fb09ef45
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1611264457;
+  d=citrix.com; s=securemail; t=1611264459;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Wc3FEvOvDDgeHoKwLAGPw5KnMsVxUDgNrcW7jjtvYnA=;
-  b=f2iH52La3CAkdlG4f14y1ml+AXdQwD5WZtkZhrB9h0OkEPGvrdittjEP
-   Hk2ZRc80ddxKWHJRcLExVQj95Lnn2Ga/nv+BxN9/a4B4ImwijoQSvTcyW
-   CpRPs+I5taM8VlS6sfWlJMy3eoNDJVL3N7mYCBq88xVzLXrD4mt3RHgeB
-   Y=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: gQCoibysz3Y2cMDVmBNNrwewFxcfjaxB7dDpMPt+Jas6aw4Dt4V1G4ddmDxeN15mX4bah9p143
- QA7lh1vvwD/28Kd3G2DlaPomGSWXfOhFfpKm68GjvFYkwvIzJDnGR0NrG9D0kZnhC5avUuzD3X
- AMgwCEp2ZFPT4sqC5keONMaWNsFtz64IkIqgmnQ3XljKQkSVDTqloGzyUzXsdbwc5IA5e84WMd
- D4rx/lbgVpsZaQK1HFle5ELas97NSAk8jztSxxxT4ngsEimgpOnKdtVtBFzdVqnE7K1U9SlNTa
- G8I=
+  bh=ULMuNKqMqja/nwuazQayF1mJYFYLgopMHXg6OvP+G2w=;
+  b=hiT0WFxFfwotWHZ6qCB/0HqnaRZ4WQHfV7UZEJnm2HfGJk/enjrLAHsu
+   jIFza//YwTz+iiwJ1blaxnxf5048SCafVa35uiQ2ZtArnRF5b5zkVT89d
+   ssMNhbNUnUIPU//bITCThDaYAj63I1KlIXFios/cvS2emxFJLJDeCDC+C
+   I=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: pUDmeMzBzRUQ5LTuG7vLz88SRopKYd+75Ncm4urmXpHutgRACRYa+VamcvP0TWw/Fo1GROtlJr
+ PWVvoh999Y1SDb/1b5WMtSn0ovR3pofDNrSEyOurvccaZqjK2y07Lh9NxCIyzDpyAYYGo37R6k
+ dpJ5XK62w2YR88xMxstJlfkSG1aRTxITQ1/JI1KR5Nz2/JXExMSbHaaYHZxxsVRG2RwRwem3yo
+ 4L2ARqoLjqKd6PJONXwV7huOUiMpsqo5C8kO6Rtj9NYi14Enolf1VmD4V4RNDbfxgvMLNxc5zr
+ z1Q=
 X-SBRS: 5.1
-X-MesageID: 35815967
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 35977341
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,365,1602561600"; 
-   d="scan'208";a="35815967"
+   d="scan'208";a="35977341"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
 	Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v7 05/10] x86/vmx: Add Intel Processor Trace support
-Date: Thu, 21 Jan 2021 21:27:13 +0000
-Message-ID: <20210121212718.2441-6-andrew.cooper3@citrix.com>
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Tamas K Lengyel
+	<tamas@tklengyel.com>
+Subject: [PATCH v7 02/10] xen/domain: Add vmtrace_frames domain creation parameter
+Date: Thu, 21 Jan 2021 21:27:10 +0000
+Message-ID: <20210121212718.2441-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210121212718.2441-1-andrew.cooper3@citrix.com>
 References: <20210121212718.2441-1-andrew.cooper3@citrix.com>
@@ -91,19 +90,18 @@ Content-Transfer-Encoding: 8bit
 
 From: Michał Leszczyński <michal.leszczynski@cert.pl>
 
-Add CPUID/MSR enumeration details for Processor Trace.  For now, we will only
-support its use inside VMX operation.  Fill in the vmtrace_available boolean
-to activate the newly introduced common infrastructure for allocating trace
-buffers.
+To use vmtrace, buffers of a suitable size need allocating, and different
+tasks will want different sizes.
 
-For now, Processor Trace is going to be operated in Single Output mode behind
-the guests back.  Add the MSRs to struct vcpu_msrs, and set up the buffer
-limit in vmx_init_pt() as it is fixed for the lifetime of the domain.
+Add a domain creation parameter, and audit it appropriately in the
+{arch_,}sanitise_domain_config() functions.
 
-Context switch the most of the MSRs in and out of vCPU context switch, but the
-main control register needs to reside in the MSR load/save lists.  Explicitly
-pull the msrs pointer out into a local variable, because the optimiser cannot
-keep it live across the memory clobbers in the MSR accesses.
+For now, the x86 specific auditing is tuned to Processor Trace running in
+Single Output mode, which requires a single contiguous range of memory.
+
+The size is given an arbitrary limit of 64M which is expected to be enough for
+anticipated usecases, but not large enough to get into long-running-hypercall
+problems.
 
 Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
@@ -111,247 +109,193 @@ Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
+When support for later generations of IPT get added, we can in principle start
+to use ToTP which is a scatter list of smaller trace regions to use, if we
+need to massively up the buffer size available.
+
 v7:
  * Major chop&change within the series.
- * Move MSRs to vcpu_msrs, which is where they'll definitely want to live when
-   we offer PT to VMs for their own use.
+ * Use the name 'vmtrace' consistently.
+ * Use the (new) common vcpu_teardown() functionality, rather than leaving a
+   latent memory leak on ARM.
 ---
- tools/libs/light/libxl_cpuid.c              |  1 +
- tools/misc/xen-cpuid.c                      |  2 +-
- xen/arch/x86/hvm/vmx/vmcs.c                 | 15 ++++++++++++-
- xen/arch/x86/hvm/vmx/vmx.c                  | 34 ++++++++++++++++++++++++++++-
- xen/include/asm-x86/cpufeature.h            |  1 +
- xen/include/asm-x86/hvm/vmx/vmcs.h          |  4 ++++
- xen/include/asm-x86/msr.h                   | 32 +++++++++++++++++++++++++++
- xen/include/public/arch-x86/cpufeatureset.h |  1 +
- 8 files changed, 87 insertions(+), 3 deletions(-)
+ xen/arch/x86/domain.c       | 23 +++++++++++++++++++
+ xen/common/domain.c         | 56 +++++++++++++++++++++++++++++++++++++++++++++
+ xen/include/public/domctl.h |  1 +
+ xen/include/xen/sched.h     |  7 ++++++
+ 4 files changed, 87 insertions(+)
 
-diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
-index 259612834e..289c59c742 100644
---- a/tools/libs/light/libxl_cpuid.c
-+++ b/tools/libs/light/libxl_cpuid.c
-@@ -188,6 +188,7 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
-         {"avx512-ifma",  0x00000007,  0, CPUID_REG_EBX, 21,  1},
-         {"clflushopt",   0x00000007,  0, CPUID_REG_EBX, 23,  1},
-         {"clwb",         0x00000007,  0, CPUID_REG_EBX, 24,  1},
-+        {"proc-trace",   0x00000007,  0, CPUID_REG_EBX, 25,  1},
-         {"avx512pf",     0x00000007,  0, CPUID_REG_EBX, 26,  1},
-         {"avx512er",     0x00000007,  0, CPUID_REG_EBX, 27,  1},
-         {"avx512cd",     0x00000007,  0, CPUID_REG_EBX, 28,  1},
-diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
-index c81aa93055..2d04162d8d 100644
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -106,7 +106,7 @@ static const char *const str_7b0[32] =
-     [18] = "rdseed",   [19] = "adx",
-     [20] = "smap",     [21] = "avx512-ifma",
-     [22] = "pcommit",  [23] = "clflushopt",
--    [24] = "clwb",     [25] = "pt",
-+    [24] = "clwb",     [25] = "proc-trace",
-     [26] = "avx512pf", [27] = "avx512er",
-     [28] = "avx512cd", [29] = "sha",
-     [30] = "avx512bw", [31] = "avx512vl",
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 164535f8f0..5576caad8e 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -291,6 +291,20 @@ static int vmx_init_vmcs_config(void)
-         _vmx_cpu_based_exec_control &=
-             ~(CPU_BASED_CR8_LOAD_EXITING | CPU_BASED_CR8_STORE_EXITING);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index b9ba04633e..3f12d68e9e 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -660,6 +660,29 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+         return -EINVAL;
+     }
  
-+    rdmsrl(MSR_IA32_VMX_MISC, _vmx_misc_cap);
-+
-+    /* Check whether IPT is supported in VMX operation. */
-+    if ( !smp_processor_id() )
-+        vmtrace_available = cpu_has_proc_trace &&
-+                            (_vmx_misc_cap & VMX_MISC_PROC_TRACE);
-+    else if ( vmtrace_available &&
-+              !(_vmx_misc_cap & VMX_MISC_PROC_TRACE) )
++    if ( config->vmtrace_frames )
 +    {
-+        printk("VMX: IPT capabilities differ between CPU%u and CPU0\n",
-+               smp_processor_id());
++        unsigned int frames = config->vmtrace_frames;
++
++        ASSERT(vmtrace_available); /* Checked by common code. */
++
++        /*
++         * For now, vmtrace is restricted to HVM guests, and using a
++         * power-of-2 buffer up to 64M in size.
++         */
++        if ( !hvm )
++        {
++            dprintk(XENLOG_INFO, "vmtrace not supported for PV\n");
++            return -EINVAL;
++        }
++
++        if ( frames > (MB(64) >> PAGE_SHIFT) || (frames & (frames - 1)) )
++        {
++            dprintk(XENLOG_INFO, "Unsupported vmtrace frames: %u\n", frames);
++            return -EINVAL;
++        }
++    }
++
+     return 0;
+ }
+ 
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index d1e94d88cf..a844bc7b78 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -132,6 +132,48 @@ static void vcpu_info_reset(struct vcpu *v)
+     v->vcpu_info_mfn = INVALID_MFN;
+ }
+ 
++static void vmtrace_free_buffer(struct vcpu *v)
++{
++    const struct domain *d = v->domain;
++    struct page_info *pg = v->vmtrace.buf;
++    unsigned int i;
++
++    if ( !pg )
++        return;
++
++    for ( i = 0; i < d->vmtrace_frames; i++ )
++    {
++        put_page_alloc_ref(&pg[i]);
++        put_page_and_type(&pg[i]);
++    }
++
++    v->vmtrace.buf = NULL;
++}
++
++static int vmtrace_alloc_buffer(struct vcpu *v)
++{
++    struct domain *d = v->domain;
++    struct page_info *pg;
++    unsigned int i;
++
++    if ( !d->vmtrace_frames )
++        return 0;
++
++    pg = alloc_domheap_pages(d, get_order_from_pages(d->vmtrace_frames),
++                             MEMF_no_refcount);
++    if ( !pg )
++        return -ENOMEM;
++
++    v->vmtrace.buf = pg;
++
++    for ( i = 0; i < d->vmtrace_frames; i++ )
++        /* Domain can't know about this page yet - something fishy going on. */
++        if ( !get_page_and_type(&pg[i], d, PGT_writable_page) )
++            BUG();
++
++    return 0;
++}
++
+ /*
+  * Release resources held by a vcpu.  There may or may not be live references
+  * to the vcpu, and it may or may not be fully constructed.
+@@ -140,6 +182,8 @@ static void vcpu_info_reset(struct vcpu *v)
+  */
+ static int vcpu_teardown(struct vcpu *v)
+ {
++    vmtrace_free_buffer(v);
++
+     return 0;
+ }
+ 
+@@ -201,6 +245,9 @@ struct vcpu *vcpu_create(struct domain *d, unsigned int vcpu_id)
+     if ( sched_init_vcpu(v) != 0 )
+         goto fail_wq;
+ 
++    if ( vmtrace_alloc_buffer(v) != 0 )
++        goto fail_wq;
++
+     if ( arch_vcpu_create(v) != 0 )
+         goto fail_sched;
+ 
+@@ -449,6 +496,12 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
+         }
+     }
+ 
++    if ( config->vmtrace_frames && !vmtrace_available )
++    {
++        dprintk(XENLOG_INFO, "vmtrace requested but not available\n");
 +        return -EINVAL;
 +    }
 +
-     if ( _vmx_cpu_based_exec_control & CPU_BASED_ACTIVATE_SECONDARY_CONTROLS )
-     {
-         min = 0;
-@@ -305,7 +319,6 @@ static int vmx_init_vmcs_config(void)
-                SECONDARY_EXEC_ENABLE_VIRT_EXCEPTIONS |
-                SECONDARY_EXEC_XSAVES |
-                SECONDARY_EXEC_TSC_SCALING);
--        rdmsrl(MSR_IA32_VMX_MISC, _vmx_misc_cap);
-         if ( _vmx_misc_cap & VMX_MISC_VMWRITE_ALL )
-             opt |= SECONDARY_EXEC_ENABLE_VMCS_SHADOWING;
-         if ( opt_vpid_enabled )
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 4120234c15..93121fbf27 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -428,6 +428,20 @@ static void vmx_domain_relinquish_resources(struct domain *d)
-     vmx_free_vlapic_mapping(d);
+     return arch_sanitise_domain_config(config);
  }
  
-+static void vmx_init_pt(struct vcpu *v)
-+{
-+    unsigned int frames = v->domain->vmtrace_frames;
-+
-+    if ( !frames )
-+        return;
-+
-+    /* Checked by domain creation logic. */
-+    ASSERT(v->vmtrace.buf);
-+    ASSERT(frames <= (GB(4) >> PAGE_SHIFT) && (frames & (frames - 1)) == 0);
-+
-+    v->arch.msrs->rtit.output_limit = (frames << PAGE_SHIFT) - 1;
-+}
-+
- static int vmx_vcpu_initialise(struct vcpu *v)
- {
-     int rc;
-@@ -470,6 +484,7 @@ static int vmx_vcpu_initialise(struct vcpu *v)
-     }
+@@ -474,7 +527,10 @@ struct domain *domain_create(domid_t domid,
+     ASSERT(is_system_domain(d) ? config == NULL : config != NULL);
  
-     vmx_install_vlapic_mapping(v);
-+    vmx_init_pt(v);
- 
-     return 0;
- }
-@@ -508,22 +523,39 @@ static void vmx_restore_host_msrs(void)
- 
- static void vmx_save_guest_msrs(struct vcpu *v)
- {
-+    struct vcpu_msrs *msrs = v->arch.msrs;
-+
-     /*
-      * We cannot cache SHADOW_GS_BASE while the VCPU runs, as it can
-      * be updated at any time via SWAPGS, which we cannot trap.
-      */
-     v->arch.hvm.vmx.shadow_gs = read_gs_shadow();
-+
-+    if ( v->arch.hvm.vmx.ipt_active )
+     if ( config )
 +    {
-+        rdmsrl(MSR_RTIT_OUTPUT_MASK, msrs->rtit.output_mask);
-+        rdmsrl(MSR_RTIT_STATUS, msrs->rtit.status);
+         d->options = config->flags;
++        d->vmtrace_frames = config->vmtrace_frames;
 +    }
- }
  
- static void vmx_restore_guest_msrs(struct vcpu *v)
- {
-+    const struct vcpu_msrs *msrs = v->arch.msrs;
-+
-     write_gs_shadow(v->arch.hvm.vmx.shadow_gs);
-     wrmsrl(MSR_STAR,           v->arch.hvm.vmx.star);
-     wrmsrl(MSR_LSTAR,          v->arch.hvm.vmx.lstar);
-     wrmsrl(MSR_SYSCALL_MASK,   v->arch.hvm.vmx.sfmask);
+     /* Sort out our idea of is_control_domain(). */
+     d->is_privileged = is_priv;
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index 666aeb71bf..1585678d50 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -94,6 +94,7 @@ struct xen_domctl_createdomain {
+     uint32_t max_evtchn_port;
+     int32_t max_grant_frames;
+     int32_t max_maptrack_frames;
++    uint32_t vmtrace_frames;
  
-     if ( cpu_has_msr_tsc_aux )
--        wrmsr_tsc_aux(v->arch.msrs->tsc_aux);
-+        wrmsr_tsc_aux(msrs->tsc_aux);
-+
-+    if ( v->arch.hvm.vmx.ipt_active )
-+    {
-+        wrmsrl(MSR_RTIT_OUTPUT_BASE, page_to_maddr(v->vmtrace.buf));
-+        wrmsrl(MSR_RTIT_OUTPUT_MASK, msrs->rtit.output_mask);
-+        wrmsrl(MSR_RTIT_STATUS, msrs->rtit.status);
-+    }
- }
+     struct xen_arch_domainconfig arch;
+ };
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index da19f4e9f6..03905f6246 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -257,6 +257,10 @@ struct vcpu
+     /* vPCI per-vCPU area, used to store data for long running operations. */
+     struct vpci_vcpu vpci;
  
- void vmx_update_cpu_exec_control(struct vcpu *v)
-diff --git a/xen/include/asm-x86/cpufeature.h b/xen/include/asm-x86/cpufeature.h
-index ad3d84bdde..8ad658be1b 100644
---- a/xen/include/asm-x86/cpufeature.h
-+++ b/xen/include/asm-x86/cpufeature.h
-@@ -104,6 +104,7 @@
- #define cpu_has_clwb            boot_cpu_has(X86_FEATURE_CLWB)
- #define cpu_has_avx512er        boot_cpu_has(X86_FEATURE_AVX512ER)
- #define cpu_has_avx512cd        boot_cpu_has(X86_FEATURE_AVX512CD)
-+#define cpu_has_proc_trace      boot_cpu_has(X86_FEATURE_PROC_TRACE)
- #define cpu_has_sha             boot_cpu_has(X86_FEATURE_SHA)
- #define cpu_has_avx512bw        boot_cpu_has(X86_FEATURE_AVX512BW)
- #define cpu_has_avx512vl        boot_cpu_has(X86_FEATURE_AVX512VL)
-diff --git a/xen/include/asm-x86/hvm/vmx/vmcs.h b/xen/include/asm-x86/hvm/vmx/vmcs.h
-index 906810592f..8073af323b 100644
---- a/xen/include/asm-x86/hvm/vmx/vmcs.h
-+++ b/xen/include/asm-x86/hvm/vmx/vmcs.h
-@@ -156,6 +156,9 @@ struct vmx_vcpu {
-     /* Do we need to tolerate a spurious EPT_MISCONFIG VM exit? */
-     bool_t               ept_spurious_misconfig;
- 
-+    /* Processor Trace configured and enabled for the vcpu. */
-+    bool                 ipt_active;
-+
-     /* Is the guest in real mode? */
-     uint8_t              vmx_realmode;
-     /* Are we emulating rather than VMENTERing? */
-@@ -283,6 +286,7 @@ extern u32 vmx_secondary_exec_control;
- #define VMX_VPID_INVVPID_SINGLE_CONTEXT_RETAINING_GLOBAL 0x80000000000ULL
- extern u64 vmx_ept_vpid_cap;
- 
-+#define VMX_MISC_PROC_TRACE                     0x00004000
- #define VMX_MISC_CR3_TARGET                     0x01ff0000
- #define VMX_MISC_VMWRITE_ALL                    0x20000000
- 
-diff --git a/xen/include/asm-x86/msr.h b/xen/include/asm-x86/msr.h
-index 16f95e7344..1d3eca9063 100644
---- a/xen/include/asm-x86/msr.h
-+++ b/xen/include/asm-x86/msr.h
-@@ -306,6 +306,38 @@ struct vcpu_msrs
-         };
-     } misc_features_enables;
- 
-+    /*
-+     * 0x00000560 ... 57x - MSR_RTIT_*
-+     *
-+     * "Real Time Instruction Trace", now called Processor Trace.
-+     *
-+     * These MSRs are not exposed to guests.  They are controlled by Xen
-+     * behind the scenes, when vmtrace is enabled for the domain.
-+     *
-+     * MSR_RTIT_OUTPUT_BASE not stored here.  It is fixed per vcpu, and
-+     * derived from v->vmtrace.buf.
-+     */
 +    struct {
-+        /*
-+         * Placed in the MSR load/save lists.  Only modified by hypercall in
-+         * the common case.
-+         */
-+        uint64_t ctl;
++        struct page_info *buf;
++    } vmtrace;
 +
-+        /*
-+         * Updated by hardware in non-root mode.  Synchronised here on vcpu
-+         * context switch.
-+         */
-+        uint64_t status;
-+        union {
-+            uint64_t output_mask;
-+            struct {
-+                uint32_t output_limit;
-+                uint32_t output_offset;
-+            };
-+        };
-+    } rtit;
+     struct arch_vcpu arch;
+ };
+ 
+@@ -470,6 +474,9 @@ struct domain
+     unsigned    pbuf_idx;
+     spinlock_t  pbuf_lock;
+ 
++    /* Used by vmtrace features */
++    uint32_t    vmtrace_frames;
 +
-     /* 0x00000da0 - MSR_IA32_XSS */
-     struct {
-         uint64_t raw;
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 6f7efaad6d..a501479820 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -217,6 +217,7 @@ XEN_CPUFEATURE(SMAP,          5*32+20) /*S  Supervisor Mode Access Prevention */
- XEN_CPUFEATURE(AVX512_IFMA,   5*32+21) /*A  AVX-512 Integer Fused Multiply Add */
- XEN_CPUFEATURE(CLFLUSHOPT,    5*32+23) /*A  CLFLUSHOPT instruction */
- XEN_CPUFEATURE(CLWB,          5*32+24) /*A  CLWB instruction */
-+XEN_CPUFEATURE(PROC_TRACE,    5*32+25) /*   Processor Trace */
- XEN_CPUFEATURE(AVX512PF,      5*32+26) /*A  AVX-512 Prefetch Instructions */
- XEN_CPUFEATURE(AVX512ER,      5*32+27) /*A  AVX-512 Exponent & Reciprocal Instrs */
- XEN_CPUFEATURE(AVX512CD,      5*32+28) /*A  AVX-512 Conflict Detection Instrs */
+     /* OProfile support. */
+     struct xenoprof *xenoprof;
+ 
 -- 
 2.11.0
 
