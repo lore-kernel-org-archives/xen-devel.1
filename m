@@ -2,50 +2,44 @@ Return-Path: <SRS0=QJUc=GY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B3E2C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 14:20:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B68BEC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 14:31:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23E20239D1
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 14:20:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23E20239D1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4619B20897
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jan 2021 14:31:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4619B20897
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.72111.129524 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.72116.129537 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2aot-0006kp-G6; Thu, 21 Jan 2021 14:20:19 +0000
+	id 1l2azh-0007p4-Hr; Thu, 21 Jan 2021 14:31:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 72111.129524; Thu, 21 Jan 2021 14:20:19 +0000
+Received: by outflank-mailman (output) from mailman id 72116.129537; Thu, 21 Jan 2021 14:31:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2aot-0006ki-D5; Thu, 21 Jan 2021 14:20:19 +0000
-Received: by outflank-mailman (input) for mailman id 72111;
- Thu, 21 Jan 2021 14:20:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=F0IY=GY=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1l2aor-0006kd-V5
- for xen-devel@lists.xen.org; Thu, 21 Jan 2021 14:20:18 +0000
-Received: from wout1-smtp.messagingengine.com (unknown [64.147.123.24])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a017b2db-1280-4ea7-83d9-25e362d1bb65;
- Thu, 21 Jan 2021 14:20:17 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id C6E0F1BA6
- for <xen-devel@lists.xen.org>; Thu, 21 Jan 2021 09:20:15 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Thu, 21 Jan 2021 09:20:15 -0500
-Received: from mail-itl (ip5b40aa59.dynamic.kabel-deutschland.de
- [91.64.170.89])
- by mail.messagingengine.com (Postfix) with ESMTPA id EDDAD1080057
- for <xen-devel@lists.xen.org>; Thu, 21 Jan 2021 09:20:14 -0500 (EST)
+	id 1l2azh-0007ox-EO; Thu, 21 Jan 2021 14:31:29 +0000
+Received: by outflank-mailman (input) for mailman id 72116;
+ Thu, 21 Jan 2021 14:31:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=iH6i=GY=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1l2azf-0007os-VE
+ for xen-devel@lists.xen.org; Thu, 21 Jan 2021 14:31:27 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8653673a-c162-403b-800e-24b6ac8d2172;
+ Thu, 21 Jan 2021 14:31:27 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 261A3AB7A;
+ Thu, 21 Jan 2021 14:31:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,97 +51,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a017b2db-1280-4ea7-83d9-25e362d1bb65
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=883DNC
-	ICWYCwPpONq9am5siGjzcQHp2BuKfi/93PzZk=; b=FVGz6+QqY9Dk5oMrjWoE/4
-	t2/Qh3dTi9CXULSOc0u+f8rRGYA6CN1EQMsD07Vqpq2t7z5daUmIzrTGFEvJpbGo
-	ge2XESrCwbTNN8NH/YTkdNtSg8tcvtGxH6m6ekOVKj1xoZwMriB7wVblm4aEBoeF
-	VsZKHNe6XxFr+K4rounCSxt8qOg1uxUMiK7GaGzq4X9LqPDIK6OBZajigohecWG/
-	tRz/NUhSHoRmsWxioXSsNlvP466zX+/6C58ECbpt0DdTbIO0emJs3s456r81jRHY
-	KW77bqMalnn3HsjPjdODdOvYVbBm7NqpiWnKPCAEGoqvKCsC/aockfArFu0sFLUA
-	==
-X-ME-Sender: <xms:n40JYPykbVziCYsMLtFW5jh8o3NrrdFQi_ZdufqUbOjWbJ9vF1A-vg>
-    <xme:n40JYHTDL8X_KkHesrfYC6mt6BiUA0uTMhJYgnCLOb1nBCEtNHEWsdW2QqfPf-ycA
-    qQsDaWDTpkvNQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudeggdeiiecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecunecujfgurhepfffhvffukfhfgggtuggjsehgtderre
-    dttdejnecuhfhrohhmpeforghrvghkucforghrtgiihihkohifshhkihdqifpkrhgvtghk
-    ihcuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqe
-    enucggtffrrghtthgvrhhnpeejudeigeeiffekgfduvdetfeefhefhleefudevleejveet
-    ffdugeekjedufffhfeenucffohhmrghinhepgigvnhdrohhrghenucfkphepledurdeige
-    drudejtddrkeelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhf
-    rhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:n40JYJXIQJ3qukk519FO31_OyXHjGQ8yIuKtQ1P0sB9Q0pO1vsOFxA>
-    <xmx:n40JYJixCo1Vom24aqEcX3BZQypxRnvV-R_SnPF0KBH-9QpTXWg1QA>
-    <xmx:n40JYBDyf21uwzOFBNqG7XWgmQ8WB2Da3HBg7yNbL_CE-4JuS_n4cQ>
-    <xmx:n40JYNzd6Y7A5F1amVgO7P3zKGupokLuPF0jLukwXEuWY1d1KDjclQ>
-Date: Thu, 21 Jan 2021 15:20:12 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xen.org
+X-Inumbo-ID: 8653673a-c162-403b-800e-24b6ac8d2172
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1611239486; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zpLtvu5Ohb2R53GtEEtWCh6K6G5MQ/ZY+jcvJKeYyww=;
+	b=EmUF4sE08VXQIUjZUR/qtCScWk3ES5Rc7hclCUA/qlBenVbOstf28ESRJ+6aGM9zWqMDVV
+	nWZRts/PYMy/kYPGfPpoCmaSEUi64/Haazx4mGAYtdgYxzSyhaEwtWAYPpJRvYB6Jztioa
+	SY+AIcwSQnQbgUVWbBypjdf3BiiCeAc=
 Subject: Re: Xen Security Advisory 360 v1 - IRQ vector leak on x86
-Message-ID: <20210121142012.GB1592@mail-itl>
+To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>
 References: <E1l2afg-0006PK-Gj@xenbits.xenproject.org>
+ <20210121142012.GB1592@mail-itl>
+Cc: xen-devel@lists.xen.org
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <aa7839c8-de5c-14bb-5392-d8ee47ae1017@suse.com>
+Date: Thu, 21 Jan 2021 15:31:25 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="2B/JsCI69OhZNC5r"
-Content-Disposition: inline
-In-Reply-To: <E1l2afg-0006PK-Gj@xenbits.xenproject.org>
+In-Reply-To: <20210121142012.GB1592@mail-itl>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
+On 21.01.2021 15:20, Marek Marczykowski-Górecki wrote:
+> On Thu, Jan 21, 2021 at 02:10:48PM +0000, Xen.org security team wrote:
+>> MITIGATION
+>> ==========
+>>
+>> Not running HVM guests with PCI pass through devices will avoid the
+>> vulnerability.  Note that even non-malicious guests can trigger this
+>> vulnerability as part of normal operation.
+> 
+> Does the 'on_reboot="destroy"' mitigate the issue too? Or on_soft_reset?
 
---2B/JsCI69OhZNC5r
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: Xen Security Advisory 360 v1 - IRQ vector leak on x86
+I don't think so, no.
 
-On Thu, Jan 21, 2021 at 02:10:48PM +0000, Xen.org security team wrote:
->                     Xen Security Advisory XSA-360
->=20
->                         IRQ vector leak on x86
->=20
-> ISSUE DESCRIPTION
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> A x86 HVM guest with PCI pass through devices can force the allocation
-> of all IDT vectors on the system by rebooting itself with MSI or MSI-X
-> capabilities enabled and entries setup.
-
-(...)
-
-> MITIGATION
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> Not running HVM guests with PCI pass through devices will avoid the
-> vulnerability.  Note that even non-malicious guests can trigger this
-> vulnerability as part of normal operation.
-
-Does the 'on_reboot=3D"destroy"' mitigate the issue too? Or on_soft_reset?
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---2B/JsCI69OhZNC5r
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmAJjZsACgkQ24/THMrX
-1yyWEAf+I9YtT/vf/ZDwJkt6lLw6pBXMzVsDBEnbobddNGKLgPzEyZiEFHxddrWJ
-c0IIj7fTBnc+gmeg+PpfmQ3t0Q6OMpTPgcafWBhH2BCxY+48pKTwjyzLml0kO1QN
-hgvGT1xx0wlsR/fkmwa9e6uKk6Wr6rd+ECoEF6SLcR5QkiYkLKzC7PAxDaXLbl4m
-33nAfcwvKVALAEqKHwWZvgxt/x6tH6ZFGmmdHr2PzhvIyVjjO+klhxPq6coRaW/K
-2woM/KGUfrIDSt9u4qJ2RRXMA5LTILja1NlOXPTnbCI00ZtqIUx79Pqz8n+xUAM0
-ZTOGyJjk9y1C6hg7tnFff21Ypn1f/g==
-=h4kx
------END PGP SIGNATURE-----
-
---2B/JsCI69OhZNC5r--
+Jan
 
