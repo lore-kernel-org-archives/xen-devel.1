@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04CECC433DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B6CEC433E6
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 15:56:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AFCEF221FF
+	by mail.kernel.org (Postfix) with ESMTPS id C1F6F22248
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 15:56:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AFCEF221FF
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1F6F22248
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.72902.131430 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.72898.131389 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2ynI-0004fM-7b; Fri, 22 Jan 2021 15:56:16 +0000
+	id 1l2ynG-0004bz-DV; Fri, 22 Jan 2021 15:56:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 72902.131430; Fri, 22 Jan 2021 15:56:16 +0000
+Received: by outflank-mailman (output) from mailman id 72898.131389; Fri, 22 Jan 2021 15:56:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l2ynH-0004ey-La; Fri, 22 Jan 2021 15:56:15 +0000
-Received: by outflank-mailman (input) for mailman id 72902;
- Fri, 22 Jan 2021 15:56:13 +0000
+	id 1l2ynG-0004bm-2V; Fri, 22 Jan 2021 15:56:14 +0000
+Received: by outflank-mailman (input) for mailman id 72898;
+ Fri, 22 Jan 2021 15:56:12 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l2ynF-0004bJ-MZ
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 15:56:13 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l2ynE-0004ay-MY
+ for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 15:56:12 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l2ynF-0002OY-Kz
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 15:56:13 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l2ynE-0002OM-Lf
+ for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 15:56:12 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l2ynF-0000Rz-Jw
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 15:56:13 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l2ynE-0000RF-KM
+ for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 15:56:12 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1l2ynD-0004Ar-T2; Fri, 22 Jan 2021 15:56:12 +0000
+ id 1l2ynC-0004Ar-Mt; Fri, 22 Jan 2021 15:56:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,51 +58,41 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=Du2uJm4oHuTzZSLlTawEiTsabsoS+t2X1zlx4gXyhUs=; b=E9G81hP+oAym6MuTYGG2cJTuTp
-	7fxw9LpolCWtEnrinBOYlOlzPkLJVuOtaXZkKsZloTGy56RnFcBWKhcPXZ7nBSrFbzJ/bJeXQUS7E
-	fn/Le3aZfXcsfs2JRP4JLxulSqFF3IUPdjeJSSdVUIHfpANzAQXmI07J/IrTtzPHYcI4=;
+	bh=V4DNzO9T0hlpsDh/QQtSucpoSUBfF4hGCHEzohAvxvY=; b=RxNME30Y6jHmgfZsZYe3qAyQAg
+	cjeokpkgi7Hnilre8GiGPBEW6kxA0OlgU+vhgBRPBqS4Hzbgeh7eMCCaB/EOVlwUepQVAGMZlPXC6
+	x9E0km2tjqN6PxtvA+PYEuUZMUgL2AF99ejAaFd18HZIVB64hocBs3f/W2GunEELH0g8=;
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 6/7] mfi-common: Provide stripy_rand
-Date: Fri, 22 Jan 2021 15:56:02 +0000
-Message-Id: <20210122155603.23402-6-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 2/7] target_editfile_kvp_replace: Add a bit of logging
+Date: Fri, 22 Jan 2021 15:55:58 +0000
+Message-Id: <20210122155603.23402-2-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210122155603.23402-1-iwj@xenproject.org>
 References: <20210122155603.23402-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-We will use this in a moment.
+This helps see what's going on without fishing individual
+before-and-after files out of the log directory.
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- mfi-common | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ Osstest/TestSupport.pm | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/mfi-common b/mfi-common
-index 34b0c116..35efd233 100644
---- a/mfi-common
-+++ b/mfi-common
-@@ -31,6 +31,18 @@ stripy () {
-   eval "$out_vn=\"\$out_$out_val\""
- }
- 
-+stripy_rand () {
-+  # feel free to pass not-real values for $job
-+  # if desired to perturb the hash, etc.
-+  local job="$1"; shift
-+  local out_vn="$1"; shift
-+  local hash="$( echo "$job $out_vn" | sha256sum )"
-+  hash="${hash:0:7}"
-+  local ix=$(( (0x$hash * $#) / 0x10000000 + 1 ))
-+  out_val="${@:$ix:1}"
-+  eval "$out_vn=\"\$out_val\""
-+}
-+
- branch_wants_migrupgrade_tests () {
-   case "$branch" in
-     xen-3.*-testing) return 1 ;;
+diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
+index d2558f31..9e85303a 100644
+--- a/Osstest/TestSupport.pm
++++ b/Osstest/TestSupport.pm
+@@ -777,6 +777,7 @@ sub teditfileex {
+ sub target_editfile_kvp_replace
+ {
+     my (%kv) = @_;
++    logm("substituing: @_");
+     my $prnow= sub {
+ 	my ($key) = @_;
+ 	my $value = $kv{$key};
 -- 
 2.20.1
 
