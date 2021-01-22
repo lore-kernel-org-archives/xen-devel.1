@@ -2,47 +2,43 @@ Return-Path: <SRS0=o5zc=GZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,PDS_SHORTFWD_URISHRT_QP,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E58EC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 22:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E9F5C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 23:36:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D82F23B1A
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 22:00:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D82F23B1A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id DB86C23A3A
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 23:36:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB86C23A3A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=todobom.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.73132.131854 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.73140.131866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l34Tp-0002kx-HT; Fri, 22 Jan 2021 22:00:33 +0000
+	id 1l35yY-00036U-Gp; Fri, 22 Jan 2021 23:36:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 73132.131854; Fri, 22 Jan 2021 22:00:33 +0000
+Received: by outflank-mailman (output) from mailman id 73140.131866; Fri, 22 Jan 2021 23:36:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l34Tp-0002kq-EJ; Fri, 22 Jan 2021 22:00:33 +0000
-Received: by outflank-mailman (input) for mailman id 73132;
- Fri, 22 Jan 2021 22:00:32 +0000
+	id 1l35yY-00036N-DI; Fri, 22 Jan 2021 23:36:22 +0000
+Received: by outflank-mailman (input) for mailman id 73140;
+ Fri, 22 Jan 2021 23:36:21 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0NXE=GZ=gmail.com=bobbyeshleman@srs-us1.protection.inumbo.net>)
- id 1l34To-0002kl-Ai
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 22:00:32 +0000
-Received: from mail-pj1-x102a.google.com (unknown [2607:f8b0:4864:20::102a])
+ <SRS0=unIu=GZ=todobom.com=claudemir@srs-us1.protection.inumbo.net>)
+ id 1l35yW-00036I-VE
+ for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 23:36:21 +0000
+Received: from mail-qk1-x72f.google.com (unknown [2607:f8b0:4864:20::72f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4a90c183-8c38-41fa-b6bc-e57fb037a092;
- Fri, 22 Jan 2021 22:00:31 +0000 (UTC)
-Received: by mail-pj1-x102a.google.com with SMTP id e6so4759486pjj.1
- for <xen-devel@lists.xenproject.org>; Fri, 22 Jan 2021 14:00:31 -0800 (PST)
-Received: from piano ([2601:1c2:4f00:c640:3cc1:5f60:de20:49b1])
- by smtp.gmail.com with ESMTPSA id n2sm9891614pfu.129.2021.01.22.14.00.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Jan 2021 14:00:29 -0800 (PST)
+ id 49fe36e1-c390-4579-82bb-a150d289bc83;
+ Fri, 22 Jan 2021 23:36:19 +0000 (UTC)
+Received: by mail-qk1-x72f.google.com with SMTP id 22so6916195qkf.9
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Jan 2021 15:36:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,96 +50,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a90c183-8c38-41fa-b6bc-e57fb037a092
+X-Inumbo-ID: 49fe36e1-c390-4579-82bb-a150d289bc83
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=zPaqQvgSnFUeWxSLsjPodaEcfWkfP+yU8MEEA26LpnE=;
-        b=F7J185sv88lcM22QhUKZs+WgRWVF97LLuEFoCrGWS+czOXv/+MFpi4eEw8/nyRXwJy
-         tZ217ftvr0umuuizA4Gtdl2GXPOCnbSUx58pgueJK2NumfqEmKqQc3EVmbYKpdq60wNx
-         RBr3c6Pc/yvFnJWO68+Cbi0Rv5jJqlpbMX5t1k5wTTp3k14yvlvnKpS7B+ym2NuSx0UF
-         8b6671yz3Ijs0txmzmryDVC5A2UMS4f+sCvbFtqlYNWYkavOIEgdhbudbeddlXMvpcF3
-         ar3FOS7BlgEBWB6IQAVnc3Wzzb1JkXYbQ/iZSsO5sgclUYd5gt59KXUMYHzK590RZ8zd
-         IPCA==
+        d=todobom-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=M+vFQlausoJiFvxvyOgAw2Zd3YK3RXL7dBooZbDdKNQ=;
+        b=Qz1+eIwdrekriuMPhcFjWScXtanahcGH0Pj4Zjk/3JqwKNC1iS39v7EzC6ulvu9O5Y
+         9lxmRe1QiIOjv6mqPJYL8rkxWrQKJe8+DL5YObUldDrA9hMWo3qesIl5/zsMes8vKdj0
+         luwZyqZLe4hAzh9DRxhNsV8DhuyZ3HHkQqNiWNLj3p6c8Posy5tASV4awD7inxQZ0Luj
+         bsSSN/GglTE7IoksB2ndH65n+WUrJMP/OY8kQ0Db7iBTAumQOZF18Cl5lEBAOIrr/HHp
+         AubKYE2Q3BfCu1IWQEAMPWTaiOo72zCBNElj6bdGCJLnYFfl1FFkha7I/sAILNjIScTj
+         xdlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=zPaqQvgSnFUeWxSLsjPodaEcfWkfP+yU8MEEA26LpnE=;
-        b=E/Ac8v5kDGuD9BP/3RHg8yt3PGdKvl39KkcVSyHdXg9fjvAoF903Y2bDSNJwbWbkZd
-         WO7s7ZCDODEBmKtRIGQ3qtExPaDPuBd6J4wHYrcSFU9wBgQAGQak1Qp2Zgk/eIm2ngGR
-         kBzJ1gYgIR9vFkE9pZy1qQZBLBEVk7H1fTe5XLptA1vb54bd5+O7BycnMC6bS89/lFFH
-         BUXXugGG1fSfq+IY83e4bjPyZFGsUTu4/S11ru/knO8QeRWGqw4fesB470eYnxiOOW4n
-         lyqcwrND3xx0RbwYr4rh1H2w+xLGpJATvOFZJ3wLN+6SQ8MKjDd30lRHr0w2UkEcp0Oz
-         O1pw==
-X-Gm-Message-State: AOAM5328Yw6mGdgBys2MRdeF+nbeecjjoNInsch+BysI98N7zjwtFqQW
-	wjg4w7TRJPaLmiTnutTW12w=
-X-Google-Smtp-Source: ABdhPJxOGwOMslHj4Du9KwiXwtZpkRHZ4+yAMo8NQXsWQbCtNj6eutssGD0+9d1tpthhisXyz10IOQ==
-X-Received: by 2002:a17:90a:5d8d:: with SMTP id t13mr7710569pji.39.1611352830366;
-        Fri, 22 Jan 2021 14:00:30 -0800 (PST)
-From: Bobby Eshleman <bobbyeshleman@gmail.com>
-X-Google-Original-From: Bobby Eshleman <bobbye@piano>
-Date: Fri, 22 Jan 2021 13:57:59 -0800
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
-	Daniel Kiper <daniel.kiper@oracle.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	Xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v3 1/5] xen: add XEN_BUILD_POSIX_TIME
-Message-ID: <YAtKZ3QiE8ZNdNif@piano>
-References: <cover.1611273359.git.bobbyeshleman@gmail.com>
- <e8c57268455291bad0bbcdf0013b0d5aa349be1b.1611273359.git.bobbyeshleman@gmail.com>
- <52e85ee7-b980-ece1-50d4-7deac182bca0@suse.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=M+vFQlausoJiFvxvyOgAw2Zd3YK3RXL7dBooZbDdKNQ=;
+        b=ojpnsBJ6n+YbD0xroaVVR0eh8Kzq//YBtCyGIA+Bv2BCQb0xRobaddQp81Pb+45yZ/
+         qQOkfklzK8AlAvt8kpjYHwZCOXqV+olit3o/hMlfhGHNlsGZArx2esUUBttfRz7GdshC
+         sqImjyERyRG5GEoW0vDizXPFb9BCpKcoNJC/zD6HmFUNyZTfToRWSlt2T9yguwav+ves
+         UPf6sxpZGxdMbgP9MBvWqSf1uLTSCdKD9k1DKs89TtcvlEzw0svUX2nhS3bawJVm0CjP
+         oyRMP4BO0uEOAjmnRonJd8JW/mTJD+JYLacJR37ZC05woraRVU1I2PBy9aDu/MGCxJaL
+         pM5A==
+X-Gm-Message-State: AOAM531hOW/wvu66qp8IlE95Yux6qnFYaYbWRWDk3M2yoe2onXnzXXlr
+	eupHzV1f17h+F1lEd8lidm2b0wXwjEpcf7oB0tiggw==
+X-Google-Smtp-Source: ABdhPJx+CvZ0JaOUFLpN4rqegInuLvs75O/0wEphB3+yRwlDwdtERCT8LXwPJuV5AgxML8P/IV6KAR0qn2opgQqowds=
+X-Received: by 2002:a37:9101:: with SMTP id t1mr3429223qkd.357.1611358578715;
+ Fri, 22 Jan 2021 15:36:18 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <52e85ee7-b980-ece1-50d4-7deac182bca0@suse.com>
+References: <CANyqHYfNBHnUiBiXHdt+R3mZ72oYQBnQcaWuKw5gY0uDb_ZqKw@mail.gmail.com>
+ <e1d69914-c6bc-40b9-a9f4-33be4bd022b6@suse.com> <CANyqHYcifnCgd5C5vbYoi4CTtoMX5+jzGqHfs6JZ+e=d2Y_dmg@mail.gmail.com>
+ <ff799cd4-ba42-e120-107c-5011dc803b5a@suse.com> <609a82d8-af12-4764-c4e0-f5ee0e11c130@suse.com>
+In-Reply-To: <609a82d8-af12-4764-c4e0-f5ee0e11c130@suse.com>
+From: Claudemir Todo Bom <claudemir@todobom.com>
+Date: Fri, 22 Jan 2021 20:36:06 -0300
+Message-ID: <CANyqHYehUWeNfVXqVJX6nrBS_CcKL1DQjyNVa1cUbvbx+zD83w@mail.gmail.com>
+Subject: Re: Problems with APIC on versions 4.9 and later (4.8 works)
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Jan Beulich <jbeulich@suse.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 22, 2021 at 12:27:29PM +0100, Jan Beulich wrote:
-> On 22.01.2021 01:51, Bobby Eshleman wrote:
-> >  export XEN_BUILD_DATE	?= $(shell LC_ALL=C date)
-> >  export XEN_BUILD_TIME	?= $(shell LC_ALL=C date +%T)
-> >  export XEN_BUILD_HOST	?= $(shell hostname)
-> > +export XEN_BUILD_POSIX_TIME	?= $(shell echo $${SOURCE_DATE_EPOCH:-$(shell date +%s)})
-> 
-> ... the use of SOURCE_DATE_EPOCH here when it's not used for
-> XEN_BUILD_TIME (the two could also do with living side by
-> side) and ...
-> 
+Em qua., 20 de jan. de 2021 =C3=A0s 12:13, J=C3=BCrgen Gro=C3=9F <jgross@su=
+se.com> escreveu:
+>
+> On 20.01.21 09:50, Jan Beulich wrote:
+> > On 19.01.2021 20:36, Claudemir Todo Bom wrote:
+> >> I do not have serial output on this setup, so I recorded a video with
+> >> boot_delay=3D50 in order to be able to get all the kernel messages:
+> >> https://youtu.be/y95h6vqoF7Y
+> >
+> > This doesn't show any badness afaics.
+> >
+> >> This is running 4.14 from debian bullseye (testing).
+> >>
+> >> I'm also attaching the dmesg output when booting xen 4.8 with  the sam=
+e
+> >> kernel version and same parameters.
+> >>
+> >> I visually compared all the messages, and the only thing I noticed was=
+ that
+> >> 4.14 used tsc as clocksource and 4.8 used xen. I tried to boot the ker=
+nel
+> >> with "clocksource=3Dxen" and the problem is happening with that also.
+> >
+> > There's some confusion here I suppose: The clock source you talk
+> > about is the kernel's, not Xen's. I didn't think this would
+> > change for the same kernel version with different Xen underneath,
+> > but the Linux maintainers of the Xen code there may know better.
+> > Cc-ing them.
+>
+> This might depend on CPUID bits given to dom0 by Xen, e.g. regarding
+> TSC stability.
+>
 
-XEN_BUILD_TIME is of the form "HH:MM:SS" and SOURCE_DATE_EPOCH / date
-+%s are unix timestamps (seconds since epoch).  On Linux, `date -d`
-could be used to equalize the two timestamps... I'm not sure about
-FreeBSD, as -d is not required by POSIX.
+Looks like the CPUID changes I observed and wrote on the other
+messages are another
+problem I may end up with. I narrowed down the cause of the problem on
+booting of dom0 with more than 1 core on the following commit:
 
-I could place them side-by-side if that's preferred.  I placed it
-afterwards here so that there wasn't one oddly aligned "?=" assignment
-in the middle of the others, as in rev2 it was requested their alignment
-be retained here.
+https://github.com/xen-project/xen/commit/63e1d01b8fd948b3e0fa3beea494e4076=
+68aa43b
 
-> > --- a/xen/include/xen/compile.h.in
-> > +++ b/xen/include/xen/compile.h.in
-> > @@ -1,5 +1,6 @@
-> >  #define XEN_COMPILE_DATE	"@@date@@"
-> >  #define XEN_COMPILE_TIME	"@@time@@"
-> > +#define XEN_COMPILE_POSIX_TIME	@@posix_time@@
-> >  #define XEN_COMPILE_BY		"@@whoami@@"
-> >  #define XEN_COMPILE_DOMAIN	"@@domain@@"
-> >  #define XEN_COMPILE_HOST	"@@hostname@@"
-> 
-> ... the lack of quotes here when all neighboring items have
-> them.
-> 
+Code built from this commit doesn't boot, built from the parent of it, boot=
+s.
 
-XEN_COMPILE_POSIX_TIME is used as a long, while the others are used as
-strings.  Should this be commented?
+Now, there is something I can do on the command line to make it boots?
+Or its needed to fix on the code?
 
-Thank you for the feedback.
-
-Best,
-Bobby
+Best regards,
+Claudemir
 
