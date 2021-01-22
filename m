@@ -2,47 +2,46 @@ Return-Path: <SRS0=o5zc=GZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 925A3C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 17:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7337AC433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 17:44:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 48E2D23A68
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 17:37:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48E2D23A68
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id DD6C423A79
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 17:44:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD6C423A79
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=codiax.se
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.73004.131611 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.73008.131624 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l30N4-0008WI-PF; Fri, 22 Jan 2021 17:37:18 +0000
+	id 1l30U1-00019L-HT; Fri, 22 Jan 2021 17:44:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 73004.131611; Fri, 22 Jan 2021 17:37:18 +0000
+Received: by outflank-mailman (output) from mailman id 73008.131624; Fri, 22 Jan 2021 17:44:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l30N4-0008WB-M4; Fri, 22 Jan 2021 17:37:18 +0000
-Received: by outflank-mailman (input) for mailman id 73004;
- Fri, 22 Jan 2021 17:37:17 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l30N3-0008W6-NU
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 17:37:17 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l30N3-0004fF-Kg
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 17:37:17 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l30N3-0002eb-Jz
- for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 17:37:17 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1l30My-0004Qs-UX; Fri, 22 Jan 2021 17:37:12 +0000
+	id 1l30U1-00019E-EO; Fri, 22 Jan 2021 17:44:29 +0000
+Received: by outflank-mailman (input) for mailman id 73008;
+ Fri, 22 Jan 2021 17:44:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=530u=GZ=codiax.se=anders.tornqvist@srs-us1.protection.inumbo.net>)
+ id 1l30Tz-000199-WC
+ for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 17:44:28 +0000
+Received: from mailrelay4-3.pub.mailoutpod1-cph3.one.com (unknown
+ [46.30.212.13]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e2aa96b0-a485-4883-9e25-fc74532b3231;
+ Fri, 22 Jan 2021 17:44:25 +0000 (UTC)
+Received: from [192.168.101.129] (h77-53-239-0.cust.a3fiber.se [77.53.239.0])
+ by mailrelay4.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+ id 76c8e193-5cd9-11eb-a8e7-d0431ea8bb10;
+ Fri, 22 Jan 2021 17:44:23 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,95 +53,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=Z7tMbTglVxu5ykuKvbrAOjDGqFemtyesoQo5K3SwYgE=; b=jouXbVVeMyOHYU2iP6l53AA29i
-	iTsRQnRt1sEAx2k1cK0XOz6ea45DbXDxdAwJocAtjZnhP3vr4DdUNIWKTV6jhCU7SawkYNqv0sIyM
-	aVZsh/qzYFLyCIn5EXMDNlbgQNwH4WZWq1INYeLgZHXOJr4K3camGCJ6enZ4yvIcdBWw=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: e2aa96b0-a485-4883-9e25-fc74532b3231
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=codiax.se; s=20191106;
+	h=content-transfer-encoding:content-type:in-reply-to:mime-version:date:
+	 message-id:from:references:to:subject:from;
+	bh=pXYuLPB+VTW0S1FR4T7jmHV9SYK1jKmmlE8i+PWh9fM=;
+	b=LSz9ME5o+tNQ61TVSK7ZH6HSQ8Uq3jiDerGcFJOuiKdrNFO1LJzVfihDbybw21YIN4cLHpDaPAqfy
+	 m8wtubdq1JUhUHbbZLdczW1nIBBMH1OPG5zyQRunwJr2nPK683MuB/CSvTNvaEmzp4ikjh2cLD1zKv
+	 zEfWY/nZly0ghxajJoYfBxNiXIhYI9Uf1P/nAXoq8OCiDiMF2A42KAIgg/P2Dnz97IbqSJ6X2ydJFV
+	 FFmIKCb/cIIHWtWHtXqFrIuHfX57yvZ8sbXXfUktN+FTR3/CpgpVibvHz1MCs/dbYaFUcLfoFc9LJz
+	 JBGqihIr42BEDafZPWMCBfN0wS5nKJA==
+X-HalOne-Cookie: abcb0c112efd680717da00e61315fae726c3b411
+X-HalOne-ID: 76c8e193-5cd9-11eb-a8e7-d0431ea8bb10
+Subject: Re: Null scheduler and vwfi native problem
+To: Julien Grall <julien@xen.org>, Dario Faggioli <dfaggioli@suse.com>,
+ xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
+References: <fe3dd9f0-b035-01fe-3e01-ddf065f182ab@codiax.se>
+ <207305e4e2998614767fdcc5ad83ced6de982820.camel@suse.com>
+ <e85548f4-e03b-4717-3495-9ed472ed03c9@xen.org>
+ <e18ba69efd0d12fc489144024305fd3c6102c330.camel@suse.com>
+ <e37fe8a9-c633-3572-e273-2fd03b35b791@codiax.se>
+ <744ddde6-a228-82fc-76b9-401926d7963b@xen.org>
+From: =?UTF-8?Q?Anders_T=c3=b6rnqvist?= <anders.tornqvist@codiax.se>
+Message-ID: <8eef0e27-63bc-5202-9857-8143c94acd04@codiax.se>
+Date: Fri, 22 Jan 2021 18:44:23 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+In-Reply-To: <744ddde6-a228-82fc-76b9-401926d7963b@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Message-ID: <24587.3400.673049.196349@mariner.uk.xensource.com>
-Date: Fri, 22 Jan 2021 17:37:12 +0000
-To: Edwin Torok <edvin.torok@citrix.com>,
-    Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: <xen-devel@lists.xenproject.org>,
-    Christian Lindig <christian.lindig@citrix.com>,
-    =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>,
-    Wei Liu <wl@xen.org>
-Subject: Re: [OSSTEST PATCH 7/7] make-flight: Stripy xenstored [and 2 more messages]
-In-Reply-To: <a436baeb-888e-a213-2a68-6817309a6b2a@citrix.com>,
-	<81f92e66-3a43-dea8-f633-2fcf725c10dc@citrix.com>,
-	<8b231075e5ed13412f98881c3b3454d9abf9e871.camel@citrix.com>
-References: <20210122155603.23402-1-iwj@xenproject.org>
-	<20210122155603.23402-7-iwj@xenproject.org>
-	<8b231075e5ed13412f98881c3b3454d9abf9e871.camel@citrix.com>
-	<81f92e66-3a43-dea8-f633-2fcf725c10dc@citrix.com>
-	<0361ffd5-a640-ac59-c222-4a2d5a9a4727@citrix.com>
-	<24586.64456.905401.474099@mariner.uk.xensource.com>
-	<a436baeb-888e-a213-2a68-6817309a6b2a@citrix.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Language: en-GB
 
-Andrew Cooper writes ("Re: [OSSTEST PATCH 7/7] make-flight: Stripy xenstored"):
-> Right, but nothing will actually fail the build.
+On 1/22/21 3:26 PM, Julien Grall wrote:
+> Hi Anders,
+>
+> On 22/01/2021 08:06, Anders Törnqvist wrote:
+>> On 1/22/21 12:35 AM, Dario Faggioli wrote:
+>>> On Thu, 2021-01-21 at 19:40 +0000, Julien Grall wrote:
+>> - booting with "sched=null vwfi=native" but not doing the IRQ 
+>> passthrough that you mentioned above
+>> "xl destroy" gives
+>> (XEN) End of domain_destroy function
+>>
+>> Then a "xl create" says nothing but the domain has not started 
+>> correct. "xl list" look like this for the domain:
+>> mydomu                                   2   512     1 ------       0.0
+>
+> This is odd. I would have expected ``xl create`` to fail if something 
+> went wrong with the domain creation.
+>
+> The list of dash, suggests that the domain is:
+>    - Not running
+>    - Not blocked (i.e cannot run)
+>    - Not paused
+>    - Not shutdown
+>
+> So this suggest the NULL scheduler didn't schedule the vCPU. Would it 
+> be possible to describe your setup:
+>   - How many pCPUs?
+There are 6 pCPUs
+>   - How many vCPUs did you give to dom0?
+I gave it 5
+>   - What was the number of the vCPUs given to the previous guest?
 
-Indeed.
+Nr 0.
 
-> So the way this error will manifest is the first non-trivial `xl $FOO`
-> executed in dom0 hanging until the job timeout.
+Listing vcpus looks like this when the domain is running:
 
-I doubt it would produce a timeout BICBW.
+xl vcpu-list
+Name                                ID  VCPU   CPU State   Time(s) 
+Affinity (Hard / Soft)
+Domain-0                             0     0    0   r--     101.7 0 / all
+Domain-0                             0     1    1   r--     101.0 1 / all
+Domain-0                             0     2    2   r--     101.0 2 / all
+Domain-0                             0     3    3   r--     100.9 3 / all
+Domain-0                             0     4    4   r--     100.9 4 / all
+mydomu                              1     0    5   r--      89.5 5 / all
 
-> Or does OSSTest have an explicit "is xenstored running" check after
-> boot, before any further testing occurs?
+vCPU nr 0 is also for dom0. Is that normal?
 
-No.
-
-If this turns out to ever happen we can improve the pre-checking.  In
-general I let the chips fall where they may, for test failures, and
-improve the checking/logging later.  Otherwise adding new tests
-becomes very time-consuming (and there is also the risk that added
-checks do not align with actual behvaiour).
-
-Now that it's builing, I think it's fairly unlikely that we will
-accidentally stop building one of the xenstoreds.
-
-> There is no such thing as an ocaml stub-xenstored yet, but I have asked
-> the Mirage folk if they'd like to remedy this.
-
-Cool.
-
-
-Andrew Cooper writes ("Re: [OSSTEST PATCH 7/7] make-flight: Stripy xenstored"):
-> An extra thought.� What exactly feeds into the decision?
-
-Precisely, the job name.
-
-> If it includes the flight number, then the retest logic is going to get
-> very confused on xenstored bugs when the implementation change between
-> the two runs.
-
-Indeed.  But it doesn't :-).
-
-> Also, what is the bisector going across this changeset?
-
-The bisector always runs with the latest osstest.  So if this new C
-xenstore testing discovers that it's broken, the bisector won't be
-much help.  (It will fail to repro the basis pass; so in any case we
-won't get false reports from it.)
-
-On the other hand, if C xenstored still works and some future point we
-break it, the bisection will DTRT.
+>
+> One possibility is the NULL scheduler doesn't release the pCPUs until 
+> the domain is fully destroyed. So if there is no pCPU free, it 
+> wouldn't be able to schedule the new domain.
+>
+> However, I would have expected the NULL scheduler to refuse the domain 
+> to create if there is no pCPU available.
+>
+> @Dario, @Stefano, do you know when the NULL scheduler decides to 
+> allocate the pCPU?
+>
+> Cheers,
+>
 
 
-Edwin Torok writes ("Re: [OSSTEST PATCH 7/7] make-flight: Stripy xenstored"):
-> In the patch series that I've recently posted to xen-devel there is
-> also a 'make check' target in tools/ocaml/xenstored.
-
-Cool.
-
-Thanks,
-Ian.
 
