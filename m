@@ -2,48 +2,47 @@ Return-Path: <SRS0=o5zc=GZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89619C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 21:58:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E58EC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 22:00:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4790A23AA1
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 21:58:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4790A23AA1
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3D82F23B1A
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Jan 2021 22:00:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D82F23B1A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.73126.131839 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.73132.131854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l34S9-0001kE-4R; Fri, 22 Jan 2021 21:58:49 +0000
+	id 1l34Tp-0002kx-HT; Fri, 22 Jan 2021 22:00:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 73126.131839; Fri, 22 Jan 2021 21:58:49 +0000
+Received: by outflank-mailman (output) from mailman id 73132.131854; Fri, 22 Jan 2021 22:00:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l34S9-0001k7-16; Fri, 22 Jan 2021 21:58:49 +0000
-Received: by outflank-mailman (input) for mailman id 73126;
- Fri, 22 Jan 2021 21:58:48 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l34S7-0001jz-Ug; Fri, 22 Jan 2021 21:58:47 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l34S7-0000dT-Os; Fri, 22 Jan 2021 21:58:47 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l34S7-0002pN-Fr; Fri, 22 Jan 2021 21:58:47 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1l34S7-0005Fi-Er; Fri, 22 Jan 2021 21:58:47 +0000
+	id 1l34Tp-0002kq-EJ; Fri, 22 Jan 2021 22:00:33 +0000
+Received: by outflank-mailman (input) for mailman id 73132;
+ Fri, 22 Jan 2021 22:00:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0NXE=GZ=gmail.com=bobbyeshleman@srs-us1.protection.inumbo.net>)
+ id 1l34To-0002kl-Ai
+ for xen-devel@lists.xenproject.org; Fri, 22 Jan 2021 22:00:32 +0000
+Received: from mail-pj1-x102a.google.com (unknown [2607:f8b0:4864:20::102a])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4a90c183-8c38-41fa-b6bc-e57fb037a092;
+ Fri, 22 Jan 2021 22:00:31 +0000 (UTC)
+Received: by mail-pj1-x102a.google.com with SMTP id e6so4759486pjj.1
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Jan 2021 14:00:31 -0800 (PST)
+Received: from piano ([2601:1c2:4f00:c640:3cc1:5f60:de20:49b1])
+ by smtp.gmail.com with ESMTPSA id n2sm9891614pfu.129.2021.01.22.14.00.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Jan 2021 14:00:29 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,87 +54,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=PZ+BfoeHlQj+gRUVPTBsmCFhOUaJVhJUQYmlRVgFrtQ=; b=u3GpdgQ//aoNSsttBdhZyPpSMI
-	phbNijCsOPhauJrkxjhnxrP2LNZExIOqEVe+srkCI2TScO2MatcB0JXqD0gsG1iZBL7zMUXxfm+Fy
-	ohF5/062j2XmTnkfnvhsvSlZdj/Xo54KJB/pBX3oCA0yEMAYQiGfWvwsXi+We4yIWjV4=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-158580-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 4a90c183-8c38-41fa-b6bc-e57fb037a092
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:date:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=zPaqQvgSnFUeWxSLsjPodaEcfWkfP+yU8MEEA26LpnE=;
+        b=F7J185sv88lcM22QhUKZs+WgRWVF97LLuEFoCrGWS+czOXv/+MFpi4eEw8/nyRXwJy
+         tZ217ftvr0umuuizA4Gtdl2GXPOCnbSUx58pgueJK2NumfqEmKqQc3EVmbYKpdq60wNx
+         RBr3c6Pc/yvFnJWO68+Cbi0Rv5jJqlpbMX5t1k5wTTp3k14yvlvnKpS7B+ym2NuSx0UF
+         8b6671yz3Ijs0txmzmryDVC5A2UMS4f+sCvbFtqlYNWYkavOIEgdhbudbeddlXMvpcF3
+         ar3FOS7BlgEBWB6IQAVnc3Wzzb1JkXYbQ/iZSsO5sgclUYd5gt59KXUMYHzK590RZ8zd
+         IPCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=zPaqQvgSnFUeWxSLsjPodaEcfWkfP+yU8MEEA26LpnE=;
+        b=E/Ac8v5kDGuD9BP/3RHg8yt3PGdKvl39KkcVSyHdXg9fjvAoF903Y2bDSNJwbWbkZd
+         WO7s7ZCDODEBmKtRIGQ3qtExPaDPuBd6J4wHYrcSFU9wBgQAGQak1Qp2Zgk/eIm2ngGR
+         kBzJ1gYgIR9vFkE9pZy1qQZBLBEVk7H1fTe5XLptA1vb54bd5+O7BycnMC6bS89/lFFH
+         BUXXugGG1fSfq+IY83e4bjPyZFGsUTu4/S11ru/knO8QeRWGqw4fesB470eYnxiOOW4n
+         lyqcwrND3xx0RbwYr4rh1H2w+xLGpJATvOFZJ3wLN+6SQ8MKjDd30lRHr0w2UkEcp0Oz
+         O1pw==
+X-Gm-Message-State: AOAM5328Yw6mGdgBys2MRdeF+nbeecjjoNInsch+BysI98N7zjwtFqQW
+	wjg4w7TRJPaLmiTnutTW12w=
+X-Google-Smtp-Source: ABdhPJxOGwOMslHj4Du9KwiXwtZpkRHZ4+yAMo8NQXsWQbCtNj6eutssGD0+9d1tpthhisXyz10IOQ==
+X-Received: by 2002:a17:90a:5d8d:: with SMTP id t13mr7710569pji.39.1611352830366;
+        Fri, 22 Jan 2021 14:00:30 -0800 (PST)
+From: Bobby Eshleman <bobbyeshleman@gmail.com>
+X-Google-Original-From: Bobby Eshleman <bobbye@piano>
+Date: Fri, 22 Jan 2021 13:57:59 -0800
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
+	Daniel Kiper <daniel.kiper@oracle.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+	Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 1/5] xen: add XEN_BUILD_POSIX_TIME
+Message-ID: <YAtKZ3QiE8ZNdNif@piano>
+References: <cover.1611273359.git.bobbyeshleman@gmail.com>
+ <e8c57268455291bad0bbcdf0013b0d5aa349be1b.1611273359.git.bobbyeshleman@gmail.com>
+ <52e85ee7-b980-ece1-50d4-7deac182bca0@suse.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 158580: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=b1278939db0b2eded9729a8e8c77c93fcbc9d870
-X-Osstest-Versions-That:
-    xen=5e317896342d553f0b55f72948bbf93a0f1147d3
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 22 Jan 2021 21:58:47 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <52e85ee7-b980-ece1-50d4-7deac182bca0@suse.com>
 
-flight 158580 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/158580/
+On Fri, Jan 22, 2021 at 12:27:29PM +0100, Jan Beulich wrote:
+> On 22.01.2021 01:51, Bobby Eshleman wrote:
+> >  export XEN_BUILD_DATE	?= $(shell LC_ALL=C date)
+> >  export XEN_BUILD_TIME	?= $(shell LC_ALL=C date +%T)
+> >  export XEN_BUILD_HOST	?= $(shell hostname)
+> > +export XEN_BUILD_POSIX_TIME	?= $(shell echo $${SOURCE_DATE_EPOCH:-$(shell date +%s)})
+> 
+> ... the use of SOURCE_DATE_EPOCH here when it's not used for
+> XEN_BUILD_TIME (the two could also do with living side by
+> side) and ...
+> 
 
-Failures :-/ but no regressions.
+XEN_BUILD_TIME is of the form "HH:MM:SS" and SOURCE_DATE_EPOCH / date
++%s are unix timestamps (seconds since epoch).  On Linux, `date -d`
+could be used to equalize the two timestamps... I'm not sure about
+FreeBSD, as -d is not required by POSIX.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+I could place them side-by-side if that's preferred.  I placed it
+afterwards here so that there wasn't one oddly aligned "?=" assignment
+in the middle of the others, as in rev2 it was requested their alignment
+be retained here.
 
-version targeted for testing:
- xen                  b1278939db0b2eded9729a8e8c77c93fcbc9d870
-baseline version:
- xen                  5e317896342d553f0b55f72948bbf93a0f1147d3
+> > --- a/xen/include/xen/compile.h.in
+> > +++ b/xen/include/xen/compile.h.in
+> > @@ -1,5 +1,6 @@
+> >  #define XEN_COMPILE_DATE	"@@date@@"
+> >  #define XEN_COMPILE_TIME	"@@time@@"
+> > +#define XEN_COMPILE_POSIX_TIME	@@posix_time@@
+> >  #define XEN_COMPILE_BY		"@@whoami@@"
+> >  #define XEN_COMPILE_DOMAIN	"@@domain@@"
+> >  #define XEN_COMPILE_HOST	"@@hostname@@"
+> 
+> ... the lack of quotes here when all neighboring items have
+> them.
+> 
 
-Last test of basis   158578  2021-01-22 15:01:30 Z    0 days
-Testing same since   158580  2021-01-22 19:01:23 Z    0 days    1 attempts
+XEN_COMPILE_POSIX_TIME is used as a long, while the others are used as
+strings.  Should this be commented?
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Christian Lindig <christian.lindig@citrix.com>
-  Edwin Török <edvin.torok@citrix.com>
+Thank you for the feedback.
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   5e31789634..b1278939db  b1278939db0b2eded9729a8e8c77c93fcbc9d870 -> smoke
+Best,
+Bobby
 
