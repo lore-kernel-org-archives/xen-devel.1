@@ -2,45 +2,45 @@ Return-Path: <SRS0=b7J0=G2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD686C433DB
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 11:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92C69C433DB
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 11:55:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6C09D22CF7
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 11:44:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C09D22CF7
+	by mail.kernel.org (Postfix) with ESMTPS id 3DD25235DD
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 11:55:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DD25235DD
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.73268.132062 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.73277.132087 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l3HLK-0007bi-L7; Sat, 23 Jan 2021 11:44:38 +0000
+	id 1l3HVb-0000Ka-1b; Sat, 23 Jan 2021 11:55:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 73268.132062; Sat, 23 Jan 2021 11:44:38 +0000
+Received: by outflank-mailman (output) from mailman id 73277.132087; Sat, 23 Jan 2021 11:55:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l3HLK-0007ba-Hn; Sat, 23 Jan 2021 11:44:38 +0000
-Received: by outflank-mailman (input) for mailman id 73268;
- Sat, 23 Jan 2021 11:44:37 +0000
+	id 1l3HVa-0000KT-UZ; Sat, 23 Jan 2021 11:55:14 +0000
+Received: by outflank-mailman (input) for mailman id 73277;
+ Sat, 23 Jan 2021 11:55:13 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1l3HLJ-0007bO-6C
- for xen-devel@lists.xenproject.org; Sat, 23 Jan 2021 11:44:37 +0000
+ (envelope-from <julien@xen.org>) id 1l3HVZ-0000KJ-J3
+ for xen-devel@lists.xenproject.org; Sat, 23 Jan 2021 11:55:13 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1l3HLF-0005QV-UU; Sat, 23 Jan 2021 11:44:33 +0000
+ id 1l3HVV-0005bN-QX; Sat, 23 Jan 2021 11:55:09 +0000
 Received: from [54.239.6.177] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1l3HLF-00075O-Mj; Sat, 23 Jan 2021 11:44:33 +0000
+ id 1l3HVV-0008Dn-GP; Sat, 23 Jan 2021 11:55:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,72 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=1wKMe7duyypGiRSLautTnU44G4khD2cjllG0da3VBQg=; b=JMqRQaIC9r8exs/0p2YT7FFt9b
-	Xv9+juqX406h3/wQANElHhupGvjzIU4D+1MbMEsPkCZ8Xfe4b+upM2It5rWd5vzNVjFx90fabVvZD
-	443GwCFKYNRWnbueU3R6sW7l5H3aUfSVks4cQiSbXzjysOi+GEK0jRpOolRn+awR1rbk=;
-Subject: Re: [PATCH RFC 0/6] xen/arm: mm: Add limited support for superpages
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com, Julien Grall <jgrall@amazon.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
+	bh=4t7p09Yyty8AlkWbzZZL9fvWfZhGW0mVSz1SQe+Tjq8=; b=N04dUgz1Q/989Gh+K3UIps7fZI
+	4/iQHb8nFjSd/WWWb50NtUrcoYvrdf9YLl8B9z6nQFiUyrfX5DhBxuVNJWunQmLUfy8E4gwblDOPo
+	jop8n7Y1+hyhqGwKN9t3atI+qaNlWKqgQAkCBM1eBe0p3NMFdYXhkPsWEjgkl4w+Xhys=;
+Subject: Re: [PATCH v6 10/10] xen/arm: smmuv3: Add support for SMMUv3 driver
+To: Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20201119190751.22345-1-julien@xen.org>
+References: <388adde9a060eb9fc685cc743a354361fcdf0374.1611314782.git.rahul.singh@arm.com>
+ <df3a76bc971a09daf4e61361bbc635e82cf9b59e.1611314782.git.rahul.singh@arm.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <d24d251a-0c53-3cc3-0e07-97610b123171@xen.org>
-Date: Sat, 23 Jan 2021 11:44:32 +0000
+Message-ID: <1a7e0989-29c6-7c7e-43a1-0caa11caad61@xen.org>
+Date: Sat, 23 Jan 2021 11:55:07 +0000
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <20201119190751.22345-1-julien@xen.org>
+In-Reply-To: <df3a76bc971a09daf4e61361bbc635e82cf9b59e.1611314782.git.rahul.singh@arm.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi Rahul
 
-On 19/11/2020 19:07, Julien Grall wrote:
-> From: Julien Grall <jgrall@amazon.com>
+On 22/01/2021 11:37, Rahul Singh wrote:
+> Add support for ARM architected SMMUv3 implementation. It is based on
+> the Linux SMMUv3 driver.
 > 
-> Hi all,
+> Driver is currently supported as Tech Preview.
 > 
-> This is a first attempt to add superpage mapping in
-> xen_pt_update_entry(). The end goal if to remove open-coding mappings
-> which will help to:
->    1) get better compliance with the Arm memory model
->    2) pave the way for other page size (64KB, 16KB).
+> Major differences with regard to Linux driver are as follows:
+> 2. Only Stage-2 translation is supported as compared to the Linux driver
+>     that supports both Stage-1 and Stage-2 translations.
+> 3. Use P2M  page table instead of creating one as SMMUv3 has the
+>     capability to share the page tables with the CPU.
+> 4. Tasklets are used in place of threaded IRQ's in Linux for event queue
+>     and priority queue IRQ handling.
+> 5. Latest version of the Linux SMMUv3 code implements the commands queue
+>     access functions based on atomic operations implemented in Linux.
+>     Atomic functions used by the commands queue access functions are not
+>     implemented in XEN therefore we decided to port the earlier version
+>     of the code. Atomic operations are introduced to fix the bottleneck
+>     of the SMMU command queue insertion operation. A new algorithm for
+>     inserting commands into the queue is introduced, which is lock-free
+>     on the fast-path.
+>     Consequence of reverting the patch is that the command queue
+>     insertion will be slow for large systems as spinlock will be used to
+>     serializes accesses from all CPUs to the single queue supported by
+>     the hardware. Once the proper atomic operations will be available in
+>     XEN the driver can be updated.
+> 6. Spin lock is used in place of mutex when attaching a device to the
+>     SMMU, as there is no blocking locks implementation available in XEN.
+>     This might introduce latency in XEN. Need to investigate before
+>     driver is out for tech preview.
+> 7. PCI ATS functionality is not supported, as there is no support
+>     available in XEN to test the functionality. Code is not tested and
+>     compiled. Code is guarded by the flag CONFIG_PCI_ATS.
+> 8. MSI interrupts are not supported as there is no support available in
+>     XEN to request MSI interrupts. Code is not tested and compiled. Code
+>     is guarded by the flag CONFIG_MSI.
 > 
-> For now, only the open-code mappings for the Device-Tree is reworked.
-> The others will be added later.
-> 
-> Julien Grall (5):
->    xen/arm: mm: Remove ; at the end of mm_printk()
->    xen/arm: setup: Call unregister_init_virtual_region() after the last
->      init function
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-[...]
-
-> 
-> Stefano Stabellini (1):
->    xen/arm: mm: Remove special case for CPU0 in dump_hyp_walk()
-
-I have committed the 3 patches above. The rest needs a respin which will 
-only happen after 4.15.
+Thank you for sending a new version. I have commited the series now.
 
 Cheers,
 
