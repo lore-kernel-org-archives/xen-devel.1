@@ -2,45 +2,48 @@ Return-Path: <SRS0=b7J0=G2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F730C433DB
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 13:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FB03C433DB
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 15:05:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D591523159
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 13:23:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D591523159
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id D1E23224BE
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Jan 2021 15:05:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1E23224BE
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.73306.132135 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.73333.132146 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l3IsD-0000oQ-Cp; Sat, 23 Jan 2021 13:22:41 +0000
+	id 1l3KSu-00023l-Jc; Sat, 23 Jan 2021 15:04:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 73306.132135; Sat, 23 Jan 2021 13:22:41 +0000
+Received: by outflank-mailman (output) from mailman id 73333.132146; Sat, 23 Jan 2021 15:04:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l3IsD-0000oJ-8f; Sat, 23 Jan 2021 13:22:41 +0000
-Received: by outflank-mailman (input) for mailman id 73306;
- Sat, 23 Jan 2021 13:22:39 +0000
+	id 1l3KSu-00023e-Gi; Sat, 23 Jan 2021 15:04:40 +0000
+Received: by outflank-mailman (input) for mailman id 73333;
+ Sat, 23 Jan 2021 15:04:39 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1l3IsB-0000oD-7u
- for xen-devel@lists.xenproject.org; Sat, 23 Jan 2021 13:22:39 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l3KSt-00023W-0I; Sat, 23 Jan 2021 15:04:39 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l3IsA-00074R-6d; Sat, 23 Jan 2021 13:22:38 +0000
-Received: from [54.239.6.177] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l3Is9-0006BM-Qq; Sat, 23 Jan 2021 13:22:37 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l3KSs-0000Kw-FT; Sat, 23 Jan 2021 15:04:38 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l3KSs-0004Qj-6Z; Sat, 23 Jan 2021 15:04:38 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1l3KSs-0002ba-67; Sat, 23 Jan 2021 15:04:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,141 +55,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=7T1exBXi/j/fhZ2RfiQf032YwMX1mDT9ra5fW7Pd1GA=; b=aoaiZbJ0wXN5THIONfBDSfbYvA
-	NHlyKSwdOBBwJ5y2Z/uaZzXE52S2cPTmsRqmP0euCwZj1RyegNn2akFugleGsEj+1usqdru7FXEs4
-	CXIwMWv8FWdZWIH8CK0hRb/TiumVQoGrY6e922hLZQl73ghVmEcZn7JyankwczJ9BLEQ=;
-Subject: Re: [PATCH 2/6] x86/mm: p2m_add_foreign() is HVM-only
-To: Oleksandr <olekstysh@gmail.com>, Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-References: <be9ce75e-9119-2b5a-9e7b-437beb7ee446@suse.com>
- <cf4569c5-a9c5-7b4b-d576-d1521c369418@suse.com>
- <f736244b-ece7-af35-1517-2e5fdd9705c7@citrix.com>
- <e2ee99fc-e3f8-bdaf-fe4a-d048da34731a@suse.com>
- <b4abbe2f-5e3d-5f43-80b8-cfa3fd97061e@citrix.com>
- <CAPD2p-nZyf_i_bGh5sSs2fC4S7nxB1Mk_zbSKtqF=zvBOp3X+Q@mail.gmail.com>
- <2dcbe286-4112-e4b3-dc12-9691154365b3@suse.com>
- <448a6ef3-2cbd-da9c-e4ef-88122d246833@gmail.com>
- <18c21c64-d350-482a-c778-c8478d3daf2c@suse.com>
- <c8315e16-6130-e990-3d16-d0d42b2f92c4@gmail.com>
- <ec041f81-4b80-5ffb-8219-6732f50bef36@suse.com>
- <f6f1ffdd-619d-017e-6820-276814056845@gmail.com>
- <257224ea-4ba3-302e-e198-e92c8c1036b3@suse.com>
- <898d609c-8652-e43d-4400-27986cc37371@gmail.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <9523a20e-0b26-51b4-a13a-5767584389cf@xen.org>
-Date: Sat, 23 Jan 2021 13:22:35 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.6.1
-MIME-Version: 1.0
-In-Reply-To: <898d609c-8652-e43d-4400-27986cc37371@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=QSurfi03RTQmwzG4CktnKMhh5wKlhTJhsgu/w2+INaU=; b=nqn9sBkz4vEGZYE5t9AnKLZS8u
+	PMZHcQw2wqYfNwBE0s6SOiDJ5sJYYaOLCVu4SlI087PbpE7Gb9ZIr9THqj0lUkZjx/FeztFL2i5bf
+	Inwlt6jQ8b+MEUY8hGeUJ46EKmLtpt2hzjq8UvyPUSlOskaPFtNAv0NI3X+I0n4L1Dug=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-158590-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 158590: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=452ddbe3592b141b05a7e0676f09c8ae07f98fdd
+X-Osstest-Versions-That:
+    xen=b4707372296874cbfd882b8f9351b7ae549d5463
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sat, 23 Jan 2021 15:04:38 +0000
 
-Hi Jan & Oleksandr,
+flight 158590 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/158590/
 
-On 13/01/2021 15:06, Oleksandr wrote:
-> 
-> On 12.01.21 13:58, Jan Beulich wrote:
-> 
-> Hi Jan.
-> 
->> On 11.01.2021 09:23, Oleksandr wrote:
->>> On 11.01.21 09:41, Jan Beulich wrote:
->>>> If you could also provide your exact .config, I could see whether I
->>>> can repro here with some of the gcc5 versions I have laying around.
->>> Please see attached
->> Builds perfectly fine with 5.4.0 here.
-> 
-> Thank you for testing.
-> 
-> 
-> I wonder whether I indeed missed something. I have switched to 5.4.0 
-> again (from 9.3.0) and rechecked, a build issue was still present.
-> I even downloaded 5.4.0 sources and built them to try to build Xen, and 
-> got the same effect.  What I noticed is that for non-debug builds the 
-> build issue wasn't present.
-> Then I decided to build today's staging 
-> (414be7b66349e7dca42bc1fd47c2b2f5b2d27432 xen/memory: Fix compat 
-> XENMEM_acquire_resource for size requests) instead of 9-day's old one when
-> I had initially reported about that build issue 
-> (7ba2ab495be54f608cb47440e1497b2795bd301a x86/p2m: Fix 
-> paging_gva_to_gfn() for nested virt). Today's staging builds perfectly 
-> fine with 5.4.0.
-> It seems that commit in the middle 
-> (994f6478a48a60e3b407c7defc2d36a80f880b04 xsm/dummy: harden against 
-> speculative abuse) indirectly fixes that weird build issue with 5.4.0...
+Failures :-/ but no regressions.
 
-The gitlab CI reported a similar issue today (see [1]) when building 
-with randconfig ([2]). This is happening on Debian sid with GCC 9.3.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-Note that the default compiler on sid is GCC 10.2.1. So you will have to 
-install the package gcc-9 and then use CC=gcc-9 make <...>.
+version targeted for testing:
+ xen                  452ddbe3592b141b05a7e0676f09c8ae07f98fdd
+baseline version:
+ xen                  b4707372296874cbfd882b8f9351b7ae549d5463
 
+Last test of basis   158584  2021-01-23 01:00:28 Z    0 days
+Testing same since   158590  2021-01-23 12:02:37 Z    0 days    1 attempts
 
- From a local repro, I get the following message:
+------------------------------------------------------------
+People who touched revisions under test:
+  Juergen Gross <jgross@suse.com>
+  Julien GralL <jgrall@amazon.com>
+  Rahul Singh <rahul.singh@arm.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-ld: ld: prelink.o: in function `xenmem_add_to_physmap_batch':
-/root/xen/xen/common/memory.c:942: undefined reference to 
-`xenmem_add_to_physmap_one'
-/root/xen/xen/common/memory.c:942:(.text+0x22145): relocation truncated 
-to fit: R_X86_64_PLT32 against undefined symbol `xenmem_add_to_physmap_one'
-prelink-efi.o: in function `xenmem_add_to_physmap_batch':
-/root/xen/xen/common/memory.c:942: undefined reference to 
-`xenmem_add_to_physmap_one'
-make[2]: *** [Makefile:215: /root/xen/xen/xen.efi] Error 1
-make[2]: *** Waiting for unfinished jobs....
-ld: /root/xen/xen/.xen-syms.0: hidden symbol `xenmem_add_to_physmap_one' 
-isn't defined
-ld: final link failed: bad value
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
-This points to the call in xenmem_add_to_physmap_batch(). I have played 
-a bit with the .config options. I was able to get it built as soon as I 
-disabled CONFIG_COVERAGE=y.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-So maybe the optimizer is not clever enough on GCC 9 when building with 
-coverage enabled?
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-With the diff below applied (borrowed from 
-xenmem_add_to_physmap_batch()), I can build without tweaking the .config 
-[1]:
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index ccb4d49fc6..5cfd36a53d 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -903,6 +903,12 @@ static int xenmem_add_to_physmap_batch(struct 
-domain *d,
-  {
-      union add_to_physmap_extra extra = {};
-
-+    if ( !paging_mode_translate(d) )
-+    {
-+        ASSERT_UNREACHABLE();
-+        return -EACCES;
-+    }
-+
-      if ( unlikely(xatpb->size < extent) )
-          return -EILSEQ;
-
-Cheers,
-
-[1] https://gitlab.com/xen-project/xen/-/jobs/981624525
-[2] https://pastebin.com/vTbQXXV9
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
-https://gitlab.com/xen-project/xen/-/jobs/981624525
+Pushing revision :
 
-> 
-> 
-
--- 
-Julien Grall
+To xenbits.xen.org:/home/xen/git/xen.git
+   b470737229..452ddbe359  452ddbe3592b141b05a7e0676f09c8ae07f98fdd -> smoke
 
