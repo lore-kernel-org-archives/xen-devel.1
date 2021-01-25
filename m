@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E78DC433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23FE0C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B5FAA2256F
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5FAA2256F
+	by mail.kernel.org (Postfix) with ESMTPS id BA84721744
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA84721744
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.74381.133745 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.74383.133770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l47QD-0003fu-0X; Mon, 25 Jan 2021 19:21:09 +0000
+	id 1l47QE-0003k8-HZ; Mon, 25 Jan 2021 19:21:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 74381.133745; Mon, 25 Jan 2021 19:21:08 +0000
+Received: by outflank-mailman (output) from mailman id 74383.133770; Mon, 25 Jan 2021 19:21:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l47QC-0003fU-LX; Mon, 25 Jan 2021 19:21:08 +0000
-Received: by outflank-mailman (input) for mailman id 74381;
+	id 1l47QE-0003jF-1R; Mon, 25 Jan 2021 19:21:10 +0000
+Received: by outflank-mailman (input) for mailman id 74383;
  Mon, 25 Jan 2021 19:21:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DTVL=G4=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1l47GJ-0008N7-JR
- for xen-devel@lists.xenproject.org; Mon, 25 Jan 2021 19:10:55 +0000
-Received: from mail-wm1-x333.google.com (unknown [2a00:1450:4864:20::333])
+ id 1l47Fz-0008N7-Ip
+ for xen-devel@lists.xenproject.org; Mon, 25 Jan 2021 19:10:35 +0000
+Received: from mail-wm1-x32e.google.com (unknown [2a00:1450:4864:20::32e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5bc4c605-df07-442b-8357-7150c8be4ed9;
- Mon, 25 Jan 2021 19:09:19 +0000 (UTC)
-Received: by mail-wm1-x333.google.com with SMTP id m187so388585wme.2
- for <xen-devel@lists.xenproject.org>; Mon, 25 Jan 2021 11:09:16 -0800 (PST)
+ id 4677ca31-8225-4649-b648-8bcdf5dd0cf6;
+ Mon, 25 Jan 2021 19:09:14 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id 190so405220wmz.0
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Jan 2021 11:09:13 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id k6sm12991031wro.27.2021.01.25.11.09.15
+ by smtp.gmail.com with ESMTPSA id k6sm12991031wro.27.2021.01.25.11.09.11
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 25 Jan 2021 11:09:15 -0800 (PST)
+ Mon, 25 Jan 2021 11:09:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,71 +55,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5bc4c605-df07-442b-8357-7150c8be4ed9
+X-Inumbo-ID: 4677ca31-8225-4649-b648-8bcdf5dd0cf6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=56q3vS7kTPjkBeZpCedlA35sj1F6SAbFf73YA28cuDw=;
-        b=NAQXLR3YC0ePDFcJsMH2mJiS9iq1e7hqncXyhKPgAIZMXHKYL90qKiw9NPln14JyhJ
-         ko/xbh3dydPY5irT9V1He2YZE32F2nM/EXck5OgfqpTzh9mC+T43vXlsCduaHjZM+u8/
-         CMyvM8Vsx81GVsTyVd1aQeaYP9LO7AekDaITxS+WU/0KejucOPTaVBZlwGLMw2dG8oQY
-         ACi9SUyne7kX/xeLPKxVZ6my/XbN0GiGE1c9eA6iYAOBRSd+gXd/cnmqexzyejRGTeYG
-         Imara8PFomv2OPOgIUkvSHWHkOUSc4zIxe926xQqwcDHpS2RyOHOeTEkSE6D/6ncvsd2
-         00AQ==
+        bh=SCUpLEiOlSX9ul+kRijfipf8pIcb5kXp2unnhpR7jAc=;
+        b=prv5iMM/uS0Q196uQKNNJjf/gKceib37WdsQCJHp1q2vDrr0xOoCYw6wMVg088uHpu
+         KrS41/3QQ4rVgZ6uYcAO9voy3nnP+eCgfd29AU5jtFUxC+iuvBtXtozhXtTGUjxD4By5
+         U54Nb1T1ojEUPL1olsiLxpOh4mqF2GBTHuF1qcU+irE/cGsSLEZwQV6TPfdRRDfoXTma
+         6VN1fMDRIlEyBh739WOE4E9nez5XRqOzFt0+Cyz2zWMOs+EbYaslvtwDzrDyK0GtiUuK
+         wSuBVGshVAJ2Je/SV2tVz52eHKAcj3VzKuePUYUorPbrBg4/J8dvk43YGDFpvTRaGP2x
+         QCtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=56q3vS7kTPjkBeZpCedlA35sj1F6SAbFf73YA28cuDw=;
-        b=teMn0cPjRhsuaOc0sTZQXvngmm8sK4YvDwvCt00FViUcC6D8WVxYDGhoGOH77WrekW
-         CFYGCIP+IiBOPBpssnT7eBOlYGOWVhyjdT+BIn9NPEaDiqZgwNuelKzS1ezaSAbQq951
-         8f7z0V4IffMGznwXgg1cGYlCkZCfUVm0IY6QbP3eOTBQdHPpqKfot93xP3r/RjYpU7ZD
-         DAZe/ISlJGG1desqYtf2OLHEQfBi5935JwrjOcX8XFS/6dORFGZ2rnwE6xR716kFdDXE
-         LSRWC2FgZx4R8DjhaUhwf7MQx/W/OqvKXhp83rmgkhQw2CUaB88J4Yru7xpkQMmBDJx9
-         /Jqw==
-X-Gm-Message-State: AOAM530l4gmylGvep/xpp00r7krgexN+w1CNpJFkGPXCStpuFZuInwoh
-	Wj9QKVTLAkeSBCusKq6f1p4WZxwQjninRA==
-X-Google-Smtp-Source: ABdhPJxqWxZA1UNJHCs8azX6BOxbaVbtxb6CX9NTt1ZK8DMoPsOuUD+DEbXrlAAjS6M6ec1aRQWp0Q==
-X-Received: by 2002:a1c:a593:: with SMTP id o141mr1467438wme.92.1611601755965;
-        Mon, 25 Jan 2021 11:09:15 -0800 (PST)
+        bh=SCUpLEiOlSX9ul+kRijfipf8pIcb5kXp2unnhpR7jAc=;
+        b=bS0JgaWur6U9oCPUaOe3MslSe6EPbyuqApgnQgDDRs5UtiVxu8U+ch4x6wVDb4ndyj
+         apMMwLr3LjVSgjVPIpdg07L5JBAOS2j67Uh4nfSpq/FBtku2yB97IDTqW9+4hzSqpdnA
+         RITelx1nfyDHoehxUjN3vs57Vwj3pzMVWBKaUT6hd1qPLZA3PWvDchPgIA0q7uy9CkuR
+         t76Sc6OkMoOeYg59H9Iwxjs50TOrZSF/pj4Ee5PNdl78OrHPMkOR8aLOfLzbC+u6yBKf
+         X0tVe7MgRvHNYPA/bA28GOX41ii7x2N1VWshKXOdTdDaG/PHBF5caGUCeKAWszEF/jU5
+         1Pfg==
+X-Gm-Message-State: AOAM5338X7zYmt7l44vDeefUNElh9x5MmAQP6w2l9rHERvjzqupft7Jk
+	YCaLOXa5YpMQ7u3/L43HzF/l/jF/8pMLqg==
+X-Google-Smtp-Source: ABdhPJzCrjr+H6hjoOH0LCGPFQHL0w7RQK2ptp43b+vUuwWK1ofTkk2w2FoTTyY3udPjkYQy0bRUeA==
+X-Received: by 2002:a1c:398b:: with SMTP id g133mr1416143wma.35.1611601752109;
+        Mon, 25 Jan 2021 11:09:12 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V5 22/22] xen/arm: Add mapcache invalidation handling
-Date: Mon, 25 Jan 2021 21:08:29 +0200
-Message-Id: <1611601709-28361-23-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V5 18/22] xen/dm: Introduce xendevicemodel_set_irq_level DM op
+Date: Mon, 25 Jan 2021 21:08:25 +0200
+Message-Id: <1611601709-28361-19-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
 References: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-We need to send mapcache invalidation request to qemu/demu everytime
-the page gets removed from a guest.
+This patch adds ability to the device emulator to notify otherend
+(some entity running in the guest) using a SPI and implements Arm
+specific bits for it. Proposed interface allows emulator to set
+the logical level of a one of a domain's IRQ lines.
 
-At the moment, the Arm code doesn't explicitely remove the existing
-mapping before inserting the new mapping. Instead, this is done
-implicitely by __p2m_set_entry().
+We can't reuse the existing DM op (xen_dm_op_set_isa_irq_level)
+to inject an interrupt as the "isa_irq" field is only 8-bit and
+able to cover IRQ 0 - 255, whereas we need a wider range (0 - 1020).
 
-So we need to recognize a case when old entry is a RAM page *and*
-the new MFN is different in order to set the corresponding flag.
-The most suitable place to do this is p2m_free_entry(), there
-we can find the correct leaf type. The invalidation request
-will be sent in do_trap_hypercall() later on.
+Please note, for egde-triggered interrupt (which is used for
+the virtio-mmio emulation) we only trigger the interrupt on Arm
+if the level is asserted (rising edge) and do nothing if the level
+is deasserted (falling edge), so the call could be named "trigger_irq"
+(without the level parameter). But, in order to model the line closely
+(to be able to support level-triggered interrupt) we need to know whether
+the line is low or high, so the proposed interface has been chosen.
+However, it is worth mentioning that in case of the level-triggered
+interrupt, we should keep injecting the interrupt to the guest until
+the line is deasserted (this is not covered by current patch).
 
-Taking into the account the following the do_trap_hypercall()
-is the best place to send invalidation request:
- - The only way a guest can modify its P2M on Arm is via an hypercall
- - When sending the invalidation request, the vCPU will be blocked
-   until all the IOREQ servers have acknowledged the invalidation
-
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Julien Grall <julien.grall@arm.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 [On Arm only]
 Tested-by: Wei Chen <Wei.Chen@arm.com>
 
@@ -127,144 +133,208 @@ Tested-by: Wei Chen <Wei.Chen@arm.com>
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
-***
-Please note, this patch depends on the following which is
-on review:
-https://patchwork.kernel.org/patch/11803383/
-
-This patch is on par with x86 code (whether it is buggy or not).
-If there is a need to improve/harden something, this can be done on
-a follow-up.
-***
+Changes RFC -> V1:
+   - check incoming parameters in arch_dm_op()
+   - add explicit padding to struct xen_dm_op_set_irq_level
 
 Changes V1 -> V2:
-   - new patch, some changes were derived from (+ new explanation):
-     xen/ioreq: Make x86's invalidate qemu mapcache handling common
-   - put setting of the flag into __p2m_set_entry()
-   - clarify the conditions when the flag should be set
-   - use domain_has_ioreq_server()
-   - update do_trap_hypercall() by adding local variable
+   - update the author of a patch
+   - update patch description
+   - check that padding is always 0
+   - mention that interface is Arm only and only SPIs are
+     supported for now
+   - allow to set the logical level of a line for non-allocated
+     interrupts only
+   - add xen_dm_op_set_irq_level_t
 
 Changes V2 -> V3:
-   - update patch description
-   - move check to p2m_free_entry()
-   - add a comment
-   - use "curr" instead of "v" in do_trap_hypercall()
+   - no changes
 
 Changes V3 -> V4:
    - update patch description
-   - re-order check in p2m_free_entry() to call domain_has_ioreq_server()
-     only if p2m->domain == current->domain
-   - add a comment in do_trap_hypercall()
+   - update patch according to the IOREQ related dm-op handling changes
 
 Changes V4 -> V5:
-   - add Stefano's R-b
-   - update comment in do_trap_hypercall()
+   - rebase
+   - add Stefano-s A-b
 ---
 ---
- xen/arch/arm/p2m.c   | 25 +++++++++++++++++--------
- xen/arch/arm/traps.c | 20 +++++++++++++++++---
- 2 files changed, 34 insertions(+), 11 deletions(-)
+ tools/include/xendevicemodel.h               |  4 +++
+ tools/libs/devicemodel/core.c                | 18 ++++++++++
+ tools/libs/devicemodel/libxendevicemodel.map |  1 +
+ xen/arch/arm/dm.c                            | 54 +++++++++++++++++++++++++++-
+ xen/include/public/hvm/dm_op.h               | 16 +++++++++
+ 5 files changed, 92 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-index d41c4fa..26acb95d 100644
---- a/xen/arch/arm/p2m.c
-+++ b/xen/arch/arm/p2m.c
-@@ -1,6 +1,7 @@
- #include <xen/cpu.h>
- #include <xen/domain_page.h>
- #include <xen/iocap.h>
-+#include <xen/ioreq.h>
- #include <xen/lib.h>
- #include <xen/sched.h>
- #include <xen/softirq.h>
-@@ -749,17 +750,25 @@ static void p2m_free_entry(struct p2m_domain *p2m,
-     if ( !p2m_is_valid(entry) )
-         return;
+diff --git a/tools/include/xendevicemodel.h b/tools/include/xendevicemodel.h
+index e877f5c..c06b3c8 100644
+--- a/tools/include/xendevicemodel.h
++++ b/tools/include/xendevicemodel.h
+@@ -209,6 +209,10 @@ int xendevicemodel_set_isa_irq_level(
+     xendevicemodel_handle *dmod, domid_t domid, uint8_t irq,
+     unsigned int level);
  
--    /* Nothing to do but updating the stats if the entry is a super-page. */
--    if ( p2m_is_superpage(entry, level) )
-+    if ( p2m_is_superpage(entry, level) || (level == 3) )
-     {
--        p2m->stats.mappings[level]--;
--        return;
--    }
-+#ifdef CONFIG_IOREQ_SERVER
-+        /*
-+         * If this gets called (non-recursively) then either the entry
-+         * was replaced by an entry with a different base (valid case) or
-+         * the shattering of a superpage was failed (error case).
-+         * So, at worst, the spurious mapcache invalidation might be sent.
-+         */
-+        if ( (p2m->domain == current->domain) &&
-+              domain_has_ioreq_server(p2m->domain) &&
-+              p2m_is_ram(entry.p2m.type) )
-+            p2m->domain->mapcache_invalidate = true;
-+#endif
- 
--    if ( level == 3 )
--    {
-         p2m->stats.mappings[level]--;
--        p2m_put_l3_page(entry);
-+        /* Nothing to do if the entry is a super-page. */
-+        if ( level == 3 )
-+            p2m_put_l3_page(entry);
-         return;
-     }
- 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 4cdd343..64b740b 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -1443,6 +1443,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
-                               const union hsr hsr)
- {
-     arm_hypercall_fn_t call = NULL;
-+    struct vcpu *curr = current;
- 
-     BUILD_BUG_ON(NR_hypercalls < ARRAY_SIZE(arm_hypercall_table) );
- 
-@@ -1459,7 +1460,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
-         return;
-     }
- 
--    current->hcall_preempted = false;
-+    curr->hcall_preempted = false;
- 
-     perfc_incra(hypercalls, *nr);
-     call = arm_hypercall_table[*nr].fn;
-@@ -1472,7 +1473,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
-     HYPERCALL_RESULT_REG(regs) = call(HYPERCALL_ARGS(regs));
- 
- #ifndef NDEBUG
--    if ( !current->hcall_preempted )
-+    if ( !curr->hcall_preempted )
-     {
-         /* Deliberately corrupt parameter regs used by this hypercall. */
-         switch ( arm_hypercall_table[*nr].nr_args ) {
-@@ -1489,8 +1490,21 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
- #endif
- 
-     /* Ensure the hypercall trap instruction is re-executed. */
--    if ( current->hcall_preempted )
-+    if ( curr->hcall_preempted )
-         regs->pc -= 4;  /* re-execute 'hvc #XEN_HYPERCALL_TAG' */
++int xendevicemodel_set_irq_level(
++    xendevicemodel_handle *dmod, domid_t domid, unsigned int irq,
++    unsigned int level);
 +
-+#ifdef CONFIG_IOREQ_SERVER
-+    /*
-+     * We call ioreq_signal_mapcache_invalidate from do_trap_hypercall()
-+     * because the only way a guest can modify its P2M on Arm is via an
-+     * hypercall.
-+     * Note that sending the invalidation request causes the vCPU to block
-+     * until all the IOREQ servers have acknowledged the invalidation.
-+     */
-+    if ( unlikely(curr->domain->mapcache_invalidate) &&
-+         test_and_clear_bool(curr->domain->mapcache_invalidate) )
-+        ioreq_signal_mapcache_invalidate();
-+#endif
+ /**
+  * This function maps a PCI INTx line to a an IRQ line.
+  *
+diff --git a/tools/libs/devicemodel/core.c b/tools/libs/devicemodel/core.c
+index 4d40639..30bd79f 100644
+--- a/tools/libs/devicemodel/core.c
++++ b/tools/libs/devicemodel/core.c
+@@ -430,6 +430,24 @@ int xendevicemodel_set_isa_irq_level(
+     return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
  }
  
- void arch_hypercall_tasklet_result(struct vcpu *v, long res)
++int xendevicemodel_set_irq_level(
++    xendevicemodel_handle *dmod, domid_t domid, uint32_t irq,
++    unsigned int level)
++{
++    struct xen_dm_op op;
++    struct xen_dm_op_set_irq_level *data;
++
++    memset(&op, 0, sizeof(op));
++
++    op.op = XEN_DMOP_set_irq_level;
++    data = &op.u.set_irq_level;
++
++    data->irq = irq;
++    data->level = level;
++
++    return xendevicemodel_op(dmod, domid, 1, &op, sizeof(op));
++}
++
+ int xendevicemodel_set_pci_link_route(
+     xendevicemodel_handle *dmod, domid_t domid, uint8_t link, uint8_t irq)
+ {
+diff --git a/tools/libs/devicemodel/libxendevicemodel.map b/tools/libs/devicemodel/libxendevicemodel.map
+index 561c62d..a0c3012 100644
+--- a/tools/libs/devicemodel/libxendevicemodel.map
++++ b/tools/libs/devicemodel/libxendevicemodel.map
+@@ -32,6 +32,7 @@ VERS_1.2 {
+ 	global:
+ 		xendevicemodel_relocate_memory;
+ 		xendevicemodel_pin_memory_cacheattr;
++		xendevicemodel_set_irq_level;
+ } VERS_1.1;
+ 
+ VERS_1.3 {
+diff --git a/xen/arch/arm/dm.c b/xen/arch/arm/dm.c
+index f254ed7..7854133 100644
+--- a/xen/arch/arm/dm.c
++++ b/xen/arch/arm/dm.c
+@@ -20,6 +20,8 @@
+ #include <xen/ioreq.h>
+ #include <xen/nospec.h>
+ 
++#include <asm/vgic.h>
++
+ int dm_op(const struct dmop_args *op_args)
+ {
+     struct domain *d;
+@@ -35,6 +37,7 @@ int dm_op(const struct dmop_args *op_args)
+         [XEN_DMOP_unmap_io_range_from_ioreq_server] = sizeof(struct xen_dm_op_ioreq_server_range),
+         [XEN_DMOP_set_ioreq_server_state]           = sizeof(struct xen_dm_op_set_ioreq_server_state),
+         [XEN_DMOP_destroy_ioreq_server]             = sizeof(struct xen_dm_op_destroy_ioreq_server),
++        [XEN_DMOP_set_irq_level]                    = sizeof(struct xen_dm_op_set_irq_level),
+     };
+ 
+     rc = rcu_lock_remote_domain_by_id(op_args->domid, &d);
+@@ -73,7 +76,56 @@ int dm_op(const struct dmop_args *op_args)
+     if ( op.pad )
+         goto out;
+ 
+-    rc = ioreq_server_dm_op(&op, d, &const_op);
++    switch ( op.op )
++    {
++    case XEN_DMOP_set_irq_level:
++    {
++        const struct xen_dm_op_set_irq_level *data =
++            &op.u.set_irq_level;
++        unsigned int i;
++
++        /* Only SPIs are supported */
++        if ( (data->irq < NR_LOCAL_IRQS) || (data->irq >= vgic_num_irqs(d)) )
++        {
++            rc = -EINVAL;
++            break;
++        }
++
++        if ( data->level != 0 && data->level != 1 )
++        {
++            rc = -EINVAL;
++            break;
++        }
++
++        /* Check that padding is always 0 */
++        for ( i = 0; i < sizeof(data->pad); i++ )
++        {
++            if ( data->pad[i] )
++            {
++                rc = -EINVAL;
++                break;
++            }
++        }
++
++        /*
++         * Allow to set the logical level of a line for non-allocated
++         * interrupts only.
++         */
++        if ( test_bit(data->irq, d->arch.vgic.allocated_irqs) )
++        {
++            rc = -EINVAL;
++            break;
++        }
++
++        vgic_inject_irq(d, NULL, data->irq, data->level);
++        rc = 0;
++        break;
++    }
++
++    default:
++        rc = ioreq_server_dm_op(&op, d, &const_op);
++        break;
++    }
+ 
+     if ( (!rc || rc == -ERESTART) &&
+          !const_op && copy_to_guest_offset(op_args->buf[0].h, offset,
+diff --git a/xen/include/public/hvm/dm_op.h b/xen/include/public/hvm/dm_op.h
+index 66cae1a..1f70d58 100644
+--- a/xen/include/public/hvm/dm_op.h
++++ b/xen/include/public/hvm/dm_op.h
+@@ -434,6 +434,21 @@ struct xen_dm_op_pin_memory_cacheattr {
+ };
+ typedef struct xen_dm_op_pin_memory_cacheattr xen_dm_op_pin_memory_cacheattr_t;
+ 
++/*
++ * XEN_DMOP_set_irq_level: Set the logical level of a one of a domain's
++ *                         IRQ lines (currently Arm only).
++ * Only SPIs are supported.
++ */
++#define XEN_DMOP_set_irq_level 19
++
++struct xen_dm_op_set_irq_level {
++    uint32_t irq;
++    /* IN - Level: 0 -> deasserted, 1 -> asserted */
++    uint8_t level;
++    uint8_t pad[3];
++};
++typedef struct xen_dm_op_set_irq_level xen_dm_op_set_irq_level_t;
++
+ struct xen_dm_op {
+     uint32_t op;
+     uint32_t pad;
+@@ -447,6 +462,7 @@ struct xen_dm_op {
+         xen_dm_op_track_dirty_vram_t track_dirty_vram;
+         xen_dm_op_set_pci_intx_level_t set_pci_intx_level;
+         xen_dm_op_set_isa_irq_level_t set_isa_irq_level;
++        xen_dm_op_set_irq_level_t set_irq_level;
+         xen_dm_op_set_pci_link_route_t set_pci_link_route;
+         xen_dm_op_modified_memory_t modified_memory;
+         xen_dm_op_set_mem_type_t set_mem_type;
 -- 
 2.7.4
 
