@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88D3FC433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E78DC433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 41B0A224DF
+	by mail.kernel.org (Postfix) with ESMTPS id B5FAA2256F
 	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:21:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41B0A224DF
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5FAA2256F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.74378.133729 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.74381.133745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l47QC-0003eb-4p; Mon, 25 Jan 2021 19:21:08 +0000
+	id 1l47QD-0003fu-0X; Mon, 25 Jan 2021 19:21:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 74378.133729; Mon, 25 Jan 2021 19:21:08 +0000
+Received: by outflank-mailman (output) from mailman id 74381.133745; Mon, 25 Jan 2021 19:21:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l47QC-0003eT-1S; Mon, 25 Jan 2021 19:21:08 +0000
-Received: by outflank-mailman (input) for mailman id 74378;
- Mon, 25 Jan 2021 19:21:06 +0000
+	id 1l47QC-0003fU-LX; Mon, 25 Jan 2021 19:21:08 +0000
+Received: by outflank-mailman (input) for mailman id 74381;
+ Mon, 25 Jan 2021 19:21:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DTVL=G4=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1l47G9-0008N7-JA
- for xen-devel@lists.xenproject.org; Mon, 25 Jan 2021 19:10:45 +0000
-Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
+ id 1l47GJ-0008N7-JR
+ for xen-devel@lists.xenproject.org; Mon, 25 Jan 2021 19:10:55 +0000
+Received: from mail-wm1-x333.google.com (unknown [2a00:1450:4864:20::333])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0b3dc2d8-998b-411b-a0ae-aec95ec0f12b;
- Mon, 25 Jan 2021 19:09:14 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id c12so14121099wrc.7
- for <xen-devel@lists.xenproject.org>; Mon, 25 Jan 2021 11:09:14 -0800 (PST)
+ id 5bc4c605-df07-442b-8357-7150c8be4ed9;
+ Mon, 25 Jan 2021 19:09:19 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id m187so388585wme.2
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Jan 2021 11:09:16 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id k6sm12991031wro.27.2021.01.25.11.09.13
+ by smtp.gmail.com with ESMTPSA id k6sm12991031wro.27.2021.01.25.11.09.15
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 25 Jan 2021 11:09:13 -0800 (PST)
+ Mon, 25 Jan 2021 11:09:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,33 +55,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b3dc2d8-998b-411b-a0ae-aec95ec0f12b
+X-Inumbo-ID: 5bc4c605-df07-442b-8357-7150c8be4ed9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=Sk79uDPAYTcbZS3IWNRXkK9ttYsPF3BwQfUARr2zP5w=;
-        b=S7bBHY2jX+8tT1AkkSi7NewjpnxqKyRltDTV6cKkz4Q1QjzsPrP9jFz8UNhlvabht5
-         eAcvd6DtFO00KKwee+dks2tykDGiw7rW0VGEsReEdapj96QO11rrliP48DI+BBEsDywF
-         feYjUInrg7UR54yKc/SKixnOw+v8g0R8wetkrOfIILD6FNImBFUsOpSzFuVXCzD9/3fF
-         L5xxR7RDedjqmBkINiJWmMnT4bCAAYAFPv+9ijqUf05/RGW4si53m6RrUosSRauizC+G
-         s1Nts/MJc34un8xUp8INbtDBu1uIDJVSb6z1yqmivDUgwS3Cmc0xATTX3Wq0Av2iEhpN
-         kq3w==
+        bh=56q3vS7kTPjkBeZpCedlA35sj1F6SAbFf73YA28cuDw=;
+        b=NAQXLR3YC0ePDFcJsMH2mJiS9iq1e7hqncXyhKPgAIZMXHKYL90qKiw9NPln14JyhJ
+         ko/xbh3dydPY5irT9V1He2YZE32F2nM/EXck5OgfqpTzh9mC+T43vXlsCduaHjZM+u8/
+         CMyvM8Vsx81GVsTyVd1aQeaYP9LO7AekDaITxS+WU/0KejucOPTaVBZlwGLMw2dG8oQY
+         ACi9SUyne7kX/xeLPKxVZ6my/XbN0GiGE1c9eA6iYAOBRSd+gXd/cnmqexzyejRGTeYG
+         Imara8PFomv2OPOgIUkvSHWHkOUSc4zIxe926xQqwcDHpS2RyOHOeTEkSE6D/6ncvsd2
+         00AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=Sk79uDPAYTcbZS3IWNRXkK9ttYsPF3BwQfUARr2zP5w=;
-        b=bM2TvVfLLSpaolbEhM5gV8E7IXBlugIdCM4qIuEOgiAnJ/M+aDX854aoHREpHk7Gix
-         4leHm+K76qUFwYEgOoyHsVgqdWDfCS2aEGITukE4l0aXbadMo2Ghb6ubuCBBcfISCaXu
-         yEI7OAhIcthPQTTps8Vs07BkJhju8wi3HR28EwkuOGVDbpUHewOLa/jwn2yRlVTAtvUE
-         4WsTir7JZfIrlv3jCoIcjZeDDjPwG7cE1N0DWs9O2UyGg+qZ/eTcKLsd677yeAmW0436
-         ZV4OwkUNlEQhqtq8h9ofcOBiBk5aRNihWdDqTqisDsjtCW8xrLmkd/mDFcEPeVLfq3Gg
-         329g==
-X-Gm-Message-State: AOAM530zaYe0ir2dNDdgaWIA/gQQL9BYN4YS/9NgfdSxm69z00JVz45x
-	btt39H38J4PkipB/0Ao5eJ9JeFXq/ZMPIw==
-X-Google-Smtp-Source: ABdhPJwg+fou6IhlCR6vpmF0nriE79P9MuJzT14u5Hxu9FJE+RZ/uJ8CEUoUfciGBDP7VPb8+haqCw==
-X-Received: by 2002:a5d:6092:: with SMTP id w18mr2543200wrt.75.1611601753964;
-        Mon, 25 Jan 2021 11:09:13 -0800 (PST)
+        bh=56q3vS7kTPjkBeZpCedlA35sj1F6SAbFf73YA28cuDw=;
+        b=teMn0cPjRhsuaOc0sTZQXvngmm8sK4YvDwvCt00FViUcC6D8WVxYDGhoGOH77WrekW
+         CFYGCIP+IiBOPBpssnT7eBOlYGOWVhyjdT+BIn9NPEaDiqZgwNuelKzS1ezaSAbQq951
+         8f7z0V4IffMGznwXgg1cGYlCkZCfUVm0IY6QbP3eOTBQdHPpqKfot93xP3r/RjYpU7ZD
+         DAZe/ISlJGG1desqYtf2OLHEQfBi5935JwrjOcX8XFS/6dORFGZ2rnwE6xR716kFdDXE
+         LSRWC2FgZx4R8DjhaUhwf7MQx/W/OqvKXhp83rmgkhQw2CUaB88J4Yru7xpkQMmBDJx9
+         /Jqw==
+X-Gm-Message-State: AOAM530l4gmylGvep/xpp00r7krgexN+w1CNpJFkGPXCStpuFZuInwoh
+	Wj9QKVTLAkeSBCusKq6f1p4WZxwQjninRA==
+X-Google-Smtp-Source: ABdhPJxqWxZA1UNJHCs8azX6BOxbaVbtxb6CX9NTt1ZK8DMoPsOuUD+DEbXrlAAjS6M6ec1aRQWp0Q==
+X-Received: by 2002:a1c:a593:: with SMTP id o141mr1467438wme.92.1611601755965;
+        Mon, 25 Jan 2021 11:09:15 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
@@ -89,60 +89,182 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V5 20/22] xen/arm: io: Harden sign extension check
-Date: Mon, 25 Jan 2021 21:08:27 +0200
-Message-Id: <1611601709-28361-21-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V5 22/22] xen/arm: Add mapcache invalidation handling
+Date: Mon, 25 Jan 2021 21:08:29 +0200
+Message-Id: <1611601709-28361-23-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
 References: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-In the ideal world we would never get an undefined behavior when
-propagating the sign bit since that bit can only be set for access
-size smaller than the register size (i.e byte/half-word for aarch32,
-byte/half-word/word for aarch64).
+We need to send mapcache invalidation request to qemu/demu everytime
+the page gets removed from a guest.
 
-In the real world we need to care for *possible* hardware bug such as
-advertising a sign extension for either 64-bit (or 32-bit) on Arm64
-(resp. Arm32).
+At the moment, the Arm code doesn't explicitely remove the existing
+mapping before inserting the new mapping. Instead, this is done
+implicitely by __p2m_set_entry().
 
-So harden a bit more the code to prevent undefined behavior when
-propagating the sign bit in case of buggy hardware.
+So we need to recognize a case when old entry is a RAM page *and*
+the new MFN is different in order to set the corresponding flag.
+The most suitable place to do this is p2m_free_entry(), there
+we can find the correct leaf type. The invalidation request
+will be sent in do_trap_hypercall() later on.
+
+Taking into the account the following the do_trap_hypercall()
+is the best place to send invalidation request:
+ - The only way a guest can modify its P2M on Arm is via an hypercall
+ - When sending the invalidation request, the vCPU will be blocked
+   until all the IOREQ servers have acknowledged the invalidation
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 CC: Julien Grall <julien.grall@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+[On Arm only]
+Tested-by: Wei Chen <Wei.Chen@arm.com>
 
 ---
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
+***
+Please note, this patch depends on the following which is
+on review:
+https://patchwork.kernel.org/patch/11803383/
+
+This patch is on par with x86 code (whether it is buggy or not).
+If there is a need to improve/harden something, this can be done on
+a follow-up.
+***
+
+Changes V1 -> V2:
+   - new patch, some changes were derived from (+ new explanation):
+     xen/ioreq: Make x86's invalidate qemu mapcache handling common
+   - put setting of the flag into __p2m_set_entry()
+   - clarify the conditions when the flag should be set
+   - use domain_has_ioreq_server()
+   - update do_trap_hypercall() by adding local variable
+
+Changes V2 -> V3:
+   - update patch description
+   - move check to p2m_free_entry()
+   - add a comment
+   - use "curr" instead of "v" in do_trap_hypercall()
+
 Changes V3 -> V4:
-   - new patch
+   - update patch description
+   - re-order check in p2m_free_entry() to call domain_has_ioreq_server()
+     only if p2m->domain == current->domain
+   - add a comment in do_trap_hypercall()
 
 Changes V4 -> V5:
-   - add Stefano's and Volodymyr's R-b
+   - add Stefano's R-b
+   - update comment in do_trap_hypercall()
 ---
 ---
- xen/include/asm-arm/traps.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/arm/p2m.c   | 25 +++++++++++++++++--------
+ xen/arch/arm/traps.c | 20 +++++++++++++++++---
+ 2 files changed, 34 insertions(+), 11 deletions(-)
 
-diff --git a/xen/include/asm-arm/traps.h b/xen/include/asm-arm/traps.h
-index c6b3cc7..2ed2b85 100644
---- a/xen/include/asm-arm/traps.h
-+++ b/xen/include/asm-arm/traps.h
-@@ -94,7 +94,8 @@ static inline register_t sign_extend(const struct hsr_dabt dabt, register_t r)
-      * Note that we expect the read handler to have zeroed the bits
-      * outside the requested access size.
-      */
--    if ( dabt.sign && (r & (1UL << (size - 1))) )
-+    if ( dabt.sign && (size < sizeof(register_t) * 8) &&
-+         (r & (1UL << (size - 1))) )
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index d41c4fa..26acb95d 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -1,6 +1,7 @@
+ #include <xen/cpu.h>
+ #include <xen/domain_page.h>
+ #include <xen/iocap.h>
++#include <xen/ioreq.h>
+ #include <xen/lib.h>
+ #include <xen/sched.h>
+ #include <xen/softirq.h>
+@@ -749,17 +750,25 @@ static void p2m_free_entry(struct p2m_domain *p2m,
+     if ( !p2m_is_valid(entry) )
+         return;
+ 
+-    /* Nothing to do but updating the stats if the entry is a super-page. */
+-    if ( p2m_is_superpage(entry, level) )
++    if ( p2m_is_superpage(entry, level) || (level == 3) )
      {
-         /*
-          * We are relying on register_t using the same as
+-        p2m->stats.mappings[level]--;
+-        return;
+-    }
++#ifdef CONFIG_IOREQ_SERVER
++        /*
++         * If this gets called (non-recursively) then either the entry
++         * was replaced by an entry with a different base (valid case) or
++         * the shattering of a superpage was failed (error case).
++         * So, at worst, the spurious mapcache invalidation might be sent.
++         */
++        if ( (p2m->domain == current->domain) &&
++              domain_has_ioreq_server(p2m->domain) &&
++              p2m_is_ram(entry.p2m.type) )
++            p2m->domain->mapcache_invalidate = true;
++#endif
+ 
+-    if ( level == 3 )
+-    {
+         p2m->stats.mappings[level]--;
+-        p2m_put_l3_page(entry);
++        /* Nothing to do if the entry is a super-page. */
++        if ( level == 3 )
++            p2m_put_l3_page(entry);
+         return;
+     }
+ 
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 4cdd343..64b740b 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1443,6 +1443,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
+                               const union hsr hsr)
+ {
+     arm_hypercall_fn_t call = NULL;
++    struct vcpu *curr = current;
+ 
+     BUILD_BUG_ON(NR_hypercalls < ARRAY_SIZE(arm_hypercall_table) );
+ 
+@@ -1459,7 +1460,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
+         return;
+     }
+ 
+-    current->hcall_preempted = false;
++    curr->hcall_preempted = false;
+ 
+     perfc_incra(hypercalls, *nr);
+     call = arm_hypercall_table[*nr].fn;
+@@ -1472,7 +1473,7 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
+     HYPERCALL_RESULT_REG(regs) = call(HYPERCALL_ARGS(regs));
+ 
+ #ifndef NDEBUG
+-    if ( !current->hcall_preempted )
++    if ( !curr->hcall_preempted )
+     {
+         /* Deliberately corrupt parameter regs used by this hypercall. */
+         switch ( arm_hypercall_table[*nr].nr_args ) {
+@@ -1489,8 +1490,21 @@ static void do_trap_hypercall(struct cpu_user_regs *regs, register_t *nr,
+ #endif
+ 
+     /* Ensure the hypercall trap instruction is re-executed. */
+-    if ( current->hcall_preempted )
++    if ( curr->hcall_preempted )
+         regs->pc -= 4;  /* re-execute 'hvc #XEN_HYPERCALL_TAG' */
++
++#ifdef CONFIG_IOREQ_SERVER
++    /*
++     * We call ioreq_signal_mapcache_invalidate from do_trap_hypercall()
++     * because the only way a guest can modify its P2M on Arm is via an
++     * hypercall.
++     * Note that sending the invalidation request causes the vCPU to block
++     * until all the IOREQ servers have acknowledged the invalidation.
++     */
++    if ( unlikely(curr->domain->mapcache_invalidate) &&
++         test_and_clear_bool(curr->domain->mapcache_invalidate) )
++        ioreq_signal_mapcache_invalidate();
++#endif
+ }
+ 
+ void arch_hypercall_tasklet_result(struct vcpu *v, long res)
 -- 
 2.7.4
 
