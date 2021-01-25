@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0540C433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:09:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE4AAC433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:09:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE52D216FD
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:09:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE52D216FD
+	by mail.kernel.org (Postfix) with ESMTPS id 916692067B
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Jan 2021 19:09:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 916692067B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.74299.133537 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.74300.133549 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l47Ee-00008P-EF; Mon, 25 Jan 2021 19:09:12 +0000
+	id 1l47Ei-0000Dn-Tc; Mon, 25 Jan 2021 19:09:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 74299.133537; Mon, 25 Jan 2021 19:09:12 +0000
+Received: by outflank-mailman (output) from mailman id 74300.133549; Mon, 25 Jan 2021 19:09:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l47Ee-00008G-Ac; Mon, 25 Jan 2021 19:09:12 +0000
-Received: by outflank-mailman (input) for mailman id 74299;
- Mon, 25 Jan 2021 19:09:10 +0000
+	id 1l47Ei-0000Dc-PM; Mon, 25 Jan 2021 19:09:16 +0000
+Received: by outflank-mailman (input) for mailman id 74300;
+ Mon, 25 Jan 2021 19:09:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DTVL=G4=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1l47Ec-0008N7-GC
- for xen-devel@lists.xenproject.org; Mon, 25 Jan 2021 19:09:10 +0000
-Received: from mail-wm1-x32c.google.com (unknown [2a00:1450:4864:20::32c])
+ id 1l47Eh-0008N7-GQ
+ for xen-devel@lists.xenproject.org; Mon, 25 Jan 2021 19:09:15 +0000
+Received: from mail-wm1-x32f.google.com (unknown [2a00:1450:4864:20::32f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a001e2ed-890d-44c7-a0c3-1544d1748298;
- Mon, 25 Jan 2021 19:08:56 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id m187so387134wme.2
- for <xen-devel@lists.xenproject.org>; Mon, 25 Jan 2021 11:08:56 -0800 (PST)
+ id 9bfbffa9-99bf-4ce0-b91f-f14539646bd1;
+ Mon, 25 Jan 2021 19:08:58 +0000 (UTC)
+Received: by mail-wm1-x32f.google.com with SMTP id c128so545130wme.2
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Jan 2021 11:08:58 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id k6sm12991031wro.27.2021.01.25.11.08.54
+ by smtp.gmail.com with ESMTPSA id k6sm12991031wro.27.2021.01.25.11.08.56
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 25 Jan 2021 11:08:54 -0800 (PST)
+ Mon, 25 Jan 2021 11:08:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a001e2ed-890d-44c7-a0c3-1544d1748298
+X-Inumbo-ID: 9bfbffa9-99bf-4ce0-b91f-f14539646bd1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=OsLFEZreg7YqeEEhgK+SjAQbSMvohSeO9g6je9KBEsI=;
-        b=T9dfsa7gmJ7W9ij7E90dOw8sQ/oEP/vrOLg+A0tjx3SjZX4SrPb2qHgRYjl0PEz4Kk
-         rk7w2UJWqOUt/sUs8II+69Lyx4U5q/TgT3A9isaOt4HDH8XvXgVZE8LWQYEHT/kjA9Y/
-         sGc0/fc6a4BPVVORdbe7QgkGTNbU7K69s19JY/LIxU1TC2W4YasNYnJILuy7XcfdFA/t
-         k18laMJGxy+Rfd/iXdogqLPOyge+FU+fWAd6TpRcAsh2ALXeaLhDDLXtVt6OXOEJ62q4
-         yAxveXM2N0oVD+c/yemTrUIUSJz2dTKdFsgVaur6CH6YVjHfCqzjhtEpwpr5XgO9ZBXF
-         dbJA==
+        bh=xxdxnb18IQZyQw5ZgPoetsUdOChDIHKtZYMdcL56th8=;
+        b=FsIzJwtHTH9vW8AnlkAXm3RWhRKHKLoV3ChKDtQIyyVp9HApSkaPDBbVf+22GvQUXS
+         r0STc8tkCt8xceA4kpvHyuN+wDv4BOvnYUEqCq6rWN0JDOhS0ACrB+SJdzjdgT5KLAdz
+         YLeFVTIJMsxgZorparLXgB4uz5EZ3n1qI/iBTv0U5mvEPjh8e+OPtXDoD4meLPz9PpUe
+         WFLKtWsTyQFrrMvnpNWC20Ev6Hys/VeLLAD9mUXHXR+Q8yu+4Rz48YwJHaT2rRSQTeK9
+         hZaDdw90kP1B66BjPsPWj2xDt0Fmt+rYGg8NJaPzZ0BL3pVTbHsILYRZmeMMJBhIp0+k
+         kx7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=OsLFEZreg7YqeEEhgK+SjAQbSMvohSeO9g6je9KBEsI=;
-        b=spEGlAgaZxCOjcV89sijeFe7qmeShWouMkvL9HB64lq9++5RkAdzTO62wLq9CVCD1F
-         vVtXoc1EvdgDvKuUs1pIb4YBDKNtCd6K//Ivx6QIcYQzEv3Y/4PjcQmitLZZv458xjmp
-         VLIHFoLAy5Htb6Jv4vsgmsapt/4p71XT7ElVFq07T1gnn5AaopOUNNm/fj9MrRJLa/4d
-         jAdtj3+6/J49hbMB2p5Q3KKhLCBs7XFBw5s1HTrzFll+L8ZcYK7pWQfJ39kBpU58ZgVj
-         7EdQTu+21mIocOuuXto/7jPNsND24/6fI6yjOAwelqjvCbZVvtbeMdlkwFdUW+nDrjYV
-         ME9A==
-X-Gm-Message-State: AOAM531kRpOWOYMGGaVDkotLwOOdtvXRS1NAUzDLWeprhfG1gK4uQSqA
-	x0UgjeqBzATNr2beYUAqECyjIXJ7Q2wdLg==
-X-Google-Smtp-Source: ABdhPJwicXK5X8XYRb1eHofoVzV3U5TxlFZM1E98xbSQrWkgmoNYx3frsyt+PgqQkKp03Nm5JT78/g==
-X-Received: by 2002:a7b:c09a:: with SMTP id r26mr1494547wmh.64.1611601735366;
-        Mon, 25 Jan 2021 11:08:55 -0800 (PST)
+        bh=xxdxnb18IQZyQw5ZgPoetsUdOChDIHKtZYMdcL56th8=;
+        b=HpbGx1oM0LGYizOqDnCBP+LIuAPeAjMNwf4hDrIJfpLHkNtGsaRh0WCvJSPbpY5L0L
+         ijoa3bdRY4g/yrkr1bc0I1WzsJl73IuNr4MzlugZQ7MFucYr00HjDbc5rZJNe1To+VBE
+         DK4w6jWjxy5/ymj2/TaECmia1vkuTtN7YVlCZie6YB7TowZETPSIGypo/J/g+82qlIEv
+         xCkp5lXXF0zLadIjD8WILb+13/UAuIFnlTzETsA8ChKdOIpPPGc5zVzQSBEk1x2+yGS+
+         k+5iSn85tDtyU1mQ3YNyvHAMegAVHrWCE63qP0XaCLZlJouyDBsr+OnG0WYe4yjK+6ff
+         JS9A==
+X-Gm-Message-State: AOAM532A1avjb9LUV/vHI/G5Hw6Q46FPI8chWr7HAeNsMuNlFKIql4cJ
+	WxyQ7q0s+0d4XG5N85mgRieYdk9o8W3CMg==
+X-Google-Smtp-Source: ABdhPJxB5/BXkVwijZ/Ht81JLw1VC6Ay7ZTXnKX9A4yseCn/W0p+qmB1wA/DCz69LvKD68FDmipp9A==
+X-Received: by 2002:a1c:398b:: with SMTP id g133mr1415480wma.35.1611601737842;
+        Mon, 25 Jan 2021 11:08:57 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
@@ -94,9 +94,9 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V5 03/22] x86/ioreq: Provide out-of-line wrapper for the handle_mmio()
-Date: Mon, 25 Jan 2021 21:08:10 +0200
-Message-Id: <1611601709-28361-4-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V5 05/22] xen/ioreq: Make x86's hvm_ioreq_needs_completion() common
+Date: Mon, 25 Jan 2021 21:08:12 +0200
+Message-Id: <1611601709-28361-6-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
 References: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
@@ -106,22 +106,19 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-The IOREQ is about to be common feature and Arm will have its own
-implementation.
+The IOREQ is a common feature now and this helper will be used
+on Arm as is. Move it to xen/ioreq.h and remove "hvm" prefix.
 
-But the name of the function is pretty generic and can be confusing
-on Arm (we already have a try_handle_mmio()).
-
-In order not to rename the function (which is used for a varying
-set of purposes on x86) globally and get non-confusing variant on Arm
-provide a wrapper arch_ioreq_complete_mmio() to be used on common
-and Arm code.
+Although PIO handling on Arm is not introduced with the current series
+(it will be implemented when we add support for vPCI), technically
+the PIOs exist on Arm (however they are accessed the same way as MMIO)
+and it would be better not to diverge now.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Paul Durrant <paul@xen.org>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 CC: Julien Grall <julien.grall@arm.com>
 [On Arm only]
 Tested-by: Wei Chen <Wei.Chen@arm.com>
@@ -131,68 +128,123 @@ Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
 Changes RFC -> V1:
-   - new patch
+   - new patch, was split from:
+     "[RFC PATCH V1 01/12] hvm/ioreq: Make x86's IOREQ feature common"
 
 Changes V1 -> V2:
-   - remove "handle"
-   - add Jan's A-b
+   - remove "hvm" prefix
 
 Changes V2 -> V3:
-   - remove Jan's A-b
-   - update patch subject/description
-   - use out-of-line function instead of #define
-   - put earlier in the series to avoid breakage
+   - add Paul's R-b
 
 Changes V3 -> V4:
-   - add Jan's R-b
-   - rename ioreq_complete_mmio() to arch_ioreq_complete_mmio()
+   - add Jan's A-b
 
 Changes V4 -> V5:
    - rebase
-   - add Alex's, Julien's and Paul's R-b
+   - add Julien's and Alex's R-b
 ---
 ---
- xen/arch/x86/hvm/ioreq.c | 7 ++++++-
- xen/include/xen/ioreq.h  | 1 +
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ xen/arch/x86/hvm/emulate.c     | 4 ++--
+ xen/arch/x86/hvm/io.c          | 2 +-
+ xen/common/ioreq.c             | 4 ++--
+ xen/include/asm-x86/hvm/vcpu.h | 7 -------
+ xen/include/xen/ioreq.h        | 7 +++++++
+ 5 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 27a4a6f..30e8724 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -36,6 +36,11 @@
- #include <public/hvm/ioreq.h>
- #include <public/hvm/params.h>
- 
-+bool arch_ioreq_complete_mmio(void)
-+{
-+    return handle_mmio();
-+}
-+
- static void set_ioreq_server(struct domain *d, unsigned int id,
-                              struct hvm_ioreq_server *s)
- {
-@@ -226,7 +231,7 @@ bool handle_hvm_io_completion(struct vcpu *v)
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index 60ca465..c3487b5 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -336,7 +336,7 @@ static int hvmemul_do_io(
+             rc = hvm_send_ioreq(s, &p, 0);
+             if ( rc != X86EMUL_RETRY || currd->is_shutting_down )
+                 vio->io_req.state = STATE_IOREQ_NONE;
+-            else if ( !hvm_ioreq_needs_completion(&vio->io_req) )
++            else if ( !ioreq_needs_completion(&vio->io_req) )
+                 rc = X86EMUL_OKAY;
+         }
          break;
+@@ -2649,7 +2649,7 @@ static int _hvm_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt,
+     if ( rc == X86EMUL_OKAY && vio->mmio_retry )
+         rc = X86EMUL_RETRY;
  
-     case HVMIO_mmio_completion:
--        return handle_mmio();
-+        return arch_ioreq_complete_mmio();
+-    if ( !hvm_ioreq_needs_completion(&vio->io_req) )
++    if ( !ioreq_needs_completion(&vio->io_req) )
+         completion = HVMIO_no_completion;
+     else if ( completion == HVMIO_no_completion )
+         completion = (vio->io_req.type != IOREQ_TYPE_PIO ||
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index 11e007d..ef8286b 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -135,7 +135,7 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
  
-     case HVMIO_pio_completion:
-         return handle_pio(vio->io_req.addr, vio->io_req.size,
+     rc = hvmemul_do_pio_buffer(port, size, dir, &data);
+ 
+-    if ( hvm_ioreq_needs_completion(&vio->io_req) )
++    if ( ioreq_needs_completion(&vio->io_req) )
+         vio->io_completion = HVMIO_pio_completion;
+ 
+     switch ( rc )
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index 4e7d91b..61ddd54 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -160,7 +160,7 @@ static bool hvm_wait_for_io(struct hvm_ioreq_vcpu *sv, ioreq_t *p)
+     }
+ 
+     p = &sv->vcpu->arch.hvm.hvm_io.io_req;
+-    if ( hvm_ioreq_needs_completion(p) )
++    if ( ioreq_needs_completion(p) )
+         p->data = data;
+ 
+     sv->pending = false;
+@@ -186,7 +186,7 @@ bool handle_hvm_io_completion(struct vcpu *v)
+     if ( sv && !hvm_wait_for_io(sv, get_ioreq(s, v)) )
+         return false;
+ 
+-    vio->io_req.state = hvm_ioreq_needs_completion(&vio->io_req) ?
++    vio->io_req.state = ioreq_needs_completion(&vio->io_req) ?
+         STATE_IORESP_READY : STATE_IOREQ_NONE;
+ 
+     msix_write_completion(v);
+diff --git a/xen/include/asm-x86/hvm/vcpu.h b/xen/include/asm-x86/hvm/vcpu.h
+index 5ccd075..6c1feda 100644
+--- a/xen/include/asm-x86/hvm/vcpu.h
++++ b/xen/include/asm-x86/hvm/vcpu.h
+@@ -91,13 +91,6 @@ struct hvm_vcpu_io {
+     const struct g2m_ioport *g2m_ioport;
+ };
+ 
+-static inline bool hvm_ioreq_needs_completion(const ioreq_t *ioreq)
+-{
+-    return ioreq->state == STATE_IOREQ_READY &&
+-           !ioreq->data_is_ptr &&
+-           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir != IOREQ_WRITE);
+-}
+-
+ struct nestedvcpu {
+     bool_t nv_guestmode; /* vcpu in guestmode? */
+     void *nv_vvmcx; /* l1 guest virtual VMCB/VMCS */
 diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index d0980c5..b95d3ef 100644
+index 430fc22..e957b52 100644
 --- a/xen/include/xen/ioreq.h
 +++ b/xen/include/xen/ioreq.h
-@@ -24,6 +24,7 @@
+@@ -23,6 +23,13 @@
+ 
+ #include <public/hvm/dm_op.h>
+ 
++static inline bool ioreq_needs_completion(const ioreq_t *ioreq)
++{
++    return ioreq->state == STATE_IOREQ_READY &&
++           !ioreq->data_is_ptr &&
++           (ioreq->type != IOREQ_TYPE_PIO || ioreq->dir != IOREQ_WRITE);
++}
++
  #define HANDLE_BUFIOREQ(s) \
      ((s)->bufioreq_handling != HVM_IOREQSRV_BUFIOREQ_OFF)
  
-+bool arch_ioreq_complete_mmio(void);
- bool arch_vcpu_ioreq_completion(enum hvm_io_completion io_completion);
- int arch_ioreq_server_map_pages(struct hvm_ioreq_server *s);
- void arch_ioreq_server_unmap_pages(struct hvm_ioreq_server *s);
 -- 
 2.7.4
 
