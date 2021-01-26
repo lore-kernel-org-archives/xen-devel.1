@@ -2,45 +2,41 @@ Return-Path: <SRS0=12TN=G5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD2BAC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 13:36:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11DCEC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 13:46:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 781702251F
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 13:36:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 781702251F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C20142223D
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 13:46:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C20142223D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.75040.134989 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.75051.135027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4OVi-0001M3-Uh; Tue, 26 Jan 2021 13:35:58 +0000
+	id 1l4Ofb-0002Qe-BX; Tue, 26 Jan 2021 13:46:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 75040.134989; Tue, 26 Jan 2021 13:35:58 +0000
+Received: by outflank-mailman (output) from mailman id 75051.135027; Tue, 26 Jan 2021 13:46:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4OVi-0001Lw-RG; Tue, 26 Jan 2021 13:35:58 +0000
-Received: by outflank-mailman (input) for mailman id 75040;
- Tue, 26 Jan 2021 13:35:58 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ElsB=G5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l4OVh-0001Lr-Ud
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 13:35:57 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ed6ecff5-3917-49a7-b9db-9ef0ef7cb33e;
- Tue, 26 Jan 2021 13:35:56 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7B735AEAC;
- Tue, 26 Jan 2021 13:35:55 +0000 (UTC)
+	id 1l4Ofb-0002QW-8S; Tue, 26 Jan 2021 13:46:11 +0000
+Received: by outflank-mailman (input) for mailman id 75051;
+ Tue, 26 Jan 2021 13:46:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=nQkR=G5=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1l4Ofa-0002P0-Nb
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 13:46:10 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 38afccda-a70c-45c0-a946-dd50e345cae6;
+ Tue, 26 Jan 2021 13:46:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,125 +48,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ed6ecff5-3917-49a7-b9db-9ef0ef7cb33e
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1611668155; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pnFxgLdQ3RxVZOh9gjmCe+I9LPGXdQ+uEyWkGJKZ5LI=;
-	b=NONovAhsCq1TO4JbrHP4EF8IghoVHuXT/9f8hwRiT8Drh51QEzHx/q0cPOtAgpj3vP6Ea0
-	IzNYKvrQxl2PwTG9QPVQQvrim4sh3jc6fFknlleyjoUn9xzzSKCSFBYQGKiGCmDpLNP2Ee
-	F/Z05MaY6I/08p0Si+oaoToR3T0CNng=
-Subject: Re: [PATCH v7 05/10] x86/vmx: Add Intel Processor Trace support
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Micha=c5=82_Leszczy=c5=84ski?= <michal.leszczynski@cert.pl>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>,
- Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20210121212718.2441-1-andrew.cooper3@citrix.com>
- <20210121212718.2441-6-andrew.cooper3@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <9fa8ff47-cd09-a09b-6d62-bb47f72c3847@suse.com>
-Date: Tue, 26 Jan 2021 14:35:56 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
-MIME-Version: 1.0
-In-Reply-To: <20210121212718.2441-6-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+X-Inumbo-ID: 38afccda-a70c-45c0-a946-dd50e345cae6
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1611668769;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=zV5p8UFyPoTSMQmezKe1+4OLo2ijl2EWElgcz3mlZ5o=;
+  b=W/s44bZKgtx+PNneD1W5waOeSL8npcHo2IBh90dFUaKHvqy9Q/HNpe3U
+   nlIkJ0fCHI2cu5zhdJD+aD0YSAspqwCTkpt9kcmYmPVe22rYPbSngfUPn
+   NBR1ZVX8rlZBshAjUNKFTO93h7rvTgrw3ea2CTpkOU+/APcnRjq3c2mU9
+   0=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: 3g0MHlyjz83bFPKSEK3mrM7Yf5VPEJjGiByv0XXBxdYClo0qVrD7NHNT0X+KH8dndNpAth34n3
+ 2iZG4G+u30BfGWkdI09mJtMF1SBCFoQIM505YgQatM8NhET0chZWRGm+P5fIf+BUNX7bGntVZT
+ 2xfqJOE5RmpKndq8eeVQrZTIuIwfSPBZKK+ZQefYKjRkjMle0jDaNvDhyHokpuBTIysqZrXZhi
+ JEVJ3Vxf+LkPUd0zgaQB0ZXRCleROSZmsrTWaC61JB5QAYAmXbxH8+dEEiOSr1M18RhEeaochS
+ 638=
+X-SBRS: 5.2
+X-MesageID: 36071568
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.79,375,1602561600"; 
+   d="scan'208";a="36071568"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fIQUYscEWzfUmza+yPPFNyot1r+qQBC9HGKEj7i+ZjGyvcMHtdSlimZcnP4Ssm+2pyBjBe3Mmv4zhmnyBF5UCP770m91/XLR2NVWOkzbKEvEomXQ5N5WuvLt2835O6HqSO8gVqKe1pTs5qSGN9EjtJNcy3BuJtsSXkQEgFiGgKyIrcfKA4g6EKScuPFagMfNNZtOYXVINDjL2A7Y0tZTe+chxpz0s3g7wM5//KuHU4HWP+pBlvxh2KX3GohQNhelGIxev+J3RigOGIr3zsnxqioJafjgN+pWHnBf0aFNm3Mi84Ahm4j0kyd/w07/UYGV/clsQNDivP/W5PdkYxSlbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZOg4CQnce8V68jgFkjekq4x4TGd9TVd2TOnMUjeWQRw=;
+ b=dZuUOkllXuhDZk5nbrwONmEqSx5xxbIy9K6DJcFmJZwfUgSIXQ+B7AqdTpIwc19/BuU7PsX1ACyPepu8JQUq1qK3FTzShaH/IFq5LzyQP/KwGpoRAvtYEiZbnv1jiO5sgn3abBaXyk+ExkWb3CUhxRHwRuv3eSRxTuGTO140ARmes7sMl6ClFzCMaxbx5wyE+k1UeDTu8TTALbKs7d0LdnHYkmVfOM9k0GQWvmBCrlomOAhTIqMnww/AnxBEPp21N1RbsoTLyGHoLOZlQPWUjS82nYPM0iMZjhd6GDrfhc8qnHQY41kjFRQ9/LEdz/VpXwF53gXj5A+MptJRyrA7eQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZOg4CQnce8V68jgFkjekq4x4TGd9TVd2TOnMUjeWQRw=;
+ b=wf+wrodDQ/kyH0nzD2xKCPAIFilwWevjP6dDuqUS6R2D+US2JVVcCeV9cCxGDpCDnQqs6VCk8NryGxesCu/pF4QgauK7oAt/U0+uwDmQ9kKNl+YNex6RhoaJXiiDcyjNl5STaWHh20PnuFDUGLhgIVH5lYSGTK7URa47TuM0sH4=
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 1/6] x86/vioapic: top word redir entry writes don't trigger interrupts
+Date: Tue, 26 Jan 2021 14:45:16 +0100
+Message-ID: <20210126134521.25784-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210126134521.25784-1-roger.pau@citrix.com>
+References: <20210126134521.25784-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MR2P264CA0170.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501::9)
+ To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: ad5f4f0f-e6a5-4d0c-c61f-08d8c200bac0
+X-MS-TrafficTypeDiagnostic: DM5PR03MB3209:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM5PR03MB32096E4D6B513F19FD725F9D8FBC9@DM5PR03MB3209.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: hEWQJnQst59alvtZKhAelpI5B/a8J9WBtLPD7f4zz5rF9LtDxz5OSv7hx9ma2pCctqN+XyJxmxsilf2YsbvAGTJZ8a7qCNzIkvUQeV3of4hitGnPGBWdv0T30kL8vg/aWzf1BQ8Y00L+eYHn5XVvZrbHheeb/hJ/+HvFjYKsL14MMKtjOWEPBJY8WJckKQBY1VOunZJYdRFJ6LnhA7MGcGo/Bauh5lDPgIcx4v7PNTEksaFeudTN3yn85BhFqJmhagVBFBo4YPdSIp24fgOgelEKdEpmuNtg6saIlLKTeBYJCRiJuMP3Ip9f+nGGrPd19ZHSbgvxecxpf0ZGNgBK8YiCMcuxOVoCdyhaasi2BIrDjeyogSMCPkFD0l6OPoRD45gXJiSzLaCnS/iaVuapIrgHC2Gi0Ed8Fss4xemCMPgZeH7imwSWpB0j6pSkviCQi13vE/CN2uEHxOB+TZMeifJBhY0uC6m3LbrWLl0wzCqNkjmghIZnkO0pVO93vvgSqHWWiVMfwtoDZOnqeh27Pw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(39860400002)(396003)(136003)(376002)(6666004)(6916009)(66946007)(8936002)(956004)(86362001)(36756003)(478600001)(2616005)(8676002)(83380400001)(4326008)(6486002)(186003)(4744005)(6496006)(54906003)(16526019)(2906002)(1076003)(5660300002)(66476007)(316002)(26005)(66556008);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?WDZuNHExSVJnbnllczRmU3ZjNFlleU4xRzdqT05pZWNnR1NOdHZBa2pjRXJR?=
+ =?utf-8?B?bHRFak0welJoWEVCL0ZOMWxGWWIzYlMzVkl2QXkwZUdiNlJWY2llMU8ramVz?=
+ =?utf-8?B?Wi95VWRNdWh2T0lLYVVnQ3dmQSsrOCtjWVBmRTZUREpIdXhla2ZaWlEyREdW?=
+ =?utf-8?B?WEtqWUd0bmU0SjcxeXljcCs5UHFZK1BCSGh2bjVESTd2SnNPNE1kQkFvaEpS?=
+ =?utf-8?B?STZVdk52VVZGelJTSHJZYlpSKzh5TVN3MWo2OTk2Qldrc2Uvb0Z2YVFkVWdk?=
+ =?utf-8?B?QW5YUWpCN1hwV2VOOVNDVWRlU0Jta2dxVkQ5QVlvWEVCSkJHbVpHOW1UelVR?=
+ =?utf-8?B?Q243UCtnZk1HcEc3MDhrUzUvdi9uQ2lSNzRvZ2U5Uk1BWmJPVUgwV3QzNHRr?=
+ =?utf-8?B?S2d2RTd4Y3RLeU9vL1J2YkwxczQrMHFvTFZzOEZsREtEWmdNbTFQWFVSZUll?=
+ =?utf-8?B?NHRYb1ErM0Q5OU9BdzNqNFFSSGUxdStSZGx4NXNxSVkxQUtkSkFQRWFRTXVZ?=
+ =?utf-8?B?dWVtWnFGSTliZkdxVWcxNDRhcEdKUHV6cUJPVHZYakFjSGFUVEJSYWxLRHVZ?=
+ =?utf-8?B?MHRzTTBtM0lDOGh0QWJ3bFcydzlkTDFxSGRXZHdjWFlMQjBubkYzLzZ6OWZ0?=
+ =?utf-8?B?MkdYMHNBdENrOWw3YUhPbEY3ODlzTGRQRzc3SFlMZmNnRmdwVDQvTzU3RmdV?=
+ =?utf-8?B?K0lqQnEzMlkzWC9ZQ2NiVlVlUE00VjVOczJTN0J1TWY5a3ZqY3dZeVo3VlpQ?=
+ =?utf-8?B?MzFEWHRtY3BEcWNyR1I5MmZnZW9EWnRXU1R5czZTMy9tR2Jqb1JXRDZ1bHln?=
+ =?utf-8?B?Nzh3UFRhNHFTSGl6TFROY1dyZTRIWWxpRWRiWlFLaWtrNEY1MjF5NnM4ZnFB?=
+ =?utf-8?B?T0FQSXI0K01NSVdTenhQL3N6Tnh3RmRkN0xPMlhqS1RMTTJ0cTl1Slh1Q1ZK?=
+ =?utf-8?B?OHdMMGRwbGc4WXNpcmI5a2p4MitDeHR6VTlJS05jQTRaR0NxUnNIcjNYMm5u?=
+ =?utf-8?B?Y2pyay9vUjRmeVZCNzJSTE43bnFaazdYd0crajBuNm1KRGxVSDBldUw5d2t0?=
+ =?utf-8?B?R2lSMzYvZHNHT3Y0bkRNbTRTRGgzUEFCWSsycFF1VVhOY1FYb1BLZmt1Uzlx?=
+ =?utf-8?B?bXhLQitjMlIyMVQwV29QUzZoZWhpcXFXQUE4anBNWVNmaVJUVkpETXJobEFz?=
+ =?utf-8?B?d1JMNUlBRUc5amdBdkk0YWNoc0NQZHFvL3VpeGlpS1YrWnFId0pLanZtWUQz?=
+ =?utf-8?B?dEprUjhDbEI3WVJackJuMlk3SC9STW5iWi9RbFhGSXBDL3pUVVd2cXQzQVpj?=
+ =?utf-8?B?WXJkYmtMcTdvaGhLUFFiNkRpVS8wVWp5QkJ4WEpkcnZSdDVqYmNXcDZEblYw?=
+ =?utf-8?B?TktFL2xIZ3A3WWtuSG5NOW15NHhYN1pRTjZOQktJK1hDSVpjeThrWjNwSzBv?=
+ =?utf-8?B?Q3FaNGVhQ2V1Qyt4MDNKWHluOHh4Q1V1U2JxMm5nPT0=?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: ad5f4f0f-e6a5-4d0c-c61f-08d8c200bac0
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2021 13:46:06.3004
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xthL3nesgoWMqxwRWyUHriVQtfj97fvqY/mQcnoJkJwyidu+PFOuQ7CgA0plwYipMFRErkGlp3JLnni0dLBqeg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB3209
+X-OriginatorOrg: citrix.com
 
-On 21.01.2021 22:27, Andrew Cooper wrote:
-> From: Michał Leszczyński <michal.leszczynski@cert.pl>
-> 
-> Add CPUID/MSR enumeration details for Processor Trace.  For now, we will only
-> support its use inside VMX operation.  Fill in the vmtrace_available boolean
-> to activate the newly introduced common infrastructure for allocating trace
-> buffers.
-> 
-> For now, Processor Trace is going to be operated in Single Output mode behind
-> the guests back.  Add the MSRs to struct vcpu_msrs, and set up the buffer
-> limit in vmx_init_pt() as it is fixed for the lifetime of the domain.
-> 
-> Context switch the most of the MSRs in and out of vCPU context switch, but the
-> main control register needs to reside in the MSR load/save lists.  Explicitly
-> pull the msrs pointer out into a local variable, because the optimiser cannot
-> keep it live across the memory clobbers in the MSR accesses.
-> 
-> Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Top word writes just update the destination of the interrupt, but
+since there's no change on the masking or the triggering mode no
+guest interrupt injection can result of such write. Add an assert to
+that effect.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-albeit with a few things to consider and with a question to
-confirm my understanding.
+Requested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - New in this version.
+---
+ xen/arch/x86/hvm/vioapic.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> --- a/xen/arch/x86/hvm/vmx/vmcs.c
-> +++ b/xen/arch/x86/hvm/vmx/vmcs.c
-> @@ -291,6 +291,20 @@ static int vmx_init_vmcs_config(void)
->          _vmx_cpu_based_exec_control &=
->              ~(CPU_BASED_CR8_LOAD_EXITING | CPU_BASED_CR8_STORE_EXITING);
->  
-> +    rdmsrl(MSR_IA32_VMX_MISC, _vmx_misc_cap);
-> +
-> +    /* Check whether IPT is supported in VMX operation. */
-> +    if ( !smp_processor_id() )
+diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
+index 804bc77279..e3ee747b7d 100644
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -262,6 +262,8 @@ static void vioapic_write_redirent(
+               !ent.fields.remote_irr &&
+               hvm_irq->gsi_assert_count[gsi] )
+     {
++        /* A top word write should never trigger an interrupt injection. */
++        ASSERT(!top_word);
+         pent->fields.remote_irr = 1;
+         vioapic_deliver(vioapic, idx);
+     }
+-- 
+2.29.2
 
-I'm not happy to see another one of these appear. I'd prefer
-if the caller passed its "bsp" boolean into here, or if this
-was made use system_state.
-
-> +        vmtrace_available = cpu_has_proc_trace &&
-> +                            (_vmx_misc_cap & VMX_MISC_PROC_TRACE);
-> +    else if ( vmtrace_available &&
-> +              !(_vmx_misc_cap & VMX_MISC_PROC_TRACE) )
-> +    {
-> +        printk("VMX: IPT capabilities differ between CPU%u and CPU0\n",
-
-As a minor follow-on, instead of "CPU0" this may then want
-to say "rest of the system" or "BSP", but I can see that at
-least the former is also making the message longer (which
-may not be desirable).
-
-> --- a/xen/arch/x86/hvm/vmx/vmx.c
-> +++ b/xen/arch/x86/hvm/vmx/vmx.c
-> @@ -428,6 +428,20 @@ static void vmx_domain_relinquish_resources(struct domain *d)
->      vmx_free_vlapic_mapping(d);
->  }
->  
-> +static void vmx_init_pt(struct vcpu *v)
-
-We use "pt" already as an acronym for pass-through. Could we
-use "ipt" here, for example (following the new "ipt_active"
-field)?
-
-> --- a/xen/include/asm-x86/msr.h
-> +++ b/xen/include/asm-x86/msr.h
-> @@ -306,6 +306,38 @@ struct vcpu_msrs
->          };
->      } misc_features_enables;
->  
-> +    /*
-> +     * 0x00000560 ... 57x - MSR_RTIT_*
-> +     *
-> +     * "Real Time Instruction Trace", now called Processor Trace.
-> +     *
-> +     * These MSRs are not exposed to guests.  They are controlled by Xen
-> +     * behind the scenes, when vmtrace is enabled for the domain.
-> +     *
-> +     * MSR_RTIT_OUTPUT_BASE not stored here.  It is fixed per vcpu, and
-> +     * derived from v->vmtrace.buf.
-> +     */
-> +    struct {
-> +        /*
-> +         * Placed in the MSR load/save lists.  Only modified by hypercall in
-> +         * the common case.
-> +         */
-> +        uint64_t ctl;
-
-IIUC this field will be used by subsequent patches only?
-
-Jan
 
