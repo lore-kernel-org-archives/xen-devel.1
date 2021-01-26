@@ -2,43 +2,49 @@ Return-Path: <SRS0=12TN=G5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A1DBC43381
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 22:58:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0002C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 23:00:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3EABA2065C
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 22:58:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EABA2065C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 57DA72065E
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 23:00:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57DA72065E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=netbsd.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.75654.136283 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.75668.136305 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4XIJ-0003n3-EA; Tue, 26 Jan 2021 22:58:43 +0000
+	id 1l4XJX-00049d-7X; Tue, 26 Jan 2021 22:59:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 75654.136283; Tue, 26 Jan 2021 22:58:43 +0000
+Received: by outflank-mailman (output) from mailman id 75668.136305; Tue, 26 Jan 2021 22:59:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4XIJ-0003mt-AP; Tue, 26 Jan 2021 22:58:43 +0000
-Received: by outflank-mailman (input) for mailman id 75654;
- Tue, 26 Jan 2021 22:58:42 +0000
+	id 1l4XJX-00049S-0X; Tue, 26 Jan 2021 22:59:59 +0000
+Received: by outflank-mailman (input) for mailman id 75668;
+ Tue, 26 Jan 2021 22:59:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ePBE=G5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1l4XII-0003iY-CK
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 22:58:42 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=3HxG=G5=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
+ id 1l4X9J-0001QY-On
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 22:49:25 +0000
+Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6c140295-193d-4b56-94ee-33fb97677d53;
- Tue, 26 Jan 2021 22:58:40 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A79EA2067B;
- Tue, 26 Jan 2021 22:58:39 +0000 (UTC)
+ id 32455d2f-5efb-41df-84d5-dd1c72b63732;
+ Tue, 26 Jan 2021 22:48:37 +0000 (UTC)
+Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10QMmXcl003710;
+ Tue, 26 Jan 2021 23:48:33 +0100 (CET)
+Received: from borneo.soc.lip6.fr (borneo [132.227.103.47])
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10QMmWnJ009929;
+ Tue, 26 Jan 2021 23:48:33 +0100 (MET)
+Received: by borneo.soc.lip6.fr (Postfix, from userid 373)
+ id E6B26AA8C1; Tue, 26 Jan 2021 23:48:32 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,157 +56,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c140295-193d-4b56-94ee-33fb97677d53
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1611701920;
-	bh=f04Fi/lIYdD7+J+KA0VjXybZ+sqQj9Rzhr9Y9B6vpgU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=J3Ot9nEGFAjMJlpm42N0j4RTmAr+SBBh4u8BgTeLBNp+RemkWHnBXo5YVrdckT0jH
-	 mtF+/XaAScv7Pf/uUM99nkaw2BIqesKz8Yt2MID9NsuqwWfRI96NSoi+cZBLiGGJtf
-	 a9ecgYTeXj+sVLWGfEcKOxG6Qv75dDOwwhgE8tFnmRV3JLCZ7BkWTPV98Rby3RnspI
-	 3PEdUdSpPp0OmcCRVW6iCwtMpubs6sx7v3u/uOd+YijfqDMIeGWg3qbAMcOrrMzmns
-	 b+hzPuEbVPuy+mQlonMPM8XF4Fnc2H7fBXmVYAG2F8V+dSVppgT5w86ItZrw+hTWOz
-	 5wf1NjXS9Xrhw==
-From: Stefano Stabellini <sstabellini@kernel.org>
+X-Inumbo-ID: 32455d2f-5efb-41df-84d5-dd1c72b63732
+From: Manuel Bouyer <bouyer@netbsd.org>
 To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	julien@xen.org,
-	Bertrand.Marquis@arm.com,
-	Volodymyr_Babchuk@epam.com,
-	rahul.singh@arm.com,
-	brian.woods@xilinx.com,
-	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH v3 3/3] arm,smmu: add support for generic DT bindings. Implement add_device and dt_xlate.
-Date: Tue, 26 Jan 2021 14:58:36 -0800
-Message-Id: <20210126225836.6017-3-sstabellini@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <alpine.DEB.2.21.2101261435550.2568@sstabellini-ThinkPad-T480s>
-References: <alpine.DEB.2.21.2101261435550.2568@sstabellini-ThinkPad-T480s>
+Cc: Manuel Bouyer <bouyer@netbsd.org>,
+        =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+        Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2] libs/call: fix build on NetBSD
+Date: Tue, 26 Jan 2021 23:47:51 +0100
+Message-Id: <20210126224800.1246-5-bouyer@netbsd.org>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210126224800.1246-1-bouyer@netbsd.org>
+References: <20210126224800.1246-1-bouyer@netbsd.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 26 Jan 2021 23:48:33 +0100 (CET)
+X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
-From: Brian Woods <brian.woods@xilinx.com>
+Define PAGE_* if not already defined
+Catch up with osdep interface change.
 
-Now that all arm iommu drivers support generic bindings we can remove
-the workaround from iommu_add_dt_device().
-
-Note that if both legacy bindings and generic bindings are present in
-device tree, the legacy bindings are the ones that are used.
-
-Signed-off-by: Brian Woods <brian.woods@xilinx.com>
-Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-Changes in v3:
-- split patch
-- make find_smmu return non-const so that we can use it in arm_smmu_dt_add_device_generic
-- use dt_phandle_args
-- update commit message
----
- xen/drivers/passthrough/arm/smmu.c    | 40 ++++++++++++++++++++++++++-
- xen/drivers/passthrough/device_tree.c | 17 +-----------
- 2 files changed, 40 insertions(+), 17 deletions(-)
+ tools/libs/call/netbsd.c  | 19 +++++++++++--------
+ tools/libs/call/private.h |  4 +++-
+ 2 files changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index 9687762283..620ba5a4b5 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -254,6 +254,8 @@ struct iommu_group
- 	atomic_t ref;
- };
+diff --git a/tools/libs/call/netbsd.c b/tools/libs/call/netbsd.c
+index a5502da377..4dcc2919ba 100644
+--- a/tools/libs/call/netbsd.c
++++ b/tools/libs/call/netbsd.c
+@@ -19,12 +19,15 @@
+  * Split from xc_netbsd.c
+  */
  
-+static struct arm_smmu_device *find_smmu(const struct device *dev);
+-#include "xc_private.h"
+ 
+ #include <unistd.h>
+ #include <fcntl.h>
+ #include <malloc.h>
++#include <errno.h>
+ #include <sys/mman.h>
++#include <sys/ioctl.h>
 +
- static struct iommu_group *iommu_group_alloc(void)
++#include "private.h"
+ 
+ int osdep_xencall_open(xencall_handle *xcall)
  {
- 	struct iommu_group *group = xzalloc(struct iommu_group);
-@@ -843,6 +845,40 @@ static int register_smmu_master(struct arm_smmu_device *smmu,
- 					     fwspec);
+@@ -69,12 +72,13 @@ int osdep_xencall_close(xencall_handle *xcall)
+     return close(fd);
  }
  
-+static int arm_smmu_dt_add_device_generic(u8 devfn, struct device *dev)
-+{
-+	struct arm_smmu_device *smmu;
-+	struct iommu_fwspec *fwspec;
-+
-+	fwspec = dev_iommu_fwspec_get(dev);
-+	if (fwspec == NULL)
-+		return -ENXIO;
-+
-+	smmu = find_smmu(fwspec->iommu_dev);
-+	if (smmu == NULL)
-+		return -ENXIO;
-+
-+	return arm_smmu_dt_add_device_legacy(smmu, dev, fwspec);
-+}
-+
-+static int arm_smmu_dt_xlate_generic(struct device *dev,
-+				    const struct dt_phandle_args *spec)
-+{
-+	uint32_t mask, fwid = 0;
-+
-+	if (spec->args_count > 0)
-+		fwid |= (SMR_ID_MASK & spec->args[0]) << SMR_ID_SHIFT;
-+
-+	if (spec->args_count > 1)
-+		fwid |= (SMR_MASK_MASK & spec->args[1]) << SMR_MASK_SHIFT;
-+	else if (!of_property_read_u32(spec->np, "stream-match-mask", &mask))
-+		fwid |= (SMR_MASK_MASK & mask) << SMR_MASK_SHIFT;
-+
-+	return iommu_fwspec_add_ids(dev,
-+				    &fwid,
-+				    1);
-+}
-+
- static struct arm_smmu_device *find_smmu_for_device(struct device *dev)
+-void *osdep_alloc_hypercall_buffer(xencall_handle *xcall, size_t npages)
++void *osdep_alloc_pages(xencall_handle *xcall, size_t npages)
  {
- 	struct arm_smmu_device *smmu;
-@@ -2766,6 +2802,7 @@ static void arm_smmu_iommu_domain_teardown(struct domain *d)
- static const struct iommu_ops arm_smmu_iommu_ops = {
-     .init = arm_smmu_iommu_domain_init,
-     .hwdom_init = arm_smmu_iommu_hwdom_init,
-+    .add_device = arm_smmu_dt_add_device_generic,
-     .teardown = arm_smmu_iommu_domain_teardown,
-     .iotlb_flush = arm_smmu_iotlb_flush,
-     .iotlb_flush_all = arm_smmu_iotlb_flush_all,
-@@ -2773,9 +2810,10 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
-     .reassign_device = arm_smmu_reassign_dev,
-     .map_page = arm_iommu_map_page,
-     .unmap_page = arm_iommu_unmap_page,
-+    .dt_xlate = arm_smmu_dt_xlate_generic,
- };
+-    size_t size = npages * XC_PAGE_SIZE;
++    size_t size = npages * PAGE_SIZE;
+     void *p;
++    int ret;
  
--static __init const struct arm_smmu_device *find_smmu(const struct device *dev)
-+static struct arm_smmu_device *find_smmu(const struct device *dev)
+-    ret = posix_memalign(&p, XC_PAGE_SIZE, size);
++    ret = posix_memalign(&p, PAGE_SIZE, size);
+     if ( ret != 0 || !p )
+         return NULL;
+ 
+@@ -86,14 +90,13 @@ void *osdep_alloc_hypercall_buffer(xencall_handle *xcall, size_t npages)
+     return p;
+ }
+ 
+-void osdep_free_hypercall_buffer(xencall_handle *xcall, void *ptr,
+-                                 size_t npages)
++void osdep_free_pages(xencall_handle *xcall, void *ptr, size_t npages)
  {
- 	struct arm_smmu_device *smmu;
- 	bool found = false;
-diff --git a/xen/drivers/passthrough/device_tree.c b/xen/drivers/passthrough/device_tree.c
-index a51ae3c9c3..ae07f272e1 100644
---- a/xen/drivers/passthrough/device_tree.c
-+++ b/xen/drivers/passthrough/device_tree.c
-@@ -162,22 +162,7 @@ int iommu_add_dt_device(struct dt_device_node *np)
-          * these callback implemented.
-          */
-         if ( !ops->add_device || !ops->dt_xlate )
--        {
--            /*
--             * Some Device Trees may expose both legacy SMMU and generic
--             * IOMMU bindings together. However, the SMMU driver is only
--             * supporting the former and will protect them during the
--             * initialization. So we need to skip them and not return
--             * error here.
--             *
--             * XXX: This can be dropped when the SMMU is able to deal
--             * with generic bindings.
--             */
--            if ( dt_device_is_protected(np) )
--                return 0;
--            else
--                return -EINVAL;
--        }
-+            return -EINVAL;
+-    (void) munlock(ptr, npages * XC_PAGE_SIZE);
++    munlock(ptr, npages * PAGE_SIZE);
+     free(ptr);
+ }
  
-         if ( !dt_device_is_available(iommu_spec.np) )
-             break;
+-int do_xen_hypercall(xencall_handle *xcall, privcmd_hypercall_t *hypercall)
++int osdep_hypercall(xencall_handle *xcall, privcmd_hypercall_t *hypercall)
+ {
+     int fd = xcall->fd;
+     int error = ioctl(fd, IOCTL_PRIVCMD_HYPERCALL, hypercall);
+diff --git a/tools/libs/call/private.h b/tools/libs/call/private.h
+index 21f992b37e..7944ac5baf 100644
+--- a/tools/libs/call/private.h
++++ b/tools/libs/call/private.h
+@@ -12,8 +12,10 @@
+ #ifndef PAGE_SHIFT /* Mini-os, Yukk */
+ #define PAGE_SHIFT           12
+ #endif
+-#ifndef __MINIOS__ /* Yukk */
++#ifndef PAGE_SIZE
+ #define PAGE_SIZE            (1UL << PAGE_SHIFT)
++#endif
++#ifndef PAGE_MASK
+ #define PAGE_MASK            (~(PAGE_SIZE-1))
+ #endif
+ 
 -- 
-2.17.1
+2.29.2
 
 
