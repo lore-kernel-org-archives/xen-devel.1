@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D710AC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 22:48:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB0AC433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 22:48:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9715C2065C
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 22:48:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9715C2065C
+	by mail.kernel.org (Postfix) with ESMTPS id 1C9132065C
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 22:48:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C9132065C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=netbsd.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.75597.136121 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.75599.136133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4X8c-0001U6-F4; Tue, 26 Jan 2021 22:48:42 +0000
+	id 1l4X8g-0001Y1-UO; Tue, 26 Jan 2021 22:48:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 75597.136121; Tue, 26 Jan 2021 22:48:42 +0000
+Received: by outflank-mailman (output) from mailman id 75599.136133; Tue, 26 Jan 2021 22:48:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4X8c-0001Tz-BW; Tue, 26 Jan 2021 22:48:42 +0000
-Received: by outflank-mailman (input) for mailman id 75597;
- Tue, 26 Jan 2021 22:48:40 +0000
+	id 1l4X8g-0001Xu-RC; Tue, 26 Jan 2021 22:48:46 +0000
+Received: by outflank-mailman (input) for mailman id 75599;
+ Tue, 26 Jan 2021 22:48:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3HxG=G5=lip6.fr=manuel.bouyer@srs-us1.protection.inumbo.net>)
- id 1l4X8a-0001QY-ND
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 22:48:40 +0000
+ id 1l4X8f-0001QY-NL
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 22:48:45 +0000
 Received: from isis.lip6.fr (unknown [2001:660:3302:283c::2])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f1918700-dc64-4f28-bccc-a6eb94d7b194;
+ id fb6b7076-4f14-4d63-8fbf-4cea582397ec;
  Tue, 26 Jan 2021 22:48:34 +0000 (UTC)
 Received: from asim.lip6.fr (asim.lip6.fr [132.227.86.2])
- by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10QMmX00028126;
+ by isis.lip6.fr (8.15.2/8.15.2) with ESMTP id 10QMmXnW018900;
  Tue, 26 Jan 2021 23:48:33 +0100 (CET)
 Received: from borneo.soc.lip6.fr (borneo [132.227.103.47])
- by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10QMmWkA003315;
- Tue, 26 Jan 2021 23:48:33 +0100 (MET)
+ by asim.lip6.fr (8.15.2/8.14.4) with ESMTP id 10QMmWk8003315;
+ Tue, 26 Jan 2021 23:48:32 +0100 (MET)
 Received: by borneo.soc.lip6.fr (Postfix, from userid 373)
- id F21BBAA8D0; Tue, 26 Jan 2021 23:48:32 +0100 (MET)
+ id CAA9BAA8C7; Tue, 26 Jan 2021 23:48:32 +0100 (MET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,14 +56,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1918700-dc64-4f28-bccc-a6eb94d7b194
+X-Inumbo-ID: fb6b7076-4f14-4d63-8fbf-4cea582397ec
 From: Manuel Bouyer <bouyer@netbsd.org>
 To: xen-devel@lists.xenproject.org
-Cc: Manuel Bouyer <bouyer@netbsd.org>, Ian Jackson <iwj@xenproject.org>,
-        Wei Liu <wl@xen.org>
-Subject: [PATCH v2] libs/foreignmemory: Implement on NetBSD
-Date: Tue, 26 Jan 2021 23:47:52 +0100
-Message-Id: <20210126224800.1246-6-bouyer@netbsd.org>
+Cc: Manuel Bouyer <bouyer@netbsd.org>,
+        Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+        Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2] NetBSD: use system-provided headers
+Date: Tue, 26 Jan 2021 23:47:50 +0100
+Message-Id: <20210126224800.1246-4-bouyer@netbsd.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20210126224800.1246-1-bouyer@netbsd.org>
 References: <20210126224800.1246-1-bouyer@netbsd.org>
@@ -72,158 +73,309 @@ Content-Transfer-Encoding: 8bit
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (isis.lip6.fr [132.227.60.2]); Tue, 26 Jan 2021 23:48:33 +0100 (CET)
 X-Scanned-By: MIMEDefang 2.78 on 132.227.60.2
 
-Implement foreignmemory interface on NetBSD. The compat interface is now used
-only on __sun__
+On NetBSD use the system-provided headers for ioctl and related definitions,
+they are up to date and have more chances to match the kernel's idea of
+the ioctls and structures.
+Remove now-unused NetBSD/evtchn.h and NetBSD/privcmd.h.
+Don't fail install if xen/sys/*.h are not present.
 
 Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
 ---
- tools/libs/foreignmemory/Makefile  |  2 +-
- tools/libs/foreignmemory/netbsd.c  | 66 +++++++++++++++++++++++++-----
- tools/libs/foreignmemory/private.h |  6 +--
- 3 files changed, 60 insertions(+), 14 deletions(-)
+ tools/debugger/gdbsx/xg/xg_main.c      |   4 +
+ tools/include/Makefile                 |   2 +
+ tools/include/xen-sys/NetBSD/evtchn.h  |  86 --------------------
+ tools/include/xen-sys/NetBSD/privcmd.h | 106 -------------------------
+ tools/libs/call/private.h              |   4 +
+ tools/libs/ctrl/xc_private.h           |   4 +
+ tools/libs/foreignmemory/private.h     |   6 ++
+ 7 files changed, 20 insertions(+), 192 deletions(-)
+ delete mode 100644 tools/include/xen-sys/NetBSD/evtchn.h
+ delete mode 100644 tools/include/xen-sys/NetBSD/privcmd.h
 
-diff --git a/tools/libs/foreignmemory/Makefile b/tools/libs/foreignmemory/Makefile
-index 13850f7988..f191cdbed0 100644
---- a/tools/libs/foreignmemory/Makefile
-+++ b/tools/libs/foreignmemory/Makefile
-@@ -8,7 +8,7 @@ SRCS-y                 += core.c
- SRCS-$(CONFIG_Linux)   += linux.c
- SRCS-$(CONFIG_FreeBSD) += freebsd.c
- SRCS-$(CONFIG_SunOS)   += compat.c solaris.c
--SRCS-$(CONFIG_NetBSD)  += compat.c netbsd.c
-+SRCS-$(CONFIG_NetBSD)  += netbsd.c
- SRCS-$(CONFIG_MiniOS)  += minios.c
+diff --git a/tools/debugger/gdbsx/xg/xg_main.c b/tools/debugger/gdbsx/xg/xg_main.c
+index 4576c762af..903d60baed 100644
+--- a/tools/debugger/gdbsx/xg/xg_main.c
++++ b/tools/debugger/gdbsx/xg/xg_main.c
+@@ -49,7 +49,11 @@
+ #include "xg_public.h"
+ #include <xen/version.h>
+ #include <xen/domctl.h>
++#ifdef __NetBSD__
++#include <xen/xenio.h>
++#else
+ #include <xen/sys/privcmd.h>
++#endif
+ #include <xen/foreign/x86_32.h>
+ #include <xen/foreign/x86_64.h>
  
- include $(XEN_ROOT)/tools/libs/libs.mk
-diff --git a/tools/libs/foreignmemory/netbsd.c b/tools/libs/foreignmemory/netbsd.c
-index 54a418ebd6..a7e1d72ffc 100644
---- a/tools/libs/foreignmemory/netbsd.c
-+++ b/tools/libs/foreignmemory/netbsd.c
-@@ -19,7 +19,9 @@
+diff --git a/tools/include/Makefile b/tools/include/Makefile
+index 4d4ec5f974..04902397b7 100644
+--- a/tools/include/Makefile
++++ b/tools/include/Makefile
+@@ -68,7 +68,9 @@ install: all
+ 	$(INSTALL_DATA) xen/foreign/*.h $(DESTDIR)$(includedir)/xen/foreign
+ 	$(INSTALL_DATA) xen/hvm/*.h $(DESTDIR)$(includedir)/xen/hvm
+ 	$(INSTALL_DATA) xen/io/*.h $(DESTDIR)$(includedir)/xen/io
++ifeq ($(wildcard xen/sys/.),)
+ 	$(INSTALL_DATA) xen/sys/*.h $(DESTDIR)$(includedir)/xen/sys
++endif
+ 	$(INSTALL_DATA) xen/xsm/*.h $(DESTDIR)$(includedir)/xen/xsm
  
- #include <unistd.h>
- #include <fcntl.h>
-+#include <errno.h>
- #include <sys/mman.h>
-+#include <sys/ioctl.h>
+ .PHONY: uninstall
+diff --git a/tools/include/xen-sys/NetBSD/evtchn.h b/tools/include/xen-sys/NetBSD/evtchn.h
+deleted file mode 100644
+index 2d8a1f9164..0000000000
+--- a/tools/include/xen-sys/NetBSD/evtchn.h
++++ /dev/null
+@@ -1,86 +0,0 @@
+-/* $NetBSD: evtchn.h,v 1.1.1.1 2007/06/14 19:39:45 bouyer Exp $ */
+-/******************************************************************************
+- * evtchn.h
+- * 
+- * Interface to /dev/xen/evtchn.
+- * 
+- * Copyright (c) 2003-2005, K A Fraser
+- * 
+- * This file may be distributed separately from the Linux kernel, or
+- * incorporated into other software packages, subject to the following license:
+- * 
+- * Permission is hereby granted, free of charge, to any person obtaining a copy
+- * of this source file (the "Software"), to deal in the Software without
+- * restriction, including without limitation the rights to use, copy, modify,
+- * merge, publish, distribute, sublicense, and/or sell copies of the Software,
+- * and to permit persons to whom the Software is furnished to do so, subject to
+- * the following conditions:
+- * 
+- * The above copyright notice and this permission notice shall be included in
+- * all copies or substantial portions of the Software.
+- * 
+- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+- * IN THE SOFTWARE.
+- */
+-
+-#ifndef __NetBSD_EVTCHN_H__
+-#define __NetBSD_EVTCHN_H__
+-
+-/*
+- * Bind a fresh port to VIRQ @virq.
+- */
+-#define IOCTL_EVTCHN_BIND_VIRQ				\
+-	_IOWR('E', 4, struct ioctl_evtchn_bind_virq)
+-struct ioctl_evtchn_bind_virq {
+-	unsigned int virq;
+-	unsigned int port;
+-};
+-
+-/*
+- * Bind a fresh port to remote <@remote_domain, @remote_port>.
+- */
+-#define IOCTL_EVTCHN_BIND_INTERDOMAIN			\
+-	_IOWR('E', 5, struct ioctl_evtchn_bind_interdomain)
+-struct ioctl_evtchn_bind_interdomain {
+-	unsigned int remote_domain, remote_port;
+-	unsigned int port;
+-};
+-
+-/*
+- * Allocate a fresh port for binding to @remote_domain.
+- */
+-#define IOCTL_EVTCHN_BIND_UNBOUND_PORT			\
+-	_IOWR('E', 6, struct ioctl_evtchn_bind_unbound_port)
+-struct ioctl_evtchn_bind_unbound_port {
+-	unsigned int remote_domain;
+-	unsigned int port;
+-};
+-
+-/*
+- * Unbind previously allocated @port.
+- */
+-#define IOCTL_EVTCHN_UNBIND				\
+-	_IOW('E', 7, struct ioctl_evtchn_unbind)
+-struct ioctl_evtchn_unbind {
+-	unsigned int port;
+-};
+-
+-/*
+- * Send event to previously allocated @port.
+- */
+-#define IOCTL_EVTCHN_NOTIFY				\
+-	_IOW('E', 8, struct ioctl_evtchn_notify)
+-struct ioctl_evtchn_notify {
+-	unsigned int port;
+-};
+-
+-/* Clear and reinitialise the event buffer. Clear error condition. */
+-#define IOCTL_EVTCHN_RESET				\
+-	_IO('E', 9)
+-
+-#endif /* __NetBSD_EVTCHN_H__ */
+diff --git a/tools/include/xen-sys/NetBSD/privcmd.h b/tools/include/xen-sys/NetBSD/privcmd.h
+deleted file mode 100644
+index 555bad973e..0000000000
+--- a/tools/include/xen-sys/NetBSD/privcmd.h
++++ /dev/null
+@@ -1,106 +0,0 @@
+-/*	NetBSD: xenio.h,v 1.3 2005/05/24 12:07:12 yamt Exp $	*/
+-
+-/******************************************************************************
+- * privcmd.h
+- * 
+- * Copyright (c) 2003-2004, K A Fraser
+- * 
+- * This file may be distributed separately from the Linux kernel, or
+- * incorporated into other software packages, subject to the following license:
+- * 
+- * Permission is hereby granted, free of charge, to any person obtaining a copy
+- * of this source file (the "Software"), to deal in the Software without
+- * restriction, including without limitation the rights to use, copy, modify,
+- * merge, publish, distribute, sublicense, and/or sell copies of the Software,
+- * and to permit persons to whom the Software is furnished to do so, subject to
+- * the following conditions:
+- * 
+- * The above copyright notice and this permission notice shall be included in
+- * all copies or substantial portions of the Software.
+- * 
+- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+- * IN THE SOFTWARE.
+- */
+-
+-#ifndef __NetBSD_PRIVCMD_H__
+-#define __NetBSD_PRIVCMD_H__
+-
+-/* Interface to /dev/xen/privcmd */
+-
+-typedef struct privcmd_hypercall
+-{
+-    unsigned long op;
+-    unsigned long arg[5];
+-    long retval;
+-} privcmd_hypercall_t;
+-
+-typedef struct privcmd_mmap_entry {
+-    unsigned long va;
+-    unsigned long mfn;
+-    unsigned long npages;
+-} privcmd_mmap_entry_t; 
+-
+-typedef struct privcmd_mmap {
+-    int num;
+-    domid_t dom; /* target domain */
+-    privcmd_mmap_entry_t *entry;
+-} privcmd_mmap_t; 
+-
+-typedef struct privcmd_mmapbatch {
+-    int num;     /* number of pages to populate */
+-    domid_t dom; /* target domain */
+-    unsigned long addr;  /* virtual address */
+-    unsigned long *arr; /* array of mfns - top nibble set on err */
+-} privcmd_mmapbatch_t; 
+-
+-typedef struct privcmd_blkmsg
+-{
+-    unsigned long op;
+-    void         *buf;
+-    int           buf_size;
+-} privcmd_blkmsg_t;
+-
+-/*
+- * @cmd: IOCTL_PRIVCMD_HYPERCALL
+- * @arg: &privcmd_hypercall_t
+- * Return: Value returned from execution of the specified hypercall.
+- */
+-#define IOCTL_PRIVCMD_HYPERCALL         \
+-    _IOWR('P', 0, privcmd_hypercall_t)
+-
+-#if defined(_KERNEL)
+-/* compat */
+-#define IOCTL_PRIVCMD_INITDOMAIN_EVTCHN_OLD \
+-    _IO('P', 1)
+-#endif /* defined(_KERNEL) */
+-    
+-#define IOCTL_PRIVCMD_MMAP             \
+-    _IOW('P', 2, privcmd_mmap_t)
+-#define IOCTL_PRIVCMD_MMAPBATCH        \
+-    _IOW('P', 3, privcmd_mmapbatch_t)
+-#define IOCTL_PRIVCMD_GET_MACH2PHYS_START_MFN \
+-    _IOR('P', 4, unsigned long)
+-
+-/*
+- * @cmd: IOCTL_PRIVCMD_INITDOMAIN_EVTCHN
+- * @arg: n/a
+- * Return: Port associated with domain-controller end of control event channel
+- *         for the initial domain.
+- */
+-#define IOCTL_PRIVCMD_INITDOMAIN_EVTCHN \
+-    _IOR('P', 5, int)
+-
+-/* Interface to /dev/xenevt */
+-/* EVTCHN_RESET: Clear and reinit the event buffer. Clear error condition. */
+-#define EVTCHN_RESET  _IO('E', 1)
+-/* EVTCHN_BIND: Bind to the specified event-channel port. */
+-#define EVTCHN_BIND   _IOW('E', 2, unsigned long)
+-/* EVTCHN_UNBIND: Unbind from the specified event-channel port. */
+-#define EVTCHN_UNBIND _IOW('E', 3, unsigned long)
+-
+-#endif /* __NetBSD_PRIVCMD_H__ */
+diff --git a/tools/libs/call/private.h b/tools/libs/call/private.h
+index 7944ac5baf..96922e03d5 100644
+--- a/tools/libs/call/private.h
++++ b/tools/libs/call/private.h
+@@ -7,7 +7,11 @@
+ #include <xencall.h>
  
- #include "private.h"
+ #include <xen/xen.h>
++#ifdef __NetBSD__
++#include <xen/xenio.h>
++#else
+ #include <xen/sys/privcmd.h>
++#endif
  
-@@ -66,15 +68,17 @@ int osdep_xenforeignmemory_close(xenforeignmemory_handle *fmem)
-     return close(fd);
- }
+ #ifndef PAGE_SHIFT /* Mini-os, Yukk */
+ #define PAGE_SHIFT           12
+diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
+index f0b5f83ac8..68e388f488 100644
+--- a/tools/libs/ctrl/xc_private.h
++++ b/tools/libs/ctrl/xc_private.h
+@@ -39,7 +39,11 @@
+ #include <xenforeignmemory.h>
+ #include <xendevicemodel.h>
  
--void *osdep_map_foreign_batch(xenforeignmem_handle *fmem, uint32_t dom,
--                              void *addr, int prot, int flags,
--                              xen_pfn_t *arr, int num)
-+void *osdep_xenforeignmemory_map(xenforeignmemory_handle *fmem,
-+                                 uint32_t dom, void *addr,
-+                                 int prot, int flags, size_t num,
-+                                 const xen_pfn_t arr[/*num*/], int err[/*num*/])
-+
- {
-     int fd = fmem->fd;
--    privcmd_mmapbatch_t ioctlx;
--    addr = mmap(addr, num*XC_PAGE_SIZE, prot, flags | MAP_ANON | MAP_SHARED, -1, 0);
-+    privcmd_mmapbatch_v2_t ioctlx;
-+    addr = mmap(addr, num*PAGE_SIZE, prot, flags | MAP_ANON | MAP_SHARED, -1, 0);
-     if ( addr == MAP_FAILED ) {
--        PERROR("osdep_map_foreign_batch: mmap failed");
-+        PERROR("osdep_xenforeignmemory_map: mmap failed");
-         return NULL;
-     }
++#ifdef __NetBSD__
++#include <xen/xenio.h>
++#else
+ #include <xen/sys/privcmd.h>
++#endif
  
-@@ -82,11 +86,12 @@ void *osdep_map_foreign_batch(xenforeignmem_handle *fmem, uint32_t dom,
-     ioctlx.dom=dom;
-     ioctlx.addr=(unsigned long)addr;
-     ioctlx.arr=arr;
--    if ( ioctl(fd, IOCTL_PRIVCMD_MMAPBATCH, &ioctlx) < 0 )
-+    ioctlx.err=err;
-+    if ( ioctl(fd, IOCTL_PRIVCMD_MMAPBATCH_V2, &ioctlx) < 0 )
-     {
-         int saved_errno = errno;
--        PERROR("osdep_map_foreign_batch: ioctl failed");
--        (void)munmap(addr, num*XC_PAGE_SIZE);
-+        PERROR("osdep_xenforeignmemory_map: ioctl failed");
-+        (void)munmap(addr, num*PAGE_SIZE);
-         errno = saved_errno;
-         return NULL;
-     }
-@@ -97,7 +102,48 @@ void *osdep_map_foreign_batch(xenforeignmem_handle *fmem, uint32_t dom,
- int osdep_xenforeignmemory_unmap(xenforeignmemory_handle *fmem,
-                                  void *addr, size_t num)
- {
--    return munmap(addr, num*XC_PAGE_SIZE);
-+    return munmap(addr, num*PAGE_SIZE);
-+}
-+
-+int osdep_xenforeignmemory_restrict(xenforeignmemory_handle *fmem,
-+                                    domid_t domid)
-+{
-+    errno = EOPNOTSUPP;
-+    return -1;
-+}
-+
-+int osdep_xenforeignmemory_unmap_resource(
-+    xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fres)
-+{
-+    return fres ? munmap(fres->addr, fres->nr_frames << PAGE_SHIFT) : 0;
-+}
-+
-+int osdep_xenforeignmemory_map_resource(
-+    xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fres)
-+{
-+    privcmd_mmap_resource_t mr = {
-+        .dom = fres->domid,
-+        .type = fres->type,
-+        .id = fres->id,
-+        .idx = fres->frame,
-+        .num = fres->nr_frames,
-+    };
-+    int rc;
-+
-+    fres->addr = mmap(fres->addr, fres->nr_frames << PAGE_SHIFT,
-+                      fres->prot, fres->flags | MAP_ANON | MAP_SHARED, -1, 0);
-+    if ( fres->addr == MAP_FAILED )
-+        return -1;
-+
-+    mr.addr = (uintptr_t)fres->addr;
-+
-+    rc = ioctl(fmem->fd, IOCTL_PRIVCMD_MMAP_RESOURCE, &mr);
-+    if ( rc )
-+    {
-+        PERROR("ioctl failed");
-+    }
-+
-+    return 0;
- }
+ #include <xen-tools/libs.h>
  
- /*
 diff --git a/tools/libs/foreignmemory/private.h b/tools/libs/foreignmemory/private.h
-index ebd45c4785..7e734ac61e 100644
+index 7e734ac61e..39f8e0b869 100644
 --- a/tools/libs/foreignmemory/private.h
 +++ b/tools/libs/foreignmemory/private.h
-@@ -36,9 +36,9 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handle *fmem,
- int osdep_xenforeignmemory_unmap(xenforeignmemory_handle *fmem,
-                                  void *addr, size_t num);
+@@ -8,7 +8,13 @@
+ #include <xentoolcore_internal.h>
  
--#if defined(__NetBSD__) || defined(__sun__)
-+#if defined(__sun__)
- /* Strictly compat for those two only only */
--void *compat_mapforeign_batch(xenforeignmem_handle *fmem, uint32_t dom,
-+void *osdep_map_foreign_batch(xenforeignmemory_handle *fmem, uint32_t dom,
-                               void *addr, int prot, int flags,
-                               xen_pfn_t *arr, int num);
- #endif
-@@ -54,7 +54,7 @@ struct xenforeignmemory_resource_handle {
-     int flags;
- };
+ #include <xen/xen.h>
++
++#ifdef __NetBSD__
++#include <xen/xen.h>
++#include <xen/xenio.h>
++#else
+ #include <xen/sys/privcmd.h>
++#endif
  
--#if !defined(__linux__) && !defined(__FreeBSD__)
-+#ifdef __sun__
- static inline int osdep_xenforeignmemory_restrict(xenforeignmemory_handle *fmem,
-                                                   domid_t domid)
- {
+ #ifndef PAGE_SHIFT /* Mini-os, Yukk */
+ #define PAGE_SHIFT           12
 -- 
 2.29.2
 
