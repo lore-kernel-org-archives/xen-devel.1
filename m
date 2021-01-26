@@ -2,42 +2,44 @@ Return-Path: <SRS0=12TN=G5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C79FFC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EBEDC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8F8BA23104
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F8BA23104
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6446523104
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6446523104
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.74842.134571 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.74843.134583 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4MCo-0001Cs-2b; Tue, 26 Jan 2021 11:08:18 +0000
+	id 1l4MCs-0001Gp-BY; Tue, 26 Jan 2021 11:08:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 74842.134571; Tue, 26 Jan 2021 11:08:18 +0000
+Received: by outflank-mailman (output) from mailman id 74843.134583; Tue, 26 Jan 2021 11:08:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4MCn-0001Ch-TR; Tue, 26 Jan 2021 11:08:17 +0000
-Received: by outflank-mailman (input) for mailman id 74842;
- Tue, 26 Jan 2021 11:08:16 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nQkR=G5=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1l4MCm-00016Q-Ar
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 11:08:16 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8d6ef972-d78c-45e5-aa18-7f0d3e3da4a2;
- Tue, 26 Jan 2021 11:08:12 +0000 (UTC)
+	id 1l4MCs-0001Gh-7u; Tue, 26 Jan 2021 11:08:22 +0000
+Received: by outflank-mailman (input) for mailman id 74843;
+ Tue, 26 Jan 2021 11:08:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ElsB=G5=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1l4MCq-0001Bu-PR
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 11:08:20 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 68ee0184-8764-4a13-8bf8-5d64de4e3ec5;
+ Tue, 26 Jan 2021 11:08:15 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id C50FEABDA;
+ Tue, 26 Jan 2021 11:08:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,141 +51,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8d6ef972-d78c-45e5-aa18-7f0d3e3da4a2
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1611659292;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=NFFOG4gSGPKaBD5plci1+We3i0aKp6X529Jz1vT/8E4=;
-  b=dHkFwsb0bPKj0JmNmBaf9zWnolsfaq8cUCf5tot5BGPJNpMrvU1pvWt2
-   L0nmDq/vDNy8ll6fi/tR2itoR8zd4hcoVoIlNULC9WSdp/POt1JoFONHK
-   HDVN96znaPN/rCib+BJb3lJI6hoyM8gSOxhOEmFL0rL9VL2FP3VXLOZv9
-   U=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: /tecgAs6H4UDCV+/njuDxMCH/oRRHd0toI6QxyLZjQUrEHuHJ+A94xapCMbDBK3ThuzctWmebb
- 6mOzpMG81kkJkuG32bMsgjg0sEFYWbzrK5LIbQPqASsRKafIoY7xIZ/ewcBd3XM/47+KqYYqn4
- shC5Nron5349WwpEG6HEGpQojqwHW2GNW/oI4X2dhPJu4YNi6RQcVaFtfwFQnhLS8Ulv48WPB+
- t9AZ1qF9fEpM839STriChK0/8uoR8RYfBCBQ94NyUqaJsKodrmQh5WpSAFWyYU1Or4p7dWzBX4
- n9Y=
-X-SBRS: 5.2
-X-MesageID: 36062434
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.79,375,1602561600"; 
-   d="scan'208";a="36062434"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HHlkzs4Ym26muNJH4UZfn0PbasHQDNjKjfnRqx9DwP9hphjUIsSVH6sV1Xc6OsgtsX8zsRIZ3A2P5SifHk2SiIMRqGAATj70TBR4TBzfzbz2E/9zvcbHr+G/psN+SCBRWdTDG5wasxqHkVnN/7PBs55A2OKoC2QS3zpunW2ouao5c17foO0xd76YKI+ZEdbvdmKzeVWClcQJLgqJsvdRNSeRPxt521kEuEY1y/Ylic6BlhHNAZ7l018Ju0uzr2vTMgtRZt5VQb1WTH7XS33vTRwV5A6RleUk48S4bMQcvB2Ya//L9C7VVF5K3qCMluan3R1yuu4r9YU30Jbzi10MYQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=35r293zGi7bEtyf6UwXJ4l7Clf7lDN7gCH2LmyYvRfE=;
- b=VxvJHthnt0grba5LtwZhHttBu79zOyrlU7rfclDQNFD76YUxEn1BtgWHW3i/F5ny8KlIUNCLqZmxUE+JsZUMcYUe0DDDd08UP/gDTHxy8Q/esdBkvh7ax2JgFiHfYcrOv1/RzSWjgNaurw51ui6j4Z+8L+oiukweK6tEF3YrJOXz8s7Ri2iBx+XsViCjTyt7x+EZa/BR+d/I3+Vcgxcp2CxgQiJwcdRp6hA+HQCliZh7dHtmtdK8tGZ1YJz9jSTlVPYEKiaNthhq+I2YXB+Rnw8oqA2mUyMjPcHIQ6SK8sQ7RKgFsEb0+O6Gd0LW411dWxEP27z4CGme7+rgaGjgKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=35r293zGi7bEtyf6UwXJ4l7Clf7lDN7gCH2LmyYvRfE=;
- b=BambPaF4Q44P8ByC916lNXpXYw9ROYE8LFHzfVFDd4KEeML6MDQZLsnPM33AMTqd8gjSH2RukBgP8fGZpWXRlenl8mENeOvm7RDgg2O5wr0aDhyu/Gn80pLcnc2NDcaR35JwzV0HkVSd6EmLLvm3cr54c8x9a4Pfa6LY5tLuB1g=
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 2/3] x86/irq: don't disable domain MSI IRQ on force unbind
-Date: Tue, 26 Jan 2021 12:06:05 +0100
-Message-ID: <20210126110606.21741-3-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210126110606.21741-1-roger.pau@citrix.com>
-References: <20210126110606.21741-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PR3P193CA0051.EURP193.PROD.OUTLOOK.COM
- (2603:10a6:102:51::26) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+X-Inumbo-ID: 68ee0184-8764-4a13-8bf8-5d64de4e3ec5
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1611659294; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Cbm7U8ulZCNHWNWtP+XsFPhBUkhp4DISJSS9+FcJaj4=;
+	b=E71p7l78F3wP7x4VKanJaxlk7/FlA4CRFJtlyK3JyFcMqHCNqYwnmuMhYeBIlnYQ1Cx5Ao
+	QK3cBWYh94IEuqqOPoIApc91pQ7t/DJhQHqRsCrkrmbNs3L73g/EoVLGFokgcp9CHnGj1a
+	xCcFQHjUHCB2PQiHM6gR3WUKMQ476Xo=
+Subject: Re: [PATCH] x86/pod: Do not fragment PoD memory allocations
+To: Elliott Mitchell <ehem+xen@m5p.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
+ Roger Pau Monn?? <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+References: <202101242308.10ON8Umj004866@m5p.com>
+ <b2ad35f1-3adf-a78a-5e82-2ac4a672d624@suse.com>
+ <YA8D85MoJ9lG0KJS@mattapan.m5p.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <c0a70f39-d529-6ee4-511d-e82730c14879@suse.com>
+Date: Tue, 26 Jan 2021 12:08:15 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d83302d2-fe84-4d3e-5f06-08d8c1eaaa67
-X-MS-TrafficTypeDiagnostic: DM6PR03MB4059:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR03MB40593742216507CD960F1D318FBC9@DM6PR03MB4059.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: cWrFS7Hbnf2Iwi12tyWAm778CYtuXDP1+G9ace7TR0AnfDIUKP+r/DIgm9UbCLd8YoYH1DRgyx9v3DjFies/iNVFcdq8hkYPya+mcZ/Rba0U4GLGa+eefjvGDTsP1KZVbK9sH3yfrqykYPM4MLy2SHDlIcuwebfKEvbmQHll11IRcYL9yM/wLzA6mU6L4zbbPKtiSTraKdrrTv4MpR5SS9hy1tkzDSujpVj+YBkYzqbjG8jIV8BiVhrgjg890AvMlue53iv6xWFfAlWl4c9QR+j+jiwiz4ZcV4VZgtEvbjp+Gxhd/l18Tt2RiC+PTsK7atDSivjRVYvBFeMhqPmfHWlOOf0jeEJTRqV/eQo8hQEIbvAvmrEph0gpMI1KVhAdnwhba7bPVPccXXR+o79tmA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(39860400002)(136003)(396003)(4326008)(186003)(83380400001)(478600001)(26005)(5660300002)(2906002)(66476007)(54906003)(16526019)(6496006)(6486002)(6666004)(956004)(8676002)(2616005)(86362001)(8936002)(36756003)(66946007)(6916009)(66556008)(1076003)(316002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?NmRVdUh0eGtZWnMvV2YyRlMrNVJwUTd5OE5UY0RjeUIzZmZYSnQ3eU80TVJS?=
- =?utf-8?B?TUtxM0xZWHNKZE1LUnhGTkhlUVJxaHd6REwvTVRQNGRxZGhOeldDbFVhTUpn?=
- =?utf-8?B?d1plVHgvSnVRWjhYalhpakkyeHF0a2l2Wm96d2VlUm5Qb0N6dm92YVZQNFV1?=
- =?utf-8?B?S3BVZVJDbGhyNzlDZWUzazA5NVhxVGFDYVVoNWJHd2o2QWRuR3VxemRodnBG?=
- =?utf-8?B?cTJQK3dicHBlaFRUVjhUeHY1elZ1MGpmcWErbkUvRlJ5MXNIUUJVeW5qRnRt?=
- =?utf-8?B?ZmRjK2NRSFV4Wk9MRHpJcmJtYzY1TTc2bDRmY1V4TVJJcHB4TitidHpnZHpT?=
- =?utf-8?B?NXVVWEpHd01tdTBCT08xaVI2TlpnaWZuZWEwUXF3RTM3R0MyMWJhQnRUb2l4?=
- =?utf-8?B?TzJTTkhQdm9qQTRWeVlmNUk2eHFwM2xGREM1M0Q0TWxIcUxaZW80OUFybm1r?=
- =?utf-8?B?VVRySTdIUTB5T3c2TUVPZWpJL2ZOK21ESkplaXduNTIyMG02R2o5QkhDSWNw?=
- =?utf-8?B?bUlNb2dqQ0RwcW1oaGlrMmtRVGJ4bXFNaDBDemZ3RjdnZW9QMngxMGpvYUFm?=
- =?utf-8?B?NVBqQWpMa2cyZ2xNSlVxdUY1RVNLeWdFN1NJN3ZDelJ5Wlg0VDZENlBMTTQr?=
- =?utf-8?B?VGplRm9GZ0w3a1IyeEd5YWVHTHlHVzlGeHZpQ3BkOThuVC9NTzEyM0ZhMVhP?=
- =?utf-8?B?anhhVG51dVdPS0M2U2tEU0JUTmhWcVVMMnlpeDZ2eitKN3p1TWlzbktrdW8z?=
- =?utf-8?B?SUVNZkV5eGtLSUluaHo1KzUrQ2dIQk10cWEyZGx1QytyQmIvY0NrRE02bG1O?=
- =?utf-8?B?Mm5yRm9SRGViSThQbnI4emhSRW5ESHpXZjR5NzUyMmZrdEpWTEFnejRaNFV5?=
- =?utf-8?B?cFFhcENpTmI1NXRxNXBvNkNzRmYxc1EzZjJmYU4weWNsMHJ5bDJvSzFLQS9G?=
- =?utf-8?B?SFVBMTgwbkx5aFIvRU1nT3YwRnhtbVVTK2k1b2UvR0FYb2d6VFp0SEZlWHNx?=
- =?utf-8?B?dER6LzFRWXp2eEVmVjNvYUxkS0hvSXZubEZ6ZENCVVNSMXIvWFFVT3VWUE5a?=
- =?utf-8?B?RlZISjB5TVAxWkNmRkhwemlVV1hlNEFON2d5MjdQRW9ncmdHMDdkQlNLaVhL?=
- =?utf-8?B?cWlvNnZUazVucjQvOUtiLzUwbnVDZzdYUExIcjVmNzZwcERncWwvNmtmK2xU?=
- =?utf-8?B?ckkyc01kdjZ3elhjODNLR0czVW9pUisreC8wZzc2aTFQblhwK3oveHVlY29Q?=
- =?utf-8?B?bnZybkNwMXpKZUozZDBvanJGb2UxME43OTlxYVJpNlBBVEJpQVoxeFV5TnZU?=
- =?utf-8?B?Mm14Z1V1dC9iMHREcVFvOUxKaENsNmp0Smk1ZkxKZndBeFRSUDhjUWc4R3dn?=
- =?utf-8?B?RS8rTTJ3dkJwTUZiQUxrWGVhOVozTjJqSElqYW1lUnBMSU94VUxiNkdKUWVi?=
- =?utf-8?B?QWNkTldxYzlxSzRYd01yZDFHMXZlMmZKeEJ1K2JnPT0=?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: d83302d2-fe84-4d3e-5f06-08d8c1eaaa67
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2021 11:08:10.0614
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7aauG811DK1k61O+3oVDMpfWUXgmNDBWM2qwhRlIp+WTiZOTQyPOCLHN+xppoQZAY84/pxxAN0HbPtJKSRgAHA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4059
-X-OriginatorOrg: citrix.com
+In-Reply-To: <YA8D85MoJ9lG0KJS@mattapan.m5p.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-When force unbinding a MSI the used IRQ would get added to the domain
-irq-pirq tree as -irq -pirq, thus preventing the same IRQ to be used
-by the domain. Doing so for MSI allocated IRQs prevents the same IRQ
-to be used for any other device, since MSI IRQs are allocated and
-deallocated on demand unlike legacy PCI IRQs.
+On 25.01.2021 18:46, Elliott Mitchell wrote:
+> On Mon, Jan 25, 2021 at 10:56:25AM +0100, Jan Beulich wrote:
+>> On 24.01.2021 05:47, Elliott Mitchell wrote:
+>>>
+>>> ---
+>>> Changes in v2:
+>>> - Include the obvious removal of the goto target.  Always realize you're
+>>>   at the wrong place when you press "send".
+>>
+>> Please could you also label the submission then accordingly? I
+>> got puzzled by two identically titled messages side by side,
+>> until I noticed the difference.
+> 
+> Sorry about that.  Would you have preferred a third message mentioning
+> this mistake?
 
-Ignore forced unbinds for MSI IRQs and just cleanup the irq-pirq
-information as normal.
+No. But I'd have expected v2 to have its subject start with
+"[PATCH v2] ...", making it relatively clear that one might
+save looking at the one labeled just "[PATCH] ...".
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-It's not clear to me why we add the irq as -irq -pirq to the irq-pirq
-domain tree on forced unbind, as allowing to bind the irq again should
-just work regardless of whether it has been previously forcefully
-unbound?
----
- xen/arch/x86/irq.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+>>> I'm not including a separate cover message since this is a single hunk.
+>>> This really needs some checking in `xl`.  If one has a domain which
+>>> sometimes gets started on different hosts and is sometimes modified with
+>>> slightly differing settings, one can run into trouble.
+>>>
+>>> In this case most of the time the particular domain is most often used
+>>> PV/PVH, but every so often is used as a template for HVM.  Starting it
+>>> HVM will trigger PoD mode.  If it is started on a machine with less
+>>> memory than others, PoD may well exhaust all memory and then trigger a
+>>> panic.
+>>>
+>>> `xl` should likely fail HVM domain creation when the maximum memory
+>>> exceeds available memory (never mind total memory).
+>>
+>> I don't think so, no - it's the purpose of PoD to allow starting
+>> a guest despite there not being enough memory available to
+>> satisfy its "max", as such guests are expected to balloon down
+>> immediately, rather than triggering an oom condition.
+> 
+> Even Qemu/OVMF is expected to handle ballooning for a *HVM* domain?
 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index 49849bd7d3..c8e5277eb1 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -2362,7 +2362,7 @@ int unmap_domain_pirq(struct domain *d, int pirq)
-     {
-         BUG_ON(irq != domain_pirq_to_irq(d, pirq + i));
- 
--        if ( !forced_unbind )
-+        if ( !forced_unbind || msi_desc )
-             clear_domain_irq_pirq(d, irq, info);
-         else
-         {
--- 
-2.29.2
+No idea how qemu comes into play here. Any preboot environment
+aware of possibly running under Xen of course is expected to
+tolerate running with maxmem > memory (or clearly document its
+inability, in which case it may not be suitable for certain
+use cases). For example, I don't see why a preboot environment
+would need to touch all of the memory in a VM, except maybe
+for the purpose of zeroing it (which PoD can deal with fine).
 
+>>> For example try a domain with the following settings:
+>>>
+>>> memory = 8192
+>>> maxmem = 2147483648
+>>>
+>>> If type is PV or PVH, it will likely boot successfully.  Change type to
+>>> HVM and unless your hardware budget is impressive, Xen will soon panic.
+>>
+>> Xen will panic? That would need fixing if so. Also I'd consider
+>> an excessively high maxmem (compared to memory) a configuration
+>> error. According to my experiments long, long ago I seem to
+>> recall that a factor beyond 32 is almost never going to lead to
+>> anything good, irrespective of guest type. (But as said, badness
+>> here should be restricted to the guest; Xen itself should limp
+>> on fine.)
+> 
+> I'll confess I haven't confirmed the panic is in Xen itself.  Problem is
+> when this gets triggered, by the time the situation is clear and I can
+> get to the console the computer is already restarting, thus no error
+> message has been observed.
+
+If the panic isn't in Xen itself, why would the computer be
+restarting?
+
+> This is most certainly a configuration error.  Problem is this is a very
+> small delta between a perfectly valid configuration and the one which
+> reliably triggers a panic.
+> 
+> The memory:maxmem ratio isn't the problem.  My example had a maxmem of
+> 2147483648 since that is enough to exceed the memory of sub-$100K
+> computers.  The crucial features are maxmem >= machine memory,
+> memory < free memory (thus potentially bootable PV/PVH) and type = "hvm".
+> 
+> When was the last time you tried running a Xen machine with near zero
+> free memory?  Perhaps in the past Xen kept the promise of never panicing
+> on memory exhaustion, but this feels like this hasn't held for some time.
+
+Such bugs needs fixing. Which first of all requires properly
+pointing them out. A PoD guest misbehaving when there's not
+enough memory to fill its pages (i.e. before it manages to
+balloon down) is expected behavior. If you can't guarantee the
+guest ballooning down quickly enough, don't configure it to
+use PoD. A PoD guest causing a Xen crash, otoh, is very likely
+even a security issue. Which needs to be treated as such: It
+needs fixing, not avoiding by "curing" one of perhaps many
+possible sources.
+
+As an aside - if the PoD code had proper 1Gb page support,
+would you then propose to only allocate in 1Gb chunks? And if
+there was a 512Gb page feature in hardware, in 512Gb chunks
+(leaving aside the fact that scanning 512Gb of memory to be
+all zero would simply take too long with today's computers)?
+
+Jan
 
