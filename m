@@ -2,76 +2,42 @@ Return-Path: <SRS0=12TN=G5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,
-	UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26275C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A0BEC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC21E23109
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC21E23109
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2182D23108
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:08:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2182D23108
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.74844.134592 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.74846.134607 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4MCt-0001IM-5s; Tue, 26 Jan 2021 11:08:23 +0000
+	id 1l4MD0-0001QT-BI; Tue, 26 Jan 2021 11:08:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 74844.134592; Tue, 26 Jan 2021 11:08:23 +0000
+Received: by outflank-mailman (output) from mailman id 74846.134607; Tue, 26 Jan 2021 11:08:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4MCs-0001I6-Q2; Tue, 26 Jan 2021 11:08:22 +0000
-Received: by outflank-mailman (input) for mailman id 74844;
- Tue, 26 Jan 2021 11:08:21 +0000
+	id 1l4MD0-0001QM-6i; Tue, 26 Jan 2021 11:08:30 +0000
+Received: by outflank-mailman (input) for mailman id 74846;
+ Tue, 26 Jan 2021 11:08:29 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=55K9=G5=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1l4MCr-00016Q-B5
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 11:08:21 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
- [40.107.22.44]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 13d82b33-11e6-4186-bd08-f1a56581767b;
- Tue, 26 Jan 2021 11:08:14 +0000 (UTC)
-Received: from AM6P193CA0128.EURP193.PROD.OUTLOOK.COM (2603:10a6:209:85::33)
- by HE1PR0801MB1867.eurprd08.prod.outlook.com (2603:10a6:3:53::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.15; Tue, 26 Jan
- 2021 11:08:11 +0000
-Received: from AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:209:85:cafe::ce) by AM6P193CA0128.outlook.office365.com
- (2603:10a6:209:85::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.14 via Frontend
- Transport; Tue, 26 Jan 2021 11:08:11 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM5EUR03FT031.mail.protection.outlook.com (10.152.16.111) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3784.11 via Frontend Transport; Tue, 26 Jan 2021 11:08:11 +0000
-Received: ("Tessian outbound 4d8113405d55:v71");
- Tue, 26 Jan 2021 11:08:10 +0000
-Received: from 5d85ceec7953.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- C345401A-AC77-459C-9DE3-C5D5C41634E5.1; 
- Tue, 26 Jan 2021 11:08:04 +0000
-Received: from EUR03-DB5-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 5d85ceec7953.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Tue, 26 Jan 2021 11:08:04 +0000
-Received: from VE1PR08MB5696.eurprd08.prod.outlook.com (2603:10a6:800:1ae::15)
- by VI1PR08MB4157.eurprd08.prod.outlook.com (2603:10a6:803:e8::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.13; Tue, 26 Jan
- 2021 11:08:03 +0000
-Received: from VE1PR08MB5696.eurprd08.prod.outlook.com
- ([fe80::c8bf:1301:3373:94a6]) by VE1PR08MB5696.eurprd08.prod.outlook.com
- ([fe80::c8bf:1301:3373:94a6%5]) with mapi id 15.20.3784.017; Tue, 26 Jan 2021
- 11:08:02 +0000
+ <SRS0=nQkR=G5=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1l4MCy-0001PP-Vi
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 11:08:29 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8301c828-1086-4441-8918-f37be9196020;
+ Tue, 26 Jan 2021 11:08:27 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -83,245 +49,347 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13d82b33-11e6-4186-bd08-f1a56581767b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AS9BZO/AWk6T2fGjCyXTAi/DZ1AnAwsykCqBwMNESVc=;
- b=RiK5m1OLzr/UoDDqZt8/OdFYzO2W/idLcoxy/CJKIKRxbJBINxH76RVUUOn1Cxdm9QCKjZD4BEttkd4KvCsESC5/ZVFXyBhlxZW2UtwE390TUXBh0q8Hb/FALM1Sfbga0B1Szyg/q27r8GSGmGcVhe2MahYPRd8Fe64vAKk/m5A=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 5949b070d59e3d0e
-X-CR-MTA-TID: 64aa7808
+X-Inumbo-ID: 8301c828-1086-4441-8918-f37be9196020
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1611659307;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=+Y6GrmAeF2fUu0S/2qyh56Dq2QXhgtZ6gEzn+JGVP2c=;
+  b=AeH72sl7330R05Zb+vniTzKJC8Qa8M/Teg/jYbM7HQvn/E+n2OUXX9AS
+   SMdHqgeHvi9N9RmqfosoCTAJbXLn81TK+R6HsajvDwM313Nxewfx0JJWi
+   T1HMSuKWCT7bMss3nbtLTtWHxIKH64GKMpgGP7ZAFAlciAG+E/Msko0Jd
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: zF980WfHV/D3S2j3ukDxOhPLkEe8aVINO8mhmTZ0IMjvbUXYoDN6dewsTnpGKxNMyldQlVCRtx
+ fJ3rc5BG28Gk3+nDl6QvGV+noI6LQmPkYlUc6VVnEoMYFGGhPJXvoptpN1VhRRvFSb3tJ+EgWj
+ 9ltb6Wm2PaP55Yoj6GevyOSmJzkue0KMOhokX01+jSMXieU5qbJ8Wqe7arRi9TBsD+nHAPqF/1
+ 89JvFLFHIkeRoBmR5tsr7JAmV/zKgjV4yKsL13SnOoF8onrItddTrEXdUOrGrnmZG6HqAmv94j
+ 7ZU=
+X-SBRS: 5.2
+X-MesageID: 37168647
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.79,375,1602561600"; 
+   d="scan'208";a="37168647"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XKVwfdBXrl1yVTN0J70eNoM8EpvYZRne3v7zMvyvX5ByZZuaaZduAO7xrIB3lOC8Tbsa5tqyjeks/iIlfuAOqRZwRJb26xJqD/Y8Mw2scFGwQwp00ylkhu/P7UUcSoBhd5LVi5BcKoC3K8dFiC9zCZDvFZ7scEox3OsKL5e6xCYjEuMIECrmy3edI5YJZ7HVGZ4pj7Xv95Zwrn6YK1b2huoaX3aSMoGPrNvgA9o3JVwh2VNZKdxsNjoAVDoFYTHgdLul6kzVWoYQLYX0bkLW0+yrR2A+bCKo5xHCxsTCmhaV3KObUtfN/WeteKb0JhS1ULQtsXhU2O82C/LnYtsAJw==
+ b=na/9RLEvdTAP00GtvEuGJPAnqPGSSqO/jbvSGICu70ugMbJadcIIQmPVic9cXvjFYZRIzBgeAJfs3jb2ToyFHiEE68PMp2alcAMdq7Lo+J+wu2FS7egW11z3w2henJWVPDIu+xjKtTj7DQl4/2V7ErceCV+NdacCUZTHUVpAZkXdocUXvE9Uhfd4wSpXMFiXhzYi/6+n8CpD2mnNAHrg9lGvoVqKVr984mdht24V8/XWQyv94Uv7GwCpojajTYY3OqkFwjNVtvqPvSrBzXG1CImOZZtYVDG1Py0afJRv+sgzSh2ckqcgBfKQCpdaQM1YJStrfvJpDnn/L1an4qeD4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AS9BZO/AWk6T2fGjCyXTAi/DZ1AnAwsykCqBwMNESVc=;
- b=kO+B8yqzv7i4Ym5u1N/CBucK6VKaBFhy9WczqFZ0KVnE7Bbh2lYLHvtkTAHhOwByj6+PuI1Tr8JOm4TeFb5CWKjNRzalavFYbNWSSu0m8272CJ/V3oEijGfcCSpr/+9OkjvsW8IFU6+9RrG9eeuPU9i0VD0IWWI2iG57ND67OCqWCCxNnSEuKjyM5vd/hHE54ayr9KOG3B7+zQnO5q06SAN0B/FnfsSJwusMoqfFzsx/HTks6zHiVHW0W4jQ882nlcnHNuxyCRdwbddMXwXe7DHNq8xZKGy9vVf2byiB8XHXIS8rHUHQMgctpiNXh8CfNA/SHUz8JmAiXBEry210Jg==
+ bh=Xq1Aix58aH3zzkOd8rRntNDXU6045fRsfX+qmZVQiyo=;
+ b=Z8ZKIM2ZHjJrdyhGyqA2NyO9gq4+rvZDuI2vht4Iay0XpAXyls1MOSjn65hiS8OBQkiFSfmOUctB39lOJHcAYiKjZUblynQIWdWLOMyDOswrDG9hPokmR9jiMSkUUTD43BlKK7EUcIEqZmWQI+7K0nZTrLWkZiqhzlVRvC2V713iVjfA5A+t0v192+gTIBgM3yVR6GqeEk3+zO7O17gtbYHLWedzdowNVovkYNOp8teD9o1A3EYhlpDJm0heYJsspeT5dj41yzTu1gVgKNWKwCdTRJ8iMO2oobLr5K8EaDwYcmHFDH3M3VHlZGhjnA50We3VVnyWDLz9AyabJgd1gQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AS9BZO/AWk6T2fGjCyXTAi/DZ1AnAwsykCqBwMNESVc=;
- b=RiK5m1OLzr/UoDDqZt8/OdFYzO2W/idLcoxy/CJKIKRxbJBINxH76RVUUOn1Cxdm9QCKjZD4BEttkd4KvCsESC5/ZVFXyBhlxZW2UtwE390TUXBh0q8Hb/FALM1Sfbga0B1Szyg/q27r8GSGmGcVhe2MahYPRd8Fe64vAKk/m5A=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini
-	<stefano.stabellini@xilinx.com>, "andrew.cooper3@citrix.com"
-	<andrew.cooper3@citrix.com>, "george.dunlap@citrix.com"
-	<george.dunlap@citrix.com>, "iwj@xenproject.org" <iwj@xenproject.org>,
-	"jbeulich@suse.com" <jbeulich@suse.com>, "julien@xen.org" <julien@xen.org>,
-	"wl@xen.org" <wl@xen.org>
-Subject: Re: [PATCH v4 2/2] xen: add (EXPERT) to one-line descriptions when
- appropriate
-Thread-Topic: [PATCH v4 2/2] xen: add (EXPERT) to one-line descriptions when
- appropriate
-Thread-Index: AQHW82EXNHb66SNMekqQqd9sHf0/nKo5wEQA
-Date: Tue, 26 Jan 2021 11:08:02 +0000
-Message-ID: <984D4402-B9E8-4BA5-8866-A9D87BEB7251@arm.com>
-References: <alpine.DEB.2.21.2101251321420.20638@sstabellini-ThinkPad-T480s>
- <20210125212747.26676-2-sstabellini@kernel.org>
-In-Reply-To: <20210125212747.26676-2-sstabellini@kernel.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3608.120.23.2.4)
-Authentication-Results-Original: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=arm.com;
-x-originating-ip: [86.26.33.241]
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 0136b1f2-267a-463d-1d05-08d8c1eaab48
-x-ms-traffictypediagnostic: VI1PR08MB4157:|HE1PR0801MB1867:
-X-Microsoft-Antispam-PRVS:
-	<HE1PR0801MB186719B3C437632F33F9350A9DBC0@HE1PR0801MB1867.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:8273;OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- CaDVyzllOFshpmBM09zqoEH8vGJlnlmnPckIL3C2s5AAUX0sD9/E/WpQXZMvt6kf23FIxVzuLGs49rAzNoG5VxeAWBpE7ycI5vEl8eaAcTj0eXAb4v0wZEP7VnrT6fJoVueM1UDyrEYgNJ6Wd+OzkspK6IIjEJ1BxLynpa7uSPr6/UrfC2nJtXNgHa1qb8QOxriRRKYgTuwH99hZdXi4eKD8xFWFMq7KA772SMue9DSYQA/BeMGPwqET7cFnxGLPjPZSN8JbxWFH3YVNlAn5ERXM4Epx/sDcU5m20lST279mWnLBopqskVTXM5+7G3cN5NloAISyPY1piAKHa1Dt4AAttdyDot1lC1sZqRRAwPDVUmWvbc7SMSTlDUT6kXgyI9cXEBTVjpMHZGdD7p9d4G9iKzlrPmctebW5mad2rCAZrdx6fE31V0KEhwFHdVHj
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR08MB5696.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(366004)(376002)(136003)(396003)(39850400004)(83380400001)(53546011)(66476007)(6506007)(4326008)(66946007)(55236004)(76116006)(86362001)(66556008)(316002)(91956017)(5660300002)(8676002)(186003)(26005)(64756008)(2906002)(8936002)(6486002)(54906003)(71200400001)(6916009)(2616005)(36756003)(33656002)(66446008)(6512007)(478600001)(45980500001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata:
- =?us-ascii?Q?SydAT7DwM5dWoyJNfIgMJYXMkC5jHm3jCY9C2Kvz03da8/ZhKEbKJAKOFoT2?=
- =?us-ascii?Q?oUEQR7ibp+uSILC36ORLtM7d9i3LhIhFdGV9h/1RZCfZRz6XW0YdgzJs+IsJ?=
- =?us-ascii?Q?3TSObWqsHx1NomcjL7eUSdqQUi8DysZQsaZsW/p9dQV0CMXHsNYpXuqqv5Fi?=
- =?us-ascii?Q?nXLelBJx5igLbG7ZzikQC9dOLSFHqvQAJ4iIi7AnbKe6WZIaefGPN4KC+LNL?=
- =?us-ascii?Q?58DPAQFAaMiJyEvSvUFxzI7F9ayGQjRnbmLMv10GwmHfe90whFLdyfvHidky?=
- =?us-ascii?Q?DTbiwxGJszMox2gILwAJnvuyIR++Q8NujX5oZYibyhAO43U1E/13bMHIHWg8?=
- =?us-ascii?Q?SvAnV0n91Gueq3Qe6KStBYQ+lMOPbqegX1YVgKUMNcWBjtd4tuIxNv7dmktB?=
- =?us-ascii?Q?j1rbQqh+McWKlfalfXQvqmLEhX1wZA3TgT00CjZvaffnz6T41ZM3TO0Kkij8?=
- =?us-ascii?Q?bbTHs3SX6iwZazLY5VZYUQG++cLdTtsY8g6Dk4BUyS0kJQ5/+VavM4eKxreO?=
- =?us-ascii?Q?mN6fOiey6jEiOyOGJto1RA7x+1csJY+Jl2v2EcEGVVywogmVWNxHT1fKk4RY?=
- =?us-ascii?Q?30ZE35g5PEp5Y1ad3DibZXHULZzhvJnnCLk8xv4yrTkLiyY6ecVXQkESTopq?=
- =?us-ascii?Q?SV5tRjMXaVB0+eUU3jRdwS45HW+dxooZgXm8zKzSjdJCRsBw/oK/FjLMADuE?=
- =?us-ascii?Q?YhZNcJfhmFu45vO4EqoAGwZvtW4Hx8se1BwpSqnKRrhq3vPLnLQETrQnDupP?=
- =?us-ascii?Q?t8+kHOTDeFEsKzM4gAzabA2tg1iD7488/3fbsPSq5RPccZgsqM1/nv7EjXDW?=
- =?us-ascii?Q?AYwY8uyTyxio7o8hx5ZlGjg7vZiUAfAg1i0viqJIjv/Q7s5T03xBJIOYyGR5?=
- =?us-ascii?Q?m01c64HjebLsC7gpeCNKhGdiuTtBoZIF1GPZPaA1ey8aCKPr+VCvz5djYr1H?=
- =?us-ascii?Q?Q0uvROdpYBn/bipbGz+tgNy2agQTH24tOPZVyM0jh22LO1t9EuBy6lHyHIVw?=
- =?us-ascii?Q?1JIwH/5peJd82gwR+HY64UKXiXu7lir7PhYkxjdndcAAN7TuQXfwAPEfbQa+?=
- =?us-ascii?Q?/GHU1Z8W?=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <F16F6966E209A248BAEC2F016C77A21C@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+ bh=Xq1Aix58aH3zzkOd8rRntNDXU6045fRsfX+qmZVQiyo=;
+ b=E5TN671DOcdE5iaF8Z2GsayYieblEHUoMAUdAS0J90tYvnzOo/iyudTUKBIIfHKI0Z8y/4tzMa22bTEAnowD8/I4kR/HDmrVs6ZTQ7ZcwrjQvgiL7ubI1sxo5lD8k+8C8T19P6I0sayYBGh0vynEPUqSV8/QiJxw2fS1Tz9Hkmc=
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Paul Durrant
+	<paul@xen.org>
+Subject: [PATCH 3/3] x86/vmsi: tolerate unsupported MSI address/data fields
+Date: Tue, 26 Jan 2021 12:06:06 +0100
+Message-ID: <20210126110606.21741-4-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210126110606.21741-1-roger.pau@citrix.com>
+References: <20210126110606.21741-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AM5PR0201CA0014.eurprd02.prod.outlook.com
+ (2603:10a6:203:3d::24) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4157
-Original-Authentication-Results: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	694f3efa-56ef-4e44-ec26-08d8c1eaa650
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8ff21026-898a-48e6-8391-08d8c1eaad6a
+X-MS-TrafficTypeDiagnostic: DM6PR03MB4059:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR03MB4059A958C8F65E2A437F99DB8FBC9@DM6PR03MB4059.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2582;
+X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	E3hJWlG/LfOAvuuvVp5Cad9YWMKH/zpydR9TixWVG2Kvz5/yT7RSU8lR17iy/YqUa9H6p0RbAL2Y67+ioPsKNq1oYOQ+3ZhRkFoQc+LPH1fUhS8ts4nTO/Jbe1oreSZCTl1XFMU/bcEkYKX+AcEPuibmXLBVLShvEm5fQAWvY9NEHZH059rVS7QZ4XfGPuyMRFB3dHx1Q/UNlI6KINm3CqxLeHKF9MYtQsHwqbANkFojITe3vvp/iyy5djpBERO+qSMzo7z5BiLJlLAdCGOqHMJR2BnlxCStfWyYMaUadfuWWf0brBGBRFth4exWTQ4tPsyVmHeZoLJ6t3HPC0Uuh+e7gBkb72aWe2vqyotAKFD0eWD8ZCYatmzJ0SBJQ9qgMCbu6GyEyHIJhnVCKK8ng9P7aD+9T2TrkCNxFkpB6V1lJgFLRCNmSIIayHGqMK1DjOdpKaVgWcKQAyfedHX80Q==
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(376002)(346002)(39860400002)(136003)(396003)(46966006)(53546011)(83380400001)(4326008)(8676002)(5660300002)(26005)(186003)(2906002)(82740400003)(2616005)(33656002)(54906003)(6486002)(6862004)(55236004)(336012)(6506007)(47076005)(70586007)(81166007)(478600001)(36756003)(6512007)(356005)(8936002)(82310400003)(86362001)(70206006)(316002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2021 11:08:11.2449
+X-Microsoft-Antispam-Message-Info: /xGZWrheZrmWs/zaT/KDQPBQUhcW8qhuDj8ZtLcU4+iIGg7QKcBjfkUibedxo8b568DzWQ5txAPQnE65Upz42O/cBzcpXd3rtxWUEGZWfKxwRa/UhFxGpFGwYslCTG1ZNA+jlq078tlROlaFLiw2OUzaQQcatWam65b0BGA4U6PbGUihoK2+94bLuB4YKumNqQscmmTlYEii7u1FMkJRSJWff93FmXd0O1dSgjyMKypjSj1/HvCWqITu0jW9Bxg95oTccGsM5Yb6nRXBwYPDKVgxO1JRRsdwopDLtRREyy8Q7m0oU25anLadYHM1UuuWif1DFQ5XOwKw8yP4t/meCFESJ+opsZ6GZXgtHlV3bZLDvaEU/6YtxbdSlF6C+9R4DbOkEFLI0Hbz9AdaQKdGtw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(366004)(346002)(39860400002)(136003)(396003)(4326008)(186003)(83380400001)(478600001)(26005)(5660300002)(2906002)(66476007)(54906003)(16526019)(6496006)(6486002)(6666004)(956004)(8676002)(2616005)(86362001)(8936002)(36756003)(66946007)(6916009)(66556008)(1076003)(316002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?OURheWZRREpzaFFnY1FkeTd5Tm5ULzBNdmdLd0ZBV05HU3h5bGZuTzF4MEZs?=
+ =?utf-8?B?TmxuMkd1V0ZraGM2WHhsb0FBOHRWa2ZCQ2FmdDdHdm14ajNVYTJWQ1hBUlFB?=
+ =?utf-8?B?VXg0aU5VajFCa21obkFIdGF4ckVlMlQxeXdKUG5VM05CN0pPSXNLMDNpYnRB?=
+ =?utf-8?B?Wm9qdmk1b0ZROStTOTJGQ096aDJOaDk0S0ZsVStPREtJeVVKUXVZR2JnNGJZ?=
+ =?utf-8?B?WTRCQjA5azk2NDd1alUxN2w4NWJpdmN3d2FIdTQ1dnRTckZlSVdVaDVFVmFU?=
+ =?utf-8?B?MDgyMWV2dWFLb2ZGUkRJREIvMFpGOVdEeFhGS3V6cWYySVB5WDN2L0puUlZM?=
+ =?utf-8?B?cWc5a3ZRQmJOSG1KY2tlYUdKMkNlTzR5ZEFXbEhrSzF2bjhLcXNlNXc0UVRP?=
+ =?utf-8?B?TW5iV20xUnYvNWxkWnFubzVmcVZNZHhqS1lsb3lmL1V3dC9CMWFPQjRKQ3F4?=
+ =?utf-8?B?STdYQ3RBNnA2dnhEcS9zci9kTDlBYUNLN2tlTk9yUWo2SCtSVHpicWdwOXE5?=
+ =?utf-8?B?K1c3eGp2cjFmYWFGVUUrb1NLWnR1YXZBamF0QkdGb0Z4cVpNMUxlOXM0RzNa?=
+ =?utf-8?B?NlhCQ1EzYTV1cHRMOXdnUnRqcDBHWDJTWkVoNU9IMGNNSVNlemFTWVlzTnFX?=
+ =?utf-8?B?RHJoRFlWbHhBWllyVDdyS0VlakdJbzdWdFlQRzhlcHo3SnEvVEZsaldaSFhQ?=
+ =?utf-8?B?RXBINGxRcldoUEtYeFc3bTdCbGErSGpsa3RaaGo3MG9aWkd1MXVCUzAwbUxm?=
+ =?utf-8?B?MUtkVWFWczhONXVlT1JzY3J4eWtSZ08zR04xTjV6MUR6WUQ3N3JkaEsraUgy?=
+ =?utf-8?B?TWcxV05URDVVdUxic053VXE5LzdqUEhXSllpY0htdFVkdTJRVFhTTUFJNUFU?=
+ =?utf-8?B?bkV0S0ZaWFhTQWlQYmV5MnVuY3NSVUVNaHN4MlpVZXd0Z3ptMHoxbXh0MkVG?=
+ =?utf-8?B?Wm5iZWtjalZhZk9nWVhWZTVTUExtbmQ3M3hQcmhqanhzMUNCY0tMQllGOTgr?=
+ =?utf-8?B?TUxpNDlwTnJ3UDhCUzg0eCtEQjVLVEJGN1NSRlR2QUNLRCsyaW5kVFJnQ0Ro?=
+ =?utf-8?B?QUFqQktZWmlFWmdDS0QvNzJzYnllR0RSQ3hoNnNadHJONjFBS0svZGNvU0cr?=
+ =?utf-8?B?RUVOT1NmeCtMek9EdE9vY2NRQTArZUNPelYwanUwR0E4Uk9zT2UvV09nZ0Qx?=
+ =?utf-8?B?VVZQcmxOL3E2Sk5Vc1FkaWhISDRSa1oxM2lLdktmeC81UjJvUVQxdEEyWmNY?=
+ =?utf-8?B?Y0ducFZmeWY0d1NrenJpS3VhaHQ3UG9Lb1EvcjZUWXlLWVd6Wlk0elNTWVkw?=
+ =?utf-8?B?S1R1RXY1WkliQ3QvV09PZ293UFpPZS9ON3dKV1ZhVm1oYnFidjdCVEwvcnRH?=
+ =?utf-8?B?RFZYUS9zK3VCcHhGUXBUYUlJMGYrNlVBYWhvUWx6RW5wVlpwWDB1T2F3UmlL?=
+ =?utf-8?Q?WBlRSf+1?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ff21026-898a-48e6-8391-08d8c1eaad6a
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2021 11:08:15.0982
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0136b1f2-267a-463d-1d05-08d8c1eaab48
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0801MB1867
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: S2O05zvtnXeGQSUwI4QHGFKgbVcnSBpBeWOC2R3h9doDwpqnCeanu/1h7s3ApR1F2s6HScc3W69S+Q+BkFkGGg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4059
+X-OriginatorOrg: citrix.com
 
-Hi,
+Plain MSI doesn't allow caching the MSI address and data fields while
+the capability is enabled and not masked, hence we need to allow any
+changes to those fields to update the binding of the interrupt. For
+reference, the same doesn't apply to MSI-X that is allowed to cache
+the data and address fields while the entry is unmasked, see section
+6.8.3.5 of the PCI Local Bus Specification 3.0.
 
-> On 25 Jan 2021, at 21:27, Stefano Stabellini <sstabellini@kernel.org> wro=
-te:
->=20
-> Add an "(EXPERT)" tag to the one-line description of Kconfig options
-> that depend on EXPERT.
->=20
-> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-> CC: andrew.cooper3@citrix.com
-> CC: george.dunlap@citrix.com
-> CC: iwj@xenproject.org
-> CC: jbeulich@suse.com
-> CC: julien@xen.org
-> CC: wl@xen.org
+Allowing such updates means that a guest can write an invalid address
+(ie: all zeros) and then a valid one, so the PIRQs shouldn't be
+unmapped when the interrupt cannot be bound to the guest, since
+further updates to the address or data fields can result in the
+binding succeeding.
 
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Modify the vPCI MSI arch helpers to track whether the interrupt is
+bound, and make failures in vpci_msi_update not unmap the PIRQ, so
+that further calls can attempt to bind the PIRQ again.
 
-Cheers
-Bertrand
+Note this requires some modifications to the MSI-X handlers, but there
+shouldn't be any functional changes in that area.
 
->=20
-> ---
-> Changes in v4:
-> - new patch
-> ---
-> xen/arch/x86/Kconfig     |  2 +-
-> xen/common/Kconfig       | 12 ++++++------
-> xen/common/sched/Kconfig |  2 +-
-> 3 files changed, 8 insertions(+), 8 deletions(-)
->=20
-> diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-> index 302334d3e4..3f630b89e8 100644
-> --- a/xen/arch/x86/Kconfig
-> +++ b/xen/arch/x86/Kconfig
-> @@ -103,7 +103,7 @@ config HVM
-> 	  If unsure, say Y.
->=20
-> config XEN_SHSTK
-> -	bool "Supervisor Shadow Stacks"
-> +	bool "Supervisor Shadow Stacks (EXPERT)"
-> 	depends on HAS_AS_CET_SS && EXPERT
-> 	default y
-> 	---help---
-> diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-> index 39451e8350..b49127463d 100644
-> --- a/xen/common/Kconfig
-> +++ b/xen/common/Kconfig
-> @@ -12,7 +12,7 @@ config CORE_PARKING
-> 	bool
->=20
-> config GRANT_TABLE
-> -	bool "Grant table support" if EXPERT
-> +	bool "Grant table support (EXPERT)" if EXPERT
-> 	default y
-> 	---help---
-> 	  Grant table provides a generic mechanism to memory sharing
-> @@ -151,7 +151,7 @@ config KEXEC
-> 	  If unsure, say Y.
->=20
-> config EFI_SET_VIRTUAL_ADDRESS_MAP
-> -    bool "EFI: call SetVirtualAddressMap()" if EXPERT
-> +    bool "EFI: call SetVirtualAddressMap() (EXPERT)" if EXPERT
->     ---help---
->       Call EFI SetVirtualAddressMap() runtime service to setup memory map=
- for
->       further runtime services. According to UEFI spec, it isn't strictly
-> @@ -162,7 +162,7 @@ config EFI_SET_VIRTUAL_ADDRESS_MAP
->=20
-> config XENOPROF
-> 	def_bool y
-> -	prompt "Xen Oprofile Support" if EXPERT
-> +	prompt "Xen Oprofile Support (EXPERT)" if EXPERT
-> 	depends on X86
-> 	---help---
-> 	  Xen OProfile (Xenoprof) is a system-wide profiler for Xen virtual
-> @@ -199,7 +199,7 @@ config XSM_FLASK
->=20
-> config XSM_FLASK_AVC_STATS
-> 	def_bool y
-> -	prompt "Maintain statistics on the FLASK access vector cache" if EXPERT
-> +	prompt "Maintain statistics on the FLASK access vector cache (EXPERT)" =
-if EXPERT
-> 	depends on XSM_FLASK
-> 	---help---
-> 	  Maintain counters on the access vector cache that can be viewed using
-> @@ -344,7 +344,7 @@ config SUPPRESS_DUPLICATE_SYMBOL_WARNINGS
-> 	  build becoming overly verbose.
->=20
-> config CMDLINE
-> -	string "Built-in hypervisor command string" if EXPERT
-> +	string "Built-in hypervisor command string (EXPERT)" if EXPERT
-> 	default ""
-> 	---help---
-> 	  Enter arguments here that should be compiled into the hypervisor
-> @@ -377,7 +377,7 @@ config DOM0_MEM
-> 	  Leave empty if you are not sure what to specify.
->=20
-> config TRACEBUFFER
-> -	bool "Enable tracing infrastructure" if EXPERT
-> +	bool "Enable tracing infrastructure (EXPERT)" if EXPERT
-> 	default y
-> 	---help---
-> 	  Enable tracing infrastructure and pre-defined tracepoints within Xen.
-> diff --git a/xen/common/sched/Kconfig b/xen/common/sched/Kconfig
-> index 94c9e20139..b6020a83c6 100644
-> --- a/xen/common/sched/Kconfig
-> +++ b/xen/common/sched/Kconfig
-> @@ -1,4 +1,4 @@
-> -menu "Schedulers"
-> +menu "Schedulers (EXPERT)"
-> 	visible if EXPERT
->=20
-> config SCHED_CREDIT
-> --=20
-> 2.17.1
->=20
->=20
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/hvm/vmsi.c      | 93 +++++++++++++++++++-----------------
+ xen/drivers/vpci/msi.c       |  3 +-
+ xen/include/asm-x86/hvm/io.h |  1 +
+ xen/include/xen/vpci.h       |  3 +-
+ 4 files changed, 51 insertions(+), 49 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
+index a2ac82c95c..13e2a190b4 100644
+--- a/xen/arch/x86/hvm/vmsi.c
++++ b/xen/arch/x86/hvm/vmsi.c
+@@ -715,32 +715,37 @@ static int vpci_msi_update(const struct pci_dev *pdev, uint32_t data,
+     return 0;
+ }
+ 
+-int vpci_msi_arch_update(struct vpci_msi *msi, const struct pci_dev *pdev)
++void vpci_msi_arch_update(struct vpci_msi *msi, const struct pci_dev *pdev)
+ {
++    unsigned int i;
+     int rc;
+ 
+     ASSERT(msi->arch.pirq != INVALID_PIRQ);
+ 
+     pcidevs_lock();
+-    rc = vpci_msi_update(pdev, msi->data, msi->address, msi->vectors,
+-                         msi->arch.pirq, msi->mask);
+-    if ( rc )
++    for ( i = 0; i < msi->vectors && msi->arch.bound; i++ )
+     {
+-        spin_lock(&pdev->domain->event_lock);
+-        unmap_domain_pirq(pdev->domain, msi->arch.pirq);
+-        spin_unlock(&pdev->domain->event_lock);
+-        pcidevs_unlock();
+-        msi->arch.pirq = INVALID_PIRQ;
+-        return rc;
++        struct xen_domctl_bind_pt_irq unbind = {
++            .machine_irq = msi->arch.pirq + i,
++            .irq_type = PT_IRQ_TYPE_MSI,
++        };
++
++        rc = pt_irq_destroy_bind(pdev->domain, &unbind);
++        if ( rc )
++        {
++            ASSERT_UNREACHABLE();
++            domain_crash(pdev->domain);
++            return;
++        }
+     }
+-    pcidevs_unlock();
+ 
+-    return 0;
++    msi->arch.bound = !vpci_msi_update(pdev, msi->data, msi->address,
++                                       msi->vectors, msi->arch.pirq, msi->mask);
++    pcidevs_unlock();
+ }
+ 
+-static int vpci_msi_enable(const struct pci_dev *pdev, uint32_t data,
+-                           uint64_t address, unsigned int nr,
+-                           paddr_t table_base, uint32_t mask)
++static int vpci_msi_enable(const struct pci_dev *pdev, unsigned int nr,
++                           paddr_t table_base)
+ {
+     struct msi_info msi_info = {
+         .seg = pdev->seg,
+@@ -749,7 +754,6 @@ static int vpci_msi_enable(const struct pci_dev *pdev, uint32_t data,
+         .table_base = table_base,
+         .entry_nr = nr,
+     };
+-    unsigned vectors = table_base ? 1 : nr;
+     int rc, pirq = INVALID_PIRQ;
+ 
+     /* Get a PIRQ. */
+@@ -763,18 +767,6 @@ static int vpci_msi_enable(const struct pci_dev *pdev, uint32_t data,
+         return rc;
+     }
+ 
+-    pcidevs_lock();
+-    rc = vpci_msi_update(pdev, data, address, vectors, pirq, mask);
+-    if ( rc )
+-    {
+-        spin_lock(&pdev->domain->event_lock);
+-        unmap_domain_pirq(pdev->domain, pirq);
+-        spin_unlock(&pdev->domain->event_lock);
+-        pcidevs_unlock();
+-        return rc;
+-    }
+-    pcidevs_unlock();
+-
+     return pirq;
+ }
+ 
+@@ -784,25 +776,28 @@ int vpci_msi_arch_enable(struct vpci_msi *msi, const struct pci_dev *pdev,
+     int rc;
+ 
+     ASSERT(msi->arch.pirq == INVALID_PIRQ);
+-    rc = vpci_msi_enable(pdev, msi->data, msi->address, vectors, 0, msi->mask);
+-    if ( rc >= 0 )
+-    {
+-        msi->arch.pirq = rc;
+-        rc = 0;
+-    }
++    rc = vpci_msi_enable(pdev, vectors, 0);
++    if ( rc < 0 )
++        return rc;
++    msi->arch.pirq = rc;
+ 
+-    return rc;
++    pcidevs_lock();
++    msi->arch.bound = !vpci_msi_update(pdev, msi->data, msi->address, vectors,
++                                       msi->arch.pirq, msi->mask);
++    pcidevs_unlock();
++
++    return 0;
+ }
+ 
+ static void vpci_msi_disable(const struct pci_dev *pdev, int pirq,
+-                             unsigned int nr)
++                             unsigned int nr, bool bound)
+ {
+     unsigned int i;
+ 
+     ASSERT(pirq != INVALID_PIRQ);
+ 
+     pcidevs_lock();
+-    for ( i = 0; i < nr; i++ )
++    for ( i = 0; i < nr && bound; i++ )
+     {
+         struct xen_domctl_bind_pt_irq bind = {
+             .machine_irq = pirq + i,
+@@ -822,7 +817,7 @@ static void vpci_msi_disable(const struct pci_dev *pdev, int pirq,
+ 
+ void vpci_msi_arch_disable(struct vpci_msi *msi, const struct pci_dev *pdev)
+ {
+-    vpci_msi_disable(pdev, msi->arch.pirq, msi->vectors);
++    vpci_msi_disable(pdev, msi->arch.pirq, msi->vectors, msi->arch.bound);
+     msi->arch.pirq = INVALID_PIRQ;
+ }
+ 
+@@ -857,14 +852,22 @@ int vpci_msix_arch_enable_entry(struct vpci_msix_entry *entry,
+     int rc;
+ 
+     ASSERT(entry->arch.pirq == INVALID_PIRQ);
+-    rc = vpci_msi_enable(pdev, entry->data, entry->addr,
+-                         vmsix_entry_nr(pdev->vpci->msix, entry),
+-                         table_base, entry->masked);
+-    if ( rc >= 0 )
++    rc = vpci_msi_enable(pdev, vmsix_entry_nr(pdev->vpci->msix, entry),
++                         table_base);
++    if ( rc < 0 )
++        return rc;
++
++    entry->arch.pirq = rc;
++
++    pcidevs_lock();
++    rc = vpci_msi_update(pdev, entry->data, entry->addr, 1, entry->arch.pirq,
++                         entry->masked);
++    if ( rc )
+     {
+-        entry->arch.pirq = rc;
+-        rc = 0;
++        vpci_msi_disable(pdev, entry->arch.pirq, 1, false);
++        entry->arch.pirq = INVALID_PIRQ;
+     }
++    pcidevs_unlock();
+ 
+     return rc;
+ }
+@@ -875,7 +878,7 @@ int vpci_msix_arch_disable_entry(struct vpci_msix_entry *entry,
+     if ( entry->arch.pirq == INVALID_PIRQ )
+         return -ENOENT;
+ 
+-    vpci_msi_disable(pdev, entry->arch.pirq, 1);
++    vpci_msi_disable(pdev, entry->arch.pirq, 1, true);
+     entry->arch.pirq = INVALID_PIRQ;
+ 
+     return 0;
+diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
+index 65db438d24..5757a7aed2 100644
+--- a/xen/drivers/vpci/msi.c
++++ b/xen/drivers/vpci/msi.c
+@@ -85,8 +85,7 @@ static void update_msi(const struct pci_dev *pdev, struct vpci_msi *msi)
+     if ( !msi->enabled )
+         return;
+ 
+-    if ( vpci_msi_arch_update(msi, pdev) )
+-        msi->enabled = false;
++    vpci_msi_arch_update(msi, pdev);
+ }
+ 
+ /* Handlers for the address field (32bit or low part of a 64bit address). */
+diff --git a/xen/include/asm-x86/hvm/io.h b/xen/include/asm-x86/hvm/io.h
+index 9453b9b2b7..3d2e877110 100644
+--- a/xen/include/asm-x86/hvm/io.h
++++ b/xen/include/asm-x86/hvm/io.h
+@@ -130,6 +130,7 @@ static inline void msixtbl_init(struct domain *d) {}
+ /* Arch-specific MSI data for vPCI. */
+ struct vpci_arch_msi {
+     int pirq;
++    bool bound;
+ };
+ 
+ /* Arch-specific MSI-X entry data for vPCI. */
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 5295d4c990..9f5b5d52e1 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -160,8 +160,7 @@ int __must_check vpci_msi_arch_enable(struct vpci_msi *msi,
+                                       const struct pci_dev *pdev,
+                                       unsigned int vectors);
+ void vpci_msi_arch_disable(struct vpci_msi *msi, const struct pci_dev *pdev);
+-int __must_check vpci_msi_arch_update(struct vpci_msi *msi,
+-                                      const struct pci_dev *pdev);
++void vpci_msi_arch_update(struct vpci_msi *msi, const struct pci_dev *pdev);
+ void vpci_msi_arch_init(struct vpci_msi *msi);
+ void vpci_msi_arch_print(const struct vpci_msi *msi);
+ 
+-- 
+2.29.2
 
 
