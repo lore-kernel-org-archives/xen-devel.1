@@ -2,44 +2,44 @@ Return-Path: <SRS0=12TN=G5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79BCFC433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 19:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B704C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 19:03:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 288CD206CC
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 19:03:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 288CD206CC
+	by mail.kernel.org (Postfix) with ESMTPS id 31672206CC
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 19:03:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 31672206CC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.75437.135833 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.75439.135845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4TcX-0004k7-2y; Tue, 26 Jan 2021 19:03:21 +0000
+	id 1l4Tci-0004ne-Bm; Tue, 26 Jan 2021 19:03:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 75437.135833; Tue, 26 Jan 2021 19:03:21 +0000
+Received: by outflank-mailman (output) from mailman id 75439.135845; Tue, 26 Jan 2021 19:03:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4TcW-0004k0-W5; Tue, 26 Jan 2021 19:03:20 +0000
-Received: by outflank-mailman (input) for mailman id 75437;
- Tue, 26 Jan 2021 19:03:19 +0000
+	id 1l4Tci-0004nX-8A; Tue, 26 Jan 2021 19:03:32 +0000
+Received: by outflank-mailman (input) for mailman id 75439;
+ Tue, 26 Jan 2021 19:03:31 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ePBE=G5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1l4TcV-0004ju-PD
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 19:03:19 +0000
+ id 1l4Tch-0004nA-4f
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 19:03:31 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 76416527-7cb8-4742-a0eb-13ec3c2d8573;
- Tue, 26 Jan 2021 19:03:18 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 874F522228;
- Tue, 26 Jan 2021 19:03:17 +0000 (UTC)
+ id b3498e7d-d62f-4a2b-8001-db32feb032b8;
+ Tue, 26 Jan 2021 19:03:30 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 844792228A;
+ Tue, 26 Jan 2021 19:03:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,75 +51,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76416527-7cb8-4742-a0eb-13ec3c2d8573
+X-Inumbo-ID: b3498e7d-d62f-4a2b-8001-db32feb032b8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1611687797;
-	bh=CxdOm18QcjTByBOTXeDr+9j8JHLf6CUwJm+1nREHE5E=;
-	h=Date:From:To:cc:Subject:From;
-	b=QF1rFAJTsdyivFvbzd9fhnlQNj5LCk5C24fOWhe+dVTTc47fvfDQAZNuY6Ju7g2TS
-	 KnddDIlHO5tT6hh1hMqLaktwaUaIow/StJnyVFpAVJ0Py4O9CmdQBi8axvyhXVnWvg
-	 m/IsG04mqGq1EY3gwN3Zrp/bBjZWM0akFpOtay8eBb1J8nFry9vNjLeZKw+WYCg/2O
-	 wYi9y/xC50iWkGxdYe9d61iEqkSa9ExXJjLGX/TUEy7i8qJ6OTXe+bRpeqMQb3Xniu
-	 JXVhv82/HZJLdzUBUecc7+FCwH58JV7glb5pdh5kScNhx21zBrtqd9xq52aUiaJ8Tn
-	 z/iqbLW2T/6/g==
-Date: Tue, 26 Jan 2021 11:03:16 -0800 (PST)
+	s=k20201202; t=1611687809;
+	bh=OELfP2+bx90CE63iMtCmIw1eetKsqCDD4U0PIp0tN6M=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=jLFPSqFfGEX+oiWRGnVUkE0OsNd0JQy4v5E8gQzeEddoutRn8uiJihM/4pOBfyyNy
+	 KKbBpAgsV8tYt5Yu4K3yYXN3tOh8LwaHvdwoL8siViai81FHXnyJSRpifrzdFt78DK
+	 y61KwYulIUaVh+UtRtHOWl1gUzUal2WRa5AHD0Ube9tF224IYorZxdAaPmsq0OML+Q
+	 scvA08AQnI2hZ/u+hQrTJkIRn8KbrCrurjEKxRY09y8gih6AyR0dLBnjQ91YzEtYIB
+	 5TtalElLmx7oYiDh705MEbyNCvMTUHBDvPJJuj/SE+hLCDUNv9Pgj+SC15e//MYl7V
+	 /aXECGAeYym+Q==
 From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: xen-devel@lists.xenproject.org
-cc: sstabellini@kernel.org, andrew.cooper3@citrix.com, 
-    george.dunlap@citrix.com, iwj@xenproject.org, jbeulich@suse.com, 
-    julien@xen.org, wl@xen.org
-Subject: [PATCH v5 0/2] introduce UNSUPPORTED
-Message-ID: <alpine.DEB.2.21.2101261042030.20638@sstabellini-ThinkPad-T480s>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Cc: sstabellini@kernel.org,
+	andrew.cooper3@citrix.com,
+	george.dunlap@citrix.com,
+	iwj@xenproject.org,
+	jbeulich@suse.com,
+	julien@xen.org,
+	wl@xen.org,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH v5 2/2] xen: add (EXPERT) to one-line description of XEN_SHSTK
+Date: Tue, 26 Jan 2021 11:03:28 -0800
+Message-Id: <20210126190328.2461-2-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <alpine.DEB.2.21.2101261042030.20638@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2101261042030.20638@sstabellini-ThinkPad-T480s>
 
-Hi all,
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-A recent thread [1] has exposed a couple of issues with our current way
-of handling EXPERT.
+Add an "(EXPERT)" tag to the one-line description of Kconfig options
+that depend on EXPERT. (Not where just the prompt depends on EXPERT.)
 
-1) It is not obvious that "Configure standard Xen features (expert
-users)" is actually the famous EXPERT we keep talking about on xen-devel
+Today we only have one such option: XEN_SHSTK.
 
-2) It is not obvious when we need to enable EXPERT to get a specific
-feature
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+CC: andrew.cooper3@citrix.com
+CC: george.dunlap@citrix.com
+CC: iwj@xenproject.org
+CC: jbeulich@suse.com
+CC: julien@xen.org
+CC: wl@xen.org
 
-In particular if you want to enable ACPI support so that you can boot
-Xen on an ACPI platform, you have to enable EXPERT first. But searching
-through the kconfig menu it is really not clear (type '/' and "ACPI"):
-nothing in the description tells you that you need to enable EXPERT to
-get the option.
+---
+Changes in v5:
+- actually, only change one-line description of options that depends on
+  EXPERT (and not just the prompt)
 
-This series makes things easier by doing the following:
+Changes in v4:
+- new patch
+---
+ xen/arch/x86/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-- introduce a new kconfig option UNSUPPORTED which is clearly to enable
-  UNSUPPORTED features as defined by SUPPORT.md
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 302334d3e4..3f630b89e8 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -103,7 +103,7 @@ config HVM
+ 	  If unsure, say Y.
+ 
+ config XEN_SHSTK
+-	bool "Supervisor Shadow Stacks"
++	bool "Supervisor Shadow Stacks (EXPERT)"
+ 	depends on HAS_AS_CET_SS && EXPERT
+ 	default y
+ 	---help---
+-- 
+2.17.1
 
-- change EXPERT options to UNSUPPORTED where it makes sense: keep
-  depending on EXPERT for features made for experts
-
-- tag unsupported features by adding (UNSUPPORTED) to the one-line
-  description
-
-- clarify the EXPERT one-line description
-
-[1] https://marc.info/?l=xen-devel&m=160333101228981
-
-Cheers,
-
-Stefano
-
-
-Stefano Stabellini (2):
-      xen: EXPERT clean-up and introduce UNSUPPORTED
-      xen: add (EXPERT) to one-line description of XEN_SHSTK
-
- xen/Kconfig              | 11 ++++++++++-
- xen/arch/arm/Kconfig     |  6 +++---
- xen/arch/x86/Kconfig     |  8 ++++----
- xen/common/Kconfig       |  2 +-
- xen/common/sched/Kconfig |  6 +++---
- 5 files changed, 21 insertions(+), 12 deletions(-)
 
