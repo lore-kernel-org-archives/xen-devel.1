@@ -2,43 +2,76 @@ Return-Path: <SRS0=12TN=G5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B1CEC433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 10:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C860C4332B
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:06:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 771C22072E
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 10:59:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 771C22072E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=unikie.com
+	by mail.kernel.org (Postfix) with ESMTPS id CE58723104
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Jan 2021 11:06:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE58723104
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.74829.134523 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.74834.134535 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4M4H-0008TN-37; Tue, 26 Jan 2021 10:59:29 +0000
+	id 1l4MB5-0000yp-RY; Tue, 26 Jan 2021 11:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 74829.134523; Tue, 26 Jan 2021 10:59:29 +0000
+Received: by outflank-mailman (output) from mailman id 74834.134535; Tue, 26 Jan 2021 11:06:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4M4G-0008TG-VO; Tue, 26 Jan 2021 10:59:28 +0000
-Received: by outflank-mailman (input) for mailman id 74829;
- Tue, 26 Jan 2021 10:59:27 +0000
+	id 1l4MB5-0000yi-Nw; Tue, 26 Jan 2021 11:06:31 +0000
+Received: by outflank-mailman (input) for mailman id 74834;
+ Tue, 26 Jan 2021 11:06:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=vBst=G5=unikie.com=jukka.kaartinen@srs-us1.protection.inumbo.net>)
- id 1l4M4F-0008TB-Ku
- for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 10:59:27 +0000
-Received: from mail-lf1-x130.google.com (unknown [2a00:1450:4864:20::130])
+ <SRS0=55K9=G5=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
+ id 1l4MB4-0000yc-1b
+ for xen-devel@lists.xenproject.org; Tue, 26 Jan 2021 11:06:30 +0000
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com (unknown
+ [2a01:111:f400:fe02::60b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id db100cdb-27e2-4b69-a63d-ee338385c8a6;
- Tue, 26 Jan 2021 10:59:25 +0000 (UTC)
-Received: by mail-lf1-x130.google.com with SMTP id f1so12320116lfu.3
- for <xen-devel@lists.xenproject.org>; Tue, 26 Jan 2021 02:59:25 -0800 (PST)
+ id add1ce59-b34a-46f0-8f3b-43f7663d9533;
+ Tue, 26 Jan 2021 11:06:27 +0000 (UTC)
+Received: from AM6PR01CA0051.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:e0::28) by PA4PR08MB6046.eurprd08.prod.outlook.com
+ (2603:10a6:102:e4::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12; Tue, 26 Jan
+ 2021 11:06:25 +0000
+Received: from VE1EUR03FT030.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:e0:cafe::7b) by AM6PR01CA0051.outlook.office365.com
+ (2603:10a6:20b:e0::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.12 via Frontend
+ Transport; Tue, 26 Jan 2021 11:06:25 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT030.mail.protection.outlook.com (10.152.18.66) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3784.11 via Frontend Transport; Tue, 26 Jan 2021 11:06:25 +0000
+Received: ("Tessian outbound f362b81824dc:v71");
+ Tue, 26 Jan 2021 11:06:24 +0000
+Received: from a5e0a98c03aa.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 18E528B1-DAF4-4301-ACC3-9C5F0029F34A.1; 
+ Tue, 26 Jan 2021 11:06:19 +0000
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id a5e0a98c03aa.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Tue, 26 Jan 2021 11:06:19 +0000
+Received: from VE1PR08MB5696.eurprd08.prod.outlook.com (2603:10a6:800:1ae::15)
+ by VI1PR08MB5423.eurprd08.prod.outlook.com (2603:10a6:803:133::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.13; Tue, 26 Jan
+ 2021 11:06:17 +0000
+Received: from VE1PR08MB5696.eurprd08.prod.outlook.com
+ ([fe80::c8bf:1301:3373:94a6]) by VE1PR08MB5696.eurprd08.prod.outlook.com
+ ([fe80::c8bf:1301:3373:94a6%5]) with mapi id 15.20.3784.017; Tue, 26 Jan 2021
+ 11:06:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,424 +83,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db100cdb-27e2-4b69-a63d-ee338385c8a6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=unikie-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=sM94mqou9OkavdC0AULJ1iDAtSyysyfccNSDPc+6l4I=;
-        b=tzgw8+QupsuKZrquuUPlTJRG29GuRKzsEjU70zN2OmrCkJY9tZ60AN/+Hl1YUhGn/b
-         25faoY3+DHVEgOl4bjGevLsBsDZNaj3q0J7zdLlf8XVJ8bsRJqQwuUIcnP5WXphuFzj2
-         DceKRYG+OZvEEutSEZ0pKhGo8PCjwGaQermZtFjHyzOh2Q0FdCTyKu+hZX77iNx2p+49
-         582CA5tDwtjoxvzmzx2o9ZN3OpVGywbv0kBbTuVPoT8foBsVKm26V/rpSslw5+ZXSkx1
-         MckQdDd/8PQiAuXew0PAzsTOsepEyWwb+8Z5zumnFM9u/K1tEF2r1C4P/Vj3/PJ2QgT+
-         E+Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=sM94mqou9OkavdC0AULJ1iDAtSyysyfccNSDPc+6l4I=;
-        b=KDSdL+5nTO97DWkeFfijUSReGdutyjAxhYoV/1IzP0HvURDdREBpeq9QrDeHvG0b3k
-         wcK4mNyxAVQ0UE8+/AY4hY3zGQGCc1lJ1RfnsUUqBIud0m4dhopxUfiEbXaythEm7EDS
-         UdV0diJVB4x+uySplkmzyglhheN+JAOTDVY0hyT8RmpMA2M3fXtPSRok7vBTxRqyrH7H
-         X07JohuOsA0J7pzseCD99QoZap4hp+xKfSYWiSyNrrM1bAbTWAu29PdV43ec520M9Blj
-         3hIlGodDl/xC7wGzfkjZgIjNptyumbcFn5qToLhFn0iSgbdNI1PicKCTwPv1FQal9qy4
-         73DQ==
-X-Gm-Message-State: AOAM5326YQ47+xEjDsF9vajQOPlzPzA2fZZ9zsGOpUGIp3m7gGGMLrK5
-	Kh1TXO4DpCxIkwxLcOYoo4S6WN7QZDc4HLhffrU4YQ==
-X-Google-Smtp-Source: ABdhPJyOBFGbC+I2Gecd/Uix7cGFZ0SDAUZ7pf15E+SnscnxwjTnnWw2nQUfDrG5XuoMhnP5b7NwWKE6I5irvZwtS/c=
-X-Received: by 2002:ac2:4acc:: with SMTP id m12mr2628421lfp.537.1611658764422;
- Tue, 26 Jan 2021 02:59:24 -0800 (PST)
+X-Inumbo-ID: add1ce59-b34a-46f0-8f3b-43f7663d9533
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1MPQXDASd9pvLvWQ9AvBmvIXbuqMuS+G7+m13q15wK4=;
+ b=XoONI0MFcb9E/ViygCaZrXiKupNDGjS4vU4GrYEiCfkWgUAE43fYhW9bZf9PWGxpBSbVtl06qp65hDwNg8xEq5C8e9AcRhj17n4lw4DCAuaDvtQBceOpmSGBT0jGn8ntMModOaEi81HIEm1QerNWJcHSEm2lLo1Y7gy0+MdJ7ck=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
+ action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 64495a000aa77a2f
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZWhwQNVUeqgPWSjdUIfQPpRIdifeGYNDbYfr6fAD9AqvgzTanGWuTzRerVmW/rSpdDHStpKGFNWB+4B6nsNs5ISmbm68SFtXjCha99C+/zlktfdcysSjLnGAGkmg+aWb24CxCr96vmNzcstZKp7ZbDO1MfGmLd1oPpdjQaTHAHsSQyfl6Eer7ttBQFe7jo3QUR4fqH8EHHm2Yby9H0KzNIc60c9mk2TmnGj3tCBUmG7VeZyU/dPOnNJ+IntHQENaFhxL+N1vakTjSbCffeVqTYb8TYMYLmiQlxpVjt2ZxagwVcq6WjReykpeC2bY/JTswpsCvrEo2tZa31X9EdUyMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1MPQXDASd9pvLvWQ9AvBmvIXbuqMuS+G7+m13q15wK4=;
+ b=h6Mzg08Oq8aFd/Ea9TpIpkVf4dxgKm9/v39gyApGpfa8kWdyKfa4fAR2m4LW4iI5yPLyN7ObBRo3fUgCLW1ILhw3wyn3UQKvkLD3NaSlrI1BAnvbecsPTzvH04H2ETP3x08Kalc9Bm8FdIWvATiKr2UEnsR/KHYlIGquru9/6VNN9kMlWnVmbSf6tn70StU88CXxB1ZynYF1SBr0FottYj2eBwWvMElMQYDv1whQpW1TxxBSbuVvBLu1r1M9T9bckrOSMfV9wO9pAHVCMLLToSHc4K5xoKaQwHIijSs0qiSlyTuwXnHAPG/XKPNItFkcD7r3OmIKw7vWAM/6ydQeRQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1MPQXDASd9pvLvWQ9AvBmvIXbuqMuS+G7+m13q15wK4=;
+ b=XoONI0MFcb9E/ViygCaZrXiKupNDGjS4vU4GrYEiCfkWgUAE43fYhW9bZf9PWGxpBSbVtl06qp65hDwNg8xEq5C8e9AcRhj17n4lw4DCAuaDvtQBceOpmSGBT0jGn8ntMModOaEi81HIEm1QerNWJcHSEm2lLo1Y7gy0+MdJ7ck=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Stefano Stabellini
+	<stefano.stabellini@xilinx.com>, "andrew.cooper3@citrix.com"
+	<andrew.cooper3@citrix.com>, "george.dunlap@citrix.com"
+	<george.dunlap@citrix.com>, "iwj@xenproject.org" <iwj@xenproject.org>,
+	"julien@xen.org" <julien@xen.org>, "wl@xen.org" <wl@xen.org>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v4 1/2] xen: EXPERT clean-up and introduce UNSUPPORTED
+Thread-Topic: [PATCH v4 1/2] xen: EXPERT clean-up and introduce UNSUPPORTED
+Thread-Index: AQHW82EN9R2ynrmbqk6EAVX0Oyalkao5otWAgAAc8QA=
+Date: Tue, 26 Jan 2021 11:06:17 +0000
+Message-ID: <8F34AC6E-2337-42C3-B612-A5414F9E16BE@arm.com>
+References: <alpine.DEB.2.21.2101251321420.20638@sstabellini-ThinkPad-T480s>
+ <20210125212747.26676-1-sstabellini@kernel.org>
+ <bbdbb0d2-24d7-4e46-1303-706c6c3036c3@suse.com>
+In-Reply-To: <bbdbb0d2-24d7-4e46-1303-706c6c3036c3@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3608.120.23.2.4)
+Authentication-Results-Original: suse.com; dkim=none (message not signed)
+ header.d=none;suse.com; dmarc=none action=none header.from=arm.com;
+x-originating-ip: [86.26.33.241]
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 436df05f-e3c2-484c-7d18-08d8c1ea6c37
+x-ms-traffictypediagnostic: VI1PR08MB5423:|PA4PR08MB6046:
+X-Microsoft-Antispam-PRVS:
+	<PA4PR08MB6046F5A76C54D2BD4538E4159DBC0@PA4PR08MB6046.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:9508;OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ Zsn27aJHV+oS9Z+teRkUuRwowXTBP0gtjT1JlfcRZ+VVOxxu4khIIanANwL4OM3+PNDSn0Z1enHznbKHEqJQ7Uvjf94av6BBm0w2diTJf5gRRZ0H46mLteBHkXjqE5GvAuojhluZ3sDlSmv437ngQbmXMnqjA5izPTMs6W19kCMZIpoXU10hHMVmfHBX86LQAcu3HcEa6IjrnjUTqxTtMh8CSzl1MpYdMHcMKyK+ZkIg2Va4AApSszBePMyWCBvxE8p1cPFfq2D8agKLyj0E8Yy81FqcB6k5LN5bjHf0uy7UStMomJbwW01j5JiA/nvxf5pshX0Wr3wwofpZXMVd1AT5JfjE0HY/EA2XdcWBlHGw0Euo8HZQ5DjcIpKEecmZd6b8SmcoCrQsuXespB/lw7qvLV36+vYwsThzigB7U270A5zolvqtMq66aVeWB/TzIPq2WtccyTdFaskZfl7Tccez1jgW1ymxVFKwTTyi2DzRijuiOYqHABcSz6d+AiGmdeAVx3//AeYoCvEJokOW+6yj0tUQ8PTwJcj54JqLopM=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR08MB5696.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(376002)(346002)(366004)(396003)(136003)(966005)(186003)(26005)(33656002)(55236004)(6916009)(83380400001)(6506007)(8936002)(36756003)(316002)(66476007)(5660300002)(66556008)(66446008)(91956017)(54906003)(66946007)(76116006)(4326008)(8676002)(64756008)(71200400001)(53546011)(478600001)(86362001)(6486002)(2906002)(2616005)(6512007)(45980500001)(6606295002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata:
+ =?utf-8?B?NmVSNEF0Qkh6dk55akZzTTJXclBvTFRmOTlocmQyazFJZHk4RkJMd3lkVjFx?=
+ =?utf-8?B?T0NaOXRNT2UzWlpwYjlqMS9VeTd6azNrT2VVUjJWV251ekdkLzUyVDE5ZUc1?=
+ =?utf-8?B?S0dPWUZSL2NpTldwajMyMlQ0d01NUjJyc1ZsTHY1d0pJMkpYMFFoZmZLb0hV?=
+ =?utf-8?B?c01hMGkzVzV6SGNkTENnSmsvNjd4SXAweWhjMUJ1MDdtUU9hZmZkOHNXUU4v?=
+ =?utf-8?B?M3dXWWVkeDBOR0JxRExQeEZKeGI0c3R6TjZ5c3NEWHJjTkZCTUkwMXp0V2JO?=
+ =?utf-8?B?ME5nRVlBOFNOdUlGMlBQdUN5cUdRWjlvZklWUEVZWDNlMHBVSlZQR1NNYjlR?=
+ =?utf-8?B?MGc3bU9xSnhKeExLeFFlK2sxVGZTRC9Yc21tRGFIbGJhS0ZZNVJWaUlrYW9U?=
+ =?utf-8?B?YTBoUVVIQklxMFN5YU1vSENONmJnNEx0TVdFbW9BbWdoc2oxT0ZmYTh6MGV5?=
+ =?utf-8?B?di9DMHR6TGtWVFpsR1hFTXkwZUxSSzJxRFhxWThQK1Ezd2swWEpYWEx2clRX?=
+ =?utf-8?B?ekc4dStwMEVDeE9PdkN1OVlqYms5aThRRlBtOUNDak5rTXQxekxOajNLRm5a?=
+ =?utf-8?B?NVhlM2Z1QnVKYVFKYlNzUmR4ZmJBUGNpZjMvUHpWcFhKSDNWTW5BcTYvZHls?=
+ =?utf-8?B?VXhNT0ZGT2cwc1p0NzRnTmNzNENqZTRSTXpISGk0NW5WdFZYU1JYVEV0Mmhi?=
+ =?utf-8?B?UFpOT1RHK0N0ckdPQnl2cjVFa2VqWElubTRrWkxOK1hucUoxUEpDZWtaa00v?=
+ =?utf-8?B?Q2RGWFovMDBFa1lJdDNsRjMxTHJJY2pncU1LaVNkMlJPR1p6SXEzSk9nSVo5?=
+ =?utf-8?B?TmZxY1grdXU0MERmOTBucHNCM3d6OWVMcGF6NlVPclF3RlVWcU9Ia3o5dTdS?=
+ =?utf-8?B?RnE0b0VtMHdoMnl2M0pSdlRhL1JtWWN2a1JKN1dQTkhIZjRrYU5rS1JrVSty?=
+ =?utf-8?B?RlZJQmpjVEx6eUFVVGo2bXpZdjlybVpRUitwRFlSZ2xjSXQ3OGltM2l5blJJ?=
+ =?utf-8?B?anl6T2phc0hwOEQrQU1WNU9HejlPQjd0dXFBTHhDZlZpamJiUnI1d1AyQlpI?=
+ =?utf-8?B?Yk9CdXNtcTEyU2xLdFJYQVJ1WXZHckZFOHB5clUwc2tlMnJqYjRXOGNRMFNZ?=
+ =?utf-8?B?TzB0bGdIUmZjelZoRHYxbFRRZEh3dmRjTkhaSDFNczJ2WXZReTVvRHRiaHcz?=
+ =?utf-8?B?TkJCUkxZRmQrVGdCclBlRFBhc1Mxd2h6ZXBQUXNuWUxzV3JVOEZUWktwcWhY?=
+ =?utf-8?B?dDhkb09rUmtpbXNrN0Rvd0lFaE9LR1hadGkzTEJCeEkvZ204bVdmb09DUnk2?=
+ =?utf-8?B?ZjBKQlIrMWljbml5Q2l2ZkFwRjl5ZWRSKzI4bGpjV3NJVXFnZGdYaUYzRHp4?=
+ =?utf-8?B?MmVVODB0VTZVUzcyWmRPTzFSTGQxWFlISGxzNkdKS1oxQnN6YWZMejdWcUF0?=
+ =?utf-8?Q?7u7Sa/Q0?=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <26FD6B576166044F91FB3DCB37D86ADD@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <CAFnJQOouOUox_kBB66sfSuriUiUSvmhSjPxucJjgrB9DdLOwkg@mail.gmail.com>
- <alpine.DEB.2.21.2101221449480.14612@sstabellini-ThinkPad-T480s>
- <CAFnJQOqoqj6mWwR61ZsZj1JxRrdisFtH_87YXCeW619GM+L21Q@mail.gmail.com> <alpine.DEB.2.21.2101251646470.20638@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2101251646470.20638@sstabellini-ThinkPad-T480s>
-From: Jukka Kaartinen <jukka.kaartinen@unikie.com>
-Date: Tue, 26 Jan 2021 12:59:13 +0200
-Message-ID: <CAFnJQOpuehAWde5Ta4ud9CGufwZ-K+=60epzSdKc_DnS75O2iA@mail.gmail.com>
-Subject: Re: Question about xen and Rasp 4B
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Roman Shaposhnik <roman@zededa.com>, 
-	Julien Grall <julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>
-Content-Type: multipart/alternative; boundary="0000000000002726d505b9cb8cd2"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB5423
+Original-Authentication-Results: suse.com; dkim=none (message not signed)
+ header.d=none;suse.com; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ VE1EUR03FT030.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	e66d61af-1fe3-48db-abda-08d8c1ea6795
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	wW4qRkeQhGRWG+w9TFwyexMRc9jc6jWe5oVi4Tqq4VJ/+YoITUN+BX4eUJWH0pOCs52K0fCoF3/5y/oWTzwGYuabke+yqRV3ptS/4B1DDKntM6z0fsVZTbV7pka/kxc4LK13U6WwIQEneMXSkkg767p32D2CqM5gYQWdlY0oA9EkuUUlcBm68fKk4kVTjIPTx+jbrFxEFMtNimU6FtfF57KLODH4qqgEDaI+m0N4r0O4v09eRmLT5adF5qIjOu/mnKhLgm+RUHdE8LXgQ3oworbuH+okVu7nlaf89U+rcuah2EueY47K0r1CUqOaPCVO2sUqeRHoZjs11N6jji7igX7t8LlPNa+X7wy4e/j0zDqVU0z70y90+010JgrzrMh7AIGJetK34zrsO32/Ebj+7TZH+7y3FoOzziXGA1aiv514KbtWOEE3MUcOzXavyN1lBZ206rFFeYCZ5lG6z0bRdIADpRaACXUU20IKpZi2ZRrd459OFCTiCU5D1hQQmBG/SEWNxfM4yKFNkjiMwPYPSvvMUIIQ0rf5de11duMWgiHR3hQpVgslm3LidJvR+gB5jr97m24EfmxluZEc84SKExZ0rkh4c4vzPI4EWIaA71RslKISqHOis4JGSdJpSNsG5NQwxoHx8r7VMOXoxaNpxXDtBtIdvn6JBDUpOzt40IJpIzCaJBtkMgjnFw8ZuEf45XqtvMwMd66FqLiocAAAHQ==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(376002)(346002)(396003)(136003)(39860400002)(46966006)(83380400001)(54906003)(70586007)(6486002)(2616005)(966005)(8936002)(6512007)(8676002)(82740400003)(81166007)(5660300002)(356005)(53546011)(6506007)(36756003)(4326008)(55236004)(186003)(82310400003)(26005)(6862004)(47076005)(86362001)(336012)(478600001)(70206006)(33656002)(316002)(2906002)(6606295002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2021 11:06:25.3239
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 436df05f-e3c2-484c-7d18-08d8c1ea6c37
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	VE1EUR03FT030.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6046
 
---0000000000002726d505b9cb8cd2
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Jan 26, 2021 at 2:54 AM Stefano Stabellini <sstabellini@kernel.org>
-wrote:
-
-> On Sat, 23 Jan 2021, Jukka Kaartinen wrote:
-> > Thanks for the response!
-> >
-> > On Sat, Jan 23, 2021 at 2:27 AM Stefano Stabellini <
-> sstabellini@kernel.org> wrote:
-> >       + xen-devel, Roman,
-> >
-> >
-> >       On Fri, 22 Jan 2021, Jukka Kaartinen wrote:
-> >       > Hi Stefano,
-> >       > I'm Jukka Kaartinen a SW developer working on enabling
-> hypervisors on mobile platforms. One of our HW that we use on
-> >       development is
-> >       > Raspberry Pi 4B. I wonder if you could help me a bit :).
-> >       >
-> >       > I'm trying to enable the GPU with Xen + Raspberry Pi for
-> >       dom0.
-> https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=232323#p1797605
-> >       >
-> >       > I got so far that GPU drivers are loaded (v3d & vc4) without
-> errors. But now Xen returns error when X is starting:
-> >       > (XEN) traps.c:1986:d0v1 HSR=0x93880045 pc=0x00007f97b14e70
-> gva=0x7f7f817000 gpa=0x0000401315d000
-> >       >  I tried to debug what causes this and looks
-> like find_mmio_handler cannot find handler.
-> >       > (See more here:
-> https://www.raspberrypi.org/forums/viewtopic.php?f=63&t=232323&start=25#p1801691
-> )
-> >       >
-> >       > Any ideas why the handler is not found?
-> >
-> >
-> >       Hi Jukka,
-> >
-> >       I am glad to hear that you are interested in Xen on RaspberryPi
-> :-)  I
-> >       haven't tried the GPU yet, I have been using the serial only.
-> >       Roman, did you ever get the GPU working?
-> >
-> >
-> >       The error is a data abort error: Linux is trying to access an
-> address
-> >       which is not mapped to dom0. The address seems to be 0x401315d000.
-> It is
-> >       a pretty high address; I looked in device tree but couldn't spot
-> it.
-> >
-> >       >From the HSR (the syndrom register) it looks like it is a
-> translation
-> >       fault at EL1 on stage1. As if the Linux address mapping was wrong.
-> >       Anyone has any ideas how this could happen? Maybe a reserved-memory
-> >       misconfiguration?
-> >
-> > I had issues with loading the driver in the first place. Apparently
-> swiotlb is used, maybe it can cause this. I also tried to enable CMA.
-> > config.txt:
-> > dtoverlay=vc4-fkms-v3d,cma=320M@0x0-0x40000000
-> > gpu_mem=128
->
-> Also looking at your other reply and the implementation of
-> vc4_bo_create, it looks like this is a CMA problem.
->
-> It would be good to run a test with the swiotlb-xen disabled:
->
-> diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
-> index 467fa225c3d0..2bdd12785d14 100644
-> --- a/arch/arm/xen/mm.c
-> +++ b/arch/arm/xen/mm.c
-> @@ -138,8 +138,7 @@ void xen_destroy_contiguous_region(phys_addr_t pstart,
-> unsigned int order)
->  static int __init xen_mm_init(void)
->  {
->         struct gnttab_cache_flush cflush;
-> -       if (!xen_initial_domain())
-> -               return 0;
-> +       return 0;
->         xen_swiotlb_init(1, false);
->
->         cflush.op = 0;
->
-With this change the kernel is not booting up. (btw. I'm using USB SSD for
-my OS.)
-[    0.071081] bcm2835-dma fe007000.dma: Unable to set DMA mask
-[    0.076277] bcm2835-dma fe007b00.dma: Unable to set DMA mask
-(XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=25: not implemented
-(XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=15: not implemented
-[    0.592695] pci 0000:00:00.0: Failed to add - passthrough or MSI/MSI-X
-might fail!
-(XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=15: not implemented
-[    0.606819] pci 0000:01:00.0: Failed to add - passthrough or MSI/MSI-X
-might fail!
-[    1.212820] usb 1-1: device descriptor read/64, error 18
-[    1.452815] usb 1-1: device descriptor read/64, error 18
-[    1.820813] usb 1-1: device descriptor read/64, error 18
-[    2.060815] usb 1-1: device descriptor read/64, error 18
-[    2.845548] usb 1-1: device descriptor read/8, error -61
-[    2.977603] usb 1-1: device descriptor read/8, error -61
-[    3.237530] usb 1-1: device descriptor read/8, error -61
-[    3.369585] usb 1-1: device descriptor read/8, error -61
-[    3.480765] usb usb1-port1: unable to enumerate USB device
-
-Traces stop here. I could try with a memory card. Maybe it makes a
-difference.
-
-
->
-> It is going to be fine just to boot Dom0 and DomUs without PV drivers.
-> Also, can you post the device tree that you are using here? Just in case
-> there is an issue with Xen parsing any possible /reserved-memory nodes
-> with CMA info that need to be passed on to Dom0.
-
-Here is the device dumped from command line:
-dtc -I fs /proc/device-tree
-https://drive.google.com/file/d/17u18dJHxRfbGZMtRXIwtLVZZfMj9KwN-/view?usp=sharing
-
-
->
->
-> >       > p.s.
-> >       > While testing I found issue with Xen master branch and your
-> patch: xen/rpi4: implement watchdog-based reset
-> >       >
-> >       > Looks like black listing the bcm2835-pm
-> >       > @@ -37,12 +41,69 @@ static const struct dt_device_match
-> rpi4_blacklist_dev[] __initconst =
-> >       >       * The aux peripheral also shares a page with the aux UART.
-> >       >       */
-> >       >      DT_MATCH_COMPATIBLE("brcm,bcm2835-aux"),
-> >       > +    /* Special device used for rebooting */
-> >       > +    DT_MATCH_COMPATIBLE("brcm,bcm2835-pm"),
-> >       >
-> >       > will prevent v3d driver to locate phandle. I think it will use
-> the same resource:
-> >       >   pm: watchdog@7e100000 {
-> >       >       compatible = "brcm,bcm2835-pm", "brcm,bcm2835-pm-wdt";
-> >       > #power-domain-cells = <1>;
-> >       > #reset-cells = <1>;
-> >       > reg = <0x7e100000 0x114>,
-> >       >      <0x7e00a000 0x24>,
-> >       >      <0x7ec11000 0x20>;
-> >       > clocks = <&clocks BCM2835_CLOCK_V3D>,
-> >       > <&clocks BCM2835_CLOCK_PERI_IMAGE>,
-> >       > <&clocks BCM2835_CLOCK_H264>,
-> >       > <&clocks BCM2835_CLOCK_ISP>;
-> >       > clock-names = "v3d", "peri_image", "h264", "isp";
-> >       > system-power-controller;
-> >       >
-> >       > };
-> >
-> >       Yeah, I imagine it could be possible. Can you post the error
-> message you
-> >       are seeing from the v3d driver?
-> >
-> > This is the error:
-> > [    0.069682] OF: /v3dbus/v3d@7ec04000: could not find phandle
-> > [    0.074828] OF: /v3dbus/v3d@7ec04000: could not find phandle
-> > v3d driver is not loaded.
-> >
-> > --
-> > Br,
-> > Jukka Kaartinen
-> >
-> >
-
-
-
--- 
-Br,
-Jukka Kaartinen
-
---0000000000002726d505b9cb8cd2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 26, 2021 at 2:54 AM Stefa=
-no Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" target=3D"_blan=
-k">sstabellini@kernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
-4,204);padding-left:1ex">On Sat, 23 Jan 2021, Jukka Kaartinen wrote:<br>
-&gt; Thanks for the response!<br>
-&gt; <br>
-&gt; On Sat, Jan 23, 2021 at 2:27 AM Stefano Stabellini &lt;<a href=3D"mail=
-to:sstabellini@kernel.org" target=3D"_blank">sstabellini@kernel.org</a>&gt;=
- wrote:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0+ xen-devel, Roman,<br>
-&gt; <br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0On Fri, 22 Jan 2021, Jukka Kaartinen wrote:<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Hi Stefano,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; I&#39;m Jukka=C2=A0Kaartinen a SW devel=
-oper working on enabling hypervisors on mobile platforms. One of our HW tha=
-t we use on<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0development is<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Raspberry Pi 4B. I wonder if you could =
-help me a bit :).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; I&#39;m trying to enable the GPU with X=
-en=C2=A0+ Raspberry Pi for<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0dom0.=C2=A0<a href=3D"https://www.raspberryp=
-i.org/forums/viewtopic.php?f=3D63&amp;t=3D232323#p1797605" rel=3D"noreferre=
-r" target=3D"_blank">https://www.raspberrypi.org/forums/viewtopic.php?f=3D6=
-3&amp;t=3D232323#p1797605</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; I got so far that GPU drivers are loade=
-d (v3d &amp; vc4) without errors. But now Xen returns error=C2=A0when X is =
-starting:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; (XEN) traps.c:1986:d0v1 HSR=3D0x9388004=
-5 pc=3D0x00007f97b14e70 gva=3D0x7f7f817000 gpa=3D0x0000401315d000<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0I tried to debug what causes this=
- and looks like=C2=A0find_mmio_handler=C2=A0cannot find handler.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; (See more here: <a href=3D"https://www.=
-raspberrypi.org/forums/viewtopic.php?f=3D63&amp;t=3D232323&amp;start=3D25#p=
-1801691" rel=3D"noreferrer" target=3D"_blank">https://www.raspberrypi.org/f=
-orums/viewtopic.php?f=3D63&amp;t=3D232323&amp;start=3D25#p1801691</a> )<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Any ideas why the handler is not found?=
-<br>
-&gt; <br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Hi Jukka,<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0I am glad to hear that you are interested in=
- Xen on RaspberryPi :-)=C2=A0 I<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0haven&#39;t tried the GPU yet, I have been u=
-sing the serial only.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Roman, did you ever get the GPU working?<br>
-&gt; <br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0The error is a data abort error: Linux is tr=
-ying to access an address<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0which is not mapped to dom0. The address see=
-ms to be 0x401315d000. It is<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0a pretty high address; I looked in device tr=
-ee but couldn&#39;t spot it.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;From the HSR (the syndrom register) it l=
-ooks like it is a translation<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0fault at EL1 on stage1. As if the Linux addr=
-ess mapping was wrong.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Anyone has any ideas how this could happen? =
-Maybe a reserved-memory<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0misconfiguration?<br>
-&gt; <br>
-&gt; I had issues=C2=A0with loading the driver in the first place. Apparent=
-ly swiotlb is used, maybe it=C2=A0can cause this. I also tried to enable CM=
-A.<br>
-&gt; config.txt:<br>
-&gt; dtoverlay=3Dvc4-fkms-v3d,cma=3D320M@0x0-0x40000000<br>
-&gt; gpu_mem=3D128<br>
-<br>
-Also looking at your other reply and the implementation of<br>
-vc4_bo_create, it looks like this is a CMA problem.<br>
-<br>
-It would be good to run a test with the swiotlb-xen disabled:<br>
-<br>
-diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c<br>
-index 467fa225c3d0..2bdd12785d14 100644<br>
---- a/arch/arm/xen/mm.c<br>
-+++ b/arch/arm/xen/mm.c<br>
-@@ -138,8 +138,7 @@ void xen_destroy_contiguous_region(phys_addr_t pstart, =
-unsigned int order)<br>
-=C2=A0static int __init xen_mm_init(void)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 struct gnttab_cache_flush cflush;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0if (!xen_initial_domain())<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return 0;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 xen_swiotlb_init(1, false);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 cflush.op =3D 0;<br></blockquote><div>With this=
- change the kernel is not booting up. (btw. I&#39;m using USB SSD for my OS=
-.)</div><div>[ =C2=A0 =C2=A00.071081] bcm2835-dma fe007000.dma: Unable to s=
-et DMA mask<br>[ =C2=A0 =C2=A00.076277] bcm2835-dma fe007b00.dma: Unable to=
- set DMA mask<br>(XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=3D25: not implemente=
-d<br>(XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=3D15: not implemented<br>[ =C2=
-=A0 =C2=A00.592695] pci 0000:00:00.0: Failed to add - passthrough or MSI/MS=
-I-X might fail!<br>(XEN) physdev.c:16:d0v0 PHYSDEVOP cmd=3D15: not implemen=
-ted<br>[ =C2=A0 =C2=A00.606819] pci 0000:01:00.0: Failed to add - passthrou=
-gh or MSI/MSI-X might fail!<br>[ =C2=A0 =C2=A01.212820] usb 1-1: device des=
-criptor read/64, error 18<br>[ =C2=A0 =C2=A01.452815] usb 1-1: device descr=
-iptor read/64, error 18<br>[ =C2=A0 =C2=A01.820813] usb 1-1: device descrip=
-tor read/64, error 18<br>[ =C2=A0 =C2=A02.060815] usb 1-1: device descripto=
-r read/64, error 18<br>[ =C2=A0 =C2=A02.845548] usb 1-1: device descriptor =
-read/8, error -61<br>[ =C2=A0 =C2=A02.977603] usb 1-1: device descriptor re=
-ad/8, error -61<br>[ =C2=A0 =C2=A03.237530] usb 1-1: device descriptor read=
-/8, error -61<br>[ =C2=A0 =C2=A03.369585] usb 1-1: device descriptor read/8=
-, error -61<br>[ =C2=A0 =C2=A03.480765] usb usb1-port1: unable to enumerate=
- USB device<br></div><div><br></div><div>Traces stop here. I could try with=
- a memory card. Maybe it makes a difference.</div><div>=C2=A0<br></div><blo=
-ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
-:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-It is going to be fine just to boot Dom0 and DomUs without PV drivers.<br>
-Also, can you post the device tree that you are using here? Just in case<br=
->
-there is an issue with Xen parsing any possible /reserved-memory nodes<br>
-with CMA info that need to be passed on to Dom0.</blockquote><div>Here is t=
-he device dumped from command line:</div><div>dtc -I fs /proc/device-tree</=
-div><div><a href=3D"https://drive.google.com/file/d/17u18dJHxRfbGZMtRXIwtLV=
-ZZfMj9KwN-/view?usp=3Dsharing">https://drive.google.com/file/d/17u18dJHxRfb=
-GZMtRXIwtLVZZfMj9KwN-/view?usp=3Dsharing</a><br></div><div>=C2=A0</div><blo=
-ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
-:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; p.s.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; While testing I found issue with Xen ma=
-ster branch and your patch:=C2=A0xen/rpi4: implement watchdog-based reset<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; Looks like black listing the=C2=A0bcm28=
-35-pm<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; @@ -37,12 +41,69 @@ static const struct=
- dt_device_match rpi4_blacklist_dev[] __initconst =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0 =C2=A0 =C2=A0 * The aux peripher=
-al also shares a page with the aux UART.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0 =C2=A0 =C2=A0DT_MATCH_COMPATIBLE=
-(&quot;brcm,bcm2835-aux&quot;),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; + =C2=A0 =C2=A0/* Special device used f=
-or rebooting */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; + =C2=A0 =C2=A0DT_MATCH_COMPATIBLE(&quo=
-t;brcm,bcm2835-pm&quot;),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; will prevent v3d driver to locate phand=
-le. I think it will use the same resource:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0 pm: watchdog@7e100000 {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0compatible =
-=3D &quot;brcm,bcm2835-pm&quot;, &quot;brcm,bcm2835-pm-wdt&quot;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; #power-domain-cells =3D &lt;1&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; #reset-cells =3D &lt;1&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; reg =3D &lt;0x7e100000 0x114&gt;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0 =C2=A0 =C2=A0&lt;0x7e00a000 0x24=
-&gt;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; =C2=A0 =C2=A0 =C2=A0&lt;0x7ec11000 0x20=
-&gt;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; clocks =3D &lt;&amp;clocks BCM2835_CLOC=
-K_V3D&gt;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &lt;&amp;clocks BCM2835_CLOCK_PERI_IMAG=
-E&gt;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &lt;&amp;clocks BCM2835_CLOCK_H264&gt;,=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &lt;&amp;clocks BCM2835_CLOCK_ISP&gt;;<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; clock-names =3D &quot;v3d&quot;, &quot;=
-peri_image&quot;, &quot;h264&quot;, &quot;isp&quot;;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; system-power-controller;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; };<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0Yeah, I imagine it could be possible. Can yo=
-u post the error message you<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0are seeing from the v3d driver?<br>
-&gt; <br>
-&gt; This is the error:<br>
-&gt; [ =C2=A0 =C2=A00.069682] OF: /v3dbus/v3d@7ec04000: could not find phan=
-dle<br>
-&gt; [ =C2=A0 =C2=A00.074828] OF: /v3dbus/v3d@7ec04000: could not find phan=
-dle<br>
-&gt; v3d driver is not loaded.<br>
-&gt; <br>
-&gt; --<br>
-&gt; Br,<br>
-&gt; Jukka Kaartinen<br>
-&gt; <br>
-&gt; </blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D=
-"ltr"><div dir=3D"ltr"><div>Br,</div><div>Jukka Kaartinen</div></div></div>=
-</div>
-
---0000000000002726d505b9cb8cd2--
+SGksDQoNCj4gT24gMjYgSmFuIDIwMjEsIGF0IDA5OjIyLCBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+IHdyb3RlOg0KPiANCj4gT24gMjUuMDEuMjAyMSAyMjoyNywgU3RlZmFubyBTdGFi
+ZWxsaW5pIHdyb3RlOg0KPj4gQSByZWNlbnQgdGhyZWFkIFsxXSBoYXMgZXhwb3NlZCBhIGNvdXBs
+ZSBvZiBpc3N1ZXMgd2l0aCBvdXIgY3VycmVudCB3YXkNCj4+IG9mIGhhbmRsaW5nIEVYUEVSVC4N
+Cj4+IA0KPj4gMSkgSXQgaXMgbm90IG9idmlvdXMgdGhhdCAiQ29uZmlndXJlIHN0YW5kYXJkIFhl
+biBmZWF0dXJlcyAoZXhwZXJ0DQo+PiB1c2VycykiIGlzIGFjdHVhbGx5IHRoZSBmYW1vdXMgRVhQ
+RVJUIHdlIGtlZXAgdGFsa2luZyBhYm91dCBvbiB4ZW4tZGV2ZWwNCj4+IA0KPj4gMikgSXQgaXMg
+bm90IG9idmlvdXMgd2hlbiB3ZSBuZWVkIHRvIGVuYWJsZSBFWFBFUlQgdG8gZ2V0IGEgc3BlY2lm
+aWMNCj4+IGZlYXR1cmUNCj4+IA0KPj4gSW4gcGFydGljdWxhciBpZiB5b3Ugd2FudCB0byBlbmFi
+bGUgQUNQSSBzdXBwb3J0IHNvIHRoYXQgeW91IGNhbiBib290DQo+PiBYZW4gb24gYW4gQUNQSSBw
+bGF0Zm9ybSwgeW91IGhhdmUgdG8gZW5hYmxlIEVYUEVSVCBmaXJzdC4gQnV0IHNlYXJjaGluZw0K
+Pj4gdGhyb3VnaCB0aGUga2NvbmZpZyBtZW51IGl0IGlzIHJlYWxseSBub3QgY2xlYXIgKHR5cGUg
+Jy8nIGFuZCAiQUNQSSIpOg0KPj4gbm90aGluZyBpbiB0aGUgZGVzY3JpcHRpb24gdGVsbHMgeW91
+IHRoYXQgeW91IG5lZWQgdG8gZW5hYmxlIEVYUEVSVCB0bw0KPj4gZ2V0IHRoZSBvcHRpb24uDQo+
+PiANCj4+IFNvIHRoaXMgcGF0Y2ggbWFrZXMgdGhpbmdzIGVhc2llciBieSBkb2luZyB0d28gdGhp
+bmdzOg0KPj4gDQo+PiAtIGludHJvZHVjZSBhIG5ldyBrY29uZmlnIG9wdGlvbiBVTlNVUFBPUlRF
+RCB3aGljaCBpcyBjbGVhcmx5IHRvIGVuYWJsZQ0KPj4gIFVOU1VQUE9SVEVEIGZlYXR1cmVzIGFz
+IGRlZmluZWQgYnkgU1VQUE9SVC5tZA0KPj4gDQo+PiAtIGNoYW5nZSBFWFBFUlQgb3B0aW9ucyB0
+byBVTlNVUFBPUlRFRCB3aGVyZSBpdCBtYWtlcyBzZW5zZToga2VlcA0KPj4gIGRlcGVuZGluZyBv
+biBFWFBFUlQgZm9yIGZlYXR1cmVzIG1hZGUgZm9yIGV4cGVydHMNCj4+IA0KPj4gLSB0YWcgdW5z
+dXBwb3J0ZWQgZmVhdHVyZXMgYnkgYWRkaW5nIChVTlNVUFBPUlRFRCkgdG8gdGhlIG9uZS1saW5l
+DQo+PiAgZGVzY3JpcHRpb24NCj4+IA0KPj4gLSBjbGFyaWZ5IHRoZSBFWFBFUlQgb25lLWxpbmUg
+ZGVzY3JpcHRpb24NCj4+IA0KPj4gWzFdIGh0dHBzOi8vbWFyYy5pbmZvLz9sPXhlbi1kZXZlbCZt
+PTE2MDMzMzEwMTIyODk4MQ0KPj4gDQo+PiBTaWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxp
+bmkgPHN0ZWZhbm8uc3RhYmVsbGluaUB4aWxpbnguY29tPg0KUmV2aWV3ZWQtYnk6IEJlcnRyYW5k
+IE1hcnF1aXMgPGJlcnRyYW5kLm1hcnF1aXNAYXJtLmNvbT4NCg0KQW5zd2VyaW5nIHRvIEphbi4u
+Lg0KDQo+IA0KPiBOb24tQXJtIGJpdHMNCj4gUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1
+bGljaEBzdXNlLmNvbT4NCj4gSG93ZXZlciwgSSBoYXZlIHF1ZXN0aW9ucyBvbiB0aGUgQXJtIG9u
+ZXMgKHNvcnJ5IGZvciBub3Qgbm90aWNpbmcNCj4gZWFybGllciwgYXMgSSBhc3N1bWUgaXQgd2Fz
+IHRoaXMgd2F5IGJlZm9yZSBhbHJlYWR5KToNCj4gDQo+PiBAQCAtNzcsNyArNzcsNyBAQCBjb25m
+aWcgU0JTQV9WVUFSVF9DT05TT0xFDQo+PiAJICBTQlNBIEdlbmVyaWMgVUFSVCBpbXBsZW1lbnRz
+IGEgc3Vic2V0IG9mIEFSTSBQTDAxMSBVQVJULg0KPj4gDQo+PiBjb25maWcgQVJNX1NTQkQNCj4+
+IC0JYm9vbCAiU3BlY3VsYXRpdmUgU3RvcmUgQnlwYXNzIERpc2FibGUiIGlmIEVYUEVSVA0KPj4g
+Kwlib29sICJTcGVjdWxhdGl2ZSBTdG9yZSBCeXBhc3MgRGlzYWJsZSAoVU5TVVBQT1JURUQpIiBp
+ZiBVTlNVUFBPUlRFRA0KPj4gCWRlcGVuZHMgb24gSEFTX0FMVEVSTkFUSVZFDQo+PiAJZGVmYXVs
+dCB5DQo+PiAJaGVscA0KPj4gQEAgLTg3LDcgKzg3LDcgQEAgY29uZmlnIEFSTV9TU0JEDQo+PiAJ
+ICBJZiB1bnN1cmUsIHNheSBZLg0KPj4gDQo+PiBjb25maWcgSEFSREVOX0JSQU5DSF9QUkVESUNU
+T1INCj4+IC0JYm9vbCAiSGFyZGVuIHRoZSBicmFuY2ggcHJlZGljdG9yIGFnYWluc3QgYWxpYXNp
+bmcgYXR0YWNrcyIgaWYgRVhQRVJUDQo+PiArCWJvb2wgIkhhcmRlbiB0aGUgYnJhbmNoIHByZWRp
+Y3RvciBhZ2FpbnN0IGFsaWFzaW5nIGF0dGFja3MgKFVOU1VQUE9SVEVEKSIgaWYgVU5TVVBQT1JU
+RUQNCj4+IAlkZWZhdWx0IHkNCj4+IAloZWxwDQo+PiAJICBTcGVjdWxhdGlvbiBhdHRhY2tzIGFn
+YWluc3Qgc29tZSBoaWdoLXBlcmZvcm1hbmNlIHByb2Nlc3NvcnMgcmVseSBvbg0KPiANCj4gQm90
+aCBvZiB0aGVzZSBkZWZhdWx0IHRvIHkgYW5kIGhhdmUgdGhlaXIgX3Byb21wdF8NCj4gY29uZGl0
+aW9uYWwgdXBvbiBFWFBFUlQuIFdoaWNoIG1lYW5zIG9ubHkgYW4gZXhwZXJ0IGNhbiB0dXJuIHRo
+ZW0NCj4gX29mZl8uIFdoaWNoIGRvZXNuJ3QgbWFrZSBpdCBsb29rIGxpa2UgdGhlc2UgYXJlIHVu
+c3VwcG9ydGVkPyBPcg0KPiBpZiBhbnl0aGluZywgdHVybmluZyB0aGVtIG9mZiBpcyB1bnN1cHBv
+cnRlZD8NCg0KLi4uWW91IGNvdWxkIHNlZSB0aGF0IGFzIEVYUEVSVC9VTlNVUFBPUlRFRCBvcHRp
+b25zIGNhbiBvbmx5IGJlDQog4oCcbW9kaWZpZWTigJ0gZnJvbSB0aGVpciBkZWZhdWx0IHZhbHVl
+IGlmIEVYUEVSVC9VTlNVUFBPUlRFRCBpcyBhY3RpdmF0ZWQuDQpTbyBJIGZpbmQgdGhlIGN1cnJl
+bnQgc29sdXRpb24gb2suDQoNCklmIHRoaXMgaXMgYSBwcm9ibGVtIHdlIGNvdWxkIGFsc28gY2hh
+bmdlIHRob3NlIG9wdGlvbnMgdG8gYmUgZGVmYXVsdCB0byBfb2ZmXyBieSByZW5hbWluZyB0aGVt
+IHRvIGNvbmZpZyBESVNBQkxFX3h4eHgNCg0KQ2hlZXJzDQpCZXJ0cmFuZA0KDQo+IA0KPiBKYW4N
+Cg0K
 
