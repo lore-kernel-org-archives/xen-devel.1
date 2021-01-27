@@ -2,44 +2,44 @@ Return-Path: <SRS0=2Mj5=G6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34061C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Jan 2021 08:23:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86AA3C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Jan 2021 08:32:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C3FA02073C
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Jan 2021 08:23:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C3FA02073C
+	by mail.kernel.org (Postfix) with ESMTPS id 199512073C
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Jan 2021 08:32:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 199512073C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.75823.136620 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.75828.136631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4g6V-00075Z-9R; Wed, 27 Jan 2021 08:23:07 +0000
+	id 1l4gEx-000850-5o; Wed, 27 Jan 2021 08:31:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 75823.136620; Wed, 27 Jan 2021 08:23:07 +0000
+Received: by outflank-mailman (output) from mailman id 75828.136631; Wed, 27 Jan 2021 08:31:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l4g6V-00075S-69; Wed, 27 Jan 2021 08:23:07 +0000
-Received: by outflank-mailman (input) for mailman id 75823;
- Wed, 27 Jan 2021 08:23:05 +0000
+	id 1l4gEx-00084t-2b; Wed, 27 Jan 2021 08:31:51 +0000
+Received: by outflank-mailman (input) for mailman id 75828;
+ Wed, 27 Jan 2021 08:31:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Shlr=G6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l4g6T-00075N-5t
- for xen-devel@lists.xenproject.org; Wed, 27 Jan 2021 08:23:05 +0000
+ id 1l4gEw-00084o-1f
+ for xen-devel@lists.xenproject.org; Wed, 27 Jan 2021 08:31:50 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 19f5f514-8d73-4f40-b106-2c29731b005f;
- Wed, 27 Jan 2021 08:23:04 +0000 (UTC)
+ id 77637f9c-f4a9-4e88-a63c-7845e83fb037;
+ Wed, 27 Jan 2021 08:31:49 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9AC64AF17;
- Wed, 27 Jan 2021 08:23:03 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 49E2EAD57;
+ Wed, 27 Jan 2021 08:31:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,46 +51,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19f5f514-8d73-4f40-b106-2c29731b005f
+X-Inumbo-ID: 77637f9c-f4a9-4e88-a63c-7845e83fb037
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1611735783; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1611736308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=hrD0ab+tGFKd27v9Im6SAF7792v/bC/PVNf7Ub31zHQ=;
-	b=Y2ZqX1NfY6DSZ3B3RD8TkfBrCJ71mSOIwkwyH/uzsdef0F48VuwnNuf1KCEvYy07bFmGYY
-	Yj2j+KRQq1mOzvTS8kOejEoFO9eFHFoPqfXYAjy7aLwgaLXT/whrZynLnfuJaSUNesUXXA
-	rpIQ+/3IMaUBkuQ7Y6sa/0y5wtBOzkw=
-Subject: Re: [PATCH v5 2/2] xen: add (EXPERT) to one-line description of
- XEN_SHSTK
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: andrew.cooper3@citrix.com, george.dunlap@citrix.com, iwj@xenproject.org,
- julien@xen.org, wl@xen.org,
- Stefano Stabellini <stefano.stabellini@xilinx.com>,
- xen-devel@lists.xenproject.org
-References: <alpine.DEB.2.21.2101261042030.20638@sstabellini-ThinkPad-T480s>
- <20210126190328.2461-2-sstabellini@kernel.org>
+	bh=v38++mWX26+g7i6KhRuErWQs2ufiDDbJ7MmCoqmtsVM=;
+	b=oj+59HnTiAtGmnbChY5ruxrl9beFn9pp9U+DEpEFOqHHp+91zzLOD/z05j68nuLb2w5ZXe
+	5Bwi6o9FufOdNkREZv82IxvcAHNL+IAFpXMdICGsPjd177/q+3uEq+aUJc3YdV3lZo3W2V
+	2UbUzCHxZsuOSOPCd1ICFnWH8EAM9eo=
+Subject: Re: [PATCH] Fix error: array subscript has type 'char'
+To: Ian Jackson <iwj@xenproject.org>
+Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
+ Manuel Bouyer <bouyer@antioche.eu.org>
+References: <20210112181242.1570-1-bouyer@antioche.eu.org>
+ <574d9ed8-c827-6864-4732-4e1b813fc3e3@suse.com>
+ <20210114122912.GA2522@antioche.eu.org>
+ <1af2b532-4dce-29cf-94ae-ad0c399ecbce@suse.com>
+ <20210114141615.GA9157@mail.soc.lip6.fr>
+ <20210126174415.GA21858@mail.soc.lip6.fr>
+ <24592.22685.67161.585056@mariner.uk.xensource.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6278b2ce-326d-bbc1-723c-aa57bf03ba7f@suse.com>
-Date: Wed, 27 Jan 2021 09:23:03 +0100
+Message-ID: <2452d5cb-90ba-a4c4-a5e4-3070c5a676d2@suse.com>
+Date: Wed, 27 Jan 2021 09:31:48 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <20210126190328.2461-2-sstabellini@kernel.org>
+In-Reply-To: <24592.22685.67161.585056@mariner.uk.xensource.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 26.01.2021 20:03, Stefano Stabellini wrote:
-> From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+On 26.01.2021 18:59, Ian Jackson wrote:
+> Manuel Bouyer writes ("Re: [PATCH] Fix error: array subscript has type 'char'"):
+>> On Thu, Jan 14, 2021 at 03:16:15PM +0100, Manuel Bouyer wrote:
+>>> On Thu, Jan 14, 2021 at 02:25:05PM +0100, Jan Beulich wrote:
+>>>> Which means you're shifting the undefined-ness from the implementation
 > 
-> Add an "(EXPERT)" tag to the one-line description of Kconfig options
-> that depend on EXPERT. (Not where just the prompt depends on EXPERT.)
+> The undefined-ness is in the *specification*. [1]
 > 
-> Today we only have one such option: XEN_SHSTK.
+>>>> Isn't this something that wants changing in your ctype.h instead?
+>>>> the functions (or macros), as per the C standard
 > 
-> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> Jan, can you please check your facts before asserting the existence
+> of a pretty blatant bug in a platform's implementation of basic C
+> functions ?
+> 
+> From my copy of C99+TC1+TC2, para 7.4:
+> 
+>  1   In all cases the argument is an int, the value of which shall be
+>      representable as an unsigned char or shall equal the value of the
+>      macro EOF.  If the argument has any other value, the behavior is
+>      undefined. [...]
+> 
+> If char is signed, then it can contain -ve values.  Those values are
+> promoted to int by the usual integer promotions.  Naturally such
+> negative values are not representable as unsigned char.  Passing them
+> to ctype macros is UB.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+I did read that part of the spec before replying. Irrespective
+of the wording there it seems entirely unreasonable to me for
+the spec to imply all use sites of the is...() functions to
+have to use casts. Even more so that we all know (I suppose)
+that casts can be dangerous as both potentially introducing
+bugs (perhaps not at the point of their addition, but later
+when code elsewhere gets changed) and keeping analysis tools
+from actually spotting ones.
+
+But yes, I'm not the maintainer of this code, so if you're
+happy with such risks, so be it.
+
+For the record, to me the less risky approach here would seem
+to have been to make use of compilers allowing to choose
+whether plain char is signed or unsigned, and force it to
+unsigned for at least the affected components.
+
+Jan
 
