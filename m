@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D67FC433E6
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78080C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:16:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C67D764DD8
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:15:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C67D764DD8
+	by mail.kernel.org (Postfix) with ESMTPS id E7D0E64DBD
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:16:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E7D0E64DBD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76687.138509 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76692.138527 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51Wp-0006LY-6G; Thu, 28 Jan 2021 07:15:43 +0000
+	id 1l51Wz-0006Vm-Kt; Thu, 28 Jan 2021 07:15:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76687.138509; Thu, 28 Jan 2021 07:15:43 +0000
+Received: by outflank-mailman (output) from mailman id 76692.138527; Thu, 28 Jan 2021 07:15:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51Wo-0006LH-T5; Thu, 28 Jan 2021 07:15:42 +0000
-Received: by outflank-mailman (input) for mailman id 76687;
- Thu, 28 Jan 2021 07:15:42 +0000
+	id 1l51Wz-0006Ve-H6; Thu, 28 Jan 2021 07:15:53 +0000
+Received: by outflank-mailman (input) for mailman id 76692;
+ Thu, 28 Jan 2021 07:15:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YU/W=G7=wdc.com=prvs=655a99766=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1l51Wo-0005xp-09
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:15:42 +0000
-Received: from esa2.hgst.iphmx.com (unknown [68.232.143.124])
+ id 1l51Wy-0005xp-0V
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:15:52 +0000
+Received: from esa5.hgst.iphmx.com (unknown [216.71.153.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d7a66c51-aa5a-4519-bc9d-05b32741e4b6;
- Thu, 28 Jan 2021 07:15:33 +0000 (UTC)
+ id da9bff1e-c501-457d-9cf5-275f1f36d2d5;
+ Thu, 28 Jan 2021 07:15:49 +0000 (UTC)
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:18:33 +0800
+ by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:15:48 +0800
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2021 22:59:52 -0800
+ 27 Jan 2021 23:00:08 -0800
 Received: from vm.labspan.wdc.com (HELO vm.sc.wdc.com) ([10.6.137.102])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:15:32 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:15:48 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,37 +56,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d7a66c51-aa5a-4519-bc9d-05b32741e4b6
+X-Inumbo-ID: da9bff1e-c501-457d-9cf5-275f1f36d2d5
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1611818314; x=1643354314;
+  t=1611818149; x=1643354149;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=cXmRF2Su1ZKio9gUSME8BeoE9pXLYvn976s4DXPYmio=;
-  b=QIacUKU9yyuXrFsLNOJ3/cAlWaM/YNuVsLyI0jzb5iCD9id30IEx5d8g
-   Qg0WZBSLOZld9Ugspj+PCSDQ8DC+vwQQz6ivTxMPxiYJP3vkqA8ePHb17
-   mKbz675BbNRcr10onze8EhQ3PnP7KQcFfIlLJxjpdK3L3p/b+l5c7mS5r
-   LiutP3d9tF1YIRj2SYiEJbbHo5zbvOGzpzDQXZKXoTb9dS3qGw0WdScBs
-   5Kn7zuVeQHe7R8HweBDaOMEtJ+iKkT8W7KlEMg63obkTa8/fLlpjnxF32
-   rdii4tLmI8stVf4d0Q4Hpcpp2ijDTfg4ePIcK2XMfeXCLP3KNntnxWl8j
+  bh=NNQh//SoJS4GqMqJS7HaqIWs/nAFaMjGpU2K0hvKGW0=;
+  b=fQfK9wUdOyIrIsfy9RLLvC5xPgYcSXg3MNYnHSc9IsYLZx30nRHzIAUZ
+   294UUudQQlYk8gJcK/edZROZYlJIE1eNrjLm1JGiz/Q21FfSGShI1OpDG
+   AVL3nWWtzIN++jlZ98TQAnqMod+6Ql8ECPGPLXwk9xo2jd9Tx5vttBp8A
+   MKW1qB5k/Qt/1N/OTPnz9MYuOySMfX9ETamQAGkN5rbbeVBg424fAd1GQ
+   hDTtCXp/Z9hfKKx9hoSKub7BrBRCs+yLmSqVgpJS1F86spUPwH+/QWj7g
+   HR1yP3TJs98ynx2C6xmfLztXq4e7yWbpoTlZnnY6hLXY72FFMg4KLmomH
    Q==;
-IronPort-SDR: +DeOHSiPuYXzZqiyAIX3LDlBHW0KIsbf68EHkSE9GrD05QRZOrlk03Yfgm5CJwWUthdVGMbUwy
- dKZsvQTGYjdKmFmEg83qwiiRFxPWI7aLa4+FXj2MY/vEPxOX3vp5N5vxIeB2c1JtSyJ5jEXqCI
- 8KGIicmmBmGNtkYRzYBdcUmu2Tu9Xmmr+qNb9zdN7bUCxUdIxqypReAimH4dVO50H9zsNjMO0M
- HK1ikRb+vDT3qfVV0QH7h0g0VxE5KpEk31o9hjw9aQmVscpEbk6AuB7YGDErOxL8wJjwiCr/NG
- fjc=
+IronPort-SDR: FIV1m0hqMjPv7EbDoudd3IU/sfM4dtIXVcOrfZP9FG6QS+qNV/cpHr7zPfe6cikVTuMAIWMrRE
+ 1CFFIA3M2n74FPetnuW4UIXhHv04+NojRtALLIm1ShTbRzoMpJzodse0FT7TKA9rmpzDk0hf2J
+ osqfJT1Hw13QCXwtTqc43/JeIOacFqdvj3uOE8wdnBhSuCJtni52KCfSDmNsSyMqak0NZQLmhb
+ RVqXLrFPttVmJHYuA+DRTQ/CQCt7oxoFooNbcGq7LXUqJAFun/IgoGhOb61ZyQh4tY4TVzWgoL
+ SfQ=
 X-IronPort-AV: E=Sophos;i="5.79,381,1602518400"; 
-   d="scan'208";a="262549193"
-IronPort-SDR: 9ERyHW2iXRv3pJTiHfQ6FCkvxQIn6RJoWyH5LT+UwXZT6ya7nLIzPeXSBcUtFJlYLbzJ1jDzxN
- pHV16noZdfrJgeYrFgZiSV9/HCaVgGMNxhaPnz3oXfu0fVwYpGlTH/1bmIIXWjjR2b9nT1t/4l
- 0Z2IC1wX2I3hVw8IlpAjOMZ7GJogy47Ic6kGXndqejrVNVoYa8f+ikzzvDphAHKl1xbxW+pbly
- uH1WBsmk4xtsYcu3MZd4HwNMp+vBKja986bP94zC3xKVEq5SqQYTyn/o9akXG36Lx7xn5fsdTW
- aUf4tCGYfqHI98qHkVuQcnZn
-IronPort-SDR: m+UU9TJBIXCvSyFz/7O2vaYmlOCexk8ewW0e2kOKkWSuwpQEVFGI+DHENO7Q1Bf8IQzN352Mi5
- 5dDETfg3/zd0aL0yHDjcbUD/eS6byN5dveWHS0JlUn01j5YdJYnuzvRhCyGEwEvsPLeiwlo6h7
- h47UPjLb7UDOPAPFC4EqcqtJYlkeHUwpVqBF6C8WUdWbiBbzIaj0jcLgB21R8kA1PJHycwAnr3
- 51c0CVR8EMmKQ6pEvymjZcIoINYcADZvl3xn96JSQjk6KW59eeMqwpBFLuZiCrCp4Zkdz1bD1j
- kZU=
+   d="scan'208";a="158518450"
+IronPort-SDR: s18G1HC83Rr3z3ZHjRbyNRB84D8eeJyfxEsQsWugvQYNm/5tp9Bykx2d0PDD1lJnqQ7n3ROCLB
+ YSWyg9J7I6HqnB2NgFwMU4ssoB6tjGH/79230TWkDogzAEgyRx4yPiMRRDGGGJYtPzQqzrHfUY
+ iO3zDWOiwemtUczZcPdewa4KogxATq3ygZIiw6li+/J7dkvbfEn3uGzNA0AnmVFzdIkRTnkjEr
+ NZyMm+4X1MpeNq7dOG+OefxOr48EAZ8pX3UG1xjxSqFs9hl07ia08o8M9UC0qFD/6LvMa4wq1F
+ GfS04fX+yByC8zurUKSx9scr
+IronPort-SDR: QLHAdyBGhpMGQ+9sBMvXF0omk88B/E7BRqUoQLtstkadK8XTqcLBOvZ/pjpZSQe5Fab6+IJLIs
+ ck58Xl2YqFxcQH934VbGmHAxVZYNpxUZEqIAo35K+cwpiHURts0rCHDJ2TNufJwwd/0szVEfZu
+ V2kbFpOqLyVucrhtvqpRhrkBznCSCkx3a3rZqsYu2xJ2ZrJKihugfXyvxYjD/F6eNL2QYyPhq5
+ GySOsYgZ6Jfrk4o/qsLABBe1b7+pVB/jDQ0aaMBZEhc+3I3KzSll4D3O/V1q5DDbYD+ht9Zxf5
+ kSQ=
 WDCIronportException: Internal
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-xfs@vger.kernel.org,
@@ -146,9 +146,9 @@ Cc: axboe@kernel.dk,
 	osandov@fb.com,
 	bvanassche@acm.org,
 	jefflexu@linux.alibaba.com
-Subject: [RFC PATCH 28/34] zonefs: use bio_new
-Date: Wed, 27 Jan 2021 23:11:27 -0800
-Message-Id: <20210128071133.60335-29-chaitanya.kulkarni@wdc.com>
+Subject: [RFC PATCH 30/34] hfsplus: use bio_new in hfsplus_submit_bio()
+Date: Wed, 27 Jan 2021 23:11:29 -0800
+Message-Id: <20210128071133.60335-31-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.22.1
 In-Reply-To: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
 References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
@@ -157,38 +157,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 ---
- fs/zonefs/super.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ fs/hfsplus/wrapper.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
-index ab68e27bb322..620d67965a22 100644
---- a/fs/zonefs/super.c
-+++ b/fs/zonefs/super.c
-@@ -661,6 +661,7 @@ static const struct iomap_dio_ops zonefs_write_dio_ops = {
+diff --git a/fs/hfsplus/wrapper.c b/fs/hfsplus/wrapper.c
+index 0350dc7821bf..8341ee6c9b31 100644
+--- a/fs/hfsplus/wrapper.c
++++ b/fs/hfsplus/wrapper.c
+@@ -64,10 +64,7 @@ int hfsplus_submit_bio(struct super_block *sb, sector_t sector,
+ 	offset = start & (io_size - 1);
+ 	sector &= ~((io_size >> HFSPLUS_SECTOR_SHIFT) - 1);
  
- static ssize_t zonefs_file_dio_append(struct kiocb *iocb, struct iov_iter *from)
- {
-+	unsigned int op = REQ_OP_ZONE_APPEND | REQ_SYNC | REQ_IDLE;
- 	struct inode *inode = file_inode(iocb->ki_filp);
- 	struct zonefs_inode_info *zi = ZONEFS_I(inode);
- 	struct block_device *bdev = inode->i_sb->s_bdev;
-@@ -678,15 +679,12 @@ static ssize_t zonefs_file_dio_append(struct kiocb *iocb, struct iov_iter *from)
- 	if (!nr_pages)
- 		return 0;
+-	bio = bio_alloc(GFP_NOIO, 1);
+-	bio->bi_iter.bi_sector = sector;
+-	bio_set_dev(bio, sb->s_bdev);
+-	bio_set_op_attrs(bio, op, op_flags);
++	bio = bio_new(sb->s_bdev, sector, op, op_flags, 1, GFP_NOIO);
  
--	bio = bio_alloc(GFP_NOFS, nr_pages);
-+	bio = bio_new(bdev, zi->i_zsector, op, 0, GFP_NOFS, nr_pages);
- 	if (!bio)
- 		return -ENOMEM;
- 
--	bio_set_dev(bio, bdev);
--	bio->bi_iter.bi_sector = zi->i_zsector;
- 	bio->bi_write_hint = iocb->ki_hint;
- 	bio->bi_ioprio = iocb->ki_ioprio;
--	bio->bi_opf = REQ_OP_ZONE_APPEND | REQ_SYNC | REQ_IDLE;
- 	if (iocb->ki_flags & IOCB_DSYNC)
- 		bio->bi_opf |= REQ_FUA;
- 
+ 	if (op != WRITE && data)
+ 		*data = (u8 *)buf + offset;
 -- 
 2.22.1
 
