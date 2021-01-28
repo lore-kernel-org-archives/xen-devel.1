@@ -2,45 +2,44 @@ Return-Path: <SRS0=OK+i=G7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91E9DC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 16:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CA6BC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 17:01:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2BC0D64E0C
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 16:56:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BC0D64E0C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C06DD64E0C
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 17:01:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C06DD64E0C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.77269.139841 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.77275.139854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5Ab6-0007jk-Vh; Thu, 28 Jan 2021 16:56:44 +0000
+	id 1l5Af7-0000Ko-JJ; Thu, 28 Jan 2021 17:00:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 77269.139841; Thu, 28 Jan 2021 16:56:44 +0000
+Received: by outflank-mailman (output) from mailman id 77275.139854; Thu, 28 Jan 2021 17:00:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5Ab6-0007jd-Sm; Thu, 28 Jan 2021 16:56:44 +0000
-Received: by outflank-mailman (input) for mailman id 77269;
- Thu, 28 Jan 2021 16:56:43 +0000
+	id 1l5Af7-0000Kh-Fa; Thu, 28 Jan 2021 17:00:53 +0000
+Received: by outflank-mailman (input) for mailman id 77275;
+ Thu, 28 Jan 2021 16:59:48 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=AY0C=G7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l5Ab5-0007jY-TL
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 16:56:43 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=JMWF=G7=kernel.org=djwong@srs-us1.protection.inumbo.net>)
+ id 1l5Ae4-00082Y-P0
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 16:59:48 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1e46d4b9-faf8-4476-ac61-67f052da7a26;
- Thu, 28 Jan 2021 16:56:42 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0AC67AD62;
- Thu, 28 Jan 2021 16:56:42 +0000 (UTC)
+ id bf9f499b-1317-4784-9461-0663aededbcf;
+ Thu, 28 Jan 2021 16:59:47 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0EEE564E0E;
+ Thu, 28 Jan 2021 16:59:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,61 +51,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1e46d4b9-faf8-4476-ac61-67f052da7a26
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1611853002; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=K7yikDNVSBAftQaS8amHsmZhu5qRTbQy3uQQUcoKwhQ=;
-	b=BaFHnNg8luJeOOuETYkpHNMoce63IHS6ZuUzwVKlq9nBupzfrfmHDqSKdapgg2fYSU30Xo
-	l4RXaTlY2yIgh682zKLazuZYvykzcKRadhU4G5SbSAOummRoztjopRJNplLfEr3tUaq1LX
-	6tYUAHWA9S5Wuj2yFgeB2fouWwlxKDA=
-Subject: Re: [PATCH] x86/HVM: re-order error path of hvm_domain_initialise()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <57a95580-bae0-ac76-fb4c-e1db85da4d5f@suse.com>
- <55b43ce7-1fdc-9238-6eba-3c7c0377bea0@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6eda7f13-b624-ef18-539a-c7f98f997184@suse.com>
-Date: Thu, 28 Jan 2021 17:56:42 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+X-Inumbo-ID: bf9f499b-1317-4784-9461-0663aededbcf
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1611853187;
+	bh=f6FDYR+2fbZ3ZjuVDKmJrkeFHlqyA4P3vGdmoyOPa1M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Rzag2xxRHgFBGSJ365/QUldWd9CTCZVGt3cs71rJutBhKs94QB4O0wVHJ78U0xIF9
+	 n96V7cXtAmPsB9hu9gUYvKXwcH1SXtYNdkFw15Hr/lW1MQ6ApKzq4voIl5psE+u1SS
+	 oIYlBt3CEfmzYKr/W9GKeV1ES9XtHwmC1KiXTL4cmN2/9EoY9kXCbDD71u9sIp+Nfr
+	 FbyyfdHM+E5ZA+F8801PzzCElIq3kyLXwweF8LRAnfmH79wwG+57YuSijr3uE7kbk9
+	 /DpcS6Ckt3f1RwDjmwI1QhKt/MkNHods9aX+BJj1ComGJOXJH3o25qnvlVltgShwCo
+	 r/bA/dJbtb2Sw==
+Date: Thu, 28 Jan 2021 08:59:46 -0800
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
+Cc: linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	dm-devel@redhat.com, linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org, drbd-dev@lists.linbit.com,
+	xen-devel@lists.xenproject.org, linux-nvme@lists.infradead.org,
+	linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
+	linux-fscrypt@vger.kernel.org, jfs-discussion@lists.sourceforge.net,
+	linux-nilfs@vger.kernel.org, ocfs2-devel@oss.oracle.com,
+	linux-pm@vger.kernel.org, linux-mm@kvack.org, axboe@kernel.dk,
+	philipp.reisner@linbit.com, lars.ellenberg@linbit.com,
+	konrad.wilk@oracle.com, roger.pau@citrix.com, minchan@kernel.org,
+	ngupta@vflare.org, sergey.senozhatsky.work@gmail.com,
+	agk@redhat.com, snitzer@redhat.com, hch@lst.de, sagi@grimberg.me,
+	martin.petersen@oracle.com, viro@zeniv.linux.org.uk, tytso@mit.edu,
+	jaegeuk@kernel.org, ebiggers@kernel.org, shaggy@kernel.org,
+	konishi.ryusuke@gmail.com, mark@fasheh.com, jlbec@evilplan.org,
+	joseph.qi@linux.alibaba.com, damien.lemoal@wdc.com,
+	naohiro.aota@wdc.com, jth@kernel.org, rjw@rjwysocki.net,
+	len.brown@intel.com, pavel@ucw.cz, akpm@linux-foundation.org,
+	hare@suse.de, gustavoars@kernel.org, tiwai@suse.de,
+	alex.shi@linux.alibaba.com, asml.silence@gmail.com,
+	ming.lei@redhat.com, tj@kernel.org, osandov@fb.com,
+	bvanassche@acm.org, jefflexu@linux.alibaba.com
+Subject: Re: [RFC PATCH 17/34] iomap: use bio_new in iomap_dio_zero
+Message-ID: <20210128165946.GL7698@magnolia>
+References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
+ <20210128071133.60335-18-chaitanya.kulkarni@wdc.com>
 MIME-Version: 1.0
-In-Reply-To: <55b43ce7-1fdc-9238-6eba-3c7c0377bea0@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210128071133.60335-18-chaitanya.kulkarni@wdc.com>
 
-On 28.01.2021 17:51, Andrew Cooper wrote:
-> On 28/01/2021 14:40, Jan Beulich wrote:
->> hvm_destroy_all_ioreq_servers(), called from
->> hvm_domain_relinquish_resources(), invokes relocate_portio_handler(),
->> which uses d->arch.hvm.io_handler. Defer freeing of this array
->> accordingly on the error path of hvm_domain_initialise().
->>
->> Similarly rtc_deinit() requires d->arch.hvm.pl_time to still be around,
->> or else an armed timer structure would get freed, and that timer never
->> get killed.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On Wed, Jan 27, 2021 at 11:11:16PM -0800, Chaitanya Kulkarni wrote:
+> Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
+
+Looks ok to me,
+Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+
+--D
+
+> ---
+>  fs/iomap/direct-io.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 > 
-> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
-
-Thanks.
-
->> ---
->> We may want to consider moving the other two XFREE()s later as well,
->> if only to be on the safe side.
+> diff --git a/fs/iomap/direct-io.c b/fs/iomap/direct-io.c
+> index ea1e8f696076..f6c557a1bd25 100644
+> --- a/fs/iomap/direct-io.c
+> +++ b/fs/iomap/direct-io.c
+> @@ -189,15 +189,13 @@ iomap_dio_zero(struct iomap_dio *dio, struct iomap *iomap, loff_t pos,
+>  	int flags = REQ_SYNC | REQ_IDLE;
+>  	struct bio *bio;
+>  
+> -	bio = bio_alloc(GFP_KERNEL, 1);
+> -	bio_set_dev(bio, iomap->bdev);
+> -	bio->bi_iter.bi_sector = iomap_sector(iomap, pos);
+> +	bio = bio_new(iomap->bdev, iomap_sector(iomap, pos), REQ_OP_WRITE,
+> +		      flags, 1, GFP_KERNEL);
+>  	bio->bi_private = dio;
+>  	bio->bi_end_io = iomap_dio_bio_end_io;
+>  
+>  	get_page(page);
+>  	__bio_add_page(bio, page, len, 0);
+> -	bio_set_op_attrs(bio, REQ_OP_WRITE, flags);
+>  	iomap_dio_submit_bio(dio, iomap, bio, pos);
+>  }
+>  
+> -- 
+> 2.22.1
 > 
-> Wherever possible, I want to move stuff like this into the idempotent
-> domain_teardown()/_domain_destroy() logic, although I suspect you want
-> this suitable for backport as well?
-
-This and I didn't want it more involved than necessary at this point.
-
-Jan
 
