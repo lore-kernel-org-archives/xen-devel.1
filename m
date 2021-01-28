@@ -2,46 +2,48 @@ Return-Path: <SRS0=OK+i=G7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20D30C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FC83C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:45:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 929C864DCE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:38:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 929C864DCE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.alibaba.com
+	by mail.kernel.org (Postfix) with ESMTPS id CE6B164DDF
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:45:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE6B164DDF
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76978.139187 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76988.139198 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l56Yu-0001PW-12; Thu, 28 Jan 2021 12:38:12 +0000
+	id 1l56g5-0002Rq-Rt; Thu, 28 Jan 2021 12:45:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76978.139187; Thu, 28 Jan 2021 12:38:11 +0000
+Received: by outflank-mailman (output) from mailman id 76988.139198; Thu, 28 Jan 2021 12:45:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l56Yt-0001PP-Th; Thu, 28 Jan 2021 12:38:11 +0000
-Received: by outflank-mailman (input) for mailman id 76978;
- Thu, 28 Jan 2021 12:13:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l56g5-0002Rj-P0; Thu, 28 Jan 2021 12:45:37 +0000
+Received: by outflank-mailman (input) for mailman id 76988;
+ Thu, 28 Jan 2021 12:45:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7iPv=G7=linux.alibaba.com=joseph.qi@srs-us1.protection.inumbo.net>)
- id 1l56BB-0007sL-0r
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 12:13:41 +0000
-Received: from out30-131.freemail.mail.aliyun.com (unknown [115.124.30.131])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 10eb5a45-45de-4782-9780-d87b4522a68e;
- Thu, 28 Jan 2021 12:13:38 +0000 (UTC)
-Received: from B-D1K7ML85-0059.local(mailfrom:joseph.qi@linux.alibaba.com
- fp:SMTPD_---0UN8ZMkY_1611836008) by smtp.aliyun-inc.com(127.0.0.1);
- Thu, 28 Jan 2021 20:13:29 +0800
+ <SRS0=TgTx=G7=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1l56g4-0002Re-Dx
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 12:45:36 +0000
+Received: from mail-wm1-x332.google.com (unknown [2a00:1450:4864:20::332])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1b289c31-15be-418e-a191-cc1cee2c06ef;
+ Thu, 28 Jan 2021 12:45:35 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id m2so4204595wmm.1
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Jan 2021 04:45:35 -0800 (PST)
+Received: from CBGR90WXYV0 ([2a00:23c5:5785:9a01:ad9a:ab78:5748:a7ec])
+ by smtp.gmail.com with ESMTPSA id 17sm5604203wmk.48.2021.01.28.04.45.33
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 28 Jan 2021 04:45:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,85 +55,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10eb5a45-45de-4782-9780-d87b4522a68e
-X-Alimail-AntiSpam:AC=PASS;BC=-1|-1;BR=01201311R261e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04357;MF=joseph.qi@linux.alibaba.com;NM=1;PH=DS;RN=56;SR=0;TI=SMTPD_---0UN8ZMkY_1611836008;
-Subject: Re: [RFC PATCH 25/34] ocfs/cluster: use bio_new in dm-log-writes
-To: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>,
- linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- dm-devel@redhat.com, linux-block@vger.kernel.org,
- linux-kernel@vger.kernel.org, drbd-dev@lists.linbit.com,
- xen-devel@lists.xenproject.org, linux-nvme@lists.infradead.org,
- linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
- linux-fscrypt@vger.kernel.org, jfs-discussion@lists.sourceforge.net,
- linux-nilfs@vger.kernel.org, ocfs2-devel@oss.oracle.com,
- linux-pm@vger.kernel.org, linux-mm@kvack.org
-Cc: axboe@kernel.dk, philipp.reisner@linbit.com, lars.ellenberg@linbit.com,
- konrad.wilk@oracle.com, roger.pau@citrix.com, minchan@kernel.org,
- ngupta@vflare.org, sergey.senozhatsky.work@gmail.com, agk@redhat.com,
- snitzer@redhat.com, hch@lst.de, sagi@grimberg.me,
- martin.petersen@oracle.com, viro@zeniv.linux.org.uk, tytso@mit.edu,
- jaegeuk@kernel.org, ebiggers@kernel.org, djwong@kernel.org,
- shaggy@kernel.org, konishi.ryusuke@gmail.com, mark@fasheh.com,
- jlbec@evilplan.org, damien.lemoal@wdc.com, naohiro.aota@wdc.com,
- jth@kernel.org, rjw@rjwysocki.net, len.brown@intel.com, pavel@ucw.cz,
- akpm@linux-foundation.org, hare@suse.de, gustavoars@kernel.org,
- tiwai@suse.de, alex.shi@linux.alibaba.com, asml.silence@gmail.com,
- ming.lei@redhat.com, tj@kernel.org, osandov@fb.com, bvanassche@acm.org,
- jefflexu@linux.alibaba.com
-References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
- <20210128071133.60335-26-chaitanya.kulkarni@wdc.com>
-From: Joseph Qi <joseph.qi@linux.alibaba.com>
-Message-ID: <8ba2c461-6042-757d-a3c1-0490932e749e@linux.alibaba.com>
-Date: Thu, 28 Jan 2021 20:13:28 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.6.1
+X-Inumbo-ID: 1b289c31-15be-418e-a191-cc1cee2c06ef
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+         :mime-version:content-transfer-encoding:thread-index
+         :content-language;
+        bh=5HZmOnhuwAj2v4zjq2s472s3S/ZmtFf7k2VzcL5KLLM=;
+        b=Qms3RaHi+DvRsyyVaA/lNb2x+IrecvIp5CtMyJpm7xAOAi/8NAtORBAhvmx11wzXLv
+         0ouZxQpC9uYV5vW6X67XvMSkWR/ggSVLhOm27PP7UxfwsAQTGPOmA2yNmcHiDjFfWwss
+         eBEfdEs4UCGEYBj82nVFBnqdavV6VSzc4oYc4xtQ2uMzZWTLO8MOY69WXej1GhK31y0j
+         DPMjvHpFWGo7sMsAzKDn/JiZTGTQq4UF7cddWbIBL8wqCgmfSVmShpz7EyblfUO/9Z6s
+         yPyPVwgNVDTnn4VELCA27skTX4hjgKumiXQG9o1lRxV0QGqfaB6y8ZvtyXntR6ssvRNn
+         5z0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+         :subject:date:message-id:mime-version:content-transfer-encoding
+         :thread-index:content-language;
+        bh=5HZmOnhuwAj2v4zjq2s472s3S/ZmtFf7k2VzcL5KLLM=;
+        b=DYy61i9qn9yEkAbdTYqDr/9/Z9yT9B3dkvP1kmX62hQwbo7UdaKFcBGFQ/AFVOOQQR
+         xAFTb7IEslwK3V5seLZaehtlHXczyBTvnCz+qrY7kOK15fFbj9vB+KzzENGbJJf+Fnba
+         ifwNffTXqxVari4fMP8xdb16DEW97+TDC5/QpME9MP4w5JAZVeV7/als/OOAXYdnGWLI
+         bMWXK85txDqVnfogDQS5QnLog+4QvK4L4XhdstnPRnF0VkTuD2Xg4eocr/AzAmBAw81v
+         +NbzX0B0M8O3j4HqPTWoZ7XJBUOP155jpG9ZRrTlg8IHmWFK38wvyXrgLkY6P50XHQYL
+         i4uA==
+X-Gm-Message-State: AOAM5312hhb7l+7n6V+XvqkngGG6/pxaNj5VMy9+RwdkK+PE8nmI2ImK
+	vBPvOPq/CxdJJcIZQBpY0GE=
+X-Google-Smtp-Source: ABdhPJygj28s4pfoQGpSH5eZqlVdE6ngPXXE0+aDXsnRk8MZgUwIBGcqrIXjj28iGOSOXrpaDMpHCQ==
+X-Received: by 2002:a1c:3882:: with SMTP id f124mr8508548wma.56.1611837934699;
+        Thu, 28 Jan 2021 04:45:34 -0800 (PST)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+Reply-To: <paul@xen.org>
+To: "'Andrew Cooper'" <andrew.cooper3@citrix.com>,
+	"'Xen-devel'" <xen-devel@lists.xenproject.org>
+Cc: "'Wei Liu'" <wl@xen.org>,
+	=?utf-8?Q?'Roger_Pau_Monn=C3=A9'?= <roger.pau@citrix.com>,
+	"'Juergen Gross'" <jgross@suse.com>,
+	"'Ian Jackson'" <iwj@xenproject.org>,
+	=?utf-8?Q?'Micha=C5=82_Leszczy=C5=84ski'?= <michal.leszczynski@cert.pl>,
+	"'Hubert Jasudowicz'" <hubert.jasudowicz@cert.pl>,
+	"'Tamas K Lengyel'" <tamas@tklengyel.com>,
+	"'Manuel Bouyer'" <bouyer@netbsd.org>
+References: <20210128120152.9908-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20210128120152.9908-1-andrew.cooper3@citrix.com>
+Subject: RE: [PATCH v4] tools/foreignmem: Support querying the size of a resource
+Date: Thu, 28 Jan 2021 12:45:33 -0000
+Message-ID: <029301d6f573$783c9a10$68b5ce30$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <20210128071133.60335-26-chaitanya.kulkarni@wdc.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQGhwFBtvDP1/NOJjC1fTcVPiTmZCaqnZhkg
+Content-Language: en-gb
 
-I think you send a wrong subject by mistake.
+> -----Original Message-----
+> From: Andrew Cooper <andrew.cooper3@citrix.com>
+> Sent: 28 January 2021 12:02
+> To: Xen-devel <xen-devel@lists.xenproject.org>
+> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Wei Liu <wl@xen.org>; =
+Paul Durrant <paul@xen.org>;
+> Roger Pau Monn=C3=A9 <roger.pau@citrix.com>; Juergen Gross =
+<jgross@suse.com>; Ian Jackson
+> <iwj@xenproject.org>; Micha=C5=82 Leszczy=C5=84ski =
+<michal.leszczynski@cert.pl>; Hubert Jasudowicz
+> <hubert.jasudowicz@cert.pl>; Tamas K Lengyel <tamas@tklengyel.com>; =
+Manuel Bouyer <bouyer@netbsd.org>
+> Subject: [PATCH v4] tools/foreignmem: Support querying the size of a =
+resource
+>=20
+> With the Xen side of this interface (soon to be) fixed to return real =
+sizes,
+> userspace needs to be able to make the query.
+>=20
+> Introduce xenforeignmemory_resource_size() for the purpose, bumping =
+the
+> library minor version.
+>=20
+> Update both all osdep_xenforeignmemory_map_resource() implementations =
+to
+> understand size requests, skip the mmap() operation, and copy back the
+> nr_frames field.
+>=20
+> For NetBSD, also fix up the ioctl() error path to issue an unmap(), =
+which was
+> overlooked by c/s 4a64e2bb39 "libs/foreignmemory: Implement on =
+NetBSD".
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Reviewed-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
 
-Thanks,
-Joseph
+Reviewed-by: Paul Durrant <paul@xen.org>
 
-On 1/28/21 3:11 PM, Chaitanya Kulkarni wrote:
-> Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
-> ---
->  fs/ocfs2/cluster/heartbeat.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/ocfs2/cluster/heartbeat.c b/fs/ocfs2/cluster/heartbeat.c
-> index 0179a73a3fa2..b34518036446 100644
-> --- a/fs/ocfs2/cluster/heartbeat.c
-> +++ b/fs/ocfs2/cluster/heartbeat.c
-> @@ -515,12 +515,13 @@ static struct bio *o2hb_setup_one_bio(struct o2hb_region *reg,
->  	unsigned int cs = *current_slot;
->  	struct bio *bio;
->  	struct page *page;
-> +	sector_t sect = (reg->hr_start_block + cs) << (bits - 9);
->  
->  	/* Testing has shown this allocation to take long enough under
->  	 * GFP_KERNEL that the local node can get fenced. It would be
->  	 * nicest if we could pre-allocate these bios and avoid this
->  	 * all together. */
-> -	bio = bio_alloc(GFP_ATOMIC, 16);
-> +	bio = bio_new(reg->hr_bdev, sect, op, op_flags, 16, GFP_ATOMIC);
->  	if (!bio) {
->  		mlog(ML_ERROR, "Could not alloc slots BIO!\n");
->  		bio = ERR_PTR(-ENOMEM);
-> @@ -528,11 +529,8 @@ static struct bio *o2hb_setup_one_bio(struct o2hb_region *reg,
->  	}
->  
->  	/* Must put everything in 512 byte sectors for the bio... */
-> -	bio->bi_iter.bi_sector = (reg->hr_start_block + cs) << (bits - 9);
-> -	bio_set_dev(bio, reg->hr_bdev);
->  	bio->bi_private = wc;
->  	bio->bi_end_io = o2hb_bio_end_io;
-> -	bio_set_op_attrs(bio, op, op_flags);
->  
->  	vec_start = (cs << bits) % PAGE_SIZE;
->  	while(cs < max_slots) {
-> 
 
