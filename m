@@ -2,49 +2,49 @@ Return-Path: <SRS0=OK+i=G7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D714C433E9
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:12:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4333C433E6
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:12:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 11B9464DD6
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:12:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 11B9464DD6
+	by mail.kernel.org (Postfix) with ESMTPS id 87BF764DD8
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:12:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 87BF764DD8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76568.138179 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76575.138215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51Sx-0003MP-Gs; Thu, 28 Jan 2021 07:11:43 +0000
+	id 1l51TQ-0003Yo-C0; Thu, 28 Jan 2021 07:12:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76568.138179; Thu, 28 Jan 2021 07:11:43 +0000
+Received: by outflank-mailman (output) from mailman id 76575.138215; Thu, 28 Jan 2021 07:12:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51Sx-0003MI-Dl; Thu, 28 Jan 2021 07:11:43 +0000
-Received: by outflank-mailman (input) for mailman id 76568;
- Thu, 28 Jan 2021 07:11:42 +0000
+	id 1l51TQ-0003Yg-8b; Thu, 28 Jan 2021 07:12:12 +0000
+Received: by outflank-mailman (input) for mailman id 76575;
+ Thu, 28 Jan 2021 07:12:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YU/W=G7=wdc.com=prvs=655a99766=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1l51Sv-0003MD-SJ
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:11:42 +0000
-Received: from esa1.hgst.iphmx.com (unknown [68.232.141.245])
+ id 1l51TO-0003Y5-JD
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:12:10 +0000
+Received: from esa3.hgst.iphmx.com (unknown [216.71.153.141])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e2c0940-128d-4bc7-a048-e4cdd5ca41a8;
- Thu, 28 Jan 2021 07:11:39 +0000 (UTC)
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ id fb547af9-eb84-4c99-bd7d-dbd0c1260015;
+ Thu, 28 Jan 2021 07:12:07 +0000 (UTC)
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:11:38 +0800
+ by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:12:06 +0800
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2021 22:53:56 -0800
+ 27 Jan 2021 22:54:24 -0800
 Received: from vm.labspan.wdc.com (HELO vm.sc.wdc.com) ([10.6.137.102])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:11:38 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:12:06 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,37 +56,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3e2c0940-128d-4bc7-a048-e4cdd5ca41a8
+X-Inumbo-ID: fb547af9-eb84-4c99-bd7d-dbd0c1260015
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1611817899; x=1643353899;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=BWhCtPmFmY8SRwjALXcTfESKnsKfTCmOrzddkgcZe24=;
-  b=najx2apuJj8Rzstic9UUF6wkNiJmnz1WB56S5SNgmasfosOAzrepDxzF
-   /J9Q7w+qfB7GbJesGGScfJzUjVqmT3JD9Hf+/14UdR1NlTBPnsVbcSukI
-   r91h8dUn0Khd00+bcfmD/cfOFbgH8s8pAQ/2CZa4Aitm8Atb4sBHCAbbi
-   qFh0N60tSMFdApsojgGp+L4OVaUERC6tJr7fwmH3eGX+foXOJH2OSvXj4
-   hoh5CSYDMPZKG719NfKurUxYb61CNaGu0Lu0Fb8PPh/ln4KLpS5WjQaHe
-   LkxgIihXWqzfLLwbtm4v5vOWHKMx9/FeINee+X2oC1hcVxTcmJ5PR7H3Y
-   Q==;
-IronPort-SDR: bmbotpiR8liqB8B4gPNPfTDea8ZaVqI93TVGgoJmmt7x1rMQqk97XiFLrjlvIg6dVTC8WATQAf
- gYMYtQIiVRj+lIaJU4qELxSa3+/Znhh3hcpqSOOtngSnJ7/0TRa5/UTkvmda8/DcVTyPFSt970
- oQ3eyVcHdRlzhATjWYYpBAKZ2UKX1FRF85IgD+Yf7z2MPgORT2xelLb85Yvwx1sNU/B9nKWA8B
- GexAMenwy95tgQ2sqmq17juHr8LBPPDarWEqB+vbPT1F13TRmEneDwlgeVTJCwYn146GgFpBjn
- Eiw=
+  t=1611817927; x=1643353927;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=jUCaPFeDv057fdkiILPSRkCuXPSAzqxSiECC+FKJaMI=;
+  b=ntzfBVdo6Ba8+2InFSdLXU0jcRosgGQ/a63/Hz8IQ622DjbGi6ZQMeb5
+   0wyjQLb+5qz92VJsgQeCphIOcfIrq1dm8LAOt39vK6fhnWNivb9YK75D4
+   +XQ8NZ1GGPJqP6gBu666Jh4pzj5AZqHGrREhSiCYlS4zDSPlBnXjEKUeB
+   q7lyZjlhZcudf/u+Qux/EsAnW29nnheu+5DFtYZO5pqzJ33EBRazOUVOl
+   z7HIVC30EKfUDdWuSCJS4OXDNLip8eUZftDIsVxrefAMX/CzJ7fwztqEL
+   ctLEGmxTt46J/874hseAZ8pqMHCFC4Of1CoWK/g7uh/i7GL3IC8GBXlpM
+   A==;
+IronPort-SDR: UP/zg7VusFM37PFExVn1lpsq4kLlp3CoWfxlTMD27D9IMap9JPMjj3BqHLRPB+lhnNpe4ZPZbP
+ 8kwCBfy1bf7mfSN2D32EfvowCqLT5okVggOFWWrPUveJvUfo2ymhQgyFGqI05TPCD92y4vSr75
+ fALAIM5gSbdZIsp6uc3zl1zV5l2mdCubhZENgrGn16ZC5qDqAteab4yNT9YbH6hjreb6ju52Ec
+ Kte8SIp7+3F6DH/KSyCFEw93Y+n8mVTJVePAMS7bKjpoKLtkcT+7reZB++nmq+TBgFusqZ0911
+ w/o=
 X-IronPort-AV: E=Sophos;i="5.79,381,1602518400"; 
-   d="scan'208";a="268892309"
-IronPort-SDR: V6UIONKp5ZLGSab/6BgVCFBaSrruC6YtEHTd0DfGBbhl5gPifby+/oDC4uW7L+ViXZ7YFrkBqM
- BopeHYXoOiYF62ORqWn4EFlq2HVmU8ml5AEihIfL9BDJcYs7HZ3Cb0CexwRq0FS47MRKq+C4z/
- 50RN8lDzWhvSLrsN15fuEwK52PAYwMTBscX0oYctZ+1Otzb67dOnsHeBvEohXAcrD1t4HdcUPt
- wXgfkgXzCN5XeaGHJidT4HantXc7LAwOkU93kWXDEwU6FgkMTbqHziSSzp0ZXpiA23EZoktmO4
- QFi0xNZYnAAcRfRcSvTQqBbT
-IronPort-SDR: 61Jf/0E9AfrbFBR+VL+aX9SYCVB0aW8ut/7/jLtTqvhkleWzu7b9JjkuOaGgMYwgMXw5C5Sybl
- VeNQs3LEjTqxDsR0ZyK8GA/cVYEZNMX2maaVF3ljBoeSQOO/ApbWgebfLMlSCkYd12pl+6neKj
- zn8nHOcIOMnNA2IBKV67KMXVLkXTllokNu+jCcdgoa5YFwfQecWL2vYSP5hgldmlqCiXple2ew
- fybG/wLzJMKvqPxvYQ59ATt+ZGQv1DjVDDtxXyNp0NJ+IswNbwLOu8d1uiq12NaSa1/W79MYTO
- wq8=
+   d="scan'208";a="162963116"
+IronPort-SDR: 8i0j1P+vj7oUgnmWMDCVMmiMi/tvxMOLB6tyoIxd9NRYHDF8m0rKbbA4pVsRUz4VP1lJ+lT5Go
+ Qbip/3H67HbZZkCHJXtATZEq9dxkj6+5cicW4dgr8nxtkKpLqdGUP/JPjhlrQja+jwnqpLfH6W
+ jLnZtjTtevIqirU5Zh+MmvOv9T94JhsbnN+ZOsb76Fi0F+r/WrsGsP3w3V2vQTXscndevNEQvt
+ n5TwssndZ/I8e+lmlx7gVN1pGtAOUBzpPYAacf49GRV7V965p9fdoE5bpiPz6GWg2NyvNx1mOs
+ gZoNjL/SimU8o7q7eDs3+2FX
+IronPort-SDR: d5xTirF8Ys37shQjxL90xQdmAvrvSyaDd23k+ldZQk6g8Gmyh3lDvEoGm16xcyp5mSBaZTpxOa
+ PvC1PFp6twA2TpPlG+Ql+/AG65S9RMLgGFawcQCbg9J6k/x2AMPUiKYtsSCC84Z+EGYfmFKoID
+ N3xp6Srvi9c6y+EZp98pFBd59WcY1NGSO1F5aHMorlNIT26uZMyL8pegMXpgjACziNosRf/+TT
+ qFeHE9fwJbeXCBkPpJ7sXhYMSQdfV8ojzZIb3gXAYZT1zkKG2mcOAVOk/sf7gRxWJd9WgQISSA
+ lhk=
 WDCIronportException: Internal
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-xfs@vger.kernel.org,
@@ -146,95 +146,49 @@ Cc: axboe@kernel.dk,
 	osandov@fb.com,
 	bvanassche@acm.org,
 	jefflexu@linux.alibaba.com
-Subject: [RFC PATCH 00/34] block: introduce bio_new()
-Date: Wed, 27 Jan 2021 23:10:59 -0800
-Message-Id: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
+Subject: [RFC PATCH 03/34] drdb: use bio_new in drdb
+Date: Wed, 27 Jan 2021 23:11:02 -0800
+Message-Id: <20210128071133.60335-4-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.22.1
+In-Reply-To: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
+References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi,
+Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
+---
+ drivers/block/drbd/drbd_receiver.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-This is a *compile only RFC* which adds a generic helper to initialize
-the various fields of the bio that is repeated all the places in
-file-systems, block layer, and drivers.
-
-The new helper allows callers to initialize non-optional members of bio
-such as bdev, sector, op, opflags, max_bvecs and gfp_mask by
-encapsulating new bio allocation with bio alloc with initialization
-at one place.
-
-The objective of this RFC is to only start a discussion, this it not 
-completely tested at all.
-
--ck                         
-
-Chaitanya Kulkarni (34):
-  block: move common code into blk_next_bio()
-  block: introduce and use bio_new
-  drdb: use bio_new in drdb
-  drdb: use bio_new() in submit_one_flush
-  xen-blkback: use bio_new
-  zram: use bio_new
-  dm: use bio_new in dm-log-writes
-  dm-zoned: use bio_new in get_mblock_slow
-  dm-zoned: use bio_new in dmz_write_mblock
-  dm-zoned: use bio_new in dmz_rdwr_block
-  nvmet: use bio_new in nvmet_bdev_execute_rw
-  scsi: target/iblock: use bio_new
-  block: use bio_new in __blkdev_direct_IO
-  fs/buffer: use bio_new in submit_bh_wbc
-  fscrypt: use bio_new in fscrypt_zeroout_range
-  fs/direct-io: use bio_new in dio_bio_alloc
-  iomap: use bio_new in iomap_dio_zero
-  iomap: use bio_new in iomap_dio_bio_actor
-  fs/jfs/jfs_logmgr.c: use bio_new in lbmRead
-  fs/jfs/jfs_logmgr.c: use bio_new in lbmStartIO
-  fs/jfs/jfs_metapage.c: use bio_new in metapage_writepage
-  fs/jfs/jfs_metapage.c: use bio_new in metapage_readpage
-  fs/mpage.c: use bio_new mpage_alloc
-  fs/nilfs: use bio_new nilfs_alloc_seg_bio
-  ocfs/cluster: use bio_new in dm-log-writes
-  xfs: use bio_new in xfs_rw_bdev
-  xfs: use bio_new in xfs_buf_ioapply_map
-  zonefs: use bio_new
-  power/swap: use bio_new in hib_submit_io
-  hfsplus: use bio_new in hfsplus_submit_bio()
-  iomap: use bio_new in iomap_readpage_actor
-  mm: use bio_new in __swap_writepage
-  mm: use bio_new in swap_readpage
-  mm: add swap_bio_new common bio helper
-
- block/blk-lib.c                     | 34 ++++++++++-------------------
- block/blk-zoned.c                   |  4 +---
- block/blk.h                         |  5 +++--
- drivers/block/drbd/drbd_receiver.c  | 12 +++++-----
- drivers/block/xen-blkback/blkback.c | 20 +++++++++++------
- drivers/block/zram/zram_drv.c       |  5 ++---
- drivers/md/dm-log-writes.c          | 30 +++++++++----------------
- drivers/md/dm-zoned-metadata.c      | 18 +++++----------
- drivers/nvme/target/io-cmd-bdev.c   |  9 +++-----
- drivers/target/target_core_iblock.c |  5 ++---
- fs/block_dev.c                      |  6 ++---
- fs/buffer.c                         | 16 ++++++--------
- fs/crypto/bio.c                     |  5 ++---
- fs/direct-io.c                      |  6 ++---
- fs/hfsplus/wrapper.c                |  5 +----
- fs/iomap/buffered-io.c              | 12 +++++-----
- fs/iomap/direct-io.c                | 11 ++++------
- fs/jfs/jfs_logmgr.c                 | 13 ++++-------
- fs/jfs/jfs_metapage.c               | 15 +++++--------
- fs/mpage.c                          | 18 +++++----------
- fs/nilfs2/segbuf.c                  | 10 ++-------
- fs/ocfs2/cluster/heartbeat.c        |  6 ++---
- fs/xfs/xfs_bio_io.c                 |  7 ++----
- fs/xfs/xfs_buf.c                    |  6 ++---
- fs/zonefs/super.c                   |  6 ++---
- include/linux/bio.h                 | 25 +++++++++++++++++++++
- kernel/power/swap.c                 |  7 +++---
- mm/page_io.c                        | 30 +++++++++++++------------
- 28 files changed, 151 insertions(+), 195 deletions(-)
-
+diff --git a/drivers/block/drbd/drbd_receiver.c b/drivers/block/drbd/drbd_receiver.c
+index 09c86ef3f0fd..e1cd3427b28b 100644
+--- a/drivers/block/drbd/drbd_receiver.c
++++ b/drivers/block/drbd/drbd_receiver.c
+@@ -1643,6 +1643,7 @@ int drbd_submit_peer_request(struct drbd_device *device,
+ 	struct bio *bio;
+ 	struct page *page = peer_req->pages;
+ 	sector_t sector = peer_req->i.sector;
++	struct block_device *bdev = device->ldev->backing_bdev;
+ 	unsigned data_size = peer_req->i.size;
+ 	unsigned n_bios = 0;
+ 	unsigned nr_pages = (data_size + PAGE_SIZE -1) >> PAGE_SHIFT;
+@@ -1687,15 +1688,12 @@ int drbd_submit_peer_request(struct drbd_device *device,
+ 	 * generated bio, but a bio allocated on behalf of the peer.
+ 	 */
+ next_bio:
+-	bio = bio_alloc(GFP_NOIO, nr_pages);
++	bio = bio_new(bdev, sector, op, op_flags, GFP_NOIO, nr_pages);
+ 	if (!bio) {
+ 		drbd_err(device, "submit_ee: Allocation of a bio failed (nr_pages=%u)\n", nr_pages);
+ 		goto fail;
+ 	}
+ 	/* > peer_req->i.sector, unless this is the first bio */
+-	bio->bi_iter.bi_sector = sector;
+-	bio_set_dev(bio, device->ldev->backing_bdev);
+-	bio_set_op_attrs(bio, op, op_flags);
+ 	bio->bi_private = peer_req;
+ 	bio->bi_end_io = drbd_peer_request_endio;
+ 
 -- 
 2.22.1
 
