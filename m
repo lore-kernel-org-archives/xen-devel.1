@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FF1DC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:14:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C848C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:14:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D2FAB64DCE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:14:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D2FAB64DCE
+	by mail.kernel.org (Postfix) with ESMTPS id BBACA64DD6
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:14:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBACA64DD6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76637.138394 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76643.138407 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51VV-0005CI-Gg; Thu, 28 Jan 2021 07:14:21 +0000
+	id 1l51Vk-0005O6-Uw; Thu, 28 Jan 2021 07:14:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76637.138394; Thu, 28 Jan 2021 07:14:21 +0000
+Received: by outflank-mailman (output) from mailman id 76643.138407; Thu, 28 Jan 2021 07:14:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51VV-0005C9-CY; Thu, 28 Jan 2021 07:14:21 +0000
-Received: by outflank-mailman (input) for mailman id 76637;
- Thu, 28 Jan 2021 07:14:20 +0000
+	id 1l51Vk-0005Nw-Qo; Thu, 28 Jan 2021 07:14:36 +0000
+Received: by outflank-mailman (input) for mailman id 76643;
+ Thu, 28 Jan 2021 07:14:35 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YU/W=G7=wdc.com=prvs=655a99766=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1l51VU-0005BH-Nh
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:14:20 +0000
-Received: from esa5.hgst.iphmx.com (unknown [216.71.153.144])
+ id 1l51Vj-0005NJ-LI
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:14:35 +0000
+Received: from esa6.hgst.iphmx.com (unknown [216.71.154.45])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f71a8279-8ac6-4682-824d-537aead0bc24;
- Thu, 28 Jan 2021 07:14:20 +0000 (UTC)
+ id a1b2f94e-f791-42c9-9d79-3621c749b1e9;
+ Thu, 28 Jan 2021 07:14:34 +0000 (UTC)
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:14:18 +0800
+ by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:14:33 +0800
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2021 22:58:38 -0800
+ 27 Jan 2021 22:58:53 -0800
 Received: from vm.labspan.wdc.com (HELO vm.sc.wdc.com) ([10.6.137.102])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:14:18 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:14:33 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,37 +57,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f71a8279-8ac6-4682-824d-537aead0bc24
+X-Inumbo-ID: a1b2f94e-f791-42c9-9d79-3621c749b1e9
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1611818060; x=1643354060;
+  t=1611818074; x=1643354074;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SCctODBcoMVRMibJjtR9kI3GnL0tVZIiIK8qwMLhuQk=;
-  b=qdqyxKe3yUWbRVVnMj8HMLkLfvTUhUlWHfOYDRlZV661tSR3jyHIutX0
-   70dbM4HVhubEC6O6E+jts1HT3o4JTQSCGSjW7ThucLKvCboeyDv0X7nEW
-   174nhhrArwDSOaJJO2SWVXYmHoIVTm/z/J+Oota1lpY4usfRL1CWHCPks
-   TAGAUl6p0fhbwr0V7M6Sc+W7dxG+8kME1JlQ12fuIOFmcLLL8lsw8CRub
-   kuOhdJSLKWUGgsZrdWgFNswozYKNWEOaZm7ZNJjOKEaO5xkGDqEL/SxZK
-   XlhuNf4Yfj2TBEs/OKGueemBoUCAmOu08pnRdb4d6ZwvyjMokMrDjbD5c
-   A==;
-IronPort-SDR: pK692UaIEnP1XIpoIqEh2c3HLlD6x0lnVRSjCfBU9TS6HoDHKsgh/edt/TKkJrKwWPmq0Ua6JT
- HAbthreXMxsYvvPUNxMLU2JAFNHMFwktPQANSID8hfODguMNLr2gAfLtCCF0UVrye3gEUespHN
- m2ISnexpHqlYWlr7f6zyfdMJAoforZwGwBc+F4t7VMraQsPO9oxQTgei1cs/+PtIEPFBBsfJK1
- xE2/vWe5Im+jy283q+34mky8bB7w0djJlNGuwPSd3FTRk+JlI7Z8cxqcQQrwHjzkBDHBA/vwcD
- W6c=
+  bh=WN34YNrFVBX2exPMiNFaWJshviC5HdAH5Y1CjLjlB3Y=;
+  b=P8OPFyb6+DRO2eMvGrO3ZFdfcGq9gKcZAkTUtEw7UFQiIRDVN6YdJenG
+   qviqep58vKGmHKOk6+xi4akbk8a/fL8hKHtb2XVDVpdZYILhtwEXj+Laj
+   6cqeWVZo6IaEdBGYSRhAUoWn50bjPdGQcmNj+f2jgJuCB774qpKEiGhoc
+   tKEoYO+uD74GrI30eiBjbsF6T+wpZQZlOyz8tXkuAZNATooJci9g2yhE2
+   t4ynFIeOFUelOs/m2IAlzwHqCGCEeSQ7h6AO+yn2ArteTzutzJ1yYM0mu
+   0g8W1XKV4rPS3IoeGXQKXpN7fKdU3IuwS46WqunGRvxCAqm8Tm0RbwCFP
+   w==;
+IronPort-SDR: 8qaiRkGulLvOG5qjHxDkPJgEjUECT6TYlwGkIeueAE/XAaqMyzBxfuhfMWVXvvYx2nDYhk+dE6
+ SuN8luAfu4RSWnDeAQOgag+ATZJxFRIbQo2vMg7dMhanwcbYyuoyWUDnbSkzfuWnI01Wgyiu0C
+ xsVZBhzX65T6/osDm9avGeDSvMPRD3wT2N5TMcSNHJyby0BqMCB+/2H0CECX/O4tyTqEEVVqWk
+ 1q/Olzku3hfrFuVQxBkXd7aK3Mvk4ZjM9VxWRfz61pN057aoF1xosz/OHhNF0nwuTzp5mjAn2n
+ 8nI=
 X-IronPort-AV: E=Sophos;i="5.79,381,1602518400"; 
-   d="scan'208";a="158518274"
-IronPort-SDR: FI+nhGOOuPuDu8M5kbpqnDdZpIcHVCvLVkg0rWAH0kfli3UNt+ADqPUjM6iGp44MF+gnY3IMm7
- UU+dUpa9ZamKNJ7EJuhtWvwUvrSG/genpTFYxW1zjHMhXDM2V7GCqTEhnqOY/ELyieYgi89Op5
- JUuH1BitVkyjJwK64wIyPxgheR1BDfzc8YHdBBWjY3uisMaGUk1mxi+ZKF9HXrGSV2jQqSqOyZ
- Uy88ydX8xsNBeE3Zy6xpxfblHQV+4Ntl/ja7k2EVcstok9YOaBizNnGFF6pQzpRtnl05SXn+9t
- oWiNAHTeXvXKeYupL/xbCnWQ
-IronPort-SDR: SE/7jhzj8mUN4IuNpOkC3snrZ8NJ1clnXy6y5ds9FsX94ZBtriQ4uRa7QWKdGcnXbjLMCBoUCV
- muTlW54Qa3qPh6fwMtXMlfwP2+yfKLqOcAu45V7pI+dpenWI0L1OM9udcXtJMTQueAmHig5gDN
- d6OcRwyGrT7GxH48PliS/P58sqmLq3e242QCy6iyXTMgFXRd2EClUAs64FPFphS/GBkZYgQLMx
- xAByTj3G42kPYoeBIsWoRZMAgUwhHcuqehcOxGoJkKVhb66+D9X5hujEyFAgPHDC4Sd1jNsKev
- N7A=
+   d="scan'208";a="159693929"
+IronPort-SDR: rUniaWO92UoUVDNasq2Mg01K3ZD6eAX8KX0XBkhBiIhRHFDuaOSQPQAi2AFktih4P0lGSSV6u6
+ 1QJvr1titcHCS+WSLX73NY2dt1EDt0x/2IEl3+6kIi8fCD9JDkcwVkRNbBFaa5GZ7fpv1ZVw3f
+ 2rA0eyHovrbJ82FVztMfe/gs5sERauw4PpJZbjZNEoW1QXf3Gs2gzGg+nhIYH9WIGObuzob3hJ
+ p4bN6g+yuya+t+E2qn1YRDsFrWgx1QPKIG9BafRaNjjRxwnydAGXq7juRoTKLyRxHK7I1bEI7i
+ bLdoBOEHiYOaToZrg7OjMYlB
+IronPort-SDR: hgdemKPG/3HHgXRADNUaRfIeto8NmW8LEHR468JLI5qNdwJ9I/Vz7EOVIHe6ux2OR8aMkXbCb+
+ hHmOp4ZL4+H3N5KG2012DyI6S+0eAji83o59kSvMRJsf1lkWorl0McE4AqjKkZANcW6TxQu0db
+ Rg6QKY68t8KKdoDxgIWM8St6Q8n+pLj6fbsJ1LpjtPi/SVOVdnUNhjzT9HNr2ak6ECZBXsF3YT
+ a/oz2zpRpm0NjKofMt8jO2sCHWsfpktQx0L5tGvTxbU6SR20ACdGgmG00/Fl2WObQ2KsI7nqdc
+ S2A=
 WDCIronportException: Internal
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-xfs@vger.kernel.org,
@@ -147,9 +147,9 @@ Cc: axboe@kernel.dk,
 	osandov@fb.com,
 	bvanassche@acm.org,
 	jefflexu@linux.alibaba.com
-Subject: [RFC PATCH 18/34] iomap: use bio_new in iomap_dio_bio_actor
-Date: Wed, 27 Jan 2021 23:11:17 -0800
-Message-Id: <20210128071133.60335-19-chaitanya.kulkarni@wdc.com>
+Subject: [RFC PATCH 20/34] fs/jfs/jfs_logmgr.c: use bio_new in lbmStartIO
+Date: Wed, 27 Jan 2021 23:11:19 -0800
+Message-Id: <20210128071133.60335-21-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.22.1
 In-Reply-To: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
 References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
@@ -158,25 +158,32 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 ---
- fs/iomap/direct-io.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ fs/jfs/jfs_logmgr.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/fs/iomap/direct-io.c b/fs/iomap/direct-io.c
-index f6c557a1bd25..0737192f7e5c 100644
---- a/fs/iomap/direct-io.c
-+++ b/fs/iomap/direct-io.c
-@@ -267,9 +267,8 @@ iomap_dio_bio_actor(struct inode *inode, loff_t pos, loff_t length,
- 			goto out;
- 		}
+diff --git a/fs/jfs/jfs_logmgr.c b/fs/jfs/jfs_logmgr.c
+index 4481f3e33a3f..bb25737d52f6 100644
+--- a/fs/jfs/jfs_logmgr.c
++++ b/fs/jfs/jfs_logmgr.c
+@@ -2121,16 +2121,14 @@ static void lbmStartIO(struct lbuf * bp)
  
--		bio = bio_alloc(GFP_KERNEL, nr_pages);
--		bio_set_dev(bio, iomap->bdev);
--		bio->bi_iter.bi_sector = iomap_sector(iomap, pos);
-+		bio = bio_new(iomap->bdev, iomap_sector(iomap, pos), 0, 0,
-+			      nr_pages, GFP_KERNEL);
- 		bio->bi_write_hint = dio->iocb->ki_hint;
- 		bio->bi_ioprio = dio->iocb->ki_ioprio;
- 		bio->bi_private = dio;
+ 	jfs_info("lbmStartIO");
+ 
+-	bio = bio_alloc(GFP_NOFS, 1);
+-	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
+-	bio_set_dev(bio, log->bdev);
++	bio = bio_new(log->bdev, bp->l_blkno << (log->l2bsize - 9),
++			REQ_OP_WRITE | REQ_SYNC, 0, 1, GFP_NOFS);
+ 
+ 	bio_add_page(bio, bp->l_page, LOGPSIZE, bp->l_offset);
+ 	BUG_ON(bio->bi_iter.bi_size != LOGPSIZE);
+ 
+ 	bio->bi_end_io = lbmIODone;
+ 	bio->bi_private = bp;
+-	bio->bi_opf = REQ_OP_WRITE | REQ_SYNC;
+ 
+ 	/* check if journaling to disk has been disabled */
+ 	if (log->no_integrity) {
 -- 
 2.22.1
 
