@@ -2,49 +2,50 @@ Return-Path: <SRS0=OK+i=G7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4341C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 06:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A26DC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:12:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 46FF464DC4
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 06:27:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46FF464DC4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1261964DD9
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:12:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1261964DD9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76560.138166 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76569.138191 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l50lq-000780-Ue; Thu, 28 Jan 2021 06:27:10 +0000
+	id 1l51T5-0003OJ-Pd; Thu, 28 Jan 2021 07:11:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76560.138166; Thu, 28 Jan 2021 06:27:10 +0000
+Received: by outflank-mailman (output) from mailman id 76569.138191; Thu, 28 Jan 2021 07:11:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l50lq-00077t-Rc; Thu, 28 Jan 2021 06:27:10 +0000
-Received: by outflank-mailman (input) for mailman id 76560;
- Thu, 28 Jan 2021 06:27:08 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l51T5-0003OB-MH; Thu, 28 Jan 2021 07:11:51 +0000
+Received: by outflank-mailman (input) for mailman id 76569;
+ Thu, 28 Jan 2021 07:11:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cjbl=G7=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1l50lo-00077o-Lu
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 06:27:08 +0000
-Received: from mail-ot1-x329.google.com (unknown [2607:f8b0:4864:20::329])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 652e41a2-c8f7-4bca-af58-8f2a519d857b;
- Thu, 28 Jan 2021 06:27:06 +0000 (UTC)
-Received: by mail-ot1-x329.google.com with SMTP id 36so4222998otp.2
- for <xen-devel@lists.xenproject.org>; Wed, 27 Jan 2021 22:27:06 -0800 (PST)
-Received: from walnut.ice.pyrology.org (mobile-166-176-187-111.mycingular.net.
- [166.176.187.111])
- by smtp.gmail.com with ESMTPSA id y84sm965474oig.36.2021.01.27.22.27.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Jan 2021 22:27:04 -0800 (PST)
+ <SRS0=YU/W=G7=wdc.com=prvs=655a99766=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
+ id 1l51T4-0003No-KE
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:11:50 +0000
+Received: from esa3.hgst.iphmx.com (unknown [216.71.153.141])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cd66f260-13a4-4693-b98f-d42b9279e01c;
+ Thu, 28 Jan 2021 07:11:48 +0000 (UTC)
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:11:47 +0800
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Jan 2021 22:56:07 -0800
+Received: from vm.labspan.wdc.com (HELO vm.sc.wdc.com) ([10.6.137.102])
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:11:46 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,876 +57,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 652e41a2-c8f7-4bca-af58-8f2a519d857b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=jXcOi3t3iNhKg24AB8K/qz6fgm6UeKoZAlvdh8MWLPs=;
-        b=CuYUzG0CogoTg1e0yqrLzyOmnJHmaXICdwpTZ09EPYqF14qmhAuI8OVhLYxELXJrLW
-         2VPJUQI0VHRztwh5Rkl/oDOyiQfdpH8fRhfjJmnxgyGtjqMc+pAsBe8Q4ABtelZDsohU
-         XTYtn9GYendO6UBE6gaiD3Gw6l6z8d40XcbWYcqYMZk7U1XCKJO0XNE0FWklrpDOVMTI
-         KBe/S29+EzAK5QTIunlgN9ldoRixdglrPPHJn9u+V6k/T9kX4yPRHGVz8yvP//29tPMg
-         ycCFLhaMnVyP4pTee0q5IFjiA0S2VYaMUX1HD32o5fp893QcB6QFZaQxxVbZ2moxOJb+
-         p/iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=jXcOi3t3iNhKg24AB8K/qz6fgm6UeKoZAlvdh8MWLPs=;
-        b=qnnB1yjYm04jTZuv4eYuXvo2oC7Uv8YtICc1zP1IrZ7OhxGKFDfxb4zt5TsSfNZuCF
-         BGQ3pRHDAd7mNG9XG/2G5GlaJYchTXGTLGcmcoI4uja8CDItQfhHBF1oAc0RwZRQpt/6
-         Ab/Hn2iKTAZRP9G5J6pnNL+DMUD8C3krLMlcVtx0wSn+VfSWLF07El3lLbcCXh4phuTa
-         R9ZMtHF+2SngTJxVHdJ18xiJchBv+Iju48U+8vTzFAgxM/V0Lv3OBg6KNJH1h+ATVyBi
-         7fE8sOxXgm3Ki2M+9PsCy9J2r2ZWQQgJTcNXXXG4TCVE3XpQGErKpctgczf3pvLVqdrd
-         MG0Q==
-X-Gm-Message-State: AOAM531BuAeDpicTHT4IXokG89oO2dXWxDTLThlYT9qSj8DYQ0vAjMoT
-	4yjREuqlALDuPEeNXA4P1iC91CdXlt3JPQ==
-X-Google-Smtp-Source: ABdhPJy8cGmGzx1YH5WQf39tWCfc9uKIqNP3MzNfIPaiFHciMTg4mO7iYz5gJ9xsxhM1TvETI8ytAQ==
-X-Received: by 2002:a05:6830:2313:: with SMTP id u19mr10608421ote.321.1611815225198;
-        Wed, 27 Jan 2021 22:27:05 -0800 (PST)
-From: Christopher Clark <christopher.w.clark@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Julien Grall <julien.grall.oss@gmail.com>,
-	Bertrand Marquis <Bertrand.Marquis@arm.com>,
-	Rich Persaud <persaur@gmail.com>,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
-	openxt <openxt@googlegroups.com>,
-	Oleksandr Tyshchenko <olekstysh@gmail.com>,
-	Julien Grall <jgrall@amazon.com>,
-	James McKenzie <james@bromium.com>,
-	Andrew Cooper <Andrew.Cooper3@citrix.com>,
-	Paul Durrant <pdurrant@amazon.co.uk>,
-	Jean-Philippe Ouellet <jpo@vt.edu>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [XTF v2] Add Argo test
-Date: Wed, 27 Jan 2021 22:26:35 -0800
-Message-Id: <20210128062635.29677-1-christopher.w.clark@gmail.com>
-X-Mailer: git-send-email 2.17.1
+X-Inumbo-ID: cd66f260-13a4-4693-b98f-d42b9279e01c
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1611817908; x=1643353908;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=eWet3+GOqUNRw+dCyihtl3LTOeV3gTTJDd7Ea4w+clg=;
+  b=iMqWOGYFcU/z4lo7PoOXYZTsAbxO7VKfU3WDTRM+XIro0cg2PZ+UoR0O
+   zOdKL9nsRm6UChk8kvAImXLNrXJuxtg9dlr6ojpj8kID5TkhQqGaQom60
+   wg25bVcYzhDP0hWBoVNCOqFXxW6GTSHb0yNNXD5+gv5Wkm+LjrW6aYuGx
+   08xgPmCTvnNHJwhyhDcKS8dTurEhHbjHm85Thosp/DiIXf16omtWeRAg7
+   NNXUdRg9wKKx0J20ty0i+us+O+79Fvluj55eIdqfCHHNcmbDTN+WC/O/r
+   Pw/Nru94ujijYu/STDWWO3smL5bQcTvzOlXUigAN7uyuGXjOLbWYdODyP
+   Q==;
+IronPort-SDR: Cg0YySq52S1BuYvbYJA5tV8RN60kOfaJ8QXPIarU8RJmGG3ZSm/zgGgxYXimAfRAR57BaBhNGr
+ eklxNYueuhkztz/2Y53pIGN8qULIrhRgLGXXMPGlwjENBeiZpicXu9PleRFAF5EDK5xsI6HFFu
+ 8TG9KKCq/uYMXasbYK6QEKHI3/w6UReRb5bl4JJboF1ixvE3MVGP9ojTuASPW1PjQGHXqKIKNq
+ TFF0e9aMJlt2AjHUKWh6Hr/xiC6D1AVKrOgP2fTJxoUyl6aj5HEI46V+2is+atUd3Q0NGhKsAA
+ I08=
+X-IronPort-AV: E=Sophos;i="5.79,381,1602518400"; 
+   d="scan'208";a="162963089"
+IronPort-SDR: CQ3xngbmWgBCY128PrOjv3YPIhdzR5/rdx7EQv1x+b0HTwFN4ltwdNFQv5FvA1TbS4ULFawWPm
+ kwT2sibF6IG3KiSh+LGFEWCNi2B/00GnBOk4cp/TDLePP49TiHQd8DgSijwnSZiTydgmYgLvYS
+ KcLPasadLharbWJpg07S5Ezzl0RrLkJ3twr/qU043n8xTi/DMptOxbb20eNEECbQEOlfBU4uWd
+ 7NoP/Y4QBbrDoXvqexuZ776uaQPac/TQHhI3PEFF9dMqayERupQaa+CULj8SgwqQ46dfOiCsy0
+ jENBUexABXv5dcxgCfqU2R3T
+IronPort-SDR: UO027L+w2LmrSv+r4jHc7V6MfhclxochZ4q/gKoOnHb/alTZT7F9/4KjZrNCZAKJPJHjEl8zjQ
+ btfDHq8ntGB6arYkxikoGObA79gqCi3nJZAFBbpTjKtHzOWqNheZit1SHeKrnOkOlZqda10wHA
+ lKzVa+peWlZiSXNoZnitf2s3YH424/Lf6Od0Q5TvGZLxtIxoLSsxIGie29rcLN/atLab1ULG9S
+ UmjXPLLRWItiporouoLkwAzUh8fELyClcBeyT3S1PWdOuFAmZ6ShYxhRystXSbBeBsPW0LixEL
+ geY=
+WDCIronportException: Internal
+From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
+To: linux-xfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	dm-devel@redhat.com,
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	drbd-dev@lists.linbit.com,
+	xen-devel@lists.xenproject.org,
+	linux-nvme@lists.infradead.org,
+	linux-scsi@vger.kernel.org,
+	target-devel@vger.kernel.org,
+	linux-fscrypt@vger.kernel.org,
+	jfs-discussion@lists.sourceforge.net,
+	linux-nilfs@vger.kernel.org,
+	ocfs2-devel@oss.oracle.com,
+	linux-pm@vger.kernel.org,
+	linux-mm@kvack.org
+Cc: axboe@kernel.dk,
+	philipp.reisner@linbit.com,
+	lars.ellenberg@linbit.com,
+	konrad.wilk@oracle.com,
+	roger.pau@citrix.com,
+	minchan@kernel.org,
+	ngupta@vflare.org,
+	sergey.senozhatsky.work@gmail.com,
+	agk@redhat.com,
+	snitzer@redhat.com,
+	hch@lst.de,
+	sagi@grimberg.me,
+	chaitanya.kulkarni@wdc.com,
+	martin.petersen@oracle.com,
+	viro@zeniv.linux.org.uk,
+	tytso@mit.edu,
+	jaegeuk@kernel.org,
+	ebiggers@kernel.org,
+	djwong@kernel.org,
+	shaggy@kernel.org,
+	konishi.ryusuke@gmail.com,
+	mark@fasheh.com,
+	jlbec@evilplan.org,
+	joseph.qi@linux.alibaba.com,
+	damien.lemoal@wdc.com,
+	naohiro.aota@wdc.com,
+	jth@kernel.org,
+	rjw@rjwysocki.net,
+	len.brown@intel.com,
+	pavel@ucw.cz,
+	akpm@linux-foundation.org,
+	hare@suse.de,
+	gustavoars@kernel.org,
+	tiwai@suse.de,
+	alex.shi@linux.alibaba.com,
+	asml.silence@gmail.com,
+	ming.lei@redhat.com,
+	tj@kernel.org,
+	osandov@fb.com,
+	bvanassche@acm.org,
+	jefflexu@linux.alibaba.com
+Subject: [RFC PATCH 01/34] block: move common code into blk_next_bio()
+Date: Wed, 27 Jan 2021 23:11:00 -0800
+Message-Id: <20210128071133.60335-2-chaitanya.kulkarni@wdc.com>
+X-Mailer: git-send-email 2.22.1
+In-Reply-To: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
+References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Simple test cases for the four Argo operations, register, unregister,
-sendv and notify exercised with a single test domain.
-Add infrastructure to access Argo: a 5-argument hypercall, number 39.
+blk_next_bio() is the central function which allocates the bios for
+discard, write-same, write-zeroes and zone-mgmt. The initialization of
+various bio members is duplicated in disacrd, write-same, write-zeores.
+In this preparation patch we add bdev, sector, op, and opf arguments to
+the blk_next_bio() to reduce the duplication. 
 
-Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+In the next patch we introduce bio_new(), this prepration patch allows
+us to call it inside blk_next_bio().
+
+Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 ---
-v2:
-- corrected the CC list. Apologies for the omissions in posting v1.
+ block/blk-lib.c   | 36 +++++++++++++++---------------------
+ block/blk-zoned.c |  4 +---
+ block/blk.h       |  5 +++--
+ 3 files changed, 19 insertions(+), 26 deletions(-)
 
-- update to use $(ALL_ENVIRONMENTS) in TEST-ENVS: pv32pae
-  was unintentionally missing and all are wanted included.
-
- arch/x86/hypercall_page.S                |   2 +-
- arch/x86/include/arch/hypercall-x86_32.h |  13 +
- arch/x86/include/arch/hypercall-x86_64.h |  14 +
- docs/all-tests.dox                       |   2 +
- include/xen/argo.h                       | 255 ++++++++++++++++
- include/xen/xen.h                        |  11 +-
- include/xtf/hypercall.h                  |   8 +
- include/xtf/numbers.h                    |   5 +
- tests/argo/Makefile                      |   9 +
- tests/argo/main.c                        | 360 +++++++++++++++++++++++
- 10 files changed, 677 insertions(+), 2 deletions(-)
- create mode 100644 include/xen/argo.h
- create mode 100644 tests/argo/Makefile
- create mode 100644 tests/argo/main.c
-
-diff --git a/arch/x86/hypercall_page.S b/arch/x86/hypercall_page.S
-index b77c1b9..cc6ddc2 100644
---- a/arch/x86/hypercall_page.S
-+++ b/arch/x86/hypercall_page.S
-@@ -59,7 +59,7 @@ DECLARE_HYPERCALL(sysctl)
- DECLARE_HYPERCALL(domctl)
- DECLARE_HYPERCALL(kexec_op)
- DECLARE_HYPERCALL(tmem_op)
--DECLARE_HYPERCALL(xc_reserved_op)
-+DECLARE_HYPERCALL(argo_op)
- DECLARE_HYPERCALL(xenpmu_op)
+diff --git a/block/blk-lib.c b/block/blk-lib.c
+index 752f9c722062..fb486a0bdb58 100644
+--- a/block/blk-lib.c
++++ b/block/blk-lib.c
+@@ -10,7 +10,9 @@
  
- DECLARE_HYPERCALL(arch_0)
-diff --git a/arch/x86/include/arch/hypercall-x86_32.h b/arch/x86/include/arch/hypercall-x86_32.h
-index 34a7026..f372291 100644
---- a/arch/x86/include/arch/hypercall-x86_32.h
-+++ b/arch/x86/include/arch/hypercall-x86_32.h
-@@ -53,6 +53,19 @@
-         (type)res;                                                      \
-     })
+ #include "blk.h"
  
-+#define _hypercall32_5(type, hcall, a1, a2, a3, a4, a5)                 \
-+    ({                                                                  \
-+        long res, _a1 = (long)(a1), _a2 = (long)(a2), _a3 = (long)(a3), \
-+            _a4 = (long)(a4), _a5 = (long)(a5);                         \
-+        asm volatile (                                                  \
-+            "call hypercall_page + %c[offset]"                          \
-+            : "=a" (res), "+b" (_a1), "+c" (_a2), "+d" (_a3),           \
-+              "+S" (_a4), "+D" (_a5)                                    \
-+            : [offset] "i" (hcall * 32)                                 \
-+            : "memory" );                                               \
-+        (type)res;                                                      \
-+    })
-+
- #endif /* XTF_X86_32_HYPERCALL_H */
+-struct bio *blk_next_bio(struct bio *bio, unsigned int nr_pages, gfp_t gfp)
++struct bio *blk_next_bio(struct bio *bio, struct block_device *bdev,
++			sector_t sect, unsigned op, unsigned opf,
++			unsigned int nr_pages, gfp_t gfp)
+ {
+ 	struct bio *new = bio_alloc(gfp, nr_pages);
  
- /*
-diff --git a/arch/x86/include/arch/hypercall-x86_64.h b/arch/x86/include/arch/hypercall-x86_64.h
-index d283ad3..728bf74 100644
---- a/arch/x86/include/arch/hypercall-x86_64.h
-+++ b/arch/x86/include/arch/hypercall-x86_64.h
-@@ -53,6 +53,20 @@
-         (type)res;                                                      \
-     })
+@@ -19,6 +21,10 @@ struct bio *blk_next_bio(struct bio *bio, unsigned int nr_pages, gfp_t gfp)
+ 		submit_bio(bio);
+ 	}
  
-+#define _hypercall64_5(type, hcall, a1, a2, a3, a4, a5)                 \
-+    ({                                                                  \
-+        long res, _a1 = (long)(a1), _a2 = (long)(a2), _a3 = (long)(a3); \
-+        register long _a4 asm ("r10") = (long)(a4);                     \
-+        register long _a5 asm ("r8") = (long)(a5);                     \
-+        asm volatile (                                                  \
-+            "call hypercall_page + %c[offset]"                          \
-+            : "=a" (res), "+D" (_a1), "+S" (_a2), "+d" (_a3),           \
-+              "+r" (_a4), "+r" (_a5)                                    \
-+            : [offset] "i" (hcall * 32)                                 \
-+            : "memory" );                                               \
-+        (type)res;                                                      \
-+    })
++	new->bi_iter.bi_sector = sect;
++	bio_set_dev(new, bdev);
++	bio_set_op_attrs(new, op, opf);
 +
- #endif /* XTF_X86_64_HYPERCALL_H */
- 
- /*
-diff --git a/docs/all-tests.dox b/docs/all-tests.dox
-index 902fc44..bed674c 100644
---- a/docs/all-tests.dox
-+++ b/docs/all-tests.dox
-@@ -164,6 +164,8 @@ states.
- 
- @section index-utility Utilities
- 
-+@subpage test-argo - Argo functionality test
-+
- @subpage test-cpuid - Print CPUID information.
- 
- @subpage test-fep - Test availability of HVM Forced Emulation Prefix.
-diff --git a/include/xen/argo.h b/include/xen/argo.h
-new file mode 100644
-index 0000000..58ff439
---- /dev/null
-+++ b/include/xen/argo.h
-@@ -0,0 +1,255 @@
-+/******************************************************************************
-+ * Argo : Hypervisor-Mediated data eXchange
-+ *
-+ * Derived from v4v, the version 2 of v2v.
-+ *
-+ * Copyright (c) 2010, Citrix Systems
-+ * Copyright (c) 2018-2019, BAE Systems
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to
-+ * deal in the Software without restriction, including without limitation the
-+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-+ * sell copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ *
-+ */
-+
-+#ifndef __XEN_PUBLIC_ARGO_H__
-+#define __XEN_PUBLIC_ARGO_H__
-+
-+#include "xen.h"
-+
-+#define XEN_ARGO_DOMID_ANY       DOMID_INVALID
-+
-+/* The maximum size of an Argo ring is defined to be: 16MB (0x1000000 bytes). */
-+#define XEN_ARGO_MAX_RING_SIZE  (0x1000000ULL)
-+
-+/* Fixed-width type for "argo port" number. Nothing to do with evtchns. */
-+typedef uint32_t xen_argo_port_t;
-+
-+/* gfn type: 64-bit fixed-width on all architectures */
-+typedef uint64_t xen_argo_gfn_t;
-+
-+/*
-+ * XEN_ARGO_MAXIOV : maximum number of iovs accepted in a single sendv.
-+ * Caution is required if this value is increased: this determines the size of
-+ * an array of xen_argo_iov_t structs on the hypervisor stack, so could cause
-+ * stack overflow if the value is too large.
-+ * The Linux Argo driver never passes more than two iovs.
-+*/
-+#define XEN_ARGO_MAXIOV          8U
-+
-+typedef struct xen_argo_iov
-+{
-+    unsigned long iov_hnd;
-+    uint32_t iov_len;
-+    uint32_t pad;
-+} xen_argo_iov_t;
-+
-+typedef struct xen_argo_addr
-+{
-+    xen_argo_port_t aport;
-+    domid_t domain_id;
-+    uint16_t pad;
-+} xen_argo_addr_t;
-+
-+typedef struct xen_argo_send_addr
-+{
-+    struct xen_argo_addr src;
-+    struct xen_argo_addr dst;
-+} xen_argo_send_addr_t;
-+
-+typedef struct xen_argo_ring
-+{
-+    /* Guests should use atomic operations to access rx_ptr */
-+    uint32_t rx_ptr;
-+    /* Guests should use atomic operations to access tx_ptr */
-+    uint32_t tx_ptr;
-+    /*
-+     * Header space reserved for later use. Align the start of the ring to a
-+     * multiple of the message slot size.
-+     */
-+    uint8_t reserved[56];
-+    uint8_t ring[XEN_FLEX_ARRAY_DIM];
-+} xen_argo_ring_t;
-+
-+typedef struct xen_argo_register_ring
-+{
-+    xen_argo_port_t aport;
-+    domid_t partner_id;
-+    uint16_t pad;
-+    uint32_t len;
-+} xen_argo_register_ring_t;
-+
-+typedef struct xen_argo_unregister_ring
-+{
-+    xen_argo_port_t aport;
-+    domid_t partner_id;
-+    uint16_t pad;
-+} xen_argo_unregister_ring_t;
-+
-+/* Messages on the ring are padded to a multiple of this size. */
-+#define XEN_ARGO_MSG_SLOT_SIZE 0x10
-+
-+/*
-+ * Notify flags
-+ */
-+/* Ring exists */
-+#define XEN_ARGO_RING_EXISTS            (1U << 0)
-+/* Ring is shared, not unicast */
-+#define XEN_ARGO_RING_SHARED            (1U << 1)
-+/* Ring is empty */
-+#define XEN_ARGO_RING_EMPTY             (1U << 2)
-+/* Sufficient space to queue space_required bytes might exist */
-+#define XEN_ARGO_RING_SUFFICIENT        (1U << 3)
-+/* Insufficient ring size for space_required bytes */
-+#define XEN_ARGO_RING_EMSGSIZE          (1U << 4)
-+/* Too many domains waiting for available space signals for this ring */
-+#define XEN_ARGO_RING_EBUSY             (1U << 5)
-+
-+typedef struct xen_argo_ring_data_ent
-+{
-+    struct xen_argo_addr ring;
-+    uint16_t flags;
-+    uint16_t pad;
-+    uint32_t space_required;
-+    uint32_t max_message_size;
-+} xen_argo_ring_data_ent_t;
-+
-+typedef struct xen_argo_ring_data
-+{
-+    uint32_t nent;
-+    uint32_t pad;
-+    struct xen_argo_ring_data_ent data[XEN_FLEX_ARRAY_DIM];
-+} xen_argo_ring_data_t;
-+
-+struct xen_argo_ring_message_header
-+{
-+    uint32_t len;
-+    struct xen_argo_addr source;
-+    uint32_t message_type;
-+    uint8_t data[XEN_FLEX_ARRAY_DIM];
-+};
-+
-+/*
-+ * Hypercall operations
-+ */
-+
-+/*
-+ * XEN_ARGO_OP_register_ring
-+ *
-+ * Register a ring using the guest-supplied memory pages.
-+ * Also used to reregister an existing ring (eg. after resume from hibernate).
-+ *
-+ * The first argument struct indicates the port number for the ring to register
-+ * and the partner domain, if any, that is to be allowed to send to the ring.
-+ * A wildcard (XEN_ARGO_DOMID_ANY) may be supplied instead of a partner domid,
-+ * and if the hypervisor has wildcard sender rings enabled, this will allow
-+ * any domain (XSM notwithstanding) to send to the ring.
-+ *
-+ * The second argument is an array of guest frame numbers and the third argument
-+ * indicates the size of the array. This operation only supports 4K-sized pages.
-+ *
-+ * arg1: XEN_GUEST_HANDLE(xen_argo_register_ring_t)
-+ * arg2: XEN_GUEST_HANDLE(xen_argo_gfn_t)
-+ * arg3: unsigned long npages
-+ * arg4: unsigned long flags (32-bit value)
-+ */
-+#define XEN_ARGO_OP_register_ring     1
-+
-+/* Register op flags */
-+/*
-+ * Fail exist:
-+ * If set, reject attempts to (re)register an existing established ring.
-+ * If clear, reregistration occurs if the ring exists, with the new ring
-+ * taking the place of the old, preserving tx_ptr if it remains valid.
-+ */
-+#define XEN_ARGO_REGISTER_FLAG_FAIL_EXIST  0x1
-+
-+#ifdef __XEN__
-+/* Mask for all defined flags. */
-+#define XEN_ARGO_REGISTER_FLAG_MASK XEN_ARGO_REGISTER_FLAG_FAIL_EXIST
-+#endif
-+
-+/*
-+ * XEN_ARGO_OP_unregister_ring
-+ *
-+ * Unregister a previously-registered ring, ending communication.
-+ *
-+ * arg1: XEN_GUEST_HANDLE(xen_argo_unregister_ring_t)
-+ * arg2: NULL
-+ * arg3: 0 (ZERO)
-+ * arg4: 0 (ZERO)
-+ */
-+#define XEN_ARGO_OP_unregister_ring     2
-+
-+/*
-+ * XEN_ARGO_OP_sendv
-+ *
-+ * Send a list of buffers contained in iovs.
-+ *
-+ * The send address struct specifies the source and destination addresses
-+ * for the message being sent, which are used to find the destination ring:
-+ * Xen first looks for a most-specific match with a registered ring with
-+ *  (id.addr == dst) and (id.partner == sending_domain) ;
-+ * if that fails, it then looks for a wildcard match (aka multicast receiver)
-+ * where (id.addr == dst) and (id.partner == DOMID_ANY).
-+ *
-+ * For each iov entry, send iov_len bytes from iov_base to the destination ring.
-+ * If insufficient space exists in the destination ring, it will return -EAGAIN
-+ * and Xen will notify the caller when sufficient space becomes available.
-+ *
-+ * The message type is a 32-bit data field available to communicate message
-+ * context data (eg. kernel-to-kernel, rather than application layer).
-+ *
-+ * arg1: XEN_GUEST_HANDLE(xen_argo_send_addr_t) source and dest addresses
-+ * arg2: XEN_GUEST_HANDLE(xen_argo_iov_t) iovs
-+ * arg3: unsigned long niov
-+ * arg4: unsigned long message type (32-bit value)
-+ */
-+#define XEN_ARGO_OP_sendv               3
-+
-+/*
-+ * XEN_ARGO_OP_notify
-+ *
-+ * Asks Xen for information about other rings in the system.
-+ *
-+ * ent->ring is the xen_argo_addr_t of the ring you want information on.
-+ * Uses the same ring matching rules as XEN_ARGO_OP_sendv.
-+ *
-+ * ent->space_required : if this field is not null then Xen will check
-+ * that there is space in the destination ring for this many bytes of payload.
-+ * If the ring is too small for the requested space_required, it will set the
-+ * XEN_ARGO_RING_EMSGSIZE flag on return.
-+ * If sufficient space is available, it will set XEN_ARGO_RING_SUFFICIENT
-+ * and CANCEL any pending notification for that ent->ring; otherwise it
-+ * will schedule a notification event and the flag will not be set.
-+ *
-+ * These flags are set by Xen when notify replies:
-+ * XEN_ARGO_RING_EXISTS     ring exists
-+ * XEN_ARGO_RING_SHARED     ring is registered for wildcard partner
-+ * XEN_ARGO_RING_EMPTY      ring is empty
-+ * XEN_ARGO_RING_SUFFICIENT sufficient space for space_required is there
-+ * XEN_ARGO_RING_EMSGSIZE   space_required is too large for the ring size
-+ * XEN_ARGO_RING_EBUSY      too many domains waiting for available space signals
-+ *
-+ * arg1: XEN_GUEST_HANDLE(xen_argo_ring_data_t) ring_data (may be NULL)
-+ * arg2: NULL
-+ * arg3: 0 (ZERO)
-+ * arg4: 0 (ZERO)
-+ */
-+#define XEN_ARGO_OP_notify              4
-+
-+#endif
-diff --git a/include/xen/xen.h b/include/xen/xen.h
-index 877f2f0..bcde4ad 100644
---- a/include/xen/xen.h
-+++ b/include/xen/xen.h
-@@ -49,7 +49,7 @@
- #define __HYPERVISOR_domctl               36
- #define __HYPERVISOR_kexec_op             37
- #define __HYPERVISOR_tmem_op              38
--#define __HYPERVISOR_xc_reserved_op       39 /* reserved for XenClient */
-+#define __HYPERVISOR_argo_op              39
- #define __HYPERVISOR_xenpmu_op            40
- 
- /* Architecture-specific hypercall definitions. */
-@@ -66,6 +66,15 @@
- typedef uint16_t domid_t;
- #endif
- 
-+/* Define a variable length array (depends on compiler). */
-+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-+#define XEN_FLEX_ARRAY_DIM
-+#elif defined(__GNUC__)
-+#define XEN_FLEX_ARRAY_DIM  0
-+#else
-+#define XEN_FLEX_ARRAY_DIM  1 /* variable size */
-+#endif
-+
- #define DOMID_FIRST_RESERVED (0x7ff0U)
- #define DOMID_SELF (0x7ff0U)
- 
-diff --git a/include/xtf/hypercall.h b/include/xtf/hypercall.h
-index acda592..2d3d7ee 100644
---- a/include/xtf/hypercall.h
-+++ b/include/xtf/hypercall.h
-@@ -13,6 +13,7 @@
- # define HYPERCALL2 _hypercall64_2
- # define HYPERCALL3 _hypercall64_3
- # define HYPERCALL4 _hypercall64_4
-+# define HYPERCALL5 _hypercall64_5
- 
- #elif defined(__i386__)
- 
-@@ -21,6 +22,7 @@
- # define HYPERCALL2 _hypercall32_2
- # define HYPERCALL3 _hypercall32_3
- # define HYPERCALL4 _hypercall32_4
-+# define HYPERCALL5 _hypercall32_5
- 
- #else
- # error Bad architecture for hypercalls
-@@ -170,6 +172,12 @@ static inline long hypercall_sysctl(xen_sysctl_t *arg)
-     return HYPERCALL1(long, __HYPERVISOR_sysctl, arg);
+ 	return new;
  }
  
-+static inline long hypercall_argo_op(unsigned int cmd, void *arg1, void *arg2,
-+                                     unsigned long arg3, unsigned long arg4)
-+{
-+    return HYPERCALL5(long, __HYPERVISOR_argo_op, cmd, arg1, arg2, arg3, arg4);
-+}
-+
- /*
-  * Higher level hypercall helpers
-  */
-diff --git a/include/xtf/numbers.h b/include/xtf/numbers.h
-index f5c73b7..b0b2c1b 100644
---- a/include/xtf/numbers.h
-+++ b/include/xtf/numbers.h
-@@ -52,6 +52,11 @@
-  */
- #define _u(v) ((unsigned long)(v))
+@@ -94,11 +100,7 @@ int __blkdev_issue_discard(struct block_device *bdev, sector_t sector,
  
-+/**
-+ * Round up a number to the next integer
-+ */
-+#define roundup(x, y) ((((x) + ((y) - 1)) / (y)) * (y))
-+
- #endif /* !__ASSEMBLY__ */
- #endif /* XTF_NUMBERS_H */
+ 		WARN_ON_ONCE((req_sects << 9) > UINT_MAX);
  
-diff --git a/tests/argo/Makefile b/tests/argo/Makefile
-new file mode 100644
-index 0000000..51d72f3
---- /dev/null
-+++ b/tests/argo/Makefile
-@@ -0,0 +1,9 @@
-+include $(ROOT)/build/common.mk
-+
-+NAME      := argo
-+CATEGORY  := utility
-+TEST-ENVS := $(ALL_ENVIRONMENTS)
-+
-+obj-perenv += main.o
-+
-+include $(ROOT)/build/gen.mk
-diff --git a/tests/argo/main.c b/tests/argo/main.c
-new file mode 100644
-index 0000000..8eac3d2
---- /dev/null
-+++ b/tests/argo/main.c
-@@ -0,0 +1,360 @@
-+/**
-+ * @file tests/argo/main.c
-+ * @ref test-argo
-+ *
-+ * @page test-argo argo
-+ *
-+ * @todo Docs for test-argo
-+ *
-+ * @see tests/argo/main.c
-+ */
-+#include <xtf.h>
-+#include <xtf/lib.h>
-+#include <xen/argo.h>
-+
-+const char test_title[] = "Argo hypercall test";
-+
-+/*
-+ * The current Linux Argo driver has a default ring size of 32 4k pages,
-+ * so follow that for the test ring size.
-+ */
-+#define TEST_RING_NPAGES 32
-+static uint8_t ring_buffer[PAGE_SIZE * TEST_RING_NPAGES] __page_aligned_bss;
-+
-+static int
-+test_invalid_register_ring(void)
-+{
-+    int rc;
-+
-+    /* attempt an Argo call to register a ring with invalid arguments */
-+    rc = hypercall_argo_op(XEN_ARGO_OP_register_ring, NULL, NULL,
-+                           XEN_ARGO_MAX_RING_SIZE + 1, /* never allowed */
-+                           0);
-+    switch (rc) {
-+        case -EINVAL: /* this is the response we are looking for */
-+            return 0;
-+
-+        /* All below here are test exit conditions */
-+        case 0:
-+            xtf_failure("Fail: an invalid ring register op was not rejected\n");
-+            break;
-+        case -ENOSYS:
-+            xtf_error("Error: Argo support has not been enabled in this hypervisor\n");
-+            break;
-+        case -EOPNOTSUPP:
-+            xtf_error("Error: Argo is not enabled at runtime for this hypervisor\n");
-+            break;
-+        case -ENODEV:
-+            xtf_error("Error: Argo is not enabled for this domain\n");
-+            break;
-+        case -EPERM:
-+            xtf_failure("Fail: ring registration by this domain is not permitted\n");
-+            break;
-+        default:
-+            xtf_failure("Fail: unknown error %d for invalid ring registration\n", rc);
-+            break;
-+    }
-+
-+    return -1;
-+}
-+
-+/* notify: asks Xen for information about rings */
-+static int
-+test_notify_for_one_ring(domid_t query_domid, xen_argo_port_t query_port,
-+                         bool exists)
-+{
-+    int rc;
-+    /* buffer for populating a struct with a variable length array member */
-+    uint8_t raw_buf[sizeof(xen_argo_ring_data_t) + 1 * sizeof(xen_argo_ring_data_ent_t)];
-+    xen_argo_ring_data_t *p_ring_data;
-+
-+    p_ring_data = (xen_argo_ring_data_t *)&raw_buf;
-+    p_ring_data->nent = 1;
-+    p_ring_data->pad = 0;
-+
-+    p_ring_data->data[0].ring.domain_id = query_domid;
-+    p_ring_data->data[0].ring.aport = query_port;
-+    p_ring_data->data[0].ring.pad = 0;
-+
-+    p_ring_data->data[0].flags = 0;
-+    p_ring_data->data[0].space_required = 0;
-+    p_ring_data->data[0].max_message_size = 0;
-+    p_ring_data->data[0].pad = 0;
-+
-+    rc = hypercall_argo_op(XEN_ARGO_OP_notify, p_ring_data, NULL, 0, 0);
-+
-+    switch (rc) {
-+        case 0:
-+            break;
-+        case -ENODEV:
-+            xtf_failure("Fail: Argo is not enabled for this domain\n");
-+            return -1;
-+        case -EFAULT:
-+            xtf_failure("Fail: Memory fault performing notify test\n");
-+            return -1;
-+        default:
-+            xtf_failure("Fail: Unexpected error code %d in notify test\n", rc);
-+            return -1;
-+    }
-+
-+    if ( !exists )
-+    {
-+        /* No currently-defined flags should be set for a non-existent ring */
-+        if ( p_ring_data->data[0].flags )
-+        {
-+            xtf_failure("Fail: Non-existent ring reported as existing\n");
-+            return -1;
-+        }
-+    }
-+    else
-+    {
-+        if ( !(p_ring_data->data[0].flags & XEN_ARGO_RING_EXISTS) )
-+        {
-+            xtf_failure("Fail: Ring not reported as existing\n");
-+            return -1;
-+        }
-+    }
-+
-+    return 0;
-+}
-+
-+/* See the Argo Linux device driver for similar use of these macros */
-+#define XEN_ARGO_ROUNDUP(x) roundup((x), XEN_ARGO_MSG_SLOT_SIZE)
-+#define ARGO_RING_OVERHEAD 80
-+#define TEST_RING_SIZE(npages) \
-+        (XEN_ARGO_ROUNDUP((((PAGE_SIZE)*npages) - ARGO_RING_OVERHEAD)))
-+
-+static int
-+test_register_ring(domid_t own_domid, xen_argo_port_t aport)
-+{
-+    int rc;
-+    unsigned int i;
-+    xen_argo_register_ring_t reg;
-+    xen_argo_gfn_t gfns[TEST_RING_NPAGES];
-+
-+    reg.aport = aport;
-+    reg.partner_id = own_domid;
-+    reg.len = TEST_RING_SIZE(TEST_RING_NPAGES);
-+    reg.pad = 0;
-+
-+    for ( i = 0; i < TEST_RING_NPAGES; i++ )
-+        gfns[i] = virt_to_gfn(ring_buffer + (i * PAGE_SIZE));
-+
-+    rc = hypercall_argo_op(XEN_ARGO_OP_register_ring, &reg, &gfns,
-+                           TEST_RING_NPAGES, XEN_ARGO_REGISTER_FLAG_FAIL_EXIST);
-+    switch (rc) {
-+        case 0:
-+            return 0;
-+
-+        case -ENODEV:
-+            xtf_failure("Fail: Argo is not enabled for this domain\n");
-+            break;
-+        case -EFAULT:
-+            xtf_failure("Fail: Memory fault performing register ring test\n");
-+            break;
-+        default:
-+            xtf_failure("Fail: Unexpected error code %d in register ring test\n", rc);
-+            break;
-+    }
-+    return -1;
-+}
-+
-+static int
-+test_unregister_ring(domid_t partner_domid, xen_argo_port_t aport,
-+                     bool exists)
-+{
-+    int rc;
-+    xen_argo_register_ring_t unreg;
-+
-+    unreg.aport = aport;
-+    unreg.partner_id = partner_domid;
-+    unreg.pad = 0;
-+
-+    rc = hypercall_argo_op(XEN_ARGO_OP_unregister_ring, &unreg, NULL, 0, 0);
-+
-+    switch (rc) {
-+        case 0:
-+            if ( exists )
-+                return 0;
-+            xtf_failure("Fail: unexpected success unregistering non-existent ring\n");
-+            return -1;
-+
-+        case -ENOENT:
-+            if ( !exists )
-+                return 0;
-+            xtf_failure("Fail: unexpected ring not found when unregistering \n");
-+            return -1;
-+
-+        default:
-+            xtf_failure("Fail: Unexpected error code %d in unregister ring test\n", rc);
-+            break;
-+    }
-+    return -1;
-+}
-+
-+static int
-+test_sendv(domid_t src_domid, xen_argo_port_t src_aport,
-+           domid_t dst_domid, xen_argo_port_t dst_aport,
-+           const char *msg_text, int msg_len, unsigned int msg_type)
-+{
-+    int rc;
-+    xen_argo_send_addr_t send_addr;
-+    xen_argo_iov_t iovs[1];
-+    unsigned int niov;
-+
-+    send_addr.src.domain_id = src_domid;
-+    send_addr.src.aport     = src_aport;
-+    send_addr.src.pad       = 0;
-+    send_addr.dst.domain_id = dst_domid;
-+    send_addr.dst.aport     = dst_aport;
-+    send_addr.dst.pad       = 0;
-+
-+    iovs[0].iov_hnd = (unsigned long)msg_text;
-+    iovs[0].iov_len = msg_len;
-+    iovs[0].pad = 0;
-+    niov = 1;
-+
-+    rc = hypercall_argo_op(XEN_ARGO_OP_sendv, &send_addr, &iovs, niov, msg_type);
-+
-+    if ( rc != msg_len )
-+    {
-+        if ( rc < 0 )
-+        {
-+            xtf_failure("Fail: Unexpected error code %d in sendv test\n", rc);
-+            return -1;
-+        }
-+        xtf_failure("Fail: Unexpected message size %d written in sendv test\n", rc);
-+        return -1;
-+    }
-+
-+    return 0;
-+}
-+
-+static int
-+inspect_ring_after_first_single_sendv(domid_t src_domid,
-+                                      xen_argo_port_t src_aport,
-+                                      const char *sent_msg,
-+                                      unsigned int sent_msg_len,
-+                                      unsigned int sent_msg_type)
-+{
-+    int rc = 0;
-+    xen_argo_ring_t *ringp = (xen_argo_ring_t *)ring_buffer;
-+    struct xen_argo_ring_message_header *msg_hdr;
-+    unsigned int sent_length;
-+
-+    if ( ringp->rx_ptr != 0 )
-+    {
-+        xtf_failure("Fail: receive pointer non-zero after sendv: %u\n",
-+                    ringp->rx_ptr);
-+        rc = -1;
-+    }
-+
-+    if ( ringp->tx_ptr != XEN_ARGO_ROUNDUP(
-+                sizeof(struct xen_argo_ring_message_header) + sent_msg_len) )
-+    {
-+        xtf_failure("Fail: transmit pointer incorrect after sendv: %u\n",
-+                    ringp->rx_ptr);
-+        rc = -1;
-+    }
-+
-+    msg_hdr = (struct xen_argo_ring_message_header *)&(ringp->ring);
-+
-+    if ( msg_hdr->source.domain_id != src_domid )
-+    {
-+        xtf_failure("Fail: source domain id incorrect: %u, expected %u\n",
-+                    msg_hdr->source.domain_id, src_domid);
-+        rc = -1;
-+    }
-+
-+    if ( msg_hdr->source.aport != src_aport )
-+    {
-+        xtf_failure("Fail: source domain port incorrect: %u, expected %u\n",
-+                    msg_hdr->source.domain_id, src_aport);
-+        rc = -1;
-+    }
-+
-+    if ( msg_hdr->source.pad != 0 )
-+    {
-+        xtf_failure("Fail: source padding incorrect: %u, expected zero\n",
-+                    msg_hdr->source.pad);
-+        rc = -1;
-+    }
-+
-+    if ( sent_msg_type != msg_hdr->message_type )
-+    {
-+        xtf_failure("Fail: message type incorrect: %u sent, %u received\n",
-+                    sent_msg_type, msg_hdr->message_type);
-+        rc = -1;
-+    }
-+
-+    sent_length = sent_msg_len + sizeof(struct xen_argo_ring_message_header);
-+    if ( sent_length != msg_hdr->len )
-+    {
-+        xtf_failure("Fail: received message length incorrect: "
-+                    "%u sent is %u with header added, %u received\n",
-+                    sent_msg_len, sent_length, msg_hdr->len);
-+        rc = -1;
-+    }
-+
-+    if ( strncmp((const char *)msg_hdr->data, sent_msg, sent_msg_len) )
-+    {
-+        xtf_failure("Fail: sent message got mangled\n");
-+        rc = -1;
-+    }
-+
-+    return rc;
-+}
-+
-+static int
-+clear_test_ring(void)
-+{
-+    memset(ring_buffer, 0, PAGE_SIZE * TEST_RING_NPAGES);
-+    return 0;
-+}
-+
-+void test_main(void)
-+{
-+    int own_domid;
-+    xen_argo_port_t test_aport = 1;
-+    const char simple_text[] = "a simple thing to send\n";
-+    const unsigned int msg_type = 0x12345678;
-+
-+    /* First test validates for Argo availability to gate further testing */
-+    if ( test_invalid_register_ring() )
-+        return;
-+
-+    own_domid = xtf_get_domid();
-+    if ( own_domid < 0 )
-+        return xtf_error("Error: could not determine domid of the test domain\n");
-+
-+    if ( test_notify_for_one_ring(own_domid, test_aport, false) ||
-+         test_unregister_ring(own_domid, test_aport, false) ||
-+         clear_test_ring() ||
-+         test_register_ring(own_domid, test_aport) ||
-+         test_notify_for_one_ring(own_domid, test_aport, true) ||
-+         test_unregister_ring(own_domid, test_aport, true) ||
-+         test_notify_for_one_ring(own_domid, test_aport, false) ||
-+         test_unregister_ring(own_domid, test_aport, false) ||
-+         clear_test_ring() ||
-+         test_register_ring(own_domid, test_aport) ||
-+         test_sendv(own_domid, test_aport, own_domid, test_aport,
-+                    simple_text, sizeof(simple_text), msg_type) ||
-+         inspect_ring_after_first_single_sendv(own_domid, test_aport,
-+                    simple_text, sizeof(simple_text), msg_type) ||
-+         test_notify_for_one_ring(own_domid, test_aport, true) ||
-+         test_unregister_ring(own_domid, test_aport, true) ||
-+         test_unregister_ring(own_domid, test_aport, false) )
-+        return;
-+
-+    xtf_success(NULL);
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+-		bio = blk_next_bio(bio, 0, gfp_mask);
+-		bio->bi_iter.bi_sector = sector;
+-		bio_set_dev(bio, bdev);
+-		bio_set_op_attrs(bio, op, 0);
+-
++		bio = blk_next_bio(bio, bdev, sector, op, 0, 0, gfp_mask);
+ 		bio->bi_iter.bi_size = req_sects << 9;
+ 		sector += req_sects;
+ 		nr_sects -= req_sects;
+@@ -168,6 +170,7 @@ static int __blkdev_issue_write_same(struct block_device *bdev, sector_t sector,
+ {
+ 	struct request_queue *q = bdev_get_queue(bdev);
+ 	unsigned int max_write_same_sectors;
++	unsigned int op = REQ_OP_WRITE_SAME;
+ 	struct bio *bio = *biop;
+ 	sector_t bs_mask;
+ 
+@@ -188,14 +191,11 @@ static int __blkdev_issue_write_same(struct block_device *bdev, sector_t sector,
+ 	max_write_same_sectors = bio_allowed_max_sectors(q);
+ 
+ 	while (nr_sects) {
+-		bio = blk_next_bio(bio, 1, gfp_mask);
+-		bio->bi_iter.bi_sector = sector;
+-		bio_set_dev(bio, bdev);
++		bio = blk_next_bio(bio, bdev, sector, op, 0, 1, gfp_mask);
+ 		bio->bi_vcnt = 1;
+ 		bio->bi_io_vec->bv_page = page;
+ 		bio->bi_io_vec->bv_offset = 0;
+ 		bio->bi_io_vec->bv_len = bdev_logical_block_size(bdev);
+-		bio_set_op_attrs(bio, REQ_OP_WRITE_SAME, 0);
+ 
+ 		if (nr_sects > max_write_same_sectors) {
+ 			bio->bi_iter.bi_size = max_write_same_sectors << 9;
+@@ -249,7 +249,9 @@ static int __blkdev_issue_write_zeroes(struct block_device *bdev,
+ {
+ 	struct bio *bio = *biop;
+ 	unsigned int max_write_zeroes_sectors;
++	unsigned int op = REQ_OP_WRITE_ZEROES;
+ 	struct request_queue *q = bdev_get_queue(bdev);
++	unsigned int opf = flags & BLKDEV_ZERO_NOUNMAP ? REQ_NOUNMAP : 0;
+ 
+ 	if (!q)
+ 		return -ENXIO;
+@@ -264,13 +266,7 @@ static int __blkdev_issue_write_zeroes(struct block_device *bdev,
+ 		return -EOPNOTSUPP;
+ 
+ 	while (nr_sects) {
+-		bio = blk_next_bio(bio, 0, gfp_mask);
+-		bio->bi_iter.bi_sector = sector;
+-		bio_set_dev(bio, bdev);
+-		bio->bi_opf = REQ_OP_WRITE_ZEROES;
+-		if (flags & BLKDEV_ZERO_NOUNMAP)
+-			bio->bi_opf |= REQ_NOUNMAP;
+-
++		bio = blk_next_bio(bio, bdev, sector, op, opf, 0, gfp_mask);
+ 		if (nr_sects > max_write_zeroes_sectors) {
+ 			bio->bi_iter.bi_size = max_write_zeroes_sectors << 9;
+ 			nr_sects -= max_write_zeroes_sectors;
+@@ -303,6 +299,7 @@ static int __blkdev_issue_zero_pages(struct block_device *bdev,
+ 		sector_t sector, sector_t nr_sects, gfp_t gfp_mask,
+ 		struct bio **biop)
+ {
++	unsigned int nr_pages = __blkdev_sectors_to_bio_pages(nr_sects);
+ 	struct request_queue *q = bdev_get_queue(bdev);
+ 	struct bio *bio = *biop;
+ 	int bi_size = 0;
+@@ -315,11 +312,8 @@ static int __blkdev_issue_zero_pages(struct block_device *bdev,
+ 		return -EPERM;
+ 
+ 	while (nr_sects != 0) {
+-		bio = blk_next_bio(bio, __blkdev_sectors_to_bio_pages(nr_sects),
++		bio = blk_next_bio(bio, bdev, sector, REQ_OP_WRITE, 0, nr_pages,
+ 				   gfp_mask);
+-		bio->bi_iter.bi_sector = sector;
+-		bio_set_dev(bio, bdev);
+-		bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
+ 
+ 		while (nr_sects != 0) {
+ 			sz = min((sector_t) PAGE_SIZE, nr_sects << 9);
+diff --git a/block/blk-zoned.c b/block/blk-zoned.c
+index 7a68b6e4300c..68e77628348d 100644
+--- a/block/blk-zoned.c
++++ b/block/blk-zoned.c
+@@ -231,8 +231,7 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
+ 		return -EINVAL;
+ 
+ 	while (sector < end_sector) {
+-		bio = blk_next_bio(bio, 0, gfp_mask);
+-		bio_set_dev(bio, bdev);
++		bio = blk_next_bio(bio, bdev, 0 , op, REQ_SYNC, 0, gfp_mask);
+ 
+ 		/*
+ 		 * Special case for the zone reset operation that reset all
+@@ -244,7 +243,6 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
+ 			break;
+ 		}
+ 
+-		bio->bi_opf = op | REQ_SYNC;
+ 		bio->bi_iter.bi_sector = sector;
+ 		sector += zone_sectors;
+ 
+diff --git a/block/blk.h b/block/blk.h
+index 0198335c5838..0a278bae5478 100644
+--- a/block/blk.h
++++ b/block/blk.h
+@@ -329,8 +329,9 @@ extern int blk_iolatency_init(struct request_queue *q);
+ static inline int blk_iolatency_init(struct request_queue *q) { return 0; }
+ #endif
+ 
+-struct bio *blk_next_bio(struct bio *bio, unsigned int nr_pages, gfp_t gfp);
+-
++struct bio *blk_next_bio(struct bio *bio, struct block_device *bdev,
++			sector_t sect, unsigned op, unsigned opf,
++			unsigned int nr_pages, gfp_t gfp);
+ #ifdef CONFIG_BLK_DEV_ZONED
+ void blk_queue_free_zone_bitmaps(struct request_queue *q);
+ #else
 -- 
-2.17.1
+2.22.1
 
 
