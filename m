@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FC82C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5096FC433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:19:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 428F264DD6
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:19:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 428F264DD6
+	by mail.kernel.org (Postfix) with ESMTPS id 0172464DBD
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:19:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0172464DBD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76726.138551 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76733.138564 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51Zz-00072E-Er; Thu, 28 Jan 2021 07:18:59 +0000
+	id 1l51an-0007FG-Qv; Thu, 28 Jan 2021 07:19:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76726.138551; Thu, 28 Jan 2021 07:18:59 +0000
+Received: by outflank-mailman (output) from mailman id 76733.138564; Thu, 28 Jan 2021 07:19:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51Zz-000727-At; Thu, 28 Jan 2021 07:18:59 +0000
-Received: by outflank-mailman (input) for mailman id 76726;
- Thu, 28 Jan 2021 07:18:58 +0000
+	id 1l51an-0007F7-L5; Thu, 28 Jan 2021 07:19:49 +0000
+Received: by outflank-mailman (input) for mailman id 76733;
+ Thu, 28 Jan 2021 07:19:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YU/W=G7=wdc.com=prvs=655a99766=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1l51Vf-0004at-5o
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:14:31 +0000
-Received: from esa2.hgst.iphmx.com (unknown [68.232.143.124])
+ id 1l51X8-0005xp-0u
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:16:02 +0000
+Received: from esa1.hgst.iphmx.com (unknown [68.232.141.245])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id acc075e5-c520-4e8d-984d-3086641da3f1;
- Thu, 28 Jan 2021 07:14:27 +0000 (UTC)
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:16:53 +0800
+ id 6c077183-3313-4dcd-9118-ffda31c970cc;
+ Thu, 28 Jan 2021 07:15:56 +0000 (UTC)
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:15:56 +0800
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2021 22:58:46 -0800
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Jan 2021 22:58:14 -0800
 Received: from vm.labspan.wdc.com (HELO vm.sc.wdc.com) ([10.6.137.102])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:14:26 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:15:56 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,37 +56,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: acc075e5-c520-4e8d-984d-3086641da3f1
+X-Inumbo-ID: 6c077183-3313-4dcd-9118-ffda31c970cc
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1611818215; x=1643354215;
+  t=1611818156; x=1643354156;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ehPvHcNFObZpIErrj099M/D2lwJDNRsp+vZtBu0oImM=;
-  b=k/Jru1VNjukvwvnvZz0pM0LaZbG8K+F6BQzUFH9Qf1jMHx0aq5ApLu88
-   Rb8tduHQb5dWDKKlXRj44rBBaKXeXcDl6Txj9hhXUnD6FJrAChKpq1Vfb
-   oanL2XI1ICrkolTcMjRJecKzIA8dvr8BsxJEByutfSpkAxv9nfF5ZUAlM
-   Bp1kUF7CRdOmzo2LnZg3/Rv9p80v2i2se7EeTNdMM5Wg5HV6AdsYYHl2F
-   FJogJwPPr1Ps6OJyuned0ffgeWjG6oX5RNUBVys95X8RP9zmoILZN2pXE
-   cjAsTfUjOYhIFE8SIIP7Sf+KfGs/Fytf/0LEMcdcuZNM2CiCRP5VAcy88
-   g==;
-IronPort-SDR: TIyCIEWYac9w41uOVHCx1NlputHnePgau9U4Nio69e774e+y9cOp4h+IKaKCI301hgNtB8yprv
- OzNvH/7WTp9HgJAKWBfCFL5vppPayTQkk3hFAENtRx52kjln5+RR1BZGzrFHbTG4CDVeqqWHjT
- sHZteJXFthRUvmtbzVRktJolWtP6ZxivYoDAZ6//uohOXrJ/AeHt4qoVfe5cXbpPCyeAhQh4Iq
- NpUJaFI0UegbzGqXhx6UsK6U6WC90CBjOhzjwY/+zZXOl/14RnhLTZscq/M21E4vFU7BFXIgcF
- 4kk=
+  bh=Y9+Mnjxua+V7f2wybPN6k7Lk3+3v11itMxG4MZ3QMkM=;
+  b=CsawMGiqvoAV9E1wzdlqWHzFa/o/XTDpW+RwCvV6hN5B7lfpJX3nqqqg
+   IiwDkVPjYFNfvaPy4ZvlyQAC8SSwLkvUl39gPNHV4Y2KySVtVmf2G/21K
+   rgtqo5PZyyusW6hD9cXQjLerpVixKAUp3XCf3d03f5wH00jGJcK1HgiFw
+   n9mvFFhsFY14nG2/yx/+EpZ1U6tGLPFivP/qBIAJqnNnlmma5XXLfop9H
+   0TW4Ols4UePg9AdlsX8kunQ+grhQ6ue+VMUZius0QI4fuzLcerS3QxwnH
+   FvBm0N0bmWPIN1T+EY4U+CtmvzvVNrPCSh/CSvwHx+1oWhPo6OY2kqQe2
+   w==;
+IronPort-SDR: 8EemiGUR/Lt+s9KCVSzppInI5P2SsG2w6RJRXUX0+HLYGkqpb+IeibZbb1m8yqLJ8rE1QNPYDc
+ TG5iJoHgw8EYFfoff/LCvPiHkbvPZNrVQxe74PkI17nBMIt9bHfhSt/2l3jnPWJiAfTK3LpoZe
+ E26lQya24uGpGgRyzBcF77l49GQj1hvkoD5fRIlBj3UlyFC5pIOevvxPF/49IJLyLUigijBDf7
+ /XRnRXheRwVMRXxvYRPrF71nqBtb2w3cpyrannM8XumLS7K7YkbmEu2DNGHcoFuXVOMXUTGNsl
+ qcM=
 X-IronPort-AV: E=Sophos;i="5.79,381,1602518400"; 
-   d="scan'208";a="262549081"
-IronPort-SDR: 1cbHfofSamCo/ApmAsljDsCfz4r54G2FUZWYGmNyuiSCN/Z2YbFMK4sTHBY6hI5X9G+hdRKckL
- MECpSuOA5McwEFqGcWF9fZAuz1wtmgLEfP04Iww38ZdVq/7yvSG85e0GGhFjwhuUeHPHiZ+CA0
- KVoKo0o6pkY6maaofqS39ufg6JO/WLTcZRQ5Fkl5MyqYubTWnwqw9qWJ8sa/aAQljenlUfCNNe
- CGBAKcNX2u0L20dVF1ImlGoD1GGzcPw5ZLeIoSk0Novo+/GPe+cqpPa4nboxjKy0E+3Zuvs8Qn
- +Wrn6/RiP2m2ygrD+0NiE/MM
-IronPort-SDR: 8zWpKV1GG73An1zpnhB0A6RHwKcvj53Vuxf9sCqOuA5ZBa5rmYze0QOVvU8HXRv/G7xpZnMIM1
- owK+1cH03BzVuf34Vf4nPTxb3MJRxKHU7MPVsfYKBvoE5U6OUm3WvlKRFiuZT6me2l9YBpl9Dw
- srBAVfHgvdy6RitQaBWTWMkJB+swHKrWKKu/bnpunnMHs5/vTt80z06ovpDFKB7vDmFytTZ38T
- a/jEmxYBTtNgI1MsJxovm0Lez6j5sfQFarO3Hedm9NgwCWDpXDWzTcx88c/FgbEiOtdVVLfaVV
- avQ=
+   d="scan'208";a="268892708"
+IronPort-SDR: Hk7obHlDXWo91j7YJHosOOiKVsPbGtO7cFr8RDApjJ+ffY/3xP4Er8cCd9NrMjI9U2UrQdbZXk
+ mDC0jlUQ18cOryhI1Upz8EVoEwm3LJ0ySK9ulE3meo1/rIWuP6CBfNp6Y9Hb8KmLVRynSCTfep
+ EI1XdxpdJRe9lhlW0Xau0ca866/fUBaVpwpIK/HMif5/AHGaHJjCdaYnVd7F42TtPFk8+hK3dC
+ HMy5P4MvPRDY5suNXoidrxC76XpQ1SiePw7B0IzOKnp9/2ATeG//8Fvj/qqQZvvFkhdBPm4Fzl
+ G8eeZgDmxKQSkr1MHtNIRmok
+IronPort-SDR: MJghY7CI3VIGR5/IaW1FKfL3TP8YTcGZMlKgwb78Me3B/B/3apRuuzh9zoIBvsafPZo8P1zI7O
+ tvlMLEPWxNEsao+d+OWmeAfzkHQtyrR4CezWVDYJlrvLmf+2864qvNG9WiZqHSu38lUOwqOgWr
+ BwUEJ5wQyzZ3OCyeIORv7uUc6VzLa9ZZ6RiC/IlKAQuXNbiGRl7btRhvnWciISjEw6c6WHvSr7
+ U7MWRK7LEz7DNkLYA3LIdhi5N4PJW+ftjhgTNZ5eyVeVGIhgT6If8NwOmXnpUTI7IymY6dp08v
+ 5GE=
 WDCIronportException: Internal
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-xfs@vger.kernel.org,
@@ -146,9 +146,9 @@ Cc: axboe@kernel.dk,
 	osandov@fb.com,
 	bvanassche@acm.org,
 	jefflexu@linux.alibaba.com
-Subject: [RFC PATCH 19/34] fs/jfs/jfs_logmgr.c: use bio_new in lbmRead
-Date: Wed, 27 Jan 2021 23:11:18 -0800
-Message-Id: <20210128071133.60335-20-chaitanya.kulkarni@wdc.com>
+Subject: [RFC PATCH 31/34] iomap: use bio_new in iomap_readpage_actor
+Date: Wed, 27 Jan 2021 23:11:30 -0800
+Message-Id: <20210128071133.60335-32-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.22.1
 In-Reply-To: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
 References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
@@ -157,33 +157,45 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 ---
- fs/jfs/jfs_logmgr.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ fs/iomap/buffered-io.c | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/fs/jfs/jfs_logmgr.c b/fs/jfs/jfs_logmgr.c
-index 9330eff210e0..4481f3e33a3f 100644
---- a/fs/jfs/jfs_logmgr.c
-+++ b/fs/jfs/jfs_logmgr.c
-@@ -1979,17 +1979,14 @@ static int lbmRead(struct jfs_log * log, int pn, struct lbuf ** bpp)
+diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+index 16a1e82e3aeb..08d119b62cf5 100644
+--- a/fs/iomap/buffered-io.c
++++ b/fs/iomap/buffered-io.c
+@@ -241,6 +241,9 @@ iomap_readpage_actor(struct inode *inode, loff_t pos, loff_t length, void *data,
+ 	struct page *page = ctx->cur_page;
+ 	struct iomap_page *iop = iomap_page_create(inode, page);
+ 	bool same_page = false, is_contig = false;
++	struct block_device *bdev = iomap->bdev;
++	unsigned opf = ctx->rac ? REQ_RAHEAD : 0;
++	unsigned op = REQ_OP_READ;
+ 	loff_t orig_pos = pos;
+ 	unsigned poff, plen;
+ 	sector_t sector;
+@@ -285,19 +288,14 @@ iomap_readpage_actor(struct inode *inode, loff_t pos, loff_t length, void *data,
  
- 	bp->l_flag |= lbmREAD;
+ 		if (ctx->rac) /* same as readahead_gfp_mask */
+ 			gfp |= __GFP_NORETRY | __GFP_NOWARN;
+-		ctx->bio = bio_alloc(gfp, min(BIO_MAX_PAGES, nr_vecs));
++		ctx->bio = bio_new(bdev, sector, op, opf, gfp, nr_vecs);
+ 		/*
+ 		 * If the bio_alloc fails, try it again for a single page to
+ 		 * avoid having to deal with partial page reads.  This emulates
+ 		 * what do_mpage_readpage does.
+ 		 */
+ 		if (!ctx->bio)
+-			ctx->bio = bio_alloc(orig_gfp, 1);
+-		ctx->bio->bi_opf = REQ_OP_READ;
+-		if (ctx->rac)
+-			ctx->bio->bi_opf |= REQ_RAHEAD;
+-		ctx->bio->bi_iter.bi_sector = sector;
+-		bio_set_dev(ctx->bio, iomap->bdev);
++			ctx->bio = bio_new(bdev, sector, op, opf, orig_gfp, 1);
+ 		ctx->bio->bi_end_io = iomap_read_end_io;
+ 	}
  
--	bio = bio_alloc(GFP_NOFS, 1);
--
--	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
--	bio_set_dev(bio, log->bdev);
-+	bio = bio_new(log->bdev, bp->l_blkno << (log->l2bsize - 9),
-+			REQ_OP_READ, 0, 1, GFP_NOFS);
- 
- 	bio_add_page(bio, bp->l_page, LOGPSIZE, bp->l_offset);
- 	BUG_ON(bio->bi_iter.bi_size != LOGPSIZE);
- 
- 	bio->bi_end_io = lbmIODone;
- 	bio->bi_private = bp;
--	bio->bi_opf = REQ_OP_READ;
- 	/*check if journaling to disk has been disabled*/
- 	if (log->no_integrity) {
- 		bio->bi_iter.bi_size = 0;
 -- 
 2.22.1
 
