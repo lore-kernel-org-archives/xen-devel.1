@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C31F6C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54669C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:13:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6CC8C64DD8
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:13:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CC8C64DD8
+	by mail.kernel.org (Postfix) with ESMTPS id 1434564DCE
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 07:13:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1434564DCE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76595.138275 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76599.138287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51UA-00042i-2a; Thu, 28 Jan 2021 07:12:58 +0000
+	id 1l51UI-0004AN-I9; Thu, 28 Jan 2021 07:13:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76595.138275; Thu, 28 Jan 2021 07:12:58 +0000
+Received: by outflank-mailman (output) from mailman id 76599.138287; Thu, 28 Jan 2021 07:13:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l51U9-00042X-Vq; Thu, 28 Jan 2021 07:12:57 +0000
-Received: by outflank-mailman (input) for mailman id 76595;
- Thu, 28 Jan 2021 07:12:56 +0000
+	id 1l51UI-0004AF-E1; Thu, 28 Jan 2021 07:13:06 +0000
+Received: by outflank-mailman (input) for mailman id 76599;
+ Thu, 28 Jan 2021 07:13:04 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YU/W=G7=wdc.com=prvs=655a99766=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1l51U8-00040j-DC
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:12:56 +0000
-Received: from esa2.hgst.iphmx.com (unknown [68.232.143.124])
+ id 1l51UG-00048y-HN
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 07:13:04 +0000
+Received: from esa3.hgst.iphmx.com (unknown [216.71.153.141])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7f087a9c-87f4-413b-9b62-01a83a78ff2f;
- Thu, 28 Jan 2021 07:12:53 +0000 (UTC)
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:14:21 +0800
+ id db42adc0-1404-41f4-a545-7206404311c3;
+ Thu, 28 Jan 2021 07:13:03 +0000 (UTC)
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 28 Jan 2021 15:13:02 +0800
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2021 22:57:05 -0800
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Jan 2021 22:55:20 -0800
 Received: from vm.labspan.wdc.com (HELO vm.sc.wdc.com) ([10.6.137.102])
- by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:12:45 -0800
+ by uls-op-cesaip02.wdc.com with ESMTP; 27 Jan 2021 23:13:02 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,37 +57,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f087a9c-87f4-413b-9b62-01a83a78ff2f
+X-Inumbo-ID: db42adc0-1404-41f4-a545-7206404311c3
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1611818074; x=1643354074;
+  t=1611817983; x=1643353983;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=A6gWT2+anXyYq2Hv6qVI+iojoFiSM9Vb51ZpjBpkhPc=;
-  b=gM/RwNIq1yMz3moNmYY7tIHWnvLEFZi3it25y6vCR8uyG74Ok+VaQrVD
-   dQplJFcYrzQ62nAgkEVt6DyO75+H8w87LM/hbmJYMIFh3+jN7anHpphm5
-   HoOL77UagK5gxoYb4b0q62/lQCt70KprQ3d83VZBiK2E2MbzXYu+HgSPa
-   dIQn9kWdAN5EwG4um1EkSTVT3aVddLRIdHp2jQYne1FSROA/eQCfhoHbU
-   NQXguNFM+7JTRpTNVkNh1cGH+Fwnk3D7DzNxXVQnAPYN2J/TAknDdjSrQ
-   LvOoq/eE6Q4eyF860CxYDp4dM922/vhVXX/IMx7EX83T79ZT7Hcd6AYV9
-   w==;
-IronPort-SDR: VaaR04ggAqFXOyy7jziY6XZn8tZ+eAXmimmP3zvqMO06fWIgMx+2nrQ/OWKG7VJriTxCOKhwzw
- cEO7jbgMSvCA3dFAMMYasC50xR0nNHEJaAULDaaPpSxTNEA4xIwbcHHY0BD5W/5WoAQjxt0cUN
- +PqtQSa24rXZJX1fh6TloJ0KSfTfd7m/WHUlpjdLgb9Y2rl8CeN/301piaVc/bSPke2sRvbzPy
- XmHq6qVkAkXiJRREfXAPLEQj6UKNXK+SDHs74g8xtYB19i630SO5u8pHaLu/gB+4km5MQZHYJq
- sbw=
+  bh=OzcT2XWni+wbNY2uowp8HTdSyU1JsS57dIOzGLP71ak=;
+  b=DCTHmIIs3gw9kivtm1op9LgYX/zeqSVgFsjj2hNMK2fMLuZq9MQHtCJt
+   t0oiq11BdFbk/DXas69rVxIqZuCNmWUmwpDuWf0x8VwTUKtVxaB90TiRi
+   L/ueumxYEhwKh2TrQClHjvx4F834UdICFwe7nVOZYCFsE4X4wguTTfZdh
+   QSqf9oMBvqF95b4wse/GArJtRfIJuC18O3FdPNdjJqWW6RCZBzxD4yNMT
+   7INZz48bFm2oZF9bqV6NzcPiGpqzWjVVYR64vBmpc1bgTLkjjnfIAWI2r
+   hBZdD1Qor8OQO4k0Ybd5xsqLjZgAlAofvNh6PqJ0okrd0ZlQhrsJVGl19
+   Q==;
+IronPort-SDR: /Ehg7W3oO96HmOx7BOpK3IpA5+Q6Y6NIujGptz5FGbcCktNolbiyM0WDYaVrQeYK2NDzqfdOpB
+ eiES1DZtHxFBLCP5yGjDQg2TmN9jZb7kl29SwOZ2q4vk+WYVY0ci/FnSJc/Vrw+TyPAXjy498W
+ awJ5E96c1gb1FBra+MoXD6Ggmnx5qB4vJkiSPOcciYX7NUM9RF3YzktZzeh3MBej09lC0x9qfu
+ h61xgBHS0IDEzh+6oofukF0zbllbB+LcDQk/qOzucr3WQG9wmKlzEeSnj6tZeENlUkl0oCj7i6
+ Xhs=
 X-IronPort-AV: E=Sophos;i="5.79,381,1602518400"; 
-   d="scan'208";a="262548934"
-IronPort-SDR: tHKnkyA5sDjpo439P4+RiOKkzW5Juu1iWfyWNK9QKgTeCwc04rS7dgMt7vhaJpkILwBMpQmfVp
- gD7zv1Ct3HmK4l7RhTHtJU44dOaJVM6+AUlM3QNnviVFbEKLcvXhtr+NhsSydPXB5oHzKX2uB3
- 6z7/ykNrnuxV/jiJ6uh+VRlT+eStWQrsiNHInAONKI4ow+4zhF6ey06Yhy9aXw5s1rC72D5Xdq
- Ho4MNY8172qGVII50yIiSHRFC0CH5LSOR8WDmBETCLN1Y+S3R2vi6y891Cx6XxtEFD/zNGc7w0
- jCIPY3RfMEdRwXKeoayd/OkE
-IronPort-SDR: iX0HhBu+61xFa7EtRWB17G0RFoDdFxtABLHP5yHe733z1qMOeQszsqPYXIq64MFQkReY48/RWk
- FOClHc2dhNxuRM1QyLpF0KtQrhnCpVvcpPgq0B9OecXrJpCL8UYdCuDWFTL9LdxFS6qWHXh51B
- DNrP6xQEwjJPm/GL/W/Mv5XtvThzXYCRCRRzvICfBStun4/LN576oOtiFYHwzWMShhTX3BjqKf
- c8icNJold/1bdh3xf4xqkQcFwP0TJ4M2AqZVo41MRst8Lsv9bfR6qeue7iMnlhLF3vJJuSRBwu
- WXg=
+   d="scan'208";a="162963196"
+IronPort-SDR: Ksd/LnIoJ+vsFjCGE8tsOEW2ssFLNYKgKtFW+zEdJnb6jheXsNaO5rq7C6Kw+rR7gylft6icMH
+ +YReDC/JTUTpHxel8AR1WRqSJiG2B1pKhetrt7VRuVSmg5QVOdufPSwwbEzUMDZJ+NwViVtvl/
+ fSNlkrqdAhpvcDO7ttYJG+K2Yt+vF/+JW3bB1L7VKapGrK3PgNLbCM2QgRFPKM2x2YQ3Ycok+b
+ VI4KBf8NOdKQ/GVu2B00bbycOSgZPx7QhAr+//E0FXXz4DXyinwg/QG/xXzFzV7V9tdTxePKHz
+ SM2XlRlNjpgO7YMRTg4uGJB6
+IronPort-SDR: m8MWhLly+Q/ggpFQoQazEvRAK79hMprrsJeibomNIX1/4xtKgak83IDhV3hY33IYYgETWfckla
+ 12cflgJcZOLhtYF332W1ZeqMwkaZsc7uQahEN2f8ydynExvlY4KkvRqWC31LBbVv2+B3KXuSeg
+ s9mXwdZWg1TGYc2w+IbnJALYEzC776WPgdLPtLGdrMUnCNPoz5WeDSYQd/QZ1Y+MzxJurZd/eC
+ 94O7CZ/ZfohxaTfsL58Np58+H9TOWMfDJbBI8BFZ4728SkC4ncTHu1ybMvyhjmP7gPrroYjKqQ
+ UWE=
 WDCIronportException: Internal
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-xfs@vger.kernel.org,
@@ -147,9 +147,9 @@ Cc: axboe@kernel.dk,
 	osandov@fb.com,
 	bvanassche@acm.org,
 	jefflexu@linux.alibaba.com
-Subject: [RFC PATCH 07/34] dm: use bio_new in dm-log-writes
-Date: Wed, 27 Jan 2021 23:11:06 -0800
-Message-Id: <20210128071133.60335-8-chaitanya.kulkarni@wdc.com>
+Subject: [RFC PATCH 09/34] dm-zoned: use bio_new in dmz_write_mblock
+Date: Wed, 27 Jan 2021 23:11:08 -0800
+Message-Id: <20210128071133.60335-10-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.22.1
 In-Reply-To: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
 References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
@@ -158,119 +158,35 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 ---
- drivers/md/dm-log-writes.c | 30 ++++++++++--------------------
- 1 file changed, 10 insertions(+), 20 deletions(-)
+ drivers/md/dm-zoned-metadata.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/md/dm-log-writes.c b/drivers/md/dm-log-writes.c
-index e3d35c6c9f71..7ca9af407647 100644
---- a/drivers/md/dm-log-writes.c
-+++ b/drivers/md/dm-log-writes.c
-@@ -217,18 +217,15 @@ static int write_metadata(struct log_writes_c *lc, void *entry,
- 	void *ptr;
- 	size_t ret;
+diff --git a/drivers/md/dm-zoned-metadata.c b/drivers/md/dm-zoned-metadata.c
+index e6252f48a49c..fa0ee732c6e9 100644
+--- a/drivers/md/dm-zoned-metadata.c
++++ b/drivers/md/dm-zoned-metadata.c
+@@ -723,7 +723,8 @@ static int dmz_write_mblock(struct dmz_metadata *zmd, struct dmz_mblock *mblk,
+ 	if (dmz_bdev_is_dying(dev))
+ 		return -EIO;
  
--	bio = bio_alloc(GFP_KERNEL, 1);
-+	bio = bio_new(lc->logdev->bdev, sector, REQ_OP_WRITE, 0, 1, GFP_KERNEL);
+-	bio = bio_alloc(GFP_NOIO, 1);
++	bio = bio_new(dev->bdev, dmz_blk2sect(block), REQ_OP_WRITE,
++		      REQ_META | REQ_PRIO, 1, GFP_NOIO);
  	if (!bio) {
- 		DMERR("Couldn't alloc log bio");
- 		goto error;
- 	}
- 	bio->bi_iter.bi_size = 0;
--	bio->bi_iter.bi_sector = sector;
--	bio_set_dev(bio, lc->logdev->bdev);
- 	bio->bi_end_io = (sector == WRITE_LOG_SUPER_SECTOR) ?
- 			  log_end_super : log_end_io;
- 	bio->bi_private = lc;
--	bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
+ 		set_bit(DMZ_META_ERROR, &mblk->state);
+ 		return -ENOMEM;
+@@ -731,11 +732,8 @@ static int dmz_write_mblock(struct dmz_metadata *zmd, struct dmz_mblock *mblk,
  
- 	page = alloc_page(GFP_KERNEL);
- 	if (!page) {
-@@ -264,7 +261,7 @@ static int write_inline_data(struct log_writes_c *lc, void *entry,
- 			     size_t entrylen, void *data, size_t datalen,
- 			     sector_t sector)
- {
--	int num_pages, bio_pages, pg_datalen, pg_sectorlen, i;
-+	int num_pages, pg_datalen, pg_sectorlen, i;
- 	struct page *page;
- 	struct bio *bio;
- 	size_t ret;
-@@ -272,24 +269,21 @@ static int write_inline_data(struct log_writes_c *lc, void *entry,
+ 	set_bit(DMZ_META_WRITING, &mblk->state);
  
- 	while (datalen) {
- 		num_pages = ALIGN(datalen, PAGE_SIZE) >> PAGE_SHIFT;
--		bio_pages = min(num_pages, BIO_MAX_PAGES);
+-	bio->bi_iter.bi_sector = dmz_blk2sect(block);
+-	bio_set_dev(bio, dev->bdev);
+ 	bio->bi_private = mblk;
+ 	bio->bi_end_io = dmz_mblock_bio_end_io;
+-	bio_set_op_attrs(bio, REQ_OP_WRITE, REQ_META | REQ_PRIO);
+ 	bio_add_page(bio, mblk->page, DMZ_BLOCK_SIZE, 0);
+ 	submit_bio(bio);
  
- 		atomic_inc(&lc->io_blocks);
- 
--		bio = bio_alloc(GFP_KERNEL, bio_pages);
-+		bio = bio_new(lc->logdev->bdev, sector, REQ_OP_WRITE, 0,
-+			      num_pages, GFP_KERNEL);
- 		if (!bio) {
- 			DMERR("Couldn't alloc inline data bio");
- 			goto error;
- 		}
- 
- 		bio->bi_iter.bi_size = 0;
--		bio->bi_iter.bi_sector = sector;
--		bio_set_dev(bio, lc->logdev->bdev);
- 		bio->bi_end_io = log_end_io;
- 		bio->bi_private = lc;
--		bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
- 
--		for (i = 0; i < bio_pages; i++) {
-+		for (i = 0; i < bio->bi_max_vecs; i++) {
- 			pg_datalen = min_t(int, datalen, PAGE_SIZE);
- 			pg_sectorlen = ALIGN(pg_datalen, lc->sectorsize);
- 
-@@ -317,7 +311,7 @@ static int write_inline_data(struct log_writes_c *lc, void *entry,
- 		}
- 		submit_bio(bio);
- 
--		sector += bio_pages * PAGE_SECTORS;
-+		sector += bio->bi_max_vecs * PAGE_SECTORS;
- 	}
- 	return 0;
- error_bio:
-@@ -364,17 +358,15 @@ static int log_one_block(struct log_writes_c *lc,
- 		goto out;
- 
- 	atomic_inc(&lc->io_blocks);
--	bio = bio_alloc(GFP_KERNEL, min(block->vec_cnt, BIO_MAX_PAGES));
-+	bio = bio_new(lc->logdev->bdev, sector, REQ_OP_WRITE, 0,
-+			block->vec_cnt, GFP_KERNEL);
- 	if (!bio) {
- 		DMERR("Couldn't alloc log bio");
- 		goto error;
- 	}
- 	bio->bi_iter.bi_size = 0;
--	bio->bi_iter.bi_sector = sector;
--	bio_set_dev(bio, lc->logdev->bdev);
- 	bio->bi_end_io = log_end_io;
- 	bio->bi_private = lc;
--	bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
- 
- 	for (i = 0; i < block->vec_cnt; i++) {
- 		/*
-@@ -386,17 +378,15 @@ static int log_one_block(struct log_writes_c *lc,
- 		if (ret != block->vecs[i].bv_len) {
- 			atomic_inc(&lc->io_blocks);
- 			submit_bio(bio);
--			bio = bio_alloc(GFP_KERNEL, min(block->vec_cnt - i, BIO_MAX_PAGES));
-+			bio = bio_new(lc->logdev->bdev, sector, REQ_OP_WRITE,
-+					0, block->vec_cnt - i, GFP_KERNEL);
- 			if (!bio) {
- 				DMERR("Couldn't alloc log bio");
- 				goto error;
- 			}
- 			bio->bi_iter.bi_size = 0;
--			bio->bi_iter.bi_sector = sector;
--			bio_set_dev(bio, lc->logdev->bdev);
- 			bio->bi_end_io = log_end_io;
- 			bio->bi_private = lc;
--			bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
- 
- 			ret = bio_add_page(bio, block->vecs[i].bv_page,
- 					   block->vecs[i].bv_len, 0);
 -- 
 2.22.1
 
