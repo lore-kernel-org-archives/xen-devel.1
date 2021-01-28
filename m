@@ -2,72 +2,48 @@ Return-Path: <SRS0=OK+i=G7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FD7EC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:46:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D98DC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:49:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1E18D64DDD
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:46:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1E18D64DDD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	by mail.kernel.org (Postfix) with ESMTPS id D91F464DE3
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jan 2021 12:49:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D91F464DE3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.76986.139211 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.76998.139223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l56gf-0002XL-5M; Thu, 28 Jan 2021 12:46:13 +0000
+	id 1l56jh-0002oD-Px; Thu, 28 Jan 2021 12:49:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 76986.139211; Thu, 28 Jan 2021 12:46:13 +0000
+Received: by outflank-mailman (output) from mailman id 76998.139223; Thu, 28 Jan 2021 12:49:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l56gf-0002XE-2F; Thu, 28 Jan 2021 12:46:13 +0000
-Received: by outflank-mailman (input) for mailman id 76986;
- Thu, 28 Jan 2021 12:44:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l56jh-0002o6-MV; Thu, 28 Jan 2021 12:49:21 +0000
+Received: by outflank-mailman (input) for mailman id 76998;
+ Thu, 28 Jan 2021 12:49:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3/5e=G7=oracle.com=dave.kleikamp@srs-us1.protection.inumbo.net>)
- id 1l56ey-0002QO-8w
- for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 12:44:28 +0000
-Received: from userp2130.oracle.com (unknown [156.151.31.86])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e0315bc8-1a9d-4216-8b6c-e8bf94f873d1;
- Thu, 28 Jan 2021 12:44:26 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 10SCYAiu192248;
- Thu, 28 Jan 2021 12:43:16 GMT
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by userp2130.oracle.com with ESMTP id 368b7r3xs7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 28 Jan 2021 12:43:16 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 10SCbobd047153;
- Thu, 28 Jan 2021 12:43:15 GMT
-Received: from nam11-co1-obe.outbound.protection.outlook.com
- (mail-co1nam11lp2172.outbound.protection.outlook.com [104.47.56.172])
- by aserp3030.oracle.com with ESMTP id 368wcqmysx-2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 28 Jan 2021 12:43:15 +0000
-Received: from CH2PR10MB4118.namprd10.prod.outlook.com (2603:10b6:610:a4::8)
- by CH2PR10MB3941.namprd10.prod.outlook.com (2603:10b6:610:4::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.15; Thu, 28 Jan
- 2021 12:43:11 +0000
-Received: from CH2PR10MB4118.namprd10.prod.outlook.com
- ([fe80::2cd3:dc36:f8d4:ea2a]) by CH2PR10MB4118.namprd10.prod.outlook.com
- ([fe80::2cd3:dc36:f8d4:ea2a%8]) with mapi id 15.20.3784.019; Thu, 28 Jan 2021
- 12:43:11 +0000
-Received: from [192.168.0.190] (68.201.65.98) by
- SN4PR0501CA0077.namprd05.prod.outlook.com (2603:10b6:803:22::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.8 via Frontend
- Transport; Thu, 28 Jan 2021 12:43:07 +0000
+ <SRS0=tEu6=G7=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1l56jh-0002o1-5T
+ for xen-devel@lists.xenproject.org; Thu, 28 Jan 2021 12:49:21 +0000
+Received: from mail-lj1-x22e.google.com (unknown [2a00:1450:4864:20::22e])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 656c512a-55aa-4026-8c72-61f492603565;
+ Thu, 28 Jan 2021 12:49:20 +0000 (UTC)
+Received: by mail-lj1-x22e.google.com with SMTP id u4so4630553ljh.6
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Jan 2021 04:49:20 -0800 (PST)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id p17sm1992959ljj.91.2021.01.28.04.49.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Jan 2021 04:49:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -79,171 +55,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e0315bc8-1a9d-4216-8b6c-e8bf94f873d1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2020-01-29;
- bh=4s6f1Z4X6xFsF2Ee1gAGevBW8HhU6VhaeckNt9jWQHc=;
- b=kX6Rlr0au8sY4I6yUJwn2LXmhSeVCZE3jKgLuqO1QhpGfaIM4g2+Ig07nc+VWL7SzJVg
- Bj72iFAcU9Za8alm5F6IopQUt9S9FRLVjgKOzpkdupcC+hpfJjJHBLB/bmz88hbIhmKm
- R5V6ChjnvtAW/+gc2yOzLGfoJTVsrsbY+kr8JgLDbWqNF4+R6cbKMt3a3s7X48K4271x
- CDkPKyy97rdwx0sWjQDA2+7KudY+HrQldnAORaUtHWSSe5HKI9gYe3WuYasENMKo4H26
- YZHYf/IJQe1vowSGdXaismmdrzSvukfzxgZgsVxZUPtuzVPDomuh8lDLOEXGRn0omBFg Fg== 
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RKa1PHQx+4vPhBbaBxaJjVKGURsFjvvn2W6lC/iFdn9bkxeVzsvtftX1xuRA2u84IGmDemjkbsOwoFCwOvg9NKLHBcEzufwP4kH1tdGx+H9eQX62kkQICCwZp9KJr5vKd1yHCr3APlfB1zM2KLBJ03e+r9Vcf7FZypAoO/lXq1OSRCFA/4kvSijmF2tXHX7Zyj1YSIdRqMhnZEekXkq3qsHnU8jRHsFVM9RqQz2AjXAmdLnbA11IsEL7gMZs/9lPCj/aPVW20Y+pji7OPD41ujvylPOxbe1JX1m4boJpM9Qvhr0FETkYNwB3/eepMUZflx48FJ6UX1cwUPN+utuiTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4s6f1Z4X6xFsF2Ee1gAGevBW8HhU6VhaeckNt9jWQHc=;
- b=eye7cqB5+rQXahNo3YEXGO/r0wrAgfNmXyOfChG/HMWPvXF4nqWaeLetDNEHYAxEXke5tVmaQzJLisX8as5R65JK8SE0agPGBN38fiNX9bnfY0FmIsuTW7JnCvs4NLUHTz4zsQFevpAPO9l4+CZ0HZSS6wMOpxU8UU37D5536AznjCYNCpXpR7CRgQ7P1FTShRVo+ukLXm6LHKuKOsIFFW1d/9QiJEwOwwfMQKtjySz3EAOsroLmoDCYVZCrSOhEK0RKD57Il4yxnwNpBrArsGxShbQZIPXT4nuL6SUxgqHJRGqLZZqKXAigJ8degYRY8pPhfRMTK9tUQH5hPL9MkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+X-Inumbo-ID: 656c512a-55aa-4026-8c72-61f492603565
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4s6f1Z4X6xFsF2Ee1gAGevBW8HhU6VhaeckNt9jWQHc=;
- b=Mr0nOt0UdZbc4cbI+3mzml8n5Q2KLA4MNetq2+yWthAXAn2HGggfFVZFDPIA5a75lWpBuhsz6jb+7Hv4R+QLC6SnfehG7z67W5eJYq42XFUyMZ/Wqub2sQs6r+KdZ2HwpgSqYLe4paKq0Af/xnNbc+FBBI7IKZugdF6TcuEkdt4=
-Authentication-Results: linux.alibaba.com; dkim=none (message not signed)
- header.d=none;linux.alibaba.com; dmarc=none action=none
- header.from=oracle.com;
-Subject: Re: [RFC PATCH 19/34] fs/jfs/jfs_logmgr.c: use bio_new in lbmRead
-To: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>, linux-xfs@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, dm-devel@redhat.com,
-        linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
-        drbd-dev@lists.linbit.com, xen-devel@lists.xenproject.org,
-        linux-nvme@lists.infradead.org, linux-scsi@vger.kernel.org,
-        target-devel@vger.kernel.org, linux-fscrypt@vger.kernel.org,
-        jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org,
-        ocfs2-devel@oss.oracle.com, linux-pm@vger.kernel.org,
-        linux-mm@kvack.org
-Cc: axboe@kernel.dk, philipp.reisner@linbit.com, lars.ellenberg@linbit.com,
-        konrad.wilk@oracle.com, roger.pau@citrix.com, minchan@kernel.org,
-        ngupta@vflare.org, sergey.senozhatsky.work@gmail.com, agk@redhat.com,
-        snitzer@redhat.com, hch@lst.de, sagi@grimberg.me,
-        martin.petersen@oracle.com, viro@zeniv.linux.org.uk, tytso@mit.edu,
-        jaegeuk@kernel.org, ebiggers@kernel.org, djwong@kernel.org,
-        shaggy@kernel.org, konishi.ryusuke@gmail.com, mark@fasheh.com,
-        jlbec@evilplan.org, joseph.qi@linux.alibaba.com, damien.lemoal@wdc.com,
-        naohiro.aota@wdc.com, jth@kernel.org, rjw@rjwysocki.net,
-        len.brown@intel.com, pavel@ucw.cz, akpm@linux-foundation.org,
-        hare@suse.de, gustavoars@kernel.org, tiwai@suse.de,
-        alex.shi@linux.alibaba.com, asml.silence@gmail.com,
-        ming.lei@redhat.com, tj@kernel.org, osandov@fb.com, bvanassche@acm.org,
-        jefflexu@linux.alibaba.com
-References: <20210128071133.60335-1-chaitanya.kulkarni@wdc.com>
- <20210128071133.60335-20-chaitanya.kulkarni@wdc.com>
-From: Dave Kleikamp <dave.kleikamp@oracle.com>
-Message-ID: <8d3f7e70-1c7a-567a-0e60-97bac846bf13@oracle.com>
-Date: Thu, 28 Jan 2021 06:43:03 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
-In-Reply-To: <20210128071133.60335-20-chaitanya.kulkarni@wdc.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [68.201.65.98]
-X-ClientProxiedBy: SN4PR0501CA0077.namprd05.prod.outlook.com
- (2603:10b6:803:22::15) To CH2PR10MB4118.namprd10.prod.outlook.com
- (2603:10b6:610:a4::8)
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=dgdSNw9Sde+sbK0Da07wwof2udIJaSaLHHECyeB1A5E=;
+        b=QK+p8upsCI5jGaxryHc7KDFMo5cn5PAqIov5pswJPvCRGnsRRL/Zyr1n1hZacd05fV
+         Y2LmEEA+crjpgSQUgHAklSq6OLHy+DHAAA1Rf+CuUkpgAdgi1uJ3VNOpJPP1o6+Z2Dq6
+         1WL1acxHGEtQmB4DUaz4fMdRRHie0cMl0tmhuPCoPTh18iKtqemhtfDWU7GBCwcIg7QN
+         RvNmUO8DNzKzIyfxpRCeP+Di3J/8FyUKmozrG0tA/OzQwT7CiACgvlEBChHBQil5dPYY
+         RUfVAT6UYW8xedTliLqaiRe8Q9ANSMgr1q6fAbdbPsbcDBp4ym/3G72PoEuYEall/EOq
+         V4WQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=dgdSNw9Sde+sbK0Da07wwof2udIJaSaLHHECyeB1A5E=;
+        b=co3qGxaEewtmErELp4srw2YHEnMX8hginqaBkN+trXmfBi0/9IZM3O5IeTcYQrBEX8
+         Y2vDr7y+YKkQRsTr49xXkVvBb1maZuGvJ5xcNa8KFU+NQovksr8XohHojKhPC46SNGGh
+         VtxuxGWT+LEeecGrFtEIiDKZZd3cIxLXX4l7JWerwxIEDNNUGSuJLFhQdjgopIOEjxON
+         lcYAI+44Jk/AOfEbreeE89wX8RRLxaCcha3eYdWGdG8+Gbdy0IbELzF++S6TEpc3PoG8
+         ZsPBjHStk/XfW4XYEtiDblidez2OtqFq2/epfpLRFTOmCe9r/0Ms48qynhR+5BmSrg/x
+         K27g==
+X-Gm-Message-State: AOAM532YqQYfcTjLKB9TIRW3qxgAXXLJwnRbOjlpujJ63PMe14XxZ7jU
+	z8eU7FHC/4cTGvqOV5AAo1M=
+X-Google-Smtp-Source: ABdhPJxP287Iu7NymYCcOo3c7w3iDTPxCqVwT+29D2YRiKZayuivNr5xgnT1ROtD3W/eJs2yhjJXsQ==
+X-Received: by 2002:a2e:6f05:: with SMTP id k5mr8030901ljc.400.1611838159182;
+        Thu, 28 Jan 2021 04:49:19 -0800 (PST)
+Subject: Re: [PATCH V5 04/22] xen/ioreq: Make x86's IOREQ feature common
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien.grall.oss@gmail.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, Paul Durrant <paul@xen.org>,
+ Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+ Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>
+References: <1611601709-28361-1-git-send-email-olekstysh@gmail.com>
+ <1611601709-28361-5-git-send-email-olekstysh@gmail.com>
+ <CAJ=z9a1c+obN3KW_cMr7OH0112_gHSxnAoEJb9qW6R1J38QgQQ@mail.gmail.com>
+ <20270711-36bc-6d7d-16cb-4572cace47ed@gmail.com>
+ <eb03f366-9405-c193-07be-fbeca29fca4c@xen.org>
+ <1156e356-5762-a196-ec16-bb6614912394@gmail.com>
+ <alpine.DEB.2.21.2101271235410.9684@sstabellini-ThinkPad-T480s>
+ <dd9a1bf6-5afb-158a-6456-a5ded15580bf@gmail.com>
+ <0785367a-9349-ae0c-2622-9412297773fc@suse.com>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <f6983b35-ea63-b48c-e122-ee9c294034ab@gmail.com>
+Date: Thu, 28 Jan 2021 14:49:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0e01d42d-3bc2-4bab-28da-08d8c38a4555
-X-MS-TrafficTypeDiagnostic: CH2PR10MB3941:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: 
-	<CH2PR10MB39411E0FD376FAA86E74219987BA9@CH2PR10MB3941.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:260;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	pJ5ccHGdfMIuYnzx8aq0wBe7CGK5hELGkFwmW+UbSGKkOVpfgd4YBi0vrc+er51UtFKESCZAyt1Tp5H5X6cEG9b1EeQrBf4RSEyzl3baouUCAYXgXHVFR0/RrNoIj7y0HIIMRk7rAHMY0vw04eZ0KN1Rg0nSmRbIXxfIzHm/+llfg5vXr7mz+bpOE+7sfq/1lFfhHLxDCXXWejvvBjnCeOxXqgBDiOXdG5T5s0+D4oxdxJZFuttUOavuECY7bCePtreJrvjchJOPXhU1BoOiRU4gVcpEp8gkj+VeGWMkfFRlm0cCmZbfS3BfDuXDIT7v3vdL8Q9W39+CtghNyBZ4KaMGtxayQFhOQ6Po0F1ZVyaiiuZ85rlA4rjv24EJRBq6/z02CElTZrxJeLOHNl1EFko6t5wnFfQCXczxRrfrpdXumXasRKoJ/+16Gw0rrPZY85eRY7PEoxjxU7PLkD4+F17RBlIaAnKfg+aLMDxGkkoSN9BOBtMlkavxKTCf8ofiLHhjadTYZo2E3Uz0awpIg+XtnZwMJu+yQJg5YabAYiD3ogLMFP/9xSg9wyCqCxIWb2px3qKIgj4zJ8SqXI+ievvKAKlegmf0tVnNgoQvfibMDk1NTpx5Py49FzNeNngt
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH2PR10MB4118.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(346002)(396003)(136003)(39860400002)(366004)(376002)(7366002)(6486002)(36756003)(2616005)(66556008)(83380400001)(2906002)(921005)(16526019)(5660300002)(8676002)(66476007)(7406005)(478600001)(7416002)(86362001)(186003)(6666004)(316002)(16576012)(31696002)(66946007)(8936002)(53546011)(956004)(4326008)(26005)(31686004)(44832011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?Vm4rTktBWm5uc09iM3FnVVBkdjNUVHBpdWs5Q0ZDTkk5R0E3ODRnYUZMMktU?=
- =?utf-8?B?RG56Y1hFZjFxaXJGM1N2TnlIN0ZCOFJCa2FKYmpJMEZDTGJIcU81MkkvWUN5?=
- =?utf-8?B?TFd0TUV5cERHM1RvKytObUVJd0NXSmpZa1NRZk5iRGhldTRMSlVvajhDTlhR?=
- =?utf-8?B?T0txelh4S3RUTDRrN20rSjFIZzBwdk1OOFRtMHBOUTdjMUhHby9mcWVJWFBm?=
- =?utf-8?B?bndkYzh1dWM1NVZXRk9pTEFmbG9Mcnl2N1h1YzhDVTVSdWdjczNKMFk1LzM5?=
- =?utf-8?B?STBkVWthUEIzamRkOTlvS0xNUHdFNFhkbVRxQXEvKzdEODZhdmlMSDRjbU9T?=
- =?utf-8?B?aENkbks2SEo1ZzNJanV3Z2pHVW1pUFF6eXdlRVkyTVBrRE42a2FjbWIwWkpl?=
- =?utf-8?B?TDdURFBoVFVSMnh4U0VLcjFTTUJrM2JXbXBSY3J3T3pQb3E0eHFTSWdZcXNX?=
- =?utf-8?B?cm9INjZLZG9QQ0dJR2JXZS9LNUtGeVZhTDlmTXV3SHVlczBrbldTWHFGdjhI?=
- =?utf-8?B?YlFTR2pCalVGQWo0aTUxblpoR1h3RjZKd3J3R2FCZDlNc0RVSUdtUFMyODht?=
- =?utf-8?B?Qi9pd1NrdlJoL243S2U1eUsyVEtJZ3FYckRmMFRmUllPcW1leFZnSnVEY2R3?=
- =?utf-8?B?Z2hDdUx4R3FyRjJqVEZ2WkRBWWJOdy9iY3JsUXFtSzhBYmhOZlp1MEZmMW1J?=
- =?utf-8?B?RU1udXJkREFRS0lFMUU0dlNRazZ4Vmw5UGlrTnExV3RKdzBodnZseFFKQTVz?=
- =?utf-8?B?Uy9FdkhyUjJtVU85aklWcXkzd0g4a0FMYllNR01TUFl5dkQ3ZkpJdUJDMksx?=
- =?utf-8?B?VjMvUWVUVnFpNzd0ZE1PZEtMaElncUlFYjYvNFBQZ3hVeXBrVDNVOXhORTA3?=
- =?utf-8?B?azNUa1FVUXZzTXZxQWIxeXUvdjlvbHRrR3ZTbEpwRUZpOVc5ZUZvWWVjWGFM?=
- =?utf-8?B?dGh5MTFxYVdobnA3dDZtckhsallCWHU1SXBwYkxXNHFNb2dLR3BMQ3BEWEFt?=
- =?utf-8?B?K2tRNnZ0eU9EZHF3TmVycGZzY0RSWHJibHlOcnYvamJCZEZmSzk0cnN1NXRR?=
- =?utf-8?B?RjBrd0I1eGVTSWlUb3RPbjNVUnhLMGxqeko1Vk41emRZMWxjRlZmNE5yRkxD?=
- =?utf-8?B?Ri9ITS8vQ3c4dDVYbnlHbU8zU0RqS09wK0NXaFRaWnkxd3JDL2thTSttS1lv?=
- =?utf-8?B?VnR3MlVIdjRlSy85QTdCS1FhekYvbnZyTjZlZTJtcU85NmtER3o5S0RDV3JL?=
- =?utf-8?B?cTJiTEFPUlJDWksyeS81NzVueSt5QmdieUYwVHd2bGRZZzdUYlB4QzhLNUtQ?=
- =?utf-8?B?Rjk0eGVMVGV0aFF4WS8zUG8xbGQ2NG9jUzZzbWNYTXBvRTZsUDVRSTV5ZXB6?=
- =?utf-8?B?VTRKOTgvaTZIb0dDR2pPQzNnM3V6Z3kvMUd3azhpYnRoTFdhbEg0N2hlb21t?=
- =?utf-8?Q?xgW5/je/?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0e01d42d-3bc2-4bab-28da-08d8c38a4555
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR10MB4118.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2021 12:43:11.2780
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tFBedDYhghl7XP3cZN2/McX0JwxYw4Cu7FZ5NDxZqDAklfqhu0dMXnszrFIG3H4zPpJnTe1yGk1iM6Mt6c63XUXi/NVyG5gbxkRVEUnPYnc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR10MB3941
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9877 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 mlxscore=0 suspectscore=0
- phishscore=0 mlxlogscore=999 bulkscore=0 malwarescore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2101280064
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9877 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 spamscore=0 phishscore=0
- adultscore=0 impostorscore=0 malwarescore=0 lowpriorityscore=0 bulkscore=0
- priorityscore=1501 mlxscore=0 clxscore=1011 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2101280064
+In-Reply-To: <0785367a-9349-ae0c-2622-9412297773fc@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-You probably don't need 4 patches to fs/jfs/. These can be combined into 
-a single patch.
 
-Dave
+On 28.01.21 13:21, Jan Beulich wrote:
 
-On 1/28/21 1:11 AM, Chaitanya Kulkarni wrote:
-> Signed-off-by: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
-> ---
->   fs/jfs/jfs_logmgr.c | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/jfs/jfs_logmgr.c b/fs/jfs/jfs_logmgr.c
-> index 9330eff210e0..4481f3e33a3f 100644
-> --- a/fs/jfs/jfs_logmgr.c
-> +++ b/fs/jfs/jfs_logmgr.c
-> @@ -1979,17 +1979,14 @@ static int lbmRead(struct jfs_log * log, int pn, struct lbuf ** bpp)
->   
->   	bp->l_flag |= lbmREAD;
->   
-> -	bio = bio_alloc(GFP_NOFS, 1);
-> -
-> -	bio->bi_iter.bi_sector = bp->l_blkno << (log->l2bsize - 9);
-> -	bio_set_dev(bio, log->bdev);
-> +	bio = bio_new(log->bdev, bp->l_blkno << (log->l2bsize - 9),
-> +			REQ_OP_READ, 0, 1, GFP_NOFS);
->   
->   	bio_add_page(bio, bp->l_page, LOGPSIZE, bp->l_offset);
->   	BUG_ON(bio->bi_iter.bi_size != LOGPSIZE);
->   
->   	bio->bi_end_io = lbmIODone;
->   	bio->bi_private = bp;
-> -	bio->bi_opf = REQ_OP_READ;
->   	/*check if journaling to disk has been disabled*/
->   	if (log->no_integrity) {
->   		bio->bi_iter.bi_size = 0;
-> 
+Hi Jan
+
+> On 28.01.2021 12:01, Oleksandr wrote:
+>> On 27.01.21 22:46, Stefano Stabellini wrote:
+>>> On Wed, 27 Jan 2021, Oleksandr wrote:
+>>>> Thank you. I got a request to make a possibility for user to select IOREQ via
+>>>> the menuconfig on Arm. Saying tech preview do you mean that I also need to put
+>>>> it under CONFIG_EXPERT on Arm?
+>>> Normally I would say that unless it actually takes an expert to enable
+>>> the feature, it is better to make it depend on CONFIG_UNSUPPORTED [1].
+>>>
+>>> However, in this case, it might actually take an expert :-)
+>>> Additional patches are still required to enable the feature at the
+>>> toolstack level, and also the user needs to build a userspace ioreq
+>>> server. So in this case I am fine either way. I'll leave it up to you
+>>> and Julien to pick the best one.
+>>>
+>>> Either way, please add "(EXPERT)" or "(UNSUPPORTED)" in the one-line
+>>> kconfig description for ARM if possible.
+>>>
+>>>
+>>> [1] https://marc.info/?l=xen-devel&m=161168780401884
+>> Thank you for the explanation, personally I would prefer EXPERT, but...
+>>
+>> It would be really nice if we could agreed regarding that *common*
+>> Kconfig option before I submit V6 (which would probably avoid me to send
+>> V7 I hope).
+>>
+>> Now I see it as following (please note, it is a subject for new patch in
+>> this series, which should come last):
+>>
+>> +++ b/xen/common/Kconfig
+>> @@ -137,7 +137,13 @@ config HYPFS_CONFIG
+>>             want to hide the .config contents from dom0.
+>>
+>>    config IOREQ_SERVER
+>> -       bool
+>> +       bool "IOREQ support" if EXPERT || X86
+> This would make the prompt visible for x86, which we don't
+> want.
+
+Hmm, I missed that point.
+
+
+> But I guess Stefano was anyway after ...
+>
+>> +       default X86
+>> +       depends on HVM
+>> +       ---help---
+>> +         Enables generic mechanism for providing emulated devices to
+>> the guests.
+>> +
+>> +         If unsure, say Y.
+>   config IOREQ_SERVER
+>         bool "IOREQ support (EXPERT)" if EXPERT && !X86
+>         default X86
+>         depends on HVM
+>
+> As the prompt should be invisible this way on x86, the (EXPERT)
+> doesn't need further qualifying, except maybe in the help text
+> (just to avoid this being taken as a possible mistake).
+
+Yes, this works as my initial version *but* is invisible on x86,
+
+what is more that indeed the *EXPERT* tag for IOREQ on x86 will look 
+quite odd...
+
+Perfect, thank you.
+
+
+>
+> Jan
+
+-- 
+Regards,
+
+Oleksandr Tyshchenko
+
 
