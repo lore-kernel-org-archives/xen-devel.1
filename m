@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A54AC433DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2178C433E6
 	for <xen-devel@archiver.kernel.org>; Fri, 29 Jan 2021 01:59:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2E38B64DFB
+	by mail.kernel.org (Postfix) with ESMTPS id 938DB64DD8
 	for <xen-devel@archiver.kernel.org>; Fri, 29 Jan 2021 01:59:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E38B64DFB
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 938DB64DD8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.77628.140764 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.77629.140770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5J46-00078o-2M; Fri, 29 Jan 2021 01:59:14 +0000
+	id 1l5J46-0007A2-Q1; Fri, 29 Jan 2021 01:59:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 77628.140764; Fri, 29 Jan 2021 01:59:14 +0000
+Received: by outflank-mailman (output) from mailman id 77629.140770; Fri, 29 Jan 2021 01:59:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5J45-00078Y-Tz; Fri, 29 Jan 2021 01:59:13 +0000
-Received: by outflank-mailman (input) for mailman id 77628;
+	id 1l5J46-00079R-Ar; Fri, 29 Jan 2021 01:59:14 +0000
+Received: by outflank-mailman (input) for mailman id 77629;
  Fri, 29 Jan 2021 01:59:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AjHm=HA=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1l5Ivg-0004da-Lt
- for xen-devel@lists.xenproject.org; Fri, 29 Jan 2021 01:50:32 +0000
-Received: from mail-lj1-x22d.google.com (unknown [2a00:1450:4864:20::22d])
+ id 1l5Ivq-0004da-MA
+ for xen-devel@lists.xenproject.org; Fri, 29 Jan 2021 01:50:42 +0000
+Received: from mail-lj1-x236.google.com (unknown [2a00:1450:4864:20::236])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 48c0507c-26f8-47b6-b7c4-36f0116b0e24;
- Fri, 29 Jan 2021 01:49:24 +0000 (UTC)
-Received: by mail-lj1-x22d.google.com with SMTP id r14so8744346ljc.2
- for <xen-devel@lists.xenproject.org>; Thu, 28 Jan 2021 17:49:24 -0800 (PST)
+ id 33856721-8e4d-4188-87f0-896a28741d34;
+ Fri, 29 Jan 2021 01:49:26 +0000 (UTC)
+Received: by mail-lj1-x236.google.com with SMTP id v15so5733970ljk.13
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Jan 2021 17:49:26 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id z128sm1840238lfa.72.2021.01.28.17.49.22
+ by smtp.gmail.com with ESMTPSA id z128sm1840238lfa.72.2021.01.28.17.49.24
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 28 Jan 2021 17:49:22 -0800 (PST)
+ Thu, 28 Jan 2021 17:49:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,63 +55,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48c0507c-26f8-47b6-b7c4-36f0116b0e24
+X-Inumbo-ID: 33856721-8e4d-4188-87f0-896a28741d34
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=yHZDWbqsnnHHHjfd2iWbdB0nAif5Wc6wWeD5M/+zjqk=;
-        b=rI9PkNpdToPqeWalJrNwob6+vrOCbPe4W3YpVj4tPWtDm1dK2mDYqY8hmAA25d2+8f
-         ezJgBXk3yJm27eLnoDHdwQxqQCljQ13/YR7PmrSBk1MG3gdVc4vz94kP43JJ1SZvLSlZ
-         a2qAVnwehERTxFR/+UKKZmIFyvztP78efInzwECIc3PzORnJr1CgdWtE1y1yyCQ36cFh
-         bNByyce2bZzmeVFwV2ubdjnjMsbnf5r70WTRme0844tQaiqcWzeq68bRaB6JQysAxNK7
-         0U8o28qn7F22B0w996Z5tjsuCukiDPom8rpZScQlW+S7zPwMHWtDdcSFYoCJXGpq85dC
-         QR3A==
+        bh=PS2Y4AZ7CaGH+jvzxCns83I8qf6IAANHgkaElFlh7Pc=;
+        b=EASIFe7e8W285IsdY5ZsU7pbUZs9uMYhdtdtxWmhjdtTisYMCkSRGfbznqaQ2Ss/j0
+         f9Zxgw9kY6ZU9fGoi6+ytoKQQYDoCDDzMz10IS8l76SUDqZR0NAqyyg6VpqMbVoPYdY3
+         AgduovJ8Qf7ydKEt6gUIfHPPVQQapvnYEnJHUl0hN7HbchI4HnFNUiRD4ezwn0AFS8hM
+         GqmbN9/zY1RFINlLXLhQnIJEr9uXBDbD1iSrzqDgLnsS5TDWnXtO8GwYGpOPdoHfqxut
+         fyMaaEqernNgTbuEpu3SA4EdloVgmfViTBdJDbGuPI4jqyUa1metkLoqwRb63TzmiTK5
+         l8Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=yHZDWbqsnnHHHjfd2iWbdB0nAif5Wc6wWeD5M/+zjqk=;
-        b=HNGuysyOwqSxuW2cwknkl8ff7t7eGZpMhKAMZXGum95SALLdRW+ixXn1823ThjIgrN
-         AD4E8ZfC5z2oDvQlx1NfHfURzNOqD46Qx8C3A4ZfP7KnSarU4WkXs0u3eGRIWkM2Sa8R
-         L1q4nmPDcN0ae45KY+z9cW4QMXg1EN7g3adPg7YeCiKNJugvW3OzvTP/wv/lwos1+3Ca
-         ATAZ6FXdfpQCAMzMxl9iv2+I3pTULpy64SrUiTEwzUl5Zmw6hDraQSE5gBDMxLsDtvrB
-         ghdy2V+vPtio6rRhq5mAEEAwV4tgWRvNPYcqhUcucqrKBZ89HwG15CNFtGOZw8pT3FoW
-         IaUQ==
-X-Gm-Message-State: AOAM53121I59IOfYITA9T/BB8V2yPGQ96htsQtBvCPS0QufFGotDzj2t
-	onLgOn/TcpyI7coG9RiVANUcKcH6eWjs4g==
-X-Google-Smtp-Source: ABdhPJywtxd0avHPJo4IDv+C7oO/ZT0z6gNVCBhFZ0T2TPq2hZc0VjSlgwTG9S4slmEXh9fP6sIWKg==
-X-Received: by 2002:a2e:b8c6:: with SMTP id s6mr1101564ljp.275.1611884963249;
-        Thu, 28 Jan 2021 17:49:23 -0800 (PST)
+        bh=PS2Y4AZ7CaGH+jvzxCns83I8qf6IAANHgkaElFlh7Pc=;
+        b=j6LkuprbaVMMpMLJe4e75A6tHXw4xOmhRdLPjrbB9zHJWedWLF/WMqGWK2b9t+ihru
+         UXKfXwzMRygLZHPtZiGutrjF60fUkUx1MGayCh7F5CG3MP4vbvd0DasUtjwlFL3G6Hep
+         n7bnVHFklUY1YfPrutuYYGPfRvl6EmfnInKJz3G+0W1kEvI88weGD0Gjvt7vmvZekDUp
+         t6LgsOf3idlf19hGwbwu9PgC4BogxmI5Ig68vx7vfouUfongQAkVzmHS3LuM3HMACCBO
+         BKtHyhPkmi9YwmfbRRi2VXWmxDgY4ytqx56GJvQj46Z4GNvdFteU1Cp+W/o8gO4Gj4sP
+         /VXw==
+X-Gm-Message-State: AOAM533zSAM7J2CxBLyaHp/9z9B3VbgMLuFLOAYfkefKJmgpvv2zibcM
+	t6kIlXSGkLzLshEvKDgiaMm2n0bAbN2rQg==
+X-Google-Smtp-Source: ABdhPJx2qq2uckNQzPqI5wsNqwcjBbwhtIIclwaWFXnk/F0UcG378prNRgIXR7dY0+QNWH8NaOfKTQ==
+X-Received: by 2002:a2e:850c:: with SMTP id j12mr1224965lji.298.1611884965401;
+        Thu, 28 Jan 2021 17:49:25 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Paul Durrant <paul@xen.org>,
 	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V6 17/24] xen/ioreq: Introduce domain_has_ioreq_server()
-Date: Fri, 29 Jan 2021 03:48:45 +0200
-Message-Id: <1611884932-1851-18-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V6 19/24] xen/arm: io: Abstract sign-extension
+Date: Fri, 29 Jan 2021 03:48:47 +0200
+Message-Id: <1611884932-1851-20-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1611884932-1851-1-git-send-email-olekstysh@gmail.com>
 References: <1611884932-1851-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-This patch introduces a helper the main purpose of which is to check
-if a domain is using IOREQ server(s).
-
-On Arm the current benefit is to avoid calling vcpu_ioreq_handle_completion()
-(which implies iterating over all possible IOREQ servers anyway)
-on every return in leave_hypervisor_to_guest() if there is no active
-servers for the particular domain.
-Also this helper will be used by one of the subsequent patches on Arm.
+In order to avoid code duplication (both handle_read() and
+handle_ioserv() contain the same code for the sign-extension)
+put this code to a common helper to be used for both.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 CC: Julien Grall <julien.grall@arm.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Reviewed-by: Paul Durrant <paul@xen.org>
 [On Arm only]
 Tested-by: Wei Chen <Wei.Chen@arm.com>
 
@@ -119,111 +112,139 @@ Tested-by: Wei Chen <Wei.Chen@arm.com>
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
-Changes RFC -> V1:
+Changes V1 -> V2:
    - new patch
 
-Changes V1 -> V2:
-   - update patch description
-   - guard helper with CONFIG_IOREQ_SERVER
-   - remove "hvm" prefix
-   - modify helper to just return d->arch.hvm.ioreq_server.nr_servers
-   - put suitable ASSERT()s
-   - use ASSERT(d->ioreq_server.server[id] ? !s : !!s) in set_ioreq_server()
-   - remove d->ioreq_server.nr_servers = 0 from hvm_ioreq_init()
-
 Changes V2 -> V3:
-   - update patch description
-   - remove ASSERT()s from the helper, add a comment
-   - use #ifdef CONFIG_IOREQ_SERVER inside function body
-   - use new ASSERT() construction in set_ioreq_server()
+   - no changes
 
 Changes V3 -> V4:
-   - update patch description
-   - drop per-domain variable "nr_servers"
-   - reimplement a helper to count the non-NULL entries
-   - make the helper out-of-line
+   - no changes here, but in new patch:
+     "xen/arm: io: Harden sign extension check"
 
 Changes V4 -> V5:
-   - add Stefano's and Paul's R-b
+   - add Stefano-s R-b
 
 Changes V5 -> V6:
    - no changes
 
 ---
 ---
- xen/arch/arm/traps.c    | 15 +++++++++------
- xen/common/ioreq.c      | 16 ++++++++++++++++
- xen/include/xen/ioreq.h |  2 ++
- 3 files changed, 27 insertions(+), 6 deletions(-)
+ xen/arch/arm/io.c           | 18 ++----------------
+ xen/arch/arm/ioreq.c        | 17 +----------------
+ xen/include/asm-arm/traps.h | 24 ++++++++++++++++++++++++
+ 3 files changed, 27 insertions(+), 32 deletions(-)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index cb37a45..476900e 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -2275,14 +2275,17 @@ static bool check_for_vcpu_work(void)
-     struct vcpu *v = current;
+diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
+index 7ac0303..729287e 100644
+--- a/xen/arch/arm/io.c
++++ b/xen/arch/arm/io.c
+@@ -25,6 +25,7 @@
+ #include <asm/current.h>
+ #include <asm/ioreq.h>
+ #include <asm/mmio.h>
++#include <asm/traps.h>
  
- #ifdef CONFIG_IOREQ_SERVER
--    bool handled;
-+    if ( domain_has_ioreq_server(v->domain) )
-+    {
-+        bool handled;
+ #include "decode.h"
  
--    local_irq_enable();
--    handled = vcpu_ioreq_handle_completion(v);
--    local_irq_disable();
-+        local_irq_enable();
-+        handled = vcpu_ioreq_handle_completion(v);
-+        local_irq_disable();
+@@ -40,26 +41,11 @@ static enum io_state handle_read(const struct mmio_handler *handler,
+      * setting r).
+      */
+     register_t r = 0;
+-    uint8_t size = (1 << dabt.size) * 8;
  
--    if ( !handled )
--        return true;
-+        if ( !handled )
-+            return true;
-+    }
- #endif
+     if ( !handler->ops->read(v, info, &r, handler->priv) )
+         return IO_ABORT;
  
-     if ( likely(!v->arch.need_flush_to_ram) )
-diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
-index 07572a5..5b0f03e 100644
---- a/xen/common/ioreq.c
-+++ b/xen/common/ioreq.c
-@@ -80,6 +80,22 @@ static ioreq_t *get_ioreq(struct ioreq_server *s, struct vcpu *v)
-     return &p->vcpu_ioreq[v->vcpu_id];
+-    /*
+-     * Sign extend if required.
+-     * Note that we expect the read handler to have zeroed the bits
+-     * outside the requested access size.
+-     */
+-    if ( dabt.sign && (r & (1UL << (size - 1))) )
+-    {
+-        /*
+-         * We are relying on register_t using the same as
+-         * an unsigned long in order to keep the 32-bit assembly
+-         * code smaller.
+-         */
+-        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
+-        r |= (~0UL) << size;
+-    }
++    r = sign_extend(dabt, r);
+ 
+     set_user_reg(regs, dabt.reg, r);
+ 
+diff --git a/xen/arch/arm/ioreq.c b/xen/arch/arm/ioreq.c
+index 43f5d6b..308650b 100644
+--- a/xen/arch/arm/ioreq.c
++++ b/xen/arch/arm/ioreq.c
+@@ -28,7 +28,6 @@ enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v)
+     const union hsr hsr = { .bits = regs->hsr };
+     const struct hsr_dabt dabt = hsr.dabt;
+     /* Code is similar to handle_read */
+-    uint8_t size = (1 << dabt.size) * 8;
+     register_t r = v->io.req.data;
+ 
+     /* We are done with the IO */
+@@ -37,21 +36,7 @@ enum io_state handle_ioserv(struct cpu_user_regs *regs, struct vcpu *v)
+     if ( dabt.write )
+         return IO_HANDLED;
+ 
+-    /*
+-     * Sign extend if required.
+-     * Note that we expect the read handler to have zeroed the bits
+-     * outside the requested access size.
+-     */
+-    if ( dabt.sign && (r & (1UL << (size - 1))) )
+-    {
+-        /*
+-         * We are relying on register_t using the same as
+-         * an unsigned long in order to keep the 32-bit assembly
+-         * code smaller.
+-         */
+-        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
+-        r |= (~0UL) << size;
+-    }
++    r = sign_extend(dabt, r);
+ 
+     set_user_reg(regs, dabt.reg, r);
+ 
+diff --git a/xen/include/asm-arm/traps.h b/xen/include/asm-arm/traps.h
+index c4a3d0f..c6b3cc7 100644
+--- a/xen/include/asm-arm/traps.h
++++ b/xen/include/asm-arm/traps.h
+@@ -84,6 +84,30 @@ static inline bool VABORT_GEN_BY_GUEST(const struct cpu_user_regs *regs)
+         (unsigned long)abort_guest_exit_end == regs->pc;
  }
  
-+/*
-+ * This should only be used when d == current->domain or when they're
-+ * distinct and d is paused. Otherwise the result is stale before
-+ * the caller can inspect it.
-+ */
-+bool domain_has_ioreq_server(const struct domain *d)
++/* Check whether the sign extension is required and perform it */
++static inline register_t sign_extend(const struct hsr_dabt dabt, register_t r)
 +{
-+    const struct ioreq_server *s;
-+    unsigned int id;
++    uint8_t size = (1 << dabt.size) * 8;
 +
-+    FOR_EACH_IOREQ_SERVER(d, id, s)
-+        return true;
++    /*
++     * Sign extend if required.
++     * Note that we expect the read handler to have zeroed the bits
++     * outside the requested access size.
++     */
++    if ( dabt.sign && (r & (1UL << (size - 1))) )
++    {
++        /*
++         * We are relying on register_t using the same as
++         * an unsigned long in order to keep the 32-bit assembly
++         * code smaller.
++         */
++        BUILD_BUG_ON(sizeof(register_t) != sizeof(unsigned long));
++        r |= (~0UL) << size;
++    }
 +
-+    return false;
++    return r;
 +}
 +
- static struct ioreq_vcpu *get_pending_vcpu(const struct vcpu *v,
-                                            struct ioreq_server **srvp)
- {
-diff --git a/xen/include/xen/ioreq.h b/xen/include/xen/ioreq.h
-index 0b433e2..89ee171 100644
---- a/xen/include/xen/ioreq.h
-+++ b/xen/include/xen/ioreq.h
-@@ -83,6 +83,8 @@ static inline bool ioreq_needs_completion(const ioreq_t *ioreq)
- #define HANDLE_BUFIOREQ(s) \
-     ((s)->bufioreq_handling != HVM_IOREQSRV_BUFIOREQ_OFF)
- 
-+bool domain_has_ioreq_server(const struct domain *d);
-+
- bool vcpu_ioreq_pending(struct vcpu *v);
- bool vcpu_ioreq_handle_completion(struct vcpu *v);
- bool is_ioreq_server_page(struct domain *d, const struct page_info *page);
+ #endif /* __ASM_ARM_TRAPS__ */
+ /*
+  * Local variables:
 -- 
 2.7.4
 
