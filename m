@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46742C43381
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Jan 2021 01:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5905EC433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Jan 2021 01:59:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C2F0E64DD8
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Jan 2021 01:59:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C2F0E64DD8
+	by mail.kernel.org (Postfix) with ESMTPS id E2DC764DF1
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Jan 2021 01:59:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2DC764DF1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.77625.140728 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.77627.140752 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5J3y-0006rL-Jo; Fri, 29 Jan 2021 01:59:06 +0000
+	id 1l5J41-0006zJ-Kr; Fri, 29 Jan 2021 01:59:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 77625.140728; Fri, 29 Jan 2021 01:59:06 +0000
+Received: by outflank-mailman (output) from mailman id 77627.140752; Fri, 29 Jan 2021 01:59:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5J3y-0006rB-Fk; Fri, 29 Jan 2021 01:59:06 +0000
-Received: by outflank-mailman (input) for mailman id 77625;
- Fri, 29 Jan 2021 01:59:05 +0000
+	id 1l5J41-0006yt-Gk; Fri, 29 Jan 2021 01:59:09 +0000
+Received: by outflank-mailman (input) for mailman id 77627;
+ Fri, 29 Jan 2021 01:59:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AjHm=HA=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1l5IvW-0004da-Lj
- for xen-devel@lists.xenproject.org; Fri, 29 Jan 2021 01:50:22 +0000
-Received: from mail-lj1-x231.google.com (unknown [2a00:1450:4864:20::231])
+ id 1l5Iv7-0004da-Ky
+ for xen-devel@lists.xenproject.org; Fri, 29 Jan 2021 01:49:57 +0000
+Received: from mail-lf1-x12b.google.com (unknown [2a00:1450:4864:20::12b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bedd6eb8-f922-434f-9d06-20c2c723c811;
- Fri, 29 Jan 2021 01:49:22 +0000 (UTC)
-Received: by mail-lj1-x231.google.com with SMTP id f19so8727026ljn.5
- for <xen-devel@lists.xenproject.org>; Thu, 28 Jan 2021 17:49:22 -0800 (PST)
+ id 6959da08-c442-4655-bd02-cac1cadc4785;
+ Fri, 29 Jan 2021 01:49:18 +0000 (UTC)
+Received: by mail-lf1-x12b.google.com with SMTP id i187so10306523lfd.4
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Jan 2021 17:49:18 -0800 (PST)
 Received: from otyshchenko.www.tendawifi.com ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id z128sm1840238lfa.72.2021.01.28.17.49.20
+ by smtp.gmail.com with ESMTPSA id z128sm1840238lfa.72.2021.01.28.17.49.16
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 28 Jan 2021 17:49:20 -0800 (PST)
+ Thu, 28 Jan 2021 17:49:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,75 +55,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bedd6eb8-f922-434f-9d06-20c2c723c811
+X-Inumbo-ID: 6959da08-c442-4655-bd02-cac1cadc4785
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=J8Q+NbbfOYPSxHuBJx+zfYkWiARdAR8S5Uvx+xX0BfA=;
-        b=Jjep4zr3UhqrSeIHdGssd6JksZpaqYeuPw9KyUEeBCN7elRBbF0moB865viv3iHgSo
-         +JGDIbFDCHf+RNOUUFkmZGVWvil8uiUKuCXXE9yURSa+Ft/2MlgI4H4YM9SXsWfNexz9
-         ssF9caR+lwPVQq30Ayns6EOYhDnKygKeO2dy9mH3u2OMyRncBnve2fA0Gwr+s16ljMLK
-         vyTYbfwdFo1KOKE6CkN8BqAwOhhgH/pfsXmzEipqV4nmnz9fCAdvM8n9IlgX4QnbmrfX
-         +YviyhQ5WNv+RQQWL3VB1cHeCIby7BsxXNAotJcfTPrrUq6FzhDw8hlcnqe0sqZ8bTJy
-         xSMg==
+        bh=wO92iTlgb3DNVOezolo/XVlMnVKwV7Y/rHIBCUd9Cu8=;
+        b=SY9UcgHzjsclm7gI+VSLSdbMx7Y+JLur1TDQbTOD8jLvHId5WwCm5B9hFwbmCHPxfg
+         W+j+LRzOFGjbWtPrgvlV+bWRC9aFV/rFqLFGumSp0rtwXUsjl87scUDJ5w/uP15UyPgN
+         sNosYkbC4YWVwbBx202bVI42SidEY8tPHvm/OCS/o8jXV2k2GQfqxPyAJXY9QJXd6ILi
+         wnuIv+zPBqmN1+GJ+zlErH8Z8DJ+Bv+x1530nTrDIdGYo8vQugHDzO9t7smnxYf10nYS
+         zUDXhdGU8KfdKZbO6Ya1zRFHqvlUq4EPWb8rXY3ft6zxFECybFHRpvaHnan2jPEe17rx
+         db/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=J8Q+NbbfOYPSxHuBJx+zfYkWiARdAR8S5Uvx+xX0BfA=;
-        b=sylojfWhdZVgno7JNnrXKyCPtZ096evPCjB4ZEDJvkth3EVY8psoBCsXBrFRrv58Tp
-         IsZY0M8EBMpFsY+X/sl6750J+9qJ+3uWjKvQDlKfPzmJjYgZ+chrA/0kmGwZw/ckH7or
-         8wavSQBiZvmm414UEz6+7OPSWoQH5KtaezahVCRaa1azrWnte6fyLDbh+YgscVMXSQsZ
-         cJ1+0p+T+hxICr4sj6Bj4VbT6t5V7bRZYi4kc1cYQmOlnhrgolzCCUUEJ41s2ME0n2S8
-         i4ZKblTNOd3nFAOKdoTk5md78ideO2csPEaB50NWiugSB6vWssmS1O5hs+e8ZQ5UbYOa
-         bhIw==
-X-Gm-Message-State: AOAM530i2xRo41b+fZ3/raNvwMApw5h8KXHXM+nf83R4d12/yeeQkg2d
-	dMTq/qklNLCg1UafP6vDSLV7yAdLiusvlA==
-X-Google-Smtp-Source: ABdhPJzEBOBx24c+tcYLLrrcPo5wbVjdcfZT3+cHR9T25pn+6+yxuJkL9xX8SKTw6mYHmAU22DMeVA==
-X-Received: by 2002:a2e:9c88:: with SMTP id x8mr1166570lji.409.1611884961181;
-        Thu, 28 Jan 2021 17:49:21 -0800 (PST)
+        bh=wO92iTlgb3DNVOezolo/XVlMnVKwV7Y/rHIBCUd9Cu8=;
+        b=JC2ZHD8xpfUnZ3w6yZfEMqsgBz2sOaX+FKFb1Kit9+3ZMSqUCSnSAJKFw7hXlMsUmt
+         pt5uu8nqr4w8Cs+GZ0+Ulu0gTg/AGfB4oYgSwN2oCo5jLN//qGVvmSO9+3OIT2tM5HVb
+         1XDxcGsAq5hZCANLAXDjPcqbJx2yTXN2Zw4mHX8UppNyaS8f1hEu7ozp7rU4iviNmp/q
+         Qx3WlIt0uosL5pDkVvHHvKp5Dz4JMwem3B0PQ0cbyjSJ8rpb7gJOBsLgxBlhCEcV02MS
+         x7ssmVOqx21A+njVQiPayAfYoHktWjkkAFbQgQu6Uutm479iUhhS1QCdLNbrs1E8MQ85
+         OcQg==
+X-Gm-Message-State: AOAM531LNV5ziTaiMbfQX94S05YNcHugztcXFJ/atQmrmJh4hxeKrmZD
+	iphsCGmO24q6Ato/h3VIEr/11SZxHoMBTg==
+X-Google-Smtp-Source: ABdhPJzPm/FEOVU7qPNjQYoLRgww8CaY20+14YvdxhpQqKI3lLPXxYbZWQ6BDet5953TClQxpDebsA==
+X-Received: by 2002:a19:c356:: with SMTP id t83mr875368lff.484.1611884957102;
+        Thu, 28 Jan 2021 17:49:17 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Julien Grall <julien.grall@arm.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <julien.grall@arm.com>
-Subject: [PATCH V6 15/24] xen/arm: Call vcpu_ioreq_handle_completion() in check_for_vcpu_work()
-Date: Fri, 29 Jan 2021 03:48:43 +0200
-Message-Id: <1611884932-1851-16-git-send-email-olekstysh@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V6 11/24] xen/mm: Make x86's XENMEM_resource_ioreq_server handling common
+Date: Fri, 29 Jan 2021 03:48:39 +0200
+Message-Id: <1611884932-1851-12-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1611884932-1851-1-git-send-email-olekstysh@gmail.com>
 References: <1611884932-1851-1-git-send-email-olekstysh@gmail.com>
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 
-This patch adds remaining bits needed for the IOREQ support on Arm.
-Besides just calling vcpu_ioreq_handle_completion() we need to handle
-it's return value to make sure that all the vCPU works are done before
-we return to the guest (the vcpu_ioreq_handle_completion() may return
-false if there is vCPU work to do or IOREQ state is invalid).
-For that reason we use an unbounded loop in leave_hypervisor_to_guest().
+As x86 implementation of XENMEM_resource_ioreq_server can be
+re-used on Arm later on, this patch makes it common and removes
+arch_acquire_resource (and the corresponding option) as unneeded.
 
-The worse that can happen here if the vCPU will never run again
-(the I/O will never complete). But, in Xen case, if the I/O never
-completes then it most likely means that something went horribly
-wrong with the Device Emulator. And it is most likely not safe
-to continue. So letting the vCPU to spin forever if the I/O never
-completes is a safer action than letting it continue and leaving
-the guest in unclear state and is the best what we can do for now.
+Also re-order #include-s alphabetically.
 
-Please note, using this loop we will not spin forever on a pCPU,
-preventing any other vCPUs from being scheduled. At every loop
-we will call check_for_pcpu_work() that will process pending
-softirqs. In case of failure, the guest will crash and the vCPU
-will be unscheduled. In normal case, if the rescheduling is necessary
-the vCPU will be rescheduled to give place to someone else.
+This support is going to be used on Arm to be able run device
+emulator outside of Xen hypervisor.
 
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Acked-by: Julien Grall <jgrall@amazon.com>
-CC: Julien Grall <julien.grall@arm.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 [On Arm only]
 Tested-by: Wei Chen <Wei.Chen@arm.com>
 
@@ -131,93 +123,246 @@ Tested-by: Wei Chen <Wei.Chen@arm.com>
 Please note, this is a split/cleanup/hardening of Julien's PoC:
 "Add support for Guest IO forwarding to a device emulator"
 
+Changes RFC -> V1:
+   - no changes
+
 Changes V1 -> V2:
-   - new patch, changes were derived from (+ new explanation):
-     arm/ioreq: Introduce arch specific bits for IOREQ/DM features
+   - update the author of a patch
 
 Changes V2 -> V3:
-   - update patch description
+   - don't wrap #include <xen/ioreq.h>
+   - limit the number of #ifdef-s
+   - re-order #include-s alphabetically
 
 Changes V3 -> V4:
-   - update patch description and comment in code
+   - rebase
+   - Add Jan's R-b
 
 Changes V4 -> V5:
-   - add Stefano's R-b
-   - update patch subject/description and comment in code,
-     was "xen/arm: Stick around in leave_hypervisor_to_guest until I/O has completed"
-   - change loop logic a bit
-   - squash with changes to check_for_vcpu_work() from patch #14
+   - add Paul's R-b
+   - update patch description
+   - remove ARCH_ACQUIRE_RESOURCE option, etc
 
 Changes V5 -> V6:
-   - add Julien's A-b
+   - no changes
 
 ---
 ---
- xen/arch/arm/traps.c | 26 +++++++++++++++++++++++---
- 1 file changed, 23 insertions(+), 3 deletions(-)
+ xen/arch/x86/Kconfig     |  1 -
+ xen/arch/x86/mm.c        | 44 ---------------------------------
+ xen/common/Kconfig       |  3 ---
+ xen/common/memory.c      | 63 +++++++++++++++++++++++++++++++++++++++---------
+ xen/include/asm-x86/mm.h |  4 ---
+ xen/include/xen/mm.h     |  9 -------
+ 6 files changed, 51 insertions(+), 73 deletions(-)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 8848764..cb37a45 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -21,6 +21,7 @@
- #include <xen/hypercall.h>
- #include <xen/init.h>
- #include <xen/iocap.h>
-+#include <xen/ioreq.h>
- #include <xen/irq.h>
- #include <xen/lib.h>
- #include <xen/mem_access.h>
-@@ -2269,12 +2270,23 @@ static void check_for_pcpu_work(void)
-  * Process pending work for the vCPU. Any call should be fast or
-  * implement preemption.
-  */
--static void check_for_vcpu_work(void)
-+static bool check_for_vcpu_work(void)
- {
-     struct vcpu *v = current;
- 
-+#ifdef CONFIG_IOREQ_SERVER
-+    bool handled;
-+
-+    local_irq_enable();
-+    handled = vcpu_ioreq_handle_completion(v);
-+    local_irq_disable();
-+
-+    if ( !handled )
-+        return true;
-+#endif
-+
-     if ( likely(!v->arch.need_flush_to_ram) )
--        return;
-+        return false;
- 
-     /*
-      * Give a chance for the pCPU to process work before handling the vCPU
-@@ -2285,6 +2297,8 @@ static void check_for_vcpu_work(void)
-     local_irq_enable();
-     p2m_flush_vm(v);
-     local_irq_disable();
-+
-+    return false;
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index ea9a9ea..abe0fce 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -6,7 +6,6 @@ config X86
+ 	select ACPI
+ 	select ACPI_LEGACY_TABLES_LOOKUP
+ 	select ARCH_SUPPORTS_INT128
+-	select ARCH_ACQUIRE_RESOURCE
+ 	select COMPAT
+ 	select CORE_PARKING
+ 	select HAS_ALTERNATIVE
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 59eb5c8..4366ea3 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -4587,50 +4587,6 @@ static int handle_iomem_range(unsigned long s, unsigned long e, void *p)
+     return err || s > e ? err : _handle_iomem_range(s, e, p);
  }
  
- /*
-@@ -2297,7 +2311,13 @@ void leave_hypervisor_to_guest(void)
+-int arch_acquire_resource(struct domain *d, unsigned int type,
+-                          unsigned int id, unsigned long frame,
+-                          unsigned int nr_frames, xen_pfn_t mfn_list[])
+-{
+-    int rc;
+-
+-    switch ( type )
+-    {
+-#ifdef CONFIG_HVM
+-    case XENMEM_resource_ioreq_server:
+-    {
+-        ioservid_t ioservid = id;
+-        unsigned int i;
+-
+-        rc = -EINVAL;
+-        if ( !is_hvm_domain(d) )
+-            break;
+-
+-        if ( id != (unsigned int)ioservid )
+-            break;
+-
+-        rc = 0;
+-        for ( i = 0; i < nr_frames; i++ )
+-        {
+-            mfn_t mfn;
+-
+-            rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
+-            if ( rc )
+-                break;
+-
+-            mfn_list[i] = mfn_x(mfn);
+-        }
+-        break;
+-    }
+-#endif
+-
+-    default:
+-        rc = -EOPNOTSUPP;
+-        break;
+-    }
+-
+-    return rc;
+-}
+-
+ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  {
-     local_irq_disable();
+     int rc;
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index cf32a07..fa049a6 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -22,9 +22,6 @@ config GRANT_TABLE
  
--    check_for_vcpu_work();
-+    /*
-+     * check_for_vcpu_work() may return true if there are more work to before
-+     * the vCPU can safely resume. This gives us an opportunity to deschedule
-+     * the vCPU if needed.
-+     */
-+    while ( check_for_vcpu_work() )
-+        check_for_pcpu_work();
-     check_for_pcpu_work();
+ 	  If unsure, say Y.
  
-     vgic_sync_to_lrs();
+-config ARCH_ACQUIRE_RESOURCE
+-	bool
+-
+ config HAS_ALTERNATIVE
+ 	bool
+ 
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index ccb4d49..2f274a6 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -8,22 +8,23 @@
+  */
+ 
+ #include <xen/domain_page.h>
+-#include <xen/types.h>
++#include <xen/errno.h>
++#include <xen/event.h>
++#include <xen/grant_table.h>
++#include <xen/guest_access.h>
++#include <xen/hypercall.h>
++#include <xen/iocap.h>
++#include <xen/ioreq.h>
+ #include <xen/lib.h>
++#include <xen/mem_access.h>
+ #include <xen/mm.h>
++#include <xen/numa.h>
++#include <xen/paging.h>
+ #include <xen/param.h>
+ #include <xen/perfc.h>
+ #include <xen/sched.h>
+-#include <xen/event.h>
+-#include <xen/paging.h>
+-#include <xen/iocap.h>
+-#include <xen/guest_access.h>
+-#include <xen/hypercall.h>
+-#include <xen/errno.h>
+-#include <xen/numa.h>
+-#include <xen/mem_access.h>
+ #include <xen/trace.h>
+-#include <xen/grant_table.h>
++#include <xen/types.h>
+ #include <asm/current.h>
+ #include <asm/hardirq.h>
+ #include <asm/p2m.h>
+@@ -1091,6 +1092,40 @@ static int acquire_grant_table(struct domain *d, unsigned int id,
+     return 0;
+ }
+ 
++static int acquire_ioreq_server(struct domain *d,
++                                unsigned int id,
++                                unsigned long frame,
++                                unsigned int nr_frames,
++                                xen_pfn_t mfn_list[])
++{
++#ifdef CONFIG_IOREQ_SERVER
++    ioservid_t ioservid = id;
++    unsigned int i;
++    int rc;
++
++    if ( !is_hvm_domain(d) )
++        return -EINVAL;
++
++    if ( id != (unsigned int)ioservid )
++        return -EINVAL;
++
++    for ( i = 0; i < nr_frames; i++ )
++    {
++        mfn_t mfn;
++
++        rc = hvm_get_ioreq_server_frame(d, id, frame + i, &mfn);
++        if ( rc )
++            return rc;
++
++        mfn_list[i] = mfn_x(mfn);
++    }
++
++    return 0;
++#else
++    return -EOPNOTSUPP;
++#endif
++}
++
+ static int acquire_resource(
+     XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
+ {
+@@ -1149,9 +1184,13 @@ static int acquire_resource(
+                                  mfn_list);
+         break;
+ 
++    case XENMEM_resource_ioreq_server:
++        rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                  mfn_list);
++        break;
++
+     default:
+-        rc = arch_acquire_resource(d, xmar.type, xmar.id, xmar.frame,
+-                                   xmar.nr_frames, mfn_list);
++        rc = -EOPNOTSUPP;
+         break;
+     }
+ 
+diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
+index 1fdb4eb..041c158 100644
+--- a/xen/include/asm-x86/mm.h
++++ b/xen/include/asm-x86/mm.h
+@@ -640,8 +640,4 @@ static inline bool arch_mfn_in_directmap(unsigned long mfn)
+     return mfn <= (virt_to_mfn(eva - 1) + 1);
+ }
+ 
+-int arch_acquire_resource(struct domain *d, unsigned int type,
+-                          unsigned int id, unsigned long frame,
+-                          unsigned int nr_frames, xen_pfn_t mfn_list[]);
+-
+ #endif /* __ASM_X86_MM_H__ */
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 636a125..667f9da 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -612,13 +612,4 @@ static inline void put_page_alloc_ref(struct page_info *page)
+     }
+ }
+ 
+-#ifndef CONFIG_ARCH_ACQUIRE_RESOURCE
+-static inline int arch_acquire_resource(
+-    struct domain *d, unsigned int type, unsigned int id, unsigned long frame,
+-    unsigned int nr_frames, xen_pfn_t mfn_list[])
+-{
+-    return -EOPNOTSUPP;
+-}
+-#endif /* !CONFIG_ARCH_ACQUIRE_RESOURCE */
+-
+ #endif /* __XEN_MM_H__ */
 -- 
 2.7.4
 
