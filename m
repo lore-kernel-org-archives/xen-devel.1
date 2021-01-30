@@ -2,46 +2,43 @@ Return-Path: <SRS0=bW6+=HB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F945C433E0
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 15:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7596DC433E0
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 15:24:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 47F9260C3D
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 15:22:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 47F9260C3D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 170DC64E0E
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 15:24:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 170DC64E0E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.78926.143673 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.78930.143687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5s4n-00068T-K0; Sat, 30 Jan 2021 15:22:17 +0000
+	id 1l5s7E-0006Hx-0x; Sat, 30 Jan 2021 15:24:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 78926.143673; Sat, 30 Jan 2021 15:22:17 +0000
+Received: by outflank-mailman (output) from mailman id 78930.143687; Sat, 30 Jan 2021 15:24:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5s4n-00068M-Eg; Sat, 30 Jan 2021 15:22:17 +0000
-Received: by outflank-mailman (input) for mailman id 78926;
- Sat, 30 Jan 2021 15:22:15 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1l5s7D-0006Hq-Tj; Sat, 30 Jan 2021 15:24:47 +0000
+Received: by outflank-mailman (input) for mailman id 78930;
+ Sat, 30 Jan 2021 15:24:46 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1l5s4l-00068H-QN
- for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 15:22:15 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l5s4k-0001PM-4Y; Sat, 30 Jan 2021 15:22:14 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l5s4j-00030l-Oc; Sat, 30 Jan 2021 15:22:13 +0000
+ (envelope-from <SRS0=5C/p=HB=linuxfoundation.org=gregkh@kernel.org>)
+ id 1l5s7C-0006Hk-5H
+ for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 15:24:46 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9200cb69-81a2-46a5-994c-b42526dff8e2;
+ Sat, 30 Jan 2021 15:24:45 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A24D164DED;
+ Sat, 30 Jan 2021 15:24:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,151 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=qOiXMDevhm0RwhWScyWMR1qp3ZEzs7jvG4bra0f+F5U=; b=KGZxHa+0vhdA5t1dbUcS453QU3
-	PIMUpECWtLnCmdTZV7uRuOxUXNue0cza96861OZQ/uwh1Z5H1juxruv6EiLmxhTVtVVEiBt16WQIY
-	ptJz5G8n3hvHRBWETCyAESS+N9+sFxkXvE3SKhQkE7DBpFyWopDwmE/wdDWqFLb2jzYs=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	Julien Grall <jgrall@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [PATCH for-4.15] xen/mm: Fix build when CONFIG_HVM=n and CONFIG_COVERAGE=y
-Date: Sat, 30 Jan 2021 15:22:10 +0000
-Message-Id: <20210130152210.17503-1-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
+X-Inumbo-ID: 9200cb69-81a2-46a5-994c-b42526dff8e2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1612020284;
+	bh=LwThvucIGjOLsQSrFOF+2+R/stZNcgbNkWB9sGB3MNg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=zB8KJqu42VGvEtCYwZfH5dPPfnMfxDp+++khYsxBrwOEv1DHvc5FcLFCcNp9Cn+bM
+	 yS8oZdFX9Id45ebW3iC5YCXo4MqPmdijq1PYSY3hwycnr5GjKLekKsuWi5roPw90Q0
+	 t3pKcXB9h1R1c/tzsQTEEoAmm8xBFvdp7HaAfj0E=
+Date: Sat, 30 Jan 2021 16:24:41 +0100
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: stable@vger.kernel.org, xen-devel@lists.xenproject.org,
+	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH for-4.19.y] xen/privcmd: allow fetching resource sizes
+Message-ID: <YBV6OeEQwG0gLEfY@kroah.com>
+References: <YBPlDmlJTK78clC3@kroah.com>
+ <20210129122215.19482-1-roger.pau@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210129122215.19482-1-roger.pau@citrix.com>
 
-From: Julien Grall <jgrall@amazon.com>
+On Fri, Jan 29, 2021 at 01:22:15PM +0100, Roger Pau Monne wrote:
+> commit ef3a575baf53571dc405ee4028e26f50856898e7 upstream.
+> 
 
-Xen is heavily relying on the DCE stage to remove unused code so the
-linker doesn't throw an error because a function is not implemented
-yet we defined a prototype for it.
+Now queued up, thanks.
 
-On some GCC version (such as 9.4 provided by Debian sid), the compiler
-will DCE stage will not managed to figure that out for
-xenmem_add_to_physmap_batch():
-
-ld: ld: prelink.o: in function `xenmem_add_to_physmap_batch':
-/xen/xen/common/memory.c:942: undefined reference to `xenmem_add_to_physmap_one'
-/xen/xen/common/memory.c:942:(.text+0x22145): relocation truncated
-to fit: R_X86_64_PLT32 against undefined symbol `xenmem_add_to_physmap_one'
-prelink-efi.o: in function `xenmem_add_to_physmap_batch':
-/xen/xen/common/memory.c:942: undefined reference to `xenmem_add_to_physmap_one'
-make[2]: *** [Makefile:215: /root/xen/xen/xen.efi] Error 1
-make[2]: *** Waiting for unfinished jobs....
-ld: /xen/xen/.xen-syms.0: hidden symbol `xenmem_add_to_physmap_one' isn't defined
-ld: final link failed: bad value
-
-It is not entirely clear why the compiler DCE is not detecting the
-unused code. However, moving the permission check from do_memory_op()
-to xenmem_add_to_physmap_batch() does the trick.
-
-Note that this required to move the implementation of
-xapt_permision_check() earlier on so it can be called in
-xemem_add_to_physmap_batch().
-
-No functional change intended.
-
-Fixes: d4f699a0df6c ("x86/mm: p2m_add_foreign() is HVM-only")
-Reported-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
----
-
-This also resolves a randconfig issue on the gitlab CI.
-
-The gitlab CI is used to provide basic testing on a per-series basis. So
-I would like to request this patch to be merged in Xen 4.15 in order to
-reduce the number of failure not related to the series tested.
-
-Note that there are a few more randconfig issues that needs to be
-addressed.
----
- xen/common/memory.c | 44 +++++++++++++++++++++-----------------------
- 1 file changed, 21 insertions(+), 23 deletions(-)
-
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 01cab7e4930e..b047a93a703a 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -898,11 +898,32 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
-     return rc;
- }
- 
-+static long xatp_permission_check(struct domain *d, unsigned int space)
-+{
-+    if ( !paging_mode_translate(d) )
-+        return -EACCES;
-+
-+    /*
-+     * XENMAPSPACE_dev_mmio mapping is only supported for hardware Domain
-+     * to map this kind of space to itself.
-+     */
-+    if ( (space == XENMAPSPACE_dev_mmio) &&
-+         (!is_hardware_domain(d) || (d != current->domain)) )
-+        return -EACCES;
-+
-+    return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
-+}
-+
- static int xenmem_add_to_physmap_batch(struct domain *d,
-                                        struct xen_add_to_physmap_batch *xatpb,
-                                        unsigned int extent)
- {
-     union add_to_physmap_extra extra = {};
-+    int rc;
-+
-+    rc = xatp_permission_check(d, xatpb->space);
-+    if ( rc )
-+        return rc;
- 
-     if ( unlikely(xatpb->size < extent) )
-         return -EILSEQ;
-@@ -1038,22 +1059,6 @@ static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
- }
- #endif
- 
--static long xatp_permission_check(struct domain *d, unsigned int space)
--{
--    if ( !paging_mode_translate(d) )
--        return -EACCES;
--
--    /*
--     * XENMAPSPACE_dev_mmio mapping is only supported for hardware Domain
--     * to map this kind of space to itself.
--     */
--    if ( (space == XENMAPSPACE_dev_mmio) &&
--         (!is_hardware_domain(d) || (d != current->domain)) )
--        return -EACCES;
--
--    return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
--}
--
- unsigned int ioreq_server_max_frames(const struct domain *d)
- {
-     unsigned int nr = 0;
-@@ -1442,13 +1447,6 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         if ( d == NULL )
-             return -ESRCH;
- 
--        rc = xatp_permission_check(d, xatpb.space);
--        if ( rc )
--        {
--            rcu_unlock_domain(d);
--            return rc;
--        }
--
-         rc = xenmem_add_to_physmap_batch(d, &xatpb, start_extent);
- 
-         rcu_unlock_domain(d);
--- 
-2.17.1
-
+greg k-h
 
