@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1193C433E9
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1305C433DB
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 64C0264E24
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 64C0264E24
+	by mail.kernel.org (Postfix) with ESMTPS id A6E7764E24
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A6E7764E24
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.78642.143226 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.78646.143238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5gU1-00010N-OC; Sat, 30 Jan 2021 02:59:33 +0000
+	id 1l5gU7-00019j-4V; Sat, 30 Jan 2021 02:59:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 78642.143226; Sat, 30 Jan 2021 02:59:33 +0000
+Received: by outflank-mailman (output) from mailman id 78646.143238; Sat, 30 Jan 2021 02:59:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5gU1-000109-Hh; Sat, 30 Jan 2021 02:59:33 +0000
-Received: by outflank-mailman (input) for mailman id 78642;
- Sat, 30 Jan 2021 02:59:32 +0000
+	id 1l5gU6-00019K-VH; Sat, 30 Jan 2021 02:59:38 +0000
+Received: by outflank-mailman (input) for mailman id 78646;
+ Sat, 30 Jan 2021 02:59:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bynp=HB=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l5gU0-0000YD-Qc
- for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 02:59:32 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ id 1l5gU5-0000YD-Qr
+ for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 02:59:37 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2c0b585b-f587-468e-bc95-4c5c8fe3e30e;
- Sat, 30 Jan 2021 02:59:13 +0000 (UTC)
+ id e82c1f1d-02ed-4b5d-b9ca-591e636518df;
+ Sat, 30 Jan 2021 02:59:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,39 +48,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c0b585b-f587-468e-bc95-4c5c8fe3e30e
+X-Inumbo-ID: e82c1f1d-02ed-4b5d-b9ca-591e636518df
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1611975553;
+  d=citrix.com; s=securemail; t=1611975554;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=EqYl0Kb4/COUva2GRLaJjCYsAtWQEco55jqghSs9xRU=;
-  b=a7H8g3sYNXSxEIlc3QNQDFoTJm6SNUtwZ0OJpoLRVCO9VQf2LNHezGlh
-   iM7k0P+UMe91OmHmlwlC1I84gXL+ZfbSC9021phD0odwmS9NiKrTOaXej
-   s2Ted7lBX2IKMT9s+OqoiWYMiM2yiz2Ai0FF/P46ftubng1z964Br6Vie
-   4=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: ISuLahzRvGoRGi4NrvKUugJTJrfABpKQhnld6WCRriWnFjzGC6pCRZHfVsmb2dMD5Imm1sU2+m
- Xc3d3pYnvN1VyW4rNYjsbP+58qjbwneTEVVcV4FifCbzgoGWXgsy+M5S7ruJX6Ly6pOquyNSms
- qRKumJSOZPyjNnmNH21bUjXeGoFlXH7iPhGtc2IQ/6cIUeQF03jcPM08h7FVfmGxETAffthZ3I
- acB/+NfHK1dvleJX8BwDx/wZ7giqe8ZSbZ9gpYrCW/5G0EqcuYAAoqTczCLH5PvgNTp0at/LpA
- FjU=
+  bh=VoTeqylyIKYNUVGR1p4EbYqyDB1lDehnO+q/9sVC2vI=;
+  b=VfjfWAy02G0IfGUExxrGpFFV0R7fjZfyGbc+PDtjhpz6PpiLzX+7G/3L
+   p/LRpJhUD2hL0SKKgJLliAE9Lc+7CN+xTb2iWjXS+abHn28R6xJhSC5Wx
+   ex5Mjvc3Xx1EdySDmMzkLhoYTX2O5HTFh3gixPUFr5Pr4UYDTWkuEKCl6
+   o=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: wSvciXDYXWGNEV5d0mKKe9gT+n67YO2SHpfaeRlKDfg8scP66BMzOYvZdGMyQsib2NOC+JzSjf
+ M2xgiduc7UIWeFSFkQC2BTsG/fvN1VthkCjJSkZn59l34NJymTpBaATn5qMVPyEZynqY2b4LML
+ qom3XHgiktuTZMjXWOwpS42fdHV569c4CsoLB379Hp0N3vC8OdSXjE+SDy5s/7/8fleP0dNwqm
+ QpRr8/U1EXPfhrAHmtthaDqEHSPKsGKtOflB6+WGBfSJ6GphlZGTlZcRJe48rcx064QHzWkKon
+ Kt8=
 X-SBRS: 5.1
-X-MesageID: 36195186
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 37525492
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,387,1602561600"; 
-   d="scan'208";a="36195186"
+   d="scan'208";a="37525492"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Tamas K Lengyel
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
+	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
+	Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
 	<tamas@tklengyel.com>
-Subject: [PATCH v8 08/16] xen/domain: Add vmtrace_size domain creation parameter
-Date: Sat, 30 Jan 2021 02:58:44 +0000
-Message-ID: <20210130025852.12430-9-andrew.cooper3@citrix.com>
+Subject: [PATCH v8 02/16] xen/gnttab: Rework resource acquisition
+Date: Sat, 30 Jan 2021 02:58:38 +0000
+Message-ID: <20210130025852.12430-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210130025852.12430-1-andrew.cooper3@citrix.com>
 References: <20210130025852.12430-1-andrew.cooper3@citrix.com>
@@ -88,243 +90,238 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-From: Michał Leszczyński <michal.leszczynski@cert.pl>
+The existing logic doesn't function in the general case for mapping a guests
+grant table, due to arbitrary 32 frame limit, and the default grant table
+limit being 64.
 
-To use vmtrace, buffers of a suitable size need allocating, and different
-tasks will want different sizes.
+In order to start addressing this, rework the existing grant table logic by
+implementing a single gnttab_acquire_resource().  This is far more efficient
+than the previous acquire_grant_table() in memory.c because it doesn't take
+the grant table write lock, and attempt to grow the table, for every single
+frame.
 
-Add a domain creation parameter, and audit it appropriately in the
-{arch_,}sanitise_domain_config() functions.
+The new gnttab_acquire_resource() function subsumes the previous two
+gnttab_get_{shared,status}_frame() helpers.
 
-For now, the x86 specific auditing is tuned to Processor Trace running in
-Single Output mode, which requires a single contiguous range of memory.
+No functional change.
 
-The size is given an arbitrary limit of 64M which is expected to be enough for
-anticipated usecases, but not large enough to get into long-running-hypercall
-problems.
-
-Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
+CC: Julien Grall <julien@xen.org>
+CC: Paul Durrant <paul@xen.org>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
+CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
-When support for later generations of IPT get added, we can in principle start
-to use ToTP which is a scatter list of smaller trace regions to use, if we
-need to massively up the buffer size available.
-
 v8:
- * Rename vmtrace_frames to vmtrace_size.  Reposition to fill a hole.
- * Rename vmtrace.buf to vmtrace.pg.
- * Rework the refcounting logic and comment it *very* clearly.
+ * Rebase over 'frame' truncation/overflow changes.
+ * Rebase over ARM/IOREQ series.
 
-v7:
- * Major chop&change within the series.
- * Use the name 'vmtrace' consistently.
- * Use the (new) common vcpu_teardown() functionality, rather than leaving a
-   latent memory leak on ARM.
+v3:
+ * Fold switch statements in gnttab_acquire_resource()
 ---
- xen/arch/x86/domain.c       | 23 +++++++++++++
- xen/common/domain.c         | 79 +++++++++++++++++++++++++++++++++++++++++++++
- xen/include/public/domctl.h |  3 ++
- xen/include/xen/sched.h     |  6 ++++
- 4 files changed, 111 insertions(+)
+ xen/common/grant_table.c      | 76 ++++++++++++++++++++++++++++---------------
+ xen/common/memory.c           | 42 ++----------------------
+ xen/include/xen/grant_table.h | 19 ++++-------
+ 3 files changed, 58 insertions(+), 79 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index b9ba04633e..6c7ee25f3b 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -660,6 +660,29 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-         return -EINVAL;
-     }
- 
-+    if ( config->vmtrace_size )
-+    {
-+        unsigned int size = config->vmtrace_size;
-+
-+        ASSERT(vmtrace_available); /* Checked by common code. */
-+
-+        /*
-+         * For now, vmtrace is restricted to HVM guests, and using a
-+         * power-of-2 buffer between 4k and 64M in size.
-+         */
-+        if ( !hvm )
-+        {
-+            dprintk(XENLOG_INFO, "vmtrace not supported for PV\n");
-+            return -EINVAL;
-+        }
-+
-+        if ( size < PAGE_SIZE || size > MB(64) || (size & (size - 1)) )
-+        {
-+            dprintk(XENLOG_INFO, "Unsupported vmtrace size: %#x\n", size);
-+            return -EINVAL;
-+        }
-+    }
-+
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 4ecec35f28..235bf88daf 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -3987,6 +3987,55 @@ static int gnttab_get_shared_frame_mfn(struct domain *d,
      return 0;
  }
  
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index d1e94d88cf..491b32812e 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -132,6 +132,71 @@ static void vcpu_info_reset(struct vcpu *v)
-     v->vcpu_info_mfn = INVALID_MFN;
- }
- 
-+static void vmtrace_free_buffer(struct vcpu *v)
++int gnttab_acquire_resource(
++    struct domain *d, unsigned int id, unsigned int frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[])
 +{
-+    const struct domain *d = v->domain;
-+    struct page_info *pg = v->vmtrace.pg;
-+    unsigned int i;
++    struct grant_table *gt = d->grant_table;
++    unsigned int i, final_frame;
++    mfn_t tmp;
++    void **vaddrs;
++    int rc = -EINVAL;
 +
-+    if ( !pg )
-+        return;
++    if ( !nr_frames )
++        return rc;
 +
-+    v->vmtrace.pg = NULL;
++    final_frame = frame + nr_frames - 1;
 +
-+    for ( i = 0; i < (d->vmtrace_size >> PAGE_SHIFT); i++ )
++    /* Grow table if necessary. */
++    grant_write_lock(gt);
++    switch ( id )
 +    {
-+        put_page_alloc_ref(&pg[i]);
-+        put_page_and_type(&pg[i]);
++    case XENMEM_resource_grant_table_id_shared:
++        vaddrs = gt->shared_raw;
++        rc = gnttab_get_shared_frame_mfn(d, final_frame, &tmp);
++        break;
++
++    case XENMEM_resource_grant_table_id_status:
++        if ( gt->gt_version != 2 )
++            break;
++
++        /* Check that void ** is a suitable representation for gt->status. */
++        BUILD_BUG_ON(!__builtin_types_compatible_p(
++                         typeof(gt->status), grant_status_t **));
++        vaddrs = (void **)gt->status;
++        rc = gnttab_get_status_frame_mfn(d, final_frame, &tmp);
++        break;
 +    }
++
++    /* Any errors?  Bad id, or from growing the table? */
++    if ( rc )
++        goto out;
++
++    for ( i = 0; i < nr_frames; ++i )
++        mfn_list[i] = virt_to_mfn(vaddrs[frame + i]);
++
++ out:
++    grant_write_unlock(gt);
++
++    return rc;
 +}
 +
-+static int vmtrace_alloc_buffer(struct vcpu *v)
-+{
-+    struct domain *d = v->domain;
-+    struct page_info *pg;
-+    unsigned int i;
-+
-+    if ( !d->vmtrace_size )
-+        return 0;
-+
-+    pg = alloc_domheap_pages(d, get_order_from_bytes(d->vmtrace_size),
-+                             MEMF_no_refcount);
-+    if ( !pg )
-+        return -ENOMEM;
-+
-+    /*
-+     * Getting the reference counting correct here is hard.
-+     *
-+     * All pages are now on the domlist.  They, or subranges within, will be
-+     * freed when their reference count drops to zero, which may any time
-+     * between now and the domain teardown path.
-+     */
-+
-+    for ( i = 0; i < (d->vmtrace_size >> PAGE_SHIFT); i++ )
-+        if ( unlikely(!get_page_and_type(&pg[i], d, PGT_writable_page)) )
-+            goto refcnt_err;
-+
-+    /*
-+     * We must only let vmtrace_free_buffer() take any action in the success
-+     * case when we've taken all the refs it intends to drop.
-+     */
-+    v->vmtrace.pg = pg;
-+
-+    return 0;
-+
-+ refcnt_err:
-+    /*
-+     * In the failure case, we must drop all the acquired typerefs thus far,
-+     * skip vmtrace_free_buffer(), and leave domain_relinquish_resources() to
-+     * drop the alloc refs on any remaining pages - some pages could already
-+     * have been freed behind our backs.
-+     */
-+    while ( i-- )
-+        put_page_and_type(&pg[i]);
-+
-+    return -ENODATA;
-+}
-+
- /*
-  * Release resources held by a vcpu.  There may or may not be live references
-  * to the vcpu, and it may or may not be fully constructed.
-@@ -140,6 +205,8 @@ static void vcpu_info_reset(struct vcpu *v)
-  */
- static int vcpu_teardown(struct vcpu *v)
+ int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn, mfn_t *mfn)
  {
-+    vmtrace_free_buffer(v);
-+
-     return 0;
+     int rc = 0;
+@@ -4021,33 +4070,6 @@ int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn, mfn_t *mfn)
+     return rc;
  }
  
-@@ -201,6 +268,9 @@ struct vcpu *vcpu_create(struct domain *d, unsigned int vcpu_id)
-     if ( sched_init_vcpu(v) != 0 )
-         goto fail_wq;
- 
-+    if ( vmtrace_alloc_buffer(v) != 0 )
-+        goto fail_wq;
-+
-     if ( arch_vcpu_create(v) != 0 )
-         goto fail_sched;
- 
-@@ -449,6 +519,12 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-         }
-     }
- 
-+    if ( config->vmtrace_size && !vmtrace_available )
-+    {
-+        dprintk(XENLOG_INFO, "vmtrace requested but not available\n");
-+        return -EINVAL;
-+    }
-+
-     return arch_sanitise_domain_config(config);
+-int gnttab_get_shared_frame(struct domain *d, unsigned int idx,
+-                            mfn_t *mfn)
+-{
+-    struct grant_table *gt = d->grant_table;
+-    int rc;
+-
+-    grant_write_lock(gt);
+-    rc = gnttab_get_shared_frame_mfn(d, idx, mfn);
+-    grant_write_unlock(gt);
+-
+-    return rc;
+-}
+-
+-int gnttab_get_status_frame(struct domain *d, unsigned int idx,
+-                            mfn_t *mfn)
+-{
+-    struct grant_table *gt = d->grant_table;
+-    int rc;
+-
+-    grant_write_lock(gt);
+-    rc = (gt->gt_version == 2) ?
+-        gnttab_get_status_frame_mfn(d, idx, mfn) : -EINVAL;
+-    grant_write_unlock(gt);
+-
+-    return rc;
+-}
+-
+ static void gnttab_usage_print(struct domain *rd)
+ {
+     int first = 1;
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 4d681597a5..b36c28af63 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1054,44 +1054,6 @@ static long xatp_permission_check(struct domain *d, unsigned int space)
+     return xsm_add_to_physmap(XSM_TARGET, current->domain, d);
  }
  
-@@ -474,7 +550,10 @@ struct domain *domain_create(domid_t domid,
-     ASSERT(is_system_domain(d) ? config == NULL : config != NULL);
+-static int acquire_grant_table(struct domain *d, unsigned int id,
+-                               unsigned int frame,
+-                               unsigned int nr_frames,
+-                               xen_pfn_t mfn_list[])
+-{
+-    unsigned int i = nr_frames;
+-
+-    /* Iterate backwards in case table needs to grow */
+-    while ( i-- != 0 )
+-    {
+-        mfn_t mfn = INVALID_MFN;
+-        int rc;
+-
+-        switch ( id )
+-        {
+-        case XENMEM_resource_grant_table_id_shared:
+-            rc = gnttab_get_shared_frame(d, frame + i, &mfn);
+-            break;
+-
+-        case XENMEM_resource_grant_table_id_status:
+-            rc = gnttab_get_status_frame(d, frame + i, &mfn);
+-            break;
+-
+-        default:
+-            rc = -EINVAL;
+-            break;
+-        }
+-
+-        if ( rc )
+-            return rc;
+-
+-        ASSERT(!mfn_eq(mfn, INVALID_MFN));
+-        mfn_list[i] = mfn_x(mfn);
+-    }
+-
+-    return 0;
+-}
+-
+ static int acquire_ioreq_server(struct domain *d,
+                                 unsigned int id,
+                                 unsigned int frame,
+@@ -1188,8 +1150,8 @@ static int acquire_resource(
+     switch ( xmar.type )
+     {
+     case XENMEM_resource_grant_table:
+-        rc = acquire_grant_table(d, xmar.id, xmar.frame, xmar.nr_frames,
+-                                 mfn_list);
++        rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                     mfn_list);
+         break;
  
-     if ( config )
-+    {
-         d->options = config->flags;
-+        d->vmtrace_size = config->vmtrace_size;
-+    }
+     case XENMEM_resource_ioreq_server:
+diff --git a/xen/include/xen/grant_table.h b/xen/include/xen/grant_table.h
+index 6d14fe2526..14973de734 100644
+--- a/xen/include/xen/grant_table.h
++++ b/xen/include/xen/grant_table.h
+@@ -55,10 +55,10 @@ int mem_sharing_gref_to_gfn(struct grant_table *gt, grant_ref_t ref,
  
-     /* Sort out our idea of is_control_domain(). */
-     d->is_privileged = is_priv;
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 666aeb71bf..88a5b1ef5d 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -95,6 +95,9 @@ struct xen_domctl_createdomain {
-     int32_t max_grant_frames;
-     int32_t max_maptrack_frames;
- 
-+    /* Per-vCPU buffer size in bytes.  0 to disable. */
-+    uint32_t vmtrace_size;
+ int gnttab_map_frame(struct domain *d, unsigned long idx, gfn_t gfn,
+                      mfn_t *mfn);
+-int gnttab_get_shared_frame(struct domain *d, unsigned int idx,
+-                            mfn_t *mfn);
+-int gnttab_get_status_frame(struct domain *d, unsigned int idx,
+-                            mfn_t *mfn);
 +
-     struct xen_arch_domainconfig arch;
- };
++int gnttab_acquire_resource(
++    struct domain *d, unsigned int id, unsigned int frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[]);
  
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 06dba1a397..bc78a09a53 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -272,6 +272,10 @@ struct vcpu
-     /* vPCI per-vCPU area, used to store data for long running operations. */
-     struct vpci_vcpu vpci;
+ #else
  
-+    struct {
-+        struct page_info *pg; /* One contiguous allocation of d->vmtrace_size */
-+    } vmtrace;
-+
-     struct arch_vcpu arch;
+@@ -92,14 +92,9 @@ static inline int gnttab_map_frame(struct domain *d, unsigned long idx,
+     return -EINVAL;
+ }
  
- #ifdef CONFIG_IOREQ_SERVER
-@@ -547,6 +551,8 @@ struct domain
-         unsigned int guest_request_sync          : 1;
-     } monitor;
- 
-+    unsigned int vmtrace_size; /* Buffer size in bytes, or 0 to disable. */
-+
- #ifdef CONFIG_ARGO
-     /* Argo interdomain communication support */
-     struct argo_domain *argo;
+-static inline int gnttab_get_shared_frame(struct domain *d, unsigned int idx,
+-                                          mfn_t *mfn)
+-{
+-    return -EINVAL;
+-}
+-
+-static inline int gnttab_get_status_frame(struct domain *d, unsigned int idx,
+-                                          mfn_t *mfn)
++static inline int gnttab_acquire_resource(
++    struct domain *d, unsigned int id, unsigned int frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[])
+ {
+     return -EINVAL;
+ }
 -- 
 2.11.0
 
