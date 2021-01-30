@@ -2,41 +2,41 @@ Return-Path: <SRS0=bW6+=HB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8A3CC433E0
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58D37C43381
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6225864E27
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6225864E27
+	by mail.kernel.org (Postfix) with ESMTPS id EEC2364E27
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEC2364E27
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.78637.143177 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.78635.143154 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5gTr-0000h8-Ny; Sat, 30 Jan 2021 02:59:23 +0000
+	id 1l5gTn-0000bR-Sn; Sat, 30 Jan 2021 02:59:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 78637.143177; Sat, 30 Jan 2021 02:59:23 +0000
+Received: by outflank-mailman (output) from mailman id 78635.143154; Sat, 30 Jan 2021 02:59:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5gTr-0000gy-K6; Sat, 30 Jan 2021 02:59:23 +0000
-Received: by outflank-mailman (input) for mailman id 78637;
- Sat, 30 Jan 2021 02:59:22 +0000
+	id 1l5gTn-0000bI-O6; Sat, 30 Jan 2021 02:59:19 +0000
+Received: by outflank-mailman (input) for mailman id 78635;
+ Sat, 30 Jan 2021 02:59:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bynp=HB=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l5gTq-0000YD-Q7
- for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 02:59:22 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1l5gTl-0000YD-Q1
+ for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 02:59:17 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4d657e7b-95f0-4b8d-93db-3330e23ff20a;
- Sat, 30 Jan 2021 02:59:12 +0000 (UTC)
+ id 87103295-8722-45fe-93e4-48523448dbf0;
+ Sat, 30 Jan 2021 02:59:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,126 +48,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d657e7b-95f0-4b8d-93db-3330e23ff20a
+X-Inumbo-ID: 87103295-8722-45fe-93e4-48523448dbf0
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1611975552;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=8vgH45XlNNq0PCbPRDg9sE+eRRJKofBQp4hdFGXVgoY=;
-  b=a2fGwvNCovZH9g4Q1KNmF2DiT9+MZ1tKqxBebUn4JOTCLDl7um6KIYc2
-   +6NJ4ElOEI5tPQYMBrUvXcecz4mfdmhTkKnTa4bysJZaPicDq6cMNbJGW
-   Oj7v0iHRoAh8a4XeSxCnHIQgmtmy/BygdzC9mTZlcS8ASu+OARai2tuvu
-   Q=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: x6FII1DBgEZCwjABwaIKg7sLAAANYTPvSaryuUuV6nwXqVX1BRzFbH9BNaudHSHrDPfn10kEgR
- 4PzjduA+DinvCteRhqXXkhTmHMlWyjtnziq3J0EhgXhzCPqU25ScQxW5wxevZmvcXWggzgB0WR
- gD+vBw9ZJ95d/caR+gMiPuymtU3tBN55FutuFryYK98jTPeEvHX6vd4BSiagxPwWE720Q3PAVp
- NcIDz9SM8iyk71fR9/emoBF6wD4BgQp5ps9D14KvbU4J2cHVpSbW26n0U312vRy+ML/iUihgt9
- xhI=
+  d=citrix.com; s=securemail; t=1611975551;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=e4zMx+E+sDkOfYsWc3uNfBOCqVtwp50q1FWC0/NfoFo=;
+  b=b9vwW3kMlln51eXd5+Nus27Sw9HkQVzrAIu0r3XqrywbQBiLvbZ6YLZB
+   vCS0SvAHWQX+tcBdw8Tk+/CHWKGh2Sh3lPJtyqZa/dB7nwd2ZP1H3doIB
+   IE8kkWDeuIK8/wCQ9XxGxxgk72z6CFlTaxVDDEjD3v2WyDHnNp2pzQ3ov
+   o=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: fqRQ838jlXUOr6w4phFw7DfsVTtBRBeYx8Xnm+yrR/TKqNA2A/wK0OHKNcCzza04s0Td7dHxBO
+ ttfg7cDc/HG/fvUc1QzLL6dLXqWJ+5nKph0gM5EdcO7YYl+8JVGN399eO8B/92BTLInGLDiCzP
+ gXaOkmrIQbKsmgXwU8OZsqZlYR1g0bDJX9EhhznPA1TwYAMt0JJHVtYqxV9f+8mpgYtLbwEvX4
+ +0oZ94AqZOaXUBXzCw7WH46K8xNcdGWBEt9nljsLz3iq3lEymqRo4Cju18YBXsLTiednGO6Q1D
+ 13M=
 X-SBRS: 5.1
-X-MesageID: 36399490
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 36195184
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,387,1602561600"; 
-   d="scan'208";a="36399490"
+   d="scan'208";a="36195184"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
-	<iwj@xenproject.org>, Anthony PERARD <anthony.perard@citrix.com>, "Jun
- Nakajima" <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
 	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v8 00/16] acquire_resource size and external IPT monitoring
-Date: Sat, 30 Jan 2021 02:58:36 +0000
-Message-ID: <20210130025852.12430-1-andrew.cooper3@citrix.com>
+	Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
+	<tamas@tklengyel.com>
+Subject: [PATCH v8 05/16] xen/memory: Indent part of acquire_resource()
+Date: Sat, 30 Jan 2021 02:58:41 +0000
+Message-ID: <20210130025852.12430-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210130025852.12430-1-andrew.cooper3@citrix.com>
+References: <20210130025852.12430-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Combined series (as they are dependent).  First, the resource size fixes, and
-then the external IPT monitoring built on top.
+Indent the middle of acquire_resource() inside a do {} while ( 0 ) loop.  This
+is broken out specifically to make the following change readable.
 
-Posting in full for reference, but several patches are ready to go in.  Those
-in need of review are patch 6, 8 and 12.
+No functional change.
 
-See individual patches for changes.  The major work was rebasing over the
-ARM/IOREQ series which moved a load of code which this series was bugfixing.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Paul Durrant <paul@xen.org>
+CC: Michał Leszczyński <michal.leszczynski@cert.pl>
+CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
+CC: Tamas K Lengyel <tamas@tklengyel.com>
 
-Andrew Cooper (7):
-  xen/memory: Reject out-of-range resource 'frame' values
-  xen/gnttab: Rework resource acquisition
-  xen/memory: Fix acquire_resource size semantics
-  xen/memory: Improve compat XENMEM_acquire_resource handling
-  xen/memory: Indent part of acquire_resource()
-  xen/memory: Fix mapping grant tables with XENMEM_acquire_resource
-  xen+tools: Introduce XEN_SYSCTL_PHYSCAP_vmtrace
+v8:
+ * Rebase over ARM/IOREQ series.
+---
+ xen/common/memory.c | 72 +++++++++++++++++++++++++++--------------------------
+ 1 file changed, 37 insertions(+), 35 deletions(-)
 
-Michał Leszczyński (7):
-  xen/domain: Add vmtrace_size domain creation parameter
-  tools/[lib]xl: Add vmtrace_buf_size parameter
-  xen/memory: Add a vmtrace_buf resource type
-  x86/vmx: Add Intel Processor Trace support
-  xen/domctl: Add XEN_DOMCTL_vmtrace_op
-  tools/libxc: Add xc_vmtrace_* functions
-  tools/misc: Add xen-vmtrace tool
-
-Tamas K Lengyel (2):
-  xen/vmtrace: support for VM forks
-  x86/vm_event: Carry the vmtrace buffer position in vm_event
-
- docs/man/xl.cfg.5.pod.in                    |   9 +
- tools/golang/xenlight/helpers.gen.go        |   4 +
- tools/golang/xenlight/types.gen.go          |   2 +
- tools/include/libxl.h                       |  14 ++
- tools/include/xenctrl.h                     |  73 ++++++++
- tools/libs/ctrl/Makefile                    |   1 +
- tools/libs/ctrl/xc_vmtrace.c                | 128 +++++++++++++
- tools/libs/light/libxl.c                    |   2 +
- tools/libs/light/libxl_cpuid.c              |   1 +
- tools/libs/light/libxl_create.c             |   1 +
- tools/libs/light/libxl_types.idl            |   5 +
- tools/misc/.gitignore                       |   1 +
- tools/misc/Makefile                         |   7 +
- tools/misc/xen-cpuid.c                      |   2 +-
- tools/misc/xen-vmtrace.c                    | 154 ++++++++++++++++
- tools/ocaml/libs/xc/xenctrl.ml              |   1 +
- tools/ocaml/libs/xc/xenctrl.mli             |   1 +
- tools/xl/xl_info.c                          |   5 +-
- tools/xl/xl_parse.c                         |   4 +
- xen/arch/x86/domain.c                       |  23 +++
- xen/arch/x86/domctl.c                       |  55 ++++++
- xen/arch/x86/hvm/vmx/vmcs.c                 |  19 +-
- xen/arch/x86/hvm/vmx/vmx.c                  | 200 +++++++++++++++++++-
- xen/arch/x86/mm/mem_sharing.c               |   3 +
- xen/arch/x86/vm_event.c                     |   3 +
- xen/common/compat/memory.c                  | 147 +++++++++++----
- xen/common/domain.c                         |  81 ++++++++
- xen/common/grant_table.c                    | 112 ++++++++----
- xen/common/ioreq.c                          |   2 +-
- xen/common/memory.c                         | 274 +++++++++++++++++++---------
- xen/common/sysctl.c                         |   2 +
- xen/include/asm-x86/cpufeature.h            |   1 +
- xen/include/asm-x86/hvm/hvm.h               |  72 ++++++++
- xen/include/asm-x86/hvm/vmx/vmcs.h          |   4 +
- xen/include/asm-x86/msr.h                   |  32 ++++
- xen/include/public/arch-x86/cpufeatureset.h |   1 +
- xen/include/public/domctl.h                 |  38 ++++
- xen/include/public/memory.h                 |  18 +-
- xen/include/public/sysctl.h                 |   3 +-
- xen/include/public/vm_event.h               |   7 +
- xen/include/xen/domain.h                    |   2 +
- xen/include/xen/grant_table.h               |  21 ++-
- xen/include/xen/ioreq.h                     |   2 +-
- xen/include/xen/sched.h                     |   6 +
- xen/xsm/flask/hooks.c                       |   1 +
- 45 files changed, 1366 insertions(+), 178 deletions(-)
- create mode 100644 tools/libs/ctrl/xc_vmtrace.c
- create mode 100644 tools/misc/xen-vmtrace.c
-
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 9fb34eb4d0..01cab7e493 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1187,48 +1187,50 @@ static int acquire_resource(
+         goto out;
+     }
+ 
+-    switch ( xmar.type )
+-    {
+-    case XENMEM_resource_grant_table:
+-        rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
+-                                     mfn_list);
+-        break;
++    do {
++        switch ( xmar.type )
++        {
++        case XENMEM_resource_grant_table:
++            rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                         mfn_list);
++            break;
+ 
+-    case XENMEM_resource_ioreq_server:
+-        rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
+-                                  mfn_list);
+-        break;
++        case XENMEM_resource_ioreq_server:
++            rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
++                                      mfn_list);
++            break;
+ 
+-    default:
+-        rc = -EOPNOTSUPP;
+-        break;
+-    }
++        default:
++            rc = -EOPNOTSUPP;
++            break;
++        }
+ 
+-    if ( rc )
+-        goto out;
++        if ( rc )
++            goto out;
+ 
+-    if ( !paging_mode_translate(currd) )
+-    {
+-        if ( copy_to_guest(xmar.frame_list, mfn_list, xmar.nr_frames) )
+-            rc = -EFAULT;
+-    }
+-    else
+-    {
+-        xen_pfn_t gfn_list[ARRAY_SIZE(mfn_list)];
+-        unsigned int i;
++        if ( !paging_mode_translate(currd) )
++        {
++            if ( copy_to_guest(xmar.frame_list, mfn_list, xmar.nr_frames) )
++                rc = -EFAULT;
++        }
++        else
++        {
++            xen_pfn_t gfn_list[ARRAY_SIZE(mfn_list)];
++            unsigned int i;
+ 
+-        if ( copy_from_guest(gfn_list, xmar.frame_list, xmar.nr_frames) )
+-            rc = -EFAULT;
++            if ( copy_from_guest(gfn_list, xmar.frame_list, xmar.nr_frames) )
++                rc = -EFAULT;
+ 
+-        for ( i = 0; !rc && i < xmar.nr_frames; i++ )
+-        {
+-            rc = set_foreign_p2m_entry(currd, d, gfn_list[i],
+-                                       _mfn(mfn_list[i]));
+-            /* rc should be -EIO for any iteration other than the first */
+-            if ( rc && i )
+-                rc = -EIO;
++            for ( i = 0; !rc && i < xmar.nr_frames; i++ )
++            {
++                rc = set_foreign_p2m_entry(currd, d, gfn_list[i],
++                                           _mfn(mfn_list[i]));
++                /* rc should be -EIO for any iteration other than the first */
++                if ( rc && i )
++                    rc = -EIO;
++            }
+         }
+-    }
++    } while ( 0 );
+ 
+  out:
+     rcu_unlock_domain(d);
 -- 
 2.11.0
 
