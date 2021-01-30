@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59D88C4332B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B2E0C433E9
 	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EEBF064E24
-	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEBF064E24
+	by mail.kernel.org (Postfix) with ESMTPS id 280DF64E29
+	for <xen-devel@archiver.kernel.org>; Sat, 30 Jan 2021 02:59:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 280DF64E29
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.78634.143142 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.78638.143190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5gTj-0000ZM-IS; Sat, 30 Jan 2021 02:59:15 +0000
+	id 1l5gTt-0000jz-4U; Sat, 30 Jan 2021 02:59:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 78634.143142; Sat, 30 Jan 2021 02:59:15 +0000
+Received: by outflank-mailman (output) from mailman id 78638.143190; Sat, 30 Jan 2021 02:59:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l5gTj-0000ZF-Ey; Sat, 30 Jan 2021 02:59:15 +0000
-Received: by outflank-mailman (input) for mailman id 78634;
- Sat, 30 Jan 2021 02:59:13 +0000
+	id 1l5gTs-0000jp-Um; Sat, 30 Jan 2021 02:59:24 +0000
+Received: by outflank-mailman (input) for mailman id 78638;
+ Sat, 30 Jan 2021 02:59:23 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=bynp=HB=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l5gTh-0000YI-Rx
- for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 02:59:13 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1l5gTr-0000YI-Kk
+ for xen-devel@lists.xenproject.org; Sat, 30 Jan 2021 02:59:23 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 27a26bf1-553e-443e-8540-0c5db081456f;
+ id d0575504-b320-4970-9fec-343f3cef2949;
  Sat, 30 Jan 2021 02:59:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -49,41 +49,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27a26bf1-553e-443e-8540-0c5db081456f
+X-Inumbo-ID: d0575504-b320-4970-9fec-343f3cef2949
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1611975552;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=dQKNhP8sDS8/NNw+FPEKxJTqs+cEaD8DbMzBYrGIXcA=;
-  b=bhUxG0Xf2YiOpLFD/3LczxN4mq7/URuKir3bMW8cbsvDCQRJ39qsQUIL
-   pl6xh8Lhu39WbGnU8S4msWCxPnUxc4S/g70dpCnFqRO1H5nGA+FGMMEgN
-   W0M44q6UkQTJQW8F10QTFuDrA5xgaFqYyD90TuQVJfJDISRec7iLaoPmM
-   o=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: wbRla5J5MEZhyzoROXLITv6uEQUDN5uDsIXrJOjGiflUz9YT0n9KRg6k47+OLQSBApS9e1x8iw
- k/emv68V8fwyCfl0Ni/hn9n/RQ/17lBUKRrEC7JzuqeJ8o/XzRmhy8DW1sdBwWW78d6CM22+zH
- JyzrSXPuMrN/qjCvhJRJIDofVop7Nugo/mtLHf6sZYxEZfXY9b8Yzcuc7fVTf1QM0tP8k2tWUh
- 7Fq6V/Jphwjzm0xsnIdfuUbeAD5q9BAlA5IJn70rueha+NF4A+BaSBoKRDyiR7vuWMinEdtUg8
- WFo=
+  bh=u9HbrD454r7loU8ATdIyKS3rdl9mdxgTmPdOV+EWKoU=;
+  b=H0SLfOtZ/zh7XbtooTQftdbOxlLsgrZI+S35puWcrSbRITmH/xzlSjxm
+   sz1k1rcljYYBJiWX+2L1H+992I8ihxzEHANtNWThjA0+01SJD0//oCgFo
+   Ov3dE1N/ASdR8a+4qSRRyb1Q8dtIVDf5EOwMGaZxJPguhck9CamSPA3yv
+   0=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: s6vv2TFw2N7RC3xdfMkWMWdj8MslYeVxlAw7UuMOmewed5HiqimBN2PhttUOKhWfNXPM/rYjEv
+ GUrqer6lHvPbRVAIjX5kxx9CSGx04/Ac741dMeqpbFgLm0TflU85oTFyocNab0j53ViWk9/f2Q
+ caYgFjatN2mOuwqQkDxp6UymyA1i0Zu1sy7MaECzobJpwRaKYd6f+tcdtLtaM14taABZwmqQhz
+ dF6TuRNXoiYWt63LFRXV/ZkQn1sj0WACHpHc8ZaZ3oy4qUmsGpYAGQI4Ftc+vq2gZ3eLRZK5YR
+ D5E=
 X-SBRS: 5.1
-X-MesageID: 36399489
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 36195185
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,387,1602561600"; 
-   d="scan'208";a="36399489"
+   d="scan'208";a="36195185"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
-	<tamas@tklengyel.com>
-Subject: [PATCH v8 04/16] xen/memory: Improve compat XENMEM_acquire_resource handling
-Date: Sat, 30 Jan 2021 02:58:40 +0000
-Message-ID: <20210130025852.12430-5-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
+	<iwj@xenproject.org>, =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?=
+	<michal.leszczynski@cert.pl>, Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v8 07/16] xen+tools: Introduce XEN_SYSCTL_PHYSCAP_vmtrace
+Date: Sat, 30 Jan 2021 02:58:43 +0000
+Message-ID: <20210130025852.12430-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210130025852.12430-1-andrew.cooper3@citrix.com>
 References: <20210130025852.12430-1-andrew.cooper3@citrix.com>
@@ -91,158 +89,217 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-The frame_list is an input, or an output, depending on whether the calling
-domain is translated or not.  The array does not need marshalling in both
-directions.
+We're about to introduce support for Intel Processor Trace, but similar
+functionality exists in other platforms.
 
-Furthermore, the copy-in loop was very inefficient, copying 4 bytes at at
-time.  Rewrite it to copy in all nr_frames at once, and then expand
-compat_pfn_t to xen_pfn_t in place.
-
-Re-position the copy-in loop to simplify continuation support in a future
-patch, and reduce the scope of certain variables.
-
-No change in guest observed behaviour.
+Aspects of vmtrace can reasonably can be common, so start with
+XEN_SYSCTL_PHYSCAP_vmtrace and plumb the signal from Xen all the way down into
+`xl info`.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Paul Durrant <paul@xen.org>
+Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
-CC: Ian Jackson <iwj@xenproject.org>
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
-CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
----
- xen/common/compat/memory.c | 65 ++++++++++++++++++++++++++++------------------
- 1 file changed, 40 insertions(+), 25 deletions(-)
 
-diff --git a/xen/common/compat/memory.c b/xen/common/compat/memory.c
-index ed92e05b08..834c5e19d1 100644
---- a/xen/common/compat/memory.c
-+++ b/xen/common/compat/memory.c
-@@ -55,6 +55,8 @@ static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
+v8:
+ * Bump XEN_SYSCTL_PHYSCAP_MAX, fix Ocaml stubs
+v7:
+ * New
+---
+ tools/golang/xenlight/helpers.gen.go | 2 ++
+ tools/golang/xenlight/types.gen.go   | 1 +
+ tools/include/libxl.h                | 7 +++++++
+ tools/libs/light/libxl.c             | 2 ++
+ tools/libs/light/libxl_types.idl     | 1 +
+ tools/ocaml/libs/xc/xenctrl.ml       | 1 +
+ tools/ocaml/libs/xc/xenctrl.mli      | 1 +
+ tools/xl/xl_info.c                   | 5 +++--
+ xen/common/domain.c                  | 2 ++
+ xen/common/sysctl.c                  | 2 ++
+ xen/include/public/sysctl.h          | 3 ++-
+ xen/include/xen/domain.h             | 2 ++
+ 12 files changed, 26 insertions(+), 3 deletions(-)
+
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
+index e0681ee14e..63e2876463 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -3348,6 +3348,7 @@ x.CapHvmDirectio = bool(xc.cap_hvm_directio)
+ x.CapHap = bool(xc.cap_hap)
+ x.CapShadow = bool(xc.cap_shadow)
+ x.CapIommuHapPtShare = bool(xc.cap_iommu_hap_pt_share)
++x.CapVmtrace = bool(xc.cap_vmtrace)
  
- int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
+  return nil}
+ 
+@@ -3378,6 +3379,7 @@ xc.cap_hvm_directio = C.bool(x.CapHvmDirectio)
+ xc.cap_hap = C.bool(x.CapHap)
+ xc.cap_shadow = C.bool(x.CapShadow)
+ xc.cap_iommu_hap_pt_share = C.bool(x.CapIommuHapPtShare)
++xc.cap_vmtrace = C.bool(x.CapVmtrace)
+ 
+  return nil
+  }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index ac78dea1af..5851c38057 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -1000,6 +1000,7 @@ CapHvmDirectio bool
+ CapHap bool
+ CapShadow bool
+ CapIommuHapPtShare bool
++CapVmtrace bool
+ }
+ 
+ type Connectorinfo struct {
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 547ddd3085..f48d0c5e8a 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -482,6 +482,13 @@
+ #define LIBXL_HAVE_DEVICE_PCI_NAME 1
+ 
+ /*
++ * LIBXL_HAVE_PHYSINFO_CAP_VMTRACE indicates that libxl_physinfo has a
++ * cap_vmtrace field, which indicates the availability of platform tracing
++ * functionality.
++ */
++#define LIBXL_HAVE_PHYSINFO_CAP_VMTRACE 1
++
++/*
+  * libxl ABI compatibility
+  *
+  * The only guarantee which libxl makes regarding ABI compatibility
+diff --git a/tools/libs/light/libxl.c b/tools/libs/light/libxl.c
+index d2a87157a2..204eb0be2d 100644
+--- a/tools/libs/light/libxl.c
++++ b/tools/libs/light/libxl.c
+@@ -402,6 +402,8 @@ int libxl_get_physinfo(libxl_ctx *ctx, libxl_physinfo *physinfo)
+         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_shadow);
+     physinfo->cap_iommu_hap_pt_share =
+         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share);
++    physinfo->cap_vmtrace =
++        !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_vmtrace);
+ 
+     GC_FREE;
+     return 0;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 37fe61f3ec..dacb7df6b7 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -1053,6 +1053,7 @@ libxl_physinfo = Struct("physinfo", [
+     ("cap_hap", bool),
+     ("cap_shadow", bool),
+     ("cap_iommu_hap_pt_share", bool),
++    ("cap_vmtrace", bool),
+     ], dir=DIR_OUT)
+ 
+ libxl_connectorinfo = Struct("connectorinfo", [
+diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+index e0a47c4769..a02e26b27f 100644
+--- a/tools/ocaml/libs/xc/xenctrl.ml
++++ b/tools/ocaml/libs/xc/xenctrl.ml
+@@ -116,6 +116,7 @@ type physinfo_cap_flag =
+ 	| CAP_HAP
+ 	| CAP_Shadow
+ 	| CAP_IOMMU_HAP_PT_SHARE
++	| CAP_Vmtrace
+ 
+ type physinfo =
  {
-+    struct vcpu *curr = current;
-+    struct domain *currd = curr->domain;
-     int split, op = cmd & MEMOP_CMD_MASK;
-     long rc;
-     unsigned int start_extent = cmd >> MEMOP_EXTENT_SHIFT;
-@@ -399,7 +401,7 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
+diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+index 84311fa33d..d2a312e273 100644
+--- a/tools/ocaml/libs/xc/xenctrl.mli
++++ b/tools/ocaml/libs/xc/xenctrl.mli
+@@ -101,6 +101,7 @@ type physinfo_cap_flag =
+   | CAP_HAP
+   | CAP_Shadow
+   | CAP_IOMMU_HAP_PT_SHARE
++  | CAP_Vmtrace
  
-         case XENMEM_acquire_resource:
-         {
--            xen_pfn_t *xen_frame_list;
-+            xen_pfn_t *xen_frame_list = NULL;
-             unsigned int max_nr_frames;
+ type physinfo = {
+   threads_per_core : int;
+diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
+index ca417df8e8..8383e4a6df 100644
+--- a/tools/xl/xl_info.c
++++ b/tools/xl/xl_info.c
+@@ -210,14 +210,15 @@ static void output_physinfo(void)
+          info.hw_cap[4], info.hw_cap[5], info.hw_cap[6], info.hw_cap[7]
+         );
  
-             if ( copy_from_guest(&cmp.mar, compat, 1) )
-@@ -417,28 +419,10 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-             if ( cmp.mar.nr_frames > max_nr_frames )
-                 return -E2BIG;
+-    maybe_printf("virt_caps              :%s%s%s%s%s%s%s\n",
++    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s\n",
+          info.cap_pv ? " pv" : "",
+          info.cap_hvm ? " hvm" : "",
+          info.cap_hvm && info.cap_hvm_directio ? " hvm_directio" : "",
+          info.cap_pv && info.cap_hvm_directio ? " pv_directio" : "",
+          info.cap_hap ? " hap" : "",
+          info.cap_shadow ? " shadow" : "",
+-         info.cap_iommu_hap_pt_share ? " iommu_hap_pt_share" : ""
++         info.cap_iommu_hap_pt_share ? " iommu_hap_pt_share" : "",
++         info.cap_vmtrace ? " vmtrace" : ""
+         );
  
--            if ( compat_handle_is_null(cmp.mar.frame_list) )
--                xen_frame_list = NULL;
--            else
--            {
-+            /* Marshal the frame list in the remainder of the xlat space. */
-+            if ( !compat_handle_is_null(cmp.mar.frame_list) )
-                 xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
+     vinfo = libxl_get_version_info(ctx);
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 2b461655c3..d1e94d88cf 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -82,6 +82,8 @@ struct vcpu *idle_vcpu[NR_CPUS] __read_mostly;
  
--                if ( !compat_handle_okay(cmp.mar.frame_list,
--                                         cmp.mar.nr_frames) )
--                    return -EFAULT;
--
--                for ( i = 0; i < cmp.mar.nr_frames; i++ )
--                {
--                    compat_pfn_t frame;
--
--                    if ( __copy_from_compat_offset(
--                             &frame, cmp.mar.frame_list, i, 1) )
--                        return -EFAULT;
--
--                    xen_frame_list[i] = frame;
--                }
--            }
--
- #define XLAT_mem_acquire_resource_HNDL_frame_list(_d_, _s_) \
-             set_xen_guest_handle((_d_)->frame_list, xen_frame_list)
+ vcpu_info_t dummy_vcpu_info;
  
-@@ -446,6 +430,31 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
- 
- #undef XLAT_mem_acquire_resource_HNDL_frame_list
- 
-+            if ( xen_frame_list && cmp.mar.nr_frames )
-+            {
-+                /*
-+                 * frame_list is an input for translated guests, and an output
-+                 * for untranslated guests.  Only copy in for translated guests.
-+                 */
-+                if ( paging_mode_translate(currd) )
-+                {
-+                    compat_pfn_t *compat_frame_list = (void *)xen_frame_list;
++bool __read_mostly vmtrace_available;
 +
-+                    if ( !compat_handle_okay(cmp.mar.frame_list,
-+                                             cmp.mar.nr_frames) ||
-+                         __copy_from_compat_offset(
-+                             compat_frame_list, cmp.mar.frame_list,
-+                             0, cmp.mar.nr_frames) )
-+                        return -EFAULT;
-+
-+                    /*
-+                     * Iterate backwards over compat_frame_list[] expanding
-+                     * compat_pfn_t to xen_pfn_t in place.
-+                     */
-+                    for ( int x = cmp.mar.nr_frames - 1; x >= 0; --x )
-+                        xen_frame_list[x] = compat_frame_list[x];
-+                }
-+            }
-             break;
+ static void __domain_finalise_shutdown(struct domain *d)
+ {
+     struct vcpu *v;
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index ec916424e5..3558641cd9 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -277,6 +277,8 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+             if ( iommu_hap_pt_share )
+                 pi->capabilities |= XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share;
          }
-         default:
-@@ -590,8 +599,6 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
++        if ( vmtrace_available )
++            pi->capabilities |= XEN_SYSCTL_PHYSCAP_vmtrace;
  
-         case XENMEM_acquire_resource:
-         {
--            const xen_pfn_t *xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
--            compat_pfn_t *compat_frame_list = (compat_pfn_t *)(nat.mar + 1);
-             DEFINE_XEN_GUEST_HANDLE(compat_mem_acquire_resource_t);
+         if ( copy_to_guest(u_sysctl, op, 1) )
+             ret = -EFAULT;
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index a073647117..039ccf885c 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -100,9 +100,10 @@ struct xen_sysctl_tbuf_op {
+ #define _XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share 5
+ #define XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share  \
+     (1u << _XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share)
++#define XEN_SYSCTL_PHYSCAP_vmtrace       (1 << 6)
  
-             if ( compat_handle_is_null(cmp.mar.frame_list) )
-@@ -601,9 +608,18 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-                                            compat_mem_acquire_resource_t),
-                          nat.mar, nr_frames) )
-                     return -EFAULT;
-+                break;
-             }
--            else
+ /* Max XEN_SYSCTL_PHYSCAP_* constant.  Used for ABI checking. */
+-#define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share
++#define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_vmtrace
+ 
+ struct xen_sysctl_physinfo {
+     uint32_t threads_per_core;
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index cde0d9c7fe..1708c36964 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -131,4 +131,6 @@ void vnuma_destroy(struct vnuma_info *vnuma);
+ static inline void vnuma_destroy(struct vnuma_info *vnuma) { ASSERT(!vnuma); }
+ #endif
+ 
++extern bool vmtrace_available;
 +
-+            /*
-+             * frame_list is an input for translated guests, and an output for
-+             * untranslated guests.  Only copy out for untranslated guests.
-+             */
-+            if ( !paging_mode_translate(currd) )
-             {
-+                const xen_pfn_t *xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
-+                compat_pfn_t *compat_frame_list = (compat_pfn_t *)(nat.mar + 1);
-+
-                 /*
-                  * NOTE: the smaller compat array overwrites the native
-                  *       array.
-@@ -625,7 +641,6 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-                                              cmp.mar.nr_frames) )
-                     return -EFAULT;
-             }
--
-             break;
-         }
- 
+ #endif /* __XEN_DOMAIN_H__ */
 -- 
 2.11.0
 
