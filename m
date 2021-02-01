@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81268C433E9
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0671C4332D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:28:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2548864EC3
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:28:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2548864EC3
+	by mail.kernel.org (Postfix) with ESMTPS id 8C6B864EC3
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:28:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C6B864EC3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.80196.146578 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.80197.146590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6ibq-0007tk-98; Mon, 01 Feb 2021 23:27:54 +0000
+	id 1l6ibr-0007wv-Oq; Mon, 01 Feb 2021 23:27:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 80196.146578; Mon, 01 Feb 2021 23:27:54 +0000
+Received: by outflank-mailman (output) from mailman id 80197.146590; Mon, 01 Feb 2021 23:27:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6ibq-0007tY-4m; Mon, 01 Feb 2021 23:27:54 +0000
-Received: by outflank-mailman (input) for mailman id 80196;
- Mon, 01 Feb 2021 23:27:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l6ibr-0007wh-Gx; Mon, 01 Feb 2021 23:27:55 +0000
+Received: by outflank-mailman (input) for mailman id 80197;
+ Mon, 01 Feb 2021 23:27:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IWGu=HD=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l6ibo-0007P6-RR
- for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:27:52 +0000
+ id 1l6ibp-0007PB-Sp
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:27:53 +0000
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4974a30f-43f4-47f0-bfa7-ad5966e08e58;
- Mon, 01 Feb 2021 23:27:35 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id c308b7bc-9a82-4428-9e41-2107868277a2;
+ Mon, 01 Feb 2021 23:27:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,41 +48,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4974a30f-43f4-47f0-bfa7-ad5966e08e58
+X-Inumbo-ID: c308b7bc-9a82-4428-9e41-2107868277a2
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612222055;
+  d=citrix.com; s=securemail; t=1612222056;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ooOeFTFX01JiGDLs2zOj6QNxJzo/EvnmXjy1QpJOiP4=;
-  b=a+NT2DtUex+pSs0j0IktlIAZRKnsKiiEVDrDBiSiBjUQRJkMY1VS7Toz
-   upWRHN2MSqbcsR8p6Z3l67d05V4qo/zQ6wCb2T5YAc7NuxR88ebW0UQQR
-   MwRBLXl/njKInQefWZca0Xf7VE2DKx7/Ci6yDNqwejWJ6znqEGi36vImI
-   s=;
+  bh=njVGh0BG2zEjGyol+qwxOLZnJzEyLf5QMa4qeRMwOaI=;
+  b=J3Zc47eOJRMQTCgV3iIkux1S4SyWV86QbIvq6euaYaN+crmQntJDYHpX
+   IdB/qGgIAwLdCJaI/CIftkJrnCFVyz5v8Sa9IBljosnh45OlnhgkLBv4L
+   L7y7ZheU0QOpS57/ou9Yrus8yigPi480YvNh0wlp33mAcxQ207jxYBvkH
+   4=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: GkpqpvXlBS0xQRr0Iymb1U4xQHvVP8qukJrzdmUmf5j2EtFLx/ZR8st79ap0XebBopMenwStB5
- YK4Nc2TFUMM7caQwQ9KmRudisXuuPmgAMGDyWHmyj4kR0TI2fncs39KX6OYO15Myz6g4Uukf5D
- j+IW0IFwoqJ1NWMxWZqsHsCLZJueQJr3k4gV+0BIfQCpahOKXaVIujqLCKUAeSe9xR9eL4g8kO
- vNQXK/w3Hil2eZd/f0n2wixXZ9LeuawymIziKwkEdS1rUXuUemWdeYzeJvtVaiVWhIP0bH/HY1
- Leo=
+IronPort-SDR: SgNfmBguvZHKQHBqSDQjqZXWEQLQaZg26ryWUzmAlwkA4p7i4zv+Ivvf4NSSC0BQ//Zp0QQfZG
+ Et15UDHnHhEAjHmzK+4iAVTf+hbKTX4EFhA+h84fmFgcL+N4FySXpL37FYol1YUzbsrJsfDBnl
+ TlKbVVWjZr6s9gp0PYWL3Mwz4j1OrI6pLxc0bYFv/FqGtKyLpLq3iKnSsICVbBh59iYysXCRZv
+ 0tjVSppl+zZGA6hBdZo1kh7BYFKhzYmCHdOk8ho5VWD3s14FxzwPPPosztVuLDpXWqmW2DdplT
+ yO0=
 X-SBRS: 5.1
-X-MesageID: 36319806
+X-MesageID: 36319807
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,393,1602561600"; 
-   d="scan'208";a="36319806"
+   d="scan'208";a="36319807"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Hubert Jasudowicz <hubert.jasudowicz@cert.pl>, Tamas K Lengyel
-	<tamas@tklengyel.com>
-Subject: [PATCH v9 01/11] xen/memory: Fix mapping grant tables with XENMEM_acquire_resource
-Date: Mon, 1 Feb 2021 23:26:53 +0000
-Message-ID: <20210201232703.29275-2-andrew.cooper3@citrix.com>
+CC: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v9 08/11] tools/misc: Add xen-vmtrace tool
+Date: Mon, 1 Feb 2021 23:27:00 +0000
+Message-ID: <20210201232703.29275-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210201232703.29275-1-andrew.cooper3@citrix.com>
 References: <20210201232703.29275-1-andrew.cooper3@citrix.com>
@@ -91,450 +86,238 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-A guest's default number of grant frames is 64, and XENMEM_acquire_resource
-will reject an attempt to map more than 32 frames.  This limit is caused by
-the size of mfn_list[] on the stack.
+From: Michał Leszczyński <michal.leszczynski@cert.pl>
 
-Fix mapping of arbitrary size requests by looping over batches of 32 in
-acquire_resource(), and using hypercall continuations when necessary.
+Add an demonstration tool that uses xc_vmtrace_* calls in order
+to manage external IPT monitoring for DomU.
 
-To start with, break _acquire_resource() out of acquire_resource() to cope
-with type-specific dispatching, and update the return semantics to indicate
-the number of mfns returned.  Update gnttab_acquire_resource() and x86's
-arch_acquire_resource() to match these new semantics.
-
-Have do_memory_op() pass start_extent into acquire_resource() so it can pick
-up where it left off after a continuation, and loop over batches of 32 until
-all the work is done, or a continuation needs to occur.
-
-compat_memory_op() is a bit more complicated, because it also has to marshal
-frame_list in the XLAT buffer.  Have it account for continuation information
-itself and hide details from the upper layer, so it can marshal the buffer in
-chunks if necessary.
-
-With these fixes in place, it is now possible to map the whole grant table for
-a guest.
-
+Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Ian Jackson <iwj@xenproject.org>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Ian Jackson <iwj@xenproject.org>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
-CC: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
 v9:
- * Crash domain rather than returning late with -ERANGE/-EFAULT.
+ * Fix truncated data on clean exit
 
 v8:
- * nat => cmp change in the start_extent check.
- * Rebase over 'frame' and ARM/IOREQ series.
-
-v3:
- * Spelling fixes
+ * Switch to being a build-only target
 ---
- xen/common/compat/memory.c | 114 +++++++++++++++++++++++++++++++++--------
- xen/common/grant_table.c   |   3 ++
- xen/common/memory.c        | 124 +++++++++++++++++++++++++++++++++------------
- 3 files changed, 187 insertions(+), 54 deletions(-)
+ tools/misc/.gitignore    |   1 +
+ tools/misc/Makefile      |   7 ++
+ tools/misc/xen-vmtrace.c | 166 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 174 insertions(+)
+ create mode 100644 tools/misc/xen-vmtrace.c
 
-diff --git a/xen/common/compat/memory.c b/xen/common/compat/memory.c
-index 834c5e19d1..c43fa97cf1 100644
---- a/xen/common/compat/memory.c
-+++ b/xen/common/compat/memory.c
-@@ -402,23 +402,10 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-         case XENMEM_acquire_resource:
-         {
-             xen_pfn_t *xen_frame_list = NULL;
--            unsigned int max_nr_frames;
+diff --git a/tools/misc/.gitignore b/tools/misc/.gitignore
+index b2c3b21f57..ce6f937d0c 100644
+--- a/tools/misc/.gitignore
++++ b/tools/misc/.gitignore
+@@ -1,3 +1,4 @@
+ xen-access
+ xen-memshare
+ xen-ucode
++xen-vmtrace
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 912c5d4f0e..2b683819d4 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -50,6 +50,10 @@ TARGETS_COPY += xenpvnetboot
+ # Everything which needs to be built
+ TARGETS_BUILD := $(filter-out $(TARGETS_COPY),$(TARGETS_ALL))
  
-             if ( copy_from_guest(&cmp.mar, compat, 1) )
-                 return -EFAULT;
- 
--            /*
--             * The number of frames handled is currently limited to a
--             * small number by the underlying implementation, so the
--             * scratch space should be sufficient for bouncing the
--             * frame addresses.
--             */
--            max_nr_frames = (COMPAT_ARG_XLAT_SIZE - sizeof(*nat.mar)) /
--                sizeof(*xen_frame_list);
--
--            if ( cmp.mar.nr_frames > max_nr_frames )
--                return -E2BIG;
--
-             /* Marshal the frame list in the remainder of the xlat space. */
-             if ( !compat_handle_is_null(cmp.mar.frame_list) )
-                 xen_frame_list = (xen_pfn_t *)(nat.mar + 1);
-@@ -432,6 +419,28 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
- 
-             if ( xen_frame_list && cmp.mar.nr_frames )
-             {
-+                unsigned int xlat_max_frames =
-+                    (COMPAT_ARG_XLAT_SIZE - sizeof(*nat.mar)) /
-+                    sizeof(*xen_frame_list);
++# ... including build-only targets
++TARGETS_BUILD-$(CONFIG_X86)    += xen-vmtrace
++TARGETS_BUILD += $(TARGETS_BUILD-y)
 +
-+                if ( start_extent >= cmp.mar.nr_frames )
-+                    return -EINVAL;
-+
-+                /*
-+                 * Adjust nat to account for work done on previous
-+                 * continuations, leaving cmp pristine.  Hide the continaution
-+                 * from the native code to prevent double accounting.
-+                 */
-+                nat.mar->nr_frames -= start_extent;
-+                nat.mar->frame += start_extent;
-+                cmd &= MEMOP_CMD_MASK;
-+
-+                /*
-+                 * If there are two many frames to fit within the xlat buffer,
-+                 * we'll need to loop to marshal them all.
-+                 */
-+                nat.mar->nr_frames = min(nat.mar->nr_frames, xlat_max_frames);
-+
-                 /*
-                  * frame_list is an input for translated guests, and an output
-                  * for untranslated guests.  Only copy in for translated guests.
-@@ -444,14 +453,14 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-                                              cmp.mar.nr_frames) ||
-                          __copy_from_compat_offset(
-                              compat_frame_list, cmp.mar.frame_list,
--                             0, cmp.mar.nr_frames) )
-+                             start_extent, nat.mar->nr_frames) )
-                         return -EFAULT;
+ .PHONY: all build
+ all build: $(TARGETS_BUILD)
  
-                     /*
-                      * Iterate backwards over compat_frame_list[] expanding
-                      * compat_pfn_t to xen_pfn_t in place.
-                      */
--                    for ( int x = cmp.mar.nr_frames - 1; x >= 0; --x )
-+                    for ( int x = nat.mar->nr_frames - 1; x >= 0; --x )
-                         xen_frame_list[x] = compat_frame_list[x];
-                 }
-             }
-@@ -600,9 +609,11 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-         case XENMEM_acquire_resource:
-         {
-             DEFINE_XEN_GUEST_HANDLE(compat_mem_acquire_resource_t);
-+            unsigned int done;
+@@ -90,6 +94,9 @@ xen-hvmcrash: xen-hvmcrash.o
+ xen-memshare: xen-memshare.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
  
-             if ( compat_handle_is_null(cmp.mar.frame_list) )
-             {
-+                ASSERT(split == 0 && rc == 0);
-                 if ( __copy_field_to_guest(
-                          guest_handle_cast(compat,
-                                            compat_mem_acquire_resource_t),
-@@ -611,6 +622,21 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-                 break;
-             }
- 
-+            if ( split < 0 )
-+            {
-+                /* Continuation occurred. */
-+                ASSERT(rc != XENMEM_acquire_resource);
-+                done = cmd >> MEMOP_EXTENT_SHIFT;
-+            }
-+            else
-+            {
-+                /* No continuation. */
-+                ASSERT(rc == 0);
-+                done = nat.mar->nr_frames;
-+            }
++xen-vmtrace: xen-vmtrace.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenforeignmemory) $(APPEND_LDFLAGS)
 +
-+            ASSERT(done <= nat.mar->nr_frames);
-+
-             /*
-              * frame_list is an input for translated guests, and an output for
-              * untranslated guests.  Only copy out for untranslated guests.
-@@ -626,21 +652,67 @@ int compat_memory_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) compat)
-                  */
-                 BUILD_BUG_ON(sizeof(compat_pfn_t) > sizeof(xen_pfn_t));
+ xenperf: xenperf.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
  
--                for ( i = 0; i < cmp.mar.nr_frames; i++ )
-+                rc = 0;
-+                for ( i = 0; i < done; i++ )
-                 {
-                     compat_pfn_t frame = xen_frame_list[i];
- 
-                     if ( frame != xen_frame_list[i] )
--                        return -ERANGE;
-+                    {
-+                        rc = -ERANGE;
-+                        break;
-+                    }
- 
-                     compat_frame_list[i] = frame;
-                 }
- 
--                if ( __copy_to_compat_offset(cmp.mar.frame_list, 0,
--                                             compat_frame_list,
--                                             cmp.mar.nr_frames) )
--                    return -EFAULT;
-+                if ( !rc && __copy_to_compat_offset(
-+                         cmp.mar.frame_list, start_extent,
-+                         compat_frame_list, done) )
-+                    rc = -EFAULT;
-+
-+                if ( rc )
-+                {
-+                    if ( split < 0 )
-+                    {
-+                        gdprintk(XENLOG_ERR,
-+                                 "Cannot cancel continuation: %ld\n", rc);
-+                        domain_crash(current->domain);
-+                    }
-+                    return rc;
-+                }
-+            }
-+
-+            start_extent += done;
-+
-+            /* Completely done. */
-+            if ( start_extent == cmp.mar.nr_frames )
-+                break;
-+
-+            /*
-+             * Done a "full" batch, but we were limited by space in the xlat
-+             * area.  Go around the loop again without necesserily returning
-+             * to guest context.
-+             */
-+            if ( done == nat.mar->nr_frames )
-+            {
-+                split = 1;
-+                break;
-             }
-+
-+            /* Explicit continuation request from a higher level. */
-+            if ( done < nat.mar->nr_frames )
-+                return hypercall_create_continuation(
-+                    __HYPERVISOR_memory_op, "ih",
-+                    op | (start_extent << MEMOP_EXTENT_SHIFT), compat);
-+
-+            /*
-+             * Well... Somethings gone wrong with the two levels of chunking.
-+             * My condolences to whomever next has to debug this mess.
-+             */
-+            ASSERT_UNREACHABLE();
-+            domain_crash(current->domain);
-+            split = 0;
-             break;
-         }
- 
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 280b7969b6..b95403695f 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -4053,6 +4053,9 @@ int gnttab_acquire_resource(
-     for ( i = 0; i < nr_frames; ++i )
-         mfn_list[i] = virt_to_mfn(vaddrs[frame + i]);
- 
-+    /* Success.  Passed nr_frames back to the caller. */
-+    rc = nr_frames;
-+
-  out:
-     grant_write_unlock(gt);
- 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index 01cab7e493..128718b31c 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1118,23 +1118,41 @@ static int acquire_ioreq_server(struct domain *d,
-         mfn_list[i] = mfn_x(mfn);
-     }
- 
--    return 0;
-+    /* Success.  Passed nr_frames back to the caller. */
-+    return nr_frames;
- #else
-     return -EOPNOTSUPP;
- #endif
- }
- 
-+/*
-+ * Returns -errno on error, or positive in the range [1, nr_frames] on
-+ * success.  Returning less than nr_frames contitutes a request for a
-+ * continuation.  Callers can depend on frame + nr_frames not overflowing.
+diff --git a/tools/misc/xen-vmtrace.c b/tools/misc/xen-vmtrace.c
+new file mode 100644
+index 0000000000..cc58a0707b
+--- /dev/null
++++ b/tools/misc/xen-vmtrace.c
+@@ -0,0 +1,166 @@
++/******************************************************************************
++ * tools/vmtrace.c
++ *
++ * Demonstrative tool for collecting Intel Processor Trace data from Xen.
++ *  Could be used to externally monitor a given vCPU in given DomU.
++ *
++ * Copyright (C) 2020 by CERT Polska - NASK PIB
++ *
++ * Authors: Michał Leszczyński, michal.leszczynski@cert.pl
++ * Date:    June, 2020
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; under version 2 of the License.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; If not, see <http://www.gnu.org/licenses/>.
 + */
-+static int _acquire_resource(
-+    struct domain *d, unsigned int type, unsigned int id, unsigned int frame,
-+    unsigned int nr_frames, xen_pfn_t mfn_list[])
++
++#include <err.h>
++#include <errno.h>
++#include <signal.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <sys/mman.h>
++
++#include <xenctrl.h>
++#include <xenforeignmemory.h>
++
++#define MSR_RTIT_CTL                        0x00000570
++#define  RTIT_CTL_OS                        (1 <<  2)
++#define  RTIT_CTL_USR                       (1 <<  3)
++#define  RTIT_CTL_BRANCH_EN                 (1 << 13)
++
++static xc_interface *xch;
++static xenforeignmemory_handle *fh;
++static uint32_t domid, vcpu;
++static size_t size;
++static char *buf;
++
++static sig_atomic_t interrupted = 0;
++static void int_handler(int signum)
 +{
-+    switch ( type )
-+    {
-+    case XENMEM_resource_grant_table:
-+        return gnttab_acquire_resource(d, id, frame, nr_frames, mfn_list);
-+
-+    case XENMEM_resource_ioreq_server:
-+        return acquire_ioreq_server(d, id, frame, nr_frames, mfn_list);
-+
-+    default:
-+        return -EOPNOTSUPP;
-+    }
++    interrupted = 1;
 +}
 +
- static int acquire_resource(
--    XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg)
-+    XEN_GUEST_HANDLE_PARAM(xen_mem_acquire_resource_t) arg,
-+    unsigned long start_extent)
- {
-     struct domain *d, *currd = current->domain;
-     xen_mem_acquire_resource_t xmar;
--    /*
--     * The mfn_list and gfn_list (below) arrays are ok on stack for the
--     * moment since they are small, but if they need to grow in future
--     * use-cases then per-CPU arrays or heap allocations may be required.
--     */
--    xen_pfn_t mfn_list[32];
-     unsigned int max_frames;
-     int rc;
- 
-@@ -1147,9 +1165,6 @@ static int acquire_resource(
-     if ( xmar.pad != 0 )
-         return -EINVAL;
- 
--    if ( xmar.nr_frames > ARRAY_SIZE(mfn_list) )
--        return -E2BIG;
--
-     /*
-      * The ABI is rather unfortunate.  nr_frames (and therefore the total size
-      * of the resource) is 32bit, while frame (the offset within the resource
-@@ -1179,7 +1194,7 @@ static int acquire_resource(
- 
-     if ( guest_handle_is_null(xmar.frame_list) )
-     {
--        if ( xmar.nr_frames )
-+        if ( xmar.nr_frames || start_extent )
-             goto out;
- 
-         xmar.nr_frames = max_frames;
-@@ -1187,30 +1202,47 @@ static int acquire_resource(
-         goto out;
-     }
- 
--    do {
--        switch ( xmar.type )
--        {
--        case XENMEM_resource_grant_table:
--            rc = gnttab_acquire_resource(d, xmar.id, xmar.frame, xmar.nr_frames,
--                                         mfn_list);
--            break;
-+    /*
-+     * Limiting nr_frames at (UINT_MAX >> MEMOP_EXTENT_SHIFT) isn't ideal.  If
-+     * it ever becomes a practical problem, we can switch to mutating
-+     * xmar.{frame,nr_frames,frame_list} in guest memory.
-+     */
-+    rc = -EINVAL;
-+    if ( start_extent >= xmar.nr_frames ||
-+         xmar.nr_frames > (UINT_MAX >> MEMOP_EXTENT_SHIFT) )
++static int get_more_data(void)
++{
++    static uint64_t last_pos;
++    uint64_t pos;
++
++    if ( xc_vmtrace_output_position(xch, domid, vcpu, &pos) )
++    {
++        perror("xc_vmtrace_output_position()");
++        return -1;
++    }
++
++    if ( pos > last_pos )
++        fwrite(buf + last_pos, pos - last_pos, 1, stdout);
++    else if ( pos < last_pos )
++    {
++        /* buffer wrapped */
++        fwrite(buf + last_pos, size - last_pos, 1, stdout);
++        fwrite(buf, pos, 1, stdout);
++    }
++
++    last_pos = pos;
++    return 0;
++}
++
++int main(int argc, char **argv)
++{
++    int rc, exit = 1;
++    xenforeignmemory_resource_handle *fres = NULL;
++
++    if ( signal(SIGINT, int_handler) == SIG_ERR )
++        err(1, "Failed to register signal handler\n");
++
++    if ( argc != 3 )
++    {
++        fprintf(stderr, "Usage: %s <domid> <vcpu_id>\n", argv[0]);
++        fprintf(stderr, "It's recommended to redirect thisprogram's output to file\n");
++        fprintf(stderr, "or to pipe it's output to xxd or other program.\n");
++        return 1;
++    }
++
++    domid = atoi(argv[1]);
++    vcpu  = atoi(argv[2]);
++
++    xch = xc_interface_open(NULL, NULL, 0);
++    fh = xenforeignmemory_open(NULL, 0);
++
++    if ( !xch )
++        err(1, "xc_interface_open()");
++    if ( !fh )
++        err(1, "xenforeignmemory_open()");
++
++    rc = xenforeignmemory_resource_size(
++        fh, domid, XENMEM_resource_vmtrace_buf, vcpu, &size);
++    if ( rc )
++        err(1, "xenforeignmemory_resource_size()");
++
++    fres = xenforeignmemory_map_resource(
++        fh, domid, XENMEM_resource_vmtrace_buf, vcpu,
++        0, size >> XC_PAGE_SHIFT, (void **)&buf, PROT_READ, 0);
++    if ( !fres )
++        err(1, "xenforeignmemory_map_resource()");
++
++    if ( xc_vmtrace_set_option(
++             xch, domid, vcpu, MSR_RTIT_CTL,
++             RTIT_CTL_BRANCH_EN | RTIT_CTL_USR | RTIT_CTL_OS) )
++    {
++        perror("xc_vmtrace_set_option()");
 +        goto out;
- 
--        case XENMEM_resource_ioreq_server:
--            rc = acquire_ioreq_server(d, xmar.id, xmar.frame, xmar.nr_frames,
--                                      mfn_list);
--            break;
-+    /* Adjust for work done on previous continuations. */
-+    xmar.nr_frames -= start_extent;
-+    xmar.frame += start_extent;
-+    guest_handle_add_offset(xmar.frame_list, start_extent);
- 
--        default:
--            rc = -EOPNOTSUPP;
--            break;
--        }
-+    do {
-+        /*
-+         * Arbitrary size.  Not too much stack space, and a reasonable stride
-+         * for continuation checks.
-+         */
-+        xen_pfn_t mfn_list[32];
-+        unsigned int todo = MIN(ARRAY_SIZE(mfn_list), xmar.nr_frames), done;
- 
--        if ( rc )
-+        rc = _acquire_resource(d, xmar.type, xmar.id, xmar.frame,
-+                               todo, mfn_list);
-+        if ( rc < 0 )
++    }
++
++    if ( xc_vmtrace_enable(xch, domid, vcpu) )
++    {
++        perror("xc_vmtrace_enable()");
++        goto out;
++    }
++
++    while ( !interrupted )
++    {
++        xc_dominfo_t dominfo;
++
++        if ( get_more_data() )
 +            goto out;
 +
-+        done = rc;
-+        rc = 0;
-+        if ( done == 0 || done > todo )
++        usleep(1000 * 100);
++
++        if ( xc_domain_getinfo(xch, domid, 1, &dominfo) != 1 ||
++             dominfo.domid != domid || dominfo.shutdown )
 +        {
-+            ASSERT_UNREACHABLE();
-+            rc = -EINVAL;
-             goto out;
++            if ( get_more_data() )
++                goto out;
++            break;
 +        }
- 
-+        /* Adjust guest frame_list appropriately. */
-         if ( !paging_mode_translate(currd) )
-         {
--            if ( copy_to_guest(xmar.frame_list, mfn_list, xmar.nr_frames) )
-+            if ( copy_to_guest(xmar.frame_list, mfn_list, done) )
-                 rc = -EFAULT;
-         }
-         else
-@@ -1218,10 +1250,10 @@ static int acquire_resource(
-             xen_pfn_t gfn_list[ARRAY_SIZE(mfn_list)];
-             unsigned int i;
- 
--            if ( copy_from_guest(gfn_list, xmar.frame_list, xmar.nr_frames) )
-+            if ( copy_from_guest(gfn_list, xmar.frame_list, done) )
-                 rc = -EFAULT;
- 
--            for ( i = 0; !rc && i < xmar.nr_frames; i++ )
-+            for ( i = 0; !rc && i < done; i++ )
-             {
-                 rc = set_foreign_p2m_entry(currd, d, gfn_list[i],
-                                            _mfn(mfn_list[i]));
-@@ -1230,7 +1262,32 @@ static int acquire_resource(
-                     rc = -EIO;
-             }
-         }
--    } while ( 0 );
++    }
 +
-+        if ( rc )
-+            goto out;
++    exit = 0;
 +
-+        xmar.nr_frames -= done;
-+        xmar.frame += done;
-+        guest_handle_add_offset(xmar.frame_list, done);
-+        start_extent += done;
++ out:
++    if ( xc_vmtrace_disable(xch, domid, vcpu) )
++        perror("xc_vmtrace_disable()");
 +
-+        /*
-+         * Explicit continuation request from _acquire_resource(), or we've
-+         * still got more work to do.
-+         */
-+        if ( done < todo ||
-+             (xmar.nr_frames && hypercall_preempt_check()) )
-+        {
-+            rc = hypercall_create_continuation(
-+                __HYPERVISOR_memory_op, "lh",
-+                XENMEM_acquire_resource | (start_extent << MEMOP_EXTENT_SHIFT),
-+                arg);
-+            goto out;
-+        }
++    if ( fres && xenforeignmemory_unmap_resource(fh, fres) )
++        perror("xenforeignmemory_unmap_resource()");
 +
-+    } while ( xmar.nr_frames );
++    return exit;
++}
 +
-+    rc = 0;
- 
-  out:
-     rcu_unlock_domain(d);
-@@ -1697,7 +1754,8 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- 
-     case XENMEM_acquire_resource:
-         rc = acquire_resource(
--            guest_handle_cast(arg, xen_mem_acquire_resource_t));
-+            guest_handle_cast(arg, xen_mem_acquire_resource_t),
-+            start_extent);
-         break;
- 
-     default:
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.11.0
 
