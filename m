@@ -2,45 +2,47 @@ Return-Path: <SRS0=1OSo=HD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF5DDC433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 14:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1696DC433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 14:59:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 33DE864DF5
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 14:57:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 33DE864DF5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8C3B764E08
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 14:59:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C3B764E08
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.79931.145801 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.79940.145813 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6adT-0002A3-NE; Mon, 01 Feb 2021 14:57:03 +0000
+	id 1l6ag1-0002WR-4Z; Mon, 01 Feb 2021 14:59:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 79931.145801; Mon, 01 Feb 2021 14:57:03 +0000
+Received: by outflank-mailman (output) from mailman id 79940.145813; Mon, 01 Feb 2021 14:59:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6adT-00029w-K2; Mon, 01 Feb 2021 14:57:03 +0000
-Received: by outflank-mailman (input) for mailman id 79931;
- Mon, 01 Feb 2021 14:57:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l6ag1-0002WK-1Y; Mon, 01 Feb 2021 14:59:41 +0000
+Received: by outflank-mailman (input) for mailman id 79940;
+ Mon, 01 Feb 2021 14:59:40 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4N3t=HD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l6adS-00029l-JC
- for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 14:57:02 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e9c5d348-d9cd-422d-a2be-e0cf2a827521;
- Mon, 01 Feb 2021 14:57:00 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id CD1BAAB92;
- Mon,  1 Feb 2021 14:56:59 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1l6ag0-0002WA-33
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 14:59:40 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l6ag0-00046x-2G
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 14:59:40 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l6ag0-0003Wo-1N
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 14:59:40 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1l6afv-0007gD-Cb; Mon, 01 Feb 2021 14:59:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,52 +54,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e9c5d348-d9cd-422d-a2be-e0cf2a827521
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1612191419; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=gpjsoXyymi3tg3gNQWwGrxdoOaO5dOb3D73T4UALbJY=;
-	b=O4jT9VS+Vw7V5cpYT9lciX+jT/8jHDht0cw27NOF7UCQLEainrdSOaNGOvaRB+ZJiljoYE
-	LoAbHbV8uhV2xWmmlyxWrxP5zhy9Ih39kc+rmJMoov71Z3Bl18IzCufXUz5SXHL02CyH5m
-	Kye9Ycd/Uy1LVsc+szPH+qUW7qddjFY=
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Julien Grall <julien@xen.org>, Ian Jackson <iwj@xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/build: correctly record dependencies of asm-offsets.s
-Message-ID: <b3b57f6b-3ed9-18f6-2a87-6af3304c6645@suse.com>
-Date: Mon, 1 Feb 2021 15:56:59 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=B5q6o1TGLLRrNrSxomCbQfBR0hkmteq+1huEep3awn4=; b=3lUNaioN/e5TsKwcIoRWgoTuoQ
+	7aBvh8xqoaf3C2geRO/EywgKckWAkCrJn+yTgW9+mjhuQZZe00lLnaCi3t8yDa/jF4A9Kw8cGP9kt
+	673cszVZaIz0k1vzayM6rWM0GsQZGWkzYwbE83NiiUfz+yUj8+4UHAbfo4fW18GIynUc=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Message-ID: <24600.5975.179890.232213@mariner.uk.xensource.com>
+Date: Mon, 1 Feb 2021 14:59:35 +0000
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: Manuel Bouyer <bouyer@antioche.eu.org>,
+    <xen-devel@lists.xenproject.org>,
+    Wei  Liu <wl@xen.org>
+Subject: Re: [PATCH v3 2/2] Document qemu-ifup on NetBSD
+In-Reply-To: <YBfevtNorE5OtQVR@Air-de-Roger>
+References: <20210130230300.11664-1-bouyer@netbsd.org>
+	<20210130230300.11664-2-bouyer@netbsd.org>
+	<YBe6JpR6jOLvYDz6@Air-de-Roger>
+	<20210201093747.GA624@antioche.eu.org>
+	<YBfevtNorE5OtQVR@Air-de-Roger>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Going through an intermediate *.new file requires telling the compiler
-what the real target is, so that the inclusion of the resulting .*.d
-file will actually be useful.
+Roger Pau Monné writes ("Re: [PATCH v3 2/2] Document qemu-ifup on NetBSD"):
+> On Mon, Feb 01, 2021 at 10:37:47AM +0100, Manuel Bouyer wrote:
+> > Well, as a user, I want to know how the scripts are called, so that I can
+> > tune them ...
+> 
+> Isn't that information on the header of the script? I would expect
+> users that want to modify such script will open it and then the header
+> should already lists the parameters.
+> 
+> IMO I would leave the parameters out of this document because we don't
+> list them for any other script, so it seems odd to list them for the
+> qemu-ifup script only.
 
-Fixes: 7d2d7a43d014 ("x86/build: limit rebuilding of asm-offsets.h")
-Reported-by: Julien Grall <julien@xen.org>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Already on the original patch I did suggest that perhaps Arm would want
-to follow suit. So again - perhaps the rules should be unified by moving
-to common code?
+I think it is shown there, indeed.  That may not be the best place for
+this information.  But maybe putting it somewhere else should be done
+systematically rather than ad hoc.  IOW with my maintainer hat on I
+don't feel I have a strong opinion.
 
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -241,7 +241,7 @@ efi/buildid.o efi/relocs-dummy.o: $(BASE
- efi/buildid.o efi/relocs-dummy.o: ;
- 
- asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c $(BASEDIR)/include/asm-x86/asm-macros.h
--	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -g0 -o $@.new $<
-+	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
- 	$(call move-if-changed,$@.new,$@)
- 
- asm-macros.i: CFLAGS-y += -D__ASSEMBLY__ -P
+OTOH from my RM hat
+
+Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+
+since this is a documentation change.
+
+Ian.
 
