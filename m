@@ -4,40 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5367AC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C5F2C433E6
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:28:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0042E64EC1
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:27:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0042E64EC1
+	by mail.kernel.org (Postfix) with ESMTPS id 11D2C64EC1
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:28:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 11D2C64EC1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.80194.146554 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.80195.146566 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6ibl-0007je-74; Mon, 01 Feb 2021 23:27:49 +0000
+	id 1l6ibm-0007nU-Rq; Mon, 01 Feb 2021 23:27:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 80194.146554; Mon, 01 Feb 2021 23:27:49 +0000
+Received: by outflank-mailman (output) from mailman id 80195.146566; Mon, 01 Feb 2021 23:27:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6ibl-0007jR-2F; Mon, 01 Feb 2021 23:27:49 +0000
-Received: by outflank-mailman (input) for mailman id 80194;
- Mon, 01 Feb 2021 23:27:47 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l6ibm-0007nD-ME; Mon, 01 Feb 2021 23:27:50 +0000
+Received: by outflank-mailman (input) for mailman id 80195;
+ Mon, 01 Feb 2021 23:27:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IWGu=HD=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l6ibj-0007P6-R7
- for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:27:47 +0000
+ id 1l6ibk-0007PB-SZ
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:27:48 +0000
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c06dd5f6-d926-4d97-b9e7-c3c1e9e49841;
- Mon, 01 Feb 2021 23:27:33 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7290a8cc-2697-4c86-a1de-a9c8fc86c84b;
+ Mon, 01 Feb 2021 23:27:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,477 +48,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c06dd5f6-d926-4d97-b9e7-c3c1e9e49841
+X-Inumbo-ID: 7290a8cc-2697-4c86-a1de-a9c8fc86c84b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612222053;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=TDLzcFIKoSOVt0T44fLv76oX9OLOeZU1LgI0QoM4uAM=;
-  b=br7pFkh3Yxfga1vsyta+ZOBhdcbIx/sVkdnoQRXdqLZsvDV2hJsgSznC
-   lvscJ8DtUlvsY6yofYg50pOg2YnO+oDu9emseILjH+xUag6uczt9jnBXd
-   OHNylUS56fBramPCa6tv//Ii6NEtHlN4MmB+p2D3E9u0jDsNiMVTemq6p
-   I=;
+  d=citrix.com; s=securemail; t=1612222054;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=vuuwq+6fSuNyCmrq1LxmH6Aqiqy1A+s02+fVKEkgO+4=;
+  b=OatCVzKqX4fMD5FwX+vlL5/K9WYg5uS95lqVNRHI1JBpYR/9PJR+4Aiw
+   CwtErrZTlER4W/8a/x+HSJny943Z4U8VdmRGBBtK5zhFaaWSc/sdZQrUs
+   GXNjEncR2OPQ40JeComWBDMh5Ot6t6X/6oTFx3Bi4TNhDfwPyUOngv4+l
+   c=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: mNnxg+ANT/zlDaBh9WfHRXCilKPBs3sVM8W70uTCXls00Pxz1RVTGxZKZf2zugHUSi7fZZlsSy
- xFXIeUqtRd0scZ5Unh5CP3+us5n+2eJqpEaN8TcBk+yQrm/yNVJzmRVS5QwSTsqnvk+4Q+6aMu
- 6HVmbgb3qG+lSg1Ejo0yJjLWTwGOO8KcZQ8fuZ9ZAtAOS88HIzxQXgscE4uH4GinvWkShfH5Ol
- fYtlm6BCE434KxkSJzvp667yuUrtbo2QqVlp8RE4r7sEU7T6HhIhEB2eI8WsC12Z1DCrD20HyP
- OUg=
+IronPort-SDR: +RXHQME0JbXlIVKVhTdFc35TdYsQ/l2+XYnNQNL2+IQShsdxGo+SWoIc/Ds9PwB0Zr4BG4pIKp
+ Iix87JetSgQNyyjwFqcco0J39yiqp/ruPnzu8SfPsVAqwNktkQXo7SWw2fdrwhIV5tCMM/3/zl
+ ZuuYJjLQS7PSTcx5/Yt5OsBYAVPWFRusTVR/dWiAqwosaKQXFrvl/ulK3bxY+cqE0SPkQUuorV
+ pQR6oFYYcmRRfgkOapMEnraQT6udL4EcGDRyFeNceBYZuon7OHNv07Go66OFDY7X9/PbVGJTS8
+ aro=
 X-SBRS: 5.1
-X-MesageID: 36319801
+X-MesageID: 36319805
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,393,1602561600"; 
-   d="scan'208";a="36319801"
+   d="scan'208";a="36319805"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v9 06/11] xen/domctl: Add XEN_DOMCTL_vmtrace_op
-Date: Mon, 1 Feb 2021 23:26:58 +0000
-Message-ID: <20210201232703.29275-7-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
+	<iwj@xenproject.org>, Anthony PERARD <anthony.perard@citrix.com>, "Jun
+ Nakajima" <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
+	Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v9 00/11] acquire_resource size and external IPT monitoring
+Date: Mon, 1 Feb 2021 23:26:52 +0000
+Message-ID: <20210201232703.29275-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210201232703.29275-1-andrew.cooper3@citrix.com>
-References: <20210201232703.29275-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-From: Michał Leszczyński <michal.leszczynski@cert.pl>
+Combined series (as they are dependent).  First, the resource size fixes, and
+then the external IPT monitoring built on top.  Some patches got committed
+before the feature freeze date last Friday.  This is the remainder.
 
-Implement an interface to configure and control tracing operations.  Reuse the
-existing SETDEBUGGING flask vector rather than inventing a new one.
+Everything is suitably reviewed now, unless anyone has any last minute urgent
+issues.
 
-Userspace using this interface is going to need platform specific knowledge
-anyway to interpret the contents of the trace buffer.  While some operations
-(e.g. enable/disable) can reasonably be generic, others cannot.  Provide an
-explicitly-platform specific pair of get/set operations to reduce API churn as
-new options get added/enabled.
+Therefore, I'd like to request a release exception.
 
-For the VMX specific Processor Trace implementation, tolerate reading and
-modifying a safe subset of bits in CTL, STATUS and OUTPUT_MASK.  This permits
-userspace to control the content which gets logged, but prevents modification
-of details such as the position/size of the output buffer.
+Patch 1 is a bugfix, and the last in a long line of fixes to the
+acquire_resource hypercall.  Technically it ought not to need a release ack at
+this point.
 
-Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
-CC: Michał Leszczyński <michal.leszczynski@cert.pl>
-CC: Tamas K Lengyel <tamas@tklengyel.com>
+The rest of the patches are a feature, originally contributed by CERT.PL for a
+project they are working on, which got blocked for reasons outside of their
+control (blocked on my acquire_resource fixes, and the extreme quantity of
+security work this release cycle).
 
-v9:
- * Drop platform-specific access to MSR_RTIT_OUTPUT_MASK.  It's not necessary
-   for current usecases, and will simplify adding ToPA support in the future.
+Intel Processor Trace is a debugging/diagnostic feature, which allows for
+reconstruction of the exact execution path of the target.  As implemented
+here, a monitoring agent can trace execution within the guest.
 
-v8:
- * Reposition mask constants.
+There are two production users of this already.
 
-v7:
- * Major chop&change within the series.
----
- xen/arch/x86/domctl.c         |  55 +++++++++++++++++
- xen/arch/x86/hvm/vmx/vmx.c    | 135 ++++++++++++++++++++++++++++++++++++++++++
- xen/include/asm-x86/hvm/hvm.h |  63 ++++++++++++++++++++
- xen/include/public/domctl.h   |  35 +++++++++++
- xen/xsm/flask/hooks.c         |   1 +
- 5 files changed, 289 insertions(+)
+1) KFX - https://github.com/intel/kernel-fuzzer-for-xen-project
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index b28cfe9817..b464465230 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -155,6 +155,55 @@ void arch_get_domain_info(const struct domain *d,
-     info->arch_config.emulation_flags = d->arch.emulation_flags;
- }
- 
-+static int do_vmtrace_op(struct domain *d, struct xen_domctl_vmtrace_op *op,
-+                         XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-+{
-+    struct vcpu *v;
-+    int rc;
-+
-+    if ( !d->vmtrace_size || d == current->domain /* No vcpu_pause() */ )
-+        return -EINVAL;
-+
-+    ASSERT(is_hvm_domain(d)); /* Restricted by domain creation logic. */
-+
-+    v = domain_vcpu(d, op->vcpu);
-+    if ( !v )
-+        return -ENOENT;
-+
-+    vcpu_pause(v);
-+    switch ( op->cmd )
-+    {
-+    case XEN_DOMCTL_vmtrace_enable:
-+    case XEN_DOMCTL_vmtrace_disable:
-+    case XEN_DOMCTL_vmtrace_reset_and_enable:
-+        rc = hvm_vmtrace_control(
-+            v, op->cmd != XEN_DOMCTL_vmtrace_disable,
-+            op->cmd == XEN_DOMCTL_vmtrace_reset_and_enable);
-+        break;
-+
-+    case XEN_DOMCTL_vmtrace_output_position:
-+        rc = hvm_vmtrace_output_position(v, &op->value);
-+        if ( rc >= 0 )
-+            rc = 0;
-+        break;
-+
-+    case XEN_DOMCTL_vmtrace_get_option:
-+        rc = hvm_vmtrace_get_option(v, op->key, &op->value);
-+        break;
-+
-+    case XEN_DOMCTL_vmtrace_set_option:
-+        rc = hvm_vmtrace_set_option(v, op->key, op->value);
-+        break;
-+
-+    default:
-+        rc = -EOPNOTSUPP;
-+        break;
-+    }
-+    vcpu_unpause(v);
-+
-+    return rc;
-+}
-+
- #define MAX_IOPORTS 0x10000
- 
- long arch_do_domctl(
-@@ -1320,6 +1369,12 @@ long arch_do_domctl(
-         domain_unpause(d);
-         break;
- 
-+    case XEN_DOMCTL_vmtrace_op:
-+        ret = do_vmtrace_op(d, &domctl->u.vmtrace_op, u_domctl);
-+        if ( !ret )
-+            copyback = true;
-+        break;
-+
-     default:
-         ret = iommu_do_domctl(domctl, d, u_domctl);
-         break;
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 12b961113e..beb5692b8b 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2261,6 +2261,137 @@ static bool vmx_get_pending_event(struct vcpu *v, struct x86_event *info)
-     return true;
- }
- 
-+/*
-+ * We only let vmtrace agents see and modify a subset of bits in MSR_RTIT_CTL.
-+ * These all pertain to data-emitted into the trace buffer(s).  Must not
-+ * include controls pertaining to the structure/position of the trace
-+ * buffer(s).
-+ */
-+#define RTIT_CTL_MASK                                                   \
-+    (RTIT_CTL_TRACE_EN | RTIT_CTL_OS | RTIT_CTL_USR | RTIT_CTL_TSC_EN | \
-+     RTIT_CTL_DIS_RETC | RTIT_CTL_BRANCH_EN)
-+
-+/*
-+ * Status bits restricted to the first-gen subset (i.e. no further CPUID
-+ * requirements.)
-+ */
-+#define RTIT_STATUS_MASK                                                \
-+    (RTIT_STATUS_FILTER_EN | RTIT_STATUS_CONTEXT_EN | RTIT_STATUS_TRIGGER_EN | \
-+     RTIT_STATUS_ERROR | RTIT_STATUS_STOPPED)
-+
-+static int vmtrace_get_option(struct vcpu *v, uint64_t key, uint64_t *output)
-+{
-+    const struct vcpu_msrs *msrs = v->arch.msrs;
-+
-+    switch ( key )
-+    {
-+    case MSR_RTIT_CTL:
-+        *output = msrs->rtit.ctl & RTIT_CTL_MASK;
-+        break;
-+
-+    case MSR_RTIT_STATUS:
-+        *output = msrs->rtit.status & RTIT_STATUS_MASK;
-+        break;
-+
-+    default:
-+        *output = 0;
-+        return -EINVAL;
-+    }
-+    return 0;
-+}
-+
-+static int vmtrace_set_option(struct vcpu *v, uint64_t key, uint64_t value)
-+{
-+    struct vcpu_msrs *msrs = v->arch.msrs;
-+    bool new_en, old_en = msrs->rtit.ctl & RTIT_CTL_TRACE_EN;
-+
-+    switch ( key )
-+    {
-+    case MSR_RTIT_CTL:
-+        if ( value & ~RTIT_CTL_MASK )
-+            return -EINVAL;
-+
-+        msrs->rtit.ctl &= ~RTIT_CTL_MASK;
-+        msrs->rtit.ctl |= (value & RTIT_CTL_MASK);
-+        break;
-+
-+    case MSR_RTIT_STATUS:
-+        if ( value & ~RTIT_STATUS_MASK )
-+            return -EINVAL;
-+
-+        msrs->rtit.status &= ~RTIT_STATUS_MASK;
-+        msrs->rtit.status |= (value & RTIT_STATUS_MASK);
-+        break;
-+
-+    default:
-+        return -EINVAL;
-+    }
-+
-+    new_en = msrs->rtit.ctl & RTIT_CTL_TRACE_EN;
-+
-+    /* ctl.trace_en changed => update MSR load/save lists appropriately. */
-+    if ( !old_en && new_en )
-+    {
-+        if ( vmx_add_guest_msr(v, MSR_RTIT_CTL, msrs->rtit.ctl) ||
-+             vmx_add_host_load_msr(v, MSR_RTIT_CTL, 0) )
-+        {
-+            /*
-+             * The only failure cases here are failing the
-+             * singleton-per-domain memory allocation, or exceeding the space
-+             * in the allocation.  We could unwind in principle, but there is
-+             * nothing userspace can usefully do to continue using this VM.
-+             */
-+            domain_crash(v->domain);
-+            return -ENXIO;
-+        }
-+    }
-+    else if ( old_en && !new_en )
-+    {
-+        vmx_del_msr(v, MSR_RTIT_CTL, VMX_MSR_GUEST);
-+        vmx_del_msr(v, MSR_RTIT_CTL, VMX_MSR_HOST);
-+    }
-+
-+    return 0;
-+}
-+
-+static int vmtrace_control(struct vcpu *v, bool enable, bool reset)
-+{
-+    struct vcpu_msrs *msrs = v->arch.msrs;
-+    uint64_t new_ctl;
-+    int rc;
-+
-+    /*
-+     * Absolutely nothing good will come of Xen's and userspace's idea of
-+     * whether ipt is enabled getting out of sync.
-+     */
-+    if ( v->arch.hvm.vmx.ipt_active == enable )
-+        return -EINVAL;
-+
-+    if ( reset )
-+    {
-+        msrs->rtit.status = 0;
-+        msrs->rtit.output_offset = 0;
-+    }
-+
-+    new_ctl = msrs->rtit.ctl & ~RTIT_CTL_TRACE_EN;
-+    if ( enable )
-+        new_ctl |= RTIT_CTL_TRACE_EN;
-+
-+    rc = vmtrace_set_option(v, MSR_RTIT_CTL, new_ctl);
-+    if ( rc )
-+        return rc;
-+
-+    v->arch.hvm.vmx.ipt_active = enable;
-+
-+    return 0;
-+}
-+
-+static int vmtrace_output_position(struct vcpu *v, uint64_t *pos)
-+{
-+    *pos = v->arch.msrs->rtit.output_offset;
-+    return v->arch.hvm.vmx.ipt_active;
-+}
-+
- static struct hvm_function_table __initdata vmx_function_table = {
-     .name                 = "VMX",
-     .cpu_up_prepare       = vmx_cpu_up_prepare,
-@@ -2316,6 +2447,10 @@ static struct hvm_function_table __initdata vmx_function_table = {
-     .altp2m_vcpu_update_vmfunc_ve = vmx_vcpu_update_vmfunc_ve,
-     .altp2m_vcpu_emulate_ve = vmx_vcpu_emulate_ve,
-     .altp2m_vcpu_emulate_vmfunc = vmx_vcpu_emulate_vmfunc,
-+    .vmtrace_control = vmtrace_control,
-+    .vmtrace_output_position = vmtrace_output_position,
-+    .vmtrace_set_option = vmtrace_set_option,
-+    .vmtrace_get_option = vmtrace_get_option,
-     .tsc_scaling = {
-         .max_ratio = VMX_TSC_MULTIPLIER_MAX,
-     },
-diff --git a/xen/include/asm-x86/hvm/hvm.h b/xen/include/asm-x86/hvm/hvm.h
-index 334bd573b9..960ec03917 100644
---- a/xen/include/asm-x86/hvm/hvm.h
-+++ b/xen/include/asm-x86/hvm/hvm.h
-@@ -214,6 +214,12 @@ struct hvm_function_table {
-     bool_t (*altp2m_vcpu_emulate_ve)(struct vcpu *v);
-     int (*altp2m_vcpu_emulate_vmfunc)(const struct cpu_user_regs *regs);
- 
-+    /* vmtrace */
-+    int (*vmtrace_control)(struct vcpu *v, bool enable, bool reset);
-+    int (*vmtrace_output_position)(struct vcpu *v, uint64_t *pos);
-+    int (*vmtrace_set_option)(struct vcpu *v, uint64_t key, uint64_t value);
-+    int (*vmtrace_get_option)(struct vcpu *v, uint64_t key, uint64_t *value);
-+
-     /*
-      * Parameters and callbacks for hardware-assisted TSC scaling,
-      * which are valid only when the hardware feature is available.
-@@ -655,6 +661,41 @@ static inline bool altp2m_vcpu_emulate_ve(struct vcpu *v)
-     return false;
- }
- 
-+static inline int hvm_vmtrace_control(struct vcpu *v, bool enable, bool reset)
-+{
-+    if ( hvm_funcs.vmtrace_control )
-+        return hvm_funcs.vmtrace_control(v, enable, reset);
-+
-+    return -EOPNOTSUPP;
-+}
-+
-+/* Returns -errno, or a boolean of whether tracing is currently active. */
-+static inline int hvm_vmtrace_output_position(struct vcpu *v, uint64_t *pos)
-+{
-+    if ( hvm_funcs.vmtrace_output_position )
-+        return hvm_funcs.vmtrace_output_position(v, pos);
-+
-+    return -EOPNOTSUPP;
-+}
-+
-+static inline int hvm_vmtrace_set_option(
-+    struct vcpu *v, uint64_t key, uint64_t value)
-+{
-+    if ( hvm_funcs.vmtrace_set_option )
-+        return hvm_funcs.vmtrace_set_option(v, key, value);
-+
-+    return -EOPNOTSUPP;
-+}
-+
-+static inline int hvm_vmtrace_get_option(
-+    struct vcpu *v, uint64_t key, uint64_t *value)
-+{
-+    if ( hvm_funcs.vmtrace_get_option )
-+        return hvm_funcs.vmtrace_get_option(v, key, value);
-+
-+    return -EOPNOTSUPP;
-+}
-+
- /*
-  * This must be defined as a macro instead of an inline function,
-  * because it uses 'struct vcpu' and 'struct domain' which have
-@@ -751,6 +792,28 @@ static inline bool hvm_has_set_descriptor_access_exiting(void)
-     return false;
- }
- 
-+static inline int hvm_vmtrace_control(struct vcpu *v, bool enable, bool reset)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static inline int hvm_vmtrace_output_position(struct vcpu *v, uint64_t *pos)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static inline int hvm_vmtrace_set_option(
-+    struct vcpu *v, uint64_t key, uint64_t value)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static inline int hvm_vmtrace_get_option(
-+    struct vcpu *v, uint64_t key, uint64_t *value)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
- #define is_viridian_domain(d) ((void)(d), false)
- #define is_viridian_vcpu(v) ((void)(v), false)
- #define has_viridian_time_ref_count(d) ((void)(d), false)
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 88a5b1ef5d..4dbf107785 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1135,6 +1135,39 @@ struct xen_domctl_vuart_op {
-                                  */
- };
- 
-+/* XEN_DOMCTL_vmtrace_op: Perform VM tracing operations. */
-+struct xen_domctl_vmtrace_op {
-+    uint32_t cmd;           /* IN */
-+    uint32_t vcpu;          /* IN */
-+    uint64_aligned_t key;   /* IN     - @cmd specific data. */
-+    uint64_aligned_t value; /* IN/OUT - @cmd specific data. */
-+
-+    /*
-+     * General enable/disable of tracing.
-+     *
-+     * XEN_DOMCTL_vmtrace_reset_and_enable is provided as optimisation for
-+     * common usecases, which want to reset status and position information
-+     * when turning tracing back on.
-+     */
-+#define XEN_DOMCTL_vmtrace_enable             1
-+#define XEN_DOMCTL_vmtrace_disable            2
-+#define XEN_DOMCTL_vmtrace_reset_and_enable   3
-+
-+    /* Obtain the current output position within the buffer.  Fills @value. */
-+#define XEN_DOMCTL_vmtrace_output_position    4
-+
-+    /*
-+     * Get/Set platform specific configuration.
-+     *
-+     * For Intel Processor Trace, @key/@value are interpreted as MSR
-+     * reads/writes to MSR_RTIT_*, filtered to a safe subset.
-+     */
-+#define XEN_DOMCTL_vmtrace_get_option         5
-+#define XEN_DOMCTL_vmtrace_set_option         6
-+};
-+typedef struct xen_domctl_vmtrace_op xen_domctl_vmtrace_op_t;
-+DEFINE_XEN_GUEST_HANDLE(xen_domctl_vmtrace_op_t);
-+
- struct xen_domctl {
-     uint32_t cmd;
- #define XEN_DOMCTL_createdomain                   1
-@@ -1219,6 +1252,7 @@ struct xen_domctl {
- #define XEN_DOMCTL_vuart_op                      81
- #define XEN_DOMCTL_get_cpu_policy                82
- #define XEN_DOMCTL_set_cpu_policy                83
-+#define XEN_DOMCTL_vmtrace_op                    84
- #define XEN_DOMCTL_gdbsx_guestmemio            1000
- #define XEN_DOMCTL_gdbsx_pausevcpu             1001
- #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
-@@ -1279,6 +1313,7 @@ struct xen_domctl {
-         struct xen_domctl_monitor_op        monitor_op;
-         struct xen_domctl_psr_alloc         psr_alloc;
-         struct xen_domctl_vuart_op          vuart_op;
-+        struct xen_domctl_vmtrace_op        vmtrace_op;
-         uint8_t                             pad[128];
-     } u;
- };
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 11784d7425..3b7313b949 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -703,6 +703,7 @@ static int flask_domctl(struct domain *d, int cmd)
-         return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__VM_EVENT);
- 
-     case XEN_DOMCTL_debug_op:
-+    case XEN_DOMCTL_vmtrace_op:
-     case XEN_DOMCTL_gdbsx_guestmemio:
-     case XEN_DOMCTL_gdbsx_pausevcpu:
-     case XEN_DOMCTL_gdbsx_unpausevcpu:
+   This is a project lead by Tamas which is a fuzzer based on Xen, with AFL
+   running in dom0, and backended with introspection and VMFork/reset for
+   injecting data and parallel testing.  It uses IPT (this series) to feed the
+   taken-path back to AFL, is far more convenient than recompiling the
+   subject-under-test, and is far faster than using breakpoints for path
+   reconstruction.
+
+2) Drakvuf Sandbox - https://github.com/CERT-Polska/drakvuf-sandbox
+
+   This project, lead by a team at CERT is an automatic malware-analysis SaaS
+   offering, which will inspect suspicious files and attempt to provoke them
+   to extract their payload, with introspection stepping in once it is fully
+   unpacked, to inspect and classify the malware.
+
+Both are very exciting projects, and the addition of IPT support like this
+helps keep Xen at the forefront of hypervisor introspection technologies.
+
+When I've got enough free time to do some paperwork, I'm intending to add IPT
+as tech-preview (in particular - there are some hardware errata which concern
+me, and an as-yet uninvestigated exclusion vs LBR as a hardware restriction).
+
+It has active downstream users and extensive testing, as well as being fairly
+isolated in terms of interactions with the rest of Xen, so the changes of a
+showstopper affecting other features is very slim.
+
+
+Andrew Cooper (1):
+  xen/memory: Fix mapping grant tables with XENMEM_acquire_resource
+
+Michał Leszczyński (7):
+  xen/domain: Add vmtrace_size domain creation parameter
+  tools/[lib]xl: Add vmtrace_buf_size parameter
+  xen/memory: Add a vmtrace_buf resource type
+  x86/vmx: Add Intel Processor Trace support
+  xen/domctl: Add XEN_DOMCTL_vmtrace_op
+  tools/libxc: Add xc_vmtrace_* functions
+  tools/misc: Add xen-vmtrace tool
+
+Tamas K Lengyel (3):
+  xen/vmtrace: support for VM forks
+  x86/vm_event: Carry the vmtrace buffer position in vm_event
+  x86/vm_event: add response flag to reset vmtrace buffer
+
+ docs/man/xl.cfg.5.pod.in                    |   9 ++
+ tools/golang/xenlight/helpers.gen.go        |   2 +
+ tools/golang/xenlight/types.gen.go          |   1 +
+ tools/include/libxl.h                       |   7 ++
+ tools/include/xenctrl.h                     |  73 +++++++++++
+ tools/libs/ctrl/Makefile                    |   1 +
+ tools/libs/ctrl/xc_vmtrace.c                | 128 ++++++++++++++++++++
+ tools/libs/light/libxl_cpuid.c              |   1 +
+ tools/libs/light/libxl_create.c             |   1 +
+ tools/libs/light/libxl_types.idl            |   4 +
+ tools/misc/.gitignore                       |   1 +
+ tools/misc/Makefile                         |   7 ++
+ tools/misc/xen-cpuid.c                      |   2 +-
+ tools/misc/xen-vmtrace.c                    | 166 +++++++++++++++++++++++++
+ tools/xl/xl_parse.c                         |   4 +
+ xen/arch/x86/domain.c                       |  23 ++++
+ xen/arch/x86/domctl.c                       |  55 +++++++++
+ xen/arch/x86/hvm/vmx/vmcs.c                 |  19 ++-
+ xen/arch/x86/hvm/vmx/vmx.c                  | 180 +++++++++++++++++++++++++++-
+ xen/arch/x86/mm/mem_sharing.c               |   3 +
+ xen/arch/x86/vm_event.c                     |  10 ++
+ xen/common/compat/memory.c                  | 114 ++++++++++++++----
+ xen/common/domain.c                         |  64 ++++++++++
+ xen/common/grant_table.c                    |   3 +
+ xen/common/memory.c                         | 153 ++++++++++++++++++-----
+ xen/common/vm_event.c                       |   3 +
+ xen/include/asm-arm/vm_event.h              |   6 +
+ xen/include/asm-x86/cpufeature.h            |   1 +
+ xen/include/asm-x86/hvm/hvm.h               |  72 +++++++++++
+ xen/include/asm-x86/hvm/vmx/vmcs.h          |   4 +
+ xen/include/asm-x86/msr.h                   |  32 +++++
+ xen/include/asm-x86/vm_event.h              |   2 +
+ xen/include/public/arch-x86/cpufeatureset.h |   1 +
+ xen/include/public/domctl.h                 |  38 ++++++
+ xen/include/public/memory.h                 |   1 +
+ xen/include/public/vm_event.h               |  11 ++
+ xen/include/xen/sched.h                     |   6 +
+ xen/xsm/flask/hooks.c                       |   1 +
+ 38 files changed, 1150 insertions(+), 59 deletions(-)
+ create mode 100644 tools/libs/ctrl/xc_vmtrace.c
+ create mode 100644 tools/misc/xen-vmtrace.c
+
 -- 
 2.11.0
 
