@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F748C433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:27:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87EF6C433E6
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:27:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2128564E2E
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:27:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2128564E2E
+	by mail.kernel.org (Postfix) with ESMTPS id 3949F64EC1
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:27:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3949F64EC1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.80189.146493 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.80190.146506 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6ibX-0007QH-AZ; Mon, 01 Feb 2021 23:27:35 +0000
+	id 1l6ibb-0007Tb-JZ; Mon, 01 Feb 2021 23:27:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 80189.146493; Mon, 01 Feb 2021 23:27:35 +0000
+Received: by outflank-mailman (output) from mailman id 80190.146506; Mon, 01 Feb 2021 23:27:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6ibX-0007QA-7Z; Mon, 01 Feb 2021 23:27:35 +0000
-Received: by outflank-mailman (input) for mailman id 80189;
- Mon, 01 Feb 2021 23:27:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l6ibb-0007TU-Fr; Mon, 01 Feb 2021 23:27:39 +0000
+Received: by outflank-mailman (input) for mailman id 80190;
+ Mon, 01 Feb 2021 23:27:37 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IWGu=HD=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l6ibW-0007PB-0l
- for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:27:34 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5bda2d77-d5a5-4294-9fd1-d4c2be43d2e3;
- Mon, 01 Feb 2021 23:27:32 +0000 (UTC)
+ id 1l6ibZ-0007P6-Qt
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:27:37 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3d35c18d-68bf-48f9-993b-8fdff7993348;
+ Mon, 01 Feb 2021 23:27:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,37 +49,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5bda2d77-d5a5-4294-9fd1-d4c2be43d2e3
+X-Inumbo-ID: 3d35c18d-68bf-48f9-993b-8fdff7993348
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612222052;
+  d=citrix.com; s=securemail; t=1612222051;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=EvfjqR50MUjZfV+wJxte5vJxLsTztJ8urztBWoZwrE4=;
-  b=a64ywfGPWzZrgGIZ9nz5YSx5JWVPNBK9O+cLzYjkjQ0XabURaXYhTRRE
-   YqibgUDpj+qcAeC6ObSohMbGGtMzC8aLnsjcasW6qcG5UbLQWwA/3t6//
-   llOg3BnNbSBN1hAWoUx8FNUPmD1VV/efdFecmW76lA7vZvtXdcpEcBfqR
-   c=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: p+bwOS9yhAo0dKZ1+LmmyuytD6afidLE/c6n6GRnIcBSgmr0eDty1Gtj6MxTt4mjmczbooMOYP
- U8rfJeV3iX3LGukV840Cc9jx8pL50wshDUT/vR4nxdOdMCYbLVAWa8066eaRYUDU7k1WhQ3m2U
- Vb5TxY/FC4fFeJR7F1oB40hFd4ohKIziSaAhvJPZPjvW1FiFy1rSNEJEhd4BoXWMtXZQQTi/mx
- Zt9tJLlcB6Xfx/vz09iN1F0ae8yvRdQnQwJ8Qpo6/KP5xliDfdWxsWlsW3WIh+TnTn+txqSZvu
- +jk=
+  bh=SJRgavZh5UboqFIes1Vgd8L9o/aFp0WpSJ+Ons+P7bw=;
+  b=VJ+XdxhDljjq4eO4QmvqjbxS6JuTELmP9M433yE/rB9ZrmQT8UYelJug
+   isRTKaF5D1SX4t3QJGklg22yWPQ9ZyTZ09Yvj8Udk0zK1ngsZvJtKWFp9
+   80doVvdWnbGYSliXDz8y15BscDyES05ImsSU1K6z+VkdanKe/n9Q+/l4b
+   4=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: vJwJmHhGesYA1E5eg5NT9NMRm0hNc4DFSfh8WkGBNeByiHoRntitHyhtv7W48wl75fZNCSFR3B
+ l9eRQSWp4qQmrLqYrLWODTXN9UNTiUjDrEp7G0kq+sHrEWRc+ICtme/0/aUzmrfSgDIEz2rMLk
+ lUXlRYWLzIsS0rcb+lNOvTEZTm+srPwcMS1jXr2ZSvEWFy1KkNuqy72JYfcR3GpQ+EfCejWROa
+ r7n1y1Z7WeO62A8bLBkWM+tzoB0vu7Rvg0cL80hwuqN0PLvA/vBjziyx34mzBD28nm+4uWukyf
+ JHQ=
 X-SBRS: 5.1
-X-MesageID: 36523027
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 36319798
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,393,1602561600"; 
-   d="scan'208";a="36523027"
+   d="scan'208";a="36319798"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v9 07/11] tools/libxc: Add xc_vmtrace_* functions
-Date: Mon, 1 Feb 2021 23:26:59 +0000
-Message-ID: <20210201232703.29275-8-andrew.cooper3@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v9 04/11] xen/memory: Add a vmtrace_buf resource type
+Date: Mon, 1 Feb 2021 23:26:56 +0000
+Message-ID: <20210201232703.29275-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210201232703.29275-1-andrew.cooper3@citrix.com>
 References: <20210201232703.29275-1-andrew.cooper3@citrix.com>
@@ -88,256 +90,94 @@ Content-Transfer-Encoding: 8bit
 
 From: Michał Leszczyński <michal.leszczynski@cert.pl>
 
-Add functions in libxc that use the new XEN_DOMCTL_vmtrace interface.
+Allow to map processor trace buffer using acquire_resource().
 
 Signed-off-by: Michał Leszczyński <michal.leszczynski@cert.pl>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-CC: Ian Jackson <iwj@xenproject.org>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 CC: Michał Leszczyński <michal.leszczynski@cert.pl>
 CC: Tamas K Lengyel <tamas@tklengyel.com>
 
-v7:
- * Use the name 'vmtrace' consistently.
----
- tools/include/xenctrl.h      |  73 ++++++++++++++++++++++++
- tools/libs/ctrl/Makefile     |   1 +
- tools/libs/ctrl/xc_vmtrace.c | 128 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 202 insertions(+)
- create mode 100644 tools/libs/ctrl/xc_vmtrace.c
+v8:
+ * Rebase over 'fault' and ARM/IOREQ series.
 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 3796425e1e..0efcdae8b4 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -1583,6 +1583,79 @@ int xc_tbuf_set_cpu_mask(xc_interface *xch, xc_cpumap_t mask);
+v7:
+ * Rebase over changes elsewhere in the series
+---
+ xen/common/memory.c         | 29 +++++++++++++++++++++++++++++
+ xen/include/public/memory.h |  1 +
+ 2 files changed, 30 insertions(+)
+
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 128718b31c..fada97a79f 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1085,6 +1085,9 @@ static unsigned int resource_max_frames(const struct domain *d,
+     case XENMEM_resource_ioreq_server:
+         return ioreq_server_max_frames(d);
  
- int xc_tbuf_set_evt_mask(xc_interface *xch, uint32_t mask);
++    case XENMEM_resource_vmtrace_buf:
++        return d->vmtrace_size >> PAGE_SHIFT;
++
+     default:
+         return -EOPNOTSUPP;
+     }
+@@ -1125,6 +1128,29 @@ static int acquire_ioreq_server(struct domain *d,
+ #endif
+ }
  
-+/**
-+ * Enable vmtrace for given vCPU.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_enable(xc_interface *xch, uint32_t domid, uint32_t vcpu);
++static int acquire_vmtrace_buf(
++    struct domain *d, unsigned int id, unsigned int frame,
++    unsigned int nr_frames, xen_pfn_t mfn_list[])
++{
++    const struct vcpu *v = domain_vcpu(d, id);
++    unsigned int i;
++    mfn_t mfn;
 +
-+/**
-+ * Enable vmtrace for given vCPU.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_disable(xc_interface *xch, uint32_t domid, uint32_t vcpu);
++    if ( !v )
++        return -ENOENT;
 +
-+/**
-+ * Enable vmtrace for a given vCPU, along with resetting status/offset
-+ * details.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_reset_and_enable(xc_interface *xch, uint32_t domid,
-+                                uint32_t vcpu);
++    if ( !v->vmtrace.pg ||
++         (frame + nr_frames) > (d->vmtrace_size >> PAGE_SHIFT) )
++        return -EINVAL;
 +
-+/**
-+ * Get current output position inside the trace buffer.
-+ *
-+ * Repeated calls will return different values if tracing is enabled.  It is
-+ * platform specific what happens when the buffer fills completely.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @parm pos current output position in bytes
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_output_position(xc_interface *xch, uint32_t domid,
-+                               uint32_t vcpu, uint64_t *pos);
++    mfn = page_to_mfn(v->vmtrace.pg);
 +
-+/**
-+ * Get platform specific vmtrace options.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @parm key platform-specific input
-+ * @parm value platform-specific output
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_get_option(xc_interface *xch, uint32_t domid,
-+                          uint32_t vcpu, uint64_t key, uint64_t *value);
++    for ( i = 0; i < nr_frames; i++ )
++        mfn_list[i] = mfn_x(mfn) + frame + i;
 +
-+/**
-+ * Set platform specific vntvmtrace options.
-+ *
-+ * @parm xch a handle to an open hypervisor interface
-+ * @parm domid domain identifier
-+ * @parm vcpu vcpu identifier
-+ * @parm key platform-specific input
-+ * @parm value platform-specific input
-+ * @return 0 on success, -1 on failure
-+ */
-+int xc_vmtrace_set_option(xc_interface *xch, uint32_t domid,
-+                          uint32_t vcpu, uint64_t key, uint64_t value);
++    return nr_frames;
++}
 +
- int xc_domctl(xc_interface *xch, struct xen_domctl *domctl);
- int xc_sysctl(xc_interface *xch, struct xen_sysctl *sysctl);
+ /*
+  * Returns -errno on error, or positive in the range [1, nr_frames] on
+  * success.  Returning less than nr_frames contitutes a request for a
+@@ -1142,6 +1168,9 @@ static int _acquire_resource(
+     case XENMEM_resource_ioreq_server:
+         return acquire_ioreq_server(d, id, frame, nr_frames, mfn_list);
  
-diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
-index 6106e36c49..ce9ecae710 100644
---- a/tools/libs/ctrl/Makefile
-+++ b/tools/libs/ctrl/Makefile
-@@ -22,6 +22,7 @@ SRCS-y       += xc_pm.c
- SRCS-y       += xc_cpu_hotplug.c
- SRCS-y       += xc_resume.c
- SRCS-y       += xc_vm_event.c
-+SRCS-y       += xc_vmtrace.c
- SRCS-y       += xc_monitor.c
- SRCS-y       += xc_mem_paging.c
- SRCS-y       += xc_mem_access.c
-diff --git a/tools/libs/ctrl/xc_vmtrace.c b/tools/libs/ctrl/xc_vmtrace.c
-new file mode 100644
-index 0000000000..602502367f
---- /dev/null
-+++ b/tools/libs/ctrl/xc_vmtrace.c
-@@ -0,0 +1,128 @@
-+/******************************************************************************
-+ * xc_vmtrace.c
-+ *
-+ * API for manipulating hardware tracing features
-+ *
-+ * Copyright (c) 2020, Michal Leszczynski
-+ *
-+ * Copyright 2020 CERT Polska. All rights reserved.
-+ * Use is subject to license terms.
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ */
++    case XENMEM_resource_vmtrace_buf:
++        return acquire_vmtrace_buf(d, id, frame, nr_frames, mfn_list);
 +
-+#include "xc_private.h"
-+
-+int xc_vmtrace_enable(
-+    xc_interface *xch, uint32_t domid, uint32_t vcpu)
-+{
-+    struct xen_domctl domctl = {
-+        .cmd = XEN_DOMCTL_vmtrace_op,
-+        .domain = domid,
-+        .u.vmtrace_op = {
-+            .cmd = XEN_DOMCTL_vmtrace_enable,
-+            .vcpu = vcpu,
-+        },
-+    };
-+
-+    return do_domctl(xch, &domctl);
-+}
-+
-+int xc_vmtrace_disable(
-+    xc_interface *xch, uint32_t domid, uint32_t vcpu)
-+{
-+    struct xen_domctl domctl = {
-+        .cmd = XEN_DOMCTL_vmtrace_op,
-+        .domain = domid,
-+        .u.vmtrace_op = {
-+            .cmd = XEN_DOMCTL_vmtrace_disable,
-+            .vcpu = vcpu,
-+        },
-+    };
-+
-+    return do_domctl(xch, &domctl);
-+}
-+
-+int xc_vmtrace_reset_and_enable(
-+    xc_interface *xch, uint32_t domid, uint32_t vcpu)
-+{
-+    struct xen_domctl domctl = {
-+        .cmd = XEN_DOMCTL_vmtrace_op,
-+        .domain = domid,
-+        .u.vmtrace_op = {
-+            .cmd = XEN_DOMCTL_vmtrace_reset_and_enable,
-+            .vcpu = vcpu,
-+        },
-+    };
-+
-+    return do_domctl(xch, &domctl);
-+}
-+
-+int xc_vmtrace_output_position(
-+    xc_interface *xch, uint32_t domid, uint32_t vcpu, uint64_t *pos)
-+{
-+    struct xen_domctl domctl = {
-+        .cmd = XEN_DOMCTL_vmtrace_op,
-+        .domain = domid,
-+        .u.vmtrace_op = {
-+            .cmd = XEN_DOMCTL_vmtrace_output_position,
-+            .vcpu = vcpu,
-+        },
-+    };
-+    int rc = do_domctl(xch, &domctl);
-+
-+    if ( !rc )
-+        *pos = domctl.u.vmtrace_op.value;
-+
-+    return rc;
-+}
-+
-+int xc_vmtrace_get_option(
-+    xc_interface *xch, uint32_t domid, uint32_t vcpu,
-+    uint64_t key, uint64_t *value)
-+{
-+    struct xen_domctl domctl = {
-+        .cmd = XEN_DOMCTL_vmtrace_op,
-+        .domain = domid,
-+        .u.vmtrace_op = {
-+            .cmd = XEN_DOMCTL_vmtrace_get_option,
-+            .vcpu = vcpu,
-+            .key = key,
-+        },
-+    };
-+    int rc = do_domctl(xch, &domctl);
-+
-+    if ( !rc )
-+        *value = domctl.u.vmtrace_op.value;
-+
-+    return rc;
-+}
-+
-+int xc_vmtrace_set_option(
-+    xc_interface *xch, uint32_t domid, uint32_t vcpu,
-+    uint64_t key, uint64_t value)
-+{
-+    struct xen_domctl domctl = {
-+        .cmd = XEN_DOMCTL_vmtrace_op,
-+        .domain = domid,
-+        .u.vmtrace_op = {
-+            .cmd = XEN_DOMCTL_vmtrace_set_option,
-+            .vcpu = vcpu,
-+            .key = key,
-+            .value = value,
-+        },
-+    };
-+
-+    return do_domctl(xch, &domctl);
-+}
+     default:
+         return -EOPNOTSUPP;
+     }
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index 020c79d757..50e73eef98 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -625,6 +625,7 @@ struct xen_mem_acquire_resource {
+ 
+ #define XENMEM_resource_ioreq_server 0
+ #define XENMEM_resource_grant_table 1
++#define XENMEM_resource_vmtrace_buf 2
+ 
+     /*
+      * IN - a type-specific resource identifier, which must be zero
 -- 
 2.11.0
 
