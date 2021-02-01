@@ -2,42 +2,48 @@ Return-Path: <SRS0=1OSo=HD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41650C433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31987C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:53:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D20E264ECB
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:52:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D20E264ECB
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D5D8164ECC
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 23:53:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5D8164ECC
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.80222.146638 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.80223.146650 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6izk-00035E-ME; Mon, 01 Feb 2021 23:52:36 +0000
+	id 1l6j0L-0003EO-VR; Mon, 01 Feb 2021 23:53:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 80222.146638; Mon, 01 Feb 2021 23:52:36 +0000
+Received: by outflank-mailman (output) from mailman id 80223.146650; Mon, 01 Feb 2021 23:53:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6izk-000357-IP; Mon, 01 Feb 2021 23:52:36 +0000
-Received: by outflank-mailman (input) for mailman id 80222;
- Mon, 01 Feb 2021 23:52:34 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IWGu=HD=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l6izi-00033V-Os
- for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 23:52:34 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7098a47b-7da7-49cb-a644-40ccc243acb2;
- Mon, 01 Feb 2021 23:52:29 +0000 (UTC)
+	id 1l6j0L-0003EH-SK; Mon, 01 Feb 2021 23:53:13 +0000
+Received: by outflank-mailman (input) for mailman id 80223;
+ Mon, 01 Feb 2021 23:53:11 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l6j0J-0003E4-U0; Mon, 01 Feb 2021 23:53:11 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l6j0J-0005d0-N7; Mon, 01 Feb 2021 23:53:11 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l6j0J-0004Rc-FV; Mon, 01 Feb 2021 23:53:11 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1l6j0J-0000N6-F1; Mon, 01 Feb 2021 23:53:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,107 +55,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7098a47b-7da7-49cb-a644-40ccc243acb2
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612223549;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=FaRlj2zjPcVI+8D5Vii4wydz4lnh2fPaipEPLCTPTI0=;
-  b=SZjlb4NuwRAMCtg82JY9sAJv2tOki2WqnQUHWovDr2ooY3Ft0PTDOSQQ
-   COwLrqjkSslcangajo0ZfJ7X8p12lcrgYDl/2cxv1jw0AtKV1wpKOQ3YG
-   bte92Ap7myYnCkskdApBzthBgj1WPle0fv3ROrvZX4D6KKQCewtjyM3N8
-   4=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: VGG41gzWPGgR1D9d6Nqyc5pFf0yGaeZWBxJlOgIReLPjTnRPrebnQEN95TkhRZyBAujKjfDekZ
- YzR7jscQ4lQCpafFPq03Kf8N17oWuQskY9kytiNqWjA4Mao4Fufa4p6VULuaK/2I3XzMUB6l/Q
- +ozcBcfxVVjVIstbc/gqrhgmsQiWuZ92j5vJPITm10QwRJELJ1iDZlLUnKn6iZ518xad3Eh59P
- ttUhk37grwqnotT97cEkWRuYKGh60sNigdU/BnWUA15/8ZctB0k6yKTU514RXRbLuKPAqlkxwG
- DdE=
-X-SBRS: 5.1
-X-MesageID: 36320760
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.79,393,1602561600"; 
-   d="scan'208";a="36320760"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Tamas K Lengyel <tamas.lengyel@intel.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>, =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?=
-	<michal.leszczynski@cert.pl>, Tamas K Lengyel <tamas@tklengyel.com>
-Subject: [PATCH v9 10/11] x86/vm_event: Carry the vmtrace buffer position in vm_event
-Date: Mon, 1 Feb 2021 23:27:02 +0000
-Message-ID: <20210201232703.29275-11-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210201232703.29275-1-andrew.cooper3@citrix.com>
-References: <20210201232703.29275-1-andrew.cooper3@citrix.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=XQyRPeOhUekwhQ2ecBD1qGvEAjqcvxQhyIPHaIDGbrU=; b=rHhcXPkYIeHWnIS/w0A3oHtYbR
+	mW/iGdS3eZp+o0yIZF9SlPz1mDQr9uMBsvG36rBOerzI4lgIAMYJ6f4BhOcwDs1v+e8Y2M6Fqi1U8
+	iOSgTiwVhFxOCXaAE2O8K4OpCcdM2+CzETMtIeEFIMw0QCZVjL+oxOnhSlkc0homeNt0=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-158909-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 158909: regressions - trouble: blocked/fail
+X-Osstest-Failures:
+    xen-unstable-smoke:build-amd64:xen-build:fail:regression
+    xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
+    xen-unstable-smoke:build-armhf:xen-build:fail:regression
+    xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    xen=ffbb8aa282de262403275f2395d8540818cf576e
+X-Osstest-Versions-That:
+    xen=9dc687f155a57216b83b17f9cde55dd43e06b0cd
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 01 Feb 2021 23:53:11 +0000
 
-From: Tamas K Lengyel <tamas.lengyel@intel.com>
+flight 158909 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/158909/
 
-Add vmtrace_pos field to x86 regs in vm_event. Initialized to ~0 if
-vmtrace is not in use.
+Regressions :-(
 
-Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
-CC: Michał Leszczyński <michal.leszczynski@cert.pl>
-CC: Tamas K Lengyel <tamas@tklengyel.com>
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 158804
+ build-arm64-xsm               6 xen-build                fail REGR. vs. 158804
+ build-armhf                   6 xen-build                fail REGR. vs. 158804
 
-v8:
- * Use 'vmtrace' consistently.
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
 
-v7:
- * New
----
- xen/arch/x86/vm_event.c       | 3 +++
- xen/include/public/vm_event.h | 7 +++++++
- 2 files changed, 10 insertions(+)
+version targeted for testing:
+ xen                  ffbb8aa282de262403275f2395d8540818cf576e
+baseline version:
+ xen                  9dc687f155a57216b83b17f9cde55dd43e06b0cd
 
-diff --git a/xen/arch/x86/vm_event.c b/xen/arch/x86/vm_event.c
-index 848d69c1b0..36272e9316 100644
---- a/xen/arch/x86/vm_event.c
-+++ b/xen/arch/x86/vm_event.c
-@@ -251,6 +251,9 @@ void vm_event_fill_regs(vm_event_request_t *req)
- 
-     req->data.regs.x86.shadow_gs = ctxt.shadow_gs;
-     req->data.regs.x86.dr6 = ctxt.dr6;
-+
-+    if ( hvm_vmtrace_output_position(curr, &req->data.regs.x86.vmtrace_pos) != 1 )
-+        req->data.regs.x86.vmtrace_pos = ~0;
- #endif
- }
- 
-diff --git a/xen/include/public/vm_event.h b/xen/include/public/vm_event.h
-index 141ea024a3..147dc3ea73 100644
---- a/xen/include/public/vm_event.h
-+++ b/xen/include/public/vm_event.h
-@@ -223,6 +223,13 @@ struct vm_event_regs_x86 {
-      */
-     uint64_t npt_base;
- 
-+    /*
-+     * Current position in the vmtrace buffer, or ~0 if vmtrace is not active.
-+     *
-+     * For Intel Processor Trace, it is the upper half of MSR_RTIT_OUTPUT_MASK.
-+     */
-+    uint64_t vmtrace_pos;
-+
-     uint32_t cs_base;
-     uint32_t ss_base;
-     uint32_t ds_base;
--- 
-2.11.0
+Last test of basis   158804  2021-01-30 04:00:24 Z    2 days
+Failing since        158892  2021-02-01 16:00:25 Z    0 days    4 attempts
+Testing same since   158897  2021-02-01 19:02:25 Z    0 days    3 attempts
 
+------------------------------------------------------------
+People who touched revisions under test:
+  Ian Jackson <iwj@xenproject.org>
+  Manuel Bouyer <bouyer@netbsd.org>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              fail    
+ build-amd64                                                  fail    
+ build-armhf                                                  fail    
+ build-amd64-libvirt                                          blocked 
+ test-armhf-armhf-xl                                          blocked 
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit ffbb8aa282de262403275f2395d8540818cf576e
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Mon Feb 1 16:53:17 2021 +0100
+
+    xenstore: fix build on {Net/Free}BSD
+    
+    The endian.h header is in sys/ on NetBSD and FreeBSD.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Ian Jackson <iwj@xenproject.org>
+    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+
+commit 419cd07895891c6642f29085aee07be72413f08c
+Author: Ian Jackson <iwj@xenproject.org>
+Date:   Mon Feb 1 15:18:36 2021 +0000
+
+    xenpmd.c: Remove hard tab
+    
+    bbed98e7cedc "xenpmd.c: use dynamic allocation" had a hard tab.
+    I thought we had fixed that and I thought I had checked.
+    Remove it now.
+    
+    Signed-off-by: Ian Jackson <iwj@xenproject.org>
+
+commit bbed98e7cedcd5072671c21605330075740382d3
+Author: Manuel Bouyer <bouyer@netbsd.org>
+Date:   Sat Jan 30 19:27:10 2021 +0100
+
+    xenpmd.c: use dynamic allocation
+    
+    On NetBSD, d_name is larger than 256, so file_name[284] may not be large
+    enough (and gcc emits a format-truncation error).
+    Use asprintf() instead of snprintf() on a static on-stack buffer.
+    
+    Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
+    Reviewed-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+    
+    Plus
+    
+    define GNU_SOURCE for asprintf()
+    
+    Harmless on NetBSD.
+    
+    Signed-off-by: Manuel Bouyer <bouyer@netbsd.org>
+    Reviewed-by: Ian Jackson <ian.jackson@eu.citrix.com>
+    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+(qemu changes not included)
 
