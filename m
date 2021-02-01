@@ -2,44 +2,46 @@ Return-Path: <SRS0=1OSo=HD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EFB8C433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 15:30:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C16A1C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 15:34:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EE58C64D9E
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 15:30:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE58C64D9E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8084464EA2
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Feb 2021 15:34:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8084464EA2
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.79982.146005 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.79987.146016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6b9K-0007qG-IE; Mon, 01 Feb 2021 15:29:58 +0000
+	id 1l6bD9-0000Fw-2s; Mon, 01 Feb 2021 15:33:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 79982.146005; Mon, 01 Feb 2021 15:29:58 +0000
+Received: by outflank-mailman (output) from mailman id 79987.146016; Mon, 01 Feb 2021 15:33:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6b9K-0007q9-Es; Mon, 01 Feb 2021 15:29:58 +0000
-Received: by outflank-mailman (input) for mailman id 79982;
- Mon, 01 Feb 2021 15:29:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l6bD8-0000Fp-WB; Mon, 01 Feb 2021 15:33:54 +0000
+Received: by outflank-mailman (input) for mailman id 79987;
+ Mon, 01 Feb 2021 15:33:54 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4N3t=HD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l6b9J-0007px-5B
- for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 15:29:57 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b8d9ccc6-4a65-4e07-8520-3501842ef03e;
- Mon, 01 Feb 2021 15:29:56 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 7B248B14D;
- Mon,  1 Feb 2021 15:29:55 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1l6bD8-0000Fk-Fi
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 15:33:54 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l6bD8-0004mp-C8
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 15:33:54 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l6bD8-0006Yr-Ak
+ for xen-devel@lists.xenproject.org; Mon, 01 Feb 2021 15:33:54 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1l6bD5-0007qn-1G; Mon, 01 Feb 2021 15:33:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,62 +53,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8d9ccc6-4a65-4e07-8520-3501842ef03e
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1612193395; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=MQ68E43jyhkHfGMTsQG8E0vxVLN8gjNoABSisXJaxCo=;
-	b=GTTkoEG/IPXdgXwap0jXm1bPO5y3CafyIYzXDmouBE5JPkWiGa/wDZ9M9pbl7LVsKfN9Kz
-	M1vmWi1KZz3srJWdNEWjM9z+s9i6CDYI7YN7aoAnKWgMyzJnYEz9mahuxl9rr6FBRHo5Lb
-	rFOlLV4g1N8apj0QtQqig2ahvVH+LDk=
-Subject: Re: [PATCH] x86/build: correctly record dependencies of asm-offsets.s
- [and 1 more messages]
-To: Ian Jackson <iwj@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Julien Grall <julien@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-References: <b3b57f6b-3ed9-18f6-2a87-6af3304c6645@suse.com>
- <0cbbdb3a-5681-10df-aeee-ac185d7033cc@citrix.com>
- <24600.6974.503961.950273@mariner.uk.xensource.com>
- <aed2dfba-3b1c-7e54-7996-766b100375f9@suse.com>
- <24600.7722.256518.556806@mariner.uk.xensource.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6c09f5d9-22b3-07f6-3af3-ed76c6d15c75@suse.com>
-Date: Mon, 1 Feb 2021 16:29:54 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Subject:To:Date:Message-ID:
+	Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=nkBRSlzmBwKRZLlNLozRCLgU5gDK5KyhbACypTekpcM=; b=4ELd+8uSHu1bG/mw4nPVI/10+h
+	Byxu8SH75vNazZaF9K3Oaqf7fvWgJuY26AjP+eHyT+XbjWWqnxY2pWkb95BFyLgTw6cE/FcE0Be4N
+	7w1pVl5+QsVDKBkScv6dDy6eJAlB9Zx70CRCzmG15XcXUkkfkpluU0H0GwiANK7Alb0c=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <24600.7722.256518.556806@mariner.uk.xensource.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24600.8030.769396.165224@mariner.uk.xensource.com>
+Date: Mon, 1 Feb 2021 15:33:50 +0000
+To: committers@xenproject.org,
+    xen-devel@lists.xenproject.org
+Subject: [ANNOUNCE] Xen 4.15 release schedule - feature freeze now in effect
 
-On 01.02.2021 16:28, Ian Jackson wrote:
-> Jan Beulich writes ("Re: [PATCH] x86/build: correctly record dependencies of asm-offsets.s [and 1 more messages]"):
->> Oh, this used to be different on prior releases once we were
->> past the full freeze point. Are to intending to allow bug fixes
->> without release ack until the actual release (minus commit
->> moratorium periods, of course), or will this change at some
->> (un?)predictable point?
-> 
->>>    Friday 29th January    Feature freeze
->>>
->>>        Patches adding new features should be committed by this date.
->>>        Straightforward bugfixes may continue to be accepted by maintainers.
->>>
->>>    Friday 12th February **tentatve**   Code freeze
->>>
->>>        Bugfixes only, all changes to be approved by the Release Manager.
+Thanks everyone for your hard work so far.  We are now in feature
+freeze, as of the end of Friday.  No new features should be committed
+to xen.git#staging.
 
-Oh, looks like I forgot we have three freezes, not two.
+You may continue to commit straightforward bugfixes, docs changes, and
+new tests, without a release-ack.  Anything involving reorganisation
+or refactoring should get a release ack.  If in doubt please ask me
+and I will grant (or withhold) permission.
 
-> I will send a proper announcement.
+Codefreeze will occur on the 12th of February as planned.
 
-Thanks.
+  As a reminder, here is the release schedule:
+  (unchanged information indented with spaces):
 
-Jan
+   Friday 15th January    Last posting date
+
+       Patches adding new features should be posted to the mailing list
+       by this cate, although perhaps not in their final version.
+
+   Friday 29th January    Feature freeze
+
+       Patches adding new features should be committed by this date.
+       Straightforward bugfixes may continue to be accepted by
+       maintainers.
+
++  Friday 12th February   Code freeze
+
+       Bugfixes only, all changes to be approved by the Release Manager.
+
+   Week of 12th March **tentative**    Release
+       (probably Tuesday or Wednesday)
+
+  Any patches containing substantial refactoring are to treated as
+  new features, even if they intent is to fix bugs.
+
+  Freeze exceptions will not be routine, but may be granted in
+  exceptional cases for small changes on the basis of risk assessment.
+  Large series will not get exceptions.  Contributors *must not* rely on
+  getting, or expect, a freeze exception.
+
+  New or improved tests (supposing they do not involve refactoring,
+  even build system reorganisation), and documentation improvements,
+  will generally be treated as bugfixes.
+
+  The release dates is provisional and will be adjusted in the light
+  of apparent code quality etc.
+
+Thanks,
+Ian.
 
