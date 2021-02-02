@@ -2,46 +2,46 @@ Return-Path: <SRS0=EOea=HE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DC84C433E6
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Feb 2021 17:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 189CCC433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Feb 2021 17:57:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1BB9D64DCC
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Feb 2021 17:50:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1BB9D64DCC
+	by mail.kernel.org (Postfix) with ESMTPS id C001164ECE
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Feb 2021 17:57:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C001164ECE
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.80679.147730 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.80683.147745 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6zox-0001uN-Ik; Tue, 02 Feb 2021 17:50:35 +0000
+	id 1l6zvW-00026J-Bi; Tue, 02 Feb 2021 17:57:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 80679.147730; Tue, 02 Feb 2021 17:50:35 +0000
+Received: by outflank-mailman (output) from mailman id 80683.147745; Tue, 02 Feb 2021 17:57:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l6zox-0001uG-FB; Tue, 02 Feb 2021 17:50:35 +0000
-Received: by outflank-mailman (input) for mailman id 80679;
- Tue, 02 Feb 2021 17:50:33 +0000
+	id 1l6zvW-00026C-8W; Tue, 02 Feb 2021 17:57:22 +0000
+Received: by outflank-mailman (input) for mailman id 80683;
+ Tue, 02 Feb 2021 17:57:21 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1l6zov-0001uB-Nh
- for xen-devel@lists.xenproject.org; Tue, 02 Feb 2021 17:50:33 +0000
+ (envelope-from <paul@xen.org>) id 1l6zvV-000267-5h
+ for xen-devel@lists.xenproject.org; Tue, 02 Feb 2021 17:57:21 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l6zou-0002Vy-Na; Tue, 02 Feb 2021 17:50:32 +0000
-Received: from 54-240-197-231.amazon.com ([54.240.197.231]
- helo=a483e7b01a66.ant.amazon.com)
+ (envelope-from <paul@xen.org>)
+ id 1l6zvU-0002dh-MJ; Tue, 02 Feb 2021 17:57:20 +0000
+Received: from host86-190-149-163.range86-190.btcentralplus.com
+ ([86.190.149.163] helo=ubuntu.home)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l6zou-0005qx-HV; Tue, 02 Feb 2021 17:50:32 +0000
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <paul@xen.org>)
+ id 1l6zvU-0006HU-Ac; Tue, 02 Feb 2021 17:57:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,85 +54,160 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=lcy2N9XuXSWSqalYRLS1T/ccGfxxM6G/C6AQaaGTGwM=; b=UFiRPikbD1sqNmtUchdtO+inFo
-	UM3dLL8WkLKuk6oOfXYiNK9CrS1m5NQ4rX6w5GhKShb5U9AsDbDiU+sqI77fLqdWexEWVjineBQjr
-	Ee95YYckgzFMHfVUgfgxUMZ0UjXy2s3NbKl8Q7djWV4KfS/izXJ4yDvlMyIPxnBBVzH4=;
-Subject: Re: [PATCH v3 0/3] Generic SMMU Bindings
-To: Stefano Stabellini <sstabellini@kernel.org>,
- Rahul Singh <Rahul.Singh@arm.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>,
- "brian.woods@xilinx.com" <brian.woods@xilinx.com>
-References: <alpine.DEB.2.21.2101261435550.2568@sstabellini-ThinkPad-T480s>
- <C094E054-885F-4363-ABF3-E0FB4DDD7A2A@arm.com>
- <alpine.DEB.2.21.2102020937480.29047@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <7ddc6e1b-41ce-37ae-f86e-39893f53a0ec@xen.org>
-Date: Tue, 2 Feb 2021 17:50:29 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.0
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+	Message-Id:Date:Subject:Cc:To:From;
+	bh=U9LFyj567L8ODDmpt5H9dtpTYleJRBeis5xuYap+UEk=; b=IUMNPYDqTYI1m8BX1jWz/P2whH
+	oNjab1nTmbSWf0fqWGhwZLs6Uc9oaLgtwwALS9GMpNWg813Ba3WGqoY7+YjCijfTBCWYjCI1WyMsn
+	cso0MzQS3/uM9+n28VjVJBo9A0oF72aK2lv2qOP7xALJK5tiE97jvyjlF+mJbRox/L1U=;
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org,
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Paul Durrant <pdurrant@amazon.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Jens Axboe <axboe@kernel.dk>
+Subject: [PATCH v3] xen-blkback: fix compatibility bug with single page rings
+Date: Tue,  2 Feb 2021 17:56:59 +0000
+Message-Id: <20210202175659.18452-1-paul@xen.org>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2102020937480.29047@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+From: Paul Durrant <pdurrant@amazon.com>
 
-On 02/02/2021 17:44, Stefano Stabellini wrote:
-> On Tue, 2 Feb 2021, Rahul Singh wrote:
->> Hello Stefano,
->>
->>> On 26 Jan 2021, at 10:58 pm, Stefano Stabellini <sstabellini@kernel.org> wrote:
->>>
->>> Hi all,
->>>
->>> This series introduces support for the generic SMMU bindings to
->>> xen/drivers/passthrough/arm/smmu.c.
->>>
->>> The last version of the series was
->>> https://marc.info/?l=xen-devel&m=159539053406643
->>>
->>> I realize that it is late for 4.15 -- I think it is OK if this series
->>> goes in afterwards.
->>
->> I tested the series on the Juno board it is woking fine.
->> I found one issue in SMMU driver while testing this series that is not related to this series but already existing issue in SMMU driver.
->>
->> If there are more than one device behind SMMU and they share the same Stream-Id, SMMU driver is creating the new SMR entry without checking the already configured SMR entry if SMR entry correspond to stream-id is already configured.  Because of this I observed the stream match conflicts on Juno board.
->>
->> (XEN) smmu: /iommu@7fb30000: Unexpected global fault, this could be serious
->> (XEN) smmu: /iommu@7fb30000: 	GFSR 0x00000004, GFSYNR0 0x00000006, GFSYNR1 0x00000000, GFSYNR2 0x00000000
->>
->>
->> Below two patches is required to be ported to Xen to fix the issue from Linux driver.
->>
->> https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/drivers/iommu/arm-smmu.c?h=linux-5.8.y&id=1f3d5ca43019bff1105838712d55be087d93c0da
->> https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/drivers/iommu/arm-smmu.c?h=linux-5.8.y&id=21174240e4f4439bb8ed6c116cdbdc03eba2126e
-> 
-> 
-> Good catch and thanks for the pointers! Do you have any interest in
-> backporting these two patches or should I put them on my TODO list?
-> 
-> Unrelated to who does the job, we should discuss if it makes sense to
-> try to fix the bug for 4.15. The patches don't seem trivial so I am
-> tempted to say that it might be best to leave the bug unfixed for 4.15
-> and fix it later.
+Prior to commit 4a8c31a1c6f5 ("xen/blkback: rework connect_ring() to avoid
+inconsistent xenstore 'ring-page-order' set by malicious blkfront"), the
+behaviour of xen-blkback when connecting to a frontend was:
 
-SMMU support on Juno is not that interesting because IIRC the stream-ID 
-is the same for all the devices. So it is all or nothing passthrough.
+- read 'ring-page-order'
+- if not present then expect a single page ring specified by 'ring-ref'
+- else expect a ring specified by 'ring-refX' where X is between 0 and
+  1 << ring-page-order
 
-For other HW, this may be a useful feature. Yet we would need a way to 
-group the devices for passthrough.
+This was correct behaviour, but was broken by the afforementioned commit to
+become:
 
-In this context, I would consider it more a feature than a bug because 
-the SMMU driver never remotely work on such HW.
+- read 'ring-page-order'
+- if not present then expect a single page ring (i.e. ring-page-order = 0)
+- expect a ring specified by 'ring-refX' where X is between 0 and
+  1 << ring-page-order
+- if that didn't work then see if there's a single page ring specified by
+  'ring-ref'
 
-Cheers,
+This incorrect behaviour works most of the time but fails when a frontend
+that sets 'ring-page-order' is unloaded and replaced by one that does not
+because, instead of reading 'ring-ref', xen-blkback will read the stale
+'ring-ref0' left around by the previous frontend will try to map the wrong
+grant reference.
 
+This patch restores the original behaviour.
+
+Fixes: 4a8c31a1c6f5 ("xen/blkback: rework connect_ring() to avoid inconsistent xenstore 'ring-page-order' set by malicious blkfront")
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Reviewed-by: Dongli Zhang <dongli.zhang@oracle.com>
+Reviewed-by: "Roger Pau Monné" <roger.pau@citrix.com>
+---
+Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Jens Axboe <axboe@kernel.dk>
+
+v3:
+ - Whitespace fix
+
+v2:
+ - Remove now-spurious error path special-case when nr_grefs == 1
+---
+ drivers/block/xen-blkback/common.h |  1 +
+ drivers/block/xen-blkback/xenbus.c | 38 +++++++++++++-----------------
+ 2 files changed, 17 insertions(+), 22 deletions(-)
+
+diff --git a/drivers/block/xen-blkback/common.h b/drivers/block/xen-blkback/common.h
+index b0c71d3a81a0..bda5c815e441 100644
+--- a/drivers/block/xen-blkback/common.h
++++ b/drivers/block/xen-blkback/common.h
+@@ -313,6 +313,7 @@ struct xen_blkif {
+ 
+ 	struct work_struct	free_work;
+ 	unsigned int 		nr_ring_pages;
++	bool			multi_ref;
+ 	/* All rings for this device. */
+ 	struct xen_blkif_ring	*rings;
+ 	unsigned int		nr_rings;
+diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
+index 9860d4842f36..6c5e9373e91c 100644
+--- a/drivers/block/xen-blkback/xenbus.c
++++ b/drivers/block/xen-blkback/xenbus.c
+@@ -998,14 +998,17 @@ static int read_per_ring_refs(struct xen_blkif_ring *ring, const char *dir)
+ 	for (i = 0; i < nr_grefs; i++) {
+ 		char ring_ref_name[RINGREF_NAME_LEN];
+ 
+-		snprintf(ring_ref_name, RINGREF_NAME_LEN, "ring-ref%u", i);
++		if (blkif->multi_ref)
++			snprintf(ring_ref_name, RINGREF_NAME_LEN, "ring-ref%u", i);
++		else {
++			WARN_ON(i != 0);
++			snprintf(ring_ref_name, RINGREF_NAME_LEN, "ring-ref");
++		}
++
+ 		err = xenbus_scanf(XBT_NIL, dir, ring_ref_name,
+ 				   "%u", &ring_ref[i]);
+ 
+ 		if (err != 1) {
+-			if (nr_grefs == 1)
+-				break;
+-
+ 			err = -EINVAL;
+ 			xenbus_dev_fatal(dev, err, "reading %s/%s",
+ 					 dir, ring_ref_name);
+@@ -1013,18 +1016,6 @@ static int read_per_ring_refs(struct xen_blkif_ring *ring, const char *dir)
+ 		}
+ 	}
+ 
+-	if (err != 1) {
+-		WARN_ON(nr_grefs != 1);
+-
+-		err = xenbus_scanf(XBT_NIL, dir, "ring-ref", "%u",
+-				   &ring_ref[0]);
+-		if (err != 1) {
+-			err = -EINVAL;
+-			xenbus_dev_fatal(dev, err, "reading %s/ring-ref", dir);
+-			return err;
+-		}
+-	}
+-
+ 	err = -ENOMEM;
+ 	for (i = 0; i < nr_grefs * XEN_BLKIF_REQS_PER_PAGE; i++) {
+ 		req = kzalloc(sizeof(*req), GFP_KERNEL);
+@@ -1129,10 +1120,15 @@ static int connect_ring(struct backend_info *be)
+ 		 blkif->nr_rings, blkif->blk_protocol, protocol,
+ 		 blkif->vbd.feature_gnt_persistent ? "persistent grants" : "");
+ 
+-	ring_page_order = xenbus_read_unsigned(dev->otherend,
+-					       "ring-page-order", 0);
+-
+-	if (ring_page_order > xen_blkif_max_ring_order) {
++	err = xenbus_scanf(XBT_NIL, dev->otherend, "ring-page-order", "%u",
++			   &ring_page_order);
++	if (err != 1) {
++		blkif->nr_ring_pages = 1;
++		blkif->multi_ref = false;
++	} else if (ring_page_order <= xen_blkif_max_ring_order) {
++		blkif->nr_ring_pages = 1 << ring_page_order;
++		blkif->multi_ref = true;
++	} else {
+ 		err = -EINVAL;
+ 		xenbus_dev_fatal(dev, err,
+ 				 "requested ring page order %d exceed max:%d",
+@@ -1141,8 +1137,6 @@ static int connect_ring(struct backend_info *be)
+ 		return err;
+ 	}
+ 
+-	blkif->nr_ring_pages = 1 << ring_page_order;
+-
+ 	if (blkif->nr_rings == 1)
+ 		return read_per_ring_refs(&blkif->rings[0], dev->otherend);
+ 	else {
 -- 
-Julien Grall
+2.17.1
+
 
