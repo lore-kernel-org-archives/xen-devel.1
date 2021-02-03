@@ -2,42 +2,42 @@ Return-Path: <SRS0=08Yz=HF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75B23C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 17:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D9FFC433E6
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 17:36:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E91B964E34
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 17:27:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E91B964E34
+	by mail.kernel.org (Postfix) with ESMTPS id AA00E64F87
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 17:36:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA00E64F87
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.80990.148781 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.80997.148794 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7LwN-0007NS-Sz; Wed, 03 Feb 2021 17:27:43 +0000
+	id 1l7M4Y-0008UR-Qz; Wed, 03 Feb 2021 17:36:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 80990.148781; Wed, 03 Feb 2021 17:27:43 +0000
+Received: by outflank-mailman (output) from mailman id 80997.148794; Wed, 03 Feb 2021 17:36:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7LwN-0007NL-Pu; Wed, 03 Feb 2021 17:27:43 +0000
-Received: by outflank-mailman (input) for mailman id 80990;
- Wed, 03 Feb 2021 17:27:43 +0000
+	id 1l7M4Y-0008UK-Nw; Wed, 03 Feb 2021 17:36:10 +0000
+Received: by outflank-mailman (input) for mailman id 80997;
+ Wed, 03 Feb 2021 17:36:09 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c0lb=HF=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l7LwN-0007NF-3k
- for xen-devel@lists.xenproject.org; Wed, 03 Feb 2021 17:27:43 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ id 1l7M4X-0008Tu-Jr
+ for xen-devel@lists.xenproject.org; Wed, 03 Feb 2021 17:36:09 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 649045c1-783e-4110-a551-7e53b0df63d7;
- Wed, 03 Feb 2021 17:27:41 +0000 (UTC)
+ id 58c0bd68-f56d-4cab-82e4-e7127bb1aace;
+ Wed, 03 Feb 2021 17:36:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,143 +49,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 649045c1-783e-4110-a551-7e53b0df63d7
+X-Inumbo-ID: 58c0bd68-f56d-4cab-82e4-e7127bb1aace
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612373261;
-  h=subject:to:cc:references:from:message-id:date:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=NjYpEzNQazpJGj4a3dfpfbot4Kja9+8s7lhf+XKS/zY=;
-  b=cXuNMZF75TYNbLQZys17ZnCpE6t9iaMLLGP3NroL2Gf1Kr1FBIMVg6q9
-   dJF8JRA0UEhZ1AAXU4kJ96SJomquXZD3szJpukjXb9h1ULycmDuZ6QRFY
-   2eB+jnVie+gLQkuUsYVSjinXz5E9GPYNAlSRHChBAPO3Mf/KixGuaiX90
-   c=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: uQqKJc+TQayzNJHo8/PCrIwLEsdjrYb/PfC6PZA9BUNiw1x5/GCiSlo7KmvQNaFKMNuRboZwvS
- mfGpl5KkMyjCHJoVIlrtE0QIJG9eFa50i1CXrXf71zfedKBAbkUe3FtVG5wESUzKMQUTnZqKJI
- uufGXDVBJGvLyD4TG2Wvo9y1m2CTXc9OBWAdvBnzph37m1rA5n522JUBrnPHqATFTQ7ODiQJ/E
- xTj5zL7RFuUnTMYXnTFWk6kw20S3bCZ9NIt6CBEP6SiWbbOC2ABTJ5Ysjk29iiEdvhh2ywUwpy
- Ajg=
-X-SBRS: 5.2
-X-MesageID: 36482864
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
+  d=citrix.com; s=securemail; t=1612373767;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=889AXvG19V0DSakGW3KQHUHk1PEmlP7uNjR4YWM4jWA=;
+  b=JPJkjgP1C0rWovARN0J3PoSLv3GHDmwG3eoFZ3pVgZiPhNTFqa4w3L7P
+   C6nAFHSxvNHJASwj2WkWLYsd99tFF5JMa9EofSurPvGwKbTwVLna2npQI
+   Gj4bJXjW2fWV4V/CPS4SsE/I9KKdLMydRk7Cgm7OhfsRrLaLkVagZ6f9q
+   0=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: GHlpCchcGiZaGyMFSLcqrjrMkMAx7YnISs1C2/f8fe3gDyooaOdOelMf6aFFDzwG8iadmKZNs8
+ edjC4SEnD/fIPDmb6pWVjnHXl9bwREqYnNI3ghAepI7EHHhVlueIX9LlvooRxXZOo8Yz8+pNOF
+ WlD4C1aRO0OaOl6X+tWv6tUdQ9UM8DHrt9zsgphtpUa0KYYImq6jFrsmmZ2pOwJoZPebOwU6sw
+ nqqrc51lUpiQJ9nc/N0a7a5DshMrEWJ2lm4ekDbFu8zN7wRRanPskcnx6alPgLCrIoqqcE1z1R
+ Nrk=
+X-SBRS: 4.0
+X-MesageID: 36863742
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.79,399,1602561600"; 
-   d="scan'208";a="36482864"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SEDqIKplDlH+FvFgVMaU5pVF/Yb4uVIUjwX5+zBuIvvtN3m42xCrT1BN5Ws4JTR0KWfKUDhZ7UrRw3+jir8y+3WoF1u9TVgZPoz5KvXG3FM6fw5lYzcWcFtICRg562cAaIOTk+Nv8qtPuhVMEZXY8Vj2t4y+YOYy/71j+iz/RwJDLEWoVYk4jqfcPOxgag4lYV4eXQTVSTbsdjsxGcHteP6Q6Bfl0zEbR3Rk+Y6twby2ZgXOqCthQu3aPdX9s1qTklreyvPJnOxqWBd5ob3TkIcdB8LV12b4AfHyxvx65n7nxLiK+ceVX50CcbxoFIRlEuORccBumO7ZSj3kfs4XqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4EkyiE2hrhjR80MlJZncWxzBHVWtp46zqd3s+A0L+Y0=;
- b=NNiLHwqGjEZ4RWcy0hOvwFKGnwWJ4aysePF/hwTXJe+61m3rYJvjwPtt509zkT/bGD+S10SJCOm0PU/3P0lT/F+rjCvSni2PSFcObAG8RtKEzZq9p65p4dgHYjzVeL+fndUQi2S6sta5VXw11mmnvEgKoY38aCiORWrdPMI4Ge7MvXGee3X97QwL3s87z/K5dx2dKUV6NnyGcps3JqZksk+lTENBJ07mFqWv5Ffd97FzPc1DNPlf+o8ZIj8kQs+NupxX8hd94KBqZ9k3s40CbOzDe+1CYpDOEFYh4njoJtdrHXQAg144xnuQdvaOPH+iH53me3naGy42BJSBtO1Qzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4EkyiE2hrhjR80MlJZncWxzBHVWtp46zqd3s+A0L+Y0=;
- b=X/LvIBLRUNRivrZvLH78f0jzh9ElMW072tZoqAyVA6J22ERbuQ7hd8iOhWhMxP8RO87Hf4J94uediMo5BAS+8j+Fa4pE3UsottMKCt3TsGSZ+XF7/vXeo2F5HKiJXVbn+VXyghzdpVmriUEWSah+iy42jCkyq/O3kdg+ps8c6wg=
-Subject: Re: [PATCH for-4.15 2/2] libs/foreignmem: Fix/simplify errno handling
- for map_resource
-To: Ian Jackson <iwj@xenproject.org>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Manuel Bouyer
-	<bouyer@netbsd.org>
-References: <20210203163750.7564-1-andrew.cooper3@citrix.com>
- <20210203163750.7564-2-andrew.cooper3@citrix.com>
- <24602.56036.522316.35851@mariner.uk.xensource.com>
+   d="scan'208";a="36863742"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <2a895f2c-76ec-4636-9a99-20ad3522936e@citrix.com>
-Date: Wed, 3 Feb 2021 17:27:01 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
-In-Reply-To: <24602.56036.522316.35851@mariner.uk.xensource.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
-X-ClientProxiedBy: LNXP265CA0033.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:5c::21) To BYAPR03MB4728.namprd03.prod.outlook.com
- (2603:10b6:a03:13a::24)
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, Ian Jackson <iwj@xenproject.org>, "Wei
+ Liu" <wl@xen.org>
+Subject: [PATCH 1/3] tools/oxenstored: Fix quota calculation for mkdir EEXIST
+Date: Wed, 3 Feb 2021 17:35:47 +0000
+Message-ID: <20210203173549.21159-2-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210203173549.21159-1-andrew.cooper3@citrix.com>
+References: <20210203173549.21159-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b2ea18bb-d9ba-4bd9-ace3-08d8c868ee73
-X-MS-TrafficTypeDiagnostic: BY5PR03MB5061:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BY5PR03MB5061383ABD49641EFC9141B1BAB49@BY5PR03MB5061.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: oeI2bV97lg5CAuBXflePzHz2Keygzc4RLzsLsEqKpaTDeXqFozY8KS09NLG9BqM6T4wfB1wVxcS9jJg31DWUOYrlvcKMsHdoi4MHD+gavc/hVWQqHjOP6x4Kf+VZ4fBPZHJSXEqlV+L9Td8fePk1ANVRdf2HW0pGCs1ZTWhNfKMlXb2359vA+fNDIYx4eWuW9ImNqH2LsfHWVGBwu8h/ITEa2leE45EyVPiuW3FLPueGyez+PwdJCMA/4jKkGPir/Tx/mhuLcvMEuuYnQy3z0jvTS7/oFrRSrQ4TmsbOJxiS9TlM+q3SMg7WojhOW9FzUBGtwaawhkaLaY3XjHlI12FLOEzUWq+RY2abMrKVxjZ5eJHmrEJyK8TkxDxD9BhpUZZ9s7H/+yZugvN+5tJN1rUsLWCkGF44QhqUIR+tB9PCXENESQbN1xJoLGrtJit3yq4OOW2Ve9z2Mw/IPAPZd8sM1c9Dd1Az5vC1BNfF9msAmFXXVm2RFu4a23fsqIrICAekw9Halg9aeZG8H2+c0VrbH2gYYcePa89m21SEGXur6KddHU0csq9hfvthRGmLqT6dHlvSVPvF+/nmJyU2gFttM15eC/kbecIRYX992uk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB4728.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(376002)(346002)(366004)(136003)(396003)(6666004)(316002)(54906003)(36756003)(31686004)(16526019)(26005)(2906002)(8936002)(83380400001)(6486002)(8676002)(16576012)(5660300002)(31696002)(86362001)(478600001)(6916009)(53546011)(4326008)(956004)(66476007)(66556008)(186003)(2616005)(66946007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?YTdjMWdGWmU1djBHeXZjWXdiNGw5UWx4dG1ReFZRZFNyV002dlpPakEraHNS?=
- =?utf-8?B?N2JnWmEvek9tS3d4VHVlS3VLUlYvM2cwMFZ3anFrQXZYWmYxN2NTOE5WRmFJ?=
- =?utf-8?B?SllUQk5oMHYrbzZzVko0cE1BYUpBb2F2OEJrYjlVOHVRZHZ0VlZkN3VxMVhm?=
- =?utf-8?B?R1J6NWNOeXYxK2JJOC90L002RzFIWFNGL0VOSXZoU1hyN3NiczJmelN0bnV6?=
- =?utf-8?B?azk5UHRVL0FTTW4zSnNFNkRzWE1OMVFDckU3bE5EcGYxbXhrSmdKUUFWN0p5?=
- =?utf-8?B?bTNMRzNjVVh3SndvcTYyeFdVbFNaUVpZS0RhRHM5YktoT2tjU3QvK1JSRWpn?=
- =?utf-8?B?WS9xaWNtOXpPV0svUWU5RmVOeVM5R0lWcEl3RDkyRHBmVnZZNVZFdG0yUFRI?=
- =?utf-8?B?OU8xeWpzNTQ2SVl5azVkMUhwOGNGckVKV3RWN2sxY0pXMUowSjRsd2x3VFo0?=
- =?utf-8?B?bzduNGtaTjRucVdVUjVFb1lsbHhYNGFWd3lhTDZVSDFxcTVQTTIydDk1WWlY?=
- =?utf-8?B?M1FpMXRrN3BSZ1FKYWo0V1BMTmx4U0sxazBtOVdZRXNxeTVxRHRuT1ZUZzF3?=
- =?utf-8?B?TmVrWWlwNmlLaWhpVFVGM1ZSdlpYUWVOWnJ5bFpwc2t6bUVvb1p1ZkVXS0FP?=
- =?utf-8?B?T1Y2MkFsVGw4MWhjVVlOdWF3aEMyODlJSjdUUkVoZGFPTkVHTjlKQmMzNHUr?=
- =?utf-8?B?aFZ2U09ySGl1bnBTYlB1T3FiaGVSOE56YWhqT3NqOFkzWWFJQmxmMTJTOEY1?=
- =?utf-8?B?Q3FWc0w0eDlCbEtQMTVmNXhtNnpmTFU0N0hRS05jdFVLNVl5T1hxUWZ2czI4?=
- =?utf-8?B?cDZSNXdLNHBFWlR2VEhQOHIvTUU5b0ozWXN0Qk1BZVcrcDNSTnJQZUcxTDBz?=
- =?utf-8?B?ZzVHdllNbHZYaGJYMUp5R1MwNXlIbi9BQlRMYk04SkEyWk5PYzhyUFdyZVRZ?=
- =?utf-8?B?azYrYjVSdkdXQmMzcEdGQTB0b25vd0plZHZrLzdXZ3Nqa3gxR2o5WEhmVHpp?=
- =?utf-8?B?U05kTjdHdHpqODA2eCtxblBwSnhNVUxuZkoyRHM0eU56RllDK1BXVXJoM0py?=
- =?utf-8?B?OGxtcDVCWTZwYzltZVNwUUw4VitaN3FTRklKR3k5VkREZEFXeUdaUW85VGtK?=
- =?utf-8?B?UHFHMExuRC9iN0JxWEZvQjRaRFFmVHFEWmZGS3VFeDQ2eWRPdzNPRGpPemVz?=
- =?utf-8?B?NElsRUk5ckhCOVVwbmViR2lsYUE3RFZIV0g0NXAyamhWQ01YUEc1eEg0M3Bk?=
- =?utf-8?B?eWxxSEFLMDVJRXk1bkhvMFZEY0ExcTZhS0hVZWxTczVsQ05adVh5VjBOREcx?=
- =?utf-8?B?M0JxbkY0eDBJUUhFZEh3cVNTQVc1emJDQkptb2MxRUI1K1hHTFpGMzNGakdR?=
- =?utf-8?B?WEpBV1FodU1zSnJ5YTdhYlZnUUEwNjQ4Q2tYWVJyUWRTWjZzWDlmUUgzeXAx?=
- =?utf-8?Q?BJDVw2Ow?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: b2ea18bb-d9ba-4bd9-ace3-08d8c868ee73
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB4728.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2021 17:27:07.6996
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Cd6wZUx+o/h6E5RYoMxNbaIN/jj60DRIQf5K/ACTDWmlF+PAUVDSg1bhh+5PytwMUD+SEER3cxvzXCI1/jHbpxIBX4iFp6TfU2O2retFJbA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5061
-X-OriginatorOrg: citrix.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On 03/02/2021 17:18, Ian Jackson wrote:
-> Andrew Cooper writes ("[PATCH for-4.15 2/2] libs/foreignmem: Fix/simplify errno handling for map_resource"):
->> Simplify the FreeBSD logic, and duplicate it for NetBSD as the userpace ABI
->> appears to be to consistently provide EOPNOTSUPP for missing Xen/Kernel
->> support.
->>
->> The Linux logic was contorted in what appears to be a deliberate attempt to
->> skip the now-deleted logic for the EOPNOTSUPP case.  Simplify it.
-> AFAICT this is a mixture of cleanup/refactoring, and bugfix.  Is that
-> correct ?
->
->> diff --git a/tools/libs/foreignmemory/netbsd.c b/tools/libs/foreignmemory/netbsd.c
->> index 565682e064..c0b1b8f79d 100644
->> --- a/tools/libs/foreignmemory/netbsd.c
->> +++ b/tools/libs/foreignmemory/netbsd.c
->> @@ -147,6 +147,9 @@ int osdep_xenforeignmemory_map_resource(
->>      rc = ioctl(fmem->fd, IOCTL_PRIVCMD_MMAP_RESOURCE, &mr);
->>      if ( rc )
->>      {
->> +        if ( errno == ENOSYS )
->> +            errno = EOPNOTSUPP;
->> +
->>          if ( fres->addr )
->>          {
->>              int saved_errno = errno;
-> Specifically, I guess this is the bugfix ?
+From: Edwin Török <edvin.torok@citrix.com>
 
-It is a bugfix on NetBSD (for brand new functionality), and cleanup on
-FreeBSD/Linux specifically split out of the previous patch.
+We increment the domain's quota on mkdir even when the node already exists.
+This results in a quota inconsistency after live update, where reconstructing
+the tree from scratch results in a different quota.
 
-~Andrew
+Not a security issue because the domain uses up quota faster, so it will only
+get a Quota error sooner than it should.
+
+Found by the structured fuzzer.
+
+Signed-off-by: Edwin Török <edvin.torok@citrix.com>
+---
+CC: Christian Lindig <christian.lindig@citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+---
+ tools/ocaml/xenstored/store.ml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/ocaml/xenstored/store.ml b/tools/ocaml/xenstored/store.ml
+index 1bd0c81f6f..20e67b1427 100644
+--- a/tools/ocaml/xenstored/store.ml
++++ b/tools/ocaml/xenstored/store.ml
+@@ -419,6 +419,7 @@ let mkdir store perm path =
+ 	(* It's upt to the mkdir logic to decide what to do with existing path *)
+ 	if not (existing || (Perms.Connection.is_dom0 perm)) then Quota.check store.quota owner 0;
+ 	store.root <- path_mkdir store perm path;
++	if not existing then
+ 	Quota.add_entry store.quota owner
+ 
+ let rm store perm path =
+-- 
+2.11.0
+
 
