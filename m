@@ -2,43 +2,48 @@ Return-Path: <SRS0=08Yz=HF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D509DC433DB
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 22:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2F13C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 23:38:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 64EA964F4C
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 22:53:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 64EA964F4C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7D01964F43
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Feb 2021 23:38:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D01964F43
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.81082.149162 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.81091.149180 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7R18-0001X5-LT; Wed, 03 Feb 2021 22:52:58 +0000
+	id 1l7RiX-0005tu-3P; Wed, 03 Feb 2021 23:37:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 81082.149162; Wed, 03 Feb 2021 22:52:58 +0000
+Received: by outflank-mailman (output) from mailman id 81091.149180; Wed, 03 Feb 2021 23:37:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7R18-0001Wy-IW; Wed, 03 Feb 2021 22:52:58 +0000
-Received: by outflank-mailman (input) for mailman id 81082;
- Wed, 03 Feb 2021 22:52:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JooJ=HF=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
- id 1l7R17-0001Wt-BO
- for xen-devel@lists.xenproject.org; Wed, 03 Feb 2021 22:52:57 +0000
-Received: from mail-ej1-x630.google.com (unknown [2a00:1450:4864:20::630])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9fbccfa8-004a-47c0-a63a-435a22cef54f;
- Wed, 03 Feb 2021 22:52:56 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id i8so1789124ejc.7
- for <xen-devel@lists.xenproject.org>; Wed, 03 Feb 2021 14:52:56 -0800 (PST)
+	id 1l7RiX-0005tn-0A; Wed, 03 Feb 2021 23:37:49 +0000
+Received: by outflank-mailman (input) for mailman id 81091;
+ Wed, 03 Feb 2021 23:37:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7RiU-0005tf-S6; Wed, 03 Feb 2021 23:37:46 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7RiU-0002cv-L6; Wed, 03 Feb 2021 23:37:46 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7RiU-0006ZL-DL; Wed, 03 Feb 2021 23:37:46 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7RiU-0005BM-Ct; Wed, 03 Feb 2021 23:37:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,136 +55,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9fbccfa8-004a-47c0-a63a-435a22cef54f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=1zQdBrKtgGLyifz0oCElzsKWKMiI4DTiGlD3rvY/pxE=;
-        b=B5m0jCQ2E+yFUzruzcZ4MXywRVfHVhQ/IYPCZslNwqu/8UKRc/32nODVf2T7BLMbtE
-         3ffIdPLp61Jp4TvvV8YZMxxmX5MUrh19vVDRU1UcDl6bbTH42M28i+UF6zO9yWbHee5p
-         RG0uOSiV/2zq1K9aaToFINxnKHJpZ/Q64Xx9JQFeoYiSvUQfHFBGnn0/J8N/N4osk/X7
-         DB3xfcKVOryolYmvLgcC6YUtyPuXCrC/bN1N/Wj9jqBj1STMzI+DXypdGE/iwF44TtVX
-         lzfQOiZJEiXMzZLFlUKLkA4yYgzs/RWj0uB0Tse4f9VedmnCoqMPrpIpDQaJCfiy7yIO
-         hpbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=1zQdBrKtgGLyifz0oCElzsKWKMiI4DTiGlD3rvY/pxE=;
-        b=BilX6usGwCiYhnVUOAcgpuNbd9x1/ys9k509g07H1lCDf5j4hvUp03QsnvOeDvZQiO
-         KsP6ZURjXKusdrzrP2x4ZjTN94CXLEt33bvQOpaKU8nAyFoxZL5DiMhmjfQxdHVlr8OM
-         c0lbWVzKP2AAhhowajKBZDl59ZFoXmpIB0VJ7G30pZ6Q9I5i0U7GrOZlZgWrbIb90kCn
-         O5Zsj36wKBhkD7SEAOdbVuL4XikC88TNONepCNCrVi4UHsgDSF4e3cBukm4CGxURBVl/
-         1x8sxQI0ZYmQA+n+XZd1S2eSXDINtdQOanvPNJXSe6QX1rn2umrBw7lFR1FugHsfY3DU
-         Uq7g==
-X-Gm-Message-State: AOAM533RpvyM3kXpE0y+1Z3s8ZvKgHcrr4Elirmmlnc7OsQqhaqsmjQp
-	Z0vyDtIU+1q2MvdKISKvPR3bXRAxwRzpmlINKOw=
-X-Google-Smtp-Source: ABdhPJxARiiNuXKrEI4iixbIZqWqrkxh69QtI8L9ODVCc1DVaKnoTNyIPQpCeTfY2EQkb2qmzw7HwYL+zVsGhtdGtGY=
-X-Received: by 2002:a17:906:296a:: with SMTP id x10mr5341214ejd.240.1612392775402;
- Wed, 03 Feb 2021 14:52:55 -0800 (PST)
-MIME-Version: 1.0
-References: <YBmQQ3Tzu++AadKx@mattapan.m5p.com> <a422c04c-f908-6fb6-f2de-fea7b18a6e7d@xen.org>
- <b6d342f8-c833-db88-9808-cdc946999300@xen.org> <alpine.DEB.2.21.2102021412480.29047@sstabellini-ThinkPad-T480s>
- <06d6b9ec-0db9-d6da-e30b-df9f9381157d@xen.org> <alpine.DEB.2.21.2102031315350.29047@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2102031315350.29047@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien.grall.oss@gmail.com>
-Date: Wed, 3 Feb 2021 22:52:44 +0000
-Message-ID: <CAJ=z9a1LsqOMFXV5GLYEkF7=akMx7fT_vpgVtT6xP6MPfmP9vQ@mail.gmail.com>
-Subject: Re: [PATCH] xen/arm: domain_build: Ignore device nodes with invalid addresses
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Elliott Mitchell <ehem+xen@m5p.com>, xen-devel <xen-devel@lists.xenproject.org>, 
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=34/HTxSiS/AOgVfwITJWRivivy0Ry+KGYIUGnuXz/Ao=; b=06uBXcVsxoY7vW9o8Uz5w8ZPJS
+	vhUdMnGwjiAIFtYAQGg/SXXWAY9ajykBDzSkfkSIkqu6YlGenKKSfe1uxH9eEVU9n8h1VM722TxPK
+	igRxfTj6cozlJhIpPlNwJl1beMxIgxoYFksQgeZLAq35qVI75nSaBBqS08cNHYA11eWg=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-158993-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 158993: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=d203dbd69f1a02577dd6fe571d72beb980c548a6
+X-Osstest-Versions-That:
+    xen=5e7aa904405fa2f268c3af213516bae271de3265
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 03 Feb 2021 23:37:46 +0000
 
-On Wed, 3 Feb 2021 at 22:18, Stefano Stabellini <sstabellini@kernel.org> wrote:
-> > > But aside from PCIe, let's say that we know of a few nodes for which
-> > > "reg" needs a special treatment. I am not sure it makes sense to proceed
-> > > with parsing those nodes without knowing how to deal with that.
-> >
-> > I believe that most of the time the "special" treatment would be to ignore the
-> > property "regs" as it will not be an CPU memory address.
-> >
-> > > So maybe
-> > > we should add those nodes to skip_matches until we know what to do with
-> > > them. At that point, I would imagine we would introduce a special
-> > > handle_device function that knows what to do. In the case of PCIe,
-> > > something like "handle_device_pcie".
-> > Could you outline how "handle_device_pcie()" will differ with handle_node()?
-> >
-> > In fact, the problem is not the PCIe node directly. Instead, it is the second
-> > level of nodes below it (i.e usb@...).
-> >
-> > The current implementation of dt_number_of_address() only look at the bus type
-> > of the parent. As the parent has no bus type and "ranges" then it thinks this
-> > is something we can translate to a CPU address.
-> >
-> > However, this is below a PCI bus so the meaning of "reg" is completely
-> > different. In this case, we only need to ignore "reg".
->
-> I see what you are saying and I agree: if we had to introduce a special
-> case for PCI, then  dt_number_of_address() seems to be a good place.  In
-> fact, we already have special PCI handling, see our
-> __dt_translate_address function and xen/common/device_tree.c:dt_busses.
->
-> Which brings the question: why is this actually failing?
+flight 158993 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/158993/
 
-I already hinted at the reason in my previous e-mail :). Let me expand
-a bit more.
+Failures :-/ but no regressions.
 
->
-> pcie0 {
->      ranges = <0x02000000 0x0 0xc0000000 0x6 0x00000000 0x0 0x40000000>;
->
-> Which means that PCI addresses 0xc0000000-0x100000000 become 0x600000000-0x700000000.
->
-> The offending DT is:
->
-> &pcie0 {
->          pci@1,0 {
->                  #address-cells = <3>;
->                  #size-cells = <2>;
->                  ranges;
->
->                  reg = <0 0 0 0 0>;
->
->                  usb@1,0 {
->                          reg = <0x10000 0 0 0 0>;
->                          resets = <&reset RASPBERRYPI_FIRMWARE_RESET_ID_USB>;
->                  };
->          };
-> };
->
->
-> reg = <0x10000 0 0 0 0> means that usb@1,0 is PCI device 01:00.0.
-> However, the rest of the regs cells are left as zero. It shouldn't be an
-> issue because usb@1,0 is a child of pci@1,0 but pci@1,0 is not a bus.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-The property "ranges" is used to define a mapping or translation
-between the address space of the "bus" (here pci@1,0) and the address
-space of the bus node's parent (&pcie0).
-IOW, it means "reg" in usb@1,0 is an address on the PCI bus (i.e. BDF).
+version targeted for testing:
+ xen                  d203dbd69f1a02577dd6fe571d72beb980c548a6
+baseline version:
+ xen                  5e7aa904405fa2f268c3af213516bae271de3265
 
-The problem is dt_number_of_address() will only look at the "bus" type
-of the parent using dt_match_bus(). This will return the default bus
-(see dt_bus_default_match()), because this is a property "ranges" in
-the parent node (i.e. pci@1,0). Therefore...
+Last test of basis   158950  2021-02-02 11:01:24 Z    1 days
+Testing same since   158993  2021-02-03 21:00:26 Z    0 days    1 attempts
 
-> So
-> in theory dt_number_of_address() should already return 0 for it.
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
 
-... dt_number_of_address() will return 1 even if the address is not a
-CPU address. So when Xen will try to translate it, it will fail.
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
->
-> Maybe reg = <0 0 0 0 0> is the problem. In that case, we could simply
-> add a check to skip 0 size ranges. Just a hack to explain what I mean:
 
-The parent of pci@1,0 is a PCI bridge (see the property type), so the
-CPU addresses are found not via "regs" but "assigned-addresses".
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-In this situation, "regs" will have a different meaning and therefore
-there is no promise that the size will be 0.
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Cheers,
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   5e7aa90440..d203dbd69f  d203dbd69f1a02577dd6fe571d72beb980c548a6 -> smoke
 
