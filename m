@@ -2,41 +2,48 @@ Return-Path: <SRS0=vb+Z=HG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FAE1C433E6
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 15:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00F31C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 16:16:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C28D864F5C
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 15:59:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C28D864F5C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8C07A64D5D
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 16:16:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C07A64D5D
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.81358.150245 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.81360.150257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7h2F-0001Y4-0t; Thu, 04 Feb 2021 15:59:11 +0000
+	id 1l7hIT-0003yI-GJ; Thu, 04 Feb 2021 16:15:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 81358.150245; Thu, 04 Feb 2021 15:59:10 +0000
+Received: by outflank-mailman (output) from mailman id 81360.150257; Thu, 04 Feb 2021 16:15:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7h2E-0001Xx-Ti; Thu, 04 Feb 2021 15:59:10 +0000
-Received: by outflank-mailman (input) for mailman id 81358;
- Thu, 04 Feb 2021 15:59:09 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KAxh=HG=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l7h2D-0001Xs-14
- for xen-devel@lists.xenproject.org; Thu, 04 Feb 2021 15:59:09 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cda7f7fc-3bff-4e31-8a30-1b96c2b82cd7;
- Thu, 04 Feb 2021 15:59:08 +0000 (UTC)
+	id 1l7hIT-0003yB-CT; Thu, 04 Feb 2021 16:15:57 +0000
+Received: by outflank-mailman (input) for mailman id 81360;
+ Thu, 04 Feb 2021 16:15:56 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7hIS-0003y2-BD; Thu, 04 Feb 2021 16:15:56 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7hIS-0006rK-2m; Thu, 04 Feb 2021 16:15:56 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7hIR-0004Mi-Ro; Thu, 04 Feb 2021 16:15:55 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1l7hIR-0003Bg-RJ; Thu, 04 Feb 2021 16:15:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,97 +55,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cda7f7fc-3bff-4e31-8a30-1b96c2b82cd7
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612454347;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=CwKJFclLx3+gmhV9TPR9itejegLsKMZkkdIpvkqQIZI=;
-  b=BO8zQgH8Z/96+J6cCxiFPswgzHJ7XEpXJQV5Fiz+lThDrSDusQlFzqKf
-   5jZlyf3HOfIrVkXBizg/kr0b378YKh1YYcazaXALzzX1iuKHx5zznxdoy
-   icZK2esCJITvWDyrfshdL8K0VXiPxDOmlEoSwZz7jQRt9gxkQ3sdtQimV
-   M=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: YIlOc9EbGCS8tIed7Mj/RvcjpP37tzVxzvotJEyUykYWXPme0aWaIvubFVKPhDByL8kAYoQ5By
- NnxQ3dBYgEVJGWz1EvdKiYZ1EVTpM/WguIJyoIVfHMZxHdqKd2q+S/QYLRs+kjck/zAabTKqOj
- qmqJDGIkD5kCI6hmk3sLyf/XtgMlbhy+r0BQ2kSSDnNIzngq/wJf12+xFpik4IX1Ie6Tosy5DO
- fp7mrp+/RF3hF4eqpJOVTi+DWqgHJdOJTwZI0KTPvD8fMlqIZxTClcpOZwU3jnTT6QRrDAv/uY
- +wI=
-X-SBRS: 4.0
-X-MesageID: 36517128
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.79,401,1602561600"; 
-   d="scan'208";a="36517128"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Julien Grall
-	<julien.grall@arm.com>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Chen <Wei.Chen@arm.com>
-Subject: [PATCH for-4.15] libs/devicemodel: Fix ABI breakage from xendevicemodel_set_irq_level()
-Date: Thu, 4 Feb 2021 15:58:50 +0000
-Message-ID: <20210204155850.23649-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=i1PQkXOM4QRAjsOWQRMblW2J93LX6M5jqsKtdZFhfVo=; b=H+v+xKLVB3DwrkvrMi7K3j729Q
+	cO2mNG1+K/Y1pA1J5xS54jcMCtO0C+N//3hW+fG2/BhXt7IYHdffUYeprIGgM30+oyHJvZfcHhCcn
+	q5zRmjdKDcEP3zjx2idPMELouUi6usLAqYi5vCjkAUsofsv9kYZ1fpZhyd+S2PXqLRkU=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-159014-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain
+Subject: [xen-unstable-smoke test] 159014: trouble: blocked/broken/pass
+X-Osstest-Failures:
+    xen-unstable-smoke:build-arm64-xsm:<job status>:broken:regression
+    xen-unstable-smoke:build-arm64-xsm:host-install(4):broken:regression
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=92f5ffa58d188c9f9a9f1bcdccb6d6348d9df612
+X-Osstest-Versions-That:
+    xen=d203dbd69f1a02577dd6fe571d72beb980c548a6
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 04 Feb 2021 16:15:55 +0000
 
-It is not permitted to edit the VERS clause for a version in a release of Xen.
+flight 159014 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/159014/
 
-Revert xendevicemodel_set_irq_level()'s inclusion in .so.1.2 and bump the the
-library minor version to .so.1.4 instead.
+Failures and problems with tests :-(
 
-Fixes: 5d752df85f ("xen/dm: Introduce xendevicemodel_set_irq_level DM op")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien.grall@arm.com>
-CC: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Chen <Wei.Chen@arm.com>
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-arm64-xsm                 <job status>                 broken
+ build-arm64-xsm               4 host-install(4)        broken REGR. vs. 158993
 
-Critical to include in 4.15, as this is an ABI breakage.  Reverting the broken
-change doesn't look to be a practical option.
----
- tools/libs/devicemodel/Makefile              | 2 +-
- tools/libs/devicemodel/libxendevicemodel.map | 6 +++++-
- 2 files changed, 6 insertions(+), 2 deletions(-)
+Tests which did not succeed, but are not blocking:
+ test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-diff --git a/tools/libs/devicemodel/Makefile b/tools/libs/devicemodel/Makefile
-index 500de7adc5..3e50ff6d90 100644
---- a/tools/libs/devicemodel/Makefile
-+++ b/tools/libs/devicemodel/Makefile
-@@ -2,7 +2,7 @@ XEN_ROOT = $(CURDIR)/../../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- MAJOR    = 1
--MINOR    = 3
-+MINOR    = 4
- 
- SRCS-y                 += core.c
- SRCS-$(CONFIG_Linux)   += common.c
-diff --git a/tools/libs/devicemodel/libxendevicemodel.map b/tools/libs/devicemodel/libxendevicemodel.map
-index a0c30125de..733549327b 100644
---- a/tools/libs/devicemodel/libxendevicemodel.map
-+++ b/tools/libs/devicemodel/libxendevicemodel.map
-@@ -32,10 +32,14 @@ VERS_1.2 {
- 	global:
- 		xendevicemodel_relocate_memory;
- 		xendevicemodel_pin_memory_cacheattr;
--		xendevicemodel_set_irq_level;
- } VERS_1.1;
- 
- VERS_1.3 {
- 	global:
- 		xendevicemodel_modified_memory_bulk;
- } VERS_1.2;
-+
-+VERS_1.4 {
-+	global:
-+		xendevicemodel_set_irq_level;
-+} VERS_1.3;
--- 
-2.11.0
+version targeted for testing:
+ xen                  92f5ffa58d188c9f9a9f1bcdccb6d6348d9df612
+baseline version:
+ xen                  d203dbd69f1a02577dd6fe571d72beb980c548a6
 
+Last test of basis   158993  2021-02-03 21:00:26 Z    0 days
+Testing same since   159014  2021-02-04 14:00:28 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              broken  
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+broken-job build-arm64-xsm broken
+broken-step build-arm64-xsm host-install(4)
+
+Not pushing.
+
+------------------------------------------------------------
+commit 92f5ffa58d188c9f9a9f1bcdccb6d6348d9df612
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Thu Feb 4 14:02:32 2021 +0100
+
+    x86/efi: enable MS ABI attribute on clang
+    
+    Or else the EFI service calls will use the wrong calling convention.
+    
+    The __ms_abi__ attribute is available on all supported versions of
+    clang. Add a specific Clang check because the GCC version reported by
+    Clang is below the required 4.4 to use the __ms_abi__ attribute.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+    Reviewed-by: Ian Jackson <iwj@xenproject.org>
+    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+
+commit da20c93108226cb2eb2ed1a13225337f2318a642
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Feb 4 14:01:21 2021 +0100
+
+    IOREQ: fix waiting for broadcast completion
+    
+    Checking just a single server is not enough - all of them must have
+    signaled that they're done processing the request.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Paul Durrant <paul@xen.org>
+
+commit 7b93d92a35dc7c0a6e5f1f79b3c887aa3e66ddc0
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Thu Feb 4 13:59:56 2021 +0100
+
+    x86/string: correct memmove()'s forwarding to memcpy()
+    
+    With memcpy() expanding to the compiler builtin, we may not hand it
+    overlapping source and destination. We strictly mean to forward to our
+    own implementation (a few lines up in the same source file).
+    
+    Fixes: 78825e1c60fa ("x86/string: Clean up x86/string.h")
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+(qemu changes not included)
 
