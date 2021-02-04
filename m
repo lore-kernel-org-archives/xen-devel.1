@@ -2,47 +2,47 @@ Return-Path: <SRS0=vb+Z=HG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.4 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24EA4C433DB
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 11:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D37BC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 12:12:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CA06664E43
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 11:49:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA06664E43
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id EA48264E8C
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Feb 2021 12:12:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA48264E8C
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.81277.149916 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.81281.149927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7d8j-00071r-1i; Thu, 04 Feb 2021 11:49:37 +0000
+	id 1l7dUk-0001VL-6Q; Thu, 04 Feb 2021 12:12:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 81277.149916; Thu, 04 Feb 2021 11:49:37 +0000
+Received: by outflank-mailman (output) from mailman id 81281.149927; Thu, 04 Feb 2021 12:12:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7d8i-00071k-TH; Thu, 04 Feb 2021 11:49:36 +0000
-Received: by outflank-mailman (input) for mailman id 81277;
- Thu, 04 Feb 2021 11:49:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7zif=HG=arm.com=robin.murphy@srs-us1.protection.inumbo.net>)
- id 1l7d8h-00071b-IT
- for xen-devel@lists.xenproject.org; Thu, 04 Feb 2021 11:49:35 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 12df5d41-f7c8-4742-9477-8bad7ed76f18;
- Thu, 04 Feb 2021 11:49:32 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E69ABD6E;
- Thu,  4 Feb 2021 03:49:31 -0800 (PST)
-Received: from [10.57.49.26] (unknown [10.57.49.26])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6C76A3F73B;
- Thu,  4 Feb 2021 03:49:25 -0800 (PST)
+	id 1l7dUk-0001VE-3W; Thu, 04 Feb 2021 12:12:22 +0000
+Received: by outflank-mailman (input) for mailman id 81281;
+ Thu, 04 Feb 2021 12:12:20 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l7dUi-0001V9-H9
+ for xen-devel@lists.xenproject.org; Thu, 04 Feb 2021 12:12:20 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l7dUi-0002FQ-D5
+ for xen-devel@lists.xenproject.org; Thu, 04 Feb 2021 12:12:20 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1l7dUi-0007lC-BR
+ for xen-devel@lists.xenproject.org; Thu, 04 Feb 2021 12:12:20 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1l7dUf-0007yU-56; Thu, 04 Feb 2021 12:12:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,67 +54,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12df5d41-f7c8-4742-9477-8bad7ed76f18
-Subject: Re: [PATCH RFC v1 2/6] swiotlb: convert variables to arrays
-To: Christoph Hellwig <hch@lst.de>, Dongli Zhang <dongli.zhang@oracle.com>
-Cc: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- iommu@lists.linux-foundation.org, linux-mips@vger.kernel.org,
- linux-mmc@vger.kernel.org, linux-pci@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, nouveau@lists.freedesktop.org,
- x86@kernel.org, xen-devel@lists.xenproject.org,
- linux-kernel@vger.kernel.org, adrian.hunter@intel.com,
- akpm@linux-foundation.org, benh@kernel.crashing.org, bskeggs@redhat.com,
- bhelgaas@google.com, bp@alien8.de, boris.ostrovsky@oracle.com,
- chris@chris-wilson.co.uk, daniel@ffwll.ch, airlied@linux.ie, hpa@zytor.com,
- mingo@kernel.org, mingo@redhat.com, jani.nikula@linux.intel.com,
- joonas.lahtinen@linux.intel.com, jgross@suse.com, konrad.wilk@oracle.com,
- m.szyprowski@samsung.com, matthew.auld@intel.com, mpe@ellerman.id.au,
- rppt@kernel.org, paulus@samba.org, peterz@infradead.org,
- rodrigo.vivi@intel.com, sstabellini@kernel.org, bauerman@linux.ibm.com,
- tsbogend@alpha.franken.de, tglx@linutronix.de, ulf.hansson@linaro.org,
- joe.jin@oracle.com, thomas.lendacky@amd.com,
- Claire Chang <tientzu@chromium.org>
-References: <20210203233709.19819-1-dongli.zhang@oracle.com>
- <20210203233709.19819-3-dongli.zhang@oracle.com>
- <20210204072947.GA29812@lst.de>
-From: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <b46ddefe-d91a-fa6a-0e0d-cf1edc343c2e@arm.com>
-Date: Thu, 4 Feb 2021 11:49:23 +0000
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:CC:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=f+rG5AhiOwAyIRub0twvjSm4J2tj7lnP7cbhIvwtpmI=; b=Fi7A4PwySoAVQEgmY3QW+lr/52
+	fjiuTOtnbh/me2rX22eeaMIfxAYg+8Ryoou95D3AMtasSH3lfJ/Tj2nbzsEjOjvc89UsvyMWyfWEi
+	N0yyyth9mNwZNsI7G6oyMLCZ9PIzdZqjF5Xkfky28QCuVRbrr9qeWJNpc2o0JRrfXPs0=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <20210204072947.GA29812@lst.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Message-ID: <24603.58528.901884.980466@mariner.uk.xensource.com>
+Date: Thu, 4 Feb 2021 12:12:16 +0000
+To: committers@xenproject.org,
+    xen-devel@lists.xenproject.org
+CC: Andrew Cooper <andrew.cooper3@citrix.com>,
+    Dario Faggioli <dfaggioli@suse.com>,
+    Jan Beulich <jbeulich@suse.com>,
+    Julien Grall <julien@xen.org>,
+    community.manager@xenproject.org
+Subject: [ANNOUNCE] Xen 4.15 - call for notification/status of significant bugs
+In-Reply-To: <24600.8030.769396.165224@mariner.uk.xensource.com>
+References: <24600.8030.769396.165224@mariner.uk.xensource.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-On 2021-02-04 07:29, Christoph Hellwig wrote:
-> On Wed, Feb 03, 2021 at 03:37:05PM -0800, Dongli Zhang wrote:
->> This patch converts several swiotlb related variables to arrays, in
->> order to maintain stat/status for different swiotlb buffers. Here are
->> variables involved:
->>
->> - io_tlb_start and io_tlb_end
->> - io_tlb_nslabs and io_tlb_used
->> - io_tlb_list
->> - io_tlb_index
->> - max_segment
->> - io_tlb_orig_addr
->> - no_iotlb_memory
->>
->> There is no functional change and this is to prepare to enable 64-bit
->> swiotlb.
-> 
-> Claire Chang (on Cc) already posted a patch like this a month ago,
-> which looks much better because it actually uses a struct instead
-> of all the random variables.
+Although there are a few things outstanding, we are now firmly into
+the bugfixing phase of the Xen 4.15 release.
 
-Indeed, I skimmed the cover letter and immediately thought that this 
-whole thing is just the restricted DMA pool concept[1] again, only from 
-a slightly different angle.
+I searched my email (and my memory) and found four open blockers which
+I have listed below, and one closed blocker.
 
-Robin.
+I feel there are probably more issues out there, so please let me
+know, in response to this mail, of any other significant bugs you are
+aware of.
 
-[1] 
-https://lore.kernel.org/linux-iommu/20210106034124.30560-1-tientzu@chromium.org/
+Ian.
+
+
+OPEN ISSUES
+-----------
+
+A. HPET/PIT issue on newer Intel systems
+
+Information from
+  Andrew Cooper <andrew.cooper3@citrix.com>
+
+| This has had literally tens of reports across the devel and users
+| mailing lists, and prevents Xen from booting at all on the past two
+| generations of Intel laptop.  I've finally got a repro and posted a
+| fix to the list, but still in progress.
+
+I think Andrew is still on the case here.
+
+
+B. "scheduler broken" bugs.
+
+Information from
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Dario Faggioli <dfaggioli@suse.com>
+
+Quoting Andrew Cooper
+| We've had 4 or 5 reports of Xen not working, and very little
+| investigation on whats going on.  Suspicion is that there might be
+| two bugs, one with smt=0 on recent AMD hardware, and one more
+| general "some workloads cause negative credit" and might or might
+| not be specific to credit2 (debugging feedback differs - also might
+| be 3 underlying issue).
+
+I reviewed a thread about this and it is not clear to me where we are
+with this.
+
+
+C. Fallout from MSR handling behavioral change.
+
+Information from
+  Jan Beulich <jbeulich@suse.com>
+
+I am lacking an extended desxcription of this.  What are the bug(s),
+and what is the situation ?
+
+
+D. Use-after-free in the IOMMU code
+
+Information from
+  Julien Grall <julien@xen.org>
+References
+ [PATCH for-4.15 0/4] xen/iommu: Collection of bug fixes for IOMMU teadorwn
+ <20201222154338.9459-1-julien@xen.org>
+
+Quoting the 0/:
+| This series is a collection of bug fixes for the IOMMU teardown code.
+| All of them are candidate for 4.15 as they can either leak memory or
+| lead to host crash/host corruption.
+
+AFAIT these patches are not yet in-tree.
+
+
+
+CLOSED ISSUES
+=============
+
+E. zstd support
+
+Information from
+  Andrew Cooper <andrew.cooper3@citrix.com>
+  Jan Beulich <jbeulich@suse.com>
+  git
+
+Needed to unbreak Fedora.  Needs support for both dom0 and domU.
+
+AFAICT this seems to be in-tree as of 8169f82049ef
+"libxenguest: support zstd compressed kernels"
 
