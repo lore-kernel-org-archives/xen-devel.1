@@ -2,48 +2,44 @@ Return-Path: <SRS0=4OGc=HH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22EB9C433E0
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Feb 2021 11:10:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3609C433DB
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Feb 2021 11:13:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B0B060241
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Feb 2021 11:10:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B0B060241
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 5D1D264FA3
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Feb 2021 11:13:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5D1D264FA3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.81604.150895 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.81607.150910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7z0G-0003ex-Ld; Fri, 05 Feb 2021 11:10:20 +0000
+	id 1l7z3E-0003mx-5H; Fri, 05 Feb 2021 11:13:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 81604.150895; Fri, 05 Feb 2021 11:10:20 +0000
+Received: by outflank-mailman (output) from mailman id 81607.150910; Fri, 05 Feb 2021 11:13:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l7z0G-0003eq-IX; Fri, 05 Feb 2021 11:10:20 +0000
-Received: by outflank-mailman (input) for mailman id 81604;
- Fri, 05 Feb 2021 11:10:20 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1l7z3E-0003mq-21; Fri, 05 Feb 2021 11:13:24 +0000
+Received: by outflank-mailman (input) for mailman id 81607;
+ Fri, 05 Feb 2021 11:13:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l7z0G-0003ei-6l; Fri, 05 Feb 2021 11:10:20 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l7z0F-0004QN-Uw; Fri, 05 Feb 2021 11:10:19 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l7z0F-00020H-JN; Fri, 05 Feb 2021 11:10:19 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1l7z0F-00025s-Iu; Fri, 05 Feb 2021 11:10:19 +0000
+ (envelope-from <SRS0=IalI=HH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1l7z3D-0003mk-8r
+ for xen-devel@lists.xenproject.org; Fri, 05 Feb 2021 11:13:23 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a8891eb4-8e4b-4047-9566-c7aca688ad49;
+ Fri, 05 Feb 2021 11:13:22 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 0D97CAD29;
+ Fri,  5 Feb 2021 11:13:21 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,75 +51,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=Is8i9PnX2FAMu9Lz0qYZF9EzAZIG5xYGkVEhxcjsCpI=; b=1Fbbxnj/wRcuOZNh6hyAgcoSdI
-	xJE2+d1ALUFjbGTA0UH2YVAFH55XwDJ3K/URwCk8YYZgKzYNDf6U1RhS2+JnMFQ1vYhZKsUrP/uwe
-	dUbZHil1BUrwbAUndpVwFulDLht9QIWOXw702AF8AvzxT9vhASnAzYRJp5dB2qNnlkB0=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-159019-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: a8891eb4-8e4b-4047-9566-c7aca688ad49
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1612523601; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=8v4oWbwcX3QM0Dfxs0hXbaPsKCNxckSU0hKztJTQ96Q=;
+	b=ClE2nSCJ+g9Pau9qslpyY+stz07us5Mg0wztUHEVjvLwWr4oR/wqtetHSS8aOL8F5N3lp2
+	iRrvszepF5hLmxDFCD7lOgjGPTNwfAdWgHb8U4tXAtTrK+wiXZIMW/JO9CGXzXFtHAYclo
+	QJD8fi/o9ZIZhMYW0KugBdidrxAZZnQ=
+Subject: Re: [PATCH] x86/EFI: work around GNU ld 2.36 issue
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <e6d59277-35b2-e7df-0e68-a794c8855ac0@suse.com>
+ <8450b84d-93f2-7568-362e-af27954e5157@suse.com>
+ <881b97a1-a4e3-f213-f81b-ac07ca46ed27@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <5a02763e-715f-a76d-e926-87a2a4c38449@suse.com>
+Date: Fri, 5 Feb 2021 12:13:21 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-Subject: [ovmf test] 159019: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=1b6c3a94eca7f12f6a3b65a3e8619d2e2e7c1eb6
-X-Osstest-Versions-That:
-    ovmf=f6ec1dd34fb6b9757b5ead465ee2ea20c182b0ac
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 05 Feb 2021 11:10:19 +0000
+In-Reply-To: <881b97a1-a4e3-f213-f81b-ac07ca46ed27@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-flight 159019 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/159019/
+On 05.02.2021 11:33, Andrew Cooper wrote:
+> On 05/02/2021 08:11, Jan Beulich wrote:
+>> On 04.02.2021 14:38, Jan Beulich wrote:
+>>> Our linker capability check fails with the recent binutils release's ld:
+>>>
+>>> .../check.o:(.debug_aranges+0x6): relocation truncated to fit: R_X86_64_32 against `.debug_info'
+>>> .../check.o:(.debug_info+0x6): relocation truncated to fit: R_X86_64_32 against `.debug_abbrev'
+>>> .../check.o:(.debug_info+0xc): relocation truncated to fit: R_X86_64_32 against `.debug_str'+76
+>>> .../check.o:(.debug_info+0x11): relocation truncated to fit: R_X86_64_32 against `.debug_str'+d
+>>> .../check.o:(.debug_info+0x15): relocation truncated to fit: R_X86_64_32 against `.debug_str'+2b
+>>> .../check.o:(.debug_info+0x29): relocation truncated to fit: R_X86_64_32 against `.debug_line'
+>>> .../check.o:(.debug_info+0x30): relocation truncated to fit: R_X86_64_32 against `.debug_str'+19
+>>> .../check.o:(.debug_info+0x37): relocation truncated to fit: R_X86_64_32 against `.debug_str'+71
+>>> .../check.o:(.debug_info+0x3e): relocation truncated to fit: R_X86_64_32 against `.debug_str'
+>>> .../check.o:(.debug_info+0x45): relocation truncated to fit: R_X86_64_32 against `.debug_str'+5e
+>>> .../check.o:(.debug_info+0x4c): additional relocation overflows omitted from the output
+>>>
+>>> Tell the linker to strip debug info as a workaround. Oddly enough debug
+>>> info has been getting stripped when linking the actual xen.efi, without
+>>> me being able to tell why this would be.
+>> I've changed this to
+>>
+>> "Tell the linker to strip debug info as a workaround. Debug info has been
+>>  getting stripped already anyway when linking the actual xen.efi."
+>>
+>> as I noticed I did look for -S only yesterday, while we have
+>>
+>> EFI_LDFLAGS += --image-base=$(1) --stack=0,0 --heap=0,0 --strip-debug
+> 
+> So, in terms of the bugfix, Acked-by: Andrew Cooper
+> <andrew.cooper3@citrix.com>
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 1b6c3a94eca7f12f6a3b65a3e8619d2e2e7c1eb6
-baseline version:
- ovmf                 f6ec1dd34fb6b9757b5ead465ee2ea20c182b0ac
+Thanks.
 
-Last test of basis   159000  2021-02-04 01:40:54 Z    1 days
-Testing same since   159019  2021-02-04 16:41:43 Z    0 days    1 attempts
+> However, we ought be keeping the debug symbols for xen-syms.efi (or
+> equiv) seeing as there is logic included here which isn't in the regular
+> xen-syms.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Laszlo Ersek <lersek@redhat.com>
-  Leif Lindholm <leif@nuviainc.com>
+Well, perhaps. Besides the 2.36 binutils regression needing fixing
+(or preventing us to avoid the stripping in case that's the linker
+version used), there are a few more points relevant here:
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+- Checking with a random older binutils (2.32) I observe the linker
+  working fine, but our mkreloc utility choking on the (admittedly
+  suspicious, at least at the first glance) output. This may be
+  possible to deal with, but still.
 
+- It would need checking whether the resulting binary works at all.
+  All the .debug_* sections come first. Of course there are surely
+  again ways to overcome this (albeit it smells like a binutils
+  bug).
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+- While in ELF binaries the particular .debug_* sections are
+  conventionally assumed to hold Dwarf debug info, no such
+  assumption is true for PE executables. In particular I observe
+  objdump (2.32 as well as 2.36) to merely dump the COFF symbol
+  table when handed -g. Are you aware of consumers of the
+  information, if we indeed kept it?
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   f6ec1dd34f..1b6c3a94ec  1b6c3a94eca7f12f6a3b65a3e8619d2e2e7c1eb6 -> xen-tested-master
+Jan
 
