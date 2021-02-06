@@ -2,44 +2,45 @@ Return-Path: <SRS0=r5xc=HI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D885EC433DB
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79FE2C433E0
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 11:09:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A03FA64EAD
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A03FA64EAD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2E88164E53
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 11:09:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2E88164E53
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.82127.151851 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.82138.151863 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l8LAH-0006WC-Jg; Sat, 06 Feb 2021 10:50:09 +0000
+	id 1l8LSk-0008Ml-Au; Sat, 06 Feb 2021 11:09:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 82127.151851; Sat, 06 Feb 2021 10:50:09 +0000
+Received: by outflank-mailman (output) from mailman id 82138.151863; Sat, 06 Feb 2021 11:09:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l8LAH-0006Vv-Ep; Sat, 06 Feb 2021 10:50:09 +0000
-Received: by outflank-mailman (input) for mailman id 82127;
- Sat, 06 Feb 2021 10:50:08 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1l8LSk-0008Me-7i; Sat, 06 Feb 2021 11:09:14 +0000
+Received: by outflank-mailman (input) for mailman id 82138;
+ Sat, 06 Feb 2021 11:09:12 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=gVlU=HI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l8LAG-0005VY-J0
- for xen-devel@lists.xenproject.org; Sat, 06 Feb 2021 10:50:08 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 379e30f7-dd5d-4dd4-ae1b-01c2cce109c6;
- Sat, 06 Feb 2021 10:49:49 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A8F2EAE55;
- Sat,  6 Feb 2021 10:49:47 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1l8LSi-0008MZ-6B
+ for xen-devel@lists.xenproject.org; Sat, 06 Feb 2021 11:09:12 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1l8LSg-000721-Mx; Sat, 06 Feb 2021 11:09:10 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1l8LSg-0000z4-B6; Sat, 06 Feb 2021 11:09:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,237 +52,171 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 379e30f7-dd5d-4dd4-ae1b-01c2cce109c6
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1612608587; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=+rhXTWkgbyXvV9gClvwDbgn20u/kYNFxY4GB9OVP82g=;
-	b=RGpZWqhB1MjUDVT7qV5Vbs65zV+xJItgY6MdTYnW6OU8SQSOPBnnf+yTZvjl+m/ff6/cm7
-	/sTtzQxlR3CrNaSip17pGUzElz0mgWAMvehJRNUMQ6YaeEXd2FgGbPTd9diut4ODNqVso9
-	3rFOpioQlUVEVE6RoWIRlOalao/MEgE=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 5/7] xen/events: add per-xenbus device event statistics and settings
-Date: Sat,  6 Feb 2021 11:49:30 +0100
-Message-Id: <20210206104932.29064-6-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210206104932.29064-1-jgross@suse.com>
-References: <20210206104932.29064-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=e5i6NxZrM2fGvPLAGwDz2aKPTGuJQtRwfz0sok4jvOY=; b=xX9U2IdXnrSNvwEpXe7TmLKOES
+	5SmMXQE405Mui+JCD+T8SbFGJ9fzhiQXw7tMJAZ7EWGWqcNr5H6C2k4/WaKjel0dmcLfKhJ7Q5lyT
+	GRXfpjTnAKJ14QNqN+zTE5HDkkB01kTYf9d7fVivNWmgqlHS3U6QOjM73URMq5QK4dVE=;
+Subject: Re: [PATCH] xen/arm: fix gnttab_need_iommu_mapping
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: lucmiccio@gmail.com, xen-devel@lists.xenproject.org,
+ Bertrand.Marquis@arm.com, Volodymyr_Babchuk@epam.com
+References: <alpine.DEB.2.21.2102051604320.29047@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien@xen.org>
+Message-ID: <247f517e-a283-12c8-2ccb-3915cda4ac2e@xen.org>
+Date: Sat, 6 Feb 2021 11:09:08 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <alpine.DEB.2.21.2102051604320.29047@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Add sysfs nodes for each xenbus device showing event statistics (number
-of events and spurious events, number of associated event channels)
-and for setting a spurious event threshold in case a frontend is
-sending too many events without being rogue on purpose.
+Hi Stefano,
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- drivers/xen/events/events_base.c  | 27 ++++++++++++-
- drivers/xen/xenbus/xenbus_probe.c | 66 +++++++++++++++++++++++++++++++
- include/xen/xenbus.h              |  7 ++++
- 3 files changed, 98 insertions(+), 2 deletions(-)
+On 06/02/2021 00:38, Stefano Stabellini wrote:
+> Commit 91d4eca7add broke gnttab_need_iommu_mapping on ARM.
 
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index 8c620c11e32a..d0c57c5664c0 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -327,6 +327,8 @@ static int xen_irq_info_evtchn_setup(unsigned irq,
- 
- 	ret = xen_irq_info_common_setup(info, irq, IRQT_EVTCHN, evtchn, 0);
- 	info->u.interdomain = dev;
-+	if (dev)
-+		atomic_inc(&dev->event_channels);
- 
- 	return ret;
- }
-@@ -572,18 +574,28 @@ static void xen_irq_lateeoi_locked(struct irq_info *info, bool spurious)
- 		return;
- 
- 	if (spurious) {
-+		struct xenbus_device *dev = info->u.interdomain;
-+		unsigned int threshold = 1;
-+
-+		if (dev && dev->spurious_threshold)
-+			threshold = dev->spurious_threshold;
-+
- 		if ((1 << info->spurious_cnt) < (HZ << 2)) {
- 			if (info->spurious_cnt != 0xFF)
- 				info->spurious_cnt++;
- 		}
--		if (info->spurious_cnt > 1) {
--			delay = 1 << (info->spurious_cnt - 2);
-+		if (info->spurious_cnt > threshold) {
-+			delay = 1 << (info->spurious_cnt - 1 - threshold);
- 			if (delay > HZ)
- 				delay = HZ;
- 			if (!info->eoi_time)
- 				info->eoi_cpu = smp_processor_id();
- 			info->eoi_time = get_jiffies_64() + delay;
-+			if (dev)
-+				atomic_add(delay, &dev->jiffies_eoi_delayed);
- 		}
-+		if (dev)
-+			atomic_inc(&dev->spurious_events);
- 	} else {
- 		info->spurious_cnt = 0;
- 	}
-@@ -920,6 +932,7 @@ static void __unbind_from_irq(unsigned int irq)
- 
- 	if (VALID_EVTCHN(evtchn)) {
- 		unsigned int cpu = cpu_from_irq(irq);
-+		struct xenbus_device *dev;
- 
- 		xen_evtchn_close(evtchn);
- 
-@@ -930,6 +943,11 @@ static void __unbind_from_irq(unsigned int irq)
- 		case IRQT_IPI:
- 			per_cpu(ipi_to_irq, cpu)[ipi_from_irq(irq)] = -1;
- 			break;
-+		case IRQT_EVTCHN:
-+			dev = info->u.interdomain;
-+			if (dev)
-+				atomic_dec(&dev->event_channels);
-+			break;
- 		default:
- 			break;
- 		}
-@@ -1593,6 +1611,7 @@ void handle_irq_for_port(evtchn_port_t port, struct evtchn_loop_ctrl *ctrl)
- {
- 	int irq;
- 	struct irq_info *info;
-+	struct xenbus_device *dev;
- 
- 	irq = get_evtchn_to_irq(port);
- 	if (irq == -1)
-@@ -1622,6 +1641,10 @@ void handle_irq_for_port(evtchn_port_t port, struct evtchn_loop_ctrl *ctrl)
- 
- 	info = info_for_irq(irq);
- 
-+	dev = (info->type == IRQT_EVTCHN) ? info->u.interdomain : NULL;
-+	if (dev)
-+		atomic_inc(&dev->events);
-+
- 	if (ctrl->defer_eoi) {
- 		info->eoi_cpu = smp_processor_id();
- 		info->irq_epoch = __this_cpu_read(irq_epoch);
-diff --git a/drivers/xen/xenbus/xenbus_probe.c b/drivers/xen/xenbus/xenbus_probe.c
-index 18ffd0551b54..9494ecad3c92 100644
---- a/drivers/xen/xenbus/xenbus_probe.c
-+++ b/drivers/xen/xenbus/xenbus_probe.c
-@@ -206,6 +206,65 @@ void xenbus_otherend_changed(struct xenbus_watch *watch,
- }
- EXPORT_SYMBOL_GPL(xenbus_otherend_changed);
- 
-+#define XENBUS_SHOW_STAT(name)						\
-+static ssize_t show_##name(struct device *_dev,				\
-+			   struct device_attribute *attr,		\
-+			   char *buf)					\
-+{									\
-+	struct xenbus_device *dev = to_xenbus_device(_dev);		\
-+									\
-+	return sprintf(buf, "%d\n", atomic_read(&dev->name));		\
-+}									\
-+static DEVICE_ATTR(name, 0444, show_##name, NULL)
-+
-+XENBUS_SHOW_STAT(event_channels);
-+XENBUS_SHOW_STAT(events);
-+XENBUS_SHOW_STAT(spurious_events);
-+XENBUS_SHOW_STAT(jiffies_eoi_delayed);
-+
-+static ssize_t show_spurious_threshold(struct device *_dev,
-+				       struct device_attribute *attr,
-+				       char *buf)
-+{
-+	struct xenbus_device *dev = to_xenbus_device(_dev);
-+
-+	return sprintf(buf, "%d\n", dev->spurious_threshold);
-+}
-+
-+static ssize_t set_spurious_threshold(struct device *_dev,
-+				      struct device_attribute *attr,
-+				      const char *buf, size_t count)
-+{
-+	struct xenbus_device *dev = to_xenbus_device(_dev);
-+	unsigned int val;
-+	ssize_t ret;
-+
-+	ret = kstrtouint(buf, 0, &val);
-+	if (ret)
-+		return ret;
-+
-+	dev->spurious_threshold = val;
-+
-+	return count;
-+}
-+
-+static DEVICE_ATTR(spurious_threshold, 0644, show_spurious_threshold,
-+		   set_spurious_threshold);
-+
-+static struct attribute *xenbus_attrs[] = {
-+	&dev_attr_event_channels.attr,
-+	&dev_attr_events.attr,
-+	&dev_attr_spurious_events.attr,
-+	&dev_attr_jiffies_eoi_delayed.attr,
-+	&dev_attr_spurious_threshold.attr,
-+	NULL
-+};
-+
-+static const struct attribute_group xenbus_group = {
-+	.name = "xenbus",
-+	.attrs = xenbus_attrs,
-+};
-+
- int xenbus_dev_probe(struct device *_dev)
- {
- 	struct xenbus_device *dev = to_xenbus_device(_dev);
-@@ -253,6 +312,11 @@ int xenbus_dev_probe(struct device *_dev)
- 		return err;
- 	}
- 
-+	dev->spurious_threshold = 1;
-+	if (sysfs_create_group(&dev->dev.kobj, &xenbus_group))
-+		dev_warn(&dev->dev, "sysfs_create_group on %s failed.\n",
-+			 dev->nodename);
-+
- 	return 0;
- fail_put:
- 	module_put(drv->driver.owner);
-@@ -269,6 +333,8 @@ int xenbus_dev_remove(struct device *_dev)
- 
- 	DPRINTK("%s", dev->nodename);
- 
-+	sysfs_remove_group(&dev->dev.kobj, &xenbus_group);
-+
- 	free_otherend_watch(dev);
- 
- 	if (drv->remove) {
-diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
-index 2c43b0ef1e4d..13ee375a1f05 100644
---- a/include/xen/xenbus.h
-+++ b/include/xen/xenbus.h
-@@ -88,6 +88,13 @@ struct xenbus_device {
- 	struct completion down;
- 	struct work_struct work;
- 	struct semaphore reclaim_sem;
-+
-+	/* Event channel based statistics and settings. */
-+	atomic_t event_channels;
-+	atomic_t events;
-+	atomic_t spurious_events;
-+	atomic_t jiffies_eoi_delayed;
-+	unsigned int spurious_threshold;
- };
- 
- static inline struct xenbus_device *to_xenbus_device(struct device *dev)
+Doh :/.
+
+> The offending chunk is: >
+>   #define gnttab_need_iommu_mapping(d)                    \
+> -    (is_domain_direct_mapped(d) && need_iommu(d))
+> +    (is_domain_direct_mapped(d) && need_iommu_pt_sync(d))
+> 
+> On ARM we need gnttab_need_iommu_mapping to be true for dom0 when it is
+> directly mapped, like the old check did,
+
+This is not entirely correct, we only need gnttab_need_iommu_mapping() 
+to return true when the domain is direct mapped **and** the IOMMU is 
+enabled for the domain.
+
+> but the new check is always
+> false. >
+> In fact, need_iommu_pt_sync is defined as dom_iommu(d)->need_sync and
+> need_sync is set as:
+> 
+>      if ( !is_hardware_domain(d) || iommu_hwdom_strict )
+>          hd->need_sync = !iommu_use_hap_pt(d); >
+> iommu_hwdom_strict is actually supposed to be ignored on ARM, see the
+> definition in docs/misc/xen-command-line.pandoc:
+> 
+>      This option is hardwired to true for x86 PVH dom0's (as RAM belonging to
+>      other domains in the system don't live in a compatible address space), and
+>      is ignored for ARM.
+> 
+> But aside from that, the issue is that iommu_use_hap_pt(d) is true,
+> hence, hd->need_sync is false, and gnttab_need_iommu_mapping(d) is false
+> too.
+
+need_sync means that you have a separate IOMMU page-table and they need 
+to be updated for every change.
+
+hap_pt means the page-table used by the IOMMU is the P2M.
+
+For Arm, we always shared the P2M with the IOMMU.
+
+> 
+> As a consequence, when using PV network from a domU on a system where
+> IOMMU is on from Dom0, I get:
+> 
+> (XEN) smmu: /smmu@fd800000: Unhandled context fault: fsr=0x402, iova=0x8424cb148, fsynr=0xb0001, cb=0
+> [   68.290307] macb ff0e0000.ethernet eth0: DMA bus error: HRESP not OK
+> 
+> The fix is to go back to the old implementation of
+> gnttab_need_iommu_mapping.  However, we don't even need to specify &&
+> need_iommu(d) since we don't actually need to check for the IOMMU to be
+> enabled (iommu_map does it for us at the beginning of the function.)
+
+gnttab_need_iommu_mapping() doesn't only gate the 
+iommu_legacy_{,un}map() call but also decides whether we need to held 
+both the local and remote grant-table write lock for the duration of the 
+operation (see double_gt_lock()).
+
+I'd like to avoid the requirement to held the double_gt_lock() if there 
+is the domain is going to use the IOMMU.
+
+> 
+> This fix is preferrable to changing the implementation of need_sync or
+> iommu_use_hap_pt because "need_sync" is not really the reason why we
+> want gnttab_need_iommu_mapping to return true.
+
+In 4.13, we introduced is_iommu_enabled() (see commit c45f59292367 
+"domain: introduce XEN_DOMCTL_CDF_iommu flag") that should do the job 
+for this patch.
+
+For 4.12, we could use iommu_enabled as in general dom0 will use an 
+IOMMU if Xen enable it globally. Note that 4.12 is only security 
+supported since last October (see [1]). So this would be up to patch 
+there tree.
+
+> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> Backport: 4.12+
+
+I would suggest to use Fixes: tag if you know the exact commit. This 
+would make easier for downstream users if they backported the offending 
+patch.
+
+> 
+> ---
+> 
+> It is incredible that it was missed for this long, but it takes a full
+> PV drivers test using DMA from a non-coherent device to trigger it, e.g.
+> wget from a domU to an HTTP server on a different machine, ping or
+> connections to dom0 won't trigger the bug.
+
+Great finding!
+
+> 
+> It is interesting that given that IOMMU is on for dom0, Linux could
+> have just avoided using swiotlb-xen and everything would have just
+> worked. It is worth considering introducing a feature flag (e.g.
+> XENFEAT_ARM_dom0_iommu) to let dom0 know that the IOMMU is on and
+> swiotlb-xen is not necessary.
+> Then Linux can avoid initializing
+> swiotlb-xen and just rely on the IOMMU for translation.
+
+The presence of an IOMMU on the system doesn't necessarily indicate that 
+all the devices will be protected by an IOMMU. We can only turn off the 
+swiotlb-xen when we know that **all** the devices are protected.
+
+Therefore a simple feature flag is not going to do the job. Instead, we 
+need to tell Linux which devices has been protected by an IOMMU. This is 
+something I attempted to do a few years ago (see [2]).
+
+In addition to that, we also need to know whether Linux is capable to 
+disable swiotlb-xen. This would allow us to turn off all the mitigation 
+we introduced in Xen for direct mapped domain. One possibility would be 
+to introduce ELF note like for Arm (see [3]).
+
+> 
+> diff --git a/xen/include/asm-arm/grant_table.h b/xen/include/asm-arm/grant_table.h
+> index 6f585b1538..2a154d1851 100644
+> --- a/xen/include/asm-arm/grant_table.h
+> +++ b/xen/include/asm-arm/grant_table.h
+> @@ -88,8 +88,7 @@ int replace_grant_host_mapping(unsigned long gpaddr, mfn_t mfn,
+>   #define gnttab_status_gfn(d, t, i)                                       \
+>       (((i) >= nr_status_frames(t)) ? INVALID_GFN : (t)->arch.status_gfn[i])
+>   
+> -#define gnttab_need_iommu_mapping(d)                    \
+> -    (is_domain_direct_mapped(d) && need_iommu_pt_sync(d))
+> +#define gnttab_need_iommu_mapping(d)  (is_domain_direct_mapped(d))
+>   
+>   #endif /* __ASM_GRANT_TABLE_H__ */
+>   /*
+> 
+
+Cheers,
+
+[1] https://xenbits.xen.org/docs/unstable/support-matrix.html
+[2] 
+https://lists.infradead.org/pipermail/linux-arm-kernel/2014-February/234523.html
+[3] 
+https://patchwork.kernel.org/project/linux-arm-kernel/patch/5342AF59.3030405@linaro.org/
+
+
 -- 
-2.26.2
-
+Julien Grall
 
