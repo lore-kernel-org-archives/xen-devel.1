@@ -2,44 +2,44 @@ Return-Path: <SRS0=r5xc=HI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E5F5C433E0
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 836DAC43381
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D155A64EAD
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D155A64EAD
+	by mail.kernel.org (Postfix) with ESMTPS id 4948364EBE
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4948364EBE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.82123.151804 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.82121.151779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l8LA7-0005ci-LM; Sat, 06 Feb 2021 10:49:59 +0000
+	id 1l8LA3-0005Xh-1Q; Sat, 06 Feb 2021 10:49:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 82123.151804; Sat, 06 Feb 2021 10:49:59 +0000
+Received: by outflank-mailman (output) from mailman id 82121.151779; Sat, 06 Feb 2021 10:49:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l8LA7-0005cb-Hw; Sat, 06 Feb 2021 10:49:59 +0000
-Received: by outflank-mailman (input) for mailman id 82123;
- Sat, 06 Feb 2021 10:49:58 +0000
+	id 1l8LA2-0005Xa-Ui; Sat, 06 Feb 2021 10:49:54 +0000
+Received: by outflank-mailman (input) for mailman id 82121;
+ Sat, 06 Feb 2021 10:49:53 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gVlU=HI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l8LA6-0005Wo-9C
- for xen-devel@lists.xenproject.org; Sat, 06 Feb 2021 10:49:58 +0000
+ id 1l8LA1-0005Wo-Gc
+ for xen-devel@lists.xenproject.org; Sat, 06 Feb 2021 10:49:53 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 819c7b88-760f-48f6-b9e9-d19095e75ee2;
+ id bdf918e8-a7cd-4417-a934-24d4bee992af;
  Sat, 06 Feb 2021 10:49:47 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id DD5BDAD29;
+ by mx2.suse.de (Postfix) with ESMTP id E5AFAAD2B;
  Sat,  6 Feb 2021 10:49:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -52,70 +52,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 819c7b88-760f-48f6-b9e9-d19095e75ee2
+X-Inumbo-ID: bdf918e8-a7cd-4417-a934-24d4bee992af
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1612608587; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=dE46dgUQjvo/vJLSEaUtAdX4bEkarOQCB+4cTFCnP1M=;
-	b=QrCfkhZ9kH6dd3p0kbDY5etXQLR7YA6fF7S4sBCvIYn3HsEhD8zDi8/nrJAkjr+5OiuNsO
-	qR+sdnPHE3sVhc6pMZV3asmTaXx7t2OGH0pSGgLCV/LVP9RbwfgXXcjXrnMW/fO54ZX1ek
-	UhKlmhgCima7ddr5rYrpiYWaVy5Ib8M=
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=GH77gMFeluI4ISQQCL5mL3HOsRIyaZbyOEdSH8AsWt0=;
+	b=IFFMq9YDbxtkEPiO6C/5LtLAtDHYvxM651iS1+qH4tvdDWCxIzsRg6ikvZ/7+U0tEsFI1x
+	ri0x4lc7ZzQrLo2ZMEyqZPK8rluRKsUjTIfUFmT+v41H7Vdw1SFIxyZnTE+MZ2UQIsn8hn
+	Yc3SHb9TRQIBgPoj/vnPwBgJcmpAZU4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-scsi@vger.kernel.org
+	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	stable@vger.kernel.org,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Wei Liu <wei.liu@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH 0/7] xen/events: bug fixes and some diagnostic aids
-Date: Sat,  6 Feb 2021 11:49:25 +0100
-Message-Id: <20210206104932.29064-1-jgross@suse.com>
+	Julien Grall <julien@xen.org>
+Subject: [PATCH 2/7] xen/events: don't unmask an event channel when an eoi is pending
+Date: Sat,  6 Feb 2021 11:49:27 +0100
+Message-Id: <20210206104932.29064-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210206104932.29064-1-jgross@suse.com>
+References: <20210206104932.29064-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The first three patches are fixes for XSA-332. The avoid WARN splats
-and a performance issue with interdomain events.
+An event channel should be kept masked when an eoi is pending for it.
+When being migrated to another cpu it might be unmasked, though.
 
-Patches 4 and 5 are some additions to event handling in order to add
-some per pv-device statistics to sysfs and the ability to have a per
-backend device spurious event delay control.
+In order to avoid this keep two different flags for each event channel
+to be able to distinguish "normal" masking/unmasking from eoi related
+masking/unmasking. The event channel should only be able to generate
+an interrupt if both flags are cleared.
 
-Patches 6 and 7 are minor fixes I had lying around.
+Cc: stable@vger.kernel.org
+Fixes: 54c9de89895e0a36047 ("xen/events: add a new late EOI evtchn framework")
+Reported-by: Julien Grall <julien@xen.org>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/xen/events/events_base.c | 63 +++++++++++++++++++++++++++-----
+ 1 file changed, 53 insertions(+), 10 deletions(-)
 
-Juergen Gross (7):
-  xen/events: reset affinity of 2-level event initially
-  xen/events: don't unmask an event channel when an eoi is pending
-  xen/events: fix lateeoi irq acknowledgement
-  xen/events: link interdomain events to associated xenbus device
-  xen/events: add per-xenbus device event statistics and settings
-  xen/evtch: use smp barriers for user event ring
-  xen/evtchn: read producer index only once
-
- drivers/block/xen-blkback/xenbus.c  |   2 +-
- drivers/net/xen-netback/interface.c |  16 ++--
- drivers/xen/events/events_2l.c      |  20 +++++
- drivers/xen/events/events_base.c    | 133 ++++++++++++++++++++++------
- drivers/xen/evtchn.c                |   6 +-
- drivers/xen/pvcalls-back.c          |   4 +-
- drivers/xen/xen-pciback/xenbus.c    |   2 +-
- drivers/xen/xen-scsiback.c          |   2 +-
- drivers/xen/xenbus/xenbus_probe.c   |  66 ++++++++++++++
- include/xen/events.h                |   7 +-
- include/xen/xenbus.h                |   7 ++
- 11 files changed, 217 insertions(+), 48 deletions(-)
-
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index e850f79351cb..6a836d131e73 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -97,7 +97,9 @@ struct irq_info {
+ 	short refcnt;
+ 	u8 spurious_cnt;
+ 	u8 is_accounted;
+-	enum xen_irq_type type; /* type */
++	short type;		/* type: IRQT_* */
++	bool masked;		/* Is event explicitly masked? */
++	bool eoi_pending;	/* Is EOI pending? */
+ 	unsigned irq;
+ 	evtchn_port_t evtchn;   /* event channel */
+ 	unsigned short cpu;     /* cpu bound */
+@@ -302,6 +304,8 @@ static int xen_irq_info_common_setup(struct irq_info *info,
+ 	info->irq = irq;
+ 	info->evtchn = evtchn;
+ 	info->cpu = cpu;
++	info->masked = true;
++	info->eoi_pending = false;
+ 
+ 	ret = set_evtchn_to_irq(evtchn, irq);
+ 	if (ret < 0)
+@@ -585,7 +589,10 @@ static void xen_irq_lateeoi_locked(struct irq_info *info, bool spurious)
+ 	}
+ 
+ 	info->eoi_time = 0;
+-	unmask_evtchn(evtchn);
++	info->eoi_pending = false;
++
++	if (!info->masked)
++		unmask_evtchn(evtchn);
+ }
+ 
+ static void xen_irq_lateeoi_worker(struct work_struct *work)
+@@ -830,7 +837,11 @@ static unsigned int __startup_pirq(unsigned int irq)
+ 		goto err;
+ 
+ out:
+-	unmask_evtchn(evtchn);
++	info->masked = false;
++
++	if (!info->eoi_pending)
++		unmask_evtchn(evtchn);
++
+ 	eoi_pirq(irq_get_irq_data(irq));
+ 
+ 	return 0;
+@@ -857,6 +868,7 @@ static void shutdown_pirq(struct irq_data *data)
+ 	if (!VALID_EVTCHN(evtchn))
+ 		return;
+ 
++	info->masked = true;
+ 	mask_evtchn(evtchn);
+ 	xen_evtchn_close(evtchn);
+ 	xen_irq_info_cleanup(info);
+@@ -1768,18 +1780,26 @@ static int set_affinity_irq(struct irq_data *data, const struct cpumask *dest,
+ 
+ static void enable_dynirq(struct irq_data *data)
+ {
+-	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
++	struct irq_info *info = info_for_irq(data->irq);
++	evtchn_port_t evtchn = info ? info->evtchn : 0;
+ 
+-	if (VALID_EVTCHN(evtchn))
+-		unmask_evtchn(evtchn);
++	if (VALID_EVTCHN(evtchn)) {
++		info->masked = false;
++
++		if (!info->eoi_pending)
++			unmask_evtchn(evtchn);
++	}
+ }
+ 
+ static void disable_dynirq(struct irq_data *data)
+ {
+-	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
++	struct irq_info *info = info_for_irq(data->irq);
++	evtchn_port_t evtchn = info ? info->evtchn : 0;
+ 
+-	if (VALID_EVTCHN(evtchn))
++	if (VALID_EVTCHN(evtchn)) {
++		info->masked = true;
+ 		mask_evtchn(evtchn);
++	}
+ }
+ 
+ static void ack_dynirq(struct irq_data *data)
+@@ -1798,6 +1818,29 @@ static void mask_ack_dynirq(struct irq_data *data)
+ 	ack_dynirq(data);
+ }
+ 
++static void lateeoi_ack_dynirq(struct irq_data *data)
++{
++	struct irq_info *info = info_for_irq(data->irq);
++	evtchn_port_t evtchn = info ? info->evtchn : 0;
++
++	if (VALID_EVTCHN(evtchn)) {
++		info->eoi_pending = true;
++		mask_evtchn(evtchn);
++	}
++}
++
++static void lateeoi_mask_ack_dynirq(struct irq_data *data)
++{
++	struct irq_info *info = info_for_irq(data->irq);
++	evtchn_port_t evtchn = info ? info->evtchn : 0;
++
++	if (VALID_EVTCHN(evtchn)) {
++		info->masked = true;
++		info->eoi_pending = true;
++		mask_evtchn(evtchn);
++	}
++}
++
+ static int retrigger_dynirq(struct irq_data *data)
+ {
+ 	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
+@@ -2023,8 +2066,8 @@ static struct irq_chip xen_lateeoi_chip __read_mostly = {
+ 	.irq_mask		= disable_dynirq,
+ 	.irq_unmask		= enable_dynirq,
+ 
+-	.irq_ack		= mask_ack_dynirq,
+-	.irq_mask_ack		= mask_ack_dynirq,
++	.irq_ack		= lateeoi_ack_dynirq,
++	.irq_mask_ack		= lateeoi_mask_ack_dynirq,
+ 
+ 	.irq_set_affinity	= set_affinity_irq,
+ 	.irq_retrigger		= retrigger_dynirq,
 -- 
 2.26.2
 
