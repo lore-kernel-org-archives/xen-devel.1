@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 836DAC43381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17B97C433E9
 	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4948364EBE
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4948364EBE
+	by mail.kernel.org (Postfix) with ESMTPS id CE09A64EAD
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Feb 2021 10:50:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE09A64EAD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.82121.151779 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.82124.151809 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l8LA3-0005Xh-1Q; Sat, 06 Feb 2021 10:49:55 +0000
+	id 1l8LA8-0005dP-16; Sat, 06 Feb 2021 10:50:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 82121.151779; Sat, 06 Feb 2021 10:49:55 +0000
+Received: by outflank-mailman (output) from mailman id 82124.151809; Sat, 06 Feb 2021 10:49:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l8LA2-0005Xa-Ui; Sat, 06 Feb 2021 10:49:54 +0000
-Received: by outflank-mailman (input) for mailman id 82121;
- Sat, 06 Feb 2021 10:49:53 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l8LA7-0005dA-RH; Sat, 06 Feb 2021 10:49:59 +0000
+Received: by outflank-mailman (input) for mailman id 82124;
+ Sat, 06 Feb 2021 10:49:58 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gVlU=HI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1l8LA1-0005Wo-Gc
- for xen-devel@lists.xenproject.org; Sat, 06 Feb 2021 10:49:53 +0000
+ id 1l8LA6-0005VY-Ih
+ for xen-devel@lists.xenproject.org; Sat, 06 Feb 2021 10:49:58 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id bdf918e8-a7cd-4417-a934-24d4bee992af;
- Sat, 06 Feb 2021 10:49:47 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e83dcfe2-0d53-42b6-8df6-ef237726f0a4;
+ Sat, 06 Feb 2021 10:49:49 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E5AFAAD2B;
- Sat,  6 Feb 2021 10:49:46 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id DB079AEB9;
+ Sat,  6 Feb 2021 10:49:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,180 +51,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bdf918e8-a7cd-4417-a934-24d4bee992af
+X-Inumbo-ID: e83dcfe2-0d53-42b6-8df6-ef237726f0a4
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1612608587; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1612608588; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=GH77gMFeluI4ISQQCL5mL3HOsRIyaZbyOEdSH8AsWt0=;
-	b=IFFMq9YDbxtkEPiO6C/5LtLAtDHYvxM651iS1+qH4tvdDWCxIzsRg6ikvZ/7+U0tEsFI1x
-	ri0x4lc7ZzQrLo2ZMEyqZPK8rluRKsUjTIfUFmT+v41H7Vdw1SFIxyZnTE+MZ2UQIsn8hn
-	Yc3SHb9TRQIBgPoj/vnPwBgJcmpAZU4=
+	bh=9dwSISahcOfN3NMnONYxvA+Xvjxj9asEhl9tMU+G0iU=;
+	b=Mo4F52hs9OAJxH6oqDjd2ntDp9R6F7ZJdn+zPE4y5bLUhZ9kXSzHtT1/3GVi2DosWy+1Tx
+	pBjsTb/LSNITlohk/amoDfpckf1C/ScW8KmaztBneh8tyVPIahPVYqgwlYXL4PiRsYG7Am
+	RzQCI08jXlLS/z74o6/g8tAKTJ04Nz8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	stable@vger.kernel.org,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 2/7] xen/events: don't unmask an event channel when an eoi is pending
-Date: Sat,  6 Feb 2021 11:49:27 +0100
-Message-Id: <20210206104932.29064-3-jgross@suse.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 6/7] xen/evtch: use smp barriers for user event ring
+Date: Sat,  6 Feb 2021 11:49:31 +0100
+Message-Id: <20210206104932.29064-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210206104932.29064-1-jgross@suse.com>
 References: <20210206104932.29064-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-An event channel should be kept masked when an eoi is pending for it.
-When being migrated to another cpu it might be unmasked, though.
+The ring buffer for user events is used in the local system only, so
+smp barriers are fine for ensuring consistency.
 
-In order to avoid this keep two different flags for each event channel
-to be able to distinguish "normal" masking/unmasking from eoi related
-masking/unmasking. The event channel should only be able to generate
-an interrupt if both flags are cleared.
-
-Cc: stable@vger.kernel.org
-Fixes: 54c9de89895e0a36047 ("xen/events: add a new late EOI evtchn framework")
-Reported-by: Julien Grall <julien@xen.org>
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/xen/events/events_base.c | 63 +++++++++++++++++++++++++++-----
- 1 file changed, 53 insertions(+), 10 deletions(-)
+ drivers/xen/evtchn.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index e850f79351cb..6a836d131e73 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -97,7 +97,9 @@ struct irq_info {
- 	short refcnt;
- 	u8 spurious_cnt;
- 	u8 is_accounted;
--	enum xen_irq_type type; /* type */
-+	short type;		/* type: IRQT_* */
-+	bool masked;		/* Is event explicitly masked? */
-+	bool eoi_pending;	/* Is EOI pending? */
- 	unsigned irq;
- 	evtchn_port_t evtchn;   /* event channel */
- 	unsigned short cpu;     /* cpu bound */
-@@ -302,6 +304,8 @@ static int xen_irq_info_common_setup(struct irq_info *info,
- 	info->irq = irq;
- 	info->evtchn = evtchn;
- 	info->cpu = cpu;
-+	info->masked = true;
-+	info->eoi_pending = false;
+diff --git a/drivers/xen/evtchn.c b/drivers/xen/evtchn.c
+index a7a85719a8c8..421382c73d88 100644
+--- a/drivers/xen/evtchn.c
++++ b/drivers/xen/evtchn.c
+@@ -173,7 +173,7 @@ static irqreturn_t evtchn_interrupt(int irq, void *data)
  
- 	ret = set_evtchn_to_irq(evtchn, irq);
- 	if (ret < 0)
-@@ -585,7 +589,10 @@ static void xen_irq_lateeoi_locked(struct irq_info *info, bool spurious)
+ 	if ((u->ring_prod - u->ring_cons) < u->ring_size) {
+ 		*evtchn_ring_entry(u, u->ring_prod) = evtchn->port;
+-		wmb(); /* Ensure ring contents visible */
++		smp_wmb(); /* Ensure ring contents visible */
+ 		if (u->ring_cons == u->ring_prod++) {
+ 			wake_up_interruptible(&u->evtchn_wait);
+ 			kill_fasync(&u->evtchn_async_queue,
+@@ -245,7 +245,7 @@ static ssize_t evtchn_read(struct file *file, char __user *buf,
  	}
  
- 	info->eoi_time = 0;
--	unmask_evtchn(evtchn);
-+	info->eoi_pending = false;
-+
-+	if (!info->masked)
-+		unmask_evtchn(evtchn);
- }
- 
- static void xen_irq_lateeoi_worker(struct work_struct *work)
-@@ -830,7 +837,11 @@ static unsigned int __startup_pirq(unsigned int irq)
- 		goto err;
- 
- out:
--	unmask_evtchn(evtchn);
-+	info->masked = false;
-+
-+	if (!info->eoi_pending)
-+		unmask_evtchn(evtchn);
-+
- 	eoi_pirq(irq_get_irq_data(irq));
- 
- 	return 0;
-@@ -857,6 +868,7 @@ static void shutdown_pirq(struct irq_data *data)
- 	if (!VALID_EVTCHN(evtchn))
- 		return;
- 
-+	info->masked = true;
- 	mask_evtchn(evtchn);
- 	xen_evtchn_close(evtchn);
- 	xen_irq_info_cleanup(info);
-@@ -1768,18 +1780,26 @@ static int set_affinity_irq(struct irq_data *data, const struct cpumask *dest,
- 
- static void enable_dynirq(struct irq_data *data)
- {
--	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
-+	struct irq_info *info = info_for_irq(data->irq);
-+	evtchn_port_t evtchn = info ? info->evtchn : 0;
- 
--	if (VALID_EVTCHN(evtchn))
--		unmask_evtchn(evtchn);
-+	if (VALID_EVTCHN(evtchn)) {
-+		info->masked = false;
-+
-+		if (!info->eoi_pending)
-+			unmask_evtchn(evtchn);
-+	}
- }
- 
- static void disable_dynirq(struct irq_data *data)
- {
--	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
-+	struct irq_info *info = info_for_irq(data->irq);
-+	evtchn_port_t evtchn = info ? info->evtchn : 0;
- 
--	if (VALID_EVTCHN(evtchn))
-+	if (VALID_EVTCHN(evtchn)) {
-+		info->masked = true;
- 		mask_evtchn(evtchn);
-+	}
- }
- 
- static void ack_dynirq(struct irq_data *data)
-@@ -1798,6 +1818,29 @@ static void mask_ack_dynirq(struct irq_data *data)
- 	ack_dynirq(data);
- }
- 
-+static void lateeoi_ack_dynirq(struct irq_data *data)
-+{
-+	struct irq_info *info = info_for_irq(data->irq);
-+	evtchn_port_t evtchn = info ? info->evtchn : 0;
-+
-+	if (VALID_EVTCHN(evtchn)) {
-+		info->eoi_pending = true;
-+		mask_evtchn(evtchn);
-+	}
-+}
-+
-+static void lateeoi_mask_ack_dynirq(struct irq_data *data)
-+{
-+	struct irq_info *info = info_for_irq(data->irq);
-+	evtchn_port_t evtchn = info ? info->evtchn : 0;
-+
-+	if (VALID_EVTCHN(evtchn)) {
-+		info->masked = true;
-+		info->eoi_pending = true;
-+		mask_evtchn(evtchn);
-+	}
-+}
-+
- static int retrigger_dynirq(struct irq_data *data)
- {
- 	evtchn_port_t evtchn = evtchn_from_irq(data->irq);
-@@ -2023,8 +2066,8 @@ static struct irq_chip xen_lateeoi_chip __read_mostly = {
- 	.irq_mask		= disable_dynirq,
- 	.irq_unmask		= enable_dynirq,
- 
--	.irq_ack		= mask_ack_dynirq,
--	.irq_mask_ack		= mask_ack_dynirq,
-+	.irq_ack		= lateeoi_ack_dynirq,
-+	.irq_mask_ack		= lateeoi_mask_ack_dynirq,
- 
- 	.irq_set_affinity	= set_affinity_irq,
- 	.irq_retrigger		= retrigger_dynirq,
+ 	rc = -EFAULT;
+-	rmb(); /* Ensure that we see the port before we copy it. */
++	smp_rmb(); /* Ensure that we see the port before we copy it. */
+ 	if (copy_to_user(buf, evtchn_ring_entry(u, c), bytes1) ||
+ 	    ((bytes2 != 0) &&
+ 	     copy_to_user(&buf[bytes1], &u->ring[0], bytes2)))
 -- 
 2.26.2
 
