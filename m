@@ -2,45 +2,44 @@ Return-Path: <SRS0=f2UP=HK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D657BC433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 10:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D04E4C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 10:41:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8827064DE7
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 10:36:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8827064DE7
+	by mail.kernel.org (Postfix) with ESMTPS id 685D264E76
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 10:41:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 685D264E76
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.82712.152798 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.82717.152823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l93u1-0008Ik-V5; Mon, 08 Feb 2021 10:36:21 +0000
+	id 1l93yi-0000u4-QK; Mon, 08 Feb 2021 10:41:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 82712.152798; Mon, 08 Feb 2021 10:36:21 +0000
+Received: by outflank-mailman (output) from mailman id 82717.152823; Mon, 08 Feb 2021 10:41:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l93u1-0008Id-S8; Mon, 08 Feb 2021 10:36:21 +0000
-Received: by outflank-mailman (input) for mailman id 82712;
- Mon, 08 Feb 2021 10:36:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1l93yi-0000tw-N3; Mon, 08 Feb 2021 10:41:12 +0000
+Received: by outflank-mailman (input) for mailman id 82717;
+ Mon, 08 Feb 2021 10:41:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZIyB=HK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1l93u0-0008IY-7Z
- for xen-devel@lists.xenproject.org; Mon, 08 Feb 2021 10:36:20 +0000
+ (envelope-from <SRS0=q0oM=HK=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1l93yi-0000tk-51
+ for xen-devel@lists.xenproject.org; Mon, 08 Feb 2021 10:41:12 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 61db22b6-4fcd-4c70-818c-0ff2c4adf5f3;
- Mon, 08 Feb 2021 10:36:19 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id dd5dc9ea-6111-4a81-820b-f17d1a7e05f4;
+ Mon, 08 Feb 2021 10:41:09 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5FFD2AC6E;
- Mon,  8 Feb 2021 10:36:18 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id B983CAD57;
+ Mon,  8 Feb 2021 10:41:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,65 +51,216 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61db22b6-4fcd-4c70-818c-0ff2c4adf5f3
+X-Inumbo-ID: dd5dc9ea-6111-4a81-820b-f17d1a7e05f4
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1612780578; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1612780868; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5UpmvGJTacd6yUXg2H9+bLosTdiuU5Va+P2BDP3oi4Y=;
-	b=QrwXNShCzDyYAZA4BYXeiZBCyfJGNbF/wzlZPiEU3K8Ie6xvQEI1yjQpnzynJRqYeVDDfU
-	KODbn7VjygcHyxQAPUiPYawbNC9JOaoFJqTVptTceuTM4hTUTnHQJIaAqTaLykBtTgvKb5
-	g5ANxsDslCGRmAKiMXbh/ZysXVTk3KU=
-Subject: Re: [PATCH 6/7] xen/evtch: use smp barriers for user event ring
-To: Andrew Cooper <andrew.cooper3@citrix.com>
+	bh=Oyt4NkBsy2VOvu6TQb/77EdCP7ezmBzu+cWNb2D9Psc=;
+	b=jInQEGa6Xw5a0rQHuwGUHqc3bPPkvN0aXjIZejVAVjV87o/lvtqvUIf6zuCKhyl/g9U28P
+	+nTquktmPa7KK+lco70/R8wxEqRXaBfxz8IuJy+gI3Kwm2vpZKnor4wmnFlVxFcHz/kEUF
+	jIVf3rnSr0DoSnZLVKC5tYWfoABHL0U=
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, linux-kernel@vger.kernel.org,
+ Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org,
  xen-devel@lists.xenproject.org
 References: <20210206104932.29064-1-jgross@suse.com>
- <20210206104932.29064-7-jgross@suse.com>
- <2d354cad-3413-a416-0bc1-01d03e1f41cd@citrix.com>
- <dfa40af0-2706-2540-c59a-6593c1c0553a@suse.com>
- <e68f76a5-27ce-a6d8-88a3-1e8fa1c30659@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <def49076-f943-9418-86b0-2aafbd0bf7de@suse.com>
-Date: Mon, 8 Feb 2021 11:36:17 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
+ <20210206104932.29064-8-jgross@suse.com>
+ <72334160-cffe-2d8a-23b7-2ea9ab1d803a@suse.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Subject: Re: [PATCH 7/7] xen/evtchn: read producer index only once
+Message-ID: <626f500a-494a-0141-7bf3-94fb86b47ed4@suse.com>
+Date: Mon, 8 Feb 2021 11:41:08 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-In-Reply-To: <e68f76a5-27ce-a6d8-88a3-1e8fa1c30659@citrix.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <72334160-cffe-2d8a-23b7-2ea9ab1d803a@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="IupQnLRuWdSKH5sgS2OBr8Sl0mDFNikL9"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--IupQnLRuWdSKH5sgS2OBr8Sl0mDFNikL9
+Content-Type: multipart/mixed; boundary="vm53xC4dDhJC8M4kx3W85gteeQw4eJHxu";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Message-ID: <626f500a-494a-0141-7bf3-94fb86b47ed4@suse.com>
+Subject: Re: [PATCH 7/7] xen/evtchn: read producer index only once
+References: <20210206104932.29064-1-jgross@suse.com>
+ <20210206104932.29064-8-jgross@suse.com>
+ <72334160-cffe-2d8a-23b7-2ea9ab1d803a@suse.com>
+In-Reply-To: <72334160-cffe-2d8a-23b7-2ea9ab1d803a@suse.com>
+
+--vm53xC4dDhJC8M4kx3W85gteeQw4eJHxu
+Content-Type: multipart/mixed;
+ boundary="------------1F70BFF80D4B87DC7A855CC4"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 
-On 08.02.2021 11:23, Andrew Cooper wrote:
-> On 08/02/2021 09:50, Jan Beulich wrote:
->> On 08.02.2021 10:44, Andrew Cooper wrote:
->>> On 06/02/2021 10:49, Juergen Gross wrote:
->>>> The ring buffer for user events is used in the local system only, so
->>>> smp barriers are fine for ensuring consistency.
->>>>
->>>> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>>> Signed-off-by: Juergen Gross <jgross@suse.com>
->>> These need to be virt_* to not break in UP builds (on non-x86).
->> Initially I though so, too, but isn't the sole vCPU of such a
->> VM getting re-scheduled to a different pCPU in the hypervisor
->> an implied barrier anyway?
-> 
-> Yes, but that isn't relevant to why UP builds break.
-> 
-> smp_*() degrade to compiler barriers in UP builds, and while that's
-> mostly fine for x86 read/write, its not fine for ARM barriers.
+This is a multi-part message in MIME format.
+--------------1F70BFF80D4B87DC7A855CC4
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Hmm, I may not know enough of Arm's memory model - are you saying
-Arm CPUs aren't even self-coherent, i.e. later operations (e.g.
-the consuming of ring contents) won't observe earlier ones (the
-updating of ring contents) when only a single physical CPU is
-involved in all of this? (I did mention the hypervisor level
-context switch simply because that's the only way multiple CPUs
-can get involved.)
+On 08.02.21 10:48, Jan Beulich wrote:
+> On 06.02.2021 11:49, Juergen Gross wrote:
+>> In evtchn_read() use READ_ONCE() for reading the producer index in
+>> order to avoid the compiler generating multiple accesses.
+>>
+>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>> ---
+>>   drivers/xen/evtchn.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/xen/evtchn.c b/drivers/xen/evtchn.c
+>> index 421382c73d88..f6b199b597bf 100644
+>> --- a/drivers/xen/evtchn.c
+>> +++ b/drivers/xen/evtchn.c
+>> @@ -211,7 +211,7 @@ static ssize_t evtchn_read(struct file *file, char=
+ __user *buf,
+>>   			goto unlock_out;
+>>  =20
+>>   		c =3D u->ring_cons;
+>> -		p =3D u->ring_prod;
+>> +		p =3D READ_ONCE(u->ring_prod);
+>>   		if (c !=3D p)
+>>   			break;
+>=20
+> Why only here and not also in
+>=20
+> 		rc =3D wait_event_interruptible(u->evtchn_wait,
+> 					      u->ring_cons !=3D u->ring_prod);
+>=20
+> or in evtchn_poll()? I understand it's not needed when
+> ring_prod_lock is held, but that's not the case in the two
+> afaics named places. Plus isn't the same then true for
+> ring_cons and ring_cons_mutex, i.e. aren't the two named
+> places plus evtchn_interrupt() also in need of READ_ONCE()
+> for ring_cons?
 
-Jan
+The problem solved here is the further processing using "p" multiple
+times. p must not be silently replaced with u->ring_prod by the
+compiler, so I probably should reword the commit message to say:
+
+=2E.. in order to not allow the compiler to refetch p.
+
+
+Juergen
+
+--------------1F70BFF80D4B87DC7A855CC4
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------1F70BFF80D4B87DC7A855CC4--
+
+--vm53xC4dDhJC8M4kx3W85gteeQw4eJHxu--
+
+--IupQnLRuWdSKH5sgS2OBr8Sl0mDFNikL9
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmAhFUQFAwAAAAAACgkQsN6d1ii/Ey+u
+Zwf8Ct7UaT6BRdKZXaUYyMQVXjemwFjfgeNdTAJ3FeTI043fYYZOJTF6ddFG8QgHKg4Jd+DrmJNq
+gh5hLLJ4CrJaS71U4B1mruE8940e4Kcb2xEOtbHR+A0sF0+YOwfs+B2R6HdVAUp0Byg3EF0rwLZ5
+ja70uiUiyMtJsbxxfArcGamcsOJKb8iwZeo9hIxKlLMGKB+h1u20y4xFhxMSlAZCu8x7EEAx9k5q
+2seqPe854sa6vKKVKu5ZeEYIe4aoGWrM4gzSNXJAifBfINv2Dzrcu3EaAbqtQZJmaM731upup3km
+N9USoU2cEEQk38aO4FrtHfBgWkGDJfz0P6EE/Xf5zA==
+=lf7B
+-----END PGP SIGNATURE-----
+
+--IupQnLRuWdSKH5sgS2OBr8Sl0mDFNikL9--
 
