@@ -2,45 +2,46 @@ Return-Path: <SRS0=f2UP=HK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22CA1C433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 18:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A650AC433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 18:54:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A85D464E74
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 18:49:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A85D464E74
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 28BCA64E59
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Feb 2021 18:54:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 28BCA64E59
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83033.153735 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83037.153759 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9Bb9-0002aq-Gx; Mon, 08 Feb 2021 18:49:23 +0000
+	id 1l9Bfw-0003Z1-G3; Mon, 08 Feb 2021 18:54:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83033.153735; Mon, 08 Feb 2021 18:49:23 +0000
+Received: by outflank-mailman (output) from mailman id 83037.153759; Mon, 08 Feb 2021 18:54:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9Bb9-0002aj-E0; Mon, 08 Feb 2021 18:49:23 +0000
-Received: by outflank-mailman (input) for mailman id 83033;
- Mon, 08 Feb 2021 18:49:21 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1l9Bfw-0003Yu-Cp; Mon, 08 Feb 2021 18:54:20 +0000
+Received: by outflank-mailman (input) for mailman id 83037;
+ Mon, 08 Feb 2021 18:54:19 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1l9Bb7-0002ae-QT
- for xen-devel@lists.xenproject.org; Mon, 08 Feb 2021 18:49:21 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l9Bb7-00023V-EX; Mon, 08 Feb 2021 18:49:21 +0000
-Received: from [54.239.6.177] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1l9Bb7-0003uw-78; Mon, 08 Feb 2021 18:49:21 +0000
+ (envelope-from <SRS0=pnXs=HK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1l9Bfv-0003Yp-GL
+ for xen-devel@lists.xenproject.org; Mon, 08 Feb 2021 18:54:19 +0000
+Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:400:100::c])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 539bb791-a89c-489f-be91-2ab650428b4e;
+ Mon, 08 Feb 2021 18:54:18 +0000 (UTC)
+Received: from sender by smtp.strato.de (RZmta 47.17.1 DYNA|AUTH)
+ with ESMTPSA id 005e38x18IsB5fl
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Mon, 8 Feb 2021 19:54:11 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,100 +53,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=uoF8bUpJutlkFjnTMxiVf+Z7Q1WnD2lsQYRfAefm6VM=; b=KoxPTe+VS95MxpSvL31HtYeA9n
-	4NzeCjdzwVYST6K7zFeE4uzgrrcqp8DSVDP0dGMhvvLPQ1cM2SINwU7LYY+TozxltwDVWN55Tqma9
-	PbB7tIB4O7BFk8UzfE0rOuwyjROkJcptXTCYLnFgL86tkE3FuTa+UgexdFlBGgqx0YwQ=;
-Subject: Re: [PATCH] xen/arm: fix gnttab_need_iommu_mapping
-To: Rahul Singh <Rahul.Singh@arm.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- "lucmiccio@gmail.com" <lucmiccio@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <alpine.DEB.2.21.2102051604320.29047@sstabellini-ThinkPad-T480s>
- <C36DCA9F-1212-4385-AE66-7D41C586A313@arm.com>
- <7e963696-a21f-4c79-5f35-a342982bee86@xen.org>
- <3EEEACBE-2028-4DE9-A3BD-053FF82CFC75@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <bc7c3b13-88da-691f-8094-75502f06e882@xen.org>
-Date: Mon, 8 Feb 2021 18:49:19 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.1
+X-Inumbo-ID: 539bb791-a89c-489f-be91-2ab650428b4e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1612810457;
+	s=strato-dkim-0002; d=aepfle.de;
+	h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+	From:Subject:Sender;
+	bh=RxmIgK2V27/s8zTeUW93U4Nul9Kl0sVucrmJEH1JL28=;
+	b=Jgc5Ap7BfUWzw76steZioMq7lVkhkzApurSXqLXOax6dxuh6IlqxJXiiWcNLIA8nmd
+	sm7eZqgfQtryoIFfQksdM3UUBODw/WyaSisIJ0PI5Y5T3lS0eaB7wQT/GGUvNgKGUih2
+	HoMD6QtHFro8sAhBkmR9pL7JgUAie5ZQKoS1nm/TcCwA9Vtte/uw15LJ/FexNN8ekYYi
+	9as9gqhSGl7uIDzhlaZtrx9sDBhRHzbFyO2ZreArCDszYTY1Y49S4EhPy8lHtfFz8Nb1
+	qKW4gbCT6m5IuSdz1cmB1U986763b4XZWCtDGbxL0WpwdRSeDiNbm3tm/KHhMR3xZrOL
+	Jy+Q==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDXdoX8l8pYAcz5OTW+v4/A=="
+X-RZG-CLASS-ID: mo00
+Date: Mon, 8 Feb 2021 19:53:57 +0100
+From: Olaf Hering <olaf@aepfle.de>
+To: Ian Jackson <iwj@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>, Anthony PERARD
+ <anthony.perard@citrix.com>
+Subject: Re: [PATCH v20210111 07/39] xl: optionally print timestamps during
+ xl migrate
+Message-ID: <20210208195357.0d4b21c0.olaf@aepfle.de>
+In-Reply-To: <24609.25950.629059.164010@mariner.uk.xensource.com>
+References: <20210111174224.24714-1-olaf@aepfle.de>
+	<20210111174224.24714-8-olaf@aepfle.de>
+	<24609.25950.629059.164010@mariner.uk.xensource.com>
+X-Mailer: Claws Mail 2020.08.19 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <3EEEACBE-2028-4DE9-A3BD-053FF82CFC75@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/JG.jPVPCNEr8FFhEdl=QKgz"; protocol="application/pgp-signature"
+
+--Sig_/JG.jPVPCNEr8FFhEdl=QKgz
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 8 Feb 2021 16:22:54 +0000
+schrieb Ian Jackson <iwj@xenproject.org>:
+
+> With my maintainer hat on: this is a useful development but I am not
+> sure about the choice of -T, and the choice to make this a
+> migrate-specific option.  Most unix things that have an option to
+> print timestamps use `-t`.  But we have already stolen `-t` as a
+> global option for "prinht CR as well as LF".  Hrmf.
+
+Was 'xl -t' intentionally left out of xl.c:help()?
+It is only mentioned in the xl man page.
+
+If yes, my change will also omit it.
+If no, I will add it along with the global -T option.
 
 
+Olaf
 
-On 08/02/2021 18:19, Rahul Singh wrote:
-> Hello Julien,
+--Sig_/JG.jPVPCNEr8FFhEdl=QKgz
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
 
-Hi Rahul,
+-----BEGIN PGP SIGNATURE-----
 
-> 
->> On 8 Feb 2021, at 6:11 pm, Julien Grall <julien@xen.org> wrote:
->>
->>
->>
->> On 08/02/2021 18:06, Rahul Singh wrote:
->>>> On 6 Feb 2021, at 12:38 am, Stefano Stabellini <sstabellini@kernel.org> wrote:
->>>>
->>>> Commit 91d4eca7add broke gnttab_need_iommu_mapping on ARM.
->>>> The offending chunk is:
->>>>
->>>> #define gnttab_need_iommu_mapping(d)                    \
->>>> -    (is_domain_direct_mapped(d) && need_iommu(d))
->>>> +    (is_domain_direct_mapped(d) && need_iommu_pt_sync(d))
->>>>
->>>> On ARM we need gnttab_need_iommu_mapping to be true for dom0 when it is
->>>> directly mapped, like the old check did, but the new check is always
->>>> false.
->>>>
->>>> In fact, need_iommu_pt_sync is defined as dom_iommu(d)->need_sync and
->>>> need_sync is set as:
->>>>
->>>>     if ( !is_hardware_domain(d) || iommu_hwdom_strict )
->>>>         hd->need_sync = !iommu_use_hap_pt(d);
->>>>
->>>> iommu_hwdom_strict is actually supposed to be ignored on ARM, see the
->>>> definition in docs/misc/xen-command-line.pandoc:
->>>>
->>>>     This option is hardwired to true for x86 PVH dom0's (as RAM belonging to
->>>>     other domains in the system don't live in a compatible address space), and
->>>>     is ignored for ARM.
->>>>
->>>> But aside from that, the issue is that iommu_use_hap_pt(d) is true,
->>>> hence, hd->need_sync is false, and gnttab_need_iommu_mapping(d) is false
->>>> too.
->>>>
->>>> As a consequence, when using PV network from a domU on a system where
->>>> IOMMU is on from Dom0, I get:
->>>>
->>>> (XEN) smmu: /smmu@fd800000: Unhandled context fault: fsr=0x402, iova=0x8424cb148, fsynr=0xb0001, cb=0
->>>> [   68.290307] macb ff0e0000.ethernet eth0: DMA bus error: HRESP not OK
->>> I also observed the IOMMU fault when DOMU guest is created and great table is used when IOMMU is enabled. I fixed the error in different way but I am not sure if you also observing the same error. I submitted the patch to pci-passthrough integration branch. Please have a look once if that make sense.
->>
->> I belive this is the same error as Stefano has observed. However, your patch will unfortunately not work if you have a system with a mix of protected and non-protected DMA-capable devices.
-> 
-> Yes you are right thats what I though when I fixed the error but then I thought in different direction if IOMMU is enabled system wise every device should be protected by IOMMU.
-I am not aware of any rule preventing a mix of protected and unprotected 
-DMA-capable devices.
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmAhiMUACgkQ86SN7mm1
+DoA/wg//QY40tppMn5FtjWP0cfgFS0bHuDadl7qtpMW3LM9LlFejCVRRBWyRucxU
+tJ2mtvGOro55xvg3TOZxUva0acJGKnHnhU0rs38rARgFmqJyKJxIRH+JSe/bFWYE
++2Zn2F8B1lEon5MsNga6Pg/HHhp+d0BuOmhzJJAlTQSlMl/tiBueKg1U+RnGh7EF
+XYjlipYrjotuBOCo/PhCUbLw3Xn651T1Adn2Q8n2161974VqXbV1Er5fKQbiOkDE
+J97k0FgVL3rkC10LOppMWU9HAGbTaxRpcfQHs6yF37vxdNUlDKqz8anDjDQaRpNg
+VonhwgSH9J63A84/lgzBxSEG7eNetBO8ahqyARcHriMXP95JPRGPOobkE7dCf3AP
+zRpQ6h89rOesSD+dFVGKDdQjLN38qtUaVK6VRoxOXEPi45wAAv5ozvz97zQcuFX3
+AcMIR+o1U/FWfmg5Jf63Cy7otwJ1ftGvG8JUkYZrODr4pHclS45cjUtBUpTKqUZb
+1mF6iGbSYPe9wp6wYIyGWgQstvqhRpPfT4Q48HYKe5wI+Y+7/Sze+FovaIdxgUzl
+fsAjilAOhU5T9HFQ1YPzZT3o5R27fIBmaxtx9+vDtst5dPz1txVF8nu2nBZeGGe4
+Cy+OWdhsa6WpYBmfgneueMncyIj+gM2B12Wb1fhOJl9FlP4/XyA=
+=Vlcx
+-----END PGP SIGNATURE-----
 
-However, even if they are all protected by an IOMMU, some of the IOMMUs 
-may have been disabled by the firmware tables for various reasons (e.g. 
-performance, buggy SMMU...). For instance, this is the case on Juno 
-where 2 out of 3 SMMUs are disabled in the Linux upstream DT.
-
-As we don't know which device will use the grant for DMA, we always need 
-to return the machine physical address.
-
-Cheers,
-
--- 
-Julien Grall
+--Sig_/JG.jPVPCNEr8FFhEdl=QKgz--
 
