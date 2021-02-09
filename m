@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4E93C43381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECA8CC4332D
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 17:59:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 98C7464EC6
+	by mail.kernel.org (Postfix) with ESMTPS id A3B9664EC4
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 17:59:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 98C7464EC6
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3B9664EC4
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83375.155016 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83377.155050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9XIC-0007gS-VB; Tue, 09 Feb 2021 17:59:16 +0000
+	id 1l9XIE-0007kJ-Nm; Tue, 09 Feb 2021 17:59:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83375.155016; Tue, 09 Feb 2021 17:59:16 +0000
+Received: by outflank-mailman (output) from mailman id 83377.155050; Tue, 09 Feb 2021 17:59:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9XIC-0007g1-NW; Tue, 09 Feb 2021 17:59:16 +0000
-Received: by outflank-mailman (input) for mailman id 83375;
- Tue, 09 Feb 2021 17:59:15 +0000
+	id 1l9XIE-0007jo-AA; Tue, 09 Feb 2021 17:59:18 +0000
+Received: by outflank-mailman (input) for mailman id 83377;
+ Tue, 09 Feb 2021 17:59:16 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIB-0007e5-6G
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:15 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIC-0007em-2J
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:16 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIB-0003yy-5Z
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:15 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIC-0003zA-1N
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:16 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIB-0004di-4W
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:15 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIC-0004eY-0O
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:16 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1l9XI9-00065Y-8X; Tue, 09 Feb 2021 17:59:13 +0000
+ id 1l9XIA-00065Y-4X; Tue, 09 Feb 2021 17:59:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,47 +58,45 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=ZGibySREmlkdtxh1B3xdTGiAPnSGGHBkgH+xeUe0jfg=; b=ZXghKaLkqZMGrYekheqY7qwBmD
-	6SbZ629tQKFK7kN0tFA5MEbVOXnOhSdxyaK5G92Bm4f8gMECaSQJGcH04JYRoB+GJLeO9ZA30OeoI
-	W7MfzLxXgPaZ0Vd8bY/HX/wlSUC7GDuxkCNpn5gJm+MGfWMlBuUXMJfIaDPORooZajRw=;
+	bh=zS5Qpm9EEk8VpYi2KeFWiIa9aufzej4lmRBAOxzJ8fo=; b=iXl7meE5dLhsslURerdtufop65
+	bz/nnK0lO0CavJvqgI+tBlYjzuUCTg0iLIU769Cli5Zrup6eUCeWBBsmVBXZNAHdip0sUN7q/gxhT
+	ayjr5TVq2F6yRhx9XTHoFwO7GZ5BfHaYIqhL6ZvYMExoWF0HFehuIhEvN2V5t7bWihW0=;
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 4/7] mg-debian-installer-update: Use Debian mirror selection
-Date: Tue,  9 Feb 2021 17:59:01 +0000
-Message-Id: <20210209175904.28282-4-iwj@xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [OSSTEST PATCH 6/7] production-config: Use a snapshot for buster armhf
+Date: Tue,  9 Feb 2021 17:59:03 +0000
+Message-Id: <20210209175904.28282-6-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210209175904.28282-1-iwj@xenproject.org>
 References: <20210209175904.28282-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-NFC with existing config.
+The recent Debian update broke some guest setup.  Roll back.
 
+CC: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- mg-debian-installer-update | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ production-config | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/mg-debian-installer-update b/mg-debian-installer-update
-index 5e890d34..4fb4bc21 100755
---- a/mg-debian-installer-update
-+++ b/mg-debian-installer-update
-@@ -28,7 +28,13 @@ suite=$1
- arch=$2
- packages="$3"
+diff --git a/production-config b/production-config
+index e7009a55..126c5d3b 100644
+--- a/production-config
++++ b/production-config
+@@ -93,6 +93,8 @@ TftpDiVersion_jessie 2018-06-26
+ TftpDiVersion_stretch 2020-09-24
+ TftpDiVersion_buster 2021-02-08
  
--site=http://ftp.debian.org/debian/
-+site=$(perl -we '
-+    use Osstest;
-+    use Osstest::Debian;
-+    readglobalconfig();
-+    print debian_mirror_url_suite_arch($ARGV[0], $ARGV[1]) or die $!;
-+' "$suite" "$arch")
++DebianMirror_buster_armhf http://snapshot.debian.org/archive/debian/20210201T024125Z/
 +
- sbase=$site/dists/$suite
+ DebianSnapshotBackports_jessie http://snapshot.debian.org/archive/debian/20190206T211314Z/
  
- src=$sbase/main/installer-$arch/current/images/netboot/
+ # For ISO installs
 -- 
 2.20.1
 
