@@ -2,46 +2,42 @@ Return-Path: <SRS0=g3ET=HL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,URIBL_RED,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7321C433DB
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 22:21:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74C45C433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 23:41:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 66AEE64DDF
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 22:21:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66AEE64DDF
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3735764E3F
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 23:41:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3735764E3F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83449.155353 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83456.155380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9bNm-0000kb-Gp; Tue, 09 Feb 2021 22:21:18 +0000
+	id 1l9cch-0007yW-VP; Tue, 09 Feb 2021 23:40:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83449.155353; Tue, 09 Feb 2021 22:21:18 +0000
+Received: by outflank-mailman (output) from mailman id 83456.155380; Tue, 09 Feb 2021 23:40:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9bNm-0000kU-Co; Tue, 09 Feb 2021 22:21:18 +0000
-Received: by outflank-mailman (input) for mailman id 83449;
- Tue, 09 Feb 2021 22:21:17 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1l9bNl-0000k6-2v
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 22:21:17 +0000
-Received: from mail-pf1-x435.google.com (unknown [2607:f8b0:4864:20::435])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9dc70a99-fe7e-4d42-bda6-f1e1e43f412c;
- Tue, 09 Feb 2021 22:21:15 +0000 (UTC)
-Received: by mail-pf1-x435.google.com with SMTP id t29so12793874pfg.11
- for <xen-devel@lists.xenproject.org>; Tue, 09 Feb 2021 14:21:15 -0800 (PST)
-Received: from sc2-haas01-esx0118.eng.vmware.com ([66.170.99.1])
- by smtp.gmail.com with ESMTPSA id v9sm58601pju.33.2021.02.09.14.21.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Feb 2021 14:21:13 -0800 (PST)
+	id 1l9cch-0007yP-RY; Tue, 09 Feb 2021 23:40:47 +0000
+Received: by outflank-mailman (input) for mailman id 83456;
+ Tue, 09 Feb 2021 23:40:47 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=5GlY=HL=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1l9ccg-0007yG-LU
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 23:40:46 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 01467dc3-32a1-4785-8305-06333bace16f;
+ Tue, 09 Feb 2021 23:40:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,156 +49,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9dc70a99-fe7e-4d42-bda6-f1e1e43f412c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HjSiRe9FHCVaGCF52pKJiLElvBu049No/wtLMDAICXE=;
-        b=ZPccq1cXTR6T3lt5wME8WuvLAa5mZge5Mw8wXRyQz0ElTK2dM1mAnAYXOysMgOvFTF
-         M1Xw0/LEh9dW5Qkrenqg0x0Lv+vYZsYEyKugTwXm+DqKUU9BR7UzcXPZmO9XadLkecQv
-         ApW9qLmbiPGG6qIUhUfOsDjkvmBBT3d1bIuWRorvesu1dHc8b0GYSrflEf1HFbYKj3Ps
-         33QK4jBS3ZO5kHS9hN+Jy1KJAsWXHDkIkgvZxzA1ZM4RRCcfTprdS7m3wectpcSsxT5g
-         gsp5xUecBmhB2lJcNcmkxhi49e7wSClMUrfkE5Gmy18NkLMWcoXbkUDEDX4QE6sQ9x5B
-         IO6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HjSiRe9FHCVaGCF52pKJiLElvBu049No/wtLMDAICXE=;
-        b=OQSl+fzNLuOpPgz9/JjDmEf58dw18DjOmum3B4/NoJtKVzwgpXsARqWj01NBYtDvr0
-         8UarNOWyW8DdVZcA05hGQKiokrWS//Cp9XvuPerw0p1zvr2SQSUOcGQe7C+FOJTvcnoS
-         tqCE/MMQWaS171gk4EGeczk5tYJTEah6Ien7F2PDaNfof/IYMma1a2yMSkFS6u1GFahG
-         HBCDIg6eQVRTvvyhgIpXDOBuZnfYq7fpDFd6o49SuyKXqQ8ewrTsO+0QWZp123UTnDi+
-         UGKj+rqp7l9JheFwEbLk6LSGFV/0Vpw3dS43bqpUGXeZO8UWt0X9MHjQS9AL+vkiKwlC
-         MJtg==
-X-Gm-Message-State: AOAM532jGkbMuqIeLUGm97DqhG0vuNt4F+YCznY3JGilUTBfzJTcjgV1
-	1+ZvmdTfu2PIIV8DetofyPQ=
-X-Google-Smtp-Source: ABdhPJz3LfnWDYq7JINpREZUWfE+W5NwAF3qi+h7lRxojWAtxXFLj2+kpLvcsoQwwfGFKhWJBLAhPg==
-X-Received: by 2002:a63:545f:: with SMTP id e31mr136017pgm.212.1612909274776;
-        Tue, 09 Feb 2021 14:21:14 -0800 (PST)
-From: Nadav Amit <nadav.amit@gmail.com>
-X-Google-Original-From: Nadav Amit
-To: Thomas Gleixner <tglx@linutronix.de>
-Cc: linux-kernel@vger.kernel.org,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Nadav Amit <namit@vmware.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Ingo Molnar <mingo@redhat.com>,
-	Josh Poimboeuf <jpoimboe@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Rik van Riel <riel@surriel.com>,
-	Sasha Levin <sashal@kernel.org>,
-	Stephen Hemminger <sthemmin@microsoft.com>,
-	kvm@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 0/8] x86/tlb: Concurrent TLB flushes
-Date: Tue,  9 Feb 2021 14:16:45 -0800
-Message-Id: <20210209221653.614098-1-namit@vmware.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 01467dc3-32a1-4785-8305-06333bace16f
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1612914045;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=yLrkLwcyr2KlIqio3Kl3OKuvXVXkJRZdqlVuUYnouSs=;
+  b=ZkSQJybmRRypFBcR3oFMYTdZtTwWz3hs8D1wHxqwepABDTPi/Zi6ICJQ
+   md8HLnWZPdC/RIUfZCApP45oK8pcabBN+OaBXYGrirSvPQNWrJzMn8u9M
+   l1s8bJI8oawF0NSKPuqf/NF7Ppv4IO7O+uzJHbEchAE9nYX5XN+99jrE3
+   w=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: o5+VlFo9/XotGNHCMH6EKmkRk3thxdZHEXV6A33GZI6Tee3T6QQHiRl5EJZ5+wGbsazcjNRuX7
+ ditmIDSdIW1qhAyv1YM4/+lPrhTqS9NekLgyy9iFYWH2pklVHKprl11IZWLKNEMooOIlssEhgk
+ 1A8BKG1vMJlE9K8AZs+Ro9ly6ybIwxe/KxVnepm4BWPiY+dXM/AMDkz9DipMDkXFe8bpieSEpV
+ mOyfJ99xz9BHUzhrOE0G4bfacCRmPIcQ9jLoykZdBP6xbXPwE/qpeTFGb2ggxi06+1sF6GZeU2
+ /UY=
+X-SBRS: 5.1
+X-MesageID: 36942693
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.81,166,1610427600"; 
+   d="scan'208";a="36942693"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
+	<iwj@xenproject.org>
+Subject: [PATCH for-4.15] x86/ucode/amd: Fix OoB read in cpu_request_microcode()
+Date: Tue, 9 Feb 2021 23:40:19 +0000
+Message-ID: <20210209234019.3827-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-From: Nadav Amit <namit@vmware.com>
+verify_patch_size() is a maximum size check, and doesn't have a minimum bound.
 
-This is a respin of a rebased version of an old series, which I did not
-follow, as I was preoccupied with personal issues (sorry).
+If the microcode container encodes a blob with a length less than 64 bytes,
+the subsequent calls to microcode_fits()/compare_header() may read off the end
+of the buffer.
 
-The series improve TLB shootdown by flushing the local TLB concurrently
-with remote TLBs, overlapping the IPI delivery time with the local
-flush. Performance numbers can be found in the previous version [1].
+Fixes: 4de936a38a ("x86/ucode/amd: Rework parsing logic in cpu_request_microcode()")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Ian Jackson <iwj@xenproject.org>
 
-The patches are essentially the same, but rebasing on the last version
-required some changes. I left the reviewed-by tags - if anyone considers
-it inappropriate, please let me know (and you have my apology).
+In practice, processor_rev_id is the only field read, which is 2 bytes at
+offset 24 into the header.  Not that this makes the bug any less bad.
 
-[1] https://lore.kernel.org/lkml/20190823224153.15223-1-namit@vmware.com/
+For 4.15.  Only dom0 can load new microcode, hence no XSA, but the bug is bad
+and the fix simple and obvious.
+---
+ xen/arch/x86/cpu/microcode/amd.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-v4 -> v5:
-* Rebase on 5.11
-* Move concurrent smp logic to smp_call_function_many_cond() 
-* Remove SGI-UV patch which is not needed anymore
-
-v3 -> v4:
-* Merge flush_tlb_func_local and flush_tlb_func_remote() [Peter]
-* Prevent preemption on_each_cpu(). It is not needed, but it prevents
-  concerns. [Peter/tglx]
-* Adding acked-, review-by tags
-
-v2 -> v3:
-* Open-code the remote/local-flush decision code [Andy]
-* Fix hyper-v, Xen implementations [Andrew]
-* Fix redundant TLB flushes.
-
-v1 -> v2:
-* Removing the patches that Thomas took [tglx]
-* Adding hyper-v, Xen compile-tested implementations [Dave]
-* Removing UV [Andy]
-* Adding lazy optimization, removing inline keyword [Dave]
-* Restructuring patch-set
-
-RFCv2 -> v1:
-* Fix comment on flush_tlb_multi [Juergen]
-* Removing async invalidation optimizations [Andy]
-* Adding KVM support [Paolo]
-
-Cc: Andy Lutomirski <luto@kernel.org>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: Haiyang Zhang <haiyangz@microsoft.com>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Josh Poimboeuf <jpoimboe@redhat.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: "K. Y. Srinivasan" <kys@microsoft.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Rik van Riel <riel@surriel.com>
-Cc: Sasha Levin <sashal@kernel.org>
-Cc: Stephen Hemminger <sthemmin@microsoft.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: kvm@vger.kernel.org
-Cc: linux-hyperv@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: virtualization@lists.linux-foundation.org
-Cc: x86@kernel.org
-Cc: xen-devel@lists.xenproject.org
-
-Nadav Amit (8):
-  smp: Run functions concurrently in smp_call_function_many_cond()
-  x86/mm/tlb: Unify flush_tlb_func_local() and flush_tlb_func_remote()
-  x86/mm/tlb: Open-code on_each_cpu_cond_mask() for tlb_is_not_lazy()
-  x86/mm/tlb: Flush remote and local TLBs concurrently
-  x86/mm/tlb: Privatize cpu_tlbstate
-  x86/mm/tlb: Do not make is_lazy dirty for no reason
-  cpumask: Mark functions as pure
-  x86/mm/tlb: Remove unnecessary uses of the inline keyword
-
- arch/x86/hyperv/mmu.c                 |  10 +-
- arch/x86/include/asm/paravirt.h       |   6 +-
- arch/x86/include/asm/paravirt_types.h |   4 +-
- arch/x86/include/asm/tlbflush.h       |  48 +++----
- arch/x86/include/asm/trace/hyperv.h   |   2 +-
- arch/x86/kernel/alternative.c         |   2 +-
- arch/x86/kernel/kvm.c                 |  11 +-
- arch/x86/mm/init.c                    |   2 +-
- arch/x86/mm/tlb.c                     | 177 +++++++++++++++-----------
- arch/x86/xen/mmu_pv.c                 |  11 +-
- include/linux/cpumask.h               |   6 +-
- include/trace/events/xen.h            |   2 +-
- kernel/smp.c                          | 148 +++++++++++----------
- 13 files changed, 242 insertions(+), 187 deletions(-)
-
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index c4ab395799..cf5947389f 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -349,6 +349,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf, size_t siz
+             if ( size < sizeof(*mc) ||
+                  (mc = buf)->type != UCODE_UCODE_TYPE ||
+                  size - sizeof(*mc) < mc->len ||
++                 mc->len < sizeof(struct microcode_patch) ||
+                  (!skip_ucode && !verify_patch_size(mc->len)) )
+             {
+                 printk(XENLOG_ERR "microcode: Bad microcode data\n");
 -- 
-2.25.1
+2.11.0
 
 
