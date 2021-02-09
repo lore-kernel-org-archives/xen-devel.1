@@ -2,42 +2,46 @@ Return-Path: <SRS0=g3ET=HL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4D8AC433DB
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 15:34:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AFF2C433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 15:46:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 611BD601FD
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 15:34:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 611BD601FD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 882F264E54
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 15:45:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 882F264E54
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83303.154674 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83310.154701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9V1f-0000Ml-Su; Tue, 09 Feb 2021 15:34:03 +0000
+	id 1l9VD4-0001TL-DD; Tue, 09 Feb 2021 15:45:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83303.154674; Tue, 09 Feb 2021 15:34:03 +0000
+Received: by outflank-mailman (output) from mailman id 83310.154701; Tue, 09 Feb 2021 15:45:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9V1f-0000Me-Pd; Tue, 09 Feb 2021 15:34:03 +0000
-Received: by outflank-mailman (input) for mailman id 83303;
- Tue, 09 Feb 2021 15:34:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5GlY=HL=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1l9V1e-0000MZ-K3
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 15:34:02 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b2c82df9-58d6-4634-9ac2-4c1f747c8794;
- Tue, 09 Feb 2021 15:34:01 +0000 (UTC)
+	id 1l9VD4-0001T9-9j; Tue, 09 Feb 2021 15:45:50 +0000
+Received: by outflank-mailman (input) for mailman id 83310;
+ Tue, 09 Feb 2021 15:45:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=NhOK=HL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1l9VD2-0001R5-ND
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 15:45:48 +0000
+Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:400:100::b])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 310bbf59-db49-48f3-94bd-4b1681ac95d7;
+ Tue, 09 Feb 2021 15:45:46 +0000 (UTC)
+Received: from sender by smtp.strato.de (RZmta 47.17.1 DYNA|AUTH)
+ with ESMTPSA id 604447x19Fjf1k7
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
+ (Client did not present a certificate);
+ Tue, 9 Feb 2021 16:45:41 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,73 +53,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2c82df9-58d6-4634-9ac2-4c1f747c8794
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1612884841;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=evLa/BNS2wckTYhJm+Vfd5cvV1KAOJvy29N7hg9YC+4=;
-  b=O7OuA32jU7IiQfFDAuV3NP3pHPrUHncji3MfGrvLAwGPzq01EYtx3A88
-   8zC+a4Wx/Hw74rq550g/5m/EgKWpL5GiIMCZg5PNAYocy9qMYcNwt0Hgk
-   gT2kG4gJZ7VbDNAJMC8mU/C2tmhnQu3+d9fyQDBUlqWQDOtVTfzxOrdXn
-   4=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: uqevPY52mP0+MCL1tyha9isG/6xSm6O0XDNd90OrIcCg5evehdH6dcR2ETswAjUrFuZZRv9TqD
- N+88m1xlz+pN0Ab56WYnhEZyENAuavVXxoehszBcRnY5wvaG2o8zQXnH1yEtKtaJM5RVZsPGbG
- c5fKNjuqh8Tk7wNRubn81KbsjzjVZ4ZYxaF51+3h9esGe3vkK3djbzZExIQPgC7T4uEcOGXqkl
- aDc8hUmrW14c6SznrAE4nQyp/sckg3qJLQoRiVXE1SPP7bNCX7rfDk0ysqiQTLAFj9MKREDTg1
- mok=
-X-SBRS: 5.1
-X-MesageID: 38224177
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.81,165,1610427600"; 
-   d="scan'208";a="38224177"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
-	<iwj@xenproject.org>
-Subject: [PATCH for-4.15] x86/ucode: Fix microcode payload size for Fam19 processors
-Date: Tue, 9 Feb 2021 15:33:36 +0000
-Message-ID: <20210209153336.4016-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+X-Inumbo-ID: 310bbf59-db49-48f3-94bd-4b1681ac95d7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1612885545;
+	s=strato-dkim-0002; d=aepfle.de;
+	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
+	From:Subject:Sender;
+	bh=aII1TmKzcTAfe8t2sM/kmBYVk4jnNgWkXZv7CILKryQ=;
+	b=GQvajl0CbHysFq2/9fJJdSsHk/hjyB3+YU30wqKdqzcC5KcQ6K1GJNvVSDTRvbUFjl
+	ABn77RT+pWvpZ10/abSM/TyGiPMVXLBPtPTscubgq/Asrw9nTAQkzKJrhCmVUkNNVEQg
+	+Wp8IESU45RtyiPknAQvwyyHKvYTEBEYjXVIWFuDF+K50mAwNEVn/JzH6DpJQ9J1GslE
+	AvomINg+KfDIb6NtHHZJZ71ZLdjp+dFkCjUSZkMMC47nGlQge95zUjhLZVPkVJZoVXT4
+	R2j51kIokX/M7GdqHf+sKAgcFa2bjqq8WDGGVBA2ui6N8LK0rwpejHtUxPavoIOF3ojq
+	TZxw==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS3GxPjw=="
+X-RZG-CLASS-ID: mo00
+From: Olaf Hering <olaf@aepfle.de>
+To: xen-devel@lists.xenproject.org
+Cc: Olaf Hering <olaf@aepfle.de>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210209 1/4] tools: move CONFIG_DIR and XEN_CONFIG_DIR in paths.m4
+Date: Tue,  9 Feb 2021 16:45:33 +0100
+Message-Id: <20210209154536.10851-2-olaf@aepfle.de>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210209154536.10851-1-olaf@aepfle.de>
+References: <20210209154536.10851-1-olaf@aepfle.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-The original limit provided wasn't accurate.  Blobs are in fact rather larger.
+Upcoming changes need to reuse XEN_CONFIG_DIR.
 
-Fixes: fe36a173d1 ("x86/amd: Initial support for Fam19h processors")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+In its current location the assignment happens too late. Move it up
+in the file, along with CONFIG_DIR. Their only dependency is
+sysconfdir, which may also be adjusted in this file.
+
+No functional change intended.
+
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Ian Jackson <iwj@xenproject.org>
+ m4/paths.m4 | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-For 4.15.  This is a very targetted fix at AMD Zen3 processors.  Without it,
-microcode loading doesn't function.
----
- xen/arch/x86/cpu/microcode/amd.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 5255028af7..c4ab395799 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -111,7 +111,7 @@ static bool verify_patch_size(uint32_t patch_size)
- #define F15H_MPB_MAX_SIZE 4096
- #define F16H_MPB_MAX_SIZE 3458
- #define F17H_MPB_MAX_SIZE 3200
--#define F19H_MPB_MAX_SIZE 4800
-+#define F19H_MPB_MAX_SIZE 5568
+diff --git a/m4/paths.m4 b/m4/paths.m4
+index 1c107b1a61..a736f57d8d 100644
+--- a/m4/paths.m4
++++ b/m4/paths.m4
+@@ -34,6 +34,12 @@ if test "x$sysconfdir" = 'x${prefix}/etc' ; then
+     esac
+ fi
  
-     switch ( boot_cpu_data.x86 )
-     {
--- 
-2.11.0
-
++CONFIG_DIR=$sysconfdir
++AC_SUBST(CONFIG_DIR)
++
++XEN_CONFIG_DIR=$CONFIG_DIR/xen
++AC_SUBST(XEN_CONFIG_DIR)
++
+ AC_ARG_WITH([initddir],
+     AS_HELP_STRING([--with-initddir=DIR],
+     [Path to directory with sysv runlevel scripts. [SYSCONFDIR/init.d]]),
+@@ -128,15 +134,9 @@ AC_SUBST(XEN_LIB_DIR)
+ SHAREDIR=$prefix/share
+ AC_SUBST(SHAREDIR)
+ 
+-CONFIG_DIR=$sysconfdir
+-AC_SUBST(CONFIG_DIR)
+-
+ INITD_DIR=$initddir_path
+ AC_SUBST(INITD_DIR)
+ 
+-XEN_CONFIG_DIR=$CONFIG_DIR/xen
+-AC_SUBST(XEN_CONFIG_DIR)
+-
+ XEN_SCRIPT_DIR=$XEN_CONFIG_DIR/scripts
+ AC_SUBST(XEN_SCRIPT_DIR)
+ 
 
