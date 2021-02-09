@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61AACC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 17:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 964DBC433E9
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 17:59:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 123C064EC8
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 17:59:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 123C064EC8
+	by mail.kernel.org (Postfix) with ESMTPS id 4808E64EC4
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 17:59:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4808E64EC4
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83374.155006 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83372.154993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9XIC-0007fV-Ia; Tue, 09 Feb 2021 17:59:16 +0000
+	id 1l9XIB-0007eM-SO; Tue, 09 Feb 2021 17:59:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83374.155006; Tue, 09 Feb 2021 17:59:16 +0000
+Received: by outflank-mailman (output) from mailman id 83372.154993; Tue, 09 Feb 2021 17:59:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9XIC-0007fG-C2; Tue, 09 Feb 2021 17:59:16 +0000
-Received: by outflank-mailman (input) for mailman id 83374;
- Tue, 09 Feb 2021 17:59:14 +0000
+	id 1l9XIB-0007eF-P6; Tue, 09 Feb 2021 17:59:15 +0000
+Received: by outflank-mailman (input) for mailman id 83372;
+ Tue, 09 Feb 2021 17:59:13 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIA-0007dh-LS
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:14 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XI9-0007dX-S8
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:13 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIA-0003yv-Km
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:14 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XI9-0003yp-OO
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:13 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XIA-0004dP-JD
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:14 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9XI9-0004cv-MB
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 17:59:13 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1l9XI8-00065Y-M7; Tue, 09 Feb 2021 17:59:12 +0000
+ id 1l9XI7-00065Y-NK; Tue, 09 Feb 2021 17:59:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,62 +57,47 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=7ptVHVv6hSaLUTOmQvRCmHGiTbV+rGIqKIYD1ZJ897I=; b=Uf6AjtirZWVDuiNlWJEiz0Cjjy
-	M4h4JY1qy4daDHN8uF5lX9ckO5XK99gdLtdZqCE3E1nkF48MdTluyWXQPmPvQIRArF727dkCCU84T
-	X+hEwuKcvhvwyZafykJad7ktpYWMCXK0VWEG9GW2s94Zfxq63g4y0cmjUQ1EGmrm52vk=;
+	Message-Id:Date:Subject:Cc:To:From;
+	bh=DeylNrZYYK3wMWxKS9RPXvprA8fskbcUy3SMB2/3gZ8=; b=YY4Hz0YJpc+VgI5f4qu8w1f9vh
+	2B9/AgT9Mod3ed28iSgZMackaFGtssgGVMKlehZ8sX7NEuezlyZnEicsF6yaKmpLAXyS+csxe1nbO
+	eNt/TS4wz2TKzqRYuEfTzLc/WWsKkms6edoaGMYIA4/+6eAYXxRKuHy16LmTqTGmPeCs=;
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 3/7] Debian mirror selection: Provide debian_archive_url_suite_arch
-Date: Tue,  9 Feb 2021 17:59:00 +0000
-Message-Id: <20210209175904.28282-3-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 1/7] mg-debian-installer-update: Honour redirect for dtbs
+Date: Tue,  9 Feb 2021 17:58:58 +0000
+Message-Id: <20210209175904.28282-1-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20210209175904.28282-1-iwj@xenproject.org>
-References: <20210209175904.28282-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-mg-debian-installer-update is going to want this.  NFC.
+When using snapshots, we can get a redirect and then we don't
+recurse.  There doesn't seem to be a suitable option for wget, so do
+this by hand before we call wget -m.
 
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- Osstest/Debian.pm | 15 +++++++++------
- 1 file changed, 9 insertions(+), 6 deletions(-)
+ mg-debian-installer-update | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index 05cc6e1f..dee52b3d 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -814,12 +814,8 @@ chmod 600 $subdir/etc/ssh/ssh_host_*_key ||:
- END
- }
- 
--sub debian_mirror_url ($) {
--    # I think ideally this should handle, and be used for, backports too.
--    # It would need an optional suite suffix which could be "-backports"?
--    my ($ho) = @_;
--    my $suite = $ho->{Suite};
--    my $arch = $ho->{Arch};
-+sub debian_mirror_url_suite_arch ($$) {
-+    my ($suite, $arch) = @_;
-     my $url =
-       $c{"DebianMirror_${suite}_${arch}"} //
-       $c{"DebianMirror_${suite}"} //
-@@ -830,6 +826,13 @@ sub debian_mirror_url ($) {
-     return $url;
- }
- 
-+sub debian_mirror_url ($) {
-+    # I think ideally this should handle, and be used for, backports too.
-+    # It would need an optional suite suffix which could be "-backports"?
-+    my ($ho) = @_;
-+    return debian_mirror_url_suite_arch($ho->{Suite}, $ho->{Arch});
-+}
-+
- sub debian_mirror_host_path ($) {
-     my ($ho) = @_;
-     my $url = debian_mirror_url($ho);
+diff --git a/mg-debian-installer-update b/mg-debian-installer-update
+index fb4fe2ab..5e890d34 100755
+--- a/mg-debian-installer-update
++++ b/mg-debian-installer-update
+@@ -89,7 +89,12 @@ if [ "x$dtbs" != "x" ] ; then
+     # Can't seem to get curl to globs.
+     rm -rf dtbs
+     mkdir dtbs
+-    ( cd dtbs && wget -nv -A README,\*.dtb -nd -nH -np -m  $dtbs )
++    dtbs_redir="$(curl -sSI -o /dev/null -w '%{redirect_url}' $dtbs)"
++    if [ "x$dtbs_redir" != x ]; then
++        dtbs=$dtbs_redir
++        echo "Redirected for dtbs, to $dtbs"
++    fi
++    ( cd dtbs && wget -nv -A README,\*.dtb -nd -nH -np -m  "$dtbs" )
+     tar --mtime=./dtbs/README -cf dtbs.tar dtbs
+     gzip -9nf dtbs.tar
+ fi
 -- 
 2.20.1
 
