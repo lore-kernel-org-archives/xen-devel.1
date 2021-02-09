@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-11.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37BAAC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 16:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 891E7C433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 16:53:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C68FA64E9D
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 16:49:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C68FA64E9D
+	by mail.kernel.org (Postfix) with ESMTPS id 3A81D64E9D
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 16:53:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A81D64E9D
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83335.154811 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83340.154824 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9WCh-0008OM-PH; Tue, 09 Feb 2021 16:49:31 +0000
+	id 1l9WGF-0000qo-Dy; Tue, 09 Feb 2021 16:53:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83335.154811; Tue, 09 Feb 2021 16:49:31 +0000
+Received: by outflank-mailman (output) from mailman id 83340.154824; Tue, 09 Feb 2021 16:53:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9WCh-0008OF-MC; Tue, 09 Feb 2021 16:49:31 +0000
-Received: by outflank-mailman (input) for mailman id 83335;
- Tue, 09 Feb 2021 16:49:30 +0000
+	id 1l9WGF-0000qh-At; Tue, 09 Feb 2021 16:53:11 +0000
+Received: by outflank-mailman (input) for mailman id 83340;
+ Tue, 09 Feb 2021 16:53:10 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l9WCg-0008O3-Fb
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 16:49:30 +0000
+ (envelope-from <iwj@xenproject.org>) id 1l9WGE-0000qc-06
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 16:53:10 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l9WCg-0002mm-Ev
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 16:49:30 +0000
+ (envelope-from <iwj@xenproject.org>) id 1l9WGD-0002rP-Rn
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 16:53:09 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1l9WCg-0004RZ-EG
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 16:49:30 +0000
+ (envelope-from <iwj@xenproject.org>) id 1l9WGD-0007Dy-PE
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 16:53:09 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1l9WCd-0005u5-4k; Tue, 09 Feb 2021 16:49:27 +0000
+ id 1l9WGA-0005uj-IC; Tue, 09 Feb 2021 16:53:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,33 +57,59 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=yHG2qfc/IXAIs9CHJMF2Vx71A2v4y1qIu7VmreiNC4E=; b=T33QSR+JMN77FHDfATAi9eu0p7
-	yip8C9fGx93KadqiPP6SNXBaetdDD9S3QRdL8ty8GszIg3SYSpuc39CKS2d/Pus+OLraCC2IRbcJC
-	Yni0Rgc5g7/GRHtJpbpQ9g9NljUzBTTTpgc8L4xImJJ/i++GC8UnA9+wyyIf9o0fcVEw=;
+	bh=1FGfhXqvsB0s8U10Z+v7BjWMeRka/NXyo7WUojyJH3U=; b=EO/ZW17Xw4r09SlFKBvqYLwUwG
+	miuAYjpdKQz+m5EG8nsicUPeECGMeneb85DWD/l2WgdYpvDUFfmB0JQXswMVMOX60PwTTfVL1UP7b
+	yR4wvReoKBsew59APPyVLL4PSTAvC1n1oD1/fzNSrqpyEPGUPaR4UW/zt7wdHTGpb7fc=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24610.48406.940250.878091@mariner.uk.xensource.com>
-Date: Tue, 9 Feb 2021 16:49:26 +0000
+Message-ID: <24610.48626.319165.973767@mariner.uk.xensource.com>
+Date: Tue, 9 Feb 2021 16:53:06 +0000
 To: Olaf Hering <olaf@aepfle.de>
 Cc: xen-devel@lists.xenproject.org,
-    Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v20210209 2/4] tools: add with-xen-scriptdir configure option
-In-Reply-To: <20210209154536.10851-3-olaf@aepfle.de>
+    Wei Liu <wl@xen.org>,
+    Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v20210209 3/4] xl: optionally print timestamps when running xl commands
+In-Reply-To: <20210209154536.10851-4-olaf@aepfle.de>
 References: <20210209154536.10851-1-olaf@aepfle.de>
-	<20210209154536.10851-3-olaf@aepfle.de>
+	<20210209154536.10851-4-olaf@aepfle.de>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Olaf Hering writes ("[PATCH v20210209 2/4] tools: add with-xen-scriptdir configure option"):
-> Some distros plan for fresh installations will have an empty /etc,
-> whose content will not be controlled by the package manager anymore.
+Olaf Hering writes ("[PATCH v20210209 3/4] xl: optionally print timestamps when running xl commands"):
+> Add a global option "-T" to xl to enable timestamps in the output from
+> libxl and libxc. This is most useful with long running commands such
+> as "migrate".
 > 
-> To make this possible, add a knob to configure to allow storing the
-> hotplug scripts to libexec instead of /etc/xen/scripts.
+> During 'xl -v.. migrate domU host' a large amount of debug is generated.
+> It is difficult to map each line to the sending and receiving side.
+> Also the time spent for migration is not reported.
 > 
-> The current default remains unchanged, which is /etc/xen/scripts.
+> With 'xl -T migrate domU host' both sides will print timestamps and
+> also the pid of the invoked xl process to make it more obvious which
+> side produced a given log line.
+> 
+> Note: depending on the command, xl itself also produces other output
+> which does not go through libxentoollog. As a result such output will
+> not have timestamps prepended.
+
+Reviewed-by: Ian Jackson <iwj@xenproject.org>
+
+This is a new feature so it needs a release risk analysis.
+
+The changes are entirely to xl command line handling.  The worst /
+most likely bug would probably be something to do with the way the
+logger is created.  Such a bug would be easy to fix.  Or, this patch
+could easily be reverted.
 
 Release-Acked-by: Ian Jackson <iwj@xenproject.org>
-Reviewed-by: Ian Jackson <iwj@xenproject.org>
+
+> This change adds also the missing "-t" flag to "xl help" output.
+
+This part of the commit message talks about -t rather than -T.  I will
+fix that on commit.
+
+I'm going to commit the first three now.
+
+Ian.
 
