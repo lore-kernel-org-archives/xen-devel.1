@@ -4,45 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6B46C433E6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB970C433E9
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 06:22:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8E68464EBC
+	by mail.kernel.org (Postfix) with ESMTPS id 8C7A464E54
 	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 06:22:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E68464EBC
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C7A464E54
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83128.153975 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83126.153951 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9MPQ-0002DA-Tv; Tue, 09 Feb 2021 06:22:00 +0000
+	id 1l9MPC-00027o-CX; Tue, 09 Feb 2021 06:21:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83128.153975; Tue, 09 Feb 2021 06:22:00 +0000
+Received: by outflank-mailman (output) from mailman id 83126.153951; Tue, 09 Feb 2021 06:21:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9MPQ-0002D2-Ql; Tue, 09 Feb 2021 06:22:00 +0000
-Received: by outflank-mailman (input) for mailman id 83128;
- Tue, 09 Feb 2021 06:21:59 +0000
+	id 1l9MPC-00027h-9U; Tue, 09 Feb 2021 06:21:46 +0000
+Received: by outflank-mailman (input) for mailman id 83126;
+ Tue, 09 Feb 2021 06:21:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CyDg=HL=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1l9MPP-0002CP-93
- for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 06:21:59 +0000
-Received: from mail-pl1-x62e.google.com (unknown [2607:f8b0:4864:20::62e])
+ id 1l9MPB-00027c-Lk
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 06:21:45 +0000
+Received: from mail-pj1-x102c.google.com (unknown [2607:f8b0:4864:20::102c])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8a10e0d0-ec6a-498b-990d-14c632b15aae;
- Tue, 09 Feb 2021 06:21:58 +0000 (UTC)
-Received: by mail-pl1-x62e.google.com with SMTP id y10so9168900plk.7
- for <xen-devel@lists.xenproject.org>; Mon, 08 Feb 2021 22:21:58 -0800 (PST)
+ id 91bc743f-1ed8-406a-bc96-e3b732d44b4b;
+ Tue, 09 Feb 2021 06:21:44 +0000 (UTC)
+Received: by mail-pj1-x102c.google.com with SMTP id q72so983995pjq.2
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Feb 2021 22:21:44 -0800 (PST)
 Received: from localhost ([2401:fa00:1:10:a106:46e1:a999:81df])
- by smtp.gmail.com with UTF8SMTPSA id a24sm22136125pff.18.2021.02.08.22.21.52
+ by smtp.gmail.com with UTF8SMTPSA id s23sm21047537pgj.29.2021.02.08.22.21.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Feb 2021 22:21:57 -0800 (PST)
+ Mon, 08 Feb 2021 22:21:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,31 +55,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a10e0d0-ec6a-498b-990d-14c632b15aae
+X-Inumbo-ID: 91bc743f-1ed8-406a-bc96-e3b732d44b4b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=ypYSGMF0E/cBAHmG+5MgTYKeSo3o0eLQF2YTe8sYrHU=;
-        b=nuyunksJVzuVGUJwTZPlPVCVdAk7PqLR5/eJIWK+czvsKm+Rv5adeEB/7QzXpfJ6Qb
-         eTQmwh//uII6ybrnF53ZsBr2I2SswetGJe9SJ79VWxXwIXylAfF5A0x6o0MD+aeanu4S
-         AHLyX/KnrhYHKwiWZolFO//7UXaKKEQSkWti8=
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=d/9o6gw27S6UN8MkYq1blVrCI9BLsI4+H00tlbC8EBE=;
+        b=favimtx+6weGe8M555lmQOBhCoy54oReElTcJzpJXeVeBgHQUImtrzhR4xL2PNQ4hj
+         B61sBGHNGjtqai17pbRiKkfpKFlyf3N7SfEZNhj9p694hdjwUDNvbaxplQIoX3Y2HB75
+         oM9e2a4FzCjXRLbXyImmgB1sz2HO9c4H1yk+0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=ypYSGMF0E/cBAHmG+5MgTYKeSo3o0eLQF2YTe8sYrHU=;
-        b=XL3vaxdA7H1QeHirmFBt1FjX1pSjMloNotxMPxzIq9A+C3osCdaQ1AGdijRp34cvA0
-         6N1fYeu+0/WNfQNPiOTd6OgYq235Fcr8q17OEyygSEyvAVe2N0fDHZ8t+G/w+/7PHmUn
-         aRhpuNS7TCuKP2+67suogEpxFk0VZPDh/EnUZF8YEAl89Fgo5+7eHGNuuL6/WEXPV77X
-         0u+enS5I4hlQd20104pmq9dj58dy4tjs1uIfpGxzxGWa+rMwph1vZnW3ZeVG+C4zgEV8
-         O9hDFUvgeAXk50dGqXiT9NQfma1eTlC02rRZMIzfeF3WpCZ+ACU1z8FIWlD3ny90VZ3K
-         qKyw==
-X-Gm-Message-State: AOAM5330TSK7fAZirgG8TjA+e5hbcwc6M+QAdxNsreoMT48GFYeHrxo3
-	gtfGGAgYi+rr4b5Qzrre3PuLSw==
-X-Google-Smtp-Source: ABdhPJywOf1kdt/G4UCY0rOH88voPYoRmAlcet1VV4EMdbEytPdXO083Yd5o1179zNV2rDMmBilckQ==
-X-Received: by 2002:a17:90a:df87:: with SMTP id p7mr663033pjv.99.1612851717915;
-        Mon, 08 Feb 2021 22:21:57 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=d/9o6gw27S6UN8MkYq1blVrCI9BLsI4+H00tlbC8EBE=;
+        b=oOPYjOMuUbsGh+ZZcLTtdBcAqogbsFAtjMv7wYHLlO41PxODMaN6oDDWrf1fJcOZ24
+         G6FbiXF8pHL/XupLhsmMsH5II2KhOktWMAr2kfXq34jMKqxn5mRgac422hiG9pah+UCg
+         7dffYDO2xtBMAkyp7TrFdsyEWBJCc5kRsy00vNqFq8StkDUIgTFI407RBfxydV0wJIR3
+         Cu6Ii42vF88QwPw1BrBxnOmQglMw+ppBdbCNoO7eQOLeEl/Llv3ZDXmIL9a4tkDaBBti
+         DvKQBo0pRX/dVOLSrBWJsM3sxr9jA2kn9dswlpzrGTNzxiKxZgrRiaSxxVZgcFEfORIK
+         n7pA==
+X-Gm-Message-State: AOAM532lS2c7h9zcIyJFZdo933askUuFTf0Ir6M/wliHljaPXpzs75NK
+	fwo4Fwf+P+chzLlydLBYFAIVYA==
+X-Google-Smtp-Source: ABdhPJz0oyYOZadpQA/7+OnNYsgqbz6PN7ozvQBTUr4giRuwP1fH3QYLnHESLb3E3I02eo5S/4aG/w==
+X-Received: by 2002:a17:90a:4fe4:: with SMTP id q91mr2479504pjh.165.1612851703796;
+        Mon, 08 Feb 2021 22:21:43 -0800 (PST)
 From: Claire Chang <tientzu@chromium.org>
 To: Rob Herring <robh+dt@kernel.org>,
 	mpe@ellerman.id.au,
@@ -116,70 +117,90 @@ Cc: benh@kernel.crashing.org,
 	Nicolas Boichat <drinkcat@chromium.org>,
 	Jim Quinlan <james.quinlan@broadcom.com>,
 	Claire Chang <tientzu@chromium.org>
-Subject: [PATCH v4 02/14] swiotlb: Move is_swiotlb_buffer() to swiotlb.c
-Date: Tue,  9 Feb 2021 14:21:19 +0800
-Message-Id: <20210209062131.2300005-3-tientzu@chromium.org>
+Subject: [PATCH v4 00/14] Restricted DMA
+Date: Tue,  9 Feb 2021 14:21:17 +0800
+Message-Id: <20210209062131.2300005-1-tientzu@chromium.org>
 X-Mailer: git-send-email 2.30.0.478.g8a0d178c01-goog
-In-Reply-To: <20210209062131.2300005-1-tientzu@chromium.org>
-References: <20210209062131.2300005-1-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move is_swiotlb_buffer() to swiotlb.c and make io_tlb_{start,end}
-static, so we can entirely hide struct swiotlb inside of swiotlb.c in
-the following patches.
+This series implements mitigations for lack of DMA access control on
+systems without an IOMMU, which could result in the DMA accessing the
+system memory at unexpected times and/or unexpected addresses, possibly
+leading to data leakage or corruption.
 
-Signed-off-by: Claire Chang <tientzu@chromium.org>
----
- include/linux/swiotlb.h | 7 +------
- kernel/dma/swiotlb.c    | 7 ++++++-
- 2 files changed, 7 insertions(+), 7 deletions(-)
+For example, we plan to use the PCI-e bus for Wi-Fi and that PCI-e bus is
+not behind an IOMMU. As PCI-e, by design, gives the device full access to
+system memory, a vulnerability in the Wi-Fi firmware could easily escalate
+to a full system exploit (remote wifi exploits: [1a], [1b] that shows a
+full chain of exploits; [2], [3]).
 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 83200f3b042a..041611bf3c2a 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -70,13 +70,8 @@ dma_addr_t swiotlb_map(struct device *dev, phys_addr_t phys,
- 
- #ifdef CONFIG_SWIOTLB
- extern enum swiotlb_force swiotlb_force;
--extern phys_addr_t io_tlb_start, io_tlb_end;
--
--static inline bool is_swiotlb_buffer(phys_addr_t paddr)
--{
--	return paddr >= io_tlb_start && paddr < io_tlb_end;
--}
- 
-+bool is_swiotlb_buffer(phys_addr_t paddr);
- void __init swiotlb_exit(void);
- unsigned int swiotlb_max_segment(void);
- size_t swiotlb_max_mapping_size(struct device *dev);
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index e180211f6ad9..678490d39e55 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -69,7 +69,7 @@ enum swiotlb_force swiotlb_force;
-  * swiotlb_tbl_sync_single_*, to see if the memory was in fact allocated by this
-  * API.
-  */
--phys_addr_t io_tlb_start, io_tlb_end;
-+static phys_addr_t io_tlb_start, io_tlb_end;
- 
- /*
-  * The number of IO TLB blocks (in groups of 64) between io_tlb_start and
-@@ -719,6 +719,11 @@ bool is_swiotlb_active(void)
- 	return io_tlb_end != 0;
- }
- 
-+bool is_swiotlb_buffer(phys_addr_t paddr)
-+{
-+	return paddr >= io_tlb_start && paddr < io_tlb_end;
-+}
-+
- phys_addr_t get_swiotlb_start(void)
- {
- 	return io_tlb_start;
+To mitigate the security concerns, we introduce restricted DMA. Restricted
+DMA utilizes the existing swiotlb to bounce streaming DMA in and out of a
+specially allocated region and does memory allocation from the same region.
+The feature on its own provides a basic level of protection against the DMA
+overwriting buffer contents at unexpected times. However, to protect
+against general data leakage and system memory corruption, the system needs
+to provide a way to restrict the DMA to a predefined memory region (this is
+usually done at firmware level, e.g. MPU in ATF on some ARM platforms [4]).
+
+[1a] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_4.html
+[1b] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_11.html
+[2] https://blade.tencent.com/en/advisories/qualpwn/
+[3] https://www.bleepingcomputer.com/news/security/vulnerabilities-found-in-highly-popular-firmware-for-wifi-chips/
+[4] https://github.com/ARM-software/arm-trusted-firmware/blob/master/plat/mediatek/mt8183/drivers/emi_mpu/emi_mpu.c#L132
+
+Claire Chang (14):
+  swiotlb: Remove external access to io_tlb_start
+  swiotlb: Move is_swiotlb_buffer() to swiotlb.c
+  swiotlb: Add struct swiotlb
+  swiotlb: Refactor swiotlb_late_init_with_tbl
+  swiotlb: Add DMA_RESTRICTED_POOL
+  swiotlb: Add restricted DMA pool
+  swiotlb: Update swiotlb API to gain a struct device argument
+  swiotlb: Use restricted DMA pool if available
+  swiotlb: Refactor swiotlb_tbl_{map,unmap}_single
+  dma-direct: Add a new wrapper __dma_direct_free_pages()
+  swiotlb: Add is_dev_swiotlb_force()
+  swiotlb: Add restricted DMA alloc/free support.
+  dt-bindings: of: Add restricted DMA pool
+  of: Add plumbing for restricted DMA pool
+
+ .../reserved-memory/reserved-memory.txt       |  24 +
+ arch/powerpc/platforms/pseries/svm.c          |   4 +-
+ drivers/iommu/dma-iommu.c                     |  12 +-
+ drivers/of/address.c                          |  25 +
+ drivers/of/device.c                           |   3 +
+ drivers/of/of_private.h                       |   5 +
+ drivers/xen/swiotlb-xen.c                     |   4 +-
+ include/linux/device.h                        |   4 +
+ include/linux/swiotlb.h                       |  32 +-
+ kernel/dma/Kconfig                            |  14 +
+ kernel/dma/direct.c                           |  51 +-
+ kernel/dma/direct.h                           |   8 +-
+ kernel/dma/swiotlb.c                          | 636 ++++++++++++------
+ 13 files changed, 582 insertions(+), 240 deletions(-)
+
 -- 
+
+v4:
+  - Fix spinlock bad magic
+  - Use rmem->name for debugfs entry
+  - Address the comments in v3
+
+v3:
+  Using only one reserved memory region for both streaming DMA and memory
+  allocation.
+  https://lore.kernel.org/patchwork/cover/1360992/
+
+v2:
+  Building on top of swiotlb.
+  https://lore.kernel.org/patchwork/cover/1280705/
+
+v1:
+  Using dma_map_ops.
+  https://lore.kernel.org/patchwork/cover/1271660/
+
 2.30.0.478.g8a0d178c01-goog
 
 
