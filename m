@@ -2,48 +2,46 @@ Return-Path: <SRS0=g3ET=HL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49D20C433DB
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 22:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0730C43381
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 22:21:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED04064E6F
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 22:13:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED04064E6F
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 89835601FF
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Feb 2021 22:21:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89835601FF
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83444.155338 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83450.155365 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9bG4-0008Ci-Ls; Tue, 09 Feb 2021 22:13:20 +0000
+	id 1l9bNs-0000mu-Q5; Tue, 09 Feb 2021 22:21:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83444.155338; Tue, 09 Feb 2021 22:13:20 +0000
+Received: by outflank-mailman (output) from mailman id 83450.155365; Tue, 09 Feb 2021 22:21:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9bG4-0008Cb-Ip; Tue, 09 Feb 2021 22:13:20 +0000
-Received: by outflank-mailman (input) for mailman id 83444;
- Tue, 09 Feb 2021 22:13:19 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l9bG3-0008CR-H7; Tue, 09 Feb 2021 22:13:19 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l9bG3-0008Mv-B1; Tue, 09 Feb 2021 22:13:19 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l9bG2-00054l-Vs; Tue, 09 Feb 2021 22:13:19 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1l9bG2-0004L5-VM; Tue, 09 Feb 2021 22:13:18 +0000
+	id 1l9bNs-0000mn-LE; Tue, 09 Feb 2021 22:21:24 +0000
+Received: by outflank-mailman (input) for mailman id 83450;
+ Tue, 09 Feb 2021 22:21:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1l9bNs-0000md-7D
+ for xen-devel@lists.xenproject.org; Tue, 09 Feb 2021 22:21:24 +0000
+Received: from mail-pl1-x633.google.com (unknown [2607:f8b0:4864:20::633])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 069a73c6-d8ec-41e7-a020-5044499d82fd;
+ Tue, 09 Feb 2021 22:21:22 +0000 (UTC)
+Received: by mail-pl1-x633.google.com with SMTP id a16so77295plh.8
+ for <xen-devel@lists.xenproject.org>; Tue, 09 Feb 2021 14:21:22 -0800 (PST)
+Received: from sc2-haas01-esx0118.eng.vmware.com ([66.170.99.1])
+ by smtp.gmail.com with ESMTPSA id v9sm58601pju.33.2021.02.09.14.21.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Feb 2021 14:21:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,177 +53,464 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=R/Y/WL0H/1HEPq0FxFXxseKL5jpZIDulg/xBv26pxCQ=; b=YGYPO+1jJJUOFeOlGn8zpa92HX
-	zAvSqhLkHtQQFv7A5KBo8F0CAJ+JfToNrWJMqX6iq6XfqKlaX35wtNPsNd/TuYmOtcD6nC6VcRxes
-	kyidSLtE+pp4HQiRNA3zf4O+7BWyasmTbHPFu/DEII7ZgFzKiExYujwPlHb7jNWEkq5E=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-159184-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 069a73c6-d8ec-41e7-a020-5044499d82fd
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=jOyYx1TDjb2A4gHSVOiGYO/bJUu5bLpN/42e2o+FxXM=;
+        b=ZudShlgecDcgL2Wf7EG99R2XM3pqdJk3GWkX8vluBL6fzf8DqgL/EzorucwyMsx473
+         cWp4bOxGdoorhZtXy7Tr0y1KlPEImuVeXVMi3aIYKeYFmsEGAWYZ4r1y5xDQglrr889X
+         NL7wsA8Vp6Tak9bbZi4PWSpfHM5dcxpZ9rkveVr53WNiLM//4j+SpsZXoB5wdDi4C+dI
+         NN+OA9jejs5MTmkLQKWHNCRrHffajpvUi6XNEXyxRG9f9fvB8a0qHZxPuNYKe61jRasg
+         MIAm1hLLu6hshupMPGoLrP0BL9DLL3SmxlC1gHjdFuC4JmTPNsiwBdutV/opH2MChwlF
+         4oHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=jOyYx1TDjb2A4gHSVOiGYO/bJUu5bLpN/42e2o+FxXM=;
+        b=OXjhTE90PDjikTG7/fBgWb9aO1XT9VGeWSbDdXKpP5Yvjwr16euBThf1O28pcyDyqa
+         NoPLvLU3PExAKvwzVBsRHryZmR/KKIGyL38iVm0leC8U/ZB6zdr7uC6+F3aFW+40ItyX
+         7m64ZtkfadW4hbX8b7DE45vO5EU5IwS7XU5B9CEyvgEHVGJCAh9jjdxQblDi4ijekpY2
+         Rynx8i4ymZTcdMOX8OdhHOIqNZmL2BW8qu5DZE4O9kC5C7FdhdihJ9K1KEOw00aixapR
+         t2yAO14PK3ent+65unV+oLCV+hImA8v5hA4xE26tnE4QMmXpSH6JY6asm+EJacXwhY0o
+         z1yQ==
+X-Gm-Message-State: AOAM533MZbK8aBwTBsO2/OqGUDTol788U8cOjI67AWEP18nFUcUiZdcO
+	uGt79VUAmqbtDQyE2657sCE=
+X-Google-Smtp-Source: ABdhPJwGDIgAQd0D3Bj7K7xE4Obh8SaZ1xW5cnD9EhQUhLiG0OIrXKXpw3elA2mYDupV4v1VuXjmJQ==
+X-Received: by 2002:a17:90a:fc3:: with SMTP id 61mr8462pjz.197.1612909281819;
+        Tue, 09 Feb 2021 14:21:21 -0800 (PST)
+From: Nadav Amit <nadav.amit@gmail.com>
+X-Google-Original-From: Nadav Amit
+To: Thomas Gleixner <tglx@linutronix.de>
+Cc: linux-kernel@vger.kernel.org,
+	Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Nadav Amit <namit@vmware.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Sasha Levin <sashal@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	x86@kernel.org,
+	Juergen Gross <jgross@suse.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	linux-hyperv@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	Michael Kelley <mikelley@microsoft.com>
+Subject: [PATCH v5 4/8] x86/mm/tlb: Flush remote and local TLBs concurrently
+Date: Tue,  9 Feb 2021 14:16:49 -0800
+Message-Id: <20210209221653.614098-5-namit@vmware.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210209221653.614098-1-namit@vmware.com>
+References: <20210209221653.614098-1-namit@vmware.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 159184: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:guest-start/debian.repeat:fail:regression
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=687121f8a0e7c1ea1c4fa3d056637e5819342f14
-X-Osstest-Versions-That:
-    xen=f18309eb06efd1db5a2ab9903a1c246b6299951a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 09 Feb 2021 22:13:18 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 159184 xen-unstable-smoke real [real]
-flight 159188 xen-unstable-smoke real-retest [real]
-http://logs.test-lab.xenproject.org/osstest/logs/159184/
-http://logs.test-lab.xenproject.org/osstest/logs/159188/
+From: Nadav Amit <namit@vmware.com>
 
-Regressions :-(
+To improve TLB shootdown performance, flush the remote and local TLBs
+concurrently. Introduce flush_tlb_multi() that does so. Introduce
+paravirtual versions of flush_tlb_multi() for KVM, Xen and hyper-v (Xen
+and hyper-v are only compile-tested).
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-arm64-arm64-xl-xsm     18 guest-start/debian.repeat fail REGR. vs. 159146
+While the updated smp infrastructure is capable of running a function on
+a single local core, it is not optimized for this case. The multiple
+function calls and the indirect branch introduce some overhead, and
+might make local TLB flushes slower than they were before the recent
+changes.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+Before calling the SMP infrastructure, check if only a local TLB flush
+is needed to restore the lost performance in this common case. This
+requires to check mm_cpumask() one more time, but unless this mask is
+updated very frequently, this should impact performance negatively.
 
-version targeted for testing:
- xen                  687121f8a0e7c1ea1c4fa3d056637e5819342f14
-baseline version:
- xen                  f18309eb06efd1db5a2ab9903a1c246b6299951a
+Cc: "K. Y. Srinivasan" <kys@microsoft.com>
+Cc: Haiyang Zhang <haiyangz@microsoft.com>
+Cc: Stephen Hemminger <sthemmin@microsoft.com>
+Cc: Sasha Levin <sashal@kernel.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: x86@kernel.org
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Andy Lutomirski <luto@kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: linux-hyperv@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org
+Cc: xen-devel@lists.xenproject.org
+Reviewed-by: Michael Kelley <mikelley@microsoft.com> # Hyper-v parts
+Reviewed-by: Juergen Gross <jgross@suse.com> # Xen and paravirt parts
+Reviewed-by: Dave Hansen <dave.hansen@linux.intel.com>
+Signed-off-by: Nadav Amit <namit@vmware.com>
+---
+ arch/x86/hyperv/mmu.c                 | 10 +++---
+ arch/x86/include/asm/paravirt.h       |  6 ++--
+ arch/x86/include/asm/paravirt_types.h |  4 +--
+ arch/x86/include/asm/tlbflush.h       |  4 +--
+ arch/x86/include/asm/trace/hyperv.h   |  2 +-
+ arch/x86/kernel/kvm.c                 | 11 ++++--
+ arch/x86/mm/tlb.c                     | 49 +++++++++++++++++----------
+ arch/x86/xen/mmu_pv.c                 | 11 +++---
+ include/trace/events/xen.h            |  2 +-
+ 9 files changed, 58 insertions(+), 41 deletions(-)
 
-Last test of basis   159146  2021-02-08 19:00:27 Z    1 days
-Testing same since   159184  2021-02-09 18:01:28 Z    0 days    1 attempts
+diff --git a/arch/x86/hyperv/mmu.c b/arch/x86/hyperv/mmu.c
+index 2c87350c1fb0..681dba8de4f2 100644
+--- a/arch/x86/hyperv/mmu.c
++++ b/arch/x86/hyperv/mmu.c
+@@ -52,8 +52,8 @@ static inline int fill_gva_list(u64 gva_list[], int offset,
+ 	return gva_n - offset;
+ }
+ 
+-static void hyperv_flush_tlb_others(const struct cpumask *cpus,
+-				    const struct flush_tlb_info *info)
++static void hyperv_flush_tlb_multi(const struct cpumask *cpus,
++				   const struct flush_tlb_info *info)
+ {
+ 	int cpu, vcpu, gva_n, max_gvas;
+ 	struct hv_tlb_flush **flush_pcpu;
+@@ -61,7 +61,7 @@ static void hyperv_flush_tlb_others(const struct cpumask *cpus,
+ 	u64 status = U64_MAX;
+ 	unsigned long flags;
+ 
+-	trace_hyperv_mmu_flush_tlb_others(cpus, info);
++	trace_hyperv_mmu_flush_tlb_multi(cpus, info);
+ 
+ 	if (!hv_hypercall_pg)
+ 		goto do_native;
+@@ -164,7 +164,7 @@ static void hyperv_flush_tlb_others(const struct cpumask *cpus,
+ 	if (!(status & HV_HYPERCALL_RESULT_MASK))
+ 		return;
+ do_native:
+-	native_flush_tlb_others(cpus, info);
++	native_flush_tlb_multi(cpus, info);
+ }
+ 
+ static u64 hyperv_flush_tlb_others_ex(const struct cpumask *cpus,
+@@ -239,6 +239,6 @@ void hyperv_setup_mmu_ops(void)
+ 		return;
+ 
+ 	pr_info("Using hypercall for remote TLB flush\n");
+-	pv_ops.mmu.flush_tlb_others = hyperv_flush_tlb_others;
++	pv_ops.mmu.flush_tlb_multi = hyperv_flush_tlb_multi;
+ 	pv_ops.mmu.tlb_remove_table = tlb_remove_table;
+ }
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index f8dce11d2bc1..515e49204c8b 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -50,7 +50,7 @@ static inline void slow_down_io(void)
+ void native_flush_tlb_local(void);
+ void native_flush_tlb_global(void);
+ void native_flush_tlb_one_user(unsigned long addr);
+-void native_flush_tlb_others(const struct cpumask *cpumask,
++void native_flush_tlb_multi(const struct cpumask *cpumask,
+ 			     const struct flush_tlb_info *info);
+ 
+ static inline void __flush_tlb_local(void)
+@@ -68,10 +68,10 @@ static inline void __flush_tlb_one_user(unsigned long addr)
+ 	PVOP_VCALL1(mmu.flush_tlb_one_user, addr);
+ }
+ 
+-static inline void __flush_tlb_others(const struct cpumask *cpumask,
++static inline void __flush_tlb_multi(const struct cpumask *cpumask,
+ 				      const struct flush_tlb_info *info)
+ {
+-	PVOP_VCALL2(mmu.flush_tlb_others, cpumask, info);
++	PVOP_VCALL2(mmu.flush_tlb_multi, cpumask, info);
+ }
+ 
+ static inline void paravirt_tlb_remove_table(struct mmu_gather *tlb, void *table)
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index b6b02b7c19cc..541fe7193526 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -201,8 +201,8 @@ struct pv_mmu_ops {
+ 	void (*flush_tlb_user)(void);
+ 	void (*flush_tlb_kernel)(void);
+ 	void (*flush_tlb_one_user)(unsigned long addr);
+-	void (*flush_tlb_others)(const struct cpumask *cpus,
+-				 const struct flush_tlb_info *info);
++	void (*flush_tlb_multi)(const struct cpumask *cpus,
++				const struct flush_tlb_info *info);
+ 
+ 	void (*tlb_remove_table)(struct mmu_gather *tlb, void *table);
+ 
+diff --git a/arch/x86/include/asm/tlbflush.h b/arch/x86/include/asm/tlbflush.h
+index a7a598af116d..3c6681def912 100644
+--- a/arch/x86/include/asm/tlbflush.h
++++ b/arch/x86/include/asm/tlbflush.h
+@@ -175,7 +175,7 @@ extern void initialize_tlbstate_and_flush(void);
+  *  - flush_tlb_page(vma, vmaddr) flushes one page
+  *  - flush_tlb_range(vma, start, end) flushes a range of pages
+  *  - flush_tlb_kernel_range(start, end) flushes a range of kernel pages
+- *  - flush_tlb_others(cpumask, info) flushes TLBs on other cpus
++ *  - flush_tlb_multi(cpumask, info) flushes TLBs on multiple cpus
+  *
+  * ..but the i386 has somewhat limited tlb flushing capabilities,
+  * and page-granular flushes are available only on i486 and up.
+@@ -209,7 +209,7 @@ struct flush_tlb_info {
+ void flush_tlb_local(void);
+ void flush_tlb_one_user(unsigned long addr);
+ void flush_tlb_one_kernel(unsigned long addr);
+-void flush_tlb_others(const struct cpumask *cpumask,
++void flush_tlb_multi(const struct cpumask *cpumask,
+ 		      const struct flush_tlb_info *info);
+ 
+ #ifdef CONFIG_PARAVIRT
+diff --git a/arch/x86/include/asm/trace/hyperv.h b/arch/x86/include/asm/trace/hyperv.h
+index 4d705cb4d63b..a8e5a7a2b460 100644
+--- a/arch/x86/include/asm/trace/hyperv.h
++++ b/arch/x86/include/asm/trace/hyperv.h
+@@ -8,7 +8,7 @@
+ 
+ #if IS_ENABLED(CONFIG_HYPERV)
+ 
+-TRACE_EVENT(hyperv_mmu_flush_tlb_others,
++TRACE_EVENT(hyperv_mmu_flush_tlb_multi,
+ 	    TP_PROTO(const struct cpumask *cpus,
+ 		     const struct flush_tlb_info *info),
+ 	    TP_ARGS(cpus, info),
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 5e78e01ca3b4..38ea9dee2456 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -613,7 +613,7 @@ static int kvm_cpu_down_prepare(unsigned int cpu)
+ }
+ #endif
+ 
+-static void kvm_flush_tlb_others(const struct cpumask *cpumask,
++static void kvm_flush_tlb_multi(const struct cpumask *cpumask,
+ 			const struct flush_tlb_info *info)
+ {
+ 	u8 state;
+@@ -627,6 +627,11 @@ static void kvm_flush_tlb_others(const struct cpumask *cpumask,
+ 	 * queue flush_on_enter for pre-empted vCPUs
+ 	 */
+ 	for_each_cpu(cpu, flushmask) {
++		/*
++		 * The local vCPU is never preempted, so we do not explicitly
++		 * skip check for local vCPU - it will never be cleared from
++		 * flushmask.
++		 */
+ 		src = &per_cpu(steal_time, cpu);
+ 		state = READ_ONCE(src->preempted);
+ 		if ((state & KVM_VCPU_PREEMPTED)) {
+@@ -636,7 +641,7 @@ static void kvm_flush_tlb_others(const struct cpumask *cpumask,
+ 		}
+ 	}
+ 
+-	native_flush_tlb_others(flushmask, info);
++	native_flush_tlb_multi(flushmask, info);
+ }
+ 
+ static void __init kvm_guest_init(void)
+@@ -654,7 +659,7 @@ static void __init kvm_guest_init(void)
+ 	}
+ 
+ 	if (pv_tlb_flush_supported()) {
+-		pv_ops.mmu.flush_tlb_others = kvm_flush_tlb_others;
++		pv_ops.mmu.flush_tlb_multi = kvm_flush_tlb_multi;
+ 		pv_ops.mmu.tlb_remove_table = tlb_remove_table;
+ 		pr_info("KVM setup pv remote TLB flush\n");
+ 	}
+diff --git a/arch/x86/mm/tlb.c b/arch/x86/mm/tlb.c
+index 07b6701a540a..78fcbd58716e 100644
+--- a/arch/x86/mm/tlb.c
++++ b/arch/x86/mm/tlb.c
+@@ -24,7 +24,7 @@
+ # define __flush_tlb_local		native_flush_tlb_local
+ # define __flush_tlb_global		native_flush_tlb_global
+ # define __flush_tlb_one_user(addr)	native_flush_tlb_one_user(addr)
+-# define __flush_tlb_others(msk, info)	native_flush_tlb_others(msk, info)
++# define __flush_tlb_multi(msk, info)	native_flush_tlb_multi(msk, info)
+ #endif
+ 
+ /*
+@@ -490,7 +490,7 @@ void switch_mm_irqs_off(struct mm_struct *prev, struct mm_struct *next,
+ 		/*
+ 		 * Even in lazy TLB mode, the CPU should stay set in the
+ 		 * mm_cpumask. The TLB shootdown code can figure out from
+-		 * from cpu_tlbstate.is_lazy whether or not to send an IPI.
++		 * cpu_tlbstate.is_lazy whether or not to send an IPI.
+ 		 */
+ 		if (WARN_ON_ONCE(real_prev != &init_mm &&
+ 				 !cpumask_test_cpu(cpu, mm_cpumask(next))))
+@@ -697,7 +697,7 @@ static void flush_tlb_func(void *info)
+ 		 * garbage into our TLB.  Since switching to init_mm is barely
+ 		 * slower than a minimal flush, just switch to init_mm.
+ 		 *
+-		 * This should be rare, with native_flush_tlb_others skipping
++		 * This should be rare, with native_flush_tlb_multi() skipping
+ 		 * IPIs to lazy TLB mode CPUs.
+ 		 */
+ 		switch_mm_irqs_off(NULL, &init_mm, NULL);
+@@ -795,9 +795,14 @@ static bool tlb_is_not_lazy(int cpu)
+ 
+ static DEFINE_PER_CPU(cpumask_t, flush_tlb_mask);
+ 
+-STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
++STATIC_NOPV void native_flush_tlb_multi(const struct cpumask *cpumask,
+ 					 const struct flush_tlb_info *info)
+ {
++	/*
++	 * Do accounting and tracing. Note that there are (and have always been)
++	 * cases in which a remote TLB flush will be traced, but eventually
++	 * would not happen.
++	 */
+ 	count_vm_tlb_event(NR_TLB_REMOTE_FLUSH);
+ 	if (info->end == TLB_FLUSH_ALL)
+ 		trace_tlb_flush(TLB_REMOTE_SEND_IPI, TLB_FLUSH_ALL);
+@@ -816,8 +821,8 @@ STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
+ 	 * doing a speculative memory access.
+ 	 */
+ 	if (info->freed_tables) {
+-		smp_call_function_many(cpumask, flush_tlb_func,
+-			       (void *)info, 1);
++		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
++				      cpumask);
+ 	} else {
+ 		/*
+ 		 * Although we could have used on_each_cpu_cond_mask(),
+@@ -844,14 +849,15 @@ STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
+ 			if (tlb_is_not_lazy(cpu))
+ 				__cpumask_set_cpu(cpu, cond_cpumask);
+ 		}
+-		smp_call_function_many(cond_cpumask, flush_tlb_func, (void *)info, 1);
++		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
++				      cpumask);
+ 	}
+ }
+ 
+-void flush_tlb_others(const struct cpumask *cpumask,
++void flush_tlb_multi(const struct cpumask *cpumask,
+ 		      const struct flush_tlb_info *info)
+ {
+-	__flush_tlb_others(cpumask, info);
++	__flush_tlb_multi(cpumask, info);
+ }
+ 
+ /*
+@@ -931,16 +937,20 @@ void flush_tlb_mm_range(struct mm_struct *mm, unsigned long start,
+ 	info = get_flush_tlb_info(mm, start, end, stride_shift, freed_tables,
+ 				  new_tlb_gen);
+ 
+-	if (mm == this_cpu_read(cpu_tlbstate.loaded_mm)) {
++	/*
++	 * flush_tlb_multi() is not optimized for the common case in which only
++	 * a local TLB flush is needed. Optimize this use-case by calling
++	 * flush_tlb_func_local() directly in this case.
++	 */
++	if (cpumask_any_but(mm_cpumask(mm), cpu) < nr_cpu_ids) {
++		flush_tlb_multi(mm_cpumask(mm), info);
++	} else if (mm == this_cpu_read(cpu_tlbstate.loaded_mm)) {
+ 		lockdep_assert_irqs_enabled();
+ 		local_irq_disable();
+ 		flush_tlb_func(info);
+ 		local_irq_enable();
+ 	}
+ 
+-	if (cpumask_any_but(mm_cpumask(mm), cpu) < nr_cpu_ids)
+-		flush_tlb_others(mm_cpumask(mm), info);
+-
+ 	put_flush_tlb_info();
+ 	put_cpu();
+ }
+@@ -1151,17 +1161,20 @@ void arch_tlbbatch_flush(struct arch_tlbflush_unmap_batch *batch)
+ 
+ 	int cpu = get_cpu();
+ 
+-	info = get_flush_tlb_info(NULL, 0, TLB_FLUSH_ALL, 0, false, 0);
+-	if (cpumask_test_cpu(cpu, &batch->cpumask)) {
++	/*
++	 * flush_tlb_multi() is not optimized for the common case in which only
++	 * a local TLB flush is needed. Optimize this use-case by calling
++	 * flush_tlb_func_local() directly in this case.
++	 */
++	if (cpumask_any_but(&batch->cpumask, cpu) < nr_cpu_ids) {
++		flush_tlb_multi(&batch->cpumask, info);
++	} else if (cpumask_test_cpu(cpu, &batch->cpumask)) {
+ 		lockdep_assert_irqs_enabled();
+ 		local_irq_disable();
+ 		flush_tlb_func(info);
+ 		local_irq_enable();
+ 	}
+ 
+-	if (cpumask_any_but(&batch->cpumask, cpu) < nr_cpu_ids)
+-		flush_tlb_others(&batch->cpumask, info);
+-
+ 	cpumask_clear(&batch->cpumask);
+ 
+ 	put_flush_tlb_info();
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index cf2ade864c30..09b95c0e876e 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -1247,8 +1247,8 @@ static void xen_flush_tlb_one_user(unsigned long addr)
+ 	preempt_enable();
+ }
+ 
+-static void xen_flush_tlb_others(const struct cpumask *cpus,
+-				 const struct flush_tlb_info *info)
++static void xen_flush_tlb_multi(const struct cpumask *cpus,
++				const struct flush_tlb_info *info)
+ {
+ 	struct {
+ 		struct mmuext_op op;
+@@ -1258,7 +1258,7 @@ static void xen_flush_tlb_others(const struct cpumask *cpus,
+ 	const size_t mc_entry_size = sizeof(args->op) +
+ 		sizeof(args->mask[0]) * BITS_TO_LONGS(num_possible_cpus());
+ 
+-	trace_xen_mmu_flush_tlb_others(cpus, info->mm, info->start, info->end);
++	trace_xen_mmu_flush_tlb_multi(cpus, info->mm, info->start, info->end);
+ 
+ 	if (cpumask_empty(cpus))
+ 		return;		/* nothing to do */
+@@ -1267,9 +1267,8 @@ static void xen_flush_tlb_others(const struct cpumask *cpus,
+ 	args = mcs.args;
+ 	args->op.arg2.vcpumask = to_cpumask(args->mask);
+ 
+-	/* Remove us, and any offline CPUS. */
++	/* Remove any offline CPUs */
+ 	cpumask_and(to_cpumask(args->mask), cpus, cpu_online_mask);
+-	cpumask_clear_cpu(smp_processor_id(), to_cpumask(args->mask));
+ 
+ 	args->op.cmd = MMUEXT_TLB_FLUSH_MULTI;
+ 	if (info->end != TLB_FLUSH_ALL &&
+@@ -2086,7 +2085,7 @@ static const struct pv_mmu_ops xen_mmu_ops __initconst = {
+ 	.flush_tlb_user = xen_flush_tlb,
+ 	.flush_tlb_kernel = xen_flush_tlb,
+ 	.flush_tlb_one_user = xen_flush_tlb_one_user,
+-	.flush_tlb_others = xen_flush_tlb_others,
++	.flush_tlb_multi = xen_flush_tlb_multi,
+ 	.tlb_remove_table = tlb_remove_table,
+ 
+ 	.pgd_alloc = xen_pgd_alloc,
+diff --git a/include/trace/events/xen.h b/include/trace/events/xen.h
+index 3b61b587e137..44a3f565264d 100644
+--- a/include/trace/events/xen.h
++++ b/include/trace/events/xen.h
+@@ -346,7 +346,7 @@ TRACE_EVENT(xen_mmu_flush_tlb_one_user,
+ 	    TP_printk("addr %lx", __entry->addr)
+ 	);
+ 
+-TRACE_EVENT(xen_mmu_flush_tlb_others,
++TRACE_EVENT(xen_mmu_flush_tlb_multi,
+ 	    TP_PROTO(const struct cpumask *cpus, struct mm_struct *mm,
+ 		     unsigned long addr, unsigned long end),
+ 	    TP_ARGS(cpus, mm, addr, end),
+-- 
+2.25.1
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Ian Jackson <iwj@xenproject.org>
-  Olaf Hering <olaf@aepfle.de>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      fail    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit 687121f8a0e7c1ea1c4fa3d056637e5819342f14
-Author: Olaf Hering <olaf@aepfle.de>
-Date:   Tue Feb 9 16:45:35 2021 +0100
-
-    xl: optionally print timestamps when running xl commands
-    
-    Add a global option "-T" to xl to enable timestamps in the output from
-    libxl and libxc. This is most useful with long running commands such
-    as "migrate".
-    
-    During 'xl -v.. migrate domU host' a large amount of debug is generated.
-    It is difficult to map each line to the sending and receiving side.
-    Also the time spent for migration is not reported.
-    
-    With 'xl -T migrate domU host' both sides will print timestamps and
-    also the pid of the invoked xl process to make it more obvious which
-    side produced a given log line.
-    
-    Note: depending on the command, xl itself also produces other output
-    which does not go through libxentoollog. As a result such output will
-    not have timestamps prepended.
-    
-    This change adds also the missing "-t" flag to "xl help" output.
-    
-    Signed-off-by: Olaf Hering <olaf@aepfle.de>
-    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
-    Reviewed-by: Ian Jackson <iwj@xenproject.org>
-
-commit 7a321c3676250aac5bacb1ae8d7dd22bfe8b1448
-Author: Olaf Hering <olaf@aepfle.de>
-Date:   Tue Feb 9 16:45:34 2021 +0100
-
-    tools: add with-xen-scriptdir configure option
-    
-    Some distros plan for fresh installations will have an empty /etc,
-    whose content will not be controlled by the package manager anymore.
-    
-    To make this possible, add a knob to configure to allow storing the
-    hotplug scripts to libexec instead of /etc/xen/scripts.
-    
-    The current default remains unchanged, which is /etc/xen/scripts.
-    
-    [autoconf rerun -iwj]
-    
-    Signed-off-by: Olaf Hering <olaf@aepfle.de>
-    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
-    Reviewed-by: Ian Jackson <iwj@xenproject.org>
-
-commit fe9ba142c03a2046def52cfd5864f5a89172bf5c
-Author: Olaf Hering <olaf@aepfle.de>
-Date:   Tue Feb 9 16:45:33 2021 +0100
-
-    tools: move CONFIG_DIR and XEN_CONFIG_DIR in paths.m4
-    
-    Upcoming changes need to reuse XEN_CONFIG_DIR.
-    
-    In its current location the assignment happens too late. Move it up
-    in the file, along with CONFIG_DIR. Their only dependency is
-    sysconfdir, which may also be adjusted in this file.
-    
-    No functional change intended.
-    
-    [autoconf rerun -iwj]
-    
-    Signed-off-by: Olaf Hering <olaf@aepfle.de>
-    Reviewed-by: Ian Jackson <iwj@xenproject.org>
-    Release-Acked-by: Ian Jackson <iwj@xenproject.org>
-
-commit 548ba7c85c6d80a671c2abb8681c29bc85c616f3
-Author: Ian Jackson <iwj@xenproject.org>
-Date:   Tue Feb 9 17:05:54 2021 +0000
-
-    tools: Regenerate autoconf
-    
-    This seems to have been omitted in many recent commits.  The earliest
-    of which are, according to git-bisect:
-      154137dfdba3  stubdom/configure      stubdom: add xenstore pvh stubdom
-      cc83ee4c6c37  all configure scripts  NetBSD: Fix lock directory path
-    but it seems that this is true of several later commits too.
-    
-    Release status: I consider this discrepancy a release critical bug.
-    
-    Signed-off-by: Ian Jackson <iwj@xenproject.org>
-    Release-acked-by: Ian Jackson <iwj@xenproject.org>
-(qemu changes not included)
 
