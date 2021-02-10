@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABE8AC433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 17:36:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A21CC433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 17:36:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6CFAA64ED7
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 17:36:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CFAA64ED7
+	by mail.kernel.org (Postfix) with ESMTPS id EFC0C64E6B
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 17:36:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFC0C64E6B
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83681.156381 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83680.156370 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9tPs-0006Hr-Co; Wed, 10 Feb 2021 17:36:40 +0000
+	id 1l9tPr-0006Gs-TY; Wed, 10 Feb 2021 17:36:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83681.156381; Wed, 10 Feb 2021 17:36:40 +0000
+Received: by outflank-mailman (output) from mailman id 83680.156370; Wed, 10 Feb 2021 17:36:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9tPs-0006HM-3J; Wed, 10 Feb 2021 17:36:40 +0000
-Received: by outflank-mailman (input) for mailman id 83681;
+	id 1l9tPr-0006Gg-Na; Wed, 10 Feb 2021 17:36:39 +0000
+Received: by outflank-mailman (input) for mailman id 83680;
  Wed, 10 Feb 2021 17:36:38 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9tPq-0006GD-Iq
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9tPq-0006G8-AY
  for xen-devel@lists.xenproject.org; Wed, 10 Feb 2021 17:36:38 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9tPq-0006Tz-IC
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9tPq-0006Tw-9V
  for xen-devel@lists.xenproject.org; Wed, 10 Feb 2021 17:36:38 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9tPq-0007oe-GJ
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1l9tPq-0007oV-8B
  for xen-devel@lists.xenproject.org; Wed, 10 Feb 2021 17:36:38 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1l9tPo-0000Wv-Q6; Wed, 10 Feb 2021 17:36:36 +0000
+ id 1l9tPo-0000Wv-H8; Wed, 10 Feb 2021 17:36:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,77 +58,39 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=juDKe/7rXRZzHIxGzUePnxmhOsyn4oXjFJ3RnY+L0k0=; b=tLauqod4iWRGCMawxk9/+EA9Rn
-	Gc/7EiEFWNNvuDey7qVTn0nqwwVrhRkiDxlyfKIzNcfVmD5pNI0TmzZt5MBIeUXlqOdbyOnagdj44
-	qa82U5fBHYubLweGDbVX9mEFJ7cxO362s4zZcKBMH8Ay4D3lzjG18H2zhLL+wz2lZ5iI=;
+	bh=pcXf+OQ/1Tk4x0BUm1rv3F8ihe0S6K2hiU6TMoIlEeg=; b=1nW9fTfhXr9JBRjeAtAm3Dd1x3
+	t8H7B3qP85HcJa6ctyCVFqS+8y9/qgpNrkUuRgGtKMuY9XG54qTP+IuvjQP5j4VEpLPF/nK7IPMQE
+	QueXpeBwYigM172D8R/OgQDRtq5viA3rwCes+AZ9/xzrIs1FAlKMdfCSurmxpMsY+u6Q=;
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 3/3] Disable updates for ssapshot.debian.org
-Date: Wed, 10 Feb 2021 17:36:29 +0000
-Message-Id: <20210210173629.4788-3-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 2/3] production-config: Update d-i version to older Debian snapshot
+Date: Wed, 10 Feb 2021 17:36:28 +0000
+Message-Id: <20210210173629.4788-2-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210210173629.4788-1-iwj@xenproject.org>
 References: <20210210173629.4788-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-security updates are a separate apt source.
-
-The point of using snapshot is to avoid pulling in uncontrolled
-updates, so we need to disable security updates.
-
-The non-security SUITE-updates are disabled by this too.  But
-everything is on fire and I don't want another iteration while I
-figure out the proper syntax for disabling only the security updates.
-
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
 ---
- Osstest/Debian.pm | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+ production-config | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index d6e0b59d..ded7cdfc 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -972,12 +972,19 @@ END
-     preseed_hook_command($ho, 'late_command', $sfx,
- 			 debian_dhcp_rofs_fix($ho, '/target'));
+diff --git a/production-config b/production-config
+index d89257e5..81582ec0 100644
+--- a/production-config
++++ b/production-config
+@@ -91,7 +91,7 @@ TftpNetbootGroup osstest
+ TftpDiVersion_wheezy 2016-06-08
+ TftpDiVersion_jessie 2018-06-26
+ TftpDiVersion_stretch 2020-09-24
+-TftpDiVersion_buster 2021-02-09
++TftpDiVersion_buster 2021-02-10
  
-+    my $disable_security_updates = 0;
-+
-     my $murl = debian_mirror_url($ho);
-     if ($murl =~ m/$c{DebianMirrorAllowExpiredReleaseRegexp}/) {
- 	# Inspired by
- 	#  https://stackoverflow.com/questions/25039317/is-there-any-setting-in-the-preseed-file-to-ignore-the-release-valid-until-opt/51396935#51396935
- 	# In some sense a workaround for the lack of a better way,
- 	#  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=771699
-+	$disable_security_updates = 1;
-+	# ^ this disables normal -updates too.  That's not desirable
-+	#   but I don't want to mess with this now.  Hopefully it can
-+	#   be improved later.
-+
- 	preseed_hook_installscript($ho, $sfx,
-             '/usr/lib/apt-setup/generators/', '02IgnoreValidUntil', <<'END');
- #!/bin/sh
-@@ -1075,12 +1082,14 @@ END
- d-i mirror/suite string $suite
- END
+ DebianMirror_buster_armhf http://snapshot.debian.org/archive/debian/20210124T203726Z/
  
-+    $disable_security_updates = 1 if $suite =~ m/jessie/;
-+    # security.d.o CDN seems unreliable right now
-+    # and jessie-updates is no more, so disable both for jessie
-+
-     $preseed .= <<'END'
- d-i apt-setup/services-select multiselect
- END
--       if $suite =~ m/jessie/;
--    # security.d.o CDN seems unreliable right now
--    # and jessie-updates is no more
-+       if $disable_security_updates;
- 
-     if (grep { $r{$_} } runvar_glob('*_dmrestrict') and
- 	$suite =~ m/stretch/) {
 -- 
 2.20.1
 
