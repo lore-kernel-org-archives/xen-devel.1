@@ -2,48 +2,45 @@ Return-Path: <SRS0=BMSw=HM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47811C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 09:48:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C54AC43381
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 09:57:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CDC8564E02
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 09:48:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CDC8564E02
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 03E0560235
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Feb 2021 09:57:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03E0560235
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.83508.155595 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.83513.155610 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9m6I-0007Yw-Hp; Wed, 10 Feb 2021 09:47:58 +0000
+	id 1l9mFj-000090-Ek; Wed, 10 Feb 2021 09:57:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 83508.155595; Wed, 10 Feb 2021 09:47:58 +0000
+Received: by outflank-mailman (output) from mailman id 83513.155610; Wed, 10 Feb 2021 09:57:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1l9m6I-0007Yp-Er; Wed, 10 Feb 2021 09:47:58 +0000
-Received: by outflank-mailman (input) for mailman id 83508;
- Wed, 10 Feb 2021 09:47:57 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1l9mFj-00008t-Br; Wed, 10 Feb 2021 09:57:43 +0000
+Received: by outflank-mailman (input) for mailman id 83513;
+ Wed, 10 Feb 2021 09:57:42 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l9m6H-0007Yf-JD; Wed, 10 Feb 2021 09:47:57 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l9m6H-0006Hj-AB; Wed, 10 Feb 2021 09:47:57 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1l9m6H-0004xJ-0f; Wed, 10 Feb 2021 09:47:57 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1l9m6H-00037N-0A; Wed, 10 Feb 2021 09:47:57 +0000
+ (envelope-from <SRS0=jO30=HM=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1l9mFi-00008o-LX
+ for xen-devel@lists.xenproject.org; Wed, 10 Feb 2021 09:57:42 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e29b3b47-3708-4922-a3a9-94abd4aa0967;
+ Wed, 10 Feb 2021 09:57:40 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 76DBEB138;
+ Wed, 10 Feb 2021 09:57:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,79 +52,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=3oFBYrFbNCXfWZwckUDkN6fK3wLQvA/IQj8ezqCB2X8=; b=ETHz4oGulNwIZJPcs3GgEPzHMh
-	qOTAW2dvAJTWJvFMIt5Zcm0qKLN8uu3MKKB5CcmbbMaPee4YKJyuGhbUzisrzU5VOLIQr7Vm+ine8
-	JlO/PRznPIm+l948xxoJoaCARQ2jV3BKAblznOsmj8rRVaOAgBIe8VRDsd+qUdNwJn9E=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-159197-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: e29b3b47-3708-4922-a3a9-94abd4aa0967
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1612951060; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=qquZIWRI0HVUHWPa6REcgtkd8siTn2WKZs0cNZYkmOc=;
+	b=QzD3QTcmLhvQF32yzs4uP8b+tEsPU08Q2UeZj4M5qg3L68flLVd3heQ7N2bYfg7UNSVp6x
+	ItkKyzjrBmo3ydfZmY2ktRCor5Xg3/o/rx3iDzQq+UZwWhXokLsCejfJJMxia7j8Va80qH
+	nzqN4TelAba99nv1lsHCW6saxTmR144=
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86emul: fix SYSENTER/SYSCALL switching into 64-bit mode
+Message-ID: <7ce15e4b-8bf1-0cfd-ca9e-5f6eba12cac1@suse.com>
+Date: Wed, 10 Feb 2021 10:57:38 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Subject: [xen-unstable-coverity test] 159197: all pass - PUSHED
-X-Osstest-Versions-This:
-    xen=687121f8a0e7c1ea1c4fa3d056637e5819342f14
-X-Osstest-Versions-That:
-    xen=5e7aa904405fa2f268c3af213516bae271de3265
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 10 Feb 2021 09:47:57 +0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-flight 159197 xen-unstable-coverity real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/159197/
+When invoked by compat mode, mode_64bit() will be false at the start of
+emulation. The logic after complete_insn, however, needs to consider the
+mode switched into, in particular to avoid truncating RIP.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xen                  687121f8a0e7c1ea1c4fa3d056637e5819342f14
-baseline version:
- xen                  5e7aa904405fa2f268c3af213516bae271de3265
+Inspired by / paralleling and extending Linux commit 943dea8af21b ("KVM:
+x86: Update emulator context mode if SYSENTER xfers to 64-bit mode").
 
-Last test of basis   158979  2021-02-03 09:18:36 Z    7 days
-Failing since        159095  2021-02-07 09:19:37 Z    3 days    2 attempts
-Testing same since   159197  2021-02-10 09:18:32 Z    0 days    1 attempts
+While there, tighten a related assertion in x86_emulate_wrapper() - we
+want to be sure to not switch into an impossible mode when the code gets
+built for 32-bit only (as is possible for the test harness).
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Christian Lindig <christian.lindig@citrix.com>
-  Edwin Török <edvin.torok@citrix.com>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Ian Jackson <iwj@xenproject.org>
-  Igor Druzhinin <igor.druzhinin@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Manuel Bouyer <bouyer@netbsd.org>
-  Michał Leszczyński <michal.leszczynski@cert.pl>
-  Olaf Hering <olaf@aepfle.de>
-  Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Tamas K Lengyel <tamas.lengyel@intel.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+In principle we could drop SYSENTER's ctxt->lma dependency when setting
+_regs.r(ip). I wasn't certain whether leaving it as is serves as kind of
+documentation ...
 
-jobs:
- coverity-amd64                                               pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   5e7aa90440..687121f8a0  687121f8a0e7c1ea1c4fa3d056637e5819342f14 -> coverity-tested/smoke
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -6127,6 +6127,10 @@ x86_emulate(
+              (rc = ops->write_segment(x86_seg_ss, &sreg, ctxt)) )
+             goto done;
+ 
++        if ( ctxt->lma )
++            /* In particular mode_64bit() needs to return true from here on. */
++            ctxt->addr_size = ctxt->sp_size = 64;
++
+         /*
+          * SYSCALL (unlike most instructions) evaluates its singlestep action
+          * based on the resulting EFLAGS.TF, not the starting EFLAGS.TF.
+@@ -6927,6 +6931,10 @@ x86_emulate(
+                                       ctxt)) != X86EMUL_OKAY )
+             goto done;
+ 
++        if ( ctxt->lma )
++            /* In particular mode_64bit() needs to return true from here on. */
++            ctxt->addr_size = ctxt->sp_size = 64;
++
+         singlestep = _regs.eflags & X86_EFLAGS_TF;
+         break;
+ 
+@@ -12113,8 +12121,12 @@ int x86_emulate_wrapper(
+     unsigned long orig_ip = ctxt->regs->r(ip);
+     int rc;
+ 
++#ifdef __x86_64__
+     if ( mode_64bit() )
+         ASSERT(ctxt->lma);
++#else
++    ASSERT(!ctxt->lma && !mode_64bit());
++#endif
+ 
+     rc = x86_emulate(ctxt, ops);
+ 
 
