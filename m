@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A148BC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Feb 2021 17:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45115C433E6
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Feb 2021 17:20:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5B0D964DAD
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Feb 2021 17:20:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B0D964DAD
+	by mail.kernel.org (Postfix) with ESMTPS id 0B07864DAD
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Feb 2021 17:20:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0B07864DAD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.84033.157478 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.84034.157490 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAFdc-0004uM-Vo; Thu, 11 Feb 2021 17:20:20 +0000
+	id 1lAFdi-00050i-9i; Thu, 11 Feb 2021 17:20:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 84033.157478; Thu, 11 Feb 2021 17:20:20 +0000
+Received: by outflank-mailman (output) from mailman id 84034.157490; Thu, 11 Feb 2021 17:20:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAFdc-0004uE-Ru; Thu, 11 Feb 2021 17:20:20 +0000
-Received: by outflank-mailman (input) for mailman id 84033;
- Thu, 11 Feb 2021 17:20:20 +0000
+	id 1lAFdi-00050a-61; Thu, 11 Feb 2021 17:20:26 +0000
+Received: by outflank-mailman (input) for mailman id 84034;
+ Thu, 11 Feb 2021 17:20:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kYUG=HN=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1lAFdb-0003q3-UD
- for xen-devel@lists.xenproject.org; Thu, 11 Feb 2021 17:20:19 +0000
-Received: from mail-wr1-x42c.google.com (unknown [2a00:1450:4864:20::42c])
+ id 1lAFdg-0003q3-UV
+ for xen-devel@lists.xenproject.org; Thu, 11 Feb 2021 17:20:24 +0000
+Received: from mail-wr1-x433.google.com (unknown [2a00:1450:4864:20::433])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e5a878be-3f47-4681-9632-3f33215129f3;
- Thu, 11 Feb 2021 17:19:58 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id r21so4918949wrr.9
- for <xen-devel@lists.xenproject.org>; Thu, 11 Feb 2021 09:19:58 -0800 (PST)
+ id 71906b6c-277f-4780-be41-9c7585268461;
+ Thu, 11 Feb 2021 17:20:00 +0000 (UTC)
+Received: by mail-wr1-x433.google.com with SMTP id v14so4927494wro.7
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Feb 2021 09:20:00 -0800 (PST)
 Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id b19sm10182925wmj.22.2021.02.11.09.19.48
+ by smtp.gmail.com with ESMTPSA id z15sm5496898wrs.25.2021.02.11.09.19.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Feb 2021 09:19:50 -0800 (PST)
+ Thu, 11 Feb 2021 09:19:58 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 82A141FF91;
+ by zen.linaroharston (Postfix) with ESMTP id E48451FF93;
  Thu, 11 Feb 2021 17:19:47 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -57,34 +57,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5a878be-3f47-4681-9632-3f33215129f3
+X-Inumbo-ID: 71906b6c-277f-4780-be41-9c7585268461
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=mkOxD0K1nZ+fuOlse/PqHe9yZcMohC/Q3ekJsWwmjy4=;
-        b=w8LhT4kIP365H63ZCZMUq9dei6vNCOnWNhpYq0chQl/sZTf3C8XFZ22WERgUcdpne6
-         75slk0xUqUmSFNQRUgspnf1CdWev7Ci9B+HaSnRszTlUCjzBqRrJyrDajMnbZWqL6mGf
-         YXKMe9U31rUSH/40au+pdVa39lmLB7UtUIc0ghB4NyMDi1hklqKqIWs5mTXUeRAubjr+
-         9qvHINBtb6D9chDVWxBjexqf2hrKJ0/SlrUiBN0pr6mHCrVgjBQM5ytf7GYEVovJkAot
-         6o1/RySMxNB7/73XxQMyz4ez26GQXtmsRC7QP/9FAMXRme+bBojQjJPxGldXt4yPngbj
-         X8sA==
+        bh=97euSTerjez5Tce8hHGcMNp4cX8yrwBdXJFrXOC2JXc=;
+        b=xbD5H3NYhzAJ7qvapOjyovl4bg42BELbyrNRG6zw1q3UPUyzd8jX7jexxdcmxLVxTE
+         rv1vIaa1IaulbpkTLDoYY+P8dN2ozs6OZq+itR/iusbN4d3LFziXoMfWzdnCH5SXEArn
+         w5sulFaqxDBgw8+ZlxFQYCh/Vb9XFA7i04sms+qLj1NzzQu9wvKkWKWIgxDCpeO8yk5g
+         s8F3Hs71+5tVvQvX8ionKzRg9bouu6aWKo9DXTGFQunviL69RSe57aiUtkXl/ZEaEw9C
+         wzmpyMj337gzqdX8P9GcEhngmj3qSngmBF7Xzb+FfAJ87MCAWpjgWHrXO2WveLj3LAA+
+         FMeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=mkOxD0K1nZ+fuOlse/PqHe9yZcMohC/Q3ekJsWwmjy4=;
-        b=jIQRvl5+sgrgEnV/8cCI9Ncm0kr4UCVT0529+BjCD/VZyqzp5248tJfppbPPI3k5Dz
-         o75QEqsEPZCnbo3VeFvDhlwUj9BkusyQHNb8Xu5SKzxtv8XwXvJzsZ/FvDskbuDPNmBI
-         FXLGyI8lpbY3FvJiZzjirOcA7a1EX4Mx/p6dLcHC7DeOqXnK54bxCVjifv3bIQXmBDZV
-         hs/fBa/JykpJLSAYNYPu+OR2xHbDR+aeD/ZY4ppqYWDLXK8eU7HfVyCXlTOoxEpSl9u0
-         lpr5vOG6gJnbHiTegRFEyCA2/j2sv3+q2Iau7P57nJ+lfl3L4gxzFGxmhKp18yPMoSqo
-         tDQA==
-X-Gm-Message-State: AOAM532E0DvENbkBK9K8xUb1lqGBKeugoRkW6e1mESN+YVWpAzs1MgKd
-	i4AP5F5QAM0mng1SJFBdjJmOXPmsPFaHfLr7
-X-Google-Smtp-Source: ABdhPJxGNE7xMzp72HGLUrXAgZu+lpGvk+gFxLvTaNvHrXzzraCXUBXJuwLIu8CbSY0xOmMelNvRYw==
-X-Received: by 2002:adf:f6d0:: with SMTP id y16mr6751776wrp.351.1613063997176;
-        Thu, 11 Feb 2021 09:19:57 -0800 (PST)
+        bh=97euSTerjez5Tce8hHGcMNp4cX8yrwBdXJFrXOC2JXc=;
+        b=hBO6qc8GP+c3Fc0MmSrprn6nY0ysqeJojTpMSLzjeSpqpeyJzL1c2IXWRtxIx4dTWT
+         xJGXw1VQ4ZbUcQ/PPaAD/uFAJ9eTbabsS+X/DT6ZpAan0D3NNR3ESp5kl6BfoWrGxZV7
+         o4v9lY5Q21E0md+iq2JU0kv68Dqlh5T0HAV2Yt8A2PRXtznyfwMrVSwygb3z1t7Hfnma
+         TlMSJkPOKJgN1efIZoBe4a2KtCr6DVoyLur8SLPG9MFabf4Awta7q+XoWNdJUyD8K6gE
+         mV30/TvB+XjJ18r+rRRFMqpEzKdeQZVeOdToLhFZcUmtX7Ite3U1jBPTGHqL9P6XxApy
+         /dPw==
+X-Gm-Message-State: AOAM530ajrKC4+PuL8FwLhhxuX0dvuPjNSZQVx+YueDmbHeS9CvWMWQI
+	gYE32OYK23YUdr4QDi6ISV8K3Q==
+X-Google-Smtp-Source: ABdhPJyzRo8kcYPUXSrP5mf6sQeEw14/2FdcWAVQ8gyif+dPFUJ6YCsxJGyHCsTfJsdULjTJavJKJw==
+X-Received: by 2002:a5d:44cf:: with SMTP id z15mr1759324wrr.191.1613063999472;
+        Thu, 11 Feb 2021 09:19:59 -0800 (PST)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: julien@xen.org,
@@ -94,10 +94,12 @@ Cc: julien@xen.org,
 	stratos-dev@op-lists.linaro.org,
 	xen-devel@lists.xenproject.org,
 	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
-	Alistair Francis <alistair@alistair23.me>
-Subject: [PATCH  v2 5/7] docs: move generic-loader documentation into the main manual
-Date: Thu, 11 Feb 2021 17:19:43 +0000
-Message-Id: <20210211171945.18313-6-alex.bennee@linaro.org>
+	Cleber Rosa <crosa@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+	Wainer dos Santos Moschetta <wainersm@redhat.com>
+Subject: [PATCH  v2 7/7] tests/avocado: add boot_xen tests
+Date: Thu, 11 Feb 2021 17:19:45 +0000
+Message-Id: <20210211171945.18313-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210211171945.18313-1-alex.bennee@linaro.org>
 References: <20210211171945.18313-1-alex.bennee@linaro.org>
@@ -105,272 +107,152 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-We might as well surface this useful information in the manual so
-users can find it easily. It is a fairly simple conversion to rst with
-the only textual fixes being QemuOps to QemuOpts.
+These tests make sure we can boot the Xen hypervisor with a Dom0
+kernel using the guest-loader. We currently have to use a kernel I
+built myself because there are issues using the Debian kernel images.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20201105175153.30489-6-alex.bennee@linaro.org>
-
 ---
-v2
-  - fix whitespace
-  - update MAINTAINERS
----
- docs/generic-loader.txt        |  92 --------------------------
- docs/system/generic-loader.rst | 117 +++++++++++++++++++++++++++++++++
- docs/system/index.rst          |   1 +
- MAINTAINERS                    |   2 +-
- 4 files changed, 119 insertions(+), 93 deletions(-)
- delete mode 100644 docs/generic-loader.txt
- create mode 100644 docs/system/generic-loader.rst
+ MAINTAINERS                  |   1 +
+ tests/acceptance/boot_xen.py | 117 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 118 insertions(+)
+ create mode 100644 tests/acceptance/boot_xen.py
 
-diff --git a/docs/generic-loader.txt b/docs/generic-loader.txt
-deleted file mode 100644
-index a9603a2af7..0000000000
---- a/docs/generic-loader.txt
-+++ /dev/null
-@@ -1,92 +0,0 @@
--Copyright (c) 2016 Xilinx Inc.
--
--This work is licensed under the terms of the GNU GPL, version 2 or later.  See
--the COPYING file in the top-level directory.
--
--
--The 'loader' device allows the user to load multiple images or values into
--QEMU at startup.
--
--Loading Data into Memory Values
---------------------------------
--The loader device allows memory values to be set from the command line. This
--can be done by following the syntax below:
--
--     -device loader,addr=<addr>,data=<data>,data-len=<data-len>
--                   [,data-be=<data-be>][,cpu-num=<cpu-num>]
--
--    <addr>      - The address to store the data in.
--    <data>      - The value to be written to the address. The maximum size of
--                  the data is 8 bytes.
--    <data-len>  - The length of the data in bytes. This argument must be
--                  included if the data argument is.
--    <data-be>   - Set to true if the data to be stored on the guest should be
--                  written as big endian data. The default is to write little
--                  endian data.
--    <cpu-num>   - The number of the CPU's address space where the data should
--                  be loaded. If not specified the address space of the first
--                  CPU is used.
--
--All values are parsed using the standard QemuOps parsing. This allows the user
--to specify any values in any format supported. By default the values
--will be parsed as decimal. To use hex values the user should prefix the number
--with a '0x'.
--
--An example of loading value 0x8000000e to address 0xfd1a0104 is:
--    -device loader,addr=0xfd1a0104,data=0x8000000e,data-len=4
--
--Setting a CPU's Program Counter
---------------------------------
--The loader device allows the CPU's PC to be set from the command line. This
--can be done by following the syntax below:
--
--     -device loader,addr=<addr>,cpu-num=<cpu-num>
--
--    <addr>      - The value to use as the CPU's PC.
--    <cpu-num>   - The number of the CPU whose PC should be set to the
--                  specified value.
--
--All values are parsed using the standard QemuOps parsing. This allows the user
--to specify any values in any format supported. By default the values
--will be parsed as decimal. To use hex values the user should prefix the number
--with a '0x'.
--
--An example of setting CPU 0's PC to 0x8000 is:
--    -device loader,addr=0x8000,cpu-num=0
--
--Loading Files
---------------
--The loader device also allows files to be loaded into memory. It can load ELF,
--U-Boot, and Intel HEX executable formats as well as raw images.  The syntax is
--shown below:
--
--    -device loader,file=<file>[,addr=<addr>][,cpu-num=<cpu-num>][,force-raw=<raw>]
--
--    <file>      - A file to be loaded into memory
--    <addr>      - The memory address where the file should be loaded. This is
--                  required for raw images and ignored for non-raw files.
--    <cpu-num>   - This specifies the CPU that should be used. This is an
--                  optional argument and will cause the CPU's PC to be set to
--                  the memory address where the raw file is loaded or the entry
--                  point specified in the executable format header. This option
--                  should only be used for the boot image.
--                  This will also cause the image to be written to the specified
--                  CPU's address space. If not specified, the default is CPU 0.
--    <force-raw> - Setting force-raw=on forces the file to be treated as a raw
--                  image.  This can be used to load supported executable formats
--                  as if they were raw.
--
--All values are parsed using the standard QemuOps parsing. This allows the user
--to specify any values in any format supported. By default the values
--will be parsed as decimal. To use hex values the user should prefix the number
--with a '0x'.
--
--An example of loading an ELF file which CPU0 will boot is shown below:
--    -device loader,file=./images/boot.elf,cpu-num=0
--
--Restrictions and ToDos
------------------------
-- - At the moment it is just assumed that if you specify a cpu-num then you
--   want to set the PC as well. This might not always be the case. In future
--   the internal state 'set_pc' (which exists in the generic loader now) should
--   be exposed to the user so that they can choose if the PC is set or not.
-diff --git a/docs/system/generic-loader.rst b/docs/system/generic-loader.rst
-new file mode 100644
-index 0000000000..6bf8a4eb48
---- /dev/null
-+++ b/docs/system/generic-loader.rst
-@@ -0,0 +1,117 @@
-+..
-+   Copyright (c) 2016, Xilinx Inc.
-+
-+This work is licensed under the terms of the GNU GPL, version 2 or later.  See
-+the COPYING file in the top-level directory.
-+
-+Generic Loader
-+--------------
-+
-+The 'loader' device allows the user to load multiple images or values into
-+QEMU at startup.
-+
-+Loading Data into Memory Values
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+The loader device allows memory values to be set from the command line. This
-+can be done by following the syntax below::
-+
-+   -device loader,addr=<addr>,data=<data>,data-len=<data-len> \
-+                   [,data-be=<data-be>][,cpu-num=<cpu-num>]
-+
-+``<addr>``
-+  The address to store the data in.
-+
-+``<data>``
-+  The value to be written to the address. The maximum size of the data
-+  is 8 bytes.
-+
-+``<data-len>``
-+  The length of the data in bytes. This argument must be included if
-+  the data argument is.
-+
-+``<data-be>``
-+  Set to true if the data to be stored on the guest should be written
-+  as big endian data. The default is to write little endian data.
-+
-+``<cpu-num>``
-+  The number of the CPU's address space where the data should be
-+  loaded. If not specified the address space of the first CPU is used.
-+
-+All values are parsed using the standard QemuOps parsing. This allows the user
-+to specify any values in any format supported. By default the values
-+will be parsed as decimal. To use hex values the user should prefix the number
-+with a '0x'.
-+
-+An example of loading value 0x8000000e to address 0xfd1a0104 is::
-+
-+    -device loader,addr=0xfd1a0104,data=0x8000000e,data-len=4
-+
-+Setting a CPU's Program Counter
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The loader device allows the CPU's PC to be set from the command line. This
-+can be done by following the syntax below::
-+
-+     -device loader,addr=<addr>,cpu-num=<cpu-num>
-+
-+``<addr>``
-+  The value to use as the CPU's PC.
-+
-+``<cpu-num>``
-+  The number of the CPU whose PC should be set to the specified value.
-+
-+All values are parsed using the standard QemuOpts parsing. This allows the user
-+to specify any values in any format supported. By default the values
-+will be parsed as decimal. To use hex values the user should prefix the number
-+with a '0x'.
-+
-+An example of setting CPU 0's PC to 0x8000 is::
-+
-+    -device loader,addr=0x8000,cpu-num=0
-+
-+Loading Files
-+^^^^^^^^^^^^^
-+
-+The loader device also allows files to be loaded into memory. It can load ELF,
-+U-Boot, and Intel HEX executable formats as well as raw images.  The syntax is
-+shown below:
-+
-+    -device loader,file=<file>[,addr=<addr>][,cpu-num=<cpu-num>][,force-raw=<raw>]
-+
-+``<file>``
-+  A file to be loaded into memory
-+
-+``<addr>``
-+  The memory address where the file should be loaded. This is required
-+  for raw images and ignored for non-raw files.
-+
-+``<cpu-num>``
-+  This specifies the CPU that should be used. This is an
-+  optional argument and will cause the CPU's PC to be set to the
-+  memory address where the raw file is loaded or the entry point
-+  specified in the executable format header. This option should only
-+  be used for the boot image. This will also cause the image to be
-+  written to the specified CPU's address space. If not specified, the
-+  default is CPU 0. <force-raw> - Setting force-raw=on forces the file
-+  to be treated as a raw image. This can be used to load supported
-+  executable formats as if they were raw.
-+
-+All values are parsed using the standard QemuOpts parsing. This allows the user
-+to specify any values in any format supported. By default the values
-+will be parsed as decimal. To use hex values the user should prefix the number
-+with a '0x'.
-+
-+An example of loading an ELF file which CPU0 will boot is shown below::
-+
-+    -device loader,file=./images/boot.elf,cpu-num=0
-+
-+Restrictions and ToDos
-+^^^^^^^^^^^^^^^^^^^^^^
-+
-+At the moment it is just assumed that if you specify a cpu-num then
-+you want to set the PC as well. This might not always be the case. In
-+future the internal state 'set_pc' (which exists in the generic loader
-+now) should be exposed to the user so that they can choose if the PC
-+is set or not.
-+
-+
-diff --git a/docs/system/index.rst b/docs/system/index.rst
-index 625b494372..cee1c83540 100644
---- a/docs/system/index.rst
-+++ b/docs/system/index.rst
-@@ -25,6 +25,7 @@ Contents:
-    usb
-    ivshmem
-    linuxboot
-+   generic-loader
-    vnc-security
-    tls
-    gdb
 diff --git a/MAINTAINERS b/MAINTAINERS
-index ab6877dae6..774b3ca7a5 100644
+index 853f174fcf..537ca7a6f3 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1991,7 +1991,7 @@ M: Alistair Francis <alistair@alistair23.me>
+@@ -1998,6 +1998,7 @@ M: Alex Bennée <alex.bennee@linaro.org>
  S: Maintained
- F: hw/core/generic-loader.c
- F: include/hw/core/generic-loader.h
--F: docs/generic-loader.txt
-+F: docs/system/generic-loader.rst
+ F: hw/core/guest-loader.c
+ F: docs/system/guest-loader.rst
++F: tests/acceptance/boot_xen.py
  
- Guest Loader
- M: Alex Bennée <alex.bennee@linaro.org>
+ Intel Hexadecimal Object File Loader
+ M: Su Hang <suhang16@mails.ucas.ac.cn>
+diff --git a/tests/acceptance/boot_xen.py b/tests/acceptance/boot_xen.py
+new file mode 100644
+index 0000000000..8c7e091d40
+--- /dev/null
++++ b/tests/acceptance/boot_xen.py
+@@ -0,0 +1,117 @@
++# Functional test that boots a Xen hypervisor with a domU kernel and
++# checks the console output is vaguely sane .
++#
++# Copyright (c) 2020 Linaro
++#
++# Author:
++#  Alex Bennée <alex.bennee@linaro.org>
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# This work is licensed under the terms of the GNU GPL, version 2 or
++# later.  See the COPYING file in the top-level directory.
++
++import os
++
++from avocado import skipIf
++from avocado_qemu import wait_for_console_pattern
++from boot_linux_console import LinuxKernelTest
++
++
++class BootXenBase(LinuxKernelTest):
++    """
++    Boots a Xen hypervisor with a Linux DomU kernel.
++    """
++
++    timeout = 90
++    XEN_COMMON_COMMAND_LINE = 'dom0_mem=128M loglvl=all guest_loglvl=all'
++
++    def fetch_guest_kernel(self):
++        # Using my own built kernel - which works
++        kernel_url = ('https://fileserver.linaro.org/'
++                      's/JSsewXGZ6mqxPr5/download?path=%2F&files='
++                      'linux-5.9.9-arm64-ajb')
++        kernel_sha1 = '4f92bc4b9f88d5ab792fa7a43a68555d344e1b83'
++        kernel_path = self.fetch_asset(kernel_url,
++                                       asset_hash=kernel_sha1)
++
++        return kernel_path
++
++    def launch_xen(self, xen_path):
++        """
++        Launch Xen with a dom0 guest kernel
++        """
++        self.log.info("launch with xen_path: %s", xen_path)
++        kernel_path = self.fetch_guest_kernel()
++
++        self.vm.set_console()
++
++        xen_command_line = self.XEN_COMMON_COMMAND_LINE
++        self.vm.add_args('-machine', 'virtualization=on',
++                         '-cpu', 'cortex-a57',
++                         '-m', '768',
++                         '-kernel', xen_path,
++                         '-append', xen_command_line,
++                         '-device',
++                         "guest-loader,addr=0x47000000,kernel=%s,bootargs=console=hvc0"
++                         % (kernel_path))
++
++        self.vm.launch()
++
++        console_pattern = 'VFS: Cannot open root device'
++        wait_for_console_pattern(self, console_pattern, "Panic on CPU 0:")
++
++
++class BootXen(BootXenBase):
++
++    @skipIf(os.getenv('GITLAB_CI'), 'Running on GitLab')
++    def test_arm64_xen_411_and_dom0(self):
++        """
++        :avocado: tags=arch:aarch64
++        :avocado: tags=accel:tcg
++        :avocado: tags=cpu:cortex-a57
++        :avocado: tags=machine:virt
++        """
++        xen_url = ('https://deb.debian.org/debian/'
++                   'pool/main/x/xen/'
++                   'xen-hypervisor-4.11-arm64_4.11.4+37-g3263f257ca-1_arm64.deb')
++        xen_sha1 = '034e634d4416adbad1212d59b62bccdcda63e62a'
++        xen_deb = self.fetch_asset(xen_url, asset_hash=xen_sha1)
++        xen_path = self.extract_from_deb(xen_deb, "/boot/xen-4.11-arm64")
++
++        self.launch_xen(xen_path)
++
++    @skipIf(os.getenv('GITLAB_CI'), 'Running on GitLab')
++    def test_arm64_xen_414_and_dom0(self):
++        """
++        :avocado: tags=arch:aarch64
++        :avocado: tags=accel:tcg
++        :avocado: tags=cpu:cortex-a57
++        :avocado: tags=machine:virt
++        """
++        xen_url = ('https://deb.debian.org/debian/'
++                   'pool/main/x/xen/'
++                   'xen-hypervisor-4.14-arm64_4.14.0+80-gd101b417b7-1_arm64.deb')
++        xen_sha1 = 'b9d209dd689ed2b393e625303a225badefec1160'
++        xen_deb = self.fetch_asset(xen_url, asset_hash=xen_sha1)
++        xen_path = self.extract_from_deb(xen_deb, "/boot/xen-4.14-arm64")
++
++        self.launch_xen(xen_path)
++
++    @skipIf(os.getenv('GITLAB_CI'), 'Running on GitLab')
++    def test_arm64_xen_415_and_dom0(self):
++        """
++        :avocado: tags=arch:aarch64
++        :avocado: tags=accel:tcg
++        :avocado: tags=cpu:cortex-a57
++        :avocado: tags=machine:virt
++        """
++
++        xen_url = ('https://fileserver.linaro.org/'
++                   's/JSsewXGZ6mqxPr5/download'
++                   '?path=%2F&files=xen-upstream-4.15-unstable.deb')
++        xen_sha1 = 'fc191172b85cf355abb95d275a24cc0f6d6579d8'
++        xen_deb = self.fetch_asset(xen_url, asset_hash=xen_sha1)
++        xen_path = self.extract_from_deb(xen_deb, "/boot/xen-4.15-unstable")
++
++        self.launch_xen(xen_path)
 -- 
 2.20.1
 
