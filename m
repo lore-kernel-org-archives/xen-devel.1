@@ -2,48 +2,42 @@ Return-Path: <SRS0=BMa3=HO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C6A2C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 14:23:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6E3DC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:40:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 29D2A64E3D
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 14:23:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29D2A64E3D
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 54B0C64E70
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:40:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 54B0C64E70
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.84292.158010 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.84308.158049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAZMC-0001u0-NF; Fri, 12 Feb 2021 14:23:40 +0000
+	id 1lAaYV-0000nE-37; Fri, 12 Feb 2021 15:40:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 84292.158010; Fri, 12 Feb 2021 14:23:40 +0000
+Received: by outflank-mailman (output) from mailman id 84308.158049; Fri, 12 Feb 2021 15:40:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAZMC-0001tt-KL; Fri, 12 Feb 2021 14:23:40 +0000
-Received: by outflank-mailman (input) for mailman id 84292;
- Fri, 12 Feb 2021 14:23:39 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lAZMB-0001tl-Bn; Fri, 12 Feb 2021 14:23:39 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lAZMB-0007wH-5p; Fri, 12 Feb 2021 14:23:39 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lAZMA-000126-Tx; Fri, 12 Feb 2021 14:23:38 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lAZMA-0001iZ-TV; Fri, 12 Feb 2021 14:23:38 +0000
+	id 1lAaYU-0000n7-Vu; Fri, 12 Feb 2021 15:40:26 +0000
+Received: by outflank-mailman (input) for mailman id 84308;
+ Fri, 12 Feb 2021 15:40:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=o46S=HO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1lAaYT-0000ix-Nr
+ for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:40:25 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 01228532-2bd6-448b-a830-03df601056c7;
+ Fri, 12 Feb 2021 15:40:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,76 +49,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=l7CMZcYdOZL0Q88BUcPEBjL31Bkf514UB7r4SCsZy4A=; b=ZQOPvVyiyob1HzFAJotSTH3ScL
-	/WlufR2vYWI3lq42Al8sWO5dQff2FFxVkIxVtNwYHFFrcUn8QgI9A/pnEcUf+TwgC9U2NG5S42Jfj
-	/0ZwJHA80LpliOtY08L+cvl9Zhop5HGR6/GZqHes9E8DFejDu+lASCrC/pzs9Za4CsS0=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-159248-mainreport@xen.org>
+X-Inumbo-ID: 01228532-2bd6-448b-a830-03df601056c7
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1613144416;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=AkTySBnlGFyVMAxg/gcAuosdJVnwo4RsV9buhZjnQmI=;
+  b=Fto+Pz5B0Aef1KmZxa1alOzmlvDsusbB3sqf88EPWlMLjp7zLCuIso6G
+   mfC/QAYmExw9rfZutIm72t1eKhfvdNwJgJT5F8u7YmVOnvNxW44AIO+c6
+   GBMeoPHf+A5alb2okvxLmGfAEwIi1hN5BXTS0SzF1oQM79PEvuWbsq+IM
+   4=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: HownhAwJMB882tcBvJ6G+QOZ8MyF74dHFD5WPKB4/YdYun8zrgjFznZa7eMmo3fa6yqRCEK46f
+ c4CFRvhfwylaL3mc3COpuLJLVUeU7P5OkvJI9wV6troHksPpTN0Pzi1s9/ff44nmfA9bo+25Nf
+ ZsGTKWfrZzgZGcZtPbpTKihFpvu9Y03/bNMaXVxR0YjKj8hzxYAJ3t6h7trMXH8etYxCBhGmYi
+ JsCe0LW4lgIg8TcIcG9FrNXj6eokQGwB1VwTJdDlV0JDuXCk4din0IC+sfucPWf3j80XJbtVVH
+ g08=
+X-SBRS: 5.2
+X-MesageID: 38508885
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.81,174,1610427600"; 
+   d="scan'208";a="38508885"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Anthony PERARD
+	<anthony.perard@citrix.com>
+Subject: [PATCH 05/10] tools/libxl: Fix uninitialised variable in libxl__write_stub_dmargs()
+Date: Fri, 12 Feb 2021 15:39:48 +0000
+Message-ID: <20210212153953.4582-6-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210212153953.4582-1-andrew.cooper3@citrix.com>
+References: <20210212153953.4582-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [ovmf test] 159248: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=1d27e58e401faea284309039f3962cb3cb4549fc
-X-Osstest-Versions-That:
-    ovmf=124f1dd1ee1140b441151043aacbe5d33bb5ab79
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 12 Feb 2021 14:23:38 +0000
 
-flight 159248 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/159248/
+Various version of gcc, when compiling with -Og, complain:
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 1d27e58e401faea284309039f3962cb3cb4549fc
-baseline version:
- ovmf                 124f1dd1ee1140b441151043aacbe5d33bb5ab79
+  libxl_dm.c: In function ‘libxl__write_stub_dmargs’:
+  libxl_dm.c:2166:16: error: ‘dmargs’ may be used uninitialized in this function [-Werror=maybe-uninitialized]
+               rc = libxl__xs_write_checked(gc, t, path, dmargs);
+               ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Last test of basis   159198  2021-02-10 11:26:55 Z    2 days
-Testing same since   159248  2021-02-11 10:27:56 Z    1 days    1 attempts
+It can't, but only because of how the is_linux_stubdom checks line up.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Rebecca Cran <rebecca@nuviainc.com>
-  Sami Mujawar <sami.mujawar@arm.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/libs/light/libxl_dm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+index 1ca21e4b81..7bbb8792ea 100644
+--- a/tools/libs/light/libxl_dm.c
++++ b/tools/libs/light/libxl_dm.c
+@@ -2099,7 +2099,7 @@ static int libxl__write_stub_dmargs(libxl__gc *gc,
+ {
+     struct xs_permissions roperm[2];
+     xs_transaction_t t = XBT_NULL;
+-    char *dmargs;
++    char *dmargs = NULL;
+     int rc;
+ 
+     roperm[0].id = 0;
+-- 
+2.11.0
 
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   124f1dd1ee..1d27e58e40  1d27e58e401faea284309039f3962cb3cb4549fc -> xen-tested-master
 
