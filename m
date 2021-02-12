@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FFFAC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D108C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:41:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3190E64DFF
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:41:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3190E64DFF
+	by mail.kernel.org (Postfix) with ESMTPS id 437D464E74
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:41:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 437D464E74
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.84313.158110 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.84314.158122 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAaYu-0001DH-OA; Fri, 12 Feb 2021 15:40:52 +0000
+	id 1lAaYz-0001Id-2a; Fri, 12 Feb 2021 15:40:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 84313.158110; Fri, 12 Feb 2021 15:40:52 +0000
+Received: by outflank-mailman (output) from mailman id 84314.158122; Fri, 12 Feb 2021 15:40:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAaYu-0001D6-Ju; Fri, 12 Feb 2021 15:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 84313;
- Fri, 12 Feb 2021 15:40:50 +0000
+	id 1lAaYy-0001IS-Us; Fri, 12 Feb 2021 15:40:56 +0000
+Received: by outflank-mailman (input) for mailman id 84314;
+ Fri, 12 Feb 2021 15:40:55 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=o46S=HO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lAaYs-0000ix-Of
- for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:40:50 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1lAaYx-0000ix-Oy
+ for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:40:55 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a1986579-83f5-4a77-bdee-3db06d09e860;
- Fri, 12 Feb 2021 15:40:18 +0000 (UTC)
+ id 99fc8af0-a1b5-402c-8def-985e4836a66a;
+ Fri, 12 Feb 2021 15:40:17 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,93 +49,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1986579-83f5-4a77-bdee-3db06d09e860
+X-Inumbo-ID: 99fc8af0-a1b5-402c-8def-985e4836a66a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1613144418;
+  d=citrix.com; s=securemail; t=1613144416;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=gxhqNkRAqt4D8bXDbOgXUWNa09LADvFwdwUf17wrXSw=;
-  b=R80rtD6giKjL9kkupOQKKmhZjbkW2sQNjKwX05b5yJXbs9z/+Wh2Oh8Y
-   wBCRzI1kVVIlH+GrxxTQFljGsMG7vdolxK2D/VyDk63Pi2f5hqjzjhX/D
-   BhQI/1/RlqriAzW01Nxx+rlG1MMpaSoKDgbnxk4zUtE/sFQykLjeylwmX
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: RKCf/rOpegXLOR/rGRr2O17NtjZ96m2jnR3RcZHKCvoQth9eyEg3hr5TXOSDVPvgM0hU3RP9Aa
- ZVOhfKHBDiTJiOdeiIU6J5DxCSf0wNjoLhH7UBPAxE4pBz20I1moCLLE/ShGQEXpmfs+JaYhox
- 12z0e8R2UXettahbW/Q5PZParO3n5jo7rd6f5wowS7uXtCZ9xn/G+nqF08eMN5LuhHyNStgQIT
- Yi08sSeTUiPiUoq9vfqO6JvSBTsNMk9XGB1JbJlu/wUEmezF15cR6TZYRsKS9L+4qlOtAEsiUh
- usQ=
+  bh=lsfae/ZYMUTtHloQUljGbO2IeSsesWCyE9jSqEqM860=;
+  b=PJ+jrVw2narBucB2O8lVOiUQP7ECcfL9NAcYtcWXamn3TauhlcsIv7UZ
+   xBmOnqrAGGK6iwhXUdzLQeiCwhNaNcMUHVXb5jqLq6H61oXouOeygKa2X
+   vov6d5KnhjX2he4rUe1OnzdYAnUyLLkjEB4Jemd0OO62Hz16M4ZKCJcFr
+   A=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: yEUYvSEFIim5Jdww6A+wuZKUVYJBIVxGk/i2RPOJroGXupap9BtvLjgddQdvX1G0VHk2n+RkTA
+ OhwPiTmolbklJkbR6p1H0zPWtnYB6lgJ+CfEGD8l1UUVMo4ny20DCUvksAbbDipn5eLBehOXsQ
+ m+CF6O7Jo0ksSqTgC702zvQOuEdb57hY6od5ZkM5wBUBn0qosfdajOcyVRCm1IU3EvzYpFbtuF
+ /dGkkjUraGXyhe2E819M1jGeZyinFk/mebU4g9S/bstypBwq2c8DkA/yLOIgJrvp5PESSaSUYe
+ GX4=
 X-SBRS: 5.2
-X-MesageID: 37518635
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 38508888
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.81,174,1610427600"; 
-   d="scan'208";a="37518635"
+   d="scan'208";a="38508888"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>
-Subject: [PATCH 04/10] tools/libxl: Fix uninitialised variable in libxl__domain_get_device_model_uid()
-Date: Fri, 12 Feb 2021 15:39:47 +0000
-Message-ID: <20210212153953.4582-5-andrew.cooper3@citrix.com>
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH 08/10] tools: Check for abi-dumper in ./configure
+Date: Fri, 12 Feb 2021 15:39:51 +0000
+Message-ID: <20210212153953.4582-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210212153953.4582-1-andrew.cooper3@citrix.com>
 References: <20210212153953.4582-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Various version of gcc, when compiling with -Og, complain:
-
-  libxl_dm.c: In function 'libxl__domain_get_device_model_uid':
-  libxl_dm.c:256:12: error: 'kill_by_uid' may be used uninitialized in this function [-Werror=maybe-uninitialized]
-    256 |         if (kill_by_uid)
-        |            ^
-
-The logic is sufficiently complicated I can't figure out if the complain is
-legitimate or not.  There is exactly one path wanting kill_by_uid set to true,
-so default it to false and drop the existing workaround for this problem at
-other optimisation levels.
+This will be optional.  No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Ian Jackson <iwj@xenproject.org>
 CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
+CC: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/light/libxl_dm.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ config/Tools.mk.in |  1 +
+ tools/configure    | 41 +++++++++++++++++++++++++++++++++++++++++
+ tools/configure.ac |  1 +
+ 3 files changed, 43 insertions(+)
 
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 291dee9b3f..1ca21e4b81 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -128,7 +128,7 @@ static int libxl__domain_get_device_model_uid(libxl__gc *gc,
-     int rc;
-     char *user;
-     uid_t intended_uid = -1;
--    bool kill_by_uid;
-+    bool kill_by_uid = false;
+diff --git a/config/Tools.mk.in b/config/Tools.mk.in
+index 48bd9ab731..d47936686b 100644
+--- a/config/Tools.mk.in
++++ b/config/Tools.mk.in
+@@ -19,6 +19,7 @@ BCC                 := @BCC@
+ IASL                := @IASL@
+ AWK                 := @AWK@
+ FETCHER             := @FETCHER@
++ABI_DUMPER          := @ABI_DUMPER@
  
-     /* Only qemu-upstream can run as a different uid */
-     if (b_info->device_model_version != LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN)
-@@ -176,7 +176,6 @@ static int libxl__domain_get_device_model_uid(libxl__gc *gc,
-         LOGD(DEBUG, guest_domid,
-              "dm_restrict disabled, starting QEMU as root");
-         user = NULL; /* Should already be null, but just in case */
--        kill_by_uid = false; /* Keep older versions of gcc happy */
-         rc = 0;
-         goto out;
-     }
-@@ -227,7 +226,6 @@ static int libxl__domain_get_device_model_uid(libxl__gc *gc,
-         LOGD(WARN, guest_domid, "Could not find user %s, falling back to %s",
-              LIBXL_QEMU_USER_RANGE_BASE, LIBXL_QEMU_USER_SHARED);
-         intended_uid = user_base->pw_uid;
--        kill_by_uid = false;
-         rc = 0;
-         goto out;
-     }
+ # Extra folder for libs/includes
+ PREPEND_INCLUDES    := @PREPEND_INCLUDES@
+diff --git a/tools/configure b/tools/configure
+index e63ca3797d..bb5acf9d43 100755
+--- a/tools/configure
++++ b/tools/configure
+@@ -682,6 +682,7 @@ OCAMLOPT
+ OCAMLLIB
+ OCAMLVERSION
+ OCAMLC
++ABI_DUMPER
+ INSTALL_DATA
+ INSTALL_SCRIPT
+ INSTALL_PROGRAM
+@@ -5442,6 +5443,46 @@ $as_echo "no" >&6; }
+ fi
+ 
+ 
++# Extract the first word of "abi-dumper", so it can be a program name with args.
++set dummy abi-dumper; ac_word=$2
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
++$as_echo_n "checking for $ac_word... " >&6; }
++if ${ac_cv_path_ABI_DUMPER+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  case $ABI_DUMPER in
++  [\\/]* | ?:[\\/]*)
++  ac_cv_path_ABI_DUMPER="$ABI_DUMPER" # Let the user override the test with a path.
++  ;;
++  *)
++  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
++for as_dir in $PATH
++do
++  IFS=$as_save_IFS
++  test -z "$as_dir" && as_dir=.
++    for ac_exec_ext in '' $ac_executable_extensions; do
++  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
++    ac_cv_path_ABI_DUMPER="$as_dir/$ac_word$ac_exec_ext"
++    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
++    break 2
++  fi
++done
++  done
++IFS=$as_save_IFS
++
++  ;;
++esac
++fi
++ABI_DUMPER=$ac_cv_path_ABI_DUMPER
++if test -n "$ABI_DUMPER"; then
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ABI_DUMPER" >&5
++$as_echo "$ABI_DUMPER" >&6; }
++else
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++fi
++
++
+ # Extract the first word of "perl", so it can be a program name with args.
+ set dummy perl; ac_word=$2
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+diff --git a/tools/configure.ac b/tools/configure.ac
+index 6b611deb13..636e7077be 100644
+--- a/tools/configure.ac
++++ b/tools/configure.ac
+@@ -310,6 +310,7 @@ AC_PROG_CC
+ AC_PROG_MAKE_SET
+ AC_PROG_INSTALL
+ AC_PATH_PROG([FLEX], [flex])
++AC_PATH_PROG([ABI_DUMPER], [abi-dumper])
+ AX_PATH_PROG_OR_FAIL([PERL], [perl])
+ AX_PATH_PROG_OR_FAIL([AWK], [awk])
+ 
 -- 
 2.11.0
 
