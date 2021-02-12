@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61BA6C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4C5FC433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:40:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0D23064DFF
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:40:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0D23064DFF
+	by mail.kernel.org (Postfix) with ESMTPS id 62F8464E74
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:40:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62F8464E74
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.84309.158062 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.84306.158025 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAaYa-0000rW-Dn; Fri, 12 Feb 2021 15:40:32 +0000
+	id 1lAaYL-0000j9-HT; Fri, 12 Feb 2021 15:40:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 84309.158062; Fri, 12 Feb 2021 15:40:32 +0000
+Received: by outflank-mailman (output) from mailman id 84306.158025; Fri, 12 Feb 2021 15:40:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAaYa-0000rN-9l; Fri, 12 Feb 2021 15:40:32 +0000
-Received: by outflank-mailman (input) for mailman id 84309;
- Fri, 12 Feb 2021 15:40:30 +0000
+	id 1lAaYL-0000j2-EQ; Fri, 12 Feb 2021 15:40:17 +0000
+Received: by outflank-mailman (input) for mailman id 84306;
+ Fri, 12 Feb 2021 15:40:16 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=o46S=HO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lAaYY-0000ix-O2
- for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:40:30 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1lAaYJ-0000ix-UV
+ for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:40:16 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b53a4ed4-952e-4bde-aa3e-303df37baa6d;
- Fri, 12 Feb 2021 15:40:16 +0000 (UTC)
+ id 0497549c-6442-4ccf-ba19-070ba799dfdc;
+ Fri, 12 Feb 2021 15:40:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,73 +49,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b53a4ed4-952e-4bde-aa3e-303df37baa6d
+X-Inumbo-ID: 0497549c-6442-4ccf-ba19-070ba799dfdc
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1613144416;
+  d=citrix.com; s=securemail; t=1613144414;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=THEW0Vd+o8+5NNZotQAfhag3Lg3d+kZffhIX6B7tke8=;
-  b=M3SFRRzPFVN3UbIedZ6vE/toxx2jRMFqDrxjXKPppSUZM88OIDw+aNeh
-   LsZnCJngO53TjpDiSp3vkD4YOtULBiBvlwJNOPkb2qNdmAhELiQFIwafA
-   oOyEHlDBaq8z4BtL3PB9hi+A9Im3T6U72ameDN/ZCpymNvI3SXFM54Cii
-   M=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 6Fw2KaezQaX/2xsw/xTG3V/cEq3H06/GILUVL4Y3NEK8P+ifbKijqr9FjN+/AIxZbV19l1Foc0
- li4F9FqP2dlWBqgmjJkF7KiuLPTCRnOgXq7WTZ+pqtPBfkQ8gKYMumEST+xKSCHPokhEe2qLsN
- dQW70Ec2AFsvezMup9xPwZw/THN//JMfLN/oJSP16nuZ1HcYj6CDdmeKim3GYNV5MkCYiDW7M3
- Caa+K5RSzxr5qTNo32reNxfMf9L34HCUOAf1KCEef0pxUNhdNY8oGc6dKqiXvIGH7LhpYHRwni
- fpY=
+  bh=9ilKt//pD9WWwJmxzImNAH8JgkNnaX0KcmVT6/nsyOQ=;
+  b=TGuIyEm4uG2FoOiaRkgb+qI7ura6onEHhWcky31AlNrEr+T0yqwoMQj+
+   i7gGdjG8lUGQhXdCxfTRGI1pzPLMzLTOuGwwhmpgzQHwCx1SSxpjPBDgs
+   lUVC1vKwJ/dwecPMiM+KQPwJxhzpOorOIpDQbmXjgQkwEbElYUPBBkoWY
+   s=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: yZYg3LdXWpas36oecYc8GfAQ44qTZtj34YojGj+i3Y/nUAffyNtu041+sfrB7t0+QzgSQnU4Vx
+ CE6fbK/BHU37/SdXYauPMkSVq4Kuw7kZVQWw66pkpyl63zDqcRMX+75ukBgAJSkBtFuDTsr15f
+ L6DBL/e93xWopf1n88mpx6DOurQDlD37sa1pHwN62lENUtfkIuodDMnYt7WNe4rESdpMxNza9J
+ PvevuBg0Zbcdri/Nx9avtE4h5McP0/HWlr4Jux+x7NdRYdJG9XZlDDMbfSfTYgyfoPr6ekp8ut
+ iTc=
 X-SBRS: 5.2
-X-MesageID: 37085875
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 38508879
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.81,174,1610427600"; 
-   d="scan'208";a="37085875"
+   d="scan'208";a="38508879"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: [PATCH 07/10] tools: Use -Og for debug builds when available
-Date: Fri, 12 Feb 2021 15:39:50 +0000
-Message-ID: <20210212153953.4582-8-andrew.cooper3@citrix.com>
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>
+Subject: [PATCH 03/10] tools/libxg: Fix uninitialised variable in meminit()
+Date: Fri, 12 Feb 2021 15:39:46 +0000
+Message-ID: <20210212153953.4582-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210212153953.4582-1-andrew.cooper3@citrix.com>
 References: <20210212153953.4582-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-The recommended optimisation level for debugging is -Og, and is what tools
-such as gdb prefer.  In practice, it equates to -01 with a few specific
-optimisations turned off.
+Various version of gcc, when compiling with -Og, complain:
 
-abi-dumper in particular wants the libraries it inspects in this form.
+  xg_dom_arm.c: In function 'meminit':
+  xg_dom_arm.c:420:19: error: 'p2m_size' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+    420 |     dom->p2m_size = p2m_size;
+        |     ~~~~~~~~~~~~~~^~~~~~~~~~
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Ian Jackson <iwj@xenproject.org>
 CC: Wei Liu <wl@xen.org>
-CC: Juergen Gross <jgross@suse.com>
----
- tools/Rules.mk | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index f61da81f4a..2907ed2d39 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -106,8 +106,9 @@ endif
- CFLAGS_libxenlight += $(CFLAGS_libxenctrl)
+Julien/Stefano: I can't work out how this variable is supposed to work, and
+the fact that it isn't a straight accumulation across the RAM banks looks
+suspect.
+---
+ tools/libs/guest/xg_dom_arm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/libs/guest/xg_dom_arm.c b/tools/libs/guest/xg_dom_arm.c
+index 94948d2b20..f1b8d06f75 100644
+--- a/tools/libs/guest/xg_dom_arm.c
++++ b/tools/libs/guest/xg_dom_arm.c
+@@ -373,7 +373,7 @@ static int meminit(struct xc_dom_image *dom)
+     const uint64_t modsize = dtb_size + ramdisk_size;
+     const uint64_t ram128mb = bankbase[0] + (128<<20);
  
- ifeq ($(debug),y)
--# Disable optimizations
--CFLAGS += -O0 -fno-omit-frame-pointer
-+# Use -Og if available, -O0 otherwise
-+dbg_opt_level := $(call cc-option,$(CC),-Og,-O0)
-+CFLAGS += $(dbg_opt_level) -fno-omit-frame-pointer
- # But allow an override to -O0 in case Python enforces -D_FORTIFY_SOURCE=<n>.
- PY_CFLAGS += $(PY_NOOPT_CFLAGS)
- else
+-    xen_pfn_t p2m_size;
++    xen_pfn_t p2m_size = 0;
+     uint64_t bank0end;
+ 
+     assert(dom->rambase_pfn << XC_PAGE_SHIFT == bankbase[0]);
 -- 
 2.11.0
 
