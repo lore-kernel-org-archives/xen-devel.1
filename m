@@ -2,42 +2,44 @@ Return-Path: <SRS0=BMa3=HO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3276FC433E6
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ADED0C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:45:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E477264DFF
-	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:41:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E477264DFF
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 61EB664E70
+	for <xen-devel@archiver.kernel.org>; Fri, 12 Feb 2021 15:45:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61EB664E70
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.84316.158134 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.84332.158146 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAaZ4-0001Or-DY; Fri, 12 Feb 2021 15:41:02 +0000
+	id 1lAadf-0001te-1g; Fri, 12 Feb 2021 15:45:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 84316.158134; Fri, 12 Feb 2021 15:41:02 +0000
+Received: by outflank-mailman (output) from mailman id 84332.158146; Fri, 12 Feb 2021 15:45:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lAaZ4-0001Of-9l; Fri, 12 Feb 2021 15:41:02 +0000
-Received: by outflank-mailman (input) for mailman id 84316;
- Fri, 12 Feb 2021 15:41:00 +0000
+	id 1lAade-0001tX-Uv; Fri, 12 Feb 2021 15:45:46 +0000
+Received: by outflank-mailman (input) for mailman id 84332;
+ Fri, 12 Feb 2021 15:45:45 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=o46S=HO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lAaZ2-0000ix-PI
- for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:41:00 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=pKAX=HO=gmail.com=snitzer@srs-us1.protection.inumbo.net>)
+ id 1lAadd-0001tS-HP
+ for xen-devel@lists.xenproject.org; Fri, 12 Feb 2021 15:45:45 +0000
+Received: from mail-pl1-f180.google.com (unknown [209.85.214.180])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5c825c4b-0a26-462a-891b-669940f5c0bc;
- Fri, 12 Feb 2021 15:40:22 +0000 (UTC)
+ id aed3b706-dc8a-43af-b503-f19b77648660;
+ Fri, 12 Feb 2021 15:45:44 +0000 (UTC)
+Received: by mail-pl1-f180.google.com with SMTP id s15so49589plr.9
+ for <xen-devel@lists.xenproject.org>; Fri, 12 Feb 2021 07:45:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,89 +51,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c825c4b-0a26-462a-891b-669940f5c0bc
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1613144422;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Rz8UsAOinQtm3EzgaPvbSv/VidINXBxSC5At43dOJUQ=;
-  b=D+/bns3hGvQNEpInGTrxn6sKpTUm/pnfRvOMnP41AbvTJtHOW3C32Cw5
-   0VqK9q/AA5Ut1rzZD2tDjb/14vxQKKikE79wB6XGBl9X8zOAvaRBDxXd1
-   16WSqYCOWaTxGburDuqVdRgtXyynHalwMjjMmZD9dyqVSh+xm0jrEgYcN
-   E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: +Wf30pnhbcD3GN9U9MLRbwvAkNGL9BlifUKjHxW3NtKLlThUKO1VZbaKVnqwO3KvD8YsRhWnfG
- MPiUbmNFZcEJ/QpmO9/gK8ds3y2k64xPl8lLVsfPIrmjvaYHoxeNHoGqnb5F3/5VMDVHuYDpsl
- Sbd0Ma5Gob6Ko9fSx4m7sOK5oDKcIDWYejrsydTAXdzcItpn95YAhMV54DUbO1B8xybaerd9me
- HZ9qEfMTQRsTJTICi2Dzh/rMq2QVDREALg8q3gg8K23Xvnp3VZrPiWb0kS8v/bs9MZk9q60aII
- PkQ=
-X-SBRS: 5.2
-X-MesageID: 37344043
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.81,174,1610427600"; 
-   d="scan'208";a="37344043"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: [PATCH for-4.15 00/10] tools: Support to use abi-dumper on libraries
-Date: Fri, 12 Feb 2021 15:39:43 +0000
-Message-ID: <20210212153953.4582-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+X-Inumbo-ID: aed3b706-dc8a-43af-b503-f19b77648660
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=M8C1yZZgp4rNPfghNpxWN41GpCK1+InKLAelhxbvplw=;
+        b=j0utPCU15ZdF4aMvuBalv8kNhluW4XUid0Ei0j/wrOqVu0XNhoipRGtO3JBrPg80T2
+         QBHZaYU0lWlGoAW9xFSnkZEnych3aJgHqJKITskkg6jPsoqo7Uy9q5ocRd2MsmVWflSw
+         CPjQWvrW/A2rW4ST9apzwhp4BkY+j728CBjuBrxLW4seYUI4S/8pjpOEEDgnaLFc8PFC
+         G+3YiClxb8+mWtYDrzIxsn/gX75xIG2o5sbwXip11ECwRGm/bP2aBfCDsX38uk30FdeW
+         Jnoynsw/+sYPsv1JtGlGVf6gFlVeK5BF+I2kePfYK3BHMuPjsll7XHZeRwSYA9Ax/8yk
+         kNiw==
+X-Gm-Message-State: AOAM533In0NeOFkBRyCDblgAB5Vz/FtLS7u1eb1b5G3Mg3FvuJxxAuXZ
+	/5ixh/HCtNRi3oWnX7Sfu8iCD1PYbA1hAoI8Pj8=
+X-Google-Smtp-Source: ABdhPJyYCXBmQgiV5syIf5Cv8mFWKTwy1gjS5Yhyhg4Qi/jYzZasdmgfRgJp2ybsEGtlgybQDIghy8J0Yy2+jaKx2kI=
+X-Received: by 2002:a17:90a:4e1:: with SMTP id g88mr3222886pjg.7.1613144743400;
+ Fri, 12 Feb 2021 07:45:43 -0800 (PST)
 MIME-Version: 1.0
+References: <20201116145809.410558-1-hch@lst.de> <20201116145809.410558-13-hch@lst.de>
+In-Reply-To: <20201116145809.410558-13-hch@lst.de>
+From: Mike Snitzer <snitzer@redhat.com>
+Date: Fri, 12 Feb 2021 10:45:32 -0500
+Message-ID: <CAMM=eLfD0_Am3--X+PsKPTfc9qzejxpMNjYwEh=WtjSa-iSncg@mail.gmail.com>
+Subject: Re: [PATCH 12/78] dm: use set_capacity_and_notify
+To: Christoph Hellwig <hch@lst.de>
+Cc: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>, 
+	Josef Bacik <josef@toxicpanda.com>, Ilya Dryomov <idryomov@gmail.com>, 
+	Jack Wang <jinpu.wang@cloud.ionos.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+	Jason Wang <jasowang@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Stefan Hajnoczi <stefanha@redhat.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Minchan Kim <minchan@kernel.org>, Song Liu <song@kernel.org>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, 
+	device-mapper development <dm-devel@redhat.com>, linux-block <linux-block@vger.kernel.org>, 
+	drbd-dev@lists.linbit.com, nbd@other.debian.org, ceph-devel@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, 
+	"linux-raid@vger.kernel.org" <linux-raid@vger.kernel.org>, linux-nvme@lists.infradead.org, 
+	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>, linux-fsdevel <linux-fsdevel@vger.kernel.org>, 
+	Hannes Reinecke <hare@suse.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 
-The first 6 patches are fixes to build with the -Og optimisation level, which
-is an expectation of abi-dumper and a good idea generally.  There are 2
-definite bugfixes, and 4 of more questionable usefulness.  All fixes are
-simple.
+On Mon, Nov 16, 2020 at 10:05 AM Christoph Hellwig <hch@lst.de> wrote:
+>
+> Use set_capacity_and_notify to set the size of both the disk and block
+> device.  This also gets the uevent notifications for the resize for free.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> Reviewed-by: Hannes Reinecke <hare@suse.de>
+> ---
+>  drivers/md/dm.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+> index c18fc25485186d..62ad44925e73ec 100644
+> --- a/drivers/md/dm.c
+> +++ b/drivers/md/dm.c
+> @@ -1971,8 +1971,7 @@ static struct dm_table *__bind(struct mapped_device *md, struct dm_table *t,
+>         if (size != dm_get_size(md))
+>                 memset(&md->geometry, 0, sizeof(md->geometry));
+>
+> -       set_capacity(md->disk, size);
+> -       bd_set_nr_sectors(md->bdev, size);
+> +       set_capacity_and_notify(md->disk, size);
+>
+>         dm_table_event_callback(t, event_callback, md);
+>
 
-The next patch switches to -Og by default.  This is potentially risky - I've
-fixed up all build failures that Gitlab CI can spot, but I don't guarentee
-that I've fixed all of them.  However, it only affects debug builds - release
-builds are unchanged, and we're before -RC1 so have plenty of time to react to
-any fallout.
+Not yet pinned down _why_ DM is calling set_capacity_and_notify() with
+a size of 0 but, when running various DM regression tests, I'm seeing
+a lot of noise like:
 
-The final 3 patches arrange for abi-dumper to run if it is available in the
-build environment.  This is strictly optional, has no effect if abi-dumper
-isn't in the build environment, and writes out one extra file if present.
+[  689.240037] dm-2: detected capacity change from 2097152 to 0
 
+Is this pr_info really useful?  Should it be moved to below: if
+(!capacity || !size) so that it only prints if a uevent is sent?
 
-With this tooling place, we can now add support to OSSTest to check for ABI
-breakges in builds.
-
-Andrew Cooper (10):
-  tools/xl: Fix exit code for `xl vkbattach`
-  tools/libxg: Fix uninitialised variable in write_x86_cpu_policy_records()
-  tools/libxg: Fix uninitialised variable in meminit()
-  tools/libxl: Fix uninitialised variable in libxl__domain_get_device_model_uid()
-  tools/libxl: Fix uninitialised variable in libxl__write_stub_dmargs()
-  stubdom/xenstored: Fix uninitialised variables in lu_read_state()
-  tools: Use -Og for debug builds when available
-  tools: Check for abi-dumper in ./configure
-  tools/libs: Add rule to generate headers.lst
-  tools/libs: Write out an ABI analysis when abi-dumper is available
-
- config/Tools.mk.in                  |  1 +
- tools/Rules.mk                      |  5 +++--
- tools/configure                     | 41 +++++++++++++++++++++++++++++++++++++
- tools/configure.ac                  |  1 +
- tools/libs/.gitignore               |  1 +
- tools/libs/guest/xg_dom_arm.c       |  2 +-
- tools/libs/guest/xg_sr_common_x86.c |  6 ++++++
- tools/libs/libs.mk                  | 18 +++++++++++++++-
- tools/libs/light/libxl_dm.c         |  6 ++----
- tools/xenstore/xenstored_control.c  |  2 +-
- tools/xl/xl_vkb.c                   |  3 ++-
- 11 files changed, 76 insertions(+), 10 deletions(-)
- create mode 100644 tools/libs/.gitignore
-
--- 
-2.11.0
-
+Mike
 
