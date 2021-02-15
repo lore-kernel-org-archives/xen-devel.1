@@ -2,46 +2,44 @@ Return-Path: <SRS0=65yj=HR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-4.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,GUARANTEED_100_PERCENT,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3754C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 07:38:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD4C3C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 08:13:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AB8EB64E68
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 07:38:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB8EB64E68
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=codiax.se
+	by mail.kernel.org (Postfix) with ESMTPS id 519B164E51
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 08:13:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 519B164E51
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.85068.159469 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.85076.159487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBYS0-0000nj-LW; Mon, 15 Feb 2021 07:37:44 +0000
+	id 1lBZ0M-0004oq-Ij; Mon, 15 Feb 2021 08:13:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 85068.159469; Mon, 15 Feb 2021 07:37:44 +0000
+Received: by outflank-mailman (output) from mailman id 85076.159487; Mon, 15 Feb 2021 08:13:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBYS0-0000nc-HF; Mon, 15 Feb 2021 07:37:44 +0000
-Received: by outflank-mailman (input) for mailman id 85068;
- Mon, 15 Feb 2021 07:37:43 +0000
+	id 1lBZ0M-0004oj-Fe; Mon, 15 Feb 2021 08:13:14 +0000
+Received: by outflank-mailman (input) for mailman id 85076;
+ Mon, 15 Feb 2021 08:13:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Dghk=HR=codiax.se=anders.tornqvist@srs-us1.protection.inumbo.net>)
- id 1lBYRz-0000nH-Di
- for xen-devel@lists.xenproject.org; Mon, 15 Feb 2021 07:37:43 +0000
-Received: from mailrelay1-3.pub.mailoutpod1-cph3.one.com (unknown
- [46.30.212.10]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 20ed8bb5-fa94-4ab7-9243-5538a7f83d63;
- Mon, 15 Feb 2021 07:37:41 +0000 (UTC)
-Received: from [192.168.101.129] (h87-96-135-119.cust.a3fiber.se
- [87.96.135.119])
- by mailrelay1.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
- id ae742993-6f60-11eb-9248-d0431ea8a283;
- Mon, 15 Feb 2021 07:37:40 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=X1yw=HR=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lBZ0L-0004oe-85
+ for xen-devel@lists.xenproject.org; Mon, 15 Feb 2021 08:13:13 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5cc8ae3b-e56a-4109-aea9-4ed6e3968418;
+ Mon, 15 Feb 2021 08:13:12 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 4A9CFB125;
+ Mon, 15 Feb 2021 08:13:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,40 +51,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 20ed8bb5-fa94-4ab7-9243-5538a7f83d63
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=codiax.se; s=20191106;
-	h=content-transfer-encoding:content-type:mime-version:date:message-id:to:
-	 subject:from:from;
-	bh=nRwWovs734qaKdA60euEkY5q39AlOcB9TXQaCO+vki4=;
-	b=VFDfkwvhUV5LPl2bPLPCwWV4mwlaqetBAeAGGOc5AmxFDg9euYUN176JdReBU4GbSXk7E5hRiKQ9h
-	 AEwjkmzzj3BFhJNzWekC8/6vV98DQG91jPbILul+Y/1CvgzsqYzTDJvp3ULq1KqD1j7y0phB/eSKRQ
-	 k415zNSCg7rXKYHzgh7yqmByrtkpz75ZhK6zF9g8zvlDELel7lvzDgZC4WHpdUM5s0wyGYFS1PKkas
-	 DOvOZi6utKH1yR+3jQlG5h11PEXoPYrcLs3yBRjjTHdXS3jyqn59Jh0ak8oSGK5j+ncfBUW/SD/hHy
-	 YY1fh7rRDDLeTJTezATkZX3CwJMFuGQ==
-X-HalOne-Cookie: 7dc683fc829a40dbfc6b6ccd077c5325c7ceba05
-X-HalOne-ID: ae742993-6f60-11eb-9248-d0431ea8a283
-From: =?UTF-8?Q?Anders_T=c3=b6rnqvist?= <anders.tornqvist@codiax.se>
-Subject: Boot time and 3 sec in warning_print
-To: xen-devel@lists.xenproject.org
-Message-ID: <fcc14668-b07d-aec8-1587-bc2d7add84da@codiax.se>
-Date: Mon, 15 Feb 2021 08:37:39 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+X-Inumbo-ID: 5cc8ae3b-e56a-4109-aea9-4ed6e3968418
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1613376791; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fwQC7DNBt5mvznk9zQZ/2vgKpu2DIGAAc5dNymRR2wQ=;
+	b=Er/2MQpqVt3Sb+EhLvE8IW1bLvydTGL9IBa030cUDoEQWBW3CPcVmZxJQLAIkk0LDqJdd/
+	1GY2wMZBBJIPpl2leYDMQeylOkPr45V8MK/7g2aSCTdQ46cT9gCt3/xH9KDlFVaYqh+hw0
+	OaEwyMUEzSnG+bqhRMFfiiTsTiHSN6A=
+Subject: Re: [PATCH] xen/iommu: arm: Don't insert an IOMMU mapping when the
+ grantee and granter...
+To: Julien Grall <julien@xen.org>
+Cc: Julien Grall <jgrall@amazon.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Rahul Singh <Rahul.Singh@arm.com>, xen-devel@lists.xenproject.org
+References: <20210214143504.23099-1-julien@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <3a827099-1d8f-826d-42ef-743d86d9ccce@suse.com>
+Date: Mon, 15 Feb 2021 09:13:14 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+In-Reply-To: <20210214143504.23099-1-julien@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 14.02.2021 15:35, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+> 
+> ... are the same.
+> 
+> When the IOMMU is enabled and the domain is direct mapped (e.g. Dom0),
+> Xen will insert a 1:1 mapping for each grant mapping in the P2M to
+> allow DMA.
+> 
+> This works quite well when the grantee and granter and not the same
+> because the GFN in the P2M should not be mapped. However, if they are
+> the same, we will overwrite the mapping. Worse, it will be completely
+> removed when the grant is unmapped.
+> 
+> As the domain is direct mapped, a 1:1 mapping should always present in
+> the P2M. This is not 100% guaranteed if the domain decides to mess with
+> the P2M. However, such domain would already end up in trouble as the
+> page would be soon be freed (when the last reference dropped).
+> 
+> Add an additional check in arm_iommu_{,un}map_page() to check whether
+> the page belongs to the domain. If it is belongs to it, then ignore the
+> request.
 
-I would like to shorten the boot time in our system if possible.
+Doesn't this want / need solving in grant_table.c itself, as it also
+affects PV on x86? Or alternatively in gnttab_need_iommu_mapping(),
+handing the macro the MFN alongside the domain? No matter which one
+was chosen, it could at the same time avoid the expensive mapkind()
+invocation in this case.
 
-In xen/common/warning.c there is warning_print() which contains a 3 
-seconds loop that calls  process_pending_softirqs().
-
-What would the potential problems be if that loop is radically shortened?
-
-/Anders
-
+Jan
 
