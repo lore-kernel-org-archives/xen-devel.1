@@ -2,45 +2,41 @@ Return-Path: <SRS0=65yj=HR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E909BC433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 15:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 655F6C433DB
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 15:37:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2A0264DA8
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 15:10:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2A0264DA8
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2F0AB600EF
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Feb 2021 15:37:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F0AB600EF
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.85270.159881 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.85273.159893 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBfWD-0002E9-VV; Mon, 15 Feb 2021 15:10:33 +0000
+	id 1lBfwA-00047K-3k; Mon, 15 Feb 2021 15:37:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 85270.159881; Mon, 15 Feb 2021 15:10:33 +0000
+Received: by outflank-mailman (output) from mailman id 85273.159893; Mon, 15 Feb 2021 15:37:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBfWD-0002E2-S7; Mon, 15 Feb 2021 15:10:33 +0000
-Received: by outflank-mailman (input) for mailman id 85270;
- Mon, 15 Feb 2021 15:10:33 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lBfWD-0002Dx-F1
- for xen-devel@lists.xenproject.org; Mon, 15 Feb 2021 15:10:33 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lBfWC-0008NR-Px; Mon, 15 Feb 2021 15:10:32 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lBfWC-0007mx-H8; Mon, 15 Feb 2021 15:10:32 +0000
+	id 1lBfwA-00047D-0r; Mon, 15 Feb 2021 15:37:22 +0000
+Received: by outflank-mailman (input) for mailman id 85273;
+ Mon, 15 Feb 2021 15:37:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=/QLJ=HR=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1lBfw9-000478-5Z
+ for xen-devel@lists.xenproject.org; Mon, 15 Feb 2021 15:37:21 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id aba63bde-7cad-4555-8b0e-636286fb3c35;
+ Mon, 15 Feb 2021 15:37:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,83 +48,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=HBoxuV2cYZP+cucKP3j6vy3oNG8hP2mNkjtQxmf9GsM=; b=pNAuWUVYG0UD8P91nQFDviWDsf
-	h4kS9UHRQUV+Q7rz93+4KL1OPs7Lbw0V5jywfhL4w3319mredSyj4ACAuHjNK9bhahEndCfi2xyJC
-	eq4qNHMGAfKt2CXfpDDph7cU9wbZUmOKGwIP5BOI4nqZTAc3MxIjieEvuLfRVTfE/daA=;
-Subject: Re: Boot time and 3 sec in warning_print
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
- <jgross@suse.com>, =?UTF-8?Q?Anders_T=c3=b6rnqvist?=
- <anders.tornqvist@codiax.se>
-References: <fcc14668-b07d-aec8-1587-bc2d7add84da@codiax.se>
- <4f256544-7e1a-1a65-4942-04b3bc00e373@suse.com>
- <d9d4ebf7-09b3-29f2-1359-cd9db73f9c94@suse.com>
- <84a8cc60-e63d-24db-750c-39bb6049c045@xen.org>
- <29a1b91f-891c-2a9e-a5f0-b7b01296c880@suse.com>
- <e4c5e236-b801-27af-d519-204943aa32d4@citrix.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <6c238a10-cf7e-527d-88ea-c1d730ad9e87@xen.org>
-Date: Mon, 15 Feb 2021 15:10:30 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.1
+X-Inumbo-ID: aba63bde-7cad-4555-8b0e-636286fb3c35
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1613403439;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Zf7KG8h/f/t89+M/y8zcenH/KRVdl9lbrjSfPKDQUDc=;
+  b=PuQMaMlkzTENGOn9tQf++aaTVdU9n+cCOO+fBGEBDBLPEcLwRQaAU16B
+   tUT8HJlAG1hn1N1Rk2t1L5R4ku9ST/v3L7QCJVnOOoN9ime0wdl64vrzx
+   IL399TUpDXHnvZ8NOieIikYymMcP1nRrCZCriPV/miNq5o0ip4O8m1CB5
+   c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: uYHojOcCv3PBzUrbrwWZn9PAmgetAW51eL4awKKfNOzIJ2ZucZQZ5UR4v1Dv4AveR7n/WsvR17
+ eni5K0cFLtkGeMZhHDC2SKG1wOh3ADwC9jJya6LbXgW7jNW4OW7v9Luo0iq5BUGLCN99xzqYGH
+ ZmrSxpJYjQIws6bUWJrpUCO+oc27xhdSM2zlMxdt+4UCm2Z+zsp40IR18e71bvpeUSbeYRIjlJ
+ HrI82reXOprjuihekmoOtp5YYFprVcI9D/r1P/+e4cJR2S7q2g7hI51u3M5otJlpsvSaGPkpy/
+ FOU=
+X-SBRS: 5.1
+X-MesageID: 37460986
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.81,180,1610427600"; 
+   d="scan'208";a="37460986"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH v1.1 06/10] stubdom/xenstored: Fix uninitialised variables in lu_read_state()
+Date: Mon, 15 Feb 2021 15:36:49 +0000
+Message-ID: <20210215153649.4055-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210212153953.4582-7-andrew.cooper3@citrix.com>
+References: <20210212153953.4582-7-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <e4c5e236-b801-27af-d519-204943aa32d4@citrix.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Hi Andrew,
+Various version of gcc, when compiling with -Og, complain:
 
-On 15/02/2021 15:00, Andrew Cooper wrote:
-> On 15/02/2021 10:41, Jan Beulich wrote:
->> On 15.02.2021 11:35, Julien Grall wrote:
->>> On 15/02/2021 08:38, Jan Beulich wrote:
->>>> On 15.02.2021 09:13, Jürgen Groß wrote:
->>> What was just an "annoyance" for boot can now completely wreck your
->>> guests and system (not many software can tolerate large downtime).
->>>
->>> So I think we either want to drop the 3s pause completely or allow the
->>> user to decide whether he/she cares about it via a command line option.
->>>
->>> I am leaning towards the former at the moment.
->> I'm afraid I'm -2 towards complete removal. I'm at least -1 towards
->> shortening of the pause, as already indicated.
-> 
-> A 3s delay on boot doesn't even cause most people to notice.  The
-> infrastructure has failed at its intended purpose.
-> 
-> Therefore, we should consider now to replace this largely-failed
-> experiment with something better.
-> 
-> 
-> Personally, I think ARM is abusing this in the first place.  Adding a 3
-> second delay for someone who's explicitly chosen hmp_unsafe is petty.
+  xenstored_control.c: In function ‘lu_read_state’:
+  xenstored_control.c:540:11: error: ‘state.size’ is used uninitialized in this
+  function [-Werror=uninitialized]
+    if (state.size == 0)
+        ~~~~~^~~~~
+  xenstored_control.c:543:6: error: ‘state.buf’ may be used uninitialized in
+  this function [-Werror=maybe-uninitialized]
+    pre = state.buf;
+    ~~~~^~~~~~~~~~~
+  xenstored_control.c:550:23: error: ‘state.buf’ may be used uninitialized in
+  this function [-Werror=maybe-uninitialized]
+     (void *)head - state.buf < state.size;
+                    ~~~~~^~~~
+  xenstored_control.c:550:35: error: ‘state.size’ may be used uninitialized in
+  this function [-Werror=maybe-uninitialized]
+     (void *)head - state.buf < state.size;
+                                ~~~~~^~~~~
 
-For Arm, the original goal was to get all the important warning in a 
-single place so they are easy to find.
+for the stubdom build.  This is because lu_get_dump_state() is a no-op stub in
+MiniOS, and state really is operated on uninitialised.
 
-The 3 seconds is unfortunately an unintended consequence of using 
-warning_add().
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+---
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Juergen Gross <jgross@suse.com>
 
-> So is adding a 3 second delay for anyone who's explicitly chosen a
-> non-default configuration.  In retrospect, I think the delay for hvm_fep
-> is also wrong, especially as we also have a taint for it. >
-> 
-> The *only* way to make users deal with the warnings is to surface them
-> very obviously in the UI they use to interact with their Xen system.
-> That is XenCenter/XenOrchestra/virt-manager/etc, and possibly the SSH
-> MOTD - not a logfile that approximately noone reads.
-> 
-> To make this happen, warnings need to be available somewhere which isn't
-> the dmesg ring.  hypfs would be the obvious candidate at the moment.
+v2:
+ * Reword commit message.
+---
+ tools/xenstore/xenstored_control.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Could we also taint Xen if there is a major warning?
-
-Cheers,
-
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 1f733e0a04..f10beaf85e 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -530,7 +530,7 @@ static const char *lu_dump_state(const void *ctx, struct connection *conn)
+ 
+ void lu_read_state(void)
+ {
+-	struct lu_dump_state state;
++	struct lu_dump_state state = {};
+ 	struct xs_state_record_header *head;
+ 	void *ctx = talloc_new(NULL); /* Work context for subfunctions. */
+ 	struct xs_state_preamble *pre;
 -- 
-Julien Grall
+2.11.0
+
 
