@@ -2,48 +2,50 @@ Return-Path: <SRS0=9fiq=HS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73879C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82B8DC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:49:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0559E61606
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:39:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0559E61606
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id B941364D73
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:49:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B941364D73
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=runbox.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.85636.160592 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.85724.160619 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBzdM-0004T0-4g; Tue, 16 Feb 2021 12:39:16 +0000
+	id 1lBzmi-00063u-Kf; Tue, 16 Feb 2021 12:48:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 85636.160592; Tue, 16 Feb 2021 12:39:16 +0000
+Received: by outflank-mailman (output) from mailman id 85724.160619; Tue, 16 Feb 2021 12:48:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBzdM-0004Sq-0F; Tue, 16 Feb 2021 12:39:16 +0000
-Received: by outflank-mailman (input) for mailman id 85636;
- Tue, 16 Feb 2021 12:39:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=y7oK=HS=xenbits.xen.org=iwj@srs-us1.protection.inumbo.net>)
- id 1lBzaW-0001zG-R3
- for xen-devel@lists.xen.org; Tue, 16 Feb 2021 12:36:20 +0000
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 058e238a-214d-4b02-9732-042ee8802a6c;
- Tue, 16 Feb 2021 12:35:35 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenbits.xen.org>)
- id 1lBzZi-0008Mp-47; Tue, 16 Feb 2021 12:35:30 +0000
-Received: from iwj by xenbits.xenproject.org with local (Exim 4.92)
- (envelope-from <iwj@xenbits.xen.org>)
- id 1lBzZi-0002aT-2R; Tue, 16 Feb 2021 12:35:30 +0000
+	id 1lBzmi-00063n-HJ; Tue, 16 Feb 2021 12:48:56 +0000
+Received: by outflank-mailman (input) for mailman id 85724;
+ Tue, 16 Feb 2021 12:48:55 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jGlc=HS=runbox.com=m.v.b@srs-us1.protection.inumbo.net>)
+ id 1lBzmg-00063i-H8
+ for xen-devel@lists.xenproject.org; Tue, 16 Feb 2021 12:48:55 +0000
+Received: from aibo.runbox.com (unknown [91.220.196.211])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0471b6f0-6bbe-4215-9ad4-c8f5733e4933;
+ Tue, 16 Feb 2021 12:48:51 +0000 (UTC)
+Received: from [10.9.9.74] (helo=submission03.runbox)
+ by mailtransmit02.runbox with esmtp (Exim 4.86_2)
+ (envelope-from <m.v.b@runbox.com>)
+ id 1lBzmZ-0005SJ-Sk; Tue, 16 Feb 2021 13:48:48 +0100
+Received: by submission03.runbox with esmtpsa [Authenticated alias (536975)]
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
+ id 1lBzmY-0002Xj-7s; Tue, 16 Feb 2021 13:48:46 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,233 +57,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 058e238a-214d-4b02-9732-042ee8802a6c
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Date:Message-Id:Subject:CC:From:To:MIME-Version:
-	Content-Transfer-Encoding:Content-Type;
-	bh=lZWifSAdWtqIapxaF/ABMz5U1NS2kxDVUZoclZKPguo=; b=3nniZQLh/q0JG34VPD0xs4VeUH
-	HRegZFYig+FQgXOTHx7CBcDBYFzPhSB9NE/4qvF9EaEZzkFN4C7HWi+Ijs4luDq/2w1LavEck4otJ
-	K5LTGecfopcu3c7q8XREM2KCw7iwukc1ZQArBpWjLiqQSujSvRNvJ+g9EccWSLbSk00g=;
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+X-Inumbo-ID: 0471b6f0-6bbe-4215-9ad4-c8f5733e4933
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=runbox.com;
+	 s=selector2; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=f+nKs8JpK4wFd/s5GZi1+0U4NVGMehxgEcNl1XW0KAo=; b=mDOzVrKoeD08JED7svMnb7Q645
+	3qinbUo4jpPJKhIojrnEOITbmyE60csS5s0vLvUeJaxtbFOExvq33FK5BwPgH0vR7ybn8hdqU84rR
+	R61nQII2iMxDMy0155EJK/OJ2VG6udUKex7eN7YgAhLldusW8SmyOUzbJn4Mw2lSfoDk6+FZW21/3
+	K8+zbxO0VI0hJ8RdDzCQDUbWKOn8jjXwNqKFBPLJ/WFILEW3kMHJB3WsTAy7QaJp+Ej86moPODbni
+	JhW5v6RCwhSDlZdILKaQ1SCbk32OR5VYc2rgQKaWIyi7OCZnprIGfPfL70BInqWtr3arZn9XYxGxI
+	wfYE+dtA==;
+Subject: Re: [PATCH 1/1] x86/ept: Fix buggy XSA-321 backport
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, marmarek@invisiblethingslab.com,
+ jbeulich@suse.com
+References: <20210215234619.245422-1-m.v.b@runbox.com>
+ <20210215234619.245422-2-m.v.b@runbox.com> <YCuOQ3qpFD6RgIld@Air-de-Roger>
+From: "M. Vefa Bicakci" <m.v.b@runbox.com>
+Message-ID: <5517e20e-c485-7016-da89-81570cc43b3b@runbox.com>
+Date: Tue, 16 Feb 2021 07:48:42 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-X-Mailer: MIME-tools 5.509 (Entity 5.509)
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
- xen-users@lists.xen.org, oss-security@lists.openwall.com
-From: Xen.org security team <security@xen.org>
-CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 362 v3 (CVE-2021-26931) - Linux: backends
- treating grant mapping errors as bugs
-Message-Id: <E1lBzZi-0002aT-2R@xenbits.xenproject.org>
-Date: Tue, 16 Feb 2021 12:35:30 +0000
+In-Reply-To: <YCuOQ3qpFD6RgIld@Air-de-Roger>
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: 8bit
 
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
+On 16/02/2021 04.20, Roger Pau Monné wrote:
+> On Mon, Feb 15, 2021 at 06:46:19PM -0500, M. Vefa Bicakci wrote:
+>> This commit aims to fix commit a852040fe3ab ("x86/ept: flush cache when
+>> modifying PTEs and sharing page tables"). The aforementioned commit is
+>> for the stable-4.9 branch of Xen and is a backported version of commit
+>> c23274fd0412 ("x86/ept: flush cache when modifying PTEs and sharing page
+>> tables"), which was for Xen 4.14.0-rc5 and which fixes the security
+>> issue reported by XSA-321.
+>>
+>> Prior to the latter commit, the function atomic_write_ept_entry in Xen
+>> 4.14.y consisted mostly of a call to p2m_entry_modify followed by an
+>> atomic replacement of a page table entry, and the latter commit adds
+>> a call to iommu_sync_cache for a specific condition:
+>>
+>>     static int atomic_write_ept_entry(struct p2m_domain *p2m,
+>>                                       ept_entry_t *entryptr, ept_entry_t new,
+>>                                       int level)
+>>     {
+>>         int rc = p2m_entry_modify(p2m, new.sa_p2mt, entryptr->sa_p2mt,
+>>                                   _mfn(new.mfn), _mfn(entryptr->mfn), level + 1);
+>>
+>>         if ( rc )
+>>             return rc;
+>>
+>>         write_atomic(&entryptr->epte, new.epte);
+>>
+>>    +    /* snipped comment block */
+>>    +    if ( !new.recalc && iommu_use_hap_pt(p2m->domain) )
+>>    +        iommu_sync_cache(entryptr, sizeof(*entryptr));
+>>    +
+>>         return 0;
+>>     }
+>>
+>> However, the backport to Xen 4.9.y is a bit different because
+>> atomic_write_ept_entry does not consist solely of a call to
+>> p2m_entry_modify, which does not exist in Xen 4.9.y. I am quoting from
+>> Xen 4.8.y for convenience:
+>>
+>>     static int atomic_write_ept_entry(ept_entry_t *entryptr, ept_entry_t new,
+>>                                       int level)
+>>     {
+>>         int rc;
+>>         unsigned long oldmfn = mfn_x(INVALID_MFN);
+>>         bool_t check_foreign = (new.mfn != entryptr->mfn ||
+>>                                 new.sa_p2mt != entryptr->sa_p2mt);
+>>
+>>         if ( level )
+>>         {
+>>             ASSERT(!is_epte_superpage(&new) || !p2m_is_foreign(new.sa_p2mt));
+>>             write_atomic(&entryptr->epte, new.epte);
+>>             return 0;
+>>         }
+>>
+>>         if ( unlikely(p2m_is_foreign(new.sa_p2mt)) )
+>>         {
+>>             rc = -EINVAL;
+>>             if ( !is_epte_present(&new) )
+>>                     goto out;
+>>
+>>             if ( check_foreign )
+>>             {
+>>                 struct domain *fdom;
+>>
+>>                 if ( !mfn_valid(new.mfn) )
+>>                     goto out;
+>>
+>>                 rc = -ESRCH;
+>>                 fdom = page_get_owner(mfn_to_page(new.mfn));
+>>                 if ( fdom == NULL )
+>>                     goto out;
+>>
+>>                 /* get refcount on the page */
+>>                 rc = -EBUSY;
+>>                 if ( !get_page(mfn_to_page(new.mfn), fdom) )
+>>                     goto out;
+>>             }
+>>         }
+>>
+>>         if ( unlikely(p2m_is_foreign(entryptr->sa_p2mt)) && check_foreign )
+>>             oldmfn = entryptr->mfn;
+>>
+>>         write_atomic(&entryptr->epte, new.epte);
+>>
+>>    +    /* snipped comment block */
+>>    +    if ( !new.recalc && iommu_hap_pt_share )
+>>    +        iommu_sync_cache(entryptr, sizeof(*entryptr));
+>>    +
+>>         if ( unlikely(oldmfn != mfn_x(INVALID_MFN)) )
+>>             put_page(mfn_to_page(oldmfn));
+>>
+>>         rc = 0;
+>>
+>>      out:
+>>         if ( rc )
+>>             gdprintk(XENLOG_ERR, "epte o:%"PRIx64" n:%"PRIx64" rc:%d\n",
+>>                      entryptr->epte, new.epte, rc);
+>>         return rc;
+>>     }
+>>
+>> Based on inspection of the p2m_entry_modify function in Xen 4.14.1, it
+>> appears that the part of atomic_write_ept_entry above the call to
+>> write_atomic is encapsulated by p2m_entry_modify, which uncovers one
+>> issue with the backport: In Xen 4.14, if p2m_entry_modify returns early
+>> without an error, then the calls to write_atomic and iommu_sync_cache
+>> will still occur (assuming that the corresponding if condition is
+>> satisfied), whereas in Xen 4.9.y, there is a code path that can skip the
+>> call to iommu_sync_cache, in case the variable level is not zero:
+>>
+>>    if ( level )
+>>    {
+>>       ASSERT(!is_epte_superpage(&new) || !p2m_is_foreign(new.sa_p2mt));
+>>       write_atomic(&entryptr->epte, new.epte);
+>>       return 0;
+>>    }
+>>
+>> This patch reorganizes the atomic_write_ept_entry to ensure that the
+>> call to iommu_sync_cache is not inadvertently skipped.
+> 
+> IMO this is likely too much change in a single patch, iff we really
+> wanted to do this you should have a pre-patch that re-arranges the
+> code without any functional change followed by a patch that fixes the
+> issue.
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
+Thank you for the feedback; this is a good point.
 
-            Xen Security Advisory CVE-2021-26931 / XSA-362
-                               version 3
+> In any case I think this is too much change, so I would go for a
+> smaller fix like my proposal below. Can you please test it?
 
-         Linux: backends treating grant mapping errors as bugs
+Thank you! I will test your patch later today, and I will report
+back by tomorrow.
 
-UPDATES IN VERSION 3
-====================
+>> Furthermore, in Xen 4.14.1, p2m_entry_modify calls
+>>
+>>    put_page(mfn_to_page(oldmfn));
+>>
+>> before the potential call to iommu_sync_cache in atomic_write_ept_entry.
+>> I am not sufficiently familiar with Xen to determine if this is a
+>> significant behavioural change, but this patch makes Xen 4.9.y similar
+>> to Xen 4.14.1 in that regard as well, by further re-organizing the code
+>> in atomic_write_ept_entry.
+> 
+> Well, that put_page is only relevant to PVH dom0, but you shouldn't
+> remove it. The put_page call in newer versions has been moved by
+> commit ce0224bf96a1a1f82 into p2m_entry_modify.
 
-Public release.
+Ah, but my patch moves the call to put_page to a location above the
+call to iommu_sync_cache, to make the code a bit similar to the same
+function in Xen 4.14. This may not be necessary, though. This goes back
+to your aforementioned point about having two separate patches, as my
+patch does not make the move of the call to put_page obvious. In any
+case, let's focus on your patch.
 
-ISSUE DESCRIPTION
-=================
+> Here is my proposed fix, I think we could even do away with the else
+> branch, but if level is != 0 p2m_is_foreign should be false, so we
+> avoid an extra check.
+>
+> Thanks, Roger.
 
-Block, net, and SCSI backends consider certain errors a plain bug,
-deliberately causing a kernel crash.  For errors potentially being at
-least under the influence of guests, like out of memory conditions, it
-isn't correct to assume so.  Memory allocations potentially causing
-such crashes occur only when Linux is running in PV mode, though.
+I will test this. Thanks again! I really appreciate that you have
+have taken the time and effort.
 
-IMPACT
-======
+Vefa
 
-A malicious or buggy frontend driver may be able to crash the
-corresponding backend driver, potentially affecting the entire domain
-running the backend driver.
-
-VULNERABLE SYSTEMS
-==================
-
-Linux versions from at least 2.6.39 onwards are vulnerable, when run in
-PV mode.  Earlier versions differ significantly in behavior and may
-therefore instead surface other issues under the same conditions.  Linux
-run in HVM / PVH modes is not vulnerable.
-
-MITIGATION
-==========
-
-For Linux, running the backends in HVM or PVH domains will avoid the
-vulnerability.
-
-For protocols where non-Linux-kernel based backends are available,
-reconfiguring guests to use alternative (e.g. qemu-based) backends may
-allow to avoid the vulnerability.
-
-In all other cases there is no known mitigation.
-
-CREDITS
-=======
-
-This issue was discovered by Jan Beulich of SUSE.
-
-RESOLUTION
-==========
-
-Applying the appropriate attached patches resolves this issue.
-
-Applying the attached patches resolves this issue.
-
-xsa362-linux-1.patch           Linux 5.11-rc - 5.10
-xsa362-linux-2.patch           Linux 5.11-rc - 3.16
-xsa362-linux-3.patch           Linux 5.11-rc - 4.1
-
-$ sha256sum xsa362*
-d64334807f16ff9909503b3cc9b8b93fd42d2c36e1fb0e508b89a765a53071a8  xsa362-linux-1.patch
-b6d02952e7fbede55b868cb2dc4d8853284996883dc72518a0cd5b14d6c7fdd4  xsa362-linux-2.patch
-0a2661380d8f786fefe12e5a8b1528d4a79f1ad058c26b417c52449a7e16a302  xsa362-linux-3.patch
-$
-
-DEPLOYMENT DURING EMBARGO
-=========================
-
-Deployment of the patches described above (or others which are
-substantially similar) is permitted during the embargo, even on
-public-facing systems with untrusted guest users and administrators.
-
-Deployment of the mitigation to switch to HVM / PVH backend domains
-is also permitted during the embargo, even on public-facing systems with
-untrusted guest users and administrators.
-
-HOWEVER, deployment of the non-kernel-based backends mitigation
-described above is NOT permitted during the embargo on public-facing
-systems with untrusted guest users and administrators.  This is because
-such a configuration change may be recognizable by the affected guests.
-
-AND: Distribution of updated software is prohibited (except to other
-members of the predisclosure list).
-
-Predisclosure list members who wish to deploy significantly different
-patches and/or mitigations, please contact the Xen Project Security
-Team.
-
-(Note: this during-embargo deployment notice is retained in
-post-embargo publicly released Xen Project advisories, even though it
-is then no longer applicable.  This is to enable the community to have
-oversight of the Xen Project Security Team's decisionmaking.)
-
-For more information about permissible uses of embargoed information,
-consult the Xen Project community's agreed Security Policy:
-  http://www.xenproject.org/security-policy.html
------BEGIN PGP SIGNATURE-----
-
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmAru/UMHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZszQH/jwCgehGBbejtpFjiOqEPdqIQhd0X+Q1feFD9PB6
-07gfGanmSds5mitr0ezTHbfLw85CoFbAJhalNdx9XeQrZTIvRAizkCi779rE9UYZ
-H0CN73GoObF4E8q+tVRpZni0Rcnb77bETRsmlYjRYRjtZNZ1+7vbn4tf4JMccoo0
-qhz1/bqY3e4yHPcdxb9P3T/DQKNG+nJjkn4kNueYo1PUGUetxw6HXbXWHh6WvbOr
-mfd+sTxRSf+Nk2OZhtofjIYEIeL058axZoSuARBIPphBmOCumUTGzrypZwe5BTuF
-GMQqlguxPU0rFscGd/Js05suFhQQR4ccJlSGRs7pswt9i0M=
-=KnG3
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: application/octet-stream; name="xsa362-linux-1.patch"
-Content-Disposition: attachment; filename="xsa362-linux-1.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
-OiB4ZW4tYmxrYmFjazogZG9uJ3QgImhhbmRsZSIgZXJyb3IgYnkgQlVHKCkK
-CkluIHBhcnRpY3VsYXIgLUVOT01FTSBtYXkgY29tZSBiYWNrIGhlcmUsIGZy
-b20gc2V0X2ZvcmVpZ25fcDJtX21hcHBpbmcoKS4KRG9uJ3QgbWFrZSBwcm9i
-bGVtcyB3b3JzZSwgdGhlIG1vcmUgdGhhdCBoYW5kbGluZyBlbHNld2hlcmUg
-KHRvZ2V0aGVyCndpdGggbWFwJ3Mgc3RhdHVzIGZpZWxkcyBub3cgaW5kaWNh
-dGluZyB3aGV0aGVyIGEgbWFwcGluZyB3YXNuJ3QgZXZlbgphdHRlbXB0ZWQs
-IGFuZCBoZW5jZSBoYXMgdG8gYmUgY29uc2lkZXJlZCBmYWlsZWQpIGRvZXNu
-J3QgcmVxdWlyZSB0aGlzCm9kZCB3YXkgb2YgZGVhbGluZyB3aXRoIGVycm9y
-cy4KClRoaXMgaXMgcGFydCBvZiBYU0EtMzYyLgoKU2lnbmVkLW9mZi1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDYzogc3RhYmxlQHZn
-ZXIua2VybmVsLm9yZwpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdy
-b3NzQHN1c2UuY29tPgoKLS0tIGEvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFj
-ay9ibGtiYWNrLmMKKysrIGIvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay9i
-bGtiYWNrLmMKQEAgLTgxMSwxMCArODExLDggQEAgYWdhaW46CiAJCQlicmVh
-azsKIAl9CiAKLQlpZiAoc2Vnc190b19tYXApIHsKKwlpZiAoc2Vnc190b19t
-YXApCiAJCXJldCA9IGdudHRhYl9tYXBfcmVmcyhtYXAsIE5VTEwsIHBhZ2Vz
-X3RvX2dudCwgc2Vnc190b19tYXApOwotCQlCVUdfT04ocmV0KTsKLQl9CiAK
-IAkvKgogCSAqIE5vdyBzd2l6emxlIHRoZSBNRk4gaW4gb3VyIGRvbWFpbiB3
-aXRoIHRoZSBNRk4gZnJvbSB0aGUgb3RoZXIgZG9tYWluCkBAIC04MzAsNyAr
-ODI4LDcgQEAgYWdhaW46CiAJCQkJZ250dGFiX3BhZ2VfY2FjaGVfcHV0KCZy
-aW5nLT5mcmVlX3BhZ2VzLAogCQkJCQkJICAgICAgJnBhZ2VzW3NlZ19pZHhd
-LT5wYWdlLCAxKTsKIAkJCQlwYWdlc1tzZWdfaWR4XS0+aGFuZGxlID0gQkxL
-QkFDS19JTlZBTElEX0hBTkRMRTsKLQkJCQlyZXQgfD0gMTsKKwkJCQlyZXQg
-fD0gIXJldDsKIAkJCQlnb3RvIG5leHQ7CiAJCQl9CiAJCQlwYWdlc1tzZWdf
-aWR4XS0+aGFuZGxlID0gbWFwW25ld19tYXBfaWR4XS5oYW5kbGU7Cg==
-
---=separator
-Content-Type: application/octet-stream; name="xsa362-linux-2.patch"
-Content-Disposition: attachment; filename="xsa362-linux-2.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
-OiB4ZW4tbmV0YmFjazogZG9uJ3QgImhhbmRsZSIgZXJyb3IgYnkgQlVHKCkK
-CkluIHBhcnRpY3VsYXIgLUVOT01FTSBtYXkgY29tZSBiYWNrIGhlcmUsIGZy
-b20gc2V0X2ZvcmVpZ25fcDJtX21hcHBpbmcoKS4KRG9uJ3QgbWFrZSBwcm9i
-bGVtcyB3b3JzZSwgdGhlIG1vcmUgdGhhdCBoYW5kbGluZyBlbHNld2hlcmUg
-KHRvZ2V0aGVyCndpdGggbWFwJ3Mgc3RhdHVzIGZpZWxkcyBub3cgaW5kaWNh
-dGluZyB3aGV0aGVyIGEgbWFwcGluZyB3YXNuJ3QgZXZlbgphdHRlbXB0ZWQs
-IGFuZCBoZW5jZSBoYXMgdG8gYmUgY29uc2lkZXJlZCBmYWlsZWQpIGRvZXNu
-J3QgcmVxdWlyZSB0aGlzCm9kZCB3YXkgb2YgZGVhbGluZyB3aXRoIGVycm9y
-cy4KClRoaXMgaXMgcGFydCBvZiBYU0EtMzYyLgoKU2lnbmVkLW9mZi1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDYzogc3RhYmxlQHZn
-ZXIua2VybmVsLm9yZwpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdy
-b3NzQHN1c2UuY29tPgoKLS0tIGEvZHJpdmVycy9uZXQveGVuLW5ldGJhY2sv
-bmV0YmFjay5jCisrKyBiL2RyaXZlcnMvbmV0L3hlbi1uZXRiYWNrL25ldGJh
-Y2suYwpAQCAtMTM0MiwxMyArMTM0MiwxMSBAQCBpbnQgeGVudmlmX3R4X2Fj
-dGlvbihzdHJ1Y3QgeGVudmlmX3F1ZXVlCiAJCXJldHVybiAwOwogCiAJZ250
-dGFiX2JhdGNoX2NvcHkocXVldWUtPnR4X2NvcHlfb3BzLCBucl9jb3BzKTsK
-LQlpZiAobnJfbW9wcyAhPSAwKSB7CisJaWYgKG5yX21vcHMgIT0gMCkKIAkJ
-cmV0ID0gZ250dGFiX21hcF9yZWZzKHF1ZXVlLT50eF9tYXBfb3BzLAogCQkJ
-CSAgICAgIE5VTEwsCiAJCQkJICAgICAgcXVldWUtPnBhZ2VzX3RvX21hcCwK
-IAkJCQkgICAgICBucl9tb3BzKTsKLQkJQlVHX09OKHJldCk7Ci0JfQogCiAJ
-d29ya19kb25lID0geGVudmlmX3R4X3N1Ym1pdChxdWV1ZSk7CiAK
-
---=separator
-Content-Type: application/octet-stream; name="xsa362-linux-3.patch"
-Content-Disposition: attachment; filename="xsa362-linux-3.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
-OiB4ZW4tc2NzaWJhY2s6IGRvbid0ICJoYW5kbGUiIGVycm9yIGJ5IEJVRygp
-CgpJbiBwYXJ0aWN1bGFyIC1FTk9NRU0gbWF5IGNvbWUgYmFjayBoZXJlLCBm
-cm9tIHNldF9mb3JlaWduX3AybV9tYXBwaW5nKCkuCkRvbid0IG1ha2UgcHJv
-YmxlbXMgd29yc2UsIHRoZSBtb3JlIHRoYXQgaGFuZGxpbmcgZWxzZXdoZXJl
-ICh0b2dldGhlcgp3aXRoIG1hcCdzIHN0YXR1cyBmaWVsZHMgbm93IGluZGlj
-YXRpbmcgd2hldGhlciBhIG1hcHBpbmcgd2Fzbid0IGV2ZW4KYXR0ZW1wdGVk
-LCBhbmQgaGVuY2UgaGFzIHRvIGJlIGNvbnNpZGVyZWQgZmFpbGVkKSBkb2Vz
-bid0IHJlcXVpcmUgdGhpcwpvZGQgd2F5IG9mIGRlYWxpbmcgd2l0aCBlcnJv
-cnMuCgpUaGlzIGlzIHBhcnQgb2YgWFNBLTM2Mi4KClNpZ25lZC1vZmYtYnk6
-IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KQ2M6IHN0YWJsZUB2
-Z2VyLmtlcm5lbC5vcmcKUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpn
-cm9zc0BzdXNlLmNvbT4KCi0tLSBhL2RyaXZlcnMveGVuL3hlbi1zY3NpYmFj
-ay5jCisrKyBiL2RyaXZlcnMveGVuL3hlbi1zY3NpYmFjay5jCkBAIC0zODYs
-MTIgKzM4NiwxMiBAQCBzdGF0aWMgaW50IHNjc2liYWNrX2dudHRhYl9kYXRh
-X21hcF9iYXRjCiAJCXJldHVybiAwOwogCiAJZXJyID0gZ250dGFiX21hcF9y
-ZWZzKG1hcCwgTlVMTCwgcGcsIGNudCk7Ci0JQlVHX09OKGVycik7CiAJZm9y
-IChpID0gMDsgaSA8IGNudDsgaSsrKSB7CiAJCWlmICh1bmxpa2VseShtYXBb
-aV0uc3RhdHVzICE9IEdOVFNUX29rYXkpKSB7CiAJCQlwcl9lcnIoImludmFs
-aWQgYnVmZmVyIC0tIGNvdWxkIG5vdCByZW1hcCBpdFxuIik7CiAJCQltYXBb
-aV0uaGFuZGxlID0gU0NTSUJBQ0tfSU5WQUxJRF9IQU5ETEU7Ci0JCQllcnIg
-PSAtRU5PTUVNOworCQkJaWYgKCFlcnIpCisJCQkJZXJyID0gLUVOT01FTTsK
-IAkJfSBlbHNlIHsKIAkJCWdldF9wYWdlKHBnW2ldKTsKIAkJfQo=
-
---=separator--
+> ---8<---
+> diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+> index 036771f43c..086739ffdd 100644
+> --- a/xen/arch/x86/mm/p2m-ept.c
+> +++ b/xen/arch/x86/mm/p2m-ept.c
+> @@ -56,11 +56,8 @@ static int atomic_write_ept_entry(ept_entry_t *entryptr, ept_entry_t new,
+>       if ( level )
+>       {
+>           ASSERT(!is_epte_superpage(&new) || !p2m_is_foreign(new.sa_p2mt));
+> -        write_atomic(&entryptr->epte, new.epte);
+> -        return 0;
+>       }
+> -
+> -    if ( unlikely(p2m_is_foreign(new.sa_p2mt)) )
+> +    else if ( unlikely(p2m_is_foreign(new.sa_p2mt)) )
+>       {
+>           rc = -EINVAL;
+>           if ( !is_epte_present(&new) )
+> 
 
