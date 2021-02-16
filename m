@@ -2,52 +2,47 @@ Return-Path: <SRS0=9fiq=HS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 036E9C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A46DC433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:36:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 946C564DAF
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:11:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 946C564DAF
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+	by mail.kernel.org (Postfix) with ESMTPS id D5E5764DDA
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Feb 2021 12:36:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D5E5764DDA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.85519.160366 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.85536.160472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBzCZ-000074-W6; Tue, 16 Feb 2021 12:11:35 +0000
+	id 1lBzaE-0002GD-9U; Tue, 16 Feb 2021 12:36:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 85519.160366; Tue, 16 Feb 2021 12:11:35 +0000
+Received: by outflank-mailman (output) from mailman id 85536.160472; Tue, 16 Feb 2021 12:36:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lBzCZ-00006x-T3; Tue, 16 Feb 2021 12:11:35 +0000
-Received: by outflank-mailman (input) for mailman id 85519;
- Tue, 16 Feb 2021 12:11:34 +0000
+	id 1lBzaE-0002G5-3s; Tue, 16 Feb 2021 12:36:02 +0000
+Received: by outflank-mailman (input) for mailman id 85536;
+ Tue, 16 Feb 2021 12:36:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TaMt=HS=infradead.org=peterz@srs-us1.protection.inumbo.net>)
- id 1lBzCX-00006n-2H
- for xen-devel@lists.xenproject.org; Tue, 16 Feb 2021 12:11:34 +0000
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ <SRS0=y7oK=HS=xenbits.xen.org=iwj@srs-us1.protection.inumbo.net>)
+ id 1lBzaC-0001zG-QO
+ for xen-devel@lists.xen.org; Tue, 16 Feb 2021 12:36:00 +0000
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 20371ff9-624d-44aa-9ce3-628e848906d4;
- Tue, 16 Feb 2021 12:11:27 +0000 (UTC)
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1lBzBS-00GpyS-Qf; Tue, 16 Feb 2021 12:10:52 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id BCFB13059DD;
- Tue, 16 Feb 2021 13:10:25 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id A5D6B2B9C6CCA; Tue, 16 Feb 2021 13:10:25 +0100 (CET)
+ id cc82297d-811e-47da-95c3-8465355eaf5e;
+ Tue, 16 Feb 2021 12:35:35 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1lBzZi-0008Mx-Q1; Tue, 16 Feb 2021 12:35:30 +0000
+Received: from iwj by xenbits.xenproject.org with local (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1lBzZi-0002bO-P6; Tue, 16 Feb 2021 12:35:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,91 +54,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 20371ff9-624d-44aa-9ce3-628e848906d4
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=qydaGrdRobsyV5LaMgil96UsQSn4K3xiCgp4dxh0juc=; b=W1OSaSNnkgJkSGPTgy8i13Fnth
-	Q3yMBTUQI35ZC32HOj6lyR72QpKJCByW9IX627qEuospypeWxHjJGIexIeRPMxqE0ne9uQQtNhjrq
-	bpoTv7CK6Y9Cg9FFNDqGjoFa67aUgp2jyFviMRH0o/L4iQMLWden+bu1eFoSy6H1so5yKTP+0qufM
-	SbTdZckJ2IAXD57Vh/FXcxwpn5F8FXBRV1s8PxB45PtPKblZ4qOdDNxWQBJdHGBMLZWA/6dB/GbRW
-	Ryy2BGjIC60/A5VLY8h27Nsvwue8yeJOw2/C9GZKFS6+uYPlFf8abXeJ8FKrixF4vTrxoLGrcBvM1
-	rJh/I4Uw==;
-Date: Tue, 16 Feb 2021 13:10:25 +0100
-From: Peter Zijlstra <peterz@infradead.org>
-To: Nadav Amit <nadav.amit@gmail.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>, linux-kernel@vger.kernel.org,
-	Andy Lutomirski <luto@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Nadav Amit <namit@vmware.com>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Stephen Hemminger <sthemmin@microsoft.com>,
-	Sasha Levin <sashal@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>, x86@kernel.org,
-	Juergen Gross <jgross@suse.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	linux-hyperv@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	Michael Kelley <mikelley@microsoft.com>
-Subject: Re: [PATCH v5 4/8] x86/mm/tlb: Flush remote and local TLBs
- concurrently
-Message-ID: <YCu2MQFdV4JTrUQb@hirez.programming.kicks-ass.net>
-References: <20210209221653.614098-1-namit@vmware.com>
- <20210209221653.614098-5-namit@vmware.com>
+X-Inumbo-ID: cc82297d-811e-47da-95c3-8465355eaf5e
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Date:Message-Id:Subject:CC:From:To:MIME-Version:
+	Content-Transfer-Encoding:Content-Type;
+	bh=CNx9HA2TuAgcqoV4Hd77YdCoDcvs1DeLFjIGIr9cIf8=; b=VNhge+CiWitYtuDMDdiguZfn3B
+	obUidPsr5cz3im2ad4rV5YsGbjJbYFE5FYlUnP8elWnZbO9bjGekvUFcfkltrDh9aipBXOd65NcP0
+	j4WJcnoja+Yva7WGZjdXG/fdKbPHTdz3VuXv+wY+CqwcQZprR16SROClEB74DU33CmgQ=;
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+X-Mailer: MIME-tools 5.509 (Entity 5.509)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 363 v3 (CVE-2021-26934) - Linux: display
+ frontend "be-alloc" mode is unsupported
+Message-Id: <E1lBzZi-0002bO-P6@xenbits.xenproject.org>
+Date: Tue, 16 Feb 2021 12:35:30 +0000
+
+--=separator
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <20210209221653.614098-5-namit@vmware.com>
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 09, 2021 at 02:16:49PM -0800, Nadav Amit wrote:
-> @@ -816,8 +821,8 @@ STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
->  	 * doing a speculative memory access.
->  	 */
->  	if (info->freed_tables) {
-> -		smp_call_function_many(cpumask, flush_tlb_func,
-> -			       (void *)info, 1);
-> +		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
-> +				      cpumask);
->  	} else {
->  		/*
->  		 * Although we could have used on_each_cpu_cond_mask(),
-> @@ -844,14 +849,15 @@ STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
->  			if (tlb_is_not_lazy(cpu))
->  				__cpumask_set_cpu(cpu, cond_cpumask);
->  		}
-> -		smp_call_function_many(cond_cpumask, flush_tlb_func, (void *)info, 1);
-> +		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
-> +				      cpumask);
->  	}
->  }
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-Surely on_each_cpu_mask() is more appropriate? There the compiler can do
-the NULL propagation because it's on the same TU.
+            Xen Security Advisory CVE-2021-26934 / XSA-363
+                               version 3
 
---- a/arch/x86/mm/tlb.c
-+++ b/arch/x86/mm/tlb.c
-@@ -821,8 +821,7 @@ STATIC_NOPV void native_flush_tlb_multi(
- 	 * doing a speculative memory access.
- 	 */
- 	if (info->freed_tables) {
--		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
--				      cpumask);
-+		on_each_cpu_mask(cpumask, flush_tlb_func, (void *)info, true);
- 	} else {
- 		/*
- 		 * Although we could have used on_each_cpu_cond_mask(),
-@@ -849,8 +848,7 @@ STATIC_NOPV void native_flush_tlb_multi(
- 			if (tlb_is_not_lazy(cpu))
- 				__cpumask_set_cpu(cpu, cond_cpumask);
- 		}
--		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
--				      cpumask);
-+		on_each_cpu_mask(cpumask, flush_tlb_func, (void *)info, true);
- 	}
- }
- 
+        Linux: display frontend "be-alloc" mode is unsupported
+
+UPDATES IN VERSION 3
+====================
+
+Public release.
+
+ISSUE DESCRIPTION
+=================
+
+The backend allocation mode of Linux'es drm_xen_front drivers was
+not meant to be a supported configuration, but this wasn't stated
+accordingly in its support status entry.
+
+IMPACT
+======
+
+Use of the feature may have unknown effects.
+
+VULNERABLE SYSTEMS
+==================
+
+Linux versions from 4.18 onwards are affected.  Earlier Linux versions
+do not provide the affected driver.
+
+MITIGATION
+==========
+
+Not using the driver or its backend allocation mode will avoid the
+vulnerability.
+
+CREDITS
+=======
+
+This issue was discovered by Jan Beulich of SUSE.
+
+RESOLUTION
+==========
+
+Applying the attached patch documents the situation.  The patch does
+not fix any security issues.
+
+xsa363.patch           xen-unstable
+
+$ sha256sum xsa363*
+cf2f2eff446aec625b19d9d01301ec66098b58b792d74012235f10c62a21bb68  xsa363.patch
+$
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmAru/UMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZSocH/3jAI0MeZtnhvuyOM4CxkNmr0fI4HIXnA1xGNhWY
+Wa2WgtOuFVaPUFX1Tj/e6zCoibatl1gicETI9hL+w4Dg6/GzIeTogOuzv5D6Ux91
+9a6n2tryFfSAs0OxTKq6etLv63VEEicYMHrZT8n700JFvJsAWYAMvuanMDknGxBP
+5/Z+DASnZxT09cpvP4REKuG7rW9vIif+6EZ0T0kU87InouDts/YOhzNsdvBD1wKH
+y5e/MZh2sOyMOovuhgbvoK+YezHTAcZeGWnUk3yQoTGnW3p+W9XZVURsc8/e2FbZ
+heY3Tj918LsY50wGpMZ2PDoHC8PSHaUqEOTq0MPmnPlppvU=
+=tJD0
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa363.patch"
+Content-Disposition: attachment; filename="xsa363.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0
+OiBTVVBQT1JULm1kOiBQViBkaXNwbGF5IGZyb250ZW5kIGlzIHVuc3VwcG9y
+dGVkIGluICJiYWNrZW5kIGFsbG9jYXRpb24iIG1vZGUKClRoaXMgd2Fzbid0
+IG1lYW50IHRvIGJlIHN1cHBvcnRlZCwgYnV0IHdhc24ndCBzdGF0ZWQgdGhp
+cyB3YXkuCgpUaGlzIGlzIFhTQS0zNjMuCgpSZXBvcnRlZC1ieTogSmFuIEJl
+bGljaCA8amJldWxpY2hAc3VzZS5jb20+ClNpZ25lZC1vZmYtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCi0tLSBhL1NVUFBPUlQubWQK
+KysrIGIvU1VQUE9SVC5tZApAQCAtNDE0LDcgKzQxNCw4IEBAIEd1ZXN0LXNp
+ZGUgZHJpdmVyIGNhcGFibGUgb2Ygc3BlYWtpbmcgdGgKIAogR3Vlc3Qtc2lk
+ZSBkcml2ZXIgY2FwYWJsZSBvZiBzcGVha2luZyB0aGUgWGVuIFBWIGRpc3Bs
+YXkgcHJvdG9jb2wKIAotICAgIFN0YXR1cywgTGludXg6IFN1cHBvcnRlZAor
+ICAgIFN0YXR1cywgTGludXg6IFN1cHBvcnRlZCAob3V0c2lkZSBvZiAiYmFj
+a2VuZCBhbGxvY2F0aW9uIiBtb2RlKQorICAgIFN0YXR1cywgTGludXg6IEV4
+cGVyaW1lbnRhbCAoaW4gImJhY2tlbmQgYWxsb2NhdGlvbiIgbW9kZSkKIAog
+IyMjIFBWIENvbnNvbGUgKGZyb250ZW5kKQogCg==
+
+--=separator--
 
