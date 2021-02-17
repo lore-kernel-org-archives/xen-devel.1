@@ -2,46 +2,45 @@ Return-Path: <SRS0=/9Q0=HT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3ABF1C433E6
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 14:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C42DC433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 14:27:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC16164DE0
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 14:25:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC16164DE0
+	by mail.kernel.org (Postfix) with ESMTPS id F012964E4A
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 14:27:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F012964E4A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.86282.161859 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.86294.161907 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCNlN-0005Js-HQ; Wed, 17 Feb 2021 14:25:09 +0000
+	id 1lCNnb-0005nK-5T; Wed, 17 Feb 2021 14:27:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 86282.161859; Wed, 17 Feb 2021 14:25:09 +0000
+Received: by outflank-mailman (output) from mailman id 86294.161907; Wed, 17 Feb 2021 14:27:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCNlN-0005Jl-EQ; Wed, 17 Feb 2021 14:25:09 +0000
-Received: by outflank-mailman (input) for mailman id 86282;
- Wed, 17 Feb 2021 14:25:08 +0000
+	id 1lCNnb-0005nD-1Z; Wed, 17 Feb 2021 14:27:27 +0000
+Received: by outflank-mailman (input) for mailman id 86294;
+ Wed, 17 Feb 2021 14:27:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lCNlL-0005JR-TG
- for xen-devel@lists.xenproject.org; Wed, 17 Feb 2021 14:25:07 +0000
+ (envelope-from <julien@xen.org>) id 1lCNnZ-0005n7-VK
+ for xen-devel@lists.xenproject.org; Wed, 17 Feb 2021 14:27:25 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lCNlI-0004eP-Gy; Wed, 17 Feb 2021 14:25:04 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
+ id 1lCNnZ-0004if-2n; Wed, 17 Feb 2021 14:27:25 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lCNlI-00057m-58; Wed, 17 Feb 2021 14:25:04 +0000
+ id 1lCNnY-0005H0-TD; Wed, 17 Feb 2021 14:27:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,58 +53,100 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=ZmVFimIAQ1oAEuVpblWKPooP062mJ9LJUPpU+7TXU8A=; b=MQMzPDIzMHLhMJ9HqUd6HvPP7U
-	DE6DTLxnzzpX6zYovY4qsA0Uk2Fva/LTTQujD8KUOpGqorneYe3kYiNqzogIuRHQd9DljUntB2qZP
-	HOgs+wp/crzg1jRNTRaz2YDg1e9in6WSOHgKiuT9bWO7KS+WbVdCKuO2wHUn2kssCZEg=;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=SqzphOsvkZYjVu8uGONDWuZ5Zn6sou//Nag8FX3HAAQ=; b=EcHACXGE6wVnU/jMIjaYkzv6ec
+	vYv7FqOsExKGYo+NaTTquCY8HmTX4mo+XzeZZVvOS5gJ/1kp3KT5K2pxwnjc4s3Zi/BRz7hNROLpo
+	iH1gyPyMcJNb3RZI++XPEmQ5i4CVj1JkLE1ljT8EBt0N1SUQ3dPn8tTsvV25gbp6iBGs=;
+Subject: Re: [PATCH 2/3] gnttab: bypass IOMMU (un)mapping when a domain is
+ (un)mapping its own grant
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Rahul Singh <Rahul.Singh@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <156559d5-853a-5bb9-942b-f623627e0907@suse.com>
+ <5bb4fba7-a10b-90c4-82f7-8cde6e8cacfb@suse.com>
+ <a267959c-538e-0f90-f9a5-72e836f33cb4@xen.org>
+ <283d8514-16fb-8973-e395-0a86bf820306@suse.com>
+ <6ece0308-504f-5127-b7af-5c801630253b@xen.org>
+ <ef8991ad-ba9e-c4f0-e4cc-fb4655608549@suse.com>
 From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: hongyxia@amazon.co.uk,
-	iwj@xenproject.org,
-	Julien Grall <jgrall@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [for-4.15][PATCH v3 0/3] xen/iommu: Collection of bug fixes for IOMMU teadorwn
-Date: Wed, 17 Feb 2021 14:24:55 +0000
-Message-Id: <20210217142458.3769-1-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
+Message-ID: <c9e48ef3-7de3-f6c8-7976-a574b7b8be90@xen.org>
+Date: Wed, 17 Feb 2021 14:27:22 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.7.1
+MIME-Version: 1.0
+In-Reply-To: <ef8991ad-ba9e-c4f0-e4cc-fb4655608549@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-From: Julien Grall <jgrall@amazon.com>
+Hi Jan,
 
-Hi all,
+On 17/02/2021 13:16, Jan Beulich wrote:
+> On 17.02.2021 12:41, Julien Grall wrote:
+>> Hi Jan,
+>>
+>> On 17/02/2021 11:38, Jan Beulich wrote:
+>>> On 17.02.2021 12:03, Julien Grall wrote:
+>>>> On 17/02/2021 10:46, Jan Beulich wrote:
+>>>>> Mappings for a domain's own pages should already be present in the
+>>>>> IOMMU. While installing the same mapping again is merely redundant (and
+>>>>> inefficient), removing the mapping when the grant mapping gets removed
+>>>>> is outright wrong in this case: The mapping was there before the map, so
+>>>>> should remain in place after unmapping.
+>>>>>
+>>>>> This affects
+>>>>> - Arm Dom0 in the direct mapped case,
+>>>>> - x86 PV Dom0 in the "iommu=dom0-strict" / "dom0-iommu=strict" cases,
+>>>>> - all x86 PV DomU-s, including driver domains.
+>>>>>
+>>>>> Reported-by: Rahul Singh <Rahul.Singh@arm.com>
+>>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>>>
+>>>>> --- a/xen/common/grant_table.c
+>>>>> +++ b/xen/common/grant_table.c
+>>>>> @@ -1243,7 +1243,7 @@ map_grant_ref(
+>>>>>             goto undo_out;
+>>>>>         }
+>>>>>     
+>>>>> -    need_iommu = gnttab_need_iommu_mapping(ld);
+>>>>> +    need_iommu = ld != rd && gnttab_need_iommu_mapping(ld);
+>>>>
+>>>> AFAICT, the owner of the page may not always be rd. So do we want to
+>>>> check against the owner instead?
+>>>
+>>> For the DomIO case - specifically not. And the DomCOW case can't
+>>> happen when an IOMMU is in use. Did I overlook any other cases
+>>> where the page may not be owned by rd?
+>>
+>> For the current code, it looks like not. But it feels to me this code is
+>> fragile as we are assuming that other cases should never happen.
+>>
+>> I think it would be worth explaining in a comment and the commit message
+>> why check rd rather than the page owner is sufficient.
+> 
+> Well, I've added
+> 
+>      /*
+>       * This is deliberately not checking the page's owner: get_paged_frame()
+>       * explicitly rejects foreign pages, and all success paths above yield
+>       * either owner == rd or owner == dom_io (the dom_cow case is irrelevant
+>       * as mem-sharing and IOMMU use are incompatible). The dom_io case would
+>       * need checking separately if we compared against owner here.
+>       */
+> 
+> to map_grant_ref(), and a reference to this comment to both
+> unmap_common() and the commit message. Will this do?
 
-This series is a collection of bug fixes for the IOMMU teardown code.
-All of them are candidate for 4.15 as they can either leak memory or
-lead to host crash/host corruption.
+LGTM. With that, you can add:
 
-This is sent directly on xen-devel because all the issues were either
-introduced in 4.15 or happen in the domain creation code.
-
-Major changes since v2:
-    - patch #1 "xen/x86: p2m: Don't map the special pages in the IOMMU
-    page-tables" has been removed. This requires Jan's patch [2] to
-    fully mitigate memory leaks.
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 
 Cheers,
 
-[1] https://lore.kernel.org/xen-devel/1b6a411b-84e7-bfb1-647e-511a13df838c@suse.com
-
-Julien Grall (3):
-  xen/iommu: x86: Clear the root page-table before freeing the
-    page-tables
-  xen/x86: iommu: Ignore IOMMU mapping requests when a domain is dying
-  xen/iommu: x86: Harden the IOMMU page-table allocator
-
- xen/drivers/passthrough/amd/iommu_map.c     | 13 ++++++
- xen/drivers/passthrough/amd/pci_amd_iommu.c | 12 +++++-
- xen/drivers/passthrough/vtd/iommu.c         | 25 +++++++++++-
- xen/drivers/passthrough/x86/iommu.c         | 45 ++++++++++++++++++++-
- xen/include/xen/iommu.h                     |  1 +
- 5 files changed, 93 insertions(+), 3 deletions(-)
-
 -- 
-2.17.1
-
+Julien Grall
 
