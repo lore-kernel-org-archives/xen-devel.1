@@ -2,43 +2,50 @@ Return-Path: <SRS0=/9Q0=HT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F99C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 01:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0981C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 01:56:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4166A64E2F
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 01:24:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4166A64E2F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
+	by mail.kernel.org (Postfix) with ESMTPS id C3FCD64E02
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 01:56:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C3FCD64E02
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=runbox.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.86085.161203 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.86093.161215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCBZG-00052B-Tt; Wed, 17 Feb 2021 01:23:50 +0000
+	id 1lCC4r-0007nG-J4; Wed, 17 Feb 2021 01:56:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 86085.161203; Wed, 17 Feb 2021 01:23:50 +0000
+Received: by outflank-mailman (output) from mailman id 86093.161215; Wed, 17 Feb 2021 01:56:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCBZG-000524-Qe; Wed, 17 Feb 2021 01:23:50 +0000
-Received: by outflank-mailman (input) for mailman id 86085;
- Wed, 17 Feb 2021 01:23:49 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qrWw=HT=ozlabs.org=dgibson@srs-us1.protection.inumbo.net>)
- id 1lCBZE-00051z-R2
- for xen-devel@lists.xenproject.org; Wed, 17 Feb 2021 01:23:49 +0000
-Received: from ozlabs.org (unknown [203.11.71.1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d1540d77-9901-44cf-a17e-1308f2308352;
- Wed, 17 Feb 2021 01:23:46 +0000 (UTC)
-Received: by ozlabs.org (Postfix, from userid 1007)
- id 4DgKqL3R2Nz9sBy; Wed, 17 Feb 2021 12:23:42 +1100 (AEDT)
+	id 1lCC4r-0007n9-Et; Wed, 17 Feb 2021 01:56:29 +0000
+Received: by outflank-mailman (input) for mailman id 86093;
+ Wed, 17 Feb 2021 01:56:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=nkg6=HT=runbox.com=m.v.b@srs-us1.protection.inumbo.net>)
+ id 1lCC4p-0007n4-Na
+ for xen-devel@lists.xenproject.org; Wed, 17 Feb 2021 01:56:28 +0000
+Received: from aibo.runbox.com (unknown [91.220.196.211])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e26e0f9f-3e25-45d5-867e-cf79746ae4c4;
+ Wed, 17 Feb 2021 01:56:25 +0000 (UTC)
+Received: from [10.9.9.73] (helo=submission02.runbox)
+ by mailtransmit03.runbox with esmtp (Exim 4.86_2)
+ (envelope-from <m.v.b@runbox.com>)
+ id 1lCC4k-000717-43; Wed, 17 Feb 2021 02:56:22 +0100
+Received: by submission02.runbox with esmtpsa [Authenticated alias (536975)]
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
+ id 1lCC4Q-0007xM-Ug; Wed, 17 Feb 2021 02:56:03 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,161 +57,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1540d77-9901-44cf-a17e-1308f2308352
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=gibson.dropbear.id.au; s=201602; t=1613525022;
-	bh=i5csGyCZLyAc9i3KKGsKbSkGDjy55sFRwjE1x4+/oxY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Ff/K0Qzt0Q0AP2MItzycNnHmFdzI6mf9iC+lPlww1oKVeZmInviIjsR7ruUoYr7V9
-	 ymzTMv9Yst0C5F2rAOX9Zn3/plSkuqmotvRNBmq1cTFoofq3So1dLvfeGPXrDZbUFn
-	 J7yiV4TKbyfDnYdtPavRMb1n0MclRaE4K6TOf7zY=
-Date: Wed, 17 Feb 2021 11:44:41 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, julien@xen.org, stefano.stabellini@linaro.org,
-	stefano.stabellini@xilinx.com, andre.przywara@arm.com,
-	stratos-dev@op-lists.linaro.org, xen-devel@lists.xenproject.org,
-	Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH  v2 3/7] device_tree: add qemu_fdt_setprop_string_array
- helper
-Message-ID: <YCxm+e2UzO9cTnl8@yekko.fritz.box>
-References: <20210211171945.18313-1-alex.bennee@linaro.org>
- <20210211171945.18313-4-alex.bennee@linaro.org>
+X-Inumbo-ID: e26e0f9f-3e25-45d5-867e-cf79746ae4c4
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=runbox.com;
+	 s=selector2; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:References:Cc:To:From:Subject;
+	bh=pyYlGNUAqjEgpRSUkNyi4+J7eM7ekIrYP7jIlz2vcPk=; b=zwnVgG3RmBo4O3l+qQeQ+OmnMZ
+	cpsBI+HQMNg83pJwMM4K9wL7blFsi6EiXD3y1r7bYMkqV1qLa9OBKvL2cZga51HkXFVdoE5yo9zCd
+	Z9oUxgaCEMOIJzowypdLrFjcTbhUCQwyQM52cWZiE8G/Wk8Ntq9MVdkk6ENEgClXHzGLabHf6kd5h
+	RCq3ZAa3oBWBbutOXIjCvL78rWSD7mkd2D+FAzb+n15fYiLEFMfNLYnNnFbTGkmRpbzQ2ReFnZif6
+	1DO30YPL7VQVjcSNOdHykHM7Gc3zUT1WZ9fd1O1L/N3CKGpw6ngJ09StzM5ooZYVnGDNLXe0zdNWm
+	CI30NJaw==;
+Subject: Re: [PATCH 1/1] x86/ept: Fix buggy XSA-321 backport
+From: "M. Vefa Bicakci" <m.v.b@runbox.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, marmarek@invisiblethingslab.com,
+ jbeulich@suse.com
+References: <20210215234619.245422-1-m.v.b@runbox.com>
+ <20210215234619.245422-2-m.v.b@runbox.com> <YCuOQ3qpFD6RgIld@Air-de-Roger>
+ <5517e20e-c485-7016-da89-81570cc43b3b@runbox.com>
+Message-ID: <aad766de-2e2a-2f64-a839-9c7a5a9e4d6f@runbox.com>
+Date: Tue, 16 Feb 2021 20:55:59 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="TO/drffHYp5rg2K/"
-Content-Disposition: inline
-In-Reply-To: <20210211171945.18313-4-alex.bennee@linaro.org>
+In-Reply-To: <5517e20e-c485-7016-da89-81570cc43b3b@runbox.com>
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: 8bit
 
+On 16/02/2021 07.48, M. Vefa Bicakci wrote:
+> On 16/02/2021 04.20, Roger Pau Monné wrote:
+>> On Mon, Feb 15, 2021 at 06:46:19PM -0500, M. Vefa Bicakci wrote:
+> 
+[snipped by Vefa]
+> >> In any case I think this is too much change, so I would go for a
+>> smaller fix like my proposal below. Can you please test it?
+> 
+> Thank you! I will test your patch later today, and I will report
+> back by tomorrow.
+> 
+[snipped by Vefa]
+> 
+>> Here is my proposed fix, I think we could even do away with the else
+>> branch, but if level is != 0 p2m_is_foreign should be false, so we
+>> avoid an extra check.
+>>
+>> Thanks, Roger.
+> 
+> I will test this. Thanks again! I really appreciate that you have
+> have taken the time and effort.
+> 
+> Vefa
 
---TO/drffHYp5rg2K/
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Roger,
 
-On Thu, Feb 11, 2021 at 05:19:41PM +0000, Alex Benn=E9e wrote:
-> A string array in device tree is simply a series of \0 terminated
-> strings next to each other. As libfdt doesn't support that directly
-> we need to build it ourselves.
+I have tested your patch, and I am happy to confirm that it too resolves
+the issue I have described in my original patch description. Thank you!
 
-Hm, that might not make a bad extension to libfdt...
+When I find some more time, I would like to prepare a GitHub pull request
+for Qubes OS 4.0's version of Xen 4.8.5 with your patch so that other users
+do not encounter the same issue. I would like to properly credit your
+contribution. Would you be able to send a patch with a Signed-off-by tag
+in its description?
 
->=20
-> Signed-off-by: Alex Benn=E9e <alex.bennee@linaro.org>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Message-Id: <20201105175153.30489-4-alex.bennee@linaro.org>
->=20
-> ---
-> v2
->   - checkpatch long line fix
-> ---
->  include/sysemu/device_tree.h | 17 +++++++++++++++++
->  softmmu/device_tree.c        | 26 ++++++++++++++++++++++++++
->  2 files changed, 43 insertions(+)
->=20
-> diff --git a/include/sysemu/device_tree.h b/include/sysemu/device_tree.h
-> index 982c89345f..8a2fe55622 100644
-> --- a/include/sysemu/device_tree.h
-> +++ b/include/sysemu/device_tree.h
-> @@ -70,6 +70,23 @@ int qemu_fdt_setprop_u64(void *fdt, const char *node_p=
-ath,
->                           const char *property, uint64_t val);
->  int qemu_fdt_setprop_string(void *fdt, const char *node_path,
->                              const char *property, const char *string);
-> +
-> +/**
-> + * qemu_fdt_setprop_string_array: set a string array property
-> + *
-> + * @fdt: pointer to the dt blob
-> + * @name: node name
-> + * @prop: property array
-> + * @array: pointer to an array of string pointers
-> + * @len: length of array
-> + *
-> + * assigns a string array to a property. This function converts and
-> + * array of strings to a sequential string with \0 separators before
-> + * setting the property.
-> + */
-> +int qemu_fdt_setprop_string_array(void *fdt, const char *node_path,
-> +                                  const char *prop, char **array, int le=
-n);
-> +
->  int qemu_fdt_setprop_phandle(void *fdt, const char *node_path,
->                               const char *property,
->                               const char *target_node_path);
-> diff --git a/softmmu/device_tree.c b/softmmu/device_tree.c
-> index b9a3ddc518..2691c58cf6 100644
-> --- a/softmmu/device_tree.c
-> +++ b/softmmu/device_tree.c
-> @@ -21,6 +21,7 @@
->  #include "qemu/error-report.h"
->  #include "qemu/option.h"
->  #include "qemu/bswap.h"
-> +#include "qemu/cutils.h"
->  #include "sysemu/device_tree.h"
->  #include "sysemu/sysemu.h"
->  #include "hw/loader.h"
-> @@ -397,6 +398,31 @@ int qemu_fdt_setprop_string(void *fdt, const char *n=
-ode_path,
->      return r;
->  }
-> =20
-> +/*
-> + * libfdt doesn't allow us to add string arrays directly but they are
-> + * test a series of null terminated strings with a length. We build
-> + * the string up here so we can calculate the final length.
-> + */
-> +int qemu_fdt_setprop_string_array(void *fdt, const char *node_path,
-> +                                  const char *prop, char **array, int le=
-n)
-> +{
-> +    int ret, i, total_len =3D 0;
-> +    char *str, *p;
-> +    for (i =3D 0; i < len; i++) {
-> +        total_len +=3D strlen(array[i]) + 1;
-> +    }
-> +    p =3D str =3D g_malloc0(total_len);
-> +    for (i =3D 0; i < len; i++) {
-> +        int len =3D strlen(array[i]) + 1;
-> +        pstrcpy(p, len, array[i]);
-> +        p +=3D len;
-> +    }
-> +
-> +    ret =3D qemu_fdt_setprop(fdt, node_path, prop, str, total_len);
-> +    g_free(str);
-> +    return ret;
-> +}
-> +
->  const void *qemu_fdt_getprop(void *fdt, const char *node_path,
->                               const char *property, int *lenp, Error **er=
-rp)
->  {
+Thanks again,
 
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
+Vefa
 
---TO/drffHYp5rg2K/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmAsZvkACgkQbDjKyiDZ
-s5JkeBAAh1nq//jzuoFXH1RTHHchSWcXwSOQwwoKtEgNymV0OYnJvVeI87h02Ryf
-Q4AkWX0TRNC7xTP7fk9rJpYlIvDu+3M3fEQKu9Paz9taWc3lat8lHdRN+qoBaDuG
-91smdKfWYGI1RHSj0C+pjDPa73He3JaNE4ooyJcpcAJEP38/jdVTBx1g82ZrksJQ
-iKBSapz/RBX5e7LSfm5NIB7OMDXWo8vORFopz+pUKIKDKNHTWGsf29zQchuNj7v9
-n62ahTYFfN7CvOsEkwccA0sqaHEKSptUFeZ9YApO9zMj/FVlyjw73RCMGFbaWTlm
-m5dzj+wS+2n8iriX2pjbDp2bpREI3AJM23D5qArXfeH4ArmXNEc98canOD4/Y5zO
-KrnErOnvghtt7CXfjYYyKoWixTCMw0StbSnXsWJBnF0NXhtRr2DXKLbI2mPFRzac
-AnNXXAEs8CKtvWt/xPAwCTEMCTw9PkaUk18USAx2edDm+8lOWwzvRgMfDvvMRl7L
-ZJxr5MXP6ZWflZCY3tLXd4nD2DT+okaxNiKv8ZuNW0HEo4pYdwni0IVc8m8ZWlIB
-kEvPySjaxF5s38NoxB0ryAsuCEMnuJR8KP2cz3bYyVJ/tLE86+gevg1ztqCQzkyz
-sw23wgg9Ze5ypekPbLZJ/fpVNr5/bOs3tEAvLoc14qPVaJ4PpaQ=
-=OXJn
------END PGP SIGNATURE-----
-
---TO/drffHYp5rg2K/--
+>> ---8<---
+>> diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+>> index 036771f43c..086739ffdd 100644
+>> --- a/xen/arch/x86/mm/p2m-ept.c
+>> +++ b/xen/arch/x86/mm/p2m-ept.c
+>> @@ -56,11 +56,8 @@ static int atomic_write_ept_entry(ept_entry_t *entryptr, ept_entry_t new,
+>>       if ( level )
+>>       {
+>>           ASSERT(!is_epte_superpage(&new) || !p2m_is_foreign(new.sa_p2mt));
+>> -        write_atomic(&entryptr->epte, new.epte);
+>> -        return 0;
+>>       }
+>> -
+>> -    if ( unlikely(p2m_is_foreign(new.sa_p2mt)) )
+>> +    else if ( unlikely(p2m_is_foreign(new.sa_p2mt)) )
+>>       {
+>>           rc = -EINVAL;
+>>           if ( !is_epte_present(&new) )
+>>
 
