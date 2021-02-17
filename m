@@ -2,45 +2,46 @@ Return-Path: <SRS0=/9Q0=HT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCCD3C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 13:55:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47B41C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 14:25:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4AD6264E0F
-	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 13:55:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4AD6264E0F
+	by mail.kernel.org (Postfix) with ESMTPS id DB20164E5B
+	for <xen-devel@archiver.kernel.org>; Wed, 17 Feb 2021 14:25:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB20164E5B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.86276.161847 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.86283.161866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCNI5-0002SB-3J; Wed, 17 Feb 2021 13:54:53 +0000
+	id 1lCNlN-0005KJ-Tq; Wed, 17 Feb 2021 14:25:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 86276.161847; Wed, 17 Feb 2021 13:54:53 +0000
+Received: by outflank-mailman (output) from mailman id 86283.161866; Wed, 17 Feb 2021 14:25:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCNI5-0002S4-0R; Wed, 17 Feb 2021 13:54:53 +0000
-Received: by outflank-mailman (input) for mailman id 86276;
- Wed, 17 Feb 2021 13:54:52 +0000
+	id 1lCNlN-0005K6-MU; Wed, 17 Feb 2021 14:25:09 +0000
+Received: by outflank-mailman (input) for mailman id 86283;
+ Wed, 17 Feb 2021 14:25:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lCNI3-0002Rw-Vm
- for xen-devel@lists.xenproject.org; Wed, 17 Feb 2021 13:54:52 +0000
+ (envelope-from <julien@xen.org>) id 1lCNlM-0005JW-KY
+ for xen-devel@lists.xenproject.org; Wed, 17 Feb 2021 14:25:08 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lCNHx-00045M-MY; Wed, 17 Feb 2021 13:54:45 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ id 1lCNlJ-0004eR-Rh; Wed, 17 Feb 2021 14:25:05 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lCNHx-0002fc-EM; Wed, 17 Feb 2021 13:54:45 +0000
+ id 1lCNlJ-00057m-Fa; Wed, 17 Feb 2021 14:25:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,110 +54,201 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=/BMI8jzOWOIBwNHI/soZA7yadtHGIBIyCRbij6dumj4=; b=xa7WckS1UZuapeyC5uvhAFU381
-	y52Rg0i9K8gtuYyB4kU4FJ2GbUJUKX71fpKIPcIL6DswSmd6vBWeKlKbzouFLuZdhIdtijkl72yS0
-	nia8H5KQxANTdX3fghYT0edGs8JCdDBTf5l3kSa9iuZzoQbVskaJWCTH2NLITdlfh0MU=;
-Subject: Re: [for-4.15][PATCH v2 5/5] xen/iommu: x86: Clear the root
- page-table before freeing the page-tables
-To: "Tian, Kevin" <kevin.tian@intel.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: "hongyxia@amazon.co.uk" <hongyxia@amazon.co.uk>,
- "iwj@xenproject.org" <iwj@xenproject.org>, Julien Grall <jgrall@amazon.com>,
- Jan Beulich <jbeulich@suse.com>, "Cooper, Andrew"
- <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>
-References: <20210209152816.15792-1-julien@xen.org>
- <20210209152816.15792-6-julien@xen.org>
- <MWHPR11MB18869B3DB550711B3F6F6CA48C8D9@MWHPR11MB1886.namprd11.prod.outlook.com>
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=E10KWobPtnAxShnfJroEM2NY8XPPcudrmSVydi6i4NA=; b=kMCv4+ftElp2JtZlu3sfOUMXe
+	W4wdDP4OTTLeHmeSn+X/qNJwqRQlDtAyI4YE6aX64pUTNugb2TNnXjMUuGj6zQy3esu/i8juW89EL
+	CEZ4iWtCGncr3Ie7CLnIDBBlyFyx2iXp6TPKpQNA2kSmawFCCQ7QqPN2s3af4kcQ7qp7Q=;
 From: Julien Grall <julien@xen.org>
-Message-ID: <a8636cac-c4da-27f6-404e-20e9e58a77b1@xen.org>
-Date: Wed, 17 Feb 2021 13:54:43 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.1
-MIME-Version: 1.0
-In-Reply-To: <MWHPR11MB18869B3DB550711B3F6F6CA48C8D9@MWHPR11MB1886.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+To: xen-devel@lists.xenproject.org
+Cc: hongyxia@amazon.co.uk,
+	iwj@xenproject.org,
+	Julien Grall <jgrall@amazon.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [for-4.15][PATCH v3 1/3] xen/iommu: x86: Clear the root page-table before freeing the page-tables
+Date: Wed, 17 Feb 2021 14:24:56 +0000
+Message-Id: <20210217142458.3769-2-julien@xen.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210217142458.3769-1-julien@xen.org>
+References: <20210217142458.3769-1-julien@xen.org>
 
-Hi Kevin,
+From: Julien Grall <jgrall@amazon.com>
 
-On 10/02/2021 02:21, Tian, Kevin wrote:
->> From: Julien Grall <julien@xen.org>
->> Sent: Tuesday, February 9, 2021 11:28 PM
->>
->> From: Julien Grall <jgrall@amazon.com>
->>
->> The new per-domain IOMMU page-table allocator will now free the
->> page-tables when domain's resources are relinquished. However, the root
->> page-table (i.e. hd->arch.pg_maddr) will not be cleared.
-> 
-> It's the pointer not the table itself.
+The new per-domain IOMMU page-table allocator will now free the
+page-tables when domain's resources are relinquished. However, the
+per-domain IOMMU structure will still contain a dangling pointer to
+the root page-table.
 
-I don't think the sentence is incorrect. One can view clearing as either 
-clearing the page table itself or the pointer.
+Xen may access the IOMMU page-tables afterwards at least in the case of
+PV domain:
 
-> 
->>
->> Xen may access the IOMMU page-tables afterwards at least in the case of
->> PV domain:
->>
->> (XEN) Xen call trace:
->> (XEN)    [<ffff82d04025b4b2>] R
->> iommu.c#addr_to_dma_page_maddr+0x12e/0x1d8
->> (XEN)    [<ffff82d04025b695>] F
->> iommu.c#intel_iommu_unmap_page+0x5d/0xf8
->> (XEN)    [<ffff82d0402695f3>] F iommu_unmap+0x9c/0x129
->> (XEN)    [<ffff82d0402696a6>] F iommu_legacy_unmap+0x26/0x63
->> (XEN)    [<ffff82d04033c5c7>] F mm.c#cleanup_page_mappings+0x139/0x144
->> (XEN)    [<ffff82d04033c61d>] F put_page+0x4b/0xb3
->> (XEN)    [<ffff82d04033c87f>] F put_page_from_l1e+0x136/0x13b
->> (XEN)    [<ffff82d04033cada>] F devalidate_page+0x256/0x8dc
->> (XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
->> (XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
->> (XEN)    [<ffff82d04033d8d6>] F mm.c#put_page_from_l2e+0x8a/0xcf
->> (XEN)    [<ffff82d04033cc27>] F devalidate_page+0x3a3/0x8dc
->> (XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
->> (XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
->> (XEN)    [<ffff82d04033d807>] F mm.c#put_page_from_l3e+0x8a/0xcf
->> (XEN)    [<ffff82d04033cdf0>] F devalidate_page+0x56c/0x8dc
->> (XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
->> (XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
->> (XEN)    [<ffff82d04033d6c7>] F mm.c#put_page_from_l4e+0x69/0x6d
->> (XEN)    [<ffff82d04033cf24>] F devalidate_page+0x6a0/0x8dc
->> (XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
->> (XEN)    [<ffff82d04033d92e>] F put_page_type_preemptible+0x13/0x15
->> (XEN)    [<ffff82d04032598a>] F domain.c#relinquish_memory+0x1ff/0x4e9
->> (XEN)    [<ffff82d0403295f2>] F domain_relinquish_resources+0x2b6/0x36a
->> (XEN)    [<ffff82d040205cdf>] F domain_kill+0xb8/0x141
->> (XEN)    [<ffff82d040236cac>] F do_domctl+0xb6f/0x18e5
->> (XEN)    [<ffff82d04031d098>] F pv_hypercall+0x2f0/0x55f
->> (XEN)    [<ffff82d04039b432>] F lstar_enter+0x112/0x120
->>
->> This will result to a use after-free and possibly an host crash or
->> memory corruption.
->>
->> Freeing the page-tables further down in domain_relinquish_resources()
->> would not work because pages may not be released until later if another
->> domain hold a reference on them.
->>
->> Once all the PCI devices have been de-assigned, it is actually pointless
->> to access modify the IOMMU page-tables. So we can simply clear the root
->> page-table address.
-> 
-> Above two paragraphs are confusing to me. I don't know what exact change
-> is proposed until looking over the whole patch. Isn't it clearer to just say
-> "We should clear the root page table pointer in iommu_free_pgtables to
-> avoid use-after-free after all pgtables are moved to the free list"?
+(XEN) Xen call trace:
+(XEN)    [<ffff82d04025b4b2>] R iommu.c#addr_to_dma_page_maddr+0x12e/0x1d8
+(XEN)    [<ffff82d04025b695>] F iommu.c#intel_iommu_unmap_page+0x5d/0xf8
+(XEN)    [<ffff82d0402695f3>] F iommu_unmap+0x9c/0x129
+(XEN)    [<ffff82d0402696a6>] F iommu_legacy_unmap+0x26/0x63
+(XEN)    [<ffff82d04033c5c7>] F mm.c#cleanup_page_mappings+0x139/0x144
+(XEN)    [<ffff82d04033c61d>] F put_page+0x4b/0xb3
+(XEN)    [<ffff82d04033c87f>] F put_page_from_l1e+0x136/0x13b
+(XEN)    [<ffff82d04033cada>] F devalidate_page+0x256/0x8dc
+(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
+(XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
+(XEN)    [<ffff82d04033d8d6>] F mm.c#put_page_from_l2e+0x8a/0xcf
+(XEN)    [<ffff82d04033cc27>] F devalidate_page+0x3a3/0x8dc
+(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
+(XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
+(XEN)    [<ffff82d04033d807>] F mm.c#put_page_from_l3e+0x8a/0xcf
+(XEN)    [<ffff82d04033cdf0>] F devalidate_page+0x56c/0x8dc
+(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
+(XEN)    [<ffff82d04033d64d>] F mm.c#put_pt_page+0x6f/0x80
+(XEN)    [<ffff82d04033d6c7>] F mm.c#put_page_from_l4e+0x69/0x6d
+(XEN)    [<ffff82d04033cf24>] F devalidate_page+0x6a0/0x8dc
+(XEN)    [<ffff82d04033d396>] F mm.c#_put_page_type+0x236/0x47e
+(XEN)    [<ffff82d04033d92e>] F put_page_type_preemptible+0x13/0x15
+(XEN)    [<ffff82d04032598a>] F domain.c#relinquish_memory+0x1ff/0x4e9
+(XEN)    [<ffff82d0403295f2>] F domain_relinquish_resources+0x2b6/0x36a
+(XEN)    [<ffff82d040205cdf>] F domain_kill+0xb8/0x141
+(XEN)    [<ffff82d040236cac>] F do_domctl+0xb6f/0x18e5
+(XEN)    [<ffff82d04031d098>] F pv_hypercall+0x2f0/0x55f
+(XEN)    [<ffff82d04039b432>] F lstar_enter+0x112/0x120
 
-Your sentence explain the approach taken but not the rational behind the 
-approach. Both are equally important for future reference.
+This will result to a use after-free and possibly an host crash or
+memory corruption.
 
-I will try to reword it.
+It would not be possible to free the page-tables further down in
+domain_relinquish_resources() because cleanup_page_mappings() will only
+be called when the last reference on the page dropped. This may happen
+much later if another domain still hold a reference.
 
-Cheers,
+After all the PCI devices have been de-assigned, nobody should use the
+IOMMU page-tables and it is therefore pointless to try to modify them.
 
+So we can simply clear any reference to the root page-table in the
+per-domain IOMMU structure. This requires to introduce a new callback of
+the method will depend on the IOMMU driver used.
+
+Fixes: 3eef6d07d722 ("x86/iommu: convert VT-d code to use new page table allocator")
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+
+---
+    Changes in v3:
+        - Move the patch earlier in the series
+        - Reword the commit message
+
+    Changes in v2:
+        - Introduce clear_root_pgtable()
+        - Move the patch later in the series
+---
+ xen/drivers/passthrough/amd/pci_amd_iommu.c | 12 +++++++++++-
+ xen/drivers/passthrough/vtd/iommu.c         | 12 +++++++++++-
+ xen/drivers/passthrough/x86/iommu.c         |  9 +++++++++
+ xen/include/xen/iommu.h                     |  1 +
+ 4 files changed, 32 insertions(+), 2 deletions(-)
+
+diff --git a/xen/drivers/passthrough/amd/pci_amd_iommu.c b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+index 42b5a5a9bec4..81add0ba26b4 100644
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -381,9 +381,18 @@ static int amd_iommu_assign_device(struct domain *d, u8 devfn,
+     return reassign_device(pdev->domain, d, devfn, pdev);
+ }
+ 
++static void iommu_clear_root_pgtable(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++
++    spin_lock(&hd->arch.mapping_lock);
++    hd->arch.amd.root_table = NULL;
++    spin_unlock(&hd->arch.mapping_lock);
++}
++
+ static void amd_iommu_domain_destroy(struct domain *d)
+ {
+-    dom_iommu(d)->arch.amd.root_table = NULL;
++    ASSERT(!dom_iommu(d)->arch.amd.root_table);
+ }
+ 
+ static int amd_iommu_add_device(u8 devfn, struct pci_dev *pdev)
+@@ -565,6 +574,7 @@ static const struct iommu_ops __initconstrel _iommu_ops = {
+     .remove_device = amd_iommu_remove_device,
+     .assign_device  = amd_iommu_assign_device,
+     .teardown = amd_iommu_domain_destroy,
++    .clear_root_pgtable = iommu_clear_root_pgtable,
+     .map_page = amd_iommu_map_page,
+     .unmap_page = amd_iommu_unmap_page,
+     .iotlb_flush = amd_iommu_flush_iotlb_pages,
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index d136fe36883b..e1871f6c2bc1 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1726,6 +1726,15 @@ out:
+     return ret;
+ }
+ 
++static void iommu_clear_root_pgtable(struct domain *d)
++{
++    struct domain_iommu *hd = dom_iommu(d);
++
++    spin_lock(&hd->arch.mapping_lock);
++    hd->arch.vtd.pgd_maddr = 0;
++    spin_unlock(&hd->arch.mapping_lock);
++}
++
+ static void iommu_domain_teardown(struct domain *d)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
+@@ -1740,7 +1749,7 @@ static void iommu_domain_teardown(struct domain *d)
+         xfree(mrmrr);
+     }
+ 
+-    hd->arch.vtd.pgd_maddr = 0;
++    ASSERT(!hd->arch.vtd.pgd_maddr);
+ }
+ 
+ static int __must_check intel_iommu_map_page(struct domain *d, dfn_t dfn,
+@@ -2719,6 +2728,7 @@ static struct iommu_ops __initdata vtd_ops = {
+     .remove_device = intel_iommu_remove_device,
+     .assign_device  = intel_iommu_assign_device,
+     .teardown = iommu_domain_teardown,
++    .clear_root_pgtable = iommu_clear_root_pgtable,
+     .map_page = intel_iommu_map_page,
+     .unmap_page = intel_iommu_unmap_page,
+     .lookup_page = intel_iommu_lookup_page,
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index cea1032b3d02..f54fc8093f18 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -267,6 +267,15 @@ int iommu_free_pgtables(struct domain *d)
+     struct page_info *pg;
+     unsigned int done = 0;
+ 
++    if ( !is_iommu_enabled(d) )
++        return 0;
++
++    /*
++     * Pages will be moved to the free list below. So we want to
++     * clear the root page-table to avoid any potential use after-free.
++     */
++    hd->platform_ops->clear_root_pgtable(d);
++
+     while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
+     {
+         free_domheap_page(pg);
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 863a68fe1622..d59ed7cbad43 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -272,6 +272,7 @@ struct iommu_ops {
+ 
+     int (*adjust_irq_affinities)(void);
+     void (*sync_cache)(const void *addr, unsigned int size);
++    void (*clear_root_pgtable)(struct domain *d);
+ #endif /* CONFIG_X86 */
+ 
+     int __must_check (*suspend)(void);
 -- 
-Julien Grall
+2.17.1
+
 
