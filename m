@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80D81C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Feb 2021 14:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9712AC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Feb 2021 15:02:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F0F7660238
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Feb 2021 14:55:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F0F7660238
+	by mail.kernel.org (Postfix) with ESMTPS id 17E9664EAE
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Feb 2021 15:02:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17E9664EAE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.86668.162845 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.86671.162856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCkhu-00035S-G3; Thu, 18 Feb 2021 14:55:06 +0000
+	id 1lCkot-00048S-Ap; Thu, 18 Feb 2021 15:02:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 86668.162845; Thu, 18 Feb 2021 14:55:06 +0000
+Received: by outflank-mailman (output) from mailman id 86671.162856; Thu, 18 Feb 2021 15:02:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lCkhu-00035L-CA; Thu, 18 Feb 2021 14:55:06 +0000
-Received: by outflank-mailman (input) for mailman id 86668;
- Thu, 18 Feb 2021 14:55:04 +0000
+	id 1lCkot-00048L-7k; Thu, 18 Feb 2021 15:02:19 +0000
+Received: by outflank-mailman (input) for mailman id 86671;
+ Thu, 18 Feb 2021 15:02:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=x3vz=HU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lCkhs-00035G-JP
- for xen-devel@lists.xenproject.org; Thu, 18 Feb 2021 14:55:04 +0000
+ id 1lCkor-00048G-Mf
+ for xen-devel@lists.xenproject.org; Thu, 18 Feb 2021 15:02:17 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fff36cdb-53c3-4362-923a-5b11829a516d;
- Thu, 18 Feb 2021 14:55:03 +0000 (UTC)
+ id 5ac93afd-5cec-4253-945a-d9c8402057f3;
+ Thu, 18 Feb 2021 15:02:16 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 3560FAECE;
- Thu, 18 Feb 2021 14:55:02 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 7931DAE6E;
+ Thu, 18 Feb 2021 15:02:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,78 +51,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fff36cdb-53c3-4362-923a-5b11829a516d
+X-Inumbo-ID: 5ac93afd-5cec-4253-945a-d9c8402057f3
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1613660102; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1613660535; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=lVOs/JzlefvQeAhcnj1Kr4X404vRAEhukY2mkTftP+c=;
-	b=Y+zusE3y3dM0OYiS/bJpg3/4XHhFrlb7Estz9KSkVUOsDMwSB2qdYJqoPc1VyE9igaDw9U
-	CmUirEl99R670nD24boM2mImnADv2lzMcfSXn0zB2xjrimJq2SbAuuau3QGilRUYLURVfa
-	EmpQEtyD/Gw9aBKbfzMKfdqhUjmFuGA=
-Subject: Re: ld 2.36 regression linking EFI binary from ELF input
-To: Binutils <binutils@sourceware.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Jeremy Drake <sourceware-bugzilla@jdrake.com>
-References: <79812876-b43d-7729-da34-3b4cd1c31f24@suse.com>
+	bh=JWCDGoQxl/o3awx8vCD48SSwoRU3YNAxpRjz1eq7XqM=;
+	b=mUOP/pE27q42jvBJvzpWUj0C4AKBMSyLHrcDEyVcC8xsIfBu5mkiiw74NrBn2IqSu0B8zf
+	lPVPwuUpQLjmb4rJebOIevthPYnnSI5dFwB4bwkTxhOPh2Hoivi2SNooNuWba1DYDiRaSM
+	YDk8cRpRtFodurMfHtmuSz+5hWlOHdw=
+Subject: Re: [PATCH 3/3] gnttab: GTF_sub_page is a v2-only flag
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <156559d5-853a-5bb9-942b-f623627e0907@suse.com>
+ <2bf46266-785d-0de3-5f61-48c3fd191a5c@suse.com>
+ <e00d9bed-20e4-b5a5-91e8-02f7a6689f86@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <8467d4dd-c702-19e2-4511-92f26a7d7b1f@suse.com>
-Date: Thu, 18 Feb 2021 15:55:01 +0100
+Message-ID: <a1a0587e-3e20-a023-6dd0-3b37b34fdf17@suse.com>
+Date: Thu, 18 Feb 2021 16:02:14 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <79812876-b43d-7729-da34-3b4cd1c31f24@suse.com>
+In-Reply-To: <e00d9bed-20e4-b5a5-91e8-02f7a6689f86@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 04.02.2021 14:21, Jan Beulich via Binutils wrote:
-> the Xen project hypervisor build system includes building the
-> hypervisor binary as an EFI application, as an option (i.e.
-> as long as the tool chain supports this). Already when probing
-> the linker we now suddenly get several "relocation truncated
-> to fit:R_X86_64_32 against `.debug_...'" errors. I have not
-> had  the time to figure out what exactly broke this, and I'm
-> sending this mail in the hope that it may ring a bell for
-> someone.
+On 18.02.2021 15:22, Andrew Cooper wrote:
+> On 17/02/2021 10:46, Jan Beulich wrote:
+>> Prior to its introduction, v1 entries weren't checked for this flag, and
+>> the flag also has been meaningless for v1 entries. Therefore it also
+>> shouldn't be checked. (The only consistent alternative would be to also
+>> check for all currently undefined flags to be clear.)
 > 
-> For reference, the probing is as simple as
+> We recently had a similar discussion for the stable libs.
 > 
-> $(LD) -mi386pep --subsystem=10 -o efi/check.efi efi/check.o
-> 
-> As was to be expected, the errors disappear with -S, but that's
-> an option only for the probing, not for the actual linking of
-> the binary.
+> Whatever we do, an unexpected corner case needs to break.  Checking for
+> all undefined flags up front is far cleaner - absolutely nothing good
+> can come for a guest which set GTF_sub_page with v1, and is expecting it
+> to work, and this way, we do all breaking in one go, rather than
+> breaking $N times in the future as new flags get added.
 
-Actually, that was just the easily visible problem. There's a
-worse one, again resulting from 514b4e191d5f ("Change the
-default characteristics of DLLs built by the linker to more
-secure settings"): Prior to this a .reloc section would not
-have been created by ld for executables. To work around this
-we've been hand-crafting relocations (by linking the image at
-two different base addresses and working out the delta). Now
-that ld does this by default, we get two base relocations for
-every field that needs relocating. Which obviously isn't
-going to work.
+Except that there doesn't need to be any breaking: v1 could continue
+to ignore all originally undefined flags. v1 and v2 could continue to
+ignore all flags presently undefined. See also Julien's question
+about GTF_sub_page on a transitive grant entry. That's presently an
+ignored setting as well (and, as an implementation detail, in fact
+getting forced to be set, but with a range covering the entire page).
 
-We also can't easily use ld's way of populating .reloc, as
-it's buggy (I'll send separate mail about that) and apart
-from this the resulting relocations differ subtly for the
-pre-populated page tables (using physical addresses, not
-virtual ones) that the binary contains.
-
-The immediate workaround at our end is therefore going to be
-to use --disable-reloc-section when available, but I have to
-admit that this is far worse breakage than I would have
-expected from a single-step binutils version increment. I
-wouldn't be surprised if Cygwin / MingW (or users thereof,
-when they are creating their own programs on top) aren't
-similarly affected. Luckily(?) the Windows loader looks to
-fall back to ignoring .relocs when it encounters an error
-processing one of the relocations, at least for executables
-(for DLLs this may not be an option).
+Retroactively starting to check (and reject) undefined flags isn't
+going to be nice; nevertheless I wanted to put this up as an at
+least theoretical alternative. Perhaps a topic for the next community
+call, if I don't forget by the time an agenda page appears.
 
 Jan
 
