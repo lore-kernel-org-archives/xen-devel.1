@@ -2,45 +2,47 @@ Return-Path: <SRS0=5oJc=HV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1F1BC433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:41:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DED49C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:50:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9EFA664E60
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:41:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9EFA664E60
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7152064DFD
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:50:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7152064DFD
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.86938.163636 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.86951.163648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lD7tt-0002im-VX; Fri, 19 Feb 2021 15:41:01 +0000
+	id 1lD83K-00044D-8r; Fri, 19 Feb 2021 15:50:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 86938.163636; Fri, 19 Feb 2021 15:41:01 +0000
+Received: by outflank-mailman (output) from mailman id 86951.163648; Fri, 19 Feb 2021 15:50:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lD7tt-0002ic-P4; Fri, 19 Feb 2021 15:41:01 +0000
-Received: by outflank-mailman (input) for mailman id 86938;
- Fri, 19 Feb 2021 15:41:00 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lD83K-000446-5k; Fri, 19 Feb 2021 15:50:46 +0000
+Received: by outflank-mailman (input) for mailman id 86951;
+ Fri, 19 Feb 2021 15:50:45 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jZy7=HV=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lD7tr-0002F6-VV
- for xen-devel@lists.xenproject.org; Fri, 19 Feb 2021 15:41:00 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a996cdc6-4437-4d1d-ac26-0ef392d6b9b6;
- Fri, 19 Feb 2021 15:40:40 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 5717EB113;
- Fri, 19 Feb 2021 15:40:39 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1lD83J-00043k-N6
+ for xen-devel@lists.xenproject.org; Fri, 19 Feb 2021 15:50:45 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lD83J-0003K6-M8
+ for xen-devel@lists.xenproject.org; Fri, 19 Feb 2021 15:50:45 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lD83J-0006KL-Kq
+ for xen-devel@lists.xenproject.org; Fri, 19 Feb 2021 15:50:45 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lD83G-0001EC-Cl; Fri, 19 Feb 2021 15:50:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,290 +54,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a996cdc6-4437-4d1d-ac26-0ef392d6b9b6
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1613749239; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6VpM+WfMANjvkY5w7Gc3UZ8tT64NvTb2gpQ7A/fT8ao=;
-	b=bvKz+jSrLdLNwd5s+FG6C4BKp/wBnu2wr9z2vfOmJ6cWicKe/y0A5AFof5tF2XSXaFqiWW
-	wO5XbI53YJWxw5Mq1h/yWAjyLBJuRNB4rFCHFn0z4tXncQ8Ffjp+CHP9IvO92IAYAT7bOS
-	h1XcIapQO8Q1rwbguFV1CFoIGtsMR30=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 6/8] xen/events: add per-xenbus device event statistics and settings
-Date: Fri, 19 Feb 2021 16:40:28 +0100
-Message-Id: <20210219154030.10892-7-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210219154030.10892-1-jgross@suse.com>
-References: <20210219154030.10892-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=u8nZQgrCi40A/rBG4PVPftmjeH8BU5sMLURTLylJDSo=; b=4j+ayX1tIq3ozDwnqyyMmNyiHL
+	nQZXJi2qfh6fSN8j7c6cmFNYqgwa9gpvw51RJ1xxiKiJ/WQjEOx/hx1mQIPBdULjVasWyp0jj19RT
+	MtuYvCRuo5HEgRP6RSdSfBTa0ha9ppDBSaC06V5/znrzyMN5tavWXtcwv7EhT8zHPUAk=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24623.56913.290437.499946@mariner.uk.xensource.com>
+Date: Fri, 19 Feb 2021 15:50:41 +0000
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    Wei Liu <wl@xen.org>,
+    Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+    George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v2 0/8] x86/PV: avoid speculation abuse through guest
+ accessors
+In-Reply-To: <b466a19e-e547-3c7c-e39b-1a4c848a053a@suse.com>
+References: <b466a19e-e547-3c7c-e39b-1a4c848a053a@suse.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Add syfs nodes for each xenbus device showing event statistics (number
-of events and spurious events, number of associated event channels)
-and for setting a spurious event threshold in case a frontend is
-sending too many events without being rogue on purpose.
+Jan Beulich writes ("[PATCH v2 0/8] x86/PV: avoid speculation abuse through guest accessors"):
+> Re-sending primarily for the purpose of getting a release ack, an
+> explicit release nak, or an indication of there not being a need,
+> all for at least the first three patches here (which are otherwise
+> ready to go in). I've dropped the shadow part of the series from
+> this re-submission, because it has all got reviewed by Tim already
+> and is intended for 4.16 only anyway. I'm re-including the follow
+> up patches getting the code base in consistent shape again, as I
+> continue to think this consistency goal is at least worth a
+> consideration towards a freeze exception.
+> 
+> 1: split __{get,put}_user() into "guest" and "unsafe" variants
+> 2: split __copy_{from,to}_user() into "guest" and "unsafe" variants
+> 3: PV: harden guest memory accesses against speculative abuse
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
----
-V2:
-- add documentation (Boris Ostrovsky)
----
- .../ABI/testing/sysfs-devices-xenbus          | 41 ++++++++++++
- drivers/xen/events/events_base.c              | 27 +++++++-
- drivers/xen/xenbus/xenbus_probe.c             | 66 +++++++++++++++++++
- include/xen/xenbus.h                          |  7 ++
- 4 files changed, 139 insertions(+), 2 deletions(-)
- create mode 100644 Documentation/ABI/testing/sysfs-devices-xenbus
+These three:
 
-diff --git a/Documentation/ABI/testing/sysfs-devices-xenbus b/Documentation/ABI/testing/sysfs-devices-xenbus
-new file mode 100644
-index 000000000000..fd796cb4f315
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-devices-xenbus
-@@ -0,0 +1,41 @@
-+What:		/sys/devices/*/xenbus/event_channels
-+Date:		February 2021
-+Contact:	Xen Developers mailing list <xen-devel@lists.xenproject.org>
-+Description:
-+		Number of Xen event channels associated with a kernel based
-+		paravirtualized device frontend or backend.
-+
-+What:		/sys/devices/*/xenbus/events
-+Date:		February 2021
-+Contact:	Xen Developers mailing list <xen-devel@lists.xenproject.org>
-+Description:
-+		Total number of Xen events received for a Xen pv device
-+		frontend or backend.
-+
-+What:		/sys/devices/*/xenbus/jiffies_eoi_delayed
-+Date:		February 2021
-+Contact:	Xen Developers mailing list <xen-devel@lists.xenproject.org>
-+Description:
-+		Summed up time in jiffies the EOI of an interrupt for a Xen
-+		pv device has been delayed in order to avoid stalls due to
-+		event storms. This value rising is a first sign for a rogue
-+		other end of the pv device.
-+
-+What:		/sys/devices/*/xenbus/spurious_events
-+Date:		February 2021
-+Contact:	Xen Developers mailing list <xen-devel@lists.xenproject.org>
-+Description:
-+		Number of events received for a Xen pv device which did not
-+		require any action. Too many spurious events in a row will
-+		trigger delayed EOI processing.
-+
-+What:		/sys/devices/*/xenbus/spurious_threshold
-+Date:		February 2021
-+Contact:	Xen Developers mailing list <xen-devel@lists.xenproject.org>
-+Description:
-+		Controls the tolerated number of subsequent spurious events
-+		before delayed EOI processing is triggered for a Xen pv
-+		device. Default is 1. This can be modified in case the other
-+		end of the pv device is issuing spurious events on a regular
-+		basis and is known not to be malicious on purpose. Raising
-+		the value for such cases can improve pv device performance.
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index b60df189ecbc..a3636fb03417 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -332,6 +332,8 @@ static int xen_irq_info_evtchn_setup(unsigned irq,
- 
- 	ret = xen_irq_info_common_setup(info, irq, IRQT_EVTCHN, evtchn, 0);
- 	info->u.interdomain = dev;
-+	if (dev)
-+		atomic_inc(&dev->event_channels);
- 
- 	return ret;
- }
-@@ -606,18 +608,28 @@ static void xen_irq_lateeoi_locked(struct irq_info *info, bool spurious)
- 		return;
- 
- 	if (spurious) {
-+		struct xenbus_device *dev = info->u.interdomain;
-+		unsigned int threshold = 1;
-+
-+		if (dev && dev->spurious_threshold)
-+			threshold = dev->spurious_threshold;
-+
- 		if ((1 << info->spurious_cnt) < (HZ << 2)) {
- 			if (info->spurious_cnt != 0xFF)
- 				info->spurious_cnt++;
- 		}
--		if (info->spurious_cnt > 1) {
--			delay = 1 << (info->spurious_cnt - 2);
-+		if (info->spurious_cnt > threshold) {
-+			delay = 1 << (info->spurious_cnt - 1 - threshold);
- 			if (delay > HZ)
- 				delay = HZ;
- 			if (!info->eoi_time)
- 				info->eoi_cpu = smp_processor_id();
- 			info->eoi_time = get_jiffies_64() + delay;
-+			if (dev)
-+				atomic_add(delay, &dev->jiffies_eoi_delayed);
- 		}
-+		if (dev)
-+			atomic_inc(&dev->spurious_events);
- 	} else {
- 		info->spurious_cnt = 0;
- 	}
-@@ -954,6 +966,7 @@ static void __unbind_from_irq(unsigned int irq)
- 
- 	if (VALID_EVTCHN(evtchn)) {
- 		unsigned int cpu = cpu_from_irq(irq);
-+		struct xenbus_device *dev;
- 
- 		xen_evtchn_close(evtchn);
- 
-@@ -964,6 +977,11 @@ static void __unbind_from_irq(unsigned int irq)
- 		case IRQT_IPI:
- 			per_cpu(ipi_to_irq, cpu)[ipi_from_irq(irq)] = -1;
- 			break;
-+		case IRQT_EVTCHN:
-+			dev = info->u.interdomain;
-+			if (dev)
-+				atomic_dec(&dev->event_channels);
-+			break;
- 		default:
- 			break;
- 		}
-@@ -1627,6 +1645,7 @@ void handle_irq_for_port(evtchn_port_t port, struct evtchn_loop_ctrl *ctrl)
- {
- 	int irq;
- 	struct irq_info *info;
-+	struct xenbus_device *dev;
- 
- 	irq = get_evtchn_to_irq(port);
- 	if (irq == -1)
-@@ -1658,6 +1677,10 @@ void handle_irq_for_port(evtchn_port_t port, struct evtchn_loop_ctrl *ctrl)
- 	if (xchg_acquire(&info->is_active, 1))
- 		return;
- 
-+	dev = (info->type == IRQT_EVTCHN) ? info->u.interdomain : NULL;
-+	if (dev)
-+		atomic_inc(&dev->events);
-+
- 	if (ctrl->defer_eoi) {
- 		info->eoi_cpu = smp_processor_id();
- 		info->irq_epoch = __this_cpu_read(irq_epoch);
-diff --git a/drivers/xen/xenbus/xenbus_probe.c b/drivers/xen/xenbus/xenbus_probe.c
-index 8a75092bb148..97f0d234482d 100644
---- a/drivers/xen/xenbus/xenbus_probe.c
-+++ b/drivers/xen/xenbus/xenbus_probe.c
-@@ -206,6 +206,65 @@ void xenbus_otherend_changed(struct xenbus_watch *watch,
- }
- EXPORT_SYMBOL_GPL(xenbus_otherend_changed);
- 
-+#define XENBUS_SHOW_STAT(name)						\
-+static ssize_t show_##name(struct device *_dev,				\
-+			   struct device_attribute *attr,		\
-+			   char *buf)					\
-+{									\
-+	struct xenbus_device *dev = to_xenbus_device(_dev);		\
-+									\
-+	return sprintf(buf, "%d\n", atomic_read(&dev->name));		\
-+}									\
-+static DEVICE_ATTR(name, 0444, show_##name, NULL)
-+
-+XENBUS_SHOW_STAT(event_channels);
-+XENBUS_SHOW_STAT(events);
-+XENBUS_SHOW_STAT(spurious_events);
-+XENBUS_SHOW_STAT(jiffies_eoi_delayed);
-+
-+static ssize_t show_spurious_threshold(struct device *_dev,
-+				       struct device_attribute *attr,
-+				       char *buf)
-+{
-+	struct xenbus_device *dev = to_xenbus_device(_dev);
-+
-+	return sprintf(buf, "%d\n", dev->spurious_threshold);
-+}
-+
-+static ssize_t set_spurious_threshold(struct device *_dev,
-+				      struct device_attribute *attr,
-+				      const char *buf, size_t count)
-+{
-+	struct xenbus_device *dev = to_xenbus_device(_dev);
-+	unsigned int val;
-+	ssize_t ret;
-+
-+	ret = kstrtouint(buf, 0, &val);
-+	if (ret)
-+		return ret;
-+
-+	dev->spurious_threshold = val;
-+
-+	return count;
-+}
-+
-+static DEVICE_ATTR(spurious_threshold, 0644, show_spurious_threshold,
-+		   set_spurious_threshold);
-+
-+static struct attribute *xenbus_attrs[] = {
-+	&dev_attr_event_channels.attr,
-+	&dev_attr_events.attr,
-+	&dev_attr_spurious_events.attr,
-+	&dev_attr_jiffies_eoi_delayed.attr,
-+	&dev_attr_spurious_threshold.attr,
-+	NULL
-+};
-+
-+static const struct attribute_group xenbus_group = {
-+	.name = "xenbus",
-+	.attrs = xenbus_attrs,
-+};
-+
- int xenbus_dev_probe(struct device *_dev)
- {
- 	struct xenbus_device *dev = to_xenbus_device(_dev);
-@@ -253,6 +312,11 @@ int xenbus_dev_probe(struct device *_dev)
- 		return err;
- 	}
- 
-+	dev->spurious_threshold = 1;
-+	if (sysfs_create_group(&dev->dev.kobj, &xenbus_group))
-+		dev_warn(&dev->dev, "sysfs_create_group on %s failed.\n",
-+			 dev->nodename);
-+
- 	return 0;
- fail_put:
- 	module_put(drv->driver.owner);
-@@ -269,6 +333,8 @@ int xenbus_dev_remove(struct device *_dev)
- 
- 	DPRINTK("%s", dev->nodename);
- 
-+	sysfs_remove_group(&dev->dev.kobj, &xenbus_group);
-+
- 	free_otherend_watch(dev);
- 
- 	if (drv->remove) {
-diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
-index bf3cfc7c35d0..0b1386073d49 100644
---- a/include/xen/xenbus.h
-+++ b/include/xen/xenbus.h
-@@ -88,6 +88,13 @@ struct xenbus_device {
- 	struct completion down;
- 	struct work_struct work;
- 	struct semaphore reclaim_sem;
-+
-+	/* Event channel based statistics and settings. */
-+	atomic_t event_channels;
-+	atomic_t events;
-+	atomic_t spurious_events;
-+	atomic_t jiffies_eoi_delayed;
-+	unsigned int spurious_threshold;
- };
- 
- static inline struct xenbus_device *to_xenbus_device(struct device *dev)
--- 
-2.26.2
+Release-Acked-by: Ian Jackson <iwj@xenproject.org>
 
+On the grounds that this is probably severe enough to be a blocking
+issue for 4.15.
+
+> 4: rename {get,put}_user() to {get,put}_guest()
+> 5: gdbsx: convert "user" to "guest" accesses
+> 6: rename copy_{from,to}_user() to copy_{from,to}_guest_pv()
+> 7: move stac()/clac() from {get,put}_unsafe_asm() ...
+> 8: PV: use get_unsafe() instead of copy_from_unsafe()
+
+These have not got a maintainer review yet.  To grant a release-ack
+I'd like an explanation of the downsides and upsides of taking this
+series in 4.15 ?
+
+You say "consistency" but in practical terms, what will happen if the
+code is not "conxistent" in this sense ?
+
+I'd also like to hear from aother hypervisor maintainer.
+
+Thanks,
+Ian.
 
