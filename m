@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97E8FC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C337C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:41:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E51564DFD
-	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:41:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E51564DFD
+	by mail.kernel.org (Postfix) with ESMTPS id 4452664E60
+	for <xen-devel@archiver.kernel.org>; Fri, 19 Feb 2021 15:41:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4452664E60
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.86935.163595 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.86934.163588 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lD7tk-0002R3-FH; Fri, 19 Feb 2021 15:40:52 +0000
+	id 1lD7tk-0002QA-0W; Fri, 19 Feb 2021 15:40:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 86935.163595; Fri, 19 Feb 2021 15:40:52 +0000
+Received: by outflank-mailman (output) from mailman id 86934.163588; Fri, 19 Feb 2021 15:40:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lD7tk-0002Qo-7w; Fri, 19 Feb 2021 15:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 86935;
+	id 1lD7tj-0002Q1-Sa; Fri, 19 Feb 2021 15:40:51 +0000
+Received: by outflank-mailman (input) for mailman id 86934;
  Fri, 19 Feb 2021 15:40:50 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jZy7=HV=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lD7th-0002F7-Vq
- for xen-devel@lists.xenproject.org; Fri, 19 Feb 2021 15:40:50 +0000
+ id 1lD7th-0002F6-V9
+ for xen-devel@lists.xenproject.org; Fri, 19 Feb 2021 15:40:49 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 17195ed2-3ee0-4ae2-ad36-57118e02a687;
- Fri, 19 Feb 2021 15:40:40 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8FC36B114;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d945f9fa-43c4-4d82-b864-f9b70dc12d2e;
  Fri, 19 Feb 2021 15:40:39 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id C5B9AB10B;
+ Fri, 19 Feb 2021 15:40:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,66 +52,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 17195ed2-3ee0-4ae2-ad36-57118e02a687
+X-Inumbo-ID: d945f9fa-43c4-4d82-b864-f9b70dc12d2e
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1613749239; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1613749238; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nYiBLOOS0jKaGXZR/xdp5WHTi+5sOW1v2m88NDrZNbI=;
-	b=mqlyaLZe/YgvYSsQIvPpN9XoaMOuiHW3Pbur9d3Wz3NOMHY4Oy4s66u3aQWq9fxarixX/O
-	Ey3afn8U9k0KK6JKqUCXGc1zWME5EppFL1W/JOkfTp3ilVzkPrWMZUrxql+Y+EqqtO2aWl
-	dpSxPChifLttkm90i7WQkWP8NL1KFr4=
+	bh=QmVbRiyGhWjgyRhmW9maPS5XeYQ8D0P7LNo1+euH3hI=;
+	b=kUPpmw0yKQA70gsRODhJFsj/8eUsG8GG0hrbpqX7y81r0C26/2h9EUbs0xUKId7cwep9Am
+	gireTmt9iiSmUipV/+ZpaGWiJ2siBWquCtwD2sAbj6VLLHfWhdZl4VbbcwKpZAGnf74FYh
+	QpyLJ4Yxuslqb5hRXglPLi6uk8bEdGY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
+	netdev@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v3 7/8] xen/evtchn: use smp barriers for user event ring
-Date: Fri, 19 Feb 2021 16:40:29 +0100
-Message-Id: <20210219154030.10892-8-jgross@suse.com>
+	Wei Liu <wei.liu@kernel.org>,
+	Paul Durrant <paul@xen.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>,
+	stable@vger.kernel.org,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 4/8] xen/netback: fix spurious event detection for common event case
+Date: Fri, 19 Feb 2021 16:40:26 +0100
+Message-Id: <20210219154030.10892-5-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210219154030.10892-1-jgross@suse.com>
 References: <20210219154030.10892-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The ring buffer for user events is local to the given kernel instance,
-so smp barriers are fine for ensuring consistency.
+In case of a common event for rx and tx queue the event should be
+regarded to be spurious if no rx and no tx requests are pending.
 
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Unfortunately the condition for testing that is wrong causing to
+decide a event being spurious if no rx OR no tx requests are
+pending.
+
+Fix that plus using local variables for rx/tx pending indicators in
+order to split function calls and if condition.
+
+Cc: stable@vger.kernel.org
+Fixes: 23025393dbeb3b ("xen/netback: use lateeoi irq binding")
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Reviewed-by: Wei Liu <wl@xen.org>
 ---
- drivers/xen/evtchn.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+V2:
+- new patch, fixing FreeBSD performance issue
+---
+ drivers/net/xen-netback/interface.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/xen/evtchn.c b/drivers/xen/evtchn.c
-index a7a85719a8c8..421382c73d88 100644
---- a/drivers/xen/evtchn.c
-+++ b/drivers/xen/evtchn.c
-@@ -173,7 +173,7 @@ static irqreturn_t evtchn_interrupt(int irq, void *data)
+diff --git a/drivers/net/xen-netback/interface.c b/drivers/net/xen-netback/interface.c
+index acb786d8b1d8..e02a4fbb74de 100644
+--- a/drivers/net/xen-netback/interface.c
++++ b/drivers/net/xen-netback/interface.c
+@@ -162,13 +162,15 @@ irqreturn_t xenvif_interrupt(int irq, void *dev_id)
+ {
+ 	struct xenvif_queue *queue = dev_id;
+ 	int old;
++	bool has_rx, has_tx;
  
- 	if ((u->ring_prod - u->ring_cons) < u->ring_size) {
- 		*evtchn_ring_entry(u, u->ring_prod) = evtchn->port;
--		wmb(); /* Ensure ring contents visible */
-+		smp_wmb(); /* Ensure ring contents visible */
- 		if (u->ring_cons == u->ring_prod++) {
- 			wake_up_interruptible(&u->evtchn_wait);
- 			kill_fasync(&u->evtchn_async_queue,
-@@ -245,7 +245,7 @@ static ssize_t evtchn_read(struct file *file, char __user *buf,
+ 	old = atomic_fetch_or(NETBK_COMMON_EOI, &queue->eoi_pending);
+ 	WARN(old, "Interrupt while EOI pending\n");
+ 
+-	/* Use bitwise or as we need to call both functions. */
+-	if ((!xenvif_handle_tx_interrupt(queue) |
+-	     !xenvif_handle_rx_interrupt(queue))) {
++	has_tx = xenvif_handle_tx_interrupt(queue);
++	has_rx = xenvif_handle_rx_interrupt(queue);
++
++	if (!has_rx && !has_tx) {
+ 		atomic_andnot(NETBK_COMMON_EOI, &queue->eoi_pending);
+ 		xen_irq_lateeoi(irq, XEN_EOI_FLAG_SPURIOUS);
  	}
- 
- 	rc = -EFAULT;
--	rmb(); /* Ensure that we see the port before we copy it. */
-+	smp_rmb(); /* Ensure that we see the port before we copy it. */
- 	if (copy_to_user(buf, evtchn_ring_entry(u, c), bytes1) ||
- 	    ((bytes2 != 0) &&
- 	     copy_to_user(&buf[bytes1], &u->ring[0], bytes2)))
 -- 
 2.26.2
 
