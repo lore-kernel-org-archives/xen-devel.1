@@ -2,59 +2,43 @@ Return-Path: <SRS0=trq0=HZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DATE_IN_PAST_03_06,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71481C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4156C433DB
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 03:08:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 36F1F614A7
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 36F1F614A7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0D90264E41
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 03:08:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0D90264E41
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.88524.166527 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.88553.166545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lENXt-0004il-5z; Tue, 23 Feb 2021 02:35:29 +0000
+	id 1lEO39-0008Fe-O8; Tue, 23 Feb 2021 03:07:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 88524.166527; Tue, 23 Feb 2021 02:35:29 +0000
+Received: by outflank-mailman (output) from mailman id 88553.166545; Tue, 23 Feb 2021 03:07:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lENXs-0004iV-VK; Tue, 23 Feb 2021 02:35:28 +0000
-Received: by outflank-mailman (input) for mailman id 88524;
- Tue, 23 Feb 2021 02:35:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lEO39-0008FX-Km; Tue, 23 Feb 2021 03:07:47 +0000
+Received: by outflank-mailman (input) for mailman id 88553;
+ Tue, 23 Feb 2021 03:07:46 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p6em=HZ=epam.com=prvs=268883478e=volodymyr_babchuk@srs-us1.protection.inumbo.net>)
- id 1lENXr-00046p-7i
- for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 02:35:27 +0000
-Received: from mx0b-0039f301.pphosted.com (unknown [148.163.137.242])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f95cf823-5a6f-4cae-aced-a78d80284f96;
- Tue, 23 Feb 2021 02:35:05 +0000 (UTC)
-Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
- by mx0b-0039f301.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 11N2QQxo004083; Tue, 23 Feb 2021 02:35:03 GMT
-Received: from eur01-db5-obe.outbound.protection.outlook.com
- (mail-db5eur01lp2052.outbound.protection.outlook.com [104.47.2.52])
- by mx0b-0039f301.pphosted.com with ESMTP id 36vqte83qr-6
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 23 Feb 2021 02:35:03 +0000
-Received: from AM0PR03MB3508.eurprd03.prod.outlook.com (2603:10a6:208:4f::23)
- by AM0PR0302MB3235.eurprd03.prod.outlook.com (2603:10a6:208:a::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.32; Tue, 23 Feb
- 2021 02:34:58 +0000
-Received: from AM0PR03MB3508.eurprd03.prod.outlook.com
- ([fe80::a9a4:6122:8de2:64cb]) by AM0PR03MB3508.eurprd03.prod.outlook.com
- ([fe80::a9a4:6122:8de2:64cb%6]) with mapi id 15.20.3846.042; Tue, 23 Feb 2021
- 02:34:58 +0000
+ <SRS0=2+Io=HZ=ozlabs.org=dgibson@srs-us1.protection.inumbo.net>)
+ id 1lEO37-0008FN-OK
+ for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 03:07:46 +0000
+Received: from ozlabs.org (unknown [203.11.71.1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b3df86e6-ed50-437b-9eca-e4f2df1545a8;
+ Tue, 23 Feb 2021 03:07:43 +0000 (UTC)
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 4Dl3rS5NJnz9sTD; Tue, 23 Feb 2021 14:07:36 +1100 (AEDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,134 +50,171 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f95cf823-5a6f-4cae-aced-a78d80284f96
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Box0ZW6cJts97vL+MA7FHGhTExkrOv+H0xYvOoLWoSAex+3v4NDWEvoaOGDmzmYtNlOmg/NUnpdBiDqKPBYeOUWcpQ/I0c0VlqMmtg3jg2MPTaIYi/26drW6h3/7UEcP+Vyvapdji3kNNbUty4rrcVgsm36UZ8gKvy4Lx2ZFLyj/gr7+4TAANZ5szhH6DKG1e3ciDXUN6zmh8paJrWBFSjM26CChOarY2WeE4ehbr21Uh0RJMjf8dIbjDGq6kOtc3+Iv288cRGxAyGsVprLYDGqk4sTTJ8O70yKAnXrNdXiHjEJIZbJCK0c1o0QRW/Zgo9LcZDA97nUn6rCtHcpH5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=77HrcIok9Ev7108K/qUYq6X0RM0POs+crZXjM8Ysf2c=;
- b=JXX58xLnl8fV4rPTTgIAgoZIAfRLCD6wBHiETxq5Ox6dRdwRpFg2xSEGSTKE01Ot9kjtMlCxBqiI0sy8r54/RCLEIO5rr+iYfbU0gRJwVdU+rKAQ8OZwrknDOXRmR8WKv3VyOntez6MQiGdGzZC+mTKYnyFQngeEl5nJHLf3lNc3zMXa+cyjDeR1EgalQvKLfk9cqsIQak4ZV2sIRLgvjn9rPna1J9dXyza2n3b0v3ElMoJkv74O+7+0nbsl/qxioORoR3UknCVUsftCjwv4sjYvZvPJdKb/tXSECe/9thod3op/Xhkh1uxZP0AkCVvLVasqHu4AN3qiNmbq2BEG2w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=77HrcIok9Ev7108K/qUYq6X0RM0POs+crZXjM8Ysf2c=;
- b=IF0hKvbI5CNPPsygUhpYpltnYRwGQbrvAa+erWdPtZvlZ6t1GkdVVBW8eO1T++ZtSWT3a4SwwYPWsyPamc71Da7iscM4C4+FZU/ofs6hHy1IiQU3TlYxHK6r97GL9Aoq64YQ+cEXtId9Y9/O/FtbnV6LpQfdsxMLPkDwQu2pf1g7Oorzm7y+n1uo+puZ+YLmFkCqoEJXw1N55t/F4mn6AS+e2xHu9L+XKBuLvO/M/OdJXM0zM5vf4vHCtxUIXIDxT1+/BGqwCvfnDO8LrcSdkWAQ7Uo8K3pzYUzXILciz6sFWhVWNkNjxGW71Z6kYUb4f3qMnZipnn2YY71lHf5RaA==
-From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        Stefano Stabellini
-	<sstabellini@kernel.org>,
-        Julien Grall <julien@xen.org>,
-        Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 09/10] arm: traps: try to preempt before leaving IRQ
- handler
-Thread-Topic: [RFC PATCH 09/10] arm: traps: try to preempt before leaving IRQ
- handler
-Thread-Index: AQHXCYx6aQhBTjfpeUOOmxfCufx61A==
-Date: Tue, 23 Feb 2021 02:34:58 +0000
-Message-ID: <20210223023428.757694-10-volodymyr_babchuk@epam.com>
-References: <20210223023428.757694-1-volodymyr_babchuk@epam.com>
-In-Reply-To: <20210223023428.757694-1-volodymyr_babchuk@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.30.1
-authentication-results: lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=none action=none
- header.from=epam.com;
-x-originating-ip: [176.36.48.175]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 5acda12d-2f42-4779-aa3c-08d8d7a39d19
-x-ms-traffictypediagnostic: AM0PR0302MB3235:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: 
- <AM0PR0302MB3235D1A9677897B3C93C0900E6809@AM0PR0302MB3235.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:6108;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- YUQaa/FnT3MvD/24iWZzbvd71oeHj86lSWMrFzCZUZKFMc+WkFxbz5LiHZWwwXJZ/ZWMmuv90yeEVuxYMPpXgw2yPME+CK2SV37fvtvr3vlXZ/+SztoFbzLHR027WjhT7lJpz/fLmH4ocWEOQd7+6gQg8PEEqiKUfF9l58Q9rb5Mwithg03V3vSGeULKwQHCkeOY6CF/V3JEy1owHmfgRlODPr9zdte2yUFGBwljTB2lUhC23JHwMwHPMQEhvSi2+ZJkWtbBvhgRIELR+mrtp7iSuyL9pKcDz7DG8MkAflYpIbpShbpyMTjHIkJah1yAH8chcDYMR9XxCPujDNzwb/fPANAkmM8lv08arCPQztNOoLw4R91f6y4/URsl/EGRLnhuTtTN1LVumzlrY88ydKTXTS8uSXW2loKlwEy1KRXSAYmE/jJYiUucwP/Uww0aMa6/pvJURuxjh9NFi2T7HTpAdBw5fXPA5D3j1B3LwjYIAqzW05BzlWQmHyXkewdrtowjkCk3aQay+Bf+Tc17EA==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB3508.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(136003)(39860400002)(346002)(376002)(316002)(6512007)(4744005)(8936002)(8676002)(86362001)(2906002)(4326008)(478600001)(6486002)(186003)(107886003)(54906003)(66556008)(55236004)(66446008)(66946007)(66476007)(64756008)(71200400001)(1076003)(2616005)(26005)(76116006)(6916009)(36756003)(5660300002)(6506007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata: 
- =?iso-8859-1?Q?dQHEm3IGAN922H5DYg775cTiCxL8zP+0cWNFPD/H/NR8hwbpTjdYY56BHa?=
- =?iso-8859-1?Q?3j8Rw1UsY6lMjPThHc/hnOSw8Ka9Kf0V6Lq2KLDXsrXNRwAdQghVcvkYLU?=
- =?iso-8859-1?Q?PMfekSKH2zzPVhl2yZCm9APKxekkFqfo2edz8Is7pG/hQraNm3VEy+xtLg?=
- =?iso-8859-1?Q?UIGuqVfcHaoql5wxNzPL3GbRRiEfG6c8e6cTNrNgRkYErnG5he3X9trDwQ?=
- =?iso-8859-1?Q?mEVtIwPfKExEWqk1szSDUNKWvwevy/Dx3ieRXHp+TK9r3AVnjx8Eo87vVy?=
- =?iso-8859-1?Q?3Ab5+8gdqjhRGlED69mqxgCuTC6HLBMfcW99BAYm3zC7BShYsgqqexPmhV?=
- =?iso-8859-1?Q?PN9TZ/Ona51NwkQQVsq9+7YJYEwJlVs9jsqPFZZl9FtCrMykO/EaFj5n5f?=
- =?iso-8859-1?Q?7qaypnU8IwnxxvrUmJOaxD2ElVNgInewvLYfqLfX/FO/Taj9WtA7mQtDvT?=
- =?iso-8859-1?Q?wY0X66jGjh4Qv+p7hZDGkY2WMLMFYIT+vlBwEBdWdnEEMK3/4JLq0YplAf?=
- =?iso-8859-1?Q?ALnNYpnwdBsdvNMhbv5T1oJro4kF4i0NDPJL+su5SJk62DDSr8yv9oiXS0?=
- =?iso-8859-1?Q?NGqafX+rggLGGRYhIftdIH82zl6EpjxM80bzBYnndPlh7FRbwYpMoQ4+K9?=
- =?iso-8859-1?Q?crJvlHNDpCCzHMvUvqUCXd+h9WnzlyhDhYN2kTr5akSFG7cPeGkCUT/NmQ?=
- =?iso-8859-1?Q?up6lgiQZfR63Q09flMC0E/5MNVvelkQ5A8en6YR67k8QlLvYsn80YY/2yw?=
- =?iso-8859-1?Q?p+Hi3uYxgK7GgcU049TyNVWZU/aPP+JZmckqUBf+S/AOzkRkoIclq2mzlT?=
- =?iso-8859-1?Q?NY1PunTy9qEyTwc5NJiiKQYeBXgtKqmg9jzO5ZBMJ/JRsNBzrjI0g6ch89?=
- =?iso-8859-1?Q?Knwb9gxPfLBwIG1/QHn7EeAUoNXDE6yVKIf1yBglA+TxriaObqxxm8gmnm?=
- =?iso-8859-1?Q?JiBuNcVpGgq+ucrdvh1n7UCzQrD5+QhuwzmKJIKYCtHjqKa087O5ke/vFh?=
- =?iso-8859-1?Q?e8lKvDy8SEy0/lFtnqfgXnegieMKcJUQWKLfTJuXoZZxVnDByMA8/kCnjP?=
- =?iso-8859-1?Q?nfmLUYceIW9jjtj4aWbQMztv8U3m3cu8zRubWdjq0NRCizah5ybvv4U0wW?=
- =?iso-8859-1?Q?TWCB97wdOd5owo5dW1fA3vyNBhhPVTNOepDVdp+4Y+//d32ZK0JXowM8x0?=
- =?iso-8859-1?Q?adiYUMb2RGqcRRR0aP9rNORZ7yLqfX2IJfyhQ6bll9IgUpBR3GdUyYIZCC?=
- =?iso-8859-1?Q?sJAaMAqUyD3fwFwS0zE5xleNHSyWS8xb12fyNeS3MTIgr07IPQ6dApQZ7d?=
- =?iso-8859-1?Q?bjjsRd+E8p9F5nDWoPC+N/qo1deDFooreiJ84HxpFTHsJZZHiNl4jFznAO?=
- =?iso-8859-1?Q?2pACeCIQlg?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: b3df86e6-ed50-437b-9eca-e4f2df1545a8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=gibson.dropbear.id.au; s=201602; t=1614049656;
+	bh=lB2qhVhVvCNwKnLEP9cyVRt4kgQq0RQXnIPlpk7dq2g=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=KFOWhcID0dtdiNAomEpDaPts1jSJ82Ytxndpt+d2goQHThz6ePo193JIsAGJiwYUo
+	 P86LbDcu1xNkh2QLXqPt/+rGLma2RlyYfZGg3c2dZ4Rw4FNWTs8HtM/WMOo8D/0hW2
+	 WkZKKs7NJTNCZUbJTm/cdhZcKb3yIEEd5MCTIJEI=
+Date: Tue, 23 Feb 2021 10:37:01 +1100
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Cornelia Huck <cohuck@redhat.com>
+Cc: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
+	qemu-devel@nongnu.org, Aurelien Jarno <aurelien@aurel32.net>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Anthony Perard <anthony.perard@citrix.com>, qemu-ppc@nongnu.org,
+	qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+	Huacai Chen <chenhuacai@kernel.org>, xen-devel@lists.xenproject.org,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
+	BALATON Zoltan <balaton@eik.bme.hu>,
+	Leif Lindholm <leif@nuviainc.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Radoslaw Biernacki <rad@semihalf.com>,
+	Alistair Francis <alistair@alistair23.me>,
+	Paul Durrant <paul@xen.org>, Eduardo Habkost <ehabkost@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Thomas Huth <thuth@redhat.com>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	=?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>,
+	Greg Kurz <groug@kaod.org>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	David Hildenbrand <david@redhat.com>,
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+	Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
+Subject: Re: [PATCH v2 01/11] accel/kvm: Check MachineClass kvm_type() return
+ value
+Message-ID: <YDRAHW1ds1eh0Lav@yekko.fritz.box>
+References: <20210219173847.2054123-1-philmd@redhat.com>
+ <20210219173847.2054123-2-philmd@redhat.com>
+ <20210222182405.3e6e9a6f.cohuck@redhat.com>
+ <bc37276d-74cc-22f0-fcc0-4ee5e62cf1df@redhat.com>
+ <20210222185044.23fccecc.cohuck@redhat.com>
+ <YDQ/Y1KozPSyNGjo@yekko.fritz.box>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB3508.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5acda12d-2f42-4779-aa3c-08d8d7a39d19
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Feb 2021 02:34:58.4833
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: hjdn6W8pYOxYaazx2wU5MY23yUziY37gihP4izXveGMMtMPo2hMl1+haK9f7i/gIValS3T1h4oayqGOsUMHiYRk36P8hdD4+AOw3Jtkh9Eg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0302MB3235
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 spamscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
- suspectscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
- mlxlogscore=730 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2102230018
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="iHciYgIJJ+RNzZ6R"
+Content-Disposition: inline
+In-Reply-To: <YDQ/Y1KozPSyNGjo@yekko.fritz.box>
 
-Now we can try to preempt code that is running in hypervisor code. To
-do so we need to try to invoke scheduler by calling try_preempt(),
-while not in nested IRQ handler.
 
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
----
- xen/arch/arm/traps.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+--iHciYgIJJ+RNzZ6R
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 6fa135050b..98a4fb4904 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -2260,7 +2260,14 @@ void do_trap_guest_serror(struct cpu_user_regs *regs=
-)
-=20
- void do_trap_irq(struct cpu_user_regs *regs)
- {
-+    static DEFINE_PER_CPU(unsigned int, irq_entry_cnt);
-+
-+    this_cpu(irq_entry_cnt)++;
-     gic_interrupt(regs, 0);
-+    this_cpu(irq_entry_cnt)--;
-+
-+    if (this_cpu(irq_entry_cnt) =3D=3D 0)
-+        try_preempt(true);
- }
-=20
- void do_trap_fiq(struct cpu_user_regs *regs)
+On Tue, Feb 23, 2021 at 10:33:55AM +1100, David Gibson wrote:
+> On Mon, Feb 22, 2021 at 06:50:44PM +0100, Cornelia Huck wrote:
+> > On Mon, 22 Feb 2021 18:41:07 +0100
+> > Philippe Mathieu-Daud=E9 <philmd@redhat.com> wrote:
+> >=20
+> > > On 2/22/21 6:24 PM, Cornelia Huck wrote:
+> > > > On Fri, 19 Feb 2021 18:38:37 +0100
+> > > > Philippe Mathieu-Daud=E9 <philmd@redhat.com> wrote:
+> > > >  =20
+> > > >> MachineClass::kvm_type() can return -1 on failure.
+> > > >> Document it, and add a check in kvm_init().
+> > > >>
+> > > >> Signed-off-by: Philippe Mathieu-Daud=E9 <philmd@redhat.com>
+> > > >> ---
+> > > >>  include/hw/boards.h | 3 ++-
+> > > >>  accel/kvm/kvm-all.c | 6 ++++++
+> > > >>  2 files changed, 8 insertions(+), 1 deletion(-)
+> > > >>
+> > > >> diff --git a/include/hw/boards.h b/include/hw/boards.h
+> > > >> index a46dfe5d1a6..68d3d10f6b0 100644
+> > > >> --- a/include/hw/boards.h
+> > > >> +++ b/include/hw/boards.h
+> > > >> @@ -127,7 +127,8 @@ typedef struct {
+> > > >>   *    implement and a stub device is required.
+> > > >>   * @kvm_type:
+> > > >>   *    Return the type of KVM corresponding to the kvm-type string=
+ option or
+> > > >> - *    computed based on other criteria such as the host kernel ca=
+pabilities.
+> > > >> + *    computed based on other criteria such as the host kernel ca=
+pabilities
+> > > >> + *    (which can't be negative), or -1 on error.
+> > > >>   * @numa_mem_supported:
+> > > >>   *    true if '--numa node.mem' option is supported and false oth=
+erwise
+> > > >>   * @smp_parse:
+> > > >> diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+> > > >> index 84c943fcdb2..b069938d881 100644
+> > > >> --- a/accel/kvm/kvm-all.c
+> > > >> +++ b/accel/kvm/kvm-all.c
+> > > >> @@ -2057,6 +2057,12 @@ static int kvm_init(MachineState *ms)
+> > > >>                                                              "kvm-=
+type",
+> > > >>                                                              &erro=
+r_abort);
+> > > >>          type =3D mc->kvm_type(ms, kvm_type);
+> > > >> +        if (type < 0) {
+> > > >> +            ret =3D -EINVAL;
+> > > >> +            fprintf(stderr, "Failed to detect kvm-type for machin=
+e '%s'\n",
+> > > >> +                    mc->name);
+> > > >> +            goto err;
+> > > >> +        }
+> > > >>      }
+> > > >> =20
+> > > >>      do { =20
+> > > >=20
+> > > > No objection to this patch; but I'm wondering why some non-pseries
+> > > > machines implement the kvm_type callback, when I see the kvm-type
+> > > > property only for pseries? Am I holding my git grep wrong? =20
+> > >=20
+> > > Can it be what David commented here?
+> > > https://www.mail-archive.com/qemu-devel@nongnu.org/msg784508.html
+> > >=20
+> >=20
+> > Ok, I might be confused about the other ppc machines; but I'm wondering
+> > about the kvm_type callback for mips and arm/virt. Maybe I'm just
+> > confused by the whole mechanism?
+>=20
+> For ppc at least, not sure about in general, pseries is the only
+> machine type that can possibly work under more than one KVM flavour
+> (HV or PR).  So, it's the only one where it's actually useful to be
+> able to configure this.
+
+Wait... I'm not sure that's true.  At least theoretically, some of the
+Book3E platforms could work with either PR or the Book3E specific
+KVM.  Not sure if KVM PR supports all the BookE instructions it would
+need to in practice.
+
+Possibly pseries is just the platform where there's been enough people
+interested in setting the KVM flavour so far.
+
 --=20
-2.29.2
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--iHciYgIJJ+RNzZ6R
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmA0QB0ACgkQbDjKyiDZ
+s5JQqBAA2HMmkpdhk4iK7XRStsDCbxBXZysxhFDBM0qLWfKEbOKqcRzv9BiIFbRb
+Ioh4AG1Vvt/cxatFBRkKOOIML8ICtAm/hhBBo3A/6gwi5ogzlRO54Jkr+GIWiRSH
+0iY9VKPGnsjTaf6SrE7GKxdYiPdGTR+6+2snq/f0EUjcz15LsWujsrB2Vyr/F/Oe
+KEYH+S+Pwot39s3mGSOIR0QYHsfN4+oYLPajZXdmcrGjBsTNM6s7+fDGb6oAC7Yg
+7cvOCbL6EAOJ1P3wmYySwu1rVM/vU6IFW7LUfZcP33JynhPYWWh7J84zCTBwNgJF
+IQvlIEQU3Qta+SieLJma+ZTwALAiYSDKSJ1n4vIEWQ21FoQLSbzP4oxqDMiTZha+
+LW5mzqPTQuF/MZg+B+dZtpCKWiLhkG7SWVB7Gb8hq7wat+AZONUJU/BaqQq2QVdN
+a7YiR95k/6rsUFyN0I8NYsrIIMbR6IlI+ivVCukvurwo3iP9m+4/UyM/gM3XRBNc
+ekYjyglLGj9pztFIC0JVBPodTG/8OSkAuvVDh2fVaefjfj0nckXJ9oxJDc1D6LH2
+vocCjxis9Dv2YgQgzem8pUAQ//Z1WGIiiyWD1gPDt/A3EDbvjxHPZK0w7ZOxKLYR
+cagHb4ijSlK6htqbMaqOJ3zM7FOgPwHvc0xLzUttBEolVXQia1E=
+=kPBL
+-----END PGP SIGNATURE-----
+
+--iHciYgIJJ+RNzZ6R--
 
