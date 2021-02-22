@@ -2,47 +2,47 @@ Return-Path: <SRS0=J8L2=HY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AB13C433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Feb 2021 11:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E3F2C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Feb 2021 11:23:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17F4B64D73
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Feb 2021 11:16:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17F4B64D73
+	by mail.kernel.org (Postfix) with ESMTPS id 08B7C60C3D
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Feb 2021 11:23:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08B7C60C3D
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.87973.165258 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.87978.165277 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lE9C3-0006mM-6Y; Mon, 22 Feb 2021 11:15:59 +0000
+	id 1lE9Ip-0007nQ-09; Mon, 22 Feb 2021 11:22:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 87973.165258; Mon, 22 Feb 2021 11:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 87978.165277; Mon, 22 Feb 2021 11:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lE9C3-0006mF-3S; Mon, 22 Feb 2021 11:15:59 +0000
-Received: by outflank-mailman (input) for mailman id 87973;
- Mon, 22 Feb 2021 11:15:57 +0000
+	id 1lE9Io-0007nJ-TI; Mon, 22 Feb 2021 11:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 87978;
+ Mon, 22 Feb 2021 11:22:57 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lE9C1-0006mA-O7
- for xen-devel@lists.xenproject.org; Mon, 22 Feb 2021 11:15:57 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lE9In-0007nE-L0
+ for xen-devel@lists.xenproject.org; Mon, 22 Feb 2021 11:22:57 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lE9C1-0006mB-KM
- for xen-devel@lists.xenproject.org; Mon, 22 Feb 2021 11:15:57 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lE9In-0006uF-KC
+ for xen-devel@lists.xenproject.org; Mon, 22 Feb 2021 11:22:57 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lE9C1-00067i-IW
- for xen-devel@lists.xenproject.org; Mon, 22 Feb 2021 11:15:57 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lE9In-0006nr-IU
+ for xen-devel@lists.xenproject.org; Mon, 22 Feb 2021 11:22:57 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1lE9By-0000ko-C3; Mon, 22 Feb 2021 11:15:54 +0000
+ id 1lE9Ih-0000nd-BY; Mon, 22 Feb 2021 11:22:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,31 +57,77 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=tvmEtbpqs6ufp1O+ExbeT6WdYpgoKsN6Fz0xeN6YX60=; b=uCBlGTzjF1mijs0mnnWx+87IcI
-	gonjUmIAkzBKH06biccndL5qbOyTk7Z4WoINv6BcoCsW15kMTs3GZRtTOpPzv7luEAHNZ4MVEKIht
-	4DE/bn/nQbZva1e60Stf48tu9HqvVYiwhmZiOsUTrsxMWQvdzL5c6NBFDqIRdX9Y7SVc=;
+	bh=h3LCZfk4f4WOJlw4VQ/w8mDw1s5Kve0vRma/C/jPGVU=; b=hwpfDDO6d9ztoNTCEWdwz6kNXy
+	ayMDbw+h/ckOR9/BE1RKa+cD09EEE3DodeSPs9q7FrWeluDfRSLXmML+DW/t/MVmlHjkjU54N3ihd
+	KM4bXUbzJgsOWYN//qh/QU8Pp6pnhrPD3UmUMYRfQB3LZG2fvemsHxpUWI8DRp2ijQfM=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24627.37482.140028.358793@mariner.uk.xensource.com>
-Date: Mon, 22 Feb 2021 11:15:54 +0000
-To: Tamas K Lengyel <tamas@tklengyel.com>
-Cc: xen-devel@lists.xenproject.org,
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Message-ID: <24627.37898.442930.913809@mariner.uk.xensource.com>
+Date: Mon, 22 Feb 2021 11:22:50 +0000
+To: Jan Beulich <jbeulich@suse.com>,
+    Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: George Dunlap <George.Dunlap@citrix.com>,
+    "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+    Kevin Tian <kevin.tian@intel.com>,
+    "Julien  Grall" <julien@xen.org>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
     Wei Liu <wl@xen.org>
-Subject: Re: [PATCH for-4.15] tools/misc/xen-vmtrace: use reset and enable
-In-Reply-To: <d63d274c46f964d89f791d5e5166971387c0e2e8.1613855006.git.tamas@tklengyel.com>
-References: <d63d274c46f964d89f791d5e5166971387c0e2e8.1613855006.git.tamas@tklengyel.com>
+Subject: Re: [PATCH for-4.15 v2] VMX: use a single, global APIC access page [and 1 more messages]
+In-Reply-To: <YDOC2ACTf0bmryG1@Air-de-Roger>,
+	<b5759150-e028-ac68-b8b5-8abcea02b5d9@suse.com>
+References: <a895386d-db14-2743-d8f9-09f9509a510a@suse.com>
+	<dcada8be-a91d-87f0-c579-30f3c7e3607e@suse.com>
+	<24623.61403.440917.434@mariner.uk.xensource.com>
+	<dfdd4440-3c37-8cb5-b7d3-a86b7c697b2e@suse.com>
+	<8B51B3E9-901A-491D-A54E-1F67641D03F0@citrix.com>
+	<b5759150-e028-ac68-b8b5-8abcea02b5d9@suse.com>
+	<YDOC2ACTf0bmryG1@Air-de-Roger>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Tamas K Lengyel writes ("[PATCH for-4.15] tools/misc/xen-vmtrace: use reset and enable"):
-> The expected behavior while using xen-vmtrace is to get a clean start, even if
-> the tool was used previously on the same VM.
+Roger Pau Monné writes ("Re: [PATCH for-4.15 v2] VMX: use a single, global APIC access page"):
+> On Mon, Feb 22, 2021 at 08:51:59AM +0100, Jan Beulich wrote:
+> > If anything, then the latter, but largely neither afaict - there's no
+> > change in this regard here at all as far as the guest could affect
+> > behavior, due to the page getting inserted as p2m_mmio_direct, and
+> > guest_remove_page() having
+> > 
+> >     if ( p2mt == p2m_mmio_direct )
+> >     {
+> >         rc = clear_mmio_p2m_entry(d, gmfn, mfn, PAGE_ORDER_4K);
+> >         goto out_put_gfn;
+> >     }
+> > 
+> > before any refcounting logic is reached. The removal of interaction
+> > is because now the page doesn't get associated with a domain (and
+> > hence doesn't become subject to refcounting) at all.
+> > 
+> > The risk of the change stems from going from using a per-domain
+> > page to using a single, system-wide one, which indeed was the subject
+> > of v1 discussion. In any event the consideration towards splitting
+> > the change would cover either concern. Perhaps I should really do so
+> > and submit as v3 ...
+> 
+> I agree it would be less risky to keep using a per-domain page, and
+> switch to a global one after the release. From the discussion in v1 I
+> don't think we where able to spot any specific issues apart from
+> guests possibly being able to access shared data in this page from
+> passthrough devices. I would at least feel more confortable with
+> that approach given the point we are in the release process.
 
-Release-Acked-by: Ian Jackson <iwj@xenproject.org>
-Reviewed-by: Ian Jackson <iwj@xenproject.org>
+Thanks to Roger and Jan for these comments which were very helpful to
+me.
 
-and pushed to staging.
+Jan Beulich writes ("Re: [PATCH for-4.15 v2] VMX: use a single, global APIC access page"):
+> Hmm, yes. The change wanted making anyway, for a long time imo. Hence
+> when putting together the patch I forgot to call out that as a side
+> effect it addresses a memory leak, as reported by Julien. With the
+> splitting of the two changes that'll be necessarily mentioned. I'm
+> about to submit v3.
 
+Great, I see it now.
+
+Thanks,
 Ian.
 
