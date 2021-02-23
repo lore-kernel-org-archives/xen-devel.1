@@ -2,43 +2,58 @@ Return-Path: <SRS0=trq0=HZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA7E0C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 01:24:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBB78C433E6
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 66C6764E5C
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 01:24:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66C6764E5C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id A05A5614A7
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A05A5614A7
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.88462.166350 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.88517.166443 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lEMQs-00053v-Ts; Tue, 23 Feb 2021 01:24:10 +0000
+	id 1lENXa-0004Bt-E4; Tue, 23 Feb 2021 02:35:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 88462.166350; Tue, 23 Feb 2021 01:24:10 +0000
+Received: by outflank-mailman (output) from mailman id 88517.166443; Tue, 23 Feb 2021 02:35:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lEMQs-00053o-Qj; Tue, 23 Feb 2021 01:24:10 +0000
-Received: by outflank-mailman (input) for mailman id 88462;
- Tue, 23 Feb 2021 01:24:09 +0000
+	id 1lENXa-0004Bi-9r; Tue, 23 Feb 2021 02:35:10 +0000
+Received: by outflank-mailman (input) for mailman id 88517;
+ Tue, 23 Feb 2021 02:35:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fjLX=HZ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1lEMQr-00053i-3a
- for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 01:24:09 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=p6em=HZ=epam.com=prvs=268883478e=volodymyr_babchuk@srs-us1.protection.inumbo.net>)
+ id 1lENXY-00046u-V5
+ for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 02:35:08 +0000
+Received: from mx0b-0039f301.pphosted.com (unknown [148.163.137.242])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ed33250b-c8fa-4049-a486-2df52977b981;
- Tue, 23 Feb 2021 01:24:08 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 78B0D64E5C;
- Tue, 23 Feb 2021 01:24:07 +0000 (UTC)
+ id 8a683b22-87a2-4aba-b212-f23bca93a2d3;
+ Tue, 23 Feb 2021 02:35:04 +0000 (UTC)
+Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 11N2QQxj004083; Tue, 23 Feb 2021 02:35:01 GMT
+Received: from eur01-db5-obe.outbound.protection.outlook.com
+ (mail-db5eur01lp2052.outbound.protection.outlook.com [104.47.2.52])
+ by mx0b-0039f301.pphosted.com with ESMTP id 36vqte83qr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 23 Feb 2021 02:35:01 +0000
+Received: from AM0PR03MB3508.eurprd03.prod.outlook.com (2603:10a6:208:4f::23)
+ by AM0PR0302MB3235.eurprd03.prod.outlook.com (2603:10a6:208:a::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.32; Tue, 23 Feb
+ 2021 02:34:56 +0000
+Received: from AM0PR03MB3508.eurprd03.prod.outlook.com
+ ([fe80::a9a4:6122:8de2:64cb]) by AM0PR03MB3508.eurprd03.prod.outlook.com
+ ([fe80::a9a4:6122:8de2:64cb%6]) with mapi id 15.20.3846.042; Tue, 23 Feb 2021
+ 02:34:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,300 +65,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ed33250b-c8fa-4049-a486-2df52977b981
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1614043447;
-	bh=6PNWPCOEa99vUhFegDYqJfYobxHhLaUuhFb7duvrvRY=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=SG2deOa1OGRPUnkYc6zlfuUCfn0cL/QDppHjz3no6EbAjL/30okf7k0sCs0UQYhQE
-	 twdpDXPF0/H/90ppQyPp2I5FBs79TTvzlvNlATTOBsNQ5fJoJSX+KKsfYnz5O7a2Iq
-	 OilkRUaWENNOlVwzQYsW1zla/9S/xNoNz34iKxWgcye1NbblK+Lasat+pirpYUlsA0
-	 I3nHCCz+fZeL/mMzA9vv7CUgF16pqXV8+KytNMfAi/Gi7oUD/R2DJKJcHiAESO4pxu
-	 DVBFVVUU+KbkBxxN2qfyQp/jlcDUhu31sIVImnrohx7en3qn9xkrBLo0+WoUw94/PE
-	 zUh5Ye1y1i/pQ==
-Date: Mon, 22 Feb 2021 17:24:06 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-cc: Julien Grall <julien@xen.org>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    "iwj@xenproject.org" <iwj@xenproject.org>, 
-    Julien Grall <jgrall@amazon.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, dfaggioli@suse.com, 
-    George.Dunlap@citrix.com
-Subject: Re: [PATCH for-4.15] xen/vgic: Implement write to ISPENDR in vGICv{2,
- 3}
-In-Reply-To: <F86904EB-91E9-475C-B60B-E08C5C9E76C3@arm.com>
-Message-ID: <alpine.DEB.2.21.2102221253390.3234@sstabellini-ThinkPad-T480s>
-References: <20210220140412.31610-1-julien@xen.org> <F86904EB-91E9-475C-B60B-E08C5C9E76C3@arm.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 8a683b22-87a2-4aba-b212-f23bca93a2d3
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SVd+3NStcB6wNxCQ0IH0EwlhcAgzILiv20hUtyCk2+R9ofOqYwZrGr9SU8d4fQhVSnZS3Kz3xuQfa2b7cgQEGWZmioNsBkW3ZXT0g3Alk+FO+yO3FB+2+jfcAoZZ/KPv8mC4zIx4dL0rCzUjqiQ2WinKheKOHzlQIeEX/8NDCobTBL+RT0juOXHHdD3AKr9N011+WWyXX3Y987QJHTMZxnNWwERliYQjk0NOCDmYuwdLEmz38mw3kVEB0ixl5hkXHvopXvkyXcnRlShMIamFVmOsVYDZUVpfEi0zjmP4LFN5/cDT/V/jwKqwICvx8toVQvPcznKi4WwrkR3Fd6iUwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kphJiUy2kLhF2NKPvP/qP8YU2nqCVKOjptsGkk/vL84=;
+ b=XW+boCnlFJzSuQpKzcrNOYYLys/jCIuqGUgaZy4WW+zx1AdojBFEenV5kiYsP0N5RbBbbWKWL40inH5ycgSMLVE/k/lnj+rLC5Y8BzBj1cOsj/a7zPkmG8mAATOX/bvN0LpRT1h2f03R167ZBcNns29KTzCUWJLh7p1So4KmqAfsq/Uu6euJcWU2Mzw5NHYPs9vEztkf6pKpM6LJuXjbv2lTKtMQ0VqvwidW917BRbCb3K7aQ5jCvbYv58525gh8JKvG4rQsAepjfDwRtkjGDfNyOh3//VMaX6h1QnwKumH3dEoJtGuVgNoTrJDO0L5+7b8U5y94OL3+daqFzpvjPg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kphJiUy2kLhF2NKPvP/qP8YU2nqCVKOjptsGkk/vL84=;
+ b=cS7iAANsZBsM5KfGWi9tBf0WaghKY1l69+bd9AwzqOFZC8/mjxI4eLb6qAAlCAtQOl9cUDqtXcK/jIHSlAEyOraBA4CTdD9UY3dUqOgTaZkvojaI5luFl5Fu8XAN0q8EaHbVSPNyffQbNe1++j5pz9pwNoxFKNWxqItigtbgbMOwpTdPRiESHL1KZCd3joBGe9BuhlDhKfXCdm/NS9vfyxqKZrVsN/2o4ECqj7y8cJu0nkN0ifqLbfaBPS26VmZbBjoX/f/R19/aWso1tqXTLncU826Vj+cjjC3E1ni92f0LLHL5533RzJAa7s3twZ1ttLvNx+R7ErhL8k/SrJOvUA==
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+        Andrew Cooper
+	<andrew.cooper3@citrix.com>,
+        George Dunlap <george.dunlap@citrix.com>,
+        Ian
+ Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
+        Julien Grall
+	<julien@xen.org>,
+        Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>
+Subject: [RFC PATCH 04/10] preempt: use atomic_t to for preempt_count
+Thread-Topic: [RFC PATCH 04/10] preempt: use atomic_t to for preempt_count
+Thread-Index: AQHXCYx5c7ga2XxajUiE7SdBv/dfFA==
+Date: Tue, 23 Feb 2021 02:34:56 +0000
+Message-ID: <20210223023428.757694-5-volodymyr_babchuk@epam.com>
+References: <20210223023428.757694-1-volodymyr_babchuk@epam.com>
+In-Reply-To: <20210223023428.757694-1-volodymyr_babchuk@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.30.1
+authentication-results: lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=none action=none
+ header.from=epam.com;
+x-originating-ip: [176.36.48.175]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: cf007190-437a-4c26-e6ff-08d8d7a39bde
+x-ms-traffictypediagnostic: AM0PR0302MB3235:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: 
+ <AM0PR0302MB3235E87F167ECCF1FBB4A6C4E6809@AM0PR0302MB3235.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:1775;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ i97tdpblv3xqToaxF4CiMxMl92IE6SDpDlUbnNlP0+3TClGIpkZHgucRTZzzvsp5q9WVvCSxyQg1TH3CFNnmLDi7H/CdQttVLj8yCG5kHnQeYF5YIMK8Ci+6DNdUQu48PCALYMKpx2q4Qx/rX2nFh8bmv6SxLc4+7dLAy5ju8163nDqDsZSsW/riLPEQdp1Xet24SdKUBweSWFZsBVtSl1GyQh0eqd6/AUDPbusq9lxXiQaKSglgMUO3VkbekY5jT9UM5TrhqjcP9jV/2+dd2ndzKpz+bZDol+ShSHvmX8sh6b5pRfS/wI4hbbBbFeO62iSkAg/8gwm13SMPXHmXtAB0S2CysseMuOYt55WA8rMQLhP1rg7wb8BPEXJlhpW98d+CyJt8bEmRPiZ3/eTGcQSeC7GGfqF/wJI7gRX+Y7ADe3lgy5mjjYPpBipiZQeZRT25Mb/N4ai/GJdAXBHD28gMDUJafqVu4JUrkIJIZujiztnq9J1lFkEwPZ744yRQs5uTdnXxz/KkmyLQX9L1Cg==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB3508.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(136003)(39860400002)(346002)(376002)(316002)(6512007)(8936002)(8676002)(86362001)(2906002)(4326008)(478600001)(6486002)(186003)(54906003)(66556008)(55236004)(83380400001)(66446008)(66946007)(66476007)(64756008)(71200400001)(1076003)(2616005)(26005)(76116006)(6916009)(36756003)(5660300002)(6506007);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: 
+ =?iso-8859-1?Q?mXs0iPRk3o5ZuDGxCOtGxNS0OtlKJFdIKJUWPc9YMSuW+tmXP3Gd6T8ht+?=
+ =?iso-8859-1?Q?Xi1aKvFLC4JwL/Ay6GSMtH3GT+hCVamxgXhL2oKhkOey5akZZqoQQlBq7/?=
+ =?iso-8859-1?Q?oQQU2rUKNsPYKFZWoku0WFEFDQ3P4YUDrU2fQhRubw5Vt5MWNARIknrNjP?=
+ =?iso-8859-1?Q?kjcrzPd8Kd/5kd4PUfJv7LXlEuFMW3HsACRTv4NETei3DPbtH42WTapidp?=
+ =?iso-8859-1?Q?v/7hGxbq5fNkd9cMdHlPChcEacrdd1SYF+QM5lk5mhpAhXdJSTyOzZrr3N?=
+ =?iso-8859-1?Q?eR/8gHnfvR5aA6+/RZE+TKkEszOyeefZEkk1mpo9rYN4yLLh2ZdFVIFZ2O?=
+ =?iso-8859-1?Q?sSsXgvDai6jEWBkfAsAKMo2s3RSya1443g4GDUl0xecB9tq4ShrQ2u/QER?=
+ =?iso-8859-1?Q?XKGVs2qilD74/ADumANBKytIyQMRonhPrNfHqDyQb/lkFrMZCJN5RH7ldL?=
+ =?iso-8859-1?Q?37H7cgLCe09zcFL6mHbQXH+F/bfxJOJFTXcR3E54gP2GLxY++fnMInCrUo?=
+ =?iso-8859-1?Q?6LYrEvlJGNK25nfeQKPI9LY1cLUCg0aJddX7U9K0B6a+BS5ip+hoEzEqsh?=
+ =?iso-8859-1?Q?WygqS3mr7uodOvWLHo4b2b86BkSn6hXu+Rw3fvh6X2hv2B3bt7BMOSh/iK?=
+ =?iso-8859-1?Q?0KY/vO4ujQbYyU/J8icywAhdzPK3U6t3I1K2d2sgs/p6gUxOPXRTshyxPD?=
+ =?iso-8859-1?Q?1/yh04YtmX4MiXJhRH7fRlC/ZhjDt5tmq5I99CbsAYoQpYGe5FStgB/3Kd?=
+ =?iso-8859-1?Q?+DpZq0T5DsrZFiG8NFUjGCq51HpweKa7HWXGotVpQ7QUAg1FHyVdjyl3Vu?=
+ =?iso-8859-1?Q?hTyonkDlAsgINfOiVastHvrpBHaxQeGBdcPgijVc9pVtHsoaIUeFriBrtv?=
+ =?iso-8859-1?Q?7d3TnKR+EuVmHG1BzhXyPZNmr9Wkz5ZsAgUr2Oq/9NeqY9IpaZk5h/pRf7?=
+ =?iso-8859-1?Q?SoLiIsBQKqbMb0L8q5gJOlxDObc3uJiM4g8+7sVdWHMD9NwC9f2QahCvOz?=
+ =?iso-8859-1?Q?kA277mrqI+zQafvI6Vz6yl0hUeEOOnHKdywH9JEeJOzz2RPxwUBa3ETpI1?=
+ =?iso-8859-1?Q?8oNJ4DVy2T86hbnjwKB60qEqCcztDXZq7djeBzE3JNZ44UlxyPfLo6wMBZ?=
+ =?iso-8859-1?Q?HggWRe4oK3ao48ddRzA/1SB7hw0kDHwgzkH66Y3BNSdDkOlnqv3TSXd6mp?=
+ =?iso-8859-1?Q?OU9pGiZ3hrZDtilIw0hXRzRh0+JRY42q2urNYwK5C+roeRjxMx+Pwo/QTJ?=
+ =?iso-8859-1?Q?Q5RwAc2AxYhgjCigw6Qv3LtF/8jxNPlmSd4iPdrApxPK7BV2Vu3RRc3L/i?=
+ =?iso-8859-1?Q?F2fDb+BIPdgaSCYaeahkTVmRmTHY86b0fG+jbkQWlqJ+/ko61FwZRzOyK9?=
+ =?iso-8859-1?Q?qKFImEG0Uf?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB3508.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf007190-437a-4c26-e6ff-08d8d7a39bde
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Feb 2021 02:34:56.6783
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: EorqOHZR/msedpiNMbRu3jdJd0YOAMW6NjB1dbgqrSDqWRJrnlgzFlxdRSh3FmOslK1Tozvs/KQsQaiuoyv3X8Cz6RMih9HsSVZpVvMyk3g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0302MB3235
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 spamscore=0
+ lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
+ suspectscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
+ mlxlogscore=775 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2102230018
 
-On Mon, 22 Feb 2021, Bertrand Marquis wrote:
-> Hi Julien,
-> 
-> > On 20 Feb 2021, at 14:04, Julien Grall <julien@xen.org> wrote:
-> > 
-> > From: Julien Grall <jgrall@amazon.com>
-> > 
-> > Currently, Xen will send a data abort to a guest trying to write to the
-> > ISPENDR.
-> > 
-> > Unfortunately, recent version of Linux (at least 5.9+) will start
-> > writing to the register if the interrupt needs to be re-triggered
-> > (see the callback irq_retrigger). This can happen when a driver (such as
-> > the xgbe network driver on AMD Seattle) re-enable an interrupt:
-> > 
-> > (XEN) d0v0: vGICD: unhandled word write 0x00000004000000 to ISPENDR44
-> > [...]
-> > [   25.635837] Unhandled fault at 0xffff80001000522c
-> > [...]
-> > [   25.818716]  gic_retrigger+0x2c/0x38
-> > [   25.822361]  irq_startup+0x78/0x138
-> > [   25.825920]  __enable_irq+0x70/0x80
-> > [   25.829478]  enable_irq+0x50/0xa0
-> > [   25.832864]  xgbe_one_poll+0xc8/0xd8
-> > [   25.836509]  net_rx_action+0x110/0x3a8
-> > [   25.840328]  __do_softirq+0x124/0x288
-> > [   25.844061]  irq_exit+0xe0/0xf0
-> > [   25.847272]  __handle_domain_irq+0x68/0xc0
-> > [   25.851442]  gic_handle_irq+0xa8/0xe0
-> > [   25.855171]  el1_irq+0xb0/0x180
-> > [   25.858383]  arch_cpu_idle+0x18/0x28
-> > [   25.862028]  default_idle_call+0x24/0x5c
-> > [   25.866021]  do_idle+0x204/0x278
-> > [   25.869319]  cpu_startup_entry+0x24/0x68
-> > [   25.873313]  rest_init+0xd4/0xe4
-> > [   25.876611]  arch_call_rest_init+0x10/0x1c
-> > [   25.880777]  start_kernel+0x5b8/0x5ec
-> > 
-> > As a consequence, the OS may become unusable.
-> > 
-> > Implementing the write part of ISPENDR is somewhat easy. For
-> > virtual interrupt, we only need to inject the interrupt again.
-> > 
-> > For physical interrupt, we need to be more careful as the de-activation
-> > of the virtual interrupt will be propagated to the physical distributor.
-> > For simplicity, the physical interrupt will be set pending so the
-> > workflow will not differ from a "real" interrupt.
-> > 
-> > Longer term, we could possible directly activate the physical interrupt
-> > and avoid taking an exception to inject the interrupt to the domain.
-> > (This is the approach taken by the new vGIC based on KVM).
-> > 
-> > Signed-off-by: Julien Grall <jgrall@amazon.com>
+This ensures that preempt_count will be accounted correctly
+during in-hypevisor context switches.
 
-Thanks for the patch!
+Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+---
+ xen/common/preempt.c      | 6 +++---
+ xen/include/xen/preempt.h | 9 ++++-----
+ 2 files changed, 7 insertions(+), 8 deletions(-)
 
-
-> This is something which will not be done by a guest very often so I think your
-> implementation actually makes it simpler and reduce possibilities of race conditions
-> so I am not even sure that the XXX comment is needed.
-> But i am ok with it being in or not so:
-> 
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> 
-> I did some tests by manually generating interrupts and I can confirm that this
-> works as expected.
-
-And thank you for testing.
-
-Yes it is definitely true that it shouldn't be done by the guest often
-so it is not worth optimizing. For example, if somebody is trying to
-measure latency using this, they are really barking at the wrong tree.
-And I like the simplicity of this implementation; the patch looks good.
-
-
-So I am not too worries about the cost of the roundtrip. But should we
-be worried about the guest continuously creating events for itself in a
-loop and potentially "kidnapping" a pcpu by looping around ISPENDR? I am
-talking about cases where 1 pcpu is shared between 2 vcpus of different
-guests. I thought we should have a brief conversation about it before
-allowing it.
-
-The consequence of this patch is that a guest can cause vcpu_unblock(v),
-hence vcpu_wake(v), to be called for its own vcpu, which basically
-always changes v to RUNSTATE_runnable. However, that alone shouldn't
-allow v to always come up ahead of any other vcpus in the queue, right?
-It should be safe. I just wanted a second opinion on this :-)
-
-It was possible to trigger interrupts for your own vcpus even before, but
-now the code path is going to be direct for virtual interrupts.
-
-
-
-> > ---
-> > 
-> > Note that this doesn't touch the read part for I{S,C}PENDR nor the write
-> > part of ICPENDR because they are more complex to implement.
-> > 
-> > For physical interrupt, I didn't implement the same solution as KVM because
-> > I couldn't convince myself this could be done race free for physical
-> > interrupt.
-> > 
-> > This was tested using the IRQ debugfs (CONFIG_GENERIC_IRQ_DEBUGFS=y)
-> > which allows to retrigger an interrupt:
-> > 
-> > 42sh> echo trigger > /sys/kernel/debug/irq/irqs/<irq>
-> > 
-> > This patch is candidate for 4.15 and also backporting to older trees.
-> > Without this patch, recent Linux version may not boot on Xen on some
-> > platforms (such as AMD Seattle used in OssTest).
-> > 
-> > The patch is self-contained to implementing a single set of registers.
-> > So this would not introduce any risk on platforms where OSes don't use
-> > those registers.
-> > 
-> > For the other setup (e.g. AMD Seattle + Linux 5.9+), it cannot be worse
-> > than today.
-> > 
-> > So therefore, I would consider the risk limited.
-> > ---
-> > xen/arch/arm/vgic-v2.c     | 10 ++++----
-> > xen/arch/arm/vgic-v3.c     | 18 ++++++---------
-> > xen/arch/arm/vgic.c        | 47 ++++++++++++++++++++++++++++++++++++++
-> > xen/include/asm-arm/vgic.h |  2 ++
-> > 4 files changed, 62 insertions(+), 15 deletions(-)
-> > 
-> > diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-> > index 64b141fea586..b2da886adc18 100644
-> > --- a/xen/arch/arm/vgic-v2.c
-> > +++ b/xen/arch/arm/vgic-v2.c
-> > @@ -472,10 +472,12 @@ static int vgic_v2_distr_mmio_write(struct vcpu *v, mmio_info_t *info,
-> > 
-> >     case VRANGE32(GICD_ISPENDR, GICD_ISPENDRN):
-> >         if ( dabt.size != DABT_WORD ) goto bad_width;
-> > -        printk(XENLOG_G_ERR
-> > -               "%pv: vGICD: unhandled word write %#"PRIregister" to ISPENDR%d\n",
-> > -               v, r, gicd_reg - GICD_ISPENDR);
-> > -        return 0;
-> > +        rank = vgic_rank_offset(v, 1, gicd_reg - GICD_ISPENDR, DABT_WORD);
-> > +        if ( rank == NULL ) goto write_ignore;
-> > +
-> > +        vgic_set_irqs_pending(v, r, rank->index);
-> > +
-> > +        return 1;
-> > 
-> >     case VRANGE32(GICD_ICPENDR, GICD_ICPENDRN):
-> >         if ( dabt.size != DABT_WORD ) goto bad_width;
-> > diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
-> > index fd8cfc156d0c..613f37abab5e 100644
-> > --- a/xen/arch/arm/vgic-v3.c
-> > +++ b/xen/arch/arm/vgic-v3.c
-> > @@ -808,10 +808,12 @@ static int __vgic_v3_distr_common_mmio_write(const char *name, struct vcpu *v,
-> > 
-> >     case VRANGE32(GICD_ISPENDR, GICD_ISPENDRN):
-> >         if ( dabt.size != DABT_WORD ) goto bad_width;
-> > -        printk(XENLOG_G_ERR
-> > -               "%pv: %s: unhandled word write %#"PRIregister" to ISPENDR%d\n",
-> > -               v, name, r, reg - GICD_ISPENDR);
-> > -        return 0;
-> > +        rank = vgic_rank_offset(v, 1, reg - GICD_ISPENDR, DABT_WORD);
-> > +        if ( rank == NULL ) goto write_ignore;
-> > +
-> > +        vgic_set_irqs_pending(v, r, rank->index);
-> > +
-> > +        return 1;
-> > 
-> >     case VRANGE32(GICD_ICPENDR, GICD_ICPENDRN):
-> >         if ( dabt.size != DABT_WORD ) goto bad_width;
-> > @@ -975,6 +977,7 @@ static int vgic_v3_rdistr_sgi_mmio_write(struct vcpu *v, mmio_info_t *info,
-> >     case VREG32(GICR_ICACTIVER0):
-> >     case VREG32(GICR_ICFGR1):
-> >     case VRANGE32(GICR_IPRIORITYR0, GICR_IPRIORITYR7):
-> > +    case VREG32(GICR_ISPENDR0):
-> >          /*
-> >           * Above registers offset are common with GICD.
-> >           * So handle common with GICD handling
-> > @@ -982,13 +985,6 @@ static int vgic_v3_rdistr_sgi_mmio_write(struct vcpu *v, mmio_info_t *info,
-> >         return __vgic_v3_distr_common_mmio_write("vGICR: SGI", v,
-> >                                                  info, gicr_reg, r);
-> > 
-> > -    case VREG32(GICR_ISPENDR0):
-> > -        if ( dabt.size != DABT_WORD ) goto bad_width;
-> > -        printk(XENLOG_G_ERR
-> > -               "%pv: vGICR: SGI: unhandled word write %#"PRIregister" to ISPENDR0\n",
-> > -               v, r);
-> > -        return 0;
-> > -
-> >     case VREG32(GICR_ICPENDR0):
-> >         if ( dabt.size != DABT_WORD ) goto bad_width;
-> >         printk(XENLOG_G_ERR
-> > diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-> > index 82f524a35c9e..8f9400a51960 100644
-> > --- a/xen/arch/arm/vgic.c
-> > +++ b/xen/arch/arm/vgic.c
-> > @@ -423,6 +423,53 @@ void vgic_enable_irqs(struct vcpu *v, uint32_t r, int n)
-> >     }
-> > }
-> > 
-> > +void vgic_set_irqs_pending(struct vcpu *v, uint32_t r, unsigned int rank)
-> > +{
-> > +    const unsigned long mask = r;
-> > +    unsigned int i;
-> > +    /* The first rank is always per-vCPU */
-> > +    bool private = rank == 0;
-> > +
-> > +    /* LPIs will never be set pending via this function */
-> > +    ASSERT(!is_lpi(32 * rank + 31));
-> > +
-> > +    for_each_set_bit( i, &mask, 32 )
-> > +    {
-> > +        unsigned int irq = i + 32 * rank;
-> > +
-> > +        if ( !private )
-> > +        {
-> > +            struct pending_irq *p = spi_to_pending(v->domain, irq);
-> > +
-> > +            /*
-> > +             * When the domain sets the pending state for a HW interrupt on
-> > +             * the virtual distributor, we set the pending state on the
-> > +             * physical distributor.
-> > +             *
-> > +             * XXX: Investigate whether we would be able to set the
-> > +             * physical interrupt active and save an interruption. (This
-> > +             * is what the new vGIC does).
-> > +             */
-> > +            if ( p->desc != NULL )
-> > +            {
-> > +                unsigned long flags;
-> > +
-> > +                spin_lock_irqsave(&p->desc->lock, flags);
-> > +                gic_set_pending_state(p->desc, true);
-> > +                spin_unlock_irqrestore(&p->desc->lock, flags);
-> > +                continue;
-> > +            }
-> > +        }
-> > +
-> > +        /*
-> > +         * If the interrupt is per-vCPU, then we want to inject the vIRQ
-> > +         * to v, otherwise we should let the function figuring out the
-> > +         * correct vCPU.
-> > +         */
-> > +        vgic_inject_irq(v->domain, private ? v : NULL, irq, true);
-> > +    }
-> > +}
-> > +
-> > bool vgic_to_sgi(struct vcpu *v, register_t sgir, enum gic_sgi_mode irqmode,
-> >                  int virq, const struct sgi_target *target)
-> > {
-> > diff --git a/xen/include/asm-arm/vgic.h b/xen/include/asm-arm/vgic.h
-> > index ce1e3c4bbdac..62c2ae538db2 100644
-> > --- a/xen/include/asm-arm/vgic.h
-> > +++ b/xen/include/asm-arm/vgic.h
-> > @@ -288,6 +288,8 @@ extern struct vgic_irq_rank *vgic_rank_offset(struct vcpu *v, int b, int n, int
-> > extern struct vgic_irq_rank *vgic_rank_irq(struct vcpu *v, unsigned int irq);
-> > extern void vgic_disable_irqs(struct vcpu *v, uint32_t r, int n);
-> > extern void vgic_enable_irqs(struct vcpu *v, uint32_t r, int n);
-> > +extern void vgic_set_irqs_pending(struct vcpu *v, uint32_t r,
-> > +                                  unsigned int rank);
-> > extern void register_vgic_ops(struct domain *d, const struct vgic_ops *ops);
-> > int vgic_v2_init(struct domain *d, int *mmio_count);
-> > int vgic_v3_init(struct domain *d, int *mmio_count);
-> > -- 
-> > 2.17.1
-> > 
-> 
+diff --git a/xen/common/preempt.c b/xen/common/preempt.c
+index 3b4178fd44..ad61c8419a 100644
+--- a/xen/common/preempt.c
++++ b/xen/common/preempt.c
+@@ -23,17 +23,17 @@
+ #include <xen/irq.h>
+ #include <asm/system.h>
+=20
+-DEFINE_PER_CPU(unsigned int, __preempt_count);
++DEFINE_PER_CPU(atomic_t, __preempt_count);
+=20
+ bool_t in_atomic(void)
+ {
+-    return preempt_count() || in_irq() || !local_irq_is_enabled();
++    return atomic_read(&preempt_count()) || in_irq() || local_irq_is_enabl=
+ed();
+ }
+=20
+ #ifndef NDEBUG
+ void ASSERT_NOT_IN_ATOMIC(void)
+ {
+-    ASSERT(!preempt_count());
++    ASSERT(!atomic_read(&preempt_count()));
+     ASSERT(!in_irq());
+     ASSERT(local_irq_is_enabled());
+ }
+diff --git a/xen/include/xen/preempt.h b/xen/include/xen/preempt.h
+index bef83135a1..e217900d6e 100644
+--- a/xen/include/xen/preempt.h
++++ b/xen/include/xen/preempt.h
+@@ -9,21 +9,20 @@
+ #ifndef __XEN_PREEMPT_H__
+ #define __XEN_PREEMPT_H__
+=20
++#include <asm/atomic.h>
+ #include <xen/types.h>
+ #include <xen/percpu.h>
+=20
+-DECLARE_PER_CPU(unsigned int, __preempt_count);
++DECLARE_PER_CPU(atomic_t, __preempt_count);
+=20
+ #define preempt_count() (this_cpu(__preempt_count))
+=20
+ #define preempt_disable() do {                  \
+-    preempt_count()++;                          \
+-    barrier();                                  \
++    atomic_inc(&preempt_count());               \
+ } while (0)
+=20
+ #define preempt_enable() do {                   \
+-    barrier();                                  \
+-    preempt_count()--;                          \
++    atomic_dec(&preempt_count());               \
+ } while (0)
+=20
+ bool_t in_atomic(void);
+--=20
+2.29.2
 
