@@ -2,47 +2,48 @@ Return-Path: <SRS0=trq0=HZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54574C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 18:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 946D7C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 18:11:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 09AEB6023B
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 18:04:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09AEB6023B
+	by mail.kernel.org (Postfix) with ESMTPS id 533ED64DD3
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 18:11:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 533ED64DD3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89048.167473 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89056.167484 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lEc2N-0001r1-LA; Tue, 23 Feb 2021 18:03:55 +0000
+	id 1lEc97-0002vN-DF; Tue, 23 Feb 2021 18:10:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89048.167473; Tue, 23 Feb 2021 18:03:55 +0000
+Received: by outflank-mailman (output) from mailman id 89056.167484; Tue, 23 Feb 2021 18:10:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lEc2N-0001qt-H1; Tue, 23 Feb 2021 18:03:55 +0000
-Received: by outflank-mailman (input) for mailman id 89048;
- Tue, 23 Feb 2021 18:03:54 +0000
+	id 1lEc97-0002vG-AJ; Tue, 23 Feb 2021 18:10:53 +0000
+Received: by outflank-mailman (input) for mailman id 89056;
+ Tue, 23 Feb 2021 18:10:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=pXyS=HZ=gmail.com=bobbyeshleman@srs-us1.protection.inumbo.net>)
- id 1lEc2M-0001qb-IJ
- for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 18:03:54 +0000
-Received: from mail-pj1-x1032.google.com (unknown [2607:f8b0:4864:20::1032])
+ id 1lEc96-0002vB-0Y
+ for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 18:10:52 +0000
+Received: from mail-pj1-x1034.google.com (unknown [2607:f8b0:4864:20::1034])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id af6da4fb-1eae-4e2d-97b6-7c724af0887c;
- Tue, 23 Feb 2021 18:03:53 +0000 (UTC)
-Received: by mail-pj1-x1032.google.com with SMTP id o22so1946556pjs.1
- for <xen-devel@lists.xenproject.org>; Tue, 23 Feb 2021 10:03:53 -0800 (PST)
+ id c62899d2-6773-4d9e-96d4-ce2582f2dd9b;
+ Tue, 23 Feb 2021 18:10:51 +0000 (UTC)
+Received: by mail-pj1-x1034.google.com with SMTP id e9so2515950pjj.0
+ for <xen-devel@lists.xenproject.org>; Tue, 23 Feb 2021 10:10:51 -0800 (PST)
 Received: from ?IPv6:2601:1c2:4f80:d230::5? ([2601:1c2:4f80:d230::5])
- by smtp.gmail.com with ESMTPSA id c6sm7830377pfc.94.2021.02.23.10.03.47
+ by smtp.gmail.com with ESMTPSA id i10sm15767282pfq.95.2021.02.23.10.10.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 Feb 2021 10:03:51 -0800 (PST)
+ Tue, 23 Feb 2021 10:10:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,72 +55,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af6da4fb-1eae-4e2d-97b6-7c724af0887c
+X-Inumbo-ID: c62899d2-6773-4d9e-96d4-ce2582f2dd9b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:organization:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=Ge4IIFdlQFH1Xek33XcsWVlIeV6+yCVvViifgE9+p+s=;
-        b=gILul5JaCqaLqKRU5o6y/z57kUxYVVmiTpx4ZHYx+UxfDhPbPuCVtLByCLstm7ikb9
-         8bxFAL3e5Mj0bp/DGJNAPzOFzbnZzzDyhA1xGT45EMtXDF4rjc6mPDKGVf0dbjmoANRC
-         7+A6eq3yJDMv/3MsGBsbI6w4b7z0jsiq4eML45T57TTpwi4rssI7XMwjNvGFi+vSq2qt
-         kzBpvCh9gOmGgzl8uNw0NYEGXM8AlFtQxTjwewDiGwhvdBeUy2Xxdlu/uMVkBLAxcs7u
-         /7Oj54FMxycbOmZBilDRb9boPSQtNaewCBc7wmF0kiDe3F0MNGXgNU4CKrxk0WnaikjF
-         Sohg==
+        bh=Ryf0krA1u79pVJENjelYCbZuFAvQJ85HPmI2Z5SonOg=;
+        b=NaU6a9d/zvFpR6cKQKM0Me+30l1VTKt99yxliuIJL9bmZqO05VF7NJJUn6/UeMRtVY
+         9/b8zM5S1Iv+mi4mDNyZbLpu+5YsTCJVjvPYRRfEX7MQ8jNLmIcAz/0XRUceDneU7GTj
+         TvR7c4haXRM9AecdyTeRF2bKrLZcF+G90ZfP0zRQZ0t7q8YDAERUZTvUBDhxXchzwUML
+         MHObNemGRmRQkUJ9KRoPdY9NPa9E31lKpdzGJ1QiVa81QMKIChuEV6vubvxMEZ9nk5NN
+         dQu/hpBBvX4p4hMkWjYVyMlu6YOKCaS2A3vXlCmiWxqvxwiJ7A/Kea3K5nwcLP5OPkWa
+         uPKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:organization
          :message-id:date:user-agent:mime-version:in-reply-to
          :content-language:content-transfer-encoding;
-        bh=Ge4IIFdlQFH1Xek33XcsWVlIeV6+yCVvViifgE9+p+s=;
-        b=qcHJ+zDUjb8vZ9kczqGATMdprTAQvkeMpQBxBhC2I79AVUxmdMiPq0JwsGDqbbnzL4
-         rwi/4x0+CORVJ9gJ0oteBtn6iZcu1e5SH01QGHvaq0WMYa9FOFTCUiAkYxBQraqVEODJ
-         NjR3/yDj7EOsDwX8lfH5QB9cxy2ggi8a5ZkBPHmOMCU2yr2SI6dtGWiLZSjPVBt7Zf2A
-         mZ6lwPls+ExQzWpdsPz9h38xppNcVTuqoAGiVtUFZz/6b5PCAS8Q+SE/x/GZeRd5iiKA
-         wUaC5S7CxTpPMcdIO1ePhUfz0nQ+WmgMyuZBn2deh6X3FujiE/CnD2Jaie0UQU5an+kM
-         lCpg==
-X-Gm-Message-State: AOAM531RMGHqhzxILL6y8zV/qGGnanPJWMrA8eBqPnHrR7197XPbRiPc
-	F37F7WYKoXaFW4vwUCSKOTtsIdlYnzoWp4Nj
-X-Google-Smtp-Source: ABdhPJyDQIw1Yye2kqr+UbCidXk5v7BCIMn0tQE+kmYc7qrn/SuSeQbinuw/+DYujMy6mw+Bhjkd3w==
-X-Received: by 2002:a17:90a:f493:: with SMTP id bx19mr17266282pjb.213.1614103432627;
-        Tue, 23 Feb 2021 10:03:52 -0800 (PST)
-Subject: Re: [PATCH v3 0/5] Support Secure Boot for multiboot2 Xen
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Daniel Kiper <daniel.kiper@oracle.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, Olivier Lambert <olivier.lambert@vates.fr>,
- Xen-devel <xen-devel@lists.xenproject.org>
+        bh=Ryf0krA1u79pVJENjelYCbZuFAvQJ85HPmI2Z5SonOg=;
+        b=Wd9Y7CHCv8GqdTOOIHUQ6XtIn42GwLEUmvAj/FOooY1FhOpkHqcEdP+CO4+YSiKSh9
+         tVSbWQXuf6I7svkeUI/iblc0XT4zeDJQe99bm5B33ioaeA4Kic7dwg3cSemUVg1/aEH+
+         lS9SXMh/5eMRTJxMnafJdX4a3Ias8nDnDx2IdY5LPgzn7p5N3TSlo+nLW2Etx0Bqf2sd
+         amxP1xp+Auyth8a7bvwLFaAGqdem49DdhkSFvfD6dLveR+D5RV94kIw33enE4tmyb4C+
+         913gpmgLqqcx0bpowRL/a7AJBY8TBn8ujvSw4LPqkKgHoCShtbIb73SCZ4idAoSr+/eo
+         jH2w==
+X-Gm-Message-State: AOAM530ZPJnSxeMn6kDUGICGq6qNwlY7bt+KGZZTklSTb5qY/z2t8los
+	PsrJHu50hBT4ZAEOG8J3TbQ=
+X-Google-Smtp-Source: ABdhPJyPWTY2ojVAxQL6iH2Y7r85BFjGkIh/0PiY9uLNrjDmTtPTUx2DqMF6GwZjmPXqJsW9XeVEfQ==
+X-Received: by 2002:a17:902:6b87:b029:dc:3402:18af with SMTP id p7-20020a1709026b87b02900dc340218afmr29120302plk.29.1614103850197;
+        Tue, 23 Feb 2021 10:10:50 -0800 (PST)
+Subject: Re: [PATCH v3 4/5] xen/x86: add some addresses to the Multiboot2
+ header
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Daniel Kiper <daniel.kiper@oracle.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
 References: <cover.1611273359.git.bobbyeshleman@gmail.com>
- <9a58bdf7-3a34-1b81-aec9-b14da463d75e@gmail.com>
- <f24e9e8d-9d55-f301-9a33-4398b463013d@suse.com>
+ <35ad940a3da56fc39c9f24e15c9f09ef74ad3448.1611273359.git.bobbyeshleman@gmail.com>
+ <YDTFOD4jdE90fZ0/@Air-de-Roger>
 From: Bob Eshleman <bobbyeshleman@gmail.com>
 Organization: Vates SAS
-Message-ID: <bb7dd7ee-9df1-47d2-c4ae-08e051ea16b1@gmail.com>
-Date: Tue, 23 Feb 2021 10:00:53 -0800
+Message-ID: <b17a562e-90d1-9704-d3e8-2be1b0c215cb@gmail.com>
+Date: Tue, 23 Feb 2021 10:07:52 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.6.1
 MIME-Version: 1.0
-In-Reply-To: <f24e9e8d-9d55-f301-9a33-4398b463013d@suse.com>
+In-Reply-To: <YDTFOD4jdE90fZ0/@Air-de-Roger>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 2/22/21 11:16 PM, Jan Beulich wrote:
-> It is on my list of things to look at. While probably not a good excuse,
-> my looking at previous versions of this makes we somewhat hesitant to
-> open any of these patch mails ... But I mean to get to it.
+On 2/23/21 1:04 AM, Roger Pau Monné wrote:
+> On Thu, Jan 21, 2021 at 04:51:43PM -0800, Bobby Eshleman wrote:
+>> From: Daniel Kiper <daniel.kiper@oracle.com>
+>>
+>> In comparison to ELF the PE format is not supported by the Multiboot2
+>> protocol. So, if we wish to load xen.mb.efi using this protocol we have
+>> to add MULTIBOOT2_HEADER_TAG_ADDRESS and MULTIBOOT2_HEADER_TAG_ENTRY_ADDRESS
+>> tags into Multiboot2 header.
+>>
+>> Additionally, put MULTIBOOT2_HEADER_TAG_ENTRY_ADDRESS and
+>> MULTIBOOT2_HEADER_TAG_ENTRY_ADDRESS_EFI64 tags close to each
+>> other to make the header more readable.
+>>
+>> The Multiboot2 protocol spec can be found at
+>>   https://www.gnu.org/software/grub/manual/multiboot2/
+>>
+>> Signed-off-by: Daniel Kiper <daniel.kiper@oracle.com>
+>> Signed-off-by: Bobby Eshleman <bobbyeshleman@gmail.com>
+>> ---
+>>  xen/arch/x86/boot/head.S | 19 +++++++++++++++----
+>>  1 file changed, 15 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+>> index 189d91a872..f2edd182a5 100644
+>> --- a/xen/arch/x86/boot/head.S
+>> +++ b/xen/arch/x86/boot/head.S
+>> @@ -94,6 +94,13 @@ multiboot2_header:
+>>          /* Align modules at page boundry. */
+>>          mb2ht_init MB2_HT(MODULE_ALIGN), MB2_HT(REQUIRED)
+>>  
+>> +        /* The address tag. */
+>> +        mb2ht_init MB2_HT(ADDRESS), MB2_HT(REQUIRED), \
+>> +                   sym_offs(multiboot2_header), /* header_addr */ \
+>> +                   sym_offs(start),             /* load_addr */ \
+>> +                   sym_offs(__bss_start),       /* load_end_addr */ \
+>> +                   sym_offs(__2M_rwdata_end)    /* bss_end_addr */
 > 
-> Jan
+> Shouldn't this only be present when a PE binary is built?
+> 
+> You seem to unconditionally add this to the header, even when the
+> resulting binary will be in ELF format?
+> 
+> According to the spec: "This information does not need to be provided
+> if the kernel image is in ELF format", and hence Xen shouldn't require
+> the loader to understand this tag unless it's strictly required, as
+> the presence of the tag forces the bootloader to use the presented
+> information in order to load the kernel, regardless of the underlying
+> binary format.
+> 
+> Thanks, Roger.
 > 
 
-Thanks for this response.  I did comb through your v2 feedback
-point-by-point and incorporate it into the code, so I do hope
-that ends up helping.
+Ah yes, this is true.  It may have made more sense to do this with v2 trying
+to step us in the direction of a single unified binary, but it certainly isn't
+required with v3.
 
-
-Best,
+Thanks,
 Bob
 
