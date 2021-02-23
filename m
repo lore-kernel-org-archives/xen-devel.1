@@ -7,54 +7,53 @@ X-Spam-Status: No, score=-17.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30869C433E9
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E8EAC4332E
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E867064E41
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E867064E41
+	by mail.kernel.org (Postfix) with ESMTPS id 0E31464E41
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 02:35:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E31464E41
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.88520.166479 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.88519.166467 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lENXi-0004Oa-Qv; Tue, 23 Feb 2021 02:35:18 +0000
+	id 1lENXf-0004IF-75; Tue, 23 Feb 2021 02:35:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 88520.166479; Tue, 23 Feb 2021 02:35:18 +0000
+Received: by outflank-mailman (output) from mailman id 88519.166467; Tue, 23 Feb 2021 02:35:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lENXi-0004OL-Kq; Tue, 23 Feb 2021 02:35:18 +0000
-Received: by outflank-mailman (input) for mailman id 88520;
- Tue, 23 Feb 2021 02:35:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lENXf-0004I4-1Y; Tue, 23 Feb 2021 02:35:15 +0000
+Received: by outflank-mailman (input) for mailman id 88519;
+ Tue, 23 Feb 2021 02:35:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=p6em=HZ=epam.com=prvs=268883478e=volodymyr_babchuk@srs-us1.protection.inumbo.net>)
- id 1lENXh-00046p-7O
- for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 02:35:17 +0000
+ id 1lENXd-00046u-V9
+ for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 02:35:13 +0000
 Received: from mx0b-0039f301.pphosted.com (unknown [148.163.137.242])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d276e0e6-dacc-4b09-8b8b-b647f20e8e58;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 721913e0-99e5-4f4c-9933-dbdb10ca54f0;
  Tue, 23 Feb 2021 02:35:04 +0000 (UTC)
 Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
  by mx0b-0039f301.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 11N2QQxn004083; Tue, 23 Feb 2021 02:35:03 GMT
+ 11N2QQxk004083; Tue, 23 Feb 2021 02:35:01 GMT
 Received: from eur01-db5-obe.outbound.protection.outlook.com
  (mail-db5eur01lp2052.outbound.protection.outlook.com [104.47.2.52])
- by mx0b-0039f301.pphosted.com with ESMTP id 36vqte83qr-5
+ by mx0b-0039f301.pphosted.com with ESMTP id 36vqte83qr-2
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 23 Feb 2021 02:35:03 +0000
+ Tue, 23 Feb 2021 02:35:01 +0000
 Received: from AM0PR03MB3508.eurprd03.prod.outlook.com (2603:10a6:208:4f::23)
  by AM0PR0302MB3235.eurprd03.prod.outlook.com (2603:10a6:208:a::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.32; Tue, 23 Feb
- 2021 02:34:58 +0000
+ 2021 02:34:57 +0000
 Received: from AM0PR03MB3508.eurprd03.prod.outlook.com
  ([fe80::a9a4:6122:8de2:64cb]) by AM0PR03MB3508.eurprd03.prod.outlook.com
  ([fe80::a9a4:6122:8de2:64cb%6]) with mapi id 15.20.3846.042; Tue, 23 Feb 2021
- 02:34:58 +0000
+ 02:34:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,36 +65,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d276e0e6-dacc-4b09-8b8b-b647f20e8e58
+X-Inumbo-ID: 721913e0-99e5-4f4c-9933-dbdb10ca54f0
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fnsoOYeaZ5ap723wZNcX5IBljYGd+jOoU5tg7D29IJwkoifiWlQ29yEkQiI8det8eYG/walXrTRJaZunRIUKKe0Bd/7fH4yHvsMgJRkL3DVPW4If/ciKu5l60yOozxyg+BzaePt+nhASfCNSynePIhSdxXXvBLDPisGHfiJDx8+suA9ZzYWcFnnfm3zXx+Sp9PDGjHlN+NHGp5XEQgO6kPFwoJm1dQVDmYOCCjNLce5cPG6JgsgzJQpctQtr6pBOEGHJw5erGcc0FG6H2pOg9qq1UPpFjaRZSMbky0z4E+zjtkT4Bw8DZ1rDLvfoeucJr7QBhzqTvjzJR/baKYaxZw==
+ b=n8UsQ/zNRlGvj/CMCAtMQlV8xoeGe/qY82ASPb8bsv1EJdfCD5A166Brx+0DHQCkbAvOD1j0OJ7Rury/pO+pMG69Q/YnB0J4EimaaZTI77s1IgEpb5JMteMdHZxmAd3/fcXj8hcFvvZRcIGP8pKEw691wnOqPbCHPzi1y+rFYFCe7dafaFJOy1ewuh04VM4e5PmlkjjRuWqsmOCYtuXQ7XdgDKEKawldJ28zOD/M2QkCa4xC9uFKERuBr1193ecVyrBJ36iqOouoStzvs5ZUhysNObYjnBrSzNwAQx6pXyFMnQxtpn8PsAXILqS3kEDPb/L3LGD3JgM9JKJMgVl+ZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hLZbFCdGG+G9vwfGEiWEMpY27lBaZZM8a/Rntb3OeZ8=;
- b=XqiDlF5qgZCsTMuVSdUW8Hdg2NKXBhCKIyUORsD7cXbl6M67tEHTLL3zeCHiRTppAhFCAZFM8R1VWgAmlo5Q6hMX8CQt9HdGAoucy6LOaa9+z7XShl2z2tmWdLOiQxSjtjvNRM73OxJYmH2Q3DMf5q6ae2hcakNiU+Mud+4mRFAAvCbNWaA7q/CHzIF/ExtnMKATPuE6OLH2kEM8BDXWjF9TY+wZ1zDiuXntkBQ4rOTVEZ2TASIaxObDlVSMkdm/rLqoTnfd82Pl5CjoE/LIkl5LkdYz0xyIxcWOWqL5BzMTxEfVKtwTD/0xVKW2QPjgKBU8ThTfFwYHoVGQmmb5DQ==
+ bh=Z7bkZJeAVBuSp9Gyc797wEvVdAIwSUhCtPUTvuKcVEE=;
+ b=CYpIuVSxRvIsnDd2YCEd7pN6Q2wWhZkEbUaFx1JQjeRvPZMICDtYtdkrltjVN2DVPhhiVnZIi8XIZgD66iqoAQxRa0OIevf6+98UwhOkgJnMKEcR4M0DeP8JqnTaBJ5ZCCmRqtj7aWvozqUrzlFzy2/jHz7mLGdtotJE8iDlNmSL6lVsTVrotp7CO7IYSlocaAJGuXH+DDRX35mzl3tWxTPICziYo273iHLH94nocdeZE6XarCAN/VlClsVDF3kMAN/ej0AsGgp/xrtN4z1WIo3pC7vcR7KsBLcap9yYpc/UwOpHxpm4ZkcPflDVVejpyNHP4hlAZArV8Zs+Jr8xZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hLZbFCdGG+G9vwfGEiWEMpY27lBaZZM8a/Rntb3OeZ8=;
- b=Do3kY2ktfT4pYTe7de5Zbtc88uic2L7hP81FVFySkF7qxPtAh29/ZPU1KdwcDTJjFKwnztvJgCyqK5oD+3eAXyEOsN5OQBGmQgTYOtsTqF8nPwf/D8ZyBJefnzLDFZ3rU94UjLooLPg544Dc+mFWifGqzo0gaSSX6AZmdImWfIIPbcePrIRmIybL7qKzSCmF0La6Y8+b2k3ABye/a/3uRetkNl0t67+4T3mryyXPzcwh1G3e84qDSTTZ84uGBfv1/RFngz0JvfKe0ewOT/R5ATI8sqwy8A2W0Te9TdxSKneqwaUG0DwMPnfkgVWaLHiuDveKZeXbP14J24hPlgzJoQ==
+ bh=Z7bkZJeAVBuSp9Gyc797wEvVdAIwSUhCtPUTvuKcVEE=;
+ b=fugEaoUmhgNcWbKy3Jbn87JBECOIM+DBEd6OK4KY7VQk/TriVRWxJk6qYa7HtezQvBznJSNn+ZTLSAgIcJnaIkFaLpNavDiz0NF1XaIVdryoRNv9EQ5AY0OVPVLQB+eEQOR6BuZR6rf6aTnoNr7qVFa3c5HON/7uS1hZ2Ymc57BwP1WOwD7rRZur3oh/ld2uDMH6fYdLCuQv+7p+3am8SWVwVLfv1D/gcWzaN77wVi5MYadAMGYDzavi2Wn74YFXwUmiGvt52nM2qpcWuE7snspokLwC5qfXGGxIg06VXhiJJkmXXSLjw8pMS05qZtKGrs8nqu1JhtoSUKdjhjYPgQ==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-        Stefano Stabellini
-	<sstabellini@kernel.org>,
-        Julien Grall <julien@xen.org>,
-        Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 08/10] arm: context_switch: allow to run with IRQs already
- disabled
-Thread-Topic: [RFC PATCH 08/10] arm: context_switch: allow to run with IRQs
- already disabled
-Thread-Index: AQHXCYx6+wvu0Xd3nESKdamktRGE6w==
-Date: Tue, 23 Feb 2021 02:34:58 +0000
-Message-ID: <20210223023428.757694-9-volodymyr_babchuk@epam.com>
+        Andrew Cooper
+	<andrew.cooper3@citrix.com>,
+        George Dunlap <george.dunlap@citrix.com>,
+        Ian
+ Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
+        Julien Grall
+	<julien@xen.org>,
+        Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>
+Subject: [RFC PATCH 05/10] preempt: add try_preempt() function
+Thread-Topic: [RFC PATCH 05/10] preempt: add try_preempt() function
+Thread-Index: AQHXCYx5ySuVthNLHUKZmgWg9dU+LA==
+Date: Tue, 23 Feb 2021 02:34:57 +0000
+Message-ID: <20210223023428.757694-6-volodymyr_babchuk@epam.com>
 References: <20210223023428.757694-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20210223023428.757694-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -108,56 +109,56 @@ authentication-results: lists.xenproject.org; dkim=none (message not signed)
  header.from=epam.com;
 x-originating-ip: [176.36.48.175]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: b928eb8a-9ac4-4d70-8ac4-08d8d7a39cea
+x-ms-office365-filtering-correlation-id: cd8759b3-5f5f-4e1d-6730-08d8d7a39c3a
 x-ms-traffictypediagnostic: AM0PR0302MB3235:
 x-ms-exchange-transport-forked: True
 x-microsoft-antispam-prvs: 
- <AM0PR0302MB3235B18F52228B33ECCA2B66E6809@AM0PR0302MB3235.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:1265;
+ <AM0PR0302MB323587FF7499713894A2505EE6809@AM0PR0302MB3235.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- 2mKXp8dQBrHgSaT64CcaGyXnuiyAm1iqTb/jAO/x28VCqUJabnDfdicEbaIGm2yAYr+wMt4rQ/mUWFGfpmXUVgl6n+hqDssf7RGZD5fgWGK2CmY2UCT4HkDtJSZfcZq05z2cB/suy9ZVqOAYa2t9viH1mWMUEGBdECs/DlZOWCK2m8CZsVuQBkZRptSclPjeAyOt9cC6c4+FqBKbROSIv9gtwQ6DWlHr0eXYjiSYeVWtKpLghbjchuEuOQcFcYa/5UXwow9Tfd6EMYqo7s7tQlOhD1IY0BM3/Wlut1j4IjH6FNP/Dl91ZVLhC/3IaJUva45zbBY917I5rWbCquAkWMZBZEGHykZfcIkXSih5NWlh/LsQBW5bn1x5PM+qseBj4N+V+9pvWo430m8SxvpqQPAblNEEZNjDlAqerBOIL8IUHCBbcRdrjHEkuWzh8wQcAOiXfWo0TEfaai018P545DAzg66y2ng/FIGtGJvfYSuJBvllXMmtojLAKtTuBhxpxef86+1X0QCKCCgLJV2g7A==
+ MhrIJOptljGFO3p3aYiupiRFD8WDZIGxT2LOroitiU2FYLsNLy7sqcVLaps+dEwnuLF3/B0VeWLSmp9kMqOwUNMUwxNGBmFGb3bfU+ayslZjWk5NTxo/vcsyCSNuq4VuSrqDxh9hCoolxbKYuHdT4VhAisIJZLEKLHFN3bIx5LW6B3zD8trTDrXqaoT8LB0RmRjrgzrEYL3cD2HFGtyouUKWbcckqSHPiukVbyphSDHHzPoO5S5crIdGmq3HZ4+vHEGmFJ+yiC7tjm9b8vu+4hDdX47/oEqsshLksylKgiNtQQiqG8AVpodCEPnbbWgYfXAtpjpLG2k1ubpiV6fHK8RvywkJbj9i+jvPBqAgKDVISDp5V4yygJMAxuWGdwDdmoIfPHO3gd4y8eiZEvjGnDiI1EoLbDOr9rzOJZd7UBBtvTwhPILjAFygF4GvV2YVZLquqy56zcDiiAm/mVXdusTU1Pbeze/qvRrjh/XX5CojxnnGTc2GFcFDJ4Eg4jaZYmFdnDDZ/hNkh9X4zE/VKfxnig3dcOdwDVQSi2tCo2gTrJ1PkZY0Z3pRE9EXtYU2
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB3508.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(136003)(39860400002)(346002)(376002)(316002)(6512007)(8936002)(8676002)(86362001)(2906002)(4326008)(478600001)(6486002)(186003)(107886003)(54906003)(66556008)(55236004)(83380400001)(66446008)(66946007)(66476007)(64756008)(71200400001)(1076003)(2616005)(26005)(76116006)(6916009)(36756003)(5660300002)(6506007);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB3508.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(366004)(136003)(39860400002)(346002)(376002)(316002)(6512007)(8936002)(8676002)(86362001)(2906002)(4326008)(478600001)(6486002)(186003)(54906003)(66556008)(55236004)(83380400001)(66446008)(66946007)(66476007)(64756008)(71200400001)(1076003)(2616005)(26005)(76116006)(6916009)(36756003)(5660300002)(6506007)(2004002);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata: 
- =?iso-8859-1?Q?XIwzGB8T8dRu9iJXV/cfOciAGeAWAE9JZvdCkymrYp8/zX4ustw16rwWAL?=
- =?iso-8859-1?Q?VHu2XSFShArGlMJuDaAtQImueOJke+l94pzfJGmwLEC3pFde+0oPrv0uZ/?=
- =?iso-8859-1?Q?4F4WKg169Y4vVz/PhxQ0zYRvVj6jerCKQ3GUCaGweU5HbxDQGYxNDiBAZw?=
- =?iso-8859-1?Q?djP2pzlROgcEcIImZur4XKVWCUsc+MK7atMXi7TrgR488XlXyke5FIyb6x?=
- =?iso-8859-1?Q?iUTQSx29yZSiBljFmvUUMrHsxJDq0z6AyiL3Lc41ooAiFOSPoVOZSUo/nk?=
- =?iso-8859-1?Q?05Iug5NXiJLfrM5Fz8hRLS0fh7XYbHNYg1SGTHvWkHNyz1EUSfPuLm3Y9D?=
- =?iso-8859-1?Q?Y4LoJtfhGxl+wJKQS7upuLVvCjzEg8vN1aU97Hjkh5p9w8JuA7bpRjXvOC?=
- =?iso-8859-1?Q?CQy+rr4ln8nsgGTgRDVvaL5hrcEuAq9kVgsglnBDOdZVgQxom5NThpQ3Bz?=
- =?iso-8859-1?Q?ufCKwFIOxxDw2rQQk0/Wn7gVrk1Kw1o7eSKRdKdIp4Hiv9q0pkuPrBHo0i?=
- =?iso-8859-1?Q?bcKIS+O0f8QlNJ/PxurHKXTgaVp07Jez3ZEWOJ+qBdy00NZGcXeLpXMhpu?=
- =?iso-8859-1?Q?H/lbxMQeiMo0mdEefTfNXYwQs8xVFmAZ7dWoqjnV2ZkJLosRKxRG3AIPYI?=
- =?iso-8859-1?Q?dRC+Gwt7J5ylEPJDQWfdYB4FbSgsRupRlNkBlUBKopLVYPS8QePIuj0G8n?=
- =?iso-8859-1?Q?o5mRaAlr+ho78ruuyldDsvGRUxcZNSh/tvhBshC5fm/YEBqQmq7BtzSUvI?=
- =?iso-8859-1?Q?0IGMF0oUwD/x2GXxNH5gdQ5OrgulHjMjUzsFdR1wFFo51000WSGuR4vWQX?=
- =?iso-8859-1?Q?t4nSRG6CzsnxSbaWDXgchzqV5tF5ObiadspAUzpU7eaSsCtfpCyYr83YJo?=
- =?iso-8859-1?Q?yvGRiSzkFQmyFT+erJhCs0CgL+1ASB2txyR9SOGZICoXcC0xfqXPFTb/HQ?=
- =?iso-8859-1?Q?wLt/PrtfXGPmnqxcEtx8YolRS2t8mBaT3lCoV8wP9rcv0dF9pRIjkc/264?=
- =?iso-8859-1?Q?f9AjWSbszdVOPeO60YVlpG/Vu9f1od85fO2H4oFDpVTpnDccVqfyRdH3ig?=
- =?iso-8859-1?Q?nsUmWAYHP3mopCCS1f8Xm4KNv0ovAySU3TmM7QjUYbLsZV1BoYOjRIwCob?=
- =?iso-8859-1?Q?49U8HThF5VdWVORMZzD5A7uPC8Nl4N+fIuFkmESwKg+huZD5P07q5WeMIQ?=
- =?iso-8859-1?Q?ePlJ1FT01eQQAUCvowAJdf+zLQs8wPpk2+nLd8QsO1vYPftQn0UYVvgT1P?=
- =?iso-8859-1?Q?aN7k+WtMRLCVubJvqXgebnks1dXWb6op3hynDdtEMfEl75Fwxpu+XO9G7i?=
- =?iso-8859-1?Q?+aAb9uMarawMXkYNRZqnmFLLx3WG3Hpl5RpKir/EhQOn8yUBWA/0AIG0LC?=
- =?iso-8859-1?Q?zT2CNOVJLC?=
+ =?iso-8859-1?Q?C1Exbo5RCcolDWAgr5FgqW9T4dHuKN7wXk1WlE6QoaYMt3/QR1CBY5yMyg?=
+ =?iso-8859-1?Q?+2D24BJ3NSotM7zkk2mZMWCAmhnbLt/wWPdLJ7Y9FXTRsfHk3wp5MW2fVw?=
+ =?iso-8859-1?Q?AIzDfTNT1dP09xdNj8K1yimvDhXuI/Wt/qFAzGjIFFhH8sK2sm/Mzy+tD8?=
+ =?iso-8859-1?Q?+o1wi/WFMoPwDe1kdTl+Fx+AUvOEJOcXelS1/IFBqKNhw5SsvyAsiDu5Hi?=
+ =?iso-8859-1?Q?0oCObvbQxjZVj6uSBFaRzVCHwHc2Hts/atlvdpkrKFRNaMGzIxnXySxacj?=
+ =?iso-8859-1?Q?El/2Xbtd0LW6pOBtD7D+k2QiD+AbMnbO8HgzRGhXfReETtTyRX+8DBTGKH?=
+ =?iso-8859-1?Q?OTGGZUgk4gD4UHMjL82XaDidijtKV/kL82bFGiCOrG3Oa6vQYh0hgNzN3E?=
+ =?iso-8859-1?Q?9LZgCKdF3J2JqPfZsQbtDooM62A8HvfntxEEsF8i7KBgsvFbL0s3vPx9oT?=
+ =?iso-8859-1?Q?IGaWcIfYH2OlXjHOgZEXq4pf0MlVwOt3+PP5dykDL/YjAQ6hibiTraP6BU?=
+ =?iso-8859-1?Q?taRzPycX4oh0khilItJFU0RjafR5CN+pufeBKBBtNC5is2ebEZPKF5cW+5?=
+ =?iso-8859-1?Q?8GNmC2Ei4XyMh5fOlQtqZVwhIIegbiniPPM2tbqv/IxLyVTvvJu4ruzA2M?=
+ =?iso-8859-1?Q?FRIQkudW9ml837l+lipmZ2oq3vUuagg3uTKgJynF4tHjnEiUwIhfLfoL/i?=
+ =?iso-8859-1?Q?jxZ37CYHejZ6hqLrbxriYWVzNoy1f3YoEJxCuBFQ9bHXGc9lKd6pTct07F?=
+ =?iso-8859-1?Q?MbRkAI0ujDIqIVpW8zNFpdJzD+uIBNmkrpogCnhmCeQDaF2N18xZ6a1MeG?=
+ =?iso-8859-1?Q?vEJgX8eCSpwoyTznVHZnZ3T4AycK1yXN93jcShE3QNY22aHpshMt9xss1y?=
+ =?iso-8859-1?Q?BFbmArwxBXGampv6cCzKeq8EqMbVztDjdyGK8o3asYWAGNXcFbQFDTtRf8?=
+ =?iso-8859-1?Q?JLqN5ImzLEq120yznvmt8PARzJmWbPvZ0EkVKrEB1D2ymyvNFy4t1BZaS0?=
+ =?iso-8859-1?Q?araHVAEuGIAY6lsNOHGILwlrHAXM5q4+8rfpAv/XyYCy4QOZxPfo/xeZuq?=
+ =?iso-8859-1?Q?jgZf2ZfPBcFAbf01NbtfQ8rcUwAMELEAHqwdSt4+GfUIlCjR2VIGt4I581?=
+ =?iso-8859-1?Q?ILEy0VOMh9H4EK5abNhUj9saOQ7DN7KUXsOov0MAVN5Ul1lO69jWSlTr9T?=
+ =?iso-8859-1?Q?kjaTwT+V+1h5yudbJB1ovkxGDLGQQWoFs4dt2/R3DKQsW84qrNyrYShvI+?=
+ =?iso-8859-1?Q?NzG6FRcfLp9CJ2RxX2oABKj8zZvp43q96J28zlUNGEIQtZKlbNTHclhzkQ?=
+ =?iso-8859-1?Q?Im6Ydko9vpXeFc4rCkvIY07ZzE9BWGnog9LwTVSU3MLdDXy/1DqfysZpf1?=
+ =?iso-8859-1?Q?nMMKs8dnfu?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB3508.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b928eb8a-9ac4-4d70-8ac4-08d8d7a39cea
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Feb 2021 02:34:58.1025
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd8759b3-5f5f-4e1d-6730-08d8d7a39c3a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Feb 2021 02:34:57.0931
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: F6FQv6X463hVt9hhQ8WuBquVF9RFWSVcl0plmS2r0D1U37EcJ7elOmoegGYxCNV11Ah3X16KLsT6ujYxzD+cFgO4AV+FRRMka6PkmkDty2o=
+X-MS-Exchange-CrossTenant-userprincipalname: qcl/SXjF/ndaYdz1kJRPCFAz+NiQgEIuok3cm7vSoPoHTV2w2VNmvDV06qtTrEUkCfmcB2esxfpMFdKF46OwRDcnBE1H6bpwUqNf/cj+3bo=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0302MB3235
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 spamscore=0
  lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
@@ -165,73 +166,124 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscor
  mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2009150000 definitions=main-2102230018
 
-With upcoming full hypervisor preemption it is possible that context
-switching code will be called with IRQs already disabled. In this case
-we don't want to enable them back. So we need to add logic that tracks
-if IRQs are already disabled.
+This function can be used to preempt code running in hypervisor mode.
+Generally, there are two reasons to preempt while in HYP mode:
+
+1. IRQ arrived. This may woke vCPU with higher scheduling priority.
+2. Exit from atomic context. While we were in atomic context, state
+   of the system may changed and we need to reschedule.
+
+It is very inefficient to call scheduler each time we leave atomic
+context, so very simple optimists is used. There are cases when
+we *know* that there might be reasons for preemption. One example - is
+IRQ. In this case we call try_preempt(true). This will force
+rescheduling if we are outside atomic context or it will ensure that
+scheduler will be called right after leaving atomic context. This is
+done by calling try_preempt(false) when we are leaving atomic
+context. try_preempt(false) will check if there was call to
+try_preempt(true) in atomic context and call scheduler only in this
+case.
+
+Also macro preempt_enable_no_sched() is introduced. It is meant to
+be used by scheduler itself, because we don't want to initiate
+rescheduling inside scheduler code.
 
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
- xen/arch/arm/domain.c | 15 +++++++++------
- 1 file changed, 9 insertions(+), 6 deletions(-)
+ xen/common/preempt.c      | 32 +++++++++++++++++++++++++++++++-
+ xen/include/xen/preempt.h |  8 ++++++++
+ 2 files changed, 39 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 2ccf4449ea..3d4a1df4a4 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -310,7 +310,7 @@ static void update_runstate_area(struct vcpu *v)
-     }
- }
+diff --git a/xen/common/preempt.c b/xen/common/preempt.c
+index ad61c8419a..98699aaa1f 100644
+--- a/xen/common/preempt.c
++++ b/xen/common/preempt.c
+@@ -4,6 +4,7 @@
+  * Track atomic regions in the hypervisor which disallow sleeping.
+  *=20
+  * Copyright (c) 2010, Keir Fraser <keir@xen.org>
++ * Copyright (c) 2021, EPAM Systems
+  *=20
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+@@ -21,13 +22,42 @@
 =20
--static void schedule_tail(struct vcpu *prev)
-+static void schedule_tail(struct vcpu *prev, bool enable_irqs)
+ #include <xen/preempt.h>
+ #include <xen/irq.h>
++#include <xen/sched.h>
++#include <xen/wait.h>
+ #include <asm/system.h>
+=20
+ DEFINE_PER_CPU(atomic_t, __preempt_count);
++DEFINE_PER_CPU(unsigned int, need_reschedule);
+=20
+ bool_t in_atomic(void)
  {
-     ASSERT(prev !=3D current);
-=20
-@@ -318,7 +318,8 @@ static void schedule_tail(struct vcpu *prev)
-=20
-     ctxt_switch_to(current);
-=20
--    local_irq_enable();
-+    if (enable_irqs)
-+        local_irq_enable();
-=20
-     sched_context_switched(prev, current);
-=20
-@@ -333,7 +334,7 @@ static void continue_new_vcpu(struct vcpu *prev)
-     current->arch.actlr =3D READ_SYSREG32(ACTLR_EL1);
-     processor_vcpu_initialise(current);
-=20
--    schedule_tail(prev);
-+    schedule_tail(prev, true);
-=20
-     /* This matches preempt_disable() in schedule() */
-     preempt_enable_no_sched();
-@@ -350,19 +351,21 @@ static void continue_new_vcpu(struct vcpu *prev)
-=20
- void context_switch(struct vcpu *prev, struct vcpu *next)
- {
--    ASSERT(local_irq_is_enabled());
-+    bool need_to_disable_irqs =3D local_irq_is_enabled();
+-    return atomic_read(&preempt_count()) || in_irq() || local_irq_is_enabl=
+ed();
++    return atomic_read(&preempt_count()) || in_irq();
++}
 +
-     ASSERT(prev !=3D next);
-     ASSERT(!vcpu_cpu_dirty(next));
-=20
-     update_runstate_area(prev);
-=20
--    local_irq_disable();
-+    if (need_to_disable_irqs)
-+        local_irq_disable();
-=20
-     set_current(next);
-=20
-     prev =3D __context_switch(prev, next);
-=20
--    schedule_tail(prev);
-+    schedule_tail(prev, need_to_disable_irqs);
++void try_preempt(bool force)
++{
++    /*
++     * If caller wants us to call the scheduler, but we are in atomic
++     * context - update the flag. We will try preemption upon exit
++     * from atomic context.
++     */
++    if ( force && in_atomic() )
++    {
++        this_cpu(need_reschedule) =3D 1;
++        return;
++    }
++
++    /* idle vCPU schedules via soft IRQs */
++    if ( unlikely(system_state !=3D SYS_STATE_active) ||
++         in_atomic() ||
++         is_idle_vcpu(current) )
++        return;
++
++    if ( force || this_cpu(need_reschedule) )
++    {
++        this_cpu(need_reschedule) =3D 0;
++        wait();
++    }
  }
 =20
- void continue_running(struct vcpu *same)
+ #ifndef NDEBUG
+diff --git a/xen/include/xen/preempt.h b/xen/include/xen/preempt.h
+index e217900d6e..df7352a75e 100644
+--- a/xen/include/xen/preempt.h
++++ b/xen/include/xen/preempt.h
+@@ -4,6 +4,7 @@
+  * Track atomic regions in the hypervisor which disallow sleeping.
+  *=20
+  * Copyright (c) 2010, Keir Fraser <keir@xen.org>
++ * Copyright (c) 2021, EPAM Systems
+  */
+=20
+ #ifndef __XEN_PREEMPT_H__
+@@ -15,6 +16,8 @@
+=20
+ DECLARE_PER_CPU(atomic_t, __preempt_count);
+=20
++void try_preempt(bool force);
++
+ #define preempt_count() (this_cpu(__preempt_count))
+=20
+ #define preempt_disable() do {                  \
+@@ -23,6 +26,11 @@ DECLARE_PER_CPU(atomic_t, __preempt_count);
+=20
+ #define preempt_enable() do {                   \
+     atomic_dec(&preempt_count());               \
++    try_preempt(false);                         \
++} while (0)
++
++#define preempt_enable_no_sched() do {          \
++    atomic_dec(&preempt_count());               \
+ } while (0)
+=20
+ bool_t in_atomic(void);
 --=20
 2.29.2
 
