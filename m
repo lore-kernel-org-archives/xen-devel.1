@@ -2,45 +2,44 @@ Return-Path: <SRS0=trq0=HZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D465C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 07:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FC14C433E6
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 07:16:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0548F64E31
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 07:13:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0548F64E31
+	by mail.kernel.org (Postfix) with ESMTPS id AE8B960238
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 07:16:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE8B960238
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.88581.166622 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.88583.166635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lERsw-0007VI-TK; Tue, 23 Feb 2021 07:13:30 +0000
+	id 1lERw8-0007ex-Cf; Tue, 23 Feb 2021 07:16:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 88581.166622; Tue, 23 Feb 2021 07:13:30 +0000
+Received: by outflank-mailman (output) from mailman id 88583.166635; Tue, 23 Feb 2021 07:16:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lERsw-0007VB-QE; Tue, 23 Feb 2021 07:13:30 +0000
-Received: by outflank-mailman (input) for mailman id 88581;
- Tue, 23 Feb 2021 07:13:29 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lERw8-0007eq-9W; Tue, 23 Feb 2021 07:16:48 +0000
+Received: by outflank-mailman (input) for mailman id 88583;
+ Tue, 23 Feb 2021 07:16:47 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=xmUX=HZ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lERsv-0007V6-T5
- for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 07:13:29 +0000
+ id 1lERw6-0007el-Tt
+ for xen-devel@lists.xenproject.org; Tue, 23 Feb 2021 07:16:46 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2831ddb7-3f68-43aa-8d38-2c5a9f4f91d2;
- Tue, 23 Feb 2021 07:13:28 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 75c20548-ce79-4e9e-94d2-fba73181b91d;
+ Tue, 23 Feb 2021 07:16:46 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F0D47ACBF;
- Tue, 23 Feb 2021 07:13:27 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 6632EAC6E;
+ Tue, 23 Feb 2021 07:16:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,102 +51,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2831ddb7-3f68-43aa-8d38-2c5a9f4f91d2
+X-Inumbo-ID: 75c20548-ce79-4e9e-94d2-fba73181b91d
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614064408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1614064605; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=jrUHoyJwvbbMr4+3pK/5jLU2vTyFp02UgSPe3FxTo5E=;
-	b=IB3tBAttR5Iqu9j+PEoBvgLiqdcD6CMvFExjLstJTW8MsVhF+JBztM8+rqYZcaXJb1AI2W
-	IlGFK9G5aY9F2uh4eS+nabsj1ChCaBZhmkV0bny6hPAtHjAmho1NI+m5spY42+jW8FpWLg
-	MKUTf/KvElHuW+83h1T/rtDs+21233o=
-Subject: Re: [PATCH][4.15] x86: mirror compat argument translation area for
- 32-bit PV
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <bdedf018-b6c4-d0da-fb4b-8cf2d048c3b1@suse.com>
- <9eade40b-bd95-b850-2dec-f7def66c3c7b@citrix.com>
- <77a36366-9157-c3d3-b1f0-211f4fc39a93@suse.com>
- <60a31ec8-6844-2149-1a04-7e757d1d2dd3@citrix.com>
+	bh=2rZNl2J+TuuNqaHSlsFWCxq5LosMSejDP9+klGAcWHc=;
+	b=iPwHmf31DvMhgFCYtea+ROBZ5MrzKgNGLNPQzC+w4aHaL+7f5B1e2gBCdjsNnRajwSQ782
+	BBFi1tqcKmO6r7SctCNruPU8RaA5BJy97od8VCTnFRn/rsbnYyd+yWQ3x0O9mbf/7EZLym
+	obIAy1t2yvK7CisayNkpgAyHOOEI7w4=
+Subject: Re: [PATCH v3 0/5] Support Secure Boot for multiboot2 Xen
+To: Bobby Eshleman <bobbyeshleman@gmail.com>
+Cc: Daniel Kiper <daniel.kiper@oracle.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Olivier Lambert <olivier.lambert@vates.fr>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <cover.1611273359.git.bobbyeshleman@gmail.com>
+ <9a58bdf7-3a34-1b81-aec9-b14da463d75e@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <42c86cc7-c417-6089-4e44-90a96ebaede1@suse.com>
-Date: Tue, 23 Feb 2021 08:13:27 +0100
+Message-ID: <f24e9e8d-9d55-f301-9a33-4398b463013d@suse.com>
+Date: Tue, 23 Feb 2021 08:16:45 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <60a31ec8-6844-2149-1a04-7e757d1d2dd3@citrix.com>
+In-Reply-To: <9a58bdf7-3a34-1b81-aec9-b14da463d75e@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 22.02.2021 17:47, Andrew Cooper wrote:
-> On 22/02/2021 14:22, Jan Beulich wrote:
->> On 22.02.2021 15:14, Andrew Cooper wrote:
->>> On 22/02/2021 10:27, Jan Beulich wrote:
->>>> Now that we guard the entire Xen VA space against speculative abuse
->>>> through hypervisor accesses to guest memory, the argument translation
->>>> area's VA also needs to live outside this range, at least for 32-bit PV
->>>> guests. To avoid extra is_hvm_*() conditionals, use the alternative VA
->>>> uniformly.
->>>>
->>>> While this could be conditionalized upon CONFIG_PV32 &&
->>>> CONFIG_SPECULATIVE_HARDEN_GUEST_ACCESS, omitting such extra conditionals
->>>> keeps the code more legible imo.
->>>>
->>>> Fixes: 4dc181599142 ("x86/PV: harden guest memory accesses against speculative abuse")
->>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>>
->>>> --- a/xen/arch/x86/mm.c
->>>> +++ b/xen/arch/x86/mm.c
->>>> @@ -1727,6 +1727,11 @@ void init_xen_l4_slots(l4_pgentry_t *l4t
->>>>                 (ROOT_PAGETABLE_FIRST_XEN_SLOT + slots -
->>>>                  l4_table_offset(XEN_VIRT_START)) * sizeof(*l4t));
->>>>      }
->>>> +
->>>> +    /* Slot 511: Per-domain mappings mirror. */
->>>> +    if ( !is_pv_64bit_domain(d) )
->>>> +        l4t[l4_table_offset(PERDOMAIN2_VIRT_START)] =
->>>> +            l4e_from_page(d->arch.perdomain_l3_pg, __PAGE_HYPERVISOR_RW);
->>> This virtual address is inside the extended directmap.
->> No. That one covers only the range excluding the last L4 slot.
->>
->>>   You're going to
->>> need to rearrange more things than just this, to make it safe.
->> I specifically picked that entry because I don't think further
->> arrangements are needed.
-> 
-> map_domain_page() will blindly hand this virtual address if an
-> appropriate mfn is passed, because there are no suitability checks.
-> 
-> The error handling isn't great, but at least any attempt to use that
-> pointer would fault, which is now no longer the case.
-> 
-> LA57 machines can have RAM or NVDIMMs in a range which will tickle this
-> bug.  In fact, they can have MFNs which would wrap around 0 into guest
-> space.
+On 22.02.2021 19:04, Bobby Eshleman wrote:
+> I just wanted to request more feedback on this series and put it on the radar, while acknowledging
+> that I'm sure given the recent code freeze it is a busy time for everybody.
 
-This latter fact would be a far worse problem than accesses through
-the last L4 entry, populated or not. However, I don't really follow
-your concern: There are ample cases where functions assume to be
-passed sane arguments. A pretty good (imo) comparison here is with
-mfn_to_page(), which also will assume a sane MFN (i.e. one with a
-representable (in frame_table[]) value. If there was a bug, it
-would be either the caller taking an MFN out of thin air, or us
-introducing MFNs we can't cover in any of direct map, frame table,
-or M2P. But afaict there is guarding against the latter (look for
-the "Ignoring inaccessible memory range" loge messages in setup.c).
-
-In any event - imo any such bug would need fixing there, rather
-than being an argument against the change here.
-
-Also, besides your objection going quite a bit too far for my taste,
-I miss any form of an alternative suggestion. Do you want the mirror
-range to be put below the canonical boundary? Taking in mind your
-wrapping consideration, about _any_ VA would be unsuitable.
+It is on my list of things to look at. While probably not a good excuse,
+my looking at previous versions of this makes we somewhat hesitant to
+open any of these patch mails ... But I mean to get to it.
 
 Jan
 
