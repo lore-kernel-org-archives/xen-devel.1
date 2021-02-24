@@ -1,49 +1,44 @@
-Return-Path: <SRS0=trq0=HZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=y6zA=H2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB230C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 22:55:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF16FC433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Feb 2021 00:20:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 56B4A64E21
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Feb 2021 22:55:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 56B4A64E21
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 5310164E83
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Feb 2021 00:20:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5310164E83
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89120.167627 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89136.167666 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lEgas-0004gX-UU; Tue, 23 Feb 2021 22:55:50 +0000
+	id 1lEhuf-0005IX-PC; Wed, 24 Feb 2021 00:20:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89120.167627; Tue, 23 Feb 2021 22:55:50 +0000
+Received: by outflank-mailman (output) from mailman id 89136.167666; Wed, 24 Feb 2021 00:20:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lEgas-0004gQ-QX; Tue, 23 Feb 2021 22:55:50 +0000
-Received: by outflank-mailman (input) for mailman id 89120;
- Tue, 23 Feb 2021 22:55:49 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lEgar-0004gE-3Z; Tue, 23 Feb 2021 22:55:49 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lEgaq-0005AM-QM; Tue, 23 Feb 2021 22:55:48 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lEgaq-0006Cn-JY; Tue, 23 Feb 2021 22:55:48 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lEgaq-0000Nc-J6; Tue, 23 Feb 2021 22:55:48 +0000
+	id 1lEhuf-0005IQ-LH; Wed, 24 Feb 2021 00:20:21 +0000
+Received: by outflank-mailman (input) for mailman id 89136;
+ Wed, 24 Feb 2021 00:20:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Stqq=H2=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1lEhue-0005IG-OF
+ for xen-devel@lists.xenproject.org; Wed, 24 Feb 2021 00:20:20 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 70a8238c-a04a-4ffa-8619-79a4178e0301;
+ Wed, 24 Feb 2021 00:20:19 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A5E8464E89;
+ Wed, 24 Feb 2021 00:20:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,87 +50,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=Q/U4b0NzbBuQVlwD5P8M7TfLstVhJNA5aPtK2vqM+qY=; b=Qq1AjKhEkO1Rg9IQ07KB0VIF27
-	E6vDaBGk3zywy0q2qAG/2lSqWx8cBa2ZkxQj6cwPKGotlq1987bA0ZRqqy1pggv3q8rXJ8qmYT5E4
-	lPP+V8pJAAx/bG3BcYVCqplyZJoc+3hRBRKTEFhjGepxZkI4ZVto2lZICHgX78vab2Rk=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-159600-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 70a8238c-a04a-4ffa-8619-79a4178e0301
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1614126018;
+	bh=Z+5yeHvLg7b690ETZIHtVhwsU2cPjYuOULSm4Lixplw=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=AQKCf+sqhZJgio3h1+YwN+m3Z9fweF/VBYpbBDw/VpeSiXyMgepxF1ANJWH6z3a4b
+	 RjCD00wPd8dKRH7sWkc9bRiVioxQzvmXduSpRpU6cjT7PW96pplm3a0oyxxWh7dtsC
+	 O5NJG4eaTlecXavNRHgvJYVVkdnERUpFusm1p/Hmdd+m6Qqb+rVZYj9izs/YqEU9Te
+	 yF/Ewc91PtLXBIWjCAOnr0dR6QsgKu+LRXVNKpssh5UKxds9mU8MDTZLC7Nh7sxkGn
+	 aOyeYbxtOIbjDlVtuRK2GG62ng973hzFdvSCQvge+HANDW5CUPyYSqLXyELaJFEOSD
+	 1N5FLDYKz8P0A==
+Date: Tue, 23 Feb 2021 16:20:18 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Julien Grall <julien@xen.org>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    xen-devel@lists.xenproject.org, Bertrand.Marquis@arm.com, 
+    Volodymyr_Babchuk@epam.com, rahul.singh@arm.com
+Subject: Re: [RFC] xen/arm: introduce XENFEAT_ARM_dom0_iommu
+In-Reply-To: <98a15b6d-7460-31a0-0b4a-acf035571a17@xen.org>
+Message-ID: <alpine.DEB.2.21.2102231520510.3234@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2102161333090.3234@sstabellini-ThinkPad-T480s> <2d22d5b8-6cda-f27b-e938-4806b65794a5@xen.org> <alpine.DEB.2.21.2102171233270.3234@sstabellini-ThinkPad-T480s> <0be0196f-5b3f-73f9-5ab7-7a54faabec5c@xen.org>
+ <alpine.DEB.2.21.2102180920570.3234@sstabellini-ThinkPad-T480s> <98a15b6d-7460-31a0-0b4a-acf035571a17@xen.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 159600: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=5d94433a66df29ce314696a13bdd324ec0e342fe
-X-Osstest-Versions-That:
-    xen=f894c3d8e705fea9cb3244fa61684bfd8bdd1b2a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 23 Feb 2021 22:55:48 +0000
+Content-Type: text/plain; charset=US-ASCII
 
-flight 159600 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/159600/
+On Fri, 19 Feb 2021, Julien Grall wrote:
+> On 19/02/2021 01:42, Stefano Stabellini wrote:
+> > On Thu, 18 Feb 2021, Julien Grall wrote:
+> > > On 17/02/2021 23:54, Stefano Stabellini wrote:
+> > > > On Wed, 17 Feb 2021, Julien Grall wrote:
+> > > > > On 17/02/2021 02:00, Stefano Stabellini wrote:
+> > > > But actually it was always wrong for Linux to enable swiotlb-xen without
+> > > > checking whether it is 1:1 mapped or not. Today we enable swiotlb-xen in
+> > > > dom0 and disable it in domU, while we should have enabled swiotlb-xen if
+> > > > 1:1 mapped no matter dom0/domU. (swiotlb-xen could be useful in a 1:1
+> > > > mapped domU driver domain.)
+> > > > 
+> > > > 
+> > > > There is an argument (Andy was making on IRC) that being 1:1 mapped or
+> > > > not is an important information that Xen should provide to the domain
+> > > > regardless of anything else.
+> > > > 
+> > > > So maybe we should add two flags:
+> > > > 
+> > > > - XENFEAT_direct_mapped
+> > > > - XENFEAT_not_direct_mapped
+> > > 
+> > > I am guessing the two flags is to allow Linux to fallback to the default
+> > > behavior (depending on dom0 vs domU) on older hypervisor On newer
+> > > hypervisors,
+> > > one of this flag would always be set. Is that correct?
+> > 
+> > Yes. On a newer hypervisor one of the two would be present and Linux can
+> > make an informed decision. On an older hypervisor, neither flag would be
+> > present, so Linux will have to keep doing what is currently doing.
+> > 
+> >   
+> > > > To all domains. This is not even ARM specific. Today dom0 would get
+> > > > XENFEAT_direct_mapped and domUs XENFEAT_not_direct_mapped. With cache
+> > > > coloring all domains will get XENFEAT_not_direct_mapped. With Bertrand's
+> > > > team work on 1:1 mapping domUs, some domUs might start to get
+> > > > XENFEAT_direct_mapped also one day soon.
+> > > > 
+> > > > Now I think this is the best option because it is descriptive, doesn't
+> > > > imply anything about what Linux should or should not do, and doesn't
+> > > > depend on unreliable IOMMU information.
+> > > 
+> > > That's a good first step but this still doesn't solve the problem on
+> > > whether
+> > > the swiotlb can be disabled per-device or even disabling the expensive 1:1
+> > > mapping in the IOMMU page-tables.
+> > > 
+> > > It feels to me we need to have a more complete solution (not necessary
+> > > implemented) so we don't put ourself in the corner again.
+> > 
+> > Yeah, XENFEAT_{not,}_direct_mapped help cleaning things up, but don't
+> > solve the issues you described. Those are difficult to solve, it would
+> > be nice to have some idea.
+> > 
+> > One issue is that we only have limited information passed via device
+> > tree, limited to the "iommus" property. If that's all we have, there
+> > isn't much we can do.
+> 
+> We can actually do a lot with that :). See more below.
+> 
+> > The device tree list is maybe the only option,
+> > although it feels a bit complex intuitively. We could maybe replace the
+> > real iommu node with a fake iommu node only to use it to "tag" devices
+> > protected by the real iommu.
+> > 
+> > I like the idea of rewarding well-designed boards; boards that have an
+> > IOMMU and works for all DMA-mastering devices. It would be great to be
+> > able to optimize those in a simple way, without breaking the others. But
+> > unfortunately due to the limited info on device tree, I cannot think of
+> > a way to do it automatically. And it is not great to rely on platform
+> > files.
+> 
+> We would not be able to automate in Xen alone, however we can ask the help of
+> Linux.
+> 
+> Xen is able to tell whether it has protected the device with an IOMMU or not.
+> When creating the domain device-tree, it could replace the IOMMU node with a
+> Xen specific one.
+> 
+> With the Xen IOMMU nodes, Linux could find out whether the device needs to use
+> the swiotlb ops or not.
 
-Failures :-/ but no regressions.
+That might work.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+Another similar idea is to use "dma-ranges" in device tree.  dma-ranges
+can only be used for a bus and allow us to specify special DMA address
+mappings between the nodes under the bus the parent address space.
 
-version targeted for testing:
- xen                  5d94433a66df29ce314696a13bdd324ec0e342fe
-baseline version:
- xen                  f894c3d8e705fea9cb3244fa61684bfd8bdd1b2a
+If we created a new bus node called "amba-nodma" with a "dma-ranges"
+that basically traslates child addresses into an invalid address or size
+zero, and moved devices without "iommus" under it, the consequence is
+that all those devices will be accessible and usable by Linux but there
+would be no DMA transactions originating from them. Or the transactions
+would fail explicitely.
 
-Last test of basis   159548  2021-02-22 12:00:26 Z    1 days
-Testing same since   159600  2021-02-23 20:01:30 Z    0 days    1 attempts
+Thus, IOMMU-protected devices would continue to work as normal.
+Non-dma-mastering non-IOMMU-protected devices would also continue to
+work as normal.
+Dma-mastering non-IOMMU-protected devices would not work, but the
+failure would be controlled and explicit.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Roger Pau Monne <roger.pau@citrix.com>
-  Roger Pau Monné <roger.pau@citrix.com>
+At that point, swiotlb-xen could be enabled only for devices that have
+this special dma-ranges address translation.
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+On one hand, this technique would require fewer changes in Linux -- it
+might even work with almost no changes on the Linux side thanks to the
+automatic fallback to the swiotlb when dma_mask checks fail.
 
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+On the other hand, I really dislike the magic invalid address
+translation. If it is invalid, the device DMA should not work at all; it
+should not trigger the swiotlb-xen. I can't think of a way to make this
+clean from a device tree spec perspective. I thought I would mention it
+in case it gives you any good ideas.
 
 
-Pushing revision :
+> Skipping extra mapping in the IOMMU is a bit trickier. I can see two
+> solutions:
+>   - A per-domain toggle to skip the IOMMU mapping. This is assuming that Linux
+> is able to know that all DMA capable devices are protected. The problem is a
+> driver may be loaded later. Such drivers are unlikely to use existing grant,
+> so the toggle could be used to say "all the grant after this point will
+> require a mapping (or not)"
 
-To xenbits.xen.org:/home/xen/git/xen.git
-   f894c3d8e7..5d94433a66  5d94433a66df29ce314696a13bdd324ec0e342fe -> smoke
+I cannot think of a way for Linux to figure out that all DMA capable
+devices are protected. Is the idea that Linux would base the decision on
+the Linux drivers, not the capability of the hardware? Even using the
+drivers, I don't know if it would be possible to implement.
+
+
+>   - A per-grant flag to indicate whether an IOMMU mapping is necessary. This
+> is assuming we are able to know whether a grant will be used for DMA.
+
+That might be easier because the caller of gnttab_map_refs in Linux
+should be able to make a decent guess.
 
