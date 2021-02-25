@@ -2,44 +2,47 @@ Return-Path: <SRS0=BiGO=H3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75D3BC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 09:32:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A96CC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 09:51:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E26664EC3
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 09:32:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E26664EC3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2DA5064EBA
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 09:51:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2DA5064EBA
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89654.169037 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89658.169048 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFD0j-0001r0-Mi; Thu, 25 Feb 2021 09:32:41 +0000
+	id 1lFDI9-0003q0-6i; Thu, 25 Feb 2021 09:50:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89654.169037; Thu, 25 Feb 2021 09:32:41 +0000
+Received: by outflank-mailman (output) from mailman id 89658.169048; Thu, 25 Feb 2021 09:50:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFD0j-0001qt-JZ; Thu, 25 Feb 2021 09:32:41 +0000
-Received: by outflank-mailman (input) for mailman id 89654;
- Thu, 25 Feb 2021 09:32:40 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lFDI9-0003pt-3m; Thu, 25 Feb 2021 09:50:41 +0000
+Received: by outflank-mailman (input) for mailman id 89658;
+ Thu, 25 Feb 2021 09:50:40 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=qWJX=H3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lFD0i-0001ql-EC
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 09:32:40 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d2c86f6b-02e2-4c19-a6c9-e8bc63149443;
- Thu, 25 Feb 2021 09:32:39 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2657DACCF;
- Thu, 25 Feb 2021 09:32:38 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1lFDI8-0003po-1h
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 09:50:40 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lFDI7-0005ic-Te
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 09:50:39 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lFDI7-0004pW-So
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 09:50:39 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lFDI1-00014S-NG; Thu, 25 Feb 2021 09:50:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,52 +54,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d2c86f6b-02e2-4c19-a6c9-e8bc63149443
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614245558; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=AjkJf4O3dzVkjq702sFusBq8xTbdicOubQgnihwYT7Q=;
-	b=VpoLdFqHh73ApSmM1sfEUruSG2FRNOLAAh4qhNcvki34p3pOpr1GL8ZY+WQ93QuS+YzsMP
-	0wcrQMxVtAxD1iK0y9cdbxF1R+M/WGVR0PcjHtPkZtBX/P7ufGpPoBK+GQ4VPk/0ZVjkyl
-	g20K7AugGdVBk61kP19/JU/xhR/gD6k=
-Subject: Re: [PATCH v3][4.15] x86: mirror compat argument translation area for
- 32-bit PV
-From: Jan Beulich <jbeulich@suse.com>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Ian Jackson <iwj@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <dbdb045d-42de-af94-64cc-0be7992b80b6@suse.com>
-Message-ID: <c56c115f-10de-35b0-c27c-1930e99d9377@suse.com>
-Date: Thu, 25 Feb 2021 10:32:38 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=P97ygsKZKkV6O5TmJ/tc84vGWcotGhvJmKuGQroEJS8=; b=ZhrQm/M4KC7RKwELr6dZtUlXnr
+	4wXbepyGZYWrMKxxzXwnPe8vum2obECWzBrZpbYwRz/UJpDesb2p9IXYEM0xpLtJQfBqOqhdr8Y2M
+	Yl3fjEKi8kGO/ISB8RFLepglPRYkEAXeUJqi2AdNjnH5K1FAB3+nv8A1/o3UR52w/E4g=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <dbdb045d-42de-af94-64cc-0be7992b80b6@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24631.29417.501638.284615@mariner.uk.xensource.com>
+Date: Thu, 25 Feb 2021 09:50:33 +0000
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+    Wei Liu <wl@xen.org>,
+    xen-devel@lists.xenproject.org,
+    Roger Pau Monne <roger.pau@citrix.com>
+Subject: Re: [PATCH 0/2] hvmloader: drop usage of system headers
+In-Reply-To: <61932477-d44c-5592-da3f-b0b5ff5c6321@suse.com>
+References: <20210224102641.89455-1-roger.pau@citrix.com>
+	<35864c33-b375-a3c6-13bc-ad1e7d0773eb@citrix.com>
+	<61932477-d44c-5592-da3f-b0b5ff5c6321@suse.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-On 25.02.2021 10:30, Jan Beulich wrote:
-> Now that we guard the entire Xen VA space against speculative abuse
-> through hypervisor accesses to guest memory, the argument translation
-> area's VA also needs to live outside this range, at least for 32-bit PV
-> guests. To avoid extra is_hvm_*() conditionals, use the alternative VA
-> uniformly.
-> 
-> While this could be conditionalized upon CONFIG_PV32 &&
-> CONFIG_SPECULATIVE_HARDEN_GUEST_ACCESS, omitting such extra conditionals
-> keeps the code more legible imo.
-> 
-> Fixes: 4dc181599142 ("x86/PV: harden guest memory accesses against speculative abuse")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Jan Beulich writes ("Re: [PATCH 0/2] hvmloader: drop usage of system headers"):
+> On 24.02.2021 21:08, Andrew Cooper wrote:
+> > After some experimentation in the arch container
+...
+> > while the freestanding form with `gcc -ffreestanding -m32 -E` is:
+...
+> > # 34 "/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include/stdint-gcc.h" 3 4
+> > typedef signed char int8_t;
+> > ...
 
-Roger - I would have dropped an R-b, but I've assumed keeping an A-b
-would be fine. Please let me know if this was wrong.
+Um, but what size is size_t ?
 
-Jan
+In particular, note that that path contains nothing to do with 32-bit
+so I think it is probably the wrong bitness.
+
+> Why "more subtle"? All we're lacking is -ffreestanding. The
+> question is whether it is an acceptably risky thing to do at
+> this point in the release cycle to add the option.
+
+If -ffreestanding DTRT then I think it's about as risky as the fix I
+already approved and we have merged...
+
+Ian.
 
