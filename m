@@ -2,41 +2,42 @@ Return-Path: <SRS0=BiGO=H3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E98D0C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECE2AC433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA79164F4D
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA79164F4D
+	by mail.kernel.org (Postfix) with ESMTPS id A900064F65
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A900064F65
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89956.170007 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89957.170019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFNHS-0007yW-AH; Thu, 25 Feb 2021 20:30:38 +0000
+	id 1lFNHU-00080q-JU; Thu, 25 Feb 2021 20:30:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89956.170007; Thu, 25 Feb 2021 20:30:38 +0000
+Received: by outflank-mailman (output) from mailman id 89957.170019; Thu, 25 Feb 2021 20:30:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFNHS-0007yN-6s; Thu, 25 Feb 2021 20:30:38 +0000
-Received: by outflank-mailman (input) for mailman id 89956;
- Thu, 25 Feb 2021 20:30:37 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lFNHU-00080i-Fv; Thu, 25 Feb 2021 20:30:40 +0000
+Received: by outflank-mailman (input) for mailman id 89957;
+ Thu, 25 Feb 2021 20:30:40 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3W+l=H3=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lFNHR-0007y5-Ak
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 20:30:37 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 35a11dac-1e2c-4877-81e7-fe1842d1a6e1;
- Thu, 25 Feb 2021 20:30:36 +0000 (UTC)
+ id 1lFNHT-00080O-Tw
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 20:30:39 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b336a773-bd63-4dcb-99ea-ee13014eb19f;
+ Thu, 25 Feb 2021 20:30:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,73 +49,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35a11dac-1e2c-4877-81e7-fe1842d1a6e1
+X-Inumbo-ID: b336a773-bd63-4dcb-99ea-ee13014eb19f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1614285036;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Uh5oHWzLVTHvmw2rDj/q17q9Xcu+TPFKLKfwevnoXC8=;
-  b=AITUxbUocgEviIzCCwYAq50YRcXa8d58YdV2pzBf4T0OBmh/stsbvQ7p
-   ujJSGJTRP+vUaSN252jc+FfYqb3y2E113RYLeST7GtzOZQV2FWVPMtj3Z
-   t3L86WBrkxECpOfc1vEQH419lsvwzxPBMV1kZZvCZZPE1MgXWmS86o3Ev
-   0=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Y8IWb4cUrWteqAlcWBAK+2LHedV+A/E1UxLdUap5ImM4kz9rgw0Gt3n0pmPyXuORQI5cMMpqC2
- KmEtPczrqvo3dz9E6Ze+oNtkEVRXHYs3Rs+emr2vaEY9xYmdOdL2CubNmXa3P+8sLKcKWIxr2l
- bngbeERHmjiRt632rRAx9DNj7IAYZlccC8+lqa1VI4vZhb3nye11T9WOXVCe+1DpyVu98LgaBw
- tRtWI8rW7+e/7DpuK5HINrlSEaVcHn/ntfIFKkGiNMozU2+Tgpz7xKrKmOSAvHtrtCKGhmZqkf
- 638=
+  d=citrix.com; s=securemail; t=1614285038;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=8hVN7Jd1M433kecw5Oj1hJjCQjf9Moi2LnCMo4tdjc8=;
+  b=PnHBjyDuSIgH/mNyiTj8N5Dn61ciBVwhrAhRGtNCpEV9kp5uneIVr743
+   FhBlvDLimJ9wWT7Y2P0+YuIe0J/aVo+w3uP3arhMdsab1GIeomss/5ECO
+   XTwqEgol8x4ky/fbI2UMuG/J0Peu1GZt8WFkTC4XVmgMNaLTqyykS2/eX
+   s=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: ie/i33Gei64ljV6YdDzbwAvj2LHGW1RD5fqq8cdzwZCw3SJMDR/sr0A65QKgKfL1KiYvRTaAma
+ wWm1R6HZw5QFP1YaRMbFw+ae+L32Ztf4C0rFbN4hbO9ozDESgcg6FmYPZXvzqo51j3WMYzq4hl
+ Jn/o/1bxZGEE9SPrJn+3/7G5ut7OMKeBJoCjZldZTwtJEY5L3a0YWM1j1Hc+2iq/wBgDq5d4Mj
+ S6hwVnQNFvEaOgU5LNG0tAxf/H3A7Zb5sr0kbWdj5v7MepBt6s9FrlANNYrhCNLyOBW1uVEa02
+ acs=
 X-SBRS: 5.2
-X-MesageID: 38246981
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 38050464
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.81,207,1610427600"; 
-   d="scan'208";a="38246981"
+   d="scan'208";a="38050464"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
-	<iwj@xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH for-4.15 0/3] Build firmware as freestanding
-Date: Thu, 25 Feb 2021 20:30:06 +0000
-Message-ID: <20210225203010.11378-1-andrew.cooper3@citrix.com>
+	<iwj@xenproject.org>
+Subject: [PATCH 2/3] tools/firmware: Build firmware as -ffreestanding
+Date: Thu, 25 Feb 2021 20:30:08 +0000
+Message-ID: <20210225203010.11378-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210225203010.11378-1-andrew.cooper3@citrix.com>
+References: <20210225203010.11378-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This fixes a bug we've had for ages, which even ended up being documented as
-an inappropriate build dependency.
+firmware should always have been -ffreestanding, as it doesn't execute in the
+host environment.
 
-For 4.15.  I'm tempted to suggest that it wants backporting to the stable
-branches as well.
+inttypes.h isn't a freestanding header, but the 32bitbios_support.c only wants
+the stdint.h types so switch to the more appropriate include.
 
-Andrew Cooper (3):
-  tools/hvmloader: Drop machelf include as well
-  tools/firmware: Build firmware as -ffreestanding
-  automation: Annotate that a 32bit libc is no longer a dependency
+This removes the build time dependency on a 32bit libc just to compile the
+hvmloader and friends.
 
- .travis.yml                                          | 1 -
- README                                               | 3 ---
- automation/build/archlinux/current.dockerfile        | 1 +
- automation/build/centos/7.2.dockerfile               | 1 +
- automation/build/centos/7.dockerfile                 | 1 +
- automation/build/debian/jessie.dockerfile            | 1 +
- automation/build/debian/stretch.dockerfile           | 1 +
- automation/build/debian/unstable.dockerfile          | 1 +
- automation/build/fedora/29.dockerfile                | 1 +
- automation/build/suse/opensuse-leap.dockerfile       | 1 +
- automation/build/suse/opensuse-tumbleweed.dockerfile | 1 +
- automation/build/ubuntu/bionic.dockerfile            | 1 +
- automation/build/ubuntu/focal.dockerfile             | 1 +
- automation/build/ubuntu/trusty.dockerfile            | 1 +
- automation/build/ubuntu/xenial.dockerfile            | 1 +
- tools/firmware/Rules.mk                              | 2 +-
- tools/firmware/hvmloader/32bitbios_support.c         | 5 +----
- 17 files changed, 15 insertions(+), 9 deletions(-)
+Update README and the TravisCI configuration.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Ian Jackson <iwj@xenproject.org>
+
+For 4.15.  Build tested in Travis (Ubuntu) and XenServer (CentOS) - no change
+in the compiled HVMLoader binary.  I'm currently rebuilding the containers
+locally to check Arch, Debian and OpenSUSE, but don't anticipate any problems.
+
+This does not resolve the build issue on Alpine.  Exactly what to do there is
+still TBC, but Roger has opened a bug with Apline concerning their GCC
+packaging.
+---
+ .travis.yml                                  | 1 -
+ README                                       | 3 ---
+ tools/firmware/Rules.mk                      | 2 +-
+ tools/firmware/hvmloader/32bitbios_support.c | 2 +-
+ 4 files changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/.travis.yml b/.travis.yml
+index 15ca9e9047..2362475f7a 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -58,7 +58,6 @@ addons:
+             - acpica-tools
+             - bin86
+             - bcc
+-            - libc6-dev-i386
+             - libnl-3-dev
+             - ocaml-nox
+             - libfindlib-ocaml-dev
+diff --git a/README b/README
+index 33cdf6b826..5167bb1708 100644
+--- a/README
++++ b/README
+@@ -62,9 +62,6 @@ provided by your OS distributor:
+     * GNU bison and GNU flex
+     * GNU gettext
+     * ACPI ASL compiler (iasl)
+-    * Libc multiarch package (e.g. libc6-dev-i386 / glibc-devel.i686).
+-      Required when building on a 64-bit platform to build
+-      32-bit components which are enabled on a default build.
+ 
+ In addition to the above there are a number of optional build
+ prerequisites. Omitting these will cause the related features to be
+diff --git a/tools/firmware/Rules.mk b/tools/firmware/Rules.mk
+index 26bbddccd4..93abcabc67 100644
+--- a/tools/firmware/Rules.mk
++++ b/tools/firmware/Rules.mk
+@@ -16,4 +16,4 @@ CFLAGS += -Werror
+ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ 
+ # Extra CFLAGS suitable for an embedded type of environment.
+-CFLAGS += -fno-builtin -msoft-float
++CFLAGS += -fno-builtin -msoft-float -ffreestanding
+diff --git a/tools/firmware/hvmloader/32bitbios_support.c b/tools/firmware/hvmloader/32bitbios_support.c
+index 6f28fb6bde..cee3804888 100644
+--- a/tools/firmware/hvmloader/32bitbios_support.c
++++ b/tools/firmware/hvmloader/32bitbios_support.c
+@@ -20,7 +20,7 @@
+  * this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <inttypes.h>
++#include <stdint.h>
+ #include <xen/libelf/elfstructs.h>
+ 
+ #include "util.h"
 -- 
 2.11.0
 
