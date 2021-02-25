@@ -2,42 +2,41 @@ Return-Path: <SRS0=BiGO=H3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55341C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E98D0C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0069464F4D
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0069464F4D
+	by mail.kernel.org (Postfix) with ESMTPS id AA79164F4D
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 20:30:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA79164F4D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89955.169994 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89956.170007 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFNHL-0007vP-U8; Thu, 25 Feb 2021 20:30:31 +0000
+	id 1lFNHS-0007yW-AH; Thu, 25 Feb 2021 20:30:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89955.169994; Thu, 25 Feb 2021 20:30:31 +0000
+Received: by outflank-mailman (output) from mailman id 89956.170007; Thu, 25 Feb 2021 20:30:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFNHL-0007vI-Qs; Thu, 25 Feb 2021 20:30:31 +0000
-Received: by outflank-mailman (input) for mailman id 89955;
- Thu, 25 Feb 2021 20:30:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lFNHS-0007yN-6s; Thu, 25 Feb 2021 20:30:38 +0000
+Received: by outflank-mailman (input) for mailman id 89956;
+ Thu, 25 Feb 2021 20:30:37 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3W+l=H3=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lFNHK-0007vD-M8
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 20:30:30 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id df6720d4-3744-49de-b4d1-09441e620fab;
- Thu, 25 Feb 2021 20:30:29 +0000 (UTC)
+ id 1lFNHR-0007y5-Ak
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 20:30:37 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 35a11dac-1e2c-4877-81e7-fe1842d1a6e1;
+ Thu, 25 Feb 2021 20:30:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,58 +48,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: df6720d4-3744-49de-b4d1-09441e620fab
+X-Inumbo-ID: 35a11dac-1e2c-4877-81e7-fe1842d1a6e1
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1614285029;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=2KPiebheJyKHjlqvLctYPjbzkFONFknSVoRbxujFVEE=;
-  b=WtKRWOZOQE3NpbUysrR8U9Mf1hy6RIIFO86Ps8M8/8/I10xx+Hj7rtpO
-   Sgm9N7e4PfB0ZdXphI0XKBB1tWWNMiOlox/8rdue6NMjhq7bPDHw/0zaW
-   mN4CmGzMocBLNQ60FnkhL6RDZOMI6hD+2r+YThHFdUHRUdSHbvcPvXGPT
-   Y=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: NePu1J4P/KYBJYnQPEvgTTrX62mpxFDZpqQPpwPq53wThMHrfGNYe9GkQgSnUt+MlZwPmZ2jnZ
- T1nwU86VaQccohBP6vqE1pswVZiisDvvug2bX6Rz8q2YqT/XyLfkQIxEG+7K44fU5QQ1rmhYQX
- WAHDpNi1OEeyjRkdxSi2+toy+Kwfku6D9OJi8NDP66+QhL/lCgVz6Gwn+5b4mrFWmu6s1IumCa
- zs1/5Kj146QGEVTx8aUN7XpL5kHniPgoM+CLZE0A7/4S8cO/YE2krv+9tQdRI62n55/153s6Hb
- Q/8=
+  d=citrix.com; s=securemail; t=1614285036;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Uh5oHWzLVTHvmw2rDj/q17q9Xcu+TPFKLKfwevnoXC8=;
+  b=AITUxbUocgEviIzCCwYAq50YRcXa8d58YdV2pzBf4T0OBmh/stsbvQ7p
+   ujJSGJTRP+vUaSN252jc+FfYqb3y2E113RYLeST7GtzOZQV2FWVPMtj3Z
+   t3L86WBrkxECpOfc1vEQH419lsvwzxPBMV1kZZvCZZPE1MgXWmS86o3Ev
+   0=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Y8IWb4cUrWteqAlcWBAK+2LHedV+A/E1UxLdUap5ImM4kz9rgw0Gt3n0pmPyXuORQI5cMMpqC2
+ KmEtPczrqvo3dz9E6Ze+oNtkEVRXHYs3Rs+emr2vaEY9xYmdOdL2CubNmXa3P+8sLKcKWIxr2l
+ bngbeERHmjiRt632rRAx9DNj7IAYZlccC8+lqa1VI4vZhb3nye11T9WOXVCe+1DpyVu98LgaBw
+ tRtWI8rW7+e/7DpuK5HINrlSEaVcHn/ntfIFKkGiNMozU2+Tgpz7xKrKmOSAvHtrtCKGhmZqkf
+ 638=
 X-SBRS: 5.2
-X-MesageID: 37980454
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 38246981
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.81,207,1610427600"; 
-   d="scan'208";a="37980454"
+   d="scan'208";a="38246981"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Doug Goldstein
-	<cardoe@cardoe.com>, Wei Liu <wl@xen.org>, Ian Jackson <iwj@xenproject.org>
-Subject: [PATCH 3/3] automation: Annotate that a 32bit libc is no longer a dependency
-Date: Thu, 25 Feb 2021 20:30:09 +0000
-Message-ID: <20210225203010.11378-4-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
+	<iwj@xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH for-4.15 0/3] Build firmware as freestanding
+Date: Thu, 25 Feb 2021 20:30:06 +0000
+Message-ID: <20210225203010.11378-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210225203010.11378-1-andrew.cooper3@citrix.com>
-References: <20210225203010.11378-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-We can't drop the 32bit libc from the existing containers, because they are
-used on older Xen branches as well.
+This fixes a bug we've had for ages, which even ended up being documented as
+an inappropriate build dependency.
 
-However, we can avoid the dependency being propagated into newer conainers
-derived from our dockerfiles.
+For 4.15.  I'm tempted to suggest that it wants backporting to the stable
+branches as well.
 
-No functional change.
+Andrew Cooper (3):
+  tools/hvmloader: Drop machelf include as well
+  tools/firmware: Build firmware as -ffreestanding
+  automation: Annotate that a 32bit libc is no longer a dependency
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Doug Goldstein <cardoe@cardoe.com>
-CC: Wei Liu <wl@xen.org>
-CC: Ian Jackson <iwj@xenproject.org>
-
-For 4.15.  Documentation changes only
----
+ .travis.yml                                          | 1 -
+ README                                               | 3 ---
  automation/build/archlinux/current.dockerfile        | 1 +
  automation/build/centos/7.2.dockerfile               | 1 +
  automation/build/centos/7.dockerfile                 | 1 +
@@ -114,164 +111,10 @@ For 4.15.  Documentation changes only
  automation/build/ubuntu/focal.dockerfile             | 1 +
  automation/build/ubuntu/trusty.dockerfile            | 1 +
  automation/build/ubuntu/xenial.dockerfile            | 1 +
- 13 files changed, 13 insertions(+)
+ tools/firmware/Rules.mk                              | 2 +-
+ tools/firmware/hvmloader/32bitbios_support.c         | 5 +----
+ 17 files changed, 15 insertions(+), 9 deletions(-)
 
-diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
-index d8fbebaf79..d46fc9d9ca 100644
---- a/automation/build/archlinux/current.dockerfile
-+++ b/automation/build/archlinux/current.dockerfile
-@@ -20,6 +20,7 @@ RUN pacman -S --refresh --sysupgrade --noconfirm --noprogressbar --needed \
-         iasl \
-         inetutils \
-         iproute \
-+        # lib32-glibc for Xen < 4.15
-         lib32-glibc \
-         libaio \
-         libcacard \
-diff --git a/automation/build/centos/7.2.dockerfile b/automation/build/centos/7.2.dockerfile
-index c2f46b694c..af672a0be1 100644
---- a/automation/build/centos/7.2.dockerfile
-+++ b/automation/build/centos/7.2.dockerfile
-@@ -34,6 +34,7 @@ RUN rpm --rebuilddb && \
-         yajl-devel \
-         pixman-devel \
-         glibc-devel \
-+        # glibc-devel.i686 for Xen < 4.15
-         glibc-devel.i686 \
-         make \
-         binutils \
-diff --git a/automation/build/centos/7.dockerfile b/automation/build/centos/7.dockerfile
-index e37d9d743a..5f83c97d0c 100644
---- a/automation/build/centos/7.dockerfile
-+++ b/automation/build/centos/7.dockerfile
-@@ -32,6 +32,7 @@ RUN yum -y install \
-         yajl-devel \
-         pixman-devel \
-         glibc-devel \
-+        # glibc-devel.i686 for Xen < 4.15
-         glibc-devel.i686 \
-         make \
-         binutils \
-diff --git a/automation/build/debian/jessie.dockerfile b/automation/build/debian/jessie.dockerfile
-index 1232b9e204..808d6272e4 100644
---- a/automation/build/debian/jessie.dockerfile
-+++ b/automation/build/debian/jessie.dockerfile
-@@ -31,6 +31,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
-diff --git a/automation/build/debian/stretch.dockerfile b/automation/build/debian/stretch.dockerfile
-index 32742f7f39..e3bace1f87 100644
---- a/automation/build/debian/stretch.dockerfile
-+++ b/automation/build/debian/stretch.dockerfile
-@@ -32,6 +32,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
-diff --git a/automation/build/debian/unstable.dockerfile b/automation/build/debian/unstable.dockerfile
-index aeb4f3448b..9a10ee08d6 100644
---- a/automation/build/debian/unstable.dockerfile
-+++ b/automation/build/debian/unstable.dockerfile
-@@ -32,6 +32,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
-diff --git a/automation/build/fedora/29.dockerfile b/automation/build/fedora/29.dockerfile
-index 6a4e5b0413..5482952523 100644
---- a/automation/build/fedora/29.dockerfile
-+++ b/automation/build/fedora/29.dockerfile
-@@ -25,6 +25,7 @@ RUN dnf -y install \
-         yajl-devel \
-         pixman-devel \
-         glibc-devel \
-+        # glibc-devel.i686 for Xen < 4.15
-         glibc-devel.i686 \
-         make \
-         binutils \
-diff --git a/automation/build/suse/opensuse-leap.dockerfile b/automation/build/suse/opensuse-leap.dockerfile
-index c60c13c943..685dd5d7fd 100644
---- a/automation/build/suse/opensuse-leap.dockerfile
-+++ b/automation/build/suse/opensuse-leap.dockerfile
-@@ -26,6 +26,7 @@ RUN zypper install -y --no-recommends \
-         git \
-         glib2-devel \
-         glibc-devel \
-+        # glibc-devel-32bit for Xen < 4.15
-         glibc-devel-32bit \
-         gzip \
-         hostname \
-diff --git a/automation/build/suse/opensuse-tumbleweed.dockerfile b/automation/build/suse/opensuse-tumbleweed.dockerfile
-index 084cce0921..061173e751 100644
---- a/automation/build/suse/opensuse-tumbleweed.dockerfile
-+++ b/automation/build/suse/opensuse-tumbleweed.dockerfile
-@@ -26,6 +26,7 @@ RUN zypper install -y --no-recommends \
-         git \
-         glib2-devel \
-         glibc-devel \
-+        # glibc-devel-32bit for Xen < 4.15
-         glibc-devel-32bit \
-         gzip \
-         hostname \
-diff --git a/automation/build/ubuntu/bionic.dockerfile b/automation/build/ubuntu/bionic.dockerfile
-index 712b2e4722..408063698c 100644
---- a/automation/build/ubuntu/bionic.dockerfile
-+++ b/automation/build/ubuntu/bionic.dockerfile
-@@ -32,6 +32,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
-diff --git a/automation/build/ubuntu/focal.dockerfile b/automation/build/ubuntu/focal.dockerfile
-index c1c1f8d58f..90b4001a6a 100644
---- a/automation/build/ubuntu/focal.dockerfile
-+++ b/automation/build/ubuntu/focal.dockerfile
-@@ -31,6 +31,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
-diff --git a/automation/build/ubuntu/trusty.dockerfile b/automation/build/ubuntu/trusty.dockerfile
-index 397a28061d..fd377d948f 100644
---- a/automation/build/ubuntu/trusty.dockerfile
-+++ b/automation/build/ubuntu/trusty.dockerfile
-@@ -32,6 +32,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
-diff --git a/automation/build/ubuntu/xenial.dockerfile b/automation/build/ubuntu/xenial.dockerfile
-index ce0e84fa2f..57a71eb8c6 100644
---- a/automation/build/ubuntu/xenial.dockerfile
-+++ b/automation/build/ubuntu/xenial.dockerfile
-@@ -32,6 +32,7 @@ RUN apt-get update && \
-         bin86 \
-         bcc \
-         liblzma-dev \
-+        # libc6-dev-i386 for Xen < 4.15
-         libc6-dev-i386 \
-         libnl-3-dev \
-         ocaml-nox \
 -- 
 2.11.0
 
