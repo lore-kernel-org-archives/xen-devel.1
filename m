@@ -2,49 +2,49 @@ Return-Path: <SRS0=BiGO=H3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-20.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2DE9C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:26:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66136C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:26:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 592C664F18
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:26:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 592C664F18
+	by mail.kernel.org (Postfix) with ESMTPS id ED13D64F19
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:26:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED13D64F19
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89814.169564 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89815.169576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFIWo-0006YL-HZ; Thu, 25 Feb 2021 15:26:10 +0000
+	id 1lFIWt-0006ew-U1; Thu, 25 Feb 2021 15:26:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89814.169564; Thu, 25 Feb 2021 15:26:10 +0000
+Received: by outflank-mailman (output) from mailman id 89815.169576; Thu, 25 Feb 2021 15:26:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFIWo-0006Y7-CA; Thu, 25 Feb 2021 15:26:10 +0000
-Received: by outflank-mailman (input) for mailman id 89814;
- Thu, 25 Feb 2021 15:26:09 +0000
+	id 1lFIWt-0006em-OM; Thu, 25 Feb 2021 15:26:15 +0000
+Received: by outflank-mailman (input) for mailman id 89815;
+ Thu, 25 Feb 2021 15:26:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yJgK=H3=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
- id 1lFIWm-0006Ig-UC
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 15:26:08 +0000
-Received: from mail-ot1-x335.google.com (unknown [2607:f8b0:4864:20::335])
+ id 1lFIWr-0006Ig-UJ
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 15:26:13 +0000
+Received: from mail-oi1-x22f.google.com (unknown [2607:f8b0:4864:20::22f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1364e052-c330-4da9-90bb-5ed76ce4ac61;
+ id d7244bbf-df56-4aca-b737-d3d6dbf87f08;
  Thu, 25 Feb 2021 15:25:52 +0000 (UTC)
-Received: by mail-ot1-x335.google.com with SMTP id e45so5980873ote.9
+Received: by mail-oi1-x22f.google.com with SMTP id a13so6444675oid.0
  for <xen-devel@lists.xenproject.org>; Thu, 25 Feb 2021 07:25:52 -0800 (PST)
 Received: from localhost.localdomain (142-79-211-230.starry-inc.net.
  [142.79.211.230])
- by smtp.gmail.com with ESMTPSA id l4sm1047292ooq.33.2021.02.25.07.25.51
+ by smtp.gmail.com with ESMTPSA id l4sm1047292ooq.33.2021.02.25.07.25.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Feb 2021 07:25:52 -0800 (PST)
+ Thu, 25 Feb 2021 07:25:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,114 +56,315 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1364e052-c330-4da9-90bb-5ed76ce4ac61
+X-Inumbo-ID: d7244bbf-df56-4aca-b737-d3d6dbf87f08
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=YiyxCQHFug7bXis7dCUf995/U3uEMwgP4ohptzUZnC0=;
-        b=XsUF+tEDJHgsFKyjXHcFJ+zEKr+nxIgXngWfdFwdzX8dcQiGbpELJYFinIdlcoRoY7
-         zihf1E5D2ZQShv99Q6chMRLIcWAgGMHTFLp44SSkmWD9lYOthFrt2rY6l53LW7Af+n3M
-         CuQaxVzp2RaIdFm/KumXPEXpcliU06qQQcvvnrQy/Buii7ywuvaOdSdzaNmcpdWg81Np
-         4EkAY5kjOnj7+AUkivbxWmgMDurFU+sA0DPCzewJnnA0aodSxk0RWzScjxmRJJ2bw5Vc
-         hckmduIWDQ8DflDPZSDVwDEa4tK8uvW9Tbfqxbqwn0rkY8a4AnhiXiJMbpCQOLO2C11b
-         yjPA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jxV1oAouWd/8cftdD9YIWNtxa9BAEzSaS3HYHAZ9n7k=;
+        b=FPDMXmJDygUszxoLuOCNlrK28lNTqViFFXeA0ZgzHrRe0vMa9QsIBJF35QYplkl4k0
+         aq2hPWx2bYUA/SqjEDYB/fnMT4eBplPKShoJNUDrIJd0ubpi6cTBoGXkgezY4HURd/BW
+         XKg6qiz/1aB0hwjwSjAki6A1nUu5fJbRkk4UWMCNCcCleT3AQjU0dXVeIZ0bllAG50oA
+         MSGZvyYHewjouj+MJtdAS6DxDp4LQuj+gEyXypER2heqQmsTRUeC/ZAD9U/IUnkUpo2c
+         UXD+Tnw5zE4xqPUFic5G/JH3XupQP57xGObgCm390n6wo9snotkhbo8ybzhJmX66jcm4
+         3jXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=YiyxCQHFug7bXis7dCUf995/U3uEMwgP4ohptzUZnC0=;
-        b=VeU89nQ8gsAAoWp9cdngsgSg+1HXB3zxuaqjn3BoKkj/sk5Z2wYFka3KUe9A1NGUjd
-         VnBzcTYTJS5/2BZYg0eJ7DoH27/iHw0jbg9sJZ7Esd/bi/hXO2XNj7693PXAnBewxYTs
-         JV6fojqhAwUWLVgiPfzldvcB3mKYzYWJ4P0Dov32pLwFictRdzlLG+KOeCpL3DdyvDXj
-         Qc6g1zEAkoFVlKJfzu/2XCYR22lJfE9JVSYhmrhLdh0gaLEmiaCzLdtbXhYZQndiRCVw
-         UaHnpD4puDBjP5s2kobq9d+s871COLBYxHmn/f4givz1vOXHsFMu1D42AIPDRiZc9zRa
-         mCfw==
-X-Gm-Message-State: AOAM533/CW0vla7b4/4BiDP6nN3eQH1sqoxi/WdUtY1us6gEC6ZlaFw6
-	epovsaa5J3L1mNtO4DPCcsM+NXYKxRXjEdq/
-X-Google-Smtp-Source: ABdhPJxNJ8R4E3S6M8cMfhQpDgFRBtQ59DhMPEt4AVCgAyLkG54jWkuYtksHDQZ0ZvTra/++dMm7eg==
-X-Received: by 2002:a9d:7512:: with SMTP id r18mr2769605otk.90.1614266752261;
-        Thu, 25 Feb 2021 07:25:52 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jxV1oAouWd/8cftdD9YIWNtxa9BAEzSaS3HYHAZ9n7k=;
+        b=C9b50dW/UIYisUrqYCogweEEdgHWofof3EEdl4LaayWI7D/5BKAY3YxYj+8QpS49My
+         KS/E5fcgiOM3F1QxJm+0lUsClQwgqIegSatdUkBQ+8f4T8QVuh8q/c86Z3dUDbArOJ/U
+         yYVpD7gVxM3ilfEuOckHeGa5TnUXfuAVlGWMqyyQNBPBM1921wPpQia+Refl5tLLELIj
+         +Jybcng/zgjgDiVWPxdwxu3dMppWF8UQsaBncvadvzmt7+lXvm15xWK2msLSGtIECHd2
+         /JU1Dp3jXOUqjamDHp6+n5IuApWOCW6EdiWwR65T+WqL5CVNhi5qsnhyBilX/SU85zSL
+         jvEQ==
+X-Gm-Message-State: AOAM532NEUikFT+YfdBjjKkw3nvilW4TbqI3BNRCC20/FMH7Ff+lmZoK
+	CwocP3yWNr//1GEZfXg57RT5NTWmPSEgo+zV
+X-Google-Smtp-Source: ABdhPJzS3WdZA0j6jUhkkWJ7oLhmSrPSDG0oMoeYLDffemXWgyI+2RnZwhmjmLAZLTPOtddziiimzA==
+X-Received: by 2002:aca:3887:: with SMTP id f129mr2244058oia.19.1614266746814;
+        Thu, 25 Feb 2021 07:25:46 -0800 (PST)
 From: Connor Davis <connojdavis@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
 	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Alexandru Isaila <aisaila@bitdefender.com>,
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
 	Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH for-next 6/6] automation: add container for riscv64 builds
-Date: Thu, 25 Feb 2021 08:24:05 -0700
-Message-Id: <a7829e62734a73993cd41cdbc18e1d16e4bb06d9.1614265718.git.connojdavis@gmail.com>
+Subject: [PATCH for-next 0/6] Minimal build for RISCV
+Date: Thu, 25 Feb 2021 08:23:59 -0700
+Message-Id: <cover.1614265718.git.connojdavis@gmail.com>
 X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1614265718.git.connojdavis@gmail.com>
-References: <cover.1614265718.git.connojdavis@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a container for cross-compiling xen to riscv64.
-This just includes the cross-compiler and necessary packages for
-building xen itself (packages for tools, stubdoms, etc., can be
-added later).
+Hi all,
 
-To build xen in the container run the following:
+This series introduces a minimal build for RISCV. It is based on Bobby's
+previous work from last year[0]. I have worked to rebase onto current Xen,
+as well as update the various header files borrowed from Linux.
 
-$ make XEN_TARGET_ARCH=riscv64 SUBSYSTEMS=xen
+This series provides the patches necessary to get a minimal build
+working. The build is "minimal" in the sense that 1) it uses a
+minimal config and 2) files, functions, and variables are included if
+and only if they are required for a successful build based on the
+config. It doesn't run at all, as the functions just have stub
+implementations.
 
-Signed-off-by: Connor Davis <connojdavis@gmail.com>
----
- automation/build/archlinux/riscv64.dockerfile | 32 +++++++++++++++++++
- automation/scripts/containerize               |  1 +
- 2 files changed, 33 insertions(+)
+My hope is that this can serve as a useful example for future ports as
+well as inform the community of exactly what is imposed by common code
+onto new architectures.
+
+The first 4 patches are mods to non-RISCV bits that enable building a
+config with:
+
+  !CONFIG_HAS_NS16550
+  !CONFIG_HAS_PASSTHROUGH
+  NR_CPUS == 1
+  !CONFIG_GRANT_TABLE
+
+respectively. The fifth patch adds the RISCV files, and the last patch
+adds a docker container for doing the build. To build from the docker
+container (after creating it locally), you can run the following:
+
+  $ make XEN_TARGET_ARCH=riscv64 SUBSYSTEMS=xen 
+
+The sources taken from Linux are documented in arch/riscv/README.sources.
+There were also some files copied from arm:
+
+  asm-arm/softirq.h
+  asm-arm/random.h
+  asm-arm/nospec.h
+  asm-arm/numa.h
+  asm-arm/p2m.h
+  asm-arm/delay.h
+  asm-arm/debugger.h
+  asm-arm/desc.h
+  asm-arm/guest_access.h
+  asm-arm/hardirq.h
+  lib/find_next_bit.c
+
+I imagine some of these will want some consolidation, but I put them
+under the respective RISCV directories for now.
+
+[0] https://lore.kernel.org/xen-devel/cover.1579615303.git.bobbyeshleman@gmail.com/
+
+Connor Davis (6):
+  xen/char: Default HAS_NS16550 to y only for X86 and ARM
+  xen/common: Guard iommu symbols with CONFIG_HAS_PASSTHROUGH
+  xen/sched: Fix build when NR_CPUS == 1
+  xen: Fix build when !CONFIG_GRANT_TABLE
+  xen: Add files needed for minimal riscv build
+  automation: add container for riscv64 builds
+
+ automation/build/archlinux/riscv64.dockerfile |  32 ++
+ automation/scripts/containerize               |   1 +
+ config/riscv64.mk                             |   7 +
+ xen/Makefile                                  |   8 +-
+ xen/arch/riscv/Kconfig                        |  54 +++
+ xen/arch/riscv/Kconfig.debug                  |   0
+ xen/arch/riscv/Makefile                       |  57 +++
+ xen/arch/riscv/README.source                  |  19 +
+ xen/arch/riscv/Rules.mk                       |  13 +
+ xen/arch/riscv/arch.mk                        |   7 +
+ xen/arch/riscv/configs/riscv64_defconfig      |  12 +
+ xen/arch/riscv/delay.c                        |  16 +
+ xen/arch/riscv/domain.c                       | 144 +++++++
+ xen/arch/riscv/domctl.c                       |  36 ++
+ xen/arch/riscv/guestcopy.c                    |  57 +++
+ xen/arch/riscv/head.S                         |   6 +
+ xen/arch/riscv/irq.c                          |  78 ++++
+ xen/arch/riscv/lib/Makefile                   |   1 +
+ xen/arch/riscv/lib/find_next_bit.c            | 284 +++++++++++++
+ xen/arch/riscv/mm.c                           |  93 +++++
+ xen/arch/riscv/p2m.c                          | 150 +++++++
+ xen/arch/riscv/percpu.c                       |  17 +
+ xen/arch/riscv/platforms/Kconfig              |  31 ++
+ xen/arch/riscv/riscv64/asm-offsets.c          |  31 ++
+ xen/arch/riscv/setup.c                        |  27 ++
+ xen/arch/riscv/shutdown.c                     |  28 ++
+ xen/arch/riscv/smp.c                          |  35 ++
+ xen/arch/riscv/smpboot.c                      |  34 ++
+ xen/arch/riscv/sysctl.c                       |  33 ++
+ xen/arch/riscv/time.c                         |  35 ++
+ xen/arch/riscv/traps.c                        |  35 ++
+ xen/arch/riscv/vm_event.c                     |  39 ++
+ xen/arch/riscv/xen.lds.S                      | 113 ++++++
+ xen/common/domain.c                           |   2 +
+ xen/common/memory.c                           |  10 +
+ xen/common/sched/core.c                       |   2 +-
+ xen/common/sysctl.c                           |   2 +
+ xen/drivers/char/Kconfig                      |   2 +-
+ xen/drivers/char/serial.c                     |   1 +
+ xen/include/asm-riscv/altp2m.h                |  39 ++
+ xen/include/asm-riscv/asm.h                   |  77 ++++
+ xen/include/asm-riscv/asm_defns.h             |  24 ++
+ xen/include/asm-riscv/atomic.h                | 204 ++++++++++
+ xen/include/asm-riscv/bitops.h                | 331 +++++++++++++++
+ xen/include/asm-riscv/bug.h                   |  54 +++
+ xen/include/asm-riscv/byteorder.h             |  16 +
+ xen/include/asm-riscv/cache.h                 |  24 ++
+ xen/include/asm-riscv/cmpxchg.h               | 382 ++++++++++++++++++
+ xen/include/asm-riscv/compiler_types.h        |  32 ++
+ xen/include/asm-riscv/config.h                | 110 +++++
+ xen/include/asm-riscv/cpufeature.h            |  17 +
+ xen/include/asm-riscv/csr.h                   | 219 ++++++++++
+ xen/include/asm-riscv/current.h               |  47 +++
+ xen/include/asm-riscv/debugger.h              |  15 +
+ xen/include/asm-riscv/delay.h                 |  15 +
+ xen/include/asm-riscv/desc.h                  |  12 +
+ xen/include/asm-riscv/device.h                |  15 +
+ xen/include/asm-riscv/div64.h                 |  23 ++
+ xen/include/asm-riscv/domain.h                |  50 +++
+ xen/include/asm-riscv/event.h                 |  42 ++
+ xen/include/asm-riscv/fence.h                 |  12 +
+ xen/include/asm-riscv/flushtlb.h              |  34 ++
+ xen/include/asm-riscv/grant_table.h           |  12 +
+ xen/include/asm-riscv/guest_access.h          |  41 ++
+ xen/include/asm-riscv/guest_atomics.h         |  60 +++
+ xen/include/asm-riscv/hardirq.h               |  27 ++
+ xen/include/asm-riscv/hypercall.h             |  12 +
+ xen/include/asm-riscv/init.h                  |  42 ++
+ xen/include/asm-riscv/io.h                    | 283 +++++++++++++
+ xen/include/asm-riscv/iocap.h                 |  13 +
+ xen/include/asm-riscv/iommu.h                 |  46 +++
+ xen/include/asm-riscv/irq.h                   |  58 +++
+ xen/include/asm-riscv/mem_access.h            |   4 +
+ xen/include/asm-riscv/mm.h                    | 246 +++++++++++
+ xen/include/asm-riscv/monitor.h               |  65 +++
+ xen/include/asm-riscv/nospec.h                |  25 ++
+ xen/include/asm-riscv/numa.h                  |  41 ++
+ xen/include/asm-riscv/p2m.h                   | 218 ++++++++++
+ xen/include/asm-riscv/page-bits.h             |  11 +
+ xen/include/asm-riscv/page.h                  |  73 ++++
+ xen/include/asm-riscv/paging.h                |  15 +
+ xen/include/asm-riscv/pci.h                   |  31 ++
+ xen/include/asm-riscv/percpu.h                |  33 ++
+ xen/include/asm-riscv/processor.h             |  59 +++
+ xen/include/asm-riscv/random.h                |   9 +
+ xen/include/asm-riscv/regs.h                  |  23 ++
+ xen/include/asm-riscv/setup.h                 |  14 +
+ xen/include/asm-riscv/smp.h                   |  46 +++
+ xen/include/asm-riscv/softirq.h               |  16 +
+ xen/include/asm-riscv/spinlock.h              |  12 +
+ xen/include/asm-riscv/string.h                |  28 ++
+ xen/include/asm-riscv/sysregs.h               |  16 +
+ xen/include/asm-riscv/system.h                |  99 +++++
+ xen/include/asm-riscv/time.h                  |  31 ++
+ xen/include/asm-riscv/trace.h                 |  12 +
+ xen/include/asm-riscv/types.h                 |  60 +++
+ xen/include/asm-riscv/vm_event.h              |  55 +++
+ xen/include/asm-riscv/xenoprof.h              |  12 +
+ xen/include/public/arch-riscv.h               | 183 +++++++++
+ xen/include/public/arch-riscv/hvm/save.h      |  39 ++
+ xen/include/public/hvm/save.h                 |   2 +
+ xen/include/public/pmu.h                      |   2 +
+ xen/include/public/xen.h                      |   2 +
+ xen/include/xen/domain.h                      |   1 +
+ xen/include/xen/grant_table.h                 |   2 +
+ 105 files changed, 5421 insertions(+), 4 deletions(-)
  create mode 100644 automation/build/archlinux/riscv64.dockerfile
+ create mode 100644 config/riscv64.mk
+ create mode 100644 xen/arch/riscv/Kconfig
+ create mode 100644 xen/arch/riscv/Kconfig.debug
+ create mode 100644 xen/arch/riscv/Makefile
+ create mode 100644 xen/arch/riscv/README.source
+ create mode 100644 xen/arch/riscv/Rules.mk
+ create mode 100644 xen/arch/riscv/arch.mk
+ create mode 100644 xen/arch/riscv/configs/riscv64_defconfig
+ create mode 100644 xen/arch/riscv/delay.c
+ create mode 100644 xen/arch/riscv/domain.c
+ create mode 100644 xen/arch/riscv/domctl.c
+ create mode 100644 xen/arch/riscv/guestcopy.c
+ create mode 100644 xen/arch/riscv/head.S
+ create mode 100644 xen/arch/riscv/irq.c
+ create mode 100644 xen/arch/riscv/lib/Makefile
+ create mode 100644 xen/arch/riscv/lib/find_next_bit.c
+ create mode 100644 xen/arch/riscv/mm.c
+ create mode 100644 xen/arch/riscv/p2m.c
+ create mode 100644 xen/arch/riscv/percpu.c
+ create mode 100644 xen/arch/riscv/platforms/Kconfig
+ create mode 100644 xen/arch/riscv/riscv64/asm-offsets.c
+ create mode 100644 xen/arch/riscv/setup.c
+ create mode 100644 xen/arch/riscv/shutdown.c
+ create mode 100644 xen/arch/riscv/smp.c
+ create mode 100644 xen/arch/riscv/smpboot.c
+ create mode 100644 xen/arch/riscv/sysctl.c
+ create mode 100644 xen/arch/riscv/time.c
+ create mode 100644 xen/arch/riscv/traps.c
+ create mode 100644 xen/arch/riscv/vm_event.c
+ create mode 100644 xen/arch/riscv/xen.lds.S
+ create mode 100644 xen/include/asm-riscv/altp2m.h
+ create mode 100644 xen/include/asm-riscv/asm.h
+ create mode 100644 xen/include/asm-riscv/asm_defns.h
+ create mode 100644 xen/include/asm-riscv/atomic.h
+ create mode 100644 xen/include/asm-riscv/bitops.h
+ create mode 100644 xen/include/asm-riscv/bug.h
+ create mode 100644 xen/include/asm-riscv/byteorder.h
+ create mode 100644 xen/include/asm-riscv/cache.h
+ create mode 100644 xen/include/asm-riscv/cmpxchg.h
+ create mode 100644 xen/include/asm-riscv/compiler_types.h
+ create mode 100644 xen/include/asm-riscv/config.h
+ create mode 100644 xen/include/asm-riscv/cpufeature.h
+ create mode 100644 xen/include/asm-riscv/csr.h
+ create mode 100644 xen/include/asm-riscv/current.h
+ create mode 100644 xen/include/asm-riscv/debugger.h
+ create mode 100644 xen/include/asm-riscv/delay.h
+ create mode 100644 xen/include/asm-riscv/desc.h
+ create mode 100644 xen/include/asm-riscv/device.h
+ create mode 100644 xen/include/asm-riscv/div64.h
+ create mode 100644 xen/include/asm-riscv/domain.h
+ create mode 100644 xen/include/asm-riscv/event.h
+ create mode 100644 xen/include/asm-riscv/fence.h
+ create mode 100644 xen/include/asm-riscv/flushtlb.h
+ create mode 100644 xen/include/asm-riscv/grant_table.h
+ create mode 100644 xen/include/asm-riscv/guest_access.h
+ create mode 100644 xen/include/asm-riscv/guest_atomics.h
+ create mode 100644 xen/include/asm-riscv/hardirq.h
+ create mode 100644 xen/include/asm-riscv/hypercall.h
+ create mode 100644 xen/include/asm-riscv/init.h
+ create mode 100644 xen/include/asm-riscv/io.h
+ create mode 100644 xen/include/asm-riscv/iocap.h
+ create mode 100644 xen/include/asm-riscv/iommu.h
+ create mode 100644 xen/include/asm-riscv/irq.h
+ create mode 100644 xen/include/asm-riscv/mem_access.h
+ create mode 100644 xen/include/asm-riscv/mm.h
+ create mode 100644 xen/include/asm-riscv/monitor.h
+ create mode 100644 xen/include/asm-riscv/nospec.h
+ create mode 100644 xen/include/asm-riscv/numa.h
+ create mode 100644 xen/include/asm-riscv/p2m.h
+ create mode 100644 xen/include/asm-riscv/page-bits.h
+ create mode 100644 xen/include/asm-riscv/page.h
+ create mode 100644 xen/include/asm-riscv/paging.h
+ create mode 100644 xen/include/asm-riscv/pci.h
+ create mode 100644 xen/include/asm-riscv/percpu.h
+ create mode 100644 xen/include/asm-riscv/processor.h
+ create mode 100644 xen/include/asm-riscv/random.h
+ create mode 100644 xen/include/asm-riscv/regs.h
+ create mode 100644 xen/include/asm-riscv/setup.h
+ create mode 100644 xen/include/asm-riscv/smp.h
+ create mode 100644 xen/include/asm-riscv/softirq.h
+ create mode 100644 xen/include/asm-riscv/spinlock.h
+ create mode 100644 xen/include/asm-riscv/string.h
+ create mode 100644 xen/include/asm-riscv/sysregs.h
+ create mode 100644 xen/include/asm-riscv/system.h
+ create mode 100644 xen/include/asm-riscv/time.h
+ create mode 100644 xen/include/asm-riscv/trace.h
+ create mode 100644 xen/include/asm-riscv/types.h
+ create mode 100644 xen/include/asm-riscv/vm_event.h
+ create mode 100644 xen/include/asm-riscv/xenoprof.h
+ create mode 100644 xen/include/public/arch-riscv.h
+ create mode 100644 xen/include/public/arch-riscv/hvm/save.h
 
-diff --git a/automation/build/archlinux/riscv64.dockerfile b/automation/build/archlinux/riscv64.dockerfile
-new file mode 100644
-index 0000000000..d94048b6c3
---- /dev/null
-+++ b/automation/build/archlinux/riscv64.dockerfile
-@@ -0,0 +1,32 @@
-+FROM archlinux/base
-+LABEL maintainer.name="The Xen Project" \
-+      maintainer.email="xen-devel@lists.xenproject.org"
-+
-+# Packages needed for the build
-+RUN pacman --noconfirm -Syu \
-+    base-devel \
-+    gcc \
-+    git
-+
-+# Packages needed for QEMU
-+RUN pacman --noconfirm -Syu \
-+    pixman \
-+    python \
-+    sh
-+
-+# There is a regression in GDB that causes an assertion error
-+# when setting breakpoints, use this commit until it is fixed!
-+RUN git clone --recursive -j$(nproc) --progress https://github.com/riscv/riscv-gnu-toolchain && \
-+    cd riscv-gnu-toolchain/riscv-gdb && \
-+    git checkout 1dd588507782591478882a891f64945af9e2b86c && \
-+    cd  .. && \
-+    ./configure --prefix=/opt/riscv && \
-+    make linux -j$(nproc) && \
-+    rm -R /riscv-gnu-toolchain
-+
-+# Add compiler path
-+ENV PATH=/opt/riscv/bin/:${PATH}
-+
-+RUN useradd --create-home user
-+USER user
-+WORKDIR /build
-diff --git a/automation/scripts/containerize b/automation/scripts/containerize
-index da45baed4e..1901e8c0ef 100755
---- a/automation/scripts/containerize
-+++ b/automation/scripts/containerize
-@@ -25,6 +25,7 @@ die() {
- BASE="registry.gitlab.com/xen-project/xen"
- case "_${CONTAINER}" in
-     _archlinux|_arch) CONTAINER="${BASE}/archlinux:current" ;;
-+    _riscv64) CONTAINER="${BASE}/archlinux:riscv64" ;;
-     _centos7) CONTAINER="${BASE}/centos:7" ;;
-     _centos72) CONTAINER="${BASE}/centos:7.2" ;;
-     _fedora) CONTAINER="${BASE}/fedora:29";;
 -- 
 2.27.0
 
