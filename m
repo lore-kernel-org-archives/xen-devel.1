@@ -2,47 +2,49 @@ Return-Path: <SRS0=BiGO=H3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0589C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A6E1C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:26:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5FED864E83
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:19:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FED864E83
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0FC2B64F18
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Feb 2021 15:26:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FC2B64F18
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.89808.169503 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.89810.169516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFIPh-0005Gq-Hj; Thu, 25 Feb 2021 15:18:49 +0000
+	id 1lFIWU-0006Iv-5s; Thu, 25 Feb 2021 15:25:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 89808.169503; Thu, 25 Feb 2021 15:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 89810.169516; Thu, 25 Feb 2021 15:25:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFIPh-0005Gj-Ev; Thu, 25 Feb 2021 15:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 89808;
- Thu, 25 Feb 2021 15:18:48 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lFIPg-0005Ge-5J
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 15:18:48 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lFIPg-0002sg-19
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 15:18:48 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lFIPf-0005mj-Ua
- for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 15:18:47 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1lFIPc-0001nZ-Oc; Thu, 25 Feb 2021 15:18:44 +0000
+	id 1lFIWU-0006Io-2O; Thu, 25 Feb 2021 15:25:50 +0000
+Received: by outflank-mailman (input) for mailman id 89810;
+ Thu, 25 Feb 2021 15:25:49 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=yJgK=H3=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
+ id 1lFIWT-0006Ig-2r
+ for xen-devel@lists.xenproject.org; Thu, 25 Feb 2021 15:25:49 +0000
+Received: from mail-ot1-x32f.google.com (unknown [2607:f8b0:4864:20::32f])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id caa3e51a-578f-4676-bf40-d41890cff51d;
+ Thu, 25 Feb 2021 15:25:48 +0000 (UTC)
+Received: by mail-ot1-x32f.google.com with SMTP id x9so1645930otp.8
+ for <xen-devel@lists.xenproject.org>; Thu, 25 Feb 2021 07:25:48 -0800 (PST)
+Received: from localhost.localdomain (142-79-211-230.starry-inc.net.
+ [142.79.211.230])
+ by smtp.gmail.com with ESMTPSA id l4sm1047292ooq.33.2021.02.25.07.25.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Feb 2021 07:25:47 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,32 +56,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=mHgn79VoU0X+EBcR9Q+xaanqK2e6WMyZ3WvtA8NNHrw=; b=qu7Lh0zyxFCjiUL5lZ8PhyPZqv
-	pms7kQmcpvMqeBVrhoDM3JFNv+eTFE/e8Iaxv9ffxlja806YfqiRuqA1fzcciTZ/LeoN2mFlT5vLJ
-	DwhGxcN5XZP5MHhxJ0MEwJ7VoUMnKQ/1fmRRidK5BxAN4V2mINtOG64khsrRLo6a5uPs=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: caa3e51a-578f-4676-bf40-d41890cff51d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=cPpdtH7EP/GfkHJoh7H3eTxLsigt9nHP/GO1BtnF+lU=;
+        b=Bf14hds7oDs36GvTBWn1wKIYqICk/QqpQeafNMq02oyCb+vENIT+aDszRqm2+bJM01
+         AaqCki956flemlJ9yYXFhdufzPXO/1v4Y0uoXdxS6JMC12miRUlohVcEho6BAGl4CLaq
+         S3QzCRHgC51c80Cwd89HDijn697vyZQQaj9wokSqULOKtlTlKlt/4OIZ8D3vJc6fzYBL
+         309hLkvXyBe7jAEWJ20rT1r8R6/3HxdaP6ZJD+XkWH1eDyR7fTDuMXsJaFKItrowe1lX
+         ETNa9e0qsokgB6XHoZvn9qSP6sDDCEqenLg5mHtZUQaBPqlERnGJkKXL0U9bWYV9RZjC
+         b0tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=cPpdtH7EP/GfkHJoh7H3eTxLsigt9nHP/GO1BtnF+lU=;
+        b=dOpBL/kmAZaM4yQTPjy9Nx3ZJNZgx8pJh+B5iKVEamtpx9hiVHvGmaUSrElEsnrkEz
+         95OmxJmGx9V2mISzOD/ybrfzKDXIvjqD/Wynf1rHve7ula81LpOyOdClFFnT0kJefgH4
+         6nyj18Y7bxSZi1GKRJImIyVXzC9098UMjQKk0lVRTXnX3TjisCcFQIgVEmSoqGpvJgtR
+         p3ghq8eCHILNUwr8FKg8AYkgrIRk2WOWLGk0QIitfGY44T3yNXp+74kItUwMVgWn53pG
+         t03wZhUy3zIUqDw0yFBm9NnjQQWpXz3kG6JgQTucmiaxjtt5Q/dKWFeHs/UEa5uhbRRg
+         RK0Q==
+X-Gm-Message-State: AOAM532B8E7X/1cnb+TLdlojCXM/cVa+YtISbAp27fRTapZyoFzKAU7Q
+	1Uu4Iu98gPTxJBCpGxwILRACukMeZZzp5ct3
+X-Google-Smtp-Source: ABdhPJwaZdTJwT2bM4vTgLqMPQUw8O93laRFsy/02o5DbENHrFqspQnaON7fOYWmvSKW7l3RV/E+xA==
+X-Received: by 2002:a05:6830:22f6:: with SMTP id t22mr2637474otc.10.1614266747625;
+        Thu, 25 Feb 2021 07:25:47 -0800 (PST)
+From: Connor Davis <connojdavis@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH for-next 1/6] xen/char: Default HAS_NS16550 to y only for X86 and ARM
+Date: Thu, 25 Feb 2021 08:24:00 -0700
+Message-Id: <def4f2a0dc13d486bcfd86601152885acd880dd0.1614265718.git.connojdavis@gmail.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <cover.1614265718.git.connojdavis@gmail.com>
+References: <cover.1614265718.git.connojdavis@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24631.49108.545436.134210@mariner.uk.xensource.com>
-Date: Thu, 25 Feb 2021 15:18:44 +0000
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
-    Wei Liu <wl@xen.org>,
-    "Doug  Goldstein" <cardoe@cardoe.com>
-Subject: Re: [PATCH for-4.15] automation: Fix containerize to understand the Alpine container
-In-Reply-To: <20210225143701.8487-1-andrew.cooper3@citrix.com>
-References: <20210225143701.8487-1-andrew.cooper3@citrix.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Transfer-Encoding: 8bit
 
-Andrew Cooper writes ("[PATCH for-4.15] automation: Fix containerize to understand the Alpine container"):
-> This was missing from the work to add the alpine container.
-> 
-> Fixes: a9afe7768bd ("automation: add alpine linux 3.12 x86 build container")
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Defaulting to yes only for X86 and ARM reduces the requirements
+for a minimal build when porting new architectures.
 
-Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+Signed-off-by: Connor Davis <connojdavis@gmail.com>
+---
+ xen/drivers/char/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+index b572305657..b15b0c8d6a 100644
+--- a/xen/drivers/char/Kconfig
++++ b/xen/drivers/char/Kconfig
+@@ -1,6 +1,6 @@
+ config HAS_NS16550
+ 	bool "NS16550 UART driver" if ARM
+-	default y
++	default y if (ARM || X86)
+ 	help
+ 	  This selects the 16550-series UART support. For most systems, say Y.
+ 
+-- 
+2.27.0
+
 
