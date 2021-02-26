@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70E14C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 07:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2393C433E6
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 07:04:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFCCF64DBD
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 07:01:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFCCF64DBD
+	by mail.kernel.org (Postfix) with ESMTPS id 42B8564E85
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 07:04:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 42B8564E85
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.90082.170370 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.90088.170382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFX7i-0001aj-0t; Fri, 26 Feb 2021 07:01:14 +0000
+	id 1lFXAk-0001mH-I0; Fri, 26 Feb 2021 07:04:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 90082.170370; Fri, 26 Feb 2021 07:01:13 +0000
+Received: by outflank-mailman (output) from mailman id 90088.170382; Fri, 26 Feb 2021 07:04:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFX7h-0001ac-T7; Fri, 26 Feb 2021 07:01:13 +0000
-Received: by outflank-mailman (input) for mailman id 90082;
- Fri, 26 Feb 2021 07:01:12 +0000
+	id 1lFXAk-0001mA-Er; Fri, 26 Feb 2021 07:04:22 +0000
+Received: by outflank-mailman (input) for mailman id 90088;
+ Fri, 26 Feb 2021 07:04:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ScZz=H4=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lFX7f-0001Z4-Vg
- for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 07:01:12 +0000
+ id 1lFXAj-0001m5-U0
+ for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 07:04:21 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 891ae6c8-631f-40de-affe-c62c091a31a1;
- Fri, 26 Feb 2021 07:01:11 +0000 (UTC)
+ id 02bb39d4-1922-4b50-96a9-b7136ce5c1e8;
+ Fri, 26 Feb 2021 07:04:20 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4EEA9AAC5;
- Fri, 26 Feb 2021 07:01:10 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 1F2F3AE36;
+ Fri, 26 Feb 2021 07:04:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,75 +51,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 891ae6c8-631f-40de-affe-c62c091a31a1
+X-Inumbo-ID: 02bb39d4-1922-4b50-96a9-b7136ce5c1e8
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614322870; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1614323060; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=OJeqOhZIPy5VJigOfn3Sk6y7uTgUZ5yKunKzc1bGxp0=;
-	b=bEnqAtl8y4eHcjMu9MtGMazqISBHZt4cDQegqUqZzWAyfuYevmG30g5NvL4pSlG9v6fVZt
-	3JdID9BXvRTXpF2z9MQFeKnFOv4cQCy5/JXq5NCruX3Kbbg3gpPEqQpgBZCvmrGpC4VBmF
-	cxW76mnnVnJgPwIz0yt0vonMs3k/1lY=
-Subject: Re: [PATCH for-4.15 2/5] tools/xenstored: Avoid unnecessary
- talloc_strdup() in do_lu_start()
+	bh=SnVYfUsTHPqazuGKJl1xKl40R27LNOLN7oUyrt07dQI=;
+	b=gp9ZSwWa6f0u2Skwg7vz2rnMc12Vo4VaVEdS1WMkPhsDHDlYSgHD4z9xUfDr7SZABfF39/
+	IUyaoV6bH+QRct/NHEPmTd/Y3tKJHIt0nk2juakb9wZTEw/ukBh9slOrJ08G+gu9D7uzA8
+	04qDsbdUNFv60Zl4vLnGZGj9UECEMME=
+Subject: Re: [PATCH for-4.15 3/5] tools/xenstored: control: Store the save
+ filename in lu_dump_state
 To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
 Cc: raphning@amazon.co.uk, iwj@xenproject.org,
  Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>
 References: <20210225174131.10115-1-julien@xen.org>
- <20210225174131.10115-3-julien@xen.org>
+ <20210225174131.10115-4-julien@xen.org>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <1de2c7a3-946b-e6cb-253b-c8d2b9b21843@suse.com>
-Date: Fri, 26 Feb 2021 08:01:09 +0100
+Message-ID: <022c2ec1-3ac8-6e06-1f06-c6a548754d94@suse.com>
+Date: Fri, 26 Feb 2021 08:04:19 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <20210225174131.10115-3-julien@xen.org>
+In-Reply-To: <20210225174131.10115-4-julien@xen.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="1blxmMIFTVJCdHJMBXEYLayRtChrePUep"
+ boundary="SnGt1ZXvnj8tnWLswc4KM9hfOmv7TSPp5"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---1blxmMIFTVJCdHJMBXEYLayRtChrePUep
-Content-Type: multipart/mixed; boundary="rQgRiW24aIoGvqruCCqvI72spgVEYItty";
+--SnGt1ZXvnj8tnWLswc4KM9hfOmv7TSPp5
+Content-Type: multipart/mixed; boundary="rCwufZ9o2aig2JCe7I8JQXGnheoLoxbDo";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
 Cc: raphning@amazon.co.uk, iwj@xenproject.org,
  Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>
-Message-ID: <1de2c7a3-946b-e6cb-253b-c8d2b9b21843@suse.com>
-Subject: Re: [PATCH for-4.15 2/5] tools/xenstored: Avoid unnecessary
- talloc_strdup() in do_lu_start()
+Message-ID: <022c2ec1-3ac8-6e06-1f06-c6a548754d94@suse.com>
+Subject: Re: [PATCH for-4.15 3/5] tools/xenstored: control: Store the save
+ filename in lu_dump_state
 References: <20210225174131.10115-1-julien@xen.org>
- <20210225174131.10115-3-julien@xen.org>
-In-Reply-To: <20210225174131.10115-3-julien@xen.org>
+ <20210225174131.10115-4-julien@xen.org>
+In-Reply-To: <20210225174131.10115-4-julien@xen.org>
 
---rQgRiW24aIoGvqruCCqvI72spgVEYItty
+--rCwufZ9o2aig2JCe7I8JQXGnheoLoxbDo
 Content-Type: multipart/mixed;
- boundary="------------29AD1AAF5D59772B7EFAAD78"
+ boundary="------------97D65EABBD4182718B98A83E"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------29AD1AAF5D59772B7EFAAD78
+--------------97D65EABBD4182718B98A83E
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
 On 25.02.21 18:41, Julien Grall wrote:
 > From: Julien Grall <jgrall@amazon.com>
 >=20
-> At the moment, the return of talloc_strdup() is not checked. This means=
-
-> we may dereference a NULL pointer if the allocation failed.
+> The function lu_close_dump_state() will use talloc_asprintf() without
+> checking whether the allocation succeeded. In the unlikely case we are
+> out of memory, we would dereference a NULL pointer.
 >=20
-> However, it is pointless to allocate the memory as send_reply() will
-> copy the data to a different buffer. So drop the use of talloc_strdup()=
-=2E
+> As we already computed the filename in lu_get_dump_state(), we can stor=
+e
+> the name in the lu_dump_state. This is avoiding to deal with memory fil=
+e
+> in the close path and also reduce the risk to use the different
+> filename.
 >=20
 > This bug was discovered and resolved using Coverity Static Analysis
 > Security Testing (SAST) by Synopsys, Inc.
 >=20
-> Fixes: af216a99fb4a ("tools/xenstore: add the basic framework for doing=
- the live update")
+> Fixes: c0dc6a3e7c41 ("tools/xenstore: read internal state when doing li=
+ve upgrade")
 > Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 Reviewed-by: Juergen Gross <jgross@suse.com>
@@ -127,7 +130,7 @@ Reviewed-by: Juergen Gross <jgross@suse.com>
 
 Juergen
 
---------------29AD1AAF5D59772B7EFAAD78
+--------------97D65EABBD4182718B98A83E
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -218,25 +221,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------29AD1AAF5D59772B7EFAAD78--
+--------------97D65EABBD4182718B98A83E--
 
---rQgRiW24aIoGvqruCCqvI72spgVEYItty--
+--rCwufZ9o2aig2JCe7I8JQXGnheoLoxbDo--
 
---1blxmMIFTVJCdHJMBXEYLayRtChrePUep
+--SnGt1ZXvnj8tnWLswc4KM9hfOmv7TSPp5
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmA4nLUFAwAAAAAACgkQsN6d1ii/Ey/Y
-zgf/dmlUI5rXmv3MKciaz7wSzNTOwR6nmfDM32p9C5zJW2G/EhGKOPMhNAQow/oxuiwd0yN54/r0
-jQPcGn1fdMpOq+MglNJfrEvsU0TjFqsW07dxrtGQMlT+fYfsyez03qSZGXc4Dju2TDion8ynG170
-tit/LnQiBG8jqQh0i8oZ3WzdUtbhjiG6JeibbdITxYXOirJ94NGNCF5WXurOkoroDVcOjxQ8MTht
-C2/aHNptJtecIGV4UJYgCeLLWsNZ8jaPhC4Beplp8V+eHdRq3eJOakiVkGJV7BLoYE5uc89u3zWf
-wiZrHkSek7e+0QXuTZ0tcFwc8THNceQcCeOtlJI0Dg==
-=y+Cj
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmA4nXMFAwAAAAAACgkQsN6d1ii/Ey+u
+hggAhtOKyVYJuz1x/IbQ4SjV3NR/1PofDi6vX8PqqUOr/lwvpeB3yFXOVbAYI+lKSnM7EWMefwdl
+kTObag1i8Z4KeLUI7cXSbxbOWCEg4yPUqq/Ehlqadxu0cqxp4bt681cUQBOgulPQycqm93UcSkWP
+emiWQLmpCadZ9BRJDVifqhuXx0ktKIO8tQcS2jSuV9Xd1fu1Q/cLDvfS5YJoEMXyell/INSNGMah
+sxkd1j53Xot6GfvMfboX0f4fr/2NYldqeMzjNTLT7yGD7ziTNnLsWhf0OS01RaHBljIVKrOmI+t+
+eWtmBpqABgenzXA3BJl9e0taJrz72rStPVb/iv0mPA==
+=40zg
 -----END PGP SIGNATURE-----
 
---1blxmMIFTVJCdHJMBXEYLayRtChrePUep--
+--SnGt1ZXvnj8tnWLswc4KM9hfOmv7TSPp5--
 
