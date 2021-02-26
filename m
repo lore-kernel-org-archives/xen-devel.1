@@ -2,46 +2,41 @@ Return-Path: <SRS0=mA2z=H4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D12DC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 10:57:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D701CC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 10:59:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A04DE64E4B
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 10:57:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A04DE64E4B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 5EC2064E4B
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 10:59:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5EC2064E4B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cert.pl
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.90207.170709 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.90229.170762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFanf-0003GN-HI; Fri, 26 Feb 2021 10:56:47 +0000
+	id 1lFaqY-0003va-4z; Fri, 26 Feb 2021 10:59:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 90207.170709; Fri, 26 Feb 2021 10:56:47 +0000
+Received: by outflank-mailman (output) from mailman id 90229.170762; Fri, 26 Feb 2021 10:59:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFanf-0003GG-EJ; Fri, 26 Feb 2021 10:56:47 +0000
-Received: by outflank-mailman (input) for mailman id 90207;
- Fri, 26 Feb 2021 10:56:46 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lFane-0003G6-3M
- for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 10:56:46 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lFand-0001Q1-0d; Fri, 26 Feb 2021 10:56:45 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lFanc-0007D9-L1; Fri, 26 Feb 2021 10:56:44 +0000
+	id 1lFaqY-0003vT-1m; Fri, 26 Feb 2021 10:59:46 +0000
+Received: by outflank-mailman (input) for mailman id 90229;
+ Fri, 26 Feb 2021 10:59:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Uova=H4=cert.pl=hubert.jasudowicz@srs-us1.protection.inumbo.net>)
+ id 1lFaqW-0003rd-SC
+ for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 10:59:44 +0000
+Received: from mx.nask.net.pl (unknown [195.187.55.89])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fa822b0b-cb6d-4cd6-bd58-8919d5d719ee;
+ Fri, 26 Feb 2021 10:59:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,62 +48,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=rKYi+qEerpdW0l9C/Ph4WyNn/j7ZcEQ39HY+quniLnM=; b=qmqpY3hlJJfHrB2Ax1D3efsBe
-	yoN5ARL4gbcbIK5Dn9bBEsnTxyBAxbypT2+zuRR1UcrFCc0+Mfl9Dh+7XlsArwb2ceshWljLHAluA
-	3X7ihp4IQxkw1KPLbwgWUZ/aW8GATDVM4c3uNTEoWRBOnogXSsCrF0jb+NQI+YIqmcPfY=;
-From: Julien Grall <julien@xen.org>
+X-Inumbo-ID: fa822b0b-cb6d-4cd6-bd58-8919d5d719ee
+From: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 To: xen-devel@lists.xenproject.org
-Cc: hongyxia@amazon.co.uk,
-	iwj@xenproject.org,
-	Julien Grall <jgrall@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH for-4.15 v5 1/3] xen/iommu: x86: Don't try to free page tables is the IOMMU is not enabled
-Date: Fri, 26 Feb 2021 10:56:38 +0000
-Message-Id: <20210226105640.12037-2-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210226105640.12037-1-julien@xen.org>
-References: <20210226105640.12037-1-julien@xen.org>
+Cc: Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <michal.leszczynski@cert.pl>
+Subject: [PATCH] tools: Improve signal handling in xen-vmtrace
+Date: Fri, 26 Feb 2021 11:59:26 +0100
+Message-Id: <26720bf5c8258e1b7b4600af3648039b5b9ee18d.1614336820.git.hubert.jasudowicz@cert.pl>
+X-Mailer: git-send-email 2.30.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <jgrall@amazon.com>
+Make sure xen-vmtrace exits cleanly in case SIGPIPE is sent. This can
+happen when piping the output to some other program.
 
-When using CONFIG_BIGMEM=y, the page_list cannot be accessed whilst it
-is is unitialized. However, iommu_free_pgtables() will be called even if
-the domain is not using an IOMMU.
+Additionaly, add volatile qualifier to interrupted flag to avoid
+it being optimized away by the compiler.
 
-Consequently, Xen will try to go through the page list and deference a
-NULL pointer.
-
-Bail out early if the domain is not using an IOMMU.
-
-Fixes: 15bc9a1ef51c ("x86/iommu: add common page-table allocator")
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
+Signed-off-by: Hubert Jasudowicz <hubert.jasudowicz@cert.pl>
 ---
-    Changes in v5:
-        - Patch added. This was split from "xen/x86: iommu: Ignore
-        IOMMU mapping requests when a domain is dying"
----
- xen/drivers/passthrough/x86/iommu.c | 3 +++
- 1 file changed, 3 insertions(+)
+ tools/misc/xen-vmtrace.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
-index cea1032b3d02..58a330e82247 100644
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -267,6 +267,9 @@ int iommu_free_pgtables(struct domain *d)
-     struct page_info *pg;
-     unsigned int done = 0;
+diff --git a/tools/misc/xen-vmtrace.c b/tools/misc/xen-vmtrace.c
+index 7572e880c5..e2da043058 100644
+--- a/tools/misc/xen-vmtrace.c
++++ b/tools/misc/xen-vmtrace.c
+@@ -43,7 +43,7 @@ static uint32_t domid, vcpu;
+ static size_t size;
+ static char *buf;
  
-+    if ( !is_iommu_enabled(d) )
-+        return 0;
+-static sig_atomic_t interrupted;
++static volatile sig_atomic_t interrupted;
+ static void int_handler(int signum)
+ {
+     interrupted = 1;
+@@ -81,6 +81,9 @@ int main(int argc, char **argv)
+     if ( signal(SIGINT, int_handler) == SIG_ERR )
+         err(1, "Failed to register signal handler\n");
+ 
++    if ( signal(SIGPIPE, int_handler) == SIG_ERR )
++        err(1, "Failed to register signal handler\n");
 +
-     while ( (pg = page_list_remove_head(&hd->arch.pgtables.list)) )
+     if ( argc != 3 )
      {
-         free_domheap_page(pg);
+         fprintf(stderr, "Usage: %s <domid> <vcpu_id>\n", argv[0]);
 -- 
-2.17.1
+2.30.0
 
 
