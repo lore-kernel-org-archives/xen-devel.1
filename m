@@ -2,55 +2,56 @@ Return-Path: <SRS0=mA2z=H4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71360C433E9
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 14:42:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71FE7C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 14:42:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 09E6E64E20
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 14:42:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09E6E64E20
+	by mail.kernel.org (Postfix) with ESMTPS id 0F77A64E28
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 14:42:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F77A64E28
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.90349.170932 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.90352.170968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFeJq-00039X-Bt; Fri, 26 Feb 2021 14:42:14 +0000
+	id 1lFeK7-0003Ib-71; Fri, 26 Feb 2021 14:42:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 90349.170932; Fri, 26 Feb 2021 14:42:14 +0000
+Received: by outflank-mailman (output) from mailman id 90352.170968; Fri, 26 Feb 2021 14:42:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFeJq-00039Q-8r; Fri, 26 Feb 2021 14:42:14 +0000
-Received: by outflank-mailman (input) for mailman id 90349;
- Fri, 26 Feb 2021 14:42:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lFeK7-0003IU-2D; Fri, 26 Feb 2021 14:42:31 +0000
+Received: by outflank-mailman (input) for mailman id 90352;
+ Fri, 26 Feb 2021 14:42:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=77G0=H4=amazon.de=prvs=684d0ac3b=nmanthey@srs-us1.protection.inumbo.net>)
- id 1lFeJo-00039L-Hd
- for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 14:42:12 +0000
-Received: from smtp-fw-4101.amazon.com (unknown [72.21.198.25])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8e33ec5c-6a09-4a29-8acd-5a78c6b34fad;
- Fri, 26 Feb 2021 14:42:11 +0000 (UTC)
+ id 1lFeK4-0003Af-W5
+ for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 14:42:29 +0000
+Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4c304731-8eb6-43a7-9e85-74d2e28eb149;
+ Fri, 26 Feb 2021 14:42:19 +0000 (UTC)
 Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO
- email-inbound-relay-2a-d0be17ee.us-west-2.amazon.com) ([10.43.8.2])
- by smtp-border-fw-out-4101.iad4.amazon.com with ESMTP;
- 26 Feb 2021 14:42:03 +0000
-Received: from EX13D37EUA004.ant.amazon.com
- (pdx1-ws-svc-p6-lb9-vlan3.pdx.amazon.com [10.236.137.198])
- by email-inbound-relay-2a-d0be17ee.us-west-2.amazon.com (Postfix) with ESMTPS
- id EDDA7A25E2; Fri, 26 Feb 2021 14:42:02 +0000 (UTC)
+ email-inbound-relay-2a-e7be2041.us-west-2.amazon.com) ([10.43.8.2])
+ by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
+ 26 Feb 2021 14:42:18 +0000
+Received: from EX13D37EUB001.ant.amazon.com
+ (pdx1-ws-svc-p6-lb9-vlan2.pdx.amazon.com [10.236.137.194])
+ by email-inbound-relay-2a-e7be2041.us-west-2.amazon.com (Postfix) with ESMTPS
+ id 75A1AA2428; Fri, 26 Feb 2021 14:42:17 +0000 (UTC)
 Received: from EX13MTAUEB002.ant.amazon.com (10.43.60.12) by
- EX13D37EUA004.ant.amazon.com (10.43.165.124) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 26 Feb 2021 14:42:01 +0000
+ EX13D37EUB001.ant.amazon.com (10.43.166.31) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 26 Feb 2021 14:42:15 +0000
 Received: from u6fc700a6f3c650.ant.amazon.com (10.1.212.27) by
  mail-relay.amazon.com (10.43.60.234) with Microsoft SMTP Server id
- 15.0.1497.2 via Frontend Transport; Fri, 26 Feb 2021 14:41:59 +0000
+ 15.0.1497.2 via Frontend Transport; Fri, 26 Feb 2021 14:42:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,61 +62,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e33ec5c-6a09-4a29-8acd-5a78c6b34fad
+X-Inumbo-ID: 4c304731-8eb6-43a7-9e85-74d2e28eb149
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
-  t=1614350531; x=1645886531;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=MrpNszt3xmQUZDbSv/CS/qvXEazMfVAoaD1nb9pai1Q=;
-  b=cuv3sbHfYAMqB6rIQ5lWVSjPU5bTrG/7Mc9kMpsxGvjZu5uA6PA9vpPh
-   JPilmWxzksfEIz1EprZGGSskK8YV1E1tT4SxQmk+1t4yfnUsjOZgEipy5
-   jmMz5rxu91NbvHBpa/ZU7mkqg3GP3IZdKl9zxHgMHVlvYI2nFM1/+cGHn
-   c=;
+  t=1614350539; x=1645886539;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=a4CF3aP7V8BLgQT8wGjqFYA8omaY5bulrWv/CPPvqmk=;
+  b=unrra1cdH1zvPCzI6P0P2cMWPp73xYGqhDhfSN50qex9j4IFOCS0Lwi6
+   7ROdkwS8YMYBO0yFlQ5lb/VgLu9FyCQwWOwP+HCeEQbOchSbmDa/wb6V0
+   aigyb4u0o3N9p8123l9AumFW14+gtPwbn1DjRhuPhKUfMRa4UPaEyT1Y0
+   4=;
 X-IronPort-AV: E=Sophos;i="5.81,208,1610409600"; 
-   d="scan'208";a="88627962"
+   d="scan'208";a="91300657"
 From: Norbert Manthey <nmanthey@amazon.de>
 To: <xen-devel@lists.xenproject.org>
 CC: Ian Jackson <iwj@xenproject.org>, Juergen Gross <jgross@suse.com>, Wei Liu
 	<wl@xen.org>, Julien Grall <jgrall@amazon.co.uk>, Michael Kurth
 	<mku@amazon.de>, Norbert Manthey <nmanthey@amazon.de>
-Subject: [PATCH XENSTORE v1 00/10] Code analysis fixes
-Date: Fri, 26 Feb 2021 15:41:34 +0100
-Message-ID: <20210226144144.9252-1-nmanthey@amazon.de>
+Subject: [PATCH XENSTORE v1 03/10] xenstore: check formats of trace
+Date: Fri, 26 Feb 2021 15:41:37 +0100
+Message-ID: <20210226144144.9252-4-nmanthey@amazon.de>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210226144144.9252-1-nmanthey@amazon.de>
+References: <20210226144144.9252-1-nmanthey@amazon.de>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: Bulk
 
-Dear all,
+When passing format strings to the trace function, allow gcc to analyze
+those and warn on issues.
 
-we have been running some code analysis tools on the xenstore code, and triaged
-the results. This series presents the robustness fixes we identified.
+Signed-off-by: Norbert Manthey <nmanthey@amazon.de>
+Reviewed-by: Thomas Friebel <friebelt@amazon.de>
+Reviewed-by: Julien Grall <jgrall@amazon.co.uk>
 
-Best,
-Norbert
+---
+ tools/xenstore/xenstored_core.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Michael Kurth (1):
-  xenstore: add missing NULL check
-
-Norbert Manthey (9):
-  xenstore: add missing NULL check
-  xenstore: fix print format string
-  xenstore: check formats of trace
-  xenstore_client: handle memory on error
-  xenstore: handle daemon creation errors
-  xenstored: handle port reads correctly
-  xenstore: handle do_mkdir and do_rm failure
-  xs: handle daemon socket error
-  xs: add error handling
-
- tools/libs/store/xs.c            | 10 +++++++++-
- tools/xenstore/xenstore_client.c |  3 +++
- tools/xenstore/xenstored_core.c  | 16 ++++++++++++++++
- tools/xenstore/xenstored_core.h  |  2 +-
- tools/xenstore/xenstored_posix.c |  6 +++++-
- tools/xenstore/xs_tdb_dump.c     |  6 +++---
- 6 files changed, 37 insertions(+), 6 deletions(-)
-
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -217,7 +217,7 @@ int delay_request(struct connection *conn, struct buffered_data *in,
+ /* Tracing infrastructure. */
+ void trace_create(const void *data, const char *type);
+ void trace_destroy(const void *data, const char *type);
+-void trace(const char *fmt, ...);
++void trace(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+ void dtrace_io(const struct connection *conn, const struct buffered_data *data, int out);
+ void reopen_log(void);
+ void close_log(void);
 -- 
 2.17.1
 
