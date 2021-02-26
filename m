@@ -2,42 +2,46 @@ Return-Path: <SRS0=mA2z=H4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C84C1C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:09:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02182C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:09:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A91664EEE
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:09:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A91664EEE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7689D64EF3
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:09:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7689D64EF3
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.90142.170562 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.90136.170514 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFYza-0007VI-8Q; Fri, 26 Feb 2021 09:00:58 +0000
+	id 1lFYwF-0006I1-Nb; Fri, 26 Feb 2021 08:57:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 90142.170562; Fri, 26 Feb 2021 09:00:58 +0000
+Received: by outflank-mailman (output) from mailman id 90136.170514; Fri, 26 Feb 2021 08:57:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFYza-0007VB-5C; Fri, 26 Feb 2021 09:00:58 +0000
-Received: by outflank-mailman (input) for mailman id 90142;
- Fri, 26 Feb 2021 09:00:56 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zK4+=H4=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1lFYzY-0007UE-FO
- for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 09:00:56 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d14fef2c-b6de-4b7c-b17b-f11b32700cfc;
- Fri, 26 Feb 2021 09:00:55 +0000 (UTC)
+	id 1lFYwF-0006Hu-Ka; Fri, 26 Feb 2021 08:57:31 +0000
+Received: by outflank-mailman (input) for mailman id 90136;
+ Fri, 26 Feb 2021 08:57:30 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1lFYwE-0006Hp-Eq
+ for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 08:57:30 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lFYwC-0007nx-3p; Fri, 26 Feb 2021 08:57:28 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lFYwB-0007tI-Ow; Fri, 26 Feb 2021 08:57:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,137 +53,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d14fef2c-b6de-4b7c-b17b-f11b32700cfc
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1614330055;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=hcHZxn/yloaKbz4HuwpCWh+4xZp5v7qk/JNM42WjKUM=;
-  b=XDhsBgQ7pKWMmfxld8eBDabMT1BJUNIpiLLFuSddW0EqvL97+ckfAc/h
-   W+T6+bpBHJpaj7H3sh1pfNsTcykfFYGJuEzwJRQSd8i5lkZd86z/LfsSM
-   +Imogjyi+DlOMh7n8vSJUpQZzMgSw2wRVOXY484/iJnxwPju3KjBAJKy2
-   Y=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: wSgAA5y5wVVo/oQ/CS6btyjOt1uTCrvFlD1Y/BVby9vwUiD5yoqxrN4/xpIO046Unqvoz8XC3y
- TizCFOUbkfvhgU48eGEqymCZsjOm3J79j2kgZMWFf8UbRe1K/WokNBFV1YALuzxbfzjBQccNk3
- 546ApWeMUynWsMbIuwkR4v1B0MdRqRBy6uLdHaqFcyAsWuszb0xdmi0qqfLI6Qmgl3aK7MgFxO
- buzu+N1R0mUtPKD4Q7Am3fcME6Ficss3sy9h4yxcFmlCpirFuXTiJXR35pJH4gM8GNFrOExxgM
- 0f8=
-X-SBRS: 5.2
-X-MesageID: 38281509
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.81,208,1610427600"; 
-   d="scan'208";a="38281509"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gVcL7XXSzfeBk0HpU77cZvw+pdpXU9InFkf29LogVwHbUX/7uRa2LcM9DlmYrTsPWoHRewF2liSs/tLPp+xH5VIUfdHvhjW+6IGcVN120OeWqeiPZxVfNEO4475IbYv3gy/94E68n4QyuK0GlKI0V5+RxktZrsz0WHBjMiqUe5EbxmUsV/PASFasUv2qafPyyApiks4Pkust1c0rYs3M19zzgtNPwhXtkrHFdzr3a9v/pWvqxsKzf3emd7GbHASFlE0KKu2T9WHpkKttOdJG3ZOuyRtdFouLoOxO2+NthvKuRvcLs8mQh8XNmRJjuDdUtQt9rvyQuYH3c4JumktC6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cydJsAIez600M/vb94JozzdggeHZXjVoZDJiSVI8vdk=;
- b=V/sOIyIo1iWY2O4urxGerAoGPB/zjdgBmAcMJzjrm4m8aSw1dpSO1KdJPUraYRKe+R6t7qYe1DHUNt5HG3+iGOKGDs0+kCsQiBPgVW4AW68gw6vir77aVnmZqHf0BtXiW1dygdrvqej/g84mTZesRXVqb/3/Lfl+PN1DzL+CleNiTekwcZHzCtnsjq4MwIBU+wJ0plwkEkDItQxVxaFOoT6dhfByPZ4ISJ8ox2wSMslCGdskPlF8WDd2TWn3vEzJJhxylHtg+LPWSLVp/6P+XXHXaAuT/waBbJTmQZhrvnRVZj4QvW8Vv8wR8j0HMActwkDH1sCpc6joXVcmsaf/yA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cydJsAIez600M/vb94JozzdggeHZXjVoZDJiSVI8vdk=;
- b=Qb3bkvoReEXHl1cTB3Wvl5VMr+wFUZFsIRA8+WGYwKrKQoU9qpmcnnVMP8kSwYpQDfErBYB7KVpjvsKA5XzwVQaQqnEnwsFov2RFgEm//7U7XgJDJUVZAe3v7JmW0aUNXNc26X4wocIZmaJhDpg+EekiDmKind9GD6z2V5Xdq28=
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Doug Goldstein <cardoe@cardoe.com>
-Subject: [PATCH for-4.15 3/3] automation: enable rombios build on Alpine
-Date: Fri, 26 Feb 2021 09:59:08 +0100
-Message-ID: <20210226085908.21254-4-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210226085908.21254-1-roger.pau@citrix.com>
-References: <20210226085908.21254-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM6P195CA0080.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:209:86::21) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=bfSRLRQrbGKnSidBkvM8jJR/POW5DzFBzZ5BkdttpWg=; b=cI29TdAIqO++Gz3Ro4q4Nsr658
+	wXvmSacLrROH6ueKMU0JjiaPbL7AIH7TMtKM00LfHF6IPiYOb7/UMYkz9KvzBD2ZD6a9yMBRCLbbP
+	TcRwMG+W1jc/6Yyv7f2+X1IzwRam9+1+M7bgDGqsF2bkVLN0Sls5rIaAB3Vt2STy79p0=;
+Subject: Re: [PATCH for-4.15 5/5] tools/xenstored: Silence coverity when using
+ xs_state_* structures
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ xen-devel@lists.xenproject.org
+Cc: raphning@amazon.co.uk, iwj@xenproject.org,
+ Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>,
+ "Manthey, Norbert" <nmanthey@amazon.de>
+References: <20210225174131.10115-1-julien@xen.org>
+ <20210225174131.10115-6-julien@xen.org>
+ <0aa89914-8fae-3731-a5a0-ccf4316ce96b@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <37e219e6-a66b-383d-2a60-b61fdd1d66a8@xen.org>
+Date: Fri, 26 Feb 2021 08:57:25 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.7.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 24fd7f05-1b4b-450a-fd15-08d8da3504ec
-X-MS-TrafficTypeDiagnostic: DM6PR03MB4394:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR03MB4394659081E56D81C4CCC7058F9D9@DM6PR03MB4394.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: AiZ5MAl9dU+k5KTCQeFt+JOOMNCSoIkBdrpbYrFSgkMQ6mNr/euqacEaAA5nSSpD6Nsi6yFOJHkUf9sbc4qxBE4NsDGRtVANWD5xFEgA769As8tiLHfQRfHxTy10e4ubuM6VZ5w2oCA24PYrCywQdEFavvlv8wJGnumR4JdEmHEgFPG82det3M/ZmuXNXPdVztv6jMLIt4bKOt5/xJmHU85zZ16LmJWShmg7HMK2sGEV3hQTCur+qiMEmy8UkCLixuoCCeWtFYPTU6tp9ixckOk9YKeKDTBo3eNhI6IXFv+jQJ7+naGpufd8wbEClAk7EeQIVqZKKongGKkkp4pNBj9UfBtHW1ntOJLaqcM6PX5K1DU4C73HwnaLg+389KXjJsS6iCKZowe8qyHji2sEfpAoG7ep/NjCmdXiF4DtLfyUQpNOGmnOEGAVGw8l6+tGpdIkIrex4Mwl36sXmIGPqnmliYI/sipoHBpOCG1CCsyZgMbnnav4SC4QhH6yRKa7PoHp1GVKFo0WyZC4qqnU2w==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(39860400002)(376002)(136003)(366004)(396003)(6916009)(66556008)(66946007)(36756003)(316002)(478600001)(6496006)(6666004)(66476007)(86362001)(2616005)(26005)(4326008)(54906003)(186003)(1076003)(5660300002)(16526019)(2906002)(4744005)(8936002)(956004)(83380400001)(8676002)(6486002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?WGtHZWJGWnJhWmR1YVg1R2NFdk54eEZMbWlyOTJqWHVQSk9kNmVZTXB4MUtz?=
- =?utf-8?B?WnVXVDdjV0d5RzVqcFV4WmFiVVI3UjF2YWovSjdIbldyOHI4bWw0TllmZzFj?=
- =?utf-8?B?aFh4UDJZc285TFdnNzgrNVQ4VzRQU3ErUmV5cGhaK0lBZlBWOE1rcVVMa1o3?=
- =?utf-8?B?d29XMyttalA5eExWRERxYk4vNmRZMDZXZG5rV1RJVytob1BtUVhDVmNNUlBR?=
- =?utf-8?B?N1NXazF0VVZtdFdIZzR6U1p3LytSVlZ3UWo1V056YS94Yndvc0lYeCtsaS9W?=
- =?utf-8?B?aGJSdkhPNHdacGUzWlQvQ0NKK2FRRndvVXkzY0hrVzhNbFpoaldOQmQrYlZD?=
- =?utf-8?B?V2dhY3pKUW5DTGIwUE0wZWE1Q3NqQS9HYzF3N0JxZzE5UW5tZ0dkY3oyWitY?=
- =?utf-8?B?NVJKM1ZLSEQ1aDQ1bzdBVDRjR3pOM2NQOG04bnZCTDdSeEpmbEFMYzhVSXYw?=
- =?utf-8?B?ZDBvR3pOajhXOEQ1K0FUSGpIbVVjcE1kY1ZGSHpoOG5GVnNBSlZNWnBLOTIx?=
- =?utf-8?B?LzJ0b0gybmtDZC81cFhQRWtNZUdxNExNM3NsM0FVbFpnUkhLYXJxL3NRdG5O?=
- =?utf-8?B?YVpHTElqa0FweTJLd1Q1WnNFakhvTERsNHY1cldjRmlMMFlsSDNYVnR4VWVX?=
- =?utf-8?B?NmoyN3A1blZKNVlacWplUnB2MHh5TWE5U1RTMXIzTWp1ZkZqNEFRZTRzcFVE?=
- =?utf-8?B?QTJ2UDJVWTI2Qi9TRkhuRXNsb2s5UVUyRG9Vc1FTVDJ1K0Z0Vkx0QjlJeDYw?=
- =?utf-8?B?NVdLY3NSakMyMFJYM1M5Vmt2QlpMQTJkK3BuMm9SY2dqWnBHcmdELzh4VkMw?=
- =?utf-8?B?S0N5MEt4bHdWNFB3d3hZSm9mT3BzRzRHaVEvL3FMQVhWSjNwZGlVNk02QXBo?=
- =?utf-8?B?YVlDalRDbWpVdktYNDRMNVlyK1BPTzdOWitVNU1sMS80SlFIZEhmTGRCWGQz?=
- =?utf-8?B?OFBZQlBGTXVpcVlqdUNZRjZvVWFoU0hVVG9NNkpZb0JvNXBsM2I5L2hSQnFD?=
- =?utf-8?B?czRKRnEvQUdvR0IrWnBvNzBNei8vZkl6OCtxM2hXOC9jOGtJMGdUOVIzWHA1?=
- =?utf-8?B?Q1c0SmZ4cEczQWdsK2R6M1h4bHVCcjRpSnpWMml2MEJjU2pVV2VlTlJqb1Iz?=
- =?utf-8?B?b1VSdldDaUpUSnN3cHdVbk5paVRQcjVhR0p1V1plZnhNTUhRdEJkVzVFQ0tH?=
- =?utf-8?B?cTVUL1Z6M040WjJlWStRVFZQaDdIQzhsdzFMZ295WVZwMnlBTGJBb2ZkNERt?=
- =?utf-8?B?SWhiSDVlTUtieUQ4VXVIS1REMkhIZnk0S1hNZ2pmVDdXMXlxMXZqVGdYTm1M?=
- =?utf-8?B?S1hiaU5sVnZsRGtLV21tRjRHWlVTVnRLazdGSWljWVFtRjhYSWRBV0luYUNK?=
- =?utf-8?B?UUV6T3lqUVRJbGhBaVdDT0xGb1BuTzNvcWpXWjl2L1g1dlFMUnh0Y0hyQ3lu?=
- =?utf-8?B?U3lRTHZFZzcyMlVYOEVsTnhFbzRSUXJXUmRIUHhBMGkxbVhwYjFmazJkekxL?=
- =?utf-8?B?V1E3SUJFUXVGSnFXbDU1UndSZXRUV21udTlsZGVaRHQxeXNsbzlPeFM5M3h3?=
- =?utf-8?B?ZXJtUnM4N2hoU2wzU0R3dkd4dUV6Vm9mcTU5STVWVU9lQTI5NGc1VjJIdjI0?=
- =?utf-8?B?b0xPeHZVeTUrek9RUzdudFhPa3ZaOVVjaksvdUZMVUtHbHJHOE85c1NjRGVs?=
- =?utf-8?B?L0hIRklwa2IrMWl1NnlBdVM3N01qUEVmR05xQllKRHlWWktwQ0syc08xekJw?=
- =?utf-8?Q?I74RJad7DdawzbhBOF6g0nI4dans6CyGox7pRPx?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 24fd7f05-1b4b-450a-fd15-08d8da3504ec
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2021 09:00:52.4802
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MaxM2rmnO+DLUV5YP63C9oIIsO4PN46OQgTV2zz25vShUTPEahZL9pIOGpy3dnjg0Trj0TZZsq5LQLYydIRZFA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4394
-X-OriginatorOrg: citrix.com
+In-Reply-To: <0aa89914-8fae-3731-a5a0-ccf4316ce96b@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-It's now safe to enable the build of rombios on Alpine systems, as
-hvmloader already builds fine there.
+Hi Juergen,
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- automation/scripts/build | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+On 26/02/2021 07:10, Jürgen Groß wrote:
+> On 25.02.21 18:41, Julien Grall wrote:
+>> From: Julien Grall <jgrall@amazon.com>
+>>
+>> Coverity will report unitialized values for every use of xs_state_*
+>> structures in the save part. This can be prevented by using the [0]
+>> rather than [] to define variable length array.
+>>
+>> Coverity-ID: 1472398
+>> Coverity-ID: 1472397
+>> Coverity-ID: 1472396
+>> Coverity-ID: 1472395
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+> 
+> Sorry, but Coverity is clearly wrong here.
+I saw what Andrew wrote but neither of you really provided enough 
+information to infer the same. Care to provide more details?
 
-diff --git a/automation/scripts/build b/automation/scripts/build
-index d8990c3bf4..87e44bb940 100755
---- a/automation/scripts/build
-+++ b/automation/scripts/build
-@@ -31,9 +31,8 @@ fi
- if ! test -z "$(ldd /bin/ls|grep musl|head -1)"; then
-     # disable --disable-werror for QEMUU when building with MUSL
-     cfgargs+=("--with-extra-qemuu-configure-args=\"--disable-werror\"")
--    # hvmloader doesn't build on MUSL systems
--    cfgargs+=("--disable-seabios")
--    cfgargs+=("--disable-rombios")
-+    # SeaBIOS doesn't build on MUSL systems
-+    cfgargs+=("--with-system-seabios=/bin/false")
- fi
- 
- # Qemu requires Python 3.5 or later
+> 
+> Should we really modify our code to work around bugs in external
+> static code analyzers?
+
+I don't think it is OK to have 866 issues (and counting) and keep 
+ignoring them because Coverity may be wrong. We should fix them one way 
+or another. If this means telling Coverity they are reporting false 
+positive, then fine.
+
+But for that, I first needs a bit more details why they are clearly wrong.
+
+Cheers,
+
 -- 
-2.30.1
-
+Julien Grall
 
