@@ -2,51 +2,46 @@ Return-Path: <SRS0=mA2z=H4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72589C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:42:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60BFFC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 10:47:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0662364E85
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:42:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0662364E85
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by mail.kernel.org (Postfix) with ESMTPS id C8D2C64DA1
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 10:47:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C8D2C64DA1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.90176.170659 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.90204.170697 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFZdq-00048x-CV; Fri, 26 Feb 2021 09:42:34 +0000
+	id 1lFaeV-00029e-Kq; Fri, 26 Feb 2021 10:47:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 90176.170659; Fri, 26 Feb 2021 09:42:34 +0000
+Received: by outflank-mailman (output) from mailman id 90204.170697; Fri, 26 Feb 2021 10:47:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFZdq-00048q-8F; Fri, 26 Feb 2021 09:42:34 +0000
-Received: by outflank-mailman (input) for mailman id 90176;
- Fri, 26 Feb 2021 09:42:32 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+p7+=H4=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lFZdo-00048k-Ep
- for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 09:42:32 +0000
-Received: from mail-qk1-x735.google.com (unknown [2607:f8b0:4864:20::735])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dde87779-66cf-4d63-8c80-b8d76fdbea30;
- Fri, 26 Feb 2021 09:42:31 +0000 (UTC)
-Received: by mail-qk1-x735.google.com with SMTP id f17so8504815qkl.5
- for <xen-devel@lists.xenproject.org>; Fri, 26 Feb 2021 01:42:31 -0800 (PST)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com.
- [209.85.160.172])
- by smtp.gmail.com with ESMTPSA id e18sm2022868qtr.69.2021.02.26.01.42.30
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Feb 2021 01:42:30 -0800 (PST)
-Received: by mail-qt1-f172.google.com with SMTP id f17so6227997qth.7
- for <xen-devel@lists.xenproject.org>; Fri, 26 Feb 2021 01:42:30 -0800 (PST)
+	id 1lFaeV-00029X-H4; Fri, 26 Feb 2021 10:47:19 +0000
+Received: by outflank-mailman (input) for mailman id 90204;
+ Fri, 26 Feb 2021 10:47:18 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1lFaeU-00029S-IS
+ for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 10:47:18 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lFaeR-0001IB-C8; Fri, 26 Feb 2021 10:47:15 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lFaeR-0006bN-3y; Fri, 26 Feb 2021 10:47:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,80 +53,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dde87779-66cf-4d63-8c80-b8d76fdbea30
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=E8MT/YBSt9+GOAVKSt/z+/x/oAmJs4mba4MVCW+FEPI=;
-        b=YlJGaB2HjeORjhsgYOy8pctb9+8JkGl/ZdIRVJcfQxCMoR62lL7XtrY95NgsqhINjE
-         lSgvnnp9tfO6u1oKErjW0g+HTDOG3GFiOyn5d4dJiyFIJKbzFBupmPEB/V7jXmUb4d2q
-         N9u5qLxflCWFXhFfzUGrtIkZV0aKvT2pOtERk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=E8MT/YBSt9+GOAVKSt/z+/x/oAmJs4mba4MVCW+FEPI=;
-        b=MMC2fobt7Lm6xF9B04NEfH07G+hH5o+ny3ZW9+FHet0g361WNIrfQ2NaWZnI1qrXh3
-         m/ME4NJA1KGXsXwKldjwBSd0Rt6qANkaeSreSTzb5poi+i4k+aHhJAuyCCEjsy08d35w
-         iE9wZdklyp1r4TZpb92i81HO3qIb6hSRAkYU8OHjwW9csxKpsk5vFrDFjREfzmrd4aeI
-         uCyRHPNJwmw+yyQAP6sDr2KcFYWF2N7k1N3OkD2VZZt5TMfVy8P5JQbBhwiEnfiMOT21
-         FvysLwp4eHawFKsEHc2ew8RJvcGqLFEg+jjZH8aOg8vlcAAhJXYhYae5KgaHDtrxDL6d
-         cF2w==
-X-Gm-Message-State: AOAM531JJOBydc6NrjekXjDuo9gf2wfUmQ4xbIkTkpSMaEb5Dpdhc078
-	KsNSX11zA96NTkt4sffXecC7jSLmC9S7Iw==
-X-Google-Smtp-Source: ABdhPJxSS17I3z7JFspWlipa+fPiAjwpNkli5sbyFLNN93Z+IBPiUvolmDdVhJWP+YAnudJ196tQiQ==
-X-Received: by 2002:a37:8a04:: with SMTP id m4mr1752223qkd.78.1614332551112;
-        Fri, 26 Feb 2021 01:42:31 -0800 (PST)
-X-Received: by 2002:a02:b61a:: with SMTP id h26mr2057255jam.90.1614332168202;
- Fri, 26 Feb 2021 01:36:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=ipvQkVg4Bqcmvpp2yi2ILlarioKI8P+uinKEzPQxz0I=; b=fm/WwMQ5ZNGwcCO1/yCfLs/cMd
+	ewSiCNnR80xlDWEyB6OED5CgpWgKdwe501KuRgZqJtWnhljGh266DAT5IvVBVOjcKYIUcjGS4Srcv
+	Sj8VAKp0nJulPYx7BlR8s6wTDlZvHoVY6/E8TzErFT20ctWaCFQD1i1Zz7qZVhbyYBIw=;
+Subject: Re: [for-4.15][RESEND PATCH v4 1/2] xen/x86: iommu: Ignore IOMMU
+ mapping requests when a domain is dying
+To: Jan Beulich <jbeulich@suse.com>
+Cc: hongyxia@amazon.co.uk, iwj@xenproject.org,
+ Julien Grall <jgrall@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Kevin Tian <kevin.tian@intel.com>, Paul Durrant <paul@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20210224094356.7606-1-julien@xen.org>
+ <20210224094356.7606-2-julien@xen.org>
+ <d5a09319-614d-398b-b911-bc2533bec587@suse.com>
+ <7ce1deb9-e362-439c-dd14-a17dbb6fb1c8@xen.org>
+ <2c1d2b05-7553-5f15-ad28-47aba5b9c47f@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <9d0423c8-2610-0bcc-8b88-3e13ee9e4888@xen.org>
+Date: Fri, 26 Feb 2021 10:47:13 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.7.1
 MIME-Version: 1.0
-References: <20210209062131.2300005-1-tientzu@chromium.org>
- <20210209062131.2300005-13-tientzu@chromium.org> <CALiNf298+DLjTK6ALe0mYrRuCP_LtztMGuQQCS90ubDctbS0kw@mail.gmail.com>
- <20210226051740.GB2072@lst.de>
-In-Reply-To: <20210226051740.GB2072@lst.de>
-From: Claire Chang <tientzu@chromium.org>
-Date: Fri, 26 Feb 2021 17:35:57 +0800
-X-Gmail-Original-Message-ID: <CALiNf29tSQ1R8zh35neQWuWqDPek+Jr8QzyPQQvTsW2cZBMEUw@mail.gmail.com>
-Message-ID: <CALiNf29tSQ1R8zh35neQWuWqDPek+Jr8QzyPQQvTsW2cZBMEUw@mail.gmail.com>
-Subject: Re: [PATCH v4 12/14] swiotlb: Add restricted DMA alloc/free support.
-To: Christoph Hellwig <hch@lst.de>
-Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>, 
-	Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, 
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com, jgross@suse.com, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, benh@kernel.crashing.org, paulus@samba.org, 
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
-	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
-	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
-	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
-	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
-	heikki.krogerus@linux.intel.com, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
-	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
-	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
-	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
-	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <2c1d2b05-7553-5f15-ad28-47aba5b9c47f@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 26, 2021 at 1:17 PM Christoph Hellwig <hch@lst.de> wrote:
->
-> On Fri, Feb 26, 2021 at 12:17:50PM +0800, Claire Chang wrote:
-> > Do you think I should fix this and rebase on the latest linux-next
-> > now? I wonder if there are more factor and clean up coming and I
-> > should wait after that.
->
-> Here is my preferred plan:
->
->  1) wait for my series to support the min alignment in swiotlb to
->     land in Linus tree
->  2) I'll resend my series with the further swiotlb cleanup and
->     refactoring, which includes a slightly rebased version of your
->     patch to add the io_tlb_mem structure
->  3) resend your series on top of that as a baseline
->
-> This is my current WIP tree for 2:
->
->   http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/swiotlb-struct
+Hi Jan,
 
-Sounds good to me. Thanks!
+On 25/02/2021 13:18, Jan Beulich wrote:
+> On 25.02.2021 12:56, Julien Grall wrote:
+>> On 24/02/2021 14:07, Jan Beulich wrote:
+>>> On 24.02.2021 10:43, Julien Grall wrote:
+>>>> --- a/xen/drivers/passthrough/x86/iommu.c
+>>>> +++ b/xen/drivers/passthrough/x86/iommu.c
+>>>> @@ -267,6 +267,12 @@ int iommu_free_pgtables(struct domain *d)
+>>>>        struct page_info *pg;
+>>>>        unsigned int done = 0;
+>>>>    
+>>>> +    if ( !is_iommu_enabled(d) )
+>>>> +        return 0;
+>>>
+>>> Why is this addition needed? Hitting a not yet initialize spin lock
+>>> is - afaict - no worse than a not yet initialized list, so it would
+>>> seem to me that this can't be the reason. No other reason looks to
+>>> be called out by the description.
+>>
+>> struct domain_iommu will be initially zeroed as it is part of struct domain.
+>>
+>> For the list, we are so far fine because page_list_remove_head()
+>> tolerates NULL. If we were using the normal list operations (e.g.
+>> list_del), then this code would have segfaulted.
+> 
+> And so we do, in the CONFIG_BIGMEM case. May I suggest then to split
+> this out as a prereq patch, or add wording to the description
+> mentioning this additional effect?
+
+You are correct, I can crash the hypervisor when enabling 
+CONFIG_BIGMEM=y and not using the IOMMU. I will move this chunk in a 
+separate patch.
+
+Cheers,
+
+-- 
+Julien Grall
 
