@@ -2,46 +2,45 @@ Return-Path: <SRS0=mA2z=H4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-22.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54246C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 08:31:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66E73C433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:03:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0579A64ECE
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 08:31:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0579A64ECE
+	by mail.kernel.org (Postfix) with ESMTPS id D826264EF0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Feb 2021 09:03:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D826264EF0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.90120.170463 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.90152.170574 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFYWj-0003jJ-Ki; Fri, 26 Feb 2021 08:31:09 +0000
+	id 1lFZ22-0007nG-Pk; Fri, 26 Feb 2021 09:03:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 90120.170463; Fri, 26 Feb 2021 08:31:09 +0000
+Received: by outflank-mailman (output) from mailman id 90152.170574; Fri, 26 Feb 2021 09:03:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lFYWj-0003jC-Gx; Fri, 26 Feb 2021 08:31:09 +0000
-Received: by outflank-mailman (input) for mailman id 90120;
- Fri, 26 Feb 2021 08:31:07 +0000
+	id 1lFZ22-0007n9-Kx; Fri, 26 Feb 2021 09:03:30 +0000
+Received: by outflank-mailman (input) for mailman id 90152;
+ Fri, 26 Feb 2021 09:03:29 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eEmz=H4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lFYWh-0003j7-PR
- for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 08:31:07 +0000
+ id 1lFZ21-0007n4-J7
+ for xen-devel@lists.xenproject.org; Fri, 26 Feb 2021 09:03:29 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 299e8d67-cced-4d79-bb36-3d15241eebce;
- Fri, 26 Feb 2021 08:31:03 +0000 (UTC)
+ id da0ca2f5-670c-4ea6-920e-6fb2e91452da;
+ Fri, 26 Feb 2021 09:03:28 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 3F07EAAAE;
- Fri, 26 Feb 2021 08:31:02 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id E6335AC6E;
+ Fri, 26 Feb 2021 09:03:27 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,148 +52,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 299e8d67-cced-4d79-bb36-3d15241eebce
+X-Inumbo-ID: da0ca2f5-670c-4ea6-920e-6fb2e91452da
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614328262; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1614330208; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=zizc9mgtALmCUMLDX8SdCLIf5N1ESalejPn7NvmvnQE=;
-	b=XmVTz74Y0YHUvQcuQf8EP8cDnqpZBL249xWLVnwv3o5PXCZuw6wGxv1cR7DR+1ggxPKd/D
-	uMBdFe2Y+VBQ5z1x6p8ap+i3rhSKTfMdk8C/Q7KkSySm/iWJI3lP6fvJPnXJ88bCP11eYy
-	xV7lPLynT913Ewtlc8fizPrHTEOiaDA=
-Subject: Re: [PATCH for-next 3/6] xen/sched: Fix build when NR_CPUS == 1
-To: Connor Davis <connojdavis@gmail.com>
-Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
- George Dunlap <george.dunlap@citrix.com>, Dario Faggioli
- <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
-References: <cover.1614265718.git.connojdavis@gmail.com>
- <d0922adc698ab76223d76a0a7f328a72cedf00ad.1614265718.git.connojdavis@gmail.com>
- <b4ad0f83-e071-49f8-17a8-7fec0e226b9a@suse.com>
- <20210226030833.uugfojf5kkxhlpr7@thewall>
+	bh=hLHHBQG+gRZqFcvISMbHh8pjmJkAMVV34j7OAarnsCE=;
+	b=JY6v5gY+OguB/NB9fr1bs9t7kv9takJj6m6xunZgVYZIy4bv6UCdiRaM3cE0GwT0sRhF4G
+	H94cauVIGQkSVfG+sLVONRC/9lDfihqOvGGzQQ6OIl7/Hea7TkdJuTLKoQhmG3NGxq5Ivc
+	7cDzV1+4a+fWkkCO/IO0M+tMDFP7Aoo=
+Subject: Re: [PATCH] xen: introduce XENFEAT_direct_mapped and
+ XENFEAT_not_direct_mapped
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Stefano Stabellini <stefano.stabellini@xilinx.com>,
+ andrew.cooper3@citrix.com, julien@xen.org, xen-devel@lists.xenproject.org
+References: <20210225012243.28530-1-sstabellini@kernel.org>
+ <96d764b6-a719-711c-31ea-235381bfd0ce@suse.com>
+ <alpine.DEB.2.21.2102250948160.3234@sstabellini-ThinkPad-T480s>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <eb19a389-d2b3-d0cc-fd25-62bbb121cf98@suse.com>
-Date: Fri, 26 Feb 2021 09:31:02 +0100
+Message-ID: <fe4f0f87-0b6a-c37a-7f17-e3cf40f739f1@suse.com>
+Date: Fri, 26 Feb 2021 10:03:28 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <20210226030833.uugfojf5kkxhlpr7@thewall>
+In-Reply-To: <alpine.DEB.2.21.2102250948160.3234@sstabellini-ThinkPad-T480s>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 26.02.2021 04:08, Connor Davis wrote:
-> On Thu, Feb 25, 2021 at 04:50:02PM +0100, Jan Beulich wrote:
->> On 25.02.2021 16:24, Connor Davis wrote:
->>> Return from cpu_schedule_up when either cpu is 0 or
->>> NR_CPUS == 1. This fixes the following:
->>>
->>> core.c: In function 'cpu_schedule_up':
->>> core.c:2769:19: error: array subscript 1 is above array bounds
->>> of 'struct vcpu *[1]' [-Werror=array-bounds]
->>>  2769 |     if ( idle_vcpu[cpu] == NULL )
->>>       |
->>>
->>> Signed-off-by: Connor Davis <connojdavis@gmail.com>
->>> ---
->>>  xen/common/sched/core.c | 2 +-
->>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
->>> index 9745a77eee..f5ec65bf9b 100644
->>> --- a/xen/common/sched/core.c
->>> +++ b/xen/common/sched/core.c
->>> @@ -2763,7 +2763,7 @@ static int cpu_schedule_up(unsigned int cpu)
->>>      cpumask_set_cpu(cpu, &sched_res_mask);
+On 25.02.2021 21:51, Stefano Stabellini wrote:
+> On Thu, 25 Feb 2021, Jan Beulich wrote:
+>> On 25.02.2021 02:22, Stefano Stabellini wrote:
+>>> --- a/xen/include/public/features.h
+>>> +++ b/xen/include/public/features.h
+>>> @@ -114,6 +114,13 @@
+>>>   */
+>>>  #define XENFEAT_linux_rsdp_unrestricted   15
 >>>  
->>>      /* Boot CPU is dealt with later in scheduler_init(). */
->>> -    if ( cpu == 0 )
->>> +    if ( cpu == 0 || NR_CPUS == 1 )
->>>          return 0;
->>>  
->>>      if ( idle_vcpu[cpu] == NULL )
+>>> +/*
+>>> + * A direct-mapped (or 1:1 mapped) domain is a domain for which its
+>>> + * local pages have gfn == mfn.
+>>> + */
+>>> +#define XENFEAT_not_direct_mapped       16
+>>> +#define XENFEAT_direct_mapped           17
 >>
->> I'm not convinced a compiler warning is due here, and in turn
->> I'm not sure we want/need to work around this the way you do.
+>> Why two new values? Absence of XENFEAT_direct_mapped requires
+>> implying not-direct-mapped by the consumer anyway, doesn't it?
 > 
-> It seems like a reasonable warning to me, but of course I'm open
-> to dealing with it in a different way.
+> That's because if we add both flags we can avoid all unpleasant guessing
+> games in the guest kernel.
 > 
->> First question is whether that's just a specific compiler
->> version that's flawed. If it's not just a special case (e.g.
+> If one flag or the other flag is set, we can make an informed decision.
 > 
-> The docker container uses gcc 10.2.0 from
-> https://github.com/riscv/riscv-gnu-toolchain
+> But if neither flag is set, it means we are running on an older Xen,
+> and we fall back on the current checks.
 
-Ah yes, at -O2 I can observe the warning on e.g.
+Oh, okay - if there's guesswork to avoid, then I see the point.
+Maybe mention in the description?
 
-extern int array[N];
+>> Further, quoting xen/mm.h: "For a non-translated guest which
+>> is aware of Xen, gfn == mfn." This to me implies that PV would
+>> need to get XENFEAT_direct_mapped set; not sure whether this
+>> simply means x86'es is_domain_direct_mapped() is wrong, but if
+>> it is, uses elsewhere in the code would likely need changing.
+> 
+> That's a good point, I didn't think about x86 PV. I think the two flags
+> are needed for autotranslated guests. I don't know for sure what is best
+> for non-autotranslated guests.
+> 
+> Maybe we could say that XENFEAT_not_direct_mapped and
+> XENFEAT_direct_mapped only apply to XENFEAT_auto_translated_physmap
+> guests. And it would match the implementation of
+> is_domain_direct_mapped().
 
-int test(unsigned i) {
-	if(i == N - 1)
-		return 0;
-	return array[i];
-}
+I'm having trouble understanding this last sentence, and hence I'm
+not sure I understand the rest in the way you may mean it. Neither
+x86'es nor Arm's is_domain_direct_mapped() has any check towards a
+guest being translated (obviously such a check would be redundant
+on Arm).
 
-when N=1. No warning appears when N=2 or higher, yet if it is
-sensible to emit for N=1 then it would imo be similarly
-sensible to emit in other cases. The only difference is that
-when N=1, there's no i for which the array access would ever
-be valid, while e.g. for N=2 there's exactly one such i.
+> For non XENFEAT_auto_translated_physmap guests we could either do:
+> 
+> - neither flag is set
+> - set XENFEAT_direct_mapped (without changing the implementation of
+>   is_domain_direct_mapped)
+> 
+> What do you think? I am happy either way.
 
-I've tried an x86 build with NR_CPUS=1, and this hits the case
-you found and a 2nd one, where behavior is even more puzzling.
-For the case you've found I'd like to suggest as alternative
-
-@@ -2769,6 +2769,12 @@ static int cpu_schedule_up(unsigned int
-     if ( cpu == 0 )
-         return 0;
- 
-+    /*
-+     * Guard in particular also against the compiler suspecting out-of-bounds
-+     * array accesses below when NR_CPUS=1.
-+     */
-+    BUG_ON(cpu >= NR_CPUS);
-+
-     if ( idle_vcpu[cpu] == NULL )
-         vcpu_create(idle_vcpu[0]->domain, cpu);
-     else
-
-To fix the x86 build in this regard we'd additionally need
-something along the lines of
-
---- unstable.orig/xen/arch/x86/genapic/x2apic.c
-+++ unstable/xen/arch/x86/genapic/x2apic.c
-@@ -54,7 +54,17 @@ static void init_apic_ldr_x2apic_cluster
-     per_cpu(cluster_cpus, this_cpu) = cluster_cpus_spare;
-     for_each_online_cpu ( cpu )
-     {
--        if (this_cpu == cpu || x2apic_cluster(this_cpu) != x2apic_cluster(cpu))
-+        if ( this_cpu == cpu )
-+            continue;
-+        /*
-+         * Guard in particular against the compiler suspecting out-of-bounds
-+         * array accesses below when NR_CPUS=1 (oddly enough with gcc 10 it
-+         * is the 1st of these alone which actually helps, not the 2nd, nor
-+         * are both required together there).
-+         */
-+        BUG_ON(this_cpu >= NR_CPUS);
-+        BUG_ON(cpu >= NR_CPUS);
-+        if ( x2apic_cluster(this_cpu) != x2apic_cluster(cpu) )
-             continue;
-         per_cpu(cluster_cpus, this_cpu) = per_cpu(cluster_cpus, cpu);
-         break;
-
-but the comment points out how strangely the compiler behaves here.
-Even flipping around the two sides of the != doesn't change its
-behavior. It is perhaps relevant to note here that there's no
-special casing of smp_processor_id() in the NR_CPUS=1 case, so the
-compiler can't infer this_cpu == 0.
-
-Once we've settled on how to change common/sched/core.c I guess
-I'll then adjust the x86-specific change accordingly and submit as
-a separate fix (or I could of course also bundle both changes then).
+I'm happy either way as well; suitably described perhaps setting
+XENFEAT_direct_mapped when !paging_mode_translate() would be
+slightly more "natural". But a spelled out and enforced
+dependency upon XENFEAT_auto_translated_physmap would too be fine
+with me.
 
 Jan
 
