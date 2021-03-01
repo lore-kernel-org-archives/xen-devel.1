@@ -2,41 +2,47 @@ Return-Path: <SRS0=TTqk=H7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCD27C433E6
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E8CAC433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:16:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9415464F6E
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:01:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9415464F6E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5DD3A651C8
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:16:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DD3A651C8
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.91802.173219 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.91816.173255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGlv3-00065s-8C; Mon, 01 Mar 2021 17:01:17 +0000
+	id 1lGm9u-0007Xg-VJ; Mon, 01 Mar 2021 17:16:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 91802.173219; Mon, 01 Mar 2021 17:01:17 +0000
+Received: by outflank-mailman (output) from mailman id 91816.173255; Mon, 01 Mar 2021 17:16:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGlv3-00065l-56; Mon, 01 Mar 2021 17:01:17 +0000
-Received: by outflank-mailman (input) for mailman id 91802;
- Mon, 01 Mar 2021 17:01:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ju5b=H7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lGlv1-00062i-Be
- for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 17:01:15 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 50051d20-5e5d-4b78-8405-480cb8369e0c;
- Mon, 01 Mar 2021 17:01:10 +0000 (UTC)
+	id 1lGm9u-0007XZ-SC; Mon, 01 Mar 2021 17:16:38 +0000
+Received: by outflank-mailman (input) for mailman id 91816;
+ Mon, 01 Mar 2021 17:16:38 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lGm9u-0007XU-78
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 17:16:38 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lGm9u-0004qy-2u
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 17:16:38 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lGm9u-0002V6-1x
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 17:16:38 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lGm9q-0004xS-NV; Mon, 01 Mar 2021 17:16:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,138 +54,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50051d20-5e5d-4b78-8405-480cb8369e0c
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1614618070;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=X0/GB4CAinlU2bd2Nnz46CPqRoIoBMMDymVSzGexTAk=;
-  b=d3kL2qWvT9eBr6HU+n7I1jrSSvpalLvXPQk8mHy7YGqqgPbsa/ObzCjJ
-   3+J4LT8/8H1ZX/s8mRK6zgTl+tQnmXWyWPu72yU6eKqhrXKNdcJJ328xs
-   Bpl2rEM8q89tUInt8xQbeGZENmgCfTgNqKsXMOrp462fY/8EvuNI5oJUC
-   0=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: zAgcpBW/a8KTBJBGF7NGVISZB9r478yOLjt6pAwcTD1q0IR4gVQ4oIZ1DTmHvm7XWIcQ/P5EJ6
- BKpJRMwINT6IOfksguSm4K16ZhHh09j90uFfnZISXOhbPQIHTls5JnQe/EE3BrJyUtuLn89z6o
- 5PonzNhOLWqar48+CWZ5bkbu7WutWSLqzfX2iZNFf2vS8Uen8iktpl8gBha46TvmauY6faBymI
- WQ6q1oFsgXqwDxeEdYRybA3xFarK9VDlBida+pYfkt6q7gTsDEFSfcaS7mo3wyHL9wwe6A/fjp
- f1M=
-X-SBRS: 5.2
-X-MesageID: 39657548
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.81,215,1610427600"; 
-   d="scan'208";a="39657548"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH 1/3] tools: Check for abi-compliance-checker in ./configure
-Date: Mon, 1 Mar 2021 17:00:42 +0000
-Message-ID: <20210301170044.23295-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210301170044.23295-1-andrew.cooper3@citrix.com>
-References: <20210301170044.23295-1-andrew.cooper3@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=13Kj7RzqmVCzVZETaSPuaFP8XdUIobXKzSnObUsCibA=; b=WOiNlCUpOk+TNTyZOfE6ZqhgqL
+	v2MHHEml4KYs+nraDZxLmOGRLycDMZ3WgU8g6oJaVm+olcMHpNB+cctSFvzicAn+LhxWsyS69+W/v
+	qO/Q6Fqk/Ua4hmfCF9azujPFF6hoqUPZVEkwppEc358rKMPPqcL+wQlKs0OiMOAhZVxc=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Message-ID: <24637.8562.514355.845883@mariner.uk.xensource.com>
+Date: Mon, 1 Mar 2021 17:16:34 +0000
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: <xen-devel@lists.xenproject.org>,
+    Wei Liu <wl@xen.org>,
+    Anthony PERARD <anthony.perard@citrix.com>,
+    Jan Beulich <jbeulich@suse.com>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    Jun Nakajima <jun.nakajima@intel.com>,
+    Kevin Tian <kevin.tian@intel.com>,
+    Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH RFC for-4.15] x86/msr: introduce an option for legacy MSR behavior selection
+In-Reply-To: <20210301162357.76527-1-roger.pau@citrix.com>
+References: <20210301162357.76527-1-roger.pau@citrix.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-This will be optional.  No functional change
+Roger Pau Monne writes ("[PATCH RFC for-4.15] x86/msr: introduce an option for legacy MSR behavior selection"):
+> Introduce an option to allow selecting the legacy behavior for
+> accesses to MSRs not explicitly handled. Since commit
+> 84e848fd7a162f669 and 322ec7c89f6640e accesses to MSRs not explicitly
+> handled by Xen result in the injection of a #GP to the guest. This is
+> a behavior change since previously a #GP was only injected if
+> accessing the MSR on the real hardware will also trigger a #GP.
+> 
+> This seems to be problematic for some guests, so introduce an option
+> to fallback to this legacy behavior. The main difference between what
+> was previously done is that the hardware MSR value is not leaked to
+> the guests on reads.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> ---
+> Note that this option is not made available to dom0. I'm not sure
+> whether it makes sense to do so, since anyone updating Xen to such
+> newer version will also likely pair it with a newish kernel that
+> doesn't require such workarounds.
+> 
+> RFC because there's still some debate as to how we should solve the
+> MSR issue, this is one possible way, but IMO we need to make a
+> decision soon-ish because of the release timeline.
+> 
+> Boris, could you please test with Solaris to see if this fixes the
+> issue?
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Wei Liu <wl@xen.org>
----
- config/Tools.mk.in |  1 +
- tools/configure    | 41 +++++++++++++++++++++++++++++++++++++++++
- tools/configure.ac |  1 +
- 3 files changed, 43 insertions(+)
+So AIUI this patch is to make it possible for Xen 4.15 to behave like
+Xen 4.14, thus avoiding a regression for these troublesome guests.
 
-diff --git a/config/Tools.mk.in b/config/Tools.mk.in
-index d47936686b..8e2268da3e 100644
---- a/config/Tools.mk.in
-+++ b/config/Tools.mk.in
-@@ -20,6 +20,7 @@ IASL                := @IASL@
- AWK                 := @AWK@
- FETCHER             := @FETCHER@
- ABI_DUMPER          := @ABI_DUMPER@
-+ABI_COMPLIANCE_CHECKER := @ABI_COMPLIANCE_CHECKER@
- 
- # Extra folder for libs/includes
- PREPEND_INCLUDES    := @PREPEND_INCLUDES@
-diff --git a/tools/configure b/tools/configure
-index bb5acf9d43..f77bf6f66d 100755
---- a/tools/configure
-+++ b/tools/configure
-@@ -682,6 +682,7 @@ OCAMLOPT
- OCAMLLIB
- OCAMLVERSION
- OCAMLC
-+ABI_COMPLIANCE_CHECKER
- ABI_DUMPER
- INSTALL_DATA
- INSTALL_SCRIPT
-@@ -5483,6 +5484,46 @@ $as_echo "no" >&6; }
- fi
- 
- 
-+# Extract the first word of "abi-compliance-checker", so it can be a program name with args.
-+set dummy abi-compliance-checker; ac_word=$2
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-+$as_echo_n "checking for $ac_word... " >&6; }
-+if ${ac_cv_path_ABI_COMPLIANCE_CHECKER+:} false; then :
-+  $as_echo_n "(cached) " >&6
-+else
-+  case $ABI_COMPLIANCE_CHECKER in
-+  [\\/]* | ?:[\\/]*)
-+  ac_cv_path_ABI_COMPLIANCE_CHECKER="$ABI_COMPLIANCE_CHECKER" # Let the user override the test with a path.
-+  ;;
-+  *)
-+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-+for as_dir in $PATH
-+do
-+  IFS=$as_save_IFS
-+  test -z "$as_dir" && as_dir=.
-+    for ac_exec_ext in '' $ac_executable_extensions; do
-+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-+    ac_cv_path_ABI_COMPLIANCE_CHECKER="$as_dir/$ac_word$ac_exec_ext"
-+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-+    break 2
-+  fi
-+done
-+  done
-+IFS=$as_save_IFS
-+
-+  ;;
-+esac
-+fi
-+ABI_COMPLIANCE_CHECKER=$ac_cv_path_ABI_COMPLIANCE_CHECKER
-+if test -n "$ABI_COMPLIANCE_CHECKER"; then
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ABI_COMPLIANCE_CHECKER" >&5
-+$as_echo "$ABI_COMPLIANCE_CHECKER" >&6; }
-+else
-+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-+$as_echo "no" >&6; }
-+fi
-+
-+
- # Extract the first word of "perl", so it can be a program name with args.
- set dummy perl; ac_word=$2
- { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-diff --git a/tools/configure.ac b/tools/configure.ac
-index 636e7077be..d84f2edcdc 100644
---- a/tools/configure.ac
-+++ b/tools/configure.ac
-@@ -311,6 +311,7 @@ AC_PROG_MAKE_SET
- AC_PROG_INSTALL
- AC_PATH_PROG([FLEX], [flex])
- AC_PATH_PROG([ABI_DUMPER], [abi-dumper])
-+AC_PATH_PROG([ABI_COMPLIANCE_CHECKER], [abi-compliance-checker])
- AX_PATH_PROG_OR_FAIL([PERL], [perl])
- AX_PATH_PROG_OR_FAIL([AWK], [awk])
- 
--- 
-2.11.0
+Have we diffed the result of this against 4.14 and if not would it be
+a sensible thing to do ?
 
+Ian.
 
