@@ -2,44 +2,47 @@ Return-Path: <SRS0=TTqk=H7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C5CBC433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 15:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 572FAC433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 15:58:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BB4BE64DF5
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 15:15:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB4BE64DF5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id D4B5964DE5
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 15:58:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D4B5964DE5
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.91728.173057 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.91756.173069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGkFj-0002IU-1c; Mon, 01 Mar 2021 15:14:31 +0000
+	id 1lGkva-0006E2-BC; Mon, 01 Mar 2021 15:57:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 91728.173057; Mon, 01 Mar 2021 15:14:31 +0000
+Received: by outflank-mailman (output) from mailman id 91756.173069; Mon, 01 Mar 2021 15:57:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGkFi-0002IN-Uo; Mon, 01 Mar 2021 15:14:30 +0000
-Received: by outflank-mailman (input) for mailman id 91728;
- Mon, 01 Mar 2021 15:14:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lGkva-0006Dv-7e; Mon, 01 Mar 2021 15:57:46 +0000
+Received: by outflank-mailman (input) for mailman id 91756;
+ Mon, 01 Mar 2021 15:57:44 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=m81q=H7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lGkFh-0002II-5y
- for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 15:14:29 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 18885b9b-e16c-4da0-bfbc-d3cbd611aa4c;
- Mon, 01 Mar 2021 15:14:28 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6FDBEAF59;
- Mon,  1 Mar 2021 15:14:27 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1lGkvY-0006Dq-Lr
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 15:57:44 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lGkvY-0002y7-Hi
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 15:57:44 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lGkvY-00005H-Eh
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 15:57:44 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lGkvU-0004kk-TO; Mon, 01 Mar 2021 15:57:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,66 +54,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18885b9b-e16c-4da0-bfbc-d3cbd611aa4c
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614611667; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=PoO1/fDL0ExPzQjEi0DBvTkmnPW4j7s6jpqYlEpbTkA=;
-	b=H8qm4FKnuLjH3uvoa1zCaPTq+x1SaPZbRtTDfYs5OT81E+49px3+NG4iqs4Be5l3TMpjlE
-	KR7+iVHpie2HdAvr7grdoATSSR7S4v+Vf9zWAWDnRRvX5wAp0ZfghYgYWCKg8EjAdyS+GO
-	7XhbzZPSU9mXxVZYNcQpvMjbuM/JT30=
-Subject: Re: [PATCH 2/2][4.15?] x86: fix build when NR_CPUS == 1
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>
-References: <ad59eaf9-747c-f60e-16b7-121c9f86a1e0@suse.com>
- <1d8d5089-32a9-9c42-5949-8f9cd20f33e0@suse.com>
- <YDzzt1CXau8vKCn1@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <a0664115-2b36-7a56-2814-bb234fb379cf@suse.com>
-Date: Mon, 1 Mar 2021 16:14:26 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=D6ber2Y4v3368Vq2zqGOCcZQ0X8vbXNk5rYjNgWHM7g=; b=moU0gcLGQakxbsDeGu7klJNbOR
+	BRNLqyNA8O2H2GS0CJLLONBUo/ij2pBa/5XTD2bfs5hEzP5fYi2xEhGFBdl6Vs5EAu0+EtcT5ORsG
+	g5uK5PXvW9rxW7PI/DjBRyEkI0wKoVTcY73SGM8P/h1qIDvoES4cdSb/qrille4VrNqk=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <YDzzt1CXau8vKCn1@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24637.3828.576373.217715@mariner.uk.xensource.com>
+Date: Mon, 1 Mar 2021 15:57:40 +0000
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+    Connor Davis <connojdavis@gmail.com>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Dario Faggioli  <dfaggioli@suse.com>
+Subject: Re: [PATCH 1/2][4.15?] sched: fix build when NR_CPUS == 1
+In-Reply-To: <171d1da4-e87a-b154-5c63-a5627d4f93bc@suse.com>
+References: <ad59eaf9-747c-f60e-16b7-121c9f86a1e0@suse.com>
+	<171d1da4-e87a-b154-5c63-a5627d4f93bc@suse.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-On 01.03.2021 15:01, Roger Pau Monné wrote:
-> On Mon, Mar 01, 2021 at 09:31:07AM +0100, Jan Beulich wrote:
->> In this case the compiler is recognizing that no valid array indexes
->> remain (in x2apic_cluster()'s access to per_cpu(cpu_2_logical_apicid,
->> ...)), but oddly enough isn't really consistent about the checking it
->> does (see the code comment).
-> 
-> I assume this is because of the underlying per_cpu access to
-> __per_cpu_offset using cpu as the index, in which case wouldn't it be
-> better to place the BUG_ON there?
+Jan Beulich writes ("[PATCH 1/2][4.15?] sched: fix build when NR_CPUS == 1"):
+> In this case the compiler is recognizing that no valid array indexes
+> remain, and hence e.g. reports:
 
-Not sure, to be honest. It seemed more logical to me to place it
-next to where the issue is.
-
-> Also I wonder why the accesses the same function does to the per_cpu
-> area before the modified chunk using this_cpu as index don't also
-> trigger such warnings.
-
-The compiler appears to be issuing the warning when it can prove
-that no legitimate index can make it to a respective use. in this
-case it means that is is
-
-        if ( this_cpu == cpu )
-            continue;
-
-which makes it possible for the compiler to know that what gets
-past this would be an out of bounds access, since for NR_CPUS=1
-both this_cpu and cpu can only validly both be zero. (This also
-plays into my choice of placement, because it is not
-x2apic_cluster() on its own which has this issue.)
-
-Jan
+Release-Acked-by: Ian Jackson <iwj@xenproject.org>
 
