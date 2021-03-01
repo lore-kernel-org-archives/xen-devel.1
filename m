@@ -2,45 +2,44 @@ Return-Path: <SRS0=TTqk=H7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E917C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 07:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54608C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 08:11:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED94A64DBD
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 07:57:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED94A64DBD
+	by mail.kernel.org (Postfix) with ESMTPS id E302564DF2
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 08:11:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E302564DF2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.91307.172550 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.91316.172581 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGdQe-0005Bo-9u; Mon, 01 Mar 2021 07:57:20 +0000
+	id 1lGddu-0007kM-26; Mon, 01 Mar 2021 08:11:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 91307.172550; Mon, 01 Mar 2021 07:57:20 +0000
+Received: by outflank-mailman (output) from mailman id 91316.172581; Mon, 01 Mar 2021 08:11:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGdQe-0005Bh-6p; Mon, 01 Mar 2021 07:57:20 +0000
-Received: by outflank-mailman (input) for mailman id 91307;
- Mon, 01 Mar 2021 07:57:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lGddt-0007kF-Ue; Mon, 01 Mar 2021 08:11:01 +0000
+Received: by outflank-mailman (input) for mailman id 91316;
+ Mon, 01 Mar 2021 08:11:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=m81q=H7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lGdQc-0005Bc-Bt
- for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 07:57:18 +0000
+ id 1lGdds-0007k1-Qh
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 08:11:00 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f5c1ae32-e259-421f-8712-e8c3d8f3f140;
- Mon, 01 Mar 2021 07:57:16 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 36c5a0b4-6fa5-460a-a2fa-16e82c7ad008;
+ Mon, 01 Mar 2021 08:10:59 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C8DBFAAC5;
- Mon,  1 Mar 2021 07:57:15 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id ECA42AAC5;
+ Mon,  1 Mar 2021 08:10:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,83 +51,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f5c1ae32-e259-421f-8712-e8c3d8f3f140
+X-Inumbo-ID: 36c5a0b4-6fa5-460a-a2fa-16e82c7ad008
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614585435; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1614586259; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=Bm618ENHOLlPwZbs+NnfWMXdyQyfD9kLXr1Ug/4Lg1k=;
-	b=JCakssBrBePqAAzizP9LOlOF43sKGgMfHEd0ChrLAksTVJPRuyKQ7SVk86rlQ9Uei15JCh
-	iohchgdET0NjgqExnHkZPZiyYnRnyCYyZ7gMUkBTSJvtw50tsGlObo+sb2E54L8rS+Yn60
-	5X88fiA7yNHfbQajWm/cwza9u3jyec8=
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=swrp9hl6sdidetG22tkJhfXywPsPVmZJSgAo0ZbE4xY=;
+	b=EPkjV+4w5iYTXuSe1blZL+oFnjO0GpusvSRec8agcbf4DKkfGKme/iPFfkjldx5IBz2YUf
+	TfeiY2Ui4WetcS9LegCXG8ipTyj+3wMG3aO59cmkLW2sLZB9c+vy7TI0jmPqQb1P0zwBG1
+	WTOU+/3P4w+MoLO3EUoOBlP57+awDqI=
+Subject: Re: [PATCH][4.15] x86/shadow: suppress "fast fault path" optimization
+ without reserved bits
+To: Tim Deegan <tim@xen.org>, Ian Jackson <iwj@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <aefe5617-9f10-23a4-ee27-6ea66b62cdbe@suse.com>
+ <YDkq3KwtfGZZTyLL@deinos.phlegethon.org>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH][4.15] crypto: adjust rijndaelEncrypt() prototype for gcc11
-Message-ID: <05fe3295-7993-2eb5-37bc-a6d04fde1fbc@suse.com>
-Date: Mon, 1 Mar 2021 08:57:15 +0100
+Message-ID: <72c3c863-7465-ce26-1f57-b71227bb2b19@suse.com>
+Date: Mon, 1 Mar 2021 09:10:58 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
+In-Reply-To: <YDkq3KwtfGZZTyLL@deinos.phlegethon.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-The upcoming release complains, not entirely unreasonably:
+On 26.02.2021 18:07, Tim Deegan wrote:
+> At 14:03 +0100 on 25 Feb (1614261809), Jan Beulich wrote:
+>> When none of the physical address bits in PTEs are reserved, we can't
+>> create any 4k (leaf) PTEs which would trigger reserved bit faults. Hence
+>> the present SHOPT_FAST_FAULT_PATH machinery needs to be suppressed in
+>> this case, which is most easily achieved by never creating any magic
+>> entries.
+>>
+>> To compensate a little, eliminate sh_write_p2m_entry_post()'s impact on
+>> such hardware.
+>>
+>> While at it, also avoid using an MMIO magic entry when that would
+>> truncate the incoming GFN.
+>>
+>> Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Acked-by: Tim Deegan <tim@xen.org>
 
-In file included from rijndael.c:33:
-.../xen/include/crypto/rijndael.h:55:53: note: previously declared as 'const unsigned char[]'
-   55 | void    rijndaelEncrypt(const unsigned int [], int, const unsigned char [],
-      |                                                     ^~~~~~~~~~~~~~~~~~~~~~
-rijndael.c:865:8: error: argument 4 of type 'u8[16]' {aka 'unsigned char[16]'} with mismatched bound [-Werror=array-parameter=]
-  865 |     u8 ct[16])
-      |     ~~~^~~~~~
-In file included from rijndael.c:33:
-.../xen/include/crypto/rijndael.h:56:13: note: previously declared as 'unsigned char[]'
-   56 |             unsigned char []);
-      |             ^~~~~~~~~~~~~~~~
+Thanks.
 
-While it's not really clear to me why it would complain only for arg 4,
-the adjustment to make is obvious and riskfree also for arg 3: Simply
-declare the correct array dimension right away. This then allows
-compilers to apply checking at call sites, which seems desirable anyway.
+>> I wonder if subsequently we couldn't arrange for SMEP/SMAP faults to be
+>> utilized instead, on capable hardware (which might well be all having
+>> such large a physical address width).
+> 
+> I don't immediately see how, since we don't control the access type
+> that the guest will use.
 
-For the moment I'm leaving untouched the disagreement between u8/u32
-used in the function definition and unsigned {char,int} used in the
-declaration, as making this consistent would call for touching further
-functions.
 
-Reported-by: Charles Arnold <carnold@suse.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-There are quite a few more issues with gcc11, but from my brief initial
-inspection I'm suspecting (hoping) it'll rather be the compiler which
-will get further changed by the time their release gets finalized. Just
-one example:
+>> I further wonder whether SH_L1E_MMIO_GFN_MASK couldn't / shouldn't be
+>> widened. I don't see a reason why it would need confining to the low
+>> 32 bits of the PTE - using the full space up to bit 50 ought to be fine
+>> (i.e. just one address bit left set in the magic mask), and we wouldn't
+>> even need that many to encode a 40-bit GFN (i.e. the extra guarding
+>> added here wouldn't then be needed in the first place).
+> 
+> Yes, I think it could be reduced to use just one reserved address bit.
+> IIRC we just used such a large mask so the magic entries would be
+> really obvious in debugging, and there was no need to support arbitrary
+> address widths for emulated devices.
 
-.../xen/include/xen/string.h:101:27: error: '__builtin_memcmp' specified bound 4 exceeds source size 0 [-Werror=stringop-overread]
-  101 | #define memcmp(s1, s2, n) __builtin_memcmp(s1, s2, n)
-      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-mpparse.c:722:13: note: in expansion of macro 'memcmp'
-  722 |         if (memcmp(mpf->mpf_signature, "_MP_", 4) == 0 &&
-      |             ^~~~~~
+Will cook a patch, albeit I guess I'll keep as many of the bits set
+as possible, while still being able to encode a full-40-bit GFN.
 
-Clearly neither the 1st nor the 2nd argument have a "source size" of 0.
+Ian - I don't suppose you'd consider this a reasonable thing to do
+for 4.15? It would allow limiting the negative (performance) effect
+the change here has.
 
---- a/xen/include/crypto/rijndael.h
-+++ b/xen/include/crypto/rijndael.h
-@@ -52,7 +52,7 @@
- 
- int	rijndaelKeySetupEnc(unsigned int [], const unsigned char [], int);
- int	rijndaelKeySetupDec(unsigned int [], const unsigned char [], int);
--void	rijndaelEncrypt(const unsigned int [], int, const unsigned char [],
--	    unsigned char []);
-+void	rijndaelEncrypt(const unsigned int [], int, const unsigned char [16],
-+	    unsigned char [16]);
- 
- #endif /* __RIJNDAEL_H */
+Jan
 
