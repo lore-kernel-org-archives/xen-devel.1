@@ -2,41 +2,41 @@ Return-Path: <SRS0=TTqk=H7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7701C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:01:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA4CBC43381
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:01:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 58C3A64FE2
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:01:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 58C3A64FE2
+	by mail.kernel.org (Postfix) with ESMTPS id A15C164FE8
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Mar 2021 17:01:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A15C164FE8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.91805.173230 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.91801.173206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGlv7-00069K-Rd; Mon, 01 Mar 2021 17:01:21 +0000
+	id 1lGluy-00062u-03; Mon, 01 Mar 2021 17:01:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 91805.173230; Mon, 01 Mar 2021 17:01:21 +0000
+Received: by outflank-mailman (output) from mailman id 91801.173206; Mon, 01 Mar 2021 17:01:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGlv7-00069C-OA; Mon, 01 Mar 2021 17:01:21 +0000
-Received: by outflank-mailman (input) for mailman id 91805;
- Mon, 01 Mar 2021 17:01:20 +0000
+	id 1lGlux-00062n-TK; Mon, 01 Mar 2021 17:01:11 +0000
+Received: by outflank-mailman (input) for mailman id 91801;
+ Mon, 01 Mar 2021 17:01:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ju5b=H7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lGlv6-00062i-Bv
- for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 17:01:20 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1lGluw-00062i-Cv
+ for xen-devel@lists.xenproject.org; Mon, 01 Mar 2021 17:01:10 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2756f48d-8e71-41c6-9676-8669975f102a;
- Mon, 01 Mar 2021 17:01:14 +0000 (UTC)
+ id 3960c46e-8c32-4cd4-a32d-4ec41a0b4b2c;
+ Mon, 01 Mar 2021 17:01:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,96 +48,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2756f48d-8e71-41c6-9676-8669975f102a
+X-Inumbo-ID: 3960c46e-8c32-4cd4-a32d-4ec41a0b4b2c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1614618073;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=FjUnGPVEAyWud86DM21udaJ75FfBw2ymxYDma8YblGY=;
-  b=Gk1B5LmGOsbeKAVMilN6Cjwy2dNGND2l2eRU8SVwyaFOKKGkFIl5wykU
-   36y0RwDwqkyVq/g3/9ovzyvMsUUK20y7VSxUG5GH0cl4w2GjWGyzJhNBk
-   hGjfe7pMDec83xX1AGNqn+O7c/du9ep6OfR0SiE1hlH6q5+xEFOQR9XUF
-   w=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: k1jckH8qiAXyMvWlee/mBx99CGcwRw0gaUEDd8Drr9NkOz39+Nw/7Jyxtf1EMdLhpGyCvusVMA
- kGiW2XYgvp4D1cJaBC8v41TrFPJmxEZ/gNH4h7Ge1q4ZIacV+XZqJDxX2eAZxYxigEx1UKeVvD
- QyYgR6Ydn5cCvVUjXXkFrUGAfmIpPoEYgY1Khdsx69Hg9C9WSj0Jpaj8O+/KMeYOl7RFayXPM+
- tAidUuS1aKD2fKCg4X8MVHUvZ7qtwFC0wjeECE29TKu79npVl9G0jipyxwAZkv3644hHZR8BzQ
- OWM=
+  d=citrix.com; s=securemail; t=1614618069;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=lYtMvIpYuWI/bvPALsefbxZrve6XvUtyOc1OkhsXeKg=;
+  b=Cg8XhYgjgLBiWYdw+bjyhr+6mW22l0gkFk2h2hlH5331b8IPiAicxDEk
+   61t8dEIJH/SmD1wlG724cbR1j5XIblDSd560QhV1L/kUwTMrXiDQoUOaI
+   VRVgw0wpP4EkDsQym3HpuMNevbTPMzDorXyMuHSTFoCfRhdywnfPvnDfN
+   k=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: OFHdRIWBO7xTwzDntzzH7kxZiPIJm/4GyA1W4Dq7McWKYuhTdbJmfvdHLNM+THmcgBOBuG7KAH
+ iaXZ2T7LuMbMcJr9xelccqNMquhMbPbhPMO2f58hDSNLbEqsdDBoLEvqNBDz/pt0SCVROaE1Rg
+ KPQ+seFKrWE977gSpiEOA8SQMrFXIVMtzlGD+uF0KKue8tJKH3XAE0YggUluO8nlB//rmvlJhv
+ Gog7AsXGiVLov41e89lTiq9w7jZcEcHunD0JU+biAUNY2VjutO138CoKb70pOYZmP62mgCijU6
+ JgM=
 X-SBRS: 5.2
-X-MesageID: 38182446
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 39657544
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.81,215,1610427600"; 
-   d="scan'208";a="38182446"
+   d="scan'208";a="39657544"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: [PATCH 3/3] tools/libs: Check ABI # DO NOT APPLY YET
-Date: Mon, 1 Mar 2021 17:00:44 +0000
-Message-ID: <20210301170044.23295-4-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH for-4.15 0/3] tools: ABI checking
+Date: Mon, 1 Mar 2021 17:00:41 +0000
+Message-ID: <20210301170044.23295-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210301170044.23295-1-andrew.cooper3@citrix.com>
-References: <20210301170044.23295-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Wei Liu <wl@xen.org>
-CC: Juergen Gross <jgross@suse.com>
----
- tools/libs/.gitignore |  2 ++
- tools/libs/libs.mk    | 15 +++++++++++----
- 2 files changed, 13 insertions(+), 4 deletions(-)
+Support in-tree ABI checking for stable libs.
 
-diff --git a/tools/libs/.gitignore b/tools/libs/.gitignore
-index 4a13126144..655f46a6e8 100644
---- a/tools/libs/.gitignore
-+++ b/tools/libs/.gitignore
-@@ -1 +1,3 @@
-+*/abi.chk
-+*/compat_reports/
- */headers.lst
-diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
-index a68cec244c..c12e779e63 100644
---- a/tools/libs/libs.mk
-+++ b/tools/libs/libs.mk
-@@ -96,12 +96,19 @@ lib$(LIB_FILE_NAME).so.$(MAJOR): lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR)
- lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR): $(PIC_OBJS) libxen$(LIBNAME).map
- 	$(CC) $(LDFLAGS) $(PTHREAD_LDFLAGS) -Wl,$(SONAME_LDFLAG) -Wl,lib$(LIB_FILE_NAME).so.$(MAJOR) $(SHLIB_LDFLAGS) -o $@ $(PIC_OBJS) $(LDUSELIBS) $(APPEND_LDFLAGS)
- 
--# If abi-dumper is available, write out the ABI analysis
--ifneq ($(ABI_DUMPER),)
--libs: $(PKG_ABI)
- $(PKG_ABI): lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) headers.lst
- 	$(ABI_DUMPER) $< -o $@ -public-headers headers.lst -lver $(MAJOR).$(MINOR)
-+
-+abi.chk: $(PKG_OLD_ABI) $(PKG_ABI)
-+	$(ABI_COMPLIANCE_CHECKER) -l lib$(LIB_FILE_NAME) -old $(PKG_OLD_ABI) -new $(PKG_ABI)
-+	touch $@
-+
-+ifneq ($(ABI_COMPLIANCE_CHECKER),)
-+ifeq ($(debug_symbols),y)
-+libs: abi.chk
- endif
-+endif
-+
- 
- .PHONY: install
- install: build
-@@ -131,7 +138,7 @@ TAGS:
- clean:
- 	rm -rf *.rpm $(LIB) *~ $(DEPS_RM) $(LIB_OBJS) $(PIC_OBJS)
- 	rm -f lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) lib$(LIB_FILE_NAME).so.$(MAJOR)
--	rm -f headers.chk headers.lst
-+	rm -f headers.chk headers.lst abi.chk
- 	rm -f $(PKG_CONFIG)
- 	rm -f _paths.h
- 
+This series highlights a regression from 4.14, which needs fixing before the
+3rd patch can be committed.
+
+abi-compliance-checker reports:
+
+  Removed Symbols  3
+    xentoolcore_internal.h
+      xentoolcore__deregister_active_handle ( Xentoolcore__Active_Handle* ah )
+      xentoolcore__register_active_handle ( Xentoolcore__Active_Handle* ah )
+      xentoolcore__restrict_by_dup2_null ( int fd )
+
+
+Another RFC question - this only applies to x86_64 at the moment.  For other
+architectures, we'd need to commit other ABI files.
+
+Andrew Cooper (3):
+  tools: Check for abi-compliance-checker in ./configure
+  tools/libs: Stash the 4.14 API/ABIs for the stable libraries
+  tools/libs: Check ABI # DO NOT APPLY YET
+
+ config/Tools.mk.in                                 |    1 +
+ tools/configure                                    |   41 +
+ tools/configure.ac                                 |    1 +
+ tools/libs/.gitignore                              |    2 +
+ tools/libs/abi/libxencall.so.1.2-x86_64-abi.dump   |  924 +++++++++++
+ .../abi/libxendevicemodel.so.1.3-x86_64-abi.dump   | 1491 +++++++++++++++++
+ tools/libs/abi/libxenevtchn.so.1.1-x86_64-abi.dump |  719 ++++++++
+ .../abi/libxenforeignmemory.so.1.3-x86_64-abi.dump |  847 ++++++++++
+ tools/libs/abi/libxengnttab.so.1.2-x86_64-abi.dump | 1199 ++++++++++++++
+ tools/libs/abi/libxenhypfs.so.1.0-x86_64-abi.dump  |  597 +++++++
+ .../libs/abi/libxenstore.so.3.0.3-x86_64-abi.dump  | 1711 ++++++++++++++++++++
+ .../libs/abi/libxentoolcore.so.1.0-x86_64-abi.dump |  239 +++
+ .../libs/abi/libxentoollog.so.1.0-x86_64-abi.dump  |  882 ++++++++++
+ tools/libs/call/Makefile                           |    2 +
+ tools/libs/devicemodel/Makefile                    |    2 +
+ tools/libs/evtchn/Makefile                         |    2 +
+ tools/libs/foreignmemory/Makefile                  |    2 +
+ tools/libs/gnttab/Makefile                         |    2 +
+ tools/libs/hypfs/Makefile                          |    2 +
+ tools/libs/libs.mk                                 |   15 +-
+ tools/libs/store/Makefile                          |    2 +
+ tools/libs/toolcore/Makefile                       |    2 +
+ tools/libs/toollog/Makefile                        |    2 +
+ 23 files changed, 8683 insertions(+), 4 deletions(-)
+ create mode 100644 tools/libs/abi/libxencall.so.1.2-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxendevicemodel.so.1.3-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxenevtchn.so.1.1-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxenforeignmemory.so.1.3-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxengnttab.so.1.2-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxenhypfs.so.1.0-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxenstore.so.3.0.3-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxentoolcore.so.1.0-x86_64-abi.dump
+ create mode 100644 tools/libs/abi/libxentoollog.so.1.0-x86_64-abi.dump
+
 -- 
 2.11.0
 
