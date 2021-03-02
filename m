@@ -2,44 +2,44 @@ Return-Path: <SRS0=Bsih=IA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6360C433DB
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:11:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CFE7C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:15:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6F9CF60241
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:11:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F9CF60241
+	by mail.kernel.org (Postfix) with ESMTPS id 2BC1661606
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:15:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BC1661606
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92084.173799 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92087.173810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGxJq-0002Kw-94; Tue, 02 Mar 2021 05:11:38 +0000
+	id 1lGxNa-0002Uo-Pf; Tue, 02 Mar 2021 05:15:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92084.173799; Tue, 02 Mar 2021 05:11:38 +0000
+Received: by outflank-mailman (output) from mailman id 92087.173810; Tue, 02 Mar 2021 05:15:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGxJq-0002Kp-5w; Tue, 02 Mar 2021 05:11:38 +0000
-Received: by outflank-mailman (input) for mailman id 92084;
- Tue, 02 Mar 2021 05:11:36 +0000
+	id 1lGxNa-0002Uh-Mb; Tue, 02 Mar 2021 05:15:30 +0000
+Received: by outflank-mailman (input) for mailman id 92087;
+ Tue, 02 Mar 2021 05:15:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jRZ7=IA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lGxJo-0002Kg-PE
- for xen-devel@lists.xenproject.org; Tue, 02 Mar 2021 05:11:36 +0000
+ id 1lGxNZ-0002Uc-6j
+ for xen-devel@lists.xenproject.org; Tue, 02 Mar 2021 05:15:29 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9b868ab8-e4c0-4b6f-a798-223d335bc8dd;
- Tue, 02 Mar 2021 05:11:36 +0000 (UTC)
+ id 7e434e1f-7586-48fc-a9c6-615da07a2748;
+ Tue, 02 Mar 2021 05:15:28 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 3B280AAC5;
- Tue,  2 Mar 2021 05:11:35 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 453BAAAC5;
+ Tue,  2 Mar 2021 05:15:27 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,76 +51,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b868ab8-e4c0-4b6f-a798-223d335bc8dd
+X-Inumbo-ID: 7e434e1f-7586-48fc-a9c6-615da07a2748
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614661895; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1614662127; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ieqJjZduduZPTxRgFb41qXRs8Z/JIuWf8tlRwGj0ceE=;
-	b=u7wrrE6CBMp7nmUkerxQFLeozzE1Gfk+Ii0V0AeaoBeHOkDZPXOSeSRwx0FexHUXLpFdYf
-	E1Z/BpV1enLRWUY7IxQLukJX+pZo/sOUIj38PVvHOYB0Y5AtiCZ/8frhn7Nw2aEo1vwu7B
-	OLsixJ4H0ExEstvr+rDV7Alc+MqN1v8=
-Subject: Re: [PATCH XENSTORE v1 10/10] xs: add error handling
-To: Norbert Manthey <nmanthey@amazon.de>, xen-devel@lists.xenproject.org
+	bh=P1HJmEBLe02gdILdBiKZ8//oVn+6DgIMWtesj9tNA4w=;
+	b=Yca6tVZzhzmzIyDu/Q/7LIx39sG66Y+vlKZsWF4k8qAnMJKSPAUx5r5rOssijX29q5U/uH
+	1tNkK8H29W/ljVVGvtw+3fEfSPHOMNc82T0rP6dIt+QPUdlMEah3ylVX2chnnagI01FJsw
+	hfBw4PlkkFOG75fnfAu9j6novWnTKF0=
+Subject: Re: [PATCH XENSTORE v1 06/10] xenstored: handle port reads correctly
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Norbert Manthey <nmanthey@amazon.de>, xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
  Julien Grall <jgrall@amazon.co.uk>, Michael Kurth <mku@amazon.de>
 References: <20210226144144.9252-1-nmanthey@amazon.de>
- <20210226144144.9252-11-nmanthey@amazon.de>
+ <20210226144144.9252-7-nmanthey@amazon.de>
+ <a840c4fa-148e-7617-20e5-9b286ace2c40@citrix.com>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <2e8a0983-c6dd-e016-b4e8-c49795c0084c@suse.com>
-Date: Tue, 2 Mar 2021 06:11:34 +0100
+Message-ID: <fc383f00-7bf9-6f2f-54ab-b1e66eed419d@suse.com>
+Date: Tue, 2 Mar 2021 06:15:26 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <20210226144144.9252-11-nmanthey@amazon.de>
+In-Reply-To: <a840c4fa-148e-7617-20e5-9b286ace2c40@citrix.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="1kEzha21uE6D8HRzv4V6DOmcoBBcrMPPY"
+ boundary="NFF5TYVYjkXxGTm1P7LrRVHjTR0sLkBga"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---1kEzha21uE6D8HRzv4V6DOmcoBBcrMPPY
-Content-Type: multipart/mixed; boundary="0lTuGIZDrhzQo6PK71BUGoKMbSIqJulhi";
+--NFF5TYVYjkXxGTm1P7LrRVHjTR0sLkBga
+Content-Type: multipart/mixed; boundary="5windFdbY919aeLwnnvFDDlYv8vQI5ROv";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-To: Norbert Manthey <nmanthey@amazon.de>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Norbert Manthey <nmanthey@amazon.de>, xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
  Julien Grall <jgrall@amazon.co.uk>, Michael Kurth <mku@amazon.de>
-Message-ID: <2e8a0983-c6dd-e016-b4e8-c49795c0084c@suse.com>
-Subject: Re: [PATCH XENSTORE v1 10/10] xs: add error handling
+Message-ID: <fc383f00-7bf9-6f2f-54ab-b1e66eed419d@suse.com>
+Subject: Re: [PATCH XENSTORE v1 06/10] xenstored: handle port reads correctly
 References: <20210226144144.9252-1-nmanthey@amazon.de>
- <20210226144144.9252-11-nmanthey@amazon.de>
-In-Reply-To: <20210226144144.9252-11-nmanthey@amazon.de>
+ <20210226144144.9252-7-nmanthey@amazon.de>
+ <a840c4fa-148e-7617-20e5-9b286ace2c40@citrix.com>
+In-Reply-To: <a840c4fa-148e-7617-20e5-9b286ace2c40@citrix.com>
 
---0lTuGIZDrhzQo6PK71BUGoKMbSIqJulhi
+--5windFdbY919aeLwnnvFDDlYv8vQI5ROv
 Content-Type: multipart/mixed;
- boundary="------------B140342196A812B5A086D90C"
+ boundary="------------A427817A38666E490C6069FB"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------B140342196A812B5A086D90C
+--------------A427817A38666E490C6069FB
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 26.02.21 15:41, Norbert Manthey wrote:
-> In case of a failure deep in the call tree, we might return NULL as the=
+On 26.02.21 16:36, Andrew Cooper wrote:
+> On 26/02/2021 14:41, Norbert Manthey wrote:
+>> The read value could be larger than a signed 32bit integer. As -1 is
+>> used as error value, we should not rely on using the full 32 bits.
+>> Hence, when reading the port number, we should make sure we only retur=
+n
+>> valid values.
+>>
+>> This change sanity checks the input.
+>> The issue is that the value for the port is
+>>   1. transmitted as a string, with a fixed amount of digits.
+>>   2. Next, this string is parsed by a function that can deal with stri=
+ngs
+>>      representing 64bit integers
+>>   3. A 64bit integer is returned, and will be truncated to it's lower
+>>      32bits, resulting in a wrong port number (in case the sender of t=
+he
+>>      string decides to craft a suitable 64bit value).
+>>
+>> The value is typically provided by the kernel, which has this value ha=
+rd
+>> coded in the proper range. As we use the function strtoul, non-digit
+>> character are considered as end of the input, and hence do not require=
 
-> value of the domain. In that case, error out instead of dereferencing
-> the NULL pointer.
+>> checking. Therefore, this change only covers the corner case to make
+>> sure we stay in the 32 bit range.
+>>
+>> This bug was discovered and resolved using Coverity Static Analysis
+>> Security Testing (SAST) by Synopsys, Inc.
+>>
+>> Signed-off-by: Norbert Manthey <nmanthey@amazon.de>
+>> Reviewed-by: Thomas Friebel <friebelt@amazon.de>
+>> Reviewed-by: Julien Grall <jgrall@amazon.co.uk>
 >=20
-> This bug was discovered and resolved using Coverity Static Analysis
-> Security Testing (SAST) by Synopsys, Inc.
->=20
-> Signed-off-by: Norbert Manthey <nmanthey@amazon.de>
-> Reviewed-by: Julien Grall <jgrall@amazon.co.uk>
-> Reviewed-by: Raphael Ning <raphning@amazon.co.uk>
+> Port numbers are currently limited at 2^17, with easy extension to 2^29=
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+> (iirc), but the entire event channel infrastructure would have to
+> undergo another redesign to get beyond that.
+>=20
+> I think we can reasonably make an ABI statement saying that a port
+> number will never exceed 2^31.=C2=A0 This is already pseudo-encoded in =
+the
+> evtchn_port_or_error_t mouthful.
+
+I agree. There is no need for this patch.
 
 
 Juergen
 
---------------B140342196A812B5A086D90C
+
+--------------A427817A38666E490C6069FB
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -211,25 +247,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------B140342196A812B5A086D90C--
+--------------A427817A38666E490C6069FB--
 
---0lTuGIZDrhzQo6PK71BUGoKMbSIqJulhi--
+--5windFdbY919aeLwnnvFDDlYv8vQI5ROv--
 
---1kEzha21uE6D8HRzv4V6DOmcoBBcrMPPY
+--NFF5TYVYjkXxGTm1P7LrRVHjTR0sLkBga
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmA9yQYFAwAAAAAACgkQsN6d1ii/Ey8r
-kQgAlYvrtiKZXr1qZ6M+CzGNa1ukKXsyJNbEbYRW+EZa95yCe8toJDB4EXeO9ssdP4lJHqCPus3i
-PaGSYr/PUQLA5uGv5JQFvR+A+qNLQkFyqt8t3l8WqlqukOrKoWb9TvIYmjjiYO1H3mM6PxKQMDx6
-55wq1thHD/E16FWyRT2P0OOOpJEqfwMTS4E8OEPJV4CHrVVrumv8n7SWwQqPx4hG5ZmEt7ig4P7x
-htLxSz8YVfj5aSpkN5xorOwO5wGoUNKUcVtBwcuI48F3NXCtoVuNa9zWdLZoxUsfLUW80wI7xwmo
-+4GWmLeqAKnojM+QTRarOBVvQej9xK1XeHNpBXYlGA==
-=Luh3
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmA9ye4FAwAAAAAACgkQsN6d1ii/Ey9H
+qQf/b+gKtN2eeSBenccE1vlTHjfoLUQ/PePp8lHGU5LA3X4QP5mT0vp9a3/qBWzhV/1LlhE50q8m
+55LSdPuqGJ4wbRdu14M3FHrhHdZ/NE2Zi+dxBkawb8FAkzO29Cchi+4+FqaufVzZR8ZuHpz8jkfG
++UijdMXvfCW/hceJYes3y+nO5+eqS2ymXCuVC4vz1Zsh2ewhb3ZTuRyAoQPzc4yYbgUF63pD9E8Y
+rajE4yfyDyBnGM5ecFC5GZeOLvPgB6mNAu5GL2e7AfHFsoB4kYrCbHl0Nz4daSCfFicqEGOqzm/g
+mOdCkcGR66niJHP+XSoHn06x3NHHHqcdCmvZQfiiag==
+=5aEa
 -----END PGP SIGNATURE-----
 
---1kEzha21uE6D8HRzv4V6DOmcoBBcrMPPY--
+--NFF5TYVYjkXxGTm1P7LrRVHjTR0sLkBga--
 
