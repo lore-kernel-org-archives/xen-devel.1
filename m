@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7876C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:08:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89A8BC433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:08:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6EB3F61494
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:08:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6EB3F61494
+	by mail.kernel.org (Postfix) with ESMTPS id 2A1C160249
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Mar 2021 05:08:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2A1C160249
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92064.173727 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92066.173738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGxGR-0000kz-79; Tue, 02 Mar 2021 05:08:07 +0000
+	id 1lGxGt-0000r3-FW; Tue, 02 Mar 2021 05:08:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92064.173727; Tue, 02 Mar 2021 05:08:07 +0000
+Received: by outflank-mailman (output) from mailman id 92066.173738; Tue, 02 Mar 2021 05:08:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lGxGR-0000ks-38; Tue, 02 Mar 2021 05:08:07 +0000
-Received: by outflank-mailman (input) for mailman id 92064;
- Tue, 02 Mar 2021 05:08:05 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lGxGt-0000qw-Cd; Tue, 02 Mar 2021 05:08:35 +0000
+Received: by outflank-mailman (input) for mailman id 92066;
+ Tue, 02 Mar 2021 05:08:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jRZ7=IA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lGxGP-0000kl-4e
- for xen-devel@lists.xenproject.org; Tue, 02 Mar 2021 05:08:05 +0000
+ id 1lGxGs-0000qo-VF
+ for xen-devel@lists.xenproject.org; Tue, 02 Mar 2021 05:08:34 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3b9d276e-ce2b-4630-be92-ac4adabfe403;
- Tue, 02 Mar 2021 05:08:04 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 71b11b7f-4269-45c4-b02e-76871cac8642;
+ Tue, 02 Mar 2021 05:08:34 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 63C75AF42;
- Tue,  2 Mar 2021 05:08:03 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 69413AF3D;
+ Tue,  2 Mar 2021 05:08:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,61 +51,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b9d276e-ce2b-4630-be92-ac4adabfe403
+X-Inumbo-ID: 71b11b7f-4269-45c4-b02e-76871cac8642
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614661683; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1614661713; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=GuPZpo92mMF+eXi6V19Vtb/4pJKfhfEYrUYSFqHjDmk=;
-	b=S47VMpFzGJECagFt08ef+/cNVDp3A1t05DfChgiYp30J6xEBgFeb7rOxVVo6+vTEJjLxuJ
-	I5aV6WC0zunL33R3czkMIC1Ekm/QW5aV75qCdy0wuPtxPrrU5rbqBv/VQRQtAmb4wHr0B4
-	47sr5n56onPD/xc6lCqGEpU02gjihV0=
-Subject: Re: [PATCH XENSTORE v1 03/10] xenstore: check formats of trace
+	bh=XGlmdWCcxPIoZ/5IbtfMq6LZi/5JaokMs/dNhoe3CDA=;
+	b=mN0/xPQ42BQUgs74nSnclrqJc6fSAsVvYyb+GF511ioULuqr8GjosrOrPLvf/ua5UE/2Y0
+	TePxZuVirG3VvPZmJg3ub7nCT1ddUlhKJOCy4GqH+bH8gzli3dy+nk0c4HKFfRflMx06l+
+	ddiqPuyUdvIgBKiBy14Dr/dORRVEvNs=
+Subject: Re: [PATCH XENSTORE v1 04/10] xenstore_client: handle memory on error
 To: Norbert Manthey <nmanthey@amazon.de>, xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
  Julien Grall <jgrall@amazon.co.uk>, Michael Kurth <mku@amazon.de>
 References: <20210226144144.9252-1-nmanthey@amazon.de>
- <20210226144144.9252-4-nmanthey@amazon.de>
+ <20210226144144.9252-5-nmanthey@amazon.de>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <1e5c80c2-9306-0332-8bc1-cc95dbc83ccd@suse.com>
-Date: Tue, 2 Mar 2021 06:08:02 +0100
+Message-ID: <0b6cfcc1-21ec-c7b6-f108-ee7fa6220494@suse.com>
+Date: Tue, 2 Mar 2021 06:08:32 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <20210226144144.9252-4-nmanthey@amazon.de>
+In-Reply-To: <20210226144144.9252-5-nmanthey@amazon.de>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="Keagi0xqEvXvT3adLijyfQDquxNsqqZJl"
+ boundary="4bU43dAFurs5IHJjtf46bJf4HoqrMj3cy"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Keagi0xqEvXvT3adLijyfQDquxNsqqZJl
-Content-Type: multipart/mixed; boundary="gWtHmy5wJhNcNSgWhJCaTrueVwJ9Jbn3R";
+--4bU43dAFurs5IHJjtf46bJf4HoqrMj3cy
+Content-Type: multipart/mixed; boundary="4p3yzyqxSP3Hf1jQJNvArxeC7ffeGmLIg";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 To: Norbert Manthey <nmanthey@amazon.de>, xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
  Julien Grall <jgrall@amazon.co.uk>, Michael Kurth <mku@amazon.de>
-Message-ID: <1e5c80c2-9306-0332-8bc1-cc95dbc83ccd@suse.com>
-Subject: Re: [PATCH XENSTORE v1 03/10] xenstore: check formats of trace
+Message-ID: <0b6cfcc1-21ec-c7b6-f108-ee7fa6220494@suse.com>
+Subject: Re: [PATCH XENSTORE v1 04/10] xenstore_client: handle memory on error
 References: <20210226144144.9252-1-nmanthey@amazon.de>
- <20210226144144.9252-4-nmanthey@amazon.de>
-In-Reply-To: <20210226144144.9252-4-nmanthey@amazon.de>
+ <20210226144144.9252-5-nmanthey@amazon.de>
+In-Reply-To: <20210226144144.9252-5-nmanthey@amazon.de>
 
---gWtHmy5wJhNcNSgWhJCaTrueVwJ9Jbn3R
+--4p3yzyqxSP3Hf1jQJNvArxeC7ffeGmLIg
 Content-Type: multipart/mixed;
- boundary="------------78D29FABA71603A07543D28D"
+ boundary="------------289FCFF9E29771528664BC5B"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------78D29FABA71603A07543D28D
+--------------289FCFF9E29771528664BC5B
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
 On 26.02.21 15:41, Norbert Manthey wrote:
-> When passing format strings to the trace function, allow gcc to analyze=
-
-> those and warn on issues.
+> In case a command fails, also free the memory. As this is for the CLI
+> client, currently the leaked memory is freed right after receiving the
+> error, as the application terminates next.
+>=20
+> Similarly, if the allocation fails, do not use the NULL pointer
+> afterwards, but instead error out.
+>=20
+> This bug was discovered and resolved using Coverity Static Analysis
+> Security Testing (SAST) by Synopsys, Inc.
 >=20
 > Signed-off-by: Norbert Manthey <nmanthey@amazon.de>
 > Reviewed-by: Thomas Friebel <friebelt@amazon.de>
@@ -118,7 +123,7 @@ Reviewed-by: Juergen Gross <jgross@suse.com>
 Juergen
 
 
---------------78D29FABA71603A07543D28D
+--------------289FCFF9E29771528664BC5B
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -209,25 +214,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------78D29FABA71603A07543D28D--
+--------------289FCFF9E29771528664BC5B--
 
---gWtHmy5wJhNcNSgWhJCaTrueVwJ9Jbn3R--
+--4p3yzyqxSP3Hf1jQJNvArxeC7ffeGmLIg--
 
---Keagi0xqEvXvT3adLijyfQDquxNsqqZJl
+--4bU43dAFurs5IHJjtf46bJf4HoqrMj3cy
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmA9yDIFAwAAAAAACgkQsN6d1ii/Ey9S
-pAf/aZh55vA2pSBMZ/NKBSV7co6h8issEZueJArDV1eLor0mBHH2gd/02251QvodbI9Db14mdpnE
-onFiXMRoBD1Tt3iPBGm/WP9TVd08utw+YOvntZhwnJb/NCVvog6frfkyt41t2zomWpr850OL3E8V
-E8TWT9w/WoiFViWEndpALbzoQkH8D7zzUtPxdVltPEMtFdhRgyJfgsDjgcnXAB9s94bzJtZ61ttZ
-e3+qoecNeR8d270L1GfP2pfHLkJd1t9c2XfzMAmq+iqvgcx7W1lYC++p6P5iJqqMHHIhVBWpUglD
-Bqc+epMF3HWUucDE0wH+/DACnsOc8Ddq8prh7ClxAA==
-=t7mE
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmA9yFAFAwAAAAAACgkQsN6d1ii/Ey93
+3AgAlAxbYGVSjEVm8fkARtVlLTAXTN6L1oKWUPKP9U3OzUmxT6DC+t5lVJMzyf2adJDjD+1WkXEx
+i4ZzjRsmfr44z8pDjEc1CuiVsbSlngrJCLrO3q6AjBoC48T3aTyn4ZujTZPz9LzO5SWg5zkSY3ec
+MUPwjI8oz7C3MoZZixTZV296AfqPQttPrYvny2JxBCYQI5Am9qBaZ1izdoZnjqVu5sTSnWnKFHBY
+ZGCLkaQQmam8z5gbINauBqu7z2UlXzSlxxip6QAFl5QLOE+/1YDvbZAqB21gF2Sw9gFgieCNanip
+5vZnBx81CkHJP/IM39AqIw5WvcKdy8+3rF0/VFHU6g==
+=UZP7
 -----END PGP SIGNATURE-----
 
---Keagi0xqEvXvT3adLijyfQDquxNsqqZJl--
+--4bU43dAFurs5IHJjtf46bJf4HoqrMj3cy--
 
