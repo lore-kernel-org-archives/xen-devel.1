@@ -2,54 +2,54 @@ Return-Path: <SRS0=XTf+=IB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF801C433DB
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBA53C433E6
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 77A2B64EEE
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77A2B64EEE
+	by mail.kernel.org (Postfix) with ESMTPS id 7764E64EED
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7764E64EED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92800.174918 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92801.174930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHOHu-0001PZ-0B; Wed, 03 Mar 2021 09:59:26 +0000
+	id 1lHOHy-0001RR-7a; Wed, 03 Mar 2021 09:59:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92800.174918; Wed, 03 Mar 2021 09:59:25 +0000
+Received: by outflank-mailman (output) from mailman id 92801.174930; Wed, 03 Mar 2021 09:59:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHOHt-0001PS-SF; Wed, 03 Mar 2021 09:59:25 +0000
-Received: by outflank-mailman (input) for mailman id 92800;
- Wed, 03 Mar 2021 09:59:24 +0000
+	id 1lHOHy-0001RJ-4C; Wed, 03 Mar 2021 09:59:30 +0000
+Received: by outflank-mailman (input) for mailman id 92801;
+ Wed, 03 Mar 2021 09:59:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4P7r=IB=yandex-team.ru=lekiravi@srs-us1.protection.inumbo.net>)
- id 1lHOHs-0001PK-D5
- for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 09:59:24 +0000
+ id 1lHOHx-0001PK-CC
+ for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 09:59:29 +0000
 Received: from forwardcorp1o.mail.yandex.net (unknown [2a02:6b8:0:1a2d::193])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a408df4d-be1d-4b82-bccb-2f2374b324dd;
- Wed, 03 Mar 2021 09:59:21 +0000 (UTC)
+ id 03bc414c-1d27-4163-aa22-dc3a6fffd42b;
+ Wed, 03 Mar 2021 09:59:24 +0000 (UTC)
 Received: from vla1-fdfb804fb3f3.qloud-c.yandex.net
  (vla1-fdfb804fb3f3.qloud-c.yandex.net
  [IPv6:2a02:6b8:c0d:3199:0:640:fdfb:804f])
- by forwardcorp1o.mail.yandex.net (Yandex) with ESMTP id 0F2642E159C;
- Wed,  3 Mar 2021 12:59:19 +0300 (MSK)
+ by forwardcorp1o.mail.yandex.net (Yandex) with ESMTP id 778DD2E159D;
+ Wed,  3 Mar 2021 12:59:23 +0300 (MSK)
 Received: from vla5-d6d5ce7a4718.qloud-c.yandex.net
  (vla5-d6d5ce7a4718.qloud-c.yandex.net [2a02:6b8:c18:341e:0:640:d6d5:ce7a])
  by vla1-fdfb804fb3f3.qloud-c.yandex.net (mxbackcorp/Yandex) with ESMTP id
- Yde6ClwwhQ-xIxSMHKG; Wed, 03 Mar 2021 12:59:18 +0300
+ 3wSchzD0qs-xNx0Kbbh; Wed, 03 Mar 2021 12:59:23 +0300
 Received: from dynamic-red3.dhcp.yndx.net (dynamic-red3.dhcp.yndx.net
  [2a02:6b8:0:107:880d:3c89:fcd8:ca75])
  by vla5-d6d5ce7a4718.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
- w0BjtEeJGw-xInKm6qD; Wed, 03 Mar 2021 12:59:18 +0300
+ w0BjtEeJGw-xNnKfM56; Wed, 03 Mar 2021 12:59:23 +0300
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (Client certificate not present)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -62,14 +62,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a408df4d-be1d-4b82-bccb-2f2374b324dd
+X-Inumbo-ID: 03bc414c-1d27-4163-aa22-dc3a6fffd42b
 Precedence: bulk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru; s=default;
-	t=1614765558; bh=13Oc7DM6MmyK0eAsUQqEpz94FAGI8joGzd7oyzYKa04=;
-	h=Message-Id:Date:Subject:To:From:Cc;
-	b=lsjkEAg8bmshp+24u6p+ZrCu8qCeGK3XkCx20rlU2rdTOCNRpN0T+Bhk+rM8P65Wh
-	 jXSOSAsrj8apT0LPvYY2kSBOK5KYY1i2vU+oP/Q5KDIKQZa79PIG8hu/77pmkQKOLv
-	 YDFOsosnNqsIV6QltOwlhvMJfxDgW76hpjost+7c=
+	t=1614765563; bh=TClaDRzxQB4h6SlKaYxQXAsUYr6qhA7dXnvUiqCeKqs=;
+	h=In-Reply-To:Message-Id:References:Date:Subject:To:From:Cc;
+	b=ECfrZx48XAaCBOEwbhj1JgVAsg8v9direbd7oanzOnhLwMqHZ+vl/7eqref57HsGc
+	 xmQgPHA8N5kCiM0H3sB8+XjNNdnPOYdsKcocuHkg0MI6kTNlPFbf4p0Bk36Uwr3TL9
+	 Br3swnWxJY+Ny5qVkGUwSzkLtVnpKRnCZfxCu76Y=
 Authentication-Results: vla1-fdfb804fb3f3.qloud-c.yandex.net; dkim=pass header.i=@yandex-team.ru
 From: Alexey Kirillov <lekiravi@yandex-team.ru>
 To: Jason Wang <jasowang@redhat.com>,
@@ -91,121 +91,166 @@ Cc: Laurent Vivier <lvivier@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	qemu-devel@nongnu.org,
 	yc-core@yandex-team.ru
-Subject: [PATCH v7 0/5] Introducing QMP query-netdev command
-Date: Wed,  3 Mar 2021 12:59:05 +0300
-Message-Id: <20210303095910.78277-1-lekiravi@yandex-team.ru>
+Subject: [PATCH v7 2/5] tests: Add tests for query-netdev command
+Date: Wed,  3 Mar 2021 12:59:07 +0300
+Message-Id: <20210303095910.78277-3-lekiravi@yandex-team.ru>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210303095910.78277-1-lekiravi@yandex-team.ru>
+References: <20210303095910.78277-1-lekiravi@yandex-team.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch series introduces a new QMP command "query-netdev" to get
-information about currently attached backend network devices (netdevs).
+A simply qtest that checks for correct number of netdevs in the response
+of the query-netdev.
 
-Also, since the "info_str" field of "NetClientState" is now deprecated,
-we no longer use it for netdevs, only for NIC/hubports.
-
-The HMP command "info network" now also uses QAPI structure inside.
-
-Usage example:
-
--> { "execute": "query-netdev" }
-<- { "return": [
-         {
-             "listen": "127.0.0.1:90",
-             "type": "socket",
-             "peer-id": "hub0port1",
-             "id": "__org.qemu.net1"
-         },
-         {
-             "script": "/etc/qemu-ifup",
-             "downscript": "/etc/qemu-ifdown",
-             "ifname": "tap0",
-             "type": "tap",
-             "peer-id": "net5",
-             "vnet_hdr": true,
-             "id": "tap0"
-         },
-         {
-             "ipv6": true,
-             "ipv4": true,
-             "host": "10.0.2.2",
-             "ipv6-dns": "fec0::3",
-             "ipv6-prefix": "fec0::",
-             "net": "10.0.2.0/255.255.255.0",
-             "ipv6-host": "fec0::2",
-             "type": "user",
-             "peer-id": "net0",
-             "dns": "10.0.2.3",
-             "hostfwd": [
-                 {
-                     "str": "tcp::20004-:22"
-                 }
-             ],
-             "ipv6-prefixlen": 64,
-             "id": "netdev0",
-             "restrict": false
-         }
-     ]
-   }
-
-v6->v7:
-- Use macroses QAPI_LIST_PREPEND and QAPI_LIST_APPEND for lists.
-- Reorder NetBackend entries in alphabetical order.
-
-v5->v6:
-- Add QAPI visitor to generate info_str replacement directly from NetdevInfo.
-- Make info_str dynamically allocated.
-- Make commit messages more meaningful.
-
-v4->v5:
-- Enable qtest of query-netdevs for AVR and RX archs.
-- Bump "Since" version in QAPI to 6.0.
-
-v3->v4:
-- Rename "query-netdevs" to "query-netdev".
-- Copy netdev drivers to new QAPI enum "NetBackend".
-
-v2->v3:
-- Remove NIC and hubports from query-netdevs.
-- Remove several fields from NetdevInfo since they are unnecessary.
-- Rename field @peer to @peer-id.
-- Add support of vhost-vdpa.
-- Keep "info_str" for NIC/hubports, but remove it for netdevs.
-
-v1->v2:
-- Rewrite HMP "info network" to get information from results of QMP command.
-- Remove obsolete field "info_str" from "NetClientState".
-
-Alexey Kirillov (5):
-  qapi: net: Add query-netdev command
-  tests: Add tests for query-netdev command
-  net: Move NetClientState.info_str to dynamic allocations
-  hmp: Use QAPI NetdevInfo in hmp_info_network
-  net: Do not fill legacy info_str for backends
-
- hw/net/xen_nic.c                  |   5 +-
- include/net/net.h                 |   5 +-
- include/qapi/hmp-output-visitor.h |  30 +++++
- net/l2tpv3.c                      |   8 +-
- net/net.c                         |  73 +++++++++--
- net/netmap.c                      |   7 ++
- net/slirp.c                       | 124 ++++++++++++++++++-
- net/socket.c                      |  92 ++++++++++----
- net/tap-win32.c                   |  10 +-
- net/tap.c                         | 107 +++++++++++++++--
- net/vde.c                         |  25 +++-
- net/vhost-user.c                  |  20 +++-
- net/vhost-vdpa.c                  |  15 ++-
- qapi/hmp-output-visitor.c         | 193 ++++++++++++++++++++++++++++++
- qapi/meson.build                  |   1 +
- qapi/net.json                     |  80 +++++++++++++
- tests/qtest/meson.build           |   3 +
- tests/qtest/test-query-netdev.c   | 120 +++++++++++++++++++
- 18 files changed, 856 insertions(+), 62 deletions(-)
- create mode 100644 include/qapi/hmp-output-visitor.h
- create mode 100644 qapi/hmp-output-visitor.c
+Signed-off-by: Alexey Kirillov <lekiravi@yandex-team.ru>
+Acked-by: Thomas Huth <thuth@redhat.com>
+---
+ tests/qtest/meson.build         |   3 +
+ tests/qtest/test-query-netdev.c | 120 ++++++++++++++++++++++++++++++++
+ 2 files changed, 123 insertions(+)
  create mode 100644 tests/qtest/test-query-netdev.c
 
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index ba6ecaed32..fefe3da3c3 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -17,6 +17,9 @@ qtests_generic = [
+ if config_host.has_key('CONFIG_MODULES')
+   qtests_generic += [ 'modules-test' ]
+ endif
++if slirp.found()
++  qtests_generic += [ 'test-query-netdev' ]
++endif
+ 
+ qtests_pci = \
+   (config_all_devices.has_key('CONFIG_VGA') ? ['display-vga-test'] : []) +                  \
+diff --git a/tests/qtest/test-query-netdev.c b/tests/qtest/test-query-netdev.c
+new file mode 100644
+index 0000000000..1118537a9f
+--- /dev/null
++++ b/tests/qtest/test-query-netdev.c
+@@ -0,0 +1,120 @@
++/*
++ * QTest testcase for the query-netdev
++ *
++ * Copyright Yandex N.V., 2019
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ *
++ */
++
++#include "qemu/osdep.h"
++
++#include "libqos/libqtest.h"
++#include "qapi/qmp/qdict.h"
++#include "qapi/qmp/qlist.h"
++
++/*
++ * Events can get in the way of responses we are actually waiting for.
++ */
++GCC_FMT_ATTR(2, 3)
++static QObject *wait_command(QTestState *who, const char *command, ...)
++{
++    va_list ap;
++    QDict *response;
++    QObject *result;
++
++    va_start(ap, command);
++    qtest_qmp_vsend(who, command, ap);
++    va_end(ap);
++
++    response = qtest_qmp_receive(who);
++
++    result = qdict_get(response, "return");
++    g_assert(result);
++    qobject_ref(result);
++    qobject_unref(response);
++
++    return result;
++}
++
++static void qmp_query_netdev_no_error(QTestState *qts, size_t netdevs_count)
++{
++    QObject *resp;
++    QList *netdevs;
++
++    resp = wait_command(qts, "{'execute': 'query-netdev'}");
++
++    netdevs = qobject_to(QList, resp);
++    g_assert(netdevs);
++    g_assert(qlist_size(netdevs) == netdevs_count);
++
++    qobject_unref(resp);
++}
++
++static void test_query_netdev(void)
++{
++    const char *arch = qtest_get_arch();
++    QObject *resp;
++    QTestState *state;
++
++    /* Choosing machine for platforms without default one */
++    if (g_str_equal(arch, "arm") ||
++        g_str_equal(arch, "aarch64")) {
++        state = qtest_init(
++            "-nodefaults "
++            "-M virt "
++            "-netdev user,id=slirp0");
++    } else if (g_str_equal(arch, "tricore")) {
++        state = qtest_init(
++            "-nodefaults "
++            "-M tricore_testboard "
++            "-netdev user,id=slirp0");
++    } else if (g_str_equal(arch, "avr")) {
++        state = qtest_init(
++            "-nodefaults "
++            "-M mega2560 "
++            "-netdev user,id=slirp0");
++    } else if (g_str_equal(arch, "rx")) {
++        state = qtest_init(
++            "-nodefaults "
++            "-M gdbsim-r5f562n8 "
++            "-netdev user,id=slirp0");
++    } else {
++        state = qtest_init(
++            "-nodefaults "
++            "-netdev user,id=slirp0");
++    }
++    g_assert(state);
++
++    qmp_query_netdev_no_error(state, 1);
++
++    resp = wait_command(state,
++        "{'execute': 'netdev_add', 'arguments': {"
++        " 'id': 'slirp1',"
++        " 'type': 'user'}}");
++    qobject_unref(resp);
++
++    qmp_query_netdev_no_error(state, 2);
++
++    resp = wait_command(state,
++        "{'execute': 'netdev_del', 'arguments': {"
++        " 'id': 'slirp1'}}");
++    qobject_unref(resp);
++
++    qmp_query_netdev_no_error(state, 1);
++
++    qtest_quit(state);
++}
++
++int main(int argc, char **argv)
++{
++    int ret = 0;
++    g_test_init(&argc, &argv, NULL);
++
++    qtest_add_func("/net/qapi/query_netdev", test_query_netdev);
++
++    ret = g_test_run();
++
++    return ret;
++}
 -- 
 2.25.1
 
