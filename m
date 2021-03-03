@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54D85C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 16:08:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0525EC433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 16:08:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D683264ED7
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 16:08:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D683264ED7
+	by mail.kernel.org (Postfix) with ESMTPS id 8C45B64EE6
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 16:08:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C45B64EE6
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92894.175140 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92895.175152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHU3D-0006dL-NG; Wed, 03 Mar 2021 16:08:39 +0000
+	id 1lHU3O-0006h0-26; Wed, 03 Mar 2021 16:08:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92894.175140; Wed, 03 Mar 2021 16:08:39 +0000
+Received: by outflank-mailman (output) from mailman id 92895.175152; Wed, 03 Mar 2021 16:08:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHU3D-0006dE-JN; Wed, 03 Mar 2021 16:08:39 +0000
-Received: by outflank-mailman (input) for mailman id 92894;
- Wed, 03 Mar 2021 16:08:37 +0000
+	id 1lHU3N-0006gr-Sk; Wed, 03 Mar 2021 16:08:49 +0000
+Received: by outflank-mailman (input) for mailman id 92895;
+ Wed, 03 Mar 2021 16:08:49 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lHU3B-0006d7-M9
- for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 16:08:37 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lHU3N-0006gb-3K
+ for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 16:08:49 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lHU3B-0003zS-LJ
- for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 16:08:37 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lHU3N-0003zk-2F
+ for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 16:08:49 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lHU3B-0005Wp-KG
- for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 16:08:37 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lHU3N-0005YX-1J
+ for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 16:08:49 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1lHU38-0002Un-9E; Wed, 03 Mar 2021 16:08:34 +0000
+ id 1lHU3J-0002V7-O7; Wed, 03 Mar 2021 16:08:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,32 +57,30 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=b6Y2ILNtXyy6F4Wi0+hE/oc2Zw9GEarWcGvHfh8GfmY=; b=UUHX7PbBDJdLbU0Ns++HWVFhIY
-	d9cSSXniDRdC5BCs3q6BQbJBzxrGWLUdihH6RyykJfKJdk0Bm5IuZzvL0Xa83gSKXleq1URFk6B/R
-	K1Jd+H467t2AahkmuPRZdYfBUiwpVbpCBvefRwtLOiImggz8q/7kJF3m9R/75qAalRHU=;
+	bh=8U79bQjaPvJAPE9FcD1NwDJIjVKHdU/u6q7g9cU3elw=; b=dMHV/JvB9DAgU8n34K6I+t6Jvx
+	6B5jR8bpMPNiLuaGxYoBWgSAJtKuk3FyQGCBaM1jg9D4xHJp60wAL7QJuS3uTIJZEaYmu/+L96Fac
+	tU/mz90VYIsdaq0klrmOS266kkZD8GyUikJvgvxxDqxpIA3IYNEaWt/vBph1bmZ+688w=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24639.46209.972182.673496@mariner.uk.xensource.com>
-Date: Wed, 3 Mar 2021 16:08:33 +0000
+Message-ID: <24639.46221.478411.522161@mariner.uk.xensource.com>
+Date: Wed, 3 Mar 2021 16:08:45 +0000
 To: Norbert Manthey <nmanthey@amazon.de>
 Cc: <xen-devel@lists.xenproject.org>,
     Juergen Gross <jgross@suse.com>,
     Wei Liu <wl@xen.org>,
     Julien Grall <jgrall@amazon.co.uk>,
     Michael Kurth <mku@amazon.de>
-Subject: [PATCH XENSTORE v1 02/10] xenstore: fix print format string
-In-Reply-To: <20210226144144.9252-3-nmanthey@amazon.de>
+Subject: [PATCH XENSTORE v1 03/10] xenstore: check formats of trace
+In-Reply-To: <20210226144144.9252-4-nmanthey@amazon.de>
 References: <20210226144144.9252-1-nmanthey@amazon.de>
-	<20210226144144.9252-3-nmanthey@amazon.de>
+	<20210226144144.9252-4-nmanthey@amazon.de>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Norbert Manthey writes ("[PATCH XENSTORE v1 02/10] xenstore: fix print format string"):
-> Use the correct format specifier for unsigned values. Additionally, a
-> cast was dropped, as the format specifier did not require it anymore.
-> 
-> This was reported by analysis with cppcheck.
+Norbert Manthey writes ("[PATCH XENSTORE v1 03/10] xenstore: check formats of trace"):
+> When passing format strings to the trace function, allow gcc to analyze
+> those and warn on issues.
 > 
 > Signed-off-by: Norbert Manthey <nmanthey@amazon.de>
 > Reviewed-by: Thomas Friebel <friebelt@amazon.de>
