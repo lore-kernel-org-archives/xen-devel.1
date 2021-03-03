@@ -2,49 +2,48 @@ Return-Path: <SRS0=XTf+=IB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CD64C43381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B325C433E9
 	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 01:46:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EEAF564E6B
+	by mail.kernel.org (Postfix) with ESMTPS id EA35064E66
 	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 01:46:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEAF564E6B
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA35064E66
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92644.174648 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92641.174612 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHGb3-0008Cy-88; Wed, 03 Mar 2021 01:46:41 +0000
+	id 1lHGao-00084E-8T; Wed, 03 Mar 2021 01:46:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92644.174648; Wed, 03 Mar 2021 01:46:41 +0000
+Received: by outflank-mailman (output) from mailman id 92641.174612; Wed, 03 Mar 2021 01:46:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHGb3-0008Cn-3k; Wed, 03 Mar 2021 01:46:41 +0000
-Received: by outflank-mailman (input) for mailman id 92644;
- Wed, 03 Mar 2021 01:46:39 +0000
+	id 1lHGao-000846-2l; Wed, 03 Mar 2021 01:46:26 +0000
+Received: by outflank-mailman (input) for mailman id 92641;
+ Wed, 03 Mar 2021 01:46:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Ma28=IB=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1lHGb1-000841-QL
- for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 01:46:39 +0000
-Received: from mail-qk1-x72e.google.com (unknown [2607:f8b0:4864:20::72e])
+ id 1lHGan-000841-4w
+ for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 01:46:25 +0000
+Received: from mail-qt1-x836.google.com (unknown [2607:f8b0:4864:20::836])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 88826741-7be0-4128-96f9-5c5fdacf9a8b;
- Wed, 03 Mar 2021 01:46:27 +0000 (UTC)
-Received: by mail-qk1-x72e.google.com with SMTP id g185so3229914qkf.6
- for <xen-devel@lists.xenproject.org>; Tue, 02 Mar 2021 17:46:27 -0800 (PST)
+ id 2e0d693a-253b-49b0-820b-4568eb680827;
+ Wed, 03 Mar 2021 01:46:24 +0000 (UTC)
+Received: by mail-qt1-x836.google.com with SMTP id s15so16415257qtq.0
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Mar 2021 17:46:23 -0800 (PST)
 Received: from six.home (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
  by smtp.gmail.com with ESMTPSA id
- g21sm5406145qkk.72.2021.03.02.17.46.25
+ g21sm5406145qkk.72.2021.03.02.17.46.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Mar 2021 17:46:26 -0800 (PST)
+ Tue, 02 Mar 2021 17:46:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +55,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88826741-7be0-4128-96f9-5c5fdacf9a8b
+X-Inumbo-ID: 2e0d693a-253b-49b0-820b-4568eb680827
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :in-reply-to:references;
-        bh=NSsxG6jC6iAfi1izLJM576IbFfwdbov0QctCg+vigCk=;
-        b=i7XvrduzFBb3vFjJ9h5JkKQLLbFxa5PxO1Guf6ZAdR1g6oa+fd0VX2/XAxWEY4a5OS
-         pLDdYRz5wjNzvNtIj/LY4M9zIVmMV3E7jjbhUu5Zm5yGA9JaFvjSjC3nCJwTBsUwUzS7
-         UhzcTk6DJINxpem85hn0ACPx4UN2QImq9z8S/5lkcn2nh77h1LsWm2OmJvN9XWyAadYa
-         KouzKt3/O3QmrWfNCztnD0RvJLYqPUVfZC+AEYf6WYNjNGl09PlXSbLIccC4FctWvGPq
-         Un1jdV6gHcpnfjROwHd0GKIuqx92xhLzbYDKmEi/TdrVmpa4JBv4hbGfMYFpveRy/329
-         s5LA==
+        h=from:to:cc:subject:date:message-id;
+        bh=FrLDylkw+U8rfdSCi7ScgTakUdJYNvinWBx5qALy/yI=;
+        b=dB5bKhSmNpMUyQ1wVssPjTeTd1YoULzawIvCCGK23kfO7fMaZSz6I/Ani/7B9cVGqM
+         zXsNtpENIwU3o1cP0HFwJqZS9XI6dpaYZgdVYF7HzqPgFO1Jo20M8ZpKEVavipG0zU7r
+         VeAPnvoSYk6mD0aLPeDok+u3HF963rQ3LHGCr7cboJVRX2x7Kjg/T4Q8JqlI1K5DiQ35
+         VSrjhQErcMzUO13IKlO/L9vUncRoZYO1DIeM9uMnXFs+C+ClGCMLQty3KkGeNmypdfpn
+         vSOVhsMbSMiLeQUNj1YibUSoND+ny79Xj9A7mV2UxfcHESaquidOf6raHxIlb6Bn+9/E
+         yv2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:in-reply-to:references;
-        bh=NSsxG6jC6iAfi1izLJM576IbFfwdbov0QctCg+vigCk=;
-        b=IkrnjDTh71bdfHphEsdykIGN+rXVsNlw3YDxsqGASsbDAnpthrznniAWe7d4phgM3Y
-         vo9MB0hMAcfyH43Qnrpo3aIlzhrcESM505FMPqrq+TCjwpPjdcVGwlxb+yqQ6Bae6IgD
-         3WbHFVFQLhl6MIlEbjgeCinKpnBnh6QqsY7xsmWDXOvOYefY07fVwztcZjAKdce8uXHb
-         NcWSU1AydTI4lE4PuGRzkqGmqX/NJ3P6klsVc233nmTz7clsjeE165y1IPMmwahfuLc4
-         JzxzVOuxxKAfC+odM8t6DYSpVwARWzcFT0oESBbqHwuWzCm+/YczNFQTJ18nK57+MgGH
-         6IBg==
-X-Gm-Message-State: AOAM530RwaZ0MnbrQOs7B20dIbcJhu3mRNq0AUB1UouwdxICFv4N8oXX
-	9/0EM9uUAmeHEDhxilgsiJ7cBT0ZtOiDYg==
-X-Google-Smtp-Source: ABdhPJz4Ks5EvlScGLnpU0G+C2xgzT2jcmx7EX7joUCoj1HPTIlcK/T/y6Vn8a8yV23XO9L4Tw/lww==
-X-Received: by 2002:ae9:eb57:: with SMTP id b84mr18756591qkg.271.1614735986824;
-        Tue, 02 Mar 2021 17:46:26 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=FrLDylkw+U8rfdSCi7ScgTakUdJYNvinWBx5qALy/yI=;
+        b=DUmW9yhZQlmObgrBEhO7IBbdg4XoCS4ovHsuzbLU8yU4WaKbAZ49xGM+3gkMad13zr
+         tEaPnuTNT+3hksGQyHPfx+OMhuRZohecDZ2VK2jZ1RvzUmDuzGz6RgY2OO4oPfYf1c15
+         zaEaxfj0+ydbcqaxYOZ/g4j+eCeVDp+/w5Kj0F/KhCiSkv2CHq5O71DGTDm1S3Ec8bkD
+         dUNU9rTGZBiiTBUMfwUNVhXKliDZaZkedNiuD25ikp66qcgBCLIcp7F2nnO7/aUcNyeH
+         55QzC/0B59Pft2gOFzFFoMnhtWGYzt0dd55NtdhBIP+kekWzHAxIKPnaCz5+klRcwZ64
+         QyqA==
+X-Gm-Message-State: AOAM5329b/LYxiAfp15W4WGMkUuvkxp5uhZZYYIAXojFroY0fPClaZLZ
+	NapYpQ8O2vT4GfdQZV37DPEnVBJukkGIQA==
+X-Google-Smtp-Source: ABdhPJwUKEo6w7UoiiGFZp5YcggoA9/QEP7Ai3Xfp1O4MXEwEodzmyYUWMjg7qg1nZYyYbLoDCO9tw==
+X-Received: by 2002:ac8:74c9:: with SMTP id j9mr20998988qtr.369.1614735983341;
+        Tue, 02 Mar 2021 17:46:23 -0800 (PST)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.org
@@ -92,81 +89,52 @@ Cc: george.dunlap@citrix.com,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [RFC v2 3/7] libxl: add PASS_BY_CONST_REFERENCE to idl
-Date: Tue,  2 Mar 2021 20:46:15 -0500
-Message-Id: <4b7f52dd28516aa286ab6db90536835b8caed022.1614734296.git.rosbrookn@ainfosec.com>
+Subject: [RFC v2 0/7] add function support to IDL
+Date: Tue,  2 Mar 2021 20:46:12 -0500
+Message-Id: <cover.1614734296.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1614734296.git.rosbrookn@ainfosec.com>
-References: <cover.1614734296.git.rosbrookn@ainfosec.com>
-In-Reply-To: <cover.1614734296.git.rosbrookn@ainfosec.com>
-References: <cover.1614734296.git.rosbrookn@ainfosec.com>
 
-Currently, there is only support for PASS_BY_{REFERENCE,VALUE} in the IDL.
-As a piece of adding function support, add logic for PASS_BY_CONST_REFERENCE
-so that function generation code can use Type.make_arg() for function
-signatures that require const reference parameters.
+At a Xen Summit design session for the golang bindings (see [1]), we
+agreed that it would be beneficial to expand the libxl IDL with function
+support. In addition to benefiting libxl itself, this would allow other
+language bindings to easily generate function wrappers.
 
-Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
----
- tools/libs/light/idl.py | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+The first version of this RFC is quite old [1]. I did address comments
+on the original RFC, but also expanded the scope a bit. As a way to
+evaluate function support, I worked on using this addition to the IDL to
+generate device add/remove/destroy functions, and removing the
+corresponding macros in libxl_internal.h. However, I stopped short of
+actually completing a build with this in place, as I thought it made
+sense to get feedback on the idea before working on the next step.
 
-diff --git a/tools/libs/light/idl.py b/tools/libs/light/idl.py
-index 20278c272a..a8a4768efc 100644
---- a/tools/libs/light/idl.py
-+++ b/tools/libs/light/idl.py
-@@ -4,6 +4,7 @@ import sys
- 
- PASS_BY_VALUE = 1
- PASS_BY_REFERENCE = 2
-+PASS_BY_CONST_REFERENCE = 3
- 
- DIR_NONE = 0
- DIR_IN   = 1
-@@ -40,7 +41,7 @@ class Type(object):
-             raise ValueError
- 
-         self.passby = kwargs.setdefault('passby', PASS_BY_VALUE)
--        if self.passby not in [PASS_BY_VALUE, PASS_BY_REFERENCE]:
-+        if self.passby not in [PASS_BY_VALUE, PASS_BY_REFERENCE, PASS_BY_CONST_REFERENCE]:
-             raise ValueError
- 
-         self.private = kwargs.setdefault('private', False)
-@@ -109,6 +110,8 @@ class Type(object):
- 
-         if passby == PASS_BY_REFERENCE:
-             return "%s *%s" % (self.typename, n)
-+        elif passby == PASS_BY_CONST_REFERENCE:
-+            return "const %s *%s" % (self.typename, n)
-         else:
-             return "%s %s" % (self.typename, n)
- 
-@@ -116,7 +119,7 @@ class Type(object):
-         if passby is None: passby = self.passby
-         if isref is None: isref = self.passby == PASS_BY_REFERENCE
- 
--        if passby == PASS_BY_REFERENCE:
-+        if passby in [PASS_BY_REFERENCE, PASS_BY_CONST_REFERENCE]:
-             if isref:
-                 return "%s" % (n)
-             else:
-@@ -272,7 +275,7 @@ class KeyedUnion(Aggregate):
-             raise ValueError
- 
-         kv_kwargs = dict([(x.lstrip('keyvar_'),y) for (x,y) in kwargs.items() if x.startswith('keyvar_')])
--        
-+
-         self.keyvar = Field(keyvar_type, keyvar_name, **kv_kwargs)
- 
-         for f in fields:
-@@ -392,6 +395,7 @@ def parse(f):
-         elif isinstance(t,type(object)) and issubclass(t, Function):
-             globs[n] = t
-         elif n in ['PASS_BY_REFERENCE', 'PASS_BY_VALUE',
-+                   'PASS_BY_CONST_REFERENCE',
-                    'DIR_NONE', 'DIR_IN', 'DIR_OUT', 'DIR_BOTH',
-                    'namespace', 'hidden']:
-             globs[n] = t
+[1] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg00964.html
+[2] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg01352.html
+
+Nick Rosbrook (7):
+  libxl: remove extra whitespace from gentypes.py
+  libxl: add Function class to IDL
+  libxl: add PASS_BY_CONST_REFERENCE to idl
+  libxl: add DeviceFunction classes to IDL
+  libxl: add device function definitions to libxl_types.idl
+  libxl: implement device add/remove/destroy functions generation
+  libxl: replace LIBXL_DEFINE_DEVICE* macro usage with generated code
+
+ tools/golang/xenlight/gengotypes.py |   2 +-
+ tools/libs/light/gentypes.py        | 107 +++++++++++++--
+ tools/libs/light/idl.py             |  69 +++++++++-
+ tools/libs/light/libxl_9pfs.c       |   2 -
+ tools/libs/light/libxl_console.c    |   2 -
+ tools/libs/light/libxl_disk.c       |   2 -
+ tools/libs/light/libxl_nic.c        |   2 -
+ tools/libs/light/libxl_pvcalls.c    |   2 -
+ tools/libs/light/libxl_types.idl    | 202 ++++++++++++++++++++++++++++
+ tools/libs/light/libxl_usb.c        |   3 -
+ tools/libs/light/libxl_vdispl.c     |   2 -
+ tools/libs/light/libxl_vkb.c        |   1 -
+ tools/libs/light/libxl_vsnd.c       |   2 -
+ tools/libs/light/libxl_vtpm.c       |   2 -
+ 14 files changed, 367 insertions(+), 33 deletions(-)
+
 -- 
 2.17.1
 
