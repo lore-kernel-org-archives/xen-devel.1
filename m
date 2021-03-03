@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBA53C433E6
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A65D4C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7764E64EED
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7764E64EED
+	by mail.kernel.org (Postfix) with ESMTPS id 4B64564EEB
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 09:59:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B64564EEB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92801.174930 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92802.174942 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHOHy-0001RR-7a; Wed, 03 Mar 2021 09:59:30 +0000
+	id 1lHOHz-0001TK-H9; Wed, 03 Mar 2021 09:59:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92801.174930; Wed, 03 Mar 2021 09:59:30 +0000
+Received: by outflank-mailman (output) from mailman id 92802.174942; Wed, 03 Mar 2021 09:59:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHOHy-0001RJ-4C; Wed, 03 Mar 2021 09:59:30 +0000
-Received: by outflank-mailman (input) for mailman id 92801;
+	id 1lHOHz-0001TA-Cl; Wed, 03 Mar 2021 09:59:31 +0000
+Received: by outflank-mailman (input) for mailman id 92802;
  Wed, 03 Mar 2021 09:59:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4P7r=IB=yandex-team.ru=lekiravi@srs-us1.protection.inumbo.net>)
- id 1lHOHx-0001PK-CC
+ id 1lHOHx-0001R5-G0
  for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 09:59:29 +0000
-Received: from forwardcorp1o.mail.yandex.net (unknown [2a02:6b8:0:1a2d::193])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 03bc414c-1d27-4163-aa22-dc3a6fffd42b;
- Wed, 03 Mar 2021 09:59:24 +0000 (UTC)
+Received: from forwardcorp1j.mail.yandex.net (unknown [5.45.199.163])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 2f29e6d3-31d5-43d7-832c-8ea62129d81e;
+ Wed, 03 Mar 2021 09:59:26 +0000 (UTC)
 Received: from vla1-fdfb804fb3f3.qloud-c.yandex.net
  (vla1-fdfb804fb3f3.qloud-c.yandex.net
  [IPv6:2a02:6b8:c0d:3199:0:640:fdfb:804f])
- by forwardcorp1o.mail.yandex.net (Yandex) with ESMTP id 778DD2E159D;
- Wed,  3 Mar 2021 12:59:23 +0300 (MSK)
+ by forwardcorp1j.mail.yandex.net (Yandex) with ESMTP id A151B2E1332;
+ Wed,  3 Mar 2021 12:59:25 +0300 (MSK)
 Received: from vla5-d6d5ce7a4718.qloud-c.yandex.net
  (vla5-d6d5ce7a4718.qloud-c.yandex.net [2a02:6b8:c18:341e:0:640:d6d5:ce7a])
  by vla1-fdfb804fb3f3.qloud-c.yandex.net (mxbackcorp/Yandex) with ESMTP id
- 3wSchzD0qs-xNx0Kbbh; Wed, 03 Mar 2021 12:59:23 +0300
+ GQMvhqpKQa-xPx0b0C5; Wed, 03 Mar 2021 12:59:25 +0300
 Received: from dynamic-red3.dhcp.yndx.net (dynamic-red3.dhcp.yndx.net
  [2a02:6b8:0:107:880d:3c89:fcd8:ca75])
  by vla5-d6d5ce7a4718.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
- w0BjtEeJGw-xNnKfM56; Wed, 03 Mar 2021 12:59:23 +0300
+ w0BjtEeJGw-xPnKGPHs; Wed, 03 Mar 2021 12:59:25 +0300
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (Client certificate not present)
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -62,14 +63,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 03bc414c-1d27-4163-aa22-dc3a6fffd42b
+X-Inumbo-ID: 2f29e6d3-31d5-43d7-832c-8ea62129d81e
 Precedence: bulk
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru; s=default;
-	t=1614765563; bh=TClaDRzxQB4h6SlKaYxQXAsUYr6qhA7dXnvUiqCeKqs=;
+	t=1614765565; bh=3xaewMFazOtEOhmAX9L2qiolW885HNMJSqIVvauR6mA=;
 	h=In-Reply-To:Message-Id:References:Date:Subject:To:From:Cc;
-	b=ECfrZx48XAaCBOEwbhj1JgVAsg8v9direbd7oanzOnhLwMqHZ+vl/7eqref57HsGc
-	 xmQgPHA8N5kCiM0H3sB8+XjNNdnPOYdsKcocuHkg0MI6kTNlPFbf4p0Bk36Uwr3TL9
-	 Br3swnWxJY+Ny5qVkGUwSzkLtVnpKRnCZfxCu76Y=
+	b=okXjIIdLuDRC0sj05f2wTTjT8cJk8tnMOgU5p0ti7aIkcP0nOlOqR6TVKP+5RyM9X
+	 L2v22GPHEObingBB1phSBHzQB1BD7iaplNBHszV/DHZheVwHgNdKSohOCyo+eVEjCU
+	 TMrOqZ0qZR6LDPZqODM0l76iY5Dl7dGuSJMV/nlo=
 Authentication-Results: vla1-fdfb804fb3f3.qloud-c.yandex.net; dkim=pass header.i=@yandex-team.ru
 From: Alexey Kirillov <lekiravi@yandex-team.ru>
 To: Jason Wang <jasowang@redhat.com>,
@@ -91,50 +92,136 @@ Cc: Laurent Vivier <lvivier@redhat.com>,
 	xen-devel@lists.xenproject.org,
 	qemu-devel@nongnu.org,
 	yc-core@yandex-team.ru
-Subject: [PATCH v7 2/5] tests: Add tests for query-netdev command
-Date: Wed,  3 Mar 2021 12:59:07 +0300
-Message-Id: <20210303095910.78277-3-lekiravi@yandex-team.ru>
+Subject: [PATCH v7 4/5] hmp: Use QAPI NetdevInfo in hmp_info_network
+Date: Wed,  3 Mar 2021 12:59:09 +0300
+Message-Id: <20210303095910.78277-5-lekiravi@yandex-team.ru>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210303095910.78277-1-lekiravi@yandex-team.ru>
 References: <20210303095910.78277-1-lekiravi@yandex-team.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-A simply qtest that checks for correct number of netdevs in the response
-of the query-netdev.
+Replace usage of legacy field info_str of NetClientState for backend
+network devices with QAPI NetdevInfo stored_config that already used
+in QMP query-netdev.
+
+This change increases the detail of the "info network" output and takes
+a more general approach to composing the output.
+
+NIC and hubports still use legacy info_str field.
 
 Signed-off-by: Alexey Kirillov <lekiravi@yandex-team.ru>
-Acked-by: Thomas Huth <thuth@redhat.com>
 ---
- tests/qtest/meson.build         |   3 +
- tests/qtest/test-query-netdev.c | 120 ++++++++++++++++++++++++++++++++
- 2 files changed, 123 insertions(+)
- create mode 100644 tests/qtest/test-query-netdev.c
+ include/qapi/hmp-output-visitor.h |  30 +++++
+ net/net.c                         |  31 ++++-
+ qapi/hmp-output-visitor.c         | 193 ++++++++++++++++++++++++++++++
+ qapi/meson.build                  |   1 +
+ 4 files changed, 254 insertions(+), 1 deletion(-)
+ create mode 100644 include/qapi/hmp-output-visitor.h
+ create mode 100644 qapi/hmp-output-visitor.c
 
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index ba6ecaed32..fefe3da3c3 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -17,6 +17,9 @@ qtests_generic = [
- if config_host.has_key('CONFIG_MODULES')
-   qtests_generic += [ 'modules-test' ]
- endif
-+if slirp.found()
-+  qtests_generic += [ 'test-query-netdev' ]
-+endif
- 
- qtests_pci = \
-   (config_all_devices.has_key('CONFIG_VGA') ? ['display-vga-test'] : []) +                  \
-diff --git a/tests/qtest/test-query-netdev.c b/tests/qtest/test-query-netdev.c
+diff --git a/include/qapi/hmp-output-visitor.h b/include/qapi/hmp-output-visitor.h
 new file mode 100644
-index 0000000000..1118537a9f
+index 0000000000..541e4002e3
 --- /dev/null
-+++ b/tests/qtest/test-query-netdev.c
-@@ -0,0 +1,120 @@
++++ b/include/qapi/hmp-output-visitor.h
+@@ -0,0 +1,30 @@
 +/*
-+ * QTest testcase for the query-netdev
++ * HMP string output Visitor
 + *
-+ * Copyright Yandex N.V., 2019
++ * Copyright Yandex N.V., 2021
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ *
++ */
++
++#ifndef HMP_OUTPUT_VISITOR_H
++#define HMP_OUTPUT_VISITOR_H
++
++#include "qapi/visitor.h"
++
++typedef struct HMPOutputVisitor HMPOutputVisitor;
++
++/**
++ * Create a HMP string output visitor for @obj
++ *
++ * Flattens dicts/structures, only shows arrays borders.
++ *
++ * Errors are not expected to happen.
++ *
++ * The caller is responsible for freeing the visitor with
++ * visit_free().
++ */
++Visitor *hmp_output_visitor_new(char **result);
++
++#endif
+diff --git a/net/net.c b/net/net.c
+index 88d70d0e4d..e186b44e9a 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -54,6 +54,7 @@
+ #include "sysemu/sysemu.h"
+ #include "net/filter.h"
+ #include "qapi/string-output-visitor.h"
++#include "qapi/hmp-output-visitor.h"
+ 
+ /* Net bridge is currently not supported for W32. */
+ #if !defined(_WIN32)
+@@ -1192,14 +1193,42 @@ static void netfilter_print_info(Monitor *mon, NetFilterState *nf)
+     monitor_printf(mon, "\n");
+ }
+ 
++static char *generate_info_str(NetClientState *nc)
++{
++    NetdevInfo *ni = nc->stored_config;
++    char *ret_out = NULL;
++    Visitor *v;
++
++    /* Use legacy field info_str for NIC and hubports */
++    if ((nc->info->type == NET_CLIENT_DRIVER_NIC) ||
++        (nc->info->type == NET_CLIENT_DRIVER_HUBPORT)) {
++        return g_strdup(nc->info_str ? nc->info_str : "");
++    }
++
++    if (!ni) {
++        return g_malloc0(1);
++    }
++
++    v = hmp_output_visitor_new(&ret_out);
++    if (visit_type_NetdevInfo(v, "", &ni, NULL)) {
++        visit_complete(v, &ret_out);
++    }
++    visit_free(v);
++
++    return ret_out;
++}
++
+ void print_net_client(Monitor *mon, NetClientState *nc)
+ {
+     NetFilterState *nf;
++    char *info_str = generate_info_str(nc);
+ 
+     monitor_printf(mon, "%s: index=%d,type=%s,%s\n", nc->name,
+                    nc->queue_index,
+                    NetClientDriver_str(nc->info->type),
+-                   nc->info_str ? nc->info_str : "");
++                   info_str);
++    g_free(info_str);
++
+     if (!QTAILQ_EMPTY(&nc->filters)) {
+         monitor_printf(mon, "filters:\n");
+     }
+diff --git a/qapi/hmp-output-visitor.c b/qapi/hmp-output-visitor.c
+new file mode 100644
+index 0000000000..8036605f97
+--- /dev/null
++++ b/qapi/hmp-output-visitor.c
+@@ -0,0 +1,193 @@
++/*
++ * HMP string output Visitor
++ *
++ * Copyright Yandex N.V., 2021
 + *
 + * This work is licensed under the terms of the GNU GPL, version 2 or later.
 + * See the COPYING file in the top-level directory.
@@ -142,115 +229,200 @@ index 0000000000..1118537a9f
 + */
 +
 +#include "qemu/osdep.h"
++#include "qemu/cutils.h"
++#include "qapi/hmp-output-visitor.h"
++#include "qapi/visitor-impl.h"
 +
-+#include "libqos/libqtest.h"
-+#include "qapi/qmp/qdict.h"
-+#include "qapi/qmp/qlist.h"
++struct HMPOutputVisitor {
++    Visitor visitor;
++    char **result;
++    GString *buffer;
++    bool is_continue;
++};
 +
-+/*
-+ * Events can get in the way of responses we are actually waiting for.
-+ */
-+GCC_FMT_ATTR(2, 3)
-+static QObject *wait_command(QTestState *who, const char *command, ...)
++static HMPOutputVisitor *to_hov(Visitor *v)
 +{
-+    va_list ap;
-+    QDict *response;
-+    QObject *result;
-+
-+    va_start(ap, command);
-+    qtest_qmp_vsend(who, command, ap);
-+    va_end(ap);
-+
-+    response = qtest_qmp_receive(who);
-+
-+    result = qdict_get(response, "return");
-+    g_assert(result);
-+    qobject_ref(result);
-+    qobject_unref(response);
-+
-+    return result;
++    return container_of(v, HMPOutputVisitor, visitor);
 +}
 +
-+static void qmp_query_netdev_no_error(QTestState *qts, size_t netdevs_count)
++static void hmp_output_append_formatted(Visitor *v, const char *fmt, ...)
 +{
-+    QObject *resp;
-+    QList *netdevs;
++    HMPOutputVisitor *ov = to_hov(v);
++    va_list args;
 +
-+    resp = wait_command(qts, "{'execute': 'query-netdev'}");
-+
-+    netdevs = qobject_to(QList, resp);
-+    g_assert(netdevs);
-+    g_assert(qlist_size(netdevs) == netdevs_count);
-+
-+    qobject_unref(resp);
-+}
-+
-+static void test_query_netdev(void)
-+{
-+    const char *arch = qtest_get_arch();
-+    QObject *resp;
-+    QTestState *state;
-+
-+    /* Choosing machine for platforms without default one */
-+    if (g_str_equal(arch, "arm") ||
-+        g_str_equal(arch, "aarch64")) {
-+        state = qtest_init(
-+            "-nodefaults "
-+            "-M virt "
-+            "-netdev user,id=slirp0");
-+    } else if (g_str_equal(arch, "tricore")) {
-+        state = qtest_init(
-+            "-nodefaults "
-+            "-M tricore_testboard "
-+            "-netdev user,id=slirp0");
-+    } else if (g_str_equal(arch, "avr")) {
-+        state = qtest_init(
-+            "-nodefaults "
-+            "-M mega2560 "
-+            "-netdev user,id=slirp0");
-+    } else if (g_str_equal(arch, "rx")) {
-+        state = qtest_init(
-+            "-nodefaults "
-+            "-M gdbsim-r5f562n8 "
-+            "-netdev user,id=slirp0");
++    if (ov->is_continue) {
++        g_string_append(ov->buffer, ",");
 +    } else {
-+        state = qtest_init(
-+            "-nodefaults "
-+            "-netdev user,id=slirp0");
++        ov->is_continue = true;
 +    }
-+    g_assert(state);
 +
-+    qmp_query_netdev_no_error(state, 1);
-+
-+    resp = wait_command(state,
-+        "{'execute': 'netdev_add', 'arguments': {"
-+        " 'id': 'slirp1',"
-+        " 'type': 'user'}}");
-+    qobject_unref(resp);
-+
-+    qmp_query_netdev_no_error(state, 2);
-+
-+    resp = wait_command(state,
-+        "{'execute': 'netdev_del', 'arguments': {"
-+        " 'id': 'slirp1'}}");
-+    qobject_unref(resp);
-+
-+    qmp_query_netdev_no_error(state, 1);
-+
-+    qtest_quit(state);
++    va_start(args, fmt);
++    g_string_append_vprintf(ov->buffer, fmt, args);
++    va_end(args);
 +}
 +
-+int main(int argc, char **argv)
++static void hmp_output_skip_comma(Visitor *v)
 +{
-+    int ret = 0;
-+    g_test_init(&argc, &argv, NULL);
++    HMPOutputVisitor *ov = to_hov(v);
 +
-+    qtest_add_func("/net/qapi/query_netdev", test_query_netdev);
-+
-+    ret = g_test_run();
-+
-+    return ret;
++    ov->is_continue = false;
 +}
++
++static bool hmp_output_start_struct(Visitor *v, const char *name,
++                                    void **obj, size_t unused, Error **errp)
++{
++    return true;
++}
++
++static void hmp_output_end_struct(Visitor *v, void **obj) {}
++
++static bool hmp_output_start_list(Visitor *v, const char *name,
++                                  GenericList **listp, size_t size,
++                                  Error **errp)
++{
++    hmp_output_append_formatted(v, "%s=[", name);
++    /* First element in array without comma before it */
++    hmp_output_skip_comma(v);
++
++    return true;
++}
++
++static GenericList *hmp_output_next_list(Visitor *v, GenericList *tail,
++                                         size_t size)
++{
++    return tail->next;
++}
++
++static void hmp_output_end_list(Visitor *v, void **obj)
++{
++    /* Don't need comma after last array element */
++    hmp_output_skip_comma(v);
++    hmp_output_append_formatted(v, "]");
++}
++
++static bool hmp_output_type_int64(Visitor *v, const char *name,
++                                  int64_t *obj, Error **errp)
++{
++    hmp_output_append_formatted(v, "%s=%" PRId64, name, *obj);
++
++    return true;
++}
++
++static bool hmp_output_type_uint64(Visitor *v, const char *name,
++                                   uint64_t *obj, Error **errp)
++{
++    hmp_output_append_formatted(v, "%s=%" PRIu64, name, *obj);
++
++    return true;
++}
++
++static bool hmp_output_type_bool(Visitor *v, const char *name, bool *obj,
++                                 Error **errp)
++{
++    hmp_output_append_formatted(v, "%s=%s", name, *obj ? "true" : "false");
++
++    return true;
++}
++
++static bool hmp_output_type_str(Visitor *v, const char *name, char **obj,
++                                Error **errp)
++{
++    /* Skip already printed or unused fields */
++    if (!*obj || g_str_equal(name, "id") || g_str_equal(name, "type")) {
++        return true;
++    }
++
++    /* Do not print stub name for StringList elements */
++    if (g_str_equal(name, "str")) {
++        hmp_output_append_formatted(v, "%s", *obj);
++    } else {
++        hmp_output_append_formatted(v, "%s=%s", name, *obj);
++    }
++
++    return true;
++}
++
++static bool hmp_output_type_number(Visitor *v, const char *name,
++                                   double *obj, Error **errp)
++{
++    hmp_output_append_formatted(v, "%s=%.17g", name, *obj);
++
++    return true;
++}
++
++/* TODO: remove this function? */
++static bool hmp_output_type_any(Visitor *v, const char *name,
++                                QObject **obj, Error **errp)
++{
++    return true;
++}
++
++static bool hmp_output_type_null(Visitor *v, const char *name,
++                                 QNull **obj, Error **errp)
++{
++    hmp_output_append_formatted(v, "%s=NULL", name);
++
++    return true;
++}
++
++static void hmp_output_complete(Visitor *v, void *opaque)
++{
++    HMPOutputVisitor *ov = to_hov(v);
++
++    *ov->result = g_string_free(ov->buffer, false);
++    ov->buffer = NULL;
++}
++
++static void hmp_output_free(Visitor *v)
++{
++    HMPOutputVisitor *ov = to_hov(v);
++
++    if (ov->buffer) {
++        g_string_free(ov->buffer, true);
++    }
++    g_free(v);
++}
++
++Visitor *hmp_output_visitor_new(char **result)
++{
++    HMPOutputVisitor *v;
++
++    v = g_malloc0(sizeof(*v));
++
++    v->visitor.type = VISITOR_OUTPUT;
++    v->visitor.start_struct = hmp_output_start_struct;
++    v->visitor.end_struct = hmp_output_end_struct;
++    v->visitor.start_list = hmp_output_start_list;
++    v->visitor.next_list = hmp_output_next_list;
++    v->visitor.end_list = hmp_output_end_list;
++    v->visitor.type_int64 = hmp_output_type_int64;
++    v->visitor.type_uint64 = hmp_output_type_uint64;
++    v->visitor.type_bool = hmp_output_type_bool;
++    v->visitor.type_str = hmp_output_type_str;
++    v->visitor.type_number = hmp_output_type_number;
++    v->visitor.type_any = hmp_output_type_any;
++    v->visitor.type_null = hmp_output_type_null;
++    v->visitor.complete = hmp_output_complete;
++    v->visitor.free = hmp_output_free;
++
++    v->result = result;
++    v->buffer = g_string_new("");
++    v->is_continue = false;
++
++    return &v->visitor;
++}
+diff --git a/qapi/meson.build b/qapi/meson.build
+index 0652569bc4..94effbc052 100644
+--- a/qapi/meson.build
++++ b/qapi/meson.build
+@@ -8,6 +8,7 @@ util_ss.add(files(
+   'qobject-output-visitor.c',
+   'string-input-visitor.c',
+   'string-output-visitor.c',
++  'hmp-output-visitor.c',
+ ))
+ if have_system or have_tools
+   util_ss.add(files(
 -- 
 2.25.1
 
