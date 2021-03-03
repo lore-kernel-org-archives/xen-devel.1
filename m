@@ -2,46 +2,51 @@ Return-Path: <SRS0=XTf+=IB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6323C433DB
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 17:06:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9638AC433E6
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 17:37:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3038C64E25
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 17:06:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3038C64E25
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2908B64EDC
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Mar 2021 17:37:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2908B64EDC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.92922.175248 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.92928.175272 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHUwI-00054s-5P; Wed, 03 Mar 2021 17:05:34 +0000
+	id 1lHVQZ-0008Dw-Uf; Wed, 03 Mar 2021 17:36:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 92922.175248; Wed, 03 Mar 2021 17:05:34 +0000
+Received: by outflank-mailman (output) from mailman id 92928.175272; Wed, 03 Mar 2021 17:36:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHUwI-00054l-1P; Wed, 03 Mar 2021 17:05:34 +0000
-Received: by outflank-mailman (input) for mailman id 92922;
- Wed, 03 Mar 2021 17:05:32 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lHUwG-00054f-M4
- for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 17:05:32 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lHUwF-0004yA-4M; Wed, 03 Mar 2021 17:05:31 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lHUwE-0005q4-Ip; Wed, 03 Mar 2021 17:05:30 +0000
+	id 1lHVQZ-0008Dp-Rd; Wed, 03 Mar 2021 17:36:51 +0000
+Received: by outflank-mailman (input) for mailman id 92928;
+ Wed, 03 Mar 2021 17:36:50 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Voz6=IB=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
+ id 1lHVQY-0008CL-SJ
+ for xen-devel@lists.xenproject.org; Wed, 03 Mar 2021 17:36:50 +0000
+Received: from mail-wr1-x430.google.com (unknown [2a00:1450:4864:20::430])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4e806233-47ab-4952-919c-50e0a1938d16;
+ Wed, 03 Mar 2021 17:36:45 +0000 (UTC)
+Received: by mail-wr1-x430.google.com with SMTP id b18so18122692wrn.6
+ for <xen-devel@lists.xenproject.org>; Wed, 03 Mar 2021 09:36:45 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id m2sm6316827wml.34.2021.03.03.09.36.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Mar 2021 09:36:43 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 7DDF21FF8C;
+ Wed,  3 Mar 2021 17:36:42 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,101 +58,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=9yPzP18IxQGu4Rh4EpOr1irO50bzzkHI1YvhVzGWuy8=; b=TmaV2u0t8q9F/Mbs3Bj88nGH4o
-	Z1RRUcYfDXy1PM2L4g096zfl4uEjtehqGrl/Yd279G+iwYw4IEkUiTx+Di/xiq09v0c8Cil4LsoPJ
-	mmTZL/S/TVKUxB9E2kflpg2mJm8uc712hhgrDjN5bd8+7QRLKqxi0OnvuppxEHz1N0EQ=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: raphning@amazon.co.uk,
-	iwj@xenproject.org,
-	Julien Grall <jgrall@amazon.com>,
-	Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>,
-	Bjoern Doebel <doebel@amazon.de>
-Subject: [PATCH for-4.15] tools/xenstored: liveupdate: Properly check long transaction
-Date: Wed,  3 Mar 2021 17:05:26 +0000
-Message-Id: <20210303170526.15903-1-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
+X-Inumbo-ID: 4e806233-47ab-4952-919c-50e0a1938d16
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=1mhDoxefyC/VVw7zUuqfiHo+BNITfl2gfYDxMgzesU4=;
+        b=y8ZioLIGZvHKVdZXRlv1Zar1mcJF3BAo55XTeclyWG7L1Ra+fookeVnBv1QaxXwyMD
+         3/tNFOUq9PlV7eQ+ejutHRg8QEXH8Wk/zTPau7KzdQACukH7fFZDs4AQ0sFK2epAtH9+
+         aixZob2k3D61ulHEcxY+dJRI0xinFr9lNeIr35PfAc30pBrfH54QrNhwf89w013Nhr0f
+         UDGgJ2pMGm0e+tSXuEj5wAOOAyz/bDgYSQ2A6DtSmWQBquJ0FduvnWFRsPQbjvDJcnFc
+         3rQRTqczwqbcwKyUbVbhbhmnEIVMDcK/hLttLiJTnpGOLHl/UmzYsgIwbo2dF/qJZPPU
+         sz7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=1mhDoxefyC/VVw7zUuqfiHo+BNITfl2gfYDxMgzesU4=;
+        b=nr1zFjrOBPIoHy/woUBggjG7XuwGcrBgXlEALS285Eckunh3c8q5U/GH+E77wry2ao
+         xFq/S7YwwLAn6S1FvmVqyUVDGbX/ChLvp6nOG8edH5L9dbme06XPhun8w/JE2rL2OI22
+         wMDC0omiPJ5fMl8fs6mm3OxkEOIRKVT3k0eLJ349+7trqndwTxBBiUnElkzP5LvQbiv2
+         LRslo07qqbyWPkcwhCfm8FkB8iKPuFrLnROwv4Zl84EQ2lS2ccyTGBcHlRlg46PXQM6p
+         1AjfICQ7xPXhS4neGB/x5K6/eWqsqvTS4uQ9bGoECtoIBQyespBtTfotUiPJe6KV2H2r
+         WQjg==
+X-Gm-Message-State: AOAM531fxPDRBP6i8yp8m4eFfD5cV4EBzPGMKiLOCXOKHjhIzUXlcWOW
+	CiFVRDr7ChtoJQvqeZnLJNfqXQ==
+X-Google-Smtp-Source: ABdhPJyZSxtpc4fcGhtaCFDlXly5Tpm9D42Lg+8EXzRiM52nT+tOhOeLiZfd9lGfRgooTwIG8FgzQg==
+X-Received: by 2002:adf:c752:: with SMTP id b18mr5625686wrh.233.1614793004917;
+        Wed, 03 Mar 2021 09:36:44 -0800 (PST)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: julien@xen.org,
+	stefano.stabellini@linaro.org,
+	stefano.stabellini@xilinx.com,
+	andre.przywara@arm.com,
+	stratos-dev@op-lists.linaro.org,
+	xen-devel@lists.xenproject.org,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Sagar Karandikar <sagark@eecs.berkeley.edu>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH  v3 2/7] hw/riscv: migrate fdt field to generic MachineState
+Date: Wed,  3 Mar 2021 17:36:37 +0000
+Message-Id: <20210303173642.3805-3-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210303173642.3805-1-alex.bennee@linaro.org>
+References: <20210303173642.3805-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <jgrall@amazon.com>
+This is a mechanical change to make the fdt available through
+MachineState.
 
-As XenStored is single-threaded, conn->ta_start_time will always be
-smaller than now. As we substract the latter from the former, it means
-a transaction will never be considered long running.
-
-Invert the two operands of the substraction in both lu_reject_reason()
-and lu_check_allowed(). In addition to that, the former also needs to
-check that conn->ta_start_time is not 0 (i.e the transaction is not
-active).
-
-Take the opportunity to document the return condition of
-lu_check_allowed().
-
-Fixes: e04e53a5be20 ("tools/xenstore: allow live update only with no transaction active")
-Reported-by: Bjoern Doebel <doebel@amazon.de>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Message-Id: <20210211171945.18313-3-alex.bennee@linaro.org>
 ---
+ include/hw/riscv/virt.h |  1 -
+ hw/riscv/virt.c         | 20 ++++++++++----------
+ 2 files changed, 10 insertions(+), 11 deletions(-)
 
-I am a bit puzzled on how -F is implemented. From my understanding we
-will force LiveUpdate when one of the following conditions is met:
-  1) All the active transactions are long running
-  2) If we didn't manage to LiveUpdate after N sec
-
-It is not quite clear why we need the both as 2) would indirectly cover
-1). However 2) is probably unsafe as we may reset transactions for
-"well-behaving" guest.
-
-So I am thinking to send a patch to drop 2). Any opinions?
-
-This patch is candidate for 4.15. Without it, the long-running
-transactions are not properly accounted.
----
- tools/xenstore/xenstored_control.c | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
-
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index d7ad112138b2..8e470f2b2056 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -459,11 +459,18 @@ static bool lu_check_lu_allowed(void)
- 	list_for_each_entry(conn, &connections, list) {
- 		if (conn->ta_start_time) {
- 			ta_total++;
--			if (conn->ta_start_time - now >= lu_status->timeout)
-+			if (now - conn->ta_start_time >= lu_status->timeout)
- 				ta_long++;
- 		}
- 	}
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 84b7a3848f..632da52018 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -41,7 +41,6 @@ struct RISCVVirtState {
+     DeviceState *plic[VIRT_SOCKETS_MAX];
+     PFlashCFI01 *flash[2];
  
-+	/*
-+	 * Allow LiveUpdate if one of the following conditions is met:
-+	 *	- There is no active transactions
-+	 *	- All transactions are long running (e.g. they have been
-+	 *	active for more than lu_status->timeout sec) and the admin as
-+	 *	requested to force the operation.
-+	 */
- 	return ta_total ? (lu_status->force && ta_long == ta_total) : true;
- }
+-    void *fdt;
+     int fdt_size;
+ };
  
-@@ -474,11 +481,12 @@ static const char *lu_reject_reason(const void *ctx)
- 	time_t now = time(NULL);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2299b3a6be..8d0ba72d78 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -189,14 +189,14 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
  
- 	list_for_each_entry(conn, &connections, list) {
--		if (conn->ta_start_time - now >= lu_status->timeout) {
-+		if (conn->ta_start_time &&
-+		    (now - conn->ta_start_time >= lu_status->timeout)) {
- 			ret = talloc_asprintf(ctx, "%s\nDomain %u: %ld s",
- 					      ret ? : "Domains with long running transactions:",
- 					      conn->id,
--					      conn->ta_start_time - now);
-+					      now - conn->ta_start_time);
- 		}
- 	}
+     if (mc->dtb) {
+-        fdt = s->fdt = load_device_tree(mc->dtb, &s->fdt_size);
++        fdt = mc->fdt = load_device_tree(mc->dtb, &s->fdt_size);
+         if (!fdt) {
+             error_report("load_device_tree() failed");
+             exit(1);
+         }
+         goto update_bootargs;
+     } else {
+-        fdt = s->fdt = create_device_tree(&s->fdt_size);
++        fdt = mc->fdt = create_device_tree(&s->fdt_size);
+         if (!fdt) {
+             error_report("create_device_tree() failed");
+             exit(1);
+@@ -434,12 +434,12 @@ static void create_fdt(RISCVVirtState *s, const struct MemmapEntry *memmap,
+     g_free(name);
  
+     name = g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
+-    qemu_fdt_add_subnode(s->fdt, name);
+-    qemu_fdt_setprop_string(s->fdt, name, "compatible", "cfi-flash");
+-    qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
++    qemu_fdt_add_subnode(mc->fdt, name);
++    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
++    qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
+                                  2, flashbase, 2, flashsize,
+                                  2, flashbase + flashsize, 2, flashsize);
+-    qemu_fdt_setprop_cell(s->fdt, name, "bank-width", 4);
++    qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
+     g_free(name);
+ 
+ update_bootargs:
+@@ -631,9 +631,9 @@ static void virt_machine_init(MachineState *machine)
+             hwaddr end = riscv_load_initrd(machine->initrd_filename,
+                                            machine->ram_size, kernel_entry,
+                                            &start);
+-            qemu_fdt_setprop_cell(s->fdt, "/chosen",
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
+                                   "linux,initrd-start", start);
+-            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
+                                   end);
+         }
+     } else {
+@@ -654,12 +654,12 @@ static void virt_machine_init(MachineState *machine)
+ 
+     /* Compute the fdt load address in dram */
+     fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
+-                                   machine->ram_size, s->fdt);
++                                   machine->ram_size, machine->fdt);
+     /* load the reset vector */
+     riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
+                               virt_memmap[VIRT_MROM].base,
+                               virt_memmap[VIRT_MROM].size, kernel_entry,
+-                              fdt_load_addr, s->fdt);
++                              fdt_load_addr, machine->fdt);
+ 
+     /* SiFive Test MMIO device */
+     sifive_test_create(memmap[VIRT_TEST].base);
 -- 
-2.17.1
+2.20.1
 
 
