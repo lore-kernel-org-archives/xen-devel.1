@@ -2,44 +2,47 @@ Return-Path: <SRS0=L0Gu=IC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA38CC433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Mar 2021 11:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D030C433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Mar 2021 11:22:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 84D0764F2B
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Mar 2021 11:01:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 84D0764F2B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 41DFA64E89
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Mar 2021 11:22:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41DFA64E89
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.93189.175876 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.93208.175888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHliz-0001fp-E5; Thu, 04 Mar 2021 11:00:57 +0000
+	id 1lHm3E-0003u8-65; Thu, 04 Mar 2021 11:21:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 93189.175876; Thu, 04 Mar 2021 11:00:57 +0000
+Received: by outflank-mailman (output) from mailman id 93208.175888; Thu, 04 Mar 2021 11:21:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lHliz-0001fi-9M; Thu, 04 Mar 2021 11:00:57 +0000
-Received: by outflank-mailman (input) for mailman id 93189;
- Thu, 04 Mar 2021 11:00:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lHm3E-0003u1-2W; Thu, 04 Mar 2021 11:21:52 +0000
+Received: by outflank-mailman (input) for mailman id 93208;
+ Thu, 04 Mar 2021 11:21:50 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ljEZ=IC=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lHlix-0001fX-Io
- for xen-devel@lists.xenproject.org; Thu, 04 Mar 2021 11:00:55 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dfdf0f78-ddf7-47c3-8db2-f60b05fa3060;
- Thu, 04 Mar 2021 11:00:55 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2F411AE1F;
- Thu,  4 Mar 2021 11:00:54 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1lHm3C-0003tw-9f
+ for xen-devel@lists.xenproject.org; Thu, 04 Mar 2021 11:21:50 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lHm3C-0001Lz-4b
+ for xen-devel@lists.xenproject.org; Thu, 04 Mar 2021 11:21:50 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lHm3C-0006yO-3f
+ for xen-devel@lists.xenproject.org; Thu, 04 Mar 2021 11:21:50 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lHm2y-00050F-TZ; Thu, 04 Mar 2021 11:21:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,53 +54,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dfdf0f78-ddf7-47c3-8db2-f60b05fa3060
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1614855654; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=WXqHPe+Ifnv5Vf7F0Ne6BsKMUPRrUe3g+NOcm0DY8Po=;
-	b=Wb2k58m2tPyw8HJWGN4OpsnluwahwTkXLlCH83ups3omce9KolKDdUZKnr/01mnQARefe6
-	zdjprHYQ/al8PYmwTYY3Rq8ttMQj/0SNMlm663huu2nT5pLiph5X/3ZaxSkSR750/lMIrJ
-	7ERgKTScfUWv8MxgMKMRzBnsI93uAhQ=
-From: Juergen Gross <jgross@suse.com>
-To: torvalds@linux-foundation.org
-Cc: linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	boris.ostrovsky@oracle.com
-Subject: [GIT PULL] xen: branch for v5.12-rc2
-Date: Thu,  4 Mar 2021 12:00:53 +0100
-Message-Id: <20210304110053.8787-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=xsQlyatzXrok8XO8ymfSBI8MKz1Bcgiyw9bZ+/YS5qg=; b=eNXFTkksJp1G6AqwrikeHx/vzd
+	Z1ffECpBG3Ddw67dRwipNtS7IkrK5YhxbMp422VfQmaonOjnibetrQ1Cr7hdmvr1PUn9YFr5CXyHX
+	XLQEmxRnv+NZWPmt1pXWWYKO+uHO/BUaItodT1QjtCNgjb2NH7WicxAoB6Bs21wTlgSE=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24640.49856.639416.385729@mariner.uk.xensource.com>
+Date: Thu, 4 Mar 2021 11:21:36 +0000
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>,
+    Charles Arnold <CARNOLD@suse.com>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    Wei Liu <wl@xen.org>,
+    "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH][4.15] crypto: adjust rijndaelEncrypt() prototype for
+ gcc11
+In-Reply-To: <1e625665-7a14-a1f6-5b93-cac6e3640c1f@suse.com>
+References: <05fe3295-7993-2eb5-37bc-a6d04fde1fbc@suse.com>
+	<7e0584ab-8923-cb59-fac2-c2908d736f0c@xen.org>
+	<1e625665-7a14-a1f6-5b93-cac6e3640c1f@suse.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Linus,
+Jan Beulich writes ("Re: [PATCH][4.15] crypto: adjust rijndaelEncrypt() prototype for gcc11"):
+> On 03.03.2021 20:09, Julien Grall wrote:
+> > On 01/03/2021 07:57, Jan Beulich wrote:
+> >> The upcoming release complains, not entirely unreasonably:
+> >>
+> >> In file included from rijndael.c:33:
+> >> .../xen/include/crypto/rijndael.h:55:53: note: previously declared as 'const unsigned char[]'
+> >>     55 | void    rijndaelEncrypt(const unsigned int [], int, const unsigned char [],
+> >>        |                                                     ^~~~~~~~~~~~~~~~~~~~~~
+> >> rijndael.c:865:8: error: argument 4 of type 'u8[16]' {aka 'unsigned char[16]'} with mismatched bound [-Werror=array-parameter=]
+> >>    865 |     u8 ct[16])
 
-Please git pull the following tag:
+I think this is an erroneous compiler warning.
 
- git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.12b-rc2-tag
+It has been idiomatic in some codebases for a long time to write
+    const unsigned char[]
+as a formal parameter for an array (of whatever size).
 
-xen: branch for v5.12-rc2
+> >> .../xen/include/xen/string.h:101:27: error: '__builtin_memcmp' specified bound 4 exceeds source size 0 [-Werror=stringop-overread]
+> >>    101 | #define memcmp(s1, s2, n) __builtin_memcmp(s1, s2, n)
+> >>        |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >> mpparse.c:722:13: note: in expansion of macro 'memcmp'
+> >>    722 |         if (memcmp(mpf->mpf_signature, "_MP_", 4) == 0 &&
+> >>        |             ^~~~~~
+> >>
+> >> Clearly neither the 1st nor the 2nd argument have a "source size" of 0.
+> > 
+> > It looks like there is a report on the redhat bug tracker for it [1]. Do 
+> > you know if there is a bug report on the GCC tracker as well?
+> 
+> I have no idea, to be honest.
 
-It contains fixes for 2 security issues (XSA-367 and XSA-369).
+This erroneous message makes me think that there is simply a bug in
+this version of GCC, where formal parameters declared as
+    const unsigned char[]
+are treated as
+    const unsigned char[0]
+rather than as
+    const unsigned char*
 
-
-Thanks.
-
-Juergen
-
- arch/arm/xen/p2m.c                | 35 ++++++++++++++++++++++---
- arch/x86/include/asm/xen/page.h   | 12 +++++++++
- arch/x86/xen/p2m.c                | 54 ++++++++++++++++++++++++++++++++++-----
- arch/x86/xen/setup.c              | 25 +++---------------
- drivers/net/xen-netback/netback.c | 12 ++++++++-
- 5 files changed, 104 insertions(+), 34 deletions(-)
-
-Jan Beulich (2):
-      Xen/gnttab: handle p2m update errors on a per-slot basis
-      xen-netback: respect gnttab_map_refs()'s return value
-
-Juergen Gross (1):
-      xen: fix p2m size in dom0 for disabled memory hotplug case
+Ian.
 
