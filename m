@@ -2,42 +2,44 @@ Return-Path: <SRS0=5QKt=ID=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80834C433DB
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 12:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7340C433E0
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 13:00:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3AD8364F44
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 12:50:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3AD8364F44
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6653864EF8
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 13:00:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6653864EF8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.93672.176715 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.93679.176727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lI9um-00037e-JN; Fri, 05 Mar 2021 12:50:44 +0000
+	id 1lIA3y-0004GY-HY; Fri, 05 Mar 2021 13:00:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 93672.176715; Fri, 05 Mar 2021 12:50:44 +0000
+Received: by outflank-mailman (output) from mailman id 93679.176727; Fri, 05 Mar 2021 13:00:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lI9um-00037X-Fr; Fri, 05 Mar 2021 12:50:44 +0000
-Received: by outflank-mailman (input) for mailman id 93672;
- Fri, 05 Mar 2021 12:50:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4w+o=ID=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lI9ul-00034k-Nq
- for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 12:50:43 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c69cd3e-2afb-40fd-92b6-c28aaf925f35;
- Fri, 05 Mar 2021 12:50:35 +0000 (UTC)
+	id 1lIA3y-0004GR-DW; Fri, 05 Mar 2021 13:00:14 +0000
+Received: by outflank-mailman (input) for mailman id 93679;
+ Fri, 05 Mar 2021 13:00:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=XWNu=ID=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lIA3w-0004GM-Po
+ for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:00:12 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b154e5b4-b06a-479f-96c8-d87ef9c7df17;
+ Fri, 05 Mar 2021 13:00:11 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id E6111AE3C;
+ Fri,  5 Mar 2021 13:00:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,115 +51,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c69cd3e-2afb-40fd-92b6-c28aaf925f35
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1614948635;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=bjbbijXY3Quk6aaO7tZzhGLPPA5Tof1s8Ux56AsuWVA=;
-  b=ER4qGNg49UkbY5BceFcgoznZcnQoae8bsmgTqZEcFqElnpb0lIM1svAZ
-   IgIv/yRIh0tEVQBCWAKrSfoHn5gzda7BJUqEtwIju5hUlD7z2IO508g2Z
-   kh/5HAoHBIGbgLqD4ssshJNex31hBuDC3OCcYR2tY7erp5rZziTGOAyY/
-   s=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: BF4f4GdbBtHTAFCGu3ev5zVe1heqgu4zA3pccQd8JISXJwWZyO7Wcdh+0h4wS1Q+yg+ZwExZlm
- ZEgjy4/xPiyWNtmEEER15vEGhx0iY3ZKMo5P1P00HFTcFWCDne7hVtp+1yuNXvEOvwpN1d28+f
- xYgkN2ib0XmuIBDSogoSQUhPfkrztjkHdKIG/AxeDXO1aUthThE6URm1CIhT4bDm071MYhI2VT
- mtb0I8aHBihjdoTKZs2tRAxJfh07uFxoGX64iHZ9MN1tyyfjW9gc1xZDMbkZnSlcj/gRn5j94E
- GXU=
-X-SBRS: 5.1
-X-MesageID: 38643897
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.81,224,1610427600"; 
-   d="scan'208";a="38643897"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: [PATCH 2/3] xen/dmop: Strip __XEN_TOOLS__ header guard from public API
-Date: Fri, 5 Mar 2021 12:49:48 +0000
-Message-ID: <20210305124949.6719-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210305124949.6719-1-andrew.cooper3@citrix.com>
-References: <20210305124949.6719-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: b154e5b4-b06a-479f-96c8-d87ef9c7df17
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1614949211; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=fqPFFEXxRn+iLNAl6ARcX7hpFyaZ22cTsCmarIGybCE=;
+	b=shrzf7c4xYqFiIrYokDL0RoF2BKE9fqgF8LscJynYpPheckAynlQgA1Cs3kQimr4gNKRcX
+	L8mgoasZiyVsep/UplJiD7BHL8SpGMMRSJrIU0KmbVkT0yUfbNPML2q2eYYe05n7kAnWtD
+	PipCMz4sHEMv1VKgDehhhTzQfWihz1I=
+Subject: Re: [PATCH for-4.15 1/2] tools/xenstore: Consolidate
+ PRINTF_ATTRIBUTE() in utils.h
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: raphning@amazon.co.uk, iwj@xenproject.org,
+ Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>
+References: <20210305124003.13582-1-julien@xen.org>
+ <20210305124003.13582-2-julien@xen.org>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <b75f2fad-f9cf-d9d1-d114-efea792550a0@suse.com>
+Date: Fri, 5 Mar 2021 14:00:10 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210305124003.13582-2-julien@xen.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="xa030PwzxeFYZePFlNYfPQjgqVXhHFt1I"
 
-Exactly as with c/s f40e1c52e4, this is inappropriate for a stable library.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--xa030PwzxeFYZePFlNYfPQjgqVXhHFt1I
+Content-Type: multipart/mixed; boundary="Z3BhJ0Nm3JMkACTRK4cX3yc0paXAySkt0";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: raphning@amazon.co.uk, iwj@xenproject.org,
+ Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>
+Message-ID: <b75f2fad-f9cf-d9d1-d114-efea792550a0@suse.com>
+Subject: Re: [PATCH for-4.15 1/2] tools/xenstore: Consolidate
+ PRINTF_ATTRIBUTE() in utils.h
+References: <20210305124003.13582-1-julien@xen.org>
+ <20210305124003.13582-2-julien@xen.org>
+In-Reply-To: <20210305124003.13582-2-julien@xen.org>
 
-That change actually broke the build with:
+--Z3BhJ0Nm3JMkACTRK4cX3yc0paXAySkt0
+Content-Type: multipart/mixed;
+ boundary="------------0C8A056C013D922393496A8F"
+Content-Language: en-US
 
-  include/xendevicemodel.h:52:5: error: unknown type name 'ioservid_t'
-       ioservid_t *id);
-       ^
+This is a multi-part message in MIME format.
+--------------0C8A056C013D922393496A8F
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-as libxendevicemodel.h now uses a type it can't see a typedef for.  However,
-nothing noticed because the header.chk logic is also broken (fixed
-subsequently).
+On 05.03.21 13:40, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+>=20
+> At the moment PRINTF_ATTRIBUTE() is defined in two places:
+>      - tdb.h: Defined as a NOP
+>      - talloc.h: Defined as a NOP for GCC older than 3.0 otherwise will=
 
-Strip the guard from the public header, and remove compensation from
-devicemodel's private.h
+>      add the attribute to check the printf format
+>=20
+> Xen requires to build with minimum GCC 4.1 and we want to check the
+> printf format for all the printf-like functions.
+>=20
+> Only implement PRINTF_ATTRIBUTE() once in utils.h and drop the
+> conditional check for GCC < 3.0.
+>=20
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Paul Durrant <paul@xen.org>
-CC: Ian Jackson <iwj@xenproject.org>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 
-For 4.15.  This is a build fix, even if current staging can't spot the
-breakage.
 
-These two issues highlight that libxendevcemodel.h has never been checked
-since its introduction, because the checking logic only saw an empty file.
----
- tools/libs/devicemodel/private.h | 2 --
- xen/include/public/hvm/dm_op.h   | 5 -----
- 2 files changed, 7 deletions(-)
+Juergen
 
-diff --git a/tools/libs/devicemodel/private.h b/tools/libs/devicemodel/private.h
-index c4a225f8af..c24f3396bb 100644
---- a/tools/libs/devicemodel/private.h
-+++ b/tools/libs/devicemodel/private.h
-@@ -1,8 +1,6 @@
- #ifndef XENDEVICEMODEL_PRIVATE_H
- #define XENDEVICEMODEL_PRIVATE_H
- 
--#define __XEN_TOOLS__ 1
--
- #include <xentoollog.h>
- #include <xendevicemodel.h>
- #include <xencall.h>
-diff --git a/xen/include/public/hvm/dm_op.h b/xen/include/public/hvm/dm_op.h
-index ef7fbc0d3d..fa3f083fed 100644
---- a/xen/include/public/hvm/dm_op.h
-+++ b/xen/include/public/hvm/dm_op.h
-@@ -25,9 +25,6 @@
- #define __XEN_PUBLIC_HVM_DM_OP_H__
- 
- #include "../xen.h"
--
--#if defined(__XEN__) || defined(__XEN_TOOLS__)
--
- #include "../event_channel.h"
- 
- #ifndef uint64_aligned_t
-@@ -491,8 +488,6 @@ struct xen_dm_op {
-     } u;
- };
- 
--#endif /* __XEN__ || __XEN_TOOLS__ */
--
- struct xen_dm_op_buf {
-     XEN_GUEST_HANDLE(void) h;
-     xen_ulong_t size;
--- 
-2.11.0
+--------------0C8A056C013D922393496A8F
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------0C8A056C013D922393496A8F--
+
+--Z3BhJ0Nm3JMkACTRK4cX3yc0paXAySkt0--
+
+--xa030PwzxeFYZePFlNYfPQjgqVXhHFt1I
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmBCK1oFAwAAAAAACgkQsN6d1ii/Ey/1
+BQf/YnLAst5UUldnEmQIpWFZVi6rtDrclj8/XHyi+fyXtyPPo++Sew2azMBk1kAkt8orxiwj2RrW
++8OTO+3e0AiG8vKtQFjJrJwLhgulUBAMZtcS8Mez7T0krO2Wx3uY4nfrdq8Xf1G0p23NBk1e37Fi
+oVUPp72XtcxkoK8zIvlCIFHvaq5e7NHkCTjxsBDwrz+/vRnVvryT3w9HAQSpNXoycboen4f4TFuf
++FZCvjY+yJ2M42O+2O3z+0QhJX4qxSF3Wv397gg3A+2KEFRK4JVM9pHAIPGUD1mo7EdV7OagHSq2
+Bmre1QrYOS+/nbyqfKUyzlZT9lRGepr/2t3hMJIFSg==
+=zR+B
+-----END PGP SIGNATURE-----
+
+--xa030PwzxeFYZePFlNYfPQjgqVXhHFt1I--
 
