@@ -2,47 +2,47 @@ Return-Path: <SRS0=5QKt=ID=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,URIBL_BLOCKED autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75A99C433E0
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 13:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76CC2C433DB
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 13:25:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1E9FE64FDD
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 13:24:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1E9FE64FDD
+	by mail.kernel.org (Postfix) with ESMTPS id 3107664FD6
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Mar 2021 13:25:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3107664FD6
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.93691.176763 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.93694.176775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lIAR4-0006Uk-W2; Fri, 05 Mar 2021 13:24:06 +0000
+	id 1lIARs-0006bR-9d; Fri, 05 Mar 2021 13:24:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 93691.176763; Fri, 05 Mar 2021 13:24:06 +0000
+Received: by outflank-mailman (output) from mailman id 93694.176775; Fri, 05 Mar 2021 13:24:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lIAR4-0006Ud-Sr; Fri, 05 Mar 2021 13:24:06 +0000
-Received: by outflank-mailman (input) for mailman id 93691;
- Fri, 05 Mar 2021 13:24:05 +0000
+	id 1lIARs-0006bJ-6i; Fri, 05 Mar 2021 13:24:56 +0000
+Received: by outflank-mailman (input) for mailman id 93694;
+ Fri, 05 Mar 2021 13:24:55 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lIAR3-0006UW-MS
- for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:24:05 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lIARr-0006bD-8o
+ for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:24:55 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lIAR3-0006h5-G8
- for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:24:05 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lIARr-0006i3-85
+ for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:24:55 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lIAR3-0001kA-El
- for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:24:05 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lIARr-0001oa-7E
+ for xen-devel@lists.xenproject.org; Fri, 05 Mar 2021 13:24:55 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1lIAR0-0008Nz-3O; Fri, 05 Mar 2021 13:24:02 +0000
+ id 1lIARn-0008OQ-QZ; Fri, 05 Mar 2021 13:24:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,40 +57,36 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=v8BwmWVXumSpTnT5yALGy/i+hc30fZFIsTozBDrd3RA=; b=VmJUv5lPXCiIVUPX1JUAkBK+G6
-	Uq+uxth/eNdGz2JvqmLKnSNP/6RTEHfXGpSPoFHH9VxRwHOl1sLeaeyviFeTYQ6fZokLDnY+ywRRb
-	wls8qPTN/gdmW3nQ0VdPcvXrHA98gdi5jo2+qWXkc4cJF2Y4DMY/dhUCcFOr0YeIBRLg=;
+	bh=h3cfrY8MA3VSc5TALv7Rc6fduNBtb3sFNMgBZL07nF0=; b=OXOEO8t0dqwGC4l6IOw4//Z6in
+	F9LZSpuc2wqncBSwzWjg8iWtA43BEWmIJ4t2X9ZzH8bDGP6VLxXQxT11SR9FryJoplq2G96WSBeaC
+	J+k8vdz0gpzIv2iB2E2N9NvEZCZi8CQnRIaxHw2upnvcPTCKt0kd8bagDt7ckOxS0g+s=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24642.12529.753822.114284@mariner.uk.xensource.com>
-Date: Fri, 5 Mar 2021 13:24:01 +0000
+Message-ID: <24642.12579.543046.234448@mariner.uk.xensource.com>
+Date: Fri, 5 Mar 2021 13:24:51 +0000
 To: Julien Grall <julien@xen.org>
 Cc: xen-devel@lists.xenproject.org,
     raphning@amazon.co.uk,
     Julien Grall <jgrall@amazon.com>,
     Wei Liu <wl@xen.org>,
     Juergen Gross <jgross@suse.com>
-Subject: [PATCH for-4.15 1/2] tools/xenstore: Consolidate PRINTF_ATTRIBUTE() in utils.h
-In-Reply-To: <20210305124003.13582-2-julien@xen.org>
+Subject: [PATCH for-4.15 2/2] tools/xenstore: Check the format printf for xprintf() and barf{,_perror}()
+In-Reply-To: <20210305124003.13582-3-julien@xen.org>
 References: <20210305124003.13582-1-julien@xen.org>
-	<20210305124003.13582-2-julien@xen.org>
+	<20210305124003.13582-3-julien@xen.org>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Julien Grall writes ("[PATCH for-4.15 1/2] tools/xenstore: Consolidate PRINTF_ATTRIBUTE() in utils.h"):
+Julien Grall writes ("[PATCH for-4.15 2/2] tools/xenstore: Check the format printf for xprintf() and barf{,_perror}()"):
 > From: Julien Grall <jgrall@amazon.com>
 > 
-> At the moment PRINTF_ATTRIBUTE() is defined in two places:
->     - tdb.h: Defined as a NOP
->     - talloc.h: Defined as a NOP for GCC older than 3.0 otherwise will
->     add the attribute to check the printf format
+> Allow GCC to analyze the format printf for xprintf() and
+> barf{,_perror}().
 > 
-> Xen requires to build with minimum GCC 4.1 and we want to check the
-> printf format for all the printf-like functions.
-> 
-> Only implement PRINTF_ATTRIBUTE() once in utils.h and drop the
-> conditional check for GCC < 3.0.
+> Take the opportunity to define __noreturn to make the prototype for
+> barf{,_perror})() easier to read.
 
 Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+
 
