@@ -2,44 +2,45 @@ Return-Path: <SRS0=fV0s=IG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6AF5C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 09:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE9A8C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 09:33:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 97A1C65062
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 09:26:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 97A1C65062
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6B631651B9
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 09:33:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B631651B9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.94721.178298 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.94724.178309 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJC9F-0002Jg-Kc; Mon, 08 Mar 2021 09:25:57 +0000
+	id 1lJCGK-0003EP-Cb; Mon, 08 Mar 2021 09:33:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 94721.178298; Mon, 08 Mar 2021 09:25:57 +0000
+Received: by outflank-mailman (output) from mailman id 94724.178309; Mon, 08 Mar 2021 09:33:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJC9F-0002JZ-HU; Mon, 08 Mar 2021 09:25:57 +0000
-Received: by outflank-mailman (input) for mailman id 94721;
- Mon, 08 Mar 2021 09:25:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lJCGK-0003EI-9p; Mon, 08 Mar 2021 09:33:16 +0000
+Received: by outflank-mailman (input) for mailman id 94724;
+ Mon, 08 Mar 2021 09:33:14 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=bU7p=IG=xen.org=tim@srs-us1.protection.inumbo.net>)
- id 1lJC9D-0002JU-V3
- for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 09:25:55 +0000
-Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 983a0b0b-2798-44a9-8445-efd91bb7f0ef;
- Mon, 08 Mar 2021 09:25:55 +0000 (UTC)
-Received: from tjd by deinos.phlegethon.org with local (Exim 4.92.3 (FreeBSD))
- (envelope-from <tim@xen.org>)
- id 1lJC98-000DWw-Kb; Mon, 08 Mar 2021 09:25:50 +0000
+ (envelope-from <SRS0=mI6H=IG=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lJCGI-0003ED-Ar
+ for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 09:33:14 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ab5f8d97-6d98-48e9-a152-3508eec7d4b2;
+ Mon, 08 Mar 2021 09:33:13 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AB0FCAC54;
+ Mon,  8 Mar 2021 09:33:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,50 +52,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 983a0b0b-2798-44a9-8445-efd91bb7f0ef
-Date: Mon, 8 Mar 2021 09:25:50 +0000
-From: Tim Deegan <tim@xen.org>
-To: Jan Beulich <jbeulich@suse.com>
+X-Inumbo-ID: ab5f8d97-6d98-48e9-a152-3508eec7d4b2
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1615195992; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=oXB4itmC2qnNbufxt2cZxq8FU89mYhIiwkRvTXpCZn8=;
+	b=sMlodLLa5OmRXlrkb5VIvnvXVmG3fYt5SfQ3XTKd3gt19b1GmPiELyLum5sgJY1LswthzL
+	Qt4BbyxGdEGs686k0IG9usf+bH4apT/kFFm+Fq8ys8vED2ZwppikMRFO834cbdNLGwZzqn
+	rTlZC+z84hYkTcCgzUbV8zhIEs64644=
+Subject: Re: [PATCH v2 1/2][4.15] x86/PV: conditionally avoid raising #GP for
+ early guest MSR reads
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>
-Subject: Re: [PATCH 1/2][4.15?] x86/shadow: suppress "fast fault path"
- optimization when running virtualized
-Message-ID: <YEXtnkYzNSXasTw1@deinos.phlegethon.org>
-References: <d0190313-921f-7cbc-4659-9a79f6299fab@suse.com>
- <3bb90ab6-22c9-31d4-88a2-39bd3d81c2d7@suse.com>
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Ian Jackson <iwj@xenproject.org>
+References: <f5f17207-b601-2909-8a5c-55276e734272@suse.com>
+ <d794bbee-a5e5-6632-3d1f-acd8164b7171@suse.com>
+ <YEXmvp02UvvY8Fve@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <1f19ced7-183b-8f08-3a90-c06039e053a6@suse.com>
+Date: Mon, 8 Mar 2021 10:33:12 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <3bb90ab6-22c9-31d4-88a2-39bd3d81c2d7@suse.com>
-X-SA-Known-Good: Yes
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: tim@xen.org
-X-SA-Exim-Scanned: No (on deinos.phlegethon.org); SAEximRunCond expanded to false
+In-Reply-To: <YEXmvp02UvvY8Fve@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-At 16:37 +0100 on 05 Mar (1614962224), Jan Beulich wrote:
-> We can't make correctness of our own behavior dependent upon a
-> hypervisor underneath us correctly telling us the true physical address
-> with hardware uses. Without knowing this, we can't be certain reserved
-> bit faults can actually be observed. Therefore, besides evaluating the
-> number of address bits when deciding whether to use the optimization,
-> also check whether we're running virtualized ourselves.
+On 08.03.2021 09:56, Roger Pau Monné wrote:
+> On Fri, Mar 05, 2021 at 10:50:34AM +0100, Jan Beulich wrote:
+>> Prior to 4.15 Linux, when running in PV mode, did not install a #GP
+>> handler early enough to cover for example the rdmsrl_safe() of
+>> MSR_K8_TSEG_ADDR in bsp_init_amd() (not to speak of the unguarded read
+>> of MSR_K7_HWCR later in the same function). The respective change
+>> (42b3a4cb5609 "x86/xen: Support early interrupts in xen pv guests") was
+>> backported to 4.14, but no further - presumably since it wasn't really
+>> easy because of other dependencies.
+>>
+>> Therefore, to prevent our change in the handling of guest MSR accesses
+>> to render PV Linux 4.13 and older unusable on at least AMD systems, make
+>> the raising of #GP on this paths conditional upon the guest having
+>> installed a handler, provided of course the MSR can be read in the first
+>> place (we would have raised #GP in that case even before). Producing
+>> zero for reads isn't necessarily correct and may trip code trying to
+>> detect presence of MSRs early, but since such detection logic won't work
+>> without a #GP handler anyway, this ought to be a fair workaround.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> v2: Probe MSR read. Exclude hypervisor range. Avoid issuing two log
+>>     messages (in debug builds). Don't alter WRMSR behavior.
+>> ---
+>> I'm not convinced we can get away without also making the WRMSR path
+>> somewhat more permissive again, e.g. tolerating attempts to set bits
+>> which are already set. But of course this would require keeping in sync
+>> for which MSRs we "fake" reads, as then a kernel attempt to set a bit
+>> may also appear as an attempt to clear others (because of the zero value
+>> that we gave it for the read).
 > 
-> Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> The above approach seems dangerous, as it could allow a guest to
+> figure out the value of the underlying MSR by probing whether values
+> trigger a #GP?
 
-Acked-by: Tim Deegan <tim@xen.org>
+Perhaps, yes. But what do you do? There's potentially a huge value
+range to probe ...
 
-I would consider this to be a bug in the underlying hypervisor, but I
-agree than in practice it won't be safe to rely on it being correct.
+> I think we want to do something similar to what we do on HVM in 4.14
+> and previous versions: ignore writes as long as the rdmsr to the
+> target MSR succeeds, regardless of the value.
 
-These checks are getting fiddly now.  I think that if we end up adding
-any more to them it might be good to set a read-mostly variable at boot
-time rather than do them on every MMIO/NP fault.
+Which, as said elsewhere, has its own downsides - writable MSRs don't
+need to also be readable. See e.g. AMD's proposed PARTIAL_{FS,GS}_LOAD
+MSRs.
 
-Cheers,
+>> --- a/xen/arch/x86/pv/emul-priv-op.c
+>> +++ b/xen/arch/x86/pv/emul-priv-op.c
+>> @@ -874,7 +874,7 @@ static int read_msr(unsigned int reg, ui
+>>      struct vcpu *curr = current;
+>>      const struct domain *currd = curr->domain;
+>>      const struct cpuid_policy *cp = currd->arch.cpuid;
+>> -    bool vpmu_msr = false;
+>> +    bool vpmu_msr = false, warn = false;
+>>      int ret;
+>>  
+>>      if ( (ret = guest_rdmsr(curr, reg, val)) != X86EMUL_UNHANDLEABLE )
+>> @@ -882,7 +882,7 @@ static int read_msr(unsigned int reg, ui
+>>          if ( ret == X86EMUL_EXCEPTION )
+>>              x86_emul_hw_exception(TRAP_gp_fault, 0, ctxt);
+>>  
+>> -        return ret;
+>> +        goto done;
+>>      }
+>>  
+>>      switch ( reg )
+>> @@ -986,7 +986,7 @@ static int read_msr(unsigned int reg, ui
+>>          }
+>>          /* fall through */
+>>      default:
+>> -        gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", reg);
+>> +        warn = true;
+>>          break;
+>>  
+>>      normal:
+>> @@ -995,7 +995,19 @@ static int read_msr(unsigned int reg, ui
+>>          return X86EMUL_OKAY;
+>>      }
+>>  
+>> -    return X86EMUL_UNHANDLEABLE;
+>> + done:
+> 
+> Won't this handling be better placed in the 'default' switch case
+> above?
 
-Tim.
+No - see the "goto done" added near the top of the function.
+
+>> +    if ( ret != X86EMUL_OKAY && !curr->arch.pv.trap_ctxt[X86_EXC_GP].address &&
+>> +         (reg >> 16) != 0x4000 && !rdmsr_safe(reg, *val) )
+> 
+> We didn't used to care about explicitly blocking the reserved MSR
+> range, do we really wan to do it now?
+> 
+> I'm not sure I see an issue with that, but given that we are trying to
+> bring back something similar to the previous behavior, I would avoid
+> adding new conditions.
+
+What I'm particularly trying to avoid here is to allow
+information from an underlying hypervisor to "shine through",
+even if it's only information as to whether a certain MSR is
+readable. It should be solely our own selection which MSRs in
+this range a guest is able to (appear to) read.
+
+Plus of course by avoiding the rdmsr_safe() in this case we
+also avoid the unnecessary (debug only) log message associated
+with such attempted reads.
+
+Jan
 
