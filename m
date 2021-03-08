@@ -5,41 +5,42 @@ X-Spam-Level:
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 108B5C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41B04C433DB
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A5DB0651C9
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A5DB0651C9
+	by mail.kernel.org (Postfix) with ESMTPS id D667B651C3
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D667B651C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.94854.178728 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.94855.178739 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJF0Q-0004yG-Us; Mon, 08 Mar 2021 12:29:02 +0000
+	id 1lJF0S-00050e-BY; Mon, 08 Mar 2021 12:29:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 94854.178728; Mon, 08 Mar 2021 12:29:02 +0000
+Received: by outflank-mailman (output) from mailman id 94855.178739; Mon, 08 Mar 2021 12:29:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJF0Q-0004y9-Qz; Mon, 08 Mar 2021 12:29:02 +0000
-Received: by outflank-mailman (input) for mailman id 94854;
- Mon, 08 Mar 2021 12:29:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lJF0S-00050U-7K; Mon, 08 Mar 2021 12:29:04 +0000
+Received: by outflank-mailman (input) for mailman id 94855;
+ Mon, 08 Mar 2021 12:29:03 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7wcm=IG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJF0P-0004nW-AA
- for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 12:29:01 +0000
+ id 1lJF0R-0004oO-2d
+ for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 12:29:03 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 65108507-ec09-4e9a-b903-90b38b0bb3b9;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9751bea7-d149-4868-944a-b0cebfa6788f;
  Mon, 08 Mar 2021 12:28:51 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8A636AD73;
- Mon,  8 Mar 2021 12:28:50 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 18F67ADDB;
+ Mon,  8 Mar 2021 12:28:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,169 +52,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65108507-ec09-4e9a-b903-90b38b0bb3b9
+X-Inumbo-ID: 9751bea7-d149-4868-944a-b0cebfa6788f
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615206530; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1615206531; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=256H1k7Fa3HpWRn/najlrX8F12wVH//y72/kSGmicik=;
-	b=kIBCYqb5tkrSpCJXtvHEorRcAyKDGDZaB27lX6JiUAOPpHakZWRFRvonM0e4PMNt4G44vO
-	dfR8a2VElVq4arTI9m2rHkQ9dbNnqpAHSybQ58sX5ryEoDSA8FXmjo5dyX1EqjtbupnKcA
-	bRXYdPfhmTmZbiCkN9Pg8AULDdXLaqw=
+	bh=vgl/JWA4fVb0I9JhPSVrr1rdgr2fz1+oJzHmt6wTrys=;
+	b=IWQn5cuqU2UPwrvfspsUqOhx29PSjVJw4RuGFmrLMSTlFouMQ4xwDjTaMmeAD142p7nT0v
+	WJpVNKOvvPuwCR8xEMmTgvOVqAeIrFfE5wrCBCr+RJ5bClt+DSDGM5LYtOKOtB3x3g1+ls
+	+Rjb2ccVbkKmq78oF1XMjKG+Dz5eRMY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
-	linux-kernel@vger.kernel.org
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Josh Poimboeuf <jpoimboe@redhat.com>,
-	Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH v5 04/12] x86/alternative: support not-feature
-Date: Mon,  8 Mar 2021 13:28:36 +0100
-Message-Id: <20210308122844.30488-5-jgross@suse.com>
+	Deep Shah <sdeep@vmware.com>,
+	"VMware, Inc." <pv-drivers@vmware.com>
+Subject: [PATCH v5 06/12] x86: add new features for paravirt patching
+Date: Mon,  8 Mar 2021 13:28:38 +0100
+Message-Id: <20210308122844.30488-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210308122844.30488-1-jgross@suse.com>
 References: <20210308122844.30488-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add support for alternative patching for the case a feature is not
-present on the current cpu.
+For being able to switch paravirt patching from special cased custom
+code sequences to ALTERNATIVE handling some X86_FEATURE_* are needed
+as new features. This enables to have the standard indirect pv call
+as the default code and to patch that with the non-Xen custom code
+sequence via ALTERNATIVE patching later.
 
-For this purpose add a flag byte to struct alt_instr adding the
-information that the inverted feature should be used.
-
-For users of ALTERNATIVE() and friends an inverted feature is specified
-by negating it, e.g.:
-
-ALTERNATIVE(old, new, ~feature)
-
-This requires adapting the objtool information for struct alt_instr.
+Make sure paravirt patching is performed before alternative patching.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V5:
-- split off from next patch
-- reworked to use flag byte (Boris Petkov)
+V3:
+- add comment (Boris Petkov)
+- no negative features (Boris Petkov)
+V4:
+- move paravirt_set_cap() to paravirt-spinlocks.c
 ---
- arch/x86/include/asm/alternative-asm.h        | 6 ++++++
- arch/x86/include/asm/alternative.h            | 8 ++++++++
- arch/x86/include/asm/cpufeature.h             | 2 ++
- arch/x86/kernel/alternative.c                 | 5 +++--
- tools/objtool/arch/x86/include/arch/special.h | 6 +++---
- 5 files changed, 22 insertions(+), 5 deletions(-)
+ arch/x86/include/asm/cpufeatures.h   |  2 ++
+ arch/x86/include/asm/paravirt.h      | 10 ++++++++++
+ arch/x86/kernel/alternative.c        | 30 ++++++++++++++++++++++++++--
+ arch/x86/kernel/paravirt-spinlocks.c |  9 +++++++++
+ 4 files changed, 49 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/include/asm/alternative-asm.h b/arch/x86/include/asm/alternative-asm.h
-index 464034db299f..9a1763550217 100644
---- a/arch/x86/include/asm/alternative-asm.h
-+++ b/arch/x86/include/asm/alternative-asm.h
-@@ -39,7 +39,13 @@
- .macro altinstruction_entry orig alt feature orig_len alt_len pad_len
- 	.long \orig - .
- 	.long \alt - .
-+	.iflt \feature
-+	.word ~(\feature)
-+	.byte 1
-+	.else
- 	.word \feature
-+	.byte 0
-+	.endif
- 	.byte \orig_len
- 	.byte \alt_len
- 	.byte \pad_len
-diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
-index 5753fb2ac489..b9749cf21ada 100644
---- a/arch/x86/include/asm/alternative.h
-+++ b/arch/x86/include/asm/alternative.h
-@@ -59,6 +59,8 @@ struct alt_instr {
- 	s32 instr_offset;	/* original instruction */
- 	s32 repl_offset;	/* offset to replacement instruction */
- 	u16 cpuid;		/* cpuid bit set for replacement */
-+	u8  flag;		/* flag byte */
-+#define ALTINSTR_FLAG_INV	0x01
- 	u8  instrlen;		/* length of original instruction */
- 	u8  replacementlen;	/* length of new instruction */
- 	u8  padlen;		/* length of build-time padding */
-@@ -145,7 +147,13 @@ static inline int alternatives_text_reserved(void *start, void *end)
- #define ALTINSTR_ENTRY(feature, num)					      \
- 	" .long 661b - .\n"				/* label           */ \
- 	" .long " b_replacement(num)"f - .\n"		/* new instruction */ \
-+	" .iflt " __stringify(feature) "\n"		/* inverted?       */ \
-+	" .word ~(" __stringify(feature) ")\n"		/* feature bit     */ \
-+	" .byte " __stringify(ALTINSTR_FLAG_INV) "\n"	/* flag byte       */ \
-+	" .else\n"							      \
- 	" .word " __stringify(feature) "\n"		/* feature bit     */ \
-+	" .byte 0\n"					/* flag byte       */ \
-+	" .endif\n"							      \
- 	" .byte " alt_total_slen "\n"			/* source len      */ \
- 	" .byte " alt_rlen(num) "\n"			/* replacement len */ \
- 	" .byte " alt_pad_len "\n"			/* pad len */
-diff --git a/arch/x86/include/asm/cpufeature.h b/arch/x86/include/asm/cpufeature.h
-index 1728d4ce5730..f060d3186ee4 100644
---- a/arch/x86/include/asm/cpufeature.h
-+++ b/arch/x86/include/asm/cpufeature.h
-@@ -184,6 +184,7 @@ static __always_inline bool _static_cpu_has(u16 bit)
- 		 " .long 1b - .\n"		/* src offset */
- 		 " .long 4f - .\n"		/* repl offset */
- 		 " .word %P[always]\n"		/* always replace */
-+		 " .byte 0\n"			/* flag byte */
- 		 " .byte 3b - 1b\n"		/* src len */
- 		 " .byte 5f - 4f\n"		/* repl len */
- 		 " .byte 3b - 2b\n"		/* pad len */
-@@ -196,6 +197,7 @@ static __always_inline bool _static_cpu_has(u16 bit)
- 		 " .long 1b - .\n"		/* src offset */
- 		 " .long 0\n"			/* no replacement */
- 		 " .word %P[feature]\n"		/* feature bit */
-+		 " .byte 0\n"			/* flag byte */
- 		 " .byte 3b - 1b\n"		/* src len */
- 		 " .byte 0\n"			/* repl len */
- 		 " .byte 0\n"			/* pad len */
+diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
+index cc96e26d69f7..b440c950246d 100644
+--- a/arch/x86/include/asm/cpufeatures.h
++++ b/arch/x86/include/asm/cpufeatures.h
+@@ -236,6 +236,8 @@
+ #define X86_FEATURE_EPT_AD		( 8*32+17) /* Intel Extended Page Table access-dirty bit */
+ #define X86_FEATURE_VMCALL		( 8*32+18) /* "" Hypervisor supports the VMCALL instruction */
+ #define X86_FEATURE_VMW_VMMCALL		( 8*32+19) /* "" VMware prefers VMMCALL hypercall instruction */
++#define X86_FEATURE_PVUNLOCK		( 8*32+20) /* "" PV unlock function */
++#define X86_FEATURE_VCPUPREEMPT		( 8*32+21) /* "" PV vcpu_is_preempted function */
+ 
+ /* Intel-defined CPU features, CPUID level 0x00000007:0 (EBX), word 9 */
+ #define X86_FEATURE_FSGSBASE		( 9*32+ 0) /* RDFSBASE, WRFSBASE, RDGSBASE, WRGSBASE instructions*/
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index 1e45b46fae84..8c354099d9c3 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -47,6 +47,10 @@ static inline u64 paravirt_steal_clock(int cpu)
+ 	return static_call(pv_steal_clock)(cpu);
+ }
+ 
++#ifdef CONFIG_PARAVIRT_SPINLOCKS
++void __init paravirt_set_cap(void);
++#endif
++
+ /* The paravirtualized I/O functions */
+ static inline void slow_down_io(void)
+ {
+@@ -811,5 +815,11 @@ static inline void paravirt_arch_exit_mmap(struct mm_struct *mm)
+ {
+ }
+ #endif
++
++#ifndef CONFIG_PARAVIRT_SPINLOCKS
++static inline void paravirt_set_cap(void)
++{
++}
++#endif
+ #endif /* __ASSEMBLY__ */
+ #endif /* _ASM_X86_PARAVIRT_H */
 diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 8d778e46725d..1296a90aa5b8 100644
+index 1296a90aa5b8..ab9ad729fc5a 100644
 --- a/arch/x86/kernel/alternative.c
 +++ b/arch/x86/kernel/alternative.c
-@@ -393,14 +393,15 @@ void __init_or_module noinline apply_alternatives(struct alt_instr *start,
- 		replacement = (u8 *)&a->repl_offset + a->repl_offset;
- 		BUG_ON(a->instrlen > sizeof(insn_buff));
- 		BUG_ON(a->cpuid >= (NCAPINTS + NBUGINTS) * 32);
--		if (!boot_cpu_has(a->cpuid)) {
-+		if (!boot_cpu_has(a->cpuid) == !(a->flag & ALTINSTR_FLAG_INV)) {
- 			if (a->padlen > 1)
- 				optimize_nops(a, instr);
+@@ -28,6 +28,7 @@
+ #include <asm/insn.h>
+ #include <asm/io.h>
+ #include <asm/fixmap.h>
++#include <asm/paravirt.h>
  
- 			continue;
- 		}
+ int __read_mostly alternatives_patched;
  
--		DPRINTK("feat: %d*32+%d, old: (%pS (%px) len: %d), repl: (%px, len: %d), pad: %d",
-+		DPRINTK("feat: %s%d*32+%d, old: (%pS (%px) len: %d), repl: (%px, len: %d), pad: %d",
-+			(a->flag & ALTINSTR_FLAG_INV) ? "~" : "",
- 			a->cpuid >> 5,
- 			a->cpuid & 0x1f,
- 			instr, instr, a->instrlen,
-diff --git a/tools/objtool/arch/x86/include/arch/special.h b/tools/objtool/arch/x86/include/arch/special.h
-index d818b2bffa02..afde39063963 100644
---- a/tools/objtool/arch/x86/include/arch/special.h
-+++ b/tools/objtool/arch/x86/include/arch/special.h
-@@ -10,11 +10,11 @@
- #define JUMP_ORIG_OFFSET	0
- #define JUMP_NEW_OFFSET		4
+@@ -724,6 +725,33 @@ void __init alternative_instructions(void)
+ 	 * patching.
+ 	 */
  
--#define ALT_ENTRY_SIZE		13
-+#define ALT_ENTRY_SIZE		14
- #define ALT_ORIG_OFFSET		0
- #define ALT_NEW_OFFSET		4
- #define ALT_FEATURE_OFFSET	8
--#define ALT_ORIG_LEN_OFFSET	10
--#define ALT_NEW_LEN_OFFSET	11
-+#define ALT_ORIG_LEN_OFFSET	11
-+#define ALT_NEW_LEN_OFFSET	12
++	/*
++	 * Paravirt patching and alternative patching can be combined to
++	 * replace a function call with a short direct code sequence (e.g.
++	 * by setting a constant return value instead of doing that in an
++	 * external function).
++	 * In order to make this work the following sequence is required:
++	 * 1. set (artificial) features depending on used paravirt
++	 *    functions which can later influence alternative patching
++	 * 2. apply paravirt patching (generally replacing an indirect
++	 *    function call with a direct one)
++	 * 3. apply alternative patching (e.g. replacing a direct function
++	 *    call with a custom code sequence)
++	 * Doing paravirt patching after alternative patching would clobber
++	 * the optimization of the custom code with a function call again.
++	 */
++	paravirt_set_cap();
++
++	/*
++	 * First patch paravirt functions, such that we overwrite the indirect
++	 * call with the direct call.
++	 */
++	apply_paravirt(__parainstructions, __parainstructions_end);
++
++	/*
++	 * Then patch alternatives, such that those paravirt calls that are in
++	 * alternatives can be overwritten by their immediate fragments.
++	 */
+ 	apply_alternatives(__alt_instructions, __alt_instructions_end);
  
- #endif /* _X86_ARCH_SPECIAL_H */
+ #ifdef CONFIG_SMP
+@@ -742,8 +770,6 @@ void __init alternative_instructions(void)
+ 	}
+ #endif
+ 
+-	apply_paravirt(__parainstructions, __parainstructions_end);
+-
+ 	restart_nmi();
+ 	alternatives_patched = 1;
+ }
+diff --git a/arch/x86/kernel/paravirt-spinlocks.c b/arch/x86/kernel/paravirt-spinlocks.c
+index 4f75d0cf6305..9e1ea99ad9df 100644
+--- a/arch/x86/kernel/paravirt-spinlocks.c
++++ b/arch/x86/kernel/paravirt-spinlocks.c
+@@ -32,3 +32,12 @@ bool pv_is_native_vcpu_is_preempted(void)
+ 	return pv_ops.lock.vcpu_is_preempted.func ==
+ 		__raw_callee_save___native_vcpu_is_preempted;
+ }
++
++void __init paravirt_set_cap(void)
++{
++	if (!pv_is_native_spin_unlock())
++		setup_force_cpu_cap(X86_FEATURE_PVUNLOCK);
++
++	if (!pv_is_native_vcpu_is_preempted())
++		setup_force_cpu_cap(X86_FEATURE_VCPUPREEMPT);
++}
 -- 
 2.26.2
 
