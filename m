@@ -2,45 +2,44 @@ Return-Path: <SRS0=fV0s=IG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41B04C433DB
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4042C433E6
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D667B651C3
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D667B651C3
+	by mail.kernel.org (Postfix) with ESMTPS id 66587651C9
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66587651C9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.94855.178739 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.94856.178752 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJF0S-00050e-BY; Mon, 08 Mar 2021 12:29:04 +0000
+	id 1lJF0V-00056P-Nc; Mon, 08 Mar 2021 12:29:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 94855.178739; Mon, 08 Mar 2021 12:29:04 +0000
+Received: by outflank-mailman (output) from mailman id 94856.178752; Mon, 08 Mar 2021 12:29:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJF0S-00050U-7K; Mon, 08 Mar 2021 12:29:04 +0000
-Received: by outflank-mailman (input) for mailman id 94855;
- Mon, 08 Mar 2021 12:29:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lJF0V-00056A-JF; Mon, 08 Mar 2021 12:29:07 +0000
+Received: by outflank-mailman (input) for mailman id 94856;
+ Mon, 08 Mar 2021 12:29:06 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7wcm=IG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJF0R-0004oO-2d
- for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 12:29:03 +0000
+ id 1lJF0U-0004nW-AG
+ for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 12:29:06 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9751bea7-d149-4868-944a-b0cebfa6788f;
- Mon, 08 Mar 2021 12:28:51 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 26545cf8-4a4f-41b9-bb9f-1b7c120a9b36;
+ Mon, 08 Mar 2021 12:28:52 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 18F67ADDB;
- Mon,  8 Mar 2021 12:28:51 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id EE520ADCD;
+ Mon,  8 Mar 2021 12:28:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,172 +51,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9751bea7-d149-4868-944a-b0cebfa6788f
+X-Inumbo-ID: 26545cf8-4a4f-41b9-bb9f-1b7c120a9b36
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1615206531; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vgl/JWA4fVb0I9JhPSVrr1rdgr2fz1+oJzHmt6wTrys=;
-	b=IWQn5cuqU2UPwrvfspsUqOhx29PSjVJw4RuGFmrLMSTlFouMQ4xwDjTaMmeAD142p7nT0v
-	WJpVNKOvvPuwCR8xEMmTgvOVqAeIrFfE5wrCBCr+RJ5bClt+DSDGM5LYtOKOtB3x3g1+ls
-	+Rjb2ccVbkKmq78oF1XMjKG+Dz5eRMY=
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=Pj0+lsoXMYSDviFMNu3CfGDulAqhBZd0duxurV0jt/k=;
+	b=ullbjypHk4a2OSdXRZBXV7LzXx1wRPq0P3DUkuf3g00TxnX2Kvmikn2mvZgT5yu1bK+GT9
+	Pb18L02feaPu+UmwjPoQNvBkbpJDORl8H6ArZ/XWAobYvxZmsd1kHtOeWcA3mN+bVvHI/I
+	evXt2ltyGZ054ZgETkOoGM4IjjxGEog=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
 	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
+	x86@kernel.org,
+	virtualization@lists.linux-foundation.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-hyperv@vger.kernel.org,
+	kvm@vger.kernel.org,
+	clang-built-linux@googlegroups.com
 Cc: Juergen Gross <jgross@suse.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Josh Poimboeuf <jpoimboe@redhat.com>,
+	Jason Baron <jbaron@akamai.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Deep Shah <sdeep@vmware.com>,
+	"VMware, Inc." <pv-drivers@vmware.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Deep Shah <sdeep@vmware.com>,
-	"VMware, Inc." <pv-drivers@vmware.com>
-Subject: [PATCH v5 06/12] x86: add new features for paravirt patching
-Date: Mon,  8 Mar 2021 13:28:38 +0100
-Message-Id: <20210308122844.30488-7-jgross@suse.com>
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Wanpeng Li <wanpengli@tencent.com>,
+	Jim Mattson <jmattson@google.com>,
+	Joerg Roedel <joro@8bytes.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Andy Lutomirski <luto@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nick Desaulniers <ndesaulniers@google.com>
+Subject: [PATCH v5 00/12] x86: major paravirt cleanup
+Date: Mon,  8 Mar 2021 13:28:32 +0100
+Message-Id: <20210308122844.30488-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210308122844.30488-1-jgross@suse.com>
-References: <20210308122844.30488-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-For being able to switch paravirt patching from special cased custom
-code sequences to ALTERNATIVE handling some X86_FEATURE_* are needed
-as new features. This enables to have the standard indirect pv call
-as the default code and to patch that with the non-Xen custom code
-sequence via ALTERNATIVE patching later.
+This is a major cleanup of the paravirt infrastructure aiming at
+eliminating all custom code patching via paravirt patching.
 
-Make sure paravirt patching is performed before alternative patching.
+This is achieved by using ALTERNATIVE instead, leading to the ability
+to give objtool access to the patched in instructions.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V3:
-- add comment (Boris Petkov)
-- no negative features (Boris Petkov)
-V4:
-- move paravirt_set_cap() to paravirt-spinlocks.c
----
- arch/x86/include/asm/cpufeatures.h   |  2 ++
- arch/x86/include/asm/paravirt.h      | 10 ++++++++++
- arch/x86/kernel/alternative.c        | 30 ++++++++++++++++++++++++++--
- arch/x86/kernel/paravirt-spinlocks.c |  9 +++++++++
- 4 files changed, 49 insertions(+), 2 deletions(-)
+In order to remove most of the 32-bit special handling from pvops the
+time related operations are switched to use static_call() instead.
 
-diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
-index cc96e26d69f7..b440c950246d 100644
---- a/arch/x86/include/asm/cpufeatures.h
-+++ b/arch/x86/include/asm/cpufeatures.h
-@@ -236,6 +236,8 @@
- #define X86_FEATURE_EPT_AD		( 8*32+17) /* Intel Extended Page Table access-dirty bit */
- #define X86_FEATURE_VMCALL		( 8*32+18) /* "" Hypervisor supports the VMCALL instruction */
- #define X86_FEATURE_VMW_VMMCALL		( 8*32+19) /* "" VMware prefers VMMCALL hypercall instruction */
-+#define X86_FEATURE_PVUNLOCK		( 8*32+20) /* "" PV unlock function */
-+#define X86_FEATURE_VCPUPREEMPT		( 8*32+21) /* "" PV vcpu_is_preempted function */
- 
- /* Intel-defined CPU features, CPUID level 0x00000007:0 (EBX), word 9 */
- #define X86_FEATURE_FSGSBASE		( 9*32+ 0) /* RDFSBASE, WRFSBASE, RDGSBASE, WRGSBASE instructions*/
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 1e45b46fae84..8c354099d9c3 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -47,6 +47,10 @@ static inline u64 paravirt_steal_clock(int cpu)
- 	return static_call(pv_steal_clock)(cpu);
- }
- 
-+#ifdef CONFIG_PARAVIRT_SPINLOCKS
-+void __init paravirt_set_cap(void);
-+#endif
-+
- /* The paravirtualized I/O functions */
- static inline void slow_down_io(void)
- {
-@@ -811,5 +815,11 @@ static inline void paravirt_arch_exit_mmap(struct mm_struct *mm)
- {
- }
- #endif
-+
-+#ifndef CONFIG_PARAVIRT_SPINLOCKS
-+static inline void paravirt_set_cap(void)
-+{
-+}
-+#endif
- #endif /* __ASSEMBLY__ */
- #endif /* _ASM_X86_PARAVIRT_H */
-diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 1296a90aa5b8..ab9ad729fc5a 100644
---- a/arch/x86/kernel/alternative.c
-+++ b/arch/x86/kernel/alternative.c
-@@ -28,6 +28,7 @@
- #include <asm/insn.h>
- #include <asm/io.h>
- #include <asm/fixmap.h>
-+#include <asm/paravirt.h>
- 
- int __read_mostly alternatives_patched;
- 
-@@ -724,6 +725,33 @@ void __init alternative_instructions(void)
- 	 * patching.
- 	 */
- 
-+	/*
-+	 * Paravirt patching and alternative patching can be combined to
-+	 * replace a function call with a short direct code sequence (e.g.
-+	 * by setting a constant return value instead of doing that in an
-+	 * external function).
-+	 * In order to make this work the following sequence is required:
-+	 * 1. set (artificial) features depending on used paravirt
-+	 *    functions which can later influence alternative patching
-+	 * 2. apply paravirt patching (generally replacing an indirect
-+	 *    function call with a direct one)
-+	 * 3. apply alternative patching (e.g. replacing a direct function
-+	 *    call with a custom code sequence)
-+	 * Doing paravirt patching after alternative patching would clobber
-+	 * the optimization of the custom code with a function call again.
-+	 */
-+	paravirt_set_cap();
-+
-+	/*
-+	 * First patch paravirt functions, such that we overwrite the indirect
-+	 * call with the direct call.
-+	 */
-+	apply_paravirt(__parainstructions, __parainstructions_end);
-+
-+	/*
-+	 * Then patch alternatives, such that those paravirt calls that are in
-+	 * alternatives can be overwritten by their immediate fragments.
-+	 */
- 	apply_alternatives(__alt_instructions, __alt_instructions_end);
- 
- #ifdef CONFIG_SMP
-@@ -742,8 +770,6 @@ void __init alternative_instructions(void)
- 	}
- #endif
- 
--	apply_paravirt(__parainstructions, __parainstructions_end);
--
- 	restart_nmi();
- 	alternatives_patched = 1;
- }
-diff --git a/arch/x86/kernel/paravirt-spinlocks.c b/arch/x86/kernel/paravirt-spinlocks.c
-index 4f75d0cf6305..9e1ea99ad9df 100644
---- a/arch/x86/kernel/paravirt-spinlocks.c
-+++ b/arch/x86/kernel/paravirt-spinlocks.c
-@@ -32,3 +32,12 @@ bool pv_is_native_vcpu_is_preempted(void)
- 	return pv_ops.lock.vcpu_is_preempted.func ==
- 		__raw_callee_save___native_vcpu_is_preempted;
- }
-+
-+void __init paravirt_set_cap(void)
-+{
-+	if (!pv_is_native_spin_unlock())
-+		setup_force_cpu_cap(X86_FEATURE_PVUNLOCK);
-+
-+	if (!pv_is_native_vcpu_is_preempted())
-+		setup_force_cpu_cap(X86_FEATURE_VCPUPREEMPT);
-+}
+At the end of this series all paravirt patching has to do is to
+replace indirect calls with direct ones. In a further step this could
+be switched to static_call(), too.
+
+Changes in V5:
+- patches 1-5 of V4 dropped, as already applied
+- new patches 1+3
+- fixed patch 2
+- split V4 patch 8 into patches 4+5
+- use flag byte instead of negative feature bit for "not feature"
+
+Changes in V4:
+- fixed several build failures
+- removed objtool patch, as objtool patches are in tip now
+- added patch 1 for making usage of static_call easier
+- even more cleanup
+
+Changes in V3:
+- added patches 7 and 12
+- addressed all comments
+
+Changes in V2:
+- added patches 5-12
+
+Juergen Gross (12):
+  staticcall: move struct static_call_key definition to
+    static_call_types.h
+  x86/paravirt: switch time pvops functions to use static_call()
+  x86/alternative: drop feature parameter from ALTINSTR_REPLACEMENT()
+  x86/alternative: support not-feature
+  x86/alternative: support ALTERNATIVE_TERNARY
+  x86: add new features for paravirt patching
+  x86/paravirt: remove no longer needed 32-bit pvops cruft
+  x86/paravirt: simplify paravirt macros
+  x86/paravirt: switch iret pvops to ALTERNATIVE
+  x86/paravirt: add new macros PVOP_ALT* supporting pvops in
+    ALTERNATIVEs
+  x86/paravirt: switch functions with custom code to ALTERNATIVE
+  x86/paravirt: have only one paravirt patch function
+
+ arch/arm/include/asm/paravirt.h               |  14 +-
+ arch/arm/kernel/paravirt.c                    |   9 +-
+ arch/arm64/include/asm/paravirt.h             |  14 +-
+ arch/arm64/kernel/paravirt.c                  |  13 +-
+ arch/x86/Kconfig                              |   1 +
+ arch/x86/entry/entry_32.S                     |   4 +-
+ arch/x86/entry/entry_64.S                     |   2 +-
+ arch/x86/include/asm/alternative-asm.h        |  10 +
+ arch/x86/include/asm/alternative.h            |  28 ++-
+ arch/x86/include/asm/cpufeature.h             |   2 +
+ arch/x86/include/asm/cpufeatures.h            |   2 +
+ arch/x86/include/asm/irqflags.h               |   7 +-
+ arch/x86/include/asm/mshyperv.h               |   2 +-
+ arch/x86/include/asm/paravirt.h               | 167 +++++++-------
+ arch/x86/include/asm/paravirt_types.h         | 210 +++++++-----------
+ arch/x86/kernel/Makefile                      |   3 +-
+ arch/x86/kernel/alternative.c                 |  37 ++-
+ arch/x86/kernel/asm-offsets.c                 |   7 -
+ arch/x86/kernel/cpu/vmware.c                  |   5 +-
+ arch/x86/kernel/kvm.c                         |   2 +-
+ arch/x86/kernel/kvmclock.c                    |   2 +-
+ arch/x86/kernel/paravirt-spinlocks.c          |   9 +
+ arch/x86/kernel/paravirt.c                    |  78 ++-----
+ arch/x86/kernel/paravirt_patch.c              |  99 ---------
+ arch/x86/kernel/tsc.c                         |   2 +-
+ arch/x86/xen/enlighten_pv.c                   |   4 +-
+ arch/x86/xen/time.c                           |  11 +-
+ drivers/xen/time.c                            |   3 +-
+ include/linux/static_call.h                   |  18 --
+ include/linux/static_call_types.h             |  18 ++
+ tools/include/linux/static_call_types.h       |  18 ++
+ tools/objtool/arch/x86/include/arch/special.h |   6 +-
+ 32 files changed, 339 insertions(+), 468 deletions(-)
+ delete mode 100644 arch/x86/kernel/paravirt_patch.c
+
 -- 
 2.26.2
 
