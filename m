@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8F1DC433E6
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 782B8C433E9
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 310BA651CC
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 310BA651CC
+	by mail.kernel.org (Postfix) with ESMTPS id 1DBD0651C9
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 12:29:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DBD0651C9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.94850.178680 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.94851.178692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJF0G-0004ni-Km; Mon, 08 Mar 2021 12:28:52 +0000
+	id 1lJF0I-0004oo-Sf; Mon, 08 Mar 2021 12:28:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 94850.178680; Mon, 08 Mar 2021 12:28:52 +0000
+Received: by outflank-mailman (output) from mailman id 94851.178692; Mon, 08 Mar 2021 12:28:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJF0G-0004nb-HW; Mon, 08 Mar 2021 12:28:52 +0000
-Received: by outflank-mailman (input) for mailman id 94850;
- Mon, 08 Mar 2021 12:28:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lJF0I-0004oh-PZ; Mon, 08 Mar 2021 12:28:54 +0000
+Received: by outflank-mailman (input) for mailman id 94851;
+ Mon, 08 Mar 2021 12:28:53 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7wcm=IG=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJF0F-0004nW-GS
- for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 12:28:51 +0000
+ id 1lJF0H-0004oO-6w
+ for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 12:28:53 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0e7878a4-9810-4479-a6a5-d109f8b3cb83;
- Mon, 08 Mar 2021 12:28:50 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b196f617-02a3-4284-99b5-d6ceabb29440;
+ Mon, 08 Mar 2021 12:28:51 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 74BD8AC54;
- Mon,  8 Mar 2021 12:28:49 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id C40CCAD87;
+ Mon,  8 Mar 2021 12:28:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,176 +52,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e7878a4-9810-4479-a6a5-d109f8b3cb83
+X-Inumbo-ID: b196f617-02a3-4284-99b5-d6ceabb29440
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615206529; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1615206530; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=lwxA20SDAEyST3opQlZ9hzTp/g3xcLqoUnJ7P0MzmB8=;
-	b=kmRTs4o4dKYOCNahWofrTsHkMs5Gn8Terd0KSrZvSTOOBy7owvGGeZY807SznPlwAkR3a/
-	a71lIVLaLdAEzRCGid6ouhfLLyJn/Vne51eTP0zd71MmLqVDYi/Dn4w8UzfXNSxpJ4DKBJ
-	m7bLZGEGLx01xgYEampZFgNDLEk/k+c=
+	bh=AmZ4aGz4K80se4EUVR17Db7xntpSeR5C5fS3BvWpgIw=;
+	b=CH99PWZ6ZOyR+G56mFI3ckGT68QOmth2XBLqlfe/znAM4Wb0+aLF09fpeVepRlHbQarYYZ
+	o4yVIMUg2zb+04V9sgrVLq25zJCu4+3PefC+WqkAi4Rlb5tOlCcpKYje4T7Xs74C7OwHcG
+	WujYX2oZUDeIqS8/KmYx5I76ekDmLWE=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
+	x86@kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Josh Poimboeuf <jpoimboe@redhat.com>,
-	Jason Baron <jbaron@akamai.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ard Biesheuvel <ardb@kernel.org>
-Subject: [PATCH v5 01/12] staticcall: move struct static_call_key definition to static_call_types.h
-Date: Mon,  8 Mar 2021 13:28:33 +0100
-Message-Id: <20210308122844.30488-2-jgross@suse.com>
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v5 05/12] x86/alternative: support ALTERNATIVE_TERNARY
+Date: Mon,  8 Mar 2021 13:28:37 +0100
+Message-Id: <20210308122844.30488-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210308122844.30488-1-jgross@suse.com>
 References: <20210308122844.30488-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Having the definition of static_call() in static_call_types.h makes
-no sense as long struct static_call_key isn't defined there, as the
-generic implementation of static_call() is referencing this structure.
+Add ALTERNATIVE_TERNARY support for replacing an initial instruction
+with either of two instructions depending on a feature:
 
-So move the definition of struct static_call_key to static_call_types.h.
+  ALTERNATIVE_TERNARY "default_instr", FEATURE_NR,
+                      "feature_on_instr", "feature_off_instr"
+
+which will start with "default_instr" and at patch time will, depending
+on FEATURE_NR being set or not, patch that with either
+"feature_on_instr" or "feature_off_instr".
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V5:
+V3:
 - new patch
+V4:
+- use X86_FEATURE_ALWAYS instead of negated feature (Boris Petkov)
+- unfortunately this isn't enough to get rid of the "not feature"
+  support, as this is needed in the patch "x86/paravirt: switch
+  functions with custom code to ALTERNATIVE", too
+V5:
+- carve out the "not feature" part
 ---
- include/linux/static_call.h             | 18 ------------------
- include/linux/static_call_types.h       | 18 ++++++++++++++++++
- tools/include/linux/static_call_types.h | 18 ++++++++++++++++++
- 3 files changed, 36 insertions(+), 18 deletions(-)
+ arch/x86/include/asm/alternative-asm.h | 4 ++++
+ arch/x86/include/asm/alternative.h     | 6 ++++++
+ 2 files changed, 10 insertions(+)
 
-diff --git a/include/linux/static_call.h b/include/linux/static_call.h
-index 85ecc789f4ff..76b881259144 100644
---- a/include/linux/static_call.h
-+++ b/include/linux/static_call.h
-@@ -128,16 +128,6 @@ struct static_call_mod {
- 	struct static_call_site *sites;
- };
+diff --git a/arch/x86/include/asm/alternative-asm.h b/arch/x86/include/asm/alternative-asm.h
+index 9a1763550217..ba0aad81d3bb 100644
+--- a/arch/x86/include/asm/alternative-asm.h
++++ b/arch/x86/include/asm/alternative-asm.h
+@@ -115,6 +115,10 @@
+ 	.popsection
+ .endm
  
--struct static_call_key {
--	void *func;
--	union {
--		/* bit 0: 0 = mods, 1 = sites */
--		unsigned long type;
--		struct static_call_mod *mods;
--		struct static_call_site *sites;
--	};
--};
--
- /* For finding the key associated with a trampoline */
- struct static_call_tramp_key {
- 	s32 tramp;
-@@ -187,10 +177,6 @@ extern long __static_call_return0(void);
- 
- static inline int static_call_init(void) { return 0; }
- 
--struct static_call_key {
--	void *func;
--};
--
- #define __DEFINE_STATIC_CALL(name, _func, _func_init)			\
- 	DECLARE_STATIC_CALL(name, _func);				\
- 	struct static_call_key STATIC_CALL_KEY(name) = {		\
-@@ -243,10 +229,6 @@ static inline long __static_call_return0(void)
- 
- static inline int static_call_init(void) { return 0; }
- 
--struct static_call_key {
--	void *func;
--};
--
- static inline long __static_call_return0(void)
- {
- 	return 0;
-diff --git a/include/linux/static_call_types.h b/include/linux/static_call_types.h
-index ae5662d368b9..5a00b8b2cf9f 100644
---- a/include/linux/static_call_types.h
-+++ b/include/linux/static_call_types.h
-@@ -58,11 +58,25 @@ struct static_call_site {
- 	__raw_static_call(name);					\
- })
- 
-+struct static_call_key {
-+	void *func;
-+	union {
-+		/* bit 0: 0 = mods, 1 = sites */
-+		unsigned long type;
-+		struct static_call_mod *mods;
-+		struct static_call_site *sites;
-+	};
-+};
++#define ALTERNATIVE_TERNARY(oldinstr, feature, newinstr1, newinstr2)	\
++	ALTERNATIVE_2 oldinstr, newinstr2, X86_FEATURE_ALWAYS,		\
++	newinstr1, feature
 +
- #else /* !CONFIG_HAVE_STATIC_CALL_INLINE */
+ #endif  /*  __ASSEMBLY__  */
  
- #define __STATIC_CALL_ADDRESSABLE(name)
- #define __static_call(name)	__raw_static_call(name)
+ #endif /* _ASM_X86_ALTERNATIVE_ASM_H */
+diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
+index b9749cf21ada..693991f8fe89 100644
+--- a/arch/x86/include/asm/alternative.h
++++ b/arch/x86/include/asm/alternative.h
+@@ -183,6 +183,9 @@ static inline int alternatives_text_reserved(void *start, void *end)
+ 	ALTINSTR_REPLACEMENT(newinstr2, 2)				\
+ 	".popsection\n"
  
-+struct static_call_key {
-+	void *func;
-+};
++#define ALTERNATIVE_TERNARY(oldinstr, feature, newinstr1, newinstr2)	\
++	ALTERNATIVE_2(oldinstr, newinstr2, X86_FEATURE_ALWAYS, newinstr1, feature)
 +
- #endif /* CONFIG_HAVE_STATIC_CALL_INLINE */
+ #define ALTERNATIVE_3(oldinsn, newinsn1, feat1, newinsn2, feat2, newinsn3, feat3) \
+ 	OLDINSTR_3(oldinsn, 1, 2, 3)						\
+ 	".pushsection .altinstructions,\"a\"\n"					\
+@@ -214,6 +217,9 @@ static inline int alternatives_text_reserved(void *start, void *end)
+ #define alternative_2(oldinstr, newinstr1, feature1, newinstr2, feature2) \
+ 	asm_inline volatile(ALTERNATIVE_2(oldinstr, newinstr1, feature1, newinstr2, feature2) ::: "memory")
  
- #ifdef MODULE
-@@ -77,6 +91,10 @@ struct static_call_site {
- 
- #else
- 
-+struct static_call_key {
-+	void *func;
-+};
++#define alternative_ternary(oldinstr, feature, newinstr1, newinstr2)	\
++	asm_inline volatile(ALTERNATIVE_TERNARY(oldinstr, feature, newinstr1, newinstr2) ::: "memory")
 +
- #define static_call(name)						\
- 	((typeof(STATIC_CALL_TRAMP(name))*)(STATIC_CALL_KEY(name).func))
- 
-diff --git a/tools/include/linux/static_call_types.h b/tools/include/linux/static_call_types.h
-index ae5662d368b9..5a00b8b2cf9f 100644
---- a/tools/include/linux/static_call_types.h
-+++ b/tools/include/linux/static_call_types.h
-@@ -58,11 +58,25 @@ struct static_call_site {
- 	__raw_static_call(name);					\
- })
- 
-+struct static_call_key {
-+	void *func;
-+	union {
-+		/* bit 0: 0 = mods, 1 = sites */
-+		unsigned long type;
-+		struct static_call_mod *mods;
-+		struct static_call_site *sites;
-+	};
-+};
-+
- #else /* !CONFIG_HAVE_STATIC_CALL_INLINE */
- 
- #define __STATIC_CALL_ADDRESSABLE(name)
- #define __static_call(name)	__raw_static_call(name)
- 
-+struct static_call_key {
-+	void *func;
-+};
-+
- #endif /* CONFIG_HAVE_STATIC_CALL_INLINE */
- 
- #ifdef MODULE
-@@ -77,6 +91,10 @@ struct static_call_site {
- 
- #else
- 
-+struct static_call_key {
-+	void *func;
-+};
-+
- #define static_call(name)						\
- 	((typeof(STATIC_CALL_TRAMP(name))*)(STATIC_CALL_KEY(name).func))
- 
+ /*
+  * Alternative inline assembly with input.
+  *
 -- 
 2.26.2
 
