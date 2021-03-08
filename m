@@ -2,70 +2,49 @@ Return-Path: <SRS0=fV0s=IG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9A36C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 20:34:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28DC8C433E9
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 21:02:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 674AD65272
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 20:34:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 674AD65272
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	by mail.kernel.org (Postfix) with ESMTPS id DC4EA652B6
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Mar 2021 21:02:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC4EA652B6
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95077.179340 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95081.179364 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJMZZ-0003gN-Bd; Mon, 08 Mar 2021 20:33:49 +0000
+	id 1lJN1J-0006Qc-0A; Mon, 08 Mar 2021 21:02:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95077.179340; Mon, 08 Mar 2021 20:33:49 +0000
+Received: by outflank-mailman (output) from mailman id 95081.179364; Mon, 08 Mar 2021 21:02:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJMZZ-0003gG-8b; Mon, 08 Mar 2021 20:33:49 +0000
-Received: by outflank-mailman (input) for mailman id 95077;
- Mon, 08 Mar 2021 20:33:48 +0000
+	id 1lJN1I-0006QU-Sv; Mon, 08 Mar 2021 21:02:28 +0000
+Received: by outflank-mailman (input) for mailman id 95081;
+ Mon, 08 Mar 2021 21:02:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cDqk=IG=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1lJMZX-0003gB-Q0
- for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 20:33:47 +0000
-Received: from userp2120.oracle.com (unknown [156.151.31.85])
+ <SRS0=odrr=IG=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1lJN1H-0006P0-Hx
+ for xen-devel@lists.xenproject.org; Mon, 08 Mar 2021 21:02:27 +0000
+Received: from mail-qv1-xf2f.google.com (unknown [2607:f8b0:4864:20::f2f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c939548a-3423-4033-b9a0-8a1e0a528203;
- Mon, 08 Mar 2021 20:33:46 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 128KTV7p153061;
- Mon, 8 Mar 2021 20:33:41 GMT
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2120.oracle.com with ESMTP id 3742cn50n6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 08 Mar 2021 20:33:41 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 128KVPfQ103050;
- Mon, 8 Mar 2021 20:33:41 GMT
-Received: from nam04-sn1-obe.outbound.protection.outlook.com
- (mail-sn1nam04lp2054.outbound.protection.outlook.com [104.47.44.54])
- by aserp3020.oracle.com with ESMTP id 374kmxfu46-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 08 Mar 2021 20:33:40 +0000
-Received: from BYAPR10MB3288.namprd10.prod.outlook.com (2603:10b6:a03:156::21)
- by BYAPR10MB2728.namprd10.prod.outlook.com (2603:10b6:a02:b9::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19; Mon, 8 Mar
- 2021 20:33:39 +0000
-Received: from BYAPR10MB3288.namprd10.prod.outlook.com
- ([fe80::f489:4e25:63e0:c721]) by BYAPR10MB3288.namprd10.prod.outlook.com
- ([fe80::f489:4e25:63e0:c721%7]) with mapi id 15.20.3912.027; Mon, 8 Mar 2021
- 20:33:39 +0000
-Received: from [10.74.106.64] (138.3.200.0) by
- SA0PR13CA0025.namprd13.prod.outlook.com (2603:10b6:806:130::30) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.22 via Frontend
- Transport; Mon, 8 Mar 2021 20:33:37 +0000
+ id 43aa06a6-76b4-4036-837e-7fcc27eb821d;
+ Mon, 08 Mar 2021 21:02:24 +0000 (UTC)
+Received: by mail-qv1-xf2f.google.com with SMTP id s17so5311941qvr.12
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Mar 2021 13:02:24 -0800 (PST)
+Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:a33e:daa7:46a1:a7eb])
+ by smtp.gmail.com with ESMTPSA id
+ r2sm8514070qti.4.2021.03.08.13.02.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Mar 2021 13:02:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -77,152 +56,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c939548a-3423-4033-b9a0-8a1e0a528203
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2020-01-29;
- bh=sfh4bTAv0pzzVgRm13LxdL0UG9lCgW8MA+UnVFVa5II=;
- b=D53UHi50/fVZS/Jcz/5qwp7YCiv29LOXYW4LKbKKRn7RVN49aC2zUQ+4LbpGUX6tn2QQ
- WLFhoaTMNkrcfWiXdh/0EU4ZvZVUcQR5u60QJ/DRILGb797/TrVe5yEjbeZY0sADs49f
- borj2KQJqxTt9xkah8v3pJP1ZMnMBvWK6HNa2/bOce62QHutc7L+YwsIifY4/79+UsSb
- hPj8rd5hQ1d6hTMEkg4n+FQJxHgjSudFU9Ynb2J2EKZtn9Ycm5Cwtmek22dzaTZ/eyYN
- uxpAYVcZtrkG3TKh9N9uqsUdAtUdKF0hl9U2NX1VrrHhui1r00gP/h42xMAQGpwcbB4A Vg== 
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=g+0BiV0H2HQJOgOK8QmRlz5ud817vLtBPhMN4Jszh1nBDmj9kPW3eA3EzVcOIGuGdlAaFgsZ1tHPIPY4dKioX+2LEveDwHb9C42YfnAvSYZcZH9YKW7B6oT1juRkuYucrGDr+DM3jtTzt6y3t9c0z/kabHCVzJPkZF1/kRWm+aJz2rqNzPnXJMPML89aVhF6qBi/Ozy6eHWrdqXhzIOGiGN0947Qk31PSWJzkx2vysnTo8RR8XCP7q9sdptqZMEWLHSIZrRf0vMZWNgxy77rBNf6RK0Vjg0R4Q9XlnSeMn4Z2ExE9BUT+8lMwnplM0n3PCZW0jNQDCmW8rFJmYztXA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sfh4bTAv0pzzVgRm13LxdL0UG9lCgW8MA+UnVFVa5II=;
- b=cCb9APGjKrVkBvJzhoTJeUQX5X9iqJ1voTS1NBsmzl4hA5zFShgEyCuCMHlEEw3k3XE3UnWyn3dRQEjX6mGpP5NxefEYEYjs7KNylVDRuWIH1YCjEz3ECdCJylze95kwTo5X33bckaW4qht2I9yrbhqMqUYjMQ87ojQvC8dLfxfR118uGO1ZV1SYHoYnoMOiqG3T84U3Qeue5ylNxCIFW8B6J+NK7b0VGuaXprD/4+lyBBd0UZiNVKyJsHYVdUG/7b7TzpyPrW4ZedInHoN2gE+yr1Q5PbH6yMzsVnPfF7ZVnTNIbhnwD9OS8M5KcDNvbOTtm9OWWDp37VSPmMyhWA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+X-Inumbo-ID: 43aa06a6-76b4-4036-837e-7fcc27eb821d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sfh4bTAv0pzzVgRm13LxdL0UG9lCgW8MA+UnVFVa5II=;
- b=wRRhexa8eTzrzBqBSTqLvC9DcJnMI2KnaZA/FNE+QOYcjQKsGMREXs/q8rD+qs+Os465dS25nga10bYZraSz8+At62Kd5kudUrp9RUKepLq+wiy2m1Z5mxhpGze72DBYzKxr1unO7sjqohFewbYD4zJklls6EuxJDM+Bla0F2FI=
-Authentication-Results: amazon.com; dkim=none (message not signed)
- header.d=none;amazon.com; dmarc=none action=none header.from=oracle.com;
-Subject: Re: [PATCH v4 2/3] xen/events: don't unmask an event channel when an
- eoi is pending
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
-        linux-kernel@vger.kernel.org, ross.lagerwall@citrix.com
-Cc: Stefano Stabellini <sstabellini@kernel.org>, stable@vger.kernel.org,
-        Julien Grall <julien@xen.org>, Julien Grall <jgrall@amazon.com>
-References: <20210306161833.4552-1-jgross@suse.com>
- <20210306161833.4552-3-jgross@suse.com>
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Message-ID: <ff9fb99f-12ca-c04e-e4bc-1b1c67381cc2@oracle.com>
-Date: Mon, 8 Mar 2021 15:33:33 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.1
-In-Reply-To: <20210306161833.4552-3-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-Originating-IP: [138.3.200.0]
-X-ClientProxiedBy: SA0PR13CA0025.namprd13.prod.outlook.com
- (2603:10b6:806:130::30) To BYAPR10MB3288.namprd10.prod.outlook.com
- (2603:10b6:a03:156::21)
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=AfcM/s05qxzInnDElTdSa2MUdrnaUTl8MKM2+TfWCVg=;
+        b=tbMhZo+C/23Qk6OTDzVt4ntvhwQITnUTwcsWvir9zh+CBlzBSXCq/rINAAzPFz88s6
+         sm65Or2at2PZwM9OyXMQBkwvz8WVbxSIi8kfNdy5sj5TjdAj724obPfg1aOCylj0FKMV
+         7HU1HUA1MV4DZdfHrDqsj2lX4xt+26nJvNA6K8iAXoZ/yAwryvCAwZXlZ/TY+eHBkMym
+         cADG9C92CEKCTjfN9HXLOPb2B4rgMDImokSiU72PRhEZbKf76RHdH2Bxrsos8D84pzuG
+         oDY4mZQNUJe3nzYoEJkCSQJbl/urs94V8KGdP05uslJ+02VO5KJ2kIFOrMW+NRGYzNTT
+         AwRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=AfcM/s05qxzInnDElTdSa2MUdrnaUTl8MKM2+TfWCVg=;
+        b=AF8PJwYNOfQysq/gVqLA2/myFhaxfGnCxo9hld4+TM3NnPh4sMiQ+juhUGBD/i9uaO
+         ecGMt13qk2anGvMu0mQO2XhwuHfIbjc8WFeLtgB7j1MwdZi4Hr5lIHnCSI4/T+JKQjTe
+         VogGNe0s6tOaq8AS/6FM61kNWxo5aynHaL1ebtS07czHWOzDS9v8vEtzGdMvk8kttr2V
+         +DZgioOlhBc2ra7qhU7EJH0cExudecf4v7HgLxfLNUVxd5O0hAWEPoB4L9pjfLPTnP3m
+         iAtsb12HUNfbs8UoKCGJevust8pgoR5Ta5EUfP9MxGgGU+h0I0EvcarsUyIbn4nbAHrf
+         BDxw==
+X-Gm-Message-State: AOAM5330DHGv78YR4Gqktex82hS0RjLYKh+Slj7yP8kIFaYJSMByfsk/
+	Eu4wB/r3t5NdaFRd11RR31oIKGFzvA4=
+X-Google-Smtp-Source: ABdhPJyHuwzAX6BTlMOiuZNdGKVNT28aymiqM3iA/I5EocSfeuPmVcrmGeqzJ7pR7YdpkQMQVDFKsg==
+X-Received: by 2002:ad4:4c0b:: with SMTP id bz11mr1818565qvb.4.1615237344305;
+        Mon, 08 Mar 2021 13:02:24 -0800 (PST)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: pawel@invisiblethingslab.com,
+	marmarek@invisiblethingslab.com,
+	Jason Andryuk <jandryuk@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [RFC 01/12] cpufreq: Allow restricting to internal governors only
+Date: Mon,  8 Mar 2021 16:01:59 -0500
+Message-Id: <20210308210210.116278-2-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20210308210210.116278-1-jandryuk@gmail.com>
+References: <20210308210210.116278-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0c6b90f5-001c-434f-67aa-08d8e27174a1
-X-MS-TrafficTypeDiagnostic: BYAPR10MB2728:
-X-Microsoft-Antispam-PRVS: 
-	<BYAPR10MB272805732535B091418B1ECE8A939@BYAPR10MB2728.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2150;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	MqrKX6HA9vF+ia18hPRRU99v9ZQz4XXiO3Ih2VhHEn/k2LeFJ9TYGtrXEGUq0P8ocVsEFirUM94WwoMYKuRP8euiXlYo08OP7anRMJo/oUsuSM/fpmX7Jx/YBpVVjgLib0/JOLDE9r8yOeu2+NhGAyZNGlWrLvrdg9fXJaGHkKBm9i20742LSNxy7D1SnCEzNoJZg3a49YyB3Z+jxvhyrfql4rkycGcm8WaPh6ehKyng4A3QPT7D+ei8rauhWYOlu4nBvlJJ6sBOSsgKnEM+mey+p2wmQoZGGSclFhOz8JRG7YD9EJf4ioGt/u7uKUulJYWbyEL0ueEJt0QsbJwNYEBWIOTBnjXJMfHGqms4PE4geUr5TGzMO+AHdw3WBwO1GwMXTaY/urTsJ5oOLAcyfcrf//Q19OxPNSNDZKiaqkj8rb/IWJmjq85n559T6A6aObuO/6kXA4eMC2n3TmC+tvpprNI7tb2SAXW/5+WG8Ck5NZ6xOOvVsUr3KVEZjQF4z6UkdPh5Rxn/J7l4T+6axIM+Zxvsmbq9X/ym88R7entTe5iNp6brwdocRvl9cciGDlfwo5opIvKKokmAroJjoP3fZP19VkbfwzjSzWmb88o=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3288.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(396003)(376002)(346002)(366004)(39860400002)(956004)(186003)(31696002)(2616005)(478600001)(83380400001)(316002)(66946007)(4326008)(66476007)(66556008)(8936002)(26005)(6666004)(16576012)(16526019)(8676002)(36756003)(54906003)(53546011)(5660300002)(2906002)(31686004)(4744005)(6486002)(86362001)(44832011)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 
-	=?utf-8?B?S0hFQ21HUFhZQXp0OE83dnRNdmpuNEV3V0lmYWx1TE5jTUxUTVlPT3BYb1Zn?=
- =?utf-8?B?SzZ4eWVFSWQxQ0dqajZxWHFHMGJBa1QyREsvcWo1Y2xkM09lZTdyUDhjdFps?=
- =?utf-8?B?dk9BZHNJNmhmSi9BazBBTXQzK2tPdnlqK2U3djB6M3pPNmM5WmtYaW92TWUv?=
- =?utf-8?B?VGExR21HWXJEZlFBN2VoeFJKdXMwSlRWZDcrRFRNeWU2M3JSUi9rNGphQ2lm?=
- =?utf-8?B?bVQ5ZzhWQTRsZVhCSEpPVFo0MXRxNmFFRDFsYmZmM2JMeG92M3B0QllBWW84?=
- =?utf-8?B?QjV6SHdIb0w2YkFxdkRIQlB2dFphOTRDYkthT0lXdlB2cVBkckxWdVhBOERs?=
- =?utf-8?B?NFBTQkdmSUFONTFmdnRLQktMMkdsS2I2WmNqcTJwRzdGdmx2cU1mbFVoWFFG?=
- =?utf-8?B?bFNPY0xSUjFEUEI4NE04UElwMzkxaUM5cUlnOUNBelZuVWR2UmRYN3VJVmN2?=
- =?utf-8?B?cmFxZ3NuV0UvR1dLb2xXTnF5TWs0UVg3UGgzWUcrdGttZ016QXBHc1VTSWU1?=
- =?utf-8?B?WXhVZFZTdmpoZnJSenV2R3ZXeVVwUC8rMlR3NlJPWi9UNjVVbk5QbTBLQUgv?=
- =?utf-8?B?eE9waGVuUHBpbHF1djdQcXU5MVR4UmpGeVR3eHdmZ2ZMdEVTUFkyNmpMb1lN?=
- =?utf-8?B?T2N4emlZTThSTkE0d0gySXoyMnpteHVRNkJUa0tCbWsvVHl3L0JpQjFYM2FE?=
- =?utf-8?B?TUY2dTVDZnlVTERLZEt5enduYVhLVlRFMGYveDFaMDU5UUxOdUlNVkhrcDlT?=
- =?utf-8?B?eFV6QW91L1JoNlptVmZMUHQ3RyszOWx2MHk1dXYwcVI5RHBmYWRGUzVZN1c1?=
- =?utf-8?B?QmY4TzdFamlWMnVPRlRpRFZ2eHkrdG9YUFY0Q3kvR1FrdzZYRHFUMUJPZkx6?=
- =?utf-8?B?L0ljZktPTGlUSEpRd2xFaHZjblVIQUpMRGl3UVFPY0JPcmp6TkNJMXZUcU42?=
- =?utf-8?B?VzZ5cHRMYmhGSis2cUFUR3NjamQvdXR3b0tpV0RPaW9DL2tURVNGZHBmL2FJ?=
- =?utf-8?B?eVJRT1F0UFRCd1U3K2VCTTVBSzBLaEpaKzl6cmMyWEdMT0ZMQmRPWXJDbkwz?=
- =?utf-8?B?Zi90eExVWWNUenZOU0FlZlJEQno3bHJxdDB3b0FhdndEZE9XU1JjaDhHbGZB?=
- =?utf-8?B?cjlqQUtZNm5QcE0wZ2Zvak01WlI5SlgwQy9xWHBmVi84TWhBMkNpdFF3OG9K?=
- =?utf-8?B?bGVaeDVXRkFxWHREeWtELzJObFI3ZUxGVGNOaFhUMnBrREhKR294NUVwVmdF?=
- =?utf-8?B?YnBKaDY1ZjlRZ0V2NnNuMXJnUElEUzJQcmdxcTZvODN3UFdHYjI4OW0vZ05t?=
- =?utf-8?B?UHJIS1FsV3BZSEw1TUlZYkNzTUo1S3BYc2RVUkdOcHVFeER0U09uMG5vcU96?=
- =?utf-8?B?ZzROazI3SklickhyenZaVnR5cW1YNkt5WStxYmgyZWZOWVMxeFRZd3JTQSt1?=
- =?utf-8?B?RVlXak1McXdidWY1dURKOHRHcy9nczRVUWlEOVN1Nng2Z2l0MmZZbHNMejVr?=
- =?utf-8?B?MVBTZ3lidDI0M0hkQzFqTU1RNXhvKzFyNlZXTlNrVGR6a0FCU2ZKM0JqMGtP?=
- =?utf-8?B?K2N2SzRvTFNQL2dIYlZZOFVGc3VkY2Y3U2VDeUwyeUFnL21OU2ljVXpPeFhO?=
- =?utf-8?B?M2FFTldaL3ZaOW5FcUV1cGxhVmxCRFN2Z2RiTDdsdnZVTFZWUVdPSURHMmJ0?=
- =?utf-8?B?R01ibnJmbUdTV3BQUStFUTdaQXBPOElkUzZCVzBVQTlnQjZveENwTjV0T2hZ?=
- =?utf-8?Q?AH1vbiBJb8S0q7b09AlgLrRjGu8lylV1S/jlSgG?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c6b90f5-001c-434f-67aa-08d8e27174a1
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3288.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2021 20:33:39.2519
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pl7VJxOi1ZWKq7QP/LBfqnR9ISM4Z4q8NhIP6UMNroaXOGvg4QVUx3NSFDEq3b08h+zkRwJ643twzkWeO/fV67ZTX6OAYCcIQRhEcoA+IHM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB2728
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9917 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 bulkscore=0 malwarescore=0
- spamscore=0 mlxlogscore=999 phishscore=0 adultscore=0 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2103080107
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9917 signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 suspectscore=0
- clxscore=1011 phishscore=0 adultscore=0 mlxlogscore=999 priorityscore=1501
- lowpriorityscore=0 bulkscore=0 mlxscore=0 impostorscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2103080107
+Content-Transfer-Encoding: 8bit
 
+For hwp, the standard governors are not usable, and only the internal
+one is applicable.  Add the cpufreq_governor_internal boolean to
+indicate when an internal governor, like hwp-internal, will be used.
+This is set during presmp_initcall, so that it can suppress governor
+registration during initcall.  Only a governor with a name containing
+"internal" will be allowed in that case.
 
-On 3/6/21 11:18 AM, Juergen Gross wrote:
-> An event channel should be kept masked when an eoi is pending for it.
-> When being migrated to another cpu it might be unmasked, though.
->
-> In order to avoid this keep three different flags for each event channel
-> to be able to distinguish "normal" masking/unmasking from eoi related
-> masking/unmasking and temporary masking. The event channel should only
-> be able to generate an interrupt if all flags are cleared.
->
-> Cc: stable@vger.kernel.org
-> Fixes: 54c9de89895e0a36047 ("xen/events: add a new late EOI evtchn framework")
-> Reported-by: Julien Grall <julien@xen.org>
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> Reviewed-by: Julien Grall <jgrall@amazon.com>
-> ---
-> V2:
-> - introduce a lock around masking/unmasking
-> - merge patch 3 into this one (Jan Beulich)
-> V4:
-> - don't set eoi masking flag in lateeoi_mask_ack_dynirq()
+This way, the unuseable governors are not registered, so they internal
+one is the only one returned to userspace.  This means incompatible
+governors won't be advertised to userspace.
 
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+ xen/drivers/cpufreq/cpufreq.c      | 4 ++++
+ xen/include/acpi/cpufreq/cpufreq.h | 1 +
+ 2 files changed, 5 insertions(+)
 
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-
-
-Ross, are you planning to test this?
-
-
--boris
-
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index e630a47419..b1f668b715 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -57,6 +57,7 @@ struct cpufreq_dom {
+ };
+ static LIST_HEAD_READ_MOSTLY(cpufreq_dom_list_head);
+ 
++bool __read_mostly cpufreq_governor_internal;
+ struct cpufreq_governor *__read_mostly cpufreq_opt_governor;
+ LIST_HEAD_READ_MOSTLY(cpufreq_governor_list);
+ 
+@@ -122,6 +123,9 @@ int __init cpufreq_register_governor(struct cpufreq_governor *governor)
+     if (!governor)
+         return -EINVAL;
+ 
++    if (cpufreq_governor_internal && strstr(governor->name, "internal") == NULL)
++        return -EINVAL;
++
+     if (__find_governor(governor->name) != NULL)
+         return -EEXIST;
+ 
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index e88b20bfed..56df5eebed 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -115,6 +115,7 @@ extern struct cpufreq_governor cpufreq_gov_dbs;
+ extern struct cpufreq_governor cpufreq_gov_userspace;
+ extern struct cpufreq_governor cpufreq_gov_performance;
+ extern struct cpufreq_governor cpufreq_gov_powersave;
++extern bool cpufreq_governor_internal;
+ 
+ extern struct list_head cpufreq_governor_list;
+ 
+-- 
+2.29.2
 
 
