@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C40DC43332
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B5FDC43381
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:48:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE6CD65243
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:48:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE6CD65243
+	by mail.kernel.org (Postfix) with ESMTPS id B369E65101
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:48:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B369E65101
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95413.180084 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95414.180096 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJcij-0003z9-S9; Tue, 09 Mar 2021 13:48:21 +0000
+	id 1lJcim-00040L-4I; Tue, 09 Mar 2021 13:48:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95413.180084; Tue, 09 Mar 2021 13:48:21 +0000
+Received: by outflank-mailman (output) from mailman id 95414.180096; Tue, 09 Mar 2021 13:48:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJcij-0003z2-P7; Tue, 09 Mar 2021 13:48:21 +0000
-Received: by outflank-mailman (input) for mailman id 95413;
- Tue, 09 Mar 2021 13:48:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lJcim-00040B-0z; Tue, 09 Mar 2021 13:48:24 +0000
+Received: by outflank-mailman (input) for mailman id 95414;
+ Tue, 09 Mar 2021 13:48:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jEQk=IH=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJcii-0003yx-Qy
- for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 13:48:20 +0000
+ id 1lJcik-0003zp-Fn
+ for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 13:48:22 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7619889b-bbcf-4c07-b37e-6cac559b238f;
- Tue, 09 Mar 2021 13:48:20 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2a1860f4-6cbd-4df3-b717-955e83e439e5;
+ Tue, 09 Mar 2021 13:48:21 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 329F5AC17;
- Tue,  9 Mar 2021 13:48:19 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 403ECAD72;
+ Tue,  9 Mar 2021 13:48:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,176 +51,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7619889b-bbcf-4c07-b37e-6cac559b238f
+X-Inumbo-ID: 2a1860f4-6cbd-4df3-b717-955e83e439e5
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615297699; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1615297700; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=lLz8EEkgsQbQc5zK5shQUpeWBQPCbxXPv1CJD4/GY5s=;
-	b=V9rLewRZsFpBl1/XMebrWwmjaGkfsV2llhnmLZXMNrI974R7XYC90NkWaxfzuPQahHLRV7
-	QYcLm6Y0TKWTsGJlbD4nAR0d1uWxj00iAlUqO1DXdmT043Yz6a/Kj/cH22/KXJwces9Oac
-	2m1T/gsMz7tida4po0YgsnFuzklP0Qk=
+	bh=ahQRIjhdqXiMH7Gh0LbxfuU+coM2Xg7I375ydZ/1bFA=;
+	b=GBMKwRz6DKjYuW/RxjuLrnbjyTUV/PQ2WKh98Pjh9rrIrjyiW1pF+Wgagq+0nKWLV7SuO6
+	lu9xKibwmx5qj6ngBrEliMhnJA8Q2guu+e90vxKo523+I6F7J1s6WfUfLOPpxT4DdXK3BG
+	OWEdwNxuKk3uNRro96+ZuX/fqMPmKzM=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
+	x86@kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Josh Poimboeuf <jpoimboe@redhat.com>,
-	Jason Baron <jbaron@akamai.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ard Biesheuvel <ardb@kernel.org>
-Subject: [PATCH v6 01/12] static_call: move struct static_call_key definition to static_call_types.h
-Date: Tue,  9 Mar 2021 14:48:02 +0100
-Message-Id: <20210309134813.23912-2-jgross@suse.com>
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v6 04/12] x86/alternative: support not-feature
+Date: Tue,  9 Mar 2021 14:48:05 +0100
+Message-Id: <20210309134813.23912-5-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210309134813.23912-1-jgross@suse.com>
 References: <20210309134813.23912-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Having the definition of static_call() in static_call_types.h makes
-no sense as long struct static_call_key isn't defined there, as the
-generic implementation of static_call() is referencing this structure.
+Add support for alternative patching for the case a feature is not
+present on the current cpu.
 
-So move the definition of struct static_call_key to static_call_types.h.
+For users of ALTERNATIVE() and friends an inverted feature is specified
+by applying the ALT_NOT() macro to it, e.g.:
+
+ALTERNATIVE(old, new, ALT_NOT(feature))
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
 V5:
-- new patch
+- split off from next patch
+- reworked to use flag byte (Boris Petkov)
+V6:
+- rework again to not use flag byte (Boris Petkov)
 ---
- include/linux/static_call.h             | 18 ------------------
- include/linux/static_call_types.h       | 18 ++++++++++++++++++
- tools/include/linux/static_call_types.h | 18 ++++++++++++++++++
- 3 files changed, 36 insertions(+), 18 deletions(-)
+ arch/x86/include/asm/alternative-asm.h |  3 +++
+ arch/x86/include/asm/alternative.h     |  3 +++
+ arch/x86/kernel/alternative.c          | 19 ++++++++++++++-----
+ 3 files changed, 20 insertions(+), 5 deletions(-)
 
-diff --git a/include/linux/static_call.h b/include/linux/static_call.h
-index 85ecc789f4ff..76b881259144 100644
---- a/include/linux/static_call.h
-+++ b/include/linux/static_call.h
-@@ -128,16 +128,6 @@ struct static_call_mod {
- 	struct static_call_site *sites;
- };
+diff --git a/arch/x86/include/asm/alternative-asm.h b/arch/x86/include/asm/alternative-asm.h
+index 464034db299f..3965daf0460e 100644
+--- a/arch/x86/include/asm/alternative-asm.h
++++ b/arch/x86/include/asm/alternative-asm.h
+@@ -6,6 +6,9 @@
  
--struct static_call_key {
--	void *func;
--	union {
--		/* bit 0: 0 = mods, 1 = sites */
--		unsigned long type;
--		struct static_call_mod *mods;
--		struct static_call_site *sites;
--	};
--};
--
- /* For finding the key associated with a trampoline */
- struct static_call_tramp_key {
- 	s32 tramp;
-@@ -187,10 +177,6 @@ extern long __static_call_return0(void);
+ #include <asm/asm.h>
  
- static inline int static_call_init(void) { return 0; }
- 
--struct static_call_key {
--	void *func;
--};
--
- #define __DEFINE_STATIC_CALL(name, _func, _func_init)			\
- 	DECLARE_STATIC_CALL(name, _func);				\
- 	struct static_call_key STATIC_CALL_KEY(name) = {		\
-@@ -243,10 +229,6 @@ static inline long __static_call_return0(void)
- 
- static inline int static_call_init(void) { return 0; }
- 
--struct static_call_key {
--	void *func;
--};
--
- static inline long __static_call_return0(void)
- {
- 	return 0;
-diff --git a/include/linux/static_call_types.h b/include/linux/static_call_types.h
-index ae5662d368b9..5a00b8b2cf9f 100644
---- a/include/linux/static_call_types.h
-+++ b/include/linux/static_call_types.h
-@@ -58,11 +58,25 @@ struct static_call_site {
- 	__raw_static_call(name);					\
- })
- 
-+struct static_call_key {
-+	void *func;
-+	union {
-+		/* bit 0: 0 = mods, 1 = sites */
-+		unsigned long type;
-+		struct static_call_mod *mods;
-+		struct static_call_site *sites;
-+	};
-+};
++#define ALTINSTR_FLAG_INV	(1 << 15)
++#define ALT_NOT(feat)		((feat) | ALTINSTR_FLAG_INV)
 +
- #else /* !CONFIG_HAVE_STATIC_CALL_INLINE */
+ #ifdef CONFIG_SMP
+ 	.macro LOCK_PREFIX
+ 672:	lock
+diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
+index 5753fb2ac489..89889618ae01 100644
+--- a/arch/x86/include/asm/alternative.h
++++ b/arch/x86/include/asm/alternative.h
+@@ -59,11 +59,14 @@ struct alt_instr {
+ 	s32 instr_offset;	/* original instruction */
+ 	s32 repl_offset;	/* offset to replacement instruction */
+ 	u16 cpuid;		/* cpuid bit set for replacement */
++#define ALTINSTR_FLAG_INV (1 << 15)
+ 	u8  instrlen;		/* length of original instruction */
+ 	u8  replacementlen;	/* length of new instruction */
+ 	u8  padlen;		/* length of build-time padding */
+ } __packed;
  
- #define __STATIC_CALL_ADDRESSABLE(name)
- #define __static_call(name)	__raw_static_call(name)
- 
-+struct static_call_key {
-+	void *func;
-+};
++#define ALT_NOT(feat)	((feat) | ALTINSTR_FLAG_INV)
 +
- #endif /* CONFIG_HAVE_STATIC_CALL_INLINE */
+ /*
+  * Debug flag that can be tested to see whether alternative
+  * instructions were patched in already:
+diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
+index 8d778e46725d..d8e669a1546f 100644
+--- a/arch/x86/kernel/alternative.c
++++ b/arch/x86/kernel/alternative.c
+@@ -388,21 +388,30 @@ void __init_or_module noinline apply_alternatives(struct alt_instr *start,
+ 	 */
+ 	for (a = start; a < end; a++) {
+ 		int insn_buff_sz = 0;
++		/* Mask away "NOT" flag bit for feature to test. */
++		u16 feature = a->cpuid & ~ALTINSTR_FLAG_INV;
  
- #ifdef MODULE
-@@ -77,6 +91,10 @@ struct static_call_site {
- 
- #else
- 
-+struct static_call_key {
-+	void *func;
-+};
+ 		instr = (u8 *)&a->instr_offset + a->instr_offset;
+ 		replacement = (u8 *)&a->repl_offset + a->repl_offset;
+ 		BUG_ON(a->instrlen > sizeof(insn_buff));
+-		BUG_ON(a->cpuid >= (NCAPINTS + NBUGINTS) * 32);
+-		if (!boot_cpu_has(a->cpuid)) {
++		BUG_ON(feature >= (NCAPINTS + NBUGINTS) * 32);
 +
- #define static_call(name)						\
- 	((typeof(STATIC_CALL_TRAMP(name))*)(STATIC_CALL_KEY(name).func))
++		/*
++		 * Drop out if either:
++		 * - feature not available, but required, or
++		 * - feature available, but NOT required
++		 */
++		if (!boot_cpu_has(feature) == !(a->cpuid & ALTINSTR_FLAG_INV)) {
+ 			if (a->padlen > 1)
+ 				optimize_nops(a, instr);
  
-diff --git a/tools/include/linux/static_call_types.h b/tools/include/linux/static_call_types.h
-index ae5662d368b9..5a00b8b2cf9f 100644
---- a/tools/include/linux/static_call_types.h
-+++ b/tools/include/linux/static_call_types.h
-@@ -58,11 +58,25 @@ struct static_call_site {
- 	__raw_static_call(name);					\
- })
+ 			continue;
+ 		}
  
-+struct static_call_key {
-+	void *func;
-+	union {
-+		/* bit 0: 0 = mods, 1 = sites */
-+		unsigned long type;
-+		struct static_call_mod *mods;
-+		struct static_call_site *sites;
-+	};
-+};
-+
- #else /* !CONFIG_HAVE_STATIC_CALL_INLINE */
- 
- #define __STATIC_CALL_ADDRESSABLE(name)
- #define __static_call(name)	__raw_static_call(name)
- 
-+struct static_call_key {
-+	void *func;
-+};
-+
- #endif /* CONFIG_HAVE_STATIC_CALL_INLINE */
- 
- #ifdef MODULE
-@@ -77,6 +91,10 @@ struct static_call_site {
- 
- #else
- 
-+struct static_call_key {
-+	void *func;
-+};
-+
- #define static_call(name)						\
- 	((typeof(STATIC_CALL_TRAMP(name))*)(STATIC_CALL_KEY(name).func))
+-		DPRINTK("feat: %d*32+%d, old: (%pS (%px) len: %d), repl: (%px, len: %d), pad: %d",
+-			a->cpuid >> 5,
+-			a->cpuid & 0x1f,
++		DPRINTK("feat: %s%d*32+%d, old: (%pS (%px) len: %d), repl: (%px, len: %d), pad: %d",
++			(a->cpuid & ALTINSTR_FLAG_INV) ? "!" : "",
++			feature >> 5,
++			feature & 0x1f,
+ 			instr, instr, a->instrlen,
+ 			replacement, a->replacementlen, a->padlen);
  
 -- 
 2.26.2
