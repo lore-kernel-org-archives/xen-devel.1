@@ -2,45 +2,42 @@ Return-Path: <SRS0=FTcr=IH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FD59C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A43D0C433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:54:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3696E650BD
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:49:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3696E650BD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 544C864F51
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 13:54:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 544C864F51
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95427.180228 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95438.180244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJcjJ-0004tL-2M; Tue, 09 Mar 2021 13:48:57 +0000
+	id 1lJcot-0006CW-1Q; Tue, 09 Mar 2021 13:54:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95427.180228; Tue, 09 Mar 2021 13:48:57 +0000
+Received: by outflank-mailman (output) from mailman id 95438.180244; Tue, 09 Mar 2021 13:54:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJcjI-0004t9-T7; Tue, 09 Mar 2021 13:48:56 +0000
-Received: by outflank-mailman (input) for mailman id 95427;
- Tue, 09 Mar 2021 13:48:55 +0000
+	id 1lJcos-0006CP-T6; Tue, 09 Mar 2021 13:54:42 +0000
+Received: by outflank-mailman (input) for mailman id 95438;
+ Tue, 09 Mar 2021 13:54:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jEQk=IH=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJcjH-0003yx-Nx
- for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 13:48:55 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eWC+=IH=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1lJcor-0006CK-N4
+ for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 13:54:41 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8b730f95-bd8a-4a68-9970-cc52293042a1;
- Tue, 09 Mar 2021 13:48:23 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8F848AE15;
- Tue,  9 Mar 2021 13:48:22 +0000 (UTC)
+ id d76b7dbf-fe7f-42e0-99c8-ffa6888d6a86;
+ Tue, 09 Mar 2021 13:54:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,502 +49,241 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b730f95-bd8a-4a68-9970-cc52293042a1
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615297702; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=d4ExMZPJQhPpnv6x0LBUpMruJTxKVMDPDTTcOV0zzwM=;
-	b=ijkz3iPh8dCqibcoZxTCFz3vwKvA0Yfny/egFKgPDoyJ0llIhby8i3vydZcsIK2asD+CdX
-	aFgh87ABYNgE34nI2wUnypL2xCdjovhQkwXSYqdXL3v8BPyN6273kD5z+HYmP+AyWillpx
-	lum4r6AOmEQZ8hTSxXbcqyFgRJ1cokM=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Deep Shah <sdeep@vmware.com>,
-	"VMware, Inc." <pv-drivers@vmware.com>,
-	Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH v6 11/12] x86/paravirt: switch functions with custom code to ALTERNATIVE
-Date: Tue,  9 Mar 2021 14:48:12 +0100
-Message-Id: <20210309134813.23912-12-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210309134813.23912-1-jgross@suse.com>
-References: <20210309134813.23912-1-jgross@suse.com>
-MIME-Version: 1.0
+X-Inumbo-ID: d76b7dbf-fe7f-42e0-99c8-ffa6888d6a86
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1615298080;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=1+KscXvyCCD81TD7F9sW2175DPD5UtaWe9uwNTX/4lE=;
+  b=XA9blZjoX/zNTUASH/WEB4DWDYsCIzHEv/Y9j+RGT1i4sLbVz7bGOldC
+   LDb+HUONpVdiGakFqzXmEJkyxQ6/bEba98MavOuSspFonquMRKwNE8nH0
+   hw1uxJIshBKsvJ30DX+XzpW2j09yy7c5L5A+oan2PJ6++1Mf51sUYin3Y
+   4=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: 7BTF9tYZq/oJHFo9+fB43BybqSCa9BsLB22fhRHUsO1xn3B+XgZX8oM7LUXUutUZF7hSqOhM1r
+ zL9RBZYKTxypwoqA00q4+f+e+MV+gJSSARO1m3aESkMN0cTnu4ALTSWqHwAJcclD5VGrBUEnzv
+ BQdSHq0zBJhMKW3OV6bIKo15SgJnFiR0PJLat3mjQhU2YDnM/o5WiR6N674ZRMJjripUwZnZeI
+ zaL3Et02Q/52oXh/xVv/EpVQcZGnMo/p0VR/8tmsvge2+1w2hS73ZGmSJ0Z/weKHMPMPcgmwBL
+ nfM=
+X-SBRS: 5.2
+X-MesageID: 39226148
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.81,234,1610427600"; 
+   d="scan'208";a="39226148"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=G4vfSxcrU6nhlKKD/fnPp8zC1LgVd8MfrL8OzdPH5oychq9IQsLc5bJ4LvQXEWjpZZyuULFKTPmMO95HxOG+QBqxKtPOsDmIxFHIrM5zy9sYg3nEUF8AHIzD9zdafpSwCoArPzAM8KmmQPMG8rYmeVuWIX2+n0zrPZP/t+UUH6os65bONYyh8hRltFhONuMy4bp63baBO+9Vpt/oazOh27KGLji9XXRDGAVOAGVguUNgrBlTkk2PMBApx6/+fWVqD+U5YptEgvX8IkIJnPwUJsRrPgMV+bY3oe9EJRqE+My7kvzVFuJt8V34ZXTeBkoO6MV0+4ihLwPlIv4QDBsusA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D6nC5FmpFN+MJz4419r0TamyGM7/BsI6Yi5wphL6dqY=;
+ b=CUm0co0sPuQebDdkvbmL3hQsspdvMuFTVOt30ZyzGO/N596CJhRrabA69GDWmzlAKfHey1ot++7zTC+/6NNQOc8+MO57UQMde/givqRMaXbHHRaTv8xoH5DiwOTPqTUNcThiUJpKO5g0YTxZi8AhoshfhPIrLCloQtcaYFlrlZPGFQViY8Jn0MNEPZpR1QhYth0T3iW+1IeoTFnAIA9CIDYUMvt1+rPvy47WRzGlQrJc+CqMIbahA6thP1mR3XwMw64PjEmEfTd+0/AenpER4wd7dgM/IyKFIHR5YeLytO7rmQxEOMBdGTnaNSmdWyxH7KsKm0ipYxfArECaiF/YzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D6nC5FmpFN+MJz4419r0TamyGM7/BsI6Yi5wphL6dqY=;
+ b=aQ69vAHn5hnq7+iBA/APE0S6Kzj20TKtatHkLzoVLGa8CK/P1O6JidI7o7C9SJis6cy35PPQ/S1wbO0lsR2LChWvoLARq0vhLm0VEFSYnEQe15ClbJRL+02FMcY1Gw8SfZXQZhwzhHwmRKeO0/1MS9+d2SoDoMvU7+F6Enyr9hc=
+Date: Tue, 9 Mar 2021 14:53:53 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+	"Julien Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+	"Anthony PERARD" <anthony.perard@citrix.com>, Christian Lindig
+	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Jun Nakajima
+	<jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Boris Ostrovsky
+	<boris.ostrovsky@oracle.com>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 for-4.15] x86/msr: introduce an option for compatible
+ MSR behavior selection
+Message-ID: <YEd98T104rrsmn2S@Air-de-Roger>
+References: <20210309105634.7200-1-roger.pau@citrix.com>
+ <37e82170-8097-1eda-95d9-23d235075a67@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <37e82170-8097-1eda-95d9-23d235075a67@suse.com>
+X-ClientProxiedBy: LO2P265CA0135.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:9f::27) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 16945f3a-b25b-4693-1b87-08d8e302c9ed
+X-MS-TrafficTypeDiagnostic: DM6PR03MB4057:
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR03MB40575FB3BF9D9619C56BEEEF8F929@DM6PR03MB4057.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: J8LBlOlpSMXp3gJB61iJ0TG7djpAGegB7/YWMwyb69+COPGiVxNERcUV7UMx/shwtyVqMztNQUO6ueCyNAPi+wZnKz/R8dEFWxKZoVzFzglWIHDvFGK3Ceft7AtTNZCHgPmc3jGd9/A97qHiCOcngpH/SWp+/JR8gSlJwAA26tLUN8UQhJZAu78QNpIA4atuFWFYhQyk9akHqe5lT4bfHVUQ5crwXPGxSPDLdJgFoOVnH1+xa1CMNl9smo3jz5HagigxLWfI0f8jyHlT7dxrH25wUSn+DPmrmbH5Qm8nogm1FJinVwK695bWNMqZu+gy40GD/dq450pYx9UZlX9SnZd+DGhFa4g8rjwYDTBDme6jLR26UgMkCh0tlEfwCk5TG54Xpp3er+hj4bzotgxbrMMPcF2v0UmOUULKO214aiL9xcPaURiwdXBNeU6539SRRpKQnywXfPApgP2zWmfp1v6VGydugJaZBgafESnsg5m0ipshJAVg1svx1EF3veh/1prS53DPcgg8ZUZymblCGA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(7916004)(4636009)(396003)(366004)(376002)(136003)(346002)(39860400002)(6496006)(6666004)(53546011)(8676002)(7416002)(33716001)(6486002)(9686003)(85182001)(5660300002)(86362001)(186003)(66946007)(66556008)(16526019)(478600001)(4326008)(26005)(54906003)(956004)(8936002)(6916009)(83380400001)(316002)(2906002)(66476007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?aEt2WUo4YW1SeUlRN1Y2d293WHBNYVhrZk1aUWVaSzhTaXVoOU9aaGNpSnpr?=
+ =?utf-8?B?WnF6SnkwaVV1ZXY2ZVltVDF1S29JcjI3VEpTNzNZOTVuaUVBZmxmVUw5eVRt?=
+ =?utf-8?B?WFgzMVNnQ0Y3QXk1eDNoK1lQamdVNTBjbnRGTU5sSXk4UGtGTVVQMEF2aDF4?=
+ =?utf-8?B?TmtWM2RRT3FOcG1SNFExdWd3dzNiRStsQjlwQUtHR2JrQ1VyRWx0WlVhWlVT?=
+ =?utf-8?B?TFRjQTZlRDBoeGtaWEU2M292Sjd1R0hVbHF1bjBCK3dLcDZkeml0KytrbE9E?=
+ =?utf-8?B?NW1yem1ldVh2WXlUK09jNmMrazJETVVWVnYrbjJYQ1VZZzVEc0RySUYvNWVs?=
+ =?utf-8?B?MVpZaWNIOVFkeDVLR1JJbzQ3R1h6R0pFVHRyYW9wYXNVaFl6a29FTEhZNmxV?=
+ =?utf-8?B?M1g2QnZhQkhpV3doWkY4NE1tKzczeXUySngvZU9BWWRzWGdaUGFoM3Y0eFNB?=
+ =?utf-8?B?UnpjK1Q2Z21QZTZZVXJuTEUyNkJEWnY4ZzAvamFjN1Y3SmNBSCtlSHFZUFJW?=
+ =?utf-8?B?Z0RlMWxJVXZWdEYzbGZKNXpad1lCb3VLNURFRHBVRk5qellTYTB3YVdwQ0Vl?=
+ =?utf-8?B?OFRYS3hOMCtGZ2ZxNDY1OTRSS0gvd2JWdnRuMG5TZXRIVmt3VVN4UjNOSFo4?=
+ =?utf-8?B?QjN6Q2I2eFlJZWplZG9kY1hqaDZrMzdvbGErZG1SZHF6RkxObDZVbFB0aHdP?=
+ =?utf-8?B?Q1QwR3YyNlF4Qk5VdHd5ZksxVDFPeDVIT3Bob04wMzkyN2ZCSWZ2SVFlNHFv?=
+ =?utf-8?B?U2ZZZis0Vlh6a3gwelJONmlQbWQ1aUVvL1h1ai9vMThrQkJXOGxRS1VBOVl2?=
+ =?utf-8?B?TkpmQWtvMTcvY0R1MTYxVytSRVJXZ0JGZVVnc3pld0RLVnRjK0orZlhQcG5s?=
+ =?utf-8?B?UndwS0ZvY3pPWnY1b0ZXWkNRMlVVaTV4U2FjbWpaV3NpT1QvL2NlZlZoV2Jn?=
+ =?utf-8?B?WmZpSXlmNDZDQnpPU1ppNUtuc1JpeE9ob0drcDZaTWdnQ0ZHZHFOOHNFVFlo?=
+ =?utf-8?B?SDdpakg1cWtnckhyaTZZVVIwVzBFZHV5cUJZZGxoREtwWkQ4WkJpOTFSc1dp?=
+ =?utf-8?B?dWVYczlzWDIxSmNHRDV1V2pVV2hiUkdCMUw0WXhvTktQVHh5cHY1eXlPbURp?=
+ =?utf-8?B?Yi9UYkl0SndhYlBmZnh2ZjkrK2FRY1ovdks0WWJaWXpNdWs1aWR6bS9NMC9F?=
+ =?utf-8?B?YU9VM1JwRm01R0NUN1Z1eE4vS1dGbGwxcy94NWdLOEErbldtVW9icVUrb0tW?=
+ =?utf-8?B?OXhCQ2VsRzNxRmdMTUlVZE5xV0M1b3Z6bEIrRUdCeU94S1A2SVhIWFUzZlpO?=
+ =?utf-8?B?VmxCRzBzSlNoSENublJPVFFoaTZFMm84WlV5NGlNdXpHTW1Bdy8xOFBqUFZQ?=
+ =?utf-8?B?TTNueGNsZzUzZjQ2NzlrWGYyMytHSERPa1lJM2Q5UkpMQTVaRVpnZWZxSnJk?=
+ =?utf-8?B?Z0JUNnhjMEJzT1pJL0svUVFIRGlPNWE4K1NmYndsYXhXT294WjB4SHRUdlZZ?=
+ =?utf-8?B?d2pQNkl1M1NGelVJWEJGTjRjMm1rUW81UzN3WTFtN1loY09BQ3BEMVZmWmFl?=
+ =?utf-8?B?eTFkS3lDSkx6WWtxS0ZoUDFnLzZ6Z005UHpPRFNzZFY5M3RWMVk1SEpRbGcr?=
+ =?utf-8?B?SkE5bHcrR3BQSU1UOTd2c3ZHRVBBUFV3RVVBL0t0VXJvOW5yQnNkWG1qbm9r?=
+ =?utf-8?B?RXdWQXU2WXo3cDNaTVdTK085K3kyaC9yMFhLWkxIWXpBenhEQTRqTzJQNTJw?=
+ =?utf-8?B?RlYxaWpLbWlvMXU0MVhUQnNMN2N1SjI3MFQveDNGQmJaT2hRNG1iVTduS2lk?=
+ =?utf-8?B?YmxiQkVPL2lPMGI5RnVhZz09?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16945f3a-b25b-4693-1b87-08d8e302c9ed
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2021 13:53:59.1757
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nBO6exsclYOaEm5txLnqoXvHxs2jnKYjBqrivIgK0ohh7GL1M3wOi9hLVLkJ2Y3cA9MZBOzn7Ns4FYbqK96u/w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4057
+X-OriginatorOrg: citrix.com
 
-Instead of using paravirt patching for custom code sequences use
-ALTERNATIVE for the functions with custom code replacements.
+On Tue, Mar 09, 2021 at 12:36:39PM +0100, Jan Beulich wrote:
+> On 09.03.2021 11:56, Roger Pau Monne wrote:
+> > Introduce an option to allow selecting a behavior similar to the pre
+> > Xen 4.15 one for accesses to MSRs not explicitly handled. Since commit
+> > 84e848fd7a162f669 and 322ec7c89f6640e accesses to MSRs not explicitly
+> > handled by Xen result in the injection of a #GP to the guest. This
+> > is a behavior change since previously a #GP was only injected if
+> > accessing the MSR on the real hardware would also trigger a #GP, or if
+> > the attempted to be set bits wouldn't match the hardware values (for
+> > PV).
+> > 
+> > This seems to be problematic for some guests, so introduce an option
+> > to fallback to this kind of legacy behavior without leaking the
+> > underlying MSR values to the guest.
+> > 
+> > When the option is set, for both PV and HVM don't inject a #GP to the
+> > guest on MSR read if reading the underlying MSR doesn't result in a
+> > #GP, do the same for writes and simply discard the value to be written
+> > on that case.
+> > 
+> > Note that for guests restored or migrated from previous Xen versions
+> > the option is enabled by default, in order to keep a compatible
+> > MSR behavior. Such compatibility is done at the libxl layer, to avoid
+> > higher-level toolstacks from having to know the details about this flag.
+> > 
+> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> 
+> I'm generally okay with this approach, but wouldn't want to give it
+> my R-b until it's at least clear it's not entirely unacceptable to
+> anyone else (Andrew in particular). Couple of remarks:
 
-Instead of patching an ud2 instruction for unpopulated vector entries
-into the caller site, use a simple function just calling BUG() as a
-replacement.
+Thanks.
 
-Simplify the register defines for assembler paravirt calling, as there
-isn't much usage left.
+> > Changes since v2:
+> >  - Apply the option to both HVM and PV guest.
+> >  - Handle both reads and writes.
+> 
+> I take it that it's intentional that you didn't allow separate read
+> and write control?
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
----
-V4:
-- fixed SAVE_FLAGS() (kernel test robot)
-- added assembler paravirt cleanup
----
- arch/x86/entry/entry_64.S             |   2 +-
- arch/x86/include/asm/irqflags.h       |   2 +-
- arch/x86/include/asm/paravirt.h       | 101 +++++++++++++-------------
- arch/x86/include/asm/paravirt_types.h |   6 --
- arch/x86/kernel/paravirt.c            |  16 ++--
- arch/x86/kernel/paravirt_patch.c      |  88 ----------------------
- 6 files changed, 58 insertions(+), 157 deletions(-)
+Yes, I don't have a strong opinion, but I think just having a single
+option is better: guests requiring the read side bodge are also likely
+to require the same adjustment on the write side. It's also better
+from a user perspective, as it's likely people would enable them in
+tandem anyway.
 
-diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
-index 400908dff42e..12e2e3cd58be 100644
---- a/arch/x86/entry/entry_64.S
-+++ b/arch/x86/entry/entry_64.S
-@@ -305,7 +305,7 @@ SYM_CODE_END(ret_from_fork)
- .macro DEBUG_ENTRY_ASSERT_IRQS_OFF
- #ifdef CONFIG_DEBUG_ENTRY
- 	pushq %rax
--	SAVE_FLAGS(CLBR_RAX)
-+	SAVE_FLAGS
- 	testl $X86_EFLAGS_IF, %eax
- 	jz .Lokay_\@
- 	ud2
-diff --git a/arch/x86/include/asm/irqflags.h b/arch/x86/include/asm/irqflags.h
-index a0efbcd24b86..c5ce9845c999 100644
---- a/arch/x86/include/asm/irqflags.h
-+++ b/arch/x86/include/asm/irqflags.h
-@@ -111,7 +111,7 @@ static __always_inline unsigned long arch_local_irq_save(void)
- 
- #ifdef CONFIG_X86_64
- #ifdef CONFIG_DEBUG_ENTRY
--#define SAVE_FLAGS(x)		pushfq; popq %rax
-+#define SAVE_FLAGS		pushfq; popq %rax
- #endif
- 
- #define INTERRUPT_RETURN	jmp native_iret
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 36cd71fa097f..b32b408958e8 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -137,7 +137,9 @@ static inline void write_cr0(unsigned long x)
- 
- static inline unsigned long read_cr2(void)
- {
--	return PVOP_CALLEE0(unsigned long, mmu.read_cr2);
-+	return PVOP_ALT_CALLEE0(unsigned long, mmu.read_cr2,
-+				"mov %%cr2, %%rax;",
-+				ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline void write_cr2(unsigned long x)
-@@ -147,12 +149,14 @@ static inline void write_cr2(unsigned long x)
- 
- static inline unsigned long __read_cr3(void)
- {
--	return PVOP_CALL0(unsigned long, mmu.read_cr3);
-+	return PVOP_ALT_CALL0(unsigned long, mmu.read_cr3,
-+			      "mov %%cr3, %%rax;", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline void write_cr3(unsigned long x)
- {
--	PVOP_VCALL1(mmu.write_cr3, x);
-+	PVOP_ALT_VCALL1(mmu.write_cr3, x,
-+			"mov %%rdi, %%cr3", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline void __write_cr4(unsigned long x)
-@@ -172,7 +176,7 @@ static inline void halt(void)
- 
- static inline void wbinvd(void)
- {
--	PVOP_VCALL0(cpu.wbinvd);
-+	PVOP_ALT_VCALL0(cpu.wbinvd, "wbinvd", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline u64 paravirt_read_msr(unsigned msr)
-@@ -386,22 +390,28 @@ static inline void paravirt_release_p4d(unsigned long pfn)
- 
- static inline pte_t __pte(pteval_t val)
- {
--	return (pte_t) { PVOP_CALLEE1(pteval_t, mmu.make_pte, val) };
-+	return (pte_t) { PVOP_ALT_CALLEE1(pteval_t, mmu.make_pte, val,
-+					  "mov %%rdi, %%rax",
-+					  ALT_NOT(X86_FEATURE_XENPV)) };
- }
- 
- static inline pteval_t pte_val(pte_t pte)
- {
--	return PVOP_CALLEE1(pteval_t, mmu.pte_val, pte.pte);
-+	return PVOP_ALT_CALLEE1(pteval_t, mmu.pte_val, pte.pte,
-+				"mov %%rdi, %%rax", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline pgd_t __pgd(pgdval_t val)
- {
--	return (pgd_t) { PVOP_CALLEE1(pgdval_t, mmu.make_pgd, val) };
-+	return (pgd_t) { PVOP_ALT_CALLEE1(pgdval_t, mmu.make_pgd, val,
-+					  "mov %%rdi, %%rax",
-+					  ALT_NOT(X86_FEATURE_XENPV)) };
- }
- 
- static inline pgdval_t pgd_val(pgd_t pgd)
- {
--	return PVOP_CALLEE1(pgdval_t, mmu.pgd_val, pgd.pgd);
-+	return PVOP_ALT_CALLEE1(pgdval_t, mmu.pgd_val, pgd.pgd,
-+				"mov %%rdi, %%rax", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- #define  __HAVE_ARCH_PTEP_MODIFY_PROT_TRANSACTION
-@@ -434,12 +444,15 @@ static inline void set_pmd(pmd_t *pmdp, pmd_t pmd)
- 
- static inline pmd_t __pmd(pmdval_t val)
- {
--	return (pmd_t) { PVOP_CALLEE1(pmdval_t, mmu.make_pmd, val) };
-+	return (pmd_t) { PVOP_ALT_CALLEE1(pmdval_t, mmu.make_pmd, val,
-+					  "mov %%rdi, %%rax",
-+					  ALT_NOT(X86_FEATURE_XENPV)) };
- }
- 
- static inline pmdval_t pmd_val(pmd_t pmd)
- {
--	return PVOP_CALLEE1(pmdval_t, mmu.pmd_val, pmd.pmd);
-+	return PVOP_ALT_CALLEE1(pmdval_t, mmu.pmd_val, pmd.pmd,
-+				"mov %%rdi, %%rax", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline void set_pud(pud_t *pudp, pud_t pud)
-@@ -451,14 +464,16 @@ static inline pud_t __pud(pudval_t val)
- {
- 	pudval_t ret;
- 
--	ret = PVOP_CALLEE1(pudval_t, mmu.make_pud, val);
-+	ret = PVOP_ALT_CALLEE1(pudval_t, mmu.make_pud, val,
-+			       "mov %%rdi, %%rax", ALT_NOT(X86_FEATURE_XENPV));
- 
- 	return (pud_t) { ret };
- }
- 
- static inline pudval_t pud_val(pud_t pud)
- {
--	return PVOP_CALLEE1(pudval_t, mmu.pud_val, pud.pud);
-+	return PVOP_ALT_CALLEE1(pudval_t, mmu.pud_val, pud.pud,
-+				"mov %%rdi, %%rax", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline void pud_clear(pud_t *pudp)
-@@ -477,14 +492,17 @@ static inline void set_p4d(p4d_t *p4dp, p4d_t p4d)
- 
- static inline p4d_t __p4d(p4dval_t val)
- {
--	p4dval_t ret = PVOP_CALLEE1(p4dval_t, mmu.make_p4d, val);
-+	p4dval_t ret = PVOP_ALT_CALLEE1(p4dval_t, mmu.make_p4d, val,
-+					"mov %%rdi, %%rax",
-+					ALT_NOT(X86_FEATURE_XENPV));
- 
- 	return (p4d_t) { ret };
- }
- 
- static inline p4dval_t p4d_val(p4d_t p4d)
- {
--	return PVOP_CALLEE1(p4dval_t, mmu.p4d_val, p4d.p4d);
-+	return PVOP_ALT_CALLEE1(p4dval_t, mmu.p4d_val, p4d.p4d,
-+				"mov %%rdi, %%rax", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline void __set_pgd(pgd_t *pgdp, pgd_t pgd)
-@@ -571,7 +589,9 @@ static __always_inline void pv_queued_spin_lock_slowpath(struct qspinlock *lock,
- 
- static __always_inline void pv_queued_spin_unlock(struct qspinlock *lock)
- {
--	PVOP_VCALLEE1(lock.queued_spin_unlock, lock);
-+	PVOP_ALT_VCALLEE1(lock.queued_spin_unlock, lock,
-+			  "movb $0, (%%" _ASM_ARG1 ");",
-+			  ALT_NOT(X86_FEATURE_PVUNLOCK));
- }
- 
- static __always_inline void pv_wait(u8 *ptr, u8 val)
-@@ -586,7 +606,9 @@ static __always_inline void pv_kick(int cpu)
- 
- static __always_inline bool pv_vcpu_is_preempted(long cpu)
- {
--	return PVOP_CALLEE1(bool, lock.vcpu_is_preempted, cpu);
-+	return PVOP_ALT_CALLEE1(bool, lock.vcpu_is_preempted, cpu,
-+				"xor %%" _ASM_AX ", %%" _ASM_AX ";",
-+				ALT_NOT(X86_FEATURE_VCPUPREEMPT));
- }
- 
- void __raw_callee_save___native_queued_spin_unlock(struct qspinlock *lock);
-@@ -660,17 +682,18 @@ bool __raw_callee_save___native_vcpu_is_preempted(long cpu);
- #ifdef CONFIG_PARAVIRT_XXL
- static inline notrace unsigned long arch_local_save_flags(void)
- {
--	return PVOP_CALLEE0(unsigned long, irq.save_fl);
-+	return PVOP_ALT_CALLEE0(unsigned long, irq.save_fl, "pushf; pop %%rax;",
-+				ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline notrace void arch_local_irq_disable(void)
- {
--	PVOP_VCALLEE0(irq.irq_disable);
-+	PVOP_ALT_VCALLEE0(irq.irq_disable, "cli;", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline notrace void arch_local_irq_enable(void)
- {
--	PVOP_VCALLEE0(irq.irq_enable);
-+	PVOP_ALT_VCALLEE0(irq.irq_enable, "sti;", ALT_NOT(X86_FEATURE_XENPV));
- }
- 
- static inline notrace unsigned long arch_local_irq_save(void)
-@@ -715,35 +738,9 @@ extern void default_banner(void);
- 	.popsection
- 
- 
--#define COND_PUSH(set, mask, reg)			\
--	.if ((~(set)) & mask); push %reg; .endif
--#define COND_POP(set, mask, reg)			\
--	.if ((~(set)) & mask); pop %reg; .endif
--
- #ifdef CONFIG_X86_64
- #ifdef CONFIG_PARAVIRT_XXL
- 
--#define PV_SAVE_REGS(set)			\
--	COND_PUSH(set, CLBR_RAX, rax);		\
--	COND_PUSH(set, CLBR_RCX, rcx);		\
--	COND_PUSH(set, CLBR_RDX, rdx);		\
--	COND_PUSH(set, CLBR_RSI, rsi);		\
--	COND_PUSH(set, CLBR_RDI, rdi);		\
--	COND_PUSH(set, CLBR_R8, r8);		\
--	COND_PUSH(set, CLBR_R9, r9);		\
--	COND_PUSH(set, CLBR_R10, r10);		\
--	COND_PUSH(set, CLBR_R11, r11)
--#define PV_RESTORE_REGS(set)			\
--	COND_POP(set, CLBR_R11, r11);		\
--	COND_POP(set, CLBR_R10, r10);		\
--	COND_POP(set, CLBR_R9, r9);		\
--	COND_POP(set, CLBR_R8, r8);		\
--	COND_POP(set, CLBR_RDI, rdi);		\
--	COND_POP(set, CLBR_RSI, rsi);		\
--	COND_POP(set, CLBR_RDX, rdx);		\
--	COND_POP(set, CLBR_RCX, rcx);		\
--	COND_POP(set, CLBR_RAX, rax)
--
- #define PARA_PATCH(off)		((off) / 8)
- #define PARA_SITE(ptype, ops)	_PVSITE(ptype, ops, .quad, 8)
- #define PARA_INDIRECT(addr)	*addr(%rip)
-@@ -754,12 +751,14 @@ extern void default_banner(void);
- 		X86_FEATURE_XENPV, "jmp xen_iret;", "jmp native_iret;")
- 
- #ifdef CONFIG_DEBUG_ENTRY
--#define SAVE_FLAGS(clobbers)                                        \
--	PARA_SITE(PARA_PATCH(PV_IRQ_save_fl),			    \
--		  PV_SAVE_REGS(clobbers | CLBR_CALLEE_SAVE);        \
--		  ANNOTATE_RETPOLINE_SAFE;			    \
--		  call PARA_INDIRECT(pv_ops+PV_IRQ_save_fl);	    \
--		  PV_RESTORE_REGS(clobbers | CLBR_CALLEE_SAVE);)
-+.macro PARA_IRQ_save_fl
-+	PARA_SITE(PARA_PATCH(PV_IRQ_save_fl),
-+		  ANNOTATE_RETPOLINE_SAFE;
-+		  call PARA_INDIRECT(pv_ops+PV_IRQ_save_fl);)
-+.endm
-+
-+#define SAVE_FLAGS	ALTERNATIVE "PARA_IRQ_save_fl;", "pushf; pop %rax;", \
-+				    ALT_NOT(X86_FEATURE_XENPV)
- #endif
- #endif /* CONFIG_PARAVIRT_XXL */
- #endif	/* CONFIG_X86_64 */
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 0ed976286d49..588ff14ce969 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -3,7 +3,6 @@
- #define _ASM_X86_PARAVIRT_TYPES_H
- 
- /* Bitmask of what can be clobbered: usually at least eax. */
--#define CLBR_NONE 0
- #define CLBR_EAX  (1 << 0)
- #define CLBR_ECX  (1 << 1)
- #define CLBR_EDX  (1 << 2)
-@@ -15,7 +14,6 @@
- 
- #define CLBR_ARG_REGS	(CLBR_EAX | CLBR_EDX | CLBR_ECX)
- #define CLBR_RET_REG	(CLBR_EAX | CLBR_EDX)
--#define CLBR_SCRATCH	(0)
- #else
- #define CLBR_RAX  CLBR_EAX
- #define CLBR_RCX  CLBR_ECX
-@@ -32,12 +30,9 @@
- #define CLBR_ARG_REGS	(CLBR_RDI | CLBR_RSI | CLBR_RDX | \
- 			 CLBR_RCX | CLBR_R8 | CLBR_R9)
- #define CLBR_RET_REG	(CLBR_RAX)
--#define CLBR_SCRATCH	(CLBR_R10 | CLBR_R11)
- 
- #endif /* X86_64 */
- 
--#define CLBR_CALLEE_SAVE ((CLBR_ARG_REGS | CLBR_SCRATCH) & ~CLBR_RET_REG)
--
- #ifndef __ASSEMBLY__
- 
- #include <asm/desc_defs.h>
-@@ -322,7 +317,6 @@ extern void (*paravirt_iret)(void);
- /* Simple instruction patching code. */
- #define NATIVE_LABEL(a,x,b) "\n\t.globl " a #x "_" #b "\n" a #x "_" #b ":\n\t"
- 
--unsigned paravirt_patch_ident_64(void *insn_buff, unsigned len);
- unsigned paravirt_patch_default(u8 type, void *insn_buff, unsigned long addr, unsigned len);
- unsigned paravirt_patch_insns(void *insn_buff, unsigned len, const char *start, const char *end);
- 
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index 0553a339d850..082954930809 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -53,7 +53,10 @@ void __init default_banner(void)
- }
- 
- /* Undefined instruction for dealing with missing ops pointers. */
--static const unsigned char ud2a[] = { 0x0f, 0x0b };
-+static void paravirt_BUG(void)
-+{
-+	BUG();
-+}
- 
- struct branch {
- 	unsigned char opcode;
-@@ -107,17 +110,10 @@ unsigned paravirt_patch_default(u8 type, void *insn_buff,
- 	unsigned ret;
- 
- 	if (opfunc == NULL)
--		/* If there's no function, patch it with a ud2a (BUG) */
--		ret = paravirt_patch_insns(insn_buff, len, ud2a, ud2a+sizeof(ud2a));
-+		/* If there's no function, patch it with paravirt_BUG() */
-+		ret = paravirt_patch_call(insn_buff, paravirt_BUG, addr, len);
- 	else if (opfunc == _paravirt_nop)
- 		ret = 0;
--
--#ifdef CONFIG_PARAVIRT_XXL
--	/* identity functions just return their single argument */
--	else if (opfunc == _paravirt_ident_64)
--		ret = paravirt_patch_ident_64(insn_buff, len);
--
--#endif
- 	else
- 		/* Otherwise call the function. */
- 		ret = paravirt_patch_call(insn_buff, opfunc, addr, len);
-diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
-index abd27ec67397..10543dcc8211 100644
---- a/arch/x86/kernel/paravirt_patch.c
-+++ b/arch/x86/kernel/paravirt_patch.c
-@@ -4,96 +4,8 @@
- #include <asm/paravirt.h>
- #include <asm/asm-offsets.h>
- 
--#define PSTART(d, m)							\
--	patch_data_##d.m
--
--#define PEND(d, m)							\
--	(PSTART(d, m) + sizeof(patch_data_##d.m))
--
--#define PATCH(d, m, insn_buff, len)						\
--	paravirt_patch_insns(insn_buff, len, PSTART(d, m), PEND(d, m))
--
--#define PATCH_CASE(ops, m, data, insn_buff, len)				\
--	case PARAVIRT_PATCH(ops.m):					\
--		return PATCH(data, ops##_##m, insn_buff, len)
--
--#ifdef CONFIG_PARAVIRT_XXL
--struct patch_xxl {
--	const unsigned char	irq_irq_disable[1];
--	const unsigned char	irq_irq_enable[1];
--	const unsigned char	irq_save_fl[2];
--	const unsigned char	mmu_read_cr2[3];
--	const unsigned char	mmu_read_cr3[3];
--	const unsigned char	mmu_write_cr3[3];
--	const unsigned char	cpu_wbinvd[2];
--	const unsigned char	mov64[3];
--};
--
--static const struct patch_xxl patch_data_xxl = {
--	.irq_irq_disable	= { 0xfa },		// cli
--	.irq_irq_enable		= { 0xfb },		// sti
--	.irq_save_fl		= { 0x9c, 0x58 },	// pushf; pop %[re]ax
--	.mmu_read_cr2		= { 0x0f, 0x20, 0xd0 },	// mov %cr2, %[re]ax
--	.mmu_read_cr3		= { 0x0f, 0x20, 0xd8 },	// mov %cr3, %[re]ax
--	.mmu_write_cr3		= { 0x0f, 0x22, 0xdf },	// mov %rdi, %cr3
--	.cpu_wbinvd		= { 0x0f, 0x09 },	// wbinvd
--	.mov64			= { 0x48, 0x89, 0xf8 },	// mov %rdi, %rax
--};
--
--unsigned int paravirt_patch_ident_64(void *insn_buff, unsigned int len)
--{
--	return PATCH(xxl, mov64, insn_buff, len);
--}
--# endif /* CONFIG_PARAVIRT_XXL */
--
--#ifdef CONFIG_PARAVIRT_SPINLOCKS
--struct patch_lock {
--	unsigned char queued_spin_unlock[3];
--	unsigned char vcpu_is_preempted[2];
--};
--
--static const struct patch_lock patch_data_lock = {
--	.vcpu_is_preempted	= { 0x31, 0xc0 },	// xor %eax, %eax
--
--# ifdef CONFIG_X86_64
--	.queued_spin_unlock	= { 0xc6, 0x07, 0x00 },	// movb $0, (%rdi)
--# else
--	.queued_spin_unlock	= { 0xc6, 0x00, 0x00 },	// movb $0, (%eax)
--# endif
--};
--#endif /* CONFIG_PARAVIRT_SPINLOCKS */
--
- unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
- 			  unsigned int len)
- {
--	switch (type) {
--
--#ifdef CONFIG_PARAVIRT_XXL
--	PATCH_CASE(irq, save_fl, xxl, insn_buff, len);
--	PATCH_CASE(irq, irq_enable, xxl, insn_buff, len);
--	PATCH_CASE(irq, irq_disable, xxl, insn_buff, len);
--
--	PATCH_CASE(mmu, read_cr2, xxl, insn_buff, len);
--	PATCH_CASE(mmu, read_cr3, xxl, insn_buff, len);
--	PATCH_CASE(mmu, write_cr3, xxl, insn_buff, len);
--
--	PATCH_CASE(cpu, wbinvd, xxl, insn_buff, len);
--#endif
--
--#ifdef CONFIG_PARAVIRT_SPINLOCKS
--	case PARAVIRT_PATCH(lock.queued_spin_unlock):
--		if (pv_is_native_spin_unlock())
--			return PATCH(lock, queued_spin_unlock, insn_buff, len);
--		break;
--
--	case PARAVIRT_PATCH(lock.vcpu_is_preempted):
--		if (pv_is_native_vcpu_is_preempted())
--			return PATCH(lock, vcpu_is_preempted, insn_buff, len);
--		break;
--#endif
--	default:
--		break;
--	}
--
- 	return paravirt_patch_default(type, insn_buff, addr, len);
- }
--- 
-2.26.2
+> 
+> > --- a/xen/arch/x86/hvm/svm/svm.c
+> > +++ b/xen/arch/x86/hvm/svm/svm.c
+> > @@ -1795,6 +1795,7 @@ static int svm_msr_read_intercept(unsigned int msr, uint64_t *msr_content)
+> >      const struct domain *d = v->domain;
+> >      struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+> >      const struct nestedsvm *nsvm = &vcpu_nestedsvm(v);
+> > +    uint64_t tmp;
+> >  
+> >      switch ( msr )
+> >      {
+> 
+> While to some degree a matter of taste, I think such variables needed
+> only inside a switch() and not needing an initializer would better
+> live in the respective switch()'s scope.
 
+I can indeed define them inside the switch statement.
+
+> > --- a/xen/arch/x86/pv/emul-priv-op.c
+> > +++ b/xen/arch/x86/pv/emul-priv-op.c
+> > @@ -875,6 +875,7 @@ static int read_msr(unsigned int reg, uint64_t *val,
+> >      const struct domain *currd = curr->domain;
+> >      const struct cpuid_policy *cp = currd->arch.cpuid;
+> >      bool vpmu_msr = false;
+> > +    uint64_t tmp;
+> >      int ret;
+> >  
+> >      if ( (ret = guest_rdmsr(curr, reg, val)) != X86EMUL_UNHANDLEABLE )
+> > @@ -986,6 +987,12 @@ static int read_msr(unsigned int reg, uint64_t *val,
+> >          }
+> >          /* fall through */
+> >      default:
+> > +        if ( currd->arch.msr_relaxed && !rdmsr_safe(reg, tmp) )
+> > +        {
+> > +            *val = 0;
+> > +            return X86EMUL_OKAY;
+> > +        }
+> > +
+> >          gdprintk(XENLOG_WARNING, "RDMSR 0x%08x unimplemented\n", reg);
+> >          break;
+> >  
+> > @@ -1148,6 +1155,9 @@ static int write_msr(unsigned int reg, uint64_t val,
+> >          }
+> >          /* fall through */
+> >      default:
+> > +        if ( currd->arch.msr_relaxed && !rdmsr_safe(reg, val) )
+> > +            return X86EMUL_OKAY;
+> > +
+> >          gdprintk(XENLOG_WARNING,
+> >                   "WRMSR 0x%08x val 0x%016"PRIx64" unimplemented\n",
+> >                   reg, val);
+> 
+> So what are your thoughts wrt my change to this file? Drop it
+> altogether and require people to use this new option? Or do you
+> see both coexist?
+
+I wouldn't be opposed to have both changes co-exist, as long as the PV
+one is made part of the PV ABI, that is have it properly described in
+the public headers as part of the PV behavior. I've replied with some
+details along those lines in your patch.
+
+> In the latter case, since you had suggested
+> that I drop the write side of my change - does your changing of
+> the write path indicate you've changed your mind?
+
+Yes, I think we need to provide an option to allow users to revert
+back to an MSR behavior as close as possible to the previous one for
+compatibility reasons, and that should include the write side even if
+we don't know any users requiring it right now.
+
+We would be in a bad position if that use-case gets discovered after
+the release, so it's IMO best to provide an option that covers both
+read and write side straight away.
+
+Thanks, Roger.
 
