@@ -2,44 +2,44 @@ Return-Path: <SRS0=FTcr=IH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 539B7C433DB
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 15:39:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F20D3C433E0
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 16:06:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0C4E5651B2
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 15:39:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C4E5651B2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 852136523A
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 16:06:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 852136523A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95590.180502 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95599.180528 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJeSG-0000tl-Ot; Tue, 09 Mar 2021 15:39:28 +0000
+	id 1lJesa-00046s-D7; Tue, 09 Mar 2021 16:06:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95590.180502; Tue, 09 Mar 2021 15:39:28 +0000
+Received: by outflank-mailman (output) from mailman id 95599.180528; Tue, 09 Mar 2021 16:06:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJeSG-0000te-Lg; Tue, 09 Mar 2021 15:39:28 +0000
-Received: by outflank-mailman (input) for mailman id 95590;
- Tue, 09 Mar 2021 15:39:27 +0000
+	id 1lJesa-00046l-A0; Tue, 09 Mar 2021 16:06:40 +0000
+Received: by outflank-mailman (input) for mailman id 95599;
+ Tue, 09 Mar 2021 16:06:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=7FLA=IH=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1lJeSF-0000tZ-KR
- for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 15:39:27 +0000
-Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jEQk=IH=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lJesY-00044h-Lw
+ for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 16:06:38 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3b0e38db-5cdf-48f5-aa3d-bcd6901f06ef;
- Tue, 09 Mar 2021 15:39:26 +0000 (UTC)
-Received: by mail-lf1-x12d.google.com with SMTP id v2so14758355lft.9
- for <xen-devel@lists.xenproject.org>; Tue, 09 Mar 2021 07:39:26 -0800 (PST)
+ id 71bdde6a-93c6-453c-bf2f-54ea5420be8e;
+ Tue, 09 Mar 2021 16:06:32 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 21C7AAF0C;
+ Tue,  9 Mar 2021 16:06:32 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,68 +51,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b0e38db-5cdf-48f5-aa3d-bcd6901f06ef
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=l58xmmVOujUcw8TlSSVOH7vDnqxBI6hJIhiBvOHQ3Tk=;
-        b=bsisIYh6Qra+bnUKUlVJ4KB22EmyrjLM/7CDHGuRv9o5pLPVwxFuV/L9d9A/Jeq/9x
-         DgXYw24CdpC3yvyPVQPJbhQZgY5IW9dt1L6zK0OqDxVDv7YDk9gqmVD4wXdGIYUZ+Wjc
-         aR8Th8BOQDWO4LYndjH1KxglUD2zTuMEohfnmAYFftqvLvUghjpoiLBBWu4n5batpZLF
-         Hh+BHCUV4r2cRI03aIqsaAD3/NEq4hMnCLYIVTL59ibXM2c4egQ0ODmsif2bRAWthLx+
-         jo/BhSEngrFhOU/NkAYCFyka/5olyJQYRRQfTVgXEtfkSV0z/AdXiCivGkfubQ/fRGmI
-         cxeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=l58xmmVOujUcw8TlSSVOH7vDnqxBI6hJIhiBvOHQ3Tk=;
-        b=HYlemSoutksq+Nxlx7h1MY1nNLEkmF4faGYYcvW3vEyQ9CLIBtxlvLKEsMmooZHMfh
-         BEujDMp/X+5keuhHr3Q0bSq6HdKXWdPaevPsGUiGNpnlfdI6IamD1a23bM2WgCkMv+Wv
-         iTUu0PLTDy6/uGA+zAMyUvjdhe1y1NiWoC6qwmxhqkJwKlId54qo/XYRE1B7tizKILVP
-         9oZ2XZb5on4vATEiiu9jVYKcQeLqRR1iXXt5VRLOB//Y3hELUBlhIN0yCR/rfueDld17
-         k6Q/TXskI6bvjKl7bq0RRxxL8pcNWFzOWd7SBg8Q7T0Tuj2DhY9CWFqyZpBdNn9R0FCt
-         dd/Q==
-X-Gm-Message-State: AOAM533h1P0WC17C2QSaZgZd4ZZfZz+HX2g1MJ20YOBeCZJvVOTKcAyr
-	EwJkNXK+UFunv7AVUNl1KpB+ZK35+72LrnObzYE=
-X-Google-Smtp-Source: ABdhPJwujjv8+xAbRl5wwIBuE0bkomGV2eFE7SvJB7axQ5lqRnUS3QH9t4Z4GESiRYiYe3Z5fEnD7CjwaCC1/oqQ5n8=
-X-Received: by 2002:a05:6512:370f:: with SMTP id z15mr6872274lfr.562.1615304365529;
- Tue, 09 Mar 2021 07:39:25 -0800 (PST)
+X-Inumbo-ID: 71bdde6a-93c6-453c-bf2f-54ea5420be8e
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1615305992; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=yE5Leq5IeRX/BGMbx+e0U1ktiHL+YFJD+F5kGmaHXd0=;
+	b=EwCIEbawx8JZXbWyvRDdft0L71brX1Fx+d/eZYuwgZItIq6G5aTUcSr2UVJrwlCkGFKXrm
+	pYZ0uFkIF6aGMVsjGli9Q1bZ51U3C5zgCu/XaNKv4ki1lj4IDx6a5FOxErE/kI43Yk5vp9
+	k+ZEUtvPFtuaXGTylCOasP4UGg38aPA=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	x86@kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v6 14/12] x86/alternative: don't open code ALTERNATIVE_TERNARY() in _static_cpu_has()
+Date: Tue,  9 Mar 2021 17:06:21 +0100
+Message-Id: <20210309160621.29290-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210309160621.29290-1-jgross@suse.com>
+References: <20210309134813.23912-1-jgross@suse.com>
+ <20210309160621.29290-1-jgross@suse.com>
 MIME-Version: 1.0
-References: <20210309145002.30359-1-iwj@xenproject.org> <20210309145002.30359-4-iwj@xenproject.org>
-In-Reply-To: <20210309145002.30359-4-iwj@xenproject.org>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Tue, 9 Mar 2021 10:39:14 -0500
-Message-ID: <CAKf6xps8wgo0=Nkh0Kt3bKpHtuHAOrKh77y+wn+RofVoW_qwQA@mail.gmail.com>
-Subject: Re: [PATCH 4.15 3/3] CHANGELOG.md: Glean some information from SUPPORT.md
-To: Ian Jackson <iwj@xenproject.org>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, 
-	Community Manager <community.manager@xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, Mar 9, 2021 at 9:50 AM Ian Jackson <iwj@xenproject.org> wrote:
->
-> Signed-off-by: Ian Jackson <iwj@xenproject.org>
-> ---
->  CHANGELOG.md | 10 ++++++++++
->  1 file changed, 10 insertions(+)
->
-> diff --git a/CHANGELOG.md b/CHANGELOG.md
-> index 4ecd157a35..ccdbb82c2e 100644
-> --- a/CHANGELOG.md
-> +++ b/CHANGELOG.md
-> @@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
->
->  ## [Unreleased](https://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog)
->
-> +## Added / support upgraded
-> + - Linux device model stubdomains (Tech Preview)
+_static_cpu_has() contains a completely open coded version of
+ALTERNATIVE_TERNARY(). Replace that with the macro instead.
 
-This is inaccurate. Linux device model stubdomains went into 4.14, but
-SUPPORT.md was only updated in 4.15.  Patch 2/3 removed "libxl support
-for running qemu-xen device model in a linux stubdomain."
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/include/asm/cpufeature.h | 41 +++++++------------------------
+ 1 file changed, 9 insertions(+), 32 deletions(-)
 
-Regards,
-Jason
+diff --git a/arch/x86/include/asm/cpufeature.h b/arch/x86/include/asm/cpufeature.h
+index 1728d4ce5730..16a51e7288d5 100644
+--- a/arch/x86/include/asm/cpufeature.h
++++ b/arch/x86/include/asm/cpufeature.h
+@@ -8,6 +8,7 @@
+ 
+ #include <asm/asm.h>
+ #include <linux/bitops.h>
++#include <asm/alternative.h>
+ 
+ enum cpuid_leafs
+ {
+@@ -175,39 +176,15 @@ extern void clear_cpu_cap(struct cpuinfo_x86 *c, unsigned int bit);
+  */
+ static __always_inline bool _static_cpu_has(u16 bit)
+ {
+-	asm_volatile_goto("1: jmp 6f\n"
+-		 "2:\n"
+-		 ".skip -(((5f-4f) - (2b-1b)) > 0) * "
+-			 "((5f-4f) - (2b-1b)),0x90\n"
+-		 "3:\n"
+-		 ".section .altinstructions,\"a\"\n"
+-		 " .long 1b - .\n"		/* src offset */
+-		 " .long 4f - .\n"		/* repl offset */
+-		 " .word %P[always]\n"		/* always replace */
+-		 " .byte 3b - 1b\n"		/* src len */
+-		 " .byte 5f - 4f\n"		/* repl len */
+-		 " .byte 3b - 2b\n"		/* pad len */
+-		 ".previous\n"
+-		 ".section .altinstr_replacement,\"ax\"\n"
+-		 "4: jmp %l[t_no]\n"
+-		 "5:\n"
+-		 ".previous\n"
+-		 ".section .altinstructions,\"a\"\n"
+-		 " .long 1b - .\n"		/* src offset */
+-		 " .long 0\n"			/* no replacement */
+-		 " .word %P[feature]\n"		/* feature bit */
+-		 " .byte 3b - 1b\n"		/* src len */
+-		 " .byte 0\n"			/* repl len */
+-		 " .byte 0\n"			/* pad len */
+-		 ".previous\n"
+-		 ".section .altinstr_aux,\"ax\"\n"
+-		 "6:\n"
+-		 " testb %[bitnum],%[cap_byte]\n"
+-		 " jnz %l[t_yes]\n"
+-		 " jmp %l[t_no]\n"
+-		 ".previous\n"
++	asm_volatile_goto(
++		ALTERNATIVE_TERNARY("jmp 6f", %P[feature], "", "jmp %l[t_no]")
++		".section .altinstr_aux,\"ax\"\n"
++		"6:\n"
++		" testb %[bitnum],%[cap_byte]\n"
++		" jnz %l[t_yes]\n"
++		" jmp %l[t_no]\n"
++		".previous\n"
+ 		 : : [feature]  "i" (bit),
+-		     [always]   "i" (X86_FEATURE_ALWAYS),
+ 		     [bitnum]   "i" (1 << (bit & 7)),
+ 		     [cap_byte] "m" (((const char *)boot_cpu_data.x86_capability)[bit >> 3])
+ 		 : : t_yes, t_no);
+-- 
+2.26.2
+
 
