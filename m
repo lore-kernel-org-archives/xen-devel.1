@@ -2,44 +2,45 @@ Return-Path: <SRS0=FTcr=IH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC46AC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 16:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78206C433DB
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 16:08:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44B5265237
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 16:06:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44B5265237
+	by mail.kernel.org (Postfix) with ESMTPS id 18C8065237
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Mar 2021 16:08:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18C8065237
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95598.180517 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95606.180541 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJesV-00044x-1h; Tue, 09 Mar 2021 16:06:35 +0000
+	id 1lJetk-0004JK-OG; Tue, 09 Mar 2021 16:07:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95598.180517; Tue, 09 Mar 2021 16:06:35 +0000
+Received: by outflank-mailman (output) from mailman id 95606.180541; Tue, 09 Mar 2021 16:07:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJesU-00044q-US; Tue, 09 Mar 2021 16:06:34 +0000
-Received: by outflank-mailman (input) for mailman id 95598;
- Tue, 09 Mar 2021 16:06:33 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lJetk-0004JD-KP; Tue, 09 Mar 2021 16:07:52 +0000
+Received: by outflank-mailman (input) for mailman id 95606;
+ Tue, 09 Mar 2021 16:07:51 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jEQk=IH=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJesT-00044h-Ph
- for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 16:06:33 +0000
+ (envelope-from <SRS0=Bv84=IH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lJetj-0004J6-5H
+ for xen-devel@lists.xenproject.org; Tue, 09 Mar 2021 16:07:51 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 71f5cab4-acc3-49d2-9ec5-97cb181ff656;
- Tue, 09 Mar 2021 16:06:32 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a2900864-d6fe-44a5-8d7b-393045be25e5;
+ Tue, 09 Mar 2021 16:07:49 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 3EF51AEC4;
- Tue,  9 Mar 2021 16:06:31 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 14678AF0C;
+ Tue,  9 Mar 2021 16:07:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,514 +52,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71f5cab4-acc3-49d2-9ec5-97cb181ff656
+X-Inumbo-ID: a2900864-d6fe-44a5-8d7b-393045be25e5
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615305991; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
+	t=1615306069; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bItPstEQLhxvk+MVBlxjVI1YB2J02jgbKDGYfqttiBY=;
-	b=o92FAkPYMlFd1PqVN9IkglmvGsLiQg8uSNViGVfUx5cTwU8MnwSeYp76NkuU8WdN1I2plM
-	3NCidYVI/mSz+xR9sqNUEjPesqeKk3Gjnj++OwaxRCDOuDa8zUJrI+44SmL7sq92nUq+CX
-	Tz+CNcFSfn+I+9u/a9AWX0rh2GcrxIk=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>
-Subject: [PATCH v6 13/12] x86/alternative: merge include files
-Date: Tue,  9 Mar 2021 17:06:20 +0100
-Message-Id: <20210309160621.29290-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210309134813.23912-1-jgross@suse.com>
-References: <20210309134813.23912-1-jgross@suse.com>
+	bh=zuzxC2VAAcoZxRiP1UTz555AsK1O/NCW3/YWheLLu1k=;
+	b=AYzLSd21doUDbJ4gcjLWqWTzSlj62q5xMcC2/8nLMcHSwuMgQSR6VEijPJblXPMAOufBvT
+	+ATvXh6wRHJFzxwiHdqC8zGyQpiM4HISQgMHnkEFQtVOSaqNfVrz7BJFAmELIYOqAOQ1C9
+	PgJm7FtQhlHQD+RbyLmdskk5n10FxrQ=
+Subject: Re: [PATCH v2 1/2][4.15] x86/PV: conditionally avoid raising #GP for
+ early guest MSR reads
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Ian Jackson <iwj@xenproject.org>
+References: <f5f17207-b601-2909-8a5c-55276e734272@suse.com>
+ <d794bbee-a5e5-6632-3d1f-acd8164b7171@suse.com>
+ <YEXmvp02UvvY8Fve@Air-de-Roger>
+ <1f19ced7-183b-8f08-3a90-c06039e053a6@suse.com>
+ <YEYUbGw5J1VMnuxd@Air-de-Roger>
+ <b8ab7ac3-036b-d226-dc82-c61bf42f13d6@suse.com>
+ <YEdLO04upNrxNTmI@Air-de-Roger>
+ <204d73ec-a46a-6cef-9bc4-4219a7d00350@suse.com>
+ <YEd6GTXJqRIjijl6@Air-de-Roger>
+ <6dd26887-4246-8c5d-bf94-de03657230c1@suse.com>
+ <YEeSE0oWzY4jUN6G@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <eafaee05-cdf8-bea6-65d7-7a9b8e1dfb3d@suse.com>
+Date: Tue, 9 Mar 2021 17:07:48 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
+In-Reply-To: <YEeSE0oWzY4jUN6G@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Merge arch/x86/include/asm/alternative-asm.h into
-arch/x86/include/asm/alternative.h in order to make it easier to use
-common definitions later.
+On 09.03.2021 16:19, Roger Pau Monné wrote:
+> On Tue, Mar 09, 2021 at 03:50:59PM +0100, Jan Beulich wrote:
+>> On 09.03.2021 14:37, Roger Pau Monné wrote:
+>>> Right. So given this awkward position Xen is in, we should maybe make
+>>> the lack of #GP injection as a result of an MSR access when no handler
+>>> is set formally part of the ABI and written down somewhere?
+>>>
+>>> It's not ideal, but at the end of day PV is 'our' own architecture,
+>>> and given that this workaround will be enabled by default, and that we
+>>> won't be able to turn it off we should have it written down as part of
+>>> the ABI.
+>>>
+>>> If you agree with this I'm fine with not injecting a #GP at all unless
+>>> the handler is set for PV, like you proposed in your first patch. IMO
+>>> it's not ideal, but it's better if it's a consistent behavior and
+>>> clearly written down in the public headers (likely next to the
+>>> hypercall used to setup the #GP handler).
+>>>
+>>> I know this can be seen as broken behavior from an x86 perspective,
+>>> but again PV is already different from x86.
+>>
+>> I'm certainly not opposed to spelling this out somewhere; iirc you
+>> said the other day that you couldn't spot a good place. I can't think
+>> of a good place either.
+> 
+> After looking some more, I think placing such comment next to
+> HYPERVISOR_set_trap_table (in arch-x86/xen.h) would be fine.
+> 
+>> Furthermore before we spell out anything we
+>> (which specifically includes Andrew) need to settle on the precise
+>> behavior we want. I did suggest earlier that I could see us tighten
+>> the condition, and there are many possible variations. For example we
+>> could record whether a #GP handler was ever installed, so we wouldn't
+>> return back to the relaxed behavior in case a guest zapped its handler
+>> again. But for behavior like this the immediate question is going to
+>> be what effect migration (or saving/restoring) of the guest ought to
+>> have.
+> 
+> Replying to the save/restore part: this is covered by my patch. Any
+> restore (or incoming live migration) from a source that doesn't have
+> msr_relaxed support will get that option enabled by default, so that
+> guests migrated from previous Xen versions don't see a change in MSR
+> access behavior. That applies to both PV and HVM guests (unless I have
+> messed things up in my patch).
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/entry/entry_32.S                |   2 +-
- arch/x86/entry/vdso/vdso32/system_call.S |   2 +-
- arch/x86/include/asm/alternative-asm.h   | 121 -----------------------
- arch/x86/include/asm/alternative.h       | 121 +++++++++++++++++++++--
- arch/x86/include/asm/nospec-branch.h     |   1 -
- arch/x86/include/asm/smap.h              |   5 +-
- arch/x86/lib/atomic64_386_32.S           |   2 +-
- arch/x86/lib/atomic64_cx8_32.S           |   2 +-
- arch/x86/lib/copy_page_64.S              |   2 +-
- arch/x86/lib/copy_user_64.S              |   2 +-
- arch/x86/lib/memcpy_64.S                 |   2 +-
- arch/x86/lib/memmove_64.S                |   2 +-
- arch/x86/lib/memset_64.S                 |   2 +-
- arch/x86/lib/retpoline.S                 |   2 +-
- 14 files changed, 126 insertions(+), 142 deletions(-)
- delete mode 100644 arch/x86/include/asm/alternative-asm.h
+Well, yes, that's for your changes. But here the question is about
+mine (and remember we didn't settle on the precise condition(s) yet,
+so the migration aspect may not be relevant in the end).
 
-diff --git a/arch/x86/entry/entry_32.S b/arch/x86/entry/entry_32.S
-index 765487e57d6e..96f084868ec7 100644
---- a/arch/x86/entry/entry_32.S
-+++ b/arch/x86/entry/entry_32.S
-@@ -40,7 +40,7 @@
- #include <asm/processor-flags.h>
- #include <asm/irq_vectors.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/asm.h>
- #include <asm/smap.h>
- #include <asm/frame.h>
-diff --git a/arch/x86/entry/vdso/vdso32/system_call.S b/arch/x86/entry/vdso/vdso32/system_call.S
-index de1fff7188aa..d6a6080bade0 100644
---- a/arch/x86/entry/vdso/vdso32/system_call.S
-+++ b/arch/x86/entry/vdso/vdso32/system_call.S
-@@ -6,7 +6,7 @@
- #include <linux/linkage.h>
- #include <asm/dwarf2.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- 
- 	.text
- 	.globl __kernel_vsyscall
-diff --git a/arch/x86/include/asm/alternative-asm.h b/arch/x86/include/asm/alternative-asm.h
-deleted file mode 100644
-index 80bc6b533358..000000000000
---- a/arch/x86/include/asm/alternative-asm.h
-+++ /dev/null
-@@ -1,121 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef _ASM_X86_ALTERNATIVE_ASM_H
--#define _ASM_X86_ALTERNATIVE_ASM_H
--
--#ifdef __ASSEMBLY__
--
--#include <asm/asm.h>
--
--#define ALTINSTR_FLAG_INV	(1 << 15)
--#define ALT_NOT(feat)		((feat) | ALTINSTR_FLAG_INV)
--
--#ifdef CONFIG_SMP
--	.macro LOCK_PREFIX
--672:	lock
--	.pushsection .smp_locks,"a"
--	.balign 4
--	.long 672b - .
--	.popsection
--	.endm
--#else
--	.macro LOCK_PREFIX
--	.endm
--#endif
--
--/*
-- * objtool annotation to ignore the alternatives and only consider the original
-- * instruction(s).
-- */
--.macro ANNOTATE_IGNORE_ALTERNATIVE
--	.Lannotate_\@:
--	.pushsection .discard.ignore_alts
--	.long .Lannotate_\@ - .
--	.popsection
--.endm
--
--/*
-- * Issue one struct alt_instr descriptor entry (need to put it into
-- * the section .altinstructions, see below). This entry contains
-- * enough information for the alternatives patching code to patch an
-- * instruction. See apply_alternatives().
-- */
--.macro altinstruction_entry orig alt feature orig_len alt_len pad_len
--	.long \orig - .
--	.long \alt - .
--	.word \feature
--	.byte \orig_len
--	.byte \alt_len
--	.byte \pad_len
--.endm
--
--/*
-- * Define an alternative between two instructions. If @feature is
-- * present, early code in apply_alternatives() replaces @oldinstr with
-- * @newinstr. ".skip" directive takes care of proper instruction padding
-- * in case @newinstr is longer than @oldinstr.
-- */
--.macro ALTERNATIVE oldinstr, newinstr, feature
--140:
--	\oldinstr
--141:
--	.skip -(((144f-143f)-(141b-140b)) > 0) * ((144f-143f)-(141b-140b)),0x90
--142:
--
--	.pushsection .altinstructions,"a"
--	altinstruction_entry 140b,143f,\feature,142b-140b,144f-143f,142b-141b
--	.popsection
--
--	.pushsection .altinstr_replacement,"ax"
--143:
--	\newinstr
--144:
--	.popsection
--.endm
--
--#define old_len			141b-140b
--#define new_len1		144f-143f
--#define new_len2		145f-144f
--
--/*
-- * gas compatible max based on the idea from:
-- * http://graphics.stanford.edu/~seander/bithacks.html#IntegerMinOrMax
-- *
-- * The additional "-" is needed because gas uses a "true" value of -1.
-- */
--#define alt_max_short(a, b)	((a) ^ (((a) ^ (b)) & -(-((a) < (b)))))
--
--
--/*
-- * Same as ALTERNATIVE macro above but for two alternatives. If CPU
-- * has @feature1, it replaces @oldinstr with @newinstr1. If CPU has
-- * @feature2, it replaces @oldinstr with @feature2.
-- */
--.macro ALTERNATIVE_2 oldinstr, newinstr1, feature1, newinstr2, feature2
--140:
--	\oldinstr
--141:
--	.skip -((alt_max_short(new_len1, new_len2) - (old_len)) > 0) * \
--		(alt_max_short(new_len1, new_len2) - (old_len)),0x90
--142:
--
--	.pushsection .altinstructions,"a"
--	altinstruction_entry 140b,143f,\feature1,142b-140b,144f-143f,142b-141b
--	altinstruction_entry 140b,144f,\feature2,142b-140b,145f-144f,142b-141b
--	.popsection
--
--	.pushsection .altinstr_replacement,"ax"
--143:
--	\newinstr1
--144:
--	\newinstr2
--145:
--	.popsection
--.endm
--
--#define ALTERNATIVE_TERNARY(oldinstr, feature, newinstr1, newinstr2)	\
--	ALTERNATIVE_2 oldinstr, newinstr2, X86_FEATURE_ALWAYS,		\
--	newinstr1, feature
--
--#endif  /*  __ASSEMBLY__  */
--
--#endif /* _ASM_X86_ALTERNATIVE_ASM_H */
-diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
-index 4fb844e29d26..03f428e6b897 100644
---- a/arch/x86/include/asm/alternative.h
-+++ b/arch/x86/include/asm/alternative.h
-@@ -2,13 +2,17 @@
- #ifndef _ASM_X86_ALTERNATIVE_H
- #define _ASM_X86_ALTERNATIVE_H
- 
--#ifndef __ASSEMBLY__
--
- #include <linux/types.h>
--#include <linux/stddef.h>
- #include <linux/stringify.h>
- #include <asm/asm.h>
- 
-+#define ALTINSTR_FLAG_INV	(1 << 15)
-+#define ALT_NOT(feat)		((feat) | ALTINSTR_FLAG_INV)
-+
-+#ifndef __ASSEMBLY__
-+
-+#include <linux/stddef.h>
-+
- /*
-  * Alternative inline assembly for SMP.
-  *
-@@ -59,14 +63,11 @@ struct alt_instr {
- 	s32 instr_offset;	/* original instruction */
- 	s32 repl_offset;	/* offset to replacement instruction */
- 	u16 cpuid;		/* cpuid bit set for replacement */
--#define ALTINSTR_FLAG_INV (1 << 15)
- 	u8  instrlen;		/* length of original instruction */
- 	u8  replacementlen;	/* length of new instruction */
- 	u8  padlen;		/* length of build-time padding */
- } __packed;
- 
--#define ALT_NOT(feat)	((feat) | ALTINSTR_FLAG_INV)
--
- /*
-  * Debug flag that can be tested to see whether alternative
-  * instructions were patched in already:
-@@ -280,6 +281,114 @@ static inline int alternatives_text_reserved(void *start, void *end)
-  */
- #define ASM_NO_INPUT_CLOBBER(clbr...) "i" (0) : clbr
- 
-+#else /* __ASSEMBLY__ */
-+
-+#ifdef CONFIG_SMP
-+	.macro LOCK_PREFIX
-+672:	lock
-+	.pushsection .smp_locks,"a"
-+	.balign 4
-+	.long 672b - .
-+	.popsection
-+	.endm
-+#else
-+	.macro LOCK_PREFIX
-+	.endm
-+#endif
-+
-+/*
-+ * objtool annotation to ignore the alternatives and only consider the original
-+ * instruction(s).
-+ */
-+.macro ANNOTATE_IGNORE_ALTERNATIVE
-+	.Lannotate_\@:
-+	.pushsection .discard.ignore_alts
-+	.long .Lannotate_\@ - .
-+	.popsection
-+.endm
-+
-+/*
-+ * Issue one struct alt_instr descriptor entry (need to put it into
-+ * the section .altinstructions, see below). This entry contains
-+ * enough information for the alternatives patching code to patch an
-+ * instruction. See apply_alternatives().
-+ */
-+.macro altinstruction_entry orig alt feature orig_len alt_len pad_len
-+	.long \orig - .
-+	.long \alt - .
-+	.word \feature
-+	.byte \orig_len
-+	.byte \alt_len
-+	.byte \pad_len
-+.endm
-+
-+/*
-+ * Define an alternative between two instructions. If @feature is
-+ * present, early code in apply_alternatives() replaces @oldinstr with
-+ * @newinstr. ".skip" directive takes care of proper instruction padding
-+ * in case @newinstr is longer than @oldinstr.
-+ */
-+.macro ALTERNATIVE oldinstr, newinstr, feature
-+140:
-+	\oldinstr
-+141:
-+	.skip -(((144f-143f)-(141b-140b)) > 0) * ((144f-143f)-(141b-140b)),0x90
-+142:
-+
-+	.pushsection .altinstructions,"a"
-+	altinstruction_entry 140b,143f,\feature,142b-140b,144f-143f,142b-141b
-+	.popsection
-+
-+	.pushsection .altinstr_replacement,"ax"
-+143:
-+	\newinstr
-+144:
-+	.popsection
-+.endm
-+
-+#define old_len			141b-140b
-+#define new_len1		144f-143f
-+#define new_len2		145f-144f
-+
-+/*
-+ * gas compatible max based on the idea from:
-+ * http://graphics.stanford.edu/~seander/bithacks.html#IntegerMinOrMax
-+ *
-+ * The additional "-" is needed because gas uses a "true" value of -1.
-+ */
-+#define alt_max_short(a, b)	((a) ^ (((a) ^ (b)) & -(-((a) < (b)))))
-+
-+/*
-+ * Same as ALTERNATIVE macro above but for two alternatives. If CPU
-+ * has @feature1, it replaces @oldinstr with @newinstr1. If CPU has
-+ * @feature2, it replaces @oldinstr with @feature2.
-+ */
-+.macro ALTERNATIVE_2 oldinstr, newinstr1, feature1, newinstr2, feature2
-+140:
-+	\oldinstr
-+141:
-+	.skip -((alt_max_short(new_len1, new_len2) - (old_len)) > 0) * \
-+	      (alt_max_short(new_len1, new_len2) - (old_len)),0x90
-+142:
-+
-+	.pushsection .altinstructions,"a"
-+	altinstruction_entry 140b,143f,\feature1,142b-140b,144f-143f,142b-141b
-+	altinstruction_entry 140b,144f,\feature2,142b-140b,145f-144f,142b-141b
-+	.popsection
-+
-+	.pushsection .altinstr_replacement,"ax"
-+143:
-+	\newinstr1
-+144:
-+	\newinstr2
-+145:
-+	.popsection
-+.endm
-+
-+#define ALTERNATIVE_TERNARY(oldinstr, feature, newinstr1, newinstr2)	\
-+	ALTERNATIVE_2 oldinstr, newinstr2, X86_FEATURE_ALWAYS,		\
-+	newinstr1, feature
-+
- #endif /* __ASSEMBLY__ */
- 
- #endif /* _ASM_X86_ALTERNATIVE_H */
-diff --git a/arch/x86/include/asm/nospec-branch.h b/arch/x86/include/asm/nospec-branch.h
-index cb9ad6b73973..529f8e9380d8 100644
---- a/arch/x86/include/asm/nospec-branch.h
-+++ b/arch/x86/include/asm/nospec-branch.h
-@@ -7,7 +7,6 @@
- #include <linux/objtool.h>
- 
- #include <asm/alternative.h>
--#include <asm/alternative-asm.h>
- #include <asm/cpufeatures.h>
- #include <asm/msr-index.h>
- #include <asm/unwind_hints.h>
-diff --git a/arch/x86/include/asm/smap.h b/arch/x86/include/asm/smap.h
-index 8b58d6975d5d..ea1d8eb644cb 100644
---- a/arch/x86/include/asm/smap.h
-+++ b/arch/x86/include/asm/smap.h
-@@ -11,6 +11,7 @@
- 
- #include <asm/nops.h>
- #include <asm/cpufeatures.h>
-+#include <asm/alternative.h>
- 
- /* "Raw" instruction opcodes */
- #define __ASM_CLAC	".byte 0x0f,0x01,0xca"
-@@ -18,8 +19,6 @@
- 
- #ifdef __ASSEMBLY__
- 
--#include <asm/alternative-asm.h>
--
- #ifdef CONFIG_X86_SMAP
- 
- #define ASM_CLAC \
-@@ -37,8 +36,6 @@
- 
- #else /* __ASSEMBLY__ */
- 
--#include <asm/alternative.h>
--
- #ifdef CONFIG_X86_SMAP
- 
- static __always_inline void clac(void)
-diff --git a/arch/x86/lib/atomic64_386_32.S b/arch/x86/lib/atomic64_386_32.S
-index 3b6544111ac9..16bc9130e7a5 100644
---- a/arch/x86/lib/atomic64_386_32.S
-+++ b/arch/x86/lib/atomic64_386_32.S
-@@ -6,7 +6,7 @@
-  */
- 
- #include <linux/linkage.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- 
- /* if you want SMP support, implement these with real spinlocks */
- .macro LOCK reg
-diff --git a/arch/x86/lib/atomic64_cx8_32.S b/arch/x86/lib/atomic64_cx8_32.S
-index 1c5c81c16b06..ce6935690766 100644
---- a/arch/x86/lib/atomic64_cx8_32.S
-+++ b/arch/x86/lib/atomic64_cx8_32.S
-@@ -6,7 +6,7 @@
-  */
- 
- #include <linux/linkage.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- 
- .macro read64 reg
- 	movl %ebx, %eax
-diff --git a/arch/x86/lib/copy_page_64.S b/arch/x86/lib/copy_page_64.S
-index 2402d4c489d2..db4b4f9197c7 100644
---- a/arch/x86/lib/copy_page_64.S
-+++ b/arch/x86/lib/copy_page_64.S
-@@ -3,7 +3,7 @@
- 
- #include <linux/linkage.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/export.h>
- 
- /*
-diff --git a/arch/x86/lib/copy_user_64.S b/arch/x86/lib/copy_user_64.S
-index 77b9b2a3b5c8..57b79c577496 100644
---- a/arch/x86/lib/copy_user_64.S
-+++ b/arch/x86/lib/copy_user_64.S
-@@ -11,7 +11,7 @@
- #include <asm/asm-offsets.h>
- #include <asm/thread_info.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/asm.h>
- #include <asm/smap.h>
- #include <asm/export.h>
-diff --git a/arch/x86/lib/memcpy_64.S b/arch/x86/lib/memcpy_64.S
-index 1e299ac73c86..1cc9da6e29c7 100644
---- a/arch/x86/lib/memcpy_64.S
-+++ b/arch/x86/lib/memcpy_64.S
-@@ -4,7 +4,7 @@
- #include <linux/linkage.h>
- #include <asm/errno.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/export.h>
- 
- .pushsection .noinstr.text, "ax"
-diff --git a/arch/x86/lib/memmove_64.S b/arch/x86/lib/memmove_64.S
-index 41902fe8b859..64801010d312 100644
---- a/arch/x86/lib/memmove_64.S
-+++ b/arch/x86/lib/memmove_64.S
-@@ -8,7 +8,7 @@
-  */
- #include <linux/linkage.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/export.h>
- 
- #undef memmove
-diff --git a/arch/x86/lib/memset_64.S b/arch/x86/lib/memset_64.S
-index 0bfd26e4ca9e..9827ae267f96 100644
---- a/arch/x86/lib/memset_64.S
-+++ b/arch/x86/lib/memset_64.S
-@@ -3,7 +3,7 @@
- 
- #include <linux/linkage.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/export.h>
- 
- /*
-diff --git a/arch/x86/lib/retpoline.S b/arch/x86/lib/retpoline.S
-index f6fb1d218dcc..6bb74b5c238c 100644
---- a/arch/x86/lib/retpoline.S
-+++ b/arch/x86/lib/retpoline.S
-@@ -4,7 +4,7 @@
- #include <linux/linkage.h>
- #include <asm/dwarf2.h>
- #include <asm/cpufeatures.h>
--#include <asm/alternative-asm.h>
-+#include <asm/alternative.h>
- #include <asm/export.h>
- #include <asm/nospec-branch.h>
- #include <asm/unwind_hints.h>
--- 
-2.26.2
-
+Jan
 
