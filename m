@@ -2,56 +2,48 @@ Return-Path: <SRS0=92qd=II=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85CB6C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 10:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0527C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 10:44:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 252AB64E60
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 10:24:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 252AB64E60
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4EEC764FE5
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 10:44:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4EEC764FE5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95954.181211 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95959.181228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJw15-0001CR-KI; Wed, 10 Mar 2021 10:24:35 +0000
+	id 1lJwJf-00034K-Ae; Wed, 10 Mar 2021 10:43:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95954.181211; Wed, 10 Mar 2021 10:24:35 +0000
+Received: by outflank-mailman (output) from mailman id 95959.181228; Wed, 10 Mar 2021 10:43:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJw15-0001CK-HP; Wed, 10 Mar 2021 10:24:35 +0000
-Received: by outflank-mailman (input) for mailman id 95954;
- Wed, 10 Mar 2021 10:24:34 +0000
+	id 1lJwJf-00034D-7g; Wed, 10 Mar 2021 10:43:47 +0000
+Received: by outflank-mailman (input) for mailman id 95959;
+ Wed, 10 Mar 2021 10:43:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wmYj=II=amazon.com=prvs=696d233ab=famzheng@srs-us1.protection.inumbo.net>)
- id 1lJw14-0001CF-7k
- for xen-devel@lists.xenproject.org; Wed, 10 Mar 2021 10:24:34 +0000
-Received: from smtp-fw-4101.amazon.com (unknown [72.21.198.25])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6e72d90d-d512-4648-8c16-c0064fc13ff5;
- Wed, 10 Mar 2021 10:24:32 +0000 (UTC)
-Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO
- email-inbound-relay-2c-c6afef2e.us-west-2.amazon.com) ([10.43.8.2])
- by smtp-border-fw-out-4101.iad4.amazon.com with ESMTP;
- 10 Mar 2021 10:24:25 +0000
-Received: from EX13D38EUB001.ant.amazon.com
- (pdx1-ws-svc-p6-lb9-vlan2.pdx.amazon.com [10.236.137.194])
- by email-inbound-relay-2c-c6afef2e.us-west-2.amazon.com (Postfix) with ESMTPS
- id BB253A2840; Wed, 10 Mar 2021 10:24:23 +0000 (UTC)
-Received: from EX13D38EUB001.ant.amazon.com (10.43.166.110) by
- EX13D38EUB001.ant.amazon.com (10.43.166.110) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Wed, 10 Mar 2021 10:24:22 +0000
-Received: from EX13D38EUB001.ant.amazon.com ([10.43.166.110]) by
- EX13D38EUB001.ant.amazon.com ([10.43.166.110]) with mapi id 15.00.1497.012;
- Wed, 10 Mar 2021 10:24:22 +0000
+ <SRS0=Iqsa=II=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
+ id 1lJwJe-000348-0R
+ for xen-devel@lists.xenproject.org; Wed, 10 Mar 2021 10:43:46 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id cd3f677c-babd-48ef-b53d-6dc2017b9d0b;
+ Wed, 10 Mar 2021 10:43:44 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EE6171FB;
+ Wed, 10 Mar 2021 02:43:43 -0800 (PST)
+Received: from e123311-lin.arm.com (unknown [10.57.15.227])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0907B3F85F;
+ Wed, 10 Mar 2021 02:43:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,76 +53,116 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e72d90d-d512-4648-8c16-c0064fc13ff5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1615371874; x=1646907874;
-  h=from:to:cc:date:message-id:references:in-reply-to:
-   content-id:content-transfer-encoding:mime-version:subject;
-  bh=FvSvjguTLFZ1hhfb8GXwvVIqK8Ngn1VmFVpzPrk+vtc=;
-  b=K4ExUeoDZtZss8ExAfsspXeKWi45YoAWrZQZElNQ0pRvE+g4ywE2618N
-   Eaj/6W/sGjcOPwgPykB9D8H5KHQJADMQqPYtBu2ZS4BFpAA4kx+dzv1Ya
-   FB8ztVOFLW4tJDDfNZrArJYHrU4Ac0ONZtOvBidjgfhaWo24lQcySC6db
-   Q=;
-X-IronPort-AV: E=Sophos;i="5.81,237,1610409600"; 
-   d="scan'208";a="91705831"
-Subject: Re: [PATCH for-4.15] xen: Bump the minimum version of GCC supported to 4.9
- (5.1 on arm64)
-Thread-Topic: [PATCH for-4.15] xen: Bump the minimum version of GCC supported to 4.9 (5.1
- on arm64)
-From: "Zheng, Fam" <famzheng@amazon.com>
-To: "roger.pau@citrix.com" <roger.pau@citrix.com>, "sstabellini@kernel.org"
-	<sstabellini@kernel.org>
-CC: "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>,
-	"anthony.perard@citrix.com" <anthony.perard@citrix.com>,
-	"andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "cardoe@cardoe.com"
-	<cardoe@cardoe.com>, "Bertrand.Marquis@arm.com" <Bertrand.Marquis@arm.com>,
-	"julien@xen.org" <julien@xen.org>, "wl@xen.org" <wl@xen.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Thread-Index: AQHXEt09VDRvSzcs2kGB8AY7OydLi6p4fe6AgAJbNYCAAJiMAIAAB66AgADGvICAAJ7QAIAAKm8A
-Date: Wed, 10 Mar 2021 10:24:22 +0000
-Message-ID: <985f49e153789ff2428a7b3f47a0b2557bf23c97.camel@amazon.com>
-References: <161507188317.11025.6744028462008264481@c667a6b167f6>
-	 <af575951-9d48-09da-d120-a6120ca29ead@xen.org>
-	 <alpine.DEB.2.21.2103081654030.16374@sstabellini-ThinkPad-T480s>
-	 <10b8048a-e8fe-1fcd-7291-7f1b16da2f4c@xen.org>
-	 <YEdOz4B4rtXbjKOS@Air-de-Roger>
-	 <alpine.DEB.2.21.2103091423470.16374@sstabellini-ThinkPad-T480s>
-	 <YEh6vmXV8bdhcC1U@Air-de-Roger>
-In-Reply-To: <YEh6vmXV8bdhcC1U@Air-de-Roger>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.43.166.52]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <8D6519B30EEBE64592AE9E0AC0D73F42@amazon.com>
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: cd3f677c-babd-48ef-b53d-6dc2017b9d0b
+From: Michal Orzel <michal.orzel@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: julien@xen.org,
+	andrew.cooper3@citrix.com,
+	amc96@cam.ac.uk
+Subject: [XTF 1/4] xtf: Perform misc code cleanup
+Date: Wed, 10 Mar 2021 11:43:32 +0100
+Message-Id: <20210310104335.14855-2-michal.orzel@arm.com>
+X-Mailer: git-send-email 2.29.0
+In-Reply-To: <20210310104335.14855-1-michal.orzel@arm.com>
+References: <20210310104335.14855-1-michal.orzel@arm.com>
 MIME-Version: 1.0
-Precedence: Bulk
+Content-Transfer-Encoding: 8bit
 
-T24gV2VkLCAyMDIxLTAzLTEwIGF0IDA4OjUyICswMTAwLCBSb2dlciBQYXUgTW9ubsOpIHdyb3Rl
-Og0KPiBDQVVUSU9OOiBUaGlzIGVtYWlsIG9yaWdpbmF0ZWQgZnJvbSBvdXRzaWRlIG9mIHRoZSBv
-cmdhbml6YXRpb24uIERvDQo+IG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVu
-bGVzcyB5b3UgY2FuIGNvbmZpcm0gdGhlIHNlbmRlcg0KPiBhbmQga25vdyB0aGUgY29udGVudCBp
-cyBzYWZlLg0KPiANCj4gDQo+IA0KPiBPbiBUdWUsIE1hciAwOSwgMjAyMSBhdCAwMjoyNDowNVBN
-IC0wODAwLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6DQo+ID4gT24gVHVlLCA5IE1hciAyMDIx
-LCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOg0KPiA+ID4gT24gVHVlLCBNYXIgMDksIDIwMjEgYXQg
-MTA6MDU6MThBTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdyb3RlOg0KPiA+ID4gPiBIaSBTdGVmYW5v
-LA0KPiA+ID4gPiANCj4gPiA+ID4gT24gMDkvMDMvMjAyMSAwMDo1OSwgU3RlZmFubyBTdGFiZWxs
-aW5pIHdyb3RlOg0KPiA+ID4gPiA+IE9uIFN1biwgNyBNYXIgMjAyMSwgSnVsaWVuIEdyYWxsIHdy
-b3RlOg0KPiA+ID4gPiA+ID4gT24gMDYvMDMvMjAyMSAyMzowNCwgbm8tcmVwbHlAcGF0Y2hldy5v
-cmcgd3JvdGU6DQo+ID4gPiANCj4gPiA+IFdoZXJlIGRvZXMgb25lIGhhcyB0byByZWdpc3RlciB0
-byBnZXQgdGhlIHBhdGNoZXcgYnVpbGQgZmFpbHVyZXM/DQo+ID4gDQo+ID4gQnkgYXNraW5nIEZh
-bSAoQ0MnZWQpIHZlcnkgbmljZWx5IDotKQ0KPiANCj4gVGhhbmtzISBDb3VsZCB3ZSBtYXliZSBz
-ZXR1cCBhIG1haWxpbmcgbGlzdCBmb3IgdGhvc2UgZW1haWxzPyBpZToNCj4gcGF0Y2hldy10ZXN0
-c0AuLi4gb3Igc29tZSBzdWNoLCBzbyB0aGF0IHdlIGRvbid0IGhhdmUgdG8gZ28gYWRkaW5nDQo+
-IHBlb3BsZSBtYW51YWxseT8NCj4gDQo+IFJvZ2VyLg0KDQpUaGUgaWRlYSAoSSB0aGluaykgaXMg
-dG8gZ3JvdXAgcmVwbHkgYWxsIG9uY2Ugd2UgZmVlbCBjb21mb3J0YWJsZSB3aXRoDQp0aGUgZmFs
-c2UgcG9zaXRpdmUgcmF0ZS4gQnV0IGEgc2VwYXJhdGUgbWFpbGluZyBsaXN0IGlzIGFsc28gYSBn
-b29kDQphcHByb2FjaC4NCg0KSSdsbCBhZGQgeW91IGJ5IGhhbmQgZm9yIG5vdywgUm9nZXIuDQoN
-CkZhbQ0K
+-define macro ALIGN to set alignment:
+Header file asm_macros.h should not contain
+architecture specific code. Replace hardcoded
+alignment value with a call to macro ALIGN.
+
+-move declaration of shared_info into xtf/traps.h:
+Declaration of shared_info structure should be
+placed in xtf/traps.h as it is a common declaration
+for all the possible architectures.
+
+-do not protect including <arch/barrier.h>
+We should always include <arch/barrier.h> and rely
+on the compiler to throw an error. This would avoid
+increasing #if protection each time we would add
+a new architecture.
+
+Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+---
+ arch/x86/include/arch/asm_macros.h | 2 ++
+ arch/x86/include/arch/traps.h      | 1 -
+ include/xtf/asm_macros.h           | 2 +-
+ include/xtf/barrier.h              | 4 ----
+ include/xtf/traps.h                | 2 ++
+ 5 files changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/arch/x86/include/arch/asm_macros.h b/arch/x86/include/arch/asm_macros.h
+index e12e1ba..1aabed5 100644
+--- a/arch/x86/include/arch/asm_macros.h
++++ b/arch/x86/include/arch/asm_macros.h
+@@ -15,6 +15,8 @@
+ # define __ASM_CODE_RAW(x) #x
+ #endif
+ 
++#define ALIGN .align 16
++
+ /* Select between two variations based on compat or long mode. */
+ #ifdef __i386__
+ # define __ASM_SEL(c, l)     __ASM_CODE(c)
+diff --git a/arch/x86/include/arch/traps.h b/arch/x86/include/arch/traps.h
+index 0c6888b..60fc3a4 100644
+--- a/arch/x86/include/arch/traps.h
++++ b/arch/x86/include/arch/traps.h
+@@ -57,7 +57,6 @@ extern uint8_t user_stack[PAGE_SIZE];
+ 
+ extern xen_pv_start_info_t *pv_start_info;
+ extern xen_pvh_start_info_t *pvh_start_info;
+-extern shared_info_t shared_info;
+ 
+ /*
+  * Parameters for fine tuning the exec_user_*() behaviour.
+diff --git a/include/xtf/asm_macros.h b/include/xtf/asm_macros.h
+index 5484f7c..c531355 100644
+--- a/include/xtf/asm_macros.h
++++ b/include/xtf/asm_macros.h
+@@ -25,7 +25,7 @@
+  * @param name Function name.
+  */
+ #define ENTRY(name)                             \
+-    .align 16;                                  \
++    ALIGN;                                      \
+     GLOBAL(name)
+ 
+ /**
+diff --git a/include/xtf/barrier.h b/include/xtf/barrier.h
+index b526fe1..3b02d49 100644
+--- a/include/xtf/barrier.h
++++ b/include/xtf/barrier.h
+@@ -1,11 +1,7 @@
+ #ifndef XTF_BARRIER_H
+ #define XTF_BARRIER_H
+ 
+-#if defined(__x86_64__) || defined (__i386__)
+ # include <arch/barrier.h>
+-#else
+-# error Bad architecture
+-#endif
+ 
+ #endif /* XTF_BARRIER_H */
+ 
+diff --git a/include/xtf/traps.h b/include/xtf/traps.h
+index 8fc66af..4081db6 100644
+--- a/include/xtf/traps.h
++++ b/include/xtf/traps.h
+@@ -6,6 +6,8 @@
+ 
+ #include <arch/traps.h>
+ 
++extern shared_info_t shared_info;
++
+ /**
+  * May be implemented by a guest to provide custom exception handling.
+  */
+-- 
+2.29.0
+
 
