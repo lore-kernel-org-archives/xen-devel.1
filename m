@@ -2,45 +2,45 @@ Return-Path: <SRS0=92qd=II=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24A0DC433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 07:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24C57C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 07:52:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D42F164FDE
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 07:51:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D42F164FDE
+	by mail.kernel.org (Postfix) with ESMTPS id C811764FC4
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Mar 2021 07:52:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C811764FC4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.95881.181014 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.95885.181026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJtcu-0002Q6-20; Wed, 10 Mar 2021 07:51:28 +0000
+	id 1lJte7-0002Zk-G7; Wed, 10 Mar 2021 07:52:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 95881.181014; Wed, 10 Mar 2021 07:51:28 +0000
+Received: by outflank-mailman (output) from mailman id 95885.181026; Wed, 10 Mar 2021 07:52:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lJtct-0002Pz-Uz; Wed, 10 Mar 2021 07:51:27 +0000
-Received: by outflank-mailman (input) for mailman id 95881;
- Wed, 10 Mar 2021 07:51:26 +0000
+	id 1lJte7-0002Zd-D4; Wed, 10 Mar 2021 07:52:43 +0000
+Received: by outflank-mailman (input) for mailman id 95885;
+ Wed, 10 Mar 2021 07:52:42 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=YKvx=II=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lJtcs-0002Ps-AQ
- for xen-devel@lists.xenproject.org; Wed, 10 Mar 2021 07:51:26 +0000
+ id 1lJte6-0002ZY-Bg
+ for xen-devel@lists.xenproject.org; Wed, 10 Mar 2021 07:52:42 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 501b0ad5-d2ae-4a28-9543-767120d0df42;
- Wed, 10 Mar 2021 07:51:25 +0000 (UTC)
+ id d94ed53f-f894-4c97-aa0b-37368bcb87d7;
+ Wed, 10 Mar 2021 07:52:41 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 79E63AC1F;
- Wed, 10 Mar 2021 07:51:24 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id E5E6DAE44;
+ Wed, 10 Mar 2021 07:52:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,139 +52,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 501b0ad5-d2ae-4a28-9543-767120d0df42
+X-Inumbo-ID: d94ed53f-f894-4c97-aa0b-37368bcb87d7
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615362684; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1615362761; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=OdJhwschBXvB5hNHxMQE7ci5qnJUnPFBXFeYxWWs7LU=;
-	b=MIhzv4U/6I9MUcLzMLr7qFZ5XDlYOMx+4qXKrm3bpB5MI6rXn4/VWVUmQNesLyQK4JWPsZ
-	NyTSsAP5d6dlFcaGiMseRqojsKxIlKlVF2qv7qQl7w/FdImJGPHAb7HgqO6EnT98wcyJpB
-	SPmxzqannDTIg0oRcNf4OS81xpo3XRQ=
+	bh=fmagm0g6SG9wOn5qY9NDsKJhRGoqp/JA1hP32sWV3T4=;
+	b=VyZrbZQKMeSMXCTWCSyz0CqR7B2gWSK3gyj6vBitCnWoQi7styoaQILCubHOquaJugUypv
+	ovDZFEds58x63Nt44akxgZiZ4BSosHqqH92NNeihDJ/FNj5MIk3ysmnm9p42v5UM3/fAEh
+	IKGW1y8bpuZ2EbURSOq7bZEdO9hkQPE=
+Subject: Re: [PATCH v6 04/12] x86/alternative: support not-feature
 To: Borislav Petkov <bp@alien8.de>
 Cc: xen-devel@lists.xenproject.org, x86@kernel.org,
- virtualization@lists.linux-foundation.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
- Deep Shah <sdeep@vmware.com>, "VMware, Inc." <pv-drivers@vmware.com>,
- Russell King <linux@armlinux.org.uk>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- "H. Peter Anvin" <hpa@zytor.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
- Wanpeng Li <wanpengli@tencent.com>, Jim Mattson <jmattson@google.com>,
- Joerg Roedel <joro@8bytes.org>, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>
+ linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>
 References: <20210309134813.23912-1-jgross@suse.com>
- <20210309134813.23912-3-jgross@suse.com> <20210309185737.GE699@zn.tnic>
+ <20210309134813.23912-5-jgross@suse.com> <20210310060705.GB23521@zn.tnic>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Subject: Re: [PATCH v6 02/12] x86/paravirt: switch time pvops functions to use
- static_call()
-Message-ID: <e06cc359-6300-a26b-c307-9ef8d963b0c1@suse.com>
-Date: Wed, 10 Mar 2021 08:51:22 +0100
+Message-ID: <1b95376a-56e1-ab3e-aa85-73a9d38aaaf7@suse.com>
+Date: Wed, 10 Mar 2021 08:52:40 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.7.1
 MIME-Version: 1.0
-In-Reply-To: <20210309185737.GE699@zn.tnic>
+In-Reply-To: <20210310060705.GB23521@zn.tnic>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="nna0TkS6ABUg1IonAzP3y7arxA0rrchGS"
+ boundary="dTWXoiEr2CUu22HQ0ZizVBKitnbXxMRRZ"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---nna0TkS6ABUg1IonAzP3y7arxA0rrchGS
-Content-Type: multipart/mixed; boundary="q9XNVycbGdPhE1GVCGpTpAYFf6uHIwdvx";
+--dTWXoiEr2CUu22HQ0ZizVBKitnbXxMRRZ
+Content-Type: multipart/mixed; boundary="p5M5sLIHJQkn6BTbMQSaAVowf7JqkAJIS";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 To: Borislav Petkov <bp@alien8.de>
 Cc: xen-devel@lists.xenproject.org, x86@kernel.org,
- virtualization@lists.linux-foundation.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-hyperv@vger.kernel.org, kvm@vger.kernel.org,
- Deep Shah <sdeep@vmware.com>, "VMware, Inc." <pv-drivers@vmware.com>,
- Russell King <linux@armlinux.org.uk>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- "H. Peter Anvin" <hpa@zytor.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson
- <seanjc@google.com>, Vitaly Kuznetsov <vkuznets@redhat.com>,
- Wanpeng Li <wanpengli@tencent.com>, Jim Mattson <jmattson@google.com>,
- Joerg Roedel <joro@8bytes.org>, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>
-Message-ID: <e06cc359-6300-a26b-c307-9ef8d963b0c1@suse.com>
-Subject: Re: [PATCH v6 02/12] x86/paravirt: switch time pvops functions to use
- static_call()
+ linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, "H. Peter Anvin" <hpa@zytor.com>
+Message-ID: <1b95376a-56e1-ab3e-aa85-73a9d38aaaf7@suse.com>
+Subject: Re: [PATCH v6 04/12] x86/alternative: support not-feature
 References: <20210309134813.23912-1-jgross@suse.com>
- <20210309134813.23912-3-jgross@suse.com> <20210309185737.GE699@zn.tnic>
-In-Reply-To: <20210309185737.GE699@zn.tnic>
+ <20210309134813.23912-5-jgross@suse.com> <20210310060705.GB23521@zn.tnic>
+In-Reply-To: <20210310060705.GB23521@zn.tnic>
 
---q9XNVycbGdPhE1GVCGpTpAYFf6uHIwdvx
+--p5M5sLIHJQkn6BTbMQSaAVowf7JqkAJIS
 Content-Type: multipart/mixed;
- boundary="------------B707D43FD7210F09477B06A5"
+ boundary="------------67B61F63DAEE5E8820EB9FAE"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------B707D43FD7210F09477B06A5
+--------------67B61F63DAEE5E8820EB9FAE
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 09.03.21 19:57, Borislav Petkov wrote:
-> On Tue, Mar 09, 2021 at 02:48:03PM +0100, Juergen Gross wrote:
->> @@ -167,6 +168,17 @@ static u64 native_steal_clock(int cpu)
->>   	return 0;
->>   }
->>  =20
->> +DEFINE_STATIC_CALL(pv_steal_clock, native_steal_clock);
->> +DEFINE_STATIC_CALL(pv_sched_clock, native_sched_clock);
->> +
->> +bool paravirt_using_native_sched_clock =3D true;
->> +
->> +void paravirt_set_sched_clock(u64 (*func)(void))
->> +{
->> +	static_call_update(pv_sched_clock, func);
->> +	paravirt_using_native_sched_clock =3D (func =3D=3D native_sched_cloc=
-k);
->> +}
+On 10.03.21 07:07, Borislav Petkov wrote:
+> On Tue, Mar 09, 2021 at 02:48:05PM +0100, Juergen Gross wrote:
+>> Add support for alternative patching for the case a feature is not
+>> present on the current cpu.
+>>
+>> For users of ALTERNATIVE() and friends an inverted feature is specifie=
+d
+>> by applying the ALT_NOT() macro to it, e.g.:
+>>
+>> ALTERNATIVE(old, new, ALT_NOT(feature))
+>>
+>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>> ---
+>> V5:
+>> - split off from next patch
+>> - reworked to use flag byte (Boris Petkov)
+>> V6:
+>> - rework again to not use flag byte (Boris Petkov)
+>> ---
+>>   arch/x86/include/asm/alternative-asm.h |  3 +++
+>>   arch/x86/include/asm/alternative.h     |  3 +++
+>>   arch/x86/kernel/alternative.c          | 19 ++++++++++++++-----
+>>   3 files changed, 20 insertions(+), 5 deletions(-)
 >=20
-> What's the point of this function if there's a global
-> paravirt_using_native_sched_clock variable now?
-
-It is combining the two needed actions: update the static call and
-set the paravirt_using_native_sched_clock boolean.
-
-> Looking how the bit of information whether native_sched_clock is used,
-> is needed in tsc.c, it probably would be cleaner if you add a
+> LGTM, minor touchups I'd do ontop:
 >=20
-> set_sched_clock_native(void);
+> ---
 >=20
-> or so, to tsc.c instead and call that here and make that long var name =
-a
-> a shorter and static one in tsc.c instead.
+> diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/=
+alternative.h
+> index 89889618ae01..fd205cdcfbad 100644
+> --- a/arch/x86/include/asm/alternative.h
+> +++ b/arch/x86/include/asm/alternative.h
+> @@ -55,18 +55,18 @@
+>   	".long 999b - .\n\t"					\
+>   	".popsection\n\t"
+>  =20
+> +#define ALTINSTR_FLAG_INV	(1 << 15)
+> +#define ALT_NOT(feat)		((feat) | ALTINSTR_FLAG_INV)
+> +
+>   struct alt_instr {
+>   	s32 instr_offset;	/* original instruction */
+>   	s32 repl_offset;	/* offset to replacement instruction */
+>   	u16 cpuid;		/* cpuid bit set for replacement */
+> -#define ALTINSTR_FLAG_INV (1 << 15)
+>   	u8  instrlen;		/* length of original instruction */
+>   	u8  replacementlen;	/* length of new instruction */
+>   	u8  padlen;		/* length of build-time padding */
+>   } __packed;
+>  =20
+> -#define ALT_NOT(feat)	((feat) | ALTINSTR_FLAG_INV)
+> -
 
-I need to transfer a boolean value, so it would need to be
+Did you look at patch 13? :-)
 
-set_sched_clock_native(bool state);
+>   /*
+>    * Debug flag that can be tested to see whether alternative
+>    * instructions were patched in already:
+> diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternativ=
+e.c
+> index d8e669a1546f..133b549dc091 100644
+> --- a/arch/x86/kernel/alternative.c
+> +++ b/arch/x86/kernel/alternative.c
+> @@ -397,9 +397,10 @@ void __init_or_module noinline apply_alternatives(=
+struct alt_instr *start,
+>   		BUG_ON(feature >=3D (NCAPINTS + NBUGINTS) * 32);
+>  =20
+>   		/*
+> -		 * Drop out if either:
+> -		 * - feature not available, but required, or
+> -		 * - feature available, but NOT required
+> +		 * Patch if either:
+> +		 * - feature is present
+> +		 * - feature not present but ALTINSTR_FLAG_INV is set to mean,
+> +		 *   patch if feature is *NOT* present.
 
-In the end the difference is only marginal IMO.
-
-Just had another idea: I could add a function to static_call.h for
-querying the current function. This would avoid the double book keeping
-and could probably be used later when switching other pv_ops calls to
-static_call, too (e.g. pv_is_native_spin_unlock()).
-
-What do you think?
+Okay.
 
 
 Juergen
 
---------------B707D43FD7210F09477B06A5
+--------------67B61F63DAEE5E8820EB9FAE
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -275,25 +277,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------B707D43FD7210F09477B06A5--
+--------------67B61F63DAEE5E8820EB9FAE--
 
---q9XNVycbGdPhE1GVCGpTpAYFf6uHIwdvx--
+--p5M5sLIHJQkn6BTbMQSaAVowf7JqkAJIS--
 
---nna0TkS6ABUg1IonAzP3y7arxA0rrchGS
+--dTWXoiEr2CUu22HQ0ZizVBKitnbXxMRRZ
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmBIenoFAwAAAAAACgkQsN6d1ii/Ey+d
-LQf+PRoeCHcywaE7JFLyJUUT15sNvX3awHBwiEsVK1SYO1xfHKSHZY8/xQGVeeRS/+MUAoXzkcBy
-8j0SEjUX6gtprkhE1CYcwf21hlc7v1nA9u2wPwys5VFLGJfKPEv0TBPX1/jm5QQdFpb6+ttqPQb/
-l3bNN4scvGkK/tV+D8L6FW+9a/SaHjXmNeLDe43rz10jNHFhkPAdOnRlHzH9DVSdFZFxKcORKgSO
-xp1FQRbKEv5252ZN+v1bESbjN1N/J/6e4dDRAzj7oUDuexczA2Qq7mRrd31J2eh0+QW/EQQ3gqQF
-QAmw28hYrqmgzmcWhfmLRzQVGuzx5NnueG8taAtUBA==
-=4mcV
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmBIesgFAwAAAAAACgkQsN6d1ii/Ey8v
+Qwf+PVmZMZVTwfKPrQb5E1WzsyCFL0Gr06M/AR0VARJ5+OhMaH1oGGeSsE8Td0O7+R6P3m6+c4j2
+4vxCddjvA/a7Z5CBWOs70yOGK282YHUdSanfGGbWD0EE89h8IvxqIvpKIvedJZeaykynOFl2u3gp
+F7QUw8FzZMfuMeFMHTiOxrv0kJ797jvbzLjhZRIOxaStCMj2FAwqpSHfWANXwJ39POD3kO3n/dBc
+E2BCQSmYxijJUHHrUTcYk5bgVwbtVX1H7t47zru6RLWbjJkeYXENYYaXZjBQHh8dJTPFPJqWhbH7
+qNC1tndU9dCCQQvfB2c5MsMw9K8kcDvN600vlT5Npg==
+=bcO9
 -----END PGP SIGNATURE-----
 
---nna0TkS6ABUg1IonAzP3y7arxA0rrchGS--
+--dTWXoiEr2CUu22HQ0ZizVBKitnbXxMRRZ--
 
