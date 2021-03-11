@@ -2,48 +2,45 @@ Return-Path: <SRS0=6W/h=IJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D08CC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:22:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D16D3C433E9
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:23:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFF7D64FA9
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:22:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFF7D64FA9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7FFB964FA9
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:23:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7FFB964FA9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.96569.182802 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.96572.182814 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lKMCg-0003Rg-O7; Thu, 11 Mar 2021 14:22:18 +0000
+	id 1lKMDm-0003Yf-2F; Thu, 11 Mar 2021 14:23:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 96569.182802; Thu, 11 Mar 2021 14:22:18 +0000
+Received: by outflank-mailman (output) from mailman id 96572.182814; Thu, 11 Mar 2021 14:23:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lKMCg-0003RZ-L1; Thu, 11 Mar 2021 14:22:18 +0000
-Received: by outflank-mailman (input) for mailman id 96569;
- Thu, 11 Mar 2021 14:22:17 +0000
+	id 1lKMDl-0003YY-VY; Thu, 11 Mar 2021 14:23:25 +0000
+Received: by outflank-mailman (input) for mailman id 96572;
+ Thu, 11 Mar 2021 14:23:24 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cYX0=IJ=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1lKMCf-0003RU-QL
- for xen-devel@lists.xenproject.org; Thu, 11 Mar 2021 14:22:17 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 7da69c1c-e585-488f-b41e-4a9634814bf5;
- Thu, 11 Mar 2021 14:22:15 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 823601FB;
- Thu, 11 Mar 2021 06:22:15 -0800 (PST)
-Received: from e123311-lin.arm.com (unknown [10.57.15.166])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C979A3F800;
- Thu, 11 Mar 2021 06:22:12 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=+5TX=IJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lKMDk-0003YK-Pv
+ for xen-devel@lists.xenproject.org; Thu, 11 Mar 2021 14:23:24 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fc97f6c3-6c4e-477e-9f5d-5db6de1dcff8;
+ Thu, 11 Mar 2021 14:23:23 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id DB495AC8C;
+ Thu, 11 Mar 2021 14:23:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,142 +52,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7da69c1c-e585-488f-b41e-4a9634814bf5
-From: Michal Orzel <michal.orzel@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	bertrand.marquis@arm.com
-Subject: [PATCH v5] arm: Add Kconfig entry to select CONFIG_DTB_FILE
-Date: Thu, 11 Mar 2021 15:22:07 +0100
-Message-Id: <20210311142207.25556-1-michal.orzel@arm.com>
-X-Mailer: git-send-email 2.29.0
+X-Inumbo-ID: fc97f6c3-6c4e-477e-9f5d-5db6de1dcff8
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1615472603; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=lLz8EEkgsQbQc5zK5shQUpeWBQPCbxXPv1CJD4/GY5s=;
+	b=IQ0vLS/VjrX40HoFEUQlgpmm/G1qlzafLoXcUzAz0m3i8GSx5sFZR9ulwVcPtvbf5MQb0/
+	RtHqUx7tOZfE8FLDs5KJJOqGu0CefWcG4SDNQ0fqCIw08DhvEYAQF8FuURxONGmk4A7xzP
+	DeEtvr5EqmS7D6CFoATk75XwHSyDFZs=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Josh Poimboeuf <jpoimboe@redhat.com>,
+	Jason Baron <jbaron@akamai.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Ard Biesheuvel <ardb@kernel.org>
+Subject: [PATCH v7 02/14] static_call: move struct static_call_key definition to static_call_types.h
+Date: Thu, 11 Mar 2021 15:23:07 +0100
+Message-Id: <20210311142319.4723-3-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210311142319.4723-1-jgross@suse.com>
+References: <20210311142319.4723-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently in order to link existing DTB into Xen image
-we need to either specify option CONFIG_DTB_FILE on the
-command line or manually add it into .config.
-Add Kconfig entry: CONFIG_DTB_FILE
-to be able to provide the path to DTB we want to embed
-into Xen image. If no path provided - the dtb will not
-be embedded.
+Having the definition of static_call() in static_call_types.h makes
+no sense as long struct static_call_key isn't defined there, as the
+generic implementation of static_call() is referencing this structure.
 
-Remove the line: AFLAGS-y += -DCONFIG_DTB_FILE=\"$(CONFIG_DTB_FILE)\"
-as it is not needed since Kconfig will define it in a header
-with all the other config options.
+So move the definition of struct static_call_key to static_call_types.h.
 
-Make a change in the linker script from:
-_sdtb = .;
-to:
-PROVIDE(_sdtb = .);
-to avoid creation of _sdtb if there is no reference to it.
-
-Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- xen/arch/arm/Makefile     | 5 ++---
- xen/arch/arm/arm32/head.S | 4 ++--
- xen/arch/arm/arm64/head.S | 4 ++--
- xen/arch/arm/xen.lds.S    | 2 +-
- xen/common/Kconfig        | 8 ++++++++
- 5 files changed, 15 insertions(+), 8 deletions(-)
+V5:
+- new patch
+---
+ include/linux/static_call.h             | 18 ------------------
+ include/linux/static_call_types.h       | 18 ++++++++++++++++++
+ tools/include/linux/static_call_types.h | 18 ++++++++++++++++++
+ 3 files changed, 36 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 16e6523e2c..46e6a95fec 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -68,9 +68,8 @@ extra-y += $(TARGET_SUBARCH)/head.o
+diff --git a/include/linux/static_call.h b/include/linux/static_call.h
+index 85ecc789f4ff..76b881259144 100644
+--- a/include/linux/static_call.h
++++ b/include/linux/static_call.h
+@@ -128,16 +128,6 @@ struct static_call_mod {
+ 	struct static_call_site *sites;
+ };
  
- #obj-bin-y += ....o
+-struct static_call_key {
+-	void *func;
+-	union {
+-		/* bit 0: 0 = mods, 1 = sites */
+-		unsigned long type;
+-		struct static_call_mod *mods;
+-		struct static_call_site *sites;
+-	};
+-};
+-
+ /* For finding the key associated with a trampoline */
+ struct static_call_tramp_key {
+ 	s32 tramp;
+@@ -187,10 +177,6 @@ extern long __static_call_return0(void);
  
--ifdef CONFIG_DTB_FILE
-+ifneq ($(CONFIG_DTB_FILE),"")
- obj-y += dtb.o
--AFLAGS-y += -DCONFIG_DTB_FILE=\"$(CONFIG_DTB_FILE)\"
- endif
+ static inline int static_call_init(void) { return 0; }
  
- ALL_OBJS := $(TARGET_SUBARCH)/head.o $(ALL_OBJS)
-@@ -137,7 +136,7 @@ asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c
- xen.lds: xen.lds.S
- 	$(CPP) -P $(a_flags) -MQ $@ -o $@ $<
+-struct static_call_key {
+-	void *func;
+-};
+-
+ #define __DEFINE_STATIC_CALL(name, _func, _func_init)			\
+ 	DECLARE_STATIC_CALL(name, _func);				\
+ 	struct static_call_key STATIC_CALL_KEY(name) = {		\
+@@ -243,10 +229,6 @@ static inline long __static_call_return0(void)
  
--dtb.o: $(CONFIG_DTB_FILE)
-+dtb.o: $(patsubst "%",%,$(CONFIG_DTB_FILE))
+ static inline int static_call_init(void) { return 0; }
  
- .PHONY: clean
- clean::
-diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
-index c404fa973e..50f019ed98 100644
---- a/xen/arch/arm/arm32/head.S
-+++ b/xen/arch/arm/arm32/head.S
-@@ -156,10 +156,10 @@ past_zImage:
-         sub   r10, r9, r0            /* r10 := phys-offset */
+-struct static_call_key {
+-	void *func;
+-};
+-
+ static inline long __static_call_return0(void)
+ {
+ 	return 0;
+diff --git a/include/linux/static_call_types.h b/include/linux/static_call_types.h
+index ae5662d368b9..5a00b8b2cf9f 100644
+--- a/include/linux/static_call_types.h
++++ b/include/linux/static_call_types.h
+@@ -58,11 +58,25 @@ struct static_call_site {
+ 	__raw_static_call(name);					\
+ })
  
-         /* Using the DTB in the .dtb section? */
--#ifdef CONFIG_DTB_FILE
-+.ifnes CONFIG_DTB_FILE,""
-         ldr   r8, =_sdtb
-         add   r8, r10                /* r8 := paddr(DTB) */
--#endif
-+.endif
- 
-         /* Initialize the UART if earlyprintk has been enabled. */
- #ifdef CONFIG_EARLY_PRINTK
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index 5d44667bd8..f38a8dfca7 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -296,9 +296,9 @@ real_start_efi:
-         sub   x20, x19, x0           /* x20 := phys-offset */
- 
-         /* Using the DTB in the .dtb section? */
--#ifdef CONFIG_DTB_FILE
-+.ifnes CONFIG_DTB_FILE,""
-         load_paddr x21, _sdtb
--#endif
-+.endif
- 
-         /* Initialize the UART if earlyprintk has been enabled. */
- #ifdef CONFIG_EARLY_PRINTK
-diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
-index 004b182acb..78af2af504 100644
---- a/xen/arch/arm/xen.lds.S
-+++ b/xen/arch/arm/xen.lds.S
-@@ -222,7 +222,7 @@ SECTIONS
- 
- #ifdef CONFIG_DTB_FILE
-   /* Section for the device tree blob (if any). */
--  _sdtb = .;
-+  PROVIDE(_sdtb = .);
-   .dtb : { *(.dtb) } :text
- #endif
- 
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index eb953d171e..71fc9e00cb 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -400,6 +400,14 @@ config DOM0_MEM
- 
- 	  Leave empty if you are not sure what to specify.
- 
-+config DTB_FILE
-+	string "Absolute path to device tree blob"
-+	depends on HAS_DEVICE_TREE
-+	help
-+	  When using a bootloader that has no device tree support or when there
-+	  is no bootloader at all, use this option to specify the absolute path
-+	  to a device tree that will be linked directly inside Xen binary.
++struct static_call_key {
++	void *func;
++	union {
++		/* bit 0: 0 = mods, 1 = sites */
++		unsigned long type;
++		struct static_call_mod *mods;
++		struct static_call_site *sites;
++	};
++};
 +
- config TRACEBUFFER
- 	bool "Enable tracing infrastructure" if EXPERT
- 	default y
+ #else /* !CONFIG_HAVE_STATIC_CALL_INLINE */
+ 
+ #define __STATIC_CALL_ADDRESSABLE(name)
+ #define __static_call(name)	__raw_static_call(name)
+ 
++struct static_call_key {
++	void *func;
++};
++
+ #endif /* CONFIG_HAVE_STATIC_CALL_INLINE */
+ 
+ #ifdef MODULE
+@@ -77,6 +91,10 @@ struct static_call_site {
+ 
+ #else
+ 
++struct static_call_key {
++	void *func;
++};
++
+ #define static_call(name)						\
+ 	((typeof(STATIC_CALL_TRAMP(name))*)(STATIC_CALL_KEY(name).func))
+ 
+diff --git a/tools/include/linux/static_call_types.h b/tools/include/linux/static_call_types.h
+index ae5662d368b9..5a00b8b2cf9f 100644
+--- a/tools/include/linux/static_call_types.h
++++ b/tools/include/linux/static_call_types.h
+@@ -58,11 +58,25 @@ struct static_call_site {
+ 	__raw_static_call(name);					\
+ })
+ 
++struct static_call_key {
++	void *func;
++	union {
++		/* bit 0: 0 = mods, 1 = sites */
++		unsigned long type;
++		struct static_call_mod *mods;
++		struct static_call_site *sites;
++	};
++};
++
+ #else /* !CONFIG_HAVE_STATIC_CALL_INLINE */
+ 
+ #define __STATIC_CALL_ADDRESSABLE(name)
+ #define __static_call(name)	__raw_static_call(name)
+ 
++struct static_call_key {
++	void *func;
++};
++
+ #endif /* CONFIG_HAVE_STATIC_CALL_INLINE */
+ 
+ #ifdef MODULE
+@@ -77,6 +91,10 @@ struct static_call_site {
+ 
+ #else
+ 
++struct static_call_key {
++	void *func;
++};
++
+ #define static_call(name)						\
+ 	((typeof(STATIC_CALL_TRAMP(name))*)(STATIC_CALL_KEY(name).func))
+ 
 -- 
-2.29.0
+2.26.2
 
 
