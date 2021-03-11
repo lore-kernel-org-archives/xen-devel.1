@@ -2,44 +2,44 @@ Return-Path: <SRS0=6W/h=IJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E75B0C43381
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F412C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:23:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8022E64E87
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:23:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8022E64E87
+	by mail.kernel.org (Postfix) with ESMTPS id 25FF064FA9
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Mar 2021 14:23:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 25FF064FA9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.96573.182824 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.96574.182833 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lKMDm-0003ZY-It; Thu, 11 Mar 2021 14:23:26 +0000
+	id 1lKMDn-0003ai-25; Thu, 11 Mar 2021 14:23:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 96573.182824; Thu, 11 Mar 2021 14:23:26 +0000
+Received: by outflank-mailman (output) from mailman id 96574.182833; Thu, 11 Mar 2021 14:23:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lKMDm-0003ZL-Di; Thu, 11 Mar 2021 14:23:26 +0000
-Received: by outflank-mailman (input) for mailman id 96573;
+	id 1lKMDm-0003a2-NG; Thu, 11 Mar 2021 14:23:26 +0000
+Received: by outflank-mailman (input) for mailman id 96574;
  Thu, 11 Mar 2021 14:23:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+5TX=IJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lKMDl-0003YP-1n
+ id 1lKMDl-0003YP-FS
  for xen-devel@lists.xenproject.org; Thu, 11 Mar 2021 14:23:25 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4a193490-165a-4615-bed4-c8fa15d56401;
+ id a5bc6b17-7e05-4e8c-962b-b42beaf96281;
  Thu, 11 Mar 2021 14:23:24 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id DB47BAC23;
- Thu, 11 Mar 2021 14:23:22 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id F3D90AD74;
+ Thu, 11 Mar 2021 14:23:23 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,168 +51,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a193490-165a-4615-bed4-c8fa15d56401
+X-Inumbo-ID: a5bc6b17-7e05-4e8c-962b-b42beaf96281
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1615472603; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=po4QZsHAN+vzX5uvzJmshXlPCac7n69c5r9Fdn0dvCo=;
-	b=sjqqOUQpbELgunG51bLYnaAneLdLoAHn6rXcSwK/DsFchfLZJWPal7opKb2RUZtxFSKIEo
-	JbtKBiDJ2iWmLlE8dN17PcQJiP6NCqXX2GAZhWcMmbQgbNa+4/4kethaBp09UxMuCAjwFQ
-	d8u620eAOSyPtbAZDTHxKFPkybBM2LQ=
+	t=1615472604; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qh1g08GhFm6ePTkeeFW/Xy4vYX6kKi58igyTMiHJm8U=;
+	b=WfQsdvmtX5iJzk4B1I5YaGG3Gs9euDnfi9U+jiaEOfoTQuIrA29bkaQ58hpLJAtP6YrNJd
+	bvqAftjelQYv2S8BiBeoS4GAB4iWy+Z/dDgftaAibgQsbuhZ1c5Vo69JErGX4e05UqA+bJ
+	e5igTzFMS+NDNRRCpaVu9taTTRtTx28=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
-	linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	clang-built-linux@googlegroups.com
+	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andy Lutomirski <luto@kernel.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Josh Poimboeuf <jpoimboe@redhat.com>,
-	Jason Baron <jbaron@akamai.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Deep Shah <sdeep@vmware.com>,
-	"VMware, Inc." <pv-drivers@vmware.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Stephen Hemminger <sthemmin@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>,
-	Jim Mattson <jmattson@google.com>,
-	Joerg Roedel <joro@8bytes.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>
-Subject: [PATCH v7 00/14] x86: major paravirt cleanup
-Date: Thu, 11 Mar 2021 15:23:05 +0100
-Message-Id: <20210311142319.4723-1-jgross@suse.com>
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v7 05/14] x86/alternative: support not-feature
+Date: Thu, 11 Mar 2021 15:23:10 +0100
+Message-Id: <20210311142319.4723-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210311142319.4723-1-jgross@suse.com>
+References: <20210311142319.4723-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is a major cleanup of the paravirt infrastructure aiming at
-eliminating all custom code patching via paravirt patching.
+Add support for alternative patching for the case a feature is not
+present on the current cpu.
 
-This is achieved by using ALTERNATIVE instead, leading to the ability
-to give objtool access to the patched in instructions.
+For users of ALTERNATIVE() and friends an inverted feature is specified
+by applying the ALT_NOT() macro to it, e.g.:
 
-In order to remove most of the 32-bit special handling from pvops the
-time related operations are switched to use static_call() instead.
+ALTERNATIVE(old, new, ALT_NOT(feature))
 
-At the end of this series all paravirt patching has to do is to
-replace indirect calls with direct ones. In a further step this could
-be switched to static_call(), too.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V5:
+- split off from next patch
+- reworked to use flag byte (Boris Petkov)
+V6:
+- rework again to not use flag byte (Boris Petkov)
+V7:
+- minor tweaks: move defines up, comment wording (Boris Petkov)
+---
+ arch/x86/include/asm/alternative.h |  3 +++
+ arch/x86/kernel/alternative.c      | 20 +++++++++++++++-----
+ 2 files changed, 18 insertions(+), 5 deletions(-)
 
-Changes in V7:
-- dropped patch 3, as already applied on tip tree
-- new patch 3 (patches 1 and 7 have been added to V6 late)
-- addressed comments by Boris
-
-Changes in V6:
-- switched back to "not" bit in feature value for "not feature"
-- other minor comments addressed
-
-Changes in V5:
-- patches 1-5 of V4 dropped, as already applied
-- new patches 1+3
-- fixed patch 2
-- split V4 patch 8 into patches 4+5
-- use flag byte instead of negative feature bit for "not feature"
-
-Changes in V4:
-- fixed several build failures
-- removed objtool patch, as objtool patches are in tip now
-- added patch 1 for making usage of static_call easier
-- even more cleanup
-
-Changes in V3:
-- added patches 7 and 12
-- addressed all comments
-
-Changes in V2:
-- added patches 5-12
-
-Juergen Gross (14):
-  x86/alternative: merge include files
-  static_call: move struct static_call_key definition to
-    static_call_types.h
-  static_call: add function to query current function
-  x86/paravirt: switch time pvops functions to use static_call()
-  x86/alternative: support not-feature
-  x86/alternative: support ALTERNATIVE_TERNARY
-  x86/alternative: don't open code ALTERNATIVE_TERNARY() in
-    _static_cpu_has()
-  x86: add new features for paravirt patching
-  x86/paravirt: remove no longer needed 32-bit pvops cruft
-  x86/paravirt: simplify paravirt macros
-  x86/paravirt: switch iret pvops to ALTERNATIVE
-  x86/paravirt: add new macros PVOP_ALT* supporting pvops in
-    ALTERNATIVEs
-  x86/paravirt: switch functions with custom code to ALTERNATIVE
-  x86/paravirt: have only one paravirt patch function
-
- arch/arm/include/asm/paravirt.h          |  14 +-
- arch/arm/kernel/paravirt.c               |   9 +-
- arch/arm64/include/asm/paravirt.h        |  14 +-
- arch/arm64/kernel/paravirt.c             |  13 +-
- arch/x86/Kconfig                         |   1 +
- arch/x86/entry/entry_32.S                |   6 +-
- arch/x86/entry/entry_64.S                |   2 +-
- arch/x86/entry/vdso/vdso32/system_call.S |   2 +-
- arch/x86/include/asm/alternative-asm.h   | 114 ------------
- arch/x86/include/asm/alternative.h       | 126 +++++++++++++-
- arch/x86/include/asm/cpufeature.h        |  41 +----
- arch/x86/include/asm/cpufeatures.h       |   2 +
- arch/x86/include/asm/irqflags.h          |   7 +-
- arch/x86/include/asm/mshyperv.h          |   2 +-
- arch/x86/include/asm/nospec-branch.h     |   1 -
- arch/x86/include/asm/paravirt.h          | 167 ++++++++----------
- arch/x86/include/asm/paravirt_types.h    | 210 +++++++++--------------
- arch/x86/include/asm/smap.h              |   5 +-
- arch/x86/kernel/Makefile                 |   3 +-
- arch/x86/kernel/alternative.c            |  52 +++++-
- arch/x86/kernel/asm-offsets.c            |   7 -
- arch/x86/kernel/cpu/vmware.c             |   5 +-
- arch/x86/kernel/kvm.c                    |   2 +-
- arch/x86/kernel/kvmclock.c               |   2 +-
- arch/x86/kernel/paravirt-spinlocks.c     |   9 +
- arch/x86/kernel/paravirt.c               |  75 ++------
- arch/x86/kernel/paravirt_patch.c         |  99 -----------
- arch/x86/kernel/tsc.c                    |   3 +-
- arch/x86/lib/atomic64_386_32.S           |   2 +-
- arch/x86/lib/atomic64_cx8_32.S           |   2 +-
- arch/x86/lib/copy_page_64.S              |   2 +-
- arch/x86/lib/copy_user_64.S              |   2 +-
- arch/x86/lib/memcpy_64.S                 |   2 +-
- arch/x86/lib/memmove_64.S                |   2 +-
- arch/x86/lib/memset_64.S                 |   2 +-
- arch/x86/lib/retpoline.S                 |   2 +-
- arch/x86/xen/enlighten_pv.c              |   4 +-
- arch/x86/xen/time.c                      |  26 +--
- drivers/xen/time.c                       |   3 +-
- include/linux/static_call.h              |  26 +--
- include/linux/static_call_types.h        |  18 ++
- tools/include/linux/static_call_types.h  |  18 ++
- 42 files changed, 473 insertions(+), 631 deletions(-)
- delete mode 100644 arch/x86/include/asm/alternative-asm.h
- delete mode 100644 arch/x86/kernel/paravirt_patch.c
-
+diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
+index 53f295f41c34..649e56f70889 100644
+--- a/arch/x86/include/asm/alternative.h
++++ b/arch/x86/include/asm/alternative.h
+@@ -6,6 +6,9 @@
+ #include <linux/stringify.h>
+ #include <asm/asm.h>
+ 
++#define ALTINSTR_FLAG_INV	(1 << 15)
++#define ALT_NOT(feat)		((feat) | ALTINSTR_FLAG_INV)
++
+ #ifndef __ASSEMBLY__
+ 
+ #include <linux/stddef.h>
+diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
+index 8d778e46725d..133b549dc091 100644
+--- a/arch/x86/kernel/alternative.c
++++ b/arch/x86/kernel/alternative.c
+@@ -388,21 +388,31 @@ void __init_or_module noinline apply_alternatives(struct alt_instr *start,
+ 	 */
+ 	for (a = start; a < end; a++) {
+ 		int insn_buff_sz = 0;
++		/* Mask away "NOT" flag bit for feature to test. */
++		u16 feature = a->cpuid & ~ALTINSTR_FLAG_INV;
+ 
+ 		instr = (u8 *)&a->instr_offset + a->instr_offset;
+ 		replacement = (u8 *)&a->repl_offset + a->repl_offset;
+ 		BUG_ON(a->instrlen > sizeof(insn_buff));
+-		BUG_ON(a->cpuid >= (NCAPINTS + NBUGINTS) * 32);
+-		if (!boot_cpu_has(a->cpuid)) {
++		BUG_ON(feature >= (NCAPINTS + NBUGINTS) * 32);
++
++		/*
++		 * Patch if either:
++		 * - feature is present
++		 * - feature not present but ALTINSTR_FLAG_INV is set to mean,
++		 *   patch if feature is *NOT* present.
++		 */
++		if (!boot_cpu_has(feature) == !(a->cpuid & ALTINSTR_FLAG_INV)) {
+ 			if (a->padlen > 1)
+ 				optimize_nops(a, instr);
+ 
+ 			continue;
+ 		}
+ 
+-		DPRINTK("feat: %d*32+%d, old: (%pS (%px) len: %d), repl: (%px, len: %d), pad: %d",
+-			a->cpuid >> 5,
+-			a->cpuid & 0x1f,
++		DPRINTK("feat: %s%d*32+%d, old: (%pS (%px) len: %d), repl: (%px, len: %d), pad: %d",
++			(a->cpuid & ALTINSTR_FLAG_INV) ? "!" : "",
++			feature >> 5,
++			feature & 0x1f,
+ 			instr, instr, a->instrlen,
+ 			replacement, a->replacementlen, a->padlen);
+ 
 -- 
 2.26.2
 
