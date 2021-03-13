@@ -2,46 +2,46 @@ Return-Path: <SRS0=JEUX=IL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F21BCC433DB
-	for <xen-devel@archiver.kernel.org>; Sat, 13 Mar 2021 15:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4BB3C433DB
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Mar 2021 16:06:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2F2664F16
-	for <xen-devel@archiver.kernel.org>; Sat, 13 Mar 2021 15:29:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2F2664F16
+	by mail.kernel.org (Postfix) with ESMTPS id 592B564F19
+	for <xen-devel@archiver.kernel.org>; Sat, 13 Mar 2021 16:06:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 592B564F19
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.97571.185305 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.97577.185338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lL6Cg-0000vO-NR; Sat, 13 Mar 2021 15:29:22 +0000
+	id 1lL6mR-00054u-Cf; Sat, 13 Mar 2021 16:06:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 97571.185305; Sat, 13 Mar 2021 15:29:22 +0000
+Received: by outflank-mailman (output) from mailman id 97577.185338; Sat, 13 Mar 2021 16:06:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lL6Cg-0000vH-KB; Sat, 13 Mar 2021 15:29:22 +0000
-Received: by outflank-mailman (input) for mailman id 97571;
- Sat, 13 Mar 2021 15:29:21 +0000
+	id 1lL6mR-00054g-3u; Sat, 13 Mar 2021 16:06:19 +0000
+Received: by outflank-mailman (input) for mailman id 97577;
+ Sat, 13 Mar 2021 16:06:17 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lL6Cf-0000vC-8x
- for xen-devel@lists.xenproject.org; Sat, 13 Mar 2021 15:29:21 +0000
+ (envelope-from <julien@xen.org>) id 1lL6mP-00053m-Rz
+ for xen-devel@lists.xenproject.org; Sat, 13 Mar 2021 16:06:17 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lL6Cd-0005IA-87; Sat, 13 Mar 2021 15:29:19 +0000
-Received: from 54-240-197-227.amazon.com ([54.240.197.227]
- helo=a483e7b01a66.ant.amazon.com)
+ id 1lL6mP-0006R9-HD; Sat, 13 Mar 2021 16:06:17 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lL6Cd-0007RP-1q; Sat, 13 Mar 2021 15:29:19 +0000
+ id 1lL6mP-0001Ff-8P; Sat, 13 Mar 2021 16:06:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,64 +54,143 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=6PpD2QtjKJVCKF9Z4MznSD0DNfKnwqhdqX9Vn0Wnkh8=; b=4O5yisHfDbMVGDInDbSDi4/ROi
-	8SSjVxEE9XArzPCrRNRqbw9d+IA1Xu49O8BBctw9mTuSAkEsWMyhs+TbiFFsM+ROL+7PjfwQiGeBH
-	6tY+sFyT2h45vK4WU7PNTFctyNg1L4+VayHFLxIpvXJRZZBFKZV1vidiLf/UwGZ5XUAE=;
-Subject: Re: preparations for 4.13.3
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: George Dunlap <george.dunlap@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wl@xen.org>,
- Anthony Perard <anthony.perard@citrix.com>
-References: <5373f9d5-fc03-1967-8181-d77bbdaf25b9@suse.com>
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=h/X3I9ZAsFKz04WmHoy0166ylMYdxPeS6uPApGEsbfA=; b=LdQeA51vQbW/wbup+yVmczglR
+	68QA0nyB5pXJm9ofc72BiTLSI+qWvec/ZbtcCpSTV2te4zv3NtMvFqqm0WMsNQrjK/XhtbfDJBCC5
+	ZZwjSBQwUb3ZoCt/pe637jCpnZgNdYR/zls7npRhhlAk1+w5qcq9DiNrkic/dirrnHEZI=;
 From: Julien Grall <julien@xen.org>
-Message-ID: <b82a0932-761d-662c-baa4-59c4801ad5c8@xen.org>
-Date: Sat, 13 Mar 2021 15:29:16 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <5373f9d5-fc03-1967-8181-d77bbdaf25b9@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	Julien Grall <jgrall@amazon.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH for-next v2 2/2] xen/arm64: Place a speculation barrier following an ret instruction
+Date: Sat, 13 Mar 2021 16:06:11 +0000
+Message-Id: <20210313160611.18665-3-julien@xen.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210313160611.18665-1-julien@xen.org>
+References: <20210313160611.18665-1-julien@xen.org>
 
-Hi Jan & Stefano,
+From: Julien Grall <jgrall@amazon.com>
 
-On 08/03/2021 09:49, Jan Beulich wrote:
-> All,
-> 
-> the release is overdue (my apologies). Please point out backports
-> you find missing from the respective staging branches, but which
-> you consider relevant.
-> > Ones that I have queued already, but which hadn't passed the push
-> gate to master yet when doing a swipe late last week, are
-> 
-> c6ad5a701b9a crypto: adjust rijndaelEncrypt() prototype for gcc11
-> 9318fdf757ec x86/shadow: suppress "fast fault path" optimization without reserved bits
-> 60c0444fae21 x86/shadow: suppress "fast fault path" optimization when running virtualized
+Some CPUs can speculate past a RET instruction and potentially perform
+speculative accesses to memory before processing the return.
 
-I would like to also consider the following one:
+There is no known gadget available after the RET instruction today.
+However some of the registers (such as in check_pending_guest_serror())
+may contain a value provided by the guest.
 
-28804c0ce9fd SUPPORT.MD: Clarify the support state for the Arm SMMUv{1, 
-2} drivers (4.11+ as updating the security support)
-067935804a8e xen/vgic: Implement write to ISPENDR in vGICv{2, 3} (4.13+)
-     To support newer kernel on stable Xen
-d81133d45d81 xen/arm: Add workaround for Cortex-A53 erratum #843419 (4.13+)
-fd7479b9aec2 xen/arm: Add workaround for Cortex-A55 erratum #1530923 (4.13+)
-5505f5f8e7e8 xen/arm: Add Cortex-A73 erratum 858921 workaround (4.13+)
-63b4c9bfb788 xen/arm: mm: Access a PT entry before the table is unmapped 
-(4.13 only)
-f6790389613c xen/arm: sched: Ensure the vCPU context is seen before 
-vcpu_pause() returns (4.13 only)
+In order to harden the code, it would be better to add a speculation
+barrier after each RET instruction. The performance impact is meant to
+be negligeable as the speculation barrier is not meant to be
+architecturally executed.
 
-I have put in parentheses the list of versions targeted.
+Rather than manually inserting a speculation barrier, use a macro
+which overrides the mnemonic RET and replace with RET + SB. We need to
+use the opcode for RET to prevent any macro recursion.
 
-Cheers,
+This patch is only covering the assembly code. C code would need to be
+covered separately using the compiler support.
 
+This is part of the work to mitigate straight-line speculation.
+
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+
+---
+
+It is not clear to me whether Armv7 (we don't officially support 32-bit
+hypervisor on Armv8) is also affected by straight-line speculation.
+
+But the mitigation is a lot messier because opcode can be optionally
+executed. So this Arm32 is left alone for now.
+
+    Changes in v2:
+        - Use a macro rather than inserting the speculation barrier
+        manually
+        - Remove mitigation for arm32
+---
+ xen/arch/arm/arm32/entry.S         |  1 +
+ xen/arch/arm/arm32/lib/lib1funcs.S |  1 +
+ xen/include/asm-arm/arm64/macros.h |  6 ++++++
+ xen/include/asm-arm/macros.h       | 18 +++++++++---------
+ 4 files changed, 17 insertions(+), 9 deletions(-)
+
+diff --git a/xen/arch/arm/arm32/entry.S b/xen/arch/arm/arm32/entry.S
+index f2f1bc7a3158..d0a066484f13 100644
+--- a/xen/arch/arm/arm32/entry.S
++++ b/xen/arch/arm/arm32/entry.S
+@@ -441,6 +441,7 @@ ENTRY(__context_switch)
+ 
+         add     r4, r1, #VCPU_arch_saved_context
+         ldmia   r4, {r4 - sl, fp, sp, pc}       /* Load registers and return */
++        sb
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/arm/arm32/lib/lib1funcs.S b/xen/arch/arm/arm32/lib/lib1funcs.S
+index f1278bd6c139..8c33ffbbcc4c 100644
+--- a/xen/arch/arm/arm32/lib/lib1funcs.S
++++ b/xen/arch/arm/arm32/lib/lib1funcs.S
+@@ -382,5 +382,6 @@ UNWIND(.save {lr})
+ 	bl	__div0
+ 	mov	r0, #0			@ About as wrong as it could be.
+ 	ldr	pc, [sp], #8
++	sb
+ UNWIND(.fnend)
+ ENDPROC(Ldiv0)
+diff --git a/xen/include/asm-arm/arm64/macros.h b/xen/include/asm-arm/arm64/macros.h
+index f981b4f43e84..4614394b3dd5 100644
+--- a/xen/include/asm-arm/arm64/macros.h
++++ b/xen/include/asm-arm/arm64/macros.h
+@@ -21,6 +21,12 @@
+     ldr     \dst, [\dst, \tmp]
+     .endm
+ 
++    .macro  ret
++        // ret opcode
++        .inst 0xd65f03c0
++        sb
++    .endm
++
+ /*
+  * Register aliases.
+  */
+diff --git a/xen/include/asm-arm/macros.h b/xen/include/asm-arm/macros.h
+index 4833671f4ced..1aa373760f98 100644
+--- a/xen/include/asm-arm/macros.h
++++ b/xen/include/asm-arm/macros.h
+@@ -5,6 +5,15 @@
+ # error "This file should only be included in assembly file"
+ #endif
+ 
++    /*
++     * Speculative barrier
++     * XXX: Add support for the 'sb' instruction
++     */
++    .macro sb
++    dsb nsh
++    isb
++    .endm
++
+ #if defined (CONFIG_ARM_32)
+ # include <asm/arm32/macros.h>
+ #elif defined(CONFIG_ARM_64)
+@@ -20,13 +29,4 @@
+     .endr
+     .endm
+ 
+-    /*
+-     * Speculative barrier
+-     * XXX: Add support for the 'sb' instruction
+-     */
+-    .macro sb
+-    dsb nsh
+-    isb
+-    .endm
+-
+ #endif /* __ASM_ARM_MACROS_H */
 -- 
-Julien Grall
+2.17.1
+
 
