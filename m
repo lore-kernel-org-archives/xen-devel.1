@@ -2,41 +2,41 @@ Return-Path: <SRS0=4R9G=IO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB687C433E6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA6DCC433E0
 	for <xen-devel@archiver.kernel.org>; Tue, 16 Mar 2021 16:19:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9E036650FD
+	by mail.kernel.org (Postfix) with ESMTPS id 9DF1065092
 	for <xen-devel@archiver.kernel.org>; Tue, 16 Mar 2021 16:19:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9E036650FD
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DF1065092
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.98384.186626 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.98382.186601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lMCPd-0002pd-Iw; Tue, 16 Mar 2021 16:19:17 +0000
+	id 1lMCPU-0002l7-T7; Tue, 16 Mar 2021 16:19:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 98384.186626; Tue, 16 Mar 2021 16:19:17 +0000
+Received: by outflank-mailman (output) from mailman id 98382.186601; Tue, 16 Mar 2021 16:19:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lMCPd-0002pR-Eo; Tue, 16 Mar 2021 16:19:17 +0000
-Received: by outflank-mailman (input) for mailman id 98384;
- Tue, 16 Mar 2021 16:19:16 +0000
+	id 1lMCPU-0002l0-Q9; Tue, 16 Mar 2021 16:19:08 +0000
+Received: by outflank-mailman (input) for mailman id 98382;
+ Tue, 16 Mar 2021 16:19:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Kyr7=IO=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lMCPc-0002kv-S1
- for xen-devel@lists.xenproject.org; Tue, 16 Mar 2021 16:19:16 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1lMCPT-0002kv-1R
+ for xen-devel@lists.xenproject.org; Tue, 16 Mar 2021 16:19:07 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9863bba2-0946-4b55-9ef0-6c206ee58d6e;
- Tue, 16 Mar 2021 16:19:13 +0000 (UTC)
+ id c5875003-9fc3-438f-8ad6-81bc9887a3b0;
+ Tue, 16 Mar 2021 16:19:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,61 +48,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9863bba2-0946-4b55-9ef0-6c206ee58d6e
+X-Inumbo-ID: c5875003-9fc3-438f-8ad6-81bc9887a3b0
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1615911553;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=qDVzQrkqOORjK1tpTv/h9844QV+q3KXmjnsN49ior48=;
-  b=PvHkHYGRvijSWYUvobdTJSv5H2IAJWA7O8yyJ337TIUjhKBs+5LwrSSj
-   37CC6rJji6KQ8iAIlBVbgpCh7D9zuewC0+bZeGzLBryfHTD+adfDAeoTl
-   951Yelsbyb8O/Cm5sshYDbNkqgx5PymFVM6qw4CPhN5ODiK99K9JIrCZA
-   I=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: P3HDpFx97VuZkhun39VBuWLw8ueXFh3aqbIIpafB+iRN7D4Z2dbRuNZm6M/yDqzNduKmCFKYKS
- 0zSCLPtGNlFqaPkLl5IFE3wFshwhLS91k224IT8L/0LhCkPTO4682Pe3ctGYa3fWyG9J+daJg+
- NFazLYr5Z7e5WplqV9557kTJpQZV8RZQHjUAY2hiPuAv5CBsBqCfaoV44QBxx/XVIzNkyV3P8U
- mZNufYDbeGbxhJrxLg6nEj7qFikycVm7j/SZsVfeu9JhTOZiPzHNs+If6j2g5LuG3uckMelSNt
- 7N8=
+  d=citrix.com; s=securemail; t=1615911545;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=nhAX0yyRIBSeaz93pFWYK1z2uQ1J1CjJXlWF+mLEc70=;
+  b=CBhszXhJW9KtURAl6iYjZaEUe0TbavZJcUQGu+6lkywI15gGy86ArN92
+   jLsxSDdlixrv1NTkmENLOw2/P+CKm4EQFheMweLPj/jwtew+oLp87/H7B
+   bPK8OsrTia4RNIKRWO4iGi0ym5ePNCcjrmGuHcWK/Wa4GWCoDx6MVBPhd
+   s=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: n5BQTAtLxqxafpFEdbx0CgRATm/N9FByb1BTMPGz+5IUy/d4lXv8xcSDA6HDCkCrcpUC57TnTM
+ LWI7cd38qgdJcu03Cwj2qMqqDRe8xwBAmUxwWOxran2w3OxgQpzMbzHkG2YS3dm8+WSaJNExyH
+ j1s57lhe4ECcZhbjmVUp/nsWFY8CHRvGOXcNid2BlXvY3T6hRQPVWf85Uy6Xxxc4x4y4MszrOr
+ uM2J+D1kt1ui6dz1+TIIqS1jMI1YdHJpZEA7IWw6cFmlWN1muk+KUGAancjA7NcLwgNChp/pt1
+ 8Sw=
 X-SBRS: 5.1
-X-MesageID: 39309516
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 39404104
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:8lR+Pqg5dmupob9vJkJu5o3vynBQXj4ji2hD6mlwRA09T+Wzva
- mV8sgz/xnylToXRTUcgtiGIqaNWjfx8pRy7IkXM96ZLW7bkUGvK5xv6pan/i34F0TFh4pg/I
- ppbqQWMr3NJHdgi8KS2mWFOvIB5PXCz6yyn+fZyB5WPGRXQoVt9R1wBAreMmAefngkObMDGJ
- CR5tVKqlObEBx9BKmGL0IIQvTZoJnznI/mCCR2YSIP0hWEjj+j9dfBciSw4xF2aVxy6IZn1W
- DElgDjj5/T0c2G9g==
+IronPort-HdrOrdr: A9a23:9rE3+q4hZN5th5CqIQPXwE/XdLJzesId70hD6mlaY3VuE/Cwvc
+ aogfgdyFvIkz4XQn4tgpStP6OHTHPa+/dOkPEsFJ2lWxTrv3btEZF64eLZskTdMgD36+I179
+ YCT4FQE9v1ZGIUse/b502CH88k0J279smT9IPj5lNMaS0vVK169Qd+DW+gYytLbS1LH4AwGp
+ bZxucvnUvDRV0tYs62BmYIUoH4zrWh/v+LXTc8CxEq8wWIhz+zgYSKdCSw5RsCTyhJhY4r7G
+ mtqX2D2oyYr/q5xhXAvlWy071qnrLapOdrNYipgsgRJi6EsHfMWLhc
 X-IronPort-AV: E=Sophos;i="5.81,251,1610427600"; 
-   d="scan'208";a="39309516"
+   d="scan'208";a="39404104"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Boris Ostrovsky
 	<boris.ostrovsky@oracle.com>, Ian Jackson <iwj@xenproject.org>
-Subject: [PATCH for-4.15 0/3] x86/msr: Fixes for XSA-351
-Date: Tue, 16 Mar 2021 16:18:41 +0000
-Message-ID: <20210316161844.1658-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 2/3] x86/msr: Forward port XSA-351 changes from 4.14
+Date: Tue, 16 Mar 2021 16:18:43 +0000
+Message-ID: <20210316161844.1658-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210316161844.1658-1-andrew.cooper3@citrix.com>
+References: <20210316161844.1658-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This is slightly complicated.  Patches 1 and 2 rearrange the code to look and
-behave more like 4.14, and patch 3 fixes a Solaris (and turbostat) bug in a
-manner which can be backported to all security trees.
+staging was not impacted by XSA-351 at the time of release, due to c/s
+322ec7c89f and 84e848fd7a which disallows read access by default.
 
-Andrew Cooper (3):
-  Revert "x86/msr: drop compatibility #GP handling in guest_{rd,wr}msr()"
-  x86/msr: Forward port XSA-351 changes from 4.14
-  x86/msr: Fix Solaris and turbostat following XSA-351
+Forward port the XSA-351 changes to make the code structure consistent between
+4.14 and 4.15.
 
- xen/arch/x86/msr.c              | 78 +++++++++++++++++++++++++++++++++++++++++
- xen/include/asm-x86/msr-index.h | 39 +++++++++++++++++++++
- 2 files changed, 117 insertions(+)
+This removes logspew for guests probing for the RAPL interface.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+CC: Ian Jackson <iwj@xenproject.org>
+
+Technically this breaks Solaris/turbostat insofar as you can no longer use
+msr_relaxed to "fix" the guest.  The subsequent patch will unbreak it
+differently.
+
+For 4.15.  Restoring behaviour closer to 4.14, and prereq for a bugfix needing
+backporting.
+---
+ xen/arch/x86/msr.c              | 19 +++++++++++++++++++
+ xen/include/asm-x86/msr-index.h | 39 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
+
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index c3a988bd11..5927b6811b 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -188,6 +188,13 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+     case MSR_TSX_CTRL:
+     case MSR_MCU_OPT_CTRL:
+     case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
++    case MSR_RAPL_POWER_UNIT:
++    case MSR_PKG_POWER_LIMIT  ... MSR_PKG_POWER_INFO:
++    case MSR_DRAM_POWER_LIMIT ... MSR_DRAM_POWER_INFO:
++    case MSR_PP0_POWER_LIMIT  ... MSR_PP0_POLICY:
++    case MSR_PP1_POWER_LIMIT  ... MSR_PP1_POLICY:
++    case MSR_PLATFORM_ENERGY_COUNTER:
++    case MSR_PLATFORM_POWER_LIMIT:
+     case MSR_U_CET:
+     case MSR_S_CET:
+     case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
+@@ -195,6 +202,8 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+     case MSR_AMD64_LWP_CBADDR:
+     case MSR_PPIN_CTL:
+     case MSR_PPIN:
++    case MSR_F15H_CU_POWER ... MSR_F15H_CU_MAX_POWER:
++    case MSR_AMD_RAPL_POWER_UNIT ... MSR_AMD_PKG_ENERGY_STATUS:
+     case MSR_AMD_PPIN_CTL:
+     case MSR_AMD_PPIN:
+         goto gp_fault;
+@@ -412,6 +421,7 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+     case MSR_INTEL_CORE_THREAD_COUNT:
+     case MSR_INTEL_PLATFORM_INFO:
+     case MSR_ARCH_CAPABILITIES:
++    case MSR_IA32_PERF_STATUS:
+ 
+         /* Not offered to guests. */
+     case MSR_TEST_CTRL:
+@@ -419,6 +429,13 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+     case MSR_TSX_CTRL:
+     case MSR_MCU_OPT_CTRL:
+     case MSR_RTIT_OUTPUT_BASE ... MSR_RTIT_ADDR_B(7):
++    case MSR_RAPL_POWER_UNIT:
++    case MSR_PKG_POWER_LIMIT  ... MSR_PKG_POWER_INFO:
++    case MSR_DRAM_POWER_LIMIT ... MSR_DRAM_POWER_INFO:
++    case MSR_PP0_POWER_LIMIT  ... MSR_PP0_POLICY:
++    case MSR_PP1_POWER_LIMIT  ... MSR_PP1_POLICY:
++    case MSR_PLATFORM_ENERGY_COUNTER:
++    case MSR_PLATFORM_POWER_LIMIT:
+     case MSR_U_CET:
+     case MSR_S_CET:
+     case MSR_PL0_SSP ... MSR_INTERRUPT_SSP_TABLE:
+@@ -426,6 +443,8 @@ int guest_wrmsr(struct vcpu *v, uint32_t msr, uint64_t val)
+     case MSR_AMD64_LWP_CBADDR:
+     case MSR_PPIN_CTL:
+     case MSR_PPIN:
++    case MSR_F15H_CU_POWER ... MSR_F15H_CU_MAX_POWER:
++    case MSR_AMD_RAPL_POWER_UNIT ... MSR_AMD_PKG_ENERGY_STATUS:
+     case MSR_AMD_PPIN_CTL:
+     case MSR_AMD_PPIN:
+         goto gp_fault;
+diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
+index f2e34dd22b..49c1afdd22 100644
+--- a/xen/include/asm-x86/msr-index.h
++++ b/xen/include/asm-x86/msr-index.h
+@@ -101,6 +101,38 @@
+ #define MSR_RTIT_ADDR_A(n)                 (0x00000580 + (n) * 2)
+ #define MSR_RTIT_ADDR_B(n)                 (0x00000581 + (n) * 2)
+ 
++/*
++ * Intel Runtime Average Power Limiting (RAPL) interface.  Power plane base
++ * addresses (MSR_*_POWER_LIMIT) are model specific, but have so-far been
++ * consistent since their introduction in SandyBridge.
++ *
++ * Offsets of functionality from the power plane base is architectural, but
++ * not all power planes support all functionality.
++ */
++#define MSR_RAPL_POWER_UNIT                 0x00000606
++
++#define MSR_PKG_POWER_LIMIT                 0x00000610
++#define MSR_PKG_ENERGY_STATUS               0x00000611
++#define MSR_PKG_PERF_STATUS                 0x00000613
++#define MSR_PKG_POWER_INFO                  0x00000614
++
++#define MSR_DRAM_POWER_LIMIT                0x00000618
++#define MSR_DRAM_ENERGY_STATUS              0x00000619
++#define MSR_DRAM_PERF_STATUS                0x0000061b
++#define MSR_DRAM_POWER_INFO                 0x0000061c
++
++#define MSR_PP0_POWER_LIMIT                 0x00000638
++#define MSR_PP0_ENERGY_STATUS               0x00000639
++#define MSR_PP0_POLICY                      0x0000063a
++
++#define MSR_PP1_POWER_LIMIT                 0x00000640
++#define MSR_PP1_ENERGY_STATUS               0x00000641
++#define MSR_PP1_POLICY                      0x00000642
++
++/* Intel Platform-wide power interface. */
++#define MSR_PLATFORM_ENERGY_COUNTER         0x0000064d
++#define MSR_PLATFORM_POWER_LIMIT            0x0000065c
++
+ #define MSR_U_CET                           0x000006a0
+ #define MSR_S_CET                           0x000006a2
+ #define  CET_SHSTK_EN                       (_AC(1, ULL) <<  0)
+@@ -116,10 +148,17 @@
+ #define  PASID_PASID_MASK                   0x000fffff
+ #define  PASID_VALID                        (_AC(1, ULL) << 31)
+ 
++#define MSR_F15H_CU_POWER                   0xc001007a
++#define MSR_F15H_CU_MAX_POWER               0xc001007b
++
+ #define MSR_K8_VM_CR                        0xc0010114
+ #define  VM_CR_INIT_REDIRECTION             (_AC(1, ULL) <<  1)
+ #define  VM_CR_SVM_DISABLE                  (_AC(1, ULL) <<  4)
+ 
++#define MSR_AMD_RAPL_POWER_UNIT             0xc0010299
++#define MSR_AMD_CORE_ENERGY_STATUS          0xc001029a
++#define MSR_AMD_PKG_ENERGY_STATUS           0xc001029b
++
+ /*
+  * Legacy MSR constants in need of cleanup.  No new MSRs below this comment.
+  */
 -- 
 2.11.0
 
