@@ -2,48 +2,45 @@ Return-Path: <SRS0=7FyG=IQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA7F9C433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Mar 2021 16:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CD66C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Mar 2021 16:25:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 61F1264F40
-	for <xen-devel@archiver.kernel.org>; Thu, 18 Mar 2021 16:22:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61F1264F40
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id DBBC964E98
+	for <xen-devel@archiver.kernel.org>; Thu, 18 Mar 2021 16:25:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DBBC964E98
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.99061.188173 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.99067.188188 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lMvQ5-0003Ag-I5; Thu, 18 Mar 2021 16:22:45 +0000
+	id 1lMvSf-0003Ko-07; Thu, 18 Mar 2021 16:25:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 99061.188173; Thu, 18 Mar 2021 16:22:45 +0000
+Received: by outflank-mailman (output) from mailman id 99067.188188; Thu, 18 Mar 2021 16:25:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lMvQ5-0003AZ-EO; Thu, 18 Mar 2021 16:22:45 +0000
-Received: by outflank-mailman (input) for mailman id 99061;
- Thu, 18 Mar 2021 16:22:44 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lMvQ4-0003AM-1o; Thu, 18 Mar 2021 16:22:44 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lMvQ3-0004LH-SW; Thu, 18 Mar 2021 16:22:43 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lMvQ3-0007qw-IE; Thu, 18 Mar 2021 16:22:43 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lMvQ3-0006Bg-Hi; Thu, 18 Mar 2021 16:22:43 +0000
+	id 1lMvSe-0003Kh-TL; Thu, 18 Mar 2021 16:25:24 +0000
+Received: by outflank-mailman (input) for mailman id 99067;
+ Thu, 18 Mar 2021 16:25:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=YepO=IQ=casper.srs.infradead.org=batv+3da9058682ed8a08391b+6416+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1lMvSd-0003Ka-RE
+ for xen-devel@lists.xenproject.org; Thu, 18 Mar 2021 16:25:23 +0000
+Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e5ae8642-de36-4435-836c-bd10dd68b670;
+ Thu, 18 Mar 2021 16:25:22 +0000 (UTC)
+Received: from 089144199244.atnat0008.highway.a1.net ([89.144.199.244]
+ helo=localhost)
+ by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
+ id 1lMvRV-003DLG-Ih; Thu, 18 Mar 2021 16:24:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,86 +52,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: e5ae8642-de36-4435-836c-bd10dd68b670
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=8u42r4Wt4Gow3IZjy1v1paOiVYIMbEs/gDhq/DcC9LY=; b=RlD+fSaVdg/S3xjC9I2ho6t2K1
-	F0AqrIsF0p8bTQC808XhP/XetuRS5F69FFCjmfSciEt9wY042LK2AEfPKT0kbdCaRxhF8a0sB5U46
-	l84RUsGuHTaLztCr1xOQmrqkud5a5PYlpw/Viny4BKwEgfyKVh9PnH54W6ezE9iXHDlo=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-160126-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-Type:Content-ID:Content-Description;
+	bh=9gEP8raZOg3EB9wo1YlmqP5MKZV8/kqbQaScw+YfWuE=; b=JnuhGi9J4kooWrHzFkSJvSQB/f
+	H1LyP5FBzoY04johHQs63+EOvbbCIVrj5RI97Wzqrpu5/ANSHEXfUXSSHmdx8qZkrYl0CqZPmQyqD
+	gUuOdJ02W96mrTGr0lh+bCwDZO6ub/Uc/WxBzk9LMWBGZefHttJAq4B8N6Oi+F+13iVW8MEutZfAR
+	KhQuThABIusZgmw132kdn9enlQGOEPn3Q5pRjO2nNpenvm5KpiptkisJ0z5ZklqDVtXsxC2KvXNFB
+	IxMjAONqS2TPXowUqOYB3qGo+qaWd6+I+m/Zd/mrIzgAeF0iNeQFlhB66jMOxkfVk2r8Yaub0v3Mb
+	dDfJBBug==;
+From: Christoph Hellwig <hch@lst.de>
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>,
+	Dongli Zhang <dongli.zhang@oracle.com>,
+	Claire Chang <tientzu@chromium.org>,
+	xen-devel@lists.xenproject.org,
+	linuxppc-dev@lists.ozlabs.org,
+	iommu@lists.linux-foundation.org
+Subject: [PATCH 3/3] swiotlb: remove swiotlb_nr_tbl
+Date: Thu, 18 Mar 2021 17:14:24 +0100
+Message-Id: <20210318161424.489045-4-hch@lst.de>
+X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210318161424.489045-1-hch@lst.de>
+References: <20210318161424.489045-1-hch@lst.de>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 160126: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=dae3c3e8b257cd27d6b35a467a34bf79a6650340
-X-Osstest-Versions-That:
-    xen=21657ad4f01a634beac570c64c0691e51b9cf366
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 18 Mar 2021 16:22:43 +0000
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 
-flight 160126 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/160126/
+All callers just use it to check if swiotlb is active at all, for which
+they can just use is_swiotlb_active.  In the longer run drivers need
+to stop using is_swiotlb_active as well, but let's do the simple step
+first.
 
-Failures :-/ but no regressions.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/gpu/drm/i915/gem/i915_gem_internal.c | 2 +-
+ drivers/gpu/drm/nouveau/nouveau_ttm.c        | 2 +-
+ drivers/pci/xen-pcifront.c                   | 2 +-
+ include/linux/swiotlb.h                      | 1 -
+ kernel/dma/swiotlb.c                         | 7 +------
+ 5 files changed, 4 insertions(+), 10 deletions(-)
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+diff --git a/drivers/gpu/drm/i915/gem/i915_gem_internal.c b/drivers/gpu/drm/i915/gem/i915_gem_internal.c
+index ad22f42541bda6..a9d65fc8aa0eab 100644
+--- a/drivers/gpu/drm/i915/gem/i915_gem_internal.c
++++ b/drivers/gpu/drm/i915/gem/i915_gem_internal.c
+@@ -42,7 +42,7 @@ static int i915_gem_object_get_pages_internal(struct drm_i915_gem_object *obj)
+ 
+ 	max_order = MAX_ORDER;
+ #ifdef CONFIG_SWIOTLB
+-	if (swiotlb_nr_tbl()) {
++	if (is_swiotlb_active()) {
+ 		unsigned int max_segment;
+ 
+ 		max_segment = swiotlb_max_segment();
+diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+index a37bc3d7b38b3b..9662522aa0664a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+@@ -321,7 +321,7 @@ nouveau_ttm_init(struct nouveau_drm *drm)
+ 	}
+ 
+ #if IS_ENABLED(CONFIG_SWIOTLB) && IS_ENABLED(CONFIG_X86)
+-	need_swiotlb = !!swiotlb_nr_tbl();
++	need_swiotlb = is_swiotlb_active();
+ #endif
+ 
+ 	ret = ttm_bo_device_init(&drm->ttm.bdev, &nouveau_bo_driver,
+diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
+index 2d75026482197d..b7a8f3a1921f83 100644
+--- a/drivers/pci/xen-pcifront.c
++++ b/drivers/pci/xen-pcifront.c
+@@ -693,7 +693,7 @@ static int pcifront_connect_and_init_dma(struct pcifront_device *pdev)
+ 
+ 	spin_unlock(&pcifront_dev_lock);
+ 
+-	if (!err && !swiotlb_nr_tbl()) {
++	if (!err && !is_swiotlb_active()) {
+ 		err = pci_xen_swiotlb_init_late();
+ 		if (err)
+ 			dev_err(&pdev->xdev->dev, "Could not setup SWIOTLB!\n");
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 63f7a63f61d098..216854a5e5134b 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -37,7 +37,6 @@ enum swiotlb_force {
+ 
+ extern void swiotlb_init(int verbose);
+ int swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose);
+-extern unsigned long swiotlb_nr_tbl(void);
+ unsigned long swiotlb_size_or_default(void);
+ extern int swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs);
+ extern int swiotlb_late_init_with_default_size(size_t default_size);
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 13de669a9b4681..539c76beb52e07 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -94,12 +94,6 @@ setup_io_tlb_npages(char *str)
+ }
+ early_param("swiotlb", setup_io_tlb_npages);
+ 
+-unsigned long swiotlb_nr_tbl(void)
+-{
+-	return io_tlb_default_mem ? io_tlb_default_mem->nslabs : 0;
+-}
+-EXPORT_SYMBOL_GPL(swiotlb_nr_tbl);
+-
+ unsigned int swiotlb_max_segment(void)
+ {
+ 	return io_tlb_default_mem ? max_segment : 0;
+@@ -652,6 +646,7 @@ bool is_swiotlb_active(void)
+ {
+ 	return io_tlb_default_mem != NULL;
+ }
++EXPORT_SYMBOL_GPL(is_swiotlb_active);
+ 
+ #ifdef CONFIG_DEBUG_FS
+ 
+-- 
+2.30.1
 
-version targeted for testing:
- xen                  dae3c3e8b257cd27d6b35a467a34bf79a6650340
-baseline version:
- xen                  21657ad4f01a634beac570c64c0691e51b9cf366
-
-Last test of basis   160099  2021-03-16 15:00:26 Z    2 days
-Testing same since   160126  2021-03-18 14:01:29 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Anthony PERARD <anthony.perard@citrix.com>
-  Olaf Hering <olaf@aepfle.de>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   21657ad4f0..dae3c3e8b2  dae3c3e8b257cd27d6b35a467a34bf79a6650340 -> smoke
 
