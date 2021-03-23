@@ -2,45 +2,44 @@ Return-Path: <SRS0=CNy3=IV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 736BBC433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 05:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14EB1C433C1
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 05:20:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CA9EC619A0
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 05:15:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA9EC619A0
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+	by mail.kernel.org (Postfix) with ESMTPS id A6427619A9
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 05:20:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A6427619A9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.100494.191512 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.100517.191524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOZNq-0004OI-7K; Tue, 23 Mar 2021 05:15:14 +0000
+	id 1lOZTA-0005N4-0A; Tue, 23 Mar 2021 05:20:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 100494.191512; Tue, 23 Mar 2021 05:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 100517.191524; Tue, 23 Mar 2021 05:20:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOZNq-0004OB-3f; Tue, 23 Mar 2021 05:15:14 +0000
-Received: by outflank-mailman (input) for mailman id 100494;
- Tue, 23 Mar 2021 01:47:22 +0000
+	id 1lOZT9-0005Mx-TI; Tue, 23 Mar 2021 05:20:43 +0000
+Received: by outflank-mailman (input) for mailman id 100517;
+ Tue, 23 Mar 2021 05:20:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=P+Lm=IV=mail.ustc.edu.cn=lyl2019@srs-us1.protection.inumbo.net>)
- id 1lOW8Z-0000l8-K4
- for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 01:47:22 +0000
-Received: from ustc.edu.cn (unknown [2001:da8:d800::8])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 1d3eeaa0-2052-45cb-ae63-f449f2dd0a6b;
- Tue, 23 Mar 2021 01:47:06 +0000 (UTC)
-Received: from ubuntu.localdomain (unknown [202.38.69.14])
- by newmailweb.ustc.edu.cn (Coremail) with SMTP id
- LkAmygAHTZySSFlgFboXAA--.232S4; 
- Tue, 23 Mar 2021 09:46:59 +0800 (CST)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=CYFo=IV=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lOZT8-0005Ms-89
+ for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 05:20:42 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e2386b14-b378-49e0-adfa-799cdf4d1668;
+ Tue, 23 Mar 2021 05:20:40 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id BC6C9AB8A;
+ Tue, 23 Mar 2021 05:20:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,92 +51,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1d3eeaa0-2052-45cb-ae63-f449f2dd0a6b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-Id:MIME-Version:Content-Transfer-Encoding; bh=XcjGkHVa6C
-	nee3IqKp4QVabZFCLc/bBbQsfdChM0o8M=; b=JxgXXgrPjt06IXfD+VfFyt55xH
-	rfybtg0zY7Ipzrz2pOjyfe7kCglsSbH693814QChtOgpNQWSuB7N3OO3dAaFQIMx
-	IsIdu1PxcDfXYiSRTfGLAlWO+2JVBq4p0I3wD/J3isBRHcRhKaJUbWAG+tSys/n7
-	/g4LCOa5RRLjhk0Ww=
-From: Lv Yunlong <lyl2019@mail.ustc.edu.cn>
-To: oleksandr_andrushchenko@epam.com,
-	airlied@linux.ie,
-	daniel@ffwll.ch
-Cc: dri-devel@lists.freedesktop.org,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	Lv Yunlong <lyl2019@mail.ustc.edu.cn>
-Subject: [PATCH] gpu/xen: Fix a use after free in xen_drm_drv_init
-Date: Mon, 22 Mar 2021 18:46:56 -0700
-Message-Id: <20210323014656.10068-1-lyl2019@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: e2386b14-b378-49e0-adfa-799cdf4d1668
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1616476839; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5I+ECwluVxNDYjbroJ18babfeVRF43gPcdMo1xXHs6E=;
+	b=mFaNNH1uo+pz0uBwSXZRBDsfhCJd6SDjvN9fdSVQIDPQ5acOsrZqUUCgPiaDwPzAaX02hP
+	6Md33ReNwGBW+svmvF7dg4Rt8QFfZhCWLaYYjz6VbI7MsI+I/iTVOk7Pqfoblyi1TQfYWs
+	V0i3IAvr9l4YXnwntux+7VH/NfmJMvw=
+Subject: Re: [PATCH v2 for-4.14] tools: Fix pkg-config file for libxenstore
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Jan Beulich <JBeulich@suse.com>
+References: <20210322162013.12639-1-andrew.cooper3@citrix.com>
+ <20210322163847.23941-1-andrew.cooper3@citrix.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <9204d9c3-d8e9-db75-f209-1b23b7ee2f45@suse.com>
+Date: Tue, 23 Mar 2021 06:20:38 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:LkAmygAHTZySSFlgFboXAA--.232S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7Zw4fXw1fCFy8Xw4kWry5twb_yoW8Xw47pF
-	4fZFy5KrWUtws2kr15A3Wku3W5JanrKa1fGr9xA3y3Cw45ZFy09a15t34xuFyUArWfCrn5
-	tr9xXFyUAFyDCr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
-	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
-	CE3s1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
-	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
-	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I
-	648v4I1lc2xSY4AK67AK6w4l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr
-	1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE
-	14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7
-	IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvE
-	x4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvj
-	DU0xZFpf9x0JUmNtcUUUUU=
-X-CM-SenderInfo: ho1ojiyrz6zt1loo32lwfovvfxof0/
+In-Reply-To: <20210322163847.23941-1-andrew.cooper3@citrix.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="Jfjippe6nk70T9Wmw0VO0DnhyKi5GUTye"
 
-In function displback_changed, has the call chain
-displback_connect(front_info)->xen_drm_drv_init(front_info).
-We can see that drm_info is assigned to front_info->drm_info
-and drm_info is freed in fail branch in xen_drm_drv_init().
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Jfjippe6nk70T9Wmw0VO0DnhyKi5GUTye
+Content-Type: multipart/mixed; boundary="mXcjw0XiVHI0irVC4UNe7aK2YOajojIL5";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Jan Beulich <JBeulich@suse.com>
+Message-ID: <9204d9c3-d8e9-db75-f209-1b23b7ee2f45@suse.com>
+Subject: Re: [PATCH v2 for-4.14] tools: Fix pkg-config file for libxenstore
+References: <20210322162013.12639-1-andrew.cooper3@citrix.com>
+ <20210322163847.23941-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20210322163847.23941-1-andrew.cooper3@citrix.com>
 
-Later displback_disconnect(front_info) is called and it calls
-xen_drm_drv_fini(front_info) cause a use after free by
-drm_info = front_info->drm_info statement.
+--mXcjw0XiVHI0irVC4UNe7aK2YOajojIL5
+Content-Type: multipart/mixed;
+ boundary="------------0F618CB599365888ECB3F791"
+Content-Language: en-US
 
-My patch has done two things. First fixes the fail label which
-drm_info = kzalloc() failed and still free the drm_info.
-Second sets front_info->drm_info to NULL to avoid uaf.
+This is a multi-part message in MIME format.
+--------------0F618CB599365888ECB3F791
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Lv Yunlong <lyl2019@mail.ustc.edu.cn>
----
- drivers/gpu/drm/xen/xen_drm_front.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+On 22.03.21 17:38, Andrew Cooper wrote:
+> There are no dependenices on evtchn, ctrl or gnttab.
+>=20
+> Fixes: 1b008e99 ("tools: provide pkg-config file for libxenstore")
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-diff --git a/drivers/gpu/drm/xen/xen_drm_front.c b/drivers/gpu/drm/xen/xen_drm_front.c
-index 30d9adf31c84..9f14d99c763c 100644
---- a/drivers/gpu/drm/xen/xen_drm_front.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front.c
-@@ -521,7 +521,7 @@ static int xen_drm_drv_init(struct xen_drm_front_info *front_info)
- 	drm_dev = drm_dev_alloc(&xen_drm_driver, dev);
- 	if (IS_ERR(drm_dev)) {
- 		ret = PTR_ERR(drm_dev);
--		goto fail;
-+		goto fail_dev;
- 	}
- 
- 	drm_info->drm_dev = drm_dev;
-@@ -551,8 +551,10 @@ static int xen_drm_drv_init(struct xen_drm_front_info *front_info)
- 	drm_kms_helper_poll_fini(drm_dev);
- 	drm_mode_config_cleanup(drm_dev);
- 	drm_dev_put(drm_dev);
--fail:
-+fail_dev:
- 	kfree(drm_info);
-+	front_info->drm_info = NULL;
-+fail:
- 	return ret;
- }
- 
--- 
-2.25.1
+Reviewed-by: Juergen Gross <jgross@suse.com>
 
 
+Juergen
+
+--------------0F618CB599365888ECB3F791
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------0F618CB599365888ECB3F791--
+
+--mXcjw0XiVHI0irVC4UNe7aK2YOajojIL5--
+
+--Jfjippe6nk70T9Wmw0VO0DnhyKi5GUTye
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmBZeqYFAwAAAAAACgkQsN6d1ii/Ey9I
+ogf9Fltjax/k23S21iT+tu7npOgBzD41r+URe8p0ggyLUmXpGxZDC6n+C7MXYTgF2VUZNX3qfH1N
+4bZCIu7zhPcB4fqK1/ATJ582BlljQ90Jq7uRHoin1/BMZTddyJCIx6D7du5HIPedBm1YJohw7zkx
+h9FTeO7muHZRgdIerX6sssSJIv3UAaePr3e00ndwTZgeO8aaemErPY6GPOWrpbOyOhmJqgZCrtSg
+QPK9oVfw9KW1/ixawn9+i/4PtmdL5p4MKxZ4zPqtDWjue1mcq+u4Mh30f0G8+frW502xT6riC927
+vRmgrSeRCaajWseaTy4sda+V9yoWkU13uyuSDD9R9g==
+=mOBw
+-----END PGP SIGNATURE-----
+
+--Jfjippe6nk70T9Wmw0VO0DnhyKi5GUTye--
 
