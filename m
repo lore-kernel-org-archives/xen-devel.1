@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C71AC433C1
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 10:07:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C156C433C1
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 10:08:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DF20D619AB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 10:07:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF20D619AB
+	by mail.kernel.org (Postfix) with ESMTPS id E9C20619BB
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 10:07:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E9C20619BB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.100582.191773 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.100588.191785 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOdwo-0000db-QO; Tue, 23 Mar 2021 10:07:38 +0000
+	id 1lOdx0-0000lZ-4S; Tue, 23 Mar 2021 10:07:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 100582.191773; Tue, 23 Mar 2021 10:07:38 +0000
+Received: by outflank-mailman (output) from mailman id 100588.191785; Tue, 23 Mar 2021 10:07:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOdwo-0000dU-NP; Tue, 23 Mar 2021 10:07:38 +0000
-Received: by outflank-mailman (input) for mailman id 100582;
- Tue, 23 Mar 2021 10:07:37 +0000
+	id 1lOdx0-0000lG-02; Tue, 23 Mar 2021 10:07:50 +0000
+Received: by outflank-mailman (input) for mailman id 100588;
+ Tue, 23 Mar 2021 10:07:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJMG=IV=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1lOdr9-0006c2-1B
- for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 10:01:47 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ id 1lOdqe-0006c2-W7
+ for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 10:01:17 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cce34c28-814a-474a-b18c-56b37af096c9;
- Tue, 23 Mar 2021 10:01:37 +0000 (UTC)
+ id f8ba6ac2-16b6-45de-b559-d8438a60d5da;
+ Tue, 23 Mar 2021 10:00:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,277 +48,268 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cce34c28-814a-474a-b18c-56b37af096c9
+X-Inumbo-ID: f8ba6ac2-16b6-45de-b559-d8438a60d5da
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1616493697;
+  d=citrix.com; s=securemail; t=1616493655;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:content-transfer-encoding:mime-version;
-  bh=elgicdoLLjyAPG6mTxXmUlhWyWbTk4KjmQet+vnO69Q=;
-  b=DZkitnqXKuZBiIC1A9HeW2mmWTxmekPiKQcU0Ii+3ainK8Rf2ygpK0Dh
-   bqPLZaFZpnb6i8ltZagZGa/B5yxzQ5f6QuY4B+tGbjcelmW3fZje9HoDl
-   Ck92fAWWsbMUyArW7W/hAEnMnYyn0yA7zm4mXm8nYpOlcZvJaS29ha7Hv
-   A=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: DK49BHw+0b9sC4ZyTccq2A1VcLd2uJ38RZw+M7GYiGZWsQJZrYU9+IQlTPLx93pQg4SHNHvmYi
- ZhSrtiQTEnTAaPluhln1G1WFLXrChiT9uKmInCdIsgQW2FP84COtMeVuQBE2hwPz35GlfueSfQ
- KHrcem9qGl83v0RKMmjKMMH8pT5RBiNY+1uWBC2j/TkeP2RALVafPd1C0x32ljqJVeet9f4GIN
- mZDLQz4n1rZ+G/5RWYriaBG+ubMhziy3HU4PlWoDzpHVFFuMrVYxZ0/GRh65b42DXnyIh/zh5v
- e34=
+  bh=cqD+tWGVB4nOXoM5SIKNJg9ABIWM9BwXG5qj4qpnV7o=;
+  b=VlTr1cehDfTXoZ+8f9lzTvecd8+Ol10yjahXRLKxQjYkKwDNZC3Cdz9D
+   uy/88zSGDI9EVPN804pqCMI9IQqnKe21Q1t1+9Hc0P8by3155LOk0PQYF
+   JXyJmZaHoavMg7k+3c6csTFBvAeH5bRTvDAY0cROJyNGo88wGab1lbrs2
+   c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: tFVhLBjgM5gWqO4sNFSwKp5Q7HZE1NaaoTm2tbjSxVMDFdERRAA3k93Eavxly1OMcUi6Plsmw9
+ 4EyAgVuQ/M9mPS7av4kvM8LFpOuDMCQ5Tz3sB2xWfvN+mwigvIjTAaPRbnyJNX0CPEdX738l8E
+ qS0Npd/Zb/YkoNIsVgdW9/BJ98yGLhf2hJWjufbgpaA1COyhsKVdwqmVobZss2Y19fXBHU2WJ8
+ Cj14H8caTNKmGMAQac8o/INumoOiMri9BB9XIdUqhkZePiJdrLZV41xAS8l7/cOxUISuGfp5je
+ bgM=
 X-SBRS: 5.2
-X-MesageID: 39900444
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 40055664
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:oW3gKaFSjQIIjIkOpLqFbZTXdLJzesId70hD6mlYcjYQWtCEls
- yogfQQ3QL1jjFUY307hdWcIsC7Lk/03aVepa0cJ62rUgWjgmunK4l+8ZDvqgeNJwTXzcQY76
- tpdsFFZeHYJURmjMr8/QmzG8shxt7Cy6yzmeLC1R5WLD1CQYsI1XYcNi+wFEpqSA5aQacjHJ
- 2H6cZd4xamc3IbbsO0b0N1I9TrjdvNiZ7gfFo6FwcqgTP+8A+AxZzbN1yj3hkYWy5S2rtKyw
- b4uiHw+6nLiYDc9jbyzGnWhq4m+ufJ6twGP8CUj9hQFzOEsHfSWK1Ee5mv+A84u/uu7lFCqq
- i9nz4FM95o433cOkGZyCGdojXI6zol53/8xVLwuxKKyqaYNVFKefZpvo5XfgDU7EAtprhHod
- h29lmUqoZNClf4lDn9juK4Ji1CrFa+onYpjIco/htieLYZAYUhyLA3zQd+FZcNGz/C84Y3EO
- ViJ9G03ocpTXqqK1/epWVh29qqQzAaGQqHWFELvoiv3yFRh20R9TpV+OUv2lM7sL4tQZhN4O
- rJdoxuibF1V8cTKYZwHv0IT8ebAnHEKCi8f166EBDCLuUqKnjNo5n47PEe/+exYqEFy5M0hd
- DoTE5YnXRaQTOvNeS+mLlwtjzdSmS0WjrgjutE4YJih7H6TL33dQWeVVEVlde6qfl3OLybZ9
- +DfLZtR9PzJ2rnHohEmyfkXYNJFHUYWMoJ/vkhXVajpd/KN53KuuTXfO27HsuuLR8UHkfERl
- cTVjn6I8tNqmqxXGXjvRTXU3TxPmzzlKgAVZTyzqw28swgJ4dMug8ahRCS/ceQMwBPtaQwYQ
- 9bKLPjmaWrmHmu8Q/zniFUEysYKnwQzKTrUntMqwNPGVjza6w/t9KWfn0X+3ebOBllTYfzHB
- REr1p6vYK7RqbgixwKOpaCCCa3nnETrHWFQ9M3gauY//rofZs+E9IBQ6x+FQLCEjRvggZ0oG
- J/aAsJL3WvVQ/GuOGAttg5Fevff95zjEOAOshPs0/Ssk2auIUSXHcBZiWvVsSWmA4qYDJRij
- RKgugiqYvFvQzqBXo0gew+PlEJTGiMGrpJAD6IY5hulqnxdBt9SnqLgjKmmwg+E1CahHk6ty
- jEF2m5aPvLCl1StjRj3qHm/EhdW0+dc0hzA0oK+rFVJCDjgDJewOWLbq283y+tcVME2PgaKy
- yASyAVOBlSy9e+0wO1lD6OGW49/IgnOvXQAd0YAvfu80LoDLfNubANHvdS8pogCcvntfUTV/
- mDPyCSNzH1BooSqnqoj0dgHBMxjnYqkfnlgkK4qEe52WMyGvrULhBNQaoBL9SV8mjjQLKp3f
- xC/KYIlNr1Fl+0TNiMjZzzRXpkDDj4pGatVeEmqZxOp8sJxfNONqiedQGN7W1N2RU1Edz9m0
- wfSplq+bypAP4bQ+UiPwZiumcznNuBLEEXohX7L+83c1YqlWLaNbqyks31gItqJkWAoQfqUG
- PvixF1zrPgXyGZ06QdBL91CWNKaFIk4HAKxpLJS6TgTCGrffpE5ly0LzuUd6JcUrGMHfE1og
- xh69+F28+ReCyQ4nGcgRJLZoZP+X2gW8W8HUalHvNJ6cWzPRC0uZSRifTDxQvfeH+ccEQXhY
- pMaEwWYIBis1AZ/fIK+xn3bLf2rEIjm0ZZ+hd9mDfWq9Gb3Fs=
+IronPort-HdrOrdr: A9a23:WKVnSq+UZ5A3TXsdg1Ruk+Gncb1zdoIgy1knxilNYDRvWIixi9
+ 2ukPMH1RX9lTYWXzUalcqdPbSbKEmxybdc2qNUGbu5RgHptC+TLI9k5Zb/2DGIIUDD38Zn/+
+ Nbf6B6YeebMXFTh8z3+RT9Nt4mzsWO/qzAv5am815GZ2hRCp1IxQF/FwqdDwlSTA5JGZI2GP
+ Onl7J6jhCnfmkaadn+O2kdU4H41pb2vb/FQTpDPR4o7wGSkSilgYSQLzG01goTOgk/pIsK3n
+ PCl2XCiZmLk/b+8RPE0n+W0pI+oqqG9vJmJOihzvcYMS/tjAHAXvUqZ5SnsCouqO+irHYG+e
+ O8xysIBMh453PPcmzdm3KE5yDa3Dkj8HPkw1OD6EGTxvDRfi4wCMZKmOtiEifx1ks6sNlwlI
+ JN0m6J3qAnby/ooSXn69DEEyxtj0q/yEBS8tI7sno3a+UjQY4UibZa0FJeEZ8GEi6/wpsgCv
+ NSAMbV4+sTWU+GbljC11MfjeCEbzAWJFOrU0ICssua33x9h3Zi1XYVw8QZgzMp6I89cZ9Z/O
+ 7JW54Y2I1mf4szV+ZQFe0BScy4BijmWhTXKl+fJlzhCeUhN2/SrYX0pJE4/vujdpBN7JZaou
+ WPbHpo8UoJP27+A8yH25NGtjrXRn+mYDjrwsZCo5djvLnxQ6fqLD2DRFgin9DImYRfPuTrH9
+ KIfL5GCf7qKmXjXaxT2RflZpVUIX4CFM0Z0+xLG26mk4buEMnHp+bbePHcKP7GCjA/QF7yBX
+ MFQXz2LMVE5Ua7R2/gjHHqKjDQU3262ag1PLnR/uAVxoRIHJZLqBIphVOw4dzOLyZDvKwwdE
+ 53O6jmjau/uGmz8Q/znitUEysYKnwQzKTrUntMqwNPGVjza6w/t9KWfn0XwGGKPQZlT8TdEB
+ dWolN+/a7fFe3T+QkST/acdk6KhXoao3yHC6oGkqqY/MH/Z9cTFZA9QpF8Eg3NCj14kQtns3
+ 14dQcBX0PTfwmezJmNvdgxPqX/f8M5qBq3KcRUwEivznm0lIUKfD8neBKAFeSQmh0jQjJIgE
+ YZyd5kvJOw3QyABy8TosQddGdNZmOWB7wuNnXdWKxk3orEVkVVYg6x9HqnoiB2QETFs34/vF
+ DFEESvCLb2K2sYgF53lprP2HdPVkj1RTM1VllK9bBYUUz9/lhY98ilD5DDi1e5Ykcew+0bLT
+ HOaSYTJAQr3NysyBuJgl+5ZAkb75E1PvXqCbwpf7TIs0ndVbGghOUIGeRZ841iM82ruugXUf
+ iHcwvQNz/gDfg1sjbl70oNKW1xqHM+l+nv1wCg5G+k3GQnCf66GiUQe5gLZ9Wd5XPjXfCGzd
+ Fwis80p/K5NiH0ZsSdwa/aKz5FJRW7mx/Bc8g47ZRVt7k1rr19At3SVibJzmhO2FEmN9jv/X
+ luMphT8fTEIMtibsYScyVW8h4gk8mONlIitkjzDvUldV8ggnfHN7qykvL1gKtqBlfEqBr7OF
+ GZ/SEY5fvDUieZ3bMRCq47Iw1tGTwBwWUn+PnHe5zbCQ2see0G4UGzNWWldqRBDKeCArcdo3
+ 9BkqK1tv7SczC93g/evTF2eP0Tt2mmRN6/GwKKF6pD9cegNVGFn6ut54qygV7MOEqGQlVdgZ
+ cAc0oaKtlHgH0lioY81yCpUKz5ok4/iTJlkERav0+o3pLj+XvRGEFNLBbQjZpXVyRCK3Tgt7
+ W6zcGIkHDmpCVf0ZbNFE1MbshDFtgZQI/wNTpvI6Erzc6V1rtqhD9CbhcoB3M9jz643/oO58
+ bH5Mnv
 X-IronPort-AV: E=Sophos;i="5.81,271,1610427600"; 
-   d="scan'208";a="39900444"
+   d="scan'208";a="40055664"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AOKtNw58QdCQiPzStDBaWTYixloQZO3WhTzwSha0l2L+yqOqK7eLXwMClH/Sc8yoJrGlyOTL8skRLJlEswRFCVsX2cc+UkpHJNzGH7q+bMDspwMUCDrzkDLOHB1uoVdTPJxUPc3R7Z11D7bAaRJTzZ3ltCbmXsaVLWz/EF2WLOlu/YXLHYju71SF2LYfAsASq/6Tcdsj9uoEVspyX4HNxy0COdZeuKteDEuLN3XSO8oLLZzFgQniRPpnmFX4XYUX2CnlVtLHnE9YXZqhqxqA2DFmvudPO/kqroggalKwczInL7sffFEmNH4gHjyNP4ubfWTbekqm/IhhXBVLk16MkQ==
+ b=hSN2XjNK30WKoKDpaOaZ4ktG/uQLzwTvI7jCXmZbjIuYSogteQtby63ZrGztfSyUjRZQd448eUVCdyCH0Q1Y7tZRenitqKnllJH2+n2CU93wGIYJ3S6GyLUDJkFnjGR/941JR7FsP6k1CeNIHXkA+zTgyHQSCy9VjLsGkhzsWXBVpqCCh/Po20xC1SebLT9R3NSIOEzX8f/G/ghHy5cAjUjyvMuQMwJW715Azmq4fUZT84PnCBn01CkROZCWR2IY2oXYDp2a0KGdawTdnUcd4pryfDer6uFGhtLI1hV8sRAgL51wfV6KW+BuHxCUDkez3gbALXQv96zDpHncnB+DgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/sAstwZ3FZzzgYovYIPvWV/JpZRMk/Un8JhdEN4a52A=;
- b=I+LsnmI+QZuBTFfTCX1N51EhE8BeG0Ap/QAf/GtoYaY3g8XKKGbJZNCccGcpvhe0I1GU1EsVYZfLMD5AOpCZOT6nAkcfQ2DZ/doWubd5bGKU/CuJJJgAfh9JIrMEaK5eWPNEOUEVUNGjnEhkHKMvRBlu3d3QP2qrRdJGvM8JMC1SE/bEVk634mag7Y8QcY+hc7ee//pTz26/I4jDmlpG/PVOed388hsBi81dTGJ1Zq4q9dHNE68aQojhB0FXT9wTGRcthDZg7k0iaL9O7VfAh0Qpbhv1aXzDQz+cVtDngWZjMNpI1oHd0P7lN+WxkKxqs8RbZ7e4xQK1s/b8xz+ffg==
+ bh=hY3Kjsh0dxbfkIPBdEUM6WIbCGm2IEEAQFQ7pR2GimY=;
+ b=YA8mMe2Zy+0BtGxjhPMCSr3QU8o3EzRaHD2Or8eF1RwQqtj1eZq1BoBzMk21UMmNEErTH2gYHyGO0jSqjr+R0143vfbyRZoLiAaJOHlDTqy0lJc8nbaCW0DQPu5T2/oK12FNQiSfczJVpwK0XhDIQ/8ApsP9D12N6z/Se0EHp0TDMhgqc5S/b6bgDJSXYbBoq2WUf9Qn1G7oReiBokF1uXkPbNcz22bGQgwgq1Hg+BGFhShkuOwgfVhKp7j1FNhAEmO1+sFFW3eH8lcH8/fivfzJiShMtxNpQ9V7jB6a11PTVpTBP61cVXZUw6aix4tpfDNQJs/2M9x0fC4Yepyiew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/sAstwZ3FZzzgYovYIPvWV/JpZRMk/Un8JhdEN4a52A=;
- b=Ajs2cmCZbeBkD9V2vWhH4FMyo1DhToX0513zehcMUlAFgQrhqn3Ot5UUs/BD06FbwQ7VHH4WoRdiM3OGp9QaHhv6DVmkbcX8C0qMPOieZzdWZARkzga+TrHWd+oFKQQZrt5TM4QOsCCuLuwpLXSiMQxPMORYxcH81WZctuhaMzU=
+ bh=hY3Kjsh0dxbfkIPBdEUM6WIbCGm2IEEAQFQ7pR2GimY=;
+ b=JhGzIIbD4S7GRBu0C5YRTn9UXMfw/Bd+4D1p02LPK2ab9181AzkqWCdrvCIdWO5PIwfdR/b71+V9pA0Mlxr3zKIqmusmkaXftJ/TjVGRz4ADQRhAN18CH570j1vkcxPUmvEXHvsOJMp/jS1CB0je0kID7dVgG5kuNWx+JZOS0Fo=
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau Monne
 	<roger.pau@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
 	<wl@xen.org>
-Subject: [PATCH 19/21] libs/guest: apply a featureset into a cpu policy
-Date: Tue, 23 Mar 2021 10:58:47 +0100
-Message-ID: <20210323095849.37858-20-roger.pau@citrix.com>
+Subject: [PATCH 13/21] libs/guest: switch users of xc_set_domain_cpu_policy
+Date: Tue, 23 Mar 2021 10:58:41 +0100
+Message-ID: <20210323095849.37858-14-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210323095849.37858-1-roger.pau@citrix.com>
 References: <20210323095849.37858-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MR2P264CA0126.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:500:30::18) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+X-ClientProxiedBy: MR2P264CA0173.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501::12)
+ To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d14b9d14-0391-40b2-09f2-08d8ede29d6f
+X-MS-Office365-Filtering-Correlation-Id: 0c34239e-bbc1-4e7e-605c-08d8ede28a66
 X-MS-TrafficTypeDiagnostic: DM6PR03MB4969:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR03MB49699F6F752C3E530DF89C3E8F649@DM6PR03MB4969.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-Microsoft-Antispam-PRVS: <DM6PR03MB4969C0C41DAADAE3E87105808F649@DM6PR03MB4969.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:361;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: RTkijCKJ1KFTtE8o9PKnBhvssfJyfO7/cpwRLa5J8yvfBPQ8YkqZ+o/2AxWZuFoIGu3KajxME3ooQj7kAcbgEXS2hxjMl3PtghpU4ExZgYYSWTauTjdYTxF5rwwgoS16pSv9Wvu9qvU6N1ltDVNnXIbspBV5AiEfWwTrVI6tWF1xq9khhK7mtUZVXwTRiCl0ObmzxS5wnxc8pmRbO7KZuG/GhHUqsV5dmxEVNCy27rBukBNA44nDJSc3B3dcJSrG2sLr/Zv5awdKZL+Zr3mMWDF+rRXWZkTHDR6Amky2FjKZP6eSoOkAfTxFNGVBqenYxuUWFdy9QNqkAIOSY4L2OUv6Xl97EIg1+cx/PPE+qaM+nKOGM6MSmEx43TuunzBmyAFVw+a9uKGD8sZjBDCe9iw9h08RBI6AoO6eGw2kxgArm1FjWJRh8WmtVES/B8pCChEOIEmnqRAOrLgpN2naIKtJYBgmV84qJwo35a8mAnT3DQySZBqyHPsNBw+6g112DO7cwrZb3ATLF757aSm5K2ZtqV5EgVtTf4OLOmif3J+IX0s296Ie7ja4w1TFf6faEwRE5bq3FHREUKToVRSFUQSZdS3c+HByjSTNJO8GDPX5EWrird9jrasJh2ocSVUVTsSqi3EgrNh7SjzXJpRtmw==
+X-Microsoft-Antispam-Message-Info: WXIkZ34+UgPAT83aLO2rXjwWKANlatQh1mO93kMP9s38l7/QNmrAgSx7+rIdcwYG/d8dFy3dsm9SQdHcWTjM5B7iwgDmI0imGJWrN7YkcOtitiIN925K7KE0Ue4odX86QLzXfXIhAOXAJwVLRn3cnwjRsBANat/JGVKzFuwURVdVidwqNmqk6WSjTZ9okF/+lG/HYzepavx2B+Oln8xv71HFrDmn8lwvgEJVVQgU5Jm8j67sC98W8Gqbreic6YpPHj+VQyYApVBaWvj/arGHPrvcZJLbhF0kIKdYNHvrctJgUPmUZbzvQj7jEdGMdKRBzCPCxB/WQ4/6+1VK95+d5kRFK8BU8J+ugiYJM/R067Mo/kJM0s0cqysg4HwRyQuUgmDf0iXrFZyeuWokR60tWSXiSzRVEGvKPn+2Wu9bSb8wtJHfn5x65yyhMs8SXlQhYXh99LCFU0fPhL6Dm1lhu/vM/9whxeNsR3e5yn+6ZaSr0SgYvnf0i4ufZ1qP5YAO9UERZYD0KDQV8rDZrSV1mJ5LqTifnAoF18+Wpyyffe/NAx2nyLTXkTNYoMmxD/dRpeKRUTZPxThfYBw/l0R0WJEopoPsFPAgDpjQvQHFqQge9ow3GEBKWXKY8Ei8GVBdmtnsDB46p1F4bO5dYlABZQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(136003)(376002)(396003)(346002)(39860400002)(54906003)(36756003)(2616005)(316002)(26005)(6486002)(956004)(16526019)(186003)(2906002)(86362001)(66556008)(6916009)(478600001)(5660300002)(8936002)(6496006)(38100700001)(83380400001)(6666004)(66476007)(8676002)(66946007)(1076003)(4326008);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?bEtNMytaYWY0bUdLbXUrUWZzRk4rQXFzeVNGcHFYcEtyYXBNSXY0U3pQWmU5?=
- =?utf-8?B?MWdLOXdwSEhjUFdFbkFxTnlUdjFFclNldmhVWUpVSStaRXdtdmQ1VjNuRjVm?=
- =?utf-8?B?VENSclBRUm5ZOFhtOUZFWlkzZXpOSFpHcW9LaWhxanVjZFlTQkV0bnB5RW1N?=
- =?utf-8?B?TDRVQ1dLbFkyV0orNVZwTmRmbHAzUy9NS3FsSVhXb2VlVXV0YlNCaEt4OEZL?=
- =?utf-8?B?T0ZZUkhCUzlhZ04ySzJORjVnM0VDbkJHaTJ6NFlRSzJMTWlaRTJzNnJOOHhD?=
- =?utf-8?B?UHVKR09Gay9mOGdZQzF6eEJCdjFudHFQOFR2THlXY1NYTThNOVYwNlQzdjJz?=
- =?utf-8?B?NURxRVpWWGFwV2NVeVA3ajFxZHJWZzlPTGVPS21TNWVxbUpGNXAvblRGaHhV?=
- =?utf-8?B?eEpJYXJYSUlUemJzNk40U3c3a3VjNFhONEpHem9hWU80R3lUSW05cFZHUWo3?=
- =?utf-8?B?VDRkL2NmUlJseTFCeGdLVzhoczkvZFpNWndzOFh5ZTI1YlBIMFdYSlp2SnZz?=
- =?utf-8?B?Tjc1V01sQzQ1RU4zN291ZHhhbkJUSjVtUkFWSlIxMTNQdVFtb2ZqWmlwSEdv?=
- =?utf-8?B?MnlqOEV1N0NCaDNFbnA4cjB5ZGhvWFo2RnV6V20yQ3llcmVDeHd5ZlhsSjZC?=
- =?utf-8?B?MkF2WTZNMDlheVRDZXprbXI5UW9YZ2tyS1QwYklNRFczSlRnUFg5OFVLaWl1?=
- =?utf-8?B?bElZNWhuQnp3OGJ2SnpSdGg1SjdKNmEwYkxVMTRJUW5EMjVqMURnNEhtbFhO?=
- =?utf-8?B?cXcyY3ZjeG5UeVNjVjNrbjBXdnpIU0Jub0pWcXY4ZXgxa2htbFJ6KzkrV1RL?=
- =?utf-8?B?ZWRWcGI1WWxlRDFWWmJiS0tET1FGVk1Ibnh1aUhJRzcyQXNmUVkyZlIzL1Mx?=
- =?utf-8?B?dVA2RmIvOFd3NmFTenFyUjZZSW91eERNdDVXRXFFTE0xMFYrdE5HMElDdldn?=
- =?utf-8?B?OHpYQnBvd3VKdFo0UERsc0l0Unh6bmQreUxpVVJMditKaHhrbmswekNUZitz?=
- =?utf-8?B?VXNoVHFVU3I0MWN0ZE5LVU43bmllQm1NR3AraGNLelJOdUVPSmc5czdwZzFG?=
- =?utf-8?B?eEREcDZHZG0xV2tVcmQxOEViNlV1MVpubW1LN1pzR1oxK2NSck1iWE9sc3ln?=
- =?utf-8?B?V21OZ0FudnFub3FydW1IT3lIeW0xdlhoMEVqQ1V6VVpyN0V3bHQ0MjJGQnE1?=
- =?utf-8?B?QzFNdTRZZWRvUFl2WWVjeS9oT25KbENSdjlUTVE3dmRPUVVOR0dST0FlVGZO?=
- =?utf-8?B?VkFtMjJ0SXQwNk8wYUJFdHpDbnFhTDlUM2YxcnhmQ2dubFV1L3Fwc0pVU1FE?=
- =?utf-8?B?SzE5eGg2d2pZMnhZbGlHRFZVMFVRYUpQRkpKeUlGa09zTzNtVnJpVmtIM1BF?=
- =?utf-8?B?bHdkSDkvSCtDWk5yKzlFSkNVWjh4SW5zUTlHOGF5d3hDUXNPbTFwbWMwNUhN?=
- =?utf-8?B?eTVXYnJrb1kvVExzWWg1dnhKR1BZV2pYeDcxbFUvT0hjcm9Mc004OTJSSTE2?=
- =?utf-8?B?V1hPUnFvNHdMcGFIMTZiQisvSVQyR1pXOGE5QWFHZmdQQmlGQ0ZZWjhONEQw?=
- =?utf-8?B?cGpOTUwycFo5SHdjY0NXLzZub294THYxc0drYXl2bmN0YW9kQmowNUZlOE85?=
- =?utf-8?B?M3VOQ1hoc3NtbWgzUUFvYWt2K0tSMTVxa1FmbDBuanpCZFZLNC9zem1ucHZ2?=
- =?utf-8?B?ZDNJbHFMOFNIT0x0eGdLRkRSRWZBVkZZYUdudmg0d3l5cVVxdGpRaWMxOFpW?=
- =?utf-8?Q?OlXTAiIgLZczEw4//k6vho3dMJGsCKRmd+TnB6q?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: d14b9d14-0391-40b2-09f2-08d8ede29d6f
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?Q0gvMVp3UGhONkNoZHFxSXpKUExGR29LUEtWZDg1U0J4QVp0S0NzZnNUSHAz?=
+ =?utf-8?B?MFNKbU5oVmlvbThVVzZ0dVlCaGdQU0Nzenc5cWQ0clZpa0gxbmZISW9iODBr?=
+ =?utf-8?B?Y1RrQ1lpdVkvcTdvOVVYWVlWTThVZnc1eENodlNseXltVm9iLzBUYlNCS1F6?=
+ =?utf-8?B?bWtQSWhiZkxBd0Frb056WFJMcXdkdlIrQ3c4VndDOVdHdmhyYXRpZzZxT1lN?=
+ =?utf-8?B?VUYyWnlaNFpSRithb0N5QUU3SG9jQkFRR3JlN0dzci9WR1FoOUlyWVd0aTBs?=
+ =?utf-8?B?RUVvaVdMN0dETWFCTGErYU9SOEM0RDk2bzVGZjVDT1RMYXVkNFdDYzFzcU9H?=
+ =?utf-8?B?a1JvQkkrOE9KRlVKRGNySnF1eEozTTIwaDU3NlNPbTdqSG03dEtDWHVmU3BY?=
+ =?utf-8?B?YVZpQ2RNS0RSWEhTSnRGY1h0OGM1STFYMWpkK1p5V1VIRGZ5VEpqWFllNHhV?=
+ =?utf-8?B?MFFlQS9YNk9BNXh6RzBCdG00VHBwbk0rRU8wbjNySlNxSEJyYzFrU245U1Yr?=
+ =?utf-8?B?YXVtMzNmUERldFFLVmxHKzI2V0xobGVpUFRZSUlsc2hVUzZZMUFiemdlK2cr?=
+ =?utf-8?B?aUI4OXpmTU5VRmZWVUtYazYzcHBJNzcva2RGcDhCMTNXYXg1dzlPQ3AvQzNv?=
+ =?utf-8?B?cWtDcXMyU0NIQnVnZjZIY2p5UTMwTFgwR3phTVB5V1dzaXJady9QT0Y1MW9u?=
+ =?utf-8?B?Z1UrN3g3YXYrL2IyMy9ETlhpVFZBWkxhVTdEL0hUQ1ZCcGkwZDlJU1hpSDNY?=
+ =?utf-8?B?eTZlb1dpcEZuM2tsTVZxdDU2dFJqU28xV29EYnNnUFlOZW1TdXNWMzlmZ0Fq?=
+ =?utf-8?B?Tnhzc015L0VlNU5CZTNoQ01OUnFTVTZkK2FHaHpCc1AxeGRQdFpGTVNuRzNa?=
+ =?utf-8?B?M1hlakR2UzdHcCtpSHg1cXhkQjhNVi90MzBLT1MxSWliTkwzRUJzWld5MzNM?=
+ =?utf-8?B?SU9YRXZQU3hRTmdPaDJYeHo5S3RFNCt2aTRuTjFaa1JQVktaSUtNaThvNDNR?=
+ =?utf-8?B?S0NlM0xNM3dObG1VZmZhZFVGdG5ySE5BZDlsTHZMMGFZVnVBdWZKZXB5bUdw?=
+ =?utf-8?B?SWpSV1lBM0pPNWE1azRrdDlxSmRZa0MrN0ZXMWRBRXF3OThBVG0yOWNzQnU4?=
+ =?utf-8?B?cGwzVncrVTcvR2lObW5qb1lJR2NibmNZQTdPN0R5VVJvbHgweGUwSUEySUVS?=
+ =?utf-8?B?ZmIzaDdnckZySkF2enZIWThPVU5nWU9VNm9UREJQQU9BamVxdjhSK2FxM01H?=
+ =?utf-8?B?bk5Vb2duQktMSWhXdzZ6a2RDRURONnBKVXE3WFJqYjZTTjUrTjhnZTdGaXZU?=
+ =?utf-8?B?Nmt0Y0tnRWxkMGprWXFrWE9KUVNSSHJPalhBUmJONjVra3kwUjdTVjdpN3dL?=
+ =?utf-8?B?NWdvZEloMGdwVUVDZ09ZTHd5UmptLzNTQjVMNlB6eThybHl5a1NNUFE1K1Mw?=
+ =?utf-8?B?UGx6dGZRWms1VDBnNDZzOEtNL1prNGdMOWxmNE9DSFowbTlDdG9xY1dSZ0ZW?=
+ =?utf-8?B?VjZVL1dqMldhaWlKZjd6QXlrMDJmb01xQjJKOGg3VHE5ZHpSZmRRcDlQcWhv?=
+ =?utf-8?B?aFIxM3JSbzk5MHBDL3ZxWml1MUh5c1p6VjV1ekVUMGtXNlVqNnlFZWhITmZv?=
+ =?utf-8?B?RDZuRkJpVFdCZUJ5eHdhcmNLdXdQbkdSby9abXVVWk5HcXdoOEdYNHN0RUVo?=
+ =?utf-8?B?eDNHakVMOHlWeWk2dXcwU1BVa3Nxay82VGM5ODZMaThnZ3ozbktBZG01aDNE?=
+ =?utf-8?Q?yKbcj30yU+96oaan6LO3eg6ud16ky1mUBuzbU0c?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c34239e-bbc1-4e7e-605c-08d8ede28a66
 X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2021 10:01:23.3851
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2021 10:00:51.4327
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yeDoZ/E7oFk2udtTDTughx7lpIwXtbR5DlwlcXptKtz3yBpdFrW39UgbLZt2mnjUStF1ySzMQNZVxnbgBenWGg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Eceh7IR/BLgBDKMpPgEw8YBp2pBZsHg47vBirqMeeaViKR/Kf7Wxk8R+Z1k9xbugLj5edwng0Lm61l+3fdFGhg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4969
 X-OriginatorOrg: citrix.com
 
-Pull out the code from xc_cpuid_apply_policy that applies a featureset
-to a cpu policy and place it on it's own standalone function that's
-part of the public interface.
-
-No functional change intended.
+To use the new cpu policy interface xc_cpu_policy_set_domain. Note
+that xc_set_domain_cpu_policy is removed from the interface and the
+function is made static to xg_cpuid_x86.c for it's internal callers.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- tools/include/xenctrl.h         |  5 ++
- tools/libs/guest/xg_cpuid_x86.c | 94 ++++++++++++++++++++-------------
- 2 files changed, 61 insertions(+), 38 deletions(-)
+ tools/include/xenctrl.h             |  5 -----
+ tools/libs/guest/xg_cpuid_x86.c     | 22 +++++++++++-----------
+ tools/libs/guest/xg_sr_common_x86.c | 28 +++++++++++++++++++++-------
+ 3 files changed, 32 insertions(+), 23 deletions(-)
 
 diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 07b8bfc08aa..a830fac1d12 100644
+index 46f5026081c..164a287b367 100644
 --- a/tools/include/xenctrl.h
 +++ b/tools/include/xenctrl.h
-@@ -2639,6 +2639,11 @@ int xc_cpu_policy_topology(xc_interface *xch, xc_cpu_policy_t policy,
- int xc_cpu_policy_apply_cpuid(xc_interface *xch, xc_cpu_policy_t policy,
-                               const struct xc_xend_cpuid *cpuid, bool hvm);
+@@ -2625,11 +2625,6 @@ int xc_get_cpu_featureset(xc_interface *xch, uint32_t index,
  
-+/* Apply a featureset to the policy. */
-+int xc_cpu_policy_apply_featureset(xc_interface *xch, xc_cpu_policy_t policy,
-+                                   const uint32_t *featureset,
-+                                   unsigned int nr_features);
-+
- int xc_get_cpu_levelling_caps(xc_interface *xch, uint32_t *caps);
- int xc_get_cpu_featureset(xc_interface *xch, uint32_t index,
-                           uint32_t *nr_features, uint32_t *featureset);
+ int xc_cpu_policy_get_size(xc_interface *xch, uint32_t *nr_leaves,
+                            uint32_t *nr_msrs);
+-int xc_set_domain_cpu_policy(xc_interface *xch, uint32_t domid,
+-                             uint32_t nr_leaves, xen_cpuid_leaf_t *leaves,
+-                             uint32_t nr_msrs, xen_msr_entry_t *msrs,
+-                             uint32_t *err_leaf_p, uint32_t *err_subleaf_p,
+-                             uint32_t *err_msr_p);
+ 
+ uint32_t xc_get_cpu_featureset_size(void);
+ 
 diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
-index ce4a4a1a436..96b969342fa 100644
+index 07756743e76..f7b662f31aa 100644
 --- a/tools/libs/guest/xg_cpuid_x86.c
 +++ b/tools/libs/guest/xg_cpuid_x86.c
-@@ -450,46 +450,14 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
- 
-     if ( featureset )
-     {
--        uint32_t disabled_features[FEATURESET_NR_ENTRIES],
--            feat[FEATURESET_NR_ENTRIES] = {};
--        static const uint32_t deep_features[] = INIT_DEEP_FEATURES;
--        unsigned int i, b;
--
--        /*
--         * The user supplied featureset may be shorter or longer than
--         * FEATURESET_NR_ENTRIES.  Shorter is fine, and we will zero-extend.
--         * Longer is fine, so long as it only padded with zeros.
--         */
--        unsigned int user_len = min(FEATURESET_NR_ENTRIES + 0u, nr_features);
--
--        /* Check for truncated set bits. */
--        rc = -EOPNOTSUPP;
--        for ( i = user_len; i < nr_features; ++i )
--            if ( featureset[i] != 0 )
--                goto out;
--
--        memcpy(feat, featureset, sizeof(*featureset) * user_len);
--
--        /* Disable deep dependencies of disabled features. */
--        for ( i = 0; i < ARRAY_SIZE(disabled_features); ++i )
--            disabled_features[i] = ~feat[i] & deep_features[i];
--
--        for ( b = 0; b < sizeof(disabled_features) * CHAR_BIT; ++b )
-+        policy.cpuid = p;
-+        rc = xc_cpu_policy_apply_featureset(xch, &policy, featureset,
-+                                            nr_features);
-+        if ( rc )
-         {
--            const uint32_t *dfs;
--
--            if ( !test_bit(b, disabled_features) ||
--                 !(dfs = x86_cpuid_lookup_deep_deps(b)) )
--                continue;
--
--            for ( i = 0; i < ARRAY_SIZE(disabled_features); ++i )
--            {
--                feat[i] &= ~dfs[i];
--                disabled_features[i] &= ~dfs[i];
--            }
-+            ERROR("Failed to apply featureset to policy");
-+            goto out;
-         }
--
--        cpuid_featureset_to_policy(feat, p);
-     }
-     else
-     {
-@@ -1230,3 +1198,53 @@ int xc_cpu_policy_topology(xc_interface *xch, xc_cpu_policy_t policy,
- 
-     return 0;
+@@ -204,11 +204,11 @@ static int get_domain_cpu_policy(xc_interface *xch, uint32_t domid,
+     return ret;
  }
+ 
+-int xc_set_domain_cpu_policy(xc_interface *xch, uint32_t domid,
+-                             uint32_t nr_leaves, xen_cpuid_leaf_t *leaves,
+-                             uint32_t nr_msrs, xen_msr_entry_t *msrs,
+-                             uint32_t *err_leaf_p, uint32_t *err_subleaf_p,
+-                             uint32_t *err_msr_p)
++static int set_domain_cpu_policy(xc_interface *xch, uint32_t domid,
++                                 uint32_t nr_leaves, xen_cpuid_leaf_t *leaves,
++                                 uint32_t nr_msrs, xen_msr_entry_t *msrs,
++                                 uint32_t *err_leaf_p, uint32_t *err_subleaf_p,
++                                 uint32_t *err_msr_p)
+ {
+     DECLARE_DOMCTL;
+     DECLARE_HYPERCALL_BOUNCE(leaves,
+@@ -405,8 +405,8 @@ static int xc_cpuid_xend_policy(
+     }
+ 
+     /* Feed the transformed currrent policy back up to Xen. */
+-    rc = xc_set_domain_cpu_policy(xch, domid, nr_cur, cur, 0, NULL,
+-                                  &err_leaf, &err_subleaf, &err_msr);
++    rc = set_domain_cpu_policy(xch, domid, nr_cur, cur, 0, NULL,
++                               &err_leaf, &err_subleaf, &err_msr);
+     if ( rc )
+     {
+         PERROR("Failed to set d%d's policy (err leaf %#x, subleaf %#x, msr %#x)",
+@@ -638,8 +638,8 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+         goto out;
+     }
+ 
+-    rc = xc_set_domain_cpu_policy(xch, domid, nr_leaves, leaves, 0, NULL,
+-                                  &err_leaf, &err_subleaf, &err_msr);
++    rc = set_domain_cpu_policy(xch, domid, nr_leaves, leaves, 0, NULL,
++                               &err_leaf, &err_subleaf, &err_msr);
+     if ( rc )
+     {
+         PERROR("Failed to set d%d's policy (err leaf %#x, subleaf %#x, msr %#x)",
+@@ -833,8 +833,8 @@ int xc_cpu_policy_set_domain(xc_interface *xch, uint32_t domid,
+     if ( rc )
+         goto out;
+ 
+-    rc = xc_set_domain_cpu_policy(xch, domid, nr_leaves, leaves, nr_msrs, msrs,
+-                                  &err_leaf, &err_subleaf, &err_msr);
++    rc = set_domain_cpu_policy(xch, domid, nr_leaves, leaves, nr_msrs, msrs,
++                               &err_leaf, &err_subleaf, &err_msr);
+     if ( rc )
+     {
+         ERROR("Failed to set domain %u policy (%d = %s)", domid, -rc,
+diff --git a/tools/libs/guest/xg_sr_common_x86.c b/tools/libs/guest/xg_sr_common_x86.c
+index 15265e7a331..02f0c3ae9ed 100644
+--- a/tools/libs/guest/xg_sr_common_x86.c
++++ b/tools/libs/guest/xg_sr_common_x86.c
+@@ -151,7 +151,10 @@ int x86_static_data_complete(struct xc_sr_context *ctx, unsigned int *missing)
+ {
+     xc_interface *xch = ctx->xch;
+     uint32_t nr_leaves = 0, nr_msrs = 0;
+-    uint32_t err_l = ~0, err_s = ~0, err_m = ~0;
++    xc_cpu_policy_t policy = xc_cpu_policy_init();
 +
-+int xc_cpu_policy_apply_featureset(xc_interface *xch, xc_cpu_policy_t policy,
-+                                   const uint32_t *featureset,
-+                                   unsigned int nr_features)
-+{
-+    uint32_t disabled_features[FEATURESET_NR_ENTRIES],
-+        feat[FEATURESET_NR_ENTRIES] = {};
-+    static const uint32_t deep_features[] = INIT_DEEP_FEATURES;
-+    unsigned int i, b;
-+
-+    /*
-+     * The user supplied featureset may be shorter or longer than
-+     * FEATURESET_NR_ENTRIES.  Shorter is fine, and we will zero-extend.
-+     * Longer is fine, so long as it only padded with zeros.
-+     */
-+    unsigned int user_len = min(FEATURESET_NR_ENTRIES + 0u, nr_features);
-+
-+    /* Check for truncated set bits. */
-+    for ( i = user_len; i < nr_features; ++i )
-+        if ( featureset[i] != 0 )
-+        {
-+            errno = EOPNOTSUPP;
-+            return -1;
-+        }
-+
-+    memcpy(feat, featureset, sizeof(*featureset) * user_len);
-+
-+    /* Disable deep dependencies of disabled features. */
-+    for ( i = 0; i < ARRAY_SIZE(disabled_features); ++i )
-+        disabled_features[i] = ~feat[i] & deep_features[i];
-+
-+    for ( b = 0; b < sizeof(disabled_features) * CHAR_BIT; ++b )
++    if ( !policy )
++        return -1;
+ 
+     if ( ctx->x86.restore.cpuid.ptr )
+         nr_leaves = ctx->x86.restore.cpuid.size / sizeof(xen_cpuid_leaf_t);
+@@ -163,14 +166,25 @@ int x86_static_data_complete(struct xc_sr_context *ctx, unsigned int *missing)
+     else
+         *missing |= XGR_SDD_MISSING_MSR;
+ 
++    if ( nr_leaves &&
++         xc_cpu_policy_update_cpuid(xch, policy,
++                                    ctx->x86.restore.cpuid.ptr, nr_leaves) )
 +    {
-+        const uint32_t *dfs;
-+
-+        if ( !test_bit(b, disabled_features) ||
-+             !(dfs = x86_cpuid_lookup_deep_deps(b)) )
-+            continue;
-+
-+        for ( i = 0; i < ARRAY_SIZE(disabled_features); ++i )
-+        {
-+            feat[i] &= ~dfs[i];
-+            disabled_features[i] &= ~dfs[i];
-+        }
++        PERROR("Failed to update CPUID policy");
++        return -1;
++    }
++    if ( nr_msrs &&
++         xc_cpu_policy_update_msrs(xch, policy,
++                                   ctx->x86.restore.msr.ptr, nr_msrs) )
++    {
++        PERROR("Failed to update MSR policy");
++        return -1;
 +    }
 +
-+    cpuid_featureset_to_policy(feat, policy->cpuid);
-+
-+    return 0;
-+}
+     if ( (nr_leaves || nr_msrs) &&
+-         xc_set_domain_cpu_policy(xch, ctx->domid,
+-                                  nr_leaves, ctx->x86.restore.cpuid.ptr,
+-                                  nr_msrs,   ctx->x86.restore.msr.ptr,
+-                                  &err_l, &err_s, &err_m) )
++         xc_cpu_policy_set_domain(xch, ctx->domid, policy) )
+     {
+-        PERROR("Failed to set CPUID policy: leaf %08x, subleaf %08x, msr %08x",
+-               err_l, err_s, err_m);
++        PERROR("Failed to set CPUID policy");
+         return -1;
+     }
+ 
 -- 
 2.30.1
 
