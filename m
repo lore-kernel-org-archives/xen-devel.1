@@ -2,44 +2,47 @@ Return-Path: <SRS0=CNy3=IV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2956EC433C1
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 16:15:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1AFAC433C1
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 16:53:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D584061990
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 16:15:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D584061990
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9408C619BA
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 16:53:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9408C619BA
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.100741.192123 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.100746.192141 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOjgY-0007iq-1K; Tue, 23 Mar 2021 16:15:14 +0000
+	id 1lOkHM-0003L9-0n; Tue, 23 Mar 2021 16:53:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 100741.192123; Tue, 23 Mar 2021 16:15:14 +0000
+Received: by outflank-mailman (output) from mailman id 100746.192141; Tue, 23 Mar 2021 16:53:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOjgX-0007ij-UF; Tue, 23 Mar 2021 16:15:13 +0000
-Received: by outflank-mailman (input) for mailman id 100741;
- Tue, 23 Mar 2021 16:15:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lOkHL-0003L2-Tp; Tue, 23 Mar 2021 16:53:15 +0000
+Received: by outflank-mailman (input) for mailman id 100746;
+ Tue, 23 Mar 2021 16:53:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=YFj+=IV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lOjgW-0007ia-4Q
- for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 16:15:12 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 912cd9cb-1466-41dc-8659-8e902694f50c;
- Tue, 23 Mar 2021 16:15:11 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8821CADAA;
- Tue, 23 Mar 2021 16:15:10 +0000 (UTC)
+ (envelope-from <iwj@xenproject.org>) id 1lOkHJ-0003Kx-Ur
+ for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 16:53:14 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lOkHJ-0002e6-Qw
+ for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 16:53:13 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lOkHJ-0000Wd-Ox
+ for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 16:53:13 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lOkHG-0002au-IR; Tue, 23 Mar 2021 16:53:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,63 +54,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 912cd9cb-1466-41dc-8659-8e902694f50c
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1616516110; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NnSchVe5Sd8n1SbhskQmhu9C+dFhNe9VTvxTj9olY6c=;
-	b=ToXSX4tYtplZg3iZnBAGeQVF7Is3Zu6E3FBOpptOsdsour3WoxOw7wzGwGKx55h1WZ9DtD
-	ph1WMJKfLnJBVZDu0YpKWgtduL3s8GS9q4B4kcs+JNUfnKN/o3hWWbIgdBpOFEHT2ojjaF
-	+lCOD7oL2XNfooVj48RQlQKZKzjtDio=
-Subject: Re: [ANNOUNCE] Xen 4.15 - release status, branching tomorrow
-To: Ian Jackson <iwj@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, community.manager@xenproject.org,
- Andrew Cooper <andrew.cooper3@citrix.com>, committers@xenproject.org,
- Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>,
- =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
-References: <24666.1682.595069.435575@mariner.uk.xensource.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <0bfab829-3841-b2cd-96f9-874340cf75c2@suse.com>
-Date: Tue, 23 Mar 2021 17:15:09 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=BvoZTo5swmqmWjAIhmdG3QAN4H7/hSNkplL5xeVp2AU=; b=wF6CSwL+zUvFEwdgcRvOARil5S
+	egYZCskBa2WgUv5pusMn3ALoRCnzLGMxzLVponNZ4EWlZOzy41+Jj4aSnhyC0Brk0YEcV01R2Dkju
+	TJ6CSuVI3lWylUv3RWjYXZ+R7jxl4UeLqkkxRpQz7vfqHdUKjC8a060ImOs0OeOlnDDA=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <24666.1682.595069.435575@mariner.uk.xensource.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24666.7414.232768.961456@mariner.uk.xensource.com>
+Date: Tue, 23 Mar 2021 16:53:10 +0000
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org,
+    community.manager@xenproject.org,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    committers@xenproject.org,
+    Wei Liu <wl@xen.org>,
+    Juergen Gross <jgross@suse.com>,
+    =?iso-8859-1?Q?Fr=E9d=E9ric?= Pierret <frederic.pierret@qubes-os.org>
+Subject: Re: [ANNOUNCE] Xen 4.15 - release status, branching tomorrow
+In-Reply-To: <0bfab829-3841-b2cd-96f9-874340cf75c2@suse.com>
+References: <24666.1682.595069.435575@mariner.uk.xensource.com>
+	<0bfab829-3841-b2cd-96f9-874340cf75c2@suse.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-On 23.03.2021 16:17, Ian Jackson wrote:
-> I have reviewed my list of blockers and the conversation that followed
-> and there are just three areas that are still of concern to me:
+Jan Beulich writes ("Re: [ANNOUNCE] Xen 4.15 - release status, branching tomorrow"):
+> On 23.03.2021 16:17, Ian Jackson wrote:
+> >   I think it may be time to reconcile ourselves to not fixing this,
+> >   and deciding on a suitable plan B.  Do we need to put something in
+> >   the release notes, or SUPPORT.md, or implement a mitigation of some
+> >   kind ?
 > 
-> * io-apic issue on Ryzen 1800X
-> 
->    Related Qubes issue tracking this:
->    https://github.com/QubesOS/qubes-issues/issues/6423
->    Information from
->      Jan Beulich <jbeulich@suse.com>
->      Andrew Cooper <andrew.cooper3@citrix.com>
->      Frédéric Pierret <frederic.pierret@qubes-os.org>
-> 
->   Are we likely to get a fix in the next few days ?
+> One option of course is, like was just done for 4.13.3, to revert.
+> Iirc Andrew had some thoughts towards making the new piece of code
+> conditional upon the original issue actually hitting.
 
-Afaic - I'm still lacking certain bits of information to even think
-of possible solutions.
+I would be very happy to consider a revert it someone would give me
+references and explain to me the implications in words of one
+syllable.
 
->   I think it may be time to reconcile ourselves to not fixing this,
->   and deciding on a suitable plan B.  Do we need to put something in
->   the release notes, or SUPPORT.md, or implement a mitigation of some
->   kind ?
+> Another
+> (somewhat similar) option might be to hide the new piece of code
+> behind a default-off command line option.
 
-One option of course is, like was just done for 4.13.3, to revert.
-Iirc Andrew had some thoughts towards making the new piece of code
-conditional upon the original issue actually hitting. Another
-(somewhat similar) option might be to hide the new piece of code
-behind a default-off command line option.
+Likewise.
 
-Jan
+Sorry to be vague but I feel quite ignorant here!
+
+Ian.
 
