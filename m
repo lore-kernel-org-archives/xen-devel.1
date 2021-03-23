@@ -2,44 +2,47 @@ Return-Path: <SRS0=CNy3=IV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C7C9C433E1
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 17:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74782C433C1
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 19:09:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D2AF761554
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 17:40:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D2AF761554
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1E40E61481
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 19:09:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1E40E61481
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.100770.192213 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.100785.192231 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOl0i-0000ll-TQ; Tue, 23 Mar 2021 17:40:08 +0000
+	id 1lOmOY-0000s7-Nk; Tue, 23 Mar 2021 19:08:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 100770.192213; Tue, 23 Mar 2021 17:40:08 +0000
+Received: by outflank-mailman (output) from mailman id 100785.192231; Tue, 23 Mar 2021 19:08:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOl0i-0000le-Pd; Tue, 23 Mar 2021 17:40:08 +0000
-Received: by outflank-mailman (input) for mailman id 100770;
- Tue, 23 Mar 2021 17:40:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QwVt=IV=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1lOl0h-0000lZ-K3
- for xen-devel@lists.xenproject.org; Tue, 23 Mar 2021 17:40:07 +0000
-Received: from mail-ot1-x333.google.com (unknown [2607:f8b0:4864:20::333])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ea385f8a-6f9b-4b14-8532-b3d071fac583;
- Tue, 23 Mar 2021 17:40:06 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- h6-20020a0568300346b02901b71a850ab4so20270126ote.6
- for <xen-devel@lists.xenproject.org>; Tue, 23 Mar 2021 10:40:06 -0700 (PDT)
+	id 1lOmOY-0000s0-KT; Tue, 23 Mar 2021 19:08:50 +0000
+Received: by outflank-mailman (input) for mailman id 100785;
+ Tue, 23 Mar 2021 19:08:49 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOmOX-0000rs-Br; Tue, 23 Mar 2021 19:08:49 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOmOX-0004z2-5R; Tue, 23 Mar 2021 19:08:49 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOmOW-0004As-Qc; Tue, 23 Mar 2021 19:08:48 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOmOW-00084Z-Q5; Tue, 23 Mar 2021 19:08:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,199 +54,268 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea385f8a-6f9b-4b14-8532-b3d071fac583
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=6/GVoKCpWxnqFm864SDF05q7kHeQOw7BOMEGkyvvqbY=;
-        b=de8nbgoP5df7TO9XQZIC3svnyphH122fIkpvrOWAQQUcE3Z3yKvu33wT2rsZDYj48U
-         CkoMjBFhSbX2UmmUXrRzMWl7JYgV0U6ddLFWArgbzBPLjNJziosJeGCxu3vJrpA4msXt
-         Utem+DDWLgjY2TaQKvzpWZsla0Gp+pEwQF4mVWIffxqpY54pATzsH1y7F/8jFC5tnb2b
-         ObNR/CmO9myy41ZUh343v0+8/lV/Ud+gCqddo8XaHr0u6dSYY85H3WwC5AHitE73zSXa
-         o2AL+u3ewhCrvMFZc8qPlN8d9Mxgq/7EP+tDadSofNR520LFCKxFF9y4NM7BVJBV90up
-         HYuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=6/GVoKCpWxnqFm864SDF05q7kHeQOw7BOMEGkyvvqbY=;
-        b=WorPV+o2Cyyt/MqFCHwTt5lrlmlXJ5KKIt6OXWmv+HbuTKRg5YeUzARKK4Fyam1Mhf
-         7q+Z04UtVZ4b8Yqtjdk42mtIG2MKosrgXSW5++bzJgsZj/tTzZS/1oIxzrZ6fvLOC9qb
-         m7OKf0Amit71o2fsHAyvxqXyL5uExnW/3TSPR/AyGF/V7VdT05MIwc5mAsjVaQVMMavb
-         31oIVyUMPfvPpAEPkWCcu15xnzBrN9bTTApD7GSXMBh3Cwq/7nCG7DBmLS5+OU620WXh
-         5j6JBEmf7rx6Lz+dUjrnzexwR/Y5fdBhUo4pMewif1M6/+K9bdl01rD5zaF6YI3dxDiM
-         EYow==
-X-Gm-Message-State: AOAM53390Z3wQ65H/4/ZYUdkucOq0VOLPac/VIxP+SWQcqEVmowvlU45
-	BpZUqLa4R28q0HqKqN6SalvC0e8SgjdcJ2rPxfQ=
-X-Google-Smtp-Source: ABdhPJw0/XMEJ8uDz5h5tRTD95XGq8/VfUYIVmgdxxKapSWYyh4cvq55OhkJY5pjIiSNI0UJ088BUhQPu6e25SZP2EI=
-X-Received: by 2002:a9d:70ce:: with SMTP id w14mr5255632otj.183.1616521206117;
- Tue, 23 Mar 2021 10:40:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210316031814.10311-1-dpsmith@apertussolutions.com>
- <20210316031814.10311-2-dpsmith@apertussolutions.com> <YFODOnQRAntdETY7@Air-de-Roger>
-In-Reply-To: <YFODOnQRAntdETY7@Air-de-Roger>
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Date: Tue, 23 Mar 2021 10:39:53 -0700
-Message-ID: <CACMJ4GaWtSWAyqbgqDa-DuLy1bYCBx8E6PucxtGfVeiraAy5cA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] docs/designs/launch: hyperlaunch design document
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>, 
-	xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Stefano Stabellini <stefano.stabellini@xilinx.com>, Julien Grall <jgrall@amazon.com>, 
-	Julien Grall <Julien.grall.oss@gmail.com>, iwj@xenproject.org, Wei Liu <wl@xen.org>, 
-	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
-	Rich Persaud <persaur@gmail.com>, Bertrand Marquis <Bertrand.Marquis@arm.com>, luca.fancellu@arm.com, 
-	paul@xen.org, Adam Schwalm <adam.schwalm@starlab.io>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=A7ClMuT6Neyd+xLXfW6BoWmK9wv54c6pbmhm9X+LSG8=; b=OixojxwTqvm7Dw44FqzmliyrJ8
+	cihrADO88vKBe72XYLG0vHrrTOVn+0A90XEsDRL+XNyvTUlHNgDa3gdiy1xBARbUIeknAz5Go8pWa
+	pBgiTXj9rEipUpZApZH+XqvY8TAYzPk2upNUF9lHiAGqID0otnR5bB+ZR2oo0Yu3RffY=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-160350-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [libvirt test] 160350: regressions - FAIL
+X-Osstest-Failures:
+    libvirt:build-amd64-libvirt:libvirt-build:fail:regression
+    libvirt:build-armhf-libvirt:libvirt-build:fail:regression
+    libvirt:build-arm64-libvirt:libvirt-build:fail:regression
+    libvirt:build-i386-libvirt:libvirt-build:fail:regression
+    libvirt:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-pair:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-vhd:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-amd64-libvirt-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-arm64-arm64-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-arm64-arm64-libvirt-qcow2:build-check(1):blocked:nonblocking
+    libvirt:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
+    libvirt:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
+    libvirt:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    libvirt=9eb7e9e817656983ab3f8801ef3cd9ba5ab5ee1c
+X-Osstest-Versions-That:
+    libvirt=2c846fa6bcc11929c9fb857a22430fb9945654ad
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 23 Mar 2021 19:08:48 +0000
 
-On Thu, Mar 18, 2021 at 9:43 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com>=
- wrote:
->
-> Just took a quick look at it.
->
-> On Mon, Mar 15, 2021 at 11:18:13PM -0400, Daniel P. Smith wrote:
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------------------+
-> > + | **Xen Dom0**  | **Linux** | **Late**   | **Jail**  | **Xen**     | =
-**Xen Hyperlaunch** |
-> > + | **(Classic)** | **KVM**   | **HW Dom** | **house** | **dom0less**+-=
---------+-----------+
-> > + |               |           |            |           |             | =
-Static  | Dynamic   |
-> > + +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
-> > + | Hypervisor able to launch multiple VMs during host boot            =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |     Y     |       Y     | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Hypervisor supports Static Partitioning                            =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |     Y     |       Y     | =
-   Y    |           |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Able to launch VMs dynamically after host boot                     =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |       Y       |     Y     |      Y*    |     Y     |       Y*    | =
-        |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Supports strong isolation between all VMs started at host boot     =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |     Y     |       Y     | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Enables flexible sequencing of VM start during host boot           =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |             | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Prevent all-powerful static root domain being launched at boot     =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |       Y*    | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Operates without a Highly-privileged management VM (eg. Dom0)      =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |      Y*    |           |       Y*    | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Operates without a privileged toolstack VM (Control Domain)        =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |       Y*    | =
-   Y    |           |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Extensible VM configuration applied before launch of VMs at host bo=
-ot                  |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |             | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Flexible granular assignment of permissions and functions to VMs   =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |             | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | Supports extensible VM measurement architecture for DRTM and attest=
-ation               |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |             | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + | PCI passthrough configured at host boot                            =
-                    |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
-> > + |               |           |            |           |             | =
-   Y    |     Y     |
-> > + +---------------+-----------+------------+-----------+-------------+-=
---------+-----------+
->
-> I'm curious about this, I assume this is done using vPCI so that
-> there's no hardware domain (and user-space device model) involved for
-> PCI passthrough?
+flight 160350 libvirt real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/160350/
 
-That would be an incorrect assumption. See below for why.
+Regressions :-(
 
-> I'm also not sure how you are going to handle things like SR-IOV
-> devices. Right now SR-IOV capability is setup and initialized by the
-> hardware domain, and the new virtual devices are notified to Xen once
-> setup is done. Do you plan to move those bits into Xen, so that it can
-> setup and initialize the SR-IOV capability?
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 151777
+ build-armhf-libvirt           6 libvirt-build            fail REGR. vs. 151777
+ build-arm64-libvirt           6 libvirt-build            fail REGR. vs. 151777
+ build-i386-libvirt            6 libvirt-build            fail REGR. vs. 151777
 
-While you could do it with the vPCI, as you point out this will not work
-for SR-IOV. With hyperlaunch, these cases will require the use of a boot
-domain, which is for all intents and purposes, a lightweight/restricted
-toolstack domain.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
+ test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt      1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt-qcow2  1 build-check(1)               blocked  n/a
+ test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
 
-The boot domain will have to do the necessary operations to ensure that
-when startup is finished, PCI passthrough will be successfully setup.
-Note, this may have to include the boot domain unpausing the hardware
-domain to help complete the setup before the boot domain can exit and
-allow the remaining domains to come online.
+version targeted for testing:
+ libvirt              9eb7e9e817656983ab3f8801ef3cd9ba5ab5ee1c
+baseline version:
+ libvirt              2c846fa6bcc11929c9fb857a22430fb9945654ad
 
-Both of these cases are in scope for our customer funding the work,
-so we will be giving these use cases extra scrutiny, though it is
-not like we intend to leave anything that works today unusable.
+Last test of basis   151777  2020-07-10 04:19:19 Z  256 days
+Failing since        151818  2020-07-11 04:18:52 Z  255 days  248 attempts
+Testing same since   160350  2021-03-23 04:18:53 Z    0 days    1 attempts
 
-thanks
+------------------------------------------------------------
+People who touched revisions under test:
+  Adolfo Jayme Barrientos <fitoschido@gmail.com>
+  Aleksandr Alekseev <alexander.alekseev@virtuozzo.com>
+  Aleksei Zakharov <zaharov@selectel.ru>
+  Andika Triwidada <andika@gmail.com>
+  Andrea Bolognani <abologna@redhat.com>
+  Balázs Meskó <meskobalazs@mailbox.org>
+  Barrett Schonefeld <bschoney@utexas.edu>
+  Bastien Orivel <bastien.orivel@diateam.net>
+  BiaoXiang Ye <yebiaoxiang@huawei.com>
+  Bihong Yu <yubihong@huawei.com>
+  Binfeng Wu <wubinfeng@huawei.com>
+  Boris Fiuczynski <fiuczy@linux.ibm.com>
+  Brian Turek <brian.turek@gmail.com>
+  Bruno Haible <bruno@clisp.org>
+  Chris Mayo <aklhfex@gmail.com>
+  Christian Ehrhardt <christian.ehrhardt@canonical.com>
+  Christian Schoenebeck <qemu_oss@crudebyte.com>
+  Cole Robinson <crobinso@redhat.com>
+  Collin Walling <walling@linux.ibm.com>
+  Cornelia Huck <cohuck@redhat.com>
+  Cédric Bosdonnat <cbosdonnat@suse.com>
+  Côme Borsoi <fedora@borsoi.fr>
+  Daniel Henrique Barboza <danielhb413@gmail.com>
+  Daniel Letai <dani@letai.org.il>
+  Daniel P. Berrange <berrange@redhat.com>
+  Daniel P. Berrangé <berrange@redhat.com>
+  Dmytro Linkin <dlinkin@nvidia.com>
+  Eiichi Tsukata <eiichi.tsukata@nutanix.com>
+  Erik Skultety <eskultet@redhat.com>
+  Fabian Affolter <mail@fabian-affolter.ch>
+  Fabian Freyer <fabian.freyer@physik.tu-berlin.de>
+  Fangge Jin <fjin@redhat.com>
+  Farhan Ali <alifm@linux.ibm.com>
+  Fedora Weblate Translation <i18n@lists.fedoraproject.org>
+  gongwei <gongwei@smartx.com>
+  Guoyi Tu<tu.guoyi@h3c.com>
+  Göran Uddeborg <goeran@uddeborg.se>
+  Halil Pasic <pasic@linux.ibm.com>
+  Han Han <hhan@redhat.com>
+  Hao Wang <wanghao232@huawei.com>
+  Hela Basa <r45xveza@pm.me>
+  Helmut Grohne <helmut@subdivi.de>
+  Ian Wienand <iwienand@redhat.com>
+  Jakob Meng <jakobmeng@web.de>
+  Jamie Strandboge <jamie@canonical.com>
+  Jamie Strandboge <jamie@ubuntu.com>
+  Jan Kuparinen <copper_fin@hotmail.com>
+  Jean-Baptiste Holcroft <jean-baptiste@holcroft.fr>
+  Jianan Gao <jgao@redhat.com>
+  Jim Fehlig <jfehlig@suse.com>
+  Jin Yan <jinyan12@huawei.com>
+  Jiri Denemark <jdenemar@redhat.com>
+  John Ferlan <jferlan@redhat.com>
+  Jonathan Watt <jwatt@jwatt.org>
+  Jonathon Jongsma <jjongsma@redhat.com>
+  Julio Faracco <jcfaracco@gmail.com>
+  Ján Tomko <jtomko@redhat.com>
+  Kashyap Chamarthy <kchamart@redhat.com>
+  Kevin Locke <kevin@kevinlocke.name>
+  Kristina Hanicova <khanicov@redhat.com>
+  Laine Stump <laine@redhat.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Liao Pingfang <liao.pingfang@zte.com.cn>
+  Lin Ma <lma@suse.com>
+  Lin Ma <lma@suse.de>
+  Lin Ma <morecache@gmail.com>
+  Marc Hartmayer <mhartmay@linux.ibm.com>
+  Marc-André Lureau <marcandre.lureau@redhat.com>
+  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+  Markus Schade <markus.schade@hetzner.com>
+  Martin Kletzander <mkletzan@redhat.com>
+  Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+  Matt Coleman <matt@datto.com>
+  Matt Coleman <mcoleman@datto.com>
+  Mauro Matteo Cascella <mcascell@redhat.com>
+  Meina Li <meili@redhat.com>
+  Michal Privoznik <mprivozn@redhat.com>
+  Michał Smyk <fedora@smyk.it>
+  Milo Casagrande <milo@milo.name>
+  Moshe Levi <moshele@nvidia.com>
+  Muha Aliss <muhaaliss@gmail.com>
+  Neal Gompa <ngompa13@gmail.com>
+  Nick Shyrokovskiy <nshyrokovskiy@gmail.com>
+  Nickys Music Group <nickys.music.group@gmail.com>
+  Nico Pache <npache@redhat.com>
+  Nikolay Shirokovskiy <nshirokovskiy@virtuozzo.com>
+  Olaf Hering <olaf@aepfle.de>
+  Olesya Gerasimenko <gammaray@basealt.ru>
+  Orion Poplawski <orion@nwra.com>
+  Pany <geekpany@gmail.com>
+  Patrick Magauran <patmagauran.j@gmail.com>
+  Paulo de Rezende Pinatti <ppinatti@linux.ibm.com>
+  Pavel Hrdina <phrdina@redhat.com>
+  Peng Liang <liangpeng10@huawei.com>
+  Peter Krempa <pkrempa@redhat.com>
+  Pino Toscano <ptoscano@redhat.com>
+  Pino Toscano <toscano.pino@tiscali.it>
+  Piotr Drąg <piotrdrag@gmail.com>
+  Prathamesh Chavan <pc44800@gmail.com>
+  Ricky Tigg <ricky.tigg@gmail.com>
+  Roman Bogorodskiy <bogorodskiy@gmail.com>
+  Roman Bolshakov <r.bolshakov@yadro.com>
+  Ryan Gahagan <rgahagan@cs.utexas.edu>
+  Ryan Schmidt <git@ryandesign.com>
+  Sam Hartman <hartmans@debian.org>
+  Scott Shambarger <scott-libvirt@shambarger.net>
+  Sebastian Mitterle <smitterl@redhat.com>
+  Shalini Chellathurai Saroja <shalini@linux.ibm.com>
+  Shaojun Yang <yangshaojun@phytium.com.cn>
+  Shi Lei <shi_lei@massclouds.com>
+  simmon <simmon@nplob.com>
+  Simon Gaiser <simon@invisiblethingslab.com>
+  Stefan Bader <stefan.bader@canonical.com>
+  Stefan Berger <stefanb@linux.ibm.com>
+  Stefan Berger <stefanb@linux.vnet.ibm.com>
+  Szymon Scholz <szymonscholz@gmail.com>
+  Thomas Huth <thuth@redhat.com>
+  Tim Wiederhake <twiederh@redhat.com>
+  Tomáš Golembiovský <tgolembi@redhat.com>
+  Tomáš Janoušek <tomi@nomi.cz>
+  Tuguoyi <tu.guoyi@h3c.com>
+  Ville Skyttä <ville.skytta@iki.fi>
+  Wang Xin <wangxinxin.wang@huawei.com>
+  Weblate <noreply@weblate.org>
+  Yalei Li <274268859@qq.com>
+  Yalei Li <liyl43@chinatelecom.cn>
+  Yang Hang <yanghang44@huawei.com>
+  Yanqiu Zhang <yanqzhan@redhat.com>
+  Yi Li <yili@winhong.com>
+  Yi Wang <wang.yi59@zte.com.cn>
+  Yuri Chornoivan <yurchor@ukr.net>
+  Zheng Chuan <zhengchuan@huawei.com>
+  zhenwei pi <pizhenwei@bytedance.com>
+  Zhenyu Zheng <zheng.zhenyu@outlook.com>
 
-Christopher
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          fail    
+ build-arm64-libvirt                                          fail    
+ build-armhf-libvirt                                          fail    
+ build-i386-libvirt                                           fail    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
+ test-amd64-amd64-libvirt-xsm                                 blocked 
+ test-arm64-arm64-libvirt-xsm                                 blocked 
+ test-amd64-i386-libvirt-xsm                                  blocked 
+ test-amd64-amd64-libvirt                                     blocked 
+ test-arm64-arm64-libvirt                                     blocked 
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      blocked 
+ test-amd64-amd64-libvirt-pair                                blocked 
+ test-amd64-i386-libvirt-pair                                 blocked 
+ test-arm64-arm64-libvirt-qcow2                               blocked 
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-amd64-libvirt-vhd                                 blocked 
 
->
-> Thanks, Roger.
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 48452 lines long.)
 
