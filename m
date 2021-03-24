@@ -2,48 +2,71 @@ Return-Path: <SRS0=26S9=IW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DATE_IN_FUTURE_03_06,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B628C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 23:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6820C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 23:10:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BFBAE61A1E
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 23:07:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BFBAE61A1E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 700C561A1E
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 23:10:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 700C561A1E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101215.193421 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101221.193433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPCaw-0007nw-BE; Wed, 24 Mar 2021 23:07:22 +0000
+	id 1lPCdc-0000PG-Pb; Wed, 24 Mar 2021 23:10:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101215.193421; Wed, 24 Mar 2021 23:07:22 +0000
+Received: by outflank-mailman (output) from mailman id 101221.193433; Wed, 24 Mar 2021 23:10:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPCaw-0007np-7d; Wed, 24 Mar 2021 23:07:22 +0000
-Received: by outflank-mailman (input) for mailman id 101215;
- Wed, 24 Mar 2021 23:07:20 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lPCdc-0000P9-MA; Wed, 24 Mar 2021 23:10:08 +0000
+Received: by outflank-mailman (input) for mailman id 101221;
+ Wed, 24 Mar 2021 23:10:07 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8uro=IW=gmail.com=unixbhaskar@srs-us1.protection.inumbo.net>)
- id 1lPCau-0007nk-Ib
- for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 23:07:20 +0000
-Received: from mail-qk1-x729.google.com (unknown [2607:f8b0:4864:20::729])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2efdf1de-2b15-471e-af28-c7949d341672;
- Wed, 24 Mar 2021 23:07:19 +0000 (UTC)
-Received: by mail-qk1-x729.google.com with SMTP id y18so17424qky.11
- for <xen-devel@lists.xenproject.org>; Wed, 24 Mar 2021 16:07:19 -0700 (PDT)
-Received: from Slackware ([156.146.55.193])
- by smtp.gmail.com with ESMTPSA id m13sm2793041qkm.103.2021.03.24.16.07.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Mar 2021 16:07:18 -0700 (PDT)
+ <SRS0=egK0=IW=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1lPCda-0000L6-SD
+ for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 23:10:07 +0000
+Received: from userp2120.oracle.com (unknown [156.151.31.85])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fb2f6a94-c328-4ed2-a7eb-1251200842c7;
+ Wed, 24 Mar 2021 23:10:06 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 12ONA2xb038970;
+ Wed, 24 Mar 2021 23:10:02 GMT
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by userp2120.oracle.com with ESMTP id 37d9pn4g4u-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 24 Mar 2021 23:10:02 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 12ON4tsp155571;
+ Wed, 24 Mar 2021 23:09:57 GMT
+Received: from nam11-co1-obe.outbound.protection.outlook.com
+ (mail-co1nam11lp2174.outbound.protection.outlook.com [104.47.56.174])
+ by userp3030.oracle.com with ESMTP id 37du00fc8h-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 24 Mar 2021 23:09:57 +0000
+Received: from BYAPR10MB3288.namprd10.prod.outlook.com (2603:10b6:a03:156::21)
+ by BYAPR10MB2632.namprd10.prod.outlook.com (2603:10b6:a02:b2::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.23; Wed, 24 Mar
+ 2021 23:09:55 +0000
+Received: from BYAPR10MB3288.namprd10.prod.outlook.com
+ ([fe80::f489:4e25:63e0:c721]) by BYAPR10MB3288.namprd10.prod.outlook.com
+ ([fe80::f489:4e25:63e0:c721%7]) with mapi id 15.20.3977.025; Wed, 24 Mar 2021
+ 23:09:55 +0000
+Received: from [10.74.100.232] (138.3.201.40) by
+ BYAPR08CA0053.namprd08.prod.outlook.com (2603:10b6:a03:117::30) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25 via Frontend
+ Transport; Wed, 24 Mar 2021 23:09:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,122 +78,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2efdf1de-2b15-471e-af28-c7949d341672
+X-Inumbo-ID: fb2f6a94-c328-4ed2-a7eb-1251200842c7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2020-01-29;
+ bh=Io2lAihE3mQOuQ7rki9suM4viVm/JFb91YPnIilRCI8=;
+ b=Py5k8o6l/pgPCAR7DEx9bYMqNKJOuzBB1gOZ3ig9hdVpySreWYt/U5TGwpZ5H190seEM
+ JO2n8iivHCmv5b+Vbkk2Z17KP5lopNMJMK/pK4rTah9UqBZbKeTfQ221sQCMERa6mgJL
+ 7sH0Z+S0AY6PUJE1qGOTq4ujfcMyv610Co0OvMtOrOJh4dqzk6TqeaOsUDgKNwkwlDzv
+ NYOxFBRLfRz8Peg0jhZ4pymWUnBtzS9vP318eiqgEwtFeXYuS0F8R8QXetmbrObxE598
+ +aNf2MroNep2X7w3HtX70bk2WHesjj01dLKe/d2SCFTq1ZR3nABni5tYG6XPPsH7DXDe Jw== 
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BcTG725W8jhbRDeKi+s7n2vqKNSEmb1l3VYfTnaKMr9BksxkE9jxabsdo9tfLeFUYrsqGDIGE8YXnRT44jcL8/xJvF9RNWKGMbcEkQ7Vpe8oXGm33oz4xrVee3f/SLJZWPjPCs8UNCWNkF2h8KmMhFaGjh/lZvleI/91xgEBFspvL2JOYQa4e3gwNew60jIhrrjcWsLfmDwanOYdHH/y2iA4L8qt/8xdOhjz4g28AH+Hk7hI0RbMsnpUmMvuJPlJz80D2hLv2FYZZIrh60AZWNEBv1cuvlQsv0J9vrWR0+FW+YfoDQ0ZVC94lHX3TennUIaRMyt24KLvXkANjbIEog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Io2lAihE3mQOuQ7rki9suM4viVm/JFb91YPnIilRCI8=;
+ b=JRLDFR2UguDD5VfbX/PBw4YtNpt3x/EUyByI3GNGVJQGiwlOCVIUfBsvoAWntb1XvreE+1wlAaIwfAM/5gYEBod4COFJ45AiUbGTdCuggqZbS8OsrJ09AUy2KKAIk2DJ535FAvFBGoLKwTUnDzY+Zd7tfBjKgIO3DhDwNvqGhrEpHea6OMAZxJusxYOVfRoV8hR1mR+5b2I3N5v2fXuRwwxO3Q81Fwj77XVZWFcOkbB66ykzNg5NUNYmgZx+/ufixRDVgH9pxJzVv+W8+arD5nW61kG4HBs5uyWAKYAuCUyGsTFEf+SWdQbt/WJ+r6h/Qo8qOgAaKQW1se9/kBPlKg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:mail-followup-to:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=unU9mIXis029RymGHdH7V1zjjWKUJpo7L/5r2jBdOHw=;
-        b=Aw54LjN39oNkovcR3V4TfpdwnEylMj/oVtzW/NXQdaYCxg3Z1Ec6YWTJf/U+L1LIjf
-         35ZXylU6/XHmVtfM6knNs2/JPE81nifQvV5LbfJPqpX/txjlJFIpkoNMXSvXNR45JeN4
-         scwViwmTM2ZaZcE4fK8t6bREcUD+COLNZBIQkktPUelFaQ64yTnrwNX3B7V0pGztfYQY
-         UHxVmGhKa4Vcmg8LjpzVCWi5T78/dOtGgBzxKDzrdcJHyIjkuM24Fcc8qbKHGFlWy6Qo
-         p3HTj2YIogqMHlwBlzT5cTsiAG43mqH3xFT3Ei4RnVgk6mk9UtlMkWge4kpsPogcioxs
-         IXiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id
-         :mail-followup-to:references:mime-version:content-disposition
-         :in-reply-to;
-        bh=unU9mIXis029RymGHdH7V1zjjWKUJpo7L/5r2jBdOHw=;
-        b=KiY/HP2VnjxerkZwPysWLZlW+0vJTqQ5Hs7+6fBiQVGwoMIV+67bbcWu90iAX+GuMJ
-         lhjM58mGlIIOebaDPDUioxsyFAAUoODkgBM4ADhTXALxdOj661jvNpluJ+pFQO/Aj4sF
-         5Um71Qda/+wsqDm8aFyLODx0s9Lv3WixDanO/K7bBrvUbu3tb1xHLrQKNIm70/9xURCC
-         +R2rvlSsFdnaUlM7ZUQC1vKh9lCmzq61OvHbgObSR8LbGWtXy4wsdaIjv5gB+vIq/Ox8
-         RCxo4TIaA3IbjWldDssx6ksYraaMUHIG4N6WLZBEbgcJZPxH2Gc7nkUGFRFaD1Olgo/G
-         IdDw==
-X-Gm-Message-State: AOAM531aU1YX3mnH9E5JtcVaaz7oPGcd4jhskeW0ZFEwLZXLSdyzP2h8
-	9aPvQOMV80kQgBFqd0qHmnE=
-X-Google-Smtp-Source: ABdhPJy0XDX6xf+AUtITEYmLy/Evqhue1H4jw/H6OCKGGRWyxuZQkdH3VsEtvbV9hUJzchPL3P/mIA==
-X-Received: by 2002:a37:2749:: with SMTP id n70mr5477245qkn.105.1616627239714;
-        Wed, 24 Mar 2021 16:07:19 -0700 (PDT)
-Date: Thu, 25 Mar 2021 10:07:08 +0530
-From: Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, linux@armlinux.org.uk,
-	xen-devel@lists.xenproject.org,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	jgross@suse.com, boris.ostrovsky@oracle.com
-Subject: Re: [PATCH] ARM: xen/mm.c: A mundane typo fix
-Message-ID: <YFwTdAnamANFsBPZ@Slackware>
-Mail-Followup-To: Bhaskar Chowdhury <unixbhaskar@gmail.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, linux@armlinux.org.uk,
-	xen-devel@lists.xenproject.org,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	jgross@suse.com, boris.ostrovsky@oracle.com
-References: <20210324133036.17665-1-unixbhaskar@gmail.com>
- <alpine.DEB.2.21.2103241154320.439@sstabellini-ThinkPad-T480s>
- <5e1b573a-6dc7-7f28-28ae-c509e6782fbf@infradead.org>
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Io2lAihE3mQOuQ7rki9suM4viVm/JFb91YPnIilRCI8=;
+ b=Ha9MghV2NBbBh9wQGSI4JQ9+HHEoIppGIzHImk0iThVRoG6FG7PScBDbBVnx+tidiaRC7nYDmljIKn8/6GRkvz3GCa0SBxX/vZLOGmH7DcUghggDg207AzkG6jrQXUtyTwSyxHaRubwJ48YxO9iUpsQzIeThkTuC6TA06Sqqw8M=
+Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=none action=none
+ header.from=oracle.com;
+Subject: Re: [PATCH v2 0/2] xen/x86: alternative fix for XSA-369
+To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Jan Beulich
+ <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+References: <20210324122424.58685-1-roger.pau@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Message-ID: <6b70700e-667b-03a7-8f5e-937d5c45c79d@oracle.com>
+Date: Wed, 24 Mar 2021 19:09:51 -0400
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.8.1
+In-Reply-To: <20210324122424.58685-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-Originating-IP: [138.3.201.40]
+X-ClientProxiedBy: BYAPR08CA0053.namprd08.prod.outlook.com
+ (2603:10b6:a03:117::30) To BYAPR10MB3288.namprd10.prod.outlook.com
+ (2603:10b6:a03:156::21)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="TCrfE9v/6+6uxuTN"
-Content-Disposition: inline
-In-Reply-To: <5e1b573a-6dc7-7f28-28ae-c509e6782fbf@infradead.org>
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: ba059265-bd32-4aec-fb63-08d8ef19efd2
+X-MS-TrafficTypeDiagnostic: BYAPR10MB2632:
+X-Microsoft-Antispam-PRVS: 
+	<BYAPR10MB26321C4A17F8B96D17B5F7CF8A639@BYAPR10MB2632.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ckQb0z20JdOZYGvomBOSsv1UDlYotxz6NLc7tQKpsJQ+P1MrejO8LFokvU+39nELzUV0jz0lUR+Fot4sL/CbN2WteKe9Ldo5H8yOywoyxyTk2lMIMfSGByJavwiwZSm5DkiKo3vEbLl8AGCzeL05UgFwPOZ7O5mddF+lwRmRGEdzzAbd59N5Syoe7PAZc/m0ZkzP7q1Vuke9MUkVAEnFvpghSkmGy0N5VNy3VqfXMULTlK71Cbp7smJjXuUKVYNjyUQ+uS0dQcKiamTm2pP4AeEH1tEj9euiDBnUUhg4ql99twELCkDeKBEGbqJNMZfH40LNaPzE9BBzrpTXGZfzJWM5uwRmqnyyPcZwmxIBrdYASSob6CthaqpKlzPTUHGc5HuAisQuAJsMfo8W9rk2mVjP86gGTE0wSw7uaOVbIwvp198Pyui9bG6q+vGGMMFTwOvWGSE6sLt0bX4AG8jzMuwLqXsT63OEydylbXoZIRig+byucEVyw5XEPcfpWfqrycxFQBNWh/WL/l0ZfrQmm2ZRqDA1CaAkDHFjUIiQOpbDymBPW9LzSlXZ9xh1On6EhFfA3XyxUlmBh5PR6mCsDlqQp2+ZcnneD9HdFOmhHZhNviTFFGUojwQptvFHUPkAGvh82BLoIuaeWMIjhoG+2OG6LHFpweQDiR52LkPoXPKyblyF00B3qw4Xt+QMwC0V6rqPC0ZOZlI9yyhRGDgAgk1HtIlllh5ayHGheS0dXf0=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB3288.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(396003)(376002)(346002)(39860400002)(136003)(366004)(2616005)(956004)(8936002)(44832011)(478600001)(8676002)(38100700001)(5660300002)(2906002)(53546011)(54906003)(16576012)(16526019)(86362001)(36756003)(66556008)(31686004)(316002)(4326008)(6486002)(83380400001)(31696002)(186003)(26005)(66946007)(66476007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: 
+	=?utf-8?B?Lys2RGZSZFFuUTdNQ21uL255Z3hVeDk0eVZlM3IyNVBCaDBNcDJKMC8rUGlW?=
+ =?utf-8?B?SVJhTkJ0bjJRMkRKUng1bS95ZGV1UkllUHhGTlI1akc5SGd6RVNnYlpVZFFO?=
+ =?utf-8?B?MkIrTGZkSHBWRlpRUlFINE51RGlWL1FZT3hBQThQSUhsZkswT0UwQVZvMTNR?=
+ =?utf-8?B?dFdUUlhvQ21kekFiTk9MZm1lcVc2SFZ2RXdkaTNQaXJyQjczdnVibXczZFRs?=
+ =?utf-8?B?Z3NLNSt5dHQ3QkZPdGJjd0FydEFZRjI1UDF1VCtHT2pldGN3SW9aR1Y5cys2?=
+ =?utf-8?B?VTlpOStUalNaM3ppL0d3dS9SYnBIdHZEeDcwa3JFME5KclpVbzZpZTFvTVAr?=
+ =?utf-8?B?eFdJQTlBdWpOWmF0cXE1Tm5UUjA3SElxb3pUb21QcE92K2tjdzBxS25VNHpv?=
+ =?utf-8?B?Qm4vUTVxdmFHL1pXVEovVWorbFJZZmlmRlF2MXl1RFhxZ0dkR2ZZUGZKUFpa?=
+ =?utf-8?B?MEpaRHVOMVpkcTlaVWY1VXpyT21sU0pXdDZWZWFaUTMvYTVsSGEwWHVPdFJP?=
+ =?utf-8?B?L1phWkRnRmZhQ09GTFBObWJqRURoK1UvRlZ6c3VQTHd0ZFFHbkdVWjRudk1r?=
+ =?utf-8?B?RmFBNzNQMW9kRzB0NlRCaUJZeUtTZUduZ0RZNmdhdEtiVUFxZTRUa1FJOWZt?=
+ =?utf-8?B?UUp2R3d0aElzbncwZUV4cWVlNVdUemFGbVlKUnUxVWhLaWh6U3puQzZPZFln?=
+ =?utf-8?B?UFJOVDJadG12b0pzSTJ4ZGpGNmhKTXAzVDFRV2ZhRmNxZTZpZnkwZ2xNU2Y5?=
+ =?utf-8?B?N2kwMFFWblBSNmRGZDQvbzdKSzFqSWQwODJkUGN2K3o2RVdWUzV2cVpxNkpv?=
+ =?utf-8?B?aTFGOUhwRHpmaVFlbmpVUzFXRVAydUkwNUhWVDYzS25IZk5EalAzNFRkbmVX?=
+ =?utf-8?B?NFFXZC9veXcrcnR1WE1SU0xWQkI0MXp2cHBzNDcxNCtNcTErbnBFWm0zZFhK?=
+ =?utf-8?B?WW5XNnBGYnBLY045M010Wk1nbkJubzVrOHR2T0NxMnVHK0RSdTdyOHV2czJH?=
+ =?utf-8?B?aEN5QkE4a2d0RDg2UEFvcXQ0L1VXV1Y0K2xKeGtMZzk3eU1VY24xVU1zTGRS?=
+ =?utf-8?B?U0J5RG0yTHNuUWdXT3AxQUQvL3puc2dreW5LWkFLaDBpRE9ITExCdjV4ZDVZ?=
+ =?utf-8?B?UGJ3dzBkRkkvZE4zNkdCSjZtaGx5b0llZkpWT1V1bzhMN011cmRQb1cySVRN?=
+ =?utf-8?B?dytrMmRmWFd6ZFZGU2haUEd0b1VoWmVFQmJtWTFWSDFlZU84dVN6bU9lMCs1?=
+ =?utf-8?B?WXh0Q3BwRnViQlRXRmFKS1RyMnRVZ2p2bVBtWWRteXg2RkpDUGlGMDJTN1JG?=
+ =?utf-8?B?bUxxNmtUakczbUFBTEljYVNUZTd1VkIvOThST2dpZWIwaDhub0czQzE4ZUU2?=
+ =?utf-8?B?WHpMREpHUHVrNDJMUjloT2lHUVNiZjJTZWFnR01wVUVpRGw5anhFeTg2cTIw?=
+ =?utf-8?B?aHVRVTd6T0V0elpuYSs1NW5UeWdNM2Y3MDRUMWRQcjFqZDg4dnV1ZmlnZS90?=
+ =?utf-8?B?aEpPc1piOTExSkIwYThDWXNnei9uWEN5TFhBd1k5ZExqN2xRWnA5WTlaSUpL?=
+ =?utf-8?B?ejFPZ002ajB1WEhLWUg3N0Y2cjA5WmxZOXgwUi8ySmhkRC9xbGpzZExGL0th?=
+ =?utf-8?B?cWhBN3Q5OVo0T0ZHUGJoZEFkUm9SNzZHNmZxZzAwNlFXZ0UweldiT3g5RVk1?=
+ =?utf-8?B?SXA3NTc4T3F5eVBoNU5GK1hjbitkdFJaa0dycEpHLzdoQmVYY2U4NVc3Tm5J?=
+ =?utf-8?Q?vq5BG4J4X7F3IZ+gCCzy9bbprgJT1BM+LG8NvfF?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ba059265-bd32-4aec-fb63-08d8ef19efd2
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3288.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2021 23:09:55.1036
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +bdPrtrKXm83xqWLSEvJxX57gmUUNJd+NYprHYbVupfqGXA44wpZ5J2NiLNpnCdhKpztHM/guuY9ZlsniF18ep+qWpYomUlHRdlFDt9fYd4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB2632
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9933 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 bulkscore=0 phishscore=0
+ mlxlogscore=999 suspectscore=0 spamscore=0 malwarescore=0 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2103240166
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9933 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 lowpriorityscore=0 phishscore=0
+ mlxlogscore=999 priorityscore=1501 impostorscore=0 bulkscore=0 spamscore=0
+ adultscore=0 clxscore=1015 malwarescore=0 mlxscore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2103240167
 
 
---TCrfE9v/6+6uxuTN
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
+On 3/24/21 8:24 AM, Roger Pau Monne wrote:
+> Hello,
+>
+> This is a proposal for an alternative fix for XSA-369 that instead of
+> special casing XEN_UNPOPULATED_ALLOC to size the p2m relies on making
+> XEN_BALLOON_MEMORY_HOTPLUG_LIMIT depend on the generic MEMORY_HOTPLUG
+> option rather than XEN_BALLOON_MEMORY_HOTPLUG.
+>
+> I think this is safer, as we don't want to be special casing any option
+> that pulls in generic MEMORY_HOTPLUG without XEN_BALLOON_MEMORY_HOTPLUG.
+> Without this we would also need to at least special case ZONE_DEVICE
+> which also relies on MEMORY_HOTPLUG, and is what pulls the generic
+> MEMORY_HOTPLUG option even when XEN_BALLOON_MEMORY_HOTPLUG is disabled
+> with XEN_UNPOPULATED_ALLOC.
+>
+> Thanks, Roger.
+>
+> Roger Pau Monne (2):
+>   xen/x86: make XEN_BALLOON_MEMORY_HOTPLUG_LIMIT depend on
+>     MEMORY_HOTPLUG
+>   Revert "xen: fix p2m size in dom0 for disabled memory hotplug case"
+>
+>  arch/x86/include/asm/xen/page.h | 12 ------------
+>  arch/x86/xen/p2m.c              |  7 ++-----
+>  arch/x86/xen/setup.c            | 16 ++++++++++++++--
+>  drivers/xen/Kconfig             |  4 ++--
+>  4 files changed, 18 insertions(+), 21 deletions(-)
 
-On 11:59 Wed 24 Mar 2021, Randy Dunlap wrote:
->On 3/24/21 11:55 AM, Stefano Stabellini wrote:
->> On Wed, 24 Mar 2021, Bhaskar Chowdhury wrote:
->>> s/acrros/across/
->>>
->>> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
->>
->> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
->>
->>
->
->Hi,
->It seems to me like some of those "page" should be "pages".
->
->>> ---
->>>  arch/arm/xen/mm.c | 2 +-
->>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
->>> index 467fa225c3d0..be7c942c74bf 100644
->>> --- a/arch/arm/xen/mm.c
->>> +++ b/arch/arm/xen/mm.c
->>> @@ -105,7 +105,7 @@ bool xen_arch_need_swiotlb(struct device *dev,
->>>  	 *	- The Linux page refers to foreign memory
->>>  	 *	- The device doesn't support coherent DMA request
->>>  	 *
->>> -	 * The Linux page may be spanned acrros multiple Xen page, although>> +	 * The Linux page may be spanned across multiple Xen page, although
->
->	                                                     pages,
->
->>>  	 * it's not possible to have a mix of local and foreign Xen page.
->
->	                                                            pages.
->
->>>  	 * Furthermore, range_straddles_page_boundary is already checking
->>>  	 * if buffer is physically contiguous in the host RAM.
->>> --
->
-Thank you....I have sent a V2 now.
->
->
->~Randy
->
 
---TCrfE9v/6+6uxuTN
-Content-Type: application/pgp-signature; name="signature.asc"
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCAAdFiEEnwF+nWawchZUPOuwsjqdtxFLKRUFAmBcE20ACgkQsjqdtxFL
-KRUvIggA0Bu+io2ijz60vfhZz7xZNVSid1OoUl1Om/MMq2kve/J9NbkNzt7dGSaO
-Nb8vdiEZT77497MkjBJ8U/pxck9POJdv7RJ4S5s949pPcbuP6PsGhlzk35nN7NqM
-vZ42o9L0cEtLrIrAxWtl3Rscy6x7W90BHhDMhix174CXg5S8ciQ+MCPdo3EyBwuN
-crlJJJZ6VbQiaxOkjGnxyRobSz+WpFCJa/XPioII8xf3p854qdgbVE0GLRaC5f9y
-koN0TLULWOVyX8tm1LOkP8ACv6wIQehPlFCkxRLk8C67CUdmQdx+Mz/u6hQK54K2
-WjwbqPHASv5QkWa+p9PHbF+GjV7yqg==
-=PKSI
------END PGP SIGNATURE-----
-
---TCrfE9v/6+6uxuTN--
 
