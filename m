@@ -2,46 +2,48 @@ Return-Path: <SRS0=26S9=IW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 788AEC433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F15BFC433C1
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:18:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1D1EB61A09
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:10:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D1EB61A09
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id A2B1E61962
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:18:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2B1E61962
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101022.192846 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101006.192859 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lP4Co-0000De-QF; Wed, 24 Mar 2021 14:09:54 +0000
+	id 1lP4Ko-0001Ev-LV; Wed, 24 Mar 2021 14:18:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101022.192846; Wed, 24 Mar 2021 14:09:54 +0000
+Received: by outflank-mailman (output) from mailman id 101006.192859; Wed, 24 Mar 2021 14:18:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lP4Co-0000DX-NA; Wed, 24 Mar 2021 14:09:54 +0000
-Received: by outflank-mailman (input) for mailman id 101022;
- Wed, 24 Mar 2021 14:09:53 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lP4Cn-0000DS-Gh
- for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 14:09:53 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lP4Cm-0002S0-2W; Wed, 24 Mar 2021 14:09:52 +0000
-Received: from 54-240-197-239.amazon.com ([54.240.197.239]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lP4Cl-0000mz-So; Wed, 24 Mar 2021 14:09:52 +0000
+	id 1lP4Ko-0001Eo-Ib; Wed, 24 Mar 2021 14:18:10 +0000
+Received: by outflank-mailman (input) for mailman id 101006;
+ Wed, 24 Mar 2021 13:28:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=8uro=IW=gmail.com=unixbhaskar@srs-us1.protection.inumbo.net>)
+ id 1lP3Z9-0004SL-EM
+ for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 13:28:55 +0000
+Received: from mail-qk1-x734.google.com (unknown [2607:f8b0:4864:20::734])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3c808549-f3bf-4382-83eb-b18b74097656;
+ Wed, 24 Mar 2021 13:28:54 +0000 (UTC)
+Received: by mail-qk1-x734.google.com with SMTP id y18so17922405qky.11
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Mar 2021 06:28:54 -0700 (PDT)
+Received: from Slackware.localdomain ([156.146.36.138])
+ by smtp.gmail.com with ESMTPSA id k138sm1620627qke.60.2021.03.24.06.28.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Mar 2021 06:28:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,111 +55,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=Vihx1o6sfVYFq29apSCGABYusFxApavcEm7NpdHdVOM=; b=yKp0BD1wKvOwQcHhH412d0Tvus
-	rw5xgvebldDGRaeCQCtlKMIXgW5/edQ5eVIq8MJVyrH8D9p9LMqddn7COyWkKjRS8iQNdAPTVq1fK
-	/92+ElC0rokjO+wlTMZE7KC6iBZx1t4jzq1O+4A3m2r9tVEgqIX55TQCi3EHNwuPQDBk=;
-Subject: Re: [PATCH-for-4.15 V2] tools/libs/store: tidy up libxenstore
- interface
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20210324113035.32691-1-jgross@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <043461f3-9b5e-7d29-bc52-275d663579c9@xen.org>
-Date: Wed, 24 Mar 2021 14:09:36 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.1
+X-Inumbo-ID: 3c808549-f3bf-4382-83eb-b18b74097656
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZA4TMh4IQBJtlxJtgRg6PC7dBsn/y/DHlKXiLg69OBw=;
+        b=vIAeFill0cXse/9RJBHavhpguN7xSunFa2f+v2bdmqARM2G7mS5PMrrSXhVx41lH6C
+         KEoxKR6UuHlDbKnwsl3p8z1F9EFzOiKeQiP6l1rb3/izBA9tTqaPzehpikrq0vZSDJqX
+         4aYH5LwedhVmaeOhOF27DD4tsZ7vIEXYAtxgGiJFJze7Yym/DsuR2d8v52g6HBlbPBSJ
+         Q83bXj2BXfllIoypNNVaug2C5phbhumK16MeagjM7IQ1G0/qdfuzKUrqONR+ykO933p9
+         oUZtP2EDjgf8AIShCLpnSfIN1xoyKJiMYl4vIR+CYy9PfPkNg11J+z29APLScd3neX/j
+         inRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZA4TMh4IQBJtlxJtgRg6PC7dBsn/y/DHlKXiLg69OBw=;
+        b=Hdkg9AOg7EiP0HwZS2DF/j79ctybFdYSBXow4KcpzVP8P99zxqqJgY2DxV1DUicJL9
+         KDY4UzXApQumyrZOfu+qO3INioocHlhCwq89ILOJ5U74Y6c7wo3ShrIpAHqS6cDwOU/S
+         KmDRh1qPuujV0oiZjFgV8IsU7jeRuy9Y4rcdVGj44E8tUSCP4avElih5iJfjDUGsXBoO
+         /tTKEo295FaODoo8JeYswJFfooKffj2Ag5OvSu5h8OFt+UaoAmSWGt15kaIL45NvZC1n
+         wJoD3NjbuddjYXZEyMuRTCblFZkrQjyUfEv5BZXBmplFH16CJZuswkQQ2S9gqlK5KSCb
+         yVUA==
+X-Gm-Message-State: AOAM5303t7rkWMbUfYbsTuvdt3Qu8AvyYrRU2S91M45i4A8aeCwOi2Cc
+	qqEarmjWTg8pxd95lHq7bbE=
+X-Google-Smtp-Source: ABdhPJy2CjjpOmQpimqajsFZOrQh+V4XiC9VHO5NNVgJMDvkS8TP9WHAV0Aahm5348sd/33RwTJrfA==
+X-Received: by 2002:a37:a2c2:: with SMTP id l185mr2986406qke.178.1616592534322;
+        Wed, 24 Mar 2021 06:28:54 -0700 (PDT)
+From: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+To: sstabellini@kernel.org,
+	linux@armlinux.org.uk,
+	xen-devel@lists.xenproject.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Cc: rdunlap@infradead.org,
+	Bhaskar Chowdhury <unixbhaskar@gmail.com>
+Subject: [PATCH] ARM: xen/mm.c: A mundane typo fix
+Date: Wed, 24 Mar 2021 19:00:36 +0530
+Message-Id: <20210324133036.17665-1-unixbhaskar@gmail.com>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-In-Reply-To: <20210324113035.32691-1-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Juergen,
+s/acrros/across/
 
-On 24/03/2021 11:30, Juergen Gross wrote:
-> xenstore_lib.h is in need to be tidied up a little bit:
-> 
-> - the definition of struct xs_tdb_record_hdr shouldn't be here
-> - some symbols are not namespaced correctly
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> ---
-> V2: minimal variant (Ian Jackson)
-> ---
->   tools/include/xenstore_lib.h     | 17 ++++-------------
->   tools/libs/store/libxenstore.map |  6 +++---
->   tools/libs/store/xs.c            | 12 ++++++------
->   tools/xenstore/utils.h           | 11 +++++++++++
->   tools/xenstore/xenstore_client.c | 12 ++++++------
->   5 files changed, 30 insertions(+), 28 deletions(-)
-> 
-> diff --git a/tools/include/xenstore_lib.h b/tools/include/xenstore_lib.h
-> index 4c9b6d1685..f74ad7024b 100644
-> --- a/tools/include/xenstore_lib.h
-> +++ b/tools/include/xenstore_lib.h
-> @@ -43,15 +43,6 @@ struct xs_permissions
->   	enum xs_perm_type perms;
->   };
->   
-> -/* Header of the node record in tdb. */
-> -struct xs_tdb_record_hdr {
-> -	uint64_t generation;
-> -	uint32_t num_perms;
-> -	uint32_t datalen;
-> -	uint32_t childlen;
-> -	struct xs_permissions perms[0];
-> -};
-> -
->   /* Each 10 bits takes ~ 3 digits, plus one, plus one for nul terminator. */
->   #define MAX_STRLEN(x) ((sizeof(x) * CHAR_BIT + CHAR_BIT-1) / 10 * 3 + 2)
->   
-> @@ -78,18 +69,18 @@ bool xs_perm_to_string(const struct xs_permissions *perm,
->   unsigned int xs_count_strings(const char *strings, unsigned int len);
->   
->   /* Sanitising (quoting) possibly-binary strings. */
-> -struct expanding_buffer {
-> +struct xs_expanding_buffer {
->   	char *buf;
->   	int avail;
->   };
->   
->   /* Ensure that given expanding buffer has at least min_avail characters. */
-> -char *expanding_buffer_ensure(struct expanding_buffer *, int min_avail);
-> +char *xs_expanding_buffer_ensure(struct xs_expanding_buffer *, int min_avail);
->   
->   /* sanitise_value() may return NULL if malloc fails. */
-> -char *sanitise_value(struct expanding_buffer *, const char *val, unsigned len);
-> +char *xs_sanitise_value(struct xs_expanding_buffer *, const char *val, unsigned len);
->   
->   /* *out_len_r on entry is ignored; out must be at least strlen(in)+1 bytes. */
-> -void unsanitise_value(char *out, unsigned *out_len_r, const char *in);
-> +void xs_unsanitise_value(char *out, unsigned *out_len_r, const char *in);
->   
->   #endif /* XENSTORE_LIB_H */
-> diff --git a/tools/libs/store/libxenstore.map b/tools/libs/store/libxenstore.map
-> index 9854305a2c..fc1c213f13 100644
-> --- a/tools/libs/store/libxenstore.map
-> +++ b/tools/libs/store/libxenstore.map
-> @@ -42,8 +42,8 @@ VERS_3.0.3 {
->   		xs_strings_to_perms;
->   		xs_perm_to_string;
->   		xs_count_strings;
-> -		expanding_buffer_ensure;
-> -		sanitise_value;
-> -		unsanitise_value;
-> +		xs_expanding_buffer_ensure;
-> +		xs_sanitise_value;
-> +		xs_unsanitise_value;
+Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+---
+ arch/arm/xen/mm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Isn't libxenstore considered stable? If so, shouldn't we bump the 
-version to avoid any breakage for existing app?
+diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
+index 467fa225c3d0..be7c942c74bf 100644
+--- a/arch/arm/xen/mm.c
++++ b/arch/arm/xen/mm.c
+@@ -105,7 +105,7 @@ bool xen_arch_need_swiotlb(struct device *dev,
+ 	 *	- The Linux page refers to foreign memory
+ 	 *	- The device doesn't support coherent DMA request
+ 	 *
+-	 * The Linux page may be spanned acrros multiple Xen page, although
++	 * The Linux page may be spanned across multiple Xen page, although
+ 	 * it's not possible to have a mix of local and foreign Xen page.
+ 	 * Furthermore, range_straddles_page_boundary is already checking
+ 	 * if buffer is physically contiguous in the host RAM.
+--
+2.30.1
 
-Cheers,
-
--- 
-Julien Grall
 
