@@ -2,46 +2,41 @@ Return-Path: <SRS0=26S9=IW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C68EEC433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 16:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72C10C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 16:44:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6530661A10
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 16:41:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6530661A10
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2BE6061A06
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 16:44:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BE6061A06
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101091.193067 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101094.193079 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lP6Za-0000lx-7X; Wed, 24 Mar 2021 16:41:34 +0000
+	id 1lP6cF-0000tW-ME; Wed, 24 Mar 2021 16:44:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101091.193067; Wed, 24 Mar 2021 16:41:34 +0000
+Received: by outflank-mailman (output) from mailman id 101094.193079; Wed, 24 Mar 2021 16:44:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lP6Za-0000lq-4X; Wed, 24 Mar 2021 16:41:34 +0000
-Received: by outflank-mailman (input) for mailman id 101091;
- Wed, 24 Mar 2021 16:41:33 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lP6ZZ-0000ll-6w
- for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 16:41:33 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lP6ZZ-0005UD-1N
- for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 16:41:33 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lP6ZY-0003Q8-Vu
- for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 16:41:32 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1lP6ZV-0005Wy-PK; Wed, 24 Mar 2021 16:41:29 +0000
+	id 1lP6cF-0000tP-J0; Wed, 24 Mar 2021 16:44:19 +0000
+Received: by outflank-mailman (input) for mailman id 101094;
+ Wed, 24 Mar 2021 16:44:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Hwg6=IW=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1lP6cE-0000tK-9B
+ for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 16:44:18 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fe3c2d2f-ee37-440e-86e5-56f21fca31a0;
+ Wed, 24 Mar 2021 16:44:17 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,59 +48,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:CC:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=0ePatYhDjtMPoz0LupiynKhfC6gPUUIWv3q+GbEVQ/4=; b=4W8xQINqxlvzFMySVkefIAwmEW
-	mfVoGbkFGKYc2QffkKG6HJRWD5ScgSCZ143NKnPDgv3Pby1CZ/0lMspXSnLEsUVexxVrzYyUCL6em
-	8KSHQeC3v2/TnnKXGj3W5D7aJts08GVpNXs5mqwCYlDX58bBcg/vAD7DITcyR09YaB64=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: fe3c2d2f-ee37-440e-86e5-56f21fca31a0
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1616604256;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=4C4OgRiFuuJLkcoqPkh43cejHpfFvgEUCcVuNhnuUcc=;
+  b=d1oW4l0nFL8HDeBlmxNAQS0Qc1WUHTCUNqSXCx7ZMyci2TAGHmFE9NY9
+   1iy/DWWMZ/C/8y9lc5iNId3iZ4fMcXmGUuZeKimuRKB7bB1wTs8NeYiUh
+   4FH/JynxlgMwyuhg/nIRQHLQygOdjbmlB8U7jqmCsYJihaYnxGnjHMNFy
+   o=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 72Mkk4St9jViuPz78rtfz6TM6I6eKt8KZIl013QVGgP17ydrzEiXnXlOO1elZxsa3fVpHUuW5m
+ Glp0Qq6VD6AIaA01m6yuvxal37EghsvW1MJFV0rPpux3q9Lvu7b3Po5i7j64tBJoJoBwfHzYcV
+ abLpBBtLWF/m+fqPI3YRdqijHwJ3vvaN5/snWjyEkv22O+JpUMfgoSqh6QeuBarq1uxrdXi1G4
+ 4CLg3mixfNrWXqO8bQnzpb9sdtcSz2PL5ukh7K7huzfgCIclNNjaivo9c88p9HbLxgaDmBeFGf
+ saw=
+X-SBRS: 5.1
+X-MesageID: 41481705
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:4WA9Q6x8Fj8kelO1QWKZKrPwqb1zdoIgy1knxilNYDZ+G/b3q+
+ mFmvMH2RjozAsLUHY7ltyafIWGS3XQ9Zl6iLNhW4uKdg/gpWeuMcVe/ZLvqgeQYxHW2+ZB2c
+ 5bE5RWJ8b3CTFB4frSwA79KNo4xcnCzabAv5a6815IbSVHL55t9B14DAHzKDwQeCBjCYAiHJ
+ SRouprzgDQGkg/VciwCnkbU+WrnbSi//iKXTc8CxEq8wWIhz+zgYSKdySw5RsCTyhJhY4r7G
+ mtqX2B2oyYr/q5xhXAvlWz071qnrLapedrNYipgsgRJi6EsHfLWLhc
+X-IronPort-AV: E=Sophos;i="5.81,275,1610427600"; 
+   d="scan'208";a="41481705"
+From: George Dunlap <george.dunlap@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: George Dunlap <george.dunlap@citrix.com>, George Dunlap
+	<george.dunlap@citrix.coM>, Ian Jackson <ian.jackson@citrix.com>, "Paul
+ Durrant" <paul@xen.org>
+Subject: [PATCH 2/6] CHANGELOG.md: Add named PCI devices
+Date: Wed, 24 Mar 2021 16:44:03 +0000
+Message-ID: <20210324164407.302062-2-george.dunlap@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210324164407.302062-1-george.dunlap@citrix.com>
+References: <20210324164407.302062-1-george.dunlap@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24667.27577.412129.252658@mariner.uk.xensource.com>
-Date: Wed, 24 Mar 2021 16:41:29 +0000
-To: committers@xenproject.org,
-CC: xen-devel@lists.xenproject.org
-Subject: Xen 4.15 branched; commit moratorium lifted
-In-Reply-To: <24636.50438.204769.9038@mariner.uk.xensource.com>
-References: <24636.50438.204769.9038@mariner.uk.xensource.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-I have just branched Xen 4.15.
+Signed-off-by: George Dunlap <george.dunlap@citrix.coM>
+---
+CC: Ian Jackson <ian.jackson@citrix.com>
+CC: Paul Durrant <paul@xen.org>
+---
+ CHANGELOG.md | 1 +
+ 1 file changed, 1 insertion(+)
 
-Patches targeted for Xen 4.15, with appropriate release-ack and
-maintainer acks, should be pushed to the branch staging-4.15.
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 7f03e85bd7..8c89212f14 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+  - Renesas IPMMU-VMSA (Supported, not security supported; was Tech Preview)
+  - ARM SMMUv3 (Tech Preview)
+  - Intel Processor Trace support (Tech Preview)
++ - Named PCI devices for xl/libxl
+ 
+ ## Removed / support downgraded
+ 
+-- 
+2.30.2
 
-Patches targeting xen-next should be pushed to simply staging.
-
-Please do not commit anything to the new staging which would cause it
-to diverge from 4.15 in a troublesome way.  Specifically, please
-avoid:
-
- * Anything textually intrusive - code motion, variable renaming,
-   refactoring, etc.  These would make back- and forward-porting fixes
-   more complicated.
-
- * Any change X which would make it less reasonable to use the results
-   of tests of "staging" including some other changes "Y" to justify
-   the goodness of the same changes Y on "staging-4.15".  This is
-   relevant since the staging-4.15 branch now runs with debug off and
-   we are expecting fixes to go to both trees in parallel at the
-   moment.
-
- * Anything that needs intensive review by people working on the
-   remaining outstanding issues for Xen 4.15.  Maintainers, please
-   continue to prioritise any 4.15 work that is on your plate.
-
-This regime will continue until 4.15.0 is actually released.
-Hopefully fairly soon; there are only few outstanding issues.
-
-For bugfixes targeting 4.15, you may develop them against staging
-first, or you may develop them against staging-4.15 first.  In any
-case we probably won't want to release 4.15 without them having been
-applied to trunk.
-
-Thanks,
-Ian.
 
