@@ -2,48 +2,49 @@ Return-Path: <SRS0=26S9=IW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F15BFC433C1
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:18:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF918C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:23:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A2B1E61962
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:18:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2B1E61962
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9D2EB619D5
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 14:23:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9D2EB619D5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101006.192859 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101027.192870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lP4Ko-0001Ev-LV; Wed, 24 Mar 2021 14:18:10 +0000
+	id 1lP4PO-00025T-8H; Wed, 24 Mar 2021 14:22:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101006.192859; Wed, 24 Mar 2021 14:18:10 +0000
+Received: by outflank-mailman (output) from mailman id 101027.192870; Wed, 24 Mar 2021 14:22:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lP4Ko-0001Eo-Ib; Wed, 24 Mar 2021 14:18:10 +0000
-Received: by outflank-mailman (input) for mailman id 101006;
- Wed, 24 Mar 2021 13:28:55 +0000
+	id 1lP4PO-00025M-5D; Wed, 24 Mar 2021 14:22:54 +0000
+Received: by outflank-mailman (input) for mailman id 101027;
+ Wed, 24 Mar 2021 14:22:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8uro=IW=gmail.com=unixbhaskar@srs-us1.protection.inumbo.net>)
- id 1lP3Z9-0004SL-EM
- for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 13:28:55 +0000
-Received: from mail-qk1-x734.google.com (unknown [2607:f8b0:4864:20::734])
+ <SRS0=ehbw=IW=intel.com=andriy.shevchenko@srs-us1.protection.inumbo.net>)
+ id 1lP4PM-00025H-Qh
+ for xen-devel@lists.xenproject.org; Wed, 24 Mar 2021 14:22:52 +0000
+Received: from mga14.intel.com (unknown [192.55.52.115])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3c808549-f3bf-4382-83eb-b18b74097656;
- Wed, 24 Mar 2021 13:28:54 +0000 (UTC)
-Received: by mail-qk1-x734.google.com with SMTP id y18so17922405qky.11
- for <xen-devel@lists.xenproject.org>; Wed, 24 Mar 2021 06:28:54 -0700 (PDT)
-Received: from Slackware.localdomain ([156.146.36.138])
- by smtp.gmail.com with ESMTPSA id k138sm1620627qke.60.2021.03.24.06.28.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Mar 2021 06:28:53 -0700 (PDT)
+ id daeefe23-cc93-45d5-bf85-cdef9f8b79e8;
+ Wed, 24 Mar 2021 14:22:50 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Mar 2021 07:22:49 -0700
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Mar 2021 07:22:47 -0700
+Received: from andy by smile with local (Exim 4.94)
+ (envelope-from <andriy.shevchenko@intel.com>)
+ id 1lP4PE-00FiD8-Q7; Wed, 24 Mar 2021 16:22:44 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,70 +56,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c808549-f3bf-4382-83eb-b18b74097656
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZA4TMh4IQBJtlxJtgRg6PC7dBsn/y/DHlKXiLg69OBw=;
-        b=vIAeFill0cXse/9RJBHavhpguN7xSunFa2f+v2bdmqARM2G7mS5PMrrSXhVx41lH6C
-         KEoxKR6UuHlDbKnwsl3p8z1F9EFzOiKeQiP6l1rb3/izBA9tTqaPzehpikrq0vZSDJqX
-         4aYH5LwedhVmaeOhOF27DD4tsZ7vIEXYAtxgGiJFJze7Yym/DsuR2d8v52g6HBlbPBSJ
-         Q83bXj2BXfllIoypNNVaug2C5phbhumK16MeagjM7IQ1G0/qdfuzKUrqONR+ykO933p9
-         oUZtP2EDjgf8AIShCLpnSfIN1xoyKJiMYl4vIR+CYy9PfPkNg11J+z29APLScd3neX/j
-         inRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZA4TMh4IQBJtlxJtgRg6PC7dBsn/y/DHlKXiLg69OBw=;
-        b=Hdkg9AOg7EiP0HwZS2DF/j79ctybFdYSBXow4KcpzVP8P99zxqqJgY2DxV1DUicJL9
-         KDY4UzXApQumyrZOfu+qO3INioocHlhCwq89ILOJ5U74Y6c7wo3ShrIpAHqS6cDwOU/S
-         KmDRh1qPuujV0oiZjFgV8IsU7jeRuy9Y4rcdVGj44E8tUSCP4avElih5iJfjDUGsXBoO
-         /tTKEo295FaODoo8JeYswJFfooKffj2Ag5OvSu5h8OFt+UaoAmSWGt15kaIL45NvZC1n
-         wJoD3NjbuddjYXZEyMuRTCblFZkrQjyUfEv5BZXBmplFH16CJZuswkQQ2S9gqlK5KSCb
-         yVUA==
-X-Gm-Message-State: AOAM5303t7rkWMbUfYbsTuvdt3Qu8AvyYrRU2S91M45i4A8aeCwOi2Cc
-	qqEarmjWTg8pxd95lHq7bbE=
-X-Google-Smtp-Source: ABdhPJy2CjjpOmQpimqajsFZOrQh+V4XiC9VHO5NNVgJMDvkS8TP9WHAV0Aahm5348sd/33RwTJrfA==
-X-Received: by 2002:a37:a2c2:: with SMTP id l185mr2986406qke.178.1616592534322;
-        Wed, 24 Mar 2021 06:28:54 -0700 (PDT)
-From: Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To: sstabellini@kernel.org,
-	linux@armlinux.org.uk,
-	xen-devel@lists.xenproject.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Cc: rdunlap@infradead.org,
-	Bhaskar Chowdhury <unixbhaskar@gmail.com>
-Subject: [PATCH] ARM: xen/mm.c: A mundane typo fix
-Date: Wed, 24 Mar 2021 19:00:36 +0530
-Message-Id: <20210324133036.17665-1-unixbhaskar@gmail.com>
-X-Mailer: git-send-email 2.30.1
+X-Inumbo-ID: daeefe23-cc93-45d5-bf85-cdef9f8b79e8
+IronPort-SDR: MTK+kCSekNPsmTluonGr3LavgbNq9QVbr2UwXn9vEQ04vV8C4gYrimlGjp8pz0VNtM1uwQI+BH
+ GPb0q2r8eXgw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9933"; a="190129693"
+X-IronPort-AV: E=Sophos;i="5.81,274,1610438400"; 
+   d="scan'208";a="190129693"
+IronPort-SDR: VwrKILIj/QZQwCX9DSJSCDYw53ud/1y/6178HuzK5RgnLGH3tp2RGzmj30o19mEzRgutOVgMQp
+ I1vu/hV9te2A==
+X-IronPort-AV: E=Sophos;i="5.81,274,1610438400"; 
+   d="scan'208";a="391317293"
+Date: Wed, 24 Mar 2021 16:22:44 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	linux-gpio@vger.kernel.org
+Subject: Re: [PATCH RESEND] intel/pinctrl: check capability offset is between
+ MMIO region
+Message-ID: <YFtLNLTrR9wTO41W@smile.fi.intel.com>
+References: <20210324123118.58865-1-roger.pau@citrix.com>
+ <YFs3XwOBRGAFyASY@smile.fi.intel.com>
+ <YFtEw7qHQKE/4p8t@Air-de-Roger>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <YFtEw7qHQKE/4p8t@Air-de-Roger>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 
-s/acrros/across/
+On Wed, Mar 24, 2021 at 02:55:15PM +0100, Roger Pau Monné wrote:
+> On Wed, Mar 24, 2021 at 02:58:07PM +0200, Andy Shevchenko wrote:
+> > On Wed, Mar 24, 2021 at 01:31:18PM +0100, Roger Pau Monne wrote:
 
-Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
----
- arch/arm/xen/mm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+...
 
-diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
-index 467fa225c3d0..be7c942c74bf 100644
---- a/arch/arm/xen/mm.c
-+++ b/arch/arm/xen/mm.c
-@@ -105,7 +105,7 @@ bool xen_arch_need_swiotlb(struct device *dev,
- 	 *	- The Linux page refers to foreign memory
- 	 *	- The device doesn't support coherent DMA request
- 	 *
--	 * The Linux page may be spanned acrros multiple Xen page, although
-+	 * The Linux page may be spanned across multiple Xen page, although
- 	 * it's not possible to have a mix of local and foreign Xen page.
- 	 * Furthermore, range_straddles_page_boundary is already checking
- 	 * if buffer is physically contiguous in the host RAM.
---
-2.30.1
+> What could be done is check whether reading REVID returns ~0 and exit
+> at that point, if ~0 will never be a valid value returned by that
+> register. I think that should be a separate patch however.
+
+Sounds good to me.
+
+> > Moreover, it seems you are bailing out and basically denying driver to load.
+> > This does look that capability is simply the first register that blows the setup.
+> > I think you have to fix something into Xen to avoid loading these drivers or
+> > check with something like pci_device_is_present() approach.
+> 
+> Is there a backing PCI device BAR for those MMIO regions that the
+> pinctrl driver is trying to access? AFAICT those regions are only
+> reported in the ACPI DSDT table on the _CRS method of the object (at
+> least on my system).
+
+Unfortunately it does not expose PCI configuration space.
+
+> Doing something like pci_device_is_present would require a register
+> that we know will never return ~0 unless the device is not present. As
+> said above, maybe we could use REVID to that end?
+
+Yes, that's good, see above.
+
+WRT capabilities, if we crash we will see the report immediately on the
+hardware which has such an issue. (It's quite unlikely we will ever have one,
+that's why I consider it's not critical)
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
 
 
