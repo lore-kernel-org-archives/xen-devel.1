@@ -1,45 +1,49 @@
-Return-Path: <SRS0=CNy3=IV=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=26S9=IW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DF10C433DB
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 23:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6996C433C1
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 00:37:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B2FEB61984
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Mar 2021 23:45:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B2FEB61984
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 61976619E6
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Mar 2021 00:37:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61976619E6
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.100825.192321 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.100831.192339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOqi7-00039z-Vj; Tue, 23 Mar 2021 23:45:19 +0000
+	id 1lOrVt-000080-VT; Wed, 24 Mar 2021 00:36:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 100825.192321; Tue, 23 Mar 2021 23:45:19 +0000
+Received: by outflank-mailman (output) from mailman id 100831.192339; Wed, 24 Mar 2021 00:36:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lOqi7-00039s-Sh; Tue, 23 Mar 2021 23:45:19 +0000
-Received: by outflank-mailman (input) for mailman id 100825;
- Tue, 23 Mar 2021 23:45:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QwVt=IV=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1lOqi7-00039n-9a
- for xen-devel@lists.xen.org; Tue, 23 Mar 2021 23:45:19 +0000
-Received: from mail-ot1-x32c.google.com (unknown [2607:f8b0:4864:20::32c])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4cdcb398-8f79-41cf-a852-0603059a46dd;
- Tue, 23 Mar 2021 23:45:18 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- v24-20020a9d69d80000b02901b9aec33371so21280797oto.2
- for <xen-devel@lists.xen.org>; Tue, 23 Mar 2021 16:45:17 -0700 (PDT)
+	id 1lOrVt-00007t-SM; Wed, 24 Mar 2021 00:36:45 +0000
+Received: by outflank-mailman (input) for mailman id 100831;
+ Wed, 24 Mar 2021 00:36:43 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOrVr-00007l-Th; Wed, 24 Mar 2021 00:36:43 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOrVr-0002bW-Mg; Wed, 24 Mar 2021 00:36:43 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOrVr-0002u4-Fk; Wed, 24 Mar 2021 00:36:43 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lOrVr-0005Du-FB; Wed, 24 Mar 2021 00:36:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,173 +55,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4cdcb398-8f79-41cf-a852-0603059a46dd
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=30XQNYb2T9mP3JRg6lsKoXYDzFycp16JlM5yfypF0B8=;
-        b=gY/WciJerlVATJVt9+xYAEBSdyz8/iWoO+dSYlPl1eSW9Lt6LHoI5lX+lem4iwFQG7
-         RvIk7ZGZHS1WoYjy8Hym4E9LdlrFGBaTqbm74dEAtkeK8TlJhEBPgzrdowvMkIXziict
-         qi+q2/ZuNHeZHBlLW2OIYMhw2KuvXjpD2jaklEUACPsLnHrxVwwNmCVha3bhMNnsF6DM
-         JCNyxmvZFm3mmXMqZq5LyN+5iVYNwer7RxwyBiCZFMQVx1c4hJYwlAqYKNEyeflm0zRi
-         qMq+XpZm1s687TKmTIDiJ81PrExlZGyoG1fBq8IwDhqHOQWAJ+Zx+NtX5xs+u/Y3b9DH
-         tCTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=30XQNYb2T9mP3JRg6lsKoXYDzFycp16JlM5yfypF0B8=;
-        b=cPHqc17fDo9I+RyT1zMsp15y7zXsEzymi8JZvFzDKMIw46T5UteDiLLji1JcHf96QU
-         Rpf5vCSaRn1q9mMIpkEyItijUpQIkhuzx/zkgOCo5uDQmxxYB4Xws+WY6fsvVofaUZ7N
-         kxwyxlLgncd1iPh8raPv85YAz+vS2OuwxIUYGM2KkU09qsmxZvlTZJg5gJS3oK8ZIQQl
-         NVI5u/DjJd4Bvy5/GCAjqJLFdJVQhuz0+m0hcIKe7Ii+39xhTM1fPRZdwtu6oq1MCCBK
-         5eubWnJKlLoCRXHby/dsK5+kGgTOCdaWXBc5SlyMh3DxXr6IceU9TvyYCADvg7IBW8DD
-         s+CQ==
-X-Gm-Message-State: AOAM533MVewztXoaI7/3TwAOwLjTg6IG2wf5uyChqiVXI3KmwD6ZmVvP
-	qRoGppZ7u93VkWxpeg0FE/tJquVBrymrzLpyT2c=
-X-Google-Smtp-Source: ABdhPJxU0pQLYI+mJL9FcgyAObkDwyEWPoRt+1tIi3/QEYjne938wfp8j9wBjZX98hJz0bOXb2D4AV3XyCjyQ6xNxtI=
-X-Received: by 2002:a9d:70ce:: with SMTP id w14mr665276otj.183.1616543117417;
- Tue, 23 Mar 2021 16:45:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <2e7213c1-e01c-9d9d-3ac1-3086eb6889e5@apertussolutions.com> <c3a60e96-3179-f377-5c8b-3e6941d055ae@apertussolutions.com>
-In-Reply-To: <c3a60e96-3179-f377-5c8b-3e6941d055ae@apertussolutions.com>
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Date: Tue, 23 Mar 2021 16:45:06 -0700
-Message-ID: <CACMJ4GaqX4X8iR-NfbVpQnXO5DU7DNb9pKi2mUdjXrAxMCPmWA@mail.gmail.com>
-Subject: Re: Working Group Meeting for hyperlaunch
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Stefano Stabellini <stefano.stabellini@xilinx.com>, Julien Grall <jgrall@amazon.com>, iwj@xenproject.org, 
-	Wei Liu <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, 
-	Rich Persaud <persaur@gmail.com>, Bertrand Marquis <bertrand.marquis@arm.com>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	luca.fancellu@arm.com, Adam Schwalm <adam.schwalm@starlab.io>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, paul@xen.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=i7GGIuFxYUUNUq+dleF/y6vxIkY/UFGQCu1zgXaz2Fo=; b=bWXEGAggYH7F815uo6zXWlPs5y
+	3J3pNc8mjvl/rfWE9WJnEJ/lB41fBbXFEc/UGIpuPCQ65NZrnUDz3FDPQGCYXp0/Ui9y2Jfp2aDpa
+	IkAgwAWk7SEHPcF84PkcIoYr/cdK51MiGB/niJpxcN0Qjhm/29RMcWX+UJ96OtjDAysk=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-160352-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 160352: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=0ecdcb6142037dd1cdd08660a2349960bcf0270a
+X-Osstest-Versions-That:
+    ovmf=3d0df0f076e120c6faf3c1892fffa21b4f31ed84
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 24 Mar 2021 00:36:43 +0000
 
-On Thu, Mar 18, 2021 at 8:33 AM Daniel P. Smith
-<dpsmith@apertussolutions.com> wrote:
->
-> On 3/16/21 12:09 AM, Daniel P. Smith wrote:
-> > All,
-> >
-> > We have posted[1][2] the design documents for hyperlaunch and would
-> > invite attendance at a working group call to discuss two agenda items.
-> > The first item is a review of the documents and the second is a
-> > discussion about bringing production-ready revisions of our previous
-> > prototype in as patches to provide a near-term implementation of the
-> > design. If possible please join us this Thursday 3/18 at
-> > 1700CET/1600GMT/1200EDT/0900PDT. Below are the call details.
-> >
-> > [1]
-> > https://lists.xenproject.org/archives/html/xen-devel/2021-03/msg00939.html
-> > [2]
-> > https://lists.xenproject.org/archives/html/xen-devel/2021-03/pdfCV4LaWCrTN.pdf
->
-> Agenda link,
-> https://cryptpad.fr/pad/#/2/pad/edit/+MJgJ0EkalH81-YVOlsp1bEo/
+flight 160352 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/160352/
 
-## Minutes from the Hyperlaunch Working Group meeting, 18th March
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 0ecdcb6142037dd1cdd08660a2349960bcf0270a
+baseline version:
+ ovmf                 3d0df0f076e120c6faf3c1892fffa21b4f31ed84
 
-* Posted design docs:
-    1) main doc: has the high level design
-    2) device tree doc: has implementation details for launch
+Last test of basis   160249  2021-03-22 01:39:50 Z    1 days
+Testing same since   160352  2021-03-23 05:41:31 Z    0 days    1 attempts
 
-- new version of docs much better, in-line with vision for Xen design docs
-- Xen tree has example of another good recent design doc
+------------------------------------------------------------
+People who touched revisions under test:
+  Liu Wei <weix.c.liu@intel.com>
 
-- Stefano: have minor feedback on some details eg. node names
-Evaluating fit with work on System Device Tree; is very aligned.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
-* Naming: "Hyperlaunch" and the related terms "Hyperlaunch Static"
-and "Hyperlaunch Dynamic"
 
-- No objections; proceeding with these names for now
-- OK to retire term 'dom0less' in favour of 'Hyperlaunch Static' since
-  Hyperlaunch Static will do everything that dom0less does, plus more
-- an Appendix in the posted main design document has reasoning,
-  rationale behind the proposed naming
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-* Towards merging:
-- Andy: Xen currently in release freeze, so wait for opening for
-  4.16, and then follow up
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-* Crash domain: When is it started? What defines a crash?
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-Aim: Xen does its best to handle misconfig / faults to get system up
-to a usable console
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
-Andy: two separate crash cases:
-  1: hypervisor crash:
-  - current Xen can reserve memory on boot, load a crash kernel,
-    jump into it on a crash: mount root disk, dump logs, reboot
-  - is kexec case, and also the safety case for error in the hypervisor
 
-  2: crash of a domain that Xen is starting:
-  - can use normal Xen functionality to recover
-  - structure in doc supports DRTM measurement of crash handling logic
+Pushing revision :
 
-Stefano: there is some similar need or equivalent in Safety systems
-Bertrand: doc should describe what a crash is, what the functionality
-can do
-
-* ACTION: update doc to describe proposed crash response functionality
-
-* Terminology: 'recovery' or 'rescue' terms preferred:
-
-- First: better as "crash environment" (not "crash domain")
-- Second: "recovery domain""
-
-Bertrand: safety case: reboot to most recent known working config
-- on server, reboot to interactive is ok
-- make sure domain has sufficient capacity to do both
-
-* ACTION: add definitions and descriptions to the design doc
-    - work out where the safety use case fits
-    - multiple domains can have control domain permission
-
-* Recommendations on approach for development
- - 40-odd patch series in prototype: too big for one series (!)
- - will work on changes to both x86 and Arm code together
-
-Stefano: sending multiple smaller series is OK: make each testable
-
-* How much common vs. arch-specific?
-
-Andy: aim for common: logic in-line with RISC-V and PowerPC ports
-- eg. LCM handling in common; and may require some arch-specific
-
-Christopher: prototype used PV for Hardware Domain, following code
-for current most-common dom0; any guidance on PV vs PVH, experience
-with PVH dom0?
-
-Roger: PVH dom0 used on FreeBSD; is in GitLab CI and osstest.
-PVH use for domU is more common.
-
-Andy: Hardware Domain and Control Domain need clearer definitions
-
-* ACTION: add definitions and descriptions for Hardware, Control,
-domain to the design doc
-
-Roger:
-- feedback on PCI points: have posted to the list
-
-* Beyond posted docs:
-
-Andy: Bareflank-style setup is relevant: can ensure Hyperlaunch work
-aligns and keep use case in mind
-eg. case where hypervisor doesn't have scheduler, offloads power mgmt
-Rich: seek design input for Hyperlaunch
-Eric: invite to next call?
-
-* ACTION: invite Bareflank developers to next call, supply pointer to
-Hyperlaunch design docs
-
-* Public development:
-
-Rich: ok for in-development Hyperlaunch code to be public on github?
-Christopher + Daniel: most likely yes; can check with project sponsor
-
---
-Christopher
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   3d0df0f076..0ecdcb6142  0ecdcb6142037dd1cdd08660a2349960bcf0270a -> xen-tested-master
 
