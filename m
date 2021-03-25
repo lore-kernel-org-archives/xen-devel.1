@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E1C6C433C1
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 11:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6A5DC433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 11:43:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A66461A25
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 11:13:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A66461A25
+	by mail.kernel.org (Postfix) with ESMTPS id 4D9E261A0A
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 11:43:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4D9E261A0A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101376.193857 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101382.193874 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPNvO-0003vg-KP; Thu, 25 Mar 2021 11:13:14 +0000
+	id 1lPOO8-0007Ac-15; Thu, 25 Mar 2021 11:42:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101376.193857; Thu, 25 Mar 2021 11:13:14 +0000
+Received: by outflank-mailman (output) from mailman id 101382.193874; Thu, 25 Mar 2021 11:42:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPNvO-0003vZ-HF; Thu, 25 Mar 2021 11:13:14 +0000
-Received: by outflank-mailman (input) for mailman id 101376;
- Thu, 25 Mar 2021 11:13:12 +0000
+	id 1lPOO7-0007AV-UP; Thu, 25 Mar 2021 11:42:55 +0000
+Received: by outflank-mailman (input) for mailman id 101382;
+ Thu, 25 Mar 2021 11:42:54 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lPNvM-0003vL-OL
- for xen-devel@lists.xenproject.org; Thu, 25 Mar 2021 11:13:12 +0000
+ (envelope-from <julien@xen.org>) id 1lPOO6-0007AQ-6M
+ for xen-devel@lists.xenproject.org; Thu, 25 Mar 2021 11:42:54 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lPNvL-0002Mn-CZ; Thu, 25 Mar 2021 11:13:11 +0000
+ id 1lPOO4-0002q2-M4; Thu, 25 Mar 2021 11:42:52 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lPNvL-0002fE-0C; Thu, 25 Mar 2021 11:13:11 +0000
+ id 1lPOO4-0004ON-9g; Thu, 25 Mar 2021 11:42:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,81 +55,46 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=aOQI9Mr0Yo2TD1tNatsazTuCAXLpcS3ebRcXECoMhhw=; b=QG5KoAnmaAdnEe3OVNDsQPEB4g
-	rEKBuSu/My5VuL6dh8yDf5xTv0L4Ghp0dyk4nvUHuKPHWWIOY5NW3Ud0L5m9hCp1/e4tVVtYaGG5b
-	3O0X/YuM25ucfX993UFIV9PvD3MUmohDmRuxwdlZkZRqC1QS9wd9z0Y9TKpm9CthZo8I=;
+	bh=z+vsNgBK9l3wShAjdTSgrGCHBKpK3MehG+GnO8o0ivQ=; b=VH97DEXvG39dtg/08DSDIWwqaN
+	TDg2wdbTEJq+F2YPGeCMjlhno6xwIB3PQuOLXKLsq0jVZFXJHc1KRZFtVmwocAHwKWRPNf78n1H2W
+	2YPBgcYgJmeqOX6j5C7n4Ak2BeUyilKWMPQXCeqO0Ya5Sv2nKvqKYQFOjwn1pfVkIgw8=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Julien Grall <jgrall@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	raphning@gmail.com,
-	edvin.torok@citrix.com,
-	jgross@suse.com
-Subject: [PATCH for-4.15?] docs/design: Update xenstore-migration.md
-Date: Thu, 25 Mar 2021 11:12:55 +0000
-Message-Id: <20210325111255.16330-1-julien@xen.org>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH] tools/xenstored: Remove unnecessary define XC_WANT_COMPAT_MAP_FOREIGN_API
+Date: Thu, 25 Mar 2021 11:42:43 +0000
+Message-Id: <20210325114243.12284-1-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 
 From: Julien Grall <jgrall@amazon.com>
 
-It is not very clear the shared page adddress is not contained in the
-connection record. Additionally, it is misleading to say the grant
-will always point to the share paged as a domain is free to revoke the
-permission. The restore code would need to make sure it doesn't
-fail/crash if this is happening.
+The last use of the compat foreign API was dropped in commit
+38eeb3864de4 "tools/xenstored: Drop mapping of the ring via foreign
+map".
 
-The sentence is now replaced with a paragraph explaining why the GFN is
-not preserved and that the grant is not guarantee to exist during
-restore.
+Therefore, we don't need to define XC_WANT_COMPAT_MAP_FOREIGN_API.
 
-Take the opportunity to replace "code" with "node" when description the
-permission.
-
-Reported-by: Raphael Ning <raphning@amazon.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
 ---
-Cc: raphning@gmail.com
-Cc: edvin.torok@citrix.com
-Cc: jgross@suse.com
+ tools/xenstore/xenstored_core.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-Ian, would you still consider documentation update for 4.15?
----
- docs/designs/xenstore-migration.md | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/docs/designs/xenstore-migration.md b/docs/designs/xenstore-migration.md
-index 1a5b94b31da8..5f1155273ec3 100644
---- a/docs/designs/xenstore-migration.md
-+++ b/docs/designs/xenstore-migration.md
-@@ -216,8 +216,10 @@ For `shared ring` connections it is as follows:
- |           | by xenstored to communicate with `domid`          |
- |           |                                                   |
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 0c9a0961b57e..1cdbc3dcb5f7 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -19,7 +19,6 @@
+ #ifndef _XENSTORED_CORE_H
+ #define _XENSTORED_CORE_H
  
--Since the ABI guarantees that entry 1 in `domid`'s grant table will always
--contain the GFN of the shared page.
-+The GFN of the shared page is not preserved because the ABI reserves
-+entry 1 in `domid`'s grant table to point to the xenstore shared page.
-+Note there is no guarantee the page will still be valid at the time of
-+the restore because a domain can revoke the permission.
+-#define XC_WANT_COMPAT_MAP_FOREIGN_API
+ #include <xenctrl.h>
+ #include <xengnttab.h>
  
- For `socket` connections it is as follows:
- 
-@@ -398,7 +400,7 @@ A node permission specifier has the following format:
- |         |                                                     |
- | `domid` | The domain-id to which the permission relates       |
- 
--Note that perm1 defines the domain owning the code. See [4] for more
-+Note that perm1 defines the domain owning the node. See [4] for more
- explanation of node permissions.
- 
- * * *
 -- 
 2.17.1
 
