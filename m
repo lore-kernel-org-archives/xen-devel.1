@@ -2,44 +2,46 @@ Return-Path: <SRS0=LcbK=IX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D56FC433DB
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 09:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AAA1C433DB
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 09:29:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1654361963
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 09:19:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1654361963
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ffwll.ch
+	by mail.kernel.org (Postfix) with ESMTPS id 875FD619E4
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Mar 2021 09:29:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 875FD619E4
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=antioche.eu.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101345.193764 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101349.193788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPM8v-00081f-LU; Thu, 25 Mar 2021 09:19:05 +0000
+	id 1lPMII-0000l8-RS; Thu, 25 Mar 2021 09:28:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101345.193764; Thu, 25 Mar 2021 09:19:05 +0000
+Received: by outflank-mailman (output) from mailman id 101349.193788; Thu, 25 Mar 2021 09:28:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPM8v-00081Y-IN; Thu, 25 Mar 2021 09:19:05 +0000
-Received: by outflank-mailman (input) for mailman id 101345;
- Thu, 25 Mar 2021 09:19:04 +0000
+	id 1lPMII-0000l0-OC; Thu, 25 Mar 2021 09:28:46 +0000
+Received: by outflank-mailman (input) for mailman id 101349;
+ Thu, 25 Mar 2021 09:28:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=q7uR=IX=ffwll.ch=daniel.vetter@srs-us1.protection.inumbo.net>)
- id 1lPM8u-00081T-1h
- for xen-devel@lists.xenproject.org; Thu, 25 Mar 2021 09:19:04 +0000
-Received: from mail-ot1-x32c.google.com (unknown [2607:f8b0:4864:20::32c])
+ <SRS0=aWHm=IX=antioche.eu.org=bouyer@srs-us1.protection.inumbo.net>)
+ id 1lPMII-0000je-7c
+ for xen-devel@lists.xenproject.org; Thu, 25 Mar 2021 09:28:46 +0000
+Received: from chassiron.antioche.eu.org (unknown [2001:41d0:fe9d:1101::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 87f3a48a-baa9-490b-98d6-41d575b13615;
- Thu, 25 Mar 2021 09:19:02 +0000 (UTC)
-Received: by mail-ot1-x32c.google.com with SMTP id
- k14-20020a9d7dce0000b02901b866632f29so1322298otn.1
- for <xen-devel@lists.xenproject.org>; Thu, 25 Mar 2021 02:19:02 -0700 (PDT)
+ id 595761af-4e95-4cc0-8c96-0a784fdb6d17;
+ Thu, 25 Mar 2021 09:28:41 +0000 (UTC)
+Received: from rochebonne.antioche.eu.org (rochebonne [10.0.0.1])
+ by chassiron.antioche.eu.org (8.15.2/8.15.2) with ESMTP id 12P9SWEX000942;
+ Thu, 25 Mar 2021 10:28:32 +0100 (MET)
+Received: by rochebonne.antioche.eu.org (Postfix, from userid 1210)
+ id 0389927E3; Thu, 25 Mar 2021 10:28:32 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,115 +53,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 87f3a48a-baa9-490b-98d6-41d575b13615
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=s8gaLzfKO51sv2EAdyYwOBAav4JswI+vzWWUFTJdNYY=;
-        b=ZkxfOIKsj2q9i0xgCpJIWPTGgfJnpexFD69S2YCMtm7qz9+Vz3iFYeeL/zq8cW43eJ
-         ZxJ0JznpvlRjP0MCLr3dVA6OrS5dUJtNyIVuvegpRL22m1fimwU5A2IkRinyZfD/MOg9
-         pdBoeBEUs7bsM2BitRB3evCfcTP2TuuWcIMoc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=s8gaLzfKO51sv2EAdyYwOBAav4JswI+vzWWUFTJdNYY=;
-        b=qyPYfSrPT/TtVrV3O5a+Xc/amrIWVR3rerZnrRO8ZGeW0zUVT+SZL+RBLstnMjdkDm
-         GlHrVwQyZ00tz1KcVhN4PF7vPr67pefWBrmZLsNNYdRiMr882eSM5GFvStRIebKklKcb
-         yAoGxU7t6pTdOAVR+2d1LJndPq/IT6yRB8G9f12J9bem/pRSnF2/VbVUFAap5YmzB1Lg
-         /0AvIEEvNBfQsqwtDVc7Zna7epeJQrHuDckpkIAaLv7vwirJpY2h3vsbCcrkfnTFsZNn
-         xElZMskdrYhkC6JtWNvqnp/UJkd9WbMNjyRMW4reDqRJkAPG5LIpIlNsmr0BknQke0N/
-         NJWw==
-X-Gm-Message-State: AOAM532ieHjNwwncZsiLFIPK5/1GxpVKhohVtO4dML1W6meJeDAlv7wT
-	YT48Q5WLNNvlz7pnaQacoRtIFKcQUzrKUj9hTrcLgw==
-X-Google-Smtp-Source: ABdhPJwuRBoHhQ1X/QBIV1XedaouhUZsXyPMY5vgD/AZosvW57FTBULFoCWN1cliFURZtu4WwmxByGgjBHWXJVPUY/M=
-X-Received: by 2002:a9d:845:: with SMTP id 63mr4608787oty.303.1616663942428;
- Thu, 25 Mar 2021 02:19:02 -0700 (PDT)
+X-Inumbo-ID: 595761af-4e95-4cc0-8c96-0a784fdb6d17
+Date: Thu, 25 Mar 2021 10:28:31 +0100
+From: Manuel Bouyer <bouyer@antioche.eu.org>
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
+        Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH 4/6] CHANGELOG.md: NetBSD lib/gnttab support
+Message-ID: <YFxXvyF4j32uTa5S@antioche.eu.org>
+References: <20210324164407.302062-1-george.dunlap@citrix.com>
+ <20210324164407.302062-4-george.dunlap@citrix.com>
+ <YFxUJwF45F1HD2jU@Air-de-Roger>
 MIME-Version: 1.0
-References: <20210325061901.851273-1-wanjiabing@vivo.com> <e45d6b24-5e74-17f6-eb18-c6e51fed923a@epam.com>
- <CAKMK7uEpNexmDYar36ZEX0hbHoxH3Y+_D42NqjRwAqxpiCXHRA@mail.gmail.com>
-In-Reply-To: <CAKMK7uEpNexmDYar36ZEX0hbHoxH3Y+_D42NqjRwAqxpiCXHRA@mail.gmail.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Thu, 25 Mar 2021 10:18:51 +0100
-Message-ID: <CAKMK7uGsjv5S8eKGwmM1ErQPnx+UdxgF5c8YXewEDEyMakpEig@mail.gmail.com>
-Subject: Re: [PATCH] drivers: gpu: drm: xen_drm_front_drm_info is declared twice
-To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Wan Jiabing <wanjiabing@vivo.com>, David Airlie <airlied@linux.ie>, 
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "kael_w@yeah.net" <kael_w@yeah.net>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <YFxUJwF45F1HD2jU@Air-de-Roger>
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3 (chassiron.antioche.eu.org [151.127.5.145]); Thu, 25 Mar 2021 10:28:32 +0100 (MET)
 
-On Thu, Mar 25, 2021 at 10:16 AM Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> On Thu, Mar 25, 2021 at 7:53 AM Oleksandr Andrushchenko
-> <Oleksandr_Andrushchenko@epam.com> wrote:
-> >
-> > Hi,
-> >
-> > On 3/25/21 8:19 AM, Wan Jiabing wrote:
-> > > struct xen_drm_front_drm_info has been declared.
-> > > Remove the duplicate.
-> > >
-> > > Signed-off-by: Wan Jiabing <wanjiabing@vivo.com>
-> >
-> > Thank you for the patch,
-> >
-> > Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> >
-> > Will apply to drm-misc-next-fixes
->
-> drm-misc-next-fixes is the wrong tree, bugfixes outside of the merge
-> window belong into drm-misc-fixes. Please consult
->
-> https://drm.pages.freedesktop.org/maintainer-tools/committer-drm-misc.html#where-do-i-apply-my-patch
->
-> We need to hard-reset drm-misc-next-fixes back, please re-apply the
-> patches (both of them) to drm-misc-fixes. Also adding drm-misc
-> maintainers.
+On Thu, Mar 25, 2021 at 10:13:11AM +0100, Roger Pau Monné wrote:
+> On Wed, Mar 24, 2021 at 04:44:05PM +0000, George Dunlap wrote:
+> > Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+> 
+> LGTM, maybe Manuel has something else to add.
 
-Also simple cleanup like this should be pushed to drm-misc-next, not
-any of the -fixes branches.
--Daniel
-
-> -Daniel
->
-> >
-> > Thank you,
-> >
-> > Oleksandr
-> >
-> > > ---
-> > >   drivers/gpu/drm/xen/xen_drm_front_conn.h | 1 -
-> > >   1 file changed, 1 deletion(-)
-> > >
-> > > diff --git a/drivers/gpu/drm/xen/xen_drm_front_conn.h b/drivers/gpu/drm/xen/xen_drm_front_conn.h
-> > > index 3adacba9a23b..e5f4314899ee 100644
-> > > --- a/drivers/gpu/drm/xen/xen_drm_front_conn.h
-> > > +++ b/drivers/gpu/drm/xen/xen_drm_front_conn.h
-> > > @@ -16,7 +16,6 @@
-> > >   struct drm_connector;
-> > >   struct xen_drm_front_drm_info;
-> > >
-> > > -struct xen_drm_front_drm_info;
-> > >
-> > >   int xen_drm_front_conn_init(struct xen_drm_front_drm_info *drm_info,
-> > >                           struct drm_connector *connector);
->
->
->
-> --
-> Daniel Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
-
-
+no, it's OK for me too
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Manuel Bouyer <bouyer@antioche.eu.org>
+     NetBSD: 26 ans d'experience feront toujours la difference
+--
 
