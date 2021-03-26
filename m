@@ -2,49 +2,42 @@ Return-Path: <SRS0=uMCZ=IY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA515C433C1
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 13:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5565C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 13:46:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 55B3D61A1D
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 13:44:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55B3D61A1D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	by mail.kernel.org (Postfix) with ESMTPS id 739456193C
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 13:46:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 739456193C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101820.194993 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101827.195012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPmky-0008KY-FA; Fri, 26 Mar 2021 13:44:08 +0000
+	id 1lPmn5-0008VK-B6; Fri, 26 Mar 2021 13:46:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101820.194993; Fri, 26 Mar 2021 13:44:08 +0000
+Received: by outflank-mailman (output) from mailman id 101827.195012; Fri, 26 Mar 2021 13:46:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPmky-0008KR-Ar; Fri, 26 Mar 2021 13:44:08 +0000
-Received: by outflank-mailman (input) for mailman id 101820;
- Fri, 26 Mar 2021 13:44:07 +0000
+	id 1lPmn5-0008V4-4C; Fri, 26 Mar 2021 13:46:19 +0000
+Received: by outflank-mailman (input) for mailman id 101827;
+ Fri, 26 Mar 2021 13:46:17 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3UtC=IY=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1lPmkx-0008KM-C5
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 13:44:07 +0000
-Received: from wout1-smtp.messagingengine.com (unknown [64.147.123.24])
+ <SRS0=MLVS=IY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1lPmn3-0008UZ-PM
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 13:46:17 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ba1c1410-b1b7-4c51-8698-7a786a3c853e;
- Fri, 26 Mar 2021 13:44:06 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.west.internal (Postfix) with ESMTP id 630191CD6;
- Fri, 26 Mar 2021 09:44:04 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Fri, 26 Mar 2021 09:44:05 -0400
-Received: from mail-itl (ip5b434f04.dynamic.kabel-deutschland.de [91.67.79.4])
- by mail.messagingengine.com (Postfix) with ESMTPA id 8675724005A;
- Fri, 26 Mar 2021 09:44:02 -0400 (EDT)
+ id a5fc831d-1c0b-4342-9a7f-7425274862da;
+ Fri, 26 Mar 2021 13:46:17 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,129 +49,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba1c1410-b1b7-4c51-8698-7a786a3c853e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=9/IjJe
-	iYxx3t/DAoDZmmzyOMFZL7HIJttlB53JUX5eE=; b=QF2pp9LTl9jgqSwVNW6/s0
-	zUx/JcgCunTaOcGZUQ8cqo3R4eGFfQPlHqkeIAkHYntt6+Wpic6nuN9V08LIyHy6
-	UcVIiNajTPwlJl8sAu1cwmT1YHywRoapM897MZWeUQ3qIYIOldzdl5qq3Al/U6Ea
-	Hk8RHLNbKu4vCDXIJe31HrOkatsTwDcDnfkJ06lSK/FWZqVb9P8stduFjoTJHag9
-	8fUBbLdnepRtoIipSfGebD6ubgGtoC4Yb4U8n2FC/H7GY5mplnicY61Fmy+SoRgv
-	I0SbRezFUaWRGkQguvAmu3TVDXGtjWe0el6aW5s/H/4c/bEf9UiIP1qCB95ESbRw
-	==
-X-ME-Sender: <xms:I-VdYFUyS3Q5lEhbdcTWe3sCoierN91kzBjjFAy1tOLspZm1U9ZS0w>
-    <xme:I-VdYFnojneAqNZQL2kaOQ9y9xe0g_8MN1aEoynAdCeLQ4_-Lydpd5W2xAimstQAf
-    51HoMOnhGYhyA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudehvddgheeiucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhepfffhvffukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
-    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
-    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeetveff
-    iefghfekhffggeeffffhgeevieektedthfehveeiheeiiedtudegfeetffenucfkpheple
-    durdeijedrjeelrdegnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghi
-    lhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtg
-    homh
-X-ME-Proxy: <xmx:I-VdYBY8BaSNeAjkKWeaW4exJ_MjugggDz1qnO29kCdfLz68zIsc9A>
-    <xmx:I-VdYIXFYUfPiYbLwpN79TM4GwhjRMao-I_jchXifepre0X5yw8VAA>
-    <xmx:I-VdYPlb9uQ2Apf_l4i16UUjr57ym3olr2HnKAJfhYOLYTV0Q_Yt0Q>
-    <xmx:JOVdYNhU_0Dx2eB3jHwWqa8oPnprnFKOEhJBClj7-z0TH4NwSOV6pw>
-Date: Fri, 26 Mar 2021 14:43:58 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Ian Jackson <iwj@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
-	=?utf-8?B?RnLDqWTDqXJpYw==?= Pierret <frederic.pierret@qubes-os.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v1.1 2/2] x86/hpet: Don't enable legacy replacement mode
- unconditionally
-Message-ID: <YF3lHjYdrILNA1y9@mail-itl>
-References: <20210325165224.10306-3-andrew.cooper3@citrix.com>
- <20210325172132.14980-1-andrew.cooper3@citrix.com>
- <24669.52641.499147.88002@mariner.uk.xensource.com>
- <24669.54213.173154.400771@mariner.uk.xensource.com>
- <e768ad29-55e3-945a-f398-05050b46e927@suse.com>
+X-Inumbo-ID: a5fc831d-1c0b-4342-9a7f-7425274862da
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1616766376;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=750BMnBsidY80ANFlQktnM1w+1rQ3ybeQkufZpAghn4=;
+  b=TZMvWj0O1E3YwZuCFVwagHwZjSRZD4AIYmTIZkQpHIXx6e1p2g8D/Mhn
+   zTZhJzOrLBXuwFibzu9S+wMCe94XU2UsvDGQcsPVQD4E4qRe4geAovYSk
+   c3tuBd3bJlWFlpXYawN/Fn6MqAvCuYB+0Xpz/b0YjAiM6afHDniGue8hm
+   U=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 9HTa7ZgJV2gwEqSwH9fNVeNx5YLj7AaT3A0h+5xI/FI8nNtqz5xbPWGUNn4Dpr78MvEaJjm6KS
+ HiU6Ib+oa3mAw5yed0TWIiqWzSvFwQ6dHq4cS1F9+n4K5rNS0SC+lzCl3W8IC4TYBGV9WHV0kb
+ i8y1fdVHP6yi86wAaBlnPQs5SRw+ZK/dIGElo7pPZIVNomaLFFzEuUD0gc5XXwCJXd9T4dykNU
+ sNiucjK9a/bDjLEFh01u4G4CcbNmKtTbOC7BrfiN7hBx75mtI7u3uds8Rn+ujGJlwPcqfOs0oM
+ RLw=
+X-SBRS: 4.0
+X-MesageID: 41661002
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:rw327q3F47EXEdsJmsCrfAqjBWByeYIsi2QD101hICF9WtCEls
+ yogfQQ3QL1jjFUY307hdWcIsC7LE/035Qd2+ksFJ2lWxTrv3btEZF64eLZslndMgDd1soY76
+ dvdKBiFMb9ZGIRse/W6BS1euxO/PCp66at7N2x815IbSVHL55t9B14DAHzKDwSeCBjCYAiHJ
+ SRouprzgDQGkg/VciwCnkbU+WrnbSi+K7OWhIaGwUhrDCHkDLA0tXHOiKF1RQTWS4n+8ZBzU
+ H5lWXCh5mLgrWA5TL3k0TS6JlXn9WJ8Ko/OOW8zvI7Bx+ppgKhZIFKU6CPsjYvsIiUmSoXue
+ iJmTgMFYBe7G7QY3GUrHLWqnbd+Qdr0VDO4xu5hmbuusPwTj5SMbs+uatpNiH3xmBlmfMU6t
+ Mt40up86B5IDmFoQHGo//PbB1unlrcmwtYrccjy0ZxfKFbVKVctuUkjSVoOaZFJg3WwqY9Ht
+ JjCcnNjcwmC2+yXjTism5jzMfEZAVLIj62BkwLusmi2zNLhnxOz0wB2MwFnnsbnahNM6V52w
+ ==
+X-IronPort-AV: E=Sophos;i="5.81,280,1610427600"; 
+   d="scan'208";a="41661002"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Doug Goldstein
+	<cardoe@cardoe.com>
+Subject: [PATCH 2/2] CI: Add zstd/etc libraries to build environments
+Date: Fri, 26 Mar 2021 13:45:58 +0000
+Message-ID: <20210326134558.7751-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210326134558.7751-1-andrew.cooper3@citrix.com>
+References: <20210326134558.7751-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="HGjM90Qvvu8CYKe4"
-Content-Disposition: inline
-In-Reply-To: <e768ad29-55e3-945a-f398-05050b46e927@suse.com>
+Content-Type: text/plain
 
+zstd compression support is new in 4.15, but isn't currently tested anywhere
+in CI.
 
---HGjM90Qvvu8CYKe4
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+bzip2/zlib was missing in some cases, so add those as well.
 
-On Fri, Mar 26, 2021 at 02:30:09PM +0100, Jan Beulich wrote:
-> On 26.03.2021 13:29, Ian Jackson wrote:
-> > I wrote:
-> >> I'm sorry, but I think it is too late for 4.15 to do this.  I prefer
-> >> Jan's patch which I have alread release-acked.
-> >>
-> >> Can someone qualified please provide a maintainer review for this,
-> >> ideally today ?
-> >=20
-> > I asked Andrew on IRC:
-> >=20
-> > 12:08 <Diziet> andyhhp__: Are you prepared to maintainer-ack Jan's
-> >                more-minimal hpet workaround approach ?
-> > 12:16 <andyhhp__> Diziet: honestly, no.  I don't consider that
-> >                   acceptable behaviour, and it is a fairly big "f you"
-> >                   (this was literally feedback I got in private) to
-> >                   the downstreams who've spent years trying to get us
-> >                   to fix this bug, and have now backported the first
-> >                   version.
-> > 12:16 <andyhhp__> I'm looking into the feedback on my series
-> > 12:17 <andyhhp__> one way or another, the moment we enter the fallback
-> >                   path for interrupt routing, something is very broken
-> >                   on the system
-> > 12:19 <andyhhp__> so the tradeoff is an unspecified bug on one ancient
-> >                   laptop which can't be tested now, vs 5 years of Atom
-> >                   CPUs, 2 years of latop CPUs, and the forthcoming
-> >                   Server line of Intel CPUs
-> > 12:19 <andyhhp__> or whatever other compromise we can work on
-> >=20
-> > I'm sorry that this bug is going to continue to be not properly fixed.
->=20
-> Actually I had another thought here in the morning, but then didn't
-> write it down: While Andrew's approach indeed would (hopefully)
-> improve user experience, it'll reduce the incentive of actually
-> fixing the issue. Normally I might not be that concerned, but seeing
-> how long it took to even arrive at a workaround, I'm afraid now I am
-> concerned.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Doug Goldstein <cardoe@cardoe.com>
 
-I assume "the issue" you meant "Xen using legacy stuff that stops being
-supported by the hardware", right? Yes it is an issue. But for most
-users of Xen, having it broken more likely will results in "lets switch
-to something that works" (perhaps not after the first such case, but
-this is definitely not the first one) instead of "lets spend some hours
-on debugging this very low level issue".
-And to be honest, this is more and more appealing option, even though
-all the deficiencies of KVM...
+For 4.15.  Add build time testing for a currently untested feature.  This
+should have been part of the series which included 8169f82049efb but I don't
+think it really qualifies for a Fixes: tag.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+RFC for two reasons.  First, this needs extending to other containers when
+I've finished chasing package names, and the CI runs haven't completed yet.
+---
+ .cirrus.yml                              | 2 +-
+ automation/build/alpine/3.12.dockerfile  | 2 ++
+ automation/build/ubuntu/focal.dockerfile | 2 ++
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
---HGjM90Qvvu8CYKe4
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/.cirrus.yml b/.cirrus.yml
+index fdb1c9c94d..05e72b92db 100644
+--- a/.cirrus.yml
++++ b/.cirrus.yml
+@@ -4,7 +4,7 @@ freebsd_template: &FREEBSD_TEMPLATE
+     APPEND_LIB: /usr/local/lib
+     APPEND_INCLUDES: /usr/local/include
+ 
+-  install_script: pkg install -y seabios gmake
++  install_script: pkg install -y seabios gmake zlib bzip2 zstd
+                                  pkgconf python libiconv bison perl5
+                                  yajl lzo2 pixman argp-standalone
+                                  libxml2 glib git
+diff --git a/automation/build/alpine/3.12.dockerfile b/automation/build/alpine/3.12.dockerfile
+index 8631d221db..8d61f3860b 100644
+--- a/automation/build/alpine/3.12.dockerfile
++++ b/automation/build/alpine/3.12.dockerfile
+@@ -38,6 +38,8 @@ RUN \
+   apk add xz-dev && \
+   apk add yajl-dev && \
+   apk add zlib-dev && \
++  apk add bzip2-dev && \
++  apk add zstd-dev && \
+   \
+   # qemu build deps
+   apk add bison && \
+diff --git a/automation/build/ubuntu/focal.dockerfile b/automation/build/ubuntu/focal.dockerfile
+index 6c4565745b..0558519a97 100644
+--- a/automation/build/ubuntu/focal.dockerfile
++++ b/automation/build/ubuntu/focal.dockerfile
+@@ -30,6 +30,8 @@ RUN apt-get update && \
+         bin86 \
+         bcc \
+         liblzma-dev \
++        libzstd-dev \
++        libbz2-dev \
+         # libc6-dev-i386 for Xen < 4.15
+         libc6-dev-i386 \
+         libnl-3-dev \
+-- 
+2.11.0
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmBd5R8ACgkQ24/THMrX
-1yxsPQf8Cf0d+0ZK0PNOYF/Lhl4ZSBvJYARVJYAAxWLmah75hSgU1L0ULKAjuxAX
-sClqzLBOyzZHwJvDBS73jJqKbRDV60svpkpyTmScHsTstvAsr3C/UotnEijONy8x
-RaXvN/EnAfezvdspSXnnupgDKiTBEebFyHoxuqH4brTColq0b+NZXJd3EcGgKcno
-NqTD2H9Cx19Px2FO4/PFobCBLUxWMg1wCL+zB/reYDEV04EmE/xWf7y7bkJ6B2Rs
-H08scvYdjr7008bSIxZAnZBFsnutxXxUrQNEIWE0fKUK1WGMg4m89QvPioseRvWN
-07DnExH45WXVCroaMMhOaz7hC2of7A==
-=RXRN
------END PGP SIGNATURE-----
-
---HGjM90Qvvu8CYKe4--
 
