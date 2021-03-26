@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E083FC433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 07:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22E9FC433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 07:49:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85F2C61992
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 07:48:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85F2C61992
+	by mail.kernel.org (Postfix) with ESMTPS id D8C1161A02
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 07:49:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8C1161A02
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101612.194484 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101615.194496 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPhCj-00079V-DP; Fri, 26 Mar 2021 07:48:25 +0000
+	id 1lPhDe-0007FQ-Ne; Fri, 26 Mar 2021 07:49:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101612.194484; Fri, 26 Mar 2021 07:48:25 +0000
+Received: by outflank-mailman (output) from mailman id 101615.194496; Fri, 26 Mar 2021 07:49:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPhCj-00079O-AC; Fri, 26 Mar 2021 07:48:25 +0000
-Received: by outflank-mailman (input) for mailman id 101612;
- Fri, 26 Mar 2021 07:48:24 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lPhDe-0007FJ-Kd; Fri, 26 Mar 2021 07:49:22 +0000
+Received: by outflank-mailman (input) for mailman id 101615;
+ Fri, 26 Mar 2021 07:49:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+hki=IY=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lPhCi-000790-A1
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 07:48:24 +0000
+ id 1lPhDc-0007FD-MK
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 07:49:20 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e30644c9-fc71-46e2-b204-b4c30cae5538;
- Fri, 26 Mar 2021 07:48:23 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ef035bb3-f850-42e3-9ddf-35eac9c72a3e;
+ Fri, 26 Mar 2021 07:49:19 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 93DD5AD8D;
- Fri, 26 Mar 2021 07:48:22 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 1676BADF1;
+ Fri, 26 Mar 2021 07:49:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,39 +51,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e30644c9-fc71-46e2-b204-b4c30cae5538
+X-Inumbo-ID: ef035bb3-f850-42e3-9ddf-35eac9c72a3e
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1616744902; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1616744959; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=yAgln7FYxkX6fCwdyVACav6m4nzfQzV3nSffvMFUyik=;
-	b=hojvaHjEmP6M7FmtZxe17saHad0MAPwBF+Ht/WWz8LMQ2YXYSYgeD0RzU0qtS1ogtZvgSN
-	xea//YEL380a2yIu/QyZW8t7C0JHVsfTckTHHJ25RXGUsXH3/x+nfrgV4GL833cCEmQVPm
-	518/eCkfUponnlY1mZNiGUFY+3CXmrc=
-Subject: Re: [PATCH for-4.15?] docs/design: Update xenstore-migration.md
+	bh=tx8pHdfaHZgJECaTkkUpSJfSjQ3fgHbIeajI5YrwFJg=;
+	b=ajHm/zJHFkBZTZReZsyjWdb+EMnt2gCszHPn1odl36VvaGy1b0qshtwVaY6vSf0f3VeDBQ
+	5WwcKx864jXYb3tFbGDCx88Jx0+yuMlupOxoUpNf9bYwD3OzloJDnTkalP4L7LZLE4s/NV
+	NIhm/Cpu6oKBm2/E7HHHXnvdJIwyAj8=
+Subject: Re: [PATCH for-4.15?] docs/misc: xenstored: Re-instate and tweak the
+ documentation for XS_RESUME
 To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
 Cc: Julien Grall <jgrall@amazon.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
  <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, raphning@gmail.com,
- edvin.torok@citrix.com
-References: <20210325111255.16330-1-julien@xen.org>
+ paul@xen.org
+References: <20210325180607.13158-1-julien@xen.org>
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <680ae414-cfd2-aba5-c88b-df94b71b49b4@suse.com>
-Date: Fri, 26 Mar 2021 08:48:21 +0100
+Message-ID: <615b1f45-c64a-0917-ab4c-f0bb3a9b80fd@suse.com>
+Date: Fri, 26 Mar 2021 08:49:18 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
 MIME-Version: 1.0
-In-Reply-To: <20210325111255.16330-1-julien@xen.org>
+In-Reply-To: <20210325180607.13158-1-julien@xen.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="CuCItKUWYSKodzkDuVepHOqyXSbSyCa3l"
+ boundary="fblZicCrADbV6gtcuU7krE5wDEmnNjhoK"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---CuCItKUWYSKodzkDuVepHOqyXSbSyCa3l
-Content-Type: multipart/mixed; boundary="bu3yIOYFDMEv6oLBhpLOIroDL50lCIncA";
+--fblZicCrADbV6gtcuU7krE5wDEmnNjhoK
+Content-Type: multipart/mixed; boundary="qEAk6Pvvaak7LVOsnMGf5NL2V6cpocn63";
  protected-headers="v1"
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
@@ -93,41 +93,37 @@ Cc: Julien Grall <jgrall@amazon.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
  <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, raphning@gmail.com,
- edvin.torok@citrix.com
-Message-ID: <680ae414-cfd2-aba5-c88b-df94b71b49b4@suse.com>
-Subject: Re: [PATCH for-4.15?] docs/design: Update xenstore-migration.md
-References: <20210325111255.16330-1-julien@xen.org>
-In-Reply-To: <20210325111255.16330-1-julien@xen.org>
+ paul@xen.org
+Message-ID: <615b1f45-c64a-0917-ab4c-f0bb3a9b80fd@suse.com>
+Subject: Re: [PATCH for-4.15?] docs/misc: xenstored: Re-instate and tweak the
+ documentation for XS_RESUME
+References: <20210325180607.13158-1-julien@xen.org>
+In-Reply-To: <20210325180607.13158-1-julien@xen.org>
 
---bu3yIOYFDMEv6oLBhpLOIroDL50lCIncA
+--qEAk6Pvvaak7LVOsnMGf5NL2V6cpocn63
 Content-Type: multipart/mixed;
- boundary="------------0773380745A4F761A8A503E9"
+ boundary="------------0CFEA9DE27D287AA55357961"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------0773380745A4F761A8A503E9
+--------------0CFEA9DE27D287AA55357961
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 25.03.21 12:12, Julien Grall wrote:
+On 25.03.21 19:06, Julien Grall wrote:
 > From: Julien Grall <jgrall@amazon.com>
 >=20
-> It is not very clear the shared page adddress is not contained in the
-> connection record. Additionally, it is misleading to say the grant
-> will always point to the share paged as a domain is free to revoke the
-> permission. The restore code would need to make sure it doesn't
-> fail/crash if this is happening.
->=20
-> The sentence is now replaced with a paragraph explaining why the GFN is=
+> Commit 13dd372834a4 removed the documentation for XS_RESUME, however
+> this command is still implemented (at least in C Xenstored) and used by=
 
-> not preserved and that the grant is not guarantee to exist during
-> restore.
+> libxl when resuming a domain.
 >=20
-> Take the opportunity to replace "code" with "node" when description the=
+> So re-instate the documentation for the XS_RESUME. Take the opportunity=
 
-> permission.
+> to update it as there is a user of the command.
 >=20
-> Reported-by: Raphael Ning <raphning@amazon.com>
+> Fixes: 13dd372834a4 ("docs/designs: re-work the xenstore migration docu=
+ment...")
 > Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 Reviewed-by: Juergen Gross <jgross@suse.com>
@@ -135,7 +131,7 @@ Reviewed-by: Juergen Gross <jgross@suse.com>
 
 Juergen
 
---------------0773380745A4F761A8A503E9
+--------------0CFEA9DE27D287AA55357961
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -226,25 +222,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------0773380745A4F761A8A503E9--
+--------------0CFEA9DE27D287AA55357961--
 
---bu3yIOYFDMEv6oLBhpLOIroDL50lCIncA--
+--qEAk6Pvvaak7LVOsnMGf5NL2V6cpocn63--
 
---CuCItKUWYSKodzkDuVepHOqyXSbSyCa3l
+--fblZicCrADbV6gtcuU7krE5wDEmnNjhoK
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmBdkcUFAwAAAAAACgkQsN6d1ii/Ey+J
-Tgf9Gdf1vNWjBOxvqka9FADOKVhcWsDPEKQH5wGpyNv2GSkHC4s+qq3gSVWi8Lfly2lGkSFZxMOS
-lpHMTz6NkhVGZV0AhRTDBYrr2wFNG4kQlr0HhGTxgv0VE4xFQre8g+L8nAcT6isF5fwce27X2v5S
-Q+26AEL/6n3tnkH/tdIZxDWft9uPCzRVSaKpeNc2zNP4jpk6zAwMkRf/Glk+bDT+UyrFrzMIytpq
-NxVoKdIhleELZ+Xt/orJGSqH7m3Q8fCkcMF/DoOWBUUguSIyxKECluqffF1qddsx2QmkrFAfTIJG
-q7NYFR0uNphXbrhCc8kw9OpUjWK1hi86OebnWRvznQ==
-=1Qk3
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmBdkf4FAwAAAAAACgkQsN6d1ii/Ey/H
+2QgAmDvRghRoFA8WEvQMpX23VVeRqmGJrDsXc5FzPGEojaiMOVE2A69JREYiJ0SZJTlgj+Plzy9h
+iTlhzxgUZNccrx3HQNZePqnxDNf102mqJXaWsTnz2ju0iG5Lc8a2yz6qi0flmgO8j2EmsicQXa95
+AFOpoE28DWsddD7yGR3BaXDFoZtB4rbZDlMvGEVvqT+NkHwKDDnnJnjKeBhxaL3LOAaxjTPIwgtD
+ksK834GoNpRJB2Xq25Rqlps/jUpbVum/P7eg1YKLQs272XuO11P03Uu9YDNTs7BZRMw9dWrkZ2ZT
+OLulVSfN34dXRYdti+BS8oDR7iXUY/A/Zz1bFCh93Q==
+=5PXi
 -----END PGP SIGNATURE-----
 
---CuCItKUWYSKodzkDuVepHOqyXSbSyCa3l--
+--fblZicCrADbV6gtcuU7krE5wDEmnNjhoK--
 
