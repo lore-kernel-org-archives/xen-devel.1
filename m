@@ -2,47 +2,45 @@ Return-Path: <SRS0=uMCZ=IY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41A69C433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 11:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C164C433C1
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 11:56:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA78C61585
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 11:54:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA78C61585
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id B32F461585
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 11:56:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B32F461585
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101727.194713 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101733.194725 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPl2C-00028A-BD; Fri, 26 Mar 2021 11:53:48 +0000
+	id 1lPl4f-0002Hu-RD; Fri, 26 Mar 2021 11:56:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101727.194713; Fri, 26 Mar 2021 11:53:48 +0000
+Received: by outflank-mailman (output) from mailman id 101733.194725; Fri, 26 Mar 2021 11:56:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPl2C-000283-8B; Fri, 26 Mar 2021 11:53:48 +0000
-Received: by outflank-mailman (input) for mailman id 101727;
- Fri, 26 Mar 2021 11:53:46 +0000
+	id 1lPl4f-0002Hn-Me; Fri, 26 Mar 2021 11:56:21 +0000
+Received: by outflank-mailman (input) for mailman id 101733;
+ Fri, 26 Mar 2021 11:56:20 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lPl2A-00027y-Tc
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 11:53:46 +0000
+ (envelope-from <julien@xen.org>) id 1lPl4e-0002Hh-7C
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 11:56:20 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lPl2A-0005tn-Pf
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 11:53:46 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lPl2A-0008JN-Oq
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 11:53:46 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1lPl1z-0002K3-6Q; Fri, 26 Mar 2021 11:53:35 +0000
+ (envelope-from <julien@xen.org>)
+ id 1lPl4W-0005vn-Fv; Fri, 26 Mar 2021 11:56:12 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lPl4W-00008N-AQ; Fri, 26 Mar 2021 11:56:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,52 +52,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=c5aNGwLinAeVYu9H8GNs+QPI3/kTyPAs2J8h1C8Rb1E=; b=AGkave4JlrKttIvwr/y0YS5Vfr
-	tQC8HhvN3MgxCGx7JhGroyHfNUwsyPbOYz1Kx4O/7zyptA8xLFA5G9E7SDX46V6yITneE34ayjeJ3
-	A+fyIIL3gLHvJC9su06j2hNMXqcomgGK+Ogp5Zloow4DtuMWePq4fo4ruw1YSjwz2BTo=;
-From: Ian Jackson <iwj@xenproject.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=unXj0uiO50G30n+3QelLpUREJQwtOcnuPyn99KqDsIs=; b=cfay5yX2LQZ8FuTbsaoOilbaSu
+	i1T2rf8APfkbhqtMqBROD6I/ov2kXeKSx8Nl4QMk8rpQQnRUuw2KuBEJvjtNxP7lcROWIOwZtUQRi
+	hlxK7u8rh+V6p3pSUgHy82BkniYf4wOtcsg3ReANfxD4hX4gjPqEGDYeJHMGAAwt3/Ys=;
+Subject: Re: [PATCH for-next v2 2/2] xen/arm64: Place a speculation barrier
+ following an ret instruction
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Julien Grall <jgrall@amazon.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ "Xen.org security team" <security@xen.org>
+References: <20210313160611.18665-1-julien@xen.org>
+ <20210313160611.18665-3-julien@xen.org>
+ <C0FD2269-4D00-480A-94AC-61663E0C9E94@arm.com>
+ <50175d48-6f0b-2d96-8ea9-33f4f65f920f@xen.org>
+ <342BA51C-80BE-4393-997E-6C5830CB57A1@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <4dd05515-b65e-e690-1891-5fd24400e385@xen.org>
+Date: Fri, 26 Mar 2021 11:56:10 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24669.52030.995324.426028@mariner.uk.xensource.com>
-Date: Fri, 26 Mar 2021 11:53:34 +0000
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-    andrew.cooper3@citrix.com,
-    roger.pau@citrix.com,
-    wl@xen.org,
-    stephen.s.brennan@oracle.com,
-    xen-devel@lists.xenproject.org
-Subject: Re: [PATCH][4.15] Performance regression due to XSA-336
-In-Reply-To: <e3657f74-5b62-fe59-3bbf-41df5fbe4593@suse.com>
-References: <1616619905-640-1-git-send-email-boris.ostrovsky@oracle.com>
-	<e3657f74-5b62-fe59-3bbf-41df5fbe4593@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+In-Reply-To: <342BA51C-80BE-4393-997E-6C5830CB57A1@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-Jan Beulich writes ("Re: [PATCH][4.15] Performance regression due to XSA-336"):
-> While the change is more intrusive than one would like at this point, an
-> up-to-40% regression imo makes this at least a change to be considered
-> for 4.15. I will admit though that before next week I won't get around
-> to look at this in any more detail than just having read through this
-> cover letter. But perhaps someone else might find time earlier.
 
-As I understand it:
 
-This amounts to a request to consider a release ack for "x86/vpt:
-Replace per-guest pt_migrate lock with per pt lock".
+On 26/03/2021 11:13, Bertrand Marquis wrote:
+> Hi Julien,
 
-That patch fixes a regression due to XSA-336.  XSA-336 affected many
-versions of Xen.  Therefore this is not a regression between 4.14 and
-4.15; rather it's a regresion from pre-XSA-336 to post-XSA-336.
+Hi Bertrand,
 
-I looked at the patch and I am really not comfortable with that kind
-of change at this stage of the release.
+>> On 20 Mar 2021, at 13:13, Julien Grall <julien@xen.org> wrote:
+>>
+>> (+ Security)
+>>
+>>
+>> On 17/03/2021 14:56, Bertrand Marquis wrote:
+>>> Hi Julien,
+>>
+>> Hi Bertrand,
+>>
+>>>> On 13 Mar 2021, at 16:06, Julien Grall <julien@xen.org> wrote:
+>>>>
+>>>> From: Julien Grall <jgrall@amazon.com>
+>>>>
+>>>> Some CPUs can speculate past a RET instruction and potentially perform
+>>>> speculative accesses to memory before processing the return.
+>>>>
+>>>> There is no known gadget available after the RET instruction today.
+>>>> However some of the registers (such as in check_pending_guest_serror())
+>>>> may contain a value provided by the guest.
+>>>>
+>>>> In order to harden the code, it would be better to add a speculation
+>>>> barrier after each RET instruction. The performance impact is meant to
+>>>> be negligeable as the speculation barrier is not meant to be
+>>>> architecturally executed.
+>>>>
+>>>> Rather than manually inserting a speculation barrier, use a macro
+>>>> which overrides the mnemonic RET and replace with RET + SB. We need to
+>>>> use the opcode for RET to prevent any macro recursion.
+>>>>
+>>>> This patch is only covering the assembly code. C code would need to be
+>>>> covered separately using the compiler support.
+>>>>
+>>>> This is part of the work to mitigate straight-line speculation.
+>>>>
+>>>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>>> The macro solution is definitely a great improvement compared to v1 and I could
+>>> confirm the presence of the sb in the generated code.
+>>
+>> Thanks for testing! It is indeed a lot nicer and less error-prone. We can thansk Jan for the idea as he originally introduced it on x86 :).
+>>
+>>> I also think that the mitigation on arm32/v7 would be messy to do.
+>>
+>> It is messy but not impossible :). Some of the assembly function could be rewritten in C to take advantage of the compiler mitigations.
+>>
+>> I went through the paper again today. Straight-line mitigation only refers to unconditional control flow change (e.g. RET) on AArch64 Armv8.
+>>
+>> A recent submission to LLVM seems to suggest that Armv7 and AArch32 Armv8 is also affected [2].
+> 
+> Thanks for the pointer :-)
+> 
+>>
+>> So I think we only need to care of unconditional return instruction (e.g. mov pc, lr).
+>>
+>> For conditional return instructions, they would be treated as spectre v2 which we already mitigate.
+> 
+> That would be a good idea but that would mean lots of invasive changes on armv7 and
+It is not quite clear which change you think is invasive... The change 
+for adding a barrier after all unconditional return instruction is 
+pretty straight-forward.
 
-So I'm afraid the answer is no, unless I have misunderstood something.
+Regarding conditional return instructions, then is nothing to do for 
+straight-line speculation.
 
-Regards,
-Ian.
+> this is not the mostly tested architecture with Xen.
+To me this looks very subjective, how do you define "mostly tested"?
+
+ From Xen Project perspective, we run the same test suite on arm64 and 
+arm32 multiple time daily. I couldn't say the same for some of the Arm 
+drivers in the tree.
+
+> Anyway I am happy to help reviewing this if it is done.
+> 
+>>
+>>> Shall we mark v7/aarch32 as not security supported ?
+>> This would have consequence beyond just speculation. There might be processor out which are not affected by straight-line speculation and we would not issue any security update for them. So I am not in favor with this approach.
+>>
+>> What we could consider is mentioning in SUPPORT.MD that speculation attack using Straight-Line speculation are not security support on Arm (the 64-bit is not fully mitigated).
+> 
+> Weird to say “not security supported” maybe saying not mitigated by Xen would be more clear.
+
+I am open for the wording :).
+
+Cheers,
+
+-- 
+Julien Grall
 
