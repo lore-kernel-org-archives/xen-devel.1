@@ -2,47 +2,47 @@ Return-Path: <SRS0=uMCZ=IY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC075C433C1
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 14:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C989C433C1
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 14:11:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 664B261A24
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 14:07:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 664B261A24
+	by mail.kernel.org (Postfix) with ESMTPS id 0FB0F619EE
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 14:11:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FB0F619EE
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101846.195064 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.101852.195077 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPn7O-00032T-Rh; Fri, 26 Mar 2021 14:07:18 +0000
+	id 1lPnAw-0004CR-B3; Fri, 26 Mar 2021 14:10:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101846.195064; Fri, 26 Mar 2021 14:07:18 +0000
+Received: by outflank-mailman (output) from mailman id 101852.195077; Fri, 26 Mar 2021 14:10:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPn7O-00032M-Oa; Fri, 26 Mar 2021 14:07:18 +0000
-Received: by outflank-mailman (input) for mailman id 101846;
- Fri, 26 Mar 2021 14:07:17 +0000
+	id 1lPnAw-0004CK-7s; Fri, 26 Mar 2021 14:10:58 +0000
+Received: by outflank-mailman (input) for mailman id 101852;
+ Fri, 26 Mar 2021 14:10:56 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lPn7N-00032H-PF
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 14:07:17 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lPnAu-0004CF-8w
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 14:10:56 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lPn7N-0008JC-Ml
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 14:07:17 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lPnAt-0008NT-QY
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 14:10:55 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1lPn7N-0002O0-Ll
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 14:07:17 +0000
+ (envelope-from <iwj@xenproject.org>) id 1lPnAt-0002cE-PO
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 14:10:55 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1lPn7F-0002l6-Dy; Fri, 26 Mar 2021 14:07:09 +0000
+ id 1lPnAq-0002mQ-9a; Fri, 26 Mar 2021 14:10:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,71 +55,32 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:CC:To:Date
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=mbdj9qMK5fAVTq8jbTpx8PlkEojetXFvmPFUtkRUyhs=; b=kIUEhUJ1Ej+WRI+LvHIzzJ1IeD
-	ygupU7Sa2aVZx1O51xwNwYqpJw13+aVGdzbWmmdY5Xyc3SzRhbNLoHgK4q20ozlIdtawwdx4dNgOR
-	vIfJCBYnQy7pGlncIMphw7NMzHbW7h752jjsykh5j8saIK/AnUKT5hkHY3297Zqhv4kk=;
+	bh=1R3ySF5CbH94c9fx9B2ycerhqIEhh+lWWSAV80xKuts=; b=NBz4z4Lc2Uf4Uhbza+c3fKmS1a
+	ftI5mPbD+RS83XcUacgGo1dnsrPkJUQre16sv7q4lFbHH5+WzhyWAOAq/hJxmzZ8IkDYFMH+WGBlg
+	pG8cWszo46C12OND/eKgxshc1jgkSKc6ixSVAj/z3WdWus1YhfiFZMSGH/67SkMSXBV0=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24669.60045.100353.660483@mariner.uk.xensource.com>
-Date: Fri, 26 Mar 2021 14:07:09 +0000
-To: committers@xenproject.org
-CC: Jan Beulich <jbeulich@suse.com>,
-    Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-    Andrew Cooper <andrew.cooper3@citrix.com>,
-    Xen-devel <xen-devel@lists.xenproject.org>,
+Message-ID: <24669.60267.962692.954979@mariner.uk.xensource.com>
+Date: Fri, 26 Mar 2021 14:10:51 +0000
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
     Wei Liu <wl@xen.org>,
-    Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?=  <marmarek@invisiblethingslab.com>,
-    =?iso-8859-1?Q?Fr=E9d=E9ric?= Pierret <frederic.pierret@qubes-os.org>,
-    Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Subject: Re: [PATCH v1.1 2/2] x86/hpet: Don't enable legacy replacement mode
- unconditionally
-In-Reply-To: <be87024c-3079-1b4f-5053-bb40bfab406a@suse.com>
-References: <20210325165224.10306-3-andrew.cooper3@citrix.com>
-	<20210325172132.14980-1-andrew.cooper3@citrix.com>
-	<24669.52641.499147.88002@mariner.uk.xensource.com>
-	<24669.54213.173154.400771@mariner.uk.xensource.com>
-	<CABfawh=O1hdycEr0+=JXU6USZ8DAzQvKoXQOnRnoWL643FTa+g@mail.gmail.com>
-	<24669.56958.383583.53595@mariner.uk.xensource.com>
-	<be87024c-3079-1b4f-5053-bb40bfab406a@suse.com>
+    Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: [PATCH 2/2] CI: Add zstd/etc libraries to build environments
+In-Reply-To: <20210326134558.7751-3-andrew.cooper3@citrix.com>
+References: <20210326134558.7751-1-andrew.cooper3@citrix.com>
+	<20210326134558.7751-3-andrew.cooper3@citrix.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Jan Beulich writes ("Re: [PATCH v1.1 2/2] x86/hpet: Don't enable legacy replacement mode unconditionally"):
-> TBH delaying the release for this specific problem should be seriously
-> considered imo. In principle I'm in favor of (3) of the above, if there
-> weren't the downsides I did mention in prior mails.
+Andrew Cooper writes ("[PATCH 2/2] CI: Add zstd/etc libraries to build environments"):
+> zstd compression support is new in 4.15, but isn't currently tested anywhere
+> in CI.
+> 
+> bzip2/zlib was missing in some cases, so add those as well.
 
-Thanks for putting forward your opinion.  I am always happy to hear
-what people say and this input is very valuable.  However:
-
-I am not inclined to delay the release over this.  Delaying the
-release might be appropriate if this problem was unforeseen and
-recently discovered, late in the freeze.  But it was not.
-
-That there was a significant regression caused by e1de4c196a2e
-  x86/timer: Fix boot on Intel systems using ITSSPRC static PIT clock gating
-was already known at least by the 24th of February[1].
-
-Since then, that change has been at risk of being reverted if it went
-unfixed.  Unfortunately the the first cut of patches to try fix this
-something like properly were only posted yesterday.
-
-It is up to everyone who wants something to make it into the release,
-to make sure that the code is ready in time.  That includes sorting
-out any regressions it introduces.  In the case of e1de4c196a2e that
-has not occurred.
-
-It doesn't seem to me that we will have sufficient confidence in the
-more comphrenesive fix, for it to go into staging-4.15 today.
-
-I think the appropriate course, therefore, is the conditional (based
-on commaned line) revert proposed by Jan.
-
-Sorry,
-Ian.
-
-[1] https://lists.xenproject.org/archives/html/xen-devel/2021-02/msg01533.html
+Release-Acked-by: Ian Jackson <iwj@xenproject.org>
 
