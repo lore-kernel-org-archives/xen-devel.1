@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D56DFC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 19:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D07BC433DB
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 19:00:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 63BE16193F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 19:00:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 63BE16193F
+	by mail.kernel.org (Postfix) with ESMTPS id D7E74619A3
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 19:00:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D7E74619A3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.102055.195499 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.102056.195511 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPrgp-0007VO-Sp; Fri, 26 Mar 2021 19:00:11 +0000
+	id 1lPrgv-0007ZY-Ad; Fri, 26 Mar 2021 19:00:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 102055.195499; Fri, 26 Mar 2021 19:00:11 +0000
+Received: by outflank-mailman (output) from mailman id 102056.195511; Fri, 26 Mar 2021 19:00:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPrgp-0007VF-Pk; Fri, 26 Mar 2021 19:00:11 +0000
-Received: by outflank-mailman (input) for mailman id 102055;
- Fri, 26 Mar 2021 19:00:10 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lPrgv-0007ZM-7K; Fri, 26 Mar 2021 19:00:17 +0000
+Received: by outflank-mailman (input) for mailman id 102056;
+ Fri, 26 Mar 2021 19:00:15 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MLVS=IY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lPrgo-0007Ut-NB
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 19:00:10 +0000
+ id 1lPrgt-0007YF-Dl
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 19:00:15 +0000
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 36518861-707e-490e-81d4-4a6817d0faed;
- Fri, 26 Mar 2021 19:00:08 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 921b78e8-fa6d-4e3d-b97b-20b3fe291f33;
+ Fri, 26 Mar 2021 19:00:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,55 +48,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36518861-707e-490e-81d4-4a6817d0faed
+X-Inumbo-ID: 921b78e8-fa6d-4e3d-b97b-20b3fe291f33
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1616785208;
+  d=citrix.com; s=securemail; t=1616785214;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=hoKdN8csoqaelamoWrWzTqNBSKLs0axyRHUC7J8rEEM=;
-  b=gx1r9eI73xNbKuUiua2I/lygw/wRiyTVDbC+8peT8iR7g3rzW4LAQYMm
-   CUBVwtkvakv0/XhDtupEEExCVj+6UpV1s6+0jAeQ6eobtALPIYtPfmkLD
-   D2xuxWWNllX6/vgbVasPvR6VQvf/ZOxGc6NpvQrErMZw9RLMQVJY5L0EH
-   c=;
+  bh=Owj/a0DofXQQ1pbrqHaoX4QZh8e96kJPF3mOvOw79JI=;
+  b=dg2HOhy4dwC0tN4caOKSHYpERJEpLPzx41zc7pSGGrsjguP/q3+X9d8J
+   Ic5loMKRwuWZ/JS6lClpGWe6EmnQ8JuYJEAqFHjj8XW9ZVh4m/tsJTDY5
+   dhkSrxOk4P7liK+7fooezSeDtrGWgqBpzrYFBPUnm/pUgiuORsIyNmSFE
+   4=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: zsK55gemVstwCTyRH4LtBkpgWq9VD3bgys0Wg2m345eRf9KH+ZOWQsUCzxvlpCQPx6z3eNtMRS
- u7T24eJQzpBkY42Covx4PExdpw+9NwYbNoO3rWzSrUz2fLYS34+n3g+RP1buqJZ2qv6JwcZFV+
- OGmCxPiGC2QaT/ExROJqUGkf/3X2ot9zS1Tmx16i7HVpZnoZ6Jk/s+QcsQuUbrINkchvV0OiF9
- 2Y4CC/qWPy8FFXWPLGlPUDj0y2NavoMscCXumMKBsxmFQ+BMSmGmjfTyZZvyHXxa9XsbhybYdw
- nhA=
+IronPort-SDR: iUTJQ4F+iFWnnIvdcpZl+54dk/M1KanUpRnRglrSjSC1p6miXqPe5wm4dYwxZNJqdCJ1554XmY
+ 1ugTvLbKpAUFXax6CUsXSq7D7UseF5dkqKv7OQ40jqdPDazoO8ACduyvkfmkibfyzOD1GpaCYb
+ 47uQtuBqUkxvgFQlgwZiRdtOdYZiO1OJoqLAQ+tGf+B0kgOBx6PhnwznToxmpzOyfCraZXXyxu
+ SySCEUqpqHDkjgVYg3vE9jjRGBOO7OVshs1VyJWMu47PkzNYoeKTuPgQ64o8cbx5eGpGn4hMFy
+ iCU=
 X-SBRS: 4.0
-X-MesageID: 40605106
+X-MesageID: 40605116
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:m83dP606WrBnf0xHY/R78gqjBal2eYIsi2QD101hICF9Wvez0+
- izgfUW0gL1gj4NWHcm3euNIrWEXGm0z/FIyKErF/OHUBP9sGWlaLtj44zr3iH6F0TFmtJ1/Z
- xLN5JzANiYNzVHpO7x6gWgDpIEyN6I7KiniY7lvg1QZCthApsQtTtRIACdD0FwWU1iDZ02CJ
- KT6qN81kedUF4Qadm2AWRAYvjbq7Tw5d7bSDMlJzpi0gmBiju09KX3eiL34j4yWy5CqI1Sl1
- TtvBf+4syYwpKG4z/ak1Te9pFH3Obmo+Ezf/CkrugwBnHShh2zZIJnMofy8wwdhO208l4lnJ
- 3tjn4bTr1OwkjcdG20vhfhsjOIuF1Fih/f4GSVjnf5rcvySChSMbs4uatibhDb50A81esMtZ
- 5j4mODu5JbSTPGkSjtjuK4MC1Cq0uurXIu1dMUlnxUOLFuDIN5kIp3xjI2LL4wWAbBrKw3Gu
- hnC8/RoNxMd0mBUnzftm5zhPSxQ3UaBH69Mwk/k/3Q9wITsGFyzkMeysBatGwH7ogBR55N4P
- mBGrh0lYtJUtQdYctGdac8aPryLlaIbQPHMWqUL1iiProAIWjxp5n+56hww+22ZpoSzt8XlI
- 7aWF1V8U4+EnieSvGm7dluyFTgUW+9VTPixoV1/J5ioIDxQ7LtLGmNU1Yrn8y8o+gOA8HSVv
- qpUagmRsPLHC/LI8Jkzgf+U55dJT01S8sOoOs2XFqIv4bKJ+TRx6jmWceWAICoPScvW2v5DH
- dGdiP0Pt984keiXWK9hBDQXnjqa1Hu5J4YKtmcw8EjjKw2cqFcuAkcjlq0ouuRLydZj6AwdE
- xiZLX9kq26omGy9X3S73pgPwdcCko92sSjb1p64Ssxd2/ke7cKvNuSPUpI2mGcGxN5R8TKVB
- JEq09v4qKxJZyIzSUkA9aqW1jqyUc7lTavddMxi6eD7cDqdtcEFZ4gQrV2DhiOPQdygxxWpG
- BKbxIkSkfTGij1s7isiIUZCYjkBoBBqTbuBfQRiHrE8W2AuMkkRxIgLkKTeP/SpTxreh15qR
- la9bQFjL+JhDC1QFFP/9gQARlrc2SYALVPEQKfQp5b84qbNj1YfCO0vBjfpzYYPlHH2WU3qg
- XaXHGpUMCOPWN4/l5i9JrStHNYH1/tIn5YWzREiKk4NEL9hx9IoLS2T5v27FK0Lns5hsAsGw
- rkTFIpU1xT7uHy6yew3BK5OzEH6/wVT7TgJbw+brDe3W6sIoWUlacAW+RZ5ophKcqGiJ50bc
- uFfROJIC7/YtlZrzC9tzIrPjJ5p2Ijlu6t0Br57HKg1Hp6GvbKJk96LotraO20/izhR/yS1o
- 9+gs9wteysMn/pYtru89CfUxdTbhfSq3WxVecmtNRdur8zrqJ6G93eXSHT3H9KmBU4I8Gcrj
- JXfI1rpLTAMJRoZcocZmZQ+Ucojs2GKA8zqRPta9VOCG0FnjveJZeE8rDIob0gDgmIoxbxI0
- CW92lY8+3eVyWO2LYGA8sLUC5rQVl57G4n8PKJdoXWBgnvbe1F8VagOnK2cbNWSsG+aMMthw
- c/58vNk/6cdiL+1gyVoCByJbhW9X27Bcy1GwCBFIdzgpGHEEXJhrHv5sG9jD36E2TmL0sZgJ
- BIbkwWYIBIjCI4gIg+zyi1Tej2ryse4ihjyCAikkSo3I6spHrfFwVBNwbSh51NRzldMnSSl6
- 3+gJ+l/WW45CIAwIXJEUdbY8pHFNcRRJXmNisGE7lhgJe4u640xjlZaBggD2QgmCnw0uNv07
- C+wujTUYTZeAXVEENE/yVECI5yljEqrm8Fc9HW1+PNXjkq
+IronPort-HdrOrdr: A9a23:0hFm9qqWi6uyRAbsXIigvGMaV5uTKtV00zAX/kB9WHVpW+SivY
+ SHgOkb2RjoiDwYRXEnnpS6NLOdRG7HnKQa3aA4Bp3neAX9omOnIMVZ7YXkyyD9ACGWzIFg/I
+ 9aWexFBNX0ZGIXse/T6gO1Cstl5dGB/ryhi+u29QYRcShBbaZ84wBlTiOSFUNrTAdLbKBJaK
+ a0zMxBujamZDArft22b0N1E9Triv/qsNbdYRAADwM68wXmt1KVwZPzDhTw5GZmbxph2rEnmF
+ K18TDRxqLmiP2jzw+Z6mm71eUtpPLE6v9uQPOBkdIULDKEsHfmWK1EV6eZtD445MGDgWxa6O
+ XkmBsrM8Rt5365RAjcynGBu3iC7B8U53Dv0lOei3f4yPaJPw4SMMZdmZlfNiLQ9ktIhqAk7I
+ tww2mbu5BLZCmw+BjV2tnSWxlm0mqyrHYy+NRj6UB3bIoEZLdd6bEY5UNeea1wex7S1YZPKp
+ gKMOjsoNJtNX+KZXHQuWdihPa2WG4oIxuASk8e/uSIzjl/hhlCvgUl7f1auk1F2IM2SpFC6e
+ iBGL9vjqtyQsgfar84LPsdQPGwFnfGTXv3QSOvCGWiMJtCF2PGqpbx7rlwzvqtYoY0wJw7n4
+ mEd19Eq2goeQbLBdeV1JNGtjDBKV/NHQjF+4V73dxUq7f8TL3kPWmoU1Y1ifatpP0ZH4nVQP
+ C2NJVKA+LyLGfnFIpTtjeOGaV6GD07aok4q9w7U1WBrobgMYvxrNHWd/7VOf7sHF8fKybCK0
+ pGeAK2CNRL70itVHO9qgPWQWnRdkv2+o81FKDb+uMU2ZUcL4EkiHlQtX2JouWwbRFSuK0/e0
+ VzZJn9lLmgmGWw9WHUq2NzOhRcCU5R6K76U2xDoBILN0+cS8dBh/yvPURpmFeXLB52SM3bVC
+ RFoU5sxK6xJ5uMgTw5B8m/KWKchXsLrHeMR5MR85fzovvNS9cdNNILSaZxHQLEG1hJgg5ssn
+ 5EcxJBbFTYDCnShaKsi4E0COnTe8JnuhqiJddZpBvkxAOhjPBqYkFefja1FeaLnA4lRlNv9y
+ JM2p5apIDFpBGCBi8Uhv8iPFhFdWKNaYg2cjitVcFzgbDkeAZ5UGGQoyeV4itDIlbC/1kOh2
+ DnMC2fcezKBF0YoXxDzqP26jpPBxSgVlM1ZXZgvYJnE2Pa/n51zO+Qf6K2l3Ccc10Y34gmQX
+ r4SCpXJgNl3Nas0hGJ3D6ECHU9350rV9atRYgLYvXW2nm3LpePmrxDF/hI/Ix9PNSrtuMQS+
+ qQd0uUKzz/YtlZkzC9tzIgOCNurmMjnu6t0Br57HKg1Hp6GOHMOj1dNsUmCsDZ63KhS+eD0Z
+ 1/g95wteysMn/pYtrDza3MdTZMJh7avGbedZBjlblE+aYp8LdjFZjSVjXFkGtK2xgzN8/4nk
+ ITSqYT2sG2BqZ/O8gJPy5J9Fsgk9qCaFYxugvtG+kkYBUjiWTYM97h2cuElZM/Rkma4A3+Nl
+ mU/3cDo7PLXy6f2aUbDKx1K2JMc0Q44Glj+uTHd4C4MnTZS8hTuF6hdnm6e/tBTaLAH7MapB
+ Nz+cuJkO+abDCQ4nGmgRJrZqZVt3+6SsazCh+WEeFG89amKU2B65Hak/KbnXPyU3+ncEwWio
+ 1OaFwIYslCgjckipcr0iLacN2Dnms1111E4T9mkVbx2o+ppGfDdHs2QTHkvg==
 X-IronPort-AV: E=Sophos;i="5.81,281,1610427600"; 
-   d="scan'208";a="40605106"
+   d="scan'208";a="40605116"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
@@ -106,9 +103,9 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<iwj@xenproject.org>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
 	<marmarek@invisiblethingslab.com>, =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Pierret?=
 	<frederic.pierret@qubes-os.org>
-Subject: [PATCH v2 3/3] x86/hpet: Restore old configuration if Legacy Replacement mode doesn't help
-Date: Fri, 26 Mar 2021 18:59:47 +0000
-Message-ID: <20210326185947.23243-4-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 1/3] x86/hpet: Factor hpet_enable_legacy_replacement_mode() out of hpet_setup()
+Date: Fri, 26 Mar 2021 18:59:45 +0000
+Message-ID: <20210326185947.23243-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210326185947.23243-1-andrew.cooper3@citrix.com>
 References: <20210326185947.23243-1-andrew.cooper3@citrix.com>
@@ -116,10 +113,12 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-If Legacy Replacement mode doesn't help in check_timer(), restore the old
-configuration before falling back to other workarounds.
+... in preparation to introduce a second caller.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
@@ -128,109 +127,165 @@ CC: Ian Jackson <iwj@xenproject.org>
 CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 CC: Frédéric Pierret <frederic.pierret@qubes-os.org>
 
+For 4.15.  Pre-req for trying to unbreak AMD Ryzen 1800X systems.
+
 v2:
- * New.
-
-For 4.15: Attempt to unbreak AMD Ryzen 1800X systems.
-
-I'm tempted to fold this into the previous patch, but its presented here in
-isolation for ease of review.
-
-Tested by repositioning the timer_irq_works() calls on a system with a working
-PIT.
-
-(XEN) ENABLING IO-APIC IRQs
-(XEN)  -> Using old ACK method
-(XEN) ..TIMER: vector=0xF0 apic1=0 pin1=2 apic2=0 pin2=0
-(XEN) ..no 8254 timer found - trying HPET Legacy Replacement Mode
-(XEN) ..no HPET timer found - reverting Legacy Replacement Mode
-(XEN) TSC deadline timer enabled
+ * s/u64/uint64_t/
+ * Drop id local variable
 ---
- xen/arch/x86/hpet.c        | 27 ++++++++++++++++++++++++++-
- xen/arch/x86/io_apic.c     |  4 ++++
- xen/include/asm-x86/hpet.h |  6 ++++++
- 3 files changed, 36 insertions(+), 1 deletion(-)
+ xen/arch/x86/hpet.c        | 116 ++++++++++++++++++++++++---------------------
+ xen/include/asm-x86/hpet.h |   6 +++
+ 2 files changed, 68 insertions(+), 54 deletions(-)
 
 diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
-index bfa75f135a..afe104dc93 100644
+index 1ff005fb4a..c1d04f184f 100644
 --- a/xen/arch/x86/hpet.c
 +++ b/xen/arch/x86/hpet.c
-@@ -783,6 +783,9 @@ int hpet_legacy_irq_tick(void)
- 
- static u32 *hpet_boot_cfg;
- static uint64_t __initdata hpet_rate;
-+static __initdata struct {
-+    uint32_t cmp, cfg;
-+} pre_legacy_c0;
- 
- bool __init hpet_enable_legacy_replacement_mode(void)
- {
-@@ -796,8 +799,11 @@ bool __init hpet_enable_legacy_replacement_mode(void)
-     /* Stop the main counter. */
-     hpet_write32(cfg & ~HPET_CFG_ENABLE, HPET_CFG);
- 
-+    /* Stash channel 0's old CFG/CMP incase we need to undo. */
-+    pre_legacy_c0.cfg = c0_cfg = hpet_read32(HPET_Tn_CFG(0));
-+    pre_legacy_c0.cmp = hpet_read32(HPET_Tn_CMP(0));
-+
-     /* Reconfigure channel 0 to be 32bit periodic. */
--    c0_cfg = hpet_read32(HPET_Tn_CFG(0));
-     c0_cfg |= (HPET_TN_ENABLE | HPET_TN_PERIODIC | HPET_TN_SETVAL |
-                HPET_TN_32BIT);
-     hpet_write32(c0_cfg, HPET_Tn_CFG(0));
-@@ -843,6 +849,25 @@ bool __init hpet_enable_legacy_replacement_mode(void)
-     return true;
+@@ -754,11 +754,70 @@ int hpet_legacy_irq_tick(void)
  }
  
-+void __init hpet_disable_legacy_replacement_mode(void)
+ static u32 *hpet_boot_cfg;
++static uint64_t __initdata hpet_rate;
++
++bool __init hpet_enable_legacy_replacement_mode(void)
 +{
-+    unsigned int cfg = hpet_read32(HPET_CFG);
++    unsigned int cfg, c0_cfg, ticks, count;
 +
-+    ASSERT(hpet_rate);
++    if ( !hpet_rate ||
++         !(hpet_read32(HPET_ID) & HPET_ID_LEGSUP) ||
++         ((cfg = hpet_read32(HPET_CFG)) & HPET_CFG_LEGACY) )
++        return false;
 +
-+    cfg &= ~(HPET_CFG_LEGACY | HPET_CFG_ENABLE);
++    /* Stop the main counter. */
++    hpet_write32(cfg & ~HPET_CFG_ENABLE, HPET_CFG);
 +
-+    /* Stop the main counter and disable legacy mode. */
-+    hpet_write32(cfg, HPET_CFG);
++    /* Reconfigure channel 0 to be 32bit periodic. */
++    c0_cfg = hpet_read32(HPET_Tn_CFG(0));
++    c0_cfg |= (HPET_TN_ENABLE | HPET_TN_PERIODIC | HPET_TN_SETVAL |
++               HPET_TN_32BIT);
++    hpet_write32(c0_cfg, HPET_Tn_CFG(0));
 +
-+    /* Restore pre-Legacy Replacement Mode settings. */
-+    hpet_write32(pre_legacy_c0.cfg, HPET_Tn_CFG(0));
-+    hpet_write32(pre_legacy_c0.cmp, HPET_Tn_CMP(0));
++    /*
++     * The exact period doesn't have to match a legacy PIT.  All we need
++     * is an interrupt queued up via the IO-APIC to check routing.
++     *
++     * Use HZ as the frequency.
++     */
++    ticks = ((SECONDS(1) / HZ) * div_sc(hpet_rate, SECONDS(1), 32)) >> 32;
 +
-+    /* Restart the main counter. */
-+    hpet_write32(cfg | HPET_CFG_ENABLE, HPET_CFG);
++    count = hpet_read32(HPET_COUNTER);
++
++    /*
++     * HPET_TN_SETVAL above is atrociously documented in the spec.
++     *
++     * Periodic HPET channels have a main comparator register, and
++     * separate "accumulator" register.  Despite being named accumulator
++     * in the spec, this is not an accurate description of its behaviour
++     * or purpose.
++     *
++     * Each time an interrupt is generated, the "accumulator" register is
++     * re-added to the comparator set up the new period.
++     *
++     * Normally, writes to the CMP register update both registers.
++     * However, under these semantics, it is impossible to set up a
++     * periodic timer correctly without the main HPET counter being at 0.
++     *
++     * Instead, HPET_TN_SETVAL is a self-clearing control bit which we can
++     * use for periodic timers to mean that the second write to CMP
++     * updates the accumulator only, and not the absolute comparator
++     * value.
++     *
++     * This lets us set a period when the main counter isn't at 0.
++     */
++    hpet_write32(count + ticks, HPET_Tn_CMP(0));
++    hpet_write32(ticks,         HPET_Tn_CMP(0));
++
++    /* Restart the main counter, and legacy mode. */
++    hpet_write32(cfg | HPET_CFG_ENABLE | HPET_CFG_LEGACY, HPET_CFG);
++
++    return true;
 +}
-+
+ 
  u64 __init hpet_setup(void)
  {
-     unsigned int hpet_id, hpet_period;
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index 3f131a81fb..58b26d962c 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -1955,6 +1955,10 @@ static void __init check_timer(void)
-                 local_irq_restore(flags);
-                 return;
-             }
-+
-+            /* Legacy Replacement mode hasn't helped.  Undo it. */
-+            printk(XENLOG_ERR "..no HPET timer found - reverting Legacy Replacement Mode\n");
-+            hpet_disable_legacy_replacement_mode();
-         }
+-    static u64 __initdata hpet_rate;
+-    unsigned int hpet_id, hpet_period, hpet_cfg;
++    unsigned int hpet_id, hpet_period;
+     unsigned int last, rem;
  
-         clear_IO_APIC_pin(apic1, pin1);
+     if ( hpet_rate )
+@@ -805,58 +864,7 @@ u64 __init hpet_setup(void)
+      * Reconfigure the HPET into legacy mode to re-establish the timer
+      * interrupt.
+      */
+-    if ( hpet_id & HPET_ID_LEGSUP &&
+-         !((hpet_cfg = hpet_read32(HPET_CFG)) & HPET_CFG_LEGACY) )
+-    {
+-        unsigned int c0_cfg, ticks, count;
+-
+-        /* Stop the main counter. */
+-        hpet_write32(hpet_cfg & ~HPET_CFG_ENABLE, HPET_CFG);
+-
+-        /* Reconfigure channel 0 to be 32bit periodic. */
+-        c0_cfg = hpet_read32(HPET_Tn_CFG(0));
+-        c0_cfg |= (HPET_TN_ENABLE | HPET_TN_PERIODIC | HPET_TN_SETVAL |
+-                   HPET_TN_32BIT);
+-        hpet_write32(c0_cfg, HPET_Tn_CFG(0));
+-
+-        /*
+-         * The exact period doesn't have to match a legacy PIT.  All we need
+-         * is an interrupt queued up via the IO-APIC to check routing.
+-         *
+-         * Use HZ as the frequency.
+-         */
+-        ticks = ((SECONDS(1) / HZ) * div_sc(hpet_rate, SECONDS(1), 32)) >> 32;
+-
+-        count = hpet_read32(HPET_COUNTER);
+-
+-        /*
+-         * HPET_TN_SETVAL above is atrociously documented in the spec.
+-         *
+-         * Periodic HPET channels have a main comparator register, and
+-         * separate "accumulator" register.  Despite being named accumulator
+-         * in the spec, this is not an accurate description of its behaviour
+-         * or purpose.
+-         *
+-         * Each time an interrupt is generated, the "accumulator" register is
+-         * re-added to the comparator set up the new period.
+-         *
+-         * Normally, writes to the CMP register update both registers.
+-         * However, under these semantics, it is impossible to set up a
+-         * periodic timer correctly without the main HPET counter being at 0.
+-         *
+-         * Instead, HPET_TN_SETVAL is a self-clearing control bit which we can
+-         * use for periodic timers to mean that the second write to CMP
+-         * updates the accumulator only, and not the absolute comparator
+-         * value.
+-         *
+-         * This lets us set a period when the main counter isn't at 0.
+-         */
+-        hpet_write32(count + ticks, HPET_Tn_CMP(0));
+-        hpet_write32(ticks,         HPET_Tn_CMP(0));
+-
+-        /* Restart the main counter, and legacy mode. */
+-        hpet_write32(hpet_cfg | HPET_CFG_ENABLE | HPET_CFG_LEGACY, HPET_CFG);
+-    }
++    hpet_enable_legacy_replacement_mode();
+ 
+     return hpet_rate;
+ }
 diff --git a/xen/include/asm-x86/hpet.h b/xen/include/asm-x86/hpet.h
-index 07bc8d6079..8f9725a95e 100644
+index fb6bf05065..50176de3d2 100644
 --- a/xen/include/asm-x86/hpet.h
 +++ b/xen/include/asm-x86/hpet.h
-@@ -80,6 +80,12 @@ int hpet_legacy_irq_tick(void);
- bool hpet_enable_legacy_replacement_mode(void);
+@@ -73,6 +73,12 @@ void hpet_disable(void);
+ int hpet_legacy_irq_tick(void);
  
  /*
-+ * Undo the effects of hpet_disable_legacy_replacement_mode().  Must not be
-+ * called unless enable() returned true.
++ * Try to enable HPET Legacy Replacement mode.  Returns a boolean indicating
++ * whether the HPET configuration was changed.
 + */
-+void hpet_disable_legacy_replacement_mode(void);
++bool hpet_enable_legacy_replacement_mode(void);
 +
 +/*
   * Temporarily use an HPET event counter for timer interrupt handling,
