@@ -2,45 +2,42 @@ Return-Path: <SRS0=uMCZ=IY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8736AC433DB
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 18:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F905C433C1
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 18:48:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1133861A13
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 18:04:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1133861A13
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id C595B61601
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Mar 2021 18:48:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C595B61601
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.101994.195422 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.102050.195475 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPqoE-0008OI-EE; Fri, 26 Mar 2021 18:03:46 +0000
+	id 1lPrVV-0005UY-He; Fri, 26 Mar 2021 18:48:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 101994.195422; Fri, 26 Mar 2021 18:03:46 +0000
+Received: by outflank-mailman (output) from mailman id 102050.195475; Fri, 26 Mar 2021 18:48:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lPqoE-0008OB-8f; Fri, 26 Mar 2021 18:03:46 +0000
-Received: by outflank-mailman (input) for mailman id 101994;
- Fri, 26 Mar 2021 18:03:45 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lPqoD-0008O6-FI
- for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 18:03:45 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lPqoC-0004TC-6Y; Fri, 26 Mar 2021 18:03:44 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lPqoB-0000qd-UM; Fri, 26 Mar 2021 18:03:44 +0000
+	id 1lPrVV-0005UR-E2; Fri, 26 Mar 2021 18:48:29 +0000
+Received: by outflank-mailman (input) for mailman id 102050;
+ Fri, 26 Mar 2021 18:48:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=rKN6=IY=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
+ id 1lPrVU-0005UH-Ka
+ for xen-devel@lists.xenproject.org; Fri, 26 Mar 2021 18:48:28 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4eb19bad-2cfc-464d-81e9-48dab581ed33;
+ Fri, 26 Mar 2021 18:48:28 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPS id 32EC961A32;
+ Fri, 26 Mar 2021 18:48:27 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,60 +49,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=Vn5K8+827u0j2tL/5w3PXoqi0Zay3eOA6Y3FQXE9aRY=; b=bQygGXYFmHzTRVI0A2j+rP4ojN
-	qNnrMGbeJwpX6/K7saK47RDejSof4oLZdW1X03/AN2mzSnEA+K1aASs3rsFLkELvfJhAHy0L1iptl
-	wecc66xtoAM14jCX4KKt3H1mwkxHPms5ao8FZ/NyyrrbBtb8EEzZhYjI+IsKwTXK4hU4=;
-Subject: Re: [PATCH-for-4.15 v3] tools/libs/store: tidy up libxenstore
- interface
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-References: <20210324123948.7207-1-jgross@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <a638d4e4-14c0-634d-433b-42b6ec6b50a8@xen.org>
-Date: Fri, 26 Mar 2021 18:03:42 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <20210324123948.7207-1-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-Inumbo-ID: 4eb19bad-2cfc-464d-81e9-48dab581ed33
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1616784507;
+	bh=o3vDg6yqgyA1Twdd5bXDGYIg+8P1k+tonUCRFj0cgFs=;
+	h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
+	b=ldSeRY2niZjtW89vymy5Rpzk4LwHllb9JP4S2W9PL/2/DjEykeE0wCQywnnMBlL5v
+	 l6zr5zLFrI7b8RqhijSPVJEcJYihTkX6q+rJzRhCnvJiEcs0v6iYd0MAPf+2PlIPQg
+	 U8niqtpxT4AmLFOnlrpKeM7g/Q1cpsqEj0u3swNgYKSGF0/qIe3OhVvTXEAsk22pYg
+	 4GK3Qb9Qbz3OEf+n+yEyj4aG7jnFqilGLLTLvCcuKfOVBhrr1KMA5IL0fndvv+k4fr
+	 IONsi/rVn+1LPEV5t3Pux3QLGpGQwbo9xTJZ+xkUQdiqMFCnIhAbOoBWqB2jh+TjU2
+	 W0QJoozBIkYJQ==
+Subject: Re: [GIT PULL] xen: branch for v5.12-rc5
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20210326152041.25735-1-jgross@suse.com>
+References: <20210326152041.25735-1-jgross@suse.com>
+X-PR-Tracked-List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
+X-PR-Tracked-Message-Id: <20210326152041.25735-1-jgross@suse.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.12b-rc5-tag
+X-PR-Tracked-Commit-Id: af44a387e743ab7aa39d3fb5e29c0a973cf91bdc
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 6c20f6df61ee7b8b562143504cf3e89ae802de87
+Message-Id: <161678450709.8437.15896961548334222943.pr-tracker-bot@kernel.org>
+Date: Fri, 26 Mar 2021 18:48:27 +0000
+To: Juergen Gross <jgross@suse.com>
+Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 
-Hi Juergen,
+The pull request you sent on Fri, 26 Mar 2021 16:20:41 +0100:
 
-On 24/03/2021 12:39, Juergen Gross wrote:
-> xenstore_lib.h is in need to be tidied up a little bit:
-> 
-> - the definition of struct xs_tdb_record_hdr shouldn't be here
-> - some symbols are not namespaced correctly
-> - the layout of a structure with an enum inside it depends on the
->    implementation of the compiler
+> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.12b-rc5-tag
 
-TBH, they seem that each of them should be in their own patch. I am fine 
-with one patch but I think you should at least outline the solution in 
-the commit message. This will be easier to relate with the rest of the 
-code (you are solving 3 issues at once).
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/6c20f6df61ee7b8b562143504cf3e89ae802de87
 
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
->
-
-Sorry I didn't realize, you already sent a v3. So I will repeat my 
-comment here.
-
-I think you want to summarize the discussion [1] in the commit message 
-so it is clear that
-   1) You are breaking the ABI (although it is technically broken as we 
-use enum)
-   2) Why this is fine to do it.
-
-Cheers,
-
-[1]  https://lists.xen.org/archives/html/xen-devel/2021-03/msg01267.html
+Thank you!
 
 -- 
-Julien Grall
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/prtracker.html
 
