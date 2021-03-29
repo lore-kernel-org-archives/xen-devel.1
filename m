@@ -1,45 +1,46 @@
-Return-Path: <SRS0=2Bwx=I3=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=ZQjX=I4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+X-Spam-Status: No, score=-4.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF729C433C1
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Mar 2021 23:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA4B9C433C1
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Mar 2021 05:06:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5564F61924
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Mar 2021 23:39:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5564F61924
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 840B661580
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Mar 2021 05:06:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 840B661580
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.103294.197110 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.103228.197152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lR1T2-0004Z2-1Y; Mon, 29 Mar 2021 23:38:44 +0000
+	id 1lR6Zi-0003GY-Fg; Tue, 30 Mar 2021 05:05:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 103294.197110; Mon, 29 Mar 2021 23:38:44 +0000
+Received: by outflank-mailman (output) from mailman id 103228.197152; Tue, 30 Mar 2021 05:05:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lR1T1-0004Yv-UW; Mon, 29 Mar 2021 23:38:43 +0000
-Received: by outflank-mailman (input) for mailman id 103294;
- Mon, 29 Mar 2021 23:38:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lR6Zi-0003GR-Bf; Tue, 30 Mar 2021 05:05:58 +0000
+Received: by outflank-mailman (input) for mailman id 103228;
+ Mon, 29 Mar 2021 18:47:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MaHR=I3=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1lR1Sz-0004Yq-PC
- for xen-devel@lists.xenproject.org; Mon, 29 Mar 2021 23:38:41 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7c7fc1f9-7cc0-4528-86db-531da5b3f4d6;
- Mon, 29 Mar 2021 23:38:40 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D07ED61996;
- Mon, 29 Mar 2021 23:38:39 +0000 (UTC)
+ <SRS0=zVVk=I3=gmail.com=ttr9droid@srs-us1.protection.inumbo.net>)
+ id 1lQwur-0007LR-SB
+ for xen-devel@lists.xenproject.org; Mon, 29 Mar 2021 18:47:09 +0000
+Received: from mail-oo1-xc32.google.com (unknown [2607:f8b0:4864:20::c32])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6a5256b5-a160-4ef5-bd29-0fd555bcfb87;
+ Mon, 29 Mar 2021 18:47:08 +0000 (UTC)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ q127-20020a4a33850000b02901b646aa81b1so3198110ooq.8
+ for <xen-devel@lists.xenproject.org>; Mon, 29 Mar 2021 11:47:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,65 +52,354 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7c7fc1f9-7cc0-4528-86db-531da5b3f4d6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1617061120;
-	bh=GUJL3LcaAUI/LVc1NF3tsYKfXtlSCAFsCnKpHMQuLF8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=mUVeeqoe2c6fWc5BqecyDhn8iIFBZ2CrVnzYG+mlozI3xOW5fKbRM33NpxEazFIB6
-	 cOiTzenGMy6gt8VwF9HW+Ir43ipdGKA0M8SXB7wyF2AX9GFgU5cNTsuNncfox86wls
-	 PEG3BG++7eeiHDoOiXrNOf/E6n1FxUlu4FhlC8GG0Sl90HSCp25syhkUTkKEe+2Icz
-	 mtNaC8TOC5SDaQExIHlIAMwtFrh0vjBYMvNZOVEKN4CPOwvB0vyPVQAGYnKLQb5xLr
-	 91DSsNjj5gieWVe0jXgHC1XLxMp6mKcVjfyz0l3U4pEOoxpNMvg257FFY2VVPbfK8F
-	 SdEfqFeTkdhKg==
-Date: Mon, 29 Mar 2021 16:38:39 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: George Dunlap <george.dunlap@citrix.com>
-cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH v2 for-4.15 6/7] CHANGELOG.md: Add entries for CI loop
-In-Reply-To: <20210329161457.345360-6-george.dunlap@citrix.com>
-Message-ID: <alpine.DEB.2.21.2103291638300.31460@sstabellini-ThinkPad-T480s>
-References: <20210329161457.345360-1-george.dunlap@citrix.com> <20210329161457.345360-6-george.dunlap@citrix.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 6a5256b5-a160-4ef5-bd29-0fd555bcfb87
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=3ocqKDylW1ZNXFNbmp0rk66cJmvs5eErDPFuhhnmcwI=;
+        b=d0zq4ywnBUnaGqRda3SNcvgHibeebslUVJ0IXRSZtdUhAZtqMEOFdxdh5uHeEYB5QF
+         7V7lTgKpwzldEGrw8jwo/l6n97P5vnlM90qmalKVPegrRmMwcujiz5jfTnnSu4es6JE+
+         iYkdzk8evVYnfRHGMwcsK6Vv5PGK/Mhswpg6KjrlroXe++Ur92lQxd5Os7rINLUAGKof
+         x4LPCoxQPCaBHnLukcraN1B80oYXwGZZ37PvuH3XaB4IKOh2Ncv6I9wQu7Ojhkzf3o5E
+         AiR6ayD+0ccc44rekBSE/aMgTEonQ+0TPSZ2Uc1vMdF3S//kWRQZc2m4s+nqSaBZ73E+
+         owXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=3ocqKDylW1ZNXFNbmp0rk66cJmvs5eErDPFuhhnmcwI=;
+        b=lxqZPzj+G12MdO3hJbEEqExVN3FEfFDStMg+Ye5M5GWvQ1rrnIEKRMV2dj1Ux4cgm5
+         n5qrUiSI0DGVMgFrTV9dDqsrZPqSsvllwsLw4JI3Y9JS5Daya77HUB5/PVjkmzFQontk
+         xNIs26wq4ruXEsWj4gtco5dZ8o4X5AkU09Pzn/idVe5/+FArHPLUgypUVlaYH8d2WFFn
+         gdkwcwN+bwKAVliKlBZ0Jd6Ouer8HGvhLBgEmPPr61dGhwfevJek6Ug4Ds1hOoz4uA/W
+         sN1b/UsoZ0HWHlPwhNiHc02aH4yKDCEkDJqgKX6GGxVHWjppYgeGDlgP//9vurVPKeRa
+         l2rA==
+X-Gm-Message-State: AOAM531ECBRk8cgdLJXIwjM9OlPTMwuYfGMhQ011LzlZ9Q+RSYMGXa17
+	6H5NHfxW1tHSDOp9FzP1ejkDaLR6CGGTxXL3r78=
+X-Google-Smtp-Source: ABdhPJziZOZlCS036I60U840Y6K8xRc/0qc99dnwwLVNHc236c3g3mm8yMLA/v69hZSK7YW+SA+lq4g26hMOlugHpsM=
+X-Received: by 2002:a4a:1ac3:: with SMTP id 186mr4176430oof.8.1617043627657;
+ Mon, 29 Mar 2021 11:47:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+References: <CAKqicRBsCxFY=A=RD6kHaZa7bFag+hmUkwAJc-LSYy8XvsbGPg@mail.gmail.com>
+ <889B1827-1FEB-4AC0-9002-278337D19ED5@citrix.com>
+In-Reply-To: <889B1827-1FEB-4AC0-9002-278337D19ED5@citrix.com>
+From: John Simpson <ttr9droid@gmail.com>
+Date: Mon, 29 Mar 2021 21:46:49 +0300
+Message-ID: <CAKqicRCiahd5bt1Qo=Mdh4DYRQbGWf410gF=CG51J9AD=4YwmA@mail.gmail.com>
+Subject: Re: An error due to installation that require binutils package
+To: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
+Cc: "gcc-help@gcc.gnu.org" <gcc-help@gcc.gnu.org>, 
+	Community Manager <community.manager@xenproject.org>, George Dunlap <George.Dunlap@citrix.com>
+Content-Type: multipart/alternative; boundary="000000000000034cd405beb14f97"
 
-On Mon, 29 Mar 2021, George Dunlap wrote:
-> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+--000000000000034cd405beb14f97
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+Hello,
 
-> ---
-> v2:
->  - Add dom0 / domU testing for ARM on alpine Linux as well
-> 
-> CC: Wei Liu <wl@xen.org>
-> CC: Andrew Cooper <andrew.cooper3@citrix.com>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> CC: Doug Goldstein <cardoe@cardoe.com>
-> ---
->  CHANGELOG.md | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/CHANGELOG.md b/CHANGELOG.md
-> index 62174c8c74..c4696e41a1 100644
-> --- a/CHANGELOG.md
-> +++ b/CHANGELOG.md
-> @@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
->   - Library improvements from NetBSD ports upstreamed
->   - x86_emulate: Support AVX-VNNI instructions
->   - x86_emulate: Expanded testing for several instruction classes
-> + - CI loop: Add Alpine Linux, Ubuntu Focal targets; drop CentOS 6
-> + - CI loop: Add qemu-based dom0 / domU test for ARM
-> + - CI loop: Add dom0less aarch64 smoke test
->  
->  ## Removed / support downgraded
->  
-> -- 
-> 2.30.2
-> 
+Kindly ask you to have a look at this bug.
+Thank you for your replies.
+
+On Mon, Mar 29, 2021 at 7:07 PM George Dunlap <George.Dunlap@citrix.com>
+wrote:
+
+> John,
+>
+> Thanks for your report.  Can you post your bug report
+> xen-devel@lists.xenproject.org ?
+>
+> The bug is in the compilation of QEMU, which is an external project; so
+> it=E2=80=99s possible that we=E2=80=99ll end up having to raise this with=
+ that community as
+> well.
+>
+> Thanks,
+>  -George Dunlap
+>
+> > On Mar 28, 2021, at 2:26 PM, John Simpson <ttr9droid@gmail.com> wrote:
+> >
+> > Hello,
+> >
+> > Just forwarding this message to you. Can you give some thoughs about
+> this? Thanks a lot.
+> >
+> >
+> > ---------- Forwarded message ---------
+> > From: Alan Modra <amodra@gmail.com>
+> > Date: Sun, Mar 28, 2021 at 2:21 PM
+> > Subject: Re: An error due to installation that require binutils package=
+.
+> > To: John Simpson <ttr9droid@gmail.com>
+> > Cc: <binutils@sourceware.org>
+> >
+> >
+> > On Sun, Mar 28, 2021 at 12:55:23PM +0300, John Simpson via Binutils
+> wrote:
+> > >   BUILD   pc-bios/optionrom/kvmvapic.img
+> > > ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)
+> >
+> > -no-pie is a gcc option.  Neither -no-pie nor --no-pie is a valid ld
+> > option.  The fault lies with whatever passed -no-pie to ld.
+> >
+> > --
+> > Alan Modra
+> > Australia Development Lab, IBM
+> >
+> >
+> >
+> > ---------- Forwarded message ---------
+> > From: Andreas Schwab <schwab@linux-m68k.org>
+> > Date: Sun, Mar 28, 2021 at 2:17 PM
+> > Subject: Re: An error due to installation that require binutils package=
+.
+> > To: John Simpson via Binutils <binutils@sourceware.org>
+> > Cc: John Simpson <ttr9droid@gmail.com>
+> >
+> >
+> > Please report that to the xen project.  ld -no-pie doesn't have a usefu=
+l
+> > meaning.  It used to mean the same as ld -n -o-pie, which sets "-pie" a=
+s
+> > the output file name.
+> >
+> > Andreas.
+> >
+> > --
+> > Andreas Schwab, schwab@linux-m68k.org
+> > GPG Key fingerprint =3D 7578 EB47 D4E5 4D69 2510  2552 DF73 E780 A9DA A=
+EC1
+> > "And now for something completely different."
+> >
+> >
+> >
+> > ---------- Forwarded message ---------
+> > From: John Simpson <ttr9droid@gmail.com>
+> > Date: Sun, Mar 28, 2021 at 12:55 PM
+> > Subject: An error due to installation that require binutils package.
+> > To: <binutils@sourceware.org>
+> >
+> >
+> > Hello,
+> >
+> > Recently I got a following error due to installation xen on
+> 5.11.6-1-MANJARO kernel:
+> >
+> >   GEN     target/riscv/trace.c
+> >   GEN     target/s390x/trace.c
+> >   GEN     target/sparc/trace.c
+> >   GEN     util/trace.c
+> >   GEN     config-all-devices.mak
+> > make[1]: Entering directory
+> '/home/username/xen/src/xen-4.14.1/tools/qemu-xen/slirp'
+> > make[1]: Nothing to be done for 'all'.
+> > make[1]: Leaving directory
+> '/home/username/xen/src/xen-4.14.1/tools/qemu-xen/slirp'
+> >   BUILD   pc-bios/optionrom/multiboot.img
+> >   BUILD   pc-bios/optionrom/linuxboot.img
+> >   BUILD   pc-bios/optionrom/linuxboot_dma.img
+> >   BUILD   pc-bios/optionrom/kvmvapic.img
+> > ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)
+> > make[1]: *** [Makefile:53: multiboot.img] Error 1
+> > make[1]: *** Waiting for unfinished jobs....
+> > ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)
+> > make[1]: *** [Makefile:53: linuxboot_dma.img] Error 1
+> >   BUILD   pc-bios/optionrom/pvh.img
+> > ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)
+> > make[1]: *** [Makefile:53: linuxboot.img] Error 1
+> > ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)
+> > make[1]: *** [Makefile:53: kvmvapic.img] Error 1
+> > ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)
+> > make[1]: *** [Makefile:50: pvh.img] Error 1
+> > make: *** [Makefile:581: pc-bios/optionrom/all] Error 2
+> > make: Leaving directory
+> '/home/username/xen/src/xen-4.14.1/tools/qemu-xen-build'
+> > make[3]: *** [Makefile:218: subdir-all-qemu-xen-dir] Error 2
+> > make[3]: Leaving directory '/home/username/xen/src/xen-4.14.1/tools'
+> > make[2]: ***
+> [/home/username/xen/src/xen-4.14.1/tools/../tools/Rules.mk:235:
+> subdirs-install] Error 2
+> > make[2]: Leaving directory '/home/username/xen/src/xen-4.14.1/tools'
+> > make[1]: *** [Makefile:72: install] Error 2
+> > make[1]: Leaving directory '/home/username/xen/src/xen-4.14.1/tools'
+> > make: *** [Makefile:134: install-tools] Error 2
+> > =3D=3D> ERROR: A failure occurred in build().
+> >     Aborting...
+> >
+> > Currently I have fresh binutils 2.36.1-2 and it seems to me that the
+> issue is related to this part of code:
+> >
+> > https://github.com/bminor/binutils-gdb/blob/master/ld/lexsup.c#L451
+> >
+> > It seems to me that this could impact far more users than just me.
+> >
+>
+>
+
+--000000000000034cd405beb14f97
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><div><br></div><div>Kind=
+ly ask you to have a look at this bug. <br></div><div>Thank you for your re=
+plies.<br></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, Mar 29, 2021 at 7:07 PM George Dunlap &lt;<a href=
+=3D"mailto:George.Dunlap@citrix.com">George.Dunlap@citrix.com</a>&gt; wrote=
+:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">John,<br>
+<br>
+Thanks for your report.=C2=A0 Can you post your bug report <a href=3D"mailt=
+o:xen-devel@lists.xenproject.org" target=3D"_blank">xen-devel@lists.xenproj=
+ect.org</a> ?<br>
+<br>
+The bug is in the compilation of QEMU, which is an external project; so it=
+=E2=80=99s possible that we=E2=80=99ll end up having to raise this with tha=
+t community as well.<br>
+<br>
+Thanks,<br>
+=C2=A0-George Dunlap<br>
+<br>
+&gt; On Mar 28, 2021, at 2:26 PM, John Simpson &lt;<a href=3D"mailto:ttr9dr=
+oid@gmail.com" target=3D"_blank">ttr9droid@gmail.com</a>&gt; wrote:<br>
+&gt; <br>
+&gt; Hello,<br>
+&gt; <br>
+&gt; Just forwarding this message to you. Can you give some thoughs about t=
+his? Thanks a lot.<br>
+&gt; <br>
+&gt; <br>
+&gt; ---------- Forwarded message ---------<br>
+&gt; From: Alan Modra &lt;<a href=3D"mailto:amodra@gmail.com" target=3D"_bl=
+ank">amodra@gmail.com</a>&gt;<br>
+&gt; Date: Sun, Mar 28, 2021 at 2:21 PM<br>
+&gt; Subject: Re: An error due to installation that require binutils packag=
+e.<br>
+&gt; To: John Simpson &lt;<a href=3D"mailto:ttr9droid@gmail.com" target=3D"=
+_blank">ttr9droid@gmail.com</a>&gt;<br>
+&gt; Cc: &lt;<a href=3D"mailto:binutils@sourceware.org" target=3D"_blank">b=
+inutils@sourceware.org</a>&gt;<br>
+&gt; <br>
+&gt; <br>
+&gt; On Sun, Mar 28, 2021 at 12:55:23PM +0300, John Simpson via Binutils wr=
+ote:<br>
+&gt; &gt;=C2=A0 =C2=A0BUILD=C2=A0 =C2=A0pc-bios/optionrom/kvmvapic.img<br>
+&gt; &gt; ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie=
+ ?)<br>
+&gt; <br>
+&gt; -no-pie is a gcc option.=C2=A0 Neither -no-pie nor --no-pie is a valid=
+ ld<br>
+&gt; option.=C2=A0 The fault lies with whatever passed -no-pie to ld.<br>
+&gt; <br>
+&gt; -- <br>
+&gt; Alan Modra<br>
+&gt; Australia Development Lab, IBM<br>
+&gt; <br>
+&gt; <br>
+&gt; <br>
+&gt; ---------- Forwarded message ---------<br>
+&gt; From: Andreas Schwab &lt;<a href=3D"mailto:schwab@linux-m68k.org" targ=
+et=3D"_blank">schwab@linux-m68k.org</a>&gt;<br>
+&gt; Date: Sun, Mar 28, 2021 at 2:17 PM<br>
+&gt; Subject: Re: An error due to installation that require binutils packag=
+e.<br>
+&gt; To: John Simpson via Binutils &lt;<a href=3D"mailto:binutils@sourcewar=
+e.org" target=3D"_blank">binutils@sourceware.org</a>&gt;<br>
+&gt; Cc: John Simpson &lt;<a href=3D"mailto:ttr9droid@gmail.com" target=3D"=
+_blank">ttr9droid@gmail.com</a>&gt;<br>
+&gt; <br>
+&gt; <br>
+&gt; Please report that to the xen project.=C2=A0 ld -no-pie doesn&#39;t ha=
+ve a useful<br>
+&gt; meaning.=C2=A0 It used to mean the same as ld -n -o-pie, which sets &q=
+uot;-pie&quot; as<br>
+&gt; the output file name.<br>
+&gt; <br>
+&gt; Andreas.<br>
+&gt; <br>
+&gt; -- <br>
+&gt; Andreas Schwab, <a href=3D"mailto:schwab@linux-m68k.org" target=3D"_bl=
+ank">schwab@linux-m68k.org</a><br>
+&gt; GPG Key fingerprint =3D 7578 EB47 D4E5 4D69 2510=C2=A0 2552 DF73 E780 =
+A9DA AEC1<br>
+&gt; &quot;And now for something completely different.&quot;<br>
+&gt; <br>
+&gt; <br>
+&gt; <br>
+&gt; ---------- Forwarded message ---------<br>
+&gt; From: John Simpson &lt;<a href=3D"mailto:ttr9droid@gmail.com" target=
+=3D"_blank">ttr9droid@gmail.com</a>&gt;<br>
+&gt; Date: Sun, Mar 28, 2021 at 12:55 PM<br>
+&gt; Subject: An error due to installation that require binutils package.<b=
+r>
+&gt; To: &lt;<a href=3D"mailto:binutils@sourceware.org" target=3D"_blank">b=
+inutils@sourceware.org</a>&gt;<br>
+&gt; <br>
+&gt; <br>
+&gt; Hello,<br>
+&gt; <br>
+&gt; Recently I got a following error due to installation xen on 5.11.6-1-M=
+ANJARO kernel:<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0GEN=C2=A0 =C2=A0 =C2=A0target/riscv/trace.c<br>
+&gt;=C2=A0 =C2=A0GEN=C2=A0 =C2=A0 =C2=A0target/s390x/trace.c<br>
+&gt;=C2=A0 =C2=A0GEN=C2=A0 =C2=A0 =C2=A0target/sparc/trace.c<br>
+&gt;=C2=A0 =C2=A0GEN=C2=A0 =C2=A0 =C2=A0util/trace.c<br>
+&gt;=C2=A0 =C2=A0GEN=C2=A0 =C2=A0 =C2=A0config-all-devices.mak<br>
+&gt; make[1]: Entering directory &#39;/home/username/xen/src/xen-4.14.1/too=
+ls/qemu-xen/slirp&#39;<br>
+&gt; make[1]: Nothing to be done for &#39;all&#39;.<br>
+&gt; make[1]: Leaving directory &#39;/home/username/xen/src/xen-4.14.1/tool=
+s/qemu-xen/slirp&#39;<br>
+&gt;=C2=A0 =C2=A0BUILD=C2=A0 =C2=A0pc-bios/optionrom/multiboot.img<br>
+&gt;=C2=A0 =C2=A0BUILD=C2=A0 =C2=A0pc-bios/optionrom/linuxboot.img<br>
+&gt;=C2=A0 =C2=A0BUILD=C2=A0 =C2=A0pc-bios/optionrom/linuxboot_dma.img<br>
+&gt;=C2=A0 =C2=A0BUILD=C2=A0 =C2=A0pc-bios/optionrom/kvmvapic.img<br>
+&gt; ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)<b=
+r>
+&gt; make[1]: *** [Makefile:53: multiboot.img] Error 1<br>
+&gt; make[1]: *** Waiting for unfinished jobs....<br>
+&gt; ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)<b=
+r>
+&gt; make[1]: *** [Makefile:53: linuxboot_dma.img] Error 1<br>
+&gt;=C2=A0 =C2=A0BUILD=C2=A0 =C2=A0pc-bios/optionrom/pvh.img<br>
+&gt; ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)<b=
+r>
+&gt; make[1]: *** [Makefile:53: linuxboot.img] Error 1<br>
+&gt; ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)<b=
+r>
+&gt; make[1]: *** [Makefile:53: kvmvapic.img] Error 1<br>
+&gt; ld: Error: unable to disambiguate: -no-pie (did you mean --no-pie ?)<b=
+r>
+&gt; make[1]: *** [Makefile:50: pvh.img] Error 1<br>
+&gt; make: *** [Makefile:581: pc-bios/optionrom/all] Error 2<br>
+&gt; make: Leaving directory &#39;/home/username/xen/src/xen-4.14.1/tools/q=
+emu-xen-build&#39;<br>
+&gt; make[3]: *** [Makefile:218: subdir-all-qemu-xen-dir] Error 2<br>
+&gt; make[3]: Leaving directory &#39;/home/username/xen/src/xen-4.14.1/tool=
+s&#39;<br>
+&gt; make[2]: *** [/home/username/xen/src/xen-4.14.1/tools/../tools/Rules.m=
+k:235: subdirs-install] Error 2<br>
+&gt; make[2]: Leaving directory &#39;/home/username/xen/src/xen-4.14.1/tool=
+s&#39;<br>
+&gt; make[1]: *** [Makefile:72: install] Error 2<br>
+&gt; make[1]: Leaving directory &#39;/home/username/xen/src/xen-4.14.1/tool=
+s&#39;<br>
+&gt; make: *** [Makefile:134: install-tools] Error 2<br>
+&gt; =3D=3D&gt; ERROR: A failure occurred in build().<br>
+&gt;=C2=A0 =C2=A0 =C2=A0Aborting...<br>
+&gt; <br>
+&gt; Currently I have fresh binutils 2.36.1-2 and it seems to me that the i=
+ssue is related to this part of code:<br>
+&gt; <br>
+&gt; <a href=3D"https://github.com/bminor/binutils-gdb/blob/master/ld/lexsu=
+p.c#L451" rel=3D"noreferrer" target=3D"_blank">https://github.com/bminor/bi=
+nutils-gdb/blob/master/ld/lexsup.c#L451</a><br>
+&gt; <br>
+&gt; It seems to me that this could impact far more users than just me.<br>
+&gt; <br>
+<br>
+</blockquote></div></div>
+
+--000000000000034cd405beb14f97--
 
