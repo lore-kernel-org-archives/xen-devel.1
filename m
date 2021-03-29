@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D5A8C433DB
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Mar 2021 16:15:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C473C433C1
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Mar 2021 16:15:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EEB9A61582
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Mar 2021 16:15:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEB9A61582
+	by mail.kernel.org (Postfix) with ESMTPS id CFBB461582
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Mar 2021 16:15:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFBB461582
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.103131.196779 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.103132.196791 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lQuXv-0006sB-BZ; Mon, 29 Mar 2021 16:15:19 +0000
+	id 1lQuY1-0006ux-JO; Mon, 29 Mar 2021 16:15:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 103131.196779; Mon, 29 Mar 2021 16:15:19 +0000
+Received: by outflank-mailman (output) from mailman id 103132.196791; Mon, 29 Mar 2021 16:15:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lQuXv-0006s4-81; Mon, 29 Mar 2021 16:15:19 +0000
-Received: by outflank-mailman (input) for mailman id 103131;
- Mon, 29 Mar 2021 16:15:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lQuY1-0006up-G2; Mon, 29 Mar 2021 16:15:25 +0000
+Received: by outflank-mailman (input) for mailman id 103132;
+ Mon, 29 Mar 2021 16:15:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HZ2U=I3=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1lQuXu-0006rz-0c
- for xen-devel@lists.xenproject.org; Mon, 29 Mar 2021 16:15:18 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7ba0f9e8-f5e0-4e76-865d-a21c2abcdcfa;
- Mon, 29 Mar 2021 16:15:16 +0000 (UTC)
+ id 1lQuY0-0006uY-K6
+ for xen-devel@lists.xenproject.org; Mon, 29 Mar 2021 16:15:24 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 75101d4c-f12a-46ba-bd6a-1e2f4f100ae3;
+ Mon, 29 Mar 2021 16:15:23 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,73 +48,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ba0f9e8-f5e0-4e76-865d-a21c2abcdcfa
+X-Inumbo-ID: 75101d4c-f12a-46ba-bd6a-1e2f4f100ae3
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1617034516;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=H/etSajIvVyS1+Qxid3LfzwQ29MP/LQNDTOK0oSc3bk=;
-  b=AYzEdSust4twO1JuEMT5IiYRY0eaA/odgwGipBzAIqfBarfuPqy6N/m4
-   3ddf3EzP5RbIelnDVL6/m/XkYpyuLDVAZsmZUcoyUXalqR92/zVpb3ZKd
-   3GlX4PK7YVDGTLEnNjvDrxcUsl92SC9TChXt7r0hAPRY3CmCet6bPpcWA
-   A=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: K0nMMO/Bfjp4Bf06twPple1uGIET5rFB22LalhadRLPgqNetCJs5vU+/G6c30dCZRe8CgbGqnG
- IzxwlBvWHyKoW5xFGjFVkGq3wdttrHhMsSILiay7nrMVqTA9/jnRMJtudIorU96Cl2qJoQ4nyh
- 72A9ufA7PniY26bOCg1vpAZr4VenqLCsx4+7Dpu1OMnzt3GxPZO3J1N6UPx7F0XaHDC3Olpocd
- VN/h/jKUkGnTmWJ6OrTJt4H/IUye05YbnMfCXBGlTvoZAD7f7rxA3lEg88fgYH+oGWW1J1K1uN
- F/s=
+  d=citrix.com; s=securemail; t=1617034523;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=4Kmj6iy4PIotKGTyDexDXi398U4mGAHli8fvkm6ZyDw=;
+  b=crWJqpb/GTWlLlHAua0bog8yA5eDTthVhSjtQcpWrsCHY+XyRN3pHYzy
+   7xWPe5lQTbByCyiP1lfe1c8kTf325Ct15Wpgm7N1IO25Cyxlo7JoyumbT
+   /8CfULwLtBy0aJk9xN817PnQCdDpeU6B4PDqO6dzRy5kfOdaHUxFttr95
+   k=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: B6X4D/X+yoUmNQD3kIEUN8V2lCaLAIhNq/P69Ib1Y0W5xZMR2zVozqclKlXP8OUuq03IyMJeKf
+ K8UZdZpOSyM6S03neVjE4kvrdOFNQngeF/sri4FNAAgCe46dG8IKu2bgXEYd4C4smscIhXnWy3
+ dCc4l5saIi3ehq/ZmJAjW84276/SV+RYs2LW6pQV5/6jT+xoSPiwhf1mqlMTWyMDYRvydi+ZZt
+ RX64YvfRl5lbP6Y5y+IogDOPHt80ptUWC3JnttpS1H+1XpERRGKEru36vtDlp54wCwX+L2CJTQ
+ 99k=
 X-SBRS: 5.1
-X-MesageID: 40515557
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 40346954
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:IbpqjKixhk/a3daqMzfMAFHWfXBQXl8ji2hD6mlwRA09T+Wzva
- mV8sgz/xnylToXRTUcgtiGIqaNWjfx8pRy7IkXM96ZLW/bkUGvK5xv6pan/i34F0TFh5Zg/I
- ppbqQWMr3NJHdgi8KS2mWFOvYmhOKK6aW5wdrZpk0dKD1CT4FFw0NHBh2AEktwLTM2YqYRMJ
- aH/MJIq36BVB0sH6eGL0IIVeTCuNHH/aiOCXVtaiIP0wWAgSil77T3CXGjr3MjeghC3Ks49i
- z9mxH5j5/Tys2T8APW1GPY8v1t+efJ990rPqOxo/lQDj3tjwqyDb4ROYG/gA==
+IronPort-HdrOrdr: A9a23:qi6weK+SlyXb9W/94xluk+A+I+orLtY04lQ7vn1ZYzY9SK2lvu
+ qpm+kW0gKxtS0YX2sulcvFFK6LR37d8pAd2/h3AZ6JWg76tGy0aLxz9IeK+UyYJwTS/vNQvJ
+ 0QEJRWJ8b3CTFB4vrSxCmdP5IezMKc8Kau7N2uq0tFaQ1xcalv40NYJ2+gYy9LbTJLD5Y4C5
+ aQj/Avz1HLFBgqR/+2G2UfWKz7r8DL/aiWByIuPQIt6wWFkFqTiILSLh7w5HkjegIK5b8j9G
+ Tf+jaJg5mejw==
 X-IronPort-AV: E=Sophos;i="5.81,288,1610427600"; 
-   d="scan'208";a="40515557"
+   d="scan'208";a="40346954"
 From: George Dunlap <george.dunlap@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
 	Ian Jackson <ian.jackson@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>
-Subject: [PATCH v2 for-4.15 3/7] CHANGELOG.md: Add dom0/domU zstd compression support
-Date: Mon, 29 Mar 2021 17:14:53 +0100
-Message-ID: <20210329161457.345360-3-george.dunlap@citrix.com>
+	<andrew.cooper3@citrix.com>, Tamas K Lengyel <tamas.lengyel@zentific.com>
+Subject: [PATCH v2 for-4.15 1/7] Intel Processor Trace Support: Add CHANGELOG.md and SUPPORT.md entries
+Date: Mon, 29 Mar 2021 17:14:51 +0100
+Message-ID: <20210329161457.345360-1-george.dunlap@citrix.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210329161457.345360-1-george.dunlap@citrix.com>
-References: <20210329161457.345360-1-george.dunlap@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Release-acked-by: Ian Jackson <ian.jackson@citrix.com>
 ---
 v2:
- - domU support also added
+ - Added "x86" specifier
 
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Ian Jackson <ian.jackson@citrix.com>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Ian Jackson <ian.jackson@citrix.com>
+CC: Tamas K Lengyel <tamas.lengyel@zentific.com>
 ---
  CHANGELOG.md | 1 +
- 1 file changed, 1 insertion(+)
+ SUPPORT.md   | 7 +++++++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 8c89212f14..538eae611c 100644
+index c407f6bb2f..7f03e85bd7 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+  - ARM IOREQ servers (device emulation etc.) (Tech Preview)
+  - Renesas IPMMU-VMSA (Supported, not security supported; was Tech Preview)
   - ARM SMMUv3 (Tech Preview)
-  - Intel Processor Trace support (Tech Preview)
-  - Named PCI devices for xl/libxl
-+ - Support for zstd-compressed dom0 and domU kernels
++ - Intel Processor Trace support (Tech Preview)
  
  ## Removed / support downgraded
  
+diff --git a/SUPPORT.md b/SUPPORT.md
+index a1efd8fcfd..cd0c09e6a4 100644
+--- a/SUPPORT.md
++++ b/SUPPORT.md
+@@ -247,6 +247,13 @@ Export hypervisor coverage data suitable for analysis by gcov or lcov.
+ 
+     Status: Supported, Not security supported
+ 
++### Processor trace support
++
++Support for using Intel Processor Trace technology to trace guests
++from dom0.
++
++    Status, x86: Tech Preview
++
+ ## Memory Management
+ 
+ ### Dynamic memory control
 -- 
 2.30.2
 
