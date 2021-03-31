@@ -2,47 +2,45 @@ Return-Path: <SRS0=azK0=I5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_2 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 293B4C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 09:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16BA0C433DB
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 09:54:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C181C61981
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 09:44:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C181C61981
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id B8B176195C
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 09:54:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B8B176195C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.103808.197955 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.103815.197967 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRXOM-0008CR-ID; Wed, 31 Mar 2021 09:44:02 +0000
+	id 1lRXYA-0000jS-IC; Wed, 31 Mar 2021 09:54:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 103808.197955; Wed, 31 Mar 2021 09:44:02 +0000
+Received: by outflank-mailman (output) from mailman id 103815.197967; Wed, 31 Mar 2021 09:54:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRXOM-0008CK-F5; Wed, 31 Mar 2021 09:44:02 +0000
-Received: by outflank-mailman (input) for mailman id 103808;
- Wed, 31 Mar 2021 09:06:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aLCM=I5=gmail.com=jerryxia32@srs-us1.protection.inumbo.net>)
- id 1lRWoF-0004Ps-0G
- for xen-devel@lists.xenproject.org; Wed, 31 Mar 2021 09:06:43 +0000
-Received: from mail-wr1-x42a.google.com (unknown [2a00:1450:4864:20::42a])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1094f86e-64c0-4ce6-a7a3-79a59d337d09;
- Wed, 31 Mar 2021 09:06:41 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id e18so18867806wrt.6
- for <xen-devel@lists.xenproject.org>; Wed, 31 Mar 2021 02:06:41 -0700 (PDT)
-Received: from KJerrY-TPad (82-132-235-44.dab.02.net. [82.132.235.44])
- by smtp.gmail.com with ESMTPSA id c11sm3311273wrm.67.2021.03.31.02.06.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Mar 2021 02:06:40 -0700 (PDT)
+	id 1lRXYA-0000jL-FF; Wed, 31 Mar 2021 09:54:10 +0000
+Received: by outflank-mailman (input) for mailman id 103815;
+ Wed, 31 Mar 2021 09:54:09 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>) id 1lRXY9-0000jG-15
+ for xen-devel@lists.xenproject.org; Wed, 31 Mar 2021 09:54:09 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lRXY8-000836-Pt; Wed, 31 Mar 2021 09:54:08 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=freeip.amazon.com) by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lRXY7-0003Rg-6S; Wed, 31 Mar 2021 09:54:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,48 +52,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1094f86e-64c0-4ce6-a7a3-79a59d337d09
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:message-id:subject:to:cc:date:in-reply-to:references
-         :user-agent:mime-version:content-transfer-encoding;
-        bh=IOUJe2tihTzla+erqhwVJsivSTtTbZipunSRUJNldxg=;
-        b=YriR/wzYVk5Uma+KgBfwE+20pLxMrlbzZK9kN9BmaxNM2W77u1lK2zTl5lNwpGoQuZ
-         /vkXlg3uduy7V9mKHvn+tsQ4JHlub39EG2dOaZM3pBWvRWzs5bGapFjTXqBavfq7KQOY
-         aYF5GggxCqMoujwAhduKPjLWzqaJ/7PIhf50dMAUzQqGcbBMtQB96c93kJg6z4+G9k6m
-         ptjNaF7E9SihDWDk9CZ692tx63jmNyyhPQTpBrHzG9t6aK3AVmEJdQ4QwpyfwTpVtfM2
-         Upk8wewd9H1aNcYz70t3VWFoA9EInG53EQz1nT3fGYMqHeU6wqGCaAPfQcERF+TPo9//
-         fIsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:message-id:subject:to:cc:date:in-reply-to
-         :references:user-agent:mime-version:content-transfer-encoding;
-        bh=IOUJe2tihTzla+erqhwVJsivSTtTbZipunSRUJNldxg=;
-        b=ouFzwSnt24EGOB5q14bs9Ppo+MAkwboQjZRXF2RBvNg4hzibzFMf6Uq/esPsXEE+W4
-         ZbtjsXMkGq2h+u1rtYzhSbJtMJyZqZ5/b9imbyUini+E1ZW6yKaquhWjSyxpdZgfBZD+
-         wQ5bi462hg3eyv7cabA2XaDO9HYTL4UHd3N7qKXNUD4O2nQp5Wl93XC+wMrjN6WoVPo0
-         L+0Tydvp86fxXZ0V7rUiubAPYh+Q1BZkE1XUQtytf9nReXvjPLFnZeNGAm3SJLCNKZZy
-         uvMoEqcEzjY1q04FTqF6xpp/Ks8ONnnV/lIzsoMh8geRVXIU3IRiwFOma8BsKDI/On43
-         4oZQ==
-X-Gm-Message-State: AOAM530MCnlMI7pUuP7NAO3Zq5eI45r+Y38v3NyDV99Nu1WSZJLl7D++
-	ZGG6ulcbXB1ak/6uoyq7ddQ=
-X-Google-Smtp-Source: ABdhPJx5YV2bllswP9Y5HDR1gd78JxAq/tXgJVrMlFlfswTcU+ohp7EIfHZnR2PamFVgNaPqHvPRqg==
-X-Received: by 2002:adf:e8c9:: with SMTP id k9mr2405325wrn.315.1617181600635;
-        Wed, 31 Mar 2021 02:06:40 -0700 (PDT)
-From: Hongyan Xia <jerryxia32@gmail.com>
-X-Google-Original-From: Hongyan Xia <Jerryxia32@gmail.com>
-Message-ID: <d22d4d5cabab4dc0db0d3f7f3cd67ce167a4451e.camel@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Mime-Version:Content-Type:
+	References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID;
+	bh=IOUJe2tihTzla+erqhwVJsivSTtTbZipunSRUJNldxg=; b=xqBd6Phf53khymVT9bBW9mqPpg
+	Q7xnmUNtiOmSWdc2/ZhmvS8FhE1jmkHyiS1hgGpn489LUaFVWuN21PP4Ej+6y0xOFFHRGhqFfuxCt
+	+0gTxoywdW186zPAjmHRkbP6NBmP2V11sgmn2TZQdkO/G+fTWSHVNubgAV0ZEmIMsk/8=;
+Message-ID: <fc88e9ebb902d7d4315202ec25d00506f433641c.camel@xen.org>
 Subject: Re: [PATCH RESEND] Performance regression due to XSA-336
+From: Hongyan Xia <hx242@xen.org>
 To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
 	xen-devel@lists.xenproject.org
 Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger.pau@citrix.com, 
 	wl@xen.org, stephen.s.brennan@oracle.com
-Date: Wed, 31 Mar 2021 10:06:31 +0100
+Date: Wed, 31 Mar 2021 10:53:49 +0100
 In-Reply-To: <1616619905-640-1-git-send-email-boris.ostrovsky@oracle.com>
 References: <1616619905-640-1-git-send-email-boris.ostrovsky@oracle.com>
 Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
-MIME-Version: 1.0
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
 Thank you for the patch. We observed similar issues.
