@@ -2,42 +2,42 @@ Return-Path: <SRS0=azK0=I5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47B36C433DB
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 10:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 079F2C433C1
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 10:36:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C19AB61582
-	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 10:36:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C19AB61582
+	by mail.kernel.org (Postfix) with ESMTPS id 778FA6198A
+	for <xen-devel@archiver.kernel.org>; Wed, 31 Mar 2021 10:36:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 778FA6198A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.103829.198007 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.103833.198043 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRYCN-0004Xm-9P; Wed, 31 Mar 2021 10:35:43 +0000
+	id 1lRYCd-0004hg-C9; Wed, 31 Mar 2021 10:35:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 103829.198007; Wed, 31 Mar 2021 10:35:43 +0000
+Received: by outflank-mailman (output) from mailman id 103833.198043; Wed, 31 Mar 2021 10:35:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRYCN-0004Xf-6J; Wed, 31 Mar 2021 10:35:43 +0000
-Received: by outflank-mailman (input) for mailman id 103829;
- Wed, 31 Mar 2021 10:35:41 +0000
+	id 1lRYCd-0004hW-7v; Wed, 31 Mar 2021 10:35:59 +0000
+Received: by outflank-mailman (input) for mailman id 103833;
+ Wed, 31 Mar 2021 10:35:57 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9hby=I5=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1lRYCL-0004XZ-BR
- for xen-devel@lists.xenproject.org; Wed, 31 Mar 2021 10:35:41 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1lRYCb-0004gV-L0
+ for xen-devel@lists.xenproject.org; Wed, 31 Mar 2021 10:35:57 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8b5e75a1-b357-4113-91e5-f4aa7e3306d6;
- Wed, 31 Mar 2021 10:35:40 +0000 (UTC)
+ id 44e71fb5-fe1a-4cb7-891e-c4233cdb117e;
+ Wed, 31 Mar 2021 10:35:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,186 +49,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b5e75a1-b357-4113-91e5-f4aa7e3306d6
+X-Inumbo-ID: 44e71fb5-fe1a-4cb7-891e-c4233cdb117e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1617186940;
-  h=from:to:cc:subject:date:message-id:
-   content-transfer-encoding:mime-version;
-  bh=lXblGJuTWXkI6+BzR09qzE74qpS68r0DGSrFHambnJc=;
-  b=aIfBtvwGeD1Req2y3jjdAcDSw4w5hDRZELcot/K8SYKYz0NWg+S9b4uj
-   Ocdm0x/qMPBuZnMtHmFIC/apxyAAMVnc0kwEoI06xOp2C3kmtZGS9Uxvf
-   MvLRBk0MXto+gJUM6Lm0PgW6liOEKWgbfTp806vZ/Mhes7xUucyF6KoYl
-   A=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: NbvWk5CaU+ZTzThIwBlND9TovZdaEiHDNfJRP/OM6osZi0ynmbZ2YjvQk7L6MqhQx9MNWtvTlw
- pxoagTdwNdtnzNeGVeJ8VCC0DT4o5KmG8BxirZDAsIzrFSfoyt5MY82YPlpmM3COdWXoL+t+5Y
- 3si7uh/8DeOp7ykzsAfEE9QKvxQG3YfJcoOtVDeppbMyEJhBWaklVYdPsKwKtIjq93xNrBpcqw
- oe0zk30p6SAq5J3fccjFf5EEd4mR1jTtINkpsmqk2pkHDl+iBd6JU1GeO+/ykhsuDNDmy+IZZR
- u7E=
+  d=citrix.com; s=securemail; t=1617186956;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=uZL29ugOlkoo4WkuuUBU+vjfeGVoGnql4+FwdjwuYkw=;
+  b=cMcaf7jlRyPTxy9fC5T1nSuWXaaUmgmAjUEacUNGOoi6qVx+8IH286RE
+   KP/8vA6RJi+nBppWs2t6QwnkruGZIYcuSlRfTJeyBMZ3F44CvfCOOZkjH
+   a4MwZ0YM2XGK3mCQ87Vg7Te6B8MRaOk3yS8gcFDORedE6QxOIw22bXxEd
+   M=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: /uvVyBv5xVnGakZuFeRVMy4mY9cyezBPFJig4mB6tRWhyGbcU7vPA5DcqVjPIa4nSnJPdW0lSY
+ gCPlH/uacWa2Gk1Rkz+mW0Y8rJ4zxosMUqY1fmgKLhywQAPm9CLUAwAZlT32y9wG2/UcVyg7zX
+ SE/COgEiplotmXfkQHK8D9Sk0FAZUM+Ch5Jo1RrIQu9aqAcflIV1m8bqp6qtpUbgZ3IlkYMEd5
+ 3FbUfV0iU0K862wjTWrMLtpROdrsLy3lDg5O+ZdusFa9DbUbWFjZf3trfo/Kx81ZSuH1IkFfIk
+ VbY=
 X-SBRS: 5.2
-X-MesageID: 40415641
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 41994558
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:NtJ0oaFWq0EWyM6TpLqFMpHXdLJzesId70hD6mlYVQFVfsuEl8
- qngfQc0lvOhCwMXWw78OrsBICrR3TA+ZlppbQAJLvKZniChEKEDqFHqbHjzTrpBjHk+odmv5
- tIXqBiBLTLYmRSot395GCDfeoI5Pmi3OSWifzFz3FrJDsaCZ1IywtiEA6UHglXaWB9ZaYRL5
- aX6spZqzfIQx1+AviTPXUZQ/PF4+TCiZOOW3U7LiQ64wqDhy7A0s+YLzGk2H4lMg9n8PMZ3k
- Xu1yf44aiitP/T8G6n60bjq654tfGk5t9KBMmngtUYJDP2mm+TFflccozHhh8ZiqWC70srjc
- ntrn4bTrhOwkKURE6Zi1/M3BTtyzkn4XOK8y7mvVLT5fbXaRh/Lugpv/M8TjLpr3AOkfs57Y
- dwm0WejJZTBQOoplWE2/H4EytEu2DxnWAvioco/htieLpbUpB9h6oF8nhYFZ8RdRiKk7wPIa
- 1VAMbQ6O0+SyL9U1np+m1mwNmbVn8uBBuxQk8bpsyP0zRN9UoJtncl+A==
+IronPort-HdrOrdr: A9a23:B5fhqqtFUXAdGj05Gn3cyYaB7skCrIMji2hD6mlwRA09T+Wxi9
+ 2ukPMH1RX9lTYWXzUalcqdPbSbKEmwybde544NMbC+GDT3oWfAFvAG0aLO4R3FXxf/+OlUyL
+ t6f8FFYuHYIFBmga/BjzWQPM0nxLC8npyAocf74zNTQRpxa6dmhj0JaDqzNkFtXgFJCd4YOf
+ OnhvZvnDardXQJYsnTPBBsM9TrnNHXiIngJScPGh9P0mKzpAm14733GQXw5GZ8bxpzx94ZkF
+ TtokjCyYiI99q6zRLd0GG71eUtpPLRjuFtKebJpswcKjDHghulaoJ7S9S5zU0IidDq0nkGup
+ 3hpAohItRS5hrqDx2IiCqo4SbM+nIP7GLv0lCRi3eLm72HeBsKT/BvqKgcVzmx0TtFgPhMlJ
+ hl8kjcir9sSTTHpyj578igbWATqmOE5UAMvMRWs2ZSSuIlGdhshL1axmx5OrEaEhn37Yg2ed
+ Med/301bJtfVSWY2uxhBgI/PWcGnA6HhKxSkMfoMCi0z9PgHBjz0cDrfZv50s9yA==
 X-IronPort-AV: E=Sophos;i="5.81,293,1610427600"; 
-   d="scan'208";a="40415641"
+   d="scan'208";a="41994558"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S3xwStePB3EOcI+Ob3u5/H0pd7o2fee7nqKiC/XU8syvXuK6dD5brIPPly3f2++n9p+J9bCA+X0YzeI50QE8IFzT1/93n+bL3CrwqMG/KRkyAgdChP76dNyJZ6il8QCgwXB4Kk4JaPcL1XZquurQ5KU6GpmYdfx61qTN+wvohFxuGxeGPJO5v2kS1Uc1yDBQ2LJ1ik865sZXx5FAMpJEVNy0DMo1pa7UjS7i24M06eHLNrGm8pTXgtArRVLmVH0v8ZdLEw3+/wOA+lF4Ml9UuWVJBlovCkRAcqJHcr1dCw5wuTScRj56G5GPlGFQLVhC66dNAV4GE/J68Tcbc1SwQg==
+ b=lhQY8Q/l2c+6iIvW71SMpYAVrLVHsqARZo9cog2+8XzZhmUbyv0ZETFZy1lrUswKxoovVEbOIhbPxVeGXgCgNOTiIXcqt9a2kyTu55852tJ9TmNlTjsTfu228ZK5FfY0pPVO2QCmELgxDnyrX79LTwBJNYG9fTkTZQYn1mdBPKa1LHPbJWnda+YqRbSdllg0QE5yhx3rk1qmgB615NTr/RPb4cwsPLAn4eDdQlX73k2igQuvuLWZ3liqvLNbBLkcwNNYNKsIPhzslOK9knthU7MYlVIdCJur7Jp8Dcz4Ov+HOJFPFh1zML1dqd1ntsKLU63Nl3H4zHq+GWy6ubp3xA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k5uDutd4OrUzZF9dpiK3BecJLbNCTSNgtYFMzSQYNMk=;
- b=fn1w84bu9urHhZPeRT/7Z+OhoB7kUz4AEXF/MCr3B+S7QUglCo8Md8xMEmlzbfNS6lytwhdMsHqTXIaz/z88LD9W4sIXB0MXvAMy2/9WDVJ3n0W7MXcD7WCYieN0X3mKXoSnKKioM7XCt/eP0OnPW/xh8YEMY+/7BstvAA4XCQoczUU65qymuitoG74wknN0Tccp8nSdgb4/h+aLHplHHAySBMUDnCEOMYljMQAy9o30FBPyLD1qE0UAb1Y2487TksBH4dwuClX8WLvOoOFU9wFFPMTytNG/A76EI5A5kpEbv6hj9ZJlkbbkYBcGteHVld8NHt0PO7P1Nadet3Csow==
+ bh=uZNy/L5pNGQXMad8B2V5JHLEH+vnc9PVuVRiLVFoWBc=;
+ b=gAJ2rBDFAFszOJyQBarAM2F89ax9WwK3ixGwi4oM38jCWbvzOoB43NiSQXrryQ0TQkkeKtXI3KobNzi6Y7KoCSNc5hIPj72HNEGB+5F3dhQW7CDj/EIoAhZm6uPmU1RKt0GA//lBMmDqV8CM6T5WbqjiuVeHZ3tOqFsgKSa4EXVSFpQ+wFhk0IC7CtR9/NQ4RuYfn730C2q5VtfDqJS6+NsAR+9EDlPd0WIzwL6dhicCfSaa4DwEQdNZSCDO2t/uL6ODZ2mncAZWlLFSnvHmg953otOpvMQeBs/q/hbBryHw/x0oOpHbHOLIRfd0jYgFMmBIMhPB3YmK6uXyRSUURQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k5uDutd4OrUzZF9dpiK3BecJLbNCTSNgtYFMzSQYNMk=;
- b=YgSqCHGhCtI5g4I67Y83LyA47HV8r/FvwQAMB36KCemNwN3qHaXj9YIbjQqKLOQ3pQYLjmjCrHe0wMDXTQvUFfYl9miN3GL9B+cG3fE/hkbUv4StLTozDeOprEDZ3leHlir8GUqOPE8QfzH2z33NNaVVSo3TJG2ad3p/w+WFSUI=
+ bh=uZNy/L5pNGQXMad8B2V5JHLEH+vnc9PVuVRiLVFoWBc=;
+ b=FpVkjNC/CUc/BLLNsCdcUqyK64HwCy/rUvncXKF+5SF4ChspWMqN0NqM8DYNTd1paPGjbKynepgtd52wFNFx/Lyn1uRi6U+bgQa8T3Etozw8jXQt09Xgug4PnuzLkqtmZcI8WWXsEO+deOyh+LgmJMlmMWk/WQNfGK83ECEC0o8=
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Paul Durrant
-	<paul@xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>
-Subject: [PATCH v3 00/11] x86/intr: introduce EOI callbacks and fix vPT
-Date: Wed, 31 Mar 2021 12:32:52 +0200
-Message-ID: <20210331103303.79705-1-roger.pau@citrix.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 03/11] x86/vlapic: introduce an EOI callback mechanism
+Date: Wed, 31 Mar 2021 12:32:55 +0200
+Message-ID: <20210331103303.79705-4-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210331103303.79705-1-roger.pau@citrix.com>
+References: <20210331103303.79705-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MR2P264CA0089.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:500:32::29) To DS7PR03MB5608.namprd03.prod.outlook.com
+X-ClientProxiedBy: MR2P264CA0152.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:1::15) To DS7PR03MB5608.namprd03.prod.outlook.com
  (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 524e110e-4121-407f-dd59-08d8f430b83f
-X-MS-TrafficTypeDiagnostic: DM5PR03MB2777:
-X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr
+X-MS-Office365-Filtering-Correlation-Id: 849cd698-cfa6-4f51-9f0c-08d8f430c258
+X-MS-TrafficTypeDiagnostic: DM4PR03MB5968:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM5PR03MB2777995DB746EBB824030B6C8F7C9@DM5PR03MB2777.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-Microsoft-Antispam-PRVS: <DM4PR03MB596839834E1E1E0DCB74501E8F7C9@DM4PR03MB5968.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:506;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wjwNH9xCrrZJnCYbGU3HPWlLBn/HzHGLXPY2sqmoVzo1D32w+CE+GeAY7w84HNNmZg3cW1IJmlKKlhAQXgeXNyNP9YyztfpS8I5QtFDhub+pSZG1KgrXE89pv55SL8ZTssnlPi/QHIhC36ckUyuG/6zFQfhHDtIo8uE1XQBJsuFoX29IUMIHZCfW3arqs9VWaPSSqZxdumIMBi1vMurrr/8FemdbQDs5lB2DQk3kB1a6GQQUbw4eoBK/8qPFziSCB5Wv7dttk65MtOEqdIQ6lEwI5fyNKXIKsJVDbFIYZoRKWMVMbVcjXxBcppytJVRsbuDMwdJwlYGfCsMOD3dN7sfIgmDkIsyO6ZkOss961R6tAioyGoqXI5DSAI2EpDVMf1UKdTeDJT+S3zq6UtUlrRFWku4dRWQ9m+IeJOLijo18AbNOJG7XVxB12kgm4EVAXoAfJkwbAaF1QUhSPmzCGExJLLmb+m3W2JP98vYIgqDSAcckUdihjb7QXiPsBV6FWmr+cp3MTw3wmMC5z+mEPBvcWxcS5iGdiYWfYXUddSAyC4Pz3hMeXns8fbqe2eG3v+8EsQ7rZkAKFKNCLFn0Ly31lw+xaqfP6DTs3YYKLgLm1tY8i008kwO8V9nlJ/fHxMHsCgxE7HOLDmymCMOhaA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(136003)(346002)(366004)(39860400002)(376002)(5660300002)(186003)(66476007)(16526019)(26005)(6486002)(8676002)(36756003)(86362001)(83380400001)(38100700001)(8936002)(956004)(54906003)(1076003)(6916009)(2906002)(4326008)(316002)(2616005)(66946007)(6666004)(66556008)(478600001)(6496006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?VVBNZUJQSVJWQU5mTFlaNmoxblMzS2Q4ano0K3JsSVc0MllBaHBZOFdiaFRm?=
- =?utf-8?B?V3R4NkVVeTQzZ2FuVXRUbjNQcE1FOTBaL2ZQNnFaZDc4ZnI0Y2l0eUphYkVk?=
- =?utf-8?B?VjZIVFRYTEROOE5tSXcvTGo3NjJSL3lQbVFWZ2lCczJHc2o5WnRaRm1FRDZM?=
- =?utf-8?B?MWVRUDJsazNDdEdhNXRMbWI2MGM5R3BaUEhsTjJQcHpkQTNPaEhDNWcwaTc2?=
- =?utf-8?B?MEZvOXNnbGRQc0VpaE1vQ21Qd0h1NkRpWitLbHlkUnpra0E1WExleFBVT2s0?=
- =?utf-8?B?eXNyb0VNcUJtVGgwaFdWWmU2RTYzTEhlWjgrenVvZFRNVFdmYmxXbzlocWF2?=
- =?utf-8?B?NExtVjZIb1AyNElzN1FORTg4MEdPRkt4T2FYTDl4YlZ2SG5Ba3BMSlk2UktU?=
- =?utf-8?B?RUZDWXhmWUUzSHdiMFJ3dEFvWUdweDZ0ZEJsYTEyeTdwR3p0SVAvVjZOUjF3?=
- =?utf-8?B?bVFQa1FpTUxkNXlCbjFSVHZOTldDTnhXd241emE3NGMvYTRYS0Y4ZUJZNER2?=
- =?utf-8?B?Nk02dWlDTHFNdFpaRmIxenM0elc4SVhRM2FoMDJXdXh4WmFxL0N5RkRaR1ZO?=
- =?utf-8?B?YU5jTlJxV1ZoWDk0aHlMLzFzbUFzaFg3aXlkYjhkdFNEL2RUY1Z2a0FmNUhP?=
- =?utf-8?B?YklyU0dyRE14bUtCemNEMGQvRWtEMzF3TWJhYTU2Q0xYdlR5bmZyRXVSNFE4?=
- =?utf-8?B?Y1VCOXJUSGduNHdYVm12cGxNQ21hWCszQ1NkelNmR2lHRUlGNzcxUHRlNWRl?=
- =?utf-8?B?dEx0QlZwZWJ4RGZOaTkzUFRENWE5MkVWM3d2bHQ4a3ErckxqVWhzSzA1c242?=
- =?utf-8?B?NW50UmhKOWxsdzhJVzJ2T3Nsa3R2S2pOYzhHZTJDSmVHN2dqWDEzMDBpeUN1?=
- =?utf-8?B?UUtEWVlScFNXdW1nUXJHOWZKUy9US04zSWtVaEw3V1NUZDNicEcrVmhnU3J0?=
- =?utf-8?B?RkVMb3JiYTBUaXhwMnZHaXZqMm9iYjVQTWpVRkprMFBGbGZnM1cwMzFVSElY?=
- =?utf-8?B?K0NDbWswRmx4MnJmZjUwMHQ5YXJNaXZaTkh2SnEydEsyV2NWTll2aEZCcWFm?=
- =?utf-8?B?Qml1bGdPc2kzblFCeXJpelhWdkN4U2JxYUV5VXRDT2JGTUtVSVBHUTNORHJO?=
- =?utf-8?B?WmFQYzRXeFArM1pIdnlaalRVdlorUGlBUFV1SDFLYUsyWGVuUXVCU2lFaU43?=
- =?utf-8?B?OFFUd0JzMXM2WnVBODFRSUNsaFhCck1zcG1wWUZ5THdxcENrUGhIS2FvYTQ2?=
- =?utf-8?B?WjlGU2FMTUY0REN5aXlIRHAxcU5kU3BkR0JxTVJ5UnBvQ2J5SEtmUlpPcjJY?=
- =?utf-8?B?NllRZmN3cExYT1FzRS9HV0xva1R0Y1lzSklZQXlucExoL2tjdm9iTGVuVDNV?=
- =?utf-8?B?N2djRjJXdHc4c1hLRy9yVmRXMWhhUHg3L3hwOSt1SDRBK1hyaHR4aW93MEZl?=
- =?utf-8?B?WFQxL01iVENWR20rYWkza1VFZGZWZEtEQi9pcnFGZklacGlSZVcvcGkwOGRL?=
- =?utf-8?B?eWhrQndZRjY0WXhJWVBtY0JYdEttT0F3R1BkV2k5VFZrN05Xb0ZBUHFxNjNH?=
- =?utf-8?B?QXArUmQvWUVwU1ZLcU1pWmYwd2NuKzVUWHB2RDBYR1BHemlTRFE2VmJxT1li?=
- =?utf-8?B?cy9LUlQvVXJyVkdNanMvQkNTMGpjK2JpNzkyNGtEc2M5QTIvSWlEZTRwRFk4?=
- =?utf-8?B?ZmJla1V4ZWlrUmlZZ21YajdOV0tRTDJLY3VTYXFsM1JPYVova3VWRmZvU0cr?=
- =?utf-8?Q?d2vituBZ/oMRPz/lpHrPpOiJmymYRq42rtUM9h5?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 524e110e-4121-407f-dd59-08d8f430b83f
+X-Microsoft-Antispam-Message-Info: 978tVbIdC4b7xVB7qTjvrvvOkPJqj1euY03Fn+Y3BPKz73P4rRIBvxmu379v1eJuNtfUg2PLMd7kl3kXmES9+umdE2xIgWXFUloHXoydg+z4fKWUmrrbTnRVZv1yvusFt9FAj4ouZGz/y/luXOEyafVruUDQgRtwEJxFRjrmqOdK+tgLpPK4YSyYixeCTgte6vWTkbM9FI//esy4PeNdHJeFKkAzs92UpPbSZ/vczwGcSY/EgVTiyl4B8K6ERrGewib1Y/9kwl1d3oYEUsn7igc3PjUOx1wekVq1FB0q28v0lZ3iXP57kDN6NZQE52KVaMv4m8PiQoLcZv26RFQ1xoDeMoqvoqRSmhWd8zzWTOGGvuwjcNps8ZYB4PUPlpL9Eu6918M9buKzR1EQuM5bUvq8PbYVS+PrAV8OkrBUsan+BJTAlaTisrd+61UFRsIEmUhrMVALZNClveNfrxKwry1rdsKIz1pJ3WMe2p3fGPXA9QROrFbHTxs0+BtZQK+nMEcy6Mv6h6na2CdOyXY09+U5aQwAhXstRo91KDnEGWbzisno8SzrRLQMdGe+amcX88H9mAB5hUbAXJpiYk6ezizPKNTznEYDV8M/6n26EyuUTC5ex1guQEUGan1ZR/wi27ebaAidDUw0RuDlDOQwfkjbCWuceFb5W4hqdiBIIzY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(366004)(136003)(39860400002)(396003)(26005)(2906002)(6486002)(8676002)(1076003)(36756003)(38100700001)(8936002)(83380400001)(16526019)(86362001)(186003)(6916009)(6496006)(66556008)(66946007)(478600001)(66476007)(5660300002)(316002)(4326008)(2616005)(956004)(54906003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?MVcyOUV0by9hQmpScEp5VTFVT1hpcytDeUdJQWpVRDhuMXBoREl3UE9oSVox?=
+ =?utf-8?B?T0tUTjRVQVluYkV3T0lQZ3hXN3hPR2l5K1JteGljd3R1WXJPRktIcm03L2VL?=
+ =?utf-8?B?OEhjOGtaRUlURktmSDJXaE8rTkM3K0J5bFZ0TGdTZ3QrSjBlUG1ualUxZVZ4?=
+ =?utf-8?B?TFk4aTNlZWRrWDhXTGM4dWNRY1ZqR3I4UUV0elB4WERicGZoTTFCemZjUk9T?=
+ =?utf-8?B?bVo0Z2RGMmdDYWpuK1hnNGt1dXgvTjhQejBSQmpGeDJQWjVUa0NsVTRpSTRp?=
+ =?utf-8?B?b3hvSWl3SkdRcGZ1TytBaTVadkNLSjkzSjZvNUNEMkxIVElqRk9Ma01yZU5j?=
+ =?utf-8?B?T3lxRENuZHY3dGo3QWZoOWo1bTNIcmppMnJkRkxGbjRkbHN0MGhpSjNrV2t2?=
+ =?utf-8?B?TTRIYTQwVjhRZU50UGgrN2ZPZmZwZlJMcTNwdXRrdGZwNmJyTmNGQmU0RlNl?=
+ =?utf-8?B?NWVTUC83bkpPV2JXRkh1UWpFSmYrcVptbGJzVTVxUExvTnpWTHNzakZTd056?=
+ =?utf-8?B?MmdOZXBNazVFT084TnB2TUxvMERRYStGbk5Pd0xaeXcxSDB6MmllQ3IvRDNm?=
+ =?utf-8?B?c1Zra3VvNTllbk5XbjRlUkVVREdPcnVrREQxOHlWUHVaUlczK05hbFhlUURo?=
+ =?utf-8?B?ZzdCVStNOFVFVlJjUlRZdEJ2Zjg1VzFXVHNXaS9pNGZFc3RtRHRXcmNzK0wr?=
+ =?utf-8?B?ZDlEeHRIaXl2K1pzYkN6TG5MclBmZGRxd1FIb2gvZll6RDlDMVV1MC91TWhh?=
+ =?utf-8?B?WU5NUEV6YXc5NmM0YW5ja3VYSmRNUTM4Nk9SQ0dwV040aU5IUEV0YVBSYVNL?=
+ =?utf-8?B?NGl0TVpZV0ZUZitBVXJtbnRBK2M1d0VmYjJid24xMENiZHdBMHl4aTZ6c0Fn?=
+ =?utf-8?B?V2FvalVLSG45eXZrV0ZSWFp1aVRBbDhLYnRKS05xajdtcThYcDZvVnE4TjB6?=
+ =?utf-8?B?MnczZGVZRGEzZXZBNER2UVdhODIwVkY5aGJzZlVUc3dIWXB6NVBGQ0o5OXdM?=
+ =?utf-8?B?eEZzY25QU3FBMEZYRXRNRUJzajFWbXJHQVNDaGdNWlJsNUI3UUVPQWR5OG93?=
+ =?utf-8?B?OCt6dFhhNjFCN1A4aXZiMkphOCtTbVpmajFvZmFsbmxDVlRiWXNqNXpBRjVG?=
+ =?utf-8?B?WS9FMTE4SHhHN2J0NGJlU3N6T2lYL3dsRXNqb3NUb25uNlhkT0lNRWFqK0lD?=
+ =?utf-8?B?WjZtYkgzVE80SXhkaXpERWd2U3dSaUdZbWdrbkJ2V21aYUk5ZDByaGdhVlJ6?=
+ =?utf-8?B?ZU1tcGV1d1JCMUhsU1pIT09haG94OHdmcENqWUFLa0g5ZFNrWGRTUUNFaFJX?=
+ =?utf-8?B?M0I3dHpaWHpSM2lnNGJUZldVSEpUVk5yNGxGY0lIcUtrWElldDVFeW5iNDJM?=
+ =?utf-8?B?SjNsWno4M3RBVXoyRzZkd0NOQUo0ZFczcmY5N1NvR2ZTRVNpSDNsMmpDeG4z?=
+ =?utf-8?B?bmpkWHNRbVQxQXFPcmNSakQvUnRjT3BIWTdWTTFNd3U2cnd6QXVhOHpnSzN2?=
+ =?utf-8?B?M09XUENoRHZtSnhLWHFwdExIblpwZ1Awb0haREVUZmFVaWI1dlM2MFBRNG9k?=
+ =?utf-8?B?WmxUMzdPRmRQL0NKSFF3NUdTaDJ6aElTbkJzU0UwbUttL3dmR2RJUm1Xbnpw?=
+ =?utf-8?B?Nkk3TmNzTlZzYjJXbzYrc2NrRTArWklkTDczU2hhSWdSM1p2c1B5ajNJczJP?=
+ =?utf-8?B?SHFJWldsQjVzRTQ2Z21pZWtDUEExQU45ZU1KWVVVU2NYU210L0xhMXRFdUlT?=
+ =?utf-8?Q?u3JkV+0DkvmBg71tbBnkQecPLFUX+P7S1jB213x?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 849cd698-cfa6-4f51-9f0c-08d8f430c258
 X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2021 10:35:36.0860
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2021 10:35:53.0006
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +xrAnvZDTI2EZqncl1vLzRgVfjnMzRpnJGaHRD6M+qrpGOJlyaiqVbq+zOI8Ok3freC/CwE3XdYanXdSCX045g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB2777
+X-MS-Exchange-CrossTenant-UserPrincipalName: Uk7sJxrigTALmRmpuIWDkmH+7wdVt+PT3ExT0sWxHlJOrqFVHvkSft46g9fK+2jhBxH7VImo50T1kwTlgc9S1g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB5968
 X-OriginatorOrg: citrix.com
 
-Hello,
+Add a new vlapic_set_irq_callback helper in order to inject a vector
+and set a callback to be executed when the guest performs the end of
+interrupt acknowledgment.
 
-The following series introduces EOI callbacks and switches a number of
-subsystems to use them. The first one is vmsi and dpci, which are quite
-straight forward to switch since they used to open code hooks in the EOI
-handlers.
+Such functionality will be used to migrate the current ad hoc handling
+done in vlapic_handle_EOI for the vectors that require some logic to
+be executed when the end of interrupt is performed.
 
-Finally HVM virtual timers are also switched to a different model where
-EOI callbacks are used instead of checking at every return to guest
-whether a timer interrupt is being injected. Note that such change also
-fixes a bug in virtual periodic timers that prevented injecting to a vCPU
-different than the one where the timer is assigned (and that would
-currently match the i8259 target).
+The setter of the callback will be in charge for setting the callback
+again on resume. That is the reason why vlapic_set_callback is not a
+static function.
 
-Those changes are paired together so that practical applications of
-having EOI callbacks can be seen in action.
+No current users are migrated to use this new functionality yet, so no
+functional change expected as a result.
 
-Note that further cleanup can be done, but I think the series is already
-big enough and provides a clear benefit.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - Fix commit message typo.
+ - Expand commit message.
+ - Also print a warning if the callback data is overridden.
+ - Properly free memory in case of error in vlapic_init.
 
-A couple of notes from the testing performed:
- - PVH dom0.
- - Windows guest, limited to 2% capacity to test delay for missed ticks
-   mode - time is consistent in the guest.
- - Windows guest migration.
- - PCI passthrough to a guest.
+Changes since v1:
+ - Make vlapic_set_irq an inline function on the header.
+ - Clear the callback hook in vlapic_handle_EOI.
+ - Introduce a helper to set the callback without injecting a vector.
+ - Remove unneeded parentheses.
+ - Reduce callback table by 16.
+ - Use %pv to print domain/vcpu ID.
+---
+ xen/arch/x86/hvm/vlapic.c        | 64 +++++++++++++++++++++++++++++++-
+ xen/include/asm-x86/hvm/vlapic.h | 18 ++++++++-
+ 2 files changed, 79 insertions(+), 3 deletions(-)
 
-Thanks, Roger.
-
-Roger Pau Monne (11):
-  x86/hvm: drop vcpu parameter from vlapic EOI callbacks
-  x86/hvm: drop domain parameter from vioapic/vpic EOI callbacks
-  x86/vlapic: introduce an EOI callback mechanism
-  x86/vmsi: use the newly introduced EOI callbacks
-  x86/vioapic: switch to use the EOI callback mechanism
-  x86/hvm: allowing registering EOI callbacks for GSIs
-  x86/dpci: move code
-  x86/dpci: switch to use a GSI EOI callback
-  x86/vpt: switch interrupt injection model
-  x86/vpt: remove vPT timers per-vCPU lists
-  x86/vpt: introduce a per-vPT lock
-
- xen/arch/x86/domain.c             |   4 +-
- xen/arch/x86/emul-i8254.c         |   1 +
- xen/arch/x86/hvm/hpet.c           |   8 +-
- xen/arch/x86/hvm/hvm.c            |  23 +-
- xen/arch/x86/hvm/irq.c            |  63 ++++
- xen/arch/x86/hvm/rtc.c            |   1 +
- xen/arch/x86/hvm/svm/intr.c       |   3 -
- xen/arch/x86/hvm/vioapic.c        | 149 ++++++----
- xen/arch/x86/hvm/vlapic.c         |  74 ++++-
- xen/arch/x86/hvm/vmsi.c           |  35 ++-
- xen/arch/x86/hvm/vmx/intr.c       |  59 ----
- xen/arch/x86/hvm/vpic.c           |   9 +-
- xen/arch/x86/hvm/vpt.c            | 476 +++++++++---------------------
- xen/drivers/passthrough/x86/hvm.c | 219 ++++++++------
- xen/include/asm-x86/hvm/io.h      |   3 +-
- xen/include/asm-x86/hvm/irq.h     |  21 ++
- xen/include/asm-x86/hvm/vcpu.h    |   4 -
- xen/include/asm-x86/hvm/vioapic.h |   2 +-
- xen/include/asm-x86/hvm/vlapic.h  |  18 +-
- xen/include/asm-x86/hvm/vpt.h     |  26 +-
- 20 files changed, 601 insertions(+), 597 deletions(-)
-
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index 98e4ba67d79..851a1f5bd6c 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -144,7 +144,35 @@ bool vlapic_test_irq(const struct vlapic *vlapic, uint8_t vec)
+     return vlapic_test_vector(vec, &vlapic->regs->data[APIC_IRR]);
+ }
+ 
+-void vlapic_set_irq(struct vlapic *vlapic, uint8_t vec, uint8_t trig)
++void vlapic_set_callback(struct vlapic *vlapic, unsigned int vec,
++                         vlapic_eoi_callback_t *callback, void *data)
++{
++    unsigned long flags;
++    unsigned int index = vec - 16;
++
++    if ( !callback || vec < 16 || vec >= X86_NR_VECTORS )
++    {
++        ASSERT_UNREACHABLE();
++        return;
++    }
++
++    spin_lock_irqsave(&vlapic->callback_lock, flags);
++    if ( vlapic->callbacks[index].callback &&
++         (vlapic->callbacks[index].callback != callback ||
++          vlapic->callbacks[index].data != data) )
++        printk(XENLOG_G_WARNING
++               "%pv overriding vector %#x callback %ps (%p) data %p "
++               "with %ps (%p) data %p\n",
++               vlapic_vcpu(vlapic), vec, vlapic->callbacks[index].callback,
++               vlapic->callbacks[index].callback, vlapic->callbacks[index].data,
++               callback, callback, data);
++    vlapic->callbacks[index].callback = callback;
++    vlapic->callbacks[index].data = data;
++    spin_unlock_irqrestore(&vlapic->callback_lock, flags);
++}
++
++void vlapic_set_irq_callback(struct vlapic *vlapic, uint8_t vec, uint8_t trig,
++                             vlapic_eoi_callback_t *callback, void *data)
+ {
+     struct vcpu *target = vlapic_vcpu(vlapic);
+ 
+@@ -159,8 +187,12 @@ void vlapic_set_irq(struct vlapic *vlapic, uint8_t vec, uint8_t trig)
+     else
+         vlapic_clear_vector(vec, &vlapic->regs->data[APIC_TMR]);
+ 
++    if ( callback )
++        vlapic_set_callback(vlapic, vec, callback, data);
++
+     if ( hvm_funcs.update_eoi_exit_bitmap )
+-        alternative_vcall(hvm_funcs.update_eoi_exit_bitmap, target, vec, trig);
++        alternative_vcall(hvm_funcs.update_eoi_exit_bitmap, target, vec,
++                          trig || callback);
+ 
+     if ( hvm_funcs.deliver_posted_intr )
+         alternative_vcall(hvm_funcs.deliver_posted_intr, target, vec);
+@@ -459,10 +491,24 @@ void vlapic_EOI_set(struct vlapic *vlapic)
+ 
+ void vlapic_handle_EOI(struct vlapic *vlapic, u8 vector)
+ {
++    vlapic_eoi_callback_t *callback;
++    void *data;
++    unsigned long flags;
++    unsigned int index = vector - 16;
++
+     if ( vlapic_test_vector(vector, &vlapic->regs->data[APIC_TMR]) )
+         vioapic_update_EOI(vector);
+ 
+     hvm_dpci_msi_eoi(vector);
++
++    spin_lock_irqsave(&vlapic->callback_lock, flags);
++    callback = vlapic->callbacks[index].callback;
++    vlapic->callbacks[index].callback = NULL;
++    data = vlapic->callbacks[index].data;
++    spin_unlock_irqrestore(&vlapic->callback_lock, flags);
++
++    if ( callback )
++        callback(vector, data);
+ }
+ 
+ static bool_t is_multicast_dest(struct vlapic *vlapic, unsigned int short_hand,
+@@ -1620,9 +1666,22 @@ int vlapic_init(struct vcpu *v)
+ 
+     clear_page(vlapic->regs);
+ 
++    vlapic->callbacks = xmalloc_array(typeof(*vlapic->callbacks),
++                                      X86_NR_VECTORS - 16);
++    if ( !vlapic->callbacks )
++    {
++        dprintk(XENLOG_ERR, "%pv: alloc vlapic callbacks error\n", v);
++        unmap_domain_page_global(vlapic->regs);
++        free_domheap_page(vlapic->regs_page);
++        return -ENOMEM;
++    }
++    memset(vlapic->callbacks, 0,
++           sizeof(*vlapic->callbacks) * (X86_NR_VECTORS - 16));
++
+     vlapic_reset(vlapic);
+ 
+     spin_lock_init(&vlapic->esr_lock);
++    spin_lock_init(&vlapic->callback_lock);
+ 
+     tasklet_init(&vlapic->init_sipi.tasklet, vlapic_init_sipi_action, v);
+ 
+@@ -1644,6 +1703,7 @@ void vlapic_destroy(struct vcpu *v)
+     destroy_periodic_time(&vlapic->pt);
+     unmap_domain_page_global(vlapic->regs);
+     free_domheap_page(vlapic->regs_page);
++    XFREE(vlapic->callbacks);
+ }
+ 
+ /*
+diff --git a/xen/include/asm-x86/hvm/vlapic.h b/xen/include/asm-x86/hvm/vlapic.h
+index 8f908928c35..c380127a719 100644
+--- a/xen/include/asm-x86/hvm/vlapic.h
++++ b/xen/include/asm-x86/hvm/vlapic.h
+@@ -73,6 +73,8 @@
+ #define vlapic_clear_vector(vec, bitmap)                                \
+     clear_bit(VEC_POS(vec), (uint32_t *)((bitmap) + REG_POS(vec)))
+ 
++typedef void vlapic_eoi_callback_t(unsigned int vector, void *data);
++
+ struct vlapic {
+     struct hvm_hw_lapic      hw;
+     struct hvm_hw_lapic_regs *regs;
+@@ -89,6 +91,11 @@ struct vlapic {
+         uint32_t             icr, dest;
+         struct tasklet       tasklet;
+     } init_sipi;
++    struct {
++        vlapic_eoi_callback_t *callback;
++        void                 *data;
++    } *callbacks;
++    spinlock_t               callback_lock;
+ };
+ 
+ /* vlapic's frequence is 100 MHz */
+@@ -111,7 +118,16 @@ void vlapic_reg_write(struct vcpu *v, unsigned int reg, uint32_t val);
+ bool_t is_vlapic_lvtpc_enabled(struct vlapic *vlapic);
+ 
+ bool vlapic_test_irq(const struct vlapic *vlapic, uint8_t vec);
+-void vlapic_set_irq(struct vlapic *vlapic, uint8_t vec, uint8_t trig);
++void vlapic_set_callback(struct vlapic *vlapic, unsigned int vec,
++                         vlapic_eoi_callback_t *callback, void *data);
++void vlapic_set_irq_callback(struct vlapic *vlapic, uint8_t vec, uint8_t trig,
++                             vlapic_eoi_callback_t *callback, void *data);
++
++static inline void vlapic_set_irq(struct vlapic *vlapic, uint8_t vec,
++                                  uint8_t trig)
++{
++    vlapic_set_irq_callback(vlapic, vec, trig, NULL, NULL);
++}
+ 
+ int vlapic_has_pending_irq(struct vcpu *v);
+ int vlapic_ack_pending_irq(struct vcpu *v, int vector, bool_t force_ack);
 -- 
 2.30.1
 
