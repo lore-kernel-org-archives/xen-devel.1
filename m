@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C641C433B4
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 08:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA6BDC433B4
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 08:44:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F1C1660190
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 08:44:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F1C1660190
+	by mail.kernel.org (Postfix) with ESMTPS id 8202260190
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 08:44:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8202260190
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.104170.198911 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.104175.198924 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRsvy-00068V-SM; Thu, 01 Apr 2021 08:44:10 +0000
+	id 1lRswQ-0006Gi-8X; Thu, 01 Apr 2021 08:44:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 104170.198911; Thu, 01 Apr 2021 08:44:10 +0000
+Received: by outflank-mailman (output) from mailman id 104175.198924; Thu, 01 Apr 2021 08:44:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRsvy-00068O-PL; Thu, 01 Apr 2021 08:44:10 +0000
-Received: by outflank-mailman (input) for mailman id 104170;
- Thu, 01 Apr 2021 08:44:08 +0000
+	id 1lRswQ-0006Gb-5V; Thu, 01 Apr 2021 08:44:38 +0000
+Received: by outflank-mailman (input) for mailman id 104175;
+ Thu, 01 Apr 2021 08:44:37 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=evtz=I6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lRsvw-00068H-JW
- for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 08:44:08 +0000
+ id 1lRswP-0006GT-5t
+ for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 08:44:37 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ff23fd63-710c-46c3-8f90-b409ab186394;
- Thu, 01 Apr 2021 08:44:07 +0000 (UTC)
+ id e703b07c-674a-4a5d-8e3e-639abbca8c6f;
+ Thu, 01 Apr 2021 08:44:36 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id BF2A1AE86;
- Thu,  1 Apr 2021 08:44:06 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BED10AE8D;
+ Thu,  1 Apr 2021 08:44:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,24 +52,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ff23fd63-710c-46c3-8f90-b409ab186394
+X-Inumbo-ID: e703b07c-674a-4a5d-8e3e-639abbca8c6f
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1617266646; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1617266675; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=EVCTE1tfqI4iUXHiO5xFd7e8mHxtUGLrwEPBx00R958=;
-	b=tyd7dgVvsLyTX3ldvHPf2mSEZI6d5TO41Hsq1IcgrXwSWoDsT1AxGciCXL8jP58OwmhL1V
-	pSMqGtdvjSA2di/unGO4Oshs9ePmDFdgWkrB1Xb2x1phKR2Rpvk6dZtiNIsmrCyuFJKDzj
-	JGwOHG9Qk22r6g95AxemrduZPxjqrPc=
-Subject: [PATCH 1/6] VT-d: improve save/restore of registers across S3
+	bh=5qi6++u9QBggB8E7CGEoTNUFM2DKPu+n9nR4wGp6C/U=;
+	b=RGHEfTZYySo1EMvwvxwxQK9e2SYicqFszHLrDPzRlPxPscjsrTilBG+cu32oDWIgVrNRgj
+	rsUB10uiziJIfDY2WELwdwmhKZIh4X6Zcz+sygR227WN06vDZTw6efxHRbT+ARQn9HZfWR
+	Xrfptbo+SHJFAOofp2QXx4c+OU8GfQs=
+Subject: [PATCH 2/6] VT-d: don't open-code dmar_readl()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Kevin Tian <kevin.tian@intel.com>
 References: <157e4a65-6d0b-7ea8-1c23-cd393c8c0d7f@suse.com>
-Message-ID: <2ff7ac44-5a67-55e5-758b-680e68ebacaa@suse.com>
-Date: Thu, 1 Apr 2021 10:44:06 +0200
+Message-ID: <e6cd8e78-81b2-c167-a3ca-5cb374fce7a3@suse.com>
+Date: Thu, 1 Apr 2021 10:44:35 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.9.0
 MIME-Version: 1.0
@@ -78,146 +78,21 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-The static allocation of the save space is not only very inefficient
-(most of the array slots won't ever get used), but is also the sole
-reason for a build-time upper bound on the number of IOMMUs. Introduce
-a structure containing just the one needed field we can't (easily)
-restore from other in-memory state, and allocate the respective
-array dynamically.
-
-Take the opportunity and make the FEUADDR write dependent upon
-x2apic_enabled, like is already the case in dma_msi_set_affinity().
-
-Also alter properties of nr_iommus: static, unsigned, and __initdata.
+While at it also drop the unnecessary use of a local variable there.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/drivers/passthrough/vtd/iommu.c
 +++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -57,7 +57,7 @@ bool __read_mostly iommu_qinval = true;
- bool __read_mostly iommu_snoop = true;
- #endif
- 
--int nr_iommus;
-+static unsigned int __initdata nr_iommus;
- 
- static struct iommu_ops vtd_ops;
- static struct tasklet vtd_fault_tasklet;
-@@ -1165,13 +1165,6 @@ int __init iommu_alloc(struct acpi_drhd_
-     unsigned long sagaw, nr_dom;
-     int agaw;
- 
--    if ( nr_iommus >= MAX_IOMMUS )
--    {
--        dprintk(XENLOG_ERR VTDPREFIX,
--                "IOMMU: nr_iommus %d > MAX_IOMMUS\n", nr_iommus + 1);
--        return -ENOMEM;
--    }
--
-     iommu = xzalloc(struct vtd_iommu);
-     if ( iommu == NULL )
-         return -ENOMEM;
-@@ -2226,6 +2219,10 @@ static void __hwdom_init setup_hwdom_rmr
-     pcidevs_unlock();
- }
- 
-+static struct iommu_state {
-+    uint32_t fectl;
-+} *__read_mostly iommu_state;
-+
- static int __init vtd_setup(void)
- {
-     struct acpi_drhd_unit *drhd;
-@@ -2251,6 +2248,13 @@ static int __init vtd_setup(void)
-         goto error;
+@@ -990,8 +990,7 @@ static void __do_iommu_page_fault(struct
      }
- 
-+    iommu_state = xmalloc_array(struct iommu_state, nr_iommus);
-+    if ( !iommu_state )
-+    {
-+        ret = -ENOMEM;
-+        goto error;
-+    }
-+
-     /* We enable the following features only if they are supported by all VT-d
-      * engines: Snoop Control, DMA passthrough, Queued Invalidation, Interrupt
-      * Remapping, and Posted Interrupt
-@@ -2508,8 +2512,6 @@ static int intel_iommu_group_id(u16 seg,
-         return PCI_BDF2(bus, devfn);
- }
- 
--static u32 iommu_state[MAX_IOMMUS][MAX_IOMMU_REGS];
--
- static int __must_check vtd_suspend(void)
- {
-     struct acpi_drhd_unit *drhd;
-@@ -2534,14 +2536,7 @@ static int __must_check vtd_suspend(void
-         iommu = drhd->iommu;
-         i = iommu->index;
- 
--        iommu_state[i][DMAR_FECTL_REG] =
--            (u32) dmar_readl(iommu->reg, DMAR_FECTL_REG);
--        iommu_state[i][DMAR_FEDATA_REG] =
--            (u32) dmar_readl(iommu->reg, DMAR_FEDATA_REG);
--        iommu_state[i][DMAR_FEADDR_REG] =
--            (u32) dmar_readl(iommu->reg, DMAR_FEADDR_REG);
--        iommu_state[i][DMAR_FEUADDR_REG] =
--            (u32) dmar_readl(iommu->reg, DMAR_FEUADDR_REG);
-+        iommu_state[i].fectl = dmar_readl(iommu->reg, DMAR_FECTL_REG);
- 
-         /* don't disable VT-d engine when force_iommu is set. */
-         if ( force_iommu )
-@@ -2594,15 +2589,13 @@ static void vtd_resume(void)
-     for_each_drhd_unit ( drhd )
+ clear_overflow:
+     /* clear primary fault overflow */
+-    fault_status = readl(iommu->reg + DMAR_FSTS_REG);
+-    if ( fault_status & DMA_FSTS_PFO )
++    if ( dmar_readl(iommu->reg, DMAR_FSTS_REG) & DMA_FSTS_PFO )
      {
-         iommu = drhd->iommu;
--        i = iommu->index;
- 
          spin_lock_irqsave(&iommu->register_lock, flags);
--        dmar_writel(iommu->reg, DMAR_FEDATA_REG,
--                    iommu_state[i][DMAR_FEDATA_REG]);
--        dmar_writel(iommu->reg, DMAR_FEADDR_REG,
--                    iommu_state[i][DMAR_FEADDR_REG]);
--        dmar_writel(iommu->reg, DMAR_FEUADDR_REG,
--                    iommu_state[i][DMAR_FEUADDR_REG]);
-+        dmar_writel(iommu->reg, DMAR_FEDATA_REG, iommu->msi.msg.data);
-+        dmar_writel(iommu->reg, DMAR_FEADDR_REG, iommu->msi.msg.address_lo);
-+        if ( x2apic_enabled )
-+            dmar_writel(iommu->reg, DMAR_FEUADDR_REG,
-+                        iommu->msi.msg.address_hi);
-         spin_unlock_irqrestore(&iommu->register_lock, flags);
-     }
- 
-@@ -2615,8 +2608,7 @@ static void vtd_resume(void)
-         i = iommu->index;
- 
-         spin_lock_irqsave(&iommu->register_lock, flags);
--        dmar_writel(iommu->reg, DMAR_FECTL_REG,
--                    (u32) iommu_state[i][DMAR_FECTL_REG]);
-+        dmar_writel(iommu->reg, DMAR_FECTL_REG, iommu_state[i].fectl);
-         spin_unlock_irqrestore(&iommu->register_lock, flags);
- 
-         iommu_enable_translation(drhd);
---- a/xen/drivers/passthrough/vtd/iommu.h
-+++ b/xen/drivers/passthrough/vtd/iommu.h
-@@ -499,8 +499,6 @@ struct qinval_entry {
- #define VTD_PAGE_TABLE_LEVEL_3  3
- #define VTD_PAGE_TABLE_LEVEL_4  4
- 
--#define MAX_IOMMU_REGS 0xc0
--
- extern struct list_head acpi_drhd_units;
- extern struct list_head acpi_rmrr_units;
- extern struct list_head acpi_ioapic_units;
---- a/xen/include/asm-x86/iommu.h
-+++ b/xen/include/asm-x86/iommu.h
-@@ -22,7 +22,6 @@
- #include <asm/hvm/vmx/vmcs.h>
- 
- #define DEFAULT_DOMAIN_ADDRESS_WIDTH 48
--#define MAX_IOMMUS 32
- 
- struct g2m_ioport {
-     struct list_head list;
+         dmar_writel(iommu->reg, DMAR_FSTS_REG, DMA_FSTS_PFO);
 
 
