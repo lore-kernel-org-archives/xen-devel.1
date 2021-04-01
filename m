@@ -2,41 +2,44 @@ Return-Path: <SRS0=WHN/=I6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7517FC433ED
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 13:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D354C433ED
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 13:43:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 278DC61242
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 13:39:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 278DC61242
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D75B661262
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 13:43:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D75B661262
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.104472.199857 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.104486.199869 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRxXO-0006AT-4Y; Thu, 01 Apr 2021 13:39:06 +0000
+	id 1lRxbT-0007L4-SD; Thu, 01 Apr 2021 13:43:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 104472.199857; Thu, 01 Apr 2021 13:39:06 +0000
+Received: by outflank-mailman (output) from mailman id 104486.199869; Thu, 01 Apr 2021 13:43:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRxXO-0006AK-19; Thu, 01 Apr 2021 13:39:06 +0000
-Received: by outflank-mailman (input) for mailman id 104472;
- Thu, 01 Apr 2021 13:39:04 +0000
+	id 1lRxbT-0007Kx-Oy; Thu, 01 Apr 2021 13:43:19 +0000
+Received: by outflank-mailman (input) for mailman id 104486;
+ Thu, 01 Apr 2021 13:43:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=j8z4=I6=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1lRxXM-0005gw-4G
- for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 13:39:04 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=evtz=I6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lRxbS-0007Ks-AG
+ for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 13:43:18 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 74176d82-3484-4845-a7aa-d68fb9f381eb;
- Thu, 01 Apr 2021 13:38:40 +0000 (UTC)
+ id 8411d6d6-b774-4778-a803-b2d8168943f2;
+ Thu, 01 Apr 2021 13:43:17 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id D5F38AF23;
+ Thu,  1 Apr 2021 13:43:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,75 +51,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74176d82-3484-4845-a7aa-d68fb9f381eb
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1617284320;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=9Cwda7hvpLKLiOQOMp9r6kfCTOsPTlqzOoOijVd/CF0=;
-  b=B11ehphShE4o05dLLS8u2gojF28Y3e4T1PuLZs91UmV/nT/Vnwd3dYrX
-   /HoxOL4BFDSCgdj2IGSMbJoD6apXUSo1r+nOQ/L7+5pz/NVzmqID4//T1
-   H9n1BN0f+Kw659Y9jiZBnX92yetVun9frBSVnQME3oMjI7IRwS4s+mhms
-   s=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 2gFl06xf/DpDln0vux+wr1cKad4T7roFUaDLtEu+RG8dauZt8CqKby0tz5+BoqGPsWyX0kcQ3C
- mjwsweqFqrH3yuAvq90tMZR0WgF8GoGRlG+63AzjL09qHO6y3Ki9kyWTeH8/fDiJ3DsIEs3B0A
- vzg1OB3GOnbf5mVYIo9yCFyXGf/yqwVyAo+wqxaq/I3PO8dvcQL20BAxgxr74ZmrBFZNrFXVUz
- cBLi6bsip/2xbeSzpoLBFLMHE+QAUBiiy7pGUyChKb/LsIWKDg9q4NwLkBcaiWtUw5djHVfRi0
- cgU=
-X-SBRS: 5.1
-X-MesageID: 40698211
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:bH7E96h9uW3o+1PC2DFnize3nHBQXyl13DAbvn1ZSRFFG/Gwv9
- yynfgdyB//gCsQXnZlotybJKycWxrnmKJdy4N5B9efdSPhv3alK5wn0Jv6z1TbakvD38N+9Y
- MlSahxD9XsEUN35PyR3CCUG8stqePpzImGnuHbpk0CcShLbOVa4x59GkKnFCRNNWt7LL4YML
- bZ2cZdvTqnfh0sH6OGL10IRfLKqdGOtL+OW29kOzcd5AODjSyl5dfBenD14j4kXzxC2rsk+2
- Te+jaJg5mLiP2n1gTak1ba8pU+orDc4+FeD8+BgNV9EESJti+UYu1aOoGqjXQOj8yErH0rl9
- TNpBlIBbUN11rhOlubjDGo9w3p0DMF42Lvx1mCkRLY0LLEbQN/MeVtr8Z0dQbY9loBsbhHod
- N29lPcjbV7J1fhmznw/NfBXR0CrDvFnVMS1dQ9olYadKl2Us4pkaUvuHl7Pb1FIQfBrKcgK+
- VqBNG03ocqTXqqK0r3k0Mq/MahRR0Ib2+7a3lHgOO5+R5Mkkt0ykMJrfZv4ksoxdYGR55I6/
- +sCNUSqJh+CssfbadKDOwcW8eACmvUXRLWMG6JSG6Xbp06Bw==
-X-IronPort-AV: E=Sophos;i="5.81,296,1610427600"; 
-   d="scan'208";a="40698211"
-From: George Dunlap <george.dunlap@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
-	<ian.jackson@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	"Julien Grall" <julien@xen.org>
-Subject: [PATCH for-4.15 4/7] CHANGELOG.md: Mention various ARM errata
-Date: Thu, 1 Apr 2021 14:38:24 +0100
-Message-ID: <20210401133827.362216-4-george.dunlap@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210401133827.362216-1-george.dunlap@citrix.com>
-References: <20210401133827.362216-1-george.dunlap@citrix.com>
+X-Inumbo-ID: 8411d6d6-b774-4778-a803-b2d8168943f2
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1617284597; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=KrgYsx1UP6iZuNfaU2C4DpL8Uvgwht3nbDd3oOYHCZk=;
+	b=R0nfvDDx3MsC+2xnyhgScJVGsQ+wFaKMUepGsMk98XDnQW/nkyCLoVwv1mNkbxNJXpkNtL
+	3vMPn/RPOl3XtJDUQjfJnGYldwsq8QDCxfd8uXba4oQrj6YiOGTAySV9jxUFpqnGBCWQIV
+	tqcmP3IpFKIsBKvk+UlzupZb7bIO9TU=
+Subject: Re: [PATCH 00/23] further population of xen/lib/
+To: Julien Grall <julien@xen.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <c53a6802-8bae-1dc6-5ac4-6238e122aaa4@suse.com>
+ <27916fa0-9ebd-a49a-bbb9-1ef47c2b5bf6@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <4f745d03-baa8-e9e6-692c-f9c9f401b766@suse.com>
+Date: Thu, 1 Apr 2021 15:43:16 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+In-Reply-To: <27916fa0-9ebd-a49a-bbb9-1ef47c2b5bf6@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
----
-CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
----
- CHANGELOG.md | 1 +
- 1 file changed, 1 insertion(+)
+On 01.04.2021 13:54, Julien Grall wrote:
+> On 01/04/2021 11:14, Jan Beulich wrote:
+>> This is to dissolve / move xen/common/lib.c and xen/common/string.c.
+>> One benefit of moving these functions into an archive is that we can
+>> drop some of the related __HAVE_ARCH_* #define-s: By living in an
+>> archive, the per-arch functions will preempt any loading of the
+>> respective functions (objects) from the archive. (Down the road we
+>> may want to move the per-arch functions into archives as well, at
+>> which point the per-arch archive(s) would need to be specified ahead
+>> of the common one(s) to the linker.)
+> 
+> While I think it is a good idea to move code in xen/lib, I am not 
+> convinced that having a single function per file is that beneficial.
+> 
+> Do you have numbers showing how much Xen will shrink after this series?
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index a12dab1c33..b3325a8371 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-  - Added XEN_SCRIPT_DIR configuration option to specify location for Xen scripts, rather than hard-coding /etc/xen/scripts
-  - xennet: Documented a way for the backend (or toolstack) to specify MTU to the frontend
-  - Some additional affordances in various xl subcommands.
-+ - Added the following ARM errata: Cortex A53 #843419, Cortex A55 #1530923, Cortex A72 #853709, Cortex A73 #858921, Cortex A76 #1286807, Neoverse-N1 #1165522
- 
- ### Removed / support downgraded
- 
--- 
-2.30.2
+In the default build, from all I was able to tell, there's one function
+that's unused (strspn(), as mentioned in the respective patch description).
+I don't think I've been claiming any space savings here, though, so I
+wonder why you make this a criteria at all. The functions being one per
+CU is such that they can be individually overridden by an arch, without
+pulling in dead code.
 
+Jan
 
