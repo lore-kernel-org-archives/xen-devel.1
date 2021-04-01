@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3390C433ED
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41E10C433ED
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:22:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6DA79610A5
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:21:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6DA79610A5
+	by mail.kernel.org (Postfix) with ESMTPS id C40396108B
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:22:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C40396108B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.104298.199329 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.104301.199341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRuSU-0001u2-IN; Thu, 01 Apr 2021 10:21:50 +0000
+	id 1lRuT5-00022C-Qt; Thu, 01 Apr 2021 10:22:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 104298.199329; Thu, 01 Apr 2021 10:21:50 +0000
+Received: by outflank-mailman (output) from mailman id 104301.199341; Thu, 01 Apr 2021 10:22:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRuSU-0001tv-Eh; Thu, 01 Apr 2021 10:21:50 +0000
-Received: by outflank-mailman (input) for mailman id 104298;
- Thu, 01 Apr 2021 10:21:49 +0000
+	id 1lRuT5-000225-ND; Thu, 01 Apr 2021 10:22:27 +0000
+Received: by outflank-mailman (input) for mailman id 104301;
+ Thu, 01 Apr 2021 10:22:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=evtz=I6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lRuST-0001tl-ED
- for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 10:21:49 +0000
+ id 1lRuT3-00021n-UA
+ for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 10:22:25 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 74a238bc-faa6-4588-a8a9-7155f24fd142;
- Thu, 01 Apr 2021 10:21:48 +0000 (UTC)
+ id 4fb8832f-be95-4d20-ae58-4b50e73d5c12;
+ Thu, 01 Apr 2021 10:22:25 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id B82A5AEA6;
- Thu,  1 Apr 2021 10:21:47 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 7CFFAAEA6;
+ Thu,  1 Apr 2021 10:22:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,27 +51,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74a238bc-faa6-4588-a8a9-7155f24fd142
+X-Inumbo-ID: 4fb8832f-be95-4d20-ae58-4b50e73d5c12
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1617272507; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1617272544; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=UlwL2DZgk5QMsxjKNY14U9Y4Ed0W95Lps/NjFQlhkyk=;
-	b=kaDKC3HL34Id+gFUhxYyLvm99yhF4rXxMW7FIMhuxPTmBQiRmF3wmZ6EAe/0VgSE1bg0k7
-	sjlZn/fYs59zGaFD57At7atwibjezKifjFh5+D1MSUMYqwwwNMrJkAm95y3awCiDl9JBV6
-	rbnSbyOADKk+T2dJVYMBvg5oGLClW34=
-Subject: [PATCH 06/23] lib: move memmove()
+	bh=e1kdSAKEAN16LJljjXzIk1aT1zZrsyx9ENiy36Xyzo4=;
+	b=nRlQ+tI8dRA9xfib5Ur7UyMrq1n3GB4VeMrC6gyOVKmf3Zt4PdU4K/t8wvc1PHLd/VBtoS
+	F6J1I3Ut7Ddqt8uy5ZlE1jQxTJ8fm5S4cum06Pnu8hG2N6ISsYnOEbti+Bebgk0uBLbC3e
+	Uc68mOTctRb8XUG6lKVk5Xz1W7OecHI=
+Subject: [PATCH 07/23] lib: move memcmp()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+ Wei Liu <wl@xen.org>
 References: <c53a6802-8bae-1dc6-5ac4-6238e122aaa4@suse.com>
-Message-ID: <36449347-69e8-b963-597f-c9359207cf57@suse.com>
-Date: Thu, 1 Apr 2021 12:21:47 +0200
+Message-ID: <b82ffb74-1c76-f5b5-dce5-d90897750b70@suse.com>
+Date: Thu, 1 Apr 2021 12:22:23 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.9.0
 MIME-Version: 1.0
@@ -80,78 +80,49 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-By moving the function into an archive, x86 doesn't need to announce
-anymore that is has its own implementation - symbol resolution by the
-linker will now guarantee that the generic function remains unused, and
-the forwarding to the compiler built-in gets done by the common header
-anyway.
-
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/string.c
 +++ b/xen/common/string.c
-@@ -311,36 +311,6 @@ char *(strstr)(const char *s1, const cha
+@@ -311,25 +311,6 @@ char *(strstr)(const char *s1, const cha
  }
  #endif
  
--#ifndef __HAVE_ARCH_MEMMOVE
+-#ifndef __HAVE_ARCH_MEMCMP
 -/**
-- * memmove - Copy one area of memory to another
-- * @dest: Where to copy to
-- * @src: Where to copy from
+- * memcmp - Compare two areas of memory
+- * @cs: One area of memory
+- * @ct: Another area of memory
 - * @count: The size of the area.
-- *
-- * Unlike memcpy(), memmove() copes with overlapping areas.
 - */
--void *(memmove)(void *dest, const void *src, size_t count)
+-int (memcmp)(const void *cs, const void *ct, size_t count)
 -{
--	char *tmp, *s;
+-	const unsigned char *su1, *su2;
+-	int res = 0;
 -
--	if (dest <= src) {
--		tmp = (char *) dest;
--		s = (char *) src;
--		while (count--)
--			*tmp++ = *s++;
--		}
--	else {
--		tmp = (char *) dest + count;
--		s = (char *) src + count;
--		while (count--)
--			*--tmp = *--s;
--		}
--
--	return dest;
+-	for( su1 = cs, su2 = ct; 0 < count; ++su1, ++su2, count--)
+-		if ((res = *su1 - *su2) != 0)
+-			break;
+-	return res;
 -}
 -#endif
 -
- #ifndef __HAVE_ARCH_MEMCMP
+ #ifndef __HAVE_ARCH_MEMCHR
  /**
-  * memcmp - Compare two areas of memory
---- a/xen/include/asm-x86/string.h
-+++ b/xen/include/asm-x86/string.h
-@@ -1,9 +1,6 @@
- #ifndef __X86_STRING_H__
- #define __X86_STRING_H__
- 
--#define __HAVE_ARCH_MEMMOVE
--#define memmove(d, s, n) __builtin_memmove(d, s, n)
--
- #endif /* __X86_STRING_H__ */
- /*
-  * Local variables:
+  * memchr - Find a character in an area of memory.
 --- a/xen/lib/Makefile
 +++ b/xen/lib/Makefile
-@@ -5,6 +5,7 @@ lib-y += ctors.o
+@@ -4,6 +4,7 @@ lib-y += bsearch.o
+ lib-y += ctors.o
  lib-y += ctype.o
  lib-y += list-sort.o
++lib-y += memcmp.o
  lib-y += memcpy.o
-+lib-y += memmove.o
+ lib-y += memmove.o
  lib-y += memset.o
- lib-y += muldiv64.o
- lib-y += parse-size.o
 --- /dev/null
-+++ b/xen/lib/memmove.c
-@@ -0,0 +1,42 @@
++++ b/xen/lib/memcmp.c
+@@ -0,0 +1,32 @@
 +/*
 + *  Copyright (C) 1991, 1992  Linus Torvalds
 + */
@@ -159,30 +130,20 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 +#include <xen/string.h>
 +
 +/**
-+ * memmove - Copy one area of memory to another
-+ * @dest: Where to copy to
-+ * @src: Where to copy from
++ * memcmp - Compare two areas of memory
++ * @cs: One area of memory
++ * @ct: Another area of memory
 + * @count: The size of the area.
-+ *
-+ * Unlike memcpy(), memmove() copes with overlapping areas.
 + */
-+void *(memmove)(void *dest, const void *src, size_t count)
++int (memcmp)(const void *cs, const void *ct, size_t count)
 +{
-+	char *tmp, *s;
++	const unsigned char *su1, *su2;
++	int res = 0;
 +
-+	if (dest <= src) {
-+		tmp = (char *) dest;
-+		s = (char *) src;
-+		while (count--)
-+			*tmp++ = *s++;
-+	} else {
-+		tmp = (char *) dest + count;
-+		s = (char *) src + count;
-+		while (count--)
-+			*--tmp = *--s;
-+	}
-+
-+	return dest;
++	for( su1 = cs, su2 = ct; 0 < count; ++su1, ++su2, count--)
++		if ((res = *su1 - *su2) != 0)
++			break;
++	return res;
 +}
 +
 +/*
