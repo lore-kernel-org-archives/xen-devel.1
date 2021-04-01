@@ -2,46 +2,45 @@ Return-Path: <SRS0=WHN/=I6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB9DEC43460
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 14:04:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68A0AC433ED
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 14:13:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA57461285
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 14:04:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA57461285
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 1116660BD3
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 14:13:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1116660BD3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.104515.199965 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.104518.199977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRxva-0001ZX-KW; Thu, 01 Apr 2021 14:04:06 +0000
+	id 1lRy4X-0002W9-Ic; Thu, 01 Apr 2021 14:13:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 104515.199965; Thu, 01 Apr 2021 14:04:06 +0000
+Received: by outflank-mailman (output) from mailman id 104518.199977; Thu, 01 Apr 2021 14:13:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRxva-0001ZQ-Gc; Thu, 01 Apr 2021 14:04:06 +0000
-Received: by outflank-mailman (input) for mailman id 104515;
- Thu, 01 Apr 2021 14:04:06 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1lRy4X-0002W2-Dc; Thu, 01 Apr 2021 14:13:21 +0000
+Received: by outflank-mailman (input) for mailman id 104518;
+ Thu, 01 Apr 2021 14:13:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lRxva-0001ZL-0B
- for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 14:04:06 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lRxvY-0007IN-NU; Thu, 01 Apr 2021 14:04:04 +0000
-Received: from 54-240-197-239.amazon.com ([54.240.197.239]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lRxvY-0007p5-HG; Thu, 01 Apr 2021 14:04:04 +0000
+ (envelope-from <SRS0=evtz=I6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lRy4V-0002Vx-U5
+ for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 14:13:19 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id da409f7a-6212-4446-9525-314178b2430f;
+ Thu, 01 Apr 2021 14:13:18 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id F09F8B21D;
+ Thu,  1 Apr 2021 14:13:17 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,81 +52,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=oxS3dMoshd19B3V90o3bmPWkqypn36Zp+eVdVJW1c4E=; b=DkDO9Rlno7NY5lYiCLZ7bBxP7X
-	vlz9rOT7z1KvqT4SMU23FIwKKlETSMy1V9pkwtE+4xTDmBZcPVpnQegio9UEzJKaTICvhPVf84HLm
-	JSY4fwB4lLmsxWimFO7ov096OovcG1wvF18i05MfPgsBGQNoa71vf6q/QR6g2OJaTj4Y=;
-Subject: Re: [PATCH 00/23] further population of xen/lib/
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <c53a6802-8bae-1dc6-5ac4-6238e122aaa4@suse.com>
- <27916fa0-9ebd-a49a-bbb9-1ef47c2b5bf6@xen.org>
- <4f745d03-baa8-e9e6-692c-f9c9f401b766@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <6a38f0db-938b-fd13-48e6-6b538c85fe42@xen.org>
-Date: Thu, 1 Apr 2021 15:04:02 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.1
+X-Inumbo-ID: da409f7a-6212-4446-9525-314178b2430f
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1617286398; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5R1iFocCrCea+Q5CcekCM394fJXvvNmfhZ4ckV/HZw4=;
+	b=peDM+GzJLIOurWE/aJeXyz5Jit3ZlwNVPChscDbWL9L0PtWNknTu2s3kBn0GuooNVretBQ
+	Y85W8cprQk+U6clKIYpmE3zz/nkmCX2GuZpr3+aXBkZ8jyzEU7C6M5vspYINSoL8nkTjMZ
+	+uiWilsKU9NQywT9ycbQLdvOLjDvQRo=
+Subject: Re: [PATCH for-4.15 4/7] CHANGELOG.md: Mention various ARM errata
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20210401133827.362216-1-george.dunlap@citrix.com>
+ <20210401133827.362216-4-george.dunlap@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <330feed2-d601-8b79-3c1f-bd8be167b8eb@suse.com>
+Date: Thu, 1 Apr 2021 16:13:17 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-In-Reply-To: <4f745d03-baa8-e9e6-692c-f9c9f401b766@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+In-Reply-To: <20210401133827.362216-4-george.dunlap@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Hi Jan,
+On 01.04.2021 15:38, George Dunlap wrote:
+> --- a/CHANGELOG.md
+> +++ b/CHANGELOG.md
+> @@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+>   - Added XEN_SCRIPT_DIR configuration option to specify location for Xen scripts, rather than hard-coding /etc/xen/scripts
+>   - xennet: Documented a way for the backend (or toolstack) to specify MTU to the frontend
+>   - Some additional affordances in various xl subcommands.
+> + - Added the following ARM errata: Cortex A53 #843419, Cortex A55 #1530923, Cortex A72 #853709, Cortex A73 #858921, Cortex A76 #1286807, Neoverse-N1 #1165522
 
-On 01/04/2021 14:43, Jan Beulich wrote:
-> On 01.04.2021 13:54, Julien Grall wrote:
->> On 01/04/2021 11:14, Jan Beulich wrote:
->>> This is to dissolve / move xen/common/lib.c and xen/common/string.c.
->>> One benefit of moving these functions into an archive is that we can
->>> drop some of the related __HAVE_ARCH_* #define-s: By living in an
->>> archive, the per-arch functions will preempt any loading of the
->>> respective functions (objects) from the archive. (Down the road we
->>> may want to move the per-arch functions into archives as well, at
->>> which point the per-arch archive(s) would need to be specified ahead
->>> of the common one(s) to the linker.)
->>
->> While I think it is a good idea to move code in xen/lib, I am not
->> convinced that having a single function per file is that beneficial.
->>
->> Do you have numbers showing how much Xen will shrink after this series?
-> 
-> In the default build, from all I was able to tell, there's one function
-> that's unused (strspn(), as mentioned in the respective patch description).
-> I don't think I've been claiming any space savings here, though, so I
+May I suggest "Added workarounds for ..."?
 
-You didn't. I was trying to guess why you wrote this series given that 
-your cover letter doesn't provide a lot of benefits (other than dropping 
-__HAVE_ARCH_*).
-
-> wonder why you make this a criteria at all.
-
-Because this is the main reason I would be willing to ack this series. 
-This outweight the increase number of files with just a single function 
-implemented.
-
-> The functions being one per
-> CU is such that they can be individually overridden by an arch, without
-> pulling in dead code.
-
-I would agree with functions like memcpy/memset() because you can gain a 
-lot to outweight the implementation in assembly. I am not convinced this 
-would be true for functions such as strlen().
-
-So overall, the number of functions requiring overriding will likely be 
-pretty limited and #ifdef would be IMHO tolerable.
-
-Although, I would be OK with creating a file per function that are 
-already overrided. For all the others, I think this is just pointless.
-
-Cheers,
-
--- 
-Julien Grall
+Jan
 
