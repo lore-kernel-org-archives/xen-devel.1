@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 498C4C433B4
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DA9AC433ED
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:23:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D8DD6610A5
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:22:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8DD6610A5
+	by mail.kernel.org (Postfix) with ESMTPS id 0F25D606A5
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Apr 2021 10:23:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F25D606A5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.104304.199353 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.104309.199365 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRuTO-00028j-72; Thu, 01 Apr 2021 10:22:46 +0000
+	id 1lRuTm-0002Fy-Gj; Thu, 01 Apr 2021 10:23:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 104304.199353; Thu, 01 Apr 2021 10:22:46 +0000
+Received: by outflank-mailman (output) from mailman id 104309.199365; Thu, 01 Apr 2021 10:23:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lRuTO-00028a-3b; Thu, 01 Apr 2021 10:22:46 +0000
-Received: by outflank-mailman (input) for mailman id 104304;
- Thu, 01 Apr 2021 10:22:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lRuTm-0002Fr-Dc; Thu, 01 Apr 2021 10:23:10 +0000
+Received: by outflank-mailman (input) for mailman id 104309;
+ Thu, 01 Apr 2021 10:23:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=evtz=I6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lRuTN-00028Q-FU
- for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 10:22:45 +0000
+ id 1lRuTl-0002Ep-1a
+ for xen-devel@lists.xenproject.org; Thu, 01 Apr 2021 10:23:09 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1ac8f106-5911-401b-9a4a-e6bb748213bf;
- Thu, 01 Apr 2021 10:22:44 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 5993ffe6-787f-475b-b7ec-368f2c9a3671;
+ Thu, 01 Apr 2021 10:23:07 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C0F65AEA6;
- Thu,  1 Apr 2021 10:22:43 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 1529BAED7;
+ Thu,  1 Apr 2021 10:23:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ac8f106-5911-401b-9a4a-e6bb748213bf
+X-Inumbo-ID: 5993ffe6-787f-475b-b7ec-368f2c9a3671
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1617272563; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1617272587; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=KxBFJAZ2KdhCH/22RG50f65pG/J6rh981un4Qrrk7qs=;
-	b=uOPVgUllDCy67MY+92BXsz4sL3+4fgw2GNxlRoKLLRqhOEXjpirWugQoKc3gsNO2LlXkmC
-	FBABYsIsKCE0VhREqQFbix1lgQ1FJlnQ9Dt5FUr+do9hQGAZuFY3gpG/fBhtVAh0dMPYHl
-	ReMYzkvJ2zFymUS/MLAa3ZD4XX6NxtE=
-Subject: [PATCH 08/23] lib: move memchr()
+	bh=5742tdH/lAsOCplYSlX/aqstUJg8Rlv97TdWNCdRmSk=;
+	b=ANROaimZWyzPlbs+4BeRDilkJtvIDsazHfGxSUcZuaQRhSHX2z0Sjb4Bb/sOszH8YVl/lX
+	PH6jFzbeGidL4IhDn7Gyi6zXcWSZFqKKxFmhYaCw6iNB74mjlsJniiTasoOgEV94SxvN6a
+	0W8/f1ceznKvCPDD+VZsPlyDN7H/Zbw=
+Subject: [PATCH 09/23] lib: move memchr_inv()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -70,8 +71,8 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
  Wei Liu <wl@xen.org>
 References: <c53a6802-8bae-1dc6-5ac4-6238e122aaa4@suse.com>
-Message-ID: <b8f92c94-ddc0-74df-d412-fe536b094bc5@suse.com>
-Date: Thu, 1 Apr 2021 12:22:43 +0200
+Message-ID: <adf1c065-396a-562d-e91b-c5167f298846@suse.com>
+Date: Thu, 1 Apr 2021 12:23:06 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.9.0
 MIME-Version: 1.0
@@ -84,47 +85,45 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/string.c
 +++ b/xen/common/string.c
-@@ -311,28 +311,6 @@ char *(strstr)(const char *s1, const cha
+@@ -311,26 +311,6 @@ char *(strstr)(const char *s1, const cha
  }
  #endif
  
--#ifndef __HAVE_ARCH_MEMCHR
 -/**
-- * memchr - Find a character in an area of memory.
+- * memchr_inv - Find an unmatching character in an area of memory.
 - * @s: The memory area
-- * @c: The byte to search for
+- * @c: The byte that is expected
 - * @n: The size of the area.
 - *
-- * returns the address of the first occurrence of @c, or %NULL
-- * if @c is not found
+- * returns the address of the first occurrence of a character other than @c,
+- * or %NULL if the whole buffer contains just @c.
 - */
--void *(memchr)(const void *s, int c, size_t n)
+-void *memchr_inv(const void *s, int c, size_t n)
 -{
 -	const unsigned char *p = s;
 -
 -	while (n--)
--		if ((unsigned char)c == *p++)
+-		if ((unsigned char)c != *p++)
 -			return (void *)(p - 1);
 -
 -	return NULL;
 -}
--#endif
 -
- /**
-  * memchr_inv - Find an unmatching character in an area of memory.
-  * @s: The memory area
+ /*
+  * Local variables:
+  * mode: C
 --- a/xen/lib/Makefile
 +++ b/xen/lib/Makefile
-@@ -4,6 +4,7 @@ lib-y += bsearch.o
- lib-y += ctors.o
+@@ -5,6 +5,7 @@ lib-y += ctors.o
  lib-y += ctype.o
  lib-y += list-sort.o
-+lib-y += memchr.o
+ lib-y += memchr.o
++lib-y += memchr_inv.o
  lib-y += memcmp.o
  lib-y += memcpy.o
  lib-y += memmove.o
 --- /dev/null
-+++ b/xen/lib/memchr.c
++++ b/xen/lib/memchr_inv.c
 @@ -0,0 +1,35 @@
 +/*
 + *  Copyright (C) 1991, 1992  Linus Torvalds
@@ -133,20 +132,20 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 +#include <xen/string.h>
 +
 +/**
-+ * memchr - Find a character in an area of memory.
++ * memchr_inv - Find an unmatching character in an area of memory.
 + * @s: The memory area
-+ * @c: The byte to search for
++ * @c: The byte that is expected
 + * @n: The size of the area.
 + *
-+ * returns the address of the first occurrence of @c, or %NULL
-+ * if @c is not found
++ * returns the address of the first occurrence of a character other than @c,
++ * or %NULL if the whole buffer contains just @c.
 + */
-+void *(memchr)(const void *s, int c, size_t n)
++void *memchr_inv(const void *s, int c, size_t n)
 +{
 +	const unsigned char *p = s;
 +
 +	while (n--)
-+		if ((unsigned char)c == *p++)
++		if ((unsigned char)c != *p++)
 +			return (void *)(p - 1);
 +
 +	return NULL;
