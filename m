@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B56BC433B4
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Apr 2021 15:21:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B196EC433ED
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Apr 2021 15:51:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E63CB60FD7
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Apr 2021 15:21:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E63CB60FD7
+	by mail.kernel.org (Postfix) with ESMTPS id 6429B61158
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Apr 2021 15:51:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6429B61158
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.104888.200887 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.104905.200925 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lSLbj-0004Ss-QA; Fri, 02 Apr 2021 15:21:11 +0000
+	id 1lSM4l-0007GX-Tl; Fri, 02 Apr 2021 15:51:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 104888.200887; Fri, 02 Apr 2021 15:21:11 +0000
+Received: by outflank-mailman (output) from mailman id 104905.200925; Fri, 02 Apr 2021 15:51:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lSLbj-0004Sl-Ml; Fri, 02 Apr 2021 15:21:11 +0000
-Received: by outflank-mailman (input) for mailman id 104888;
- Fri, 02 Apr 2021 15:21:10 +0000
+	id 1lSM4l-0007GQ-Qc; Fri, 02 Apr 2021 15:51:11 +0000
+Received: by outflank-mailman (input) for mailman id 104905;
+ Fri, 02 Apr 2021 15:51:11 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lSLbi-0004Sb-Hy
- for xen-devel@lists.xenproject.org; Fri, 02 Apr 2021 15:21:10 +0000
+ (envelope-from <julien@xen.org>) id 1lSM4k-0007GL-Rs
+ for xen-devel@lists.xenproject.org; Fri, 02 Apr 2021 15:51:10 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lSLbi-00009f-3w; Fri, 02 Apr 2021 15:21:10 +0000
+ id 1lSM4k-0000dr-G1; Fri, 02 Apr 2021 15:51:10 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lSLbh-00050B-Qp; Fri, 02 Apr 2021 15:21:10 +0000
+ id 1lSM4k-0007En-4r; Fri, 02 Apr 2021 15:51:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,10 +54,10 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=8l2SWhRF4hXjT/n8ib3kpA3rAz6cYAQdMNmVVhQCfJc=; b=sZgkbqyKP4h660FFtsmJw+U7d
-	uaIGvr6cJxJHac3CJ7UWPOxUrkgFZx9cJLjwUMP05gOTM4RpUSF92RdZB2tKqWCZev1SdMqOuhUj5
-	ugMJhLkS52TzXfkeCIviCGmyFyEb/7PQ0l93y2sgniwl8KgThtDnO6trrZGAwSlv/VIKU=;
+	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
+	bh=96ZKz1XmVWDUX9O90srYP7TKBuT4+NLELAxUsP7ryl8=; b=R4hgIoOsFE7yXyA2OwciAkNIAM
+	JOsokbamE5Wb/jU0E4TABqEXBTjR3KJMCyLKaSuKiOUaZlExQin/Uf04QYirrtLJbNs9xv3ohN1mv
+	j9fF0TE7/Cz4Lg2kYmRaPBXDiJY2zMj8SlRnE3SoZM4qyefXe14SJ8Wcnaboog22DjBY=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
@@ -65,59 +65,48 @@ Cc: bertrand.marquis@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/2] xen/arm: kernel: Propagate the error if we fail to decompress the kernel
-Date: Fri,  2 Apr 2021 16:21:04 +0100
-Message-Id: <20210402152105.29387-2-julien@xen.org>
+Subject: [PATCH v2] xen/iommu: smmu: Silence clang in arm_smmu_device_dt_probe()
+Date: Fri,  2 Apr 2021 16:51:06 +0100
+Message-Id: <20210402155106.15486-1-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210402152105.29387-1-julien@xen.org>
-References: <20210402152105.29387-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Currently, we are ignoring any error from perform_gunzip() and replacing
-the compressed kernel with the "uncompressed" kernel.
+Clang 11 will throw the following error:
 
-If there is a gzip failure, then it means that the output buffer may
-contain garbagge. So it can result to various sort of behavior that may
-be difficult to root cause.
+smmu.c:2284:18: error: cast to smaller integer type 'enum arm_smmu_arch_version' from 'const void *' [-Werror,-Wvoid-pointer-to-enum-cast]
+        smmu->version = (enum arm_smmu_arch_version)of_id->data;
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In case of failure, free the output buffer and propagate the error.
-We also need to adjust the return check for kernel_compress() as
-perform_gunzip() may return a positive value.
-
-Take the opportunity to adjust the code style for the check.
+The error can be prevented by initially casting to (uintptr_t) and then
+enum.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- xen/arch/arm/kernel.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
-index ab78689ed2a6..f6b60ab77355 100644
---- a/xen/arch/arm/kernel.c
-+++ b/xen/arch/arm/kernel.c
-@@ -292,6 +292,12 @@ static __init int kernel_decompress(struct bootmodule *mod)
-     iounmap(input);
-     vunmap(output);
+---
+
+Changes in v2:
+    - Cast to (uintptr_t) rather than introduce separate pointer
+    (requested by Andrew).
+
+Only build tested
+---
+ xen/drivers/passthrough/arm/smmu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 20ac672e91b6..fab7be8b48bb 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -2382,7 +2382,7 @@ static int arm_smmu_device_dt_probe(struct platform_device *pdev)
+ 	smmu->dev = dev;
  
-+    if ( rc )
-+    {
-+        free_domheap_pages(pages);
-+        return rc;
-+    }
-+
-     mod->start = page_to_maddr(pages);
-     mod->size = output_size;
+ 	of_id = of_match_node(arm_smmu_of_match, dev->of_node);
+-	smmu->version = (enum arm_smmu_arch_version)of_id->data;
++	smmu->version = (enum arm_smmu_arch_version)(uintptr_t)of_id->data;
  
-@@ -503,7 +509,7 @@ int __init kernel_probe(struct kernel_info *info,
- 
-     /* if it is a gzip'ed image, 32bit or 64bit, uncompress it */
-     rc = kernel_decompress(mod);
--    if (rc < 0 && rc != -EINVAL)
-+    if ( rc && rc != -EINVAL )
-         return rc;
- 
- #ifdef CONFIG_ARM_64
+ 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+ 	smmu->base = devm_ioremap_resource(dev, res);
 -- 
 2.17.1
 
