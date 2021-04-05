@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DC49C43611
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFB40C43460
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24AB9613A3
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24AB9613A3
+	by mail.kernel.org (Postfix) with ESMTPS id 85B2C613A3
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85B2C613A3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.105399.201797 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.105401.201821 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTRbU-0002Jr-Cr; Mon, 05 Apr 2021 15:57:28 +0000
+	id 1lTRbX-0002S9-MZ; Mon, 05 Apr 2021 15:57:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 105399.201797; Mon, 05 Apr 2021 15:57:28 +0000
+Received: by outflank-mailman (output) from mailman id 105401.201821; Mon, 05 Apr 2021 15:57:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTRbU-0002Jg-8S; Mon, 05 Apr 2021 15:57:28 +0000
-Received: by outflank-mailman (input) for mailman id 105399;
- Mon, 05 Apr 2021 15:57:26 +0000
+	id 1lTRbX-0002Rn-GV; Mon, 05 Apr 2021 15:57:31 +0000
+Received: by outflank-mailman (input) for mailman id 105401;
+ Mon, 05 Apr 2021 15:57:29 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lTRbS-0002FR-Em
- for xen-devel@lists.xenproject.org; Mon, 05 Apr 2021 15:57:26 +0000
+ (envelope-from <julien@xen.org>) id 1lTRbU-0002LQ-RY
+ for xen-devel@lists.xenproject.org; Mon, 05 Apr 2021 15:57:28 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lTRbR-0002oD-LU; Mon, 05 Apr 2021 15:57:25 +0000
+ id 1lTRbU-0002oS-3D; Mon, 05 Apr 2021 15:57:28 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lTRbR-00053b-BX; Mon, 05 Apr 2021 15:57:25 +0000
+ id 1lTRbT-00053b-RA; Mon, 05 Apr 2021 15:57:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,106 +55,75 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=KksYVhRFyICjFP1ckAs027N7azKI8dI/+aHOnCC8ZNM=; b=MD7lFwzB7Qwcvo0bxHk/cU5DD
-	RDZ8pugfP5wNpM9iE+LoFxmAAi2+x82jDVBUktTbN6r6/v2vcj9yuZjWSYgpW2W0xRNfbj9t7DzP0
-	nQzHyJ7I6AWMzbE+8yGh9lZhyWHM+s2kJjj+joi1uiclMGvy7Yvo8TBfIv8mrZULTD6KY=;
+	 bh=lyhRqrnLbAOU2YP7TBUMqJqT/uwbvMLMSBzL3B6aYDM=; b=3Gr5r9LZKz7autrB/fEbv7nk4
+	Ly3bxyt5lzdn97NLfjISrWngoQbegaXsde6Lwr3CrIngHV7M9hPpwSlT3WDkIRs7LsBNZ5GJCJlKG
+	/dNxd9cj8TTaG/oNE7j4QlTNDneyiXVGPBsqpVmSar+7k68jy6uvQS9gzHYz79qx6eaRg=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Julien Grall <jgrall@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 06/14] tools/libs: stat: Use const whenever we point to literal strings
-Date: Mon,  5 Apr 2021 16:57:05 +0100
-Message-Id: <20210405155713.29754-7-julien@xen.org>
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Ian Jackson <iwj@xenproject.org>
+Subject: [PATCH 08/14] tools/firmware: hvmloader: Use const in __bug() and __assert_failed()
+Date: Mon,  5 Apr 2021 16:57:07 +0100
+Message-Id: <20210405155713.29754-9-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210405155713.29754-1-julien@xen.org>
 References: <20210405155713.29754-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-literal strings are not meant to be modified. So we should use const
-char * rather than char * when we want to store a pointer to them.
+__bug() and __assert_failed() are not meant to modify the string
+parameters. So mark them as const.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/libs/stat/xenstat_linux.c |  4 ++--
- tools/libs/stat/xenstat_qmp.c   | 12 ++++++------
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ tools/firmware/hvmloader/util.c | 4 ++--
+ tools/firmware/hvmloader/util.h | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tools/libs/stat/xenstat_linux.c b/tools/libs/stat/xenstat_linux.c
-index c00b26d4d898..875a0617ade8 100644
---- a/tools/libs/stat/xenstat_linux.c
-+++ b/tools/libs/stat/xenstat_linux.c
-@@ -66,7 +66,7 @@ static const char PROCNETDEV_HEADER[] =
- 
- /* We need to get the name of the bridge interface for use with bonding interfaces */
- /* Use excludeName parameter to avoid adding bridges we don't care about, eg. virbr0 */
--static void getBridge(char *excludeName, char *result, size_t resultLen)
-+static void getBridge(const char *excludeName, char *result, size_t resultLen)
- {
- 	struct dirent *de;
- 	DIR *d;
-@@ -113,7 +113,7 @@ static int parseNetDevLine(char *line, char *iface, unsigned long long *rxBytes,
- 	int num = 19;
- 
- 	/* Regular exception to parse all the information from /proc/net/dev line */
--	char *regex = "([^:]*):([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)"
-+	const char *regex = "([^:]*):([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)"
- 			"[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*"
- 			"([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)[ ]*([^ ]*)";
- 
-diff --git a/tools/libs/stat/xenstat_qmp.c b/tools/libs/stat/xenstat_qmp.c
-index 0c5748ba68b3..2205a041313b 100644
---- a/tools/libs/stat/xenstat_qmp.c
-+++ b/tools/libs/stat/xenstat_qmp.c
-@@ -38,7 +38,7 @@
- 
- #include <yajl/yajl_tree.h>
- 
--static unsigned char *qmp_query(int, char *);
-+static unsigned char *qmp_query(int, const char *);
- 
- enum query_blockstats {
-     QMP_STATS_RETURN  = 0,
-@@ -80,7 +80,7 @@ enum query_block {
- static char *qmp_get_block_image(xenstat_node *node, char *qmp_devname, int qfd)
- {
- 	char *tmp, *file = NULL;
--	char *query_block_cmd = "{ \"execute\": \"query-block\" }";
-+	const char *query_block_cmd = "{ \"execute\": \"query-block\" }";
- 	static const char *const qblock[] = {
- 		[ QMP_BLOCK_RETURN  ] = "return",
- 		[ QMP_BLOCK_DEVICE  ] = "device",
-@@ -264,7 +264,7 @@ done:
+diff --git a/tools/firmware/hvmloader/util.c b/tools/firmware/hvmloader/util.c
+index 7da144b0bb15..581b35e5cfb5 100644
+--- a/tools/firmware/hvmloader/util.c
++++ b/tools/firmware/hvmloader/util.c
+@@ -722,14 +722,14 @@ static void __attribute__((noreturn)) crash(void)
+         asm volatile ( "hlt" );
  }
  
- /* Write a command via the QMP. Returns number of bytes written */
--static size_t qmp_write(int qfd, char *cmd, size_t cmd_len)
-+static size_t qmp_write(int qfd, const char *cmd, size_t cmd_len)
+-void __assert_failed(char *assertion, char *file, int line)
++void __assert_failed(const char *assertion, const char *file, int line)
  {
- 	size_t pos = 0;
- 	ssize_t res;
-@@ -317,7 +317,7 @@ static int qmp_read(int qfd, unsigned char **qstats)
+     printf("*** HVMLoader assertion '%s' failed at %s:%d\n",
+            assertion, file, line);
+     crash();
  }
  
- /* With the given cmd, query QMP for requested data. Returns allocated buffer containing data or NULL */
--static unsigned char *qmp_query(int qfd, char *cmd)
-+static unsigned char *qmp_query(int qfd, const char *cmd)
+-void __bug(char *file, int line)
++void __bug(const char *file, int line)
  {
- 	unsigned char *qstats = NULL;
- 	int n;
-@@ -385,8 +385,8 @@ static int qmp_connect(char *path)
- */
- static void read_attributes_qdisk_dom(xenstat_node *node, domid_t domain)
- {
--	char *cmd_mode = "{ \"execute\": \"qmp_capabilities\" }";
--	char *query_blockstats_cmd = "{ \"execute\": \"query-blockstats\" }";
-+	const char *cmd_mode = "{ \"execute\": \"qmp_capabilities\" }";
-+	const char *query_blockstats_cmd = "{ \"execute\": \"query-blockstats\" }";
- 	unsigned char *qmp_stats, *val;
- 	char path[80];
- 	int qfd;
+     printf("*** HVMLoader bug at %s:%d\n", file, line);
+     crash();
+diff --git a/tools/firmware/hvmloader/util.h b/tools/firmware/hvmloader/util.h
+index 4f0baade0e6c..8d95eab28a65 100644
+--- a/tools/firmware/hvmloader/util.h
++++ b/tools/firmware/hvmloader/util.h
+@@ -34,11 +34,11 @@ enum {
+ #undef NULL
+ #define NULL ((void*)0)
+ 
+-void __assert_failed(char *assertion, char *file, int line)
++void __assert_failed(const char *assertion, const char *file, int line)
+     __attribute__((noreturn));
+ #define ASSERT(p) \
+     do { if (!(p)) __assert_failed(#p, __FILE__, __LINE__); } while (0)
+-void __bug(char *file, int line) __attribute__((noreturn));
++void __bug(const char *file, int line) __attribute__((noreturn));
+ #define BUG() __bug(__FILE__, __LINE__)
+ #define BUG_ON(p) do { if (p) BUG(); } while (0)
+ #define BUILD_BUG_ON(p) ((void)sizeof(char[1 - 2 * !!(p)]))
 -- 
 2.17.1
 
