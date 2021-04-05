@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46EA5C43603
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F37FEC43462
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 083F061242
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 083F061242
+	by mail.kernel.org (Postfix) with ESMTPS id BD753613A3
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD753613A3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.105396.201761 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.105400.201803 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTRbR-0002CF-5O; Mon, 05 Apr 2021 15:57:25 +0000
+	id 1lTRbV-0002LF-09; Mon, 05 Apr 2021 15:57:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 105396.201761; Mon, 05 Apr 2021 15:57:25 +0000
+Received: by outflank-mailman (output) from mailman id 105400.201803; Mon, 05 Apr 2021 15:57:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTRbR-0002C7-1f; Mon, 05 Apr 2021 15:57:25 +0000
-Received: by outflank-mailman (input) for mailman id 105396;
- Mon, 05 Apr 2021 15:57:23 +0000
+	id 1lTRbU-0002Kq-MN; Mon, 05 Apr 2021 15:57:28 +0000
+Received: by outflank-mailman (input) for mailman id 105400;
+ Mon, 05 Apr 2021 15:57:27 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lTRbP-0002AY-BS
- for xen-devel@lists.xenproject.org; Mon, 05 Apr 2021 15:57:23 +0000
+ (envelope-from <julien@xen.org>) id 1lTRbT-0002Hp-Ab
+ for xen-devel@lists.xenproject.org; Mon, 05 Apr 2021 15:57:27 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lTRbO-0002nT-3j; Mon, 05 Apr 2021 15:57:22 +0000
+ id 1lTRbS-0002oL-Nz; Mon, 05 Apr 2021 15:57:26 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lTRbN-00053b-Rj; Mon, 05 Apr 2021 15:57:22 +0000
+ id 1lTRbS-00053b-Fh; Mon, 05 Apr 2021 15:57:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,91 +55,115 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=+qpe2Q4MYVn+N9AOgWxQnBcvE9Q4UEVlLyVO20fEAig=; b=0s6PRARc2L7Ols9se5qmubITO
-	gCphmgCs7lKIQzI5hW9F5lftz96cYZXIWqh44Nvg3k88t04xh2WXceIGv1LD5/oFrnBHoWEiz1uBO
-	WH5HjSuPJUx+pmj180WxZlco8v+Pv8RpV0pKgXiRbET7wZNbUDGLZDTU9xIQ3kSC7NJFE=;
+	 bh=fSnIgvoSjbUt91Rc+3WKbTs8Y6JmyyNkB+9IjjcALAg=; b=49TpKmuxcFkNIHf0NZn/D91QM
+	liDzLY1pqQul9K2C/SIHFl+oM8o+pki3Cl4fUQm2psyk8/+nCbY6jUqjIBBEBzoI4Zap7OFnIWMr5
+	UKWnKZ9aH40D6z1jqY5HMTS537E5FENgqwyZiQgXenW3kkRonsxeLecm88Ks4xK7sd1Fk=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Julien Grall <jgrall@amazon.com>,
-	Tim Deegan <tim@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 03/14] xen/x86: shadow: The return type of sh_audit_flags() should be const
-Date: Mon,  5 Apr 2021 16:57:02 +0100
-Message-Id: <20210405155713.29754-4-julien@xen.org>
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH 07/14] tools/xl: Use const whenever we point to literal strings
+Date: Mon,  5 Apr 2021 16:57:06 +0100
+Message-Id: <20210405155713.29754-8-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210405155713.29754-1-julien@xen.org>
 References: <20210405155713.29754-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-The function sh_audit_flags() is returning pointer to literal strings.
-They should not be modified, so the return is now const and this is
-propagated to the callers.
-
-Take the opportunity to fix the coding style in the declaration of
-sh_audit_flags.
+literal strings are not meant to be modified. So we should use const
+char * rather than char * when we want to store a pointer to them.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/x86/mm/shadow/multi.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ tools/xl/xl.h         | 8 ++++----
+ tools/xl/xl_console.c | 2 +-
+ tools/xl/xl_utils.c   | 4 ++--
+ tools/xl/xl_utils.h   | 4 ++--
+ 4 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index 9b43cb116c47..0342de81d2c1 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -4290,8 +4290,8 @@ static void sh_pagetable_dying(paddr_t gpa)
-     done = 1;                                                           \
- } while (0)
+diff --git a/tools/xl/xl.h b/tools/xl/xl.h
+index 137a29077c1e..3052e3db0072 100644
+--- a/tools/xl/xl.h
++++ b/tools/xl/xl.h
+@@ -21,13 +21,13 @@
+ #include <xentoollog.h>
  
--static char * sh_audit_flags(struct vcpu *v, int level,
--                              int gflags, int sflags)
-+static const char *sh_audit_flags(struct vcpu *v, int level,
-+                                  int gflags, int sflags)
- /* Common code for auditing flag bits */
+ struct cmd_spec {
+-    char *cmd_name;
++    const char *cmd_name;
+     int (*cmd_impl)(int argc, char **argv);
+     int can_dryrun;
+     int modifies;
+-    char *cmd_desc;
+-    char *cmd_usage;
+-    char *cmd_option;
++    const char *cmd_desc;
++    const char *cmd_usage;
++    const char *cmd_option;
+ };
+ 
+ struct domain_create {
+diff --git a/tools/xl/xl_console.c b/tools/xl/xl_console.c
+index 4e65d7386733..b27f9e013697 100644
+--- a/tools/xl/xl_console.c
++++ b/tools/xl/xl_console.c
+@@ -27,7 +27,7 @@ int main_console(int argc, char **argv)
+     uint32_t domid;
+     int opt = 0, num = 0;
+     libxl_console_type type = 0;
+-    char *console_names = "pv, serial, vuart";
++    const char *console_names = "pv, serial, vuart";
+ 
+     SWITCH_FOREACH_OPT(opt, "n:t:", NULL, "console", 1) {
+     case 't':
+diff --git a/tools/xl/xl_utils.c b/tools/xl/xl_utils.c
+index 4503ac7ea03c..17489d182954 100644
+--- a/tools/xl/xl_utils.c
++++ b/tools/xl/xl_utils.c
+@@ -27,7 +27,7 @@
+ #include "xl.h"
+ #include "xl_utils.h"
+ 
+-void dolog(const char *file, int line, const char *func, char *fmt, ...)
++void dolog(const char *file, int line, const char *func, const char *fmt, ...)
  {
-     if ( (sflags & _PAGE_PRESENT) && !(gflags & _PAGE_PRESENT) )
-@@ -4324,7 +4324,7 @@ int sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
-     mfn_t mfn, gmfn, gl1mfn;
-     gfn_t gfn;
-     p2m_type_t p2mt;
--    char *s;
-+    const char *s;
-     int done = 0;
+     va_list ap;
+     char *s = NULL;
+@@ -248,7 +248,7 @@ void print_bitmap(uint8_t *map, int maplen, FILE *stream)
+     }
+ }
  
-     /* Follow the backpointer */
-@@ -4419,7 +4419,7 @@ int sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
-     mfn_t mfn, gmfn, gl2mfn;
-     gfn_t gfn;
-     p2m_type_t p2mt;
--    char *s;
-+    const char *s;
-     int done = 0;
+-int do_daemonize(char *name, const char *pidfile)
++int do_daemonize(const char *name, const char *pidfile)
+ {
+     char *fullname;
+     pid_t child1;
+diff --git a/tools/xl/xl_utils.h b/tools/xl/xl_utils.h
+index d98b419f1075..0c337ede954b 100644
+--- a/tools/xl/xl_utils.h
++++ b/tools/xl/xl_utils.h
+@@ -123,7 +123,7 @@ int def_getopt(int argc, char * const argv[],
+                const struct option *longopts,
+                const char* helpstr, int reqargs);
  
-     /* Follow the backpointer */
-@@ -4471,7 +4471,7 @@ int sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
-     mfn_t mfn, gmfn, gl3mfn;
-     gfn_t gfn;
-     p2m_type_t p2mt;
--    char *s;
-+    const char *s;
-     int done = 0;
+-void dolog(const char *file, int line, const char *func, char *fmt, ...)
++void dolog(const char *file, int line, const char *func, const char *fmt, ...)
+ 	__attribute__((format(printf,4,5)));
  
-     /* Follow the backpointer */
-@@ -4521,7 +4521,7 @@ int sh_audit_l4_table(struct vcpu *v, mfn_t sl4mfn, mfn_t x)
-     mfn_t mfn, gmfn, gl4mfn;
-     gfn_t gfn;
-     p2m_type_t p2mt;
--    char *s;
-+    const char *s;
-     int done = 0;
+ void xvasprintf(char **strp, const char *fmt, va_list ap)
+@@ -143,7 +143,7 @@ uint32_t find_domain(const char *p) __attribute__((warn_unused_result));
  
-     /* Follow the backpointer */
+ void print_bitmap(uint8_t *map, int maplen, FILE *stream);
+ 
+-int do_daemonize(char *name, const char *pidfile);
++int do_daemonize(const char *name, const char *pidfile);
+ #endif /* XL_UTILS_H */
+ 
+ /*
 -- 
 2.17.1
 
