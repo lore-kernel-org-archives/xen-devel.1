@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50DD2C433B4
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88438C433B4
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 16:14:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1D11061242
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 15:57:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D11061242
+	by mail.kernel.org (Postfix) with ESMTPS id 48E1261025
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Apr 2021 16:14:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 48E1261025
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.105402.201829 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.105452.201851 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTRbY-0002TX-IF; Mon, 05 Apr 2021 15:57:32 +0000
+	id 1lTRsA-0005V5-Ct; Mon, 05 Apr 2021 16:14:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 105402.201829; Mon, 05 Apr 2021 15:57:32 +0000
+Received: by outflank-mailman (output) from mailman id 105452.201851; Mon, 05 Apr 2021 16:14:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTRbY-0002T5-0E; Mon, 05 Apr 2021 15:57:32 +0000
-Received: by outflank-mailman (input) for mailman id 105402;
- Mon, 05 Apr 2021 15:57:30 +0000
+	id 1lTRsA-0005Uu-6H; Mon, 05 Apr 2021 16:14:42 +0000
+Received: by outflank-mailman (input) for mailman id 105452;
+ Mon, 05 Apr 2021 16:14:39 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lTRbV-0002OA-Qm
- for xen-devel@lists.xenproject.org; Mon, 05 Apr 2021 15:57:29 +0000
+ (envelope-from <julien@xen.org>) id 1lTRs7-0005U6-PK
+ for xen-devel@lists.xenproject.org; Mon, 05 Apr 2021 16:14:39 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lTRbV-0002oY-3V; Mon, 05 Apr 2021 15:57:29 +0000
+ id 1lTRs6-0003eu-H5; Mon, 05 Apr 2021 16:14:38 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lTRbU-00053b-RZ; Mon, 05 Apr 2021 15:57:29 +0000
+ id 1lTRbW-00053b-W8; Mon, 05 Apr 2021 15:57:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,18 +55,18 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=UgMhryuGQDNF+IkibD7yNt0PjYxYcwu1lo/PGDlCLKY=; b=bK51hyrcTT4viBqIAN1cWJGfC
-	wDeFEzPJc59SCRpH4goiKY8qLNzgak/3/yWAPp2fjlQ9lW7KuFNoY4jzspPaP1t6GwB6rUSdOvqpg
-	Owg7mfSgH7KOQZAOK0O0XUR62ee/usQYpI9yOoglRBSfzkeKH1Y0WXik9zTTeH6PVtzaY=;
+	 bh=fOozlpcQqX3U35FdV5utWkSVhrMD0HRaxwSjYqjDLQU=; b=s3UuLNW5J0CRb7QQWuy3WCObx
+	9Gdg6FRWFWbkIYxzFKoZOv2val092fE4cOQzcRm4YVQZ31kwcWJ3NT60CRP2B9jujZTo3yvvEONJz
+	7FInxspUOxEYrqmX/FCyAO/5RTJMMjSXJx9QixNpURGdf4BHNYESij6Ke2nVKGjrv2FC4=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Julien Grall <jgrall@amazon.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 09/14] tools/console: Use const whenever we point to literal strings
-Date: Mon,  5 Apr 2021 16:57:08 +0100
-Message-Id: <20210405155713.29754-10-julien@xen.org>
+Subject: [PATCH 11/14] tools/misc: Use const whenever we point to literal strings
+Date: Mon,  5 Apr 2021 16:57:10 +0100
+Message-Id: <20210405155713.29754-12-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210405155713.29754-1-julien@xen.org>
 References: <20210405155713.29754-1-julien@xen.org>
@@ -74,70 +74,52 @@ References: <20210405155713.29754-1-julien@xen.org>
 From: Julien Grall <jgrall@amazon.com>
 
 literal strings are not meant to be modified. So we should use const
-char * rather than char * when we want to store a pointer to them.
+char * rather than char * when we we to store a pointer to them.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/console/client/main.c |  4 ++--
- tools/console/daemon/io.c   | 10 +++++-----
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ tools/misc/xen-detect.c | 2 +-
+ tools/misc/xenhypfs.c   | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tools/console/client/main.c b/tools/console/client/main.c
-index 088be28dff02..80157be42144 100644
---- a/tools/console/client/main.c
-+++ b/tools/console/client/main.c
-@@ -325,7 +325,7 @@ int main(int argc, char **argv)
+diff --git a/tools/misc/xen-detect.c b/tools/misc/xen-detect.c
+index eac9e46a35bb..18b28dabf311 100644
+--- a/tools/misc/xen-detect.c
++++ b/tools/misc/xen-detect.c
+@@ -44,7 +44,7 @@ enum guest_type {
+     XEN_NONE = 3
+ };
+ 
+-static char *type;
++static const char *type;
+ static char *ver;
+ 
+ static void cpuid(uint32_t idx, uint32_t *regs, int pv_context)
+diff --git a/tools/misc/xenhypfs.c b/tools/misc/xenhypfs.c
+index 5da24aed905c..df398b07bdc0 100644
+--- a/tools/misc/xenhypfs.c
++++ b/tools/misc/xenhypfs.c
+@@ -81,9 +81,9 @@ static int xenhypfs_wr(char *path, char *val)
+     return ret;
+ }
+ 
+-static char *xenhypfs_type(struct xenhypfs_dirent *ent)
++static const char *xenhypfs_type(struct xenhypfs_dirent *ent)
  {
- 	struct termios attr;
- 	int domid;
--	char *sopt = "hn:";
-+	const char *sopt = "hn:";
- 	int ch;
- 	unsigned int num = 0;
- 	int opt_ind=0;
-@@ -345,7 +345,7 @@ int main(int argc, char **argv)
- 	char *end;
- 	console_type type = CONSOLE_INVAL;
- 	bool interactive = 0;
--	char *console_names = "serial, pv, vuart";
-+	const char *console_names = "serial, pv, vuart";
+-    char *res;
++    const char *res;
  
- 	while((ch = getopt_long(argc, argv, sopt, lopt, &opt_ind)) != -1) {
- 		switch(ch) {
-diff --git a/tools/console/daemon/io.c b/tools/console/daemon/io.c
-index 4af27ffc5d02..6a8a94e31b65 100644
---- a/tools/console/daemon/io.c
-+++ b/tools/console/daemon/io.c
-@@ -87,14 +87,14 @@ struct buffer {
- };
+     switch (ent->type) {
+     case xenhypfs_type_dir:
+@@ -134,7 +134,7 @@ static int xenhypfs_ls(char *path)
+     return ret;
+ }
  
- struct console {
--	char *ttyname;
-+	const char *ttyname;
- 	int master_fd;
- 	int master_pollfd_idx;
- 	int slave_fd;
- 	int log_fd;
- 	struct buffer buffer;
- 	char *xspath;
--	char *log_suffix;
-+	const char *log_suffix;
- 	int ring_ref;
- 	xenevtchn_handle *xce_handle;
- 	int xce_pollfd_idx;
-@@ -109,9 +109,9 @@ struct console {
- };
- 
- struct console_type {
--	char *xsname;
--	char *ttyname;
--	char *log_suffix;
-+	const char *xsname;
-+	const char *ttyname;
-+	const char *log_suffix;
- 	bool optional;
- 	bool use_gnttab;
- };
+-static int xenhypfs_tree_sub(char *path, unsigned int depth)
++static int xenhypfs_tree_sub(const char *path, unsigned int depth)
+ {
+     struct xenhypfs_dirent *ent;
+     unsigned int n, i;
 -- 
 2.17.1
 
