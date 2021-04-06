@@ -2,49 +2,46 @@ Return-Path: <SRS0=uqgo=JD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA6C0C433B4
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 10:51:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59FFBC433ED
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 11:06:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6F41B610C8
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 10:51:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F41B610C8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1FCF9613C7
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 11:06:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FCF9613C7
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.105793.202332 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.105802.202392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTjIt-00034v-JN; Tue, 06 Apr 2021 10:51:27 +0000
+	id 1lTjXM-0004JB-7B; Tue, 06 Apr 2021 11:06:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 105793.202332; Tue, 06 Apr 2021 10:51:27 +0000
+Received: by outflank-mailman (output) from mailman id 105802.202392; Tue, 06 Apr 2021 11:06:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTjIt-00034o-Et; Tue, 06 Apr 2021 10:51:27 +0000
-Received: by outflank-mailman (input) for mailman id 105793;
- Tue, 06 Apr 2021 10:51:26 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xZnD=JD=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1lTjIs-00034Q-PM
- for xen-devel@lists.xenproject.org; Tue, 06 Apr 2021 10:51:26 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id dd21e63e-4c1f-4a54-b146-49ebbd0fb2cf;
- Tue, 06 Apr 2021 10:51:26 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D4F9531B;
- Tue,  6 Apr 2021 03:51:25 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
- [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D44A3F73D;
- Tue,  6 Apr 2021 03:51:24 -0700 (PDT)
+	id 1lTjXM-0004J2-2L; Tue, 06 Apr 2021 11:06:24 +0000
+Received: by outflank-mailman (input) for mailman id 105802;
+ Tue, 06 Apr 2021 11:06:22 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>) id 1lTjXK-0004Hr-ST
+ for xen-devel@lists.xenproject.org; Tue, 06 Apr 2021 11:06:22 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lTjXK-00053A-KC; Tue, 06 Apr 2021 11:06:22 +0000
+Received: from 54-240-197-238.amazon.com ([54.240.197.238]
+ helo=ua82172827c7b5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lTjXK-0002qD-2L; Tue, 06 Apr 2021 11:06:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,96 +53,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd21e63e-4c1f-4a54-b146-49ebbd0fb2cf
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: sstabellini@kernel.org,
-	jgross@suse.com,
-	jgrall@amazon.com
-Cc: boris.ostrovsky@oracle.com,
-	tglx@linutronix.de,
-	wei.liu@kernel.org,
-	jbeulich@suse.com,
-	yyankovskyi@gmail.com,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	bertrand.marquis@arm.com
-Subject: [PATCH] xen/evtchn: Change irq_info lock to raw_spinlock_t
-Date: Tue,  6 Apr 2021 11:51:04 +0100
-Message-Id: <20210406105105.10141-1-luca.fancellu@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=References:In-Reply-To:References:In-Reply-To:Message-Id:
+	Date:Subject:Cc:To:From; bh=s1xYw5JRA0hX+hVyYpDhdvIQg52C43B8RF1tdty6+gI=; b=q
+	rvO47LJf+Qx69S/KtsguvWew2ZpWZu6weBHn63fYk6YFjXcT+Ge+BULkx4s/rtdrm2wSly1NafdKP
+	J79mwlq8crEPjt9GOzE4fq8gmJxmwhtonCmBaNt9Z6rnzC5p6pQp/f6IjABwCySb+QiO56TlbrfzV
+	qJfq8CmpFC2ba8M8=;
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: jgrall@amazon.com,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v9 04/13] x86_64/mm: introduce pl2e in paging_init
+Date: Tue,  6 Apr 2021 12:05:52 +0100
+Message-Id: <836cc0def0609a5f4495491b1c4994fc044cfbef.1617706782.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1617706782.git.hongyxia@amazon.com>
+References: <cover.1617706782.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1617706782.git.hongyxia@amazon.com>
+References: <cover.1617706782.git.hongyxia@amazon.com>
 
-Unmask operation must be called with interrupt disabled,
-on preempt_rt spin_lock_irqsave/spin_unlock_irqrestore
-don't disable/enable interrupts, so use raw_* implementation
-and change lock variable in struct irq_info from spinlock_t
-to raw_spinlock_t
+From: Wei Liu <wei.liu2@citrix.com>
 
-Cc: stable@vger.kernel.org
-Fixes: 25da4618af24 ("xen/events: don't unmask an event channel
-when an eoi is pending")
+We will soon map and unmap pages in paging_init(). Introduce pl2e so
+that we can use l2_ro_mpt to point to the page table itself.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+No functional change.
+
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+
 ---
- drivers/xen/events/events_base.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Changed in v7:
+- reword commit message.
+---
+ xen/arch/x86/x86_64/mm.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
-index 8236e2364eeb..7bbfd58958bc 100644
---- a/drivers/xen/events/events_base.c
-+++ b/drivers/xen/events/events_base.c
-@@ -110,7 +110,7 @@ struct irq_info {
- 	unsigned short eoi_cpu; /* EOI must happen on this cpu-1 */
- 	unsigned int irq_epoch; /* If eoi_cpu valid: irq_epoch of event */
- 	u64 eoi_time;           /* Time in jiffies when to EOI. */
--	spinlock_t lock;
-+	raw_spinlock_t lock;
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index bce1561e1a80..c5a47df01bde 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -496,7 +496,7 @@ void __init paging_init(void)
+     unsigned long i, mpt_size, va;
+     unsigned int n, memflags;
+     l3_pgentry_t *l3_ro_mpt;
+-    l2_pgentry_t *l2_ro_mpt = NULL;
++    l2_pgentry_t *pl2e = NULL, *l2_ro_mpt = NULL;
+     struct page_info *l1_pg;
  
- 	union {
- 		unsigned short virq;
-@@ -312,7 +312,7 @@ static int xen_irq_info_common_setup(struct irq_info *info,
- 	info->evtchn = evtchn;
- 	info->cpu = cpu;
- 	info->mask_reason = EVT_MASK_REASON_EXPLICIT;
--	spin_lock_init(&info->lock);
-+	raw_spin_lock_init(&info->lock);
+     /*
+@@ -546,7 +546,7 @@ void __init paging_init(void)
+             (L2_PAGETABLE_SHIFT - 3 + PAGE_SHIFT)));
  
- 	ret = set_evtchn_to_irq(evtchn, irq);
- 	if (ret < 0)
-@@ -472,28 +472,28 @@ static void do_mask(struct irq_info *info, u8 reason)
- {
- 	unsigned long flags;
+         if ( cpu_has_page1gb &&
+-             !((unsigned long)l2_ro_mpt & ~PAGE_MASK) &&
++             !((unsigned long)pl2e & ~PAGE_MASK) &&
+              (mpt_size >> L3_PAGETABLE_SHIFT) > (i >> PAGETABLE_ORDER) )
+         {
+             unsigned int k, holes;
+@@ -606,7 +606,7 @@ void __init paging_init(void)
+             memset((void *)(RDWR_MPT_VIRT_START + (i << L2_PAGETABLE_SHIFT)),
+                    0xFF, 1UL << L2_PAGETABLE_SHIFT);
+         }
+-        if ( !((unsigned long)l2_ro_mpt & ~PAGE_MASK) )
++        if ( !((unsigned long)pl2e & ~PAGE_MASK) )
+         {
+             if ( (l2_ro_mpt = alloc_xen_pagetable()) == NULL )
+                 goto nomem;
+@@ -614,13 +614,14 @@ void __init paging_init(void)
+             l3e_write(&l3_ro_mpt[l3_table_offset(va)],
+                       l3e_from_paddr(__pa(l2_ro_mpt),
+                                      __PAGE_HYPERVISOR_RO | _PAGE_USER));
++            pl2e = l2_ro_mpt;
+             ASSERT(!l2_table_offset(va));
+         }
+         /* NB. Cannot be GLOBAL: guest user mode should not see it. */
+         if ( l1_pg )
+-            l2e_write(l2_ro_mpt, l2e_from_page(
++            l2e_write(pl2e, l2e_from_page(
+                 l1_pg, /*_PAGE_GLOBAL|*/_PAGE_PSE|_PAGE_USER|_PAGE_PRESENT));
+-        l2_ro_mpt++;
++        pl2e++;
+     }
+ #undef CNT
+ #undef MFN
+@@ -632,6 +633,7 @@ void __init paging_init(void)
+             goto nomem;
+         compat_idle_pg_table_l2 = l2_ro_mpt;
+         clear_page(l2_ro_mpt);
++        pl2e = l2_ro_mpt;
  
--	spin_lock_irqsave(&info->lock, flags);
-+	raw_spin_lock_irqsave(&info->lock, flags);
- 
- 	if (!info->mask_reason)
- 		mask_evtchn(info->evtchn);
- 
- 	info->mask_reason |= reason;
- 
--	spin_unlock_irqrestore(&info->lock, flags);
-+	raw_spin_unlock_irqrestore(&info->lock, flags);
- }
- 
- static void do_unmask(struct irq_info *info, u8 reason)
- {
- 	unsigned long flags;
- 
--	spin_lock_irqsave(&info->lock, flags);
-+	raw_spin_lock_irqsave(&info->lock, flags);
- 
- 	info->mask_reason &= ~reason;
- 
- 	if (!info->mask_reason)
- 		unmask_evtchn(info->evtchn);
- 
--	spin_unlock_irqrestore(&info->lock, flags);
-+	raw_spin_unlock_irqrestore(&info->lock, flags);
- }
- 
- #ifdef CONFIG_X86
+         /* Allocate and map the compatibility mode machine-to-phys table. */
+         mpt_size = (mpt_size >> 1) + (1UL << (L2_PAGETABLE_SHIFT - 1));
+@@ -649,7 +651,7 @@ void __init paging_init(void)
+              sizeof(*compat_machine_to_phys_mapping))
+     BUILD_BUG_ON((sizeof(*frame_table) & ~sizeof(*frame_table)) % \
+                  sizeof(*compat_machine_to_phys_mapping));
+-    for ( i = 0; i < (mpt_size >> L2_PAGETABLE_SHIFT); i++, l2_ro_mpt++ )
++    for ( i = 0; i < (mpt_size >> L2_PAGETABLE_SHIFT); i++, pl2e++ )
+     {
+         memflags = MEMF_node(phys_to_nid(i <<
+             (L2_PAGETABLE_SHIFT - 2 + PAGE_SHIFT)));
+@@ -671,7 +673,7 @@ void __init paging_init(void)
+                         (i << L2_PAGETABLE_SHIFT)),
+                0xFF, 1UL << L2_PAGETABLE_SHIFT);
+         /* NB. Cannot be GLOBAL as the ptes get copied into per-VM space. */
+-        l2e_write(l2_ro_mpt, l2e_from_page(l1_pg, _PAGE_PSE|_PAGE_PRESENT));
++        l2e_write(pl2e, l2e_from_page(l1_pg, _PAGE_PSE|_PAGE_PRESENT));
+     }
+ #undef CNT
+ #undef MFN
 -- 
-2.17.1
+2.23.3
 
 
