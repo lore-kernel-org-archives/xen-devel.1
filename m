@@ -2,47 +2,42 @@ Return-Path: <SRS0=uqgo=JD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBC3AC433ED
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 20:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6FADC433ED
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 21:25:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9B80C613CC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 20:11:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9B80C613CC
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6658061396
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Apr 2021 21:25:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6658061396
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.106292.203297 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.106307.203312 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTs2K-0000Qm-A4; Tue, 06 Apr 2021 20:10:56 +0000
+	id 1lTtBv-0006au-PB; Tue, 06 Apr 2021 21:24:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 106292.203297; Tue, 06 Apr 2021 20:10:56 +0000
+Received: by outflank-mailman (output) from mailman id 106307.203312; Tue, 06 Apr 2021 21:24:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lTs2K-0000Qf-7A; Tue, 06 Apr 2021 20:10:56 +0000
-Received: by outflank-mailman (input) for mailman id 106292;
- Tue, 06 Apr 2021 20:10:54 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lTs2I-0000QX-Qf; Tue, 06 Apr 2021 20:10:54 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lTs2I-0006V7-Jz; Tue, 06 Apr 2021 20:10:54 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lTs2I-0005Bp-6l; Tue, 06 Apr 2021 20:10:54 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lTs2I-00038c-6F; Tue, 06 Apr 2021 20:10:54 +0000
+	id 1lTtBv-0006an-MG; Tue, 06 Apr 2021 21:24:55 +0000
+Received: by outflank-mailman (input) for mailman id 106307;
+ Tue, 06 Apr 2021 21:24:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=uncx=JD=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1lTtBu-0006ai-Aq
+ for xen-devel@lists.xenproject.org; Tue, 06 Apr 2021 21:24:54 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 31548986-699d-460f-96da-b1d3b419f200;
+ Tue, 06 Apr 2021 21:24:53 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A2DB461396;
+ Tue,  6 Apr 2021 21:24:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,86 +49,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=LAZboV645ug/1FvP9fosge1bBzZGcfITEo7L5NMJBMU=; b=tq5ojLZ251bmOcf8ut8bQm4wiZ
-	y3CbD9hs7Cg+QXfX42YgPQw/pvA4whS/cRutv1MjTd3R0X9DkQnIHG4Si8ae3stGoQ2a6DhcY4Asl
-	HqykGt3wJ+MIt6DN9fHSIZr5Jdy3qtYhhgjROFE9LWJTHd8d/T2ROqZ+IO/VedD56FrE=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-160772-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 31548986-699d-460f-96da-b1d3b419f200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1617744293;
+	bh=H2NAWP4Xi7y6EV5xHX1I9+POqLpf99goDaZ8lVmFaUY=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=Y5Pg0fHm1ZX8R7Chj0E/JZOkd2eoNizyOWV7mtVOYMw4aUS5YsPh95t223j9oOYUU
+	 DoVow/TjAx6cn9PumcJFQLfx8+aoqFbzdArT8CXcv07La3+k/CVSBA0XPrdddQ5NP6
+	 pY5uXFzhq0+4I+OOzHnKpeO2BOx+I8Q0iCEVTmofhXcWs0AXRjK5Mu4WNsDLBEDwJv
+	 TeCKtnupt5H6JfVLwh0QuatqnTwcFUXIh6DvRaC43QC3eBdVVT50g6AXaz/qOoeesB
+	 qCcJQqyl4tN/UUGT9nX5Wh3fwDrv8yV8WV9Um/8cvkT0E4LGaF18vYUzSI6aAWfgHf
+	 bd8O5VlCZMfmg==
+Date: Tue, 6 Apr 2021 14:24:51 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+cc: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org, 
+    bertrand.marquis@arm.com, wei.chen@arm.com, 
+    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
+    Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
+    Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 0/3] Use Doxygen and sphinx for html documentation
+In-Reply-To: <225d7e0a-c5c6-a954-9141-ba1d859f400a@citrix.com>
+Message-ID: <alpine.DEB.2.21.2104061418360.31460@sstabellini-ThinkPad-T480s>
+References: <20210406103603.8530-1-luca.fancellu@arm.com> <225d7e0a-c5c6-a954-9141-ba1d859f400a@citrix.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 160772: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=6425fcf37122b1f1e4ceaacadd00a4c280a58f57
-X-Osstest-Versions-That:
-    xen=0435784cc75dcfef3b5f59c29deb1dbb84265ddb
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 06 Apr 2021 20:10:54 +0000
+Content-Type: multipart/mixed; boundary="8323329-285525972-1617744292=:31460"
 
-flight 160772 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/160772/
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Failures :-/ but no regressions.
+--8323329-285525972-1617744292=:31460
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+On Tue, 6 Apr 2021, Andrew Cooper wrote:
+> On 06/04/2021 11:36, Luca Fancellu wrote:
+> > This serie introduce doxygen in the sphinx html docs generation.
+> > One benefit is to keep most of the documentation in the source
+> > files of xen so that it's more maintainable, on the other hand
+> > there are some limitation of doxygen that must be addressed
+> > modifying the current codebase (for example doxygen can't parse
+> > anonymous structure/union).
+> >
+> > To reproduce the documentation xen must be compiled because
+> > most of the headers are generated on compilation time from
+> > the makefiles.
+> >
+> > Here follows the steps to generate the sphinx html docs, some
+> > package may be required on your machine, everything is suggested
+> > by the autoconf script.
+> > Here I'm building the arm64 docs (the only introduced for now by
+> > this serie):
+> >
+> > ./configure
+> > make -C xen XEN_TARGET_ARCH="arm64" CROSS_COMPILE="aarch64-linux-gnu-" menuconfig
+> > make -C xen XEN_TARGET_ARCH="arm64" CROSS_COMPILE="aarch64-linux-gnu-"
+> > make -C docs XEN_TARGET_ARCH="arm64" sphinx-html
+> >
+> > now in docs/sphinx/html/ we have the generated docs starting
+> > from the index.html page.
+> 
+> Do you have a sample rendered output?
+> 
+> The plan was to try and use Linux's kernel-doc plugin for Sphinx, which
+> is very doxygen-like.  Did you experiment with this option?
 
-version targeted for testing:
- xen                  6425fcf37122b1f1e4ceaacadd00a4c280a58f57
-baseline version:
- xen                  0435784cc75dcfef3b5f59c29deb1dbb84265ddb
+As you probably know the end goal for Luca (and the Xen FuSa SIG as a
+whole) is to generate all FuSa documents, including requirements docs,
+interface docs, etc.
 
-Last test of basis   160648  2021-04-01 18:00:27 Z    5 days
-Testing same since   160772  2021-04-06 15:00:34 Z    0 days    1 attempts
+FuSa requires us to follow the famous V model, where the high level
+requirements are linked to the lower level requirements, which are
+linked to the interface docs, which are linked all the way down to the
+code.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <jgrall@amazon.com>
+Maintaining the linking is difficult and typically done with expensive
+proprietary FuSa tools.
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+Fortunately, an engineer working with the Zephyr project developed a set
+of scripts for Doxygen that are able to generate the required FuSa docs
+and also links from in-code comments and markdown/rst docs in the tree.
 
+This is great work, and in the FuSa SIG we thought it would be best to
+align ourselves with Zephyr to be able to pull our efforts together on
+the tooling side instead of doing the same thing again on our own.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   0435784cc7..6425fcf371  6425fcf37122b1f1e4ceaacadd00a4c280a58f57 -> smoke
+This is the reason why we ended up with Doxygen.
+--8323329-285525972-1617744292=:31460--
 
