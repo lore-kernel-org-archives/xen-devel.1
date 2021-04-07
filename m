@@ -2,41 +2,47 @@ Return-Path: <SRS0=v/14=JE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0640C433ED
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Apr 2021 15:04:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F13AC433ED
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Apr 2021 15:19:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 80F5A61262
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Apr 2021 15:04:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 80F5A61262
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id CF30C610CB
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Apr 2021 15:19:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF30C610CB
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.106751.204107 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.106758.204134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lU9ij-0003XH-8n; Wed, 07 Apr 2021 15:03:53 +0000
+	id 1lU9xl-0004de-US; Wed, 07 Apr 2021 15:19:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 106751.204107; Wed, 07 Apr 2021 15:03:53 +0000
+Received: by outflank-mailman (output) from mailman id 106758.204134; Wed, 07 Apr 2021 15:19:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lU9ij-0003XA-5W; Wed, 07 Apr 2021 15:03:53 +0000
-Received: by outflank-mailman (input) for mailman id 106751;
- Wed, 07 Apr 2021 15:03:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=L9xm=JE=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lU9ih-0003X5-ST
- for xen-devel@lists.xenproject.org; Wed, 07 Apr 2021 15:03:51 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3c42e1a3-a204-4685-b51e-da852e24e71e;
- Wed, 07 Apr 2021 15:03:51 +0000 (UTC)
+	id 1lU9xl-0004dW-Qv; Wed, 07 Apr 2021 15:19:25 +0000
+Received: by outflank-mailman (input) for mailman id 106758;
+ Wed, 07 Apr 2021 15:19:24 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lU9xk-0004bs-GS
+ for xen-devel@lists.xenproject.org; Wed, 07 Apr 2021 15:19:24 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lU9xk-0007uo-Ea
+ for xen-devel@lists.xenproject.org; Wed, 07 Apr 2021 15:19:24 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1lU9xk-000672-Cq
+ for xen-devel@lists.xenproject.org; Wed, 07 Apr 2021 15:19:24 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1lU9xf-00052w-GE; Wed, 07 Apr 2021 16:19:19 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,67 +54,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c42e1a3-a204-4685-b51e-da852e24e71e
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1617807831;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=dCcL9tZYdKA331q4Nw5XFfidGGKXo1yPU3a7vQpENx8=;
-  b=TCSr5wLlQEMETFoUJsxUxGQBLjlzX54UfyXVIg/GlWuMMraP7o2yvrpO
-   9woG7Pa/OCl5rgOxqtJQKzkhVbdxqD7ojo8NGwudkHSs6rGZGlZWNqEmr
-   A3lgs8oIyq00GzvvOcsHleLf287rSRoRGr0yWXqKJL4VK80sCBE6PPnmx
-   w=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: JcQOxFw4MmKPgtigDh26hoXUhDov/kliljCizXGag/AHX/T7E7ZfgBqK9YrFvqRy8hh9CIF8eX
- H0Vh5lUsEx+Ypo/5mmmWDuSfSrd1VWk/xJpXr5Wq+aAV5kkzjo9wJNAGvvictWjhW2ChSA5yCb
- jOefKMhiOFa1KTdK6Sg1fMKKpuOMkOcvRWg9ydq3AFz3BHsMJKHD7Jcl1UtGp77fUS0A69HKoQ
- fOHtqF9t3+ii4tMK3zn9AthlzF/h2zFj0RINSAcTcVZi3H9mBWseNf8+YFJJMMg9ie4prbS0DX
- CCo=
-X-SBRS: 5.1
-X-MesageID: 42544777
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:qqPDYqBGaBULchHlHekz55DYdL4zR+YMi2QD/WoZc3JoW+afkN
- 2jm+le+B/vkTAKWGwhn9foAtjlfVr385lp7Y4NeYqzRQWOghrMEKhO5ZbvqgeMJwTQ7ehYvJ
- 0NT4FfD5nKAUF+nYLG5mCDYrEd6f2m1IztuuvE1XdqSmhRGsNdxiN0EBySHEEzZCQuP/oEPa
- GR7MZGuDasEE5/Bq/QOlA/U+fOvNHNnp79CCR2ZCIP0wWSkSiurIfzDhnw5GZ5bxp03bwg/W
- LZ+jaZ2oyftZiApSPh6w==
-X-IronPort-AV: E=Sophos;i="5.82,203,1613451600"; 
-   d="scan'208";a="42544777"
-Date: Wed, 7 Apr 2021 16:03:46 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Olaf Hering <olaf@aepfle.de>
-CC: <xen-devel@lists.xenproject.org>, Ian Jackson <iwj@xenproject.org>, Wei
- Liu <wl@xen.org>
-Subject: Re: [XEN PATCH for-4.15] libxl: Replace deprecated QMP command by
- "query-cpus-fast"
-Message-ID: <YG3J0rRCCG0JotRq@perard>
-References: <20210322141744.522041-1-anthony.perard@citrix.com>
- <20210401162454.78fb0290.olaf@aepfle.de>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=GvpGue6hK6WrmBsnSv9fYunLo++JeTdS38KgxlgCwQg=; b=46+vTlPvBDg6DfU+G4/s5qbdfk
+	lNqznKpe3erOISxB7GnNkKt0qlIjmIRdVD7OKm53mgK895BSRKyGnY9JATF/Xw3PTEjKVLdy1bECK
+	zZ1fyJ30HFlez6g5In5lTdG6ayxpW4AWKrjcmp3/R6jZXDgPGGUqahKmyGQ1s8hDrEtk=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20210401162454.78fb0290.olaf@aepfle.de>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Message-ID: <24685.52599.234444.705703@mariner.uk.xensource.com>
+Date: Wed, 7 Apr 2021 16:19:19 +0100
+To: Luca Fancellu <luca.fancellu@arm.com>
+Cc: Julien Grall <julien@xen.org>,
+    xen-devel@lists.xenproject.org,
+    Bertrand Marquis <bertrand.marquis@arm.com>,
+    wei.chen@arm.com,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Jan Beulich <jbeulich@suse.com>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 3/3] docs/doxygen: doxygen documentation for grant_table.h
+In-Reply-To: <0F20064C-418C-4A4F-9883-4452A726B038@arm.com>
+References: <20210406103603.8530-1-luca.fancellu@arm.com>
+	<20210406103603.8530-4-luca.fancellu@arm.com>
+	<7f143615-acdf-5a97-5e07-57cab49031d6@xen.org>
+	<0F20064C-418C-4A4F-9883-4452A726B038@arm.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-On Thu, Apr 01, 2021 at 04:24:54PM +0200, Olaf Hering wrote:
-> Am Mon, 22 Mar 2021 14:17:44 +0000
-> schrieb Anthony PERARD <anthony.perard@citrix.com>:
-> 
-> > We use the deprecated QMP command "query-cpus"
-> 
-> There is also the already removed "cpu-add" command used, which apparently has to be replaced by "device_add".
-> 
-> Do you happen to have a fix for this as well?
->
-> Another thread suggests that more deprecated commands are used. I think they have to be adjusted as well, ideally before they finally disappear from upstream qemu.
+Luca Fancellu writes ("Re: [PATCH 3/3] docs/doxygen: doxygen documentation for grant_table.h"):
+> The problem is that Doxygen can’t generate proper documentation for anonymous union/structure, it ends up with warning and/or producing wrong documentation like
+> changing names or giving field description to the wrong field.
 
-I'm working on a fix for cpu hotplug and other deprecated/removed
-things, I'll try to propose the patches upstream soon after the release
-of Xen.
+This does not seem like it would be an impossibly hard feature to add
+to doxygen.
 
-Thanks,
-
--- 
-Anthony PERARD
+Ian.
 
