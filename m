@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD912C433B4
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 12:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9019DC433ED
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 12:18:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 79394610F8
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 12:17:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 79394610F8
+	by mail.kernel.org (Postfix) with ESMTPS id 4E99561041
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 12:18:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E99561041
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.107234.204977 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.107237.204989 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lUTbI-0003Tk-94; Thu, 08 Apr 2021 12:17:32 +0000
+	id 1lUTbl-0003Zz-IA; Thu, 08 Apr 2021 12:18:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 107234.204977; Thu, 08 Apr 2021 12:17:32 +0000
+Received: by outflank-mailman (output) from mailman id 107237.204989; Thu, 08 Apr 2021 12:18:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lUTbI-0003Tc-5e; Thu, 08 Apr 2021 12:17:32 +0000
-Received: by outflank-mailman (input) for mailman id 107234;
- Thu, 08 Apr 2021 12:17:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lUTbl-0003Zs-EL; Thu, 08 Apr 2021 12:18:01 +0000
+Received: by outflank-mailman (input) for mailman id 107237;
+ Thu, 08 Apr 2021 12:17:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=e/uL=JF=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lUTbH-0003TX-Hf
- for xen-devel@lists.xenproject.org; Thu, 08 Apr 2021 12:17:31 +0000
+ id 1lUTbj-0003ZO-T4
+ for xen-devel@lists.xenproject.org; Thu, 08 Apr 2021 12:17:59 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 456238ae-2933-4aa1-acc3-7110983556ff;
- Thu, 08 Apr 2021 12:17:30 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 90761739-f7d3-4dd4-80d1-076cba7ebca2;
+ Thu, 08 Apr 2021 12:17:59 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1E70AB007;
- Thu,  8 Apr 2021 12:17:30 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 4EF1FB090;
+ Thu,  8 Apr 2021 12:17:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,28 +52,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 456238ae-2933-4aa1-acc3-7110983556ff
+X-Inumbo-ID: 90761739-f7d3-4dd4-80d1-076cba7ebca2
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1617884250; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1617884278; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YjgoyLYt7SHX0fU/jqnJ8hiIG5x4umZdD9kaKSbikg8=;
-	b=GYTsYqOJBinstoNn4WhvIEOkGgCSezGloEwIGC1ui32JB78W4p+cc9o36UXx+Seqoty3tL
-	3NLFyLAT8EHVE3fdK8iPzzBcQazKeYCkd6WjwxqVc1hMkCNefnmbw5A0MKxvPkcLHp357c
-	E1SsFGrAAdOSfgzJHogeITPGkV8mxvs=
-Subject: [PATCH 02/11] x86/vPMU: avoid effectively open-coding
- xzalloc_flex_struct()
+	bh=QnmG9k8Zw1WTHYZkvL1RP6b1ZHGImCYwyft4ku4C/6U=;
+	b=jARlKgxxgKd+LvB/iXqHR4JKLtrBD7/3V9FIdXlHV+vniPp/MLLCibRxuHF+WQxNFcZbdp
+	SzojpNL3PZBmLmiHV7drDOaPWnEAJXsTNHahdvT7+/kC2vPdpEym1XinF+WcujsqSjmbSl
+	5s1M7h/eHRv274C0zjtxNc5RT3sLpM8=
+Subject: [PATCH 03/11] x86/MCE: avoid effectively open-coding xmalloc_array()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 References: <a3fef3b0-c9f3-208e-3728-62ca9cff70ba@suse.com>
-Message-ID: <ec03cef8-a883-fd68-a062-c243d782394c@suse.com>
-Date: Thu, 8 Apr 2021 14:17:29 +0200
+Message-ID: <47101cea-a856-3921-dd19-89ce766aaaeb@suse.com>
+Date: Thu, 8 Apr 2021 14:17:58 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.9.0
 MIME-Version: 1.0
@@ -81,28 +80,22 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-There is a difference in generated code: xzalloc_bytes() forces
+There is a difference in generated code: xmalloc_bytes() forces
 SMP_CACHE_BYTES alignment. I think we not only don't need this here, but
 actually don't want it.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -461,10 +461,10 @@ static int core2_vpmu_alloc_resource(str
-             goto out_err;
-     }
+--- a/xen/arch/x86/cpu/mcheck/mctelem.c
++++ b/xen/arch/x86/cpu/mcheck/mctelem.c
+@@ -345,7 +345,7 @@ void __init mctelem_init(unsigned int da
  
--    core2_vpmu_cxt = xzalloc_bytes(sizeof(*core2_vpmu_cxt) +
--                                   sizeof(uint64_t) * fixed_pmc_cnt +
--                                   sizeof(struct xen_pmu_cntr_pair) *
--                                   arch_pmc_cnt);
-+    core2_vpmu_cxt = xzalloc_flex_struct(struct xen_pmu_intel_ctxt, regs,
-+                                         fixed_pmc_cnt + arch_pmc_cnt *
-+                                         (sizeof(struct xen_pmu_cntr_pair) /
-+                                          sizeof(*core2_vpmu_cxt->regs)));
-     p = xzalloc(uint64_t);
-     if ( !core2_vpmu_cxt || !p )
-         goto out_err;
+ 	if ((mctctl.mctc_elems = xmalloc_array(struct mctelem_ent,
+ 	    MC_NENT)) == NULL ||
+-	    (datarr = xmalloc_bytes(MC_NENT * datasz)) == NULL) {
++	    (datarr = xmalloc_array(char, MC_NENT * datasz)) == NULL) {
+ 		xfree(mctctl.mctc_elems);
+ 		printk("Allocations for MCA telemetry failed\n");
+ 		return;
 
 
