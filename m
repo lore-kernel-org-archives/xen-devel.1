@@ -2,48 +2,44 @@ Return-Path: <SRS0=xlmN=JF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A647EC43470
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 09:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F81CC433B4
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 10:03:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E87861158
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 09:48:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E87861158
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0570C60FD8
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 10:03:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0570C60FD8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.107103.204706 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.107130.204768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lURH7-0004Wc-Rp; Thu, 08 Apr 2021 09:48:33 +0000
+	id 1lURV8-0006rJ-OE; Thu, 08 Apr 2021 10:03:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 107103.204706; Thu, 08 Apr 2021 09:48:33 +0000
+Received: by outflank-mailman (output) from mailman id 107130.204768; Thu, 08 Apr 2021 10:03:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lURH7-0004WV-Ok; Thu, 08 Apr 2021 09:48:33 +0000
-Received: by outflank-mailman (input) for mailman id 107103;
- Thu, 08 Apr 2021 09:48:32 +0000
+	id 1lURV8-0006rC-KW; Thu, 08 Apr 2021 10:03:02 +0000
+Received: by outflank-mailman (input) for mailman id 107130;
+ Thu, 08 Apr 2021 10:03:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=0/ag=JF=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1lURH6-0004WL-Mv
- for xen-devel@lists.xenproject.org; Thu, 08 Apr 2021 09:48:32 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id aaa26d65-9060-46f9-8271-5e5f6ea52be3;
- Thu, 08 Apr 2021 09:48:31 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CBD10106F;
- Thu,  8 Apr 2021 02:48:30 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
- [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DD9843F694;
- Thu,  8 Apr 2021 02:48:29 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=e/uL=JF=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lURV6-0006r6-Fk
+ for xen-devel@lists.xenproject.org; Thu, 08 Apr 2021 10:03:00 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4a64de18-f741-47eb-bbe1-232a54e0f9b9;
+ Thu, 08 Apr 2021 10:02:59 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9EFC9AFCC;
+ Thu,  8 Apr 2021 10:02:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,152 +51,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aaa26d65-9060-46f9-8271-5e5f6ea52be3
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	wei.chen@arm.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 1/4] xen/arm: Move dom0 creation in domain_build.c
-Date: Thu,  8 Apr 2021 10:48:15 +0100
-Message-Id: <20210408094818.8173-2-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210408094818.8173-1-luca.fancellu@arm.com>
-References: <20210408094818.8173-1-luca.fancellu@arm.com>
+X-Inumbo-ID: 4a64de18-f741-47eb-bbe1-232a54e0f9b9
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1617876178; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=y8ct3Jmpr+aHlOLuCoPj1PRJp6rEB/k9wJ4H+Phr9WU=;
+	b=f/H/M5IhxmxupF1kvI4SRwhKaes7yXO28AatMkGKJ5QoRwqDmW6hU7RXO7j0UsFlqquVE7
+	gezoW3C1kMaqptEsWs4d9VQ1wthiXKLra8MUpxefXXE8Qve7nc1JyahKO8Lb5LSycAp/zq
+	TA03/c5iO/SViUene6kYB6EXSqlX6fg=
+Subject: Re: [PATCH v2 3/3] x86: avoid building COMPAT code when !HVM && !PV32
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <bf79f745-078b-071d-cf01-dfede456041a@suse.com>
+ <85b6edfc-9756-9dd0-c90f-f46dc120dade@suse.com>
+Message-ID: <5acec73c-27c1-80f2-fca8-bba428952016@suse.com>
+Date: Thu, 8 Apr 2021 12:02:58 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
+MIME-Version: 1.0
+In-Reply-To: <85b6edfc-9756-9dd0-c90f-f46dc120dade@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Move dom0 creation and start from setup.c to domain_build.c
-on a dedicate function.
+On 06.04.2021 16:02, Jan Beulich wrote:
+> --- a/xen/include/xen/compat.h
+> +++ b/xen/include/xen/compat.h
+> @@ -5,10 +5,11 @@
+>  #ifndef __XEN_COMPAT_H__
+>  #define __XEN_COMPAT_H__
+>  
+> -#ifdef CONFIG_COMPAT
+> -
+>  #include <xen/types.h>
+>  #include <asm/compat.h>
+> +
+> +#ifdef CONFIG_COMPAT
+> +
+>  #include <compat/xlat.h>
+>  
+>  #define __DEFINE_COMPAT_HANDLE(name, type) \
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
- xen/arch/arm/domain_build.c | 36 ++++++++++++++++++++++++++++++++++++
- xen/arch/arm/setup.c        | 29 +----------------------------
- xen/include/asm-arm/setup.h |  1 +
- 3 files changed, 38 insertions(+), 28 deletions(-)
+As I've just noticed this breaks the Arm build, for the lack of
+asm/compat.h there. I'll be folding in the hunks below; an alternative
+would be to require every arch to have a (perhaps empty) compat.h,
+which seems less desirable to me.
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 374bf655ee..d7c9c7f4d1 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -21,6 +21,7 @@
- #include <asm/device.h>
- #include <asm/kernel.h>
- #include <asm/setup.h>
-+#include <asm/tee/tee.h>
- #include <asm/platform.h>
- #include <asm/psci.h>
- #include <asm/setup.h>
-@@ -2520,6 +2521,41 @@ void __init create_domUs(void)
-     }
- }
- 
-+struct domain* __init create_dom0(void)
-+{
-+    struct domain *dom0;
-+    struct xen_domctl_createdomain dom0_cfg = {
-+        .flags = XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap,
-+        .max_evtchn_port = -1,
-+        .max_grant_frames = gnttab_dom0_frames(),
-+        .max_maptrack_frames = -1,
-+    };
-+
-+    /* The vGIC for DOM0 is exactly emulating the hardware GIC */
-+    dom0_cfg.arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
-+    /*
-+     * Xen vGIC supports a maximum of 992 interrupt lines.
-+     * 32 are substracted to cover local IRQs.
-+     */
-+    dom0_cfg.arch.nr_spis = min(gic_number_lines(), (unsigned int) 992) - 32;
-+    if ( gic_number_lines() > 992 )
-+        printk(XENLOG_WARNING "Maximum number of vGIC IRQs exceeded.\n");
-+    dom0_cfg.arch.tee_type = tee_get_type();
-+    dom0_cfg.max_vcpus = dom0_max_vcpus();
-+
-+    if ( iommu_enabled )
-+        dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
-+
-+    dom0 = domain_create(0, &dom0_cfg, true);
-+    if ( IS_ERR(dom0) || (alloc_dom0_vcpu0(dom0) == NULL) )
-+        panic("Error creating domain 0\n");
-+
-+    if ( construct_dom0(dom0) != 0)
-+        panic("Could not set up DOM0 guest OS\n");
-+
-+    return dom0;
-+}
-+
- int __init construct_dom0(struct domain *d)
- {
-     struct kernel_info kinfo = {};
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 2532ec9739..b405f58996 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -51,7 +51,6 @@
- #include <asm/platform.h>
- #include <asm/procinfo.h>
- #include <asm/setup.h>
--#include <asm/tee/tee.h>
- #include <xsm/xsm.h>
- #include <asm/acpi.h>
- 
-@@ -805,12 +804,6 @@ void __init start_xen(unsigned long boot_phys_offset,
-     const char *cmdline;
-     struct bootmodule *xen_bootmodule;
-     struct domain *dom0;
--    struct xen_domctl_createdomain dom0_cfg = {
--        .flags = XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap,
--        .max_evtchn_port = -1,
--        .max_grant_frames = gnttab_dom0_frames(),
--        .max_maptrack_frames = -1,
--    };
-     int rc;
- 
-     dcache_line_bytes = read_dcache_line_bytes();
-@@ -965,27 +958,7 @@ void __init start_xen(unsigned long boot_phys_offset,
-     enable_errata_workarounds();
- 
-     /* Create initial domain 0. */
--    /* The vGIC for DOM0 is exactly emulating the hardware GIC */
--    dom0_cfg.arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
--    /*
--     * Xen vGIC supports a maximum of 992 interrupt lines.
--     * 32 are substracted to cover local IRQs.
--     */
--    dom0_cfg.arch.nr_spis = min(gic_number_lines(), (unsigned int) 992) - 32;
--    if ( gic_number_lines() > 992 )
--        printk(XENLOG_WARNING "Maximum number of vGIC IRQs exceeded.\n");
--    dom0_cfg.arch.tee_type = tee_get_type();
--    dom0_cfg.max_vcpus = dom0_max_vcpus();
--
--    if ( iommu_enabled )
--        dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
--
--    dom0 = domain_create(0, &dom0_cfg, true);
--    if ( IS_ERR(dom0) || (alloc_dom0_vcpu0(dom0) == NULL) )
--        panic("Error creating domain 0\n");
--
--    if ( construct_dom0(dom0) != 0)
--        panic("Could not set up DOM0 guest OS\n");
-+    dom0 = create_dom0();
- 
-     heap_init_late();
- 
-diff --git a/xen/include/asm-arm/setup.h b/xen/include/asm-arm/setup.h
-index 28bf622aa1..e5f5c7ebc6 100644
---- a/xen/include/asm-arm/setup.h
-+++ b/xen/include/asm-arm/setup.h
-@@ -95,6 +95,7 @@ int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
- 
- int construct_dom0(struct domain *d);
- void create_domUs(void);
-+struct domain* create_dom0(void);
- 
- void discard_initial_modules(void);
- void fw_unreserved_regions(paddr_t s, paddr_t e,
--- 
-2.17.1
+Jan
 
+--- unstable.orig/xen/arch/x86/Kconfig
++++ unstable/xen/arch/x86/Kconfig
+@@ -9,6 +9,7 @@ config X86
+ 	select ARCH_SUPPORTS_INT128
+ 	select CORE_PARKING
+ 	select HAS_ALTERNATIVE
++	select HAS_COMPAT
+ 	select HAS_CPUFREQ
+ 	select HAS_EHCI
+ 	select HAS_EX_TABLE
+--- unstable.orig/xen/common/Kconfig
++++ unstable/xen/common/Kconfig
+@@ -25,6 +25,9 @@ config GRANT_TABLE
+ config HAS_ALTERNATIVE
+ 	bool
+ 
++config HAS_COMPAT
++	bool
++
+ config HAS_DEVICE_TREE
+ 	bool
+ 
+--- unstable.orig/xen/include/xen/compat.h
++++ unstable/xen/include/xen/compat.h
+@@ -6,7 +6,9 @@
+ #define __XEN_COMPAT_H__
+ 
+ #include <xen/types.h>
++#ifdef CONFIG_HAS_COMPAT
+ #include <asm/compat.h>
++#endif
+ 
+ #ifdef CONFIG_COMPAT
+ 
 
