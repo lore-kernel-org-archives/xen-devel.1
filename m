@@ -2,48 +2,49 @@ Return-Path: <SRS0=xlmN=JF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2C9AC433ED
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 09:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73B60C433B4
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 09:48:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 41EB061130
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 09:32:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41EB061130
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0E53661154
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Apr 2021 09:48:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E53661154
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.107098.204691 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.107106.204736 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lUR10-0003TW-DA; Thu, 08 Apr 2021 09:31:54 +0000
+	id 1lURHD-0004ad-NU; Thu, 08 Apr 2021 09:48:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 107098.204691; Thu, 08 Apr 2021 09:31:54 +0000
+Received: by outflank-mailman (output) from mailman id 107106.204736; Thu, 08 Apr 2021 09:48:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lUR10-0003TP-9K; Thu, 08 Apr 2021 09:31:54 +0000
-Received: by outflank-mailman (input) for mailman id 107098;
- Thu, 08 Apr 2021 09:31:53 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lUR0z-0003TH-Qi; Thu, 08 Apr 2021 09:31:53 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lUR0z-0008TW-D2; Thu, 08 Apr 2021 09:31:53 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lUR0z-00060J-4l; Thu, 08 Apr 2021 09:31:53 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lUR0z-0007mC-4G; Thu, 08 Apr 2021 09:31:53 +0000
+	id 1lURHD-0004aR-Hg; Thu, 08 Apr 2021 09:48:39 +0000
+Received: by outflank-mailman (input) for mailman id 107106;
+ Thu, 08 Apr 2021 09:48:37 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=0/ag=JF=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
+ id 1lURHB-0004WM-P1
+ for xen-devel@lists.xenproject.org; Thu, 08 Apr 2021 09:48:37 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 36a3e47c-9081-4c70-b092-c6ecab5b98b2;
+ Thu, 08 Apr 2021 09:48:33 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A11E0106F;
+ Thu,  8 Apr 2021 02:48:32 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
+ [10.1.197.16])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0C6213F694;
+ Thu,  8 Apr 2021 02:48:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,74 +56,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=Ac87KTjzKOxdpftoe/HwLizYUL9JVT3fRpNmzwOYxVg=; b=EjxsgdY6c83YAjSGIuplUturUt
-	AFyomDuI+MDGDlLw1Gw7D2Gh2ilgOz2C2H+gCXwCMWK0ReB4BHo5maXZTuqxdUy2A/IOh2xZyULau
-	qwV8OU9qcTpOn8z9LQz8fXrDsJqcxq5l6o05jolOv9XIAUuVICioCy3CaaF5P5CLo3Ek=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-160799-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [ovmf test] 160799: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=9c08b3e7d5ac177a1ecb3678004fd94164865814
-X-Osstest-Versions-That:
-    ovmf=4ac02962017c77bf38b462f970c884c2dc7931cf
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 08 Apr 2021 09:31:53 +0000
+X-Inumbo-ID: 36a3e47c-9081-4c70-b092-c6ecab5b98b2
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v2 2/4] xen/arm: Handle cases when hardware_domain is NULL
+Date: Thu,  8 Apr 2021 10:48:16 +0100
+Message-Id: <20210408094818.8173-3-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210408094818.8173-1-luca.fancellu@arm.com>
+References: <20210408094818.8173-1-luca.fancellu@arm.com>
 
-flight 160799 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/160799/
+The function is_hardware_domain() returns true if the
+hardware_domain and the passed domain is NULL, here we
+add a check to return false if there is no hardware_domain.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 9c08b3e7d5ac177a1ecb3678004fd94164865814
-baseline version:
- ovmf                 4ac02962017c77bf38b462f970c884c2dc7931cf
+Among the common and arm codebase there are few cases where
+the hardware_domain variable is checked to see if the current
+domain is equal to the hardware_domain, change this cases to
+use is_hardware_domain() function instead.
 
-Last test of basis   160757  2021-04-06 01:11:18 Z    2 days
-Testing same since   160799  2021-04-07 16:40:17 Z    0 days    1 attempts
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+ xen/arch/arm/irq.c                       | 2 +-
+ xen/common/domain.c                      | 4 ++--
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 2 +-
+ xen/drivers/passthrough/arm/smmu-v3.c    | 2 +-
+ xen/drivers/passthrough/arm/smmu.c       | 2 +-
+ xen/include/asm-arm/domain.h             | 2 +-
+ xen/include/xen/sched.h                  | 2 +-
+ 7 files changed, 8 insertions(+), 8 deletions(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michael D Kinney <michael.d.kinney@intel.com>
+diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+index b71b099e6f..b761d90c40 100644
+--- a/xen/arch/arm/irq.c
++++ b/xen/arch/arm/irq.c
+@@ -412,7 +412,7 @@ bool is_assignable_irq(unsigned int irq)
+  */
+ bool irq_type_set_by_domain(const struct domain *d)
+ {
+-    return (d == hardware_domain);
++    return is_hardware_domain(d);
+ }
+ 
+ /*
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index d85984638a..e8ec3ba445 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -308,7 +308,7 @@ static int late_hwdom_init(struct domain *d)
+     struct domain *dom0;
+     int rv;
+ 
+-    if ( d != hardware_domain || d->domain_id == 0 )
++    if ( !is_hardware_domain(d) || d->domain_id == 0 )
+         return 0;
+ 
+     rv = xsm_init_hardware_domain(XSM_HOOK, d);
+@@ -705,7 +705,7 @@ struct domain *domain_create(domid_t domid,
+     err = err ?: -EILSEQ; /* Release build safety. */
+ 
+     d->is_dying = DOMDYING_dead;
+-    if ( hardware_domain == d )
++    if ( is_hardware_domain(d) )
+         hardware_domain = old_hwdom;
+     atomic_set(&d->refcnt, DOMAIN_DESTROYED);
+ 
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index aef358d880..8b8e3a00ba 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -1168,7 +1168,7 @@ static int ipmmu_reassign_device(struct domain *s, struct domain *t,
+     int ret = 0;
+ 
+     /* Don't allow remapping on other domain than hwdom */
+-    if ( t && t != hardware_domain )
++    if ( t && !is_hardware_domain(t) )
+         return -EPERM;
+ 
+     if ( t == s )
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index 53d150cdb6..d115df7320 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -3366,7 +3366,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
+ 	int ret = 0;
+ 
+ 	/* Don't allow remapping on other domain than hwdom */
+-	if (t && t != hardware_domain)
++	if ( t && !is_hardware_domain(t) )
+ 		return -EPERM;
+ 
+ 	if (t == s)
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 3e8aa37866..932fdfd6dd 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -2670,7 +2670,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
+ 	int ret = 0;
+ 
+ 	/* Don't allow remapping on other domain than hwdom */
+-	if (t && t != hardware_domain)
++	if ( t && !is_hardware_domain(t) )
+ 		return -EPERM;
+ 
+ 	if (t == s)
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index 1da90f207d..738bda5ef3 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -30,7 +30,7 @@ enum domain_type {
+ #endif
+ 
+ /* The hardware domain has always its memory direct mapped. */
+-#define is_domain_direct_mapped(d) ((d) == hardware_domain)
++#define is_domain_direct_mapped(d) (is_hardware_domain(d))
+ 
+ struct vtimer {
+     struct vcpu *v;
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 5485d08afb..bfc9d2577c 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -1022,7 +1022,7 @@ static always_inline bool is_hardware_domain(const struct domain *d)
+     if ( IS_ENABLED(CONFIG_PV_SHIM_EXCLUSIVE) )
+         return false;
+ 
+-    return evaluate_nospec(d == hardware_domain);
++    return evaluate_nospec((hardware_domain != NULL) && (d == hardware_domain));
+ }
+ 
+ /* This check is for functionality specific to a control domain */
+-- 
+2.17.1
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   4ac0296201..9c08b3e7d5  9c08b3e7d5ac177a1ecb3678004fd94164865814 -> xen-tested-master
 
