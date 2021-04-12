@@ -2,47 +2,49 @@ Return-Path: <SRS0=44Tx=JJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90DAFC433ED
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 032C6C433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4EC3B61244
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4EC3B61244
+	by mail.kernel.org (Postfix) with ESMTPS id B1D4261241
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B1D4261241
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.108959.207939 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.108960.207950 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVuBk-0000hz-3g; Mon, 12 Apr 2021 10:53:04 +0000
+	id 1lVuBn-0000js-BD; Mon, 12 Apr 2021 10:53:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 108959.207939; Mon, 12 Apr 2021 10:53:04 +0000
+Received: by outflank-mailman (output) from mailman id 108960.207950; Mon, 12 Apr 2021 10:53:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVuBk-0000hs-0G; Mon, 12 Apr 2021 10:53:04 +0000
-Received: by outflank-mailman (input) for mailman id 108959;
- Mon, 12 Apr 2021 10:53:03 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lVuBn-0000jl-7h; Mon, 12 Apr 2021 10:53:07 +0000
+Received: by outflank-mailman (input) for mailman id 108960;
+ Mon, 12 Apr 2021 10:53:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VKKJ=JJ=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1lVuBj-0000hn-2G
- for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 10:53:03 +0000
+ id 1lVuBl-0000jA-MG
+ for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 10:53:05 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id f81b5f68-9c6b-4dd9-b793-ecdbe4df2bb2;
- Mon, 12 Apr 2021 10:53:01 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 36946a84-f473-4f29-99fd-a68ce6a6bc01;
+ Mon, 12 Apr 2021 10:53:04 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 25F2D31B;
- Mon, 12 Apr 2021 03:53:01 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0130EED1;
+ Mon, 12 Apr 2021 03:53:04 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8C7E83F694;
- Mon, 12 Apr 2021 03:52:59 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6EE903F694;
+ Mon, 12 Apr 2021 03:53:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,7 +56,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f81b5f68-9c6b-4dd9-b793-ecdbe4df2bb2
+X-Inumbo-ID: 36946a84-f473-4f29-99fd-a68ce6a6bc01
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
@@ -68,44 +70,117 @@ Cc: bertrand.marquis@arm.com,
 	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Rahul Singh <rahul.singh@arm.com>
-Subject: [PATCH v3 0/4] xen/arm: Prevent Dom0 to be loaded when using dom0less
-Date: Mon, 12 Apr 2021 11:52:39 +0100
-Message-Id: <20210412105243.23354-1-luca.fancellu@arm.com>
+Subject: [PATCH v3 2/4] xen/arm: Handle cases when hardware_domain is NULL
+Date: Mon, 12 Apr 2021 11:52:41 +0100
+Message-Id: <20210412105243.23354-3-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210412105243.23354-1-luca.fancellu@arm.com>
+References: <20210412105243.23354-1-luca.fancellu@arm.com>
 
-This is the v2 of xen/arm: Prevent Dom0 to be loaded when using dom0less
-previously pushed.
+The function is_hardware_domain() returns true if the
+hardware_domain and the passed domain is NULL, here we
+add a check to return false if there is no hardware_domain.
 
-The aim of this serie is to prevent the creation and run of the domain 0 (Dom0)
-when the system configuration to be used is dom0less, that is when the device
-tree declares at least one domU and no Dom0.
+Among the common and arm codebase there are few cases where
+the hardware_domain variable is checked to see if the current
+domain is equal to the hardware_domain, change this cases to
+use is_hardware_domain() function instead.
 
-Changes in v2 are:
- - Moving the dom0 creation in a proper function
- - Handle the case of having an hardware_domain NULL
- - Be sure that the domain id 0 is never allocated
- - Modify documentation about dom0less
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+v3 changes:
+- removed unneeded parenthesis for macro is_domain_direct_mapped
+- is_hardware_domain() checks for the passed domain and if it is
+  NULL, it returns false.
+- reverted back checks in the function late_hwdom_init
+---
+ xen/arch/arm/irq.c                       | 2 +-
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 2 +-
+ xen/drivers/passthrough/arm/smmu-v3.c    | 2 +-
+ xen/drivers/passthrough/arm/smmu.c       | 2 +-
+ xen/include/asm-arm/domain.h             | 2 +-
+ xen/include/xen/sched.h                  | 3 +++
+ 6 files changed, 8 insertions(+), 5 deletions(-)
 
-Changes in v3: minor fixes explained in each patches
-
-Luca Fancellu (4):
-  xen/arm: Move dom0 creation in domain_build.c
-  xen/arm: Handle cases when hardware_domain is NULL
-  xen/arm: Reserve domid 0 for Dom0
-  xen/arm: Prevent Dom0 to be loaded when using dom0less
-
- docs/features/dom0less.pandoc            |  7 +--
- xen/arch/arm/domain_build.c              | 43 ++++++++++++++-
- xen/arch/arm/irq.c                       |  2 +-
- xen/arch/arm/setup.c                     | 69 +++++++++++++-----------
- xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
- xen/drivers/passthrough/arm/smmu-v3.c    |  2 +-
- xen/drivers/passthrough/arm/smmu.c       |  2 +-
- xen/include/asm-arm/domain.h             |  2 +-
- xen/include/asm-arm/setup.h              |  2 +-
- xen/include/xen/sched.h                  |  3 ++
- 10 files changed, 94 insertions(+), 40 deletions(-)
-
+diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+index b71b099e6f..b761d90c40 100644
+--- a/xen/arch/arm/irq.c
++++ b/xen/arch/arm/irq.c
+@@ -412,7 +412,7 @@ bool is_assignable_irq(unsigned int irq)
+  */
+ bool irq_type_set_by_domain(const struct domain *d)
+ {
+-    return (d == hardware_domain);
++    return is_hardware_domain(d);
+ }
+ 
+ /*
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index aef358d880..8b8e3a00ba 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -1168,7 +1168,7 @@ static int ipmmu_reassign_device(struct domain *s, struct domain *t,
+     int ret = 0;
+ 
+     /* Don't allow remapping on other domain than hwdom */
+-    if ( t && t != hardware_domain )
++    if ( t && !is_hardware_domain(t) )
+         return -EPERM;
+ 
+     if ( t == s )
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index 53d150cdb6..d115df7320 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -3366,7 +3366,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
+ 	int ret = 0;
+ 
+ 	/* Don't allow remapping on other domain than hwdom */
+-	if (t && t != hardware_domain)
++	if ( t && !is_hardware_domain(t) )
+ 		return -EPERM;
+ 
+ 	if (t == s)
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index 3e8aa37866..932fdfd6dd 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -2670,7 +2670,7 @@ static int arm_smmu_reassign_dev(struct domain *s, struct domain *t,
+ 	int ret = 0;
+ 
+ 	/* Don't allow remapping on other domain than hwdom */
+-	if (t && t != hardware_domain)
++	if ( t && !is_hardware_domain(t) )
+ 		return -EPERM;
+ 
+ 	if (t == s)
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index 1da90f207d..0a74df9931 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -30,7 +30,7 @@ enum domain_type {
+ #endif
+ 
+ /* The hardware domain has always its memory direct mapped. */
+-#define is_domain_direct_mapped(d) ((d) == hardware_domain)
++#define is_domain_direct_mapped(d) is_hardware_domain(d)
+ 
+ struct vtimer {
+     struct vcpu *v;
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 5485d08afb..5ba90f1214 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -1022,6 +1022,9 @@ static always_inline bool is_hardware_domain(const struct domain *d)
+     if ( IS_ENABLED(CONFIG_PV_SHIM_EXCLUSIVE) )
+         return false;
+ 
++    if ( !d )
++        return false;
++
+     return evaluate_nospec(d == hardware_domain);
+ }
+ 
 -- 
 2.17.1
 
