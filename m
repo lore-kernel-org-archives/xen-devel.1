@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01328C43461
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13D41C433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC97561287
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC97561287
+	by mail.kernel.org (Postfix) with ESMTPS id CDCD061244
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CDCD061244
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109278.208620 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109279.208632 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVyOr-0005NG-7x; Mon, 12 Apr 2021 15:22:53 +0000
+	id 1lVyOv-0005SQ-I6; Mon, 12 Apr 2021 15:22:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109278.208620; Mon, 12 Apr 2021 15:22:53 +0000
+Received: by outflank-mailman (output) from mailman id 109279.208632; Mon, 12 Apr 2021 15:22:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVyOr-0005N2-3I; Mon, 12 Apr 2021 15:22:53 +0000
-Received: by outflank-mailman (input) for mailman id 109278;
- Mon, 12 Apr 2021 15:22:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lVyOv-0005SF-Dx; Mon, 12 Apr 2021 15:22:57 +0000
+Received: by outflank-mailman (input) for mailman id 109279;
+ Mon, 12 Apr 2021 15:22:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=oSjc=JJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lVyOp-0005HA-EH
- for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 15:22:51 +0000
+ id 1lVyOt-0005H5-Ko
+ for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 15:22:55 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 39ce5eed-b4f5-42f5-80e6-b3d0dfb9d9b7;
- Mon, 12 Apr 2021 15:22:45 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0fd291f5-23f7-43a6-81d1-374e8f0f9978;
+ Mon, 12 Apr 2021 15:22:46 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8975CB2F2;
- Mon, 12 Apr 2021 15:22:44 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0F4B5B312;
+ Mon, 12 Apr 2021 15:22:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,176 +51,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 39ce5eed-b4f5-42f5-80e6-b3d0dfb9d9b7
+X-Inumbo-ID: 0fd291f5-23f7-43a6-81d1-374e8f0f9978
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1618240964; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1618240965; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=P+pP2B8esDOs+sJC9sMxYhDklvTGPhZovtj2JSiHDDU=;
-	b=jVvqUVXFGoFAjb+V+tAjqjcgsLRHGvDyPrwcnmfyxAwyy7uLRSOSm3UFRyVTp4fNqyqa4A
-	kxrw5lWpT3WzH8f8cuGC4QgxNBDTbuV4fyycAci9a3cGLsHWYwAW2SGzktEZ8bCH3tztwr
-	zAtUIwq0ONxx95MYkZmoKaSjCS6cATI=
+	bh=r/d1m/nwqJtLr2C9cFqF0W7SDbqgauwOmuYrIPpnLeM=;
+	b=JMVPQdsuB79ObIjUXQC6Mqu76yBPNU/E/edvkqCWu5NXhrcKzvkp84/U5lCPJW++mtzBJI
+	Un6/3+YrDgNadxdI7xEmDxtl4brtDfsVrefBqvQ1PZbimC248S8m+3nyKgvpxWbvE71E/r
+	SIWJZIiah15hnbkjXHzZrb/LbE7wnrw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>
-Subject: [PATCH v2 3/6] tools/libs/ctrl: use common p2m mapping code in xc_domain_resume_any()
-Date: Mon, 12 Apr 2021 17:22:33 +0200
-Message-Id: <20210412152236.1975-4-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 6/6] tools/libs/guest: make some definitions private to libxenguest
+Date: Mon, 12 Apr 2021 17:22:36 +0200
+Message-Id: <20210412152236.1975-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210412152236.1975-1-jgross@suse.com>
 References: <20210412152236.1975-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of open coding the mapping of the p2m list use the already
-existing xc_core_arch_map_p2m() call, especially as the current code
-does not support guests with the linear p2m map. It should be noted
-that this code is needed for colo/remus only.
+There are some definitions which are used in libxenguest only now.
+Move them from libxenctrl over to libxenguest.
 
-Switching to xc_core_arch_map_p2m() drops the need to bail out for
-bitness of tool stack and guest differing.
+Remove an unused macro.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-This might be a backport candidate
-V2:
-- add missing #include in ocaml stub (Andrew Cooper)
----
- tools/libs/ctrl/xc_resume.c         | 66 +++++++++--------------------
- tools/ocaml/libs/xc/xenctrl_stubs.c |  1 +
- 2 files changed, 22 insertions(+), 45 deletions(-)
+ tools/libs/ctrl/xc_private.h   | 32 --------------------------------
+ tools/libs/guest/xg_core.h     |  2 +-
+ tools/libs/guest/xg_core_x86.c | 16 +++++++++++++++-
+ tools/libs/guest/xg_private.h  | 16 +++++++++++++++-
+ tools/libs/guest/xg_resume.c   |  2 +-
+ 5 files changed, 32 insertions(+), 36 deletions(-)
 
-diff --git a/tools/libs/ctrl/xc_resume.c b/tools/libs/ctrl/xc_resume.c
-index 94c6c9fb31..e3c8e83aa9 100644
---- a/tools/libs/ctrl/xc_resume.c
-+++ b/tools/libs/ctrl/xc_resume.c
-@@ -20,6 +20,7 @@
- #include <xen/foreign/x86_32.h>
- #include <xen/foreign/x86_64.h>
- #include <xen/hvm/params.h>
-+#include "xc_core.h"
+diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
+index dff0f0289b..3e299b943f 100644
+--- a/tools/libs/ctrl/xc_private.h
++++ b/tools/libs/ctrl/xc_private.h
+@@ -65,38 +65,6 @@ struct iovec {
  
- static int modify_returncode(xc_interface *xch, uint32_t domid)
- {
-@@ -137,12 +138,10 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-     struct domain_info_context _dinfo = { .guest_width = 0,
-                                           .p2m_size = 0 };
-     struct domain_info_context *dinfo = &_dinfo;
--    unsigned long mfn;
-+    xen_pfn_t mfn, store_mfn, console_mfn;
-     vcpu_guest_context_any_t ctxt;
--    start_info_t *start_info;
--    shared_info_t *shinfo = NULL;
--    xen_pfn_t *p2m_frame_list_list = NULL;
--    xen_pfn_t *p2m_frame_list = NULL;
-+    start_info_any_t *start_info;
-+    shared_info_any_t *shinfo = NULL;
-     xen_pfn_t *p2m = NULL;
+ #define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
+ 
+-#define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
+-
+-#define SET_FIELD(_p, _f, _v, _w) do {          \
+-    if ((_w) == 8)                              \
+-        (_p)->x64._f = (_v);                    \
+-    else                                        \
+-        (_p)->x32._f = (_v);                    \
+-} while (0)
+-
+-/* XXX SMH: following skanky macros rely on variable p2m_size being set */
+-/* XXX TJD: also, "guest_width" should be the guest's sizeof(unsigned long) */
+-
+-struct domain_info_context {
+-    unsigned int guest_width;
+-    unsigned int p2m_frames;
+-    unsigned long p2m_size;
+-};
+-
+-/* Number of xen_pfn_t in a page */
+-#define FPP             (PAGE_SIZE/(dinfo->guest_width))
+-
+-/* Number of entries in the pfn_to_mfn_frame_list_list */
+-#define P2M_FLL_ENTRIES (((dinfo->p2m_size)+(FPP*FPP)-1)/(FPP*FPP))
+-
+-/* Number of entries in the pfn_to_mfn_frame_list */
+-#define P2M_FL_ENTRIES  (((dinfo->p2m_size)+FPP-1)/FPP)
+-
+-/* Size in bytes of the pfn_to_mfn_frame_list     */
+-#define P2M_GUEST_FL_SIZE ((P2M_FL_ENTRIES) * (dinfo->guest_width))
+-#define P2M_TOOLS_FL_SIZE ((P2M_FL_ENTRIES) *                           \
+-                           max_t(size_t, sizeof(xen_pfn_t), dinfo->guest_width))
+-
+ #define DECLARE_DOMCTL struct xen_domctl domctl
+ #define DECLARE_SYSCTL struct xen_sysctl sysctl
+ #define DECLARE_PHYSDEV_OP struct physdev_op physdev_op
+diff --git a/tools/libs/guest/xg_core.h b/tools/libs/guest/xg_core.h
+index f07584aaa6..aaca9e0a8b 100644
+--- a/tools/libs/guest/xg_core.h
++++ b/tools/libs/guest/xg_core.h
+@@ -21,7 +21,7 @@
+ #define XC_CORE_H
+ 
+ #include "xen/version.h"
+-#include "xc_private.h"
++#include "xg_private.h"
+ #include "xen/libelf/elfstructs.h"
+ 
+ /* section names */
+diff --git a/tools/libs/guest/xg_core_x86.c b/tools/libs/guest/xg_core_x86.c
+index 09f5d696ce..61106b98b8 100644
+--- a/tools/libs/guest/xg_core_x86.c
++++ b/tools/libs/guest/xg_core_x86.c
+@@ -18,10 +18,24 @@
+  */
+ 
+ #include <inttypes.h>
+-#include "xc_private.h"
++#include "xg_private.h"
+ #include "xg_core.h"
+ #include <xen/hvm/e820.h>
+ 
++/* Number of xen_pfn_t in a page */
++#define FPP             (PAGE_SIZE/(dinfo->guest_width))
++
++/* Number of entries in the pfn_to_mfn_frame_list_list */
++#define P2M_FLL_ENTRIES (((dinfo->p2m_size)+(FPP*FPP)-1)/(FPP*FPP))
++
++/* Number of entries in the pfn_to_mfn_frame_list */
++#define P2M_FL_ENTRIES  (((dinfo->p2m_size)+FPP-1)/FPP)
++
++/* Size in bytes of the pfn_to_mfn_frame_list     */
++#define P2M_GUEST_FL_SIZE ((P2M_FL_ENTRIES) * (dinfo->guest_width))
++#define P2M_TOOLS_FL_SIZE ((P2M_FL_ENTRIES) * \
++                           max_t(size_t, sizeof(xen_pfn_t), dinfo->guest_width))
++
+ int
+ xc_core_arch_gpfn_may_present(struct xc_core_arch_context *arch_ctxt,
+                               unsigned long pfn)
+diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
+index 8f9b257a2f..ff57f8b832 100644
+--- a/tools/libs/guest/xg_private.h
++++ b/tools/libs/guest/xg_private.h
+@@ -42,6 +42,21 @@
+ #endif
  #endif
  
-@@ -164,11 +163,6 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-         PERROR("Could not get domain width");
-         return rc;
-     }
--    if ( dinfo->guest_width != sizeof(long) )
--    {
--        ERROR("Cannot resume uncooperative cross-address-size guests");
--        return rc;
--    }
++#define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
++
++#define SET_FIELD(_p, _f, _v, _w) do {          \
++    if ((_w) == 8)                              \
++        (_p)->x64._f = (_v);                    \
++    else                                        \
++        (_p)->x32._f = (_v);                    \
++} while (0)
++
++struct domain_info_context {
++    unsigned int guest_width;
++    unsigned int p2m_frames;
++    unsigned long p2m_size;
++};
++
+ struct xc_dom_loader {
+     char *name;
+     /* Sadly the error returns from these functions are not consistent: */
+@@ -139,7 +154,6 @@ static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
+ /* Masks for PTE<->PFN conversions */
+ #define MADDR_BITS_X86  ((dinfo->guest_width == 8) ? 52 : 44)
+ #define MFN_MASK_X86    ((1ULL << (MADDR_BITS_X86 - PAGE_SHIFT_X86)) - 1)
+-#define MADDR_MASK_X86  (MFN_MASK_X86 << PAGE_SHIFT_X86)
  
-     /* Map the shared info frame */
-     shinfo = xc_map_foreign_range(xch, domid, PAGE_SIZE,
-@@ -179,34 +173,8 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-         goto out;
-     }
+ int pin_table(xc_interface *xch, unsigned int type, unsigned long mfn,
+               uint32_t dom);
+diff --git a/tools/libs/guest/xg_resume.c b/tools/libs/guest/xg_resume.c
+index d201c1488d..77e2451a3c 100644
+--- a/tools/libs/guest/xg_resume.c
++++ b/tools/libs/guest/xg_resume.c
+@@ -13,7 +13,7 @@
+  * License along with this library; If not, see <http://www.gnu.org/licenses/>.
+  */
  
--    dinfo->p2m_size = shinfo->arch.max_pfn;
--
--    p2m_frame_list_list =
--        xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
--                             shinfo->arch.pfn_to_mfn_frame_list_list);
--    if ( p2m_frame_list_list == NULL )
--    {
--        ERROR("Couldn't map p2m_frame_list_list");
--        goto out;
--    }
--
--    p2m_frame_list = xc_map_foreign_pages(xch, domid, PROT_READ,
--                                          p2m_frame_list_list,
--                                          P2M_FLL_ENTRIES);
--    if ( p2m_frame_list == NULL )
--    {
--        ERROR("Couldn't map p2m_frame_list");
--        goto out;
--    }
--
--    /* Map all the frames of the pfn->mfn table. For migrate to succeed,
--       the guest must not change which frames are used for this purpose.
--       (its not clear why it would want to change them, and we'll be OK
--       from a safety POV anyhow. */
--    p2m = xc_map_foreign_pages(xch, domid, PROT_READ,
--                               p2m_frame_list,
--                               P2M_FL_ENTRIES);
--    if ( p2m == NULL )
-+    /* Map the p2m list */
-+    if ( xc_core_arch_map_p2m(xch, dinfo, &info, shinfo, &p2m) )
-     {
-         ERROR("Couldn't map p2m table");
-         goto out;
-@@ -228,8 +196,20 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-         goto out;
-     }
+-#include "xc_private.h"
++#include "xg_private.h"
+ #include "xenguest.h"
  
--    start_info->store_mfn        = p2m[start_info->store_mfn];
--    start_info->console.domU.mfn = p2m[start_info->console.domU.mfn];
-+    store_mfn = GET_FIELD(start_info, store_mfn, dinfo->guest_width);
-+    console_mfn = GET_FIELD(start_info, console.domU.mfn, dinfo->guest_width);
-+    if ( dinfo->guest_width == 4 )
-+    {
-+        store_mfn = ((uint32_t *)p2m)[store_mfn];
-+        console_mfn = ((uint32_t *)p2m)[console_mfn];
-+    }
-+    else
-+    {
-+        store_mfn = ((uint64_t *)p2m)[store_mfn];
-+        console_mfn = ((uint64_t *)p2m)[console_mfn];
-+    }
-+    SET_FIELD(start_info, store_mfn, store_mfn, dinfo->guest_width);
-+    SET_FIELD(start_info, console.domU.mfn, console_mfn, dinfo->guest_width);
- 
-     munmap(start_info, PAGE_SIZE);
- #endif /* defined(__i386__) || defined(__x86_64__) */
-@@ -250,11 +230,7 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
- out:
  #if defined(__i386__) || defined(__x86_64__)
-     if (p2m)
--        munmap(p2m, P2M_FL_ENTRIES*PAGE_SIZE);
--    if (p2m_frame_list)
--        munmap(p2m_frame_list, P2M_FLL_ENTRIES*PAGE_SIZE);
--    if (p2m_frame_list_list)
--        munmap(p2m_frame_list_list, PAGE_SIZE);
-+        munmap(p2m, dinfo->p2m_frames * PAGE_SIZE);
-     if (shinfo)
-         munmap(shinfo, PAGE_SIZE);
- #endif
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index d05d7bb30e..6e4bc567f5 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -32,6 +32,7 @@
- 
- #define XC_WANT_COMPAT_MAP_FOREIGN_API
- #include <xenctrl.h>
-+#include <xenguest.h>
- #include <xen-tools/libs.h>
- 
- #include "mmap_stubs.h"
 -- 
 2.26.2
 
