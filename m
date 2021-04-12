@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13D41C433B4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F18D3C43462
 	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CDCD061244
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CDCD061244
+	by mail.kernel.org (Postfix) with ESMTPS id B6AB161287
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 15:23:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B6AB161287
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109279.208632 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109280.208640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVyOv-0005SQ-I6; Mon, 12 Apr 2021 15:22:57 +0000
+	id 1lVyOw-0005UG-9b; Mon, 12 Apr 2021 15:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109279.208632; Mon, 12 Apr 2021 15:22:57 +0000
+Received: by outflank-mailman (output) from mailman id 109280.208640; Mon, 12 Apr 2021 15:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVyOv-0005SF-Dx; Mon, 12 Apr 2021 15:22:57 +0000
-Received: by outflank-mailman (input) for mailman id 109279;
- Mon, 12 Apr 2021 15:22:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lVyOw-0005Tj-34; Mon, 12 Apr 2021 15:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 109280;
+ Mon, 12 Apr 2021 15:22:56 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=oSjc=JJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lVyOt-0005H5-Ko
- for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 15:22:55 +0000
+ id 1lVyOu-0005HA-EU
+ for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 15:22:56 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0fd291f5-23f7-43a6-81d1-374e8f0f9978;
- Mon, 12 Apr 2021 15:22:46 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0F4B5B312;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 12dbaf82-ae34-45df-a96b-ef04e5f58a64;
  Mon, 12 Apr 2021 15:22:45 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AFDBAB2F6;
+ Mon, 12 Apr 2021 15:22:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,178 +52,230 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0fd291f5-23f7-43a6-81d1-374e8f0f9978
+X-Inumbo-ID: 12dbaf82-ae34-45df-a96b-ef04e5f58a64
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1618240965; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1618240964; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=r/d1m/nwqJtLr2C9cFqF0W7SDbqgauwOmuYrIPpnLeM=;
-	b=JMVPQdsuB79ObIjUXQC6Mqu76yBPNU/E/edvkqCWu5NXhrcKzvkp84/U5lCPJW++mtzBJI
-	Un6/3+YrDgNadxdI7xEmDxtl4brtDfsVrefBqvQ1PZbimC248S8m+3nyKgvpxWbvE71E/r
-	SIWJZIiah15hnbkjXHzZrb/LbE7wnrw=
+	bh=9lSZVDHBJO9o342eIYRKM8hbyMeKeAJ7KWKA4F6tztw=;
+	b=Lp5nKXOj8wKyy20U1iyY036GzG9qwXGVo6cePIl5c4vZ5aiGGnl+MRU24Rb52av84ZQWQp
+	76M97tgiSJ4KSYv9hFHEISL45kcK0mDFFce0gDIdtTuX+MyKT3CkWILyp/sqdlycdkZUiy
+	qPWkKZkanshOVk+jpPZniNLHpOFQL+0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 6/6] tools/libs/guest: make some definitions private to libxenguest
-Date: Mon, 12 Apr 2021 17:22:36 +0200
-Message-Id: <20210412152236.1975-7-jgross@suse.com>
+Subject: [PATCH v2 4/6] tools/libs: move xc_resume.c to libxenguest
+Date: Mon, 12 Apr 2021 17:22:34 +0200
+Message-Id: <20210412152236.1975-5-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210412152236.1975-1-jgross@suse.com>
 References: <20210412152236.1975-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There are some definitions which are used in libxenguest only now.
-Move them from libxenctrl over to libxenguest.
-
-Remove an unused macro.
+The guest suspend functionality is already part of libxenguest. Move
+the resume functionality from libxenctrl to libxenguest, too.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/ctrl/xc_private.h   | 32 --------------------------------
- tools/libs/guest/xg_core.h     |  2 +-
- tools/libs/guest/xg_core_x86.c | 16 +++++++++++++++-
- tools/libs/guest/xg_private.h  | 16 +++++++++++++++-
- tools/libs/guest/xg_resume.c   |  2 +-
- 5 files changed, 32 insertions(+), 36 deletions(-)
+ tools/include/xenctrl.h                       | 63 -------------------
+ tools/include/xenguest.h                      | 62 ++++++++++++++++++
+ tools/libs/ctrl/Makefile                      |  1 -
+ tools/libs/guest/Makefile                     |  1 +
+ .../{ctrl/xc_resume.c => guest/xg_resume.c}   |  1 +
+ 5 files changed, 64 insertions(+), 64 deletions(-)
+ rename tools/libs/{ctrl/xc_resume.c => guest/xg_resume.c} (99%)
 
-diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
-index dff0f0289b..3e299b943f 100644
---- a/tools/libs/ctrl/xc_private.h
-+++ b/tools/libs/ctrl/xc_private.h
-@@ -65,38 +65,6 @@ struct iovec {
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 318920166c..8a6bede5b0 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -576,69 +576,6 @@ int xc_domain_destroy(xc_interface *xch,
+                       uint32_t domid);
  
- #define ROUNDUP(_x,_w) (((unsigned long)(_x)+(1UL<<(_w))-1) & ~((1UL<<(_w))-1))
  
--#define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
+-/**
+- * This function resumes a suspended domain. The domain should have
+- * been previously suspended.
+- *
+- * Note that there are 'xc_domain_suspend' as suspending a domain
+- * is quite the endeavour.
+- *
+- * For the purpose of this explanation there are three guests:
+- * PV (using hypercalls for privilgied operations), HVM
+- * (fully hardware virtualized guests using emulated devices for everything),
+- * and PVHVM (PV aware with hardware virtualisation).
+- *
+- * HVM guest are the simplest - they suspend via S3 / S4 and resume from
+- * S3 / S4. Upon resume they have to re-negotiate with the emulated devices.
+- *
+- * PV and PVHVM communicate via hypercalls for suspend (and resume).
+- * For suspend the toolstack initiates the process by writing an value
+- * in XenBus "control/shutdown" with the string "suspend".
+- *
+- * The PV guest stashes anything it deems neccessary in 'struct
+- * start_info' in case of failure (PVHVM may ignore this) and calls
+- * the SCHEDOP_shutdown::SHUTDOWN_suspend hypercall (for PV as
+- * argument it passes the MFN to 'struct start_info').
+- *
+- * And then the guest is suspended.
+- *
+- * The checkpointing or notifying a guest that the suspend failed or
+- * cancelled (in case of checkpoint) is by having the
+- * SCHEDOP_shutdown::SHUTDOWN_suspend hypercall return a non-zero
+- * value.
+- *
+- * The PV and PVHVM resume path are similar. For PV it would be
+- * similar to bootup - figure out where the 'struct start_info' is (or
+- * if the suspend was cancelled aka checkpointed - reuse the saved
+- * values).
+- *
+- * From here on they differ depending whether the guest is PV or PVHVM
+- * in specifics but follow overall the same path:
+- *  - PV: Bringing up the vCPUS,
+- *  - PVHVM: Setup vector callback,
+- *  - Bring up vCPU runstates,
+- *  - Remap the grant tables if checkpointing or setup from scratch,
+- *
+- *
+- * If the resume was not checkpointing (or if suspend was succesful) we would
+- * setup the PV timers and the different PV events. Lastly the PV drivers
+- * re-negotiate with the backend.
+- *
+- * This function would return before the guest started resuming. That is
+- * the guest would be in non-running state and its vCPU context would be
+- * in the the SCHEDOP_shutdown::SHUTDOWN_suspend hypercall return path
+- * (for PV and PVHVM). For HVM it would be in would be in QEMU emulated
+- * BIOS handling S3 suspend.
+- *
+- * @parm xch a handle to an open hypervisor interface
+- * @parm domid the domain id to resume
+- * @parm fast use cooperative resume (guest must support this)
+- * return 0 on success, -1 on failure
+- */
+-int xc_domain_resume(xc_interface *xch,
+-		     uint32_t domid,
+-		     int fast);
 -
--#define SET_FIELD(_p, _f, _v, _w) do {          \
--    if ((_w) == 8)                              \
--        (_p)->x64._f = (_v);                    \
--    else                                        \
--        (_p)->x32._f = (_v);                    \
--} while (0)
--
--/* XXX SMH: following skanky macros rely on variable p2m_size being set */
--/* XXX TJD: also, "guest_width" should be the guest's sizeof(unsigned long) */
--
--struct domain_info_context {
--    unsigned int guest_width;
--    unsigned int p2m_frames;
--    unsigned long p2m_size;
--};
--
--/* Number of xen_pfn_t in a page */
--#define FPP             (PAGE_SIZE/(dinfo->guest_width))
--
--/* Number of entries in the pfn_to_mfn_frame_list_list */
--#define P2M_FLL_ENTRIES (((dinfo->p2m_size)+(FPP*FPP)-1)/(FPP*FPP))
--
--/* Number of entries in the pfn_to_mfn_frame_list */
--#define P2M_FL_ENTRIES  (((dinfo->p2m_size)+FPP-1)/FPP)
--
--/* Size in bytes of the pfn_to_mfn_frame_list     */
--#define P2M_GUEST_FL_SIZE ((P2M_FL_ENTRIES) * (dinfo->guest_width))
--#define P2M_TOOLS_FL_SIZE ((P2M_FL_ENTRIES) *                           \
--                           max_t(size_t, sizeof(xen_pfn_t), dinfo->guest_width))
--
- #define DECLARE_DOMCTL struct xen_domctl domctl
- #define DECLARE_SYSCTL struct xen_sysctl sysctl
- #define DECLARE_PHYSDEV_OP struct physdev_op physdev_op
-diff --git a/tools/libs/guest/xg_core.h b/tools/libs/guest/xg_core.h
-index f07584aaa6..aaca9e0a8b 100644
---- a/tools/libs/guest/xg_core.h
-+++ b/tools/libs/guest/xg_core.h
-@@ -21,7 +21,7 @@
- #define XC_CORE_H
+ /**
+  * This function will shutdown a domain. This is intended for use in
+  * fully-virtualized domains where this operation is analogous to the
+diff --git a/tools/include/xenguest.h b/tools/include/xenguest.h
+index 781d40c119..44300a8658 100644
+--- a/tools/include/xenguest.h
++++ b/tools/include/xenguest.h
+@@ -689,6 +689,68 @@ int xc_query_page_offline_status(xc_interface *xch, unsigned long start,
  
- #include "xen/version.h"
--#include "xc_private.h"
-+#include "xg_private.h"
- #include "xen/libelf/elfstructs.h"
+ int xc_exchange_page(xc_interface *xch, uint32_t domid, xen_pfn_t mfn);
  
- /* section names */
-diff --git a/tools/libs/guest/xg_core_x86.c b/tools/libs/guest/xg_core_x86.c
-index 09f5d696ce..61106b98b8 100644
---- a/tools/libs/guest/xg_core_x86.c
-+++ b/tools/libs/guest/xg_core_x86.c
-@@ -18,10 +18,24 @@
-  */
++/**
++ * This function resumes a suspended domain. The domain should have
++ * been previously suspended.
++ *
++ * Note that there are 'xc_domain_suspend' as suspending a domain
++ * is quite the endeavour.
++ *
++ * For the purpose of this explanation there are three guests:
++ * PV (using hypercalls for privilgied operations), HVM
++ * (fully hardware virtualized guests using emulated devices for everything),
++ * and PVHVM (PV aware with hardware virtualisation).
++ *
++ * HVM guest are the simplest - they suspend via S3 / S4 and resume from
++ * S3 / S4. Upon resume they have to re-negotiate with the emulated devices.
++ *
++ * PV and PVHVM communicate via hypercalls for suspend (and resume).
++ * For suspend the toolstack initiates the process by writing an value
++ * in XenBus "control/shutdown" with the string "suspend".
++ *
++ * The PV guest stashes anything it deems neccessary in 'struct
++ * start_info' in case of failure (PVHVM may ignore this) and calls
++ * the SCHEDOP_shutdown::SHUTDOWN_suspend hypercall (for PV as
++ * argument it passes the MFN to 'struct start_info').
++ *
++ * And then the guest is suspended.
++ *
++ * The checkpointing or notifying a guest that the suspend failed or
++ * cancelled (in case of checkpoint) is by having the
++ * SCHEDOP_shutdown::SHUTDOWN_suspend hypercall return a non-zero
++ * value.
++ *
++ * The PV and PVHVM resume path are similar. For PV it would be
++ * similar to bootup - figure out where the 'struct start_info' is (or
++ * if the suspend was cancelled aka checkpointed - reuse the saved
++ * values).
++ *
++ * From here on they differ depending whether the guest is PV or PVHVM
++ * in specifics but follow overall the same path:
++ *  - PV: Bringing up the vCPUS,
++ *  - PVHVM: Setup vector callback,
++ *  - Bring up vCPU runstates,
++ *  - Remap the grant tables if checkpointing or setup from scratch,
++ *
++ *
++ * If the resume was not checkpointing (or if suspend was succesful) we would
++ * setup the PV timers and the different PV events. Lastly the PV drivers
++ * re-negotiate with the backend.
++ *
++ * This function would return before the guest started resuming. That is
++ * the guest would be in non-running state and its vCPU context would be
++ * in the the SCHEDOP_shutdown::SHUTDOWN_suspend hypercall return path
++ * (for PV and PVHVM). For HVM it would be in would be in QEMU emulated
++ * BIOS handling S3 suspend.
++ *
++ * @parm xch a handle to an open hypervisor interface
++ * @parm domid the domain id to resume
++ * @parm fast use cooperative resume (guest must support this)
++ * return 0 on success, -1 on failure
++ */
++int xc_domain_resume(xc_interface *xch,
++                     uint32_t domid,
++                     int fast);
  
- #include <inttypes.h>
--#include "xc_private.h"
-+#include "xg_private.h"
- #include "xg_core.h"
- #include <xen/hvm/e820.h>
- 
-+/* Number of xen_pfn_t in a page */
-+#define FPP             (PAGE_SIZE/(dinfo->guest_width))
-+
-+/* Number of entries in the pfn_to_mfn_frame_list_list */
-+#define P2M_FLL_ENTRIES (((dinfo->p2m_size)+(FPP*FPP)-1)/(FPP*FPP))
-+
-+/* Number of entries in the pfn_to_mfn_frame_list */
-+#define P2M_FL_ENTRIES  (((dinfo->p2m_size)+FPP-1)/FPP)
-+
-+/* Size in bytes of the pfn_to_mfn_frame_list     */
-+#define P2M_GUEST_FL_SIZE ((P2M_FL_ENTRIES) * (dinfo->guest_width))
-+#define P2M_TOOLS_FL_SIZE ((P2M_FL_ENTRIES) * \
-+                           max_t(size_t, sizeof(xen_pfn_t), dinfo->guest_width))
-+
- int
- xc_core_arch_gpfn_may_present(struct xc_core_arch_context *arch_ctxt,
-                               unsigned long pfn)
-diff --git a/tools/libs/guest/xg_private.h b/tools/libs/guest/xg_private.h
-index 8f9b257a2f..ff57f8b832 100644
---- a/tools/libs/guest/xg_private.h
-+++ b/tools/libs/guest/xg_private.h
-@@ -42,6 +42,21 @@
- #endif
- #endif
- 
-+#define GET_FIELD(_p, _f, _w) (((_w) == 8) ? ((_p)->x64._f) : ((_p)->x32._f))
-+
-+#define SET_FIELD(_p, _f, _v, _w) do {          \
-+    if ((_w) == 8)                              \
-+        (_p)->x64._f = (_v);                    \
-+    else                                        \
-+        (_p)->x32._f = (_v);                    \
-+} while (0)
-+
-+struct domain_info_context {
-+    unsigned int guest_width;
-+    unsigned int p2m_frames;
-+    unsigned long p2m_size;
-+};
-+
- struct xc_dom_loader {
-     char *name;
-     /* Sadly the error returns from these functions are not consistent: */
-@@ -139,7 +154,6 @@ static inline xen_pfn_t xc_pfn_to_mfn(xen_pfn_t pfn, xen_pfn_t *p2m,
- /* Masks for PTE<->PFN conversions */
- #define MADDR_BITS_X86  ((dinfo->guest_width == 8) ? 52 : 44)
- #define MFN_MASK_X86    ((1ULL << (MADDR_BITS_X86 - PAGE_SHIFT_X86)) - 1)
--#define MADDR_MASK_X86  (MFN_MASK_X86 << PAGE_SHIFT_X86)
- 
- int pin_table(xc_interface *xch, unsigned int type, unsigned long mfn,
-               uint32_t dom);
-diff --git a/tools/libs/guest/xg_resume.c b/tools/libs/guest/xg_resume.c
-index d201c1488d..77e2451a3c 100644
---- a/tools/libs/guest/xg_resume.c
+ /**
+  * Memory related information, such as PFN types, the P2M table,
+diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
+index ce9ecae710..fbeb3a3537 100644
+--- a/tools/libs/ctrl/Makefile
++++ b/tools/libs/ctrl/Makefile
+@@ -20,7 +20,6 @@ SRCS-y       += xc_rt.c
+ SRCS-y       += xc_tbuf.c
+ SRCS-y       += xc_pm.c
+ SRCS-y       += xc_cpu_hotplug.c
+-SRCS-y       += xc_resume.c
+ SRCS-y       += xc_vm_event.c
+ SRCS-y       += xc_vmtrace.c
+ SRCS-y       += xc_monitor.c
+diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
+index 604e1695d6..8309bbcd20 100644
+--- a/tools/libs/guest/Makefile
++++ b/tools/libs/guest/Makefile
+@@ -9,6 +9,7 @@ endif
+ SRCS-y += xg_private.c
+ SRCS-y += xg_domain.c
+ SRCS-y += xg_suspend.c
++SRCS-y += xg_resume.c
+ ifeq ($(CONFIG_MIGRATE),y)
+ SRCS-y += xg_sr_common.c
+ SRCS-$(CONFIG_X86) += xg_sr_common_x86.c
+diff --git a/tools/libs/ctrl/xc_resume.c b/tools/libs/guest/xg_resume.c
+similarity index 99%
+rename from tools/libs/ctrl/xc_resume.c
+rename to tools/libs/guest/xg_resume.c
+index e3c8e83aa9..3bdefb2eef 100644
+--- a/tools/libs/ctrl/xc_resume.c
 +++ b/tools/libs/guest/xg_resume.c
-@@ -13,7 +13,7 @@
-  * License along with this library; If not, see <http://www.gnu.org/licenses/>.
+@@ -14,6 +14,7 @@
   */
  
--#include "xc_private.h"
-+#include "xg_private.h"
- #include "xenguest.h"
+ #include "xc_private.h"
++#include "xenguest.h"
  
  #if defined(__i386__) || defined(__x86_64__)
+ 
 -- 
 2.26.2
 
