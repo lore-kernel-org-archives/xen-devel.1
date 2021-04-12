@@ -2,48 +2,49 @@ Return-Path: <SRS0=44Tx=JJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF1E8C433ED
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 497A4C43461
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ABEB961029
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ABEB961029
+	by mail.kernel.org (Postfix) with ESMTPS id 0EBAA61029
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Apr 2021 10:53:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0EBAA61029
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.108961.207963 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.108962.207975 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVuBp-0000mL-Kz; Mon, 12 Apr 2021 10:53:09 +0000
+	id 1lVuBr-0000pD-Up; Mon, 12 Apr 2021 10:53:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 108961.207963; Mon, 12 Apr 2021 10:53:09 +0000
+Received: by outflank-mailman (output) from mailman id 108962.207975; Mon, 12 Apr 2021 10:53:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lVuBp-0000mC-Gw; Mon, 12 Apr 2021 10:53:09 +0000
-Received: by outflank-mailman (input) for mailman id 108961;
- Mon, 12 Apr 2021 10:53:08 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lVuBr-0000p5-R7; Mon, 12 Apr 2021 10:53:11 +0000
+Received: by outflank-mailman (input) for mailman id 108962;
+ Mon, 12 Apr 2021 10:53:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VKKJ=JJ=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1lVuBo-0000hn-0H
- for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 10:53:08 +0000
+ id 1lVuBq-0000jA-Kz
+ for xen-devel@lists.xenproject.org; Mon, 12 Apr 2021 10:53:10 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 0dfdfd44-22ae-4134-b6e0-b309473b5af6;
- Mon, 12 Apr 2021 10:53:02 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id fea0e1d6-044f-4d5b-b334-ffe3636f831e;
+ Mon, 12 Apr 2021 10:53:05 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3AA52D6E;
- Mon, 12 Apr 2021 03:53:02 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A329D6E;
+ Mon, 12 Apr 2021 03:53:05 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 52AEC3F694;
- Mon, 12 Apr 2021 03:53:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 33BF53F694;
+ Mon, 12 Apr 2021 03:53:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,7 +56,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0dfdfd44-22ae-4134-b6e0-b309473b5af6
+X-Inumbo-ID: fea0e1d6-044f-4d5b-b334-ffe3636f831e
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
@@ -63,158 +64,44 @@ Cc: bertrand.marquis@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 1/4] xen/arm: Move dom0 creation in domain_build.c
-Date: Mon, 12 Apr 2021 11:52:40 +0100
-Message-Id: <20210412105243.23354-2-luca.fancellu@arm.com>
+Subject: [PATCH v3 3/4] xen/arm: Reserve domid 0 for Dom0
+Date: Mon, 12 Apr 2021 11:52:42 +0100
+Message-Id: <20210412105243.23354-4-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210412105243.23354-1-luca.fancellu@arm.com>
 References: <20210412105243.23354-1-luca.fancellu@arm.com>
 
-Move dom0 creation and start from setup.c to domain_build.c
-on a dedicate function.
+This patch adds a comment in create_domUs() right before
+domain_create() to explain the importance of the pre-increment
+operator on the variable max_init_domid, to ensure that the
+domid 0 is allocated only during start_xen() function by the
+create_dom0() and not on any other possible code path to the
+domain_create() function.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
-v3 changes:
-- move create_dom0 function after construct_dom0 and
-  make construct_dom0 static
+Changes in v3:
+- removed check introduced in v2.
 ---
- xen/arch/arm/domain_build.c | 38 ++++++++++++++++++++++++++++++++++++-
- xen/arch/arm/setup.c        | 29 +---------------------------
- xen/include/asm-arm/setup.h |  2 +-
- 3 files changed, 39 insertions(+), 30 deletions(-)
+ xen/arch/arm/domain_build.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 374bf655ee..359957dc1b 100644
+index 359957dc1b..b1d7b9849f 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -21,6 +21,7 @@
- #include <asm/device.h>
- #include <asm/kernel.h>
- #include <asm/setup.h>
-+#include <asm/tee/tee.h>
- #include <asm/platform.h>
- #include <asm/psci.h>
- #include <asm/setup.h>
-@@ -2520,7 +2521,7 @@ void __init create_domUs(void)
-     }
- }
+@@ -2508,6 +2508,11 @@ void __init create_domUs(void)
+                                          GUEST_VPL011_SPI - 32 + 1);
+         }
  
--int __init construct_dom0(struct domain *d)
-+static int __init construct_dom0(struct domain *d)
- {
-     struct kernel_info kinfo = {};
-     int rc;
-@@ -2578,6 +2579,41 @@ int __init construct_dom0(struct domain *d)
-     return construct_domain(d, &kinfo);
- }
- 
-+struct domain* __init create_dom0(void)
-+{
-+    struct domain *dom0;
-+    struct xen_domctl_createdomain dom0_cfg = {
-+        .flags = XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap,
-+        .max_evtchn_port = -1,
-+        .max_grant_frames = gnttab_dom0_frames(),
-+        .max_maptrack_frames = -1,
-+    };
-+
-+    /* The vGIC for DOM0 is exactly emulating the hardware GIC */
-+    dom0_cfg.arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
-+    /*
-+     * Xen vGIC supports a maximum of 992 interrupt lines.
-+     * 32 are substracted to cover local IRQs.
-+     */
-+    dom0_cfg.arch.nr_spis = min(gic_number_lines(), (unsigned int) 992) - 32;
-+    if ( gic_number_lines() > 992 )
-+        printk(XENLOG_WARNING "Maximum number of vGIC IRQs exceeded.\n");
-+    dom0_cfg.arch.tee_type = tee_get_type();
-+    dom0_cfg.max_vcpus = dom0_max_vcpus();
-+
-+    if ( iommu_enabled )
-+        dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
-+
-+    dom0 = domain_create(0, &dom0_cfg, true);
-+    if ( IS_ERR(dom0) || (alloc_dom0_vcpu0(dom0) == NULL) )
-+        panic("Error creating domain 0\n");
-+
-+    if ( construct_dom0(dom0) != 0)
-+        panic("Could not set up DOM0 guest OS\n");
-+
-+    return dom0;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 2532ec9739..b405f58996 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -51,7 +51,6 @@
- #include <asm/platform.h>
- #include <asm/procinfo.h>
- #include <asm/setup.h>
--#include <asm/tee/tee.h>
- #include <xsm/xsm.h>
- #include <asm/acpi.h>
- 
-@@ -805,12 +804,6 @@ void __init start_xen(unsigned long boot_phys_offset,
-     const char *cmdline;
-     struct bootmodule *xen_bootmodule;
-     struct domain *dom0;
--    struct xen_domctl_createdomain dom0_cfg = {
--        .flags = XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap,
--        .max_evtchn_port = -1,
--        .max_grant_frames = gnttab_dom0_frames(),
--        .max_maptrack_frames = -1,
--    };
-     int rc;
- 
-     dcache_line_bytes = read_dcache_line_bytes();
-@@ -965,27 +958,7 @@ void __init start_xen(unsigned long boot_phys_offset,
-     enable_errata_workarounds();
- 
-     /* Create initial domain 0. */
--    /* The vGIC for DOM0 is exactly emulating the hardware GIC */
--    dom0_cfg.arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
--    /*
--     * Xen vGIC supports a maximum of 992 interrupt lines.
--     * 32 are substracted to cover local IRQs.
--     */
--    dom0_cfg.arch.nr_spis = min(gic_number_lines(), (unsigned int) 992) - 32;
--    if ( gic_number_lines() > 992 )
--        printk(XENLOG_WARNING "Maximum number of vGIC IRQs exceeded.\n");
--    dom0_cfg.arch.tee_type = tee_get_type();
--    dom0_cfg.max_vcpus = dom0_max_vcpus();
--
--    if ( iommu_enabled )
--        dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
--
--    dom0 = domain_create(0, &dom0_cfg, true);
--    if ( IS_ERR(dom0) || (alloc_dom0_vcpu0(dom0) == NULL) )
--        panic("Error creating domain 0\n");
--
--    if ( construct_dom0(dom0) != 0)
--        panic("Could not set up DOM0 guest OS\n");
-+    dom0 = create_dom0();
- 
-     heap_init_late();
- 
-diff --git a/xen/include/asm-arm/setup.h b/xen/include/asm-arm/setup.h
-index 28bf622aa1..5283244015 100644
---- a/xen/include/asm-arm/setup.h
-+++ b/xen/include/asm-arm/setup.h
-@@ -93,8 +93,8 @@ void acpi_create_efi_mmap_table(struct domain *d,
- 
- int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
- 
--int construct_dom0(struct domain *d);
- void create_domUs(void);
-+struct domain* create_dom0(void);
- 
- void discard_initial_modules(void);
- void fw_unreserved_regions(paddr_t s, paddr_t e,
++        /*
++         * The variable max_init_domid is initialized with zero, so here it's
++         * very important to use the pre-increment operator to call
++         * domain_create() with a domid > 0. (domid == 0 is reserved for Dom0)
++         */
+         d = domain_create(++max_init_domid, &d_cfg, false);
+         if ( IS_ERR(d) )
+             panic("Error creating domain %s\n", dt_node_name(node));
 -- 
 2.17.1
 
