@@ -2,48 +2,53 @@ Return-Path: <SRS0=+ia2=JK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,
+	CHARSET_FARAWAY_HEADER,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8A96C433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 05:13:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87192C43460
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 05:19:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9AA946109F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 05:13:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AA946109F
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3EAEA6109F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 05:19:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EAEA6109F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=byosoft.com.cn
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109515.209040 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109473.209057 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWBMm-0004C6-8J; Tue, 13 Apr 2021 05:13:36 +0000
+	id 1lWBRy-0004R5-Ud; Tue, 13 Apr 2021 05:18:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109515.209040; Tue, 13 Apr 2021 05:13:36 +0000
+Received: by outflank-mailman (output) from mailman id 109473.209057; Tue, 13 Apr 2021 05:18:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWBMm-0004Bz-51; Tue, 13 Apr 2021 05:13:36 +0000
-Received: by outflank-mailman (input) for mailman id 109515;
- Tue, 13 Apr 2021 05:13:35 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lWBMl-0004Bo-8t; Tue, 13 Apr 2021 05:13:35 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lWBMl-0003ZE-2q; Tue, 13 Apr 2021 05:13:35 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lWBMk-0001sI-OG; Tue, 13 Apr 2021 05:13:34 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lWBMk-0008KT-No; Tue, 13 Apr 2021 05:13:34 +0000
+	id 1lWBRy-0004Qy-Rh; Tue, 13 Apr 2021 05:18:58 +0000
+Received: by outflank-mailman (input) for mailman id 109473;
+ Tue, 13 Apr 2021 01:00:18 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=biUC=JK=byosoft.net=byomail@srs-us1.protection.inumbo.net>)
+ id 1lW7Pe-0006bm-QE
+ for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 01:00:18 +0000
+Received: from regular1.263xmail.com (unknown [211.150.70.200])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c3f61924-4788-4730-b128-342b9c9eb904;
+ Tue, 13 Apr 2021 01:00:16 +0000 (UTC)
+Received: from localhost (unknown [192.168.167.69])
+ by regular1.263xmail.com (Postfix) with ESMTP id 0C7AF1D8B
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Apr 2021 09:00:14 +0800 (CST)
+Received: from mail.byosoft.com.cn (unknown [58.240.74.242])
+ by smtp.263.net (postfix) whith ESMTP id
+ P13167T139812237465344S1618275613190704_; 
+ Tue, 13 Apr 2021 09:00:13 +0800 (CST)
+Received: from DESKTOPS6D0PVI ([58.246.60.130])
+ (envelope-sender <gaoliming@byosoft.com.cn>)
+ by 192.168.6.13 with ESMTP
+ for <anthony.perard@citrix.com>; Tue, 13 Apr 2021 08:58:59 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,80 +59,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=848p2unHaw8QSZbbNu8uTeKMfQsjlWAoCskV/feUL7Q=; b=EHXISgX1+8LjE44lhNJ4p5QSfb
-	ek93NRBXJvBUoTdJ2d2a1Gr+6Qw4mvmLufMuB8fwUqgi4hZDPdRu9RvCpeLl8hHjkPZooAXA8Z+5B
-	xnIjNzfE2YjQvpFWeOvSJj8wtuAiYCNtBBumHQCq9Wc8e2gcUgzRO9E1IIVgreZGJeME=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-161054-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: c3f61924-4788-4730-b128-342b9c9eb904
+X-MAIL-GRAY:0
+X-MAIL-DELIVERY:1
+X-ADDR-CHECKED4:1
+X-ANTISPAM-LEVEL:2
+X-SKE-CHECKED:1
+X-ABS-CHECKED:1
+X-IP-DOMAINF:1
+X-UNIQUE-TAG:<590428c32a38e4c3ec9272e0c2a4b8da>
+X-RL-SENDER:byomail@byosoft.net
+X-SENDER:byomail@byosoft.net
+X-LOGIN-NAME:byomail@byosoft.net
+X-FST-TO:xen-devel@lists.xenproject.org
+X-SENDER-IP:58.240.74.242
+X-ATTACHMENT-NUM:0
+X-System-Flag:0
+X-WM-Sender: gaoliming@byosoft.com.cn
+X-Originating-IP: 58.246.60.130
+X-WM-AuthFlag: YES
+X-WM-AuthUser: gaoliming@byosoft.com.cn
+From: "gaoliming" <gaoliming@byosoft.com.cn>
+To: <devel@edk2.groups.io>,
+	<anthony.perard@citrix.com>
+Cc: "'Laszlo Ersek'" <lersek@redhat.com>,
+	"'Jordan Justen'" <jordan.l.justen@intel.com>,
+	"'Ard Biesheuvel'" <ardb+tianocore@kernel.org>,
+	<xen-devel@lists.xenproject.org>,
+	"'Julien Grall'" <julien@xen.org>,
+	"'Michael D Kinney'" <michael.d.kinney@intel.com>,
+	"'Zhiguang Liu'" <zhiguang.liu@intel.com>,
+	"'Liming Gao'" <liming.gao@intel.com>
+References: <20210412133003.146438-1-anthony.perard@citrix.com> <20210412133003.146438-3-anthony.perard@citrix.com>
+In-Reply-To: <20210412133003.146438-3-anthony.perard@citrix.com>
+Subject: =?gb2312?B?u9i4tDogW2VkazItZGV2ZWxdIFtQQVRDSCB2MyAyLzddIE1kZVBrZw==?=
+	=?gb2312?B?OiBBbGxvdyBQY2RGU0JDbG9jayB0byBieSBEeW5hbWlj?=
+Date: Tue, 13 Apr 2021 08:59:06 +0800
+Message-ID: <00c601d73000$350a7510$9f1f5f30$@byosoft.com.cn>
 MIME-Version: 1.0
-Subject: [ovmf test] 161054: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=2072c22a0d63c780b0cc6377f6d4ffb116ad6144
-X-Osstest-Versions-That:
-    ovmf=97336fdee4f9847e164639f06616ce1139ef9a15
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 13 Apr 2021 05:13:34 +0000
+Content-Type: text/plain;
+	charset="gb2312"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQG017LAufWq6diCCV2Qgjs5xaxIuAJhiU9zquNEocA=
+Content-Language: zh-cn
+Sender: "gaoliming" <gaoliming@byosoft.com.cn>
 
-flight 161054 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/161054/
+Reviewed-by: Liming Gao <gaoliming@byosoft.com.cn>
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 2072c22a0d63c780b0cc6377f6d4ffb116ad6144
-baseline version:
- ovmf                 97336fdee4f9847e164639f06616ce1139ef9a15
+> -----=D3=CA=BC=FE=D4=AD=BC=FE-----
+> =B7=A2=BC=FE=C8=CB: devel@edk2.groups.io <devel@edk2.groups.io> =
+=B4=FA=B1=ED Anthony
+> PERARD via groups.io
+> =B7=A2=CB=CD=CA=B1=BC=E4: 2021=C4=EA4=D4=C212=C8=D5 21:30
+> =CA=D5=BC=FE=C8=CB: devel@edk2.groups.io
+> =B3=AD=CB=CD: Laszlo Ersek <lersek@redhat.com>; Jordan Justen
+> <jordan.l.justen@intel.com>; Ard Biesheuvel =
+<ardb+tianocore@kernel.org>;
+> xen-devel@lists.xenproject.org; Anthony PERARD
+> <anthony.perard@citrix.com>; Julien Grall <julien@xen.org>; Michael D
+> Kinney <michael.d.kinney@intel.com>; Liming Gao
+> <gaoliming@byosoft.com.cn>; Zhiguang Liu <zhiguang.liu@intel.com>; =
+Liming
+> Gao <liming.gao@intel.com>
+> =D6=F7=CC=E2: [edk2-devel] [PATCH v3 2/7] MdePkg: Allow PcdFSBClock to =
+by
+> Dynamic
+>=20
+> We are going to want to change the value of PcdFSBClock at run time in
+> OvmfXen, so move it to the PcdsDynamic section.
+>=20
+> Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=3D2490
+> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+> Reviewed-by: Laszlo Ersek <lersek@redhat.com>
+> Reviewed-by: Liming Gao <liming.gao@intel.com>
+> ---
+>=20
+> Notes:
+>     CC: Michael D Kinney <michael.d.kinney@intel.com>
+>     CC: Liming Gao <gaoliming@byosoft.com.cn>
+>     CC: Zhiguang Liu <zhiguang.liu@intel.com>
+>=20
+>  MdePkg/MdePkg.dec | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/MdePkg/MdePkg.dec b/MdePkg/MdePkg.dec
+> index f4156920e599..8965e903e093 100644
+> --- a/MdePkg/MdePkg.dec
+> +++ b/MdePkg/MdePkg.dec
+> @@ -2265,10 +2265,6 @@ [PcdsFixedAtBuild,PcdsPatchableInModule]
+>    # @ValidList  0x80000001 | 8, 16, 32
+>    gEfiMdePkgTokenSpaceGuid.PcdPort80DataWidth|8|UINT8|0x0000002d
+>=20
+> -  ## This value is used to configure X86 Processor FSB clock.
+> -  # @Prompt FSB Clock.
+> -
+> gEfiMdePkgTokenSpaceGuid.PcdFSBClock|200000000|UINT32|0x0000000c
+> -
+>    ## The maximum printable number of characters. UefLib functions:
+> AsciiPrint(), AsciiErrorPrint(),
+>    #  PrintXY(), AsciiPrintXY(), Print(), ErrorPrint() base on this =
+PCD
+value to
+> print characters.
+>    # @Prompt Maximum Printable Number of Characters.
+> @@ -2372,5 +2368,9 @@ [PcdsFixedAtBuild, PcdsPatchableInModule,
+> PcdsDynamic, PcdsDynamicEx]
+>    # @Prompt Boot Timeout (s)
+>=20
+> gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|0xffff|UINT16|0x0000
+> 002c
+>=20
+> +  ## This value is used to configure X86 Processor FSB clock.
+> +  # @Prompt FSB Clock.
+> +
+> gEfiMdePkgTokenSpaceGuid.PcdFSBClock|200000000|UINT32|0x0000000c
+> +
+>  [UserExtensions.TianoCore."ExtraFiles"]
+>    MdePkgExtra.uni
+> --
+> Anthony PERARD
+>=20
+>=20
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Groups.io Links: You receive all messages sent to this group.
+> View/Reply Online (#73954): =
+https://edk2.groups.io/g/devel/message/73954
+> Mute This Topic: https://groups.io/mt/82037830/4905953
+> Group Owner: devel+owner@edk2.groups.io
+> Unsubscribe: https://edk2.groups.io/g/devel/unsub
+> [gaoliming@byosoft.com.cn]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
 
-Last test of basis   161033  2021-04-12 02:41:06 Z    1 days
-Testing same since   161054  2021-04-12 11:41:28 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Abner Chang <abner.chang@hpe.com>
-  Fan Wang <fan.wang@intel.com>
-  Jason Lou <yun.lou@intel.com>
-  Jiaxin Wu <jiaxin.wu@intel.com>
-  Lou, Yun <Yun.Lou@intel.com>
-  Siyuan Fu <siyuan.fu@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   97336fdee4..2072c22a0d  2072c22a0d63c780b0cc6377f6d4ffb116ad6144 -> xen-tested-master
 
