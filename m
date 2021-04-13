@@ -7,50 +7,50 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE473C433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 10:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C0A6C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 10:05:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 49CAE613B2
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 10:00:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49CAE613B2
+	by mail.kernel.org (Postfix) with ESMTPS id 4BDB2613B2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 10:05:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BDB2613B2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109621.209268 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109634.209295 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWFpg-0006QN-LU; Tue, 13 Apr 2021 09:59:44 +0000
+	id 1lWFue-0007Xg-Ot; Tue, 13 Apr 2021 10:04:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109621.209268; Tue, 13 Apr 2021 09:59:44 +0000
+Received: by outflank-mailman (output) from mailman id 109634.209295; Tue, 13 Apr 2021 10:04:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWFpg-0006QG-Hz; Tue, 13 Apr 2021 09:59:44 +0000
-Received: by outflank-mailman (input) for mailman id 109621;
- Tue, 13 Apr 2021 09:59:43 +0000
+	id 1lWFue-0007XZ-L1; Tue, 13 Apr 2021 10:04:52 +0000
+Received: by outflank-mailman (input) for mailman id 109634;
+ Tue, 13 Apr 2021 10:04:51 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=OBYq=JK=redhat.com=lersek@srs-us1.protection.inumbo.net>)
- id 1lWFpf-0006QB-BB
- for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 09:59:43 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ id 1lWFud-0007XU-Qv
+ for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 10:04:51 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [63.128.21.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 510a276a-22b1-412b-b68a-17c362c720cc;
- Tue, 13 Apr 2021 09:59:38 +0000 (UTC)
+ id 39e20994-404e-4bc4-a97e-adc125e8632f;
+ Tue, 13 Apr 2021 10:04:49 +0000 (UTC)
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-501-HQzQOgAWPtyv3vb86wDJsw-1; Tue, 13 Apr 2021 05:59:34 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
+ us-mta-570-sni6Xwg-OGudgMdFNFp2Mg-1; Tue, 13 Apr 2021 06:04:45 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 71E9E9126D;
- Tue, 13 Apr 2021 09:59:32 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D8D6C5B378;
+ Tue, 13 Apr 2021 10:04:43 +0000 (UTC)
 Received: from lacos-laptop-7.usersys.redhat.com (ovpn-115-199.ams2.redhat.com
  [10.36.115.199])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 21B3571287;
- Tue, 13 Apr 2021 09:59:29 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F0DD75C239;
+ Tue, 13 Apr 2021 10:04:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,374 +62,333 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 510a276a-22b1-412b-b68a-17c362c720cc
+X-Inumbo-ID: 39e20994-404e-4bc4-a97e-adc125e8632f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1618307978;
+	s=mimecast20190719; t=1618308289;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PC9iOqfTfZP07nfc1h3ik3+YFxj0evh+vBjeUVFJEik=;
-	b=jM7E2FaLKxKD7nLvNc6C7ickZQ8d1Pee1yxtzs8Fr7rU+A6NvCsGOZJZ33xi9hUZE2Z3f4
-	HLFBUUjZgiHPD0Eowp+eopECmXO/c2sinIt/qsw0D1zN+ju3lbfAcGEkR5qq2YmEUdoASU
-	WYoU9TvHA1z9xi2gEDFj1aQuimas5BI=
-X-MC-Unique: HQzQOgAWPtyv3vb86wDJsw-1
-Subject: Re: [PATCH v3 4/7] OvmfPkg/IndustryStandard: Introduce PageTable.h
+	bh=YpwttS5IrIwpZItZFzCIsbk23Wrw5Lws3lJvfiMO91I=;
+	b=Sltqs5QcAk/+cs+QsU8ECjqNTSmshTTXjT6Rd2yGY5YHSTxpyQW6UwLziwSIXPVo5qEMv3
+	jBoElDTk0kx7Glw2H8XE3kvrl5y69pQ1e1/gQ0GosH6L1qKfytu3fxHk0IJPQCPcwEK9Pl
+	qVWE+aIAXF+4rICM7+okq5ApOplogZ0=
+X-MC-Unique: sni6Xwg-OGudgMdFNFp2Mg-1
+Subject: Re: [PATCH v3 6/7] OvmfPkg/XenPlatformPei: Calibrate APIC timer
+ frequency
 To: Anthony PERARD <anthony.perard@citrix.com>, devel@edk2.groups.io
 Cc: Jordan Justen <jordan.l.justen@intel.com>,
  Ard Biesheuvel <ardb+tianocore@kernel.org>, xen-devel@lists.xenproject.org,
- Julien Grall <julien@xen.org>, Brijesh Singh <brijesh.singh@amd.com>,
- Tom Lendacky <thomas.lendacky@amd.com>
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>
 References: <20210412133003.146438-1-anthony.perard@citrix.com>
- <20210412133003.146438-5-anthony.perard@citrix.com>
+ <20210412133003.146438-7-anthony.perard@citrix.com>
 From: Laszlo Ersek <lersek@redhat.com>
-Message-ID: <6cfddec5-db6d-64e9-0008-638bffae586e@redhat.com>
-Date: Tue, 13 Apr 2021 11:59:29 +0200
+Message-ID: <89d38e99-9a74-db1c-7f91-da2539d12d2b@redhat.com>
+Date: Tue, 13 Apr 2021 12:04:40 +0200
 MIME-Version: 1.0
-In-Reply-To: <20210412133003.146438-5-anthony.perard@citrix.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+In-Reply-To: <20210412133003.146438-7-anthony.perard@citrix.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lersek@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 On 04/12/21 15:30, Anthony PERARD wrote:
-> We are going to use the page table structure in yet another place,
-> collect the types and macro that can be used from another module
-> rather than making yet another copy.
+> Calculate the frequency of the APIC timer that Xen provides.
+> 
+> Even though the frequency is currently hard-coded, it isn't part of
+> the public ABI that Xen provides and thus may change at any time. OVMF
+> needs to determine the frequency by an other mean.
+> 
+> Fortunately, Xen provides a way to determines the frequency of the
+> TSC, so we can use TSC to calibrate the frequency of the APIC timer.
+> That information is found in the shared_info page which we map and
+> unmap once done (XenBusDxe is going to map the page somewhere else).
+> 
+> The shared_info page is mapped at the highest physical address allowed
+> as it doesn't need to be in the RAM, thus there's a call to update the
+> page table.
+> 
+> The calculated frequency is only logged in this patch, it will be used
+> in a following patch.
 > 
 > Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=2490
 > Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-> Acked-by: Tom Lendacky <thomas.lendacky@amd.com>
+> Acked-by: Laszlo Ersek <lersek@redhat.com>
 > ---
 > 
 > Notes:
->     CC: Brijesh Singh <brijesh.singh@amd.com>
+>     CC: Roger Pau Monné <roger.pau@citrix.com>
 >     
 >     v3:
->     - fix typos and coding style
->     
->     v2:
->     - new patch
-> 
->  .../IndustryStandard/PageTable.h}             | 117 +-------------
->  .../BaseMemEncryptSevLib/X64/VirtualMemory.h  | 143 +-----------------
->  2 files changed, 5 insertions(+), 255 deletions(-)
->  copy OvmfPkg/{Library/BaseMemEncryptSevLib/X64/VirtualMemory.h => Include/IndustryStandard/PageTable.h} (60%)
+>     - fix debug format strings
+>     - fix coding style
 
-Reviewed-by: Laszlo Ersek <lersek@redhat.com>
+Thanks for the updates.
 
-Thanks
 Laszlo
 
+>     
+>     v2:
+>     - fix CamelCases
+>     - Use U64 multiplication and division helpers
+>     - don't read TscShift from the SharedInfo page again
+>     - change the location of the shared info page to be outside of the ram
+>     - check for overflow in XenDelay
+>     - check for overflow when calculating the calculating APIC frequency
 > 
-> diff --git a/OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h b/OvmfPkg/Include/IndustryStandard/PageTable.h
-> similarity index 60%
-> copy from OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h
-> copy to OvmfPkg/Include/IndustryStandard/PageTable.h
-> index 996f94f07ebb..5e797eeea8ef 100644
-> --- a/OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h
-> +++ b/OvmfPkg/Include/IndustryStandard/PageTable.h
-> @@ -1,6 +1,6 @@
->  /** @file
+>  OvmfPkg/XenPlatformPei/XenPlatformPei.inf |   2 +
+>  OvmfPkg/XenPlatformPei/Platform.h         |   5 +
+>  OvmfPkg/XenPlatformPei/Platform.c         |   1 +
+>  OvmfPkg/XenPlatformPei/Xen.c              | 177 ++++++++++++++++++++++
+>  4 files changed, 185 insertions(+)
+> 
+> diff --git a/OvmfPkg/XenPlatformPei/XenPlatformPei.inf b/OvmfPkg/XenPlatformPei/XenPlatformPei.inf
+> index 8790d907d3ec..5732d2188871 100644
+> --- a/OvmfPkg/XenPlatformPei/XenPlatformPei.inf
+> +++ b/OvmfPkg/XenPlatformPei/XenPlatformPei.inf
+> @@ -52,6 +52,7 @@ [LibraryClasses]
+>    DebugLib
+>    HobLib
+>    IoLib
+> +  LocalApicLib
+>    PciLib
+>    ResourcePublicationLib
+>    PeiServicesLib
+> @@ -59,6 +60,7 @@ [LibraryClasses]
+>    MtrrLib
+>    MemEncryptSevLib
+>    PcdLib
+> +  SafeIntLib
+>    XenHypercallLib
 >  
-> -  Virtual Memory Management Services to set or clear the memory encryption bit
-> +  x86_64 Page Tables structures
+>  [Pcd]
+> diff --git a/OvmfPkg/XenPlatformPei/Platform.h b/OvmfPkg/XenPlatformPei/Platform.h
+> index e70ca58078eb..77d88fc159d7 100644
+> --- a/OvmfPkg/XenPlatformPei/Platform.h
+> +++ b/OvmfPkg/XenPlatformPei/Platform.h
+> @@ -132,6 +132,11 @@ PhysicalAddressIdentityMapping (
+>    IN EFI_PHYSICAL_ADDRESS AddressToMap
+>    );
 >  
->    Copyright (c) 2006 - 2016, Intel Corporation. All rights reserved.<BR>
->    Copyright (c) 2017 - 2020, AMD Incorporated. All rights reserved.<BR>
-> @@ -11,17 +11,10 @@
+> +VOID
+> +CalibrateLapicTimer (
+> +  VOID
+> +  );
+> +
+>  extern EFI_BOOT_MODE mBootMode;
 >  
->  **/
+>  extern UINT8 mPhysMemAddressWidth;
+> diff --git a/OvmfPkg/XenPlatformPei/Platform.c b/OvmfPkg/XenPlatformPei/Platform.c
+> index 717fd0ab1a45..e9511eb40c62 100644
+> --- a/OvmfPkg/XenPlatformPei/Platform.c
+> +++ b/OvmfPkg/XenPlatformPei/Platform.c
+> @@ -448,6 +448,7 @@ InitializeXenPlatform (
+>    InitializeRamRegions ();
 >  
-> -#ifndef __VIRTUAL_MEMORY__
-> -#define __VIRTUAL_MEMORY__
-> +#ifndef PAGE_TABLE_H_
-> +#define PAGE_TABLE_H_
+>    InitializeXen ();
+> +  CalibrateLapicTimer ();
 >  
-> -#include <Library/BaseLib.h>
-> -#include <Library/BaseMemoryLib.h>
-> -#include <Library/CacheMaintenanceLib.h>
-> -#include <Library/DebugLib.h>
-> -#include <Library/MemoryAllocationLib.h>
-> -#include <Uefi.h>
-> -
-> -#define SYS_CODE64_SEL 0x38
-> +#include <Base.h>
+>    if (mBootMode != BOOT_ON_S3_RESUME) {
+>      ReserveEmuVariableNvStore ();
+> diff --git a/OvmfPkg/XenPlatformPei/Xen.c b/OvmfPkg/XenPlatformPei/Xen.c
+> index b2a7d1c21dac..8b06bebd7731 100644
+> --- a/OvmfPkg/XenPlatformPei/Xen.c
+> +++ b/OvmfPkg/XenPlatformPei/Xen.c
+> @@ -21,8 +21,10 @@
+>  #include <Library/CpuLib.h>
+>  #include <Library/DebugLib.h>
+>  #include <Library/HobLib.h>
+> +#include <Library/LocalApicLib.h>
+>  #include <Library/MemoryAllocationLib.h>
+>  #include <Library/PcdLib.h>
+> +#include <Library/SafeIntLib.h>
+>  #include <Guid/XenInfo.h>
+>  #include <IndustryStandard/E820.h>
+>  #include <Library/ResourcePublicationLib.h>
+> @@ -457,3 +459,178 @@ PhysicalAddressIdentityMapping (
 >  
->  #pragma pack(1)
->  
-> @@ -165,106 +158,4 @@ typedef union {
->  #define PTE_OFFSET(x)               ( (x >> 12) & PAGETABLE_ENTRY_MASK)
->  #define PAGING_1G_ADDRESS_MASK_64   0x000FFFFFC0000000ull
->  
-> -#define PAGE_TABLE_POOL_ALIGNMENT   BASE_2MB
-> -#define PAGE_TABLE_POOL_UNIT_SIZE   SIZE_2MB
-> -#define PAGE_TABLE_POOL_UNIT_PAGES  \
-> -  EFI_SIZE_TO_PAGES (PAGE_TABLE_POOL_UNIT_SIZE)
-> -#define PAGE_TABLE_POOL_ALIGN_MASK  \
-> -  (~(EFI_PHYSICAL_ADDRESS)(PAGE_TABLE_POOL_ALIGNMENT - 1))
-> -
-> -typedef struct {
-> -  VOID            *NextPool;
-> -  UINTN           Offset;
-> -  UINTN           FreePages;
-> -} PAGE_TABLE_POOL;
-> -
-> -/**
-> -  Return the pagetable memory encryption mask.
-> -
-> -  @return  The pagetable memory encryption mask.
-> -
-> -**/
-> -UINT64
-> -EFIAPI
-> -InternalGetMemEncryptionAddressMask (
-> -  VOID
-> -  );
-> -
-> -/**
-> -  This function clears memory encryption bit for the memory region specified by
-> -  PhysicalAddress and Length from the current page table context.
-> -
-> -  @param[in]  Cr3BaseAddress          Cr3 Base Address (if zero then use
-> -                                      current CR3)
-> -  @param[in]  PhysicalAddress         The physical address that is the start
-> -                                      address of a memory region.
-> -  @param[in]  Length                  The length of memory region
-> -  @param[in]  Flush                   Flush the caches before applying the
-> -                                      encryption mask
-> -
-> -  @retval RETURN_SUCCESS              The attributes were cleared for the
-> -                                      memory region.
-> -  @retval RETURN_INVALID_PARAMETER    Number of pages is zero.
-> -  @retval RETURN_UNSUPPORTED          Clearing the memory encyrption attribute
-> -                                      is not supported
-> -**/
-> -RETURN_STATUS
-> -EFIAPI
-> -InternalMemEncryptSevSetMemoryDecrypted (
-> -  IN  PHYSICAL_ADDRESS        Cr3BaseAddress,
-> -  IN  PHYSICAL_ADDRESS        PhysicalAddress,
-> -  IN  UINTN                   Length,
-> -  IN  BOOLEAN                 Flush
-> -  );
-> -
-> -/**
-> -  This function sets memory encryption bit for the memory region specified by
-> -  PhysicalAddress and Length from the current page table context.
-> -
-> -  @param[in]  Cr3BaseAddress          Cr3 Base Address (if zero then use
-> -                                      current CR3)
-> -  @param[in]  PhysicalAddress         The physical address that is the start
-> -                                      address of a memory region.
-> -  @param[in]  Length                  The length of memory region
-> -  @param[in]  Flush                   Flush the caches before applying the
-> -                                      encryption mask
-> -
-> -  @retval RETURN_SUCCESS              The attributes were set for the memory
-> -                                      region.
-> -  @retval RETURN_INVALID_PARAMETER    Number of pages is zero.
-> -  @retval RETURN_UNSUPPORTED          Setting the memory encyrption attribute
-> -                                      is not supported
-> -**/
-> -RETURN_STATUS
-> -EFIAPI
-> -InternalMemEncryptSevSetMemoryEncrypted (
-> -  IN  PHYSICAL_ADDRESS        Cr3BaseAddress,
-> -  IN  PHYSICAL_ADDRESS        PhysicalAddress,
-> -  IN  UINTN                   Length,
-> -  IN  BOOLEAN                 Flush
-> -  );
-> -
-> -/**
-> -  Returns the encryption state of the specified virtual address range.
-> -
-> -  @param[in]  Cr3BaseAddress          Cr3 Base Address (if zero then use
-> -                                      current CR3)
-> -  @param[in]  BaseAddress             Base address to check
-> -  @param[in]  Length                  Length of virtual address range
-> -
-> -  @retval MemEncryptSevAddressRangeUnencrypted  Address range is mapped
-> -                                                unencrypted
-> -  @retval MemEncryptSevAddressRangeEncrypted    Address range is mapped
-> -                                                encrypted
-> -  @retval MemEncryptSevAddressRangeMixed        Address range is mapped mixed
-> -  @retval MemEncryptSevAddressRangeError        Address range is not mapped
-> -**/
-> -MEM_ENCRYPT_SEV_ADDRESS_RANGE_STATE
-> -EFIAPI
-> -InternalMemEncryptSevGetAddressRangeState (
-> -  IN PHYSICAL_ADDRESS         Cr3BaseAddress,
-> -  IN PHYSICAL_ADDRESS         BaseAddress,
-> -  IN UINTN                    Length
-> -  );
-> -
->  #endif
-> diff --git a/OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h b/OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h
-> index 996f94f07ebb..fe2a0b2826cd 100644
-> --- a/OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h
-> +++ b/OvmfPkg/Library/BaseMemEncryptSevLib/X64/VirtualMemory.h
-> @@ -14,6 +14,7 @@
->  #ifndef __VIRTUAL_MEMORY__
->  #define __VIRTUAL_MEMORY__
->  
-> +#include <IndustryStandard/PageTable.h>
->  #include <Library/BaseLib.h>
->  #include <Library/BaseMemoryLib.h>
->  #include <Library/CacheMaintenanceLib.h>
-> @@ -23,148 +24,6 @@
->  
->  #define SYS_CODE64_SEL 0x38
->  
-> -#pragma pack(1)
-> -
-> -//
-> -// Page-Map Level-4 Offset (PML4) and
-> -// Page-Directory-Pointer Offset (PDPE) entries 4K & 2MB
-> -//
-> -
-> -typedef union {
-> -  struct {
-> -    UINT64  Present:1;                // 0 = Not present in memory,
-> -                                      //   1 = Present in memory
-> -    UINT64  ReadWrite:1;              // 0 = Read-Only, 1= Read/Write
-> -    UINT64  UserSupervisor:1;         // 0 = Supervisor, 1=User
-> -    UINT64  WriteThrough:1;           // 0 = Write-Back caching,
-> -                                      //   1 = Write-Through caching
-> -    UINT64  CacheDisabled:1;          // 0 = Cached, 1=Non-Cached
-> -    UINT64  Accessed:1;               // 0 = Not accessed,
-> -                                      //   1 = Accessed (set by CPU)
-> -    UINT64  Reserved:1;               // Reserved
-> -    UINT64  MustBeZero:2;             // Must Be Zero
-> -    UINT64  Available:3;              // Available for use by system software
-> -    UINT64  PageTableBaseAddress:40;  // Page Table Base Address
-> -    UINT64  AvabilableHigh:11;        // Available for use by system software
-> -    UINT64  Nx:1;                     // No Execute bit
-> -  } Bits;
-> -  UINT64    Uint64;
-> -} PAGE_MAP_AND_DIRECTORY_POINTER;
-> -
-> -//
-> -// Page Table Entry 4KB
-> -//
-> -typedef union {
-> -  struct {
-> -    UINT64  Present:1;                // 0 = Not present in memory,
-> -                                      //   1 = Present in memory
-> -    UINT64  ReadWrite:1;              // 0 = Read-Only, 1= Read/Write
-> -    UINT64  UserSupervisor:1;         // 0 = Supervisor, 1=User
-> -    UINT64  WriteThrough:1;           // 0 = Write-Back caching,
-> -                                      //   1 = Write-Through caching
-> -    UINT64  CacheDisabled:1;          // 0 = Cached, 1=Non-Cached
-> -    UINT64  Accessed:1;               // 0 = Not accessed,
-> -                                      //   1 = Accessed (set by CPU)
-> -    UINT64  Dirty:1;                  // 0 = Not Dirty, 1 = written by
-> -                                      //   processor on access to page
-> -    UINT64  PAT:1;                    //
-> -    UINT64  Global:1;                 // 0 = Not global page, 1 = global page
-> -                                      //   TLB not cleared on CR3 write
-> -    UINT64  Available:3;              // Available for use by system software
-> -    UINT64  PageTableBaseAddress:40;  // Page Table Base Address
-> -    UINT64  AvabilableHigh:11;        // Available for use by system software
-> -    UINT64  Nx:1;                     // 0 = Execute Code,
-> -                                      //   1 = No Code Execution
-> -  } Bits;
-> -  UINT64    Uint64;
-> -} PAGE_TABLE_4K_ENTRY;
-> -
-> -//
-> -// Page Table Entry 2MB
-> -//
-> -typedef union {
-> -  struct {
-> -    UINT64  Present:1;                // 0 = Not present in memory,
-> -                                      //   1 = Present in memory
-> -    UINT64  ReadWrite:1;              // 0 = Read-Only, 1= Read/Write
-> -    UINT64  UserSupervisor:1;         // 0 = Supervisor, 1=User
-> -    UINT64  WriteThrough:1;           // 0 = Write-Back caching,
-> -                                      //   1=Write-Through caching
-> -    UINT64  CacheDisabled:1;          // 0 = Cached, 1=Non-Cached
-> -    UINT64  Accessed:1;               // 0 = Not accessed,
-> -                                      //   1 = Accessed (set by CPU)
-> -    UINT64  Dirty:1;                  // 0 = Not Dirty, 1 = written by
-> -                                      //   processor on access to page
-> -    UINT64  MustBe1:1;                // Must be 1
-> -    UINT64  Global:1;                 // 0 = Not global page, 1 = global page
-> -                                      //   TLB not cleared on CR3 write
-> -    UINT64  Available:3;              // Available for use by system software
-> -    UINT64  PAT:1;                    //
-> -    UINT64  MustBeZero:8;             // Must be zero;
-> -    UINT64  PageTableBaseAddress:31;  // Page Table Base Address
-> -    UINT64  AvabilableHigh:11;        // Available for use by system software
-> -    UINT64  Nx:1;                     // 0 = Execute Code,
-> -                                      //   1 = No Code Execution
-> -  } Bits;
-> -  UINT64    Uint64;
-> -} PAGE_TABLE_ENTRY;
-> -
-> -//
-> -// Page Table Entry 1GB
-> -//
-> -typedef union {
-> -  struct {
-> -    UINT64  Present:1;                // 0 = Not present in memory,
-> -                                      //   1 = Present in memory
-> -    UINT64  ReadWrite:1;              // 0 = Read-Only, 1= Read/Write
-> -    UINT64  UserSupervisor:1;         // 0 = Supervisor, 1=User
-> -    UINT64  WriteThrough:1;           // 0 = Write-Back caching,
-> -                                      //   1 = Write-Through caching
-> -    UINT64  CacheDisabled:1;          // 0 = Cached, 1=Non-Cached
-> -    UINT64  Accessed:1;               // 0 = Not accessed,
-> -                                      //   1 = Accessed (set by CPU)
-> -    UINT64  Dirty:1;                  // 0 = Not Dirty, 1 = written by
-> -                                      //   processor on access to page
-> -    UINT64  MustBe1:1;                // Must be 1
-> -    UINT64  Global:1;                 // 0 = Not global page, 1 = global page
-> -                                      //   TLB not cleared on CR3 write
-> -    UINT64  Available:3;              // Available for use by system software
-> -    UINT64  PAT:1;                    //
-> -    UINT64  MustBeZero:17;            // Must be zero;
-> -    UINT64  PageTableBaseAddress:22;  // Page Table Base Address
-> -    UINT64  AvabilableHigh:11;        // Available for use by system software
-> -    UINT64  Nx:1;                     // 0 = Execute Code,
-> -                                      //   1 = No Code Execution
-> -  } Bits;
-> -  UINT64    Uint64;
-> -} PAGE_TABLE_1G_ENTRY;
-> -
-> -#pragma pack()
-> -
-> -#define IA32_PG_P                   BIT0
-> -#define IA32_PG_RW                  BIT1
-> -#define IA32_PG_PS                  BIT7
-> -
-> -#define PAGING_PAE_INDEX_MASK       0x1FF
-> -
-> -#define PAGING_4K_ADDRESS_MASK_64   0x000FFFFFFFFFF000ull
-> -#define PAGING_2M_ADDRESS_MASK_64   0x000FFFFFFFE00000ull
-> -#define PAGING_1G_ADDRESS_MASK_64   0x000FFFFFC0000000ull
-> -
-> -#define PAGING_L1_ADDRESS_SHIFT     12
-> -#define PAGING_L2_ADDRESS_SHIFT     21
-> -#define PAGING_L3_ADDRESS_SHIFT     30
-> -#define PAGING_L4_ADDRESS_SHIFT     39
-> -
-> -#define PAGING_PML4E_NUMBER         4
-> -
-> -#define PAGETABLE_ENTRY_MASK        ((1UL << 9) - 1)
-> -#define PML4_OFFSET(x)              ( (x >> 39) & PAGETABLE_ENTRY_MASK)
-> -#define PDP_OFFSET(x)               ( (x >> 30) & PAGETABLE_ENTRY_MASK)
-> -#define PDE_OFFSET(x)               ( (x >> 21) & PAGETABLE_ENTRY_MASK)
-> -#define PTE_OFFSET(x)               ( (x >> 12) & PAGETABLE_ENTRY_MASK)
-> -#define PAGING_1G_ADDRESS_MASK_64   0x000FFFFFC0000000ull
-> -
->  #define PAGE_TABLE_POOL_ALIGNMENT   BASE_2MB
->  #define PAGE_TABLE_POOL_UNIT_SIZE   SIZE_2MB
->  #define PAGE_TABLE_POOL_UNIT_PAGES  \
+>    return EFI_SUCCESS;
+>  }
+> +
+> +STATIC
+> +EFI_STATUS
+> +MapSharedInfoPage (
+> +  IN VOID *PagePtr
+> +  )
+> +{
+> +  xen_add_to_physmap_t  Parameters;
+> +  INTN                  ReturnCode;
+> +
+> +  Parameters.domid = DOMID_SELF;
+> +  Parameters.space = XENMAPSPACE_shared_info;
+> +  Parameters.idx = 0;
+> +  Parameters.gpfn = (UINTN)PagePtr >> EFI_PAGE_SHIFT;
+> +  ReturnCode = XenHypercallMemoryOp (XENMEM_add_to_physmap, &Parameters);
+> +  if (ReturnCode != 0) {
+> +    return EFI_NO_MAPPING;
+> +  }
+> +  return EFI_SUCCESS;
+> +}
+> +
+> +STATIC
+> +VOID
+> +UnmapXenPage (
+> +  IN VOID *PagePtr
+> +  )
+> +{
+> +  xen_remove_from_physmap_t Parameters;
+> +  INTN                      ReturnCode;
+> +
+> +  Parameters.domid = DOMID_SELF;
+> +  Parameters.gpfn = (UINTN)PagePtr >> EFI_PAGE_SHIFT;
+> +  ReturnCode = XenHypercallMemoryOp (XENMEM_remove_from_physmap, &Parameters);
+> +  ASSERT (ReturnCode == 0);
+> +}
+> +
+> +
+> +STATIC
+> +UINT64
+> +GetCpuFreq (
+> +  IN XEN_VCPU_TIME_INFO *VcpuTime
+> +  )
+> +{
+> +  UINT32 Version;
+> +  UINT32 TscToSystemMultiplier;
+> +  INT8   TscShift;
+> +  UINT64 CpuFreq;
+> +
+> +  do {
+> +    Version = VcpuTime->Version;
+> +    MemoryFence ();
+> +    TscToSystemMultiplier = VcpuTime->TscToSystemMultiplier;
+> +    TscShift = VcpuTime->TscShift;
+> +    MemoryFence ();
+> +  } while (((Version & 1) != 0) && (Version != VcpuTime->Version));
+> +
+> +  CpuFreq = DivU64x32 (LShiftU64 (1000000000ULL, 32), TscToSystemMultiplier);
+> +  if (TscShift >= 0) {
+> +      CpuFreq = RShiftU64 (CpuFreq, TscShift);
+> +  } else {
+> +      CpuFreq = LShiftU64 (CpuFreq, -TscShift);
+> +  }
+> +  return CpuFreq;
+> +}
+> +
+> +STATIC
+> +VOID
+> +XenDelay (
+> +  IN XEN_VCPU_TIME_INFO *VcpuTimeInfo,
+> +  IN UINT64             DelayNs
+> +  )
+> +{
+> +  UINT64        Tick;
+> +  UINT64        CpuFreq;
+> +  UINT64        Delay;
+> +  UINT64        DelayTick;
+> +  UINT64        NewTick;
+> +  RETURN_STATUS Status;
+> +
+> +  Tick = AsmReadTsc ();
+> +
+> +  CpuFreq = GetCpuFreq (VcpuTimeInfo);
+> +  Status = SafeUint64Mult (DelayNs, CpuFreq, &Delay);
+> +  if (EFI_ERROR (Status)) {
+> +    DEBUG ((DEBUG_ERROR,
+> +      "XenDelay (%lu ns): delay too big in relation to CPU freq %lu Hz\n",
+> +      DelayNs, CpuFreq));
+> +    ASSERT_EFI_ERROR (Status);
+> +    CpuDeadLoop ();
+> +  }
+> +
+> +  DelayTick = DivU64x32 (Delay, 1000000000);
+> +
+> +  NewTick = Tick + DelayTick;
+> +
+> +  //
+> +  // Check for overflow
+> +  //
+> +  if (NewTick < Tick) {
+> +    //
+> +    // Overflow, wait for TSC to also overflow
+> +    //
+> +    while (AsmReadTsc () >= Tick) {
+> +      CpuPause ();
+> +    }
+> +  }
+> +
+> +  while (AsmReadTsc () <= NewTick) {
+> +    CpuPause ();
+> +  }
+> +}
+> +
+> +
+> +/**
+> +  Calculate the frequency of the Local Apic Timer
+> +**/
+> +VOID
+> +CalibrateLapicTimer (
+> +  VOID
+> +  )
+> +{
+> +  XEN_SHARED_INFO       *SharedInfo;
+> +  XEN_VCPU_TIME_INFO    *VcpuTimeInfo;
+> +  UINT32                TimerTick, TimerTick2, DiffTimer;
+> +  UINT64                TscTick, TscTick2;
+> +  UINT64                Freq;
+> +  UINT64                Dividend;
+> +  EFI_STATUS            Status;
+> +
+> +
+> +  SharedInfo = (VOID*)((1ULL << mPhysMemAddressWidth) - EFI_PAGE_SIZE);
+> +  Status = PhysicalAddressIdentityMapping ((EFI_PHYSICAL_ADDRESS)SharedInfo);
+> +  if (EFI_ERROR (Status)) {
+> +    DEBUG ((DEBUG_ERROR,
+> +      "Failed to add page table entry for Xen shared info page: %r\n",
+> +      Status));
+> +    ASSERT_EFI_ERROR (Status);
+> +    return;
+> +  }
+> +
+> +  Status = MapSharedInfoPage (SharedInfo);
+> +  if (EFI_ERROR (Status)) {
+> +    DEBUG ((DEBUG_ERROR, "Failed to map Xen's shared info page: %r\n",
+> +      Status));
+> +    ASSERT_EFI_ERROR (Status);
+> +    return;
+> +  }
+> +
+> +  VcpuTimeInfo = &SharedInfo->VcpuInfo[0].Time;
+> +
+> +  InitializeApicTimer (1, MAX_UINT32, TRUE, 0);
+> +  DisableApicTimerInterrupt ();
+> +
+> +  TimerTick = GetApicTimerCurrentCount ();
+> +  TscTick = AsmReadTsc ();
+> +  XenDelay (VcpuTimeInfo, 1000000ULL);
+> +  TimerTick2 = GetApicTimerCurrentCount ();
+> +  TscTick2 = AsmReadTsc ();
+> +
+> +
+> +  DiffTimer = TimerTick - TimerTick2;
+> +  Status = SafeUint64Mult (GetCpuFreq (VcpuTimeInfo), DiffTimer, &Dividend);
+> +  if (EFI_ERROR (Status)) {
+> +    DEBUG ((DEBUG_ERROR, "overflow while calculating APIC frequency\n"));
+> +    DEBUG ((DEBUG_ERROR, "CPU freq: %lu Hz; APIC timer tick count for 1 ms: %u\n",
+> +      GetCpuFreq (VcpuTimeInfo), DiffTimer));
+> +    ASSERT_EFI_ERROR (Status);
+> +    CpuDeadLoop ();
+> +  }
+> +
+> +  Freq = DivU64x64Remainder (Dividend, TscTick2 - TscTick, NULL);
+> +  DEBUG ((DEBUG_INFO, "APIC Freq % 8lu Hz\n", Freq));
+> +
+> +  UnmapXenPage (SharedInfo);
+> +}
 > 
 
 
