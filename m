@@ -2,43 +2,43 @@ Return-Path: <SRS0=+ia2=JK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B85F8C433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 22:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81D0DC433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 22:44:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5882C61103
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 22:30:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5882C61103
+	by mail.kernel.org (Postfix) with ESMTPS id 22C7E6120E
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 22:44:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22C7E6120E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.110145.210214 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.110150.210226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWRXv-0006dv-Vp; Tue, 13 Apr 2021 22:30:11 +0000
+	id 1lWRlG-0007gJ-7h; Tue, 13 Apr 2021 22:43:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 110145.210214; Tue, 13 Apr 2021 22:30:11 +0000
+Received: by outflank-mailman (output) from mailman id 110150.210226; Tue, 13 Apr 2021 22:43:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWRXv-0006do-Sr; Tue, 13 Apr 2021 22:30:11 +0000
-Received: by outflank-mailman (input) for mailman id 110145;
- Tue, 13 Apr 2021 22:30:10 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lWRlG-0007gC-4C; Tue, 13 Apr 2021 22:43:58 +0000
+Received: by outflank-mailman (input) for mailman id 110150;
+ Tue, 13 Apr 2021 22:43:56 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IdfB=JK=kernel.org=patchwork-bot+netdevbpf@srs-us1.protection.inumbo.net>)
- id 1lWRXu-0006dj-Pj
- for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 22:30:10 +0000
+ <SRS0=1MWi=JK=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1lWRlE-0007g7-Qs
+ for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 22:43:56 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a24e0a80-57ed-4609-a074-6b2492681b7b;
- Tue, 13 Apr 2021 22:30:10 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPS id 30F1B61164;
- Tue, 13 Apr 2021 22:30:09 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f7ae1fc6-9473-4259-bffe-92cf9b5162d8;
+ Tue, 13 Apr 2021 22:43:56 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 14E68611EE;
+ Tue, 13 Apr 2021 22:43:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,62 +50,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a24e0a80-57ed-4609-a074-6b2492681b7b
+X-Inumbo-ID: f7ae1fc6-9473-4259-bffe-92cf9b5162d8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1618353009;
-	bh=YDZSi70s3rOnFQkuC0w/GRNCFulrZjkk0ICdWBlUI9M=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=Jya3PSqkB5j9zQvQZXkopGm4IRx3Aa/oCPNlFr6iauzTfuDAfnECgecJ3WtMqS2Dc
-	 JKbG9ZZZzqogG/o6WQxS/vezQs2vR0ppQTLyzOiBFPN68DnYxL8Z3TkYHFihURB3SB
-	 JksbZJzK8pJldF8x3dUBKzQs7xNL7UZLI3xtm9yTwyj8wWi3HbcZ+os+BdgwZSFQ4v
-	 /lcBPGZru3Q2yY/nCVwfUEjza87gY+yO8/7i/DGFUCBoFZE2Y1L0KNcOcACUMbfk0W
-	 vYoWUbTpeIlTByRvcT3H8t7QfXNuYIyF36gv5hOFLGPDUbGNWyL9B74NukcTgZ+N7X
-	 7OS9ZIB//sekQ==
-Content-Type: text/plain; charset="utf-8"
+	s=k20201202; t=1618353835;
+	bh=3GKHVKoQucQ1+1UhAkBoWE46c9GK78k3u0Txs4vEtD4=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=DUKRkY0WOd9/+sVQkCHPfK+THpLht9B7KSSJ/pcZcMBZ0gWN1SFNX7yhi4i5XRZsZ
+	 bc3TNZZKAtPC2sYCx+zIWf+uMIYxSXoF2yteGPjBpNEsxquFsjAlyA82NEDfzdEHMF
+	 9iVzCvDVx0b9y0Mjs4CtYaYd0yLJsmD4XFYb2LikKlOhq+B2Xp6bNMFnL7IbaBPmTc
+	 SmhqMsObuD26r49Lc5GuGNz8OSj6VGsmxlX/xz6CiEN7jPNfl2mLQmh9dGQdByQEG8
+	 0yPZL0CG82mHhLZ2cOXfnwj/ohO8445d7N67oifq+LnTxNQuJ6PM26CNeq9WCV/65s
+	 B5p2zfVjtxBDg==
+Date: Tue, 13 Apr 2021 15:43:54 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Julien Grall <julien@xen.org>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
+    ash.j.wilding@gmail.com, Julien Grall <jgrall@amazon.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Dario Faggioli <dfaggioli@suse.com>, 
+    George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH] xen/arm: Ensure the vCPU context is seen before clearing
+ the _VPF_down
+In-Reply-To: <86165804-34a1-59e5-1b51-fecc60dbf796@xen.org>
+Message-ID: <alpine.DEB.2.21.2104131541370.4885@sstabellini-ThinkPad-T480s>
+References: <20210226205158.20991-1-julien@xen.org> <alpine.DEB.2.21.2102261756280.2682@sstabellini-ThinkPad-T480s> <ca41bfbb-d942-d8fd-e96e-c464f6b3643f@xen.org> <alpine.DEB.2.21.2103191652450.439@sstabellini-ThinkPad-T480s>
+ <86165804-34a1-59e5-1b51-fecc60dbf796@xen.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] xen-netback: Check for hotplug-status existence before
- watching
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <161835300913.8271.8325193243665845147.git-patchwork-notify@kernel.org>
-Date: Tue, 13 Apr 2021 22:30:09 +0000
-References: <20210413152512.903750-1-mbrown@fensystems.co.uk>
-In-Reply-To: <20210413152512.903750-1-mbrown@fensystems.co.uk>
-To: Michael Brown <mbrown@fensystems.co.uk>
-Cc: paul@xen.org, xen-devel@lists.xenproject.org, netdev@vger.kernel.org,
- wei.liu@kernel.org, pdurrant@amazon.com
+Content-Type: text/plain; charset=US-ASCII
 
-Hello:
-
-This patch was applied to netdev/net.git (refs/heads/master):
-
-On Tue, 13 Apr 2021 16:25:12 +0100 you wrote:
-> The logic in connect() is currently written with the assumption that
-> xenbus_watch_pathfmt() will return an error for a node that does not
-> exist.  This assumption is incorrect: xenstore does allow a watch to
-> be registered for a nonexistent node (and will send notifications
-> should the node be subsequently created).
+On Sat, 20 Mar 2021, Julien Grall wrote:
+> On 20/03/2021 00:01, Stefano Stabellini wrote:
+> > On Sat, 27 Feb 2021, Julien Grall wrote:
+> > > (+ Dario and George)
+> > > 
+> > > Hi Stefano,
+> > > 
+> > > I have added Dario and George to get some inputs from the scheduling part.
+> > > 
+> > > On 27/02/2021 01:58, Stefano Stabellini wrote:
+> > > > On Fri, 26 Feb 2021, Julien Grall wrote:
+> > > > > From: Julien Grall <jgrall@amazon.com>
+> > > > > 
+> > > > > A vCPU can get scheduled as soon as _VPF_down is cleared. As there is
+> > > > > currently not ordering guarantee in arch_set_info_guest(), it may be
+> > > > > possible that flag can be observed cleared before the new values of
+> > > > > vCPU
+> > > > > registers are observed.
+> > > > > 
+> > > > > Add an smp_mb() before the flag is cleared to prevent re-ordering.
+> > > > > 
+> > > > > Signed-off-by: Julien Grall <jgrall@amazon.com>
+> > > > > 
+> > > > > ---
+> > > > > 
+> > > > > Barriers should work in pair. However, I am not entirely sure whether
+> > > > > to
+> > > > > put the other half. Maybe at the beginning of context_switch_to()?
+> > > > 
+> > > > It should be right after VGCF_online is set or cleared, right?
+> > > 
+> > > vcpu_guest_context_t is variable allocated on the heap just for the
+> > > purpose of
+> > > this call. So an ordering with VGFC_online is not going to do anything.
+> > > 
+> > > > So it
+> > > > would be:
+> > > > 
+> > > > xen/arch/arm/domctl.c:arch_get_info_guest
+> > > > xen/arch/arm/vpsci.c:do_common_cpu_on
+> > > > 
+> > > > But I think it is impossible that either of them get called at the same
+> > > > time as arch_set_info_guest, which makes me wonder if we actually need
+> > > > the barrier...
+> > > arch_get_info_guest() is called without the domain lock held and I can't
+> > > see
+> > > any other lock that could prevent it to be called in // of
+> > > arch_set_info_guest().
+> > > 
+> > > So you could technically get corrupted information from
+> > > XEN_DOMCTL_getvcpucontext. For this case, we would want a smp_wmb() before
+> > > writing to v->is_initialised. The corresponding read barrier would be in
+> > > vcpu_pause() -> vcpu_sleep_sync() -> sync_vcpu_execstate().
+> > > 
+> > > But this is not the issue I was originally trying to solve. Currently,
+> > > do_common_cpu_on() will roughly do:
+> > > 
+> > >   1) domain_lock(d)
+> > > 
+> > >   2) v->arch.sctlr = ...
+> > >      v->arch.ttbr0 = ...
+> > > 
+> > >   3) clear_bit(_VFP_down, &v->pause_flags);
+> > > 
+> > >   4) domain_unlock(d)
+> > > 
+> > >   5) vcpu_wake(v);
+> > > 
+> > > If we had only one pCPU on the system, then we would only wake the vCPU in
+> > > step 5. We would be fine in this situation. But that's not the interesting
+> > > case.
+> > > 
+> > > If you add a second pCPU in the story, it may be possible to have
+> > > vcpu_wake()
+> > > happening in // (see more below). As there is no memory barrier, step 3
+> > > may be
+> > > observed before 2. So, assuming the vcpu is runnable, we could start to
+> > > schedule a vCPU before any update to the registers (step 2) are observed.
+> > > 
+> > > This means that when context_switch_to() is called, we may end up to
+> > > restore
+> > > some old values.
+> > > 
+> > > Now the question is can vcpu_wake() be called in // from another pCPU?
+> > > AFAICT,
+> > > it would be only called if a given flag in v->pause_flags is cleared (e.g.
+> > > _VFP_blocked). But can we rely on that?
+> > > 
+> > > Even if we can rely on it, v->pause_flags has other flags in it. I
+> > > couldn't
+> > > rule out that _VPF_down cannot be set at the same time as the other
+> > > _VPF_*.
+> > > 
+> > > Therefore, I think a barrier is necessary to ensure the ordering.
+> > > 
+> > > Do you agree with this analysis?
+> >   Yes, I think this makes sense. The corresponding barrier in the
+> > scheduling code would have to be after reading _VPF_down and before
+> > reading v->arch.sctlr, etc.
+> > 
+> > 
+> > > > > The issues described here is also quite theoritical because there are
+> > > > > hundreds of instructions executed between the time a vCPU is seen
+> > > > > runnable and scheduled. But better be safe than sorry :).
+> > > > > ---
+> > > > >    xen/arch/arm/domain.c | 7 +++++++
+> > > > >    1 file changed, 7 insertions(+)
+> > > > > 
+> > > > > diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+> > > > > index bdd3d3e5b5d5..2b705e66be81 100644
+> > > > > --- a/xen/arch/arm/domain.c
+> > > > > +++ b/xen/arch/arm/domain.c
+> > > > > @@ -914,7 +914,14 @@ int arch_set_info_guest(
+> > > > >        v->is_initialised = 1;
+> > > > >          if ( ctxt->flags & VGCF_online )
+> > > > > +    {
+> > > > > +        /*
+> > > > > +         * The vCPU can be scheduled as soon as _VPF_down is cleared.
+> > > > > +         * So clear the bit *after* the context was loaded.
+> > > > > +         */
+> > > > > +        smp_mb();
+> > > 
+> > >  From the discussion above, I would move this barrier before
+> > > v->is_initialised.
+> > > So we also take care of the issue with arch_get_info_guest().
+> > > 
+> > > This barrier also can be reduced to a smp_wmb() as we only expect an
+> > > ordering
+> > > between writes.
+> > > 
+> > > The barrier would be paired with the barrier in:
+> > >     - sync_vcpu_execstate() in the case of arch_get_vcpu_info_guest().
+> > >     - context_switch_to() in the case of scheduling (The exact barrier is
+> > > TDB).
+> > 
+> > OK, this makes sense, but why before:
+> > 
+> >    v->is_initialised = 1;
+> > 
+> > instead of right after it? It is just v->pause_flags we care about,
+> > right?
 > 
-> As of commit 1f2565780 ("xen-netback: remove 'hotplug-status' once it
-> has served its purpose"), this leads to a failure when a domU
-> transitions into XenbusStateConnected more than once.  On the first
-> domU transition into Connected state, the "hotplug-status" node will
-> be deleted by the hotplug_status_changed() callback in dom0.  On the
-> second or subsequent domU transition into Connected state, the
-> hotplug_status_changed() callback will therefore never be invoked, and
-> so the backend will remain stuck in InitWait.
+> The issue I originally tried to address was a race with v->pause_flags. But I
+> also discovered one with v->initialised while answering to your previous
+> e-mail. This was only briefly mentioned so let me expand it.
 > 
-> [...]
+> A toolstack can take a snapshot of the vCPU context using
+> XEN_DOMCTL_get_vcpucontext. The helper will bail out if v->is_initialized is
+> 0.
+> 
+> If v->is_initialized is 1, it will temporarily pause the vCPU and then call
+> arch_get_info_guest().
+> 
+> AFAICT, arch_get_info_guest() and arch_set_info_guest() (called from PSCI CPU
+> on) can run concurrently.
+> 
+> If you put the barrier right after v->is_initialised, then a
+> processor/compiler is allowed to re-order the write with what comes before.
+> Therefore, the new value of v->is_initialised may be observed before
+> v->arch.{sctlr, ttbr0,...}.
+> 
+> Hence, we need a barrier before setting v->is_initialized so the new value is
+> observed *after* the changes to v->arch.{sctlr, ttbr0, ...) have been
+> observed.
+> 
+> A single smp_wmb() barrier before v->is_initialized should be sufficient to
+> cover the two problems discussed as I don't think we need to observe
+> v->is_initialized *before* v->pause_flags.
 
-Here is the summary with links:
-  - xen-netback: Check for hotplug-status existence before watching
-    https://git.kernel.org/netdev/net/c/2afeec08ab5c
-
-You are awesome, thank you!
---
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
-
+I think your explanation is correct. However, don't we need a smp_rmb()
+barrier after reading v->is_initialised in xen/common/domctl.c:do_domctl
+? That would be the barrier that pairs with smp_wmb in regards to
+v->is_initialised.
 
