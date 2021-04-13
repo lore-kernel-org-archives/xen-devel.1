@@ -2,53 +2,45 @@ Return-Path: <SRS0=+ia2=JK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,
-	CHARSET_FARAWAY_HEADER,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,PDS_BAD_THREAD_QP_64,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87192C43460
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 05:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA877C43460
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 06:14:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3EAEA6109F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 05:19:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3EAEA6109F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=byosoft.com.cn
+	by mail.kernel.org (Postfix) with ESMTPS id 9327861249
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 06:14:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9327861249
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109473.209057 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109530.209069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWBRy-0004R5-Ud; Tue, 13 Apr 2021 05:18:58 +0000
+	id 1lWCJT-0001a2-Tj; Tue, 13 Apr 2021 06:14:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109473.209057; Tue, 13 Apr 2021 05:18:58 +0000
+Received: by outflank-mailman (output) from mailman id 109530.209069; Tue, 13 Apr 2021 06:14:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWBRy-0004Qy-Rh; Tue, 13 Apr 2021 05:18:58 +0000
-Received: by outflank-mailman (input) for mailman id 109473;
- Tue, 13 Apr 2021 01:00:18 +0000
+	id 1lWCJT-0001Zv-Qo; Tue, 13 Apr 2021 06:14:15 +0000
+Received: by outflank-mailman (input) for mailman id 109530;
+ Tue, 13 Apr 2021 06:14:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=biUC=JK=byosoft.net=byomail@srs-us1.protection.inumbo.net>)
- id 1lW7Pe-0006bm-QE
- for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 01:00:18 +0000
-Received: from regular1.263xmail.com (unknown [211.150.70.200])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=A51V=JK=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lWCJS-0001Zq-Kf
+ for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 06:14:14 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c3f61924-4788-4730-b128-342b9c9eb904;
- Tue, 13 Apr 2021 01:00:16 +0000 (UTC)
-Received: from localhost (unknown [192.168.167.69])
- by regular1.263xmail.com (Postfix) with ESMTP id 0C7AF1D8B
- for <xen-devel@lists.xenproject.org>; Tue, 13 Apr 2021 09:00:14 +0800 (CST)
-Received: from mail.byosoft.com.cn (unknown [58.240.74.242])
- by smtp.263.net (postfix) whith ESMTP id
- P13167T139812237465344S1618275613190704_; 
- Tue, 13 Apr 2021 09:00:13 +0800 (CST)
-Received: from DESKTOPS6D0PVI ([58.246.60.130])
- (envelope-sender <gaoliming@byosoft.com.cn>)
- by 192.168.6.13 with ESMTP
- for <anthony.perard@citrix.com>; Tue, 13 Apr 2021 08:58:59 +0800
+ id 69600f72-3fe0-49ee-9de1-6e65d44c440a;
+ Tue, 13 Apr 2021 06:14:13 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id DBE20B139;
+ Tue, 13 Apr 2021 06:14:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,142 +51,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: c3f61924-4788-4730-b128-342b9c9eb904
-X-MAIL-GRAY:0
-X-MAIL-DELIVERY:1
-X-ADDR-CHECKED4:1
-X-ANTISPAM-LEVEL:2
-X-SKE-CHECKED:1
-X-ABS-CHECKED:1
-X-IP-DOMAINF:1
-X-UNIQUE-TAG:<590428c32a38e4c3ec9272e0c2a4b8da>
-X-RL-SENDER:byomail@byosoft.net
-X-SENDER:byomail@byosoft.net
-X-LOGIN-NAME:byomail@byosoft.net
-X-FST-TO:xen-devel@lists.xenproject.org
-X-SENDER-IP:58.240.74.242
-X-ATTACHMENT-NUM:0
-X-System-Flag:0
-X-WM-Sender: gaoliming@byosoft.com.cn
-X-Originating-IP: 58.246.60.130
-X-WM-AuthFlag: YES
-X-WM-AuthUser: gaoliming@byosoft.com.cn
-From: "gaoliming" <gaoliming@byosoft.com.cn>
-To: <devel@edk2.groups.io>,
-	<anthony.perard@citrix.com>
-Cc: "'Laszlo Ersek'" <lersek@redhat.com>,
-	"'Jordan Justen'" <jordan.l.justen@intel.com>,
-	"'Ard Biesheuvel'" <ardb+tianocore@kernel.org>,
-	<xen-devel@lists.xenproject.org>,
-	"'Julien Grall'" <julien@xen.org>,
-	"'Michael D Kinney'" <michael.d.kinney@intel.com>,
-	"'Zhiguang Liu'" <zhiguang.liu@intel.com>,
-	"'Liming Gao'" <liming.gao@intel.com>
-References: <20210412133003.146438-1-anthony.perard@citrix.com> <20210412133003.146438-3-anthony.perard@citrix.com>
-In-Reply-To: <20210412133003.146438-3-anthony.perard@citrix.com>
-Subject: =?gb2312?B?u9i4tDogW2VkazItZGV2ZWxdIFtQQVRDSCB2MyAyLzddIE1kZVBrZw==?=
-	=?gb2312?B?OiBBbGxvdyBQY2RGU0JDbG9jayB0byBieSBEeW5hbWlj?=
-Date: Tue, 13 Apr 2021 08:59:06 +0800
-Message-ID: <00c601d73000$350a7510$9f1f5f30$@byosoft.com.cn>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 69600f72-3fe0-49ee-9de1-6e65d44c440a
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1618294453; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type;
+	bh=FZE0rFfPoJlnGmQi0NAqD3f5YebsMx3Op8QIEC0YYU4=;
+	b=bGQRRsT0x1i8jTZi/4bDAnyjXgn6+Y6qcZhNZSgFxNN8lrqVcUYIvmByaNY8nOvWERq+fR
+	xo5JVtElCdwuHCaiDhys6RX/ztCnLExE3ji7fugAByueSeiPbvRCi0qFEqOwxRCrrXr+X4
+	p1MfmS16BK+fiFaG4v/szuZER5BDLuA=
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+From: Juergen Gross <jgross@suse.com>
+Subject: Support of old Xen versions in the Linux kernel
+Message-ID: <1e4dc7c0-4364-1095-bb6b-c6341bc58e60@suse.com>
+Date: Tue, 13 Apr 2021 08:14:12 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="gb2312"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="XSZ8F7LiMmH4vrA4g4RtE7iOZYIZFrhRR"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--XSZ8F7LiMmH4vrA4g4RtE7iOZYIZFrhRR
+Content-Type: multipart/mixed; boundary="MoozWMqqclU4lZO7TxvuQCJ3PeRXQmBzZ";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Message-ID: <1e4dc7c0-4364-1095-bb6b-c6341bc58e60@suse.com>
+Subject: Support of old Xen versions in the Linux kernel
+
+--MoozWMqqclU4lZO7TxvuQCJ3PeRXQmBzZ
+Content-Type: multipart/mixed;
+ boundary="------------1DE9F3693D3913834284AC39"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------1DE9F3693D3913834284AC39
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQG017LAufWq6diCCV2Qgjs5xaxIuAJhiU9zquNEocA=
-Content-Language: zh-cn
-Sender: "gaoliming" <gaoliming@byosoft.com.cn>
 
-Reviewed-by: Liming Gao <gaoliming@byosoft.com.cn>
+In x86 kernel development the question came up whether we need to
+support XENFEAT_gnttab_map_avail_bits not being set when running as a PV
+guest.
 
-> -----=D3=CA=BC=FE=D4=AD=BC=FE-----
-> =B7=A2=BC=FE=C8=CB: devel@edk2.groups.io <devel@edk2.groups.io> =
-=B4=FA=B1=ED Anthony
-> PERARD via groups.io
-> =B7=A2=CB=CD=CA=B1=BC=E4: 2021=C4=EA4=D4=C212=C8=D5 21:30
-> =CA=D5=BC=FE=C8=CB: devel@edk2.groups.io
-> =B3=AD=CB=CD: Laszlo Ersek <lersek@redhat.com>; Jordan Justen
-> <jordan.l.justen@intel.com>; Ard Biesheuvel =
-<ardb+tianocore@kernel.org>;
-> xen-devel@lists.xenproject.org; Anthony PERARD
-> <anthony.perard@citrix.com>; Julien Grall <julien@xen.org>; Michael D
-> Kinney <michael.d.kinney@intel.com>; Liming Gao
-> <gaoliming@byosoft.com.cn>; Zhiguang Liu <zhiguang.liu@intel.com>; =
-Liming
-> Gao <liming.gao@intel.com>
-> =D6=F7=CC=E2: [edk2-devel] [PATCH v3 2/7] MdePkg: Allow PcdFSBClock to =
-by
-> Dynamic
->=20
-> We are going to want to change the value of PcdFSBClock at run time in
-> OvmfXen, so move it to the PcdsDynamic section.
->=20
-> Ref: https://bugzilla.tianocore.org/show_bug.cgi?id=3D2490
-> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-> Reviewed-by: Laszlo Ersek <lersek@redhat.com>
-> Reviewed-by: Liming Gao <liming.gao@intel.com>
-> ---
->=20
-> Notes:
->     CC: Michael D Kinney <michael.d.kinney@intel.com>
->     CC: Liming Gao <gaoliming@byosoft.com.cn>
->     CC: Zhiguang Liu <zhiguang.liu@intel.com>
->=20
->  MdePkg/MdePkg.dec | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->=20
-> diff --git a/MdePkg/MdePkg.dec b/MdePkg/MdePkg.dec
-> index f4156920e599..8965e903e093 100644
-> --- a/MdePkg/MdePkg.dec
-> +++ b/MdePkg/MdePkg.dec
-> @@ -2265,10 +2265,6 @@ [PcdsFixedAtBuild,PcdsPatchableInModule]
->    # @ValidList  0x80000001 | 8, 16, 32
->    gEfiMdePkgTokenSpaceGuid.PcdPort80DataWidth|8|UINT8|0x0000002d
->=20
-> -  ## This value is used to configure X86 Processor FSB clock.
-> -  # @Prompt FSB Clock.
-> -
-> gEfiMdePkgTokenSpaceGuid.PcdFSBClock|200000000|UINT32|0x0000000c
-> -
->    ## The maximum printable number of characters. UefLib functions:
-> AsciiPrint(), AsciiErrorPrint(),
->    #  PrintXY(), AsciiPrintXY(), Print(), ErrorPrint() base on this =
-PCD
-value to
-> print characters.
->    # @Prompt Maximum Printable Number of Characters.
-> @@ -2372,5 +2368,9 @@ [PcdsFixedAtBuild, PcdsPatchableInModule,
-> PcdsDynamic, PcdsDynamicEx]
->    # @Prompt Boot Timeout (s)
->=20
-> gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|0xffff|UINT16|0x0000
-> 002c
->=20
-> +  ## This value is used to configure X86 Processor FSB clock.
-> +  # @Prompt FSB Clock.
-> +
-> gEfiMdePkgTokenSpaceGuid.PcdFSBClock|200000000|UINT32|0x0000000c
-> +
->  [UserExtensions.TianoCore."ExtraFiles"]
->    MdePkgExtra.uni
-> --
-> Anthony PERARD
->=20
->=20
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Groups.io Links: You receive all messages sent to this group.
-> View/Reply Online (#73954): =
-https://edk2.groups.io/g/devel/message/73954
-> Mute This Topic: https://groups.io/mt/82037830/4905953
-> Group Owner: devel+owner@edk2.groups.io
-> Unsubscribe: https://edk2.groups.io/g/devel/unsub
-> [gaoliming@byosoft.com.cn]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
+This feature is active for PV guests since Xen 3.4.
+
+So the basic question is: which is the oldest version of Xen we want to
+support in the Linux kernel? As far as I know there is no Xen based
+product in productive use with Xen older than 4.2.
+
+Would we be fine to drop support for older versions (feel free to
+suggest other versions than 4.2 as the first to be supported Xen
+version)?
+
+In case the answer is yes, I'd post some patches to clean up the kernel,
+including a safety net to bail out in case a feature needed isn't
+available.
 
 
+Juergen
 
+--------------1DE9F3693D3913834284AC39
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------1DE9F3693D3913834284AC39--
+
+--MoozWMqqclU4lZO7TxvuQCJ3PeRXQmBzZ--
+
+--XSZ8F7LiMmH4vrA4g4RtE7iOZYIZFrhRR
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmB1NrQFAwAAAAAACgkQsN6d1ii/Ey8D
+EQf/eJl0JGvu7onEdr1apInuS+64axht8dmVf4g7lICkXdI5y7httwHEPC3zLbVQhp7eGwTTFsP6
+aNyHhkgpNBKaO26zXdVGf2PZRUalNdf77YXZqHcQL//Gb/NBFKB4k+CSEid4pgqaIB5k9j2OUzBU
+d+2QX6nR+rF1amb3IB86bxvUid8ON1xg3asPwEfKFDtrxilKZLGY39cgdLsxRypwYPqEAI5MLpid
+oMsvzxzBaoIHLbchaq8j5Zu49a+wAfUxzIx49PXTDbopCSdjGRNEnp87KaExmPawBVod6ae0v9vh
+5wp5GdyqMgpntmP51O/28DQ+ZoVdUPFjeCgSDmGO3g==
+=XSe6
+-----END PGP SIGNATURE-----
+
+--XSZ8F7LiMmH4vrA4g4RtE7iOZYIZFrhRR--
 
