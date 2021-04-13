@@ -2,41 +2,41 @@ Return-Path: <SRS0=+ia2=JK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0196AC433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 13:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEB81C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 14:02:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8F37961369
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 13:17:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F37961369
+	by mail.kernel.org (Postfix) with ESMTPS id 624BE61242
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 14:02:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 624BE61242
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109754.209475 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109768.209516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWIv8-0000Ro-Mp; Tue, 13 Apr 2021 13:17:34 +0000
+	id 1lWJcL-0004un-Pb; Tue, 13 Apr 2021 14:02:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109754.209475; Tue, 13 Apr 2021 13:17:34 +0000
+Received: by outflank-mailman (output) from mailman id 109768.209516; Tue, 13 Apr 2021 14:02:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWIv8-0000Rh-Ja; Tue, 13 Apr 2021 13:17:34 +0000
-Received: by outflank-mailman (input) for mailman id 109754;
- Tue, 13 Apr 2021 13:17:33 +0000
+	id 1lWJcL-0004ug-MX; Tue, 13 Apr 2021 14:02:13 +0000
+Received: by outflank-mailman (input) for mailman id 109768;
+ Tue, 13 Apr 2021 14:02:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UdUp=JK=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lWIv7-0000Rc-HC
- for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 13:17:33 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ <SRS0=51M0=JK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1lWJcK-0004rK-98
+ for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 14:02:12 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7cee59a6-1fc5-4bd5-a970-29e7633675e8;
- Tue, 13 Apr 2021 13:17:32 +0000 (UTC)
+ id 48c99015-3a53-41f1-8730-55d527821831;
+ Tue, 13 Apr 2021 14:02:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,236 +48,222 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7cee59a6-1fc5-4bd5-a970-29e7633675e8
+X-Inumbo-ID: 48c99015-3a53-41f1-8730-55d527821831
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618319851;
-  h=to:cc:references:from:subject:message-id:date:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=8y6Zm545iPg295ZlMAIPKP2ci/v6t9yGaJK99+2o4xg=;
-  b=Hex8cdjMZ4p8BVhfjfKtYZjb1kyTTWeZdOAhIMhQi0TA+GsTUUdpknYF
-   56Qd/xr0csrkg5z4Y1xXMAkMpSwpi3Yj/92C21gr8fbkDfL09eRnBgmVs
-   RHkIWbIli9n+WTXZ4Ig2xg0ML8BvZzXuWAqZ2PHXypjHwedHIUDYpV2Fq
-   8=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: upUcqEpx7as25A7HmHKbDt6+PmdpOOx54tmRhTC9Qi1xMDwF6tLKVk9PfaAP+A88/fuYUI6Cfa
- Drv0LjRQApx2LkyrMAaAgarfilGkVso4PFpFuxHS6a7946KWurOnShKr+LmqSuWAPa2MbCnx8H
- e3raKDf0MlEdvMdoRWZOTyY326L2y0D7ZmDg5uOmnzhLFLsXXxuF3cddWZuRKJ98xnX9jbdSwz
- CpFQh6bYyDfdGZRhmE3zHTBGRrSn054Y0VCDLkHJ+2zyaDb532OJx5Goe3TfHcdBCgFX8TZZDo
- joQ=
+  d=citrix.com; s=securemail; t=1618322529;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=OVrwr3BA9em1iIl+C3YJ3vNrkONASrz74AXCzhLJFEw=;
+  b=OPhIvVgtDGgWBs1bHMIP9Sc/ELKEsdBbPMSjvpxr5y/+rseriBVD/uX9
+   gVkCS/AxV0/48a8H6Ltji90UuO/9rWV6UygI/Z8u41hBIqx+9779HxFFr
+   kv13Oodh30zUHQMIcJR+uhRzkmVkhUWSO7Sex1BIWVqpBIk4EySLAn6Hw
+   A=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: SeCTuAeuUTjiNEw5xG0CgRsQnlCMfV0xcotneONWGIvmP/zwSIl9G0eajD6fFwGIKOStOGSvNc
+ aWpQsM6YXBerPURXrIm0E4kkHgNRVNCC56csl701RM3YFVY0RE6/DVxmWwfVx8QRNUueo2XSUk
+ Z8ov5TJLPo1jXsfuIqoUy1ayizIbVhur8uH6d2me3JIZ06D6dWQKe/bZEH83s0YC+C0wA4y4UH
+ wFG7TYPC1vwn3AO8cWO4fYY4oqa6/l+WF5SBQP6rAbITtmb4K3CzVkj8Ezcz3tBqcvkqUwhMgK
+ kEY=
 X-SBRS: 5.2
-X-MesageID: 41478845
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 42955875
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:jvLxJ6gIGudphcdPrtSYc7+h63BQXwB13DAbvn1ZSRFFG/Gwv9
- yynfgdyB//gCsQXnZlotybJKycWxrnmKJdy48XILukQU3aqHKlRbsSiLfK7h/BP2nF9uBb3b
- p9aKQWMrfNJHVzkMqS2maFOvk6xt3vys6VrMP/61socg1wcaFn6G5Ce2SmO2l7XhNPC5Z8NL
- f03Kp6jgGtc3gWcci3b0NtN4T+jubGiY78Zlo+DwMngTPksRqT9LX4HxKEty1uMA9n/LFKyw
- n4uj283IqPmbWRyhjQ12jchq4m4ufJ+594K+GnzuQQIjXooA60aIpmQK3qhkFJnMifrGwEvf
- OJjxA8P9liy365RBDInTLdnzPO/Rxry3j+xUSWiXHuyPaJOw4SOo56qq9yNj76gnBQ2O1U4e
- Zw8E+y86dzN1fmmh/w4tDZPisa7nackD4ZvsM4y0BEXZB2Us43kaUvuHl7Pb0nByzA5IUuAI
- BVfbrhzccTS1+cYnzD11MfpuCEbzA2FheCdEAIptaY5ThQhGx41EsV3qUk7w49yK4=
+IronPort-HdrOrdr: A9a23:7t9B8aCGp8u4YT7lHegptMeALOonbusQ8zAX/mhLY1h8btGYm8
+ eynP4SyB/zj3IrVGs9nM2bUZPufVr1zrQwxYUKJ7+tUE3duGWuJJx/9oeK+VHdMgXE3Kpm2a
+ 9kGpISNPTZEUV6gcHm4AOxDtYnx529/Lq1gPrFpk0NcShBQchbnmNEIyycFVB7QxQDOIEwE4
+ CS6tECiz2rf3kWacrTPAh4Y8HoodrXmJX6JSMXHhJP0njysRqEyp7fVyKZ0BAXTi9Vzd4Zn1
+ TtvgTl6syYwpeG4zDG0Wu71eU1pPLAzZ95CNWImowpLFzX+32VTaBAf5HHgzwvuuGo7z8R4a
+ nxijMtJd565X+UXkzdm2qV5yDa3Dwj62DvxDaj6BOJy6yJJ0NJN+N7iY1UaRff4UY71esMqp
+ 5j5G6Fq4FRSSrJgSWV3am4azhRikG2rXA++NRj6EB3bI12Us41kaUvuGlREJsGARvg7pEmHO
+ REHKjnlYhrWGLfQHbDsmZ1xtuwGlw1AxedW0AH/veYyj5MgRlCvgcl7f1auk1F2IM2SpFC6e
+ iBGqN0lItWRstTSa5mHu8OTea+F2Sle2OCDEuiZXDcUI0XMXPErJD6pJ8v4vuxRZAOxJwu3L
+ zcTVJxrwcJCgLTIPzL+KcO3gHGQW27Uzio4NpZ/YJFtrr1Q6euGTGfSWopj9Crr5wkc4zmcs
+ f2HKgTL+7oLGPoF4oM9Rb5QYNuJX4XV9BQlc08X36Iv8LXOqznvuHWa5/oVfjQOAdhflm6Lm
+ oIXTD1KskFxFusQGXEjB/YXG6oWkGXx+M0LIHqu8wojKQdPIxFtQYYzX6j4NuQFDFEuqsqOG
+ 93ILbtlLKHtXC7lFy4q1lBC154NAJ48b/gW3RFqUshKEXva4sOvN2ZZCR00GaYIAR8C+fbCh
+ RWqVgy2a/fFe3f+QkST/acdk6KhXoao3yHC70GnLeY2MvjcpQkSrA8WKJwEg3PPwdvmRljrV
+ pCbANsfD6dKhrezYGeyLAEDuDWcNdxxC2xJ9RPlH7ZvUKA4f00SmAjRD6oW86PiQMITz5Z72
+ cBtJM3sf6lo3KCOGE/iOM3PBlpZH6MCLxLNgiDeb5Zg6vmYg12UGeMiwGLkh1bQBuYy2wiwk
+ jaaQGEc/DCBVRQ/kpV1avn63tYXGSQdUAYUAEwjaRNUUD9/lpj2+6CYaS+l1aLYlwZ2+cHLX
+ Xuej0JOD5jwNixyT+YkDuPDm8d250rJ+DRZY5TNY376zeIEsmlhKsGF/hb8NJZL9joqPYMSv
+ /aVAmPLj/0YtlZrTC9lzIAAm1Tp3Ylm/+zh0Ggw2i8wXIlAf3dZH5hXKoWJtmA727iA9aEua
+ 8J+e4djK+VCCHWbNXD9IT8KxhkATnXqXStT+4ppYtP1JhC/IdbLt3+a3/wyHpD3B8CN8/6m0
+ MVfbRj7Nn6S/pSVv1XXxgcw0Egm9uOJnY6qwDaAucxelc2kn/QVun5lIbgmP4KCk2FqBCYAy
+ jmzwRtu9PEVTCEz7gUFuYZJnlXclE17B1Zjam/XryVLAWhbOdY+lWmdle7bb9GUaCAXZEdtA
+ xz7d3Nv+iZcUPDqU3tlAo+BqJF6GC8R8yuRCqKBO5T6tS/fW22vZHC2r/7sB7HDR2ha0oZgo
+ VZdUsfKuR74wNS87Ef42yVUaz4okUsjl1Exypo/2Sdg7Sb3A==
 X-IronPort-AV: E=Sophos;i="5.82,219,1613451600"; 
-   d="scan'208";a="41478845"
+   d="scan'208";a="42955875"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZMJcUUyQ6NsaIgHlanLpd3N5VNX1iohUmq6Q3sNfmyxQ7a17OoNTkfCA+ILGopEIZWTusottGjVGvu5OF8HdywvwOrXnrV0To6+Zw6PWjtjmpBuWIXiORLp76Mt+10fSX2wdA0J9/WlPyjrrQk88YKAStBAFkGjnFVxN1qSMBEFZ8mQca4+mb9+0Z0Jli6ENsY1dT83nQOQp52GwguoO6QEBAoJ87eOf7MP1Svmr+fT59nVvZa/BAwLf35vektt0rkwZ4Y4y7bKAfeaMxb+NdtcA7TMU3d7LT6ihnNrzosJ08TCrIg4BNTY/eXHVUmCmwAdQkwpdExzaMm66jFKq/w==
+ b=a3XokpEHaMnhaA3jpVQSpPGCz28oHwcnso4E3it17TPbnWfEDHblv6E8X4E05soRfgHwv31L2BFmgsUFzSytfOK43Yun9IPHImhhqtDxCauTodzGEi1SA5nCJ8UV9d7tdQSWJZ6aCj/YQe9bUmS47l7mH1rtp0/wcFDFLCo/59P1tuNGxLYU5Oy3bceztzWIaIS2IZzgWRM2zvYib3A6f6Lmi1219Oo163HQor46Jv9TccMW/qU+XGTblLTs8QCrlPcy47dfBEqXf0OyB7MObtndIvAhIzzY1ucyOe+kPL9Jx8pZBNA5479R+JVuR+VTGhjm+xGVh1NECS4WhnwsGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XU6SCAC8tSqQ5SZ56GRk5s8jm2BTCkOODkOEpV+B8rE=;
- b=G02R1ZJG62IiIAivvaTQ8MEUNcS8PMgufL9wcDcKIr1XCYJKTgtZU27KMg7cudMQudmMxM55k12cHkRDpUgllcRL2phpI4piNQ2NEsHjijdCbiJ0R4+cmfNsj+he2X+DLalmNGVWHjh6gKm3UbgB8kNc0dQGMh+LkBzwTkS+/EY4LhwmtjEIWrJMpDpG7ZlL5ADpCHxwBSycA6Jnsi/aF0QPoOJ/7zkX4yvKjox5CSV6mRG03OpqtUZDOU6Fgg/nMIsrezF2/5gO6tY8ptNJWMnFkwDotzl12jiIAFcmyY+KM0lSpHr7P19WPejfbvPurGgWYYsA+YUiXlv+Rtb1XQ==
+ bh=AoWJS/SFtHWRRkap7XLMIw8mpVF2QgzC+GpX7sO6F4c=;
+ b=W7edqZkYpnseA/m33je5UCCLA8cwe5dCjViWAXgE14MGUdY32u/JuXBqI4QvejzLdbA6ECAPZJmiq03TKN7P58bBULr5t4VuAhcMFxrojAj8SprSq3WXZOaaarYC/P9EYyydxd4JPUnneQf3o7ECRrsVIs7J4lle8llAppBnYrWTB9TMzjJi2RFqwLuuMCmMK1nJ2G353Es8ynAvqgBT7QuV6EY+ayFb2xWSAogoCGgszZSJN2WnbtLpnRI5NGKZq0WkAou8dp2YRXCdJpXUD6QYE6kX91Ug+5oWasiQEaoMbrxm14xwODE630cyi1G4sWhGc30+ofwdhXNGgHp9kA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XU6SCAC8tSqQ5SZ56GRk5s8jm2BTCkOODkOEpV+B8rE=;
- b=cJlcy8BIkwd1oUa3dWn/0MgjE8LLdGZf9rSau1fEhK0enWhg0pQe2nboFGTnt601YwjO6FJe9ilCSFpu8Sop+Eoqe1FSCIfX7AmSq+gBzfzh6A76qTKZRUR63ihk2emVDqsLIgPh/BgkJV/JQ7xhWJxA+0gqyZguC1OPpIS6uho=
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <0753c049-9572-c12a-c74f-7e2fac3f5a24@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: x86: memset() / clear_page() / page scrubbing
-Message-ID: <21c00073-86a8-a040-fa40-e99e2fb434eb@citrix.com>
-Date: Tue, 13 Apr 2021 14:17:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-In-Reply-To: <0753c049-9572-c12a-c74f-7e2fac3f5a24@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-GB
-X-ClientProxiedBy: LO2P265CA0076.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:8::16) To BYAPR03MB3623.namprd03.prod.outlook.com
- (2603:10b6:a02:aa::12)
+ bh=AoWJS/SFtHWRRkap7XLMIw8mpVF2QgzC+GpX7sO6F4c=;
+ b=sS7038EEzn81OYlq39E8SeFvBUnN5DNNw2ZRy4VvK9kUoB7OhJg4U7ZGcfI+93WAecHIrKI3pZCYB13Guw5tDdv5FF2WnXRNbUax6dvgoxahueGI9855/DlKY4cl0r8fNPbZDs/5fOukJjGiYkuiy5l8DPGbNDlwDabBnty1l3w=
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau Monne
+	<roger.pau@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
+	<wl@xen.org>, Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2 02/21] libs/guest: rename xc_get_cpu_policy_size to xc_cpu_policy_get_size
+Date: Tue, 13 Apr 2021 16:01:20 +0200
+Message-ID: <20210413140140.73690-3-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.30.1
+In-Reply-To: <20210413140140.73690-1-roger.pau@citrix.com>
+References: <20210413140140.73690-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MR2P264CA0146.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:1::9)
+ To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3d19fae2-0666-4031-e1fb-08d8fe7e7aed
-X-MS-TrafficTypeDiagnostic: SJ0PR03MB5837:
+X-MS-Office365-Filtering-Correlation-Id: 43a425bd-6181-4761-2d64-08d8fe84b9ab
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6096:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <SJ0PR03MB5837A56740CFA04A2405F799BA4F9@SJ0PR03MB5837.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-Microsoft-Antispam-PRVS: <DM4PR03MB609607FAD102A90B04FE6E848F4F9@DM4PR03MB6096.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:626;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 3SXxVZJxbgiZnGBmBREeObYrOu7Jjw7EUYziwodJICZvh18uUDiLOz+hMthCmxdjAHCNSdQJa7wg/gqEtCNSqrLQpiOZDXxHYbqaPpqHkWvMU3ONUbz5igynfz7dq8CiqP4jmgfPRldXQt2re+tXtY15CmwYH8OIsCxLHPlM3g/+SgRxOuDXowKVxM7Vcu10UT0RRXtYFI8yHtd9G0iZujJkYN0rlHxBSq6udDDMazo8oFjZibHd+ecMOxsdDh1uAS4LVcK6rEmd1y+DcGGPy2Lbiz8TTAvPRflwkzwqDDg71VhwqKt9sAZ3RthKasVOZOKE3uFpI0OZOK5IcjLbDepgSCU/YtbEC2LCz6rhJCarnoKjkfm9dWGCtBzdUrqgDzfs8V+HcE/q4nYFlWyGtxqwWCaj32he/MFCih2pFrXRuoXSb0FqrLVDUETmyE6yA54AylLu6DI087emz80wMuuRwFKzOwbDhq/w5GKhoscQToYMq6WBfPwHsyK2VfRuSkP1lATi1EEgdRFFWf2Z4omzKUWAHFg/GFk5Ux+kHNr2BSjueS5N7VqRTQMdW5HewRif6zWzONSbCvcuej7rUf66uxVY3p7Wac9VaddNIeDIIep/XqbejMJhQLF9Y5OezZP2h+xIuvNR3xzB+pMErmFetF3vkJJXZ6f4gCq1yHO77hbz2vQAhIPsNu5Vcoxz
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(396003)(136003)(376002)(366004)(2616005)(107886003)(4326008)(956004)(66556008)(5660300002)(186003)(66476007)(6486002)(2906002)(86362001)(66946007)(38100700002)(478600001)(83380400001)(26005)(110136005)(316002)(53546011)(8936002)(8676002)(6666004)(16576012)(31696002)(36756003)(16526019)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?TFRwVU4yeVJoME9KWURtUVo4akRvN2Z5bGtya2cxUnhRTHVMcGdDbzFZTTdK?=
- =?utf-8?B?L1lacEZkQ0YzaU5LQVBTUDMzR05vaXQyZXlLOXJQMFBMSTZhMS9PYWJTL0hT?=
- =?utf-8?B?b2dMYjgwcG5ISHJxaCs0VG5RY0FFWHVqZ2FCS2xnL0NWem85R01JMTJCaWl2?=
- =?utf-8?B?UXJYWWc0RnpCeVVwa1I3SkNTRkUzSkJhOWdrQzd4ZEVrR1ErU2FvemFPWFVa?=
- =?utf-8?B?MXNBNitheVZJQnNjSjZCNGFtYmRDSWR4NDVXblRVb2s1QjQwaVVnSVRrVTly?=
- =?utf-8?B?WTY1bHRSZk1leXUzR2RDVS9KM05HUGoyNkZ0R2NBZEV4bXFJM3h4dVU5N1VE?=
- =?utf-8?B?akpBaTFySXJ0OHlVbVpUMFZUd1VpOW8xMTRic2hkOWczKytIcVpKRVNYYUcv?=
- =?utf-8?B?R0FwY3pudVhEZXhDblNJYzZmb2dVVVU1dFJDR215SVRQT0ExbXMrZTZOZzBE?=
- =?utf-8?B?UFV4NHFOVWhZOG5hVHlCMzVWNEs5S1JzU1pmc0JwWkVtS1o1NnlHSmNnS1kx?=
- =?utf-8?B?dlI2S3RzRFlaVk05eDZqdTllK1hEczRXMC83TkgxTitlVWVaSm9RVWNHSHYv?=
- =?utf-8?B?cVByeG1PNmViVVJjS0pFM1JnZnFFcXdFOFRJMDVYdG05b21XbUJrdlZjZEVr?=
- =?utf-8?B?MG9jTFRPOXdoRGJyYnVCckozVll4OE9mK01sYys1ZVNsL01qQXdKNkgrb1U4?=
- =?utf-8?B?WUFTWkNlZ1Yrcjc2RWoyNnh2cmxzQnN6M0EyZ0FVRGI0MlEyYU0xQjlYaDAw?=
- =?utf-8?B?SXczT2ZEVVpnbFRQdEl5SkZObTJFWXhDZ0ZpdHQ4ODRkYUo4L0JKU1IwM2kr?=
- =?utf-8?B?cVZac2lPNlNhcEFWb1ZKOUh4dWI1TlVLTzNTenBYVXZVRDZXK3RKUm9Nc1ZF?=
- =?utf-8?B?NGNLWHYwSW9NdjdWdnkxKzREaVBKM1JvbHBUMnc5YTUveElROUl3WGlQeGps?=
- =?utf-8?B?eWJvSlYwcG10QTNUQWwybHZmeUE1YnRmajVoNGE3TnNZUE0zMzZJYnhyOFY5?=
- =?utf-8?B?RExYa2UyS2pMS25TanhEdWRqZUwwYmNEejNtbEk1aHgrWXVoY1pOcVVoa1JT?=
- =?utf-8?B?bGhhYlM0UzkwNGE4d2ljY3FZNktwS2QwNUNVVHZkWFBBWDdKV3ZYajZ6OXVK?=
- =?utf-8?B?L2lpSTkxNFBlejhtVExlYlJMVzBpbWVvbFJqQmRaeW92Qm4vNlpNSnNPcTJ0?=
- =?utf-8?B?NUN3N2svaWczcEg1SnE4RjdiV2d3eVhkRE1EU3NQdlRncFlrRHdDMnRHdzVr?=
- =?utf-8?B?a25TeVVUZncvVDRiVW1CSWhoQUtGZnNSTlgva1FhWjcxN292ZzdjYlVxNUYv?=
- =?utf-8?B?cnVEckZreGhHUlBGeUZrenNlaHE3VnV5ZUd4RSt4dWpjV05WNGcyR2xPeDd0?=
- =?utf-8?B?YTRxNXhPU0llQ3kvcEJqNjBJaVZwRVJPYitSbXR2SVpkTFJ1bDdQTlJMVmti?=
- =?utf-8?B?cmVzT2c4dzB6d2VwcW9KQlI5UTRqZytkckN1RGtJT0o0Q1VwOGo3TUZ2TGNF?=
- =?utf-8?B?Rlc2VzdIdVBxbFdEWTB4VE11QnJ5NWdCdmY1dWY2M3FzQU5BMGl0V1NoYkEr?=
- =?utf-8?B?T3U1V3dERWw0OXZPajdkWDBoUkJ0bTdDaXlXKzVuc29IekpXcExIYU8rWlNZ?=
- =?utf-8?B?djhuN1VQQjUwb0pGUDRNZGlGUkU0U0RiKzNWQWdINFIxK2V4WGh2b0V0NkhW?=
- =?utf-8?B?dzAvcUpRZzdnc28wUCt3RjNRWElPZU9NVTU0OGtBWG84RTAvYkk2OUoxdTNJ?=
- =?utf-8?Q?u3LQEiq0oLHBQFLy0zx1UNMAa8eUR62fa5+B/03?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d19fae2-0666-4031-e1fb-08d8fe7e7aed
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-Microsoft-Antispam-Message-Info: s2asjK6QgMbZDc/csizUOK9m+dMKrGmxI/EyH2CXZWt35m93mly94Lgt1SUd5ueffb+p8ckGbcgCYEedtkYpjQKN1KmuAgEGtBbEuekmlsIa411aRJ19kb7g511Nv8l+CyNZrHi375ZZoykgc9fN1hbqSuHXWYY2jfK10Csf58vqdDClo8ki9oRhrn5p8eE79Knlxeuf0htt87LUi1gIurpPOrL3ujZ3SpBmd5b9djFpImb5O36ZqdkZLxIO4I5Wly9oo/8Yuf/c+7OfslAgdol5PUCdpyZ9RAtzxV+f16AZy3brNTpPy1T+HHpJtIy4qvfa1n7AOoNVcIjH5U1ZcGW8zfdPxQHKZEXjXJV44YE2aUadf9X0ldZwOrRKkbegvBMvWdA95QFhMKUayu1fO8Qzy2Zs298/admYVq5IdLUYgjT9itjrwtgmUQPzd36dCi+QcqxMywUPssj8NFum897/9dEwH8InzF4G9mfrtKZOqywyyiDTjHT4UCsvQFqQ1VK+DxrgLkRmbqeCXIRDrRnsRzZAA0YMrjkrx3xyRa+q+tslf9m3JkVNobipMI2bLT60+oNeo69cskPQdKnp4p0KGBiZbfJsSuUL4WmQK8Q=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(376002)(136003)(39850400004)(396003)(346002)(26005)(6916009)(86362001)(36756003)(83380400001)(186003)(8676002)(6666004)(16526019)(66476007)(66556008)(54906003)(2616005)(6496006)(5660300002)(956004)(38100700002)(478600001)(1076003)(4326008)(2906002)(8936002)(6486002)(316002)(66946007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?MlBxYm5nOXpDZHlER3NBS1dCQm9HTmFOdWM3RTNTS0Y1cWE1d0d0TitCTnJi?=
+ =?utf-8?B?VzlOWDNhRmNWb3Ixc3lmem5oZmxwR3RQTU1CZVJiamVnSXNpS1VETEdtYW93?=
+ =?utf-8?B?TVllT1hzVDJPUXlhZ1JVM3UxQ0tSb2plSDBlbnRaSmVpaDhzZ2FiYWVORGRw?=
+ =?utf-8?B?UC94YXpIMEFybXJRNHFNS01pTWdWbHBWMmpYbHY3UHJKYU5YTWh4QlY0Y2gv?=
+ =?utf-8?B?MGZSUlkxa3VMclRoSDh1eVJnc0pDMXpibEdoVEVQZzNpd3RtRGlPYW1wTzFI?=
+ =?utf-8?B?Nkh3eDM5a3hxalcvck44YmZtQ0s2Yi9NRWFZeWpUemt2SkNraWlVMzJaa3Jy?=
+ =?utf-8?B?R1Zjb2laeEJKaW9FUFpSSVF6eGZCRnVjU3p5ay9icDJHTzRNeEIwWE8vcWsx?=
+ =?utf-8?B?aSt2MkpPRDJYRzFPSnBybkFtM0ZuS0ZQRnRXd1RRb2hZeGVraWJVOTFmNTFl?=
+ =?utf-8?B?cVhITllrYzdMa1ZqNm5rVjB6MTV5Q3NjTk9xbHcwWUQvUHpLeWxsWjZZT0ZS?=
+ =?utf-8?B?dWc4NjY2TXlONFYvbitLWkVlRGkwZWNDb0g4d0RhbmQySWdpVGZEMktVZzRF?=
+ =?utf-8?B?THlIMkw0ZkZJem9VZUI1ZUVvQUFpYVdpYlFQQlRUU2M5ejBiT1JrQ0JtUmxX?=
+ =?utf-8?B?NnVsR3djWFR3SVY2QzRPN3lQMTNtWWE0THJ0S0JZbjltdWFENjJYSHovdndZ?=
+ =?utf-8?B?eFBJZmg0WGRKbEY5Vk1vNVZkK2l2bWdxVCtzNnV3emRXN3JBUDdsaEIrc0Yy?=
+ =?utf-8?B?cTNZOHhOZHdJZGU2ajZGa1IrblVCblM2NXFKRE0yQmdQdFZpOXVmYndUUVEw?=
+ =?utf-8?B?M0dKQjl3SVQzWWNweVpzOXN1eFlhKzdzSytBU3lFSnk0TVFLTVcrcHhQOEhu?=
+ =?utf-8?B?OWZXM3RVQkV1SXNxNEhaQ2ZHc1J3SXE4OUdkcnhDMEdoY01zYXZINld5dGtC?=
+ =?utf-8?B?ZnJROVEySWNGSlFCZER6T0JhLzRFZUM3OGVEWlhYYXU1ZU1WN3Bqamo5VytQ?=
+ =?utf-8?B?Z3JsRHlHMTZTSGhna0VZdm5TWXJ6THRCblVUOVd3Y0Y4dXNEakJaRi9KSFcy?=
+ =?utf-8?B?cFNaRE9FbXBXSFBBY0FML0JYVVI2SVU1ajNPRnlwcU1rdXJOZG5uYWFpRmQ1?=
+ =?utf-8?B?ZmZqVytUNW9XeUlYYmpwU1FiTHJDWGsxTWcwTFBYR1FjVW5nRlV6WmhyRnVx?=
+ =?utf-8?B?SlFya0ZFOU1LUzdEeWR5TWFMM3lVQ3B3cm1NTTBoSm5sYmlWYUMwZ3lza011?=
+ =?utf-8?B?MGZnVlFHb0hxdUVuZW9vaW5WU0d6YXJ2MzVFNUgyUG5JN2NzUHJSVWdJNU0x?=
+ =?utf-8?B?dGlsNG5ITldPQ2hLZTZ4WDhFYTRtcjNNaTRZK08zMzZ5dkdSUXk0VWZlVmVS?=
+ =?utf-8?B?RTZGb0NmRHlzYUxyR2xya09TVDJsRVorWkdLUFFWeXFLbUN0eG0rOGZhc25z?=
+ =?utf-8?B?RXl3SUFmbi9sYW9BMDlxdlFoREg4NWxQV2hLdnljWHdQQ2lPT0hCTkluSDJu?=
+ =?utf-8?B?SHlwbFhiMmpCTkxvTVAwUEx2eHpnbnlRd0lhWG1MRnZyQXNIN3N2T1BQVmdZ?=
+ =?utf-8?B?b3JuVzBjRnhFQ1JRN0NCR04yNFNpM2k5N055L09nbkRtQTlIM0V1dVdYQk90?=
+ =?utf-8?B?NUIxNjZiZWEzTGVUNzdVQVA4SDBHK005Tmh2cG16amdlelZvOTZydXFMdVgy?=
+ =?utf-8?B?RDVGR1dLVDNPTnVnMGV0bE1PTWhOcHAwZmwycC93V0I2VXdsc3k5c0FqUkFM?=
+ =?utf-8?Q?Qha/tAjRnEuhTaH0p+54XOg13eKOSKbXgS0Xt+S?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43a425bd-6181-4761-2d64-08d8fe84b9ab
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2021 13:17:25.6538
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2021 14:02:07.9127
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9Ok3dRUIk/rYPl1+ak1pTo3/p92n6bwChBvNZZrO8diAhqxZTErv7DxmDHkJNEFJu3a8dufCX7RBvCs5ED1+HowcU6BLPoSqHQIG0SFprf8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5837
+X-MS-Exchange-CrossTenant-UserPrincipalName: g2Fzh24Z/ay5DGmpo/3r0qkbvzyuHJJGNEwtO65VlejzaVUcXhDt6EfAGjOpMgprWOKf0WCn147TOExvFj0hNQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6096
 X-OriginatorOrg: citrix.com
 
-On 08/04/2021 14:58, Jan Beulich wrote:
-> All,
->
-> since over the years we've been repeatedly talking of changing the
-> implementation of these fundamental functions, I've taken some time
-> to do some measurements (just for possible clear_page() alternatives
-> to keep things manageable). I'm not sure I want to spend as much time
-> subsequently on memcpy() / copy_page() (or more, because there are
-> yet more combinations of arguments to consider), so for the moment I
-> think the route we're going to pick here is going to more or less
-> also apply to those.
->
-> The present copy_page() is the way it is because of the desire to
-> avoid disturbing the cache. The effect of REP STOS on the L1 cache
-> (compared to the present use of MOVNTI) is more or less noticable on
-> all hardware, and at least on Intel hardware more noticable when the
-> cache starts out clean. For L2 the results are more mixed when
-> comparing cache-clean and cache-filled cases, but the difference
-> between MOVNTI and REP STOS remains or (at least on Zen2 and older
-> Intel hardware) becomes more prominent.
->
-> Otoh REP STOS, as was to be expected, in most cases has meaningfully
-> lower latency than MOVNTI.
->
-> Because I was curious I also included AVX (32-byte stores), AVX512
-> (64-byte stores), and AMD's CLZERO in my testing. While AVX is a
-> clear win except on the vendors' first generations implementing it
-> (but I've left out any playing with CR0.TS, which is what I expect
-> would take this out as an option), AVX512 isn't on Skylake (perhaps
-> newer hardware does better). CLZERO has slightly higher impact on
-> L1 than MOVNTI, but lower than REP STOS. Its latency is between
-> both when the caches are warm, and better than both when the caches
-> are cold.
->
-> Therefore I think that we want to distinguish page clearing (where
-> we care about latency) from (background) page scrubbing (where I
-> think the goal ought to be to avoid disturbing the caches). That
-> would make it
-> - REP STOS{L,Q} for clear_page() (perhaps also to be used for
->   synchronous scrubbing),
-> - MOVNTI for scrub_page() (when done from idle context), unless
->   CLZERO is available.
-> Whether in addition we should take into consideration activity of
-> other (logical) CPUs sharing caches I don't know - this feels like
-> it could get complex pretty quickly.
->
-> For memset() we already simply use REP STOSB. I don't see a strong
-> need to change that, but it may be worth to consider bringing it
-> closer to memcpy() - try to do the main chunk with REP STOS{L,Q}.
-> They perform somewhat better in a number of cases (including when
-> ERMS is advertised, i.e. on my Haswell and Skylake, which isn't
-> what I would have expected). We may want to put the whole thing in
-> a .S file though, seeing that the C function right now consists of
-> little more than an asm().
->
-> For memcpy() I'm inclined to suggest that we simply use REP MOVSB
-> on ERMS hardware, and stay with what we have everywhere else.
->
-> copy_page() (or really copy_domain_page()) doesn't have many uses,
-> so I'm not sure how worthwhile it is to do much optimization there.
-> It might be an option to simply expand it to memcpy(), like Arm
-> does.
->
-> Looking forward, on CPUs having "Fast Short REP CMPSB/SCASB" we
-> may want to figure out whether using these for strlen(), strcmp(),
-> strchr(), memchr(), and/or memcmp() would be a win.
->
-> Thoughts anyone, before I start creating actual patches?
+Preparatory change to introduce a new set of xc_cpu_policy_* functions
+that will replace the current CPUID/MSR helpers.
 
-Do you have actual numbers from these experiments?=C2=A0 I've seen your pat=
-ch
-from the thread, but at a minimum its missing some hunks adding new
-CPUID bits.=C2=A0 I do worry however whether the testing is likely to be
-realistic for non-idle scenarios.
+No functional change intended.
 
-It is very little surprise that AVX-512 on Skylake is poor.=C2=A0 The
-frequency hit from using %zmm is staggering.=C2=A0 IceLake is expected to b=
-e
-better, but almost certainly won't exceed REP MOVSB, which is optimised
-in microcode for the data width of the CPU.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ tools/include/xenctrl.h             | 2 +-
+ tools/libs/guest/xg_cpuid_x86.c     | 6 +++---
+ tools/libs/guest/xg_sr_common_x86.c | 2 +-
+ tools/misc/xen-cpuid.c              | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-For memset(), please don't move in the direction of memcpy().=C2=A0 memcpy(=
-)
-is problematic because the common case is likely to be a multiple of 8
-bytes, meaning that we feed 0 into the REP MOVSB, and this a hit wanting
-avoiding.=C2=A0 The "Fast Zero length $FOO" bits on future parts indicate
-when passing %ecx=3D0 is likely to be faster than branching around the
-invocation.
-
-With ERMS/etc, our logic should be a REP MOVSB/STOSB only, without any
-cleverness about larger word sizes.=C2=A0 The Linux forms do this fairly we=
-ll
-already, and probably better than Xen, although there might be some room
-for improvement IMO.
-
-It is worth nothing that we have extra variations of memset/memcpy where
-__builtin_memcpy() gets expanded inline, and the result is a
-compiler-chosen sequence, and doesn't hit any of our optimised
-sequences.=C2=A0 I'm not sure what to do about this, because there is surel=
-y
-a larger win from the cases which can be turned into a single mov, or an
-elided store/copy, than using a potentially inefficient sequence in the
-rare cases.=C2=A0 Maybe there is room for a fine-tuning option to say "just
-call memset() if you're going to expand it inline".
-
-
-For all set/copy operations, whether you want non-temporal or not
-depends on when/where the lines are next going to be consumed.=C2=A0 Page
-scrubbing in idle context is the only example I can think of where we
-aren't plausibly going to consume the destination imminently.=C2=A0 Even
-clear/copy page in a hypercall doesn't want to be non-temporal, because
-chances are good that the vcpu is going to touch the page on return.
-
-~Andrew
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 318920166c5..e91ff92b9b1 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -2594,7 +2594,7 @@ int xc_get_cpu_levelling_caps(xc_interface *xch, uint32_t *caps);
+ int xc_get_cpu_featureset(xc_interface *xch, uint32_t index,
+                           uint32_t *nr_features, uint32_t *featureset);
+ 
+-int xc_get_cpu_policy_size(xc_interface *xch, uint32_t *nr_leaves,
++int xc_cpu_policy_get_size(xc_interface *xch, uint32_t *nr_leaves,
+                            uint32_t *nr_msrs);
+ int xc_get_system_cpu_policy(xc_interface *xch, uint32_t index,
+                              uint32_t *nr_leaves, xen_cpuid_leaf_t *leaves,
+diff --git a/tools/libs/guest/xg_cpuid_x86.c b/tools/libs/guest/xg_cpuid_x86.c
+index 5ea69ad3d51..cc5cae95725 100644
+--- a/tools/libs/guest/xg_cpuid_x86.c
++++ b/tools/libs/guest/xg_cpuid_x86.c
+@@ -109,7 +109,7 @@ const uint32_t *xc_get_static_cpu_featuremask(
+     return masks[mask];
+ }
+ 
+-int xc_get_cpu_policy_size(xc_interface *xch, uint32_t *nr_leaves,
++int xc_cpu_policy_get_size(xc_interface *xch, uint32_t *nr_leaves,
+                            uint32_t *nr_msrs)
+ {
+     struct xen_sysctl sysctl = {};
+@@ -302,7 +302,7 @@ static int xc_cpuid_xend_policy(
+         goto fail;
+     }
+ 
+-    rc = xc_get_cpu_policy_size(xch, &nr_leaves, &nr_msrs);
++    rc = xc_cpu_policy_get_size(xch, &nr_leaves, &nr_msrs);
+     if ( rc )
+     {
+         PERROR("Failed to obtain policy info size");
+@@ -448,7 +448,7 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid, bool restore,
+         goto out;
+     }
+ 
+-    rc = xc_get_cpu_policy_size(xch, &nr_leaves, &nr_msrs);
++    rc = xc_cpu_policy_get_size(xch, &nr_leaves, &nr_msrs);
+     if ( rc )
+     {
+         PERROR("Failed to obtain policy info size");
+diff --git a/tools/libs/guest/xg_sr_common_x86.c b/tools/libs/guest/xg_sr_common_x86.c
+index 3168c5485fd..4982519e055 100644
+--- a/tools/libs/guest/xg_sr_common_x86.c
++++ b/tools/libs/guest/xg_sr_common_x86.c
+@@ -50,7 +50,7 @@ int write_x86_cpu_policy_records(struct xc_sr_context *ctx)
+     uint32_t nr_leaves = 0, nr_msrs = 0;
+     int rc;
+ 
+-    if ( xc_get_cpu_policy_size(xch, &nr_leaves, &nr_msrs) < 0 )
++    if ( xc_cpu_policy_get_size(xch, &nr_leaves, &nr_msrs) < 0 )
+     {
+         PERROR("Unable to get CPU Policy size");
+         return -1;
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index 2d04162d8d8..52596c08c90 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -462,7 +462,7 @@ int main(int argc, char **argv)
+         if ( !xch )
+             err(1, "xc_interface_open");
+ 
+-        if ( xc_get_cpu_policy_size(xch, &max_leaves, &max_msrs) )
++        if ( xc_cpu_policy_get_size(xch, &max_leaves, &max_msrs) )
+             err(1, "xc_get_cpu_policy_size(...)");
+         if ( domid == -1 )
+             printf("Xen reports there are maximum %u leaves and %u MSRs\n",
+-- 
+2.30.1
 
 
