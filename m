@@ -2,45 +2,47 @@ Return-Path: <SRS0=+ia2=JK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39A3CC433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 09:42:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14887C433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 10:00:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EC1F86121E
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 09:42:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EC1F86121E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id C2C0F613B2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Apr 2021 10:00:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C2C0F613B2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.109615.209253 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.109622.209280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWFYx-0005JR-56; Tue, 13 Apr 2021 09:42:27 +0000
+	id 1lWFpk-0006S1-1v; Tue, 13 Apr 2021 09:59:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 109615.209253; Tue, 13 Apr 2021 09:42:27 +0000
+Received: by outflank-mailman (output) from mailman id 109622.209280; Tue, 13 Apr 2021 09:59:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWFYx-0005JK-1P; Tue, 13 Apr 2021 09:42:27 +0000
-Received: by outflank-mailman (input) for mailman id 109615;
- Tue, 13 Apr 2021 09:42:26 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lWFYw-0005JF-1B
- for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 09:42:26 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lWFYv-00009Q-4L; Tue, 13 Apr 2021 09:42:25 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lWFYu-0002Bz-SW; Tue, 13 Apr 2021 09:42:25 +0000
+	id 1lWFpj-0006Rr-V6; Tue, 13 Apr 2021 09:59:47 +0000
+Received: by outflank-mailman (input) for mailman id 109622;
+ Tue, 13 Apr 2021 09:59:47 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=RIKl=JK=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
+ id 1lWFpj-0006Rf-J7
+ for xen-devel@lists.xenproject.org; Tue, 13 Apr 2021 09:59:47 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 94ed2a37-8469-46b6-aca4-9833297b4b1a;
+ Tue, 13 Apr 2021 09:59:45 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 82773106F;
+ Tue, 13 Apr 2021 02:59:45 -0700 (PDT)
+Received: from [10.57.30.107] (unknown [10.57.30.107])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6D0EB3F73B;
+ Tue, 13 Apr 2021 02:59:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,88 +54,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=/7xHAjHttr8A85YaYdHQxaP6UMSrn9K3+UkEAXmybXM=; b=uvJbJzHaiT7ta2hOGBVMh9s6X3
-	0vBGCILMlwFrN0HktHrw6LJzpiNikygmAKbLPNpsj/AsMJHRNAYUFg0qgSnlKw5yNH0eLijKwx6Wd
-	HLs/NudTwVTZgYLUn1xEt4usO/ZfSodKXftb/Lc/cAhZI1hwItolKoit5Hv6s+0dmPQc=;
+X-Inumbo-ID: 94ed2a37-8469-46b6-aca4-9833297b4b1a
 Subject: Re: [PATCH] Remove support for ThumbEE
-To: Michal Orzel <michal.orzel@arm.com>, xen-devel@lists.xenproject.org
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, bertrand.marquis@arm.com,
  wei.chen@arm.com
 References: <20210413082447.30313-1-michal.orzel@arm.com>
  <1c3d1c69-976c-6626-74e7-ded112f6ed03@xen.org>
  <83218c74-3d71-6165-31a3-1f6c77b95f94@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <693507bd-5640-dd2a-3e37-9f8ea7da1a53@xen.org>
-Date: Tue, 13 Apr 2021 10:42:23 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.9.0
+ <693507bd-5640-dd2a-3e37-9f8ea7da1a53@xen.org>
+From: Michal Orzel <michal.orzel@arm.com>
+Message-ID: <616b27e4-8882-d577-188d-0a183c94bc52@arm.com>
+Date: Tue, 13 Apr 2021 11:59:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <83218c74-3d71-6165-31a3-1f6c77b95f94@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+In-Reply-To: <693507bd-5640-dd2a-3e37-9f8ea7da1a53@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 
 
-On 13/04/2021 10:32, Michal Orzel wrote:
-> Hi Julien,
+On 13.04.2021 11:42, Julien Grall wrote:
 > 
-> On 13.04.2021 11:07, Julien Grall wrote:
->> Hi Michal,
+> 
+> On 13/04/2021 10:32, Michal Orzel wrote:
+>> Hi Julien,
 >>
->> On 13/04/2021 09:24, Michal Orzel wrote:
->>> ThumbEE(T32EE) was introduced in ARMv7 and removed in ARMv8.
->>> In 2011 ARM deprecated any use of the ThumbEE instruction set.
->>
->> This doesn't mean this is not present in any CPU. In fact, in the same section (see A2.10 in ARM DDI 0406C.d):
->>
->> "ThumbEE is both the name of the instruction set and the name of the extension that provides support for that
->> instruction set. The ThumbEE Extension is:
->>    - Required in implementations of the ARMv7-A profile.
->>    - Optional in implementations of the ARMv7-R profile.
->> "
->>
+>> On 13.04.2021 11:07, Julien Grall wrote:
+>>> Hi Michal,
 >>>
->>> This feature is untested and as per my understanding
->>> there are no reported users for it. >
->>> Remove all the bits related to it.
+>>> On 13/04/2021 09:24, Michal Orzel wrote:
+>>>> ThumbEE(T32EE) was introduced in ARMv7 and removed in ARMv8.
+>>>> In 2011 ARM deprecated any use of the ThumbEE instruction set.
 >>>
->>> Signed-off-by: Michal Orzel <michal.orzel@arm.com> > ---
->>>    xen/arch/arm/cpufeature.c        |  3 +++
->>>    xen/arch/arm/domain.c            | 12 ------------
->>>    xen/arch/arm/setup.c             |  3 +--
->>>    xen/include/asm-arm/cpregs.h     |  6 ------
->>>    xen/include/asm-arm/cpufeature.h |  1 -
->>>    xen/include/asm-arm/domain.h     |  1 -
->>>    6 files changed, 4 insertions(+), 22 deletions(-)
+>>> This doesn't mean this is not present in any CPU. In fact, in the same section (see A2.10 in ARM DDI 0406C.d):
 >>>
->>> diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
->>> index 1d88783809..82265a72f4 100644
->>> --- a/xen/arch/arm/cpufeature.c
->>> +++ b/xen/arch/arm/cpufeature.c
->>> @@ -209,6 +209,9 @@ static int __init create_guest_cpuinfo(void)
->>>        guest_cpuinfo.pfr32.ras = 0;
->>>        guest_cpuinfo.pfr32.ras_frac = 0;
->>>    +    /* Hide ThumbEE support */
->>> +    guest_cpuinfo.pfr32.thumbee = 0;
->>
->> Even if you hide the feature from the guest, the registers are still accessible. So you are not removing support but just opening a potential security hole as the registers now gets shared...
->>
->> Looking at the spec, it doesn't look like it is possible to trap them.
-> Looking at the spec for ARMv7A/R:
-> https://developer.arm.com/documentation/ddi0406/c/System-Level-Architecture/System-Control-Registers-in-a-VMSA-implementation/VMSA-System-control-registers-descriptions--in-register-order/HSTR--Hyp-System-Trap-Register--Virtualization-Extensions
-> we can trap Thumbee operations.
-> This means that we will not open the security hole.
+>>> "ThumbEE is both the name of the instruction set and the name of the extension that provides support for that
+>>> instruction set. The ThumbEE Extension is:
+>>>    - Required in implementations of the ARMv7-A profile.
+>>>    - Optional in implementations of the ARMv7-R profile.
+>>> "
+>>>
+>>>>
+>>>> This feature is untested and as per my understanding
+>>>> there are no reported users for it. >
+>>>> Remove all the bits related to it.
+>>>>
+>>>> Signed-off-by: Michal Orzel <michal.orzel@arm.com> > ---
+>>>>    xen/arch/arm/cpufeature.c        |  3 +++
+>>>>    xen/arch/arm/domain.c            | 12 ------------
+>>>>    xen/arch/arm/setup.c             |  3 +--
+>>>>    xen/include/asm-arm/cpregs.h     |  6 ------
+>>>>    xen/include/asm-arm/cpufeature.h |  1 -
+>>>>    xen/include/asm-arm/domain.h     |  1 -
+>>>>    6 files changed, 4 insertions(+), 22 deletions(-)
+>>>>
+>>>> diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
+>>>> index 1d88783809..82265a72f4 100644
+>>>> --- a/xen/arch/arm/cpufeature.c
+>>>> +++ b/xen/arch/arm/cpufeature.c
+>>>> @@ -209,6 +209,9 @@ static int __init create_guest_cpuinfo(void)
+>>>>        guest_cpuinfo.pfr32.ras = 0;
+>>>>        guest_cpuinfo.pfr32.ras_frac = 0;
+>>>>    +    /* Hide ThumbEE support */
+>>>> +    guest_cpuinfo.pfr32.thumbee = 0;
+>>>
+>>> Even if you hide the feature from the guest, the registers are still accessible. So you are not removing support but just opening a potential security hole as the registers now gets shared...
+>>>
+>>> Looking at the spec, it doesn't look like it is possible to trap them.
+>> Looking at the spec for ARMv7A/R:
+>> https://developer.arm.com/documentation/ddi0406/c/System-Level-Architecture/System-Control-Registers-in-a-VMSA-implementation/VMSA-System-control-registers-descriptions--in-register-order/HSTR--Hyp-System-Trap-Register--Virtualization-Extensions
+>> we can trap Thumbee operations.
+>> This means that we will not open the security hole.
+> 
+> That's for pointing that out. However, I am not still not sure why you want to drop the code. Yes this is technically untested, but:
+>   1) The change is very small
+>   2) There are CPU out there supporting it (it is mandated after all).
+> 
+I wanted to drop the support for thumbee due to the following reasons:
+-it is untested
+-it is deprecated
+-no reported users for this feature
+-KVM did that
 
-That's for pointing that out. However, I am not still not sure why you 
-want to drop the code. Yes this is technically untested, but:
-   1) The change is very small
-   2) There are CPU out there supporting it (it is mandated after all).
-
--- 
-Julien Grall
+If you think we should not do this, then I am ok to abandon this patch.
 
