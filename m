@@ -2,45 +2,47 @@ Return-Path: <SRS0=ZRtW=JL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,UPPERCASE_50_75,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6882C433ED
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 11:41:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE4EAC433B4
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 11:59:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7F8B961154
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 11:41:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7F8B961154
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8D83261132
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 11:59:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D83261132
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.110532.210978 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.110540.210991 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWdtn-0000Rk-RO; Wed, 14 Apr 2021 11:41:35 +0000
+	id 1lWeAU-0001fL-9G; Wed, 14 Apr 2021 11:58:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 110532.210978; Wed, 14 Apr 2021 11:41:35 +0000
+Received: by outflank-mailman (output) from mailman id 110540.210991; Wed, 14 Apr 2021 11:58:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWdtn-0000Rd-OQ; Wed, 14 Apr 2021 11:41:35 +0000
-Received: by outflank-mailman (input) for mailman id 110532;
- Wed, 14 Apr 2021 11:41:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=WBRZ=JL=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lWdtn-0000RY-52
- for xen-devel@lists.xenproject.org; Wed, 14 Apr 2021 11:41:35 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 521518c2-1467-43ce-a3d2-c023d0a525e3;
- Wed, 14 Apr 2021 11:41:33 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 99E85AF0F;
- Wed, 14 Apr 2021 11:41:32 +0000 (UTC)
+	id 1lWeAU-0001fE-6P; Wed, 14 Apr 2021 11:58:50 +0000
+Received: by outflank-mailman (input) for mailman id 110540;
+ Wed, 14 Apr 2021 11:58:49 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eQnP=JL=intel.com=chao.gao@srs-us1.protection.inumbo.net>)
+ id 1lWeAT-0001f9-7F
+ for xen-devel@lists.xenproject.org; Wed, 14 Apr 2021 11:58:49 +0000
+Received: from mga05.intel.com (unknown [192.55.52.43])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f8019497-9c36-491b-b146-2eb922696768;
+ Wed, 14 Apr 2021 11:58:46 +0000 (UTC)
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Apr 2021 04:58:41 -0700
+Received: from gao-cwp.sh.intel.com (HELO gao-cwp) ([10.239.159.149])
+ by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Apr 2021 04:58:38 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,86 +54,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 521518c2-1467-43ce-a3d2-c023d0a525e3
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1618400492; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nfgsXC/Q0hZwjUUeeGOOHh5Hf9Po5/M+RrswZyhgIvI=;
-	b=hXznFt6Vzfxw8YsDj+/z1xxr9mv3r7+iH9drYLBSnrgBpMvJEm7XjE5l0kGlmArrAlhoRn
-	DncDPAdyFpuA9HS/4M3Of8ktpJyIqdbDbVvtZ5eyvgEz2mJ5DtC4M/UUZWdk7LVKt1Xkuc
-	+AVJeXAyC7wR2O8/ksLqccN8QOycVUI=
-Subject: Re: [PATCH v4 1/2] x86/vtx: add LBR_SELECT to the list of LBR MSRs
-To: Igor Druzhinin <igor.druzhinin@citrix.com>
-Cc: andrew.cooper3@citrix.com, roger.pau@citrix.com, wl@xen.org,
- jun.nakajima@intel.com, kevin.tian@intel.com, xen-devel@lists.xenproject.org
-References: <1618375222-9283-1-git-send-email-igor.druzhinin@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <871c259b-487e-4c67-e648-b1aefef55df3@suse.com>
-Date: Wed, 14 Apr 2021 13:41:32 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.1
+X-Inumbo-ID: f8019497-9c36-491b-b146-2eb922696768
+IronPort-SDR: r0+/vT+D/+aLk1mUQ9DqFub21BRr7h28/Ebrrx5awxfsIjMSxyUD+qzoGyIRvEOF5+mK38Putk
+ OMsRhYkvTSIQ==
+X-IronPort-AV: E=McAfee;i="6200,9189,9953"; a="279934442"
+X-IronPort-AV: E=Sophos;i="5.82,222,1613462400"; 
+   d="scan'208";a="279934442"
+IronPort-SDR: B38S8vVuqKzwYdq23hXPr8Sm0GFo+06Lx9MbaHDNBCb0zeb9hN++yIxTBZgCk3zpSr0i6vHTFq
+ qSAMEHX5ekDA==
+X-IronPort-AV: E=Sophos;i="5.82,222,1613462400"; 
+   d="scan'208";a="424708734"
+Date: Wed, 14 Apr 2021 20:02:49 +0800
+From: Chao Gao <chao.gao@intel.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+	Kevin Tian <kevin.tian@intel.com>, xen-devel@lists.xenproject.org
+Subject: Re: [RFC PATCH] VT-d: Don't assume register-based invalidation is
+ always supported
+Message-ID: <20210414120248.GA29028@gao-cwp>
+References: <20210414005526.36760-1-chao.gao@intel.com>
+ <568f7b59-57e0-7daf-c27d-b771869209c4@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <1618375222-9283-1-git-send-email-igor.druzhinin@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <568f7b59-57e0-7daf-c27d-b771869209c4@suse.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 
-On 14.04.2021 06:40, Igor Druzhinin wrote:
-> --- a/xen/arch/x86/hvm/vmx/vmx.c
-> +++ b/xen/arch/x86/hvm/vmx/vmx.c
-> @@ -2915,14 +2915,16 @@ static const struct lbr_info {
->  }, nh_lbr[] = {
->      { MSR_IA32_LASTINTFROMIP,       1 },
->      { MSR_IA32_LASTINTTOIP,         1 },
-> -    { MSR_C2_LASTBRANCH_TOS,        1 },
-> +    { MSR_NHL_LBR_SELECT,           1 },
-> +    { MSR_NHL_LASTBRANCH_TOS,       1 },
->      { MSR_P4_LASTBRANCH_0_FROM_LIP, NUM_MSR_P4_LASTBRANCH_FROM_TO },
->      { MSR_P4_LASTBRANCH_0_TO_LIP,   NUM_MSR_P4_LASTBRANCH_FROM_TO },
->      { 0, 0 }
->  }, sk_lbr[] = {
->      { MSR_IA32_LASTINTFROMIP,       1 },
->      { MSR_IA32_LASTINTTOIP,         1 },
-> -    { MSR_SKL_LASTBRANCH_TOS,       1 },
-> +    { MSR_NHL_LBR_SELECT,           1 },
-> +    { MSR_NHL_LASTBRANCH_TOS,       1 },
->      { MSR_SKL_LASTBRANCH_0_FROM_IP, NUM_MSR_SKL_LASTBRANCH },
->      { MSR_SKL_LASTBRANCH_0_TO_IP,   NUM_MSR_SKL_LASTBRANCH },
->      { MSR_SKL_LASTBRANCH_0_INFO,    NUM_MSR_SKL_LASTBRANCH },
-> @@ -2937,6 +2939,7 @@ static const struct lbr_info {
->  }, gm_lbr[] = {
->      { MSR_IA32_LASTINTFROMIP,       1 },
->      { MSR_IA32_LASTINTTOIP,         1 },
-> +    { MSR_GM_LBR_SELECT,            1 },
+On Wed, Apr 14, 2021 at 12:07:02PM +0200, Jan Beulich wrote:
+>On 14.04.2021 02:55, Chao Gao wrote:
+>> According to Intel VT-d SPEC rev3.3 Section 6.5, Register-based Invalidation
+>> isn't supported by Intel VT-d version 6 and beyond.
+>> 
+>> This hardware change impacts following two scenarios: admin can disable
+>> queued invalidation via 'qinval' cmdline and use register-based interface;
+>> VT-d switches to register-based invalidation when queued invalidation needs
+>> to be disabled, for example, during disabling x2apic or during system
+>> suspension.
+>> 
+>> To deal with this hardware change, if register-based invalidation isn't
+>> supported, queued invalidation cannot be disabled through Xen cmdline; and
+>> if queued invalidation has to be disabled temporarily in some scenarios,
+>> VT-d won't switch to register-based interface but use some dummy functions
+>> to catch errors in case there is any invalidation request issued when queued
+>> invalidation is disabled.
+>> 
+>> Signed-off-by: Chao Gao <chao.gao@intel.com>
+>> ---
+>> I only tested Xen boot with qinval/no-qinval. I also want to do system
+>> suspension and resumption to see if any unexpected error. But I don't
+>> know how to trigger them. Any recommendation?
+>
+>Iirc, if your distro doesn't support a proper interface for this, it's
+>as simple as "echo mem >/sys/power/state".
 
-What about Xeon Phi, Silvermont, and Airmont?
+Thanks. I will give it a try. And all your comments make a lot of sense.
+Will fix all of them in the next version.
 
-> --- a/xen/include/asm-x86/msr-index.h
-> +++ b/xen/include/asm-x86/msr-index.h
-> @@ -606,14 +606,18 @@
->  #define NUM_MSR_C2_LASTBRANCH_FROM_TO	4
->  #define NUM_MSR_ATOM_LASTBRANCH_FROM_TO	8
->  
-> +/* Nehalem (and newer) last-branch recording */
-> +#define MSR_NHL_LBR_SELECT		0x000001c8
-> +#define MSR_NHL_LASTBRANCH_TOS		0x000001c9
-> +
->  /* Skylake (and newer) last-branch recording */
-> -#define MSR_SKL_LASTBRANCH_TOS		0x000001c9
->  #define MSR_SKL_LASTBRANCH_0_FROM_IP	0x00000680
->  #define MSR_SKL_LASTBRANCH_0_TO_IP	0x000006c0
->  #define MSR_SKL_LASTBRANCH_0_INFO	0x00000dc0
->  #define NUM_MSR_SKL_LASTBRANCH		32
->  
->  /* Goldmont last-branch recording */
-> +#define MSR_GM_LBR_SELECT		0x000001c8
->  #define MSR_GM_LASTBRANCH_TOS		0x000001c9
-
-Wouldn't it make sense to also re-use the NHL constants, like you
-do for Skylake?
-
-Jan
+Chao
 
