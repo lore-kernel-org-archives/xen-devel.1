@@ -2,44 +2,48 @@ Return-Path: <SRS0=ZRtW=JL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,DATE_IN_PAST_06_12,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 753F6C433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 08:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7808C433ED
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 08:23:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2B58261222
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 08:13:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B58261222
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5EC40613C1
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Apr 2021 08:23:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5EC40613C1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.110345.210598 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.110353.210613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWadt-0002Wr-QE; Wed, 14 Apr 2021 08:12:57 +0000
+	id 1lWanW-0003c6-Ul; Wed, 14 Apr 2021 08:22:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 110345.210598; Wed, 14 Apr 2021 08:12:57 +0000
+Received: by outflank-mailman (output) from mailman id 110353.210613; Wed, 14 Apr 2021 08:22:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWadt-0002Wk-My; Wed, 14 Apr 2021 08:12:57 +0000
-Received: by outflank-mailman (input) for mailman id 110345;
- Wed, 14 Apr 2021 08:12:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=WBRZ=JL=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lWads-0002Wf-VR
- for xen-devel@lists.xenproject.org; Wed, 14 Apr 2021 08:12:57 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a972c735-38d8-494d-84f7-7192c2df983d;
- Wed, 14 Apr 2021 08:12:54 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8A311AF23;
- Wed, 14 Apr 2021 08:12:53 +0000 (UTC)
+	id 1lWanW-0003bz-Qi; Wed, 14 Apr 2021 08:22:54 +0000
+Received: by outflank-mailman (input) for mailman id 110353;
+ Wed, 14 Apr 2021 08:22:53 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eQnP=JL=intel.com=chao.gao@srs-us1.protection.inumbo.net>)
+ id 1lWanV-0003bu-Me
+ for xen-devel@lists.xenproject.org; Wed, 14 Apr 2021 08:22:53 +0000
+Received: from mga02.intel.com (unknown [134.134.136.20])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a9bee840-1f62-4592-8592-b75c6df97c02;
+ Wed, 14 Apr 2021 08:22:50 +0000 (UTC)
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Apr 2021 01:22:49 -0700
+Received: from unknown (HELO hyperv-sh4.sh.intel.com) ([10.239.48.33])
+ by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Apr 2021 01:22:46 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,499 +55,229 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a972c735-38d8-494d-84f7-7192c2df983d
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1618387973; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=xGgUMLhYxbSWQ+m5eciReqTnaSl48J+ci2xi6DgcSqY=;
-	b=sFM0PZSjUor5nF3b5rsVApRwkdkcIp4FvYFExfgY5FcwdlgRr5KiH2BUw7C5ludmJd9byD
-	Mv/TNeu4ZqRYhuCiMohCNFmTPmkHgyIOA9rOqpjVwBx7AO+FoSfo74LMHIy4AGWiNOfuf3
-	pfijwxyW6afu6REcuwUiR1Z3c6IvzBg=
-Subject: Re: x86: memset() / clear_page() / page scrubbing
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <0753c049-9572-c12a-c74f-7e2fac3f5a24@suse.com>
- <21c00073-86a8-a040-fa40-e99e2fb434eb@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <213c3706-5296-4673-dae2-12f9056ed73b@suse.com>
-Date: Wed, 14 Apr 2021 10:12:53 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.1
+X-Inumbo-ID: a9bee840-1f62-4592-8592-b75c6df97c02
+IronPort-SDR: pvkxHMBbtyE44qGu8d6Nhbc0mArhfvwKoXxtl9X1sd45oADEFoW3yhZTgsB5bTONii4SY1pPNZ
+ V67DAbxloVrQ==
+X-IronPort-AV: E=McAfee;i="6200,9189,9953"; a="181715370"
+X-IronPort-AV: E=Sophos;i="5.82,221,1613462400"; 
+   d="scan'208";a="181715370"
+IronPort-SDR: dI9AmB6jIeR57Bskm5ThJiCmxAseeWAVFROpB20vOGLjevnoTZoWNckk1rcXLa0T2DQP5TGnwC
+ xaUxAwHaArLA==
+X-IronPort-AV: E=Sophos;i="5.82,221,1613462400"; 
+   d="scan'208";a="418232839"
+From: Chao Gao <chao.gao@intel.com>
+To: xen-devel@lists.xenproject.org
+Cc: Chao Gao <chao.gao@intel.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Kevin Tian <kevin.tian@intel.com>
+Subject: [RFC PATCH] VT-d: Don't assume register-based invalidation is always supported
+Date: Wed, 14 Apr 2021 08:55:26 +0800
+Message-Id: <20210414005526.36760-1-chao.gao@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <21c00073-86a8-a040-fa40-e99e2fb434eb@citrix.com>
-Content-Type: multipart/mixed;
- boundary="------------E9A009BC66E76B4D3F1D9EB6"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------E9A009BC66E76B4D3F1D9EB6
-Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-On 13.04.2021 15:17, Andrew Cooper wrote:
-> Do you have actual numbers from these experiments?
+According to Intel VT-d SPEC rev3.3 Section 6.5, Register-based Invalidation
+isn't supported by Intel VT-d version 6 and beyond.
 
-Attached is the collected raw output from a number of systems.
+This hardware change impacts following two scenarios: admin can disable
+queued invalidation via 'qinval' cmdline and use register-based interface;
+VT-d switches to register-based invalidation when queued invalidation needs
+to be disabled, for example, during disabling x2apic or during system
+suspension.
 
->  I've seen your patch
-> from the thread, but at a minimum its missing some hunks adding new
-> CPUID bits.
+To deal with this hardware change, if register-based invalidation isn't
+supported, queued invalidation cannot be disabled through Xen cmdline; and
+if queued invalidation has to be disabled temporarily in some scenarios,
+VT-d won't switch to register-based interface but use some dummy functions
+to catch errors in case there is any invalidation request issued when queued
+invalidation is disabled.
 
-It's not missing hunks - these additions are in a prereq patch that
-I meant to post together with whatever this analysis would lead to.
-If you think I should submit the prereqs ahead of time, I can of
-course do so.
+Signed-off-by: Chao Gao <chao.gao@intel.com>
+---
+I only tested Xen boot with qinval/no-qinval. I also want to do system
+suspension and resumption to see if any unexpected error. But I don't
+know how to trigger them. Any recommendation?
+---
+ docs/misc/xen-command-line.pandoc    |  4 ++-
+ xen/drivers/passthrough/vtd/iommu.c  | 40 +++++++++++++++++++++++++---
+ xen/drivers/passthrough/vtd/iommu.h  |  7 +++++
+ xen/drivers/passthrough/vtd/qinval.c | 33 +++++++++++++++++++++--
+ 4 files changed, 77 insertions(+), 7 deletions(-)
 
->  I do worry however whether the testing is likely to be
-> realistic for non-idle scenarios.
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index deef6d0b4c..4ff4a87844 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -1442,7 +1442,9 @@ The following options are specific to Intel VT-d hardware:
+ *   The `qinval` boolean controls the Queued Invalidation sub-feature, and is
+     active by default on compatible hardware.  Queued Invalidation is a
+     feature in second-generation IOMMUs and is a functional prerequisite for
+-    Interrupt Remapping.
++    Interrupt Remapping. Note that Xen disregards this setting for Intel VT-d
++    version 6 and greater as Registered-Based Invalidation isn't supported
++    by them.
+ 
+ *   The `igfx` boolean is active by default, and controls whether the IOMMU in
+     front of an Intel Graphics Device is enabled or not.
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index 6428c8fe3e..e738d04543 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1193,6 +1193,14 @@ int __init iommu_alloc(struct acpi_drhd_unit *drhd)
+ 
+     iommu->cap = dmar_readq(iommu->reg, DMAR_CAP_REG);
+     iommu->ecap = dmar_readq(iommu->reg, DMAR_ECAP_REG);
++    iommu->version = dmar_readl(iommu->reg, DMAR_VER_REG);
++
++    if ( !iommu_qinval && !has_register_based_invalidation(iommu) )
++    {
++        printk(XENLOG_WARNING VTDPREFIX "IOMMU %d: cannot disable Queued Invalidation.\n",
++               iommu->index);
++        iommu_qinval = true;
++    }
+ 
+     if ( iommu_verbose )
+     {
+@@ -2231,6 +2239,8 @@ static int __init vtd_setup(void)
+     struct acpi_drhd_unit *drhd;
+     struct vtd_iommu *iommu;
+     int ret;
++    bool queued_inval_supported = true;
++    bool reg_inval_supported = true;
+ 
+     if ( list_empty(&acpi_drhd_units) )
+     {
+@@ -2252,8 +2262,8 @@ static int __init vtd_setup(void)
+     }
+ 
+     /* We enable the following features only if they are supported by all VT-d
+-     * engines: Snoop Control, DMA passthrough, Queued Invalidation, Interrupt
+-     * Remapping, and Posted Interrupt
++     * engines: Snoop Control, DMA passthrough, Register-based Invalidation,
++     * Queued Invalidation, Interrupt Remapping, and Posted Interrupt.
+      */
+     for_each_drhd_unit ( drhd )
+     {
+@@ -2272,8 +2282,11 @@ static int __init vtd_setup(void)
+         if ( iommu_hwdom_passthrough && !ecap_pass_thru(iommu->ecap) )
+             iommu_hwdom_passthrough = false;
+ 
+-        if ( iommu_qinval && !ecap_queued_inval(iommu->ecap) )
+-            iommu_qinval = 0;
++        if ( reg_inval_supported && !has_register_based_invalidation(iommu) )
++            reg_inval_supported = false;
++
++        if ( queued_inval_supported && !ecap_queued_inval(iommu->ecap) )
++            queued_inval_supported = false;
+ 
+         if ( iommu_intremap && !ecap_intr_remap(iommu->ecap) )
+             iommu_intremap = iommu_intremap_off;
+@@ -2301,6 +2314,25 @@ static int __init vtd_setup(void)
+ 
+     softirq_tasklet_init(&vtd_fault_tasklet, do_iommu_page_fault, NULL);
+ 
++    if ( !queued_inval_supported && !reg_inval_supported )
++    {
++        dprintk(XENLOG_ERR VTDPREFIX, "No available invalidation interface.\n");
++        ret = -ENODEV;
++        goto error;
++    }
++
++    /*
++     * We cannot have !iommu_qinval && !reg_inval_supported here since
++     * iommu_qinval is set in iommu_alloc() if any iommu doesn't support
++     * Register-based Invalidation.
++     */
++    if ( iommu_qinval && !queued_inval_supported )
++    {
++        dprintk(XENLOG_WARNING VTDPREFIX, "Disable Queued Invalidation as "
++                "it isn't supported.\n");
++        iommu_qinval = false;
++    }
++
+     if ( !iommu_qinval && iommu_intremap )
+     {
+         iommu_intremap = iommu_intremap_off;
+diff --git a/xen/drivers/passthrough/vtd/iommu.h b/xen/drivers/passthrough/vtd/iommu.h
+index 216791b3d6..644224051a 100644
+--- a/xen/drivers/passthrough/vtd/iommu.h
++++ b/xen/drivers/passthrough/vtd/iommu.h
+@@ -540,6 +540,7 @@ struct vtd_iommu {
+     struct list_head ats_devices;
+     unsigned long *domid_bitmap;  /* domain id bitmap */
+     u16 *domid_map;               /* domain id mapping array */
++    u32 version;
+ };
+ 
+ #define INTEL_IOMMU_DEBUG(fmt, args...) \
+@@ -549,4 +550,10 @@ struct vtd_iommu {
+             dprintk(XENLOG_WARNING VTDPREFIX, fmt, ## args);    \
+     } while(0)
+ 
++/* Register-based invalidation isn't supported by VT-d version 6 and beyond. */
++static inline bool has_register_based_invalidation(struct vtd_iommu *iommu)
++{
++    return VER_MAJOR(iommu->version) < 6;
++}
++
+ #endif
+diff --git a/xen/drivers/passthrough/vtd/qinval.c b/xen/drivers/passthrough/vtd/qinval.c
+index 764ef9f0fc..1e90f50ff8 100644
+--- a/xen/drivers/passthrough/vtd/qinval.c
++++ b/xen/drivers/passthrough/vtd/qinval.c
+@@ -442,6 +442,23 @@ int enable_qinval(struct vtd_iommu *iommu)
+     return 0;
+ }
+ 
++static int vtd_flush_context_noop(struct vtd_iommu *iommu, uint16_t did,
++                                  uint16_t source_id, uint8_t function_mask,
++                                  uint64_t type, bool flush_non_present_entry)
++{
++    dprintk(XENLOG_ERR VTDPREFIX, "IOMMU: Cannot flush CONTEXT.\n");
++    return -EIO;
++}
++
++static int vtd_flush_iotlb_noop(struct vtd_iommu *iommu, uint16_t did,
++                                uint64_t addr, unsigned int size_order,
++                                uint64_t type, bool flush_non_present_entry,
++                                bool flush_dev_iotlb)
++{
++    dprintk(XENLOG_ERR VTDPREFIX, "IOMMU: Cannot flush IOTLB.\n");
++    return -EIO;
++}
++
+ void disable_qinval(struct vtd_iommu *iommu)
+ {
+     u32 sts;
+@@ -463,6 +480,18 @@ void disable_qinval(struct vtd_iommu *iommu)
+ out:
+     spin_unlock_irqrestore(&iommu->register_lock, flags);
+ 
+-    iommu->flush.context = vtd_flush_context_reg;
+-    iommu->flush.iotlb   = vtd_flush_iotlb_reg;
++    /*
++     * Assign callbacks to noop to catch errors if register-based invalidation
++     * isn't supported.
++     */
++    if ( has_register_based_invalidation(iommu) )
++    {
++        iommu->flush.context = vtd_flush_context_reg;
++        iommu->flush.iotlb   = vtd_flush_iotlb_reg;
++    }
++    else
++    {
++        iommu->flush.context = vtd_flush_context_noop;
++        iommu->flush.iotlb = vtd_flush_iotlb_noop;
++    }
+ }
+-- 
+2.25.1
 
-Of course it's not going to be - in non-idle scenarios we'll always
-be somewhere in the middle. Therefore I wanted to have numbers at
-the edges (hot and cold cache respectively), as any other numbers
-are going to be much harder to obtain in a way that they would
-actually be meaningful (and hence reasonably stable).
-
-> It is very little surprise that AVX-512 on Skylake is poor.  The
-> frequency hit from using %zmm is staggering.  IceLake is expected to be
-> better, but almost certainly won't exceed REP MOVSB, which is optimised
-> in microcode for the data width of the CPU.
-
-Right, much like AVX has improved but didn't get anywhere near
-REP MOVS.
-
-> For memset(), please don't move in the direction of memcpy().  memcpy()
-> is problematic because the common case is likely to be a multiple of 8
-> bytes, meaning that we feed 0 into the REP MOVSB, and this a hit wanting
-> avoiding.
-
-And you say this despite me having pointed out that REP STOSL may
-be faster in a number of cases? Or do you mean to suggest we should
-branch around the trailing REP {MOV,STO}SB?
-
->  The "Fast Zero length $FOO" bits on future parts indicate
-> when passing %ecx=0 is likely to be faster than branching around the
-> invocation.
-
-IOW down the road we could use alternatives patching to remove such
-branches. But this of course is only if we don't end up using
-exclusively REP MOVSB / REP STOSB there anyway, as you seem to be
-suggesting ...
-
-> With ERMS/etc, our logic should be a REP MOVSB/STOSB only, without any
-> cleverness about larger word sizes.  The Linux forms do this fairly well
-> already, and probably better than Xen, although there might be some room
-> for improvement IMO.
-
-... here.
-
-As to the Linux implementations - for memcpy_erms() I don't think
-I see any room for improvement in the function itself. We could do
-alternatives patching somewhat differently (and I probably would).
-For memset_erms() the tiny bit of improvement over Linux'es code
-that I would see is to avoid the partial register access when
-loading %al. But to be honest - in both cases I wouldn't have
-bothered looking at their code anyway, if you hadn't pointed me
-there.
-
-> It is worth nothing that we have extra variations of memset/memcpy where
-> __builtin_memcpy() gets expanded inline, and the result is a
-> compiler-chosen sequence, and doesn't hit any of our optimised
-> sequences.  I'm not sure what to do about this, because there is surely
-> a larger win from the cases which can be turned into a single mov, or an
-> elided store/copy, than using a potentially inefficient sequence in the
-> rare cases.  Maybe there is room for a fine-tuning option to say "just
-> call memset() if you're going to expand it inline".
-
-You mean "just call memset() instead of expanding it inline"?
-
-If the inline expansion is merely REP STOS, I'm not sure we'd
-actually gain anything from keeping the compiler from expanding it
-inline. But if the inline construct was more complicated (as I
-observe e.g. in map_vcpu_info() with gcc 10), then it would likely
-be nice if there was such a control. I'll take note to see if I
-can find anything.
-
-But this isn't relevant for {clear,copy}_page().
-
-> For all set/copy operations, whether you want non-temporal or not
-> depends on when/where the lines are next going to be consumed.  Page
-> scrubbing in idle context is the only example I can think of where we
-> aren't plausibly going to consume the destination imminently.  Even
-> clear/copy page in a hypercall doesn't want to be non-temporal, because
-> chances are good that the vcpu is going to touch the page on return.
-
-I'm afraid the situation isn't as black-and-white. Take HAP or
-IOMMU page table allocations, for example: They need to clear the
-full page, yes. But often this is just to then insert one single
-entry, i.e. re-use exactly one of the cache lines. Or take initial
-population of guest RAM: The larger the guest, the less likely it
-is for every individual page to get accessed again before its
-contents get evicted from the caches. Judging from what Ankur said,
-once we get to around L3 capacity, MOVNT / CLZERO may be preferable
-there.
-
-I think in cases where we don't know how the page is going to be
-used subsequently, we ought to favor latency over cache pollution
-avoidance. But in cases where we know the subsequent usage pattern,
-we may want to direct scrubbing / zeroing accordingly. Yet of
-course it's not very helpful that there's no way to avoid
-polluting caches and still have reasonably low latency, so using
-some heuristics may be unavoidable.
-
-And of course another goal of mine would be to avoid double zeroing
-of pages: When scrubbing uses clear_page() anyway, there's no point
-in the caller then calling clear_page() again. IMO, just like we
-have xzalloc(), we should also have MEMF_zero. Internally the page
-allocator can know whether a page was already scrubbed, and it
-does know for sure whether scrubbing means zeroing.
-
-Jan
-
---------------E9A009BC66E76B4D3F1D9EB6
-Content-Type: text/plain; charset=UTF-8;
- name="xen-clear-page.txt"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="xen-clear-page.txt"
-
-QW9ydXMgKFNreWxha2UpOgoKKFhFTikgZXJtcz0xIGZzcm09MCBmenJtPTAgZnNycz0wIGZz
-cmNzPTAgbDFkPTMyayBsMj0xMDI0awooWEVOKSBMMSB3L28gZmx1c2g6CihYRU4pICBwcmU9
-NWFhIHNzZTI9MTdjOCBwb3N0PTQ2NgooWEVOKSAgcHJlPTMwMiBzdG9zYj01NDQgcG9zdD02
-ZjIKKFhFTikgIHByZT0yZjYgc3Rvc2w9NGRlIHBvc3Q9NTAwCihYRU4pICBwcmU9MzA4IHN0
-b3NxPTRiYyBwb3N0PTRiNgooWEVOKSAgcHJlPTMwMCBhdng9MTRkNCBwb3N0PTJmYQooWEVO
-KSAgcHJlPTJlYSBhdng1MTI9MTFjYSBwb3N0PTMwMAooWEVOKSAgcHJlPTMyYyBzc2UyPTE2
-MjAgcG9zdD0zMzAKKFhFTikgIHByZT0zMjYgc3Rvc2I9NTVhIHBvc3Q9NGIwCihYRU4pICBw
-cmU9MzMyIHN0b3NsPTRmMiBwb3N0PTRhMgooWEVOKSAgcHJlPTMzNiBzdG9zcT00ZWMgcG9z
-dD00N2MKKFhFTikgIHByZT0zMzIgYXZ4PTE0ZjQgcG9zdD0zMjQKKFhFTikgIHByZT0zYTIg
-YXZ4NTEyPTEyMDQgcG9zdD0zNWMKKFhFTikgIHByZT0zMjIgc3NlMj0xNjA2IHBvc3Q9MzMw
-CihYRU4pICBwcmU9MzI0IHN0b3NiPTU2NCBwb3N0PTQ2NgooWEVOKSAgcHJlPTMxZSBzdG9z
-bD00ZjggcG9zdD00OWMKKFhFTikgIHByZT0zMjIgc3Rvc3E9NGZhIHBvc3Q9M2UwCihYRU4p
-ICBwcmU9MzQwIGF2eD0xNGY2IHBvc3Q9MzI4CihYRU4pICBwcmU9MzI2IGF2eDUxMj0xMjBj
-IHBvc3Q9MzIyCihYRU4pIEwxIHcvIGZsdXNoOgooWEVOKSAgcHJlPTJlNCBzc2UyPWMwMCBw
-b3N0PTNlNgooWEVOKSAgcHJlPTM0YyBzdG9zYj05MTYgcG9zdD03MjIKKFhFTikgIHByZT0z
-NTggc3Rvc2w9OTA4IHBvc3Q9N2I0CihYRU4pICBwcmU9MzYwIHN0b3NxPWE3MiBwb3N0PTcz
-MgooWEVOKSAgcHJlPTMzZSBhdng9YjNjIHBvc3Q9MzNjCihYRU4pICBwcmU9MzQ4IGF2eDUx
-Mj1hMzggcG9zdD0zNDIKKFhFTikgIHByZT0zNDIgc3NlMj1jMjQgcG9zdD0zM2UKKFhFTikg
-IHByZT0zNGUgc3Rvc2I9OTk4IHBvc3Q9NzdjCihYRU4pICBwcmU9MzUyIHN0b3NsPTkxMCBw
-b3N0PTZlNAooWEVOKSAgcHJlPTM1NiBzdG9zcT05NGMgcG9zdD03NGEKKFhFTikgIHByZT0z
-MzQgYXZ4PWI0NCBwb3N0PTMzMgooWEVOKSAgcHJlPTM2ZSBhdng1MTI9YmNhIHBvc3Q9MzM2
-CihYRU4pICBwcmU9MzU2IHNzZTI9YzFhIHBvc3Q9MzM2CihYRU4pICBwcmU9MzVjIHN0b3Ni
-PTkyYSBwb3N0PTZmMAooWEVOKSAgcHJlPTMyZSBzdG9zbD05NzAgcG9zdD04NjQKKFhFTikg
-IHByZT0zNTggc3Rvc3E9OTRjIHBvc3Q9NzU2CihYRU4pICBwcmU9MzQ0IGF2eD1iNGMgcG9z
-dD0zMjYKKFhFTikgIHByZT0zNGMgYXZ4NTEyPWE1YyBwb3N0PTM3MgooWEVOKSBMMiB3L28g
-Zmx1c2g6CihYRU4pICBwcmU9MTVmN2Mgc3NlMj0yZWZmOCBwb3N0PWMyNzIKKFhFTikgIHBy
-ZT1jZjhjIHN0b3NiPWNiZjYgcG9zdD1jNmE0CihYRU4pICBwcmU9Y2U1YyBzdG9zbD1jYzdl
-IHBvc3Q9YzZiYwooWEVOKSAgcHJlPWQzYjYgc3Rvc3E9N2Y1ZTYgcG9zdD1kODk4CihYRU4p
-ICBwcmU9Y2Y1NiBhdng9MmQ3ZGUgcG9zdD1iZTFhCihYRU4pICBwcmU9Y2ZlNiBhdng1MTI9
-MzQ5YzYgcG9zdD1jYWY4CihYRU4pICBwcmU9ZGNlZSBzc2UyPTJmOTNlIHBvc3Q9Yzk3ZQoo
-WEVOKSAgcHJlPWRkNmUgc3Rvc2I9ZDAwMCBwb3N0PWQxMDIKKFhFTikgIHByZT1kYWQwIHN0
-b3NsPWQwMzQgcG9zdD1kMTJlCihYRU4pICBwcmU9ZGIwMCBzdG9zcT1kMGVlIHBvc3Q9ZDBi
-MgooWEVOKSAgcHJlPWRhYmMgYXZ4PTJkZWM4IHBvc3Q9YzgzMAooWEVOKSAgcHJlPWRjMDQg
-YXZ4NTEyPTJkYmJlIHBvc3Q9YzhhYQooWEVOKSAgcHJlPWRiNzQgc3NlMj0yZjhlNiBwb3N0
-PWM4OWUKKFhFTikgIHByZT1kZDRjIHN0b3NiPWQwYTYgcG9zdD1kMTZjCihYRU4pICBwcmU9
-ZGE2YyBzdG9zbD1jZmQwIHBvc3Q9ZDM4OAooWEVOKSAgcHJlPWQ4Yzggc3Rvc3E9ZDA1NCBw
-b3N0PWQwYjQKKFhFTikgIHByZT1kYjJlIGF2eD0yZGU3OCBwb3N0PWNiM2MKKFhFTikgIHBy
-ZT1kOWVhIGF2eDUxMj0yZDlkNiBwb3N0PWM4ZjAKKFhFTikgTDIgdy8gZmx1c2g6CihYRU4p
-ICBwcmU9MTYwMDAgc3NlMj0xNmNmMiBwb3N0PWJmYzQKKFhFTikgIHByZT0xNjA0YyBzdG9z
-Yj0xMmFiOCBwb3N0PWM2NmMKKFhFTikgIHByZT0xNjA1NCBzdG9zbD0xMjYyNCBwb3N0PWM3
-YTYKKFhFTikgIHByZT0xNjAwOCBzdG9zcT0xMjdiNCBwb3N0PWM1NGUKKFhFTikgIHByZT0x
-NWY3YyBhdng9MTVhOTggcG9zdD1iZDUwCihYRU4pICBwcmU9MTYwNDYgYXZ4NTEyPTE1NzYw
-IHBvc3Q9MTNjNTIKKFhFTikgIHByZT0xNWY4YSBzc2UyPTE2ZGMwIHBvc3Q9YmZiOAooWEVO
-KSAgcHJlPTE1ZmI0IHN0b3NiPTEyOTNhIHBvc3Q9YzZkYQooWEVOKSAgcHJlPTE1ZjdjIHN0
-b3NsPTEyNjcyIHBvc3Q9YzU3NAooWEVOKSAgcHJlPTE1ZmVlIHN0b3NxPTEyNDVlIHBvc3Q9
-YzZmZQooWEVOKSAgcHJlPTE1ZmM4IGF2eD0xNWFhZSBwb3N0PWMwMWMKKFhFTikgIHByZT0x
-NjA4YyBhdng1MTI9MWNhMzIgcG9zdD1jOWNlCihYRU4pICBwcmU9MTVmYmEgc3NlMj0xNmNk
-YyBwb3N0PWMwNzYKKFhFTikgIHByZT0xNWZmZSBzdG9zYj0xMjk5MiBwb3N0PWM5YjAKKFhF
-TikgIHByZT0xNjA1MCBzdG9zbD0xMjkwYSBwb3N0PWM1M2UKKFhFTikgIHByZT0xNjAwMiBz
-dG9zcT0xMjlhNiBwb3N0PWM1NDAKKFhFTikgIHByZT0xNWY5OCBhdng9MTU5ZWUgcG9zdD1i
-YzUwCihYRU4pICBwcmU9MTVmY2EgYXZ4NTEyPTE1OWJjIHBvc3Q9MTNkOWEKCgpSb21lOgoK
-KFhFTikgZXJtcz0wIGZzcm09MCBmenJtPTAgZnNycz0wIGZzcmNzPTAgbDFkPTMyayBsMj01
-MTJrCihYRU4pIEwxIHcvbyBmbHVzaDoKKFhFTikgIHByZT00YzQgc3NlMj1lZWMgcG9zdD0z
-ODQKKFhFTikgIHByZT0zNWMgc3Rvc2I9MjMwIHBvc3Q9Mzk4CihYRU4pICBwcmU9MzVjIHN0
-b3NsPTIzMCBwb3N0PTNkNAooWEVOKSAgcHJlPTM1YyBzdG9zcT0yNTggcG9zdD00MTAKKFhF
-TikgIHByZT0zNzAgYXZ4PWRkNCBwb3N0PTM3MAooWEVOKSAgcHJlPTM3MCBjbHplcm89NzU4
-IHBvc3Q9MzVjCihYRU4pICBwcmU9MzVjIHNzZTI9ZTEwIHBvc3Q9MzcwCihYRU4pICBwcmU9
-MzVjIHN0b3NiPTIxYyBwb3N0PTM3MAooWEVOKSAgcHJlPTM1YyBzdG9zbD0yMzAgcG9zdD0z
-ZmMKKFhFTikgIHByZT0zNWMgc3Rvc3E9MjFjIHBvc3Q9M2FjCihYRU4pICBwcmU9MzVjIGF2
-eD1kOTggcG9zdD0zNWMKKFhFTikgIHByZT0zNWMgY2x6ZXJvPTc1OCBwb3N0PTM1YwooWEVO
-KSAgcHJlPTM1YyBzc2UyPWUyNCBwb3N0PTM1YwooWEVOKSAgcHJlPTM1YyBzdG9zYj0yMWMg
-cG9zdD0zZDQKKFhFTikgIHByZT0zNWMgc3Rvc2w9MjFjIHBvc3Q9M2Q0CihYRU4pICBwcmU9
-MzcwIHN0b3NxPTIxYyBwb3N0PTNhYwooWEVOKSAgcHJlPTM1YyBhdng9ZDg0IHBvc3Q9MzVj
-CihYRU4pICBwcmU9MzVjIGNsemVybz03NTggcG9zdD0zNzAKKFhFTikgTDEgdy8gZmx1c2g6
-CihYRU4pICBwcmU9NDM4IHNzZTI9YTUwIHBvc3Q9MzVjCihYRU4pICBwcmU9NDM4IHN0b3Ni
-PWQzNCBwb3N0PTM5OAooWEVOKSAgcHJlPTQzOCBzdG9zbD1kMGMgcG9zdD0zODQKKFhFTikg
-IHByZT00Mzggc3Rvc3E9YWEwIHBvc3Q9Mzg0CihYRU4pICBwcmU9NDRjIGF2eD05MjQgcG9z
-dD0zNzAKKFhFTikgIHByZT00NGMgY2x6ZXJvPTVmMCBwb3N0PTM3MAooWEVOKSAgcHJlPTQz
-OCBzc2UyPWE1MCBwb3N0PTM1YwooWEVOKSAgcHJlPTQzOCBzdG9zYj1jMzAgcG9zdD0zOTgK
-KFhFTikgIHByZT00NGMgc3Rvc2w9ZDIwIHBvc3Q9M2MwCihYRU4pICBwcmU9NDM4IHN0b3Nx
-PWIwNCBwb3N0PTM3MAooWEVOKSAgcHJlPTQzOCBhdng9OTM4IHBvc3Q9MzcwCihYRU4pICBw
-cmU9NDRjIGNsemVybz02ZjQgcG9zdD0zNWMKKFhFTikgIHByZT00Mzggc3NlMj1hM2MgcG9z
-dD0zNWMKKFhFTikgIHByZT00NGMgc3Rvc2I9YWRjIHBvc3Q9Mzg0CihYRU4pICBwcmU9NDM4
-IHN0b3NsPWFhMCBwb3N0PTNjMAooWEVOKSAgcHJlPTQ0YyBzdG9zcT1hM2MgcG9zdD0zNzAK
-KFhFTikgIHByZT00MzggYXZ4PTkyNCBwb3N0PTM1YwooWEVOKSAgcHJlPTQzOCBjbHplcm89
-NWM4IHBvc3Q9MzcwCihYRU4pIEwyIHcvbyBmbHVzaDoKKFhFTikgIHByZT02NzBjIHNzZTI9
-ZmU4OCBwb3N0PTEwOGVjCihYRU4pICBwcmU9NmUyOCBzdG9zYj0yNGNjIHBvc3Q9MTQ1MDAK
-KFhFTikgIHByZT03MTIwIHN0b3NsPTI0NjggcG9zdD0xNGQwYwooWEVOKSAgcHJlPTc0OTAg
-c3Rvc3E9MjQ3YyBwb3N0PTE1MDdjCihYRU4pICBwcmU9N2E2YyBhdng9ZmM2YyBwb3N0PTEx
-OWNjCihYRU4pICBwcmU9NzJiMCBjbHplcm89NzNmMCBwb3N0PTExOGI0CihYRU4pICBwcmU9
-NzE4NCBzc2UyPWZkZmMgcG9zdD0xMWUyYwooWEVOKSAgcHJlPTZmMDQgc3Rvc2I9MjQ3YyBw
-b3N0PTE0YjkwCihYRU4pICBwcmU9NzI4OCBzdG9zbD0yNTMwIHBvc3Q9MTUwNTQKKFhFTikg
-IHByZT03NWQwIHN0b3NxPTI0YTQgcG9zdD0xNWIzMAooWEVOKSAgcHJlPTZmZTAgYXZ4PWZj
-OTQgcG9zdD0xMTg2NAooWEVOKSAgcHJlPTcxOTggY2x6ZXJvPTc0Y2MgcG9zdD0xMWQ1MAoo
-WEVOKSAgcHJlPTc1MWMgc3NlMj1mZGZjIHBvc3Q9MTIxYjAKKFhFTikgIHByZT03MzUwIHN0
-b3NiPTI0Y2MgcG9zdD0xNTM2MAooWEVOKSAgcHJlPTZlNjQgc3Rvc2w9MjRiOCBwb3N0PTE0
-ZjAwCihYRU4pICBwcmU9NzczOCBzdG9zcT0yNDQwIHBvc3Q9MTRhOGMKKFhFTikgIHByZT02
-ZjkwIGF2eD1mY2Y4IHBvc3Q9MTFiYzAKKFhFTikgIHByZT03MjljIGNsemVybz03NDdjIHBv
-c3Q9MTFhZTQKKFhFTikgTDIgdy8gZmx1c2g6CihYRU4pICBwcmU9NTgwYyBzc2UyPWE4NzAg
-cG9zdD0xMDU1NAooWEVOKSAgcHJlPTU3NDQgc3Rvc2I9OWM3YyBwb3N0PTE1MmFjCihYRU4p
-ICBwcmU9NTkyNCBzdG9zbD05YTI0IHBvc3Q9MTVjNDgKKFhFTikgIHByZT01NmNjIHN0b3Nx
-PTlkZjggcG9zdD0xNTdmYwooWEVOKSAgcHJlPTU4OTggYXZ4PWE2NDAgcG9zdD0xMDMzOAoo
-WEVOKSAgcHJlPTU5NzQgY2x6ZXJvPTY5ZGMgcG9zdD0xMGRlYwooWEVOKSAgcHJlPTViZTAg
-c3NlMj1hODcwIHBvc3Q9MTBiYTgKKFhFTikgIHByZT01N2E4IHN0b3NiPTllZDQgcG9zdD0x
-NWE0MAooWEVOKSAgcHJlPTU5NGMgc3Rvc2w9OWQ2YyBwb3N0PTE2MTk4CihYRU4pICBwcmU9
-NTQzOCBzdG9zcT05ZGQwIHBvc3Q9MTU4NjAKKFhFTikgIHByZT01N2QwIGF2eD1hNDljIHBv
-c3Q9MTBiODAKKFhFTikgIHByZT01MmJjIGNsemVybz02OWRjIHBvc3Q9ZjkzOAooWEVOKSAg
-cHJlPTU2ZTAgc3NlMj1hYjU0IHBvc3Q9MTBiMDgKKFhFTikgIHByZT01NjU0IHN0b3NiPTlm
-ODggcG9zdD0xNTg0YwooWEVOKSAgcHJlPTU2NTQgc3Rvc2w9YTAxNCBwb3N0PTE0YWI0CihY
-RU4pICBwcmU9NThjMCBzdG9zcT05YTM4IHBvc3Q9MTVkYzQKKFhFTikgIHByZT01N2E4IGF2
-eD1hNjQwIHBvc3Q9MTBjMGMKKFhFTikgIHByZT01NjE4IGNsemVybz02OWRjIHBvc3Q9MTA1
-NTQKCgpQcmVjaXNpb24gNzgxMCAoSGFzd2VsbCk6CgooWEVOKSBlcm1zPTEgZnNybT0wIGZ6
-cm09MCBmc3JzPTAgZnNyY3M9MCBsMWQ9MzJrIGwyPTI1NmsKKFhFTikgTDEgdy9vIGZsdXNo
-OgooWEVOKSAgcHJlPTYxOCBzc2UyPTEzMjQgcG9zdD00MWMKKFhFTikgIHByZT0zYzQgc3Rv
-c2I9NmZjIHBvc3Q9NzRjCihYRU4pICBwcmU9M2FjIHN0b3NsPTZjNCBwb3N0PTcyOAooWEVO
-KSAgcHJlPTM5YyBzdG9zcT02YjAgcG9zdD03MjAKKFhFTikgIHByZT0zYWMgYXZ4PWRmNCBw
-b3N0PTNlNAooWEVOKSAgcHJlPTM4YyBzc2UyPWY0YyBwb3N0PTNhOAooWEVOKSAgcHJlPTM4
-YyBzdG9zYj02ZTQgcG9zdD03NDgKKFhFTikgIHByZT0zOTAgc3Rvc2w9Njk4IHBvc3Q9NmY4
-CihYRU4pICBwcmU9MzgwIHN0b3NxPTZhYyBwb3N0PTZlYwooWEVOKSAgcHJlPTNhNCBhdng9
-ZTI4IHBvc3Q9M2E4CihYRU4pICBwcmU9Mzg0IHNzZTI9ZjUwIHBvc3Q9Mzc0CihYRU4pICBw
-cmU9Mzk4IHN0b3NiPTZlYyBwb3N0PTZkNAooWEVOKSAgcHJlPTM4MCBzdG9zbD02OWMgcG9z
-dD03MDAKKFhFTikgIHByZT0zYjggc3Rvc3E9Njk4IHBvc3Q9NmNjCihYRU4pICBwcmU9Mzk0
-IGF2eD1lNjQgcG9zdD0zOTAKKFhFTikgTDEgdy8gZmx1c2g6CihYRU4pICBwcmU9NDljIHNz
-ZTI9MTA5YyBwb3N0PTM4MAooWEVOKSAgcHJlPTQ4MCBzdG9zYj0xYzA4IHBvc3Q9ODY0CihY
-RU4pICBwcmU9NGQwIHN0b3NsPTFiYzggcG9zdD04MjAKKFhFTikgIHByZT00ODggc3Rvc3E9
-MWJiOCBwb3N0PTgzNAooWEVOKSAgcHJlPTNhYyBhdng9ZGRjIHBvc3Q9Mzg4CihYRU4pICBw
-cmU9NDk4IHNzZTI9ZWY4IHBvc3Q9Mzg0CihYRU4pICBwcmU9NDc0IHN0b3NiPTFjYjAgcG9z
-dD04NWMKKFhFTikgIHByZT00YTQgc3Rvc2w9MWJjNCBwb3N0PTg1YwooWEVOKSAgcHJlPTQ3
-YyBzdG9zcT0xYmNjIHBvc3Q9ODI4CihYRU4pICBwcmU9NDgwIGF2eD1kZjAgcG9zdD0zOGMK
-KFhFTikgIHByZT00OTggc3NlMj1mMDggcG9zdD0zNzAKKFhFTikgIHByZT00ODAgc3Rvc2I9
-MWVkNCBwb3N0PTg4MAooWEVOKSAgcHJlPTQ3YyBzdG9zbD0xYmIwIHBvc3Q9ODQ4CihYRU4p
-ICBwcmU9NDhjIHN0b3NxPTFiYTAgcG9zdD04NTAKKFhFTikgIHByZT00ODggYXZ4PWRlNCBw
-b3N0PTM5NAooWEVOKSBMMiB3L28gZmx1c2g6CihYRU4pICBwcmU9NjQ1MCBzc2UyPTdmNzgg
-cG9zdD0zOWM4CihYRU4pICBwcmU9NTQ3OCBzdG9zYj0zYWI4IHBvc3Q9NGI3NAooWEVOKSAg
-cHJlPTRmNjggc3Rvc2w9Mzk3OCBwb3N0PTRkODQKKFhFTikgIHByZT00Y2EwIHN0b3NxPTM5
-NWMgcG9zdD00ZTYwCihYRU4pICBwcmU9NTJiNCBhdng9Nzk3NCBwb3N0PTNjODQKKFhFTikg
-IHByZT00ZmE4IHNzZTI9N2YyNCBwb3N0PTNhODAKKFhFTikgIHByZT01MTE4IHN0b3NiPTNh
-ZDggcG9zdD00ZTE4CihYRU4pICBwcmU9NGRmMCBzdG9zbD0zOTA4IHBvc3Q9NGNlOAooWEVO
-KSAgcHJlPTUwMjggc3Rvc3E9Mzk2YyBwb3N0PTRlZjAKKFhFTikgIHByZT01MTEwIGF2eD03
-OTY4IHBvc3Q9M2JhNAooWEVOKSAgcHJlPTUwODggc3NlMj03ZjIwIHBvc3Q9M2IxYwooWEVO
-KSAgcHJlPTRkYjggc3Rvc2I9MzkwOCBwb3N0PTRlYzQKKFhFTikgIHByZT00ZWI0IHN0b3Ns
-PTNhMDAgcG9zdD00YzAwCihYRU4pICBwcmU9NGY5MCBzdG9zcT0zOTcwIHBvc3Q9NGQ5OAoo
-WEVOKSAgcHJlPTRmM2MgYXZ4PTc5NTAgcG9zdD0zYTc4CihYRU4pIEwyIHcvIGZsdXNoOgoo
-WEVOKSAgcHJlPTYzODAgc3NlMj03ODZjIHBvc3Q9Mzk0OAooWEVOKSAgcHJlPTY0MDAgc3Rv
-c2I9MTA0NzggcG9zdD00NzQwCihYRU4pICBwcmU9NjQzMCBzdG9zbD0xMDU2NCBwb3N0PTQ2
-Y2MKKFhFTikgIHByZT02NDMwIHN0b3NxPTEwNjA4IHBvc3Q9NDZjNAooWEVOKSAgcHJlPTY0
-OTggYXZ4PTc1NDggcG9zdD0zOTc4CihYRU4pICBwcmU9NjQxOCBzc2UyPTc4NjggcG9zdD0z
-OTM0CihYRU4pICBwcmU9NjM1MCBzdG9zYj0xMDk4OCBwb3N0PTQ3OTgKKFhFTikgIHByZT02
-NDEwIHN0b3NsPTEwNTA4IHBvc3Q9NDY3OAooWEVOKSAgcHJlPTYzZGMgc3Rvc3E9MTA1YTgg
-cG9zdD00NmZjCihYRU4pICBwcmU9NjUwMCBhdng9NzU2NCBwb3N0PTM5ZDAKKFhFTikgIHBy
-ZT02M2IwIHNzZTI9Nzg5MCBwb3N0PTM5N2MKKFhFTikgIHByZT02NDhjIHN0b3NiPTEwODY4
-IHBvc3Q9NDdmMAooWEVOKSAgcHJlPTY0YTAgc3Rvc2w9MTA2ZjQgcG9zdD00NmI0CihYRU4p
-ICBwcmU9NjQ2YyBzdG9zcT0xMDQ2OCBwb3N0PTQ3MzQKKFhFTikgIHByZT02M2VjIGF2eD03
-NWM0IHBvc3Q9MzkzOAoKCkRpbmFyOgoKKFhFTikgZXJtcz0wIGZzcm09MCBmenJtPTAgZnNy
-cz0wIGZzcmNzPTAgbDFkPTE2ayBsMj0yMDQ4awooWEVOKSBMMSB3L28gZmx1c2g6CihYRU4p
-ICBwcmU9N2U2IHNzZTI9MWMwNiBwb3N0PTc5ZAooWEVOKSAgcHJlPTcwYSBzdG9zYj02Njgg
-cG9zdD04NGYKKFhFTikgIHByZT02ZGMgc3Rvc2w9Njc2IHBvc3Q9ODNmCihYRU4pICBwcmU9
-NmNmIHN0b3NxPTY1YiBwb3N0PTg3MgooWEVOKSAgcHJlPTZlMCBhdng9MWE4NCBwb3N0PTcw
-NgooWEVOKSAgcHJlPTcwOSBzc2UyPTE5YWEgcG9zdD02Y2UKKFhFTikgIHByZT02Yjcgc3Rv
-c2I9NjAxIHBvc3Q9ODQ0CihYRU4pICBwcmU9NmU4IHN0b3NsPTYxMyBwb3N0PTg1ZQooWEVO
-KSAgcHJlPTZhMSBzdG9zcT02MTQgcG9zdD04MjQKKFhFTikgIHByZT02YjkgYXZ4PTFhNjYg
-cG9zdD02OTUKKFhFTikgIHByZT02ZTIgc3NlMj0xOTliIHBvc3Q9NmFmCihYRU4pICBwcmU9
-NmU3IHN0b3NiPTYwMiBwb3N0PTgzOQooWEVOKSAgcHJlPTZjYyBzdG9zbD02MWIgcG9zdD04
-NDUKKFhFTikgIHByZT02YWQgc3Rvc3E9NjA3IHBvc3Q9ODE1CihYRU4pICBwcmU9NmFjIGF2
-eD0xYTgxIHBvc3Q9NjkzCihYRU4pIEwxIHcvIGZsdXNoOgooWEVOKSAgcHJlPTgwNCBzc2Uy
-PWM0OCBwb3N0PTZkYQooWEVOKSAgcHJlPTdjYSBzdG9zYj1lMTYgcG9zdD04MmIKKFhFTikg
-IHByZT03YTMgc3Rvc2w9ZWYwIHBvc3Q9ODFlCihYRU4pICBwcmU9N2Q3IHN0b3NxPWRkZSBw
-b3N0PTgyOQooWEVOKSAgcHJlPTdhZSBhdng9MTU2MiBwb3N0PTZjMAooWEVOKSAgcHJlPTdj
-OSBzc2UyPWMzYSBwb3N0PTZkOAooWEVOKSAgcHJlPTdlYyBzdG9zYj1kYjAgcG9zdD04MmIK
-KFhFTikgIHByZT03ZjAgc3Rvc2w9ZTNlIHBvc3Q9ODRkCihYRU4pICBwcmU9N2YxIHN0b3Nx
-PWRlOCBwb3N0PTgyNwooWEVOKSAgcHJlPTdkZCBhdng9MTU3YSBwb3N0PTZiZAooWEVOKSAg
-cHJlPTdkMiBzc2UyPWM0OSBwb3N0PTZjNAooWEVOKSAgcHJlPTdhNCBzdG9zYj1kZmUgcG9z
-dD04NDgKKFhFTikgIHByZT03Y2Ugc3Rvc2w9ZThjIHBvc3Q9ODMxCihYRU4pICBwcmU9N2Iz
-IHN0b3NxPWRhYSBwb3N0PTgxZAooWEVOKSAgcHJlPTdmOCBhdng9MTU2YiBwb3N0PTZkMAoo
-WEVOKSBMMiB3L28gZmx1c2g6CihYRU4pICBwcmU9NWUyNGYgc3NlMj03ZmY2OSBwb3N0PTQw
-YWY2CihYRU4pICBwcmU9M2M1MTUgc3Rvc2I9NGRkYzcgcG9zdD05ZjNiZgooWEVOKSAgcHJl
-PTNjZmI5IHN0b3NsPTRkYTNjIHBvc3Q9OWVmY2IKKFhFTikgIHByZT0zYmM1YyBzdG9zcT00
-ZGJkMyBwb3N0PTllYzFjCihYRU4pICBwcmU9M2M5MjcgYXZ4PWE2Y2MwIHBvc3Q9NDJhYTEK
-KFhFTikgIHByZT0zY2Y2ZCBzc2UyPTdmZTk1IHBvc3Q9NDIyM2QKKFhFTikgIHByZT0zYzU1
-ZiBzdG9zYj00ZTAzNSBwb3N0PTlmMjVkCihYRU4pICBwcmU9M2NkNjMgc3Rvc2w9NGRkOGIg
-cG9zdD05ZjE0ZgooWEVOKSAgcHJlPTNiOGQzIHN0b3NxPTRkZTFmIHBvc3Q9OWYwNTAKKFhF
-TikgIHByZT0zYzY2ZiBhdng9YTZjYWQgcG9zdD00Mzg4NgooWEVOKSAgcHJlPTNjOTkwIHNz
-ZTI9N2ZlYjkgcG9zdD00MmE2ZAooWEVOKSAgcHJlPTNjMWEwIHN0b3NiPTRkZDQ1IHBvc3Q9
-OWYwNGEKKFhFTikgIHByZT0zZDBhZSBzdG9zbD00ZGU2NCBwb3N0PTlmMDJiCihYRU4pICBw
-cmU9M2MwYWUgc3Rvc3E9NGQ5ZGMgcG9zdD05ZWRiOAooWEVOKSAgcHJlPTNkMGI0IGF2eD1h
-NmM5NyBwb3N0PTQxZTY3CihYRU4pIEwyIHcvIGZsdXNoOgooWEVOKSAgcHJlPTM5MTk0IHNz
-ZTI9NTVlZmQgcG9zdD0zYTJhOQooWEVOKSAgcHJlPTM5MWNmIHN0b3NiPTVhOGJjIHBvc3Q9
-OTVhMWQKKFhFTikgIHByZT0zOTEzYyBzdG9zbD01YTVhNyBwb3N0PThmY2VkCihYRU4pICBw
-cmU9MzkzOGIgc3Rvc3E9NWE2OGIgcG9zdD05NjdkNAooWEVOKSAgcHJlPTM4MjMyIGF2eD05
-ZDMyOCBwb3N0PTNhNGZlCihYRU4pICBwcmU9MzkzYTYgc3NlMj01NjAyNyBwb3N0PTNhMmZl
-CihYRU4pICBwcmU9MzkxN2Egc3Rvc2I9NTlmM2YgcG9zdD05NTE4YQooWEVOKSAgcHJlPTM5
-MGMyIHN0b3NsPTVhMGYzIHBvc3Q9OTUxYmMKKFhFTikgIHByZT0zOTIyZSBzdG9zcT01YTdm
-NiBwb3N0PTk1MmRiCihYRU4pICBwcmU9Mzk0NDMgYXZ4PTlkNDA3IHBvc3Q9M2E0YzQKKFhF
-TikgIHByZT0zODYzNSBzc2UyPTU1ZmI4IHBvc3Q9M2E1NTcKKFhFTikgIHByZT0zODIzNyBz
-dG9zYj01YTJmYiBwb3N0PTkyZjNhCihYRU4pICBwcmU9MzkxNGUgc3Rvc2w9NWE4ZTUgcG9z
-dD04YmI0OAooWEVOKSAgcHJlPTM5MDU4IHN0b3NxPTVhNWRjIHBvc3Q9OTY3MjYKKFhFTikg
-IHByZT0zOTEzYyBhdng9OWQzM2QgcG9zdD0zYTJkMQoKClJvbWxleSAoU2FuZHlicmlkZ2Up
-OgoKKFhFTikgZXJtcz0wIGZzcm09MCBmenJtPTAgZnNycz0wIGZzcmNzPTAgbDFkPTMyayBs
-Mj0yNTZrCihYRU4pIEwxIHcvbyBmbHVzaDoKKFhFTikgIHByZT05NTQgc3NlMj0yOTU4IHBv
-c3Q9Nzk4CihYRU4pICBwcmU9NzkyIHN0b3NiPWU3YyBwb3N0PWFmMgooWEVOKSAgcHJlPTcz
-MiBzdG9zbD1iNzAgcG9zdD1iMjgKKFhFTikgIHByZT03Njggc3Rvc3E9YmRjIHBvc3Q9YWMy
-CihYRU4pICBwcmU9NzRhIGF2eD0yNmFjIHBvc3Q9NzUwCihYRU4pICBwcmU9Nzc0IHNzZTI9
-MjdkMiBwb3N0PTcwOAooWEVOKSAgcHJlPTczOCBzdG9zYj1lNGMgcG9zdD1hZGEKKFhFTikg
-IHByZT03MTQgc3Rvc2w9YjIyIHBvc3Q9YTk4CihYRU4pICBwcmU9NzMyIHN0b3NxPWIzNCBw
-b3N0PWFjMgooWEVOKSAgcHJlPTcxNCBhdng9MjczMCBwb3N0PTcxNAooWEVOKSAgcHJlPTcx
-NCBzc2UyPTI3ZDggcG9zdD03MGUKKFhFTikgIHByZT03MmMgc3Rvc2I9ZTNhIHBvc3Q9YWIw
-CihYRU4pICBwcmU9NzE0IHN0b3NsPWIwNCBwb3N0PWE3NAooWEVOKSAgcHJlPTczMiBzdG9z
-cT1iMDQgcG9zdD1hOTIKKFhFTikgIHByZT03MTQgYXZ4PTRmYzggcG9zdD03MTQKKFhFTikg
-TDEgdy8gZmx1c2g6CihYRU4pICBwcmU9N2M4IHNzZTI9Mjc4NCBwb3N0PTcwOAooWEVOKSAg
-cHJlPTcyYyBzdG9zYj0yMTAwIHBvc3Q9Y2E4CihYRU4pICBwcmU9ODBhIHN0b3NsPTFlZDIg
-cG9zdD1jMWUKKFhFTikgIHByZT03ZjIgc3Rvc3E9MjA1MiBwb3N0PWM5MAooWEVOKSAgcHJl
-PTcxNCBhdng9MjY1MiBwb3N0PTcxNAooWEVOKSAgcHJlPTdkNCBzc2UyPTI3NzIgcG9zdD03
-MzIKKFhFTikgIHByZT03Yzggc3Rvc2I9MjQ2NiBwb3N0PWJlMgooWEVOKSAgcHJlPTgyOCBz
-dG9zbD0yMDA0IHBvc3Q9YzcyCihYRU4pICBwcmU9N2Q0IHN0b3NxPTIwYjIgcG9zdD1jOTYK
-KFhFTikgIHByZT04MWMgYXZ4PTI2ODIgcG9zdD03MTQKKFhFTikgIHByZT03ZDQgc3NlMj0y
-NzU0IHBvc3Q9NzJjCihYRU4pICBwcmU9N2M4IHN0b3NiPTIzNTggcG9zdD1iY2EKKFhFTikg
-IHByZT04Mjggc3Rvc2w9MWVjYyBwb3N0PWM0OAooWEVOKSAgcHJlPTdjOCBzdG9zcT0yMGI4
-IHBvc3Q9YzAwCihYRU4pICBwcmU9ODFjIGF2eD0yNmY0IHBvc3Q9NzE0CihYRU4pIEwyIHcv
-byBmbHVzaDoKKFhFTikgIHByZT05Y2Y2IHNzZTI9MTRiOWUgcG9zdD01NzA2CihYRU4pICBw
-cmU9N2NlMCBzdG9zYj02ZjAwIHBvc3Q9NzRhNgooWEVOKSAgcHJlPTc4ZWEgc3Rvc2w9NWUy
-NiBwb3N0PTc5YzgKKFhFTikgIHByZT03OTI2IHN0b3NxPTVlYzIgcG9zdD03ODQ4CihYRU4p
-ICBwcmU9NzkyMCBhdng9MTQxMGMgcG9zdD01YzcwCihYRU4pICBwcmU9N2JkZSBzc2UyPTE0
-YTA2IHBvc3Q9NWRlYQooWEVOKSAgcHJlPTdhYjIgc3Rvc2I9NmRkYSBwb3N0PTc4YzAKKFhF
-TikgIHByZT03YTZhIHN0b3NsPTVmMzQgcG9zdD03OTJjCihYRU4pICBwcmU9Nzc1MiBzdG9z
-cT02MDU0IHBvc3Q9N2JmYwooWEVOKSAgcHJlPTc5NzQgYXZ4PTE0MTcyIHBvc3Q9NWRlNAoo
-WEVOKSAgcHJlPTdhNzYgc3NlMj0xNGE1NCBwb3N0PTVkYzAKKFhFTikgIHByZT03N2Q2IHN0
-b3NiPTZjZDggcG9zdD03NzlhCihYRU4pICBwcmU9Nzc0YyBzdG9zbD01ZGNjIHBvc3Q9N2Mz
-OAooWEVOKSAgcHJlPTc4OGEgc3Rvc3E9NWU2MiBwb3N0PTdhMDQKKFhFTikgIHByZT03NzIy
-IGF2eD0xNmFjYSBwb3N0PTVlMmMKKFhFTikgTDIgdy8gZmx1c2g6CihYRU4pICBwcmU9OWNl
-YSBzc2UyPTE0MTcyIHBvc3Q9NTcxZQooWEVOKSAgcHJlPTljM2Mgc3Rvc2I9MTEzZTIgcG9z
-dD02ZDUwCihYRU4pICBwcmU9OWQ1NiBzdG9zbD0xMDkyNiBwb3N0PTZjYTgKKFhFTikgIHBy
-ZT05Y2EyIHN0b3NxPTEwOTUwIHBvc3Q9NmRiNgooWEVOKSAgcHJlPTlkNDQgYXZ4PTEzYjA2
-IHBvc3Q9NTcwMAooWEVOKSAgcHJlPTlkZjggc3NlMj0xNDFjYyBwb3N0PTU2YTYKKFhFTikg
-IHByZT05Y2MwIHN0b3NiPTExMmE0IHBvc3Q9NmNhOAooWEVOKSAgcHJlPTlkNTAgc3Rvc2w9
-MTA5YzggcG9zdD02Y2EyCihYRU4pICBwcmU9OWM4NCBzdG9zcT0xMGExMCBwb3N0PTZjZjAK
-KFhFTikgIHByZT05Yzg0IGF2eD0xM2IzMCBwb3N0PTU2ZTgKKFhFTikgIHByZT05Y2RlIHNz
-ZTI9MTQxZWEgcG9zdD01NzljCihYRU4pICBwcmU9OWM3ZSBzdG9zYj0xMTM3MCBwb3N0PTZj
-MmEKKFhFTikgIHByZT05ZDQ0IHN0b3NsPTEwOGRlIHBvc3Q9NmMzYwooWEVOKSAgcHJlPTli
-ZjQgc3Rvc3E9MTA5NmUgcG9zdD02Y2NjCihYRU4pICBwcmU9OWM3ZSBhdng9MTNiMTggcG9z
-dD01NmFjCgoKV2VzdG1lcmU6CgooWEVOKSBlcm1zPTAgZnNybT0wIGZ6cm09MCBmc3JzPTAg
-ZnNyY3M9MCBsMWQ9MzJrIGwyPTI1NmsKKFhFTikgTDEgdy9vIGZsdXNoOgooWEVOKSAgcHJl
-PTExODQgc3NlMj0yMDU4IHBvc3Q9YzYwCihYRU4pICBwcmU9YWQ0IHN0b3NiPWI2MCBwb3N0
-PTFhMjQKKFhFTikgIHByZT05ZDQgc3Rvc2w9ODc0IHBvc3Q9MTM0OAooWEVOKSAgcHJlPTll
-OCBzdG9zcT04ZDQgcG9zdD1kZDAKKFhFTikgIHByZT05ZGMgc3NlMj0xZGZjIHBvc3Q9OWU4
-CihYRU4pICBwcmU9OWU4IHN0b3NiPWE2YyBwb3N0PWRhNAooWEVOKSAgcHJlPTlkNCBzdG9z
-bD04NTQgcG9zdD1kZDQKKFhFTikgIHByZT05ZTggc3Rvc3E9OGE0IHBvc3Q9ZDNjCihYRU4p
-ICBwcmU9OWQ4IHNzZTI9MWUxYyBwb3N0PTllYwooWEVOKSAgcHJlPTllOCBzdG9zYj1hNDQg
-cG9zdD1jYzgKKFhFTikgIHByZT05ZDQgc3Rvc2w9ODFjIHBvc3Q9ZDBjCihYRU4pICBwcmU9
-OWVjIHN0b3NxPTgxMCBwb3N0PWNjOAooWEVOKSBMMSB3LyBmbHVzaDoKKFhFTikgIHByZT1i
-MTggc3NlMj0xOTZjIHBvc3Q9YTg0CihYRU4pICBwcmU9YjA4IHN0b3NiPTE1YjggcG9zdD0x
-MTZjCihYRU4pICBwcmU9YjEwIHN0b3NsPTE0NDAgcG9zdD0xNjNjCihYRU4pICBwcmU9YTQ4
-IHN0b3NxPTEzZDggcG9zdD0xM2I0CihYRU4pICBwcmU9YjFjIHNzZTI9MTk5YyBwb3N0PWEz
-YwooWEVOKSAgcHJlPWJiOCBzdG9zYj0xNWM0IHBvc3Q9MTJlOAooWEVOKSAgcHJlPWIwYyBz
-dG9zbD0xMzI0IHBvc3Q9MTQzMAooWEVOKSAgcHJlPWE0OCBzdG9zcT0xMzVjIHBvc3Q9MTJj
-NAooWEVOKSAgcHJlPWIxYyBzc2UyPTE5OWMgcG9zdD1hM2MKKFhFTikgIHByZT1iMTggc3Rv
-c2I9MTgxOCBwb3N0PTEzMjAKKFhFTikgIHByZT1iMTAgc3Rvc2w9MTMyNCBwb3N0PTExYmMK
-KFhFTikgIHByZT1hNDggc3Rvc3E9MTM1YyBwb3N0PTEyMmMKKFhFTikgTDIgdy9vIGZsdXNo
-OgooWEVOKSAgcHJlPThlMjAgc3NlMj1mNDkwIHBvc3Q9NTA0YwooWEVOKSAgcHJlPTc3YTQg
-c3Rvc2I9NzgwNCBwb3N0PTY4NTQKKFhFTikgIHByZT03NzhjIHN0b3NsPTcyODAgcG9zdD02
-MzZjCihYRU4pICBwcmU9NzU5NCBzdG9zcT03MjM0IHBvc3Q9NjBjOAooWEVOKSAgcHJlPTcw
-YmMgc3NlMj1mM2M0IHBvc3Q9NTVlMAooWEVOKSAgcHJlPTcwMTQgc3Rvc2I9NzdlOCBwb3N0
-PTVmNjgKKFhFTikgIHByZT03M2Y4IHN0b3NsPTcyNjQgcG9zdD02MmI4CihYRU4pICBwcmU9
-NzJlYyBzdG9zcT03MjA4IHBvc3Q9NjJmYwooWEVOKSAgcHJlPTZkODAgc3NlMj1mMzcwIHBv
-c3Q9NTFhMAooWEVOKSAgcHJlPTZlMzQgc3Rvc2I9NzgwNCBwb3N0PTVmODQKKFhFTikgIHBy
-ZT03MDU4IHN0b3NsPTcyM2MgcG9zdD01ZmI4CihYRU4pICBwcmU9NmYxYyBzdG9zcT03MjVj
-IHBvc3Q9NjE4OAooWEVOKSBMMiB3LyBmbHVzaDoKKFhFTikgIHByZT04ZTQ4IHNzZTI9Y2Jj
-NCBwb3N0PTUwMzQKKFhFTikgIHByZT04ZDVjIHN0b3NiPTk5OWMgcG9zdD01OGQwCihYRU4p
-ICBwcmU9OGRhMCBzdG9zbD05MTJjIHBvc3Q9NTkwYwooWEVOKSAgcHJlPThjMTAgc3Rvc3E9
-OGY4MCBwb3N0PTVhMGMKKFhFTikgIHByZT04ZTEwIHNzZTI9Y2JkMCBwb3N0PTUwMzAKKFhF
-TikgIHByZT04Y2IwIHN0b3NiPTk4NzggcG9zdD01OTYwCihYRU4pICBwcmU9OGRlNCBzdG9z
-bD05MDYwIHBvc3Q9NThlNAooWEVOKSAgcHJlPThjMGMgc3Rvc3E9OGZhMCBwb3N0PTVhMTAK
-KFhFTikgIHByZT04ZDRjIHNzZTI9Y2JkMCBwb3N0PTUwMmMKKFhFTikgIHByZT04Y2Y4IHN0
-b3NiPTk4MzQgcG9zdD01OGYwCihYRU4pICBwcmU9OGRlNCBzdG9zbD05MGQwIHBvc3Q9NThl
-NAooWEVOKSAgcHJlPThjMGMgc3Rvc3E9OTE3OCBwb3N0PTU5OTgKCgpMYXRpdHVkZSBFNjQx
-MCAoU2FuZHlicmlkZ2UpOgoKKFhFTikgZXJtcz0wIGZzcm09MCBmenJtPTAgZnNycz0wIGZz
-cmNzPTAgbDFkPTMyayBsMj0yNTZrCihYRU4pIEwxIHcvbyBmbHVzaDoKKFhFTikgIHByZT02
-OGQgc3NlMj0zYzA2IHBvc3Q9NDYwCihYRU4pICBwcmU9NDFmIHN0b3NiPThhMCBwb3N0PTgy
-MwooWEVOKSAgcHJlPTQxMyBzdG9zbD02YWUgcG9zdD03ODkKKFhFTikgIHByZT00MTMgc3Rv
-c3E9NmUzIHBvc3Q9NzhmCihYRU4pICBwcmU9NDEzIHNzZTI9Mzk4OSBwb3N0PTQxMAooWEVO
-KSAgcHJlPTQyMiBzdG9zYj04MWQgcG9zdD03NzEKKFhFTikgIHByZT00MTMgc3Rvc2w9Njc1
-IHBvc3Q9NzdkCihYRU4pICBwcmU9M2Y5IHN0b3NxPTY2NyBwb3N0PTZmYgooWEVOKSAgcHJl
-PTQzNyBzc2UyPTM4YjcgcG9zdD00MTYKKFhFTikgIHByZT00MDcgc3Rvc2I9ODAyIHBvc3Q9
-NzI3CihYRU4pICBwcmU9NDA3IHN0b3NsPTY1ZSBwb3N0PTc1NAooWEVOKSAgcHJlPTQwNCBz
-dG9zcT02NWIgcG9zdD02ZWYKKFhFTikgTDEgdy8gZmx1c2g6CihYRU4pICBwcmU9NWI0IHNz
-ZTI9MjBjYSBwb3N0PTQzMwooWEVOKSAgcHJlPTU1ZiBzdG9zYj0xNWEyIHBvc3Q9ODYxCihY
-RU4pICBwcmU9NTY1IHN0b3NsPTEyNTIgcG9zdD04NjEKKFhFTikgIHByZT01NTkgc3Rvc3E9
-MTQ0NCBwb3N0PTg0ZAooWEVOKSAgcHJlPTU3YyBzc2UyPTIxYWUgcG9zdD00MzYKKFhFTikg
-IHByZT01NWYgc3Rvc2I9MTU3ZSBwb3N0PTg5NwooWEVOKSAgcHJlPTU2ZCBzdG9zbD0xMjU1
-IHBvc3Q9ODNiCihYRU4pICBwcmU9NjU3IHN0b3NxPTEyODIgcG9zdD04NmQKKFhFTikgIHBy
-ZT01NjUgc3NlMj0yMWJkIHBvc3Q9NDNhCihYRU4pICBwcmU9NTdjIHN0b3NiPTE1M2QgcG9z
-dD04OGQKKFhFTikgIHByZT01NmIgc3Rvc2w9MTI0NyBwb3N0PTg3YwooWEVOKSAgcHJlPTU3
-MyBzdG9zcT0xMjU4IHBvc3Q9ODdmCihYRU4pIEwyIHcvbyBmbHVzaDoKKFhFTikgIHByZT02
-MDJiIHNzZTI9MWQ0ZDQgcG9zdD0zNjY5CihYRU4pICBwcmU9NGE2YyBzdG9zYj00Yjc5IHBv
-c3Q9NDRiNAooWEVOKSAgcHJlPTQ5NzYgc3Rvc2w9NDM4MyBwb3N0PTQ4ZDAKKFhFTikgIHBy
-ZT00ZDk1IHN0b3NxPTQzNWQgcG9zdD00N2JhCihYRU4pICBwcmU9NGJmMyBzc2UyPTFkMzMz
-IHBvc3Q9MzlmNwooWEVOKSAgcHJlPTRiZWQgc3Rvc2I9NGIzYyBwb3N0PTQ2NzEKKFhFTikg
-IHByZT01MDAzIHN0b3NsPTQzNWQgcG9zdD00ZGU4CihYRU4pICBwcmU9NGYwYSBzdG9zcT00
-Mzc3IHBvc3Q9NDg3NAooWEVOKSAgcHJlPTRkMWUgc3NlMj0xZDM2OCBwb3N0PTNlNmUKKFhF
-TikgIHByZT00ZjI1IHN0b3NiPTRiNGEgcG9zdD00N2E1CihYRU4pICBwcmU9NGFiZiBzdG9z
-bD00MzE2IHBvc3Q9NDdjYwooWEVOKSAgcHJlPTRmMTkgc3Rvc3E9NDM1MSBwb3N0PTQ4YmIK
-KFhFTikgTDIgdy8gZmx1c2g6CihYRU4pICBwcmU9NjBjYiBzc2UyPTEwMzEwIHBvc3Q9MzY3
-MgooWEVOKSAgcHJlPTYwY2Ugc3Rvc2I9OTU2YyBwb3N0PTQzNmIKKFhFTikgIHByZT02MDNk
-IHN0b3NsPThhNzAgcG9zdD00MzhmCihYRU4pICBwcmU9NWZlMSBzdG9zcT04NzZkIHBvc3Q9
-NDQyZgooWEVOKSAgcHJlPTYwZjggc3NlMj0xMDNkYyBwb3N0PTM2YWEKKFhFTikgIHByZT02
-MDEwIHN0b3NiPTk0ZGIgcG9zdD00MzZlCihYRU4pICBwcmU9NjBmZSBzdG9zbD04YTdjIHBv
-c3Q9NDNhNwooWEVOKSAgcHJlPTYwNWIgc3Rvc3E9ODc2ZCBwb3N0PTQ0NzMKKFhFTikgIHBy
-ZT02MDkzIHNzZTI9MTA0ODUgcG9zdD0zNmI5CihYRU4pICBwcmU9NjA0YyBzdG9zYj05M2M0
-IHBvc3Q9NDNiMwooWEVOKSAgcHJlPTYwYjMgc3Rvc2w9OGMwMyBwb3N0PTQzNWYKKFhFTikg
-IHByZT02MDdlIHN0b3NxPTg5NWMgcG9zdD00M2ZjCgoKVHVsc2EgKEZhbTBmIFhlb24gKDcx
-MDA/KSk6CgooWEVOKSBlcm1zPTAgZnNybT0wIGZ6cm09MCBmc3JzPTAgZnNyY3M9MCBsMWQ9
-MTZrIGwyPTEwMjRrCihYRU4pIEwxIHcvbyBmbHVzaDoKKFhFTikgIHByZT1jYWYgc3NlMj0z
-Y2Q0IHBvc3Q9YjM5CihYRU4pICBwcmU9YjI4IHN0b3NiPTE5MmIgcG9zdD0xNDg1CihYRU4p
-ICBwcmU9YjlmIHN0b3NsPWQ3YiBwb3N0PWQzNwooWEVOKSAgcHJlPWIyOCBzdG9zcT1jNmIg
-cG9zdD1jOGQKKFhFTikgIHByZT1iMTcgc3NlMj0zMjIzIHBvc3Q9YWU0CihYRU4pICBwcmU9
-YThmIHN0b3NiPWJkMiBwb3N0PWI0YQooWEVOKSAgcHJlPWE4ZiBzdG9zbD1hYTAgcG9zdD1h
-ZjUKKFhFTikgIHByZT1hYjEgc3Rvc3E9YThmIHBvc3Q9YmUzCihYRU4pICBwcmU9YWMyIHNz
-ZTI9MzIxMiBwb3N0PWFlNAooWEVOKSAgcHJlPWE4ZiBzdG9zYj1iYzEgcG9zdD1hZTQKKFhF
-TikgIHByZT1hYTAgc3Rvc2w9YTZkIHBvc3Q9YWQzCihYRU4pICBwcmU9YWEwIHN0b3NxPWE2
-ZCBwb3N0PWFlNAooWEVOKSBMMSB3LyBmbHVzaDoKKFhFTikgIHByZT1iMDYgc3NlMj02Mjhj
-IHBvc3Q9YzI3CihYRU4pICBwcmU9YWU0IHN0b3NiPTk1OGMgcG9zdD0xNGViCihYRU4pICBw
-cmU9YjE3IHN0b3NsPTk1OWQgcG9zdD0xNmE1CihYRU4pICBwcmU9YjA2IHN0b3NxPTk2Njkg
-cG9zdD0xNWQ5CihYRU4pICBwcmU9YWU0IHNzZTI9NjEyNyBwb3N0PWJjMQooWEVOKSAgcHJl
-PWE3ZSBzdG9zYj05NjM2IHBvc3Q9MTViNwooWEVOKSAgcHJlPWFhMCBzdG9zbD05MmU0IHBv
-c3Q9MTQ3NAooWEVOKSAgcHJlPWE4ZiBzdG9zcT05NWUxIHBvc3Q9MTYxZAooWEVOKSAgcHJl
-PWFiMSBzc2UyPTYyYmYgcG9zdD1jMDUKKFhFTikgIHByZT1hOGYgc3Rvc2I9OTZlMCBwb3N0
-PTE4MGEKKFhFTikgIHByZT1hOGYgc3Rvc2w9OTcwMiBwb3N0PTE1YTYKKFhFTikgIHByZT1h
-YTAgc3Rvc3E9OTQzOCBwb3N0PTE1ZDkKKFhFTikgTDIgdy9vIGZsdXNoOgooWEVOKSAgcHJl
-PTUzNDJkIHNzZTI9ZDQ5ZWQgcG9zdD0yMWM4YwooWEVOKSAgcHJlPTI1NDk4IHN0b3NiPTY5
-ZDRiIHBvc3Q9MzE1YzUKKFhFTikgIHByZT0yNDliNCBzdG9zbD02OTgyZSBwb3N0PTMxNjZm
-CihYRU4pICBwcmU9MjQ3MGMgc3Rvc3E9NjllMjggcG9zdD0zMGJiZQooWEVOKSAgcHJlPTIz
-ZjI1IHNzZTI9ZDQ1MzYgcG9zdD0xZmIxNAooWEVOKSAgcHJlPTIzZTI2IHN0b3NiPTZhZDJh
-IHBvc3Q9MzBhNmEKKFhFTikgIHByZT0yM2ZjZiBzdG9zbD02OGVkMSBwb3N0PTJmZDIyCihY
-RU4pICBwcmU9MjNlNDggc3Rvc3E9NjliZTYgcG9zdD0zMDhlMwooWEVOKSAgcHJlPTIzZTlk
-IHNzZTI9ZDQ0NTkgcG9zdD0yMGM5YwooWEVOKSAgcHJlPTIzZjY5IHN0b3NiPTZhNzBlIHBv
-c3Q9MzBjOWIKKFhFTikgIHByZT0yNDAzNSBzdG9zbD02OTA2OSBwb3N0PTMwMmU5CihYRU4p
-ICBwcmU9MjU4ZmEgc3Rvc3E9NjlhYTMgcG9zdD0zMGNiZAooWEVOKSBMMiB3LyBmbHVzaDoK
-KFhFTikgIHByZT0yNjNjZCBzc2UyPTEzMDZhMiBwb3N0PTIxYmQxCihYRU4pICBwcmU9MjY1
-ZmUgc3Rvc2I9MjdhZWIyIHBvc3Q9MzE3N2YKKFhFTikgIHByZT0yNjQ2NiBzdG9zbD0yN2Y1
-MTYgcG9zdD0zMTFjOQooWEVOKSAgcHJlPTI2MDA0IHN0b3NxPTI3Y2I0MCBwb3N0PTMxNTNk
-CihYRU4pICBwcmU9MjU2NDEgc3NlMj0xMzAzMWQgcG9zdD0yMWIxNgooWEVOKSAgcHJlPTI2
-NDExIHN0b3NiPTI3ZjU3YyBwb3N0PTMxZWNkCihYRU4pICBwcmU9MjYyZjAgc3Rvc2w9Mjdi
-NWJjIHBvc3Q9MzE1YTMKKFhFTikgIHByZT0yNWY0OSBzdG9zcT0yN2I5NzQgcG9zdD0zMTJh
-NgooWEVOKSAgcHJlPTI1NTIwIHNzZTI9MTMxMGVkIHBvc3Q9MjFiMzgKKFhFTikgIHByZT0y
-NjE3YSBzdG9zYj0yN2QxMDcgcG9zdD0zMTRkNwooWEVOKSAgcHJlPTI2MWFkIHN0b3NsPTI3
-YmQ4MSBwb3N0PTMwOWYzCihYRU4pICBwcmU9MjVmZjMgc3Rvc3E9MjdkZmY4IHBvc3Q9MzE2
-NGQK
---------------E9A009BC66E76B4D3F1D9EB6--
 
