@@ -2,45 +2,44 @@ Return-Path: <SRS0=iyTO=JM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2C2DC433ED
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C555FC433B4
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:22:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BAEAE60BD3
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:21:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BAEAE60BD3
+	by mail.kernel.org (Postfix) with ESMTPS id 7D438613B7
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:22:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D438613B7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.111257.212765 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.111263.212777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lX2s8-0007vZ-T2; Thu, 15 Apr 2021 14:21:32 +0000
+	id 1lX2tG-00084P-5n; Thu, 15 Apr 2021 14:22:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 111257.212765; Thu, 15 Apr 2021 14:21:32 +0000
+Received: by outflank-mailman (output) from mailman id 111263.212777; Thu, 15 Apr 2021 14:22:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lX2s8-0007vS-Ni; Thu, 15 Apr 2021 14:21:32 +0000
-Received: by outflank-mailman (input) for mailman id 111257;
- Thu, 15 Apr 2021 14:21:32 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lX2tG-00084I-2H; Thu, 15 Apr 2021 14:22:42 +0000
+Received: by outflank-mailman (input) for mailman id 111263;
+ Thu, 15 Apr 2021 14:22:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=x7n8=JM=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lX2s7-0007vJ-UQ
- for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 14:21:31 +0000
+ id 1lX2tF-00084C-Fl
+ for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 14:22:41 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 880cbd17-fbc2-48e6-b507-3e14bec4bcdf;
- Thu, 15 Apr 2021 14:21:31 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 36129436-dbe9-4e4b-a0ba-1ad624e744c2;
+ Thu, 15 Apr 2021 14:22:40 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 6E5EEAEF8;
- Thu, 15 Apr 2021 14:21:30 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 0DE2DAF79;
+ Thu, 15 Apr 2021 14:22:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,48 +51,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 880cbd17-fbc2-48e6-b507-3e14bec4bcdf
+X-Inumbo-ID: 36129436-dbe9-4e4b-a0ba-1ad624e744c2
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1618496490; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1618496560; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=anHE6BTBhvz0gOu6r8Dzkje9MyEAsFLAqlnyUUHGgUw=;
-	b=BPaSxddSSm3w4YJLWLoXGqKC6u6CLIooR2ZLo5NjSgvreBEhM5qm2is8rlityMoL95Q+sN
-	13fRQEWCTJTvyE61dToDgn1SYVZVQcTn/D7IQbSyUX+0n5KgQ60+qPfKg3u3L1ObWTEDNC
-	x72rUkNZhglceQsUbSPWC+Jg9NB+s+8=
-Subject: Re: [PATCH v3 13/15] unzstd: replace INIT{,DATA} and STATIC
+	bh=1IPtRFErwYfDHMEq0K5fG1FI5xXzh8w7kMgqtY5TcfI=;
+	b=iUgEL7lMyfqCWi7w1BObpr+AjAt2ySaAa3e6YS20prxMdhB78ZAGwS/7rDWDS3K6YsM1ch
+	YLL/YIljh4h8/SQiJbRbwATcj3b4qKj//A0O2vXfW9JOT1H/YZOQSH9uJQ+7T9KCRM/wtT
+	ZPFy23Et0I0OAxcm/dVWa0H7GULVcuM=
+Subject: Re: [PATCH v3 12/15] unxz: replace INIT{,DATA} and STATIC
 To: Julien Grall <julien@xen.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <2db91183-a7de-0c43-2fef-feb3523ed19b@suse.com>
- <19f12930-df0e-5a00-9e5e-53edffcf51d7@suse.com>
- <467ed62e-e5c3-0a08-b9a7-5b4e913b3c90@xen.org>
+ <4e0a0db2-db34-a738-2f5e-1d5cd2c37e19@suse.com>
+ <c52c9670-d87e-79f9-0104-e6e074419c31@xen.org>
+ <a9adf993-0f2d-acb1-b671-7b8c3b15b4d8@suse.com>
+ <eaf819a8-985f-d33f-902d-58320c99a8d8@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <e1d08ced-c2e8-22e3-2da3-8116b69cb627@suse.com>
-Date: Thu, 15 Apr 2021 16:21:30 +0200
+Message-ID: <1a3f4d72-d57a-dde3-fb46-c91508f09b2a@suse.com>
+Date: Thu, 15 Apr 2021 16:22:39 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.9.1
 MIME-Version: 1.0
-In-Reply-To: <467ed62e-e5c3-0a08-b9a7-5b4e913b3c90@xen.org>
+In-Reply-To: <eaf819a8-985f-d33f-902d-58320c99a8d8@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 15.04.2021 13:59, Julien Grall wrote:
-> On 26/01/2021 09:52, Jan Beulich wrote:
->> With xen/common/decompress.h now agreeing in both build modes about
->> what STATIC expands to, there's no need for this abstraction anymore.
+On 15.04.2021 16:18, Julien Grall wrote:
 > 
-> Shouldn't you also mention "INIT" and "INITDATA" here?
+> 
+> On 15/04/2021 15:16, Jan Beulich wrote:
+>> On 15.04.2021 13:58, Julien Grall wrote:
+>>> On 26/01/2021 09:52, Jan Beulich wrote:
+>>>> --- a/xen/common/decompress.h
+>>>> +++ b/xen/common/decompress.h
+>>>> @@ -9,7 +9,6 @@
+>>>>    
+>>>>    #define STATIC static
+>>>>    #define INIT __init
+>>>> -#define INITDATA __initdata
+>>>>    
+>>>>    #define malloc xmalloc_bytes
+>>>>    #define free xfree
+>>>> @@ -21,7 +20,6 @@
+>>>>    
+>>>>    #define STATIC static
+>>>>    #define INIT
+>>>> -#define INITDATA
+>>>
+>>> Shouldn't the two changes be part of patch #14?
+>>
+>> One could do it that way, sure, but the last uses are gone here,
+>> and hence I wanted to get rid of this one item right away.
+> 
+> AFAICT, the same is true for STATIC and INIT. So it doesn't sense to not 
+> be consistent in the way you treat them.
 
-Two parts: INITDATA was mistakenly mentioned in the title. I've
-dropped that. And what I'm saying about STATIC does not apply to
-INIT - for it, we replace the extra level of abstraction by
-directly using __init, just like was done in the earlier patches.
+No, further uses of STATIC and INIT get dropped by later patches.
 
 Jan
 
