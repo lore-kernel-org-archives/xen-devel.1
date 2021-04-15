@@ -2,42 +2,45 @@ Return-Path: <SRS0=iyTO=JM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C852BC43462
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:05:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0248C433B4
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:26:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 90754613B6
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:05:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 90754613B6
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 556B260FF1
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:26:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 556B260FF1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.111015.212185 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.111021.212197 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWyrk-0004TE-6N; Thu, 15 Apr 2021 10:04:52 +0000
+	id 1lWzCS-0006UY-2W; Thu, 15 Apr 2021 10:26:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 111015.212185; Thu, 15 Apr 2021 10:04:52 +0000
+Received: by outflank-mailman (output) from mailman id 111021.212197; Thu, 15 Apr 2021 10:26:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWyrk-0004T5-2A; Thu, 15 Apr 2021 10:04:52 +0000
-Received: by outflank-mailman (input) for mailman id 111015;
- Thu, 15 Apr 2021 10:04:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=C/wI=JM=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1lWyrj-0004Sv-5m
- for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 10:04:51 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9ae1a2da-2134-4fb3-a202-dc69953984f8;
- Thu, 15 Apr 2021 10:04:50 +0000 (UTC)
+	id 1lWzCR-0006UR-VO; Thu, 15 Apr 2021 10:26:15 +0000
+Received: by outflank-mailman (input) for mailman id 111021;
+ Thu, 15 Apr 2021 10:26:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1lWzCP-0006UM-SQ
+ for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 10:26:13 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lWzCP-0005nz-Jn; Thu, 15 Apr 2021 10:26:13 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lWzCP-00010I-AA; Thu, 15 Apr 2021 10:26:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,148 +52,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ae1a2da-2134-4fb3-a202-dc69953984f8
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618481089;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=XM/KC8VilFwVpZaPc2wNIuqDGK9utm8Pm2v2UbjAvFI=;
-  b=BQjVTd2ingDFFR7yLGc82TtUku9ie639hi8qMCz1piIgyxcR+wUWF58F
-   9wF8ZWMv66+LguzUXusnVBjzREoPHwsby0yg2zpacMxlGMBRHycUJMHuA
-   YZCgpuDrlc6Qzcx6av7nlgt5YsX423JKJtPbYl/PlIVHcvhuxloEU8J8c
-   8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 96QOzxdbZpGNDreiqxcT08JvuAmgfU27g96unckYg1kCfLyhRfZKpx2XU3adRS6IHc8KhRpxQ4
- 6ACu6xYaHke17zZOfhzkMcuEQhXXjcF2ubTl4YU8lHZsaL9NKu4vc8YI/oAcJ/VJfdqhamrC0X
- kInQWBXP19ognevZ0COV8dvpGlEpj6PKN6O+DYOeLqp6XS3wnJlGkzzGOffim8BFxDFNY/zGrh
- 8FKysYsros8OadRGZrQDXvjwhXsqEpEe8ft2PSxA37MUxkRlpYViV6fWNVBQ3vkmrJtheB/hih
- llA=
-X-SBRS: 4.0
-X-MesageID: 41492243
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:wpaSEaOZ925J7cBcTgSjsMiAIKoaSvp033AA/SlKJyB9WMqeis
- yogbAnxQb54QxhP00ItNicNMC7IU/02oVy5eAqUYuKeCnDlC+WIJp57Y3kqgeQfxHW0uJGz6
- 9vf+xfJbTLfDtHpP336gW5DNosqePvmMvD6Nv29HtxURpsL5hp8gYRMHf/LmRNWAJECZAlfa
- D82uN7oVObFkg/X4CeDnkBU/OrnayoqK7b
-X-IronPort-AV: E=Sophos;i="5.82,223,1613451600"; 
-   d="scan'208";a="41492243"
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <jun.nakajima@intel.com>, <kevin.tian@intel.com>, <jbeulich@suse.com>,
-	<andrew.cooper3@citrix.com>, <roger.pau@citrix.com>, <wl@xen.org>, "Igor
- Druzhinin" <igor.druzhinin@citrix.com>
-Subject: [PATCH v5 1/2] x86/vtx: add LBR_SELECT to the list of LBR MSRs
-Date: Thu, 15 Apr 2021 11:04:21 +0100
-Message-ID: <1618481062-16094-1-git-send-email-igor.druzhinin@citrix.com>
-X-Mailer: git-send-email 2.7.4
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=NZ07Qcw1Cctb6iKARQGabUrJslVL16xSSfmjvDjEfmQ=; b=k7StNO7A8s8cRusMz7QXsQY76t
+	f8tWcHeeoA03pSMvheHzbhF2eio5ffTu8xpaxwH51BOSo73yErW/jpsRKXJNymwF42WANHuXExD44
+	erOEqZUZK0vG8KLWmrvvNw/xim17t8TMyWjTd4K91t6eydbC2YFq/75UyshFnA1/PzGw=;
+Subject: Re: [PATCH 11/11] Arm/optee: don't open-code xzalloc_flex_struct()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: George Dunlap <george.dunlap@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <a3fef3b0-c9f3-208e-3728-62ca9cff70ba@suse.com>
+ <aad23304-c727-2921-59fe-ab3763f5da03@suse.com>
+ <9f95c37b-dc4a-d2cf-01c1-98d2108fae88@xen.org>
+ <1c9229ac-5491-313e-f053-bc5bee01c3de@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <7945a56e-337d-3c84-ecfd-2be759adda4a@xen.org>
+Date: Thu, 15 Apr 2021 11:26:11 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.9.1
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <1c9229ac-5491-313e-f053-bc5bee01c3de@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-This MSR exists since Nehalem / Silvermont and is actively used by Linux,
-for instance, to improve sampling efficiency.
+Hi Jan,
 
-Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
----
-Changes in v5:
-- added Silvermont+ LBR_SELECT support
+On 14/04/2021 08:03, Jan Beulich wrote:
+> On 13.04.2021 20:19, Julien Grall wrote:
+>> On 08/04/2021 13:23, Jan Beulich wrote:
+>>> There is a difference in generated code: xzalloc_bytes() forces
+>>> SMP_CACHE_BYTES alignment. I think we not only don't need this here, but
+>>> actually don't want it.
+>>
+>> So I think moving to xmalloc_flex_struct() is a pretty good move. But I
+>> am actually a bit confused with the argument used.
+>>
+>> Could you provide some details why you think forcing the array to be
+>> aligned to the maximum cache line supported (128 bytes on Arm) is wrong?
+> 
+> It is not "wrong" in that sense, but if this is intended it shouldn't
+> be arranged via use of xmalloc_bytes().
 
-New patch in v4 as suggested by Andrew.
----
- xen/arch/x86/hvm/vmx/vmx.c      | 20 ++++++++++++++++----
- xen/include/asm-x86/msr-index.h | 10 ++++++++--
- 2 files changed, 24 insertions(+), 6 deletions(-)
+This is not very clear from the commit message (or even the cover 
+letter). How about:
 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 835b905..30c6a57 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2915,14 +2915,16 @@ static const struct lbr_info {
- }, nh_lbr[] = {
-     { MSR_IA32_LASTINTFROMIP,       1 },
-     { MSR_IA32_LASTINTTOIP,         1 },
--    { MSR_C2_LASTBRANCH_TOS,        1 },
-+    { MSR_NHL_LBR_SELECT,           1 },
-+    { MSR_NHL_LASTBRANCH_TOS,       1 },
-     { MSR_P4_LASTBRANCH_0_FROM_LIP, NUM_MSR_P4_LASTBRANCH_FROM_TO },
-     { MSR_P4_LASTBRANCH_0_TO_LIP,   NUM_MSR_P4_LASTBRANCH_FROM_TO },
-     { 0, 0 }
- }, sk_lbr[] = {
-     { MSR_IA32_LASTINTFROMIP,       1 },
-     { MSR_IA32_LASTINTTOIP,         1 },
--    { MSR_SKL_LASTBRANCH_TOS,       1 },
-+    { MSR_NHL_LBR_SELECT,           1 },
-+    { MSR_NHL_LASTBRANCH_TOS,       1 },
-     { MSR_SKL_LASTBRANCH_0_FROM_IP, NUM_MSR_SKL_LASTBRANCH },
-     { MSR_SKL_LASTBRANCH_0_TO_IP,   NUM_MSR_SKL_LASTBRANCH },
-     { MSR_SKL_LASTBRANCH_0_INFO,    NUM_MSR_SKL_LASTBRANCH },
-@@ -2934,10 +2936,19 @@ static const struct lbr_info {
-     { MSR_C2_LASTBRANCH_0_FROM_IP,  NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
-     { MSR_C2_LASTBRANCH_0_TO_IP,    NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
-     { 0, 0 }
-+}, sm_lbr[] = {
-+    { MSR_IA32_LASTINTFROMIP,       1 },
-+    { MSR_IA32_LASTINTTOIP,         1 },
-+    { MSR_SM_LBR_SELECT,            1 },
-+    { MSR_SM_LASTBRANCH_TOS,        1 },
-+    { MSR_C2_LASTBRANCH_0_FROM_IP,  NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
-+    { MSR_C2_LASTBRANCH_0_TO_IP,    NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
-+    { 0, 0 }
- }, gm_lbr[] = {
-     { MSR_IA32_LASTINTFROMIP,       1 },
-     { MSR_IA32_LASTINTTOIP,         1 },
--    { MSR_GM_LASTBRANCH_TOS,        1 },
-+    { MSR_SM_LBR_SELECT,            1 },
-+    { MSR_SM_LASTBRANCH_TOS,        1 },
-     { MSR_GM_LASTBRANCH_0_FROM_IP,  NUM_MSR_GM_LASTBRANCH_FROM_TO },
-     { MSR_GM_LASTBRANCH_0_TO_IP,    NUM_MSR_GM_LASTBRANCH_FROM_TO },
-     { 0, 0 }
-@@ -2991,6 +3002,7 @@ static const struct lbr_info *last_branch_msr_get(void)
-             return sk_lbr;
-         /* Atom */
-         case 0x1c: case 0x26: case 0x27: case 0x35: case 0x36:
-+            return at_lbr;
-         /* Silvermont */
-         case 0x37: case 0x4a: case 0x4d: case 0x5a: case 0x5d:
-         /* Xeon Phi Knights Landing */
-@@ -2999,7 +3011,7 @@ static const struct lbr_info *last_branch_msr_get(void)
-         case 0x85:
-         /* Airmont */
-         case 0x4c:
--            return at_lbr;
-+            return sm_lbr;
-         /* Goldmont */
-         case 0x5c: case 0x5f:
-             return gm_lbr;
-diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
-index 43d26ef..020908f 100644
---- a/xen/include/asm-x86/msr-index.h
-+++ b/xen/include/asm-x86/msr-index.h
-@@ -606,15 +606,21 @@
- #define NUM_MSR_C2_LASTBRANCH_FROM_TO	4
- #define NUM_MSR_ATOM_LASTBRANCH_FROM_TO	8
- 
-+/* Nehalem (and newer) last-branch recording */
-+#define MSR_NHL_LBR_SELECT		0x000001c8
-+#define MSR_NHL_LASTBRANCH_TOS		0x000001c9
-+
- /* Skylake (and newer) last-branch recording */
--#define MSR_SKL_LASTBRANCH_TOS		0x000001c9
- #define MSR_SKL_LASTBRANCH_0_FROM_IP	0x00000680
- #define MSR_SKL_LASTBRANCH_0_TO_IP	0x000006c0
- #define MSR_SKL_LASTBRANCH_0_INFO	0x00000dc0
- #define NUM_MSR_SKL_LASTBRANCH		32
- 
-+/* Silvermont (and newer) last-branch recording */
-+#define MSR_SM_LBR_SELECT		0x000001c8
-+#define MSR_SM_LASTBRANCH_TOS		0x000001c9
-+
- /* Goldmont last-branch recording */
--#define MSR_GM_LASTBRANCH_TOS		0x000001c9
- #define MSR_GM_LASTBRANCH_0_FROM_IP	0x00000680
- #define MSR_GM_LASTBRANCH_0_TO_IP	0x000006c0
- #define NUM_MSR_GM_LASTBRANCH_FROM_TO	32
+"
+The current use xzalloc_bytes() in optee is nearly an open-coded version 
+of xzalloc_flex_struct() which was introduced after the driver was merged.
+
+The main difference is xzalloc_bytes() will also force the allocation to 
+be SMP_CACHE_BYTES aligned and therefore avoid sharing the cache line.
+
+While sharing the cache line can have an impact on the performance, this 
+is also true for most of the other users of  x*alloc_flex_struct(). So 
+if we want to prevent sharing a cache line, it should be part of 
+x*alloc_flex_struct().
+
+In this case, we don't need stricter alignment than what the allocator 
+does. So the call to xzalloc_bytes() is now replaced with a call 
+xzalloc_flex_Struct().
+"
+
+Ideally, we want the same sort of the commit message in the other patches.
+
+> As also pointed out in a
+> similar discussion on another sub-thread, imo xmalloc_bytes(), being
+> type-unsafe, should go away altogether mid-term.
+
+And I will support dropping xmalloc_bytes().
+
+> If individual callers
+> have specific alignment requirements (which ought to be the exception),
+> they should explicitly request the needed alignment. If architectures
+> would prefer all allocations to have certain minimum alignment (e.g.
+> to avoid cacheline sharing, which was Andrew's argument) or other
+> "arrangement" (alignment by itself may not be that interesting due to
+> the bhdr placed ahead of the allocation), it should be the allocator
+> itself that provides for this, not individual callers.
+
+And I agree that the allocator should do the alignment if this benefits 
+every allocation.
+
+Cheers,
+
 -- 
-2.7.4
-
+Julien Grall
 
