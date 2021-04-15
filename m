@@ -7,38 +7,38 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E55ACC433B4
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:04:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4D1DC433B4
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:05:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B430F611AD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:04:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B430F611AD
+	by mail.kernel.org (Postfix) with ESMTPS id 9EF1B611AD
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:05:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9EF1B611AD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.111208.212678 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.111212.212690 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lX2bn-0005Dx-OJ; Thu, 15 Apr 2021 14:04:39 +0000
+	id 1lX2c2-0005R7-0c; Thu, 15 Apr 2021 14:04:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 111208.212678; Thu, 15 Apr 2021 14:04:39 +0000
+Received: by outflank-mailman (output) from mailman id 111212.212690; Thu, 15 Apr 2021 14:04:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lX2bn-0005Dp-Jy; Thu, 15 Apr 2021 14:04:39 +0000
-Received: by outflank-mailman (input) for mailman id 111208;
- Thu, 15 Apr 2021 14:04:38 +0000
+	id 1lX2c1-0005Qz-TI; Thu, 15 Apr 2021 14:04:53 +0000
+Received: by outflank-mailman (input) for mailman id 111212;
+ Thu, 15 Apr 2021 14:04:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DGSX=JM=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
- id 1lX2bm-0005DJ-Ml
- for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 14:04:38 +0000
+ id 1lX2c0-0005QS-H3
+ for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 14:04:52 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 61f85623-bfab-4ec5-ac67-dd6e0049dbd4;
- Thu, 15 Apr 2021 14:04:38 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D9190611AD;
- Thu, 15 Apr 2021 14:04:36 +0000 (UTC)
+ id e48585a6-b32a-45d2-9d93-ae5ed314f5b3;
+ Thu, 15 Apr 2021 14:04:52 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E07DE611F1;
+ Thu, 15 Apr 2021 14:04:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,21 +50,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61f85623-bfab-4ec5-ac67-dd6e0049dbd4
+X-Inumbo-ID: e48585a6-b32a-45d2-9d93-ae5ed314f5b3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1618495477;
-	bh=Wdz8Aa9qdJDiwAN8b8SMYaoOnBF5VIObjL/JbA05IYw=;
+	s=korg; t=1618495491;
+	bh=InKw4zxjZjE30ezO3My2+utu1Qvgljuk6Zk+g4yv8Fs=;
 	h=Subject:To:Cc:From:Date:In-Reply-To:From;
-	b=K0DK3m3dGaFczhd9OyDsenGdUjULmso5HQ39/TUKyZlc5WiGxomGAYUwyqPLXdTtk
-	 yxZDmX2yfSXpBiOxtXc6VGvvc1+8A4bioh+zEsu35jwmLF1lEWKQbQsJDPTrO0hWwc
-	 EZIOda/bk8TNDlyQmAF0R9Lq8DinbKI04ZWInu3g=
-Subject: Patch "xen/events: fix setting irq affinity" has been added to the 5.4-stable tree
+	b=dqbuVDi5ZtdqBE74NwCxQ2zLUCUETjljPb0PJHkx+ASjhwbykWGST3wpFmVcK07VP
+	 ndy2QtAup5ZRgzAHa3rOAFbIAmYhzRCXv3ZFLrNWvVTd4M/r9f9MxGLcLE9eSEiV5N
+	 PgtMK0cBcQdQJs0QS3gOnuNAsnVsz5dpYNayciT4=
+Subject: Patch "xen/events: fix setting irq affinity" has been added to the 5.10-stable tree
 To: boris.ostrovsky@oracle.com,gregkh@linuxfoundation.org,jgross@suse.com,sstabellini@kernel.org,xen-devel@lists.xenproject.org
 Cc: <stable-commits@vger.kernel.org>
 From: <gregkh@linuxfoundation.org>
-Date: Thu, 15 Apr 2021 16:04:20 +0200
+Date: Thu, 15 Apr 2021 16:04:36 +0200
 In-Reply-To: <20210412062845.13946-1-jgross@suse.com>
-Message-ID: <1618495460134238@kroah.com>
+Message-ID: <16184954768817@kroah.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=ANSI_X3.4-1968
 Content-Transfer-Encoding: 8bit
@@ -76,12 +76,12 @@ This is a note to let you know that I've just added the patch titled
 
     xen/events: fix setting irq affinity
 
-to the 5.4-stable tree which can be found at:
+to the 5.10-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      xen-events-fix-setting-irq-affinity.patch
-and it can be found in the queue-5.4 subdirectory.
+and it can be found in the queue-5.10 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -119,7 +119,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/xen/events/events_base.c
 +++ b/drivers/xen/events/events_base.c
-@@ -1783,7 +1783,7 @@ static void lateeoi_ack_dynirq(struct ir
+@@ -1809,7 +1809,7 @@ static void lateeoi_ack_dynirq(struct ir
  
  	if (VALID_EVTCHN(evtchn)) {
  		do_mask(info, EVT_MASK_REASON_EOI_PENDING);
@@ -128,7 +128,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  	}
  }
  
-@@ -1794,7 +1794,7 @@ static void lateeoi_mask_ack_dynirq(stru
+@@ -1820,7 +1820,7 @@ static void lateeoi_mask_ack_dynirq(stru
  
  	if (VALID_EVTCHN(evtchn)) {
  		do_mask(info, EVT_MASK_REASON_EXPLICIT);
@@ -141,5 +141,5 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from jgross@suse.com are
 
-queue-5.4/xen-events-fix-setting-irq-affinity.patch
+queue-5.10/xen-events-fix-setting-irq-affinity.patch
 
