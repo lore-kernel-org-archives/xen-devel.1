@@ -2,45 +2,45 @@ Return-Path: <SRS0=iyTO=JM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 982B5C433B4
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00648C433B4
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:47:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5CB06611CD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:46:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CB06611CD
+	by mail.kernel.org (Postfix) with ESMTPS id B0E3561029
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 14:47:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B0E3561029
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.111318.212900 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.111324.212916 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lX3Fj-0002mE-HJ; Thu, 15 Apr 2021 14:45:55 +0000
+	id 1lX3HR-0002uj-4x; Thu, 15 Apr 2021 14:47:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 111318.212900; Thu, 15 Apr 2021 14:45:55 +0000
+Received: by outflank-mailman (output) from mailman id 111324.212916; Thu, 15 Apr 2021 14:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lX3Fj-0002m7-EH; Thu, 15 Apr 2021 14:45:55 +0000
-Received: by outflank-mailman (input) for mailman id 111318;
- Thu, 15 Apr 2021 14:45:54 +0000
+	id 1lX3HQ-0002uc-Vj; Thu, 15 Apr 2021 14:47:40 +0000
+Received: by outflank-mailman (input) for mailman id 111324;
+ Thu, 15 Apr 2021 14:47:39 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lX3Fi-0002m2-Df
- for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 14:45:54 +0000
+ (envelope-from <julien@xen.org>) id 1lX3HP-0002uX-N0
+ for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 14:47:39 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lX3Fh-0001pY-D5; Thu, 15 Apr 2021 14:45:53 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ id 1lX3HO-0001sj-SF; Thu, 15 Apr 2021 14:47:38 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lX3Fh-0008A7-3a; Thu, 15 Apr 2021 14:45:53 +0000
+ id 1lX3HO-0008E7-LR; Thu, 15 Apr 2021 14:47:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,77 +55,79 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=bwrtqTabdqwBUteMA3h8oCrjrdDQq7TNKoYz4L8jTSI=; b=rOaO6t2iDIAXSTimYxps/5R6do
-	ufcDeR1w7Yt1dNtyY63rfsjxr89R/7t9HrVuSPTnthZhaUFNjUoeQq2V/nrrNZ6SYLWM+4IoodAvB
-	ODqZIiitxwBUJm1dF44vdmPuUYUVd9AG67/suvc1wwx2QTKsnhd9mTvQ+Dz19FfWGv7A=;
-Subject: Re: [PATCH v3 14/15] xen/decompress: drop STATIC and INIT
+	bh=5TlB75kf/qDr9Khh2QJL8G/y3DImPl9rSzt9GOnvfhs=; b=lXjzpVoLzZBOn5wqDDu+6vMEzs
+	vXy1BE57DwlV9NY/19qPtbX1AmdwtXVDhPBySiqlP4m9MWXUiOof2DDxrrRIo6s2TRJuT4/vszOyx
+	TNRaRMxxRcYRd+EAhwhsmuPBTMarg7Vt5t1Pdqhybw+CrfMicDTTTzCOdnT/SUdOBWe8=;
+Subject: Re: [PATCH v3 13/15] unzstd: replace INIT{,DATA} and STATIC
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <2db91183-a7de-0c43-2fef-feb3523ed19b@suse.com>
- <b9410d49-8767-a6f2-ccbe-c94e451c60ba@suse.com>
- <e36f9026-edb6-5eb3-fdb2-cd00750b3ee7@xen.org>
- <39c092fe-052c-5900-74ef-310e0ae15453@suse.com>
+ <19f12930-df0e-5a00-9e5e-53edffcf51d7@suse.com>
+ <467ed62e-e5c3-0a08-b9a7-5b4e913b3c90@xen.org>
+ <e1d08ced-c2e8-22e3-2da3-8116b69cb627@suse.com>
+ <e861b617-7b9f-317d-9941-0fd7577147cb@xen.org>
+ <950e7ec1-3d4a-594d-ce8f-62d9d5930265@suse.com>
+ <75195be2-ca13-28c2-b871-992c0168e1e7@xen.org>
+ <71658edb-2cb5-09c2-708f-06c6fca9253d@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <4bc3913a-89ba-5b5d-9cf2-301bf10cbf14@xen.org>
-Date: Thu, 15 Apr 2021 15:45:51 +0100
+Message-ID: <7d33d499-19a6-dbea-7e37-59eeb5b47263@xen.org>
+Date: Thu, 15 Apr 2021 15:47:36 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.9.1
 MIME-Version: 1.0
-In-Reply-To: <39c092fe-052c-5900-74ef-310e0ae15453@suse.com>
+In-Reply-To: <71658edb-2cb5-09c2-708f-06c6fca9253d@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
+Hi Jan,
 
-
-On 15/04/2021 15:32, Jan Beulich wrote:
-> On 15.04.2021 16:21, Julien Grall wrote:
->> On 26/01/2021 09:53, Jan Beulich wrote:
->>> All users have been removed in earlier changes.
->>
->> This is not entirely correct given there is a still a user of...
->>
+On 15/04/2021 15:34, Jan Beulich wrote:
+> On 15.04.2021 16:30, Julien Grall wrote:
+>> On 15/04/2021 15:25, Jan Beulich wrote:
+>>> On 15.04.2021 16:22, Julien Grall wrote:
+>>>> On 15/04/2021 15:21, Jan Beulich wrote:
+>>>>> On 15.04.2021 13:59, Julien Grall wrote:
+>>>>>> On 26/01/2021 09:52, Jan Beulich wrote:
+>>>>>>> With xen/common/decompress.h now agreeing in both build modes about
+>>>>>>> what STATIC expands to, there's no need for this abstraction anymore.
+>>>>>>
+>>>>>> Shouldn't you also mention "INIT" and "INITDATA" here?
+>>>>>
+>>>>> Two parts: INITDATA was mistakenly mentioned in the title. I've
+>>>>> dropped that.
+>>>>
+>>>> Ok.
+>>>>
+>>>> And what I'm saying about STATIC does not apply to
+>>>>> INIT - for it, we replace the extra level of abstraction by
+>>>>> directly using __init, just like was done in the earlier patches.
+>>>>
+>>>> This should be mention in the commit message.
 >>>
->>> Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>> ---
->>> v3: New.
->>>
->>> --- a/xen/arch/arm/efi/efi-dom0.c
->>> +++ b/xen/arch/arm/efi/efi-dom0.c
->>> @@ -28,7 +28,7 @@
->>>    #include <asm/setup.h>
->>>    #include <asm/acpi.h>
->>>    #include "../../../common/decompress.h"
->>> -#define XZ_EXTERN STATIC
->>> +#define XZ_EXTERN static
->>
->> STATIC here. So maybe you want to say "all but one users"?
+>>> It already is by what is being said after the comma. May I direct
+>>> you back to the commit messages of earlier patches in this series
+>>> (when talk was of just INIT)?
+>>   From the way the commit message is written it sounds like more you are
+>> referring to STATIC only. This is a clearer on the other commit messages
+>> because there is no other way to interpret "this".
 > 
-> Sigh. Of course I re-word this. But does it really matter? 
+> If the commit message is taken together with the title, I think
+> all is clear.
 
-Just consistency between the diff and the commit message.
+I have to admit, I view the commit title as a one line summary. So I 
+often read them separately.
 
-> The
-> more that the thing here is more of an abuse than a proper use
-> anyway? I didn't create this hackery ... In fact this odd use
-> is why I made this a separate patch in the first place.
->> Also, for consistency, I think you want to either remove INITDATA here
->> or remove INIT in the patch that drop the last user.
 > 
-> See my other reply - what matters, I think, is a consistent
-> end result. I would really like to ask that I be left with some
-> room on how precisely to get there.
+>> So I would suggest to clarify it.
+> 
+> And I would like to avoid doing so. As a compromise, I'll change
+> "this abstraction" to "these abstractions".
 
-I thought I would point out because we often request to shuffle code to 
-make a series more logical.
-
-This is not a must to me. The code is fine it is.
-
-Acked-by: Julien Grall <jgrall@amazon.com>
+Sounds good to me.
 
 Cheers,
 
