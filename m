@@ -2,42 +2,42 @@ Return-Path: <SRS0=iyTO=JM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B01E8C433ED
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C852BC43462
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:05:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 66713611AD
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:04:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66713611AD
+	by mail.kernel.org (Postfix) with ESMTPS id 90754613B6
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Apr 2021 10:05:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 90754613B6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.111012.212173 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.111015.212185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWyrV-0004Nl-Rv; Thu, 15 Apr 2021 10:04:37 +0000
+	id 1lWyrk-0004TE-6N; Thu, 15 Apr 2021 10:04:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 111012.212173; Thu, 15 Apr 2021 10:04:37 +0000
+Received: by outflank-mailman (output) from mailman id 111015.212185; Thu, 15 Apr 2021 10:04:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lWyrV-0004Ne-NR; Thu, 15 Apr 2021 10:04:37 +0000
-Received: by outflank-mailman (input) for mailman id 111012;
- Thu, 15 Apr 2021 10:04:36 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lWyrk-0004T5-2A; Thu, 15 Apr 2021 10:04:52 +0000
+Received: by outflank-mailman (input) for mailman id 111015;
+ Thu, 15 Apr 2021 10:04:51 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=C/wI=JM=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1lWyrU-0004NU-N2
- for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 10:04:36 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 564343f5-6711-48bd-bd92-18067bf0bcc3;
- Thu, 15 Apr 2021 10:04:35 +0000 (UTC)
+ id 1lWyrj-0004Sv-5m
+ for xen-devel@lists.xenproject.org; Thu, 15 Apr 2021 10:04:51 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9ae1a2da-2134-4fb3-a202-dc69953984f8;
+ Thu, 15 Apr 2021 10:04:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,100 +49,147 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 564343f5-6711-48bd-bd92-18067bf0bcc3
+X-Inumbo-ID: 9ae1a2da-2134-4fb3-a202-dc69953984f8
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618481075;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=36FTba6wXpKsrGSytruNVcKh7iyTzyBZ7hcdmzqIxUw=;
-  b=djDs4sktKJoLmtJ1hTp5BXN7BQdMZ40V+7kPCkKlH0CvngmM3LaQ59gL
-   1ZcLDuq8H2njJ0Hlzq0MVfdeptKY9llJ17Q/oZ9aJo9MuSb4VNQsb5QT2
-   KjptvlftmhUEJDrqJZqgtq9dTME7v97cgGq8pZmJKnNM7NlWKS4swRnoR
-   o=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 50X7pzc+yaPzBHTOPz+2vLHLRv+wIDS7xksK3+oZDNUsQ0r2P38fvtcQjMgl4udd8iazdOBx1O
- RvQYMzb7HPatbBT/G3osYqywFovXhJHe2nMLFRhW1YzJ5mjhp6VXnXWwSfSIZ3uoCQ9nGAr3xm
- fKznlRMO28a3Cvl+n7lJu6ijw76p7TQm1P9SvvIRXI6mtwCf6aNbvaBQmdzOXWLcFbR0vQUptQ
- D4CEkg4lAnWDkszuZVlcCIjrJRJhq5Omp3ZGf8pTJkimmy8evDbbduAoo1E3jmtLRU22pwhwn9
- zVg=
+  d=citrix.com; s=securemail; t=1618481089;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=XM/KC8VilFwVpZaPc2wNIuqDGK9utm8Pm2v2UbjAvFI=;
+  b=BQjVTd2ingDFFR7yLGc82TtUku9ie639hi8qMCz1piIgyxcR+wUWF58F
+   9wF8ZWMv66+LguzUXusnVBjzREoPHwsby0yg2zpacMxlGMBRHycUJMHuA
+   YZCgpuDrlc6Qzcx6av7nlgt5YsX423JKJtPbYl/PlIVHcvhuxloEU8J8c
+   8=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 96QOzxdbZpGNDreiqxcT08JvuAmgfU27g96unckYg1kCfLyhRfZKpx2XU3adRS6IHc8KhRpxQ4
+ 6ACu6xYaHke17zZOfhzkMcuEQhXXjcF2ubTl4YU8lHZsaL9NKu4vc8YI/oAcJ/VJfdqhamrC0X
+ kInQWBXP19ognevZ0COV8dvpGlEpj6PKN6O+DYOeLqp6XS3wnJlGkzzGOffim8BFxDFNY/zGrh
+ 8FKysYsros8OadRGZrQDXvjwhXsqEpEe8ft2PSxA37MUxkRlpYViV6fWNVBQ3vkmrJtheB/hih
+ llA=
 X-SBRS: 4.0
-X-MesageID: 41658484
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 41492243
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:mibTiK7301shrSv0ngPXwC7XdLJzesId70hD6mlaY3VuHPCwvc
- aogfgdyFvImC8cMUtQ4OyoFaGcTRrnlaJdzpIWOd6ZMDXOmGztF4166Jun/juIIVyaysd49Y
- NNN5dzE8fxC18St7ed3CCdH8w7yNeKtICE7N2urEtFdg1hZ6F+4woRMG/yeScaeCB8CZU0D5
- aa7MZczgDQHUg/VcinGmIDG9HKutyjruOAXTc9GxUl5AOS5AnI1JfGFXGjsSs2Yndqybcm/X
- OtqX2a2pme
+IronPort-HdrOrdr: A9a23:wpaSEaOZ925J7cBcTgSjsMiAIKoaSvp033AA/SlKJyB9WMqeis
+ yogbAnxQb54QxhP00ItNicNMC7IU/02oVy5eAqUYuKeCnDlC+WIJp57Y3kqgeQfxHW0uJGz6
+ 9vf+xfJbTLfDtHpP336gW5DNosqePvmMvD6Nv29HtxURpsL5hp8gYRMHf/LmRNWAJECZAlfa
+ D82uN7oVObFkg/X4CeDnkBU/OrnayoqK7b
 X-IronPort-AV: E=Sophos;i="5.82,223,1613451600"; 
-   d="scan'208";a="41658484"
+   d="scan'208";a="41492243"
 From: Igor Druzhinin <igor.druzhinin@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <jun.nakajima@intel.com>, <kevin.tian@intel.com>, <jbeulich@suse.com>,
 	<andrew.cooper3@citrix.com>, <roger.pau@citrix.com>, <wl@xen.org>, "Igor
  Druzhinin" <igor.druzhinin@citrix.com>
-Subject: [PATCH v5 2/2] x86/intel: insert Ice Lake-SP and Ice Lake-D model numbers
-Date: Thu, 15 Apr 2021 11:04:22 +0100
-Message-ID: <1618481062-16094-2-git-send-email-igor.druzhinin@citrix.com>
+Subject: [PATCH v5 1/2] x86/vtx: add LBR_SELECT to the list of LBR MSRs
+Date: Thu, 15 Apr 2021 11:04:21 +0100
+Message-ID: <1618481062-16094-1-git-send-email-igor.druzhinin@citrix.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1618481062-16094-1-git-send-email-igor.druzhinin@citrix.com>
-References: <1618481062-16094-1-git-send-email-igor.druzhinin@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-LBR, C-state MSRs should correspond to Ice Lake desktop according to
-SDM rev. 74 for both models.
+This MSR exists since Nehalem / Silvermont and is actively used by Linux,
+for instance, to improve sampling efficiency.
 
-Ice Lake-SP is known to expose IF_PSCHANGE_MC_NO in IA32_ARCH_CAPABILITIES MSR
-(as advisory tells and Whitley SDP confirms) which means the erratum is fixed
-in hardware for that model and therefore it shouldn't be present in
-has_if_pschange_mc list. Provisionally assume the same to be the case
-for Ice Lake-D.
-
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
 ---
-No changes in v5.
+Changes in v5:
+- added Silvermont+ LBR_SELECT support
 
-Changes in v4:
-- now based on SDM update
-- new LBR (0x1e0)does not seem to be exposed in the docs
-
-Changes in v3:
-- Add Ice Lake-D model numbers
-- Drop has_if_pschange_mc hunk following Tiger Lake related discussion
+New patch in v4 as suggested by Andrew.
 ---
- xen/arch/x86/acpi/cpu_idle.c | 2 ++
- xen/arch/x86/hvm/vmx/vmx.c   | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ xen/arch/x86/hvm/vmx/vmx.c      | 20 ++++++++++++++++----
+ xen/include/asm-x86/msr-index.h | 10 ++++++++--
+ 2 files changed, 24 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index c092086..d788c8b 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -181,6 +181,8 @@ static void do_get_hw_residencies(void *arg)
-     case 0x55:
-     case 0x5E:
-     /* Ice Lake */
-+    case 0x6A:
-+    case 0x6C:
-     case 0x7D:
-     case 0x7E:
-     /* Tiger Lake */
 diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 30c6a57..91cba19 100644
+index 835b905..30c6a57 100644
 --- a/xen/arch/x86/hvm/vmx/vmx.c
 +++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2990,7 +2990,7 @@ static const struct lbr_info *last_branch_msr_get(void)
-         /* Goldmont Plus */
-         case 0x7a:
-         /* Ice Lake */
--        case 0x7d: case 0x7e:
-+        case 0x6a: case 0x6c: case 0x7d: case 0x7e:
-         /* Tiger Lake */
-         case 0x8c: case 0x8d:
-         /* Tremont */
+@@ -2915,14 +2915,16 @@ static const struct lbr_info {
+ }, nh_lbr[] = {
+     { MSR_IA32_LASTINTFROMIP,       1 },
+     { MSR_IA32_LASTINTTOIP,         1 },
+-    { MSR_C2_LASTBRANCH_TOS,        1 },
++    { MSR_NHL_LBR_SELECT,           1 },
++    { MSR_NHL_LASTBRANCH_TOS,       1 },
+     { MSR_P4_LASTBRANCH_0_FROM_LIP, NUM_MSR_P4_LASTBRANCH_FROM_TO },
+     { MSR_P4_LASTBRANCH_0_TO_LIP,   NUM_MSR_P4_LASTBRANCH_FROM_TO },
+     { 0, 0 }
+ }, sk_lbr[] = {
+     { MSR_IA32_LASTINTFROMIP,       1 },
+     { MSR_IA32_LASTINTTOIP,         1 },
+-    { MSR_SKL_LASTBRANCH_TOS,       1 },
++    { MSR_NHL_LBR_SELECT,           1 },
++    { MSR_NHL_LASTBRANCH_TOS,       1 },
+     { MSR_SKL_LASTBRANCH_0_FROM_IP, NUM_MSR_SKL_LASTBRANCH },
+     { MSR_SKL_LASTBRANCH_0_TO_IP,   NUM_MSR_SKL_LASTBRANCH },
+     { MSR_SKL_LASTBRANCH_0_INFO,    NUM_MSR_SKL_LASTBRANCH },
+@@ -2934,10 +2936,19 @@ static const struct lbr_info {
+     { MSR_C2_LASTBRANCH_0_FROM_IP,  NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
+     { MSR_C2_LASTBRANCH_0_TO_IP,    NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
+     { 0, 0 }
++}, sm_lbr[] = {
++    { MSR_IA32_LASTINTFROMIP,       1 },
++    { MSR_IA32_LASTINTTOIP,         1 },
++    { MSR_SM_LBR_SELECT,            1 },
++    { MSR_SM_LASTBRANCH_TOS,        1 },
++    { MSR_C2_LASTBRANCH_0_FROM_IP,  NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
++    { MSR_C2_LASTBRANCH_0_TO_IP,    NUM_MSR_ATOM_LASTBRANCH_FROM_TO },
++    { 0, 0 }
+ }, gm_lbr[] = {
+     { MSR_IA32_LASTINTFROMIP,       1 },
+     { MSR_IA32_LASTINTTOIP,         1 },
+-    { MSR_GM_LASTBRANCH_TOS,        1 },
++    { MSR_SM_LBR_SELECT,            1 },
++    { MSR_SM_LASTBRANCH_TOS,        1 },
+     { MSR_GM_LASTBRANCH_0_FROM_IP,  NUM_MSR_GM_LASTBRANCH_FROM_TO },
+     { MSR_GM_LASTBRANCH_0_TO_IP,    NUM_MSR_GM_LASTBRANCH_FROM_TO },
+     { 0, 0 }
+@@ -2991,6 +3002,7 @@ static const struct lbr_info *last_branch_msr_get(void)
+             return sk_lbr;
+         /* Atom */
+         case 0x1c: case 0x26: case 0x27: case 0x35: case 0x36:
++            return at_lbr;
+         /* Silvermont */
+         case 0x37: case 0x4a: case 0x4d: case 0x5a: case 0x5d:
+         /* Xeon Phi Knights Landing */
+@@ -2999,7 +3011,7 @@ static const struct lbr_info *last_branch_msr_get(void)
+         case 0x85:
+         /* Airmont */
+         case 0x4c:
+-            return at_lbr;
++            return sm_lbr;
+         /* Goldmont */
+         case 0x5c: case 0x5f:
+             return gm_lbr;
+diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
+index 43d26ef..020908f 100644
+--- a/xen/include/asm-x86/msr-index.h
++++ b/xen/include/asm-x86/msr-index.h
+@@ -606,15 +606,21 @@
+ #define NUM_MSR_C2_LASTBRANCH_FROM_TO	4
+ #define NUM_MSR_ATOM_LASTBRANCH_FROM_TO	8
+ 
++/* Nehalem (and newer) last-branch recording */
++#define MSR_NHL_LBR_SELECT		0x000001c8
++#define MSR_NHL_LASTBRANCH_TOS		0x000001c9
++
+ /* Skylake (and newer) last-branch recording */
+-#define MSR_SKL_LASTBRANCH_TOS		0x000001c9
+ #define MSR_SKL_LASTBRANCH_0_FROM_IP	0x00000680
+ #define MSR_SKL_LASTBRANCH_0_TO_IP	0x000006c0
+ #define MSR_SKL_LASTBRANCH_0_INFO	0x00000dc0
+ #define NUM_MSR_SKL_LASTBRANCH		32
+ 
++/* Silvermont (and newer) last-branch recording */
++#define MSR_SM_LBR_SELECT		0x000001c8
++#define MSR_SM_LASTBRANCH_TOS		0x000001c9
++
+ /* Goldmont last-branch recording */
+-#define MSR_GM_LASTBRANCH_TOS		0x000001c9
+ #define MSR_GM_LASTBRANCH_0_FROM_IP	0x00000680
+ #define MSR_GM_LASTBRANCH_0_TO_IP	0x000006c0
+ #define NUM_MSR_GM_LASTBRANCH_FROM_TO	32
 -- 
 2.7.4
 
