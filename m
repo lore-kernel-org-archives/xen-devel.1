@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C0BBC433ED
-	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 06:58:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42BDEC433B4
+	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 10:33:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 41FAD60FF1
-	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 06:58:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 41FAD60FF1
+	by mail.kernel.org (Postfix) with ESMTPS id E1873610CD
+	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 10:33:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1873610CD
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.112023.214194 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.112062.214226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lXeu2-0007AQ-Tg; Sat, 17 Apr 2021 06:58:02 +0000
+	id 1lXiGD-0002RD-Oy; Sat, 17 Apr 2021 10:33:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 112023.214194; Sat, 17 Apr 2021 06:58:02 +0000
+Received: by outflank-mailman (output) from mailman id 112062.214226; Sat, 17 Apr 2021 10:33:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lXeu2-0007AJ-QS; Sat, 17 Apr 2021 06:58:02 +0000
-Received: by outflank-mailman (input) for mailman id 112023;
- Sat, 17 Apr 2021 06:58:01 +0000
+	id 1lXiGD-0002R6-Lq; Sat, 17 Apr 2021 10:33:09 +0000
+Received: by outflank-mailman (input) for mailman id 112062;
+ Sat, 17 Apr 2021 10:33:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lXeu1-0007AB-LT; Sat, 17 Apr 2021 06:58:01 +0000
+ id 1lXiGC-0002Qy-Pj; Sat, 17 Apr 2021 10:33:08 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lXeu1-0006F0-EE; Sat, 17 Apr 2021 06:58:01 +0000
+ id 1lXiGC-0001t4-Ds; Sat, 17 Apr 2021 10:33:08 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lXeu1-0001WK-64; Sat, 17 Apr 2021 06:58:01 +0000
+ id 1lXiGC-00043W-65; Sat, 17 Apr 2021 10:33:08 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lXeu1-0001Ha-5Y; Sat, 17 Apr 2021 06:58:01 +0000
+ id 1lXiGC-0006sP-5X; Sat, 17 Apr 2021 10:33:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,54 +58,49 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=EFaZDaHr4hJDOKPQ3kN/zsWXF6bbZknVtVbaCHvA1TA=; b=OoEeUkBsuxxo/egjuhBMpt/e7b
-	Z9dBv8lkyQpKpk/fE12nnCobk7tvzQHnOzMEtlJ/tN9wxElYSVIM15cewO/7xP6HfxeHol+B0Giv4
-	4mzA3e+ZqOF7niwq9zeKkYuWIpMjt5jDfjJ8wOdzwkv968CnEIrPlW2/22VVMokQZTtA=;
+	bh=8Lhq8zfKutVFMgO/4yYAwTELd6J4Y77+581rHNHjtmQ=; b=l5G2VWaMExcAeQzvPTigiwmdD9
+	QTQ1Nv/jTAqKR0ljZHmP1ZJjIxcIAejuSRc7kTlTHKfEGor9btsUSpG7nlJMebLKB74tUx3BRPfvw
+	zc6KvLOw6l+13qhw8fxbgcu/TSZXu224rbMlNY5am0T/c1JsgA9yTpxmaAF+2uqOc1sc=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-161204-mainreport@xen.org>
+Message-ID: <osstest-161219-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 161204: all pass - PUSHED
+Subject: [xtf test] 161219: all pass - PUSHED
 X-Osstest-Versions-This:
-    ovmf=99e7e48cc7117c37fc1c08a741872d0875595796
+    xtf=8893fd89044e99e1894f8856d72893ea598d32d8
 X-Osstest-Versions-That:
-    ovmf=96479947bcd7b425e4f2196b06701fd8ec3da595
+    xtf=90320d569b830666afc369992a507a61f0668534
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 17 Apr 2021 06:58:01 +0000
+Date: Sat, 17 Apr 2021 10:33:08 +0000
 
-flight 161204 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/161204/
+flight 161219 xtf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/161219/
 
 Perfect :-)
 All tests in this flight passed as required
 version targeted for testing:
- ovmf                 99e7e48cc7117c37fc1c08a741872d0875595796
+ xtf                  8893fd89044e99e1894f8856d72893ea598d32d8
 baseline version:
- ovmf                 96479947bcd7b425e4f2196b06701fd8ec3da595
+ xtf                  90320d569b830666afc369992a507a61f0668534
 
-Last test of basis   161187  2021-04-16 00:11:21 Z    1 days
-Testing same since   161204  2021-04-16 12:04:01 Z    0 days    1 attempts
+Last test of basis   161177  2021-04-15 17:41:37 Z    1 days
+Testing same since   161219  2021-04-16 23:10:06 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
-  Abner Chang <abner.chang@hpe.com>
-  Jiewen Yao <Jiewen.yao@intel.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
+  Andrew Cooper <andrew.cooper3@citrix.com>
 
 jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
+ build-amd64-xtf                                              pass    
  build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
  build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+ test-xtf-amd64-amd64-1                                       pass    
+ test-xtf-amd64-amd64-2                                       pass    
+ test-xtf-amd64-amd64-3                                       pass    
+ test-xtf-amd64-amd64-4                                       pass    
+ test-xtf-amd64-amd64-5                                       pass    
 
 
 ------------------------------------------------------------
@@ -126,6 +121,6 @@ Test harness code can be found at
 
 Pushing revision :
 
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   96479947bc..99e7e48cc7  99e7e48cc7117c37fc1c08a741872d0875595796 -> xen-tested-master
+To xenbits.xen.org:/home/xen/git/xtf.git
+   90320d5..8893fd8  8893fd89044e99e1894f8856d72893ea598d32d8 -> xen-tested-master
 
