@@ -2,48 +2,43 @@ Return-Path: <SRS0=KvvG=JO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0EC7C433ED
-	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 18:06:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7972FC433B4
+	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 19:25:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6D134613B0
-	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 18:06:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D134613B0
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 223AC61241
+	for <xen-devel@archiver.kernel.org>; Sat, 17 Apr 2021 19:25:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 223AC61241
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.112229.214335 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.112247.214355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lXpKf-0002iK-2J; Sat, 17 Apr 2021 18:06:13 +0000
+	id 1lXqYs-0001fG-TH; Sat, 17 Apr 2021 19:24:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 112229.214335; Sat, 17 Apr 2021 18:06:13 +0000
+Received: by outflank-mailman (output) from mailman id 112247.214355; Sat, 17 Apr 2021 19:24:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lXpKe-0002iD-Va; Sat, 17 Apr 2021 18:06:12 +0000
-Received: by outflank-mailman (input) for mailman id 112229;
- Sat, 17 Apr 2021 18:06:11 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1lXqYs-0001f9-Q9; Sat, 17 Apr 2021 19:24:58 +0000
+Received: by outflank-mailman (input) for mailman id 112247;
+ Sat, 17 Apr 2021 19:24:56 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lXpKd-0002i5-N6; Sat, 17 Apr 2021 18:06:11 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lXpKd-0001K3-IN; Sat, 17 Apr 2021 18:06:11 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lXpKd-0005Sj-BH; Sat, 17 Apr 2021 18:06:11 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lXpKd-0007sh-Am; Sat, 17 Apr 2021 18:06:11 +0000
+ (envelope-from <SRS0=uePU=JO=xen.org=tim@srs-us1.protection.inumbo.net>)
+ id 1lXqYq-0001f4-ND
+ for xen-devel@lists.xenproject.org; Sat, 17 Apr 2021 19:24:56 +0000
+Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a744a3c5-97c7-4303-8738-523ba71ecffa;
+ Sat, 17 Apr 2021 19:24:55 +0000 (UTC)
+Received: from tjd by deinos.phlegethon.org with local (Exim 4.92.3 (FreeBSD))
+ (envelope-from <tim@xen.org>)
+ id 1lXqYi-000LTl-T2; Sat, 17 Apr 2021 19:24:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,72 +50,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=6tJAM+4u0jlAKFmuNfMMMQtDRPq4Yd7yis5TrDmC5aI=; b=TcloBaRMs9OwBrSsjHBWpqvp0o
-	hXctC6VvVHDtMQczqgXFDABiPv+n4xuUaw1iCY0OOaP0+B88d+/T1x+NYh6OE99ZkStKtc1R3pA5q
-	iyHMyjVh7/9RLE7kX656FUscjrqz/qRR3/5ALNMe8LAtbKIv53aUglczfyAwfFOYXLno=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-161229-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: a744a3c5-97c7-4303-8738-523ba71ecffa
+Date: Sat, 17 Apr 2021 20:24:48 +0100
+From: Tim Deegan <tim@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Jun Nakajima <jun.nakajima@intel.com>
+Subject: Re: [PATCH v4] VMX: use a single, global APIC access page
+Message-ID: <YHs2AJ6pqrAw7uew@deinos.phlegethon.org>
+References: <4731a3a3-906a-98ac-11ba-6a0723903391@suse.com>
+ <1c489e77-6e65-6121-6c28-3c4bd377223c@suse.com>
 MIME-Version: 1.0
-Subject: [xtf test] 161229: all pass - PUSHED
-X-Osstest-Versions-This:
-    xtf=2f655c0c74439805ce6dbc6fd1f2e7defdaf33e5
-X-Osstest-Versions-That:
-    xtf=8893fd89044e99e1894f8856d72893ea598d32d8
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 17 Apr 2021 18:06:11 +0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <1c489e77-6e65-6121-6c28-3c4bd377223c@suse.com>
+X-SA-Known-Good: Yes
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: tim@xen.org
+X-SA-Exim-Scanned: No (on deinos.phlegethon.org); SAEximRunCond expanded to false
 
-flight 161229 xtf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/161229/
+Hi,
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xtf                  2f655c0c74439805ce6dbc6fd1f2e7defdaf33e5
-baseline version:
- xtf                  8893fd89044e99e1894f8856d72893ea598d32d8
+Apologies for not sending comments before, and thanks for the ping.
 
-Last test of basis   161219  2021-04-16 23:10:06 Z    0 days
-Testing same since   161229  2021-04-17 10:33:36 Z    0 days    1 attempts
+At 12:40 +0200 on 12 Apr (1618231248), Jan Beulich wrote:
+> The address of this page is used by the CPU only to recognize when to
+> access the virtual APIC page instead. No accesses would ever go to this
+> page. It only needs to be present in the (CPU) page tables so that
+> address translation will produce its address as result for respective
+> accesses.
+> 
+> By making this page global, we also eliminate the need to refcount it,
+> or to assign it to any domain in the first place.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
+What is the aim here?  To save 4k per domain?  It seems to come out
+about even for adding and removing code. 
 
-jobs:
- build-amd64-xtf                                              pass    
- build-amd64                                                  pass    
- build-amd64-pvops                                            pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
+> --- a/xen/arch/x86/mm/shadow/set.c
+> +++ b/xen/arch/x86/mm/shadow/set.c
+> @@ -94,6 +94,22 @@ shadow_get_page_from_l1e(shadow_l1e_t sl
+>      ASSERT(!sh_l1e_is_magic(sl1e));
+>      ASSERT(shadow_mode_refcounts(d));
+>  
+> +    /*
+> +     * VMX'es APIC access MFN is just a surrogate page.  It doesn't actually
+> +     * get accessed, and hence there's no need to refcount it (and refcounting
+> +     * would fail, due to the page having no owner).
+> +     */
+> +    if ( mfn_valid(mfn = shadow_l1e_get_mfn(sl1e)) )
 
+Would it be better to check specifically for mfn == apic_access_mfn
+(and apic_access_mfn != 0, I guess)?  If we want this behaviour for
+for all un-owned PGC_extra MFNs it would be good to explain that in the
+comments.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+Cheers,
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xtf.git
-   8893fd8..2f655c0  2f655c0c74439805ce6dbc6fd1f2e7defdaf33e5 -> xen-tested-master
+Tim.
 
