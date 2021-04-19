@@ -2,48 +2,43 @@ Return-Path: <SRS0=K98N=JQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58B75C433ED
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:36:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F324C43460
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:44:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E480A61369
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:36:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E480A61369
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4BB77613CE
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:44:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4BB77613CE
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113164.215614 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113170.215629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYacD-0001Nk-Ph; Mon, 19 Apr 2021 20:35:29 +0000
+	id 1lYakb-0002HF-Kh; Mon, 19 Apr 2021 20:44:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113164.215614; Mon, 19 Apr 2021 20:35:29 +0000
+Received: by outflank-mailman (output) from mailman id 113170.215629; Mon, 19 Apr 2021 20:44:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYacD-0001Nd-Mj; Mon, 19 Apr 2021 20:35:29 +0000
-Received: by outflank-mailman (input) for mailman id 113164;
- Mon, 19 Apr 2021 20:35:29 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1lYakb-0002H8-HI; Mon, 19 Apr 2021 20:44:09 +0000
+Received: by outflank-mailman (input) for mailman id 113170;
+ Mon, 19 Apr 2021 20:44:07 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lYacC-0001NV-UD; Mon, 19 Apr 2021 20:35:28 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lYacC-0001Wd-Km; Mon, 19 Apr 2021 20:35:28 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lYacC-00055D-Dy; Mon, 19 Apr 2021 20:35:28 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lYacC-0007gE-DN; Mon, 19 Apr 2021 20:35:28 +0000
+ (envelope-from <SRS0=rQOg=JQ=kernel.org=sashal@srs-us1.protection.inumbo.net>)
+ id 1lYakZ-0002H3-Ng
+ for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 20:44:07 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ccbcec68-a49d-4072-a355-dcec347277ca;
+ Mon, 19 Apr 2021 20:44:06 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E524161104;
+ Mon, 19 Apr 2021 20:44:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,72 +50,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=PaTqCX89ywiSAV+EIwRttt/bUR0ZPoazY9R1oIoCQFg=; b=BkVa29s087QxJW6MZh02rG8vR1
-	cPl6mRMoQmgJImyrdpA7VL4Cv2bd54xvFrooFs49gSBw+NJNWYJIPj1HFyfA6D++NhJHt8Mzrnrh3
-	gcs6/8av9QFOGimq3XApDAgF1rYqGdq4/MI1ekTKePKul3Gflb0sASTutFBIs/MdHPoI=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-161294-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: ccbcec68-a49d-4072-a355-dcec347277ca
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1618865045;
+	bh=3m3lFg+7CrTJgU9IHDfJ4YqA/Dn5bG9FWVMD5FrUKY4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=MDBJgDB5j4W5MX9rnasxo5ZovYtRzLaWDg8FkZ2qabfBW8FAcW7PN0ZyWZfQ8DGAo
+	 bYLGwAryKjzHGRxKNrTfILehYFJUleLHcuWhJJGDLhhTggjYb9L1OoVf6ck8fbwwXU
+	 04ti7rq1BPZxuZdVUfjiwU+zManH2EithFeAps3v5TbyHHrBUwewsigzq7enmgf/mK
+	 KEaMjcpCK5dk2BSUKeeho9v69Kk76PBzEw/ZHRnSfwVNnAsOArxLQriZIRMNerl9ZC
+	 UNJ8mqzk4Pf5RMnuSTPD/hNmiMNWoFGwbYj/tIB1qLupRv4gwDUfsKXVDZAy4mvVed
+	 dNoMJwe3vs9Og==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Michael Brown <mbrown@fensystems.co.uk>,
+	Paul Durrant <paul@xen.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Sasha Levin <sashal@kernel.org>,
+	xen-devel@lists.xenproject.org,
+	netdev@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.11 15/23] xen-netback: Check for hotplug-status existence before watching
+Date: Mon, 19 Apr 2021 16:43:34 -0400
+Message-Id: <20210419204343.6134-15-sashal@kernel.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210419204343.6134-1-sashal@kernel.org>
+References: <20210419204343.6134-1-sashal@kernel.org>
 MIME-Version: 1.0
-Subject: [xtf test] 161294: all pass - PUSHED
-X-Osstest-Versions-This:
-    xtf=b0bc49846c154b79243f39d461a4515804bcaf53
-X-Osstest-Versions-That:
-    xtf=2f655c0c74439805ce6dbc6fd1f2e7defdaf33e5
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 19 Apr 2021 20:35:28 +0000
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 
-flight 161294 xtf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/161294/
+From: Michael Brown <mbrown@fensystems.co.uk>
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xtf                  b0bc49846c154b79243f39d461a4515804bcaf53
-baseline version:
- xtf                  2f655c0c74439805ce6dbc6fd1f2e7defdaf33e5
+[ Upstream commit 2afeec08ab5c86ae21952151f726bfe184f6b23d ]
 
-Last test of basis   161229  2021-04-17 10:33:36 Z    2 days
-Testing same since   161294  2021-04-19 14:41:20 Z    0 days    1 attempts
+The logic in connect() is currently written with the assumption that
+xenbus_watch_pathfmt() will return an error for a node that does not
+exist.  This assumption is incorrect: xenstore does allow a watch to
+be registered for a nonexistent node (and will send notifications
+should the node be subsequently created).
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
+As of commit 1f2565780 ("xen-netback: remove 'hotplug-status' once it
+has served its purpose"), this leads to a failure when a domU
+transitions into XenbusStateConnected more than once.  On the first
+domU transition into Connected state, the "hotplug-status" node will
+be deleted by the hotplug_status_changed() callback in dom0.  On the
+second or subsequent domU transition into Connected state, the
+hotplug_status_changed() callback will therefore never be invoked, and
+so the backend will remain stuck in InitWait.
 
-jobs:
- build-amd64-xtf                                              pass    
- build-amd64                                                  pass    
- build-amd64-pvops                                            pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
+This failure prevents scenarios such as reloading the xen-netfront
+module within a domU, or booting a domU via iPXE.  There is
+unfortunately no way for the domU to work around this dom0 bug.
 
+Fix by explicitly checking for existence of the "hotplug-status" node,
+thereby creating the behaviour that was previously assumed to exist.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+Signed-off-by: Michael Brown <mbrown@fensystems.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/net/xen-netback/xenbus.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/xenbus.c
+index 6f10e0998f1c..94d19158efc1 100644
+--- a/drivers/net/xen-netback/xenbus.c
++++ b/drivers/net/xen-netback/xenbus.c
+@@ -824,11 +824,15 @@ static void connect(struct backend_info *be)
+ 	xenvif_carrier_on(be->vif);
+ 
+ 	unregister_hotplug_status_watch(be);
+-	err = xenbus_watch_pathfmt(dev, &be->hotplug_status_watch, NULL,
+-				   hotplug_status_changed,
+-				   "%s/%s", dev->nodename, "hotplug-status");
+-	if (!err)
++	if (xenbus_exists(XBT_NIL, dev->nodename, "hotplug-status")) {
++		err = xenbus_watch_pathfmt(dev, &be->hotplug_status_watch,
++					   NULL, hotplug_status_changed,
++					   "%s/%s", dev->nodename,
++					   "hotplug-status");
++		if (err)
++			goto err;
+ 		be->have_hotplug_status_watch = 1;
++	}
+ 
+ 	netif_tx_wake_all_queues(be->vif->dev);
+ 
+-- 
+2.30.2
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xtf.git
-   2f655c0..b0bc498  b0bc49846c154b79243f39d461a4515804bcaf53 -> xen-tested-master
 
