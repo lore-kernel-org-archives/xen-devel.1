@@ -7,38 +7,38 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABFE9C43461
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BF3EC43461
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:46:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E9CC613DF
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:45:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E9CC613DF
+	by mail.kernel.org (Postfix) with ESMTPS id BB620613C9
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 20:46:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB620613C9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113181.215665 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113184.215678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYalu-0002dJ-G6; Mon, 19 Apr 2021 20:45:30 +0000
+	id 1lYamH-0002jv-RZ; Mon, 19 Apr 2021 20:45:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113181.215665; Mon, 19 Apr 2021 20:45:30 +0000
+Received: by outflank-mailman (output) from mailman id 113184.215678; Mon, 19 Apr 2021 20:45:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYalu-0002dC-DD; Mon, 19 Apr 2021 20:45:30 +0000
-Received: by outflank-mailman (input) for mailman id 113181;
- Mon, 19 Apr 2021 20:45:29 +0000
+	id 1lYamH-0002jo-Mw; Mon, 19 Apr 2021 20:45:53 +0000
+Received: by outflank-mailman (input) for mailman id 113184;
+ Mon, 19 Apr 2021 20:45:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rQOg=JQ=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1lYalt-0002d2-Qa
- for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 20:45:29 +0000
+ id 1lYamG-0002ix-9W
+ for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 20:45:52 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3ac99ebf-ac69-4a4a-8ab9-f42df83f3816;
- Mon, 19 Apr 2021 20:45:29 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 7EE98613D5;
- Mon, 19 Apr 2021 20:45:27 +0000 (UTC)
+ id 77a93e31-99ba-441c-a5cc-b12d0767a4e0;
+ Mon, 19 Apr 2021 20:45:47 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BE3A1613E0;
+ Mon, 19 Apr 2021 20:45:45 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,17 +50,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3ac99ebf-ac69-4a4a-8ab9-f42df83f3816
+X-Inumbo-ID: 77a93e31-99ba-441c-a5cc-b12d0767a4e0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1618865128;
-	bh=YW3vYxnGOhg3+Kycggdg534bAnAV6eoJFWmNIQVXieA=;
+	s=k20201202; t=1618865146;
+	bh=g2eIx8Az/Bb0zYkng6cw8qgVnkYdIcpHR3F4HJvjseM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=K9TYCxGLIY+pqb0D1V8jokw0yBXWMpGJ5NottRjQZ+TP1MUOsLvjEXGPYZmZ/Y2aO
-	 vtlWC9kud8Eo9kj9U1mg5DMyy2nymBOEDYuuFBLvQhLutFuk1InPQuIu8lAvUFGwhx
-	 RAzEW+Gh2t2ksNQAiEl3M9paAVBaNI+1OtOJQ8Y0TQw70rR8rUPFEvAdtU4O1m6fuV
-	 LkaLeBtVUG3d/ksLcVP4ia6zVsXoJJwumhjApKwvf5FEgu5pS40nPFCyx4lk/M7/dE
-	 Bj253pCFE2UHDbrTwvK2sJPhvUCzRDa4+0U511gFkFfWTxhFK/O97Qv6OXJVfBynSB
-	 rbSt7k4x3BJJw==
+	b=HVHoUgIOgeMzoFRTP7nT9R0wGfeCVoxdQeItsOJAtZNHYbIi7xlNA/FHrmNfRVWUi
+	 HjLV4f6uvuMS+IklEY9DjbuaKyiLNiC3d9uDaJ3gHGGV6aeJIqN/mtDCviDYlyugKE
+	 opcJiU75hDfOa6jS3lCXRD0/Qkw9uAWteFEA65Re1BYQdT7GbRfTtHK7unZ6gCeEj6
+	 kkrDg9j9LIpbP9Gct3goLjAsWkrIm1kIyAkkxvV0D9usPJ6n8VwtRsu5HI6jbduWrI
+	 Q7cb2ysVBSJrnU0N9HtBi65D6KscDDxu2Sb7GCX8LgInfIBYveehqUnv8bejxvMcnH
+	 dwIjtz323nCCg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -70,12 +70,12 @@ Cc: Michael Brown <mbrown@fensystems.co.uk>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org,
 	netdev@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 07/12] xen-netback: Check for hotplug-status existence before watching
-Date: Mon, 19 Apr 2021 16:45:12 -0400
-Message-Id: <20210419204517.6770-7-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 06/11] xen-netback: Check for hotplug-status existence before watching
+Date: Mon, 19 Apr 2021 16:45:31 -0400
+Message-Id: <20210419204536.6924-6-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210419204517.6770-1-sashal@kernel.org>
-References: <20210419204517.6770-1-sashal@kernel.org>
+In-Reply-To: <20210419204536.6924-1-sashal@kernel.org>
+References: <20210419204536.6924-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -116,7 +116,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/xenbus.c
-index 107bbd4ae825..78c56149559c 100644
+index 910322b442bd..9092b55e087f 100644
 --- a/drivers/net/xen-netback/xenbus.c
 +++ b/drivers/net/xen-netback/xenbus.c
 @@ -1043,11 +1043,15 @@ static void connect(struct backend_info *be)
