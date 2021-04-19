@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E081BC43461
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 644B3C433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8604161107
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8604161107
+	by mail.kernel.org (Postfix) with ESMTPS id 1AA6B6100A
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1AA6B6100A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.112935.215340 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.112936.215352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYUTQ-0006Bb-L4; Mon, 19 Apr 2021 14:02:00 +0000
+	id 1lYUTS-0006FW-Vb; Mon, 19 Apr 2021 14:02:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 112935.215340; Mon, 19 Apr 2021 14:02:00 +0000
+Received: by outflank-mailman (output) from mailman id 112936.215352; Mon, 19 Apr 2021 14:02:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYUTQ-0006BS-Hh; Mon, 19 Apr 2021 14:02:00 +0000
-Received: by outflank-mailman (input) for mailman id 112935;
- Mon, 19 Apr 2021 14:01:59 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lYUTS-0006FK-S2; Mon, 19 Apr 2021 14:02:02 +0000
+Received: by outflank-mailman (input) for mailman id 112936;
+ Mon, 19 Apr 2021 14:02:01 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3l5R=JQ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lYUTP-0005yZ-EP
- for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 14:01:59 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1a82269e-fe70-47a8-9879-c76ff1e105b8;
- Mon, 19 Apr 2021 14:01:54 +0000 (UTC)
+ id 1lYUTR-00061N-8E
+ for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 14:02:01 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 665d3f7c-ab3f-4023-ab3e-e0dc9239117f;
+ Mon, 19 Apr 2021 14:01:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,46 +48,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a82269e-fe70-47a8-9879-c76ff1e105b8
+X-Inumbo-ID: 665d3f7c-ab3f-4023-ab3e-e0dc9239117f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618840914;
+  d=citrix.com; s=securemail; t=1618840911;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=6BUv+N6okA8eie29SW3frkmwZ8F2KRqBim4h2q/ANWM=;
-  b=GeVz/Jgr1jzbMApAonIcLm1STwz1KWUlgDq42uy7M5D/C8j0DlGKJtVX
-   S05y4G7ekjxcj9zX5qK/BgCb27ZyrO1AUXScdpaKmqqKPdWXzHd8eTICh
-   HQiUzvx0P44/dbokgHmAne74xL2bLfxV65xDhry5RjPxrDH3w0+Dqr+cm
-   A=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 2gZqkBYH1WeWqjKj9X9QFQDsCYxJLRAsGlWbdyIOlKNIXNu7DPePxXjniCpR4YIUoXnja2wAfv
- Jhskh1lGM37FwZPP+EUkGDJ7zy5VJMKFwwEneXji6w/KYrdnA+bhuCwYN6I4ZdGF9ddJLigRLJ
- +PH8GI+FMk8wv7u3MCCaA237dF9bJ2WCye1l3flV1Wnctzh7h/6MExASKBSqPTE7n9XxeZ2jxo
- t8+9AQZK8z4G+vpOo/8lhibZTPV0chl6qF9J3oz2K6Vi/+5cYHf66jBHaBexhSyRzYxDus12KK
- nsk=
+  bh=1jko2KVCpjzrndGXx0YAEFP0pnOv6quT6EsQagA40cw=;
+  b=AHNLTHPdaI0BZhchszAI9lV3MSwZnS1EHxVEMnuKJ1dbjjVOjtDe13xN
+   KVGH7CR/b06qQHkvbScwNhkRNNzCb/K3ck14hpyd0VUCctHMwPBuCCQvt
+   BhBTpAdAlXyJtNBNlGeDM4TZpetbBL0X5YBtd+WHgw8reWjFJflqSTy/W
+   c=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 4dw8FPQQdflBDRcafRhL0AdCLPex3/yZ9EWa56O9Ip9Lx67CF9Puw1pAF6geEP8bZYpRBLFagD
+ EsRqPZHTaZGt0poXjK79QmTWY611BSqyBKPxwQVNz00N4ZC8TbwXPtKvXLJdQYaOAJdq1c3w2N
+ BdUSskXTOvp9ormIvJY2RFppqJZko8MdrmOghVKlRYu90jU/QufkCWG05Tig5pCsCeymO9MLfR
+ Ga34BGL+ZeB+xtr2nmbtAsVPFsn/6VEVal/O1nTKxjq1Ake/zQQSUpDPPEKY743ab6EOGIvHpf
+ +VI=
 X-SBRS: 5.1
-X-MesageID: 42271924
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 41892066
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:JzmgOqEN8ZxqED95pLqFP5HXdLJzesId70hD6mlaTxtJfsuE0/
- 2/hfhz726ItB89UGwt8OrhBICuWnXZnKQZ3aAwOvOYUBDiqC+UKuhZnO7f6hnBPwG7yeJHz6
- dndMFFeaHNJHx3l9zz7gX9M/tI+qjlzImSie3Tz2hgQGhRAskKhTtRMQqVHlZ7QwNLH/MCZf
- ihz/BarDmtc2l/VKuGL0QFROTKqpnqk5/rcHc9ZiIP1QiUgTukrIP9ChiTty1xbxpzx94ZnV
- TtokjQ+rik98q20Abb0HXeq65LgcL7xsFYbfb87fQ9G3HJsEKFdY5hU7qNsHQUp+qo+RIQjN
- zBuVMEOcJrgkmhGF2dkF/I4U3A2Cxrw2L+wVWY6EGTxfDRdXYfMY59oq53NjHe8FEtudlg1r
- kj5RPhi7NeEQ7H2D7g7NzJSgxnmyOP0AEfuP9Wi2YaXZoVabdXo4Ba8k9THIwJAS72rIQqCv
- NnAs2Z/vBLalmXBkqpxFVH0ZipRDA+Dx2GSk8NtoiN2yNbm208y0cD3sQQkjMB+fsGOuF529
- g=
+IronPort-HdrOrdr: A9a23:t6oF1qgSpEjUF7F8VFLowa1vMHBQXwh13DAbvn1ZSRFFG/Gwv9
+ yynfgdyB//gCsQXnZlotybJKycWxrnmKJdy4N5B9efdSPhv3alK5wn0Jv6z1TbaknD38N+9Y
+ MlSahxD9XsEUN35PyR3CCUG8stqePpzImGnuHbpk0CcShPS4VNqzh0ERyaFEoefngiObMcGI
+ CH7sRK4xqMEE5nDfiTPXUOU+jdq9CjrvuPDSIuPBI79BKIyQqh9b+SKXOl9y0DWDBCy6pKyx
+ mmryXF4MyY0s2T+1vn+EL4q79Xn9bgzdUrPr3wtuElbg/CpyztSIBoW7iptC04rue1+D8R4a
+ XxiiZlBetfwTf8eXy0vAvM1mDboUkTwk6n83C0qz/CptH0Xz0zAcYpv/MmTjLpr3AOkfs59Y
+ Aj5RP/i7NnSSnusQ642v3zEzZtrUawqWpKq59ps1VvFbEwRZUUkZYS5ypuYfE9NRO/0q8LOs
+ 90AvrR4f5HGGnqFUzxjy1UzNugUm9bJGb+fmEy/sic0z1hlHtk1UcvxMsGgnca9J4mIqM0n9
+ j5Dg==
 X-IronPort-AV: E=Sophos;i="5.82,234,1613451600"; 
-   d="scan'208";a="42271924"
+   d="scan'208";a="41892066"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, "Jan
+ Beulich" <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 4/7] x86/irq: Make create_irq() compile at -Og
-Date: Mon, 19 Apr 2021 15:01:29 +0100
-Message-ID: <20210419140132.16909-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/7] x86/shadow: Make _shadow_prealloc() compile at -Og
+Date: Mon, 19 Apr 2021 15:01:31 +0100
+Message-ID: <20210419140132.16909-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210419140132.16909-1-andrew.cooper3@citrix.com>
 References: <20210419140132.16909-1-andrew.cooper3@citrix.com>
@@ -98,35 +97,47 @@ Content-Transfer-Encoding: 8bit
 
 When compiling at -Og:
 
-  irq.c: In function ‘create_irq’:
-  irq.c:310:38: error: ‘desc’ may be used uninitialized in this function[-Werror=maybe-uninitialized]
-               desc->arch.creator_domid = currd->domain_id;
-               ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+  In file included from
+  /builds/xen-project/people/andyhhp/xen/xen/include/asm/domain.h:4:0,
+                   from /builds/xen-project/people/andyhhp/xen/xen/include/xen/domain.h:8,
+                   from /builds/xen-project/people/andyhhp/xen/xen/include/xen/sched.h:11,
+                   from /builds/xen-project/people/andyhhp/xen/xen/include/xen/ioreq.h:22,
+                   from common.c:23:
+  common.c: In function '_shadow_prealloc':
+  /builds/xen-project/people/andyhhp/xen/xen/include/xen/mm.h:252:55: error: 't' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+       return page != head->next ? pdx_to_page(page->list.prev) : NULL;
+                                                         ^
+  common.c:933:28: note: 't' was declared here
+       struct page_info *sp, *t;
+                              ^
 
-This diagnostic is bogus, because desc is already read on earlier paths.
+I'm not certain the analysis is correct.  't' is a temporary variable, and is
+clearly initialised before use in foreach_pinned_shadow().  Either way,
+initialising it to NULL placates the compiler.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
+CC: Tim Deegan <tim@xen.org>
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/irq.c | 2 +-
+ xen/arch/x86/mm/shadow/common.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index a1693f92dd..72b86c6155 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -264,7 +264,7 @@ void __init clear_irq_vector(int irq)
- int create_irq(nodeid_t node, bool grant_access)
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index b99ca14e71..737e6b365a 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -931,7 +931,7 @@ static inline void trace_shadow_prealloc_unpin(struct domain *d, mfn_t smfn)
+ static void _shadow_prealloc(struct domain *d, unsigned int pages)
  {
-     int irq, ret;
--    struct irq_desc *desc;
-+    struct irq_desc *desc = NULL;
+     struct vcpu *v;
+-    struct page_info *sp, *t;
++    struct page_info *sp, *t = NULL;
+     mfn_t smfn;
+     int i;
  
-     for (irq = nr_irqs_gsi; irq < nr_irqs; irq++)
-     {
 -- 
 2.11.0
 
