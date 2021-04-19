@@ -2,42 +2,42 @@ Return-Path: <SRS0=K98N=JQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B76B0C43600
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 089A1C433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F90761057
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F90761057
+	by mail.kernel.org (Postfix) with ESMTPS id B2E4A61245
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Apr 2021 14:02:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B2E4A61245
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.112931.215292 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.112932.215304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYUTG-000608-G7; Mon, 19 Apr 2021 14:01:50 +0000
+	id 1lYUTI-00062Q-P4; Mon, 19 Apr 2021 14:01:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 112931.215292; Mon, 19 Apr 2021 14:01:50 +0000
+Received: by outflank-mailman (output) from mailman id 112932.215304; Mon, 19 Apr 2021 14:01:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYUTG-000600-C5; Mon, 19 Apr 2021 14:01:50 +0000
-Received: by outflank-mailman (input) for mailman id 112931;
- Mon, 19 Apr 2021 14:01:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lYUTI-00062H-LC; Mon, 19 Apr 2021 14:01:52 +0000
+Received: by outflank-mailman (input) for mailman id 112932;
+ Mon, 19 Apr 2021 14:01:51 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3l5R=JQ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lYUTF-0005yZ-Du
- for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 14:01:49 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 98467370-7f61-41ad-84a3-b50c4d4368dc;
- Mon, 19 Apr 2021 14:01:48 +0000 (UTC)
+ id 1lYUTH-00061N-Ga
+ for xen-devel@lists.xenproject.org; Mon, 19 Apr 2021 14:01:51 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ecb8b980-4f33-41e0-a0f6-492d4d5acdf7;
+ Mon, 19 Apr 2021 14:01:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,42 +49,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 98467370-7f61-41ad-84a3-b50c4d4368dc
+X-Inumbo-ID: ecb8b980-4f33-41e0-a0f6-492d4d5acdf7
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618840908;
+  d=citrix.com; s=securemail; t=1618840909;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=u9A8Xbp2f28xpiyEql1FXS9QDyMZHqIW8dHroVxEQz0=;
-  b=damj74y7thsnEtJgAqNQsH7qvba371RodFW5o/h4CozHQDXSOT3Gb4+n
-   WteTk3aS4KWEquTli3301epwJQTUxy3XPi2KI3yVnRSGG6qJfSh+bumh9
-   EaHZ13HnvqwKwH0FeTjQ2kp0An+DLxfdi/x3jIGkSr7yZTmFrP0xDNuci
-   A=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 9dLxGOaIsnB66Fuzg95ph/S9+suSyg6IWMg+z9hhurXGdoZA5tb3pUkQGGadGtQyIqHDplGWwY
- aJ1/XU0bwious1VjmOyp+YBy6PF+VAIbBtt0OtKuCAGqcH/br8zyTuqIReMFLee4fTHtjBwCSP
- 4OWoy7wOC8ksgqyluh4Hjh2LKdtXFEux4H1aMrA59k4hkJlp6LTJWby5wv2SMD8RFujrULqmpQ
- BzNP/37eL4OdmULPuRYn/BR3Hq5iYK4MBslA8oGjtOOZL5LVZ67heT6c60m2h5ygNTlFds2KQB
- X/E=
+  bh=TA5ZKAuUwi4CHsYgJ25Kg8HIPW9/JmPHtVST3zPieb0=;
+  b=cDQ75ETNDtCEjGA/sxnJFDdZxJPCtjwZp16m6/C1FAU9obRRxsDPfzgF
+   /dNHaW70bpSu+iw1v+Qev1MzzcwDtnnCJx8QqXdb50tQ05VsdQO+lAFXJ
+   J/aoc9++NPMReO/XYUytwMj2/YMsRUmKkbBvz2iCkCM1XcN8EIe2WESDc
+   8=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: nKAw0paORZWMn2xzxBZJ2gUU4K0T24s3gCftZ+WLUFp7Wc7pFBsBftdOgcZEd9J0sgnBF31DiR
+ SSIyoOJ4OQ/xIwm/ShX4wGAFGRFnhtH2svdemK1CK9cBWQqxtrFhKq5waGiPTf81k3ZyfsRusH
+ EIm0FKVkByrusRU7vH4wKhyEvIbfkP5GP8E6AgC6NUMO2JYXfGKoGsJPYDiIHPin0YZFvMHqjO
+ AC/ApiRRfIvXlLFENcv6m5ExEpvGhVW4r2ZbKikcRreLDiilHvpK33F4BQbYJ1NZaXLavKNV6D
+ E5s=
 X-SBRS: 5.1
-X-MesageID: 42271885
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 41892058
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:HRN7aaCJLywv6UHlHekp55DYdL4zR+YMi2QD/WoZc3JoW+afkN
- 2jm+le6AT9jywfVGpltdeLPqSBRn20z+8N3aA6O7C+UA76/Fa5NY0K1/qF/xTMEzDzn9Q86Y
- 5OaK57YeedMXFbioLA7BC8A5IcxrC8gcWVrMP/61socg1wcaFn6G5Ce2GmO2l7XhNPC5Z8NL
- f03LslmxOadX4abtu2CxA+NoCpzbD2vanrbhIcCxks5BPmt0LN1JfAHwWFxRBbajtTwN4ZgB
- D4ujbk7aauuezT8H7h/lLUhq44pPLRjv9KBMmBkaEuW1fRtjo=
+IronPort-HdrOrdr: A9a23:Rd5jdKopNcXHAQ2UlMnTX4YaV5u6KtV00zAX/kB9WHVpW+SivY
+ SHgOkb2RjoiDwYRXEnnpS6NLOdRG7HnKQZ3aA4Bp3neAX9omOnIMVZ7YXkyyD9ACGWzIRg/I
+ 9aWexFBNX0ZGIQse/T6gO1Cstl5dGB/ryhi+u29QYUcShBbaZ84wBlTiOSFUNrTAdLbKBJb6
+ a0zMxBujamZDArft22b0N1FNTriv/qsNbdYRAADwM68wXmt1+VwZPzDhTw5GZ7bxph2rEnmF
+ KlryXY4eGZv+i/2lvg0Qbonu1rsf/A7vcGO8CWkMgSLVzX+0yVTaBsQaeLsjxwgMzH0idMrP
+ D2rx0tP9t+5hrqFwnbzyfF4AXu3C0j7HXv0zaj8B3eiPbkTzE3Adcpv/M7TjLl6lEttNw58K
+ VH03PxjeszMTr8nT/w79WNahdylkDcmwtBrccviRVkMbc2Wft0l8gy7UlVGJAPEGbR84Y8Ct
+ RjC8na+bJ/bU6aR2qxhBgi/PWcGlAIWjuWSEkLvcKYlxJMmmpi8kcezMsD2l8d6ZMGTYVe7e
+ isCNUmqJh+CustKY5tDuYIRsW6TkbXRwjXDW6UKVP7UIYKJmzKsJyyxLku/umldNgpwfIJ6d
+ r8eWIdkVR3V1PlCMWI0pEO2AvKWn+BUTPkzdwb6IN+vrH6Wbr3ISyOQF0jiKKb0rUiK/yef8
+ z2FINdAvflI2erM51OxRfCV55bLmRbUMB9gKd5Z3u+5ubwbqH6vO3Sd/jeYJD3Fyw/Z2/5Cn
+ wfGDz6JMBK6FG3Smb16SKhGU/FSwjax9ZdAaLa9+8cxMwmLYtXqDUYjly/+4WMMj1Nsqs/eU
+ NkO7P5mqanpW27lFy4rllBC154NAJ48b/gW3RFqUshKEXva4sOvN2ZZCRPxnedPwR+SMnXCQ
+ ZboFxy9cuMXtmt7BFnL+jiHnORjnMVqn7PcowVnbeb49z5PrkiCIw9ZaB3HQLXNhB8lApwsl
+ 1fYAscSkK3LEKrtYyVyLgvQMDWbZ1VnRqiK888kwOkiWys4eUUAkY9cxHre8iNmgoqTydTnT
+ RKgtIiqYvFvy2uJ2s5iPk/K3tWZg2scf97JQyYeYRZna3qcglsTWGMwSeXkQ03Z3CCzTRvuk
+ XxaSKTYv3FGVxbpzRR1bvr6kp9ciGHc1t3cW0Si/wKKU3W/nJy2/SMfKy9zi+YbUYD2PgUNF
+ j+EE8vCxIrw9C8zxiOnjmeUX0g25U1J+TYSLAuaava1H/oKIqGk8g9bohp1YcgMNDlqekQV+
+ 2DPweTMTPjEussnxWPuWxNAlgGlFA01ffznBH15mmx23AyRfLUPVR9XrkeZ9WR9XLtSfqE2I
+ hw5OhF9NeYIyH0cJqL2KvXZzlMJlfIrWm6Q/ohpJpUsagx3YEDaqXzQH/NzjVKzR8+JMD7mA
+ cCW6x9+qnGIZIqcMoIeS5Vl2BZ3OinPQ8uqEjxDeA/d1120COeMNON/rbSqb0gRkeGvxD9PF
+ GD8ytbu/fJNhHzpIIyGuY1OyBRbkN59XFpuOWFfIfUAB+xd+5C8EGhW0XNAoN1WeyAA/EIsh
+ 1+49uUhOeZeCrzxRDIsVJAU9xz2nfiRdn3HRmFFuFJ+cGrIFiAgqOl58iokTf8IAHLG3gwlM
+ lCbkwfbsNKlzkkgsk2y0GJO9PKnn4=
 X-IronPort-AV: E=Sophos;i="5.82,234,1613451600"; 
-   d="scan'208";a="42271885"
+   d="scan'208";a="41892058"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 2/7] x86/shim: Fix compilation at -Og
-Date: Mon, 19 Apr 2021 15:01:27 +0100
-Message-ID: <20210419140132.16909-3-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Juergen Gross <jgross@suse.com>
+Subject: [PATCH 7/7] xen: Use -Og for debug builds when available
+Date: Mon, 19 Apr 2021 15:01:32 +0100
+Message-ID: <20210419140132.16909-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210419140132.16909-1-andrew.cooper3@citrix.com>
 References: <20210419140132.16909-1-andrew.cooper3@citrix.com>
@@ -92,50 +113,46 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-When compiling at -Og:
+The recommended optimisation level for debugging is -Og, and is what tools
+such as gdb prefer.  In practice, it equates to -01 with a few specific
+optimisations turned off.
 
-  shim.c: In function ‘write_start_info’:
-  shim.c:288:22: error: ‘param’ may be used uninitialized in this function[-Werror=maybe-uninitialized]
-       si->store_evtchn = param;
-       ~~~~~~~~~~~~~~~~~^~~~~~~
-
-and a slew of knock-on failures.  All are caused by
-xen_hypercall_hvm_get_param(), and presumably insufficient analysis to observe
-that *value is always written on the ret=0 path.
+While the use of gdb isn't necessarily very helpful for Xen, the disassembly
+will have fewer structural transformations vs C, and therefore will be easier
+to follow.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/pv/shim.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Juergen Gross <jgross@suse.com>
 
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index d16c0048c0..a05aaa7bcc 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -282,7 +282,7 @@ static void write_start_info(struct domain *d)
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-     start_info_t *si = map_domain_page(_mfn(is_pv_32bit_domain(d) ? regs->edx
-                                                                   : regs->rdx));
--    uint64_t param;
-+    uint64_t param = 0;
+Successful CI runs:
+  https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/287769787
+  https://cirrus-ci.com/build/5086280275984384
+---
+ xen/Makefile | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/xen/Makefile b/xen/Makefile
+index 9f3be7766d..128de93f5e 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -195,7 +195,9 @@ include/config/%.conf include/config/%.conf.cmd: $(KCONFIG_CONFIG)
+ 	$(MAKE) $(kconfig) syncconfig
  
-     snprintf(si->magic, sizeof(si->magic), "xen-3.0-x86_%s",
-              is_pv_32bit_domain(d) ? "32p" : "64");
-@@ -311,8 +311,8 @@ int pv_shim_shutdown(uint8_t reason)
-     struct domain *d = current->domain;
-     struct vcpu *v;
-     unsigned int i;
--    uint64_t old_store_pfn, old_console_pfn = 0, store_pfn, console_pfn;
--    uint64_t store_evtchn, console_evtchn;
-+    uint64_t old_store_pfn = 0, old_console_pfn = 0, store_pfn = 0, console_pfn = 0;
-+    uint64_t store_evtchn = 0, console_evtchn = 0;
-     long rc;
- 
-     if ( reason != SHUTDOWN_suspend )
+ ifeq ($(CONFIG_DEBUG),y)
+-CFLAGS += -O1
++# Use -Og if available, -O1 otherwise
++dbg_opt_level := $(call cc-option,$(CC),-Og,-O1)
++CFLAGS += $(dbg_opt_level)
+ else
+ CFLAGS += -O2
+ endif
 -- 
 2.11.0
 
