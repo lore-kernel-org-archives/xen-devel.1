@@ -2,41 +2,48 @@ Return-Path: <SRS0=xmOv=JR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 479F5C433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EBF5C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:37:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B4E19613B4
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:15:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4E19613B4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id BD3EA6100A
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:37:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD3EA6100A
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113804.216877 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113828.216888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYr9Q-0002lB-W7; Tue, 20 Apr 2021 14:14:52 +0000
+	id 1lYrV8-0004lI-U3; Tue, 20 Apr 2021 14:37:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113804.216877; Tue, 20 Apr 2021 14:14:52 +0000
+Received: by outflank-mailman (output) from mailman id 113828.216888; Tue, 20 Apr 2021 14:37:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYr9Q-0002l2-SZ; Tue, 20 Apr 2021 14:14:52 +0000
-Received: by outflank-mailman (input) for mailman id 113804;
- Tue, 20 Apr 2021 14:14:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Yi73=JR=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1lYr4t-0000xF-6u
- for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 14:10:11 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2858213d-19f3-4c16-9308-28276496afce;
- Tue, 20 Apr 2021 14:09:56 +0000 (UTC)
+	id 1lYrV8-0004lB-R5; Tue, 20 Apr 2021 14:37:18 +0000
+Received: by outflank-mailman (input) for mailman id 113828;
+ Tue, 20 Apr 2021 14:37:18 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lYrV7-0004l3-Vm; Tue, 20 Apr 2021 14:37:17 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lYrV7-0002wd-Lk; Tue, 20 Apr 2021 14:37:17 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lYrV7-0002zB-CQ; Tue, 20 Apr 2021 14:37:17 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lYrV7-0002t9-Br; Tue, 20 Apr 2021 14:37:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,179 +55,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2858213d-19f3-4c16-9308-28276496afce
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618927796;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=Vi/QQviJCSIXptO4sworOuxdl1wg4QnJXyCQBTzDZmg=;
-  b=Eq4W+FvUTKSMUJkFf7EHCzAlYxJ77psNlup+w0owGfpBwqyBpzEYn/d2
-   vZXk7VFPUhgJuI0XaOl7qUMxjJDnhJev0sDDJffslsOW1WrkXGSHhMKkD
-   3fi/o7iXTvoEAIcqLICk8tmq7ZTWE/pG5QzEeIcI778a0NaAZfrWoLRk3
-   4=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: Wpx9aLvW0BGxBvCyrN1RMQg0zwqNHwOZN+CS7E4WCV3wl+ZIqT6SExzetTAnrXVVTAxaUrXIN2
- jRsA7Znf3E6DIy2Lk1u9jkyt7R4xe/ZfQnFCpjbxmJp1Ev9ITkqpL5vrz6lDqoBgfVbVcapUdQ
- jjf7dkZMEf0lwwcY0aB+ztX/WSeK1kv7iS7/aJuvLDBZMF7NzKFDf6uKTFYxj+dI24j7MpKeY5
- XcdMHxsk5EqVgEOCrKf6sXFUOzmzyI+lA5nj6LTcADBRqe9dwsamNfVnjNf6m1eP2FxfcGTprl
- x00=
-X-SBRS: 5.2
-X-MesageID: 41981601
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:/yCU7q2NXLufcIbxjpmRQwqjBWhyeYIsi2QD101hICF9WtCEls
- yogfQQ3QL1jjFUY307hdWcIsC7LE/035hz/IUXIPOeTBDr0VHYSb1KwKnD53nbGyP4/vNAzq
- sIScJDIfD5EFQSt6nHySaiFdJI+re62YSJocub8Ht3VwFtbMhbnmVEIyKWCFd/SgUDJbdRLv
- qhz/FKrTahZngbB/7TbhU4dtPOusHRk9beaQMGbiRN1CC1kTiq5LTmeiLovSs2bjUn+9Yf2F
- mAqSPVzOGJs/a3yhjTvlWjlah+qZ/a5fZoQOCJgsgRAD3whgivf5QJYcz+gBkF5NuBxXxvvN
- 7QowoxH8kb0QKsQkiF5SHD9iOl8DEy52TswVWV6EGT3vDRdXYBJOdqwad6GyGpj3YIjZVH/4
- 9gm1+9jd5xCyjNmSzsjuK4Ly1Cpw6PjlcJ1dIIg2c3a/p4VJZh6bYx0WlyC5k6ECfz+OkcYZ
- JTJfCZ3vpQfF+ABkqp2FVH8ZipVnQ3KB+MXlIPjMyTyyRXh3B01SIjtbUioks=
-X-IronPort-AV: E=Sophos;i="5.82,237,1613451600"; 
-   d="scan'208";a="41981601"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=njg1+i2ZTvkXEpkBMEL9xAtNWk3HTTXOh7kGvvpPWR3jT1rk+AsTeZfrCvyMWh/Eb2dhgP5XD5nJXCdbCo7NuDK1X8gpnrO0AahVnpkNLeOGBLH2SWGjLnCuBFrZp3DmZgXsyrRRuzHsVtDINz9BydBgK37CN4+SjotINOwZf5zumGADZzOJbrT36d4dkG8J1DDitgW1XE4WiImwLi9q+sGeaj8yq6MD9TMeEIHWU5ef0nDf/0QLmPMDNfNkMU47nr3ejBbDnKexXhzWNUKLnc2eMh4ltNOVpy0O8TVmJu8UN405gN3WnCBMduH3Bwm4pbbxfQGC+jwSLTC/pjXcNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/8G6ZphiMwjkLCnh/B+N1lg5s23KSmnn5KG1LwIN6mo=;
- b=oOpWZDQ5Txt/jQ6LUxPL1ulf/uUzALQKZkkrvtmnj/cfgjHMhGvr4J0V/Kf3LzWuOMplwxqP3+0HJ1FfRIP2eoOxiWmhbFmzc73BSRDTrfKRg6sgl5cpTZ+CJt1NJqFjDF/BUuNUL52ulIi93BWZZAiF2HdHwEmRtQFlB74tm/ZFkQDa2QjRHqwD6BvhElER3QvZ1OYSfPouY+IT4531m9B2hLpiL8HkBPA77QiWTZDvFTBFdske28+W0WuB+AuKwAy1Xe7mhThv1zPvY6d0W7xW/yhO+G++IOYP1GvPTbqkQgvYrl4prIxHcHtP9qFljJpfqBNZ0FU5smowNs2pQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/8G6ZphiMwjkLCnh/B+N1lg5s23KSmnn5KG1LwIN6mo=;
- b=I/Lg/N8OWifczWXAsx6tCB93Je1iVplFFrk4iIgiwrb5EBr3ooIUVBbHvCNS1mAhmZcrJGUyhuzYD3+PlkzDXVPAgARGt5vy1DZ1Bf+LA3TnXCK2TBNikGL10DRBkYfhl0I/iPOO4pjUbvHSKr0evqagh6KYI5XPuVBJYm7V9HM=
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v4 10/12] x86/irq: drop return value from hvm_ioapic_assert
-Date: Tue, 20 Apr 2021 16:07:21 +0200
-Message-ID: <20210420140723.65321-11-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210420140723.65321-1-roger.pau@citrix.com>
-References: <20210420140723.65321-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=H84soC+IQ65oSWsJQfEsDH4T1DkIje12VbkylCyrJ8o=; b=sqio+cd6z2SvAzBWXHobEnK4gU
+	rqJXvdcLRfxJjY26yxTie7KTT+5CxPewtVyIFGEqGsezDNq3zjGyHvtQh2o8p2I1BDIPUezI4IymB
+	c5td50U3THPfcBYPlj26RtJIS3IS7RYp2leSPKC909Ellrc/rDg6aluk+tbGd8JfkNuo=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-161321-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MR2P264CA0040.FRAP264.PROD.OUTLOOK.COM (2603:10a6:500::28)
- To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 53b0597c-efe7-48fb-b2cd-08d90405f7c5
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6000:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM4PR03MB6000979E4BC9C94AAAF6E2D58F489@DM4PR03MB6000.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: koAqw+I5BsffFXgWodMN8KdbC/X0ogyAWjRXM5+7xSwBBuC1Zg1X2v6t9hWvfND1QpFTZng+E8f5vujtno+Ow0ISOS/JP3Uod65p0BQlDNjOcswIggaFFrMyso7w+7DnDlcjG+wZLZ43SCURgXd2DkyBL+nYtTPWung+4VE0lEBi03+cMSgOQI3Ik1SlTbgiUxzCOYZ9BX7yEfsWx3OFASBwbnbA7YIjsOqxtPmEbehzD4O6wg3JS7kumd14tLq2M6CQnFBZTHmwRxCHsF8jOJrMQSzxdoDtzNo/Dki26FG5m5TaU+90/0MFjmSwKxkGmfIPP+mRAuMAt8AjOjT3aA8BkpIT0gAPKJiGhV4rpSB3zBtPoKTvLNDm7oCTjDOyaEowCeaiUeVKYT9li94mI8tvTc9iIM7fP2kiYB1F7aJe85LmAMN3PnazDbCu5Z6p5/I52eJq2dl7Yeod5bZJ5cva1ceqvHxIRL0RJVhOsDeSee4gH6TZb7aRNnUu2rxCEarDuOem6rZxPSjShUcRDpB8hTN6QmkGcOdqXRLeaYrLGMT/+XdxcMFoqlbjoWw4TwyUbw0jbO0mU+4qWxjPezw1lH4fr4/n1D/7eKBAd3I=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(376002)(39850400004)(136003)(366004)(6916009)(83380400001)(4326008)(38100700002)(16526019)(36756003)(316002)(956004)(6486002)(2616005)(6496006)(478600001)(8676002)(26005)(186003)(5660300002)(8936002)(54906003)(2906002)(6666004)(66476007)(1076003)(66556008)(86362001)(66946007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?VXQvWVVlNkpPVUtlTGsxdEsvSW04QkZjMGhhMytBamVLN0lIV3ZZSFRDR296?=
- =?utf-8?B?a3pTRzhad2NmOXM2d2ZGN2luMzFXdmhQdjltaWZ5dWVOa21yZTdjY3cvb1BS?=
- =?utf-8?B?M1JGaUxlZjd0d0lhSkFjVkZGdGZjeWRhaTlack1zeGRLNnVLYTMxeW1kMHRR?=
- =?utf-8?B?eDF0NFczcFZJYXhxeEE4cEM2YytIWTBEK05pSmxraXFrSG9tVHN3WlN4aXFh?=
- =?utf-8?B?b2JqZmhMNkVGVUlOek00RWRjeEh0Nm1MT1BUMnpMT3BtRWVYRmpTV3VFNndF?=
- =?utf-8?B?b094ak9xZDRyc21uaUlTUis3RGYxZ1lYTHVRajdUSnJrUG9GZGFWMXhBLy8w?=
- =?utf-8?B?TGRYcWFSNSt4TndIV2lXVzRoNUdNV25wYmtMbElrK3phdjRXMHk3T2htUjFr?=
- =?utf-8?B?cjlqdkRRR2dFaUtKWTNhSGxWdkx4bDgxOEp5dmNTaUFTSEJJS2JXZ3pHZDB6?=
- =?utf-8?B?em95YlNZS2RpMTJ6d1d5dlNxQlFRUWlEb0dvbytWTHIyYkg5L0hoeXJ6cmNs?=
- =?utf-8?B?WmI2MXBtVmtxblpJVXIrZ1A4NXByR09lcXh5RTIzTU9lZHJHWjlrQjBYUWxF?=
- =?utf-8?B?c2gwRDF0T2xENzZlQi9FSVU0dGM2SURSYVp6aHpvaTJqallUcUdXam9wajdQ?=
- =?utf-8?B?L2Fpd3RuQjJhNjN4NUF4V2s5bG1QUDZHMWxPdjJtTkpXVTBIYUxHSmQrM0dB?=
- =?utf-8?B?RHF1T0taZGVGeXNvRzZ4cjNmMEFWUEFRWG9BdnNvNzJxT0NMencyTnBqMS82?=
- =?utf-8?B?Rys5elhNRk9oaTA2MDNUZ2g0NUx2YmhQUjRBYk1uQStDTmp0eUhXem9KMWpX?=
- =?utf-8?B?UzFlN3JRVUdKNHFad2d4amlnaldHNnRQb0Z2K1cvUG4zeHRJcDdzZ2F2YTZt?=
- =?utf-8?B?SU9sTzNkRFQ5TlZHTlk3REh1Q0JMU2F1ZUlGK2t2dlgxZklqQitRV0FYcjFM?=
- =?utf-8?B?ejdXMnJ6QVIrMnB2YklLWU9JOU9BSDNDM2dTKzd5WWtmdSs3YjF5RTVUbjQv?=
- =?utf-8?B?OFlFL05LZ3U4OVdjV2xIQ09PTk9XdFhTL2ZNZ1ZqTW5KbnJjTDRHQmxLcm1r?=
- =?utf-8?B?clpHTGxuZ3VJL0h3Zk4xZW9LTE8yM0NZTnkvZnQ2NGNuUkZHL2lLQ0h1YitZ?=
- =?utf-8?B?RXJ5ejhWZktHY3V5NjBOZTdMMlpUMnZoam1ZRWRDZnluMTE3Vm5iKzdnN2U2?=
- =?utf-8?B?Q2pZbUtNUmVSWWxMeWRmc3hlTkZ2dENibElBT3NPRENqdG9IYTdRb1NkRjY5?=
- =?utf-8?B?bGdiaXhBTlI4V3JmelpDS080bHFzY2ZQclQ5YnVYRHZhTStrNmRyT1BmZlBO?=
- =?utf-8?B?eG81MjV4QVNxeTU4ekQ0SHBwbFNEMTlZSmk5QzVjdEsySmRvU0VrTWdVbUlt?=
- =?utf-8?B?b2lnOCtLNkZ3TW0rNUVYd1I0N1NlaHlBV2dlYWxuWFBwNHVvU004ZnkxOGpl?=
- =?utf-8?B?RHg5RHZ1VUFiWkV5KzRHZ1pDeWliaHRNTzVBeWlWTlFRVkU2eFBiZ2ZwTnVN?=
- =?utf-8?B?QW1TMFJLNTdVa2dtVjFlbFAxc1dlc0lnd1o0SGt2ZEEyZEFiWFpHZUJYRWZF?=
- =?utf-8?B?NU5ld2VjTnVQRW82ZmFSZFZYWlZUWUUyMG1lMTczaXIzbTBsTjRCUFRVSWRn?=
- =?utf-8?B?YVBDNG1ZNzVNTkxkZHowbUFtTUN5Q1lHRmtEVjZLa2hHSUVySVN2WXhUQTh4?=
- =?utf-8?B?cEMvUWtYbG9HUlBkWEhZa0ZROUdsZWxLSmhXUk1Xdm1sSGFGTGNvWGxFaGlI?=
- =?utf-8?Q?jw1Yk2uUJ8vbeXsUf5IVSABSoJaRD4//EbdHo1c?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 53b0597c-efe7-48fb-b2cd-08d90405f7c5
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2021 14:09:52.9813
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VXlOPkzeDOFCHxI57qG4RSNE2TSYXYksCxc0KlSuE871wK//5mKNVpTucPK5wNoYOI1YppoXDwutKNVMgNr8Zg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6000
-X-OriginatorOrg: citrix.com
+Subject: [xen-unstable-smoke test] 161321: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:guest-localmigrate/x10:fail:regression
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=730d0f6082e66eefae64f35bc62e51fc54d02d55
+X-Osstest-Versions-That:
+    xen=a8c532be6a44c7faa54ac777a717f4aa65e3a806
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 20 Apr 2021 14:37:17 +0000
 
-There's no caller anymore that cares about the injected vector, so
-drop the returned vector from the function.
+flight 161321 xen-unstable-smoke real [real]
+flight 161328 xen-unstable-smoke real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/161321/
+http://logs.test-lab.xenproject.org/osstest/logs/161328/
 
-No functional change indented.
+Regressions :-(
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v3:
- - New in this version.
----
- xen/arch/x86/hvm/irq.c        | 8 ++------
- xen/include/asm-x86/hvm/irq.h | 2 +-
- 2 files changed, 3 insertions(+), 7 deletions(-)
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64 18 guest-localmigrate/x10 fail REGR. vs. 161293
 
-diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
-index c3d8f2a786a..1c588e212f9 100644
---- a/xen/arch/x86/hvm/irq.c
-+++ b/xen/arch/x86/hvm/irq.c
-@@ -47,24 +47,20 @@ static void assert_gsi(struct domain *d, unsigned ioapic_gsi)
-     vioapic_irq_positive_edge(d, ioapic_gsi);
- }
- 
--int hvm_ioapic_assert(struct domain *d, unsigned int gsi, bool level)
-+void hvm_ioapic_assert(struct domain *d, unsigned int gsi, bool level)
- {
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
--    int vector;
- 
-     if ( gsi >= hvm_irq->nr_gsis )
-     {
-         ASSERT_UNREACHABLE();
--        return -1;
-+        return;
-     }
- 
-     spin_lock(&d->arch.hvm.irq_lock);
-     if ( !level || hvm_irq->gsi_assert_count[gsi]++ == 0 )
-         assert_gsi(d, gsi);
--    vector = vioapic_get_vector(d, gsi);
-     spin_unlock(&d->arch.hvm.irq_lock);
--
--    return vector;
- }
- 
- void hvm_ioapic_deassert(struct domain *d, unsigned int gsi)
-diff --git a/xen/include/asm-x86/hvm/irq.h b/xen/include/asm-x86/hvm/irq.h
-index 4e3534d4eb4..fda2f8e8ebf 100644
---- a/xen/include/asm-x86/hvm/irq.h
-+++ b/xen/include/asm-x86/hvm/irq.h
-@@ -226,7 +226,7 @@ int hvm_set_pci_link_route(struct domain *d, u8 link, u8 isa_irq);
- int hvm_inject_msi(struct domain *d, uint64_t addr, uint32_t data);
- 
- /* Assert/deassert an IO APIC pin. */
--int hvm_ioapic_assert(struct domain *d, unsigned int gsi, bool level);
-+void hvm_ioapic_assert(struct domain *d, unsigned int gsi, bool level);
- void hvm_ioapic_deassert(struct domain *d, unsigned int gsi);
- 
- void hvm_maybe_deassert_evtchn_irq(void);
--- 
-2.30.1
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
+version targeted for testing:
+ xen                  730d0f6082e66eefae64f35bc62e51fc54d02d55
+baseline version:
+ xen                  a8c532be6a44c7faa54ac777a717f4aa65e3a806
+
+Last test of basis   161293  2021-04-19 14:00:26 Z    1 days
+Testing same since   161321  2021-04-20 10:02:00 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan Beulich <jbeulich@suse.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    fail    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 730d0f6082e66eefae64f35bc62e51fc54d02d55
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Tue Apr 20 11:36:54 2021 +0200
+
+    x86/dpci: remove the dpci EOI timer
+    
+    Current interrupt pass though code will setup a timer for each
+    interrupt injected to the guest that requires an EOI from the guest.
+    Such timer would perform two actions if the guest doesn't EOI the
+    interrupt before a given period of time. The first one is deasserting
+    the virtual line, the second is perform an EOI of the physical
+    interrupt source if it requires such.
+    
+    The deasserting of the guest virtual line is wrong, since it messes
+    with the interrupt status of the guest. This seems to have been done
+    in order to compensate for missing deasserts when certain interrupt
+    controller actions are performed. The original motivation of the
+    introduction of the timer was to fix issues when a GSI was shared
+    between different guests. We believe that other changes in the
+    interrupt handling code (ie: proper propagation of EOI related actions
+    to dpci) will have fixed such errors now.
+    
+    Performing an EOI of the physical interrupt source is redundant, since
+    there's already a timer that takes care of this for all interrupts,
+    not just the HVM dpci ones, see irq_guest_action_t struct eoi_timer
+    field.
+    
+    Since both of the actions performed by the dpci timer are not
+    required, remove it altogether.
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 2d494f2198d7909a394085d079475bb099d7afe7
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Tue Apr 20 11:36:09 2021 +0200
+
+    x86/vpic: issue dpci EOI for cleared pins at ICW1
+    
+    When pins are cleared from either ISR or IRR as part of the
+    initialization sequence forward the clearing of those pins to the dpci
+    EOI handler, as it is equivalent to an EOI. Not doing so can bring the
+    interrupt controller state out of sync with the dpci handling logic,
+    that expects a notification when a pin has been EOI'ed.
+    
+    Fixes: 7b3cb5e5416 ('IRQ injection changes for HVM PCI passthru.')
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit 192f7479f21ef63dad8d8acbbda93cce0971fe66
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Tue Apr 20 11:35:29 2021 +0200
+
+    x86/vpic: don't trigger unmask event until end of init
+    
+    Wait until the end of the init sequence to trigger the unmask event.
+    Note that it will be unconditionally triggered, but that's harmless if
+    not unmask actually happened.
+    
+    While there change the variable type to bool.
+    
+    Suggested-by: Jan Beulich <jbeulich@suse.com>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 1ca901c527d21c083ceb706839db2cdac102926c
+Author: Roger Pau Monné <roger.pau@citrix.com>
+Date:   Tue Apr 20 11:34:53 2021 +0200
+
+    x86/vpic: force int output to low when in init mode
+    
+    When the PIC is on the init sequence prevent interrupt delivery. The
+    state of the registers is in the process of being set during the init
+    phase, so it makes sense to prevent any int line changes during that
+    process.
+    
+    Suggested-by: Jan Beulich <jbeulich@suse.com>
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+(qemu changes not included)
 
