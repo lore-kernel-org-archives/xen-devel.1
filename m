@@ -2,47 +2,48 @@ Return-Path: <SRS0=xmOv=JR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74AD7C43461
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5145DC433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2851A6135F
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2851A6135F
+	by mail.kernel.org (Postfix) with ESMTPS id F3FB4611F2
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F3FB4611F2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113307.215888 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113308.215906 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYkVS-0006KL-6n; Tue, 20 Apr 2021 07:09:10 +0000
+	id 1lYkVX-0006OF-Cf; Tue, 20 Apr 2021 07:09:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113307.215888; Tue, 20 Apr 2021 07:09:10 +0000
+Received: by outflank-mailman (output) from mailman id 113308.215906; Tue, 20 Apr 2021 07:09:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYkVS-0006K8-0q; Tue, 20 Apr 2021 07:09:10 +0000
-Received: by outflank-mailman (input) for mailman id 113307;
- Tue, 20 Apr 2021 07:09:08 +0000
+	id 1lYkVX-0006O6-9J; Tue, 20 Apr 2021 07:09:15 +0000
+Received: by outflank-mailman (input) for mailman id 113308;
+ Tue, 20 Apr 2021 07:09:13 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8gRw=JR=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1lYkVQ-0006Ja-SC
- for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 07:09:08 +0000
+ id 1lYkVV-0006Ja-NO
+ for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 07:09:13 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 2ebb22f9-8efc-4ea3-be65-27adb0a2ee55;
- Tue, 20 Apr 2021 07:09:05 +0000 (UTC)
+ id aa01ec39-8aab-4e59-b44c-5e2fe6ec18a6;
+ Tue, 20 Apr 2021 07:09:08 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0C3AB1435;
- Tue, 20 Apr 2021 00:09:05 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CA30814BF;
+ Tue, 20 Apr 2021 00:09:07 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.29.239])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EBA9B3F85F;
- Tue, 20 Apr 2021 00:09:03 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B348E3F85F;
+ Tue, 20 Apr 2021 00:09:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,75 +55,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ebb22f9-8efc-4ea3-be65-27adb0a2ee55
+X-Inumbo-ID: aa01ec39-8aab-4e59-b44c-5e2fe6ec18a6
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	bertrand.marquis@arm.com
-Subject: [PATCH 0/9] xen/arm64: Get rid of READ/WRITE_SYSREG32
-Date: Tue, 20 Apr 2021 09:08:44 +0200
-Message-Id: <20210420070853.8918-1-michal.orzel@arm.com>
+Subject: [PATCH 2/9] arm/domain: Get rid of READ/WRITE_SYSREG32
+Date: Tue, 20 Apr 2021 09:08:46 +0200
+Message-Id: <20210420070853.8918-3-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
+In-Reply-To: <20210420070853.8918-1-michal.orzel@arm.com>
+References: <20210420070853.8918-1-michal.orzel@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The purpose of this patch series is to remove 32bit helper
-macros READ/WRITE_SYSREG32 on arm64 as the idea of them is
-not following the latest ARMv8 specification and mrs/msr instructions
-are expecting 64bit values.
-According to ARM DDI 0487G.a all the AArch64 system registers
-are 64bit wide even though many of them have upper 32bit reserved.
-This does not mean that in the newer versions of ARMv8 or in the next
-architecture, some of the sysregs will get widen.
-Also when dealing with system registers we should use register_t
-type.
+AArch64 system registers are 64bit whereas AArch32 ones
+are 32bit or 64bit. MSR/MRS are expecting 64bit values thus
+we should get rid of helpers READ/WRITE_SYSREG32
+in favour of using READ/WRITE_SYSREG.
+We should also use register_t type when reading sysregs
+which can correspond to uint64_t or uint32_t.
+Even though many AArch64 sysregs have upper 32bit reserved
+it does not mean that they can't be widen in the future.
 
-This patch series removes the use of READ/WRITE_SYSREG32
-and replaces these calls with READ/WRITE_SYSREG. The change was
-splited into several small patches to make the review proces easier.
+Modify type of registers: actlr, cntkctl to register_t.
 
-This patch series focuses on removing READ/WRITE_SYSREG32.
-There are still some AArch64 system registers defined as 32bit like cpsr
-that should be changed later on. They were not changed as they did not appear
-inside READ/WRITE_SYSREG32. The next thing to do is to also get rid of
-vreg_emulate_sysreg32.
+Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+---
+ xen/arch/arm/domain.c        | 20 ++++++++++----------
+ xen/include/asm-arm/domain.h |  4 ++--
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-Michal Orzel (9):
-  arm64/vfp: Get rid of READ/WRITE_SYSREG32
-  arm/domain: Get rid of READ/WRITE_SYSREG32
-  arm/gic: Get rid of READ/WRITE_SYSREG32
-  arm/p2m: Get rid of READ/WRITE_SYSREG32
-  arm/mm: Get rid of READ/WRITE_SYSREG32
-  arm/page: Get rid of READ/WRITE_SYSREG32
-  arm/time,vtimer: Get rid of READ/WRITE_SYSREG32
-  arm: Change type of hsr to register_t
-  xen/arm64: Remove READ/WRITE_SYSREG32 helper macros
-
- xen/arch/arm/arm64/entry.S            |  2 +-
- xen/arch/arm/arm64/traps.c            |  2 +-
- xen/arch/arm/arm64/vfp.c              | 12 ++--
- xen/arch/arm/arm64/vsysreg.c          |  3 +-
- xen/arch/arm/domain.c                 | 20 +++---
- xen/arch/arm/gic-v3-lpi.c             |  2 +-
- xen/arch/arm/gic-v3.c                 | 96 ++++++++++++++-------------
- xen/arch/arm/mm.c                     |  2 +-
- xen/arch/arm/p2m.c                    |  8 +--
- xen/arch/arm/time.c                   | 28 ++++----
- xen/arch/arm/traps.c                  | 24 ++++---
- xen/arch/arm/vcpreg.c                 | 29 ++++++--
- xen/arch/arm/vtimer.c                 | 10 +--
- xen/include/asm-arm/arm32/processor.h |  2 +-
- xen/include/asm-arm/arm64/processor.h |  5 +-
- xen/include/asm-arm/arm64/sysregs.h   |  5 --
- xen/include/asm-arm/arm64/vfp.h       |  6 +-
- xen/include/asm-arm/domain.h          |  6 +-
- xen/include/asm-arm/gic.h             |  6 +-
- xen/include/asm-arm/hsr.h             | 34 +++++++++-
- xen/include/asm-arm/page.h            |  4 +-
- 21 files changed, 179 insertions(+), 127 deletions(-)
-
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index bdd3d3e5b5..c021a03c61 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -113,13 +113,13 @@ static void ctxt_switch_from(struct vcpu *p)
+     p->arch.tpidr_el1 = READ_SYSREG(TPIDR_EL1);
+ 
+     /* Arch timer */
+-    p->arch.cntkctl = READ_SYSREG32(CNTKCTL_EL1);
++    p->arch.cntkctl = READ_SYSREG(CNTKCTL_EL1);
+     virt_timer_save(p);
+ 
+     if ( is_32bit_domain(p->domain) && cpu_has_thumbee )
+     {
+-        p->arch.teecr = READ_SYSREG32(TEECR32_EL1);
+-        p->arch.teehbr = READ_SYSREG32(TEEHBR32_EL1);
++        p->arch.teecr = READ_SYSREG(TEECR32_EL1);
++        p->arch.teehbr = READ_SYSREG(TEEHBR32_EL1);
+     }
+ 
+ #ifdef CONFIG_ARM_32
+@@ -175,7 +175,7 @@ static void ctxt_switch_from(struct vcpu *p)
+ 
+ static void ctxt_switch_to(struct vcpu *n)
+ {
+-    uint32_t vpidr;
++    register_t vpidr;
+ 
+     /* When the idle VCPU is running, Xen will always stay in hypervisor
+      * mode. Therefore we don't need to restore the context of an idle VCPU.
+@@ -183,8 +183,8 @@ static void ctxt_switch_to(struct vcpu *n)
+     if ( is_idle_vcpu(n) )
+         return;
+ 
+-    vpidr = READ_SYSREG32(MIDR_EL1);
+-    WRITE_SYSREG32(vpidr, VPIDR_EL2);
++    vpidr = READ_SYSREG(MIDR_EL1);
++    WRITE_SYSREG(vpidr, VPIDR_EL2);
+     WRITE_SYSREG(n->arch.vmpidr, VMPIDR_EL2);
+ 
+     /* VGIC */
+@@ -257,8 +257,8 @@ static void ctxt_switch_to(struct vcpu *n)
+ 
+     if ( is_32bit_domain(n->domain) && cpu_has_thumbee )
+     {
+-        WRITE_SYSREG32(n->arch.teecr, TEECR32_EL1);
+-        WRITE_SYSREG32(n->arch.teehbr, TEEHBR32_EL1);
++        WRITE_SYSREG(n->arch.teecr, TEECR32_EL1);
++        WRITE_SYSREG(n->arch.teehbr, TEEHBR32_EL1);
+     }
+ 
+ #ifdef CONFIG_ARM_32
+@@ -274,7 +274,7 @@ static void ctxt_switch_to(struct vcpu *n)
+ 
+     /* This is could trigger an hardware interrupt from the virtual
+      * timer. The interrupt needs to be injected into the guest. */
+-    WRITE_SYSREG32(n->arch.cntkctl, CNTKCTL_EL1);
++    WRITE_SYSREG(n->arch.cntkctl, CNTKCTL_EL1);
+     virt_timer_restore(n);
+ }
+ 
+@@ -330,7 +330,7 @@ static void schedule_tail(struct vcpu *prev)
+ 
+ static void continue_new_vcpu(struct vcpu *prev)
+ {
+-    current->arch.actlr = READ_SYSREG32(ACTLR_EL1);
++    current->arch.actlr = READ_SYSREG(ACTLR_EL1);
+     processor_vcpu_initialise(current);
+ 
+     schedule_tail(prev);
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index 0a74df9931..2d4f38c669 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -156,7 +156,7 @@ struct arch_vcpu
+ 
+     /* Control Registers */
+     register_t sctlr;
+-    uint32_t actlr;
++    register_t actlr;
+     uint32_t cpacr;
+ 
+     uint32_t contextidr;
+@@ -190,7 +190,7 @@ struct arch_vcpu
+     struct vgic_cpu vgic;
+ 
+     /* Timer registers  */
+-    uint32_t cntkctl;
++    register_t cntkctl;
+ 
+     struct vtimer phys_timer;
+     struct vtimer virt_timer;
 -- 
 2.29.0
 
