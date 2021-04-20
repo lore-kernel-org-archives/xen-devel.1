@@ -7,42 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23B46C433ED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88A25C433B4
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC528611F2
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC528611F2
+	by mail.kernel.org (Postfix) with ESMTPS id 2B45461220
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B45461220
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113311.215933 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113310.215923 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYkVc-0006Ue-OU; Tue, 20 Apr 2021 07:09:20 +0000
+	id 1lYkVc-0006TZ-9T; Tue, 20 Apr 2021 07:09:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113311.215933; Tue, 20 Apr 2021 07:09:20 +0000
+Received: by outflank-mailman (output) from mailman id 113310.215923; Tue, 20 Apr 2021 07:09:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYkVc-0006UO-FZ; Tue, 20 Apr 2021 07:09:20 +0000
-Received: by outflank-mailman (input) for mailman id 113311;
- Tue, 20 Apr 2021 07:09:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lYkVc-0006TB-22; Tue, 20 Apr 2021 07:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 113310;
+ Tue, 20 Apr 2021 07:09:18 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8gRw=JR=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1lYkVa-0006RY-VL
+ id 1lYkVa-0006Ja-Na
  for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 07:09:18 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id da5caf71-00df-4133-af6e-706a268879af;
- Tue, 20 Apr 2021 07:09:18 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 96ea6986-5d1d-4ec3-a367-d26f9eb199db;
+ Tue, 20 Apr 2021 07:09:09 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CF3F01435;
- Tue, 20 Apr 2021 00:09:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5695C1435;
+ Tue, 20 Apr 2021 00:09:09 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.29.239])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B9E773F85F;
- Tue, 20 Apr 2021 00:09:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1D0B13F85F;
+ Tue, 20 Apr 2021 00:09:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,16 +55,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: da5caf71-00df-4133-af6e-706a268879af
+X-Inumbo-ID: 96ea6986-5d1d-4ec3-a367-d26f9eb199db
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	bertrand.marquis@arm.com
-Subject: [PATCH 9/9] xen/arm64: Remove READ/WRITE_SYSREG32 helper macros
-Date: Tue, 20 Apr 2021 09:08:53 +0200
-Message-Id: <20210420070853.8918-10-michal.orzel@arm.com>
+Subject: [PATCH 3/9] arm/gic: Get rid of READ/WRITE_SYSREG32
+Date: Tue, 20 Apr 2021 09:08:47 +0200
+Message-Id: <20210420070853.8918-4-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20210420070853.8918-1-michal.orzel@arm.com>
 References: <20210420070853.8918-1-michal.orzel@arm.com>
@@ -79,65 +80,304 @@ which can correspond to uint64_t or uint32_t.
 Even though many AArch64 sysregs have upper 32bit reserved
 it does not mean that they can't be widen in the future.
 
-As there are no other places in the code using READ/WRITE_SYSREG32,
-remove the helper macros.
+Modify types of following members of struct gic_v3 to register_t:
+-hcr(not used at all in Xen)
+-vmcr
+-sre_el1
+-apr0
+-apr1
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
 ---
- xen/arch/arm/vcpreg.c               | 16 ++++++++++++++++
- xen/include/asm-arm/arm64/sysregs.h |  5 -----
- 2 files changed, 16 insertions(+), 5 deletions(-)
+ xen/arch/arm/gic-v3-lpi.c |  2 +-
+ xen/arch/arm/gic-v3.c     | 96 ++++++++++++++++++++-------------------
+ xen/include/asm-arm/gic.h |  6 +--
+ 3 files changed, 54 insertions(+), 50 deletions(-)
 
-diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-index c7f516ee0a..6cb7f3108c 100644
---- a/xen/arch/arm/vcpreg.c
-+++ b/xen/arch/arm/vcpreg.c
-@@ -48,6 +48,7 @@
+diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
+index 869bc97fa1..e1594dd20e 100644
+--- a/xen/arch/arm/gic-v3-lpi.c
++++ b/xen/arch/arm/gic-v3-lpi.c
+@@ -178,7 +178,7 @@ void gicv3_do_LPI(unsigned int lpi)
+     irq_enter();
+ 
+     /* EOI the LPI already. */
+-    WRITE_SYSREG32(lpi, ICC_EOIR1_EL1);
++    WRITE_SYSREG(lpi, ICC_EOIR1_EL1);
+ 
+     /* Find out if a guest mapped something to this physical LPI. */
+     hlpip = gic_get_host_lpi(lpi);
+diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+index ac28013c19..0634013a67 100644
+--- a/xen/arch/arm/gic-v3.c
++++ b/xen/arch/arm/gic-v3.c
+@@ -246,12 +246,12 @@ static void gicv3_ich_write_lr(int lr, uint64_t val)
   */
+ static void gicv3_enable_sre(void)
+ {
+-    uint32_t val;
++    register_t val;
  
- /* The name is passed from the upper macro to workaround macro expansion. */
-+#ifdef CONFIG_ARM_32
- #define TVM_REG(sz, func, reg...)                                           \
- static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
- {                                                                           \
-@@ -61,6 +62,21 @@ static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
-                                                                             \
-     return true;                                                            \
+-    val = READ_SYSREG32(ICC_SRE_EL2);
++    val = READ_SYSREG(ICC_SRE_EL2);
+     val |= GICC_SRE_EL2_SRE;
+ 
+-    WRITE_SYSREG32(val, ICC_SRE_EL2);
++    WRITE_SYSREG(val, ICC_SRE_EL2);
+     isb();
  }
-+#else /* CONFIG_ARM_64 */
-+#define TVM_REG(sz, func, reg...)                                           \
-+static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
-+{                                                                           \
-+    struct vcpu *v = current;                                               \
-+    bool cache_enabled = vcpu_has_cache_enabled(v);                         \
-+                                                                            \
-+    GUEST_BUG_ON(read);                                                     \
-+    WRITE_SYSREG(*r, reg);                                                  \
-+                                                                            \
-+    p2m_toggle_cache(v, cache_enabled);                                     \
-+                                                                            \
-+    return true;                                                            \
-+}
-+#endif
  
- #define TVM_REG32(regname, xreg) TVM_REG(32, vreg_emulate_##regname, xreg)
- #define TVM_REG64(regname, xreg) TVM_REG(64, vreg_emulate_##regname, xreg)
-diff --git a/xen/include/asm-arm/arm64/sysregs.h b/xen/include/asm-arm/arm64/sysregs.h
-index 077fd95fb7..83a1157ac4 100644
---- a/xen/include/asm-arm/arm64/sysregs.h
-+++ b/xen/include/asm-arm/arm64/sysregs.h
-@@ -86,11 +86,6 @@
+@@ -315,16 +315,16 @@ static void restore_aprn_regs(const union gic_state_data *d)
+     switch ( gicv3.nr_priorities )
+     {
+     case 7:
+-        WRITE_SYSREG32(d->v3.apr0[2], ICH_AP0R2_EL2);
+-        WRITE_SYSREG32(d->v3.apr1[2], ICH_AP1R2_EL2);
++        WRITE_SYSREG(d->v3.apr0[2], ICH_AP0R2_EL2);
++        WRITE_SYSREG(d->v3.apr1[2], ICH_AP1R2_EL2);
+         /* Fall through */
+     case 6:
+-        WRITE_SYSREG32(d->v3.apr0[1], ICH_AP0R1_EL2);
+-        WRITE_SYSREG32(d->v3.apr1[1], ICH_AP1R1_EL2);
++        WRITE_SYSREG(d->v3.apr0[1], ICH_AP0R1_EL2);
++        WRITE_SYSREG(d->v3.apr1[1], ICH_AP1R1_EL2);
+         /* Fall through */
+     case 5:
+-        WRITE_SYSREG32(d->v3.apr0[0], ICH_AP0R0_EL2);
+-        WRITE_SYSREG32(d->v3.apr1[0], ICH_AP1R0_EL2);
++        WRITE_SYSREG(d->v3.apr0[0], ICH_AP0R0_EL2);
++        WRITE_SYSREG(d->v3.apr1[0], ICH_AP1R0_EL2);
+         break;
+     default:
+         BUG();
+@@ -338,16 +338,16 @@ static void save_aprn_regs(union gic_state_data *d)
+     switch ( gicv3.nr_priorities )
+     {
+     case 7:
+-        d->v3.apr0[2] = READ_SYSREG32(ICH_AP0R2_EL2);
+-        d->v3.apr1[2] = READ_SYSREG32(ICH_AP1R2_EL2);
++        d->v3.apr0[2] = READ_SYSREG(ICH_AP0R2_EL2);
++        d->v3.apr1[2] = READ_SYSREG(ICH_AP1R2_EL2);
+         /* Fall through */
+     case 6:
+-        d->v3.apr0[1] = READ_SYSREG32(ICH_AP0R1_EL2);
+-        d->v3.apr1[1] = READ_SYSREG32(ICH_AP1R1_EL2);
++        d->v3.apr0[1] = READ_SYSREG(ICH_AP0R1_EL2);
++        d->v3.apr1[1] = READ_SYSREG(ICH_AP1R1_EL2);
+         /* Fall through */
+     case 5:
+-        d->v3.apr0[0] = READ_SYSREG32(ICH_AP0R0_EL2);
+-        d->v3.apr1[0] = READ_SYSREG32(ICH_AP1R0_EL2);
++        d->v3.apr0[0] = READ_SYSREG(ICH_AP0R0_EL2);
++        d->v3.apr1[0] = READ_SYSREG(ICH_AP1R0_EL2);
+         break;
+     default:
+         BUG();
+@@ -371,15 +371,15 @@ static void gicv3_save_state(struct vcpu *v)
+     dsb(sy);
+     gicv3_save_lrs(v);
+     save_aprn_regs(&v->arch.gic);
+-    v->arch.gic.v3.vmcr = READ_SYSREG32(ICH_VMCR_EL2);
+-    v->arch.gic.v3.sre_el1 = READ_SYSREG32(ICC_SRE_EL1);
++    v->arch.gic.v3.vmcr = READ_SYSREG(ICH_VMCR_EL2);
++    v->arch.gic.v3.sre_el1 = READ_SYSREG(ICC_SRE_EL1);
+ }
+ 
+ static void gicv3_restore_state(const struct vcpu *v)
+ {
+-    uint32_t val;
++    register_t val;
+ 
+-    val = READ_SYSREG32(ICC_SRE_EL2);
++    val = READ_SYSREG(ICC_SRE_EL2);
+     /*
+      * Don't give access to system registers when the guest is using
+      * GICv2
+@@ -388,7 +388,7 @@ static void gicv3_restore_state(const struct vcpu *v)
+         val &= ~GICC_SRE_EL2_ENEL1;
+     else
+         val |= GICC_SRE_EL2_ENEL1;
+-    WRITE_SYSREG32(val, ICC_SRE_EL2);
++    WRITE_SYSREG(val, ICC_SRE_EL2);
+ 
+     /*
+      * VFIQEn is RES1 if ICC_SRE_EL1.SRE is 1. This causes a Group0
+@@ -398,9 +398,9 @@ static void gicv3_restore_state(const struct vcpu *v)
+      * want before starting to mess with the rest of the GIC, and
+      * VMCR_EL1 in particular.
+      */
+-    WRITE_SYSREG32(v->arch.gic.v3.sre_el1, ICC_SRE_EL1);
++    WRITE_SYSREG(v->arch.gic.v3.sre_el1, ICC_SRE_EL1);
+     isb();
+-    WRITE_SYSREG32(v->arch.gic.v3.vmcr, ICH_VMCR_EL2);
++    WRITE_SYSREG(v->arch.gic.v3.vmcr, ICH_VMCR_EL2);
+     restore_aprn_regs(&v->arch.gic);
+     gicv3_restore_lrs(v);
+ 
+@@ -468,24 +468,25 @@ static void gicv3_mask_irq(struct irq_desc *irqd)
+ static void gicv3_eoi_irq(struct irq_desc *irqd)
+ {
+     /* Lower the priority */
+-    WRITE_SYSREG32(irqd->irq, ICC_EOIR1_EL1);
++    WRITE_SYSREG(irqd->irq, ICC_EOIR1_EL1);
+     isb();
+ }
+ 
+ static void gicv3_dir_irq(struct irq_desc *irqd)
+ {
+     /* Deactivate */
+-    WRITE_SYSREG32(irqd->irq, ICC_DIR_EL1);
++    WRITE_SYSREG(irqd->irq, ICC_DIR_EL1);
+     isb();
+ }
+ 
+ static unsigned int gicv3_read_irq(void)
+ {
+-    unsigned int irq = READ_SYSREG32(ICC_IAR1_EL1);
++    register_t irq = READ_SYSREG(ICC_IAR1_EL1);
+ 
+     dsb(sy);
+ 
+-    return irq;
++    /* Number of IRQs do not exceed 32bit. */
++    return (unsigned int)irq;
+ }
+ 
+ /*
+@@ -857,16 +858,16 @@ static int gicv3_cpu_init(void)
+     gicv3_enable_sre();
+ 
+     /* No priority grouping */
+-    WRITE_SYSREG32(0, ICC_BPR1_EL1);
++    WRITE_SYSREG(0, ICC_BPR1_EL1);
+ 
+     /* Set priority mask register */
+-    WRITE_SYSREG32(DEFAULT_PMR_VALUE, ICC_PMR_EL1);
++    WRITE_SYSREG(DEFAULT_PMR_VALUE, ICC_PMR_EL1);
+ 
+     /* EOI drops priority, DIR deactivates the interrupt (mode 1) */
+-    WRITE_SYSREG32(GICC_CTLR_EL1_EOImode_drop, ICC_CTLR_EL1);
++    WRITE_SYSREG(GICC_CTLR_EL1_EOImode_drop, ICC_CTLR_EL1);
+ 
+     /* Enable Group1 interrupts */
+-    WRITE_SYSREG32(1, ICC_IGRPEN1_EL1);
++    WRITE_SYSREG(1, ICC_IGRPEN1_EL1);
+ 
+     /* Sync at once at the end of cpu interface configuration */
+     isb();
+@@ -876,15 +877,15 @@ static int gicv3_cpu_init(void)
+ 
+ static void gicv3_cpu_disable(void)
+ {
+-    WRITE_SYSREG32(0, ICC_CTLR_EL1);
++    WRITE_SYSREG(0, ICC_CTLR_EL1);
+     isb();
+ }
+ 
+ static void gicv3_hyp_init(void)
+ {
+-    uint32_t vtr;
++    register_t vtr;
+ 
+-    vtr = READ_SYSREG32(ICH_VTR_EL2);
++    vtr = READ_SYSREG(ICH_VTR_EL2);
+     gicv3_info.nr_lrs  = (vtr & ICH_VTR_NRLRGS) + 1;
+     gicv3.nr_priorities = ((vtr >> ICH_VTR_PRIBITS_SHIFT) &
+                           ICH_VTR_PRIBITS_MASK) + 1;
+@@ -892,8 +893,8 @@ static void gicv3_hyp_init(void)
+     if ( !((gicv3.nr_priorities > 4) && (gicv3.nr_priorities < 8)) )
+         panic("GICv3: Invalid number of priority bits\n");
+ 
+-    WRITE_SYSREG32(ICH_VMCR_EOI | ICH_VMCR_VENG1, ICH_VMCR_EL2);
+-    WRITE_SYSREG32(GICH_HCR_EN, ICH_HCR_EL2);
++    WRITE_SYSREG(ICH_VMCR_EOI | ICH_VMCR_VENG1, ICH_VMCR_EL2);
++    WRITE_SYSREG(GICH_HCR_EN, ICH_HCR_EL2);
+ }
+ 
+ /* Set up the per-CPU parts of the GIC for a secondary CPU */
+@@ -917,11 +918,11 @@ out:
+ 
+ static void gicv3_hyp_disable(void)
+ {
+-    uint32_t hcr;
++    register_t hcr;
+ 
+-    hcr = READ_SYSREG32(ICH_HCR_EL2);
++    hcr = READ_SYSREG(ICH_HCR_EL2);
+     hcr &= ~GICH_HCR_EN;
+-    WRITE_SYSREG32(hcr, ICH_HCR_EL2);
++    WRITE_SYSREG(hcr, ICH_HCR_EL2);
+     isb();
+ }
+ 
+@@ -1140,39 +1141,42 @@ static void gicv3_write_lr(int lr_reg, const struct gic_lr *lr)
+ 
+ static void gicv3_hcr_status(uint32_t flag, bool status)
+ {
+-    uint32_t hcr;
++    register_t hcr;
+ 
+-    hcr = READ_SYSREG32(ICH_HCR_EL2);
++    hcr = READ_SYSREG(ICH_HCR_EL2);
+     if ( status )
+-        WRITE_SYSREG32(hcr | flag, ICH_HCR_EL2);
++        WRITE_SYSREG(hcr | flag, ICH_HCR_EL2);
+     else
+-        WRITE_SYSREG32(hcr & (~flag), ICH_HCR_EL2);
++        WRITE_SYSREG(hcr & (~flag), ICH_HCR_EL2);
+     isb();
+ }
+ 
+ static unsigned int gicv3_read_vmcr_priority(void)
+ {
+-   return ((READ_SYSREG32(ICH_VMCR_EL2) >> ICH_VMCR_PRIORITY_SHIFT) &
++   return ((READ_SYSREG(ICH_VMCR_EL2) >> ICH_VMCR_PRIORITY_SHIFT) &
+             ICH_VMCR_PRIORITY_MASK);
+ }
+ 
+ /* Only support reading GRP1 APRn registers */
+ static unsigned int gicv3_read_apr(int apr_reg)
+ {
++    register_t apr;
+     switch ( apr_reg )
+     {
+     case 0:
+         ASSERT(gicv3.nr_priorities > 4 && gicv3.nr_priorities < 8);
+-        return READ_SYSREG32(ICH_AP1R0_EL2);
++        apr = READ_SYSREG(ICH_AP1R0_EL2);
+     case 1:
+         ASSERT(gicv3.nr_priorities > 5 && gicv3.nr_priorities < 8);
+-        return READ_SYSREG32(ICH_AP1R1_EL2);
++        apr = READ_SYSREG(ICH_AP1R1_EL2);
+     case 2:
+         ASSERT(gicv3.nr_priorities > 6 && gicv3.nr_priorities < 8);
+-        return READ_SYSREG32(ICH_AP1R2_EL2);
++        apr = READ_SYSREG(ICH_AP1R2_EL2);
+     default:
+         BUG();
+     }
++    /* Number of priority levels do not exceed 32bit */
++    return (unsigned int)apr;
+ }
+ 
+ static bool gicv3_read_pending_state(struct irq_desc *irqd)
+diff --git a/xen/include/asm-arm/gic.h b/xen/include/asm-arm/gic.h
+index ad0f7452d0..d750d070b4 100644
+--- a/xen/include/asm-arm/gic.h
++++ b/xen/include/asm-arm/gic.h
+@@ -171,9 +171,9 @@
+  * GICv3 registers that needs to be saved/restored
+  */
+ struct gic_v3 {
+-    uint32_t hcr, vmcr, sre_el1;
+-    uint32_t apr0[4];
+-    uint32_t apr1[4];
++    register_t hcr, vmcr, sre_el1;
++    register_t apr0[4];
++    register_t apr1[4];
+     uint64_t lr[16];
+ };
  #endif
- 
- /* Access to system registers */
--
--#define READ_SYSREG32(name) ((uint32_t)READ_SYSREG64(name))
--
--#define WRITE_SYSREG32(v, name) WRITE_SYSREG64((uint64_t)v, name)
--
- #define WRITE_SYSREG64(v, name) do {                    \
-     uint64_t _r = v;                                    \
-     asm volatile("msr "__stringify(name)", %0" : : "r" (_r));       \
 -- 
 2.29.0
 
