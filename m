@@ -7,42 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 897D6C43460
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06461C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 32D8861354
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32D8861354
+	by mail.kernel.org (Postfix) with ESMTPS id AC7A6611F2
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 07:09:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC7A6611F2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113309.215918 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113312.215954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYkVb-0006Sp-SI; Tue, 20 Apr 2021 07:09:19 +0000
+	id 1lYkVh-0006dH-Ec; Tue, 20 Apr 2021 07:09:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113309.215918; Tue, 20 Apr 2021 07:09:19 +0000
+Received: by outflank-mailman (output) from mailman id 113312.215954; Tue, 20 Apr 2021 07:09:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYkVb-0006Sg-OA; Tue, 20 Apr 2021 07:09:19 +0000
-Received: by outflank-mailman (input) for mailman id 113309;
- Tue, 20 Apr 2021 07:09:18 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lYkVh-0006d8-9n; Tue, 20 Apr 2021 07:09:25 +0000
+Received: by outflank-mailman (input) for mailman id 113312;
+ Tue, 20 Apr 2021 07:09:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8gRw=JR=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1lYkVa-0006RY-Ef
- for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 07:09:18 +0000
+ id 1lYkVf-0006Ja-Nh
+ for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 07:09:23 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 827889b3-273a-4a00-a68b-589de8dfa309;
- Tue, 20 Apr 2021 07:09:16 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 8d41fb0d-5c6c-4ba9-9ceb-8412447acf09;
+ Tue, 20 Apr 2021 07:09:11 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 711D11474;
- Tue, 20 Apr 2021 00:09:16 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B40481474;
+ Tue, 20 Apr 2021 00:09:10 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.29.239])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3619B3F85F;
- Tue, 20 Apr 2021 00:09:15 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9EC213F85F;
+ Tue, 20 Apr 2021 00:09:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,16 +55,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 827889b3-273a-4a00-a68b-589de8dfa309
+X-Inumbo-ID: 8d41fb0d-5c6c-4ba9-9ceb-8412447acf09
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	bertrand.marquis@arm.com
-Subject: [PATCH 8/9] arm: Change type of hsr to register_t
-Date: Tue, 20 Apr 2021 09:08:52 +0200
-Message-Id: <20210420070853.8918-9-michal.orzel@arm.com>
+Subject: [PATCH 4/9] arm/p2m: Get rid of READ/WRITE_SYSREG32
+Date: Tue, 20 Apr 2021 09:08:48 +0200
+Message-Id: <20210420070853.8918-5-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20210420070853.8918-1-michal.orzel@arm.com>
 References: <20210420070853.8918-1-michal.orzel@arm.com>
@@ -79,353 +80,63 @@ which can correspond to uint64_t or uint32_t.
 Even though many AArch64 sysregs have upper 32bit reserved
 it does not mean that they can't be widen in the future.
 
-Modify type of hsr to register_t.
-When on AArch64 add 32bit RES0 members to structures inside hsr union.
+Modify type of vtcr to register_t.
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
 ---
- xen/arch/arm/arm64/entry.S            |  2 +-
- xen/arch/arm/arm64/traps.c            |  2 +-
- xen/arch/arm/arm64/vsysreg.c          |  3 ++-
- xen/arch/arm/traps.c                  | 20 +++++++++-------
- xen/arch/arm/vcpreg.c                 | 13 +++++-----
- xen/include/asm-arm/arm32/processor.h |  2 +-
- xen/include/asm-arm/arm64/processor.h |  5 ++--
- xen/include/asm-arm/hsr.h             | 34 ++++++++++++++++++++++++++-
- 8 files changed, 59 insertions(+), 22 deletions(-)
+ xen/arch/arm/p2m.c   | 8 ++++----
+ xen/arch/arm/traps.c | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/entry.S b/xen/arch/arm/arm64/entry.S
-index ab9a65fc14..218b063c97 100644
---- a/xen/arch/arm/arm64/entry.S
-+++ b/xen/arch/arm/arm64/entry.S
-@@ -155,7 +155,7 @@
-         add     x21, sp, #UREGS_CPSR
-         mrs     x22, spsr_el2
-         mrs     x23, esr_el2
--        stp     w22, w23, [x21]
-+        stp     x22, x23, [x21]
- 
-         .endm
- 
-diff --git a/xen/arch/arm/arm64/traps.c b/xen/arch/arm/arm64/traps.c
-index babfc1d884..9113a15c7a 100644
---- a/xen/arch/arm/arm64/traps.c
-+++ b/xen/arch/arm/arm64/traps.c
-@@ -36,7 +36,7 @@ void do_bad_mode(struct cpu_user_regs *regs, int reason)
-     union hsr hsr = { .bits = regs->hsr };
- 
-     printk("Bad mode in %s handler detected\n", handler[reason]);
--    printk("ESR=0x%08"PRIx32":  EC=%"PRIx32", IL=%"PRIx32", ISS=%"PRIx32"\n",
-+    printk("ESR=%#"PRIregister":  EC=%"PRIx32", IL=%"PRIx32", ISS=%"PRIx32"\n",
-            hsr.bits, hsr.ec, hsr.len, hsr.iss);
- 
-     local_irq_disable();
-diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
-index 41f18612c6..3c10d464e7 100644
---- a/xen/arch/arm/arm64/vsysreg.c
-+++ b/xen/arch/arm/arm64/vsysreg.c
-@@ -368,7 +368,8 @@ void do_sysreg(struct cpu_user_regs *regs,
-                      sysreg.op2,
-                      sysreg.read ? "=>" : "<=",
-                      sysreg.reg, regs->pc);
--            gdprintk(XENLOG_ERR, "unhandled 64-bit sysreg access %#x\n",
-+            gdprintk(XENLOG_ERR, "unhandled 64-bit sysreg access"
-+                     " %#"PRIregister"\n",
-                      hsr.bits & HSR_SYSREG_REGS_MASK);
-             inject_undef_exception(regs, hsr);
-             return;
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index e7384381cc..db15a2c647 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -546,7 +546,7 @@ void inject_undef64_exception(struct cpu_user_regs *regs, int instr_len)
-         PSR_IRQ_MASK | PSR_DBG_MASK;
-     regs->pc = handler;
- 
--    WRITE_SYSREG32(esr.bits, ESR_EL1);
-+    WRITE_SYSREG(esr.bits, ESR_EL1);
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index ac50312620..d414c4feb9 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -1973,11 +1973,11 @@ void __init p2m_restrict_ipa_bits(unsigned int ipa_bits)
  }
  
- /* Inject an abort exception into a 64 bit guest */
-@@ -580,7 +580,7 @@ static void inject_abt64_exception(struct cpu_user_regs *regs,
-     regs->pc = handler;
+ /* VTCR value to be configured by all CPUs. Set only once by the boot CPU */
+-static uint32_t __read_mostly vtcr;
++static register_t __read_mostly vtcr;
  
-     WRITE_SYSREG(addr, FAR_EL1);
--    WRITE_SYSREG32(esr.bits, ESR_EL1);
-+    WRITE_SYSREG(esr.bits, ESR_EL1);
- }
- 
- static void inject_dabt64_exception(struct cpu_user_regs *regs,
-@@ -919,7 +919,7 @@ static void _show_registers(const struct cpu_user_regs *regs,
-     printk("   HCR_EL2: %"PRIregister"\n", READ_SYSREG(HCR_EL2));
-     printk(" TTBR0_EL2: %016"PRIx64"\n", READ_SYSREG64(TTBR0_EL2));
-     printk("\n");
--    printk("   ESR_EL2: %08"PRIx32"\n", regs->hsr);
-+    printk("   ESR_EL2: %"PRIregister"\n", regs->hsr);
-     printk(" HPFAR_EL2: %"PRIregister"\n", READ_SYSREG(HPFAR_EL2));
- 
- #ifdef CONFIG_ARM_32
-@@ -2004,13 +2004,15 @@ static void do_trap_stage2_abort_guest(struct cpu_user_regs *regs,
- 
-         break;
-     default:
--        gprintk(XENLOG_WARNING, "Unsupported FSC: HSR=%#x DFSC=%#x\n",
-+        gprintk(XENLOG_WARNING, "Unsupported FSC:"
-+                " HSR=%#"PRIregister" DFSC=%#x\n",
-                 hsr.bits, xabt.fsc);
-     }
- 
- inject_abt:
--    gdprintk(XENLOG_DEBUG, "HSR=0x%x pc=%#"PRIregister" gva=%#"PRIvaddr
--             " gpa=%#"PRIpaddr"\n", hsr.bits, regs->pc, gva, gpa);
-+    gdprintk(XENLOG_DEBUG, "HSR=%#"PRIregister" pc=%#"PRIregister""
-+             " gva=%#"PRIvaddr" gpa=%#"PRIpaddr"\n",
-+             hsr.bits, regs->pc, gva, gpa);
-     if ( is_data )
-         inject_dabt_exception(regs, gva, hsr.len);
-     else
-@@ -2204,7 +2206,8 @@ void do_trap_guest_sync(struct cpu_user_regs *regs)
- 
-     default:
-         gprintk(XENLOG_WARNING,
--                "Unknown Guest Trap. HSR=0x%x EC=0x%x IL=%x Syndrome=0x%"PRIx32"\n",
-+                "Unknown Guest Trap. HSR=%#"PRIregister" EC=0x%x IL=%x"
-+                " Syndrome=0x%"PRIx32"\n",
-                 hsr.bits, hsr.ec, hsr.len, hsr.iss);
-         inject_undef_exception(regs, hsr);
-     }
-@@ -2242,7 +2245,8 @@ void do_trap_hyp_sync(struct cpu_user_regs *regs)
-         break;
-     }
-     default:
--        printk("Hypervisor Trap. HSR=0x%x EC=0x%x IL=%x Syndrome=0x%"PRIx32"\n",
-+        printk("Hypervisor Trap. HSR=%#"PRIregister" EC=0x%x IL=%x"
-+               " Syndrome=0x%"PRIx32"\n",
-                hsr.bits, hsr.ec, hsr.len, hsr.iss);
-         do_unexpected_trap("Hypervisor", regs);
-     }
-diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-index 55351fc087..c7f516ee0a 100644
---- a/xen/arch/arm/vcpreg.c
-+++ b/xen/arch/arm/vcpreg.c
-@@ -385,7 +385,7 @@ void do_cp15_32(struct cpu_user_regs *regs, const union hsr hsr)
-                  "%s p15, %d, r%d, cr%d, cr%d, %d @ 0x%"PRIregister"\n",
-                  cp32.read ? "mrc" : "mcr",
-                  cp32.op1, cp32.reg, cp32.crn, cp32.crm, cp32.op2, regs->pc);
--        gdprintk(XENLOG_ERR, "unhandled 32-bit CP15 access %#x\n",
-+        gdprintk(XENLOG_ERR, "unhandled 32-bit CP15 access %#"PRIregister"\n",
-                  hsr.bits & HSR_CP32_REGS_MASK);
-         inject_undef_exception(regs, hsr);
-         return;
-@@ -454,7 +454,8 @@ void do_cp15_64(struct cpu_user_regs *regs, const union hsr hsr)
-                      "%s p15, %d, r%d, r%d, cr%d @ 0x%"PRIregister"\n",
-                      cp64.read ? "mrrc" : "mcrr",
-                      cp64.op1, cp64.reg1, cp64.reg2, cp64.crm, regs->pc);
--            gdprintk(XENLOG_ERR, "unhandled 64-bit CP15 access %#x\n",
-+            gdprintk(XENLOG_ERR, "unhandled 64-bit CP15 access"
-+                     " %#"PRIregister"\n",
-                      hsr.bits & HSR_CP64_REGS_MASK);
-             inject_undef_exception(regs, hsr);
-             return;
-@@ -585,7 +586,7 @@ void do_cp14_32(struct cpu_user_regs *regs, const union hsr hsr)
-                  "%s p14, %d, r%d, cr%d, cr%d, %d @ 0x%"PRIregister"\n",
-                   cp32.read ? "mrc" : "mcr",
-                   cp32.op1, cp32.reg, cp32.crn, cp32.crm, cp32.op2, regs->pc);
--        gdprintk(XENLOG_ERR, "unhandled 32-bit cp14 access %#x\n",
-+        gdprintk(XENLOG_ERR, "unhandled 32-bit cp14 access %#"PRIregister"\n",
-                  hsr.bits & HSR_CP32_REGS_MASK);
-         inject_undef_exception(regs, hsr);
-         return;
-@@ -627,7 +628,7 @@ void do_cp14_64(struct cpu_user_regs *regs, const union hsr hsr)
-              "%s p14, %d, r%d, r%d, cr%d @ 0x%"PRIregister"\n",
-              cp64.read ? "mrrc" : "mcrr",
-              cp64.op1, cp64.reg1, cp64.reg2, cp64.crm, regs->pc);
--    gdprintk(XENLOG_ERR, "unhandled 64-bit CP14 access %#x\n",
-+    gdprintk(XENLOG_ERR, "unhandled 64-bit CP14 access %#"PRIregister"\n",
-              hsr.bits & HSR_CP64_REGS_MASK);
-     inject_undef_exception(regs, hsr);
- }
-@@ -658,7 +659,7 @@ void do_cp14_dbg(struct cpu_user_regs *regs, const union hsr hsr)
-              "%s p14, %d, r%d, r%d, cr%d @ 0x%"PRIregister"\n",
-              cp64.read ? "mrrc" : "mcrr",
-              cp64.op1, cp64.reg1, cp64.reg2, cp64.crm, regs->pc);
--    gdprintk(XENLOG_ERR, "unhandled 64-bit CP14 DBG access %#x\n",
-+    gdprintk(XENLOG_ERR, "unhandled 64-bit CP14 DBG access %#"PRIregister"\n",
-              hsr.bits & HSR_CP64_REGS_MASK);
- 
-     inject_undef_exception(regs, hsr);
-@@ -692,7 +693,7 @@ void do_cp10(struct cpu_user_regs *regs, const union hsr hsr)
-                  "%s p10, %d, r%d, cr%d, cr%d, %d @ 0x%"PRIregister"\n",
-                  cp32.read ? "mrc" : "mcr",
-                  cp32.op1, cp32.reg, cp32.crn, cp32.crm, cp32.op2, regs->pc);
--        gdprintk(XENLOG_ERR, "unhandled 32-bit CP10 access %#x\n",
-+        gdprintk(XENLOG_ERR, "unhandled 32-bit CP10 access %#"PRIregister"\n",
-                  hsr.bits & HSR_CP32_REGS_MASK);
-         inject_undef_exception(regs, hsr);
-         return;
-diff --git a/xen/include/asm-arm/arm32/processor.h b/xen/include/asm-arm/arm32/processor.h
-index 4e679f3273..395ce10692 100644
---- a/xen/include/asm-arm/arm32/processor.h
-+++ b/xen/include/asm-arm/arm32/processor.h
-@@ -37,7 +37,7 @@ struct cpu_user_regs
-         uint32_t pc, pc32;
-     };
-     uint32_t cpsr; /* Return mode */
--    uint32_t hsr;  /* Exception Syndrome */
-+    register_t hsr;  /* Exception Syndrome */
- 
-     /* Outer guest frame only from here on... */
- 
-diff --git a/xen/include/asm-arm/arm64/processor.h b/xen/include/asm-arm/arm64/processor.h
-index 81dfc5e615..40f628d216 100644
---- a/xen/include/asm-arm/arm64/processor.h
-+++ b/xen/include/asm-arm/arm64/processor.h
-@@ -64,8 +64,9 @@ struct cpu_user_regs
-     /* Return address and mode */
-     __DECL_REG(pc,           pc32);             /* ELR_EL2 */
-     uint32_t cpsr;                              /* SPSR_EL2 */
--    uint32_t hsr;                               /* ESR_EL2 */
-+    register_t hsr;                             /* ESR_EL2 */
- 
-+    register_t pad1; /* Doubleword-align the user half of the frame */
-     /* Outer guest frame only from here on... */
- 
-     union {
-@@ -73,8 +74,6 @@ struct cpu_user_regs
-         uint32_t spsr_svc;       /* AArch32 */
-     };
- 
--    uint32_t pad1; /* Doubleword-align the user half of the frame */
--
-     /* AArch32 guests only */
-     uint32_t spsr_fiq, spsr_irq, spsr_und, spsr_abt;
- 
-diff --git a/xen/include/asm-arm/hsr.h b/xen/include/asm-arm/hsr.h
-index 29d4531f40..7424402c6e 100644
---- a/xen/include/asm-arm/hsr.h
-+++ b/xen/include/asm-arm/hsr.h
-@@ -16,11 +16,14 @@ enum dabt_size {
- };
- 
- union hsr {
--    uint32_t bits;
-+    register_t bits;
-     struct {
-         unsigned long iss:25;  /* Instruction Specific Syndrome */
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     };
- 
-     /* Common to all conditional exception classes (0x0N, except 0x00). */
-@@ -30,6 +33,9 @@ union hsr {
-         unsigned long ccvalid:1;/* CC Valid */
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } cond;
- 
-     struct hsr_wfi_wfe {
-@@ -39,6 +45,9 @@ union hsr {
-         unsigned long ccvalid:1;/* CC Valid */
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } wfi_wfe;
- 
-     /* reg, reg0, reg1 are 4 bits on AArch32, the fifth bit is sbzp. */
-@@ -53,6 +62,9 @@ union hsr {
-         unsigned long ccvalid:1;/* CC Valid */
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } cp32; /* HSR_EC_CP15_32, CP14_32, CP10 */
- 
-     struct hsr_cp64 {
-@@ -66,6 +78,9 @@ union hsr {
-         unsigned long ccvalid:1;/* CC Valid */
-         unsigned long len:1;    /* Instruction length */
-         unsigned long ec:6;     /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } cp64; /* HSR_EC_CP15_64, HSR_EC_CP14_64 */
- 
-      struct hsr_cp {
-@@ -77,6 +92,9 @@ union hsr {
-         unsigned long ccvalid:1;/* CC Valid */
-         unsigned long len:1;    /* Instruction length */
-         unsigned long ec:6;     /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } cp; /* HSR_EC_CP */
+ static void setup_virt_paging_one(void *data)
+ {
+-    WRITE_SYSREG32(vtcr, VTCR_EL2);
++    WRITE_SYSREG(vtcr, VTCR_EL2);
  
      /*
-@@ -94,6 +112,9 @@ union hsr {
-         unsigned long ccvalid:1;/* CC Valid */
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } smc32; /* HSR_EC_SMC32 */
+      * ARM64_WORKAROUND_AT_SPECULATE: We want to keep the TLBs free from
+@@ -2000,7 +2000,7 @@ static void setup_virt_paging_one(void *data)
+ void __init setup_virt_paging(void)
+ {
+     /* Setup Stage 2 address translation */
+-    unsigned long val = VTCR_RES1|VTCR_SH0_IS|VTCR_ORGN0_WBWA|VTCR_IRGN0_WBWA;
++    register_t val = VTCR_RES1|VTCR_SH0_IS|VTCR_ORGN0_WBWA|VTCR_IRGN0_WBWA;
  
- #ifdef CONFIG_ARM_64
-@@ -108,6 +129,7 @@ union hsr {
-         unsigned long res0:3;
-         unsigned long len:1;    /* Instruction length */
-         unsigned long ec:6;
-+        unsigned long _res0:32;
-     } sysreg; /* HSR_EC_SYSREG */
+ #ifdef CONFIG_ARM_32
+     if ( p2m_ipa_bits < 40 )
+@@ -2089,7 +2089,7 @@ void __init setup_virt_paging(void)
+            pa_range_info[pa_range].pabits,
+            ( MAX_VMID == MAX_VMID_16_BIT ) ? 16 : 8);
  #endif
+-    printk("P2M: %d levels with order-%d root, VTCR 0x%lx\n",
++    printk("P2M: %d levels with order-%d root, VTCR 0x%"PRIregister"\n",
+            4 - P2M_ROOT_LEVEL, P2M_ROOT_ORDER, val);
  
-@@ -121,6 +143,9 @@ union hsr {
-         unsigned long res2:14;
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } iabt; /* HSR_EC_INSTR_ABORT_* */
- 
-     struct hsr_dabt {
-@@ -143,6 +168,9 @@ union hsr {
-         unsigned long valid:1; /* Syndrome Valid */
-         unsigned long len:1;   /* Instruction length */
-         unsigned long ec:6;    /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } dabt; /* HSR_EC_DATA_ABORT_* */
- 
-     /* Contain the common bits between DABT and IABT */
-@@ -156,6 +184,9 @@ union hsr {
-         unsigned long pad3:14;  /* Not common */
-         unsigned long len:1;    /* Instruction length */
-         unsigned long ec:6;     /* Exception Class */
-+#ifdef CONFIG_ARM_64
-+        unsigned long _res0:32;
-+#endif
-     } xabt;
- 
- #ifdef CONFIG_ARM_64
-@@ -164,6 +195,7 @@ union hsr {
-         unsigned long res0:9;
-         unsigned long len:1;        /* Instruction length */
-         unsigned long ec:6;         /* Exception Class */
-+        unsigned long _res0:32;
-     } brk;
+     p2m_vmid_allocator_init();
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index ccc0827107..c7acdb2087 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -911,7 +911,7 @@ static void _show_registers(const struct cpu_user_regs *regs,
+         show_registers_32(regs, ctxt, guest_mode, v);
  #endif
- };
+     }
+-    printk("  VTCR_EL2: %08"PRIx32"\n", READ_SYSREG32(VTCR_EL2));
++    printk("  VTCR_EL2: %"PRIregister"\n", READ_SYSREG(VTCR_EL2));
+     printk(" VTTBR_EL2: %016"PRIx64"\n", ctxt->vttbr_el2);
+     printk("\n");
+ 
 -- 
 2.29.0
 
