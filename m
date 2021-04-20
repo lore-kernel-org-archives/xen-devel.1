@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1C94C433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7BB5C433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:10:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5EF19613C2
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:10:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5EF19613C2
+	by mail.kernel.org (Postfix) with ESMTPS id 625186109E
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Apr 2021 14:10:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 625186109E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.113775.216841 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.113779.216853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYr4k-0001XU-Nf; Tue, 20 Apr 2021 14:10:02 +0000
+	id 1lYr4o-00023g-V2; Tue, 20 Apr 2021 14:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 113775.216841; Tue, 20 Apr 2021 14:10:02 +0000
+Received: by outflank-mailman (output) from mailman id 113779.216853; Tue, 20 Apr 2021 14:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lYr4k-0001Wn-Gw; Tue, 20 Apr 2021 14:10:02 +0000
-Received: by outflank-mailman (input) for mailman id 113775;
- Tue, 20 Apr 2021 14:10:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lYr4o-00023V-QW; Tue, 20 Apr 2021 14:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 113779;
+ Tue, 20 Apr 2021 14:10:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Yi73=JR=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1lYr4j-0000xF-6P
- for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 14:10:01 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 91416c04-4b23-4ec2-a787-16f6647b10eb;
- Tue, 20 Apr 2021 14:09:49 +0000 (UTC)
+ id 1lYr4n-0001lG-2b
+ for xen-devel@lists.xenproject.org; Tue, 20 Apr 2021 14:10:05 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 90bd426b-64ac-423a-b518-259ed8123f39;
+ Tue, 20 Apr 2021 14:10:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,28 +49,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 91416c04-4b23-4ec2-a787-16f6647b10eb
+X-Inumbo-ID: 90bd426b-64ac-423a-b518-259ed8123f39
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1618927789;
+  d=citrix.com; s=securemail; t=1618927803;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:content-transfer-encoding:mime-version;
-  bh=7GEPKb6ncYPoPihoILUyCWuStYhcu43arsQB5CIFPFU=;
-  b=L3O5rcUGxVJtogKyOrG5gl6O2s3OPSnVhiQjVDuDFjzvUqtKH1aLEcFE
-   zNGF6U6peVAcfP9jJnQi1wZAAK28IDsNbej+jJx/0qPHgA2MOPefZzbk5
-   g67A9qTEdAtQfur6az5Rn6gTBl6vTRmkJNFK+wxSIOETmg1EK47ItR5sj
-   8=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: VEEtpjlqf4G1++BClyikDs0Ls7k7Zt6xpVSuR1O/bHuqiPtT7hm68g6WfXeRCKNb5gdPhWo8ey
- Ns8U9Ejo2FXD3AYYO+saKO0YOwSFV7NytP+WJ2AxubI9aCxslz/T6zz+vVcG/jp1H94f6Ae4bi
- uamO87zMne5P0ljwKB/jq72qwpHvxtDsDE7f9bduTROSLcHb6/fktusw5bH6xM3Vse5/22PyHb
- s9NjYINPow6nNtQnso6HkyMFXRyuRCuRca4dW+Gz9lxUy32PisygU0HklI4EtFZkZQNlO6LUJW
- 5So=
+  bh=EawpHgaCPssKy0w03Zn3vt1Po3SOLbn8R3gB+qDePj0=;
+  b=UTaIBj+dJjxLFd8eUtvLtlec3RqQVOIRyUFy/dIYF+jgQvgjR5HPwCMe
+   9lZHC9MkvnmpQI7m8ufPedLjhHrDGg0qgBqi2SwkC3aPBdDZHGi07Qe8O
+   2LFJuc22UihR8u7UOeMrn+lmbBvQqbolHoxZwyqvtEbuREGpQQgGEd6dr
+   o=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: XOe7fnT/5ubb+lD/7lVLeXqTOp8nPSdy0sXX8INu0wjghZKVflCXppAuSAmdK1O3bjuT8Nw0LB
+ u82cNySaWZL35V6TdxA942yXs3NPGBrvslKzs0Syw0JscaP64ERKvO79BFMlpPlxulFEk1l5N7
+ UpchroWs+AbTEgMvmcfnIFaIr/NaPCQFgYwf1OizZ+b8TkAmdWCf0QvqvNhWS1cHTFizgB0rbv
+ OCUPWnogOFNJXLIQRUara5A0JRTU4H9dsrwqWsQsAbUOu2g4jQXhc1W+XAT0vnLGsSCQjVpYH4
+ IYA=
 X-SBRS: 5.2
-X-MesageID: 41981586
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 42368720
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:i1GYUq4SOFICYuRVegPXwU2EI+orLtY04lQ7vn1ZYSd+NuSFis
+IronPort-HdrOrdr: A9a23:6JPnbq5p3dhQW7a7ewPXwU2EI+orLtY04lQ7vn1ZYSd+NuSFis
  Gjm+ka3xfoiDAXHEotg8yEJbPoexzh3LZPy800Ma25VAfr/FGpIoZr8Jf4z1TbdxHW3tV2kZ
  1te60WMrDNJHBnkMf35xS5Gd48wN+BtJuln/va0m0Fd2BXQotLhj0JbjqzOEtwWQVAGN4FD5
  Ka/MVKvH6Nfn4QY8S9CBA+LpT+jvfMk4/rZgNDOg4/5GC1/E6VwZPZMzzd5BcRVDtT3awvmF
@@ -94,208 +95,547 @@ IronPort-HdrOrdr: A9a23:i1GYUq4SOFICYuRVegPXwU2EI+orLtY04lQ7vn1ZYSd+NuSFis
  ph+dmHk6u2cCX/sTqg8AdTE+Zr82y9R9m1Dx/JMelU88aiMVDJu5CU2qeI/X7KYAr+TV8Zi4
  1DfVERacoGqgBKtvxJ7gGCDortokwklFNC5ypAjVCF4Pn+3Fvm
 X-IronPort-AV: E=Sophos;i="5.82,237,1613451600"; 
-   d="scan'208";a="41981586"
+   d="scan'208";a="42368720"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QiNqsrpIfT41HYdDcTVnK7WR1Y+ZytSUowSN9FihNKTwKBkleiykZ6UYts2wiDVeScg0dL3wD7GaLgjr5Z3JyPrN2o2WXbVCFWkzYxNqhQPj5eVwXbelPA5aQnnLqj64IUTLR+rLxEiAdcVA6unVQL9yq6ljpZXExuXRvaesMR4sCrOIM90jcfXicQ90cogaGmpuIueCvIPnypjeCAJBSU1WtHRFf4zjK906v6xXxs2IE9WSDiR9wCN2oAvijIw7Iv+agZ2uCFhtfDuQfom0sdwLHkuXh/0TI/Gdxf2ETRbv2qQk0gM1mI30QMuiBxBxZ0Ghzy68TJVaPW4gTooDkg==
+ b=QwMWEJR/YE+3blOd47hlIhfmIPlZpXJ5H2c2BwwA4FlWQTskJIF5KGgiFBXrazoWUZ+Mpg+3rAFo9LSCZew+tK4Rx525mzjMtMn8ZTByTk5QIrMBoyBWprEscBb3hK2gFBMIaqKQiyfuvVq4hOIVE2Y8xg43RFP/OOtrzz64Ub/CP4m6E9zdS0A1TFRlBQZwQ1wgVItWHAkEJotwIi36xNSQjBKnfEGmFUqYtt+gajLTmHaT7h9OBbU/9RKd7xfVDArY1W4EEpY3h4qFVZwJSCZ+nojrApjJyduxVu1SGIRXaAbtCZRSkWUxTJWUgOR6j2xkZFPnIvol5DkUdzxiqw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bszQ+bQrryson/MDnymvuIoXuzehE71ihmfPFljnugg=;
- b=nwpqGMLb1LMOkt/YQhPx1gd3IZX3gejEV8pG4eFPpT7cjz8ms+W9iW5S5bLUHiUFjRvE3qoL5uJqkXBdi+mnclF69FCqbYacY2leFkLwQICsIztKPQd9rxldUykI/WBexWyP9VTMe7qqTepeV4jKWgiDaXDOZbbF5x8VxeMQF+EOfzZam0ka8yq66NoV09w8HhlMKSUjZocCh0n4w4//ykXdsO0UN6InhU0oTAkJ1438kCstCSkcnMD2rUROUul2PPpsKGmG6SxwMHthrhADxnhqQ4G9ykK1FDqdi4JWm8IFX7e8Lo0XhWgcW3tlHk5XbmJKnq1wBWTy/wOOAFNqyA==
+ bh=KpczQuO47SkhWWpbzazODSpFWqenkbs2N4Y7huesY2k=;
+ b=YrPtwHcnZZi3xe/GGmkFOE4HqBUWbGGlQ+Gb+ImyX+t9+k5lPwpP8+XlsGV4VWtyTsStwEbyt7vOz9EfaM6i+sE+UEpjGc0Xq89BEYwb2JSBfyZhIkOn6/a9ivuaHtyMpQtM0cqYZM8MgN8IAW4XuP86MqkfwPtEvgA9TWnTW1x5/MUoVA9TaMOI690rUikSR7dj1i1Cfs4Yp17Zc3lqOksuDQVCTXYBdDclvRYSoafuv3DKBiIfxmhZdWVgUu4v2DzNjtsXVIq+K3jCxK6J3FUpKA08wlBSEB1nUj+u40ih0UlRpJETilpQ4ViOx/GxvPl2GtQ9dAqRMV7PLymWmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bszQ+bQrryson/MDnymvuIoXuzehE71ihmfPFljnugg=;
- b=Q5vqNM/UX7TkqqDh+Ox44YFOZnKbHEUvtxU7cpQWXw3nPd1KeF0xvQPqt6Fg4t16RIepOLiSGPl9352CeMJJDJoXpBPupnBb3KUjFBh0F2U/i92OoyfL6USaFM5bMz0VjlQLeBD62ob9ArSr5pBfgfg9uJa6whsvs6WA9nVFfo8=
+ bh=KpczQuO47SkhWWpbzazODSpFWqenkbs2N4Y7huesY2k=;
+ b=YA/riF+sNtVKRT/Yz4IZjIxeKWlRDsACPRSDCmaSiMuiha1OH+7tV1Q73LkjYY2RbabqtNibvhoKtWMMppDkyOF3zQX/AVjTJ6xZTCo7M/FXodoAGvjZaT+WacQp+B4sOlPNKPVK6d3qPRExF6i/bCoHGMxgMhRVu9D/oWEUHrA=
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v4 09/12] x86/irq: remove unused parameter from hvm_isa_irq_assert
-Date: Tue, 20 Apr 2021 16:07:20 +0200
-Message-ID: <20210420140723.65321-10-roger.pau@citrix.com>
+Subject: [PATCH v4 11/12] x86/vpt: remove vPT timers per-vCPU lists
+Date: Tue, 20 Apr 2021 16:07:22 +0200
+Message-ID: <20210420140723.65321-12-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210420140723.65321-1-roger.pau@citrix.com>
 References: <20210420140723.65321-1-roger.pau@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MRXP264CA0045.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:500:14::33) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+X-ClientProxiedBy: MR2P264CA0177.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501::16)
+ To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1bbd9453-e694-445c-1e81-08d90405f37f
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6000:
+X-MS-Office365-Filtering-Correlation-Id: 3e8d0619-2564-4581-8b16-08d90405fbae
+X-MS-TrafficTypeDiagnostic: DM5PR03MB3068:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM4PR03MB60007F4436DDE3D6C9AD4AC38F489@DM4PR03MB6000.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:785;
+X-Microsoft-Antispam-PRVS: <DM5PR03MB3068BC27730C36A54470A51F8F489@DM5PR03MB3068.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:227;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: yrp19vMbdgSLoMYRN5sFOM/aW2kCSa3UfvBF91iX5B4wbnjoVo3XAq0I6MYRRhmX4FAoJw5gxmWCbn/nJ/+WrpexoMZkDW8lhuuoow+Qx4JGm3yoEUDVoBeGtxMx0spsJO5rEtuFZh2GNTGMXislvEvJWzUPsi2Tr15Dk4byy/oDNadBWvYj/arzDtELdoDUsLgrkHQUb7ykvJADh5MTlhYDTJFqBDkMpLPiorbcMMewLQx4esMTS7hKvJNsFRvcaxPhRIvgkHI6dHBJGsI03BXLlN3gRkocdN1X13jNYyiqTUf1S4MBNbSNPfuPM1ZmTOrbMsgJRqgvNmLt93UtJ7eegRwoce1RqSr32cJmWQK//26I4qLUWvUtM8APESIvxQsjYGto/nw3tzeZ2Fpx1lCc9VXih1+0CV3nifpeAODGhLw1GkEdxrP1b6vQ7lzOft5IEJBSaUe6Nk/R1oibarlbznvf9ihdk4UVBZbsZItn1Vl7qG+zCPsXE0ZZsC3MfHdL4Hn79YdMwA/oaILwUQkEaKZLHqVbptLiXHqUnvVGeRe88PxCdtQFhWlpxPspQJq0ahWJ0mTr/ny3wKUosOWAcymT1YMIFQUvLsT0Aco=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(376002)(39850400004)(136003)(366004)(6916009)(83380400001)(4326008)(38100700002)(16526019)(36756003)(316002)(956004)(6486002)(2616005)(6496006)(478600001)(8676002)(26005)(186003)(5660300002)(8936002)(54906003)(2906002)(6666004)(66476007)(1076003)(66556008)(86362001)(66946007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?eFAyRUQ4VTFWOG85OHNaTUlwd3A2TUEwVVdIZjUvUFA4OWFhVnBkYVIzWm8r?=
- =?utf-8?B?NVcreGdLZzhVdmFuSnViTklmbXFoWkcwZ21UU1FPZStEMXhKeEJHMUx5OFZB?=
- =?utf-8?B?Nm5KRDErMnBMeWVzbmpyc0Zvb0t6S1FJVElicUx0aG5IMldQV2ZjdXlPdkpM?=
- =?utf-8?B?cWhjamJGcFRCVUtMSWZQTVlTY2ZjR1JCbzVYT1p4OGpXV1NWWXF1Tm1aeGJC?=
- =?utf-8?B?V25tMTRORlgvYjBKY3dTLzRvWUZvWWp6RmprRHF1RXBQeGFzU3FYY1R5bnBJ?=
- =?utf-8?B?VTdld0R6QnUvTk04QVhyQlhTMjF5L2dGU1h0eFdhb0ZyaGJBa0NER3Vhbnda?=
- =?utf-8?B?RSt3VXhzblJUejdSQlR2Q3c1dmJHb3JobXFqeUlYU3hHdzFicHhhLzc5NmVR?=
- =?utf-8?B?TFpEWitKZ1drOFNGZW0wNXZHemM0d2FueUZoQXpnQmJacThMRFNtSVdYNHF1?=
- =?utf-8?B?anpKRkYwTlRlcFliNTRCaEpQVU1RYTAwWmttb1I2bmV0eDhJR21hY1djOTMz?=
- =?utf-8?B?ZHVLVjBid3huTEt1eFhhMzdlbXNPV1dtbkFoQTJEQzRRK0p5V2taYjUxSzFE?=
- =?utf-8?B?aVMrZytLV3JBa2Z3Rzk0aWJLS2N1bG5zMXczWllrZ2xveXBIV2s3N0JBdUlZ?=
- =?utf-8?B?cTFGaW5uMTFvL3BPK0FnK1Z4cFB2MVowL1VOTWJoeUxaS3BhYmZWbVdjSmJU?=
- =?utf-8?B?TUJPU0JLNVd4N3R6bzJIVEpERms2S3k3ZTZQOGU3Z3V2UE14ODdIZ0NkOVFG?=
- =?utf-8?B?ekRKakgrNCtiWDk1VjhJcTVJRXo2K0Uxanc0blduNTl5YTY4NWdvQVM1cXJk?=
- =?utf-8?B?aTNEcS8yaEIrOU9DbGFka2h6VWMwTjRKellHTmNuSkNhRnVGM2ZEYk9NVEVy?=
- =?utf-8?B?MThwRDRQYjk3V0xLb3h5STVEV1lqczdPS1FPSi9MNXdaRHMyVHFUQkFaWm5p?=
- =?utf-8?B?WnFGaHl5NnJLN3JpcExSTlMvZW85MjNtbXdtRDJUcXB5am1EZlVmUkhybWNw?=
- =?utf-8?B?V29NU25EZGNZQnhWSVFGUCtFeHlBbG03MUZNZmx2b0RiTXNXQnBRT1ZWK2g1?=
- =?utf-8?B?VUZKT003a0drQzkySndKbUpYWmtpS3NnL0lpTWo0TXVFYnNGNlBPSXBJTU1n?=
- =?utf-8?B?NFZoazBiandlMlVxZ1BiOUVVK1p3RytSWFFtYmhzVmlyUXVBNE9hSmVlak1m?=
- =?utf-8?B?WkV4V29lNmMwbUFaRWR4cm96aUNZUmZDazZ6ZVpKMEpZL2l5cEJrQ2hJRTI2?=
- =?utf-8?B?OHVRNFRvOVVWTzR6dWo0Y3hPL0hIYXFld2laWVZ4ZzI0QXErZ2dOclowaWhS?=
- =?utf-8?B?TVZic3E5bnVQVExSbmwyK0NIYWVrVzRRaElaa1ZhZ2JmRGRyc3FoMEVSSTFn?=
- =?utf-8?B?aVUrZHczdWxRZHpMUkR4YkFxZzMwVkQrWXNKQjVRSU5TN1pycENkak9DaHhP?=
- =?utf-8?B?ZVBTaGIrTk5lQkZnRytEM3RJRytFcFgwUEtTVXdsWVlZWE5sMURubUJFZXF3?=
- =?utf-8?B?STNTVGN1QXBkMmora0FScTF5M2p0NVRzRHJYODFjRFE1akRJRWRDL3lYTVFW?=
- =?utf-8?B?VksvUm80dldGbVRtRkp6RndPL1FHWTF4dysvTE1Lb09FNExTdk5mS0pwQnV5?=
- =?utf-8?B?T0NiU1ArbUl5R0pJYkh5bHdNRWFsc3dqWnUxSDFIWkEzQWhqSllOWlF4QTQ0?=
- =?utf-8?B?bzZvMzdEalROQ0lTZEpBQytNZWlBT1RydndFM25MMGZrN0FwclhuWS9HRjRP?=
- =?utf-8?Q?Y+Hy+MK8jJM61yVo/AHlkWCgelHo2dIWxGHi/bG?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1bbd9453-e694-445c-1e81-08d90405f37f
+X-Microsoft-Antispam-Message-Info: ot903jG5ohElQrZBEWVAxJj1c9HSJ3w1/sHAADpXPis0O5bnR4cWah9w1MuGRJzzITEMEvIPSg4H05VqniJLtQSrAEsT3bp/ggbe7x86oRZr6SJeg+sQnMshLp+Gq16tohFgYizczOpyRRitCatN/13MW4eikCfNvbTX4pglwYA1t4IaLMg9EYAfyuSBSx2T7HcU/06uuyRBoZrWuCVYjsRd7OeyJkq3xBz9fAaEQ0l5Ic2DRe2n4//CQuAyPSAZvIe6MgyMnMC7oKL9g4DlpOiHphejarCsGXMeIat3S6Gpims2HGnKLKQzCFgtSCNDTQtlMI+RaOuMk2VCGmjgsvn+z+lHQliUYn5Fk2PWsvEcifPEEgBEvx0InYBogbkrBWXnnSAhenbB3XneSDQoMx1mOBZTsfx01U7d92emPPvSuUo5Xb9V8XtHxddwff8OCmW9PsWaB/QVWf3CjYcvgByblBiHjrTh3OUuXg+H2A0VheuUpasIUG1V/IUWIrW7UrHQSW+hZ7ZrpB6fTEW3slL2MqNo9GtyvcpQHqJ8tQ14XiafCJDGBT5SZ3SBjSPLdqOaXP3IDrspIreU0XUJvW32xgUgRUPYC7X3Ha2wp1k=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(346002)(366004)(39860400002)(136003)(396003)(54906003)(316002)(2906002)(6486002)(30864003)(956004)(1076003)(38100700002)(36756003)(2616005)(16526019)(5660300002)(6496006)(83380400001)(4326008)(8676002)(26005)(66556008)(66946007)(66476007)(186003)(8936002)(86362001)(6666004)(478600001)(6916009);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?MStEdzRJcUkxWG9acWJvTXF2Wlc4aHo1OCtGdFA3d3prUVBReVRHSXBFby81?=
+ =?utf-8?B?dG5PeXpTTjk0TFBUcTQyWlI2Si8xMys4WWVMS0lqd1BLeVQza3l1dmlxT1g1?=
+ =?utf-8?B?V01RU1lOS010eTl5c3g4Z1VsU2dMVSszOUNZcDBtbEVXT3pMR2pJZ1NmRm9K?=
+ =?utf-8?B?TW1IaGMveDFoVUlHOEsvZEFIdGZmWkN6NzZDc1JHakhDZU5HRFI0V3JDejlq?=
+ =?utf-8?B?dWpuWi8vaEhtZndiWXlCMU1YcW9hN09EMk1TQ2NMQ0ZKVGVaTW1lallmV2t6?=
+ =?utf-8?B?Kzg5T3d4TWZlUGh6eGNUdENhRUVmeUg3MHZtVE1ZeUdxZ24zei9QQldaTGFU?=
+ =?utf-8?B?S2ZpeVRqTnVtYnhFSnNNanh2Wlk4cHd1aFVhUHNJSlZsbUVMZUlpZ09yQ0c3?=
+ =?utf-8?B?b1pWVW5JSWZSdmtYQ0t2dlRjV3RpSlBvQXFkOFBva3NlWFJtN0tyckdENkxp?=
+ =?utf-8?B?YnJxaVNWaUxPVjVkeEM4d213RXJDbjNKazdNbjdhU0o4d0dHWHIyTFZJVUpI?=
+ =?utf-8?B?cnk4WHR3b3hxeCtISVhUODcwWXl2UlJUcm4xVGkrUnlUTjFoNmVidTFxMWwx?=
+ =?utf-8?B?Q0U5NzJqbzc1RmtmRVgzcWlNZTlNcnNMZzNvRUpzbWdsZ3RNNTZPbTFLSkt6?=
+ =?utf-8?B?SU9UTThNUjdhWXJyZEhhQlk5RVlNTTZDaW5UN3NKK0xTaWJHR2tuZG1xM0J2?=
+ =?utf-8?B?ZmJnSnNQZFhvS1Z2d012aVo2NXpRaGlPZHUycVRsOUpWRStNR2ZPdHl1MlEx?=
+ =?utf-8?B?NksxK1haR1FqTlBpdVltVmROUDVSWVN1Slo4RmpNcDAxaEVwQ0g1UFMvVTJ5?=
+ =?utf-8?B?L2NxejNmdmNYR0E0M3JhWFVlRFdxaDZER3BBUHh6aGE5bzVFS3hPWWg3Y1NV?=
+ =?utf-8?B?QjErRmFlWko0ZkZqc1U5V21SNVpHemsyWFQxdlZ0aUpTRWxXQzdDT0RWcnUz?=
+ =?utf-8?B?aGZJakdBSkJvcUliM0pJN0hFUEVkNGRGZWNMeFlYMXB0bGtQeTBjdm4xUkJy?=
+ =?utf-8?B?bjZGNndkaStVWS9Ybk4yclNLL1ZDbjNJa05Mc21CTmtjVTB2SjloNi94VU9C?=
+ =?utf-8?B?RG9IQ0VCdlU5RkR5T2JwR1hSdmprK2dkSDk2NEljU3hjYVFzNDUyOWY1cTQ0?=
+ =?utf-8?B?Y0RNeGZaUFFxUSsxQmZLRXVUVlozMkdvcTJ3WVJsN3Q2MHZOa05IMjNnMHBT?=
+ =?utf-8?B?dDZEeGVXWHptY2dxdFVYUlFxOXRMckJzSnlzc1g1QjhDYUZwekxZaDBHWGdV?=
+ =?utf-8?B?Qk1DQ3lycHBMRVhqWEdLZjdaK0MxcHllWWVhV0I2LzJRY2JFaS9rYlZEeGwx?=
+ =?utf-8?B?bWJ2QVpwcU03TmRObU1PY2dhajd3VUVIRXExUW1lODNvRU9BSGdWcDFJR0FO?=
+ =?utf-8?B?V2FObzlXNDlHTXBXN0E1OFU5eTZVVGpNYkNtTmdwNHk0UW01aGp6L2tzOGx4?=
+ =?utf-8?B?dTZlWlRnMkhma1h3T3JXWU5CN2RKd05ObGQzck5zOUFaQlRTK2t6L1dzWEl6?=
+ =?utf-8?B?OFpDeVZhYlJHdXZKSjM3dGU0M1NPc0xKR0FpejRoWVI1Vi9uMDlSS3JhUVRz?=
+ =?utf-8?B?SEJRZVpWMXY5Vi8ybHJRc2NiZ3o3djNkVUs2NkJMdTlMSWtMSnhVamYyN2Y1?=
+ =?utf-8?B?N0FneWZBYitHaWdkL1pUZ0M2OHdHbjdSYmVCV2UxRWJXQlpqQU9xQmVvQ3ho?=
+ =?utf-8?B?NkV4SDJ6RVQwQzMyMEV6V1k3NWhPaUkwWEM4Ty9DUnJEbmFtYkFSN2oraXl0?=
+ =?utf-8?Q?PJf8LWTRDSYbnC/lzrt4kOQRtnN/1MC4UJW6x0B?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e8d0619-2564-4581-8b16-08d90405fbae
 X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2021 14:09:45.7034
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2021 14:09:59.4807
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Br+6PV/vvVSV4s/znOhGu+1M1wygWtaVzVywUtgtGf5otv2d7FRQpCy2ikUCYz2UxaFeTzULB/SuVpwYJANHog==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6000
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7VlPeKNLGt6z5IN3PjjXlqE71FQFDsAomWRlaVsOeK2UZZ3dAfc26CaT5LG6TJGEH9XRExjsAQ8eDzT2zO9rDg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB3068
 X-OriginatorOrg: citrix.com
 
-There are no callers anymore passing a get_vector function pointer to
-hvm_isa_irq_assert, so drop the parameter.
+No longer add vPT timers to lists on specific vCPUs, since there's no
+need anymore to check if timer interrupts have been injected on return
+to HVM guest.
 
-No functional change expected.
+Such change allows to get rid of virtual timers vCPU migration, and
+also cleanup some of the virtual timers fields that are no longer
+required.
+
+The model is also slightly different now in that timers are not
+stopped when a vCPU is de-scheduled. Such timers will continue
+running, and when triggered the function will try to inject the
+corresponding interrupt to the guest (which might be different than
+the currently running one). Note that the timer triggering when the
+guest is no longer running can only happen once, as the timer callback
+will not reset the interrupt to fire again. Such resetting if required
+will be done by the EOI callback.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes since v3:
+ - Remove stale commit log paragrpah.
+
+Changes since v2:
+ - Remove pt_{save/restore}_timer and instead use
+   pt_{freeze/thaw}_time.
+ - Remove the introduction of the 'masked' field, it's not needed.
+ - Rework pt_active to use timer_is_active.
+
+Changes since v1:
  - New in this version.
 ---
- xen/arch/x86/hvm/dm.c         |  2 +-
- xen/arch/x86/hvm/irq.c        | 10 +---------
- xen/arch/x86/hvm/pmtimer.c    |  2 +-
- xen/arch/x86/hvm/rtc.c        |  2 +-
- xen/arch/x86/hvm/vpt.c        |  2 +-
- xen/include/asm-x86/hvm/irq.h |  4 +---
- 6 files changed, 6 insertions(+), 16 deletions(-)
+ xen/arch/x86/domain.c          |   4 +-
+ xen/arch/x86/hvm/hvm.c         |   4 +-
+ xen/arch/x86/hvm/vlapic.c      |   1 -
+ xen/arch/x86/hvm/vpt.c         | 192 ++++-----------------------------
+ xen/include/asm-x86/hvm/vcpu.h |   3 +-
+ xen/include/asm-x86/hvm/vpt.h  |  12 +--
+ 6 files changed, 25 insertions(+), 191 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-index b60b9f3364a..c62a259b7fc 100644
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -110,7 +110,7 @@ static int set_isa_irq_level(struct domain *d, uint8_t isa_irq,
-         hvm_isa_irq_deassert(d, isa_irq);
-         break;
-     case 1:
--        hvm_isa_irq_assert(d, isa_irq, NULL);
-+        hvm_isa_irq_assert(d, isa_irq);
-         break;
-     default:
-         return -EINVAL;
-diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
-index 4825a387bdc..c3d8f2a786a 100644
---- a/xen/arch/x86/hvm/irq.c
-+++ b/xen/arch/x86/hvm/irq.c
-@@ -212,13 +212,10 @@ void hvm_gsi_deassert(struct domain *d, unsigned int gsi)
-     spin_unlock(&d->arch.hvm.irq_lock);
- }
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 4dc27f798e7..b6cd715dce9 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2039,8 +2039,8 @@ void context_switch(struct vcpu *prev, struct vcpu *next)
+     vpmu_switch_from(prev);
+     np2m_schedule(NP2M_SCHEDLE_OUT);
  
--int hvm_isa_irq_assert(struct domain *d, unsigned int isa_irq,
--                       int (*get_vector)(const struct domain *d,
--                                         unsigned int gsi))
-+void hvm_isa_irq_assert(struct domain *d, unsigned int isa_irq)
+-    if ( is_hvm_domain(prevd) && !list_empty(&prev->arch.hvm.tm_list) )
+-        pt_save_timer(prev);
++    if ( is_hvm_domain(prevd) )
++        pt_freeze_time(prev);
+ 
+     local_irq_disable();
+ 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 2c4dd1b86f2..ec4ab1f5199 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -489,7 +489,6 @@ void hvm_set_info_guest(struct vcpu *v)
+ void hvm_migrate_timers(struct vcpu *v)
  {
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-     unsigned int gsi = hvm_isa_irq_to_gsi(isa_irq);
--    int vector = -1;
- 
-     ASSERT(isa_irq <= 15);
- 
-@@ -228,12 +225,7 @@ int hvm_isa_irq_assert(struct domain *d, unsigned int isa_irq,
-          (hvm_irq->gsi_assert_count[gsi]++ == 0) )
-         assert_irq(d, gsi, isa_irq);
- 
--    if ( get_vector )
--        vector = get_vector(d, gsi);
--
-     spin_unlock(&d->arch.hvm.irq_lock);
--
--    return vector;
+     rtc_migrate_timers(v);
+-    pt_migrate(v);
  }
  
- void hvm_isa_irq_deassert(
-diff --git a/xen/arch/x86/hvm/pmtimer.c b/xen/arch/x86/hvm/pmtimer.c
-index 97b9e41712f..9d30b145f60 100644
---- a/xen/arch/x86/hvm/pmtimer.c
-+++ b/xen/arch/x86/hvm/pmtimer.c
-@@ -61,7 +61,7 @@ static void pmt_update_sci(PMTState *s)
-     ASSERT(spin_is_locked(&s->lock));
+ void hvm_migrate_pirq(struct hvm_pirq_dpci *pirq_dpci, const struct vcpu *v)
+@@ -544,7 +543,7 @@ void hvm_do_resume(struct vcpu *v)
+ {
+     check_wakeup_from_wait();
  
-     if ( acpi->pm1a_en & acpi->pm1a_sts & SCI_MASK )
--        hvm_isa_irq_assert(s->vcpu->domain, SCI_IRQ, NULL);
-+        hvm_isa_irq_assert(s->vcpu->domain, SCI_IRQ);
-     else
-         hvm_isa_irq_deassert(s->vcpu->domain, SCI_IRQ);
+-    pt_restore_timer(v);
++    pt_thaw_time(v);
+ 
+     if ( !vcpu_ioreq_handle_completion(v) )
+         return;
+@@ -1559,7 +1558,6 @@ int hvm_vcpu_initialise(struct vcpu *v)
+     hvm_asid_flush_vcpu(v);
+ 
+     spin_lock_init(&v->arch.hvm.tm_lock);
+-    INIT_LIST_HEAD(&v->arch.hvm.tm_list);
+ 
+     rc = hvm_vcpu_cacheattr_init(v); /* teardown: vcpu_cacheattr_destroy */
+     if ( rc != 0 )
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+index 8f3a0a2e8f7..2af24989dd5 100644
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -1342,7 +1342,6 @@ void vlapic_adjust_i8259_target(struct domain *d)
+     if ( d->arch.hvm.i8259_target == v )
+         return;
+     d->arch.hvm.i8259_target = v;
+-    pt_adjust_global_vcpu_target(v);
  }
-diff --git a/xen/arch/x86/hvm/rtc.c b/xen/arch/x86/hvm/rtc.c
-index 9992595c45a..b66ca6f64f1 100644
---- a/xen/arch/x86/hvm/rtc.c
-+++ b/xen/arch/x86/hvm/rtc.c
-@@ -63,7 +63,7 @@ static void rtc_update_irq(RTCState *s)
  
-     s->hw.cmos_data[RTC_REG_C] |= RTC_IRQF;
-     hvm_isa_irq_deassert(vrtc_domain(s), RTC_IRQ);
--    hvm_isa_irq_assert(vrtc_domain(s), RTC_IRQ, NULL);
-+    hvm_isa_irq_assert(vrtc_domain(s), RTC_IRQ);
- }
- 
- /* Called by the VPT code after it's injected a PF interrupt for us.
+ int vlapic_has_pending_irq(struct vcpu *v)
 diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
-index 6744b88d20c..639e45c520e 100644
+index 639e45c520e..6a8d216c7b5 100644
 --- a/xen/arch/x86/hvm/vpt.c
 +++ b/xen/arch/x86/hvm/vpt.c
-@@ -368,7 +368,7 @@ static bool inject_interrupt(struct periodic_time *pt)
+@@ -125,24 +125,6 @@ static int pt_irq_masked(struct periodic_time *pt)
+     return 1;
+ }
  
-     case PTSRC_isa:
-         hvm_isa_irq_deassert(d, irq);
--        hvm_isa_irq_assert(d, irq, NULL);
-+        hvm_isa_irq_assert(d, irq);
+-/*
+- * Functions which read (maybe write) all periodic_time instances
+- * attached to a particular vCPU use pt_vcpu_{un}lock locking helpers.
+- *
+- * Such users are explicitly forbidden from changing the value of the
+- * pt->vcpu field, because another thread holding the pt_migrate lock
+- * may already be spinning waiting for your vcpu lock.
+- */
+-static void pt_vcpu_lock(struct vcpu *v)
+-{
+-    spin_lock(&v->arch.hvm.tm_lock);
+-}
+-
+-static void pt_vcpu_unlock(struct vcpu *v)
+-{
+-    spin_unlock(&v->arch.hvm.tm_lock);
+-}
+-
+ /*
+  * Functions which want to modify a particular periodic_time object
+  * use pt_{un}lock locking helpers.
+@@ -176,14 +158,12 @@ static void pt_process_missed_ticks(struct periodic_time *pt)
+         return;
+ 
+     missed_ticks = missed_ticks / (s_time_t) pt->period + 1;
+-    if ( mode_is(pt->vcpu->domain, no_missed_ticks_pending) )
+-        pt->do_not_freeze = !pt->pending_intr_nr;
+-    else
++    if ( !mode_is(pt->vcpu->domain, no_missed_ticks_pending) )
+         pt->pending_intr_nr += missed_ticks;
+     pt->scheduled += missed_ticks * pt->period;
+ }
+ 
+-static void pt_freeze_time(struct vcpu *v)
++void pt_freeze_time(struct vcpu *v)
+ {
+     if ( !mode_is(v->domain, delay_for_missed_ticks) )
+         return;
+@@ -191,7 +171,7 @@ static void pt_freeze_time(struct vcpu *v)
+     v->arch.hvm.guest_time = hvm_get_guest_time(v);
+ }
+ 
+-static void pt_thaw_time(struct vcpu *v)
++void pt_thaw_time(struct vcpu *v)
+ {
+     if ( !mode_is(v->domain, delay_for_missed_ticks) )
+         return;
+@@ -203,52 +183,11 @@ static void pt_thaw_time(struct vcpu *v)
+     v->arch.hvm.guest_time = 0;
+ }
+ 
+-void pt_save_timer(struct vcpu *v)
+-{
+-    struct list_head *head = &v->arch.hvm.tm_list;
+-    struct periodic_time *pt;
+-
+-    if ( v->pause_flags & VPF_blocked )
+-        return;
+-
+-    pt_vcpu_lock(v);
+-
+-    list_for_each_entry ( pt, head, list )
+-        if ( !pt->do_not_freeze )
+-            stop_timer(&pt->timer);
+-
+-    pt_freeze_time(v);
+-
+-    pt_vcpu_unlock(v);
+-}
+-
+-void pt_restore_timer(struct vcpu *v)
+-{
+-    struct list_head *head = &v->arch.hvm.tm_list;
+-    struct periodic_time *pt;
+-
+-    pt_vcpu_lock(v);
+-
+-    list_for_each_entry ( pt, head, list )
+-        if ( pt->pending_intr_nr == 0 )
+-            set_timer(&pt->timer, pt->scheduled);
+-
+-    pt_thaw_time(v);
+-
+-    pt_vcpu_unlock(v);
+-}
+-
+ static void irq_eoi(struct periodic_time *pt)
+ {
+-    pt->irq_issued = false;
+-
+     if ( pt->one_shot )
+     {
+-        if ( pt->on_list )
+-            list_del(&pt->list);
+-        pt->on_list = false;
+         pt->pending_intr_nr = 0;
+-
+         return;
+     }
+ 
+@@ -266,7 +205,11 @@ static void irq_eoi(struct periodic_time *pt)
+     }
+ 
+     if ( !pt->pending_intr_nr )
++    {
++        /* Make sure timer follows vCPU. */
++        migrate_timer(&pt->timer, current->processor);
+         set_timer(&pt->timer, pt->scheduled);
++    }
+ }
+ 
+ static void pt_timer_fn(void *data)
+@@ -282,21 +225,15 @@ static void pt_timer_fn(void *data)
+     v = pt->vcpu;
+     irq = pt->irq;
+ 
+-    if ( inject_interrupt(pt) )
++    pt->scheduled += pt->period;
++
++    if ( !inject_interrupt(pt) )
++        pt->pending_intr_nr++;
++    else
+     {
+-        pt->scheduled += pt->period;
+-        pt->do_not_freeze = 0;
+         cb = pt->cb;
+         cb_priv = pt->priv;
+     }
+-    else
+-    {
+-        /* Masked. */
+-        if ( pt->on_list )
+-            list_del(&pt->list);
+-        pt->on_list = false;
+-        pt->pending_intr_nr++;
+-    }
+ 
+     pt_unlock(pt);
+ 
+@@ -313,22 +250,12 @@ static void eoi_callback(struct periodic_time *pt)
+     pt_lock(pt);
+ 
+     irq_eoi(pt);
+-    if ( pt->pending_intr_nr )
++    if ( pt->pending_intr_nr && inject_interrupt(pt) )
+     {
+-        if ( inject_interrupt(pt) )
+-        {
+-            pt->pending_intr_nr--;
+-            cb = pt->cb;
+-            cb_priv = pt->priv;
+-            v = pt->vcpu;
+-        }
+-        else
+-        {
+-            /* Masked. */
+-            if ( pt->on_list )
+-                list_del(&pt->list);
+-            pt->on_list = false;
+-        }
++        pt->pending_intr_nr--;
++        cb = pt->cb;
++        cb_priv = pt->priv;
++        v = pt->vcpu;
+     }
+ 
+     pt_unlock(pt);
+@@ -397,19 +324,6 @@ static bool inject_interrupt(struct periodic_time *pt)
+     return true;
+ }
+ 
+-void pt_migrate(struct vcpu *v)
+-{
+-    struct list_head *head = &v->arch.hvm.tm_list;
+-    struct periodic_time *pt;
+-
+-    pt_vcpu_lock(v);
+-
+-    list_for_each_entry ( pt, head, list )
+-        migrate_timer(&pt->timer, v->processor);
+-
+-    pt_vcpu_unlock(v);
+-}
+-
+ void create_periodic_time(
+     struct vcpu *v, struct periodic_time *pt, uint64_t delta,
+     uint64_t period, uint8_t irq, time_cb *cb, void *data, bool level)
+@@ -429,8 +343,6 @@ void create_periodic_time(
+     write_lock(&v->domain->arch.hvm.pl_time->pt_migrate);
+ 
+     pt->pending_intr_nr = 0;
+-    pt->do_not_freeze = 0;
+-    pt->irq_issued = 0;
+ 
+     /* Periodic timer must be at least 0.1ms. */
+     if ( (period < 100000) && period )
+@@ -488,11 +400,6 @@ void create_periodic_time(
          break;
+     }
  
-     case PTSRC_ioapic:
-diff --git a/xen/include/asm-x86/hvm/irq.h b/xen/include/asm-x86/hvm/irq.h
-index 57d51c15863..4e3534d4eb4 100644
---- a/xen/include/asm-x86/hvm/irq.h
-+++ b/xen/include/asm-x86/hvm/irq.h
-@@ -214,9 +214,7 @@ void hvm_pci_intx_deassert(struct domain *d, unsigned int device,
-  * allows us to get the interrupt vector in the protection of irq_lock.
-  * For most cases, just set get_vector to NULL.
-  */
--int hvm_isa_irq_assert(struct domain *d, unsigned int isa_irq,
--                       int (*get_vector)(const struct domain *d,
--                                         unsigned int gsi));
-+void hvm_isa_irq_assert(struct domain *d, unsigned int isa_irq);
- void hvm_isa_irq_deassert(struct domain *d, unsigned int isa_irq);
+-    pt_vcpu_lock(v);
+-    pt->on_list = 1;
+-    list_add(&pt->list, &v->arch.hvm.tm_list);
+-    pt_vcpu_unlock(v);
+-
+     init_timer(&pt->timer, pt_timer_fn, pt, v->processor);
+     set_timer(&pt->timer, pt->scheduled);
  
- /* Modify state of GSIs. */
+@@ -508,9 +415,6 @@ void destroy_periodic_time(struct periodic_time *pt)
+         return;
+ 
+     pt_lock(pt);
+-    if ( pt->on_list )
+-        list_del(&pt->list);
+-    pt->on_list = 0;
+     pt->pending_intr_nr = 0;
+ 
+     gsi = pt->irq;
+@@ -532,64 +436,6 @@ void destroy_periodic_time(struct periodic_time *pt)
+     kill_timer(&pt->timer);
+ }
+ 
+-static void pt_adjust_vcpu(struct periodic_time *pt, struct vcpu *v)
+-{
+-    ASSERT(pt->source == PTSRC_isa || pt->source == PTSRC_ioapic);
+-
+-    if ( pt->vcpu == NULL )
+-        return;
+-
+-    write_lock(&v->domain->arch.hvm.pl_time->pt_migrate);
+-
+-    if ( pt->vcpu == v )
+-        goto out;
+-
+-    pt_vcpu_lock(pt->vcpu);
+-    if ( pt->on_list )
+-        list_del(&pt->list);
+-    pt_vcpu_unlock(pt->vcpu);
+-
+-    pt->vcpu = v;
+-
+-    pt_vcpu_lock(v);
+-    if ( pt->on_list )
+-    {
+-        list_add(&pt->list, &v->arch.hvm.tm_list);
+-        migrate_timer(&pt->timer, v->processor);
+-    }
+-    pt_vcpu_unlock(v);
+-
+- out:
+-    write_unlock(&v->domain->arch.hvm.pl_time->pt_migrate);
+-}
+-
+-void pt_adjust_global_vcpu_target(struct vcpu *v)
+-{
+-    struct PITState *vpit;
+-    struct pl_time *pl_time;
+-    int i;
+-
+-    if ( !v || !has_vpit(v->domain) )
+-        return;
+-
+-    vpit = &v->domain->arch.vpit;
+-
+-    spin_lock(&vpit->lock);
+-    pt_adjust_vcpu(&vpit->pt0, v);
+-    spin_unlock(&vpit->lock);
+-
+-    pl_time = v->domain->arch.hvm.pl_time;
+-
+-    spin_lock(&pl_time->vrtc.lock);
+-    pt_adjust_vcpu(&pl_time->vrtc.pt, v);
+-    spin_unlock(&pl_time->vrtc.lock);
+-
+-    write_lock(&pl_time->vhpet.lock);
+-    for ( i = 0; i < HPET_TIMER_NUM; i++ )
+-        pt_adjust_vcpu(&pl_time->vhpet.pt[i], v);
+-    write_unlock(&pl_time->vhpet.lock);
+-}
+-
+ static void pt_resume(struct periodic_time *pt)
+ {
+     struct vcpu *v;
+@@ -600,14 +446,12 @@ static void pt_resume(struct periodic_time *pt)
+         return;
+ 
+     pt_lock(pt);
+-    if ( pt->pending_intr_nr && !pt->on_list && inject_interrupt(pt) )
++    if ( pt->pending_intr_nr && inject_interrupt(pt) )
+     {
+         pt->pending_intr_nr--;
+         cb = pt->cb;
+         cb_priv = pt->priv;
+         v = pt->vcpu;
+-        pt->on_list = 1;
+-        list_add(&pt->list, &pt->vcpu->arch.hvm.tm_list);
+     }
+     pt_unlock(pt);
+ 
+diff --git a/xen/include/asm-x86/hvm/vcpu.h b/xen/include/asm-x86/hvm/vcpu.h
+index 8adf4555c2a..9a756964fb0 100644
+--- a/xen/include/asm-x86/hvm/vcpu.h
++++ b/xen/include/asm-x86/hvm/vcpu.h
+@@ -148,9 +148,8 @@ struct hvm_vcpu {
+     s64                 cache_tsc_offset;
+     u64                 guest_time;
+ 
+-    /* Lock and list for virtual platform timers. */
++    /* Lock for virtual platform timers. */
+     spinlock_t          tm_lock;
+-    struct list_head    tm_list;
+ 
+     bool                flag_dr_dirty;
+     bool                debug_state_latch;
+diff --git a/xen/include/asm-x86/hvm/vpt.h b/xen/include/asm-x86/hvm/vpt.h
+index 384d2e02039..323afa605e7 100644
+--- a/xen/include/asm-x86/hvm/vpt.h
++++ b/xen/include/asm-x86/hvm/vpt.h
+@@ -31,11 +31,7 @@
+ typedef void time_cb(struct vcpu *v, void *opaque);
+ 
+ struct periodic_time {
+-    struct list_head list;
+-    bool on_list;
+     bool one_shot;
+-    bool do_not_freeze;
+-    bool irq_issued;
+     bool warned_timeout_too_short;
+     bool level;
+ #define PTSRC_isa    1 /* ISA time source */
+@@ -151,11 +147,9 @@ struct pl_time {    /* platform time */
+     struct domain *domain;
+ };
+ 
+-void pt_save_timer(struct vcpu *v);
+-void pt_restore_timer(struct vcpu *v);
+-void pt_migrate(struct vcpu *v);
++void pt_freeze_time(struct vcpu *v);
++void pt_thaw_time(struct vcpu *v);
+ 
+-void pt_adjust_global_vcpu_target(struct vcpu *v);
+ #define pt_global_vcpu_target(d) \
+     (is_hvm_domain(d) && (d)->arch.hvm.i8259_target ? \
+      (d)->arch.hvm.i8259_target : \
+@@ -164,7 +158,7 @@ void pt_adjust_global_vcpu_target(struct vcpu *v);
+ void pt_may_unmask_irq(struct domain *d, struct periodic_time *vlapic_pt);
+ 
+ /* Is given periodic timer active? */
+-#define pt_active(pt) ((pt)->on_list || (pt)->pending_intr_nr)
++#define pt_active(pt) ((pt)->pending_intr_nr || timer_is_active(&(pt)->timer))
+ 
+ /*
+  * Create/destroy a periodic (or one-shot!) timer.
 -- 
 2.30.1
 
