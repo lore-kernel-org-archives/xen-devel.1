@@ -2,45 +2,45 @@ Return-Path: <SRS0=soTB=JS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_2 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2B7EC433ED
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 13:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 26FF9C433B4
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 13:40:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5C51961449
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 13:29:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5C51961449
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C3AD5613B6
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 13:39:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C3AD5613B6
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.114504.218227 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.114509.218239 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZCuT-0002YS-9D; Wed, 21 Apr 2021 13:28:53 +0000
+	id 1lZD4q-0003ZH-8v; Wed, 21 Apr 2021 13:39:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 114504.218227; Wed, 21 Apr 2021 13:28:53 +0000
+Received: by outflank-mailman (output) from mailman id 114509.218239; Wed, 21 Apr 2021 13:39:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZCuT-0002YL-5N; Wed, 21 Apr 2021 13:28:53 +0000
-Received: by outflank-mailman (input) for mailman id 114504;
- Wed, 21 Apr 2021 13:28:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lZD4q-0003ZA-5f; Wed, 21 Apr 2021 13:39:36 +0000
+Received: by outflank-mailman (input) for mailman id 114509;
+ Wed, 21 Apr 2021 13:39:34 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4TWb=JS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lZCuS-0002YG-EM
- for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 13:28:52 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1b1863d3-763c-4c70-aafc-069fd7bbfa4d;
- Wed, 21 Apr 2021 13:28:51 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 802B1B1DE;
- Wed, 21 Apr 2021 13:28:50 +0000 (UTC)
+ (envelope-from <hx242@xen.org>) id 1lZD4o-0003Z5-Ll
+ for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 13:39:34 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lZD4l-0000HB-Vk; Wed, 21 Apr 2021 13:39:31 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=freeip.amazon.com) by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lZD4l-0001Uw-CG; Wed, 21 Apr 2021 13:39:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,55 +52,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1b1863d3-763c-4c70-aafc-069fd7bbfa4d
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619011730; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=GIR3Qw5pFN4oA2sVs3On7PYoWr3xNTZWZVH65IN3yiI=;
-	b=nnjjBBdZTXe6U1o+eOpxrSH4KwAiacWFLM55lThXl+0dwh7l+agKzaS73q2inuayvTZ/ec
-	KYS+7ZB/ELiH2d/fDg4CNOXC5bm87mbnqEKxMO0udRb1iMT5w7QaT7eH0eYwnGtmh7AbT6
-	WV01QMzYcTgqPl4R6xD4TNAuRM03LQQ=
-Subject: Re: [PATCH 2/8] x86/EFI: sections may not live at VA 0 in PE binaries
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>
-References: <b327185f-db31-50c8-ec76-6ef8f2fcfdfd@suse.com>
- <5d7c61b0-8441-dccc-4917-cc8a436fd96f@suse.com>
- <YH/nzmkQMhsJE4mw@Air-de-Roger>
- <deee924d-f124-5563-727a-71ddb39403f3@suse.com>
- <YIAhHTsNlG7lQarM@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <7c9e3e9d-b47d-93f8-e1cf-22ddb246c0fb@suse.com>
-Date: Wed, 21 Apr 2021 15:28:50 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
-MIME-Version: 1.0
-In-Reply-To: <YIAhHTsNlG7lQarM@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Mime-Version:Content-Type:
+	References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID;
+	bh=JN4E55cpVCbgAq+7oLvl1m6DdRXGpvZ9z88oDuBr/9s=; b=N7O3jzTqzr1JqDnEclX8fNWiRq
+	+W6uwJmQrcFzNRqexaL5eiohwc8HaBV2mJrMfQoxRqbVGjkVbNL6nMsAgi1WKUSPWCz0n8vLdBQnh
+	bM8Eb8VMVtHKwYKRq+rCsIdEP6GskYGTlyDwhHSwmoYqD1G1WzwOHDkmhTQkQfBi1+6o=;
+Message-ID: <66d5ed414d414629e04717560f2090345c0759ac.camel@xen.org>
+Subject: Re: [PATCH v9 10/13] x86/smpboot: switch clone_mapping() to new APIs
+From: Hongyan Xia <hx242@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: jgrall@amazon.com, Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau
+ =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+Date: Wed, 21 Apr 2021 14:39:28 +0100
+In-Reply-To: <de0df262-6c83-41d2-02d6-ce56d484baa2@suse.com>
+References: <cover.1617706782.git.hongyxia@amazon.com>
+	 <d55bcecc33df5b277bc3e1dbb48826bc816d8d10.1617706782.git.hongyxia@amazon.com>
+	 <de0df262-6c83-41d2-02d6-ce56d484baa2@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 
-On 21.04.2021 14:57, Roger Pau Monné wrote:
-> So from a bit of searching I just did it seems like stab sections
-> where used during the 90s with ELF, but that this has long been
-> superseded by DWARF 2 becoming the default in the late 90s, hence I
-> think it would be fine to just remove those sections even in the ELF
-> case?
+On Tue, 2021-04-20 at 14:32 +0200, Jan Beulich wrote:
+> On 06.04.2021 13:05, Hongyan Xia wrote:
+> > @@ -742,51 +742,58 @@ static int clone_mapping(const void *ptr,
+> > root_pgentry_t *rpt)
+> >          }
+> >      }
+> >  
+> > +    UNMAP_DOMAIN_PAGE(pl1e);
+> > +    UNMAP_DOMAIN_PAGE(pl2e);
+> > +    UNMAP_DOMAIN_PAGE(pl3e);
+> 
+> Just one minor remark: A pedantic(?) compiler might warn about the
+> setting to NULL of pl3e here, when
+> 
+> >      if ( !(root_get_flags(rpt[root_table_offset(linear)]) &
+> > _PAGE_PRESENT) )
+> >      {
+> > -        pl3e = alloc_xen_pagetable();
+> > +        mfn_t l3mfn;
+> > +
+> > +        pl3e = alloc_map_clear_xen_pt(&l3mfn);
+> >          rc = -ENOMEM;
+> >          if ( !pl3e )
+> >              goto out;
+> > -        clear_page(pl3e);
+> >          l4e_write(&rpt[root_table_offset(linear)],
+> > -                  l4e_from_paddr(__pa(pl3e), __PAGE_HYPERVISOR));
+> > +                  l4e_from_mfn(l3mfn, __PAGE_HYPERVISOR));
+> >      }
+> >      else
+> > -        pl3e = l4e_to_l3e(rpt[root_table_offset(linear)]);
+> > +        pl3e = map_l3t_from_l4e(rpt[root_table_offset(linear)]);
+> 
+> ... it is guaranteed to get initialized again before any further
+> consumption. IOW strictly speaking the last of those three would
+> want to be unmap_domain_page(), just like you have ...
+> 
+> > @@ -802,6 +809,9 @@ static int clone_mapping(const void *ptr,
+> > root_pgentry_t *rpt)
+> >  
+> >      rc = 0;
+> >   out:
+> > +    unmap_domain_page(pl1e);
+> > +    unmap_domain_page(pl2e);
+> > +    unmap_domain_page(pl3e);
+> >      return rc;
+> >  }
+> 
+> ... here.
 
-Well, maybe. Even up-to-date gcc still supports -gstabs. Plus I seem
-to have a vague recollection that Andrew objected to their removal
-at some (not overly distant) point. I can't find any reference there
-though, so Andrew: Do you have any specific thoughts here?
+True. I will switch to lower case for pl3e just in case.
 
-Of course with the stabs sections gone, .comment would remain. I'm
-very firm in not wanting to leave any statements there putting
-sections at VA zero. Irrespective of .comment (to take this example)
-being listed under /DISCARD/ for PE. This would only be acceptable
-(to me) if ld would always have at least warned about such sections.
+Hongyan
 
-Jan
 
