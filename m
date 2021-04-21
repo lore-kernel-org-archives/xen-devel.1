@@ -2,46 +2,44 @@ Return-Path: <SRS0=soTB=JS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA035C433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 968E5C433B4
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:18:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9154861434
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9154861434
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 37EE66144D
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:18:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 37EE66144D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.114551.218418 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.114603.218431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDeC-0008Hc-B3; Wed, 21 Apr 2021 14:16:08 +0000
+	id 1lZDga-0000aT-1P; Wed, 21 Apr 2021 14:18:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 114551.218418; Wed, 21 Apr 2021 14:16:08 +0000
+Received: by outflank-mailman (output) from mailman id 114603.218431; Wed, 21 Apr 2021 14:18:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDeC-0008HE-3m; Wed, 21 Apr 2021 14:16:08 +0000
-Received: by outflank-mailman (input) for mailman id 114551;
- Wed, 21 Apr 2021 14:16:06 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1lZDgZ-0000aM-US; Wed, 21 Apr 2021 14:18:35 +0000
+Received: by outflank-mailman (input) for mailman id 114603;
+ Wed, 21 Apr 2021 14:18:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>) id 1lZDeA-0008CS-8N
- for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:16:06 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1lZDeA-0000zz-2C; Wed, 21 Apr 2021 14:16:06 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ua82172827c7b5a.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1lZDe9-00045m-Mc; Wed, 21 Apr 2021 14:16:06 +0000
+ (envelope-from <SRS0=4TWb=JS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lZDgZ-0000aE-8R
+ for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:18:35 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 89c86038-d41f-4c3e-9bb8-30afb418ba75;
+ Wed, 21 Apr 2021 14:18:34 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id ABC4CB4CD;
+ Wed, 21 Apr 2021 14:18:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,112 +51,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:References:In-Reply-To:Message-Id:
-	Date:Subject:Cc:To:From; bh=e2V44CgmFQW85Zs36UVR3r9TRcWz+UvEfVkPDI9D+b4=; b=E
-	qPv1kGkyBxxVonllqQdD+ZLCwMjTNDAsbuyBwr+jiT79+wbV//FOfZ6X7Ib2+lu59tPzM0Hnfk+K5
-	0sU42tfRax9K0uCPaIJpASdNO/Wc5EgYsUE128z/CWzJCEkuim4RzWX9cF1m5THp/x3vd+RBPuFsI
-	gkNdsO8aHZkUS7QM=;
-From: Hongyan Xia <hx242@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: jgrall@amazon.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v10 09/13] x86/smpboot: add exit path for clone_mapping()
-Date: Wed, 21 Apr 2021 15:15:37 +0100
-Message-Id: <8507e4918c5c310eac77ceef4b45f86e2d7745fb.1619014052.git.hongyxia@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1619014052.git.hongyxia@amazon.com>
-References: <cover.1619014052.git.hongyxia@amazon.com>
-In-Reply-To: <cover.1619014052.git.hongyxia@amazon.com>
-References: <cover.1619014052.git.hongyxia@amazon.com>
+X-Inumbo-ID: 89c86038-d41f-4c3e-9bb8-30afb418ba75
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1619014713; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/d26MLtHBgPluR/30xU7WDm4VyvrZB+0UEUOK8FBrMQ=;
+	b=PZUXF+9zIQL0NUDj7+a+2L+tpZgCdGe+PoIJaKFlUyLnMzM5LBK5lOd0Y3T+broKMY9ebm
+	24e0n76jF7fd7jrQMCgNow3OhKDH1NhpISnmjsFQGZdJD/bzm2N3BVb4wAUk+8bV85B4vI
+	yKIV+bjgfFOyD3Pq5PO33yqphVrqSGA=
+Subject: [PATCH v2 01/20] lib: move memset()
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>
+References: <3ae091ce-6f6c-3ec6-abd3-4490239a707f@suse.com>
+Message-ID: <48444e14-5c38-efc2-b9d8-2802678c0639@suse.com>
+Date: Wed, 21 Apr 2021 16:18:33 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
+MIME-Version: 1.0
+In-Reply-To: <3ae091ce-6f6c-3ec6-abd3-4490239a707f@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Wei Liu <wei.liu2@citrix.com>
+By moving the function into an archive, x86 doesn't need to announce
+anymore that is has its own implementation - symbol resolution by the
+linker will now guarantee that the generic function remains unused, and
+the forwarding to the compiler built-in gets done by the common header
+anyway.
 
-We will soon need to clean up page table mappings in the exit path.
+Allow the function to be individually linkable, discardable, and
+overridable.
 
-No functional change.
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
-
----
-Changed in v7:
-- edit commit message.
-- begin with rc = 0 and set it to -ENOMEM ahead of if().
----
- xen/arch/x86/smpboot.c | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 82c1012e892f..e90c4dfa8a88 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -696,6 +696,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
-     l3_pgentry_t *pl3e;
-     l2_pgentry_t *pl2e;
-     l1_pgentry_t *pl1e;
-+    int rc = 0;
- 
-     /*
-      * Sanity check 'linear'.  We only allow cloning from the Xen virtual
-@@ -736,7 +737,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
-             pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(linear);
-             flags = l1e_get_flags(*pl1e);
-             if ( !(flags & _PAGE_PRESENT) )
--                return 0;
-+                goto out;
-             pfn = l1e_get_pfn(*pl1e);
-         }
-     }
-@@ -744,8 +745,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
-     if ( !(root_get_flags(rpt[root_table_offset(linear)]) & _PAGE_PRESENT) )
-     {
-         pl3e = alloc_xen_pagetable();
-+        rc = -ENOMEM;
-         if ( !pl3e )
--            return -ENOMEM;
-+            goto out;
-         clear_page(pl3e);
-         l4e_write(&rpt[root_table_offset(linear)],
-                   l4e_from_paddr(__pa(pl3e), __PAGE_HYPERVISOR));
-@@ -758,8 +760,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
-     if ( !(l3e_get_flags(*pl3e) & _PAGE_PRESENT) )
-     {
-         pl2e = alloc_xen_pagetable();
-+        rc = -ENOMEM;
-         if ( !pl2e )
--            return -ENOMEM;
-+            goto out;
-         clear_page(pl2e);
-         l3e_write(pl3e, l3e_from_paddr(__pa(pl2e), __PAGE_HYPERVISOR));
-     }
-@@ -774,8 +777,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
-     if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
-     {
-         pl1e = alloc_xen_pagetable();
-+        rc = -ENOMEM;
-         if ( !pl1e )
--            return -ENOMEM;
-+            goto out;
-         clear_page(pl1e);
-         l2e_write(pl2e, l2e_from_paddr(__pa(pl1e), __PAGE_HYPERVISOR));
-     }
-@@ -796,7 +800,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
-     else
-         l1e_write(pl1e, l1e_from_pfn(pfn, flags));
- 
--    return 0;
-+    rc = 0;
-+ out:
-+    return rc;
+--- a/xen/common/string.c
++++ b/xen/common/string.c
+@@ -311,26 +311,6 @@ char *(strstr)(const char *s1, const cha
  }
+ #endif
  
- DEFINE_PER_CPU(root_pgentry_t *, root_pgt);
--- 
-2.23.4
+-#ifndef __HAVE_ARCH_MEMSET
+-/**
+- * memset - Fill a region of memory with the given value
+- * @s: Pointer to the start of the area.
+- * @c: The byte to fill the area with
+- * @count: The size of the area.
+- *
+- * Do not use memset() to access IO space, use memset_io() instead.
+- */
+-void *(memset)(void *s, int c, size_t count)
+-{
+-	char *xs = (char *) s;
+-
+-	while (count--)
+-		*xs++ = c;
+-
+-	return s;
+-}
+-#endif
+-
+ #ifndef __HAVE_ARCH_MEMCPY
+ /**
+  * memcpy - Copy one area of memory to another
+--- a/xen/include/asm-x86/string.h
++++ b/xen/include/asm-x86/string.h
+@@ -7,9 +7,6 @@
+ #define __HAVE_ARCH_MEMMOVE
+ #define memmove(d, s, n) __builtin_memmove(d, s, n)
+ 
+-#define __HAVE_ARCH_MEMSET
+-#define memset(s, c, n) __builtin_memset(s, c, n)
+-
+ #endif /* __X86_STRING_H__ */
+ /*
+  * Local variables:
+--- a/xen/lib/Makefile
++++ b/xen/lib/Makefile
+@@ -4,6 +4,7 @@ lib-y += bsearch.o
+ lib-y += ctors.o
+ lib-y += ctype.o
+ lib-y += list-sort.o
++lib-y += memset.o
+ lib-y += muldiv64.o
+ lib-y += parse-size.o
+ lib-y += rbtree.o
+--- /dev/null
++++ b/xen/lib/memset.c
+@@ -0,0 +1,33 @@
++/*
++ *  Copyright (C) 1991, 1992  Linus Torvalds
++ */
++
++#include <xen/string.h>
++
++/**
++ * memset - Fill a region of memory with the given value
++ * @s: Pointer to the start of the area.
++ * @c: The byte to fill the area with
++ * @count: The size of the area.
++ *
++ * Do not use memset() to access IO space, use memset_io() instead.
++ */
++void *(memset)(void *s, int c, size_t count)
++{
++	char *xs = (char *) s;
++
++	while (count--)
++		*xs++ = c;
++
++	return s;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 8
++ * tab-width: 8
++ * indent-tabs-mode: t
++ * End:
++ */
 
 
