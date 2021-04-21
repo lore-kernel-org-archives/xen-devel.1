@@ -2,44 +2,46 @@ Return-Path: <SRS0=soTB=JS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92B73C433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 079FAC43462
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D9F561434
+	by mail.kernel.org (Postfix) with ESMTPS id A196F6144D
 	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D9F561434
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A196F6144D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.114541.218299 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.114546.218354 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDdv-0007lk-C5; Wed, 21 Apr 2021 14:15:51 +0000
+	id 1lZDe3-0007vY-Fv; Wed, 21 Apr 2021 14:15:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 114541.218299; Wed, 21 Apr 2021 14:15:51 +0000
+Received: by outflank-mailman (output) from mailman id 114546.218354; Wed, 21 Apr 2021 14:15:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDdv-0007ld-95; Wed, 21 Apr 2021 14:15:51 +0000
-Received: by outflank-mailman (input) for mailman id 114541;
- Wed, 21 Apr 2021 14:15:50 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lZDe3-0007v4-7O; Wed, 21 Apr 2021 14:15:59 +0000
+Received: by outflank-mailman (input) for mailman id 114546;
+ Wed, 21 Apr 2021 14:15:58 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4TWb=JS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lZDdu-0007lY-Fn
- for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:15:50 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 93e77e5e-b048-4c9b-9d86-0c822b186a64;
- Wed, 21 Apr 2021 14:15:49 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id E24B6B4A7;
- Wed, 21 Apr 2021 14:15:48 +0000 (UTC)
+ (envelope-from <hx242@xen.org>) id 1lZDe2-0007tN-A4
+ for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:15:58 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lZDe2-0000xd-40; Wed, 21 Apr 2021 14:15:58 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=ua82172827c7b5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1lZDe1-00045m-NG; Wed, 21 Apr 2021 14:15:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,62 +53,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93e77e5e-b048-4c9b-9d86-0c822b186a64
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619014549; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=UesFdHn5dx/kBX6wc3Qq2EP1qW8INJTatdh3g8LHvHw=;
-	b=HWLjfOz0qE957C1CJ3Z+32Bn0e71GzUoaKFRyISEXoADWbWV5P6hFSmgxCSQbF3r6uibec
-	fQc0cMHkEL9ahk8o4ZWU7IV5ki/rdiSqlXpwaYdSl74OQoFGH067rwZJmv9HbfEjAsPFFi
-	fXvBZJ4Yf6e+9wU8FvOVvXihK54Tiic=
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 00/20] further population of xen/lib/
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>
-Message-ID: <3ae091ce-6f6c-3ec6-abd3-4490239a707f@suse.com>
-Date: Wed, 21 Apr 2021 16:15:48 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=References:In-Reply-To:References:In-Reply-To:Message-Id:
+	Date:Subject:Cc:To:From; bh=tnkJeAzYfCYJ8oxKi3mCSr+d4dZvY/hk6gXoVXZqnz8=; b=Q
+	pd9hOksLWb94srO9XVwU3VXhtEMUf1QsF8KBHqAe850KHdg4pOk6dnRZUerp3DGj1ofmenwfnBHh+
+	HjJ/dXK073TJ+yJMxWm60gKexEoX/MA8grHWjM53B9OC9GzbOZh4ZBABLKikuM8BwK1eWs20o1dMI
+	qVQj9z84UUyPtUUk=;
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: jgrall@amazon.com,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v10 04/13] x86_64/mm: introduce pl2e in paging_init
+Date: Wed, 21 Apr 2021 15:15:32 +0100
+Message-Id: <0a457a23e38ea09a7a62722b44a1a5f47f6cab3b.1619014052.git.hongyxia@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1619014052.git.hongyxia@amazon.com>
+References: <cover.1619014052.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1619014052.git.hongyxia@amazon.com>
+References: <cover.1619014052.git.hongyxia@amazon.com>
 
-This is to dissolve / move xen/common/string.c. One benefit of moving
-these functions into an archive is that we can drop some of the related
-__HAVE_ARCH_* #define-s: By living in an archive, the per-arch functions
-will preempt any loading of the respective functions (objects) from the
-archive. (Down the road we may want to move the per-arch functions into
-archives as well, at which point the per-arch archive(s) would need to
-be specified ahead of the common one(s) to the linker.)
+From: Wei Liu <wei.liu2@citrix.com>
 
-The only change in v2 is adjustment to all of the commit messages.
+We will soon map and unmap pages in paging_init(). Introduce pl2e so
+that we can use l2_ro_mpt to point to the page table itself.
 
-01: lib: move memset()
-02: lib: move memcpy()
-03: lib: move memmove()
-04: lib: move memcmp()
-05: lib: move memchr()
-06: lib: move memchr_inv()
-07: lib: move strlen()
-08: lib: move strnlen()
-09: lib: move strcmp()
-10: lib: move strncmp()
-11: lib: move strlcpy()
-12: lib: move strlcat()
-13: lib: move strchr()
-14: lib: move strrchr()
-15: lib: move strstr()
-16: lib: move strcasecmp()
-17: lib: move/rename strnicmp() to strncasecmp()
-18: lib: move strspn()
-19: lib: move strpbrk()
-20: lib: move strsep()
+No functional change.
 
-Jan
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+
+---
+Changed in v7:
+- reword commit message.
+---
+ xen/arch/x86/x86_64/mm.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index d7e67311fa69..59049bdf8e83 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -496,7 +496,7 @@ void __init paging_init(void)
+     unsigned long i, mpt_size, va;
+     unsigned int n, memflags;
+     l3_pgentry_t *l3_ro_mpt;
+-    l2_pgentry_t *l2_ro_mpt = NULL;
++    l2_pgentry_t *pl2e = NULL, *l2_ro_mpt = NULL;
+     struct page_info *l1_pg;
+ 
+     /*
+@@ -546,7 +546,7 @@ void __init paging_init(void)
+             (L2_PAGETABLE_SHIFT - 3 + PAGE_SHIFT)));
+ 
+         if ( cpu_has_page1gb &&
+-             !((unsigned long)l2_ro_mpt & ~PAGE_MASK) &&
++             !((unsigned long)pl2e & ~PAGE_MASK) &&
+              (mpt_size >> L3_PAGETABLE_SHIFT) > (i >> PAGETABLE_ORDER) )
+         {
+             unsigned int k, holes;
+@@ -606,7 +606,7 @@ void __init paging_init(void)
+             memset((void *)(RDWR_MPT_VIRT_START + (i << L2_PAGETABLE_SHIFT)),
+                    0xFF, 1UL << L2_PAGETABLE_SHIFT);
+         }
+-        if ( !((unsigned long)l2_ro_mpt & ~PAGE_MASK) )
++        if ( !((unsigned long)pl2e & ~PAGE_MASK) )
+         {
+             if ( (l2_ro_mpt = alloc_xen_pagetable()) == NULL )
+                 goto nomem;
+@@ -614,13 +614,14 @@ void __init paging_init(void)
+             l3e_write(&l3_ro_mpt[l3_table_offset(va)],
+                       l3e_from_paddr(__pa(l2_ro_mpt),
+                                      __PAGE_HYPERVISOR_RO | _PAGE_USER));
++            pl2e = l2_ro_mpt;
+             ASSERT(!l2_table_offset(va));
+         }
+         /* NB. Cannot be GLOBAL: guest user mode should not see it. */
+         if ( l1_pg )
+-            l2e_write(l2_ro_mpt, l2e_from_page(
++            l2e_write(pl2e, l2e_from_page(
+                 l1_pg, /*_PAGE_GLOBAL|*/_PAGE_PSE|_PAGE_USER|_PAGE_PRESENT));
+-        l2_ro_mpt++;
++        pl2e++;
+     }
+ #undef CNT
+ #undef MFN
+@@ -632,6 +633,7 @@ void __init paging_init(void)
+             goto nomem;
+         compat_idle_pg_table_l2 = l2_ro_mpt;
+         clear_page(l2_ro_mpt);
++        pl2e = l2_ro_mpt;
+ 
+         /* Allocate and map the compatibility mode machine-to-phys table. */
+         mpt_size = (mpt_size >> 1) + (1UL << (L2_PAGETABLE_SHIFT - 1));
+@@ -649,7 +651,7 @@ void __init paging_init(void)
+              sizeof(*compat_machine_to_phys_mapping))
+     BUILD_BUG_ON((sizeof(*frame_table) & ~sizeof(*frame_table)) % \
+                  sizeof(*compat_machine_to_phys_mapping));
+-    for ( i = 0; i < (mpt_size >> L2_PAGETABLE_SHIFT); i++, l2_ro_mpt++ )
++    for ( i = 0; i < (mpt_size >> L2_PAGETABLE_SHIFT); i++, pl2e++ )
+     {
+         memflags = MEMF_node(phys_to_nid(i <<
+             (L2_PAGETABLE_SHIFT - 2 + PAGE_SHIFT)));
+@@ -671,7 +673,7 @@ void __init paging_init(void)
+                         (i << L2_PAGETABLE_SHIFT)),
+                0xFF, 1UL << L2_PAGETABLE_SHIFT);
+         /* NB. Cannot be GLOBAL as the ptes get copied into per-VM space. */
+-        l2e_write(l2_ro_mpt, l2e_from_page(l1_pg, _PAGE_PSE|_PAGE_PRESENT));
++        l2e_write(pl2e, l2e_from_page(l1_pg, _PAGE_PSE|_PAGE_PRESENT));
+     }
+ #undef CNT
+ #undef MFN
+-- 
+2.23.4
+
 
