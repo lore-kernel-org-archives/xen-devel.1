@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9FE6C433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:22:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DBDC433ED
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:23:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C3576144B
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:22:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C3576144B
+	by mail.kernel.org (Postfix) with ESMTPS id 49BCE6144B
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:23:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49BCE6144B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.114654.218526 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.114660.218539 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDkV-0002G0-HF; Wed, 21 Apr 2021 14:22:39 +0000
+	id 1lZDkt-0002NX-UF; Wed, 21 Apr 2021 14:23:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 114654.218526; Wed, 21 Apr 2021 14:22:39 +0000
+Received: by outflank-mailman (output) from mailman id 114660.218539; Wed, 21 Apr 2021 14:23:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDkV-0002Ft-EN; Wed, 21 Apr 2021 14:22:39 +0000
-Received: by outflank-mailman (input) for mailman id 114654;
- Wed, 21 Apr 2021 14:22:38 +0000
+	id 1lZDkt-0002NQ-R8; Wed, 21 Apr 2021 14:23:03 +0000
+Received: by outflank-mailman (input) for mailman id 114660;
+ Wed, 21 Apr 2021 14:23:02 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4TWb=JS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lZDkU-0002Fm-M5
- for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:22:38 +0000
+ id 1lZDks-0002MI-Bm
+ for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:23:02 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 28696678-3e3e-4639-8fbc-4d7c7062a3d3;
- Wed, 21 Apr 2021 14:22:37 +0000 (UTC)
+ id 4347b79d-625e-44e1-b82a-e6cbfdd24b24;
+ Wed, 21 Apr 2021 14:22:57 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id F37E5B4DA;
- Wed, 21 Apr 2021 14:22:36 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id AEB12B4DA;
+ Wed, 21 Apr 2021 14:22:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 28696678-3e3e-4639-8fbc-4d7c7062a3d3
+X-Inumbo-ID: 4347b79d-625e-44e1-b82a-e6cbfdd24b24
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619014957; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1619014976; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Fb5KI+bAQ6MYv9PFZSi0Iz4GZ8NUhpIj7sV5bfwnL9o=;
-	b=eMbeGQRo/x1qjbuNC8P5EH0YE+v/PxmWrDsnwBJ3KMwsZaJbaRnk38zybDlS5m9sxmXDQj
-	52775amAI3M37xtMtsBFJ6l9YSAA4ZoM2j1hk6+fPEvMxB9wADSsBiB/BdoLiK/5pbimxc
-	/zAF63px+MJtppqvSJwKB6ldq2Mc4K8=
-Subject: [PATCH v2 08/20] lib: move strnlen()
+	bh=s2DVYdfxyAMF+b+0oBREdJVxrIb85Ue9nsEafhsVnbY=;
+	b=rmwtaRcRU2+aEdA3K40YlM7uhrDJfsU3cxMgPTX2WPN5uWwpx/Indj5hEO4GfZZgR8C3R4
+	VReTu2zhAST3Mk8l/hw4J8tOM3SvCXdtIj4oz5n6itfdRteUC90syytvOnyjQRatrA199p
+	Fi+8RWzlFtzcjXxlkAy+H3j4BZL813I=
+Subject: [PATCH v2 09/20] lib: move strcmp()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -71,8 +71,8 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
  Wei Liu <wl@xen.org>
 References: <3ae091ce-6f6c-3ec6-abd3-4490239a707f@suse.com>
-Message-ID: <74e09e4a-1a67-b616-8c56-c5dea9184871@suse.com>
-Date: Wed, 21 Apr 2021 16:22:36 +0200
+Message-ID: <6fa3ce3e-30bb-c429-caef-64a66717cb13@suse.com>
+Date: Wed, 21 Apr 2021 16:22:56 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
@@ -88,42 +88,45 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/common/string.c
 +++ b/xen/common/string.c
-@@ -184,22 +184,6 @@ char *(strrchr)(const char *s, int c)
- }
+@@ -111,25 +111,6 @@ size_t strlcat(char *dest, const char *s
+ EXPORT_SYMBOL(strlcat);
  #endif
  
--#ifndef __HAVE_ARCH_STRNLEN
+-#ifndef __HAVE_ARCH_STRCMP
 -/**
-- * strnlen - Find the length of a length-limited string
-- * @s: The string to be sized
-- * @count: The maximum number of bytes to search
+- * strcmp - Compare two strings
+- * @cs: One string
+- * @ct: Another string
 - */
--size_t strnlen(const char * s, size_t count)
+-int (strcmp)(const char *cs, const char *ct)
 -{
--	const char *sc;
+-	register signed char __res;
 -
--	for (sc = s; count-- && *sc != '\0'; ++sc)
--		/* nothing */;
--	return sc - s;
+-	while (1) {
+-		if ((__res = *cs - *ct++) != 0 || !*cs++)
+-			break;
+-	}
+-
+-	return __res;
 -}
 -#endif
 -
- #ifndef __HAVE_ARCH_STRSPN
+ #ifndef __HAVE_ARCH_STRNCMP
  /**
-  * strspn - Calculate the length of the initial substring of @s which only
+  * strncmp - Compare two length-limited strings
 --- a/xen/lib/Makefile
 +++ b/xen/lib/Makefile
-@@ -15,6 +15,7 @@ lib-y += parse-size.o
+@@ -14,6 +14,7 @@ lib-y += muldiv64.o
+ lib-y += parse-size.o
  lib-y += rbtree.o
  lib-y += sort.o
++lib-y += strcmp.o
  lib-y += strlen.o
-+lib-y += strnlen.o
+ lib-y += strnlen.o
  lib-$(CONFIG_X86) += xxhash32.o
- lib-$(CONFIG_X86) += xxhash64.o
- 
 --- /dev/null
-+++ b/xen/lib/strnlen.c
-@@ -0,0 +1,29 @@
++++ b/xen/lib/strcmp.c
+@@ -0,0 +1,32 @@
 +/*
 + *  Copyright (C) 1991, 1992  Linus Torvalds
 + */
@@ -131,17 +134,20 @@ Signed-off-by: Jan Beulich <jbeulich@suse.com>
 +#include <xen/string.h>
 +
 +/**
-+ * strnlen - Find the length of a length-limited string
-+ * @s: The string to be sized
-+ * @count: The maximum number of bytes to search
++ * strcmp - Compare two strings
++ * @cs: One string
++ * @ct: Another string
 + */
-+size_t strnlen(const char * s, size_t count)
++int (strcmp)(const char *cs, const char *ct)
 +{
-+	const char *sc;
++	register signed char __res;
 +
-+	for (sc = s; count-- && *sc != '\0'; ++sc)
-+		/* nothing */;
-+	return sc - s;
++	while (1) {
++		if ((__res = *cs - *ct++) != 0 || !*cs++)
++			break;
++	}
++
++	return __res;
 +}
 +
 +/*
