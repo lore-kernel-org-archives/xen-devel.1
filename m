@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2BC3C43470
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D66A1C433B4
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3CEAE6144B
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3CEAE6144B
+	by mail.kernel.org (Postfix) with ESMTPS id 86B1C61445
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Apr 2021 14:16:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86B1C61445
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.114544.218330 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.114548.218377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDe0-0007pm-BU; Wed, 21 Apr 2021 14:15:56 +0000
+	id 1lZDe6-000820-GB; Wed, 21 Apr 2021 14:16:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 114544.218330; Wed, 21 Apr 2021 14:15:56 +0000
+Received: by outflank-mailman (output) from mailman id 114548.218377; Wed, 21 Apr 2021 14:16:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZDe0-0007pT-3Q; Wed, 21 Apr 2021 14:15:56 +0000
-Received: by outflank-mailman (input) for mailman id 114544;
- Wed, 21 Apr 2021 14:15:55 +0000
+	id 1lZDe6-00081d-7d; Wed, 21 Apr 2021 14:16:02 +0000
+Received: by outflank-mailman (input) for mailman id 114548;
+ Wed, 21 Apr 2021 14:16:01 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>) id 1lZDdz-0007oj-7q
- for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:15:55 +0000
+ (envelope-from <hx242@xen.org>) id 1lZDe5-00080K-IF
+ for xen-devel@lists.xenproject.org; Wed, 21 Apr 2021 14:16:01 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1lZDdz-0000xN-0Y; Wed, 21 Apr 2021 14:15:55 +0000
+ id 1lZDe5-0000xw-8X; Wed, 21 Apr 2021 14:16:01 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ua82172827c7b5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1lZDdy-00045m-FC; Wed, 21 Apr 2021 14:15:54 +0000
+ id 1lZDe4-00045m-U3; Wed, 21 Apr 2021 14:16:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,10 +55,10 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:References:In-Reply-To:Message-Id:
-	Date:Subject:Cc:To:From; bh=M+SUaviRQQzVknlharqZ3Xo7csEXaAzP707OhQVzBUk=; b=O
-	++ncezD3CiYyamLzJCFSccjv3HKmeaOXOfHRETtcsK4Tyc/cra5qdCjsnqKm7ChRAhdSzyafPFQBf
-	r6kbNfD5UaNE9N/M/SgBrlQt10Nd5z4BgkGgYHh/KDjkaL/DQRW7qpgF8ckI9w0eW4q/z0Ux96ITZ
-	twsVpenGJXDroRTw=;
+	Date:Subject:Cc:To:From; bh=EZDPpIrnwQ2O27mjd2bZL/24PbG09BLeqyZDcu4x8Gc=; b=c
+	uS1oNojhUPv/uI6wzd8mnojbNgmCMsZuZhdSfL/S4PmxGEyfoClmyVUnVx8aicXCb4YkMqsQSwzKD
+	aLKiGRdxL5ZUah5EhTumBHGF8qWsxlkrwWFDYQdqYu1ZeWawMqJuer6mn5AkvMCrF5skEgeN0wa/p
+	ZVsgmmN/x6XN/9J0=;
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: jgrall@amazon.com,
@@ -66,9 +66,9 @@ Cc: jgrall@amazon.com,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v10 02/13] x86/mm: switch to new APIs in map_pages_to_xen
-Date: Wed, 21 Apr 2021 15:15:30 +0100
-Message-Id: <f8a422d4da4a93cd9b2f788c4594a1efe82bf389.1619014052.git.hongyxia@amazon.com>
+Subject: [PATCH v10 06/13] x86_64/mm: switch to new APIs in setup_m2p_table
+Date: Wed, 21 Apr 2021 15:15:34 +0100
+Message-Id: <49477e63f5b1ae4f666ae6eb1fc225677a4418fb.1619014052.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1619014052.git.hongyxia@amazon.com>
 References: <cover.1619014052.git.hongyxia@amazon.com>
@@ -77,248 +77,104 @@ References: <cover.1619014052.git.hongyxia@amazon.com>
 
 From: Wei Liu <wei.liu2@citrix.com>
 
-Page tables allocated in that function should be mapped and unmapped
-now.
-
-Take the opportunity to avoid a potential double map in
-map_pages_to_xen() by initialising pl1e to NULL and only map it if it
-was not mapped earlier.
+While doing so, avoid repetitive mapping of l2_ro_mpt by keeping it
+across loops, and only unmap and map it when crossing 1G boundaries.
 
 Signed-off-by: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 ---
-Changed in v10:
-- avoid a potential double map.
-- drop RoB due to this change.
----
- xen/arch/x86/mm.c | 64 ++++++++++++++++++++++++++++-------------------
- 1 file changed, 38 insertions(+), 26 deletions(-)
+Changed in v8:
+- re-structure if condition around l2_ro_mpt.
+- reword the commit message.
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 5944ef19dc50..8a68da26f45f 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -5215,7 +5215,7 @@ int map_pages_to_xen(
-                 }
-                 else
-                 {
--                    l2_pgentry_t *l2t = l3e_to_l2e(ol3e);
-+                    l2_pgentry_t *l2t = map_l2t_from_l3e(ol3e);
+Changed in v7:
+- avoid repetitive mapping of l2_ro_mpt.
+- edit commit message.
+- switch to alloc_map_clear_xen_pt().
+---
+ xen/arch/x86/x86_64/mm.c | 32 +++++++++++++++++++-------------
+ 1 file changed, 19 insertions(+), 13 deletions(-)
+
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 3e40d529bbf3..c625075695e0 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -402,7 +402,8 @@ static int setup_m2p_table(struct mem_hotadd_info *info)
  
-                     for ( i = 0; i < L2_PAGETABLE_ENTRIES; i++ )
-                     {
-@@ -5227,10 +5227,11 @@ int map_pages_to_xen(
-                         else
-                         {
-                             unsigned int j;
--                            const l1_pgentry_t *l1t = l2e_to_l1e(ol2e);
-+                            const l1_pgentry_t *l1t = map_l1t_from_l2e(ol2e);
+     ASSERT(l4e_get_flags(idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)])
+             & _PAGE_PRESENT);
+-    l3_ro_mpt = l4e_to_l3e(idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)]);
++    l3_ro_mpt = map_l3t_from_l4e(
++                    idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)]);
  
-                             for ( j = 0; j < L1_PAGETABLE_ENTRIES; j++ )
-                                 flush_flags(l1e_get_flags(l1t[j]));
-+                            unmap_domain_page(l1t);
-                         }
-                     }
-                     flush_area(virt, flush_flags);
-@@ -5239,9 +5240,10 @@ int map_pages_to_xen(
-                         ol2e = l2t[i];
-                         if ( (l2e_get_flags(ol2e) & _PAGE_PRESENT) &&
-                              !(l2e_get_flags(ol2e) & _PAGE_PSE) )
--                            free_xen_pagetable(l2e_to_l1e(ol2e));
-+                            free_xen_pagetable_new(l2e_get_mfn(ol2e));
-                     }
--                    free_xen_pagetable(l2t);
-+                    unmap_domain_page(l2t);
-+                    free_xen_pagetable_new(l3e_get_mfn(ol3e));
-                 }
-             }
- 
-@@ -5258,6 +5260,7 @@ int map_pages_to_xen(
-             unsigned int flush_flags =
-                 FLUSH_TLB | FLUSH_ORDER(2 * PAGETABLE_ORDER);
-             l2_pgentry_t *l2t;
-+            mfn_t l2mfn;
- 
-             /* Skip this PTE if there is no change. */
-             if ( ((l3e_get_pfn(ol3e) & ~(L2_PAGETABLE_ENTRIES *
-@@ -5279,15 +5282,17 @@ int map_pages_to_xen(
-                 continue;
-             }
- 
--            l2t = alloc_xen_pagetable();
--            if ( l2t == NULL )
-+            l2mfn = alloc_xen_pagetable_new();
-+            if ( mfn_eq(l2mfn, INVALID_MFN) )
-                 goto out;
- 
-+            l2t = map_domain_page(l2mfn);
-             for ( i = 0; i < L2_PAGETABLE_ENTRIES; i++ )
-                 l2e_write(l2t + i,
-                           l2e_from_pfn(l3e_get_pfn(ol3e) +
-                                        (i << PAGETABLE_ORDER),
-                                        l3e_get_flags(ol3e)));
-+            UNMAP_DOMAIN_PAGE(l2t);
- 
-             if ( l3e_get_flags(ol3e) & _PAGE_GLOBAL )
-                 flush_flags |= FLUSH_TLB_GLOBAL;
-@@ -5297,15 +5302,15 @@ int map_pages_to_xen(
-             if ( (l3e_get_flags(*pl3e) & _PAGE_PRESENT) &&
-                  (l3e_get_flags(*pl3e) & _PAGE_PSE) )
-             {
--                l3e_write_atomic(pl3e, l3e_from_mfn(virt_to_mfn(l2t),
--                                                    __PAGE_HYPERVISOR));
--                l2t = NULL;
-+                l3e_write_atomic(pl3e,
-+                                 l3e_from_mfn(l2mfn, __PAGE_HYPERVISOR));
-+                l2mfn = INVALID_MFN;
-             }
-             if ( locking )
-                 spin_unlock(&map_pgdir_lock);
-             flush_area(virt, flush_flags);
--            if ( l2t )
--                free_xen_pagetable(l2t);
+     smap = (info->spfn & (~((1UL << (L2_PAGETABLE_SHIFT - 3)) -1)));
+     emap = ((info->epfn + ((1UL << (L2_PAGETABLE_SHIFT - 3)) - 1 )) &
+@@ -420,6 +421,10 @@ static int setup_m2p_table(struct mem_hotadd_info *info)
+     i = smap;
+     while ( i < emap )
+     {
++        if ( (RO_MPT_VIRT_START + i * sizeof(*machine_to_phys_mapping)) &
++             ((1UL << L3_PAGETABLE_SHIFT) - 1) )
++            UNMAP_DOMAIN_PAGE(l2_ro_mpt);
 +
-+            free_xen_pagetable_new(l2mfn);
-         }
- 
-         pl2e = virt_to_xen_l2e(virt);
-@@ -5333,12 +5338,13 @@ int map_pages_to_xen(
-                 }
-                 else
-                 {
--                    l1_pgentry_t *l1t = l2e_to_l1e(ol2e);
-+                    l1_pgentry_t *l1t = map_l1t_from_l2e(ol2e);
- 
-                     for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
-                         flush_flags(l1e_get_flags(l1t[i]));
-                     flush_area(virt, flush_flags);
--                    free_xen_pagetable(l1t);
-+                    unmap_domain_page(l1t);
-+                    free_xen_pagetable_new(l2e_get_mfn(ol2e));
-                 }
-             }
- 
-@@ -5349,20 +5355,20 @@ int map_pages_to_xen(
-         }
-         else
+         switch ( m2p_mapped(i) )
          {
-+            pl1e = NULL;
-             /* Normal page mapping. */
-             if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
+         case M2P_1G_MAPPED:
+@@ -455,32 +460,31 @@ static int setup_m2p_table(struct mem_hotadd_info *info)
+ 
+             ASSERT(!(l3e_get_flags(l3_ro_mpt[l3_table_offset(va)]) &
+                   _PAGE_PSE));
+-            if ( l3e_get_flags(l3_ro_mpt[l3_table_offset(va)]) &
+-              _PAGE_PRESENT )
+-                l2_ro_mpt = l3e_to_l2e(l3_ro_mpt[l3_table_offset(va)]) +
+-                  l2_table_offset(va);
++            if ( l2_ro_mpt )
++                /* nothing */;
++            else if ( l3e_get_flags(l3_ro_mpt[l3_table_offset(va)]) &
++                      _PAGE_PRESENT )
++                l2_ro_mpt = map_l2t_from_l3e(l3_ro_mpt[l3_table_offset(va)]);
+             else
              {
-                 pl1e = virt_to_xen_l1e(virt);
-                 if ( pl1e == NULL )
-                     goto out;
--
--                UNMAP_DOMAIN_PAGE(pl1e);
-             }
-             else if ( l2e_get_flags(*pl2e) & _PAGE_PSE )
-             {
-                 unsigned int flush_flags =
-                     FLUSH_TLB | FLUSH_ORDER(PAGETABLE_ORDER);
-                 l1_pgentry_t *l1t;
-+                mfn_t l1mfn;
- 
-                 /* Skip this PTE if there is no change. */
-                 if ( (((l2e_get_pfn(*pl2e) & ~(L1_PAGETABLE_ENTRIES - 1)) +
-@@ -5382,14 +5388,16 @@ int map_pages_to_xen(
-                     goto check_l3;
-                 }
- 
--                l1t = alloc_xen_pagetable();
--                if ( l1t == NULL )
-+                l1mfn = alloc_xen_pagetable_new();
-+                if ( mfn_eq(l1mfn, INVALID_MFN) )
-                     goto out;
- 
-+                l1t = map_domain_page(l1mfn);
-                 for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
-                     l1e_write(&l1t[i],
-                               l1e_from_pfn(l2e_get_pfn(*pl2e) + i,
-                                            lNf_to_l1f(l2e_get_flags(*pl2e))));
-+                UNMAP_DOMAIN_PAGE(l1t);
- 
-                 if ( l2e_get_flags(*pl2e) & _PAGE_GLOBAL )
-                     flush_flags |= FLUSH_TLB_GLOBAL;
-@@ -5399,20 +5407,22 @@ int map_pages_to_xen(
-                 if ( (l2e_get_flags(*pl2e) & _PAGE_PRESENT) &&
-                      (l2e_get_flags(*pl2e) & _PAGE_PSE) )
-                 {
--                    l2e_write_atomic(pl2e, l2e_from_mfn(virt_to_mfn(l1t),
-+                    l2e_write_atomic(pl2e, l2e_from_mfn(l1mfn,
-                                                         __PAGE_HYPERVISOR));
--                    l1t = NULL;
-+                    l1mfn = INVALID_MFN;
-                 }
-                 if ( locking )
-                     spin_unlock(&map_pgdir_lock);
-                 flush_area(virt, flush_flags);
--                if ( l1t )
--                    free_xen_pagetable(l1t);
+-                l2_ro_mpt = alloc_xen_pagetable();
++                mfn_t l2_ro_mpt_mfn;
 +
-+                free_xen_pagetable_new(l1mfn);
-             }
- 
--            pl1e  = l2e_to_l1e(*pl2e) + l1_table_offset(virt);
-+            if ( !pl1e )
-+                pl1e  = map_l1t_from_l2e(*pl2e) + l1_table_offset(virt);
-             ol1e  = *pl1e;
-             l1e_write_atomic(pl1e, l1e_from_mfn(mfn, flags));
-+            UNMAP_DOMAIN_PAGE(pl1e);
-             if ( (l1e_get_flags(ol1e) & _PAGE_PRESENT) )
-             {
-                 unsigned int flush_flags = FLUSH_TLB | FLUSH_ORDER(0);
-@@ -5456,12 +5466,13 @@ int map_pages_to_xen(
-                     goto check_l3;
-                 }
- 
--                l1t = l2e_to_l1e(ol2e);
-+                l1t = map_l1t_from_l2e(ol2e);
-                 base_mfn = l1e_get_pfn(l1t[0]) & ~(L1_PAGETABLE_ENTRIES - 1);
-                 for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
-                     if ( (l1e_get_pfn(l1t[i]) != (base_mfn + i)) ||
-                          (l1e_get_flags(l1t[i]) != flags) )
-                         break;
-+                UNMAP_DOMAIN_PAGE(l1t);
-                 if ( i == L1_PAGETABLE_ENTRIES )
++                l2_ro_mpt = alloc_mapped_pagetable(&l2_ro_mpt_mfn);
+                 if ( !l2_ro_mpt )
                  {
-                     l2e_write_atomic(pl2e, l2e_from_pfn(base_mfn,
-@@ -5471,7 +5482,7 @@ int map_pages_to_xen(
-                     flush_area(virt - PAGE_SIZE,
-                                FLUSH_TLB_GLOBAL |
-                                FLUSH_ORDER(PAGETABLE_ORDER));
--                    free_xen_pagetable(l2e_to_l1e(ol2e));
-+                    free_xen_pagetable_new(l2e_get_mfn(ol2e));
+                     ret = -ENOMEM;
+                     goto error;
                  }
-                 else if ( locking )
-                     spin_unlock(&map_pgdir_lock);
-@@ -5504,7 +5515,7 @@ int map_pages_to_xen(
-                 continue;
+ 
+-                clear_page(l2_ro_mpt);
+                 l3e_write(&l3_ro_mpt[l3_table_offset(va)],
+-                          l3e_from_paddr(__pa(l2_ro_mpt),
+-                                         __PAGE_HYPERVISOR_RO | _PAGE_USER));
+-                l2_ro_mpt += l2_table_offset(va);
++                          l3e_from_mfn(l2_ro_mpt_mfn,
++                                       __PAGE_HYPERVISOR_RO | _PAGE_USER));
              }
  
--            l2t = l3e_to_l2e(ol3e);
-+            l2t = map_l2t_from_l3e(ol3e);
-             base_mfn = l2e_get_pfn(l2t[0]) & ~(L2_PAGETABLE_ENTRIES *
-                                               L1_PAGETABLE_ENTRIES - 1);
-             for ( i = 0; i < L2_PAGETABLE_ENTRIES; i++ )
-@@ -5512,6 +5523,7 @@ int map_pages_to_xen(
-                       (base_mfn + (i << PAGETABLE_ORDER))) ||
-                      (l2e_get_flags(l2t[i]) != l1f_to_lNf(flags)) )
-                     break;
-+            UNMAP_DOMAIN_PAGE(l2t);
-             if ( i == L2_PAGETABLE_ENTRIES )
-             {
-                 l3e_write_atomic(pl3e, l3e_from_pfn(base_mfn,
-@@ -5521,7 +5533,7 @@ int map_pages_to_xen(
-                 flush_area(virt - PAGE_SIZE,
-                            FLUSH_TLB_GLOBAL |
-                            FLUSH_ORDER(2*PAGETABLE_ORDER));
--                free_xen_pagetable(l3e_to_l2e(ol3e));
-+                free_xen_pagetable_new(l3e_get_mfn(ol3e));
-             }
-             else if ( locking )
-                 spin_unlock(&map_pgdir_lock);
+             /* NB. Cannot be GLOBAL: guest user mode should not see it. */
+-            l2e_write(l2_ro_mpt, l2e_from_mfn(mfn,
++            l2e_write(&l2_ro_mpt[l2_table_offset(va)], l2e_from_mfn(mfn,
+                    /*_PAGE_GLOBAL|*/_PAGE_PSE|_PAGE_USER|_PAGE_PRESENT));
+         }
+-        if ( !((unsigned long)l2_ro_mpt & ~PAGE_MASK) )
+-            l2_ro_mpt = NULL;
+         i += ( 1UL << (L2_PAGETABLE_SHIFT - 3));
+     }
+ #undef CNT
+@@ -488,6 +492,8 @@ static int setup_m2p_table(struct mem_hotadd_info *info)
+ 
+     ret = setup_compat_m2p_table(info);
+ error:
++    unmap_domain_page(l2_ro_mpt);
++    unmap_domain_page(l3_ro_mpt);
+     return ret;
+ }
+ 
 -- 
 2.23.4
 
