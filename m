@@ -2,45 +2,44 @@ Return-Path: <SRS0=VIWx=JT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7574FC433B4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C143C433ED
 	for <xen-devel@archiver.kernel.org>; Thu, 22 Apr 2021 15:10:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23B0561222
+	by mail.kernel.org (Postfix) with ESMTPS id 381F56141C
 	for <xen-devel@archiver.kernel.org>; Thu, 22 Apr 2021 15:10:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23B0561222
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 381F56141C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.115608.220599 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.115609.220605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZay6-0000X4-0R; Thu, 22 Apr 2021 15:10:14 +0000
+	id 1lZay6-0000XV-B7; Thu, 22 Apr 2021 15:10:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 115608.220599; Thu, 22 Apr 2021 15:10:13 +0000
+Received: by outflank-mailman (output) from mailman id 115609.220605; Thu, 22 Apr 2021 15:10:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZay5-0000Wx-TV; Thu, 22 Apr 2021 15:10:13 +0000
-Received: by outflank-mailman (input) for mailman id 115608;
+	id 1lZay6-0000XG-56; Thu, 22 Apr 2021 15:10:14 +0000
+Received: by outflank-mailman (input) for mailman id 115609;
  Thu, 22 Apr 2021 15:10:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HGUy=JT=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lZay4-0000Wn-Nu
+ id 1lZay4-0000Ws-Tj
  for xen-devel@lists.xenproject.org; Thu, 22 Apr 2021 15:10:12 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 73b6b491-ba8a-477a-93b7-e9f66a8884b2;
- Thu, 22 Apr 2021 15:10:11 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8ef3aeea-b69a-4323-9180-7bdaa8aa7ec1;
+ Thu, 22 Apr 2021 15:10:12 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id C4992B16C;
- Thu, 22 Apr 2021 15:10:10 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 63C6EB174;
+ Thu, 22 Apr 2021 15:10:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,48 +51,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73b6b491-ba8a-477a-93b7-e9f66a8884b2
+X-Inumbo-ID: 8ef3aeea-b69a-4323-9180-7bdaa8aa7ec1
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619104210; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=DE3ajipCLGOoeJxse+uDWjYBYGnyKVCVQDv9OtWAWVI=;
-	b=YlnwiUJh4StAZX+XIutv314AStIgqEqhikMDiBZkbNqgG1wcxmZslPpvM3mPjQUuOyZq7e
-	8ozA0Mrkd+QJ0dJrUEi99VaukzQmizcyv+cZxSv4fcLOcPbKJLDYF8wXH2UNengKHDlTaR
-	iJusQ+0aBJtbRK3RqPELQGNfl41Fisc=
+	t=1619104211; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=gTxz0RbWnUOZh4apGxwrsu84odP0er4fykNXzBAMpag=;
+	b=OX0bucQn5aKzgc3RTioNoOR5BErPdayoju9pA5S5pCYLyODdOwrADpSziKmUf+9lpeLHq/
+	9Mf3LUt3Pz6e3HoQaDoc3vmW9oI3MwNlLswg5N8qCQBao4KAVZC3OEBWO7GVTKg5IwH9Ia
+	GF/vmkAWug36+NLP+GZgc6yX11cDe8o=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	x86@kernel.org
+	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
 	Peter Zijlstra <peterz@infradead.org>
-Subject: [PATCH 0/3] xen: remove some checks for always present Xen features
-Date: Thu, 22 Apr 2021 17:10:04 +0200
-Message-Id: <20210422151007.2205-1-jgross@suse.com>
+Subject: [PATCH 3/3] xen: assume XENFEAT_gnttab_map_avail_bits being set for pv guests
+Date: Thu, 22 Apr 2021 17:10:07 +0200
+Message-Id: <20210422151007.2205-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210422151007.2205-1-jgross@suse.com>
+References: <20210422151007.2205-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Some features of Xen can be assumed to be always present, so add a
-central check to verify this being true and remove the other checks.
+XENFEAT_gnttab_map_avail_bits is always set in Xen 4.0 and newer.
+Remove coding assuming it might be zero.
 
-Juergen Gross (3):
-  xen: check required Xen features
-  xen: assume XENFEAT_mmu_pt_update_preserve_ad being set for pv guests
-  xen: assume XENFEAT_gnttab_map_avail_bits being set for pv guests
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/xen/gntdev.c | 36 ++----------------------------------
+ 1 file changed, 2 insertions(+), 34 deletions(-)
 
- arch/x86/xen/enlighten_pv.c | 12 ++----------
- arch/x86/xen/mmu_pv.c       |  4 ++--
- drivers/xen/features.c      | 18 ++++++++++++++++++
- drivers/xen/gntdev.c        | 36 ++----------------------------------
- 4 files changed, 24 insertions(+), 46 deletions(-)
-
+diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
+index f01d58c7a042..93818816e137 100644
+--- a/drivers/xen/gntdev.c
++++ b/drivers/xen/gntdev.c
+@@ -266,20 +266,13 @@ static int find_grant_ptes(pte_t *pte, unsigned long addr, void *data)
+ {
+ 	struct gntdev_grant_map *map = data;
+ 	unsigned int pgnr = (addr - map->vma->vm_start) >> PAGE_SHIFT;
+-	int flags = map->flags | GNTMAP_application_map | GNTMAP_contains_pte;
++	int flags = map->flags | GNTMAP_application_map | GNTMAP_contains_pte |
++		    (1 << _GNTMAP_guest_avail0);
+ 	u64 pte_maddr;
+ 
+ 	BUG_ON(pgnr >= map->count);
+ 	pte_maddr = arbitrary_virt_to_machine(pte).maddr;
+ 
+-	/*
+-	 * Set the PTE as special to force get_user_pages_fast() fall
+-	 * back to the slow path.  If this is not supported as part of
+-	 * the grant map, it will be done afterwards.
+-	 */
+-	if (xen_feature(XENFEAT_gnttab_map_avail_bits))
+-		flags |= (1 << _GNTMAP_guest_avail0);
+-
+ 	gnttab_set_map_op(&map->map_ops[pgnr], pte_maddr, flags,
+ 			  map->grants[pgnr].ref,
+ 			  map->grants[pgnr].domid);
+@@ -288,14 +281,6 @@ static int find_grant_ptes(pte_t *pte, unsigned long addr, void *data)
+ 	return 0;
+ }
+ 
+-#ifdef CONFIG_X86
+-static int set_grant_ptes_as_special(pte_t *pte, unsigned long addr, void *data)
+-{
+-	set_pte_at(current->mm, addr, pte, pte_mkspecial(*pte));
+-	return 0;
+-}
+-#endif
+-
+ int gntdev_map_grant_pages(struct gntdev_grant_map *map)
+ {
+ 	int i, err = 0;
+@@ -1053,23 +1038,6 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
+ 		err = vm_map_pages_zero(vma, map->pages, map->count);
+ 		if (err)
+ 			goto out_put_map;
+-	} else {
+-#ifdef CONFIG_X86
+-		/*
+-		 * If the PTEs were not made special by the grant map
+-		 * hypercall, do so here.
+-		 *
+-		 * This is racy since the mapping is already visible
+-		 * to userspace but userspace should be well-behaved
+-		 * enough to not touch it until the mmap() call
+-		 * returns.
+-		 */
+-		if (!xen_feature(XENFEAT_gnttab_map_avail_bits)) {
+-			apply_to_page_range(vma->vm_mm, vma->vm_start,
+-					    vma->vm_end - vma->vm_start,
+-					    set_grant_ptes_as_special, NULL);
+-		}
+-#endif
+ 	}
+ 
+ 	return 0;
 -- 
 2.26.2
 
