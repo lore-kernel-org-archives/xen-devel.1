@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92B85C43600
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66C1CC433ED
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 16:16:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F35861425
+	by mail.kernel.org (Postfix) with ESMTPS id 1B61761445
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 16:16:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F35861425
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B61761445
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.116485.222332 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.116486.222344 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZyTS-00086T-5A; Fri, 23 Apr 2021 16:16:10 +0000
+	id 1lZyTT-00088H-Dw; Fri, 23 Apr 2021 16:16:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 116485.222332; Fri, 23 Apr 2021 16:16:10 +0000
+Received: by outflank-mailman (output) from mailman id 116486.222344; Fri, 23 Apr 2021 16:16:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZyTS-00086L-27; Fri, 23 Apr 2021 16:16:10 +0000
-Received: by outflank-mailman (input) for mailman id 116485;
- Fri, 23 Apr 2021 16:16:08 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lZyTT-000889-Ad; Fri, 23 Apr 2021 16:16:11 +0000
+Received: by outflank-mailman (input) for mailman id 116486;
+ Fri, 23 Apr 2021 16:16:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c6bT=JU=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lZyTQ-00082q-GN
- for xen-devel@lists.xenproject.org; Fri, 23 Apr 2021 16:16:08 +0000
+ id 1lZyTS-00087R-K9
+ for xen-devel@lists.xenproject.org; Fri, 23 Apr 2021 16:16:10 +0000
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 40f9f8eb-a3c7-474f-bd65-2b74a9c96a92;
- Fri, 23 Apr 2021 16:16:03 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 35ced14c-ff98-4f12-9faa-725c624e5efe;
+ Fri, 23 Apr 2021 16:16:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,44 +48,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40f9f8eb-a3c7-474f-bd65-2b74a9c96a92
+X-Inumbo-ID: 35ced14c-ff98-4f12-9faa-725c624e5efe
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1619194563;
+  d=citrix.com; s=securemail; t=1619194569;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/0JVnuCD1kTyKWnL2fFlRW6M8QY2OnK/3LpLBIlE20A=;
-  b=ZD1tStB6+hgq88/ltjY/kt5ZizCrXeiA7SbENSiGpKo8zV9nVGXWQCfg
-   4VvUNlVm8krs96JVeD8ZNPwk1hN3TGPWNrDh/hDGDogAznpac0hscXzJm
-   jRDD6XSJT02k20WBVV0+FA32JUT7peET+RHYvUWLDtHe5x4ylCXhv3Wi2
-   M=;
+  bh=e0LTxQLG6A5IsUQiwdNWsSmOOkLTe8ooqtK21GVQ8t0=;
+  b=KbbgA7t4chdajQh13E9811kTq8blGUiLEmyZwhe5oITRqqR++5dWR9g8
+   VLAtiBbBYoFgWDj7Ss4ZrRFozg8lIfzFXQQvGrfw/9fgOtj56eSciRUPF
+   y4/japCsNtkwAyT6MSzZIgaMuzGe7uwCxp4Lmp1AiQHYH/ZuTI4scSnPl
+   c=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Yzwi6UsWocA/VLpaJrQbN1iu2EfYgRtpVV+2bjL8WP8UdYgsqolJJ2FwlNZlp2Yd+TrgwULUGh
- 70GJzeuNBzbNQ/bgO/Vut68y/VJLcCoXoB8Vxhyxy/+bsAIpzz7wsxP268s/QJWWeUkhiR6BBY
- fhaFUfMCC/jCZ0HCJ0NIpOuLGjYUZ8j+TT4OX91GXpNzE2HN6ISSljWJG8Bl9NriiIYjqLPt5U
- wgtQ/HY9uOE/LD8BuWF+yTV/3k4XnVaNcQVHw7a2YxjCLYEp60uivA/hnLH8d0u383+AnonV2e
- 8tg=
+IronPort-SDR: qYlh+ZA40hvYi3FXuKBxfCYHow35VphSwxelKsLG/C6xRdvct1yIlLIwiNzt7WQxkch5k22idJ
+ iMqfBy0jmvglUt7U9nqfI1d/SO1kRIol0tjcmxWhYG0gKkjcThwylWoUkUd7i8OVg9hYZSN6UT
+ jITG9HlladJSTws+m52CcUCd19KYrDvhI1lMZBVVCA4GWIrCFv9H0PNde9kxb+//iEmKkM+gNi
+ Iw1wLE2yfs3/gtUTcTAf0ESDMNnILx6D7UL1bDGBQDZ/GhLXtGot47edv6DF1CKvwcUrVk7fQL
+ veo=
 X-SBRS: 5.1
-X-MesageID: 42285499
+X-MesageID: 42285532
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:9bG+oaGQrfM37lI3pLqFOpHXdLJzesId70hD6mlYVQFVfsuEl8
- qngfQc0lvOhCwMXWw78OrsBICrSxrnlaJdy48XILukQU3aqHKlRbsSibfK7h/BP2nF9uBb3b
- p9aKQWMrfNJHVzkMqS2maFOvk6xt3vys6VrMP/61socg1wcaFn6G5Ce2OmO2l7XhNPC5Z8NL
- f03LslmxOadX4abtu2CxA+NoCum/TxmI/7ehlDPhY76WC15g+A0qLwEBSTw34lIlFy6IolmF
- KlryXJop+Nntv+4R/a2m/V4f1t6abc4+oGPuOgoIw4Lj3tjyyheYhuXaaT1QpF3N2H2RIRv/
- Tn5zsmIsRv+1PdF1vF3ifF6k3b/xsFr1/k1FOCjnPoraXCNUwHIvsEv611WF/9ySMbzbZB+Z
- MO5U21nd5rKCmFuyLH693BR3hR5zGJiEtnq8E/pThiS4cEAYUhy7A3zQduP7orOjn104wjGP
- kGNrCn2N9mNWmXaH3UpQBUsaWRd0V2Gh+HR34LsdCO3w5Xm2hkz1AZyNZ3pAZ5yK4A
+IronPort-HdrOrdr: A9a23:FzFZ56jvUfnojb/DnvvnlfflsHBQXwh13DAbvn1ZSRFFG/Gwv9
+ yynfgdyB//gCsQXnZlotybJKycWxrnmKJdy4N5B9efdSPhv3alK5wn0Jv6z1TbaknD38N+9Y
+ MlSahxD9XsEUN35PyR3CCUG8stqePpzImGnuHbpk0CcShPS4VNqzh0ERyaFEoefngiObMcGI
+ CH7sRK4xqMEE5nDfiTPXUOU+jdq9CjrvuPDSIuPBI79BKIyQqh9b+SKXOl9y0DWDBCy6pKyx
+ mmryXF4MyY0s2T+1vn+EL4q79Xn9bgzdUrPr3wtuElbg/CpyztSIBoW7iptC04rue1+D8R4a
+ XxiiZlBetfwTf8eXy0vAvM1mDboUkTwk6n83C0qz/CptH0Xz0zAcYpv/MmTjLpr3AOkfs59Y
+ Aj5RP/i7NnSSnusQ642v3zEzZtrUawqWpKq59ps1VvFbEwRZUUkZYS5ypuYfE9NRO/0q8LOs
+ 90AvrR4f5HGGnqFUzxjy1UzNugUm9bJGb+fmEy/sic0z1hlHtk1UcvxMsGgnca9J4mIqM0n9
+ j5Dg==
 X-IronPort-AV: E=Sophos;i="5.82,246,1613451600"; 
-   d="scan'208";a="42285499"
+   d="scan'208";a="42285532"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson
 	<iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 2/8] libxl: Replace QEMU's command line short-form boolean option
-Date: Fri, 23 Apr 2021 17:15:52 +0100
-Message-ID: <20210423161558.224367-3-anthony.perard@citrix.com>
+Subject: [XEN PATCH 8/8] libxl: Replace QMP command "change" by "blockdev-change-media"
+Date: Fri, 23 Apr 2021 17:15:58 +0100
+Message-ID: <20210423161558.224367-9-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210423161558.224367-1-anthony.perard@citrix.com>
 References: <20210423161558.224367-1-anthony.perard@citrix.com>
@@ -94,81 +94,54 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Short-form boolean options are deprecated in QEMU 6.0.
-Upstream commit that deprecate those: ccd3b3b8112b ("qemu-option: warn
-for short-form boolean options").
+"change" command as been removed in QEMU 6.0. We can use
+"blockdev-change-medium" instead.
+
+Using `id` with "blockdev-change-medium" requires a change to the QEMU
+command line, introduced by:
+    "libxl: Use -device for cd-rom drives"
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/light/libxl_dm.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ tools/libs/light/libxl_disk.c | 24 +++++++++++++++++++-----
+ 1 file changed, 19 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 3599a82ef01b..0a0c1ef7c62e 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -977,14 +977,14 @@ static char *dm_spice_options(libxl__gc *gc,
-     if (spice->host)
-         opt = GCSPRINTF("%s,addr=%s", opt, spice->host);
-     if (libxl_defbool_val(spice->disable_ticketing))
--        opt = GCSPRINTF("%s,disable-ticketing", opt);
-+        opt = GCSPRINTF("%s,disable-ticketing=on", opt);
-     else
-         opt = GCSPRINTF("%s,password=%s", opt, spice->passwd);
-     opt = GCSPRINTF("%s,agent-mouse=%s", opt,
-                     libxl_defbool_val(spice->agent_mouse) ? "on" : "off");
+diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
+index faabdea7a4c3..93936d0dd0f8 100644
+--- a/tools/libs/light/libxl_disk.c
++++ b/tools/libs/light/libxl_disk.c
+@@ -962,12 +962,26 @@ static void cdrom_insert_addfd_cb(libxl__egc *egc,
+     fdset = libxl__json_object_get_integer(o);
  
-     if (!libxl_defbool_val(spice->clipboard_sharing))
--        opt = GCSPRINTF("%s,disable-copy-paste", opt);
-+        opt = GCSPRINTF("%s,disable-copy-paste=on", opt);
- 
-     if (spice->image_compression)
-         opt = GCSPRINTF("%s,image-compression=%s", opt,
-@@ -1224,7 +1224,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-         flexarray_append(dm_args, "-chardev");
-         if (state->dm_monitor_fd >= 0) {
-             flexarray_append(dm_args,
--                GCSPRINTF("socket,id=libxl-cmd,fd=%d,server,nowait",
-+                GCSPRINTF("socket,id=libxl-cmd,fd=%d,server=on,wait=off",
-                           state->dm_monitor_fd));
- 
-             /*
-@@ -1237,7 +1237,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-         } else {
-             flexarray_append(dm_args,
-                              GCSPRINTF("socket,id=libxl-cmd,"
--                                       "path=%s,server,nowait",
-+                                       "path=%s,server=on,wait=off",
-                                        libxl__qemu_qmp_path(gc, guest_domid)));
-         }
- 
-@@ -1247,7 +1247,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-         flexarray_append(dm_args, "-chardev");
-         flexarray_append(dm_args,
-                          GCSPRINTF("socket,id=libxenstat-cmd,"
--                                        "path=%s/qmp-libxenstat-%d,server,nowait",
-+                                        "path=%s/qmp-libxenstat-%d,server=on,wait=off",
-                                         libxl__run_dir_path(), guest_domid));
- 
-         flexarray_append(dm_args, "-mon");
-@@ -1264,7 +1264,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-             case LIBXL_CHANNEL_CONNECTION_SOCKET:
-                 path = guest_config->channels[i].u.socket.path;
-                 chardev = GCSPRINTF("socket,id=libxl-channel%d,path=%s,"
--                                    "server,nowait", devid, path);
-+                                    "server=on,wait=off", devid, path);
-                 break;
-             default:
-                 /* We've forgotten to add the clause */
-@@ -1577,7 +1577,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-         nics[i].colo_##sock_port) {                                         \
-         flexarray_append(dm_args, "-chardev");                              \
-         flexarray_append(dm_args,                                           \
--            GCSPRINTF("socket,id=%s,host=%s,port=%s,server,nowait",         \
-+            GCSPRINTF("socket,id=%s,host=%s,port=%s,server=on,wait=off",    \
-                       nics[i].colo_##sock_id,                               \
-                       nics[i].colo_##sock_ip,                               \
-                       nics[i].colo_##sock_port));                           \
+     devid = libxl__device_disk_dev_number(disk->vdev, NULL, NULL);
+-    QMP_PARAMETERS_SPRINTF(&args, "device", "ide-%i", devid);
+-    QMP_PARAMETERS_SPRINTF(&args, "target", "/dev/fdset/%d", fdset);
+-    libxl__qmp_param_add_string(gc, &args, "arg",
+-        libxl__qemu_disk_format_string(disk->format));
+     qmp->callback = cdrom_insert_inserted;
+-    rc = libxl__ev_qmp_send(egc, qmp, "change", args);
++
++    /* "change" is deprecated since QEMU 2.5 and the `device` parameter for
++     * for "blockdev-change-medium" is deprecated in QEMU 2.8.
++     * But `id` is only available in 2.8 we'll start using the new command
++     * with `id` with QEMU 2.8.
++     */
++    if (libxl__qmp_ev_qemu_compare_version(qmp, 2, 8, 0) >= 0) {
++        QMP_PARAMETERS_SPRINTF(&args, "id", "ide-%i", devid);
++        QMP_PARAMETERS_SPRINTF(&args, "filename", "/dev/fdset/%d", fdset);
++        libxl__qmp_param_add_string(gc, &args, "format",
++            libxl__qemu_disk_format_string(disk->format));
++        rc = libxl__ev_qmp_send(egc, qmp, "blockdev-change-medium", args);
++    } else {
++        QMP_PARAMETERS_SPRINTF(&args, "device", "ide-%i", devid);
++        QMP_PARAMETERS_SPRINTF(&args, "target", "/dev/fdset/%d", fdset);
++        libxl__qmp_param_add_string(gc, &args, "arg",
++            libxl__qemu_disk_format_string(disk->format));
++        rc = libxl__ev_qmp_send(egc, qmp, "change", args);
++    }
+ out:
+     if (rc)
+         cdrom_insert_done(egc, cis, rc); /* must be last */
 -- 
 Anthony PERARD
 
