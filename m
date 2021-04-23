@@ -2,44 +2,45 @@ Return-Path: <SRS0=Kz/T=JU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97DB0C433ED
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 08:05:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55D03C433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 08:05:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 38D6561261
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 08:05:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 38D6561261
+	by mail.kernel.org (Postfix) with ESMTPS id AB0AF61409
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 08:05:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AB0AF61409
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.115945.221264 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.115949.221276 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZqoI-0000YF-76; Fri, 23 Apr 2021 08:05:10 +0000
+	id 1lZqol-0000em-FS; Fri, 23 Apr 2021 08:05:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 115945.221264; Fri, 23 Apr 2021 08:05:10 +0000
+Received: by outflank-mailman (output) from mailman id 115949.221276; Fri, 23 Apr 2021 08:05:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZqoI-0000Y8-44; Fri, 23 Apr 2021 08:05:10 +0000
-Received: by outflank-mailman (input) for mailman id 115945;
- Fri, 23 Apr 2021 08:05:08 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lZqol-0000ef-CQ; Fri, 23 Apr 2021 08:05:39 +0000
+Received: by outflank-mailman (input) for mailman id 115949;
+ Fri, 23 Apr 2021 08:05:37 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=hwNy=JU=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lZqoG-0000Y0-Gl
- for xen-devel@lists.xenproject.org; Fri, 23 Apr 2021 08:05:08 +0000
+ id 1lZqoj-0000e9-Pp
+ for xen-devel@lists.xenproject.org; Fri, 23 Apr 2021 08:05:37 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5e9cb5cc-3f81-4dbd-af0f-71608ae29bd6;
- Fri, 23 Apr 2021 08:05:07 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c8590789-caad-471b-9e61-efb3a5acab07;
+ Fri, 23 Apr 2021 08:05:35 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0B169AD69;
- Fri, 23 Apr 2021 08:05:07 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 1F13AB080;
+ Fri, 23 Apr 2021 08:05:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,73 +52,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e9cb5cc-3f81-4dbd-af0f-71608ae29bd6
+X-Inumbo-ID: c8590789-caad-471b-9e61-efb3a5acab07
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619165107; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1619165135; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Z+6YpCPUV4ccd1rioanDGpfvVaD+DlEua0cKwyIl52g=;
-	b=TA7Yq1Hn4cE2DOaP28V7/XAb1qMmM7nsIhwhQ/kft3tvbcmON7MCUV4emKDxmVxa++32a/
-	FMQBoGf6MtG8EqrAMzYPO3NuSfOc75Sg1vMJ98xByRwbjdY1BlF9weP7cm/YVGGm8XiLE/
-	FceuMtq8CurZg1AYCOZ9GEd+iGjREWk=
-Subject: Re: [PATCH 3/3] xen-pciback: simplify vpci's find hook
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Konrad Wilk <konrad.wilk@oracle.com>
-References: <d2ac85d9-0ad1-71a3-fa3b-b99340b3204d@suse.com>
- <158273a2-d1b9-3545-b25d-affca867376c@suse.com>
+	bh=EfBBQQctPna0dlqKuDq5uBTkMpfxT/mlGGC3KyebVT4=;
+	b=TAIEFU5klJzwxgc3kY6CJAMLhbsFxeg/QD2VFyFfi6tS+zmupVxZJ1bxlfgP5Ccav5AOk8
+	Ce87htVdXnE3CxS/rWxHxNrmGl7ayTnWDGk7XMv6OPGBM4aeGZeYCNuo1yntholBTWOSyC
+	ReADnXbC/7+3DfKGHadifsYV6fapbfo=
+Subject: Re: [PATCH] xen: Remove support for PV ACPI cpu/memory hotplug
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, rafael@kernel.org, linux-kernel@vger.kernel.org
+References: <1618336344-3162-1-git-send-email-boris.ostrovsky@oracle.com>
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <5109252b-aa53-2377-13ec-8d3cfe14b351@suse.com>
-Date: Fri, 23 Apr 2021 10:05:06 +0200
+Message-ID: <bc87249e-9ca7-8746-0acb-c74290a49910@suse.com>
+Date: Fri, 23 Apr 2021 10:05:34 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
 MIME-Version: 1.0
-In-Reply-To: <158273a2-d1b9-3545-b25d-affca867376c@suse.com>
+In-Reply-To: <1618336344-3162-1-git-send-email-boris.ostrovsky@oracle.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="sRpLhjY5h1UDMH378KPGCyI5mrUOHu19N"
+ boundary="yG0mwjc9rgIW6S3MiUtiVtkkHx2HQ8IAr"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---sRpLhjY5h1UDMH378KPGCyI5mrUOHu19N
-Content-Type: multipart/mixed; boundary="fec24xKKxCNCNTnY62Tl5mp76g1Z0QHWX";
+--yG0mwjc9rgIW6S3MiUtiVtkkHx2HQ8IAr
+Content-Type: multipart/mixed; boundary="d4HwASjpKkwit4PlOUN3W8KDfy35cc1HZ";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Konrad Wilk <konrad.wilk@oracle.com>
-Message-ID: <5109252b-aa53-2377-13ec-8d3cfe14b351@suse.com>
-Subject: Re: [PATCH 3/3] xen-pciback: simplify vpci's find hook
-References: <d2ac85d9-0ad1-71a3-fa3b-b99340b3204d@suse.com>
- <158273a2-d1b9-3545-b25d-affca867376c@suse.com>
-In-Reply-To: <158273a2-d1b9-3545-b25d-affca867376c@suse.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, rafael@kernel.org, linux-kernel@vger.kernel.org
+Message-ID: <bc87249e-9ca7-8746-0acb-c74290a49910@suse.com>
+Subject: Re: [PATCH] xen: Remove support for PV ACPI cpu/memory hotplug
+References: <1618336344-3162-1-git-send-email-boris.ostrovsky@oracle.com>
+In-Reply-To: <1618336344-3162-1-git-send-email-boris.ostrovsky@oracle.com>
 
---fec24xKKxCNCNTnY62Tl5mp76g1Z0QHWX
+--d4HwASjpKkwit4PlOUN3W8KDfy35cc1HZ
 Content-Type: multipart/mixed;
- boundary="------------2C9285B894172A88EAE8A0F7"
+ boundary="------------BD6622B2ED14218016AADC87"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------2C9285B894172A88EAE8A0F7
+--------------BD6622B2ED14218016AADC87
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 07.04.21 16:37, Jan Beulich wrote:
-> There's no point in comparing SBDF - we can simply compare the struct
-> pci_dev pointers. If they weren't the same for a given device, we'd hav=
-e
-> bigger problems from having stored a stale pointer.
+On 13.04.21 19:52, Boris Ostrovsky wrote:
+> Commit 76fc253723ad ("xen/acpi-stub: Disable it b/c the acpi_processor_=
+add
+> is no longer called.") declared as BROKEN support for Xen ACPI stub (wh=
+ich
+> is required for xen-acpi-{cpu|memory}-hotplug) and suggested that this
+> is temporary and will be soon fixed. This was in March 2013.
 >=20
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Further, commit cfafae940381 ("xen: rename dom0_op to platform_op")
+> renamed an interface used by memory hotplug code without updating that
+> code (as it was BROKEN and therefore not compiled). This was
+> in November 2015 and has gone unnoticed for over 5 year.
+>=20
+> It is now clear that this code is of no interest to anyone and therefor=
+e
+> should be removed.
+>=20
+> Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 
 Pushed to xen/tip.git for-linus-5.13
 
 
 Juergen
 
---------------2C9285B894172A88EAE8A0F7
+
+--------------BD6622B2ED14218016AADC87
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -208,25 +217,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------2C9285B894172A88EAE8A0F7--
+--------------BD6622B2ED14218016AADC87--
 
---fec24xKKxCNCNTnY62Tl5mp76g1Z0QHWX--
+--d4HwASjpKkwit4PlOUN3W8KDfy35cc1HZ--
 
---sRpLhjY5h1UDMH378KPGCyI5mrUOHu19N
+--yG0mwjc9rgIW6S3MiUtiVtkkHx2HQ8IAr
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmCCf7IFAwAAAAAACgkQsN6d1ii/Ey+S
-MggAmToJjKAEubOQ94UxGwDfSrwt9/Gxw7lGdPUZMhOGWiVIOMx7RFnqxQ2ZsMhy+Ir4fWC1sJ2J
-7GDjN0rzq9A9DAk3LOpvpa1zI8cI8OSenoRyamR7Fuj04qWgIpfzUz7CFaSWQOhwNaObCvdGPPXD
-aWEtV4O/V44WfmprPs1LZtT9FbDZcfQUsn6H14Ze3jnJUtJH+upGi+paSWK3bOugypjJozSKHcsX
-qLz2cw3/iKbuwWR+nzEY36ixEsKfZ0PyDmrb/D/L+46wwck8zgf5MI+KFJKTmzk/VV1zaH1q5MAy
-4qq1CuCXyYBlpTNElgsDMHWS43hPbLrM+l6yswY01g==
-=SxVw
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmCCf84FAwAAAAAACgkQsN6d1ii/Ey/t
+dQf+O3mDv5rAdo78PrFclGElyubJL6oAfCO5AnCluJCIg6MAa1QZa66gnRYfZwWPK5gah2oi07og
+Q1RyWY9ZEY+NaK5q67cnpjuNbGwXEgRHzJL5XZ/Ap17UCTe0mYRY0zUIWXhJcntsw/QTIJk3TqoW
+sKzpemMm62Ye+RpRYjDcBE7OA7a72En1jQZk2fGfiCK+PsARa02RvJ6N1joeLmQpaoapPUrXNWLG
+bgkB+2OfF/gSDNJaquG4wQXRhxj/Hz3ex5MpDdyNGRGqAaEDsO5C0BI7pQ+0JcnsrlNwIupzCDzY
+jSrDogDqLHOY69L2gLz641gfCqhL+/pR2jczaBjRHw==
+=X13G
 -----END PGP SIGNATURE-----
 
---sRpLhjY5h1UDMH378KPGCyI5mrUOHu19N--
+--yG0mwjc9rgIW6S3MiUtiVtkkHx2HQ8IAr--
 
