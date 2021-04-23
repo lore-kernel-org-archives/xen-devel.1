@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66C1CC433ED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E043C43470
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 16:16:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B61761445
+	by mail.kernel.org (Postfix) with ESMTPS id 2F3B061460
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Apr 2021 16:16:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B61761445
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F3B061460
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.116486.222344 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.116484.222320 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZyTT-00088H-Dw; Fri, 23 Apr 2021 16:16:11 +0000
+	id 1lZyTN-00084D-Tu; Fri, 23 Apr 2021 16:16:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 116486.222344; Fri, 23 Apr 2021 16:16:11 +0000
+Received: by outflank-mailman (output) from mailman id 116484.222320; Fri, 23 Apr 2021 16:16:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lZyTT-000889-Ad; Fri, 23 Apr 2021 16:16:11 +0000
-Received: by outflank-mailman (input) for mailman id 116486;
- Fri, 23 Apr 2021 16:16:10 +0000
+	id 1lZyTN-000846-Qp; Fri, 23 Apr 2021 16:16:05 +0000
+Received: by outflank-mailman (input) for mailman id 116484;
+ Fri, 23 Apr 2021 16:16:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c6bT=JU=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lZyTS-00087R-K9
- for xen-devel@lists.xenproject.org; Fri, 23 Apr 2021 16:16:10 +0000
+ id 1lZyTM-00082v-3w
+ for xen-devel@lists.xenproject.org; Fri, 23 Apr 2021 16:16:04 +0000
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 35ced14c-ff98-4f12-9faa-725c624e5efe;
- Fri, 23 Apr 2021 16:16:09 +0000 (UTC)
+ id c77d37c6-6766-4ce5-bcd9-5c044828a554;
+ Fri, 23 Apr 2021 16:16:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,45 +48,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35ced14c-ff98-4f12-9faa-725c624e5efe
+X-Inumbo-ID: c77d37c6-6766-4ce5-bcd9-5c044828a554
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1619194569;
+  d=citrix.com; s=securemail; t=1619194562;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=e0LTxQLG6A5IsUQiwdNWsSmOOkLTe8ooqtK21GVQ8t0=;
-  b=KbbgA7t4chdajQh13E9811kTq8blGUiLEmyZwhe5oITRqqR++5dWR9g8
-   VLAtiBbBYoFgWDj7Ss4ZrRFozg8lIfzFXQQvGrfw/9fgOtj56eSciRUPF
-   y4/japCsNtkwAyT6MSzZIgaMuzGe7uwCxp4Lmp1AiQHYH/ZuTI4scSnPl
-   c=;
+  bh=FsT8vvDcYT5FDetvhVj8ocsH//yAfXcxWD8SI48U9Oc=;
+  b=af1Kn1zU4PT+EiHdKiX0DwSAZi/kxmMa1Fivg58kIWrrDEUCaDWJraHp
+   88367FZNymuR5ICSlnWqGhjk36IJu08cOdxo1qwFad/GeDbxzl0rfTXO3
+   1o2ts7TwkqgBnQlTneHZQLbkYdNyquhUodEbGGVbdgrX22wGz42my82Uj
+   8=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: qYlh+ZA40hvYi3FXuKBxfCYHow35VphSwxelKsLG/C6xRdvct1yIlLIwiNzt7WQxkch5k22idJ
- iMqfBy0jmvglUt7U9nqfI1d/SO1kRIol0tjcmxWhYG0gKkjcThwylWoUkUd7i8OVg9hYZSN6UT
- jITG9HlladJSTws+m52CcUCd19KYrDvhI1lMZBVVCA4GWIrCFv9H0PNde9kxb+//iEmKkM+gNi
- Iw1wLE2yfs3/gtUTcTAf0ESDMNnILx6D7UL1bDGBQDZ/GhLXtGot47edv6DF1CKvwcUrVk7fQL
- veo=
+IronPort-SDR: 5C9moXt+/ueguOQHh65Yi4Tfu06nqZm3bcHQVpj5Ncf4XWyMMHKjrUviqsmf8bwgAWCVn5AIl4
+ eE2VMEC1qKiouq5OLGpX1hS+nRIiJRGsiRETlVN3J7Qttid5fcZ70zBZVpcLuUNmOpjcJXHwR6
+ SCRaQRx8tdy+/fJ24ddxFBYDtyOK8Q4oRuxs0KhJY49jEaFeh4NowqpM9iO1Gw6sIFqtd/O9uV
+ C/xeyuGz5knKhTrGFGz2DP71dTVmykYhMUUqlfk4c6v1y8TrFaFlUpWJJjmtJRyQwXkt8TSm+A
+ 7VM=
 X-SBRS: 5.1
-X-MesageID: 42285532
+X-MesageID: 42285498
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:FzFZ56jvUfnojb/DnvvnlfflsHBQXwh13DAbvn1ZSRFFG/Gwv9
- yynfgdyB//gCsQXnZlotybJKycWxrnmKJdy4N5B9efdSPhv3alK5wn0Jv6z1TbaknD38N+9Y
- MlSahxD9XsEUN35PyR3CCUG8stqePpzImGnuHbpk0CcShPS4VNqzh0ERyaFEoefngiObMcGI
- CH7sRK4xqMEE5nDfiTPXUOU+jdq9CjrvuPDSIuPBI79BKIyQqh9b+SKXOl9y0DWDBCy6pKyx
- mmryXF4MyY0s2T+1vn+EL4q79Xn9bgzdUrPr3wtuElbg/CpyztSIBoW7iptC04rue1+D8R4a
- XxiiZlBetfwTf8eXy0vAvM1mDboUkTwk6n83C0qz/CptH0Xz0zAcYpv/MmTjLpr3AOkfs59Y
- Aj5RP/i7NnSSnusQ642v3zEzZtrUawqWpKq59ps1VvFbEwRZUUkZYS5ypuYfE9NRO/0q8LOs
- 90AvrR4f5HGGnqFUzxjy1UzNugUm9bJGb+fmEy/sic0z1hlHtk1UcvxMsGgnca9J4mIqM0n9
- j5Dg==
+IronPort-HdrOrdr: A9a23:qwi5hK5NlCPQPmYwiwPXwE3XdLJzesId70hD6mlaY3VuHPCwvc
+ aogfgdyFvIkz4XQn4tgpStP6OHTHPa+/dOkO8sFJ2lWxTrv3btEZF64eLZskXdMgD36+I178
+ ddWodkDtmYNzRHpOb8pDK1CtMxhOSAmZrY4Nv261dIYUVUZ7p77wF/YzzrdXFeYAVdH5I2GN
+ 69y6N81lmdUE8aZMi6GXUJNtKrz7ag+a7OWhIICwUq7wODl1qTmdrHOiOVwwsEVHd3yaoimF
+ K16jDR3LmpsP2w13bntlP70pI+orTc4+oGIMSNj8QPQw+c6DqVWA==
 X-IronPort-AV: E=Sophos;i="5.82,246,1613451600"; 
-   d="scan'208";a="42285532"
+   d="scan'208";a="42285498"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson
 	<iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 8/8] libxl: Replace QMP command "change" by "blockdev-change-media"
-Date: Fri, 23 Apr 2021 17:15:58 +0100
-Message-ID: <20210423161558.224367-9-anthony.perard@citrix.com>
+Subject: [XEN PATCH 1/8] libxl: Replace deprecated QMP command by "query-cpus-fast"
+Date: Fri, 23 Apr 2021 17:15:51 +0100
+Message-ID: <20210423161558.224367-2-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210423161558.224367-1-anthony.perard@citrix.com>
 References: <20210423161558.224367-1-anthony.perard@citrix.com>
@@ -94,54 +90,198 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-"change" command as been removed in QEMU 6.0. We can use
-"blockdev-change-medium" instead.
+We use the deprecated QMP command "query-cpus" which is removed in the
+QEMU 6.0 release. There's a replacement which is "query-cpus-fast",
+and have been available since QEMU 2.12 (April 2018).
 
-Using `id` with "blockdev-change-medium" requires a change to the QEMU
-command line, introduced by:
-    "libxl: Use -device for cd-rom drives"
+This patch try the new command first and when the command isn't
+available, it fall back to the deprecated one so libxl still works
+with older QEMU versions.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/light/libxl_disk.c | 24 +++++++++++++++++++-----
- 1 file changed, 19 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
-index faabdea7a4c3..93936d0dd0f8 100644
---- a/tools/libs/light/libxl_disk.c
-+++ b/tools/libs/light/libxl_disk.c
-@@ -962,12 +962,26 @@ static void cdrom_insert_addfd_cb(libxl__egc *egc,
-     fdset = libxl__json_object_get_integer(o);
+Notes:
+    This is v2 of '[XEN PATCH for-4.15] libxl: Replace deprecated QMP
+    command by "query-cpus-fast"' as the patch never made it into the
+    release.
+    
+    changes:
+    - introduce a fallback for when the new command isn't available.
+
+ tools/libs/light/libxl_domain.c | 103 ++++++++++++++++++++++++++++++--
+ 1 file changed, 98 insertions(+), 5 deletions(-)
+
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 5d4ec9071160..8c003aa7cb04 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -1740,6 +1740,35 @@ static int libxl__set_vcpuonline_xenstore(libxl__gc *gc, uint32_t domid,
+     return rc;
+ }
  
-     devid = libxl__device_disk_dev_number(disk->vdev, NULL, NULL);
--    QMP_PARAMETERS_SPRINTF(&args, "device", "ide-%i", devid);
--    QMP_PARAMETERS_SPRINTF(&args, "target", "/dev/fdset/%d", fdset);
--    libxl__qmp_param_add_string(gc, &args, "arg",
--        libxl__qemu_disk_format_string(disk->format));
-     qmp->callback = cdrom_insert_inserted;
--    rc = libxl__ev_qmp_send(egc, qmp, "change", args);
++static int qmp_parse_query_cpus_fast(libxl__gc *gc,
++                                     libxl_domid domid,
++                                     const libxl__json_object *response,
++                                     libxl_bitmap *const map)
++{
++    int i;
++    const libxl__json_object *cpu;
 +
-+    /* "change" is deprecated since QEMU 2.5 and the `device` parameter for
-+     * for "blockdev-change-medium" is deprecated in QEMU 2.8.
-+     * But `id` is only available in 2.8 we'll start using the new command
-+     * with `id` with QEMU 2.8.
++    libxl_bitmap_set_none(map);
++    /* Parse response to QMP command "query-cpus-fast":
++     * [ { 'cpu-index': 'int',...} ]
 +     */
-+    if (libxl__qmp_ev_qemu_compare_version(qmp, 2, 8, 0) >= 0) {
-+        QMP_PARAMETERS_SPRINTF(&args, "id", "ide-%i", devid);
-+        QMP_PARAMETERS_SPRINTF(&args, "filename", "/dev/fdset/%d", fdset);
-+        libxl__qmp_param_add_string(gc, &args, "format",
-+            libxl__qemu_disk_format_string(disk->format));
-+        rc = libxl__ev_qmp_send(egc, qmp, "blockdev-change-medium", args);
-+    } else {
-+        QMP_PARAMETERS_SPRINTF(&args, "device", "ide-%i", devid);
-+        QMP_PARAMETERS_SPRINTF(&args, "target", "/dev/fdset/%d", fdset);
-+        libxl__qmp_param_add_string(gc, &args, "arg",
-+            libxl__qemu_disk_format_string(disk->format));
-+        rc = libxl__ev_qmp_send(egc, qmp, "change", args);
++    for (i = 0; (cpu = libxl__json_array_get(response, i)); i++) {
++        unsigned int cpu_index;
++        const libxl__json_object *o;
++
++        o = libxl__json_map_get("cpu-index", cpu, JSON_INTEGER);
++        if (!o) {
++            LOGD(ERROR, domid, "Failed to retrieve CPU index.");
++            return ERROR_QEMU_API;
++        }
++
++        cpu_index = libxl__json_object_get_integer(o);
++        libxl_bitmap_set(map, cpu_index);
 +    }
- out:
-     if (rc)
-         cdrom_insert_done(egc, cis, rc); /* must be last */
++
++    return 0;
++}
++
+ static int qmp_parse_query_cpus(libxl__gc *gc,
+                                 libxl_domid domid,
+                                 const libxl__json_object *response,
+@@ -1778,8 +1807,13 @@ typedef struct set_vcpuonline_state {
+     int index; /* for loop on final_map */
+ } set_vcpuonline_state;
+ 
++static void set_vcpuonline_qmp_cpus_fast_queried(libxl__egc *,
++    libxl__ev_qmp *, const libxl__json_object *, int rc);
+ static void set_vcpuonline_qmp_cpus_queried(libxl__egc *,
+     libxl__ev_qmp *, const libxl__json_object *, int rc);
++static void set_vcpuonline_qmp_query_cpus_parse(libxl__egc *,
++    libxl__ev_qmp *qmp, const libxl__json_object *,
++    bool query_cpus_fast, int rc);
+ static void set_vcpuonline_qmp_add_cpu(libxl__egc *,
+     libxl__ev_qmp *, const libxl__json_object *response, int rc);
+ static void set_vcpuonline_timeout(libxl__egc *egc,
+@@ -1840,8 +1874,8 @@ int libxl_set_vcpuonline(libxl_ctx *ctx, uint32_t domid,
+                                              set_vcpuonline_timeout,
+                                              LIBXL_QMP_CMD_TIMEOUT * 1000);
+             if (rc) goto out;
+-            qmp->callback = set_vcpuonline_qmp_cpus_queried;
+-            rc = libxl__ev_qmp_send(egc, qmp, "query-cpus", NULL);
++            qmp->callback = set_vcpuonline_qmp_cpus_fast_queried;
++            rc = libxl__ev_qmp_send(egc, qmp, "query-cpus-fast", NULL);
+             if (rc) goto out;
+             return AO_INPROGRESS;
+         default:
+@@ -1860,11 +1894,39 @@ int libxl_set_vcpuonline(libxl_ctx *ctx, uint32_t domid,
+     return AO_INPROGRESS;
+ }
+ 
++static void set_vcpuonline_qmp_cpus_fast_queried(libxl__egc *egc,
++    libxl__ev_qmp *qmp, const libxl__json_object *response, int rc)
++{
++    EGC_GC;
++    set_vcpuonline_state *svos = CONTAINER_OF(qmp, *svos, qmp);
++
++    if (rc == ERROR_QMP_COMMAND_NOT_FOUND) {
++        /* Try again, we probably talking to a QEMU older than 2.12 */
++        qmp->callback = set_vcpuonline_qmp_cpus_queried;
++        rc = libxl__ev_qmp_send(egc, qmp, "query-cpus", NULL);
++        if (rc) goto out;
++        return;
++    }
++
++out:
++    set_vcpuonline_qmp_query_cpus_parse(egc, qmp, response, true, rc);
++}
++
+ static void set_vcpuonline_qmp_cpus_queried(libxl__egc *egc,
+     libxl__ev_qmp *qmp, const libxl__json_object *response, int rc)
+ {
+     EGC_GC;
+     set_vcpuonline_state *svos = CONTAINER_OF(qmp, *svos, qmp);
++
++    set_vcpuonline_qmp_query_cpus_parse(egc, qmp, response, false, rc);
++}
++
++static void set_vcpuonline_qmp_query_cpus_parse(libxl__egc *egc,
++    libxl__ev_qmp *qmp, const libxl__json_object *response,
++    bool query_cpus_fast, int rc)
++{
++    EGC_GC;
++    set_vcpuonline_state *svos = CONTAINER_OF(qmp, *svos, qmp);
+     int i;
+     libxl_bitmap current_map;
+ 
+@@ -1876,7 +1938,11 @@ static void set_vcpuonline_qmp_cpus_queried(libxl__egc *egc,
+     if (rc) goto out;
+ 
+     libxl_bitmap_alloc(CTX, &current_map, svos->info.vcpu_max_id + 1);
+-    rc = qmp_parse_query_cpus(gc, qmp->domid, response, &current_map);
++    if (query_cpus_fast) {
++        rc = qmp_parse_query_cpus_fast(gc, qmp->domid, response, &current_map);
++    } else {
++        rc = qmp_parse_query_cpus(gc, qmp->domid, response, &current_map);
++    }
+     if (rc) goto out;
+ 
+     libxl_bitmap_copy_alloc(CTX, final_map, svos->cpumap);
+@@ -2121,6 +2187,9 @@ typedef struct {
+ 
+ static void retrieve_domain_configuration_lock_acquired(
+     libxl__egc *egc, libxl__ev_slowlock *, int rc);
++static void retrieve_domain_configuration_cpu_fast_queried(
++    libxl__egc *egc, libxl__ev_qmp *qmp,
++    const libxl__json_object *response, int rc);
+ static void retrieve_domain_configuration_cpu_queried(
+     libxl__egc *egc, libxl__ev_qmp *qmp,
+     const libxl__json_object *response, int rc);
+@@ -2198,8 +2267,8 @@ static void retrieve_domain_configuration_lock_acquired(
+         if (rc) goto out;
+         libxl_bitmap_alloc(CTX, &rdcs->qemuu_cpus,
+                            d_config->b_info.max_vcpus);
+-        rdcs->qmp.callback = retrieve_domain_configuration_cpu_queried;
+-        rc = libxl__ev_qmp_send(egc, &rdcs->qmp, "query-cpus", NULL);
++        rdcs->qmp.callback = retrieve_domain_configuration_cpu_fast_queried;
++        rc = libxl__ev_qmp_send(egc, &rdcs->qmp, "query-cpus-fast", NULL);
+         if (rc) goto out;
+         has_callback = true;
+     }
+@@ -2210,6 +2279,30 @@ static void retrieve_domain_configuration_lock_acquired(
+         retrieve_domain_configuration_end(egc, rdcs, rc);
+ }
+ 
++static void retrieve_domain_configuration_cpu_fast_queried(
++    libxl__egc *egc, libxl__ev_qmp *qmp,
++    const libxl__json_object *response, int rc)
++{
++    EGC_GC;
++    retrieve_domain_configuration_state *rdcs =
++        CONTAINER_OF(qmp, *rdcs, qmp);
++
++    if (rc == ERROR_QMP_COMMAND_NOT_FOUND) {
++        /* Try again, we probably talking to a QEMU older than 2.12 */
++        rdcs->qmp.callback = retrieve_domain_configuration_cpu_queried;
++        rc = libxl__ev_qmp_send(egc, &rdcs->qmp, "query-cpus", NULL);
++        if (rc) goto out;
++        return;
++    }
++
++    if (rc) goto out;
++
++    rc = qmp_parse_query_cpus_fast(gc, qmp->domid, response, &rdcs->qemuu_cpus);
++
++out:
++    retrieve_domain_configuration_end(egc, rdcs, rc);
++}
++
+ static void retrieve_domain_configuration_cpu_queried(
+     libxl__egc *egc, libxl__ev_qmp *qmp,
+     const libxl__json_object *response, int rc)
 -- 
 Anthony PERARD
 
