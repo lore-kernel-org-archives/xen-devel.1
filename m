@@ -2,46 +2,46 @@ Return-Path: <SRS0=rjis=JW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBFC9C433B4
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AB9DC433ED
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9EB7E61260
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9EB7E61260
+	by mail.kernel.org (Postfix) with ESMTPS id 0C6DB6124B
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C6DB6124B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117300.223095 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117307.223179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal88-0001QW-KA; Sun, 25 Apr 2021 20:13:24 +0000
+	id 1lal8J-0001iY-Cr; Sun, 25 Apr 2021 20:13:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117300.223095; Sun, 25 Apr 2021 20:13:24 +0000
+Received: by outflank-mailman (output) from mailman id 117307.223179; Sun, 25 Apr 2021 20:13:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal88-0001QP-H7; Sun, 25 Apr 2021 20:13:24 +0000
-Received: by outflank-mailman (input) for mailman id 117300;
- Sun, 25 Apr 2021 20:13:23 +0000
+	id 1lal8J-0001iD-4n; Sun, 25 Apr 2021 20:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 117307;
+ Sun, 25 Apr 2021 20:13:33 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lal87-0001QF-BU
- for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:23 +0000
+ (envelope-from <julien@xen.org>) id 1lal8H-0001eY-IA
+ for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:33 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal86-0000nv-CE; Sun, 25 Apr 2021 20:13:22 +0000
+ id 1lal8H-0000ow-92; Sun, 25 Apr 2021 20:13:33 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal86-0005m7-0Y; Sun, 25 Apr 2021 20:13:22 +0000
+ id 1lal8H-0005m7-0N; Sun, 25 Apr 2021 20:13:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,96 +54,90 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=X15PJsfA8ZZe0WJ5gNkzuQ01mz4/pctOMdwEQyJoq0Y=; b=aki4KyKmRPMzQcN3N664q1pYhD
-	VFTvNwGwcH5NDAaoSfIoOX7a3w5naRxH6VpTQlXTZrvpODwI6KALAvbnX9pN+rUvHY/fGka9pMnlo
-	LfzN1dbaGBsRsREAT4kOMZIk8AcysTciftxSL0sCPKwO0b4lZ63OKFn6Kh/D6G1gAUSw=;
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=BjS7PbV9YIvothNxojvfyxpwJGXVh+HIjQYc5MW8oEY=; b=5HLK2dyh1X7dCPn8EtxAG9MCg
+	Bsj2Nv2kLQNEpk6BmPmNgnoREbSJ8Ey6254znwK/FVhZvMRRVfzwomElROXT24J4u34Avbssq+C0b
+	NIrGT3Cae/S5MRKrG9thBQjGB4MOjLU4O0CUmtuFf5eWGgBQMki4bjoQEFLQw+9MHNe/c=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Wei.Chen@arm.com,
 	Henry.Wang@arm.com,
 	Penny.Zheng@arm.com,
 	Bertrand.Marquis@arm.com,
-	Julien Grall <jgrall@amazon.com>,
+	Julien Grall <julien.grall@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Hongian Xia <hongyax@amazon.com>
-Subject: [PATCH RFCv2 00/15] xen/arm: mm: Remove open-coding mappings
-Date: Sun, 25 Apr 2021 21:13:03 +0100
-Message-Id: <20210425201318.15447-1-julien@xen.org>
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH RFCv2 07/15] xen/arm: mm: Re-implement early_fdt_map() using map_pages_to_xen()
+Date: Sun, 25 Apr 2021 21:13:10 +0100
+Message-Id: <20210425201318.15447-8-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210425201318.15447-1-julien@xen.org>
+References: <20210425201318.15447-1-julien@xen.org>
 
-From: Julien Grall <jgrall@amazon.com>
+From: Julien Grall <julien.grall@arm.com>
 
-Hi all,
+Now that map_pages_to_xen() has been extended to support 2MB mappings,
+we can replace the create_mappings() calls by map_pages_to_xen() calls.
 
-This series was originally sent as "xen/arm: mm: Add limited support
-for superpages" [1] and finally has grown enough to remove most of
-the open-coding mappings in the boot code.
+The mapping can also be marked read-only has Xen as no business to
+modify the host Device Tree.
 
-This will help to:
-    1) Get better compliance with the Arm memory model
-    2) Pave the way to support other page size (64KB, 16KB)
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-This is not fully finished (only boot tested on Arm64) but I sent it
-early to get more testing and also unblock some of the on-going work
-to support static memory allocation for dom0less (see [2]).
+---
+    Changes in v2:
+        - Add my AWS signed-off-by
+        - Fix typo in the commit message
+---
+ xen/arch/arm/mm.c | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
 
-There are still a few TODOs:
-    - Add support for setting the contiguous bits
-    - Remove 1GB alignment in setup_xenheap_mappings()
-    - Decide whether we want to provide a common PMAP
-
-Cheers,
-
-[1] <20201119190751.22345-1-julien@xen.org>
-[2] <PA4PR08MB6253F49C13ED56811BA5B64E92479@PA4PR08MB6253.eurprd08.prod.outlook.com>
-
-Julien Grall (14):
-  xen/arm: lpae: Rename LPAE_ENTRIES_MASK_GS to LPAE_ENTRY_MASK_GS
-  xen/arm: lpae: Use the generic helpers to defined the Xen PT helpers
-  xen/arm: p2m: Replace level_{orders, masks} arrays with LEVEL_{ORDER,
-    MASK}
-  xen/arm: mm: Allow other mapping size in xen_pt_update_entry()
-  xen/arm: mm: Avoid flushing the TLBs when mapping are inserted
-  xen/arm: mm: Don't open-code Xen PT update in remove_early_mappings()
-  xen/arm: mm: Re-implement early_fdt_map() using map_pages_to_xen()
-  xen/arm32: mm: Check if the virtual address is shared before updating
-    it
-  xen/arm32: mm: Re-implement setup_xenheap_mappings() using
-    map_pages_to_xen()
-  xen/arm: mm: Allocate xen page tables in domheap rather than xenheap
-  xen/arm: mm: Allow page-table allocation from the boot allocator
-  xen/arm: mm: Use the PMAP helpers in xen_{,un}map_table()
-  xen/arm: mm: Rework setup_xenheap_mappings()
-  xen/arm: mm: Re-implement setup_frame_table_mappings() with
-    map_pages_to_xen()
-
-Wei Liu (1):
-  xen/arm: add Persistent Map (PMAP) infrastructure
-
- xen/arch/arm/Makefile        |   1 +
- xen/arch/arm/mm.c            | 362 +++++++++++++++++------------------
- xen/arch/arm/p2m.c           |  16 +-
- xen/arch/arm/pmap.c          | 101 ++++++++++
- xen/arch/arm/setup.c         |  10 +-
- xen/include/asm-arm/config.h |   6 +
- xen/include/asm-arm/lpae.h   |  83 ++++----
- xen/include/asm-arm/page.h   |   4 +
- xen/include/asm-arm/pmap.h   |  10 +
- 9 files changed, 356 insertions(+), 237 deletions(-)
- create mode 100644 xen/arch/arm/pmap.c
- create mode 100644 xen/include/asm-arm/pmap.h
-
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 2cbfbe25240e..8fac24d80086 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -558,6 +558,7 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+     paddr_t offset;
+     void *fdt_virt;
+     uint32_t size;
++    int rc;
+ 
+     /*
+      * Check whether the physical FDT address is set and meets the minimum
+@@ -573,8 +574,12 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+     /* The FDT is mapped using 2MB superpage */
+     BUILD_BUG_ON(BOOT_FDT_VIRT_START % SZ_2M);
+ 
+-    create_mappings(xen_second, BOOT_FDT_VIRT_START, paddr_to_pfn(base_paddr),
+-                    SZ_2M >> PAGE_SHIFT, SZ_2M);
++    rc = map_pages_to_xen(BOOT_FDT_VIRT_START, maddr_to_mfn(base_paddr),
++                          SZ_2M >> PAGE_SHIFT,
++                          PAGE_HYPERVISOR_RO | _PAGE_BLOCK);
++    if ( rc )
++        panic("Unable to map the device-tree.\n");
++
+ 
+     offset = fdt_paddr % SECOND_SIZE;
+     fdt_virt = (void *)BOOT_FDT_VIRT_START + offset;
+@@ -588,9 +593,12 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+ 
+     if ( (offset + size) > SZ_2M )
+     {
+-        create_mappings(xen_second, BOOT_FDT_VIRT_START + SZ_2M,
+-                        paddr_to_pfn(base_paddr + SZ_2M),
+-                        SZ_2M >> PAGE_SHIFT, SZ_2M);
++        rc = map_pages_to_xen(BOOT_FDT_VIRT_START + SZ_2M,
++                              maddr_to_mfn(base_paddr + SZ_2M),
++                              SZ_2M >> PAGE_SHIFT,
++                              PAGE_HYPERVISOR_RO | _PAGE_BLOCK);
++        if ( rc )
++            panic("Unable to map the device-tree\n");
+     }
+ 
+     return fdt_virt;
 -- 
 2.17.1
 
