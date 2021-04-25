@@ -2,46 +2,48 @@ Return-Path: <SRS0=rjis=JW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C473C433ED
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 15:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBE27C433ED
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 15:44:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B102610C8
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 15:12:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B102610C8
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9AA0361168
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 15:44:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AA0361168
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117236.223047 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117253.223059 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lagQD-0007Lm-Bs; Sun, 25 Apr 2021 15:11:45 +0000
+	id 1lagvm-0001m0-Po; Sun, 25 Apr 2021 15:44:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117236.223047; Sun, 25 Apr 2021 15:11:45 +0000
+Received: by outflank-mailman (output) from mailman id 117253.223059; Sun, 25 Apr 2021 15:44:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lagQD-0007Lf-8q; Sun, 25 Apr 2021 15:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 117236;
- Sun, 25 Apr 2021 15:11:44 +0000
+	id 1lagvm-0001lt-Mr; Sun, 25 Apr 2021 15:44:22 +0000
+Received: by outflank-mailman (input) for mailman id 117253;
+ Sun, 25 Apr 2021 15:44:21 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lagQC-0007La-19
- for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 15:11:44 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lagvl-0001ll-AZ; Sun, 25 Apr 2021 15:44:21 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lagQA-0003kz-9C; Sun, 25 Apr 2021 15:11:42 +0000
-Received: from 54-240-197-239.amazon.com ([54.240.197.239]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lagQA-0007Hi-2d; Sun, 25 Apr 2021 15:11:42 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lagvl-0004Fb-3u; Sun, 25 Apr 2021 15:44:21 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lagvk-0005NG-Pi; Sun, 25 Apr 2021 15:44:20 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lagvk-0003dT-PC; Sun, 25 Apr 2021 15:44:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,61 +55,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=7C6eqqB4u8svDNxQWrKNWGDuzYXTR3XnATeXIg04FiY=; b=xhyri9Shxt5jirzCtdBPoop/fC
-	1r7njQsj2OcZiWCiME8zT3ILppbsBugYNLiHad3nYUn7/dGHbqZaFqSpWtmtZ5G0VunExgbQfOvZd
-	vTcgAdtumc+sutip7i1iUf9fKxdXvZPd4sBxjGMCONeJGBXxLljitVowjXXAExq0d0ac=;
-Subject: Re: [PATCH RFC 4/6] xen/arm: mm: Allow other mapping size in
- xen_pt_update_entry()
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com,
- Julien Grall <julien.grall@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20201119190751.22345-1-julien@xen.org>
- <20201119190751.22345-5-julien@xen.org>
- <alpine.DEB.2.21.2011191706420.7979@sstabellini-ThinkPad-T480s>
- <1ba4afef-7efa-6d1a-5929-ec2652dbbb21@xen.org>
- <alpine.DEB.2.21.2011231409050.7979@sstabellini-ThinkPad-T480s>
- <eff4cb40-ac90-940c-aa97-16a5021386d3@xen.org>
- <alpine.DEB.2.21.2011231612330.7979@sstabellini-ThinkPad-T480s>
- <d02e29cb-a4f1-4ebe-a04f-67b4a159a193@xen.org>
- <alpine.DEB.2.21.2011301359290.1100@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <7aa25179-2926-d829-3fac-41aeda61dd4f@xen.org>
-Date: Sun, 25 Apr 2021 16:11:40 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=2yyXF2KQjxpCQGHkNVr/fuH8hPgSLwE2S4P+u6P8Ij4=; b=wbCZIK3U0fXjjKt/2Mhqd5oi50
+	+bwTmcdPh1RrV74pVqdOOzu9u08I+DDTecByTQatSJtyUf26Jzqsi0g7Q8vSouZF2fAOaxC5h6NGC
+	K2BZjNjV5M377oWBvZKNQDNM/Kwjhd1DLB6dRFzjwMRGSWmB7jRxr+9yLwAQ31FHQhCI=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-161449-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2011301359290.1100@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Subject: [xen-unstable-smoke test] 161449: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=ab392969ea178ef9a4b499f92c3fb5bd2e4e13ed
+X-Osstest-Versions-That:
+    xen=bea65a212c0581520203b6ad0d07615693f42f73
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sun, 25 Apr 2021 15:44:20 +0000
 
-Hi Stefano,
+flight 161449 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/161449/
 
-On 30/11/2020 22:05, Stefano Stabellini wrote:
-> On Sat, 28 Nov 2020, Julien Grall wrote:
->> If you take the ``if`` alone, yes they are alignment check. But if you take
->> the overall code, then it will just compute which mapping size can be used.
->>
->> However, what I am disputing here is "rely" because there are no assumption
->> made on the alignment in the loop (we are able to cater any size). In fact,
->> the fact mfn and vfn should be aligned to the mapping size is a requirement
->> from the hardware and not the implementation.
-> 
-> OK, maybe the "rely" gives a bad impression. What about:
-> 
-> This loop relies on mfn, vfn, and nr_mfn, to be all superpage aligned
-> (mfn and vfn have to be architecturally), and it uses `mask' to check
-> for that.
- >
-> Feel free to reword it differently if you have a better idea.
-I have used your new wording proposal.
+Failures :-/ but no regressions.
 
-Cheers,
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
--- 
-Julien Grall
+version targeted for testing:
+ xen                  ab392969ea178ef9a4b499f92c3fb5bd2e4e13ed
+baseline version:
+ xen                  bea65a212c0581520203b6ad0d07615693f42f73
+
+Last test of basis   161413  2021-04-23 18:00:31 Z    1 days
+Testing same since   161449  2021-04-25 13:01:33 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Julien Grall <jgrall@amazon.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   bea65a212c..ab392969ea  ab392969ea178ef9a4b499f92c3fb5bd2e4e13ed -> smoke
 
