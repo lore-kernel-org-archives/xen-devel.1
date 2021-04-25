@@ -2,46 +2,46 @@ Return-Path: <SRS0=rjis=JW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D0ABC43461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C013C43462
 	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 13E4F611ED
+	by mail.kernel.org (Postfix) with ESMTPS id 62C38611ED
 	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13E4F611ED
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62C38611ED
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117306.223167 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117308.223187 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8H-0001ex-S2; Sun, 25 Apr 2021 20:13:33 +0000
+	id 1lal8K-0001kE-7t; Sun, 25 Apr 2021 20:13:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117306.223167; Sun, 25 Apr 2021 20:13:33 +0000
+Received: by outflank-mailman (output) from mailman id 117308.223187; Sun, 25 Apr 2021 20:13:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8H-0001el-NM; Sun, 25 Apr 2021 20:13:33 +0000
-Received: by outflank-mailman (input) for mailman id 117306;
- Sun, 25 Apr 2021 20:13:32 +0000
+	id 1lal8J-0001ji-Ln; Sun, 25 Apr 2021 20:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 117308;
+ Sun, 25 Apr 2021 20:13:35 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lal8G-0001ci-6i
- for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:32 +0000
+ (envelope-from <julien@xen.org>) id 1lal8J-0001i6-0m
+ for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:35 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal8F-0000om-LM; Sun, 25 Apr 2021 20:13:31 +0000
+ id 1lal8I-0000p4-Ou; Sun, 25 Apr 2021 20:13:34 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal8F-0005m7-Cs; Sun, 25 Apr 2021 20:13:31 +0000
+ id 1lal8I-0005m7-GR; Sun, 25 Apr 2021 20:13:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,69 +55,93 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=siVUWwfApP96aB3lihKwJZ2TVvy/coY05i6ribyQkaQ=; b=TFO4q8j8JOAgGjBBHSZTLC9+u
-	iMlWqMTBkWFPT36hYWWc45g8Fn5uSG78rEvAy+6H21I/Zi1kc+RNJ+JDddxtmVz/WrZPfWXlehK++
-	RbjszRSe7SLY8uM6Tn4Vd5WPAUN7qbDigjXmUG8LihxVjqOpSclHnKLMMocAWn9vFeTmM=;
+	 bh=NkFXrdGqH4EPmzou9mWkeqYkQCSaITClqSn4Be5r/zI=; b=F12nHvd4PDHg3Ann1gEV5mT4c
+	Uyt5mKxNT0Cx4WZY9me+oL5J3D/WXAT5LwiE0CtuebDNHBPCDkY/xwx5/hvekdxLkyxdp96WPtOYW
+	ShK7euMpoS4UkgoRNayfziVBZWzNdioOmRY1Zq5PGedJHx43r8QbptSw+5TBrdshL7AiM=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Wei.Chen@arm.com,
 	Henry.Wang@arm.com,
 	Penny.Zheng@arm.com,
 	Bertrand.Marquis@arm.com,
-	Julien Grall <julien.grall@arm.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH RFCv2 06/15] xen/arm: mm: Don't open-code Xen PT update in remove_early_mappings()
-Date: Sun, 25 Apr 2021 21:13:09 +0100
-Message-Id: <20210425201318.15447-7-julien@xen.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH RFCv2 08/15] xen/arm32: mm: Check if the virtual address is shared before updating it
+Date: Sun, 25 Apr 2021 21:13:11 +0100
+Message-Id: <20210425201318.15447-9-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210425201318.15447-1-julien@xen.org>
 References: <20210425201318.15447-1-julien@xen.org>
 
-From: Julien Grall <julien.grall@arm.com>
+From: Julien Grall <jgrall@amazon.com>
 
-Now that xen_pt_update_entry() is able to deal with different mapping
-size, we can replace the open-coding of the page-tables update by a call
-to modify_xen_mappings().
+Only the first 2GB of the virtual address space is shared between all
+the page-tables on Arm32.
 
-As the function is not meant to fail, a BUG_ON() is added to check the
-return.
+There is a long outstanding TODO in xen_pt_update() stating that the
+function is can only work with shared mapping. Nobody has ever called
+the function with private mapping, however as we add more callers
+there is a risk to mess things up.
 
-Signed-off-by: Julien Grall <julien.grall@arm.com>
+Introduce a new define to mark the ened of the shared mappings and use
+it in xen_pt_update() to verify if the address is correct.
+
+Note that on Arm64, all the mappings are shared. Some compiler may
+complain about an always true check, so the new define is not introduced
+for arm64 and the code is protected with an #ifdef.
+
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
     Changes in v2:
-        - Stay consistent with how function name are used in the commit
-        message
-        - Add my AWS signed-off-by
+        - New patch
 ---
- xen/arch/arm/mm.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ xen/arch/arm/mm.c            | 11 +++++++++--
+ xen/include/asm-arm/config.h |  4 ++++
+ 2 files changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 1fe52b3af722..2cbfbe25240e 100644
+index 8fac24d80086..5c17cafff847 100644
 --- a/xen/arch/arm/mm.c
 +++ b/xen/arch/arm/mm.c
-@@ -598,11 +598,11 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+@@ -1275,11 +1275,18 @@ static int xen_pt_update(unsigned long virt,
+      * For arm32, page-tables are different on each CPUs. Yet, they share
+      * some common mappings. It is assumed that only common mappings
+      * will be modified with this function.
+-     *
+-     * XXX: Add a check.
+      */
+     const mfn_t root = virt_to_mfn(THIS_CPU_PGTABLE);
  
- void __init remove_early_mappings(void)
- {
--    lpae_t pte = {0};
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START), pte);
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START + SZ_2M),
--              pte);
--    flush_xen_tlb_range_va(BOOT_FDT_VIRT_START, BOOT_FDT_SLOT_SIZE);
-+    int rc;
++#ifdef SHARED_VIRT_END
++    if ( virt > SHARED_VIRT_END ||
++         (SHARED_VIRT_END - virt) < nr_mfns )
++    {
++        mm_printk("Trying to map outside of the shared area.\n");
++        return -EINVAL;
++    }
++#endif
 +
-+    rc = modify_xen_mappings(BOOT_FDT_VIRT_START, BOOT_FDT_VIRT_END,
-+                             _PAGE_BLOCK);
-+    BUG_ON(rc);
- }
+     /*
+      * The hardware was configured to forbid mapping both writeable and
+      * executable.
+diff --git a/xen/include/asm-arm/config.h b/xen/include/asm-arm/config.h
+index c7b77912013e..85d4a510ce8a 100644
+--- a/xen/include/asm-arm/config.h
++++ b/xen/include/asm-arm/config.h
+@@ -137,6 +137,10 @@
  
- /*
+ #define XENHEAP_VIRT_START     _AT(vaddr_t,0x40000000)
+ #define XENHEAP_VIRT_END       _AT(vaddr_t,0x7fffffff)
++
++/* The first 2GB is always shared between all the page-tables. */
++#define SHARED_VIRT_END        _AT(vaddr_t, 0x7fffffff)
++
+ #define DOMHEAP_VIRT_START     _AT(vaddr_t,0x80000000)
+ #define DOMHEAP_VIRT_END       _AT(vaddr_t,0xffffffff)
+ 
 -- 
 2.17.1
 
