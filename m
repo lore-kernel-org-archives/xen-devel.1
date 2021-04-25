@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CD55C43460
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DECCAC433ED
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 39D6261288
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 39D6261288
+	by mail.kernel.org (Postfix) with ESMTPS id 9C68561285
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C68561285
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117303.223130 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117305.223152 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8C-0001Uw-G0; Sun, 25 Apr 2021 20:13:28 +0000
+	id 1lal8F-0001aF-IZ; Sun, 25 Apr 2021 20:13:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117303.223130; Sun, 25 Apr 2021 20:13:28 +0000
+Received: by outflank-mailman (output) from mailman id 117305.223152; Sun, 25 Apr 2021 20:13:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8C-0001Uo-Cj; Sun, 25 Apr 2021 20:13:28 +0000
-Received: by outflank-mailman (input) for mailman id 117303;
- Sun, 25 Apr 2021 20:13:27 +0000
+	id 1lal8F-0001Zz-8n; Sun, 25 Apr 2021 20:13:31 +0000
+Received: by outflank-mailman (input) for mailman id 117305;
+ Sun, 25 Apr 2021 20:13:30 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lal8B-0001Tv-5i
- for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:27 +0000
+ (envelope-from <julien@xen.org>) id 1lal8E-0001Y5-Am
+ for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:30 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal8A-0000oJ-Pf; Sun, 25 Apr 2021 20:13:26 +0000
+ id 1lal8E-0000od-1A; Sun, 25 Apr 2021 20:13:30 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal8A-0005m7-HE; Sun, 25 Apr 2021 20:13:26 +0000
+ id 1lal8D-0005m7-Ow; Sun, 25 Apr 2021 20:13:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=jWWczyhwx5+vonIhKTnyI8FTuC3mdInSZ1tXL3+0cBg=; b=Ib3Ub05fstFLx8pqFUj2tpx+l
-	trTAMuc4XOpZ5Ge3426W5ETmcqn+9nMYRWdSyFl1hqYnuX24sOs/5xujbt/yU6hFC4Lf/3TBv1XyX
-	O/RHbp+NCSWqVgNXGMv5ufJ5fIS+JQAYXDDVPXNLyDD3J+BCASCvzJ22oiGOXTiS813jc=;
+	 bh=qdn1le94TFR9RGBuVbMK3tl4UOk0qVZcjP09VJjmTGA=; b=kSyw3dlhX1A7P2j0w/l4hybr8
+	Ud7zQLDGt7Mn8i2uLPIulsJTxh+GPmAfBOJ+yF7305IdEUH38vps72MRsC2vx5R8CCCdDVKY8IHQD
+	9hFVBq73P0B1YneXKbnrgn/waWH4v8dVnu9t/ZXBysrReYhDJFh8i2DS0ckzPd97eWLYM=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Wei.Chen@arm.com,
@@ -68,89 +68,76 @@ Cc: Wei.Chen@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH RFCv2 03/15] xen/arm: p2m: Replace level_{orders, masks} arrays with LEVEL_{ORDER, MASK}
-Date: Sun, 25 Apr 2021 21:13:06 +0100
-Message-Id: <20210425201318.15447-4-julien@xen.org>
+Subject: [PATCH RFCv2 05/15] xen/arm: mm: Avoid flushing the TLBs when mapping are inserted
+Date: Sun, 25 Apr 2021 21:13:08 +0100
+Message-Id: <20210425201318.15447-6-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210425201318.15447-1-julien@xen.org>
 References: <20210425201318.15447-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-The array level_orders and level_masks can be replaced with the
-recently introduced macros LEVEL_ORDER and LEVEL_MASK.
+Currently, the function xen_pt_update() will flush the TLBs even when
+the mappings are inserted. This is a bit wasteful because we don't
+allow mapping replacement. Even if we were, the flush would need to
+happen earlier because mapping replacement should use Break-Before-Make
+when updating the entry.
+
+A single call to xen_pt_update() can perform a single action. IOW, it
+is not possible to, for instance, mix inserting and removing mappings.
+Therefore, we can use `flags` to determine what action is performed.
+
+This change will be particularly help to limit the impact of switching
+boot time mapping to use xen_pt_update().
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
+
     Changes in v2:
         - New patch
 ---
- xen/arch/arm/p2m.c | 16 +++++-----------
- 1 file changed, 5 insertions(+), 11 deletions(-)
+ xen/arch/arm/mm.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-index ac5031262061..1b04c3534439 100644
---- a/xen/arch/arm/p2m.c
-+++ b/xen/arch/arm/p2m.c
-@@ -36,12 +36,6 @@ static unsigned int __read_mostly max_vmid = MAX_VMID_8_BIT;
-  */
- unsigned int __read_mostly p2m_ipa_bits = 64;
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 8ebb36899314..1fe52b3af722 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -1101,7 +1101,13 @@ static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int level,
+         /* We should be here with a valid MFN. */
+         ASSERT(!mfn_eq(mfn, INVALID_MFN));
  
--/* Helpers to lookup the properties of each level */
--static const paddr_t level_masks[] =
--    { ZEROETH_MASK, FIRST_MASK, SECOND_MASK, THIRD_MASK };
--static const uint8_t level_orders[] =
--    { ZEROETH_ORDER, FIRST_ORDER, SECOND_ORDER, THIRD_ORDER };
--
- static mfn_t __read_mostly empty_root_mfn;
- 
- static uint64_t generate_vttbr(uint16_t vmid, mfn_t root_mfn)
-@@ -232,7 +226,7 @@ static lpae_t *p2m_get_root_pointer(struct p2m_domain *p2m,
-      * we can't use (P2M_ROOT_LEVEL - 1) because the root level might be
-      * 0. Yet we still want to check if all the unused bits are zeroed.
-      */
--    root_table = gfn_x(gfn) >> (level_orders[P2M_ROOT_LEVEL] + LPAE_SHIFT);
-+    root_table = gfn_x(gfn) >> (LEVEL_ORDER(P2M_ROOT_LEVEL) + LPAE_SHIFT);
-     if ( root_table >= P2M_ROOT_PAGES )
-         return NULL;
- 
-@@ -378,7 +372,7 @@ mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
-     if ( gfn_x(gfn) > gfn_x(p2m->max_mapped_gfn) )
-     {
-         for ( level = P2M_ROOT_LEVEL; level < 3; level++ )
--            if ( (gfn_x(gfn) & (level_masks[level] >> PAGE_SHIFT)) >
-+            if ( (gfn_x(gfn) & (LEVEL_MASK(level) >> PAGE_SHIFT)) >
-                  gfn_x(p2m->max_mapped_gfn) )
-                 break;
- 
-@@ -421,7 +415,7 @@ mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
-          * The entry may point to a superpage. Find the MFN associated
-          * to the GFN.
-          */
--        mfn = mfn_add(mfn, gfn_x(gfn) & ((1UL << level_orders[level]) - 1));
-+        mfn = mfn_add(mfn, gfn_x(gfn) & ((1UL << LEVEL_ORDER(level)) - 1));
- 
-         if ( valid )
-             *valid = lpae_is_valid(entry);
-@@ -432,7 +426,7 @@ out_unmap:
- 
- out:
-     if ( page_order )
--        *page_order = level_orders[level];
-+        *page_order = LEVEL_ORDER(level);
- 
-     return mfn;
- }
-@@ -806,7 +800,7 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, lpae_t *entry,
-     /* Convenience aliases */
-     mfn_t mfn = lpae_get_mfn(*entry);
-     unsigned int next_level = level + 1;
--    unsigned int level_order = level_orders[next_level];
-+    unsigned int level_order = LEVEL_ORDER(next_level);
+-        /* We don't allow replacing any valid entry. */
++        /*
++         * We don't allow replacing any valid entry.
++         *
++         * Note that the function xen_pt_update() relies on this
++         * assumption and will skip the TLB flush. The function will need
++         * to be updated if the check is relaxed.
++         */
+         if ( lpae_is_valid(entry) )
+         {
+             if ( lpae_is_mapping(entry, level) )
+@@ -1333,11 +1339,16 @@ static int xen_pt_update(unsigned long virt,
+     }
  
      /*
-      * This should only be called with target != level and the entry is
+-     * Flush the TLBs even in case of failure because we may have
++     * The TLBs flush can be safely skipped when a mapping is inserted
++     * as we don't allow mapping replacement (see xen_pt_check_entry()).
++     *
++     * For all the other cases, the TLBs will be flushed unconditionally
++     * even if the mapping are failed. This is because we may have
+      * partially modified the PT. This will prevent any unexpected
+      * behavior afterwards.
+      */
+-    flush_xen_tlb_range_va(virt, PAGE_SIZE * nr_mfns);
++    if ( !(flags & _PAGE_PRESENT) || mfn_eq(mfn, INVALID_MFN) )
++        flush_xen_tlb_range_va(virt, PAGE_SIZE * nr_mfns);
+ 
+     spin_unlock(&xen_pt_lock);
+ 
 -- 
 2.17.1
 
