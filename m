@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DECCAC433ED
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3551C43461
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9C68561285
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C68561285
+	by mail.kernel.org (Postfix) with ESMTPS id 86E5E611ED
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86E5E611ED
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117305.223152 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117302.223114 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8F-0001aF-IZ; Sun, 25 Apr 2021 20:13:31 +0000
+	id 1lal8A-0001S6-8J; Sun, 25 Apr 2021 20:13:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117305.223152; Sun, 25 Apr 2021 20:13:31 +0000
+Received: by outflank-mailman (output) from mailman id 117302.223114; Sun, 25 Apr 2021 20:13:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8F-0001Zz-8n; Sun, 25 Apr 2021 20:13:31 +0000
-Received: by outflank-mailman (input) for mailman id 117305;
- Sun, 25 Apr 2021 20:13:30 +0000
+	id 1lal8A-0001Rp-23; Sun, 25 Apr 2021 20:13:26 +0000
+Received: by outflank-mailman (input) for mailman id 117302;
+ Sun, 25 Apr 2021 20:13:25 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lal8E-0001Y5-Am
- for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:30 +0000
+ (envelope-from <julien@xen.org>) id 1lal89-0001RJ-KT
+ for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:25 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal8E-0000od-1A; Sun, 25 Apr 2021 20:13:30 +0000
+ id 1lal89-0000o9-9c; Sun, 25 Apr 2021 20:13:25 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal8D-0005m7-Ow; Sun, 25 Apr 2021 20:13:30 +0000
+ id 1lal89-0005m7-0v; Sun, 25 Apr 2021 20:13:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=qdn1le94TFR9RGBuVbMK3tl4UOk0qVZcjP09VJjmTGA=; b=kSyw3dlhX1A7P2j0w/l4hybr8
-	Ud7zQLDGt7Mn8i2uLPIulsJTxh+GPmAfBOJ+yF7305IdEUH38vps72MRsC2vx5R8CCCdDVKY8IHQD
-	9hFVBq73P0B1YneXKbnrgn/waWH4v8dVnu9t/ZXBysrReYhDJFh8i2DS0ckzPd97eWLYM=;
+	 bh=LKWf7A+MF6uxi0Yzj4E+EHypbxoopwZaOMfIEc68W2U=; b=1SDMm0QKKs7ZTmqP/oyO5AZh9
+	0OPJ6JkxMteNKRWqu9oagsX/IqwziRYQxxOGM+zopceh8gifGisQ16kLw7DSM1BBWXXCHBqUL/WzF
+	PG9/sViCrlB0jH55Aa9+Sr5Vu6QiedEczvB96Tb6NYy7xL2yVOyb9zzQBanYC1wVznCQ4=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Wei.Chen@arm.com,
@@ -68,76 +68,131 @@ Cc: Wei.Chen@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH RFCv2 05/15] xen/arm: mm: Avoid flushing the TLBs when mapping are inserted
-Date: Sun, 25 Apr 2021 21:13:08 +0100
-Message-Id: <20210425201318.15447-6-julien@xen.org>
+Subject: [PATCH RFCv2 02/15] xen/arm: lpae: Use the generic helpers to defined the Xen PT helpers
+Date: Sun, 25 Apr 2021 21:13:05 +0100
+Message-Id: <20210425201318.15447-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210425201318.15447-1-julien@xen.org>
 References: <20210425201318.15447-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Currently, the function xen_pt_update() will flush the TLBs even when
-the mappings are inserted. This is a bit wasteful because we don't
-allow mapping replacement. Even if we were, the flush would need to
-happen earlier because mapping replacement should use Break-Before-Make
-when updating the entry.
+Currently, Xen PT helpers are only working with 4KB page granularity
+and open-code the generic helpers. To allow more flexibility, we can
+re-use the generic helpers and pass Xen's page granularity
+(PAGE_SHIFT).
 
-A single call to xen_pt_update() can perform a single action. IOW, it
-is not possible to, for instance, mix inserting and removing mappings.
-Therefore, we can use `flags` to determine what action is performed.
+As Xen PT helpers are used in both C and assembly, we need to move
+the generic helpers definition outside of the !__ASSEMBLY__ section.
 
-This change will be particularly help to limit the impact of switching
-boot time mapping to use xen_pt_update().
+Note the aliases for each level are still kept for the time being so we
+can avoid a massive patch to change all the callers.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
-
     Changes in v2:
         - New patch
 ---
- xen/arch/arm/mm.c | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ xen/include/asm-arm/lpae.h | 71 +++++++++++++++++++++-----------------
+ 1 file changed, 40 insertions(+), 31 deletions(-)
 
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 8ebb36899314..1fe52b3af722 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -1101,7 +1101,13 @@ static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int level,
-         /* We should be here with a valid MFN. */
-         ASSERT(!mfn_eq(mfn, INVALID_MFN));
+diff --git a/xen/include/asm-arm/lpae.h b/xen/include/asm-arm/lpae.h
+index 4fb9a40a4ca9..310f5225e056 100644
+--- a/xen/include/asm-arm/lpae.h
++++ b/xen/include/asm-arm/lpae.h
+@@ -159,6 +159,17 @@ static inline bool lpae_is_superpage(lpae_t pte, unsigned int level)
+ #define lpae_get_mfn(pte)    (_mfn((pte).walk.base))
+ #define lpae_set_mfn(pte, mfn)  ((pte).walk.base = mfn_x(mfn))
  
--        /* We don't allow replacing any valid entry. */
-+        /*
-+         * We don't allow replacing any valid entry.
-+         *
-+         * Note that the function xen_pt_update() relies on this
-+         * assumption and will skip the TLB flush. The function will need
-+         * to be updated if the check is relaxed.
-+         */
-         if ( lpae_is_valid(entry) )
-         {
-             if ( lpae_is_mapping(entry, level) )
-@@ -1333,11 +1339,16 @@ static int xen_pt_update(unsigned long virt,
-     }
++/* Generate an array @var containing the offset for each level from @addr */
++#define DECLARE_OFFSETS(var, addr)          \
++    const unsigned int var[4] = {           \
++        zeroeth_table_offset(addr),         \
++        first_table_offset(addr),           \
++        second_table_offset(addr),          \
++        third_table_offset(addr)            \
++    }
++
++#endif /* __ASSEMBLY__ */
++
+ /*
+  * AArch64 supports pages with different sizes (4K, 16K, and 64K).
+  * Provide a set of generic helpers that will compute various
+@@ -190,17 +201,6 @@ static inline bool lpae_is_superpage(lpae_t pte, unsigned int level)
+ #define LPAE_TABLE_INDEX_GS(gs, lvl, addr)   \
+     (((addr) >> LEVEL_SHIFT_GS(gs, lvl)) & LPAE_ENTRY_MASK_GS(gs))
  
-     /*
--     * Flush the TLBs even in case of failure because we may have
-+     * The TLBs flush can be safely skipped when a mapping is inserted
-+     * as we don't allow mapping replacement (see xen_pt_check_entry()).
-+     *
-+     * For all the other cases, the TLBs will be flushed unconditionally
-+     * even if the mapping are failed. This is because we may have
-      * partially modified the PT. This will prevent any unexpected
-      * behavior afterwards.
-      */
--    flush_xen_tlb_range_va(virt, PAGE_SIZE * nr_mfns);
-+    if ( !(flags & _PAGE_PRESENT) || mfn_eq(mfn, INVALID_MFN) )
-+        flush_xen_tlb_range_va(virt, PAGE_SIZE * nr_mfns);
+-/* Generate an array @var containing the offset for each level from @addr */
+-#define DECLARE_OFFSETS(var, addr)          \
+-    const unsigned int var[4] = {           \
+-        zeroeth_table_offset(addr),         \
+-        first_table_offset(addr),           \
+-        second_table_offset(addr),          \
+-        third_table_offset(addr)            \
+-    }
+-
+-#endif /* __ASSEMBLY__ */
+-
+ /*
+  * These numbers add up to a 48-bit input address space.
+  *
+@@ -211,26 +211,35 @@ static inline bool lpae_is_superpage(lpae_t pte, unsigned int level)
+  * therefore 39-bits are sufficient.
+  */
  
-     spin_unlock(&xen_pt_lock);
+-#define LPAE_SHIFT      9
+-#define LPAE_ENTRIES    (_AC(1,U) << LPAE_SHIFT)
+-#define LPAE_ENTRY_MASK (LPAE_ENTRIES - 1)
+-
+-#define THIRD_SHIFT    (PAGE_SHIFT)
+-#define THIRD_ORDER    (THIRD_SHIFT - PAGE_SHIFT)
+-#define THIRD_SIZE     (_AT(paddr_t, 1) << THIRD_SHIFT)
+-#define THIRD_MASK     (~(THIRD_SIZE - 1))
+-#define SECOND_SHIFT   (THIRD_SHIFT + LPAE_SHIFT)
+-#define SECOND_ORDER   (SECOND_SHIFT - PAGE_SHIFT)
+-#define SECOND_SIZE    (_AT(paddr_t, 1) << SECOND_SHIFT)
+-#define SECOND_MASK    (~(SECOND_SIZE - 1))
+-#define FIRST_SHIFT    (SECOND_SHIFT + LPAE_SHIFT)
+-#define FIRST_ORDER    (FIRST_SHIFT - PAGE_SHIFT)
+-#define FIRST_SIZE     (_AT(paddr_t, 1) << FIRST_SHIFT)
+-#define FIRST_MASK     (~(FIRST_SIZE - 1))
+-#define ZEROETH_SHIFT  (FIRST_SHIFT + LPAE_SHIFT)
+-#define ZEROETH_ORDER  (ZEROETH_SHIFT - PAGE_SHIFT)
+-#define ZEROETH_SIZE   (_AT(paddr_t, 1) << ZEROETH_SHIFT)
+-#define ZEROETH_MASK   (~(ZEROETH_SIZE - 1))
++#define LPAE_SHIFT          LPAE_SHIFT_GS(PAGE_SHIFT)
++#define LPAE_ENTRIES        LPAE_ENTRIES_GS(PAGE_SHIFT)
++#define LPAE_ENTRY_MASK     LPAE_ENTRY_MASK_GS(PAGE_SHIFT)
++
++#define LEVEL_SHIFT(lvl)    LEVEL_SHIFT_GS(PAGE_SHIFT, lvl)
++#define LEVEL_ORDER(lvl)    LEVEL_ORDER_GS(PAGE_SHIFT, lvl)
++#define LEVEL_SIZE(lvl)     LEVEL_SIZE_GS(PAGE_SHIFT, lvl)
++#define LEVEL_MASK(lvl)     (~(LEVEL_SIZE(lvl) - 1))
++
++/* Convenience aliases */
++#define THIRD_SHIFT         LEVEL_SHIFT(3)
++#define THIRD_ORDER         LEVEL_ORDER(3)
++#define THIRD_SIZE          LEVEL_SIZE(3)
++#define THIRD_MASK          LEVEL_MASK(3)
++
++#define SECOND_SHIFT        LEVEL_SHIFT(2)
++#define SECOND_ORDER        LEVEL_ORDER(2)
++#define SECOND_SIZE         LEVEL_SIZE(2)
++#define SECOND_MASK         LEVEL_MASK(2)
++
++#define FIRST_SHIFT         LEVEL_SHIFT(1)
++#define FIRST_ORDER         LEVEL_ORDER(1)
++#define FIRST_SIZE          LEVEL_SIZE(1)
++#define FIRST_MASK          LEVEL_MASK(1)
++
++#define ZEROETH_SHIFT       LEVEL_SHIFT(0)
++#define ZEROETH_ORDER       LEVEL_ORDER(0)
++#define ZEROETH_SIZE        LEVEL_SIZE(0)
++#define ZEROETH_MASK        LEVEL_MASK(0)
  
+ /* Calculate the offsets into the pagetables for a given VA */
+ #define zeroeth_linear_offset(va) ((va) >> ZEROETH_SHIFT)
 -- 
 2.17.1
 
