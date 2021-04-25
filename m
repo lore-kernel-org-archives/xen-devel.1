@@ -2,46 +2,46 @@ Return-Path: <SRS0=rjis=JW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3551C43461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A204C43462
 	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 86E5E611ED
+	by mail.kernel.org (Postfix) with ESMTPS id 355CC611ED
 	for <xen-devel@archiver.kernel.org>; Sun, 25 Apr 2021 20:13:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86E5E611ED
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 355CC611ED
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117302.223114 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117304.223143 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8A-0001S6-8J; Sun, 25 Apr 2021 20:13:26 +0000
+	id 1lal8E-0001Yc-Qk; Sun, 25 Apr 2021 20:13:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117302.223114; Sun, 25 Apr 2021 20:13:26 +0000
+Received: by outflank-mailman (output) from mailman id 117304.223143; Sun, 25 Apr 2021 20:13:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lal8A-0001Rp-23; Sun, 25 Apr 2021 20:13:26 +0000
-Received: by outflank-mailman (input) for mailman id 117302;
- Sun, 25 Apr 2021 20:13:25 +0000
+	id 1lal8E-0001YT-NH; Sun, 25 Apr 2021 20:13:30 +0000
+Received: by outflank-mailman (input) for mailman id 117304;
+ Sun, 25 Apr 2021 20:13:29 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lal89-0001RJ-KT
- for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:25 +0000
+ (envelope-from <julien@xen.org>) id 1lal8C-0001W7-Vu
+ for xen-devel@lists.xenproject.org; Sun, 25 Apr 2021 20:13:28 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal89-0000o9-9c; Sun, 25 Apr 2021 20:13:25 +0000
+ id 1lal8C-0000oV-Hb; Sun, 25 Apr 2021 20:13:28 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lal89-0005m7-0v; Sun, 25 Apr 2021 20:13:25 +0000
+ id 1lal8C-0005m7-4y; Sun, 25 Apr 2021 20:13:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,144 +55,277 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=LKWf7A+MF6uxi0Yzj4E+EHypbxoopwZaOMfIEc68W2U=; b=1SDMm0QKKs7ZTmqP/oyO5AZh9
-	0OPJ6JkxMteNKRWqu9oagsX/IqwziRYQxxOGM+zopceh8gifGisQ16kLw7DSM1BBWXXCHBqUL/WzF
-	PG9/sViCrlB0jH55Aa9+Sr5Vu6QiedEczvB96Tb6NYy7xL2yVOyb9zzQBanYC1wVznCQ4=;
+	 bh=lBfQueqmN8lGEfYvmwCQNPeVCuWNGXAaHJKI8fcyO7c=; b=ypvOlVCA4WHF0pL5/WG6c5HOo
+	k9ybUduQYf91ZwDEarIKEk6z1uwks64TuJ3Pz1cGWgW0O7vUTP0IEMsP/dogcLhRB9E0IFu1b4haA
+	zkhTQFFg3irUF+JPz9h+sbZIMexFdageCS/DsCX39slv4XPCAm6ZwLTdcihHAmB8BuvjQ=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: Wei.Chen@arm.com,
 	Henry.Wang@arm.com,
 	Penny.Zheng@arm.com,
 	Bertrand.Marquis@arm.com,
-	Julien Grall <jgrall@amazon.com>,
+	Julien Grall <julien.grall@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH RFCv2 02/15] xen/arm: lpae: Use the generic helpers to defined the Xen PT helpers
-Date: Sun, 25 Apr 2021 21:13:05 +0100
-Message-Id: <20210425201318.15447-3-julien@xen.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH RFCv2 04/15] xen/arm: mm: Allow other mapping size in xen_pt_update_entry()
+Date: Sun, 25 Apr 2021 21:13:07 +0100
+Message-Id: <20210425201318.15447-5-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210425201318.15447-1-julien@xen.org>
 References: <20210425201318.15447-1-julien@xen.org>
 
-From: Julien Grall <jgrall@amazon.com>
+From: Julien Grall <julien.grall@arm.com>
 
-Currently, Xen PT helpers are only working with 4KB page granularity
-and open-code the generic helpers. To allow more flexibility, we can
-re-use the generic helpers and pass Xen's page granularity
-(PAGE_SHIFT).
+At the moment, xen_pt_update_entry() only supports mapping at level 3
+(i.e 4KB mapping). While this is fine for most of the runtime helper,
+the boot code will require to use superpage mapping.
 
-As Xen PT helpers are used in both C and assembly, we need to move
-the generic helpers definition outside of the !__ASSEMBLY__ section.
+We don't want to allow superpage mapping by default as some of the
+callers may expect small mappings (i.e populate_pt_range()) or even
+expect to unmap only a part of a superpage.
 
-Note the aliases for each level are still kept for the time being so we
-can avoid a massive patch to change all the callers.
+To keep the code simple, a new flag _PAGE_BLOCK is introduced to
+allow the caller to enable superpage mapping.
 
+As the code doesn't support all the combinations, xen_pt_check_entry()
+is extended to take into account the cases we don't support when
+using block mapping:
+    - Replacing a table with a mapping. This may happen if region was
+    first mapped with 4KB mapping and then later on replaced with a 2MB
+    (or 1GB mapping)
+    - Removing/modify a table. This may happen if a caller try to
+    remove a region with _PAGE_BLOCK set when it was created without it
+
+Note that the current restriction mean that the caller must ensure that
+_PAGE_BLOCK is consistently set/cleared across all the updates on a
+given virtual region. This ought to be fine with the expected use-cases.
+
+More rework will be necessary if we wanted to remove the restrictions.
+
+Note that nr_mfns is now marked const as it is used for flushing the
+TLBs and we don't want it to be modified.
+
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
-    Changes in v2:
-        - New patch
----
- xen/include/asm-arm/lpae.h | 71 +++++++++++++++++++++-----------------
- 1 file changed, 40 insertions(+), 31 deletions(-)
 
-diff --git a/xen/include/asm-arm/lpae.h b/xen/include/asm-arm/lpae.h
-index 4fb9a40a4ca9..310f5225e056 100644
---- a/xen/include/asm-arm/lpae.h
-+++ b/xen/include/asm-arm/lpae.h
-@@ -159,6 +159,17 @@ static inline bool lpae_is_superpage(lpae_t pte, unsigned int level)
- #define lpae_get_mfn(pte)    (_mfn((pte).walk.base))
- #define lpae_set_mfn(pte, mfn)  ((pte).walk.base = mfn_x(mfn))
+    Changes in v2:
+        - Pass the target level rather than the order to
+        xen_pt_update_entry()
+        - Update some comments
+        - Open-code paddr_to_pfn()
+        - Add my AWS signed-off-by
+---
+ xen/arch/arm/mm.c          | 93 ++++++++++++++++++++++++++++++--------
+ xen/include/asm-arm/page.h |  4 ++
+ 2 files changed, 79 insertions(+), 18 deletions(-)
+
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 59f8a3f15fd1..8ebb36899314 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -1060,9 +1060,10 @@ static int xen_pt_next_level(bool read_only, unsigned int level,
+ }
  
-+/* Generate an array @var containing the offset for each level from @addr */
-+#define DECLARE_OFFSETS(var, addr)          \
-+    const unsigned int var[4] = {           \
-+        zeroeth_table_offset(addr),         \
-+        first_table_offset(addr),           \
-+        second_table_offset(addr),          \
-+        third_table_offset(addr)            \
-+    }
-+
-+#endif /* __ASSEMBLY__ */
-+
- /*
-  * AArch64 supports pages with different sizes (4K, 16K, and 64K).
-  * Provide a set of generic helpers that will compute various
-@@ -190,17 +201,6 @@ static inline bool lpae_is_superpage(lpae_t pte, unsigned int level)
- #define LPAE_TABLE_INDEX_GS(gs, lvl, addr)   \
-     (((addr) >> LEVEL_SHIFT_GS(gs, lvl)) & LPAE_ENTRY_MASK_GS(gs))
+ /* Sanity check of the entry */
+-static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int flags)
++static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int level,
++                               unsigned int flags)
+ {
+-    /* Sanity check when modifying a page. */
++    /* Sanity check when modifying an entry. */
+     if ( (flags & _PAGE_PRESENT) && mfn_eq(mfn, INVALID_MFN) )
+     {
+         /* We don't allow modifying an invalid entry. */
+@@ -1072,6 +1073,13 @@ static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int flags)
+             return false;
+         }
  
--/* Generate an array @var containing the offset for each level from @addr */
--#define DECLARE_OFFSETS(var, addr)          \
--    const unsigned int var[4] = {           \
--        zeroeth_table_offset(addr),         \
--        first_table_offset(addr),           \
--        second_table_offset(addr),          \
--        third_table_offset(addr)            \
--    }
--
--#endif /* __ASSEMBLY__ */
--
- /*
-  * These numbers add up to a 48-bit input address space.
-  *
-@@ -211,26 +211,35 @@ static inline bool lpae_is_superpage(lpae_t pte, unsigned int level)
-  * therefore 39-bits are sufficient.
++        /* We don't allow modifying a table entry */
++        if ( !lpae_is_mapping(entry, level) )
++        {
++            mm_printk("Modifying a table entry is not allowed.\n");
++            return false;
++        }
++
+         /* We don't allow changing memory attributes. */
+         if ( entry.pt.ai != PAGE_AI_MASK(flags) )
+         {
+@@ -1087,7 +1095,7 @@ static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int flags)
+             return false;
+         }
+     }
+-    /* Sanity check when inserting a page */
++    /* Sanity check when inserting a mapping */
+     else if ( flags & _PAGE_PRESENT )
+     {
+         /* We should be here with a valid MFN. */
+@@ -1096,18 +1104,28 @@ static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int flags)
+         /* We don't allow replacing any valid entry. */
+         if ( lpae_is_valid(entry) )
+         {
+-            mm_printk("Changing MFN for a valid entry is not allowed (%#"PRI_mfn" -> %#"PRI_mfn").\n",
+-                      mfn_x(lpae_get_mfn(entry)), mfn_x(mfn));
++            if ( lpae_is_mapping(entry, level) )
++                mm_printk("Changing MFN for a valid entry is not allowed (%#"PRI_mfn" -> %#"PRI_mfn").\n",
++                          mfn_x(lpae_get_mfn(entry)), mfn_x(mfn));
++            else
++                mm_printk("Trying to replace a table with a mapping.\n");
+             return false;
+         }
+     }
+-    /* Sanity check when removing a page. */
++    /* Sanity check when removing a mapping. */
+     else if ( (flags & (_PAGE_PRESENT|_PAGE_POPULATE)) == 0 )
+     {
+         /* We should be here with an invalid MFN. */
+         ASSERT(mfn_eq(mfn, INVALID_MFN));
+ 
+-        /* We don't allow removing page with contiguous bit set. */
++        /* We don't allow removing a table */
++        if ( lpae_is_table(entry, level) )
++        {
++            mm_printk("Removing a table is not allowed.\n");
++            return false;
++        }
++
++        /* We don't allow removing a mapping with contiguous bit set. */
+         if ( entry.pt.contig )
+         {
+             mm_printk("Removing entry with contiguous bit set is not allowed.\n");
+@@ -1125,13 +1143,13 @@ static bool xen_pt_check_entry(lpae_t entry, mfn_t mfn, unsigned int flags)
+     return true;
+ }
+ 
++/* Update an entry at the level @target. */
+ static int xen_pt_update_entry(mfn_t root, unsigned long virt,
+-                               mfn_t mfn, unsigned int flags)
++                               mfn_t mfn, unsigned int target,
++                               unsigned int flags)
+ {
+     int rc;
+     unsigned int level;
+-    /* We only support 4KB mapping (i.e level 3) for now */
+-    unsigned int target = 3;
+     lpae_t *table;
+     /*
+      * The intermediate page tables are read-only when the MFN is not valid
+@@ -1186,7 +1204,7 @@ static int xen_pt_update_entry(mfn_t root, unsigned long virt,
+     entry = table + offsets[level];
+ 
+     rc = -EINVAL;
+-    if ( !xen_pt_check_entry(*entry, mfn, flags) )
++    if ( !xen_pt_check_entry(*entry, mfn, level, flags) )
+         goto out;
+ 
+     /* If we are only populating page-table, then we are done. */
+@@ -1204,8 +1222,11 @@ static int xen_pt_update_entry(mfn_t root, unsigned long virt,
+         {
+             pte = mfn_to_xen_entry(mfn, PAGE_AI_MASK(flags));
+ 
+-            /* Third level entries set pte.pt.table = 1 */
+-            pte.pt.table = 1;
++            /*
++             * First and second level pages set pte.pt.table = 0, but
++             * third level entries set pte.pt.table = 1.
++             */
++            pte.pt.table = (level == 3);
+         }
+         else /* We are updating the permission => Copy the current pte. */
+             pte = *entry;
+@@ -1229,11 +1250,12 @@ static DEFINE_SPINLOCK(xen_pt_lock);
+ 
+ static int xen_pt_update(unsigned long virt,
+                          mfn_t mfn,
+-                         unsigned long nr_mfns,
++                         const unsigned long nr_mfns,
+                          unsigned int flags)
+ {
+     int rc = 0;
+-    unsigned long addr = virt, addr_end = addr + nr_mfns * PAGE_SIZE;
++    unsigned long vfn = virt >> PAGE_SHIFT;
++    unsigned long left = nr_mfns;
+ 
+     /*
+      * For arm32, page-tables are different on each CPUs. Yet, they share
+@@ -1265,14 +1287,49 @@ static int xen_pt_update(unsigned long virt,
+ 
+     spin_lock(&xen_pt_lock);
+ 
+-    for ( ; addr < addr_end; addr += PAGE_SIZE )
++    while ( left )
+     {
+-        rc = xen_pt_update_entry(root, addr, mfn, flags);
++        unsigned int order, level;
++        unsigned long mask;
++
++        /*
++         * Don't take into account the MFN when removing mapping (i.e
++         * MFN_INVALID) to calculate the correct target order.
++         *
++         * This loop relies on mfn, vfn, and nr_mfn to be all superpage
++         * aligned (mfn and vfn have to be architecturally), and it uses
++         * `mask` to check for that.
++         *
++         * XXX: Support superpage mappings if nr is not aligned to a
++         * superpage size.
++         */
++        mask = !mfn_eq(mfn, INVALID_MFN) ? mfn_x(mfn) : 0;
++        mask |= vfn | left;
++
++        /*
++         * Always use level 3 mapping unless the caller request block
++         * mapping.
++         */
++        if ( likely(!(flags & _PAGE_BLOCK)) )
++            level = 3;
++        else if ( !(mask & (BIT(FIRST_ORDER, UL) - 1)) )
++            level = 1;
++        else if ( !(mask & (BIT(SECOND_ORDER, UL) - 1)) )
++            level = 2;
++        else
++            level = 3;
++
++        order = LEVEL_ORDER(level);
++
++        rc = xen_pt_update_entry(root, pfn_to_paddr(vfn), mfn, level, flags);
+         if ( rc )
+             break;
+ 
++        vfn += 1U << order;
+         if ( !mfn_eq(mfn, INVALID_MFN) )
+-            mfn = mfn_add(mfn, 1);
++            mfn = mfn_add(mfn, 1U << order);
++
++        left -= (1U << order);
+     }
+ 
+     /*
+diff --git a/xen/include/asm-arm/page.h b/xen/include/asm-arm/page.h
+index 131507a51712..7052a87ec0fe 100644
+--- a/xen/include/asm-arm/page.h
++++ b/xen/include/asm-arm/page.h
+@@ -69,6 +69,7 @@
+  * [3:4] Permission flags
+  * [5]   Page present
+  * [6]   Only populate page tables
++ * [7]   Superpage mappings is allowed
   */
+ #define PAGE_AI_MASK(x) ((x) & 0x7U)
  
--#define LPAE_SHIFT      9
--#define LPAE_ENTRIES    (_AC(1,U) << LPAE_SHIFT)
--#define LPAE_ENTRY_MASK (LPAE_ENTRIES - 1)
--
--#define THIRD_SHIFT    (PAGE_SHIFT)
--#define THIRD_ORDER    (THIRD_SHIFT - PAGE_SHIFT)
--#define THIRD_SIZE     (_AT(paddr_t, 1) << THIRD_SHIFT)
--#define THIRD_MASK     (~(THIRD_SIZE - 1))
--#define SECOND_SHIFT   (THIRD_SHIFT + LPAE_SHIFT)
--#define SECOND_ORDER   (SECOND_SHIFT - PAGE_SHIFT)
--#define SECOND_SIZE    (_AT(paddr_t, 1) << SECOND_SHIFT)
--#define SECOND_MASK    (~(SECOND_SIZE - 1))
--#define FIRST_SHIFT    (SECOND_SHIFT + LPAE_SHIFT)
--#define FIRST_ORDER    (FIRST_SHIFT - PAGE_SHIFT)
--#define FIRST_SIZE     (_AT(paddr_t, 1) << FIRST_SHIFT)
--#define FIRST_MASK     (~(FIRST_SIZE - 1))
--#define ZEROETH_SHIFT  (FIRST_SHIFT + LPAE_SHIFT)
--#define ZEROETH_ORDER  (ZEROETH_SHIFT - PAGE_SHIFT)
--#define ZEROETH_SIZE   (_AT(paddr_t, 1) << ZEROETH_SHIFT)
--#define ZEROETH_MASK   (~(ZEROETH_SIZE - 1))
-+#define LPAE_SHIFT          LPAE_SHIFT_GS(PAGE_SHIFT)
-+#define LPAE_ENTRIES        LPAE_ENTRIES_GS(PAGE_SHIFT)
-+#define LPAE_ENTRY_MASK     LPAE_ENTRY_MASK_GS(PAGE_SHIFT)
-+
-+#define LEVEL_SHIFT(lvl)    LEVEL_SHIFT_GS(PAGE_SHIFT, lvl)
-+#define LEVEL_ORDER(lvl)    LEVEL_ORDER_GS(PAGE_SHIFT, lvl)
-+#define LEVEL_SIZE(lvl)     LEVEL_SIZE_GS(PAGE_SHIFT, lvl)
-+#define LEVEL_MASK(lvl)     (~(LEVEL_SIZE(lvl) - 1))
-+
-+/* Convenience aliases */
-+#define THIRD_SHIFT         LEVEL_SHIFT(3)
-+#define THIRD_ORDER         LEVEL_ORDER(3)
-+#define THIRD_SIZE          LEVEL_SIZE(3)
-+#define THIRD_MASK          LEVEL_MASK(3)
-+
-+#define SECOND_SHIFT        LEVEL_SHIFT(2)
-+#define SECOND_ORDER        LEVEL_ORDER(2)
-+#define SECOND_SIZE         LEVEL_SIZE(2)
-+#define SECOND_MASK         LEVEL_MASK(2)
-+
-+#define FIRST_SHIFT         LEVEL_SHIFT(1)
-+#define FIRST_ORDER         LEVEL_ORDER(1)
-+#define FIRST_SIZE          LEVEL_SIZE(1)
-+#define FIRST_MASK          LEVEL_MASK(1)
-+
-+#define ZEROETH_SHIFT       LEVEL_SHIFT(0)
-+#define ZEROETH_ORDER       LEVEL_ORDER(0)
-+#define ZEROETH_SIZE        LEVEL_SIZE(0)
-+#define ZEROETH_MASK        LEVEL_MASK(0)
+@@ -82,6 +83,9 @@
+ #define _PAGE_PRESENT    (1U << 5)
+ #define _PAGE_POPULATE   (1U << 6)
  
- /* Calculate the offsets into the pagetables for a given VA */
- #define zeroeth_linear_offset(va) ((va) >> ZEROETH_SHIFT)
++#define _PAGE_BLOCK_BIT     7
++#define _PAGE_BLOCK         (1U << _PAGE_BLOCK_BIT)
++
+ /*
+  * _PAGE_DEVICE and _PAGE_NORMAL are convenience defines. They are not
+  * meant to be used outside of this header.
 -- 
 2.17.1
 
