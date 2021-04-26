@@ -2,48 +2,47 @@ Return-Path: <SRS0=fknR=JX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79157C433B4
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B0F3C433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:23:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E86360C3D
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:22:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E86360C3D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id D4D5960C3D
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:23:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D4D5960C3D
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117774.223668 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117783.223680 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lb40M-00057j-MY; Mon, 26 Apr 2021 16:22:38 +0000
+	id 1lb40w-0005G7-6E; Mon, 26 Apr 2021 16:23:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117774.223668; Mon, 26 Apr 2021 16:22:38 +0000
+Received: by outflank-mailman (output) from mailman id 117783.223680; Mon, 26 Apr 2021 16:23:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lb40M-00057b-Ja; Mon, 26 Apr 2021 16:22:38 +0000
-Received: by outflank-mailman (input) for mailman id 117774;
- Mon, 26 Apr 2021 16:22:37 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TQk4=JX=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1lb40L-00057T-El
- for xen-devel@lists.xenproject.org; Mon, 26 Apr 2021 16:22:37 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id e5fc57fb-0d70-4b38-88ec-a8275d962832;
- Mon, 26 Apr 2021 16:22:35 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3F4061FB;
- Mon, 26 Apr 2021 09:22:35 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 667A13F73B;
- Mon, 26 Apr 2021 09:22:33 -0700 (PDT)
+	id 1lb40w-0005Fy-2b; Mon, 26 Apr 2021 16:23:14 +0000
+Received: by outflank-mailman (input) for mailman id 117783;
+ Mon, 26 Apr 2021 16:23:13 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lb40u-0005Fn-V3; Mon, 26 Apr 2021 16:23:13 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lb40u-0004SY-PU; Mon, 26 Apr 2021 16:23:12 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lb40u-0007WF-Er; Mon, 26 Apr 2021 16:23:12 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lb40u-00049V-EK; Mon, 26 Apr 2021 16:23:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,460 +54,328 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5fc57fb-0d70-4b38-88ec-a8275d962832
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Paul Durrant <paul@xen.org>,
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>
-Subject: [PATCH v3 2/3] xen/pci: Refactor PCI MSI intercept related code
-Date: Mon, 26 Apr 2021 17:21:26 +0100
-Message-Id: <480947d549c46270fccc4c6d83ae8beca3c0fce6.1619453100.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1619453100.git.rahul.singh@arm.com>
-References: <cover.1619453100.git.rahul.singh@arm.com>
-In-Reply-To: <cover.1619453100.git.rahul.singh@arm.com>
-References: <cover.1619453100.git.rahul.singh@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=5DZLRELv8vWrGayu18fp2eVKs53yTwtFQ9NE7kAALQQ=; b=gMgsT2I+XVZv5YRK3Ec2MB4C84
+	sty5tZOquGm7v5nbO7TyyJSgPhwoEtP7n52K7WtRrfvWCmvWPdXq3CKafgeC7kuf3iml4nht/Ay8d
+	XBNU5bS5ssypEttvJcjDRjJNFHzSKDWeKs23q7bODFyMcwSrjS1xS873NLb3rpA3v3ZQ=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-161457-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 161457: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-amd64-i386-xl-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemut-rhel6hvm-intel:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-ws16-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-debianhvm-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-examine:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-i386-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemut-rhel6hvm-amd:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-ws16-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemuu-rhel6hvm-amd:xen-install:fail:regression
+    linux-linus:test-amd64-coresched-i386-xl:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemuu-rhel6hvm-intel:xen-install:fail:regression
+    linux-linus:test-amd64-i386-pair:xen-install/src_host:fail:regression
+    linux-linus:test-amd64-i386-pair:xen-install/dst_host:fail:regression
+    linux-linus:test-amd64-i386-xl-raw:xen-install:fail:regression
+    linux-linus:test-amd64-i386-freebsd10-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-pvshim:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-debianhvm-i386-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-shadow:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-freebsd10-i386:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-ovmf-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-win7-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-win7-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-pair:xen-install/src_host:fail:regression
+    linux-linus:test-amd64-i386-libvirt-pair:xen-install/dst_host:fail:regression
+    linux-linus:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-amd64-amd64-pvgrub:guest-stop:fail:regression
+    linux-linus:test-amd64-amd64-i386-pvgrub:guest-stop:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=9f4ad9e425a1d3b6a34617b8ea226d56a119a717
+X-Osstest-Versions-That:
+    linux=deacdb3e3979979016fcd0ffd518c320a62ad166
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 26 Apr 2021 16:23:12 +0000
 
-MSI intercept related code is not useful for ARM when MSI interrupts are
-injected via GICv3 ITS.
+flight 161457 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/161457/
 
-Therefore introducing the new flag CONFIG_PCI_MSI_INTERCEPT to gate the
-MSI code for ARM in common code and also implemented the stub version
-for the unused code for ARM to avoid compilation error when HAS_PCI
-is enabled for ARM.
+Regressions :-(
 
-No functional change intended.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-xsm        7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-qemut-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-ws16-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
+ test-amd64-i386-examine       6 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-libvirt       7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-qemut-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-ws16-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-qemuu-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
+ test-amd64-coresched-i386-xl  7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl            7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
+ test-amd64-i386-qemuu-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
+ test-amd64-i386-pair         10 xen-install/src_host     fail REGR. vs. 152332
+ test-amd64-i386-pair         11 xen-install/dst_host     fail REGR. vs. 152332
+ test-amd64-i386-xl-raw        7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-freebsd10-amd64  7 xen-install           fail REGR. vs. 152332
+ test-amd64-i386-xl-pvshim     7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-shadow     7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-libvirt-xsm   7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-freebsd10-i386  7 xen-install            fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-ovmf-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-win7-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-win7-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-libvirt-pair 10 xen-install/src_host     fail REGR. vs. 152332
+ test-amd64-i386-libvirt-pair 11 xen-install/dst_host     fail REGR. vs. 152332
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-amd64-amd64-pvgrub 20 guest-stop              fail REGR. vs. 152332
+ test-amd64-amd64-i386-pvgrub 20 guest-stop               fail REGR. vs. 152332
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
----
-Changes since v1:
- - Rename CONFIG_HAS_PCI_MSI to CONFIG_PCI_MSI_INTERCEPT
- - Implement stub version of the unused function for ARM.
- - Move unneeded function to x86 file.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 152332
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 152332
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 152332
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 152332
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 152332
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 152332
+ test-arm64-arm64-xl-seattle  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-seattle  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
 
-Changes since v2:
- - Rename function name as per the comments.
- - Created a separate non-arch specific file msi-intercept.c.
----
- xen/arch/x86/Kconfig                    |  1 +
- xen/drivers/passthrough/Makefile        |  1 +
- xen/drivers/passthrough/msi-intercept.c | 52 +++++++++++++++++++++++++
- xen/drivers/passthrough/pci.c           | 16 +++-----
- xen/drivers/pci/Kconfig                 |  4 ++
- xen/drivers/vpci/Makefile               |  3 +-
- xen/drivers/vpci/header.c               | 19 ++-------
- xen/drivers/vpci/msix.c                 | 25 ++++++++++++
- xen/drivers/vpci/vpci.c                 |  3 +-
- xen/include/xen/msi-intercept.h         | 48 +++++++++++++++++++++++
- xen/include/xen/vpci.h                  | 23 +++++++++++
- xen/xsm/flask/hooks.c                   |  8 ++--
- 12 files changed, 170 insertions(+), 33 deletions(-)
- create mode 100644 xen/drivers/passthrough/msi-intercept.c
- create mode 100644 xen/include/xen/msi-intercept.h
+version targeted for testing:
+ linux                9f4ad9e425a1d3b6a34617b8ea226d56a119a717
+baseline version:
+ linux                deacdb3e3979979016fcd0ffd518c320a62ad166
 
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index 32b9f23a20..4d72798f00 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -20,6 +20,7 @@ config X86
- 	select HAS_NS16550
- 	select HAS_PASSTHROUGH
- 	select HAS_PCI
-+	select PCI_MSI_INTERCEPT
- 	select HAS_PDX
- 	select HAS_SCHED_GRANULARITY
- 	select HAS_UBSAN
-diff --git a/xen/drivers/passthrough/Makefile b/xen/drivers/passthrough/Makefile
-index 445690e3e5..3c707706b0 100644
---- a/xen/drivers/passthrough/Makefile
-+++ b/xen/drivers/passthrough/Makefile
-@@ -7,3 +7,4 @@ obj-y += iommu.o
- obj-$(CONFIG_HAS_PCI) += pci.o
- obj-$(CONFIG_HAS_DEVICE_TREE) += device_tree.o
- obj-$(CONFIG_HAS_PCI) += ats.o
-+obj-$(CONFIG_PCI_MSI_INTERCEPT) += msi-intercept.o
-diff --git a/xen/drivers/passthrough/msi-intercept.c b/xen/drivers/passthrough/msi-intercept.c
-new file mode 100644
-index 0000000000..1edae6d4e8
---- /dev/null
-+++ b/xen/drivers/passthrough/msi-intercept.c
-@@ -0,0 +1,52 @@
-+/*
-+ * Copyright (C) 2021 Arm Ltd.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License version 2 as
-+ * published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include <xen/init.h>
-+#include <xen/pci.h>
-+#include <asm/msi.h>
-+#include <asm/hvm/io.h>
-+
-+int pdev_msix_assign(struct domain *d, struct pci_dev *pdev)
-+{
-+    int rc;
-+
-+    if ( pdev->msix )
-+    {
-+        rc = pci_reset_msix_state(pdev);
-+        if ( rc )
-+            return rc;
-+        msixtbl_init(d);
-+    }
-+
-+    return 0;
-+}
-+
-+void pdev_dump_msi(const struct pci_dev *pdev)
-+{
-+    const struct msi_desc *msi;
-+
-+    list_for_each_entry ( msi, &pdev->msi_list, list )
-+        printk("%d ", msi->irq);
-+}
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 199ce08612..298be21b5b 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -32,8 +32,8 @@
- #include <xen/softirq.h>
- #include <xen/tasklet.h>
- #include <xen/vpci.h>
-+#include <xen/msi-intercept.h>
- #include <xsm/xsm.h>
--#include <asm/msi.h>
- #include "ats.h"
- 
- struct pci_seg {
-@@ -1271,7 +1271,6 @@ bool_t pcie_aer_get_firmware_first(const struct pci_dev *pdev)
- static int _dump_pci_devices(struct pci_seg *pseg, void *arg)
- {
-     struct pci_dev *pdev;
--    struct msi_desc *msi;
- 
-     printk("==== segment %04x ====\n", pseg->nr);
- 
-@@ -1280,8 +1279,7 @@ static int _dump_pci_devices(struct pci_seg *pseg, void *arg)
-         printk("%pp - %pd - node %-3d - MSIs < ",
-                &pdev->sbdf, pdev->domain,
-                (pdev->node != NUMA_NO_NODE) ? pdev->node : -1);
--        list_for_each_entry ( msi, &pdev->msi_list, list )
--               printk("%d ", msi->irq);
-+        pdev_dump_msi(pdev);
-         printk(">\n");
-     }
- 
-@@ -1422,13 +1420,9 @@ static int assign_device(struct domain *d, u16 seg, u8 bus, u8 devfn, u32 flag)
-     ASSERT(pdev && (pdev->domain == hardware_domain ||
-                     pdev->domain == dom_io));
- 
--    if ( pdev->msix )
--    {
--        rc = pci_reset_msix_state(pdev);
--        if ( rc )
--            goto done;
--        msixtbl_init(d);
--    }
-+    rc = pdev_msix_assign(d, pdev);
-+    if ( rc )
-+        goto done;
- 
-     pdev->fault.count = 0;
- 
-diff --git a/xen/drivers/pci/Kconfig b/xen/drivers/pci/Kconfig
-index 7da03fa13b..e6bf0b7441 100644
---- a/xen/drivers/pci/Kconfig
-+++ b/xen/drivers/pci/Kconfig
-@@ -1,3 +1,7 @@
- 
- config HAS_PCI
- 	bool
-+
-+config PCI_MSI_INTERCEPT
-+	bool
-+	depends on HAS_PCI
-diff --git a/xen/drivers/vpci/Makefile b/xen/drivers/vpci/Makefile
-index 55d1bdfda0..f91fa71a40 100644
---- a/xen/drivers/vpci/Makefile
-+++ b/xen/drivers/vpci/Makefile
-@@ -1 +1,2 @@
--obj-y += vpci.o header.o msi.o msix.o
-+obj-y += vpci.o header.o
-+obj-$(CONFIG_PCI_MSI_INTERCEPT) += msi.o msix.o
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index ba9a036202..ec735c5b4b 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -206,7 +206,6 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     struct vpci_header *header = &pdev->vpci->header;
-     struct rangeset *mem = rangeset_new(NULL, NULL, 0);
-     struct pci_dev *tmp, *dev = NULL;
--    const struct vpci_msix *msix = pdev->vpci->msix;
-     unsigned int i;
-     int rc;
- 
-@@ -244,21 +243,11 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     }
- 
-     /* Remove any MSIX regions if present. */
--    for ( i = 0; msix && i < ARRAY_SIZE(msix->tables); i++ )
-+    rc = vpci_remove_msix_regions(pdev, mem);
-+    if ( rc )
-     {
--        unsigned long start = PFN_DOWN(vmsix_table_addr(pdev->vpci, i));
--        unsigned long end = PFN_DOWN(vmsix_table_addr(pdev->vpci, i) +
--                                     vmsix_table_size(pdev->vpci, i) - 1);
--
--        rc = rangeset_remove_range(mem, start, end);
--        if ( rc )
--        {
--            printk(XENLOG_G_WARNING
--                   "Failed to remove MSIX table [%lx, %lx]: %d\n",
--                   start, end, rc);
--            rangeset_destroy(mem);
--            return rc;
--        }
-+        rangeset_destroy(mem);
-+        return rc;
-     }
- 
-     /*
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 846f1b8d70..3efbaebc92 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -428,6 +428,31 @@ int vpci_make_msix_hole(const struct pci_dev *pdev)
-     return 0;
- }
- 
-+int vpci_remove_msix_regions(const struct pci_dev *pdev, struct rangeset *mem)
-+{
-+    const struct vpci_msix *msix = pdev->vpci->msix;
-+    unsigned int i;
-+    int rc;
-+
-+    for ( i = 0; msix && i < ARRAY_SIZE(msix->tables); i++ )
-+    {
-+        unsigned long start = PFN_DOWN(vmsix_table_addr(pdev->vpci, i));
-+        unsigned long end = PFN_DOWN(vmsix_table_addr(pdev->vpci, i) +
-+                vmsix_table_size(pdev->vpci, i) - 1);
-+
-+        rc = rangeset_remove_range(mem, start, end);
-+        if ( rc )
-+        {
-+            printk(XENLOG_G_WARNING
-+                    "Failed to remove MSIX table [%lx, %lx]: %d\n",
-+                    start, end, rc);
-+            return rc;
-+        }
-+    }
-+
-+    return 0;
-+}
-+
- static int init_msix(struct pci_dev *pdev)
- {
-     struct domain *d = pdev->domain;
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index cbd1bac7fc..85084dd924 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -48,8 +48,7 @@ void vpci_remove_device(struct pci_dev *pdev)
-         xfree(r);
-     }
-     spin_unlock(&pdev->vpci->lock);
--    xfree(pdev->vpci->msix);
--    xfree(pdev->vpci->msi);
-+    vpci_msi_free(pdev->vpci);
-     xfree(pdev->vpci);
-     pdev->vpci = NULL;
- }
-diff --git a/xen/include/xen/msi-intercept.h b/xen/include/xen/msi-intercept.h
-new file mode 100644
-index 0000000000..77c105e286
---- /dev/null
-+++ b/xen/include/xen/msi-intercept.h
-@@ -0,0 +1,48 @@
-+/*
-+ * Copyright (C) 2021 Arm Ltd.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License version 2 as
-+ * published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License
-+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef __XEN_MSI_INTERCEPT_H_
-+#define __XEN_MSI_INTERCEPT_H_
-+
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
-+
-+#include <asm/msi.h>
-+
-+int pdev_msix_assign(struct domain *d, struct pci_dev *pdev);
-+void pdev_dump_msi(const struct pci_dev *pdev);
-+
-+#else /* !CONFIG_PCI_MSI_INTERCEPT */
-+
-+static inline int pdev_msix_assign(struct domain *d, struct pci_dev *pdev)
-+{
-+    return 0;
-+}
-+
-+static inline void pdev_dump_msi(const struct pci_dev *pdev) {}
-+static inline void pci_cleanup_msi(struct pci_dev *pdev) {}
-+
-+#endif /* CONFIG_PCI_MSI_INTERCEPT */
-+
-+#endif /* __XEN_MSI_INTERCEPT_H */
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 9f5b5d52e1..2cd3647305 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -91,6 +91,7 @@ struct vpci {
-         /* FIXME: currently there's no support for SR-IOV. */
-     } header;
- 
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
-     /* MSI data. */
-     struct vpci_msi {
-       /* Address. */
-@@ -136,6 +137,7 @@ struct vpci {
-             struct vpci_arch_msix_entry arch;
-         } entries[];
-     } *msix;
-+#endif /* CONFIG_PCI_MSI_INTERCEPT */
- #endif
- };
- 
-@@ -148,6 +150,7 @@ struct vpci_vcpu {
- };
- 
- #ifdef __XEN__
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
- void vpci_dump_msi(void);
- 
- /* Make sure there's a hole in the p2m for the MSIX mmio areas. */
-@@ -174,6 +177,7 @@ int __must_check vpci_msix_arch_disable_entry(struct vpci_msix_entry *entry,
-                                               const struct pci_dev *pdev);
- void vpci_msix_arch_init_entry(struct vpci_msix_entry *entry);
- int vpci_msix_arch_print(const struct vpci_msix *msix);
-+int vpci_remove_msix_regions(const struct pci_dev *pdev, struct rangeset *mem);
- 
- /*
-  * Helper functions to fetch MSIX related data. They are used by both the
-@@ -208,6 +212,25 @@ static inline unsigned int vmsix_entry_nr(const struct vpci_msix *msix,
- {
-     return entry - msix->entries;
- }
-+
-+static inline void vpci_msi_free(struct vpci *vpci)
-+{
-+    XFREE(vpci->msix);
-+    XFREE(vpci->msi);
-+}
-+#else /* !CONFIG_PCI_MSI_INTERCEPT */
-+static inline int vpci_make_msix_hole(const struct pci_dev *pdev)
-+{
-+    return 0;
-+}
-+
-+static inline int vpci_remove_msix_regions(const struct pci_dev *pdev,
-+                                      struct rangeset *mem)
-+{
-+    return 0;
-+}
-+static inline void vpci_msi_free(struct vpci *vpci) {}
-+#endif /* CONFIG_PCI_MSI_INTERCEPT */
- #endif /* __XEN__ */
- 
- #else /* !CONFIG_HAS_VPCI */
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 5a24d01f04..d87f56fc95 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -21,7 +21,7 @@
- #include <xen/guest_access.h>
- #include <xen/xenoprof.h>
- #include <xen/iommu.h>
--#ifdef CONFIG_HAS_PCI
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
- #include <asm/msi.h>
- #endif
- #include <public/xen.h>
-@@ -114,7 +114,7 @@ static int get_irq_sid(int irq, u32 *sid, struct avc_audit_data *ad)
-         }
-         return security_irq_sid(irq, sid);
-     }
--#ifdef CONFIG_HAS_PCI
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
-     {
-         struct irq_desc *desc = irq_to_desc(irq);
-         if ( desc->msi_desc && desc->msi_desc->dev ) {
-@@ -874,7 +874,7 @@ static int flask_map_domain_pirq (struct domain *d)
- static int flask_map_domain_msi (struct domain *d, int irq, const void *data,
-                                  u32 *sid, struct avc_audit_data *ad)
- {
--#ifdef CONFIG_HAS_PCI
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
-     const struct msi_info *msi = data;
-     u32 machine_bdf = (msi->seg << 16) | (msi->bus << 8) | msi->devfn;
- 
-@@ -940,7 +940,7 @@ static int flask_unmap_domain_pirq (struct domain *d)
- static int flask_unmap_domain_msi (struct domain *d, int irq, const void *data,
-                                    u32 *sid, struct avc_audit_data *ad)
- {
--#ifdef CONFIG_HAS_PCI
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
-     const struct pci_dev *pdev = data;
-     u32 machine_bdf = (pdev->seg << 16) | (pdev->bus << 8) | pdev->devfn;
- 
--- 
-2.17.1
+Last test of basis   152332  2020-07-31 19:41:23 Z  268 days
+Failing since        152366  2020-08-01 20:49:34 Z  267 days  449 attempts
+Testing same since   161457  2021-04-26 00:42:12 Z    0 days    1 attempts
 
+------------------------------------------------------------
+5359 people touched revisions under test,
+not listing them all
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           fail    
+ test-amd64-coresched-i386-xl                                 fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            fail    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         fail    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  fail    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  fail    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       fail    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-i386-qemut-rhel6hvm-amd                           fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           fail    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     fail    
+ test-amd64-i386-freebsd10-amd64                              fail    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         fail    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-i386-examine                                      fail    
+ test-amd64-i386-freebsd10-i386                               fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-i386-qemut-rhel6hvm-intel                         fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         fail    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      fail    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         fail    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 fail    
+ test-amd64-amd64-amd64-pvgrub                                fail    
+ test-amd64-amd64-i386-pvgrub                                 fail    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-i386-xl-pvshim                                    fail    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       fail    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-arm64-arm64-xl-seattle                                  pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              fail    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-amd64-i386-xl-shadow                                    fail    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 1330641 lines long.)
 
