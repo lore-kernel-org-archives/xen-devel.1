@@ -2,48 +2,51 @@ Return-Path: <SRS0=fknR=JX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98EABC433ED
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08DE8C433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:38:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 390066109E
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:23:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 390066109E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7A98F60FE8
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 16:38:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7A98F60FE8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117785.223695 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117808.223706 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lb410-0005J1-Fy; Mon, 26 Apr 2021 16:23:18 +0000
+	id 1lb4Ex-0006Xa-Pu; Mon, 26 Apr 2021 16:37:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117785.223695; Mon, 26 Apr 2021 16:23:18 +0000
+Received: by outflank-mailman (output) from mailman id 117808.223706; Mon, 26 Apr 2021 16:37:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lb410-0005Is-Cf; Mon, 26 Apr 2021 16:23:18 +0000
-Received: by outflank-mailman (input) for mailman id 117785;
- Mon, 26 Apr 2021 16:23:16 +0000
+	id 1lb4Ex-0006XT-Mo; Mon, 26 Apr 2021 16:37:43 +0000
+Received: by outflank-mailman (input) for mailman id 117808;
+ Mon, 26 Apr 2021 16:37:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TQk4=JX=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1lb40y-0005IC-9f
- for xen-devel@lists.xenproject.org; Mon, 26 Apr 2021 16:23:16 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id a0539e98-d2f5-4c07-989d-58d5af27a81c;
- Mon, 26 Apr 2021 16:23:14 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CC9B11FB;
- Mon, 26 Apr 2021 09:23:13 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 609AE3F73B;
- Mon, 26 Apr 2021 09:23:12 -0700 (PDT)
+ <SRS0=MWrc=JX=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
+ id 1lb4Ew-0006XO-Oq
+ for xen-devel@lists.xenproject.org; Mon, 26 Apr 2021 16:37:42 +0000
+Received: from mail-pg1-x542.google.com (unknown [2607:f8b0:4864:20::542])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 73d06650-9487-44c1-b7b1-e35a3f33f142;
+ Mon, 26 Apr 2021 16:37:41 +0000 (UTC)
+Received: by mail-pg1-x542.google.com with SMTP id t22so5166323pgu.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Apr 2021 09:37:41 -0700 (PDT)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com.
+ [209.85.215.171])
+ by smtp.gmail.com with ESMTPSA id m11sm15125710pjs.34.2021.04.26.09.37.40
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Apr 2021 09:37:40 -0700 (PDT)
+Received: by mail-pg1-f171.google.com with SMTP id d10so2037861pgf.12
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Apr 2021 09:37:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,222 +58,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0539e98-d2f5-4c07-989d-58d5af27a81c
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 3/3] xen/pci: Refactor MSI code that implements MSI functionality within XEN
-Date: Mon, 26 Apr 2021 17:21:27 +0100
-Message-Id: <7b6651f10922571a10685dc7652fbce03b6b6e51.1619453100.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1619453100.git.rahul.singh@arm.com>
-References: <cover.1619453100.git.rahul.singh@arm.com>
-In-Reply-To: <cover.1619453100.git.rahul.singh@arm.com>
-References: <cover.1619453100.git.rahul.singh@arm.com>
+X-Inumbo-ID: 73d06650-9487-44c1-b7b1-e35a3f33f142
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=w+xLIOm1aUR+ojar7SxT7aE31iJaS6lTTL9NFfLTdqs=;
+        b=ctSitjX8LR7O2ZMk4lsR8Irz6egx7wTYNYpP5lwZVohPuAIjgk70gq0rLgnAswDS5J
+         OwrGL0fnjKjd/25GMaUPOEt1BY6NfF//O6cQPXnTolYLDRghV+Gs0xVvNzh51W3LGUxd
+         u8ZH2pOBpUkLUeomCja6RAPBZaNGl3ag01nF0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=w+xLIOm1aUR+ojar7SxT7aE31iJaS6lTTL9NFfLTdqs=;
+        b=HdAKrXbYjlEctQhOFdF3DTMuDbTfLgcUpRYRKMlvB7AN47nB0U5vVTRzpwqoyJ9flQ
+         zIGPaRJEyLl4KU3pNIj49GL97YwAca3YhDnOcpyhwkJHZAA/AOUW5vsHI88g5y9mzAKD
+         ZtbJN3VV9HK0Yi79KNs6b86hc4ElMjpqey8IY01Gvm2OGavGa30lLJYLnbwSLBnEXQ8j
+         6xnu8yoxfXnPLrK63D8c1/oX+GCg+gC7mI1dJZe5oIQxyKl4xF7w0gCqMGS6SCQtFl4+
+         TSNgLcukkeoYjYKmU1aJ+PTV76z+McCX/w8OPSyEh9bpW8ou4tfpFwM6h4lxDggG/2bl
+         jTzw==
+X-Gm-Message-State: AOAM530vI3wgmNWtv3YS5gWdU60+swNw33Ttu3Z47h4XW8RwXq5oS2Lu
+	Y74ObPZ5WNi+7SP1/gvVMHeFU76aK3Nz+Q==
+X-Google-Smtp-Source: ABdhPJwZTUJEiFbRvSi4tFMIQTz6mGt21dwc4Md7Gg3mCkvn0KF1QRxEwiFRVjICE/0FOuAdkcv6Ug==
+X-Received: by 2002:a65:618c:: with SMTP id c12mr17832885pgv.296.1619455060939;
+        Mon, 26 Apr 2021 09:37:40 -0700 (PDT)
+X-Received: by 2002:a5d:8c82:: with SMTP id g2mr15143365ion.34.1619455049397;
+ Mon, 26 Apr 2021 09:37:29 -0700 (PDT)
+MIME-Version: 1.0
+References: <20210422081508.3942748-1-tientzu@chromium.org>
+ <20210422081508.3942748-6-tientzu@chromium.org> <c9abca62-328d-d0d6-a8a6-a67475171f92@arm.com>
+In-Reply-To: <c9abca62-328d-d0d6-a8a6-a67475171f92@arm.com>
+From: Claire Chang <tientzu@chromium.org>
+Date: Tue, 27 Apr 2021 00:37:18 +0800
+X-Gmail-Original-Message-ID: <CALiNf2_tffc65PhLxCr3-+gmVYKGO2HjYiJVkBNa5U5HYdi9pg@mail.gmail.com>
+Message-ID: <CALiNf2_tffc65PhLxCr3-+gmVYKGO2HjYiJVkBNa5U5HYdi9pg@mail.gmail.com>
+Subject: Re: [PATCH v5 05/16] swiotlb: Add restricted DMA pool initialization
+To: Steven Price <steven.price@arm.com>
+Cc: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
+	Frank Rowand <frowand.list@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, 
+	boris.ostrovsky@oracle.com, jgross@suse.com, Christoph Hellwig <hch@lst.de>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, benh@kernel.crashing.org, paulus@samba.org, 
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
+	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
+	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
+	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
+	heikki.krogerus@linux.intel.com, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
+	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
+	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
+	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
+	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>, 
+	Tomasz Figa <tfiga@chromium.org>, bskeggs@redhat.com, 
+	Bjorn Helgaas <bhelgaas@google.com>, chris@chris-wilson.co.uk, 
+	Daniel Vetter <daniel@ffwll.ch>, airlied@linux.ie, dri-devel@lists.freedesktop.org, 
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, 
+	Jianxiong Gao <jxgao@google.com>, joonas.lahtinen@linux.intel.com, 
+	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com, 
+	matthew.auld@intel.com, nouveau@lists.freedesktop.org, rodrigo.vivi@intel.com, 
+	thomas.hellstrom@linux.intel.com
+Content-Type: text/plain; charset="UTF-8"
 
-MSI code that implements MSI functionality to support MSI within XEN is
-not usable on ARM. Move the code under CONFIG_PCI_MSI_INTERCEPT flag to
-gate the code for ARM.
+On Fri, Apr 23, 2021 at 7:34 PM Steven Price <steven.price@arm.com> wrote:
+>
+> On 22/04/2021 09:14, Claire Chang wrote:
+> > Add the initialization function to create restricted DMA pools from
+> > matching reserved-memory nodes.
+> >
+> > Signed-off-by: Claire Chang <tientzu@chromium.org>
+> > ---
+> >   include/linux/device.h  |  4 +++
+> >   include/linux/swiotlb.h |  3 +-
+> >   kernel/dma/swiotlb.c    | 80 +++++++++++++++++++++++++++++++++++++++++
+> >   3 files changed, 86 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/include/linux/device.h b/include/linux/device.h
+> > index 38a2071cf776..4987608ea4ff 100644
+> > --- a/include/linux/device.h
+> > +++ b/include/linux/device.h
+> > @@ -416,6 +416,7 @@ struct dev_links_info {
+> >    * @dma_pools:      Dma pools (if dma'ble device).
+> >    * @dma_mem:        Internal for coherent mem override.
+> >    * @cma_area:       Contiguous memory area for dma allocations
+> > + * @dma_io_tlb_mem: Internal for swiotlb io_tlb_mem override.
+> >    * @archdata:       For arch-specific additions.
+> >    * @of_node:        Associated device tree node.
+> >    * @fwnode: Associated device node supplied by platform firmware.
+> > @@ -521,6 +522,9 @@ struct device {
+> >   #ifdef CONFIG_DMA_CMA
+> >       struct cma *cma_area;           /* contiguous memory area for dma
+> >                                          allocations */
+> > +#endif
+> > +#ifdef CONFIG_DMA_RESTRICTED_POOL
+> > +     struct io_tlb_mem *dma_io_tlb_mem;
+> >   #endif
+> >       /* arch specific additions */
+> >       struct dev_archdata     archdata;
+> > diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+> > index 216854a5e513..03ad6e3b4056 100644
+> > --- a/include/linux/swiotlb.h
+> > +++ b/include/linux/swiotlb.h
+> > @@ -72,7 +72,8 @@ extern enum swiotlb_force swiotlb_force;
+> >    *          range check to see if the memory was in fact allocated by this
+> >    *          API.
+> >    * @nslabs: The number of IO TLB blocks (in groups of 64) between @start and
+> > - *           @end. This is command line adjustable via setup_io_tlb_npages.
+> > + *           @end. For default swiotlb, this is command line adjustable via
+> > + *           setup_io_tlb_npages.
+> >    * @used:   The number of used IO TLB block.
+> >    * @list:   The free list describing the number of free entries available
+> >    *          from each index.
+> > diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+> > index 57a9adb920bf..ffbb8724e06c 100644
+> > --- a/kernel/dma/swiotlb.c
+> > +++ b/kernel/dma/swiotlb.c
+> > @@ -39,6 +39,13 @@
+> >   #ifdef CONFIG_DEBUG_FS
+> >   #include <linux/debugfs.h>
+> >   #endif
+> > +#ifdef CONFIG_DMA_RESTRICTED_POOL
+> > +#include <linux/io.h>
+> > +#include <linux/of.h>
+> > +#include <linux/of_fdt.h>
+> > +#include <linux/of_reserved_mem.h>
+> > +#include <linux/slab.h>
+> > +#endif
+> >
+> >   #include <asm/io.h>
+> >   #include <asm/dma.h>
+> > @@ -681,3 +688,76 @@ static int __init swiotlb_create_default_debugfs(void)
+> >   late_initcall(swiotlb_create_default_debugfs);
+> >
+> >   #endif
+> > +
+> > +#ifdef CONFIG_DMA_RESTRICTED_POOL
+> > +static int rmem_swiotlb_device_init(struct reserved_mem *rmem,
+> > +                                 struct device *dev)
+> > +{
+> > +     struct io_tlb_mem *mem = rmem->priv;
+> > +     unsigned long nslabs = rmem->size >> IO_TLB_SHIFT;
+> > +
+> > +     if (dev->dma_io_tlb_mem)
+> > +             return 0;
+> > +
+> > +     /* Since multiple devices can share the same pool, the private data,
+> > +      * io_tlb_mem struct, will be initialized by the first device attached
+> > +      * to it.
+> > +      */
+> > +     if (!mem) {
+> > +             mem = kzalloc(struct_size(mem, slots, nslabs), GFP_KERNEL);
+> > +             if (!mem)
+> > +                     return -ENOMEM;
+> > +#ifdef CONFIG_ARM
+> > +             if (!PageHighMem(pfn_to_page(PHYS_PFN(rmem->base)))) {
+> > +                     kfree(mem);
+> > +                     return -EINVAL;
+> > +             }
+> > +#endif /* CONFIG_ARM */
+> > +             swiotlb_init_io_tlb_mem(mem, rmem->base, nslabs, false);
+> > +
+> > +             rmem->priv = mem;
+> > +     }
+> > +
+> > +#ifdef CONFIG_DEBUG_FS
+> > +     if (!io_tlb_default_mem->debugfs)
+> > +             io_tlb_default_mem->debugfs =
+> > +                     debugfs_create_dir("swiotlb", NULL);
+>
+> At this point it's possible for io_tlb_default_mem to be NULL, leading
+> to a splat.
 
-Currently, we have no idea how MSI functionality will be supported for
-other architecture therefore we have decided to move the code under
-CONFIG_PCI_MSI_INTERCEPT. We know this is not the right flag to gate the
-code but to avoid an extra flag we decided to use this.
+Thanks for pointing this out.
 
-No functional change intended.
+>
+> But even then if it's not and we have the situation where debugfs==NULL
+> then the debugfs_create_dir() here will cause a subsequent attempt in
+> swiotlb_create_debugfs() to fail (directory already exists) leading to
+> mem->debugfs being assigned an error value. I suspect the creation of
+> the debugfs directory needs to be separated from io_tlb_default_mem
+> being set.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
----
-Changes since v2:
- - This patch is added in this version.
----
- xen/drivers/passthrough/msi-intercept.c | 41 +++++++++++++++++++++++++
- xen/drivers/passthrough/pci.c           | 34 ++++----------------
- xen/include/xen/msi-intercept.h         |  7 +++++
- xen/include/xen/pci.h                   | 11 ++++---
- 4 files changed, 61 insertions(+), 32 deletions(-)
+debugfs creation should move into the if (!mem) {...} above to avoid
+duplication.
+I think having a separated struct dentry pointer for the default
+debugfs should be enough?
 
-diff --git a/xen/drivers/passthrough/msi-intercept.c b/xen/drivers/passthrough/msi-intercept.c
-index 1edae6d4e8..33ab71514d 100644
---- a/xen/drivers/passthrough/msi-intercept.c
-+++ b/xen/drivers/passthrough/msi-intercept.c
-@@ -19,6 +19,47 @@
- #include <asm/msi.h>
- #include <asm/hvm/io.h>
- 
-+int pdev_msi_init(struct pci_dev *pdev)
-+{
-+    unsigned int pos;
-+
-+    INIT_LIST_HEAD(&pdev->msi_list);
-+
-+    pos = pci_find_cap_offset(pdev->seg, pdev->bus, PCI_SLOT(pdev->devfn),
-+                              PCI_FUNC(pdev->devfn), PCI_CAP_ID_MSI);
-+    if ( pos )
-+    {
-+        uint16_t ctrl = pci_conf_read16(pdev->sbdf, msi_control_reg(pos));
-+
-+        pdev->msi_maxvec = multi_msi_capable(ctrl);
-+    }
-+
-+    pos = pci_find_cap_offset(pdev->seg, pdev->bus, PCI_SLOT(pdev->devfn),
-+                              PCI_FUNC(pdev->devfn), PCI_CAP_ID_MSIX);
-+    if ( pos )
-+    {
-+        struct arch_msix *msix = xzalloc(struct arch_msix);
-+        uint16_t ctrl;
-+
-+        if ( !msix )
-+            return -ENOMEM;
-+
-+        spin_lock_init(&msix->table_lock);
-+
-+        ctrl = pci_conf_read16(pdev->sbdf, msix_control_reg(pos));
-+        msix->nr_entries = msix_table_size(ctrl);
-+
-+        pdev->msix = msix;
-+    }
-+
-+    return 0;
-+}
-+
-+void pdev_msi_deinit(struct pci_dev *pdev)
-+{
-+    XFREE(pdev->msix);
-+}
-+
- int pdev_msix_assign(struct domain *d, struct pci_dev *pdev)
- {
-     int rc;
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index 298be21b5b..b1e3c711ad 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -314,6 +314,7 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
- {
-     struct pci_dev *pdev;
-     unsigned int pos;
-+    int rc;
- 
-     list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
-         if ( pdev->bus == bus && pdev->devfn == devfn )
-@@ -327,35 +328,12 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
-     *((u8*) &pdev->bus) = bus;
-     *((u8*) &pdev->devfn) = devfn;
-     pdev->domain = NULL;
--    INIT_LIST_HEAD(&pdev->msi_list);
--
--    pos = pci_find_cap_offset(pseg->nr, bus, PCI_SLOT(devfn), PCI_FUNC(devfn),
--                              PCI_CAP_ID_MSI);
--    if ( pos )
--    {
--        uint16_t ctrl = pci_conf_read16(pdev->sbdf, msi_control_reg(pos));
- 
--        pdev->msi_maxvec = multi_msi_capable(ctrl);
--    }
--
--    pos = pci_find_cap_offset(pseg->nr, bus, PCI_SLOT(devfn), PCI_FUNC(devfn),
--                              PCI_CAP_ID_MSIX);
--    if ( pos )
-+    rc = pdev_msi_init(pdev);
-+    if ( rc )
-     {
--        struct arch_msix *msix = xzalloc(struct arch_msix);
--        uint16_t ctrl;
--
--        if ( !msix )
--        {
--            xfree(pdev);
--            return NULL;
--        }
--        spin_lock_init(&msix->table_lock);
--
--        ctrl = pci_conf_read16(pdev->sbdf, msix_control_reg(pos));
--        msix->nr_entries = msix_table_size(ctrl);
--
--        pdev->msix = msix;
-+        XFREE(pdev);
-+        return NULL;
-     }
- 
-     list_add(&pdev->alldevs_list, &pseg->alldevs_list);
-@@ -449,7 +427,7 @@ static void free_pdev(struct pci_seg *pseg, struct pci_dev *pdev)
-     }
- 
-     list_del(&pdev->alldevs_list);
--    xfree(pdev->msix);
-+    pdev_msi_deinit(pdev);
-     xfree(pdev);
- }
- 
-diff --git a/xen/include/xen/msi-intercept.h b/xen/include/xen/msi-intercept.h
-index 77c105e286..38ff7a09e1 100644
---- a/xen/include/xen/msi-intercept.h
-+++ b/xen/include/xen/msi-intercept.h
-@@ -21,16 +21,23 @@
- 
- #include <asm/msi.h>
- 
-+int pdev_msi_init(struct pci_dev *pdev);
-+void pdev_msi_deinit(struct pci_dev *pdev);
- int pdev_msix_assign(struct domain *d, struct pci_dev *pdev);
- void pdev_dump_msi(const struct pci_dev *pdev);
- 
- #else /* !CONFIG_PCI_MSI_INTERCEPT */
-+static inline int pdev_msi_init(struct pci_dev *pdev)
-+{
-+    return 0;
-+}
- 
- static inline int pdev_msix_assign(struct domain *d, struct pci_dev *pdev)
- {
-     return 0;
- }
- 
-+static inline void pdev_msi_deinit(struct pci_dev *pdev) {}
- static inline void pdev_dump_msi(const struct pci_dev *pdev) {}
- static inline void pci_cleanup_msi(struct pci_dev *pdev) {}
- 
-diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
-index 8e3d4d9454..f5b57270be 100644
---- a/xen/include/xen/pci.h
-+++ b/xen/include/xen/pci.h
-@@ -79,10 +79,6 @@ struct pci_dev {
-     struct list_head alldevs_list;
-     struct list_head domain_list;
- 
--    struct list_head msi_list;
--
--    struct arch_msix *msix;
--
-     struct domain *domain;
- 
-     const union {
-@@ -94,7 +90,14 @@ struct pci_dev {
-         pci_sbdf_t sbdf;
-     };
- 
-+#ifdef CONFIG_PCI_MSI_INTERCEPT
-+    struct list_head msi_list;
-+
-+    struct arch_msix *msix;
-+
-     uint8_t msi_maxvec;
-+#endif
-+
-     uint8_t phantom_stride;
- 
-     nodeid_t node; /* NUMA node */
--- 
-2.17.1
+if (!debugfs)
+    debugfs = debugfs_create_dir("swiotlb", NULL);
+swiotlb_create_debugfs(mem, rmem->name, debugfs);
 
+>
+> Other than that I gave this series a go with our prototype of Arm's
+> Confidential Computer Architecture[1] - since the majority of the
+> guest's memory is protected from the host the restricted DMA pool allows
+> (only) a small area to be shared with the host.
+>
+> After fixing (well hacking round) the above it all seems to be working
+> fine with virtio drivers.
+>
+> Thanks,
+>
+> Steve
+>
+> [1]
+> https://www.arm.com/why-arm/architecture/security-features/arm-confidential-compute-architecture
 
