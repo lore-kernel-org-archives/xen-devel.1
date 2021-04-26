@@ -2,47 +2,49 @@ Return-Path: <SRS0=fknR=JX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 816CEC433B4
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 15:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95F1BC433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 15:38:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E33BD60FE5
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 15:31:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E33BD60FE5
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 39B1061076
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Apr 2021 15:38:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 39B1061076
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.117712.223563 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.117724.223590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lb3C2-0007ke-BV; Mon, 26 Apr 2021 15:30:38 +0000
+	id 1lb3JM-00083n-EO; Mon, 26 Apr 2021 15:38:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 117712.223563; Mon, 26 Apr 2021 15:30:38 +0000
+Received: by outflank-mailman (output) from mailman id 117724.223590; Mon, 26 Apr 2021 15:38:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lb3C2-0007kX-8L; Mon, 26 Apr 2021 15:30:38 +0000
-Received: by outflank-mailman (input) for mailman id 117712;
- Mon, 26 Apr 2021 15:30:37 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lb3C0-0007kP-W3; Mon, 26 Apr 2021 15:30:37 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lb3C0-00032h-R1; Mon, 26 Apr 2021 15:30:36 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lb3C0-00051f-In; Mon, 26 Apr 2021 15:30:36 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lb3C0-0005kn-II; Mon, 26 Apr 2021 15:30:36 +0000
+	id 1lb3JM-00083g-B2; Mon, 26 Apr 2021 15:38:12 +0000
+Received: by outflank-mailman (input) for mailman id 117724;
+ Mon, 26 Apr 2021 15:38:11 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=vTY+=JX=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
+ id 1lb3JL-00081u-L2
+ for xen-devel@lists.xenproject.org; Mon, 26 Apr 2021 15:38:11 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id ed0af932-ab0d-4a79-aaad-ee8818ca0352;
+ Mon, 26 Apr 2021 15:38:06 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 50D691042;
+ Mon, 26 Apr 2021 08:38:06 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
+ [10.1.197.16])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E3AAC3F7B4;
+ Mon, 26 Apr 2021 08:38:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,275 +56,295 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=K6lhHQLlOigeLgl5yZQG9wNHNxlhoh/dYgPFd1TEz7o=; b=aIXo+pnzIq12OE4J+FB2aLsiNp
-	Gi9aF9qkoZNy8tTdDEw0wPS67VvnA6G6ccQPI3GuwHd+j2/1/lIX65fmI4Qo/gd8oJa0F1EM//NFI
-	R9RYD1kPh3+RUZq5bxbCnTB5GyQnfzwmGTawRTxM6LKSKYVeIhbxV8o9Luoo8/0wEmjM=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-161459-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [libvirt test] 161459: regressions - FAIL
-X-Osstest-Failures:
-    libvirt:build-armhf-libvirt:libvirt-build:fail:regression
-    libvirt:build-amd64-libvirt:libvirt-build:fail:regression
-    libvirt:build-arm64-libvirt:libvirt-build:fail:regression
-    libvirt:build-i386-libvirt:libvirt-build:fail:regression
-    libvirt:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-pair:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-vhd:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-amd64-libvirt-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-arm64-arm64-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-arm64-arm64-libvirt-qcow2:build-check(1):blocked:nonblocking
-    libvirt:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
-    libvirt:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
-    libvirt:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    libvirt=3c3c55be66e230ef09ad927eda038dc32f01a166
-X-Osstest-Versions-That:
-    libvirt=2c846fa6bcc11929c9fb857a22430fb9945654ad
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 26 Apr 2021 15:30:36 +0000
+X-Inumbo-ID: ed0af932-ab0d-4a79-aaad-ee8818ca0352
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 3/3] docs/doxygen: doxygen documentation for grant_table.h
+Date: Mon, 26 Apr 2021 16:37:41 +0100
+Message-Id: <20210426153741.26904-4-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210426153741.26904-1-luca.fancellu@arm.com>
+References: <20210426153741.26904-1-luca.fancellu@arm.com>
 
-flight 161459 libvirt real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/161459/
+Modification to include/public/grant_table.h:
 
-Regressions :-(
+1) Add doxygen tags to:
+ - Create Grant tables section
+ - include variables in the generated documentation
+2) Add .rst file for grant table for Arm64
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-armhf-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-arm64-libvirt           6 libvirt-build            fail REGR. vs. 151777
- build-i386-libvirt            6 libvirt-build            fail REGR. vs. 151777
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+v3 changes:
+- removed tags to skip anonymous union/struct
+- moved back comment pointed out by Jan
+- moved down defines related to struct gnttab_copy
+  as pointed out by Jan
+v2 changes:
+- Revert back to anonymous union/struct
+- add doxygen tags to skip anonymous union/struct
+---
+ docs/hypercall-interfaces/arm64.rst           |  1 +
+ .../arm64/grant_tables.rst                    |  8 ++
+ docs/xen-doxygen/doxy_input.list              |  1 +
+ xen/include/public/grant_table.h              | 75 ++++++++++++-------
+ 4 files changed, 57 insertions(+), 28 deletions(-)
+ create mode 100644 docs/hypercall-interfaces/arm64/grant_tables.rst
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-amd64-amd64-libvirt-vhd  1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
- test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt      1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-qcow2  1 build-check(1)               blocked  n/a
- test-arm64-arm64-libvirt-xsm  1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
- test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+diff --git a/docs/hypercall-interfaces/arm64.rst b/docs/hypercall-interfaces/arm64.rst
+index 5e701a2adc..c30a7142b1 100644
+--- a/docs/hypercall-interfaces/arm64.rst
++++ b/docs/hypercall-interfaces/arm64.rst
+@@ -8,6 +8,7 @@ Starting points
+ .. toctree::
+    :maxdepth: 2
+ 
++   arm64/grant_tables
+ 
+ 
+ Functions
+diff --git a/docs/hypercall-interfaces/arm64/grant_tables.rst b/docs/hypercall-interfaces/arm64/grant_tables.rst
+new file mode 100644
+index 0000000000..8955ec5812
+--- /dev/null
++++ b/docs/hypercall-interfaces/arm64/grant_tables.rst
+@@ -0,0 +1,8 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Grant Tables
++============
++
++.. doxygengroup:: grant_table
++   :project: Xen
++   :members:
+diff --git a/docs/xen-doxygen/doxy_input.list b/docs/xen-doxygen/doxy_input.list
+index e69de29bb2..233d692fa7 100644
+--- a/docs/xen-doxygen/doxy_input.list
++++ b/docs/xen-doxygen/doxy_input.list
+@@ -0,0 +1 @@
++xen/include/public/grant_table.h
+diff --git a/xen/include/public/grant_table.h b/xen/include/public/grant_table.h
+index 84b1d26b36..9b5ccf07a4 100644
+--- a/xen/include/public/grant_table.h
++++ b/xen/include/public/grant_table.h
+@@ -25,15 +25,19 @@
+  * Copyright (c) 2004, K A Fraser
+  */
+ 
++/**
++ * @file
++ * @brief Interface for granting foreign access to page frames, and receiving
++ * page-ownership transfers.
++ */
++
+ #ifndef __XEN_PUBLIC_GRANT_TABLE_H__
+ #define __XEN_PUBLIC_GRANT_TABLE_H__
+ 
+ #include "xen.h"
+ 
+-/*
+- * `incontents 150 gnttab Grant Tables
+- *
+- * Xen's grant tables provide a generic mechanism to memory sharing
++/**
++ * @brief Xen's grant tables provide a generic mechanism to memory sharing
+  * between domains. This shared memory interface underpins the split
+  * device drivers for block and network IO.
+  *
+@@ -51,13 +55,10 @@
+  * know the real machine address of a page it is sharing. This makes
+  * it possible to share memory correctly with domains running in
+  * fully virtualised memory.
+- */
+-
+-/***********************************
++ *
+  * GRANT TABLE REPRESENTATION
+- */
+-
+-/* Some rough guidelines on accessing and updating grant-table entries
++ *
++ * Some rough guidelines on accessing and updating grant-table entries
+  * in a concurrency-safe manner. For more information, Linux contains a
+  * reference implementation for guest OSes (drivers/xen/grant_table.c, see
+  * http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=drivers/xen/grant-table.c;hb=HEAD
+@@ -66,6 +67,7 @@
+  *     compiler barrier will still be required.
+  *
+  * Introducing a valid entry into the grant table:
++ * @code
+  *  1. Write ent->domid.
+  *  2. Write ent->frame:
+  *      GTF_permit_access:   Frame to which access is permitted.
+@@ -73,20 +75,25 @@
+  *                           frame, or zero if none.
+  *  3. Write memory barrier (WMB).
+  *  4. Write ent->flags, inc. valid type.
++ * @endcode
+  *
+  * Invalidating an unused GTF_permit_access entry:
++ * @code
+  *  1. flags = ent->flags.
+  *  2. Observe that !(flags & (GTF_reading|GTF_writing)).
+  *  3. Check result of SMP-safe CMPXCHG(&ent->flags, flags, 0).
+  *  NB. No need for WMB as reuse of entry is control-dependent on success of
+  *      step 3, and all architectures guarantee ordering of ctrl-dep writes.
++ * @endcode
+  *
+  * Invalidating an in-use GTF_permit_access entry:
++ *
+  *  This cannot be done directly. Request assistance from the domain controller
+  *  which can set a timeout on the use of a grant entry and take necessary
+  *  action. (NB. This is not yet implemented!).
+  *
+  * Invalidating an unused GTF_accept_transfer entry:
++ * @code
+  *  1. flags = ent->flags.
+  *  2. Observe that !(flags & GTF_transfer_committed). [*]
+  *  3. Check result of SMP-safe CMPXCHG(&ent->flags, flags, 0).
+@@ -97,18 +104,23 @@
+  *      transferred frame is written. It is safe for the guest to spin waiting
+  *      for this to occur (detect by observing GTF_transfer_completed in
+  *      ent->flags).
++ * @endcode
+  *
+  * Invalidating a committed GTF_accept_transfer entry:
+  *  1. Wait for (ent->flags & GTF_transfer_completed).
+  *
+  * Changing a GTF_permit_access from writable to read-only:
++ *
+  *  Use SMP-safe CMPXCHG to set GTF_readonly, while checking !GTF_writing.
+  *
+  * Changing a GTF_permit_access from read-only to writable:
++ *
+  *  Use SMP-safe bit-setting instruction.
++ * @addtogroup grant_table Grant Tables
++ * @{
+  */
+ 
+-/*
++/**
+  * Reference to a grant entry in a specified domain's grant table.
+  */
+ typedef uint32_t grant_ref_t;
+@@ -120,24 +132,26 @@ typedef uint32_t grant_ref_t;
+  * [GST]: This field is written by the guest and read by Xen.
+  */
+ 
+-/*
+- * Version 1 of the grant table entry structure is maintained purely
+- * for backwards compatibility.  New guests should use version 2.
+- */
+ #if __XEN_INTERFACE_VERSION__ < 0x0003020a
+ #define grant_entry_v1 grant_entry
+ #define grant_entry_v1_t grant_entry_t
+ #endif
++/**
++ * Version 1 of the grant table entry structure is maintained purely
++ * for backwards compatibility.  New guests should use version 2.
++ */
+ struct grant_entry_v1 {
+-    /* GTF_xxx: various type and flag information.  [XEN,GST] */
++    /** GTF_xxx: various type and flag information.  [XEN,GST] */
+     uint16_t flags;
+-    /* The domain being granted foreign privileges. [GST] */
++    /** The domain being granted foreign privileges. [GST] */
+     domid_t  domid;
+-    /*
++    /**
++     * @code
+      * GTF_permit_access: GFN that @domid is allowed to map and access. [GST]
+      * GTF_accept_transfer: GFN that @domid is allowed to transfer into. [GST]
+      * GTF_transfer_completed: MFN whose ownership transferred by @domid
+      *                         (non-translated guests only). [XEN]
++     * @endcode
+      */
+     uint32_t frame;
+ };
+@@ -228,7 +242,7 @@ struct grant_entry_header {
+ };
+ typedef struct grant_entry_header grant_entry_header_t;
+ 
+-/*
++/**
+  * Version 2 of the grant entry structure.
+  */
+ union grant_entry_v2 {
+@@ -433,7 +447,7 @@ typedef struct gnttab_transfer gnttab_transfer_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
+ 
+ 
+-/*
++/**
+  * GNTTABOP_copy: Hypervisor based copy
+  * source and destinations can be eithers MFNs or, for foreign domains,
+  * grant references. the foreign domain has to grant read/write access
+@@ -451,11 +465,6 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
+  * bytes to be copied.
+  */
+ 
+-#define _GNTCOPY_source_gref      (0)
+-#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
+-#define _GNTCOPY_dest_gref        (1)
+-#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
+-
+ struct gnttab_copy {
+     /* IN parameters. */
+     struct gnttab_copy_ptr {
+@@ -471,6 +480,12 @@ struct gnttab_copy {
+     /* OUT parameters. */
+     int16_t       status;
+ };
++
++#define _GNTCOPY_source_gref      (0)
++#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
++#define _GNTCOPY_dest_gref        (1)
++#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
++
+ typedef struct gnttab_copy  gnttab_copy_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_copy_t);
+ 
+@@ -579,7 +594,7 @@ struct gnttab_swap_grant_ref {
+ typedef struct gnttab_swap_grant_ref gnttab_swap_grant_ref_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_swap_grant_ref_t);
+ 
+-/*
++/**
+  * Issue one or more cache maintenance operations on a portion of a
+  * page granted to the calling domain by a foreign domain.
+  */
+@@ -588,8 +603,8 @@ struct gnttab_cache_flush {
+         uint64_t dev_bus_addr;
+         grant_ref_t ref;
+     } a;
+-    uint16_t offset; /* offset from start of grant */
+-    uint16_t length; /* size within the grant */
++    uint16_t offset; /**< offset from start of grant */
++    uint16_t length; /**< size within the grant */
+ #define GNTTAB_CACHE_CLEAN          (1u<<0)
+ #define GNTTAB_CACHE_INVAL          (1u<<1)
+ #define GNTTAB_CACHE_SOURCE_GREF    (1u<<31)
+@@ -673,6 +688,10 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_cache_flush_t);
+     "operation not done; try again"             \
+ }
+ 
++/**
++ * @}
++*/
++
+ #endif /* __XEN_PUBLIC_GRANT_TABLE_H__ */
+ 
+ /*
+-- 
+2.17.1
 
-version targeted for testing:
- libvirt              3c3c55be66e230ef09ad927eda038dc32f01a166
-baseline version:
- libvirt              2c846fa6bcc11929c9fb857a22430fb9945654ad
-
-Last test of basis   151777  2020-07-10 04:19:19 Z  290 days
-Failing since        151818  2020-07-11 04:18:52 Z  289 days  282 attempts
-Testing same since   161423  2021-04-24 04:18:53 Z    2 days    3 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Adolfo Jayme Barrientos <fitoschido@gmail.com>
-  Aleksandr Alekseev <alexander.alekseev@virtuozzo.com>
-  Aleksei Zakharov <zaharov@selectel.ru>
-  Andika Triwidada <andika@gmail.com>
-  Andrea Bolognani <abologna@redhat.com>
-  Balázs Meskó <meskobalazs@mailbox.org>
-  Barrett Schonefeld <bschoney@utexas.edu>
-  Bastian Germann <bastiangermann@fishpost.de>
-  Bastien Orivel <bastien.orivel@diateam.net>
-  BiaoXiang Ye <yebiaoxiang@huawei.com>
-  Bihong Yu <yubihong@huawei.com>
-  Binfeng Wu <wubinfeng@huawei.com>
-  Boris Fiuczynski <fiuczy@linux.ibm.com>
-  Brian Turek <brian.turek@gmail.com>
-  Bruno Haible <bruno@clisp.org>
-  Chris Mayo <aklhfex@gmail.com>
-  Christian Ehrhardt <christian.ehrhardt@canonical.com>
-  Christian Schoenebeck <qemu_oss@crudebyte.com>
-  Cole Robinson <crobinso@redhat.com>
-  Collin Walling <walling@linux.ibm.com>
-  Cornelia Huck <cohuck@redhat.com>
-  Cédric Bosdonnat <cbosdonnat@suse.com>
-  Côme Borsoi <fedora@borsoi.fr>
-  Daniel Henrique Barboza <danielhb413@gmail.com>
-  Daniel Letai <dani@letai.org.il>
-  Daniel P. Berrange <berrange@redhat.com>
-  Daniel P. Berrangé <berrange@redhat.com>
-  Dmytro Linkin <dlinkin@nvidia.com>
-  Eiichi Tsukata <eiichi.tsukata@nutanix.com>
-  Eric Farman <farman@linux.ibm.com>
-  Erik Skultety <eskultet@redhat.com>
-  Fabian Affolter <mail@fabian-affolter.ch>
-  Fabian Freyer <fabian.freyer@physik.tu-berlin.de>
-  Fangge Jin <fjin@redhat.com>
-  Farhan Ali <alifm@linux.ibm.com>
-  Fedora Weblate Translation <i18n@lists.fedoraproject.org>
-  gongwei <gongwei@smartx.com>
-  Guoyi Tu<tu.guoyi@h3c.com>
-  Göran Uddeborg <goeran@uddeborg.se>
-  Halil Pasic <pasic@linux.ibm.com>
-  Han Han <hhan@redhat.com>
-  Hao Wang <wanghao232@huawei.com>
-  Hela Basa <r45xveza@pm.me>
-  Helmut Grohne <helmut@subdivi.de>
-  Ian Wienand <iwienand@redhat.com>
-  Jakob Meng <jakobmeng@web.de>
-  Jamie Strandboge <jamie@canonical.com>
-  Jamie Strandboge <jamie@ubuntu.com>
-  Jan Kuparinen <copper_fin@hotmail.com>
-  Jean-Baptiste Holcroft <jean-baptiste@holcroft.fr>
-  Jianan Gao <jgao@redhat.com>
-  Jim Fehlig <jfehlig@suse.com>
-  Jin Yan <jinyan12@huawei.com>
-  Jiri Denemark <jdenemar@redhat.com>
-  John Ferlan <jferlan@redhat.com>
-  Jonathan Watt <jwatt@jwatt.org>
-  Jonathon Jongsma <jjongsma@redhat.com>
-  Julio Faracco <jcfaracco@gmail.com>
-  Ján Tomko <jtomko@redhat.com>
-  Kashyap Chamarthy <kchamart@redhat.com>
-  Kevin Locke <kevin@kevinlocke.name>
-  Kristina Hanicova <khanicov@redhat.com>
-  Laine Stump <laine@redhat.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Liao Pingfang <liao.pingfang@zte.com.cn>
-  Lin Ma <lma@suse.com>
-  Lin Ma <lma@suse.de>
-  Lin Ma <morecache@gmail.com>
-  Luke Yue <lukedyue@gmail.com>
-  Luyao Zhong <luyao.zhong@intel.com>
-  Marc Hartmayer <mhartmay@linux.ibm.com>
-  Marc-André Lureau <marcandre.lureau@redhat.com>
-  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-  Markus Schade <markus.schade@hetzner.com>
-  Martin Kletzander <mkletzan@redhat.com>
-  Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
-  Matt Coleman <matt@datto.com>
-  Matt Coleman <mcoleman@datto.com>
-  Mauro Matteo Cascella <mcascell@redhat.com>
-  Meina Li <meili@redhat.com>
-  Michal Privoznik <mprivozn@redhat.com>
-  Michał Smyk <fedora@smyk.it>
-  Milo Casagrande <milo@milo.name>
-  Moshe Levi <moshele@nvidia.com>
-  Muha Aliss <muhaaliss@gmail.com>
-  Neal Gompa <ngompa13@gmail.com>
-  Nick Shyrokovskiy <nshyrokovskiy@gmail.com>
-  Nickys Music Group <nickys.music.group@gmail.com>
-  Nico Pache <npache@redhat.com>
-  Nikolay Shirokovskiy <nshirokovskiy@virtuozzo.com>
-  Olaf Hering <olaf@aepfle.de>
-  Olesya Gerasimenko <gammaray@basealt.ru>
-  Orion Poplawski <orion@nwra.com>
-  Pany <geekpany@gmail.com>
-  Patrick Magauran <patmagauran.j@gmail.com>
-  Paulo de Rezende Pinatti <ppinatti@linux.ibm.com>
-  Pavel Hrdina <phrdina@redhat.com>
-  Peng Liang <liangpeng10@huawei.com>
-  Peter Krempa <pkrempa@redhat.com>
-  Pino Toscano <ptoscano@redhat.com>
-  Pino Toscano <toscano.pino@tiscali.it>
-  Piotr Drąg <piotrdrag@gmail.com>
-  Prathamesh Chavan <pc44800@gmail.com>
-  Ricky Tigg <ricky.tigg@gmail.com>
-  Roman Bogorodskiy <bogorodskiy@gmail.com>
-  Roman Bolshakov <r.bolshakov@yadro.com>
-  Ryan Gahagan <rgahagan@cs.utexas.edu>
-  Ryan Schmidt <git@ryandesign.com>
-  Sam Hartman <hartmans@debian.org>
-  Scott Shambarger <scott-libvirt@shambarger.net>
-  Sebastian Mitterle <smitterl@redhat.com>
-  SeongHyun Jo <caelus9536@gmail.com>
-  Shalini Chellathurai Saroja <shalini@linux.ibm.com>
-  Shaojun Yang <yangshaojun@phytium.com.cn>
-  Shi Lei <shi_lei@massclouds.com>
-  simmon <simmon@nplob.com>
-  Simon Gaiser <simon@invisiblethingslab.com>
-  Stefan Bader <stefan.bader@canonical.com>
-  Stefan Berger <stefanb@linux.ibm.com>
-  Stefan Berger <stefanb@linux.vnet.ibm.com>
-  Szymon Scholz <szymonscholz@gmail.com>
-  Thomas Huth <thuth@redhat.com>
-  Tim Wiederhake <twiederh@redhat.com>
-  Tomáš Golembiovský <tgolembi@redhat.com>
-  Tomáš Janoušek <tomi@nomi.cz>
-  Tuguoyi <tu.guoyi@h3c.com>
-  Ville Skyttä <ville.skytta@iki.fi>
-  Wang Xin <wangxinxin.wang@huawei.com>
-  WangJian <wangjian161@huawei.com>
-  Weblate <noreply@weblate.org>
-  Yalei Li <274268859@qq.com>
-  Yalei Li <liyl43@chinatelecom.cn>
-  Yang Hang <yanghang44@huawei.com>
-  Yanqiu Zhang <yanqzhan@redhat.com>
-  Yaroslav Kargin <ykargin@virtuozzo.com>
-  Yi Li <yili@winhong.com>
-  Yi Wang <wang.yi59@zte.com.cn>
-  Yuri Chornoivan <yurchor@ukr.net>
-  Zheng Chuan <zhengchuan@huawei.com>
-  zhenwei pi <pizhenwei@bytedance.com>
-  Zhenyu Zheng <zheng.zhenyu@outlook.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          fail    
- build-arm64-libvirt                                          fail    
- build-armhf-libvirt                                          fail    
- build-i386-libvirt                                           fail    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           blocked 
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
- test-amd64-amd64-libvirt-xsm                                 blocked 
- test-arm64-arm64-libvirt-xsm                                 blocked 
- test-amd64-i386-libvirt-xsm                                  blocked 
- test-amd64-amd64-libvirt                                     blocked 
- test-arm64-arm64-libvirt                                     blocked 
- test-armhf-armhf-libvirt                                     blocked 
- test-amd64-i386-libvirt                                      blocked 
- test-amd64-amd64-libvirt-pair                                blocked 
- test-amd64-i386-libvirt-pair                                 blocked 
- test-arm64-arm64-libvirt-qcow2                               blocked 
- test-armhf-armhf-libvirt-raw                                 blocked 
- test-amd64-amd64-libvirt-vhd                                 blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 54631 lines long.)
 
