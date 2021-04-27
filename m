@@ -2,46 +2,44 @@ Return-Path: <SRS0=syOn=JY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C064C433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 08:31:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A8D1C43461
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 08:36:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24000611F2
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 08:31:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24000611F2
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 09E58611F2
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 08:36:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 09E58611F2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.118089.224042 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.118107.224083 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbJ7Y-0000Zl-CE; Tue, 27 Apr 2021 08:31:04 +0000
+	id 1lbJCB-0000z4-7u; Tue, 27 Apr 2021 08:35:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 118089.224042; Tue, 27 Apr 2021 08:31:04 +0000
+Received: by outflank-mailman (output) from mailman id 118107.224083; Tue, 27 Apr 2021 08:35:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbJ7Y-0000Ze-8j; Tue, 27 Apr 2021 08:31:04 +0000
-Received: by outflank-mailman (input) for mailman id 118089;
- Tue, 27 Apr 2021 08:31:02 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1lbJCB-0000yx-4l; Tue, 27 Apr 2021 08:35:51 +0000
+Received: by outflank-mailman (input) for mailman id 118107;
+ Tue, 27 Apr 2021 08:35:50 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lbJ7W-0000ZZ-NY
- for xen-devel@lists.xenproject.org; Tue, 27 Apr 2021 08:31:02 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lbJ7V-0002pA-K8; Tue, 27 Apr 2021 08:31:01 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lbJ7V-0006ZD-8w; Tue, 27 Apr 2021 08:31:01 +0000
+ (envelope-from <SRS0=4dJ3=JY=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lbJCA-0000ys-KB
+ for xen-devel@lists.xenproject.org; Tue, 27 Apr 2021 08:35:50 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3e716c9e-8ce6-4e62-a500-5bfe7e6b153f;
+ Tue, 27 Apr 2021 08:35:49 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id C5C9AB007;
+ Tue, 27 Apr 2021 08:35:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,117 +51,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=IsSeQwunhPr9X8tbKJhnbEUAHOEGZqQCyFjpQoCetZE=; b=SJWFf8YgPT6b8uXs3ugOBr9SPf
-	Wttg+bhZtsG69HBJU+44PdorLpw7esQZ8aPjWKwV5fgHZolBevfr55cu946HgJ5Ti4hgbHMJNl9fK
-	f1VP2rFCNSupoj7llhm/QeqjQ35i3z0EFQI8l9R4ph87GN6ReqOQAtM8m9PGULWdP1f8=;
-Subject: Re: [PATCH 9/9] xen/arm64: Remove READ/WRITE_SYSREG32 helper macros
-To: Michal Orzel <michal.orzel@arm.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, bertrand.marquis@arm.com
-References: <20210420070853.8918-1-michal.orzel@arm.com>
- <20210420070853.8918-10-michal.orzel@arm.com>
- <c318c303-1187-3a64-833b-0684a2dc4312@xen.org>
- <a37f7d85-dee7-d2f8-9883-1a8004d1ca25@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <0d4ffc04-3fbb-4b62-f6d8-e33da427e505@xen.org>
-Date: Tue, 27 Apr 2021 09:30:59 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.0
+X-Inumbo-ID: 3e716c9e-8ce6-4e62-a500-5bfe7e6b153f
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1619512548; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6JO7X/cz5eg8beGmPKE/svwlRrvFNg2TXGXMs5rnfos=;
+	b=J9H0zW28bfXIe842IgKqhSXFQrr9sWcTuZRhEYSxispjyLgV7joWkxBrRsNCxMO3DuUsfV
+	4LM/o+TunHv/Nw1IZEclz5Hx6Oa+NXhFm4XduJI/C+7SlYJOXoGTov7drg87MXxn4ll3fi
+	zh+kGXKV6fKmJgNbtXxOXLCsI/tNoA0=
+Subject: Ping: [Bugfix PATCH for-4.15] xen: credit2: fix per-entity load
+ tracking when continuing running
+To: Dario Faggioli <dfaggioli@suse.com>,
+ George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <iwj@xenproject.org>, xen-devel@lists.xenproject.org
+References: <161615605709.5036.4052641880659992679.stgit@Wayrath>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <a3f31cde-f1e5-e643-28bc-cdb2b36f372d@suse.com>
+Date: Tue, 27 Apr 2021 10:35:48 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <a37f7d85-dee7-d2f8-9883-1a8004d1ca25@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <161615605709.5036.4052641880659992679.stgit@Wayrath>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
+On 19.03.2021 13:14, Dario Faggioli wrote:
+> If we schedule, and the current vCPU continues to run, its statistical
+> load is not properly updated, resulting in something like this, even if
+> all the 8 vCPUs are 100% busy:
+> 
+> (XEN) Runqueue 0:
+> (XEN) [...]
+> (XEN)   aveload            = 2097152 (~800%)
+> (XEN) [...]
+> (XEN)   Domain: 0 w 256 c 0 v 8
+> (XEN)     1: [0.0] flags=2 cpu=4 credit=9996885 [w=256] load=35 (~0%)
+> (XEN)     2: [0.1] flags=2 cpu=2 credit=9993725 [w=256] load=796 (~0%)
+> (XEN)     3: [0.2] flags=2 cpu=1 credit=9995885 [w=256] load=883 (~0%)
+> (XEN)     4: [0.3] flags=2 cpu=5 credit=9998833 [w=256] load=487 (~0%)
+> (XEN)     5: [0.4] flags=2 cpu=6 credit=9998942 [w=256] load=1595 (~0%)
+> (XEN)     6: [0.5] flags=2 cpu=0 credit=9994669 [w=256] load=22 (~0%)
+> (XEN)     7: [0.6] flags=2 cpu=7 credit=9997706 [w=256] load=0 (~0%)
+> (XEN)     8: [0.7] flags=2 cpu=3 credit=9992440 [w=256] load=0 (~0%)
+> 
+> As we can see, the average load of the runqueue as a whole is, instead,
+> computed properly.
+> 
+> This issue would, in theory, potentially affect Credit2 load balancing
+> logic. In practice, however, the problem only manifests (at least with
+> these characteristics) when there is only 1 runqueue active in the
+> cpupool, which also means there is no need to do any load-balancing.
+> 
+> Hence its real impact is pretty much limited to wrong per-vCPU load
+> percentages, when looking at the output of the 'r' debug-key.
+> 
+> With this patch, the load is updated and displayed correctly:
+> 
+> (XEN) Runqueue 0:
+> (XEN) [...]
+> (XEN)   aveload            = 2097152 (~800%)
+> (XEN) [...]
+> (XEN) Domain info:
+> (XEN)   Domain: 0 w 256 c 0 v 8
+> (XEN)     1: [0.0] flags=2 cpu=4 credit=9995584 [w=256] load=262144 (~100%)
+> (XEN)     2: [0.1] flags=2 cpu=6 credit=9992992 [w=256] load=262144 (~100%)
+> (XEN)     3: [0.2] flags=2 cpu=3 credit=9998918 [w=256] load=262118 (~99%)
+> (XEN)     4: [0.3] flags=2 cpu=5 credit=9996867 [w=256] load=262144 (~100%)
+> (XEN)     5: [0.4] flags=2 cpu=1 credit=9998912 [w=256] load=262144 (~100%)
+> (XEN)     6: [0.5] flags=2 cpu=2 credit=9997842 [w=256] load=262144 (~100%)
+> (XEN)     7: [0.6] flags=2 cpu=7 credit=9994623 [w=256] load=262144 (~100%)
+> (XEN)     8: [0.7] flags=2 cpu=0 credit=9991815 [w=256] load=262144 (~100%)
+> 
+> Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
+> ---
+> Cc: George Dunlap <george.dunlap@citrix.com>
+> Cc: Ian Jackson <iwj@xenproject.org>
+> ---
+> Despite the limited effect, it's a bug. So:
+> - it should be backported;
+> - I think it should be included in 4.15. The risk is pretty low, for
+>   the same reasons already explained when describing its limited impact.
 
+I'm a little puzzled to find this is still in my waiting-to-go-in
+folder, for not having had an ack (or otherwise). George?
 
-On 27/04/2021 08:16, Michal Orzel wrote:
-> Hi Jilien,
+Jan
 
-Hi,
+> ---
+>  xen/common/sched/credit2.c |    2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+> index eb5e5a78c5..b3b5de94cf 100644
+> --- a/xen/common/sched/credit2.c
+> +++ b/xen/common/sched/credit2.c
+> @@ -3646,6 +3646,8 @@ static void csched2_schedule(
+>              runq_remove(snext);
+>              __set_bit(__CSFLAG_scheduled, &snext->flags);
+>          }
+> +        else
+> +            update_load(ops, rqd, snext, 0, now);
+>  
+>          /* Clear the idle mask if necessary */
+>          if ( cpumask_test_cpu(sched_cpu, &rqd->idle) )
+> 
+> 
+> 
 
-> On 21.04.2021 21:16, Julien Grall wrote:
->> Hi Michal,
->>
->> On 20/04/2021 08:08, Michal Orzel wrote:
->>> AArch64 system registers are 64bit whereas AArch32 ones
->>> are 32bit or 64bit. MSR/MRS are expecting 64bit values thus
->>> we should get rid of helpers READ/WRITE_SYSREG32
->>> in favour of using READ/WRITE_SYSREG.
->>> We should also use register_t type when reading sysregs
->>> which can correspond to uint64_t or uint32_t.
->>> Even though many AArch64 sysregs have upper 32bit reserved
->>> it does not mean that they can't be widen in the future.
->>
->> As a general comment, all your commit message contains information about the goal (which is great). But they don't go much in details about the actual changes. I have tried to point out where I think those details would be helpful.
->>
->>>
->>> As there are no other places in the code using READ/WRITE_SYSREG32,
->>> remove the helper macros.
->>>
->>> Signed-off-by: Michal Orzel <michal.orzel@arm.com>
->>> ---
->>>    xen/arch/arm/vcpreg.c               | 16 ++++++++++++++++
->>>    xen/include/asm-arm/arm64/sysregs.h |  5 -----
->>>    2 files changed, 16 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
->>> index c7f516ee0a..6cb7f3108c 100644
->>> --- a/xen/arch/arm/vcpreg.c
->>> +++ b/xen/arch/arm/vcpreg.c
->>> @@ -48,6 +48,7 @@
->>>     */
->>>      /* The name is passed from the upper macro to workaround macro expansion. */
->>> +#ifdef CONFIG_ARM_32
->>>    #define TVM_REG(sz, func, reg...)                                           \
->>>    static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
->>>    {                                                                           \
->>> @@ -61,6 +62,21 @@ static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
->>>                                                                                \
->>>        return true;                                                            \
->>>    }
->>> +#else /* CONFIG_ARM_64 */
->>> +#define TVM_REG(sz, func, reg...)                                           \
->>> +static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
->>> +{                                                                           \
->>> +    struct vcpu *v = current;                                               \
->>> +    bool cache_enabled = vcpu_has_cache_enabled(v);                         \
->>> +                                                                            \
->>> +    GUEST_BUG_ON(read);                                                     \
->>> +    WRITE_SYSREG(*r, reg);                                                  \
->>> +                                                                            \
->>> +    p2m_toggle_cache(v, cache_enabled);                                     \
->>> +                                                                            \
->>> +    return true;                                                            \
->>> +}
->>> +#endif
->>
->> It would be nice if this change can be explained in the commit message. However, I think we can avoid the duplication by aliasing TVM_REG32() to TVM_REG64() on Arm64.
->>
-> Unfortunately we cannot. This is the only working solution for now.
-> If we do the alias we will get many errors due to incompatbile pointer type in vreg_emulate_*.
-> Without a proper change in this functions we can't do that.
-
-Right, so the prototype needs to stay the same. How about provide a 
-wrapper WRITE_SYSREG_SZ(sz, val, sysreg) internal to vcpreg.c?
-
-On 32-bit it would expand to WRITE_SYSREG##sz(val, sysreg) and on 
-64-bit, it would expand to WRITE_SYSREG().
-
-> I will modify it once I start working on vreg_emulate topic but it requires more investigation.
-
-While it would be great to get rid of {READ, WRITE}_SYSREG32, I don't 
-want to duplicate the code (even temporarily) just for the sake for 
-removing the helpers.
-
-If the new proposal I suggested above doesn't work, then I would 
-strongly prefer to keep the existing code until vreg_emulate_* is reworked.
-
-Cheers,
-
--- 
-Julien Grall
 
