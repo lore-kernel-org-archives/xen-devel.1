@@ -2,49 +2,42 @@ Return-Path: <SRS0=syOn=JY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DATE_IN_PAST_06_12,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D00BC43460
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 08:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAA17C433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 09:05:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1FEB0613B4
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 08:55:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1FEB0613B4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 73DFC610FA
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 09:05:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 73DFC610FA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.118124.224095 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.118132.224107 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbJUh-0002s5-Rd; Tue, 27 Apr 2021 08:54:59 +0000
+	id 1lbJep-0003yN-RH; Tue, 27 Apr 2021 09:05:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 118124.224095; Tue, 27 Apr 2021 08:54:59 +0000
+Received: by outflank-mailman (output) from mailman id 118132.224107; Tue, 27 Apr 2021 09:05:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbJUh-0002ry-Nf; Tue, 27 Apr 2021 08:54:59 +0000
-Received: by outflank-mailman (input) for mailman id 118124;
- Tue, 27 Apr 2021 08:54:58 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lbJep-0003yG-Nq; Tue, 27 Apr 2021 09:05:27 +0000
+Received: by outflank-mailman (input) for mailman id 118132;
+ Tue, 27 Apr 2021 09:05:26 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iXGC=JY=gmail.com=jiangshanlai@srs-us1.protection.inumbo.net>)
- id 1lbJUg-0002rt-PX
- for xen-devel@lists.xenproject.org; Tue, 27 Apr 2021 08:54:58 +0000
-Received: from mail-pj1-x102e.google.com (unknown [2607:f8b0:4864:20::102e])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 53d7ae31-15f2-4883-9adb-0a6bda47f70c;
- Tue, 27 Apr 2021 08:54:57 +0000 (UTC)
-Received: by mail-pj1-x102e.google.com with SMTP id
- gc22-20020a17090b3116b02901558435aec1so3121635pjb.4
- for <xen-devel@lists.xenproject.org>; Tue, 27 Apr 2021 01:54:57 -0700 (PDT)
-Received: from localhost ([47.251.4.198])
- by smtp.gmail.com with ESMTPSA id a65sm1986221pfb.116.2021.04.27.01.54.55
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 27 Apr 2021 01:54:56 -0700 (PDT)
+ <SRS0=D0mD=JY=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1lbJen-0003yB-Sn
+ for xen-devel@lists.xenproject.org; Tue, 27 Apr 2021 09:05:26 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9c638880-03d0-4055-a19b-276ac693fa07;
+ Tue, 27 Apr 2021 09:05:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,173 +49,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53d7ae31-15f2-4883-9adb-0a6bda47f70c
+X-Inumbo-ID: 9c638880-03d0-4055-a19b-276ac693fa07
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1619514325;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=iDSOyvMPnznbZSaO1Ik0WZ81sWqPTRI2ohVT6ZZ06uQ=;
+  b=ZHVi5vNKFxDFXlQH1QiNxCnLCsxNfu3AywSBxWNMT2v5xbF/ItLyDVIZ
+   7O5XvluF2KwW/3pOQe9x6ocqiJi49sPQzMqwXzdUNAhfs/29ye3ngf/Vg
+   CE4JmsQF916gRvTCrZnKWOoRlxbZ0FmeipU3EWqyf+ejdPqfcH/jP90Cm
+   4=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: TJYSPKYT41JeKeKdfl1Ar1HQAYcjYlSz0erVMdWaK3VDWLEjFq3nY3gTNtpetW8FmzLA9nNI9Z
+ fOooXuY+0VZytPfIpaNYUSTr6PaoCb8X2f8TtIjr4+zj9bO0OSMWqOQt+ncCgq2wLtN45hyuPf
+ j2JE7bZx6aE8i6OU397awyiw9b4MWzRLbCMgpr6TktHd50GhVY8x777JcBPF/5+e//nkiG9HZ1
+ 78vvYrdEeM+j7PzfDU3yKYgzuR8/8E9/Kpjjr6y3htJf7XZ081Ert87HiDrO8APiOU7W6vnSD9
+ vxA=
+X-SBRS: 5.1
+X-MesageID: 42481323
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:K7k2P6HuxHx4P0SppLqFWJTXdLJzesId70hD6mlYcjYQWtCEls
+ yogfQQ3QL1jjFUY307hdWcIsC7Lk/03aVepa0cJ62rUgWjgmunK4l+8ZDvqgeNJwTXzcQY76
+ tpdsFFZeHYJURmjMr8/QmzG8shxt7Cy6yzmeLC1R5WLD1CQYsI1XYfNi+wFEpqSA5aQbc4Do
+ Ob/MpbpzymEE5nFPiTLH8DQuTFupn3j5rgexELHFoK7wOJgDOu5tfBYmWl9z0ZVC5CxqpnzH
+ jdn2XCl96emtyY6juZ7W/c6JxKhMDso+EsOOWggtUYQw+c6DqAS59mX9S5zVUIicGprG0nid
+ zd5yonVv4Dl0/5WkGQjV/T1xL70DAogkWSuWOwpXf4u8T2SHYbJqN69PtkWyDU4UYho91wuZ
+ gjtwny1+s1fGH9tR/w6NTSWxZhmlDcmwtbrccpg2FCSoxbUbdNrOUkjTJoOa0dFyH34p1PKp
+ gJMOjg4p9tADenRkGclGxuzNuwZ280DxeLT2MT0/blrQR+rTRXyVAVy9cYmWpF3JUhS4Nc7+
+ CBCahwkqpSJ/VmIZ5VNaMke4+aG2bNSRXDPCa7JknmLrgOPzbop4Ts6Ls4yem2cPUzvdQPsa
+ WEdGkdmX85ekroB8HL9oZM6ArxTGK0Wimo4t1C5rBi04eMBIbDAGmmchQDgsGgq/IQDonwQP
+ CoIq9bBPflMC/HBZtJ5QvjQJNfQENuEfE9i5IeYRajs8jLIorluqjwa/DIPofgFj4iRyfRGX
+ 0GcD/vJNhRz0yiV3Pi6SKhGU/FSwjax9ZdAaLa9+8cxMwmLYtXqDUYjly/+4WqJFR5w+kLVX
+ o7BImivrKwpGGw82qNxX5uIABhAkFc56ild3tLoAQNIn7laLprgaTaRUlimF+8YjNvRcLfFw
+ BS435t/7isEpCWzSc+T/WqL3ydlHlWgH6RVZ8Tlumi6K7eC90FJ6djfJY0ORTAFhRzlwovgn
+ xEchU4SkjWES6rr76kgpwSDOT2bMJ9nw+vHM5RpRvkxAahjPBqYkFecy+lUMaRjwprbSFTnE
+ dN/6gWh6fFpSyiMlIlgOMzMERFbUOeBL4uNnXDWKxk3pTQPC1gR2aDgjKXzzU+YHDj+Ukpim
+ v9FiGMYv3QDl1BundX77by/DpPBxagVnM1Tko/nZx2FGzAtHo26+ONa6ap+0a6a1cJwIgmQX
+ r4SApXBjkr68G81RaTljrHKG4vwY82OPfBSJ45davI53+rIIqUtK0PEvNO5qx5PNT2vuJja5
+ PYRyalaBfDT8850Q2coXgofBRuoH4/iPXyxVnL6nO70HNXO4ulHH1WA5UgZ/eS4GjvS6zWjN
+ FXjdcpsfCxNWu0QNic0q3TZyNCLBSWgWPedZBdlblk+YYJ8J10FN3ndBGN8ldt9hA3Nt31m0
+ MTW74T2sGIBqZfO+gpPxtE9V8onumVJEQlsgbKEvYzFGtd+kPzDpes2f70srIhDU2KmRvoNX
+ Se+yNb+e3ZXyHr789sN4sAZUBXYlM78nJs4aercJDREhyjc4h4jRCHG074VL9WU66eH7oM6j
+ 58/tGThueSMw71whrZszc+AqVA9Q+cMI6PKTPJPe5D6NqhP1uQxoOs/c6olT/yDQKBVH5wv/
+ wNSWUgKuJZijcji4Ur0i+9DozPy3hV7Gd20HVAjV7i2o+v/WHBO1pJWDep26lrYQ==
+X-IronPort-AV: E=Sophos;i="5.82,254,1613451600"; 
+   d="scan'208";a="42481323"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JzMrzk+h6/822B/PQ47BQ5oKG0+8sMeylw3Vy6Zy41Oi3mnPiCWR9VXEpxfjQJBRy+blw5ITMoQ+RIBFpNPwalvZD0wbDtY0PYTzHV6a2EEMiLJYYYFztKRYe0RxxEWvbFv61wU3sFE+N0sTq/fVr1j/XCQiSHFozobcteIsRU/sqG8K4t3/ZDrmTLht6liDkTh9+0qs1aSEr4Aav0lmivIyy7FxA/MrhVz4dMZWW2Evievk5vaqyYqvaATDejypOX5dGZuFubfqcaFS/Lmj27H0KIbmHTZuR/ss5yeLAsiGx5aqiBI7wuS95+NIXJ8/I+I3OlfHGF1VBR+C6BNMbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0NuqRjCniaUA8Mei4lmYCrH2yhGuw8nFaNF5XuwRRCo=;
+ b=U5z6hVADurrvj63ErNLwzZ5OlgukfqvT5LVoZPJUs/PIltmTepzCnfG8jGPO9E4fcbVzJ4VRFeV/U/kSjNXA61QniMm960myZXqLZtSQ41QsH3F0XK+Q/4Qvf+WjDtu2rYCa2HuP6jEhC61iUm3k4hGrYcB2+g1wlz52evrdxHScqzQyfUTRXu8W4JWQtK/eo8i5h3P1L5o1sBwN+BVqoLVLgWRps43n31uEEHCQLfQXW8XUtK0Pp8AOiIDW+9wI2fwRH2nfthCGR//axdxs5EG4BKVPNHB72C4qQ8VsFr1uWIAU6ZrsyqQnMfJW25+o1P5RATV5xMaLinwjFowT+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=DvudTC2BwHZGDoQJqasDl9cPJYuqaFYI5WCZvH5B/Zw=;
-        b=oZTdWHWa9y4vR0NRkwGHue6dwcl2JqZgsg7a6+YjFGuPfYA01jgtr5CG2FVV6JxsZ9
-         mypKHQE3nwLiAe0xgegucJmA7TC2ZoXS596vwbQv8YCiSKBLOMOYJ8Im+ZlEXh+zSJ9g
-         CHv2PTnEtz7IYhTMf68AtMxtuO4rUylhz0qM2NHyetmNgDmoXfdZvPmgKbnLQf4ilqyT
-         H0MgsAj/qVMZiQ9HbXjDKU6nbYGbANvN+DVIMT23z4vlS7QnD53TDBNLTwkBxXpsNpZE
-         +KC9qHwy4uf+fbZxJj96Zrs7SPVrj/7U1zxWyVqqlCxxH8NWiTS4Q0V+XrcwxNqP1099
-         RhDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=DvudTC2BwHZGDoQJqasDl9cPJYuqaFYI5WCZvH5B/Zw=;
-        b=ZEd+Frre0uiGn3lBteE+5rFTRHhgL7QAZoUV5j8Nu+bHsPPt+p/2mWt3vxgloDBXay
-         N3JBWpHiTA1M5HsGViqkZzNwH0IsoWQ5OcwApKroY2UFR21EzU7p+TNz2hu9XWVa43DX
-         l+qCA47fcULtjOo+Zqpv+JNq4n1VePeQa1iHVtd9S/TdsVbA/3Gbga2qA57i4RK7rjN9
-         XSTZTQt1kAKmVOj0NKcCY5fpkcM4MHaF2PMoS+nQmKWOUo+RbUvLE0yc62UJuwS2ygXi
-         2ubxK9mx8Cuosau5xlbuA9E7Mi1JuwyEtZVFMNfGDq9qylAbdk3QRj766Mt/bEqPz8tP
-         hDdA==
-X-Gm-Message-State: AOAM532wVB6sxlv0bMB1Fr/JsYCexfXX/O+2StMoOj063fOYZTwXaToa
-	WVLHIvybHHuhLqf757xj/wM=
-X-Google-Smtp-Source: ABdhPJyED8YOs73pY8DPavmzXj80ySfIXNvSlWASjVV8n8Ia2PPeO5IlLOQb7WEVRwY9uJ/wGmcSPA==
-X-Received: by 2002:a17:90b:2393:: with SMTP id mr19mr3656655pjb.24.1619513697046;
-        Tue, 27 Apr 2021 01:54:57 -0700 (PDT)
-From: Lai Jiangshan <jiangshanlai@gmail.com>
-To: linux-kernel@vger.kernel.org
-Cc: Lai Jiangshan <laijs@linux.alibaba.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Andi Kleen <ak@linux.intel.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>,
-	Jim Mattson <jmattson@google.com>,
-	Joerg Roedel <joro@8bytes.org>,
-	kvm@vger.kernel.org,
-	Josh Poimboeuf <jpoimboe@redhat.com>,
-	Uros Bizjak <ubizjak@gmail.com>,
-	Maxim Levitsky <mlevitsk@redhat.com>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Alexandre Chartre <alexandre.chartre@oracle.com>,
-	Joerg Roedel <jroedel@suse.de>,
-	Jian Cai <caij2003@gmail.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 1/4] x86/xen/entry: Rename xenpv_exc_nmi to noist_exc_nmi
-Date: Tue, 27 Apr 2021 07:09:46 +0800
-Message-Id: <20210426230949.3561-2-jiangshanlai@gmail.com>
-X-Mailer: git-send-email 2.19.1.6.gb485710b
-In-Reply-To: <20210426230949.3561-1-jiangshanlai@gmail.com>
-References: <20210426230949.3561-1-jiangshanlai@gmail.com>
-MIME-Version: 1.0
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0NuqRjCniaUA8Mei4lmYCrH2yhGuw8nFaNF5XuwRRCo=;
+ b=mLClvkNgqSn9o41/GmP/8r5hZxavBlZb+ZQr5mrGGfh3E5i8pPr9/KidKh1Pwk0RFUKpXo5WOlSzpjwYcOmJf4Z72aZ2LXgjPooOlxlHRxp5OsLFBaOubKnSS6wGYrfhwFreHnrpNw7wpt/9cJov7qYS4kj+m6Of8aislw+na8o=
+Date: Tue, 27 Apr 2021 11:05:13 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] build: centralize / unify asm-offsets generation
+Message-ID: <YIfTyT4rvD9yEqiM@Air-de-Roger>
+References: <fa340caa-4ee1-a302-fbf1-1df400493d6b@suse.com>
+ <YH7zXpPz03+kLzEr@Air-de-Roger>
+ <e9de883b-604b-1193-b748-5a59795a9f31@suse.com>
+ <YH7/SvkrB2yGgRij@Air-de-Roger>
+ <5170aa51-8e34-3a45-5bf6-c0a187b1c427@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <5170aa51-8e34-3a45-5bf6-c0a187b1c427@suse.com>
+X-ClientProxiedBy: PR0P264CA0052.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:100:1d::16) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: cfa8c1c3-32e7-4042-5c68-08d9095b9467
+X-MS-TrafficTypeDiagnostic: DM5PR03MB2491:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM5PR03MB24914A5CD0B931B77691EF3F8F419@DM5PR03MB2491.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: EulcsP6JMhr76Ub1gybOQR4kdK8meOyFPLA5V5M7SYL+911EfVIpFLbM6LOgJOEQ+rj2e1M3nZwwaKwRJTkzYeQu4ONl83gb0gXuoMmGNfvFyo0YJNpcejHTXMT3NlrdhKhCtpwxM1kPJepFK1k7hAOWOIk4d/7dzqxpR0jFySr/f1cxYuev80C6V1TwTVVND4I2UCsSDM1KypVVkV6dA9aAv8/XaLB0wZfMzhPBrveqVQFJZXGsZXE7Y4TrX21AKteFs5zzF6lQL6s9Dg3khZp/pvfzF+JB25boy6kLlgXElHq7bLnUe0c1WB4Q0iZC27Wm7aKX1U4N61dDYyPbqY5zpQRVOzsPoIKBe7Wmw8orC+suZWMbAamDpJCkrQ0n7Hca1BIsVb1zh4NWex/tpOpPXloF+s3NQGzkhYEX6HL9z1AQud+wa8mf2EU3Pi34nQmso2TB/oxB1X4+pv/nHjPLH4iTdlClXM7dDf2q71QQrKa3cy7S2U2rElgRVzmNrUKhQoWJTuNmtUJ5qi6hi1U4hKli2WwiuEJ4NQnnWqCtnFcHmhO8AlfFCFHqRdYVZsFAnHs6pe7KKib4sU7/swj0d/Xpy98dGsc+p2FOyAE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(7916004)(136003)(376002)(366004)(39860400002)(346002)(396003)(4326008)(8676002)(2906002)(8936002)(5660300002)(6916009)(83380400001)(53546011)(6496006)(956004)(66556008)(6486002)(186003)(26005)(38100700002)(16526019)(316002)(6666004)(54906003)(33716001)(478600001)(9686003)(86362001)(66946007)(66476007)(85182001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?bHY1VW44eExIVkRmTDZpTlVYQSswWXdiSEh1K21hcVFnakRsTnpPL0RabTdu?=
+ =?utf-8?B?Nm9ETDhBd0x0Ym9JaFB2OUppQm5lZ1VNVWlDcVVlNEhhS3RFMlBudmdjU3kw?=
+ =?utf-8?B?b3luOXcxcm5QWGNVbXRmSWVTc0RzRmdvU01oSWVOOGhOSEtXdXFkVXRmWDJO?=
+ =?utf-8?B?Qm9LM2xoZVBNNjRlMUxicWRHUExta3lodEMxUy9IakltMGpHODc4OEgwL2RD?=
+ =?utf-8?B?bS93VVpIaE9VZFlrMlJzZVhvV1Q4a1RSRHlzUitxYnh3VnNaRVZZYzJhMDJN?=
+ =?utf-8?B?ZjQ2bHNFbGErUVA2RVRyOHBVWkJzT1hicVkzcDI4UEl5V0dkczFVTVhzVEJj?=
+ =?utf-8?B?YVJ6QkR1UEFRV3RRL0hYdnl4aTFLVm1qODRHVzdXNHd3UWhvUlBhZzUxdWpC?=
+ =?utf-8?B?SnNlcDNFd2EvMVBsWDBWeENCcHUzL3BXRThDdE9KR1gvS0FON0FZb1luaE5t?=
+ =?utf-8?B?WW53Z2Z1UEtraXRSMUdGcGZJR3ZqYzRPbk9kVVpIUzkzSldTQlAydlpCT1ll?=
+ =?utf-8?B?bVNNaDBpTWZYb2RkL1NPWlEyaVF1azE5VzVyOUJFOXdsOGtLVSs2c1dNNVMr?=
+ =?utf-8?B?dlh4TVQvTUcxTzc0NU9kNFJqS25naEcyWmJGZHFIVElZN2hlc0NtNjlycWVH?=
+ =?utf-8?B?STNTcDVSMjM0ZU81cEcrYXlhRVFUOU1LRnNUdWJWeENmVjJxMkFEY1BpcVBK?=
+ =?utf-8?B?VlhTcm9qdWx1NGwxY2RUdlc2SHp0K1NXTE9PMjRTL2hFQkcrQWZPdElxcXph?=
+ =?utf-8?B?eDRCZDhqM0dJdE9MWGpvYTFQR1hibk8yU3V0MGdqdjY1VTcvby9PRXBsK1Mx?=
+ =?utf-8?B?anRnUWVqU0xMZTRVRm55d3VsR3lkV05RWjdiVGhxdktJS2hCOGlWR21lQVBL?=
+ =?utf-8?B?M3JWeTUwd2tTVE5NeUU4dy94K3dkWWtibU5tSFhvbmZlN3piY2x3SE0rNjMv?=
+ =?utf-8?B?UlFmZlU3cUpycnBZV1F0cG04MUxGVjBYbEMySWtwellqRVA2d1VhYjFBdjh3?=
+ =?utf-8?B?Z3ZyV0FNTU1zNHBGZVdZQkhPd1phRmlFVVlSYnYzQURPeEh5WUtaaTJEUFNY?=
+ =?utf-8?B?VXJDOGJpZURFYzIvQmlEVzRYeWJjeC9GRFdhalRyK2J2ak9vZXowMGhBZXBY?=
+ =?utf-8?B?YjVjb0ZKMmxZb3Q0UDB1QWZHRWFrZXpIRjY3YXBwMjJuKzNWM0EvZjlBVlIr?=
+ =?utf-8?B?QjlHdWFrY1NQcmt2L08vKzE2anN3Y25MTWdKNHkrN1k0WmhwQnlXcHltU0dZ?=
+ =?utf-8?B?M1dCZ0xCZ2c3S2gzRndJVkhIaG1QZEV2UkhEMTM3bW9kb2pyK1lIMXRvV2pV?=
+ =?utf-8?B?OGNCeVFVLzFKdEJ6WnFKanFPeklqdjV4d3dUUW4wSkxOZFlLcnZGMEFwcWx5?=
+ =?utf-8?B?d1ZOODNSUUlQbVBtcy9GZGJGbmJvNDd4UWFyR2tkZDNpbFdyVFZlZlpwSlNF?=
+ =?utf-8?B?Ty95eHhRT3RBbWl5dXF3MkJtSnNlc1RaL2crNlpiYUo3T0NaMytFbE1JcS9o?=
+ =?utf-8?B?SSt0SUZsZHlBUkVhWjkveEpiL2VyYTZWcnhuaFdhNzRBVzZiYjBQRTFlcFFo?=
+ =?utf-8?B?dVdjQnJkekYrMzd6VmM3aWdXYlZTdUtCQzYxTyt0MHVuUzNITFNCY3FFYzdt?=
+ =?utf-8?B?NVRkUURaenRrUnBIVlV6NU9pNjd0YXJXVUZiZ1RQZkJ1eUsyekh3eE5MRnVP?=
+ =?utf-8?B?YlU2Q3RjUWxCVnNRVlZTQ0ZvbzI4L3BVU2hmL0VtM1F3K3A4U2tZQi95THhu?=
+ =?utf-8?Q?Mzws3ibAKQ2FZ5+ugtqgwgkyyjZmPJ/AitO/utB?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: cfa8c1c3-32e7-4042-5c68-08d9095b9467
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Apr 2021 09:05:18.7694
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZJnuoIGYgxM8ermu839xW3Zrp+a5ZkRqAMPxfL1t6y/O15tQ5nHx1r7cxYC71UK4C40E2DG4uxEGgzbFKIY+/g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB2491
+X-OriginatorOrg: citrix.com
 
-From: Lai Jiangshan <laijs@linux.alibaba.com>
+On Wed, Apr 21, 2021 at 04:09:03PM +0200, Jan Beulich wrote:
+> On 20.04.2021 18:20, Roger Pau Monné wrote:
+> > On Tue, Apr 20, 2021 at 05:47:49PM +0200, Jan Beulich wrote:
+> >> On 20.04.2021 17:29, Roger Pau Monné wrote:
+> >>> On Thu, Apr 01, 2021 at 10:33:47AM +0200, Jan Beulich wrote:
+> >>>> @@ -399,7 +399,11 @@ include/xen/compile.h: include/xen/compi
+> >>>>  	@sed -rf tools/process-banner.sed < .banner >> $@.new
+> >>>>  	@mv -f $@.new $@
+> >>>>  
+> >>>> -include/asm-$(TARGET_ARCH)/asm-offsets.h: arch/$(TARGET_ARCH)/asm-offsets.s
+> >>>> +asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
+> >>>> +	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
+> >>>> +	$(call move-if-changed,$@.new,$@)
+> >>>
+> >>> Won't it be more natural to keep the .s file in arch/$(TARGET_ARCH)?
+> >>
+> >> Yes and no: Yes as far as the actual file location is concerned.
+> >> No when considering where it gets generated: I generally consider
+> >> it risky to generate files outside of the directory where make
+> >> currently runs. There may be good reasons for certain exceptions,
+> >> but personally I don't see this case as good enough a reason.
+> >>
+> >> Somewhat related - if doing as you suggest, which Makefile's
+> >> clean: rule should clean up that file in your opinion?
+> > 
+> > The clean rule should be in the makefile where it's generated IMO,
+> > same as asm-offsets.h clean rule currently in xen/Makefile.
+> > 
+> >> Nevertheless, if there's general agreement that keeping the file
+> >> there is better, I'd make the change and simply ignore my unhappy
+> >> feelings about it.
+> > 
+> > I don't have a strong opinion, it just feels weird to have this IMO
+> > stray asm-offsets.s outside of it's arch directory, taking into
+> > account that we have asm-offsets.h generated from xen/Makefile into an
+> > arch specific directory already as a precedent in that makefile.
+> 
+> Well, asm-offsets.h generation doesn't involve the compiler, hence
+> no .*.d files get generated and want including later. For
+> asm-offsets.s to have dependencies properly honored, if we
+> generated it in xen/arch/<arch>, .asm-offsets.d would also end up
+> there, and hence including of it would need separately taking care
+> of.
 
-There is no any functionality change intended.  Just rename it and
-move it to arch/x86/kernel/nmi.c so that we can resue it later in
-next patch for early NMI and kvm.
+I'm not sure I understand what do you mean with inclusion need taking
+care of separately. Isn't it expected for .d file to reside in the
+same directory as the output, and hence picked up automatically?
 
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Sean Christopherson <seanjc@google.com>
-Cc: Steven Rostedt <rostedt@goodmis.org>
-Cc: Andi Kleen <ak@linux.intel.com>
-Cc: Andy Lutomirski <luto@kernel.org>
-Cc: Vitaly Kuznetsov <vkuznets@redhat.com>
-Cc: Wanpeng Li <wanpengli@tencent.com>
-Cc: Jim Mattson <jmattson@google.com>
-Cc: Joerg Roedel <joro@8bytes.org>
-Cc: kvm@vger.kernel.org
-Cc: Josh Poimboeuf <jpoimboe@redhat.com>
-Cc: Uros Bizjak <ubizjak@gmail.com>
-Cc: Maxim Levitsky <mlevitsk@redhat.com>
-Signed-off-by: Lai Jiangshan <laijs@linux.alibaba.com>
----
- arch/x86/include/asm/idtentry.h | 2 +-
- arch/x86/kernel/nmi.c           | 8 ++++++++
- arch/x86/xen/enlighten_pv.c     | 9 +++------
- arch/x86/xen/xen-asm.S          | 2 +-
- 4 files changed, 13 insertions(+), 8 deletions(-)
-
-diff --git a/arch/x86/include/asm/idtentry.h b/arch/x86/include/asm/idtentry.h
-index e35e342673c7..5b11d2ddbb5c 100644
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -590,7 +590,7 @@ DECLARE_IDTENTRY_RAW(X86_TRAP_MC,	xenpv_exc_machine_check);
- /* NMI */
- DECLARE_IDTENTRY_NMI(X86_TRAP_NMI,	exc_nmi);
- #ifdef CONFIG_XEN_PV
--DECLARE_IDTENTRY_RAW(X86_TRAP_NMI,	xenpv_exc_nmi);
-+DECLARE_IDTENTRY_RAW(X86_TRAP_NMI,	noist_exc_nmi);
- #endif
- 
- /* #DB */
-diff --git a/arch/x86/kernel/nmi.c b/arch/x86/kernel/nmi.c
-index bf250a339655..2b907a76d0a1 100644
---- a/arch/x86/kernel/nmi.c
-+++ b/arch/x86/kernel/nmi.c
-@@ -524,6 +524,14 @@ DEFINE_IDTENTRY_RAW(exc_nmi)
- 		mds_user_clear_cpu_buffers();
- }
- 
-+#ifdef CONFIG_XEN_PV
-+DEFINE_IDTENTRY_RAW(noist_exc_nmi)
-+{
-+	/* On Xen PV, NMI doesn't use IST.  The C part is the same as native. */
-+	exc_nmi(regs);
-+}
-+#endif
-+
- void stop_nmi(void)
- {
- 	ignore_nmis++;
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 4f18cd9eacd8..5efbdb0905b7 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -565,12 +565,6 @@ static void xen_write_ldt_entry(struct desc_struct *dt, int entrynum,
- 
- void noist_exc_debug(struct pt_regs *regs);
- 
--DEFINE_IDTENTRY_RAW(xenpv_exc_nmi)
--{
--	/* On Xen PV, NMI doesn't use IST.  The C part is the same as native. */
--	exc_nmi(regs);
--}
--
- DEFINE_IDTENTRY_RAW_ERRORCODE(xenpv_exc_double_fault)
- {
- 	/* On Xen PV, DF doesn't use IST.  The C part is the same as native. */
-@@ -626,6 +620,9 @@ struct trap_array_entry {
- 	.xen		= xen_asm_xenpv_##func,		\
- 	.ist_okay	= ist_ok }
- 
-+/* Alias to make TRAP_ENTRY_REDIR() happy for nmi */
-+#define xen_asm_xenpv_exc_nmi	xen_asm_noist_exc_nmi
-+
- static struct trap_array_entry trap_array[] = {
- 	TRAP_ENTRY_REDIR(exc_debug,			true  ),
- 	TRAP_ENTRY_REDIR(exc_double_fault,		true  ),
-diff --git a/arch/x86/xen/xen-asm.S b/arch/x86/xen/xen-asm.S
-index 1e626444712b..12e7cbbb2a8d 100644
---- a/arch/x86/xen/xen-asm.S
-+++ b/arch/x86/xen/xen-asm.S
-@@ -130,7 +130,7 @@ _ASM_NOKPROBE(xen_\name)
- xen_pv_trap asm_exc_divide_error
- xen_pv_trap asm_xenpv_exc_debug
- xen_pv_trap asm_exc_int3
--xen_pv_trap asm_xenpv_exc_nmi
-+xen_pv_trap asm_noist_exc_nmi
- xen_pv_trap asm_exc_overflow
- xen_pv_trap asm_exc_bounds
- xen_pv_trap asm_exc_invalid_op
--- 
-2.19.1.6.gb485710b
-
+Thanks, Roger.
 
