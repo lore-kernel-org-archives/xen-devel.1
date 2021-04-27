@@ -2,57 +2,45 @@ Return-Path: <SRS0=syOn=JY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B4D1C433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 12:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24E80C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 12:30:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 836B96103E
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 12:05:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 836B96103E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cs.pub.ro
+	by mail.kernel.org (Postfix) with ESMTPS id CE01D61073
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Apr 2021 12:30:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE01D61073
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.118364.224470 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.118397.224488 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbMTK-0006Ic-LZ; Tue, 27 Apr 2021 12:05:46 +0000
+	id 1lbMrP-0000nJ-R1; Tue, 27 Apr 2021 12:30:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 118364.224470; Tue, 27 Apr 2021 12:05:46 +0000
+Received: by outflank-mailman (output) from mailman id 118397.224488; Tue, 27 Apr 2021 12:30:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbMTK-0006IT-Hr; Tue, 27 Apr 2021 12:05:46 +0000
-Received: by outflank-mailman (input) for mailman id 118364;
- Tue, 27 Apr 2021 12:05:45 +0000
+	id 1lbMrP-0000nC-NT; Tue, 27 Apr 2021 12:30:39 +0000
+Received: by outflank-mailman (input) for mailman id 118397;
+ Tue, 27 Apr 2021 12:30:39 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HmyD=JY=cs.pub.ro=costin.lupu@srs-us1.protection.inumbo.net>)
- id 1lbMTI-00062t-UP
- for xen-devel@lists.xenproject.org; Tue, 27 Apr 2021 12:05:44 +0000
-Received: from mx.upb.ro (unknown [141.85.13.200])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=4dJ3=JY=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lbMrP-0000n7-5J
+ for xen-devel@lists.xenproject.org; Tue, 27 Apr 2021 12:30:39 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7eb09498-64b8-432c-b5ef-d660233f1178;
- Tue, 27 Apr 2021 12:05:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by mx.upb.ro (Postfix) with ESMTP id 99E19B560069;
- Tue, 27 Apr 2021 15:05:32 +0300 (EEST)
-Received: from mx.upb.ro ([127.0.0.1])
- by localhost (mx.upb.ro [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id 0OFQ6eJ013ed; Tue, 27 Apr 2021 15:05:25 +0300 (EEST)
-Received: from localhost (localhost [127.0.0.1])
- by mx.upb.ro (Postfix) with ESMTP id A40DCB5600B8;
- Tue, 27 Apr 2021 15:05:25 +0300 (EEST)
-Received: from mx.upb.ro ([127.0.0.1])
- by localhost (mx.upb.ro [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id WxSkCHgP_ggo; Tue, 27 Apr 2021 15:05:25 +0300 (EEST)
-Received: from localhost.localdomain (unknown [188.25.174.245])
- by mx.upb.ro (Postfix) with ESMTPSA id 36F35B560057;
- Tue, 27 Apr 2021 15:05:25 +0300 (EEST)
+ id 918c2e85-20d9-4376-a9a8-13b224a2c90c;
+ Tue, 27 Apr 2021 12:30:37 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9BB3DB19E;
+ Tue, 27 Apr 2021 12:30:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,63 +52,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7eb09498-64b8-432c-b5ef-d660233f1178
-X-Virus-Scanned: amavisd-new at upb.ro
-From: Costin Lupu <costin.lupu@cs.pub.ro>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 2/5] tools/libfsimage: Fix PATH_MAX redefinition error
-Date: Tue, 27 Apr 2021 15:05:17 +0300
-Message-Id: <e44209c8981a68604a34f3066d53989f84ce8f49.1619524463.git.costin.lupu@cs.pub.ro>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1619524463.git.costin.lupu@cs.pub.ro>
-References: <cover.1619524463.git.costin.lupu@cs.pub.ro>
+X-Inumbo-ID: 918c2e85-20d9-4376-a9a8-13b224a2c90c
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1619526636; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+wHkM2KxNMSNO+NMsfMUTi+YRP+pC/vCyyGdQmOYFvM=;
+	b=I5l1GYF5c1RqL++oUVJOBUpx2dXhb1J1so8oX/WlL9z2y/jpNh4giP+EgtrSxv78C2bZ+A
+	uWUynsqJ+r6TO4yo2KPHVZN8LTyay1jL6fl8sVYptrMxQQREmC3gE9vM8WiiG98qPnFIPe
+	DMjYsWfCnH3RT6aZK1rmaTHmDLljEPI=
+Subject: Re: [PATCH] build: centralize / unify asm-offsets generation
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>
+References: <fa340caa-4ee1-a302-fbf1-1df400493d6b@suse.com>
+ <YH7zXpPz03+kLzEr@Air-de-Roger>
+ <e9de883b-604b-1193-b748-5a59795a9f31@suse.com>
+ <YH7/SvkrB2yGgRij@Air-de-Roger>
+ <5170aa51-8e34-3a45-5bf6-c0a187b1c427@suse.com>
+ <YIfTyT4rvD9yEqiM@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <5018479d-b566-a32b-9a01-5ccf01fe0880@suse.com>
+Date: Tue, 27 Apr 2021 14:30:35 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <YIfTyT4rvD9yEqiM@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-If PATH_MAX is already defined in the system (e.g. in /usr/include/limits=
-.h
-header) then gcc will trigger a redefinition error because of -Werror.
+On 27.04.2021 11:05, Roger Pau Monné wrote:
+> On Wed, Apr 21, 2021 at 04:09:03PM +0200, Jan Beulich wrote:
+>> On 20.04.2021 18:20, Roger Pau Monné wrote:
+>>> On Tue, Apr 20, 2021 at 05:47:49PM +0200, Jan Beulich wrote:
+>>>> On 20.04.2021 17:29, Roger Pau Monné wrote:
+>>>>> On Thu, Apr 01, 2021 at 10:33:47AM +0200, Jan Beulich wrote:
+>>>>>> @@ -399,7 +399,11 @@ include/xen/compile.h: include/xen/compi
+>>>>>>  	@sed -rf tools/process-banner.sed < .banner >> $@.new
+>>>>>>  	@mv -f $@.new $@
+>>>>>>  
+>>>>>> -include/asm-$(TARGET_ARCH)/asm-offsets.h: arch/$(TARGET_ARCH)/asm-offsets.s
+>>>>>> +asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
+>>>>>> +	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
+>>>>>> +	$(call move-if-changed,$@.new,$@)
+>>>>>
+>>>>> Won't it be more natural to keep the .s file in arch/$(TARGET_ARCH)?
+>>>>
+>>>> Yes and no: Yes as far as the actual file location is concerned.
+>>>> No when considering where it gets generated: I generally consider
+>>>> it risky to generate files outside of the directory where make
+>>>> currently runs. There may be good reasons for certain exceptions,
+>>>> but personally I don't see this case as good enough a reason.
+>>>>
+>>>> Somewhat related - if doing as you suggest, which Makefile's
+>>>> clean: rule should clean up that file in your opinion?
+>>>
+>>> The clean rule should be in the makefile where it's generated IMO,
+>>> same as asm-offsets.h clean rule currently in xen/Makefile.
+>>>
+>>>> Nevertheless, if there's general agreement that keeping the file
+>>>> there is better, I'd make the change and simply ignore my unhappy
+>>>> feelings about it.
+>>>
+>>> I don't have a strong opinion, it just feels weird to have this IMO
+>>> stray asm-offsets.s outside of it's arch directory, taking into
+>>> account that we have asm-offsets.h generated from xen/Makefile into an
+>>> arch specific directory already as a precedent in that makefile.
+>>
+>> Well, asm-offsets.h generation doesn't involve the compiler, hence
+>> no .*.d files get generated and want including later. For
+>> asm-offsets.s to have dependencies properly honored, if we
+>> generated it in xen/arch/<arch>, .asm-offsets.d would also end up
+>> there, and hence including of it would need separately taking care
+>> of.
+> 
+> I'm not sure I understand what do you mean with inclusion need taking
+> care of separately. Isn't it expected for .d file to reside in the
+> same directory as the output,
 
-Signed-off-by: Costin Lupu <costin.lupu@cs.pub.ro>
----
- tools/libfsimage/ext2fs/fsys_ext2fs.c     | 2 ++
- tools/libfsimage/reiserfs/fsys_reiserfs.c | 2 ++
- 2 files changed, 4 insertions(+)
+Yes, ...
 
-diff --git a/tools/libfsimage/ext2fs/fsys_ext2fs.c b/tools/libfsimage/ext=
-2fs/fsys_ext2fs.c
-index a4ed10419c..5ed8fce90e 100644
---- a/tools/libfsimage/ext2fs/fsys_ext2fs.c
-+++ b/tools/libfsimage/ext2fs/fsys_ext2fs.c
-@@ -278,7 +278,9 @@ struct ext4_extent_header {
-=20
- #define EXT2_SUPER_MAGIC      0xEF53	/* include/linux/ext2_fs.h */
- #define EXT2_ROOT_INO              2	/* include/linux/ext2_fs.h */
-+#ifndef PATH_MAX
- #define PATH_MAX                1024	/* include/linux/limits.h */
-+#endif
- #define MAX_LINK_COUNT             5	/* number of symbolic links to foll=
-ow */
-=20
- /* made up, these are pointers into FSYS_BUF */
-diff --git a/tools/libfsimage/reiserfs/fsys_reiserfs.c b/tools/libfsimage=
-/reiserfs/fsys_reiserfs.c
-index 916eb15292..10ca657476 100644
---- a/tools/libfsimage/reiserfs/fsys_reiserfs.c
-+++ b/tools/libfsimage/reiserfs/fsys_reiserfs.c
-@@ -284,7 +284,9 @@ struct reiserfs_de_head
- #define S_ISDIR(mode) (((mode) & 0170000) =3D=3D 0040000)
- #define S_ISLNK(mode) (((mode) & 0170000) =3D=3D 0120000)
-=20
-+#ifndef PATH_MAX
- #define PATH_MAX       1024	/* include/linux/limits.h */
-+#endif
- #define MAX_LINK_COUNT    5	/* number of symbolic links to follow */
-=20
- /* The size of the node cache */
---=20
-2.20.1
+> and hence picked up automatically?
 
+... and hence they _wouldn't_ be picked up automatically while
+building in xen/ if the .s file got created in xen/arch/<arch>/.
+
+Jan
 
