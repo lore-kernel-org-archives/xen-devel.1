@@ -2,50 +2,48 @@ Return-Path: <SRS0=iCHD=JZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-4.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EC36C433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Apr 2021 07:00:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 321C4C433ED
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Apr 2021 07:20:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 649D961154
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Apr 2021 07:00:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 649D961154
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	by mail.kernel.org (Postfix) with ESMTPS id AC1BE600D4
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Apr 2021 07:20:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC1BE600D4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.119027.225348 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.119044.225360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbeAs-0003XS-W5; Wed, 28 Apr 2021 06:59:54 +0000
+	id 1lbeUN-0005fZ-Ow; Wed, 28 Apr 2021 07:20:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 119027.225348; Wed, 28 Apr 2021 06:59:54 +0000
+Received: by outflank-mailman (output) from mailman id 119044.225360; Wed, 28 Apr 2021 07:20:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbeAs-0003XL-Sw; Wed, 28 Apr 2021 06:59:54 +0000
-Received: by outflank-mailman (input) for mailman id 119027;
- Wed, 28 Apr 2021 06:48:57 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lbeUN-0005fD-K6; Wed, 28 Apr 2021 07:20:03 +0000
+Received: by outflank-mailman (input) for mailman id 119044;
+ Wed, 28 Apr 2021 07:20:02 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=yQaW=JZ=invisiblethingslab.com=demi@srs-us1.protection.inumbo.net>)
- id 1lbe0H-0002Yv-8u
- for xen-devel@lists.xenproject.org; Wed, 28 Apr 2021 06:48:57 +0000
-Received: from wout2-smtp.messagingengine.com (unknown [64.147.123.25])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ea6d6ba8-da56-492e-8d60-2fb9099017cc;
- Wed, 28 Apr 2021 06:48:56 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.west.internal (Postfix) with ESMTP id 8DA2FD72;
- Wed, 28 Apr 2021 02:48:54 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute4.internal (MEProxy); Wed, 28 Apr 2021 02:48:54 -0400
-Received: from [10.139.255.254] (unknown [66.115.173.166])
- by mail.messagingengine.com (Postfix) with ESMTPA;
- Wed, 28 Apr 2021 02:48:53 -0400 (EDT)
+ <SRS0=1uJE=JZ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1lbeUM-0005Wf-7i
+ for xen-devel@lists.xenproject.org; Wed, 28 Apr 2021 07:20:02 +0000
+Received: from mail-wm1-x332.google.com (unknown [2a00:1450:4864:20::332])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4a2386d2-c7dc-428e-9722-5ed356ce97e0;
+ Wed, 28 Apr 2021 07:20:01 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id n127so21288002wmb.5
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Apr 2021 00:20:01 -0700 (PDT)
+Received: from [192.168.1.186]
+ (host86-180-176-157.range86-180.btcentralplus.com. [86.180.176.157])
+ by smtp.gmail.com with ESMTPSA id h63sm2810018wmh.13.2021.04.28.00.19.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Apr 2021 00:19:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,284 +55,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea6d6ba8-da56-492e-8d60-2fb9099017cc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=n+NkJe
-	fZdFCSii+qnQS0wALGULSVUtTiSpLmzmY/7jo=; b=gA98iOA2LLxpEkvq+L9Rf6
-	Of5TnBsgXw2i3ZZaXHxDOQNIDIgPDkkVgDLRpwXKNTur//bX/Aa2yVCbR72a4NSg
-	b+Q5FxQNL13L3WVIxlYo78CIZEQFsic71+qb7vf4zvQrQWO/2caUhWMtqtLz2jxo
-	x8mX4hWWGIA49TORyRU5Rx4UuhJsNLL0flULk24tQAya4/x3uwxPabh7ULJj7zdF
-	MDJT3c/zsMqBUeP89GzUgZfTypCLyOK49qSh3cxG+OJTMhdTvwtavBiV7ixmsuaI
-	URlSyUhuZJ7LtXmHfClLYHhc1p3v/RHtzHvRZRVGzUCDhPybUyIUwzFysOxmSHMA
-	==
-X-ME-Sender: <xms:VgWJYGf_qy2UgJxcueWkkHtnmnJEDrRZjAxZ0cxLup9pbY39xcEcUg>
-    <xme:VgWJYANlnAb5F4mIYEFQKiUxaAXx_ICbUpy2P7bZWKsOnFp4S7VmmwHlG-GhtixAR
-    gPp2DGxTy-sTeU>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrvddvuddgudduudcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefvfhfhuffkffgfgggjtgesghdtrefotdefjeenucfhrhhomhepffgvmhhi
-    ucforghrihgvucfqsggvnhhouhhruceouggvmhhisehinhhvihhsihgslhgvthhhihhngh
-    hslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffeutdevlefghfehheekheegieel
-    gfeffffhudduueduhfevhfejteehffehueevnecukfhppeeiiedrudduhedrudejfedrud
-    eiieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegu
-    vghmihesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:VgWJYHgMfAMs4ErI0U3WOefSrZ03Nd3KlSpoVfkWQeN-sPOFJxhbpw>
-    <xmx:VgWJYD-LiMKv9e4j3y4Fg9ZX5icD8nKcIgt-E7T_8wQUtjFdrSgd9Q>
-    <xmx:VgWJYCuolb2xGhNW313C6ldcSJRhfps9v1GBu8dJ3yhyYREOPXvnPw>
-    <xmx:VgWJYHUfiD63xFokX4COScfW17bXg4Bmfe2MoEcOSjiohkpiSLpZig>
-To: =?UTF-8?Q?Marek_Marczycowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
-References: <cover.3a5d506462133586bd805b72a226916af6a33799.1619482896.git-series.marmarek@invisiblethingslab.com>
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-Subject: Re: [RFC PATCH 0/2] libxl: support common cases without block script
-Message-ID: <41538969-c59d-acc5-9eee-0dffca50d6ac@invisiblethingslab.com>
-Date: Wed, 28 Apr 2021 02:48:47 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+X-Inumbo-ID: 4a2386d2-c7dc-428e-9722-5ed356ce97e0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=r5xGVk7hzGDeqe6D9siNjnGXs4m1MYAh6B0t/kk7rXk=;
+        b=XbiCyyaQk0Sd1WHxBa9jRmZuW5f3v5+D4/DNHkRdgkjXIHmb4lEg0TgiCKv8iNX6eh
+         8510ZbTTR097+zBBiwAOQt5PgDhrb/VD2NI1BUDqZnnJbRKYDTO46wH4d15ve543cTsE
+         hA5/HZ8Dtu9yzq3BIbV4IDVL0pWz/hYwr/fhsQzxwhcnHmdjTCQ2UW7/+SaiapELuddf
+         yz8/+m8ICAbjbB6x3djqCkNLnN3uTMr7tu5jFrMaM6mYU3h7SCZFznRb7qQjBVXbSHQf
+         XwzEdxPOthpH+h062SQazOKgdveCQWtVhgTNSbt+9QK/+nryat8eknq8p2PfFdshYUlj
+         yyyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:subject:to:cc:references
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=r5xGVk7hzGDeqe6D9siNjnGXs4m1MYAh6B0t/kk7rXk=;
+        b=Gd/KSVRmeNAobuFUCmnba0lJG7c0HESyyr6jupWglZuu6hrnSHMKVfz/OGxblKMPZs
+         GbbxfBq+GDr5OEOz64c6omZ9/R4m2cLT7mp82cZ2U3ve8la9lnWIPc+yjahMT4/4FZig
+         z8kP4ijU/2ntZSPZZxrsfTZFyJcHSBmO06ImjbnOE0c6Q4y5diNGklJyq1CdrRbRjXbH
+         J/4Kqu7aHrLS2raTy+9ACUySaJdqzVCjwh2xDBLc5AnNlYc3hLT2yMeT+sW0dkZNSll4
+         DBoMS66xGhhUKtb8sCTzxNAcKl2JzYFVqSiVlSucxmdkRMqg1FckqsP2L132xbDuDATe
+         UD1A==
+X-Gm-Message-State: AOAM533UzkWtwtooTrXBsm6bWCU83vVF+Kvarx083o75IoqYLkCaqD3v
+	PkaByUtf3kg6TpehYlpCfdg74urmXX0=
+X-Google-Smtp-Source: ABdhPJzreyOhtk6E+heq9UbzAYTMnkmac6Ad/iNc402Ol4Zc5ovemv2y9Pw7wtZENnX58SytF9L9bw==
+X-Received: by 2002:a7b:c248:: with SMTP id b8mr2789584wmj.150.1619594400378;
+        Wed, 28 Apr 2021 00:20:00 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Reply-To: paul@xen.org
+Subject: Re: [RFC PATCH] iommu: make no-quarantine mean no-quarantine
+To: Jan Beulich <jbeulich@suse.com>, Scott Davis <scott.davis@starlab.io>,
+ Scott Davis <scottwd@gmail.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <0a292d952ff71dbfed5234d27b42a05f7b49a1fe.1619451434.git.scott.davis@starlab.io>
+ <cea1d2d0-fd69-a4cd-6653-dd881d07b96a@suse.com>
+ <56F61E81-511E-4ECA-B2A0-B91F250804D7@starlab.io>
+ <237ad45b-b68d-9d31-0fbc-1af52dfca808@suse.com>
+Message-ID: <dc6556ae-c653-8519-1a81-9524e4472f26@xen.org>
+Date: Wed, 28 Apr 2021 08:19:58 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <cover.3a5d506462133586bd805b72a226916af6a33799.1619482896.git-series.marmarek@invisiblethingslab.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="QuSxHp8sqUgk0op65Pzl6XtmQMEDuaDN3"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---QuSxHp8sqUgk0op65Pzl6XtmQMEDuaDN3
-Content-Type: multipart/mixed; boundary="rtxUu6I7pPr2GiYXoLWVbrSlSu6ESUvqI";
- protected-headers="v1"
-From: Demi Marie Obenour <demi@invisiblethingslab.com>
-To: =?UTF-8?Q?Marek_Marczycowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
-Message-ID: <41538969-c59d-acc5-9eee-0dffca50d6ac@invisiblethingslab.com>
-Subject: Re: [RFC PATCH 0/2] libxl: support common cases without block script
-References: <cover.3a5d506462133586bd805b72a226916af6a33799.1619482896.git-series.marmarek@invisiblethingslab.com>
-In-Reply-To: <cover.3a5d506462133586bd805b72a226916af6a33799.1619482896.git-series.marmarek@invisiblethingslab.com>
-
---rtxUu6I7pPr2GiYXoLWVbrSlSu6ESUvqI
-Content-Type: multipart/mixed;
- boundary="------------B5CDC002198864B3CFD74116"
+In-Reply-To: <237ad45b-b68d-9d31-0fbc-1af52dfca808@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-This is a multi-part message in MIME format.
---------------B5CDC002198864B3CFD74116
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 28/04/2021 07:15, Jan Beulich wrote:
+> On 28.04.2021 00:00, Scott Davis wrote:
+>> On 4/27/21, 2:56 AM, Jan Beulich wrote:
+>>> On 26.04.2021 19:25, Scott Davis wrote:
+>>>> This patch modifies Xen's behavior when making devices assignable while the
+>>>> iommu=no-quarantine command line option is in effect. Currently this option
+>>>> only affects device deassignment, causing devices to get immediately assigned
+>>>> back to Dom0 instead of to the quarantine dom_io domain. This patch extends
+>>>> no-quarantine to device assignment as well, preventing devices from being
+>>>> assigned to dom_io when they are made assignable while no-quarantine is in
+>>>> effect.
+>>>
+>>> Well, the term "quarantine" to me means a safety action taken _after_
+>>> possible exposure to something "bad". Therefore I see this being specific
+>>> to device de-assignment as the logical thing. Hence if a mode like what
+>>> you describe was wanted, I don't think it should be the result of
+>>> "iommu=no-quarantine".
+>>
+>> Sorry I'm a bit confused by this. Correct me if wrong, but my understanding is
+>> that the purpose of assigning a device to dom_io on de-assignment is to protect
+>> Dom0 from the effects of in-flight DMA operations initiated by a DomU. I assumed
+>> that the purpose of (temporarily) assigning to dom_io on assignment was the same
+>> but in reverse: protecting a DomU from Dom0-initiated ops. Is this not the case?
+> 
+> Well, no, not really. Dom0 is considered fully trusted for a variety of
+> reasons.
+> 
+>> Also, documentation and code already refer to the operation in question as a
+>> "quarantine" (see xl command line docs and libxl__device_pci_assignable_add)
+>> and to devices that have undergone it as being "quarantined" (see assign_device
+>> in xen/drivers/passthrough/pci.c). So if that is not the correct term, there may
+>> be some additional changes needed for consistency. Is there another name that
+>> would be more appropriate?
+> 
+> I don't see what's wrong with the term for how things are currently. If
+> you talk about an adjustment to terminology to accompany your proposed
+> change - not sure.
+> 
+>> I would also point out that, currently, there does not appear to be a way for an
+>> xl user to opt out of quarantine functionality in either direction other than by
+>> manually making devices assignable. There is no xl command line flag to disable
+>> it and iommu=no-quarantine will have no effect because any device that xl itself
+>> makes assignable will have the struct pci_dev.quarantine flag set, which
+>> overrides iommu=no-quarantine. Is that intentional?
+> 
+> Not sure here either: It may also have been that it was assumed to not
+> be of interest. Paul?
+> 
 
-When it comes to file-based block devices, the major difficulty is
-the extremely bad kernel API.  The only fully safe way to use loop
-devices is to use LOOP_CONFIGURE with LO_FLAGS_AUTOCLEAR and hold a
-file descriptor open to the device until another piece of code (either
-another userspace program or the kernel) has grabbed a reference to it.
-Everything else risks either using a freed loop device (that might now
-be attached to a different file) or risks leaking them on unclean exit.
-The only exception is if one can make certain assumptions, such as no
-other program freeing loop devices for the file in question.  This is
-a reasonable assumption for Qubes dom0, but neither for Qubes domU nor
-for Xen dom0 in general.  Nevertheless, this is effectively what the
-current block script does: if I understand the code correctly, there
-is a race where badly timed calls to losetup by another process could
-result in the block script freeing the wrong loop device.
+TBH I'm not sure. When I implemented quarantining it was non-optional 
+for good reason and no-quarantine came along later (and somewhat 
+hurriedly IIRC).
 
-Worse, writes to XenStore only cause Linux to take a reference to
-the device at some unspecified point in the future, rather than
-synchronously.  It takes a major and minor number, which means we
-need to hold a reference to the relevant loop device ourselves.
-FreeBSD solves this by having XenStore include a path to the device
-and/or regular file, but on Linux this leads to awkward issues with
-namespaces.  Instead, I recommend that Linux gain an ioctl-based
-interface in the future, which takes a file descriptor to the device
-to use.  The kernel would then do the writes itself.
+>> If I misunderstood and your objection is simply that "quarantine-on-assignment"
+>> and "quarantine-on-deassignment" should be controllable by separate iommu
+>> options, that's an easy enough change to make.
+> 
+> Yes, effectively it's that what I think things would want to be, if
+> "quarantine-on-assignment" is really something that we think is needed.
+> It would default to off imo.
+> 
+>> Although I think that might also
+>> negate the need for/effect of struct pci_dev.quarantine as described above. If
+>> that's what is desired, any thoughts on what the new option(s) should be called?
+> 
+> Following the extension to the command line option I'm putting in place
+> in "IOMMU: make DMA containment of quarantined devices optional" (which
+> I still need to get around to address review feedback for and resubmit),
+> I'd be inclined to suggest "iommu=quarantine=always" or
+> "iommu=quarantine=on-assign". Unless of course we'd prefer to have the
+> caller of the assignment operation have full control over the behavior
+> here anyway (in which case a command line option control simply is not
+> necessary).
+> 
 
-Thankfully, not all hope is lost, even with the current kernel API.
-We can use sd_pid_notify_with_fds to stash the file descriptors in PID
-1, which will never exit.  We can give those file descriptors a name,
-so that we know which is which if we are restarted.  And we can close
-devices that we know are not in use by any VMs.  The cache will allow
-us to avoid duplicating devices, which is actually quite important =E2=80=
-=95
-QubesOS doesn=E2=80=99t want each qube to have a separate file descriptor=20
-for
-its kernel, for example.
+I'm still not entirely sure why not quarantining on is a problem, other 
+than it triggering an as-yet undiagnosed issue in QEMU, but I agree that 
+that the expectation of 'no-quarantine' meaning just that (i.e. the old 
+dom0->domU and domU->dom0 transitions are re-instated) is reasonable. Do 
+we really want yet more command line options?
 
-Initially, I recommend focusing on handle the case where the process
-using libxl is not restarted.  That is the simpler case, by far.
-I suggest starting by just setting up a loop device prior to attaching
-it, and destroying it when the device is detached.  Caching can be
-added as the next step.
---=20
-Demi Marie Obenour
-she/her/hers
-QubesOS Developer, Invisible Things Lab
-
---------------B5CDC002198864B3CFD74116
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB288B55FFF9C22C1.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: OpenPGP public key
-Content-Disposition: attachment;
- filename="OpenPGP_0xB288B55FFF9C22C1.asc"
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xsFNBFp+A0oBEADffj6anl9/BHhUSxGTICeVl2tob7hPDdhHNgPR4C8xlYt5q49yB+l2nipda=
-q+4
-Gk6FZfqC825TKl7eRpUjMriwle4r3R0ydSIGcy4M6eb0IcxmuPYfbWpr/si88QKgyGSVZ7GeN=
-W1U
-nzTdhYHuFlk8dBSmB1fzhEYEk0RcJqg4AKoq6/3/UorR+FaSuVwT7rqzGrTlscnTDlPWgRzrQ=
-3js
-sesI7sZLm82E3pJSgaUoCdCOlL7MMPCJwI8JpPlBedRpe9tfVyfu3euTPLPxwcV3L/cfWPGSL=
-4Po
-fBtB8NUU6QwYiQ9Hzx4xOyn67zW73/G0Q2vPPRst8LBDqlxLjbtx/WLR6h3nBc3eyuZ+q62HS=
-1pJ
-5EvUT1vjyJ1ySrqtUXWQ4XlZyoEFUfpJxJoN0A9HCxmHGVckzTRl5FMWo8TCniHynNXsBtDQb=
-abt
-7aNEOaAJdE7to0AH3T/Bvwzcp0ZJtBk0EM6YeMLtotUut7h2Bkg1b//r6bTBswMBXVJ5H44Qf=
-0+e
-KeUg7whSC9qpYOzzrm7+0r9F5u3qF8ZTx55TJc2g656C9a1P1MYVysLvkLvS4H+crmxA/i08T=
-c1h
-+x9RRvqba4lSzZ6/Tmt60DPM5Sc4R0nSm9BBff0Nm0bSNRS8InXdO1Aq3362QKX2NOwcL5YaS=
-twO
-DNyZUqF7izjK4QARAQABzTxEZW1pIE1hcmllIE9iZW5vdXIgKGxvdmVyIG9mIGNvZGluZykgP=
-GRl
-bWlvYmVub3VyQGdtYWlsLmNvbT7CwXgEEwECACIFAlp+A0oCGwMGCwkIBwMCBhUIAgkKCwQWA=
-gMB
-Ah4BAheAAAoJELKItV//nCLBhr8QAK/xrb4wyi71xII2hkFBpT59ObLN+32FQT7R3lbZRjVFj=
-c6y
-MUjOb1H/hJVxx+yo5gsSj5LS9AwggioUSrcUKldfA/PKKai2mzTlUDxTcF3vKx6iMXKA6AqwA=
-w4B
-57ZEJoMM6egm57TV19kzPMc879NV2nc6+elaKl+/kbVeD3qvBuEwsTe2Do3HAAdrfUG/j9erw=
-Ik6
-gha/Hp9yZlCnPTX+VK+xifQqt8RtMqS5R/S8z0msJMI/ajNU03kFjOpqrYziv6OZLJ5cuKb3b=
-ZU5
-aoaRQRDzkFIR6aqtFLTohTo20QywXwRa39uFaOT/0YMpNyel0kdOszFOykTEGI2u+kja35g9T=
-kH9
-0kkBTG+aEWttIht0Hy6YFmwjcAxisSakBuHnHuMSOiyRQLu43ej2+mDWgItLZ48Mu0C3IG1se=
-eQD
-jEYPtqvyZ6bGkf2Vj+L6wLoLLIhRZxQOedqArIk/Sb2SzQYuxN44IDRt+3ZcDqsPppoKcxSyd=
-1Ny
-2tpvjYJXlfKmOYLhTWs8nwlAlSHX/c/jz/ywwf7eSvGknToo1Y0VpRtoxMaKW1nvH0OeCSVJi=
-tfR
-P7YbiRVc2aNqWPCSgtqHAuVraBRbAFLKh9d2rKFB3BmynTUpc1BQLJP8+D5oNyb8Ts4xXd3iV=
-/uD
-8JLGJfYZIR7oGWFLP4uZ3tkneDfYzTxEZW1pIE9iZW5vdXIgKElUTCBFbWFpbCBLZXkpIDxhd=
-Ghl
-bmFAaW52aXNpYmxldGhpbmdzbGFiLmNvbT7CwY4EEwEIADgWIQR2h02fEza6IlkHHHGyiLVf/=
-5wi
-wQUCX6YJvQIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRCyiLVf/5wiwWRhD/0YR+YYC=
-5Kd
-uv/2LBgQJIygMsFiRHbR4+tWXuTFqgrxxFSlMktZ6gQrQCWe38WnOXkBoY6n/5lSJdfnuGd2U=
-agZ
-/9dkaGMUkqt+5WshLFly4BnP7pSsWReKgMP7etRTwn3Szk1OwFx2lzY1EnnconPLfPBc6rWG2=
-moA
-6l0WX+3WNR1B1ndqpl2hPSjT2jUCBWDVrGOUSX7r5f1WgtBeNYnEXPBCUUM51pFGESmfHIXQr=
-qFD
-A7nBNiIVFDJTmQzuEqIyJl67pKNgooij5mKzRhFKHfjLRAH4mmWZlB9UjDStAfFBAoDFHwd1H=
-L5V
-QCNQdqEc/9lZDApqWuCPadZN+pGouqLysesIYsNxUhJ7dtWOWHl0vs7/3qkWmWun/2uOJMQhr=
-a2u
-8nA9g91FbOobWqjrDd6x3ZJoGQf4zLqjmn/P514gb697788e573WN/MpQ5XIFl7aM2d6/GJiq=
-6LC
-9T2gSUW4rbPBiqOCeiUx7Kd/sVm41p9TOA7fEG4bYddCfDsNxaQJH6VRK3NOuBUGeL+iQEVF5=
-Xs6
-Yp+U+jwvv2M5Lel3EqAYo5xXTx4ls0xaxDCufudcAh8CMMqx3fguSb7Mi31WlnZpk0fDuWQVN=
-KyD
-P7lYpwc4nCCGNKCj622ZSocHAcQmX28L8pJdLYacv9pU3jPy4fHcQYvmTavTqowGnM1ARGVta=
-SBN
-YXJpZSBPYmVub3VyIChJVEwgRW1haWwgS2V5KSA8ZGVtaUBpbnZpc2libGV0aGluZ3NsYWIuY=
-29t
-PsLBjgQTAQgAOBYhBHaHTZ8TNroiWQcccbKItV//nCLBBQJgOEV+AhsDBQsJCAcCBhUKCQgLA=
-gQW
-AgMBAh4BAheAAAoJELKItV//nCLBKwoP/1WSnFdvSAD0g7fD0WlF+oi7ISFT7oqJnchFLOwVH=
-K4J
-g0e4hGn1ekWsF3Ha5tFLh4V/7UUuobYJpTfBAA2CckspYBqLtKGjFxcaqjjpO1I2W/jeNELVt=
-SYu
-COZICjdNGw2Hl9yHKRZiBkqc9u8lQcHDZKq4LIpVJj6ZQV/nxttDX90ax2No1nLLQXFbr5wb4=
-65L
-APpUlXwunYDij7xJGye+VUASQh9datye6orZYuJvNo8Tr3mAQxxkfR46LzWgxFCPEAZJ5P56N=
-c0I
-MHdJZj0Uc9+1jxERhOGppp5jlLgYGK7faGB/jTV6LaRQ4Ad+xiqokDWpmUOZsmA+bMbtPfYjD=
-ZBz
-5mlyHcIRKIFpE1l3Y8F7PhJuzzMUKkJi90CYakCV4x/aZs4pzk5E96c2VQx01RIEJ7fzHF7lw=
-Fdt
-fTS4YsLtAbQFsKayqwkGcVv2B1AHeqdoTMX+cgDvjd1ZganGlWA8Sv9RkNSMchn1hMuTwERTy=
-FTr
-2dKPnQdA1F480+jUap41ClXgn227WkCIMrNhQGNyJsnwyzi5wS8rBVRQ3BOTMyvGM07j3axUO=
-Yae
-jEpg7wKiwTPZGLGH1sz5GljD/916v5+v2xLbOo5606j9dWf5/tAhbPuqrQgWv41wuKDi+dDDE=
-KkO
-DF7DHes8No+QcHTDyETMn1RYm7t0RKR4zsFNBFp+A0oBEAC9ynZI9LU+uJkMeEJeJyQ/8VFkC=
-JQP
-QZEsIGzOTlPnwvVna0AS86n2Z+rK7R/usYs5iJCZ55/JISWd8xD57ue0eB47bcJvVqGlObI2D=
-EG8
-TwaW0O0duRhDgzMEL4t1KdRAepIESBEA/iPpI4gfUbVEIEQuqdqQyO4GAe+MkD0Hy5JH/0qgF=
-mba
-SegNTdQg5iqYjRZ3ttiswalql1/iSyv1WYeC1OAs+2BLOAT2NEggSiVOtxEfgewsQtCWi8H1S=
-oir
-akIfo45Hz0tk/Ad9ZWh2PvOGt97Ka85o4TLJxgJJqGEnqcFUZnJJriwoaRIS8N2C8/nEM53jb=
-1sH
-0gYddMU3QxY7dYNLIUrRKQeNkF30dK7V6JRH7pleRlf+wQcNfRAIUrNlatj9TxwivQrKnC9aI=
-FFH
-Ey/0mAgtrQShcMRmMgVlRoOA5B8RTulRLCmkafvwuhs6dCxN0GNAORIVVFxjx9Vn7OqYPgwio=
-fZ6
-SbEl0hgPyWBQvE85klFLZLoj7p+joDY1XNQztmfArnJ9x+YV4igjWImINAZSlmEcYtd+xy3Li=
-/8o
-eYDAqrsnrOjb+WvGhCykJk4urBog2LNtcyCjkTs7F+WeXGUo0NDhbd3Z6AyFfqeF7uJ3D5hlp=
-X2n
-I9no/ugPrrTVoVZAgrrnNz0iZG2DVx46x913pVKHl5mlYQARAQABwsFfBBgBAgAJBQJafgNKA=
-hsM
-AAoJELKItV//nCLBwNIP/AiIHE8boIqReFQyaMzxq6lE4YZCZNj65B/nkDOvodSiwfwjjVVE2=
-V3i
-EzxMHbgyTCGA67+Bo/d5aQGjgn0TPtsGzelyQHipaUzEyrsceUGWYoKXYyVWKEfyh0cDfnd9d=
-iAm
-3VeNqchtcMpoehETH8frRHnJdBcjf112PzQSdKC6kqU0Q196c4Vp5HDOQfNiDnTf7gZSj0Bra=
-HOB
-yy9LEDCLhQiCmr+2E0rW4tBtDAn2HkT9uf32ZGqJCn1O+2uVfFhGu6vPE5qkqrbSE8TG+03H8=
-ecU
-2q50zgHWPdHMOBvy3EhzfAh2VmOSTcRK+tSUe/u3wdLRDPwv/DTzGI36Kgky9MsDC5gpIwNbO=
-JP2
-G/q1wT1oGkw4IXfWv2ufWiXqJ+k7HEi2N1sree7Dy9KBCqb+ca1vFhYPDJfhP75I/VnzHVssZ=
-/rY
-Z9+51yDoUABoNdJNSGUYl+Yh9Pw9pE3Kt4EFzUlFZWbE4xKL/NPno+z4J9aWemLLszcYz/u3X=
-nbO
-vUSQHSrmfOzX3cV4yfmjM5lewgSstoxGyTx2M8enslgdXhPthZlDnTnOT+C+OTsh8+m5tos8H=
-Qja
-PM01MKBiAqdPgksm1wu2DrrwUi6ChRVTUBcj6+/9IJ81H2P2gJk3Ls3AVIxIffLoY34E+MYSf=
-kEj
-Bz0E8CLOcAw7JIwAaeBT
-=3Dx+Ro
------END PGP PUBLIC KEY BLOCK-----
-
---------------B5CDC002198864B3CFD74116--
-
---rtxUu6I7pPr2GiYXoLWVbrSlSu6ESUvqI--
-
---QuSxHp8sqUgk0op65Pzl6XtmQMEDuaDN3
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdodNnxM2uiJZBxxxsoi1X/+cIsEFAmCJBVQACgkQsoi1X/+c
-IsEB6xAA3NaPsDQNhy9DCjozQ8lR1uGp12su5Sl0Wmd86OQg1TVLjMqx0JiGFTYw
-iwcuPY3QjyEG5gsAIN5rL7ujx8/aurNBD9ca+SdDVHA6ofjlseXN4z9kZtO4gsGd
-v+pqzzntzAJ5QXIelKibyxh1mmMeQHASOnC7GBOmlw+6deHc1yNIDsUm0zftWJwH
-InLa/aap8yOXMv+rIhMWkQd0ukiSgiL0APtj+UrfhPCAN75sVmmuFSP5mpdYOUC9
-nvgpOMEi8BEXwJi7pXTvgf2dh4r6MJHypIa8pIgoxALA5eHwxFX0I4xhd2Fs4iBo
-rHiCyoE5mfb9smcR1S2RBS0qgSnI5A2vjWhtfmKhMuHiB3Xqanu5+SZua12dhHAd
-mEulIiiX8xhohJizPJ++m4DxJhjTSCVaWf5qaQ6JN2w0uQhEC06LMgdKWGlkEEcl
-mueBAsvP6O84ZuzrWGxTM4Jx+MWliQdAG0m/tetRVPb0pLJr9YCpBvHKpriN3ih7
-Q5v2legcKMjk522ihLSkqu9gabh8qYzs/IeTvdbasS2MPX6dJ8xREmq1GIFsImcl
-p+EOOl8xNXfRclNfr1t6RJkTUhI8LMBfw0MvhE7atNmKIPVo5P02KqZh1eLhfPFx
-1tr6w5sby26u2eR8zpZ2zo42BZS9Zv3Ouhm9aQejfuY4RxvlkfQ=
-=nPfN
------END PGP SIGNATURE-----
-
---QuSxHp8sqUgk0op65Pzl6XtmQMEDuaDN3--
+   Paul
 
