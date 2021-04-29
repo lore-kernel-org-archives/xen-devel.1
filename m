@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CCD9C433B4
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 00:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 416F3C43462
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 00:15:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23E786144A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 00:15:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23E786144A
+	by mail.kernel.org (Postfix) with ESMTPS id E1BF561448
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 00:15:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1BF561448
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.119621.226218 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.119622.226230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbuKb-0007Hz-7g; Thu, 29 Apr 2021 00:15:01 +0000
+	id 1lbuKe-0007N5-Rb; Thu, 29 Apr 2021 00:15:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 119621.226218; Thu, 29 Apr 2021 00:15:01 +0000
+Received: by outflank-mailman (output) from mailman id 119622.226230; Thu, 29 Apr 2021 00:15:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lbuKb-0007Hp-3q; Thu, 29 Apr 2021 00:15:01 +0000
-Received: by outflank-mailman (input) for mailman id 119621;
- Thu, 29 Apr 2021 00:14:59 +0000
+	id 1lbuKe-0007Ms-Mb; Thu, 29 Apr 2021 00:15:04 +0000
+Received: by outflank-mailman (input) for mailman id 119622;
+ Thu, 29 Apr 2021 00:15:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=S48z=J2=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1lbuKY-00072A-Tx
- for xen-devel@lists.xenproject.org; Thu, 29 Apr 2021 00:14:58 +0000
-Received: from mail-qk1-x72a.google.com (unknown [2607:f8b0:4864:20::72a])
+ id 1lbuKd-00072A-U8
+ for xen-devel@lists.xenproject.org; Thu, 29 Apr 2021 00:15:03 +0000
+Received: from mail-qk1-x733.google.com (unknown [2607:f8b0:4864:20::733])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 319f02a1-26ba-43dc-8aaf-c36d6b6dd190;
- Thu, 29 Apr 2021 00:14:41 +0000 (UTC)
-Received: by mail-qk1-x72a.google.com with SMTP id 66so26014580qkf.2
- for <xen-devel@lists.xenproject.org>; Wed, 28 Apr 2021 17:14:41 -0700 (PDT)
+ id e524f946-e987-4ffd-935f-e56f2d0521ca;
+ Thu, 29 Apr 2021 00:14:43 +0000 (UTC)
+Received: by mail-qk1-x733.google.com with SMTP id q136so44605561qka.7
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Apr 2021 17:14:43 -0700 (PDT)
 Received: from localhost.localdomain (c-73-89-138-5.hsd1.vt.comcast.net.
  [73.89.138.5])
- by smtp.gmail.com with ESMTPSA id r185sm1021694qkf.78.2021.04.28.17.14.39
+ by smtp.gmail.com with ESMTPSA id r185sm1021694qkf.78.2021.04.28.17.14.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Apr 2021 17:14:40 -0700 (PDT)
+ Wed, 28 Apr 2021 17:14:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 319f02a1-26ba-43dc-8aaf-c36d6b6dd190
+X-Inumbo-ID: e524f946-e987-4ffd-935f-e56f2d0521ca
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :in-reply-to:references;
-        bh=uzJn8fV3EdSO38YaBLqYQLo0qSO3Ncl/nRlIGcswrmU=;
-        b=Hqn+oUKMlcXpq1h0ExB/ZfAy86ZQYkb32unXiTP+XSq3xFHLZ7+0p/aR2EVAJSpTBW
-         AZrHcTCiUOX5kL7JX5qcuD3WVOqlbma7q234AtivYvByeS1qCAraUslZ2dtwT/mi/abx
-         5+KIptlww5bump2pG9vpM9riM0iqOPg35bZkxtkFZ2BQ3HtjiqGcP6uXptGzB5KtGanq
-         waL8II4ko7Aa5A6EVjIAJ9JvaeXUyOfPKnzweNlRP5NjDvDXQ1Muw42tXFw+Csyza5pe
-         ymVDjeAwqvF6htxqNqPnjAVUR1Ft0iN4lBCuhVVjzwjIExUorDGnhUqpaO7Ofq8KBf2l
-         1fWg==
+        bh=gmgGK17wIRa1DlqHFSQ1z3Zv/54AdOc2b0ySCVRt0yU=;
+        b=OKNJ37sxZCgorQWpDPLeSEJcBm6eJe3y/hN4NqQtbP7wif3VlS/ztMfU4dGIk//aqz
+         htT7IKDGhQ583NfaDB43UTo75FfOKjbEDmDUI+2MDY/o36LjTKiTUNbDD1IosAnl9jJk
+         yMSyJvw8Hp67O+KpoJ1V+8W/7V+qhrjsygpe3n2ab4pw4iAc4XbUq283x4ECQVykc6C0
+         0RGY0fnnttdZhTDp9Tkjg725E/HMCJJNn8UqU2hBkZuJgDB24+Ab5SYPJ67Bg2qPf9kk
+         keUigpG40+MdYs+tR+ipH1ZNFYpH9fZYF2iGA7zBUfmm3BowguzFmXbHMXtlBxddoEyG
+         sYKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:in-reply-to:references;
-        bh=uzJn8fV3EdSO38YaBLqYQLo0qSO3Ncl/nRlIGcswrmU=;
-        b=acgoB5ZjI4L0026R9NzlwVyBTLRXitOP/UPUhfXvY0rKerEWB/JFdyjb9Kjaaga5ZX
-         6x6LoFaPpE1Wandxx0+ckH5eXh/NcTKx0gBFHvOTcv3RQkoXe1gi1hCks7rv15Bu0j94
-         jlVAd80svdcE+wduQ1kWY7+fR9nX58WNIbVJnwfyBGY0bOrrfJmE6Wm96+P7bC6pnKBO
-         gEUAGqSal5DIfHxduAEUB/49NPfWrO2Fm+TiPfg6VC3ga2EjywoCyIfdVo5baVYM/K4c
-         +nleLoaeimHjBzb58MiWPMqK5/zpUKTwydxoPW3WjdKUmhiaOYlXRTw57RoiQno+lD1G
-         TQOw==
-X-Gm-Message-State: AOAM533Mw0V+idimjMRrdwEZGtQnkQzokWzBsykxD2zZgcwnEDaSyEYI
-	mbzsZdQkB+BfH2/AZOJEi72zZynjcgU=
-X-Google-Smtp-Source: ABdhPJxDrhgR+Agdwwa8GG3hVHvQHKk01WIAOp/Q3pWpvt/3bdUQRS+80FsrYDY+hItRfBhByWnSrw==
-X-Received: by 2002:a37:6249:: with SMTP id w70mr24334594qkb.99.1619655280638;
-        Wed, 28 Apr 2021 17:14:40 -0700 (PDT)
+        bh=gmgGK17wIRa1DlqHFSQ1z3Zv/54AdOc2b0ySCVRt0yU=;
+        b=UM680fMaCB4R1ZXIHZawt3yRqVTqCFyWoTxBt3JndYHtMAKboyh6uaAJ/wYn77ipyo
+         iU84jQCEmYV1auBJ0B4vtRJOMgyf/CIemX/U7o+omCUKtX5j0myOHxNMUSKs7b8UPkHd
+         oO0Z1BqhDtVR0OEpge1YphAsVoSvfVmVX8txgr1NTMnoG6x47pkmLEjZFRst5YneFqsT
+         1XWDzZuEwMFd0V9uKfigqmukBC2w67GAaftU+lOsqjz7hGY7a6pR+qbJiVtK+aT0/Ynj
+         KtFBBcMzc5ciTjxAja9Sc9tkbfOSQkWsgp8S6mPlWsOYY8VOO9Yk9KE5iDeOQs7U432Z
+         Nfnw==
+X-Gm-Message-State: AOAM533syWJG0CgxXYnYgSJHYgzndRavzzcfhyV/l/sV+bct7BtVVM+w
+	dA8MvxHLnMjcQdr4ooI08SlKbrZitk4=
+X-Google-Smtp-Source: ABdhPJwJCDwbqS4/N2++moiTvGiiZFQkUvJeGhOuRY3EcwdojMxZhZuIoPVa0twtVUM0W8GZgVzdIg==
+X-Received: by 2002:a05:620a:1025:: with SMTP id a5mr2345999qkk.395.1619655282448;
+        Wed, 28 Apr 2021 17:14:42 -0700 (PDT)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.org
@@ -91,829 +91,263 @@ Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 03/12] golang/xenlight: fix string conversion in generated toC functions
-Date: Wed, 28 Apr 2021 20:14:25 -0400
-Message-Id: <06763aceff41167d3d3bbd603f729572c1f55c77.1619655104.git.rosbrookn@ainfosec.com>
+Subject: [PATCH 05/12] golang/xenlight: use struct pointers in keyed union fields
+Date: Wed, 28 Apr 2021 20:14:27 -0400
+Message-Id: <ebeb085b9b4b5d3dddd66607b409590f5e7cdfc6.1619655104.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1619650820.git.rosbrookn@ainfosec.com>
 References: <cover.1619650820.git.rosbrookn@ainfosec.com>
 In-Reply-To: <29e665fc1c9313f5e221e9e5e15d7c2d9c1eb4a7.1619655104.git.rosbrookn@ainfosec.com>
 References: <29e665fc1c9313f5e221e9e5e15d7c2d9c1eb4a7.1619655104.git.rosbrookn@ainfosec.com>
 
-In gengotypes.py, the toC functions only set C string fields when
-the Go strings are non-empty. However, to prevent segfaults in some
-cases, these fields should always at least be set to nil so that the C
-memory is zeroed out.
+Currently, when marshalig Go types with keyed union fields, we assign the
+value of the struct (e.g. DomainBuildInfoTypeUnionHvm) which implements the
+interface of the keyed union field (e.g. DomainBuildInfoTypeUnion).
+As-is, this means that if a populated DomainBuildInfo is marshaled to
+e.g. JSON, unmarshaling back to DomainBuildInfo will fail.
 
-Update gengotypes.py so that the generated code always sets these fields
-to nil first, and then proceeds to check if the Go string is non-empty.
-And, commit the new generated code.
+When the encoding/json is unmarshaling data into a Go type, and
+encounters a JSON object, it basically can either marshal the data into
+an empty interface, a map, or a struct. It cannot, however, marshal data
+into an interface with at least one method defined on it (e.g.
+DomainBuildInfoTypeUnion). Before this check is done, however, the
+decoder will check if the Go type is a pointer, and dereference it if
+so. It will then use the type of this value as the "target" type.
+
+This means that if the TypeUnion field is populated with a
+DomainBuildInfoTypeUnion, the decoder will see a non-empty interface and
+fail. If the TypeUnion field is populated with a
+*DomainBuildInfoTypeUnionHvm, it dereferences the pointer and sees a
+struct instead, allowing decoding to continue normally.
+
+Since there does not appear to be a strict need for NOT using pointers
+in these fields, update code generation to set keyed union fields to
+pointers of their implementing structs.
 
 Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 ---
- tools/golang/xenlight/gengotypes.py  |   1 +
- tools/golang/xenlight/helpers.gen.go | 160 +++++++++++++++++++++++++++
- 2 files changed, 161 insertions(+)
+ tools/golang/xenlight/gengotypes.py  |  4 +--
+ tools/golang/xenlight/helpers.gen.go | 44 ++++++++++++++--------------
+ 2 files changed, 24 insertions(+), 24 deletions(-)
 
 diff --git a/tools/golang/xenlight/gengotypes.py b/tools/golang/xenlight/gengotypes.py
-index 3e40c3d5dc..e6daa9b92f 100644
+index 3796632f7d..57f2576468 100644
 --- a/tools/golang/xenlight/gengotypes.py
 +++ b/tools/golang/xenlight/gengotypes.py
-@@ -527,6 +527,7 @@ def xenlight_golang_convert_to_C(ty = None, outer_name = None,
+@@ -404,7 +404,7 @@ def xenlight_golang_union_from_C(ty = None, union_name = '', struct_name = ''):
+         s += 'if err := {0}.fromC(xc);'.format(goname)
+         s += 'err != nil {{\n return fmt.Errorf("converting field {0}: %v", err)\n}}\n'.format(goname)
  
-     elif gotypename == 'string':
-         # Use the cgo helper for converting C strings.
-+        s += '{0}.{1} = nil\n'.format(cvarname, cname)
-         s += 'if {0}.{1} != "" {{\n'.format(govarname,goname)
-         s += '{0}.{1} = C.CString({2}.{3})}}\n'.format(cvarname,cname,
-                                                    govarname,goname)
+-        s += 'x.{0} = {1}\n'.format(field_name, goname)
++        s += 'x.{0} = &{1}\n'.format(field_name, goname)
+ 
+     # End switch statement
+     s += 'default:\n'
+@@ -571,7 +571,7 @@ def xenlight_golang_union_to_C(ty = None, union_name = '',
+         gotype  = xenlight_golang_fmt_name(cgotype)
+ 
+         field_name = xenlight_golang_fmt_name('{0}_union'.format(keyname))
+-        s += 'tmp, ok := x.{0}.({1})\n'.format(field_name,gotype)
++        s += 'tmp, ok := x.{0}.(*{1})\n'.format(field_name,gotype)
+         s += 'if !ok {\n'
+         s += 'return errors.New("wrong type for union key {0}")\n'.format(keyname)
+         s += '}\n'
 diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index b454b12d52..5222898fb8 100644
+index 5222898fb8..8fc5ec1649 100644
 --- a/tools/golang/xenlight/helpers.gen.go
 +++ b/tools/golang/xenlight/helpers.gen.go
-@@ -154,8 +154,10 @@ C.libxl_vnc_info_dispose(xc)}
- if err := x.Enable.toC(&xc.enable); err != nil {
- return fmt.Errorf("converting field Enable: %v", err)
+@@ -443,7 +443,7 @@ var connectionPty ChannelinfoConnectionUnionPty
+ if err := connectionPty.fromC(xc);err != nil {
+  return fmt.Errorf("converting field connectionPty: %v", err)
  }
-+xc.listen = nil
- if x.Listen != "" {
- xc.listen = C.CString(x.Listen)}
-+xc.passwd = nil
- if x.Passwd != "" {
- xc.passwd = C.CString(x.Passwd)}
- xc.display = C.int(x.Display)
-@@ -216,11 +218,13 @@ return fmt.Errorf("converting field Enable: %v", err)
- }
- xc.port = C.int(x.Port)
- xc.tls_port = C.int(x.TlsPort)
-+xc.host = nil
- if x.Host != "" {
- xc.host = C.CString(x.Host)}
- if err := x.DisableTicketing.toC(&xc.disable_ticketing); err != nil {
- return fmt.Errorf("converting field DisableTicketing: %v", err)
- }
-+xc.passwd = nil
- if x.Passwd != "" {
- xc.passwd = C.CString(x.Passwd)}
- if err := x.AgentMouse.toC(&xc.agent_mouse); err != nil {
-@@ -233,8 +237,10 @@ if err := x.ClipboardSharing.toC(&xc.clipboard_sharing); err != nil {
- return fmt.Errorf("converting field ClipboardSharing: %v", err)
- }
- xc.usbredirection = C.int(x.Usbredirection)
-+xc.image_compression = nil
- if x.ImageCompression != "" {
- xc.image_compression = C.CString(x.ImageCompression)}
-+xc.streaming_video = nil
- if x.StreamingVideo != "" {
- xc.streaming_video = C.CString(x.StreamingVideo)}
- 
-@@ -278,8 +284,10 @@ return fmt.Errorf("converting field Enable: %v", err)
- if err := x.Opengl.toC(&xc.opengl); err != nil {
- return fmt.Errorf("converting field Opengl: %v", err)
- }
-+xc.display = nil
- if x.Display != "" {
- xc.display = C.CString(x.Display)}
-+xc.xauthority = nil
- if x.Xauthority != "" {
- xc.xauthority = C.CString(x.Xauthority)}
- 
-@@ -337,6 +345,7 @@ return fmt.Errorf("converting field Uuid: %v", err)
- }
- xc.domid = C.libxl_domid(x.Domid)
- xc.ssidref = C.uint32_t(x.Ssidref)
-+xc.ssid_label = nil
- if x.SsidLabel != "" {
- xc.ssid_label = C.CString(x.SsidLabel)}
- xc.running = C.bool(x.Running)
-@@ -391,6 +400,7 @@ C.libxl_cpupoolinfo_dispose(xc)}
- }()
- 
- xc.poolid = C.uint32_t(x.Poolid)
-+xc.pool_name = nil
- if x.PoolName != "" {
- xc.pool_name = C.CString(x.PoolName)}
- xc.sched = C.libxl_scheduler(x.Sched)
-@@ -458,9 +468,11 @@ if err != nil{
- C.libxl_channelinfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -478,6 +490,7 @@ if !ok {
+-x.ConnectionUnion = connectionPty
++x.ConnectionUnion = &connectionPty
+ case ChannelConnectionSocket:
+ x.ConnectionUnion = nil
+ case ChannelConnectionUnknown:
+@@ -485,7 +485,7 @@ switch x.Connection{
+ case ChannelConnectionUnknown:
+ break
+ case ChannelConnectionPty:
+-tmp, ok := x.ConnectionUnion.(ChannelinfoConnectionUnionPty)
++tmp, ok := x.ConnectionUnion.(*ChannelinfoConnectionUnionPty)
+ if !ok {
  return errors.New("wrong type for union key connection")
  }
- var pty C.libxl_channelinfo_connection_union_pty
-+pty.path = nil
- if tmp.Path != "" {
- pty.path = C.CString(tmp.Path)}
- ptyBytes := C.GoBytes(unsafe.Pointer(&pty),C.sizeof_libxl_channelinfo_connection_union_pty)
-@@ -563,24 +576,33 @@ C.libxl_version_info_dispose(xc)}
- 
- xc.xen_version_major = C.int(x.XenVersionMajor)
- xc.xen_version_minor = C.int(x.XenVersionMinor)
-+xc.xen_version_extra = nil
- if x.XenVersionExtra != "" {
- xc.xen_version_extra = C.CString(x.XenVersionExtra)}
-+xc.compiler = nil
- if x.Compiler != "" {
- xc.compiler = C.CString(x.Compiler)}
-+xc.compile_by = nil
- if x.CompileBy != "" {
- xc.compile_by = C.CString(x.CompileBy)}
-+xc.compile_domain = nil
- if x.CompileDomain != "" {
- xc.compile_domain = C.CString(x.CompileDomain)}
-+xc.compile_date = nil
- if x.CompileDate != "" {
- xc.compile_date = C.CString(x.CompileDate)}
-+xc.capabilities = nil
- if x.Capabilities != "" {
- xc.capabilities = C.CString(x.Capabilities)}
-+xc.changeset = nil
- if x.Changeset != "" {
- xc.changeset = C.CString(x.Changeset)}
- xc.virt_start = C.uint64_t(x.VirtStart)
- xc.pagesize = C.int(x.Pagesize)
-+xc.commandline = nil
- if x.Commandline != "" {
- xc.commandline = C.CString(x.Commandline)}
-+xc.build_id = nil
- if x.BuildId != "" {
- xc.build_id = C.CString(x.BuildId)}
- 
-@@ -650,8 +672,10 @@ if err := x.Oos.toC(&xc.oos); err != nil {
- return fmt.Errorf("converting field Oos: %v", err)
+@@ -1120,7 +1120,7 @@ var typeHvm DomainBuildInfoTypeUnionHvm
+ if err := typeHvm.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeHvm: %v", err)
  }
- xc.ssidref = C.uint32_t(x.Ssidref)
-+xc.ssid_label = nil
- if x.SsidLabel != "" {
- xc.ssid_label = C.CString(x.SsidLabel)}
-+xc.name = nil
- if x.Name != "" {
- xc.name = C.CString(x.Name)}
- xc.domid = C.libxl_domid(x.Domid)
-@@ -665,6 +689,7 @@ if err := x.Platformdata.toC(&xc.platformdata); err != nil {
- return fmt.Errorf("converting field Platformdata: %v", err)
+-x.TypeUnion = typeHvm
++x.TypeUnion = &typeHvm
+ case DomainTypeInvalid:
+ x.TypeUnion = nil
+ case DomainTypePv:
+@@ -1128,13 +1128,13 @@ var typePv DomainBuildInfoTypeUnionPv
+ if err := typePv.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typePv: %v", err)
  }
- xc.poolid = C.uint32_t(x.Poolid)
-+xc.pool_name = nil
- if x.PoolName != "" {
- xc.pool_name = C.CString(x.PoolName)}
- if err := x.RunHotplugScripts.toC(&xc.run_hotplug_scripts); err != nil {
-@@ -712,6 +737,7 @@ C.libxl_domain_restore_params_dispose(xc)}
- 
- xc.checkpointed_stream = C.int(x.CheckpointedStream)
- xc.stream_version = C.uint32_t(x.StreamVersion)
-+xc.colo_proxy_script = nil
- if x.ColoProxyScript != "" {
- xc.colo_proxy_script = C.CString(x.ColoProxyScript)}
- if err := x.UserspaceColoProxy.toC(&xc.userspace_colo_proxy); err != nil {
-@@ -1312,6 +1338,7 @@ xc.shadow_memkb = C.uint64_t(x.ShadowMemkb)
- xc.iommu_memkb = C.uint64_t(x.IommuMemkb)
- xc.rtc_timeoffset = C.uint32_t(x.RtcTimeoffset)
- xc.exec_ssidref = C.uint32_t(x.ExecSsidref)
-+xc.exec_ssid_label = nil
- if x.ExecSsidLabel != "" {
- xc.exec_ssid_label = C.CString(x.ExecSsidLabel)}
- if err := x.Localtime.toC(&xc.localtime); err != nil {
-@@ -1323,6 +1350,7 @@ return fmt.Errorf("converting field DisableMigrate: %v", err)
- if err := x.Cpuid.toC(&xc.cpuid); err != nil {
- return fmt.Errorf("converting field Cpuid: %v", err)
+-x.TypeUnion = typePv
++x.TypeUnion = &typePv
+ case DomainTypePvh:
+ var typePvh DomainBuildInfoTypeUnionPvh
+ if err := typePvh.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typePvh: %v", err)
  }
-+xc.blkdev_start = nil
- if x.BlkdevStart != "" {
- xc.blkdev_start = C.CString(x.BlkdevStart)}
- if numVnumaNodes := len(x.VnumaNodes); numVnumaNodes > 0 {
-@@ -1342,15 +1370,20 @@ if err := x.DeviceModelStubdomain.toC(&xc.device_model_stubdomain); err != nil {
- return fmt.Errorf("converting field DeviceModelStubdomain: %v", err)
- }
- xc.stubdomain_memkb = C.uint64_t(x.StubdomainMemkb)
-+xc.stubdomain_kernel = nil
- if x.StubdomainKernel != "" {
- xc.stubdomain_kernel = C.CString(x.StubdomainKernel)}
-+xc.stubdomain_ramdisk = nil
- if x.StubdomainRamdisk != "" {
- xc.stubdomain_ramdisk = C.CString(x.StubdomainRamdisk)}
-+xc.device_model = nil
- if x.DeviceModel != "" {
- xc.device_model = C.CString(x.DeviceModel)}
- xc.device_model_ssidref = C.uint32_t(x.DeviceModelSsidref)
-+xc.device_model_ssid_label = nil
- if x.DeviceModelSsidLabel != "" {
- xc.device_model_ssid_label = C.CString(x.DeviceModelSsidLabel)}
-+xc.device_model_user = nil
- if x.DeviceModelUser != "" {
- xc.device_model_user = C.CString(x.DeviceModelUser)}
- if err := x.Extra.toC(&xc.extra); err != nil {
-@@ -1397,17 +1430,22 @@ if err := x.ClaimMode.toC(&xc.claim_mode); err != nil {
- return fmt.Errorf("converting field ClaimMode: %v", err)
- }
- xc.event_channels = C.uint32_t(x.EventChannels)
-+xc.kernel = nil
- if x.Kernel != "" {
- xc.kernel = C.CString(x.Kernel)}
-+xc.cmdline = nil
- if x.Cmdline != "" {
- xc.cmdline = C.CString(x.Cmdline)}
-+xc.ramdisk = nil
- if x.Ramdisk != "" {
- xc.ramdisk = C.CString(x.Ramdisk)}
-+xc.device_tree = nil
- if x.DeviceTree != "" {
- xc.device_tree = C.CString(x.DeviceTree)}
- if err := x.Acpi.toC(&xc.acpi); err != nil {
- return fmt.Errorf("converting field Acpi: %v", err)
- }
-+xc.bootloader = nil
- if x.Bootloader != "" {
- xc.bootloader = C.CString(x.Bootloader)}
- if err := x.BootloaderArgs.toC(&xc.bootloader_args); err != nil {
-@@ -1432,6 +1470,7 @@ if !ok {
+-x.TypeUnion = typePvh
++x.TypeUnion = &typePvh
+ default:
+ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ x.ArchArm.GicVersion = GicVersion(xc.arch_arm.gic_version)
+@@ -1465,7 +1465,7 @@ xc.tee = C.libxl_tee_type(x.Tee)
+ xc._type = C.libxl_domain_type(x.Type)
+ switch x.Type{
+ case DomainTypeHvm:
+-tmp, ok := x.TypeUnion.(DomainBuildInfoTypeUnionHvm)
++tmp, ok := x.TypeUnion.(*DomainBuildInfoTypeUnionHvm)
+ if !ok {
  return errors.New("wrong type for union key type")
  }
- var hvm C.libxl_domain_build_info_type_union_hvm
-+hvm.firmware = nil
- if tmp.Firmware != "" {
- hvm.firmware = C.CString(tmp.Firmware)}
- hvm.bios = C.libxl_bios_type(tmp.Bios)
-@@ -1465,6 +1504,7 @@ return fmt.Errorf("converting field ViridianEnable: %v", err)
- if err := tmp.ViridianDisable.toC(&hvm.viridian_disable); err != nil {
- return fmt.Errorf("converting field ViridianDisable: %v", err)
- }
-+hvm.timeoffset = nil
- if tmp.Timeoffset != "" {
- hvm.timeoffset = C.CString(tmp.Timeoffset)}
- if err := tmp.Hpet.toC(&hvm.hpet); err != nil {
-@@ -1481,10 +1521,13 @@ return fmt.Errorf("converting field NestedHvm: %v", err)
- if err := tmp.Altp2M.toC(&hvm.altp2m); err != nil {
- return fmt.Errorf("converting field Altp2M: %v", err)
- }
-+hvm.system_firmware = nil
- if tmp.SystemFirmware != "" {
- hvm.system_firmware = C.CString(tmp.SystemFirmware)}
-+hvm.smbios_firmware = nil
- if tmp.SmbiosFirmware != "" {
- hvm.smbios_firmware = C.CString(tmp.SmbiosFirmware)}
-+hvm.acpi_firmware = nil
- if tmp.AcpiFirmware != "" {
- hvm.acpi_firmware = C.CString(tmp.AcpiFirmware)}
- hvm.hdtype = C.libxl_hdtype(tmp.Hdtype)
-@@ -1497,6 +1540,7 @@ return fmt.Errorf("converting field Vga: %v", err)
- if err := tmp.Vnc.toC(&hvm.vnc); err != nil {
- return fmt.Errorf("converting field Vnc: %v", err)
- }
-+hvm.keymap = nil
- if tmp.Keymap != "" {
- hvm.keymap = C.CString(tmp.Keymap)}
- if err := tmp.Sdl.toC(&hvm.sdl); err != nil {
-@@ -1509,19 +1553,23 @@ if err := tmp.GfxPassthru.toC(&hvm.gfx_passthru); err != nil {
- return fmt.Errorf("converting field GfxPassthru: %v", err)
- }
- hvm.gfx_passthru_kind = C.libxl_gfx_passthru_kind(tmp.GfxPassthruKind)
-+hvm.serial = nil
- if tmp.Serial != "" {
- hvm.serial = C.CString(tmp.Serial)}
-+hvm.boot = nil
- if tmp.Boot != "" {
- hvm.boot = C.CString(tmp.Boot)}
- if err := tmp.Usb.toC(&hvm.usb); err != nil {
- return fmt.Errorf("converting field Usb: %v", err)
- }
- hvm.usbversion = C.int(tmp.Usbversion)
-+hvm.usbdevice = nil
- if tmp.Usbdevice != "" {
- hvm.usbdevice = C.CString(tmp.Usbdevice)}
- if err := tmp.VkbDevice.toC(&hvm.vkb_device); err != nil {
- return fmt.Errorf("converting field VkbDevice: %v", err)
- }
-+hvm.soundhw = nil
- if tmp.Soundhw != "" {
- hvm.soundhw = C.CString(tmp.Soundhw)}
- if err := tmp.XenPlatformPci.toC(&hvm.xen_platform_pci); err != nil {
-@@ -1550,18 +1598,23 @@ if !ok {
+@@ -1593,7 +1593,7 @@ hvm.mca_caps = C.uint64_t(tmp.McaCaps)
+ hvmBytes := C.GoBytes(unsafe.Pointer(&hvm),C.sizeof_libxl_domain_build_info_type_union_hvm)
+ copy(xc.u[:],hvmBytes)
+ case DomainTypePv:
+-tmp, ok := x.TypeUnion.(DomainBuildInfoTypeUnionPv)
++tmp, ok := x.TypeUnion.(*DomainBuildInfoTypeUnionPv)
+ if !ok {
  return errors.New("wrong type for union key type")
  }
- var pv C.libxl_domain_build_info_type_union_pv
-+pv.kernel = nil
- if tmp.Kernel != "" {
- pv.kernel = C.CString(tmp.Kernel)}
- pv.slack_memkb = C.uint64_t(tmp.SlackMemkb)
-+pv.bootloader = nil
- if tmp.Bootloader != "" {
- pv.bootloader = C.CString(tmp.Bootloader)}
- if err := tmp.BootloaderArgs.toC(&pv.bootloader_args); err != nil {
- return fmt.Errorf("converting field BootloaderArgs: %v", err)
+@@ -1623,7 +1623,7 @@ return fmt.Errorf("converting field E820Host: %v", err)
+ pvBytes := C.GoBytes(unsafe.Pointer(&pv),C.sizeof_libxl_domain_build_info_type_union_pv)
+ copy(xc.u[:],pvBytes)
+ case DomainTypePvh:
+-tmp, ok := x.TypeUnion.(DomainBuildInfoTypeUnionPvh)
++tmp, ok := x.TypeUnion.(*DomainBuildInfoTypeUnionPvh)
+ if !ok {
+ return errors.New("wrong type for union key type")
  }
-+pv.cmdline = nil
- if tmp.Cmdline != "" {
- pv.cmdline = C.CString(tmp.Cmdline)}
-+pv.ramdisk = nil
- if tmp.Ramdisk != "" {
- pv.ramdisk = C.CString(tmp.Ramdisk)}
-+pv.features = nil
- if tmp.Features != "" {
- pv.features = C.CString(tmp.Features)}
- if err := tmp.E820Host.toC(&pv.e820_host); err != nil {
-@@ -1578,10 +1631,13 @@ var pvh C.libxl_domain_build_info_type_union_pvh
- if err := tmp.Pvshim.toC(&pvh.pvshim); err != nil {
- return fmt.Errorf("converting field Pvshim: %v", err)
+@@ -2283,7 +2283,7 @@ var typeHostdev DeviceUsbdevTypeUnionHostdev
+ if err := typeHostdev.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeHostdev: %v", err)
  }
-+pvh.pvshim_path = nil
- if tmp.PvshimPath != "" {
- pvh.pvshim_path = C.CString(tmp.PvshimPath)}
-+pvh.pvshim_cmdline = nil
- if tmp.PvshimCmdline != "" {
- pvh.pvshim_cmdline = C.CString(tmp.PvshimCmdline)}
-+pvh.pvshim_extra = nil
- if tmp.PvshimExtra != "" {
- pvh.pvshim_extra = C.CString(tmp.PvshimExtra)}
- pvhBytes := C.GoBytes(unsafe.Pointer(&pvh),C.sizeof_libxl_domain_build_info_type_union_pvh)
-@@ -1635,6 +1691,7 @@ C.libxl_device_vfb_dispose(xc)}
- }()
+-x.TypeUnion = typeHostdev
++x.TypeUnion = &typeHostdev
+ default:
+ return fmt.Errorf("invalid union key '%v'", x.Type)}
  
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
-@@ -1644,6 +1701,7 @@ return fmt.Errorf("converting field Vnc: %v", err)
- if err := x.Sdl.toC(&xc.sdl); err != nil {
- return fmt.Errorf("converting field Sdl: %v", err)
+@@ -2310,7 +2310,7 @@ xc.port = C.int(x.Port)
+ xc._type = C.libxl_usbdev_type(x.Type)
+ switch x.Type{
+ case UsbdevTypeHostdev:
+-tmp, ok := x.TypeUnion.(DeviceUsbdevTypeUnionHostdev)
++tmp, ok := x.TypeUnion.(*DeviceUsbdevTypeUnionHostdev)
+ if !ok {
+ return errors.New("wrong type for union key type")
  }
-+xc.keymap = nil
- if x.Keymap != "" {
- xc.keymap = C.CString(x.Keymap)}
- 
-@@ -1689,10 +1747,12 @@ C.libxl_device_vkb_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
- xc.backend_type = C.libxl_vkb_backend(x.BackendType)
-+xc.unique_id = nil
- if x.UniqueId != "" {
- xc.unique_id = C.CString(x.UniqueId)}
- xc.feature_disable_keyboard = C.bool(x.FeatureDisableKeyboard)
-@@ -1758,14 +1818,18 @@ C.libxl_device_disk_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
-+xc.pdev_path = nil
- if x.PdevPath != "" {
- xc.pdev_path = C.CString(x.PdevPath)}
-+xc.vdev = nil
- if x.Vdev != "" {
- xc.vdev = C.CString(x.Vdev)}
- xc.backend = C.libxl_disk_backend(x.Backend)
- xc.format = C.libxl_disk_format(x.Format)
-+xc.script = nil
- if x.Script != "" {
- xc.script = C.CString(x.Script)}
- xc.removable = C.int(x.Removable)
-@@ -1781,13 +1845,17 @@ return fmt.Errorf("converting field ColoEnable: %v", err)
- if err := x.ColoRestoreEnable.toC(&xc.colo_restore_enable); err != nil {
- return fmt.Errorf("converting field ColoRestoreEnable: %v", err)
+@@ -2508,7 +2508,7 @@ var connectionSocket DeviceChannelConnectionUnionSocket
+ if err := connectionSocket.fromC(xc);err != nil {
+  return fmt.Errorf("converting field connectionSocket: %v", err)
  }
-+xc.colo_host = nil
- if x.ColoHost != "" {
- xc.colo_host = C.CString(x.ColoHost)}
- xc.colo_port = C.int(x.ColoPort)
-+xc.colo_export = nil
- if x.ColoExport != "" {
- xc.colo_export = C.CString(x.ColoExport)}
-+xc.active_disk = nil
- if x.ActiveDisk != "" {
- xc.active_disk = C.CString(x.ActiveDisk)}
-+xc.hidden_disk = nil
- if x.HiddenDisk != "" {
- xc.hidden_disk = C.CString(x.HiddenDisk)}
- 
-@@ -1883,124 +1951,180 @@ C.libxl_device_nic_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
- xc.mtu = C.int(x.Mtu)
-+xc.model = nil
- if x.Model != "" {
- xc.model = C.CString(x.Model)}
- if err := x.Mac.toC(&xc.mac); err != nil {
- return fmt.Errorf("converting field Mac: %v", err)
- }
-+xc.ip = nil
- if x.Ip != "" {
- xc.ip = C.CString(x.Ip)}
-+xc.bridge = nil
- if x.Bridge != "" {
- xc.bridge = C.CString(x.Bridge)}
-+xc.ifname = nil
- if x.Ifname != "" {
- xc.ifname = C.CString(x.Ifname)}
-+xc.script = nil
- if x.Script != "" {
- xc.script = C.CString(x.Script)}
- xc.nictype = C.libxl_nic_type(x.Nictype)
- xc.rate_bytes_per_interval = C.uint64_t(x.RateBytesPerInterval)
- xc.rate_interval_usecs = C.uint32_t(x.RateIntervalUsecs)
-+xc.gatewaydev = nil
- if x.Gatewaydev != "" {
- xc.gatewaydev = C.CString(x.Gatewaydev)}
-+xc.coloft_forwarddev = nil
- if x.ColoftForwarddev != "" {
- xc.coloft_forwarddev = C.CString(x.ColoftForwarddev)}
-+xc.colo_sock_mirror_id = nil
- if x.ColoSockMirrorId != "" {
- xc.colo_sock_mirror_id = C.CString(x.ColoSockMirrorId)}
-+xc.colo_sock_mirror_ip = nil
- if x.ColoSockMirrorIp != "" {
- xc.colo_sock_mirror_ip = C.CString(x.ColoSockMirrorIp)}
-+xc.colo_sock_mirror_port = nil
- if x.ColoSockMirrorPort != "" {
- xc.colo_sock_mirror_port = C.CString(x.ColoSockMirrorPort)}
-+xc.colo_sock_compare_pri_in_id = nil
- if x.ColoSockComparePriInId != "" {
- xc.colo_sock_compare_pri_in_id = C.CString(x.ColoSockComparePriInId)}
-+xc.colo_sock_compare_pri_in_ip = nil
- if x.ColoSockComparePriInIp != "" {
- xc.colo_sock_compare_pri_in_ip = C.CString(x.ColoSockComparePriInIp)}
-+xc.colo_sock_compare_pri_in_port = nil
- if x.ColoSockComparePriInPort != "" {
- xc.colo_sock_compare_pri_in_port = C.CString(x.ColoSockComparePriInPort)}
-+xc.colo_sock_compare_sec_in_id = nil
- if x.ColoSockCompareSecInId != "" {
- xc.colo_sock_compare_sec_in_id = C.CString(x.ColoSockCompareSecInId)}
-+xc.colo_sock_compare_sec_in_ip = nil
- if x.ColoSockCompareSecInIp != "" {
- xc.colo_sock_compare_sec_in_ip = C.CString(x.ColoSockCompareSecInIp)}
-+xc.colo_sock_compare_sec_in_port = nil
- if x.ColoSockCompareSecInPort != "" {
- xc.colo_sock_compare_sec_in_port = C.CString(x.ColoSockCompareSecInPort)}
-+xc.colo_sock_compare_notify_id = nil
- if x.ColoSockCompareNotifyId != "" {
- xc.colo_sock_compare_notify_id = C.CString(x.ColoSockCompareNotifyId)}
-+xc.colo_sock_compare_notify_ip = nil
- if x.ColoSockCompareNotifyIp != "" {
- xc.colo_sock_compare_notify_ip = C.CString(x.ColoSockCompareNotifyIp)}
-+xc.colo_sock_compare_notify_port = nil
- if x.ColoSockCompareNotifyPort != "" {
- xc.colo_sock_compare_notify_port = C.CString(x.ColoSockCompareNotifyPort)}
-+xc.colo_sock_redirector0_id = nil
- if x.ColoSockRedirector0Id != "" {
- xc.colo_sock_redirector0_id = C.CString(x.ColoSockRedirector0Id)}
-+xc.colo_sock_redirector0_ip = nil
- if x.ColoSockRedirector0Ip != "" {
- xc.colo_sock_redirector0_ip = C.CString(x.ColoSockRedirector0Ip)}
-+xc.colo_sock_redirector0_port = nil
- if x.ColoSockRedirector0Port != "" {
- xc.colo_sock_redirector0_port = C.CString(x.ColoSockRedirector0Port)}
-+xc.colo_sock_redirector1_id = nil
- if x.ColoSockRedirector1Id != "" {
- xc.colo_sock_redirector1_id = C.CString(x.ColoSockRedirector1Id)}
-+xc.colo_sock_redirector1_ip = nil
- if x.ColoSockRedirector1Ip != "" {
- xc.colo_sock_redirector1_ip = C.CString(x.ColoSockRedirector1Ip)}
-+xc.colo_sock_redirector1_port = nil
- if x.ColoSockRedirector1Port != "" {
- xc.colo_sock_redirector1_port = C.CString(x.ColoSockRedirector1Port)}
-+xc.colo_sock_redirector2_id = nil
- if x.ColoSockRedirector2Id != "" {
- xc.colo_sock_redirector2_id = C.CString(x.ColoSockRedirector2Id)}
-+xc.colo_sock_redirector2_ip = nil
- if x.ColoSockRedirector2Ip != "" {
- xc.colo_sock_redirector2_ip = C.CString(x.ColoSockRedirector2Ip)}
-+xc.colo_sock_redirector2_port = nil
- if x.ColoSockRedirector2Port != "" {
- xc.colo_sock_redirector2_port = C.CString(x.ColoSockRedirector2Port)}
-+xc.colo_filter_mirror_queue = nil
- if x.ColoFilterMirrorQueue != "" {
- xc.colo_filter_mirror_queue = C.CString(x.ColoFilterMirrorQueue)}
-+xc.colo_filter_mirror_outdev = nil
- if x.ColoFilterMirrorOutdev != "" {
- xc.colo_filter_mirror_outdev = C.CString(x.ColoFilterMirrorOutdev)}
-+xc.colo_filter_redirector0_queue = nil
- if x.ColoFilterRedirector0Queue != "" {
- xc.colo_filter_redirector0_queue = C.CString(x.ColoFilterRedirector0Queue)}
-+xc.colo_filter_redirector0_indev = nil
- if x.ColoFilterRedirector0Indev != "" {
- xc.colo_filter_redirector0_indev = C.CString(x.ColoFilterRedirector0Indev)}
-+xc.colo_filter_redirector0_outdev = nil
- if x.ColoFilterRedirector0Outdev != "" {
- xc.colo_filter_redirector0_outdev = C.CString(x.ColoFilterRedirector0Outdev)}
-+xc.colo_filter_redirector1_queue = nil
- if x.ColoFilterRedirector1Queue != "" {
- xc.colo_filter_redirector1_queue = C.CString(x.ColoFilterRedirector1Queue)}
-+xc.colo_filter_redirector1_indev = nil
- if x.ColoFilterRedirector1Indev != "" {
- xc.colo_filter_redirector1_indev = C.CString(x.ColoFilterRedirector1Indev)}
-+xc.colo_filter_redirector1_outdev = nil
- if x.ColoFilterRedirector1Outdev != "" {
- xc.colo_filter_redirector1_outdev = C.CString(x.ColoFilterRedirector1Outdev)}
-+xc.colo_compare_pri_in = nil
- if x.ColoComparePriIn != "" {
- xc.colo_compare_pri_in = C.CString(x.ColoComparePriIn)}
-+xc.colo_compare_sec_in = nil
- if x.ColoCompareSecIn != "" {
- xc.colo_compare_sec_in = C.CString(x.ColoCompareSecIn)}
-+xc.colo_compare_out = nil
- if x.ColoCompareOut != "" {
- xc.colo_compare_out = C.CString(x.ColoCompareOut)}
-+xc.colo_compare_notify_dev = nil
- if x.ColoCompareNotifyDev != "" {
- xc.colo_compare_notify_dev = C.CString(x.ColoCompareNotifyDev)}
-+xc.colo_sock_sec_redirector0_id = nil
- if x.ColoSockSecRedirector0Id != "" {
- xc.colo_sock_sec_redirector0_id = C.CString(x.ColoSockSecRedirector0Id)}
-+xc.colo_sock_sec_redirector0_ip = nil
- if x.ColoSockSecRedirector0Ip != "" {
- xc.colo_sock_sec_redirector0_ip = C.CString(x.ColoSockSecRedirector0Ip)}
-+xc.colo_sock_sec_redirector0_port = nil
- if x.ColoSockSecRedirector0Port != "" {
- xc.colo_sock_sec_redirector0_port = C.CString(x.ColoSockSecRedirector0Port)}
-+xc.colo_sock_sec_redirector1_id = nil
- if x.ColoSockSecRedirector1Id != "" {
- xc.colo_sock_sec_redirector1_id = C.CString(x.ColoSockSecRedirector1Id)}
-+xc.colo_sock_sec_redirector1_ip = nil
- if x.ColoSockSecRedirector1Ip != "" {
- xc.colo_sock_sec_redirector1_ip = C.CString(x.ColoSockSecRedirector1Ip)}
-+xc.colo_sock_sec_redirector1_port = nil
- if x.ColoSockSecRedirector1Port != "" {
- xc.colo_sock_sec_redirector1_port = C.CString(x.ColoSockSecRedirector1Port)}
-+xc.colo_filter_sec_redirector0_queue = nil
- if x.ColoFilterSecRedirector0Queue != "" {
- xc.colo_filter_sec_redirector0_queue = C.CString(x.ColoFilterSecRedirector0Queue)}
-+xc.colo_filter_sec_redirector0_indev = nil
- if x.ColoFilterSecRedirector0Indev != "" {
- xc.colo_filter_sec_redirector0_indev = C.CString(x.ColoFilterSecRedirector0Indev)}
-+xc.colo_filter_sec_redirector0_outdev = nil
- if x.ColoFilterSecRedirector0Outdev != "" {
- xc.colo_filter_sec_redirector0_outdev = C.CString(x.ColoFilterSecRedirector0Outdev)}
-+xc.colo_filter_sec_redirector1_queue = nil
- if x.ColoFilterSecRedirector1Queue != "" {
- xc.colo_filter_sec_redirector1_queue = C.CString(x.ColoFilterSecRedirector1Queue)}
-+xc.colo_filter_sec_redirector1_indev = nil
- if x.ColoFilterSecRedirector1Indev != "" {
- xc.colo_filter_sec_redirector1_indev = C.CString(x.ColoFilterSecRedirector1Indev)}
-+xc.colo_filter_sec_redirector1_outdev = nil
- if x.ColoFilterSecRedirector1Outdev != "" {
- xc.colo_filter_sec_redirector1_outdev = C.CString(x.ColoFilterSecRedirector1Outdev)}
-+xc.colo_filter_sec_rewriter0_queue = nil
- if x.ColoFilterSecRewriter0Queue != "" {
- xc.colo_filter_sec_rewriter0_queue = C.CString(x.ColoFilterSecRewriter0Queue)}
-+xc.colo_checkpoint_host = nil
- if x.ColoCheckpointHost != "" {
- xc.colo_checkpoint_host = C.CString(x.ColoCheckpointHost)}
-+xc.colo_checkpoint_port = nil
- if x.ColoCheckpointPort != "" {
- xc.colo_checkpoint_port = C.CString(x.ColoCheckpointPort)}
- 
-@@ -2053,6 +2177,7 @@ xc.power_mgmt = C.bool(x.PowerMgmt)
- xc.permissive = C.bool(x.Permissive)
- xc.seize = C.bool(x.Seize)
- xc.rdm_policy = C.libxl_rdm_reserve_policy(x.RdmPolicy)
-+xc.name = nil
- if x.Name != "" {
- xc.name = C.CString(x.Name)}
- 
-@@ -2126,6 +2251,7 @@ xc.devid = C.libxl_devid(x.Devid)
- xc.version = C.int(x.Version)
- xc.ports = C.int(x.Ports)
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- 
-@@ -2223,6 +2349,7 @@ if err != nil{
- C.libxl_device_dtdev_dispose(xc)}
- }()
- 
-+xc.path = nil
- if x.Path != "" {
- xc.path = C.CString(x.Path)}
- 
-@@ -2259,6 +2386,7 @@ C.libxl_device_vtpm_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
-@@ -2299,12 +2427,16 @@ C.libxl_device_p9_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
-+xc.tag = nil
- if x.Tag != "" {
- xc.tag = C.CString(x.Tag)}
-+xc.path = nil
- if x.Path != "" {
- xc.path = C.CString(x.Path)}
-+xc.security_model = nil
- if x.SecurityModel != "" {
- xc.security_model = C.CString(x.SecurityModel)}
- xc.devid = C.libxl_devid(x.Devid)
-@@ -2339,6 +2471,7 @@ C.libxl_device_pvcallsif_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
-@@ -2399,9 +2532,11 @@ C.libxl_device_channel_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
-+xc.name = nil
- if x.Name != "" {
- xc.name = C.CString(x.Name)}
- xc.connection = C.libxl_channel_connection(x.Connection)
-@@ -2416,6 +2551,7 @@ if !ok {
+-x.ConnectionUnion = connectionSocket
++x.ConnectionUnion = &connectionSocket
+ case ChannelConnectionUnknown:
+ x.ConnectionUnion = nil
+ default:
+@@ -2546,7 +2546,7 @@ break
+ case ChannelConnectionPty:
+ break
+ case ChannelConnectionSocket:
+-tmp, ok := x.ConnectionUnion.(DeviceChannelConnectionUnionSocket)
++tmp, ok := x.ConnectionUnion.(*DeviceChannelConnectionUnionSocket)
+ if !ok {
  return errors.New("wrong type for union key connection")
  }
- var socket C.libxl_device_channel_connection_union_socket
-+socket.path = nil
- if tmp.Path != "" {
- socket.path = C.CString(tmp.Path)}
- socketBytes := C.GoBytes(unsafe.Pointer(&socket),C.sizeof_libxl_device_channel_connection_union_socket)
-@@ -2452,6 +2588,7 @@ if err != nil{
- C.libxl_connector_param_dispose(xc)}
- }()
- 
-+xc.unique_id = nil
- if x.UniqueId != "" {
- xc.unique_id = C.CString(x.UniqueId)}
- xc.width = C.uint32_t(x.Width)
-@@ -2497,6 +2634,7 @@ C.libxl_device_vdispl_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
-@@ -2608,6 +2746,7 @@ if err != nil{
- C.libxl_vsnd_stream_dispose(xc)}
- }()
- 
-+xc.unique_id = nil
- if x.UniqueId != "" {
- xc.unique_id = C.CString(x.UniqueId)}
- xc._type = C.libxl_vsnd_stream_type(x.Type)
-@@ -2654,6 +2793,7 @@ if err != nil{
- C.libxl_vsnd_pcm_dispose(xc)}
- }()
- 
-+xc.name = nil
- if x.Name != "" {
- xc.name = C.CString(x.Name)}
- if err := x.Params.toC(&xc.params); err != nil {
-@@ -2714,11 +2854,14 @@ C.libxl_device_vsnd_dispose(xc)}
- }()
- 
- xc.backend_domid = C.libxl_domid(x.BackendDomid)
-+xc.backend_domname = nil
- if x.BackendDomname != "" {
- xc.backend_domname = C.CString(x.BackendDomname)}
- xc.devid = C.libxl_devid(x.Devid)
-+xc.short_name = nil
- if x.ShortName != "" {
- xc.short_name = C.CString(x.ShortName)}
-+xc.long_name = nil
- if x.LongName != "" {
- xc.long_name = C.CString(x.LongName)}
- if err := x.Params.toC(&xc.params); err != nil {
-@@ -3103,9 +3246,11 @@ if err != nil{
- C.libxl_diskinfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3149,9 +3294,11 @@ if err != nil{
- C.libxl_nicinfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3198,9 +3345,11 @@ if err != nil{
- C.libxl_vtpminfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3254,9 +3403,11 @@ xc._type = C.libxl_usbctrl_type(x.Type)
- xc.devid = C.libxl_devid(x.Devid)
- xc.version = C.int(x.Version)
- xc.ports = C.int(x.Ports)
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3422,6 +3573,7 @@ if err != nil{
- C.libxl_connectorinfo_dispose(xc)}
- }()
- 
-+xc.unique_id = nil
- if x.UniqueId != "" {
- xc.unique_id = C.CString(x.UniqueId)}
- xc.width = C.uint32_t(x.Width)
-@@ -3473,9 +3625,11 @@ if err != nil{
- C.libxl_vdisplinfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3611,9 +3765,11 @@ if err != nil{
- C.libxl_vsndinfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3664,9 +3820,11 @@ if err != nil{
- C.libxl_vkbinfo_dispose(xc)}
- }()
- 
-+xc.backend = nil
- if x.Backend != "" {
- xc.backend = C.CString(x.Backend)}
- xc.backend_id = C.uint32_t(x.BackendId)
-+xc.frontend = nil
- if x.Frontend != "" {
- xc.frontend = C.CString(x.Frontend)}
- xc.frontend_id = C.uint32_t(x.FrontendId)
-@@ -3902,6 +4060,7 @@ return fmt.Errorf("converting field Compression: %v", err)
- if err := x.Netbuf.toC(&xc.netbuf); err != nil {
- return fmt.Errorf("converting field Netbuf: %v", err)
+@@ -4107,7 +4107,7 @@ var typeDiskEject EventTypeUnionDiskEject
+ if err := typeDiskEject.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeDiskEject: %v", err)
  }
-+xc.netbufscript = nil
- if x.Netbufscript != "" {
- xc.netbufscript = C.CString(x.Netbufscript)}
- if err := x.Diskbuf.toC(&xc.diskbuf); err != nil {
-@@ -4035,6 +4194,7 @@ if !ok {
+-x.TypeUnion = typeDiskEject
++x.TypeUnion = &typeDiskEject
+ case EventTypeDomainCreateConsoleAvailable:
+ x.TypeUnion = nil
+ case EventTypeDomainDeath:
+@@ -4117,13 +4117,13 @@ var typeDomainShutdown EventTypeUnionDomainShutdown
+ if err := typeDomainShutdown.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeDomainShutdown: %v", err)
+ }
+-x.TypeUnion = typeDomainShutdown
++x.TypeUnion = &typeDomainShutdown
+ case EventTypeOperationComplete:
+ var typeOperationComplete EventTypeUnionOperationComplete
+ if err := typeOperationComplete.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeOperationComplete: %v", err)
+ }
+-x.TypeUnion = typeOperationComplete
++x.TypeUnion = &typeOperationComplete
+ default:
+ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ 
+@@ -4178,7 +4178,7 @@ xc.for_user = C.uint64_t(x.ForUser)
+ xc._type = C.libxl_event_type(x.Type)
+ switch x.Type{
+ case EventTypeDomainShutdown:
+-tmp, ok := x.TypeUnion.(EventTypeUnionDomainShutdown)
++tmp, ok := x.TypeUnion.(*EventTypeUnionDomainShutdown)
+ if !ok {
  return errors.New("wrong type for union key type")
  }
- var disk_eject C.libxl_event_type_union_disk_eject
-+disk_eject.vdev = nil
- if tmp.Vdev != "" {
- disk_eject.vdev = C.CString(tmp.Vdev)}
- if err := tmp.Disk.toC(&disk_eject.disk); err != nil {
+@@ -4189,7 +4189,7 @@ copy(xc.u[:],domain_shutdownBytes)
+ case EventTypeDomainDeath:
+ break
+ case EventTypeDiskEject:
+-tmp, ok := x.TypeUnion.(EventTypeUnionDiskEject)
++tmp, ok := x.TypeUnion.(*EventTypeUnionDiskEject)
+ if !ok {
+ return errors.New("wrong type for union key type")
+ }
+@@ -4203,7 +4203,7 @@ return fmt.Errorf("converting field Disk: %v", err)
+ disk_ejectBytes := C.GoBytes(unsafe.Pointer(&disk_eject),C.sizeof_libxl_event_type_union_disk_eject)
+ copy(xc.u[:],disk_ejectBytes)
+ case EventTypeOperationComplete:
+-tmp, ok := x.TypeUnion.(EventTypeUnionOperationComplete)
++tmp, ok := x.TypeUnion.(*EventTypeUnionOperationComplete)
+ if !ok {
+ return errors.New("wrong type for union key type")
+ }
+@@ -4278,13 +4278,13 @@ var typeCat PsrHwInfoTypeUnionCat
+ if err := typeCat.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeCat: %v", err)
+ }
+-x.TypeUnion = typeCat
++x.TypeUnion = &typeCat
+ case PsrFeatTypeMba:
+ var typeMba PsrHwInfoTypeUnionMba
+ if err := typeMba.fromC(xc);err != nil {
+  return fmt.Errorf("converting field typeMba: %v", err)
+ }
+-x.TypeUnion = typeMba
++x.TypeUnion = &typeMba
+ default:
+ return fmt.Errorf("invalid union key '%v'", x.Type)}
+ 
+@@ -4323,7 +4323,7 @@ xc.id = C.uint32_t(x.Id)
+ xc._type = C.libxl_psr_feat_type(x.Type)
+ switch x.Type{
+ case PsrFeatTypeCat:
+-tmp, ok := x.TypeUnion.(PsrHwInfoTypeUnionCat)
++tmp, ok := x.TypeUnion.(*PsrHwInfoTypeUnionCat)
+ if !ok {
+ return errors.New("wrong type for union key type")
+ }
+@@ -4334,7 +4334,7 @@ cat.cdp_enabled = C.bool(tmp.CdpEnabled)
+ catBytes := C.GoBytes(unsafe.Pointer(&cat),C.sizeof_libxl_psr_hw_info_type_union_cat)
+ copy(xc.u[:],catBytes)
+ case PsrFeatTypeMba:
+-tmp, ok := x.TypeUnion.(PsrHwInfoTypeUnionMba)
++tmp, ok := x.TypeUnion.(*PsrHwInfoTypeUnionMba)
+ if !ok {
+ return errors.New("wrong type for union key type")
+ }
 -- 
 2.17.1
 
