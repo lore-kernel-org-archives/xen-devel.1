@@ -2,44 +2,46 @@ Return-Path: <SRS0=6BBm=J2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79BD4C433B4
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 13:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42D22C433B4
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 13:15:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1365561057
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 13:11:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1365561057
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C511761412
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Apr 2021 13:15:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C511761412
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.119991.226871 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.119997.226884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lc6Rg-0001D6-Uz; Thu, 29 Apr 2021 13:11:08 +0000
+	id 1lc6W9-0001Py-HP; Thu, 29 Apr 2021 13:15:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 119991.226871; Thu, 29 Apr 2021 13:11:08 +0000
+Received: by outflank-mailman (output) from mailman id 119997.226884; Thu, 29 Apr 2021 13:15:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lc6Rg-0001Cz-Rz; Thu, 29 Apr 2021 13:11:08 +0000
-Received: by outflank-mailman (input) for mailman id 119991;
- Thu, 29 Apr 2021 13:11:07 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lc6W9-0001Pr-E2; Thu, 29 Apr 2021 13:15:45 +0000
+Received: by outflank-mailman (input) for mailman id 119997;
+ Thu, 29 Apr 2021 13:15:44 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=xfjL=J2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lc6Rf-0001Cq-7W
- for xen-devel@lists.xenproject.org; Thu, 29 Apr 2021 13:11:07 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1ec80139-08ed-4b19-83ef-ce175221c69f;
- Thu, 29 Apr 2021 13:11:03 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4DF40B156;
- Thu, 29 Apr 2021 13:11:02 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1lc6W8-0001Pm-AY
+ for xen-devel@lists.xenproject.org; Thu, 29 Apr 2021 13:15:44 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lc6W6-0004qM-9y; Thu, 29 Apr 2021 13:15:42 +0000
+Received: from 54-240-197-239.amazon.com ([54.240.197.239]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lc6W6-0000kC-0v; Thu, 29 Apr 2021 13:15:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,78 +53,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ec80139-08ed-4b19-83ef-ce175221c69f
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619701862; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=22pQnCVeFanA9VjLo2fhHSQH5l3LKKD+EW3AOqi0V0E=;
-	b=fKT8HdmLaAiD0Hc5+awYuCrJE28Jz/cFkOg48m0A886aBkglSTvP9nsi/dk4FTUGf1D+Ga
-	8Y5U4W5BL3BSjeM6V7DLroe+/M+a7+TKna+4WAQYJjrWJWmwze7s4wM3zTZoyBrRsXQ5+g
-	W2Eu1KeUFWDy31f5Y/JBRP4YhePuk0U=
-Subject: Re: [PATCH v3 3/3] docs/doxygen: doxygen documentation for
- grant_table.h
-To: Luca Fancellu <luca.fancellu@arm.com>
-Cc: Bertrand Marquis <bertrand.marquis@arm.com>, wei.chen@arm.com,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=e0Q1Ff80FfEIWIQMfznCRyf4yKWW+MH4snAWf1VboQQ=; b=RmuL+ku1QfzoVKyxo1Liyj8zCy
+	1laW4g69Wj5cl/a9w7yLt97PNqq1bToulwJJlBqIULhxe8R+UhDFqwM0dErAwlHoKje6gShCjiy3b
+	i75O5eKI1V1DOusNqPl6xGp5fyskHAiA71TpKV7nA1tVEtdm24vBkI0ZOdlF3FqcBM34=;
+Subject: Re: [PATCH v3] gnttab: defer allocation of status frame tracking
+ array
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <20210426153741.26904-1-luca.fancellu@arm.com>
- <20210426153741.26904-4-luca.fancellu@arm.com>
- <eae12602-0616-9363-c8c6-ef6bbd78673c@suse.com>
- <E47AFE69-CA75-468D-868D-182F78C6992C@arm.com>
- <d50b05f7-f644-0123-9994-d31668bd5b5f@suse.com>
- <38004B72-8F91-4B4E-843E-B80911DC48B3@arm.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <843b7489-bf08-7313-767c-9c9f1c719736@suse.com>
-Date: Thu, 29 Apr 2021 15:11:01 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <d2397cd4-040e-3cc0-22d8-3f65d01f9326@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <581f843f-25de-bf8a-e8b9-7a407158bd4f@xen.org>
+Date: Thu, 29 Apr 2021 14:15:39 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <38004B72-8F91-4B4E-843E-B80911DC48B3@arm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <d2397cd4-040e-3cc0-22d8-3f65d01f9326@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On 29.04.2021 11:50, Luca Fancellu wrote:
->> On 29 Apr 2021, at 10:04, Jan Beulich <jbeulich@suse.com> wrote:
->> On 28.04.2021 16:59, Luca Fancellu wrote:
->>>> On 27 Apr 2021, at 14:57, Jan Beulich <jbeulich@suse.com> wrote:
->>>> On 26.04.2021 17:37, Luca Fancellu wrote:
->>>>> @@ -120,24 +132,26 @@ typedef uint32_t grant_ref_t;
->>>>> * [GST]: This field is written by the guest and read by Xen.
->>>>> */
->>>>>
->>>>> -/*
->>>>> - * Version 1 of the grant table entry structure is maintained purely
->>>>> - * for backwards compatibility.  New guests should use version 2.
->>>>> - */
->>>>> #if __XEN_INTERFACE_VERSION__ < 0x0003020a
->>>>> #define grant_entry_v1 grant_entry
->>>>> #define grant_entry_v1_t grant_entry_t
->>>>> #endif
->>>>> +/**
->>>>> + * Version 1 of the grant table entry structure is maintained purely
->>>>> + * for backwards compatibility.  New guests should use version 2.
->>>>> + */
->>>>
->>>> In case I didn't say so already before - I think this would be a good
->>>> opportunity to drop the comment pointing at v2. With v2 optionally
->>>> unavailable altogether, this can't possibly be a generally valid
->>>> course of action.
->>>
->>> Could you explain me better that? Do you want to get rid of this comment?
->>
->> Especially the second sentence is misleading. If new code used v2, it
->> would not work on Xen with v2 support turned off.
+Hi Jan,
+
+On 15/04/2021 10:41, Jan Beulich wrote:
+> This array can be large when many grant frames are permitted; avoid
+> allocating it when it's not going to be used anyway, by doing this only
+> in gnttab_populate_status_frames().
+
+Given the controversy of the change, I would suggest to summarize why 
+this approach is considered to be ok in the commit message.
+
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> v3: Drop smp_wmb(). Re-base.
+> v2: Defer allocation to when a domain actually switches to the v2 grant
+>      API.
 > 
-> Can you suggest what to write here? I’m not very familiar with this xen
-> Interface
+> --- a/xen/common/grant_table.c
+> +++ b/xen/common/grant_table.c
+> @@ -1747,6 +1747,17 @@ gnttab_populate_status_frames(struct dom
+>       /* Make sure, prior version checks are architectural visible */
+>       block_speculation();
+>   
+> +    if ( gt->status == ZERO_BLOCK_PTR )
+> +    {
+> +        gt->status = xzalloc_array(grant_status_t *,
+> +                                   grant_to_status_frames(gt->max_grant_frames));
+> +        if ( !gt->status )
+> +        {
+> +            gt->status = ZERO_BLOCK_PTR;
+> +            return -ENOMEM;
+> +        }
+> +    }
+> +
+>       for ( i = nr_status_frames(gt); i < req_status_frames; i++ )
+>       {
+>           if ( (gt->status[i] = alloc_xenheap_page()) == NULL )
+> @@ -1767,18 +1778,23 @@ status_alloc_failed:
+>           free_xenheap_page(gt->status[i]);
+>           gt->status[i] = NULL;
+>       }
 
-I've sent a patch myself just a few seconds ago.
+NIT: can you add a newline here and...
 
-Jan
+> +    if ( !nr_status_frames(gt) )
+> +    {
+> +        xfree(gt->status);
+> +        gt->status = ZERO_BLOCK_PTR;
+> +    }
+
+... here for readability.
+
+>       return -ENOMEM;
+>   }
+>   
+>   static int
+>   gnttab_unpopulate_status_frames(struct domain *d, struct grant_table *gt)
+>   {
+> -    unsigned int i;
+> +    unsigned int i, n = nr_status_frames(gt);
+>   
+>       /* Make sure, prior version checks are architectural visible */
+>       block_speculation();
+>   
+> -    for ( i = 0; i < nr_status_frames(gt); i++ )
+> +    for ( i = 0; i < n; i++ )
+>       {
+>           struct page_info *pg = virt_to_page(gt->status[i]);
+>           gfn_t gfn = gnttab_get_frame_gfn(gt, true, i);
+> @@ -1833,12 +1849,11 @@ gnttab_unpopulate_status_frames(struct d
+>           page_set_owner(pg, NULL);
+>       }
+>   
+> -    for ( i = 0; i < nr_status_frames(gt); i++ )
+> -    {
+> -        free_xenheap_page(gt->status[i]);
+> -        gt->status[i] = NULL;
+> -    }
+>       gt->nr_status_frames = 0;
+> +    for ( i = 0; i < n; i++ )
+> +        free_xenheap_page(gt->status[i]);
+> +    xfree(gt->status);
+> +    gt->status = ZERO_BLOCK_PTR;
+The new position of the for loop seems unrelated to the purpose of the 
+patch. May I ask why this was done?
+
+>   
+>       return 0;
+>   }
+> @@ -1969,11 +1984,11 @@ int grant_table_init(struct domain *d, i
+>       if ( gt->shared_raw == NULL )
+>           goto out;
+>   
+> -    /* Status pages for grant table - for version 2 */
+> -    gt->status = xzalloc_array(grant_status_t *,
+> -                               grant_to_status_frames(gt->max_grant_frames));
+> -    if ( gt->status == NULL )
+> -        goto out;
+> +    /*
+> +     * Status page tracking array for v2 gets allocated on demand. But don't
+> +     * leave a NULL pointer there.
+> +     */
+> +    gt->status = ZERO_BLOCK_PTR;
+>   
+>       grant_write_lock(gt);
+>   
+> @@ -4047,11 +4062,12 @@ int gnttab_acquire_resource(
+>           if ( gt->gt_version != 2 )
+>               break;
+>   
+> +        rc = gnttab_get_status_frame_mfn(d, final_frame, &tmp);
+
+NIT: It wasn't obvious to me why gnttab_get_status_frame_mfn() is moved 
+before gt->status. May I suggest to add a in-code comment abouve the 
+ordering?
+
+> +
+>           /* Check that void ** is a suitable representation for gt->status. */
+>           BUILD_BUG_ON(!__builtin_types_compatible_p(
+>                            typeof(gt->status), grant_status_t **));
+>           vaddrs = (void **)gt->status;
+> -        rc = gnttab_get_status_frame_mfn(d, final_frame, &tmp);
+>           break;
+>       }
+>   
+> 
+
+Cheers,
+
+-- 
+Julien Grall
 
