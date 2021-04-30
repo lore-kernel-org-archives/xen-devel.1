@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E784C433B4
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 14:44:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3583DC433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 14:44:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 98244613EE
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 14:44:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 98244613EE
+	by mail.kernel.org (Postfix) with ESMTPS id D37A7613EE
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 14:44:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D37A7613EE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.120573.228018 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.120575.228030 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lcUN9-0002ZK-Ej; Fri, 30 Apr 2021 14:44:03 +0000
+	id 1lcUNV-0002fi-N5; Fri, 30 Apr 2021 14:44:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 120573.228018; Fri, 30 Apr 2021 14:44:03 +0000
+Received: by outflank-mailman (output) from mailman id 120575.228030; Fri, 30 Apr 2021 14:44:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lcUN9-0002ZD-BU; Fri, 30 Apr 2021 14:44:03 +0000
-Received: by outflank-mailman (input) for mailman id 120573;
- Fri, 30 Apr 2021 14:44:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lcUNV-0002fb-Jz; Fri, 30 Apr 2021 14:44:25 +0000
+Received: by outflank-mailman (input) for mailman id 120575;
+ Fri, 30 Apr 2021 14:44:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=T1Xz=J3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lcUN8-0002Z8-4E
- for xen-devel@lists.xenproject.org; Fri, 30 Apr 2021 14:44:02 +0000
+ id 1lcUNT-0002fK-M6
+ for xen-devel@lists.xenproject.org; Fri, 30 Apr 2021 14:44:23 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c6a8a42e-123d-443f-948a-289655a324d8;
- Fri, 30 Apr 2021 14:44:00 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 34d10e4c-b18a-48fb-a228-d36dbf4bd7cc;
+ Fri, 30 Apr 2021 14:44:22 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1EC00B038;
- Fri, 30 Apr 2021 14:44:00 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 1A7ADB038;
+ Fri, 30 Apr 2021 14:44:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,26 +51,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c6a8a42e-123d-443f-948a-289655a324d8
+X-Inumbo-ID: 34d10e4c-b18a-48fb-a228-d36dbf4bd7cc
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1619793840; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1619793862; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6oCDlYqqGUYNrVBiSX4LnnYH4/TGpQyc8Ua94Bo9cz4=;
-	b=kh52rfQ1VbsqkBNHFH7MztwWog9cjV53kxOQg3f46X35nGXMQG7qgpiUB6nqUaQe1hv7/S
-	Zcu36SmSsRzZra521hbcF9CLbPdkH9YmbQxWcW1o4/OCVfpbAk1IZ+l3EZvOPkhC73XG8+
-	ltKwjMSAesnXsZCduLOdRo7fNlaacio=
-Subject: [PATCH 1/3] firmware/shim: update linkfarm exclusions
+	bh=4WSaABwQNqG2JTm70xmiIAHfh+9L9Z20dtHsVXRIDIg=;
+	b=TUXCJDj0WvBzBreDJt0SRxvGQx1jhnB+j2FvQP5UfpJVScQacYmgPOS0SvUqEuOcotyTXa
+	8s+WExlwnFub7VBuF2xrw3t+DurZ65IPkrGDHzLERCqESrsKoN6RAGe6roAEEixmZOewaa
+	WNnKM0FP05uCJZc/poHeIHvOFAtbFzU=
+Subject: [PATCH 2/3] firmware/shim: drop XEN_CONFIG_EXPERT uses
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
  Ian Jackson <iwj@xenproject.org>
 References: <19695ffc-34d8-b682-b092-668f872d4e57@suse.com>
-Message-ID: <d6f37d26-a883-b194-07a9-1ab87d5961f7@suse.com>
-Date: Fri, 30 Apr 2021 16:43:59 +0200
+Message-ID: <56bb5e87-fe35-75a8-fe18-ecc959b21799@suse.com>
+Date: Fri, 30 Apr 2021 16:44:21 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
@@ -80,66 +79,25 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Some intermediate files weren't considered at all at the time. Also
-after its introduction, various changes to the build environment have
-rendered the exclusion sets stale. For example, we now have some .*.cmd
-files in the build tree.  Combine all respective patterns into a single
-.* one, seeing that we don't have any actual source files matching this
-pattern in the tree. Add other patterns as well as individual files.
-Also introduce LINK_EXCLUDE_PATHS to deal with entire directories full
-of generated headers as well as a few specific files the names of which
-are too generic to list under LINK_EXCLUDES.
+As of commit d155e4aef35c ("xen: Allow EXPERT mode to be selected from
+the menuconfig directly") EXPERT is a regular config option.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/tools/firmware/xen-dir/Makefile
 +++ b/tools/firmware/xen-dir/Makefile
-@@ -15,9 +15,19 @@ DEP_DIRS=$(foreach i, $(LINK_DIRS), $(XE
- DEP_FILES=$(foreach i, $(LINK_FILES), $(XEN_ROOT)/$(i))
+@@ -74,10 +74,10 @@ $(D): linkfarm.stamp
+ 	$(MAKE) -C $(D)/xen distclean
  
- # Exclude some intermediate files and final build products
--LINK_EXCLUDES := '*.[isoa]' '.*.d' '.*.d2' '.config'
--LINK_EXCLUDES += '*.map' 'xen' 'xen.gz' 'xen.efi' 'xen-syms'
--LINK_EXCLUDES += '.*.tmp'
-+LINK_EXCLUDES := '*.[isoa]' '*.bin' '*.chk' '*.lnk' '*.gz' '.*'
-+LINK_EXCLUDES += lexer.lex.? parser.tab.? conf
-+LINK_EXCLUDES += asm-offsets.h asm-macros.h compile.h '*-autogen.h'
-+LINK_EXCLUDES += mkelf32 mkreloc symbols config_data.S xen.lds efi.lds
-+LINK_EXCLUDES += '*.map' xen xen.gz xen.efi xen-syms check.efi
-+
-+# To exclude full subtrees or individual files of not sufficiently specific
-+# names, regular expressions are used:
-+LINK_EXCLUDE_PATHS := xen/include/compat/.*
-+LINK_EXCLUDE_PATHS += xen/include/config/.*
-+LINK_EXCLUDE_PATHS += xen/include/generated/.*
-+LINK_EXCLUDE_PATHS += xen/arch/x86/boot/reloc[.]S
-+LINK_EXCLUDE_PATHS += xen/arch/x86/boot/cmdline[.]S
+ $(D)/xen/.config: $(D)
+-	$(MAKE) -C $(@D) KBUILD_DEFCONFIG=pvshim_defconfig XEN_CONFIG_EXPERT=y defconfig
++	$(MAKE) -C $(@D) KBUILD_DEFCONFIG=pvshim_defconfig defconfig
  
- # This is all a giant mess and doesn't really work.
- #
-@@ -32,9 +42,10 @@ LINK_EXCLUDES += '.*.tmp'
- # support easy development of the shim, but has a side effect of clobbering
- # the already-built shim.
- #
--# $(LINK_EXCLUDES) should be set such that a parallel build of shim and xen/
--# doesn't cause a subsequent `make install` to decide to regenerate the
--# linkfarm.  This means that all final build artefacts must be excluded.
-+# $(LINK_EXCLUDES) and $(LINK_EXCLUDE_DIRS) should be set such that a parallel
-+# build of shim and xen/ doesn't cause a subsequent `make install` to decide to
-+# to regenerate the linkfarm.  This means that all intermediate and final build
-+# artefacts must be excluded.
- linkfarm.stamp: $(DEP_DIRS) $(DEP_FILES) FORCE
- 	mkdir -p $(D)
- 	rm -f linkfarm.stamp.tmp
-@@ -46,7 +57,8 @@ linkfarm.stamp: $(DEP_DIRS) $(DEP_FILES)
- 			sed 's,^$(XEN_ROOT)/$(d)/,,g' | xargs mkdir -p .);) \
- 	$(foreach d, $(LINK_DIRS), \
- 		(cd $(XEN_ROOT); \
--		 find $(d) ! -type l -type f $(addprefix ! -name ,$(LINK_EXCLUDES))) \
-+		 find $(d) ! -type l -type f $(addprefix ! -name ,$(LINK_EXCLUDES)) \
-+		 | grep -v $(patsubst %,-e '^%$$',$(LINK_EXCLUDE_PATHS))) \
- 		 >> linkfarm.stamp.tmp ; ) \
- 	$(foreach f, $(LINK_FILES), \
- 		echo $(f) >> linkfarm.stamp.tmp ;)
+ xen-shim: $(D)/xen/.config
+-	$(MAKE) -C $(<D) build XEN_CONFIG_EXPERT=y
++	$(MAKE) -C $(<D) build
+ 	ln -sf $(D)/xen/xen $@
+ 	ln -sf $(D)/xen/xen-syms $@-syms
+ 
 
 
