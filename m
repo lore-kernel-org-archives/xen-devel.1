@@ -2,55 +2,56 @@ Return-Path: <SRS0=vACI=J3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14283C43461
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 906ECC433ED
 	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 11:28:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 71FA96024A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 11:28:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 71FA96024A
+	by mail.kernel.org (Postfix) with ESMTPS id 0B71E6144D
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Apr 2021 11:28:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0B71E6144D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cs.pub.ro
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.120472.227834 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.120474.227862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lcRJo-00012I-Sd; Fri, 30 Apr 2021 11:28:24 +0000
+	id 1lcRJy-00019P-IB; Fri, 30 Apr 2021 11:28:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 120472.227834; Fri, 30 Apr 2021 11:28:24 +0000
+Received: by outflank-mailman (output) from mailman id 120474.227862; Fri, 30 Apr 2021 11:28:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lcRJo-000123-L8; Fri, 30 Apr 2021 11:28:24 +0000
-Received: by outflank-mailman (input) for mailman id 120472;
- Fri, 30 Apr 2021 11:28:23 +0000
+	id 1lcRJy-00019G-EQ; Fri, 30 Apr 2021 11:28:34 +0000
+Received: by outflank-mailman (input) for mailman id 120474;
+ Fri, 30 Apr 2021 11:28:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ll2C=J3=cs.pub.ro=costin.lupu@srs-us1.protection.inumbo.net>)
- id 1lcRJn-00011a-K9
- for xen-devel@lists.xenproject.org; Fri, 30 Apr 2021 11:28:23 +0000
-Received: from mx.upb.ro (unknown [141.85.13.210])
+ id 1lcRJx-00011a-Ej
+ for xen-devel@lists.xenproject.org; Fri, 30 Apr 2021 11:28:33 +0000
+Received: from mx.upb.ro (unknown [141.85.13.200])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 90707dca-7b1e-44fd-a61a-d6a28fe7d9c1;
- Fri, 30 Apr 2021 11:28:21 +0000 (UTC)
+ id f6fa5441-43a5-4aa1-b4d8-23e7c2bdbad8;
+ Fri, 30 Apr 2021 11:28:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by mx.upb.ro (Postfix) with ESMTP id DF555B56011C;
- Fri, 30 Apr 2021 14:28:19 +0300 (EEST)
+ by mx.upb.ro (Postfix) with ESMTP id 37635B560118;
+ Fri, 30 Apr 2021 14:28:23 +0300 (EEST)
 Received: from mx.upb.ro ([127.0.0.1])
  by localhost (mx.upb.ro [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id eBQP6ciXne0i; Fri, 30 Apr 2021 14:28:18 +0300 (EEST)
+ with ESMTP id ymGLmKXsAxR9; Fri, 30 Apr 2021 14:28:20 +0300 (EEST)
 Received: from localhost (localhost [127.0.0.1])
- by mx.upb.ro (Postfix) with ESMTP id B4610B560113;
- Fri, 30 Apr 2021 14:28:17 +0300 (EEST)
+ by mx.upb.ro (Postfix) with ESMTP id 0FE78B560121;
+ Fri, 30 Apr 2021 14:28:20 +0300 (EEST)
 Received: from mx.upb.ro ([127.0.0.1])
  by localhost (mx.upb.ro [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id DSDw40tLMBxT; Fri, 30 Apr 2021 14:28:17 +0300 (EEST)
+ with ESMTP id U3G9nkr-6Er9; Fri, 30 Apr 2021 14:28:19 +0300 (EEST)
 Received: from localhost.localdomain (unknown [188.25.174.245])
- by mx.upb.ro (Postfix) with ESMTPSA id 7CD99B5600B0;
- Fri, 30 Apr 2021 14:28:16 +0300 (EEST)
+ by mx.upb.ro (Postfix) with ESMTPSA id B121DB560118;
+ Fri, 30 Apr 2021 14:28:19 +0300 (EEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,58 +63,381 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90707dca-7b1e-44fd-a61a-d6a28fe7d9c1
+X-Inumbo-ID: f6fa5441-43a5-4aa1-b4d8-23e7c2bdbad8
 X-Virus-Scanned: amavisd-new at upb.ro
 From: Costin Lupu <costin.lupu@cs.pub.ro>
 To: xen-devel@lists.xenproject.org
-Cc: Tim Deegan <tim@xen.org>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v2 0/5] Fix redefinition errors for toolstack libs
-Date: Fri, 30 Apr 2021 14:28:06 +0300
-Message-Id: <cover.1619781564.git.costin.lupu@cs.pub.ro>
+Cc: Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 4/5] tools/libs/gnttab: Fix PAGE_SIZE redefinition error
+Date: Fri, 30 Apr 2021 14:28:10 +0300
+Message-Id: <64508f42952d971a0213dfd3fff53b990a3c6ebe.1619781564.git.costin.lupu@cs.pub.ro>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <cover.1619781564.git.costin.lupu@cs.pub.ro>
+References: <cover.1619781564.git.costin.lupu@cs.pub.ro>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-For replication I used gcc 10.3 on an Alpine system. In order to replicat=
-e the
-redefinition error for PAGE_SIZE one should install the 'fortify-headers'
-package which will change the chain of included headers by indirectly inc=
-luding
-/usr/include/limits.h where PAGE_SIZE and PATH_MAX are defined.
+If PAGE_SIZE is already defined in the system (e.g. in /usr/include/limit=
+s.h
+header) then gcc will trigger a redefinition error because of -Werror. Th=
+is
+patch replaces usage of PAGE_* macros with XC_PAGE_* macros in order to a=
+void
+confusion between control domain page granularity (PAGE_* definitions) an=
+d
+guest domain page granularity (which is what we are dealing with here).
 
-Changes since v1:
-- Use XC_PAGE_* macros instead of PAGE_* macros
+Signed-off-by: Costin Lupu <costin.lupu@cs.pub.ro>
+---
+ tools/libs/gnttab/freebsd.c | 28 +++++++++++++---------------
+ tools/libs/gnttab/linux.c   | 28 +++++++++++++---------------
+ tools/libs/gnttab/netbsd.c  | 23 ++++++++++-------------
+ 3 files changed, 36 insertions(+), 43 deletions(-)
 
-Costin Lupu (5):
-  tools/debugger: Fix PAGE_SIZE redefinition error
-  tools/libfsimage: Fix PATH_MAX redefinition error
-  tools/libs/foreignmemory: Fix PAGE_SIZE redefinition error
-  tools/libs/gnttab: Fix PAGE_SIZE redefinition error
-  tools/ocaml: Fix redefinition errors
-
- tools/debugger/kdd/kdd-xen.c                  | 15 ++++------
- tools/debugger/kdd/kdd.c                      | 21 +++++++-------
- tools/libfsimage/ext2fs/fsys_ext2fs.c         |  2 ++
- tools/libfsimage/reiserfs/fsys_reiserfs.c     |  2 ++
- tools/libs/foreignmemory/core.c               |  2 +-
- tools/libs/foreignmemory/freebsd.c            | 10 +++----
- tools/libs/foreignmemory/linux.c              | 23 +++++++--------
- tools/libs/foreignmemory/minios.c             |  2 +-
- tools/libs/foreignmemory/netbsd.c             | 10 +++----
- tools/libs/foreignmemory/private.h            |  9 +-----
- tools/libs/gnttab/freebsd.c                   | 28 +++++++++----------
- tools/libs/gnttab/linux.c                     | 28 +++++++++----------
- tools/libs/gnttab/netbsd.c                    | 23 +++++++--------
- tools/ocaml/libs/xc/xenctrl_stubs.c           | 10 +++----
- .../ocaml/libs/xentoollog/xentoollog_stubs.c  |  4 +++
- tools/ocaml/libs/xl/xenlight_stubs.c          |  4 +++
- 16 files changed, 93 insertions(+), 100 deletions(-)
-
+diff --git a/tools/libs/gnttab/freebsd.c b/tools/libs/gnttab/freebsd.c
+index 768af701c6..e42ac3fbf3 100644
+--- a/tools/libs/gnttab/freebsd.c
++++ b/tools/libs/gnttab/freebsd.c
+@@ -30,14 +30,11 @@
+=20
+ #include <xen/sys/gntdev.h>
+=20
++#include <xenctrl.h>
+ #include <xen-tools/libs.h>
+=20
+ #include "private.h"
+=20
+-#define PAGE_SHIFT           12
+-#define PAGE_SIZE            (1UL << PAGE_SHIFT)
+-#define PAGE_MASK            (~(PAGE_SIZE-1))
+-
+ #define DEVXEN "/dev/xen/gntdev"
+=20
+ int osdep_gnttab_open(xengnttab_handle *xgt)
+@@ -77,10 +74,11 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     int domids_stride;
+     unsigned int refs_size =3D ROUNDUP(count *
+                                      sizeof(struct ioctl_gntdev_grant_re=
+f),
+-                                     PAGE_SHIFT);
++                                     XC_PAGE_SHIFT);
++    int os_page_size =3D getpagesize();
+=20
+     domids_stride =3D (flags & XENGNTTAB_GRANT_MAP_SINGLE_DOMAIN) ? 0 : =
+1;
+-    if ( refs_size <=3D PAGE_SIZE )
++    if ( refs_size <=3D os_page_size )
+         map.refs =3D malloc(refs_size);
+     else
+     {
+@@ -107,7 +105,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+         goto out;
+     }
+=20
+-    addr =3D mmap(NULL, PAGE_SIZE * count, prot, MAP_SHARED, fd,
++    addr =3D mmap(NULL, XC_PAGE_SIZE * count, prot, MAP_SHARED, fd,
+                 map.index);
+     if ( addr !=3D MAP_FAILED )
+     {
+@@ -116,7 +114,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+=20
+         notify.index =3D map.index;
+         notify.action =3D 0;
+-        if ( notify_offset < PAGE_SIZE * count )
++        if ( notify_offset < XC_PAGE_SIZE * count )
+         {
+             notify.index +=3D notify_offset;
+             notify.action |=3D UNMAP_NOTIFY_CLEAR_BYTE;
+@@ -131,7 +129,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+         if ( rv )
+         {
+             GTERROR(xgt->logger, "ioctl SET_UNMAP_NOTIFY failed");
+-            munmap(addr, count * PAGE_SIZE);
++            munmap(addr, count * XC_PAGE_SIZE);
+             addr =3D MAP_FAILED;
+         }
+     }
+@@ -150,7 +148,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     }
+=20
+  out:
+-    if ( refs_size > PAGE_SIZE )
++    if ( refs_size > os_page_size )
+         munmap(map.refs, refs_size);
+     else
+         free(map.refs);
+@@ -189,7 +187,7 @@ int osdep_gnttab_unmap(xengnttab_handle *xgt,
+     }
+=20
+     /* Next, unmap the memory. */
+-    if ( (rc =3D munmap(start_address, count * PAGE_SIZE)) )
++    if ( (rc =3D munmap(start_address, count * XC_PAGE_SIZE)) )
+         return rc;
+=20
+     /* Finally, unmap the driver slots used to store the grant informati=
+on. */
+@@ -256,7 +254,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+         goto out;
+     }
+=20
+-    area =3D mmap(NULL, count * PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_S=
+HARED,
++    area =3D mmap(NULL, count * XC_PAGE_SIZE, PROT_READ | PROT_WRITE, MA=
+P_SHARED,
+                 fd, gref_info.index);
+=20
+     if ( area =3D=3D MAP_FAILED )
+@@ -268,7 +266,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+=20
+     notify.index =3D gref_info.index;
+     notify.action =3D 0;
+-    if ( notify_offset < PAGE_SIZE * count )
++    if ( notify_offset < XC_PAGE_SIZE * count )
+     {
+         notify.index +=3D notify_offset;
+         notify.action |=3D UNMAP_NOTIFY_CLEAR_BYTE;
+@@ -283,7 +281,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+     if ( err )
+     {
+         GSERROR(xgs->logger, "ioctl SET_UNMAP_NOTIFY failed");
+-        munmap(area, count * PAGE_SIZE);
++        munmap(area, count * XC_PAGE_SIZE);
+         area =3D NULL;
+     }
+=20
+@@ -306,7 +304,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+ int osdep_gntshr_unshare(xengntshr_handle *xgs,
+                          void *start_address, uint32_t count)
+ {
+-    return munmap(start_address, count * PAGE_SIZE);
++    return munmap(start_address, count * XC_PAGE_SIZE);
+ }
+=20
+ /*
+diff --git a/tools/libs/gnttab/linux.c b/tools/libs/gnttab/linux.c
+index 74331a4c7b..9ce27bee6e 100644
+--- a/tools/libs/gnttab/linux.c
++++ b/tools/libs/gnttab/linux.c
+@@ -32,14 +32,11 @@
+ #include <xen/sys/gntdev.h>
+ #include <xen/sys/gntalloc.h>
+=20
++#include <xenctrl.h>
+ #include <xen-tools/libs.h>
+=20
+ #include "private.h"
+=20
+-#define PAGE_SHIFT           12
+-#define PAGE_SIZE            (1UL << PAGE_SHIFT)
+-#define PAGE_MASK            (~(PAGE_SIZE-1))
+-
+ #define DEVXEN "/dev/xen/"
+=20
+ #ifndef O_CLOEXEC
+@@ -92,6 +89,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     int fd =3D xgt->fd;
+     struct ioctl_gntdev_map_grant_ref *map;
+     unsigned int map_size =3D sizeof(*map) + (count - 1) * sizeof(map->r=
+efs[0]);
++    int os_page_size =3D getpagesize();
+     void *addr =3D NULL;
+     int domids_stride =3D 1;
+     int i;
+@@ -99,11 +97,11 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     if (flags & XENGNTTAB_GRANT_MAP_SINGLE_DOMAIN)
+         domids_stride =3D 0;
+=20
+-    if ( map_size <=3D PAGE_SIZE )
++    if ( map_size <=3D os_page_size )
+         map =3D alloca(map_size);
+     else
+     {
+-        map_size =3D ROUNDUP(map_size, PAGE_SHIFT);
++        map_size =3D ROUNDUP(map_size, XC_PAGE_SHIFT);
+         map =3D mmap(NULL, map_size, PROT_READ | PROT_WRITE,
+                    MAP_PRIVATE | MAP_ANON | MAP_POPULATE, -1, 0);
+         if ( map =3D=3D MAP_FAILED )
+@@ -127,7 +125,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     }
+=20
+  retry:
+-    addr =3D mmap(NULL, PAGE_SIZE * count, prot, MAP_SHARED, fd,
++    addr =3D mmap(NULL, XC_PAGE_SIZE * count, prot, MAP_SHARED, fd,
+                 map->index);
+=20
+     if (addr =3D=3D MAP_FAILED && errno =3D=3D EAGAIN)
+@@ -152,7 +150,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+         struct ioctl_gntdev_unmap_notify notify;
+         notify.index =3D map->index;
+         notify.action =3D 0;
+-        if (notify_offset < PAGE_SIZE * count) {
++        if (notify_offset < XC_PAGE_SIZE * count) {
+             notify.index +=3D notify_offset;
+             notify.action |=3D UNMAP_NOTIFY_CLEAR_BYTE;
+         }
+@@ -164,7 +162,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+             rv =3D ioctl(fd, IOCTL_GNTDEV_SET_UNMAP_NOTIFY, &notify);
+         if (rv) {
+             GTERROR(xgt->logger, "ioctl SET_UNMAP_NOTIFY failed");
+-            munmap(addr, count * PAGE_SIZE);
++            munmap(addr, count * XC_PAGE_SIZE);
+             addr =3D MAP_FAILED;
+         }
+     }
+@@ -184,7 +182,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     }
+=20
+  out:
+-    if ( map_size > PAGE_SIZE )
++    if ( map_size > os_page_size )
+         munmap(map, map_size);
+=20
+     return addr;
+@@ -220,7 +218,7 @@ int osdep_gnttab_unmap(xengnttab_handle *xgt,
+     }
+=20
+     /* Next, unmap the memory. */
+-    if ( (rc =3D munmap(start_address, count * PAGE_SIZE)) )
++    if ( (rc =3D munmap(start_address, count * XC_PAGE_SIZE)) )
+         return rc;
+=20
+     /* Finally, unmap the driver slots used to store the grant informati=
+on. */
+@@ -466,7 +464,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+         goto out;
+     }
+=20
+-    area =3D mmap(NULL, count * PAGE_SIZE, PROT_READ | PROT_WRITE,
++    area =3D mmap(NULL, count * XC_PAGE_SIZE, PROT_READ | PROT_WRITE,
+         MAP_SHARED, fd, gref_info->index);
+=20
+     if (area =3D=3D MAP_FAILED) {
+@@ -477,7 +475,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+=20
+     notify.index =3D gref_info->index;
+     notify.action =3D 0;
+-    if (notify_offset < PAGE_SIZE * count) {
++    if (notify_offset < XC_PAGE_SIZE * count) {
+         notify.index +=3D notify_offset;
+         notify.action |=3D UNMAP_NOTIFY_CLEAR_BYTE;
+     }
+@@ -489,7 +487,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+         err =3D ioctl(fd, IOCTL_GNTALLOC_SET_UNMAP_NOTIFY, &notify);
+     if (err) {
+         GSERROR(xgs->logger, "ioctl SET_UNMAP_NOTIFY failed");
+-        munmap(area, count * PAGE_SIZE);
++        munmap(area, count * XC_PAGE_SIZE);
+         area =3D NULL;
+     }
+=20
+@@ -510,7 +508,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+ int osdep_gntshr_unshare(xengntshr_handle *xgs,
+                          void *start_address, uint32_t count)
+ {
+-    return munmap(start_address, count * PAGE_SIZE);
++    return munmap(start_address, count * XC_PAGE_SIZE);
+ }
+=20
+ /*
+diff --git a/tools/libs/gnttab/netbsd.c b/tools/libs/gnttab/netbsd.c
+index f8d7c356eb..a4ad624b54 100644
+--- a/tools/libs/gnttab/netbsd.c
++++ b/tools/libs/gnttab/netbsd.c
+@@ -28,15 +28,12 @@
+ #include <sys/ioctl.h>
+ #include <sys/mman.h>
+=20
++#include <xenctrl.h>
+ #include <xen/xen.h>
+ #include <xen/xenio.h>
+=20
+ #include "private.h"
+=20
+-#define PAGE_SHIFT           12
+-#define PAGE_SIZE            (1UL << PAGE_SHIFT)
+-#define PAGE_MASK            (~(PAGE_SIZE-1))
+-
+ #define DEVXEN "/kern/xen/privcmd"
+=20
+ int osdep_gnttab_open(xengnttab_handle *xgt)
+@@ -87,19 +84,19 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     }
+=20
+     map.count =3D count;
+-    addr =3D mmap(NULL, count * PAGE_SIZE,
++    addr =3D mmap(NULL, count * XC_PAGE_SIZE,
+                 prot, flags | MAP_ANON | MAP_SHARED, -1, 0);
+     if ( map.va =3D=3D MAP_FAILED )
+     {
+         GTERROR(xgt->logger, "osdep_gnttab_grant_map: mmap failed");
+-        munmap((void *)map.va, count * PAGE_SIZE);
++        munmap((void *)map.va, count * XC_PAGE_SIZE);
+         addr =3D MAP_FAILED;
+     }
+     map.va =3D addr;
+=20
+     map.notify.offset =3D 0;
+     map.notify.action =3D 0;
+-    if ( notify_offset < PAGE_SIZE * count )
++    if ( notify_offset < XC_PAGE_SIZE * count )
+     {
+         map.notify.offset =3D notify_offset;
+         map.notify.action |=3D UNMAP_NOTIFY_CLEAR_BYTE;
+@@ -115,7 +112,7 @@ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+     {
+         GTERROR(xgt->logger,
+             "ioctl IOCTL_GNTDEV_MMAP_GRANT_REF failed: %d", rv);
+-        munmap(addr, count * PAGE_SIZE);
++        munmap(addr, count * XC_PAGE_SIZE);
+         addr =3D MAP_FAILED;
+     }
+=20
+@@ -136,7 +133,7 @@ int osdep_gnttab_unmap(xengnttab_handle *xgt,
+     }
+=20
+     /* Next, unmap the memory. */
+-    rc =3D munmap(start_address, count * PAGE_SIZE);
++    rc =3D munmap(start_address, count * XC_PAGE_SIZE);
+=20
+     return rc;
+ }
+@@ -187,7 +184,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+     alloc.domid =3D domid;
+     alloc.flags =3D writable ? GNTDEV_ALLOC_FLAG_WRITABLE : 0;
+     alloc.count =3D count;
+-    area =3D mmap(NULL, count * PAGE_SIZE,
++    area =3D mmap(NULL, count * XC_PAGE_SIZE,
+                 PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0);
+=20
+     if ( area =3D=3D MAP_FAILED )
+@@ -200,7 +197,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+=20
+     alloc.notify.offset =3D 0;
+     alloc.notify.action =3D 0;
+-    if ( notify_offset < PAGE_SIZE * count )
++    if ( notify_offset < XC_PAGE_SIZE * count )
+     {
+         alloc.notify.offset =3D notify_offset;
+         alloc.notify.action |=3D UNMAP_NOTIFY_CLEAR_BYTE;
+@@ -215,7 +212,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+     if ( err )
+     {
+         GSERROR(xgs->logger, "IOCTL_GNTDEV_ALLOC_GRANT_REF failed");
+-        munmap(area, count * PAGE_SIZE);
++        munmap(area, count * XC_PAGE_SIZE);
+         area =3D MAP_FAILED;
+         goto out;
+     }
+@@ -230,7 +227,7 @@ void *osdep_gntshr_share_pages(xengntshr_handle *xgs,
+ int osdep_gntshr_unshare(xengntshr_handle *xgs,
+                          void *start_address, uint32_t count)
+ {
+-    return munmap(start_address, count * PAGE_SIZE);
++    return munmap(start_address, count * XC_PAGE_SIZE);
+ }
+=20
+ /*
 --=20
 2.20.1
 
