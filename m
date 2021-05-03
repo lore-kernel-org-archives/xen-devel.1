@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66B24C433B4
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B471C433B4
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:35:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E8BF960FE3
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:35:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E8BF960FE3
+	by mail.kernel.org (Postfix) with ESMTPS id BBF816135F
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:35:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBF816135F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121843.229826 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121847.229850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldeLO-0007Up-7c; Mon, 03 May 2021 19:35:02 +0000
+	id 1ldeLU-0007a9-U2; Mon, 03 May 2021 19:35:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121843.229826; Mon, 03 May 2021 19:35:02 +0000
+Received: by outflank-mailman (output) from mailman id 121847.229850; Mon, 03 May 2021 19:35:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldeLO-0007Ui-4P; Mon, 03 May 2021 19:35:02 +0000
-Received: by outflank-mailman (input) for mailman id 121843;
- Mon, 03 May 2021 19:35:00 +0000
+	id 1ldeLU-0007a2-QJ; Mon, 03 May 2021 19:35:08 +0000
+Received: by outflank-mailman (input) for mailman id 121847;
+ Mon, 03 May 2021 19:35:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wh1Q=J6=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1ldeG4-0005i5-KY
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:29:32 +0000
-Received: from mail-qv1-xf2f.google.com (unknown [2607:f8b0:4864:20::f2f])
+ id 1ldeFp-0005i5-KA
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:29:17 +0000
+Received: from mail-qv1-xf35.google.com (unknown [2607:f8b0:4864:20::f35])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8fdb1852-9169-42f7-9597-236b74c2a607;
- Mon, 03 May 2021 19:28:59 +0000 (UTC)
-Received: by mail-qv1-xf2f.google.com with SMTP id jm10so3210244qvb.5
- for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:59 -0700 (PDT)
+ id 7961687f-6128-4146-ae23-04d37fbfe793;
+ Mon, 03 May 2021 19:28:52 +0000 (UTC)
+Received: by mail-qv1-xf35.google.com with SMTP id h1so2412836qvv.10
+ for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:52 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:8710:5560:a711:776f])
  by smtp.gmail.com with ESMTPSA id
- g18sm9225209qke.21.2021.05.03.12.28.58
+ g18sm9225209qke.21.2021.05.03.12.28.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 May 2021 12:28:58 -0700 (PDT)
+ Mon, 03 May 2021 12:28:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,330 +56,314 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8fdb1852-9169-42f7-9597-236b74c2a607
+X-Inumbo-ID: 7961687f-6128-4146-ae23-04d37fbfe793
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=SBP/WUCHYsHwmvFvXna4dIQQTPCdqZeigE28a+rXW1E=;
-        b=O6BVnc4qd3xwHDBJXfoQIucfK9gnTGxsJRVTZbya52yOkKK+3zh0/rVotSg+Sl9Hpp
-         Tql0xvakVp3Q29gD1H39GXvBQzEipXCd/8vKYbYfC9b8eILOcHb72QlNF9Nh3PIjmc/z
-         FWZHtDC2IixKzDJ5IbkNZVIG6TZrQbFfMN7UrNco4svOIsNz8xNIj2DD7zD40z/HDIKK
-         cJqcv7PvqopYvl3GimbTVrtMB4SIxB/hPMryBcsl5ZKwcWW2Aqd325ZLdVUXk+KV5te0
-         1pTIAso0lQiqiDltBky+pPfwXFXPqRtOsrRAtPf0vDlM+ZN1bTIq96pj+CroXFhOVzDe
-         fWcg==
+        bh=SA2GZ9hF2Qvi9qam8q5O9Sh0EYcwTdRBSgnWrRejxiQ=;
+        b=K7QccnrtgPJmjHYg6sNoXTWMoj+Vc0zwioEjc6/VfQ+P0fQm0cm07QvcejGvl0LYkp
+         bjiUU8UfMyEa2DA+5i2PnVXzdLx0eH0sfJhMkV7ivzXalX07OeohPWBpbK66CkPG1qKs
+         uak6gkfwR3PBhDcfrkQ1ZwJHMJ0vjnkN9rPc3P4dHTar58C+p+kfMGtAdkN7aevBVBl0
+         G3CaB18hkpLlvhi1jUxxOXu5GDRk3c/BtzZSmfpSBOIcl189O6xwIoLOmDW0ga3u92tb
+         3z0OsWME0xR6HW2gcMLZGtMvXsvnz6MI3Ub6yBnR4rRwncBZFkQHN/7Gmro27zlmJAiL
+         /qRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=SBP/WUCHYsHwmvFvXna4dIQQTPCdqZeigE28a+rXW1E=;
-        b=a58Arko+9KvYrQgPLfaRTRZO8xjMkq8ycF42IjFHPmW5egk3cZcp7RsuwCGAqAdovP
-         kzuUxieFtmiIe8ALXZtut24/emQdDmxMf7ZJmu/1532FXBPOcy/xKtrahwoyCfA8maBh
-         1NIDegU1R3e+a+FdUe6p+fttEKOrboGaQo0rPpbqucuu+HrhaBpjGSJ7BzUaKCUilkcw
-         x6ABd5YXxpyW616FPZ3+ZsB5QG9wT8JPOIQt3WBNklT5mUFPE8hN45XbDghOr13kTPPp
-         E72XsmlTwt9fVQLGRCQXXJGsadSvo5rUQ9sVnEwYaEKkbKIUNnVoOa6kDIZ7XbjkIBHn
-         aICg==
-X-Gm-Message-State: AOAM531rnk1IDXK6CIn8Bw0IaSuDYbJMbNSjXQbMpgwB4eXdEWIOssRI
-	h9sh9ixh3/zf3vNfjoqMZKSd450OGPM=
-X-Google-Smtp-Source: ABdhPJw9qRujRfcqvQQOj/Nh1hz+fW3OuLKeqluU/Upmh5MZLqNoVIeI+WS4P/Ajl4B+ngqLCxMG+A==
-X-Received: by 2002:a0c:c488:: with SMTP id u8mr21113740qvi.47.1620070139057;
-        Mon, 03 May 2021 12:28:59 -0700 (PDT)
+        bh=SA2GZ9hF2Qvi9qam8q5O9Sh0EYcwTdRBSgnWrRejxiQ=;
+        b=UKJTV6rSV43TJ4DuLtWHCyVKZ2FEdIEh13BSkHe9V9M1oGfxqeXEFmHiLtpTXTCkfw
+         qP7VUx+uD8cjSznOjq41BvcarV2GQB/ZzXlroaNEy7nvJLAQ/EY37FXZ5ZP2s29v72oi
+         b4BhbDx6FiPxqvBdNtGFCzPWPnyJ39bjfnZg5V2Q691IhDsQPEHUWdJuZVrtbMF6BM6u
+         QNj69LLNJ5An45pNJbGa0oxDx43nCPuDK5Nqq7QlnmgNIk9kM0TGsj2uu0bEsgxiZb4z
+         Lb9wg8zQgxSgUsq0qaWifHvFTzAUJwU1zGYXgaIJC7TnH+eC8ixZZi4SMqFXvKFoqMju
+         QK+Q==
+X-Gm-Message-State: AOAM532Z+/mgz6mxzkvjMFLrv2PFRD0COGoOfb62I4MpWtoufWXV/Fy5
+	no0Dn+BEJLsbxYE74aiQOOET1hMpMsU=
+X-Google-Smtp-Source: ABdhPJz+bMqGsKQPk/vjNNXpvY12fF1VAf59hcwKRvYkQrYHSjWtbGiQ8W9IwjoiBfMqfMcklYxxug==
+X-Received: by 2002:ad4:59c7:: with SMTP id el7mr21549307qvb.26.1620070131409;
+        Mon, 03 May 2021 12:28:51 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 12/13] xenpm: Add set-cpufreq-hwp subcommand
-Date: Mon,  3 May 2021 15:28:09 -0400
-Message-Id: <20210503192810.36084-13-jandryuk@gmail.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 09/13] xen: Add SET_CPUFREQ_HWP xen_sysctl_pm_op
+Date: Mon,  3 May 2021 15:28:06 -0400
+Message-Id: <20210503192810.36084-10-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210503192810.36084-1-jandryuk@gmail.com>
 References: <20210503192810.36084-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-set-cpufreq-hwp allows setting the Hardware P-State (HWP) parameters.
+Add SET_CPUFREQ_HWP xen_sysctl_pm_op to set HWP parameters.  The sysctl
+supports setting multiple values simultaneously as indicated by the
+set_params bits.  This allows atomically applying new HWP configuration
+via a single wrmsr.
 
-It can be run on all or just a single cpu.  There are presets of
-balance, powersave & performance.  Those can be further tweaked by
-param:val arguments as explained in the usage description.
+XEN_SYSCTL_HWP_SET_PRESET_BALANCE/PERFORMANCE/POWERSAVE provide three
+common presets.  Setting them depends on hardware limits which the
+hypervisor is already caching.  So using them allows skipping a
+hypercall to query the limits (hw_lowest/highest) to then set those same
+values.  The code is organized to allow a preset to be refined with
+additional stuff if desired.
 
-Parameter names are just checked to the first 3 characters to shorten
-typing.
-
-Some options are hardware dependent, and ranges can be found in
-get-cpufreq-para.
+"most_efficient" and "guaranteed" could be additional presets in the
+future, but the are not added now.  Those levels can change at runtime,
+but we don't have code in place to monitor and update for those events.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 ---
- tools/misc/xenpm.c | 240 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 240 insertions(+)
+ xen/arch/x86/acpi/cpufreq/hwp.c    | 114 +++++++++++++++++++++++++++++
+ xen/drivers/acpi/pmstat.c          |  24 ++++++
+ xen/include/acpi/cpufreq/cpufreq.h |   2 +
+ xen/include/public/sysctl.h        |  32 ++++++++
+ 4 files changed, 172 insertions(+)
 
-diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index a686f8f46e..d3bcaf3b58 100644
---- a/tools/misc/xenpm.c
-+++ b/tools/misc/xenpm.c
-@@ -67,6 +67,25 @@ void show_help(void)
-             " set-max-cstate        <num>|'unlimited' [<num2>|'unlimited']\n"
-             "                                     set the C-State limitation (<num> >= 0) and\n"
-             "                                     optionally the C-sub-state limitation (<num2> >= 0)\n"
-+            " set-cpufreq-hwp       [cpuid] [balance|performance|powersave] <param:val>*\n"
-+            "                                     set Hardware P-State (HWP) parameters\n"
-+            "                                     optionally a preset of one of\n"
-+            "                                       balance|performance|powersave\n"
-+            "                                     an optional list of param:val arguments\n"
-+            "                                       minimum:N  hw_lowest ... hw_highest\n"
-+            "                                       maximum:N  hw_lowest ... hw_highest\n"
-+            "                                       desired:N  hw_lowest ... hw_highest\n"
-+            "                                           Set explicit performance target.\n"
-+            "                                           non-zero disables auto-HWP mode.\n"
-+            "                                       energy_perf:0-255 (or 0-15)\n"
-+            "                                                   energy/performance hint\n"
-+            "                                                   lower favor performance\n"
-+            "                                                   higher favor powersave\n"
-+            "                                                   127 (or 7) balance\n"
-+            "                                       act_window:N{,m,u}s range 0us-1270s\n"
-+            "                                           window for internal calculations.\n"
-+            "                                           0 lets the hardware decide.\n"
-+            "                                     get-cpufreq-para returns hw_lowest/highest.\n"
-             " start [seconds]                     start collect Cx/Px statistics,\n"
-             "                                     output after CTRL-C or SIGINT or several seconds.\n"
-             " enable-turbo-mode     [cpuid]       enable Turbo Mode for processors that support it.\n"
-@@ -1309,6 +1328,226 @@ void disable_turbo_mode(int argc, char *argv[])
-                 errno, strerror(errno));
+diff --git a/xen/arch/x86/acpi/cpufreq/hwp.c b/xen/arch/x86/acpi/cpufreq/hwp.c
+index 92222d6d85..0fd70d76a8 100644
+--- a/xen/arch/x86/acpi/cpufreq/hwp.c
++++ b/xen/arch/x86/acpi/cpufreq/hwp.c
+@@ -547,6 +547,120 @@ int get_hwp_para(struct cpufreq_policy *policy, struct xen_hwp_para *hwp_para)
+     return 0;
  }
  
-+/*
-+ * Parse activity_window:NNN{us,ms,s} and validate range.
-+ *
-+ * Activity window is a 7bit mantissa (0-127) with a 3bit exponent (0-7) base
-+ * 10 in microseconds.  So the range is 1 microsecond to 1270 seconds.  A value
-+ * of 0 lets the hardware autonomously select the window.
-+ *
-+ * Return 0 on success
-+ *       -1 on error
-+ *        1 Not activity_window. i.e. try parsing as another argument
-+ */
-+static int parse_activity_window(xc_set_hwp_para_t *set_hwp, char *p)
++int set_hwp_para(struct cpufreq_policy *policy,
++                 struct xen_set_hwp_para *set_hwp)
 +{
-+    char *param = NULL, *val = NULL, *suffix = NULL;
-+    unsigned int u;
-+    unsigned int exponent = 0;
-+    unsigned int multiplier = 1;
-+    int ret;
++    unsigned int cpu = policy->cpu;
++    struct hwp_drv_data *data = hwp_drv_data[cpu];
 +
-+    ret = sscanf(p, "%m[a-z_A-Z]:%ms", &param, &val);
-+    if ( ret != 2 )
++    if ( data == NULL )
++        return -EINVAL;
++
++    /* Validate all parameters first */
++    if ( set_hwp->set_params & ~XEN_SYSCTL_HWP_SET_PARAM_MASK )
 +    {
-+        return -1;
++        hwp_err("Invalid bits in hwp set_params %u\n",
++                set_hwp->set_params);
++
++        return -EINVAL;
 +    }
 +
-+    if ( strncasecmp(param, "act", 3) != 0 )
++    if ( set_hwp->activity_window & ~XEN_SYSCTL_HWP_ACT_WINDOW_MASK )
 +    {
-+        ret = 1;
++        hwp_err("Invalid bits in activity window %u\n",
++                set_hwp->activity_window);
 +
-+        goto out;
++        return -EINVAL;
 +    }
 +
-+    free(param);
-+    param = NULL;
-+
-+    ret = sscanf(val, "%u%ms", &u, &suffix);
-+    if ( ret != 1 && ret != 2 )
++    if ( !feature_hwp_energy_perf &&
++         set_hwp->set_params & XEN_SYSCTL_HWP_SET_ENERGY_PERF &&
++         set_hwp->energy_perf > 0xf )
 +    {
-+        fprintf(stderr, "invalid activity window: %s\n", val);
++        hwp_err("energy_perf %u out of range for IA32_ENERGY_PERF_BIAS\n",
++                set_hwp->energy_perf);
 +
-+        ret = -1;
-+
-+        goto out;
++        return -EINVAL;
 +    }
 +
-+    if ( ret == 2 && suffix )
++    if ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_DESIRED &&
++         set_hwp->desired != 0 &&
++         ( set_hwp->desired < data->hw_lowest ||
++           set_hwp->desired > data->hw_highest ) )
 +    {
-+        if ( strcasecmp(suffix, "s") == 0 )
-+        {
-+            multiplier = 1000 * 1000;
-+            exponent = 6;
-+        }
-+        else if ( strcasecmp(suffix, "ms") == 0 )
-+        {
-+            multiplier = 1000;
-+            exponent = 3;
-+        }
-+        else if ( strcasecmp(suffix, "us") == 0 )
-+        {
-+            multiplier = 1;
-+            exponent = 0;
-+        }
++        hwp_err("hwp desired %u is out of range (%u ... %u)\n",
++                set_hwp->desired, data->hw_lowest, data->hw_highest);
++
++        return -EINVAL;
++    }
++
++    /*
++     * minimum & maximum are not validated as hardware doesn't seem to care
++     * and the SDM says CPUs will clip internally.
++     */
++
++    /* Apply presets */
++    switch ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_PRESET_MASK )
++    {
++    case XEN_SYSCTL_HWP_SET_PRESET_POWERSAVE:
++        data->minimum = data->hw_lowest;
++        data->maximum = data->hw_lowest;
++        data->activity_window = 0;
++        if ( feature_hwp_energy_perf )
++            data->energy_perf = 0xff;
 +        else
-+        {
-+            fprintf(stderr, "invalid activity window units: %s\n", suffix);
-+
-+            ret = -1;
-+            goto out;
-+        }
-+    }
-+
-+    if ( u > 1270 * 1000 * 1000 / multiplier )
-+    {
-+        fprintf(stderr, "activity window %s too large\n", val);
-+
-+        ret = -1;
-+        goto out;
-+    }
-+
-+    /* looking for 7 bits of mantissa and 3 bits of exponent */
-+    while ( u > 127 )
-+    {
-+        u /= 10;
-+        exponent += 1;
-+    }
-+
-+    set_hwp->activity_window = ( exponent & 0x7 ) << 7 | ( u & 0x7f );
-+    set_hwp->set_params |= XEN_SYSCTL_HWP_SET_ACT_WINDOW;
-+
-+    ret = 0;
-+
-+ out:
-+    free(suffix);
-+    free(param);
-+    free(val);
-+
-+    return ret;
-+}
-+
-+static int parse_hwp_opts(xc_set_hwp_para_t *set_hwp, int *cpuid,
-+                          int argc, char *argv[])
-+{
-+    int i = 0;
-+
-+    if ( argc < 1 )
-+        return -1;
-+
-+    if ( parse_cpuid_non_fatal(argv[i], cpuid) == 0 )
-+    {
-+        i++;
-+    }
-+
-+    if ( i == argc )
-+        return -1;
-+
-+    if ( strcasecmp(argv[i], "powersave") == 0 )
-+    {
-+        set_hwp->set_params = XEN_SYSCTL_HWP_SET_PRESET_POWERSAVE;
-+        i++;
-+    }
-+    else if ( strcasecmp(argv[i], "performance") == 0 )
-+    {
-+        set_hwp->set_params = XEN_SYSCTL_HWP_SET_PRESET_PERFORMANCE;
-+        i++;
-+    }
-+    else if ( strcasecmp(argv[i], "balance") == 0 )
-+    {
-+        set_hwp->set_params = XEN_SYSCTL_HWP_SET_PRESET_BALANCE;
-+        i++;
-+    }
-+
-+    for ( ; i < argc; i++)
-+    {
-+        unsigned int val;
-+        char *param;
-+        int ret;
-+
-+        ret = parse_activity_window(set_hwp, argv[i]);
-+        switch ( ret )
-+        {
-+        case -1:
-+            return -1;
-+        case 0:
-+            continue;
-+            break;
-+        case 1:
-+            /* try other parsing */
-+            break;
-+        }
-+
-+        /* sscanf can't handle split on ':' for "%ms:%u'  */
-+        ret = sscanf(argv[i], "%m[a-zA-Z_]:%u", &param, &val);
-+        if ( ret != 2 )
-+        {
-+            fprintf(stderr, "%s is an invalid hwp parameter.\n", argv[i]);
-+            return -1;
-+        }
-+
-+        if ( val > 255 )
-+        {
-+            fprintf(stderr, "%s value %u is out of range.\n", param, val);
-+            return -1;
-+        }
-+
-+        if ( strncasecmp(param, "min", 3) == 0 )
-+        {
-+            set_hwp->minimum = val;
-+            set_hwp->set_params |= XEN_SYSCTL_HWP_SET_MINIMUM;
-+        }
-+        else if ( strncasecmp(param, "max", 3) == 0 )
-+        {
-+            set_hwp->maximum = val;
-+            set_hwp->set_params |= XEN_SYSCTL_HWP_SET_MAXIMUM;
-+        }
-+        else if ( strncasecmp(param, "des", 3) == 0 )
-+        {
-+            set_hwp->desired = val;
-+            set_hwp->set_params |= XEN_SYSCTL_HWP_SET_DESIRED;
-+        }
-+        else if ( strncasecmp(param, "ene", 3) == 0 )
-+        {
-+            set_hwp->energy_perf = val;
-+            set_hwp->set_params |= XEN_SYSCTL_HWP_SET_ENERGY_PERF;
-+        }
++            data->energy_perf = 0xf;
++        data->desired = 0;
++        break;
++    case XEN_SYSCTL_HWP_SET_PRESET_PERFORMANCE:
++        data->minimum = data->hw_highest;
++        data->maximum = data->hw_highest;
++        data->activity_window = 0;
++        data->energy_perf = 0;
++        data->desired = 0;
++        break;
++    case XEN_SYSCTL_HWP_SET_PRESET_BALANCE:
++        data->minimum = data->hw_lowest;
++        data->maximum = data->hw_highest;
++        data->activity_window = 0;
++        data->energy_perf = 0x80;
++        if ( feature_hwp_energy_perf )
++            data->energy_perf = 0x80;
 +        else
-+        {
-+            fprintf(stderr, "%s is an invalid parameter\n.", param);
-+            return -1;
-+        }
++            data->energy_perf = 0x7;
++        data->desired = 0;
++        break;
++    case XEN_SYSCTL_HWP_SET_PRESET_NONE:
++        break;
++    default:
++        printk("HWP: Invalid preset value: %u\n",
++               set_hwp->set_params & XEN_SYSCTL_HWP_SET_PRESET_MASK);
 +
-+        free(param);
++        return -EINVAL;
 +    }
++
++    /* Further customize presets if needed */
++    if ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_MINIMUM )
++        data->minimum = set_hwp->minimum;
++
++    if ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_MAXIMUM )
++        data->maximum = set_hwp->maximum;
++
++    if ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_ENERGY_PERF )
++        data->energy_perf = set_hwp->energy_perf;
++
++    if ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_DESIRED )
++        data->desired = set_hwp->desired;
++
++    if ( set_hwp->set_params & XEN_SYSCTL_HWP_SET_ACT_WINDOW )
++        data->activity_window = set_hwp->activity_window &
++                                XEN_SYSCTL_HWP_ACT_WINDOW_MASK;
++
++    hwp_cpufreq_target(policy, 0, 0);
 +
 +    return 0;
 +}
 +
-+static void hwp_set_func(int argc, char *argv[])
+ int hwp_register_driver(void)
+ {
+     int ret;
+diff --git a/xen/drivers/acpi/pmstat.c b/xen/drivers/acpi/pmstat.c
+index 3e35c42949..016b0445ec 100644
+--- a/xen/drivers/acpi/pmstat.c
++++ b/xen/drivers/acpi/pmstat.c
+@@ -318,6 +318,24 @@ static int set_cpufreq_gov(struct xen_sysctl_pm_op *op)
+     return __cpufreq_set_policy(old_policy, &new_policy);
+ }
+ 
++static int set_cpufreq_hwp(struct xen_sysctl_pm_op *op)
 +{
-+    xc_set_hwp_para_t set_hwp = {};
-+    int cpuid = -1;
-+    int i = 0;
++    struct cpufreq_policy *policy;
 +
-+    if ( parse_hwp_opts(&set_hwp, &cpuid, argc, argv) )
-+    {
-+        fprintf(stderr, "Missing, excess, or invalid argument(s)\n");
-+        exit(EINVAL);
-+    }
++    if ( !cpufreq_governor_internal )
++        return -EINVAL;
 +
-+    if ( cpuid != -1 )
-+    {
-+        i = cpuid;
-+        max_cpu_nr = i + 1;
-+    }
++    policy = per_cpu(cpufreq_cpu_policy, op->cpuid);
 +
-+    for ( ; i < max_cpu_nr; i++ )
-+        if ( xc_set_cpufreq_hwp(xc_handle, i, &set_hwp) )
-+            fprintf(stderr, "[CPU%d] failed to set hwp params (%d - %s)\n",
-+                    i, errno, strerror(errno));
++    if ( !policy || !policy->governor )
++        return -EINVAL;
++
++    if ( strncasecmp(policy->governor->name, "hwp-internal", CPUFREQ_NAME_LEN) )
++        return -EINVAL;
++
++    return set_hwp_para(policy, &op->u.set_hwp);
 +}
 +
- struct {
-     const char *name;
-     void (*function)(int argc, char *argv[]);
-@@ -1319,6 +1558,7 @@ struct {
-     { "get-cpufreq-average", cpufreq_func },
-     { "start", start_gather_func },
-     { "get-cpufreq-para", cpufreq_para_func },
-+    { "set-cpufreq-hwp", hwp_set_func },
-     { "set-scaling-maxfreq", scaling_max_freq_func },
-     { "set-scaling-minfreq", scaling_min_freq_func },
-     { "set-scaling-governor", scaling_governor_func },
+ static int set_cpufreq_para(struct xen_sysctl_pm_op *op)
+ {
+     int ret = 0;
+@@ -465,6 +483,12 @@ int do_pm_op(struct xen_sysctl_pm_op *op)
+         break;
+     }
+ 
++    case SET_CPUFREQ_HWP:
++    {
++        ret = set_cpufreq_hwp(op);
++        break;
++    }
++
+     case SET_CPUFREQ_PARA:
+     {
+         ret = set_cpufreq_para(op);
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index 42146ca2cf..7ff7d0d4bb 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -248,5 +248,7 @@ void cpufreq_dbs_timer_resume(void);
+ 
+ /********************** hwp hypercall helper *************************/
+ int get_hwp_para(struct cpufreq_policy *policy, struct xen_hwp_para *hwp_para);
++int set_hwp_para(struct cpufreq_policy *policy,
++                 struct xen_set_hwp_para *set_hwp);
+ 
+ #endif /* __XEN_CPUFREQ_PM_H__ */
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 1a6c6397ea..3f18a3d522 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -318,6 +318,36 @@ struct xen_hwp_para {
+     uint8_t energy_perf;
+ };
+ 
++/* set multiple values simultaneously when set_args bit is set */
++struct xen_set_hwp_para {
++    uint16_t set_params; /* bitflags for valid values */
++#define XEN_SYSCTL_HWP_SET_DESIRED              (1U << 0)
++#define XEN_SYSCTL_HWP_SET_ENERGY_PERF          (1U << 1)
++#define XEN_SYSCTL_HWP_SET_ACT_WINDOW           (1U << 2)
++#define XEN_SYSCTL_HWP_SET_MINIMUM              (1U << 3)
++#define XEN_SYSCTL_HWP_SET_MAXIMUM              (1U << 4)
++#define XEN_SYSCTL_HWP_SET_PRESET_MASK          (0xf000)
++#define XEN_SYSCTL_HWP_SET_PRESET_NONE          (0x0000)
++#define XEN_SYSCTL_HWP_SET_PRESET_BALANCE       (0x1000)
++#define XEN_SYSCTL_HWP_SET_PRESET_POWERSAVE     (0x2000)
++#define XEN_SYSCTL_HWP_SET_PRESET_PERFORMANCE   (0x3000)
++#define XEN_SYSCTL_HWP_SET_PARAM_MASK ((uint16_t)( \
++                                  XEN_SYSCTL_HWP_SET_PRESET_MASK | \
++                                  XEN_SYSCTL_HWP_SET_DESIRED     | \
++                                  XEN_SYSCTL_HWP_SET_ENERGY_PERF | \
++                                  XEN_SYSCTL_HWP_SET_ACT_WINDOW  | \
++                                  XEN_SYSCTL_HWP_SET_MINIMUM     | \
++                                  XEN_SYSCTL_HWP_SET_MAXIMUM     ))
++
++    uint16_t activity_window; /* 7bit mantissa and 3bit exponent */
++#define XEN_SYSCTL_HWP_ACT_WINDOW_MASK          (0x03ff)
++    uint8_t minimum;
++    uint8_t maximum;
++    uint8_t desired;
++    uint8_t energy_perf; /* 0-255 or 0-15 depending on HW support */
++};
++
++
+ /*
+  * cpufreq para name of this structure named
+  * same as sysfs file name of native linux
+@@ -379,6 +409,7 @@ struct xen_sysctl_pm_op {
+     #define SET_CPUFREQ_GOV            (CPUFREQ_PARA | 0x02)
+     #define SET_CPUFREQ_PARA           (CPUFREQ_PARA | 0x03)
+     #define GET_CPUFREQ_AVGFREQ        (CPUFREQ_PARA | 0x04)
++    #define SET_CPUFREQ_HWP            (CPUFREQ_PARA | 0x05)
+ 
+     /* set/reset scheduler power saving option */
+     #define XEN_SYSCTL_pm_op_set_sched_opt_smt    0x21
+@@ -405,6 +436,7 @@ struct xen_sysctl_pm_op {
+         struct xen_get_cpufreq_para get_para;
+         struct xen_set_cpufreq_gov  set_gov;
+         struct xen_set_cpufreq_para set_para;
++        struct xen_set_hwp_para     set_hwp;
+         uint64_aligned_t get_avgfreq;
+         uint32_t                    set_sched_opt_smt;
+ #define XEN_SYSCTL_CX_UNLIMITED 0xffffffff
 -- 
 2.30.2
 
