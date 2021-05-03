@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08028C433B4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30388C433ED
 	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:40:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE71B610E6
+	by mail.kernel.org (Postfix) with ESMTPS id BA62461183
 	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:40:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE71B610E6
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA62461183
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121699.229526 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121700.229538 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldafn-00019Y-UR; Mon, 03 May 2021 15:39:51 +0000
+	id 1ldafq-0001Aj-6y; Mon, 03 May 2021 15:39:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121699.229526; Mon, 03 May 2021 15:39:51 +0000
+Received: by outflank-mailman (output) from mailman id 121700.229538; Mon, 03 May 2021 15:39:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldafn-00019R-RO; Mon, 03 May 2021 15:39:51 +0000
-Received: by outflank-mailman (input) for mailman id 121699;
- Mon, 03 May 2021 15:39:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1ldafq-0001Ab-3C; Mon, 03 May 2021 15:39:54 +0000
+Received: by outflank-mailman (input) for mailman id 121700;
+ Mon, 03 May 2021 15:39:52 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gWh3=J6=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ldafm-00019M-Uc
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 15:39:50 +0000
+ id 1ldafo-0001AE-H9
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 15:39:52 +0000
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 335820cc-7388-415e-bf6d-33d452fd8cb8;
- Mon, 03 May 2021 15:39:50 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c419d8a6-f98f-46b6-a958-3e897796841f;
+ Mon, 03 May 2021 15:39:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,41 +49,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 335820cc-7388-415e-bf6d-33d452fd8cb8
+X-Inumbo-ID: c419d8a6-f98f-46b6-a958-3e897796841f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620056390;
+  d=citrix.com; s=securemail; t=1620056391;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=w7Xo1CRX6LgQwvrOXLUtnY7XKHYy8vBzRGguf0D0ZzU=;
-  b=V05TcB4VfeAvhuszyvDSWlXfCCwBPVr2ixm8fZ6G4uR8nSsn3k5WfUbj
-   FNB/6G2wle/pD2af6UTqabFBpFN4P7dhS//xLdvxk8pS2ZF4pBOsvIN1T
-   LNYnucFQsXoqRfILqHhA4TCkIOR/LK08BLHqjYKZiys6Uw/C1aYJegStK
-   g=;
+  bh=O2yVEz5u95v8j+WwtRne2yHrcHV1GGCzk+PGhtB6nEs=;
+  b=K4hFoYpeokTeD06OFn/amVtCtKK3JmgB7QqKnmlYuT0yS+5qWtv5wKi7
+   ie907rwrhukH9TeY//dTd7aDxpnStZgRGCaEyKgzGIdI/mPZPGERm1wK5
+   lwoauB+HsqFYUYvBKG5CtAkWut/RKpLlZHkmbRaSlRCY3y1l5Lo9C11j3
+   M=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: vAYGs1Hij7qrprczXNX/gUlo7yBa9ui7IFjWJMPWCgq/AWEMZ+Euoz2iNLBf7NBIRU3+e9qUsi
- BGNyXhKmtCemdtRJINHLmWFi165SmJDLpzOnkk/UmI6g/C8tVEEN52OI28sAl4pC7c+1UFuiP4
- dRngxbWub4HGWauMHLjZdCQUd8w+b6gCyIliaGyFdSZk3je3Iw7NhCUqLnRfvAX1q47/UyJPJO
- Aqu1N+MkaT6b3Q958vwIoDcvHo3jd5mobTU/RvlQQrXziWw7SrEgCP9VSzX3SdKbVC2ni6udrv
- m7U=
+IronPort-SDR: ND6u3vdoKm4YWMNTymQAmDMkd0lpy/mP8prIe8qqAfuEtlNhe+FCyGdoS390/SYVs8FM+ek5sC
+ GsMAwiWTB3sy/ypNi5KzHL2DcZlwucTKGSVVElcdEFExPw41PsRPe/VE6TXsJC6kWz33idZ8DO
+ JmwATgSbNnNL6OfW1NlbdSgKpWTzVhdS2jIxs0wRHf0/m+TyTcdA+9Wq/UjNezRK/sHCy+w9tK
+ YAc8+Fje0uwWB+rrv8vPO0u2tr9Tn4mQHSDLziD0qvZhCTrEmDeAeWsfm5EhXgQL3I6MBpc18H
+ DpQ=
 X-SBRS: 5.1
-X-MesageID: 43332330
+X-MesageID: 43332334
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:ECAIYKq21n+vdPLaZJjR6okaV5rUeYIsi2QD101hICF9WMqeis
- yogbAnxQb54Qx8ZFgMu/ClfJOBT3TV6IJv7eAqVouKcQH6tAKTQ71KwpDlx1TbdRHW0uJGz6
- 9vf+xfJbTLbWRSqcb/7E2GH807wN+BmZrIuc7kw31gTR5nZshbhm8SZzqzKFF8RwVNGPMCZf
- mhz/dAzgDQHEg/X4CWAWQEQviGh/CjruODXTc2QyQIrCWvoFqTmdzHLyQ=
+IronPort-HdrOrdr: A9a23:9sViJagXbX0eZuIcRW07O+jHQXBQXl0ji2hD6mlwRA09T+Wzva
+ mV/cgz/xnylToXRTUcgtiGIqaNWjfx8pRy7IkXM96ZLXHbkUGvK5xv6pan/i34F0TFh5dg/I
+ ppbqQWMqySMXFUlsD/iTPWL/8Bx529/LmslaPiyR5WPGVXQoVByys8NQqBCE1xQ2B9dPwEPb
+ 6R/NBOqTblWVl/VLXYOlA/U+LOp8LGmfvdCHZsbXNK1CC0gTyl87L8GRSDty1uNA9n+rs+7X
+ PD1zXw+6TLiYDB9jbny2TR455K8eGA9vJ/AqW35PQ9G3HJggasaJ8JYczmgAwI
 X-IronPort-AV: E=Sophos;i="5.82,270,1613451600"; 
-   d="scan'208";a="43332330"
+   d="scan'208";a="43332334"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 1/5] x86/xstate: Elide redundant writes in set_xcr0()
-Date: Mon, 3 May 2021 16:39:34 +0100
-Message-ID: <20210503153938.14109-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/5] x86/cpuid: Fix handling of xsave dynamic leaves
+Date: Mon, 3 May 2021 16:39:38 +0100
+Message-ID: <20210503153938.14109-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210503153938.14109-1-andrew.cooper3@citrix.com>
 References: <20210503153938.14109-1-andrew.cooper3@citrix.com>
@@ -90,15 +92,16 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-XSETBV is an expensive instruction as, amongst other things, it involves
-reconfiguring the instruction decode at the frontend of the pipeline.
+If max leaf is greater than 0xd but xsave not available to the guest, then the
+current XSAVE size should not be filled in.  This is a latent bug for now as
+the guest max leaf is 0xd, but will become problematic in the future.
 
-We have several paths which reconfigure %xcr0 in quick succession (the context
-switch path has 5, including the fpu save/restore helpers), and only a single
-caller takes any care to try to skip redundant writes.
+The comment concerning XSS state is wrong.  VT-x doesn't manage host/guest
+state automatically, but there is provision for "host only" bits to be set, so
+the implications are still accurate.
 
-Update set_xcr0() to perform amortisation automatically, and simplify the
-__context_switch() path as a consequence.
+Introduce {xstate,hw}_compressed_size() helpers to mirror the uncompressed
+ones.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -106,52 +109,119 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/domain.c |  4 +---
- xen/arch/x86/xstate.c | 15 +++++++++++----
- 2 files changed, 12 insertions(+), 7 deletions(-)
+ xen/arch/x86/cpuid.c         | 23 +++++++--------------
+ xen/arch/x86/xstate.c        | 49 ++++++++++++++++++++++++++++++++++++++++++++
+ xen/include/asm-x86/xstate.h |  1 +
+ 3 files changed, 57 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 4dc27f798e..50a27197b5 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1977,9 +1977,7 @@ static void __context_switch(void)
-         memcpy(stack_regs, &n->arch.user_regs, CTXT_SWITCH_STACK_BYTES);
-         if ( cpu_has_xsave )
+diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
+index c7f8388e5d..92745aa63f 100644
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -1041,24 +1041,15 @@ void guest_cpuid(const struct vcpu *v, uint32_t leaf,
+     case XSTATE_CPUID:
+         switch ( subleaf )
          {
--            u64 xcr0 = n->arch.xcr0 ?: XSTATE_FP_SSE;
++        case 0:
++            if ( p->basic.xsave )
++                res->b = xstate_uncompressed_size(v->arch.xcr0);
++            break;
++
+         case 1:
+             if ( p->xstate.xsaves )
+-            {
+-                /*
+-                 * TODO: Figure out what to do for XSS state.  VT-x manages
+-                 * host vs guest MSR_XSS automatically, so as soon as we start
+-                 * supporting any XSS states, the wrong XSS will be in
+-                 * context.
+-                 */
+-                BUILD_BUG_ON(XSTATE_XSAVES_ONLY != 0);
 -
--            if ( xcr0 != get_xcr0() && !set_xcr0(xcr0) )
-+            if ( !set_xcr0(n->arch.xcr0 ?: XSTATE_FP_SSE) )
-                 BUG();
- 
-             if ( cpu_has_xsaves && is_hvm_vcpu(n) )
+-                /*
+-                 * Read CPUID[0xD,0/1].EBX from hardware.  They vary with
+-                 * enabled XSTATE, and appropraite XCR0|XSS are in context.
+-                 */
+-        case 0:
+-                res->b = cpuid_count_ebx(leaf, subleaf);
+-            }
++                res->b = xstate_compressed_size(v->arch.xcr0 |
++                                                v->arch.msrs->xss.raw);
+             break;
+         }
+         break;
 diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index 3794d9a5a5..f82dae8053 100644
+index d4c01da574..03489f0cf4 100644
 --- a/xen/arch/x86/xstate.c
 +++ b/xen/arch/x86/xstate.c
-@@ -55,11 +55,18 @@ static inline bool xsetbv(u32 index, u64 xfeatures)
-     return lo != 0;
+@@ -602,6 +602,55 @@ unsigned int xstate_uncompressed_size(uint64_t xcr0)
+     return size;
  }
  
--bool set_xcr0(u64 xfeatures)
-+bool set_xcr0(u64 val)
- {
--    if ( !xsetbv(XCR_XFEATURE_ENABLED_MASK, xfeatures) )
--        return false;
--    this_cpu(xcr0) = xfeatures;
-+    uint64_t *this_xcr0 = &this_cpu(xcr0);
++static unsigned int hw_compressed_size(uint64_t xstates)
++{
++    uint64_t curr_xcr0 = get_xcr0(), curr_xss = get_msr_xss();
++    unsigned int size;
++    bool ok;
 +
-+    if ( *this_xcr0 != val )
++    ok = set_xcr0(xstates & ~XSTATE_XSAVES_ONLY);
++    ASSERT(ok);
++    set_msr_xss(xstates & XSTATE_XSAVES_ONLY);
++
++    size = cpuid_count_ebx(XSTATE_CPUID, 1);
++
++    ok = set_xcr0(curr_xcr0);
++    ASSERT(ok);
++    set_msr_xss(curr_xss);
++
++    return size;
++}
++
++unsigned int xstate_compressed_size(uint64_t xstates)
++{
++    unsigned int i, size = XSTATE_AREA_MIN_SIZE;
++
++    xstates &= ~XSTATE_FP_SSE;
++    for_each_set_bit ( i, &xstates, 63 )
 +    {
-+        if ( !xsetbv(XCR_XFEATURE_ENABLED_MASK, val) )
-+            return false;
++        if ( test_bit(i, &xstate_align) )
++            size = ROUNDUP(size, 64);
 +
-+        *this_xcr0 = val;
++        size += xstate_sizes[i];
 +    }
 +
-     return true;
- }
++    /* In debug builds, cross-check our calculation with hardware. */
++    if ( IS_ENABLED(CONFIG_DEBUG) )
++    {
++        unsigned int hwsize;
++
++        xstates |= XSTATE_FP_SSE;
++        hwsize = hw_compressed_size(xstates);
++
++        if ( size != hwsize )
++            printk_once(XENLOG_ERR "%s(%#"PRIx64") size %#x != hwsize %#x\n",
++                        __func__, xstates, size, hwsize);
++        size = hwsize;
++    }
++
++    return size;
++}
++
+ /* Collect the information of processor's extended state */
+ void xstate_init(struct cpuinfo_x86 *c)
+ {
+diff --git a/xen/include/asm-x86/xstate.h b/xen/include/asm-x86/xstate.h
+index 02d6f171b8..ecf7bbc5cd 100644
+--- a/xen/include/asm-x86/xstate.h
++++ b/xen/include/asm-x86/xstate.h
+@@ -108,6 +108,7 @@ void xstate_free_save_area(struct vcpu *v);
+ int xstate_alloc_save_area(struct vcpu *v);
+ void xstate_init(struct cpuinfo_x86 *c);
+ unsigned int xstate_uncompressed_size(uint64_t xcr0);
++unsigned int xstate_compressed_size(uint64_t states);
  
+ static inline uint64_t xgetbv(unsigned int index)
+ {
 -- 
 2.11.0
 
