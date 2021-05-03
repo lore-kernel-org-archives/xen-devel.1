@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A81CFC43460
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3007EC433ED
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:35:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 661556115C
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:29:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 661556115C
+	by mail.kernel.org (Postfix) with ESMTPS id D122B6135F
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:35:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D122B6135F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121825.229814 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121844.229838 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldeFh-0006Np-JN; Mon, 03 May 2021 19:29:09 +0000
+	id 1ldeLR-0007Wv-Jb; Mon, 03 May 2021 19:35:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121825.229814; Mon, 03 May 2021 19:29:09 +0000
+Received: by outflank-mailman (output) from mailman id 121844.229838; Mon, 03 May 2021 19:35:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldeFh-0006Na-FI; Mon, 03 May 2021 19:29:09 +0000
-Received: by outflank-mailman (input) for mailman id 121825;
- Mon, 03 May 2021 19:29:07 +0000
+	id 1ldeLR-0007Wo-GK; Mon, 03 May 2021 19:35:05 +0000
+Received: by outflank-mailman (input) for mailman id 121844;
+ Mon, 03 May 2021 19:35:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wh1Q=J6=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1ldeFf-0005i5-Jn
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:29:07 +0000
-Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
+ id 1ldeFu-0005i5-KF
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:29:22 +0000
+Received: from mail-qk1-x729.google.com (unknown [2607:f8b0:4864:20::729])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e4ed6410-658a-4a0f-b3e0-88195cd685b6;
- Mon, 03 May 2021 19:28:49 +0000 (UTC)
-Received: by mail-qk1-x736.google.com with SMTP id x8so6283459qkl.2
- for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:49 -0700 (PDT)
+ id 67c84692-857f-406e-b7f5-ce41fbc9cc96;
+ Mon, 03 May 2021 19:28:54 +0000 (UTC)
+Received: by mail-qk1-x729.google.com with SMTP id q127so6277958qkb.1
+ for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:54 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:8710:5560:a711:776f])
  by smtp.gmail.com with ESMTPSA id
- g18sm9225209qke.21.2021.05.03.12.28.47
+ g18sm9225209qke.21.2021.05.03.12.28.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 May 2021 12:28:48 -0700 (PDT)
+ Mon, 03 May 2021 12:28:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,145 +56,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4ed6410-658a-4a0f-b3e0-88195cd685b6
+X-Inumbo-ID: 67c84692-857f-406e-b7f5-ce41fbc9cc96
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=gt85a9/jfQ7Ok17ZWY+qwgah9qHuJa+K9OUnjKLsOOc=;
-        b=m22f79isZGNQAsYaUIL3/HfQVDpVWzxexpINlOO7hIcVSY8G1Z3YESSEokpdYnOQ6L
-         ufFHbXjfy5TsQpgDkum9bIdbZ54wXP5ix2KuyWgd8ab1SeWYd/V+rCEPIlO9P864Mfjc
-         gnw0Az+nem/YdygO/CAen/ToQa9H/d4S/1/F/oNLNqc2sA7COQOT0ay6JP/cujrcqiRA
-         FDh16mVHQDxquhIGGmKtg8XpvN1SwdPqcwEy903e1B3LaNyrBR42sXw1uqqg53o1kFdH
-         TP1+7ipZeIxSMpU6CWn5KMPEfLkbeyArvRhuvoaad0BGn5XwHju6x+Gn6xZc2KG89We1
-         qGHQ==
+        bh=W0dWQDpwEXoVAFtJGqplAcn8R3hLDan97osHedktuzA=;
+        b=jeAjy/+B/nRqPMGmVF+3m+72zaVTjLaZvFYZSePfzwkhZoOAiPKLpoeYT4Y7f8KNru
+         IN8zHh5ajNrJHuLR8D9RfEz7Rb9Qv3hrAlwuXlfu9kj4iM6om55UeBgPlcPbehR7btBj
+         FEoF+XgPnyMAhDwL7Cwx+JHYcj8th2ikK4EDPnsJI3y0qfBkm7oyOyAJ6Jh5zBsaML+1
+         avV3KbPga57bSfIcmSu0a5y9BwGkLtwzZN1NgW3iZXKBPjABpprnwM6w3DCTewcQgI+U
+         GnwxM+wsrY2jsnTmSfGAVi4ngq5nYKDqoR6sHQ7dRVecGh5wtL2TsnbeMBiksn4MOGPP
+         SNiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=gt85a9/jfQ7Ok17ZWY+qwgah9qHuJa+K9OUnjKLsOOc=;
-        b=Nfaf4FAs7rID2AMuKS7VPONwLlBKH6e6275urV1JW44vt0ZKvG2Fuld0tzbaTEHzqO
-         X59gT2vdKOzjN7OHhckNwzLBRxOpCqVures7MYYaza0Ae5DUAG5bvhXqJe8gggTag+YR
-         cfwG3awdan5/gJbktCt33sxpbzUCRtvSNqAl8GUSn9Angdd1Lk/hmdR4eGIKQQ/6LDdD
-         9qTkmAhAr/m+kksUFi535Zgp8eSEXCrVWfs2WW17xYOjRpUmZa8vnFx2242HN/kpl1RS
-         8sIEFpX16d6ZN41FMYEXk9hxLniJhuviwuTnfzz3KuEZjkp0aHT+Us5vPxlS8MrkOty+
-         5Q8g==
-X-Gm-Message-State: AOAM533Aqo4MHR1bIo6VI9huVOdiUIG3oWS5egRdlvMVINUcMJmVeIyX
-	wdV4ykKss0j9Zq80g08bDQpBh4pC7HY=
-X-Google-Smtp-Source: ABdhPJz/03LMfmKp0x6zG8POk2wzTrZRWriHbDwMe0oz2I8oEm/pX7v3mJQspxQxqeARe/iXRkXpjg==
-X-Received: by 2002:a37:a683:: with SMTP id p125mr14770669qke.332.1620070128657;
-        Mon, 03 May 2021 12:28:48 -0700 (PDT)
+        bh=W0dWQDpwEXoVAFtJGqplAcn8R3hLDan97osHedktuzA=;
+        b=W7vmTRBLEq59hle7farg74MjR34dQLgcLsX+182+L13IFRoEzKmE9DTLgugww0XSqb
+         Ll6jyNQRf5jZCqgYbpa+xK417IF63vSQeDdg/JPyWSehBJsHariUAiudZTJDoPJgrPQ2
+         PIZxdTiqP7QfNV1uDdw9zU1TtlvT1llQxOWyVKbZm1C0J5WocLO8GJW3U0JJUvOosOJH
+         U01YwjImPKVmU989ibfgNvVqWVSvf//sLBfIOpPfXw7t/QTjLDS3OmPIPle/ZKOLpBwO
+         mIA09iPUSNMzgAyG1S64Jzehl7tAVRn5yWwM1AOrqjMP5IhTiuKXVPLWNdz4rvlb+Aht
+         Cqqg==
+X-Gm-Message-State: AOAM530VrBtfAghkJylPN6hZSN781xo6+KSsw0IULQ20PgrwL32TqkM+
+	AZSovIfpL4kPI4sTiYow2Y4W1+P8TLI=
+X-Google-Smtp-Source: ABdhPJxRgtng+6wCpftZbN46/DsbYWTqBEYMoYU4Bv7uuJjFVyruFKXM/P3Mof7Bhs5NjIskLYxNGQ==
+X-Received: by 2002:ae9:c014:: with SMTP id u20mr21902294qkk.387.1620070133953;
+        Mon, 03 May 2021 12:28:53 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH 08/13] xenpm: Print HWP parameters
-Date: Mon,  3 May 2021 15:28:05 -0400
-Message-Id: <20210503192810.36084-9-jandryuk@gmail.com>
+Subject: [PATCH 10/13] libxc: Add xc_set_cpufreq_hwp
+Date: Mon,  3 May 2021 15:28:07 -0400
+Message-Id: <20210503192810.36084-11-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210503192810.36084-1-jandryuk@gmail.com>
 References: <20210503192810.36084-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Print HWP-specific parameters.  Some are always present, but others
-depend on hardware support.
+Add xc_set_cpufreq_hwp to allow calling xen_systctl_pm_op
+SET_CPUFREQ_HWP.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
----
- tools/misc/xenpm.c | 71 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 71 insertions(+)
 
-diff --git a/tools/misc/xenpm.c b/tools/misc/xenpm.c
-index 562bf939f9..9588dac991 100644
---- a/tools/misc/xenpm.c
-+++ b/tools/misc/xenpm.c
-@@ -708,6 +708,43 @@ void start_gather_func(int argc, char *argv[])
-     pause();
+---
+Am I allowed to do set_hwp = *set_hwp struct assignment?
+---
+ tools/include/xenctrl.h |  4 ++++
+ tools/libs/ctrl/xc_pm.c | 18 ++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+
+diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
+index 82dfa1613a..0fd1e756cb 100644
+--- a/tools/include/xenctrl.h
++++ b/tools/include/xenctrl.h
+@@ -1994,11 +1994,15 @@ struct xc_get_cpufreq_para {
+     int32_t turbo_enabled;
+ };
+ 
++typedef struct xen_set_hwp_para xc_set_hwp_para_t;
++
+ int xc_get_cpufreq_para(xc_interface *xch, int cpuid,
+                         struct xc_get_cpufreq_para *user_para);
+ int xc_set_cpufreq_gov(xc_interface *xch, int cpuid, char *govname);
+ int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
+                         int ctrl_type, int ctrl_value);
++int xc_set_cpufreq_hwp(xc_interface *xch, int cpuid,
++                       xc_set_hwp_para_t *set_hwp);
+ int xc_get_cpufreq_avgfreq(xc_interface *xch, int cpuid, int *avg_freq);
+ 
+ int xc_set_sched_opt_smt(xc_interface *xch, uint32_t value);
+diff --git a/tools/libs/ctrl/xc_pm.c b/tools/libs/ctrl/xc_pm.c
+index 76d7eb7f26..407a24d2aa 100644
+--- a/tools/libs/ctrl/xc_pm.c
++++ b/tools/libs/ctrl/xc_pm.c
+@@ -330,6 +330,24 @@ int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
+     return xc_sysctl(xch, &sysctl);
  }
  
-+static void calculate_hwp_activity_window(const xc_hwp_para_t *hwp,
-+                                          unsigned int *activity_window,
-+                                          const char **units)
++int xc_set_cpufreq_hwp(xc_interface *xch, int cpuid,
++                       xc_set_hwp_para_t *set_hwp)
 +{
-+    unsigned int mantissa = hwp->activity_window & 0x7f;
-+    unsigned int exponent = ( hwp->activity_window >> 7 ) & 0x7;
-+    unsigned int multiplier = 1;
++    DECLARE_SYSCTL;
 +
-+    if ( hwp->activity_window == 0 )
++    if ( !xch )
 +    {
-+        *units = "hardware selected";
-+        *activity_window = 0;
-+
-+        return;
++        errno = EINVAL;
++        return -1;
 +    }
++    sysctl.cmd = XEN_SYSCTL_pm_op;
++    sysctl.u.pm_op.cmd = SET_CPUFREQ_HWP;
++    sysctl.u.pm_op.cpuid = cpuid;
++    sysctl.u.pm_op.u.set_hwp = *set_hwp;
 +
-+    if ( exponent >= 6 )
-+    {
-+        *units = "s";
-+        exponent -= 6;
-+    }
-+    else if ( exponent >= 3 )
-+    {
-+        *units = "ms";
-+        exponent -= 3;
-+    }
-+    else
-+    {
-+        *units = "us";
-+    }
-+
-+    for ( unsigned int i = 0; i < exponent; i++ )
-+        multiplier *= 10;
-+
-+    *activity_window = mantissa * multiplier;
++    return xc_sysctl(xch, &sysctl);
 +}
 +
- /* print out parameters about cpu frequency */
- static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
+ int xc_get_cpufreq_avgfreq(xc_interface *xch, int cpuid, int *avg_freq)
  {
-@@ -777,6 +814,40 @@ static void print_cpufreq_para(int cpuid, struct xc_get_cpufreq_para *p_cpufreq)
-                p_cpufreq->scaling_cur_freq);
-     }
- 
-+    if ( strcmp(p_cpufreq->scaling_governor, "hwp-internal") == 0 )
-+    {
-+        const xc_hwp_para_t *hwp = &p_cpufreq->u.hwp_para;
-+
-+        printf("hwp variables        :\n");
-+        printf("  hardware limits    : lowest [%u] most_efficient [%u]\n",
-+               hwp->hw_lowest, hwp->hw_most_efficient);
-+        printf("  hardware limits    : guaranteed [%u] highest [%u]\n",
-+               hwp->hw_guaranteed, hwp->hw_highest);
-+        printf("  configured limits  : min [%u] max [%u] energy_perf [%u]\n",
-+               hwp->minimum, hwp->maximum, hwp->energy_perf);
-+
-+        if ( hwp->hw_feature & XEN_SYSCTL_HWP_FEAT_ENERGY_PERF )
-+        {
-+            printf("  configured limits  : energy_perf [%u%s]\n",
-+                   hwp->energy_perf,
-+                   hwp->energy_perf ? "" : " hw autonomous");
-+        }
-+
-+        if ( hwp->hw_feature & XEN_SYSCTL_HWP_FEAT_ACT_WINDOW )
-+        {
-+            unsigned int activity_window;
-+            const char *units;
-+
-+            calculate_hwp_activity_window(hwp, &activity_window, &units);
-+            printf("  configured limits  : activity_window [%u %s]\n",
-+                   activity_window, units);
-+        }
-+
-+        printf("  configured limits  : desired [%u%s]\n",
-+               hwp->desired,
-+               hwp->desired ? "" : " hw autonomous");
-+    }
-+
-     printf("turbo mode           : %s\n",
-            p_cpufreq->turbo_enabled ? "enabled" : "disabled or n/a");
-     printf("\n");
+     int ret = 0;
 -- 
 2.30.2
 
