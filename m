@@ -2,42 +2,41 @@ Return-Path: <SRS0=qvPz=J6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13676C433B4
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 16:13:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05FC5C43462
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 16:39:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D961611AB
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 16:13:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D961611AB
+	by mail.kernel.org (Postfix) with ESMTPS id 7D69A613C1
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 16:39:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D69A613C1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121754.229649 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121763.229661 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldbCJ-00062Y-8Y; Mon, 03 May 2021 16:13:27 +0000
+	id 1ldbbQ-0007sB-Hx; Mon, 03 May 2021 16:39:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121754.229649; Mon, 03 May 2021 16:13:27 +0000
+Received: by outflank-mailman (output) from mailman id 121763.229661; Mon, 03 May 2021 16:39:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldbCJ-00062R-5W; Mon, 03 May 2021 16:13:27 +0000
-Received: by outflank-mailman (input) for mailman id 121754;
- Mon, 03 May 2021 16:13:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ldbbQ-0007s4-EP; Mon, 03 May 2021 16:39:24 +0000
+Received: by outflank-mailman (input) for mailman id 121763;
+ Mon, 03 May 2021 16:39:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gWh3=J6=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ldbCH-000624-9l
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 16:13:25 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b024c3e4-3e74-4bda-84f1-4a9e5e505133;
- Mon, 03 May 2021 16:13:24 +0000 (UTC)
+ <SRS0=iacE=J6=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1ldbbP-0007rz-G8
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 16:39:23 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0f09e520-f509-43f3-97ff-6d09ba35cfd3;
+ Mon, 03 May 2021 16:39:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,164 +48,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b024c3e4-3e74-4bda-84f1-4a9e5e505133
+X-Inumbo-ID: 0f09e520-f509-43f3-97ff-6d09ba35cfd3
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620058404;
-  h=to:cc:references:from:subject:message-id:date:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=jH4UhUCJPHw7dk6mHkWcv0bMFFryveuWTTTIp1cX3c8=;
-  b=ZU9A9Fh+PPCawdMUvNB6LUBDjMVybTJZlSZ9eB1frzZDuDIT2Yu6KMKl
-   SoBk/e0vW9B87g02wCkLrng1HZ9UbKuexre6isF9lPzP1DqXlfXnCvELs
-   R9DY2S876ZBCS0+ye47oxokWlnHIXcED9bTHKaZThz6/jzgm3ALWBTyk9
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: Cj5dIroF/np1ujJQtIqMkcFXkSgdBP+xqZ4fcw5eqN0z+4wCECv18UO9l5BG4nAwAAnSYhw/nl
- l+gsdRMxmyHqT3+eDh1awDD6lcanZP/GhhJTWQiQceGsIWerN6sINkcUm8FV8RVBdxey4seFH3
- PD8nQifflTmGXMHfKd4o0wSNbtoMTDF5dAm7rVIrPPFtrwVRIZh20DbHe6QIZPKNaGwJrFGqal
- BKroFSX3g9NebDG/kdvLmPJj+aTkOeV2zHlt59fCga3+xwd43w3FylrYrllVe9Clfj+52R1qEY
- YL8=
+  d=citrix.com; s=securemail; t=1620059962;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=6o4/YU971fkkFNF5WnOgbS3fC1pIW6vMLXh4yU3wl30=;
+  b=h5u6PS6JRh9A1Hlsj2tW4TBCe67FG8ATHJulcdfDsP7Q1o6Q9ZwdG1Bd
+   oi2pSQwNP1AMiMMRNAW0vzUzKYfCD1crrH2KHjrT7zsfwjpjl7xew78+z
+   je4hYPURk6ozQ7zS3BWTFySBSORQW3yNKcmBnzoBBp10XWFxFyQypf995
+   w=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: S8g/NRkGAjUvdslJX2++TghVwjrjaCleEyLtjgvz3rpvCfUDaqs4qwnfmygg8MafejhuokkQW5
+ OLvkXpg5YI+ceJo1i4emoDz2K1Daowqzv4oCIkRnUjiBcFRvIQnC/9Q48/GfDSl/weJY4M080A
+ kUXRm8W4G8DNfwtQ4J5JQzrrWjLIiyX3KsJtV5JEHYuL0jWcLo4ayGET3HfPJONzLzQaViyEAD
+ haSrXuXYlFYLMcK2d2QEFOqDSApirUv/yjc0CFEzdEffGO3uKea/AUUs3DpWMXEiqeTdQm1Ft/
+ mI4=
 X-SBRS: 5.1
-X-MesageID: 43335974
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 44470930
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:hBFHQak+GHJsWy0SLwKN3KaWzuHpDfPXimdD5ilNYBxZY6Wkvu
- izgfUW0gL1gj4NWHcm3euNIrWEXGm0z/NIyKMWOqqvWxSjhXuwIOhZnOzf6hDDOwm7zO5S0q
- 98b7NzYeebMXFWhdv3iTPWL/8O29+CmZrHuc7/yDNXQRhue+Vc6W5Ce2WmO2lXYCUDOpYjDp
- qb4aN81l6dUFAadN6yCHVAf8Wrnb32vanraxIHGBIrgTPm5V+VwYX3HBSC0hAVXykn+8ZBzU
- H/nxHk/aLmivmny3bnvFP71Yhcm9fq17J4damxo/USQw+Mti+YIL5PdpfHlzAzreGp5j8R4a
- XxiiZlBetfwTf8emm0pDHkxgXv1i0/gkWStmOwsD/YjuHSAB48FspdlaJVGyGplXYIjZVH/4
- 9gm0KfqpZNAhvLkE3Glqn1fiAvrGWYiz4Gs4co/hpieLpbUpB9h8gj2XkQN5E6ECfz+OkcYZ
- NTJfCZ3tl6WxendXzD11MfueCEbzAIMTqtZFMNgcCR2yg+pgEF82IogPYSmXoN7/sGOuF5zt
- WBNqxpkYdHRdMNYZR8A/8cQdC2Bnale2O2DF6v
+IronPort-HdrOrdr: A9a23:LDPpraNMCZG3hMBcT3Hw55DYdL4zR+YMi2QD/3taDTRIb82VkN
+ 2vlvwH1RnyzA0cQm0khMroAsa9aFvm39pQ7ZMKNbmvGDPntmyhMZ144eLZrwHIMxbVstRQ3a
+ IIScVDIfXtEFl3itv76gGkE9AmhOKK6rysmP229RZQZCtBApsQiDtRIACdD0FwWU1qBYAhEo
+ Cd+8pAoFObCA4qR+68AWQIWPWGmsbCk4jobQVDKxks7gSPij3A0s+GLzGz2BACXzRThYoz6G
+ StqX2D2oyPkdGejiXd2Wja8ohMlLLapOdrKcSQhqEuW1fRoymyYoAJYczmgBkUp6WV5E8ugJ
+ 3wpX4bTrhOwlfwWk3wnhf3wQnn118Vmg/f4HuVm2Hqr8C8ZB9SMbs5uatjfhHU61UtsbhHuc
+ ohtQLp1OskMTr6kCvw/NTOXR1x/3DE2UYKquIPk2dZFbIXdb45l/1vwGpuDJwCECjmgbpXdt
+ VGMce03oczTXqqK1rdvmVp3eW2WGUyEhqsUiE5y7Ko+gkTs3Zjw0QCwssD2l8G6ZImUpFBo9
+ /JK6Jyidh1P4MrRJM4IN1Ebdq8C2TLTx6JGGWOIW7/HKVCH37WsZb47Jg8+enCQu1G8LIC3L
+ D6FH9Iv287fEzjTeeU2odQzxzLSGKhGRzw18B3/fFCy/3BbYuuFRfGZEElksOmrflaKNbcQe
+ yPNJVfBOKmBXfyGLxOwxb1V/BpWDgjefxQnux+d0OFo8rNJIGvnPfcauzvKL3kFithdXj4Bl
+ cFQTjvNORN5k2mQRbD8VrsckKoXna60YN7EaDc8eRW4pMKLJdwvg8cjkn8xszjE0wGjoUGOG
+ 9FZJ/3mKKyome7uUzS6X9yBxZbBkFJpJHpU3ZAox42I1r5GIxz/+m3SCR35j+qNxV/R8TZHE
+ p0vFJs45+6KJSW2GQEB8+4NHmZy18evmiDQZtZuqDr37aqRroISrIdHIBhHwTCEBJ43Sxwrn
+ 1YVQMCTkjDUhX0iauki5QQLPrFd8Z1hTqqJcI8kwOdiWys4eUUAlcLVT+nVsCaxSw0QSBPu1
+ F3+6gDxIablS2XMms5iuQgOFhqYGCaaYg2SzitVcFxoPTGaQtwRWCFiXi/hwsocmTnzUkUm1
+ fsNDaZY/3NH1pbtE1Jy6qCyiIGSkytO2ZLLlxqu4x0EmrL/kx+1uKGfYKf+WqcYFlq+JBXDB
+ j1JR8pZi9+zdG+0xCY3AuYHXI935M0I6j2F7I4aYze3XurNayFnawLBOVv4Z5gLdzi29V7F9
+ 63SkuwFnfVGukp0wuaqjIZIyFysmAjiu6t9xv/7mS0tURPd8b6ERBDffU8LN6d5WS/GKrN/5
+ V9kN4vvey/dk/2ccWLzKnLbzhFbjPfyFTGO90AmNRxh+YVsrA2IrzwFR3v/1tD1A8lLMj1mF
+ gFKZ4LqIzpC8tKRYgqZyld/lAVj9yBI0sgjxzuDoYFDCQQpk6eG+nM3qHBprUuCHCQvQfcOV
+ GQ9CtG4vfONhHzooIyOuYVIW5MblI752kn1OSed5fIAAHCTZAIwHOKdlu8eqRaUq6LBPE5qQ
+ t7+ciBm6uyezDj0A7d+Rt9LaQmyRfrfeqCRCaNE/VP6dq0JBClhbar+te6iHPPcgSAAn5ozL
+ FtRAg3dcRMij4rkY0x3GyTc8XM0z0YumobxypmmF7r0pWh+0HBEyh9QFTkvqk=
 X-IronPort-AV: E=Sophos;i="5.82,270,1613451600"; 
-   d="scan'208";a="43335974"
+   d="scan'208";a="44470930"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eb8ipjnEExQEPOyth807koJLyArm6peG/COPSaZYcHuiRRFW6oCDK+TSoyBpmXxqZyRlTEi+gzRnGxgkVEAVFMeJEO+fx40Sc4PpsiBK1qP7FmlfjN9I+DG0HAAhA6xrdbPPBM+yPCb99zpxaWuR1QgoFjw9dzlFqh/d9Vsluops7WTK6cGKQk+Fc/PxwnnvJgMFKz0KT6O3FyIn1ULzHne8hS15fiAxzhREiETWPERBfk7WlxR3slQnBM249B2nKbtRj2iEDt8V+fw4/pr2T2wF1CEwt9m/cgSIYj34I7eYXOazPJlLVWo4zIOUgHT86LJAjBCB1Yk9q0LMxrm5Rg==
+ b=dkgsCsqSmrNmqC/DjJxVkHL3tHze3iiVg6bUuXx3+7X+hViTvZYXtFrKATOCw69fODooBqSatPGKntOzAE2gYBIHYHskDuttgMsyqBJgUza2UnNfkN5KI6n4RclULGnTtLW0Zm3G7CpbqM9KEX1rSEApqzLy1YI5w9KQYHRD9ym34cN2pXWykeFy+g6s8OwmQXTdrVDyqmq+l1MerEBDmYniAlrQj2eaADgltO28oP5tFftT5aIpN40zNFoi0e9tRt58uoahvPUaflHtMU8lN9ZDAf+hQJ83YGSbyI2D/HDykJOCRpXnOaqmiQGt3oP66pPD6VU2/Nmqh7a+pCYuZQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jH4UhUCJPHw7dk6mHkWcv0bMFFryveuWTTTIp1cX3c8=;
- b=cWr8R7kAQb3QyjR/cB4APLNQmyI+kqjeY9+hFT7RaunyVxmQiw4kUGggHrr4XqfT64URW7jtchzja6SOQ8qavFR8v0JmviL2TBdTitsDwubxG0M8QRV3E8srki9zi/EEIOrb97WGMS5LiDhBihjb7JxlgBLgwG1j7hpv8SE6ZAyaihtnBlfEMLRoz3Nw+/LpUdwrxM7M9pLCsSTm2Wzxm2MTR4t7W7b+nB1Ha6eZxKj0Jq9ElGa5C2ncNuAkg6jFdHt3ebQ9YnXytALw1NmPzRgwvYrPDPk33v+CtGjChHokuTz3hsu0jx12rH8snaeWkfTlpu7HuYQQuuS701HMkg==
+ bh=Y2WKKilRHeQ1aKc85MkKclO66P1DzP9xS2Lh9EV+1AQ=;
+ b=ioxlohnLrW9SV9sG0q7bXugz5noIJGDt4LMPQwMXRBgC1dipyvDNpSR1zM/CKfPs2nq/ldHkWRexKYMaIh4JGykFu99ljQeC5AQNvB+kMqGaOTJoAemmUlNP6TkA1LZA89ud9sRoDN0/UI3ipn2YfcSHtR+P4zS2lmfN6wGNiJP7c4UpJvdv+6zqVRdvnpHTwsSaNh2wwmA7bKPjjTHND3Mob9MkEQ6DT08qDacxdjqgD+C2od3ETPv1Zn0TXmuQWQ4dNWQ7lpTyo8ZnpQkLd8nBTpL3aAJPgBNFkaOxw8bd6TT7MvYDyD04DJ4QcKh3V1VqQ6zWnb6ZEKzCGrSGvA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jH4UhUCJPHw7dk6mHkWcv0bMFFryveuWTTTIp1cX3c8=;
- b=MyYIPBkg61qwLxcq8nRp+lerZwLJPvAIyAK3YFRxnBhTuBE1n4HY9yM0NTuotvLWzo/3HMFNCypDZX0uy5z+Y51/Awj+ZJdF0WUmWQ9vkZBbRd8u/nsgRJssRR/5Tsc2WDefg8m27EoBFqKIk+5xMsENSibRv6uJfu71KY++rps=
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+ bh=Y2WKKilRHeQ1aKc85MkKclO66P1DzP9xS2Lh9EV+1AQ=;
+ b=g0+ujk7K3IYrs8FVpRRaZWwavoVuTwEG9G9cWvD2xw3B9hsZcRq68neLpBUd7fRryDroGTGV3KA2ROufPA6VIIQ83qJBFS9QA9AnFOBdaYhcIvEwUOpaY9CnfRe2nBA/jBm2w1Q+atmfP98mXMkPiEJM6x9mZq8vfxq62w13Dr8=
+Date: Mon, 3 May 2021 18:39:12 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v3 01/22] mm: introduce xvmalloc() et al and use for
+ grant table allocations
+Message-ID: <YJAnMAmob1Y5myp4@Air-de-Roger>
 References: <322de6db-e01f-0b57-5777-5d94a13c441a@suse.com>
- <434705ef-1c34-581d-b956-2322b4413232@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 05/22] x86/xstate: drop xstate_offsets[] and
- xstate_sizes[]
-Message-ID: <f3a9b372-c927-70e3-a2ba-fef2bb2c7d7a@citrix.com>
-Date: Mon, 3 May 2021 17:10:28 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-In-Reply-To: <434705ef-1c34-581d-b956-2322b4413232@suse.com>
+ <69778de6-3b94-64d1-99d9-1a0fcfa503fd@suse.com>
+ <YI/e9wyOpsVDkFQi@Air-de-Roger>
+ <aeb6aa8e-7c90-be22-1888-21b7b178e1d1@suse.com>
+ <YJAOm+rmKb5gbYJq@Air-de-Roger>
+ <340fed73-973c-feba-074d-8bfa6eeae6d6@suse.com>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-GB
-X-ClientProxiedBy: LO2P265CA0252.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:8a::24) To BYAPR03MB3623.namprd03.prod.outlook.com
- (2603:10b6:a02:aa::12)
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <340fed73-973c-feba-074d-8bfa6eeae6d6@suse.com>
+X-ClientProxiedBy: MR2P264CA0046.FRAP264.PROD.OUTLOOK.COM (2603:10a6:500::34)
+ To DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a705999c-e93f-4b96-ebaf-08d90e4dfc59
-X-MS-TrafficTypeDiagnostic: BYAPR03MB4358:
+X-MS-Office365-Filtering-Correlation-Id: cf06cd30-c278-4a2f-900f-08d90e51feee
+X-MS-TrafficTypeDiagnostic: DM5PR03MB2923:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BYAPR03MB4358A73F550131C16DD999CBBA5B9@BYAPR03MB4358.namprd03.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <DM5PR03MB29234CD7AFE3F38A4F3968F48F5B9@DM5PR03MB2923.namprd03.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: h3runkRA/sxQ50gYrEXoGrEeshJ6Rzfa8KvKPZ/O+QqX+RhNWegBvkfg1fnkkcmOIADtJmvsdG44MHeU3eSnXXtUyRYbiP0vcRYVY1r2LVnJjKHSXKOfWmU3fmzMLOy89DVuntZ5XSlVa06gUDPj9gnedHTfaW4SnJF0SDHVDlKyjQlHfXCPJI/tHckMsAGYvDzwwfUlkR8IelaOfVMu6cXS7KCkN4emwR0UuPhPjxvbWdYWToxL/6tdcTm9htvMXrcoI/ThQcrU3/NX6y9+bFJC1uoLARRckr0wAjvBhB80d+u1bzWxAilse3jVGfZPfwCr59Z3uehCF2I9FsXQHMs+wCq1VJzi3gTJ93OusekHxdLVDdHZ6JGG6NCbYTRva8mrX8qkRR4HNnnB55TV5+lFQO2V50HeaFELde3pW10tTh2s+wIIXM4rPdTojV+EOWRiv7qQnY/aCn33KHrDZBtnvdZxBd8WA1s3dUPyb9sgn8NBd086RHFhGIvsQ7ylGiN65DNUeXUq4icQsTe46o41AKZf/y+REAyIdTvZ/s5dfqQKxnMC0xdTKoLpDZ7GxHZ3olvHGy8RRvxsLfPsnUXHzY+QjOzXcRa6bMgpnvx74I8FLlKgY2zzlVBOzLlzjHwfCmiUxjsXcVcu7EF7CF1JI6eDBH+tAtHP7ArGPmEP2WHHYYELCnLglVhxQH3s
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(376002)(39860400002)(346002)(136003)(366004)(8676002)(83380400001)(4326008)(53546011)(107886003)(86362001)(36756003)(8936002)(478600001)(2906002)(110136005)(956004)(186003)(2616005)(16526019)(26005)(6486002)(54906003)(31696002)(66556008)(6666004)(31686004)(16576012)(316002)(38100700002)(66946007)(5660300002)(66476007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?WTd2elN4NEEraDFnU09DSEk0S1V6d0xYTTRxTzc3dXlSWEJzM28wcDZxR2dl?=
- =?utf-8?B?bnhZREoxaU53bmMxMFBYMFdEWjNwOVViTWowVnppc21qTzFTbWxJZm8wUEg0?=
- =?utf-8?B?SEdLVjgrdFdKTzRXd1plcVRJM2RQc3UxanN1ZDVaWEUySWFqQmdNRHlrbG5h?=
- =?utf-8?B?ZmhKRCtBTmppMTlvSmNpSFBtRUdSaW1KMm16Y1I5WjgzaTcxUmxaOExQMXQ1?=
- =?utf-8?B?QlR4Z2NxVUV2Q1grWFhDZnVkU1NHTERFYXNWdVNYUGY2K3hiMnF5RHpNZ3BR?=
- =?utf-8?B?N1FzM0FIVlpWNWVtUTExSzRPZ1lxMHkvc0E2bWxCeE81R2NSellESUZMVW5n?=
- =?utf-8?B?a3VlcCtTWTYwMmpoUE00Z2pCTDZiUlVHaFdYKy9McWxlZTl4U0JvdDdMSTU2?=
- =?utf-8?B?ZnVyZ25nbmQ3aVRlUmE5elQ2c2hCNFo3SDJ0UGg5L2dtV2hrSmpkVkp6Y2tw?=
- =?utf-8?B?UUFMbEZSYlNHUEcvSmg3bFVPT0JLRS9FMzUvN0xOMUhMK1JObEQzNzV5OGJP?=
- =?utf-8?B?QUUrODNRZDdXYjJ0Y1JKRk1oQ2ZjNHJzTXgvbm54S0JmQUcwcTR1Zk1zUmEr?=
- =?utf-8?B?YncyQzA4TUNWSmZRYkRBMlVyVlZTTFE0anAyVVpVTDdPSnJiZmdzUHpTSVNQ?=
- =?utf-8?B?WEFXajRVUmtwN21oUTBwWXVBUjE1OEdYY0thVzA3d2hRaUd4M2FIVFUxWmVO?=
- =?utf-8?B?OVVYdXdoTnhOWFdSTkMrTS8zanZUNTJCa3hUbHVrVVRzNTVud3hSblZaY0No?=
- =?utf-8?B?SVZseHo5MnVBUVY5WklwVnlPNU5RenovR3k4cFgrdGE3cHNXTmtJODdsWUZ3?=
- =?utf-8?B?MlZBaU9JWXpkcTYwcFBSL3FocFFHbFJZbGlFWktyUlJaOWk1Z1d0bkhweDl5?=
- =?utf-8?B?U0p6Z3lQMjRiRnBFMmlNbGorZFpvdFpLTjQwdGZQZjBaRkptanFLUlRnbXdE?=
- =?utf-8?B?VFRrakd6djVCbVZPSHRzVzJ1L2hmemZhNmtpcEhId2ZIeXRLQWp3YUxvcFJr?=
- =?utf-8?B?Q3J3djNIbHVoT1ZzUFE1aTQ3ZVFScWRZenQ2SEpGTU9sdStrRDhrYUw3Tyt5?=
- =?utf-8?B?VldSb1hFZWRMOXNnanZFekNhRDZnTktXdzBiWWRld29YeXVWMFp2NW9qbXhm?=
- =?utf-8?B?Rm9JbzI4eVVOTjcxSUQzVis5UXFzY08vZnR6N3pRQXpHQ245ckFVUFNuYzJi?=
- =?utf-8?B?OE5iUUtPbVFVdjR1cjVqTURRaytNT2hWNVJDV3hDWUloZjZZanNWVGV3MjBX?=
- =?utf-8?B?TkV2ZXRNYXYyZFZTejN4bG03YzN6bHJWaFZxaVpRTDRZQ0RjS0VQK1NqVlJO?=
- =?utf-8?B?UG5ya1dKbWNEUlVCV204cENiUFpzNXZiaFNCZW5LZUp6M0xZMmV2Q25HTzM4?=
- =?utf-8?B?YXdNMEJFYmd3dm9URHB0dS9kNUNibGc0NFJqbnZHdGNwRDRncnJwVWRBR3h4?=
- =?utf-8?B?cXkvOExhQ0l2eEhHR01LUWxkVjFiaTlpK2ZPeUJhclk1NDRQU0FoQjdoSTIw?=
- =?utf-8?B?TURZbjFJMGlsUnRnbnhyelVObEJKRm1rT1U4VXF6cCsvUG45VktYbWlGL24z?=
- =?utf-8?B?T2k2N3l5SjJYWE1qQ2o2eC9WQUt4U1M1dUNYVTFsc3JhN210alZNa3AxSGgv?=
- =?utf-8?B?Z3dDQU1TQWZiZktzeEhCb2ViZURMU1VNZXZwZUF5d1BWTUtqTnhSZkZhZmJE?=
- =?utf-8?B?K3U4U1pudUhvUk5ud2VGZEtMMFk1MHNDNFR4TEZLdkgxRmdsUHd6eFIxdEV3?=
- =?utf-8?Q?Ycq28fGfxk4uNBcbAxU2mjs9FkXlavkoZkNYEBV?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: a705999c-e93f-4b96-ebaf-08d90e4dfc59
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-Microsoft-Antispam-Message-Info: bKPDdCduzeXWKIy1dPB1QqACBwscMrK91NSeH/lQu4tB+7yALtFYu3k7fxW9bu7K3dYdgXdUC9p8pizja5EW6jXa0HMnGc3rGSyQ4VkZ/pYzm6DWbJ9T1ZY4h92rbRpcfH8s4nXnPCLtOT8oXcf36UYHs2uUgZL55huHiHh5Pb7WV7oVZk6sEHR9d/VYi6aBC8Q1TRlys7F0yy8M38LUdzO2YdkQOXgBh9J8AqXg+VyhNhIlOscUZqT0o3aTE1zp69VovswA7mm1EcSStMPTyBE6bLw7vJvKXVYHu6H2c5oo666Qvht6gf2/jRo/ki+w1QLU2xb3X+auIaBB8DcSf9+E3TuacwnWBCILc7quabqQK2fJVrkpMhd8hZbLAd5BZvXnML2BuBAmsoSRu0zkc07dVkf1eP/JuWOFEdglu2CgdIqf/02qzww3RfrZvnqxcdWlhZKcE7jynf85wgxXA1xMIH8Ewtu3OLkuvm6C+zsMZXHqXRFJC0dcO0Gl6acAxTkfHcIOuRZi83tRdTmjIiGDxo0+MyNAxAGDyrCAqmMCtZ2Ev27C50zkvT9PadS8sJ7odf+AvPB4H2/Q72x5HqSPSf83rOPX+w6bByMIrdY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(7916004)(39860400002)(396003)(136003)(376002)(346002)(366004)(6666004)(316002)(478600001)(8676002)(8936002)(54906003)(4326008)(6486002)(9686003)(956004)(33716001)(16526019)(186003)(2906002)(5660300002)(6496006)(6916009)(66476007)(66556008)(38100700002)(66946007)(53546011)(26005)(85182001)(83380400001)(86362001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?VEJlTmtVa2szUWE2V2R4a2hZYi8zS3MrbEVFY0o1MkFMUkc1S0M1Vmw0aGVn?=
+ =?utf-8?B?SEdFK1Q1TWFIeUtIbU9iaUFYNDFFTHAvWWRkSWdzam1WNkordUp0WGo3eHdn?=
+ =?utf-8?B?dXI5K2I4bHpKRWdFa01EWUZxNXk1a1Bad244N0JaUVI5ejRTbldFTHVocnZs?=
+ =?utf-8?B?aHVackxzVzNjUm03bVp4MzNMMUhmWGszNzdkQzBGeEFTbW4zNUhiT2ZjZTRh?=
+ =?utf-8?B?d28yQlBaeWJmaWtEaTMwc1FzVnVvSU00V0puWStTaGh6SWdwRFFFWDdvdElM?=
+ =?utf-8?B?S1dmaHVGemsxKytzSmM4UEFVVlp1ekl5WjlGVnoyY3BKK3JDZUJ3YlRIZUNS?=
+ =?utf-8?B?Y2d1SUlWNmg3clZpVTU0TSt0amtFbFN6KytKTWxENXh0QWxMdC9wMkwrRVVY?=
+ =?utf-8?B?NGhSa214UGZwa2hkaExsSGFFQUxIU3dUblhaWW8zN2lDVlYxL0VyWnRLUStE?=
+ =?utf-8?B?R3hmMVJQZlFxV2o5QUpRRXQwOUZVMFp5Z2t4dHcrYTZUc0FOUXMvR0F3dmFJ?=
+ =?utf-8?B?azFpRFR0cjRYMlFFN2dUMnBaZ0J6VjFRMUVMeTdYR2JNUVBjVElWV2xRd2hy?=
+ =?utf-8?B?TTdqWmhMeTJMZlRZZXpYTE9zeWFNbW9nTExDbG1xZEFvZVlNVEJkb0Z3VjVJ?=
+ =?utf-8?B?c2pVNnI4MHF2bnQwMWd2ME1SR2pHTXQwTmNFY3E4bVI3VldZdjhXM0pKak5L?=
+ =?utf-8?B?S3BPcEQ0S0pQWUJPRTh6U2wzS054ZmxrUEpRZjZvTTJmeS9MSE93UlJPbUZE?=
+ =?utf-8?B?U3A3bm5xRGdTZW1VMWVFN1J5UjhTUTB2VEtRR3MwaVMrZlZBS1orMGozcUdR?=
+ =?utf-8?B?VzlLenNTRHJXdWg3TXVCcnRxc295RzlXb2tGL3QvdXlTeTZXTnRINGRSUG00?=
+ =?utf-8?B?QzJtRitIN2FVRm9iSER3NzBIK3dUT0V6MXczc3BpN2F5L3NmdVA1TXNUbS8r?=
+ =?utf-8?B?ZkxvWUd0K29xdW0zbXRIUEF0MmJ5Ulh1bUhQWnYrMWtydFo1TGIvNDBkUzBV?=
+ =?utf-8?B?Q01UaVJ1RnVERVFmcG05djVVdHhqNjR2RG1UVnNtbG1ZQnNpYXFXdzR6NWhH?=
+ =?utf-8?B?bnlnNTRrcEN0ZjYyaGdMdjkrZmlaVVJlajFrZ1RELzBzcVBGVGpNc1o0U2kv?=
+ =?utf-8?B?MW9lV1VnbWJuVno0TENiS3lFZG9halF5REY1WTVwYUpoV1FBMk5MTEViWlJw?=
+ =?utf-8?B?RUxLSS9JWUxLV1BUdFlrME10Y1gwRFZ4b3o0TnRvcjlyM1BHZjEyTGdZa3dn?=
+ =?utf-8?B?dkdoSkdYNGh6RkpESmV5ajJZVXEwK2dqQk1GeUxuN2lZRUlkaERyYjFhT2di?=
+ =?utf-8?B?bWZwOWtPY1FzUmI0NDdpTzBkZ2srTWlqVVA4NjJpbHRtQWdZczVwTjh3ajh3?=
+ =?utf-8?B?cHRzTnlyZmF2L25ib2FxcU9vUU0zWGVqTy9OelhRUUpmLzRFMGJ1RzhPL0JI?=
+ =?utf-8?B?bk4zVGpnb2ZGc2tsV0ZUc1dYMkxIRnhycHpBNVJ4eVRwc0tXMHNXWTVrYzFj?=
+ =?utf-8?B?Nis1SWVITFN2WnVXSURISHdNc3VlRWhCSFAwM1l0ZzdRR2RRTHZnUHZQSWVr?=
+ =?utf-8?B?MHFudFFvdjQxZ1RVcVo1Qzd3eWU5QkpleHdPUDN1aFBxSWErODArUFN0bHFy?=
+ =?utf-8?B?YmxHYzFnd0NBeThxUnBWcmRDK0lFbERSR0ZUT1pwb0s4anhwV28weTl4WFAx?=
+ =?utf-8?B?YzBjVDRRVjRRSlpNRG9VRFZWUDhxTjFmWWhWeU9vUTBEa3NkMnUwRXpLRmxT?=
+ =?utf-8?Q?ZgEX48hjgxtymTXpGoaXQwJuo10W0k91n6rNXcs?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf06cd30-c278-4a2f-900f-08d90e51feee
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2021 16:10:36.2795
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2021 16:39:18.3137
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YiYWuhW0vPK0d49p/aQFnCGyySrwDf0XI9S9fEDic0g8iam8o3NwX8qHu4UHVP4JigUYJkbW0pitxgKE8WpNpxQc9edqaOZcXEZH+JI0XQg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR03MB4358
+X-MS-Exchange-CrossTenant-UserPrincipalName: EwBzeqZTkydkZM8GvvVrtBehqwAE8fE20l8aFPQjKQnDl1gzSUKnKmhmFqL95uKj0sGYPKsd+gvrknft/UHHgA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB2923
 X-OriginatorOrg: citrix.com
 
-On 22/04/2021 15:45, Jan Beulich wrote:
-> They're redundant with respective fields from the raw CPUID policy; no
-> need to keep two copies of the same data.
+On Mon, May 03, 2021 at 05:21:37PM +0200, Jan Beulich wrote:
+> On 03.05.2021 16:54, Roger Pau Monné wrote:
+> > On Mon, May 03, 2021 at 03:50:48PM +0200, Jan Beulich wrote:
+> >> On 03.05.2021 13:31, Roger Pau Monné wrote:
+> >>> On Thu, Apr 22, 2021 at 04:43:39PM +0200, Jan Beulich wrote:
+> >>>> All of the array allocations in grant_table_init() can exceed a page's
+> >>>> worth of memory, which xmalloc()-based interfaces aren't really suitable
+> >>>> for after boot. We also don't need any of these allocations to be
+> >>>> physically contiguous.. Introduce interfaces dynamically switching
+> >>>> between xmalloc() et al and vmalloc() et al, based on requested size,
+> >>>> and use them instead.
+> >>>>
+> >>>> All the wrappers in the new header get cloned mostly verbatim from
+> >>>> xmalloc.h, with the sole adjustment to switch unsigned long to size_t
+> >>>> for sizes and to unsigned int for alignments.
+> >>>
+> >>> We seem to be growing a non-trivial amount of memory allocation
+> >>> families of functions: xmalloc, vmalloc and now xvmalloc.
+> >>>
+> >>> I think from a consumer PoV it would make sense to only have two of
+> >>> those: one for allocations that require to be physically contiguous,
+> >>> and one for allocation that don't require it.
+> >>>
+> >>> Even then, requesting for physically contiguous allocations could be
+> >>> done by passing a flag to the same interface that's used for
+> >>> non-contiguous allocations.
+> >>>
+> >>> Maybe another option would be to expand the existing
+> >>> v{malloc,realloc,...} set of functions to have your proposed behaviour
+> >>> for xv{malloc,realloc,...}?
+> >>
+> >> All of this and some of your remarks further down has already been
+> >> discussed. A working group has been formed. No progress since. Yes,
+> >> a smaller set of interfaces may be the way to go. Controlling
+> >> behavior via flags, otoh, is very much not malloc()-like. Making
+> >> existing functions have the intended new behavior is a no-go without
+> >> auditing all present uses, to find those few which actually may need
+> >> physically contiguous allocations.
+> > 
+> > But you could make your proposed xvmalloc logic the implementation
+> > behind vmalloc, as that would still be perfectly fine and safe? (ie:
+> > existing users of vmalloc already expect non-physically contiguous
+> > memory). You would just optimize the size < PAGE_SIZE for that
+> > interface?
+> 
+> Existing callers of vmalloc() may expect page alignment of the
+> returned address.
 
-So before I read this patch of yours, I had a separate cleanup patch
-turning the two arrays into static const.
+Right - just looked and also the interface is different from
+x{v}malloc, so you would have to fixup callers.
 
-> This also breaks
-> recalculate_xstate()'s dependency on xstate_init(),
+> >>>> --- /dev/null
+> >>>> +++ b/xen/include/xen/xvmalloc.h
+> >>>> @@ -0,0 +1,73 @@
+> >>>> +
+> >>>> +#ifndef __XVMALLOC_H__
+> >>>> +#define __XVMALLOC_H__
+> >>>> +
+> >>>> +#include <xen/cache.h>
+> >>>> +#include <xen/types.h>
+> >>>> +
+> >>>> +/*
+> >>>> + * Xen malloc/free-style interface for allocations possibly exceeding a page's
+> >>>> + * worth of memory, as long as there's no need to have physically contiguous
+> >>>> + * memory allocated.  These should be used in preference to xmalloc() et al
+> >>>> + * whenever the size is not known to be constrained to at most a single page.
+> >>>
+> >>> Even when it's know that size <= PAGE_SIZE this helpers are
+> >>> appropriate as they would end up using xmalloc, so I think it's fine to
+> >>> recommend them universally as long as there's no need to alloc
+> >>> physically contiguous memory?
+> >>>
+> >>> Granted there's a bit more overhead from the logic to decide between
+> >>> using xmalloc or vmalloc &c, but that's IMO not that big of a deal in
+> >>> order to not recommend this interface globally for non-contiguous
+> >>> alloc.
+> >>
+> >> As long as xmalloc() and vmalloc() are meant stay around as separate
+> >> interfaces, I wouldn't want to "forbid" their use when it's sufficiently
+> >> clear that they would be chosen by the new function anyway. Otoh, if the
+> >> new function became more powerful in terms of falling back to the
+> > 
+> > What do you mean with more powerful here?
+> 
+> Well, right now the function is very simplistic, looking just at the size
+> and doing no fallback attempts at all. Linux'es kvmalloc() goes a little
+> farther. What I see as an option is for either form of allocation to fall
+> back to the other form in case the first attempt fails. This would cover
+> - out of memory Xen heap for small allocs,
+> - out of VA space for large allocs.
+> And of course, like Linux does (or at least did at the time I looked at
+> their code), the choice which of the backing functions to call could also
+> become more sophisticated over time.
 
-It doesn't, because you've retained the reference to xstate_align, which
-is calculated in xstate_init().=C2=A0 I've posted "[PATCH 4/5] x86/cpuid:
-Simplify recalculate_xstate()" which goes rather further.
+I'm not opposed to any of this, but even your proposed code right now
+seems no worse than using either vmalloc or xmalloc, as it's only a
+higher level wrapper around those.
 
-xstate_align, and xstate_xfd as you've got later in the series, don't
-need to be variables.=C2=A0 They're constants, just like the offset/size
-information, because they're all a description of the XSAVE ISA
-instruction behaviour.
+What I would prefer is to propose to use function foo for all
+allocations that don't require contiguous physical memory, and
+function bar for those that do require contiguous physical memory.
+It's IMO awkward from a developer PoV to have to select an
+allocation function based on the size to be allocated.
 
-We never turn on states we don't understand, which means we don't
-actually need to refer to any component subleaf, other than to cross-check.
+I wouldn't mind if you wanted to name this more generic wrapped straight
+malloc.
 
-I'm still on the fence as to whether it is better to compile in the
-constants, or to just use the raw policy.=C2=A0 Absolutely nothing good wil=
-l
-come of the constants changing, and one of my backup plans for dealing
-with the size of cpuid_policy if it becomes a problem was to not store
-these leaves, and generate them dynamically on request.
-
-
-> allowing host CPUID
-> policy calculation to be moved together with that of the raw one (which
-> a subsequent change will require anyway).
-
-While breaking up the host/raw calculations from the rest, we really
-need to group the MSR policy calculations with their CPUID counterparts.
-
-~Andrew
-
+Thanks, Roger.
 
