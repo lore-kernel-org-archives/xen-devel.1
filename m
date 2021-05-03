@@ -2,41 +2,49 @@ Return-Path: <SRS0=qvPz=J6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81C71C433B4
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 505EEC433B4
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:28:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1E1F46135F
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:05:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1E1F46135F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linutronix.de
+	by mail.kernel.org (Postfix) with ESMTPS id 0EEC06115C
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:28:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0EEC06115C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121799.229705 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121805.229730 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lddsr-0003wN-Vn; Mon, 03 May 2021 19:05:33 +0000
+	id 1ldeF3-0005ju-1p; Mon, 03 May 2021 19:28:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121799.229705; Mon, 03 May 2021 19:05:33 +0000
+Received: by outflank-mailman (output) from mailman id 121805.229730; Mon, 03 May 2021 19:28:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lddsr-0003wG-Rx; Mon, 03 May 2021 19:05:33 +0000
-Received: by outflank-mailman (input) for mailman id 121799;
- Mon, 03 May 2021 19:05:33 +0000
+	id 1ldeF2-0005jm-Uj; Mon, 03 May 2021 19:28:28 +0000
+Received: by outflank-mailman (input) for mailman id 121805;
+ Mon, 03 May 2021 19:28:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D+pa=J6=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1lddsq-0003wB-Sl
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:05:33 +0000
-Received: from galois.linutronix.de (unknown [193.142.43.55])
+ <SRS0=Wh1Q=J6=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1ldeF1-0005i5-MB
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:28:27 +0000
+Received: from mail-qk1-x729.google.com (unknown [2607:f8b0:4864:20::729])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 24b006c1-b8d1-4e9f-8574-c9e3865d71f5;
- Mon, 03 May 2021 19:05:31 +0000 (UTC)
+ id 289b7eb7-366a-4be4-b57f-3045304d52a9;
+ Mon, 03 May 2021 19:28:27 +0000 (UTC)
+Received: by mail-qk1-x729.google.com with SMTP id o5so6300921qkb.0
+ for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:27 -0700 (PDT)
+Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:8710:5560:a711:776f])
+ by smtp.gmail.com with ESMTPSA id
+ g18sm9225209qke.21.2021.05.03.12.28.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 May 2021 12:28:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,91 +56,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 24b006c1-b8d1-4e9f-8574-c9e3865d71f5
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1620068730;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FLkve6HXLfgxpJAWW6er1tQK1qnNOtpub3goAX+TdbM=;
-	b=r7T+1fS30pNUclSzvMNOId4Jc7ooI632oXoL+wBdH+efvKIyRgBV0QZHYfOBmZnYGuNGcV
-	5U7ghgY6ShUSSX3nHIErQsr2UuP7dkwCXL55R4aXlU7ioqtUFsRpa89B63egHbiXRwP0IL
-	sMdxQGpp5Xvp+a3O7/M81oE1aTtxmt520+GQS889a8UQhpEFALt5qWyM1/WlcTnEakkjc3
-	3BfrS9syoDXogzgl0bBuzQPR8vlDeoWuIrzFrROO3rwKpGRz4JYIc10uCvO3a64e73KTt7
-	EkAPlic1cFpwT5pV+b2xkced1EVqatU/4DpvaQlRBQbdRS03ncx6MAizauB9sw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1620068730;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FLkve6HXLfgxpJAWW6er1tQK1qnNOtpub3goAX+TdbM=;
-	b=uD1KjZuTN8voYLmc+tVb3tu8d2nRizEfGUX5ZzhqdF060ShxUwNwzIyqHVUSEuiKrn0AO5
-	2P8oP1s8gcjL/IAw==
-To: Lai Jiangshan <jiangshanlai@gmail.com>, linux-kernel@vger.kernel.org
-Cc: Lai Jiangshan <laijs@linux.alibaba.com>, Paolo Bonzini <pbonzini@redhat.com>, Sean Christopherson <seanjc@google.com>, Steven Rostedt <rostedt@goodmis.org>, Andi Kleen <ak@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Vitaly Kuznetsov <vkuznets@redhat.com>, Wanpeng Li <wanpengli@tencent.com>, Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>, kvm@vger.kernel.org, Josh Poimboeuf <jpoimboe@redhat.com>, Uros Bizjak <ubizjak@gmail.com>, Maxim Levitsky <mlevitsk@redhat.com>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Alexandre Chartre <alexandre.chartre@oracle.com>, Joerg Roedel <jroedel@suse.de>, Jian Cai <caij2003@gmail.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 1/4] x86/xen/entry: Rename xenpv_exc_nmi to noist_exc_nmi
-In-Reply-To: <20210426230949.3561-2-jiangshanlai@gmail.com>
-References: <20210426230949.3561-1-jiangshanlai@gmail.com> <20210426230949.3561-2-jiangshanlai@gmail.com>
-Date: Mon, 03 May 2021 21:05:29 +0200
-Message-ID: <87r1ind4ee.ffs@nanos.tec.linutronix.de>
+X-Inumbo-ID: 289b7eb7-366a-4be4-b57f-3045304d52a9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=g57GzuZpsCctvWoQCtrFFJcfB/69BgTCkSLuWAk+2XM=;
+        b=YBSpjJP205ldCrlB+abWxu+m8VbeuPWIJ/XXExUz8EYyTkZUFjL7+LVAckObklbecq
+         sPObnk2qR7dwOPgGgFzMo5rBmIb1D7OBaPvJ9SkIf6BJYqvOKybVkKht3Dzq74FhtPHv
+         kw9pke3JThZ4BAXAMsWRUDC/bKESzyHV4xcS/vnc1V2z0FG8IDDfyjmYh9mFcjz3eoI1
+         9+zZBOGyKlx4LFybEC/LGuvK/i9AAIdT0YTkCXdCxD7EOWOSwspc7zdAoJ0IVbOIWhOp
+         E+bDacQAsydRaewH0NtCDSLYfl5pbxI0m5JCQT6cuCi0V9Qjk+SZC5BAstHdQbOfBKeL
+         urWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=g57GzuZpsCctvWoQCtrFFJcfB/69BgTCkSLuWAk+2XM=;
+        b=t4hf6fIQpv6sFu+hCTiVgGK6AKE54Ct28Ux/sfJCwrTrNZiBgHVPFQyStCnTyo6uOg
+         WDeD9xV576EFubHH7Q0qykN3m0tgzN2l7ZkFABHMVLgSjnOoDTabDdiKwM0W0P1v0jVh
+         nZ7tW6FiGpLRtHMNK1BInCfB1txZxDbOTzEgvOHInb7gpaMz1zJReGRA2QzFXeZVVIM3
+         yGCk4dKWNxlgx1DYz51kQkM1K7DTKcgix6XYSepsyN9EarKEXYLr4cUypldwf5LpwWMf
+         xf6ElMXPF2FCs7awwUeMUXAz5JK6GkmHjqOpsb1QYA4z0xa6fkYrVjlGMee5lbax5C8h
+         4juw==
+X-Gm-Message-State: AOAM5317CPuYjK9hmeG1Qsy7CTqFA/vhh9L1mxKBbg6BaJLB4AK+OTuM
+	dCLrHzYHxMnvDZ5V0rJEzQqO1U6d9OE=
+X-Google-Smtp-Source: ABdhPJzItvGOOofE9kprenmOUVxW3jLCJ50TJvXYSkBUnqLA6shwxoxlgBVFLmzU5Z/p3pGvKbu5lg==
+X-Received: by 2002:a37:a5d8:: with SMTP id o207mr17798356qke.13.1620070106436;
+        Mon, 03 May 2021 12:28:26 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jason Andryuk <jandryuk@gmail.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 01/13] cpufreq: Allow restricting to internal governors only
+Date: Mon,  3 May 2021 15:27:58 -0400
+Message-Id: <20210503192810.36084-2-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210503192810.36084-1-jandryuk@gmail.com>
+References: <20210503192810.36084-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 27 2021 at 07:09, Lai Jiangshan wrote:
-> From: Lai Jiangshan <laijs@linux.alibaba.com>
->
-> There is no any functionality change intended.  Just rename it and
-> move it to arch/x86/kernel/nmi.c so that we can resue it later in
-> next patch for early NMI and kvm.
+For hwp, the standard governors are not usable, and only the internal
+one is applicable.  Add the cpufreq_governor_internal boolean to
+indicate when an internal governor, like hwp-internal, will be used.
+This is set during presmp_initcall, so that it can suppress governor
+registration during initcall.  Only a governor with a name containing
+"internal" will be allowed in that case.
 
-'Reuse it later' is not really a proper explanation why this change it
-necessary.
+This way, the unuseable governors are not registered, so they internal
+one is the only one returned to userspace.  This means incompatible
+governors won't be advertised to userspace.
 
-Also this can be simplified by using aliasing which keeps the name
-spaces intact.
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+ xen/drivers/cpufreq/cpufreq.c      | 4 ++++
+ xen/include/acpi/cpufreq/cpufreq.h | 1 +
+ 2 files changed, 5 insertions(+)
 
-Thanks,
-
-        tglx
----       
-
---- a/arch/x86/include/asm/idtentry.h
-+++ b/arch/x86/include/asm/idtentry.h
-@@ -135,6 +135,9 @@ static __always_inline void __##func(str
- #define DEFINE_IDTENTRY_RAW(func)					\
- __visible noinstr void func(struct pt_regs *regs)
+diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
+index 419aae83ee..6cbf150538 100644
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -57,6 +57,7 @@ struct cpufreq_dom {
+ };
+ static LIST_HEAD_READ_MOSTLY(cpufreq_dom_list_head);
  
-+#define DEFINE_IDTENTRY_RAW_ALIAS(alias, func)				\
-+__visible noinstr void func(struct pt_regs *regs) __alias(alias)
++bool __read_mostly cpufreq_governor_internal;
+ struct cpufreq_governor *__read_mostly cpufreq_opt_governor;
+ LIST_HEAD_READ_MOSTLY(cpufreq_governor_list);
+ 
+@@ -122,6 +123,9 @@ int __init cpufreq_register_governor(struct cpufreq_governor *governor)
+     if (!governor)
+         return -EINVAL;
+ 
++    if (cpufreq_governor_internal && strstr(governor->name, "internal") == NULL)
++        return -EINVAL;
 +
- /**
-  * DECLARE_IDTENTRY_RAW_ERRORCODE - Declare functions for raw IDT entry points
-  *				    Error code pushed by hardware
---- a/arch/x86/kernel/nmi.c
-+++ b/arch/x86/kernel/nmi.c
-@@ -524,6 +524,8 @@ DEFINE_IDTENTRY_RAW(exc_nmi)
- 		mds_user_clear_cpu_buffers();
- }
+     if (__find_governor(governor->name) != NULL)
+         return -EEXIST;
  
-+DEFINE_IDTENTRY_RAW_ALIAS(exc_nmi, xenpv_exc_nmi);
-+
- void stop_nmi(void)
- {
- 	ignore_nmis++;
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -565,12 +565,6 @@ static void xen_write_ldt_entry(struct d
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index e88b20bfed..56df5eebed 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -115,6 +115,7 @@ extern struct cpufreq_governor cpufreq_gov_dbs;
+ extern struct cpufreq_governor cpufreq_gov_userspace;
+ extern struct cpufreq_governor cpufreq_gov_performance;
+ extern struct cpufreq_governor cpufreq_gov_powersave;
++extern bool cpufreq_governor_internal;
  
- void noist_exc_debug(struct pt_regs *regs);
+ extern struct list_head cpufreq_governor_list;
  
--DEFINE_IDTENTRY_RAW(xenpv_exc_nmi)
--{
--	/* On Xen PV, NMI doesn't use IST.  The C part is the same as native. */
--	exc_nmi(regs);
--}
--
- DEFINE_IDTENTRY_RAW_ERRORCODE(xenpv_exc_double_fault)
- {
- 	/* On Xen PV, DF doesn't use IST.  The C part is the same as native. */
+-- 
+2.30.2
+
 
