@@ -2,42 +2,46 @@ Return-Path: <SRS0=qvPz=J6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.5 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ED8EC433ED
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:40:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D667C433ED
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:47:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8DFFB61159
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:40:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DFFB61159
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D367161165
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:47:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D367161165
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121711.229586 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121729.229597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldagI-0002Br-Fo; Mon, 03 May 2021 15:40:22 +0000
+	id 1ldan9-0002cg-8g; Mon, 03 May 2021 15:47:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121711.229586; Mon, 03 May 2021 15:40:22 +0000
+Received: by outflank-mailman (output) from mailman id 121729.229597; Mon, 03 May 2021 15:47:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldagI-0002Bj-CC; Mon, 03 May 2021 15:40:22 +0000
-Received: by outflank-mailman (input) for mailman id 121711;
- Mon, 03 May 2021 15:40:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gWh3=J6=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ldagG-00023Q-Jm
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 15:40:20 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 503cc877-2ae4-455c-add3-a9ba24c79b18;
- Mon, 03 May 2021 15:40:14 +0000 (UTC)
+	id 1ldan9-0002cZ-5Q; Mon, 03 May 2021 15:47:27 +0000
+Received: by outflank-mailman (input) for mailman id 121729;
+ Mon, 03 May 2021 15:47:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lc2c=J6=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1ldan7-0002cE-2d
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 15:47:25 +0000
+Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:400:100::2])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a5b6d815-dc03-4f13-a96f-221b87bde8c6;
+ Mon, 03 May 2021 15:47:24 +0000 (UTC)
+Received: from sender by smtp.strato.de (RZmta 47.25.5 AUTH)
+ with ESMTPSA id g034cex43FlH029
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Mon, 3 May 2021 17:47:17 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,180 +53,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 503cc877-2ae4-455c-add3-a9ba24c79b18
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620056414;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=L7RgdbGEd1jyg+A5R9ekb1vmEPCeoLbeT25HF5YV6ys=;
-  b=Fo6y/mfH4tilvi2rNZGdCRu3ELjtjTRKZFN75E0ja+DjNRNaU2MumzpS
-   FYUtliEd0BmgfxJGvCegInLmKaff+DAncDGV7uJlf4DO/1PoZVI2r23YV
-   YkJRjy4tlg8FDtW+QUUaCD/UrXVjyXYx4uH97egXIbZyWhO+lfRsveG2T
-   Q=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: GmP/0IMBbxNpZqx3flufAKBbnNuepUNa6zZBqCJSu5LACseXfw6ekok5Z0rgXVko7KX9BIRgd3
- mBvcUPI63l31kjEYczwPlFfJkZjevfhSbt7ca7YvmTuCzQMept3XJ4uupBCOIWMsEBIJcrYHEy
- L/KBJlZXSDmwHxjogGD3hRT4T/5Sc3m5NV3GGD/72f3orz9PTfpxBTAgPapVCWN/tocfcRQrnt
- 17bq54ACAzCZsff1MTMinMDTg+wHPOIGPe3KpdlWSOX/JHbWgqF0jdoPbANaDsIGZbWilv+/T9
- NtY=
-X-SBRS: 5.1
-X-MesageID: 42942253
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:EOUCG6/QoiV6zIOdCWNuk+BfI+orLtY04lQ7vn1ZYzY9SK2lvu
- qpm+kW0gKxtS0YX2sulcvFFK6LR37d8pAd2/hoAZ6JWg76tGy0aLxz9IeK+UyYJwTS/vNQvJ
- 0QEJRWJ8b3CTFB4vrSwA79KNo4xcnCzabAv5a7815IbSVHL55t9B14DAHzKDwReCBjCYAiHJ
- SRouprzgDQG0g/VciwCnkbU+WrnbSi//iKDSIuPBIp5BKDijml8tfBYn+l9ywTTi9VxvMa+X
- XF+jaJnZmLie2xyRPXygboj6h+pd2J8LV+Lf3JrsAULzn24zzYAbhcZw==
-X-IronPort-AV: E=Sophos;i="5.82,270,1613451600"; 
-   d="scan'208";a="42942253"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 3/5] x86/xstate: Rework xstate_ctxt_size() as xstate_uncompressed_size()
-Date: Mon, 3 May 2021 16:39:36 +0100
-Message-ID: <20210503153938.14109-4-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210503153938.14109-1-andrew.cooper3@citrix.com>
-References: <20210503153938.14109-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: a5b6d815-dc03-4f13-a96f-221b87bde8c6
+ARC-Seal: i=1; a=rsa-sha256; t=1620056837; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=AaOW5fBW0PeSjI7JEmiMO5CeTXc9BPGx84g3bK5Es1hAOYlIIEI2ns29sSPDtOjn4B
+    qAAQTVdY/gI28AmI3/iPfkepHgcKpDV5TTvLyrQRhwAne1GuphjmVDyoyepDC35ePTfk
+    WIjreC2xDHedJjBdHAHLjiDJ6vnpWV/joQc5ZCv2y/iYNoc1LC10qpFoZ0lmm54vwGli
+    AtKaQlnZcKUqclUdSn5gpidEUVw6hkegPF01B71dh/9EMAxLLTXiv+7z2gdxi9ZVzdVt
+    cFcGi3RX+Jhg4coary7IWNZDFO8Xtrlxao8UgeIifO2ZqRqf8yU2T4gEuailJnRYIH0m
+    d4LQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1620056837;
+    s=strato-dkim-0002; d=strato.com;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=ycCpPkfjO2T5krNvdESPBnNfk/UB5Msvnwpt33xdYeg=;
+    b=Z3key5YpWusSNdHDORNH0htvRxhqxpzxtV8Q/INgML2jN9jDchjtKnXWZPEBQgCUuq
+    Qt7AgaJoSWoVEjFcqduMKSUFoaRJOCg01FSlo9FkLq4JXTGIGAkMdckbUkO64llu0pWX
+    vI2U4CFRNNlcIyu1AlNLFuhmchX/DI/YpPTtKWe0Gkfpk1OeSJMroQqJJZjolQU2kMX0
+    KaYwKwlNGvpZAFb+lxiayoubJ5aBEDkMhLO3Zd4V932DiNh6Q8HR3UKhfYYav6dSuwS7
+    clJGgWsM3dJnspdju/WMRcM3tRp1kNQxZ0UohQ8C66/X3DlyDogRWQx8VMKh6R/Op8yP
+    T9gQ==
+ARC-Authentication-Results: i=1; strato.com;
+    dkim=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1620056837;
+    s=strato-dkim-0002; d=aepfle.de;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=ycCpPkfjO2T5krNvdESPBnNfk/UB5Msvnwpt33xdYeg=;
+    b=P9iTvs9pIja6nGxzlYeRAsEppWTHMH70IZNNrex9d2Z+ZorTr2FtZsIxDFcnmJL6es
+    S66+3fMnQOEso11Pix4qmUZxq4rhDN4hi7m2I8UNcEw63D+kNktw/r7AaXuzic/4mpwU
+    SvUnitKfc2ftP6omg9xW4gqPsVkQ5pgg5Q/O+tnQ5U8x8bxew1M+c92kS5AJyt9Knb6b
+    QOejD4xsWBSJzwOyD5RuJhbWiaSEsmn+Iiah0AHTqYMh8ZiKEOewEIInOkS4LkhtRo7W
+    8IkuZK1EIkKqo6/b86F/+dwYN805uusSQREKYQQO5VcucbSCAGc+AKHdHQ9JeIPdfqPr
+    Jkjw==
+Authentication-Results: strato.com;
+    dkim=none
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgtl+1b1FMstFZvCqIQN5N7TvWFg4vzhFVdoKAuQ"
+X-RZG-CLASS-ID: mo00
+From: Olaf Hering <olaf@aepfle.de>
+To: xen-devel@lists.xenproject.org
+Cc: Olaf Hering <olaf@aepfle.de>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v1] tools: add newlines to xenstored WRL_LOG
+Date: Mon,  3 May 2021 17:47:12 +0200
+Message-Id: <20210503154712.508-1-olaf@aepfle.de>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-We're soon going to need a compressed helper of the same form.
+According to syslog(3) the fmt string does not need a newline.
+The mini-os implementation of syslog requires the trailing newline.
+Other calls to syslog do include the newline already, add it also to WRL_LOG.
 
-The size of the uncompressed image is a strictly a property of the highest
-user state.  This can be calculated trivially with xstate_offsets/sizes, and
-is much faster than a CPUID instruction in the first place, let alone the two
-XCR0 writes surrounding it.
-
-Retain the cross-check with hardware in debug builds, but forgo it normal
-builds.  In particular, this means that the migration paths don't need to mess
-with XCR0 just to sanity check the buffer size.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/domctl.c        |  2 +-
- xen/arch/x86/hvm/hvm.c       |  2 +-
- xen/arch/x86/xstate.c        | 40 +++++++++++++++++++++++++++++++---------
- xen/include/asm-x86/xstate.h |  2 +-
- 4 files changed, 34 insertions(+), 12 deletions(-)
+ tools/xenstore/xenstored_domain.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index e440bd021e..8c3552410d 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -899,7 +899,7 @@ long arch_do_domctl(
-         uint32_t offset = 0;
- 
- #define PV_XSAVE_HDR_SIZE (2 * sizeof(uint64_t))
--#define PV_XSAVE_SIZE(xcr0) (PV_XSAVE_HDR_SIZE + xstate_ctxt_size(xcr0))
-+#define PV_XSAVE_SIZE(xcr0) (PV_XSAVE_HDR_SIZE + xstate_uncompressed_size(xcr0))
- 
-         ret = -ESRCH;
-         if ( (evc->vcpu >= d->max_vcpus) ||
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 28beacc45b..e5fda6b387 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1203,7 +1203,7 @@ HVM_REGISTER_SAVE_RESTORE(CPU, hvm_save_cpu_ctxt, hvm_load_cpu_ctxt, 1,
- 
- #define HVM_CPU_XSAVE_SIZE(xcr0) (offsetof(struct hvm_hw_cpu_xsave, \
-                                            save_area) + \
--                                  xstate_ctxt_size(xcr0))
-+                                  xstate_uncompressed_size(xcr0))
- 
- static int hvm_save_cpu_xsave_states(struct vcpu *v, hvm_domain_context_t *h)
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 3d4d0649a2..2d333b3ff6 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -1132,10 +1132,10 @@ void wrl_apply_debit_actual(struct domain *domain)
+ 	if (domain->wrl_credit < 0) {
+ 		if (!domain->wrl_delay_logged) {
+ 			domain->wrl_delay_logged = true;
+-			WRL_LOG(now, "domain %ld is affected",
++			WRL_LOG(now, "domain %ld is affected\n",
+ 				(long)domain->domid);
+ 		} else if (!wrl_log_last_warning) {
+-			WRL_LOG(now, "rate limiting restarts");
++			WRL_LOG(now, "rate limiting restarts\n");
+ 		}
+ 		wrl_log_last_warning = now.sec;
+ 	}
+@@ -1145,7 +1145,7 @@ void wrl_log_periodic(struct wrl_timestampt now)
  {
-diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
-index e6c225a16b..d4c01da574 100644
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -184,7 +184,7 @@ void expand_xsave_states(struct vcpu *v, void *dest, unsigned int size)
-     /* Check there is state to serialise (i.e. at least an XSAVE_HDR) */
-     BUG_ON(!v->arch.xcr0_accum);
-     /* Check there is the correct room to decompress into. */
--    BUG_ON(size != xstate_ctxt_size(v->arch.xcr0_accum));
-+    BUG_ON(size != xstate_uncompressed_size(v->arch.xcr0_accum));
- 
-     if ( !(xsave->xsave_hdr.xcomp_bv & XSTATE_COMPACTION_ENABLED) )
-     {
-@@ -246,7 +246,7 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
-     u64 xstate_bv, valid;
- 
-     BUG_ON(!v->arch.xcr0_accum);
--    BUG_ON(size != xstate_ctxt_size(v->arch.xcr0_accum));
-+    BUG_ON(size != xstate_uncompressed_size(v->arch.xcr0_accum));
-     ASSERT(!xsave_area_compressed(src));
- 
-     xstate_bv = ((const struct xsave_struct *)src)->xsave_hdr.xstate_bv;
-@@ -568,16 +568,38 @@ static unsigned int hw_uncompressed_size(uint64_t xcr0)
-     return size;
+ 	if (wrl_log_last_warning &&
+ 	    (now.sec - wrl_log_last_warning) > WRL_LOGEVERY) {
+-		WRL_LOG(now, "not in force recently");
++		WRL_LOG(now, "not in force recently\n");
+ 		wrl_log_last_warning = 0;
+ 	}
  }
- 
--/* Fastpath for common xstate size requests, avoiding reloads of xcr0. */
--unsigned int xstate_ctxt_size(u64 xcr0)
-+unsigned int xstate_uncompressed_size(uint64_t xcr0)
- {
--    if ( xcr0 == xfeature_mask )
--        return xsave_cntxt_size;
-+    unsigned int size;
-+    int idx = flsl(xcr0) - 1;
- 
--    if ( xcr0 == 0 )
--        return 0;
-+    /*
-+     * The maximum size of an uncompressed XSAVE area is determined by the
-+     * highest user state, as the size and offset of each component is fixed.
-+     */
-+    if ( idx >= 2 )
-+    {
-+        ASSERT(xstate_offsets[idx] && xstate_sizes[idx]);
-+        size = xstate_offsets[idx] + xstate_sizes[idx];
-+    }
-+    else
-+        size = XSTATE_AREA_MIN_SIZE;
- 
--    return hw_uncompressed_size(xcr0);
-+    /* In debug builds, cross-check our calculation with hardware. */
-+    if ( IS_ENABLED(CONFIG_DEBUG) )
-+    {
-+        unsigned int hwsize;
-+
-+        xcr0 |= XSTATE_FP_SSE;
-+        hwsize = hw_uncompressed_size(xcr0);
-+
-+        if ( size != hwsize )
-+            printk_once(XENLOG_ERR "%s(%#"PRIx64") size %#x != hwsize %#x\n",
-+                        __func__, xcr0, size, hwsize);
-+        size = hwsize;
-+    }
-+
-+    return size;
- }
- 
- /* Collect the information of processor's extended state */
-diff --git a/xen/include/asm-x86/xstate.h b/xen/include/asm-x86/xstate.h
-index 7ab0bdde89..02d6f171b8 100644
---- a/xen/include/asm-x86/xstate.h
-+++ b/xen/include/asm-x86/xstate.h
-@@ -107,7 +107,7 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size);
- void xstate_free_save_area(struct vcpu *v);
- int xstate_alloc_save_area(struct vcpu *v);
- void xstate_init(struct cpuinfo_x86 *c);
--unsigned int xstate_ctxt_size(u64 xcr0);
-+unsigned int xstate_uncompressed_size(uint64_t xcr0);
- 
- static inline uint64_t xgetbv(unsigned int index)
- {
--- 
-2.11.0
-
 
