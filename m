@@ -2,49 +2,49 @@ Return-Path: <SRS0=qvPz=J6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F5C3C433ED
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28FDCC433B4
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:28:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F8E06135F
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:28:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F8E06135F
+	by mail.kernel.org (Postfix) with ESMTPS id E27C2613B4
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 19:28:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E27C2613B4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121804.229718 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121806.229742 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldeEx-0005iH-PK; Mon, 03 May 2021 19:28:23 +0000
+	id 1ldeF7-0005nm-De; Mon, 03 May 2021 19:28:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121804.229718; Mon, 03 May 2021 19:28:23 +0000
+Received: by outflank-mailman (output) from mailman id 121806.229742; Mon, 03 May 2021 19:28:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldeEx-0005iA-ME; Mon, 03 May 2021 19:28:23 +0000
-Received: by outflank-mailman (input) for mailman id 121804;
- Mon, 03 May 2021 19:28:22 +0000
+	id 1ldeF7-0005nf-9z; Mon, 03 May 2021 19:28:33 +0000
+Received: by outflank-mailman (input) for mailman id 121806;
+ Mon, 03 May 2021 19:28:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Wh1Q=J6=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1ldeEw-0005i5-Pi
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:28:22 +0000
-Received: from mail-qk1-x731.google.com (unknown [2607:f8b0:4864:20::731])
+ id 1ldeF6-0005i5-Ie
+ for xen-devel@lists.xenproject.org; Mon, 03 May 2021 19:28:32 +0000
+Received: from mail-qk1-x72b.google.com (unknown [2607:f8b0:4864:20::72b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 78dc73cc-d9a8-4c3d-babd-04d9718dfc6c;
- Mon, 03 May 2021 19:28:21 +0000 (UTC)
-Received: by mail-qk1-x731.google.com with SMTP id i67so3146422qkc.4
- for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:21 -0700 (PDT)
+ id 4ea1e9d3-6db0-433a-9af7-bf527518f5d2;
+ Mon, 03 May 2021 19:28:30 +0000 (UTC)
+Received: by mail-qk1-x72b.google.com with SMTP id i67so3146897qkc.4
+ for <xen-devel@lists.xenproject.org>; Mon, 03 May 2021 12:28:30 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:8710:5560:a711:776f])
  by smtp.gmail.com with ESMTPSA id
- g18sm9225209qke.21.2021.05.03.12.28.19
+ g18sm9225209qke.21.2021.05.03.12.28.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 May 2021 12:28:20 -0700 (PDT)
+ Mon, 03 May 2021 12:28:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,141 +56,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 78dc73cc-d9a8-4c3d-babd-04d9718dfc6c
+X-Inumbo-ID: 4ea1e9d3-6db0-433a-9af7-bf527518f5d2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Co+6Hp6qlbhWNQZqHSxOLclZUpg0DuM7toVdpgmloKc=;
-        b=efhDfL/Tbgue8tsD8zGB9Qt7U5UwRRapOgACRafC86iyyJ2/uG4FXq0e0fUbZLOnCk
-         yg4/79gQTUI1oKLPU7Ys80rjjdQoNeJsF0EPj9TtM1zPsN+yIjA91Wnkq9sxA8h9aNe4
-         4sqk3J434LukpT10bH4M6m5dga/KAfb3vGNgkgfgtv+NeD7xpMV5HQnKnhViJHllMoS1
-         pJNdoaxaDTHtyzDKSbXA5czgV/Go3CPDge6XZ63BW13IhxQnyHDXqnqBBMz6RT2EnlNu
-         YYGhK8h1UTyNOOYhiKF+imQ0c6oG8rVS/MNEjQ+mwjXbI+nYUYaXglEI72kUJM6HQIs+
-         H2tQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=o6aeco73TVtnG2vnCKcrrr9RATvAYWd7uArT6elgZ4M=;
+        b=jM9llCt0QXCGnbPlb2cvcWJKAmrDSwo4oWznuSXdih4WXdBIIY4x+Yysl99fS+iCtn
+         K9hA03/FWdkpL2tmB6NjdnJaqql+sc+6eIL+mfxpMi2Fhkj75eF5IGrtQl+38SCjKGAf
+         p4c8czJCGJODZux5wP737n2+HFbKfGOP4nJaeDCkGDIV8P+A6oNYFFBJk7cM3mTLhSTE
+         re3LhBQd3hHCToEu/ZXmTnOPyVhvA6zCEJmyf0v31gy9m5sW6R862AlUJX1BUwvMXGNX
+         62Xc/51OOE6g3uPf2Evvq80SkGeaDXUO94f0bhIrQWcX7917rGllkm17dViKf2tBIfSA
+         FoFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Co+6Hp6qlbhWNQZqHSxOLclZUpg0DuM7toVdpgmloKc=;
-        b=WLh3ytkrETI6m4IVWn2NAWcxyVvejUs2etVhAzhwqT4EJUqg1qVWv0h1oj68VcWbwP
-         z5mMxSlBfavRVH8YRBY1XnbbfEnQcu67aPHcuy+VXbtdMWJxMWUGcQOqAu8HpFcxxYaQ
-         TF+b+PxViQN1ntKr5fkMfuhhBRWD5tpKZjCbSmaCajnRMqb2N/WmGPrrwvEjCApCCGNW
-         wxBtIkj3p2rtBF+amAC/RTq7epECELT0Qw/B6P2kPQcu6RhvnlmHrZ2rV+8DLBCJmeug
-         z3qvqDiLXE2++NgGHoiSFilrYDC6hXP+9f05Wp/MBe3S5y2aGQyveI5ITrDE7NVbZiCu
-         aqRw==
-X-Gm-Message-State: AOAM532xxld6mPKQAL8WSMt/1VII2rjW4Jp4NhMpJJzU7s7hRP4gF5QH
-	Av0jwU5U6n/azcBrVAsvStxswLmIcIY=
-X-Google-Smtp-Source: ABdhPJzNZvZL9DqzsyfXhcULxXw/9tnBoSkZ3w0E+/iO7GgnuycshsMnWxaMqexReotRX5hbeMxtOA==
-X-Received: by 2002:ae9:e897:: with SMTP id a145mr18232749qkg.334.1620070100810;
-        Mon, 03 May 2021 12:28:20 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=o6aeco73TVtnG2vnCKcrrr9RATvAYWd7uArT6elgZ4M=;
+        b=g8iEJflMYM7i7doqae5epiTktyLcCiEqc0Z0Pu6xsUm1NayH8w3G65PXC7MbNoXkxw
+         VyVQY0BZ1pHq2xUIhsTFiWcE8BYiWOSGWXpDE1qm5hfMmL+EwzAyuMxXm7njbKOsbbmL
+         QuPw15GzWjs7dlUwkqIYeRpA8MjhS63fkUOTLUdI8Eq+l1yqqIfpXFoDgXK97RUCW/mR
+         9qyDRJYvMzMlw0bX5RQ25SZ+JXG2j+7hCGK1s5GeuzTJgFIZWAokD4epTwqBTC/i1Hdu
+         osE5+jyXIl0A/vBQqAhbpdbOypSAbEeZpmpIAwsTqvlM+M71qlrfXIOQQP6QWuM9JaJq
+         xm8g==
+X-Gm-Message-State: AOAM533vM9Fbv62N4S+5VdM3Zvk6gl67w+7NIBr8fBd41aQGG54kNHeF
+	q5rhJ6O7ZJam4oVrsMuGKxWyKNzmcYQ=
+X-Google-Smtp-Source: ABdhPJzy3E49jxtVyfMBYZkW+p55Hjn3fb981MdlPPXBkc0anCD6xoEj5zqOSMI3ZDWCGDmaiPnFJA==
+X-Received: by 2002:ae9:df46:: with SMTP id t67mr20677355qkf.269.1620070109951;
+        Mon, 03 May 2021 12:28:29 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Community Manager <community.manager@xenproject.org>
-Subject: [PATCH 00/13] Intel Hardware P-States (HWP) support
-Date: Mon,  3 May 2021 15:27:57 -0400
-Message-Id: <20210503192810.36084-1-jandryuk@gmail.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 02/13] cpufreq: Add perf_freq to cpuinfo
+Date: Mon,  3 May 2021 15:27:59 -0400
+Message-Id: <20210503192810.36084-3-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210503192810.36084-1-jandryuk@gmail.com>
+References: <20210503192810.36084-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi,
+acpi-cpufreq scales the aperf/mperf measurements by max_freq, but HWP
+needs to scale by base frequency.  Settings max_freq to base_freq
+"works" but the code is not obvious, and returning values to userspace
+is tricky.  Add an additonal perf_freq member which is used for scaling
+aperf/mperf measurements.
 
-This patch series adds Hardware-Controlled Performance States (HWP) for
-Intel processors to Xen.
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+I don't like this, but it seems the best way to re-use the common
+aperf/mperf code.  The other option would be to add wrappers that then
+do the acpi vs. hwp scaling.
+---
+ xen/arch/x86/acpi/cpufreq/cpufreq.c | 2 +-
+ xen/drivers/cpufreq/utility.c       | 1 +
+ xen/include/acpi/cpufreq/cpufreq.h  | 3 +++
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
-With HWP, the processor makes its own determinations for frequency
-selection depending, though users can set some parameters and
-preferences.  There is also Turbo Boost which dynamically pushes the max
-frequency if possible.
-
-The existing governors don't work with HWP since they select frequencies
-and HWP doesn't expose those.  Therefore a dummy hwp-interal governor is
-used that doesn't do anything.
-
-xenpm get-cpufreq-para is extended to show HWP parameters, and
-set-cpufreq-hwp is added to set them.
-
-A lightly loaded OpenXT laptop showed ~1W power savings according to
-powertop.  A mostly idle Fedora system (dom0 only) showed a more modest
-power savings.
-
-This for for a 10th gen 6-core 1600 MHz base 4900 MHZ max cpu.  In the
-default balance mode, Turbo Boost doesn't exceed 4GHz.  Tweaking the
-energy_perf preference with `xenpm set-cpufreq-hwp balance ene:64`,
-I've seen the CPU hit 4.7GHz before throttling down and bouncing around
-between 4.3 and 4.5 GHz.  Curiously the other cores read ~4GHz when
-turbo boost takes affect.  This was done after pinning all dom0 cores,
-and using taskset to pin to vCPU/pCPU 11 and running a bash tightloop.
-
-There are only minor changes since the RFC posting.  Typo fixes and a
-few hunks have been folded into earlier patches.  I reordered "xenpm:
-Factor out a non-fatal cpuid_parse variant" immediately before "xenpm:
-Add set-cpufreq-hwp subcommand" where it is used.
-
-Open questions:
-
-HWP defaults to enabled and running in balanced mode.  This is useful
-for testing, but should the old ACPI cpufreq driver remain the default?
-
-This series unilaterally enables Hardware Duty Cycling (HDC) which is
-another feature to autonomously powerdown things.  That is enabled if
-HWP is enabled.  Maybe that want to be configurable?
-
-I've only tested on an 8th gen and a 10th gen systems.  The don't have
-fast MSR support, and they do have activity window and energy_perf
-support.  So the respective other modes are untested.
-
-This changes the systcl_pm_op hypercall, so that wants review.
-
-I wanted to get this out since I know Qubes is also interested.
-
-Regards,
-Jason
-
-Jason Andryuk (13):
-  cpufreq: Allow restricting to internal governors only
-  cpufreq: Add perf_freq to cpuinfo
-  cpufreq: Export intel_feature_detect
-  cpufreq: Add Hardware P-State (HWP) driver
-  xenpm: Change get-cpufreq-para output for internal
-  cpufreq: Export HWP parameters to userspace
-  libxc: Include hwp_para in definitions
-  xenpm: Print HWP parameters
-  xen: Add SET_CPUFREQ_HWP xen_sysctl_pm_op
-  libxc: Add xc_set_cpufreq_hwp
-  xenpm: Factor out a non-fatal cpuid_parse variant
-  xenpm: Add set-cpufreq-hwp subcommand
-  CHANGELOG: Add Intel HWP entry
-
- CHANGELOG.md                              |   2 +
- docs/misc/xen-command-line.pandoc         |   9 +
- tools/include/xenctrl.h                   |   6 +
- tools/libs/ctrl/xc_pm.c                   |  18 +
- tools/misc/xenpm.c                        | 375 +++++++++++-
- xen/arch/x86/acpi/cpufreq/Makefile        |   1 +
- xen/arch/x86/acpi/cpufreq/cpufreq.c       |  15 +-
- xen/arch/x86/acpi/cpufreq/hwp.c           | 671 ++++++++++++++++++++++
- xen/drivers/acpi/pmstat.c                 |  30 +
- xen/drivers/cpufreq/cpufreq.c             |   4 +
- xen/drivers/cpufreq/utility.c             |   1 +
- xen/include/acpi/cpufreq/cpufreq.h        |   9 +
- xen/include/acpi/cpufreq/processor_perf.h |   5 +
- xen/include/asm-x86/cpufeature.h          |  11 +-
- xen/include/asm-x86/msr-index.h           |  17 +
- xen/include/public/sysctl.h               |  52 +-
- 16 files changed, 1197 insertions(+), 29 deletions(-)
- create mode 100644 xen/arch/x86/acpi/cpufreq/hwp.c
-
+diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+index f1f3c6923f..5eac2f7321 100644
+--- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
++++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+@@ -317,7 +317,7 @@ unsigned int get_measured_perf(unsigned int cpu, unsigned int flag)
+     else
+         perf_percent = 0;
+ 
+-    return policy->cpuinfo.max_freq * perf_percent / 100;
++    return policy->cpuinfo.perf_freq * perf_percent / 100;
+ }
+ 
+ static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
+diff --git a/xen/drivers/cpufreq/utility.c b/xen/drivers/cpufreq/utility.c
+index b93895d4dd..788929e079 100644
+--- a/xen/drivers/cpufreq/utility.c
++++ b/xen/drivers/cpufreq/utility.c
+@@ -236,6 +236,7 @@ int cpufreq_frequency_table_cpuinfo(struct cpufreq_policy *policy,
+ 
+     policy->min = policy->cpuinfo.min_freq = min_freq;
+     policy->max = policy->cpuinfo.max_freq = max_freq;
++    policy->cpuinfo.perf_freq = max_freq;
+     policy->cpuinfo.second_max_freq = second_max_freq;
+ 
+     if (policy->min == ~0)
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index 56df5eebed..b91859ce5d 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -37,6 +37,9 @@ extern struct acpi_cpufreq_data *cpufreq_drv_data[NR_CPUS];
+ struct cpufreq_cpuinfo {
+     unsigned int        max_freq;
+     unsigned int        second_max_freq;    /* P1 if Turbo Mode is on */
++    unsigned int        perf_freq; /* Scaling freq for aperf/mpref.
++                                      acpi-cpufreq uses max_freq, but HWP uses
++                                      base_freq.*/
+     unsigned int        min_freq;
+     unsigned int        transition_latency; /* in 10^(-9) s = nanoseconds */
+ };
 -- 
 2.30.2
 
