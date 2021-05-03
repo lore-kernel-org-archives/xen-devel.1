@@ -2,45 +2,48 @@ Return-Path: <SRS0=qvPz=J6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80C83C433ED
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:59:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03867C433ED
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 16:12:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2714261164
-	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 15:59:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2714261164
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A0656611AB
+	for <xen-devel@archiver.kernel.org>; Mon,  3 May 2021 16:12:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0656611AB
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121742.229622 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121750.229633 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldayh-0003hK-Os; Mon, 03 May 2021 15:59:23 +0000
+	id 1ldbBQ-0005wF-T6; Mon, 03 May 2021 16:12:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121742.229622; Mon, 03 May 2021 15:59:23 +0000
+Received: by outflank-mailman (output) from mailman id 121750.229633; Mon, 03 May 2021 16:12:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldayh-0003hD-KU; Mon, 03 May 2021 15:59:23 +0000
-Received: by outflank-mailman (input) for mailman id 121742;
- Mon, 03 May 2021 15:59:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ldbBQ-0005w8-QG; Mon, 03 May 2021 16:12:32 +0000
+Received: by outflank-mailman (input) for mailman id 121750;
+ Mon, 03 May 2021 16:12:31 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=TA2L=J6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ldayg-0003h4-6l
- for xen-devel@lists.xenproject.org; Mon, 03 May 2021 15:59:22 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f22c889c-682e-4513-b001-5a76cd2e7cdc;
- Mon, 03 May 2021 15:59:20 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 23295B011;
- Mon,  3 May 2021 15:59:20 +0000 (UTC)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ldbBP-0005vx-PO; Mon, 03 May 2021 16:12:31 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ldbBP-00089u-EH; Mon, 03 May 2021 16:12:31 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ldbBP-000335-5Y; Mon, 03 May 2021 16:12:31 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1ldbBP-0000gf-4i; Mon, 03 May 2021 16:12:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,126 +55,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f22c889c-682e-4513-b001-5a76cd2e7cdc
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1620057560; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3zjsJslUplCDLd2j5GYvhm/B4wkceDi5tiQCLODoQQw=;
-	b=RpVqDnKpw/wxx5k4D6kbw3iqh/lvIXGDTRPoBKZL80VxFrWXfjB3MjLix+NSkLGwhMoi09
-	5DLNVFT9i3esBKdkdcb/m4JpaTisMHc635bF/t/ddIoyohU84FR9tb0F7GVsfDrvHHWuaL
-	2Rn2ptwZawd3eH8k+Z9GdShyoqIjIQc=
-Subject: Re: [PATCH v4 01/12] x86/rtc: drop code related to strict mode
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <20210420140723.65321-1-roger.pau@citrix.com>
- <20210420140723.65321-2-roger.pau@citrix.com>
- <f282a2a2-e5cb-6a65-690a-b9c27c03089a@suse.com>
- <YI/CSKpqWrilNKi8@Air-de-Roger>
- <5b06565e-1f2e-3498-c18f-e7eac0042761@suse.com>
- <YJANG3LeuA3Ygt/Q@Air-de-Roger>
- <d8ed89e8-d13a-9ed6-e92b-fc7072b8382e@suse.com>
- <YJAWmGCtaTktGRG0@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <abed4575-b1f7-5134-483e-2301447d77e0@suse.com>
-Date: Mon, 3 May 2021 17:59:19 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
-MIME-Version: 1.0
-In-Reply-To: <YJAWmGCtaTktGRG0@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=W7oQG8Ym2Col5++JQ4zbN3VEKhFQwi6j7HMH3NoGVXY=; b=zqZ3ncMvF+36U9Z4MAYJ742Up+
+	2e+BK7Q/yKrxS8YA2t32aKNwv20zab2Bu1fyfP2dTscUoeFH+H88qpNPU6UuiAKhvakx/WOqUMBCS
+	sIQDJw0HrS6aQLiTnnc/os1tUFuUVQcOOHyC2nOX/Z41svA+jRpJFUHtJVVj25gigeFc=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-161625-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 161625: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=d26c277826dbbd64b3e3cb57159e1ecbfad33bc8
+X-Osstest-Versions-That:
+    xen=1f8ee4cb430e5a9da37096574c41632cf69a0bc7
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 03 May 2021 16:12:31 +0000
 
-On 03.05.2021 17:28, Roger Pau Monné wrote:
-> On Mon, May 03, 2021 at 04:58:07PM +0200, Jan Beulich wrote:
->> On 03.05.2021 16:47, Roger Pau Monné wrote:
->>> On Mon, May 03, 2021 at 02:26:51PM +0200, Jan Beulich wrote:
->>>> On 03.05.2021 11:28, Roger Pau Monné wrote:
->>>>> On Thu, Apr 29, 2021 at 04:53:07PM +0200, Jan Beulich wrote:
->>>>>> On 20.04.2021 16:07, Roger Pau Monne wrote:
->>>>>>> @@ -337,8 +336,7 @@ int pt_update_irq(struct vcpu *v)
->>>>>>>      {
->>>>>>>          if ( pt->pending_intr_nr )
->>>>>>>          {
->>>>>>> -            /* RTC code takes care of disabling the timer itself. */
->>>>>>> -            if ( (pt->irq != RTC_IRQ || !pt->priv) && pt_irq_masked(pt) &&
->>>>>>> +            if ( pt_irq_masked(pt) &&
->>>>>>>                   /* Level interrupts should be asserted even if masked. */
->>>>>>>                   !pt->level )
->>>>>>>              {
->>>>>>
->>>>>> I'm struggling to relate this to any other part of the patch. In
->>>>>> particular I can't find the case where a periodic timer would be
->>>>>> registered with RTC_IRQ and a NULL private pointer. The only use
->>>>>> I can find is with a non-NULL pointer, which would mean the "else"
->>>>>> path is always taken at present for the RTC case (which you now
->>>>>> change).
->>>>>
->>>>> Right, the else case was always taken because as the comment noted RTC
->>>>> would take care of disabling itself (by calling destroy_periodic_time
->>>>> from the callback when using strict_mode). When no_ack mode was
->>>>> implemented this wasn't taken into account AFAICT, and thus the RTC
->>>>> was never removed from the list even when masked.
->>>>>
->>>>> I think with no_ack mode the RTC shouldn't have this specific handling
->>>>> in pt_update_irq, as it should behave like any other virtual timer.
->>>>> I could try to split this as a separate bugfix, but then I would have
->>>>> to teach pt_update_irq to differentiate between strict_mode and no_ack
->>>>> mode.
->>>>
->>>> A fair part of my confusion was about "&& !pt->priv".
->>>
->>> I think you meant "|| !pt->priv"?
->>
->> Oops, indeed.
->>
->>>> I've looked back
->>>> at 9607327abbd3 ("x86/HVM: properly handle RTC periodic timer even when
->>>> !RTC_PIE"), where this was added. It was, afaict, to cover for
->>>> hpet_set_timer() passing NULL with RTC_IRQ.
->>>
->>> That's tricky, as hpet_set_timer hardcodes 8 instead of using RTC_IRQ
->>> which makes it really easy to miss.
->>>
->>>> Which makes me suspect that
->>>> be07023be115 ("x86/vhpet: add support for level triggered interrupts")
->>>> may have subtly broken things.
->>>
->>> Right - as that would have made the RTC irq when generated from the
->>> HPET no longer be suspended when masked (as pt->priv would no longer
->>> be NULL). Could be fixed with:
->>>
->>> diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
->>> index ca94e8b4538..f2cbd12f400 100644
->>> --- a/xen/arch/x86/hvm/hpet.c
->>> +++ b/xen/arch/x86/hvm/hpet.c
->>> @@ -318,7 +318,8 @@ static void hpet_set_timer(HPETState *h, unsigned int tn,
->>>                           hpet_tick_to_ns(h, diff),
->>>                           oneshot ? 0 : hpet_tick_to_ns(h, h->hpet.period[tn]),
->>>                           irq, timer_level(h, tn) ? hpet_timer_fired : NULL,
->>> -                         (void *)(unsigned long)tn, timer_level(h, tn));
->>> +                         timer_level(h, tn) ? (void *)(unsigned long)tn : NULL,
->>> +                         timer_level(h, tn));
->>>  }
->>>  
->>>  static inline uint64_t hpet_fixup_reg(
->>>
->>> Passing again NULL as the callback private data for edge triggered
->>> interrupts.
->>
->> Right, plus perhaps at the same time replacing the hardcoded 8.
-> 
-> Right, but if you agree to take this patch and remove strict_mode then
-> the emulated RTC won't disable itself anymore, and hence needs to be
-> handled as any other virtual timer?
+flight 161625 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/161625/
 
-I'm still trying to become convinced, both of the removal of the mode
-in general and the particular part of the change I've been struggling
-with.
+Failures :-/ but no regressions.
 
-Jan
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  d26c277826dbbd64b3e3cb57159e1ecbfad33bc8
+baseline version:
+ xen                  1f8ee4cb430e5a9da37096574c41632cf69a0bc7
+
+Last test of basis   161556  2021-04-30 17:01:28 Z    2 days
+Testing same since   161625  2021-05-03 14:01:31 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan Beulich <jbeulich@suse.com>
+  Rahul Singh <rahul.singh@arm.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Tim Deegan <tim@xen.org>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   1f8ee4cb43..d26c277826  d26c277826dbbd64b3e3cb57159e1ecbfad33bc8 -> smoke
 
