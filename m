@@ -2,48 +2,48 @@ Return-Path: <SRS0=Vf37=J7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9F07C433B4
-	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 09:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DA1BC43460
+	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 09:46:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 650DE6115C
-	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 09:46:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 650DE6115C
+	by mail.kernel.org (Postfix) with ESMTPS id B7D1D60C41
+	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 09:46:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7D1D60C41
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.122052.230181 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.122055.230217 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldrdC-0003qp-Op; Tue, 04 May 2021 09:46:18 +0000
+	id 1ldrdM-0003yB-Qf; Tue, 04 May 2021 09:46:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 122052.230181; Tue, 04 May 2021 09:46:18 +0000
+Received: by outflank-mailman (output) from mailman id 122055.230217; Tue, 04 May 2021 09:46:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldrdC-0003qi-Lf; Tue, 04 May 2021 09:46:18 +0000
-Received: by outflank-mailman (input) for mailman id 122052;
- Tue, 04 May 2021 09:46:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ldrdM-0003y3-NP; Tue, 04 May 2021 09:46:28 +0000
+Received: by outflank-mailman (input) for mailman id 122055;
+ Tue, 04 May 2021 09:46:27 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8884=J7=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1ldrdB-0003qd-Fo
- for xen-devel@lists.xenproject.org; Tue, 04 May 2021 09:46:17 +0000
+ id 1ldrdK-0003rw-Ui
+ for xen-devel@lists.xenproject.org; Tue, 04 May 2021 09:46:26 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 1b4aa7bb-162e-4f20-bda6-96ef96c40985;
- Tue, 04 May 2021 09:46:16 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id aa94bf46-2607-42ad-b6bf-b3b3c6f4157f;
+ Tue, 04 May 2021 09:46:21 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 33E14ED1;
- Tue,  4 May 2021 02:46:16 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 64CF8106F;
+ Tue,  4 May 2021 02:46:21 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D16813F73B;
- Tue,  4 May 2021 02:46:14 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0F4493F73B;
+ Tue,  4 May 2021 02:46:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,7 +55,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1b4aa7bb-162e-4f20-bda6-96ef96c40985
+X-Inumbo-ID: aa94bf46-2607-42ad-b6bf-b3b3c6f4157f
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
@@ -67,82 +67,279 @@ Cc: bertrand.marquis@arm.com,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 0/3] Use Doxygen and sphinx for html documentation
-Date: Tue,  4 May 2021 10:46:03 +0100
-Message-Id: <20210504094606.7125-1-luca.fancellu@arm.com>
+Subject: [PATCH v4 3/3] docs/doxygen: doxygen documentation for grant_table.h
+Date: Tue,  4 May 2021 10:46:06 +0100
+Message-Id: <20210504094606.7125-4-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210504094606.7125-1-luca.fancellu@arm.com>
+References: <20210504094606.7125-1-luca.fancellu@arm.com>
 
-This serie introduce doxygen in the sphinx html docs generation.
-One benefit is to keep most of the documentation in the source
-files of xen so that it's more maintainable, on the other hand
-there are some limitation of doxygen that should be addressed
-modifying the current codebase (for example doxygen can't parse
-anonymous structure/union).
+Modification to include/public/grant_table.h:
 
-To reproduce the documentation xen must be compiled because
-most of the headers are generated on compilation time from
-the makefiles.
+1) Add doxygen tags to:
+ - Create Grant tables section
+ - include variables in the generated documentation
+ - Used @keepindent/@endkeepindent to enclose comment
+   section that are indented using spaces, to keep
+   the indentation.
+2) Add .rst file for grant table for Arm64
 
-Here follows the steps to generate the sphinx html docs, some
-package may be required on your machine, everything is suggested
-by the autoconf script.
-Here I'm building the arm64 docs (the only introduced for now by
-this serie):
-
-./configure
-make -C xen XEN_TARGET_ARCH="arm64" CROSS_COMPILE="aarch64-linux-gnu-" menuconfig
-make -C xen XEN_TARGET_ARCH="arm64" CROSS_COMPILE="aarch64-linux-gnu-"
-make -C docs XEN_TARGET_ARCH="arm64" sphinx-html
-
-now in docs/sphinx/html/ we have the generated docs starting
-from the index.html page.
-
-Luca Fancellu (3):
-  docs: add doxygen support for html documentation
-  docs: hypercalls sphinx skeleton for generated html
-  docs/doxygen: doxygen documentation for grant_table.h
-
- .gitignore                                    |    7 +
- config/Docs.mk.in                             |    2 +
- docs/Makefile                                 |   46 +-
- docs/conf.py                                  |   48 +-
- docs/configure                                |  258 ++
- docs/configure.ac                             |   15 +
- docs/hypercall-interfaces/arm32.rst           |    4 +
- docs/hypercall-interfaces/arm64.rst           |   33 +
- .../common/grant_tables.rst                   |    8 +
- docs/hypercall-interfaces/index.rst.in        |    7 +
- docs/hypercall-interfaces/x86_64.rst          |    4 +
- docs/index.rst                                |    8 +
- docs/xen-doxygen/customdoxygen.css            |   36 +
- docs/xen-doxygen/doxy-preprocessor.py         |  110 +
- docs/xen-doxygen/doxy_input.list              |    1 +
- docs/xen-doxygen/doxygen_include.h.in         |   32 +
- docs/xen-doxygen/footer.html                  |   21 +
- docs/xen-doxygen/header.html                  |   56 +
- docs/xen-doxygen/mainpage.md                  |    5 +
- docs/xen-doxygen/xen_project_logo_165x67.png  |  Bin 0 -> 18223 bytes
- docs/xen.doxyfile.in                          | 2316 +++++++++++++++++
- m4/ax_python_module.m4                        |   56 +
- m4/docs_tool.m4                               |    9 +
- xen/include/public/grant_table.h              |   68 +-
- 24 files changed, 3120 insertions(+), 30 deletions(-)
- create mode 100644 docs/hypercall-interfaces/arm32.rst
- create mode 100644 docs/hypercall-interfaces/arm64.rst
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+v4 changes:
+- Used @keepindent/@endkeepindent doxygen commands
+  to keep text with spaces indentation.
+- drop changes to grant_entry_v1 comment, it will
+  be changed and included in the docs in a future patch
+- Move docs .rst to "common" folder
+v3 changes:
+- removed tags to skip anonymous union/struct
+- moved back comment pointed out by Jan
+- moved down defines related to struct gnttab_copy
+  as pointed out by Jan
+v2 changes:
+- Revert back to anonymous union/struct
+- add doxygen tags to skip anonymous union/struct
+---
+ docs/hypercall-interfaces/arm64.rst           |  1 +
+ .../common/grant_tables.rst                   |  8 +++
+ docs/xen-doxygen/doxy_input.list              |  1 +
+ xen/include/public/grant_table.h              | 68 ++++++++++++-------
+ 4 files changed, 54 insertions(+), 24 deletions(-)
  create mode 100644 docs/hypercall-interfaces/common/grant_tables.rst
- create mode 100644 docs/hypercall-interfaces/index.rst.in
- create mode 100644 docs/hypercall-interfaces/x86_64.rst
- create mode 100644 docs/xen-doxygen/customdoxygen.css
- create mode 100755 docs/xen-doxygen/doxy-preprocessor.py
- create mode 100644 docs/xen-doxygen/doxy_input.list
- create mode 100644 docs/xen-doxygen/doxygen_include.h.in
- create mode 100644 docs/xen-doxygen/footer.html
- create mode 100644 docs/xen-doxygen/header.html
- create mode 100644 docs/xen-doxygen/mainpage.md
- create mode 100644 docs/xen-doxygen/xen_project_logo_165x67.png
- create mode 100644 docs/xen.doxyfile.in
- create mode 100644 m4/ax_python_module.m4
 
+diff --git a/docs/hypercall-interfaces/arm64.rst b/docs/hypercall-interfaces/arm64.rst
+index 5e701a2adc..cb4c0d13de 100644
+--- a/docs/hypercall-interfaces/arm64.rst
++++ b/docs/hypercall-interfaces/arm64.rst
+@@ -8,6 +8,7 @@ Starting points
+ .. toctree::
+    :maxdepth: 2
+ 
++   common/grant_tables
+ 
+ 
+ Functions
+diff --git a/docs/hypercall-interfaces/common/grant_tables.rst b/docs/hypercall-interfaces/common/grant_tables.rst
+new file mode 100644
+index 0000000000..8955ec5812
+--- /dev/null
++++ b/docs/hypercall-interfaces/common/grant_tables.rst
+@@ -0,0 +1,8 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Grant Tables
++============
++
++.. doxygengroup:: grant_table
++   :project: Xen
++   :members:
+diff --git a/docs/xen-doxygen/doxy_input.list b/docs/xen-doxygen/doxy_input.list
+index e69de29bb2..233d692fa7 100644
+--- a/docs/xen-doxygen/doxy_input.list
++++ b/docs/xen-doxygen/doxy_input.list
+@@ -0,0 +1 @@
++xen/include/public/grant_table.h
+diff --git a/xen/include/public/grant_table.h b/xen/include/public/grant_table.h
+index 84b1d26b36..d879c3e23e 100644
+--- a/xen/include/public/grant_table.h
++++ b/xen/include/public/grant_table.h
+@@ -25,15 +25,19 @@
+  * Copyright (c) 2004, K A Fraser
+  */
+ 
++/**
++ * @file
++ * @brief Interface for granting foreign access to page frames, and receiving
++ * page-ownership transfers.
++ */
++
+ #ifndef __XEN_PUBLIC_GRANT_TABLE_H__
+ #define __XEN_PUBLIC_GRANT_TABLE_H__
+ 
+ #include "xen.h"
+ 
+-/*
+- * `incontents 150 gnttab Grant Tables
+- *
+- * Xen's grant tables provide a generic mechanism to memory sharing
++/**
++ * @brief Xen's grant tables provide a generic mechanism to memory sharing
+  * between domains. This shared memory interface underpins the split
+  * device drivers for block and network IO.
+  *
+@@ -51,13 +55,10 @@
+  * know the real machine address of a page it is sharing. This makes
+  * it possible to share memory correctly with domains running in
+  * fully virtualised memory.
+- */
+-
+-/***********************************
++ *
+  * GRANT TABLE REPRESENTATION
+- */
+-
+-/* Some rough guidelines on accessing and updating grant-table entries
++ *
++ * Some rough guidelines on accessing and updating grant-table entries
+  * in a concurrency-safe manner. For more information, Linux contains a
+  * reference implementation for guest OSes (drivers/xen/grant_table.c, see
+  * http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=drivers/xen/grant-table.c;hb=HEAD
+@@ -66,6 +67,7 @@
+  *     compiler barrier will still be required.
+  *
+  * Introducing a valid entry into the grant table:
++ * @keepindent
+  *  1. Write ent->domid.
+  *  2. Write ent->frame:
+  *      GTF_permit_access:   Frame to which access is permitted.
+@@ -73,20 +75,25 @@
+  *                           frame, or zero if none.
+  *  3. Write memory barrier (WMB).
+  *  4. Write ent->flags, inc. valid type.
++ * @endkeepindent
+  *
+  * Invalidating an unused GTF_permit_access entry:
++ * @keepindent
+  *  1. flags = ent->flags.
+  *  2. Observe that !(flags & (GTF_reading|GTF_writing)).
+  *  3. Check result of SMP-safe CMPXCHG(&ent->flags, flags, 0).
+  *  NB. No need for WMB as reuse of entry is control-dependent on success of
+  *      step 3, and all architectures guarantee ordering of ctrl-dep writes.
++ * @endkeepindent
+  *
+  * Invalidating an in-use GTF_permit_access entry:
++ *
+  *  This cannot be done directly. Request assistance from the domain controller
+  *  which can set a timeout on the use of a grant entry and take necessary
+  *  action. (NB. This is not yet implemented!).
+  *
+  * Invalidating an unused GTF_accept_transfer entry:
++ * @keepindent
+  *  1. flags = ent->flags.
+  *  2. Observe that !(flags & GTF_transfer_committed). [*]
+  *  3. Check result of SMP-safe CMPXCHG(&ent->flags, flags, 0).
+@@ -97,18 +104,24 @@
+  *      transferred frame is written. It is safe for the guest to spin waiting
+  *      for this to occur (detect by observing GTF_transfer_completed in
+  *      ent->flags).
++ * @endkeepindent
+  *
+  * Invalidating a committed GTF_accept_transfer entry:
+  *  1. Wait for (ent->flags & GTF_transfer_completed).
+  *
+  * Changing a GTF_permit_access from writable to read-only:
++ *
+  *  Use SMP-safe CMPXCHG to set GTF_readonly, while checking !GTF_writing.
+  *
+  * Changing a GTF_permit_access from read-only to writable:
++ *
+  *  Use SMP-safe bit-setting instruction.
++ *
++ * @addtogroup grant_table Grant Tables
++ * @{
+  */
+ 
+-/*
++/**
+  * Reference to a grant entry in a specified domain's grant table.
+  */
+ typedef uint32_t grant_ref_t;
+@@ -129,15 +142,17 @@ typedef uint32_t grant_ref_t;
+ #define grant_entry_v1_t grant_entry_t
+ #endif
+ struct grant_entry_v1 {
+-    /* GTF_xxx: various type and flag information.  [XEN,GST] */
++    /** GTF_xxx: various type and flag information.  [XEN,GST] */
+     uint16_t flags;
+-    /* The domain being granted foreign privileges. [GST] */
++    /** The domain being granted foreign privileges. [GST] */
+     domid_t  domid;
+-    /*
++    /**
++     * @keepindent
+      * GTF_permit_access: GFN that @domid is allowed to map and access. [GST]
+      * GTF_accept_transfer: GFN that @domid is allowed to transfer into. [GST]
+      * GTF_transfer_completed: MFN whose ownership transferred by @domid
+      *                         (non-translated guests only). [XEN]
++     * @endkeepindent
+      */
+     uint32_t frame;
+ };
+@@ -228,7 +243,7 @@ struct grant_entry_header {
+ };
+ typedef struct grant_entry_header grant_entry_header_t;
+ 
+-/*
++/**
+  * Version 2 of the grant entry structure.
+  */
+ union grant_entry_v2 {
+@@ -433,7 +448,7 @@ typedef struct gnttab_transfer gnttab_transfer_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
+ 
+ 
+-/*
++/**
+  * GNTTABOP_copy: Hypervisor based copy
+  * source and destinations can be eithers MFNs or, for foreign domains,
+  * grant references. the foreign domain has to grant read/write access
+@@ -451,11 +466,6 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
+  * bytes to be copied.
+  */
+ 
+-#define _GNTCOPY_source_gref      (0)
+-#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
+-#define _GNTCOPY_dest_gref        (1)
+-#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
+-
+ struct gnttab_copy {
+     /* IN parameters. */
+     struct gnttab_copy_ptr {
+@@ -471,6 +481,12 @@ struct gnttab_copy {
+     /* OUT parameters. */
+     int16_t       status;
+ };
++
++#define _GNTCOPY_source_gref      (0)
++#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
++#define _GNTCOPY_dest_gref        (1)
++#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
++
+ typedef struct gnttab_copy  gnttab_copy_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_copy_t);
+ 
+@@ -579,7 +595,7 @@ struct gnttab_swap_grant_ref {
+ typedef struct gnttab_swap_grant_ref gnttab_swap_grant_ref_t;
+ DEFINE_XEN_GUEST_HANDLE(gnttab_swap_grant_ref_t);
+ 
+-/*
++/**
+  * Issue one or more cache maintenance operations on a portion of a
+  * page granted to the calling domain by a foreign domain.
+  */
+@@ -588,8 +604,8 @@ struct gnttab_cache_flush {
+         uint64_t dev_bus_addr;
+         grant_ref_t ref;
+     } a;
+-    uint16_t offset; /* offset from start of grant */
+-    uint16_t length; /* size within the grant */
++    uint16_t offset; /**< offset from start of grant */
++    uint16_t length; /**< size within the grant */
+ #define GNTTAB_CACHE_CLEAN          (1u<<0)
+ #define GNTTAB_CACHE_INVAL          (1u<<1)
+ #define GNTTAB_CACHE_SOURCE_GREF    (1u<<31)
+@@ -673,6 +689,10 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_cache_flush_t);
+     "operation not done; try again"             \
+ }
+ 
++/**
++ * @}
++*/
++
+ #endif /* __XEN_PUBLIC_GRANT_TABLE_H__ */
+ 
+ /*
 -- 
 2.17.1
 
