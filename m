@@ -2,45 +2,49 @@ Return-Path: <SRS0=Vf37=J7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8038C433ED
-	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 13:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3481DC433ED
+	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 13:32:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 82A4A610FC
-	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 13:28:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 82A4A610FC
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id DF45B610FC
+	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 13:32:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF45B610FC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.122389.230834 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.122394.230845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldv5z-0002xG-Ff; Tue, 04 May 2021 13:28:15 +0000
+	id 1ldv9k-0003o8-Vw; Tue, 04 May 2021 13:32:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 122389.230834; Tue, 04 May 2021 13:28:15 +0000
+Received: by outflank-mailman (output) from mailman id 122394.230845; Tue, 04 May 2021 13:32:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldv5z-0002x9-CN; Tue, 04 May 2021 13:28:15 +0000
-Received: by outflank-mailman (input) for mailman id 122389;
- Tue, 04 May 2021 13:28:14 +0000
+	id 1ldv9k-0003o1-Sw; Tue, 04 May 2021 13:32:08 +0000
+Received: by outflank-mailman (input) for mailman id 122394;
+ Tue, 04 May 2021 13:32:08 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=1gXq=J7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ldv5x-0002wz-VB
- for xen-devel@lists.xenproject.org; Tue, 04 May 2021 13:28:13 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id eb30eb11-e99d-4291-9783-5a5d3127cae0;
- Tue, 04 May 2021 13:28:12 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 1C885AF2F;
- Tue,  4 May 2021 13:28:12 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=8884=J7=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
+ id 1ldv9k-0003nw-C3
+ for xen-devel@lists.xenproject.org; Tue, 04 May 2021 13:32:08 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 27a0024d-6ef3-424d-bd26-79b8e379d72a;
+ Tue, 04 May 2021 13:32:03 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9BEAF106F;
+ Tue,  4 May 2021 06:31:57 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
+ [10.1.197.16])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3D6F23F73B;
+ Tue,  4 May 2021 06:31:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,75 +56,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb30eb11-e99d-4291-9783-5a5d3127cae0
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1620134892; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=AaFdGfB8BZpSS75FzAWGpKYG+lMXN2kqMmw3gSrRoSo=;
-	b=fcJ8k92/e/CFi0J1rMoovhZYquKhkQeAtXHNHCk8aQoqplc/lBZ0oohvfwaRUZ+4yN8CC5
-	oPHN/GY1ay+5jxN0AqCSw+4yOWN0bnQER/E7BWsU/cgYbvA/P2DUEtFNvpDb2/swJiJ5oN
-	ki0Vwr+kAOmVAcxmZugGjalxkF+fddo=
-Subject: Re: [PATCH v4 3/3] docs/doxygen: doxygen documentation for
- grant_table.h
-To: Luca Fancellu <luca.fancellu@arm.com>
-Cc: Bertrand Marquis <bertrand.marquis@arm.com>, wei.chen@arm.com,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <20210504094606.7125-1-luca.fancellu@arm.com>
- <20210504094606.7125-4-luca.fancellu@arm.com>
- <37e5b461-40fe-ac78-59b9-033ff8cdc6d1@suse.com>
- <1853929B-AC45-42AF-8FE4-7B23C700B2E2@arm.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <e3f816df-a3ee-f880-ad6f-68c9cc2db517@suse.com>
-Date: Tue, 4 May 2021 15:28:11 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
-MIME-Version: 1.0
-In-Reply-To: <1853929B-AC45-42AF-8FE4-7B23C700B2E2@arm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 27a0024d-6ef3-424d-bd26-79b8e379d72a
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v5 2/3] docs: hypercalls sphinx skeleton for generated html
+Date: Tue,  4 May 2021 14:31:44 +0100
+Message-Id: <20210504133145.767-3-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210504133145.767-1-luca.fancellu@arm.com>
+References: <20210504133145.767-1-luca.fancellu@arm.com>
 
-On 04.05.2021 15:09, Luca Fancellu wrote:
->> On 4 May 2021, at 12:48, Jan Beulich <jbeulich@suse.com> wrote:
->> On 04.05.2021 11:46, Luca Fancellu wrote:
->>> @@ -451,11 +466,6 @@ DEFINE_XEN_GUEST_HANDLE(gnttab_transfer_t);
->>>  * bytes to be copied.
->>>  */
->>>
->>> -#define _GNTCOPY_source_gref      (0)
->>> -#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
->>> -#define _GNTCOPY_dest_gref        (1)
->>> -#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
->>> -
->>> struct gnttab_copy {
->>>     /* IN parameters. */
->>>     struct gnttab_copy_ptr {
->>> @@ -471,6 +481,12 @@ struct gnttab_copy {
->>>     /* OUT parameters. */
->>>     int16_t       status;
->>> };
->>> +
->>> +#define _GNTCOPY_source_gref      (0)
->>> +#define GNTCOPY_source_gref       (1<<_GNTCOPY_source_gref)
->>> +#define _GNTCOPY_dest_gref        (1)
->>> +#define GNTCOPY_dest_gref         (1<<_GNTCOPY_dest_gref)
->>
->> Didn't you say you agree with moving this back up some, next to the
->> field using these?
-> 
-> My mistake! I’ll move it in the next patch, did you spot anything else I might have forgot of what we agreed?
+Create a skeleton for the documentation about hypercalls
 
-No, thanks. I don't think I have any more comments to make on this
-series (once this last aspect got addressed, and assuming no new
-issues get introduced). But to be clear on that side as well - I
-don't think I'm up to actually ack-ing the patch (let alone the
-entire series).
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+ .gitignore                             |  1 +
+ docs/Makefile                          |  4 ++++
+ docs/hypercall-interfaces/arm32.rst    |  4 ++++
+ docs/hypercall-interfaces/arm64.rst    | 32 ++++++++++++++++++++++++++
+ docs/hypercall-interfaces/index.rst.in |  7 ++++++
+ docs/hypercall-interfaces/x86_64.rst   |  4 ++++
+ docs/index.rst                         |  8 +++++++
+ 7 files changed, 60 insertions(+)
+ create mode 100644 docs/hypercall-interfaces/arm32.rst
+ create mode 100644 docs/hypercall-interfaces/arm64.rst
+ create mode 100644 docs/hypercall-interfaces/index.rst.in
+ create mode 100644 docs/hypercall-interfaces/x86_64.rst
 
-Jan
+diff --git a/.gitignore b/.gitignore
+index d271e0ce6a..a9aab120ae 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -64,6 +64,7 @@ docs/xen.doxyfile
+ docs/xen.doxyfile.tmp
+ docs/xen-doxygen/doxygen_include.h
+ docs/xen-doxygen/doxygen_include.h.tmp
++docs/hypercall-interfaces/index.rst
+ extras/mini-os*
+ install/*
+ stubdom/*-minios-config.mk
+diff --git a/docs/Makefile b/docs/Makefile
+index 2f784c36ce..b02c3dfb79 100644
+--- a/docs/Makefile
++++ b/docs/Makefile
+@@ -61,6 +61,9 @@ build: html txt pdf man-pages figs
+ sphinx-html: $(DOXY_DEPS) $(DOXY_LIST_SOURCES)
+ ifneq ($(SPHINXBUILD),no)
+ 	$(DOXYGEN) xen.doxyfile
++	@echo "Generating hypercall-interfaces/index.rst"
++	@sed -e "s,@XEN_TARGET_ARCH@,$(XEN_TARGET_ARCH),g" \
++		hypercall-interfaces/index.rst.in > hypercall-interfaces/index.rst
+ 	XEN_ROOT=$(realpath $(XEN_ROOT)) $(SPHINXBUILD) -b html . sphinx/html
+ else
+ 	@echo "Sphinx is not installed; skipping sphinx-html documentation."
+@@ -108,6 +111,7 @@ clean: clean-man-pages
+ 	rm -f xen.doxyfile.tmp
+ 	rm -f xen-doxygen/doxygen_include.h
+ 	rm -f xen-doxygen/doxygen_include.h.tmp
++	rm -f hypercall-interfaces/index.rst
+ 
+ .PHONY: distclean
+ distclean: clean
+diff --git a/docs/hypercall-interfaces/arm32.rst b/docs/hypercall-interfaces/arm32.rst
+new file mode 100644
+index 0000000000..4e973fbbaf
+--- /dev/null
++++ b/docs/hypercall-interfaces/arm32.rst
+@@ -0,0 +1,4 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Hypercall Interfaces - arm32
++============================
+diff --git a/docs/hypercall-interfaces/arm64.rst b/docs/hypercall-interfaces/arm64.rst
+new file mode 100644
+index 0000000000..5e701a2adc
+--- /dev/null
++++ b/docs/hypercall-interfaces/arm64.rst
+@@ -0,0 +1,32 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Hypercall Interfaces - arm64
++============================
++
++Starting points
++---------------
++.. toctree::
++   :maxdepth: 2
++
++
++
++Functions
++---------
++
++
++Structs
++-------
++
++
++Enums and sets of #defines
++--------------------------
++
++
++Typedefs
++--------
++
++
++Enum values and individual #defines
++-----------------------------------
++
++
+diff --git a/docs/hypercall-interfaces/index.rst.in b/docs/hypercall-interfaces/index.rst.in
+new file mode 100644
+index 0000000000..e4dcc5db8d
+--- /dev/null
++++ b/docs/hypercall-interfaces/index.rst.in
+@@ -0,0 +1,7 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Hypercall Interfaces
++====================
++
++.. toctree::
++   @XEN_TARGET_ARCH@
+diff --git a/docs/hypercall-interfaces/x86_64.rst b/docs/hypercall-interfaces/x86_64.rst
+new file mode 100644
+index 0000000000..3ed70dff95
+--- /dev/null
++++ b/docs/hypercall-interfaces/x86_64.rst
+@@ -0,0 +1,4 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++Hypercall Interfaces - x86_64
++=============================
+diff --git a/docs/index.rst b/docs/index.rst
+index b75487a05d..52226a42d8 100644
+--- a/docs/index.rst
++++ b/docs/index.rst
+@@ -53,6 +53,14 @@ kind of development environment.
+    hypervisor-guide/index
+ 
+ 
++Hypercall Interfaces documentation
++----------------------------------
++
++.. toctree::
++   :maxdepth: 2
++
++   hypercall-interfaces/index
++
+ Miscellanea
+ -----------
+ 
+-- 
+2.17.1
+
 
