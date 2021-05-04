@@ -2,45 +2,44 @@ Return-Path: <SRS0=Vf37=J7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F15E9C433ED
-	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 07:58:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 429BCC433ED
+	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 08:03:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8DB48610FA
-	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 07:58:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8DB48610FA
+	by mail.kernel.org (Postfix) with ESMTPS id EA86661186
+	for <xen-devel@archiver.kernel.org>; Tue,  4 May 2021 08:03:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA86661186
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.121969.229999 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.121976.230012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldpwF-0001Kn-2X; Tue, 04 May 2021 07:57:51 +0000
+	id 1ldq1J-0002lm-Tj; Tue, 04 May 2021 08:03:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 121969.229999; Tue, 04 May 2021 07:57:51 +0000
+Received: by outflank-mailman (output) from mailman id 121976.230012; Tue, 04 May 2021 08:03:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ldpwE-0001Kg-Vt; Tue, 04 May 2021 07:57:50 +0000
-Received: by outflank-mailman (input) for mailman id 121969;
- Tue, 04 May 2021 07:57:50 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ldq1J-0002lf-Q1; Tue, 04 May 2021 08:03:05 +0000
+Received: by outflank-mailman (input) for mailman id 121976;
+ Tue, 04 May 2021 08:03:04 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1gXq=J7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ldpwE-0001Kb-1f
- for xen-devel@lists.xenproject.org; Tue, 04 May 2021 07:57:50 +0000
+ id 1ldq1I-0002lY-9m
+ for xen-devel@lists.xenproject.org; Tue, 04 May 2021 08:03:04 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4a264c15-80b5-4ca9-ac6c-bc694c5ec9e1;
- Tue, 04 May 2021 07:57:48 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id dc110e49-9b37-4006-9adb-39b99282f19b;
+ Tue, 04 May 2021 08:03:03 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A7B4FAECB;
- Tue,  4 May 2021 07:57:47 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id C746AAFF0;
+ Tue,  4 May 2021 08:03:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,107 +51,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a264c15-80b5-4ca9-ac6c-bc694c5ec9e1
+X-Inumbo-ID: dc110e49-9b37-4006-9adb-39b99282f19b
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1620115067; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1620115382; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=njW/EeGF5q23c7VSb2H2+m0T4TKq3MoSFSByja5muxE=;
-	b=mgC7IuhH4+JuoL9JL9fFiaPmYBobYdkuhLhFS/1xlwJSYJ8jTmxF4DEInErKarwewLW70y
-	QPuUt5h54NBF0EOUwdmvEyJ0na1KZp7kQt9dVmiaSavOqZiT0WeAls81kzG7PPd4GKqqfU
-	V1kCujWbbbIIuP2TzCviLyNZd3QGqrU=
-Subject: Re: [PATCH v3 05/22] x86/xstate: drop xstate_offsets[] and
- xstate_sizes[]
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <322de6db-e01f-0b57-5777-5d94a13c441a@suse.com>
- <434705ef-1c34-581d-b956-2322b4413232@suse.com>
- <f3a9b372-c927-70e3-a2ba-fef2bb2c7d7a@citrix.com>
+	bh=706C+Rr0FDuR3T16GiMyOKirxaTctxt7XOLLnVP5JrU=;
+	b=MAHd+U5Zc6o7yjzJdLmIDjhzdz3fZA1WUs/bjpZ0nJc7S0Uoa55lPxvk7Z/YQdM56nzmvC
+	iDpml+U1HndK0MG9FTZukdTdm++l0Rqmo+r8XbV/nWYrPXCm6Gyhc+h9rSA4kbst3mOXNp
+	TWkBpS6UDVEHLrwsnnh3LT5SN/6xyb0=
+Subject: Re: [PATCH 10/13] libxc: Add xc_set_cpufreq_hwp
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20210503192810.36084-1-jandryuk@gmail.com>
+ <20210503192810.36084-11-jandryuk@gmail.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <ebf0945a-db78-66de-2f64-860c5067220d@suse.com>
-Date: Tue, 4 May 2021 09:57:47 +0200
+Message-ID: <398aa86f-13e4-e5d4-29d6-4491a05c920a@suse.com>
+Date: Tue, 4 May 2021 10:03:02 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <f3a9b372-c927-70e3-a2ba-fef2bb2c7d7a@citrix.com>
+In-Reply-To: <20210503192810.36084-11-jandryuk@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 03.05.2021 18:10, Andrew Cooper wrote:
-> On 22/04/2021 15:45, Jan Beulich wrote:
->> They're redundant with respective fields from the raw CPUID policy; no
->> need to keep two copies of the same data.
+On 03.05.2021 21:28, Jason Andryuk wrote:
+> Add xc_set_cpufreq_hwp to allow calling xen_systctl_pm_op
+> SET_CPUFREQ_HWP.
 > 
-> So before I read this patch of yours, I had a separate cleanup patch
-> turning the two arrays into static const.
+> Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 > 
->> This also breaks
->> recalculate_xstate()'s dependency on xstate_init(),
-> 
-> It doesn't, because you've retained the reference to xstate_align, which
-> is calculated in xstate_init().
+> ---
+> Am I allowed to do set_hwp = *set_hwp struct assignment?
 
-Good point - s/breaks/eliminates some of/.
-
->  I've posted "[PATCH 4/5] x86/cpuid:
-> Simplify recalculate_xstate()" which goes rather further.
-
-I'll see to take a look soonish.
-
-> xstate_align, and xstate_xfd as you've got later in the series, don't
-> need to be variables.  They're constants, just like the offset/size
-> information, because they're all a description of the XSAVE ISA
-> instruction behaviour.
-
-Hmm, I think there are multiple views possible - for xfd_mask even more
-than for xstate_align: XFD is, according to my understanding of the
-spec, not a prereq feature to AMX. IOW AMX would function fine without
-XFD, just that lazy state saving space allocation then wouldn't be
-possible. And I also can't, in principle, see any reason why largish
-components like the AVX512 ones couldn't become XFD-sensitive (in
-hardware, we of course can't mimic this in software).
-
-(I could take as proof sde reporting AMX but not XFD with -spr, but I
-rather suspect this to be an oversight in their CPUID data. I've posted
-a respective question in their forum.)
-
-If there really was a strict static relationship, I'm having trouble
-seeing why the information would need expressing in CPUID at all. It
-would at least feel like over-engineering then.
-
-> We never turn on states we don't understand, which means we don't
-> actually need to refer to any component subleaf, other than to cross-check.
-> 
-> I'm still on the fence as to whether it is better to compile in the
-> constants, or to just use the raw policy.  Absolutely nothing good will
-> come of the constants changing, and one of my backup plans for dealing
-> with the size of cpuid_policy if it becomes a problem was to not store
-> these leaves, and generate them dynamically on request.
-
-Actually it is my understanding that the reason the offsets are
-expressed via CPUID is that originally it was meant for them to be
-able to vary between implementations (see in particular the placement
-of the LWP component, which has resulted in a curious 128-byte gap
-ahead of the MPX components). Until it was realized what implications
-this would have on migration.
-
->> allowing host CPUID
->> policy calculation to be moved together with that of the raw one (which
->> a subsequent change will require anyway).
-> 
-> While breaking up the host/raw calculations from the rest, we really
-> need to group the MSR policy calculations with their CPUID counterparts.
-
-But that's orthogonal to the change here, i.e. if at all for this
-series subject of a separate patch. Plus I have to admit I'm not
-sure I see what your plan here would be - cpuid.c and msr.c so far
-don't cross reference one another. And I thought this separation
-was intentional.
+I'm puzzled by the question - why would you not be?
 
 Jan
 
