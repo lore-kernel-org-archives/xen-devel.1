@@ -2,45 +2,49 @@ Return-Path: <SRS0=B3Pa=KA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F81DC43460
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 17:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E1F3C433ED
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 17:42:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D8597608FE
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 17:35:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8597608FE
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 39BE361157
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 17:42:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 39BE361157
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.123241.232444 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.123250.232455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leLQS-0007Uu-B6; Wed, 05 May 2021 17:35:08 +0000
+	id 1leLXL-0000S5-3u; Wed, 05 May 2021 17:42:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 123241.232444; Wed, 05 May 2021 17:35:08 +0000
+Received: by outflank-mailman (output) from mailman id 123250.232455; Wed, 05 May 2021 17:42:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leLQS-0007Un-83; Wed, 05 May 2021 17:35:08 +0000
-Received: by outflank-mailman (input) for mailman id 123241;
- Wed, 05 May 2021 17:35:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1leLQR-0007Uh-PL
- for xen-devel@lists.xenproject.org; Wed, 05 May 2021 17:35:07 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1leLQQ-0006rC-Px; Wed, 05 May 2021 17:35:06 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1leLQQ-0001zW-Jo; Wed, 05 May 2021 17:35:06 +0000
+	id 1leLXL-0000Ry-12; Wed, 05 May 2021 17:42:15 +0000
+Received: by outflank-mailman (input) for mailman id 123250;
+ Wed, 05 May 2021 17:42:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zu7P=KA=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1leLXJ-0000Rs-I0
+ for xen-devel@lists.xenproject.org; Wed, 05 May 2021 17:42:13 +0000
+Received: from mail-wr1-x42c.google.com (unknown [2a00:1450:4864:20::42c])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 030085a5-d1c5-4ed7-8586-a6807b44342a;
+ Wed, 05 May 2021 17:42:12 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id l2so2738284wrm.9
+ for <xen-devel@lists.xenproject.org>; Wed, 05 May 2021 10:42:12 -0700 (PDT)
+Received: from [192.168.1.186]
+ (host86-180-176-157.range86-180.btcentralplus.com. [86.180.176.157])
+ by smtp.gmail.com with ESMTPSA id q12sm5465702wmj.7.2021.05.05.10.42.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 May 2021 10:42:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,74 +56,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=vO2/1BMS+rEXM2serPa+0DZbUGvvSNfRrgTNgUBOWD8=; b=waXZYXBAXPwQrd/f+fy1SucVLd
-	6uitCS/n0zeyQq6A0yNpP5w+O21WmRIh3vqS1CHjBh5FnH1C1/haF2X1SjefVjNhxou/I52Bls8tM
-	eNqseV1Iw/FKFNjmZjgKrYezXPQXX/8FOAtMT10lMfFW7h+Sb0G1ClQrJzXbbYZnqWU4=;
-Subject: Re: [PATCH v4 3/3] unzstd: make helper symbols static
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <12054cba-4386-0dbf-46fd-41ace0344f8e@suse.com>
- <759c8524-cc01-fac8-bc62-0ba6558477bd@suse.com>
- <cb8fa703-f421-ce55-811a-d4a649bc201a@xen.org>
- <1696e5f2-481a-5a7f-258d-b2a0679b041f@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <f6e00fd9-a207-858e-37e8-fb25427cf8de@xen.org>
-Date: Wed, 5 May 2021 18:35:04 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.0
+X-Inumbo-ID: 030085a5-d1c5-4ed7-8586-a6807b44342a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=5ck4hA6Xxm2yKJj3VL+ZRwH+wBOpSKpRNDlAP7W/xkY=;
+        b=sqQ1P5bx1mEgzNpROO/fxDPLD91nT9gDAoarQLa7BmVjX+WVZbS3rBTTNHLYFjIFDH
+         5zj2pxzaeX4XMXJCmuJ6jzw0XeQOFEt2APMz30Aom4+taAvFdx5rM2KAHCYZhx/hu95P
+         TrvajzfUn6kYigiFSjofr5NVPr/kEHrz2NAfon1+zIAojtRgbhDWmBW3hWhXus1zpYbi
+         0OqHDmOwMs97yExn2XSUhf6RKK2G3i7E0Ji0i/uUwDcXEcqLiywbnNAbo21yz/g1kPW6
+         hakyTnxKg2W8Do32DUD9qoCuw6A4LfozyWo2O6VPiBK27Rqpzme96FXVe1X9FavAI7/T
+         phCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:subject:to:cc:references
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=5ck4hA6Xxm2yKJj3VL+ZRwH+wBOpSKpRNDlAP7W/xkY=;
+        b=Y2ymKZtJX6t6Vrb9e4tNXE6lFj1LKx8dItQM8b6IjdFkbZTFwUNl4odrIf+sZTg8SD
+         RwvGJvMiAOOeXYyOZQXpihRvj+AI5X7/lUR5ciuX4nDZUTBroRJ5kTsKSf8UDoYRf9gj
+         gplOJaifwfdVBR3YObuCPclGRz9b0iU18Jhg3uhi8jZRlu5o/SLbGQAJgQDALFInApRr
+         od9QknUryiYn2r1ih3t4Yzc2XPTzYhgxR/efoOgKtMdez0EkdehlIYDSjcaT8cpbS2TY
+         SVGmQrGfOrozo5aIOupzwb2B2YyJHHJu9xxiSA0BlwMXlvpJNWOp04fm6OiN2jSeLXJq
+         48MQ==
+X-Gm-Message-State: AOAM531dMD2LbiVhGtyZDL8xyohVQhkPvtZy25283vubLXG2kgPWyT63
+	Hb6Gtj8MNeCe4pAFv/k6VNuDgym6zRs=
+X-Google-Smtp-Source: ABdhPJyKeePxveTaMDHr01H0ue6iC6KDu7zCB1oEN0SxiOtXKt6kgydav7ZtpWMIR5bgS3/BkLoc6w==
+X-Received: by 2002:adf:a316:: with SMTP id c22mr229727wrb.202.1620236531877;
+        Wed, 05 May 2021 10:42:11 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Reply-To: paul@xen.org
+Subject: Re: [PATCH] xen: Free xenforeignmemory_resource at exit
+To: Anthony PERARD <anthony.perard@citrix.com>, qemu-devel@nongnu.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+References: <20210430163742.469739-1-anthony.perard@citrix.com>
+Message-ID: <32263046-97a5-b163-ff23-746effb5c7e4@xen.org>
+Date: Wed, 5 May 2021 18:42:10 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <1696e5f2-481a-5a7f-258d-b2a0679b041f@suse.com>
+In-Reply-To: <20210430163742.469739-1-anthony.perard@citrix.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-
-
-On 29/04/2021 14:26, Jan Beulich wrote:
-> On 29.04.2021 13:27, Julien Grall wrote:
->> On 21/04/2021 11:22, Jan Beulich wrote:
->>> While for the original library's purposes these functions of course want
->>> to be externally exposed, we don't need this, and we also don't want
->>> this both to prevent unintended use and to keep the name space tidy.
->>> (When functions have no callers at all, wrap them with a suitable
->>> #ifdef.) This has the added benefit of reducing the resulting binary
->>> size - while this is all .init code, it's still desirable to not carry
->>> dead code.
->>
->> So I understand the desire to keep the code close to Linux and removing
->> the dead code. However I am still not convinced that the approach taken
->> is actually worth the amount of memory saved.
->>
->> How much memory are we talking about here?
+On 30/04/2021 17:37, Anthony PERARD wrote:
+> From: Anthony PERARD <anthony.perard@citrix.com>
 > 
-> There are no (runtime) memory savings, as is being said by the
-> description. There are savings on the image and symbol table sizes
-> (see below - .*.0/ holding files as produced without the patch
-> applied, while .*.1/ holding output with it in place), the image
-> size reduction part of which is - as also expressed by the
-> description - a nice side effect, but not the main motivation for
-> the change.
+> Because Coverity complains about it and this is one leak that Valgrind
+> reports.
+> 
+> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Thanks for the providing the information. I have misunderstood your 
-original intention.
+Acked-by: Paul Durrant <paul@xen.org>
 
-Reading them again, I have to admit this doesn't really change my view 
-here. You are trading a smaller name space or prevent unintended use 
-(not clear what would be wrong to call them) to code 
-maintenability/readability.
+> ---
+>   hw/i386/xen/xen-hvm.c       | 9 ++++++---
+>   include/hw/xen/xen_common.h | 6 ++++++
+>   2 files changed, 12 insertions(+), 3 deletions(-)
+> 
+> diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
+> index 7ce672e5a5c3..47ed7772fa39 100644
+> --- a/hw/i386/xen/xen-hvm.c
+> +++ b/hw/i386/xen/xen-hvm.c
+> @@ -109,6 +109,7 @@ typedef struct XenIOState {
+>       shared_iopage_t *shared_page;
+>       shared_vmport_iopage_t *shared_vmport_page;
+>       buffered_iopage_t *buffered_io_page;
+> +    xenforeignmemory_resource_handle *fres;
+>       QEMUTimer *buffered_io_timer;
+>       CPUState **cpu_by_vcpu_id;
+>       /* the evtchn port for polling the notification, */
+> @@ -1254,6 +1255,9 @@ static void xen_exit_notifier(Notifier *n, void *data)
+>       XenIOState *state = container_of(n, XenIOState, exit);
+>   
+>       xen_destroy_ioreq_server(xen_domid, state->ioservid);
+> +    if (state->fres != NULL) {
+> +        xenforeignmemory_unmap_resource(xen_fmem, state->fres);
+> +    }
+>   
+>       xenevtchn_close(state->xce_handle);
+>       xs_daemon_close(state->xenstore);
+> @@ -1321,7 +1325,6 @@ static void xen_wakeup_notifier(Notifier *notifier, void *data)
+>   static int xen_map_ioreq_server(XenIOState *state)
+>   {
+>       void *addr = NULL;
+> -    xenforeignmemory_resource_handle *fres;
+>       xen_pfn_t ioreq_pfn;
+>       xen_pfn_t bufioreq_pfn;
+>       evtchn_port_t bufioreq_evtchn;
+> @@ -1333,12 +1336,12 @@ static int xen_map_ioreq_server(XenIOState *state)
+>        */
+>       QEMU_BUILD_BUG_ON(XENMEM_resource_ioreq_server_frame_bufioreq != 0);
+>       QEMU_BUILD_BUG_ON(XENMEM_resource_ioreq_server_frame_ioreq(0) != 1);
+> -    fres = xenforeignmemory_map_resource(xen_fmem, xen_domid,
+> +    state->fres = xenforeignmemory_map_resource(xen_fmem, xen_domid,
+>                                            XENMEM_resource_ioreq_server,
+>                                            state->ioservid, 0, 2,
+>                                            &addr,
+>                                            PROT_READ | PROT_WRITE, 0);
+> -    if (fres != NULL) {
+> +    if (state->fres != NULL) {
+>           trace_xen_map_resource_ioreq(state->ioservid, addr);
+>           state->buffered_io_page = addr;
+>           state->shared_page = addr + TARGET_PAGE_SIZE;
+> diff --git a/include/hw/xen/xen_common.h b/include/hw/xen/xen_common.h
+> index 82e56339dd7e..a8118b41acfb 100644
+> --- a/include/hw/xen/xen_common.h
+> +++ b/include/hw/xen/xen_common.h
+> @@ -134,6 +134,12 @@ static inline xenforeignmemory_resource_handle *xenforeignmemory_map_resource(
+>       return NULL;
+>   }
+>   
+> +static inline int xenforeignmemory_unmap_resource(
+> +    xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fres)
+> +{
+> +    return 0;
+> +}
+> +
+>   #endif /* CONFIG_XEN_CTRL_INTERFACE_VERSION < 41100 */
+>   
+>   #if CONFIG_XEN_CTRL_INTERFACE_VERSION < 41000
+> 
 
-At the same time, this is not a code I usually work on (even if I am 
-meant to maintain it). I will leave another maintainer to make the 
-decision here.
-
-Cheers,
-
--- 
-Julien Grall
 
