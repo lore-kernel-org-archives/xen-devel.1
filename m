@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20A7BC433ED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99AC5C433B4
 	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C79A161177
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C79A161177
+	by mail.kernel.org (Postfix) with ESMTPS id 4290E613C1
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4290E613C1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.122822.231710 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.122823.231714 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leCBu-00052B-0w; Wed, 05 May 2021 07:43:30 +0000
+	id 1leCBu-00055e-Ex; Wed, 05 May 2021 07:43:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 122822.231710; Wed, 05 May 2021 07:43:29 +0000
+Received: by outflank-mailman (output) from mailman id 122823.231714; Wed, 05 May 2021 07:43:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leCBt-00051z-TW; Wed, 05 May 2021 07:43:29 +0000
-Received: by outflank-mailman (input) for mailman id 122822;
- Wed, 05 May 2021 07:43:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1leCBu-00054e-7B; Wed, 05 May 2021 07:43:30 +0000
+Received: by outflank-mailman (input) for mailman id 122823;
+ Wed, 05 May 2021 07:43:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J0XF=KA=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1leCBs-00050P-Rv
- for xen-devel@lists.xenproject.org; Wed, 05 May 2021 07:43:28 +0000
+ id 1leCBt-00044r-PI
+ for xen-devel@lists.xenproject.org; Wed, 05 May 2021 07:43:29 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 26bd840a-f6da-4ce2-8f2b-87ef214a59a5;
- Wed, 05 May 2021 07:43:28 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 821e5e6c-2cea-4e11-87c1-7ae54060627c;
+ Wed, 05 May 2021 07:43:20 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CA06A11FB;
- Wed,  5 May 2021 00:43:27 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B1A5D11FB;
+ Wed,  5 May 2021 00:43:20 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.0.42])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 728C93F718;
- Wed,  5 May 2021 00:43:26 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7CECB3F718;
+ Wed,  5 May 2021 00:43:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,18 +54,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 26bd840a-f6da-4ce2-8f2b-87ef214a59a5
+X-Inumbo-ID: 821e5e6c-2cea-4e11-87c1-7ae54060627c
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	bertrand.marquis@arm.com,
-	wei.chen@arm.com,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 06/10] arm/p2m: Get rid of READ/WRITE_SYSREG32
-Date: Wed,  5 May 2021 09:43:04 +0200
-Message-Id: <20210505074308.11016-7-michal.orzel@arm.com>
+	wei.chen@arm.com
+Subject: [PATCH v3 02/10] arm/domain: Get rid of READ/WRITE_SYSREG32
+Date: Wed,  5 May 2021 09:43:00 +0200
+Message-Id: <20210505074308.11016-3-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20210505074308.11016-1-michal.orzel@arm.com>
 References: <20210505074308.11016-1-michal.orzel@arm.com>
@@ -82,64 +80,98 @@ which can correspond to uint64_t or uint32_t.
 Even though many AArch64 registers have upper 32bit reserved
 it does not mean that they can't be widen in the future.
 
-Modify type of vtcr to register_t.
+Modify type of register cntkctl to register_t.
+
+Modify accesses to thumbee registers to use READ/WRITE_SYSREG.
+Thumbee registers are only usable by a 32bit domain and in fact
+should be only accessed on ARMv7 as they were retrospectively dropped
+on ARMv8.
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/arm/p2m.c   | 8 ++++----
- xen/arch/arm/traps.c | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
+Changes since v2:
+-Modify the commit message
+Changes since v1:
+-Move modification of ACTLR into seperate patch
+---
+ xen/arch/arm/domain.c        | 18 +++++++++---------
+ xen/include/asm-arm/domain.h |  2 +-
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
-index ac50312620..d414c4feb9 100644
---- a/xen/arch/arm/p2m.c
-+++ b/xen/arch/arm/p2m.c
-@@ -1973,11 +1973,11 @@ void __init p2m_restrict_ipa_bits(unsigned int ipa_bits)
- }
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index bdd3d3e5b5..621f518b83 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -113,13 +113,13 @@ static void ctxt_switch_from(struct vcpu *p)
+     p->arch.tpidr_el1 = READ_SYSREG(TPIDR_EL1);
  
- /* VTCR value to be configured by all CPUs. Set only once by the boot CPU */
--static uint32_t __read_mostly vtcr;
-+static register_t __read_mostly vtcr;
+     /* Arch timer */
+-    p->arch.cntkctl = READ_SYSREG32(CNTKCTL_EL1);
++    p->arch.cntkctl = READ_SYSREG(CNTKCTL_EL1);
+     virt_timer_save(p);
  
- static void setup_virt_paging_one(void *data)
- {
--    WRITE_SYSREG32(vtcr, VTCR_EL2);
-+    WRITE_SYSREG(vtcr, VTCR_EL2);
- 
-     /*
-      * ARM64_WORKAROUND_AT_SPECULATE: We want to keep the TLBs free from
-@@ -2000,7 +2000,7 @@ static void setup_virt_paging_one(void *data)
- void __init setup_virt_paging(void)
- {
-     /* Setup Stage 2 address translation */
--    unsigned long val = VTCR_RES1|VTCR_SH0_IS|VTCR_ORGN0_WBWA|VTCR_IRGN0_WBWA;
-+    register_t val = VTCR_RES1|VTCR_SH0_IS|VTCR_ORGN0_WBWA|VTCR_IRGN0_WBWA;
+     if ( is_32bit_domain(p->domain) && cpu_has_thumbee )
+     {
+-        p->arch.teecr = READ_SYSREG32(TEECR32_EL1);
+-        p->arch.teehbr = READ_SYSREG32(TEEHBR32_EL1);
++        p->arch.teecr = READ_SYSREG(TEECR32_EL1);
++        p->arch.teehbr = READ_SYSREG(TEEHBR32_EL1);
+     }
  
  #ifdef CONFIG_ARM_32
-     if ( p2m_ipa_bits < 40 )
-@@ -2089,7 +2089,7 @@ void __init setup_virt_paging(void)
-            pa_range_info[pa_range].pabits,
-            ( MAX_VMID == MAX_VMID_16_BIT ) ? 16 : 8);
- #endif
--    printk("P2M: %d levels with order-%d root, VTCR 0x%lx\n",
-+    printk("P2M: %d levels with order-%d root, VTCR 0x%"PRIregister"\n",
-            4 - P2M_ROOT_LEVEL, P2M_ROOT_ORDER, val);
+@@ -175,7 +175,7 @@ static void ctxt_switch_from(struct vcpu *p)
  
-     p2m_vmid_allocator_init();
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index ccc0827107..c7acdb2087 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -911,7 +911,7 @@ static void _show_registers(const struct cpu_user_regs *regs,
-         show_registers_32(regs, ctxt, guest_mode, v);
- #endif
+ static void ctxt_switch_to(struct vcpu *n)
+ {
+-    uint32_t vpidr;
++    register_t vpidr;
+ 
+     /* When the idle VCPU is running, Xen will always stay in hypervisor
+      * mode. Therefore we don't need to restore the context of an idle VCPU.
+@@ -183,8 +183,8 @@ static void ctxt_switch_to(struct vcpu *n)
+     if ( is_idle_vcpu(n) )
+         return;
+ 
+-    vpidr = READ_SYSREG32(MIDR_EL1);
+-    WRITE_SYSREG32(vpidr, VPIDR_EL2);
++    vpidr = READ_SYSREG(MIDR_EL1);
++    WRITE_SYSREG(vpidr, VPIDR_EL2);
+     WRITE_SYSREG(n->arch.vmpidr, VMPIDR_EL2);
+ 
+     /* VGIC */
+@@ -257,8 +257,8 @@ static void ctxt_switch_to(struct vcpu *n)
+ 
+     if ( is_32bit_domain(n->domain) && cpu_has_thumbee )
+     {
+-        WRITE_SYSREG32(n->arch.teecr, TEECR32_EL1);
+-        WRITE_SYSREG32(n->arch.teehbr, TEEHBR32_EL1);
++        WRITE_SYSREG(n->arch.teecr, TEECR32_EL1);
++        WRITE_SYSREG(n->arch.teehbr, TEEHBR32_EL1);
      }
--    printk("  VTCR_EL2: %08"PRIx32"\n", READ_SYSREG32(VTCR_EL2));
-+    printk("  VTCR_EL2: %"PRIregister"\n", READ_SYSREG(VTCR_EL2));
-     printk(" VTTBR_EL2: %016"PRIx64"\n", ctxt->vttbr_el2);
-     printk("\n");
  
+ #ifdef CONFIG_ARM_32
+@@ -274,7 +274,7 @@ static void ctxt_switch_to(struct vcpu *n)
+ 
+     /* This is could trigger an hardware interrupt from the virtual
+      * timer. The interrupt needs to be injected into the guest. */
+-    WRITE_SYSREG32(n->arch.cntkctl, CNTKCTL_EL1);
++    WRITE_SYSREG(n->arch.cntkctl, CNTKCTL_EL1);
+     virt_timer_restore(n);
+ }
+ 
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index 0a74df9931..c6b59ee755 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -190,7 +190,7 @@ struct arch_vcpu
+     struct vgic_cpu vgic;
+ 
+     /* Timer registers  */
+-    uint32_t cntkctl;
++    register_t cntkctl;
+ 
+     struct vtimer phys_timer;
+     struct vtimer virt_timer;
 -- 
 2.29.0
 
