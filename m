@@ -7,42 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 050E4C43461
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20A7BC433ED
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B6BEF61177
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B6BEF61177
+	by mail.kernel.org (Postfix) with ESMTPS id C79A161177
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C79A161177
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.122821.231698 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.122822.231710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leCBp-0004eW-Nh; Wed, 05 May 2021 07:43:25 +0000
+	id 1leCBu-00052B-0w; Wed, 05 May 2021 07:43:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 122821.231698; Wed, 05 May 2021 07:43:25 +0000
+Received: by outflank-mailman (output) from mailman id 122822.231710; Wed, 05 May 2021 07:43:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leCBp-0004eL-J2; Wed, 05 May 2021 07:43:25 +0000
-Received: by outflank-mailman (input) for mailman id 122821;
- Wed, 05 May 2021 07:43:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1leCBt-00051z-TW; Wed, 05 May 2021 07:43:29 +0000
+Received: by outflank-mailman (input) for mailman id 122822;
+ Wed, 05 May 2021 07:43:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J0XF=KA=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1leCBo-00044r-PH
- for xen-devel@lists.xenproject.org; Wed, 05 May 2021 07:43:24 +0000
+ id 1leCBs-00050P-Rv
+ for xen-devel@lists.xenproject.org; Wed, 05 May 2021 07:43:28 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 88af7043-99c7-4d16-ab26-f8a73ae7904f;
- Wed, 05 May 2021 07:43:19 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 26bd840a-f6da-4ce2-8f2b-87ef214a59a5;
+ Wed, 05 May 2021 07:43:28 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 365441063;
- Wed,  5 May 2021 00:43:19 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CA06A11FB;
+ Wed,  5 May 2021 00:43:27 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.0.42])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CC5BF3F718;
- Wed,  5 May 2021 00:43:17 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 728C93F718;
+ Wed,  5 May 2021 00:43:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,7 +55,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88af7043-99c7-4d16-ab26-f8a73ae7904f
+X-Inumbo-ID: 26bd840a-f6da-4ce2-8f2b-87ef214a59a5
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
@@ -63,9 +64,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	bertrand.marquis@arm.com,
 	wei.chen@arm.com,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 01/10] arm64/vfp: Get rid of READ/WRITE_SYSREG32
-Date: Wed,  5 May 2021 09:42:59 +0200
-Message-Id: <20210505074308.11016-2-michal.orzel@arm.com>
+Subject: [PATCH v3 06/10] arm/p2m: Get rid of READ/WRITE_SYSREG32
+Date: Wed,  5 May 2021 09:43:04 +0200
+Message-Id: <20210505074308.11016-7-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20210505074308.11016-1-michal.orzel@arm.com>
 References: <20210505074308.11016-1-michal.orzel@arm.com>
@@ -81,62 +82,64 @@ which can correspond to uint64_t or uint32_t.
 Even though many AArch64 registers have upper 32bit reserved
 it does not mean that they can't be widen in the future.
 
-Modify type of FPCR, FPSR, FPEXC32_EL2 to register_t.
+Modify type of vtcr to register_t.
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
 Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/arch/arm/arm64/vfp.c        | 12 ++++++------
- xen/include/asm-arm/arm64/vfp.h |  6 +++---
- 2 files changed, 9 insertions(+), 9 deletions(-)
+ xen/arch/arm/p2m.c   | 8 ++++----
+ xen/arch/arm/traps.c | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/arm/arm64/vfp.c b/xen/arch/arm/arm64/vfp.c
-index 999a0d58a5..47885e76ba 100644
---- a/xen/arch/arm/arm64/vfp.c
-+++ b/xen/arch/arm/arm64/vfp.c
-@@ -26,10 +26,10 @@ void vfp_save_state(struct vcpu *v)
-                  "stp q30, q31, [%1, #16 * 30]\n\t"
-                  : "=Q" (*v->arch.vfp.fpregs) : "r" (v->arch.vfp.fpregs));
- 
--    v->arch.vfp.fpsr = READ_SYSREG32(FPSR);
--    v->arch.vfp.fpcr = READ_SYSREG32(FPCR);
-+    v->arch.vfp.fpsr = READ_SYSREG(FPSR);
-+    v->arch.vfp.fpcr = READ_SYSREG(FPCR);
-     if ( is_32bit_domain(v->domain) )
--        v->arch.vfp.fpexc32_el2 = READ_SYSREG32(FPEXC32_EL2);
-+        v->arch.vfp.fpexc32_el2 = READ_SYSREG(FPEXC32_EL2);
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index ac50312620..d414c4feb9 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -1973,11 +1973,11 @@ void __init p2m_restrict_ipa_bits(unsigned int ipa_bits)
  }
  
- void vfp_restore_state(struct vcpu *v)
-@@ -55,8 +55,8 @@ void vfp_restore_state(struct vcpu *v)
-                  "ldp q30, q31, [%1, #16 * 30]\n\t"
-                  : : "Q" (*v->arch.vfp.fpregs), "r" (v->arch.vfp.fpregs));
+ /* VTCR value to be configured by all CPUs. Set only once by the boot CPU */
+-static uint32_t __read_mostly vtcr;
++static register_t __read_mostly vtcr;
  
--    WRITE_SYSREG32(v->arch.vfp.fpsr, FPSR);
--    WRITE_SYSREG32(v->arch.vfp.fpcr, FPCR);
-+    WRITE_SYSREG(v->arch.vfp.fpsr, FPSR);
-+    WRITE_SYSREG(v->arch.vfp.fpcr, FPCR);
-     if ( is_32bit_domain(v->domain) )
--        WRITE_SYSREG32(v->arch.vfp.fpexc32_el2, FPEXC32_EL2);
-+        WRITE_SYSREG(v->arch.vfp.fpexc32_el2, FPEXC32_EL2);
- }
-diff --git a/xen/include/asm-arm/arm64/vfp.h b/xen/include/asm-arm/arm64/vfp.h
-index 6ab5d36c6c..e6e8c363bc 100644
---- a/xen/include/asm-arm/arm64/vfp.h
-+++ b/xen/include/asm-arm/arm64/vfp.h
-@@ -7,9 +7,9 @@
- struct vfp_state
+ static void setup_virt_paging_one(void *data)
  {
-     uint64_t fpregs[64] __vfp_aligned;
--    uint32_t fpcr;
--    uint32_t fpexc32_el2;
--    uint32_t fpsr;
-+    register_t fpcr;
-+    register_t fpexc32_el2;
-+    register_t fpsr;
- };
+-    WRITE_SYSREG32(vtcr, VTCR_EL2);
++    WRITE_SYSREG(vtcr, VTCR_EL2);
  
- #endif /* _ARM_ARM64_VFP_H */
+     /*
+      * ARM64_WORKAROUND_AT_SPECULATE: We want to keep the TLBs free from
+@@ -2000,7 +2000,7 @@ static void setup_virt_paging_one(void *data)
+ void __init setup_virt_paging(void)
+ {
+     /* Setup Stage 2 address translation */
+-    unsigned long val = VTCR_RES1|VTCR_SH0_IS|VTCR_ORGN0_WBWA|VTCR_IRGN0_WBWA;
++    register_t val = VTCR_RES1|VTCR_SH0_IS|VTCR_ORGN0_WBWA|VTCR_IRGN0_WBWA;
+ 
+ #ifdef CONFIG_ARM_32
+     if ( p2m_ipa_bits < 40 )
+@@ -2089,7 +2089,7 @@ void __init setup_virt_paging(void)
+            pa_range_info[pa_range].pabits,
+            ( MAX_VMID == MAX_VMID_16_BIT ) ? 16 : 8);
+ #endif
+-    printk("P2M: %d levels with order-%d root, VTCR 0x%lx\n",
++    printk("P2M: %d levels with order-%d root, VTCR 0x%"PRIregister"\n",
+            4 - P2M_ROOT_LEVEL, P2M_ROOT_ORDER, val);
+ 
+     p2m_vmid_allocator_init();
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index ccc0827107..c7acdb2087 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -911,7 +911,7 @@ static void _show_registers(const struct cpu_user_regs *regs,
+         show_registers_32(regs, ctxt, guest_mode, v);
+ #endif
+     }
+-    printk("  VTCR_EL2: %08"PRIx32"\n", READ_SYSREG32(VTCR_EL2));
++    printk("  VTCR_EL2: %"PRIregister"\n", READ_SYSREG(VTCR_EL2));
+     printk(" VTTBR_EL2: %016"PRIx64"\n", ctxt->vttbr_el2);
+     printk("\n");
+ 
 -- 
 2.29.0
 
