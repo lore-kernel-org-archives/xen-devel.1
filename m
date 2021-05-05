@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 792E5C433ED
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 050E4C43461
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 288D5613D8
-	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 288D5613D8
+	by mail.kernel.org (Postfix) with ESMTPS id B6BEF61177
+	for <xen-devel@archiver.kernel.org>; Wed,  5 May 2021 07:43:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B6BEF61177
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.122820.231686 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.122821.231698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leCBo-0004Mc-8D; Wed, 05 May 2021 07:43:24 +0000
+	id 1leCBp-0004eW-Nh; Wed, 05 May 2021 07:43:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 122820.231686; Wed, 05 May 2021 07:43:24 +0000
+Received: by outflank-mailman (output) from mailman id 122821.231698; Wed, 05 May 2021 07:43:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1leCBo-0004MV-41; Wed, 05 May 2021 07:43:24 +0000
-Received: by outflank-mailman (input) for mailman id 122820;
- Wed, 05 May 2021 07:43:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1leCBp-0004eL-J2; Wed, 05 May 2021 07:43:25 +0000
+Received: by outflank-mailman (input) for mailman id 122821;
+ Wed, 05 May 2021 07:43:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=J0XF=KA=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1leCBn-0004M4-Hq
- for xen-devel@lists.xenproject.org; Wed, 05 May 2021 07:43:23 +0000
+ id 1leCBo-00044r-PH
+ for xen-devel@lists.xenproject.org; Wed, 05 May 2021 07:43:24 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 18460ea0-c944-4e09-9008-4025e38dbf26;
- Wed, 05 May 2021 07:43:22 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 88af7043-99c7-4d16-ab26-f8a73ae7904f;
+ Wed, 05 May 2021 07:43:19 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3E7731063;
- Wed,  5 May 2021 00:43:22 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 365441063;
+ Wed,  5 May 2021 00:43:19 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.0.42])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 03CAB3F718;
- Wed,  5 May 2021 00:43:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CC5BF3F718;
+ Wed,  5 May 2021 00:43:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,17 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18460ea0-c944-4e09-9008-4025e38dbf26
+X-Inumbo-ID: 88af7043-99c7-4d16-ab26-f8a73ae7904f
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	bertrand.marquis@arm.com,
-	wei.chen@arm.com
-Subject: [PATCH v3 03/10] arm: Modify type of actlr to register_t
-Date: Wed,  5 May 2021 09:43:01 +0200
-Message-Id: <20210505074308.11016-4-michal.orzel@arm.com>
+	wei.chen@arm.com,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v3 01/10] arm64/vfp: Get rid of READ/WRITE_SYSREG32
+Date: Wed,  5 May 2021 09:42:59 +0200
+Message-Id: <20210505074308.11016-2-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20210505074308.11016-1-michal.orzel@arm.com>
 References: <20210505074308.11016-1-michal.orzel@arm.com>
@@ -81,45 +81,62 @@ which can correspond to uint64_t or uint32_t.
 Even though many AArch64 registers have upper 32bit reserved
 it does not mean that they can't be widen in the future.
 
-ACTLR_EL1 system register bits are implementation defined
-which means it is possibly a latent bug on current HW as the CPU
-implementer may already have decided to use the top 32bit.
+Modify type of FPCR, FPSR, FPEXC32_EL2 to register_t.
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
-Changes since v2:
--Modify the commit message
----
- xen/arch/arm/domain.c        | 2 +-
- xen/include/asm-arm/domain.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/arm/arm64/vfp.c        | 12 ++++++------
+ xen/include/asm-arm/arm64/vfp.h |  6 +++---
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 621f518b83..c021a03c61 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -330,7 +330,7 @@ static void schedule_tail(struct vcpu *prev)
+diff --git a/xen/arch/arm/arm64/vfp.c b/xen/arch/arm/arm64/vfp.c
+index 999a0d58a5..47885e76ba 100644
+--- a/xen/arch/arm/arm64/vfp.c
++++ b/xen/arch/arm/arm64/vfp.c
+@@ -26,10 +26,10 @@ void vfp_save_state(struct vcpu *v)
+                  "stp q30, q31, [%1, #16 * 30]\n\t"
+                  : "=Q" (*v->arch.vfp.fpregs) : "r" (v->arch.vfp.fpregs));
  
- static void continue_new_vcpu(struct vcpu *prev)
+-    v->arch.vfp.fpsr = READ_SYSREG32(FPSR);
+-    v->arch.vfp.fpcr = READ_SYSREG32(FPCR);
++    v->arch.vfp.fpsr = READ_SYSREG(FPSR);
++    v->arch.vfp.fpcr = READ_SYSREG(FPCR);
+     if ( is_32bit_domain(v->domain) )
+-        v->arch.vfp.fpexc32_el2 = READ_SYSREG32(FPEXC32_EL2);
++        v->arch.vfp.fpexc32_el2 = READ_SYSREG(FPEXC32_EL2);
+ }
+ 
+ void vfp_restore_state(struct vcpu *v)
+@@ -55,8 +55,8 @@ void vfp_restore_state(struct vcpu *v)
+                  "ldp q30, q31, [%1, #16 * 30]\n\t"
+                  : : "Q" (*v->arch.vfp.fpregs), "r" (v->arch.vfp.fpregs));
+ 
+-    WRITE_SYSREG32(v->arch.vfp.fpsr, FPSR);
+-    WRITE_SYSREG32(v->arch.vfp.fpcr, FPCR);
++    WRITE_SYSREG(v->arch.vfp.fpsr, FPSR);
++    WRITE_SYSREG(v->arch.vfp.fpcr, FPCR);
+     if ( is_32bit_domain(v->domain) )
+-        WRITE_SYSREG32(v->arch.vfp.fpexc32_el2, FPEXC32_EL2);
++        WRITE_SYSREG(v->arch.vfp.fpexc32_el2, FPEXC32_EL2);
+ }
+diff --git a/xen/include/asm-arm/arm64/vfp.h b/xen/include/asm-arm/arm64/vfp.h
+index 6ab5d36c6c..e6e8c363bc 100644
+--- a/xen/include/asm-arm/arm64/vfp.h
++++ b/xen/include/asm-arm/arm64/vfp.h
+@@ -7,9 +7,9 @@
+ struct vfp_state
  {
--    current->arch.actlr = READ_SYSREG32(ACTLR_EL1);
-+    current->arch.actlr = READ_SYSREG(ACTLR_EL1);
-     processor_vcpu_initialise(current);
+     uint64_t fpregs[64] __vfp_aligned;
+-    uint32_t fpcr;
+-    uint32_t fpexc32_el2;
+-    uint32_t fpsr;
++    register_t fpcr;
++    register_t fpexc32_el2;
++    register_t fpsr;
+ };
  
-     schedule_tail(prev);
-diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
-index c6b59ee755..2d4f38c669 100644
---- a/xen/include/asm-arm/domain.h
-+++ b/xen/include/asm-arm/domain.h
-@@ -156,7 +156,7 @@ struct arch_vcpu
- 
-     /* Control Registers */
-     register_t sctlr;
--    uint32_t actlr;
-+    register_t actlr;
-     uint32_t cpacr;
- 
-     uint32_t contextidr;
+ #endif /* _ARM_ARM64_VFP_H */
 -- 
 2.29.0
 
