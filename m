@@ -2,63 +2,64 @@ Return-Path: <SRS0=sIj+=KD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 702D5C433B4
-	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 12:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FBF3C43460
+	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 13:39:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16AEE61414
-	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 12:24:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16AEE61414
+	by mail.kernel.org (Postfix) with ESMTPS id ECDAF6141F
+	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 13:39:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ECDAF6141F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.124296.234584 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.124319.234620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lfLzx-00081g-To; Sat, 08 May 2021 12:23:57 +0000
+	id 1lfNAZ-0007Si-46; Sat, 08 May 2021 13:38:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 124296.234584; Sat, 08 May 2021 12:23:57 +0000
+Received: by outflank-mailman (output) from mailman id 124319.234620; Sat, 08 May 2021 13:38:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lfLzx-00081Z-Qd; Sat, 08 May 2021 12:23:57 +0000
-Received: by outflank-mailman (input) for mailman id 124296;
- Sat, 08 May 2021 12:23:57 +0000
+	id 1lfNAZ-0007Sb-1A; Sat, 08 May 2021 13:38:59 +0000
+Received: by outflank-mailman (input) for mailman id 124319;
+ Sat, 08 May 2021 13:38:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0wEz=KD=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 1lfLzx-00081N-1V
- for xen-devel@lists.xenproject.org; Sat, 08 May 2021 12:23:57 +0000
+ id 1lfNAX-0007SV-IK
+ for xen-devel@lists.xenproject.org; Sat, 08 May 2021 13:38:57 +0000
 Received: from sonata.ens-lyon.org (unknown [140.77.166.138])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2ec5bebd-6b78-4268-a098-437666b28ae0;
- Sat, 08 May 2021 12:23:56 +0000 (UTC)
+ id 170830da-7ca9-4d09-a3de-0fcc78fac654;
+ Sat, 08 May 2021 13:38:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by sonata.ens-lyon.org (Postfix) with ESMTP id D2D8C201B0;
- Sat,  8 May 2021 13:44:05 +0200 (CEST)
+ by sonata.ens-lyon.org (Postfix) with ESMTP id 0026A201C8;
+ Sat,  8 May 2021 13:43:35 +0200 (CEST)
 Received: from sonata.ens-lyon.org ([127.0.0.1])
  by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Qla649ug3nDo; Sat,  8 May 2021 13:44:05 +0200 (CEST)
+ with ESMTP id 7VuzFJee62ij; Sat,  8 May 2021 13:43:35 +0200 (CEST)
 Received: from begin (lfbn-bor-1-56-204.w90-50.abo.wanadoo.fr [90.50.148.204])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by sonata.ens-lyon.org (Postfix) with ESMTPSA id B2625201AE;
- Sat,  8 May 2021 13:44:05 +0200 (CEST)
+ by sonata.ens-lyon.org (Postfix) with ESMTPSA id D2EE2201C7;
+ Sat,  8 May 2021 13:43:35 +0200 (CEST)
 Received: from samy by begin with local (Exim 4.94)
  (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1lfLNN-00BMUY-6T; Sat, 08 May 2021 13:44:05 +0200
+ id 1lfLMt-00BMUL-87; Sat, 08 May 2021 13:43:35 +0200
 Resent-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-Resent-Date: Sat, 8 May 2021 13:44:05 +0200
-Resent-Message-ID: <20210508114405.vo7inlbci2iwcjqo@begin>
+Resent-Date: Sat, 8 May 2021 13:43:35 +0200
+Resent-Message-ID: <20210508114335.wq5cyjpjru4ssbrh@begin>
 Resent-To: jandryuk@gmail.com, xen-devel@lists.xenproject.org,
- dgdegra@tycho.nsa.gov, quan.xu0@gmail.com
+ iwj@xenproject.org, wl@xen.org, dgdegra@tycho.nsa.gov,
+ quan.xu0@gmail.com
 Received: from samy by begin with local (Exim 4.94.2)
  (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1lellQ-006BIt-J4; Thu, 06 May 2021 23:42:32 +0200
+ id 1leleq-0066zp-S4; Thu, 06 May 2021 23:35:44 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,67 +71,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ec5bebd-6b78-4268-a098-437666b28ae0
-Date: Thu, 6 May 2021 23:42:32 +0200
+X-Inumbo-ID: 170830da-7ca9-4d09-a3de-0fcc78fac654
+Date: Thu, 6 May 2021 23:35:44 +0200
 From: Samuel Thibault <samuel.thibault@ens-lyon.org>
 To: Jason Andryuk <jandryuk@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
 	Quan Xu <quan.xu0@gmail.com>
-Subject: Re: [PATCH v2 12/13] vtpmmgr: Check req_len before unpacking command
-Message-ID: <20210506214232.qv6ft4giyfoujsie@begin>
+Subject: Re: [PATCH v2 04/13] vtpmmgr: Allow specifying srk_handle for TPM2
+Message-ID: <20210506213544.6twiioapinyzajb4@begin>
 Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
 	Jason Andryuk <jandryuk@gmail.com>, xen-devel@lists.xenproject.org,
+	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
 	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
 	Quan Xu <quan.xu0@gmail.com>
 References: <20210506135923.161427-1-jandryuk@gmail.com>
- <20210506135923.161427-13-jandryuk@gmail.com>
+ <20210506135923.161427-5-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20210506135923.161427-13-jandryuk@gmail.com>
+In-Reply-To: <20210506135923.161427-5-jandryuk@gmail.com>
 Organization: I am not organized
 User-Agent: NeoMutt/20170609 (1.8.3)
 
-Jason Andryuk, le jeu. 06 mai 2021 09:59:22 -0400, a ecrit:
-> vtpm_handle_cmd doesn't ensure there is enough space before unpacking
-> the req buffer.  Add a minimum size check.  Called functions will have
-> to do their own checking if they need more data from the request.
+Jason Andryuk, le jeu. 06 mai 2021 09:59:14 -0400, a ecrit:
+> Bypass taking ownership of the TPM2 if an srk_handle is specified.
 > 
-> The error case is tricky since abort_egress wants to rely with a
-> corresponding tag.  Just hardcode TPM_TAG_RQU_COMMAND since the vtpm is
-> sending in malformed commands in the first place.
+> This srk_handle must be usable with Null auth for the time being.
 > 
 > Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 
 Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 
 > ---
->  stubdom/vtpmmgr/vtpm_cmd_handler.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+> v2: Use "=" seperator
+> ---
+>  docs/man/xen-vtpmmgr.7.pod |  7 +++++++
+>  stubdom/vtpmmgr/init.c     | 11 ++++++++++-
+>  2 files changed, 17 insertions(+), 1 deletion(-)
 > 
-> diff --git a/stubdom/vtpmmgr/vtpm_cmd_handler.c b/stubdom/vtpmmgr/vtpm_cmd_handler.c
-> index c879b24c13..5586be6997 100644
-> --- a/stubdom/vtpmmgr/vtpm_cmd_handler.c
-> +++ b/stubdom/vtpmmgr/vtpm_cmd_handler.c
-> @@ -840,6 +840,12 @@ TPM_RESULT vtpmmgr_handle_cmd(
->  	UINT32 size;
->  	TPM_COMMAND_CODE ord;
+> diff --git a/docs/man/xen-vtpmmgr.7.pod b/docs/man/xen-vtpmmgr.7.pod
+> index 875dcce508..3286954568 100644
+> --- a/docs/man/xen-vtpmmgr.7.pod
+> +++ b/docs/man/xen-vtpmmgr.7.pod
+> @@ -92,6 +92,13 @@ Valid arguments:
 >  
-> +	if (tpmcmd->req_len < sizeof_TPM_RQU_HEADER(tpmcmd->req)) {
-> +		status = TPM_BAD_PARAMETER;
-> +		tag = TPM_TAG_RQU_COMMAND;
-> +		goto abort_egress;
-> +	}
+>  =over 4
+>  
+> +=item srk_handle=<HANDLE>
 > +
->  	unpack_TPM_RQU_HEADER(tpmcmd->req,
->  			&tag, &size, &ord);
+> +Specify a srk_handle for TPM 2.0.  TPM 2.0 uses a key hierarchy, and
+> +this allow specifying the parent handle for vtpmmgr to create its own
+> +key under.  Using this option bypasses vtpmmgr trying to take ownership
+> +of the TPM.
+> +
+>  =item owner_auth=<AUTHSPEC>
 >  
+>  =item srk_auth=<AUTHSPEC>
+> diff --git a/stubdom/vtpmmgr/init.c b/stubdom/vtpmmgr/init.c
+> index 1506735051..130e4f4bf6 100644
+> --- a/stubdom/vtpmmgr/init.c
+> +++ b/stubdom/vtpmmgr/init.c
+> @@ -302,6 +302,11 @@ int parse_cmdline_opts(int argc, char** argv, struct Opts* opts)
+>              goto err_invalid;
+>           }
+>        }
+> +      else if(!strncmp(argv[i], "srk_handle=", 11)) {
+> +         if(sscanf(argv[i] + 11, "%x", &vtpm_globals.srk_handle) != 1) {
+> +            goto err_invalid;
+> +         }
+> +      }
+>        else if(!strncmp(argv[i], "tpmdriver=", 10)) {
+>           if(!strcmp(argv[i] + 10, "tpm_tis")) {
+>              opts->tpmdriver = TPMDRV_TPM_TIS;
+> @@ -586,7 +591,11 @@ TPM_RESULT vtpmmgr2_create(void)
+>  {
+>      TPM_RESULT status = TPM_SUCCESS;
+>  
+> -    TPMTRYRETURN(tpm2_take_ownership());
+> +    if ( vtpm_globals.srk_handle == 0 ) {
+> +        TPMTRYRETURN(tpm2_take_ownership());
+> +    } else {
+> +        tpm2_AuthArea_ctor(NULL, 0, &vtpm_globals.srk_auth_area);
+> +    }
+>  
+>     /* create SK */
+>      TPM2_Create_Params_out out;
 > -- 
 > 2.30.2
 > 
 
 -- 
 Samuel
-j'etais en train de nettoyer ma souris et le coup est parti...
- -+- s sur #ens-mim - et en plus c vrai... -+-
+"...[Linux's] capacity to talk via any medium except smoke signals."
+(By Dr. Greg Wettstein, Roger Maris Cancer Center)
 
