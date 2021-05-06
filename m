@@ -2,45 +2,49 @@ Return-Path: <SRS0=KcDw=KB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99966C433ED
-	for <xen-devel@archiver.kernel.org>; Thu,  6 May 2021 13:09:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFD4DC433ED
+	for <xen-devel@archiver.kernel.org>; Thu,  6 May 2021 14:00:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 46AA2610EA
-	for <xen-devel@archiver.kernel.org>; Thu,  6 May 2021 13:09:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46AA2610EA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4550661175
+	for <xen-devel@archiver.kernel.org>; Thu,  6 May 2021 14:00:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4550661175
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.123517.232957 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.123534.233000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ledl5-0007M5-51; Thu, 06 May 2021 13:09:39 +0000
+	id 1leeXp-0004X9-TO; Thu, 06 May 2021 14:00:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 123517.232957; Thu, 06 May 2021 13:09:39 +0000
+Received: by outflank-mailman (output) from mailman id 123534.233000; Thu, 06 May 2021 14:00:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ledl5-0007Ly-2A; Thu, 06 May 2021 13:09:39 +0000
-Received: by outflank-mailman (input) for mailman id 123517;
- Thu, 06 May 2021 13:09:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=EnkQ=KB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ledl3-0007Ls-Io
- for xen-devel@lists.xenproject.org; Thu, 06 May 2021 13:09:37 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ab39dffb-6bf9-4a90-9513-ba8c7dd6bb01;
- Thu, 06 May 2021 13:09:36 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9CC25AE39;
- Thu,  6 May 2021 13:09:35 +0000 (UTC)
+	id 1leeXp-0004WY-P4; Thu, 06 May 2021 14:00:01 +0000
+Received: by outflank-mailman (input) for mailman id 123534;
+ Thu, 06 May 2021 14:00:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=NmKg=KB=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1leeXo-0003iB-NM
+ for xen-devel@lists.xenproject.org; Thu, 06 May 2021 14:00:00 +0000
+Received: from mail-qk1-x72b.google.com (unknown [2607:f8b0:4864:20::72b])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 35cf9597-2d37-4779-b7e5-b5274f56732d;
+ Thu, 06 May 2021 13:59:56 +0000 (UTC)
+Received: by mail-qk1-x72b.google.com with SMTP id a22so4385472qkl.10
+ for <xen-devel@lists.xenproject.org>; Thu, 06 May 2021 06:59:56 -0700 (PDT)
+Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:6095:81da:832e:3929])
+ by smtp.gmail.com with ESMTPSA id
+ 189sm2069992qkh.99.2021.05.06.06.59.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 May 2021 06:59:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,59 +56,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab39dffb-6bf9-4a90-9513-ba8c7dd6bb01
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1620306575; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HY+Dmj9Nv1eHRXrLW69Mj3Wx9sD2RlBHWbfeyc7i/wY=;
-	b=TeWCR5omn409NuJ3KxhPf9MgweeMukJ49BbF8dFQG/oTF6eKItFGh7gQg+vuoFp2xIE/+v
-	Hl+xYtLBve933/Tu8Rzaqo8JUMkP1QcBateBqot6h1qOsdQLejapvBHTnmtW9WF3II9vI8
-	Gx9TmbR9yI4y5pFzfAIj4mTiJA/P3VU=
-Subject: Re: [PATCH v2] SUPPORT.md: Un-shimmed 32-bit PV guests are no longer
- supported
-To: George Dunlap <george.dunlap@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jann Horn <jannh@google.com>
-References: <20210506124752.65844-1-george.dunlap@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <acd695c1-dc04-4606-5212-5fd993e355b1@suse.com>
-Date: Thu, 6 May 2021 15:09:35 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+X-Inumbo-ID: 35cf9597-2d37-4779-b7e5-b5274f56732d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=SCid/Fz7LIrkhT623U47nCiexIJBPSb/z7U4jQky+9M=;
+        b=o74AxszkG4ApqEkoZ8gmh9ZcWJHzVmj9wYURxh2AI+TkrexELduphfW+qEXIX+gkuo
+         adrRZWaGh77TNrzEn+VCKwwlm68QOuah312/X/FjOIjE759FbPWIxCBDUySfHoG1gRv2
+         LYskFUGFsNJZGi1at+wWQh4EfpnYfZ54tSd/qtnoG9ZMBDdnE6a3lQjTECSeyi3WmG0S
+         ee1YQnzPQ13t2/ho7lrg/VvZoUTLqsLPYUuX9qczGd1GdFjd31BBUcd2TAfkHNrSyals
+         rt+cV2ODjk+1uKVvjs1Xkus0cF3gfNr+NtP7cBXK6GU2f0gKX8nsgF5zqVKu/RPXfoaB
+         4zAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=SCid/Fz7LIrkhT623U47nCiexIJBPSb/z7U4jQky+9M=;
+        b=TrNukfYeITWXslD2Sf4E5xCfTC6jGiSPdOn9X0EQF6D94BS6Fb4KqS98dWkWrzsWqa
+         mwLvLd0D7xns4JMUi6LxaVs9mgyTrFIe19/RfU8ZtjJaNxij8iZuiIexdY+A0RAN5T/1
+         mvKFk5zqEg0LCt8KlCX/5U3tTgNsn+6TYIpK4ishGDEVVaGeDt7TyGIlgPOE3fgM+914
+         xFxmWkr4UPkqMEuwvoMb0185NwDgoGB+8zeDhkL37ZopOhlEarFt9ANWu2VS5m/3xOJk
+         5Fo2+cxHXmrdpHdhPNnCw7QSXhhzWFjkgkxQdK9DYj/mNBcj8q0/5dvFAfI4XB8UMV+T
+         Xzfw==
+X-Gm-Message-State: AOAM53016wWfpxgHw88D9MdkQPpuNZH2v0J+JIG7Xd1gMM1pJFNfdnAq
+	4Uhy/SF/phg2xYy22R3oSsEBEvG67n8=
+X-Google-Smtp-Source: ABdhPJznW38Pts006EYI4l39hd8n1Uo8kITRc1YT80eVCcvk6D4zMIvvHlnpALjfDJcYZCDkjDXYlw==
+X-Received: by 2002:a05:620a:e05:: with SMTP id y5mr4149112qkm.250.1620309595574;
+        Thu, 06 May 2021 06:59:55 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jason Andryuk <jandryuk@gmail.com>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	Quan Xu <quan.xu0@gmail.com>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v2 02/13] vtpmmgr: Print error code to aid debugging
+Date: Thu,  6 May 2021 09:59:12 -0400
+Message-Id: <20210506135923.161427-3-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210506135923.161427-1-jandryuk@gmail.com>
+References: <20210506135923.161427-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210506124752.65844-1-george.dunlap@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 06.05.2021 14:47, George Dunlap wrote:
-> --- a/xen/arch/x86/Kconfig
-> +++ b/xen/arch/x86/Kconfig
-> @@ -55,7 +55,7 @@ config PV
->  config PV32
->  	bool "Support for 32bit PV guests"
->  	depends on PV
-> -	default y
-> +	default PV_SHIM
->  	select COMPAT
->  	---help---
->  	  The 32bit PV ABI uses Ring1, an area of the x86 architecture which
-> @@ -67,7 +67,10 @@ config PV32
->  	  reduction, or performance reasons.  Backwards compatibility can be
->  	  provided via the PV Shim mechanism.
->  
-> -	  If unsure, say Y.
-> +	  Note that outside of PV Shim, 32-bit PV guests are not security
-> +	  supported anymore.
-> +
-> +	  If unsure, use the default setting.
+tpm_get_error_name returns "Unknown Error Code" when an error string
+is not defined.  In that case, we should print the Error Code so it can
+be looked up offline.  tpm_get_error_name returns a const string, so
+just have the two callers always print the error code so it is always
+available.
 
-Alongside this I wonder whether we should also default opt_pv32 to false
-then, unless running in shim mode.
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+---
+ stubdom/vtpmmgr/tpm.c  | 2 +-
+ stubdom/vtpmmgr/tpm2.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Jan
+diff --git a/stubdom/vtpmmgr/tpm.c b/stubdom/vtpmmgr/tpm.c
+index 779cddd64e..83b2bc16b2 100644
+--- a/stubdom/vtpmmgr/tpm.c
++++ b/stubdom/vtpmmgr/tpm.c
+@@ -109,7 +109,7 @@
+ 			UINT32 rsp_status; \
+ 			UNPACK_OUT(TPM_RSP_HEADER, &rsp_tag, &rsp_len, &rsp_status); \
+ 			if (rsp_status != TPM_SUCCESS) { \
+-				vtpmlogerror(VTPM_LOG_TPM, "Failed with return code %s\n", tpm_get_error_name(rsp_status)); \
++				vtpmlogerror(VTPM_LOG_TPM, "Failed with return code %s (%x)\n", tpm_get_error_name(rsp_status), rsp_status); \
+ 				status = rsp_status; \
+ 				goto abort_egress; \
+ 			} \
+diff --git a/stubdom/vtpmmgr/tpm2.c b/stubdom/vtpmmgr/tpm2.c
+index c9f1016ab5..655e6d164c 100644
+--- a/stubdom/vtpmmgr/tpm2.c
++++ b/stubdom/vtpmmgr/tpm2.c
+@@ -126,7 +126,7 @@
+     ptr = unpack_TPM_RSP_HEADER(ptr, \
+           &(tag), &(paramSize), &(status));\
+     if ((status) != TPM_SUCCESS){ \
+-        vtpmlogerror(VTPM_LOG_TPM, "Failed with return code %s\n", tpm_get_error_name(status));\
++        vtpmlogerror(VTPM_LOG_TPM, "Failed with return code %s (%x)\n", tpm_get_error_name(status), (status));\
+         goto abort_egress;\
+     }\
+ } while(0)
+-- 
+2.30.2
+
 
