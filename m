@@ -7,59 +7,59 @@ X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7DB4C433ED
-	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 11:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5FA2C433B4
+	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 11:54:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3734E6141F
-	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 11:49:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3734E6141F
+	by mail.kernel.org (Postfix) with ESMTPS id 7541561464
+	for <xen-devel@archiver.kernel.org>; Sat,  8 May 2021 11:54:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7541561464
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ens-lyon.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.124261.234518 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.124266.234532 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lfLS6-0001Qb-O5; Sat, 08 May 2021 11:48:58 +0000
+	id 1lfLWw-0002oS-CG; Sat, 08 May 2021 11:53:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 124261.234518; Sat, 08 May 2021 11:48:58 +0000
+Received: by outflank-mailman (output) from mailman id 124266.234532; Sat, 08 May 2021 11:53:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lfLS6-0001QU-Jf; Sat, 08 May 2021 11:48:58 +0000
-Received: by outflank-mailman (input) for mailman id 124261;
- Sat, 08 May 2021 11:48:57 +0000
+	id 1lfLWw-0002oL-9L; Sat, 08 May 2021 11:53:58 +0000
+Received: by outflank-mailman (input) for mailman id 124266;
+ Sat, 08 May 2021 11:53:57 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0wEz=KD=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 1lfLS5-0001QO-Bo
- for xen-devel@lists.xenproject.org; Sat, 08 May 2021 11:48:57 +0000
+ id 1lfLWv-0002o9-3R
+ for xen-devel@lists.xenproject.org; Sat, 08 May 2021 11:53:57 +0000
 Received: from sonata.ens-lyon.org (unknown [140.77.166.138])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6478de38-f967-4034-b392-90cd9e22357a;
- Sat, 08 May 2021 11:48:56 +0000 (UTC)
+ id 334e49a0-2862-49b2-917d-5fc65212a1be;
+ Sat, 08 May 2021 11:53:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by sonata.ens-lyon.org (Postfix) with ESMTP id C5513201C3;
- Sat,  8 May 2021 13:43:04 +0200 (CEST)
+ by sonata.ens-lyon.org (Postfix) with ESMTP id BED562019C;
+ Sat,  8 May 2021 13:43:55 +0200 (CEST)
 Received: from sonata.ens-lyon.org ([127.0.0.1])
  by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dpMAKn6puGgo; Sat,  8 May 2021 13:43:04 +0200 (CEST)
+ with ESMTP id tb5DW_x33ynA; Sat,  8 May 2021 13:43:55 +0200 (CEST)
 Received: from begin (lfbn-bor-1-56-204.w90-50.abo.wanadoo.fr [90.50.148.204])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by sonata.ens-lyon.org (Postfix) with ESMTPSA id A5586201AD;
- Sat,  8 May 2021 13:43:04 +0200 (CEST)
+ by sonata.ens-lyon.org (Postfix) with ESMTPSA id 9D6152018D;
+ Sat,  8 May 2021 13:43:55 +0200 (CEST)
 Received: from samy by begin with local (Exim 4.94)
  (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1lfLMN-00BMTv-V3; Sat, 08 May 2021 13:43:03 +0200
+ id 1lfLNC-00BMUU-W9; Sat, 08 May 2021 13:43:55 +0200
 Resent-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-Resent-Date: Sat, 8 May 2021 13:43:03 +0200
-Resent-Message-ID: <20210508114303.kg3ljchsoia67iot@begin>
+Resent-Date: Sat, 8 May 2021 13:43:54 +0200
+Resent-Message-ID: <20210508114354.vf72yybsevrdc2tq@begin>
 Resent-To: jandryuk@gmail.com, xen-devel@lists.xenproject.org,
- dgdegra@tycho.nsa.gov, quan.xu0@gmail.com
+ iwj@xenproject.org, wl@xen.org
 Received: from samy by begin with local (Exim 4.94.2)
  (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1lelk9-006BGX-U9; Thu, 06 May 2021 23:41:13 +0200
+ id 1lelvU-006Grj-1F; Thu, 06 May 2021 23:52:56 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,80 +71,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6478de38-f967-4034-b392-90cd9e22357a
-Date: Thu, 6 May 2021 23:41:13 +0200
+X-Inumbo-ID: 334e49a0-2862-49b2-917d-5fc65212a1be
+Date: Thu, 6 May 2021 23:52:55 +0200
 From: Samuel Thibault <samuel.thibault@ens-lyon.org>
 To: Jason Andryuk <jandryuk@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
-	Quan Xu <quan.xu0@gmail.com>
-Subject: Re: [PATCH v2 10/13] vtpmmgr: Remove bogus cast from TPM2_GetRandom
-Message-ID: <20210506214113.bhkhiif4utufxxwp@begin>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v2 13/13] vtpm: Correct timeout units and command duration
+Message-ID: <20210506215255.yftnedauoz4e3bga@begin>
 Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
 	Jason Andryuk <jandryuk@gmail.com>, xen-devel@lists.xenproject.org,
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
-	Quan Xu <quan.xu0@gmail.com>
+	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
 References: <20210506135923.161427-1-jandryuk@gmail.com>
- <20210506135923.161427-11-jandryuk@gmail.com>
+ <20210506135923.161427-14-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20210506135923.161427-11-jandryuk@gmail.com>
+In-Reply-To: <20210506135923.161427-14-jandryuk@gmail.com>
 Organization: I am not organized
 User-Agent: NeoMutt/20170609 (1.8.3)
 
-Jason Andryuk, le jeu. 06 mai 2021 09:59:20 -0400, a ecrit:
-> The UINT32 <-> UINT16 casting in TPM2_GetRandom is incorrect.  Use a
-> local UINT16 as needed for the TPM hardware command and assign the
-> result.
+Jason Andryuk, le jeu. 06 mai 2021 09:59:23 -0400, a ecrit:
+> Add two patches:
+> vtpm-microsecond-duration.patch fixes the units for timeouts and command
+> durations.
+> vtpm-command-duration.patch increases the timeout linux uses to allow
+> commands to succeed.
 > 
-> Suggested-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+> Linux works around low timeouts, but not low durations.  The second
+> patch allows commands to complete that often timeout with the lower
+> command durations.
+> 
 > Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 
 Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 
 > ---
->  stubdom/vtpmmgr/tpm2.c | 13 ++++++++++---
->  1 file changed, 10 insertions(+), 3 deletions(-)
+>  stubdom/Makefile                        |  2 +
+>  stubdom/vtpm-command-duration.patch     | 52 +++++++++++++++++++++++++
+>  stubdom/vtpm-microsecond-duration.patch | 52 +++++++++++++++++++++++++
+>  3 files changed, 106 insertions(+)
+>  create mode 100644 stubdom/vtpm-command-duration.patch
+>  create mode 100644 stubdom/vtpm-microsecond-duration.patch
 > 
-> diff --git a/stubdom/vtpmmgr/tpm2.c b/stubdom/vtpmmgr/tpm2.c
-> index 655e6d164c..ebd06eac74 100644
-> --- a/stubdom/vtpmmgr/tpm2.c
-> +++ b/stubdom/vtpmmgr/tpm2.c
-> @@ -427,15 +427,22 @@ abort_egress:
->  
->  TPM_RC TPM2_GetRandom(UINT32 * bytesRequested, BYTE * randomBytes)
->  {
-> +    UINT16 bytesReq;
->      TPM_BEGIN(TPM_ST_NO_SESSIONS, TPM_CC_GetRandom);
->  
-> -    ptr = pack_UINT16(ptr, (UINT16)*bytesRequested);
-> +    if (*bytesRequested > UINT16_MAX)
-> +        bytesReq = UINT16_MAX;
-> +    else
-> +        bytesReq = *bytesRequested;
+> diff --git a/stubdom/Makefile b/stubdom/Makefile
+> index c6de5f68ae..06aa69d8bc 100644
+> --- a/stubdom/Makefile
+> +++ b/stubdom/Makefile
+> @@ -239,6 +239,8 @@ tpm_emulator-$(XEN_TARGET_ARCH): tpm_emulator-$(TPMEMU_VERSION).tar.gz
+>  	patch -d $@ -p1 < vtpm-implicit-fallthrough.patch
+>  	patch -d $@ -p1 < vtpm_TPM_ChangeAuthAsymFinish.patch
+>  	patch -d $@ -p1 < vtpm_extern.patch
+> +	patch -d $@ -p1 < vtpm-microsecond-duration.patch
+> +	patch -d $@ -p1 < vtpm-command-duration.patch
+>  	mkdir $@/build
+>  	cd $@/build; CC=${CC} $(CMAKE) .. -DCMAKE_C_FLAGS:STRING="-std=c99 -DTPM_NO_EXTERN $(TARGET_CPPFLAGS) $(TARGET_CFLAGS) -Wno-declaration-after-statement"
+>  	touch $@
+> diff --git a/stubdom/vtpm-command-duration.patch b/stubdom/vtpm-command-duration.patch
+> new file mode 100644
+> index 0000000000..6fdf2fc9be
+> --- /dev/null
+> +++ b/stubdom/vtpm-command-duration.patch
+> @@ -0,0 +1,52 @@
+> +From e7c976b5864e7d2649292d90ea60d5aea091a990 Mon Sep 17 00:00:00 2001
+> +From: Jason Andryuk <jandryuk@gmail.com>
+> +Date: Sun, 14 Mar 2021 12:46:34 -0400
+> +Subject: [PATCH 2/2] Increase command durations
 > +
-> +    ptr = pack_UINT16(ptr, bytesReq);
->  
->      TPM_TRANSMIT();
->      TPM_UNPACK_VERIFY();
->  
-> -    ptr = unpack_UINT16(ptr, (UINT16 *)bytesRequested);
-> -    ptr = unpack_TPM_BUFFER(ptr, randomBytes, *bytesRequested);
-> +    ptr = unpack_UINT16(ptr, &bytesReq);
-> +    *bytesRequested = bytesReq;
-> +    ptr = unpack_TPM_BUFFER(ptr, randomBytes, bytesReq);
->  
->  abort_egress:
->      return status;
+> +Wth Linux 5.4 xen-tpmfront and a Xen vtpm-stubdom, xen-tpmfront was
+> +failing commands with -ETIME:
+> +tpm tpm0: tpm_try_transmit: send(): error-62
+> +
+> +The vtpm was returning the data, but it was after the duration timeout
+> +in vtpm_send.  Linux may have started being more stringent about timing?
+> +
+> +The vtpm-stubdom has a little delay since it writes its disk before
+> +returning the response.
+> +
+> +Anyway, the durations are rather low.  When they were 1/10/1000 before
+> +converting to microseconds, Linux showed all three durations rounded to
+> +10000.  Update them with values from a physical TPM1.2.  These were
+> +taken from a WEC which was software downgraded from a TPM2 to a TPM1.2.
+> +They might be excessive, but I'd rather have a command succeed than
+> +return -ETIME.
+> +
+> +An IFX physical TPM1.2 uses:
+> +1000000
+> +1500000
+> +150000000
+> +
+> +Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+> +---
+> + tpm/tpm_data.c | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/tpm/tpm_data.c b/tpm/tpm_data.c
+> +index bebaf10..844afca 100644
+> +--- a/tpm/tpm_data.c
+> ++++ b/tpm/tpm_data.c
+> +@@ -71,9 +71,9 @@ static void init_timeouts(void)
+> +   tpmData.permanent.data.tis_timeouts[1] = 2000000;
+> +   tpmData.permanent.data.tis_timeouts[2] = 750000;
+> +   tpmData.permanent.data.tis_timeouts[3] = 750000;
+> +-  tpmData.permanent.data.cmd_durations[0] = 1000;
+> +-  tpmData.permanent.data.cmd_durations[1] = 10000;
+> +-  tpmData.permanent.data.cmd_durations[2] = 1000000;
+> ++  tpmData.permanent.data.cmd_durations[0] = 3000000;
+> ++  tpmData.permanent.data.cmd_durations[1] = 3000000;
+> ++  tpmData.permanent.data.cmd_durations[2] = 600000000;
+> + }
+> + 
+> + void tpm_init_data(void)
+> +-- 
+> +2.30.2
+> +
+> diff --git a/stubdom/vtpm-microsecond-duration.patch b/stubdom/vtpm-microsecond-duration.patch
+> new file mode 100644
+> index 0000000000..7a906e72c5
+> --- /dev/null
+> +++ b/stubdom/vtpm-microsecond-duration.patch
+> @@ -0,0 +1,52 @@
+> +From 5a510e0afd7c288e3f0fb3523ec749ba1366ad61 Mon Sep 17 00:00:00 2001
+> +From: Jason Andryuk <jandryuk@gmail.com>
+> +Date: Sun, 14 Mar 2021 12:42:10 -0400
+> +Subject: [PATCH 1/2] Use microseconds for timeouts and durations
+> +
+> +The timeout and duration fields should be in microseconds according to
+> +the spec.
+> +
+> +TPM_CAP_PROP_TIS_TIMEOUT:
+> +A 4 element array of UINT32 values each denoting the timeout value in
+> +microseconds for the following in this order:
+> +
+> +TPM_CAP_PROP_DURATION:
+> +A 3 element array of UINT32 values each denoting the duration value in
+> +microseconds of the duration of the three classes of commands:
+> +
+> +Linux will scale the timeouts up by 1000, but not the durations.  Change
+> +the units for both sets as appropriate.
+> +
+> +Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+> +---
+> + tpm/tpm_data.c | 14 +++++++-------
+> + 1 file changed, 7 insertions(+), 7 deletions(-)
+> +
+> +diff --git a/tpm/tpm_data.c b/tpm/tpm_data.c
+> +index a3a79ef..bebaf10 100644
+> +--- a/tpm/tpm_data.c
+> ++++ b/tpm/tpm_data.c
+> +@@ -67,13 +67,13 @@ static void init_nv_storage(void)
+> + static void init_timeouts(void)
+> + {
+> +   /* for the timeouts we use the PC platform defaults */
+> +-  tpmData.permanent.data.tis_timeouts[0] = 750;
+> +-  tpmData.permanent.data.tis_timeouts[1] = 2000;
+> +-  tpmData.permanent.data.tis_timeouts[2] = 750;
+> +-  tpmData.permanent.data.tis_timeouts[3] = 750;
+> +-  tpmData.permanent.data.cmd_durations[0] = 1;
+> +-  tpmData.permanent.data.cmd_durations[1] = 10;
+> +-  tpmData.permanent.data.cmd_durations[2] = 1000;
+> ++  tpmData.permanent.data.tis_timeouts[0] = 750000;
+> ++  tpmData.permanent.data.tis_timeouts[1] = 2000000;
+> ++  tpmData.permanent.data.tis_timeouts[2] = 750000;
+> ++  tpmData.permanent.data.tis_timeouts[3] = 750000;
+> ++  tpmData.permanent.data.cmd_durations[0] = 1000;
+> ++  tpmData.permanent.data.cmd_durations[1] = 10000;
+> ++  tpmData.permanent.data.cmd_durations[2] = 1000000;
+> + }
+> + 
+> + void tpm_init_data(void)
+> +-- 
+> +2.30.2
+> +
 > -- 
 > 2.30.2
 > 
 
 -- 
 Samuel
-<N> (* If you have a precise idea of the intended use of the following code, please
-<N>    write to Eduardo.Gimenez@inria.fr and ask for the prize :-)
-<N>    -- Eduardo (11/8/97) *)
- -+- N sur #ens-mim - et c'était un des développeurs -+-
+Pour un père, autant mourir que de faire plein de calculs et pas s'occuper
+de son fils
+ -+- y sur #ens-mim - sombres histoires de zombies -+-
 
