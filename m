@@ -7,52 +7,51 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 360C4C43460
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:35:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5D7AC433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:35:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C8B561455
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:35:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C8B561455
+	by mail.kernel.org (Postfix) with ESMTPS id 6924F61430
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:35:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6924F61430
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=cs.pub.ro
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.124909.235149 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.124910.235168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg1O0-0002i8-AB; Mon, 10 May 2021 08:35:32 +0000
+	id 1lg1O4-0003Ep-HI; Mon, 10 May 2021 08:35:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 124909.235149; Mon, 10 May 2021 08:35:32 +0000
+Received: by outflank-mailman (output) from mailman id 124910.235168; Mon, 10 May 2021 08:35:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg1O0-0002h4-57; Mon, 10 May 2021 08:35:32 +0000
-Received: by outflank-mailman (input) for mailman id 124909;
- Mon, 10 May 2021 08:35:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lg1O4-0003Ee-E8; Mon, 10 May 2021 08:35:36 +0000
+Received: by outflank-mailman (input) for mailman id 124910;
+ Mon, 10 May 2021 08:35:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HTYQ=KF=cs.pub.ro=costin.lupu@srs-us1.protection.inumbo.net>)
- id 1lg1Ny-0002eE-Nx
- for xen-devel@lists.xenproject.org; Mon, 10 May 2021 08:35:30 +0000
-Received: from mx.upb.ro (unknown [141.85.13.200])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 241b6232-d9e7-4af3-824a-d845635745e5;
- Mon, 10 May 2021 08:35:29 +0000 (UTC)
+ id 1lg1O3-0002e9-FW
+ for xen-devel@lists.xenproject.org; Mon, 10 May 2021 08:35:35 +0000
+Received: from mx.upb.ro (unknown [141.85.13.210])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a4c4f404-e686-4e6f-b88d-a6fdc9cc32f0;
+ Mon, 10 May 2021 08:35:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by mx.upb.ro (Postfix) with ESMTP id A5B8FB560125;
- Mon, 10 May 2021 11:35:28 +0300 (EEST)
+ by mx.upb.ro (Postfix) with ESMTP id 7186EB56007B;
+ Mon, 10 May 2021 11:35:27 +0300 (EEST)
 Received: from mx.upb.ro ([127.0.0.1])
  by localhost (mx.upb.ro [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id il_eQ4xYdlLU; Mon, 10 May 2021 11:35:25 +0300 (EEST)
+ with ESMTP id s8ApT06jIE62; Mon, 10 May 2021 11:35:24 +0300 (EEST)
 Received: from localhost (localhost [127.0.0.1])
- by mx.upb.ro (Postfix) with ESMTP id 9983AB560122;
- Mon, 10 May 2021 11:35:25 +0300 (EEST)
+ by mx.upb.ro (Postfix) with ESMTP id C15BEB560125;
+ Mon, 10 May 2021 11:35:24 +0300 (EEST)
 Received: from mx.upb.ro ([127.0.0.1])
  by localhost (mx.upb.ro [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id CD1RpKBsSRw4; Mon, 10 May 2021 11:35:25 +0300 (EEST)
+ with ESMTP id wUFcqcURlskq; Mon, 10 May 2021 11:35:24 +0300 (EEST)
 Received: from localhost.localdomain (unknown [188.25.174.245])
- by mx.upb.ro (Postfix) with ESMTPSA id 3BC0AB560126;
- Mon, 10 May 2021 11:35:25 +0300 (EEST)
+ by mx.upb.ro (Postfix) with ESMTPSA id 5A31DB56007B;
+ Mon, 10 May 2021 11:35:24 +0300 (EEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,15 +63,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 241b6232-d9e7-4af3-824a-d845635745e5
+X-Inumbo-ID: a4c4f404-e686-4e6f-b88d-a6fdc9cc32f0
 X-Virus-Scanned: amavisd-new at upb.ro
 From: Costin Lupu <costin.lupu@cs.pub.ro>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>,
+Cc: Tim Deegan <tim@xen.org>,
+	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 3/5] tools/libs/foreignmemory: Fix PAGE_SIZE redefinition error
-Date: Mon, 10 May 2021 11:35:17 +0300
-Message-Id: <2040286fc39b7e1d46376a8e75ac59d8d3be5aff.1620633386.git.costin.lupu@cs.pub.ro>
+Subject: [PATCH v3 1/5] tools/debugger: Fix PAGE_SIZE redefinition error
+Date: Mon, 10 May 2021 11:35:15 +0300
+Message-Id: <88d4d2deeca3259450dc9af2b97f2fc1453a5d7d.1620633386.git.costin.lupu@cs.pub.ro>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <cover.1620633386.git.costin.lupu@cs.pub.ro>
 References: <cover.1620633386.git.costin.lupu@cs.pub.ro>
@@ -83,309 +83,197 @@ If PAGE_SIZE is already defined in the system (e.g. in /usr/include/limit=
 s.h
 header) then gcc will trigger a redefinition error because of -Werror. Th=
 is
-patch replaces usage of PAGE_* macros with XC_PAGE_* macros in order to a=
-void
+patch replaces usage of PAGE_* macros with KDD_PAGE_* macros in order to =
+avoid
 confusion between control domain page granularity (PAGE_* definitions) an=
 d
 guest domain page granularity (which is what we are dealing with here).
 
+We chose to define the KDD_PAGE_* macros instead of using XC_PAGE_* macro=
+s
+because (1) the code in kdd.c should not include any Xen headers and (2) =
+to add
+consistency for code in both kdd.c and kdd-xen.c.
+
 Signed-off-by: Costin Lupu <costin.lupu@cs.pub.ro>
 ---
- tools/libs/foreignmemory/core.c    |  2 +-
- tools/libs/foreignmemory/freebsd.c | 10 +++++-----
- tools/libs/foreignmemory/linux.c   | 23 ++++++++++++-----------
- tools/libs/foreignmemory/minios.c  |  2 +-
- tools/libs/foreignmemory/netbsd.c  | 10 +++++-----
- tools/libs/foreignmemory/private.h |  9 +--------
- 6 files changed, 25 insertions(+), 31 deletions(-)
+ tools/debugger/kdd/kdd-xen.c | 15 ++++++---------
+ tools/debugger/kdd/kdd.c     | 19 ++++++++-----------
+ tools/debugger/kdd/kdd.h     |  7 +++++++
+ 3 files changed, 21 insertions(+), 20 deletions(-)
 
-diff --git a/tools/libs/foreignmemory/core.c b/tools/libs/foreignmemory/c=
-ore.c
-index 28ec311af1..7edc6f0dbf 100644
---- a/tools/libs/foreignmemory/core.c
-+++ b/tools/libs/foreignmemory/core.c
-@@ -202,7 +202,7 @@ int xenforeignmemory_resource_size(
-     if ( rc )
-         return rc;
+diff --git a/tools/debugger/kdd/kdd-xen.c b/tools/debugger/kdd/kdd-xen.c
+index f3f9529f9f..e78c9311c4 100644
+--- a/tools/debugger/kdd/kdd-xen.c
++++ b/tools/debugger/kdd/kdd-xen.c
+@@ -48,9 +48,6 @@
 =20
--    *size =3D fres.nr_frames << PAGE_SHIFT;
-+    *size =3D fres.nr_frames << XC_PAGE_SHIFT;
-     return 0;
- }
+ #define MAPSIZE 4093 /* Prime */
 =20
-diff --git a/tools/libs/foreignmemory/freebsd.c b/tools/libs/foreignmemor=
-y/freebsd.c
-index d94ea07862..2cf0fa1c38 100644
---- a/tools/libs/foreignmemory/freebsd.c
-+++ b/tools/libs/foreignmemory/freebsd.c
-@@ -63,7 +63,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handl=
-e *fmem,
-     privcmd_mmapbatch_t ioctlx;
-     int rc;
-=20
--    addr =3D mmap(addr, num << PAGE_SHIFT, prot, flags | MAP_SHARED, fd,=
- 0);
-+    addr =3D mmap(addr, num << XC_PAGE_SHIFT, prot, flags | MAP_SHARED, =
-fd, 0);
-     if ( addr =3D=3D MAP_FAILED )
-         return NULL;
-=20
-@@ -78,7 +78,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handl=
-e *fmem,
-     {
-         int saved_errno =3D errno;
-=20
--        (void)munmap(addr, num << PAGE_SHIFT);
-+        (void)munmap(addr, num << XC_PAGE_SHIFT);
-         errno =3D saved_errno;
-         return NULL;
-     }
-@@ -89,7 +89,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handl=
-e *fmem,
- int osdep_xenforeignmemory_unmap(xenforeignmemory_handle *fmem,
-                                  void *addr, size_t num)
- {
--    return munmap(addr, num << PAGE_SHIFT);
-+    return munmap(addr, num << XC_PAGE_SHIFT);
- }
-=20
- int osdep_xenforeignmemory_restrict(xenforeignmemory_handle *fmem,
-@@ -101,7 +101,7 @@ int osdep_xenforeignmemory_restrict(xenforeignmemory_=
-handle *fmem,
- int osdep_xenforeignmemory_unmap_resource(xenforeignmemory_handle *fmem,
-                                         xenforeignmemory_resource_handle=
- *fres)
- {
--    return fres ? munmap(fres->addr, fres->nr_frames << PAGE_SHIFT) : 0;
-+    return fres ? munmap(fres->addr, fres->nr_frames << XC_PAGE_SHIFT) :=
- 0;
- }
-=20
- int osdep_xenforeignmemory_map_resource(xenforeignmemory_handle *fmem,
-@@ -120,7 +120,7 @@ int osdep_xenforeignmemory_map_resource(xenforeignmem=
-ory_handle *fmem,
-         /* Request for resource size.  Skip mmap(). */
-         goto skip_mmap;
-=20
--    fres->addr =3D mmap(fres->addr, fres->nr_frames << PAGE_SHIFT,
-+    fres->addr =3D mmap(fres->addr, fres->nr_frames << XC_PAGE_SHIFT,
-                       fres->prot, fres->flags | MAP_SHARED, fmem->fd, 0)=
-;
-     if ( fres->addr =3D=3D MAP_FAILED )
-         return -1;
-diff --git a/tools/libs/foreignmemory/linux.c b/tools/libs/foreignmemory/=
-linux.c
-index c1f35e2db7..a5f6d62567 100644
---- a/tools/libs/foreignmemory/linux.c
-+++ b/tools/libs/foreignmemory/linux.c
-@@ -134,7 +134,7 @@ static int retry_paged(int fd, uint32_t dom, void *ad=
-dr,
-         /* At least one gfn is still in paging state */
-         ioctlx.num =3D 1;
-         ioctlx.dom =3D dom;
--        ioctlx.addr =3D (unsigned long)addr + (i<<PAGE_SHIFT);
-+        ioctlx.addr =3D (unsigned long)addr + (i<<XC_PAGE_SHIFT);
-         ioctlx.arr =3D arr + i;
-         ioctlx.err =3D err + i;
-=20
-@@ -168,7 +168,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
-     size_t i;
-     int rc;
-=20
--    addr =3D mmap(addr, num << PAGE_SHIFT, prot, flags | MAP_SHARED,
-+    addr =3D mmap(addr, num << XC_PAGE_SHIFT, prot, flags | MAP_SHARED,
-                 fd, 0);
-     if ( addr =3D=3D MAP_FAILED )
-         return NULL;
-@@ -198,9 +198,10 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_ha=
-ndle *fmem,
-          */
-         privcmd_mmapbatch_t ioctlx;
-         xen_pfn_t *pfn;
--        unsigned int pfn_arr_size =3D ROUNDUP((num * sizeof(*pfn)), PAGE=
-_SHIFT);
-+        unsigned int pfn_arr_size =3D ROUNDUP((num * sizeof(*pfn)), XC_P=
-AGE_SHIFT);
-+        int os_page_size =3D getpagesize();
-=20
--        if ( pfn_arr_size <=3D PAGE_SIZE )
-+        if ( pfn_arr_size <=3D os_page_size )
-             pfn =3D alloca(num * sizeof(*pfn));
-         else
-         {
-@@ -209,7 +210,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
-             if ( pfn =3D=3D MAP_FAILED )
-             {
-                 PERROR("mmap of pfn array failed");
--                (void)munmap(addr, num << PAGE_SHIFT);
-+                (void)munmap(addr, num << XC_PAGE_SHIFT);
-                 return NULL;
-             }
-         }
-@@ -242,7 +243,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
-                     continue;
-                 }
-                 rc =3D map_foreign_batch_single(fd, dom, pfn + i,
--                        (unsigned long)addr + (i<<PAGE_SHIFT));
-+                        (unsigned long)addr + (i<<XC_PAGE_SHIFT));
-                 if ( rc < 0 )
-                 {
-                     rc =3D -errno;
-@@ -254,7 +255,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
-             break;
-         }
-=20
--        if ( pfn_arr_size > PAGE_SIZE )
-+        if ( pfn_arr_size > os_page_size )
-             munmap(pfn, pfn_arr_size);
-=20
-         if ( rc =3D=3D -ENOENT && i =3D=3D num )
-@@ -270,7 +271,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
-     {
-         int saved_errno =3D errno;
-=20
--        (void)munmap(addr, num << PAGE_SHIFT);
-+        (void)munmap(addr, num << XC_PAGE_SHIFT);
-         errno =3D saved_errno;
-         return NULL;
-     }
-@@ -281,7 +282,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
- int osdep_xenforeignmemory_unmap(xenforeignmemory_handle *fmem,
-                                  void *addr, size_t num)
- {
--    return munmap(addr, num << PAGE_SHIFT);
-+    return munmap(addr, num << XC_PAGE_SHIFT);
- }
-=20
- int osdep_xenforeignmemory_restrict(xenforeignmemory_handle *fmem,
-@@ -293,7 +294,7 @@ int osdep_xenforeignmemory_restrict(xenforeignmemory_=
-handle *fmem,
- int osdep_xenforeignmemory_unmap_resource(
-     xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fre=
-s)
- {
--    return fres ? munmap(fres->addr, fres->nr_frames << PAGE_SHIFT) : 0;
-+    return fres ? munmap(fres->addr, fres->nr_frames << XC_PAGE_SHIFT) :=
- 0;
- }
-=20
- int osdep_xenforeignmemory_map_resource(
-@@ -312,7 +313,7 @@ int osdep_xenforeignmemory_map_resource(
-         /* Request for resource size.  Skip mmap(). */
-         goto skip_mmap;
-=20
--    fres->addr =3D mmap(fres->addr, fres->nr_frames << PAGE_SHIFT,
-+    fres->addr =3D mmap(fres->addr, fres->nr_frames << XC_PAGE_SHIFT,
-                       fres->prot, fres->flags | MAP_SHARED, fmem->fd, 0)=
-;
-     if ( fres->addr =3D=3D MAP_FAILED )
-         return -1;
-diff --git a/tools/libs/foreignmemory/minios.c b/tools/libs/foreignmemory=
-/minios.c
-index 43341ca301..c5453736d5 100644
---- a/tools/libs/foreignmemory/minios.c
-+++ b/tools/libs/foreignmemory/minios.c
-@@ -55,7 +55,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handl=
-e *fmem,
- int osdep_xenforeignmemory_unmap(xenforeignmemory_handle *fmem,
-                                  void *addr, size_t num)
- {
--    return munmap(addr, num << PAGE_SHIFT);
-+    return munmap(addr, num << XC_PAGE_SHIFT);
- }
-=20
- /*
-diff --git a/tools/libs/foreignmemory/netbsd.c b/tools/libs/foreignmemory=
-/netbsd.c
-index c0b1b8f79d..597db775d7 100644
---- a/tools/libs/foreignmemory/netbsd.c
-+++ b/tools/libs/foreignmemory/netbsd.c
-@@ -76,7 +76,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handl=
-e *fmem,
- {
-     int fd =3D fmem->fd;
-     privcmd_mmapbatch_v2_t ioctlx;
--    addr =3D mmap(addr, num * PAGE_SIZE, prot,
-+    addr =3D mmap(addr, num * XC_PAGE_SIZE, prot,
-                 flags | MAP_ANON | MAP_SHARED, -1, 0);
-     if ( addr =3D=3D MAP_FAILED ) {
-         PERROR("osdep_xenforeignmemory_map: mmap failed");
-@@ -93,7 +93,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_handl=
-e *fmem,
-     {
-         int saved_errno =3D errno;
-         PERROR("osdep_xenforeignmemory_map: ioctl failed");
--        munmap(addr, num * PAGE_SIZE);
-+        munmap(addr, num * XC_PAGE_SIZE);
-         errno =3D saved_errno;
-         return NULL;
-     }
-@@ -104,7 +104,7 @@ void *osdep_xenforeignmemory_map(xenforeignmemory_han=
-dle *fmem,
- int osdep_xenforeignmemory_unmap(xenforeignmemory_handle *fmem,
-                                  void *addr, size_t num)
- {
--    return munmap(addr, num * PAGE_SIZE);
-+    return munmap(addr, num * XC_PAGE_SIZE);
- }
-=20
- int osdep_xenforeignmemory_restrict(xenforeignmemory_handle *fmem,
-@@ -117,7 +117,7 @@ int osdep_xenforeignmemory_restrict(xenforeignmemory_=
-handle *fmem,
- int osdep_xenforeignmemory_unmap_resource(
-     xenforeignmemory_handle *fmem, xenforeignmemory_resource_handle *fre=
-s)
- {
--    return fres ? munmap(fres->addr, fres->nr_frames << PAGE_SHIFT) : 0;
-+    return fres ? munmap(fres->addr, fres->nr_frames << XC_PAGE_SHIFT) :=
- 0;
- }
-=20
- int osdep_xenforeignmemory_map_resource(
-@@ -136,7 +136,7 @@ int osdep_xenforeignmemory_map_resource(
-         /* Request for resource size.  Skip mmap(). */
-         goto skip_mmap;
-=20
--    fres->addr =3D mmap(fres->addr, fres->nr_frames << PAGE_SHIFT,
-+    fres->addr =3D mmap(fres->addr, fres->nr_frames << XC_PAGE_SHIFT,
-                       fres->prot, fres->flags | MAP_ANON | MAP_SHARED, -=
-1, 0);
-     if ( fres->addr =3D=3D MAP_FAILED )
-         return -1;
-diff --git a/tools/libs/foreignmemory/private.h b/tools/libs/foreignmemor=
-y/private.h
-index 1ee3626dd2..65fe77aa5b 100644
---- a/tools/libs/foreignmemory/private.h
-+++ b/tools/libs/foreignmemory/private.h
-@@ -1,6 +1,7 @@
- #ifndef XENFOREIGNMEMORY_PRIVATE_H
- #define XENFOREIGNMEMORY_PRIVATE_H
-=20
-+#include <xenctrl.h>
- #include <xentoollog.h>
-=20
- #include <xenforeignmemory.h>
-@@ -10,14 +11,6 @@
- #include <xen/xen.h>
- #include <xen/sys/privcmd.h>
-=20
--#ifndef PAGE_SHIFT /* Mini-os, Yukk */
--#define PAGE_SHIFT           12
--#endif
--#ifndef __MINIOS__ /* Yukk */
--#define PAGE_SIZE            (1UL << PAGE_SHIFT)
--#define PAGE_MASK            (~(PAGE_SIZE-1))
--#endif
+-#define PAGE_SHIFT 12
+-#define PAGE_SIZE (1U << PAGE_SHIFT)
 -
- struct xenforeignmemory_handle {
-     xentoollog_logger *logger, *logger_tofree;
-     unsigned flags;
+ struct kdd_guest {
+     struct xentoollog_logger xc_log; /* Must be first for xc log callbac=
+ks */
+     xc_interface *xc_handle;
+@@ -72,7 +69,7 @@ static void flush_maps(kdd_guest *g)
+     int i;
+     for (i =3D 0; i < MAPSIZE; i++) {
+         if (g->maps[i] !=3D NULL)
+-            munmap(g->maps[i], PAGE_SIZE);
++            munmap(g->maps[i], KDD_PAGE_SIZE);
+         g->maps[i] =3D NULL;
+     }
+ }
+@@ -490,13 +487,13 @@ static uint32_t kdd_access_physical_page(kdd_guest =
+*g, uint64_t addr,
+     uint32_t map_pfn, map_offset;
+     uint8_t *map;
+=20
+-    map_pfn =3D (addr >> PAGE_SHIFT);
+-    map_offset =3D addr & (PAGE_SIZE - 1);
++    map_pfn =3D (addr >> KDD_PAGE_SHIFT);
++    map_offset =3D addr & (KDD_PAGE_SIZE - 1);
+=20
+     /* Evict any mapping of the wrong frame from our slot */=20
+     if (g->pfns[map_pfn % MAPSIZE] !=3D map_pfn
+         && g->maps[map_pfn % MAPSIZE] !=3D NULL) {
+-        munmap(g->maps[map_pfn % MAPSIZE], PAGE_SIZE);
++        munmap(g->maps[map_pfn % MAPSIZE], KDD_PAGE_SIZE);
+         g->maps[map_pfn % MAPSIZE] =3D NULL;
+     }
+     g->pfns[map_pfn % MAPSIZE] =3D map_pfn;
+@@ -507,7 +504,7 @@ static uint32_t kdd_access_physical_page(kdd_guest *g=
+, uint64_t addr,
+     else {
+         map =3D xc_map_foreign_range(g->xc_handle,
+                                    g->domid,
+-                                   PAGE_SIZE,
++                                   KDD_PAGE_SIZE,
+                                    PROT_READ|PROT_WRITE,
+                                    map_pfn);
+=20
+@@ -533,7 +530,7 @@ uint32_t kdd_access_physical(kdd_guest *g, uint64_t a=
+ddr,
+ {
+     uint32_t chunk, rv, done =3D 0;
+     while (len > 0) {
+-        chunk =3D PAGE_SIZE - (addr & (PAGE_SIZE - 1));
++        chunk =3D KDD_PAGE_SIZE - (addr & (KDD_PAGE_SIZE - 1));
+         if (chunk > len)=20
+             chunk =3D len;
+         rv =3D kdd_access_physical_page(g, addr, chunk, buf, write);
+diff --git a/tools/debugger/kdd/kdd.c b/tools/debugger/kdd/kdd.c
+index 17513c2650..320c623eda 100644
+--- a/tools/debugger/kdd/kdd.c
++++ b/tools/debugger/kdd/kdd.c
+@@ -288,9 +288,6 @@ static void kdd_log_pkt(kdd_state *s, const char *nam=
+e, kdd_pkt *p)
+  *  Memory access: virtual addresses and syntactic sugar.
+  */
+=20
+-#define PAGE_SHIFT (12)
+-#define PAGE_SIZE (1ULL << PAGE_SHIFT)=20
+-
+ static uint32_t kdd_read_physical(kdd_state *s, uint64_t addr,=20
+                                   uint32_t len, void *buf)
+ {
+@@ -352,7 +349,7 @@ static uint64_t v2p(kdd_state *s, int cpuid, uint64_t=
+ va)
+=20
+     /* Walk the appropriate number of levels */
+     for (i =3D levels; i > 0; i--) {
+-        shift =3D PAGE_SHIFT + bits * (i-1);
++        shift =3D KDD_PAGE_SHIFT + bits * (i-1);
+         mask =3D ((1ULL << bits) - 1) << shift;
+         offset =3D ((va & mask) >> shift) * width;
+         KDD_DEBUG(s, "level %i: mask 0x%16.16"PRIx64" pa 0x%16.16"PRIx64
+@@ -364,12 +361,12 @@ static uint64_t v2p(kdd_state *s, int cpuid, uint64=
+_t va)
+             return -1ULL; // Not present
+         pa =3D entry & 0x000ffffffffff000ULL;
+         if (pse && (i =3D=3D 2) && (entry & 0x80)) { // Superpage
+-            mask =3D ((1ULL << (PAGE_SHIFT + bits)) - 1);
++            mask =3D ((1ULL << (KDD_PAGE_SHIFT + bits)) - 1);
+             return (pa & ~mask) + (va & mask);
+         }
+     }
+=20
+-    return pa + (va & (PAGE_SIZE - 1));
++    return pa + (va & (KDD_PAGE_SIZE - 1));
+ }
+=20
+ static uint32_t kdd_access_virtual(kdd_state *s, int cpuid, uint64_t add=
+r,
+@@ -380,7 +377,7 @@ static uint32_t kdd_access_virtual(kdd_state *s, int =
+cpuid, uint64_t addr,
+    =20
+     /* Process one page at a time */
+     while (len > 0) {
+-        chunk =3D PAGE_SIZE - (addr & (PAGE_SIZE - 1));
++        chunk =3D KDD_PAGE_SIZE - (addr & (KDD_PAGE_SIZE - 1));
+         if (chunk > len)=20
+             chunk =3D len;
+         pa =3D v2p(s, cpuid, addr);
+@@ -591,7 +588,7 @@ static void get_os_info_64(kdd_state *s)
+     uint64_t dbgkd_addr;
+     DBGKD_GET_VERSION64 dbgkd_get_version64;
+     /* Maybe 1GB is too big for the limit to search? */
+-    uint32_t search_limit =3D (1024 * 1024 * 1024) / PAGE_SIZE; /*1GB/Pa=
+geSize*/
++    uint32_t search_limit =3D (1024 * 1024 * 1024) / KDD_PAGE_SIZE; /*1G=
+B/PageSize*/
+     uint64_t efer;
+=20
+     /* if we are not in 64-bit mode, fail */
+@@ -620,7 +617,7 @@ static void get_os_info_64(kdd_state *s)
+      * in 1GB range above the current page base address
+      */
+=20
+-    base =3D idt0_addr & ~(PAGE_SIZE - 1);
++    base =3D idt0_addr & ~(KDD_PAGE_SIZE - 1);
+=20
+     while (search_limit) {
+         uint16_t val;
+@@ -633,7 +630,7 @@ static void get_os_info_64(kdd_state *s)
+         if (val =3D=3D MZ_HEADER) // MZ
+             break;
+=20
+-        base -=3D PAGE_SIZE;
++        base -=3D KDD_PAGE_SIZE;
+         search_limit -=3D 1;
+     }
+=20
+@@ -720,7 +717,7 @@ static void find_os(kdd_state *s)
+         /* Try each page in the potential range of kernel load addresses=
+ */
+         for (limit =3D s->os.base + s->os.range;
+              s->os.base <=3D limit;
+-             s->os.base +=3D PAGE_SIZE)
++             s->os.base +=3D KDD_PAGE_SIZE)
+             if (check_os(s))
+                 return;
+     }
+diff --git a/tools/debugger/kdd/kdd.h b/tools/debugger/kdd/kdd.h
+index b9a17440df..b476a76d93 100644
+--- a/tools/debugger/kdd/kdd.h
++++ b/tools/debugger/kdd/kdd.h
+@@ -39,6 +39,13 @@
+=20
+ #define PACKED __attribute__((packed))
+=20
++/* We define our page related constants here in order to specifically
++ * avoid using the Xen page macros (this is a restriction for the code
++ * in kdd.c which should not include any Xen headers) and to add
++ * consistency for code in both kdd.c and kdd-xen.c. */
++#define KDD_PAGE_SHIFT 12
++#define KDD_PAGE_SIZE (1U << KDD_PAGE_SHIFT)
++
+ /***********************************************************************=
+******
+  * Serial line protocol: Sender sends a 16-byte header with an optional
+  * payload following it.  Receiver responds to each packet with an
 --=20
 2.20.1
 
