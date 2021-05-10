@@ -2,47 +2,48 @@ Return-Path: <SRS0=a6zz=KF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FA51C43460
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7600C43461
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:41:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2EDBD6108B
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:41:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2EDBD6108B
+	by mail.kernel.org (Postfix) with ESMTPS id 863DF60FE7
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 08:41:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 863DF60FE7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.124963.235282 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.124965.235294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg1To-0001Ka-5G; Mon, 10 May 2021 08:41:32 +0000
+	id 1lg1Tt-0001je-F4; Mon, 10 May 2021 08:41:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 124963.235282; Mon, 10 May 2021 08:41:32 +0000
+Received: by outflank-mailman (output) from mailman id 124965.235294; Mon, 10 May 2021 08:41:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg1To-0001KJ-1a; Mon, 10 May 2021 08:41:32 +0000
-Received: by outflank-mailman (input) for mailman id 124963;
- Mon, 10 May 2021 08:41:30 +0000
+	id 1lg1Tt-0001jN-An; Mon, 10 May 2021 08:41:37 +0000
+Received: by outflank-mailman (input) for mailman id 124965;
+ Mon, 10 May 2021 08:41:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jR2S=KF=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1lg1Tm-0008L0-Ng
- for xen-devel@lists.xenproject.org; Mon, 10 May 2021 08:41:30 +0000
+ id 1lg1Tr-0008L0-Ng
+ for xen-devel@lists.xenproject.org; Mon, 10 May 2021 08:41:35 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 87a44038-5c7a-4c6f-b7c9-4df9ade5601f;
- Mon, 10 May 2021 08:41:15 +0000 (UTC)
+ id 50ccbb59-1223-4e84-b65f-c9a77e98272d;
+ Mon, 10 May 2021 08:41:21 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 93AD7106F;
- Mon, 10 May 2021 01:41:14 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D803B11D4;
+ Mon, 10 May 2021 01:41:20 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3C6F23F719;
- Mon, 10 May 2021 01:41:13 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 020793F719;
+ Mon, 10 May 2021 01:41:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,100 +55,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 87a44038-5c7a-4c6f-b7c9-4df9ade5601f
+X-Inumbo-ID: 50ccbb59-1223-4e84-b65f-c9a77e98272d
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v6 0/9] Use Doxygen and sphinx for html documentation
-Date: Mon, 10 May 2021 09:40:56 +0100
-Message-Id: <20210510084105.17108-1-luca.fancellu@arm.com>
+Subject: [PATCH v6 4/9] m4/python: add function to docs_tool.m4 and new m4 module
+Date: Mon, 10 May 2021 09:41:00 +0100
+Message-Id: <20210510084105.17108-5-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210510084105.17108-1-luca.fancellu@arm.com>
+References: <20210510084105.17108-1-luca.fancellu@arm.com>
 
-This serie introduce doxygen in the sphinx html docs generation.
-One benefit is to keep most of the documentation in the source
-files of xen so that it's more maintainable, on the other hand
-there are some limitation of doxygen that should be addressed
-modifying the current codebase (for example doxygen can't parse
-anonymous structure/union).
+Add ax_python_module.m4 to have a way to check if
+a python module is installed in the system.
 
-To reproduce the documentation xen must be compiled because
-most of the headers are generated on compilation time from
-the makefiles.
+Add a function to docs_tool.m4 to throw an error if the
+required docs tool is missing.
 
-Here follows the steps to generate the sphinx html docs, some
-package may be required on your machine, everything is suggested
-by the autoconf script.
-Here I'm building the arm64 docs (the only introduced for now by
-this serie):
-
-./configure
-make -C xen XEN_TARGET_ARCH="arm64" CROSS_COMPILE="aarch64-linux-gnu-" menuconfig
-make -C xen XEN_TARGET_ARCH="arm64" CROSS_COMPILE="aarch64-linux-gnu-"
-make -C docs XEN_TARGET_ARCH="arm64" sphinx-html
-
-now in docs/sphinx/html/ we have the generated docs starting
-from the index.html page.
-
-Luca Fancellu (9):
-  docs: add doxygen configuration file
-  docs: add Xen png logo for the doxygen documentation
-  docs: add doxygen templates
-  m4/python: add function to docs_tool.m4 and new m4 module
-  docs: add checks to configure for sphinx and doxygen
-  docs: add doxygen preprocessor and related files
-  docs: Change Makefile and sphinx configuration for doxygen
-  docs: hypercalls sphinx skeleton for generated html
-  docs/doxygen: doxygen documentation for grant_table.h
-
- .gitignore                                    |    7 +
- config/Docs.mk.in                             |    2 +
- docs/Makefile                                 |   46 +-
- docs/conf.py                                  |   48 +-
- docs/configure                                |  258 ++
- docs/configure.ac                             |   15 +
- docs/hypercall-interfaces/arm32.rst           |   32 +
- docs/hypercall-interfaces/arm64.rst           |   33 +
- .../common/grant_tables.rst                   |    9 +
- docs/hypercall-interfaces/index.rst.in        |    7 +
- docs/hypercall-interfaces/x86_64.rst          |   32 +
- docs/index.rst                                |    8 +
- docs/xen-doxygen/customdoxygen.css            |   36 +
- docs/xen-doxygen/doxy-preprocessor.py         |  110 +
- docs/xen-doxygen/doxy_input.list              |    1 +
- docs/xen-doxygen/doxygen_include.h.in         |   32 +
- docs/xen-doxygen/footer.html                  |   21 +
- docs/xen-doxygen/header.html                  |   56 +
- docs/xen-doxygen/mainpage.md                  |    5 +
- docs/xen-doxygen/xen_project_logo_165x67.png  |  Bin 0 -> 18223 bytes
- docs/xen.doxyfile.in                          | 2316 +++++++++++++++++
- m4/ax_python_module.m4                        |   56 +
- m4/docs_tool.m4                               |    9 +
- xen/include/public/grant_table.h              |  387 +--
- 24 files changed, 3367 insertions(+), 159 deletions(-)
- create mode 100644 docs/hypercall-interfaces/arm32.rst
- create mode 100644 docs/hypercall-interfaces/arm64.rst
- create mode 100644 docs/hypercall-interfaces/common/grant_tables.rst
- create mode 100644 docs/hypercall-interfaces/index.rst.in
- create mode 100644 docs/hypercall-interfaces/x86_64.rst
- create mode 100644 docs/xen-doxygen/customdoxygen.css
- create mode 100755 docs/xen-doxygen/doxy-preprocessor.py
- create mode 100644 docs/xen-doxygen/doxy_input.list
- create mode 100644 docs/xen-doxygen/doxygen_include.h.in
- create mode 100644 docs/xen-doxygen/footer.html
- create mode 100644 docs/xen-doxygen/header.html
- create mode 100644 docs/xen-doxygen/mainpage.md
- create mode 100644 docs/xen-doxygen/xen_project_logo_165x67.png
- create mode 100644 docs/xen.doxyfile.in
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+ m4/ax_python_module.m4 | 56 ++++++++++++++++++++++++++++++++++++++++++
+ m4/docs_tool.m4        |  9 +++++++
+ 2 files changed, 65 insertions(+)
  create mode 100644 m4/ax_python_module.m4
 
+diff --git a/m4/ax_python_module.m4 b/m4/ax_python_module.m4
+new file mode 100644
+index 0000000000..107d88264a
+--- /dev/null
++++ b/m4/ax_python_module.m4
+@@ -0,0 +1,56 @@
++# ===========================================================================
++#     https://www.gnu.org/software/autoconf-archive/ax_python_module.html
++# ===========================================================================
++#
++# SYNOPSIS
++#
++#   AX_PYTHON_MODULE(modname[, fatal, python])
++#
++# DESCRIPTION
++#
++#   Checks for Python module.
++#
++#   If fatal is non-empty then absence of a module will trigger an error.
++#   The third parameter can either be "python" for Python 2 or "python3" for
++#   Python 3; defaults to Python 3.
++#
++# LICENSE
++#
++#   Copyright (c) 2008 Andrew Collier
++#
++#   Copying and distribution of this file, with or without modification, are
++#   permitted in any medium without royalty provided the copyright notice
++#   and this notice are preserved. This file is offered as-is, without any
++#   warranty.
++
++#serial 9
++
++AU_ALIAS([AC_PYTHON_MODULE], [AX_PYTHON_MODULE])
++AC_DEFUN([AX_PYTHON_MODULE],[
++    if test -z $PYTHON;
++    then
++        if test -z "$3";
++        then
++            PYTHON="python3"
++        else
++            PYTHON="$3"
++        fi
++    fi
++    PYTHON_NAME=`basename $PYTHON`
++    AC_MSG_CHECKING($PYTHON_NAME module: $1)
++    $PYTHON -c "import $1" 2>/dev/null
++    if test $? -eq 0;
++    then
++        AC_MSG_RESULT(yes)
++        eval AS_TR_CPP(HAVE_PYMOD_$1)=yes
++    else
++        AC_MSG_RESULT(no)
++        eval AS_TR_CPP(HAVE_PYMOD_$1)=no
++        #
++        if test -n "$2"
++        then
++            AC_MSG_ERROR(failed to find required module $1)
++            exit 1
++        fi
++    fi
++])
+\ No newline at end of file
+diff --git a/m4/docs_tool.m4 b/m4/docs_tool.m4
+index 3e8814ac8d..39aa348026 100644
+--- a/m4/docs_tool.m4
++++ b/m4/docs_tool.m4
+@@ -15,3 +15,12 @@ dnl
+         AC_MSG_WARN([$2 is not available so some documentation won't be built])
+     ])
+ ])
++
++AC_DEFUN([AX_DOCS_TOOL_REQ_PROG], [
++dnl
++    AC_ARG_VAR([$1], [Path to $2 tool])
++    AC_PATH_PROG([$1], [$2])
++    AS_IF([! test -x "$ac_cv_path_$1"], [
++        AC_MSG_ERROR([$2 is needed])
++    ])
++])
+\ No newline at end of file
 -- 
 2.17.1
 
