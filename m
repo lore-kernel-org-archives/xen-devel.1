@@ -2,45 +2,44 @@ Return-Path: <SRS0=a6zz=KF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61F0AC433B4
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 07:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30A4CC433B4
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 07:31:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1193560241
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 07:27:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1193560241
+	by mail.kernel.org (Postfix) with ESMTPS id C404260241
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 07:31:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C404260241
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.124848.235057 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.124853.235069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg0Jf-0005if-6E; Mon, 10 May 2021 07:26:59 +0000
+	id 1lg0OH-000762-Ol; Mon, 10 May 2021 07:31:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 124848.235057; Mon, 10 May 2021 07:26:59 +0000
+Received: by outflank-mailman (output) from mailman id 124853.235069; Mon, 10 May 2021 07:31:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg0Jf-0005iY-27; Mon, 10 May 2021 07:26:59 +0000
-Received: by outflank-mailman (input) for mailman id 124848;
- Mon, 10 May 2021 07:26:57 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lg0OH-00075v-L6; Mon, 10 May 2021 07:31:45 +0000
+Received: by outflank-mailman (input) for mailman id 124853;
+ Mon, 10 May 2021 07:31:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=EdaL=KF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lg0Jd-0005iS-Nf
- for xen-devel@lists.xenproject.org; Mon, 10 May 2021 07:26:57 +0000
+ id 1lg0OG-00075p-9N
+ for xen-devel@lists.xenproject.org; Mon, 10 May 2021 07:31:44 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 71aed54e-1611-4428-8b53-49145054bb78;
- Mon, 10 May 2021 07:26:56 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 57493dd4-8167-4a74-9f7b-427baaf8dfed;
+ Mon, 10 May 2021 07:31:43 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 79E75AF83;
- Mon, 10 May 2021 07:26:55 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 73019AF83;
+ Mon, 10 May 2021 07:31:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,82 +51,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71aed54e-1611-4428-8b53-49145054bb78
+X-Inumbo-ID: 57493dd4-8167-4a74-9f7b-427baaf8dfed
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1620631615; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+	t=1620631902; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xYyFHuEJzA8bW84BDFLGHieoULclpUXmQ+5ryikikSc=;
-	b=Vbtb+FaJMmaDpzduJR8BiknddjmAEJD2OKIczdh7vBmyMjkEQjzF1Yq3hXaUiQVQxDX22h
-	BBGzM4wSKw1AWJ8KZK64QwBbAILC8uNbDFADDdBLRvTtl3ZoE14JQJ4D47fnSCvi6iBtdW
-	WTEWG+HMNTyEbfQmHOS8ejIUbFdgBis=
-Subject: Re: [PATCH 1/1] xen/unpopulated-alloc: fix error return code in
- fill_list()
-To: Zhen Lei <thunder.leizhen@huawei.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Dan Carpenter <dan.carpenter@oracle.com>,
- Dan Williams <dan.j.williams@intel.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- linux-kernel <linux-kernel@vger.kernel.org>
-References: <20210508021913.1727-1-thunder.leizhen@huawei.com>
+	bh=mY8k8SGs4hAq+6S/2g0vm+oUPS6TGS15HZ1yjDtmoFc=;
+	b=kmfYBizb6VsJB0VvZtAaVlL9RqiHo3X9Ml1VKGe/TO+T7mNw0JKYgTBi3nJr2cjvoyHrtt
+	8GNxjma96YwB++4NAs4moVnngfos3lwiPZkZryBOvDzM/Iq6MP1WpE4wCulIG6rdadm0m/
+	WLgwceJVglALW8PZwv4jizU0Z5nWkYc=
+Subject: Re: [PATCH v1] tools: add newlines to xenstored WRL_LOG
+To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <20210503154712.508-1-olaf@aepfle.de>
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <9d117e16-869b-2780-cf46-a4eae591dcf9@suse.com>
-Date: Mon, 10 May 2021 09:26:54 +0200
+Message-ID: <17f8a84f-13c3-2d55-13b0-79abc7f83855@suse.com>
+Date: Mon, 10 May 2021 09:31:41 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.0
 MIME-Version: 1.0
-In-Reply-To: <20210508021913.1727-1-thunder.leizhen@huawei.com>
+In-Reply-To: <20210503154712.508-1-olaf@aepfle.de>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="c8IW4CRW9p9hDoAkvLcUrsosdIjASDqIJ"
+ boundary="4SvcMA7KxV495cmCYUWLU0jSU3JcI1eR6"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---c8IW4CRW9p9hDoAkvLcUrsosdIjASDqIJ
-Content-Type: multipart/mixed; boundary="fx7x3yKP6pikwEJllzBg9r3fltrlEKFRs";
+--4SvcMA7KxV495cmCYUWLU0jSU3JcI1eR6
+Content-Type: multipart/mixed; boundary="d6Lcf5BBCdxVrBTmRc1Ik5B2f2RUg2Vby";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
-To: Zhen Lei <thunder.leizhen@huawei.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Dan Carpenter <dan.carpenter@oracle.com>,
- Dan Williams <dan.j.williams@intel.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- linux-kernel <linux-kernel@vger.kernel.org>
-Message-ID: <9d117e16-869b-2780-cf46-a4eae591dcf9@suse.com>
-Subject: Re: [PATCH 1/1] xen/unpopulated-alloc: fix error return code in
- fill_list()
-References: <20210508021913.1727-1-thunder.leizhen@huawei.com>
-In-Reply-To: <20210508021913.1727-1-thunder.leizhen@huawei.com>
+To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Message-ID: <17f8a84f-13c3-2d55-13b0-79abc7f83855@suse.com>
+Subject: Re: [PATCH v1] tools: add newlines to xenstored WRL_LOG
+References: <20210503154712.508-1-olaf@aepfle.de>
+In-Reply-To: <20210503154712.508-1-olaf@aepfle.de>
 
---fx7x3yKP6pikwEJllzBg9r3fltrlEKFRs
+--d6Lcf5BBCdxVrBTmRc1Ik5B2f2RUg2Vby
 Content-Type: multipart/mixed;
- boundary="------------B3B5B62A3A54C4C0604E2DDD"
+ boundary="------------5FA622E058BD5D971C1324D3"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------B3B5B62A3A54C4C0604E2DDD
+--------------5FA622E058BD5D971C1324D3
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 08.05.21 04:19, Zhen Lei wrote:
-> Fix to return a negative error code from the error handling case instea=
-d
-> of 0, as done elsewhere in this function.
->=20
-> Fixes: a4574f63edc6 ("mm/memremap_pages: convert to 'struct range'")
-> Reported-by: Hulk Robot <hulkci@huawei.com>
-> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+On 03.05.21 17:47, Olaf Hering wrote:
+> According to syslog(3) the fmt string does not need a newline.
+> The mini-os implementation of syslog requires the trailing newline.
+> Other calls to syslog do include the newline already, add it also to WR=
+L_LOG.
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+Mind doing the same for the two syslog() calls in xenstored_core.c
+lacking the newline?
 
 
 Juergen
 
---------------B3B5B62A3A54C4C0604E2DDD
+--------------5FA622E058BD5D971C1324D3
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -218,25 +201,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------B3B5B62A3A54C4C0604E2DDD--
+--------------5FA622E058BD5D971C1324D3--
 
---fx7x3yKP6pikwEJllzBg9r3fltrlEKFRs--
+--d6Lcf5BBCdxVrBTmRc1Ik5B2f2RUg2Vby--
 
---c8IW4CRW9p9hDoAkvLcUrsosdIjASDqIJ
+--4SvcMA7KxV495cmCYUWLU0jSU3JcI1eR6
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmCY4D4FAwAAAAAACgkQsN6d1ii/Ey8p
-4ggAh3EiWzBp0LOasjOKlL9yLd//LN6Hh9qhQcEMHmMG/5oYRXXahNo8SZVcMK1l1hWVni80Dd5D
-m1plMuOLPBHax+6R7MJVSz3EoiTrTjDAbs6hc2A0MLa8XIGcEu0H03zHXfLuemkj7TdIQ5tKSSlr
-BIEE1rXh1AWeCl/JUexqy4/jZmuYR7cbWlIxI2hqsUb8yaCTdySv5tZaqQjOECSSSpuYGO/XGUIM
-Y7Qwa1PTwXU7i4u+CypzOgN3BnrxeWRrJahzt7h/0My29pXWRKY0dNJXgkHdAE2t1XG6DrX7czY6
-NDRQqSouaoULhpsSdFM6qPx8xbYKOIfVgdiHiYHdiw==
-=20ku
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmCY4V0FAwAAAAAACgkQsN6d1ii/Ey/3
+HQf7B3mns0RKRfrgNgkab3iTg9LMHLCu7yFmJKKgohqfDn0rdUUeb7haC2K2hR276Bbny8J/SWPW
+wQdSbhcWYfL4z6yCsBZOwV5ImAjGbA6GAfSK0Dwn3+kJuLB2RK9sjCgINLKOsMGwyHYcdeROSZFI
+G3smgrMbpbt+fk4Sm21YThLd8czpqIuEs+r0MaC0OeJfoDqMXxLKlX8nDnNUFHYE/vtMmC9d7eks
++hrbAaImpyZpI5PahjqGj/zXI/s/PM5s7/iekNwxJOpxcogBFNseuksMqqTJKKyVYUnjbbvS8lG5
+2bDUN2nL/D+erCJu42R5r1pVdY4uiShOk10XiudPZA==
+=qt5k
 -----END PGP SIGNATURE-----
 
---c8IW4CRW9p9hDoAkvLcUrsosdIjASDqIJ--
+--4SvcMA7KxV495cmCYUWLU0jSU3JcI1eR6--
 
