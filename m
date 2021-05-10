@@ -7,39 +7,38 @@ X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57C86C433ED
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 14:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B996C43460
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 14:59:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 08B0961421
-	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 14:58:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08B0961421
+	by mail.kernel.org (Postfix) with ESMTPS id E5616610A0
+	for <xen-devel@archiver.kernel.org>; Mon, 10 May 2021 14:59:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E5616610A0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125298.235847 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125300.235859 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg7Md-0004Af-6Q; Mon, 10 May 2021 14:58:31 +0000
+	id 1lg7NA-0004gu-G6; Mon, 10 May 2021 14:59:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125298.235847; Mon, 10 May 2021 14:58:31 +0000
+Received: by outflank-mailman (output) from mailman id 125300.235859; Mon, 10 May 2021 14:59:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lg7Md-0004AY-3F; Mon, 10 May 2021 14:58:31 +0000
-Received: by outflank-mailman (input) for mailman id 125298;
- Mon, 10 May 2021 14:58:29 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lg7NA-0004gn-C8; Mon, 10 May 2021 14:59:04 +0000
+Received: by outflank-mailman (input) for mailman id 125300;
+ Mon, 10 May 2021 14:59:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5bM6=KF=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1lg7Mb-0004AQ-An
- for xen-devel@lists.xenproject.org; Mon, 10 May 2021 14:58:29 +0000
+ id 1lg7N9-0004ga-L1
+ for xen-devel@lists.xenproject.org; Mon, 10 May 2021 14:59:03 +0000
 Received: from verein.lst.de (unknown [213.95.11.211])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9ed29534-d824-44e2-9d55-8d77ae5a880b;
- Mon, 10 May 2021 14:58:27 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b5682814-642e-4a00-aee1-664551745c7d;
+ Mon, 10 May 2021 14:59:02 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 7F6AC67373; Mon, 10 May 2021 16:58:23 +0200 (CEST)
+ id 621D667373; Mon, 10 May 2021 16:59:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,8 +50,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ed29534-d824-44e2-9d55-8d77ae5a880b
-Date: Mon, 10 May 2021 16:58:23 +0200
+X-Inumbo-ID: b5682814-642e-4a00-aee1-664551745c7d
+Date: Mon, 10 May 2021 16:59:00 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Claire Chang <tientzu@chromium.org>
 Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
@@ -88,13 +87,13 @@ Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
 	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com,
 	matthew.auld@intel.com, nouveau@lists.freedesktop.org,
 	rodrigo.vivi@intel.com, thomas.hellstrom@linux.intel.com
-Subject: Re: [PATCH v6 01/15] swiotlb: Refactor swiotlb init functions
-Message-ID: <20210510145823.GA28066@lst.de>
-References: <20210510095026.3477496-1-tientzu@chromium.org> <20210510095026.3477496-2-tientzu@chromium.org>
+Subject: Re: [PATCH v6 02/15] swiotlb: Refactor swiotlb_create_debugfs
+Message-ID: <20210510145900.GB28066@lst.de>
+References: <20210510095026.3477496-1-tientzu@chromium.org> <20210510095026.3477496-3-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20210510095026.3477496-2-tientzu@chromium.org>
+In-Reply-To: <20210510095026.3477496-3-tientzu@chromium.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 
 Looks good,
