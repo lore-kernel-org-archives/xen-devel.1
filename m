@@ -2,44 +2,44 @@ Return-Path: <SRS0=u2kx=KG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01F94C433ED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 237C7C433B4
 	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 06:36:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9B87A61364
+	by mail.kernel.org (Postfix) with ESMTPS id 9C4B5616EB
 	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 06:36:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9B87A61364
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C4B5616EB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125620.236435 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125619.236423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgLzv-0008TQ-EH; Tue, 11 May 2021 06:36:03 +0000
+	id 1lgLzs-0008Cl-5f; Tue, 11 May 2021 06:36:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125620.236435; Tue, 11 May 2021 06:36:03 +0000
+Received: by outflank-mailman (output) from mailman id 125619.236423; Tue, 11 May 2021 06:36:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgLzv-0008TJ-AU; Tue, 11 May 2021 06:36:03 +0000
-Received: by outflank-mailman (input) for mailman id 125620;
- Tue, 11 May 2021 06:36:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lgLzs-0008Ce-2S; Tue, 11 May 2021 06:36:00 +0000
+Received: by outflank-mailman (input) for mailman id 125619;
+ Tue, 11 May 2021 06:35:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=OZd+=KG=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1lgLzu-0008Sz-OE
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 06:36:02 +0000
-Received: from verein.lst.de (unknown [213.95.11.211])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2187cd16-62f6-4edc-9932-880b66c39ad2;
- Tue, 11 May 2021 06:36:00 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 8C47567373; Tue, 11 May 2021 08:35:58 +0200 (CEST)
+ (envelope-from <SRS0=nFSD=KG=xen.org=tim@srs-us1.protection.inumbo.net>)
+ id 1lgLzp-0008CY-Si
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 06:35:57 +0000
+Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 315daa80-185c-4cb4-9f77-b69b0745ace1;
+ Tue, 11 May 2021 06:35:56 +0000 (UTC)
+Received: from tjd by deinos.phlegethon.org with local (Exim 4.94.2 (FreeBSD))
+ (envelope-from <tim@xen.org>)
+ id 1lgLzk-0007pF-Gz; Tue, 11 May 2021 06:35:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,117 +51,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2187cd16-62f6-4edc-9932-880b66c39ad2
-Date: Tue, 11 May 2021 08:35:58 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Christoph Hellwig <hch@lst.de>, Julien Grall <julien@xen.org>,
-	f.fainelli@gmail.com,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	linux-kernel@vger.kernel.org,
-	osstest service owner <osstest-admin@xenproject.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	iommu@lists.linux-foundation.org
-Subject: Re: Regression when booting 5.15 as dom0 on arm64 (WAS: Re:
- [linux-linus test] 161829: regressions - FAIL)
-Message-ID: <20210511063558.GA7605@lst.de>
-References: <osstest-161829-mainreport@xen.org> <4ea1e89f-a7a0-7664-470c-b3cf773a1031@xen.org> <20210510084057.GA933@lst.de> <alpine.DEB.2.21.2105101818260.5018@sstabellini-ThinkPad-T480s>
+X-Inumbo-ID: 315daa80-185c-4cb4-9f77-b69b0745ace1
+Date: Tue, 11 May 2021 07:35:52 +0100
+From: Tim Deegan <tim@xen.org>
+To: Costin Lupu <costin.lupu@cs.pub.ro>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v3 1/5] tools/debugger: Fix PAGE_SIZE redefinition error
+Message-ID: <YJolyMVdxPIXVCQo@deinos.phlegethon.org>
+References: <cover.1620633386.git.costin.lupu@cs.pub.ro>
+ <88d4d2deeca3259450dc9af2b97f2fc1453a5d7d.1620633386.git.costin.lupu@cs.pub.ro>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.21.2105101818260.5018@sstabellini-ThinkPad-T480s>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+In-Reply-To: <88d4d2deeca3259450dc9af2b97f2fc1453a5d7d.1620633386.git.costin.lupu@cs.pub.ro>
+X-SA-Known-Good: Yes
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: tim@xen.org
+X-SA-Exim-Scanned: No (on deinos.phlegethon.org); SAEximRunCond expanded to false
 
-On Mon, May 10, 2021 at 06:46:34PM -0700, Stefano Stabellini wrote:
-> On Mon, 10 May 2021, Christoph Hellwig wrote:
-> > On Sat, May 08, 2021 at 12:32:37AM +0100, Julien Grall wrote:
-> > > The pointer dereferenced seems to suggest that the swiotlb hasn't been 
-> > > allocated. From what I can tell, this may be because swiotlb_force is set 
-> > > to SWIOTLB_NO_FORCE, we will still enable the swiotlb when running on top 
-> > > of Xen.
-> > >
-> > > I am not entirely sure what would be the correct fix. Any opinions?
-> > 
-> > Can you try something like the patch below (not even compile tested, but
-> > the intent should be obvious?
-> > 
-> > 
-> > diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
-> > index 16a2b2b1c54d..7671bc153fb1 100644
-> > --- a/arch/arm64/mm/init.c
-> > +++ b/arch/arm64/mm/init.c
-> > @@ -44,6 +44,8 @@
-> >  #include <asm/tlb.h>
-> >  #include <asm/alternative.h>
-> >  
-> > +#include <xen/arm/swiotlb-xen.h>
-> > +
-> >  /*
-> >   * We need to be able to catch inadvertent references to memstart_addr
-> >   * that occur (potentially in generic code) before arm64_memblock_init()
-> > @@ -482,7 +484,7 @@ void __init mem_init(void)
-> >  	if (swiotlb_force == SWIOTLB_FORCE ||
-> >  	    max_pfn > PFN_DOWN(arm64_dma_phys_limit))
-> >  		swiotlb_init(1);
-> > -	else
-> > +	else if (!IS_ENABLED(CONFIG_XEN) || !xen_swiotlb_detect())
-> >  		swiotlb_force = SWIOTLB_NO_FORCE;
-> >  
-> >  	set_max_mapnr(max_pfn - PHYS_PFN_OFFSET);
+At 11:35 +0300 on 10 May (1620646515), Costin Lupu wrote:
+> If PAGE_SIZE is already defined in the system (e.g. in /usr/include/limits.h
+> header) then gcc will trigger a redefinition error because of -Werror. This
+> patch replaces usage of PAGE_* macros with KDD_PAGE_* macros in order to avoid
+> confusion between control domain page granularity (PAGE_* definitions) and
+> guest domain page granularity (which is what we are dealing with here).
 > 
-> The "IS_ENABLED(CONFIG_XEN)" is not needed as the check is already part
-> of xen_swiotlb_detect().
+> We chose to define the KDD_PAGE_* macros instead of using XC_PAGE_* macros
+> because (1) the code in kdd.c should not include any Xen headers and (2) to add
+> consistency for code in both kdd.c and kdd-xen.c.
+> 
+> Signed-off-by: Costin Lupu <costin.lupu@cs.pub.ro>
 
-As far as I can tell the x86 version of xen_swiotlb_detect has a
-!CONFIG_XEN stub.  The arm/arm64 version in uncoditionally declared, but
-the implementation only compiled when Xen support is enabled.
+Reviewed-by: Tim Deegan <tim@xen.org>
 
-> 
-> 
-> But let me ask another question first. Do you think it makes sense to have:
-> 
-> 	if (swiotlb_force == SWIOTLB_NO_FORCE)
-> 		return 0;
-> 
-> at the beginning of swiotlb_late_init_with_tbl? I am asking because
-> swiotlb_late_init_with_tbl is meant for special late initializations,
-> right? It shouldn't really matter the presence or absence of
-> SWIOTLB_NO_FORCE in regards to swiotlb_late_init_with_tbl. Also the
-> commit message for "swiotlb: Make SWIOTLB_NO_FORCE perform no
-> allocation" says that "If a platform was somehow setting
-> swiotlb_no_force and a later call to swiotlb_init() was to be made we
-> would still be proceeding with allocating the default SWIOTLB size
-> (64MB)." Our case here is very similar, right? So the allocation should
-> proceed?
+Thanks!
 
-Well, right now SWIOTLB_NO_FORCE is checked in dma_direct_map_page.
-We need to clean all this up a bit, especially with the work to support
-multiple swiotlb buffers, but I think for now this is the best we can
-do.
-
-> Which brings me to a separate unrelated issue, still affecting the path
-> xen_swiotlb_init -> swiotlb_late_init_with_tbl. If swiotlb_init(1) is
-> called by mem_init then swiotlb_late_init_with_tbl will fail due to the
-> check:
-> 
->     /* protect against double initialization */
->     if (WARN_ON_ONCE(io_tlb_default_mem))
->         return -ENOMEM;
-> 
-> xen_swiotlb_init is meant to ask Xen to make a bunch of pages physically
-> contiguous. Then, it initializes the swiotlb buffer based on those
-> pages. So it is a problem that swiotlb_late_init_with_tbl refuses to
-> continue. However, in practice it is not a problem today because on ARM
-> we don't actually make any special requests to Xen to make the pages
-> physically contiguous (yet). See the empty implementation of
-> arch/arm/xen/mm.c:xen_create_contiguous_region. I don't know about x86.
-> 
-> So maybe we should instead do something like the appended?
-
-So I'd like to change the core swiotlb initialization to just use
-a callback into the arch/xen code to make the pages contigous and
-kill all that code duplication.  Together with the multiple swiotlb
-buffer work I'd rather avoid churn that goes into a different direction
-if possible.
+Tim.
 
