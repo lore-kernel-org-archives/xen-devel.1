@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE447C433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4FF7C433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:20:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 45D46617ED
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:19:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 45D46617ED
+	by mail.kernel.org (Postfix) with ESMTPS id 99D37617ED
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:20:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 99D37617ED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125960.237090 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125962.237109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgWyy-0007jj-NK; Tue, 11 May 2021 18:19:48 +0000
+	id 1lgWz3-0008Hn-TC; Tue, 11 May 2021 18:19:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125960.237090; Tue, 11 May 2021 18:19:48 +0000
+Received: by outflank-mailman (output) from mailman id 125962.237109; Tue, 11 May 2021 18:19:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgWyy-0007iS-GO; Tue, 11 May 2021 18:19:48 +0000
-Received: by outflank-mailman (input) for mailman id 125960;
- Tue, 11 May 2021 18:19:47 +0000
+	id 1lgWz3-0008Hc-Pj; Tue, 11 May 2021 18:19:53 +0000
+Received: by outflank-mailman (input) for mailman id 125962;
+ Tue, 11 May 2021 18:19:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=iFnS=KG=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1lgWyx-0007g6-HP
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 18:19:47 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1lgWz2-0007g6-GI
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 18:19:52 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0b63d9b5-d94b-41d2-920f-8f6312662347;
- Tue, 11 May 2021 18:19:46 +0000 (UTC)
+ id 19b3bfa7-5419-49b1-8051-bd5514dfe581;
+ Tue, 11 May 2021 18:19:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,41 +48,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b63d9b5-d94b-41d2-920f-8f6312662347
+X-Inumbo-ID: 19b3bfa7-5419-49b1-8051-bd5514dfe581
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620757186;
+  d=citrix.com; s=securemail; t=1620757187;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SU7cgAQhk8vsTkLv/y2uGvNvL2Atz9xPDkxcsiAL/Ik=;
-  b=DF2iR63RcPxEEgp5BdlmahraON9RvtLSzlhmj8WPmXh0+MnIZRjIrdP+
-   kvuXgjybqV6Rle9uoS7KhyILgYDjXzvrkLTS/S1rNKf5fdLt1HRyP4U0R
-   YeXUsr2WToNHrUp00vq5gxznRf03UfQjiuGWtso8h194dTKBdCBPR9i2m
+  bh=EoaUpYs9b5JtY9mZ1Jy5aNZ4/ohnkMdircO88bxkg44=;
+  b=CHcTnBQ+gbXHApTpscebxkhpzBSOUA1WUEEhTnbrMVn8fA7Px6OwgTy6
+   CJXlvR4R0vmzePd3hrxiwsEeAN+FVR9TMtNpODlef+6CwGiTvmjdqOpXQ
+   0rdtuwvkbZi5XXNHCab4tjr7TPLbNw3eJ6v/5TiOJeZBvhWbQg3qO31J8
    0=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Js8J1Ottk9+P26tbK96orEpViIabgTRWSOozgof7eDuwY7XKgwVCvGH0wBVhvtSCELEnFH6OJ0
- fBp22c5JAdwR7wDAGrXyMhkeEsMspYxwUf93ZrkIutqa4FMP7EGaPEZJAL3D8gqS9yq/c+jxDZ
- Il+RjeVW592GORgriTnu20gCMwlO175x/506AASueEQwnhscllpB1n1TqbbMz94191Y6RGxQjH
- YTxsahTYWhchKTcXO5fsX5eaVAaRvofo9uNw5FDs6chwZVMmWlqb9+y7Dd4odwuOeQGR4oRAZf
- j3E=
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: jXvHeAJvDN1mXXdaAWfqlPHHazwViQ0FtFAp5WTIfOpuEqy+a0KF3Ohxx4UIqAk8EUleoTu5tl
+ NaRTf4EMlBhS6a9UrEyQLomS4Wry7YRe26ICnZ1n3MP+FaDaqd00tixNEsozcWIN57bePj/hax
+ edxjqei4oFFQWlggOIaVjGXhk65Cv4ADXQpot/PjgaArEdGdKc/BdQ0ZoLWxXOTwYyB+AmSWNU
+ bA7dWsMaQJtOWZuXtTDd3+JHwpqYGEwrX6TOKyQYRB70rd9+tD6X9LR5T8hwevckaH4hv/jYQa
+ a7Y=
 X-SBRS: 5.1
-X-MesageID: 43955845
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 43562364
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:7A/JIa6E+2oilrlqOQPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-HdrOrdr: A9a23:afEZh6mNz+/LDj4Xj8abPvWYjILpDfIW3DAbv31ZSRFFG/Fxl6
+ iV/cjzsiWE8Ar5OUtQ4OxoV5PwIk80maQb3WBVB8bHYOCEghrPEGgB1/qB/9SIIUSXnYQxuZ
+ uIMZIOb+EYZWIK9voSizPZLz9P+re6GdiT9ILj80s=
 X-IronPort-AV: E=Sophos;i="5.82,291,1613451600"; 
-   d="scan'208";a="43955845"
+   d="scan'208";a="43562364"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
- Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
-	<jgross@suse.com>
-Subject: [PATCH v2 16/17] tools/ocaml/xenstored: don't store domU's mfn of ring page
-Date: Tue, 11 May 2021 19:05:29 +0100
-Message-ID: <49200c1e5de78257fc43e26f545651484dbe4ff0.1620755943.git.edvin.torok@citrix.com>
+ Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 12/17] tools/ocaml/libs/mmap: mark mmap/munmap as blocking
+Date: Tue, 11 May 2021 19:05:25 +0100
+Message-ID: <294a60be29027d33b0a1d154b7d576237c7dd420.1620755942.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1620755942.git.edvin.torok@citrix.com>
 References: <cover.1620755942.git.edvin.torok@citrix.com>
@@ -90,129 +89,54 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This is a port of the following C xenstored commit
-122b52230aa5b79d65e18b8b77094027faa2f8e2 tools/xenstore: don't store domU's mfn of ring page in xenstored
+These functions can potentially take some time,
+so allow other OCaml code to proceed meanwhile (if any).
 
-Backwards compat: accept a domain dump both with and without MFN.
-
-CC: Juergen Gross <jgross@suse.com>
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/ocaml/xenstored/domain.ml  |  7 ++-----
- tools/ocaml/xenstored/domains.ml |  6 +++---
- tools/ocaml/xenstored/process.ml | 16 +++++-----------
- 3 files changed, 10 insertions(+), 19 deletions(-)
+ tools/ocaml/libs/mmap/xenmmap_stubs.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/tools/ocaml/xenstored/domain.ml b/tools/ocaml/xenstored/domain.ml
-index 82d7b1a7ef..960ebef218 100644
---- a/tools/ocaml/xenstored/domain.ml
-+++ b/tools/ocaml/xenstored/domain.ml
-@@ -22,7 +22,6 @@ let warn  fmt = Logging.warn  "domain" fmt
- type t =
+diff --git a/tools/ocaml/libs/mmap/xenmmap_stubs.c b/tools/ocaml/libs/mmap/xenmmap_stubs.c
+index d7a97c76f5..e8d2d6add5 100644
+--- a/tools/ocaml/libs/mmap/xenmmap_stubs.c
++++ b/tools/ocaml/libs/mmap/xenmmap_stubs.c
+@@ -28,6 +28,7 @@
+ #include <caml/fail.h>
+ #include <caml/callback.h>
+ #include <caml/unixsupport.h>
++#include <caml/signals.h>
+ 
+ #define Wsize_bsize_round(n) (Wsize_bsize( (n) + sizeof(value) - 1 ))
+ 
+@@ -69,7 +70,9 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
+ 		caml_invalid_argument("negative offset");
+ 	length = Int_val(len);
+ 
++	caml_enter_blocking_section();
+ 	addr = mmap(NULL, length, c_pflag, c_mflag, Int_val(fd), Int_val(offset));
++	caml_leave_blocking_section();
+ 	if (MAP_FAILED == addr)
+ 		uerror("mmap", Nothing);
+ 
+@@ -80,10 +83,15 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
+ CAMLprim value stub_mmap_final(value intf)
  {
- 	id: Xenctrl.domid;
--	mfn: nativeint;
- 	interface: Xenmmap.t;
- 	eventchn: Event.t;
- 	mutable remote_port: int;
-@@ -40,7 +39,6 @@ type t =
- let is_dom0 d = d.id = 0
- let get_id domain = domain.id
- let get_interface d = d.interface
--let get_mfn d = d.mfn
- let get_remote_port d = d.remote_port
- let get_port d = d.port
+ 	CAMLparam1(intf);
++	struct mmap_interface interface = *Intf_val(intf);
  
-@@ -61,7 +59,7 @@ let string_of_port = function
- | Some x -> string_of_int (Xeneventchn.to_int x)
+-	if (Intf_val(intf)->addr != MAP_FAILED)
+-		munmap(Intf_val(intf)->addr, Intf_val(intf)->len);
++	/* mark it as freed, in case munmap below fails, so we don't retry it */
+ 	Intf_val(intf)->addr = MAP_FAILED;
++	if (interface.addr != MAP_FAILED) {
++		caml_enter_blocking_section();
++		munmap(interface.addr, interface.len);
++		caml_leave_blocking_section();
++	}
  
- let dump d chan =
--	fprintf chan "dom,%d,%nd,%d\n" d.id d.mfn d.remote_port
-+	fprintf chan "dom,%d,%d\n" d.id d.remote_port
- 
- let notify dom = match dom.port with
- | None ->
-@@ -87,9 +85,8 @@ let close dom =
- 	Xenmmap.unmap dom.interface;
- 	()
- 
--let make id mfn remote_port interface eventchn = {
-+let make id remote_port interface eventchn = {
- 	id = id;
--	mfn = mfn;
- 	remote_port = remote_port;
- 	interface = interface;
- 	eventchn = eventchn;
-diff --git a/tools/ocaml/xenstored/domains.ml b/tools/ocaml/xenstored/domains.ml
-index d9cb693751..0dfeed193a 100644
---- a/tools/ocaml/xenstored/domains.ml
-+++ b/tools/ocaml/xenstored/domains.ml
-@@ -124,10 +124,10 @@ let cleanup doms =
- let resume _doms _domid =
- 	()
- 
--let create doms domid mfn port =
-+let create doms domid port =
- 	let mapping = Gnt.(Gnttab.map_exn doms.gnttab { domid; ref = xenstore} true) in
- 	let interface = Gnt.Gnttab.Local_mapping.to_pages doms.gnttab mapping in
--	let dom = Domain.make domid mfn port interface doms.eventchn in
-+	let dom = Domain.make domid port interface doms.eventchn in
- 	Hashtbl.add doms.table domid dom;
- 	Domain.bind_interdomain dom;
- 	dom
-@@ -147,7 +147,7 @@ let create0 doms =
- 			port, interface
- 		)
- 		in
--	let dom = Domain.make 0 Nativeint.zero port interface doms.eventchn in
-+	let dom = Domain.make 0 port interface doms.eventchn in
- 	Hashtbl.add doms.table 0 dom;
- 	Domain.bind_interdomain dom;
- 	Domain.notify dom;
-diff --git a/tools/ocaml/xenstored/process.ml b/tools/ocaml/xenstored/process.ml
-index 13b7153536..890970b8c5 100644
---- a/tools/ocaml/xenstored/process.ml
-+++ b/tools/ocaml/xenstored/process.ml
-@@ -235,10 +235,6 @@ let do_debug con t _domains cons data =
- 	| "watches" :: _ ->
- 		let watches = Connections.debug cons in
- 		Some (watches ^ "\000")
--	| "mfn" :: domid :: _ ->
--		let domid = int_of_string domid in
--		let con = Connections.find_domain cons domid in
--		may (fun dom -> Printf.sprintf "%nd\000" (Domain.get_mfn dom)) (Connection.get_domain con)
- 	| _ -> None
- 	with _ -> None
- 
-@@ -554,15 +550,13 @@ let do_introduce con t domains cons data =
- 	let dom =
- 		if Domains.exist domains domid then begin
- 			let edom = Domains.find domains domid in
--			if (Domain.get_mfn edom) = mfn && (Connections.find_domain cons domid) != con then begin
--				(* Use XS_INTRODUCE for recreating the xenbus event-channel. *)
--				edom.remote_port <- port;
--				Domain.bind_interdomain edom;
--			end;
-+			(* Use XS_INTRODUCE for recreating the xenbus event-channel. *)
-+			edom.remote_port <- port;
-+			Domain.bind_interdomain edom;
- 			edom
- 		end
- 		else try
--			let ndom = Domains.create domains domid mfn port in
-+			let ndom = Domains.create domains domid port in
- 			Connections.add_domain cons ndom;
- 			Connections.fire_spec_watches (Transaction.get_root t) cons Store.Path.introduce_domain;
- 			ndom
-@@ -571,7 +565,7 @@ let do_introduce con t domains cons data =
- 			 Logging.debug "process" "do_introduce: %s (%s)" (Printexc.to_string e) bt;
- 			 raise Invalid_Cmd_Args
- 	in
--	if (Domain.get_remote_port dom) <> port || (Domain.get_mfn dom) <> mfn then
-+	if (Domain.get_remote_port dom) <> port then
- 		raise Domain_not_match
- 
- let do_release con t domains cons data =
+ 	CAMLreturn(Val_unit);
+ }
 -- 
 2.25.1
 
