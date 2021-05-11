@@ -2,44 +2,47 @@ Return-Path: <SRS0=u2kx=KG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 237C7C433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 06:36:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B378AC433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 06:37:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9C4B5616EB
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 06:36:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9C4B5616EB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 5DE4D61430
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 06:37:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DE4D61430
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125619.236423 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125624.236447 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgLzs-0008Cl-5f; Tue, 11 May 2021 06:36:00 +0000
+	id 1lgM1L-0000wu-PQ; Tue, 11 May 2021 06:37:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125619.236423; Tue, 11 May 2021 06:36:00 +0000
+Received: by outflank-mailman (output) from mailman id 125624.236447; Tue, 11 May 2021 06:37:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgLzs-0008Ce-2S; Tue, 11 May 2021 06:36:00 +0000
-Received: by outflank-mailman (input) for mailman id 125619;
- Tue, 11 May 2021 06:35:57 +0000
+	id 1lgM1L-0000wn-M0; Tue, 11 May 2021 06:37:31 +0000
+Received: by outflank-mailman (input) for mailman id 125624;
+ Tue, 11 May 2021 06:37:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=nFSD=KG=xen.org=tim@srs-us1.protection.inumbo.net>)
- id 1lgLzp-0008CY-Si
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 06:35:57 +0000
-Received: from deinos.phlegethon.org (unknown [2001:41d0:8:b1d7::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 315daa80-185c-4cb4-9f77-b69b0745ace1;
- Tue, 11 May 2021 06:35:56 +0000 (UTC)
-Received: from tjd by deinos.phlegethon.org with local (Exim 4.94.2 (FreeBSD))
- (envelope-from <tim@xen.org>)
- id 1lgLzk-0007pF-Gz; Tue, 11 May 2021 06:35:52 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1y2t=KG=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
+ id 1lgM1K-0000wb-CA
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 06:37:30 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 90517df5-5487-40cc-981c-df11108319f4;
+ Tue, 11 May 2021 06:37:28 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2CFC9168F;
+ Mon, 10 May 2021 23:37:28 -0700 (PDT)
+Received: from [10.57.3.172] (unknown [10.57.3.172])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BDCF63F718;
+ Mon, 10 May 2021 23:37:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,41 +54,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 315daa80-185c-4cb4-9f77-b69b0745ace1
-Date: Tue, 11 May 2021 07:35:52 +0100
-From: Tim Deegan <tim@xen.org>
-To: Costin Lupu <costin.lupu@cs.pub.ro>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v3 1/5] tools/debugger: Fix PAGE_SIZE redefinition error
-Message-ID: <YJolyMVdxPIXVCQo@deinos.phlegethon.org>
-References: <cover.1620633386.git.costin.lupu@cs.pub.ro>
- <88d4d2deeca3259450dc9af2b97f2fc1453a5d7d.1620633386.git.costin.lupu@cs.pub.ro>
+X-Inumbo-ID: 90517df5-5487-40cc-981c-df11108319f4
+Subject: Re: [PATCH v3 10/10] arm64: Change type of hsr, cpsr, spsr_el1 to
+ uint64_t
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>, bertrand.marquis@arm.com,
+ wei.chen@arm.com, xen-devel@lists.xenproject.org
+References: <20210505074308.11016-1-michal.orzel@arm.com>
+ <20210505074308.11016-11-michal.orzel@arm.com>
+ <c5676e69-a474-d1ad-c7e9-49c03be3ab66@suse.com>
+From: Michal Orzel <michal.orzel@arm.com>
+Message-ID: <1ff4f9fb-0eca-189a-2b47-b910dc6b3639@arm.com>
+Date: Tue, 11 May 2021 08:37:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <88d4d2deeca3259450dc9af2b97f2fc1453a5d7d.1620633386.git.costin.lupu@cs.pub.ro>
-X-SA-Known-Good: Yes
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Mail-From: tim@xen.org
-X-SA-Exim-Scanned: No (on deinos.phlegethon.org); SAEximRunCond expanded to false
+In-Reply-To: <c5676e69-a474-d1ad-c7e9-49c03be3ab66@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-At 11:35 +0300 on 10 May (1620646515), Costin Lupu wrote:
-> If PAGE_SIZE is already defined in the system (e.g. in /usr/include/limits.h
-> header) then gcc will trigger a redefinition error because of -Werror. This
-> patch replaces usage of PAGE_* macros with KDD_PAGE_* macros in order to avoid
-> confusion between control domain page granularity (PAGE_* definitions) and
-> guest domain page granularity (which is what we are dealing with here).
+Hi Jan,
+
+On 05.05.2021 10:00, Jan Beulich wrote:
+> On 05.05.2021 09:43, Michal Orzel wrote:
+>> --- a/xen/include/public/arch-arm.h
+>> +++ b/xen/include/public/arch-arm.h
+>> @@ -267,10 +267,10 @@ struct vcpu_guest_core_regs
+>>  
+>>      /* Return address and mode */
+>>      __DECL_REG(pc64,         pc32);             /* ELR_EL2 */
+>> -    uint32_t cpsr;                              /* SPSR_EL2 */
+>> +    uint64_t cpsr;                              /* SPSR_EL2 */
+>>  
+>>      union {
+>> -        uint32_t spsr_el1;       /* AArch64 */
+>> +        uint64_t spsr_el1;       /* AArch64 */
+>>          uint32_t spsr_svc;       /* AArch32 */
+>>      };
 > 
-> We chose to define the KDD_PAGE_* macros instead of using XC_PAGE_* macros
-> because (1) the code in kdd.c should not include any Xen headers and (2) to add
-> consistency for code in both kdd.c and kdd-xen.c.
+> This change affects, besides domctl, also default_initialise_vcpu(),
+> which Arm's arch_initialise_vcpu() calls. I realize do_arm_vcpu_op()
+> only allows two unrelated VCPUOP_* to pass, but then I don't
+> understand why arch_initialise_vcpu() doesn't simply return e.g.
+> -EOPNOTSUPP. Hence I suspect I'm missing something.
 > 
-> Signed-off-by: Costin Lupu <costin.lupu@cs.pub.ro>
+I agree that do_arm_vcpu_op only allows two VCPUOP* to pass and
+arch_initialise_vcpu being called in case of VCPUOP_initialise
+has no sense as VCPUOP_initialise is not supported on arm.
+It makes sense that it should return -EOPNOTSUPP.
+However do_arm_vcpu_op will not accept VCPUOP_initialise and will return
+-EINVAL. So arch_initialise_vcpu for arm will not be called.
+Do you think that changing this behaviour so that arch_initialise_vcpu returns
+-EOPNOTSUPP should be part of this patch?
 
-Reviewed-by: Tim Deegan <tim@xen.org>
-
-Thanks!
-
-Tim.
+>> --- a/xen/include/public/domctl.h
+>> +++ b/xen/include/public/domctl.h
+>> @@ -38,7 +38,7 @@
+>>  #include "hvm/save.h"
+>>  #include "memory.h"
+>>  
+>> -#define XEN_DOMCTL_INTERFACE_VERSION 0x00000013
+>> +#define XEN_DOMCTL_INTERFACE_VERSION 0x00000014
+> 
+> So this is to cover for the struct vcpu_guest_core_regs change.
+> 
+>> --- a/xen/include/public/vm_event.h
+>> +++ b/xen/include/public/vm_event.h
+>> @@ -266,8 +266,7 @@ struct vm_event_regs_arm {
+>>      uint64_t ttbr1;
+>>      uint64_t ttbcr;
+>>      uint64_t pc;
+>> -    uint32_t cpsr;
+>> -    uint32_t _pad;
+>> +    uint64_t cpsr;
+>>  };
+> 
+> Then I wonder why this isn't accompanied by a similar bump of
+> VM_EVENT_INTERFACE_VERSION. I don't see you drop any checking /
+> filling of the _pad field, so existing callers may pass garbage
+> there, and new callers need to be prevented from looking at the
+> upper half when running on an older hypervisor.
+> 
+> Jan
+> 
+Cheers,
+Michal
 
