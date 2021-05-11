@@ -2,42 +2,51 @@ Return-Path: <SRS0=u2kx=KG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-6.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6384FC433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 16:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F943C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 16:42:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DFE966188B
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 16:42:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DFE966188B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id CB23161182
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 16:42:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CB23161182
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125817.236827 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125820.236839 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgVSU-0001Ba-9t; Tue, 11 May 2021 16:42:10 +0000
+	id 1lgVT7-0001jO-Kb; Tue, 11 May 2021 16:42:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125817.236827; Tue, 11 May 2021 16:42:10 +0000
+Received: by outflank-mailman (output) from mailman id 125820.236839; Tue, 11 May 2021 16:42:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgVSU-0001BT-6g; Tue, 11 May 2021 16:42:10 +0000
-Received: by outflank-mailman (input) for mailman id 125817;
- Tue, 11 May 2021 16:42:08 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lgVT7-0001jH-HB; Tue, 11 May 2021 16:42:49 +0000
+Received: by outflank-mailman (input) for mailman id 125820;
+ Tue, 11 May 2021 16:42:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Tq61=KG=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1lgVSS-0001BN-5l
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 16:42:08 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 06c0b46c-34c5-4b8b-bfda-6575d2e01023;
- Tue, 11 May 2021 16:42:07 +0000 (UTC)
+ <SRS0=zMp2=KG=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
+ id 1lgVT6-0001hY-G9
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 16:42:48 +0000
+Received: from mail-il1-x132.google.com (unknown [2607:f8b0:4864:20::132])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3d915ebd-c94f-43c5-ac1c-c15f2298bbad;
+ Tue, 11 May 2021 16:42:44 +0000 (UTC)
+Received: by mail-il1-x132.google.com with SMTP id e14so17682783ils.12
+ for <xen-devel@lists.xenproject.org>; Tue, 11 May 2021 09:42:44 -0700 (PDT)
+Received: from mail-il1-f175.google.com (mail-il1-f175.google.com.
+ [209.85.166.175])
+ by smtp.gmail.com with ESMTPSA id e12sm9510029ilu.75.2021.05.11.09.42.43
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 May 2021 09:42:43 -0700 (PDT)
+Received: by mail-il1-f175.google.com with SMTP id e14so17682746ils.12
+ for <xen-devel@lists.xenproject.org>; Tue, 11 May 2021 09:42:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,173 +58,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06c0b46c-34c5-4b8b-bfda-6575d2e01023
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620751327;
-  h=from:to:cc:references:subject:message-id:date:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=J34mvslvyE2BkQ5cxj3q/tvzkRJ4tyApqnGhdsNAF4Q=;
-  b=cflONfX42DAdlJPdCYmiSzLw2UL7zDNuNcdKQE3hFcNGcD7dOOUnby+b
-   0fEdO25akGseyCPSWJ9vkCaDJBsN3b1zqvAspAYgKNAKVpPTrOOXj8W53
-   YhskXznInLWD77ay3yGvzmLCLUfOirTkX1ER56epJIw19QTSNA7vakndu
-   E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: LsL6Xre9yOcBUpJlBxEOY4eXtl+UUyTpxDAyLpN8uRdntYUqWlHKLe8nn6F+CN2eBiN9rSr42a
- ERDqUtwX9AB1xaAxYFARXOSK4c4JFXmH/dnwWV2iTnyz4katlLAkyCLo3yoA9K6L9ArT+Rd1RT
- 1Bu9+kzu88eeIVYZxgAcqKrFilYpPAvOUhpziLocRPQCygOWf6HChMskR463KNj468sFrMP3cg
- 5yA8gSuZG7qM70lmF+l5+4A+L65BGyqxFqr+cy/OEn01964nZWEGmVmXddFTqg0khV27EBPeFo
- STQ=
-X-SBRS: 5.1
-X-MesageID: 43667177
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:uC2XXqh1J0EeZJod35JZP/AJ0nBQXh4ji2hC6mlwRA09TyX5ra
- 2TdZUgpHrJYVMqMk3I9uruBEDtex3hHP1OkOss1NWZPDUO0VHARO1fBOPZqAEIcBeOldK1u5
- 0AT0B/YueAd2STj6zBkXSF+wBL+qj6zEiq792usEuEVWtRGsVdB58SMHfiLqVxLjM2YqYRJd
- 6nyedsgSGvQngTZtTTPAh/YwCSz+e78q4PeHQ9dmca1DU=
-X-IronPort-AV: E=Sophos;i="5.82,291,1613451600"; 
-   d="scan'208";a="43667177"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PNlbpEYNq+rAjKMCq+smjMd8B29YnWxAgqbQU3wKlMrJHAdBvkY1U+p61edCY50C8FSubAS6CwY96xyeQirdX46R9q9oSdOYPqDB7KrPODzsxLhxDmzbsMBWLMjWTgVLJRrzOH0489FlWvtSF93EoJ/UWCQJ0ZIjzI3dLQ5x3NHWDWX0K0MEQG3IuFxNiQbBNCUIg9Kk270ALARyY1HG4HFslnX1kzVxbeLanZefjOBSvzaljotChbXfYmciuIbGlt8hDSctC9aHYCC9mM7Qb0dMb84aHKKXoIcjI1kffLMI6dCn9yUpU8Ds9XvUh7RNC27NyfnCbVSAS2FVGloOqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J34mvslvyE2BkQ5cxj3q/tvzkRJ4tyApqnGhdsNAF4Q=;
- b=fu3M7EJguc1+X7hCpi0s/nPF4wINxDM87NNeigH74whNBZ5/OhuG0azDF8o6ibl+9DOs6m8vxkdF/FqoViabnaKRxn5mlJY4ab8laZDSJkZQA56/V7FdKsVzuVG4qIERR24eEOoH+2NkXjcbDy1ps1IXsP9NrN+0xGu1LObG3yvtBh4Eyshv0gTxsf3dlXsFpxyWPUyb14U4O6ChlM1EbgZCILyTwh8YnQaBWmKA6jIhM8uN5AdgxVjB3MJYbuhwmTeCVNyfQ1bWaDtOHZyfAB0arcbK4fzA29EbbuU8yJCy/X22whopBr0uE+eCrDSW3BckVpIRnPkGKR7OaBY+zg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
+X-Inumbo-ID: 3d915ebd-c94f-43c5-ac1c-c15f2298bbad
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=J34mvslvyE2BkQ5cxj3q/tvzkRJ4tyApqnGhdsNAF4Q=;
- b=hBlAbWBPktfba4aOKtdqTgg6O3ybrD7QUOFw8GYiaEWBcgmXQP+rsLjxxek2NcRMCJ5OeLEg5ms36+waI0uVbfaz3TENLikW4PX3h4gKSt7qn2xnCUtczNFcVbPHgwbOXYtWJqELaN2cQjdMUd/pLl60WFJqpWi3pA0+4IwIs2s=
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <322de6db-e01f-0b57-5777-5d94a13c441a@suse.com>
- <8ba8f016-0aed-277b-bbea-80022d057791@suse.com>
- <5a954be8-e213-36d8-27da-4c51243dc280@citrix.com>
- <f515fdfb-d1a6-56d8-5db3-ebddeed23806@suse.com>
-Subject: Re: [PATCH v3 03/22] x86/xstate: re-size save area when CPUID policy
- changes
-Message-ID: <f16afc8a-ccd4-7e5e-e08d-d96597c6e8ab@citrix.com>
-Date: Tue, 11 May 2021 17:41:54 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-In-Reply-To: <f515fdfb-d1a6-56d8-5db3-ebddeed23806@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-GB
-X-ClientProxiedBy: LO2P265CA0396.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:f::24) To BYAPR03MB3623.namprd03.prod.outlook.com
- (2603:10b6:a02:aa::12)
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=k6jrKLJf+SUK032/zz9tWYcN5Rhay3mFZvhqIWgxNBs=;
+        b=L/Y31OZjVAvXas4gAOFGDpY1O+WckxTleHtLR2a6rScOLannRZ4axVg75JGljNN3EA
+         40xB287W01zuvyDHYZFS2WLSs1CG9A82KNV8OVT7o92X2FrRRw8J292qbL27/DexCkE7
+         qg4XvM9gaQyzYYNGyObKTqbnr0WqygwnwiYxc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=k6jrKLJf+SUK032/zz9tWYcN5Rhay3mFZvhqIWgxNBs=;
+        b=qi9HAk2mZKOK7azzeL1ApiPC6ZUiyLlDxDxHB2Z4yfVxR/d5iza+XLLkuAfxkl+vMA
+         oYG7geV1Kwe8/cHIDGb3sp6HGI/gOEAftBj0E0Ebb/zBg8wKx60eNSRufSdDoGBYOig1
+         9QXnUYrRTeOAuYuAcUzDDIidGmC7f5Kx72RIz+bEue8XaZ/nzZUaKRICAhpdgbd8eOSf
+         Bo2YkolWYF8ziW35VJqdzrFaNUD6RES+RggMMWuSAk+bYWL2xxzfTsh5A3RTEEgDMUAC
+         Hu51CdwirMqiMBq6exBGa2vvrnLeXO6iTvzFjue++6cVainroyWKH95cJjTGNe7Rs2ze
+         yfbw==
+X-Gm-Message-State: AOAM532U6YZp36/6zcvIQ43dDm5uO4duXt6yGFKVZnIkkZ9ld83qgBch
+	IeGuUbxur0ySE+Q+xKM6X/7V9ES3cqdVpg==
+X-Google-Smtp-Source: ABdhPJyA7xOvwHKtF7Olq5cAg7RoArKuUB7s4jupLnPyLDy7B8jFQJMzAuWn8oWUqWKGVlxHH5+q0A==
+X-Received: by 2002:a05:6e02:10c5:: with SMTP id s5mr28665397ilj.88.1620751363980;
+        Tue, 11 May 2021 09:42:43 -0700 (PDT)
+X-Received: by 2002:a6b:7b08:: with SMTP id l8mr22174004iop.50.1620751352978;
+ Tue, 11 May 2021 09:42:32 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 640a0976-1a9b-452f-1601-08d9149bb3f1
-X-MS-TrafficTypeDiagnostic: BYAPR03MB3429:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BYAPR03MB34294EADB389D9D45BA7475ABA539@BYAPR03MB3429.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Gbwht9Do6uZsRm1pN5qwG2yjoXtgCv6qizCE7jhNtkv+RRmCcKB1uQFcG5IYna9fSyUj5V4I2q9UdqFtKt3doSHL7xX+E/k+5KVd2ejuD+hFIrFNc6EFiEzd4gRQBhTRld/pncKdgwHd0D74UDrOupf2gt6GDpb0/YtSgNXKVH/Ba5fv99iJ8bE+Q9+6a7IO1rXL3NmEfIYrqsoJwjJQAWo01oBJNDULgoyaqzK3X3tCrqgdLHf4iOGnTsbG5ubp3/DDwTRHhHUICnteR7X4t+GK5xA2/FkPP4huy1BiBq4cX2/uCWAKNlnPpcKQ5cEDltfpx9lWt3jfDcp+tbbaZR6+We/HhKyyGhRVvxWWO/Td3AEMgnF3O+s1GOH45SN1wyo6aZhNYaBCpbnGTRLlMYFpyfkZYGsxXD0iM9XYC6XsgMRfyYq4RnEXz7fxx0MNOpthZgv2MN8iwqbReBbicDIWcGaYjKCbOsW39sm0eJW1Nf5UoMyzaRhmK7+10lJY4Lnzhopts3i36Dqq94Zl03o7jT/ZkvRdEFX+tq5nZYtwbatPbxvLlXZZ9lGYVBGccFxJNe8EiIwP021lwXhr62uQ1QP33jq60LNTkNn4icD6UxT52bT8c5pe/myT3UbNjUegVe0vH75aZIEo9M874cWEGgJqW6+HYFO+cGtj9jIAvScWVU8Vxvpm7rvYc0c3
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(376002)(39860400002)(366004)(136003)(316002)(16576012)(186003)(36756003)(6666004)(83380400001)(4326008)(8676002)(2616005)(54906003)(8936002)(5660300002)(16526019)(2906002)(31686004)(956004)(478600001)(26005)(66946007)(53546011)(66476007)(38100700002)(66556008)(86362001)(31696002)(6486002)(6916009)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?N0tFeldZZ2N5cVZOYnFXdkJobW9vRHhjTVFFUjVvR2NFTVd0NE9GNXBKVFBD?=
- =?utf-8?B?aGphV0p2bjV0UEYzTnZOamdpM0szMDBoK2RQbFJCZEp1YnlLbGdFQ2dTZGk3?=
- =?utf-8?B?NElheHRJZ3J5QmUvNTcrT2FzMldYblhRazcxQldCUWUrUmxxQ2p4R0kzcVAr?=
- =?utf-8?B?UmNFdnhZUytncXAvUldEcjI4MEtyOGkwNTRic0NFbkZNdXdOUFAwZEkzbFN5?=
- =?utf-8?B?TDE0MjY5WEFRaTV5NEdSaWNZZnZVbGpscWptSk0rOEVvUVlQcFNSU0RoKzRP?=
- =?utf-8?B?bzZkL2lNZklkWEE1SGVZMWVZMnlocUliTVd1UVo3SWV6Ni9KVnNjejVPQk54?=
- =?utf-8?B?UGFLUlhyWFpBN3lDS2JweXprdldVdGxQMlhiSVlNOXRNM2RBQVFzVUpLRk51?=
- =?utf-8?B?VnFpUkhoUm5VdDJiVWRka1BCWlhRdElxY21CK2YrUzU1alMyOW9BeWpiTTFk?=
- =?utf-8?B?YWRQK1JFdStPcnB3c0V1ZDVPZkpST1Z0UXdld2pYWmc0Q20weWF1b1Z6c0Jv?=
- =?utf-8?B?K2ZNdklTOFBpNGpMYUIxU05YeGQ2WmJ5TzBrUEx1VWZXRXhEZUNsTVNDNEsz?=
- =?utf-8?B?VmU4ZytITzRDYXlrQnYyUUNHVjhBRDBqMEc0ZmEvYk1wMlZDRk1uWlZRS0VX?=
- =?utf-8?B?UlM2VndaUjUxSndzSk04OXppL2ZJVGZHVmJjVjU5Yk9WMUFGMWtORmlYWk54?=
- =?utf-8?B?c0FZUXZ5K0ZwVFNoTWlSdzExWEtWSmJZZ1NpTWdjOCthc3MwMG1kVE9FaGlB?=
- =?utf-8?B?NzY1Y3FMWE9xRHY5cGswZjhBSHpCNEFTZ1c0akk3clN4TkJlNXVDckd6M1E1?=
- =?utf-8?B?ajFtTW1JR094WFgrYjE0ejIxbzNoKzNwVk1hR3pJNGwxcmZvSjN3RzFRT1pX?=
- =?utf-8?B?ZGRGS3VDcVptbmpwTkcyS1FIaitSMkNGVWFVbVVwMzdSWjl3Z1NaR3BPdkQ3?=
- =?utf-8?B?N3pxa2VBcTVHdDBrcFN5dThEdWFZZDNibzBVS0t0SnRUSlBHbjJTNGE1SGFT?=
- =?utf-8?B?ZGRINFN2bko4UXBWVVZicWNBZWJBdjI3UUl4RW9VazFnOVJ6dk85UEpEeEth?=
- =?utf-8?B?b3FOTzMzZ3FBT2ZVVWh5WEVId0F1L3U5OEc4UWJUYjYwM3Z3d1hNUWk3Z0JP?=
- =?utf-8?B?SWRCUSt5ZFFEQk1XZkE0eGU5N2pDTEwxUVZEeUJ3VHpnUzUzYjV1MkJzYkFE?=
- =?utf-8?B?VGhUMmozK3g2eE1tRU9wWFJWeG1LUEd2bVdKVVVZTmdhbE16ZU8rOEVXVkw1?=
- =?utf-8?B?WmJXWkx6MGxEeUViQTBwTERYU1Y5VnB4Szk3bVlsalk3TGlBTnI2RU44aFBz?=
- =?utf-8?B?bmsvK2FGTXQ0dGpzcEk1QlBGa0xDMFUwU1JScldFdWN1ZHVuMXBRWk9vNmgy?=
- =?utf-8?B?V0VKQlRRczhkcmZhVlFPVTJac0JyenhMVGNQbDQ2Y2NTNlIwWCtBcW1kbDYr?=
- =?utf-8?B?dHZwYWlCdXNXeEhmTGhNY2UvUC83bTNOQWM4bWl1NGl4MkhYcHVWblQxUHFS?=
- =?utf-8?B?bHdqVTBGVlhOV3JzUlI4L2FJbWhmVEwrdlBJc3ZWc3YzL0ErNWdjNHFJVFpj?=
- =?utf-8?B?R0hidlBuN1g0MGh4U1FJam50aEl6V1F3eFZHVm9VaXR0VE1ET3JzNlYxcUx5?=
- =?utf-8?B?MnVyckw3RlM2ZEFXMnUxMzhtME5LdDhwZTRxTHVZclZaK0MzUFBVb21HQi9Z?=
- =?utf-8?B?S2hTTGVwaDJZY1ZUM3YwR3Fmc0JCUUhMQW1LV2FWbWtaYnB1c2ptdTU4VjBK?=
- =?utf-8?Q?qbnY5+lTdyonQjsB17geFzsff1ZnH7G4PVlZn4B?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 640a0976-1a9b-452f-1601-08d9149bb3f1
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2021 16:42:02.3442
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s+t4vTlRn1J3TswnQviXoioibxoaID57WhNtVQBh8iLN5rb//KpAFwofinYtohIoFJoxsPR97UjJWJmds/RketuSOwlWEXqep/dcVqvO89c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR03MB3429
-X-OriginatorOrg: citrix.com
+References: <20210510095026.3477496-1-tientzu@chromium.org>
+ <20210510095026.3477496-6-tientzu@chromium.org> <20210510150342.GD28066@lst.de>
+In-Reply-To: <20210510150342.GD28066@lst.de>
+From: Claire Chang <tientzu@chromium.org>
+Date: Wed, 12 May 2021 00:42:22 +0800
+X-Gmail-Original-Message-ID: <CALiNf2_7mHuMG5DTQD0GsriN=vuX0ytyUn4rxEmsK2iP3PKV+w@mail.gmail.com>
+Message-ID: <CALiNf2_7mHuMG5DTQD0GsriN=vuX0ytyUn4rxEmsK2iP3PKV+w@mail.gmail.com>
+Subject: Re: [PATCH v6 05/15] swiotlb: Add a new get_io_tlb_mem getter
+To: Christoph Hellwig <hch@lst.de>
+Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>, 
+	Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com, jgross@suse.com, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, benh@kernel.crashing.org, paulus@samba.org, 
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
+	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
+	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
+	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
+	heikki.krogerus@linux.intel.com, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
+	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
+	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
+	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
+	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>, 
+	Tomasz Figa <tfiga@chromium.org>, bskeggs@redhat.com, 
+	Bjorn Helgaas <bhelgaas@google.com>, chris@chris-wilson.co.uk, 
+	Daniel Vetter <daniel@ffwll.ch>, airlied@linux.ie, dri-devel@lists.freedesktop.org, 
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, 
+	Jianxiong Gao <jxgao@google.com>, joonas.lahtinen@linux.intel.com, 
+	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com, 
+	matthew.auld@intel.com, nouveau@lists.freedesktop.org, rodrigo.vivi@intel.com, 
+	thomas.hellstrom@linux.intel.com
+Content-Type: text/plain; charset="UTF-8"
 
-On 03/05/2021 15:22, Jan Beulich wrote:
->> Another consequence is that we need to rethink our hypercall behaviour.=
-=C2=A0
->> There is no such thing as supervisor states in an uncompressed XSAVE
->> image, which means we can't continue with that being the ABI.
-> I don't think the hypercall input / output blob needs to follow any
-> specific hardware layout.
+On Mon, May 10, 2021 at 11:03 PM Christoph Hellwig <hch@lst.de> wrote:
+>
+> > +static inline struct io_tlb_mem *get_io_tlb_mem(struct device *dev)
+> > +{
+> > +#ifdef CONFIG_DMA_RESTRICTED_POOL
+> > +     if (dev && dev->dma_io_tlb_mem)
+> > +             return dev->dma_io_tlb_mem;
+> > +#endif /* CONFIG_DMA_RESTRICTED_POOL */
+> > +
+> > +     return io_tlb_default_mem;
+>
+> Given that we're also looking into a not addressing restricted pool
+> I'd rather always assign the active pool to dev->dma_io_tlb_mem and
+> do away with this helper.
 
-Currently, the blob is { xcr0, xcr0_accum, uncompressed image }.
-
-As we haven't supported any compressed states yet, we are at liberty to
-create a forward compatible change by logically s/xcr0/xstate/ and
-permitting an uncompressed image.
-
-Irritatingly, we have xcr0=3D0 as a permitted state and out in the field,
-for "no xsave state".=C2=A0 This contributes a substantial quantity of
-complexity in our xstate logic, and invalidates the easy fix I had for
-not letting the HVM initpath explode.
-
-The first task is to untangle the non-architectural xcr0=3D0 case, and to
-support compressed images.=C2=A0 Size parsing needs to be split into two, a=
-s
-for compressed images, we need to consume XSTATE_BV and XCOMP_BV to
-cross-check the size.
-
-I think we also want a rule that Xen will always send compressed if it
-is using XSAVES (/XSAVEC in the interim?)=C2=A0 We do not want to be workin=
-g
-with uncompressed images at all, now that MPX is a reasonable sized hole
-in the middle.
-
-Cleaning this up will then unblock v2 of the existing xstate cleanup
-series I posted.
-
->> In terms of actual context switching, we want to be using XSAVES/XRSTORS
->> whenever it is available, even if we're not using supervisor states.=C2=
-=A0
->> XSAVES has both the inuse and modified optimisations, without the broken
->> consequence of XSAVEOPT (which is firmly in the "don't ever use this"
->> bucket now).
-> The XSAVEOPT anomaly is affecting user mode only, isn't it? Or are
-> you talking of something I have forgot about?
-
-It's not safe to use at all in L1 xen, because the tracking leaks
-between non-root contexts.=C2=A0 I can't remember if there are further
-problems for an L0 xen, but I have a nagging feeling that there is.
-
-~Andrew
-
+Where do you think is the proper place to do the assignment? First
+time calling swiotlb_map? or in of_dma_configure_id?
 
