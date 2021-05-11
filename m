@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4FF7C433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA69DC433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:20:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 99D37617ED
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:20:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 99D37617ED
+	by mail.kernel.org (Postfix) with ESMTPS id 5FB4861168
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:20:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FB4861168
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125962.237109 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125963.237120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgWz3-0008Hn-TC; Tue, 11 May 2021 18:19:53 +0000
+	id 1lgWz7-0000Bd-5n; Tue, 11 May 2021 18:19:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125962.237109; Tue, 11 May 2021 18:19:53 +0000
+Received: by outflank-mailman (output) from mailman id 125963.237120; Tue, 11 May 2021 18:19:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgWz3-0008Hc-Pj; Tue, 11 May 2021 18:19:53 +0000
-Received: by outflank-mailman (input) for mailman id 125962;
- Tue, 11 May 2021 18:19:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lgWz7-0000BV-2T; Tue, 11 May 2021 18:19:57 +0000
+Received: by outflank-mailman (input) for mailman id 125963;
+ Tue, 11 May 2021 18:19:56 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=iFnS=KG=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1lgWz2-0007g6-GI
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 18:19:52 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 19b3bfa7-5419-49b1-8051-bd5514dfe581;
- Tue, 11 May 2021 18:19:47 +0000 (UTC)
+ id 1lgWz6-0007fz-5J
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 18:19:56 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 004134c6-8940-498b-b7f6-53c71747813c;
+ Tue, 11 May 2021 18:19:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,40 +49,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19b3bfa7-5419-49b1-8051-bd5514dfe581
+X-Inumbo-ID: 004134c6-8940-498b-b7f6-53c71747813c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620757187;
+  d=citrix.com; s=securemail; t=1620757192;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=EoaUpYs9b5JtY9mZ1Jy5aNZ4/ohnkMdircO88bxkg44=;
-  b=CHcTnBQ+gbXHApTpscebxkhpzBSOUA1WUEEhTnbrMVn8fA7Px6OwgTy6
-   CJXlvR4R0vmzePd3hrxiwsEeAN+FVR9TMtNpODlef+6CwGiTvmjdqOpXQ
-   0rdtuwvkbZi5XXNHCab4tjr7TPLbNw3eJ6v/5TiOJeZBvhWbQg3qO31J8
-   0=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: jXvHeAJvDN1mXXdaAWfqlPHHazwViQ0FtFAp5WTIfOpuEqy+a0KF3Ohxx4UIqAk8EUleoTu5tl
- NaRTf4EMlBhS6a9UrEyQLomS4Wry7YRe26ICnZ1n3MP+FaDaqd00tixNEsozcWIN57bePj/hax
- edxjqei4oFFQWlggOIaVjGXhk65Cv4ADXQpot/PjgaArEdGdKc/BdQ0ZoLWxXOTwYyB+AmSWNU
- bA7dWsMaQJtOWZuXtTDd3+JHwpqYGEwrX6TOKyQYRB70rd9+tD6X9LR5T8hwevckaH4hv/jYQa
- a7Y=
+  bh=/QT5ezwDnkjXc3nVgBVAB8DaWEl/4FRFCADP++oYh28=;
+  b=Jdu6ymxTEyir3Wpq1Vlje0oTSI8uvRDp3EyQ5XHU8GofqKnyO/4yfL/T
+   tadaeJnDhPWPHVau6fdtmwh0bZEN92ikFEct1VuRWE+8T+4Bto5mRkjmo
+   XhPMYX+n/3LKVu7pP4SrfkG0+/zf7153MPrjkTArPJkUgO2F6N1x6W1iT
+   o=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: CKYOs+i1d3uxTBukfgQWpA1/0Q6N5xF4YW3jDwQw4XsDP1Yu/ygVFpSXvRJ3wFHVWtIMu3qyOX
+ F9MHR0nLkK4Jyspb534EhqoXML/Esnp857rRv0rWlQ5smYpGBZDZx0sGM3p6785xDL2X7wBbEX
+ Qb5pYN3pIQllJJ3iigpKUx5qV+7pSHODIad8Vvb/r5S/HNEiwr5l2rtW5DFqtLRrgjc6ygT9t2
+ zkO4fJLvzYevOalpREIDVvSWqSfkDcLy1i2K+LfbAv9VRyHxi/RD7guWQCnoUkR43o9Ah/vROA
+ G+8=
 X-SBRS: 5.1
-X-MesageID: 43562364
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 43676922
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:afEZh6mNz+/LDj4Xj8abPvWYjILpDfIW3DAbv31ZSRFFG/Fxl6
- iV/cjzsiWE8Ar5OUtQ4OxoV5PwIk80maQb3WBVB8bHYOCEghrPEGgB1/qB/9SIIUSXnYQxuZ
- uIMZIOb+EYZWIK9voSizPZLz9P+re6GdiT9ILj80s=
+IronPort-HdrOrdr: A9a23:jUJ+BaDEC34bMKflHelo55DYdb4zR+YMi2TDt3oddfU1SL38qy
+ nKpp4mPHDP5wr5NEtPpTniAtjjfZq/z/5ICOAqVN/PYOCPggCVxepZnOjfKlPbehEX9oRmpN
+ 1dm6oVMqyMMbCt5/yKnDVRELwbsaa6GLjDv5a785/0JzsaE52J6W1Ce2GmO3wzfiZqL7wjGq
+ GR48JWzgDQAkj+PqyAdx84t/GonayzqK7b
 X-IronPort-AV: E=Sophos;i="5.82,291,1613451600"; 
-   d="scan'208";a="43562364"
+   d="scan'208";a="43676922"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
- Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 12/17] tools/ocaml/libs/mmap: mark mmap/munmap as blocking
-Date: Tue, 11 May 2021 19:05:25 +0100
-Message-ID: <294a60be29027d33b0a1d154b7d576237c7dd420.1620755942.git.edvin.torok@citrix.com>
+ Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>
+Subject: [PATCH v2 15/17] tools/ocaml/xenstored: use gnttab instead of xenctrl's foreign_map_range
+Date: Tue, 11 May 2021 19:05:28 +0100
+Message-ID: <2e703b8a3e75370ed0208b2c1da9a3562df82a14.1620755943.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1620755942.git.edvin.torok@citrix.com>
 References: <cover.1620755942.git.edvin.torok@citrix.com>
@@ -89,54 +92,77 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-These functions can potentially take some time,
-so allow other OCaml code to proceed meanwhile (if any).
+This is an oxenstored port of the following C xenstored commit:
+38eeb3864de40aa568c48f9f26271c141c62b50b tools/xenstored: Drop mapping of the ring via foreign map
 
+Now only Xenctrl.domain_getinfo remains as the last use of unstable xenctrl interface
+in oxenstored.
+
+Depends on: tools/ocaml: safer Xenmmap interface
+(without it the code would build but the wrong unmap function would get
+ called on domain destruction)
+
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/ocaml/libs/mmap/xenmmap_stubs.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ tools/ocaml/xenstored/domains.ml   | 7 +++++--
+ tools/ocaml/xenstored/xenstored.ml | 3 ++-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/tools/ocaml/libs/mmap/xenmmap_stubs.c b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-index d7a97c76f5..e8d2d6add5 100644
---- a/tools/ocaml/libs/mmap/xenmmap_stubs.c
-+++ b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-@@ -28,6 +28,7 @@
- #include <caml/fail.h>
- #include <caml/callback.h>
- #include <caml/unixsupport.h>
-+#include <caml/signals.h>
+diff --git a/tools/ocaml/xenstored/domains.ml b/tools/ocaml/xenstored/domains.ml
+index 17fe2fa257..d9cb693751 100644
+--- a/tools/ocaml/xenstored/domains.ml
++++ b/tools/ocaml/xenstored/domains.ml
+@@ -22,6 +22,7 @@ let xc = Xenctrl.interface_open ()
  
- #define Wsize_bsize_round(n) (Wsize_bsize( (n) + sizeof(value) - 1 ))
+ type domains = {
+ 	eventchn: Event.t;
++	gnttab: Gnt.Gnttab.interface;
+ 	table: (Xenctrl.domid, Domain.t) Hashtbl.t;
  
-@@ -69,7 +70,9 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
- 		caml_invalid_argument("negative offset");
- 	length = Int_val(len);
- 
-+	caml_enter_blocking_section();
- 	addr = mmap(NULL, length, c_pflag, c_mflag, Int_val(fd), Int_val(offset));
-+	caml_leave_blocking_section();
- 	if (MAP_FAILED == addr)
- 		uerror("mmap", Nothing);
- 
-@@ -80,10 +83,15 @@ CAMLprim value stub_mmap_init(value fd, value pflag, value mflag,
- CAMLprim value stub_mmap_final(value intf)
- {
- 	CAMLparam1(intf);
-+	struct mmap_interface interface = *Intf_val(intf);
- 
--	if (Intf_val(intf)->addr != MAP_FAILED)
--		munmap(Intf_val(intf)->addr, Intf_val(intf)->len);
-+	/* mark it as freed, in case munmap below fails, so we don't retry it */
- 	Intf_val(intf)->addr = MAP_FAILED;
-+	if (interface.addr != MAP_FAILED) {
-+		caml_enter_blocking_section();
-+		munmap(interface.addr, interface.len);
-+		caml_leave_blocking_section();
-+	}
- 
- 	CAMLreturn(Val_unit);
+ 	(* N.B. the Queue module is not thread-safe but oxenstored is single-threaded. *)
+@@ -42,8 +43,9 @@ type domains = {
+ 	mutable n_penalised: int; (* Number of domains with less than maximum credit *)
  }
+ 
+-let init eventchn on_first_conflict_pause = {
++let init eventchn gnttab on_first_conflict_pause = {
+ 	eventchn = eventchn;
++	gnttab;
+ 	table = Hashtbl.create 10;
+ 	doms_conflict_paused = Queue.create ();
+ 	doms_with_conflict_penalty = Queue.create ();
+@@ -123,7 +125,8 @@ let resume _doms _domid =
+ 	()
+ 
+ let create doms domid mfn port =
+-	let interface = Xenctrl.map_foreign_range xc domid (Xenmmap.getpagesize()) mfn in
++	let mapping = Gnt.(Gnttab.map_exn doms.gnttab { domid; ref = xenstore} true) in
++	let interface = Gnt.Gnttab.Local_mapping.to_pages doms.gnttab mapping in
+ 	let dom = Domain.make domid mfn port interface doms.eventchn in
+ 	Hashtbl.add doms.table domid dom;
+ 	Domain.bind_interdomain dom;
+diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
+index a6b86b167c..75c35107d5 100644
+--- a/tools/ocaml/xenstored/xenstored.ml
++++ b/tools/ocaml/xenstored/xenstored.ml
+@@ -446,6 +446,7 @@ let main () =
+ 
+ 	let store = Store.create () in
+ 	let eventchn = Event.init () in
++	let gnttab = Gnt.Gnttab.interface_open () in
+ 	let next_frequent_ops = ref 0. in
+ 	let advance_next_frequent_ops () =
+ 		next_frequent_ops := (Unix.gettimeofday () +. !Define.conflict_max_history_seconds)
+@@ -453,7 +454,7 @@ let main () =
+ 	let delay_next_frequent_ops_by duration =
+ 		next_frequent_ops := !next_frequent_ops +. duration
+ 	in
+-	let domains = Domains.init eventchn advance_next_frequent_ops in
++	let domains = Domains.init eventchn gnttab advance_next_frequent_ops in
+ 
+ 	(* For things that need to be done periodically but more often
+ 	 * than the periodic_ops function *)
 -- 
 2.25.1
 
