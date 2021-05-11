@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2CE1C433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5B17C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 40F0B613C0
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40F0B613C0
+	by mail.kernel.org (Postfix) with ESMTPS id 411FC6161F
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 411FC6161F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125664.236546 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125665.236558 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgOgm-0004Sr-Nj; Tue, 11 May 2021 09:28:28 +0000
+	id 1lgOgs-0004xt-3n; Tue, 11 May 2021 09:28:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125664.236546; Tue, 11 May 2021 09:28:28 +0000
+Received: by outflank-mailman (output) from mailman id 125665.236558; Tue, 11 May 2021 09:28:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgOgm-0004Sb-Ja; Tue, 11 May 2021 09:28:28 +0000
-Received: by outflank-mailman (input) for mailman id 125664;
- Tue, 11 May 2021 09:28:26 +0000
+	id 1lgOgr-0004wM-Tf; Tue, 11 May 2021 09:28:33 +0000
+Received: by outflank-mailman (input) for mailman id 125665;
+ Tue, 11 May 2021 09:28:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tiF3=KG=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lgOgk-0003CS-Px
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 09:28:26 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1lgOgp-0003CS-QC
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 09:28:31 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 82d3ce8f-aaa5-4fa3-9509-4f83f14f2936;
- Tue, 11 May 2021 09:28:18 +0000 (UTC)
+ id 627edbc2-2b6a-4689-8328-0edac7c00d06;
+ Tue, 11 May 2021 09:28:21 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,39 +48,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 82d3ce8f-aaa5-4fa3-9509-4f83f14f2936
+X-Inumbo-ID: 627edbc2-2b6a-4689-8328-0edac7c00d06
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620725297;
+  d=citrix.com; s=securemail; t=1620725300;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=K8gPTzU82ZOUTi54+69xvIkJJNm7Kwz13GZQD0G5vXM=;
-  b=Uk/lZAlilwApqdLm6/Tk6abu6cQ1ESLp3dx82f4AnFizxUxeWtrUhH1p
-   SH/LPWc2cg3NKigMeEltZLGcqFw4Qw+aWKMUUB0CxH8r2KMWYj7Nm0K6l
-   5OryhWGec5s5oMR70fzQjaGmfx//g69GjqH4Wb77+PBKBMGNJ8k95GqLp
-   8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Sp4KX4JisA/iWq0YvBzhRNcLG4kFU0wshITCFgIWluPdyDNEqYUIzIIlvjEatra8IOdhV+Kv6V
- N+u9jyfGD0QZ/mi+Ozd27aIWBs1jCRlzBA00Csj7zkqEx7zLhzfepNY0ECBFQmpGqgowjz20DO
- 4gVQcGZPfRd3BS200wToEw1ssZXqYGVgNzbQvdzhumGbhmPZ1Agwj4ZK9bAHqkvGJ3y2SE/+RU
- vIch9P+FaYg6m+o8m7LrwbssnMMBa+oZzudRvE03uzyIEwAX20vM4pRT9ETy1I2jzXfrqPlCL/
- Pa4=
+  bh=ZLCUuRpfeTD/8ZQ8pXbTB6NvDUzollCddxfo249yUko=;
+  b=er9QO5AdnoO5JqY3T+AUdZZmw1WQjaFle+Y10oMeVuS/8Sj8h0Hnc2zR
+   HylGI8MDUhZZXJwgrsISEDqIVwjxjyG3YOz/vtovZ7hSw/QNF3SkR4e9U
+   0GjfU4yX4ZlzfV67Elu5tk//IZs2/qbhWeQ2HNH+ImKQuyMzzeTmPiged
+   s=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: sUJkmyKG96ytKhXu42Cn4ZJVXWTJ2rqAnIg9NjRaqokqlG/UoqralpEXCl3kFSUi0tVPvdLmtI
+ Ro1NeCtspzBCEj73eOzoJ+eWn3zknUDRIdYtt/+AiQCcKM+DMeSjz8eH6BhNezTEFo4IXEUZhX
+ dCfJ5QILn8yq4BjfrQu5SkaAPtiVC5e9hpsMyT+JX+c6DAkuPj/GWk33SmrSvxrYUYOEe0GOOm
+ FxK6mZSAHBtTBZmaxSi05zVqJL3fT/NEnOL9SR70yGoOKXblfvIA0sY+9m42SCArtEhB6cQXt1
+ Xo8=
 X-SBRS: 5.1
-X-MesageID: 43313589
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 43624001
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:DMcLoq1yECnHCjlGXA8tlwqjBIokLtp133Aq2lEZdPRUGvb3qy
- nIpoV86faUskdoZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
- uIG5IOceEYZmIasS+V2maF+q4bsbu6zJw=
+IronPort-HdrOrdr: A9a23:VToBzqzH7LkEfRr1sUt0KrPw6L1zdoMgy1knxilNoHxuH/Bw9v
+ re+cjzsCWftN9/Yh4dcLy7VpVoIkmsl6Kdg7NwAV7KZmCP1FdARLsI0WKI+UyCJ8SRzI9gPa
+ cLSdkFNDXzZ2IK8PoTNmODYqodKNrsytHWuQ/HpU0dKT2D88tbnn9E4gDwKDwQeCB2QaAXOb
+ C7/cR9qz+paR0sH7+G7ilsZZmkmzXT/qiWGCI7Ow==
 X-IronPort-AV: E=Sophos;i="5.82,290,1613451600"; 
-   d="scan'208";a="43313589"
+   d="scan'208";a="43624001"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Jason Andryuk
 	<jandryuk@gmail.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 3/8] libxl: Replace deprecated "cpu-add" QMP command by "device_add"
-Date: Tue, 11 May 2021 10:28:05 +0100
-Message-ID: <20210511092810.13759-4-anthony.perard@citrix.com>
+Subject: [XEN PATCH v2 5/8] libxl: Assert qmp_ev's state in qmp_ev_qemu_compare_version
+Date: Tue, 11 May 2021 10:28:07 +0100
+Message-ID: <20210511092810.13759-6-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210511092810.13759-1-anthony.perard@citrix.com>
 References: <20210511092810.13759-1-anthony.perard@citrix.com>
@@ -88,160 +89,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-The command "cpu-add" for CPU hotplug is deprecated and has been
-removed from QEMU 6.0 (April 2021). We need to add cpus with the
-command "device_add" now.
-
-In order to find out which parameters to pass to "device_add" we first
-make a call to "query-hotpluggable-cpus" which list the cpus drivers
-and properties.
-
-The algorithm to figure out which CPU to add, and by extension if any
-CPU needs to be hotplugged, is in the function that adds the cpus.
-Because of that, the command "query-hotpluggable-cpus" is always
-called, even when not needed.
-
-In case we are using a version of QEMU older than 2.7 (Sept 2016)
-which don't have "query-hotpluggable-cpus", we fallback to using
-"cpu-add".
+We are supposed to read the version information only when qmp_ev is in
+state "Connected" (that correspond to state==qmp_state_connected),
+assert it so that the function isn't used too early.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 ---
+ tools/libs/light/libxl_qmp.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Notes:
-    v2:
-    - fix coding style
-
- tools/libs/light/libxl_domain.c | 89 ++++++++++++++++++++++++++++++++-
- 1 file changed, 87 insertions(+), 2 deletions(-)
-
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index 8c003aa7cb04..c00c36c92879 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -1805,6 +1805,7 @@ typedef struct set_vcpuonline_state {
-     libxl_dominfo info;
-     libxl_bitmap final_map;
-     int index; /* for loop on final_map */
-+    const char *cpu_driver;
- } set_vcpuonline_state;
- 
- static void set_vcpuonline_qmp_cpus_fast_queried(libxl__egc *,
-@@ -1814,6 +1815,10 @@ static void set_vcpuonline_qmp_cpus_queried(libxl__egc *,
- static void set_vcpuonline_qmp_query_cpus_parse(libxl__egc *,
-     libxl__ev_qmp *qmp, const libxl__json_object *,
-     bool query_cpus_fast, int rc);
-+static void set_vcpuonline_qmp_query_hotpluggable_cpus(libxl__egc *egc,
-+    libxl__ev_qmp *qmp, const libxl__json_object *response, int rc);
-+static void set_vcpuonline_qmp_device_add_cpu(libxl__egc *,
-+    libxl__ev_qmp *, const libxl__json_object *response, int rc);
- static void set_vcpuonline_qmp_add_cpu(libxl__egc *,
-     libxl__ev_qmp *, const libxl__json_object *response, int rc);
- static void set_vcpuonline_timeout(libxl__egc *egc,
-@@ -1951,13 +1956,54 @@ static void set_vcpuonline_qmp_query_cpus_parse(libxl__egc *egc,
-         libxl_bitmap_reset(final_map, i);
-     }
- 
-+    qmp->callback = set_vcpuonline_qmp_query_hotpluggable_cpus;
-+    rc = libxl__ev_qmp_send(egc, qmp, "query-hotpluggable-cpus", NULL);
-+
- out:
-     libxl_bitmap_dispose(&current_map);
-+    if (rc)
-+        set_vcpuonline_done(egc, svos, rc); /* must be last */
-+}
-+
-+static void set_vcpuonline_qmp_query_hotpluggable_cpus(libxl__egc *egc,
-+    libxl__ev_qmp *qmp, const libxl__json_object *response, int rc)
-+{
-+    set_vcpuonline_state *svos = CONTAINER_OF(qmp, *svos, qmp);
-+    const libxl__json_object *cpu;
-+    const libxl__json_object *cpu_driver;
-+
-+    if (rc == ERROR_QMP_COMMAND_NOT_FOUND) {
-+        /* We are probably connected to a version of QEMU older than 2.7,
-+         * let's fallback to using "cpu-add" command. */
-+        svos->index = -1;
-+        set_vcpuonline_qmp_add_cpu(egc, qmp, NULL, 0); /* must be last */
-+        return;
-+    }
-+
-+    if (rc) goto out;
-+
-+    /* Parse response to QMP command "query-hotpluggable-cpus"
-+     * [ { 'type': 'str', ... ]
-+     *
-+     * We are looking for the driver name for CPU to be hotplug. We'll
-+     * assume that cpus property are core-id=0, thread-id=0 and
-+     * socket-id=$cpu_index, as we start qemu with "-smp %d,maxcpus=%d", so
-+     * we don't parse the properties listed for each hotpluggable cpus.
-+     */
-+
-+    cpu = libxl__json_array_get(response, 0);
-+    cpu_driver = libxl__json_map_get("type", cpu, JSON_STRING);
-+    svos->cpu_driver = libxl__json_object_get_string(cpu_driver);
-+
-+    if (!svos->cpu_driver)
-+        rc = ERROR_QEMU_API;
-+
-+out:
-     svos->index = -1;
--    set_vcpuonline_qmp_add_cpu(egc, qmp, NULL, rc); /* must be last */
-+    set_vcpuonline_qmp_device_add_cpu(egc, qmp, NULL, rc); /* must be last */
- }
- 
--static void set_vcpuonline_qmp_add_cpu(libxl__egc *egc,
-+static void set_vcpuonline_qmp_device_add_cpu(libxl__egc *egc,
-     libxl__ev_qmp *qmp, const libxl__json_object *response, int rc)
+diff --git a/tools/libs/light/libxl_qmp.c b/tools/libs/light/libxl_qmp.c
+index 9b638e6f5442..d0967c9f029f 100644
+--- a/tools/libs/light/libxl_qmp.c
++++ b/tools/libs/light/libxl_qmp.c
+@@ -292,6 +292,8 @@ static int qmp_handle_response(libxl__gc *gc, libxl__qmp_handler *qmp,
+ static int qmp_ev_qemu_compare_version(libxl__ev_qmp *ev, int major,
+                                        int minor, int micro)
  {
-     STATE_AO_GC(qmp->ao);
-@@ -1969,6 +2015,45 @@ static void set_vcpuonline_qmp_add_cpu(libxl__egc *egc,
- 
-     if (rc) goto out;
- 
-+    while (libxl_bitmap_cpu_valid(map, ++svos->index)) {
-+        if (libxl_bitmap_test(map, svos->index)) {
-+            qmp->callback = set_vcpuonline_qmp_device_add_cpu;
-+            libxl__qmp_param_add_string(gc, &args, "id", GCSPRINTF("cpu-%d", svos->index));
-+            libxl__qmp_param_add_string(gc, &args, "driver", svos->cpu_driver);
-+            /* We'll assume that we start QEMU with -smp %d,maxcpus=%d, so
-+             * that "core-id" and "thread-id" are always 0 so that
-+             * "socket-id" correspond the cpu index.
-+             * Those properties are otherwise listed by
-+             * "query-hotpluggable-cpus". */
-+            libxl__qmp_param_add_integer(gc, &args, "socket-id", svos->index);
-+            libxl__qmp_param_add_integer(gc, &args, "core-id", 0);
-+            libxl__qmp_param_add_integer(gc, &args, "thread-id", 0);
-+            rc = libxl__ev_qmp_send(egc, qmp, "device_add", args);
-+            if (rc) goto out;
-+            return;
-+        }
-+    }
++    assert(ev->state == qmp_state_connected);
 +
-+out:
-+    set_vcpuonline_done(egc, svos, rc);
-+}
-+
-+/* Fallback function for QEMU older than 2.7, when
-+ * 'query-hotpluggable-cpus' wasn't available and vcpu object couldn't be
-+ * added with 'device_add'. */
-+static void set_vcpuonline_qmp_add_cpu(libxl__egc *egc, libxl__ev_qmp *qmp,
-+                                       const libxl__json_object *response,
-+                                       int rc)
-+{
-+    STATE_AO_GC(qmp->ao);
-+    set_vcpuonline_state *svos = CONTAINER_OF(qmp, *svos, qmp);
-+    libxl__json_object *args = NULL;
-+
-+    /* Convenience aliases */
-+    libxl_bitmap *map = &svos->final_map;
-+
-+    if (rc) goto out;
-+
-     while (libxl_bitmap_cpu_valid(map, ++svos->index)) {
-         if (libxl_bitmap_test(map, svos->index)) {
-             qmp->callback = set_vcpuonline_qmp_add_cpu;
+ #define CHECK_VERSION(level) do { \
+     if (ev->qemu_version.level > (level)) return +1; \
+     if (ev->qemu_version.level < (level)) return -1; \
 -- 
 Anthony PERARD
 
