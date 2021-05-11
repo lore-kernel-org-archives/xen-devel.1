@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3165EC43462
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8933C43460
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C36F3613C0
+	by mail.kernel.org (Postfix) with ESMTPS id 797376161F
 	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 09:28:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C36F3613C0
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 797376161F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125663.236526 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125662.236522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgOgi-0003pI-5f; Tue, 11 May 2021 09:28:24 +0000
+	id 1lgOgh-0003mL-SS; Tue, 11 May 2021 09:28:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125663.236526; Tue, 11 May 2021 09:28:24 +0000
+Received: by outflank-mailman (output) from mailman id 125662.236522; Tue, 11 May 2021 09:28:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgOgi-0003op-0W; Tue, 11 May 2021 09:28:24 +0000
-Received: by outflank-mailman (input) for mailman id 125663;
- Tue, 11 May 2021 09:28:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lgOgh-0003mB-OE; Tue, 11 May 2021 09:28:23 +0000
+Received: by outflank-mailman (input) for mailman id 125662;
+ Tue, 11 May 2021 09:28:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tiF3=KG=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lgOgg-0003ke-62
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 09:28:22 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 22332a16-40d8-4b02-b66d-8147fb086ada;
- Tue, 11 May 2021 09:28:19 +0000 (UTC)
+ id 1lgOgf-0003CS-Pm
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 09:28:21 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 85060c84-865a-4bc3-9c6f-515465efa1e0;
+ Tue, 11 May 2021 09:28:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,40 +48,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22332a16-40d8-4b02-b66d-8147fb086ada
+X-Inumbo-ID: 85060c84-865a-4bc3-9c6f-515465efa1e0
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620725299;
+  d=citrix.com; s=securemail; t=1620725296;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/Z5o0fCLmaSsMSrYh8CFK3qvyQu5rxrgLPAepK/jeWc=;
-  b=Hs29rFC6RGkzL/odGi12nQ7e0RyIoQY7lHk0icUpKrXEzuXA6Kf5MfwS
-   ve8DWH1yHlS0INWYq7ETlue7d0gcP8Olp9qfL7XThoRFWwSX/3CxQk+rB
-   xC5GpahehBnXojlt5H0uNOxGzskcDa7IDEgXN7Z6dMV9kzAEux+UR6Syc
-   U=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: WpfxmiJT8DXx6D3rvG677HDsf5LlmX52Dzeyb5yWzo4I7DLG2p0QEyKmkLvnd4d+8AJlyGK2FU
- F+lkIQfHO5nyxotHw93JLYLl3qXuTENC8ItMhlRqQsqxq2zbugnLQYGNT4FjNpB5qlBuisIpTL
- MGSKtiXF2KEA4/Szk4RTeoJS1PVOUeQCBALWSgJOd9vNsklVVrUiczg6lxUFSTsLh57v3Eet7s
- tyVXzlvv9eH4IpXHYzSUzX/r6lssaD9mwuXQOT68vqNUB5FsHLDRYUKwNLlMdIQBHDM6EQXqsL
- zqg=
+  bh=jiAw2u4kXozSgOauXMnxK9qZm/ervdgw/ztBsqd2eLI=;
+  b=OiVYsSK8TKUSFlP5C3uSqoIRcxek28mdL9b65ta7a8gp3UgoChkTmUIL
+   hqsab+U4WXR0Vc3nUXIHjolsm895tl4e51Ugyy+UOJQjomwdc78ZSEfMg
+   LISyDf48T9dDpNWsHViSyGntkp6OfrZSWNCWNyZZR+9ewggpDILDVD3ZJ
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: cbBs2QPmEOmmoXSsPEzkdgREFMXI17afDX3VWPunzRw5ia2Pv/t5ZZ+n53QuxVXafus7Yc2xsE
+ elalCSepbXc9ocXLb9UUsJHPe/ZOhHJtYNGXJQHQtVuU+P4qy1I7ieXHdh4nWbBm3xETgQ7vxQ
+ U1Hxlvh3Ge8Av5cBnmOWxQPFOVlyn4uFnu9M9SsPzCrLfpz8gkEoM3aBGazP1cAqVYjb6NeGcN
+ 86E5+XQx5wrHVnfOjX7x706fqTzQWHJWOxtIityel7zpsSHkEkgXFHw0ZudskN77SpWvVHUjG4
+ rKk=
 X-SBRS: 5.1
-X-MesageID: 43508703
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 45044864
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:8UtQFKkMC4Z+dnqtAc2Yumge+7jpDfLo3DAbv31ZSRFFG/Fw9/
- rCoB17726QtN91YhsdcL+7V5VoLUmzyXcX2/hyAV7BZmnbUQKTRekP0WKL+Vbd8kbFh41gPM
- lbEpSXCLfLfCJHZcSR2njELz73quP3jJxBho3lvghQpRkBUdAF0+/gYDzranGfQmN9dP0EPa
- vZ3OVrjRy6d08aa8yqb0N1JNQq97Xw5fTbiQdtPW9f1DWz
+IronPort-HdrOrdr: A9a23:3oOxZahw3hufCEIkGsqYbVu0PnBQX+x13DAbv31ZSRFFG/FwyP
+ rBoB1L73DJYWgqNE3I+OrwdJVoLkmsk6KdjbNhXotKGTOWw1dAT7sSorcKoQeQYhEWn9Q1vc
+ wLHskfNDSzNykDsS+T2nj+Lz9K+qjjzEncv5a4854bd3APV0gP1XYaNu+zKDwKeCB2Qb4CUL
+ aM7MtOoDStPV4NaN6gO3UDV+/f4/XWiZPPe3c9dlAawTjLqQntxK/xEhCe0BtbeShI260e/W
+ /MlBG8zrm/ssu81gTX2wbontVrcZrau5t+7f63+4oowwbX+0OVjbFaKv6/VGpcmpDS1L9lqq
+ iJn/5qBbUI15qYRBDLnfKq4Xin7N9m0Q6d9bfM6UGT0fDRVXY0DdFMipledQac4008vMtk2K
+ YOxG6BsYFLZCmw1hgVyuK4Hy2CrHDE6kbKUNRj+EC2eeMlGcxsRaV2xjIlLH7BJlOy1GkDKp
+ giMCjx3ociTbqqVQGugoA0+q3fYp0aJGbzfnQ/
 X-IronPort-AV: E=Sophos;i="5.82,290,1613451600"; 
-   d="scan'208";a="43508703"
+   d="scan'208";a="45044864"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Jason Andryuk
 	<jandryuk@gmail.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 4/8] libxl: Use -device for cd-rom drives
-Date: Tue, 11 May 2021 10:28:06 +0100
-Message-ID: <20210511092810.13759-5-anthony.perard@citrix.com>
+Subject: [XEN PATCH v2 2/8] libxl: Replace QEMU's command line short-form boolean option
+Date: Tue, 11 May 2021 10:28:04 +0100
+Message-ID: <20210511092810.13759-3-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210511092810.13759-1-anthony.perard@citrix.com>
 References: <20210511092810.13759-1-anthony.perard@citrix.com>
@@ -90,74 +93,82 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This allows to set an `id` on the device instead of only the drive. We
-are going to need the `id` with the "eject" and
-"blockdev-change-media" QMP command as using `device` parameter on
-those is deprecated. (`device` is the `id` of the `-drive` on the
-command line).
-
-We set the same `id` on both -device and -drive as QEMU doesn't
-complain and we can then either do "eject id=$id" or "eject
-device=$id".
-
-Using "-drive + -device" instead of only "-drive" has been
-available since at least QEMU 0.15, and seems to be the preferred way as it
-separates the host part (-drive which describe the disk image location
-and format) from the guest part (-device which describe the emulated
-device). More information in qemu.git/docs/qdev-device-use.txt .
-
-Changing the command line during migration for the cdrom seems fine.
-Also the documentation about migration in QEMU explains that the device
-state ID is "been formed from a bus name and device address", so
-second IDE bus and first device address on bus is still thus and
-doesn't matter if written "-drive if=ide,index=2" or "-drive
-ide-cd,bus=ide.1,unit=0".
-See qemu.git/docs/devel/migration.rst .
+Short-form boolean options are deprecated in QEMU 6.0.
+Upstream commit that deprecate those: ccd3b3b8112b ("qemu-option: warn
+for short-form boolean options").
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 ---
- tools/libs/light/libxl_dm.c | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+ tools/libs/light/libxl_dm.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 0a0c1ef7c62e..5b01cf284163 100644
+index 3599a82ef01b..0a0c1ef7c62e 100644
 --- a/tools/libs/light/libxl_dm.c
 +++ b/tools/libs/light/libxl_dm.c
-@@ -1913,6 +1913,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-             }
+@@ -977,14 +977,14 @@ static char *dm_spice_options(libxl__gc *gc,
+     if (spice->host)
+         opt = GCSPRINTF("%s,addr=%s", opt, spice->host);
+     if (libxl_defbool_val(spice->disable_ticketing))
+-        opt = GCSPRINTF("%s,disable-ticketing", opt);
++        opt = GCSPRINTF("%s,disable-ticketing=on", opt);
+     else
+         opt = GCSPRINTF("%s,password=%s", opt, spice->passwd);
+     opt = GCSPRINTF("%s,agent-mouse=%s", opt,
+                     libxl_defbool_val(spice->agent_mouse) ? "on" : "off");
  
-             if (disks[i].is_cdrom) {
-+                const char *drive_id;
-                 if (disk > 4) {
-                     LOGD(WARN, guest_domid, "Emulated CDROM can be only one of the first 4 disks.\n"
-                          "Disk %s will be available via PV drivers but not as an "
-@@ -1920,13 +1921,22 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
-                          disks[i].vdev);
-                     continue;
-                 }
--                drive = libxl__sprintf(gc,
--                         "if=ide,index=%d,readonly=on,media=cdrom,id=ide-%i",
--                         disk, dev_number);
-+
-+                drive_id = GCSPRINTF("ide-%i", dev_number);
-+                drive = GCSPRINTF("if=none,readonly=on,id=%s", drive_id);
+     if (!libxl_defbool_val(spice->clipboard_sharing))
+-        opt = GCSPRINTF("%s,disable-copy-paste", opt);
++        opt = GCSPRINTF("%s,disable-copy-paste=on", opt);
  
-                 if (target_path)
-                     drive = libxl__sprintf(gc, "%s,file=%s,format=%s",
-                                            drive, target_path, format);
-+
-+                flexarray_vappend(dm_args,
-+                    "-drive", drive,
-+                    "-device",
-+                    GCSPRINTF("ide-cd,id=%s,drive=%s,bus=ide.%u,unit=%u",
-+                              drive_id, drive_id,
-+                              disk / 2, disk % 2),
-+                    NULL);
-+                continue;
-             } else {
-                 /*
-                  * Explicit sd disks are passed through as is.
+     if (spice->image_compression)
+         opt = GCSPRINTF("%s,image-compression=%s", opt,
+@@ -1224,7 +1224,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+         flexarray_append(dm_args, "-chardev");
+         if (state->dm_monitor_fd >= 0) {
+             flexarray_append(dm_args,
+-                GCSPRINTF("socket,id=libxl-cmd,fd=%d,server,nowait",
++                GCSPRINTF("socket,id=libxl-cmd,fd=%d,server=on,wait=off",
+                           state->dm_monitor_fd));
+ 
+             /*
+@@ -1237,7 +1237,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+         } else {
+             flexarray_append(dm_args,
+                              GCSPRINTF("socket,id=libxl-cmd,"
+-                                       "path=%s,server,nowait",
++                                       "path=%s,server=on,wait=off",
+                                        libxl__qemu_qmp_path(gc, guest_domid)));
+         }
+ 
+@@ -1247,7 +1247,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+         flexarray_append(dm_args, "-chardev");
+         flexarray_append(dm_args,
+                          GCSPRINTF("socket,id=libxenstat-cmd,"
+-                                        "path=%s/qmp-libxenstat-%d,server,nowait",
++                                        "path=%s/qmp-libxenstat-%d,server=on,wait=off",
+                                         libxl__run_dir_path(), guest_domid));
+ 
+         flexarray_append(dm_args, "-mon");
+@@ -1264,7 +1264,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+             case LIBXL_CHANNEL_CONNECTION_SOCKET:
+                 path = guest_config->channels[i].u.socket.path;
+                 chardev = GCSPRINTF("socket,id=libxl-channel%d,path=%s,"
+-                                    "server,nowait", devid, path);
++                                    "server=on,wait=off", devid, path);
+                 break;
+             default:
+                 /* We've forgotten to add the clause */
+@@ -1577,7 +1577,7 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+         nics[i].colo_##sock_port) {                                         \
+         flexarray_append(dm_args, "-chardev");                              \
+         flexarray_append(dm_args,                                           \
+-            GCSPRINTF("socket,id=%s,host=%s,port=%s,server,nowait",         \
++            GCSPRINTF("socket,id=%s,host=%s,port=%s,server=on,wait=off",    \
+                       nics[i].colo_##sock_id,                               \
+                       nics[i].colo_##sock_ip,                               \
+                       nics[i].colo_##sock_port));                           \
 -- 
 Anthony PERARD
 
