@@ -2,42 +2,42 @@ Return-Path: <SRS0=u2kx=KG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABEA5C43460
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:07:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BF18C433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:07:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E6DC61628
-	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:07:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E6DC61628
+	by mail.kernel.org (Postfix) with ESMTPS id C214961628
+	for <xen-devel@archiver.kernel.org>; Tue, 11 May 2021 18:07:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C214961628
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.125907.237049 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.125909.237061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgWmu-0002xd-FC; Tue, 11 May 2021 18:07:20 +0000
+	id 1lgWmv-0003I9-Od; Tue, 11 May 2021 18:07:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 125907.237049; Tue, 11 May 2021 18:07:20 +0000
+Received: by outflank-mailman (output) from mailman id 125909.237061; Tue, 11 May 2021 18:07:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgWmu-0002xU-AL; Tue, 11 May 2021 18:07:20 +0000
-Received: by outflank-mailman (input) for mailman id 125907;
- Tue, 11 May 2021 18:07:18 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lgWmv-0003Ge-Kz; Tue, 11 May 2021 18:07:21 +0000
+Received: by outflank-mailman (input) for mailman id 125909;
+ Tue, 11 May 2021 18:07:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=iFnS=KG=citrix.com=edvin.torok@srs-us1.protection.inumbo.net>)
- id 1lgWms-0000hb-QD
- for xen-devel@lists.xenproject.org; Tue, 11 May 2021 18:07:18 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9c9be45a-b6e0-44f1-897a-16a30e5de11b;
- Tue, 11 May 2021 18:07:01 +0000 (UTC)
+ id 1lgWmu-0001nY-DX
+ for xen-devel@lists.xenproject.org; Tue, 11 May 2021 18:07:20 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6f8c4a83-831a-40ed-8f89-f3d2965861df;
+ Tue, 11 May 2021 18:07:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,40 +49,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9c9be45a-b6e0-44f1-897a-16a30e5de11b
+X-Inumbo-ID: 6f8c4a83-831a-40ed-8f89-f3d2965861df
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1620756421;
+  d=citrix.com; s=securemail; t=1620756430;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=9mD+y4+KHJLl7F5bXUBrPg32mwOSoUG5fSCQwye7W70=;
-  b=XTTUhpB1cJv7Afv+gaIhlJhCj5vOgOyT4wOrjCjerORKIOPUCcbruXg/
-   /YfGBqJF1/r0D9qrmQFHQnvgIMeVTXB6henp2uwHLmU5DpzeoqDWoT0kX
-   ACp/sa4DOQXRBhGs3RR1mxaJnMrq4YYwDCLGR/GMml0U0tFguu6zT2Bvk
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: UQeXyntwYzSztu4nyK19C5cw8sAUrc9eVV6jQWCg2hA7PhP5mCdaPh01FsCzxfVp3vD5RgECo5
- 1ehNvxozd4YgFyBhI5FbpgUdkld+oA6+Wl94ln5TbMxjzn3j2UdBgWzzHHkDXZ6VEP+L0/EpgC
- vmRhSN2U6FLqOqkpIcbtaHpwZLNL8u2INqdLPTrjXgF2IFVBNbIx234NbSYcRMWoLyEoLEcBN3
- oMLty26irLS1Stusg5Xvd5QffwEyKRqOAmMwairLpbomk2feZbgqDgbRPy8rUwsJDsMLL7/AmS
- Sy0=
+  bh=p0W19jtbXsU+HwGFf/dzsvYLrPw4HfB2Wm1ke3VJSTU=;
+  b=dQMd3S3Sh1uwjZz11L+p0WZJChMX7GaGF7J6k85HWSKjfLzhEFGL5iRL
+   Yo2pTQXXwISgXE6xH9onF5WBFRWYXD/O05R2T/mMB08JTlo4PKp92qirt
+   kR5CB9AWLI4Mm1J6taOI84LMctdfsxRnGVQuOSk2h0nTTgEepL4D5dMTO
+   4=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: kFob7Ev9G9Y0/Z94owD+Jbmq1srgk7MQRmvTxVjkheEbgfYfIYGrsES29esGjpru6VOo6Ms2Fj
+ hnpvqhiBExUTY88zyv6g5xoAf2Ub94Y3+Olbbof+howte6Bx1X63++ZmL48iyZq5Eo8ATVkWIT
+ +HrnHtJsz+KmkrHR+F/ShE9BNc5cP1J/6P9zyYSSt+w3QgHlhR0SNjy7MKIKQGdoCS0obasASc
+ 5M1yS0iVLBq+bCSgZr4ujmoj5A7RpVUqrdLvyGRCixyUsy+XEDekU8jYHQ2C4c9FoOeZWXeeor
+ b7Y=
 X-SBRS: 5.1
-X-MesageID: 43954257
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 45101013
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:gs89JaHeYqgY8YuOpLqE0seALOsnbusQ8zAXP0AYc31om6uj5r
- iTdZUgpGbJYVkqKRIdcLy7V5VoBEmskaKdgrNhW4tKPjOW2ldARbsKheCJrlHd8m/Fh4lgPM
- 9bAtND4bbLbWSS4/yV3ODBKadE/OW6
+IronPort-HdrOrdr: A9a23:jrcCBa6OcVqvAPVt+QPXwPDXdLJyesId70hD6qhwISY6TiX+rb
+ HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.82,291,1613451600"; 
-   d="scan'208";a="43954257"
+   d="scan'208";a="45101013"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
  Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, "Ian
  Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 09/17] tools/ocaml: use common macros for manipulating mmap_interface
-Date: Tue, 11 May 2021 19:05:22 +0100
-Message-ID: <744b98946062028be059435fbe2b9ccc2009e1e8.1620755942.git.edvin.torok@citrix.com>
+Subject: [PATCH v2 07/17] tools/ocaml/xenstored: validate config file before live update
+Date: Tue, 11 May 2021 19:05:20 +0100
+Message-ID: <a53934dfa8ef984bffa858cc573cc7a6445bbdc0.1620755942.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1620755942.git.edvin.torok@citrix.com>
 References: <cover.1620755942.git.edvin.torok@citrix.com>
@@ -90,113 +90,104 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Also expose these macros in a header file that can be reused by
-the upcoming grant table code.
+The configuration file can contain typos or various errors that could prevent
+live update from succeeding (e.g. a flag only valid on a different version).
+Unknown entries in the config file would be ignored on startup normally,
+add a strict --config-test that live-update can use to check that the config file
+is valid *for the new binary*.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/ocaml/libs/mmap/mmap_stubs.h    |  7 +++++++
- tools/ocaml/libs/mmap/xenmmap_stubs.c |  2 --
- tools/ocaml/libs/xb/xs_ring_stubs.c   | 14 +++++---------
- 3 files changed, 12 insertions(+), 11 deletions(-)
+ tools/ocaml/xenstored/parse_arg.ml | 4 ++++
+ tools/ocaml/xenstored/process.ml   | 2 +-
+ tools/ocaml/xenstored/xenstored.ml | 9 +++++++--
+ 3 files changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/tools/ocaml/libs/mmap/mmap_stubs.h b/tools/ocaml/libs/mmap/mmap_stubs.h
-index 65e4239890..816ba6a724 100644
---- a/tools/ocaml/libs/mmap/mmap_stubs.h
-+++ b/tools/ocaml/libs/mmap/mmap_stubs.h
-@@ -30,4 +30,11 @@ struct mmap_interface
- 	int len;
- };
- 
-+#ifndef Data_abstract_val
-+#define Data_abstract_val(v) ((void*) Op_val(v))
-+#endif
-+
-+#define Intf_val(a) ((struct mmap_interface *) Data_abstract_val(a))
-+#define Intf_data_val(a) (Intf_val(a)->addr)
-+
- #endif
-diff --git a/tools/ocaml/libs/mmap/xenmmap_stubs.c b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-index e2ce088e25..b811990a89 100644
---- a/tools/ocaml/libs/mmap/xenmmap_stubs.c
-+++ b/tools/ocaml/libs/mmap/xenmmap_stubs.c
-@@ -28,8 +28,6 @@
- #include <caml/fail.h>
- #include <caml/callback.h>
- 
--#define Intf_val(a) ((struct mmap_interface *) a)
--
- static int mmap_interface_init(struct mmap_interface *intf,
-                                int fd, int pflag, int mflag,
-                                int len, int offset)
-diff --git a/tools/ocaml/libs/xb/xs_ring_stubs.c b/tools/ocaml/libs/xb/xs_ring_stubs.c
-index 7a91fdee75..614c6e371d 100644
---- a/tools/ocaml/libs/xb/xs_ring_stubs.c
-+++ b/tools/ocaml/libs/xb/xs_ring_stubs.c
-@@ -35,8 +35,6 @@
- #include <sys/mman.h>
- #include "mmap_stubs.h"
- 
--#define GET_C_STRUCT(a) ((struct mmap_interface *) a)
--
- /*
-  * Bytes_val has been introduced by Ocaml 4.06.1. So define our own version
-  * if needed.
-@@ -52,12 +50,11 @@ CAMLprim value ml_interface_read(value ml_interface,
- 	CAMLparam3(ml_interface, ml_buffer, ml_len);
- 	CAMLlocal1(ml_result);
- 
--	struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
- 	unsigned char *buffer = Bytes_val(ml_buffer);
- 	int len = Int_val(ml_len);
- 	int result;
- 
--	struct xenstore_domain_interface *intf = interface->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(ml_interface);
- 	XENSTORE_RING_IDX cons, prod; /* offsets only */
- 	int total_data, data;
- 	uint32_t connection;
-@@ -111,12 +108,11 @@ CAMLprim value ml_interface_write(value ml_interface,
- 	CAMLparam3(ml_interface, ml_buffer, ml_len);
- 	CAMLlocal1(ml_result);
- 
--	struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
- 	const unsigned char *buffer = Bytes_val(ml_buffer);
- 	int len = Int_val(ml_len);
- 	int result;
- 
--	struct xenstore_domain_interface *intf = interface->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(ml_interface);
- 	XENSTORE_RING_IDX cons, prod;
- 	int total_space, space;
- 	uint32_t connection;
-@@ -166,7 +162,7 @@ exit:
- CAMLprim value ml_interface_set_server_features(value interface, value v)
- {
- 	CAMLparam2(interface, v);
--	struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(interface);
- 	if (intf == (void*)MAP_FAILED)
- 		caml_failwith("Interface closed");
- 
-@@ -178,7 +174,7 @@ CAMLprim value ml_interface_set_server_features(value interface, value v)
- CAMLprim value ml_interface_get_server_features(value interface)
- {
- 	CAMLparam1(interface);
--	struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(interface);
- 
- 	CAMLreturn(Val_int (intf->server_features));
+diff --git a/tools/ocaml/xenstored/parse_arg.ml b/tools/ocaml/xenstored/parse_arg.ml
+index 965cb9ebeb..588970825f 100644
+--- a/tools/ocaml/xenstored/parse_arg.ml
++++ b/tools/ocaml/xenstored/parse_arg.ml
+@@ -26,6 +26,7 @@ type config =
+ 	restart: bool;
+ 	live_reload: bool;
+ 	disable_socket: bool;
++	config_test: bool;
  }
-@@ -186,7 +182,7 @@ CAMLprim value ml_interface_get_server_features(value interface)
- CAMLprim value ml_interface_close(value interface)
- {
- 	CAMLparam1(interface);
--	struct xenstore_domain_interface *intf = GET_C_STRUCT(interface)->addr;
-+	struct xenstore_domain_interface *intf = Intf_data_val(interface);
- 	int i;
  
- 	intf->req_cons = intf->req_prod = intf->rsp_cons = intf->rsp_prod = 0;
+ let do_argv () =
+@@ -38,6 +39,7 @@ let do_argv () =
+ 	and restart = ref false
+ 	and live_reload = ref false
+ 	and disable_socket = ref false
++	and config_test = ref false
+ 	in
+ 
+ 	let speclist =
+@@ -55,6 +57,7 @@ let do_argv () =
+ 		  ("-T", Arg.Set_string tracefile, ""); (* for compatibility *)
+ 		  ("--restart", Arg.Set restart, "Read database on starting");
+ 		  ("--live", Arg.Set live_reload, "Read live dump on startup");
++		  ("--config-test", Arg.Set config_test, "Test validity of config file");
+ 		  ("--disable-socket", Arg.Unit (fun () -> disable_socket := true), "Disable socket");
+ 		] in
+ 	let usage_msg = "usage : xenstored [--config-file <filename>] [--no-domain-init] [--help] [--no-fork] [--reraise-top-level] [--restart] [--disable-socket]" in
+@@ -70,4 +73,5 @@ let do_argv () =
+ 		restart = !restart;
+ 		live_reload = !live_reload;
+ 		disable_socket = !disable_socket;
++		config_test = !config_test;
+ 	}
+diff --git a/tools/ocaml/xenstored/process.ml b/tools/ocaml/xenstored/process.ml
+index 27790d4a5c..d573c88685 100644
+--- a/tools/ocaml/xenstored/process.ml
++++ b/tools/ocaml/xenstored/process.ml
+@@ -121,7 +121,7 @@ let launch_exn t =
+ 
+ let validate_exn t =
+ 	(* --help must be last to check validity of earlier arguments *)
+-	let t' = {t with cmdline= t.cmdline @ ["--help"]} in
++	let t' = {t with cmdline= t.cmdline @ ["--config-test"]} in
+ 	let cmd = string_of_t t' in
+ 	debug "Executing %s" cmd ;
+ 	match Unix.fork () with
+diff --git a/tools/ocaml/xenstored/xenstored.ml b/tools/ocaml/xenstored/xenstored.ml
+index 2aa0dbc0e1..34e706910e 100644
+--- a/tools/ocaml/xenstored/xenstored.ml
++++ b/tools/ocaml/xenstored/xenstored.ml
+@@ -88,7 +88,7 @@ let default_pidfile = Paths.xen_run_dir ^ "/xenstored.pid"
+ 
+ let ring_scan_interval = ref 20
+ 
+-let parse_config filename =
++let parse_config ?(strict=false) filename =
+ 	let pidfile = ref default_pidfile in
+ 	let options = [
+ 		("merge-activate", Config.Set_bool Transaction.do_coalesce);
+@@ -126,11 +126,12 @@ let parse_config filename =
+ 		("xenstored-port", Config.Set_string Domains.xenstored_port); ] in
+ 	begin try Config.read filename options (fun _ _ -> raise Not_found)
+ 	with
+-	| Config.Error err -> List.iter (fun (k, e) ->
++	| Config.Error err as e -> List.iter (fun (k, e) ->
+ 		match e with
+ 		| "unknown key" -> eprintf "config: unknown key %s\n" k
+ 		| _             -> eprintf "config: %s: %s\n" k e
+ 		) err;
++		if strict then raise e
+ 	| Sys_error m -> eprintf "error: config: %s\n" m;
+ 	end;
+ 	!pidfile
+@@ -408,6 +409,10 @@ end
+ 
+ let main () =
+ 	let cf = do_argv () in
++	if cf.config_test then begin
++	  let _pidfile:string = parse_config ~strict:true (config_filename cf) in
++	  exit 0
++	end;
+ 	let pidfile =
+ 		if Sys.file_exists (config_filename cf) then
+ 			parse_config (config_filename cf)
 -- 
 2.25.1
 
