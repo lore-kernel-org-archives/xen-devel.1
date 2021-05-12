@@ -2,45 +2,45 @@ Return-Path: <SRS0=7qAe=KH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80AA4C433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 22:18:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F24F9C433B4
+	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 22:23:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3405A61413
-	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 22:18:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3405A61413
+	by mail.kernel.org (Postfix) with ESMTPS id B55EC61413
+	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 22:23:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B55EC61413
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.126445.238037 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.126452.238049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgxBj-0007W9-9J; Wed, 12 May 2021 22:18:43 +0000
+	id 1lgxGJ-0000bv-Rc; Wed, 12 May 2021 22:23:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 126445.238037; Wed, 12 May 2021 22:18:43 +0000
+Received: by outflank-mailman (output) from mailman id 126452.238049; Wed, 12 May 2021 22:23:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lgxBj-0007W2-5f; Wed, 12 May 2021 22:18:43 +0000
-Received: by outflank-mailman (input) for mailman id 126445;
- Wed, 12 May 2021 22:18:42 +0000
+	id 1lgxGJ-0000bo-O9; Wed, 12 May 2021 22:23:27 +0000
+Received: by outflank-mailman (input) for mailman id 126452;
+ Wed, 12 May 2021 22:23:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lgxBi-0007Vw-LU
- for xen-devel@lists.xenproject.org; Wed, 12 May 2021 22:18:42 +0000
+ (envelope-from <julien@xen.org>) id 1lgxGI-0000bi-To
+ for xen-devel@lists.xenproject.org; Wed, 12 May 2021 22:23:26 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lgxBg-0004fq-Ui; Wed, 12 May 2021 22:18:40 +0000
+ id 1lgxGH-0004l2-K6; Wed, 12 May 2021 22:23:25 +0000
 Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lgxBg-0006K6-Ov; Wed, 12 May 2021 22:18:40 +0000
+ id 1lgxGH-0006mh-EF; Wed, 12 May 2021 22:23:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,104 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=fG92JyapnWWZhAVzqQe7939190PRNkzzWbXxx+gTR/c=; b=kACCT2zp03nvUVWCVdEz+IKPLN
-	IcKbuU8q9wdkLevAtctsIHedQVXNYlMNw2NUh9VJiuo9F2EEjJ66YTi3s2Swww+PLiVcuTMa9nmRa
-	kKQcZ/Ts7sOz5ttSVaLaGttbDVxUcg4dvmJvc1CoPJ46JJICUb2vuMODVCJHYUZ7CFHk=;
-Subject: Re: [PATCH RFCv2 07/15] xen/arm: mm: Re-implement early_fdt_map()
- using map_pages_to_xen()
+	bh=YgBQnV6iBVWQl1Jac0X4gn8+2SozyVSztoo5d0oWYGY=; b=gGmZAku2Z5rMgcH4WZGsorB3fr
+	Ej7wMoaF9xdx07kzZ9v9dYkCyNujdifinwxvtSn8Ot35lofHLGn81T+Q4vlV1PAAjkYSP5e5FPjlQ
+	lu8Hxsvyha3npIz+1SpTR4zzsRr4JVh0GrEJXg+PLYmkKZTpYXj2vqHM1uRn1gWuDkV8=;
+Subject: Re: [PATCH RFCv2 08/15] xen/arm32: mm: Check if the virtual address
+ is shared before updating it
 To: Stefano Stabellini <sstabellini@kernel.org>
 Cc: xen-devel@lists.xenproject.org, Wei.Chen@arm.com, Henry.Wang@arm.com,
  Penny.Zheng@arm.com, Bertrand.Marquis@arm.com,
- Julien Grall <julien.grall@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Julien Grall <jgrall@amazon.com>
+ Julien Grall <jgrall@amazon.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 References: <20210425201318.15447-1-julien@xen.org>
- <20210425201318.15447-8-julien@xen.org>
- <alpine.DEB.2.21.2105121437501.5018@sstabellini-ThinkPad-T480s>
+ <20210425201318.15447-9-julien@xen.org>
+ <alpine.DEB.2.21.2105121448090.5018@sstabellini-ThinkPad-T480s>
 From: Julien Grall <julien@xen.org>
-Message-ID: <68422df9-014e-7acb-f10f-f605a7233f40@xen.org>
-Date: Wed, 12 May 2021 23:18:38 +0100
+Message-ID: <caec9741-8c0e-b80a-1020-c985beb1e100@xen.org>
+Date: Wed, 12 May 2021 23:23:23 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.10.1
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2105121437501.5018@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2105121448090.5018@sstabellini-ThinkPad-T480s>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
 Hi Stefano,
 
-On 12/05/2021 22:41, Stefano Stabellini wrote:
+On 12/05/2021 23:00, Stefano Stabellini wrote:
 > On Sun, 25 Apr 2021, Julien Grall wrote:
->> From: Julien Grall <julien.grall@arm.com>
+>> From: Julien Grall <jgrall@amazon.com>
 >>
->> Now that map_pages_to_xen() has been extended to support 2MB mappings,
->> we can replace the create_mappings() calls by map_pages_to_xen() calls.
+>> Only the first 2GB of the virtual address space is shared between all
+>> the page-tables on Arm32.
 >>
->> The mapping can also be marked read-only has Xen as no business to
->> modify the host Device Tree.
+>> There is a long outstanding TODO in xen_pt_update() stating that the
+>> function is can only work with shared mapping. Nobody has ever called
+>             ^ remove
 > 
-> I think that's good. Just FYI there is some work at Xilinx to make
-> changes to the device tree at runtime but we'll cross that bridge when
-> we come to it.
+>> the function with private mapping, however as we add more callers
+>> there is a risk to mess things up.
+>>
+>> Introduce a new define to mark the ened of the shared mappings and use
+>                                       ^end
+> 
+>> it in xen_pt_update() to verify if the address is correct.
+>>
+>> Note that on Arm64, all the mappings are shared. Some compiler may
+>> complain about an always true check, so the new define is not introduced
+>> for arm64 and the code is protected with an #ifdef.
+>   
+> On arm64 we could maybe define SHARED_VIRT_END to an arbitrarely large
+> value, such as:
+> 
+> #define SHARED_VIRT_END (1UL<<48)
+> 
+> or:
+> 
+> #define SHARED_VIRT_END DIRECTMAP_VIRT_END
+> 
+> ?
 
-This particular mapping is only used during early boot. After the DT has 
-been unflatten, this region is unmapped and the physical memory released.
-
-So if the DT needs to be modified at runtime, then you would most likely 
-want to modify the unflatten version.
+I thought about it but I didn't want to define to a random value... I 
+felt not define it was better.
 
 > 
-> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+> 
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>>
+>> ---
+>>      Changes in v2:
+>>          - New patch
+>> ---
+>>   xen/arch/arm/mm.c            | 11 +++++++++--
+>>   xen/include/asm-arm/config.h |  4 ++++
+>>   2 files changed, 13 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+>> index 8fac24d80086..5c17cafff847 100644
+>> --- a/xen/arch/arm/mm.c
+>> +++ b/xen/arch/arm/mm.c
+>> @@ -1275,11 +1275,18 @@ static int xen_pt_update(unsigned long virt,
+>>        * For arm32, page-tables are different on each CPUs. Yet, they share
+>>        * some common mappings. It is assumed that only common mappings
+>>        * will be modified with this function.
+>> -     *
+>> -     * XXX: Add a check.
+>>        */
+>>       const mfn_t root = virt_to_mfn(THIS_CPU_PGTABLE);
+>>   
+>> +#ifdef SHARED_VIRT_END
+>> +    if ( virt > SHARED_VIRT_END ||
+>> +         (SHARED_VIRT_END - virt) < nr_mfns )
+> 
+> The following would be sufficient, right?
+> 
+>      if ( virt + nr_mfns > SHARED_VIRT_END )
 
-Thank you!
+This would not protect against an overflow. So I think it is best if we 
+keep my version.
 
 Cheers,
 
