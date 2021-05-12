@@ -2,42 +2,43 @@ Return-Path: <SRS0=7qAe=KH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B11DEC433B4
-	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 19:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D69CC43460
+	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 20:10:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 51B6861407
-	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 19:56:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51B6861407
+	by mail.kernel.org (Postfix) with ESMTPS id F2A99613FB
+	for <xen-devel@archiver.kernel.org>; Wed, 12 May 2021 20:10:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2A99613FB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.126357.237871 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.126365.237883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lguxN-0001FU-E8; Wed, 12 May 2021 19:55:45 +0000
+	id 1lgvBt-0003mk-PL; Wed, 12 May 2021 20:10:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 126357.237871; Wed, 12 May 2021 19:55:45 +0000
+Received: by outflank-mailman (output) from mailman id 126365.237883; Wed, 12 May 2021 20:10:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lguxN-0001FN-AH; Wed, 12 May 2021 19:55:45 +0000
-Received: by outflank-mailman (input) for mailman id 126357;
- Wed, 12 May 2021 19:55:43 +0000
+	id 1lgvBt-0003md-MJ; Wed, 12 May 2021 20:10:45 +0000
+Received: by outflank-mailman (input) for mailman id 126365;
+ Wed, 12 May 2021 20:10:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=codm=KH=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1lguxL-0001Ey-L7
- for xen-devel@lists.xenproject.org; Wed, 12 May 2021 19:55:43 +0000
+ id 1lgvBs-0003mX-Lc
+ for xen-devel@lists.xenproject.org; Wed, 12 May 2021 20:10:44 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a3e0163c-c2ef-4546-9907-11d01f8e06c9;
- Wed, 12 May 2021 19:55:43 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id AB53C613F7;
- Wed, 12 May 2021 19:55:41 +0000 (UTC)
+ id 5c367de5-ca19-4a09-8571-a7541e6c4968;
+ Wed, 12 May 2021 20:10:44 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E584D61408;
+ Wed, 12 May 2021 20:10:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,49 +50,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a3e0163c-c2ef-4546-9907-11d01f8e06c9
+X-Inumbo-ID: 5c367de5-ca19-4a09-8571-a7541e6c4968
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1620849342;
-	bh=262+PIF/9A36VsCFqlkhq//BsN04UF0+U0v6HG31+Wo=;
+	s=k20201202; t=1620850243;
+	bh=KiSht4eykHbuRx4encDVma3UC0WdUp6sYB51Ups/XBQ=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=WEB3NSzIGZ1hY7qqH6Z9As3Y5wCiVwfxNKRRS/2CC0NbdHbt5Qgc02KzG15EMIxHx
-	 GRryYhagx0GqTVe35P4CWN/aFNbhJOcLv5Yxgs2TB4g/MMgelXLUXiw+5EwqeavSN6
-	 C1MpfPrTlXnYi4xDQtTxE+kO+JPXyDOjavVr6Sg8yNi5a8lr3RJSaOFMbgZLr1uxD2
-	 G3ZV5addJoy64YD+onajVSGgt0Xgg+EFe5W32nhaFq/UBHEuA3pK5v5HIMfnLvPbVR
-	 /a6LBUXd2mPFZKaLUDxuzPCWaR4pV3xtWBWh3N7EiyErgBxFKvaliGdztPXF4OazjN
-	 eMMkMG3PUlnMw==
-Date: Wed, 12 May 2021 12:55:40 -0700 (PDT)
+	b=oe+sv3ILc/RC+aVoS4W+Yefy9KsbBFO5a0a/INlcBlqGDSktVFnmkAeXr/w639z41
+	 FF6tet/bKQ9itBDU7qZ50bOtG4N5MDKvqG9wXs9XE5I7LA6RUYdRx25BxbmF5tLeM8
+	 vC7jRmufvNf0Cfxf5++3NwAC67oEPQXe/Acw1pHjw6tfLBhINnc8MFktxvcakjlL3t
+	 7tHb+8HFZ7QQHeyqwmf1dF6OY5SnoGvdYQ04BKAkHWVg+Q0awZtJSeCSnfthbMy5YS
+	 pp9vmID2lox89aKRN67CxlsLOK/QV8v48IrBEG+cQCZbXsRdFaQTNxlDH3SPOPnQnj
+	 ShdB+57YHYeuw==
+Date: Wed, 12 May 2021 13:10:42 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Christoph Hellwig <hch@lst.de>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, 
-    Stefano Stabellini <stefano.stabellini@xilinx.com>, 
-    boris.ostrovsky@oracle.com, jgross@suse.com, catalin.marinas@arm.com, 
-    will@kernel.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 1/2] xen/arm64: do not set SWIOTLB_NO_FORCE when swiotlb
- is required
-In-Reply-To: <20210512072645.GA22396@lst.de>
-Message-ID: <alpine.DEB.2.21.2105121255290.5018@sstabellini-ThinkPad-T480s>
-References: <20210511174142.12742-1-sstabellini@kernel.org> <20210512072645.GA22396@lst.de>
+    xen-devel@lists.xenproject.org, hch@lst.de, linux-kernel@vger.kernel.org, 
+    Stefano Stabellini <stefano.stabellini@xilinx.com>, jgross@suse.com
+Subject: Re: [PATCH 2/2] xen/swiotlb: check if the swiotlb has already been
+ initialized
+In-Reply-To: <2e5a684b-3c74-5efc-2946-8ca002894ab4@oracle.com>
+Message-ID: <alpine.DEB.2.21.2105121310210.5018@sstabellini-ThinkPad-T480s>
+References: <20210511174142.12742-2-sstabellini@kernel.org> <2e5a684b-3c74-5efc-2946-8ca002894ab4@oracle.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
-On Wed, 12 May 2021, Christoph Hellwig wrote:
-> > -int xen_swiotlb_detect(void)
-> > -{
-> > -	if (!xen_domain())
-> > -		return 0;
-> > -	if (xen_feature(XENFEAT_direct_mapped))
-> > -		return 1;
-> > -	/* legacy case */
-> > -	if (!xen_feature(XENFEAT_not_direct_mapped) && xen_initial_domain())
-> > -		return 1;
-> > -	return 0;
-> > -}
+On Tue, 11 May 2021, Boris Ostrovsky wrote:
+> On 5/11/21 1:41 PM, Stefano Stabellini wrote:
+> > --- a/drivers/xen/swiotlb-xen.c
+> > +++ b/drivers/xen/swiotlb-xen.c
+> > @@ -164,6 +164,11 @@ int __ref xen_swiotlb_init(void)
+> >  	int rc = -ENOMEM;
+> >  	char *start;
+> >  
+> > +	if (io_tlb_default_mem != NULL) {
+> > +		printk(KERN_WARNING "Xen-SWIOTLB: swiotlb buffer already initialized\n");
 > 
-> I think this move should be a separate prep patch.
+> 
+> pr_warn().
+> 
+> 
+> Reviewed-by: Boris Ostrovsky <boris.ostrvsky@oracle.com>
 
-Sure, I can do that
+Thank you! I'll send a v2 shortly with the change to pr_warn and your
+reviewed-by.
 
