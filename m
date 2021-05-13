@@ -2,46 +2,45 @@ Return-Path: <SRS0=0ON0=KI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29867C433ED
-	for <xen-devel@archiver.kernel.org>; Thu, 13 May 2021 09:52:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96E0DC433B4
+	for <xen-devel@archiver.kernel.org>; Thu, 13 May 2021 10:03:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B7B81613C7
-	for <xen-devel@archiver.kernel.org>; Thu, 13 May 2021 09:52:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7B81613C7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 3C3F361260
+	for <xen-devel@archiver.kernel.org>; Thu, 13 May 2021 10:03:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C3F361260
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.126797.238261 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.126806.238285 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lh81B-0002ND-34; Thu, 13 May 2021 09:52:33 +0000
+	id 1lh8BS-0004CR-A3; Thu, 13 May 2021 10:03:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 126797.238261; Thu, 13 May 2021 09:52:33 +0000
+Received: by outflank-mailman (output) from mailman id 126806.238285; Thu, 13 May 2021 10:03:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lh81A-0002N6-UZ; Thu, 13 May 2021 09:52:32 +0000
-Received: by outflank-mailman (input) for mailman id 126797;
- Thu, 13 May 2021 09:52:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lh8BS-0004CK-5n; Thu, 13 May 2021 10:03:10 +0000
+Received: by outflank-mailman (input) for mailman id 126806;
+ Thu, 13 May 2021 10:03:08 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yjCE=KI=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lh819-0002N0-K5
- for xen-devel@lists.xenproject.org; Thu, 13 May 2021 09:52:31 +0000
-Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:400:100::1])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id aefe7773-63df-4f89-ac6f-3d9d53501116;
- Thu, 13 May 2021 09:52:30 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.25.8 AUTH)
- with ESMTPSA id N048d9x4D9qS3pq
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 13 May 2021 11:52:28 +0200 (CEST)
+ (envelope-from <SRS0=KipV=KI=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lh8BQ-0003vw-Nm
+ for xen-devel@lists.xenproject.org; Thu, 13 May 2021 10:03:08 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 5e7d7ef8-c3c2-48a1-a0e8-26c163d772ed;
+ Thu, 13 May 2021 10:03:07 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9FC13B05D;
+ Thu, 13 May 2021 10:03:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,91 +52,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aefe7773-63df-4f89-ac6f-3d9d53501116
-ARC-Seal: i=1; a=rsa-sha256; t=1620899548; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=hEfWgoDs39gKRlWOGytO1Q4VtzO00eKDV/ffvOXboszJefdeDw7Do+n+5biHqUSGe3
-    G0Rf4WBMxfAaNVUdBVy4im4vgjNl7FEDnjzqehtZx37ME5wWMzPKus1mWESh0rkmAceR
-    PWiAaiQM6IUfYSWulsOc0IYncxbMvdrW9IYyo/C1puQLC+J/ald5L8gH/CDzqEomzhCH
-    l2VddD2itRIAgGUQ6qPK5h8zBmZT77wastRc2RRhaNjaRH/q+/X/gDKgJ7MAktH0m2QW
-    yIdC+YaxB2QBRJyS5/uKNGq0bpoNtJTwqhE6n4b9xUG+Lv3Txe8LKur1/IhmGQmWxYM8
-    kMjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1620899548;
-    s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=IFPBgtnQ4yZX6e7A5Exc73MNWqTnOip6+lgCl1NwiIY=;
-    b=YJ5/KO3VQ7Kcwzznr+0n5u/CiH/VuHPFmjzp+Fi64w9jIyU7RxjXQAHOm1FuxOKJbr
-    1uIf20mY1yFOY8m7SFjJWcArJwDQ8O8Plry0yX5vDzOBtvjhYSj8L4iFEHj6LkE1KqoM
-    +oL9rCagLKvcuoIrhBl1Khv51DJ8LrYcESL/vKu7VQ1rl+4oHhZDImVHcOUn7OSV8wlI
-    1Kb+lKLpyEzs6GfvdL0/oItc8alCoiPEN2yohJtd6ndxBhAtY4rocnjXWlJkjTiyxR+p
-    HWlmmeeJgA9EEU85RPWWGXmtuJE6VvArtIFbjtIbz73VE+wZ5tx9bIgGzCPf1t3zwlDZ
-    dEQQ==
-ARC-Authentication-Results: i=1; strato.com;
-    dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1620899548;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=IFPBgtnQ4yZX6e7A5Exc73MNWqTnOip6+lgCl1NwiIY=;
-    b=l3nE4bRRUawgPSxQkIHJJKNMu8WniwWA5hWJ/yZgekuy6EohdyLzPDXi5LSWINkamn
-    0erbmu9lGEzU9C/vQ8CFouNAAOeEPj6Q4kF2GpJjgov6ADwtQFhOSXD4ec5bNGluo4pa
-    npCq0ONrM6ENk7/CGfwrL4vG5ISW3ZHnoXy7WXBTdlc32wOLmq30opUCEihmWgHF4noP
-    p8qh2sFxJjFiM2zgm6uH78T53iPmq21PVev6sZvT0n6okyr7Q5AVMsUTHuubtEsNhKnx
-    TmwCfm5cKHlVfHnAqcYjRmqe+fXFR9Nmq5v9Sf8+h1zd4vT5JMIMp/HX8Sb7HUxzsE8U
-    +V3Q==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisF/Wx6Ea03sAi8O4Y0c9DLMc9kgmB2KMHkQZ2le"
-X-RZG-CLASS-ID: mo00
-Date: Thu, 13 May 2021 11:52:21 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: <xen-devel@lists.xenproject.org>
-Subject: Re: regression in Xen 4.15, unable to boot xenlinux dom0
-Message-ID: <20210513115221.121aa3db.olaf@aepfle.de>
-In-Reply-To: <YJz2RpJ/c8dTXG0w@Air-de-Roger>
-References: <20210513112136.6dcc3aaf.olaf@aepfle.de>
-	<YJz2RpJ/c8dTXG0w@Air-de-Roger>
-X-Mailer: Claws Mail 2021.04.23 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+X-Inumbo-ID: 5e7d7ef8-c3c2-48a1-a0e8-26c163d772ed
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1620900186; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g+1fyoENkOuy7Zh/t/9f7BoPHxXHhIGX5kJfVKmIRpA=;
+	b=g/KYhXDBmr+jGf2DUNwYpTYmyFb5iID0n+JwQIYx5JoW7VIHybKPbSnGj1UPKNEw9rGj7B
+	MiaQabJO4iSCO/G/rIVuX8Zf026zsfTmGZsYXeuDjGQ5Idoe7g910FX9BfA6fL9/j32Q2m
+	vig7EKf4L+OCtklY3VcDg8L1QLco2XY=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>
+Subject: [PATCH 6/8] xen/netfront: don't read data from request on the ring page
+Date: Thu, 13 May 2021 12:03:00 +0200
+Message-Id: <20210513100302.22027-7-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210513100302.22027-1-jgross@suse.com>
+References: <20210513100302.22027-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/MpTPGB1HD2zO3oIp6xK2bfL";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+Content-Transfer-Encoding: 8bit
 
---Sig_/MpTPGB1HD2zO3oIp6xK2bfL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+In order to avoid a malicious backend being able to influence the local
+processing of a request build the request locally first and then copy
+it to the ring page. Any reading from the request needs to be done on
+the local instance.
 
-Am Thu, 13 May 2021 11:49:58 +0200
-schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/net/xen-netfront.c | 75 ++++++++++++++++++--------------------
+ 1 file changed, 36 insertions(+), 39 deletions(-)
 
-> Can you boot with dom0=3Dmsr-relaxed on the Xen command line?
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index f91e41ece554..261c35be0147 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -435,7 +435,8 @@ struct xennet_gnttab_make_txreq {
+ 	struct netfront_queue *queue;
+ 	struct sk_buff *skb;
+ 	struct page *page;
+-	struct xen_netif_tx_request *tx; /* Last request */
++	struct xen_netif_tx_request *tx;      /* Last request on ring page */
++	struct xen_netif_tx_request tx_local; /* Last request local copy*/
+ 	unsigned int size;
+ };
+ 
+@@ -463,30 +464,27 @@ static void xennet_tx_setup_grant(unsigned long gfn, unsigned int offset,
+ 	queue->grant_tx_page[id] = page;
+ 	queue->grant_tx_ref[id] = ref;
+ 
+-	tx->id = id;
+-	tx->gref = ref;
+-	tx->offset = offset;
+-	tx->size = len;
+-	tx->flags = 0;
++	info->tx_local.id = id;
++	info->tx_local.gref = ref;
++	info->tx_local.offset = offset;
++	info->tx_local.size = len;
++	info->tx_local.flags = 0;
++
++	*tx = info->tx_local;
+ 
+ 	info->tx = tx;
+-	info->size += tx->size;
++	info->size += info->tx_local.size;
+ }
+ 
+ static struct xen_netif_tx_request *xennet_make_first_txreq(
+-	struct netfront_queue *queue, struct sk_buff *skb,
+-	struct page *page, unsigned int offset, unsigned int len)
++	struct xennet_gnttab_make_txreq *info,
++	unsigned int offset, unsigned int len)
+ {
+-	struct xennet_gnttab_make_txreq info = {
+-		.queue = queue,
+-		.skb = skb,
+-		.page = page,
+-		.size = 0,
+-	};
++	info->size = 0;
+ 
+-	gnttab_for_one_grant(page, offset, len, xennet_tx_setup_grant, &info);
++	gnttab_for_one_grant(info->page, offset, len, xennet_tx_setup_grant, info);
+ 
+-	return info.tx;
++	return info->tx;
+ }
+ 
+ static void xennet_make_one_txreq(unsigned long gfn, unsigned int offset,
+@@ -499,35 +497,27 @@ static void xennet_make_one_txreq(unsigned long gfn, unsigned int offset,
+ 	xennet_tx_setup_grant(gfn, offset, len, data);
+ }
+ 
+-static struct xen_netif_tx_request *xennet_make_txreqs(
+-	struct netfront_queue *queue, struct xen_netif_tx_request *tx,
+-	struct sk_buff *skb, struct page *page,
++static void xennet_make_txreqs(
++	struct xennet_gnttab_make_txreq *info,
++	struct page *page,
+ 	unsigned int offset, unsigned int len)
+ {
+-	struct xennet_gnttab_make_txreq info = {
+-		.queue = queue,
+-		.skb = skb,
+-		.tx = tx,
+-	};
+-
+ 	/* Skip unused frames from start of page */
+ 	page += offset >> PAGE_SHIFT;
+ 	offset &= ~PAGE_MASK;
+ 
+ 	while (len) {
+-		info.page = page;
+-		info.size = 0;
++		info->page = page;
++		info->size = 0;
+ 
+ 		gnttab_foreach_grant_in_range(page, offset, len,
+ 					      xennet_make_one_txreq,
+-					      &info);
++					      info);
+ 
+ 		page++;
+ 		offset = 0;
+-		len -= info.size;
++		len -= info->size;
+ 	}
+-
+-	return info.tx;
+ }
+ 
+ /*
+@@ -580,10 +570,14 @@ static int xennet_xdp_xmit_one(struct net_device *dev,
+ {
+ 	struct netfront_info *np = netdev_priv(dev);
+ 	struct netfront_stats *tx_stats = this_cpu_ptr(np->tx_stats);
++	struct xennet_gnttab_make_txreq info = {
++		.queue = queue,
++		.skb = NULL,
++		.page = virt_to_page(xdpf->data),
++	};
+ 	int notify;
+ 
+-	xennet_make_first_txreq(queue, NULL,
+-				virt_to_page(xdpf->data),
++	xennet_make_first_txreq(&info,
+ 				offset_in_page(xdpf->data),
+ 				xdpf->len);
+ 
+@@ -647,6 +641,7 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
+ 	unsigned int len;
+ 	unsigned long flags;
+ 	struct netfront_queue *queue = NULL;
++	struct xennet_gnttab_make_txreq info = { };
+ 	unsigned int num_queues = dev->real_num_tx_queues;
+ 	u16 queue_index;
+ 	struct sk_buff *nskb;
+@@ -704,14 +699,16 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
+ 	}
+ 
+ 	/* First request for the linear area. */
+-	first_tx = tx = xennet_make_first_txreq(queue, skb,
+-						page, offset, len);
++	info.queue = queue;
++	info.skb = skb;
++	info.page = page;
++	first_tx = tx = xennet_make_first_txreq(&info, offset, len);
+ 	offset += tx->size;
+ 	if (offset == PAGE_SIZE) {
+ 		page++;
+ 		offset = 0;
+ 	}
+-	len -= tx->size;
++	len -= info.tx_local.size;
+ 
+ 	if (skb->ip_summed == CHECKSUM_PARTIAL)
+ 		/* local packet? */
+@@ -741,12 +738,12 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
+ 	}
+ 
+ 	/* Requests for the rest of the linear area. */
+-	tx = xennet_make_txreqs(queue, tx, skb, page, offset, len);
++	xennet_make_txreqs(&info, page, offset, len);
+ 
+ 	/* Requests for all the frags. */
+ 	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
+ 		skb_frag_t *frag = &skb_shinfo(skb)->frags[i];
+-		tx = xennet_make_txreqs(queue, tx, skb, skb_frag_page(frag),
++		xennet_make_txreqs(&info, skb_frag_page(frag),
+ 					skb_frag_off(frag),
+ 					skb_frag_size(frag));
+ 	}
+-- 
+2.26.2
 
-Yes, that helps - I just discovered this cmdline option.
-
-
-Olaf
-
---Sig_/MpTPGB1HD2zO3oIp6xK2bfL
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmCc9tUACgkQ86SN7mm1
-DoCVVg/9EcXBNIltPts0EONad2gy2xPDuWX7keBc38rBFomu1NtU7vXIB1B0a4rE
-TgOP13DGNJ/UH0JgQK7OAAj5wUJqR5sLVTuH/RgKrQK0N/liw5dBLY1LBQU4/RFf
-r1QeEP3f0gVYUprfqbZb38wdWKGU8aJiLNDaZhc48o0LkSSfBZuJF4cuNmT22QIu
-HaUFLHxsryjfc2/FOl0U1c4+8N0398abcxvT3mlXF3wCjYhiTpwi+HwGwLt9HQpf
-s4APX8Tu5Yff+jJsqjbevQOM9IRFR0FAEY3nWoA5bJiIOFCa/RE5fhcRm+DnP6bt
-hKR38vrvoXYjzCPdRc6YDItO7POl/pdlXZatvOFn7NtckqLxGIbANJ2XuhhzX3ev
-s4BxM4hwr87VYYG8DfAtgbLCd9nggxWcYI6ckz+kZJcUSRuIdJznG1351Zdiq15+
-9+VTIc1Qmx0pq6mUBvmNq4RVsUr+/WPwPDMQmhVi5rWoNUXnCijQ37rlfLk19wV3
-CzTK2IyD1e2rIbBwCIzb1AyIoRUiL+u1FksXW5+rO2aIyMBnCX3WMOcTA3hWS7RK
-45FHZHzNjJCuTyj6N811upKFj7LaSFzo9AuqT/thLMViakP2ifgiV6sMG6UhQNZJ
-M/fubDy5HVZwAyW8PBvjlLdOsutDvAuoNTIvdSck+z31vstVj2M=
-=0xNu
------END PGP SIGNATURE-----
-
---Sig_/MpTPGB1HD2zO3oIp6xK2bfL--
 
