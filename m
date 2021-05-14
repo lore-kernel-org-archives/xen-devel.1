@@ -1,45 +1,50 @@
-Return-Path: <SRS0=0ON0=KI=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=zvGf=KJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22C9BC433B4
-	for <xen-devel@archiver.kernel.org>; Thu, 13 May 2021 22:59:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 266F1C433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 14 May 2021 00:57:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B84FA61363
-	for <xen-devel@archiver.kernel.org>; Thu, 13 May 2021 22:59:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B84FA61363
+	by mail.kernel.org (Postfix) with ESMTPS id DAD5E61206
+	for <xen-devel@archiver.kernel.org>; Fri, 14 May 2021 00:57:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DAD5E61206
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.127106.238810 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.127118.238847 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lhKIh-0001gk-4Y; Thu, 13 May 2021 22:59:27 +0000
+	id 1lhM93-0005Q3-W2; Fri, 14 May 2021 00:57:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 127106.238810; Thu, 13 May 2021 22:59:27 +0000
+Received: by outflank-mailman (output) from mailman id 127118.238847; Fri, 14 May 2021 00:57:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lhKIh-0001gd-1X; Thu, 13 May 2021 22:59:27 +0000
-Received: by outflank-mailman (input) for mailman id 127106;
- Thu, 13 May 2021 22:59:25 +0000
+	id 1lhM93-0005Pw-Sl; Fri, 14 May 2021 00:57:37 +0000
+Received: by outflank-mailman (input) for mailman id 127118;
+ Fri, 14 May 2021 00:57:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=zrL7=KI=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
- id 1lhKIf-0001gT-Ns
- for xen-devel@lists.xenproject.org; Thu, 13 May 2021 22:59:25 +0000
-Received: from mail-ej1-x632.google.com (unknown [2a00:1450:4864:20::632])
+ <SRS0=CSkR=KJ=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
+ id 1lhM92-0004or-7V
+ for xen-devel@lists.xenproject.org; Fri, 14 May 2021 00:57:36 +0000
+Received: from mail-il1-x130.google.com (unknown [2607:f8b0:4864:20::130])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9aef104c-0bfb-4de3-a30f-f3b27be6dfd3;
- Thu, 13 May 2021 22:59:24 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id u21so42028182ejo.13
- for <xen-devel@lists.xenproject.org>; Thu, 13 May 2021 15:59:24 -0700 (PDT)
+ id 1e29672f-6039-4915-8178-e9f5cbd9e28c;
+ Fri, 14 May 2021 00:57:30 +0000 (UTC)
+Received: by mail-il1-x130.google.com with SMTP id j20so24501126ilo.10
+ for <xen-devel@lists.xenproject.org>; Thu, 13 May 2021 17:57:30 -0700 (PDT)
+Received: from localhost.localdomain (142-79-211-230.starry-inc.net.
+ [142.79.211.230])
+ by smtp.gmail.com with ESMTPSA id g25sm1981538ion.32.2021.05.13.17.57.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 May 2021 17:57:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,314 +56,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9aef104c-0bfb-4de3-a30f-f3b27be6dfd3
+X-Inumbo-ID: 1e29672f-6039-4915-8178-e9f5cbd9e28c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=iHbZSskysz//rzg/J/U/CPVDeQUSyKDFXBsEtO6wAsk=;
-        b=c4IiTnwj5ZjXKB15fI1gV8Jew6IFfOEirnZKZGW+PQf7m9+u+zYsfzsTmNKOzcYCf2
-         TufKQQjfu+4uu3JQ4SB+eLT1FOWlXzUKPXBdIMprlScFAFSTZpD5gToIPRhPzIH/YeIF
-         d0p8v4ykEh3DYmLa6FZ8QKT5nBH/1xCCzoIv/wiOU3SWd7n8/LWLphVLMLT5SuJoFP4U
-         8s3HYNxGpS36X0ZRPPUVhzizSmzSgP9Tq7Knjby12nf3dI/frygAUc3YE97nd4uHXqBQ
-         MokHJqAMxAVAxTxMY1RiFWZFyxGKw4c/w+tG3vBvXEKkyMG7E9krUpFiD9+wZDaXy1Qy
-         RZSw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=z8NQKucDlsKkxpg+tgse/goMcErijkf42rV8EohDD7E=;
+        b=XPPSHBsT1q8Fxl+w7tsnDyetbBVg32loktCtiMutZPMZIISb8G6/GOpGW/bBxc7Fyk
+         ovDFeN8lUi41edNc42vxwYIpcbQSWxIimpk/T9X4PdIro4BqkmTQEQIl2BRbrflIHNtL
+         FR32/T6odk0CN7rtrJxiT9yaelI1GYH8zx7ipxdWXMtE3dENIKAEQcir1Y6jXo62X44O
+         2B0r5QCCaySuiDu1AOCDk3UAYtbNJqNq9GXDlgLfPkJIWZ+NDzqKYJ/x80gq7GyD3zd4
+         wecV1mmOxov5sOzjwH4D3cMXaUlU/PFSBZ3xaqkdtbKrJH7k5MiA/gs3wQ4kGBXtlwyq
+         LHGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=iHbZSskysz//rzg/J/U/CPVDeQUSyKDFXBsEtO6wAsk=;
-        b=eknWbGHbid2m8PJG7AVkX+mUqBCq6X0mL7pgWDCJyvcyfNIy31/9/gqg7yU8LxfbI+
-         /9JrLM8mF0JqWXBA/CR7r48+/oCxGRDDumgaZY4/UZtU605maD/znY13HRBgiHYQm4pG
-         vq6tttLGAHjziYsFgb8hweFYOyzZ+rEWMV/tiR4ftOpZZ0EONOc5YV4he9AaCRGStLHJ
-         ixrfEkiec4arnPU3H1rHDYmOas91Km6EFViyCqLTfnSsNmRvSCjA+VkTWlbIz9eMuzEp
-         MxAfDg5XJ3LQqHwgJqqOCiuYqXOJXt7RqPGCW6HZa3G+hOok3VXBHwaaa8Q5mpyqQhiz
-         dMbg==
-X-Gm-Message-State: AOAM532rIC2xVxP2bETgMudovWb4Tltn4lMRpD+JU2Sh0R2Gwbd2+4w9
-	VwJTf6pS0U8+bBlEuR9RzKqTPj5goa0eIZQyRXk=
-X-Google-Smtp-Source: ABdhPJxE/CH8XOP455+qI0x7WsL04Do3u1JmWZNPPEWo6czS+atSjxl6pF4Xtowu/DWbujf1MOanWlE3MNZD1HrHr4w=
-X-Received: by 2002:a17:906:e28c:: with SMTP id gg12mr45600715ejb.483.1620946763640;
- Thu, 13 May 2021 15:59:23 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=z8NQKucDlsKkxpg+tgse/goMcErijkf42rV8EohDD7E=;
+        b=R8Y7GddajITsVjQLPfLqwv+i1AF61nyYKb4FxtawEuCUuria3amPeKvc48R0Lj+iO8
+         5Cr78oLqmOERKC3WsQTJxQXmsa50MAh+YU5aJfZj4Y6idznAOJa4W/B00QhWYKpvCWh0
+         mqC6wyDJEZ4Yyg36Nh8G2UbYjw/0skz9w6mQUYLhP0UgS0NkBYkhMqkcWgUXBuotUh4i
+         CfEgiJ+hGFGezW3S8uJN1dlzsLlynxSm/93tm6ERHWBYAqi66qRqe33dFzUTE2Bngb7N
+         VP+PuozukEAhah/gV4foh/SLvJkXB6H7sOsiMZwnkBk0WdzbulqbbYSOPoYuod1fakEw
+         hn7A==
+X-Gm-Message-State: AOAM533wCMvCvXnxYqsrW1slfd7X00En98Ur2LTXjWpGN9KhY84E1o3E
+	3xSlFxLG+cyvEMppOZO/czA=
+X-Google-Smtp-Source: ABdhPJz55umq4EwDtw961MeN5IVmysZGtNDtXlv5xDHKKiDYO8Bs+8fzkkIvkTpg7mxfFPiPP4ae6A==
+X-Received: by 2002:a92:b751:: with SMTP id c17mr39545880ilm.121.1620953849854;
+        Thu, 13 May 2021 17:57:29 -0700 (PDT)
+From: Connor Davis <connojdavis@gmail.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Cc: Connor Davis <connojdavis@gmail.com>,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 2/4] xen: Export dbgp functions when CONFIG_XEN_DOM0 is enabled
+Date: Thu, 13 May 2021 18:56:49 -0600
+Message-Id: <291659390aff63df7c071367ad4932bf41e11aef.1620952511.git.connojdavis@gmail.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <d160cee9b61c0ec41c2cd5ff9b4e107011d39d8c.1620952511.git.connojdavis@gmail.com>
+References: <d160cee9b61c0ec41c2cd5ff9b4e107011d39d8c.1620952511.git.connojdavis@gmail.com>
 MIME-Version: 1.0
-References: <20210425201318.15447-1-julien@xen.org> <20210425201318.15447-9-julien@xen.org>
- <alpine.DEB.2.21.2105121448090.5018@sstabellini-ThinkPad-T480s>
- <caec9741-8c0e-b80a-1020-c985beb1e100@xen.org> <alpine.DEB.2.21.2105131528230.5018@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2105131528230.5018@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien.grall.oss@gmail.com>
-Date: Thu, 13 May 2021 23:59:13 +0100
-Message-ID: <CAJ=z9a18zq06AKTGRJHHzR1JeabdO+-FKTmu77ZmdPdQQi=NMA@mail.gmail.com>
-Subject: Re: [PATCH RFCv2 08/15] xen/arm32: mm: Check if the virtual address
- is shared before updating it
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Chen <Wei.Chen@arm.com>, Henry.Wang@arm.com, 
-	Penny.Zheng@arm.com, Bertrand Marquis <Bertrand.Marquis@arm.com>, 
-	Julien Grall <jgrall@amazon.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: multipart/alternative; boundary="0000000000000bf2b905c23e143d"
+Content-Transfer-Encoding: 8bit
 
---0000000000000bf2b905c23e143d
-Content-Type: text/plain; charset="UTF-8"
+Export xen_dbgp_reset_prep and xen_dbgp_external_startup
+when CONFIG_XEN_DOM0 is defined. This allows use of these symbols
+even if CONFIG_EARLY_PRINK_DBGP is defined.
 
-On Thu, 13 May 2021, 23:32 Stefano Stabellini, <sstabellini@kernel.org>
-wrote:
+Signed-off-by: Connor Davis <connojdavis@gmail.com>
+Acked-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/xen/dbgp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Wed, 12 May 2021, Julien Grall wrote:
-> > Hi Stefano,
-> >
-> > On 12/05/2021 23:00, Stefano Stabellini wrote:
-> > > On Sun, 25 Apr 2021, Julien Grall wrote:
-> > > > From: Julien Grall <jgrall@amazon.com>
-> > > >
-> > > > Only the first 2GB of the virtual address space is shared between all
-> > > > the page-tables on Arm32.
-> > > >
-> > > > There is a long outstanding TODO in xen_pt_update() stating that the
-> > > > function is can only work with shared mapping. Nobody has ever called
-> > >             ^ remove
-> > >
-> > > > the function with private mapping, however as we add more callers
-> > > > there is a risk to mess things up.
-> > > >
-> > > > Introduce a new define to mark the ened of the shared mappings and
-> use
-> > >                                       ^end
-> > >
-> > > > it in xen_pt_update() to verify if the address is correct.
-> > > >
-> > > > Note that on Arm64, all the mappings are shared. Some compiler may
-> > > > complain about an always true check, so the new define is not
-> introduced
-> > > > for arm64 and the code is protected with an #ifdef.
-> > >   On arm64 we could maybe define SHARED_VIRT_END to an arbitrarely
-> large
-> > > value, such as:
-> > >
-> > > #define SHARED_VIRT_END (1UL<<48)
-> > >
-> > > or:
-> > >
-> > > #define SHARED_VIRT_END DIRECTMAP_VIRT_END
-> > >
-> > > ?
-> >
-> > I thought about it but I didn't want to define to a random value... I
-> felt not
-> > define it was better.
->
-> Yeah, I see your point: any restrictions in addressing (e.g. 48bits)
-> are physical address restrictions. Here we are talking about virtual
-> address restriction, and I don't think there are actually any
-> restrictions there?  We could validly map something at
-> 0xffff_ffff_ffff_ffff. So even (1<<48) which makes sense at the physical
-> level, doesn't make sense in terms of virtual addresses.
->
+diff --git a/drivers/xen/dbgp.c b/drivers/xen/dbgp.c
+index cfb5de31d860..fef32dd1a5dc 100644
+--- a/drivers/xen/dbgp.c
++++ b/drivers/xen/dbgp.c
+@@ -44,7 +44,7 @@ int xen_dbgp_external_startup(struct usb_hcd *hcd)
+ 	return xen_dbgp_op(hcd, PHYSDEVOP_DBGP_RESET_DONE);
+ }
+ 
+-#ifndef CONFIG_EARLY_PRINTK_DBGP
++#if defined(CONFIG_XEN_DOM0) || !defined(CONFIG_EARLY_PRINTK_DBGP)
+ #include <linux/export.h>
+ EXPORT_SYMBOL_GPL(xen_dbgp_reset_prep);
+ EXPORT_SYMBOL_GPL(xen_dbgp_external_startup);
+-- 
+2.31.1
 
-The limit for the virtual address is 2^64.
-
-
->
-> > > > Signed-off-by: Julien Grall <jgrall@amazon.com>
-> > > >
-> > > > ---
-> > > >      Changes in v2:
-> > > >          - New patch
-> > > > ---
-> > > >   xen/arch/arm/mm.c            | 11 +++++++++--
-> > > >   xen/include/asm-arm/config.h |  4 ++++
-> > > >   2 files changed, 13 insertions(+), 2 deletions(-)
-> > > >
-> > > > diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-> > > > index 8fac24d80086..5c17cafff847 100644
-> > > > --- a/xen/arch/arm/mm.c
-> > > > +++ b/xen/arch/arm/mm.c
-> > > > @@ -1275,11 +1275,18 @@ static int xen_pt_update(unsigned long virt,
-> > > >        * For arm32, page-tables are different on each CPUs. Yet, they
-> > > > share
-> > > >        * some common mappings. It is assumed that only common
-> mappings
-> > > >        * will be modified with this function.
-> > > > -     *
-> > > > -     * XXX: Add a check.
-> > > >        */
-> > > >       const mfn_t root = virt_to_mfn(THIS_CPU_PGTABLE);
-> > > >   +#ifdef SHARED_VIRT_END
-> > > > +    if ( virt > SHARED_VIRT_END ||
-> > > > +         (SHARED_VIRT_END - virt) < nr_mfns )
-> > >
-> > > The following would be sufficient, right?
-> > >
-> > >      if ( virt + nr_mfns > SHARED_VIRT_END )
-> >
-> > This would not protect against an overflow. So I think it is best if we
-> keep
-> > my version.
->
-> But there can be no overflow with the way SHARED_VIRT_END is defined.
-
-Even if SHARED_VIRT_END was defined at (1<<48) there can be no overflow.
-> Only if we defined SHARED_VIRT_END as 0xffff_ffff_ffff_ffff we would
-> have an overflow, but you wrote above that your preference is not to do
-> that.
->
-
-You can have an overflow regardless the value of SHARED_VIRT_END.
-
-Imagine virt = 2^64 - 1 and nr_mfs = 1. The addition would result to 0.
-
-As a consequence the check would pass when it should not.
-
-One can argue that the caller will always provide sane values. However
-given the simplicity of the check, this is not worth the trouble if a
-caller is buggy.
-
-Now, the problem with SHARED_VIRT_END equals to 2^64 - 1 is not the
-overflow but the compiler that may throw an error/warning for always true
-check. Hence the reason of not defining SHARED_VIRT_END on arm64.
-
-Cheers,
-
---0000000000000bf2b905c23e143d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Thu, 13 May 2021, 23:32 Stefano Stabellini, &lt;<a =
-href=3D"mailto:sstabellini@kernel.org">sstabellini@kernel.org</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bor=
-der-left:1px #ccc solid;padding-left:1ex">On Wed, 12 May 2021, Julien Grall=
- wrote:<br>
-&gt; Hi Stefano,<br>
-&gt; <br>
-&gt; On 12/05/2021 23:00, Stefano Stabellini wrote:<br>
-&gt; &gt; On Sun, 25 Apr 2021, Julien Grall wrote:<br>
-&gt; &gt; &gt; From: Julien Grall &lt;<a href=3D"mailto:jgrall@amazon.com" =
-target=3D"_blank" rel=3D"noreferrer">jgrall@amazon.com</a>&gt;<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Only the first 2GB of the virtual address space is shared be=
-tween all<br>
-&gt; &gt; &gt; the page-tables on Arm32.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; There is a long outstanding TODO in xen_pt_update() stating =
-that the<br>
-&gt; &gt; &gt; function is can only work with shared mapping. Nobody has ev=
-er called<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0^ remove<br>
-&gt; &gt; <br>
-&gt; &gt; &gt; the function with private mapping, however as we add more ca=
-llers<br>
-&gt; &gt; &gt; there is a risk to mess things up.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Introduce a new define to mark the ened of the shared mappin=
-gs and use<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0^e=
-nd<br>
-&gt; &gt; <br>
-&gt; &gt; &gt; it in xen_pt_update() to verify if the address is correct.<b=
-r>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; Note that on Arm64, all the mappings are shared. Some compil=
-er may<br>
-&gt; &gt; &gt; complain about an always true check, so the new define is no=
-t introduced<br>
-&gt; &gt; &gt; for arm64 and the code is protected with an #ifdef.<br>
-&gt; &gt;=C2=A0 =C2=A0On arm64 we could maybe define SHARED_VIRT_END to an =
-arbitrarely large<br>
-&gt; &gt; value, such as:<br>
-&gt; &gt; <br>
-&gt; &gt; #define SHARED_VIRT_END (1UL&lt;&lt;48)<br>
-&gt; &gt; <br>
-&gt; &gt; or:<br>
-&gt; &gt; <br>
-&gt; &gt; #define SHARED_VIRT_END DIRECTMAP_VIRT_END<br>
-&gt; &gt; <br>
-&gt; &gt; ?<br>
-&gt; <br>
-&gt; I thought about it but I didn&#39;t want to define to a random value..=
-. I felt not<br>
-&gt; define it was better.<br>
-<br>
-Yeah, I see your point: any restrictions in addressing (e.g. 48bits)<br>
-are physical address restrictions. Here we are talking about virtual<br>
-address restriction, and I don&#39;t think there are actually any<br>
-restrictions there?=C2=A0 We could validly map something at<br>
-0xffff_ffff_ffff_ffff. So even (1&lt;&lt;48) which makes sense at the physi=
-cal<br>
-level, doesn&#39;t make sense in terms of virtual addresses.<br></blockquot=
-e></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">The limit for t=
-he virtual address is 2^64.</div><div dir=3D"auto"><br></div><div dir=3D"au=
-to"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<br>
-<br>
-&gt; &gt; &gt; Signed-off-by: Julien Grall &lt;<a href=3D"mailto:jgrall@ama=
-zon.com" target=3D"_blank" rel=3D"noreferrer">jgrall@amazon.com</a>&gt;<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; ---<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 Changes in v2:<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - New patch<br>
-&gt; &gt; &gt; ---<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0xen/arch/arm/mm.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 | 11 +++++++++--<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0xen/include/asm-arm/config.h |=C2=A0 4 ++++<br>
-&gt; &gt; &gt;=C2=A0 =C2=A02 files changed, 13 insertions(+), 2 deletions(-=
-)<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c<br>
-&gt; &gt; &gt; index 8fac24d80086..5c17cafff847 100644<br>
-&gt; &gt; &gt; --- a/xen/arch/arm/mm.c<br>
-&gt; &gt; &gt; +++ b/xen/arch/arm/mm.c<br>
-&gt; &gt; &gt; @@ -1275,11 +1275,18 @@ static int xen_pt_update(unsigned lo=
-ng virt,<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 * For arm32, page-tables are diff=
-erent on each CPUs. Yet, they<br>
-&gt; &gt; &gt; share<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 * some common mappings. It is ass=
-umed that only common mappings<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 * will be modified with this func=
-tion.<br>
-&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0*<br>
-&gt; &gt; &gt; -=C2=A0 =C2=A0 =C2=A0* XXX: Add a check.<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0const mfn_t root =3D virt_to_mfn(T=
-HIS_CPU_PGTABLE);<br>
-&gt; &gt; &gt;=C2=A0 =C2=A0+#ifdef SHARED_VIRT_END<br>
-&gt; &gt; &gt; +=C2=A0 =C2=A0 if ( virt &gt; SHARED_VIRT_END ||<br>
-&gt; &gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(SHARED_VIRT_END - virt) =
-&lt; nr_mfns )<br>
-&gt; &gt; <br>
-&gt; &gt; The following would be sufficient, right?<br>
-&gt; &gt; <br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 if ( virt + nr_mfns &gt; SHARED_VIRT_END )<br=
->
-&gt; <br>
-&gt; This would not protect against an overflow. So I think it is best if w=
-e keep<br>
-&gt; my version.<br>
-<br>
-But there can be no overflow with the way SHARED_VIRT_END is defined.</bloc=
-kquote></div></div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote=
- class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc soli=
-d;padding-left:1ex">
-Even if SHARED_VIRT_END was defined at (1&lt;&lt;48) there can be no overfl=
-ow.<br>
-Only if we defined SHARED_VIRT_END as 0xffff_ffff_ffff_ffff we would<br>
-have an overflow, but you wrote above that your preference is not to do<br>
-that.<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"a=
-uto">You can have an overflow regardless the value of SHARED_VIRT_END.</div=
-><div dir=3D"auto"><br></div><div dir=3D"auto">Imagine virt =3D 2^64 - 1 an=
-d nr_mfs =3D 1. The addition would result to 0.</div><div dir=3D"auto"><br>=
-</div><div dir=3D"auto">As a consequence the check would pass when it shoul=
-d not.</div><div dir=3D"auto"><br></div><div dir=3D"auto">One can argue tha=
-t the caller will always provide sane values. However given the simplicity =
-of the check, this is not worth the trouble if a caller is buggy.</div><div=
- dir=3D"auto"><br></div><div dir=3D"auto">Now, the problem with SHARED_VIRT=
-_END equals to 2^64 - 1 is not the overflow but the compiler that may throw=
- an error/warning for always true check. Hence the reason of not defining S=
-HARED_VIRT_END on arm64.</div><div dir=3D"auto"><br></div><div dir=3D"auto"=
->Cheers,</div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D"g=
-mail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex">
-</blockquote></div></div></div>
-
---0000000000000bf2b905c23e143d--
 
