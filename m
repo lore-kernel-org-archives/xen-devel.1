@@ -2,48 +2,49 @@ Return-Path: <SRS0=zvGf=KJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56258C433ED
-	for <xen-devel@archiver.kernel.org>; Fri, 14 May 2021 14:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C42DC433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 14 May 2021 14:13:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1AB90613AA
-	for <xen-devel@archiver.kernel.org>; Fri, 14 May 2021 14:07:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1AB90613AA
+	by mail.kernel.org (Postfix) with ESMTPS id 21D20613FB
+	for <xen-devel@archiver.kernel.org>; Fri, 14 May 2021 14:13:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 21D20613FB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.127377.239395 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.127394.239434 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lhYSv-0008L1-11; Fri, 14 May 2021 14:06:57 +0000
+	id 1lhYZD-0001xF-6s; Fri, 14 May 2021 14:13:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 127377.239395; Fri, 14 May 2021 14:06:57 +0000
+Received: by outflank-mailman (output) from mailman id 127394.239434; Fri, 14 May 2021 14:13:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lhYSu-0008Ku-Sr; Fri, 14 May 2021 14:06:56 +0000
-Received: by outflank-mailman (input) for mailman id 127377;
- Fri, 14 May 2021 14:06:56 +0000
+	id 1lhYZD-0001x8-3n; Fri, 14 May 2021 14:13:27 +0000
+Received: by outflank-mailman (input) for mailman id 127394;
+ Fri, 14 May 2021 14:13:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CSkR=KJ=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
- id 1lhYSu-0008Kk-14
- for xen-devel@lists.xenproject.org; Fri, 14 May 2021 14:06:56 +0000
-Received: from mail-il1-x136.google.com (unknown [2607:f8b0:4864:20::136])
+ id 1lhYZC-0001x2-AV
+ for xen-devel@lists.xenproject.org; Fri, 14 May 2021 14:13:26 +0000
+Received: from mail-io1-xd29.google.com (unknown [2607:f8b0:4864:20::d29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3614fd90-b3f6-4415-8d89-29236d4a0ad5;
- Fri, 14 May 2021 14:06:55 +0000 (UTC)
-Received: by mail-il1-x136.google.com with SMTP id v13so25879222ilj.8
- for <xen-devel@lists.xenproject.org>; Fri, 14 May 2021 07:06:55 -0700 (PDT)
+ id 40054e21-1838-49ff-9f20-688efc4ae478;
+ Fri, 14 May 2021 14:13:25 +0000 (UTC)
+Received: by mail-io1-xd29.google.com with SMTP id i7so20752140ioa.12
+ for <xen-devel@lists.xenproject.org>; Fri, 14 May 2021 07:13:25 -0700 (PDT)
 Received: from [192.168.99.80] (142-79-211-230.starry-inc.net.
  [142.79.211.230])
- by smtp.gmail.com with ESMTPSA id t7sm3068586ilq.34.2021.05.14.07.06.54
+ by smtp.gmail.com with ESMTPSA id g20sm415084iox.44.2021.05.14.07.13.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 May 2021 07:06:54 -0700 (PDT)
+ Fri, 14 May 2021 07:13:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,76 +56,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3614fd90-b3f6-4415-8d89-29236d4a0ad5
+X-Inumbo-ID: 40054e21-1838-49ff-9f20-688efc4ae478
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=R4gCuqdbZR815nXx2XVEAAsDO0qJ8mZy8Tzf13PeXRw=;
-        b=IETsefp/ddaBv67PB9DwzcBjShhaX873XycpoRKkMCKFRHECqeDTtDzXPsmph0KL/0
-         0EW7sCQ5V7cAmGYnLtPzplJ+8EhLBdwC2joA93USf76Bxa/HyWuVhzRtjCXUyx7wvWcj
-         B2weCbs7gGz0br63woBP633R7m2JHQ2VUnq9+nrdA96L7KVmuT1U9iuzxI/1mfEc+ri+
-         WgPxdLhDpQwuubRZ6I1SUEdnlbt394yfkm3EF3KwjEB9A0CW8JKyUIhVjlsQMZkQtWQb
-         QBliIPfHpcgfUkeFkcO43fbqNllnV6uBY3BFGpj+DcDdaUlDpQMWV2PCTRqNruPwZRH1
-         sFyQ==
+        bh=o70sDiQtQ+dDfpZ+eU3QLQfUt2kO/ieBAaoM5zoEMRk=;
+        b=I3oDkRj7N+G8uClJphH8sp3CphcAUJHuonMpStGeC7ZOtm5DueOr2UWwz1mk4VOVFJ
+         hgjz9Jo3qcPm2tLziHJGrWfMJJK5WEfWxJ6oSzqQrvqgB22wiU7t/PR+45R6N3AWzhTI
+         LSVyMAwFfx6JGpM4fEMFFCmJh7hq6aQ7vwlZB2R+iXmYYujHjEgp+YsbeouvNMq1qIm1
+         ls965ce58FGjCDQXbhYO3JzOMH7/U5HaObkgrv6Wzl29/c0uCUQun4+/5sS1S7/OkUAS
+         iOPitaLnFGZnEkd/2iHcKNemDb786ayavYewJhOm8exZxB10NYkhOQk561Yxal3mNC/T
+         HeRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-transfer-encoding
          :content-language;
-        bh=R4gCuqdbZR815nXx2XVEAAsDO0qJ8mZy8Tzf13PeXRw=;
-        b=s/dc0KqXUo/0NppOQaRbzn1oK1vr7LHlYK3thJOTk7Bi0vRMHNjS7nqq0XdB35HqBn
-         z8TWrQmDaRZJHvMf1XJiBkUxA1iPrBCMs2Ynxpe628wor48I+Xf80wdlturOyl5OLMDD
-         2TiWsc1z4lBPXkV1qeuMWhnByAdBWypOobZqaOdRWI301eC/IwF/1Qr5+JsxAAIYWBxG
-         i4iXqv79cLi+AxQaNCK1K5JH9+n5f4DEQ/df+Xq/JQkM1Q+UzxL/Bzi5hq28w0IDSH1W
-         SgNttY5pHbJjYjWTkUAlYMAsuDX5afebhQQX4KWsAO4o/YKfwfwc29Yv4+8ldCABhDdd
-         AFRw==
-X-Gm-Message-State: AOAM5330E+H8Ecz4gLy11mr2rrj6guZHPO8u3WxNqeDU7fTCNMInMDCo
-	QxvwcXBatNotvuTWT1pmW5E=
-X-Google-Smtp-Source: ABdhPJylsAg5N0IK+T5+EJrrTV3WwEBwg+lAI3XbJ38wuYsMOY+RKBJs4s+/eBw/u02YpGo+A49tZA==
-X-Received: by 2002:a05:6e02:f42:: with SMTP id y2mr29468885ilj.216.1621001215109;
-        Fri, 14 May 2021 07:06:55 -0700 (PDT)
-Subject: Re: [PATCH v2 0/4] Support xen-driven USB3 debug capability
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
- xen-devel@lists.xenproject.org, Lee Jones <lee.jones@linaro.org>,
- Jann Horn <jannh@google.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
- <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Mathias Nyman <mathias.nyman@intel.com>,
- Douglas Anderson <dianders@chromium.org>,
- "Eric W. Biederman" <ebiederm@xmission.com>, Petr Mladek <pmladek@suse.com>,
- Sumit Garg <sumit.garg@linaro.org>
-References: <cover.1620950220.git.connojdavis@gmail.com>
- <YJ4cqntf7YdZCOPk@kroah.com>
+        bh=o70sDiQtQ+dDfpZ+eU3QLQfUt2kO/ieBAaoM5zoEMRk=;
+        b=VZZCm53kjB0KDQEtcJSj/2++yAHPzCUoksEgR5mA9Uj3LZ53pFMdwURTsxgG2bR6yy
+         uD/Ox5rEKSRWbBrY//Lk4svK2WucfAPYYKCMVjbGtnTU7dOzYVz6VYPvcMP1RFGDNn61
+         AQkDUmiJkojtYbnS5DiZZgQACZbfOXazDyABhEueHOoXxUiOBrj7oJwScvxxLW3luk1m
+         IQY8G11vSkYgcYgq5uf3Zr5xDaz4Rq2GQkboLmYfsvH9J64X7A5aAeaLbFwn+eMRG3Jm
+         uGiwnOHOY52l/rmaNrs4LI3V3f4TDKDZ8UwjHd92BAzH9ossWhIF1X8+An+wxHSaWdJ2
+         tlfg==
+X-Gm-Message-State: AOAM531bD/HKyg2beKkTcLMaVblkrztVPesFCpaWkL1//q6pvffm1f+B
+	ROLqKtDsQMOvkdk7YnDk7X4=
+X-Google-Smtp-Source: ABdhPJxcba5H+VgtPFTRDUwwnpPXcXTlpl/P5iX1tSlcrlDbT8KuB2zaA6XFPrNnA/+pl4Sjn0Q9gA==
+X-Received: by 2002:a6b:4e15:: with SMTP id c21mr31591852iob.116.1621001605156;
+        Fri, 14 May 2021 07:13:25 -0700 (PDT)
+Subject: Re: [PATCH v2 1/5] xen/char: Default HAS_NS16550 to y only for X86
+ and ARM
+To: Elliott Mitchell <ehem+xen@m5p.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Ian Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>
+References: <cover.1620965208.git.connojdavis@gmail.com>
+ <3960a676376e0163d97ac02f968966cdfaccbf75.1620965208.git.connojdavis@gmail.com>
+ <YJ4LzUcajOJncKUP@mattapan.m5p.com>
 From: Connor Davis <connojdavis@gmail.com>
-Message-ID: <e2d96a91-3f0f-d2b3-9a1a-16caaf82c24a@gmail.com>
-Date: Fri, 14 May 2021 08:07:07 -0600
+Message-ID: <e597d3cf-39c4-bfaa-f0dd-ea9c84b0a178@gmail.com>
+Date: Fri, 14 May 2021 08:13:37 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.1
 MIME-Version: 1.0
-In-Reply-To: <YJ4cqntf7YdZCOPk@kroah.com>
+In-Reply-To: <YJ4LzUcajOJncKUP@mattapan.m5p.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
-On 5/14/21 12:46 AM, Greg Kroah-Hartman wrote:
-> On Thu, May 13, 2021 at 06:56:47PM -0600, Connor Davis wrote:
->> Hi all,
+On 5/13/21 11:34 PM, Elliott Mitchell wrote:
+> On Thu, May 13, 2021 at 10:17:08PM -0600, Connor Davis wrote:
+>> Defaulting to yes only for X86 and ARM reduces the requirements
+>> for a minimal build when porting new architectures.
 >>
->> This goal of this series is to allow the USB3 debug capability (DbC) to be
->> safely used by xen while linux runs as dom0.
-> Patch 2/4 does not seem to be showing up anywhere, did it get lost?
+>> Signed-off-by: Connor Davis <connojdavis@gmail.com>
+>> ---
+>>   xen/drivers/char/Kconfig | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/xen/drivers/char/Kconfig b/xen/drivers/char/Kconfig
+>> index b572305657..b15b0c8d6a 100644
+>> --- a/xen/drivers/char/Kconfig
+>> +++ b/xen/drivers/char/Kconfig
+>> @@ -1,6 +1,6 @@
+>>   config HAS_NS16550
+>>   	bool "NS16550 UART driver" if ARM
+>> -	default y
+>> +	default y if (ARM || X86)
+>>   	help
+>>   	  This selects the 16550-series UART support. For most systems, say Y.
+> Are you sure this is necessary?  I've been working on something else
+> recently, but did you confirm this with a full build?
+>
+> If you observe the line directly above that one, `_if_ARM_`.  I'm pretty
+> sure this driver will refuse to show up in a RISC-V build.
+>
+It isn't visible in Kconfig, true, but it will still be built because of
 
-Yep, just added you, sorry about that
+the unconditional "default y"
 
 
 Thanks,
 
 Connor
 
-> thanks,
->
-> greg k-h
 
