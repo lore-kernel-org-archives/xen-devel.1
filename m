@@ -2,47 +2,46 @@ Return-Path: <SRS0=1gSS=KN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3A0DC433B4
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 16:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 884DFC433B4
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 17:04:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6322E610CC
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 16:49:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6322E610CC
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 40660610A1
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 17:04:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40660610A1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.129472.243012 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.129498.243049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lj2u5-00072H-6U; Tue, 18 May 2021 16:49:09 +0000
+	id 1lj38K-0001yN-3A; Tue, 18 May 2021 17:03:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 129472.243012; Tue, 18 May 2021 16:49:09 +0000
+Received: by outflank-mailman (output) from mailman id 129498.243049; Tue, 18 May 2021 17:03:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lj2u5-00072A-3K; Tue, 18 May 2021 16:49:09 +0000
-Received: by outflank-mailman (input) for mailman id 129472;
- Tue, 18 May 2021 16:49:07 +0000
+	id 1lj38K-0001yG-0E; Tue, 18 May 2021 17:03:52 +0000
+Received: by outflank-mailman (input) for mailman id 129498;
+ Tue, 18 May 2021 17:03:51 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lj2u3-000720-SW; Tue, 18 May 2021 16:49:07 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>) id 1lj38I-0001yA-Vx
+ for xen-devel@lists.xenproject.org; Tue, 18 May 2021 17:03:50 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lj2u3-0007YC-Ms; Tue, 18 May 2021 16:49:07 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lj2u3-0007HG-Et; Tue, 18 May 2021 16:49:07 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lj2u3-0004h7-EL; Tue, 18 May 2021 16:49:07 +0000
+ (envelope-from <julien@xen.org>)
+ id 1lj38H-0007pL-Oe; Tue, 18 May 2021 17:03:49 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=ufe34d9ed68d054.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lj38H-0006eg-FU; Tue, 18 May 2021 17:03:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,74 +53,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=KQmanFUYe+sEA3RrhVRoilHE3Okr3/OVHXU5Pa4X1Gg=; b=1tosUs4qd9B1Ts3brRXBmXmYM4
-	QcBcK5HeomyZwHCvO+KX7e0zvbGSMuLAiZAAolJqDbkJhYRuTNYEfiqbw/+25YYoa3m+7gWtdsSgO
-	Ywn48RNRps2y6SZJaibFf0xTwRvLfA4sJX/WgtthqlMIDV2wfNc5vLn6yaBspVK/u3iU=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-162002-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [ovmf test] 162002: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=29e300ff815283259e81822ed3cb926bb9ad6460
-X-Osstest-Versions-That:
-    ovmf=1fbf5e30ae8eb725f4e10984f7b0a208f78abbd0
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 18 May 2021 16:49:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
+	bh=V2fnyoE48qQ6Hp55cFrx3NNSfeosJA7sSVYcgqQFi8k=; b=L0X4SzIKPssOfA1dn/4wmVhzoq
+	2e0sCMC7H5CRHo0P5nYI2a60W5Ohr7tRCKM13HnABbexF19JJIFVleZSaKI9O4Z8xOwhfG4A5vAqA
+	pGXqGUWhvXyotW51qhDAIVQgoQqo0STEMfFOsXk1xbOU8fTVKqvN0Qd4XO9cPCRt8pUk=;
+From: Julien Grall <julien@xen.org>
+To: xen-devel@lists.xenproject.org
+Cc: julien@xen.org,
+	Julien Grall <jgrall@amazon.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH] tools/libs: guest: Fix Arm build after 8fc4916daf2a
+Date: Tue, 18 May 2021 18:03:39 +0100
+Message-Id: <20210518170339.29706-1-julien@xen.org>
+X-Mailer: git-send-email 2.17.1
 
-flight 162002 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/162002/
+From: Julien Grall <jgrall@amazon.com>
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 29e300ff815283259e81822ed3cb926bb9ad6460
-baseline version:
- ovmf                 1fbf5e30ae8eb725f4e10984f7b0a208f78abbd0
+Gitlab CI spotted an issue when building the tools Arm:
 
-Last test of basis   161987  2021-05-18 01:10:06 Z    0 days
-Testing same since   162002  2021-05-18 08:10:25 Z    0 days    1 attempts
+xg_dom_arm.c: In function 'meminit':
+xg_dom_arm.c:401:50: error: passing argument 3 of 'set_mode' discards 'const' qualifier from pointer target type [-Werror=discarded-qualifiers]
+  401 |     rc = set_mode(dom->xch, dom->guest_domid, dom->guest_type);
+      |                                               ~~~^~~~~~~~~~~~
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Ray Ni <ray.ni@intel.com>
+This is because the const was not propagated in the Arm code. Fix it
+by constifying the 3rd parameter of set_mode().
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+Fixes: 8fc4916daf2a ("tools/libs: guest: Use const whenever we point to literal strings")
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+---
+ tools/libs/guest/xg_dom_arm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/tools/libs/guest/xg_dom_arm.c b/tools/libs/guest/xg_dom_arm.c
+index b4c24f15fb27..01e85e0ea9c7 100644
+--- a/tools/libs/guest/xg_dom_arm.c
++++ b/tools/libs/guest/xg_dom_arm.c
+@@ -195,7 +195,7 @@ static int vcpu_arm64(struct xc_dom_image *dom)
+ 
+ /* ------------------------------------------------------------------------ */
+ 
+-static int set_mode(xc_interface *xch, uint32_t domid, char *guest_type)
++static int set_mode(xc_interface *xch, uint32_t domid, const char *guest_type)
+ {
+     static const struct {
+         char           *guest;
+-- 
+2.17.1
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   1fbf5e30ae..29e300ff81  29e300ff815283259e81822ed3cb926bb9ad6460 -> xen-tested-master
 
