@@ -2,47 +2,51 @@ Return-Path: <SRS0=1gSS=KN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BC86C43460
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62534C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:49:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4072960240
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:44:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4072960240
+	by mail.kernel.org (Postfix) with ESMTPS id 1C068611BD
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:49:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C068611BD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.128788.241787 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.128824.241800 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1litTB-0001eu-Su; Tue, 18 May 2021 06:44:45 +0000
+	id 1litXJ-00034J-GX; Tue, 18 May 2021 06:49:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 128788.241787; Tue, 18 May 2021 06:44:45 +0000
+Received: by outflank-mailman (output) from mailman id 128824.241800; Tue, 18 May 2021 06:49:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1litTB-0001ek-OS; Tue, 18 May 2021 06:44:45 +0000
-Received: by outflank-mailman (input) for mailman id 128788;
- Tue, 18 May 2021 06:44:43 +0000
+	id 1litXJ-00034C-DV; Tue, 18 May 2021 06:49:01 +0000
+Received: by outflank-mailman (input) for mailman id 128824;
+ Tue, 18 May 2021 06:49:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RJ/V=KN=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1litT9-0001as-OG
- for xen-devel@lists.xenproject.org; Tue, 18 May 2021 06:44:43 +0000
-Received: from mail-pl1-x635.google.com (unknown [2607:f8b0:4864:20::635])
+ id 1litXI-000344-5l
+ for xen-devel@lists.xenproject.org; Tue, 18 May 2021 06:49:00 +0000
+Received: from mail-il1-x136.google.com (unknown [2607:f8b0:4864:20::136])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2ef5806f-09ec-4e4c-a594-f57ba5ab4664;
- Tue, 18 May 2021 06:44:42 +0000 (UTC)
-Received: by mail-pl1-x635.google.com with SMTP id a11so4536541plh.3
- for <xen-devel@lists.xenproject.org>; Mon, 17 May 2021 23:44:42 -0700 (PDT)
-Received: from localhost ([2401:fa00:95:205:f284:b819:54ca:c198])
- by smtp.gmail.com with UTF8SMTPSA id u23sm1635824pfn.106.2021.05.17.23.44.35
+ id c6374ad9-b12a-43f1-8c36-1fd7a2b53ba1;
+ Tue, 18 May 2021 06:48:59 +0000 (UTC)
+Received: by mail-il1-x136.google.com with SMTP id z1so8275420ils.0
+ for <xen-devel@lists.xenproject.org>; Mon, 17 May 2021 23:48:59 -0700 (PDT)
+Received: from mail-io1-f49.google.com (mail-io1-f49.google.com.
+ [209.85.166.49])
+ by smtp.gmail.com with ESMTPSA id d5sm10097421ilf.55.2021.05.17.23.48.57
+ for <xen-devel@lists.xenproject.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 May 2021 23:44:41 -0700 (PDT)
+ Mon, 17 May 2021 23:48:58 -0700 (PDT)
+Received: by mail-io1-f49.google.com with SMTP id k16so8345400ios.10
+ for <xen-devel@lists.xenproject.org>; Mon, 17 May 2021 23:48:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,183 +58,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ef5806f-09ec-4e4c-a594-f57ba5ab4664
+X-Inumbo-ID: c6374ad9-b12a-43f1-8c36-1fd7a2b53ba1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=I5cfiiuVy355q+pMGkQSgcYSZ5RdxJgoq0S/wr5t2jQ=;
-        b=VCVUNM1MLDDCM1YEpGwmMdmzVg+pX5xmo6WpPBxB4HadDcwl/CwygcBJ5Z5xVX7EGU
-         JOp+gYR2V8ugVsU2F+sXgC/jRu3mFZRgRkzZFN+5qA7YQg/e6fHR9WHgCovgX+k3cvqU
-         Wun2WPZQV8InkeRjlR+5gd/zLl5l3irc9NkFk=
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=3HopsH6N9F8FpkG4FSoTMtRMwuiSWSuF3ZB9X+VJCjU=;
+        b=LETfA+HNnfbbscLemZLHMHTU1ucDVUTbar59Z+Ip1n1aOSxU2vCiyi6AnzZ7ISe1Ci
+         d5+6nDZp7u09C4wccj2HMQoLbhxVgGmyilxSsMMqy6XnJ9Gh0XN/+XAYDZzV88am1gOT
+         FB7ehF0SoAEZFAQ80iPByl3CmJPeIGWiXIdbM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=I5cfiiuVy355q+pMGkQSgcYSZ5RdxJgoq0S/wr5t2jQ=;
-        b=GcFbIqsyEdYxk3i3vJvN4Xx6guwG7MeAYeY/QLGaJ0KG1CME1iW/nWHORP+l44HBpk
-         P06SWEZRRooUnmYBs70MKBdIWN4/p12TrDJajXqrEHeqyY1KCLSWpUYaeLpHCL6e9zyP
-         xoaTGoXRr6wMx8m1wW9zTZY8/mU9xKxnA8K3oJbaheygMLHtN0GFvZANehxddPqMJZ3g
-         e/X7FLOrhwsT+vvnpVQek8GtXfBzlWpzEhLEyulJCb7OKhxj3l2M5VEEv9WcjKyAz25n
-         oi/MIrR5sSO0TTGWl7y8KZSHQf7zfsJciyrv8W5YuY4ymJ7H8jMy5oeFcORLxkBU8yLd
-         cSCQ==
-X-Gm-Message-State: AOAM530a0GtZJnK8dR5T616HiLnRZ7UlH6T+qXw7LgZ67yal+IFF9xaN
-	QXgole8QDabDAQl5zWqoCLFAaA==
-X-Google-Smtp-Source: ABdhPJwzOAZEABY7sDXY0ei+QGCalaTIdclP5XZ2XQEkXIWtCph5uBf4dqlngGwrRv8DyOssDP/zXQ==
-X-Received: by 2002:a17:90a:9312:: with SMTP id p18mr3499688pjo.171.1621320282285;
-        Mon, 17 May 2021 23:44:42 -0700 (PDT)
-From: Claire Chang <tientzu@chromium.org>
-To: Rob Herring <robh+dt@kernel.org>,
-	mpe@ellerman.id.au,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Frank Rowand <frowand.list@gmail.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	Christoph Hellwig <hch@lst.de>,
-	Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: benh@kernel.crashing.org,
-	paulus@samba.org,
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
-	sstabellini@kernel.org,
-	Robin Murphy <robin.murphy@arm.com>,
-	grant.likely@arm.com,
-	xypron.glpk@gmx.de,
-	Thierry Reding <treding@nvidia.com>,
-	mingo@kernel.org,
-	bauerman@linux.ibm.com,
-	peterz@infradead.org,
-	Greg KH <gregkh@linuxfoundation.org>,
-	Saravana Kannan <saravanak@google.com>,
-	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
-	heikki.krogerus@linux.intel.com,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	linux-devicetree <devicetree@vger.kernel.org>,
-	lkml <linux-kernel@vger.kernel.org>,
-	linuxppc-dev@lists.ozlabs.org,
-	xen-devel@lists.xenproject.org,
-	Nicolas Boichat <drinkcat@chromium.org>,
-	Jim Quinlan <james.quinlan@broadcom.com>,
-	tfiga@chromium.org,
-	bskeggs@redhat.com,
-	bhelgaas@google.com,
-	chris@chris-wilson.co.uk,
-	tientzu@chromium.org,
-	daniel@ffwll.ch,
-	airlied@linux.ie,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	jani.nikula@linux.intel.com,
-	jxgao@google.com,
-	joonas.lahtinen@linux.intel.com,
-	linux-pci@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com,
-	matthew.auld@intel.com,
-	rodrigo.vivi@intel.com,
-	thomas.hellstrom@linux.intel.com
-Subject: [PATCH v7 15/15] of: Add plumbing for restricted DMA pool
-Date: Tue, 18 May 2021 14:42:15 +0800
-Message-Id: <20210518064215.2856977-16-tientzu@chromium.org>
-X-Mailer: git-send-email 2.31.1.751.gd2f1c929bd-goog
-In-Reply-To: <20210518064215.2856977-1-tientzu@chromium.org>
-References: <20210518064215.2856977-1-tientzu@chromium.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=3HopsH6N9F8FpkG4FSoTMtRMwuiSWSuF3ZB9X+VJCjU=;
+        b=NBYGZBhezN0Lk/PmwG7rkzQ/1AzKylacmKphA1ml8ElZxez/LDgT68HagyLcQjw/qR
+         177yY1ngHzS+WIscYgbH+1a0LgRrQMplc1yZx+fSfsCwb3kOQVyFly6QiweRRuLI23pg
+         SQXLgVTsrKo9a5hM9UsLxAjI6bqcCZjVfAJ5e2pPbmteIAcwyU9FQep4rRfGmlAHcymo
+         KfJ3RQj23/XMHD5bFxtKGeT+kXpvtK6fbymBffY9EjfIobjEN6iTbvmp8EBhgFI+TbE9
+         Xa1Jxmlh9GYYjfnI+4ntrZRWAw9bbYy9qUDD10GWuXmPtyYEPX7mzsIe+AEzNJn43qSA
+         7HCQ==
+X-Gm-Message-State: AOAM532TEMGJ3gXsWLp66c6bHwWsG8U+HVwdMZUZb7jUV7g+XIFFbTJJ
+	lCGB+iGs1gAmI92UZktXgXojSacJlype2w==
+X-Google-Smtp-Source: ABdhPJwhBO3KSW0EFRoDWRJTzhgsHA7JeKRlSuNNrCD9NbBU8x11PvPhCDM4mOvgurfC0J/tHIMe9A==
+X-Received: by 2002:a05:6e02:1d15:: with SMTP id i21mr3072489ila.2.1621320538962;
+        Mon, 17 May 2021 23:48:58 -0700 (PDT)
+X-Received: by 2002:a05:6638:32a8:: with SMTP id f40mr3969029jav.84.1621320526895;
+ Mon, 17 May 2021 23:48:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210518064215.2856977-1-tientzu@chromium.org> <20210518064215.2856977-5-tientzu@chromium.org>
+In-Reply-To: <20210518064215.2856977-5-tientzu@chromium.org>
+From: Claire Chang <tientzu@chromium.org>
+Date: Tue, 18 May 2021 14:48:35 +0800
+X-Gmail-Original-Message-ID: <CALiNf2_AWsnGqCnh02ZAGt+B-Ypzs1=-iOG2owm4GZHz2JAc4A@mail.gmail.com>
+Message-ID: <CALiNf2_AWsnGqCnh02ZAGt+B-Ypzs1=-iOG2owm4GZHz2JAc4A@mail.gmail.com>
+Subject: Re: [PATCH v7 04/15] swiotlb: Add restricted DMA pool initialization
+To: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>, 
+	Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com, jgross@suse.com, 
+	Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: benh@kernel.crashing.org, paulus@samba.org, 
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
+	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
+	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
+	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
+	heikki.krogerus@linux.intel.com, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
+	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
+	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
+	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
+	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>, 
+	Tomasz Figa <tfiga@chromium.org>, bskeggs@redhat.com, 
+	Bjorn Helgaas <bhelgaas@google.com>, chris@chris-wilson.co.uk, 
+	Daniel Vetter <daniel@ffwll.ch>, airlied@linux.ie, dri-devel@lists.freedesktop.org, 
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, 
+	Jianxiong Gao <jxgao@google.com>, joonas.lahtinen@linux.intel.com, 
+	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com, 
+	matthew.auld@intel.com, rodrigo.vivi@intel.com, 
+	thomas.hellstrom@linux.intel.com
+Content-Type: text/plain; charset="UTF-8"
 
-If a device is not behind an IOMMU, we look up the device node and set
-up the restricted DMA when the restricted-dma-pool is presented.
-
-Signed-off-by: Claire Chang <tientzu@chromium.org>
----
- drivers/of/address.c    | 25 +++++++++++++++++++++++++
- drivers/of/device.c     |  3 +++
- drivers/of/of_private.h |  5 +++++
- 3 files changed, 33 insertions(+)
-
-diff --git a/drivers/of/address.c b/drivers/of/address.c
-index aca94c348bd4..c562a9ff5f0b 100644
---- a/drivers/of/address.c
-+++ b/drivers/of/address.c
-@@ -8,6 +8,7 @@
- #include <linux/logic_pio.h>
- #include <linux/module.h>
- #include <linux/of_address.h>
-+#include <linux/of_reserved_mem.h>
- #include <linux/pci.h>
- #include <linux/pci_regs.h>
- #include <linux/sizes.h>
-@@ -1112,6 +1113,30 @@ bool of_dma_is_coherent(struct device_node *np)
- }
- EXPORT_SYMBOL_GPL(of_dma_is_coherent);
- 
-+int of_dma_set_restricted_buffer(struct device *dev)
-+{
-+	struct device_node *node;
-+	int count, i;
-+
-+	if (!dev->of_node)
-+		return 0;
-+
-+	count = of_property_count_elems_of_size(dev->of_node, "memory-region",
-+						sizeof(phandle));
-+	for (i = 0; i < count; i++) {
-+		node = of_parse_phandle(dev->of_node, "memory-region", i);
-+		/* There might be multiple memory regions, but only one
-+		 * restriced-dma-pool region is allowed.
-+		 */
-+		if (of_device_is_compatible(node, "restricted-dma-pool") &&
-+		    of_device_is_available(node))
-+			return of_reserved_mem_device_init_by_idx(
-+				dev, dev->of_node, i);
-+	}
-+
-+	return 0;
-+}
-+
- /**
-  * of_mmio_is_nonposted - Check if device uses non-posted MMIO
-  * @np:	device node
-diff --git a/drivers/of/device.c b/drivers/of/device.c
-index c5a9473a5fb1..d8d865223e51 100644
---- a/drivers/of/device.c
-+++ b/drivers/of/device.c
-@@ -165,6 +165,9 @@ int of_dma_configure_id(struct device *dev, struct device_node *np,
- 
- 	arch_setup_dma_ops(dev, dma_start, size, iommu, coherent);
- 
-+	if (!iommu)
-+		return of_dma_set_restricted_buffer(dev);
-+
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(of_dma_configure_id);
-diff --git a/drivers/of/of_private.h b/drivers/of/of_private.h
-index d717efbd637d..9fc874548528 100644
---- a/drivers/of/of_private.h
-+++ b/drivers/of/of_private.h
-@@ -163,12 +163,17 @@ struct bus_dma_region;
- #if defined(CONFIG_OF_ADDRESS) && defined(CONFIG_HAS_DMA)
- int of_dma_get_range(struct device_node *np,
- 		const struct bus_dma_region **map);
-+int of_dma_set_restricted_buffer(struct device *dev);
- #else
- static inline int of_dma_get_range(struct device_node *np,
- 		const struct bus_dma_region **map)
- {
- 	return -ENODEV;
- }
-+static inline int of_dma_set_restricted_buffer(struct device *dev)
-+{
-+	return -ENODEV;
-+}
- #endif
- 
- #endif /* _LINUX_OF_PRIVATE_H */
--- 
-2.31.1.751.gd2f1c929bd-goog
-
+I didn't move this to a separate file because I feel it might be
+confusing for swiotlb_alloc/free (and need more functions to be
+non-static).
+Maybe instead of moving to a separate file, we can try to come up with
+a better naming?
 
