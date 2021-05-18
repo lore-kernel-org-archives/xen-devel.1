@@ -2,45 +2,45 @@ Return-Path: <SRS0=1gSS=KN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D844EC433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 12:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F326DC433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 12:52:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9331960C41
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 12:13:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9331960C41
+	by mail.kernel.org (Postfix) with ESMTPS id B73C060FF0
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 12:52:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B73C060FF0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.129157.242462 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.129176.242492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1liybE-00029o-Tp; Tue, 18 May 2021 12:13:24 +0000
+	id 1lizCq-0006Cc-BV; Tue, 18 May 2021 12:52:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 129157.242462; Tue, 18 May 2021 12:13:24 +0000
+Received: by outflank-mailman (output) from mailman id 129176.242492; Tue, 18 May 2021 12:52:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1liybE-00029h-Qk; Tue, 18 May 2021 12:13:24 +0000
-Received: by outflank-mailman (input) for mailman id 129157;
- Tue, 18 May 2021 12:13:23 +0000
+	id 1lizCq-0006CV-8U; Tue, 18 May 2021 12:52:16 +0000
+Received: by outflank-mailman (input) for mailman id 129176;
+ Tue, 18 May 2021 12:52:14 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1liybD-00029b-M4
- for xen-devel@lists.xenproject.org; Tue, 18 May 2021 12:13:23 +0000
+ (envelope-from <julien@xen.org>) id 1lizCo-0006CP-QR
+ for xen-devel@lists.xenproject.org; Tue, 18 May 2021 12:52:14 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1liybD-0002Dq-9v; Tue, 18 May 2021 12:13:23 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ id 1lizCn-0002q3-PP; Tue, 18 May 2021 12:52:13 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1liybD-0001fz-3z; Tue, 18 May 2021 12:13:23 +0000
+ id 1lizCn-0004eJ-JS; Tue, 18 May 2021 12:52:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,71 +55,182 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=pM30EnypZaP2BuhRnIaEemhN0UI2YBiwJXbTiA4Khus=; b=3su872PzYVx/huA7JB+KkOJ74S
-	an8Y9jKSi2ai9tzSAegtpIrbyreR9qeiU3N6K38k9sz1PWrjo75j4GL3W3Heig+rKvpu64Pu94pXn
-	aqjiOWldfU942gTgqUcEF8cR3LFt0Zu3IEmjhh8AK9ENLJltUP6GxWg5VzxHfDaajlkE=;
-Subject: Re: [PATCH 07/10] xen/arm: intruduce alloc_domstatic_pages
-To: Penny Zheng <Penny.Zheng@arm.com>, Jan Beulich <jbeulich@suse.com>
-Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
- nd <nd@arm.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>
-References: <20210518052113.725808-1-penny.zheng@arm.com>
- <20210518052113.725808-8-penny.zheng@arm.com>
- <7e4706dc-70ea-4dc9-3d70-f07396b462d8@suse.com>
- <VE1PR08MB521528492991FDFC87AC361BF72C9@VE1PR08MB5215.eurprd08.prod.outlook.com>
+	bh=4BAW2gMWNYCTUhSbN+226fa0j0oBx0VQ07FNZy+FR8E=; b=3YEdx0DzwFBhUzxEeafrMnxoX1
+	8mqxeFQNhUFrqtFOzlIgqbVytnhTbD1iUdqeW3sGiJ8KHFG4SQRKXjLBjMvguZ7yu7i1t8oriuxUb
+	0eQ5V1v4MDenbl12H7ZabVFlxHpR8SJmAYSsR99xr3Hhele+iSHLdWkIWjq63TnM3p1E=;
+Subject: Re: [PATCH v3 2/2] tools/xenstore: simplify xenstored main loop
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <20210518061907.16374-1-jgross@suse.com>
+ <20210518061907.16374-3-jgross@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <75275b2f-9de3-944a-d55c-a62bbbf1bb8c@xen.org>
-Date: Tue, 18 May 2021 13:13:21 +0100
+Message-ID: <1f3f7620-bd8a-d705-6348-136a452a0a74@xen.org>
+Date: Tue, 18 May 2021 13:52:11 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.10.1
 MIME-Version: 1.0
-In-Reply-To: <VE1PR08MB521528492991FDFC87AC361BF72C9@VE1PR08MB5215.eurprd08.prod.outlook.com>
+In-Reply-To: <20210518061907.16374-3-jgross@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-Hi Penny,
+Hi Juergen,
 
-On 18/05/2021 09:57, Penny Zheng wrote:
->> -----Original Message-----
->> From: Jan Beulich <jbeulich@suse.com>
->> Sent: Tuesday, May 18, 2021 3:35 PM
->> To: Penny Zheng <Penny.Zheng@arm.com>
->> Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>; Wei Chen
->> <Wei.Chen@arm.com>; nd <nd@arm.com>; xen-devel@lists.xenproject.org;
->> sstabellini@kernel.org; julien@xen.org
->> Subject: Re: [PATCH 07/10] xen/arm: intruduce alloc_domstatic_pages
->>
->> On 18.05.2021 07:21, Penny Zheng wrote:
->>> --- a/xen/common/page_alloc.c
->>> +++ b/xen/common/page_alloc.c
->>> @@ -2447,6 +2447,9 @@ int assign_pages(
->>>       {
->>>           ASSERT(page_get_owner(&pg[i]) == NULL);
->>>           page_set_owner(&pg[i], d);
->>> +        /* use page_set_reserved_owner to set its reserved domain owner.
->> */
->>> +        if ( (pg[i].count_info & PGC_reserved) )
->>> +            page_set_reserved_owner(&pg[i], d);
->>
->> Now this is puzzling: What's the point of setting two owner fields to the same
->> value? I also don't recall you having introduced
->> page_set_reserved_owner() for x86, so how is this going to build there?
->>
+On 18/05/2021 07:19, Juergen Gross wrote:
+> The main loop of xenstored is rather complicated due to different
+> handling of socket and ring-page interfaces. Unify that handling by
+> introducing interface type specific functions can_read() and
+> can_write().
 > 
-> Thanks for pointing out that it will fail on x86.
-> As for the same value, sure, I shall change it to domid_t domid to record its reserved owner.
-> Only domid is enough for differentiate.
-> And even when domain get rebooted, struct domain may be destroyed, but domid will stays
-> The same.
-> Major user cases for domain on static allocation are referring to the whole system are static,
-> No runtime creation.
+> Take the opportunity to remove the empty list check before calling
+> write_messages() because the function is already able to cope with an
+> empty list.
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 
-One may want to have static memory yet doesn't care about the domid. So 
-I am not in favor to restrict about the domid unless there is no other way.
+Reviewed-by: Julien Grall <jgrall@amazon.com>
+
+I have also committed the series.
 
 Cheers,
+
+> ---
+> V2:
+> - split off function vector introduction (Julien Grall)
+> V3:
+> - expand commit message (Julien Grall)
+> ---
+>   tools/xenstore/xenstored_core.c   | 77 +++++++++++++++----------------
+>   tools/xenstore/xenstored_core.h   |  2 +
+>   tools/xenstore/xenstored_domain.c |  2 +
+>   3 files changed, 41 insertions(+), 40 deletions(-)
+> 
+> diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+> index 856f518075..883a1a582a 100644
+> --- a/tools/xenstore/xenstored_core.c
+> +++ b/tools/xenstore/xenstored_core.c
+> @@ -1659,9 +1659,34 @@ static int readfd(struct connection *conn, void *data, unsigned int len)
+>   	return rc;
+>   }
+>   
+> +static bool socket_can_process(struct connection *conn, int mask)
+> +{
+> +	if (conn->pollfd_idx == -1)
+> +		return false;
+> +
+> +	if (fds[conn->pollfd_idx].revents & ~(POLLIN | POLLOUT)) {
+> +		talloc_free(conn);
+> +		return false;
+> +	}
+> +
+> +	return (fds[conn->pollfd_idx].revents & mask) && !conn->is_ignored;
+> +}
+> +
+> +static bool socket_can_write(struct connection *conn)
+> +{
+> +	return socket_can_process(conn, POLLOUT);
+> +}
+> +
+> +static bool socket_can_read(struct connection *conn)
+> +{
+> +	return socket_can_process(conn, POLLIN);
+> +}
+> +
+>   const struct interface_funcs socket_funcs = {
+>   	.write = writefd,
+>   	.read = readfd,
+> +	.can_write = socket_can_write,
+> +	.can_read = socket_can_read,
+>   };
+>   
+>   static void accept_connection(int sock)
+> @@ -2296,47 +2321,19 @@ int main(int argc, char *argv[])
+>   			if (&next->list != &connections)
+>   				talloc_increase_ref_count(next);
+>   
+> -			if (conn->domain) {
+> -				if (domain_can_read(conn))
+> -					handle_input(conn);
+> -				if (talloc_free(conn) == 0)
+> -					continue;
+> -
+> -				talloc_increase_ref_count(conn);
+> -				if (domain_can_write(conn) &&
+> -				    !list_empty(&conn->out_list))
+> -					handle_output(conn);
+> -				if (talloc_free(conn) == 0)
+> -					continue;
+> -			} else {
+> -				if (conn->pollfd_idx != -1) {
+> -					if (fds[conn->pollfd_idx].revents
+> -					    & ~(POLLIN|POLLOUT))
+> -						talloc_free(conn);
+> -					else if ((fds[conn->pollfd_idx].revents
+> -						  & POLLIN) &&
+> -						 !conn->is_ignored)
+> -						handle_input(conn);
+> -				}
+> -				if (talloc_free(conn) == 0)
+> -					continue;
+> -
+> -				talloc_increase_ref_count(conn);
+> -
+> -				if (conn->pollfd_idx != -1) {
+> -					if (fds[conn->pollfd_idx].revents
+> -					    & ~(POLLIN|POLLOUT))
+> -						talloc_free(conn);
+> -					else if ((fds[conn->pollfd_idx].revents
+> -						  & POLLOUT) &&
+> -						 !conn->is_ignored)
+> -						handle_output(conn);
+> -				}
+> -				if (talloc_free(conn) == 0)
+> -					continue;
+> +			if (conn->funcs->can_read(conn))
+> +				handle_input(conn);
+> +			if (talloc_free(conn) == 0)
+> +				continue;
+>   
+> -				conn->pollfd_idx = -1;
+> -			}
+> +			talloc_increase_ref_count(conn);
+> +
+> +			if (conn->funcs->can_write(conn))
+> +				handle_output(conn);
+> +			if (talloc_free(conn) == 0)
+> +				continue;
+> +
+> +			conn->pollfd_idx = -1;
+>   		}
+>   
+>   		if (delayed_requests) {
+> diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+> index 6c4845c196..bb36111ecc 100644
+> --- a/tools/xenstore/xenstored_core.h
+> +++ b/tools/xenstore/xenstored_core.h
+> @@ -90,6 +90,8 @@ struct connection;
+>   struct interface_funcs {
+>   	int (*write)(struct connection *, const void *, unsigned int);
+>   	int (*read)(struct connection *, void *, unsigned int);
+> +	bool (*can_write)(struct connection *);
+> +	bool (*can_read)(struct connection *);
+>   };
+>   
+>   struct connection
+> diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+> index f3cd56050e..708bf68af0 100644
+> --- a/tools/xenstore/xenstored_domain.c
+> +++ b/tools/xenstore/xenstored_domain.c
+> @@ -175,6 +175,8 @@ static int readchn(struct connection *conn, void *data, unsigned int len)
+>   static const struct interface_funcs domain_funcs = {
+>   	.write = writechn,
+>   	.read = readchn,
+> +	.can_write = domain_can_write,
+> +	.can_read = domain_can_read,
+>   };
+>   
+>   static void *map_interface(domid_t domid)
+> 
 
 -- 
 Julien Grall
