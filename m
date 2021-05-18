@@ -2,45 +2,45 @@ Return-Path: <SRS0=1gSS=KN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2118C433B4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0374C433ED
 	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:19:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 61BB6610FA
+	by mail.kernel.org (Postfix) with ESMTPS id 81F3A60FD8
 	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:19:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61BB6610FA
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81F3A60FD8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.128707.241575 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.128709.241597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lit4f-0004rQ-3I; Tue, 18 May 2021 06:19:25 +0000
+	id 1lit4j-0005Pe-Ou; Tue, 18 May 2021 06:19:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 128707.241575; Tue, 18 May 2021 06:19:25 +0000
+Received: by outflank-mailman (output) from mailman id 128709.241597; Tue, 18 May 2021 06:19:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lit4f-0004rJ-0D; Tue, 18 May 2021 06:19:25 +0000
-Received: by outflank-mailman (input) for mailman id 128707;
- Tue, 18 May 2021 06:19:23 +0000
+	id 1lit4j-0005PX-LR; Tue, 18 May 2021 06:19:29 +0000
+Received: by outflank-mailman (input) for mailman id 128709;
+ Tue, 18 May 2021 06:19:28 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+8gn=KN=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lit4d-0004r5-Gb
- for xen-devel@lists.xenproject.org; Tue, 18 May 2021 06:19:23 +0000
+ id 1lit4i-0004r5-Av
+ for xen-devel@lists.xenproject.org; Tue, 18 May 2021 06:19:28 +0000
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b2ff66ce-25e5-4b24-a9d4-6c2f2447f62d;
+ id b9eb95af-3541-49c4-a5d0-f0780bced95c;
  Tue, 18 May 2021 06:19:21 +0000 (UTC)
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id D0D42AEFF;
- Tue, 18 May 2021 06:19:20 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 257A4AF09;
+ Tue, 18 May 2021 06:19:21 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,47 +52,177 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b2ff66ce-25e5-4b24-a9d4-6c2f2447f62d
+X-Inumbo-ID: b9eb95af-3541-49c4-a5d0-f0780bced95c
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1621318760; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=z6KF+YTRzP6/Lbt7W9Y/V0Lrtmt/kNDWUTq2Wg8gNHU=;
-	b=kErWyrRD9ASwp2ZUgI2yDeV0aaMzRntC9NDH1/HVtgwTOinfw0Lmr3EjnK6QBG1mvVBVV7
-	iHDszG6XSdBN+yezJY1idn/B+Ty53BENNnYM/9DqXBujf91Hn5ZS+ct6zyomMBnrWOdfKK
-	zDq52J25hHLMcMZUYGeokLNlij2I6Pw=
+	t=1621318761; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=989znmd4h1mcR15D9WJ4lxb1rPSUzv44K4HKKcR8q7E=;
+	b=K8D2WDHhpm027ir+2xZwrN16a1x6CaO7Ak4rl1QNL70OwzTqMlWNqEk1opWnNsDYhr3xAq
+	ZtZ+XeRyCjhPYWpQPoBUhtfRsgrbi0dJ9nGsC/88UCRhQr6RXvxHKVW1CoU8hGFeTI3J+i
+	OIz1J3uqccvF2psrQILsefoKpj8HIV0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 0/2] tools/xenstore: simplify xenstored main loop
-Date: Tue, 18 May 2021 08:19:05 +0200
-Message-Id: <20210518061907.16374-1-jgross@suse.com>
+Subject: [PATCH v3 2/2] tools/xenstore: simplify xenstored main loop
+Date: Tue, 18 May 2021 08:19:07 +0200
+Message-Id: <20210518061907.16374-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210518061907.16374-1-jgross@suse.com>
+References: <20210518061907.16374-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Small series to make the main loop of xenstored more readable.
+The main loop of xenstored is rather complicated due to different
+handling of socket and ring-page interfaces. Unify that handling by
+introducing interface type specific functions can_read() and
+can_write().
 
-Changes in V2:
-- split into two patches
-- use const
-- NO_SOCKETS handling
+Take the opportunity to remove the empty list check before calling
+write_messages() because the function is already able to cope with an
+empty list.
 
-Changes in V3:
-- guard extern declaration with NO_SOCKETS
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- split off function vector introduction (Julien Grall)
+V3:
+- expand commit message (Julien Grall)
+---
+ tools/xenstore/xenstored_core.c   | 77 +++++++++++++++----------------
+ tools/xenstore/xenstored_core.h   |  2 +
+ tools/xenstore/xenstored_domain.c |  2 +
+ 3 files changed, 41 insertions(+), 40 deletions(-)
 
-Juergen Gross (2):
-  tools/xenstore: move per connection read and write func hooks into a
-    struct
-  tools/xenstore: simplify xenstored main loop
-
- tools/xenstore/xenstored_core.c   | 121 ++++++++++++++----------------
- tools/xenstore/xenstored_core.h   |  23 +++---
- tools/xenstore/xenstored_domain.c |  15 +++-
- 3 files changed, 81 insertions(+), 78 deletions(-)
-
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 856f518075..883a1a582a 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -1659,9 +1659,34 @@ static int readfd(struct connection *conn, void *data, unsigned int len)
+ 	return rc;
+ }
+ 
++static bool socket_can_process(struct connection *conn, int mask)
++{
++	if (conn->pollfd_idx == -1)
++		return false;
++
++	if (fds[conn->pollfd_idx].revents & ~(POLLIN | POLLOUT)) {
++		talloc_free(conn);
++		return false;
++	}
++
++	return (fds[conn->pollfd_idx].revents & mask) && !conn->is_ignored;
++}
++
++static bool socket_can_write(struct connection *conn)
++{
++	return socket_can_process(conn, POLLOUT);
++}
++
++static bool socket_can_read(struct connection *conn)
++{
++	return socket_can_process(conn, POLLIN);
++}
++
+ const struct interface_funcs socket_funcs = {
+ 	.write = writefd,
+ 	.read = readfd,
++	.can_write = socket_can_write,
++	.can_read = socket_can_read,
+ };
+ 
+ static void accept_connection(int sock)
+@@ -2296,47 +2321,19 @@ int main(int argc, char *argv[])
+ 			if (&next->list != &connections)
+ 				talloc_increase_ref_count(next);
+ 
+-			if (conn->domain) {
+-				if (domain_can_read(conn))
+-					handle_input(conn);
+-				if (talloc_free(conn) == 0)
+-					continue;
+-
+-				talloc_increase_ref_count(conn);
+-				if (domain_can_write(conn) &&
+-				    !list_empty(&conn->out_list))
+-					handle_output(conn);
+-				if (talloc_free(conn) == 0)
+-					continue;
+-			} else {
+-				if (conn->pollfd_idx != -1) {
+-					if (fds[conn->pollfd_idx].revents
+-					    & ~(POLLIN|POLLOUT))
+-						talloc_free(conn);
+-					else if ((fds[conn->pollfd_idx].revents
+-						  & POLLIN) &&
+-						 !conn->is_ignored)
+-						handle_input(conn);
+-				}
+-				if (talloc_free(conn) == 0)
+-					continue;
+-
+-				talloc_increase_ref_count(conn);
+-
+-				if (conn->pollfd_idx != -1) {
+-					if (fds[conn->pollfd_idx].revents
+-					    & ~(POLLIN|POLLOUT))
+-						talloc_free(conn);
+-					else if ((fds[conn->pollfd_idx].revents
+-						  & POLLOUT) &&
+-						 !conn->is_ignored)
+-						handle_output(conn);
+-				}
+-				if (talloc_free(conn) == 0)
+-					continue;
++			if (conn->funcs->can_read(conn))
++				handle_input(conn);
++			if (talloc_free(conn) == 0)
++				continue;
+ 
+-				conn->pollfd_idx = -1;
+-			}
++			talloc_increase_ref_count(conn);
++
++			if (conn->funcs->can_write(conn))
++				handle_output(conn);
++			if (talloc_free(conn) == 0)
++				continue;
++
++			conn->pollfd_idx = -1;
+ 		}
+ 
+ 		if (delayed_requests) {
+diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
+index 6c4845c196..bb36111ecc 100644
+--- a/tools/xenstore/xenstored_core.h
++++ b/tools/xenstore/xenstored_core.h
+@@ -90,6 +90,8 @@ struct connection;
+ struct interface_funcs {
+ 	int (*write)(struct connection *, const void *, unsigned int);
+ 	int (*read)(struct connection *, void *, unsigned int);
++	bool (*can_write)(struct connection *);
++	bool (*can_read)(struct connection *);
+ };
+ 
+ struct connection
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index f3cd56050e..708bf68af0 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -175,6 +175,8 @@ static int readchn(struct connection *conn, void *data, unsigned int len)
+ static const struct interface_funcs domain_funcs = {
+ 	.write = writechn,
+ 	.read = readchn,
++	.can_write = domain_can_write,
++	.can_read = domain_can_read,
+ };
+ 
+ static void *map_interface(domid_t domid)
 -- 
 2.26.2
 
