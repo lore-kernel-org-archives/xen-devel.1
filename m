@@ -2,47 +2,45 @@ Return-Path: <SRS0=1gSS=KN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEAB6C433ED
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:43:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2112C433ED
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:43:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 93FB2611BD
-	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:43:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93FB2611BD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by mail.kernel.org (Postfix) with ESMTPS id A5318611BD
+	for <xen-devel@archiver.kernel.org>; Tue, 18 May 2021 06:43:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A5318611BD
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.128753.241684 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.128756.241696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1litRd-0004X6-H2; Tue, 18 May 2021 06:43:09 +0000
+	id 1litRm-0005BI-0h; Tue, 18 May 2021 06:43:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 128753.241684; Tue, 18 May 2021 06:43:09 +0000
+Received: by outflank-mailman (output) from mailman id 128756.241696; Tue, 18 May 2021 06:43:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1litRd-0004Wz-Dn; Tue, 18 May 2021 06:43:09 +0000
-Received: by outflank-mailman (input) for mailman id 128753;
- Tue, 18 May 2021 06:43:08 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RJ/V=KN=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1litRc-0003sj-2p
- for xen-devel@lists.xenproject.org; Tue, 18 May 2021 06:43:08 +0000
-Received: from mail-pg1-x52c.google.com (unknown [2607:f8b0:4864:20::52c])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id be00b0c2-06eb-45cb-8df3-4b763d52e2e6;
- Tue, 18 May 2021 06:43:06 +0000 (UTC)
-Received: by mail-pg1-x52c.google.com with SMTP id i5so6353965pgm.0
- for <xen-devel@lists.xenproject.org>; Mon, 17 May 2021 23:43:06 -0700 (PDT)
-Received: from localhost ([2401:fa00:95:205:f284:b819:54ca:c198])
- by smtp.gmail.com with UTF8SMTPSA id a20sm11417948pfc.186.2021.05.17.23.42.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 May 2021 23:43:05 -0700 (PDT)
+	id 1litRl-0005Ah-Sf; Tue, 18 May 2021 06:43:17 +0000
+Received: by outflank-mailman (input) for mailman id 128756;
+ Tue, 18 May 2021 06:43:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=+8gn=KN=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1litRk-00057E-Ta
+ for xen-devel@lists.xenproject.org; Tue, 18 May 2021 06:43:16 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 165d5409-afab-4c53-bb8a-598367cd407a;
+ Tue, 18 May 2021 06:43:15 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id C0578AF0B;
+ Tue, 18 May 2021 06:43:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,231 +52,391 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be00b0c2-06eb-45cb-8df3-4b763d52e2e6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=FJC+E3uhj1W2MFTmj3ojedsNmOVTANv3e34M9qGJXtM=;
-        b=k9343CttsolN9GsMPr2aOKzLXd90TLGa6ZLkyjGdncv3QQYg2LKLIXjo4a+mDhfFv4
-         P//UuSbTLM+U3QCH8tLUw/lKu3fRL4MkkniHIUcX1CuKKoskm674+IX+bA4GPuiLs5v8
-         vsc7CRHFE5KRxusiqzL5djvJXTrEyBU8vv2aY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=FJC+E3uhj1W2MFTmj3ojedsNmOVTANv3e34M9qGJXtM=;
-        b=kcfDKuw9nM2y6NYNid4pZaYjOEZVTTPKD0esK4VKtgPx1q1rU/gnAk3yeJADU81Jsr
-         thnj1ULdxxm735GQI2lfsFbbkbmEFXNv+TDjKqylgybFU5euVbt/LN82mdjfmwXMG+Bn
-         MHuQwEzyUSkQ08Ytuw2pMgXaz7/qHevnh9i8MykmbX8dEyBeU/lgzrBpdgtHKcplExiM
-         0AQufPrHrKB4zoEvFUh6qrtNAqS8dVv2GNsdzFZGpx6da6azJJhG+BHDJoC/zZ7CgloK
-         Z+ZrwtixRMsOFwidf3RNjWiCRXMjkj/5yfdWlGRXtFRP8Gals/axxdvo6ZYAlTvlOvTi
-         VHMQ==
-X-Gm-Message-State: AOAM532VTSl8jz7jOvSsJrbTQU3qrRhMuXoWPXVVR0WGXjFtTvKenoKH
-	8ASHSUNcX1uH8rb+Qz2fYK5pkA==
-X-Google-Smtp-Source: ABdhPJwd3oGOnal6zCAQgmfEPECLQv7ZEkCh4nTH0wfMV26ZVTXigImmyLVW/uGw7lbQKlKuFvK+pg==
-X-Received: by 2002:aa7:9001:0:b029:2d4:9408:9998 with SMTP id m1-20020aa790010000b02902d494089998mr3732041pfo.9.1621320185567;
-        Mon, 17 May 2021 23:43:05 -0700 (PDT)
-From: Claire Chang <tientzu@chromium.org>
-To: Rob Herring <robh+dt@kernel.org>,
-	mpe@ellerman.id.au,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Frank Rowand <frowand.list@gmail.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	Christoph Hellwig <hch@lst.de>,
-	Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: benh@kernel.crashing.org,
-	paulus@samba.org,
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
-	sstabellini@kernel.org,
-	Robin Murphy <robin.murphy@arm.com>,
-	grant.likely@arm.com,
-	xypron.glpk@gmx.de,
-	Thierry Reding <treding@nvidia.com>,
-	mingo@kernel.org,
-	bauerman@linux.ibm.com,
-	peterz@infradead.org,
-	Greg KH <gregkh@linuxfoundation.org>,
-	Saravana Kannan <saravanak@google.com>,
-	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
-	heikki.krogerus@linux.intel.com,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	linux-devicetree <devicetree@vger.kernel.org>,
-	lkml <linux-kernel@vger.kernel.org>,
-	linuxppc-dev@lists.ozlabs.org,
-	xen-devel@lists.xenproject.org,
-	Nicolas Boichat <drinkcat@chromium.org>,
-	Jim Quinlan <james.quinlan@broadcom.com>,
-	tfiga@chromium.org,
-	bskeggs@redhat.com,
-	bhelgaas@google.com,
-	chris@chris-wilson.co.uk,
-	tientzu@chromium.org,
-	daniel@ffwll.ch,
-	airlied@linux.ie,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	jani.nikula@linux.intel.com,
-	jxgao@google.com,
-	joonas.lahtinen@linux.intel.com,
-	linux-pci@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com,
-	matthew.auld@intel.com,
-	rodrigo.vivi@intel.com,
-	thomas.hellstrom@linux.intel.com
-Subject: [PATCH v7 04/15] swiotlb: Add restricted DMA pool initialization
-Date: Tue, 18 May 2021 14:42:04 +0800
-Message-Id: <20210518064215.2856977-5-tientzu@chromium.org>
-X-Mailer: git-send-email 2.31.1.751.gd2f1c929bd-goog
-In-Reply-To: <20210518064215.2856977-1-tientzu@chromium.org>
-References: <20210518064215.2856977-1-tientzu@chromium.org>
+X-Inumbo-ID: 165d5409-afab-4c53-bb8a-598367cd407a
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1621320194; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=VzK2ZTcLLJDRr8iwYOgO5IkRKWhEI6GtSBSnkGnGsuw=;
+	b=V3Uq6X1wYQTp72X7hH0jhJII2jlkExGEwnAFl5Gh/635CcyxLzwd5f4of+3gvfvq/UEE49
+	5ZoE6ikVWVB6FpcVnl8s4pwzTHOGWS0+FFMfpG26NsRVMKvDCET/9NmkcVs5JmosCC9fSF
+	1k/5DCAx75qFQx5e77b9RRAtO/cont4=
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <20210514084133.18658-1-jgross@suse.com>
+ <1e38cce0-6960-ac21-b349-dac8551e23ed@xen.org>
+ <fe5f1e6a-1a89-ea12-feb5-318f25d4281f@suse.com>
+ <39860a0c-5ac5-2537-532f-6ce288cc7219@xen.org>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] tools/xenstore: claim resources when running as daemon
+Message-ID: <e69f7d4c-a616-1265-e909-fd14feea7412@suse.com>
+Date: Tue, 18 May 2021 08:43:13 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <39860a0c-5ac5-2537-532f-6ce288cc7219@xen.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="EvWBj5DGzB9c3mKJmXnOmy6KaTqJ3rTZ2"
 
-Add the initialization function to create restricted DMA pools from
-matching reserved-memory nodes.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--EvWBj5DGzB9c3mKJmXnOmy6KaTqJ3rTZ2
+Content-Type: multipart/mixed; boundary="VJrYLzHbQdpGNORZDll3pY5qyJ71kjhfA";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Message-ID: <e69f7d4c-a616-1265-e909-fd14feea7412@suse.com>
+Subject: Re: [PATCH] tools/xenstore: claim resources when running as daemon
+References: <20210514084133.18658-1-jgross@suse.com>
+ <1e38cce0-6960-ac21-b349-dac8551e23ed@xen.org>
+ <fe5f1e6a-1a89-ea12-feb5-318f25d4281f@suse.com>
+ <39860a0c-5ac5-2537-532f-6ce288cc7219@xen.org>
+In-Reply-To: <39860a0c-5ac5-2537-532f-6ce288cc7219@xen.org>
 
-Signed-off-by: Claire Chang <tientzu@chromium.org>
----
- include/linux/device.h  |  4 +++
- include/linux/swiotlb.h |  3 +-
- kernel/dma/swiotlb.c    | 76 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 82 insertions(+), 1 deletion(-)
+--VJrYLzHbQdpGNORZDll3pY5qyJ71kjhfA
+Content-Type: multipart/mixed;
+ boundary="------------EE5529C996EC7D209640BC13"
+Content-Language: en-US
 
-diff --git a/include/linux/device.h b/include/linux/device.h
-index 38a2071cf776..4987608ea4ff 100644
---- a/include/linux/device.h
-+++ b/include/linux/device.h
-@@ -416,6 +416,7 @@ struct dev_links_info {
-  * @dma_pools:	Dma pools (if dma'ble device).
-  * @dma_mem:	Internal for coherent mem override.
-  * @cma_area:	Contiguous memory area for dma allocations
-+ * @dma_io_tlb_mem: Internal for swiotlb io_tlb_mem override.
-  * @archdata:	For arch-specific additions.
-  * @of_node:	Associated device tree node.
-  * @fwnode:	Associated device node supplied by platform firmware.
-@@ -521,6 +522,9 @@ struct device {
- #ifdef CONFIG_DMA_CMA
- 	struct cma *cma_area;		/* contiguous memory area for dma
- 					   allocations */
-+#endif
-+#ifdef CONFIG_DMA_RESTRICTED_POOL
-+	struct io_tlb_mem *dma_io_tlb_mem;
- #endif
- 	/* arch specific additions */
- 	struct dev_archdata	archdata;
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 216854a5e513..03ad6e3b4056 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -72,7 +72,8 @@ extern enum swiotlb_force swiotlb_force;
-  *		range check to see if the memory was in fact allocated by this
-  *		API.
-  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
-- *		@end. This is command line adjustable via setup_io_tlb_npages.
-+ *		@end. For default swiotlb, this is command line adjustable via
-+ *		setup_io_tlb_npages.
-  * @used:	The number of used IO TLB block.
-  * @list:	The free list describing the number of free entries available
-  *		from each index.
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index b849b01a446f..1d8eb4de0d01 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -39,6 +39,13 @@
- #ifdef CONFIG_DEBUG_FS
- #include <linux/debugfs.h>
- #endif
-+#ifdef CONFIG_DMA_RESTRICTED_POOL
-+#include <linux/io.h>
-+#include <linux/of.h>
-+#include <linux/of_fdt.h>
-+#include <linux/of_reserved_mem.h>
-+#include <linux/slab.h>
-+#endif
- 
- #include <asm/io.h>
- #include <asm/dma.h>
-@@ -690,3 +697,72 @@ static int __init swiotlb_create_default_debugfs(void)
- late_initcall(swiotlb_create_default_debugfs);
- 
- #endif
-+
-+#ifdef CONFIG_DMA_RESTRICTED_POOL
-+static int rmem_swiotlb_device_init(struct reserved_mem *rmem,
-+				    struct device *dev)
-+{
-+	struct io_tlb_mem *mem = rmem->priv;
-+	unsigned long nslabs = rmem->size >> IO_TLB_SHIFT;
-+
-+	if (dev->dma_io_tlb_mem)
-+		return 0;
-+
-+	/*
-+	 * Since multiple devices can share the same pool, the private data,
-+	 * io_tlb_mem struct, will be initialized by the first device attached
-+	 * to it.
-+	 */
-+	if (!mem) {
-+		mem = kzalloc(struct_size(mem, slots, nslabs), GFP_KERNEL);
-+		if (!mem)
-+			return -ENOMEM;
-+
-+		if (PageHighMem(pfn_to_page(PHYS_PFN(rmem->base)))) {
-+			kfree(mem);
-+			return -EINVAL;
-+		}
-+
-+		swiotlb_init_io_tlb_mem(mem, rmem->base, nslabs, false);
-+
-+		rmem->priv = mem;
-+
-+		if (IS_ENABLED(CONFIG_DEBUG_FS))
-+			swiotlb_create_debugfs(mem, rmem->name);
-+	}
-+
-+	dev->dma_io_tlb_mem = mem;
-+
-+	return 0;
-+}
-+
-+static void rmem_swiotlb_device_release(struct reserved_mem *rmem,
-+					struct device *dev)
-+{
-+	if (dev)
-+		dev->dma_io_tlb_mem = NULL;
-+}
-+
-+static const struct reserved_mem_ops rmem_swiotlb_ops = {
-+	.device_init = rmem_swiotlb_device_init,
-+	.device_release = rmem_swiotlb_device_release,
-+};
-+
-+static int __init rmem_swiotlb_setup(struct reserved_mem *rmem)
-+{
-+	unsigned long node = rmem->fdt_node;
-+
-+	if (of_get_flat_dt_prop(node, "reusable", NULL) ||
-+	    of_get_flat_dt_prop(node, "linux,cma-default", NULL) ||
-+	    of_get_flat_dt_prop(node, "linux,dma-default", NULL) ||
-+	    of_get_flat_dt_prop(node, "no-map", NULL))
-+		return -EINVAL;
-+
-+	rmem->ops = &rmem_swiotlb_ops;
-+	pr_info("Reserved memory: created device swiotlb memory pool at %pa, size %ld MiB\n",
-+		&rmem->base, (unsigned long)rmem->size / SZ_1M);
-+	return 0;
-+}
-+
-+RESERVEDMEM_OF_DECLARE(dma, "restricted-dma-pool", rmem_swiotlb_setup);
-+#endif /* CONFIG_DMA_RESTRICTED_POOL */
--- 
-2.31.1.751.gd2f1c929bd-goog
+This is a multi-part message in MIME format.
+--------------EE5529C996EC7D209640BC13
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
+On 17.05.21 17:55, Julien Grall wrote:
+> Hi Juergen,
+>=20
+> On 17/05/2021 07:47, Juergen Gross wrote:
+>> On 14.05.21 22:19, Julien Grall wrote:
+>>> Hi Juergen,
+>>>
+>>> On 14/05/2021 09:41, Juergen Gross wrote:
+>>>> Xenstored is absolutely mandatory for a Xen host and it can't be
+>>>> restarted, so being killed by OOM-killer in case of memory shortage =
+is
+>>>> to be avoided.
+>>>>
+>>>> Set /proc/$pid/oom_score_adj (if available) to -500 in order to allo=
+w
+>>>> xenstored to use large amounts of memory without being killed.
+>>>>
+>>>> In order to support large numbers of domains the limit for open file=
+
+>>>> descriptors might need to be raised. Each domain needs 2 file
+>>>> descriptors (one for the event channel and one for the xl per-domain=
+
+>>>> daemon to connect to xenstored).
+>>>
+>>> Hmmm... AFAICT there is only one file descriptor to handle all the=20
+>>> event channels. Could you point out the code showing one event FD per=20
+
+>>> domain?
+>>
+>> I have let me fooled by just counting the file descriptors used with o=
+ne
+>> or two domain active.
+>>
+>> So you are right that all event channels only use one fd, but each xl
+>> daemon will use two (which should be fixed, IMO). And thinking more
+>> about it it is even worse: each qemu process will at least require one=
+
+>> additional fd.
+>>
+>>>
+>>>>
+>>>> Try to raise ulimit for open files to 65536. First the hard limit if=
+
+>>>> needed, and then the soft limit.
+>>>
+>>> I am not sure this is right to impose this limit to everyone. For=20
+>>> instance, one admin may know that there will be no more than 100=20
+>>> domains on its system.
+>>
+>> Is setting a higher limit really a problem?
+>=20
+> I am quite unease to set a limit that nearly nobody will reach unless=20
+> something went horribly wrong on the system.
+
+Hmm, I really don't see the downside of having the possibility to let
+xenstored open lots of files.
+
+Anyway we can do it via prlimit if you like that better.
+
+>=20
+>>
+>>> So the admin should be able to configure them. At this point, I think=20
+
+>>> the two limit should be set my the initscript rather than xenstored=20
+>>> itself.
+>>
+>> But the admin would need to know the Xen internals for selecting the
+>> correct limits. In the end I'd be fine with moving this modification t=
+o
+>> the script starting Xenstore (which would be launch-xenstore), but the=
+
+>> configuration item should be "max number of domains to support".
+>=20
+> I would be fine with "max numer of domains to support". What I care the=20
+
+> most here is the limits are actually applied most of (if not all) the t=
+ime.
+
+I did another test and found:
+
+- the xl daemon for a guest will use 2 socket connections
+- qemu for a HVM guest will use 3 socket connections
+- qemu for a PV guest is using one socket connection
+- 14 other files are used by xenstored
+
+So we should set the limit to 5 * n_dom + 100 (some headroom will be
+nice IMO).
+
+>=20
+>>
+>>>
+>>> This would also avoid the problem where Xenstored is not allowed to=20
+>>> modify its limit (see more below).
+>>>
+>>>>
+>>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>>> ---
+>>>> =C2=A0 tools/xenstore/xenstored_core.c=C2=A0=C2=A0 |=C2=A0 2 ++
+>>>> =C2=A0 tools/xenstore/xenstored_core.h=C2=A0=C2=A0 |=C2=A0 3 ++
+>>>> =C2=A0 tools/xenstore/xenstored_minios.c |=C2=A0 4 +++
+>>>> =C2=A0 tools/xenstore/xenstored_posix.c=C2=A0 | 46=20
+>>>> +++++++++++++++++++++++++++++++
+>>>> =C2=A0 4 files changed, 55 insertions(+)
+>>>>
+>>>> diff --git a/tools/xenstore/xenstored_core.c=20
+>>>> b/tools/xenstore/xenstored_core.c
+>>>> index b66d119a98..964e693450 100644
+>>>> --- a/tools/xenstore/xenstored_core.c
+>>>> +++ b/tools/xenstore/xenstored_core.c
+>>>> @@ -2243,6 +2243,8 @@ int main(int argc, char *argv[])
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xprintf =3D t=
+race;
+>>>> =C2=A0 #endif
+>>>> +=C2=A0=C2=A0=C2=A0 claim_resources();
+>>>> +
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 signal(SIGHUP, trigger_reopen_log);
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (tracefile)
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tracefile =3D=20
+talloc_strdup(NULL, tracefile);
+>>>> diff --git a/tools/xenstore/xenstored_core.h=20
+>>>> b/tools/xenstore/xenstored_core.h
+>>>> index 1467270476..ac26973648 100644
+>>>> --- a/tools/xenstore/xenstored_core.h
+>>>> +++ b/tools/xenstore/xenstored_core.h
+>>>> @@ -255,6 +255,9 @@ void daemonize(void);
+>>>> =C2=A0 /* Close stdin/stdout/stderr to complete daemonize */
+>>>> =C2=A0 void finish_daemonize(void);
+>>>> +/* Set OOM-killer score and raise ulimit. */
+>>>> +void claim_resources(void);
+>>>> +
+>>>> =C2=A0 /* Open a pipe for signal handling */
+>>>> =C2=A0 void init_pipe(int reopen_log_pipe[2]);
+>>>> diff --git a/tools/xenstore/xenstored_minios.c=20
+>>>> b/tools/xenstore/xenstored_minios.c
+>>>> index c94493e52a..df8ff580b0 100644
+>>>> --- a/tools/xenstore/xenstored_minios.c
+>>>> +++ b/tools/xenstore/xenstored_minios.c
+>>>> @@ -32,6 +32,10 @@ void finish_daemonize(void)
+>>>> =C2=A0 {
+>>>> =C2=A0 }
+>>>> +void claim_resources(void)
+>>>> +{
+>>>> +}
+>>>> +
+>>>> =C2=A0 void init_pipe(int reopen_log_pipe[2])
+>>>> =C2=A0 {
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reopen_log_pipe[0] =3D -1;
+>>>> diff --git a/tools/xenstore/xenstored_posix.c=20
+>>>> b/tools/xenstore/xenstored_posix.c
+>>>> index 48c37ffe3e..0074fbd8b2 100644
+>>>> --- a/tools/xenstore/xenstored_posix.c
+>>>> +++ b/tools/xenstore/xenstored_posix.c
+>>>> @@ -22,6 +22,7 @@
+>>>> =C2=A0 #include <fcntl.h>
+>>>> =C2=A0 #include <stdlib.h>
+>>>> =C2=A0 #include <sys/mman.h>
+>>>> +#include <sys/resource.h>
+>>>> =C2=A0 #include "utils.h"
+>>>> =C2=A0 #include "xenstored_core.h"
+>>>> @@ -87,6 +88,51 @@ void finish_daemonize(void)
+>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 close(devnull);
+>>>> =C2=A0 }
+>>>> +static void avoid_oom_killer(void)
+>>>> +{
+>>>> +=C2=A0=C2=A0=C2=A0 char path[32];
+>>>> +=C2=A0=C2=A0=C2=A0 char val[] =3D "-500";
+>>>> +=C2=A0=C2=A0=C2=A0 int fd;
+>>>> +
+>>>> +=C2=A0=C2=A0=C2=A0 snprintf(path, sizeof(path), "/proc/%d/oom_score=
+_adj",=20
+>>>> (int)getpid());
+>>>
+>>> This looks Linux specific. How about other OSes?
+>>
+>> I don't know whether other OSes have an OOM killer, and if they do, ho=
+w
+>> to configure it. It is a best effort attempt, after all.
+>=20
+> I have CCed Roger who should be able to help for FreeBSD.
+
+It would be possible to set the OOM-score from the launch script, too.
+
+>=20
+>>
+>>>
+>>>> +
+>>>> +=C2=A0=C2=A0=C2=A0 fd =3D open(path, O_WRONLY);
+>>>> +=C2=A0=C2=A0=C2=A0 /* Do nothing if file doesn't exist. */
+>>>
+>>> Your commit message leads to think that we *must* configure the OOM. =
+
+>>> If not, then we should not continue. But here, this suggest this is=20
+>>> optional. In fact...
+>>
+>> I can modify the commit message by adding a "Try to".
+>>
+>>>
+>>>> +=C2=A0=C2=A0=C2=A0 if (fd < 0)
+>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+>>>> +=C2=A0=C2=A0=C2=A0 /* Ignore errors. */
+>>>> +=C2=A0=C2=A0=C2=A0 write(fd, val, sizeof(val));
+>>>
+>>> ... xenstored may not be allowed to modify its own parameters. So=20
+>>> this would continue silently without the admin necessarily knowning=20
+>>> the limit wasn't applied.
+>>
+>> I can add a line in the Xenstore log in this regard.
+>=20
+> This feels wrong to me. If a limit cannot be applied then it should fai=
+l=20
+> early rather than possibly at the wrong moment a few days (months?) aft=
+er.
+
+I think issuing a warning would be better here. We are running with
+no OOM adjustments since years now.
+
+
+Juergen
+
+--------------EE5529C996EC7D209640BC13
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------EE5529C996EC7D209640BC13--
+
+--VJrYLzHbQdpGNORZDll3pY5qyJ71kjhfA--
+
+--EvWBj5DGzB9c3mKJmXnOmy6KaTqJ3rTZ2
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmCjYgIFAwAAAAAACgkQsN6d1ii/Ey/+
++Af/cnpYv+zhFaCbjGNy1THawZG8q2IFf580IjbSP7s5ZyfRsRtDgsvMAILd6FaTH68zqwzFHzt8
+swaT5T3XFbXCKf9FWpCp9IvEjAet7MkJ8/k7zOskVRAtNBEFAb0KIwvUKlqNcOpPzxZu7R1lb3ub
+pyfu427YMWcrtZ5wz0N7FOpq0jmrXVmsH8hSEhe02LZE7TdkYyZjmSJBEdK7bs3VUn2schhe3JOW
+n8C1ieXmp0fhKS52iauCKFo/zoFVZ9Tg6TIH9yUdbVWsoEkEf1E/u3z335+BmnjXzS8q671gcyDW
+P+ovh6Lomlps4dIDP9aeB6FL2H2JbK98ER89fUaoeQ==
+=wgOr
+-----END PGP SIGNATURE-----
+
+--EvWBj5DGzB9c3mKJmXnOmy6KaTqJ3rTZ2--
 
