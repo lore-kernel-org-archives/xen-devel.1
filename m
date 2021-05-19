@@ -2,45 +2,45 @@ Return-Path: <SRS0=uOBw=KO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D88C433ED
-	for <xen-devel@archiver.kernel.org>; Wed, 19 May 2021 12:36:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EF37C433B4
+	for <xen-devel@archiver.kernel.org>; Wed, 19 May 2021 12:37:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3F6EA610A1
-	for <xen-devel@archiver.kernel.org>; Wed, 19 May 2021 12:36:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3F6EA610A1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 54505610A1
+	for <xen-devel@archiver.kernel.org>; Wed, 19 May 2021 12:37:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 54505610A1
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.130052.243832 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.130057.243844 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ljLR2-000824-3c; Wed, 19 May 2021 12:36:24 +0000
+	id 1ljLRg-00009H-Ck; Wed, 19 May 2021 12:37:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 130052.243832; Wed, 19 May 2021 12:36:24 +0000
+Received: by outflank-mailman (output) from mailman id 130057.243844; Wed, 19 May 2021 12:37:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ljLR2-00081x-0Z; Wed, 19 May 2021 12:36:24 +0000
-Received: by outflank-mailman (input) for mailman id 130052;
- Wed, 19 May 2021 12:36:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ljLRg-00009A-9T; Wed, 19 May 2021 12:37:04 +0000
+Received: by outflank-mailman (input) for mailman id 130057;
+ Wed, 19 May 2021 12:37:03 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=fOiY=KO=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1ljLR1-00081r-K2
- for xen-devel@lists.xenproject.org; Wed, 19 May 2021 12:36:23 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9d8f5961-0bb4-4ea0-b448-0f7260d7ff8e;
- Wed, 19 May 2021 12:36:22 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 836D9ACAD;
- Wed, 19 May 2021 12:36:21 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1ljLRf-000092-LM
+ for xen-devel@lists.xenproject.org; Wed, 19 May 2021 12:37:03 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1ljLRd-0001UU-R9; Wed, 19 May 2021 12:37:01 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1ljLRd-0001OZ-Lc; Wed, 19 May 2021 12:37:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,70 +52,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d8f5961-0bb4-4ea0-b448-0f7260d7ff8e
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1621427781; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=s0i22D5OWmS40N801WsJtN48/IEfxSCZBm0fibDvw7o=;
-	b=UbDiE9ZWbJR9icdJBPrSKwbEKr1Xv6WjWGs7h0XRL8k7DGcvGDs6lsD2oCghlv2ThIxE4p
-	FdANSZcPMqlxtosheungWoNKfAw6henA6FL0L37P0BjlJZJh7jBkjTUx08KWG8cZMGvxJ5
-	Bnc7QBNYspOO5wDKcYSz3xiYGXyX3ig=
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/shadow: fix DO_UNSHADOW()
-Message-ID: <cdee4753-674d-23a3-7b94-fed9f2bdd0c1@suse.com>
-Date: Wed, 19 May 2021 14:36:22 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=i0JrGOKKtE5fuHn0dNGcL+2YqLV56zteMLqCjUw10Kw=; b=5XgRdbRqu9tox0AZoqdgtADnDY
+	Vs547cZegxiwwv3iyZcDq2xq4tpYigkM2tPWlygEud1A1xmcOgCI9ujf1a5k/sixh80A0Inum4vy2
+	eFFZHanP2H0LRMQi5aAFVSYbDyUYSt5BJ1QeDLEs4MleXsckGe23Kgg89WTdzjsXG830=;
+Subject: Re: [PATCH] tools/libs: guest: Fix Arm build after 8fc4916daf2a
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Julien Grall <jgrall@amazon.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>
+References: <20210518170339.29706-1-julien@xen.org>
+ <6d77f58a-06d6-aadf-0451-b46020169004@citrix.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <8f2513b6-57a7-692d-8211-213a41ef7af6@xen.org>
+Date: Wed, 19 May 2021 13:36:58 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.10.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <6d77f58a-06d6-aadf-0451-b46020169004@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-When adding the HASH_CALLBACKS_CHECK() I failed to properly recognize
-the (somewhat unusually formatted) if() around the call to
-hash_domain_foreach()). Gcc 11 is absolutely right in pointing out the
-apparently misleading indentation. Besides adding the missing braces,
-also adjust the two oddly formatted if()-s in the macro.
+Hi,
 
-Fixes: 90629587e16e ("x86/shadow: replace stale literal numbers in hash_{vcpu,domain}_foreach()")
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-I'm puzzled as to why this bug didn't cause any fallout.
+On 18/05/2021 18:05, Andrew Cooper wrote:
+> On 18/05/2021 18:03, Julien Grall wrote:
+>> From: Julien Grall <jgrall@amazon.com>
+>>
+>> Gitlab CI spotted an issue when building the tools Arm:
+>>
+>> xg_dom_arm.c: In function 'meminit':
+>> xg_dom_arm.c:401:50: error: passing argument 3 of 'set_mode' discards 'const' qualifier from pointer target type [-Werror=discarded-qualifiers]
+>>    401 |     rc = set_mode(dom->xch, dom->guest_domid, dom->guest_type);
+>>        |                                               ~~~^~~~~~~~~~~~
+>>
+>> This is because the const was not propagated in the Arm code. Fix it
+>> by constifying the 3rd parameter of set_mode().
+>>
+>> Fixes: 8fc4916daf2a ("tools/libs: guest: Use const whenever we point to literal strings")
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+> 
+> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -2220,8 +2220,8 @@ void sh_remove_shadows(struct domain *d,
-      */
- #define DO_UNSHADOW(_type) do {                                         \
-     t = (_type);                                                        \
--    if( !(pg->count_info & PGC_page_table)                              \
--        || !(pg->shadow_flags & (1 << t)) )                             \
-+    if ( !(pg->count_info & PGC_page_table) ||                          \
-+         !(pg->shadow_flags & (1 << t)) )                               \
-         break;                                                          \
-     smfn = shadow_hash_lookup(d, mfn_x(gmfn), t);                       \
-     if ( unlikely(!mfn_valid(smfn)) )                                   \
-@@ -2235,11 +2235,13 @@ void sh_remove_shadows(struct domain *d,
-         sh_unpin(d, smfn);                                              \
-     else if ( sh_type_has_up_pointer(d, t) )                            \
-         sh_remove_shadow_via_pointer(d, smfn);                          \
--    if( !fast                                                           \
--        && (pg->count_info & PGC_page_table)                            \
--        && (pg->shadow_flags & (1 << t)) )                              \
-+    if ( !fast &&                                                       \
-+         (pg->count_info & PGC_page_table) &&                           \
-+         (pg->shadow_flags & (1 << t)) )                                \
-+    {                                                                   \
-         HASH_CALLBACKS_CHECK(SHF_page_type_mask);                       \
-         hash_domain_foreach(d, masks[t], callbacks, smfn);              \
-+    }                                                                   \
- } while (0)
- 
-     DO_UNSHADOW(SH_type_l2_32_shadow);
+Thanks! I have committed with just your ack to unblock the build.
+
+CHeers,
+
+-- 
+Julien Grall
 
