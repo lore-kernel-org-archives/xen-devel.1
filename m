@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 318A8C433ED
-	for <xen-devel@archiver.kernel.org>; Thu, 20 May 2021 09:19:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B98B7C43460
+	for <xen-devel@archiver.kernel.org>; Thu, 20 May 2021 09:27:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EEE8F61261
-	for <xen-devel@archiver.kernel.org>; Thu, 20 May 2021 09:19:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEE8F61261
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 835E0613D8
+	for <xen-devel@archiver.kernel.org>; Thu, 20 May 2021 09:27:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 835E0613D8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.130808.244817 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.130818.244828 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ljept-0005dy-TB; Thu, 20 May 2021 09:19:21 +0000
+	id 1ljexg-0007AN-Pc; Thu, 20 May 2021 09:27:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 130808.244817; Thu, 20 May 2021 09:19:21 +0000
+Received: by outflank-mailman (output) from mailman id 130818.244828; Thu, 20 May 2021 09:27:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ljept-0005dr-QB; Thu, 20 May 2021 09:19:21 +0000
-Received: by outflank-mailman (input) for mailman id 130808;
- Thu, 20 May 2021 09:19:20 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1ljexg-0007AG-KN; Thu, 20 May 2021 09:27:24 +0000
+Received: by outflank-mailman (input) for mailman id 130818;
+ Thu, 20 May 2021 09:27:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ljeps-0005db-IC
- for xen-devel@lists.xenproject.org; Thu, 20 May 2021 09:19:20 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ljeps-0004wh-AD; Thu, 20 May 2021 09:19:20 +0000
-Received: from [54.239.6.190] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ljeps-00025V-42; Thu, 20 May 2021 09:19:20 +0000
+ (envelope-from <SRS0=3HBq=KP=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ljexf-0007AA-3O
+ for xen-devel@lists.xenproject.org; Thu, 20 May 2021 09:27:23 +0000
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 00e0c74f-3340-4325-be5a-8eafe6f91952;
+ Thu, 20 May 2021 09:27:22 +0000 (UTC)
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 6CD17AE81;
+ Thu, 20 May 2021 09:27:21 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,200 +51,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=firLHKP4Voz3HrLDZC1dRE0JFIHHVE23ghAiJeGPvpk=; b=NL8SBtDqghWMVB6WoY/NdOEDVn
-	nYTi/pw+/+5M5IsQa6WaxMwsZ/Tk+/03o7PnmgujZk6GBA+MseukGQAfFIRzZIUttwTJNlioIH2CJ
-	Z675fhbVhpvQRWRLk7CEp05FToWld3jUuKO0rii8bsVIJBI4TANvViAKFEwL2Q+KLjAw=;
-Subject: Re: [PATCH] Xen: Design doc for 1:1 direct-map and static allocation
-To: Penny Zheng <Penny.Zheng@arm.com>,
+X-Inumbo-ID: 00e0c74f-3340-4325-be5a-8eafe6f91952
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1621502841; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=7rqhgH9R9B73ijK+Qc/m24+QJNhL73dhbh8I92A83hI=;
+	b=ssiW7HuR6VuDhLIudyXNbhAV165+/yUOINVmdBJPkP8WqLcNoiN8AOtKJBbZ+nQfCHpM1U
+	xKHfeJP9KHfu5WpHvPwYsuz3GgupGVwlyWbNCbesGicGw2X/S/Nd0tJ6dvBooobkjHXvdy
+	AhZha3fFAbxoREIWUt7brmFhc9heTJQ=
+Subject: Re: [PATCH 03/10] xen/arm: introduce PGC_reserved
+To: Julien Grall <julien@xen.org>, Penny Zheng <Penny.Zheng@arm.com>
+Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
+ nd <nd@arm.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  "sstabellini@kernel.org" <sstabellini@kernel.org>
-Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
- nd <nd@arm.com>
-References: <20210518050738.163156-1-penny.zheng@arm.com>
- <7ab73cb0-39d5-f8bf-660f-b3d77f3247bd@xen.org>
- <VE1PR08MB52152E43D11EB446000F4563F72A9@VE1PR08MB5215.eurprd08.prod.outlook.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <f0b798f4-8fa6-9906-9971-36fd5205ae74@xen.org>
-Date: Thu, 20 May 2021 10:19:17 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.2
+References: <20210518052113.725808-1-penny.zheng@arm.com>
+ <20210518052113.725808-4-penny.zheng@arm.com>
+ <bc6a20ef-675d-bbd6-74f7-4ecc45805ee7@xen.org>
+ <VE1PR08MB5215F3ECA8B5D9624E34A794F72B9@VE1PR08MB5215.eurprd08.prod.outlook.com>
+ <2f4eb08e-261b-70c4-bcbc-e08db36a50a9@xen.org>
+ <VE1PR08MB52155DD56E548E98AE937CE8F72A9@VE1PR08MB5215.eurprd08.prod.outlook.com>
+ <VE1PR08MB5215E19BFE3E7F329229D8E7F72A9@VE1PR08MB5215.eurprd08.prod.outlook.com>
+ <44b46f35-cc51-9274-77f2-cfd18c998a38@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <b53c5ef5-ccab-a472-1edc-63082d89f09a@suse.com>
+Date: Thu, 20 May 2021 11:27:20 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.2
 MIME-Version: 1.0
-In-Reply-To: <VE1PR08MB52152E43D11EB446000F4563F72A9@VE1PR08MB5215.eurprd08.prod.outlook.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+In-Reply-To: <44b46f35-cc51-9274-77f2-cfd18c998a38@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-
-
-On 20/05/2021 06:36, Penny Zheng wrote:
-> Hi Julien
-
-Hi Penny,
-
->>> +
->>> +Later, when domain get destroyed and memory relinquished, only pages
->>> +in `page_list` go back to heap, and pages in `reserved_page_list` shall not.
->>
->> While going through the series, I could not find any code implementing this.
->> However, this is not enough to prevent a page to go to the heap allocator
->> because a domain can release memory at runtime using hypercalls like
->> XENMEM_remove_from_physmap.
->>
->> One of the use case is when the guest decides to balloon out some memory.
->> This will call free_domheap_pages().
->>
->> Effectively, you are treating static memory as domheap pages. So I think it
->> would be better if you hook in free_domheap_pages() to decide which
->> allocator is used.
->>
->> Now, if a guest can balloon out memory, it can also balloon in memory.
->> There are two cases:
->>      1) The region used to be RAM region statically allocated
->>      2) The region used to be unallocated.
->>
->> I think for 1), we need to be able to re-use the page previously. For 2), it is
->> not clear to me whether a guest with memory statically allocated should be
->> allowed to allocate "dynamic" pages.
->>
+On 20.05.2021 10:59, Julien Grall wrote:
+> On 20/05/2021 09:40, Penny Zheng wrote:
+>> Oh, Second thought on this.
+>> And I think you are referring to balloon in/out here, hmm, also, like
 > 
-> Yeah, I share the same with you of hooking in free_domheap_pages(). I'm thinking
-> that if pages of PGC_reserved, we may create a new func free_staticmem_pages to
-> free them.
+> Yes I am referring to balloon in/out.
 > 
-> For issues on ballooning out or in, it is not supported here.
+>> I replied there:
+>> "For issues on ballooning out or in, it is not supported here.
+> 
+> So long you are not using the solution in prod then you are fine (see 
+> below)... But then we should make clear this feature is a tech preview.
+> 
+>> Domain on Static Allocation and 1:1 direct-map are all based on
+>> dom0-less right now, so no PV, grant table, event channel, etc, considered.
+>>
+>> Right now, it only supports device got passthrough into the guest."
+> 
+> So we are not creating the hypervisor node in the DT for dom0less domU. 
+> However, the hypercalls are still accessible by a domU if it really
+> wants to use them.
+> 
+> Therefore, a guest can easily mess up with your static configuration and 
+> predictability.
+> 
+> IMHO, this is a must to solve before "static memory" can be used in 
+> production.
 
-It is fine that the implementation doesn't yet implement it. However, I 
-think the design document should take into account ballooning. This is 
-because even if...
+I'm having trouble seeing why it can't be addressed right away: Such
+guests can balloon in only after they've ballooned out some pages,
+and such balloon-in requests would be satisfied from the same static
+memory that is associated by the guest anyway.
 
-> Domain on Static Allocation and 1:1 direct-map are all based on dom0-less right
-> now, so no PV, grant table, event channel, etc, considered.
-
-... there is no PV support & co, a guest is still able to issue 
-hypercalls (they are not hidden). Therefore your guest will be able to 
-disturb your static allocation.
-
-> 
-> Right now, it only supports device got passthrough into the guest.
-> 
->>> +### Memory Allocation for Domains on Static Allocation
->>> +
->>> +RAM regions pre-defined as static memory for one specifc domain shall
->>> +be parsed and reserved from the beginning. And they shall never go to
->>> +any memory allocator for any use.
->>
->> Technically, you are introducing a new allocator. So do you mean they should
->> not be given to neither the buddy allocator nor the bot allocator?
->>
-> 
-> Yes. These pre-defined RAM regions will not be given to any current
-> memory allocator. If be given there, there is no guarantee that it will
-> not be allocated for other use.
-> 
-> And right now, in my current design, these pre-defined RAM regions are either for
-> one specific domain as guest RAM or as XEN heap.
->    
->>> +
->>> +Later when allocating static memory for this specific domain, after
->>> +acquiring those reserved regions, users need to a do set of
->>> +verification before assigning.
->>> +For each page there, it at least includes the following steps:
->>> +1. Check if it is in free state and has zero reference count.
->>> +2. Check if the page is reserved(`PGC_reserved`).
->>> +
->>> +Then, assigning these pages to this specific domain, and all pages go
->>> +to one new linked page list `reserved_page_list`.
->>> +
->>> +At last, set up guest P2M mapping. By default, it shall be mapped to
->>> +the fixed guest RAM address `GUEST_RAM0_BASE`, `GUEST_RAM1_BASE`,
->>> +just like normal domains. But later in 1:1 direct-map design, if
->>> +`direct-map` is set, the guest physical address will equal to physical
->> address.
->>> +
->>> +### Static Allocation for Xen itself
->>> +
->>> +### New Deivce Tree Node: `xen,reserved_heap`
->>
->> s/Deivce/Device/
->>
-> 
-> Thx.
-> 
->>> +
->>> +Static memory for Xen heap refers to parts of RAM reserved in the
->>> +beginning for Xen heap only. The memory is pre-defined through XEN
->>> +configuration using physical address ranges.
->>> +
->>> +The reserved memory for Xen heap is an optional feature and can be
->>> +enabled by adding a device tree property in the `chosen` node.
->>> +Currently, this feature is only supported on AArch64.
->>> +
->>> +Here is one example:
->>> +
->>> +
->>> +        chosen {
->>> +            xen,reserved-heap = <0x0 0x30000000 0x0 0x40000000>;
->>> +            ...
->>> +        };
->>> +
->>> +RAM at 0x30000000 of 1G size will be reserved as heap memory. Later,
->>> +heap allocator will allocate memory only from this specific region.
->>
->> This section is quite confusing. I think we need to clearly differentiate heap vs
->> allocator.
->>
->> In Xen we have two heaps:
->>      1) Xen heap: It is always mapped in Xen virtual address space. This is
->> mainly used for xen internal allocation.
->>      2) Domain heap: It may not always be mapped in Xen virtual address space.
->> This is mainly used for domain memory and mapped on-demand.
->>
->> For Arm64 (and x86), two heaps are allocated from the same region. But on
->> Arm32, they are different.
->>
->> We also have two allocator:
->>      1) Boot allocator: This is used during boot only. There is no concept of
->> heap at this time.
->>      2) Buddy allocator: This is the current runtime allocator. This can either
->> allocator from either heap.
->>
->> AFAICT, this design is introducing a 3rd allocator that will return domain heap
->> pages.
->>
->> Now, back to this section, are you saying you will separate the two heaps and
->> force the buddy allocator to allocate xen heap pages from a specific region?
->>
->> [...]
-> 
-> I will try to explain clearly here.
-> The intention behind this reserved heap is that for supporting total static system, we
-> not only want to pre-define memory resource for guests, but also for xen runtime
-> allocation. Any runtime behavior are more predictable.
-> 
-> Right now, on AArch64, all RAM, except reserved memory, will be given to buddy
-> allocator as heap,  like you said, guest RAM for normal domain will be allocated
-> from there, xmalloc eventually is get memory from there, etc. So we want to refine
-> the heap here, not iterating through bootinfo.mem to set up XEN heap, but like
-> iterating bootinfo. reserved_heap to set up XEN heap.
-
-So effectively, you want to move to a split heap like on Arm32. Is that 
-correct?
-
-But let's take a step back from the actual code (this is implementation 
-details). If the Device-Tree describes all the regions statically 
-allocated to domains, why can't the memory used by Xen heap be the left 
-over?
-
-> 
-> True, on ARM32, xen heap and domain heap are separately mapped, which is more
-> complicated here. That's why I only talking about implementing these features on
-> AArch64 as first step.
-
-Cheers,
-
--- 
-Julien Grall
+Jan
 
