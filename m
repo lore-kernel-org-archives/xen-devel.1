@@ -2,62 +2,47 @@ Return-Path: <SRS0=XOLk=KQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADBA5C433ED
-	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 05:27:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2442C433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 06:34:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5820560C3E
-	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 05:27:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5820560C3E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
+	by mail.kernel.org (Postfix) with ESMTPS id 86D79613B6
+	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 06:34:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86D79613B6
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.131113.245225 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.131127.245235 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ljxgs-0003s8-Mz; Fri, 21 May 2021 05:27:18 +0000
+	id 1ljyjI-0002QB-Nf; Fri, 21 May 2021 06:33:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 131113.245225; Fri, 21 May 2021 05:27:18 +0000
+Received: by outflank-mailman (output) from mailman id 131127.245235; Fri, 21 May 2021 06:33:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ljxgs-0003ry-Jv; Fri, 21 May 2021 05:27:18 +0000
-Received: by outflank-mailman (input) for mailman id 131113;
- Fri, 21 May 2021 05:27:17 +0000
+	id 1ljyjI-0002Q4-Ki; Fri, 21 May 2021 06:33:52 +0000
+Received: by outflank-mailman (input) for mailman id 131127;
+ Fri, 21 May 2021 06:33:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Y0JZ=KQ=amazon.com=prvs=768a5fbb6=anchalag@srs-us1.protection.inumbo.net>)
- id 1ljxgr-0003lt-E8
- for xen-devel@lists.xenproject.org; Fri, 21 May 2021 05:27:17 +0000
-Received: from smtp-fw-80006.amazon.com (unknown [99.78.197.217])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6e96726c-88cc-436d-81cf-aa9999cb611b;
- Fri, 21 May 2021 05:27:16 +0000 (UTC)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-1a-e34f1ddc.us-east-1.amazon.com) ([10.25.36.210])
- by smtp-border-fw-80006.pdx80.corp.amazon.com with ESMTP;
- 21 May 2021 05:27:14 +0000
-Received: from EX13MTAUWA001.ant.amazon.com
- (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
- by email-inbound-relay-1a-e34f1ddc.us-east-1.amazon.com (Postfix) with ESMTPS
- id 84D9AA1E62; Fri, 21 May 2021 05:27:07 +0000 (UTC)
-Received: from EX13D07UWA004.ant.amazon.com (10.43.160.32) by
- EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
- id 15.0.1497.18; Fri, 21 May 2021 05:26:51 +0000
-Received: from EX13MTAUWA001.ant.amazon.com (10.43.160.58) by
- EX13D07UWA004.ant.amazon.com (10.43.160.32) with Microsoft SMTP Server (TLS)
- id 15.0.1497.18; Fri, 21 May 2021 05:26:51 +0000
-Received: from dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com
- (172.22.96.68) by mail-relay.amazon.com (10.43.160.118) with Microsoft SMTP
- Server id 15.0.1497.18 via Frontend Transport; Fri, 21 May 2021 05:26:51
- +0000
-Received: by dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com (Postfix,
- from userid 4335130)
- id F1AC340124; Fri, 21 May 2021 05:26:50 +0000 (UTC)
+ <SRS0=eRHa=KQ=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
+ id 1ljyjG-0002Px-NN
+ for xen-devel@lists.xenproject.org; Fri, 21 May 2021 06:33:50 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id c1cba710-067a-49ca-97c6-4db6c1cebdf7;
+ Fri, 21 May 2021 06:33:48 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C789211B3;
+ Thu, 20 May 2021 23:33:47 -0700 (PDT)
+Received: from [10.57.6.192] (unknown [10.57.6.192])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7450B3F719;
+ Thu, 20 May 2021 23:33:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,145 +52,129 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e96726c-88cc-436d-81cf-aa9999cb611b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1621574837; x=1653110837;
-  h=date:from:to:cc:message-id:references:mime-version:
-   in-reply-to:subject;
-  bh=kDiMVanU/J46MBpWtTAkHD58jSy5mLoyYAH1XvH7tTU=;
-  b=KaGi33Vipk1k55lu9qtcYFN200iDKBsinU+IO1Z1mRFTJec89utsK9Rd
-   kOKY/Glg//qialmMWX3yL/tFGtCfbg8Ilfdqh2IrYQ9D7FnXPPmlPkm0U
-   BjNt+tLTKKFRF0glSBapVEc01exvMisB3JywJ/xgdMWm3BGMwaZ+ojyzG
-   Y=;
-X-IronPort-AV: E=Sophos;i="5.82,313,1613433600"; 
-   d="scan'208";a="2533323"
-Subject: Re: [PATCH v3 01/11] xen/manage: keep track of the on-going suspend mode
-Date: Fri, 21 May 2021 05:26:50 +0000
-From: Anchal Agarwal <anchalag@amazon.com>
-To: <boris.ostrovsky@oracle.com>
-CC: "tglx@linutronix.de" <tglx@linutronix.de>, "mingo@redhat.com"
-	<mingo@redhat.com>, "bp@alien8.de" <bp@alien8.de>, "hpa@zytor.com"
-	<hpa@zytor.com>, "jgross@suse.com" <jgross@suse.com>,
-	"linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>, "linux-mm@kvack.org"
-	<linux-mm@kvack.org>, "sstabellini@kernel.org" <sstabellini@kernel.org>,
-	"konrad.wilk@oracle.com" <konrad.wilk@oracle.com>, "roger.pau@citrix.com"
-	<roger.pau@citrix.com>, "axboe@kernel.dk" <axboe@kernel.dk>,
-	"davem@davemloft.net" <davem@davemloft.net>, "rjw@rjwysocki.net"
-	<rjw@rjwysocki.net>, "len.brown@intel.com" <len.brown@intel.com>,
-	"pavel@ucw.cz" <pavel@ucw.cz>, "peterz@infradead.org" <peterz@infradead.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"vkuznets@redhat.com" <vkuznets@redhat.com>, "netdev@vger.kernel.org"
-	<netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>,
-	<Woodhouse@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>, David
-	<dwmw@amazon.co.uk>, "benh@kernel.crashing.org" <benh@kernel.crashing.org>,
-	<anchalag@amazon.com>, <aams@amazon.com>
-Message-ID: <20210521052650.GA19056@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
-References: <5f1e4772-7bd9-e6c0-3fe6-eef98bb72bd8@oracle.com>
- <20200921215447.GA28503@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <e3e447e5-2f7a-82a2-31c8-10c2ffcbfb2c@oracle.com>
- <20200922231736.GA24215@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <20200925190423.GA31885@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <274ddc57-5c98-5003-c850-411eed1aea4c@oracle.com>
- <20200925222826.GA11755@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <cc738014-6a79-a5ae-cb2a-a02ff15b4582@oracle.com>
- <20200930212944.GA3138@dev-dsk-anchalag-2a-9c2d1d96.us-west-2.amazon.com>
- <8cd59d9c-36b1-21cf-e59f-40c5c20c65f8@oracle.com>
+X-Inumbo-ID: c1cba710-067a-49ca-97c6-4db6c1cebdf7
+Subject: Re: [PATCH v3 10/10] arm64: Change type of hsr, cpsr, spsr_el1 to
+ uint64_t
+To: Julien Grall <julien@xen.org>, Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>, bertrand.marquis@arm.com,
+ wei.chen@arm.com, xen-devel@lists.xenproject.org
+References: <20210505074308.11016-1-michal.orzel@arm.com>
+ <20210505074308.11016-11-michal.orzel@arm.com>
+ <c5676e69-a474-d1ad-c7e9-49c03be3ab66@suse.com>
+ <1ff4f9fb-0eca-189a-2b47-b910dc6b3639@arm.com>
+ <42a998be-2f99-a1b6-ace6-4c5d42af7046@xen.org>
+ <54e845e1-f283-d70c-a0c2-73e768e5a56e@suse.com>
+ <b8a14892-0290-3aff-c4b5-6d363b884db7@xen.org>
+From: Michal Orzel <michal.orzel@arm.com>
+Message-ID: <f65babea-bd4f-f1fa-07db-78d83727b155@arm.com>
+Date: Fri, 21 May 2021 08:33:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <8cd59d9c-36b1-21cf-e59f-40c5c20c65f8@oracle.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Precedence: Bulk
+In-Reply-To: <b8a14892-0290-3aff-c4b5-6d363b884db7@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 01, 2020 at 08:43:58AM -0400, boris.ostrovsky@oracle.com wrote:
-> CAUTION: This email originated from outside of the organization. Do not click links or open attachments unless you can confirm the sender and know the content is safe.
-> 
-> 
-> 
-> >>>>>>> Also, wrt KASLR stuff, that issue is still seen sometimes but I haven't had
-> >>>>>>> bandwidth to dive deep into the issue and fix it.
-> >>>> So what's the plan there? You first mentioned this issue early this year and judged by your response it is not clear whether you will ever spend time looking at it.
-> >>>>
-> >>> I do want to fix it and did do some debugging earlier this year just haven't
-> >>> gotten back to it. Also, wanted to understand if the issue is a blocker to this
-> >>> series?
-> >>
-> >> Integrating code with known bugs is less than ideal.
-> >>
-> > So for this series to be accepted, KASLR needs to be fixed along with other
-> > comments of course?
-> 
-> 
-> Yes, please.
-> 
-> 
-> 
-> >>> I had some theories when debugging around this like if the random base address picked by kaslr for the
-> >>> resuming kernel mismatches the suspended kernel and just jogging my memory, I didn't find that as the case.
-> >>> Another hunch was if physical address of registered vcpu info at boot is different from what suspended kernel
-> >>> has and that can cause CPU's to get stuck when coming online.
-> >>
-> >> I'd think if this were the case you'd have 100% failure rate. And we are also re-registering vcpu info on xen restore and I am not aware of any failures due to KASLR.
-> >>
-> > What I meant there wrt VCPU info was that VCPU info is not unregistered during hibernation,
-> > so Xen still remembers the old physical addresses for the VCPU information, created by the
-> > booting kernel. But since the hibernation kernel may have different physical
-> > addresses for VCPU info and if mismatch happens, it may cause issues with resume.
-> > During hibernation, the VCPU info register hypercall is not invoked again.
-> 
-> 
-> I still don't think that's the cause but it's certainly worth having a look.
-> 
-Hi Boris,
-Apologies for picking this up after last year. 
-I did some dive deep on the above statement and that is indeed the case that's happening. 
-I did some debugging around KASLR and hibernation using reboot mode.
-I observed in my debug prints that whenever vcpu_info* address for secondary vcpu assigned 
-in xen_vcpu_setup at boot is different than what is in the image, resume gets stuck for that vcpu
-in bringup_cpu(). That means we have different addresses for &per_cpu(xen_vcpu_info, cpu) at boot and after
-control jumps into the image. 
+Hi guys,
 
-I failed to get any prints after it got stuck in bringup_cpu() and
-I do not have an option to send a sysrq signal to the guest or rather get a kdump.
-This change is not observed in every hibernate-resume cycle. I am not sure if this is a bug or an 
-expected behavior. 
-Also, I am contemplating the idea that it may be a bug in xen code getting triggered only when
-KASLR is enabled but I do not have substantial data to prove that.
-Is this a coincidence that this always happens for 1st vcpu?
-Moreover, since hypervisor is not aware that guest is hibernated and it looks like a regular shutdown to dom0 during reboot mode,
-will re-registering vcpu_info for secondary vcpu's even plausible? I could definitely use some advice to debug this further.
-
- 
-Some printk's from my debugging:
-
-At Boot:
-
-xen_vcpu_setup: xen_have_vcpu_info_placement=1 cpu=1, vcpup=0xffff9e548fa560e0, info.mfn=3996246 info.offset=224,
-
-Image Loads:
-It ends up in the condition:
- xen_vcpu_setup()
- {
- ...
- if (xen_hvm_domain()) {
-        if (per_cpu(xen_vcpu, cpu) == &per_cpu(xen_vcpu_info, cpu))
-                return 0; 
- }
- ...
- }
-
-xen_vcpu_setup: checking mfn on resume cpu=1, info.mfn=3934806 info.offset=224, &per_cpu(xen_vcpu_info, cpu)=0xffff9d7240a560e0
-
-This is tested on c4.2xlarge [8vcpu 15GB mem] instance with 5.10 kernel running
-in the guest.
-
-Thanks,
-Anchal.
+On 17.05.2021 18:03, Julien Grall wrote:
+> Hi Jan,
 > 
-> -boris
+> On 17/05/2021 08:01, Jan Beulich wrote:
+>> On 12.05.2021 19:59, Julien Grall wrote:
+>>> Hi,
+>>>
+>>> On 11/05/2021 07:37, Michal Orzel wrote:
+>>>> On 05.05.2021 10:00, Jan Beulich wrote:
+>>>>> On 05.05.2021 09:43, Michal Orzel wrote:
+>>>>>> --- a/xen/include/public/arch-arm.h
+>>>>>> +++ b/xen/include/public/arch-arm.h
+>>>>>> @@ -267,10 +267,10 @@ struct vcpu_guest_core_regs
+>>>>>>           /* Return address and mode */
+>>>>>>        __DECL_REG(pc64,         pc32);             /* ELR_EL2 */
+>>>>>> -    uint32_t cpsr;                              /* SPSR_EL2 */
+>>>>>> +    uint64_t cpsr;                              /* SPSR_EL2 */
+>>>>>>           union {
+>>>>>> -        uint32_t spsr_el1;       /* AArch64 */
+>>>>>> +        uint64_t spsr_el1;       /* AArch64 */
+>>>>>>            uint32_t spsr_svc;       /* AArch32 */
+>>>>>>        };
+>>>>>
+>>>>> This change affects, besides domctl, also default_initialise_vcpu(),
+>>>>> which Arm's arch_initialise_vcpu() calls. I realize do_arm_vcpu_op()
+>>>>> only allows two unrelated VCPUOP_* to pass, but then I don't
+>>>>> understand why arch_initialise_vcpu() doesn't simply return e.g.
+>>>>> -EOPNOTSUPP. Hence I suspect I'm missing something.
+>>>
+>>> I think it is just an overlooked when reviewing the following commit:
+>>>
+>>> commit 192df6f9122ddebc21d0a632c10da3453aeee1c2
+>>> Author: Roger Pau Monné <roger.pau@citrix.com>
+>>> Date:   Tue Dec 15 14:12:32 2015 +0100
+>>>
+>>>       x86: allow HVM guests to use hypercalls to bring up vCPUs
+>>>
+>>>       Allow the usage of the VCPUOP_initialise, VCPUOP_up, VCPUOP_down,
+>>>       VCPUOP_is_up, VCPUOP_get_physid and VCPUOP_send_nmi hypercalls from HVM
+>>>       guests.
+>>>
+>>>       This patch introduces a new structure (vcpu_hvm_context) that
+>>> should be used
+>>>       in conjuction with the VCPUOP_initialise hypercall in order to
+>>> initialize
+>>>       vCPUs for HVM guests.
+>>>
+>>>       Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+>>>       Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>>       Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>>>       Acked-by: Ian Campbell <ian.campbell@citrix.com>
+>>>
+>>> On Arm, the structure vcpu_guest_context is not exposed outside of Xen
+>>> and the tools. Interestingly vcpu_guest_core_regs is but it should only
+>>> be used within vcpu_guest_context.
+>>>
+>>> So as this is not used by stable ABI, it is fine to break it.
+>>>
+>>>>>
+>>>> I agree that do_arm_vcpu_op only allows two VCPUOP* to pass and
+>>>> arch_initialise_vcpu being called in case of VCPUOP_initialise
+>>>> has no sense as VCPUOP_initialise is not supported on arm.
+>>>> It makes sense that it should return -EOPNOTSUPP.
+>>>> However do_arm_vcpu_op will not accept VCPUOP_initialise and will return
+>>>> -EINVAL. So arch_initialise_vcpu for arm will not be called.
+>>>> Do you think that changing this behaviour so that arch_initialise_vcpu returns
+>>>> -EOPNOTSUPP should be part of this patch?
+>>>
+>>> I think this change is unrelated. So it should be handled in a follow-up
+>>> patch.
+>>
+>> My only difference in viewing this is that I'd say the adjustment
+>> would better be a prereq patch to this one, such that the one here
+>> ends up being more obviously correct.
 > 
+> The function is already not reachable so I felt it was unfair to require the clean-up for merging this code.
 > 
+>> Also, if the function is
+>> indeed not meant to be reachable, besides making it return
+>> -EOPNOTSUPP (or alike) it should probably also have
+>> ASSERT_UNREACHABLE() added.
+> 
+> +1 on the idea.
+> 
+> Cheers,
+> 
+FWICS, all the discussion is about creating the next patch fixing the VCPUOP_initialise function.
+Is there anything left to do in this patch or are you going to ack it?
+
+Cheers,
+Michal
 
