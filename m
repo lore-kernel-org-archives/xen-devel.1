@@ -7,42 +7,40 @@ X-Spam-Status: No, score=-10.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A97F1C433B4
-	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 13:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 398D6C433ED
+	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 14:09:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F583611AD
-	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 13:46:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F583611AD
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lechnology.com
+	by mail.kernel.org (Postfix) with ESMTPS id 83CC8613C8
+	for <xen-devel@archiver.kernel.org>; Fri, 21 May 2021 14:09:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 83CC8613C8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tronnes.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.131312.245487 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.131323.245500 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lk5TP-000319-Jd; Fri, 21 May 2021 13:45:55 +0000
+	id 1lk5qA-0005X2-IL; Fri, 21 May 2021 14:09:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 131312.245487; Fri, 21 May 2021 13:45:55 +0000
+Received: by outflank-mailman (output) from mailman id 131323.245500; Fri, 21 May 2021 14:09:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lk5TP-000312-GA; Fri, 21 May 2021 13:45:55 +0000
-Received: by outflank-mailman (input) for mailman id 131312;
- Fri, 21 May 2021 13:41:46 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lk5qA-0005Wv-FU; Fri, 21 May 2021 14:09:26 +0000
+Received: by outflank-mailman (input) for mailman id 131323;
+ Fri, 21 May 2021 14:09:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DwWI=KQ=lechnology.com=david@srs-us1.protection.inumbo.net>)
- id 1lk5PO-0002v2-PK
- for xen-devel@lists.xenproject.org; Fri, 21 May 2021 13:41:46 +0000
-Received: from vern.gendns.com (unknown [98.142.107.122])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3feab211-ee3e-457d-8523-4b95c8442a83;
- Fri, 21 May 2021 13:41:45 +0000 (UTC)
-Received: from [2600:1700:4830:165f::fb2] (port=60256)
- by vern.gendns.com with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
- (envelope-from <david@lechnology.com>)
- id 1lk5P6-0003HQ-MU; Fri, 21 May 2021 09:41:41 -0400
+ <SRS0=KNw9=KQ=tronnes.org=noralf@srs-us1.protection.inumbo.net>)
+ id 1lk5q8-0005Wp-VP
+ for xen-devel@lists.xenproject.org; Fri, 21 May 2021 14:09:25 +0000
+Received: from smtp.domeneshop.no (unknown [2a01:5b40:0:3005::1])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5a8d50dd-b3ba-4dba-a552-6ae1c2338342;
+ Fri, 21 May 2021 14:09:23 +0000 (UTC)
+Received: from [2a01:799:95f:4600:cca0:57ac:c55d:a485] (port=50828)
+ by smtp.domeneshop.no with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <noralf@tronnes.org>)
+ id 1lk5q6-0005ru-3Q; Fri, 21 May 2021 16:09:22 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,28 +52,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3feab211-ee3e-457d-8523-4b95c8442a83
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lechnology.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=9lP4cKqfXHid5MksziM3FSc3DFRksG808KiNvq/BVYE=; b=hmX2PqtAcvfv2cTaWaKqbBzYnw
-	DxSzvIsTFnCd9Ad9cdgXcoZVPVp+Z0y4/scrHZ6lQs88LnWXAa1YT4bs9Ia475q2X9vr1EOloNLCE
-	THXs6NcMbbEEyxq3reOMRol8oP6jgXycuu8nbCc+4m9ZxjpBaxuPlbxnbeqkFLH5sNb79jTHyusGn
-	Aj53qnao2AuiRFV92GruAtnjQKtCSKCaf2iZEz2O8VAEap+BHfbNyR/Ot54sQ9hGJPQZPKsE8tb7U
-	0yMzptP6/L6YqlsKaZ6pc6CV/OvWHV6P877WAEb11FA4+jFhLuJ5+9IAG3jPixiqPaX93WGLZqRzV
-	iYx9lswA==;
+X-Inumbo-ID: 5a8d50dd-b3ba-4dba-a552-6ae1c2338342
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=tronnes.org
+	; s=ds202012; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=mzxTAoQKZErI0PSlV6Tx+3ILAHO7jFNRjBMhpv39Rlg=; b=bILOGlhtsDznJmhl3TFXvnvplE
+	Ixe5T9HBrMiDZAMMx686k9FpKn1MoqOli+IjA8R8W5lHgPq/6V5gQAy0cvXVppCuGncYVYXrfJ1iA
+	mDTQj4RQ0x2cVmKxxqif50mnzTNJd1YW5eYwJwKp0Ls9DwseAh9+YEu/yXcVzyi/ZHKjxENmXmIsj
+	jJua4+BnHtIVIU6l/fRg8ZFtLHYf2pkbwZwOlWiMbiYsR03CkDUc5iDBh+KZW/j2/rKY1cGCxELJy
+	qUoNtLvmohAEWOPP9E7yLiBxq7gf6X4HjlOOtsTm5+Jf46IQdc8hXtE1zPrKNoHY/NCKNzIbW8tjL
+	fJseoIJg==;
 Subject: Re: [PATCH 11/11] drm/tiny: drm_gem_simple_display_pipe_prepare_fb is
  the default
 To: Daniel Vetter <daniel.vetter@ffwll.ch>,
  DRI Development <dri-devel@lists.freedesktop.org>
 Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  Daniel Vetter <daniel.vetter@intel.com>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@aj.id.au>, =?UTF-8?Q?Noralf_Tr=c3=b8nnes?=
- <noralf@tronnes.org>, Linus Walleij <linus.walleij@linaro.org>,
- Emma Anholt <emma@anholt.net>,
+ Andrew Jeffery <andrew@aj.id.au>, Linus Walleij <linus.walleij@linaro.org>,
+ Emma Anholt <emma@anholt.net>, David Lechner <david@lechnology.com>,
  Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
@@ -85,31 +82,23 @@ Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  xen-devel@lists.xenproject.org
 References: <20210521090959.1663703-1-daniel.vetter@ffwll.ch>
  <20210521090959.1663703-11-daniel.vetter@ffwll.ch>
-From: David Lechner <david@lechnology.com>
-Message-ID: <15839b4b-04e5-c65a-8e7c-6e1bdce9757f@lechnology.com>
-Date: Fri, 21 May 2021 08:41:34 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+From: =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>
+Message-ID: <0b2b3fd7-7740-4c4e-78a5-142a6e9892ea@tronnes.org>
+Date: Fri, 21 May 2021 16:09:13 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.1
 MIME-Version: 1.0
 In-Reply-To: <20210521090959.1663703-11-daniel.vetter@ffwll.ch>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - vern.gendns.com
-X-AntiAbuse: Original Domain - lists.xenproject.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lechnology.com
-X-Get-Message-Sender-Via: vern.gendns.com: authenticated_id: davidmain+lechnology.com/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: vern.gendns.com: davidmain@lechnology.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 5/21/21 4:09 AM, Daniel Vetter wrote:
+
+
+Den 21.05.2021 11.09, skrev Daniel Vetter:
 > Goes through all the drivers and deletes the default hook since it's
 > the default now.
+> 
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
 
-Acked-by: David Lechner <david@lechnology.com>
-
+Acked-by: Noralf Trønnes <noralf@tronnes.org>
 
