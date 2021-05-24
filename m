@@ -2,50 +2,48 @@ Return-Path: <SRS0=hLJu=KT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E76CC47085
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CA73C47084
 	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 14:34:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D411F6108B
+	by mail.kernel.org (Postfix) with ESMTPS id D4D9D61209
 	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 14:34:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D411F6108B
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D4D9D61209
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.131792.246155 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.131790.246133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llBer-0006ai-PQ; Mon, 24 May 2021 14:34:17 +0000
+	id 1llBei-00060B-3q; Mon, 24 May 2021 14:34:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 131792.246155; Mon, 24 May 2021 14:34:17 +0000
+Received: by outflank-mailman (output) from mailman id 131790.246133; Mon, 24 May 2021 14:34:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llBer-0006aZ-LL; Mon, 24 May 2021 14:34:17 +0000
-Received: by outflank-mailman (input) for mailman id 131792;
- Mon, 24 May 2021 14:34:16 +0000
+	id 1llBei-000604-0L; Mon, 24 May 2021 14:34:08 +0000
+Received: by outflank-mailman (input) for mailman id 131790;
+ Mon, 24 May 2021 14:34:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SOm5=KT=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
- id 1llBeq-0005zC-5d
- for xen-devel@lists.xenproject.org; Mon, 24 May 2021 14:34:16 +0000
-Received: from mail-ot1-x334.google.com (unknown [2607:f8b0:4864:20::334])
+ id 1llBeg-0005zC-Cp
+ for xen-devel@lists.xenproject.org; Mon, 24 May 2021 14:34:06 +0000
+Received: from mail-oi1-x22d.google.com (unknown [2607:f8b0:4864:20::22d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 74edadd2-c31c-444e-bd36-81b0bd7c7b2f;
- Mon, 24 May 2021 14:34:09 +0000 (UTC)
-Received: by mail-ot1-x334.google.com with SMTP id
- u25-20020a0568302319b02902ac3d54c25eso25430402ote.1
- for <xen-devel@lists.xenproject.org>; Mon, 24 May 2021 07:34:09 -0700 (PDT)
+ id ef3ee336-5f12-4f8c-b3c8-a34df3002263;
+ Mon, 24 May 2021 14:34:05 +0000 (UTC)
+Received: by mail-oi1-x22d.google.com with SMTP id d21so27198404oic.11
+ for <xen-devel@lists.xenproject.org>; Mon, 24 May 2021 07:34:05 -0700 (PDT)
 Received: from localhost.localdomain (142-79-211-230.starry-inc.net.
  [142.79.211.230])
- by smtp.gmail.com with ESMTPSA id p22sm2840564oop.7.2021.05.24.07.34.08
+ by smtp.gmail.com with ESMTPSA id p22sm2840564oop.7.2021.05.24.07.34.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 May 2021 07:34:08 -0700 (PDT)
+ Mon, 24 May 2021 07:34:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74edadd2-c31c-444e-bd36-81b0bd7c7b2f
+X-Inumbo-ID: ef3ee336-5f12-4f8c-b3c8-a34df3002263
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=KDIsJWwedO49iEv9YVCuj+jt8d4VmFrWYbJWRHeDs+U=;
-        b=Yh7vBBBU5OVB5ZSt8Zkl1ivh9VVDN84H7CvJXSSqYXgBNb9/qi/NFOcimfilfGx5DN
-         rj2k1kDAP80gbtLGAQqltBvMeKD2610eSGLAShM4NbC5AgXNRyTbP0w29celQ65HIDkC
-         c4UXNnOij/i9ZOl9GrwmP2yoqhYyShlP2+YzMkjpMkjVlC3/oE+VWj+aDIVEP9F+jE0A
-         /DtKviQhW+WALICKHanjH6fwb/Ot6YA5980VlQNQmMzrqE0Q3JpovLBzYK0RYR65R5Zh
-         uqvImHq0RQjgFG3kjeM1om8zzvdKzUkQXSBFi7EalKUZ/zX5rearK+386mplelwabxLX
-         OQ2w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=q1zjNygg3B7WteZ4Lbuck9mxhDDUSA/SZm+5egQkVsA=;
+        b=AYpWY6MvjUwqiZfOme1wDIaeSZDRMf8LeXC2CgWsB2DQFV/nTAZkJer1Ow4PLz4qiP
+         ZKGskVToy6hyiYcuBMmX0TrYp7DfZYSDU4320eBXZxScjR1qv+yR8Z7NhAlMOdQkJWlI
+         EsmJQISeNEjMS1Ue7UmFfeWZAEiO+M/BLGUuKwCb/61mzVQCR9o33WTSIfcNAnWRvDk0
+         LzQJ8I7Wk4/7jnMPEhN0FMpfRjNI1Z/QrmzOVUEiM1v2A8tUIBjyKn5anJL5fzUGvTZm
+         nKc3SywYILL7y5MxJBJF1JwXUF7eh75b/cG1YN3/R01zq87L9ib6GjaiLyDiTkQPFvjv
+         tlcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=KDIsJWwedO49iEv9YVCuj+jt8d4VmFrWYbJWRHeDs+U=;
-        b=YO0oqy2LePJvoJ9jMV0m/4nooW/9hKs+PkJj6grie3JlfHcEUp5r2u5ZY09RYAzPoT
-         cu6Li4Oyz6hqSUpM/v2zWq6QitFqqySlPZO6x/Lrc3Wo6TVcxN9vC6FZXBwpF/Y1EMlr
-         Jdhvm2my/RIWX1DfZn2x/jr+re064+UpPGH4d7d0s8TLuQvZvbQ37iL1E3T4yzqozFgy
-         D0iHVM9ulQZ/S30Lv+slne+DZqC9SN4eb5YlENfSye5o0AbIZURrQKaDuLbi5pPkvp1O
-         GioRrKOmfLdMXrzMM06QtiOv/Wn77fH8DW+ZBdbsNREI626ftRxj+AfC7AHCgWD8H88j
-         CC0w==
-X-Gm-Message-State: AOAM532pbcgB42VVzZFTCSTqbUlJlYc4rAdlLiU+3jTUqV3agTyFpdjK
-	F1E0bdqQYe3rsglZz0wfmcsPVE7cfJvjpw==
-X-Google-Smtp-Source: ABdhPJx1K+5syu74ayMih8RaFCc1VU+YarG3lhylzhElWyrmdpxlimkDUFSXTgl1VRbzNh28REIuiA==
-X-Received: by 2002:a9d:7cd8:: with SMTP id r24mr19213213otn.90.1621866848860;
-        Mon, 24 May 2021 07:34:08 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=q1zjNygg3B7WteZ4Lbuck9mxhDDUSA/SZm+5egQkVsA=;
+        b=S0kWx0f5/cNEHL+yQObSlQRPGfo0NY1RihtTO2gWCzhYEknhzoNt3QUET8bSx+HHZa
+         6ZC9FyX4Wb6nSaAIhoBKFO5QQGQ5H7nsAhGiEidTJ2Ho9NHYot3KinGbBlrTEHkREJBc
+         quLmaozlmg6FaV5cCK0dObH9LL44EQQZcYD/KZxUfFjZUv9tTdT8yGeP+9PYZkf65VVC
+         MerlM8eluI0nUCwWWQxoB1BkaP5bJTMvP5lGkRVcB73BqPXAadryfoU/qUx1joAVWTRK
+         ccUYixMQbtcV6BmSc8PNPj6dNWGbBBaLcP/09MMFVQDlHfPVFX8lIc6g+stid9vRk29G
+         5meA==
+X-Gm-Message-State: AOAM532N0hzawf6QngZlopK9Xa4sDe3+PDmlgLj4gftSHmiCL6q0PZTE
+	Xec7ZI9C5NrbbBJ+drIxC1Bpa4m/0TQzKA==
+X-Google-Smtp-Source: ABdhPJzA1mz2bVBRqZO1uu/tfVl5uInLR8dFA7CSAogpdfcg7TRo3KvL5giiQS6eyM3yy4t2T9es5g==
+X-Received: by 2002:aca:2b17:: with SMTP id i23mr11116150oik.87.1621866844656;
+        Mon, 24 May 2021 07:34:04 -0700 (PDT)
 From: Connor Davis <connojdavis@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
@@ -97,112 +95,107 @@ Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Paul Durrant <paul@xen.org>
-Subject: [PATCH v4 2/4] xen/common: Guard iommu symbols with CONFIG_HAS_PASSTHROUGH
-Date: Mon, 24 May 2021 08:34:26 -0600
-Message-Id: <f76852db6601b1bf243781b0b8b16c7a6fdc8a01.1621712830.git.connojdavis@gmail.com>
+	Paul Durrant <paul@xen.org>,
+	Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v4 0/4] Minimal build for RISCV
+Date: Mon, 24 May 2021 08:34:24 -0600
+Message-Id: <cover.1621712830.git.connojdavis@gmail.com>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1621712830.git.connojdavis@gmail.com>
-References: <cover.1621712830.git.connojdavis@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The variables iommu_enabled and iommu_dont_flush_iotlb are defined in
-drivers/passthrough/iommu.c and are referenced in common code, which
-causes the link to fail when !CONFIG_HAS_PASSTHROUGH.
+Hi all,
 
-Guard references to these variables in common code so that xen
-builds when !CONFIG_HAS_PASSTHROUGH.
+This series introduces a minimal build for RISCV. It is based on Bobby's
+previous work from last year[0] rebased onto current Xen.
 
-Signed-off-by: Connor Davis <connojdavis@gmail.com>
----
- xen/common/memory.c     | 10 ++++++++++
- xen/include/xen/iommu.h |  8 +++++++-
- 2 files changed, 17 insertions(+), 1 deletion(-)
+This series provides the patches necessary to get a minimal build
+working. The build is "minimal" in the sense that it only supports
+building TARGET=head.o. The arch/riscv/head.S is just a simple while(1).
 
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index b5c70c4b85..72a6b70cb5 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -294,7 +294,9 @@ int guest_remove_page(struct domain *d, unsigned long gmfn)
-     p2m_type_t p2mt;
- #endif
-     mfn_t mfn;
-+#ifdef CONFIG_HAS_PASSTHROUGH
-     bool *dont_flush_p, dont_flush;
-+#endif
-     int rc;
- 
- #ifdef CONFIG_X86
-@@ -385,13 +387,17 @@ int guest_remove_page(struct domain *d, unsigned long gmfn)
-      * Since we're likely to free the page below, we need to suspend
-      * xenmem_add_to_physmap()'s suppressing of IOMMU TLB flushes.
-      */
-+#ifdef CONFIG_HAS_PASSTHROUGH
-     dont_flush_p = &this_cpu(iommu_dont_flush_iotlb);
-     dont_flush = *dont_flush_p;
-     *dont_flush_p = false;
-+#endif
- 
-     rc = guest_physmap_remove_page(d, _gfn(gmfn), mfn, 0);
- 
-+#ifdef CONFIG_HAS_PASSTHROUGH
-     *dont_flush_p = dont_flush;
-+#endif
- 
-     /*
-      * With the lack of an IOMMU on some platforms, domains with DMA-capable
-@@ -839,11 +845,13 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
-     xatp->gpfn += start;
-     xatp->size -= start;
- 
-+#ifdef CONFIG_HAS_PASSTHROUGH
-     if ( is_iommu_enabled(d) )
-     {
-        this_cpu(iommu_dont_flush_iotlb) = 1;
-        extra.ppage = &pages[0];
-     }
-+#endif
- 
-     while ( xatp->size > done )
-     {
-@@ -868,6 +876,7 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
-         }
-     }
- 
-+#ifdef CONFIG_HAS_PASSTHROUGH
-     if ( is_iommu_enabled(d) )
-     {
-         int ret;
-@@ -894,6 +903,7 @@ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
-         if ( unlikely(ret) && rc >= 0 )
-             rc = ret;
-     }
-+#endif
- 
-     return rc;
- }
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 460755df29..904cdf725d 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -51,9 +51,15 @@ static inline bool_t dfn_eq(dfn_t x, dfn_t y)
-     return dfn_x(x) == dfn_x(y);
- }
- 
--extern bool_t iommu_enable, iommu_enabled;
-+extern bool_t iommu_enable;
- extern bool force_iommu, iommu_quarantine, iommu_verbose;
- 
-+#ifdef CONFIG_HAS_PASSTHROUGH
-+extern bool iommu_enabled;
-+#else
-+#define iommu_enabled false
-+#endif
-+
- #ifdef CONFIG_X86
- extern enum __packed iommu_intremap {
-    /*
+The first 2 patches are mods to non-RISCV bits that enable building a
+config with:
+
+  !CONFIG_HAS_NS16550
+  !CONFIG_HAS_PASSTHROUGH
+
+respectively. The third patch adds the make/Kconfig boilerplate
+alongside head.S and asm-riscv/config.h (head.S references ENTRY
+that is defined in asm-riscv/config.h).
+
+The last adds a docker container for doing the build. To build from the
+docker container (after creating it locally), you can run the following:
+
+  $ make XEN_TARGET_ARCH=riscv SUBSYSTEMS=xen -C xen tiny64_defconfig
+  $ make XEN_TARGET_ARCH=riscv SUBSYSTEMS=xen -C xen TARGET=head.o
+
+[0] https://lore.kernel.org/xen-devel/cover.1579615303.git.bobbyeshleman@gmail.com/
+
+Thanks,
+Connor
+
+--
+Changes since v3:
+  - Dropped "xen: Fix build when !CONFIG_GRANT_TABLE" since this was
+    applied by Jan
+  - Adjusted Kconfig condition for building NS16550
+  - Use bool rather than bool_t
+  - Removed riscv memory map, as this should probably be done later once
+    the frametable size is figured out
+  - Consolidated 64-bit #defines in asm-riscv/config.h
+  - Renamed riscv64_defconfig to tiny64_defconfig, added CONFIG_DEBUG
+    and CONFIG_DEBUG_INFO
+  - Fixed logic/alignment/whitespace issues in Kconfig files
+  - Use upstream archlinux riscv64 cross-compiler packages instead of
+    custom built toolchain in docker container
+
+Changes since v2:
+  - Reduced number of riscv files added to ease review
+
+Changes since v1:
+  - Dropped "xen/sched: Fix build when NR_CPUS == 1" since this was
+    fixed for 4.15
+  - Moved #ifdef-ary around iommu_enabled to iommu.h
+  - Moved struct grant_table declaration above ifdef CONFIG_GRANT_TABLE
+    instead of defining an empty struct when !CONFIG_GRANT_TABLE
+--
+Connor Davis (4):
+  xen/char: Default HAS_NS16550 to y only for X86 and ARM
+  xen/common: Guard iommu symbols with CONFIG_HAS_PASSTHROUGH
+  xen: Add files needed for minimal riscv build
+  automation: Add container for riscv64 builds
+
+ automation/build/archlinux/riscv64.dockerfile | 19 ++++++++
+ automation/scripts/containerize               |  1 +
+ config/riscv.mk                               |  4 ++
+ xen/Makefile                                  |  8 +++-
+ xen/arch/riscv/Kconfig                        | 47 +++++++++++++++++++
+ xen/arch/riscv/Kconfig.debug                  |  0
+ xen/arch/riscv/Makefile                       |  0
+ xen/arch/riscv/Rules.mk                       |  0
+ xen/arch/riscv/arch.mk                        | 14 ++++++
+ xen/arch/riscv/asm-offsets.c                  |  0
+ xen/arch/riscv/configs/tiny64_defconfig       | 13 +++++
+ xen/arch/riscv/head.S                         |  6 +++
+ xen/common/memory.c                           | 10 ++++
+ xen/drivers/char/Kconfig                      |  1 +
+ xen/include/asm-riscv/config.h                | 47 +++++++++++++++++++
+ xen/include/xen/iommu.h                       |  8 +++-
+ 16 files changed, 175 insertions(+), 3 deletions(-)
+ create mode 100644 automation/build/archlinux/riscv64.dockerfile
+ create mode 100644 config/riscv.mk
+ create mode 100644 xen/arch/riscv/Kconfig
+ create mode 100644 xen/arch/riscv/Kconfig.debug
+ create mode 100644 xen/arch/riscv/Makefile
+ create mode 100644 xen/arch/riscv/Rules.mk
+ create mode 100644 xen/arch/riscv/arch.mk
+ create mode 100644 xen/arch/riscv/asm-offsets.c
+ create mode 100644 xen/arch/riscv/configs/tiny64_defconfig
+ create mode 100644 xen/arch/riscv/head.S
+ create mode 100644 xen/include/asm-riscv/config.h
+
+
+base-commit: d4fb5f166c2bfbaf9ba0de69da0d411288f437a9
 -- 
 2.31.1
 
