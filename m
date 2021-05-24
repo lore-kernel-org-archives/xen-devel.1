@@ -2,49 +2,48 @@ Return-Path: <SRS0=hLJu=KT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D779FC47084
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71B8AC04FF3
 	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 20:38:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 814B0613F4
+	by mail.kernel.org (Postfix) with ESMTPS id 2855E613F4
 	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 20:38:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 814B0613F4
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2855E613F4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.131879.246281 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.131877.246260 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llHKi-0002G3-At; Mon, 24 May 2021 20:37:52 +0000
+	id 1llHKY-0001fB-M4; Mon, 24 May 2021 20:37:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 131879.246281; Mon, 24 May 2021 20:37:52 +0000
+Received: by outflank-mailman (output) from mailman id 131877.246260; Mon, 24 May 2021 20:37:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llHKi-0002Fp-7Q; Mon, 24 May 2021 20:37:52 +0000
-Received: by outflank-mailman (input) for mailman id 131879;
- Mon, 24 May 2021 20:37:50 +0000
+	id 1llHKY-0001f4-IY; Mon, 24 May 2021 20:37:42 +0000
+Received: by outflank-mailman (input) for mailman id 131877;
+ Mon, 24 May 2021 20:37:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5+P1=KT=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1llHKg-0001ey-Rc
- for xen-devel@lists.xenproject.org; Mon, 24 May 2021 20:37:50 +0000
-Received: from mail-qt1-x835.google.com (unknown [2607:f8b0:4864:20::835])
+ id 1llHKX-0001ey-4a
+ for xen-devel@lists.xenproject.org; Mon, 24 May 2021 20:37:41 +0000
+Received: from mail-qk1-x736.google.com (unknown [2607:f8b0:4864:20::736])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id db339771-0a00-45f4-9b4f-5e086dfa79f1;
- Mon, 24 May 2021 20:37:41 +0000 (UTC)
-Received: by mail-qt1-x835.google.com with SMTP id h24so10195544qtm.12
- for <xen-devel@lists.xenproject.org>; Mon, 24 May 2021 13:37:41 -0700 (PDT)
+ id fb112d32-1625-435e-86d4-070dcf340050;
+ Mon, 24 May 2021 20:37:39 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id f18so28295191qko.7
+ for <xen-devel@lists.xenproject.org>; Mon, 24 May 2021 13:37:39 -0700 (PDT)
 Received: from localhost.localdomain (c-73-89-138-5.hsd1.vt.comcast.net.
  [73.89.138.5])
- by smtp.gmail.com with ESMTPSA id t25sm5142847qkt.62.2021.05.24.13.37.40
+ by smtp.gmail.com with ESMTPSA id t25sm5142847qkt.62.2021.05.24.13.37.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 May 2021 13:37:41 -0700 (PDT)
+ Mon, 24 May 2021 13:37:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +55,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db339771-0a00-45f4-9b4f-5e086dfa79f1
+X-Inumbo-ID: fb112d32-1625-435e-86d4-070dcf340050
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :in-reply-to:references;
-        bh=0XtO/J2QIxV3EsCnIwGPbPpW2RCXziWsO8eq8KNOMcc=;
-        b=Hvl2vFOayH56YKy5obvsAuag1njomXqDiheFKyp9suXVMya6CfU1vIIcDgxSbeGqKZ
-         hDTA2FokoUEKrbZBfyV/UcRQ7DIpiJl/SnQ2VXK7odOPqEEctLtBM/WvESVNC/zZqLds
-         R57CiItNr6Tw4+Fyf2SUDt88MOyTxefYA+nvhVrhHPsR8zOKQ14cgdXrfMBaTSxWaLTh
-         Z0rYUoIKTZJISuBAab/zdur3h19pYHsdRcFLa+NoG7EZg7J/G3zl42xQObC3BUnzp9CU
-         ASckTwNXeAzxHPVFj3oLQaw548kRELz5HrTdpmazg4HrL3peXoQwiIOBiTpcTlX4YP40
-         X6oQ==
+        h=from:to:cc:subject:date:message-id;
+        bh=fT2owAWSONQ5Td8PrGcFnFo4mj+tLu/Yq6/E3PpJKDM=;
+        b=LMVvtw69MKVxK+kROImOEJaQegyq/o3anijqdLvUoo3LIy+h6+7oZ4L8PLDU5K2zN0
+         KWajWfCxxq5j4YNcqzCWPUOo2YUcguATVRXGcsi5ZUtSI2LxjfuE8aQS4POE6v/3MdTc
+         AhXKR2ep7bqtxiWQBbTFaujfzA8FjPqMeiTPrBcybXkmgCkjiJrZ7BWhJ9OFTUQ+VBsS
+         l5w+w7Py1iXe7KcF9gF4AyyYkqNRGCgMSrvG0OM5gfT954viw6jEaGkvS4LgXGQRC8nB
+         rFQwKlksuj1jFP4ipU/RX/kcp9pP6ebRpGy29yz25JjN0H6cPV71KvKLDLI34r0GZhyB
+         HFRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:in-reply-to:references;
-        bh=0XtO/J2QIxV3EsCnIwGPbPpW2RCXziWsO8eq8KNOMcc=;
-        b=h2/gAf2l74Zfa9zmYEHuPt0DehstjdSRifs36O/W3pUlgmGh58sNcq3pl3iA4WQhB2
-         0hRn/AbOzwUaeYVbvswJiyJRwYAfv6h8EdWVHN5Gf3LnFXundc2XelnFSoUA/BxR2kct
-         0WNxohYj5bRK4BGk1SVyQbYq/CJPy2d23XeE8XjNVNQVm8ULq6EyfsSD6xu+7MAP6IvT
-         WdyGRYOt0p2K668O+98x1PZcTQfeaBnZ8nXOMuNTHs17hqGqSV3io5pmlbXLyW+1zbt1
-         WWt47t2fXWHrPH6A+Qi+SD52OHY3kMzRCNl6U2Wof5qG397yBocx17yvGpHK/hr1gCY2
-         jU8A==
-X-Gm-Message-State: AOAM533SLExVLaD83D+dfcV5RnQNn7sA25KNbTgtEaZSpJf9v5WCkBUb
-	w1jVRkM3mORVbRKok21kCHI=
-X-Google-Smtp-Source: ABdhPJxb5DHlvWYjgRG4R6V8CZ2jfRLtIuFZLXonuizng5Z/UYV3nC/if1BuceqgJ23zy5XWKI+m8w==
-X-Received: by 2002:ac8:7ed2:: with SMTP id x18mr27764289qtj.26.1621888661428;
-        Mon, 24 May 2021 13:37:41 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=fT2owAWSONQ5Td8PrGcFnFo4mj+tLu/Yq6/E3PpJKDM=;
+        b=E6zR1XcmYxYGuSHAiUDx6NGkiR09VgPjBaNjwgsAVg9CVVKYHEmTSJhJaj8Cto3X2B
+         KLOdtRk/7Ue3nwSZV1XCUaqUNf1OJXP7IN6+Aovvie4gyvIjqa8kAWv5phHde8su9tCx
+         KjLOJOh7DbmRDqCcsLPOEAkN02g9YKQTpuCBEdK8gzp1PEEobJ6rcoKs4WJmyw6XxA+E
+         aP2F5qS0DpjiiYwPlB8ETszaY6qfV5s8N8+XkXR/BynxUP+qkwIveK/TF3j7orUGrXtz
+         rTNSy7RuckgxKiDFU5+gvWmM1uPIbnmjtdOrT8UsMkZvujVVj8+5t4AcbcLTU3ek/X0E
+         kQew==
+X-Gm-Message-State: AOAM533tc+SDafo5LEcWP1IDXARvIyRflmJnl4xwcfg6uSF4ySEf8QDh
+	Xfg31CfIUOVxmZoIViSfLQU=
+X-Google-Smtp-Source: ABdhPJxKKmRl70PFWvfEmJ085Ib8hp4wiOr/94ElFKb3+npLqJHzrtoVbUfm4lqTBF8aMVnggiIdXw==
+X-Received: by 2002:a05:620a:1312:: with SMTP id o18mr27335892qkj.158.1621888659431;
+        Mon, 24 May 2021 13:37:39 -0700 (PDT)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.prg,
@@ -92,54 +89,41 @@ Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RESEND PATCH 02/12] golang/xenlight: fix StringList toC conversion
-Date: Mon, 24 May 2021 16:36:43 -0400
-Message-Id: <0a15ed9eb6cd70416995f5d9805c98572eb6bd50.1621887506.git.rosbrookn@ainfosec.com>
+Subject: [RESEND PATCH 00/12] golang/xenlight: domain life cycle support
+Date: Mon, 24 May 2021 16:36:41 -0400
+Message-Id: <cover.1621887506.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1621887506.git.rosbrookn@ainfosec.com>
-References: <cover.1621887506.git.rosbrookn@ainfosec.com>
-In-Reply-To: <cover.1621887506.git.rosbrookn@ainfosec.com>
-References: <cover.1621887506.git.rosbrookn@ainfosec.com>
 
-The current implementation of StringList.toC does not correctly account
-for how libxl_string_list is expected to be laid out in C, which is clear
-when one looks at libxl_string_list_length in libxl.c. In particular,
-StringList.toC does not account for the extra memory that should be
-allocated for the "sentinel" entry. And, when using the "slice trick" to
-create a slice that can address C memory, the unsafe.Pointer conversion
-should be on a C.libxl_string_list, not *C.libxl_string_list.
+The primary goal of this patch series is to allow users of the xenlight
+package to manage a full domain life cycle. In particular, it provides
+support for receiving domain death events so that domain shutdown,
+reboot, destroy, etc. can be handled. And, it addresses issues found
+when using the package to boot domains with various configurations.
 
-Fix these problems by (1) allocating an extra slot in the slice used to
-address the C memory, and explicity set the last entry to nil so the C
-memory will be zeroed out, and (2) dereferencing csl in the
-unsafe.Pointer conversion.
+These patches address several things (e.g. bug fixes, code style,
+conveniences, new wrapper functions), but are all work towards the final
+goal of allowing a package user to manage a full domain life cycle.
 
-Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
----
- tools/golang/xenlight/xenlight.go | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Nick Rosbrook (12):
+  golang/xenlight: update generated code
+  golang/xenlight: fix StringList toC conversion
+  golang/xenlight: fix string conversion in generated toC functions
+  golang/xenlight: export keyed union interface types
+  golang/xenlight: use struct pointers in keyed union fields
+  golang/xenlight: rename Ctx receivers to ctx
+  golang/xenlight: add logging conveniences for within xenlight
+  golang/xenlight: add functional options to configure Context
+  golang/xenlight: add DomainDestroy wrapper
+  golang/xenlight: add SendTrigger wrapper
+  golang/xenlight: do not negate ret when converting to Error
+  golang/xenlight: add NotifyDomainDeath method to Context
 
-diff --git a/tools/golang/xenlight/xenlight.go b/tools/golang/xenlight/xenlight.go
-index b9189dec5c..13171d0ad1 100644
---- a/tools/golang/xenlight/xenlight.go
-+++ b/tools/golang/xenlight/xenlight.go
-@@ -491,13 +491,14 @@ func (sl *StringList) fromC(csl *C.libxl_string_list) error {
- 
- func (sl StringList) toC(csl *C.libxl_string_list) error {
- 	var char *C.char
--	size := len(sl)
-+	size := len(sl) + 1
- 	*csl = (C.libxl_string_list)(C.malloc(C.ulong(size) * C.ulong(unsafe.Sizeof(char))))
--	clist := (*[1 << 30]*C.char)(unsafe.Pointer(csl))[:size:size]
-+	clist := (*[1 << 30]*C.char)(unsafe.Pointer(*csl))[:size:size]
- 
- 	for i, v := range sl {
- 		clist[i] = C.CString(v)
- 	}
-+	clist[len(clist)-1] = nil
- 
- 	return nil
- }
+ tools/golang/xenlight/gengotypes.py  |  11 +-
+ tools/golang/xenlight/helpers.gen.go | 210 ++++++++++++--
+ tools/golang/xenlight/types.gen.go   |  63 +++--
+ tools/golang/xenlight/xenlight.go    | 398 ++++++++++++++++++++-------
+ 4 files changed, 521 insertions(+), 161 deletions(-)
+
 -- 
 2.17.1
 
