@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD849C04FF3
-	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 20:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29D4AC2B9F7
+	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 20:43:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 52158613F7
-	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 20:43:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52158613F7
+	by mail.kernel.org (Postfix) with ESMTPS id DCCA76140B
+	for <xen-devel@archiver.kernel.org>; Mon, 24 May 2021 20:43:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DCCA76140B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.131941.246369 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.131957.246388 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llHPt-0000Gx-Rv; Mon, 24 May 2021 20:43:13 +0000
+	id 1llHQ0-0000h9-Na; Mon, 24 May 2021 20:43:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 131941.246369; Mon, 24 May 2021 20:43:13 +0000
+Received: by outflank-mailman (output) from mailman id 131957.246388; Mon, 24 May 2021 20:43:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llHPt-0000Gj-Oc; Mon, 24 May 2021 20:43:13 +0000
-Received: by outflank-mailman (input) for mailman id 131941;
- Mon, 24 May 2021 20:43:13 +0000
+	id 1llHQ0-0000g7-GY; Mon, 24 May 2021 20:43:20 +0000
+Received: by outflank-mailman (input) for mailman id 131957;
+ Mon, 24 May 2021 20:43:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5+P1=KT=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1llHLU-0001ey-TW
- for xen-devel@lists.xenproject.org; Mon, 24 May 2021 20:38:40 +0000
-Received: from mail-qk1-x729.google.com (unknown [2607:f8b0:4864:20::729])
+ id 1llHLK-0001ey-TK
+ for xen-devel@lists.xenproject.org; Mon, 24 May 2021 20:38:30 +0000
+Received: from mail-qt1-x830.google.com (unknown [2607:f8b0:4864:20::830])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 27c6af09-440c-442f-9373-fb53e860d068;
- Mon, 24 May 2021 20:37:52 +0000 (UTC)
-Received: by mail-qk1-x729.google.com with SMTP id h20so12792625qko.11
- for <xen-devel@lists.xenproject.org>; Mon, 24 May 2021 13:37:52 -0700 (PDT)
+ id 78775fdc-6b0a-4a6a-bd06-66fc0f96909c;
+ Mon, 24 May 2021 20:37:50 +0000 (UTC)
+Received: by mail-qt1-x830.google.com with SMTP id t17so3827254qta.11
+ for <xen-devel@lists.xenproject.org>; Mon, 24 May 2021 13:37:50 -0700 (PDT)
 Received: from localhost.localdomain (c-73-89-138-5.hsd1.vt.comcast.net.
  [73.89.138.5])
- by smtp.gmail.com with ESMTPSA id t25sm5142847qkt.62.2021.05.24.13.37.51
+ by smtp.gmail.com with ESMTPSA id t25sm5142847qkt.62.2021.05.24.13.37.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 May 2021 13:37:51 -0700 (PDT)
+ Mon, 24 May 2021 13:37:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 27c6af09-440c-442f-9373-fb53e860d068
+X-Inumbo-ID: 78775fdc-6b0a-4a6a-bd06-66fc0f96909c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :in-reply-to:references;
-        bh=qZQxVcviBuvDjUeKOepu8YHqa+eGuG2DXDt5FNQL7LQ=;
-        b=G+pyi2ApCHcfc8UBweruANC8e0cOXX1CT03CKkAiDQRJHE7Klfn/pOpBYStmWWcyA4
-         AaYspo8J8GV+nlWKzUOviIvEb+K/L3KaHitNBCX35AfW8kdilbhDTj2Ih+mtyOfGM8Yr
-         F6nBzUQijOg+DmNcRbgoOg96MmWJ0EdBHAWkGpHLkVJTUYcMR6XCap7KSN2lpvXCeSkh
-         I2wZq1GZ/PRiZQNe4/3wLXlfK7NgQOSFqaxwGopBrV+57r0/qvF4ZpsUEW+By46BlXxT
-         dAIWqnDwKUkL/ZBMot4k6a94qk4V1uIM83QIstPfIjkNVGN8MYd8rASPEAQCNcKJUt1r
-         LxWQ==
+        bh=Bztafs77V0wo2Yc5MZ62RAYiSnYmIu905Zy3uFkoAyc=;
+        b=cdXgCVQ+7s6+xPZNj+r8PDZUWI1D+Vftou8HktB14FbDErTgnUErpGU4xv4Nd2u1gs
+         ynZuviK53q1aM6RIaNFdfgGodt8Nou1pzDOFUnma5aoZ3GEh65gTRozhdUT7s9uLqARo
+         XqMRljIvrUxuT1fWiAklcU3tHmG3Sdf/xHtVkrhxV4tOKThioNzjcT+5gQmo2cSAsJjk
+         FISwHGqNCoSHsonhqt3SF655BVjXNTtTD+bBPcwe8tgpPk2F7IAFumqBTfdoReYOspa3
+         YbifWz2w+OVqpvysiNBOiWEjFKzy1bGEMojWIdVSfoY+PKPYG+5xBClqGS8D7WwqBrNw
+         qtVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:in-reply-to:references;
-        bh=qZQxVcviBuvDjUeKOepu8YHqa+eGuG2DXDt5FNQL7LQ=;
-        b=lGYwDTmUVlw67BsPd9DybsYtrfI6U/n3xuFEsVsk5K9vgCoakI2stb8Zm/MFLnumYm
-         qoeC0Y3y2SYn0tOGLNGvH/cPAuDVZF28ahnow891HhbK9nugTbT0CDtqKZhQPnWO4QlV
-         Vk3O4ZKi9cJCqiEyr0nmLbCyj2ZOeInqegJriE+zK+0CYuTVnjFCh4eJXrxK8DiRCari
-         HWyt0NnmXfY/PQYc+OItG3qB+EnULSAwqsZ5w0NdLsF3sC1Zj9AwUg0P9cLACjy+UyY8
-         onHXzo2N/OFIIVLUbXiiEVzHMvBz5uZ3tmWBw5ehtMtoYhU2vBGDZhmbulH2NrlHvd2U
-         +q7w==
-X-Gm-Message-State: AOAM533EWehlpskrWWNCsvTzncjw+JjY+PlmMJzT7x04PvccDBnprQjq
-	9cCJJfTewej3h3xTVVhPtu4=
-X-Google-Smtp-Source: ABdhPJxK46rUoHOq90Ayw4jb8Va6QGKRHd2hRegjODp3MiUcX7+YcJZ+SyslYYQ7cj5J7aomMpbqPw==
-X-Received: by 2002:a05:620a:1252:: with SMTP id a18mr30362134qkl.416.1621888672226;
-        Mon, 24 May 2021 13:37:52 -0700 (PDT)
+        bh=Bztafs77V0wo2Yc5MZ62RAYiSnYmIu905Zy3uFkoAyc=;
+        b=LXFPA7M78iw53fSnm0z+VOP0cRaZfcZXm3zp0CCzn7pj9Hj6jMm0kKIiqc6tIACtEf
+         2ZoM3Wk3VIENoq45l7mwxnHrdxTBvfJ2LH9RJ7w2mjbt8XwQYjdh4HshtXiJKNzBkk+c
+         a0e2W77xF5hVhRWyZmene9PkLraHrd1sCDzEloMoW6eDAFpVuZxEj98tDie3SyOr0djj
+         AdXAf9d7VZ9SHQRlU5Td0VZ+6s6/uI2hrRK+XfVYnkF27G9GdOHigDDovFsuM73ArlPr
+         BFHbYnsxNBiXBGoPvoe41SvW5zRspEQ4KhjVdIqKEubHRl4dM89wkF8dxjyEIv73Rgpp
+         VoZQ==
+X-Gm-Message-State: AOAM5329e8gQDBE8PO4APTPVAFldMIk1QjdIkXZ0vmGcULjjxPkJuBoj
+	1Ic4ulrsgnyLrw0ngKH3mDs=
+X-Google-Smtp-Source: ABdhPJyxooUFZcWV9TBoDhn+5+SpABivWW2mrNmvKSUR2/ceaeSNRpOwPHMdcSvtO7JEmUQ9xrGoYg==
+X-Received: by 2002:ac8:4252:: with SMTP id r18mr25958491qtm.82.1621888669896;
+        Mon, 24 May 2021 13:37:49 -0700 (PDT)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.prg,
@@ -92,144 +92,41 @@ Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RESEND PATCH 12/12] golang/xenlight: add NotifyDomainDeath method to Context
-Date: Mon, 24 May 2021 16:36:53 -0400
-Message-Id: <e415b0e26954cfc6689fbd3ba7d79fe664f3bb50.1621887506.git.rosbrookn@ainfosec.com>
+Subject: [RESEND PATCH 10/12] golang/xenlight: add SendTrigger wrapper
+Date: Mon, 24 May 2021 16:36:51 -0400
+Message-Id: <7788e3f5f1af622782ede1b879f4f02ec63fa546.1621887506.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1621887506.git.rosbrookn@ainfosec.com>
 References: <cover.1621887506.git.rosbrookn@ainfosec.com>
 In-Reply-To: <cover.1621887506.git.rosbrookn@ainfosec.com>
 References: <cover.1621887506.git.rosbrookn@ainfosec.com>
 
-Add a helper function to wait for domain death events, and then write
-the events to a provided channel. This handles the enabling/disabling of
-the event type, freeing the event, and converting it to a Go type. The
-caller can then handle the event however they need to. This function
-will run until a provided context.Context is cancelled.
-
-NotifyDomainDeath spawns two goroutines that return when the
-context.Context is done. The first will make sure that the domain death
-event is disabled, and that the corresponding event queue is cleared.
-The second calls libxl_event_wait, and writes the event to the provided
-channel.
-
-With this, callers should be able to manage a full domain life cycle.
-Add to the comment of DomainCreateNew so that package uses know they
-should use this method in conjunction with DomainCreateNew.
+Add a warpper around libxl_send_trigger.
 
 Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 ---
- tools/golang/xenlight/xenlight.go | 83 ++++++++++++++++++++++++++++++-
- 1 file changed, 82 insertions(+), 1 deletion(-)
+ tools/golang/xenlight/xenlight.go | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/tools/golang/xenlight/xenlight.go b/tools/golang/xenlight/xenlight.go
-index 6fb22665cc..8406883433 100644
+index 1e0ed109e4..d153feb851 100644
 --- a/tools/golang/xenlight/xenlight.go
 +++ b/tools/golang/xenlight/xenlight.go
-@@ -53,6 +53,7 @@ import "C"
-  */
+@@ -1367,3 +1367,14 @@ func (ctx *Context) DomainDestroy(domid Domid) error {
  
- import (
-+	"context"
- 	"fmt"
- 	"os"
- 	"os/signal"
-@@ -1340,7 +1341,9 @@ func (ctx *Context) DeviceUsbdevRemove(domid Domid, usbdev *DeviceUsbdev) error
  	return nil
  }
- 
--// DomainCreateNew creates a new domain.
-+// DomainCreateNew creates a new domain. Callers of DomainCreateNew are
-+// responsible for handling the death of the resulting domain. This should be
-+// done using NotifyDomainDeath.
- func (ctx *Context) DomainCreateNew(config *DomainConfig) (Domid, error) {
- 	var cdomid C.uint32_t
- 	var cconfig C.libxl_domain_config
-@@ -1358,6 +1361,84 @@ func (ctx *Context) DomainCreateNew(config *DomainConfig) (Domid, error) {
- 	return Domid(cdomid), nil
- }
- 
-+// NotifyDomainDeath registers an event handler for domain death events for a
-+// given domnid, and writes events received to ec. NotifyDomainDeath returns an
-+// error if it cannot register the event handler, but other errors encountered
-+// are just logged. The goroutine spawned by calling NotifyDomainDeath runs
-+// until the provided context.Context's Done channel is closed.
-+func (ctx *Context) NotifyDomainDeath(c context.Context, domid Domid, ec chan<- Event) error {
-+	var deathw *C.libxl_evgen_domain_death
 +
-+	ret := C.libxl_evenable_domain_death(ctx.ctx, C.uint32_t(domid), 0, &deathw)
++// SendTrigger sends a Trigger to the domain specified by domid.
++func (ctx *Context) SendTrigger(domid Domid, trigger Trigger, vcpuid int) error {
++	ret := C.libxl_send_trigger(ctx.ctx, C.uint32_t(domid),
++		C.libxl_trigger(trigger), C.uint32_t(vcpuid), nil)
 +	if ret != 0 {
 +		return Error(ret)
 +	}
 +
-+	// Spawn a goroutine that is responsible for cleaning up when the
-+	// passed context.Context's Done channel is closed.
-+	go func() {
-+		<-c.Done()
-+
-+		ctx.logd("cleaning up domain death event handler for domain %d", domid)
-+
-+		// Disable the event generation.
-+		C.libxl_evdisable_domain_death(ctx.ctx, deathw)
-+
-+		// Make sure any events that were generated get cleaned up so they
-+		// do not linger in the libxl event queue.
-+		var evc *C.libxl_event
-+		for {
-+			ret := C.libxl_event_check(ctx.ctx, &evc, C.LIBXL_EVENTMASK_ALL, nil, nil)
-+			if ret != 0 {
-+				return
-+			}
-+			C.libxl_event_free(ctx.ctx, evc)
-+		}
-+	}()
-+
-+	go func() {
-+		var (
-+			ev  Event
-+			evc *C.libxl_event
-+		)
-+
-+		for {
-+			select {
-+			case <-c.Done():
-+				return
-+			default:
-+				// Go on and check for an event...
-+			}
-+
-+			ret := C.libxl_event_wait(ctx.ctx, &evc, C.LIBXL_EVENTMASK_ALL, nil, nil)
-+			if ret != 0 {
-+				ctx.logw("unexpected error waiting for event: %s", Error(ret))
-+				continue
-+			}
-+
-+			// Try to convert the event to Go, and then free the
-+			// C.libxl_event no matter what.
-+			err := ev.fromC(evc)
-+			C.libxl_event_free(ctx.ctx, evc)
-+			if err != nil {
-+				ctx.logw("error converting event from C: %v", err)
-+				continue
-+			}
-+
-+			ctx.logd("received domain death event (domid=%v, type=%v)", ev.Domid, ev.Type)
-+
-+			// Write the event to the channel
-+			select {
-+			case ec <- ev:
-+			case <-c.Done():
-+				return
-+			}
-+		}
-+	}()
-+
 +	return nil
 +}
-+
- // DomainDestroy destroys a domain given a domid.
- func (ctx *Context) DomainDestroy(domid Domid) error {
- 	ret := C.libxl_domain_destroy(ctx.ctx, C.uint32_t(domid), nil)
 -- 
 2.17.1
 
