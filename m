@@ -2,43 +2,47 @@ Return-Path: <SRS0=sPV+=KV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
 	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C0A8C47082
-	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 17:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9D3AC47089
+	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 18:31:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 59B82613C3
-	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 17:24:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 59B82613C3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6A386613BA
+	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 18:31:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6A386613BA
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.132659.247364 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.132669.247387 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llxGF-0005mZ-GR; Wed, 26 May 2021 17:24:03 +0000
+	id 1llyJE-0004Lq-1j; Wed, 26 May 2021 18:31:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 132659.247364; Wed, 26 May 2021 17:24:03 +0000
+Received: by outflank-mailman (output) from mailman id 132669.247387; Wed, 26 May 2021 18:31:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llxGF-0005mS-DM; Wed, 26 May 2021 17:24:03 +0000
-Received: by outflank-mailman (input) for mailman id 132659;
- Wed, 26 May 2021 17:24:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JqRz=KV=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1llxGD-0005mK-LK
- for xen-devel@lists.xenproject.org; Wed, 26 May 2021 17:24:01 +0000
-Received: from mail-lj1-x22b.google.com (unknown [2a00:1450:4864:20::22b])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e7add9d-a836-44b3-8762-feaa079bf9c4;
- Wed, 26 May 2021 17:24:00 +0000 (UTC)
-Received: by mail-lj1-x22b.google.com with SMTP id a4so2689712ljd.5
- for <xen-devel@lists.xenproject.org>; Wed, 26 May 2021 10:24:00 -0700 (PDT)
+	id 1llyJD-0004Lf-Th; Wed, 26 May 2021 18:31:11 +0000
+Received: by outflank-mailman (input) for mailman id 132669;
+ Wed, 26 May 2021 18:31:10 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1llyJC-0004LP-9l; Wed, 26 May 2021 18:31:10 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1llyJC-00075j-5n; Wed, 26 May 2021 18:31:10 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1llyJB-0004oN-SR; Wed, 26 May 2021 18:31:09 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1llyJB-0002k2-Ru; Wed, 26 May 2021 18:31:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,73 +54,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3e7add9d-a836-44b3-8762-feaa079bf9c4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=ptbYf6+VtJZPBOlExjwvlvDDRPFS5hF2G30LNOycenM=;
-        b=NLr+x7NpFSYauH+pJzUK+pbPs1Gb99ObTSjoaPFEuuiFDHlxxld42kIqbwveHzQ1Mr
-         3RPc5S/1L6XFosUyu5SindGfWSDD8nSzA2JHRZCmbry2XBf18cftDNhlIdcpAmMsZpkW
-         f1ZzRKbJa+ylA0Yn+0qtqHytbklEIBrgEmmmf5iUHH9Z4U4Bk6XYbIPtJFLaWlRI6UOK
-         xfklCTZumL9pk5lBrx57w9EceGfTUzFzqexVuTHfK0eBzfADMtJAVBGVom0onKQam9kp
-         FwmgJMS4mR0WUZPyd7OfM4/Za4C1xE20S6MJ9loAbz+58EDkuP1qmlIJik20Jv/YWDx8
-         9JRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=ptbYf6+VtJZPBOlExjwvlvDDRPFS5hF2G30LNOycenM=;
-        b=QQOjlhqnEpDHOZfQfrvb6TfUHWVDQKef4xOT+t5F6YOddTi5w4AlRvoubGKFqwW69u
-         dskT4bnAQZCVWZTl50H7jEAkhCrsoJ3zddRWOzXvqM6ePZfNGuBtXUi7W0P4FvUeZUye
-         Vo1SizZX+ipnemV5WP+Dkc3kuQkbcKzg+GwtnYAhpAbupG1wpPu17g/3khhT3rSskSbW
-         mTx7Jv/liy7chtUtmeiTqFj4OG12hA7T6F+qtIJGEWXYFWGLLV8iI6ZcYYrKdQV5dimY
-         ZZd527K2tPmhCqapV21xX3x6kbXDr97sqqdQRQufX05LbSxb9fnq3PnkE7yyqos3vOvy
-         KOoA==
-X-Gm-Message-State: AOAM5323+/rbEvfr3TAIHeIKPZPgk62ZciT5fA8NjWMqXhYDzfS2MraT
-	/ccW2ZPFKHOnyXlJv+5cJYlLE3JxUduPibcyFu0=
-X-Google-Smtp-Source: ABdhPJwcPMD6iJ3xDap8EDEamqU9zO97yN9kyZAHpx5m5BIzxWdXvqrQiXVXSVDr6gqVQR6WqvZDSUu4DK6Uu6ZKMtA=
-X-Received: by 2002:a05:651c:1a7:: with SMTP id c7mr3020551ljn.77.1622049839778;
- Wed, 26 May 2021 10:23:59 -0700 (PDT)
-MIME-Version: 1.0
-References: <ca7a78e5-2ee9-4109-7905-3b9186475f3d@suse.com>
-In-Reply-To: <ca7a78e5-2ee9-4109-7905-3b9186475f3d@suse.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Wed, 26 May 2021 13:23:48 -0400
-Message-ID: <CAKf6xptQaLw74y5pYuSo9ZXVDoFmCaNByNuKi6vwZ4LnSDoa=w@mail.gmail.com>
-Subject: Re: [PATCH] x86: make hypervisor build with gcc11
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
-	Ian Jackson <iwj@xenproject.org>, Julien Grall <julien@xen.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=X2nzqcstRCURBZ28eXE3vl+WJuMz8JdHZXMmkwFgLKc=; b=NL5cZzvcGjBJfsF1bolPR943IU
+	fHSpqPlo2D7fhjrmB3sUOtSAlSXLrBLSreG6VpvWMvP3RE4gXfnZ9P3R4IuS6b8NjWBDe3KwCFhUQ
+	dTBK6tpCZZy2SnrQHyU0OdDUC4FzPjfEtEhmSAFQopwge6Fxlx/oJhIZvoihpIM5FFZ4=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-162171-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 162171: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=7c110dd335a17be52549dc4b9dfbfba8165ade40
+X-Osstest-Versions-That:
+    xen=7793d19bac84cb84d919035faa9aa638f0a33370
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 26 May 2021 18:31:09 +0000
 
-On Wed, May 19, 2021 at 11:40 AM Jan Beulich <jbeulich@suse.com> wrote:
->
-> Gcc 11 looks to make incorrect assumptions about valid ranges that
-> pointers may be used for addressing when they are derived from e.g. a
-> plain constant. See https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D100680=
-.
->
-> Utilize RELOC_HIDE() to work around the issue, which for x86 manifests
-> in at least
-> - mpparse.c:efi_check_config(),
-> - tboot.c:tboot_probe(),
-> - tboot.c:tboot_gen_frametable_integrity(),
-> - x86_emulate.c:x86_emulate() (at -O2 only).
-> The last case is particularly odd not just because it only triggers at
-> higher optimization levels, but also because it only affects one of at
-> least three similar constructs. Various "note" diagnostics claim the
-> valid index range to be [0, 2=E2=81=B6=C2=B3-1].
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Tested-by: Jason Andryuk <jandryuk@gmail.com>
+flight 162171 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162171/
 
-Needed on Fedora 34.
+Failures :-/ but no regressions.
 
-Thanks,
-Jason
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  7c110dd335a17be52549dc4b9dfbfba8165ade40
+baseline version:
+ xen                  7793d19bac84cb84d919035faa9aa638f0a33370
+
+Last test of basis   162161  2021-05-26 08:01:40 Z    0 days
+Testing same since   162171  2021-05-26 16:00:27 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Julien Grall <jgrall@amazon.com>
+  Wei Liu <wl@xen.org>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   7793d19bac..7c110dd335  7c110dd335a17be52549dc4b9dfbfba8165ade40 -> smoke
 
