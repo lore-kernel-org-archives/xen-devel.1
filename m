@@ -2,45 +2,53 @@ Return-Path: <SRS0=sPV+=KV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42964C2B9F7
-	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 08:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64CCFC47082
+	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 09:15:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 03B8D613CC
-	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 08:31:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03B8D613CC
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1823C61248
+	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 09:15:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1823C61248
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=huawei.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.132388.246958 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.132399.246973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lloxC-0006fi-AR; Wed, 26 May 2021 08:31:50 +0000
+	id 1llpcx-0002LB-5w; Wed, 26 May 2021 09:14:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 132388.246958; Wed, 26 May 2021 08:31:50 +0000
+Received: by outflank-mailman (output) from mailman id 132399.246973; Wed, 26 May 2021 09:14:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lloxC-0006fb-6B; Wed, 26 May 2021 08:31:50 +0000
-Received: by outflank-mailman (input) for mailman id 132388;
- Wed, 26 May 2021 08:31:49 +0000
+	id 1llpcx-0002KH-15; Wed, 26 May 2021 09:14:59 +0000
+Received: by outflank-mailman (input) for mailman id 132399;
+ Wed, 26 May 2021 09:10:32 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZGBu=KV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lloxB-0006fV-Ii
- for xen-devel@lists.xenproject.org; Wed, 26 May 2021 08:31:49 +0000
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=mEKv=KV=huawei.com=chenhuang5@srs-us1.protection.inumbo.net>)
+ id 1llpYe-0002BS-B3
+ for xen-devel@lists.xenproject.org; Wed, 26 May 2021 09:10:32 +0000
+Received: from szxga05-in.huawei.com (unknown [45.249.212.191])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7228b69c-c542-4673-93ab-84065a47279e;
- Wed, 26 May 2021 08:31:48 +0000 (UTC)
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 92AB7B122;
- Wed, 26 May 2021 08:31:47 +0000 (UTC)
+ id b8f20abb-2fc9-421d-9497-7b9cbba889f5;
+ Wed, 26 May 2021 09:10:26 +0000 (UTC)
+Received: from dggems702-chm.china.huawei.com (unknown [172.30.72.60])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4FqlTK1TgvzkYSH;
+ Wed, 26 May 2021 17:07:33 +0800 (CST)
+Received: from dggema756-chm.china.huawei.com (10.1.198.198) by
+ dggems702-chm.china.huawei.com (10.3.19.179) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2176.2; Wed, 26 May 2021 17:10:24 +0800
+Received: from localhost.localdomain (10.175.112.125) by
+ dggema756-chm.china.huawei.com (10.1.198.198) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2176.2; Wed, 26 May 2021 17:10:23 +0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,40 +60,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7228b69c-c542-4673-93ab-84065a47279e
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622017907; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=c+k/yzqGlAGx0UctOAHow0WXoiiTdCLO+6Z7UG8i2ro=;
-	b=erRdeD3VOz6+be+GDCqCdp+jSfHsaqPflBPKbpQXDaEojRPCZS4h4rNFFh5u/DdwLFThH5
-	2gDsFPilL9ZTdjprn+6w4JAs7watJUHM2RlVZqgJAbwhiqFefsvDVnfJT++J7PDmlYWHkf
-	AxF5qJIRCXSlpt7mU7sZMY6fd1MH+lc=
-Subject: Re: [PATCH v2] firmware/shim: UNSUPPORTED=n
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>
-References: <19695ffc-34d8-b682-b092-668f872d4e57@suse.com>
- <72b98382-34ba-6e9d-c90e-c913dfe66258@suse.com>
- <YK4Gbz0fat7DRY+o@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <50ca498e-a95f-f187-2fdb-70f5a1978bfe@suse.com>
-Date: Wed, 26 May 2021 10:31:43 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+X-Inumbo-ID: b8f20abb-2fc9-421d-9497-7b9cbba889f5
+From: Chen Huang <chenhuang5@huawei.com>
+To: Michael Ellerman <mpe@ellerman.id.au>, Benjamin Herrenschmidt
+	<benh@kernel.crashing.org>, Paul Mackerras <paulus@samba.org>, "Boris
+ Ostrovsky" <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, Mark Fasheh <mark@fasheh.com>,
+	Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+	Nathan Lynch <nathanl@linux.ibm.com>, Andrew Donnellan <ajd@linux.ibm.com>,
+	Alexey Kardashevskiy <aik@ozlabs.ru>, Andrew Morton
+	<akpm@linux-foundation.org>, Stephen Rothwell <sfr@canb.auug.org.au>, "Jens
+ Axboe" <axboe@kernel.dk>, Yang Yingliang <yangyingliang@huawei.com>,
+	"Masahiro Yamada" <masahiroy@kernel.org>, Dan Carpenter
+	<dan.carpenter@oracle.com>
+CC: <linuxppc-dev@lists.ozlabs.org>, <linux-kernel@vger.kernel.org>,
+	<xen-devel@lists.xenproject.org>, <ocfs2-devel@oss.oracle.com>, Chen Huang
+	<chenhuang5@huawei.com>
+Subject: [PATCH -next 3/3] ocfs2: Replaced simple_strtoull() with kstrtoull()
+Date: Wed, 26 May 2021 09:20:20 +0000
+Message-ID: <20210526092020.554341-3-chenhuang5@huawei.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210526092020.554341-1-chenhuang5@huawei.com>
+References: <20210526092020.554341-1-chenhuang5@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <YK4Gbz0fat7DRY+o@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.175.112.125]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ dggema756-chm.china.huawei.com (10.1.198.198)
+X-CFilter-Loop: Reflected
 
-On 26.05.2021 10:27, Roger Pau Monné wrote:> It's also confusing that the scheduler that gets set as the default> when shim exclusive is selected is not available to enable/disable:> > [*] Credit scheduler support (NEW)> [*] Credit2 scheduler support (NEW)>     Default Scheduler? (Null Scheduler)  --->
-I don't view this as confusing - we want the null scheduler there in
-this case, unconditionally. But yes, the prompt's condition could of
-course also have "PV_SHIM || " added.
+The simple_strtoull() function is deprecated in some situation since
+it does not check for the range overflow, use kstrtoull() instead.
 
-Jan
+Signed-off-by: Chen Huang <chenhuang5@huawei.com>
+---
+ fs/ocfs2/cluster/heartbeat.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/fs/ocfs2/cluster/heartbeat.c b/fs/ocfs2/cluster/heartbeat.c
+index 1169c8dc9106..f89ffcbd585f 100644
+--- a/fs/ocfs2/cluster/heartbeat.c
++++ b/fs/ocfs2/cluster/heartbeat.c
+@@ -1596,12 +1596,13 @@ static ssize_t o2hb_region_start_block_store(struct config_item *item,
+ 	struct o2hb_region *reg = to_o2hb_region(item);
+ 	unsigned long long tmp;
+ 	char *p = (char *)page;
++	ssize_t ret;
+ 
+ 	if (reg->hr_bdev)
+ 		return -EINVAL;
+ 
+-	tmp = simple_strtoull(p, &p, 0);
+-	if (!p || (*p && (*p != '\n')))
++	ret = kstrtoull(p, 0, &tmp);
++	if (ret)
+ 		return -EINVAL;
+ 
+ 	reg->hr_start_block = tmp;
+-- 
+2.25.1
+
 
