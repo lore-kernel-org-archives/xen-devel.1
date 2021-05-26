@@ -7,42 +7,40 @@ X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A93AC47082
-	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 15:12:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B7C6C47082
+	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 15:22:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D778A6101E
-	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 15:12:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D778A6101E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id ED078613D2
+	for <xen-devel@archiver.kernel.org>; Wed, 26 May 2021 15:22:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED078613D2
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.132575.247237 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.132587.247259 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llvCQ-0004AR-FO; Wed, 26 May 2021 15:11:58 +0000
+	id 1llvMQ-00062s-NW; Wed, 26 May 2021 15:22:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 132575.247237; Wed, 26 May 2021 15:11:58 +0000
+Received: by outflank-mailman (output) from mailman id 132587.247259; Wed, 26 May 2021 15:22:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1llvCQ-0004AK-B4; Wed, 26 May 2021 15:11:58 +0000
-Received: by outflank-mailman (input) for mailman id 132575;
- Wed, 26 May 2021 15:11:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1llvMQ-00062l-Jm; Wed, 26 May 2021 15:22:18 +0000
+Received: by outflank-mailman (input) for mailman id 132587;
+ Wed, 26 May 2021 15:22:17 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZGBu=KV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1llvCP-0004AA-30
- for xen-devel@lists.xenproject.org; Wed, 26 May 2021 15:11:57 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 52aee2e4-7622-4a7d-945b-85364e833a7c;
- Wed, 26 May 2021 15:11:56 +0000 (UTC)
-Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by smtp-out2.suse.de (Postfix) with ESMTP id 86A7D1FD2A;
- Wed, 26 May 2021 15:11:55 +0000 (UTC)
-Received: from director2.suse.de (director2.suse-dmz.suse.de [192.168.254.72])
- by imap.suse.de (Postfix) with ESMTPSA id 662C511A98;
- Wed, 26 May 2021 15:11:55 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1llvMP-00062M-Kf
+ for xen-devel@lists.xenproject.org; Wed, 26 May 2021 15:22:17 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1llvML-0003JB-RQ; Wed, 26 May 2021 15:22:13 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1llvML-0007OT-LN; Wed, 26 May 2021 15:22:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,73 +52,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 52aee2e4-7622-4a7d-945b-85364e833a7c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622041915; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gTKMvUe9ERASua/BgbH1Bv67rkqrl0Ql9ZSgM5GmWYU=;
-	b=fxfwCc+uFdvhjLdOJGm1J4xDJ5gz+ZkeJIUCF9tazpLx2oHiXGTN/hy2S8qpF+QG5WVxvx
-	Z7V8zOsq9tJ1Gl1n29Nfxv05M0kVHa0ntZBAtcqZyCoq0XmfpBPOPSC6VtJJ+oDohofMZp
-	KrFWknqmnRq1XK1n0LOyPTYSboVB1lY=
-Subject: Re: [PATCH 03/13] cpufreq: Export intel_feature_detect
-To: Jason Andryuk <jandryuk@gmail.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
-References: <20210503192810.36084-1-jandryuk@gmail.com>
- <20210503192810.36084-4-jandryuk@gmail.com>
- <68c32d6e-8c6f-35da-c9cd-a560d3d6895b@suse.com>
- <CAKf6xpuni2=Ud9hojAn2U_aBEVQHNU7KkR9sG8WM6RMCYOnf7Q@mail.gmail.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <8525296a-607b-a0b2-94b3-67706764a9c4@suse.com>
-Date: Wed, 26 May 2021 17:11:50 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=zoAuU7FmjXI3cpHS6x/57rn0nuIppVk1pzVGGjtL/V0=; b=QtPZ6TOWQQIVeXARZxJpaCXnoq
+	OkPUsoH4inb6iEmh0O4SSuKWlWQo6pkLEBi0qApti48QSeYrYg6YVG6I9vEG+NaMGgeR02epDSQCS
+	1JS8WJiNrdHI3+4+Wu2mMMTg/PFrGY1LOFgRROENUJUEgzqTgnUJAbj3T4aEOfOnNDT8=;
+Subject: Re: [PATCH v2 0/2] Use const whenever we point to literal strings
+ (take 1)
+To: xen-devel@lists.xenproject.org
+Cc: Julien Grall <jgrall@amazon.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <20210518140134.31541-1-julien@xen.org>
+From: Julien Grall <julien@xen.org>
+Message-ID: <d6a96741-6b78-882e-4dcf-cb2439846927@xen.org>
+Date: Wed, 26 May 2021 16:22:11 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.10.2
 MIME-Version: 1.0
-In-Reply-To: <CAKf6xpuni2=Ud9hojAn2U_aBEVQHNU7KkR9sG8WM6RMCYOnf7Q@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <20210518140134.31541-1-julien@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-On 26.05.2021 16:44, Jason Andryuk wrote:
-> On Wed, May 26, 2021 at 9:27 AM Jan Beulich <jbeulich@suse.com> wrote:
->> On 03.05.2021 21:28, Jason Andryuk wrote:
->>> --- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
->>> +++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
->>> @@ -340,7 +340,7 @@ static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
->>>      return extract_freq(get_cur_val(cpumask_of(cpu)), data);
->>>  }
->>>
->>> -static void feature_detect(void *info)
->>> +void intel_feature_detect(void *info)
->>>  {
->>>      struct cpufreq_policy *policy = info;
->>
->> ... because of this (requiring the hwp code to stay in sync with
->> possible changes here, without the compiler being able to point
->> out inconsistencies) I'm not overly happy with such a change. Yet
->> I guess this isn't the first case we have in the code base.
-> 
-> For acpi-cpufreq, this is called by on_selected_cpus(), but hwp calls
-> this directly.  You could do something like:
-> 
-> void intel_feature_detect(struct cpufreq_policy *policy)
-> {
->     /* current feature_detect() */
-> }
-> 
-> static void feature_detect(void *info)
->     struct cpufreq_policy *policy = info;
-> 
->     intel_feature_detect(policy);
-> }
-> 
-> Would you prefer that?
 
-Would feel less fragile, yes. And no need for the intermediate "policy"
-variable, afaics.
 
-Jan
+On 18/05/2021 15:01, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+> 
+> Hi all,
+> 
+> By default, both Clang and GCC will happily compile C code where
+> non-const char * point to literal strings. This means the following
+> code will be accepted:
+> 
+>      char *str = "test";
+> 
+>      str[0] = 'a';
+> 
+> Literal strings will reside in rodata, so they are not modifiable.
+> This will result to an permission fault at runtime if the permissions
+> are enforced in the page-tables (this is the case in Xen).
+> 
+> I am not aware of code trying to modify literal strings in Xen.
+> However, there is a frequent use of non-const char * to point to
+> literal strings. Given the size of the codebase, there is a risk
+> to involuntarily introduce code that will modify literal strings.
+> 
+> Therefore it would be better to enforce using const when pointing
+> to such strings. Both GCC and Clang provide an option to warn
+> for such case (see -Wwrite-strings) and therefore could be used
+> by Xen.
+> 
+> This series doesn't yet make use of -Wwrite-strings because
+> the tree is not fully converted. Instead, it contains some easy
+> and non-controversial use of const in the code.
+> 
+> Julien Grall (2):
+>    xen/char: console: Use const whenever we point to literal strings
+>    tools/console: Use const whenever we point to literal strings
+
+I have committed the two patches.
+
+> 
+>   tools/console/client/main.c |  4 ++--
+>   tools/console/daemon/io.c   | 15 ++++++++-------
+>   xen/drivers/char/console.c  |  7 ++++---
+>   3 files changed, 14 insertions(+), 12 deletions(-)
+> 
+
+-- 
+Julien Grall
 
