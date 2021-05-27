@@ -2,55 +2,49 @@ Return-Path: <SRS0=cWgu=KW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5B93C4708A
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 08:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04651C4708A
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 09:46:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B0906135F
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 08:53:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B0906135F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
+	by mail.kernel.org (Postfix) with ESMTPS id A2791613E2
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 09:46:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A2791613E2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.132928.247874 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.132944.247908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmBlC-00070k-6L; Thu, 27 May 2021 08:52:58 +0000
+	id 1lmCaU-0003X0-IR; Thu, 27 May 2021 09:45:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 132928.247874; Thu, 27 May 2021 08:52:58 +0000
+Received: by outflank-mailman (output) from mailman id 132944.247908; Thu, 27 May 2021 09:45:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmBlC-00070d-2H; Thu, 27 May 2021 08:52:58 +0000
-Received: by outflank-mailman (input) for mailman id 132928;
- Thu, 27 May 2021 08:52:56 +0000
+	id 1lmCaU-0003Wt-Fd; Thu, 27 May 2021 09:45:58 +0000
+Received: by outflank-mailman (input) for mailman id 132944;
+ Thu, 27 May 2021 09:45:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+dwL=KW=darkstar.site=sakib@srs-us1.protection.inumbo.net>)
- id 1lmBlA-00070X-DZ
- for xen-devel@lists.xenproject.org; Thu, 27 May 2021 08:52:56 +0000
-Received: from pb-smtp2.pobox.com (unknown [64.147.108.71])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=HjtO=KW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lmCaT-0003Wn-Kg
+ for xen-devel@lists.xenproject.org; Thu, 27 May 2021 09:45:57 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1113c13b-c9a8-4107-834e-9619cb4dc8b0;
- Thu, 27 May 2021 08:52:54 +0000 (UTC)
-Received: from pb-smtp2.pobox.com (unknown [127.0.0.1])
- by pb-smtp2.pobox.com (Postfix) with ESMTP id 90AF6CEDCB;
- Thu, 27 May 2021 04:52:54 -0400 (EDT)
- (envelope-from sakib@darkstar.site)
-Received: from pb-smtp2.nyi.icgroup.com (unknown [127.0.0.1])
- by pb-smtp2.pobox.com (Postfix) with ESMTP id 86F59CEDCA;
- Thu, 27 May 2021 04:52:54 -0400 (EDT)
- (envelope-from sakib@darkstar.site)
-Received: from localhost (unknown [95.67.114.216])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id e7d14f91-6856-4b89-9659-88547c01e8f3;
+ Thu, 27 May 2021 09:45:56 +0000 (UTC)
+Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by pb-smtp2.pobox.com (Postfix) with ESMTPSA id C2A06CEDC9;
- Thu, 27 May 2021 04:52:53 -0400 (EDT)
- (envelope-from sakib@darkstar.site)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id B23E42190B;
+ Thu, 27 May 2021 09:45:55 +0000 (UTC)
+Received: from director2.suse.de (director2.suse-dmz.suse.de [192.168.254.72])
+ by imap.suse.de (Postfix) with ESMTPSA id 83F2611A98;
+ Thu, 27 May 2021 09:45:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,76 +56,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1113c13b-c9a8-4107-834e-9619cb4dc8b0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=from:to:cc
-	:subject:date:message-id:mime-version:content-transfer-encoding;
-	 s=sasl; bh=pSkglQJM+7qceceFKKwFTWVbzJdX1y2GYzYnRFShvQs=; b=VdZR
-	TxT1GbOMZuEC3XnM3lC/+uRDjNcy8WKRV68el2EiGzrWgqLyn4762nB/q17AzZeW
-	1tRM5qdoiIHBBSp4JxUYde6Cm081/YUHwplJbnqyYcZkVu72iYllj7FVDuaPiVVH
-	EfFUchIj7/FwIpmwNagz/EELW7ye7sQgWuL/E4Q=
-From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
-	Julien Grall <julien@xen.org>
-Subject: [XEN PATCH v2] libxl/arm: provide guests with random seed
-Date: Thu, 27 May 2021 08:52:33 +0000
-Message-Id: <20210527085233.69917-1-Sergiy_Kibrik@epam.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: e7d14f91-6856-4b89-9659-88547c01e8f3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1622108755; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ZMfg0ZqAjEjaoCXvWTP+GjBsqLLG3fjL71ifeFrWL6I=;
+	b=sp1a2HC7UbuUGf5kQsnOB9sQ0TqJzNc+AWUsNqDtyqLsd8/aFXk6twDGiwEaRrz3jtZYd1
+	aZGFo7mlbi5PXXWBDGtxfyP79mtqzdz11a9Ky2ACz8TWl1bwNYcA0h1t515u75kTDUTNb9
+	jm7RwEmS7gY8UYR5DS3nO6bwvXzO+fs=
+Subject: Re: [PATCH 10/13] libxc: Add xc_set_cpufreq_hwp
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20210503192810.36084-1-jandryuk@gmail.com>
+ <20210503192810.36084-11-jandryuk@gmail.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <8871a5b3-c03d-8438-b228-b1699c5b2747@suse.com>
+Date: Thu, 27 May 2021 11:45:51 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.2
 MIME-Version: 1.0
-X-Pobox-Relay-ID:
- ECA8B4A0-BEC8-11EB-ADE8-FD8818BA3BAF-90055647!pb-smtp2.pobox.com
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20210503192810.36084-11-jandryuk@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Pass 128 bytes of random seed via FDT, so that guests' CRNGs are better s=
-eeded
-early at boot. This is larger than ChaCha20 key size of 32, so each byte =
-of
-CRNG state will be mixed 4 times using this seed. There does not seem to =
-be
-advantage in larger seed though.
+On 03.05.2021 21:28, Jason Andryuk wrote:
+> --- a/tools/libs/ctrl/xc_pm.c
+> +++ b/tools/libs/ctrl/xc_pm.c
+> @@ -330,6 +330,24 @@ int xc_set_cpufreq_para(xc_interface *xch, int cpuid,
+>      return xc_sysctl(xch, &sysctl);
+>  }
+>  
+> +int xc_set_cpufreq_hwp(xc_interface *xch, int cpuid,
+> +                       xc_set_hwp_para_t *set_hwp)
 
-Depending on its configuration Linux can use the seed as device randomnes=
-s
-or to just quickly initialize CRNG.
-In either case this will provide extra randomness to further harden CRNG.
+Besides for general considerations, for xenpm to legitimately pass
+the same struct instance into this function multiple times, the
+last parameter wants to be pointer-to-const, declaring the intent
+of the function to leave the struct unaltered.
 
-CC: Julien Grall <julien@xen.org>
-Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
----
- tools/libxl/libxl_arm.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/tools/libxl/libxl_arm.c b/tools/libxl/libxl_arm.c
-index 34f8a29056..d3a4a72fb7 100644
---- a/tools/libxl/libxl_arm.c
-+++ b/tools/libxl/libxl_arm.c
-@@ -304,6 +304,9 @@ static int make_chosen_node(libxl__gc *gc, void *fdt,=
- bool ramdisk,
- {
-     int res;
-=20
-+    /* 1024 bit enough to mix Linux CRNG state several times */
-+    uint8_t seed[128];
-+
-     /* See linux Documentation/devicetree/... */
-     res =3D fdt_begin_node(fdt, "chosen");
-     if (res) return res;
-@@ -342,6 +345,11 @@ static int make_chosen_node(libxl__gc *gc, void *fdt=
-, bool ramdisk,
-         if (res) return res;
-     }
-=20
-+    res =3D libxl__random_bytes(gc, seed, sizeof(seed));
-+    if (res) return res;
-+    res =3D fdt_property(fdt, "rng-seed", seed, sizeof(seed));
-+    if (res) return res;
-+
-     res =3D fdt_end_node(fdt);
-     if (res) return res;
-=20
---=20
-2.25.1
-
+Jan
 
