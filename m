@@ -2,50 +2,49 @@ Return-Path: <SRS0=cWgu=KW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92376C4707F
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 07:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2D74C4707F
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 07:23:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4388E61132
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 07:16:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4388E61132
+	by mail.kernel.org (Postfix) with ESMTPS id 7AFD8613DA
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 07:23:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AFD8613DA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.132842.247725 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.132848.247736 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmAFL-0000D0-Ny; Thu, 27 May 2021 07:15:59 +0000
+	id 1lmAMU-0001cu-G8; Thu, 27 May 2021 07:23:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 132842.247725; Thu, 27 May 2021 07:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 132848.247736; Thu, 27 May 2021 07:23:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmAFL-0000Ct-Kj; Thu, 27 May 2021 07:15:59 +0000
-Received: by outflank-mailman (input) for mailman id 132842;
- Thu, 27 May 2021 07:15:58 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lmAMU-0001cn-Cs; Thu, 27 May 2021 07:23:22 +0000
+Received: by outflank-mailman (input) for mailman id 132848;
+ Thu, 27 May 2021 07:23:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HjtO=KW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lmAFJ-0000Cn-Tz
- for xen-devel@lists.xenproject.org; Thu, 27 May 2021 07:15:57 +0000
+ id 1lmAMT-0001cf-C6
+ for xen-devel@lists.xenproject.org; Thu, 27 May 2021 07:23:21 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ba0f1b88-0bec-4086-b892-35dc8f9ff801;
- Thu, 27 May 2021 07:15:57 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9c779728-4cec-4917-9c06-c070ab235e5a;
+ Thu, 27 May 2021 07:23:20 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 3E5922190A;
- Thu, 27 May 2021 07:15:56 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6D38A2190A;
+ Thu, 27 May 2021 07:23:19 +0000 (UTC)
 Received: from director2.suse.de (director2.suse-dmz.suse.de [192.168.254.72])
- by imap.suse.de (Postfix) with ESMTPSA id 0380611A98;
- Thu, 27 May 2021 07:15:55 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTPSA id 36E9511A98;
+ Thu, 27 May 2021 07:23:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,63 +56,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba0f1b88-0bec-4086-b892-35dc8f9ff801
+X-Inumbo-ID: 9c779728-4cec-4917-9c06-c070ab235e5a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622099756; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622100199; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=GSFiw99vkDCfksJCNjMxSg92+xJbb+84PggazZo4UNQ=;
-	b=UaStFBVOwTw2qcPAOAW7vraK2N7AzDnpdx9IlNm++93MrHbQnf7BhQmtxsysPkePL/Fd4p
-	efP49B6rmJDSKSd0uLKSuwCZCExtu9P4/rs4Ht+3yjMLPmWL8b1SfdODyxxk2Vz4FXdgUi
-	2dkOszpTLvUBOHRE/xqgTnTI3LAfxQ0=
-Subject: Re: [PATCH v2] xen/page_alloc: Remove dead code in
- alloc_domheap_pages()
-To: Julien Grall <julien@xen.org>
-Cc: Julien Grall <jgrall@amazon.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <20210526161129.28572-1-julien@xen.org>
+	bh=pkFIpzBnw3DwNtJs0V+aqBKdsK8tpoUaHxyqzYMjdW4=;
+	b=QRafSssdVJf3pCgwoKfrjLmc2aI+1lUpUEqxLIPI92NtdOJx1F9krFa2A0VmNGcLL27PgC
+	kGDJi/La/OOJmilw91lsamHdT3AHbSgolk5dutjYRxkv6i2XJ3U+pa5HcMcov05b6/otrh
+	ki0DtFHqX8dIG+JK3baoyvgrJYCLH9g=
+Subject: Re: [PATCH 04/13] cpufreq: Add Hardware P-State (HWP) driver
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b449be48-cded-b1a2-5086-d4d6856ed5dc@suse.com>
-Date: Thu, 27 May 2021 09:15:51 +0200
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+References: <20210503192810.36084-1-jandryuk@gmail.com>
+ <20210503192810.36084-5-jandryuk@gmail.com>
+ <1747789a-ab6c-cdae-ed35-a6b81ac580a9@suse.com>
+Message-ID: <62a49a25-678c-f854-69e7-4af123937791@suse.com>
+Date: Thu, 27 May 2021 09:23:15 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.2
 MIME-Version: 1.0
-In-Reply-To: <20210526161129.28572-1-julien@xen.org>
+In-Reply-To: <1747789a-ab6c-cdae-ed35-a6b81ac580a9@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 26.05.2021 18:11, Julien Grall wrote:
-> From: Julien Grall <jgrall@amazon.com>
+On 26.05.2021 16:59, Jan Beulich wrote:
+> On 03.05.2021 21:28, Jason Andryuk wrote:
+>> +static void hdc_set_pkg_hdc_ctl(bool val)
+>> +{
+>> +    uint64_t msr;
+>> +
+>> +    if ( rdmsr_safe(MSR_IA32_PKG_HDC_CTL, msr) )
+>> +    {
+>> +        hwp_err("error rdmsr_safe(MSR_IA32_PKG_HDC_CTL)\n");
 > 
-> Since commit 1aac966e24e9 "xen: support RAM at addresses 0 and 4096",
-> bits_to_zone() will never return 0 and it is expected that we have
-> minimum 2 zones.
-> 
-> Therefore the check in alloc_domheap_pages() is unnecessary and can
-> be removed. However, for sanity, it is replaced with an ASSERT().
-> 
-> Also take the opportunity to switch from min_t() to min() as
-> bits_to_zone() cannot return a negative value. The macro is tweaked
-> to make it clearer.
-> 
-> This bug was discovered and resolved using Coverity Static Analysis
-> Security Testing (SAST) by Synopsys, Inc.
-> 
-> Signed-off-by: Julien Grall <jgrall@amazon.com>
-> 
-> ---
->     Changes in v2:
->         - Remove BUILD_BUG_ON()
->         - Switch from min_t() to min()
+> I'm not convinced of the need of having such log messages after
+> failed rdmsr/wrmsr, but I'm definitely against them getting logged
+> unconditionally. In verbose mode, maybe.
 
-Since this fulfills the dependencies put in place at the time, the
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-continues to apply here. Thanks for making the adjustments.
+Perhaps not even there, considering that recovery from faults gets
+logged already anyway (see extable_fixup()), and is suitably
+restricted to debug builds.
 
 Jan
 
