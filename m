@@ -2,49 +2,43 @@ Return-Path: <SRS0=cWgu=KW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1109C47089
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4752EC4707F
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:35:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 671B6613AF
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:29:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 671B6613AF
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 079556113B
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:35:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 079556113B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.133027.248057 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.133045.248072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmECE-0001Km-8p; Thu, 27 May 2021 11:29:02 +0000
+	id 1lmEIB-0002yX-7H; Thu, 27 May 2021 11:35:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 133027.248057; Thu, 27 May 2021 11:29:02 +0000
+Received: by outflank-mailman (output) from mailman id 133045.248072; Thu, 27 May 2021 11:35:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmECE-0001Kf-58; Thu, 27 May 2021 11:29:02 +0000
-Received: by outflank-mailman (input) for mailman id 133027;
- Thu, 27 May 2021 11:29:01 +0000
+	id 1lmEIB-0002yQ-4F; Thu, 27 May 2021 11:35:11 +0000
+Received: by outflank-mailman (input) for mailman id 133045;
+ Thu, 27 May 2021 11:35:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=HjtO=KW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lmECD-0001H9-9o
- for xen-devel@lists.xenproject.org; Thu, 27 May 2021 11:29:01 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ (envelope-from <SRS0=Nal+=KW=kernel.org=will@srs-us1.protection.inumbo.net>)
+ id 1lmEI9-0002yK-Fn
+ for xen-devel@lists.xenproject.org; Thu, 27 May 2021 11:35:09 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ccd41df2-1a00-4c88-b47c-5a3e3295610c;
- Thu, 27 May 2021 11:29:00 +0000 (UTC)
-Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
- (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id B92B2218DD;
- Thu, 27 May 2021 11:28:59 +0000 (UTC)
-Received: from director2.suse.de (director2.suse-dmz.suse.de [192.168.254.72])
- by imap.suse.de (Postfix) with ESMTPSA id 89EBA11A98;
- Thu, 27 May 2021 11:28:59 +0000 (UTC)
+ id 9157bd06-f5ff-422e-81b0-d12d985a0491;
+ Thu, 27 May 2021 11:35:08 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2886A6113B;
+ Thu, 27 May 2021 11:35:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,186 +50,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ccd41df2-1a00-4c88-b47c-5a3e3295610c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622114939; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Qa0Zu1mlw1DByVU5m9GtwBNK3+ZFmTcifmkaJak5uN8=;
-	b=d+b+azCuQyhsO/FD1UhTHtvaamexyHVttDUtgvuCVkKpDRVdJJn1InNe1ALl1V5+1vrRgY
-	Zwg+6cEZjmwGb2H83o+yRriuFsXz1aqqPvBJAUCTFC+w7H1bCRhU1X1G9enZgB3c0jMM1v
-	GTCXDSE2vdFln/wWaohvCRlqP8xvQnk=
-Subject: [PATCH v6 3/3] evtchn: type adjustments
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <01bbf3d4-ca6a-e837-91fe-b34aa014564c@suse.com>
-Message-ID: <8f7b57da-cd10-5f96-62fe-1a6e28c8981f@suse.com>
-Date: Thu, 27 May 2021 13:28:59 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+X-Inumbo-ID: 9157bd06-f5ff-422e-81b0-d12d985a0491
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1622115307;
+	bh=awWFyuDtGzTSFYuKnqnAwD8I2u8LvxPLkIedgwXpacY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=p4bPfFCD5PrcmECQ/JmYfkoIQvGIdlvd3Xmt5WsLHiji5zjF5hUpY/7jV/AEVHJHW
+	 CB6f9oBS2X3aNGgQ3+WcdNwOGV1gPRmBycO/zJJUoapgziqu+7IL5STMx1dAhYz3+T
+	 0bM7UEMZILv76zqCaWO+pWXqjNmfb4VQ6CH4Qz9dn7I0OepvY2P5/VxhAaiFsn1JPd
+	 ce1hSAg7oNQpoYW+JbRsJjBqIARt3uf0TgyQ8bjr7saHdzXTBfM/jxaDHBHbhfTQ4Z
+	 nDFzJaE8tdL5MVg6406RffF7r/1Of9XzA/MNxWJkmUtb6zscbeJZBFAuG32Qt3uWbG
+	 DCkceG/OoqRLg==
+Date: Thu, 27 May 2021 12:34:57 +0100
+From: Will Deacon <will@kernel.org>
+To: Claire Chang <tientzu@chromium.org>
+Cc: heikki.krogerus@linux.intel.com, thomas.hellstrom@linux.intel.com,
+	peterz@infradead.org, benh@kernel.crashing.org,
+	joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
+	chris@chris-wilson.co.uk, grant.likely@arm.com, paulus@samba.org,
+	Frank Rowand <frowand.list@gmail.com>, mingo@kernel.org,
+	sstabellini@kernel.org, Saravana Kannan <saravanak@google.com>,
+	mpe@ellerman.id.au,
+	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+	Christoph Hellwig <hch@lst.de>,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>, bskeggs@redhat.com,
+	linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
+	Thierry Reding <treding@nvidia.com>,
+	intel-gfx@lists.freedesktop.org, matthew.auld@intel.com,
+	linux-devicetree <devicetree@vger.kernel.org>,
+	Jianxiong Gao <jxgao@google.com>, Daniel Vetter <daniel@ffwll.ch>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	maarten.lankhorst@linux.intel.com, airlied@linux.ie,
+	Dan Williams <dan.j.williams@intel.com>,
+	linuxppc-dev@lists.ozlabs.org, jani.nikula@linux.intel.com,
+	Rob Herring <robh+dt@kernel.org>, rodrigo.vivi@intel.com,
+	Bjorn Helgaas <bhelgaas@google.com>, boris.ostrovsky@oracle.com,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	jgross@suse.com, Nicolas Boichat <drinkcat@chromium.org>,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	lkml <linux-kernel@vger.kernel.org>,
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>, xypron.glpk@gmx.de,
+	Robin Murphy <robin.murphy@arm.com>, bauerman@linux.ibm.com
+Subject: Re: [PATCH v7 14/15] dt-bindings: of: Add restricted DMA pool
+Message-ID: <20210527113456.GA22019@willie-the-truck>
+References: <20210518064215.2856977-1-tientzu@chromium.org>
+ <20210518064215.2856977-15-tientzu@chromium.org>
+ <20210526121322.GA19313@willie-the-truck>
+ <20210526155321.GA19633@willie-the-truck>
+ <CALiNf2_sVXnb97++yWusB5PWz8Pzfn9bCKZc6z3tY4bx6-nW8w@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <01bbf3d4-ca6a-e837-91fe-b34aa014564c@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALiNf2_sVXnb97++yWusB5PWz8Pzfn9bCKZc6z3tY4bx6-nW8w@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-First of all avoid "long" when "int" suffices, i.e. in particular when
-merely conveying error codes. 32-bit values are slightly cheaper to
-deal with on x86, and their processing is at least no more expensive on
-Arm. Where possible use evtchn_port_t for port numbers and unsigned int
-for other unsigned quantities in adjacent code. In evtchn_set_priority()
-eliminate a local variable altogether instead of changing its type.
+On Thu, May 27, 2021 at 07:29:20PM +0800, Claire Chang wrote:
+> On Wed, May 26, 2021 at 11:53 PM Will Deacon <will@kernel.org> wrote:
+> >
+> > On Wed, May 26, 2021 at 01:13:22PM +0100, Will Deacon wrote:
+> > > On Tue, May 18, 2021 at 02:42:14PM +0800, Claire Chang wrote:
+> > > > @@ -138,4 +160,9 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
+> > > >             memory-region = <&multimedia_reserved>;
+> > > >             /* ... */
+> > > >     };
+> > > > +
+> > > > +   pcie_device: pcie_device@0,0 {
+> > > > +           memory-region = <&restricted_dma_mem_reserved>;
+> > > > +           /* ... */
+> > > > +   };
+> > >
+> > > I still don't understand how this works for individual PCIe devices -- how
+> > > is dev->of_node set to point at the node you have above?
+> > >
+> > > I tried adding the memory-region to the host controller instead, and then
+> > > I see it crop up in dmesg:
+> > >
+> > >   | pci-host-generic 40000000.pci: assigned reserved memory node restricted_dma_mem_reserved
+> > >
+> > > but none of the actual PCI devices end up with 'dma_io_tlb_mem' set, and
+> > > so the restricted DMA area is not used. In fact, swiotlb isn't used at all.
+> > >
+> > > What am I missing to make this work with PCIe devices?
+> >
+> > Aha, looks like we're just missing the logic to inherit the DMA
+> > configuration. The diff below gets things working for me.
+> 
+> I guess what was missing is the reg property in the pcie_device node.
+> Will update the example dts.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v6: Re-base for re-ordering / shrinking of series.
-v4: New.
+Thanks. I still think something like my diff makes sense, if you wouldn't mind including
+it, as it allows restricted DMA to be used for situations where the PCIe
+topology is not static.
 
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -284,13 +284,12 @@ void evtchn_free(struct domain *d, struc
-     xsm_evtchn_close_post(chn);
- }
- 
--static long evtchn_alloc_unbound(evtchn_alloc_unbound_t *alloc)
-+static int evtchn_alloc_unbound(evtchn_alloc_unbound_t *alloc)
- {
-     struct evtchn *chn;
-     struct domain *d;
--    int            port;
-+    int            port, rc;
-     domid_t        dom = alloc->dom;
--    long           rc;
- 
-     d = rcu_lock_domain_by_any_id(dom);
-     if ( d == NULL )
-@@ -342,13 +341,13 @@ static void double_evtchn_unlock(struct
-     evtchn_write_unlock(rchn);
- }
- 
--static long evtchn_bind_interdomain(evtchn_bind_interdomain_t *bind)
-+static int evtchn_bind_interdomain(evtchn_bind_interdomain_t *bind)
- {
-     struct evtchn *lchn, *rchn;
-     struct domain *ld = current->domain, *rd;
--    int            lport, rport = bind->remote_port;
-+    int            lport, rc;
-+    evtchn_port_t  rport = bind->remote_port;
-     domid_t        rdom = bind->remote_dom;
--    long           rc;
- 
-     if ( (rd = rcu_lock_domain_by_any_id(rdom)) == NULL )
-         return -ESRCH;
-@@ -484,12 +483,12 @@ int evtchn_bind_virq(evtchn_bind_virq_t
- }
- 
- 
--static long evtchn_bind_ipi(evtchn_bind_ipi_t *bind)
-+static int evtchn_bind_ipi(evtchn_bind_ipi_t *bind)
- {
-     struct evtchn *chn;
-     struct domain *d = current->domain;
--    int            port, vcpu = bind->vcpu;
--    long           rc = 0;
-+    int            port, rc = 0;
-+    unsigned int   vcpu = bind->vcpu;
- 
-     if ( domain_vcpu(d, vcpu) == NULL )
-         return -ENOENT;
-@@ -543,16 +542,16 @@ static void unlink_pirq_port(struct evtc
- }
- 
- 
--static long evtchn_bind_pirq(evtchn_bind_pirq_t *bind)
-+static int evtchn_bind_pirq(evtchn_bind_pirq_t *bind)
- {
-     struct evtchn *chn;
-     struct domain *d = current->domain;
-     struct vcpu   *v = d->vcpu[0];
-     struct pirq   *info;
--    int            port = 0, pirq = bind->pirq;
--    long           rc;
-+    int            port = 0, rc;
-+    unsigned int   pirq = bind->pirq;
- 
--    if ( (pirq < 0) || (pirq >= d->nr_pirqs) )
-+    if ( pirq >= d->nr_pirqs )
-         return -EINVAL;
- 
-     if ( !is_hvm_domain(d) && !pirq_access_permitted(d, pirq) )
-@@ -608,7 +607,7 @@ int evtchn_close(struct domain *d1, int
- {
-     struct domain *d2 = NULL;
-     struct evtchn *chn1 = _evtchn_from_port(d1, port1), *chn2;
--    long           rc = 0;
-+    int            rc = 0;
- 
-     if ( !chn1 )
-         return -EINVAL;
-@@ -959,7 +958,7 @@ int evtchn_status(evtchn_status_t *statu
-     domid_t          dom = status->dom;
-     int              port = status->port;
-     struct evtchn   *chn;
--    long             rc = 0;
-+    int              rc = 0;
- 
-     d = rcu_lock_domain_by_any_id(dom);
-     if ( d == NULL )
-@@ -1025,11 +1024,11 @@ int evtchn_status(evtchn_status_t *statu
- }
- 
- 
--long evtchn_bind_vcpu(unsigned int port, unsigned int vcpu_id)
-+int evtchn_bind_vcpu(evtchn_port_t port, unsigned int vcpu_id)
- {
-     struct domain *d = current->domain;
-     struct evtchn *chn;
--    long           rc = 0;
-+    int           rc = 0;
-     struct vcpu   *v;
- 
-     /* Use the vcpu info to prevent speculative out-of-bound accesses */
-@@ -1168,12 +1167,11 @@ int evtchn_reset(struct domain *d, bool
-     return rc;
- }
- 
--static long evtchn_set_priority(const struct evtchn_set_priority *set_priority)
-+static int evtchn_set_priority(const struct evtchn_set_priority *set_priority)
- {
-     struct domain *d = current->domain;
--    unsigned int port = set_priority->port;
--    struct evtchn *chn = _evtchn_from_port(d, port);
--    long ret;
-+    struct evtchn *chn = _evtchn_from_port(d, set_priority->port);
-+    int ret;
- 
-     if ( !chn )
-         return -EINVAL;
-@@ -1189,7 +1187,7 @@ static long evtchn_set_priority(const st
- 
- long do_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
--    long rc;
-+    int rc;
- 
-     switch ( cmd )
-     {
---- a/xen/include/xen/event.h
-+++ b/xen/include/xen/event.h
-@@ -54,7 +54,7 @@ void send_guest_pirq(struct domain *, co
- int evtchn_send(struct domain *d, unsigned int lport);
- 
- /* Bind a local event-channel port to the specified VCPU. */
--long evtchn_bind_vcpu(unsigned int port, unsigned int vcpu_id);
-+int evtchn_bind_vcpu(evtchn_port_t port, unsigned int vcpu_id);
- 
- /* Bind a VIRQ. */
- int evtchn_bind_virq(evtchn_bind_virq_t *bind, evtchn_port_t port);
+Perhaps we should prefer dev->of_node if it exists, but then use the node
+of the host bridge's parent node otherwise?
 
+Will
 
