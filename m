@@ -2,48 +2,45 @@ Return-Path: <SRS0=cWgu=KW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FDA7C4707F
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 13:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77DB8C4708B
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 13:06:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 32F73610A2
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 13:04:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32F73610A2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3DD7E61073
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 13:06:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DD7E61073
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.133299.248536 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.133310.248550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmFgj-0007ia-7r; Thu, 27 May 2021 13:04:37 +0000
+	id 1lmFiT-0000QJ-Pi; Thu, 27 May 2021 13:06:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 133299.248536; Thu, 27 May 2021 13:04:37 +0000
+Received: by outflank-mailman (output) from mailman id 133310.248550; Thu, 27 May 2021 13:06:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmFgj-0007iR-3h; Thu, 27 May 2021 13:04:37 +0000
-Received: by outflank-mailman (input) for mailman id 133299;
- Thu, 27 May 2021 13:04:35 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=spZp=KW=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lmFgh-0005ED-Nf
- for xen-devel@lists.xenproject.org; Thu, 27 May 2021 13:04:35 +0000
-Received: from mail-pg1-x529.google.com (unknown [2607:f8b0:4864:20::529])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8da5f5d4-b8fc-426f-8d4a-7c3b8316b614;
- Thu, 27 May 2021 13:04:12 +0000 (UTC)
-Received: by mail-pg1-x529.google.com with SMTP id l70so3663155pga.1
- for <xen-devel@lists.xenproject.org>; Thu, 27 May 2021 06:04:12 -0700 (PDT)
-Received: from localhost ([2401:fa00:95:205:a93:378d:9a9e:3b70])
- by smtp.gmail.com with UTF8SMTPSA id w197sm1969835pfc.5.2021.05.27.06.04.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 May 2021 06:04:11 -0700 (PDT)
+	id 1lmFiT-0000QC-MP; Thu, 27 May 2021 13:06:25 +0000
+Received: by outflank-mailman (input) for mailman id 133310;
+ Thu, 27 May 2021 13:06:25 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1lmFiT-0000Py-7q
+ for xen-devel@lists.xenproject.org; Thu, 27 May 2021 13:06:25 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lmFiR-0008CS-CC; Thu, 27 May 2021 13:06:23 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1lmFiR-000129-5t; Thu, 27 May 2021 13:06:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,170 +52,277 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8da5f5d4-b8fc-426f-8d4a-7c3b8316b614
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=t98IQ0DRt9rdYTgtaruQg3/PAS3qE8eaMmCBaIqRh14=;
-        b=GAjg2iwD8z4KXC0wmxl+b72WGOgo3axuh1N2ckUZTa0L2t7lEjUG/rd9vUciIgjM6/
-         BBoe8qhQS9McLcHa3Vql2S8tpN9ukDLaEDnz4WKO3KFwq/co1Y7IP35DmK8g86ONb0cC
-         2QkhzvjQas2dIg52wH3GUtMDzBV3jAGcZRtko=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=t98IQ0DRt9rdYTgtaruQg3/PAS3qE8eaMmCBaIqRh14=;
-        b=Q3lJ/n7s7NRJsRcX5covPzBvlRBpktRhFvStBQjgKSLprWxAv0w7A2b4qnxN2TdSDb
-         t9TWHt51N7S+Ipky2YFoyRc475Y3du7SNyheonQO8Wz4/ZY2/7/zZIGwk4+Ui373skJT
-         DTieml/eD0ObIV/Z4nVEGC3Wq3Pt3VUxhPa2y+hRQgW+jnBOP9qHsEL+9ILMGO/8hfsU
-         JjlDj5SovDsSOTuuSu322oXzfAD5rufVt5ZmZeDAwwbylerhbQrAhF1fOEANSwzty7rr
-         A19dyzQm7YeTYb7emTysghQ8tkZhC+rDCYYHszpQCwQyO2vL0gPug4Lz/31Oy96HJ6Ha
-         0Ibg==
-X-Gm-Message-State: AOAM5305e+02akOqwYoiYWO5fIVeJdOTGQyj0l3S2tLebYkPsPgLNdNX
-	1EPXUNZ4G2cRpgNufbKP+vdkrA==
-X-Google-Smtp-Source: ABdhPJz5SQWTqZi0xc7pup6EKCV3Dg34qwCaD2h6fUXISa0uHIOvWKamMjceM9SgliQmqLBbNqrp+Q==
-X-Received: by 2002:a62:cd49:0:b029:2d8:ae8d:6a9f with SMTP id o70-20020a62cd490000b02902d8ae8d6a9fmr3674431pfg.50.1622120651592;
-        Thu, 27 May 2021 06:04:11 -0700 (PDT)
-From: Claire Chang <tientzu@chromium.org>
-To: Rob Herring <robh+dt@kernel.org>,
-	mpe@ellerman.id.au,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Frank Rowand <frowand.list@gmail.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	Christoph Hellwig <hch@lst.de>,
-	Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: benh@kernel.crashing.org,
-	paulus@samba.org,
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
-	sstabellini@kernel.org,
-	Robin Murphy <robin.murphy@arm.com>,
-	grant.likely@arm.com,
-	xypron.glpk@gmx.de,
-	Thierry Reding <treding@nvidia.com>,
-	mingo@kernel.org,
-	bauerman@linux.ibm.com,
-	peterz@infradead.org,
-	Greg KH <gregkh@linuxfoundation.org>,
-	Saravana Kannan <saravanak@google.com>,
-	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
-	heikki.krogerus@linux.intel.com,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	linux-devicetree <devicetree@vger.kernel.org>,
-	lkml <linux-kernel@vger.kernel.org>,
-	linuxppc-dev@lists.ozlabs.org,
-	xen-devel@lists.xenproject.org,
-	Nicolas Boichat <drinkcat@chromium.org>,
-	Jim Quinlan <james.quinlan@broadcom.com>,
-	tfiga@chromium.org,
-	bskeggs@redhat.com,
-	bhelgaas@google.com,
-	chris@chris-wilson.co.uk,
-	tientzu@chromium.org,
-	daniel@ffwll.ch,
-	airlied@linux.ie,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	jani.nikula@linux.intel.com,
-	jxgao@google.com,
-	joonas.lahtinen@linux.intel.com,
-	linux-pci@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com,
-	matthew.auld@intel.com,
-	rodrigo.vivi@intel.com,
-	thomas.hellstrom@linux.intel.com
-Subject: [PATCH v8 14/15] dt-bindings: of: Add restricted DMA pool
-Date: Thu, 27 May 2021 21:03:28 +0800
-Message-Id: <20210527130329.1853588-4-tientzu@chromium.org>
-X-Mailer: git-send-email 2.31.1.818.g46aad6cb9e-goog
-In-Reply-To: <20210527130329.1853588-1-tientzu@chromium.org>
-References: <20210527130329.1853588-1-tientzu@chromium.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=bYm8+YoUMszRol+8NW8IYOBhNQiC/4d4yosbw40g3sA=; b=OVgsfzlXzZkMIIgEdg/fJgEe9F
+	oK2xb4XwX7tk8jaIZQxr/5I1sqnTYUQZ1sJHqezrsAXj5J+l0oZ17NAQJ0irMAH49MvRncmC5pn1C
+	X4tdG1UEmWi+hdns1FYUkAaJ2wtVyLGEZ5LM8h+BDFOaXOPBWpbLFeh8FksYF7ykAHy0=;
+Subject: Re: [PATCH v2 07/12] mm: allow page scrubbing routine(s) to be arch
+ controlled
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <8f56a8f4-0482-932f-96a9-c791bebb4610@suse.com>
+ <49c46d4d-4eaa-16a8-ccc8-c873b0b1d092@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <b1c10ad9-2cef-031d-39c2-8d2013b3e0b5@xen.org>
+Date: Thu, 27 May 2021 14:06:20 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.10.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <49c46d4d-4eaa-16a8-ccc8-c873b0b1d092@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Introduce the new compatible string, restricted-dma-pool, for restricted
-DMA. One can specify the address and length of the restricted DMA memory
-region by restricted-dma-pool in the reserved-memory node.
+Hi Jan,
 
-Signed-off-by: Claire Chang <tientzu@chromium.org>
----
- .../reserved-memory/reserved-memory.txt       | 36 +++++++++++++++++--
- 1 file changed, 33 insertions(+), 3 deletions(-)
+On 27/05/2021 13:33, Jan Beulich wrote:
+> Especially when dealing with large amounts of memory, memset() may not
+> be very efficient; this can be bad enough that even for debug builds a
+> custom function is warranted. We additionally want to distinguish "hot"
+> and "cold" cases.
 
-diff --git a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
-index e8d3096d922c..46804f24df05 100644
---- a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
-+++ b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
-@@ -51,6 +51,23 @@ compatible (optional) - standard definition
-           used as a shared pool of DMA buffers for a set of devices. It can
-           be used by an operating system to instantiate the necessary pool
-           management subsystem if necessary.
-+        - restricted-dma-pool: This indicates a region of memory meant to be
-+          used as a pool of restricted DMA buffers for a set of devices. The
-+          memory region would be the only region accessible to those devices.
-+          When using this, the no-map and reusable properties must not be set,
-+          so the operating system can create a virtual mapping that will be used
-+          for synchronization. The main purpose for restricted DMA is to
-+          mitigate the lack of DMA access control on systems without an IOMMU,
-+          which could result in the DMA accessing the system memory at
-+          unexpected times and/or unexpected addresses, possibly leading to data
-+          leakage or corruption. The feature on its own provides a basic level
-+          of protection against the DMA overwriting buffer contents at
-+          unexpected times. However, to protect against general data leakage and
-+          system memory corruption, the system needs to provide way to lock down
-+          the memory access, e.g., MPU. Note that since coherent allocation
-+          needs remapping, one must set up another device coherent pool by
-+          shared-dma-pool and use dma_alloc_from_dev_coherent instead for atomic
-+          coherent allocation.
-         - vendor specific string in the form <vendor>,[<device>-]<usage>
- no-map (optional) - empty property
-     - Indicates the operating system must not create a virtual mapping
-@@ -85,10 +102,11 @@ memory-region-names (optional) - a list of names, one for each corresponding
- 
- Example
- -------
--This example defines 3 contiguous regions are defined for Linux kernel:
-+This example defines 4 contiguous regions for Linux kernel:
- one default of all device drivers (named linux,cma@72000000 and 64MiB in size),
--one dedicated to the framebuffer device (named framebuffer@78000000, 8MiB), and
--one for multimedia processing (named multimedia-memory@77000000, 64MiB).
-+one dedicated to the framebuffer device (named framebuffer@78000000, 8MiB),
-+one for multimedia processing (named multimedia-memory@77000000, 64MiB), and
-+one for restricted dma pool (named restricted_dma_reserved@0x50000000, 64MiB).
- 
- / {
- 	#address-cells = <1>;
-@@ -120,6 +138,11 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
- 			compatible = "acme,multimedia-memory";
- 			reg = <0x77000000 0x4000000>;
- 		};
-+
-+		restricted_dma_reserved: restricted_dma_reserved {
-+			compatible = "restricted-dma-pool";
-+			reg = <0x50000000 0x4000000>;
-+		};
- 	};
- 
- 	/* ... */
-@@ -138,4 +161,11 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
- 		memory-region = <&multimedia_reserved>;
- 		/* ... */
- 	};
-+
-+	pcie_device: pcie_device@0,0 {
-+		reg = <0x83010000 0x0 0x00000000 0x0 0x00100000
-+		       0x83010000 0x0 0x00100000 0x0 0x00100000>;
-+		memory-region = <&restricted_dma_mem_reserved>;
-+		/* ... */
-+	};
- };
+Do you have any benchmark showing the performance improvement?
+
+> 
+> Keep the default fallback to clear_page_*() in common code; this may
+> want to be revisited down the road.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> v2: New.
+> ---
+> The choice between hot and cold in scrub_one_page()'s callers is
+> certainly up for discussion / improvement.
+
+To get the discussion started, can you explain how you made the decision 
+between hot/cot? This will also want to be written down in the commit 
+message.
+
+> 
+> --- a/xen/arch/x86/Makefile
+> +++ b/xen/arch/x86/Makefile
+> @@ -55,6 +55,7 @@ obj-y += percpu.o
+>   obj-y += physdev.o
+>   obj-$(CONFIG_COMPAT) += x86_64/physdev.o
+>   obj-y += psr.o
+> +obj-bin-$(CONFIG_DEBUG) += scrub_page.o
+>   obj-y += setup.o
+>   obj-y += shutdown.o
+>   obj-y += smp.o
+> --- /dev/null
+> +++ b/xen/arch/x86/scrub_page.S
+> @@ -0,0 +1,41 @@
+> +        .file __FILE__
+> +
+> +#include <asm/asm_defns.h>
+> +#include <xen/page-size.h>
+> +#include <xen/scrub.h>
+> +
+> +ENTRY(scrub_page_cold)
+> +        mov     $PAGE_SIZE/32, %ecx
+> +        mov     $SCRUB_PATTERN, %rax
+> +
+> +0:      movnti  %rax,   (%rdi)
+> +        movnti  %rax,  8(%rdi)
+> +        movnti  %rax, 16(%rdi)
+> +        movnti  %rax, 24(%rdi)
+> +        add     $32, %rdi
+> +        sub     $1, %ecx
+> +        jnz     0b
+> +
+> +        sfence
+> +        ret
+> +        .type scrub_page_cold, @function
+> +        .size scrub_page_cold, . - scrub_page_cold
+> +
+> +        .macro scrub_page_stosb
+> +        mov     $PAGE_SIZE, %ecx
+> +        mov     $SCRUB_BYTE_PATTERN, %eax
+> +        rep stosb
+> +        ret
+> +        .endm
+> +
+> +        .macro scrub_page_stosq
+> +        mov     $PAGE_SIZE/8, %ecx
+> +        mov     $SCRUB_PATTERN, %rax
+> +        rep stosq
+> +        ret
+> +        .endm
+> +
+> +ENTRY(scrub_page_hot)
+> +        ALTERNATIVE scrub_page_stosq, scrub_page_stosb, X86_FEATURE_ERMS
+> +        .type scrub_page_hot, @function
+> +        .size scrub_page_hot, . - scrub_page_hot
+
+ From the commit message, it is not clear how the implementation for 
+hot/cold was chosen. Can you outline in the commit message what are the 
+assumption for each helper?
+
+This will be helpful for anyone that may notice regression or even other 
+arch if they need to implement it.
+
+> --- a/xen/common/page_alloc.c
+> +++ b/xen/common/page_alloc.c
+> @@ -124,6 +124,7 @@
+>   #include <xen/types.h>
+>   #include <xen/lib.h>
+>   #include <xen/sched.h>
+> +#include <xen/scrub.h>
+>   #include <xen/spinlock.h>
+>   #include <xen/mm.h>
+>   #include <xen/param.h>
+> @@ -750,27 +751,31 @@ static void page_list_add_scrub(struct p
+>           page_list_add(pg, &heap(node, zone, order));
+>   }
+>   
+> -/* SCRUB_PATTERN needs to be a repeating series of bytes. */
+> -#ifndef NDEBUG
+> -#define SCRUB_PATTERN        0xc2c2c2c2c2c2c2c2ULL
+> -#else
+> -#define SCRUB_PATTERN        0ULL
+> +/*
+> + * While in debug builds we want callers to avoid relying on allocations
+> + * returning zeroed pages, for a production build, clear_page_*() is the
+> + * fastest way to scrub.
+> + */
+> +#ifndef CONFIG_DEBUG
+> +# undef  scrub_page_hot
+> +# define scrub_page_hot clear_page_hot
+> +# undef  scrub_page_cold
+> +# define scrub_page_cold clear_page_cold
+>   #endif
+> -#define SCRUB_BYTE_PATTERN   (SCRUB_PATTERN & 0xff)
+>   
+> -static void scrub_one_page(const struct page_info *pg)
+> +static void scrub_one_page(const struct page_info *pg, bool cold)
+>   {
+> +    void *ptr;
+> +
+>       if ( unlikely(pg->count_info & PGC_broken) )
+>           return;
+>   
+> -#ifndef NDEBUG
+> -    /* Avoid callers relying on allocations returning zeroed pages. */
+> -    unmap_domain_page(memset(__map_domain_page(pg),
+> -                             SCRUB_BYTE_PATTERN, PAGE_SIZE));
+> -#else
+> -    /* For a production build, clear_page() is the fastest way to scrub. */
+> -    clear_domain_page(_mfn(page_to_mfn(pg)));
+> -#endif
+> +    ptr = __map_domain_page(pg);
+> +    if ( cold )
+> +        scrub_page_cold(ptr);
+> +    else
+> +        scrub_page_hot(ptr);
+> +    unmap_domain_page(ptr);
+>   }
+>   
+>   static void poison_one_page(struct page_info *pg)
+> @@ -1046,12 +1051,14 @@ static struct page_info *alloc_heap_page
+>       if ( first_dirty != INVALID_DIRTY_IDX ||
+>            (scrub_debug && !(memflags & MEMF_no_scrub)) )
+>       {
+> +        bool cold = d && d != current->domain;
+
+So the assumption is if the domain is not running, then the content is 
+not in the cache. Is that correct?
+
+> +
+>           for ( i = 0; i < (1U << order); i++ )
+>           {
+>               if ( test_and_clear_bit(_PGC_need_scrub, &pg[i].count_info) )
+>               {
+>                   if ( !(memflags & MEMF_no_scrub) )
+> -                    scrub_one_page(&pg[i]);
+> +                    scrub_one_page(&pg[i], cold);
+>   
+>                   dirty_cnt++;
+>               }
+> @@ -1308,7 +1315,7 @@ bool scrub_free_pages(void)
+>                   {
+>                       if ( test_bit(_PGC_need_scrub, &pg[i].count_info) )
+>                       {
+> -                        scrub_one_page(&pg[i]);
+> +                        scrub_one_page(&pg[i], true);
+>                           /*
+>                            * We can modify count_info without holding heap
+>                            * lock since we effectively locked this buddy by
+> @@ -1947,7 +1954,7 @@ static void __init smp_scrub_heap_pages(
+>           if ( !mfn_valid(_mfn(mfn)) || !page_state_is(pg, free) )
+>               continue;
+>   
+> -        scrub_one_page(pg);
+> +        scrub_one_page(pg, true);
+>       }
+>   }
+>   
+> --- a/xen/include/asm-arm/page.h
+> +++ b/xen/include/asm-arm/page.h
+> @@ -135,6 +135,12 @@ extern size_t dcache_line_bytes;
+>   
+>   #define copy_page(dp, sp) memcpy(dp, sp, PAGE_SIZE)
+>   
+> +#define clear_page_hot  clear_page
+> +#define clear_page_cold clear_page
+> +
+> +#define scrub_page_hot(page) memset(page, SCRUB_BYTE_PATTERN, PAGE_SIZE)
+> +#define scrub_page_cold      scrub_page_hot
+> +
+>   static inline size_t read_dcache_line_bytes(void)
+>   {
+>       register_t ctr;
+> --- a/xen/include/asm-x86/page.h
+> +++ b/xen/include/asm-x86/page.h
+> @@ -239,6 +239,11 @@ void copy_page_sse2(void *, const void *
+>   #define clear_page(_p)      clear_page_cold(_p)
+>   #define copy_page(_t, _f)   copy_page_sse2(_t, _f)
+>   
+> +#ifdef CONFIG_DEBUG
+> +void scrub_page_hot(void *);
+> +void scrub_page_cold(void *);
+> +#endif
+> +
+>   /* Convert between Xen-heap virtual addresses and machine addresses. */
+>   #define __pa(x)             (virt_to_maddr(x))
+>   #define __va(x)             (maddr_to_virt(x))
+> --- /dev/null
+> +++ b/xen/include/xen/scrub.h
+> @@ -0,0 +1,24 @@
+> +#ifndef __XEN_SCRUB_H__
+> +#define __XEN_SCRUB_H__
+> +
+> +#include <xen/const.h>
+> +
+> +/* SCRUB_PATTERN needs to be a repeating series of bytes. */
+> +#ifdef CONFIG_DEBUG
+> +# define SCRUB_PATTERN       _AC(0xc2c2c2c2c2c2c2c2,ULL)
+> +#else
+> +# define SCRUB_PATTERN       _AC(0,ULL)
+> +#endif
+> +#define SCRUB_BYTE_PATTERN   (SCRUB_PATTERN & 0xff)
+> +
+> +#endif /* __XEN_SCRUB_H__ */
+> +
+> +/*
+> + * Local variables:
+> + * mode: C
+> + * c-file-style: "BSD"
+> + * c-basic-offset: 4
+> + * tab-width: 4
+> + * indent-tabs-mode: nil
+> + * End:
+> + */
+> 
+> 
+
+Cheers,
+
 -- 
-2.31.1.818.g46aad6cb9e-goog
-
+Julien Grall
 
