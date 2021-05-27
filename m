@@ -2,51 +2,50 @@ Return-Path: <SRS0=cWgu=KW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6854BC47089
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CBE6CC47089
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:48:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2A90B613B5
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:37:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2A90B613B5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by mail.kernel.org (Postfix) with ESMTPS id 8B49A6135C
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 11:48:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B49A6135C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.133051.248083 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.133061.248099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmEK9-0003ah-JX; Thu, 27 May 2021 11:37:13 +0000
+	id 1lmEUS-00054z-OM; Thu, 27 May 2021 11:47:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 133051.248083; Thu, 27 May 2021 11:37:13 +0000
+Received: by outflank-mailman (output) from mailman id 133061.248099; Thu, 27 May 2021 11:47:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmEK9-0003aa-GS; Thu, 27 May 2021 11:37:13 +0000
-Received: by outflank-mailman (input) for mailman id 133051;
- Thu, 27 May 2021 11:37:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=spZp=KW=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lmEK8-0003aU-0Y
- for xen-devel@lists.xenproject.org; Thu, 27 May 2021 11:37:12 +0000
-Received: from mail-io1-xd34.google.com (unknown [2607:f8b0:4864:20::d34])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7f929f86-6d82-4020-9b7f-87c0fa0d12f6;
- Thu, 27 May 2021 11:37:11 +0000 (UTC)
-Received: by mail-io1-xd34.google.com with SMTP id a8so63783ioa.12
- for <xen-devel@lists.xenproject.org>; Thu, 27 May 2021 04:37:11 -0700 (PDT)
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com.
- [209.85.166.42])
- by smtp.gmail.com with ESMTPSA id o2sm1045641ilt.73.2021.05.27.04.37.10
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 May 2021 04:37:10 -0700 (PDT)
-Received: by mail-io1-f42.google.com with SMTP id b81so113883iof.2
- for <xen-devel@lists.xenproject.org>; Thu, 27 May 2021 04:37:10 -0700 (PDT)
+	id 1lmEUS-00054s-LJ; Thu, 27 May 2021 11:47:52 +0000
+Received: by outflank-mailman (input) for mailman id 133061;
+ Thu, 27 May 2021 11:47:51 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=HjtO=KW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lmEUR-00054m-CY
+ for xen-devel@lists.xenproject.org; Thu, 27 May 2021 11:47:51 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a091b69d-fe3d-41a7-9949-31783f024f11;
+ Thu, 27 May 2021 11:47:50 +0000 (UTC)
+Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6A76C2190B;
+ Thu, 27 May 2021 11:47:49 +0000 (UTC)
+Received: from director2.suse.de (director2.suse-dmz.suse.de [192.168.254.72])
+ by imap.suse.de (Postfix) with ESMTPSA id 3C70711A98;
+ Thu, 27 May 2021 11:47:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,99 +57,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f929f86-6d82-4020-9b7f-87c0fa0d12f6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=XepQkdRFyf5QwVg1KdPLbhegPooaNHd/1JiifJ+YyHM=;
-        b=J39qajy3UJ3qAzWqGeZGEnwMoSI9LW5BjibS8fd+Acudu4FxBAXa2OhDGjuMcgqW0/
-         wo/z5L5WO21v6biwP7ZKEgtIJf223PVujpTOF4zDsL3aPOmxJx+dxaS3A0oSwB4zv/i6
-         Jb0bh8tNiRStD2FZiusMVkFxa8G1teBBpM9vg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=XepQkdRFyf5QwVg1KdPLbhegPooaNHd/1JiifJ+YyHM=;
-        b=gQ04b9oWd428YCzvNP367p7os2ct5sn8WAASh6QPxkDtKx0dpWqEcF2yxEUF0ppSg1
-         r8TM8DjXppLUTXVS9nmV6SS/TRCT1H4zyQHspHjGbK5Mjk3GMLar7+n3kTqjMqmFPqfi
-         7NRlo7R6Ki70xg/OsFEL1eR35WWmnQIPLt/GbqmcXoUvaCSlceGM35dPXJJUeZ5CNQIy
-         7wa7zyZaWOqzaIUNPJUZNQEOiQ98yyBdpdtX4M+xq2VprGlRN91NFsJEHrQeZtAjieWf
-         pNx2ejycehkHEYNxqOmRvkuLhOQ+k+brVC4G/ur027AtW+2Ui3iAKDgYwDxxiavOVIcL
-         XN0g==
-X-Gm-Message-State: AOAM532FHm5JA7z+blcucSsI4AKZqWWq8mmVjoISQK/Ck7+Cz61cYQJw
-	v1axTE+rnU4lD9mEaoQ5dcn1XyzSr4Ecqw==
-X-Google-Smtp-Source: ABdhPJyAJNQAdlO7tYVzqg06vwfMTIMGmYBihPYTT1l9TgwbtaDkTDEk3xWqR3ZOJ48nwEmKfaM5VQ==
-X-Received: by 2002:a02:a492:: with SMTP id d18mr3084006jam.28.1622115430727;
-        Thu, 27 May 2021 04:37:10 -0700 (PDT)
-X-Received: by 2002:a05:6e02:e42:: with SMTP id l2mr2536928ilk.189.1622114971302;
- Thu, 27 May 2021 04:29:31 -0700 (PDT)
+X-Inumbo-ID: a091b69d-fe3d-41a7-9949-31783f024f11
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1622116069; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ibvBJ8N9gYkmQfCGXm38qHnMjooDW0kvei05CtgEHck=;
+	b=PmClcs6MmtUC5Wvg8JD11blA3FjooZ9IxoJaNFUXNuWQBbOlapQw6daJX30ygtTTw5TJZG
+	e/SNKhZFJ9iE1W9Gl2BcXmBWwcrjgXT9HhYbxskpe5v/rGr9lswha+SxfJ6AQZH2Owe/Nw
+	+Pujx4muTqLLGmg20il0wBatmp5fSFs=
+Subject: Re: [PATCH 7/7] video/vesa: adjust (not just) command line option
+ handling
+From: Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <6d6da76c-ccc8-afa2-bd06-5ae132c354f2@suse.com>
+ <7e3f69d7-23e8-397d-72b6-8c489d80ea45@suse.com>
+ <3e04b606-4e4f-e181-d3be-bcf99a2c8fa2@citrix.com>
+ <3aadebaa-5a0b-e21b-c86a-289c2fae5d44@suse.com>
+Message-ID: <e4230879-48b2-651a-b0fa-0e4fbedc04f1@suse.com>
+Date: Thu, 27 May 2021 13:47:43 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.2
 MIME-Version: 1.0
-References: <20210518064215.2856977-1-tientzu@chromium.org>
- <20210518064215.2856977-15-tientzu@chromium.org> <20210526121322.GA19313@willie-the-truck>
- <20210526155321.GA19633@willie-the-truck>
-In-Reply-To: <20210526155321.GA19633@willie-the-truck>
-From: Claire Chang <tientzu@chromium.org>
-Date: Thu, 27 May 2021 19:29:20 +0800
-X-Gmail-Original-Message-ID: <CALiNf2_sVXnb97++yWusB5PWz8Pzfn9bCKZc6z3tY4bx6-nW8w@mail.gmail.com>
-Message-ID: <CALiNf2_sVXnb97++yWusB5PWz8Pzfn9bCKZc6z3tY4bx6-nW8w@mail.gmail.com>
-Subject: Re: [PATCH v7 14/15] dt-bindings: of: Add restricted DMA pool
-To: Will Deacon <will@kernel.org>
-Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>, 
-	Frank Rowand <frowand.list@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, 
-	boris.ostrovsky@oracle.com, jgross@suse.com, Christoph Hellwig <hch@lst.de>, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, benh@kernel.crashing.org, paulus@samba.org, 
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
-	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
-	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
-	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
-	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
-	heikki.krogerus@linux.intel.com, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
-	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
-	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
-	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
-	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>, 
-	Tomasz Figa <tfiga@chromium.org>, bskeggs@redhat.com, 
-	Bjorn Helgaas <bhelgaas@google.com>, chris@chris-wilson.co.uk, 
-	Daniel Vetter <daniel@ffwll.ch>, airlied@linux.ie, dri-devel@lists.freedesktop.org, 
-	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, 
-	Jianxiong Gao <jxgao@google.com>, joonas.lahtinen@linux.intel.com, 
-	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com, 
-	matthew.auld@intel.com, rodrigo.vivi@intel.com, 
-	thomas.hellstrom@linux.intel.com
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <3aadebaa-5a0b-e21b-c86a-289c2fae5d44@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Wed, May 26, 2021 at 11:53 PM Will Deacon <will@kernel.org> wrote:
->
-> On Wed, May 26, 2021 at 01:13:22PM +0100, Will Deacon wrote:
-> > On Tue, May 18, 2021 at 02:42:14PM +0800, Claire Chang wrote:
-> > > @@ -138,4 +160,9 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
-> > >             memory-region = <&multimedia_reserved>;
-> > >             /* ... */
-> > >     };
-> > > +
-> > > +   pcie_device: pcie_device@0,0 {
-> > > +           memory-region = <&restricted_dma_mem_reserved>;
-> > > +           /* ... */
-> > > +   };
-> >
-> > I still don't understand how this works for individual PCIe devices -- how
-> > is dev->of_node set to point at the node you have above?
-> >
-> > I tried adding the memory-region to the host controller instead, and then
-> > I see it crop up in dmesg:
-> >
-> >   | pci-host-generic 40000000.pci: assigned reserved memory node restricted_dma_mem_reserved
-> >
-> > but none of the actual PCI devices end up with 'dma_io_tlb_mem' set, and
-> > so the restricted DMA area is not used. In fact, swiotlb isn't used at all.
-> >
-> > What am I missing to make this work with PCIe devices?
->
-> Aha, looks like we're just missing the logic to inherit the DMA
-> configuration. The diff below gets things working for me.
+On 27.04.2021 16:04, Jan Beulich wrote:
+> On 27.04.2021 15:49, Andrew Cooper wrote:
+>> However, is there really any value in these options?  I can't see a case
+>> where their use will result in a less broken system.
+> 
+> Well, if we mis-detect VRAM size, the respective option might indeed
+> help. I'm less certain of the utility of the mapping option, the more
+> that now there's no possible (and implicit) effect on MTRRs anymore.
 
-I guess what was missing is the reg property in the pcie_device node.
-Will update the example dts.
+Actually I was wrong with referring to an implied effect on MTRRs - that
+would come from "vesa-ram=". "vesa-map=" may help if we mis-detected the
+space we actually need for the mode. However, we'd then be screwed up
+elsewhere as well, so I guess I'll add a patch removing "vesa-map=" as
+well.
+
+Jan
 
