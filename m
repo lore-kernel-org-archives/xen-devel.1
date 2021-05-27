@@ -7,45 +7,45 @@ X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EB68C47089
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 12:35:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB97DC4707F
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 12:36:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D019F61248
-	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 12:35:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D019F61248
+	by mail.kernel.org (Postfix) with ESMTPS id AD6AB61248
+	for <xen-devel@archiver.kernel.org>; Thu, 27 May 2021 12:36:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD6AB61248
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.133139.248238 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.133147.248250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmFEW-0007gr-Hh; Thu, 27 May 2021 12:35:28 +0000
+	id 1lmFF9-0008IV-SJ; Thu, 27 May 2021 12:36:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 133139.248238; Thu, 27 May 2021 12:35:28 +0000
+Received: by outflank-mailman (output) from mailman id 133147.248250; Thu, 27 May 2021 12:36:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lmFEW-0007gk-Em; Thu, 27 May 2021 12:35:28 +0000
-Received: by outflank-mailman (input) for mailman id 133139;
- Thu, 27 May 2021 12:35:27 +0000
+	id 1lmFF9-0008IO-Oc; Thu, 27 May 2021 12:36:07 +0000
+Received: by outflank-mailman (input) for mailman id 133147;
+ Thu, 27 May 2021 12:36:06 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HjtO=KW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lmFEV-0007ge-Bf
- for xen-devel@lists.xenproject.org; Thu, 27 May 2021 12:35:27 +0000
+ id 1lmFF8-0008Bu-BM
+ for xen-devel@lists.xenproject.org; Thu, 27 May 2021 12:36:06 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 832eeafd-88b1-4951-95ea-f636978a74e7;
- Thu, 27 May 2021 12:35:26 +0000 (UTC)
+ id e29f1ad8-fc4f-433a-905e-58fd79203c5f;
+ Thu, 27 May 2021 12:35:55 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A29BE218DD;
- Thu, 27 May 2021 12:35:25 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 94EED218DD;
+ Thu, 27 May 2021 12:35:54 +0000 (UTC)
 Received: from director2.suse.de (director2.suse-dmz.suse.de [192.168.254.72])
- by imap.suse.de (Postfix) with ESMTPSA id 72E3B11A98;
- Thu, 27 May 2021 12:35:25 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTPSA id 7A26411A98;
+ Thu, 27 May 2021 12:35:54 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,24 +57,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 832eeafd-88b1-4951-95ea-f636978a74e7
+X-Inumbo-ID: e29f1ad8-fc4f-433a-905e-58fd79203c5f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622118925; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622118954; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Gqg+pjRYzvrnv7dX+llGzQkhdttXtK16oe9Z8AMg9RY=;
-	b=taBtAtRvmeS/XJaxTuCZlR6WQZ2Hi+LLSwxGHHoRDfnuZV5ysOnnt3FvDK80R8EO5vgleO
-	y0gQ2oIpA3hpmJVITyX4M7jqy0aBgCCbcopTv8QNuNIA5geExhxMysP/zSu/dyFXn59p1V
-	3HmNMpi0ABiccNfotuUqqf3Jceedcbo=
-Subject: [PATCH v2 10/12] video/vesa: drop "vesa-mtrr" command line option
+	bh=JCk3FBjjK8M9z1jIUmNcbjwmgv39UQ+Tt+/agq7sJXk=;
+	b=CwLdHgXTlzL4WPEEbXsEsixG1mmn4UZqKLjoaWkaBGf3DSCk/P8CmLo224FZA/2vi9m6ls
+	TKO+TG4q4vYjIJZnsZCCWvsU3GZ7KKCwlyQCQChSb+INw2xvUcfU4+wCVyxrun6EvuRpIE
+	QZ9vBsNlwEcQYdXTTEgfI0aQHwokkME=
+Subject: [PATCH v2 11/12] video/vesa: drop "vesa-remap" command line option
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 References: <8f56a8f4-0482-932f-96a9-c791bebb4610@suse.com>
-Message-ID: <10607087-9216-c5fb-08cd-29090a80e402@suse.com>
-Date: Thu, 27 May 2021 14:35:21 +0200
+Message-ID: <bc1411cc-f920-a002-d64d-84ce1ebd080e@suse.com>
+Date: Thu, 27 May 2021 14:35:50 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.2
 MIME-Version: 1.0
@@ -83,103 +83,65 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Now that we use ioremap_wc() for mapping the frame buffer, there's no
-need for this option anymore. As noted in the change introducing the
-use of ioremap_wc(), mtrr_add() didn't work in certain cases anyway.
+If we get mode dimensions wrong, having the remapping size controllable
+via command line option isn't going to help much. Drop the option.
 
+While adjusting this also
+- add __initdata to the variable,
+- use ROUNDUP() instead of open-coding it.
+
+Requested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -6,9 +6,10 @@ The format is based on [Keep a Changelog
- 
- ## [unstable UNRELEASED](https://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=staging) - TBD
- 
--### Removed
-+### Removed / support downgraded
+@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog
+ ### Removed / support downgraded
   - XENSTORED_ROOTDIR environment variable from configuartion files and
     initscripts, due to being unused.
-+ - dropped support for the (x86-only) "vesa-mtrr" command line option
+- - dropped support for the (x86-only) "vesa-mtrr" command line option
++ - dropped support for the (x86-only) "vesa-mtrr" and "vesa-remap" command line options
  
  ## [4.15.0 UNRELEASED](https://xenbits.xen.org/gitweb/?p=xen.git;a=shortlog;h=RELEASE-4.15.0) - TBD
  
 --- a/docs/misc/xen-command-line.pandoc
 +++ b/docs/misc/xen-command-line.pandoc
-@@ -2369,9 +2369,6 @@ cache-warming. 1ms (1000) has been measu
- ### vesa-map
- > `= <integer>`
+@@ -2366,9 +2366,6 @@ PCPUs when using the credit1 scheduler.
+ of a VCPU between CPUs, and reduces the implicit overheads such as
+ cache-warming. 1ms (1000) has been measured as a good value.
  
--### vesa-mtrr
+-### vesa-map
 -> `= <integer>`
 -
  ### vesa-ram
  > `= <integer>`
  
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1816,8 +1816,6 @@ void __init noreturn __start_xen(unsigne
- 
-     local_irq_enable();
- 
--    vesa_mtrr_init();
--
-     early_msi_init();
- 
-     iommu_setup();    /* setup iommu if available */
 --- a/xen/drivers/video/vesa.c
 +++ b/xen/drivers/video/vesa.c
-@@ -145,38 +145,6 @@ void __init vesa_init(void)
-     video_puts = lfb_redraw_puts;
+@@ -26,8 +26,7 @@ static bool_t vga_compat;
+ static unsigned int vram_total;
+ integer_param("vesa-ram", vram_total);
+ 
+-static unsigned int vram_remap;
+-integer_param("vesa-map", vram_remap);
++static unsigned int __initdata vram_remap;
+ 
+ static int font_height;
+ static int __init parse_font_height(const char *s)
+@@ -79,12 +78,8 @@ void __init vesa_early_init(void)
+      *                 use for vesafb.  With modern cards it is no
+      *                 option to simply use vram_total as that
+      *                 wastes plenty of kernel address space. */
+-    vram_remap = (vram_remap ?
+-                  (vram_remap << 20) :
+-                  ((vram_vmode + (1 << L2_PAGETABLE_SHIFT) - 1) &
+-                   ~((1 << L2_PAGETABLE_SHIFT) - 1)));
+-    vram_remap = max_t(unsigned int, vram_remap, vram_vmode);
+-    vram_remap = min_t(unsigned int, vram_remap, vram_total);
++    vram_remap = ROUNDUP(vram_vmode, 1 << L2_PAGETABLE_SHIFT);
++    vram_remap = min(vram_remap, vram_total);
  }
  
--#include <asm/mtrr.h>
--
--static unsigned int vesa_mtrr;
--integer_param("vesa-mtrr", vesa_mtrr);
--
--void __init vesa_mtrr_init(void)
--{
--    static const int mtrr_types[] = {
--        0, MTRR_TYPE_UNCACHABLE, MTRR_TYPE_WRBACK,
--        MTRR_TYPE_WRCOMB, MTRR_TYPE_WRTHROUGH };
--    unsigned int size_total;
--    int rc, type;
--
--    if ( !lfb || (vesa_mtrr == 0) || (vesa_mtrr >= ARRAY_SIZE(mtrr_types)) )
--        return;
--
--    type = mtrr_types[vesa_mtrr];
--    if ( !type )
--        return;
--
--    /* Find the largest power-of-two */
--    size_total = vram_total;
--    while ( size_total & (size_total - 1) )
--        size_total &= size_total - 1;
--
--    /* Try and find a power of two to add */
--    do {
--        rc = mtrr_add(lfb_base(), size_total, type, 1);
--        size_total >>= 1;
--    } while ( (size_total >= PAGE_SIZE) && (rc == -EINVAL) );
--}
--
- static void lfb_flush(void)
- {
-     __asm__ __volatile__ ("sfence" : : : "memory");
---- a/xen/include/asm-x86/setup.h
-+++ b/xen/include/asm-x86/setup.h
-@@ -25,10 +25,8 @@ void init_IRQ(void);
- 
- #ifdef CONFIG_VIDEO
- void vesa_init(void);
--void vesa_mtrr_init(void);
- #else
- static inline void vesa_init(void) {};
--static inline void vesa_mtrr_init(void) {};
- #endif
- 
- int construct_dom0(
+ void __init vesa_init(void)
 
 
