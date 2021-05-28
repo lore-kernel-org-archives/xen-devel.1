@@ -2,45 +2,43 @@ Return-Path: <SRS0=mBg9=KX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 969EFC4708D
-	for <xen-devel@archiver.kernel.org>; Fri, 28 May 2021 10:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD3EAC2B9F7
+	for <xen-devel@archiver.kernel.org>; Fri, 28 May 2021 13:20:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 55150611C9
-	for <xen-devel@archiver.kernel.org>; Fri, 28 May 2021 10:49:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55150611C9
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 85C4F613EB
+	for <xen-devel@archiver.kernel.org>; Fri, 28 May 2021 13:20:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85C4F613EB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.133892.249388 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.133910.249402 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lma2y-0003xq-Dj; Fri, 28 May 2021 10:48:56 +0000
+	id 1lmcP5-0000oh-PH; Fri, 28 May 2021 13:19:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 133892.249388; Fri, 28 May 2021 10:48:56 +0000
+Received: by outflank-mailman (output) from mailman id 133910.249402; Fri, 28 May 2021 13:19:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lma2y-0003xj-AB; Fri, 28 May 2021 10:48:56 +0000
-Received: by outflank-mailman (input) for mailman id 133892;
- Fri, 28 May 2021 10:48:55 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lma2x-0003xd-CO
- for xen-devel@lists.xenproject.org; Fri, 28 May 2021 10:48:55 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lma2v-0004WK-Mz; Fri, 28 May 2021 10:48:53 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lma2v-0005GG-Gh; Fri, 28 May 2021 10:48:53 +0000
+	id 1lmcP5-0000oZ-JZ; Fri, 28 May 2021 13:19:55 +0000
+Received: by outflank-mailman (input) for mailman id 133910;
+ Fri, 28 May 2021 13:19:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=QboB=KX=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1lmcP4-0000oT-OJ
+ for xen-devel@lists.xenproject.org; Fri, 28 May 2021 13:19:54 +0000
+Received: from mail-lf1-x132.google.com (unknown [2a00:1450:4864:20::132])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f23221fd-77a2-44e9-97c8-cc365e133578;
+ Fri, 28 May 2021 13:19:53 +0000 (UTC)
+Received: by mail-lf1-x132.google.com with SMTP id a5so5365328lfm.0
+ for <xen-devel@lists.xenproject.org>; Fri, 28 May 2021 06:19:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,107 +50,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=ZJqmUNj1//MsNBfD3g6CRdpHlKU20FoByOfAIatVwEY=; b=uCZsp7CITRez2OimLvHz8MMD/7
-	KLmX9x7Topsx/0F4J0R7EEF3vhI4uDYKEf7Lu48Rac+zewO+DFdztuKuJRyhWfbllMwOI5F6Zefpz
-	PmgCDYHowDHTRx8t/ypq8iY/RhV3eB9jUhEXPMGLki7NcDnU8XwZyWC+e8v2N4QMCrm8=;
-Subject: Re: [PATCH v6 1/3] evtchn: slightly defer lock acquire where possible
-To: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <01bbf3d4-ca6a-e837-91fe-b34aa014564c@suse.com>
- <5939858e-1c7c-5658-bc2d-0c9024c74040@suse.com>
- <938eb888-ec15-feb1-19f7-b90dfee822ae@xen.org>
- <YLCqQz9xS4HEpabG@Air-de-Roger>
- <27d54d81-bec8-5bc7-39cd-60e9761e726b@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <079f2f2a-0797-b650-ff47-7e595ab29589@xen.org>
-Date: Fri, 28 May 2021 11:48:51 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.2
+X-Inumbo-ID: f23221fd-77a2-44e9-97c8-cc365e133578
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=k6CI3bJoWlR73wvGXkQ1pwSf9oraVxE1+E2j7+D/QPU=;
+        b=qcMEJo688QrfETvG8lwRXHD3x2/GMvUrF8rj0gxaHLd8Ze+baq1raGSwyVU/NDSAUF
+         TO/W5P2jl4fBhd3zsG2sEq3DKBEVrsJlPBRO45kUcQCCcpqc/MdnFQgZ1NYnTr40ArrY
+         N7C+gWbDH0OOmSO/0s8fK0eOML9zxFzBWLlFeQp+IaR+qEcR9t68I1GlhS7ULHPN7q15
+         siNtSTimI8txtIdy9usOtG1gXjcMJPx947BRXL3H3a9npe81QS3B9QIh5G0eONeUGscQ
+         QttC02aXdPqCpx4UzvgbA73gGgTpfwJB+yaNPi3C9ld06T2IDjY1s5HMHCRSPxqoHvN5
+         uZZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=k6CI3bJoWlR73wvGXkQ1pwSf9oraVxE1+E2j7+D/QPU=;
+        b=kX2cQumUrHExHMCc7a/n7NROuKteB8CQfFxawUAMB5eJGq3KERE6VJCYSXXPI/lsNA
+         lRtCUOx9r3jNgvUyhJZk+HIeNdJmA0po+0XyqDYAQNrqxQLTAQnYlW8HSFytZkcUfWnT
+         6/93WZ1hUBjgqi4aI2Ggq/dRGo0nPpdz2aQu4zKMYXd7mdpiaEPICPP3w3A2RX9aZhk8
+         fI6zpDY1spp3DnNQuTrgk0vgQCG/4nH5iB5dsC7wIDyBcrDq7X3cUcLGiZ3Q64fwaN1m
+         5KHK+5q8PzvllcWMC8GGVLwm5eaubJtwxNoQZFY3QmLy7PkTnxJ2Xco9H3SmAgPLfagg
+         Z0LA==
+X-Gm-Message-State: AOAM530NOtnz41ESf6YX2IzjMF+8dh99Es9uHFw/kK9o9lG6mJy3AyVu
+	nRFftziyDhF+mSKjiCV+6nPt/vpnCSUJdfkKUow=
+X-Google-Smtp-Source: ABdhPJxHubQ4FhiTAJgLMZWfFaU+5M7ZPmpSEQAaEJuxlxLxY3+S+VNSs/2hbaYeaYHTgCBfwpT0jTLXU0HhXw6GMSs=
+X-Received: by 2002:a05:6512:b95:: with SMTP id b21mr5710476lfv.491.1622207991200;
+ Fri, 28 May 2021 06:19:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <27d54d81-bec8-5bc7-39cd-60e9761e726b@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+References: <20210503192810.36084-1-jandryuk@gmail.com> <20210503192810.36084-7-jandryuk@gmail.com>
+ <e54c3aef-4c44-4302-f7f4-4f4733e33780@suse.com>
+In-Reply-To: <e54c3aef-4c44-4302-f7f4-4f4733e33780@suse.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Fri, 28 May 2021 09:19:39 -0400
+Message-ID: <CAKf6xptN13CW78XajgyE0G8t2NjFVka8tzNO2oofjcw7tT7n8g@mail.gmail.com>
+Subject: Re: [PATCH 06/13] cpufreq: Export HWP parameters to userspace
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Wei Liu <wl@xen.org>, George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
+	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+	xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Jan,
+On Thu, May 27, 2021 at 4:03 AM Jan Beulich <jbeulich@suse.com> wrote:
+>
+> On 03.05.2021 21:28, Jason Andryuk wrote:
+> > --- a/xen/drivers/acpi/pmstat.c
+> > +++ b/xen/drivers/acpi/pmstat.c
+> > @@ -290,6 +290,12 @@ static int get_cpufreq_para(struct xen_sysctl_pm_op *op)
+> >              &op->u.get_para.u.ondemand.sampling_rate,
+> >              &op->u.get_para.u.ondemand.up_threshold);
+> >      }
+> > +
+> > +    if ( !strncasecmp(op->u.get_para.scaling_governor,
+> > +                      "hwp-internal", CPUFREQ_NAME_LEN) )
+> > +    {
+> > +        ret = get_hwp_para(policy, &op->u.get_para.u.hwp_para);
+> > +    }
+> >      op->u.get_para.turbo_enabled = cpufreq_get_turbo_status(op->cpuid);
+>
+> Nit: Unnecessary parentheses again, and with the leading blank line
+> you also want a trailing one. (As an aside I'm also not overly happy
+> to see the call keyed to the governor name. Is there really no other
+> indication that hwp is in use?)
 
-On 28/05/2021 11:23, Jan Beulich wrote:
-> On 28.05.2021 10:30, Roger Pau Monné wrote:
->> On Thu, May 27, 2021 at 07:48:41PM +0100, Julien Grall wrote:
->>> On 27/05/2021 12:28, Jan Beulich wrote:
->>>> port_is_valid() and evtchn_from_port() are fine to use without holding
->>>> any locks. Accordingly acquire the per-domain lock slightly later in
->>>> evtchn_close() and evtchn_bind_vcpu().
->>>
->>> So I agree that port_is_valid() and evtchn_from_port() are fine to use
->>> without holding any locks in evtchn_bind_vcpu(). However, this is misleading
->>> to say there is no problem with evtchn_close().
->>>
->>> evtchn_close() can be called with current != d and therefore, there is a
->>
->> The only instances evtchn_close is called with current != d and the
->> domain could be unpaused is in free_xen_event_channel AFAICT.
-> 
-> As long as the domain is not paused, ->valid_evtchns can't ever
-> decrease: The only point where this gets done is in evtchn_destroy().
-> Hence ...
-> 
->>> risk that port_is_valid() may be valid and then invalid because
->>> d->valid_evtchns is decremented in evtchn_destroy().
->>
->> Hm, I guess you could indeed have parallel calls to
->> free_xen_event_channel and evtchn_destroy in a way that
->> free_xen_event_channel could race with valid_evtchns getting
->> decreased?
-> 
-> ... I don't see this as relevant.
-> 
->>> Thankfully the memory is still there. So the current code is okayish and I
->>> could reluctantly accept this behavior to be spread. However, I don't think
->>> this should be left uncommented in both the code (maybe on top of
->>> port_is_valid()?) and the commit message.
->>
->> Indeed, I think we need some expansion of the comment in port_is_valid
->> to clarify all this. I'm not sure I understand it properly myself when
->> it's fine to use port_is_valid without holding the per domain event
->> lock.
-> 
-> Because of the above property plus the fact that even if
-> ->valid_evtchns decreases, the underlying struct evtchn instance
-> will remain valid (i.e. won't get de-allocated, which happens only
-> in evtchn_destroy_final()), it is always fine to use it without
-> lock. With this I'm having trouble seeing what would need adding
-> to port_is_valid()'s commentary.
+This is preceded by similar checks for "userspace" and "ondemand", so
+it is following existing code.  Unlike other governors, hwp-internal
+is static.  It could be exported if you want to switch to comparing
+with cpufreq_driver.
 
-Lets take the example of free_xen_event_channel(). The function is 
-checking if the port is valid. If it is, then evtchn_close() will be called.
+> > --- a/xen/include/acpi/cpufreq/cpufreq.h
+> > +++ b/xen/include/acpi/cpufreq/cpufreq.h
+> > @@ -246,4 +246,7 @@ int write_userspace_scaling_setspeed(unsigned int cpu, unsigned int freq);
+> >  void cpufreq_dbs_timer_suspend(void);
+> >  void cpufreq_dbs_timer_resume(void);
+> >
+> > +/********************** hwp hypercall helper *************************/
+> > +int get_hwp_para(struct cpufreq_policy *policy, struct xen_hwp_para *hwp_para);
+>
+> While I can see that the excessive number of stars matches what
+> we have elsewhere in the header, I still wonder if you need to go
+> this far for a single declaration. If you want to stick to this,
+> then to match the rest of the file you want to follow the comment
+> by a blank line.
 
-At this point, it would be fair for a developper to assume that 
-port_is_valid() will also return true in event_close().
+Will remove.
 
-To push to the extreme, if free_xen_event_channel() was the only caller 
-of evtchn_close(), one could argue that the check in evtchn_close() 
-could be a BUG_ON().
+> > --- a/xen/include/public/sysctl.h
+> > +++ b/xen/include/public/sysctl.h
+> > @@ -301,6 +301,23 @@ struct xen_ondemand {
+> >      uint32_t up_threshold;
+> >  };
+> >
+> > +struct xen_hwp_para {
+> > +    uint16_t activity_window; /* 7bit mantissa and 3bit exponent */
+>
+> If you go this far with commenting, you should also make the further
+> aspects clear: Which bits these are, and that the exponent is taking
+> 10 as the base (in most other cases one would expect 2).
 
-However, this can't be because this would sooner or later turn to an XSA.
+Yes, this is much more useful.
 
-Effectively, it means that is_port_valid() *cannot* be used in an 
-ASSERT()/BUG_ON() and every caller should check the return even if the 
-port was previously validated.
+> > +#define XEN_SYSCTL_HWP_FEAT_ENERGY_PERF (1 << 0) /* energy_perf range 0-255 if
+> > +                                                    1. Otherwise 0-15 */
+> > +#define XEN_SYSCTL_HWP_FEAT_ACT_WINDOW  (1 << 1) /* activity_window supported
+> > +                                                    if 1 */
+>
+> Style: Comment formatting. You may want to move the comment on separate
+> lines ahead of what they comment.
+>
+> > +    uint8_t hw_feature; /* bit flags for features */
+> > +    uint8_t hw_lowest;
+> > +    uint8_t hw_most_efficient;
+> > +    uint8_t hw_guaranteed;
+> > +    uint8_t hw_highest;
+>
+> Any particular reason for the recurring hw_ prefixes?
 
-So I think a comment on top of is_port_valid() would be really useful 
-before someone rediscover it the hard way.
+The idea was to differentiate values provided by CPU hardware from
+user-configured values.
 
-Cheers,
-
--- 
-Julien Grall
+Regards,
+Jason
 
