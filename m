@@ -8,43 +8,44 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E70F5C47097
-	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00C65C4709C
+	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7DE976120A
-	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DE976120A
+	by mail.kernel.org (Postfix) with ESMTPS id A29C6610CC
+	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A29C6610CC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134311.250025 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134292.249936 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPEB-0007Ke-TD; Sun, 30 May 2021 17:27:55 +0000
+	id 1lnPE4-0005SQ-Er; Sun, 30 May 2021 17:27:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134311.250025; Sun, 30 May 2021 17:27:55 +0000
+Received: by outflank-mailman (output) from mailman id 134292.249936; Sun, 30 May 2021 17:27:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPEA-0007Du-O4; Sun, 30 May 2021 17:27:54 +0000
-Received: by outflank-mailman (input) for mailman id 134311;
- Sun, 30 May 2021 15:13:09 +0000
+	id 1lnPE4-0005Rs-9v; Sun, 30 May 2021 17:27:48 +0000
+Received: by outflank-mailman (input) for mailman id 134292;
+ Sun, 30 May 2021 15:06:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GvOc=KZ=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1lnN2H-0000PC-1Z
- for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:07:29 +0000
-Received: from mail-pj1-x1030.google.com (unknown [2607:f8b0:4864:20::1030])
+ id 1lnN1Y-0000PC-09
+ for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:06:44 +0000
+Received: from mail-pj1-x102e.google.com (unknown [2607:f8b0:4864:20::102e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5a39f5d7-2b84-4e76-bdca-43fbe04b93fb;
- Sun, 30 May 2021 15:06:52 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id f8so5216697pjh.0
- for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:52 -0700 (PDT)
+ id bd11f8a9-b1f9-444a-b7fb-b7a2652d1e5e;
+ Sun, 30 May 2021 15:06:39 +0000 (UTC)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ jz2-20020a17090b14c2b0290162cf0b5a35so1479380pjb.5
+ for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:39 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:9:dc2d:80ab:c3f3:1524])
- by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.51
+ by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 May 2021 08:06:51 -0700 (PDT)
+ Sun, 30 May 2021 08:06:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +57,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5a39f5d7-2b84-4e76-bdca-43fbe04b93fb
+X-Inumbo-ID: bd11f8a9-b1f9-444a-b7fb-b7a2652d1e5e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=B9Yo0s6TejreB7euFecHxwxeib5b7yw6r+ldWbllM0I=;
-        b=Y7Pislz7VbgUb+yvZNwnu28Spkd0fh4WJ7X5yvOjbx6Wb2FxBAMgtgWiOu45Vr1JtO
-         Y37BMSPTphcpB8fkfTZzAt+ty+NYg01Yfo8Um4UE0UsXaV4XkHLa6PVtVfxkhLSGTuak
-         7SiYtdhCxaf0HIg83rGL8u/kLsxRDYwfwfkVY6bRxHqVVOdtkMDM/tpoNf09Huiy+DuM
-         WDBVtvJ63CZfL/yeEVTe3ZAzWQSCMTcqPN4rBY/V1AADy1B0KgPu6LVFfmGKTLqOMYqg
-         aP3eqb4ABnBY5UVJ1lLGCE6AWWd5HFXCWqwLNm4EEEs43CqEAMJwmRj9SSOJTHIVZ58K
-         mAIw==
+        bh=N7+X8C2xvctqats8In2MEizKCmhW7oGccQhxaGVYYMQ=;
+        b=q7tWZton5iDKuT87fqyJEg2jMh65azm2dNFTU3sW+h6mvDH0LxlutXdO1Li/Bjijeg
+         PwLdnmy0UWtYFAeQwSDrKPo7iqtlkOoQXcYZDnVe9dfNlYbKWOkVo5B0Qg8ecs08m3j/
+         /uwMeD/kq1dIPgdCOE3VSDHtE4JUs4zmtILg/nC6KaBgzXjX970xYYivzVks4euWQADa
+         lO90RfeNp6TullZFr9iAm5vXL/6z7Ihlfg8y/XtCyp4U5qWC3X75hxRMxGkME2ndXSTn
+         HfLDHt92ew6o18+Ht4Tek8bvQWh2N+fa5+JDSf/+mdfR6e2Uq+pk5PFeDT+DkVytt5Rb
+         musg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=B9Yo0s6TejreB7euFecHxwxeib5b7yw6r+ldWbllM0I=;
-        b=K3g8m63UGYwYuzOyD5le7X92UUkR5gtMwPUncWr6TlLDj7n6nXTZau3IZhh79Xevdr
-         u6nCuej3J+3b8wnGOk8vEzV/B4pJbqTMtoECYX45yesC0GE4xfAdovxSqzGxWPs5fajM
-         G5wBO0o+M/qL4Tvc1rbcoovs2baxaKMHgRLbOrO7tAxQnlw26Swz2lVjJJnIH3kN/Ztx
-         rI3R06MlmZXXOG3xD2YnIJDnM20dAeRbkpjF6lf4LF38+k5q6OLNJghebze9cRMTG/Me
-         KHpEjjW3gBIsTOMf1YdLRp1h0hwH+wrkzzbAYUmFCi41vwQXFrc23oPzOlJdmYRtbcL6
-         6LKg==
-X-Gm-Message-State: AOAM530tURQUeWzg9oBH0huz6GjYUFU0pZS9PRll8aAc1yXV5Q/RoVp3
-	trjJoI2Ad/y2ezHUCi7yoiE=
-X-Google-Smtp-Source: ABdhPJwrEdJxapaQT2EKNHLNcNavFxex5J8rSPwUw+1RburLx4171lng6hUEFaTaie+cBHFtvTw1VQ==
-X-Received: by 2002:a17:903:1c3:b029:f4:9624:2c69 with SMTP id e3-20020a17090301c3b02900f496242c69mr16671408plh.51.1622387212144;
-        Sun, 30 May 2021 08:06:52 -0700 (PDT)
+        bh=N7+X8C2xvctqats8In2MEizKCmhW7oGccQhxaGVYYMQ=;
+        b=uCq1Lr4eEUC6pH+JBvcmtKdfzuJ7vUTelT+Xuno7Mx0iiMH/KtaQ3GcJNckpr8HT7s
+         HM54xZHiZrR0/uk1q3dDdb6yaAp7DPdGIKXUmpJIfB3Rh7G7xhKNeZXFwXVTJ00f1BV9
+         XCYC+ZiEP/WIHBCotQ4jh7VAupmsMHSHroFHqsGK/k2gNEsIjDnMic5r/HWH4n/wGo5h
+         W4m8Y+KvdFclIiqltJA9gLnrP01ldsrgMX6fwj0QyzVhl3QiA5vhNi+8+mFx5v18XCXT
+         EzaoyVl7cwZ0hO7qKoi1aIWJetPzXYIkuKY5kb9kMybFa9DvFcMDheowO4X8dCbFmWJN
+         MmIg==
+X-Gm-Message-State: AOAM532Ow4wBusdE2pYSfczL+ttB/aWywkU0wn4Lndk5KsOuAU8mjysA
+	0hdWld6F+mvGrk3WjjOichM=
+X-Google-Smtp-Source: ABdhPJwq2lgstXGT117iNMqQIPLAUzLBXpYXE32leEdMzHtS6k6jpdCmJdRCvRkfB+UaPhbQDgK8HQ==
+X-Received: by 2002:a17:902:bb92:b029:f4:4a28:3ed0 with SMTP id m18-20020a170902bb92b02900f44a283ed0mr16822273pls.48.1622387198908;
+        Sun, 30 May 2021 08:06:38 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -131,9 +132,9 @@ Cc: iommu@lists.linux-foundation.org,
 	thomas.lendacky@amd.com,
 	brijesh.singh@amd.com,
 	sunilmut@microsoft.com
-Subject: [RFC PATCH V3 10/11] HV/Netvsc: Add Isolation VM support for netvsc driver
-Date: Sun, 30 May 2021 11:06:27 -0400
-Message-Id: <20210530150628.2063957-11-ltykernel@gmail.com>
+Subject: [RFC PATCH V3 01/11] x86/HV: Initialize GHCB page in Isolation VM
+Date: Sun, 30 May 2021 11:06:18 -0400
+Message-Id: <20210530150628.2063957-2-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210530150628.2063957-1-ltykernel@gmail.com>
 References: <20210530150628.2063957-1-ltykernel@gmail.com>
@@ -142,287 +143,178 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-In Isolation VM, all shared memory with host needs to mark visible
-to host via hvcall. vmbus_establish_gpadl() has already done it for
-netvsc rx/tx ring buffer. The page buffer used by vmbus_sendpacket_
-pagebuffer() still need to handle. Use DMA API to map/umap these
-memory during sending/receiving packet and Hyper-V DMA ops callback
-will use swiotlb function to allocate bounce buffer and copy data
-from/to bounce buffer.
+Hyper-V exposes GHCB page via SEV ES GHCB MSR for SNP guest
+to communicate with hypervisor. Map GHCB page for all
+cpus to read/write MSR register and submit hvcall request
+via GHCB.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- drivers/net/hyperv/hyperv_net.h   |   6 ++
- drivers/net/hyperv/netvsc.c       | 125 ++++++++++++++++++++++++++++--
- drivers/net/hyperv/rndis_filter.c |   3 +
- include/linux/hyperv.h            |   5 ++
- 4 files changed, 133 insertions(+), 6 deletions(-)
+ arch/x86/hyperv/hv_init.c       | 60 ++++++++++++++++++++++++++++++---
+ arch/x86/include/asm/mshyperv.h |  2 ++
+ include/asm-generic/mshyperv.h  |  2 ++
+ 3 files changed, 60 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/hyperv/hyperv_net.h b/drivers/net/hyperv/hyperv_net.h
-index b11aa68b44ec..c2fbb9d4df2c 100644
---- a/drivers/net/hyperv/hyperv_net.h
-+++ b/drivers/net/hyperv/hyperv_net.h
-@@ -164,6 +164,7 @@ struct hv_netvsc_packet {
- 	u32 total_bytes;
- 	u32 send_buf_index;
- 	u32 total_data_buflen;
-+	struct hv_dma_range *dma_range;
- };
+diff --git a/arch/x86/hyperv/hv_init.c b/arch/x86/hyperv/hv_init.c
+index bb0ae4b5c00f..dc74d01cb859 100644
+--- a/arch/x86/hyperv/hv_init.c
++++ b/arch/x86/hyperv/hv_init.c
+@@ -60,6 +60,9 @@ static int hv_cpu_init(unsigned int cpu)
+ 	struct hv_vp_assist_page **hvp = &hv_vp_assist_page[smp_processor_id()];
+ 	void **input_arg;
+ 	struct page *pg;
++	u64 ghcb_gpa;
++	void *ghcb_va;
++	void **ghcb_base;
  
- #define NETVSC_HASH_KEYLEN 40
-@@ -1074,6 +1075,7 @@ struct netvsc_device {
- 
- 	/* Receive buffer allocated by us but manages by NetVSP */
- 	void *recv_buf;
-+	void *recv_original_buf;
- 	u32 recv_buf_size; /* allocated bytes */
- 	u32 recv_buf_gpadl_handle;
- 	u32 recv_section_cnt;
-@@ -1082,6 +1084,8 @@ struct netvsc_device {
- 
- 	/* Send buffer allocated by us */
- 	void *send_buf;
-+	void *send_original_buf;
-+	u32 send_buf_size;
- 	u32 send_buf_gpadl_handle;
- 	u32 send_section_cnt;
- 	u32 send_section_size;
-@@ -1729,4 +1733,6 @@ struct rndis_message {
- #define RETRY_US_HI	10000
- #define RETRY_MAX	2000	/* >10 sec */
- 
-+void netvsc_dma_unmap(struct hv_device *hv_dev,
-+		      struct hv_netvsc_packet *packet);
- #endif /* _HYPERV_NET_H */
-diff --git a/drivers/net/hyperv/netvsc.c b/drivers/net/hyperv/netvsc.c
-index 7bd935412853..a01740c6c6b8 100644
---- a/drivers/net/hyperv/netvsc.c
-+++ b/drivers/net/hyperv/netvsc.c
-@@ -153,8 +153,21 @@ static void free_netvsc_device(struct rcu_head *head)
- 	int i;
- 
- 	kfree(nvdev->extension);
--	vfree(nvdev->recv_buf);
--	vfree(nvdev->send_buf);
-+
-+	if (nvdev->recv_original_buf) {
-+		vunmap(nvdev->recv_buf);
-+		vfree(nvdev->recv_original_buf);
-+	} else {
-+		vfree(nvdev->recv_buf);
-+	}
-+
-+	if (nvdev->send_original_buf) {
-+		vunmap(nvdev->send_buf);
-+		vfree(nvdev->send_original_buf);
-+	} else {
-+		vfree(nvdev->send_buf);
-+	}
-+
- 	kfree(nvdev->send_section_map);
- 
- 	for (i = 0; i < VRSS_CHANNEL_MAX; i++) {
-@@ -338,8 +351,10 @@ static int netvsc_init_buf(struct hv_device *device,
- 	struct net_device *ndev = hv_get_drvdata(device);
- 	struct nvsp_message *init_packet;
- 	unsigned int buf_size;
-+	unsigned long *pfns;
- 	size_t map_words;
- 	int i, ret = 0;
-+	void *vaddr;
- 
- 	/* Get receive buffer area. */
- 	buf_size = device_info->recv_sections * device_info->recv_section_size;
-@@ -375,6 +390,21 @@ static int netvsc_init_buf(struct hv_device *device,
- 		goto cleanup;
+ 	/* hv_cpu_init() can be called with IRQs disabled from hv_resume() */
+ 	pg = alloc_pages(irqs_disabled() ? GFP_ATOMIC : GFP_KERNEL, hv_root_partition ? 1 : 0);
+@@ -106,6 +109,17 @@ static int hv_cpu_init(unsigned int cpu)
+ 		wrmsrl(HV_X64_MSR_VP_ASSIST_PAGE, val);
  	}
  
-+	if (hv_isolation_type_snp()) {
-+		pfns = kcalloc(buf_size / HV_HYP_PAGE_SIZE, sizeof(unsigned long),
-+			       GFP_KERNEL);
-+		for (i = 0; i < buf_size / HV_HYP_PAGE_SIZE; i++)
-+			pfns[i] = virt_to_hvpfn(net_device->recv_buf + i * HV_HYP_PAGE_SIZE) +
-+				(ms_hyperv.shared_gpa_boundary >> HV_HYP_PAGE_SHIFT);
++	if (ms_hyperv.ghcb_base) {
++		rdmsrl(MSR_AMD64_SEV_ES_GHCB, ghcb_gpa);
 +
-+		vaddr = vmap_pfn(pfns, buf_size / HV_HYP_PAGE_SIZE, PAGE_KERNEL_IO);
-+		kfree(pfns);
-+		if (!vaddr)
-+			goto cleanup;
-+		net_device->recv_original_buf = net_device->recv_buf;
-+		net_device->recv_buf = vaddr;
++		ghcb_va = ioremap_cache(ghcb_gpa, HV_HYP_PAGE_SIZE);
++		if (!ghcb_va)
++			return -ENOMEM;
++
++		ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
++		*ghcb_base = ghcb_va;
 +	}
 +
- 	/* Notify the NetVsp of the gpadl handle */
- 	init_packet = &net_device->channel_init_pkt;
- 	memset(init_packet, 0, sizeof(struct nvsp_message));
-@@ -477,6 +507,23 @@ static int netvsc_init_buf(struct hv_device *device,
- 		goto cleanup;
- 	}
- 
-+	if (hv_isolation_type_snp()) {
-+		pfns = kcalloc(buf_size / HV_HYP_PAGE_SIZE, sizeof(unsigned long),
-+			       GFP_KERNEL);
-+
-+		for (i = 0; i < buf_size / HV_HYP_PAGE_SIZE; i++)
-+			pfns[i] = virt_to_hvpfn(net_device->send_buf + i * HV_HYP_PAGE_SIZE)
-+				+ (ms_hyperv.shared_gpa_boundary >> HV_HYP_PAGE_SHIFT);
-+
-+		vaddr = vmap_pfn(pfns, buf_size / HV_HYP_PAGE_SIZE, PAGE_KERNEL_IO);
-+		kfree(pfns);
-+		if (!vaddr)
-+			goto cleanup;
-+
-+		net_device->send_original_buf = net_device->send_buf;
-+		net_device->send_buf = vaddr;
-+	}
-+
- 	/* Notify the NetVsp of the gpadl handle */
- 	init_packet = &net_device->channel_init_pkt;
- 	memset(init_packet, 0, sizeof(struct nvsp_message));
-@@ -767,7 +814,7 @@ static void netvsc_send_tx_complete(struct net_device *ndev,
- 
- 	/* Notify the layer above us */
- 	if (likely(skb)) {
--		const struct hv_netvsc_packet *packet
-+		struct hv_netvsc_packet *packet
- 			= (struct hv_netvsc_packet *)skb->cb;
- 		u32 send_index = packet->send_buf_index;
- 		struct netvsc_stats *tx_stats;
-@@ -783,6 +830,7 @@ static void netvsc_send_tx_complete(struct net_device *ndev,
- 		tx_stats->bytes += packet->total_bytes;
- 		u64_stats_update_end(&tx_stats->syncp);
- 
-+		netvsc_dma_unmap(ndev_ctx->device_ctx, packet);
- 		napi_consume_skb(skb, budget);
- 	}
- 
-@@ -947,6 +995,63 @@ static void netvsc_copy_to_send_buf(struct netvsc_device *net_device,
- 		memset(dest, 0, padding);
+ 	return 0;
  }
  
-+void netvsc_dma_unmap(struct hv_device *hv_dev,
-+		      struct hv_netvsc_packet *packet)
-+{
-+	u32 page_count = packet->cp_partial ?
-+		packet->page_buf_cnt - packet->rmsg_pgcnt :
-+		packet->page_buf_cnt;
-+	int i;
-+
-+	if (!packet->dma_range)
-+		return;
-+
-+	for (i = 0; i < page_count; i++)
-+		dma_unmap_single(&hv_dev->device, packet->dma_range[i].dma,
-+				 packet->dma_range[i].mapping_size,
-+				 DMA_TO_DEVICE);
-+
-+	kfree(packet->dma_range);
-+}
-+
-+int netvsc_dma_map(struct hv_device *hv_dev,
-+		   struct hv_netvsc_packet *packet,
-+		   struct hv_page_buffer *pb)
-+{
-+	u32 page_count =  packet->cp_partial ?
-+		packet->page_buf_cnt - packet->rmsg_pgcnt :
-+		packet->page_buf_cnt;
-+	dma_addr_t dma;
-+	int i;
-+
-+	packet->dma_range = kcalloc(page_count,
-+				    sizeof(*packet->dma_range),
-+				    GFP_KERNEL);
-+	if (!packet->dma_range)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < page_count; i++) {
-+		char *src = phys_to_virt((pb[i].pfn << HV_HYP_PAGE_SHIFT)
-+					 + pb[i].offset);
-+		u32 len = pb[i].len;
-+
-+		dma = dma_map_single(&hv_dev->device, src, len,
-+				     DMA_TO_DEVICE);
-+		if (dma_mapping_error(&hv_dev->device, dma)) {
-+			kfree(packet->dma_range);
-+			return -ENOMEM;
-+		}
-+
-+		packet->dma_range[i].dma = dma;
-+		packet->dma_range[i].mapping_size = len;
-+		pb[i].pfn = dma >> HV_HYP_PAGE_SHIFT;
-+		pb[i].offset = offset_in_hvpage(dma);
-+		pb[i].len = len;
+@@ -201,6 +215,7 @@ static int hv_cpu_die(unsigned int cpu)
+ 	unsigned long flags;
+ 	void **input_arg;
+ 	void *pg;
++	void **ghcb_va = NULL;
+ 
+ 	local_irq_save(flags);
+ 	input_arg = (void **)this_cpu_ptr(hyperv_pcpu_input_arg);
+@@ -214,6 +229,13 @@ static int hv_cpu_die(unsigned int cpu)
+ 		*output_arg = NULL;
+ 	}
+ 
++	if (ms_hyperv.ghcb_base) {
++		ghcb_va = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
++		if (*ghcb_va)
++			iounmap(*ghcb_va);
++		*ghcb_va = NULL;
 +	}
 +
-+	return 0;
+ 	local_irq_restore(flags);
+ 
+ 	free_pages((unsigned long)pg, hv_root_partition ? 1 : 0);
+@@ -369,6 +391,9 @@ void __init hyperv_init(void)
+ 	u64 guest_id, required_msrs;
+ 	union hv_x64_msr_hypercall_contents hypercall_msr;
+ 	int cpuhp, i;
++	u64 ghcb_gpa;
++	void *ghcb_va;
++	void **ghcb_base;
+ 
+ 	if (x86_hyper_type != X86_HYPER_MS_HYPERV)
+ 		return;
+@@ -429,9 +454,24 @@ void __init hyperv_init(void)
+ 			VMALLOC_END, GFP_KERNEL, PAGE_KERNEL_ROX,
+ 			VM_FLUSH_RESET_PERMS, NUMA_NO_NODE,
+ 			__builtin_return_address(0));
+-	if (hv_hypercall_pg == NULL) {
+-		wrmsrl(HV_X64_MSR_GUEST_OS_ID, 0);
+-		goto remove_cpuhp_state;
++	if (hv_hypercall_pg == NULL)
++		goto clean_guest_os_id;
++
++	if (hv_isolation_type_snp()) {
++		ms_hyperv.ghcb_base = alloc_percpu(void *);
++		if (!ms_hyperv.ghcb_base)
++			goto clean_guest_os_id;
++
++		rdmsrl(MSR_AMD64_SEV_ES_GHCB, ghcb_gpa);
++		ghcb_va = ioremap_cache(ghcb_gpa, HV_HYP_PAGE_SIZE);
++		if (!ghcb_va) {
++			free_percpu(ms_hyperv.ghcb_base);
++			ms_hyperv.ghcb_base = NULL;
++			goto clean_guest_os_id;
++		}
++
++		ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
++		*ghcb_base = ghcb_va;
+ 	}
+ 
+ 	rdmsrl(HV_X64_MSR_HYPERCALL, hypercall_msr.as_uint64);
+@@ -502,7 +542,8 @@ void __init hyperv_init(void)
+ 	hv_query_ext_cap(0);
+ 	return;
+ 
+-remove_cpuhp_state:
++clean_guest_os_id:
++	wrmsrl(HV_X64_MSR_GUEST_OS_ID, 0);
+ 	cpuhp_remove_state(cpuhp);
+ free_vp_assist_page:
+ 	kfree(hv_vp_assist_page);
+@@ -531,6 +572,9 @@ void hyperv_cleanup(void)
+ 	 */
+ 	hv_hypercall_pg = NULL;
+ 
++	if (ms_hyperv.ghcb_base)
++		free_percpu(ms_hyperv.ghcb_base);
++
+ 	/* Reset the hypercall page */
+ 	hypercall_msr.as_uint64 = 0;
+ 	wrmsrl(HV_X64_MSR_HYPERCALL, hypercall_msr.as_uint64);
+@@ -615,6 +659,14 @@ bool hv_is_isolation_supported(void)
+ }
+ EXPORT_SYMBOL_GPL(hv_is_isolation_supported);
+ 
++DEFINE_STATIC_KEY_FALSE(isolation_type_snp);
++
++bool hv_isolation_type_snp(void)
++{
++	return static_branch_unlikely(&isolation_type_snp);
 +}
++EXPORT_SYMBOL_GPL(hv_isolation_type_snp);
 +
- static inline int netvsc_send_pkt(
- 	struct hv_device *device,
- 	struct hv_netvsc_packet *packet,
-@@ -987,14 +1092,22 @@ static inline int netvsc_send_pkt(
+ /* Bit mask of the extended capability to query: see HV_EXT_CAPABILITY_xxx */
+ bool hv_query_ext_cap(u64 cap_query)
+ {
+diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+index 67ff0d637e55..aeacca7c4da8 100644
+--- a/arch/x86/include/asm/mshyperv.h
++++ b/arch/x86/include/asm/mshyperv.h
+@@ -11,6 +11,8 @@
+ #include <asm/paravirt.h>
+ #include <asm/mshyperv.h>
  
- 	trace_nvsp_send_pkt(ndev, out_channel, rpkt);
- 
-+	packet->dma_range = NULL;
- 	if (packet->page_buf_cnt) {
- 		if (packet->cp_partial)
- 			pb += packet->rmsg_pgcnt;
- 
-+		ret = netvsc_dma_map(ndev_ctx->device_ctx, packet, pb);
-+		if (ret)
-+			return ret;
++DECLARE_STATIC_KEY_FALSE(isolation_type_snp);
 +
- 		ret = vmbus_sendpacket_pagebuffer(out_channel,
--						  pb, packet->page_buf_cnt,
--						  &nvmsg, sizeof(nvmsg),
--						  req_id);
-+					  pb, packet->page_buf_cnt,
-+					  &nvmsg, sizeof(nvmsg),
-+					  req_id);
-+
-+		if (ret)
-+			netvsc_dma_unmap(ndev_ctx->device_ctx, packet);
- 	} else {
- 		ret = vmbus_sendpacket(out_channel,
- 				       &nvmsg, sizeof(nvmsg),
-diff --git a/drivers/net/hyperv/rndis_filter.c b/drivers/net/hyperv/rndis_filter.c
-index 983bf362466a..448c1ee39246 100644
---- a/drivers/net/hyperv/rndis_filter.c
-+++ b/drivers/net/hyperv/rndis_filter.c
-@@ -293,6 +293,8 @@ static void rndis_filter_receive_response(struct net_device *ndev,
- 	u32 *req_id = &resp->msg.init_complete.req_id;
- 	struct rndis_device *dev = nvdev->extension;
- 	struct rndis_request *request = NULL;
-+	struct hv_device *hv_dev = ((struct net_device_context *)
-+			netdev_priv(ndev))->device_ctx;
- 	bool found = false;
- 	unsigned long flags;
- 
-@@ -361,6 +363,7 @@ static void rndis_filter_receive_response(struct net_device *ndev,
- 			}
- 		}
- 
-+		netvsc_dma_unmap(hv_dev, &request->pkt);
- 		complete(&request->wait_event);
- 	} else {
- 		netdev_err(ndev,
-diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
-index babbe19f57e2..90abff664495 100644
---- a/include/linux/hyperv.h
-+++ b/include/linux/hyperv.h
-@@ -1616,6 +1616,11 @@ struct hyperv_service_callback {
- 	void (*callback)(void *context);
+ typedef int (*hyperv_fill_flush_list_func)(
+ 		struct hv_guest_mapping_flush_list *flush,
+ 		void *data);
+diff --git a/include/asm-generic/mshyperv.h b/include/asm-generic/mshyperv.h
+index 9a000ba2bb75..3ae56a29594f 100644
+--- a/include/asm-generic/mshyperv.h
++++ b/include/asm-generic/mshyperv.h
+@@ -35,6 +35,7 @@ struct ms_hyperv_info {
+ 	u32 max_lp_index;
+ 	u32 isolation_config_a;
+ 	u32 isolation_config_b;
++	void  __percpu **ghcb_base;
  };
+ extern struct ms_hyperv_info ms_hyperv;
  
-+struct hv_dma_range {
-+	dma_addr_t dma;
-+	u32 mapping_size;
-+};
-+
- #define MAX_SRV_VER	0x7ffffff
- extern bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp, u8 *buf, u32 buflen,
- 				const int *fw_version, int fw_vercnt,
+@@ -224,6 +225,7 @@ bool hv_is_hyperv_initialized(void);
+ bool hv_is_hibernation_supported(void);
+ enum hv_isolation_type hv_get_isolation_type(void);
+ bool hv_is_isolation_supported(void);
++bool hv_isolation_type_snp(void);
+ void hyperv_cleanup(void);
+ bool hv_query_ext_cap(u64 cap_query);
+ #else /* CONFIG_HYPERV */
 -- 
 2.25.1
 
