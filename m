@@ -8,44 +8,43 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBEC0C47092
-	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E70F5C47097
+	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 64AFE610CC
-	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 64AFE610CC
+	by mail.kernel.org (Postfix) with ESMTPS id 7DE976120A
+	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DE976120A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134300.249968 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134311.250025 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPE6-00061L-HG; Sun, 30 May 2021 17:27:50 +0000
+	id 1lnPEB-0007Ke-TD; Sun, 30 May 2021 17:27:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134300.249968; Sun, 30 May 2021 17:27:50 +0000
+Received: by outflank-mailman (output) from mailman id 134311.250025; Sun, 30 May 2021 17:27:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPE5-0005xd-Uq; Sun, 30 May 2021 17:27:49 +0000
-Received: by outflank-mailman (input) for mailman id 134300;
- Sun, 30 May 2021 15:07:04 +0000
+	id 1lnPEA-0007Du-O4; Sun, 30 May 2021 17:27:54 +0000
+Received: by outflank-mailman (input) for mailman id 134311;
+ Sun, 30 May 2021 15:13:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GvOc=KZ=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1lnN1s-0000PC-0k
- for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:07:04 +0000
+ id 1lnN2H-0000PC-1Z
+ for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:07:29 +0000
 Received: from mail-pj1-x1030.google.com (unknown [2607:f8b0:4864:20::1030])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f36adaac-9dab-42d3-8e39-a3f4c8e9df73;
- Sun, 30 May 2021 15:06:46 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id
- o17-20020a17090a9f91b029015cef5b3c50so7198667pjp.4
- for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:46 -0700 (PDT)
+ id 5a39f5d7-2b84-4e76-bdca-43fbe04b93fb;
+ Sun, 30 May 2021 15:06:52 +0000 (UTC)
+Received: by mail-pj1-x1030.google.com with SMTP id f8so5216697pjh.0
+ for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:52 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:9:dc2d:80ab:c3f3:1524])
- by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.43
+ by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 May 2021 08:06:44 -0700 (PDT)
+ Sun, 30 May 2021 08:06:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f36adaac-9dab-42d3-8e39-a3f4c8e9df73
+X-Inumbo-ID: 5a39f5d7-2b84-4e76-bdca-43fbe04b93fb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=z6S1GEUANkCSJDbGlD0AFfyq9MRalRtHEN/uug/GOu0=;
-        b=bjkBFLIGpECWm12ZAUvidwjhy290SoG0X7BEjCajWvEiZptzu5I/ZT/UvY4n5d9vQK
-         vTBSEZNwaH7n99NZzNVTQPnrt4hta7LrzuCGnHpiON9AUMkhumyiiozan8c/a5HWL8/Y
-         MhU50l/wXGpatWp4kkoMPFXW5XREua8Ne8mEhC3qJtFrgXbkxzC7Xu3wI79epYQyGnHQ
-         hv9OhB2IW6o2mfT96TOFoaY8GP/A/mlm3P19ebZlMOImyCrfxx7/c9J+oKIGXsseFTI2
-         7eqK6e1F+iZOZgxUCpjNiMRUDE9IWIfbm4trwT0KL+Ea6sMa04paSo8i/kuyuz3ciGU2
-         qirg==
+        bh=B9Yo0s6TejreB7euFecHxwxeib5b7yw6r+ldWbllM0I=;
+        b=Y7Pislz7VbgUb+yvZNwnu28Spkd0fh4WJ7X5yvOjbx6Wb2FxBAMgtgWiOu45Vr1JtO
+         Y37BMSPTphcpB8fkfTZzAt+ty+NYg01Yfo8Um4UE0UsXaV4XkHLa6PVtVfxkhLSGTuak
+         7SiYtdhCxaf0HIg83rGL8u/kLsxRDYwfwfkVY6bRxHqVVOdtkMDM/tpoNf09Huiy+DuM
+         WDBVtvJ63CZfL/yeEVTe3ZAzWQSCMTcqPN4rBY/V1AADy1B0KgPu6LVFfmGKTLqOMYqg
+         aP3eqb4ABnBY5UVJ1lLGCE6AWWd5HFXCWqwLNm4EEEs43CqEAMJwmRj9SSOJTHIVZ58K
+         mAIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=z6S1GEUANkCSJDbGlD0AFfyq9MRalRtHEN/uug/GOu0=;
-        b=dRzmTYZQ9361XVCpcxW5VBFbrgGH9pTTbplZW5+7xHBGT6MHj8cYY/BV2auogYi6LQ
-         t0FrezhcuQJ2lLeudLTQ0cF6QLq/EXIXNR6aPxXNHeH0NuXv1ikqkQqeZaF5XLkYQ5TC
-         arInUEND2QrwBy1YJvqNi7n1bEB2Bkt/zawf1tZUrMRXVS0ISiWWM6SQ5BnvM666S2CR
-         1ht3ipCSiuUGeHUsQ14pkwgVc3Ku+KT7H4ksUdsYzT7gJ7Cu4w3tB8KWWLeOPM/vZSkG
-         PFuBtRMBi/5EX2icLi+qXQTAm3ah7Umc29umFlwMr7Wz8hpJ7mtpgNT7MM4qBwY9JB+h
-         Ad4g==
-X-Gm-Message-State: AOAM533DwhZwXhVtprIvC++wcYVBShmCKEGTdbr3KDTbIecgHo/jLcbw
-	mQdXw0y0IBIpCaMwRrrQ/sY=
-X-Google-Smtp-Source: ABdhPJyBzi0D5XZ+1bVzKaDd93rKStOmEBliWJn7djh8UK0R2zDyliKB0crRLpyjBYOBktS3q/+xFg==
-X-Received: by 2002:a17:90b:1b48:: with SMTP id nv8mr15017912pjb.39.1622387205419;
-        Sun, 30 May 2021 08:06:45 -0700 (PDT)
+        bh=B9Yo0s6TejreB7euFecHxwxeib5b7yw6r+ldWbllM0I=;
+        b=K3g8m63UGYwYuzOyD5le7X92UUkR5gtMwPUncWr6TlLDj7n6nXTZau3IZhh79Xevdr
+         u6nCuej3J+3b8wnGOk8vEzV/B4pJbqTMtoECYX45yesC0GE4xfAdovxSqzGxWPs5fajM
+         G5wBO0o+M/qL4Tvc1rbcoovs2baxaKMHgRLbOrO7tAxQnlw26Swz2lVjJJnIH3kN/Ztx
+         rI3R06MlmZXXOG3xD2YnIJDnM20dAeRbkpjF6lf4LF38+k5q6OLNJghebze9cRMTG/Me
+         KHpEjjW3gBIsTOMf1YdLRp1h0hwH+wrkzzbAYUmFCi41vwQXFrc23oPzOlJdmYRtbcL6
+         6LKg==
+X-Gm-Message-State: AOAM530tURQUeWzg9oBH0huz6GjYUFU0pZS9PRll8aAc1yXV5Q/RoVp3
+	trjJoI2Ad/y2ezHUCi7yoiE=
+X-Google-Smtp-Source: ABdhPJwrEdJxapaQT2EKNHLNcNavFxex5J8rSPwUw+1RburLx4171lng6hUEFaTaie+cBHFtvTw1VQ==
+X-Received: by 2002:a17:903:1c3:b029:f4:9624:2c69 with SMTP id e3-20020a17090301c3b02900f496242c69mr16671408plh.51.1622387212144;
+        Sun, 30 May 2021 08:06:52 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -132,9 +131,9 @@ Cc: iommu@lists.linux-foundation.org,
 	thomas.lendacky@amd.com,
 	brijesh.singh@amd.com,
 	sunilmut@microsoft.com
-Subject: [RFC PATCH V3 05/11] HV: Add ghcb hvcall support for SNP VM
-Date: Sun, 30 May 2021 11:06:22 -0400
-Message-Id: <20210530150628.2063957-6-ltykernel@gmail.com>
+Subject: [RFC PATCH V3 10/11] HV/Netvsc: Add Isolation VM support for netvsc driver
+Date: Sun, 30 May 2021 11:06:27 -0400
+Message-Id: <20210530150628.2063957-11-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210530150628.2063957-1-ltykernel@gmail.com>
 References: <20210530150628.2063957-1-ltykernel@gmail.com>
@@ -143,147 +142,287 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-Hyper-V provides ghcb hvcall to handle VMBus
-HVCALL_SIGNAL_EVENT and HVCALL_POST_MESSAGE
-msg in SNP Isolation VM. Add such support.
+In Isolation VM, all shared memory with host needs to mark visible
+to host via hvcall. vmbus_establish_gpadl() has already done it for
+netvsc rx/tx ring buffer. The page buffer used by vmbus_sendpacket_
+pagebuffer() still need to handle. Use DMA API to map/umap these
+memory during sending/receiving packet and Hyper-V DMA ops callback
+will use swiotlb function to allocate bounce buffer and copy data
+from/to bounce buffer.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- arch/x86/hyperv/ivm.c           | 69 +++++++++++++++++++++++++++++++++
- arch/x86/include/asm/mshyperv.h |  1 +
- drivers/hv/connection.c         |  6 ++-
- drivers/hv/hv.c                 |  8 +++-
- 4 files changed, 82 insertions(+), 2 deletions(-)
+ drivers/net/hyperv/hyperv_net.h   |   6 ++
+ drivers/net/hyperv/netvsc.c       | 125 ++++++++++++++++++++++++++++--
+ drivers/net/hyperv/rndis_filter.c |   3 +
+ include/linux/hyperv.h            |   5 ++
+ 4 files changed, 133 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/hyperv/ivm.c b/arch/x86/hyperv/ivm.c
-index fd6dd804beef..e687fca68ba3 100644
---- a/arch/x86/hyperv/ivm.c
-+++ b/arch/x86/hyperv/ivm.c
-@@ -18,8 +18,77 @@
+diff --git a/drivers/net/hyperv/hyperv_net.h b/drivers/net/hyperv/hyperv_net.h
+index b11aa68b44ec..c2fbb9d4df2c 100644
+--- a/drivers/net/hyperv/hyperv_net.h
++++ b/drivers/net/hyperv/hyperv_net.h
+@@ -164,6 +164,7 @@ struct hv_netvsc_packet {
+ 	u32 total_bytes;
+ 	u32 send_buf_index;
+ 	u32 total_data_buflen;
++	struct hv_dma_range *dma_range;
+ };
  
- union hv_ghcb {
- 	struct ghcb ghcb;
-+	struct {
-+		u64 hypercalldata[509];
-+		u64 outputgpa;
-+		union {
-+			union {
-+				struct {
-+					u32 callcode        : 16;
-+					u32 isfast          : 1;
-+					u32 reserved1       : 14;
-+					u32 isnested        : 1;
-+					u32 countofelements : 12;
-+					u32 reserved2       : 4;
-+					u32 repstartindex   : 12;
-+					u32 reserved3       : 4;
-+				};
-+				u64 asuint64;
-+			} hypercallinput;
-+			union {
-+				struct {
-+					u16 callstatus;
-+					u16 reserved1;
-+					u32 elementsprocessed : 12;
-+					u32 reserved2         : 20;
-+				};
-+				u64 asunit64;
-+			} hypercalloutput;
-+		};
-+		u64 reserved2;
-+	} hypercall;
- } __packed __aligned(PAGE_SIZE);
+ #define NETVSC_HASH_KEYLEN 40
+@@ -1074,6 +1075,7 @@ struct netvsc_device {
  
-+u64 hv_ghcb_hypercall(u64 control, void *input, void *output, u32 input_size)
-+{
-+	union hv_ghcb *hv_ghcb;
-+	void **ghcb_base;
-+	unsigned long flags;
+ 	/* Receive buffer allocated by us but manages by NetVSP */
+ 	void *recv_buf;
++	void *recv_original_buf;
+ 	u32 recv_buf_size; /* allocated bytes */
+ 	u32 recv_buf_gpadl_handle;
+ 	u32 recv_section_cnt;
+@@ -1082,6 +1084,8 @@ struct netvsc_device {
+ 
+ 	/* Send buffer allocated by us */
+ 	void *send_buf;
++	void *send_original_buf;
++	u32 send_buf_size;
+ 	u32 send_buf_gpadl_handle;
+ 	u32 send_section_cnt;
+ 	u32 send_section_size;
+@@ -1729,4 +1733,6 @@ struct rndis_message {
+ #define RETRY_US_HI	10000
+ #define RETRY_MAX	2000	/* >10 sec */
+ 
++void netvsc_dma_unmap(struct hv_device *hv_dev,
++		      struct hv_netvsc_packet *packet);
+ #endif /* _HYPERV_NET_H */
+diff --git a/drivers/net/hyperv/netvsc.c b/drivers/net/hyperv/netvsc.c
+index 7bd935412853..a01740c6c6b8 100644
+--- a/drivers/net/hyperv/netvsc.c
++++ b/drivers/net/hyperv/netvsc.c
+@@ -153,8 +153,21 @@ static void free_netvsc_device(struct rcu_head *head)
+ 	int i;
+ 
+ 	kfree(nvdev->extension);
+-	vfree(nvdev->recv_buf);
+-	vfree(nvdev->send_buf);
 +
-+	if (!ms_hyperv.ghcb_base)
-+		return -EFAULT;
-+
-+	local_irq_save(flags);
-+	ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
-+	hv_ghcb = (union hv_ghcb *)*ghcb_base;
-+	if (!hv_ghcb) {
-+		local_irq_restore(flags);
-+		return -EFAULT;
++	if (nvdev->recv_original_buf) {
++		vunmap(nvdev->recv_buf);
++		vfree(nvdev->recv_original_buf);
++	} else {
++		vfree(nvdev->recv_buf);
 +	}
 +
-+	memset(hv_ghcb, 0x00, HV_HYP_PAGE_SIZE);
-+	hv_ghcb->ghcb.protocol_version = 1;
-+	hv_ghcb->ghcb.ghcb_usage = 1;
++	if (nvdev->send_original_buf) {
++		vunmap(nvdev->send_buf);
++		vfree(nvdev->send_original_buf);
++	} else {
++		vfree(nvdev->send_buf);
++	}
 +
-+	hv_ghcb->hypercall.outputgpa = (u64)output;
-+	hv_ghcb->hypercall.hypercallinput.asuint64 = 0;
-+	hv_ghcb->hypercall.hypercallinput.callcode = control;
-+
-+	if (input_size)
-+		memcpy(hv_ghcb->hypercall.hypercalldata, input, input_size);
-+
-+	VMGEXIT();
-+
-+	hv_ghcb->ghcb.ghcb_usage = 0xffffffff;
-+	memset(hv_ghcb->ghcb.save.valid_bitmap, 0,
-+	       sizeof(hv_ghcb->ghcb.save.valid_bitmap));
-+
-+	local_irq_restore(flags);
-+
-+	return hv_ghcb->hypercall.hypercalloutput.callstatus;
-+}
-+EXPORT_SYMBOL_GPL(hv_ghcb_hypercall);
-+
- void hv_ghcb_msr_write(u64 msr, u64 value)
- {
- 	union hv_ghcb *hv_ghcb;
-diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
-index eec7f3357d51..51dfbd040930 100644
---- a/arch/x86/include/asm/mshyperv.h
-+++ b/arch/x86/include/asm/mshyperv.h
-@@ -259,6 +259,7 @@ void hv_sint_rdmsrl_ghcb(u64 msr, u64 *value);
- void hv_signal_eom_ghcb(void);
- void hv_ghcb_msr_write(u64 msr, u64 value);
- void hv_ghcb_msr_read(u64 msr, u64 *value);
-+u64 hv_ghcb_hypercall(u64 control, void *input, void *output, u32 input_size);
+ 	kfree(nvdev->send_section_map);
  
- #define hv_get_synint_state_ghcb(int_num, val)			\
- 	hv_sint_rdmsrl_ghcb(HV_X64_MSR_SINT0 + int_num, val)
-diff --git a/drivers/hv/connection.c b/drivers/hv/connection.c
-index 311cd005b3be..186fd4c8acd4 100644
---- a/drivers/hv/connection.c
-+++ b/drivers/hv/connection.c
-@@ -445,6 +445,10 @@ void vmbus_set_event(struct vmbus_channel *channel)
+ 	for (i = 0; i < VRSS_CHANNEL_MAX; i++) {
+@@ -338,8 +351,10 @@ static int netvsc_init_buf(struct hv_device *device,
+ 	struct net_device *ndev = hv_get_drvdata(device);
+ 	struct nvsp_message *init_packet;
+ 	unsigned int buf_size;
++	unsigned long *pfns;
+ 	size_t map_words;
+ 	int i, ret = 0;
++	void *vaddr;
  
- 	++channel->sig_events;
+ 	/* Get receive buffer area. */
+ 	buf_size = device_info->recv_sections * device_info->recv_section_size;
+@@ -375,6 +390,21 @@ static int netvsc_init_buf(struct hv_device *device,
+ 		goto cleanup;
+ 	}
  
--	hv_do_fast_hypercall8(HVCALL_SIGNAL_EVENT, channel->sig_event);
-+	if (hv_isolation_type_snp())
-+		hv_ghcb_hypercall(HVCALL_SIGNAL_EVENT, &channel->sig_event,
-+				NULL, sizeof(u64));
-+	else
-+		hv_do_fast_hypercall8(HVCALL_SIGNAL_EVENT, channel->sig_event);
++	if (hv_isolation_type_snp()) {
++		pfns = kcalloc(buf_size / HV_HYP_PAGE_SIZE, sizeof(unsigned long),
++			       GFP_KERNEL);
++		for (i = 0; i < buf_size / HV_HYP_PAGE_SIZE; i++)
++			pfns[i] = virt_to_hvpfn(net_device->recv_buf + i * HV_HYP_PAGE_SIZE) +
++				(ms_hyperv.shared_gpa_boundary >> HV_HYP_PAGE_SHIFT);
++
++		vaddr = vmap_pfn(pfns, buf_size / HV_HYP_PAGE_SIZE, PAGE_KERNEL_IO);
++		kfree(pfns);
++		if (!vaddr)
++			goto cleanup;
++		net_device->recv_original_buf = net_device->recv_buf;
++		net_device->recv_buf = vaddr;
++	}
++
+ 	/* Notify the NetVsp of the gpadl handle */
+ 	init_packet = &net_device->channel_init_pkt;
+ 	memset(init_packet, 0, sizeof(struct nvsp_message));
+@@ -477,6 +507,23 @@ static int netvsc_init_buf(struct hv_device *device,
+ 		goto cleanup;
+ 	}
+ 
++	if (hv_isolation_type_snp()) {
++		pfns = kcalloc(buf_size / HV_HYP_PAGE_SIZE, sizeof(unsigned long),
++			       GFP_KERNEL);
++
++		for (i = 0; i < buf_size / HV_HYP_PAGE_SIZE; i++)
++			pfns[i] = virt_to_hvpfn(net_device->send_buf + i * HV_HYP_PAGE_SIZE)
++				+ (ms_hyperv.shared_gpa_boundary >> HV_HYP_PAGE_SHIFT);
++
++		vaddr = vmap_pfn(pfns, buf_size / HV_HYP_PAGE_SIZE, PAGE_KERNEL_IO);
++		kfree(pfns);
++		if (!vaddr)
++			goto cleanup;
++
++		net_device->send_original_buf = net_device->send_buf;
++		net_device->send_buf = vaddr;
++	}
++
+ 	/* Notify the NetVsp of the gpadl handle */
+ 	init_packet = &net_device->channel_init_pkt;
+ 	memset(init_packet, 0, sizeof(struct nvsp_message));
+@@ -767,7 +814,7 @@ static void netvsc_send_tx_complete(struct net_device *ndev,
+ 
+ 	/* Notify the layer above us */
+ 	if (likely(skb)) {
+-		const struct hv_netvsc_packet *packet
++		struct hv_netvsc_packet *packet
+ 			= (struct hv_netvsc_packet *)skb->cb;
+ 		u32 send_index = packet->send_buf_index;
+ 		struct netvsc_stats *tx_stats;
+@@ -783,6 +830,7 @@ static void netvsc_send_tx_complete(struct net_device *ndev,
+ 		tx_stats->bytes += packet->total_bytes;
+ 		u64_stats_update_end(&tx_stats->syncp);
+ 
++		netvsc_dma_unmap(ndev_ctx->device_ctx, packet);
+ 		napi_consume_skb(skb, budget);
+ 	}
+ 
+@@ -947,6 +995,63 @@ static void netvsc_copy_to_send_buf(struct netvsc_device *net_device,
+ 		memset(dest, 0, padding);
  }
- EXPORT_SYMBOL_GPL(vmbus_set_event);
-diff --git a/drivers/hv/hv.c b/drivers/hv/hv.c
-index 28faa8364952..03bcc831b034 100644
---- a/drivers/hv/hv.c
-+++ b/drivers/hv/hv.c
-@@ -97,7 +97,13 @@ int hv_post_message(union hv_connection_id connection_id,
- 	aligned_msg->payload_size = payload_size;
- 	memcpy((void *)aligned_msg->payload, payload, payload_size);
  
--	status = hv_do_hypercall(HVCALL_POST_MESSAGE, aligned_msg, NULL);
-+	if (hv_isolation_type_snp())
-+		status = hv_ghcb_hypercall(HVCALL_POST_MESSAGE,
-+				(void *)aligned_msg, NULL,
-+				sizeof(struct hv_input_post_message));
-+	else
-+		status = hv_do_hypercall(HVCALL_POST_MESSAGE,
-+				aligned_msg, NULL);
++void netvsc_dma_unmap(struct hv_device *hv_dev,
++		      struct hv_netvsc_packet *packet)
++{
++	u32 page_count = packet->cp_partial ?
++		packet->page_buf_cnt - packet->rmsg_pgcnt :
++		packet->page_buf_cnt;
++	int i;
++
++	if (!packet->dma_range)
++		return;
++
++	for (i = 0; i < page_count; i++)
++		dma_unmap_single(&hv_dev->device, packet->dma_range[i].dma,
++				 packet->dma_range[i].mapping_size,
++				 DMA_TO_DEVICE);
++
++	kfree(packet->dma_range);
++}
++
++int netvsc_dma_map(struct hv_device *hv_dev,
++		   struct hv_netvsc_packet *packet,
++		   struct hv_page_buffer *pb)
++{
++	u32 page_count =  packet->cp_partial ?
++		packet->page_buf_cnt - packet->rmsg_pgcnt :
++		packet->page_buf_cnt;
++	dma_addr_t dma;
++	int i;
++
++	packet->dma_range = kcalloc(page_count,
++				    sizeof(*packet->dma_range),
++				    GFP_KERNEL);
++	if (!packet->dma_range)
++		return -ENOMEM;
++
++	for (i = 0; i < page_count; i++) {
++		char *src = phys_to_virt((pb[i].pfn << HV_HYP_PAGE_SHIFT)
++					 + pb[i].offset);
++		u32 len = pb[i].len;
++
++		dma = dma_map_single(&hv_dev->device, src, len,
++				     DMA_TO_DEVICE);
++		if (dma_mapping_error(&hv_dev->device, dma)) {
++			kfree(packet->dma_range);
++			return -ENOMEM;
++		}
++
++		packet->dma_range[i].dma = dma;
++		packet->dma_range[i].mapping_size = len;
++		pb[i].pfn = dma >> HV_HYP_PAGE_SHIFT;
++		pb[i].offset = offset_in_hvpage(dma);
++		pb[i].len = len;
++	}
++
++	return 0;
++}
++
+ static inline int netvsc_send_pkt(
+ 	struct hv_device *device,
+ 	struct hv_netvsc_packet *packet,
+@@ -987,14 +1092,22 @@ static inline int netvsc_send_pkt(
  
- 	/* Preemption must remain disabled until after the hypercall
- 	 * so some other thread can't get scheduled onto this cpu and
+ 	trace_nvsp_send_pkt(ndev, out_channel, rpkt);
+ 
++	packet->dma_range = NULL;
+ 	if (packet->page_buf_cnt) {
+ 		if (packet->cp_partial)
+ 			pb += packet->rmsg_pgcnt;
+ 
++		ret = netvsc_dma_map(ndev_ctx->device_ctx, packet, pb);
++		if (ret)
++			return ret;
++
+ 		ret = vmbus_sendpacket_pagebuffer(out_channel,
+-						  pb, packet->page_buf_cnt,
+-						  &nvmsg, sizeof(nvmsg),
+-						  req_id);
++					  pb, packet->page_buf_cnt,
++					  &nvmsg, sizeof(nvmsg),
++					  req_id);
++
++		if (ret)
++			netvsc_dma_unmap(ndev_ctx->device_ctx, packet);
+ 	} else {
+ 		ret = vmbus_sendpacket(out_channel,
+ 				       &nvmsg, sizeof(nvmsg),
+diff --git a/drivers/net/hyperv/rndis_filter.c b/drivers/net/hyperv/rndis_filter.c
+index 983bf362466a..448c1ee39246 100644
+--- a/drivers/net/hyperv/rndis_filter.c
++++ b/drivers/net/hyperv/rndis_filter.c
+@@ -293,6 +293,8 @@ static void rndis_filter_receive_response(struct net_device *ndev,
+ 	u32 *req_id = &resp->msg.init_complete.req_id;
+ 	struct rndis_device *dev = nvdev->extension;
+ 	struct rndis_request *request = NULL;
++	struct hv_device *hv_dev = ((struct net_device_context *)
++			netdev_priv(ndev))->device_ctx;
+ 	bool found = false;
+ 	unsigned long flags;
+ 
+@@ -361,6 +363,7 @@ static void rndis_filter_receive_response(struct net_device *ndev,
+ 			}
+ 		}
+ 
++		netvsc_dma_unmap(hv_dev, &request->pkt);
+ 		complete(&request->wait_event);
+ 	} else {
+ 		netdev_err(ndev,
+diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
+index babbe19f57e2..90abff664495 100644
+--- a/include/linux/hyperv.h
++++ b/include/linux/hyperv.h
+@@ -1616,6 +1616,11 @@ struct hyperv_service_callback {
+ 	void (*callback)(void *context);
+ };
+ 
++struct hv_dma_range {
++	dma_addr_t dma;
++	u32 mapping_size;
++};
++
+ #define MAX_SRV_VER	0x7ffffff
+ extern bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp, u8 *buf, u32 buflen,
+ 				const int *fw_version, int fw_vercnt,
 -- 
 2.25.1
 
