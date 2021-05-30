@@ -5,46 +5,46 @@ X-Spam-Level:
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0F05C47096
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98F02C47091
 	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 652D8611F0
+	by mail.kernel.org (Postfix) with ESMTPS id 53FCD61108
 	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 652D8611F0
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53FCD61108
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134308.249999 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134294.249943 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPE9-0006qp-8S; Sun, 30 May 2021 17:27:53 +0000
+	id 1lnPE4-0005bV-SL; Sun, 30 May 2021 17:27:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134308.249999; Sun, 30 May 2021 17:27:53 +0000
+Received: by outflank-mailman (output) from mailman id 134294.249943; Sun, 30 May 2021 17:27:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPE8-0006eq-Gh; Sun, 30 May 2021 17:27:52 +0000
-Received: by outflank-mailman (input) for mailman id 134308;
- Sun, 30 May 2021 15:07:24 +0000
+	id 1lnPE4-0005ZH-L1; Sun, 30 May 2021 17:27:48 +0000
+Received: by outflank-mailman (input) for mailman id 134294;
+ Sun, 30 May 2021 15:06:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GvOc=KZ=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1lnN2C-0000PC-1P
- for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:07:24 +0000
-Received: from mail-pj1-x1033.google.com (unknown [2607:f8b0:4864:20::1033])
+ id 1lnN1d-0000PC-0Q
+ for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:06:49 +0000
+Received: from mail-pj1-x102e.google.com (unknown [2607:f8b0:4864:20::102e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b91ecb2c-bd2d-466d-a484-57d57bc10950;
- Sun, 30 May 2021 15:06:51 +0000 (UTC)
-Received: by mail-pj1-x1033.google.com with SMTP id ot16so5187758pjb.3
- for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:51 -0700 (PDT)
+ id 715a7924-f9c2-431e-a015-efffa53ebaf7;
+ Sun, 30 May 2021 15:06:41 +0000 (UTC)
+Received: by mail-pj1-x102e.google.com with SMTP id k5so5198069pjj.1
+ for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:41 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:9:dc2d:80ab:c3f3:1524])
- by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.49
+ by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 May 2021 08:06:50 -0700 (PDT)
+ Sun, 30 May 2021 08:06:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b91ecb2c-bd2d-466d-a484-57d57bc10950
+X-Inumbo-ID: 715a7924-f9c2-431e-a015-efffa53ebaf7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=EtCkaCE4/EzFHv3S6hPZuMsiJS31BeqUj9mfIppTr8A=;
-        b=BCfbHHh7cyudMiVzOhaWtM71E5It7nVh3XODt6DlztlKwSR8hmKzGs/GHbE9k5ukZn
-         cvwUBE5ZURUeWzebOEMn+N+iyqbQf4jk5jAG3OEblpaI62E5gwLiBEvwNG3m6sjyUZ/x
-         hRItnVqfcYlZWv6o/PEot2mwHpeCnoNP0dA2FhRjTcNveOVwR98Xi7VhiU05+2rHeKsG
-         dCGrpoRct9XXG+mj101SDS97GDP//b5DIZwBmvoBkTvUK4hiwfNAb8emrWGxAk2fR8HL
-         u18x+mH2iH03GzLJkM+cxIuDbKfAhp1Vh6iQqsI/53FhLbFKbvqa90/OlAKUI3PIs6w5
-         FTNQ==
+        bh=TDI4PXumIZgxBePNd+ivE0VBcCC0VeGNDBRFqyds1eM=;
+        b=UAse3Bpl0FAVPqqhfAnA0zSsTcxrZbreVrQAzodtanCUm4szgJIEyR5+ecqtW5IpAX
+         wvxV8auZOSKfuO8TZ4M8rO/crEbVTyzAM6eyp3NoWTLuD78xXlOdpNL1GTvOv05hTOvw
+         IJKNjFYyz12ZXEp+aAdaQoUfunooYgNvY+tYgiYWzR7jphXnzg+LZ0lYvuQrvoitNAPI
+         3dFo+NHKOib8S6vhPQHgJFZuloR8beErGmtrAztyIobPte+3TQ3S9eDUgC3gZiqCjgrA
+         2cjMlhmbzneoHRsMOP9QRH/YU9YL8UrYLz+ibUTPFCQMKMdfS1dZjF7iQIxOaa2us5Nb
+         DDlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=EtCkaCE4/EzFHv3S6hPZuMsiJS31BeqUj9mfIppTr8A=;
-        b=cQ4kCSD4G/v95nY6ibXjli2AXet3HiuIqv3/wVvprWaY25GpLdBIGHShGE7xU9w+PU
-         BFn9+bhjtjshV1w5hRZEMnEod0PzpXAmhlGMehkwcKTLqgC68HV7L2IF0FoGdroV3xtp
-         aNxRLOPQo2vT0nzZxjuvHZWnPFVEOT4ueKZf4I9blzLGtZ/6PCc/Dot8Ynn2TZb4c753
-         +3Vxh7jYSP/4jufkWJgEop4SEezwIcM4yX1vK1T1GjnS8w+4uY6nNmS7dXX4+0Nq8rEB
-         TRKCgHvNCtEiBV1+UYHe2AEKM9oM6uZD1TpTAb/0sCJZieAaobNUtYEXzx5wRlZyGJgs
-         HWAg==
-X-Gm-Message-State: AOAM531SBKV/PZG1k77WW42LGVxQUzBFSmp+u4Tgmpdg44hkDWcD7fm9
-	wcsfteYjV/FIkTeRSq4xyYE=
-X-Google-Smtp-Source: ABdhPJxBmJKYzQHIxtFyRq8cxb9YKkXh8aR0S9biw6tunPzBCDJlQ572ZHUOD2JLd5vyGyCMqeAmvA==
-X-Received: by 2002:a17:90b:400c:: with SMTP id ie12mr6846115pjb.107.1622387210845;
-        Sun, 30 May 2021 08:06:50 -0700 (PDT)
+        bh=TDI4PXumIZgxBePNd+ivE0VBcCC0VeGNDBRFqyds1eM=;
+        b=NFXKSE1A9WyATGna6I4J8ZtmQHef2NiMzsJyAuTKidFy5e11/6PSD40hmoHI293QbK
+         TcyK/9vBWQqNyJ4JyFmOEPVpGNz1hDCrzpwRsFjffIdHWBenupEACjo9uYWIOIHelH+S
+         nnJbg5jCGItedIR9S5JFNquxISDMyO8iWnuRX3kLacu4RwLcfvAI7XSoPFJEm0Ba+GSU
+         m0qN+ZDZG1VxiEof+gdiYi081awFvK5fLlirQuGND8YEWUlEtmbvrFPSd8hakbM2A+Vs
+         ONUM2NjzmW9q5p5NljIAF3CBOGGAJbWgLJpVD8iNcW8A4hLY79We3E5rX+IYb9w4BnHN
+         BKdg==
+X-Gm-Message-State: AOAM53101X46OeU2MBrv8EDhqq6yCe7XZTsO+xPELCFCnfuhJncLMhfn
+	MAdNFK2qIhE8YPOIL7zQHAk=
+X-Google-Smtp-Source: ABdhPJw6VTPU9WI3kHLEFrQaIMTpdWgtR9lc2XZhC9GhjxtOkcyL5lpx/QGe3K50jPAfDu6vcR2b5Q==
+X-Received: by 2002:a17:90a:80c5:: with SMTP id k5mr6957940pjw.129.1622387200366;
+        Sun, 30 May 2021 08:06:40 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -131,9 +131,9 @@ Cc: iommu@lists.linux-foundation.org,
 	thomas.lendacky@amd.com,
 	brijesh.singh@amd.com,
 	sunilmut@microsoft.com
-Subject: [RFC PATCH V3 09/11] HV/IOMMU: Enable swiotlb bounce buffer for Isolation VM
-Date: Sun, 30 May 2021 11:06:26 -0400
-Message-Id: <20210530150628.2063957-10-ltykernel@gmail.com>
+Subject: [RFC PATCH V3 02/11] x86/HV: Initialize shared memory boundary in the Isolation VM.
+Date: Sun, 30 May 2021 11:06:19 -0400
+Message-Id: <20210530150628.2063957-3-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210530150628.2063957-1-ltykernel@gmail.com>
 References: <20210530150628.2063957-1-ltykernel@gmail.com>
@@ -142,203 +142,54 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-Hyper-V Isolation VM requires bounce buffer support to copy
-data from/to encrypted memory and so enable swiotlb force
-mode to use swiotlb bounce buffer for DMA transaction.
-
-In Isolation VM with AMD SEV, the bounce buffer needs to be
-accessed via extra address space which is above shared_gpa_boundary
-(E.G 39 bit address line) reported by Hyper-V CPUID ISOLATION_CONFIG.
-The access physical address will be original physical address +
-shared_gpa_boundary. The shared_gpa_boundary in the AMD SEV SNP
-spec is called virtual top of memory(vTOM). Memory addresses below
-vTOM are automatically treated as private while memory above
-vTOM is treated as shared.
-
-ioremap_cache() can't use in the hyperv_iommu_swiotlb_init() which
-is too early place and remap bounce buffer in the hyperv_iommu_swiotlb_
-later_init().
+Hyper-V also exposes shared memory boundary via cpuid
+HYPERV_CPUID_ISOLATION_CONFIG and store it in the
+shared_gpa_boundary of ms_hyperv struct. This prepares
+to share memory with host for SNP guest.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- arch/x86/xen/pci-swiotlb-xen.c |  3 +-
- drivers/hv/vmbus_drv.c         |  3 ++
- drivers/iommu/hyperv-iommu.c   | 81 ++++++++++++++++++++++++++++++++++
- include/linux/hyperv.h         |  1 +
- 4 files changed, 87 insertions(+), 1 deletion(-)
+ arch/x86/kernel/cpu/mshyperv.c |  2 ++
+ include/asm-generic/mshyperv.h | 12 +++++++++++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/xen/pci-swiotlb-xen.c b/arch/x86/xen/pci-swiotlb-xen.c
-index 54f9aa7e8457..43bd031aa332 100644
---- a/arch/x86/xen/pci-swiotlb-xen.c
-+++ b/arch/x86/xen/pci-swiotlb-xen.c
-@@ -4,6 +4,7 @@
+diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
+index 22f13343b5da..d1ca36224657 100644
+--- a/arch/x86/kernel/cpu/mshyperv.c
++++ b/arch/x86/kernel/cpu/mshyperv.c
+@@ -320,6 +320,8 @@ static void __init ms_hyperv_init_platform(void)
+ 	if (ms_hyperv.priv_high & HV_ISOLATION) {
+ 		ms_hyperv.isolation_config_a = cpuid_eax(HYPERV_CPUID_ISOLATION_CONFIG);
+ 		ms_hyperv.isolation_config_b = cpuid_ebx(HYPERV_CPUID_ISOLATION_CONFIG);
++		ms_hyperv.shared_gpa_boundary =
++			(u64)1 << ms_hyperv.shared_gpa_boundary_bits;
  
- #include <linux/dma-map-ops.h>
- #include <linux/pci.h>
-+#include <linux/hyperv.h>
- #include <xen/swiotlb-xen.h>
- 
- #include <asm/xen/hypervisor.h>
-@@ -91,6 +92,6 @@ int pci_xen_swiotlb_init_late(void)
- EXPORT_SYMBOL_GPL(pci_xen_swiotlb_init_late);
- 
- IOMMU_INIT_FINISH(pci_xen_swiotlb_detect,
--		  NULL,
-+		  hyperv_swiotlb_detect,
- 		  pci_xen_swiotlb_init,
- 		  NULL);
-diff --git a/drivers/hv/vmbus_drv.c b/drivers/hv/vmbus_drv.c
-index 92cb3f7d21d9..5e3bb76d4dee 100644
---- a/drivers/hv/vmbus_drv.c
-+++ b/drivers/hv/vmbus_drv.c
-@@ -23,6 +23,7 @@
- #include <linux/cpu.h>
- #include <linux/sched/task_stack.h>
- 
-+#include <linux/dma-map-ops.h>
- #include <linux/delay.h>
- #include <linux/notifier.h>
- #include <linux/ptrace.h>
-@@ -2080,6 +2081,7 @@ struct hv_device *vmbus_device_create(const guid_t *type,
- 	return child_device_obj;
- }
- 
-+static u64 vmbus_dma_mask = DMA_BIT_MASK(64);
- /*
-  * vmbus_device_register - Register the child device
-  */
-@@ -2120,6 +2122,7 @@ int vmbus_device_register(struct hv_device *child_device_obj)
- 	}
- 	hv_debug_add_dev_dir(child_device_obj);
- 
-+	child_device_obj->device.dma_mask = &vmbus_dma_mask;
- 	return 0;
- 
- err_kset_unregister:
-diff --git a/drivers/iommu/hyperv-iommu.c b/drivers/iommu/hyperv-iommu.c
-index e285a220c913..2604619c6fa3 100644
---- a/drivers/iommu/hyperv-iommu.c
-+++ b/drivers/iommu/hyperv-iommu.c
-@@ -13,14 +13,22 @@
- #include <linux/irq.h>
- #include <linux/iommu.h>
- #include <linux/module.h>
-+#include <linux/hyperv.h>
-+#include <linux/io.h>
- 
- #include <asm/apic.h>
- #include <asm/cpu.h>
- #include <asm/hw_irq.h>
- #include <asm/io_apic.h>
-+#include <asm/iommu.h>
-+#include <asm/iommu_table.h>
- #include <asm/irq_remapping.h>
- #include <asm/hypervisor.h>
- #include <asm/mshyperv.h>
-+#include <asm/swiotlb.h>
-+#include <linux/dma-map-ops.h>
-+#include <linux/dma-direct.h>
-+#include <linux/set_memory.h>
- 
- #include "irq_remapping.h"
- 
-@@ -36,6 +44,8 @@
- static cpumask_t ioapic_max_cpumask = { CPU_BITS_NONE };
- static struct irq_domain *ioapic_ir_domain;
- 
-+static unsigned long hyperv_io_tlb_start, hyperv_io_tlb_size;
-+
- static int hyperv_ir_set_affinity(struct irq_data *data,
- 		const struct cpumask *mask, bool force)
- {
-@@ -337,4 +347,75 @@ static const struct irq_domain_ops hyperv_root_ir_domain_ops = {
- 	.free = hyperv_root_irq_remapping_free,
+ 		pr_info("Hyper-V: Isolation Config: Group A 0x%x, Group B 0x%x\n",
+ 			ms_hyperv.isolation_config_a, ms_hyperv.isolation_config_b);
+diff --git a/include/asm-generic/mshyperv.h b/include/asm-generic/mshyperv.h
+index 3ae56a29594f..2914e27b0429 100644
+--- a/include/asm-generic/mshyperv.h
++++ b/include/asm-generic/mshyperv.h
+@@ -34,8 +34,18 @@ struct ms_hyperv_info {
+ 	u32 max_vp_index;
+ 	u32 max_lp_index;
+ 	u32 isolation_config_a;
+-	u32 isolation_config_b;
++	union {
++		u32 isolation_config_b;
++		struct {
++			u32 cvm_type : 4;
++			u32 Reserved11 : 1;
++			u32 shared_gpa_boundary_active : 1;
++			u32 shared_gpa_boundary_bits : 6;
++			u32 Reserved12 : 20;
++		};
++	};
+ 	void  __percpu **ghcb_base;
++	u64 shared_gpa_boundary;
  };
+ extern struct ms_hyperv_info ms_hyperv;
  
-+void __init hyperv_iommu_swiotlb_init(void)
-+{
-+	unsigned long bytes, io_tlb_nslabs;
-+	void *vstart;
-+
-+	/* Allocate Hyper-V swiotlb  */
-+	bytes = 200 * 1024 * 1024;
-+	vstart = memblock_alloc_low(PAGE_ALIGN(bytes), PAGE_SIZE);
-+	io_tlb_nslabs = bytes >> IO_TLB_SHIFT;
-+	hyperv_io_tlb_size = bytes;
-+
-+	if (!vstart) {
-+		pr_warn("Fail to allocate swiotlb.\n");
-+		return;
-+	}
-+
-+	hyperv_io_tlb_start = virt_to_phys(vstart);
-+	if (!hyperv_io_tlb_start)
-+		panic("%s: Failed to allocate %lu bytes align=0x%lx.\n",
-+		      __func__, PAGE_ALIGN(bytes), PAGE_SIZE);
-+
-+	if (swiotlb_init_with_tbl(vstart, io_tlb_nslabs, 1))
-+		panic("%s: Cannot allocate SWIOTLB buffer.\n", __func__);
-+
-+	swiotlb_set_max_segment(HV_HYP_PAGE_SIZE);
-+}
-+
-+int __init hyperv_swiotlb_detect(void)
-+{
-+	if (hypervisor_is_type(X86_HYPER_MS_HYPERV)
-+	    && hv_is_isolation_supported()) {
-+		/*
-+		 * Enable swiotlb force mode in Isolation VM to
-+		 * use swiotlb bounce buffer for dma transaction.
-+		 */
-+		swiotlb_force = SWIOTLB_FORCE;
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+void __init hyperv_iommu_swiotlb_later_init(void)
-+{
-+	void *hyperv_io_tlb_remap;
-+	int ret;
-+
-+	/* Mask bounce buffer visible to host and remap extra address. */
-+	if (hv_isolation_type_snp()) {
-+		ret = set_memory_decrypted((unsigned long)
-+				phys_to_virt(hyperv_io_tlb_start),
-+				HVPFN_UP(hyperv_io_tlb_size));
-+		if (ret)
-+			panic("%s: Fail to mark Hyper-v swiotlb buffer visible to host. err=%d\n",
-+			      __func__, ret);
-+
-+		hyperv_io_tlb_remap = ioremap_cache(hyperv_io_tlb_start
-+				+ ms_hyperv.shared_gpa_boundary,
-+				hyperv_io_tlb_size);
-+		if (!hyperv_io_tlb_remap)
-+			panic("Fail to remap io tlb.\n");
-+
-+		memset(hyperv_io_tlb_remap, 0x00, hyperv_io_tlb_size);
-+		swiotlb_set_bounce_remap(hyperv_io_tlb_remap);
-+	}
-+}
-+
-+IOMMU_INIT_FINISH(hyperv_swiotlb_detect,
-+		  NULL, hyperv_iommu_swiotlb_init,
-+		  hyperv_iommu_swiotlb_later_init);
-+
- #endif
-diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
-index 06eccaba10c5..babbe19f57e2 100644
---- a/include/linux/hyperv.h
-+++ b/include/linux/hyperv.h
-@@ -1759,6 +1759,7 @@ int hyperv_write_cfg_blk(struct pci_dev *dev, void *buf, unsigned int len,
- int hyperv_reg_block_invalidate(struct pci_dev *dev, void *context,
- 				void (*block_invalidate)(void *context,
- 							 u64 block_mask));
-+int __init hyperv_swiotlb_detect(void);
- 
- struct hyperv_pci_block_ops {
- 	int (*read_block)(struct pci_dev *dev, void *buf, unsigned int buf_len,
 -- 
 2.25.1
 
