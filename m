@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8221EC47094
-	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00574C4709A
+	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C475611EE
-	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C475611EE
+	by mail.kernel.org (Postfix) with ESMTPS id A237561108
+	for <xen-devel@archiver.kernel.org>; Sun, 30 May 2021 17:28:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A237561108
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134302.249974 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134310.250011 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPE6-0006A1-UH; Sun, 30 May 2021 17:27:50 +0000
+	id 1lnPEA-00074j-BZ; Sun, 30 May 2021 17:27:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134302.249974; Sun, 30 May 2021 17:27:50 +0000
+Received: by outflank-mailman (output) from mailman id 134310.250011; Sun, 30 May 2021 17:27:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lnPE6-00067a-Ee; Sun, 30 May 2021 17:27:50 +0000
-Received: by outflank-mailman (input) for mailman id 134302;
- Sun, 30 May 2021 15:07:09 +0000
+	id 1lnPE9-00070q-Ji; Sun, 30 May 2021 17:27:53 +0000
+Received: by outflank-mailman (input) for mailman id 134310;
+ Sun, 30 May 2021 15:13:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GvOc=KZ=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1lnN1x-0000PC-0s
- for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:07:09 +0000
-Received: from mail-pf1-x42f.google.com (unknown [2607:f8b0:4864:20::42f])
+ id 1lnN2M-0000PC-1b
+ for xen-devel@lists.xenproject.org; Sun, 30 May 2021 15:07:34 +0000
+Received: from mail-pg1-x531.google.com (unknown [2607:f8b0:4864:20::531])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 224a67ce-d472-48cf-9c86-1f2904e7ae0a;
- Sun, 30 May 2021 15:06:47 +0000 (UTC)
-Received: by mail-pf1-x42f.google.com with SMTP id p39so7076627pfw.8
- for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:47 -0700 (PDT)
+ id cf0b8c41-fb1f-455e-ad3b-9c9f328fc9cd;
+ Sun, 30 May 2021 15:06:54 +0000 (UTC)
+Received: by mail-pg1-x531.google.com with SMTP id 29so6414704pgu.11
+ for <xen-devel@lists.xenproject.org>; Sun, 30 May 2021 08:06:54 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:9:dc2d:80ab:c3f3:1524])
- by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.45
+ by smtp.gmail.com with ESMTPSA id b15sm8679688pfi.100.2021.05.30.08.06.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 May 2021 08:06:46 -0700 (PDT)
+ Sun, 30 May 2021 08:06:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 224a67ce-d472-48cf-9c86-1f2904e7ae0a
+X-Inumbo-ID: cf0b8c41-fb1f-455e-ad3b-9c9f328fc9cd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=QKK0SjDRQsBHXdgV5ktTvZVGUyDxuCI7H9YXqu8ylp4=;
-        b=c4gjM4Jy3YZ+/DG7gJXR32TyHNrd2AT2w1NRjMRL/cVwnE9Khie59tuur1IINr0LLL
-         6PZbttSNvgl9BLFIsGHuSc+FJJmIp6Abf0SCFmm2OMKXGKumPVltWHy67nL9KV9jEyvK
-         PEkAMyNbfg9acDIg1EYYlwzHuyceS5JTu6FgLVMgyuSfaM2bY1ImRe4AQpVCfcxArLyf
-         2orge+sbm53BUlc2H/Pqht+gxOC5rv9V1Jvz+CQB0vMOQlMPoDaTCkjFsnL76KSZ3ys3
-         7eaQ9eSv/+WkbiIZxtGq9L5QDqfVWwVAegCdGoAEYHKpEA2U7AjeuHqOCq8YttRFBnB5
-         XuRQ==
+        bh=M1xVjAHigQsVBryVftpCCjvg81+wOTUQfr50wSa0z0o=;
+        b=sNrdoZzEG12p5juMA3jBGdhwekq2aogyv4cWLt3Q9FFTt7/sBUDijWvM58X66976BO
+         kJv1GfqQauUiQ6UDwB4KHSHKbqJdsTij6qKiS0I1JyaL90iuEOJ7P6aw8mucrerUw4kZ
+         ynS7ThiT7E4/MDPzHnf4KZGFeGtrUHktekJ3Mt5GvomdItXJaCyBS0do306K1hhxXMvs
+         vsFRVkYt5+hsjyFrhhoRTY51WzHW2c3gzdOCyN9MeS3XIsh08U9XZ1UHO+ZUZlEe0ZZh
+         UW0FBTRMxa8o7owQlLms0NBS25OrbKF7Oojybmwzo1E4d4fQhPlIDfgLBDz6BGXt3erV
+         1vmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=QKK0SjDRQsBHXdgV5ktTvZVGUyDxuCI7H9YXqu8ylp4=;
-        b=UeGcZf69dt4TSublkvcWVJ4+3lsJafXmHVhuiQSRE21ZBuIFpVpnqiorVlOnRq/ngG
-         bym/7ZTQBM2Xc2iBGJaehwZAiryTtHJqEc7deqoJrw6+wxUMfibXVuAdSUT6J6Ss9VSx
-         JShQE0by3QPSxif9MHsamVnP+pf+0vbNl6cWi+qpi54UV4qOKEf45hJopuj/zzelm8al
-         OCFOB+TKg474poYLb9+B/oEt9uu4FXZkHY9l4XjNbY4leN0o2mzF88HuQEJx8SNkRAv9
-         izNfHebwVMjPRR9G3DApUeYe8TXNkMbhKchg/wU4diA2IPFS6GyO0JAg5R73FMKTCQWT
-         UNFg==
-X-Gm-Message-State: AOAM531WSWiLPDD/9YND/QIvJ/zJScbJEwK+BUIqNSuIWRk7lr+rdMza
-	Yl0YVzA++TRDppAxHpy3Ohg=
-X-Google-Smtp-Source: ABdhPJw+q9VKcKHyDWVpvxugITxjif6TDbX7YEFx343/WR9bqFMb8Oo7wu2PPv+4Bif5UQ80/Bo2xg==
-X-Received: by 2002:a62:ae14:0:b029:2e9:c6ef:9856 with SMTP id q20-20020a62ae140000b02902e9c6ef9856mr2736868pff.77.1622387206687;
-        Sun, 30 May 2021 08:06:46 -0700 (PDT)
+        bh=M1xVjAHigQsVBryVftpCCjvg81+wOTUQfr50wSa0z0o=;
+        b=abzUiziIt+zvbmZG4ET23op6nwaH/O8QIGGtMfUpPCq7XslgMeu5102GFsxO+MBbTE
+         bzpjzTupkGw8r0uN7OmC3fi+g4bRALtWdd2UK9tQvh7ioasDxNL8AHbK6VpXyBK0/Drj
+         1ZLUnymTOTZMI2F8ZrnrKznDXFiHYhmGK53hYimpXysLBOhP0m7NK7h8UusmX0LjpZVj
+         N2MpjrOxrvBqUiH0n4W+0FyfzI4lJ82J4GmOZvz0Ph7MfBMdoLncKi7rvPRMab95p6Kz
+         r7jLa36ZigaqTSU4clIdISqjnUtrjz4ZUcISdnwNH4b3opgJVRsRD/lZMI7yR/XpZIFl
+         f+6g==
+X-Gm-Message-State: AOAM533fZP4349E1T0OT30m013VkqgY93Hn/G30IuB2uVijq+ufS+VHb
+	PjHmbLMuvOBSUT/nnAsH+II=
+X-Google-Smtp-Source: ABdhPJziJtspWVCmOHJqaVbfIhz+FLD7bwtV5SoxX2/+91foGt0Wvcd+JVLZUDMoLpg47iIDkrNTHQ==
+X-Received: by 2002:a05:6a00:1c6b:b029:2e2:caff:13fa with SMTP id s43-20020a056a001c6bb02902e2caff13famr12601991pfw.59.1622387213561;
+        Sun, 30 May 2021 08:06:53 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -131,9 +131,9 @@ Cc: iommu@lists.linux-foundation.org,
 	thomas.lendacky@amd.com,
 	brijesh.singh@amd.com,
 	sunilmut@microsoft.com
-Subject: [RFC PATCH V3 06/11] HV/Vmbus: Add SNP support for VMbus channel initiate message
-Date: Sun, 30 May 2021 11:06:23 -0400
-Message-Id: <20210530150628.2063957-7-ltykernel@gmail.com>
+Subject: [RFC PATCH V3 11/11] HV/Storvsc: Add Isolation VM support for storvsc driver
+Date: Sun, 30 May 2021 11:06:28 -0400
+Message-Id: <20210530150628.2063957-12-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210530150628.2063957-1-ltykernel@gmail.com>
 References: <20210530150628.2063957-1-ltykernel@gmail.com>
@@ -142,138 +142,148 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-The monitor pages in the CHANNELMSG_INITIATE_CONTACT are shared
-with host and so it's necessary to use hvcall to set them visible
-to host. In Isolation VM with AMD SEV SNP, the access address
-should be in the extra space which is above shared gpa boundary.
-So remap these pages into the extra address(pa + shared_gpa_boundary).
+In Isolation VM, all shared memory with host needs to mark visible
+to host via hvcall. vmbus_establish_gpadl() has already done it for
+storvsc rx/tx ring buffer. The page buffer used by vmbus_sendpacket_
+mpb_desc() still need to handle. Use DMA API to map/umap these
+memory during sending/receiving packet and Hyper-V DMA ops callback
+will use swiotlb function to allocate bounce buffer and copy data
+from/to bounce buffer.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- drivers/hv/connection.c   | 62 +++++++++++++++++++++++++++++++++++++++
- drivers/hv/hyperv_vmbus.h |  1 +
- 2 files changed, 63 insertions(+)
+ drivers/scsi/storvsc_drv.c | 63 +++++++++++++++++++++++++++++++++++---
+ 1 file changed, 58 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/hv/connection.c b/drivers/hv/connection.c
-index 186fd4c8acd4..389adc92f958 100644
---- a/drivers/hv/connection.c
-+++ b/drivers/hv/connection.c
-@@ -104,6 +104,12 @@ int vmbus_negotiate_version(struct vmbus_channel_msginfo *msginfo, u32 version)
+diff --git a/drivers/scsi/storvsc_drv.c b/drivers/scsi/storvsc_drv.c
+index 403753929320..32da419c134e 100644
+--- a/drivers/scsi/storvsc_drv.c
++++ b/drivers/scsi/storvsc_drv.c
+@@ -21,6 +21,8 @@
+ #include <linux/device.h>
+ #include <linux/hyperv.h>
+ #include <linux/blkdev.h>
++#include <linux/io.h>
++#include <linux/dma-mapping.h>
+ #include <scsi/scsi.h>
+ #include <scsi/scsi_cmnd.h>
+ #include <scsi/scsi_host.h>
+@@ -427,6 +429,8 @@ struct storvsc_cmd_request {
+ 	u32 payload_sz;
  
- 	msg->monitor_page1 = virt_to_phys(vmbus_connection.monitor_pages[0]);
- 	msg->monitor_page2 = virt_to_phys(vmbus_connection.monitor_pages[1]);
-+
-+	if (hv_is_isolation_supported()) {
-+		msg->monitor_page1 += ms_hyperv.shared_gpa_boundary;
-+		msg->monitor_page2 += ms_hyperv.shared_gpa_boundary;
-+	}
-+
- 	msg->target_vcpu = hv_cpu_number_to_vp_number(VMBUS_CONNECT_CPU);
+ 	struct vstor_packet vstor_packet;
++	u32 hvpg_count;
++	struct hv_dma_range *dma_range;
+ };
  
- 	/*
-@@ -148,6 +154,29 @@ int vmbus_negotiate_version(struct vmbus_channel_msginfo *msginfo, u32 version)
- 		return -ECONNREFUSED;
+ 
+@@ -1267,6 +1271,7 @@ static void storvsc_on_channel_callback(void *context)
+ 	struct hv_device *device;
+ 	struct storvsc_device *stor_device;
+ 	struct Scsi_Host *shost;
++	int i;
+ 
+ 	if (channel->primary_channel != NULL)
+ 		device = channel->primary_channel->device_obj;
+@@ -1321,6 +1326,17 @@ static void storvsc_on_channel_callback(void *context)
+ 				request = (struct storvsc_cmd_request *)scsi_cmd_priv(scmnd);
+ 			}
+ 
++			if (request->dma_range) {
++				for (i = 0; i < request->hvpg_count; i++)
++					dma_unmap_page(&device->device,
++							request->dma_range[i].dma,
++							request->dma_range[i].mapping_size,
++							request->vstor_packet.vm_srb.data_in
++							     == READ_TYPE ?
++							DMA_FROM_DEVICE : DMA_TO_DEVICE);
++				kfree(request->dma_range);
++			}
++
+ 			storvsc_on_receive(stor_device, packet, request);
+ 			continue;
+ 		}
+@@ -1817,7 +1833,9 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 		unsigned int hvpgoff, hvpfns_to_add;
+ 		unsigned long offset_in_hvpg = offset_in_hvpage(sgl->offset);
+ 		unsigned int hvpg_count = HVPFN_UP(offset_in_hvpg + length);
++		dma_addr_t dma;
+ 		u64 hvpfn;
++		u32 size;
+ 
+ 		if (hvpg_count > MAX_PAGE_BUFFER_COUNT) {
+ 
+@@ -1831,6 +1849,13 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 		payload->range.len = length;
+ 		payload->range.offset = offset_in_hvpg;
+ 
++		cmd_request->dma_range = kcalloc(hvpg_count,
++				 sizeof(*cmd_request->dma_range),
++				 GFP_ATOMIC);
++		if (!cmd_request->dma_range) {
++			ret = -ENOMEM;
++			goto free_payload;
++		}
+ 
+ 		for (i = 0; sgl != NULL; sgl = sg_next(sgl)) {
+ 			/*
+@@ -1854,9 +1879,30 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 			 * last sgl should be reached at the same time that
+ 			 * the PFN array is filled.
+ 			 */
+-			while (hvpfns_to_add--)
+-				payload->range.pfn_array[i++] =	hvpfn++;
++			while (hvpfns_to_add--) {
++				size = min(HV_HYP_PAGE_SIZE - offset_in_hvpg,
++					   (unsigned long)length);
++				dma = dma_map_page(&dev->device,
++							 pfn_to_page(hvpfn++),
++							 offset_in_hvpg, size,
++							 scmnd->sc_data_direction);
++				if (dma_mapping_error(&dev->device, dma)) {
++					ret = -ENOMEM;
++					goto free_dma_range;
++				}
++
++				if (offset_in_hvpg) {
++					payload->range.offset = dma & ~HV_HYP_PAGE_MASK;
++					offset_in_hvpg = 0;
++				}
++
++				cmd_request->dma_range[i].dma = dma;
++				cmd_request->dma_range[i].mapping_size = size;
++				payload->range.pfn_array[i++] = dma >> HV_HYP_PAGE_SHIFT;
++				length -= size;
++			}
+ 		}
++		cmd_request->hvpg_count = hvpg_count;
  	}
  
-+	if (hv_is_isolation_supported()) {
-+		vmbus_connection.monitor_pages_va[0]
-+			= vmbus_connection.monitor_pages[0];
-+		vmbus_connection.monitor_pages[0]
-+			= ioremap_cache(msg->monitor_page1, HV_HYP_PAGE_SIZE);
-+		if (!vmbus_connection.monitor_pages[0])
-+			return -ENOMEM;
+ 	cmd_request->payload = payload;
+@@ -1867,13 +1913,20 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 	put_cpu();
+ 
+ 	if (ret == -EAGAIN) {
+-		if (payload_sz > sizeof(cmd_request->mpb))
+-			kfree(payload);
+ 		/* no more space */
+-		return SCSI_MLQUEUE_DEVICE_BUSY;
++		ret = SCSI_MLQUEUE_DEVICE_BUSY;
++		goto free_dma_range;
+ 	}
+ 
+ 	return 0;
 +
-+		vmbus_connection.monitor_pages_va[1]
-+			= vmbus_connection.monitor_pages[1];
-+		vmbus_connection.monitor_pages[1]
-+			= ioremap_cache(msg->monitor_page2, HV_HYP_PAGE_SIZE);
-+		if (!vmbus_connection.monitor_pages[1]) {
-+			vunmap(vmbus_connection.monitor_pages[0]);
-+			return -ENOMEM;
-+		}
++free_dma_range:
++	kfree(cmd_request->dma_range);
 +
-+		memset(vmbus_connection.monitor_pages[0], 0x00,
-+		       HV_HYP_PAGE_SIZE);
-+		memset(vmbus_connection.monitor_pages[1], 0x00,
-+		       HV_HYP_PAGE_SIZE);
-+	}
-+
- 	return ret;
++free_payload:
++	if (payload_sz > sizeof(cmd_request->mpb))
++		kfree(payload);
++	return ret;
  }
  
-@@ -159,6 +188,7 @@ int vmbus_connect(void)
- 	struct vmbus_channel_msginfo *msginfo = NULL;
- 	int i, ret = 0;
- 	__u32 version;
-+	u64 pfn[2];
- 
- 	/* Initialize the vmbus connection */
- 	vmbus_connection.conn_state = CONNECTING;
-@@ -216,6 +246,16 @@ int vmbus_connect(void)
- 		goto cleanup;
- 	}
- 
-+	if (hv_is_isolation_supported()) {
-+		pfn[0] = virt_to_hvpfn(vmbus_connection.monitor_pages[0]);
-+		pfn[1] = virt_to_hvpfn(vmbus_connection.monitor_pages[1]);
-+		if (hv_mark_gpa_visibility(2, pfn,
-+				VMBUS_PAGE_VISIBLE_READ_WRITE)) {
-+			ret = -EFAULT;
-+			goto cleanup;
-+		}
-+	}
-+
- 	msginfo = kzalloc(sizeof(*msginfo) +
- 			  sizeof(struct vmbus_channel_initiate_contact),
- 			  GFP_KERNEL);
-@@ -282,6 +322,8 @@ int vmbus_connect(void)
- 
- void vmbus_disconnect(void)
- {
-+	u64 pfn[2];
-+
- 	/*
- 	 * First send the unload request to the host.
- 	 */
-@@ -301,6 +343,26 @@ void vmbus_disconnect(void)
- 		vmbus_connection.int_page = NULL;
- 	}
- 
-+	if (hv_is_isolation_supported()) {
-+		if (vmbus_connection.monitor_pages_va[0]) {
-+			vunmap(vmbus_connection.monitor_pages[0]);
-+			vmbus_connection.monitor_pages[0]
-+				= vmbus_connection.monitor_pages_va[0];
-+			vmbus_connection.monitor_pages_va[0] = NULL;
-+		}
-+
-+		if (vmbus_connection.monitor_pages_va[1]) {
-+			vunmap(vmbus_connection.monitor_pages[1]);
-+			vmbus_connection.monitor_pages[1]
-+				= vmbus_connection.monitor_pages_va[1];
-+			vmbus_connection.monitor_pages_va[1] = NULL;
-+		}
-+
-+		pfn[0] = virt_to_hvpfn(vmbus_connection.monitor_pages[0]);
-+		pfn[1] = virt_to_hvpfn(vmbus_connection.monitor_pages[1]);
-+		hv_mark_gpa_visibility(2, pfn, VMBUS_PAGE_NOT_VISIBLE);
-+	}
-+
- 	hv_free_hyperv_page((unsigned long)vmbus_connection.monitor_pages[0]);
- 	hv_free_hyperv_page((unsigned long)vmbus_connection.monitor_pages[1]);
- 	vmbus_connection.monitor_pages[0] = NULL;
-diff --git a/drivers/hv/hyperv_vmbus.h b/drivers/hv/hyperv_vmbus.h
-index 42f3d9d123a1..40bc0eff6665 100644
---- a/drivers/hv/hyperv_vmbus.h
-+++ b/drivers/hv/hyperv_vmbus.h
-@@ -240,6 +240,7 @@ struct vmbus_connection {
- 	 * is child->parent notification
- 	 */
- 	struct hv_monitor_page *monitor_pages[2];
-+	void *monitor_pages_va[2];
- 	struct list_head chn_msg_list;
- 	spinlock_t channelmsg_lock;
- 
+ static struct scsi_host_template scsi_driver = {
 -- 
 2.25.1
 
