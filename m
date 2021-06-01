@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42717C47096
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F24B8C47092
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16C0A60FD8
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16C0A60FD8
+	by mail.kernel.org (Postfix) with ESMTPS id BD0A860FD8
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD0A860FD8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135007.251172 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135004.251163 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo704-00054v-Dc; Tue, 01 Jun 2021 16:12:16 +0000
+	id 1lo702-0004kR-NR; Tue, 01 Jun 2021 16:12:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135007.251172; Tue, 01 Jun 2021 16:12:16 +0000
+Received: by outflank-mailman (output) from mailman id 135004.251163; Tue, 01 Jun 2021 16:12:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo703-00052v-Uk; Tue, 01 Jun 2021 16:12:15 +0000
-Received: by outflank-mailman (input) for mailman id 135007;
- Tue, 01 Jun 2021 16:12:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lo702-0004jJ-HH; Tue, 01 Jun 2021 16:12:14 +0000
+Received: by outflank-mailman (input) for mailman id 135004;
+ Tue, 01 Jun 2021 16:12:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo702-0005X1-0H
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:14 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.103])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9ea60976-470e-41f2-a4d4-de729ddb777a;
- Tue, 01 Jun 2021 16:11:41 +0000 (UTC)
+ id 1lo701-0005Ec-1y
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:13 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.84])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6c478b9f-60b0-4b75-9873-757c55e8a7d0;
+ Tue, 01 Jun 2021 16:11:36 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBb1BW
+ with ESMTPSA id j0415bx51GBV1BK
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:37 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ea60976-470e-41f2-a4d4-de729ddb777a
-ARC-Seal: i=1; a=rsa-sha256; t=1622563897; cv=none;
+X-Inumbo-ID: 6c478b9f-60b0-4b75-9873-757c55e8a7d0
+ARC-Seal: i=1; a=rsa-sha256; t=1622563892; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=DceQnoMD1LPxJK7nDDoI5jY7qyrJO2b8pj9TXL3fxAY8NxT/G8fHE1LT7IyYYEUgsk
-    VC2V36pU/F/9Uu7l/TmVZxOy1inNDMA/+R6ewt/qsmeC2fHkp+rIKrcEItQ1iFVmWhc3
-    0iG6DTYDmR0dAvQua+fBjIQ3TfjNi2StaB/clALrkHKoHltA84Nqa7Rtso+UMaDDbFpK
-    LoPcnwCPDXbaJFV3H/flgac9SE/CtOTTViWNLD3lwgQXjE7//B/mHqc2dd4XZJVpC5z4
-    DnhGlj00Hxzs2qKPPyUJBiF2newFmudvMsY0l1LGqvAeYU4rfZEGdSfHErp+bdm8uMuQ
-    15/A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563897;
+    b=PfsEkPMGS+5tPzW4MpLS4b5cQT/mvpFrBoxLm5VNSVORaH7Jw7/RTMsrI2WRYVOtiF
+    y2l8e9TSu1ykKVsd8PLopUW8TJm1oRPVaEIb4Y98rxmjmVHWmN3+YDLPf6mBVmr+gzrM
+    aug2asGY0xM/8T3tEflKxKeKLeICjFCs+gGOU3naJsFTJs7RwvxANiR1pltU2F9hYoXs
+    t+U67JjJ4Djq7ZjUvsYlQPCibe69wnN6nq1jq/oSoT4uXAiKLf3XpxekLghXdwNbB8lA
+    IWyhxl+qrK0LjeVK/fbBOoc+u0EWtO9S8yP9jd8tz3wCPVDmW5n6SxOulL5iBi9t/vP1
+    qILg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563892;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
-    b=MxhvzI3nXOCmBeAiRJFUchsTY/iiFWK16afmVmO7QesHmwQsU/ZIum/e4kJxpkINwb
-    DC2yJT/j4a7ebhe0H3SdWCI8BR1/pfzoH2YgHWKXGYSbwAmzSE41S0cH1CjToAu4mjNl
-    J0jzndpOI2m9J1AIZ/C17acSy/0DIUf/vHWC/ouT7If9g/tw0CFiUhCZFJtLhJUnUA3W
-    s9N0eYzO8/sClRLqA+zFrpPoR/YVmWRU/FSM5CT3blvk3GedmOYavbHM6XoDULwBqrTF
-    EjUwV+ejaa7rM2+J9SrBAl5U3OvqzxPzQS73GduI0vOOT9GcMpw8d63gqK/BS7AROldV
-    2umQ==
+    bh=3eJ8lfkM75YdRBwLz3IvZoNgnQXSN5j9vpY7FzwJfSQ=;
+    b=PBFVi+mK0hxstPCEJ4VhRAjU21GlGzuN+SL++kGQ/i2BDcF/NfOW2Zsy3wsKFevozm
+    o4kY2J/Avt2CWLPjOaLSDmdm17jyFDcBdbKGaD9WAwcDma/4ho4XGQyMuS6jsvRyaI3N
+    Ta/4iLKMo0NAGLSyEpckb/ZVS1/NcJR0fQwyucnYiAFJL+uAWo063RuwiuV7fCDl9ZwD
+    uKn5K9niilZV6BIkjqvujNtL389HLKKmVH4LyqQ6u6pGqn/MjPKgxIyekIIcd/tYs1WA
+    q7HOMX2DHXg3YZ73w8EIU6oW3VFZkWWgjCKYiOq4or/zygr4dI2BNtWFBdivBL972paw
+    Outw==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563897;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563892;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
-    b=a3XGOIo9gK0sthRo1QW/ge3Lkbka6xS371SdjVtTG/iXT5nFIlwa7ngxBPwuIPAr3C
-    L64Vvat9i1dmTDh1iEVYeDmuHVXnSkbiIiKGPChYjogOQug5W4x4lc6QXUX2XKZiwfX+
-    6JUCJM2cSA8y0xDAzqKajAnh5WpmMJ+XyglmRTpyi8N0ytP8b8PJ+OYlz4SCxgypjTTs
-    Fi47XB9TJ2M8js49koTSW4cYbjafFJl/itk5QIHxRfl94FgN2AOhU4v/bRkZmvEWY0Gj
-    tjE0HNGOPC4mkzS5VegXe8nbhJuTH0Yc0THPtZe2SGRxYdqZ2kwPYeww6lFrBNGZF7E3
-    IfVQ==
+    bh=3eJ8lfkM75YdRBwLz3IvZoNgnQXSN5j9vpY7FzwJfSQ=;
+    b=BVfMlPG3S1pF1bPhA5sQHrRPoE/6HsSYf91H0qpFO6TenKzmlcmNlWQZxgoaNC8j0m
+    mcGTbchP62wspXpYSY6OtY9HgOUbsK7KAFsIqy0G7oN6XtECFCwlJ8nF/LxW/mkOg9SL
+    DTqsAlvt7C/Nw3H2fbilYxL9ajdwTKEbKMlJa+esA/8xW492zYZ88HD1eOTOlKtQGGbJ
+    KnRPw1KGLTLI9t2M6BdLUUBUyAvxP7UhmRvHTW2LU5ir+QGfzxt7KwKhWvyUUxwkGMKo
+    Qx8088QqIPSHN96IQBSL7PQgUK04uBGFS7MJHTFftmTa0Z2tWjcQf+LeJzROH1eG/vNp
+    yV0w==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -96,34 +95,70 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 27/38] tools: recognize LIBXL_API_VERSION for 4.16
-Date: Tue,  1 Jun 2021 18:11:07 +0200
-Message-Id: <20210601161118.18986-28-olaf@aepfle.de>
+Subject: [PATCH v20210601 15/38] tools/guest: save: move rec_pfns array
+Date: Tue,  1 Jun 2021 18:10:55 +0200
+Message-Id: <20210601161118.18986-16-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is required by upcoming API changes.
+Remove allocation from hotpath, move rec_pfns array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/include/libxl.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ tools/libs/saverestore/common.h |  2 ++
+ tools/libs/saverestore/save.c   | 11 +----------
+ 2 files changed, 3 insertions(+), 10 deletions(-)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index ae7fe27c1f..29931626a2 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -729,7 +729,8 @@ typedef struct libxl__ctx libxl_ctx;
- #if LIBXL_API_VERSION != 0x040200 && LIBXL_API_VERSION != 0x040300 && \
-     LIBXL_API_VERSION != 0x040400 && LIBXL_API_VERSION != 0x040500 && \
-     LIBXL_API_VERSION != 0x040700 && LIBXL_API_VERSION != 0x040800 && \
--    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400
-+    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400 && \
-+    LIBXL_API_VERSION != 0x041600
- #error Unknown LIBXL_API_VERSION
- #endif
- #endif
+diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
+index b3294e79af..6a2f266469 100644
+--- a/tools/libs/saverestore/common.h
++++ b/tools/libs/saverestore/common.h
+@@ -233,6 +233,8 @@ struct xc_sr_save_arrays {
+     int errors[MAX_BATCH_SIZE];
+     /* write_batch: iovec[] for writev(). */
+     struct iovec iov[MAX_BATCH_SIZE + 4];
++    /* write_batch */
++    uint64_t rec_pfns[MAX_BATCH_SIZE];
+ };
+ 
+ struct xc_sr_restore_arrays {
+diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
+index 1d9e55afe8..ba8046b530 100644
+--- a/tools/libs/saverestore/save.c
++++ b/tools/libs/saverestore/save.c
+@@ -96,7 +96,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+-    uint64_t *rec_pfns = NULL;
++    uint64_t *rec_pfns = ctx->save.m->rec_pfns;
+     struct iovec *iov = ctx->save.m->iov; int iovcnt = 0;
+     struct xc_sr_rec_page_data_header hdr = { 0 };
+     struct xc_sr_record rec = {
+@@ -201,14 +201,6 @@ static int write_batch(struct xc_sr_context *ctx)
+         }
+     }
+ 
+-    rec_pfns = malloc(nr_pfns * sizeof(*rec_pfns));
+-    if ( !rec_pfns )
+-    {
+-        ERROR("Unable to allocate %zu bytes of memory for page data pfn list",
+-              nr_pfns * sizeof(*rec_pfns));
+-        goto err;
+-    }
+-
+     hdr.count = nr_pfns;
+ 
+     rec.length = sizeof(hdr);
+@@ -259,7 +251,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     rc = ctx->save.nr_batch_pfns = 0;
+ 
+  err:
+-    free(rec_pfns);
+     if ( guest_mapping )
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+     for ( i = 0; local_pages && i < nr_pfns; ++i )
 
