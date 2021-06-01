@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2808C4708F
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15B23C47080
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:16:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8502960232
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:14:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8502960232
+	by mail.kernel.org (Postfix) with ESMTPS id A7C7B60FDB
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:16:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7C7B60FDB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135042.251294 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135060.251306 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo71l-0004iC-5g; Tue, 01 Jun 2021 16:14:01 +0000
+	id 1lo74O-0007Cn-O4; Tue, 01 Jun 2021 16:16:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135042.251294; Tue, 01 Jun 2021 16:14:01 +0000
+Received: by outflank-mailman (output) from mailman id 135060.251306; Tue, 01 Jun 2021 16:16:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo71l-0004hX-1K; Tue, 01 Jun 2021 16:14:01 +0000
-Received: by outflank-mailman (input) for mailman id 135042;
- Tue, 01 Jun 2021 16:14:00 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lo74O-0007Cg-KJ; Tue, 01 Jun 2021 16:16:44 +0000
+Received: by outflank-mailman (input) for mailman id 135060;
+ Tue, 01 Jun 2021 16:16:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo70b-0005X1-1Q
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:49 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b1b21753-71d3-4abf-ae18-17f60e97b2ba;
- Tue, 01 Jun 2021 16:11:48 +0000 (UTC)
+ id 1lo70k-0005Ec-3S
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:58 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1c6e3a17-5e01-451b-b7b0-3bf1394c1a90;
+ Tue, 01 Jun 2021 16:11:42 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBe1Bd
+ with ESMTPSA id j0415bx51GBa1BU
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:40 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:36 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1b21753-71d3-4abf-ae18-17f60e97b2ba
-ARC-Seal: i=1; a=rsa-sha256; t=1622563900; cv=none;
+X-Inumbo-ID: 1c6e3a17-5e01-451b-b7b0-3bf1394c1a90
+ARC-Seal: i=1; a=rsa-sha256; t=1622563896; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=i+C0lQTgDG0B7xQdUrq1nGARbLlZYl/nskb/IwQqsimOXTONDE4qYhKz0EIZRSeyGI
-    kPOf2EHOxTlezAkGdwnYfP+CeKb91xfiO84YmOpM50zFgiHUGtV+hsATK882h0DXLwVL
-    Lz5Tk+cmXopFFVsMgIm/Eo6fBX+Kl9TK3KIq8gJmN9UhMf/QbRx0ohkD/RPcZlktqw55
-    AJKU8pNZb3iqoJ4kwXjT8uUMDbVgjQ96UlYBhVEJuCKQq3EjVPUV7JIOiM4sStSNYtbb
-    FcBT8EoTt1xW+IwKuhYnyUEeFgWPhengL+5LXTJLKR+fHmps7fd0gw7B286Z/xm4Jqeb
-    UoVg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563900;
+    b=oq8uQSOCopC2wqt4KXP/PJIMSsJMeRfwAtBCnP3SPlaTbYuA1whhMGU1X8xDREzu9e
+    im7cg2t8gff2Kv4a6g7CtYM84w/eqeVnXN+Yd9ibLjoT4xtnz1J0vlIo/RdHy3cqyMJh
+    yvSSYNKU2nK133nA9+g/AXOMKXpONKxLZK/jwywNtHYsLsX5Uu/yXP8nOwaYYccTcQnN
+    9eF4Ezw5eiX6lAR6tnK9IbVLEQ5SLBrn2JINwDFUuQDiEoqkUzluZ4PRFxiHPINO+Oc2
+    qIdIntXAw7DT948EDP4d7Z9S+zBfvZO6fhgtN2JPekin7o2hK00bCNnLCvIfMZELVYQ2
+    m4Ow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563896;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=yHDLzQ8w0aK0NM0b+OJIaVk/C7sbn6MbRiUz15zozj8=;
-    b=d1xKl9YT8gYggHF5Kk4WO0b/XgA5dzP7xLE7XBNmgBHFLQ/qTdP3P8ueLlMSgIlP83
-    MfkfO/b+BqIBN6v9h3/jFtKF/ZEwez+4+Syo5Z12ehaWT2UGRCy09AAwceXPtSCbmQbE
-    ZUbLDjmIOatdcAmz2PD5ytZgvPP4QyZgn3T+BmX4zwmmU25fdRyjfiovRiCH5BJsDNvh
-    MZU6u3k0FiGQLC3OP4XhBqsGG5c+INKdQzfTPJtkEZYhYCY5fplppUeGT2K5/tq9cTvY
-    CTn1l/ETDXRM96seNcMDcfwogR9kAJLfZ6xMvwG0+/tWmi59nP5JxDKhx3wK9bHarIXv
-    ieuQ==
+    bh=OehxVYQzQRfrdjC5ERJeiffQghSA59T3Cae/kEPq6Gc=;
+    b=kU3HGacCm+PbjhdqOIrzws0AzFGx9mcS4kLVDRX74SATNRbGwiwV3VTEq/s3OoRzlM
+    I0mN+DvSJhEg8pf7QNfpCnaDUkbAAvzj6SAchEqm5NUsy5rUK4zb7xXLO+awNKUCw+2I
+    r/nxOgZBsZ6ugKbo9JsSOt2srZb/2N2tBaMbRi9h9rBZRZOyUPbY69TRttkrrgUc1Z5t
+    r/BwFiNEN8EB5f50UJK6sm/LX9CcWSpGvlVVujAYZMLGk+dX+0SasXdKguV3XeP7i18O
+    ObcW937mDHj99DT9KumElASHwzWM/H9AoPVGTFZoVKA/7enGluyvr0PpFBxxcQ96y3yu
+    6gQQ==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563900;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563896;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=yHDLzQ8w0aK0NM0b+OJIaVk/C7sbn6MbRiUz15zozj8=;
-    b=r9kc6tUP5PACoqGznsVAKLelvJDqMmOq9/jpHmb6tX7eUOR1APn7wPVAzU2spubTo0
-    d3H6+T7e1lFZP9IqvP+qmaVf0TNRjlImB2OeTyqPORuS0il+wXU/xHUgm6jVCBt9ScCV
-    Q62bdvENTBdIZmNXQbtcD4Ra60HRrl8OaekaFXaL44WxvHOaKn9dWPDJtd230oaVMOTt
-    wtAwWWmhzgM+wHK/0cLRckzTFPK5LOs6lnXuHCihdD0mEI3F/wG7ng8yJ5yhRZO5XeMo
-    R9kR2m0N/Lw4T2cpJ7E2loAmfCBxu92g0MjTltSEHQeC0Gxh5reugUuTa2bwnIyoeGJe
-    D2sA==
+    bh=OehxVYQzQRfrdjC5ERJeiffQghSA59T3Cae/kEPq6Gc=;
+    b=p7cPHCBZPWH95nUnid7843WoRQ4AbwjwOfNRRCW4BG3VnoV+S24IXBfAtGep5EjypU
+    P+WRTZI0bUUwuMNIFoQ/Nqwkx1tTn7nFjfm7QVX8wDNb9CCIiIEXAo0/uwlTgvJzEygV
+    YaqUm8LFqFh6wzO54oGsgUd6XAfsH+7v01z/tlrqwr5yxaUGz4Dr+7X1ow25TArgpGaS
+    1LmR+e+HyzwWiBdzj3lZe4Evpwf8JDIVSuG0+c8BeZLarUjnDjK1goBopeNOUeboaviE
+    rjNRsp5r9a6F4+xHh6hykcfMlbQkaKxSZcXkDhfaXabJw34uUIYZnh/zA8HfjEnzQ+o7
+    If6Q==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -95,265 +94,484 @@ From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210601 33/38] tools: add --abort_if_busy to libxl_domain_suspend
-Date: Tue,  1 Jun 2021 18:11:13 +0200
-Message-Id: <20210601161118.18986-34-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210601 25/38] tools/guest: restore: split handle_page_data
+Date: Tue,  1 Jun 2021 18:11:05 +0200
+Message-Id: <20210601161118.18986-26-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Provide a knob to the host admin to abort the live migration of a
-running domU if the downtime during final transit will be too long
-for the workload within domU.
+handle_page_data must be able to read directly into mapped guest memory.
+This will avoid unneccesary memcpy calls for data that can be consumed verbatim.
 
-Adjust error reporting. Add ERROR_MIGRATION_ABORTED to allow callers of
-libxl_domain_suspend to distinguish between errors and the requested
-constraint.
+Split the various steps of record processing:
+- move processing to handle_buffered_page_data
+- adjust xenforeignmemory_map to set errno in case of failure
+- adjust verify mode to set errno in case of failure
 
-Adjust precopy_policy to simplify reporting of remaining dirty pages.
-The loop in send_memory_live populates ->dirty_count in a different
-place than ->iteration. Let it proceeed one more time to provide the
-desired information before leaving the loop.
-
-This patch adjusts xl(1) and the libxl API.
-External users check LIBXL_HAVE_DOMAIN_SUSPEND_PROPS for the availibility
-of the new .abort_if_busy property.
+This change is preparation for future changes in handle_page_data,
+no change in behavior is intended.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- docs/man/xl.1.pod.in                  |  8 +++++++
- tools/include/libxl.h                 |  1 +
- tools/libs/light/libxl_dom_save.c     |  7 ++++++-
- tools/libs/light/libxl_domain.c       |  1 +
- tools/libs/light/libxl_internal.h     |  2 ++
- tools/libs/light/libxl_stream_write.c |  9 +++++++-
- tools/libs/light/libxl_types.idl      |  1 +
- tools/xl/xl_cmdtable.c                |  6 +++++-
- tools/xl/xl_migrate.c                 | 30 ++++++++++++++++++++-------
- 9 files changed, 55 insertions(+), 10 deletions(-)
+ tools/libs/saverestore/common.h  |   9 +
+ tools/libs/saverestore/restore.c | 343 ++++++++++++++++++++-----------
+ 2 files changed, 231 insertions(+), 121 deletions(-)
 
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index 43609f6cdd..b258d56ab6 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -508,6 +508,14 @@ low, the guest is suspended and the domU will finally be moved to I<host>.
- This allows the host admin to control for how long the domU will likely
- be suspended during transit.
- 
-+=item B<--abort_if_busy>
+diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
+index 73256f08ab..21fdcf234e 100644
+--- a/tools/libs/saverestore/common.h
++++ b/tools/libs/saverestore/common.h
+@@ -242,9 +242,14 @@ struct xc_sr_restore_arrays {
+     /* process_page_data */
+     xen_pfn_t mfns[MAX_BATCH_SIZE];
+     int map_errs[MAX_BATCH_SIZE];
++    void *guest_data[MAX_BATCH_SIZE];
 +
-+Abort migration instead of doing final suspend/move/resume if the
-+guest produced more than I<min_remaining> dirty pages during th number
-+of I<max_iters> iterations.
-+This avoids long periods of time where the guest is suspended, which
-+may confuse the workload within domU.
+     /* populate_pfns */
+     xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
+     xen_pfn_t pp_pfns[MAX_BATCH_SIZE];
 +
- =back
++    /* Must be the last member */
++    struct xc_sr_rec_page_data_header pages;
+ };
  
- =item B<remus> [I<OPTIONS>] I<domain-id> I<host>
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 28d70b1078..cc056ed627 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -1719,6 +1719,7 @@ typedef struct {
- } libxl_domain_suspend_props;
- #define LIBXL_SUSPEND_DEBUG 1
- #define LIBXL_SUSPEND_LIVE 2
-+#define LIBXL_SUSPEND_ABORT_IF_BUSY 4
+ struct xc_sr_context
+@@ -335,7 +340,11 @@ struct xc_sr_context
  
- int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
-                          libxl_domain_suspend_props *props,
-diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
-index ad5df89b2c..1999a8997f 100644
---- a/tools/libs/light/libxl_dom_save.c
-+++ b/tools/libs/light/libxl_dom_save.c
-@@ -383,11 +383,16 @@ static int libxl__domain_save_precopy_policy(precopy_stats_t stats, void *user)
-          stats.iteration, stats.dirty_count, stats.total_written);
-     if (stats.dirty_count >= 0 && stats.dirty_count < dss->min_remaining)
-         goto stop_copy;
--    if (stats.iteration >= dss->max_iters)
-+    if (stats.dirty_count >= 0 && stats.iteration >= dss->max_iters)
-         goto stop_copy;
-     return XGS_POLICY_CONTINUE_PRECOPY;
- 
- stop_copy:
-+    if (dss->abort_if_busy)
-+    {
-+        dss->remaining_dirty_pages = stats.dirty_count;
-+        return XGS_POLICY_ABORT;
-+    }
-     return XGS_POLICY_STOP_AND_COPY;
- }
- 
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index ae4dc9ad01..913653bd76 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -529,6 +529,7 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
-     dss->type = type;
-     dss->max_iters = props->max_iters ?: LIBXL_XGS_POLICY_MAX_ITERATIONS;
-     dss->min_remaining = props->min_remaining ?: LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT;
-+    dss->abort_if_busy = props->flags & LIBXL_SUSPEND_ABORT_IF_BUSY;
-     dss->live = props->flags & LIBXL_SUSPEND_LIVE;
-     dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
-     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index 63028586fe..7453a3aa7b 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -3640,9 +3640,11 @@ struct libxl__domain_save_state {
-     libxl_domain_type type;
-     int live;
-     int debug;
-+    int abort_if_busy;
-     int checkpointed_stream;
-     uint32_t max_iters;
-     uint32_t min_remaining;
-+    long remaining_dirty_pages;
-     const libxl_domain_remus_info *remus;
-     /* private */
-     int rc;
-diff --git a/tools/libs/light/libxl_stream_write.c b/tools/libs/light/libxl_stream_write.c
-index 634f3240d1..1ab3943f3e 100644
---- a/tools/libs/light/libxl_stream_write.c
-+++ b/tools/libs/light/libxl_stream_write.c
-@@ -344,11 +344,18 @@ void libxl__xc_domain_save_done(libxl__egc *egc, void *dss_void,
-         goto err;
- 
-     if (retval) {
-+        if (dss->remaining_dirty_pages) {
-+            LOGD(NOTICE, dss->domid, "saving domain: aborted,"
-+                 " %ld remaining dirty pages.", dss->remaining_dirty_pages);
-+        } else {
-         LOGEVD(ERROR, errnoval, dss->domid, "saving domain: %s",
-               dss->dsps.guest_responded ?
-               "domain responded to suspend request" :
-               "domain did not respond to suspend request");
--        if (!dss->dsps.guest_responded)
-+        }
-+        if (dss->remaining_dirty_pages)
-+           rc = ERROR_MIGRATION_ABORTED;
-+        else if(!dss->dsps.guest_responded)
-             rc = ERROR_GUEST_TIMEDOUT;
-         else if (dss->rc)
-             rc = dss->rc;
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index f45adddab0..b91769ee10 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -76,6 +76,7 @@ libxl_error = Enumeration("error", [
-     (-30, "QMP_DEVICE_NOT_ACTIVE"), # a device has failed to be become active
-     (-31, "QMP_DEVICE_NOT_FOUND"), # the requested device has not been found
-     (-32, "QEMU_API"), # QEMU's replies don't contains expected members
-+    (-33, "MIGRATION_ABORTED"),
-     ], value_namespace = "")
- 
- libxl_domain_type = Enumeration("domain_type", [
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index acb84e3486..6c9de3bdec 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -176,7 +176,11 @@ const struct cmd_spec cmd_table[] = {
-       "-p                Do not unpause domain after migrating it.\n"
-       "-D                Preserve the domain id\n"
-       "--max_iters N     Number of copy iterations before final stop+move\n"
--      "--min_remaining N Number of remaining dirty pages before final stop+move"
-+      "--min_remaining N Number of remaining dirty pages before final stop+move\n"
-+      "--abort_if_busy   Abort migration instead of doing final stop+move,\n"
-+      "                  if the number of dirty pages is higher than <min_remaining>\n"
-+      "                  after <max_iters> iterations. Otherwise the amount of memory\n"
-+      "                  to be transfered would exceed maximum allowed domU downtime."
-     },
-     { "restore",
-       &main_restore, 0, 1,
-diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
-index 14feb2b7ec..f523746e5b 100644
---- a/tools/xl/xl_migrate.c
-+++ b/tools/xl/xl_migrate.c
-@@ -177,7 +177,7 @@ static void migrate_do_preamble(int send_fd, int recv_fd, pid_t child,
- }
- 
- static void migrate_domain(uint32_t domid, int preserve_domid,
--                           const char *rune, int debug,
-+                           const char *rune, int debug, int abort_if_busy,
-                            uint32_t max_iters,
-                            uint32_t min_remaining,
-                            const char *override_config_file)
-@@ -213,14 +213,20 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
- 
-     if (debug)
-         props.flags |= LIBXL_SUSPEND_DEBUG;
-+    if (abort_if_busy)
-+        props.flags |= LIBXL_SUSPEND_ABORT_IF_BUSY;
-     rc = libxl_domain_suspend(ctx, domid, send_fd, &props, NULL);
-     if (rc) {
-         fprintf(stderr, "migration sender: libxl_domain_suspend failed"
-                 " (rc=%d)\n", rc);
--        if (rc == ERROR_GUEST_TIMEDOUT)
--            goto failed_suspend;
--        else
--            goto failed_resume;
-+        switch (rc) {
-+            case ERROR_GUEST_TIMEDOUT:
-+                goto failed_suspend;
-+            case ERROR_MIGRATION_ABORTED:
-+                goto failed_busy;
-+            default:
-+                goto failed_resume;
-+        }
-     }
- 
-     //fprintf(stderr, "migration sender: Transfer complete.\n");
-@@ -302,6 +308,12 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     fprintf(stderr, "Migration failed, failed to suspend at sender.\n");
-     exit(EXIT_FAILURE);
- 
-+ failed_busy:
-+    close(send_fd);
-+    migration_child_report(recv_fd);
-+    fprintf(stderr, "Migration aborted as requested, domain is too busy.\n");
-+    exit(EXIT_FAILURE);
+             /* Sender has invoked verify mode on the stream. */
+             bool verify;
++            void *verify_buf;
 +
-  failed_resume:
-     close(send_fd);
-     migration_child_report(recv_fd);
-@@ -545,13 +557,14 @@ int main_migrate(int argc, char **argv)
-     char *rune = NULL;
-     char *host;
-     int opt, daemonize = 1, monitor = 1, debug = 0, pause_after_migration = 0;
--    int preserve_domid = 0;
-+    int preserve_domid = 0, abort_if_busy = 0;
-     uint32_t max_iters = 0;
-     uint32_t min_remaining = 0;
-     static struct option opts[] = {
-         {"debug", 0, 0, 0x100},
-         {"max_iters", 1, 0, 0x101},
-         {"min_remaining", 1, 0, 0x102},
-+        {"abort_if_busy", 0, 0, 0x103},
-         {"live", 0, 0, 0x200},
-         COMMON_LONG_OPTS
+             struct xc_sr_restore_arrays *m;
++            void *guest_mapping;
++            uint32_t nr_mapped_pages;
+         } restore;
      };
-@@ -585,6 +598,9 @@ int main_migrate(int argc, char **argv)
-     case 0x102: /* --min_remaining */
-         min_remaining = atoi(optarg);
-         break;
-+    case 0x103: /* --abort_if_busy */
-+        abort_if_busy = 1;
-+        break;
-     case 0x200: /* --live */
-         /* ignored for compatibility with xm */
-         break;
-@@ -619,7 +635,7 @@ int main_migrate(int argc, char **argv)
-                   pause_after_migration ? " -p" : "");
+ 
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index bb1574ed74..f7b4a7124b 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -186,123 +186,18 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+     return rc;
+ }
+ 
+-/*
+- * Given a list of pfns, their types, and a block of page data from the
+- * stream, populate and record their types, map the relevant subset and copy
+- * the data into the guest.
+- */
+-static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+-                             xen_pfn_t *pfns, uint32_t *types, void *page_data)
++static int handle_static_data_end_v2(struct xc_sr_context *ctx)
+ {
+-    xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = ctx->restore.m->mfns;
+-    int *map_errs = ctx->restore.m->map_errs;
+-    int rc;
+-    void *mapping = NULL, *guest_page = NULL;
+-    unsigned int i, /* i indexes the pfns from the record. */
+-        j,          /* j indexes the subset of pfns we decide to map. */
+-        nr_pages = 0;
+-
+-    rc = populate_pfns(ctx, count, pfns, types);
+-    if ( rc )
+-    {
+-        ERROR("Failed to populate pfns for batch of %u pages", count);
+-        goto err;
+-    }
+-
+-    for ( i = 0; i < count; ++i )
+-    {
+-        ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+-
+-        if ( page_type_has_stream_data(types[i]) == true )
+-            mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
+-    }
+-
+-    /* Nothing to do? */
+-    if ( nr_pages == 0 )
+-        goto done;
+-
+-    mapping = guest_page = xenforeignmemory_map(
+-        xch->fmem, ctx->domid, PROT_READ | PROT_WRITE,
+-        nr_pages, mfns, map_errs);
+-    if ( !mapping )
+-    {
+-        rc = -1;
+-        PERROR("Unable to map %u mfns for %u pages of data",
+-               nr_pages, count);
+-        goto err;
+-    }
+-
+-    for ( i = 0, j = 0; i < count; ++i )
+-    {
+-        if ( page_type_has_stream_data(types[i]) == false )
+-            continue;
+-
+-        if ( map_errs[j] )
+-        {
+-            rc = -1;
+-            ERROR("Mapping pfn %#"PRIpfn" (mfn %#"PRIpfn", type %#"PRIx32") failed with %d",
+-                  pfns[i], mfns[j], types[i], map_errs[j]);
+-            goto err;
+-        }
+-
+-        /* Undo page normalisation done by the saver. */
+-        rc = ctx->restore.ops.localise_page(ctx, types[i], page_data);
+-        if ( rc )
+-        {
+-            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
+-                  pfns[i], types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
+-            goto err;
+-        }
+-
+-        if ( ctx->restore.verify )
+-        {
+-            /* Verify mode - compare incoming data to what we already have. */
+-            if ( memcmp(guest_page, page_data, PAGE_SIZE) )
+-                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
+-                      pfns[i], types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
+-        }
+-        else
+-        {
+-            /* Regular mode - copy incoming data into place. */
+-            memcpy(guest_page, page_data, PAGE_SIZE);
+-        }
+-
+-        ++j;
+-        guest_page += PAGE_SIZE;
+-        page_data += PAGE_SIZE;
+-    }
+-
+- done:
+-    rc = 0;
+-
+- err:
+-    if ( mapping )
+-        xenforeignmemory_unmap(xch->fmem, mapping, nr_pages);
+-
+-    return rc;
+-}
++    int rc = 0;
+ 
+-/*
+- * Validate a PAGE_DATA record from the stream, and pass the results to
+- * process_page_data() to actually perform the legwork.
+- */
+-static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+-{
++#if defined(__i386__) || defined(__x86_64__)
+     xc_interface *xch = ctx->xch;
+-    struct xc_sr_rec_page_data_header *pages = rec->data;
+-    unsigned int i, pages_of_data = 0;
+-    int rc = -1;
+-
+-    xen_pfn_t *pfns = ctx->restore.m->pfns, pfn;
+-    uint32_t *types = ctx->restore.m->types, type;
+-
+     /*
+      * v2 compatibility only exists for x86 streams.  This is a bit of a
+      * bodge, but it is less bad than duplicating handle_page_data() between
+      * different architectures.
+      */
+-#if defined(__i386__) || defined(__x86_64__)
++
+     /* v2 compat.  Infer the position of STATIC_DATA_END. */
+     if ( ctx->restore.format_version < 3 && !ctx->restore.seen_static_data_end )
+     {
+@@ -320,12 +215,26 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         ERROR("No STATIC_DATA_END seen");
+         goto err;
+     }
++
++    rc = 0;
++err:
+ #endif
+ 
+-    if ( rec->length < sizeof(*pages) )
++    return rc;
++}
++
++static bool verify_rec_page_hdr(struct xc_sr_context *ctx, uint32_t rec_length,
++                                 struct xc_sr_rec_page_data_header *pages)
++{
++    xc_interface *xch = ctx->xch;
++    bool ret = false;
++
++    errno = EINVAL;
++
++    if ( rec_length < sizeof(*pages) )
+     {
+         ERROR("PAGE_DATA record truncated: length %u, min %zu",
+-              rec->length, sizeof(*pages));
++              rec_length, sizeof(*pages));
+         goto err;
      }
  
--    migrate_domain(domid, preserve_domid, rune, debug,
-+    migrate_domain(domid, preserve_domid, rune, debug, abort_if_busy,
-                    max_iters, min_remaining, config_filename);
-     return EXIT_SUCCESS;
+@@ -335,13 +244,35 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         goto err;
+     }
+ 
+-    if ( rec->length < sizeof(*pages) + (pages->count * sizeof(uint64_t)) )
++    if ( pages->count > MAX_BATCH_SIZE )
++    {
++        ERROR("pfn count %u in PAGE_DATA record too large", pages->count);
++        errno = E2BIG;
++        goto err;
++    }
++
++    if ( rec_length < sizeof(*pages) + (pages->count * sizeof(uint64_t)) )
+     {
+         ERROR("PAGE_DATA record (length %u) too short to contain %u"
+-              " pfns worth of information", rec->length, pages->count);
++              " pfns worth of information", rec_length, pages->count);
+         goto err;
+     }
+ 
++    ret = true;
++
++err:
++    return ret;
++}
++
++static bool verify_rec_page_pfns(struct xc_sr_context *ctx, uint32_t rec_length,
++                                 struct xc_sr_rec_page_data_header *pages)
++{
++    xc_interface *xch = ctx->xch;
++    uint32_t i, pages_of_data = 0;
++    xen_pfn_t pfn;
++    uint32_t type;
++    bool ret = false;
++
+     for ( i = 0; i < pages->count; ++i )
+     {
+         pfn = pages->pfn[i] & PAGE_DATA_PFN_MASK;
+@@ -364,23 +295,183 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+              * have a page worth of data in the record. */
+             pages_of_data++;
+ 
+-        pfns[i] = pfn;
+-        types[i] = type;
++        ctx->restore.m->pfns[i] = pfn;
++        ctx->restore.m->types[i] = type;
+     }
+ 
+-    if ( rec->length != (sizeof(*pages) +
++    if ( rec_length != (sizeof(*pages) +
+                          (sizeof(uint64_t) * pages->count) +
+                          (PAGE_SIZE * pages_of_data)) )
+     {
+         ERROR("PAGE_DATA record wrong size: length %u, expected "
+-              "%zu + %zu + %lu", rec->length, sizeof(*pages),
++              "%zu + %zu + %lu", rec_length, sizeof(*pages),
+               (sizeof(uint64_t) * pages->count), (PAGE_SIZE * pages_of_data));
+         goto err;
+     }
+ 
+-    rc = process_page_data(ctx, pages->count, pfns, types,
+-                           &pages->pfn[pages->count]);
++    ret = true;
++
++err:
++    return ret;
++}
++
++/*
++ * Populate pfns, if required
++ * Fill m->guest_data with either mapped address or NULL
++ * The caller must unmap guest_mapping
++ */
++static int map_guest_pages(struct xc_sr_context *ctx,
++                           struct xc_sr_rec_page_data_header *pages)
++{
++    xc_interface *xch = ctx->xch;
++    struct xc_sr_restore_arrays *m = ctx->restore.m;
++    uint32_t i, p;
++    int rc;
++
++    rc = populate_pfns(ctx, pages->count, m->pfns, m->types);
++    if ( rc )
++    {
++        ERROR("Failed to populate pfns for batch of %u pages", pages->count);
++        goto err;
++    }
++
++    ctx->restore.nr_mapped_pages = 0;
++
++    for ( i = 0; i < pages->count; i++ )
++    {
++        ctx->restore.ops.set_page_type(ctx, m->pfns[i], m->types[i]);
++
++        if ( page_type_has_stream_data(m->types[i]) == false )
++        {
++            m->guest_data[i] = NULL;
++            continue;
++        }
++
++        m->mfns[ctx->restore.nr_mapped_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, m->pfns[i]);
++    }
++
++    /* Nothing to do? */
++    if ( ctx->restore.nr_mapped_pages == 0 )
++        goto done;
++
++    ctx->restore.guest_mapping = xenforeignmemory_map(xch->fmem, ctx->domid,
++            PROT_READ | PROT_WRITE, ctx->restore.nr_mapped_pages,
++            m->mfns, m->map_errs);
++    if ( !ctx->restore.guest_mapping )
++    {
++        rc = -1;
++        PERROR("Unable to map %u mfns for %u pages of data",
++               ctx->restore.nr_mapped_pages, pages->count);
++        goto err;
++    }
++
++    /* Verify mapping, and assign address to pfn data */
++    for ( i = 0, p = 0; i < pages->count; i++ )
++    {
++        if ( page_type_has_stream_data(m->types[i]) == false )
++            continue;
++
++        if ( m->map_errs[p] == 0 )
++        {
++            m->guest_data[i] = ctx->restore.guest_mapping + (p * PAGE_SIZE);
++            p++;
++            continue;
++        }
++
++        errno = m->map_errs[p];
++        rc = -1;
++        PERROR("Mapping pfn %#"PRIpfn" (mfn %#"PRIpfn", type %#"PRIx32") failed",
++              m->pfns[i], m->mfns[p], m->types[i]);
++        goto err;
++    }
++
++done:
++    rc = 0;
++
++err:
++    return rc;
++}
++
++/*
++ * Handle PAGE_DATA record from an existing buffer
++ * Given a list of pfns, their types, and a block of page data from the
++ * stream, populate and record their types, map the relevant subset and copy
++ * the data into the guest.
++ */
++static int handle_buffered_page_data(struct xc_sr_context *ctx,
++                                     struct xc_sr_record *rec)
++{
++    xc_interface *xch = ctx->xch;
++    struct xc_sr_rec_page_data_header *pages = rec->data;
++    struct xc_sr_restore_arrays *m = ctx->restore.m;
++    void *p;
++    uint32_t i;
++    int rc = -1, idx;
++
++    rc = handle_static_data_end_v2(ctx);
++    if ( rc )
++        goto err;
++
++    /* First read and verify the header */
++    if ( verify_rec_page_hdr(ctx, rec->length, pages) == false )
++    {
++        rc = -1;
++        goto err;
++    }
++
++    /* Then read and verify the pfn numbers */
++    if ( verify_rec_page_pfns(ctx, rec->length, pages) == false )
++    {
++        rc = -1;
++        goto err;
++    }
++
++    /* Map the target pfn */
++    rc = map_guest_pages(ctx, pages);
++    if ( rc )
++        goto err;
++
++    for ( i = 0, idx = 0; i < pages->count; i++ )
++    {
++        if ( !m->guest_data[i] )
++            continue;
++
++        p = &pages->pfn[pages->count] + (idx * PAGE_SIZE);
++        rc = ctx->restore.ops.localise_page(ctx, m->types[i], p);
++        if ( rc )
++        {
++            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
++                  m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
++            goto err;
++
++        }
++
++        if ( ctx->restore.verify )
++        {
++            if ( memcmp(m->guest_data[i], p, PAGE_SIZE) )
++            {
++                errno = EIO;
++                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
++                      m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
++                goto err;
++            }
++        }
++        else
++        {
++            memcpy(m->guest_data[i], p, PAGE_SIZE);
++        }
++
++        idx++;
++    }
++
++    rc = 0;
++
+  err:
++    if ( ctx->restore.guest_mapping )
++    {
++        xenforeignmemory_unmap(xch->fmem, ctx->restore.guest_mapping, ctx->restore.nr_mapped_pages);
++        ctx->restore.guest_mapping = NULL;
++    }
+     return rc;
  }
+ 
+@@ -641,12 +732,21 @@ static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_recor
+         break;
+ 
+     case REC_TYPE_PAGE_DATA:
+-        rc = handle_page_data(ctx, rec);
++        rc = handle_buffered_page_data(ctx, rec);
+         break;
+ 
+     case REC_TYPE_VERIFY:
+         DPRINTF("Verify mode enabled");
+         ctx->restore.verify = true;
++        if ( !ctx->restore.verify_buf )
++        {
++            ctx->restore.verify_buf = malloc(MAX_BATCH_SIZE * PAGE_SIZE);
++            if ( !ctx->restore.verify_buf )
++            {
++                rc = -1;
++                PERROR("Unable to allocate verify_buf");
++            }
++        }
+         break;
+ 
+     case REC_TYPE_CHECKPOINT:
+@@ -725,7 +825,8 @@ static int setup(struct xc_sr_context *ctx)
+     }
+     ctx->restore.allocated_rec_num = DEFAULT_BUF_RECORDS;
+ 
+-    ctx->restore.m = malloc(sizeof(*ctx->restore.m));
++    ctx->restore.m = malloc(sizeof(*ctx->restore.m) +
++            (sizeof(*ctx->restore.m->pages.pfn) * MAX_BATCH_SIZE));
+     if ( !ctx->restore.m ) {
+         ERROR("Unable to allocate memory for arrays");
+         rc = -1;
 
