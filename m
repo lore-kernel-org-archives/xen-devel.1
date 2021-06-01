@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6903BC47093
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A25EBC47096
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 245D260C3E
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 245D260C3E
+	by mail.kernel.org (Postfix) with ESMTPS id 611CB60232
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 611CB60232
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134990.251079 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134989.251075 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zj-0000GC-5D; Tue, 01 Jun 2021 16:11:55 +0000
+	id 1lo6zi-00009s-DQ; Tue, 01 Jun 2021 16:11:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134990.251079; Tue, 01 Jun 2021 16:11:54 +0000
+Received: by outflank-mailman (output) from mailman id 134989.251075; Tue, 01 Jun 2021 16:11:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zi-0000ES-Qm; Tue, 01 Jun 2021 16:11:54 +0000
-Received: by outflank-mailman (input) for mailman id 134990;
- Tue, 01 Jun 2021 16:11:54 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lo6zi-00009U-8h; Tue, 01 Jun 2021 16:11:54 +0000
+Received: by outflank-mailman (input) for mailman id 134989;
+ Tue, 01 Jun 2021 16:11:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo6zh-0005X1-Vz
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:54 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 083036e1-0830-4d8b-ad5b-37494827089f;
- Tue, 01 Jun 2021 16:11:35 +0000 (UTC)
+ id 1lo6zh-0005Ec-1H
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:53 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.171])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id c2cc1909-2698-480b-8f54-aba8ac30e54e;
+ Tue, 01 Jun 2021 16:11:34 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBT1BF
+ with ESMTPSA id j0415bx51GBS1BD
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:29 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:28 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 083036e1-0830-4d8b-ad5b-37494827089f
+X-Inumbo-ID: c2cc1909-2698-480b-8f54-aba8ac30e54e
 ARC-Seal: i=1; a=rsa-sha256; t=1622563889; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=j23TsGK+nbxG3edYgJTv/d8uKBKj6wrHbhV04xpLKdY0XkbgSQOZXCoPHjLAWlM3Pk
-    QonfCPg1lvOQ+Hy1IK2zwotH1I570y4bmoWrDHqw6L4VWs0XnuKvdtgvt5qDq0I+17S5
-    0Kke+8CmT63dwlYE8S6GVNSlIf6TTGhwqK8reIMvhJevQk5sG7BXpIMe8wmptslDGnp0
-    imOeMDiupWnNsBUmtDjrT38rRQLotHqptcfcCcmpasdlrsQnTXm1i3/Q26CHAGJfUuaV
-    euTLK+cqnPBiLGlXDxqjxu79d8JRY+kq8rheD1fDXfijG8RyKijsKpG9WYuV9GI8WCcN
-    45Eg==
+    b=rnJXdhgrXacgywk38aKsQE7O0+NhpB+PxH/eZKPkEcLT/M19R5KSVeg8kCZYBLfUUA
+    AdK8ByK7g8edyjpdC7wtaQdGV+riv8mzN0QZrHHVT5y415uX87SFAHYOCO2DpwLRybAt
+    NKdF1K64VpqL/FYm0MwUhnwW3XpTyYDIxhk5LwO67BI3a1GlxlmTD3UyVn/JVhku7nq4
+    yZz1zI+OXSZOuaQghShoAUHIL2xfbTZLYn6RsoahVmr9zDdW7DcEZkUg/J1ghXqmdWf7
+    VSHUg0yFXt2NyvLmiNrYyw9lrF25GKrq6yJpQ55Svxti2YNMGqLcm/bFJ7ViY0af9RY4
+    bVZw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563889;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=E7wVU3AYom1qSRf+sliiKc9mzY5OMMBLqGFhTssnmUM=;
-    b=OTb0QjhiXLeVWtHNw8GQlI1+c5r0H2nPn3R+l6SKShj2rIwf+kb4lGnsFLWkHF2LbJ
-    EyVEHbc49qRnZ3wd9FLhGNzanaF/ZLDFSoPAeoA2kTxTZv2vxAEmJn3k29MlzMgYLmIs
-    yN0Y7QnLCKBvQYuEpNhcG0NPSV8RiFVNfV3KFyFxhtkK9/ERFdIecPyq16ep0MHY88YT
-    waayuplCtyhIhoPP/bx3HgI7b5KQU6k57gq6CEtsCpGlfgpSBGuW2r4L6DCOaUhlhjS+
-    2QRv7wsTBEv2Js0gWjUWZmOOCRXsRbRO7hyNZfoCAYokV9MDq7cdiucs4TtX+J7e8aLE
-    8YoA==
+    bh=cDil57jxI4Z5Z9nbXjVlKKlvOaQMfsb66RRaO8m9ED8=;
+    b=eUW5+lj09D+EqeYYhWwyDOnODC1rQFKFUnFVTvraE2R2lM4Frg5cOvunGY6tW5XPMf
+    9WNVbsiXm/xvd2/LkVdhmd0GgV2Zqk+k+RZmn81G+4wqIUriS+nslfVg0ZXXRtxtEwm6
+    NInQxJoQLUvRCR1kxHcrv/otELiU7bcy18W56VhYV/S+dFLXRRWglzVgHUIVYlS3jvfy
+    6vEmdDhlC6rDuRcC2KiOtsWG02mipc+rj1LX0FjNnoS2mP9I9j1Y0lyYCAR7uZX0r8ij
+    p0WgLa8Alv0NiBcWfDihUQcZUn/kj3PzktUykj5jDeUS8YjDxV9EamF4SZWum1zZCN7K
+    rKDg==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563889;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=E7wVU3AYom1qSRf+sliiKc9mzY5OMMBLqGFhTssnmUM=;
-    b=cVcv1Crx7fTfkauGUpNoOIuyaysmjNizIy2vMBgKV15/N5Rh3KQeueIMpvMWtFe3PJ
-    S03OxF0ICFBINoo7HNh5D3xnVEJWfvBLrz6d5hP1RJpL4N5wwdw60OSklwOHdP9Ko53x
-    W9XYO8zNS4E7M7LH1v6mjlYyDhhuBEFqz2QCi5Z0HH4mfl3MkXSeEKXbRdZZJCb1MuVW
-    DLhIL9Bgg/msb0MxWq8xtRAdMwVIkWZvwhJF5zqJgF99GcAQG2Y/c8UcwcuIP4BfFk1s
-    4JZrkIbElRkzQE12k65ydyhT+/Amxzz+LEkyhBn/jUFkO+Kdp8G//YHk2ze3tsPxhqeb
-    3Ucg==
+    bh=cDil57jxI4Z5Z9nbXjVlKKlvOaQMfsb66RRaO8m9ED8=;
+    b=hNSJVlEhOJlKLSnCwsYffA1aYwF0tB02Ok2uJ21W3vA/ExnRX0/9xUPLYs1JpLlotg
+    m4vphErILK7zWQwilFZ2DvEgeebVRQ8nouo91ktzb9yHleGt+srZkLPC//+yOXLJN8Rk
+    DkZ1ezBLEGpahNxBOIV5rbPrzAM3hk059Z/0681Th/S+0HoqJvW8Th/S5WtTP2gr1YaU
+    nQ5M+vGShR0Ey+L00f5Q6O2JtU9q5oM2RpJ/MyEXMhM5hbNvU70gf9iVGZ3TYREq26uM
+    KUO2ql8E6ybCmzCisCzTDtByTrYo7v50wxzaCrVHm61HZnag1J95lamGSp6dGIv2e1Pi
+    3G9Q==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -96,143 +95,125 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 10/38] tools/guest: save: move batch_pfns
-Date: Tue,  1 Jun 2021 18:10:50 +0200
-Message-Id: <20210601161118.18986-11-olaf@aepfle.de>
+Subject: [PATCH v20210601 08/38] tools: show migration transfer rate in send_dirty_pages
+Date: Tue,  1 Jun 2021 18:10:48 +0200
+Message-Id: <20210601161118.18986-9-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The batch_pfns array is already allocated in advance.
-Move it into the preallocated area.
+Show how fast domU pages are transferred in each iteration.
+
+The relevant data is how fast the pfns travel, not so much how much
+protocol overhead exists. So the reported MiB/sec is just for pfns.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/saverestore/common.h |  2 +-
- tools/libs/saverestore/save.c   | 25 +++++++++++--------------
- 2 files changed, 12 insertions(+), 15 deletions(-)
+ tools/libs/saverestore/common.h |  2 ++
+ tools/libs/saverestore/save.c   | 47 +++++++++++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+)
 
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 80b2e878aa..0d94a4c01e 100644
+index 50a8479d39..f5fe23caad 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -224,6 +224,7 @@ static inline int update_blob(struct xc_sr_blob *blob,
- }
+@@ -250,6 +250,8 @@ struct xc_sr_context
+             bool debug;
  
- struct xc_sr_save_arrays {
-+    xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
- };
- 
- struct xc_sr_restore_arrays {
-@@ -261,7 +262,6 @@ struct xc_sr_context
+             unsigned long p2m_size;
++            size_t pages_sent;
++            size_t overhead_sent;
  
              struct precopy_stats stats;
  
--            xen_pfn_t *batch_pfns;
-             unsigned int nr_batch_pfns;
-             unsigned long *deferred_pages;
-             unsigned long nr_deferred_pages;
 diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index 1662e3ee50..b11ce70a11 100644
+index bcff2d28f5..760ca04a84 100644
 --- a/tools/libs/saverestore/save.c
 +++ b/tools/libs/saverestore/save.c
-@@ -77,7 +77,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+@@ -1,5 +1,6 @@
+ #include <assert.h>
+ #include <arpa/inet.h>
++#include <time.h>
  
+ #include "common.h"
+ 
+@@ -238,6 +239,8 @@ static int write_batch(struct xc_sr_context *ctx)
+     iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
+ 
+     iovcnt = 4;
++    ctx->save.pages_sent += nr_pages;
++    ctx->save.overhead_sent += sizeof(rec) + sizeof(hdr) + nr_pfns * sizeof(*rec_pfns);
+ 
+     if ( nr_pages )
+     {
+@@ -357,6 +360,43 @@ static int suspend_domain(struct xc_sr_context *ctx)
+     return 0;
+ }
+ 
++static void show_transfer_rate(struct xc_sr_context *ctx, struct timespec *start)
++{
++    xc_interface *xch = ctx->xch;
++    struct timespec end = {}, diff = {};
++    size_t ms, MiB_sec = ctx->save.pages_sent * PAGE_SIZE;
++
++    if (!MiB_sec)
++        return;
++
++    if ( clock_gettime(CLOCK_MONOTONIC, &end) )
++        PERROR("clock_gettime");
++
++    if ( (end.tv_nsec - start->tv_nsec) < 0 )
++    {
++        diff.tv_sec = end.tv_sec - start->tv_sec - 1;
++        diff.tv_nsec = end.tv_nsec - start->tv_nsec + (1000U*1000U*1000U);
++    }
++    else
++    {
++        diff.tv_sec = end.tv_sec - start->tv_sec;
++        diff.tv_nsec = end.tv_nsec - start->tv_nsec;
++    }
++
++    ms = (diff.tv_nsec / (1000U*1000U));
++    if (!ms)
++        ms = 1;
++    ms += (diff.tv_sec * 1000U);
++
++    MiB_sec *= 1000U;
++    MiB_sec /= ms;
++    MiB_sec /= 1024U*1024U;
++
++    errno = 0;
++    IPRINTF("%s: %zu bytes + %zu pages in %ld.%09ld sec, %zu MiB/sec", __func__,
++            ctx->save.overhead_sent, ctx->save.pages_sent, diff.tv_sec, diff.tv_nsec, MiB_sec);
++}
++
  /*
-  * Writes a batch of memory as a PAGE_DATA record into the stream.  The batch
-- * is constructed in ctx->save.batch_pfns.
-+ * is constructed in ctx->save.m->batch_pfns.
-  *
-  * This function:
-  * - gets the types for each pfn in the batch.
-@@ -128,12 +128,12 @@ static int write_batch(struct xc_sr_context *ctx)
-     for ( i = 0; i < nr_pfns; ++i )
+  * Send a subset of pages in the guests p2m, according to the dirty bitmap.
+  * Used for each subsequent iteration of the live migration loop.
+@@ -370,9 +410,15 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
+     xen_pfn_t p;
+     unsigned long written;
+     int rc;
++    struct timespec start = {};
+     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
+                                     &ctx->save.dirty_bitmap_hbuf);
+ 
++    ctx->save.pages_sent = 0;
++    ctx->save.overhead_sent = 0;
++    if ( clock_gettime(CLOCK_MONOTONIC, &start) )
++        PERROR("clock_gettime");
++
+     for ( p = 0, written = 0; p < ctx->save.p2m_size; ++p )
      {
-         types[i] = mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
--                                                      ctx->save.batch_pfns[i]);
-+                                                      ctx->save.m->batch_pfns[i]);
+         if ( !test_bit(p, dirty_bitmap) )
+@@ -396,6 +442,7 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
+     if ( written > entries )
+         DPRINTF("Bitmap contained more entries than expected...");
  
-         /* Likely a ballooned page. */
-         if ( mfns[i] == INVALID_MFN )
-         {
--            set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
-+            set_bit(ctx->save.m->batch_pfns[i], ctx->save.deferred_pages);
-             ++ctx->save.nr_deferred_pages;
-         }
-     }
-@@ -179,7 +179,7 @@ static int write_batch(struct xc_sr_context *ctx)
-             if ( errors[p] )
-             {
-                 ERROR("Mapping of pfn %#"PRIpfn" (mfn %#"PRIpfn") failed %d",
--                      ctx->save.batch_pfns[i], mfns[p], errors[p]);
-+                      ctx->save.m->batch_pfns[i], mfns[p], errors[p]);
-                 goto err;
-             }
++    show_transfer_rate(ctx, &start);
+     xc_report_progress_step(xch, entries, entries);
  
-@@ -193,7 +193,7 @@ static int write_batch(struct xc_sr_context *ctx)
-             {
-                 if ( rc == -1 && errno == EAGAIN )
-                 {
--                    set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
-+                    set_bit(ctx->save.m->batch_pfns[i], ctx->save.deferred_pages);
-                     ++ctx->save.nr_deferred_pages;
-                     types[i] = XEN_DOMCTL_PFINFO_XTAB;
-                     --nr_pages;
-@@ -224,7 +224,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     rec.length += nr_pages * PAGE_SIZE;
- 
-     for ( i = 0; i < nr_pfns; ++i )
--        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
-+        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.m->batch_pfns[i];
- 
-     iov[0].iov_base = &rec.type;
-     iov[0].iov_len = sizeof(rec.type);
-@@ -296,9 +296,9 @@ static int flush_batch(struct xc_sr_context *ctx)
- 
-     if ( !rc )
-     {
--        VALGRIND_MAKE_MEM_UNDEFINED(ctx->save.batch_pfns,
-+        VALGRIND_MAKE_MEM_UNDEFINED(ctx->save.m->batch_pfns,
-                                     MAX_BATCH_SIZE *
--                                    sizeof(*ctx->save.batch_pfns));
-+                                    sizeof(*ctx->save.m->batch_pfns));
-     }
- 
-     return rc;
-@@ -315,7 +315,7 @@ static int add_to_batch(struct xc_sr_context *ctx, xen_pfn_t pfn)
-         rc = flush_batch(ctx);
- 
-     if ( rc == 0 )
--        ctx->save.batch_pfns[ctx->save.nr_batch_pfns++] = pfn;
-+        ctx->save.m->batch_pfns[ctx->save.nr_batch_pfns++] = pfn;
- 
-     return rc;
- }
-@@ -850,14 +850,12 @@ static int setup(struct xc_sr_context *ctx)
- 
-     dirty_bitmap = xc_hypercall_buffer_alloc_pages(
-         xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->save.p2m_size)));
--    ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
--                                  sizeof(*ctx->save.batch_pfns));
-     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
-     ctx->save.m = malloc(sizeof(*ctx->save.m));
- 
--    if ( !ctx->save.m || !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
-+    if ( !ctx->save.m || !dirty_bitmap || !ctx->save.deferred_pages )
-     {
--        ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
-+        ERROR("Unable to allocate memory for dirty bitmaps and"
-               " deferred pages");
-         rc = -1;
-         errno = ENOMEM;
-@@ -886,7 +884,6 @@ static void cleanup(struct xc_sr_context *ctx)
-     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
-                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
-     free(ctx->save.deferred_pages);
--    free(ctx->save.batch_pfns);
-     free(ctx->save.m);
- }
- 
+     return ctx->save.ops.check_vm_state(ctx);
 
