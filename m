@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F4160C47080
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42717C47096
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CA10760FD8
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA10760FD8
+	by mail.kernel.org (Postfix) with ESMTPS id 16C0A60FD8
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16C0A60FD8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135001.251150 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135007.251172 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zz-0003vH-5w; Tue, 01 Jun 2021 16:12:11 +0000
+	id 1lo704-00054v-Dc; Tue, 01 Jun 2021 16:12:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135001.251150; Tue, 01 Jun 2021 16:12:11 +0000
+Received: by outflank-mailman (output) from mailman id 135007.251172; Tue, 01 Jun 2021 16:12:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zy-0003ul-Nb; Tue, 01 Jun 2021 16:12:10 +0000
-Received: by outflank-mailman (input) for mailman id 135001;
- Tue, 01 Jun 2021 16:12:09 +0000
+	id 1lo703-00052v-Uk; Tue, 01 Jun 2021 16:12:15 +0000
+Received: by outflank-mailman (input) for mailman id 135007;
+ Tue, 01 Jun 2021 16:12:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo6zw-0005X1-WE
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:09 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.82])
+ id 1lo702-0005X1-0H
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:14 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.103])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f81fd6b4-bf1c-44f2-8abb-fda67d4f1df2;
- Tue, 01 Jun 2021 16:11:39 +0000 (UTC)
+ id 9ea60976-470e-41f2-a4d4-de729ddb777a;
+ Tue, 01 Jun 2021 16:11:41 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBY1BR
+ with ESMTPSA id j0415bx51GBb1BW
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:34 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f81fd6b4-bf1c-44f2-8abb-fda67d4f1df2
-ARC-Seal: i=1; a=rsa-sha256; t=1622563895; cv=none;
+X-Inumbo-ID: 9ea60976-470e-41f2-a4d4-de729ddb777a
+ARC-Seal: i=1; a=rsa-sha256; t=1622563897; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=GO3QMTQt+1PQdk26evIOQmJRuGWZ+32SI2lYkoj8qbRmKkk1NrTUy+wzUpOONFVLnw
-    KkEKVAAInwnepCRZ+sQj8bKk+QyOXZTTXLokE12qjz7M40M38ZRV1uWcYp9QoquE+Agi
-    Qn0sUYrTXR49exLojAW154D6BKGwWFlmNPqBLtelADD+sySIVaUgZjU0lBzYW9HEMUdB
-    OtNZcmogfjxC0gM3+oLY/B1cj+wL+k+L3FBWHcS22PFL3s0BdcjIUvqrSlq+PN8kB2NY
-    ccdHYc5uFS5JOta58Oqwgi8Wa0+54oCzqdZheQXLZz/bi4rtt6Ue7DpUkZPbsvaGOUye
-    Qrsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563895;
+    b=DceQnoMD1LPxJK7nDDoI5jY7qyrJO2b8pj9TXL3fxAY8NxT/G8fHE1LT7IyYYEUgsk
+    VC2V36pU/F/9Uu7l/TmVZxOy1inNDMA/+R6ewt/qsmeC2fHkp+rIKrcEItQ1iFVmWhc3
+    0iG6DTYDmR0dAvQua+fBjIQ3TfjNi2StaB/clALrkHKoHltA84Nqa7Rtso+UMaDDbFpK
+    LoPcnwCPDXbaJFV3H/flgac9SE/CtOTTViWNLD3lwgQXjE7//B/mHqc2dd4XZJVpC5z4
+    DnhGlj00Hxzs2qKPPyUJBiF2newFmudvMsY0l1LGqvAeYU4rfZEGdSfHErp+bdm8uMuQ
+    15/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563897;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=MHTDuRs4KJXGAe1IwzaUM3cPcSsfMCXWpWBD7RHfqcQ=;
-    b=oUujeh3ij71G841X2CbWGKoy44B3T2WnsQeioHkz3PBg3S0PdxQH611aIVujvzrMG0
-    Jjm1b+Yv6TEPWvjNriLKk1FP1Q0HPpCXu87dXbH3h6DvAEbv9np12AdX/XTWx86KN8Wy
-    SNzZvwOcedVzVQ3G5vSWSl8CEIc+SZcMV3AQ9Z1PqzJXFtU0yYRUGGwO0nxiHiVIr2MT
-    9cK/1TfRvEtmijw0Cr/9agRs/oa1dPUqPEftRQ8gQ5Wp532nBFF53Iyv0fJur1R5OwB9
-    +v9KhZCNQFigNBS7kCzLwT9hbobwKZt5EQ2rPzq46AoYfyZtKaNSo+e7hl0bokvuMkoj
-    M9MQ==
+    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
+    b=MxhvzI3nXOCmBeAiRJFUchsTY/iiFWK16afmVmO7QesHmwQsU/ZIum/e4kJxpkINwb
+    DC2yJT/j4a7ebhe0H3SdWCI8BR1/pfzoH2YgHWKXGYSbwAmzSE41S0cH1CjToAu4mjNl
+    J0jzndpOI2m9J1AIZ/C17acSy/0DIUf/vHWC/ouT7If9g/tw0CFiUhCZFJtLhJUnUA3W
+    s9N0eYzO8/sClRLqA+zFrpPoR/YVmWRU/FSM5CT3blvk3GedmOYavbHM6XoDULwBqrTF
+    EjUwV+ejaa7rM2+J9SrBAl5U3OvqzxPzQS73GduI0vOOT9GcMpw8d63gqK/BS7AROldV
+    2umQ==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563895;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563897;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=MHTDuRs4KJXGAe1IwzaUM3cPcSsfMCXWpWBD7RHfqcQ=;
-    b=d1oxsrIGWxW0vEUGvkWomIQ48mfGtUoieX+YZL23ervAaEs2u+g3opolyICVx+cvs5
-    jVKNq80IyqWfgXE/ZxU1aYty3h9h0GvJewGqnzwSPTnfu0rkHK14R2frBmNwVgR3vuHk
-    Kj/q/LvmKN/YzJckZhATGyEjzOlsVzGQkrzBthtqdUoeVeJl3JJr1kqhI49wEYvXf/Nm
-    hKva6W1YFgOL6p8Ikbq00Pp+PdUzT3dxopRat/m3yWKh0RJ/o9HgDem8EJIpFbvS1jwA
-    n1/kPRGufXzY3ArMcHxNgYAqLIjMdZj4QKp1OaOnTke5rLXNJ+StHBf6JL6KSaaqj37n
-    tZ4Q==
+    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
+    b=a3XGOIo9gK0sthRo1QW/ge3Lkbka6xS371SdjVtTG/iXT5nFIlwa7ngxBPwuIPAr3C
+    L64Vvat9i1dmTDh1iEVYeDmuHVXnSkbiIiKGPChYjogOQug5W4x4lc6QXUX2XKZiwfX+
+    6JUCJM2cSA8y0xDAzqKajAnh5WpmMJ+XyglmRTpyi8N0ytP8b8PJ+OYlz4SCxgypjTTs
+    Fi47XB9TJ2M8js49koTSW4cYbjafFJl/itk5QIHxRfl94FgN2AOhU4v/bRkZmvEWY0Gj
+    tjE0HNGOPC4mkzS5VegXe8nbhJuTH0Yc0THPtZe2SGRxYdqZ2kwPYeww6lFrBNGZF7E3
+    IfVQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -96,62 +96,34 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 22/38] tools/guest: restore: move mfns array in populate_pfns
-Date: Tue,  1 Jun 2021 18:11:02 +0200
-Message-Id: <20210601161118.18986-23-olaf@aepfle.de>
+Subject: [PATCH v20210601 27/38] tools: recognize LIBXL_API_VERSION for 4.16
+Date: Tue,  1 Jun 2021 18:11:07 +0200
+Message-Id: <20210601161118.18986-28-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove allocation from hotpath, move populate_pfns mfns array into preallocated space.
-Use some prefix to avoid conflict with an array used in handle_page_data.
+This is required by upcoming API changes.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/saverestore/common.h  | 2 ++
- tools/libs/saverestore/restore.c | 5 ++---
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ tools/include/libxl.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index cea549d129..6ed213e14f 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -242,6 +242,8 @@ struct xc_sr_restore_arrays {
-     /* process_page_data */
-     xen_pfn_t mfns[MAX_BATCH_SIZE];
-     int map_errs[MAX_BATCH_SIZE];
-+    /* populate_pfns */
-+    xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
- };
- 
- struct xc_sr_context
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index b534d80cbc..2ab9f792ef 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -138,12 +138,12 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-                   const xen_pfn_t *original_pfns, const uint32_t *types)
- {
-     xc_interface *xch = ctx->xch;
--    xen_pfn_t *mfns = malloc(count * sizeof(*mfns)),
-+    xen_pfn_t *mfns = ctx->restore.m->pp_mfns,
-         *pfns = malloc(count * sizeof(*pfns));
-     unsigned int i, nr_pfns = 0;
-     int rc = -1;
- 
--    if ( !mfns || !pfns )
-+    if ( !pfns )
-     {
-         ERROR("Failed to allocate %zu bytes for populating the physmap",
-               2 * count * sizeof(*mfns));
-@@ -191,7 +191,6 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- 
-  err:
-     free(pfns);
--    free(mfns);
- 
-     return rc;
- }
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index ae7fe27c1f..29931626a2 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -729,7 +729,8 @@ typedef struct libxl__ctx libxl_ctx;
+ #if LIBXL_API_VERSION != 0x040200 && LIBXL_API_VERSION != 0x040300 && \
+     LIBXL_API_VERSION != 0x040400 && LIBXL_API_VERSION != 0x040500 && \
+     LIBXL_API_VERSION != 0x040700 && LIBXL_API_VERSION != 0x040800 && \
+-    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400
++    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400 && \
++    LIBXL_API_VERSION != 0x041600
+ #error Unknown LIBXL_API_VERSION
+ #endif
+ #endif
 
