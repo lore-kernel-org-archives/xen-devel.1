@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1F8DC47092
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 276F1C47080
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:25:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3C4FF610CB
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:24:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C4FF610CB
+	by mail.kernel.org (Postfix) with ESMTPS id 971AE610CB
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:25:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 971AE610CB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135159.251361 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135185.251372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo7C3-0002k3-T9; Tue, 01 Jun 2021 16:24:39 +0000
+	id 1lo7CV-0003Yq-59; Tue, 01 Jun 2021 16:25:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135159.251361; Tue, 01 Jun 2021 16:24:39 +0000
+Received: by outflank-mailman (output) from mailman id 135185.251372; Tue, 01 Jun 2021 16:25:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo7C3-0002jv-PI; Tue, 01 Jun 2021 16:24:39 +0000
-Received: by outflank-mailman (input) for mailman id 135159;
- Tue, 01 Jun 2021 16:24:37 +0000
+	id 1lo7CV-0003Yi-23; Tue, 01 Jun 2021 16:25:07 +0000
+Received: by outflank-mailman (input) for mailman id 135185;
+ Tue, 01 Jun 2021 16:25:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo719-0005Ec-4B
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:13:23 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.100])
+ id 1lo714-0005Ec-47
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:13:18 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.103])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 60b9d1c2-9421-440a-ab4c-3ccfa7d0390c;
+ id 5c75630c-d80a-48a9-99c5-350bb6fde6fb;
  Tue, 01 Jun 2021 16:11:46 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBf1Bf
+ with ESMTPSA id j0415bx51GBb1BX
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:41 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 60b9d1c2-9421-440a-ab4c-3ccfa7d0390c
-ARC-Seal: i=1; a=rsa-sha256; t=1622563901; cv=none;
+X-Inumbo-ID: 5c75630c-d80a-48a9-99c5-350bb6fde6fb
+ARC-Seal: i=1; a=rsa-sha256; t=1622563898; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=XQvi/hWgKaEyTgjWvMcvqZqOox101nbYQgaaiAp5SBLHR29ICUoKym8AxgMDY6ieLe
-    sMsvEkhKmXz+9TtBGRkSCrJEXBHt59b3L9NIZkTJDO/tNga/bbXm4Y4tPTOzLRECpfHM
-    1ouopBa8M/jdhzRnh44V+zVPaqfQXSndaFMdwd15DZ+CPyNg/vezkbvM6OmVA3vHoLXD
-    /lxReH7+2UR881rX4r3oEQzFmsmj+qEarC6ZPQ+BWv6oecW85Fp227gR8vmRs65/wgIR
-    ssbAVSHRyfo8vKWo/Hkzo08UGCOZYUzLUPopuhgLbDKhWZ4POEfLr8kd5j3gwLbuWAYa
-    orIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563901;
+    b=mLSCEVWIFwr02TVbN1MLeBsQfsvHUlomH4hp7tBnrC/a1zOboNFjxGPvuv0nyJ3Uuk
+    xvl1JVOLX3SUyaesWJJrQcEIyZtT5iUykTLdwsYVgkjEDnJo1pgknKJHt30/NSkxzb2D
+    JjlMMnPGKIECbpLepyJTTCf2u/QCsd+DMDbZ0kxjBiovQ0QvN3vB50mPvZNqYTPsmXe4
+    AEZRBKZ/aM1q59MH4MgqGu5Ol6UYdOdaHnhFwq5OpwM9WeWT/aBFH3XOH+qrm7ox5xz/
+    BLxoauPJk/fnQoIOsw91SUv3r0qfknFEl/YRAyARtDcSmh1m03lh5pD+3nkT2MsZdvqb
+    W6Eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563898;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=w5x8dKYtaakiRZ5BSlh/86KLwxZ1yLf8VEe49hX7ZHA=;
-    b=ffy6cFrg7UEFmCg3EIpdeyDVdI8S3WfoWVJxTXXMXZCV3ToFqrMv443V8bcOFyFLiM
-    DFzY4kHwziBDuE2AaVmIBMowevy2hp3VHuWUQeq5YqIoPOsjwFh400JrB40XysFAAr7w
-    SlfNejl62jBRZ5TmAo4aRLUSefpljy+VbzBmzH6s71NQlizP4TD/JlFZLD2sJgDtPNkx
-    eJo+4JgrA0jhuFHk31kO+ynk9um5gLJmHIanY23e/O3mhiFu9HINmoTfX5I8+DPTZwqx
-    dLftyE5qV33pmQE4RSHlIgReGD7BUv+OcI2p2zUD7bkOaa/Z+kNeP0J83JN7RIzLh4+6
-    nNZg==
+    bh=MTSqerw0vG4VSeyAPsATEiIANrLKHzhkpCbX69ppdjs=;
+    b=cDP8SqOs6PbiHTLtkZHJMJO3LZgPhQDqfsDb6YGUlSOpGNWeIcyzOmQt+yB8jr3GCs
+    Pxo9cQa6EVHzmKQteeIRimlg6eTxcV3fjHVqsDfQPYVv6zMvYUQKL4xMtkq477r02SGX
+    rn6gs6q7l9Q1l/3YBy5lcOJOsoI244Drqrw9PPL0xE7+RhKRWsn0v+O+ebI6muqiQTLr
+    1NemoUBsFyy8Sv4nZUmcC9XIreuZJ6TzUjSwcJHvHFuRVeSKwYap8BN4zbrfzUQqOowN
+    7CTmqbCWD5IcLg6Mwk9olqqIfLQbSiDIptyGOzE179TbeuN8ChcETaf9RiuCp2AdgQnT
+    uIaQ==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563901;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563898;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=w5x8dKYtaakiRZ5BSlh/86KLwxZ1yLf8VEe49hX7ZHA=;
-    b=SseXCMQ9Cv8cqJPYDhT1fW17p7wimEzxvMfFOPxB7C052+05DL6x3oBP4pqUCl0U8B
-    Ky1zKQsRub4kbeyC7vDa9R+OMCdzBBTDhhG8wSYjb/AyfRzvzMo+HDwYZTyZ3FP5JL0B
-    q83sFWdYpOKAhLVsFLW6st0ByOmbDvWGtDaTXPE/ZUVl+TOIxcEuAaI3KYI+wC9MmkxI
-    jDnENx2p9At7sgk4P9YEfPBHNEl+pXrmnFWtQeXmhDQAvnbNypDscIQkCDPa2Xnsf6xN
-    M2n5cqoUR4KJ1cV0nRQmJrXZ/xHyg7NdLlUmlwgNA5IspnndP8cn4QpcDoC7hslJEUjA
-    rOpA==
+    bh=MTSqerw0vG4VSeyAPsATEiIANrLKHzhkpCbX69ppdjs=;
+    b=HIfYIkehMLE0pDA3u3B/kjs+Yufrb7XkJu/LvIJowk/lHA9LfbTCISGFdXYvPh/5xc
+    iyRBvdOctkN5Ml7Oxhb9vNNTWoi64gwJyWZrLIlDHxgGv045Jln9X3cBy7U4JnGNvxKq
+    7ZpVirnVLOlvrzyvF8xFKwDgH81z+ph+EE6zilrHqwJO0Pbxzv1C+JtoiOZOXcTqT5iY
+    IBIhrmRb763eM2W7rCRv1L0MoGoFO2+h4JoRiyYmV1YGdQ3amma8tIATUmo5GDTqKzTW
+    Nf8lOgxURBOqqS/0akEFZE3/0FC/bz+5Qd1Ny7MnJ0yRtUhJyoUmvDnm4bjU5U1TX5j8
+    KySw==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -93,215 +93,163 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
+	Christian Lindig <christian.lindig@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 35/38] tools: use xg_sr_bitmap for populated_pfns
-Date: Tue,  1 Jun 2021 18:11:15 +0200
-Message-Id: <20210601161118.18986-36-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	David Scott <dave@recoil.org>
+Subject: [PATCH v20210601 28/38] tools: adjust libxl_domain_suspend to receive a struct props
+Date: Tue,  1 Jun 2021 18:11:08 +0200
+Message-Id: <20210601161118.18986-29-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- tools/libs/saverestore/common.h          | 21 +++++++-
- tools/libs/saverestore/restore.c         | 69 ------------------------
- tools/libs/saverestore/restore_x86_hvm.c |  9 ++++
- tools/libs/saverestore/restore_x86_pv.c  |  7 +++
- 4 files changed, 35 insertions(+), 71 deletions(-)
+Upcoming changes will pass more knobs down to xc_domain_save.
+Adjust the libxl_domain_suspend API to allow easy adding of additional knobs.
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 5241e50f5e..f3ee619844 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -403,8 +403,7 @@ struct xc_sr_context
-             uint32_t     xenstore_domid,  console_domid;
- 
-             /* Bitmap of currently populated PFNs during restore. */
--            unsigned long *populated_pfns;
--            xen_pfn_t max_populated_pfn;
-+            struct xg_sr_bitmap populated_pfns;
- 
-             /* Sender has invoked verify mode on the stream. */
-             bool verify;
-@@ -596,6 +595,24 @@ static inline bool page_type_has_stream_data(uint32_t type)
-     }
-     return ret;
- }
-+
-+static inline bool pfn_is_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
-+{
-+    return xg_sr_test_bit(pfn, &ctx->restore.populated_pfns);
-+}
-+
-+static inline int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
-+{
-+    xc_interface *xch = ctx->xch;
-+
-+    if ( xg_sr_set_bit(pfn, &ctx->restore.populated_pfns) == false )
-+    {
-+        PERROR("Failed to realloc populated_pfns bitmap");
-+        errno = ENOMEM;
-+        return -1;
-+    }
-+    return 0;
-+}
- #endif
- /*
-  * Local variables:
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index 722f77b46a..0682616f16 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -71,64 +71,6 @@ static int read_headers(struct xc_sr_context *ctx)
-     return 0;
- }
- 
--/*
-- * Is a pfn populated?
-- */
--static bool pfn_is_populated(const struct xc_sr_context *ctx, xen_pfn_t pfn)
--{
--    if ( pfn > ctx->restore.max_populated_pfn )
--        return false;
--    return test_bit(pfn, ctx->restore.populated_pfns);
--}
--
--/*
-- * Set a pfn as populated, expanding the tracking structures if needed. To
-- * avoid realloc()ing too excessively, the size increased to the nearest power
-- * of two large enough to contain the required pfn.
-- */
--static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
--{
--    xc_interface *xch = ctx->xch;
--
--    if ( pfn > ctx->restore.max_populated_pfn )
--    {
--        xen_pfn_t new_max;
--        size_t old_sz, new_sz;
--        unsigned long *p;
--
--        /* Round up to the nearest power of two larger than pfn, less 1. */
--        new_max = pfn;
--        new_max |= new_max >> 1;
--        new_max |= new_max >> 2;
--        new_max |= new_max >> 4;
--        new_max |= new_max >> 8;
--        new_max |= new_max >> 16;
--#ifdef __x86_64__
--        new_max |= new_max >> 32;
--#endif
--
--        old_sz = bitmap_size(ctx->restore.max_populated_pfn + 1);
--        new_sz = bitmap_size(new_max + 1);
--        p = realloc(ctx->restore.populated_pfns, new_sz);
--        if ( !p )
--        {
--            ERROR("Failed to realloc populated bitmap");
--            errno = ENOMEM;
--            return -1;
--        }
--
--        memset((uint8_t *)p + old_sz, 0x00, new_sz - old_sz);
--
--        ctx->restore.populated_pfns    = p;
--        ctx->restore.max_populated_pfn = new_max;
--    }
--
--    assert(!test_bit(pfn, ctx->restore.populated_pfns));
--    set_bit(pfn, ctx->restore.populated_pfns);
--
--    return 0;
--}
--
- /*
-  * Given a set of pfns, obtain memory from Xen to fill the physmap for the
-  * unpopulated subset.  If types is NULL, no page type checking is performed
-@@ -929,16 +871,6 @@ static int setup(struct xc_sr_context *ctx)
-     if ( rc )
-         goto err;
- 
--    ctx->restore.max_populated_pfn = (32 * 1024 / 4) - 1;
--    ctx->restore.populated_pfns = bitmap_alloc(
--        ctx->restore.max_populated_pfn + 1);
--    if ( !ctx->restore.populated_pfns )
--    {
--        ERROR("Unable to allocate memory for populated_pfns bitmap");
--        rc = -1;
--        goto err;
--    }
--
-     ctx->restore.buffered_records = malloc(
-         DEFAULT_BUF_RECORDS * sizeof(struct xc_sr_record));
-     if ( !ctx->restore.buffered_records )
-@@ -977,7 +909,6 @@ static void cleanup(struct xc_sr_context *ctx)
- 
-     free(ctx->restore.m);
-     free(ctx->restore.buffered_records);
--    free(ctx->restore.populated_pfns);
- 
-     if ( ctx->restore.ops.cleanup(ctx) )
-         PERROR("Failed to clean up");
-diff --git a/tools/libs/saverestore/restore_x86_hvm.c b/tools/libs/saverestore/restore_x86_hvm.c
-index bd63bd2818..73f17b7fcb 100644
---- a/tools/libs/saverestore/restore_x86_hvm.c
-+++ b/tools/libs/saverestore/restore_x86_hvm.c
-@@ -136,6 +136,7 @@ static int x86_hvm_localise_page(struct xc_sr_context *ctx,
- static int x86_hvm_setup(struct xc_sr_context *ctx)
- {
-     xc_interface *xch = ctx->xch;
-+    unsigned long max_pfn;
- 
-     if ( ctx->restore.guest_type != DHDR_TYPE_X86_HVM )
-     {
-@@ -161,6 +162,13 @@ static int x86_hvm_setup(struct xc_sr_context *ctx)
-     }
+No change in behavior intented.
+
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Acked-by: Christian Lindig <christian.lindig@citrix.com>
+---
+ tools/include/libxl.h                | 26 +++++++++++++++++++++++---
+ tools/libs/light/libxl_domain.c      |  7 ++++---
+ tools/ocaml/libs/xl/xenlight_stubs.c |  3 ++-
+ tools/xl/xl_migrate.c                |  9 ++++++---
+ tools/xl/xl_saverestore.c            |  3 ++-
+ 5 files changed, 37 insertions(+), 11 deletions(-)
+
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 29931626a2..9a4d7514ed 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1706,12 +1706,32 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+     libxl_retrieve_domain_configuration_0x041200
  #endif
  
-+    max_pfn = max(ctx->restore.p2m_size, ctx->dominfo.max_memkb >> (PAGE_SHIFT-10));
-+    if ( !xg_sr_bitmap_expand(&ctx->restore.populated_pfns, max_pfn) )
-+    {
-+        PERROR("Unable to allocate memory for populated_pfns bitmap");
-+        return -1;
-+    }
++/*
++ * LIBXL_HAVE_DOMAIN_SUSPEND_PROPS indicates that the
++ * libxl_domain_suspend_props() function takes a props struct.
++ */
++#define LIBXL_HAVE_DOMAIN_SUSPEND_PROPS 1
 +
-     return 0;
++typedef struct {
++    uint32_t flags; /* LIBXL_SUSPEND_* */
++} libxl_domain_suspend_props;
++#define LIBXL_SUSPEND_DEBUG 1
++#define LIBXL_SUSPEND_LIVE 2
++
+ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
+-                         int flags, /* LIBXL_SUSPEND_* */
++                         libxl_domain_suspend_props *props,
+                          const libxl_asyncop_how *ao_how)
+                          LIBXL_EXTERNAL_CALLERS_ONLY;
+-#define LIBXL_SUSPEND_DEBUG 1
+-#define LIBXL_SUSPEND_LIVE 2
++#if defined(LIBXL_API_VERSION) && LIBXL_API_VERSION < 0x041600
++static inline int libxl_domain_suspend_0x041500(libxl_ctx *ctx, uint32_t domid,
++                         int fd, int flags, /* LIBXL_SUSPEND_* */
++                         const libxl_asyncop_how *ao_how)
++{
++    libxl_domain_suspend_props props = { .flags = flags, };
++    return libxl_domain_suspend(ctx, domid, fd, &props, ao_how);
++}
++#define libxl_domain_suspend libxl_domain_suspend_0x041500
++#endif
+ 
+ /*
+  * Only suspend domain, do not save its state to file, do not destroy it.
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 5d4ec90711..45e0c57c3a 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -505,7 +505,8 @@ static void domain_suspend_cb(libxl__egc *egc,
+ 
  }
  
-@@ -241,6 +249,7 @@ static int x86_hvm_stream_complete(struct xc_sr_context *ctx)
- 
- static int x86_hvm_cleanup(struct xc_sr_context *ctx)
+-int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
++int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
++                         libxl_domain_suspend_props *props,
+                          const libxl_asyncop_how *ao_how)
  {
-+    xg_sr_bitmap_free(&ctx->restore.populated_pfns);
-     free(ctx->x86.hvm.restore.context.ptr);
+     AO_CREATE(ctx, domid, ao_how);
+@@ -526,8 +527,8 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
+     dss->domid = domid;
+     dss->fd = fd;
+     dss->type = type;
+-    dss->live = flags & LIBXL_SUSPEND_LIVE;
+-    dss->debug = flags & LIBXL_SUSPEND_DEBUG;
++    dss->live = props->flags & LIBXL_SUSPEND_LIVE;
++    dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
+     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
  
-     free(ctx->x86.restore.cpuid.ptr);
-diff --git a/tools/libs/saverestore/restore_x86_pv.c b/tools/libs/saverestore/restore_x86_pv.c
-index 96608e5231..bdaa0c0e76 100644
---- a/tools/libs/saverestore/restore_x86_pv.c
-+++ b/tools/libs/saverestore/restore_x86_pv.c
-@@ -1060,6 +1060,12 @@ static int x86_pv_setup(struct xc_sr_context *ctx)
-     if ( rc )
-         return rc;
+     rc = libxl__fd_flags_modify_save(gc, dss->fd,
+diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
+index 352a00134d..eaf7bce35a 100644
+--- a/tools/ocaml/libs/xl/xenlight_stubs.c
++++ b/tools/ocaml/libs/xl/xenlight_stubs.c
+@@ -614,10 +614,11 @@ value stub_libxl_domain_suspend(value ctx, value domid, value fd, value async, v
+ 	int ret;
+ 	uint32_t c_domid = Int_val(domid);
+ 	int c_fd = Int_val(fd);
++    libxl_domain_suspend_props props = {};
+ 	libxl_asyncop_how *ao_how = aohow_val(async);
  
-+    if ( !xg_sr_bitmap_expand(&ctx->restore.populated_pfns, 32 * 1024 / 4) )
-+    {
-+        PERROR("Unable to allocate memory for populated_pfns bitmap");
-+        return -1;
-+    }
-+
-     ctx->x86.pv.restore.nr_vcpus = ctx->dominfo.max_vcpu_id + 1;
-     ctx->x86.pv.restore.vcpus = calloc(sizeof(struct xc_sr_x86_pv_restore_vcpu),
-                                        ctx->x86.pv.restore.nr_vcpus);
-@@ -1153,6 +1159,7 @@ static int x86_pv_stream_complete(struct xc_sr_context *ctx)
-  */
- static int x86_pv_cleanup(struct xc_sr_context *ctx)
- {
-+    xg_sr_bitmap_free(&ctx->restore.populated_pfns);
-     free(ctx->x86.pv.p2m);
-     free(ctx->x86.pv.p2m_pfns);
+ 	caml_enter_blocking_section();
+-	ret = libxl_domain_suspend(CTX, c_domid, c_fd, 0, ao_how);
++	ret = libxl_domain_suspend(CTX, c_domid, c_fd, &props, ao_how);
+ 	caml_leave_blocking_section();
  
+ 	free(ao_how);
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..144890924f 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -186,7 +186,10 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     char *away_domname;
+     char rc_buf;
+     uint8_t *config_data;
+-    int config_len, flags = LIBXL_SUSPEND_LIVE;
++    int config_len;
++    libxl_domain_suspend_props props = {
++        .flags = LIBXL_SUSPEND_LIVE,
++        };
+ 
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+                            &config_data, &config_len);
+@@ -205,8 +208,8 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     xtl_stdiostream_adjust_flags(logger, XTL_STDIOSTREAM_HIDE_PROGRESS, 0);
+ 
+     if (debug)
+-        flags |= LIBXL_SUSPEND_DEBUG;
+-    rc = libxl_domain_suspend(ctx, domid, send_fd, flags, NULL);
++        props.flags |= LIBXL_SUSPEND_DEBUG;
++    rc = libxl_domain_suspend(ctx, domid, send_fd, &props, NULL);
+     if (rc) {
+         fprintf(stderr, "migration sender: libxl_domain_suspend failed"
+                 " (rc=%d)\n", rc);
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..476d4d9a6a 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -130,6 +130,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
+     int fd;
+     uint8_t *config_data;
+     int config_len;
++    libxl_domain_suspend_props props = {};
+ 
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+                            &config_data, &config_len);
+@@ -146,7 +147,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
+ 
+     save_domain_core_writeconfig(fd, filename, config_data, config_len);
+ 
+-    int rc = libxl_domain_suspend(ctx, domid, fd, 0, NULL);
++    int rc = libxl_domain_suspend(ctx, domid, fd, &props, NULL);
+     close(fd);
+ 
+     if (rc < 0) {
 
