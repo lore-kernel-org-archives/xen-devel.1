@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DA38C4708F
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:17:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B190BC4708F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:17:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F412460FF2
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:17:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F412460FF2
+	by mail.kernel.org (Postfix) with ESMTPS id 3334360FDB
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:17:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3334360FDB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135067.251328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135069.251338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo74s-0008NV-Dt; Tue, 01 Jun 2021 16:17:14 +0000
+	id 1lo74v-0000GP-MV; Tue, 01 Jun 2021 16:17:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135067.251328; Tue, 01 Jun 2021 16:17:14 +0000
+Received: by outflank-mailman (output) from mailman id 135069.251338; Tue, 01 Jun 2021 16:17:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo74s-0008NO-Ao; Tue, 01 Jun 2021 16:17:14 +0000
-Received: by outflank-mailman (input) for mailman id 135067;
- Tue, 01 Jun 2021 16:17:13 +0000
+	id 1lo74v-0000GD-Ip; Tue, 01 Jun 2021 16:17:17 +0000
+Received: by outflank-mailman (input) for mailman id 135069;
+ Tue, 01 Jun 2021 16:17:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo70a-0005Ec-32
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:48 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+ id 1lo70u-0005Ec-3o
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:13:08 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.104])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 92920130-7184-433e-aa96-fa8bc703aa30;
- Tue, 01 Jun 2021 16:11:41 +0000 (UTC)
+ id 14052265-3ec3-46ef-a819-c5198683c5e4;
+ Tue, 01 Jun 2021 16:11:45 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBa1BV
+ with ESMTPSA id j0415bx51GBc1Ba
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:36 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92920130-7184-433e-aa96-fa8bc703aa30
-ARC-Seal: i=1; a=rsa-sha256; t=1622563897; cv=none;
+X-Inumbo-ID: 14052265-3ec3-46ef-a819-c5198683c5e4
+ARC-Seal: i=1; a=rsa-sha256; t=1622563899; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=dudlQMcq6QurLVSYJAZ5weU9gLvgk7ga30PI1ni10/6v6vlW/RpnHiPHc344aQoT5n
-    2nz6eoXiB/UvOMX5ayAh296N7uv2c6NzJkDR+WJMrih3YAByL9vZjGszF01V7WtxVgfV
-    QHJATJaC2ppHIXC18mXOcO8fRGdVT/ZZkm0tW2YStIJv5Ok/vEcOBtskppeG10WX0pl1
-    zER3j01QAJf8z25RLfcSf6e5zR7dBrvfE8o6auj+TTE4u3VXi8Xsb2XYg/I2ALhGf8vJ
-    F3JMeO+47uR4o8kEUTblo+Z6kXw5H9UaPLNxYNn/YbCsbbiWlmTZsDh1oRwX4GugPjhC
-    QpzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563897;
+    b=Nzzt+2JzYgcElHAvvU+QlBQIcLp433Kx2kvRxjzCmaxh4vGLV+IBGWpul7FPjRQgUp
+    ExSTIaImPvhM2qc0wC+fAUm23xlgXu1hT39G2qHii5BTN5lnzbMUWfHQ30wQQ/8ZmSUG
+    gqWRBaqik7yQRBF3K61FpUEOvVYcvMPojhx32fx4JH/by7fbgKOMKU9uj1V9SB54MU6h
+    7YWBGLbTfbdLg7K51ByMrW1BKqMOA1mKkCKAQHHLR6gvNEuzBwM1WocPsV0vL72MSO7I
+    qoKvd8Sf31ed/pu7Dn1UAkay9MWOdlX8zd9bLNnpZGQ2ABT3ShzY7STxUdMIH1sIMwb3
+    ihIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563899;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=eDLBvLwdNBkdJsm65Hcts+kQfVHtshr8GV54yTNeA1Y=;
-    b=JbEojE7DjUODPQOlO5CTL9kaucbAdMnMgmE0frwsA9qoL0+7NQivopCQV1UYoDI3io
-    Bv4OKH8RLvhWhHozcxfNvNWB0httJNIpTZRT4KZzok7EPnsIeMYkwSi/q8zbQCbw3j//
-    AltqW/84hmVILTF473mnzapNbVfMUmfJ0vZ3EaWLMoykCOdkzUL7zPrCIUsMVG1gY+zu
-    YnyVvu57o/rPpQ46Mq2TXmP++9Vo67ER487wS1y1YZEC77u0hk7KJWirxRBhyHvIO/UV
-    6glChkY0ZOmKCxYv4spTfEYEYAwrJRrXmUbDY2RGsQiPEDxMwqQn7sFTveRDeYDhDVBZ
-    RxhA==
+    bh=oEobMmPDeGkR5HKQsTMYf9poCJx2hGJ9mHWfmH/ZeOo=;
+    b=eRlYMUhLv1SFTirRAn5jjC1lo61RJ9Hi2DcTjmEyK0y2Q5LHYpjnNS2P6uOzjvXwk7
+    LMLKASPuzbAMVBqNj86YpY7yT+LMmWXFgbnIqTWmidpgm+OraykJjVP4uC7xDlx9imwL
+    wQOJjqr4Sgab5kx6cSPTrbIYi/iYyiZG1XUHF36TvypxWkhzvaLPjDC1ljHEtlbk05az
+    GLknIgAM2tquzRUpfT1qgXPGX7TjChnay13sm/W4uuc/sBslxBMKOle6mgscczhQLLEW
+    X4i35d+RcDTX2WTQI0smFTKy7jN1bFpU86VQFD4xrPx0jGw/T+n26IQcWMy4EdBxPOqh
+    LR7Q==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563897;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563899;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=eDLBvLwdNBkdJsm65Hcts+kQfVHtshr8GV54yTNeA1Y=;
-    b=M7R0KO8O/hmI94jXqEKM8+BNsOwtJDTsMT3JBfBJAiidLHe0/pK+fv7NWrqk7fr5es
-    42Y1ZKKcFIWVjB/9F+GtXKa1vWrVXxKIBhrml9jbsCD3ImanI17KncC2trj677FlC+Ja
-    6OGVucrVcpzSSpGtUp0UwiNm3x4iBGWpZqkas/bW8X8BQAov7/qkLmjzpGmLdQnt617a
-    Pz39F4JDfz4TU3ldYRFayHtqh6kKdgpBzan401LwdvOzidPKERz6p9UNJl1FKj160qLb
-    AhpS1NyKO2cLtYhyOZnY372E2XK0G+148UGj6Ati25SZjLtxmpAz8bPqEo9+5EBrlHzk
-    0FAA==
+    bh=oEobMmPDeGkR5HKQsTMYf9poCJx2hGJ9mHWfmH/ZeOo=;
+    b=N4ktv5IxWOYa/s3fjZBqMunV6MlGiILphSiu69DrwtxNOEY3GK+tY8ZxEhQJXjMFge
+    leQvxASgSmHfGRHoHk7ze+m70aYb5Z3Dh71d3krEa4MLzp86ZYCSChmi5ukdjPRnxAr3
+    +BTml+Z7BUA9ZtAH1Viu2YKaE+qySr/VpgA7lePZLi6ohkKHqm+bN+Yiuiu1dQY2T8y+
+    qEhSY5pyhSG05pbP/bH/5UvvWKZKEd4q+yV31F176QMqi2cpif6KIUq1YQqSoFSgMyek
+    EvSJXIsW1eZJsnNm+Uq8zgdall5x0mLJl9pVekmR8WxfdOsMKlYD5HJfTJXmaNm1BFIu
+    6hoQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -94,187 +94,101 @@ From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 26/38] tools/guest: restore: write data directly into guest
-Date: Tue,  1 Jun 2021 18:11:06 +0200
-Message-Id: <20210601161118.18986-27-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v20210601 30/38] tools: add callback to libxl for precopy_policy and precopy_stats_t
+Date: Tue,  1 Jun 2021 18:11:10 +0200
+Message-Id: <20210601161118.18986-31-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Read incoming migration stream directly into the guest memory.
-This avoids the memory allocation and copying, and the resulting
-performance penalty.
+This duplicates simple_precopy_policy. To recap its purpose:
+- do up to 5 iterations of copying dirty domU memory to target,
+  including the initial copying of all domU memory, excluding
+  the final copying while the domU is suspended
+- do fewer iterations in case the domU dirtied less than 50 pages
+
+Take the opportunity to also move xen_pfn_t into qw().
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/saverestore/common.h  |   1 +
- tools/libs/saverestore/restore.c | 132 ++++++++++++++++++++++++++++++-
- 2 files changed, 129 insertions(+), 4 deletions(-)
+ tools/libs/light/libxl_dom_save.c       | 19 +++++++++++++++++++
+ tools/libs/light/libxl_internal.h       |  2 ++
+ tools/libs/light/libxl_save_msgs_gen.pl |  3 ++-
+ 3 files changed, 23 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 21fdcf234e..4218a8ecd6 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -243,6 +243,7 @@ struct xc_sr_restore_arrays {
-     xen_pfn_t mfns[MAX_BATCH_SIZE];
-     int map_errs[MAX_BATCH_SIZE];
-     void *guest_data[MAX_BATCH_SIZE];
-+    struct iovec iov[MAX_BATCH_SIZE];
- 
-     /* populate_pfns */
-     xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index f7b4a7124b..722f77b46a 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -392,6 +392,122 @@ err:
+diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
+index 32e3cb5a13..3f3cff0342 100644
+--- a/tools/libs/light/libxl_dom_save.c
++++ b/tools/libs/light/libxl_dom_save.c
+@@ -373,6 +373,24 @@ int libxl__save_emulator_xenstore_data(libxl__domain_save_state *dss,
      return rc;
  }
  
-+/*
-+ * Handle PAGE_DATA record from the stream.
-+ * Given a list of pfns, their types, and a block of page data from the
-+ * stream, populate and record their types, map the relevant subset and copy
-+ * the data into the guest.
-+ */
-+static int handle_incoming_page_data(struct xc_sr_context *ctx,
-+                                     struct xc_sr_rhdr *rhdr)
++static int libxl__domain_save_precopy_policy(precopy_stats_t stats, void *user)
 +{
-+    xc_interface *xch = ctx->xch;
-+    struct xc_sr_restore_arrays *m = ctx->restore.m;
-+    struct xc_sr_rec_page_data_header *pages = &m->pages;
-+    uint64_t *pfn_nums = m->pages.pfn;
-+    uint32_t i;
-+    int rc, iov_idx;
++    libxl__save_helper_state *shs = user;
++    libxl__domain_save_state *dss = shs->caller_state;
++    STATE_AO_GC(dss->ao);
 +
-+    rc = handle_static_data_end_v2(ctx);
-+    if ( rc )
-+        goto err;
++    LOGD(DEBUG, shs->domid, "iteration %u dirty_count %ld total_written %lu",
++         stats.iteration, stats.dirty_count, stats.total_written);
++    if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
++        goto stop_copy;
++    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
++        goto stop_copy;
++    return XGS_POLICY_CONTINUE_PRECOPY;
 +
-+    /* First read and verify the header */
-+    rc = read_exact(ctx->fd, pages, sizeof(*pages));
-+    if ( rc )
-+    {
-+        PERROR("Could not read rec_pfn header");
-+        goto err;
-+    }
-+
-+    if ( verify_rec_page_hdr(ctx, rhdr->length, pages) == false )
-+    {
-+        rc = -1;
-+        goto err;
-+    }
-+
-+    /* Then read and verify the incoming pfn numbers */
-+    rc = read_exact(ctx->fd, pfn_nums, sizeof(*pfn_nums) * pages->count);
-+    if ( rc )
-+    {
-+        PERROR("Could not read rec_pfn data");
-+        goto err;
-+    }
-+
-+    if ( verify_rec_page_pfns(ctx, rhdr->length, pages) == false )
-+    {
-+        rc = -1;
-+        goto err;
-+    }
-+
-+    /* Finally read and verify the incoming pfn data */
-+    rc = map_guest_pages(ctx, pages);
-+    if ( rc )
-+        goto err;
-+
-+    /* Prepare read buffers, either guest or throw away memory */
-+    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
-+    {
-+        if ( !m->guest_data[i] )
-+            continue;
-+
-+        m->iov[iov_idx].iov_len = PAGE_SIZE;
-+        if ( ctx->restore.verify )
-+            m->iov[iov_idx].iov_base = ctx->restore.verify_buf + i * PAGE_SIZE;
-+        else
-+            m->iov[iov_idx].iov_base = m->guest_data[i];
-+        iov_idx++;
-+    }
-+
-+    if ( !iov_idx )
-+        goto done;
-+
-+    rc = readv_exact(ctx->fd, m->iov, iov_idx);
-+    if ( rc )
-+    {
-+        PERROR("read of %d pages failed", iov_idx);
-+        goto err;
-+    }
-+
-+    /* Post-processing of pfn data */
-+    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
-+    {
-+        if ( !m->guest_data[i] )
-+            continue;
-+
-+        rc = ctx->restore.ops.localise_page(ctx, m->types[i], m->iov[iov_idx].iov_base);
-+        if ( rc )
-+        {
-+            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
-+                  m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+            goto err;
-+
-+        }
-+
-+        if ( ctx->restore.verify )
-+        {
-+            if ( memcmp(m->guest_data[i], m->iov[iov_idx].iov_base, PAGE_SIZE) )
-+            {
-+                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
-+                      m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+            }
-+        }
-+
-+        iov_idx++;
-+    }
-+
-+done:
-+    rc = 0;
-+
-+err:
-+    if ( ctx->restore.guest_mapping )
-+    {
-+        xenforeignmemory_unmap(xch->fmem, ctx->restore.guest_mapping, ctx->restore.nr_mapped_pages);
-+        ctx->restore.guest_mapping = NULL;
-+    }
-+    return rc;
++stop_copy:
++    return XGS_POLICY_STOP_AND_COPY;
 +}
 +
- /*
-  * Handle PAGE_DATA record from an existing buffer
-  * Given a list of pfns, their types, and a block of page data from the
-@@ -773,11 +889,19 @@ static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_s
-     struct xc_sr_record rec;
-     int rc;
+ /*----- main code for saving, in order of execution -----*/
  
--    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
--    if ( rc )
--        return rc;
-+    switch ( rhdr->type )
-+    {
-+    case REC_TYPE_PAGE_DATA:
-+        rc = handle_incoming_page_data(ctx, rhdr);
-+        break;
-+    default:
-+        rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
-+        if ( rc == 0 )
-+            rc = process_buffered_record(ctx, &rec);;
-+        break;
-+    }
+ void libxl__domain_save(libxl__egc *egc, libxl__domain_save_state *dss)
+@@ -430,6 +448,7 @@ void libxl__domain_save(libxl__egc *egc, libxl__domain_save_state *dss)
+         callbacks->suspend = libxl__domain_suspend_callback;
  
--    return process_buffered_record(ctx, &rec);
-+    return rc;
- }
+     callbacks->switch_qemu_logdirty = libxl__domain_suspend_common_switch_qemu_logdirty;
++    callbacks->precopy_policy = libxl__domain_save_precopy_policy;
  
+     dss->sws.ao  = dss->ao;
+     dss->sws.dss = dss;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index 8af075291a..069c35452d 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -125,6 +125,8 @@
+ #define DOMID_XS_PATH "domid"
+ #define PVSHIM_BASENAME "xen-shim"
+ #define PVSHIM_CMDLINE "pv-shim console=xen,pv"
++#define LIBXL_XGS_POLICY_MAX_ITERATIONS 5
++#define LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT 50
  
+ /* Size macros. */
+ #define __AC(X,Y)   (X##Y)
+diff --git a/tools/libs/light/libxl_save_msgs_gen.pl b/tools/libs/light/libxl_save_msgs_gen.pl
+index f263ee01bb..ab55c81644 100755
+--- a/tools/libs/light/libxl_save_msgs_gen.pl
++++ b/tools/libs/light/libxl_save_msgs_gen.pl
+@@ -23,6 +23,7 @@ our @msgs = (
+                                              STRING doing_what),
+                                             'unsigned long', 'done',
+                                             'unsigned long', 'total'] ],
++    [ 'scxW',   "precopy_policy", ['precopy_stats_t', 'stats'] ],
+     [ 'srcxA',  "suspend", [] ],
+     [ 'srcxA',  "postcopy", [] ],
+     [ 'srcxA',  "checkpoint", [] ],
+@@ -142,7 +143,7 @@ static void bytes_put(unsigned char *const buf, int *len,
+ 
+ END
+ 
+-foreach my $simpletype (qw(int uint16_t uint32_t unsigned), 'unsigned long', 'xen_pfn_t') {
++foreach my $simpletype (qw(int uint16_t uint32_t unsigned precopy_stats_t xen_pfn_t), 'unsigned long') {
+     my $typeid = typeid($simpletype);
+     $out_body{'callout'} .= <<END;
+ static int ${typeid}_get(const unsigned char **msg,
 
