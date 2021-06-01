@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 046AFC47093
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 942E7C47096
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B1B760C3E
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B1B760C3E
+	by mail.kernel.org (Postfix) with ESMTPS id 523A160C3E
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 523A160C3E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134979.250987 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134982.251020 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zO-0005XX-Rk; Tue, 01 Jun 2021 16:11:34 +0000
+	id 1lo6zV-0006TF-32; Tue, 01 Jun 2021 16:11:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134979.250987; Tue, 01 Jun 2021 16:11:34 +0000
+Received: by outflank-mailman (output) from mailman id 134982.251020; Tue, 01 Jun 2021 16:11:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zO-0005XO-OE; Tue, 01 Jun 2021 16:11:34 +0000
-Received: by outflank-mailman (input) for mailman id 134979;
- Tue, 01 Jun 2021 16:11:33 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lo6zU-0006Rp-V4; Tue, 01 Jun 2021 16:11:40 +0000
+Received: by outflank-mailman (input) for mailman id 134982;
+ Tue, 01 Jun 2021 16:11:39 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo6zN-0005Ec-0g
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:33 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [85.215.255.20])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 13ab766b-3fdb-4683-ae05-9169682260c7;
- Tue, 01 Jun 2021 16:11:31 +0000 (UTC)
+ id 1lo6zS-0005X1-VV
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:39 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.81])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 634c5233-a18d-4ebb-9836-a0592a04f72c;
+ Tue, 01 Jun 2021 16:11:33 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBP1B6
+ with ESMTPSA id j0415bx51GBS1BC
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:25 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:28 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13ab766b-3fdb-4683-ae05-9169682260c7
-ARC-Seal: i=1; a=rsa-sha256; t=1622563885; cv=none;
+X-Inumbo-ID: 634c5233-a18d-4ebb-9836-a0592a04f72c
+ARC-Seal: i=1; a=rsa-sha256; t=1622563888; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=Q8tN60+RqOha/MCXIQ5n8Okf/eCE4XN4QKhcqJNEH4fZXpfnhdq1Mhn5RraxGGhURH
-    bR2V3bg8mIRVxZhQd9j1M3EBFN4HTux1HLo56QpEB/Gxbo6JOG1f0QcftuzC+MeDRv7i
-    wU77+TyThcRMJ1EdIUcxG4X3nP+Sq8mODjxlYfaeKbwmClPa7woA6uNk3tI6v1hrf4O5
-    IXwfnpqnCWi6HP6WdFWLjThkI5sNIypXP2ec7UnoBCaAc3Ifuh15qusQ4JMHU/p25Vef
-    dCUcnFHg/OdvfpwLvwXct7TJtQjpbWaoZMQEHXea/r6wj6xn/I1WCc1gmhtDhRybPImn
-    XJPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563885;
+    b=H8lJPq/K477YKdql0qIATRzz7uyTOc6B28Ae8wq/QXQHwmHhuuI+ZHR1jvElGTWjYV
+    eM7B8be88v9B8z8grOxNUJf2YuyvD4bmjf+XRmHwaEUmMTU1zlbOwz5YLshzxDIcGPLy
+    wIQ1F0eupzLwDA+IhtyK78bixDxiEeAEnmXjV6Y+S/OctdupEY2ejYaf+vYHR3A9RUyq
+    LD8AHSVjS+/veeZV1BbSOS5fr5DfRCTDIkZFr/lSie14xSuTSbX5kRsicP/w5yjQFPRs
+    tS/GWzShpP34YCik9znfhQ2D9QLH81nfeuqpmjfXYhHWRk0nvhbyapxMz1gnqO3Sz1Ov
+    PPBA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563888;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ti7wpap7OKPtBty/ilhF07cZXxS6hyTWcz0abirc9Nk=;
-    b=NlPTluv9dqlH2y81U97VooLLFW933ZhYmDeUIoPU04RBuEqy11hEOu/YqD9RUud8AG
-    4EmoFn+72H4J0QwM2rqMQ+EB9PxXbwBFfMbqKNQgMh4QkT4SrDhgMoyrDy2bBOTJevK9
-    8FryrKOg/HxOAfYTCtBtIu+5HzYTMf7tuak3wWU2Lqb3wQ+461DDPpdfr2IyZcllc6hf
-    oN8FNN5l7cEBd3zVMyhJ8yCoUdKYh7HsLXRpiArQbdvtPE+Jqv9M2Y5n2luWdb4VkwOn
-    Wk2S1SfZ2N3FsRTDqx0vi25FVmC6vCvuaZogANWP4q6kjCjw+Ft10E7yupTRpZizgIbb
-    5zPQ==
+    bh=sTwQgwZm9rWRjmRsqDvzAs56CeWxNcqTtl2Vld2f57Q=;
+    b=C6+utwmof9OOi4xjLK2eK3ZNkf7VrIebRVjGqdisVPh9ofzjJpJC56r0cNLUdQp6bP
+    vZNS3sevpo+5eQWncU7OHHrWfY1xGdAIyaaH/PzieZlf1GiVNaB7hGRTr0fcIEyFG2SZ
+    OHXcc2ARFfviE5zwtNi2lY1xmaajinr/MBYZe4kRsOhG+e79zFatl0dcgKZWGmJ6FWYc
+    kdXaqIOa36qjmQkBfBZY0jVHdmCJovzjaHVKRvQIU8CMJFhMzXR2iVirEtFlZb8WTlLr
+    tz3+fQZtM+LcEzagdGuqBxnFmYQgYq6M6CaDJ66VxT7qo5y8SY35vDeXLQJNXuJgS2VW
+    p6lg==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563885;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563888;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ti7wpap7OKPtBty/ilhF07cZXxS6hyTWcz0abirc9Nk=;
-    b=elofRk4c6+a0/b7PP9QcqvXDvSWVEb5gDa8oAMVpm4vMk6jdtWIkhVRdaQG6anPHjs
-    rze8P0ywimL3CGv4VwC2MCHyx5V03dXo6+yaNiNPsEstbtFafrFTBl8btXejoOGbNWQw
-    4QWm/GibrNHC3k0EwzwNOOl+asl/XaG+4lZkBlOmCD9izIGAth3l2WKT4/3T6k4fMsJT
-    CKDyLDJoVQccGr6oXvtIjFRouK+g7tijGkc2NSnCIOxG2T4PAyQYtjTf1PkxF+z4VDir
-    0nRHFlteuEjT/O09+DlcuzGLtnr+QcO0sEpeCQhByhMSKQk1JtMsSzqVrN14Wok3nZRq
-    eVxQ==
+    bh=sTwQgwZm9rWRjmRsqDvzAs56CeWxNcqTtl2Vld2f57Q=;
+    b=KB6pKtR4ZTfiqdk49MNfSbkAa7AWVIrl1ZMbYq/HM7amcx5uEK6E4YI5YovRWFau6m
+    TdnCuuwI7/4YtBtUdZT0XB8pehAwaoY0EPrO7lXtutGIg4aVt653oEtqZbUsjDNgrQhk
+    N2N2aIo7VTgxjbOPX5TMWnLEkVcjv7OeGPNn0pscYMxqk0Vgv5yVkMdxsaIuJui8U/dd
+    ZLaaKBW1Di1H17/05oTLG6M3cD39YDrqz8D0jFnATmqazbBa/v77JIowK1KK4XL9wXUD
+    FkhZaeiLfvvnBtNoV2CFPO8zYPGPWx71Q+Pe8byGRdNYyM+1W8SNxMFyHdqexOTCfw1C
+    YrFQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -95,60 +96,155 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 01/38] tools: add API to work with sevaral bits at once
-Date: Tue,  1 Jun 2021 18:10:41 +0200
-Message-Id: <20210601161118.18986-2-olaf@aepfle.de>
+Subject: [PATCH v20210601 07/38] tools: unify type checking for data pfns in migration stream
+Date: Tue,  1 Jun 2021 18:10:47 +0200
+Message-Id: <20210601161118.18986-8-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce new API to test if a fixed number of bits is clear or set,
-and clear or set them all at once.
+Introduce a helper which decides if a given pfn type has data
+for the migration stream.
 
-The caller has to make sure the input bitnumber is a multiply of BITS_PER_LONG.
-
-This API avoids the loop over each bit in a known range just to see
-if all of them are either clear or set.
+No change in behavior intended.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/ctrl/xc_bitops.h | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ tools/libs/saverestore/common.h  | 17 ++++++++++++++++
+ tools/libs/saverestore/restore.c | 34 +++++---------------------------
+ tools/libs/saverestore/save.c    | 14 ++-----------
+ 3 files changed, 24 insertions(+), 41 deletions(-)
 
-diff --git a/tools/libs/ctrl/xc_bitops.h b/tools/libs/ctrl/xc_bitops.h
-index f0bac4a071..92f38872fb 100644
---- a/tools/libs/ctrl/xc_bitops.h
-+++ b/tools/libs/ctrl/xc_bitops.h
-@@ -77,4 +77,29 @@ static inline void bitmap_or(void *_dst, const void *_other,
-         dst[i] |= other[i];
- }
+diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
+index 36946e5d48..50a8479d39 100644
+--- a/tools/libs/saverestore/common.h
++++ b/tools/libs/saverestore/common.h
+@@ -467,6 +467,23 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+ /* Handle a STATIC_DATA_END record. */
+ int handle_static_data_end(struct xc_sr_context *ctx);
  
-+static inline int test_bit_long_set(unsigned long nr_base, const void *_addr)
++static inline bool page_type_has_stream_data(uint32_t type)
 +{
-+    const unsigned long *addr = _addr;
-+    unsigned long val = addr[nr_base / BITS_PER_LONG];
-+    return val == ~0;
-+}
++    bool ret;
 +
-+static inline int test_bit_long_clear(unsigned long nr_base, const void *_addr)
-+{
-+    const unsigned long *addr = _addr;
-+    unsigned long val = addr[nr_base / BITS_PER_LONG];
-+    return val == 0;
++    switch (type)
++    {
++    case XEN_DOMCTL_PFINFO_XTAB:
++    case XEN_DOMCTL_PFINFO_XALLOC:
++    case XEN_DOMCTL_PFINFO_BROKEN:
++        ret = false;
++        break;
++    default:
++        ret = true;
++        break;
++    }
++    return ret;
 +}
-+
-+static inline void clear_bit_long(unsigned long nr_base, void *_addr)
-+{
-+    unsigned long *addr = _addr;
-+    addr[nr_base / BITS_PER_LONG] = 0;
-+}
-+
-+static inline void set_bit_long(unsigned long nr_base, void *_addr)
-+{
-+    unsigned long *addr = _addr;
-+    addr[nr_base / BITS_PER_LONG] = ~0;
-+}
- #endif  /* XC_BITOPS_H */
+ #endif
+ /*
+  * Local variables:
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index cccb0dcb71..700f9e74b5 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -152,9 +152,8 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+ 
+     for ( i = 0; i < count; ++i )
+     {
+-        if ( (!types || (types &&
+-                         (types[i] != XEN_DOMCTL_PFINFO_XTAB &&
+-                          types[i] != XEN_DOMCTL_PFINFO_BROKEN))) &&
++        if ( (!types ||
++              (types && page_type_has_stream_data(types[i]) == true)) &&
+              !pfn_is_populated(ctx, original_pfns[i]) )
+         {
+             rc = pfn_set_populated(ctx, original_pfns[i]);
+@@ -233,25 +232,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+     {
+         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+ 
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_NOTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L1TAB:
+-        case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L2TAB:
+-        case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L3TAB:
+-        case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L4TAB:
+-        case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
++        if ( page_type_has_stream_data(types[i]) == true )
+             mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
+-            break;
+-        }
+     }
+ 
+     /* Nothing to do? */
+@@ -271,14 +253,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+ 
+     for ( i = 0, j = 0; i < count; ++i )
+     {
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_XTAB:
+-        case XEN_DOMCTL_PFINFO_BROKEN:
+-        case XEN_DOMCTL_PFINFO_XALLOC:
+-            /* No page data to deal with. */
++        if ( page_type_has_stream_data(types[i]) == false )
+             continue;
+-        }
+ 
+         if ( map_errs[j] )
+         {
+@@ -413,7 +389,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+             goto err;
+         }
+ 
+-        if ( type < XEN_DOMCTL_PFINFO_BROKEN )
++        if ( page_type_has_stream_data(type) == true )
+             /* NOTAB and all L1 through L4 tables (including pinned) should
+              * have a page worth of data in the record. */
+             pages_of_data++;
+diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
+index 8d449ee0ae..bcff2d28f5 100644
+--- a/tools/libs/saverestore/save.c
++++ b/tools/libs/saverestore/save.c
+@@ -153,13 +153,8 @@ static int write_batch(struct xc_sr_context *ctx)
+             goto err;
+         }
+ 
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_BROKEN:
+-        case XEN_DOMCTL_PFINFO_XALLOC:
+-        case XEN_DOMCTL_PFINFO_XTAB:
++        if ( page_type_has_stream_data(types[i]) == false )
+             continue;
+-        }
+ 
+         mfns[nr_pages++] = mfns[i];
+     }
+@@ -177,13 +172,8 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+         for ( i = 0, p = 0; i < nr_pfns; ++i )
+         {
+-            switch ( types[i] )
+-            {
+-            case XEN_DOMCTL_PFINFO_BROKEN:
+-            case XEN_DOMCTL_PFINFO_XALLOC:
+-            case XEN_DOMCTL_PFINFO_XTAB:
++            if ( page_type_has_stream_data(types[i]) == false )
+                 continue;
+-            }
+ 
+             if ( errors[p] )
+             {
 
