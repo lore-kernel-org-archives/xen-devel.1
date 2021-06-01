@@ -2,46 +2,47 @@ Return-Path: <SRS0=atsh=K3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFF05C47092
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11C0FC47092
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7698E60FD8
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7698E60FD8
+	by mail.kernel.org (Postfix) with ESMTPS id 89C426101C
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:11:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89C426101C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134978.250975 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134980.250992 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zJ-0005Et-JV; Tue, 01 Jun 2021 16:11:29 +0000
+	id 1lo6zP-0005eM-AZ; Tue, 01 Jun 2021 16:11:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134978.250975; Tue, 01 Jun 2021 16:11:29 +0000
+Received: by outflank-mailman (output) from mailman id 134980.250992; Tue, 01 Jun 2021 16:11:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zJ-0005Em-GD; Tue, 01 Jun 2021 16:11:29 +0000
-Received: by outflank-mailman (input) for mailman id 134978;
- Tue, 01 Jun 2021 16:11:28 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lo6zP-0005c3-68; Tue, 01 Jun 2021 16:11:35 +0000
+Received: by outflank-mailman (input) for mailman id 134980;
+ Tue, 01 Jun 2021 16:11:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo6zI-0005Ec-1S
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:28 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [85.215.255.21])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 032e56eb-b77e-45fe-b95a-fb2950e57e76;
- Tue, 01 Jun 2021 16:11:26 +0000 (UTC)
+ id 1lo6zO-0005X1-0o
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:34 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.83])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4413065c-d112-4774-a33b-349495fd5293;
+ Tue, 01 Jun 2021 16:11:32 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBO1B5
+ with ESMTPSA id j0415bx51GBR1BB
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:24 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:27 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,157 +54,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 032e56eb-b77e-45fe-b95a-fb2950e57e76
-ARC-Seal: i=1; a=rsa-sha256; t=1622563885; cv=none;
+X-Inumbo-ID: 4413065c-d112-4774-a33b-349495fd5293
+ARC-Seal: i=1; a=rsa-sha256; t=1622563888; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=o8goBTfDenihvrljGvM2v005zlEHG9m3nfjPFkZi+A8YYUoOXANIc/PMTs2jKJtIXc
-    lILFicKM6EtuEJN30gTYYvTISdXa+nfEoqRn4ziuUEhFbkDAMX5qiTCfrf78WSaMadyo
-    UIITWgrFrEkP+0gz0ewjWxnQT8tiZgd007T8RwW86VPpUPON8TvVc/gGV2s0c476A6TV
-    agR0h9HREPQHHMnx3iNnxkgZuEtH5oXGae6ws1KtP4jgwISbIlFATM+5WZswQAZp5TXz
-    XlM3uQrxI/Fvg44UAFyjH4PM9otFaCeyhTTQZRHSS/f7K8yTUNys0xWe8zGq+mCgtGfZ
-    xZ9A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563885;
+    b=DgU87WsRh140kAE9TWo8r3FrWteINAYMMfUBdn8sMf+WLhlYtnUV+9gTzJ2ZhipOFk
+    +o7WvTY1KoYyCYNg/mvF09j44xxF034sxcTh8r/Coc51YIcmmJVF8i8/CuOarsNGiPvH
+    Ux1To3IUtDs5VAXJ/zrj8S11JEiiJk7Fpe/KNRelscm/lQwXnIwDd2Plpg14qyuW8O6i
+    ewxJT4xHE287ykPD8o09R7p4oJ7IDu+okvS3lTrOXNJuBjhM/XKlPckvaf3cwSJW8a0A
+    sUvK+gQ/5AA3DgjcIJUkVDpus2wG18Uc9U0XqiK44gjdxs+V0ulLGY+EHXOtkbNOQPaf
+    0QSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563888;
     s=strato-dkim-0002; d=strato.com;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=bw53oX3KFyhVByZkDFnW7+r8yCMylKYkPgRao8lX0jQ=;
-    b=nTyRSGG038jERdFo72r9AEpau6SvPmKojB17028m0nlQ+9NAyVZc5InMFvUJdGqrVH
-    AAtg0kjxm4erZWPvaWodgDMyReMmuW6qktjr0hpBLrPYZarwtXd2w7JsFjAVLTf9MPmg
-    jLS9JoMZJTb88LJPBlsskVWLkmotIryv5cNEYA5Q3p8///cGNe0093qjJHGfVZ5rTpx0
-    4tT7qnXbjubedi0B4jfB4IYc0GlyR+/CJHtfd+8cbQ6+u/gSzWyH86ainV+8F8OvTDD3
-    1tdONo4S750Lf7hA2Yh34j4ct4bZM0Sofzepsklx0AHBXppMIoX36/Jh4eRZkvrB5pJW
-    XUzA==
+    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
+    From:Subject:Sender;
+    bh=RFOd7y+e4U6vNTZpXSTmtkhWhMZi9HHw/wrHDQUGpSw=;
+    b=KV23dBncIbEZihTRJbO4NExxqIwqU+zmmb2U04PlPeViIOHVkHmAXuPMjMetbsB+sA
+    50bEcZHMKh+JzeyPG26RPoFoYAzqfLJYCV2uTAyqBwjQ58ohOl4WXvh6gFsYiUrQvM93
+    KhDlexcoE06Osg5GCFfnKvqr+8NHWh7ufZU0/E5LvIrEWYlozQGUYu5nU5W82e/DZnum
+    tjDNzGlFdkvbrL7hM0G3YaPSWH/UMPReJQ4e+eRP8ozXqOQinhjXeYaVNjJxfpW+Lybn
+    BujRGqhEU6cxPfqql9XXrPlqPrutr/2zgdK6Uq7/g/LnhGMqMuvI8QlhIL/VCxENTSmt
+    a//w==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563885;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563888;
     s=strato-dkim-0002; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=bw53oX3KFyhVByZkDFnW7+r8yCMylKYkPgRao8lX0jQ=;
-    b=QoPbrLy6f99MRAPXmhdUHvgE6u28C46qd/vJ7g7LIN5QXuvMlVh35HbD90EKiemLye
-    DHvXQ0msSeCiM6hCz9ZLjCd6gklpI9i696MtU0u0m6bBhWyUF81y3ekubgYX2uTpP/Mg
-    hkdIrsegqZl733o0flIemXNYKBs5BGoDRigoGtejw/Cgl/+RCXGGOqYps0fshEo7GtIQ
-    bqAIbspLY/cbCBjAizcyHGf6XZckpWcqTZGz2Z1rOpHf/Pw/xcFBQr0psiMNFJ+Pggu8
-    No64kSjvhOPmewQh7RyiSayDHcOPl7hjaS+XSq/GwNzuThFOo0x74ajTvSLU8Gm7XADt
-    EY/Q==
+    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
+    From:Subject:Sender;
+    bh=RFOd7y+e4U6vNTZpXSTmtkhWhMZi9HHw/wrHDQUGpSw=;
+    b=PFT2fniDwBrbJmUSN5yaULUvwdA1DzSIoDeSvoQP27u7KyVOPm000P/xpuaoFuNV5X
+    fVTeojkZrGthq694NBeSn6WM8g4YR6O6fsyZqkScWHepV4egq/E0Tn8gssGa/kKG9Vgv
+    UAh5lL0QbRfWScmkVv75iWzBzhJEosoINZ1CQPOVr+yAYMDfngx8RdcDpmFIIvRAMck/
+    qrQ1/6A670/1toUPB8t7xu94HbcYqHB9PDK/qCmajSP7a3NK2u4eQjIGpThdAq70OeaD
+    +eb0ZzP8nSnOk/9dIx3DztwVkpptW3jgEEiDjNtsMjhqr7Bv51xjnaEtQ1TraJuJELtf
+    WQjg==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH v20210601 00/38] leftover from 2020
-Date: Tue,  1 Jun 2021 18:10:40 +0200
-Message-Id: <20210601161118.18986-1-olaf@aepfle.de>
+Cc: Olaf Hering <olaf@aepfle.de>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210601 06/38] tools: use xc_is_known_page_type
+Date: Tue,  1 Jun 2021 18:10:46 +0200
+Message-Id: <20210601161118.18986-7-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
+References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Various unreviewed changes, rebase to 57f68dfd2d.
+Verify pfn type on sending side, also verify incoming batch of pfns.
 
-Olaf Hering (38):
-  tools: add API to work with sevaral bits at once
-  xl: fix description of migrate --debug
-  tools: create libxensaverestore
-  tools: add readv_exact to libxenctrl
-  tools: add xc_is_known_page_type to libxenctrl
-  tools: use xc_is_known_page_type
-  tools: unify type checking for data pfns in migration stream
-  tools: show migration transfer rate in send_dirty_pages
-  tools/guest: prepare to allocate arrays once
-  tools/guest: save: move batch_pfns
-  tools/guest: save: move mfns array
-  tools/guest: save: move types array
-  tools/guest: save: move errors array
-  tools/guest: save: move iov array
-  tools/guest: save: move rec_pfns array
-  tools/guest: save: move guest_data array
-  tools/guest: save: move local_pages array
-  tools/guest: restore: move pfns array
-  tools/guest: restore: move types array
-  tools/guest: restore: move mfns array
-  tools/guest: restore: move map_errs array
-  tools/guest: restore: move mfns array in populate_pfns
-  tools/guest: restore: move pfns array in populate_pfns
-  tools/guest: restore: split record processing
-  tools/guest: restore: split handle_page_data
-  tools/guest: restore: write data directly into guest
-  tools: recognize LIBXL_API_VERSION for 4.16
-  tools: adjust libxl_domain_suspend to receive a struct props
-  tools: change struct precopy_stats to precopy_stats_t
-  tools: add callback to libxl for precopy_policy and precopy_stats_t
-  tools: add --max_iters to libxl_domain_suspend
-  tools: add --min_remaining to libxl_domain_suspend
-  tools: add --abort_if_busy to libxl_domain_suspend
-  tools: add API for expandable bitmaps
-  tools: use xg_sr_bitmap for populated_pfns
-  tools: use superpages during restore of HVM guest
-  tools: remove migration stream verify code
-  hotplug/Linux: fix starting of xenstored with restarting systemd
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
+---
+ tools/libs/saverestore/restore.c | 3 +--
+ tools/libs/saverestore/save.c    | 6 ++++++
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
- .gitignore                                    |   2 +
- docs/man/xl.1.pod.in                          |  24 +-
- tools/hotplug/Linux/init.d/xencommons.in      |   2 +-
- tools/hotplug/Linux/launch-xenstore.in        |  40 +-
- .../Linux/systemd/xenstored.service.in        |   2 +-
- tools/include/libxl.h                         |  32 +-
- tools/include/xenguest.h                      | 186 -----
- tools/include/xensaverestore.h                | 207 ++++++
- tools/libs/Makefile                           |   1 +
- tools/libs/ctrl/xc_bitops.h                   |  25 +
- tools/libs/ctrl/xc_private.c                  |  55 +-
- tools/libs/ctrl/xc_private.h                  |  34 +
- tools/libs/guest/Makefile                     |  11 -
- tools/libs/guest/xg_dom_x86.c                 |   5 -
- tools/libs/guest/xg_offline_page.c            |   1 -
- tools/libs/guest/xg_private.h                 |   5 +
- tools/libs/guest/xg_sr_restore_x86_hvm.c      | 274 --------
- tools/libs/light/Makefile                     |   4 +-
- tools/libs/light/libxl_dom_save.c             |  24 +
- tools/libs/light/libxl_domain.c               |  10 +-
- tools/libs/light/libxl_internal.h             |   7 +
- tools/libs/light/libxl_save_helper.c          |   1 +
- tools/libs/light/libxl_save_msgs_gen.pl       |   5 +-
- tools/libs/light/libxl_stream_write.c         |   9 +-
- tools/libs/light/libxl_types.idl              |   1 +
- tools/libs/saverestore/Makefile               |  38 ++
- .../xg_sr_common.c => saverestore/common.c}   |  77 ++-
- .../xg_sr_common.h => saverestore/common.h}   | 224 +++++-
- .../common_x86.c}                             |   2 +-
- .../common_x86.h}                             |   2 +-
- .../common_x86_pv.c}                          |   2 +-
- .../common_x86_pv.h}                          |   2 +-
- .../nomigrate.c}                              |   0
- .../xg_sr_restore.c => saverestore/restore.c} | 598 ++++++++--------
- tools/libs/saverestore/restore_x86_hvm.c      | 644 ++++++++++++++++++
- .../restore_x86_pv.c}                         |  70 +-
- .../xg_sr_save.c => saverestore/save.c}       | 209 +++---
- .../save_restore.h}                           |   2 -
- .../save_x86_hvm.c}                           |   7 +-
- .../save_x86_pv.c}                            |  33 +-
- .../stream_format.h}                          |   0
- tools/libs/uselibs.mk                         |   4 +-
- tools/ocaml/libs/xl/xenlight_stubs.c          |   3 +-
- tools/xl/xl_cmdtable.c                        |  26 +-
- tools/xl/xl_migrate.c                         |  54 +-
- tools/xl/xl_saverestore.c                     |   3 +-
- 46 files changed, 1970 insertions(+), 997 deletions(-)
- create mode 100644 tools/include/xensaverestore.h
- delete mode 100644 tools/libs/guest/xg_sr_restore_x86_hvm.c
- create mode 100644 tools/libs/saverestore/Makefile
- rename tools/libs/{guest/xg_sr_common.c => saverestore/common.c} (71%)
- rename tools/libs/{guest/xg_sr_common.h => saverestore/common.h} (70%)
- rename tools/libs/{guest/xg_sr_common_x86.c => saverestore/common_x86.c} (99%)
- rename tools/libs/{guest/xg_sr_common_x86.h => saverestore/common_x86.h} (98%)
- rename tools/libs/{guest/xg_sr_common_x86_pv.c => saverestore/common_x86_pv.c} (99%)
- rename tools/libs/{guest/xg_sr_common_x86_pv.h => saverestore/common_x86_pv.h} (98%)
- rename tools/libs/{guest/xg_nomigrate.c => saverestore/nomigrate.c} (100%)
- rename tools/libs/{guest/xg_sr_restore.c => saverestore/restore.c} (67%)
- create mode 100644 tools/libs/saverestore/restore_x86_hvm.c
- rename tools/libs/{guest/xg_sr_restore_x86_pv.c => saverestore/restore_x86_pv.c} (94%)
- rename tools/libs/{guest/xg_sr_save.c => saverestore/save.c} (85%)
- rename tools/libs/{guest/xg_save_restore.h => saverestore/save_restore.h} (98%)
- rename tools/libs/{guest/xg_sr_save_x86_hvm.c => saverestore/save_x86_hvm.c} (96%)
- rename tools/libs/{guest/xg_sr_save_x86_pv.c => saverestore/save_x86_pv.c} (97%)
- rename tools/libs/{guest/xg_sr_stream_format.h => saverestore/stream_format.h} (100%)
-
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index be259a1c6b..cccb0dcb71 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -406,8 +406,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         }
+ 
+         type = (pages->pfn[i] & PAGE_DATA_TYPE_MASK) >> 32;
+-        if ( ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) >= 5) &&
+-             ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) <= 8) )
++        if ( xc_is_known_page_type(type) == false )
+         {
+             ERROR("Invalid type %#"PRIx32" for pfn %#"PRIpfn" (index %u)",
+                   type, pfn, i);
+diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
+index 92d96b0533..8d449ee0ae 100644
+--- a/tools/libs/saverestore/save.c
++++ b/tools/libs/saverestore/save.c
+@@ -147,6 +147,12 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+     {
++        if ( xc_is_known_page_type(types[i]) == false )
++        {
++            ERROR("Wrong type %#"PRIpfn" for pfn %#"PRIpfn, types[i], mfns[i]);
++            goto err;
++        }
++
+         switch ( types[i] )
+         {
+         case XEN_DOMCTL_PFINFO_BROKEN:
 
