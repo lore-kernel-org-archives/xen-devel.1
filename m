@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 012E9C47080
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:13:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFB05C47080
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:13:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A616A60FD8
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:13:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A616A60FD8
+	by mail.kernel.org (Postfix) with ESMTPS id A808860FD8
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:13:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A808860FD8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135019.251196 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135020.251206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo70v-0000Jl-Eq; Tue, 01 Jun 2021 16:13:09 +0000
+	id 1lo715-0000iu-NK; Tue, 01 Jun 2021 16:13:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135019.251196; Tue, 01 Jun 2021 16:13:09 +0000
+Received: by outflank-mailman (output) from mailman id 135020.251206; Tue, 01 Jun 2021 16:13:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo70v-0000Je-Bm; Tue, 01 Jun 2021 16:13:09 +0000
-Received: by outflank-mailman (input) for mailman id 135019;
- Tue, 01 Jun 2021 16:13:08 +0000
+	id 1lo715-0000in-KD; Tue, 01 Jun 2021 16:13:19 +0000
+Received: by outflank-mailman (input) for mailman id 135020;
+ Tue, 01 Jun 2021 16:13:18 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo70R-0005X1-1E
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:39 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
+ id 1lo70M-0005X1-18
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:34 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.100])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c58b872c-705e-46c7-a4aa-94a90b0c6dcb;
- Tue, 01 Jun 2021 16:11:47 +0000 (UTC)
+ id 00302e53-7264-4ccf-be6f-c370c8624d65;
+ Tue, 01 Jun 2021 16:11:45 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBg1Bi
+ with ESMTPSA id j0415bx51GBd1Bb
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:42 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c58b872c-705e-46c7-a4aa-94a90b0c6dcb
-ARC-Seal: i=1; a=rsa-sha256; t=1622563902; cv=none;
+X-Inumbo-ID: 00302e53-7264-4ccf-be6f-c370c8624d65
+ARC-Seal: i=1; a=rsa-sha256; t=1622563899; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=K7MnlPHaXmu4fU5RlfPrsnOzwcPTcmOAWCvSh+ooAre1bwTpwi4eMMGz/5Jv1Ig1ZW
-    JloAzpPSnJnclTW4wr7Ytk8bLdATSBiQRhf3LpoxulBCdjGwn8fEikIu6++kaZ7sPHfq
-    m9GFIxxfgtPMPPVdJKFpa2B/70/RZ3tKv/8obUaj1nj6W5e7me+PNZCLyOUaoqBecAnP
-    C+C45/54baeVovaLeEH1v31apfihBaozH7X9mlU0glNcddolHxmNutWRvmEqNjiEttZy
-    Fojaz3PuVQbehB5xyP8qO3zAvTPyTuNNoFDakouqC8rrm+uP5B2S4r6HMpOWkvv7a9a9
-    Fklw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563902;
+    b=hGephZD7UqHQtWANDp+Oel53eEzNAhaUGp/dNZuz4qmGEsyd1ZYeAmPl3I76m99/U6
+    u9dvxuflsQOFP0vxFTJTRFYRteU++Z5zWY969jj/lCx5Jb6zekj66EvCWDJRjYJU6mj2
+    +M5mmYTPmUOzu05llwonv1XmKuSrBJXUt/3VFIMXxdd+455/ScYu85BVszO9FVkTJ2tP
+    KdhDpMNHBPaH6Chk8D+BzvDxL6bEuTYH3kC6AuNA0DB5/2UrXwAvJHHbBZqO19Gyv9j7
+    0G29fv+dPnmTBdoBj23ZBIYI14af/hPmm06m6/uz+FsrXMUoIeedTx0BGTnGPgR3dD9I
+    OwZg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563899;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=fttDAmpegUqwpOBB61SFRLpHBJB9wPmVo+V4iKyUqQw=;
-    b=ZKo6xL4wFzjwUtYQMxZLthEnX/2j4XXU+ET8fslQ8JqjAiO9jlMLLDaX7tNV/rIito
-    YSjbAKL+Lgd9rhcCBSKycTE/JI+vMKvhm2LCur4Zyxg0TZeUGyGVDBoeri5jHWzi+v8m
-    5uGj4AhoMJH1/UpyRd+ABqMeblXCauuk+Qnxu4g4en0FXc8YE536ZPSMNgxEPJ7EA5vB
-    NtOn+kHn36uvexNqpQEWuZkcJfaru5vXOE5Xoup/d/KePoFZOqJoZFV2HxvZehI7SvEX
-    W6W8XvN3C4y2+CfoOWniMWikvjXytRwbvQo80fTUHzxDYBzxgh5qWXM/941Fm3bd1Yeq
-    EMfg==
+    bh=43lDIDUwBH095VtVkTuqmuE4BK9API0PDHgwKMKg2GQ=;
+    b=ctj7hFOJX3/WbRdkNZt+ZDsuhnBRoNyLVW8TeorpBWEg5JjPfF3jcs3+qLSr8gwHOT
+    EneRoF239La7oXtL/PmQm3z3FjZIjkiC1hlKLScCLBPa0sK8phX5g4tsAL8GMJ8lSqIC
+    nsV9it15egNJ6j+StsqZcbTl24yAFpL1+E22lcqmZZCwtHOLsLlMuuOvR0P6UZBnvNnz
+    KG9/rFBzOrEh23nLVKsrljjhoWo8Ydq6qx5bJ98cLLiKJIj+8zvoyG9e8CIeszSXBf9y
+    BIrIRSdfFVhpXyq39njyS+Cl0jlatZn5idWQOLFsxV/LPb6DJDcms1DSRsMeQX2PBpq+
+    YOIw==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563902;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563899;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=fttDAmpegUqwpOBB61SFRLpHBJB9wPmVo+V4iKyUqQw=;
-    b=ShTWQZKcQxZ1sfebsNAw3YaYcPQB1WYhFoM850GJhLl8wmQwEfctVTPf+8YlicvXTj
-    VlDW3wj8vaW/oiD6NQm1ua1hkBTsrESScVeGdK9/qnZ6IAKgoLi2QrU71IgL5R7JKqFu
-    SOZBrr9BV/XYgYN2PZBWv8VWy+NnFnwL8tTBdr2BjS8LjSr9CCPjYjQlWHTpZY/Qwz4s
-    uJ6yIZ97QLzsAjNs79CzpqBfvtk8o1P3YfO2jfbA8fkwYPLd4ggLTjuAP2/hUahRWXzu
-    6mIhBdYVJTtX9k2p+5OPkdMh21UKzH2P1Dk4KdBAkWGepZutG7i3uFqQ9drAKLmYKjln
-    lsCw==
+    bh=43lDIDUwBH095VtVkTuqmuE4BK9API0PDHgwKMKg2GQ=;
+    b=fw03lZoWf6At1jJTOW+AnPunAYfhTFxjvUfl2wHinBUJl1pw6D2/fXloeVmF5b+G8L
+    HgcNoLysmbrYmB6WwmGk0L1qZJs5MHgWr6r+wQuq6TlOH6j60C4OplVLi5uKyr7cVtXm
+    1hFYKzpR7ATlTbmaW/lI9IpEGZEmb2QTXlNyswZkGeH4taEbULkkFVNOWW29S6ne2OdU
+    o40HKw+//fDWytQLNe4KYveueocVd2fLgJKNTYw+1aC9RsdLL1xpquOEYq/z7evsHppq
+    EtDhz50UKUzbFsqM5bpMYq3lPVLfqXqzk8AtrfkEYCDfB65w1AztK3Bk2uaoUAdypfa6
+    o8xQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -95,173 +95,171 @@ From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 38/38] hotplug/Linux: fix starting of xenstored with restarting systemd
-Date: Tue,  1 Jun 2021 18:11:18 +0200
-Message-Id: <20210601161118.18986-39-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v20210601 31/38] tools: add --max_iters to libxl_domain_suspend
+Date: Tue,  1 Jun 2021 18:11:11 +0200
+Message-Id: <20210601161118.18986-32-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-A hard to trigger race with another unrelated systemd service and
-xenstored.service unveiled a bug in the way how xenstored is launched
-with systemd.
+Migrating a large, and potentially busy, domU will take more
+time than neccessary due to excessive number of copying iterations.
 
-launch-xenstore may start either a daemon or a domain. In case a domain
-is used, systemd-notify was called. If another service triggered a
-restart of systemd while xenstored.service was executed, systemd may
-temporary lose track of services with Type=notify. As a result,
-xenstored.service would be marked as failed and units that depend on it
-will not be started. This breaks the enire Xen toolstack.
+Allow to host admin to control the number of iterations which
+copy cumulated domU dirty pages to the target host.
 
-The chain of events is basically: xenstored.service sends the
-notification to systemd, this is a one-way event. Then systemd may be
-restarted by the other unit. During this time, xenstored.service is done
-and exits. Once systemd is done with its restart, it collects the pending
-notifications and childs. If it does not find the unit which sent the
-notification it will declare it as failed.
+The default remains 5, which means one initial iteration to copy the
+entire domU memory, and up to 4 additional iterations to copy dirty
+memory from the still running domU. After the given number of iterations
+the domU is suspended, remaining dirty memory is copied and the domU is
+finally moved to the target host.
 
-A workaround for this scenario is to leave the child processes running
-for a short time after sending the "READY=1" notification. If systemd
-happens to restart it will still find the unit it launched.
-
-Adjust the callers of launch-xenstore to specifiy the init system:
-Do not fork xenstored with systemd, preserve pid. This wil also avoid
-the need for a sleep because the process which sent the "READY=1" (the
-previously forked child) is still alive.
-
-Remove the --pid-file in the systemd case because the pid of the child
-is known, and the file had probably little effect anyway due to lack of
-PidFile= and Type=forking in the unit file.
-
-Be verbose about xenstored startup only with sysv to avoid interleaved
-output in systemd journal. Do the same also for domain case, even if is
-not strictly needed because init-xenstore-domain has no output.
-
-The fix for upstream systemd which is supposed to fix it:
-575b300b795b6 ("pid1: rework how we dispatch SIGCHLD and other signals")
+This patch adjusts xl(1) and the libxl API.
+External users check LIBXL_HAVE_DOMAIN_SUSPEND_PROPS for the availibility
+of the new .max_iters property.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
-
---
-v04:
-- do mkdir unconditionally because init-xenstore-domain writes the domid to
-  xenstored.pid
-v03:
-- remove run_xenstored function, follow style of shell built-in test function
-v02:
-- preserve Type=notify
 ---
- tools/hotplug/Linux/init.d/xencommons.in      |  2 +-
- tools/hotplug/Linux/launch-xenstore.in        | 40 ++++++++++++++-----
- .../Linux/systemd/xenstored.service.in        |  2 +-
- 3 files changed, 31 insertions(+), 13 deletions(-)
+ docs/man/xl.1.pod.in              |  4 ++++
+ tools/include/libxl.h             |  1 +
+ tools/libs/light/libxl_dom_save.c |  2 +-
+ tools/libs/light/libxl_domain.c   |  1 +
+ tools/libs/light/libxl_internal.h |  1 +
+ tools/xl/xl_cmdtable.c            |  3 ++-
+ tools/xl/xl_migrate.c             | 10 +++++++++-
+ 7 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/tools/hotplug/Linux/init.d/xencommons.in b/tools/hotplug/Linux/init.d/xencommons.in
-index 7fd6903b98..dcb0ce4b73 100644
---- a/tools/hotplug/Linux/init.d/xencommons.in
-+++ b/tools/hotplug/Linux/init.d/xencommons.in
-@@ -60,7 +60,7 @@ do_start () {
- 	mkdir -m700 -p ${XEN_LOCK_DIR}
- 	mkdir -p ${XEN_LOG_DIR}
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index ed3f4dee1e..b13e09c0ee 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -496,6 +496,10 @@ such that it will be identical on the destination host, unless that
+ configuration is overridden using the B<-C> option. Note that it is not
+ possible to use this option for a 'localhost' migration.
  
--	@XEN_SCRIPT_DIR@/launch-xenstore || exit 1
-+	@XEN_SCRIPT_DIR@/launch-xenstore 'sysv' || exit 1
- 
- 	echo Setting domain 0 name, domid and JSON config...
- 	${LIBEXEC_BIN}/xen-init-dom0 ${XEN_DOM0_UUID}
-diff --git a/tools/hotplug/Linux/launch-xenstore.in b/tools/hotplug/Linux/launch-xenstore.in
-index 019f9d6f4d..d40c66482a 100644
---- a/tools/hotplug/Linux/launch-xenstore.in
-+++ b/tools/hotplug/Linux/launch-xenstore.in
-@@ -15,6 +15,17 @@
- # License along with this library; If not, see <http://www.gnu.org/licenses/>.
- #
- 
-+initd=$1
++=item B<--max_iters> I<iterations>
 +
-+case "$initd" in
-+	sysv) nonl='-n' ;;
-+	systemd) nonl= ;;
-+	*)
-+	echo "first argument must be 'sysv' or 'systemd'"
-+	exit 1
-+	;;
-+esac
++Number of copy iterations before final suspend+move (default: 5)
 +
- XENSTORED=@XENSTORED@
+ =back
  
- . @XEN_SCRIPT_DIR@/hotplugpath.sh
-@@ -44,14 +55,16 @@ timeout_xenstore () {
- 	return 0
+ =item B<remus> [I<OPTIONS>] I<domain-id> I<host>
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 9a4d7514ed..bf77da0524 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1714,6 +1714,7 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+ 
+ typedef struct {
+     uint32_t flags; /* LIBXL_SUSPEND_* */
++    uint32_t max_iters;
+ } libxl_domain_suspend_props;
+ #define LIBXL_SUSPEND_DEBUG 1
+ #define LIBXL_SUSPEND_LIVE 2
+diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
+index 3f3cff0342..938c0127f3 100644
+--- a/tools/libs/light/libxl_dom_save.c
++++ b/tools/libs/light/libxl_dom_save.c
+@@ -383,7 +383,7 @@ static int libxl__domain_save_precopy_policy(precopy_stats_t stats, void *user)
+          stats.iteration, stats.dirty_count, stats.total_written);
+     if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
+         goto stop_copy;
+-    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
++    if (stats.iteration >= dss->max_iters)
+         goto stop_copy;
+     return XGS_POLICY_CONTINUE_PRECOPY;
+ 
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 45e0c57c3a..612d3dc4ea 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -527,6 +527,7 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
+     dss->domid = domid;
+     dss->fd = fd;
+     dss->type = type;
++    dss->max_iters = props->max_iters ?: LIBXL_XGS_POLICY_MAX_ITERATIONS;
+     dss->live = props->flags & LIBXL_SUSPEND_LIVE;
+     dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
+     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index 069c35452d..82b9dca5a0 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -3641,6 +3641,7 @@ struct libxl__domain_save_state {
+     int live;
+     int debug;
+     int checkpointed_stream;
++    uint32_t max_iters;
+     const libxl_domain_remus_info *remus;
+     /* private */
+     int rc;
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index 6fd18856c0..8f8fa72760 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -174,7 +174,8 @@ const struct cmd_spec cmd_table[] = {
+       "                of the domain.\n"
+       "--debug         Verify transferred domU page data.\n"
+       "-p              Do not unpause domain after migrating it.\n"
+-      "-D              Preserve the domain id"
++      "-D              Preserve the domain id\n"
++      "--max_iters N   Number of copy iterations before final stop+move"
+     },
+     { "restore",
+       &main_restore, 0, 1,
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index 144890924f..af117d4d56 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -178,6 +178,7 @@ static void migrate_do_preamble(int send_fd, int recv_fd, pid_t child,
+ 
+ static void migrate_domain(uint32_t domid, int preserve_domid,
+                            const char *rune, int debug,
++                           uint32_t max_iters,
+                            const char *override_config_file)
+ {
+     pid_t child = -1;
+@@ -189,6 +190,7 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     int config_len;
+     libxl_domain_suspend_props props = {
+         .flags = LIBXL_SUSPEND_LIVE,
++        .max_iters = max_iters,
+         };
+ 
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+@@ -542,8 +544,10 @@ int main_migrate(int argc, char **argv)
+     char *host;
+     int opt, daemonize = 1, monitor = 1, debug = 0, pause_after_migration = 0;
+     int preserve_domid = 0;
++    uint32_t max_iters = 0;
+     static struct option opts[] = {
+         {"debug", 0, 0, 0x100},
++        {"max_iters", 1, 0, 0x101},
+         {"live", 0, 0, 0x200},
+         COMMON_LONG_OPTS
+     };
+@@ -571,6 +575,9 @@ int main_migrate(int argc, char **argv)
+     case 0x100: /* --debug */
+         debug = 1;
+         break;
++    case 0x101: /* --max_iters */
++        max_iters = atoi(optarg);
++        break;
+     case 0x200: /* --live */
+         /* ignored for compatibility with xm */
+         break;
+@@ -605,7 +612,8 @@ int main_migrate(int argc, char **argv)
+                   pause_after_migration ? " -p" : "");
+     }
+ 
+-    migrate_domain(domid, preserve_domid, rune, debug, config_filename);
++    migrate_domain(domid, preserve_domid, rune, debug,
++                   max_iters, config_filename);
+     return EXIT_SUCCESS;
  }
  
--test_xenstore && exit 0
-+mkdir -p @XEN_RUN_DIR@
-+
-+if test "$initd" = 'sysv' ; then
-+	test_xenstore && exit 0
-+fi
- 
- test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons
- 
- [ "$XENSTORETYPE" = "" ] && XENSTORETYPE=daemon
- 
--/bin/mkdir -p @XEN_RUN_DIR@
--
- [ "$XENSTORETYPE" = "daemon" ] && {
- 	[ -z "$XENSTORED_TRACE" ] || XENSTORED_ARGS="$XENSTORED_ARGS -T @XEN_LOG_DIR@/xenstored-trace.log"
- 	[ -z "$XENSTORED" ] && XENSTORED=@XENSTORED@
-@@ -59,13 +72,15 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
- 		echo "No xenstored found"
- 		exit 1
- 	}
-+	[ "$initd" = 'sysv' ] && {
-+		echo $nonl Starting $XENSTORED...
-+		$XENSTORED --pid-file @XEN_RUN_DIR@/xenstored.pid $XENSTORED_ARGS
-+		timeout_xenstore $XENSTORED || exit 1
-+		exit 0
-+	}
- 
--	echo -n Starting $XENSTORED...
--	$XENSTORED --pid-file @XEN_RUN_DIR@/xenstored.pid $XENSTORED_ARGS
--
--	systemd-notify --booted 2>/dev/null || timeout_xenstore $XENSTORED || exit 1
--
--	exit 0
-+	exec $XENSTORED -N $XENSTORED_ARGS
-+	exit 1
- }
- 
- [ "$XENSTORETYPE" = "domain" ] && {
-@@ -75,9 +90,12 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
- 	XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS --memory $XENSTORE_DOMAIN_SIZE"
- 	[ -z "$XENSTORE_MAX_DOMAIN_SIZE" ] || XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS --maxmem $XENSTORE_MAX_DOMAIN_SIZE"
- 
--	echo -n Starting $XENSTORE_DOMAIN_KERNEL...
-+	echo $nonl Starting $XENSTORE_DOMAIN_KERNEL...
- 	${LIBEXEC_BIN}/init-xenstore-domain $XENSTORE_DOMAIN_ARGS || exit 1
--	systemd-notify --ready 2>/dev/null
-+	[ "$initd" = 'systemd' ] && {
-+		systemd-notify --ready
-+		sleep 9
-+	}
- 
- 	exit 0
- }
-diff --git a/tools/hotplug/Linux/systemd/xenstored.service.in b/tools/hotplug/Linux/systemd/xenstored.service.in
-index 80c1d408a5..c226eb3635 100644
---- a/tools/hotplug/Linux/systemd/xenstored.service.in
-+++ b/tools/hotplug/Linux/systemd/xenstored.service.in
-@@ -11,7 +11,7 @@ Type=notify
- NotifyAccess=all
- RemainAfterExit=true
- ExecStartPre=/bin/grep -q control_d /proc/xen/capabilities
--ExecStart=@XEN_SCRIPT_DIR@/launch-xenstore
-+ExecStart=@XEN_SCRIPT_DIR@/launch-xenstore 'systemd'
- 
- [Install]
- WantedBy=multi-user.target
 
