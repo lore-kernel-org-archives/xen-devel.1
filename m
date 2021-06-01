@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A25EBC47096
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69E2FC4709A
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 611CB60232
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 611CB60232
+	by mail.kernel.org (Postfix) with ESMTPS id 402E7610E7
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 402E7610E7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.134989.251075 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.134994.251102 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zi-00009s-DQ; Tue, 01 Jun 2021 16:11:54 +0000
+	id 1lo6zo-0001Nx-KR; Tue, 01 Jun 2021 16:12:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 134989.251075; Tue, 01 Jun 2021 16:11:54 +0000
+Received: by outflank-mailman (output) from mailman id 134994.251102; Tue, 01 Jun 2021 16:12:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo6zi-00009U-8h; Tue, 01 Jun 2021 16:11:54 +0000
-Received: by outflank-mailman (input) for mailman id 134989;
- Tue, 01 Jun 2021 16:11:53 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lo6zo-0001LY-85; Tue, 01 Jun 2021 16:12:00 +0000
+Received: by outflank-mailman (input) for mailman id 134994;
+ Tue, 01 Jun 2021 16:11:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo6zh-0005Ec-1H
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:53 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.171])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c2cc1909-2698-480b-8f54-aba8ac30e54e;
- Tue, 01 Jun 2021 16:11:34 +0000 (UTC)
+ id 1lo6zm-0005X1-Vx
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:11:59 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.170])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 6934594f-8962-4454-8048-10c9b500185c;
+ Tue, 01 Jun 2021 16:11:38 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBS1BD
+ with ESMTPSA id j0415bx51GBY1BP
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:28 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:34 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2cc1909-2698-480b-8f54-aba8ac30e54e
-ARC-Seal: i=1; a=rsa-sha256; t=1622563889; cv=none;
+X-Inumbo-ID: 6934594f-8962-4454-8048-10c9b500185c
+ARC-Seal: i=1; a=rsa-sha256; t=1622563894; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=rnJXdhgrXacgywk38aKsQE7O0+NhpB+PxH/eZKPkEcLT/M19R5KSVeg8kCZYBLfUUA
-    AdK8ByK7g8edyjpdC7wtaQdGV+riv8mzN0QZrHHVT5y415uX87SFAHYOCO2DpwLRybAt
-    NKdF1K64VpqL/FYm0MwUhnwW3XpTyYDIxhk5LwO67BI3a1GlxlmTD3UyVn/JVhku7nq4
-    yZz1zI+OXSZOuaQghShoAUHIL2xfbTZLYn6RsoahVmr9zDdW7DcEZkUg/J1ghXqmdWf7
-    VSHUg0yFXt2NyvLmiNrYyw9lrF25GKrq6yJpQ55Svxti2YNMGqLcm/bFJ7ViY0af9RY4
-    bVZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563889;
+    b=ClxwDl0qOSDjoIzNwbzCmJ4ADXloUwbcJ7wlHM4iM61l6JqODFCZZpqcu0/GlNFtlG
+    5oA2jSfzWBMYdDDzvhd3lnaUbTHRVkTFASjvrgWoXjHxyBLaXavo/dcy3Cl1KKGpfRwa
+    6t240vWP1WoA+vo0e/qyvLEoJCqXumv1FMIpvN7F6F/xFhtb4lS0FM/Q2dK+bwxgH44M
+    HG4dud/1aqI7dpg0Lp5tO4CYltpEK0jqmgTkRZ3ErK8vc8LRIwB60FsntryBmVe6sRvK
+    DwT9ikobnc+pdygCRehXCwJU2aWA0mpVU+tady/FNC63CQYB2hvwic+r8nmyhQ9xEgz6
+    9nKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563894;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=cDil57jxI4Z5Z9nbXjVlKKlvOaQMfsb66RRaO8m9ED8=;
-    b=eUW5+lj09D+EqeYYhWwyDOnODC1rQFKFUnFVTvraE2R2lM4Frg5cOvunGY6tW5XPMf
-    9WNVbsiXm/xvd2/LkVdhmd0GgV2Zqk+k+RZmn81G+4wqIUriS+nslfVg0ZXXRtxtEwm6
-    NInQxJoQLUvRCR1kxHcrv/otELiU7bcy18W56VhYV/S+dFLXRRWglzVgHUIVYlS3jvfy
-    6vEmdDhlC6rDuRcC2KiOtsWG02mipc+rj1LX0FjNnoS2mP9I9j1Y0lyYCAR7uZX0r8ij
-    p0WgLa8Alv0NiBcWfDihUQcZUn/kj3PzktUykj5jDeUS8YjDxV9EamF4SZWum1zZCN7K
-    rKDg==
+    bh=z4yh0601yitxQDA4KYzEdbnjeAj2W9nnPiW8js19Yoc=;
+    b=tRhf971bAx8V7lliMKUwnmZnrWq10x1IewtiX9BIroszIi5zpyi9whPdppL+JfkjWh
+    48m1XweFg1qyXLA++7UWS6rAierRXtXnKrY/0X4250XBEqxd9y13pBuViuPEqz9wc9lv
+    1GOQh10dVz9lVYEZsR2K2dJA1hU6XoquqN9Pkexf3heRUUqE4rOFndz10ooMqqwKvmXR
+    Yq4Nsc8l0Ne2n6e49UJktQOK+b4qCX6j4IFEBjGdrLJZiI34aw1P2hZHSe7h/FGE+sAl
+    GHGTFexX7BV9by0Xn5jz71OeoBzZbW0BEZSS7mz0xLL9nDgHGNJS631r1ue1yZdQG4Wb
+    4Hrw==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563889;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563894;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=cDil57jxI4Z5Z9nbXjVlKKlvOaQMfsb66RRaO8m9ED8=;
-    b=hNSJVlEhOJlKLSnCwsYffA1aYwF0tB02Ok2uJ21W3vA/ExnRX0/9xUPLYs1JpLlotg
-    m4vphErILK7zWQwilFZ2DvEgeebVRQ8nouo91ktzb9yHleGt+srZkLPC//+yOXLJN8Rk
-    DkZ1ezBLEGpahNxBOIV5rbPrzAM3hk059Z/0681Th/S+0HoqJvW8Th/S5WtTP2gr1YaU
-    nQ5M+vGShR0Ey+L00f5Q6O2JtU9q5oM2RpJ/MyEXMhM5hbNvU70gf9iVGZ3TYREq26uM
-    KUO2ql8E6ybCmzCisCzTDtByTrYo7v50wxzaCrVHm61HZnag1J95lamGSp6dGIv2e1Pi
-    3G9Q==
+    bh=z4yh0601yitxQDA4KYzEdbnjeAj2W9nnPiW8js19Yoc=;
+    b=JL0R7wiQcmcqwYI3HwBz4r03ZaCVbE7XBGrVZIHr49HwKasO7txilGAoztHfqC/8Za
+    fbrsr0orj2xYnTaByMb4rQqkb3KnydVeOKdhvFV9xzNVPFM6QoqJowWvTSqPkSq2StxM
+    xKAq3fwBOCVknK6+1S14D3+RLEIwviAlTl+gIYjN3rkj9F/jVOqAeOYSmgBCCwtJEKU9
+    zTF0zC8IdF+lSl2B17vPfcVeZpwDCqQpjddYhQOZIYDWy9kMkLodPhKjp5KiGSL685WF
+    rnZ5/qcRV1+ptvuhFxLCdaTK14i0Dhu/ZhlRB1p3x137VvJ1p6DOmIqNLI02+9TNx0+2
+    3RcA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -95,125 +96,64 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 08/38] tools: show migration transfer rate in send_dirty_pages
-Date: Tue,  1 Jun 2021 18:10:48 +0200
-Message-Id: <20210601161118.18986-9-olaf@aepfle.de>
+Subject: [PATCH v20210601 20/38] tools/guest: restore: move mfns array
+Date: Tue,  1 Jun 2021 18:11:00 +0200
+Message-Id: <20210601161118.18986-21-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Show how fast domU pages are transferred in each iteration.
-
-The relevant data is how fast the pfns travel, not so much how much
-protocol overhead exists. So the reported MiB/sec is just for pfns.
+Remove allocation from hotpath, move mfns array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/saverestore/common.h |  2 ++
- tools/libs/saverestore/save.c   | 47 +++++++++++++++++++++++++++++++++
- 2 files changed, 49 insertions(+)
+ tools/libs/saverestore/common.h  | 2 ++
+ tools/libs/saverestore/restore.c | 5 ++---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 50a8479d39..f5fe23caad 100644
+index 96cd60e0d6..c7291bb5ca 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -250,6 +250,8 @@ struct xc_sr_context
-             bool debug;
+@@ -239,6 +239,8 @@ struct xc_sr_restore_arrays {
+     /* handle_page_data */
+     xen_pfn_t pfns[MAX_BATCH_SIZE];
+     uint32_t types[MAX_BATCH_SIZE];
++    /* process_page_data */
++    xen_pfn_t mfns[MAX_BATCH_SIZE];
+ };
  
-             unsigned long p2m_size;
-+            size_t pages_sent;
-+            size_t overhead_sent;
- 
-             struct precopy_stats stats;
- 
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index bcff2d28f5..760ca04a84 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -1,5 +1,6 @@
- #include <assert.h>
- #include <arpa/inet.h>
-+#include <time.h>
- 
- #include "common.h"
- 
-@@ -238,6 +239,8 @@ static int write_batch(struct xc_sr_context *ctx)
-     iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
- 
-     iovcnt = 4;
-+    ctx->save.pages_sent += nr_pages;
-+    ctx->save.overhead_sent += sizeof(rec) + sizeof(hdr) + nr_pfns * sizeof(*rec_pfns);
- 
-     if ( nr_pages )
-     {
-@@ -357,6 +360,43 @@ static int suspend_domain(struct xc_sr_context *ctx)
-     return 0;
- }
- 
-+static void show_transfer_rate(struct xc_sr_context *ctx, struct timespec *start)
-+{
-+    xc_interface *xch = ctx->xch;
-+    struct timespec end = {}, diff = {};
-+    size_t ms, MiB_sec = ctx->save.pages_sent * PAGE_SIZE;
-+
-+    if (!MiB_sec)
-+        return;
-+
-+    if ( clock_gettime(CLOCK_MONOTONIC, &end) )
-+        PERROR("clock_gettime");
-+
-+    if ( (end.tv_nsec - start->tv_nsec) < 0 )
-+    {
-+        diff.tv_sec = end.tv_sec - start->tv_sec - 1;
-+        diff.tv_nsec = end.tv_nsec - start->tv_nsec + (1000U*1000U*1000U);
-+    }
-+    else
-+    {
-+        diff.tv_sec = end.tv_sec - start->tv_sec;
-+        diff.tv_nsec = end.tv_nsec - start->tv_nsec;
-+    }
-+
-+    ms = (diff.tv_nsec / (1000U*1000U));
-+    if (!ms)
-+        ms = 1;
-+    ms += (diff.tv_sec * 1000U);
-+
-+    MiB_sec *= 1000U;
-+    MiB_sec /= ms;
-+    MiB_sec /= 1024U*1024U;
-+
-+    errno = 0;
-+    IPRINTF("%s: %zu bytes + %zu pages in %ld.%09ld sec, %zu MiB/sec", __func__,
-+            ctx->save.overhead_sent, ctx->save.pages_sent, diff.tv_sec, diff.tv_nsec, MiB_sec);
-+}
-+
- /*
-  * Send a subset of pages in the guests p2m, according to the dirty bitmap.
-  * Used for each subsequent iteration of the live migration loop.
-@@ -370,9 +410,15 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
-     xen_pfn_t p;
-     unsigned long written;
+ struct xc_sr_context
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index 815a2d5a12..aadf322428 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -205,7 +205,7 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+                              xen_pfn_t *pfns, uint32_t *types, void *page_data)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = malloc(count * sizeof(*mfns));
++    xen_pfn_t *mfns = ctx->restore.m->mfns;
+     int *map_errs = malloc(count * sizeof(*map_errs));
      int rc;
-+    struct timespec start = {};
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->save.dirty_bitmap_hbuf);
+     void *mapping = NULL, *guest_page = NULL;
+@@ -213,7 +213,7 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         j,          /* j indexes the subset of pfns we decide to map. */
+         nr_pages = 0;
  
-+    ctx->save.pages_sent = 0;
-+    ctx->save.overhead_sent = 0;
-+    if ( clock_gettime(CLOCK_MONOTONIC, &start) )
-+        PERROR("clock_gettime");
-+
-     for ( p = 0, written = 0; p < ctx->save.p2m_size; ++p )
+-    if ( !mfns || !map_errs )
++    if ( !map_errs )
      {
-         if ( !test_bit(p, dirty_bitmap) )
-@@ -396,6 +442,7 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
-     if ( written > entries )
-         DPRINTF("Bitmap contained more entries than expected...");
+         rc = -1;
+         ERROR("Failed to allocate %zu bytes to process page data",
+@@ -299,7 +299,6 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         xenforeignmemory_unmap(xch->fmem, mapping, nr_pages);
  
-+    show_transfer_rate(ctx, &start);
-     xc_report_progress_step(xch, entries, entries);
+     free(map_errs);
+-    free(mfns);
  
-     return ctx->save.ops.check_vm_state(ctx);
+     return rc;
+ }
 
