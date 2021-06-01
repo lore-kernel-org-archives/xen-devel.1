@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5131DC47097
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 012E9C47080
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:13:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1A08D60FD8
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:12:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A08D60FD8
+	by mail.kernel.org (Postfix) with ESMTPS id A616A60FD8
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Jun 2021 16:13:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A616A60FD8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135011.251185 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135019.251196 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo709-00065a-2z; Tue, 01 Jun 2021 16:12:21 +0000
+	id 1lo70v-0000Jl-Eq; Tue, 01 Jun 2021 16:13:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135011.251185; Tue, 01 Jun 2021 16:12:21 +0000
+Received: by outflank-mailman (output) from mailman id 135019.251196; Tue, 01 Jun 2021 16:13:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lo708-000624-RE; Tue, 01 Jun 2021 16:12:20 +0000
-Received: by outflank-mailman (input) for mailman id 135011;
- Tue, 01 Jun 2021 16:12:19 +0000
+	id 1lo70v-0000Je-Bm; Tue, 01 Jun 2021 16:13:09 +0000
+Received: by outflank-mailman (input) for mailman id 135019;
+ Tue, 01 Jun 2021 16:13:08 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HQ7/=K3=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lo707-0005X1-0T
- for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:19 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.104])
+ id 1lo70R-0005X1-1E
+ for xen-devel@lists.xenproject.org; Tue, 01 Jun 2021 16:12:39 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 08fba356-fd76-4932-91f5-08adea71b95f;
- Tue, 01 Jun 2021 16:11:42 +0000 (UTC)
+ id c58b872c-705e-46c7-a4aa-94a90b0c6dcb;
+ Tue, 01 Jun 2021 16:11:47 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx51GBc1BZ
+ with ESMTPSA id j0415bx51GBg1Bi
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 1 Jun 2021 18:11:38 +0200 (CEST)
+ Tue, 1 Jun 2021 18:11:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08fba356-fd76-4932-91f5-08adea71b95f
-ARC-Seal: i=1; a=rsa-sha256; t=1622563898; cv=none;
+X-Inumbo-ID: c58b872c-705e-46c7-a4aa-94a90b0c6dcb
+ARC-Seal: i=1; a=rsa-sha256; t=1622563902; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=h/1sE7f735WbI7yPgAA9MGI8Nd6R6y99TEAhwGOGR88axJzA6YQjdLY2jnSRo+J5bh
-    5VOeSe2YgyrbJpL4PSRovNzBUm7YRtu605kwZlKHaIaSdgEmXhYGXgyb3RWbNy0Auwuv
-    FdeeXRfdfoYPwzZvXldE4kQt4fLYEk/PdDNVUQcP5xIzXDmuVTnPSIGAFYNQ5s/gEn8q
-    Vr5VQIXEQRjHNpuJetYWUytNmm4uxWKX8p9bKZpGh94EAVgIj4+Ik5Z0FpD8o6EVLSGP
-    McWZIDRVmBFeg3yMN9wGHdkbF+NHpQBnUHl2j2EnGzmw+/wKVBozM73uvonXhsvPFWq3
-    gy5Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563898;
+    b=K7MnlPHaXmu4fU5RlfPrsnOzwcPTcmOAWCvSh+ooAre1bwTpwi4eMMGz/5Jv1Ig1ZW
+    JloAzpPSnJnclTW4wr7Ytk8bLdATSBiQRhf3LpoxulBCdjGwn8fEikIu6++kaZ7sPHfq
+    m9GFIxxfgtPMPPVdJKFpa2B/70/RZ3tKv/8obUaj1nj6W5e7me+PNZCLyOUaoqBecAnP
+    C+C45/54baeVovaLeEH1v31apfihBaozH7X9mlU0glNcddolHxmNutWRvmEqNjiEttZy
+    Fojaz3PuVQbehB5xyP8qO3zAvTPyTuNNoFDakouqC8rrm+uP5B2S4r6HMpOWkvv7a9a9
+    Fklw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563902;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=qhG0lw5KlRBNwnqR+lID3/utnVv1YZhnHFw1MeFsVt0=;
-    b=tYY9fiG0VkhKyuGz+oE3vIiS809HD/c+N/9Ys7iBjS+CyGF+CSR4w7D9tHxz+TKhWb
-    pPYUls34Tin16HTrYKaO5CtWJE9ReALQ55d48RaJFgUymUC5wsse8lGzJOQshWAz9ysp
-    pct+EV3Jw3y1iRNgm9+/smZBh8vNSKImwSDUHuVCvXhGMqEkOW2BMqmO3z3UzSv1Uutf
-    VwWnmNu49YTBj/sLJv0N9LtCA5JnaV894ExYxPVaY6vHl/cc7O8p8hV8o23KGwMSOCqs
-    7aV5MGhUdGIEGQ3epJVuzz4yFXTJVH354AS99TSU+t5Km0CELIxcGtVGjSypQXYKyOop
-    9d4g==
+    bh=fttDAmpegUqwpOBB61SFRLpHBJB9wPmVo+V4iKyUqQw=;
+    b=ZKo6xL4wFzjwUtYQMxZLthEnX/2j4XXU+ET8fslQ8JqjAiO9jlMLLDaX7tNV/rIito
+    YSjbAKL+Lgd9rhcCBSKycTE/JI+vMKvhm2LCur4Zyxg0TZeUGyGVDBoeri5jHWzi+v8m
+    5uGj4AhoMJH1/UpyRd+ABqMeblXCauuk+Qnxu4g4en0FXc8YE536ZPSMNgxEPJ7EA5vB
+    NtOn+kHn36uvexNqpQEWuZkcJfaru5vXOE5Xoup/d/KePoFZOqJoZFV2HxvZehI7SvEX
+    W6W8XvN3C4y2+CfoOWniMWikvjXytRwbvQo80fTUHzxDYBzxgh5qWXM/941Fm3bd1Yeq
+    EMfg==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563898;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622563902;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=qhG0lw5KlRBNwnqR+lID3/utnVv1YZhnHFw1MeFsVt0=;
-    b=SnLjOEIWOF3dJBgmgSGgEWMsmdoJJAPSwbSuqpWSfrQx5cI/cXBsfmuHABoNfFCDqG
-    Bha0fJhbCqZ6L/LtuapHJxp2SruWGQriEkGQcbQF+KuA6h0/oSJIBz0Gu16RypFC5Ee4
-    aPk027v/nnOQLxXcg1eJxRm4oPygov9JWZAjZQCvcFa4RVo/2VbavwCnsBf80CqhWCr5
-    LC+NQ/u8AnnwawGN0czS/Lb0EbU6xTabLihK8peb93nJCOYp9AkW6sJ2W5xAm/QTyIAe
-    u0hGt19MMQyg9bWr3l+6atuSOsj77bUnpWszzGhIvQ82TQGctCo+UlkqvseI34Pt6Egl
-    iozg==
+    bh=fttDAmpegUqwpOBB61SFRLpHBJB9wPmVo+V4iKyUqQw=;
+    b=ShTWQZKcQxZ1sfebsNAw3YaYcPQB1WYhFoM850GJhLl8wmQwEfctVTPf+8YlicvXTj
+    VlDW3wj8vaW/oiD6NQm1ua1hkBTsrESScVeGdK9/qnZ6IAKgoLi2QrU71IgL5R7JKqFu
+    SOZBrr9BV/XYgYN2PZBWv8VWy+NnFnwL8tTBdr2BjS8LjSr9CCPjYjQlWHTpZY/Qwz4s
+    uJ6yIZ97QLzsAjNs79CzpqBfvtk8o1P3YfO2jfbA8fkwYPLd4ggLTjuAP2/hUahRWXzu
+    6mIhBdYVJTtX9k2p+5OPkdMh21UKzH2P1Dk4KdBAkWGepZutG7i3uFqQ9drAKLmYKjln
+    lsCw==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs09ValFcstyKtnZMLOo4jr88Zf5nXI1mYJUK+h"
@@ -96,92 +96,172 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210601 29/38] tools: change struct precopy_stats to precopy_stats_t
-Date: Tue,  1 Jun 2021 18:11:09 +0200
-Message-Id: <20210601161118.18986-30-olaf@aepfle.de>
+Subject: [PATCH v20210601 38/38] hotplug/Linux: fix starting of xenstored with restarting systemd
+Date: Tue,  1 Jun 2021 18:11:18 +0200
+Message-Id: <20210601161118.18986-39-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210601161118.18986-1-olaf@aepfle.de>
 References: <20210601161118.18986-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This will help libxl_save_msgs_gen.pl to copy the struct as a region of memory.
+A hard to trigger race with another unrelated systemd service and
+xenstored.service unveiled a bug in the way how xenstored is launched
+with systemd.
 
-No change in behavior intented.
+launch-xenstore may start either a daemon or a domain. In case a domain
+is used, systemd-notify was called. If another service triggered a
+restart of systemd while xenstored.service was executed, systemd may
+temporary lose track of services with Type=notify. As a result,
+xenstored.service would be marked as failed and units that depend on it
+will not be started. This breaks the enire Xen toolstack.
+
+The chain of events is basically: xenstored.service sends the
+notification to systemd, this is a one-way event. Then systemd may be
+restarted by the other unit. During this time, xenstored.service is done
+and exits. Once systemd is done with its restart, it collects the pending
+notifications and childs. If it does not find the unit which sent the
+notification it will declare it as failed.
+
+A workaround for this scenario is to leave the child processes running
+for a short time after sending the "READY=1" notification. If systemd
+happens to restart it will still find the unit it launched.
+
+Adjust the callers of launch-xenstore to specifiy the init system:
+Do not fork xenstored with systemd, preserve pid. This wil also avoid
+the need for a sleep because the process which sent the "READY=1" (the
+previously forked child) is still alive.
+
+Remove the --pid-file in the systemd case because the pid of the child
+is known, and the file had probably little effect anyway due to lack of
+PidFile= and Type=forking in the unit file.
+
+Be verbose about xenstored startup only with sysv to avoid interleaved
+output in systemd journal. Do the same also for domain case, even if is
+not strictly needed because init-xenstore-domain has no output.
+
+The fix for upstream systemd which is supposed to fix it:
+575b300b795b6 ("pid1: rework how we dispatch SIGCHLD and other signals")
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- tools/include/xensaverestore.h  | 7 +++----
- tools/libs/saverestore/common.h | 2 +-
- tools/libs/saverestore/save.c   | 6 +++---
- 3 files changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/tools/include/xensaverestore.h b/tools/include/xensaverestore.h
-index 0410f0469e..dca0134605 100644
---- a/tools/include/xensaverestore.h
-+++ b/tools/include/xensaverestore.h
-@@ -23,18 +23,17 @@
- #define XCFLAGS_DEBUG     (1 << 1)
+--
+v04:
+- do mkdir unconditionally because init-xenstore-domain writes the domid to
+  xenstored.pid
+v03:
+- remove run_xenstored function, follow style of shell built-in test function
+v02:
+- preserve Type=notify
+---
+ tools/hotplug/Linux/init.d/xencommons.in      |  2 +-
+ tools/hotplug/Linux/launch-xenstore.in        | 40 ++++++++++++++-----
+ .../Linux/systemd/xenstored.service.in        |  2 +-
+ 3 files changed, 31 insertions(+), 13 deletions(-)
+
+diff --git a/tools/hotplug/Linux/init.d/xencommons.in b/tools/hotplug/Linux/init.d/xencommons.in
+index 7fd6903b98..dcb0ce4b73 100644
+--- a/tools/hotplug/Linux/init.d/xencommons.in
++++ b/tools/hotplug/Linux/init.d/xencommons.in
+@@ -60,7 +60,7 @@ do_start () {
+ 	mkdir -m700 -p ${XEN_LOCK_DIR}
+ 	mkdir -p ${XEN_LOG_DIR}
  
- /* For save's precopy_policy(). */
--struct precopy_stats
--{
-+typedef struct {
-     unsigned int iteration;
-     unsigned long total_written;
-     long dirty_count; /* -1 if unknown */
--};
-+} precopy_stats_t;
+-	@XEN_SCRIPT_DIR@/launch-xenstore || exit 1
++	@XEN_SCRIPT_DIR@/launch-xenstore 'sysv' || exit 1
  
- /*
-  * A precopy_policy callback may not be running in the same address
-  * space as libxc an so precopy_stats is passed by value.
-  */
--typedef int (*precopy_policy_t)(struct precopy_stats, void *);
-+typedef int (*precopy_policy_t)(precopy_stats_t, void *);
+ 	echo Setting domain 0 name, domid and JSON config...
+ 	${LIBEXEC_BIN}/xen-init-dom0 ${XEN_DOM0_UUID}
+diff --git a/tools/hotplug/Linux/launch-xenstore.in b/tools/hotplug/Linux/launch-xenstore.in
+index 019f9d6f4d..d40c66482a 100644
+--- a/tools/hotplug/Linux/launch-xenstore.in
++++ b/tools/hotplug/Linux/launch-xenstore.in
+@@ -15,6 +15,17 @@
+ # License along with this library; If not, see <http://www.gnu.org/licenses/>.
+ #
  
- /* callbacks provided by xc_domain_save */
- struct save_callbacks {
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 4218a8ecd6..cf8d6545e2 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -283,7 +283,7 @@ struct xc_sr_context
-             size_t pages_sent;
-             size_t overhead_sent;
++initd=$1
++
++case "$initd" in
++	sysv) nonl='-n' ;;
++	systemd) nonl= ;;
++	*)
++	echo "first argument must be 'sysv' or 'systemd'"
++	exit 1
++	;;
++esac
++
+ XENSTORED=@XENSTORED@
  
--            struct precopy_stats stats;
-+            precopy_stats_t stats;
+ . @XEN_SCRIPT_DIR@/hotplugpath.sh
+@@ -44,14 +55,16 @@ timeout_xenstore () {
+ 	return 0
+ }
  
-             unsigned int nr_batch_pfns;
-             unsigned long *deferred_pages;
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index b59cb069ed..523457eaba 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -489,7 +489,7 @@ static int update_progress_string(struct xc_sr_context *ctx, char **str)
- #define SPP_MAX_ITERATIONS      5
- #define SPP_TARGET_DIRTY_COUNT 50
+-test_xenstore && exit 0
++mkdir -p @XEN_RUN_DIR@
++
++if test "$initd" = 'sysv' ; then
++	test_xenstore && exit 0
++fi
  
--static int simple_precopy_policy(struct precopy_stats stats, void *user)
-+static int simple_precopy_policy(precopy_stats_t stats, void *user)
- {
-     return ((stats.dirty_count >= 0 &&
-              stats.dirty_count < SPP_TARGET_DIRTY_COUNT) ||
-@@ -516,13 +516,13 @@ static int send_memory_live(struct xc_sr_context *ctx)
-     precopy_policy_t precopy_policy = ctx->save.callbacks->precopy_policy;
-     void *data = ctx->save.callbacks->data;
+ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons
  
--    struct precopy_stats *policy_stats;
-+    precopy_stats_t *policy_stats;
+ [ "$XENSTORETYPE" = "" ] && XENSTORETYPE=daemon
  
-     rc = update_progress_string(ctx, &progress_str);
-     if ( rc )
-         goto out;
+-/bin/mkdir -p @XEN_RUN_DIR@
+-
+ [ "$XENSTORETYPE" = "daemon" ] && {
+ 	[ -z "$XENSTORED_TRACE" ] || XENSTORED_ARGS="$XENSTORED_ARGS -T @XEN_LOG_DIR@/xenstored-trace.log"
+ 	[ -z "$XENSTORED" ] && XENSTORED=@XENSTORED@
+@@ -59,13 +72,15 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
+ 		echo "No xenstored found"
+ 		exit 1
+ 	}
++	[ "$initd" = 'sysv' ] && {
++		echo $nonl Starting $XENSTORED...
++		$XENSTORED --pid-file @XEN_RUN_DIR@/xenstored.pid $XENSTORED_ARGS
++		timeout_xenstore $XENSTORED || exit 1
++		exit 0
++	}
  
--    ctx->save.stats = (struct precopy_stats){
-+    ctx->save.stats = (precopy_stats_t){
-         .dirty_count = ctx->save.p2m_size,
-     };
-     policy_stats = &ctx->save.stats;
+-	echo -n Starting $XENSTORED...
+-	$XENSTORED --pid-file @XEN_RUN_DIR@/xenstored.pid $XENSTORED_ARGS
+-
+-	systemd-notify --booted 2>/dev/null || timeout_xenstore $XENSTORED || exit 1
+-
+-	exit 0
++	exec $XENSTORED -N $XENSTORED_ARGS
++	exit 1
+ }
+ 
+ [ "$XENSTORETYPE" = "domain" ] && {
+@@ -75,9 +90,12 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
+ 	XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS --memory $XENSTORE_DOMAIN_SIZE"
+ 	[ -z "$XENSTORE_MAX_DOMAIN_SIZE" ] || XENSTORE_DOMAIN_ARGS="$XENSTORE_DOMAIN_ARGS --maxmem $XENSTORE_MAX_DOMAIN_SIZE"
+ 
+-	echo -n Starting $XENSTORE_DOMAIN_KERNEL...
++	echo $nonl Starting $XENSTORE_DOMAIN_KERNEL...
+ 	${LIBEXEC_BIN}/init-xenstore-domain $XENSTORE_DOMAIN_ARGS || exit 1
+-	systemd-notify --ready 2>/dev/null
++	[ "$initd" = 'systemd' ] && {
++		systemd-notify --ready
++		sleep 9
++	}
+ 
+ 	exit 0
+ }
+diff --git a/tools/hotplug/Linux/systemd/xenstored.service.in b/tools/hotplug/Linux/systemd/xenstored.service.in
+index 80c1d408a5..c226eb3635 100644
+--- a/tools/hotplug/Linux/systemd/xenstored.service.in
++++ b/tools/hotplug/Linux/systemd/xenstored.service.in
+@@ -11,7 +11,7 @@ Type=notify
+ NotifyAccess=all
+ RemainAfterExit=true
+ ExecStartPre=/bin/grep -q control_d /proc/xen/capabilities
+-ExecStart=@XEN_SCRIPT_DIR@/launch-xenstore
++ExecStart=@XEN_SCRIPT_DIR@/launch-xenstore 'systemd'
+ 
+ [Install]
+ WantedBy=multi-user.target
 
