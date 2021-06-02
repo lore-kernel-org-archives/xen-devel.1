@@ -7,47 +7,47 @@ X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21170C47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0640C4708F
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:33:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CBD19611CA
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:33:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CBD19611CA
+	by mail.kernel.org (Postfix) with ESMTPS id 5F9B2611CA
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:33:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F9B2611CA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135760.252053 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135766.252063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loLN6-0000Xc-Tr; Wed, 02 Jun 2021 07:33:00 +0000
+	id 1loLNq-0001H8-6b; Wed, 02 Jun 2021 07:33:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135760.252053; Wed, 02 Jun 2021 07:33:00 +0000
+Received: by outflank-mailman (output) from mailman id 135766.252063; Wed, 02 Jun 2021 07:33:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loLN6-0000XV-Q7; Wed, 02 Jun 2021 07:33:00 +0000
-Received: by outflank-mailman (input) for mailman id 135760;
- Wed, 02 Jun 2021 07:32:59 +0000
+	id 1loLNq-0001H1-3P; Wed, 02 Jun 2021 07:33:46 +0000
+Received: by outflank-mailman (input) for mailman id 135766;
+ Wed, 02 Jun 2021 07:33:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Q/fn=K4=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1loLN5-0000XJ-Rp
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 07:32:59 +0000
+ id 1loLNo-0001GU-4J
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 07:33:44 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 01d7e13f-efcb-4ec9-80db-7b70175176c3;
- Wed, 02 Jun 2021 07:32:59 +0000 (UTC)
+ id c4f1d14c-41c2-47cb-be32-1560e31d0e9c;
+ Wed, 02 Jun 2021 07:33:43 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6E9C42193F;
- Wed,  2 Jun 2021 07:32:58 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 9F9402193D;
+ Wed,  2 Jun 2021 07:33:42 +0000 (UTC)
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 44C4C118DD;
- Wed,  2 Jun 2021 07:32:58 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id 76CF8118DD;
+ Wed,  2 Jun 2021 07:33:42 +0000 (UTC)
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id McykDyo0t2DWYQAALh3uQQ
- (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 07:32:58 +0000
+ id E7zpG1Y0t2BMYgAALh3uQQ
+ (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 07:33:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,65 +59,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 01d7e13f-efcb-4ec9-80db-7b70175176c3
+X-Inumbo-ID: c4f1d14c-41c2-47cb-be32-1560e31d0e9c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622619178; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622619222; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nt+elkNpUiv3T3plgQLyzvWSl66fWkVH1n9KUTKj4PY=;
-	b=AQGatwrVGstFLBvTjSKqgvGr9uAS+dHYEdew4cicjaj+0fr9NSExjAxrgIRjNALz60fe9R
-	H2xh47kcOkIXCEatQIc1j14WB5k3EUFkBVZwhB6102cmnvhEdrID+zCedKSFP458DOetJm
-	eYdFMoFeogkZHdlKTgrAlgY9xUdfWx0=
+	bh=u9MygJOAW7Pkxhmg/4CwkTowQSJN/+MFYfuU3uVopAY=;
+	b=f/ZSHHfRme0gUik2sjcx3L90F34B1Y4HoetKe38BLsYy/GSjYukCrtJ12V/d7iKbQMjWmA
+	U9rEQjiavKE1hJls7DfEuUah5Ht5rv80+lEXwuS7Z2KLGGTj4UTVNwMy9ZblYJ1r6RMpTx
+	LADhRL7NhBIk0tkcrGNRwEpcSmnO4dw=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622619178; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622619222; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nt+elkNpUiv3T3plgQLyzvWSl66fWkVH1n9KUTKj4PY=;
-	b=AQGatwrVGstFLBvTjSKqgvGr9uAS+dHYEdew4cicjaj+0fr9NSExjAxrgIRjNALz60fe9R
-	H2xh47kcOkIXCEatQIc1j14WB5k3EUFkBVZwhB6102cmnvhEdrID+zCedKSFP458DOetJm
-	eYdFMoFeogkZHdlKTgrAlgY9xUdfWx0=
-Subject: Re: [PATCH v20210601 12/38] tools/guest: save: move types array
+	bh=u9MygJOAW7Pkxhmg/4CwkTowQSJN/+MFYfuU3uVopAY=;
+	b=f/ZSHHfRme0gUik2sjcx3L90F34B1Y4HoetKe38BLsYy/GSjYukCrtJ12V/d7iKbQMjWmA
+	U9rEQjiavKE1hJls7DfEuUah5Ht5rv80+lEXwuS7Z2KLGGTj4UTVNwMy9ZblYJ1r6RMpTx
+	LADhRL7NhBIk0tkcrGNRwEpcSmnO4dw=
+Subject: Re: [PATCH v20210601 13/38] tools/guest: save: move errors array
 To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
 References: <20210601161118.18986-1-olaf@aepfle.de>
- <20210601161118.18986-13-olaf@aepfle.de>
+ <20210601161118.18986-14-olaf@aepfle.de>
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <e6e60e80-285e-9242-34ef-a60cb900a17b@suse.com>
-Date: Wed, 2 Jun 2021 09:32:57 +0200
+Message-ID: <6e6a58d6-a31e-6291-904d-c603168c87d6@suse.com>
+Date: Wed, 2 Jun 2021 09:33:41 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210601161118.18986-13-olaf@aepfle.de>
+In-Reply-To: <20210601161118.18986-14-olaf@aepfle.de>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="HaPmJPPEjoq53iD3TBG70tO8kCCO0VchU"
+ boundary="pZjMPdRZEfpgLUXJX5b8zLRYdv3rzN8Jk"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---HaPmJPPEjoq53iD3TBG70tO8kCCO0VchU
-Content-Type: multipart/mixed; boundary="TBZPVvz7CoAXHK0gNQmAL8INRmGa4aIJV";
+--pZjMPdRZEfpgLUXJX5b8zLRYdv3rzN8Jk
+Content-Type: multipart/mixed; boundary="1Bo2tIVaudSBWN0PVzob5mQPHwryCBpO3";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
 To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Message-ID: <e6e60e80-285e-9242-34ef-a60cb900a17b@suse.com>
-Subject: Re: [PATCH v20210601 12/38] tools/guest: save: move types array
+Message-ID: <6e6a58d6-a31e-6291-904d-c603168c87d6@suse.com>
+Subject: Re: [PATCH v20210601 13/38] tools/guest: save: move errors array
 References: <20210601161118.18986-1-olaf@aepfle.de>
- <20210601161118.18986-13-olaf@aepfle.de>
-In-Reply-To: <20210601161118.18986-13-olaf@aepfle.de>
+ <20210601161118.18986-14-olaf@aepfle.de>
+In-Reply-To: <20210601161118.18986-14-olaf@aepfle.de>
 
---TBZPVvz7CoAXHK0gNQmAL8INRmGa4aIJV
+--1Bo2tIVaudSBWN0PVzob5mQPHwryCBpO3
 Content-Type: multipart/mixed;
- boundary="------------34374FEF24CB0F20D5BB03A6"
+ boundary="------------79398960E4A1610D9C5B918F"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------34374FEF24CB0F20D5BB03A6
+--------------79398960E4A1610D9C5B918F
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
 On 01.06.21 18:10, Olaf Hering wrote:
-> Remove allocation from hotpath, move types array into preallocated spac=
-e.
+> Remove allocation from hotpath, move errors array into preallocated spa=
+ce.
 >=20
 > Signed-off-by: Olaf Hering <olaf@aepfle.de>
 
@@ -126,7 +126,7 @@ Reviewed-by: Juergen Gross <jgross@suse.com>
 
 Juergen
 
---------------34374FEF24CB0F20D5BB03A6
+--------------79398960E4A1610D9C5B918F
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -218,25 +218,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------34374FEF24CB0F20D5BB03A6--
+--------------79398960E4A1610D9C5B918F--
 
---TBZPVvz7CoAXHK0gNQmAL8INRmGa4aIJV--
+--1Bo2tIVaudSBWN0PVzob5mQPHwryCBpO3--
 
---HaPmJPPEjoq53iD3TBG70tO8kCCO0VchU
+--pZjMPdRZEfpgLUXJX5b8zLRYdv3rzN8Jk
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3NCkFAwAAAAAACgkQsN6d1ii/Ey/6
-ewf/fm1LuYyxsvXvwENQySZYi09t1ZaLlzk/KCiEFRCxwVr/XjjHSBd05IBUHyhthz4apTr/vFlB
-0YpiChUKXEeTr+7MwpQHDK/4o9bfpQlM3GxyNfkdUfcE9HCIb0lWSHQlZfIDKVWsbeItXaI3qoSs
-lwewscvwFvu3zET6XN0TB+TKiIQbICYh/9WSL2xKjAPR30ZBnXTk2VzQvh22uQK7Qu4V0u/tyKI0
-KZtgCf5wYb2hE8RY8ONNF1TIWkCd8rD/rE/ddzmD+6FaEknoR+05LxKSoY/2Nu/kzHkaVxGYA1hn
-e8lguQb71wMSxvuYjAErk7FpX+Nj/o19OLvZFvRcqg==
-=IxEl
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3NFUFAwAAAAAACgkQsN6d1ii/Ey9P
+VwgAg6sZW53nGhg5iOcq3kzxHPcQa8tX54ckm4e/kuHl+sYQsnonfXzBxhWlrmADL4sZjIh8NUL/
+AWLXbH50HsgiyxnPGoV8vGK3s2U4SvTgms1Q77QrARUjg49clxojlsvPvxw9pJcQ2j1qDpdW837R
+9wrzbZ2WSkAXxRo/p63esBE1rXMnedMrM5gTVgyVcweKUPy1OtdcsSA1Wq/rKvgPe+q+A1qnnbIA
+7L+HsURJT7ktvMZGygPmTrPSj5pqvFXS5zdbJjOtZJp49Jlc9flFX7ahmdor+etN5jek6MSVHLMN
+5YUTN8p1vlTaHoICXoAdPRCo3DOUFpUqPwX6dh0onQ==
+=49M/
 -----END PGP SIGNATURE-----
 
---HaPmJPPEjoq53iD3TBG70tO8kCCO0VchU--
+--pZjMPdRZEfpgLUXJX5b8zLRYdv3rzN8Jk--
 
