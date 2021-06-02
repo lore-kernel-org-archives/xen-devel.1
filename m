@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1B87C4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D532C4708F
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AD2CD61361
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD2CD61361
+	by mail.kernel.org (Postfix) with ESMTPS id EF898610CB
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF898610CB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135547.251844 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135550.251852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuY-0000u9-4O; Wed, 02 Jun 2021 07:03:30 +0000
+	id 1loKuZ-0001Ec-G7; Wed, 02 Jun 2021 07:03:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135547.251844; Wed, 02 Jun 2021 07:03:30 +0000
+Received: by outflank-mailman (output) from mailman id 135550.251852; Wed, 02 Jun 2021 07:03:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuX-0000tx-W1; Wed, 02 Jun 2021 07:03:29 +0000
-Received: by outflank-mailman (input) for mailman id 135547;
+	id 1loKuZ-0001D2-Ar; Wed, 02 Jun 2021 07:03:31 +0000
+Received: by outflank-mailman (input) for mailman id 135550;
  Wed, 02 Jun 2021 07:03:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKni-0007A2-6Y
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:56:26 +0000
+ id 1loKog-0007A2-8l
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:26 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 35fb7b1f-44c7-4b27-ad45-0306383e6a1a;
- Wed, 02 Jun 2021 06:55:16 +0000 (UTC)
+ id 831013cb-db5d-4f6d-83af-e0e71db48b75;
+ Wed, 02 Jun 2021 06:55:41 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKmD-0025eq-Jk; Wed, 02 Jun 2021 06:54:54 +0000
+ id 1loKma-0025sw-BW; Wed, 02 Jun 2021 06:55:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35fb7b1f-44c7-4b27-ad45-0306383e6a1a
+X-Inumbo-ID: 831013cb-db5d-4f6d-83af-e0e71db48b75
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=pV41u4G0u0xaNGxoxDb/eyNeH9eLbF/Aei3AXX+HWdY=; b=xynVkbApPKJ1V6SCFnDhqzTRhk
-	HG0wUR2lljnrg8jjaBi3fB5wReJl4j8YP38RFTuxGHRPiXc3MvRjlT3pljHnX0XyyZXySOVGvD36r
-	Yn+kDsgqGIGCgFW7UzE2sDUrTXFZpZSvReujYSqg/GDnk+jMrGw/l7eQr8EmpYPtyi2dlKoDQZniQ
-	A295rgd6IcGuhT/qNWGyPQm803gvicBX9TIVBVODY+wwREKWrX67HS+VcQ/s9Gl/7xUWi6bQoGvGi
-	xaTI/gKDuismLjMiDlvwEAfqkBTMh3FXwJk3/FqJCq/s8UQ5jthfbUwng9lkO26oujqiNf9SJQcbE
-	JqveapQg==;
+	bh=Ay3+BGPlRqdc0EFLNjvSyNAlCXYv7F/E4ZKoFdkW+qs=; b=re781XvQTLqNz+tW0K+eeLN126
+	ZHdsuYJ2Awc6hKt5NXrxWVcF1gLtmPmqrRoYM1HI43jkn7Qf75wWP01UlBu2V2sY61J+OM/Etw42Y
+	+/Y9bV0NZSR7XSiaIB3hoA5FplO+Knn8VPNUx84Za0n+grjUeqHa7Ia2Y6hM5luzozyZJ8Is3hs5t
+	0f1bIF+gL/yS4tMtIJDr7RZZ0gaHP+N8QcEaL1x8gVuo08fsq6poeekNRuls+ivPNI9U2B65ypj48
+	yQjKdXwi7x17Mz91bhzCLHhe29vJAUjBIJ8vYze0d6zCgmUka+cbdrK9DUBsKkhmarGXEPYZxI+5z
+	n/v3EyXw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 13/30] sunvdc: use blk_mq_alloc_disk
-Date: Wed,  2 Jun 2021 09:53:28 +0300
-Message-Id: <20210602065345.355274-14-hch@lst.de>
+Subject: [PATCH 18/30] loop: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:33 +0300
+Message-Id: <20210602065345.355274-19-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -105,98 +105,75 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
-allocation.
+Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
+request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/sunvdc.c | 47 ++++++++++++------------------------------
- 1 file changed, 13 insertions(+), 34 deletions(-)
+ drivers/block/loop.c | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/block/sunvdc.c b/drivers/block/sunvdc.c
-index 39aeebc6837d..c53b38578bb7 100644
---- a/drivers/block/sunvdc.c
-+++ b/drivers/block/sunvdc.c
-@@ -780,27 +780,6 @@ static const struct blk_mq_ops vdc_mq_ops = {
- 	.queue_rq	= vdc_queue_rq,
- };
+diff --git a/drivers/block/loop.c b/drivers/block/loop.c
+index 95c570f5923f..3f40e673a101 100644
+--- a/drivers/block/loop.c
++++ b/drivers/block/loop.c
+@@ -2117,12 +2117,12 @@ static int loop_add(struct loop_device **l, int i)
+ 	if (err)
+ 		goto out_free_idr;
  
--static void cleanup_queue(struct request_queue *q)
--{
--	struct vdc_port *port = q->queuedata;
+-	lo->lo_queue = blk_mq_init_queue(&lo->tag_set);
+-	if (IS_ERR(lo->lo_queue)) {
+-		err = PTR_ERR(lo->lo_queue);
++	disk = lo->lo_disk = blk_mq_alloc_disk(&lo->tag_set, lo);
++	if (IS_ERR(disk)) {
++		err = PTR_ERR(disk);
+ 		goto out_cleanup_tags;
+ 	}
+-	lo->lo_queue->queuedata = lo;
++	lo->lo_queue = lo->lo_disk->queue;
+ 
+ 	blk_queue_max_hw_sectors(lo->lo_queue, BLK_DEF_MAX_SECTORS);
+ 
+@@ -2134,11 +2134,6 @@ static int loop_add(struct loop_device **l, int i)
+ 	 */
+ 	blk_queue_flag_set(QUEUE_FLAG_NOMERGES, lo->lo_queue);
+ 
+-	err = -ENOMEM;
+-	disk = lo->lo_disk = alloc_disk(1 << part_shift);
+-	if (!disk)
+-		goto out_free_queue;
 -
--	blk_cleanup_queue(q);
--	blk_mq_free_tag_set(&port->tag_set);
--}
--
--static struct request_queue *init_queue(struct vdc_port *port)
--{
--	struct request_queue *q;
--
--	q = blk_mq_init_sq_queue(&port->tag_set, &vdc_mq_ops, VDC_TX_RING_SIZE,
--					BLK_MQ_F_SHOULD_MERGE);
--	if (IS_ERR(q))
--		return q;
--
--	q->queuedata = port;
--	return q;
--}
--
- static int probe_disk(struct vdc_port *port)
+ 	/*
+ 	 * Disable partition scanning by default. The in-kernel partition
+ 	 * scanning can be requested individually per-device during its
+@@ -2166,6 +2161,7 @@ static int loop_add(struct loop_device **l, int i)
+ 	spin_lock_init(&lo->lo_lock);
+ 	disk->major		= LOOP_MAJOR;
+ 	disk->first_minor	= i << part_shift;
++	disk->minors		= 1 << part_shift;
+ 	disk->fops		= &lo_fops;
+ 	disk->private_data	= lo;
+ 	disk->queue		= lo->lo_queue;
+@@ -2174,8 +2170,6 @@ static int loop_add(struct loop_device **l, int i)
+ 	*l = lo;
+ 	return lo->lo_number;
+ 
+-out_free_queue:
+-	blk_cleanup_queue(lo->lo_queue);
+ out_cleanup_tags:
+ 	blk_mq_free_tag_set(&lo->tag_set);
+ out_free_idr:
+@@ -2189,9 +2183,8 @@ static int loop_add(struct loop_device **l, int i)
+ static void loop_remove(struct loop_device *lo)
  {
- 	struct request_queue *q;
-@@ -838,21 +817,21 @@ static int probe_disk(struct vdc_port *port)
- 				    (u64)geom.num_sec);
- 	}
- 
--	q = init_queue(port);
--	if (IS_ERR(q)) {
--		printk(KERN_ERR PFX "%s: Could not allocate queue.\n",
--		       port->vio.name);
--		return PTR_ERR(q);
--	}
--	g = alloc_disk(1 << PARTITION_SHIFT);
--	if (!g) {
-+	err = blk_mq_alloc_sq_tag_set(&port->tag_set, &vdc_mq_ops,
-+			VDC_TX_RING_SIZE, BLK_MQ_F_SHOULD_MERGE);
-+	if (err)
-+		return err;
-+
-+	g = blk_mq_alloc_disk(&port->tag_set, port);
-+	if (IS_ERR(g)) {
- 		printk(KERN_ERR PFX "%s: Could not allocate gendisk.\n",
- 		       port->vio.name);
--		cleanup_queue(q);
--		return -ENOMEM;
-+		blk_mq_free_tag_set(&port->tag_set);
-+		return PTR_ERR(g);
- 	}
- 
- 	port->disk = g;
-+	q = g->queue;
- 
- 	/* Each segment in a request is up to an aligned page in size. */
- 	blk_queue_segment_boundary(q, PAGE_SIZE - 1);
-@@ -862,6 +841,7 @@ static int probe_disk(struct vdc_port *port)
- 	blk_queue_max_hw_sectors(q, port->max_xfer_size);
- 	g->major = vdc_major;
- 	g->first_minor = port->vio.vdev->dev_no << PARTITION_SHIFT;
-+	g->minors = 1 << PARTITION_SHIFT;
- 	strcpy(g->disk_name, port->disk_name);
- 
- 	g->fops = &vdc_fops;
-@@ -1083,9 +1063,8 @@ static int vdc_port_remove(struct vio_dev *vdev)
- 		del_timer_sync(&port->vio.timer);
- 
- 		del_gendisk(port->disk);
--		cleanup_queue(port->disk->queue);
--		put_disk(port->disk);
--		port->disk = NULL;
-+		blk_cleanup_disk(port->disk);
-+		blk_mq_free_tag_set(&port->tag_set);
- 
- 		vdc_free_tx_ring(port);
- 		vio_ldc_free(&port->vio);
+ 	del_gendisk(lo->lo_disk);
+-	blk_cleanup_queue(lo->lo_queue);
+ 	blk_mq_free_tag_set(&lo->tag_set);
+-	put_disk(lo->lo_disk);
++	blk_cleanup_disk(lo->lo_disk);
+ 	mutex_destroy(&lo->lo_mutex);
+ 	kfree(lo);
+ }
 -- 
 2.30.2
 
