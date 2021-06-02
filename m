@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 160BFC4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 084B6C47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D761C6135D
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D761C6135D
+	by mail.kernel.org (Postfix) with ESMTPS id CE49A610CB
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE49A610CB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135552.251867 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135555.251883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKub-0001UM-FH; Wed, 02 Jun 2021 07:03:33 +0000
+	id 1loKue-0002HO-36; Wed, 02 Jun 2021 07:03:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135552.251867; Wed, 02 Jun 2021 07:03:33 +0000
+Received: by outflank-mailman (output) from mailman id 135555.251883; Wed, 02 Jun 2021 07:03:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKua-0001SB-I4; Wed, 02 Jun 2021 07:03:32 +0000
-Received: by outflank-mailman (input) for mailman id 135552;
- Wed, 02 Jun 2021 07:03:30 +0000
+	id 1loKud-00027n-6v; Wed, 02 Jun 2021 07:03:35 +0000
+Received: by outflank-mailman (input) for mailman id 135555;
+ Wed, 02 Jun 2021 07:03:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKov-0007A2-9Q
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:41 +0000
+ id 1loKpy-0007A2-BZ
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:46 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 753a3bf8-eb67-40a9-9ab9-e22be25b8ddd;
- Wed, 02 Jun 2021 06:55:51 +0000 (UTC)
+ id 4fb205f2-e459-4e31-b892-046aaed03897;
+ Wed, 02 Jun 2021 06:56:32 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKmj-00260g-93; Wed, 02 Jun 2021 06:55:26 +0000
+ id 1loKnR-0026ec-A8; Wed, 02 Jun 2021 06:56:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 753a3bf8-eb67-40a9-9ab9-e22be25b8ddd
+X-Inumbo-ID: 4fb205f2-e459-4e31-b892-046aaed03897
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=dPXgPagX0YUjFpHkmb7+BJvE2rgQGNh10xmKRHSEoBw=; b=BmfFZoZgZc3og4CmFwOmdLx19i
-	QO/EHgrku+yvgdhYC17jfB1aTEH3npIjzEWzSTOP+FtfRG47SoCYsd6XDZdDvG8QFc30baslGnBO5
-	603qv1a5lD3zj6piDqc7/7HezJHswlQmBy2hQzdsqi+Pq2AqXMvtz6CZelFZP4OuEsOQ481G/g0oe
-	2D5d45xL9+Y8IhSZ0SJ7QgmfDd59y+PvwieZLqYIaXHXwCMZQBwPlFGdwrK57V7ShUrkG8V37WJ3E
-	EOpP42tJMZNBze5kjBlU3735zuT501c+A9ju4eeM4xto97GnaI9ogfZqwLOqhLmVBPmt6XU0UdEOR
-	G7vAYXaA==;
+	bh=ZrMEf0Ls9F+Osx12fthB6jYFp7YA2RuOfcMRudkR5eo=; b=RmhbmeEgAua7D4yc0CN6m+daMw
+	ggu55W3yOtqsYbnSz5c1dfLFQJ9ncvb9hc3nNvkXY6f0gcSGMOhLStwUwb0UQrJ1aG7h0ZSUng/WX
+	es/ejunr+apwEHWPUWRQDfPQvgeX1hrHlUl4NOb5oItwm7czJQwirbV+FChfRP7dM0qxLnCRqVmgI
+	bA1/+LYF3tWUOd/53KL9zns/VStS5lpZkIiq55Ah7xS6m/8ryTxd0+2JtSdNyv1ovCOilXcKoWuJr
+	8KfLwtubqhZXD6/OkB2mdwrFmz8NTFBmkmZB+9B1+iGvFIgntGiUljL/AChzeEhq1iCnrHX8J/lkd
+	xKgRqjOg==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 20/30] nullb: use blk_mq_alloc_disk
-Date: Wed,  2 Jun 2021 09:53:35 +0300
-Message-Id: <20210602065345.355274-21-hch@lst.de>
+Subject: [PATCH 30/30] z2ram: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:45 +0300
+Message-Id: <20210602065345.355274-31-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -110,32 +110,45 @@ request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/null_blk/main.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ drivers/block/z2ram.c | 15 ++++-----------
+ 1 file changed, 4 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
-index d8e098f1e5b5..74fb2ec63219 100644
---- a/drivers/block/null_blk/main.c
-+++ b/drivers/block/null_blk/main.c
-@@ -1851,13 +1851,12 @@ static int null_add_dev(struct nullb_device *dev)
+diff --git a/drivers/block/z2ram.c b/drivers/block/z2ram.c
+index c1d20818e649..a8968d9e759b 100644
+--- a/drivers/block/z2ram.c
++++ b/drivers/block/z2ram.c
+@@ -323,27 +323,20 @@ static const struct blk_mq_ops z2_mq_ops = {
  
- 		rv = -ENOMEM;
- 		nullb->tag_set->timeout = 5 * HZ;
--		nullb->q = blk_mq_init_queue_data(nullb->tag_set, nullb);
--		if (IS_ERR(nullb->q))
--			goto out_cleanup_tags;
--		nullb->disk = alloc_disk_node(1, nullb->dev->home_node);
--		if (!nullb->disk)
-+		nullb->disk = blk_mq_alloc_disk(nullb->tag_set, nullb);
-+		if (IS_ERR(nullb->disk)) {
-+			rv = PTR_ERR(nullb->disk);
- 			goto out_cleanup_disk;
--		nullb->disk->queue = nullb->q;
-+		}
-+		nullb->q = nullb->disk->queue;
- 	} else if (dev->queue_mode == NULL_Q_BIO) {
- 		rv = -ENOMEM;
- 		nullb->disk = blk_alloc_disk(nullb->dev->home_node);
+ static int z2ram_register_disk(int minor)
+ {
+-	struct request_queue *q;
+ 	struct gendisk *disk;
+ 
+-	disk = alloc_disk(1);
+-	if (!disk)
+-		return -ENOMEM;
+-
+-	q = blk_mq_init_queue(&tag_set);
+-	if (IS_ERR(q)) {
+-		put_disk(disk);
+-		return PTR_ERR(q);
+-	}
++	disk = blk_mq_alloc_disk(&tag_set, NULL);
++	if (IS_ERR(disk))
++		return PTR_ERR(disk);
+ 
+ 	disk->major = Z2RAM_MAJOR;
+ 	disk->first_minor = minor;
++	disk->minors = 1;
+ 	disk->fops = &z2_fops;
+ 	if (minor)
+ 		sprintf(disk->disk_name, "z2ram%d", minor);
+ 	else
+ 		sprintf(disk->disk_name, "z2ram");
+-	disk->queue = q;
+ 
+ 	z2ram_gendisk[minor] = disk;
+ 	add_disk(disk);
 -- 
 2.30.2
 
