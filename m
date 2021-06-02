@@ -2,49 +2,49 @@ Return-Path: <SRS0=/WvL=K4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C798C47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 23:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C340FC47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 23:21:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44711613E9
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 23:21:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44711613E9
+	by mail.kernel.org (Postfix) with ESMTPS id 6AB82613E9
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 23:21:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6AB82613E9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136249.252696 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136251.252718 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loaAQ-00029u-5T; Wed, 02 Jun 2021 23:20:54 +0000
+	id 1loaAZ-0002mV-LT; Wed, 02 Jun 2021 23:21:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136249.252696; Wed, 02 Jun 2021 23:20:54 +0000
+Received: by outflank-mailman (output) from mailman id 136251.252718; Wed, 02 Jun 2021 23:21:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loaAQ-00029n-2N; Wed, 02 Jun 2021 23:20:54 +0000
-Received: by outflank-mailman (input) for mailman id 136249;
- Wed, 02 Jun 2021 23:20:52 +0000
+	id 1loaAZ-0002mG-HQ; Wed, 02 Jun 2021 23:21:03 +0000
+Received: by outflank-mailman (input) for mailman id 136251;
+ Wed, 02 Jun 2021 23:21:02 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GNUT=K4=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
- id 1loaAO-00029h-7N
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 23:20:52 +0000
-Received: from mail-oi1-x22c.google.com (unknown [2607:f8b0:4864:20::22c])
+ id 1loaAY-00029h-2H
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 23:21:02 +0000
+Received: from mail-oi1-x22d.google.com (unknown [2607:f8b0:4864:20::22d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ebae24f0-1fd1-4bb1-9410-f3a5064d362c;
- Wed, 02 Jun 2021 23:20:51 +0000 (UTC)
-Received: by mail-oi1-x22c.google.com with SMTP id z3so4399670oib.5
- for <xen-devel@lists.xenproject.org>; Wed, 02 Jun 2021 16:20:51 -0700 (PDT)
+ id 25796a31-9b0a-47e9-a6cc-203c639555f1;
+ Wed, 02 Jun 2021 23:20:57 +0000 (UTC)
+Received: by mail-oi1-x22d.google.com with SMTP id d21so4371888oic.11
+ for <xen-devel@lists.xenproject.org>; Wed, 02 Jun 2021 16:20:57 -0700 (PDT)
 Received: from localhost.localdomain (142-79-211-230.starry-inc.net.
  [142.79.211.230])
- by smtp.gmail.com with ESMTPSA id h7sm306175oib.49.2021.06.02.16.20.49
+ by smtp.gmail.com with ESMTPSA id h7sm306175oib.49.2021.06.02.16.20.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jun 2021 16:20:50 -0700 (PDT)
+ Wed, 02 Jun 2021 16:20:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ebae24f0-1fd1-4bb1-9410-f3a5064d362c
+X-Inumbo-ID: 25796a31-9b0a-47e9-a6cc-203c639555f1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=a6gIdnq4s9ju4i8wDfgtjonCew0MtQBOOecfSAaR/Y8=;
-        b=RDux5V6jT9p/Hdz3xcl1dmxCpdw5uqfFdfRYZx45QRkMXGmqoaW8V2mhwnKojSE2YS
-         bPfl3XmhOF5UG+CVo99IsxSqZxZxWH5hKkBtLtwTX4oJKRUAtxkzCA0jzPg4I4xqS7q9
-         FxLPT/J3damlNVOxT9Kv/R+yiccHgBeOVx5Q6+zj5iy1Z9gQ+29kOHGDiPVPVxywb9TA
-         ECq51qyLqK07TcRISD1UnCyxk4DJTgy7MBoEYzQoOIn0TIhQDrqd6HKGymmtwlKdRFff
-         /iOLrDFUhY8JcvxScMGxPpHKa5w9u9Dlkm6TvevqgIy7EQIe7EJ/eBgHJrfVIwHrmn2H
-         HyVQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=y7wXnoCWLDx7IQREahGv6BGDyqktjGf6yjBgrAWmplI=;
+        b=qL6T+IYDMnlwaO6MHJMHo1K3ijLdkUlVWUNRLQ1Hx3tzI+2KdOKpsCnzfwEBsmPsXa
+         zZk2BCSF9Ln6qIj/1q2nwHbgjGkXUG2GRXesrIas/ZSyY7atVraGlmtmQFGBBwrHXziN
+         mk7aHJwQfcik+zsvd9EyKwZIwxYoHpH0TnFMD1rWdB4cHB7BSw3W2F2g7lBirT0QF0Wf
+         5zmo1p1uQJhecYR4r1vrva4OG86jHlegM0IXRtGDD/e6gqKsIF9isQRKwd3GsiPcDUB8
+         9YObQTfuYz7D4W1gP6f9GYSvDMRbe0afKEg7kTN4glgIMe44vGeFWep3nV+TlpUvtmMi
+         Du8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=a6gIdnq4s9ju4i8wDfgtjonCew0MtQBOOecfSAaR/Y8=;
-        b=c7Y7r00jP+C/GNxeeWMeLiu4qKndd1wfolHyQmahx2f3WI0Jwm7JrU0ElrO2WJpdzR
-         eSsKMJIWStL149o5AuhrwPvIyho4S4/sLrg3xDOnm6Cx3ZMiZGBEFLydJ4ifMdKOXmcq
-         g4Aa9Fn8GHxxPiIx4EJ+SAvRvOh33GtmcFRRjKs7mBXZjds4nxQe1N1DhMMu0qT0Vig0
-         i18O7H3siVpSFLCAcf+vLYVc0Y2tYY8FP/hN3pYmus3gvggcWLZx3w9aldr/I0XZJNsN
-         ZHIxgPCkeBv3a7CkZwgrj8r9nZnHtZBH0IEj3uxPME7mfyRv8loVcEKrsqhn3DiUv5JE
-         +z0w==
-X-Gm-Message-State: AOAM532V2pOtCf5/K2ptOTVCIg3nf2fA7WhHZjWne6S475HbAnwwl0IR
-	6zVgfvaD2e7e9R39bDatHTDpAE3mxUgrIw==
-X-Google-Smtp-Source: ABdhPJwgTETcQMos9JHgGva4urfC/93gH77w5U6X2lN6Sfnb2Ii1cOhr9ExkECAkCLudW77bkgaAAQ==
-X-Received: by 2002:aca:5dc6:: with SMTP id r189mr5575738oib.164.1622676050576;
-        Wed, 02 Jun 2021 16:20:50 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=y7wXnoCWLDx7IQREahGv6BGDyqktjGf6yjBgrAWmplI=;
+        b=Q2zlAF4K7oKIEIPj9Xh2z5vGHcqs83lAt6EQFl6m0zVp/osPNaY41VHwawrPV7bqN7
+         j6A40wtqxEKLuBkV02FIXRLPRQBqrYdxVZ6xJTC9iLfO+fdMhPkJnEg6tfHmPLPe+g0B
+         yiu3lSyJtQ3dCBoY8+54joaOyUIsqdke/LwR6opmT1u0I9XQnhROpLA6XSoIwQb3YZ6W
+         EoTMMoyHnE1/qULxUj7TyrEeb39YK9E1TfiTn8jM2DAYDiDXHPOuJOe0FLlvqArSMJOQ
+         eXRmdEo420rvXzpU1DpRl0vy4HOFiuu6sAO8KTFvbiyd96G3QsUPaueYkpD4FzPfiaii
+         LfYQ==
+X-Gm-Message-State: AOAM531tiILK77KuefvUUJL5EsPsx77ctU9tHfc0IUtM6w2cYEJAUSl+
+	SilBqTbf7+18IcSXmh8fPSwgn5iPS0kXQg==
+X-Google-Smtp-Source: ABdhPJy7jQErJRgEkVXaKlWUxYobW+5eP2rkRPBWtrMLLLKUzN59zPAkpOiVmuQR+WnVUVjYAIJlMA==
+X-Received: by 2002:aca:f455:: with SMTP id s82mr11834239oih.85.1622676055185;
+        Wed, 02 Jun 2021 16:20:55 -0700 (PDT)
 From: Connor Davis <connojdavis@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
@@ -96,73 +96,34 @@ Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v5 0/2] Minimal build for RISCV
-Date: Wed,  2 Jun 2021 17:20:43 -0600
-Message-Id: <cover.1622675569.git.connojdavis@gmail.com>
+Subject: [PATCH v6 2/2] xen: Add files needed for minimal riscv build
+Date: Wed,  2 Jun 2021 17:20:45 -0600
+Message-Id: <d4670a35758df878565cf757bbc20e2815618eb5.1622675569.git.connojdavis@gmail.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <cover.1622675569.git.connojdavis@gmail.com>
+References: <cover.1622675569.git.connojdavis@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi all,
+Add arch-specific makefiles and configs needed to build for
+riscv. Also add a minimal head.S that is a simple infinite loop.
+head.o can be built with
 
-This series introduces a minimal build for RISCV. It is based on Bobby's
-previous work from last year[0] rebased onto current Xen.
+$ make XEN_TARGET_ARCH=riscv64 SUBSYSTEMS=xen -C xen tiny64_defconfig
+$ make XEN_TARGET_ARCH=riscv64 SUBSYSTEMS=xen -C xen TARGET=riscv64/head.o
 
-This series provides the patches necessary to get a minimal build
-working. The build is "minimal" in the sense that it only supports
-building TARGET=riscv64/head.o. The arch/riscv/riscv64/head.S is just
-a simple while(1).
+No other TARGET is supported at the moment.
 
-The first patch is a mod to non-RISCV bits that enable building a
-config with !CONFIG_HAS_NS16550.
-
-The second patch adds the make/Kconfig boilerplate alongside head.S and
-asm-riscv/config.h (head.S references ENTRY that is defined in
-asm-riscv/config.h).
-
-[0] https://lore.kernel.org/xen-devel/cover.1579615303.git.bobbyeshleman@gmail.com/
-
-Thanks,
-Connor
-
---
-Changes since v5:
-  - Added missing A-by from Jan to patch 1
-
-Changes since v4:
-  - Dropped patches 2 and 4 as these have been applied
-  - Moved arch/riscv/head.S to arch/riscv/riscv64/head.S for consistency
-    with ARM.
-  - Added Bob and myself to MAINTAINERS
-
-Changes since v3:
-  - Dropped "xen: Fix build when !CONFIG_GRANT_TABLE" since this was
-    applied by Jan
-  - Adjusted Kconfig condition for building NS16550
-  - Use bool rather than bool_t
-  - Removed riscv memory map, as this should probably be done later once
-    the frametable size is figured out
-  - Consolidated 64-bit #defines in asm-riscv/config.h
-  - Renamed riscv64_defconfig to tiny64_defconfig, added CONFIG_DEBUG
-    and CONFIG_DEBUG_INFO
-  - Fixed logic/alignment/whitespace issues in Kconfig files
-  - Use upstream archlinux riscv64 cross-compiler packages instead of
-    custom built toolchain in docker container
-
-Changes since v2:
-  - Reduced number of riscv files added to ease review
-
-Changes since v1:
-  - Dropped "xen/sched: Fix build when NR_CPUS == 1" since this was
-    fixed for 4.15
-  - Moved #ifdef-ary around iommu_enabled to iommu.h
-  - Moved struct grant_table declaration above ifdef CONFIG_GRANT_TABLE
-    instead of defining an empty struct when !CONFIG_GRANT_TABLE
---
-Connor Davis (2):
-  xen/char: Default HAS_NS16550 to y only for X86 and ARM
-  xen: Add files needed for minimal riscv build
-
+Signed-off-by: Connor Davis <connojdavis@gmail.com>
+---
+Bob: I moved back to XEN_TARGET_ARCH=riscv64 because supplying
+just XEN_TARGET_ARCH=riscv causes TARGET_ARCH == TARGET_SUBARCH, and
+that broke the build after the recent commit b6ecd5c8bc
+"build: centralize / unify asm-offsets generation". It also deviates
+from how x86 and arm work now, so I think this change is for the best
+for now. That commit is also why the PHONY include target is added
+in the riscv/Makefile.
+---
  MAINTAINERS                             |  8 +++++
  config/riscv64.mk                       |  5 +++
  xen/Makefile                            |  8 +++--
@@ -174,9 +135,8 @@ Connor Davis (2):
  xen/arch/riscv/configs/tiny64_defconfig | 13 +++++++
  xen/arch/riscv/riscv64/asm-offsets.c    |  0
  xen/arch/riscv/riscv64/head.S           |  6 ++++
- xen/drivers/char/Kconfig                |  1 +
  xen/include/asm-riscv/config.h          | 47 +++++++++++++++++++++++++
- 13 files changed, 149 insertions(+), 2 deletions(-)
+ 12 files changed, 148 insertions(+), 2 deletions(-)
  create mode 100644 config/riscv64.mk
  create mode 100644 xen/arch/riscv/Kconfig
  create mode 100644 xen/arch/riscv/Kconfig.debug
@@ -188,6 +148,243 @@ Connor Davis (2):
  create mode 100644 xen/arch/riscv/riscv64/head.S
  create mode 100644 xen/include/asm-riscv/config.h
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d46b08a0d2..956e71220d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -456,6 +456,14 @@ F:	tools/libs/light/libxl_nonetbuffer.c
+ F:	tools/hotplug/Linux/remus-netbuf-setup
+ F:	tools/hotplug/Linux/block-drbd-probe
+ 
++RISCV
++M:	Bob Eshleman <bobbyeshleman@gmail.com>
++R:	Connor Davis <connojdavis@gmail.com>
++S:	Supported
++F:	config/riscv64.mk
++F:	xen/arch/riscv/
++F:	xen/include/asm-riscv/
++
+ RTDS SCHEDULER
+ M:	Dario Faggioli <dfaggioli@suse.com>
+ M:	Meng Xu <mengxu@cis.upenn.edu>
+diff --git a/config/riscv64.mk b/config/riscv64.mk
+new file mode 100644
+index 0000000000..a5a21e5fa2
+--- /dev/null
++++ b/config/riscv64.mk
+@@ -0,0 +1,5 @@
++CONFIG_RISCV := y
++CONFIG_RISCV_64 := y
++CONFIG_RISCV_$(XEN_OS) := y
++
++CONFIG_XEN_INSTALL_SUFFIX :=
+diff --git a/xen/Makefile b/xen/Makefile
+index 7ce7692354..89879fad4c 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -26,7 +26,9 @@ MAKEFLAGS += -rR
+ EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
+ 
+ ARCH=$(XEN_TARGET_ARCH)
+-SRCARCH=$(shell echo $(ARCH) | sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g')
++SRCARCH=$(shell echo $(ARCH) | \
++          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
++              -e s'/riscv.*/riscv/g')
+ 
+ # Don't break if the build process wasn't called from the top level
+ # we need XEN_TARGET_ARCH to generate the proper config
+@@ -35,7 +37,8 @@ include $(XEN_ROOT)/Config.mk
+ # Set ARCH/SUBARCH appropriately.
+ export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
+ export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
+-                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g')
++                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
++                                -e s'/riscv.*/riscv/g')
+ 
+ # Allow someone to change their config file
+ export KCONFIG_CONFIG ?= .config
+@@ -335,6 +338,7 @@ _clean: delete-unfresh-files
+ 	$(MAKE) $(clean) xsm
+ 	$(MAKE) $(clean) crypto
+ 	$(MAKE) $(clean) arch/arm
++	$(MAKE) $(clean) arch/riscv
+ 	$(MAKE) $(clean) arch/x86
+ 	$(MAKE) $(clean) test
+ 	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) clean
+diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
+new file mode 100644
+index 0000000000..bd8381c5e0
+--- /dev/null
++++ b/xen/arch/riscv/Kconfig
+@@ -0,0 +1,47 @@
++config RISCV
++	def_bool y
++
++config RISCV_64
++	def_bool y
++	select 64BIT
++
++config ARCH_DEFCONFIG
++	string
++	default "arch/riscv/configs/tiny64_defconfig"
++
++menu "Architecture Features"
++
++source "arch/Kconfig"
++
++endmenu
++
++menu "ISA Selection"
++
++choice
++	prompt "Base ISA"
++	default RISCV_ISA_RV64IMA if RISCV_64
++	help
++	  This selects the base ISA extensions that Xen will target.
++
++config RISCV_ISA_RV64IMA
++	bool "RV64IMA"
++	help
++	  Use the RV64I base ISA, plus the "M" and "A" extensions
++	  for integer multiply/divide and atomic instructions, respectively.
++
++endchoice
++
++config RISCV_ISA_C
++	bool "Compressed extension"
++	help
++	  Add "C" to the ISA subsets that the toolchain is allowed to
++	  emit when building Xen, which results in compressed instructions
++	  in the Xen binary.
++
++	  If unsure, say N.
++
++endmenu
++
++source "common/Kconfig"
++
++source "drivers/Kconfig"
+diff --git a/xen/arch/riscv/Kconfig.debug b/xen/arch/riscv/Kconfig.debug
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+new file mode 100644
+index 0000000000..942e4ffbc1
+--- /dev/null
++++ b/xen/arch/riscv/Makefile
+@@ -0,0 +1,2 @@
++.PHONY: include
++include:
+diff --git a/xen/arch/riscv/Rules.mk b/xen/arch/riscv/Rules.mk
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
+new file mode 100644
+index 0000000000..53dadb8975
+--- /dev/null
++++ b/xen/arch/riscv/arch.mk
+@@ -0,0 +1,14 @@
++########################################
++# RISCV-specific definitions
++
++CFLAGS-$(CONFIG_RISCV_64) += -mabi=lp64
++
++riscv-march-$(CONFIG_RISCV_ISA_RV64IMA) := rv64ima
++riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
++
++# Note that -mcmodel=medany is used so that Xen can be mapped
++# into the upper half _or_ the lower half of the address space.
++# -mcmodel=medlow would force Xen into the lower half.
++
++CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
++CFLAGS += -I$(BASEDIR)/include
+diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
+new file mode 100644
+index 0000000000..3c9a2ff941
+--- /dev/null
++++ b/xen/arch/riscv/configs/tiny64_defconfig
+@@ -0,0 +1,13 @@
++# CONFIG_SCHED_CREDIT is not set
++# CONFIG_SCHED_RTDS is not set
++# CONFIG_SCHED_NULL is not set
++# CONFIG_SCHED_ARINC653 is not set
++# CONFIG_TRACEBUFFER is not set
++# CONFIG_HYPFS is not set
++# CONFIG_GRANT_TABLE is not set
++# CONFIG_SPECULATIVE_HARDEN_ARRAY is not set
++
++CONFIG_RISCV_64=y
++CONFIG_DEBUG=y
++CONFIG_DEBUG_INFO=y
++CONFIG_EXPERT=y
+diff --git a/xen/arch/riscv/riscv64/asm-offsets.c b/xen/arch/riscv/riscv64/asm-offsets.c
+new file mode 100644
+index 0000000000..e69de29bb2
+diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
+new file mode 100644
+index 0000000000..0dbc27ba75
+--- /dev/null
++++ b/xen/arch/riscv/riscv64/head.S
+@@ -0,0 +1,6 @@
++#include <asm/config.h>
++
++        .text
++
++ENTRY(start)
++        j  start
+diff --git a/xen/include/asm-riscv/config.h b/xen/include/asm-riscv/config.h
+new file mode 100644
+index 0000000000..e2ae21de61
+--- /dev/null
++++ b/xen/include/asm-riscv/config.h
+@@ -0,0 +1,47 @@
++#ifndef __RISCV_CONFIG_H__
++#define __RISCV_CONFIG_H__
++
++#if defined(CONFIG_RISCV_64)
++# define LONG_BYTEORDER 3
++# define ELFSIZE 64
++# define MAX_VIRT_CPUS 128u
++#else
++# error "Unsupported RISCV variant"
++#endif
++
++#define BYTES_PER_LONG (1 << LONG_BYTEORDER)
++#define BITS_PER_LONG  (BYTES_PER_LONG << 3)
++#define POINTER_ALIGN  BYTES_PER_LONG
++
++#define BITS_PER_LLONG 64
++
++/* xen_ulong_t is always 64 bits */
++#define BITS_PER_XEN_ULONG 64
++
++#define CONFIG_RISCV_L1_CACHE_SHIFT 6
++#define CONFIG_PAGEALLOC_MAX_ORDER  18
++#define CONFIG_DOMU_MAX_ORDER       9
++#define CONFIG_HWDOM_MAX_ORDER      10
++
++#define OPT_CONSOLE_STR "dtuart"
++#define INVALID_VCPU_ID MAX_VIRT_CPUS
++
++/* Linkage for RISCV */
++#ifdef __ASSEMBLY__
++#define ALIGN .align 2
++
++#define ENTRY(name)                                \
++  .globl name;                                     \
++  ALIGN;                                           \
++  name:
++#endif
++
++#endif /* __RISCV_CONFIG_H__ */
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.31.1
 
