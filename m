@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D151BC4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 06:54:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5F68C47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 06:54:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A294861376
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 06:54:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A294861376
+	by mail.kernel.org (Postfix) with ESMTPS id A787B6135D
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 06:54:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A787B6135D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135478.251668 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135481.251679 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKm7-0007rC-As; Wed, 02 Jun 2021 06:54:47 +0000
+	id 1loKmB-0008Ea-KB; Wed, 02 Jun 2021 06:54:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135478.251668; Wed, 02 Jun 2021 06:54:47 +0000
+Received: by outflank-mailman (output) from mailman id 135481.251679; Wed, 02 Jun 2021 06:54:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKm7-0007qz-65; Wed, 02 Jun 2021 06:54:47 +0000
-Received: by outflank-mailman (input) for mailman id 135478;
- Wed, 02 Jun 2021 06:54:46 +0000
+	id 1loKmB-0008EP-Gk; Wed, 02 Jun 2021 06:54:51 +0000
+Received: by outflank-mailman (input) for mailman id 135481;
+ Wed, 02 Jun 2021 06:54:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKm6-0007A2-2o
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:54:46 +0000
+ id 1loKmB-0007A2-31
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:54:51 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 14b895fd-ad3b-4db4-8bd1-36518816df4c;
- Wed, 02 Jun 2021 06:54:33 +0000 (UTC)
+ id e58446d6-9e03-4f7a-a64f-71458a14aaab;
+ Wed, 02 Jun 2021 06:54:36 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKlG-0025Fb-J7; Wed, 02 Jun 2021 06:53:55 +0000
+ id 1loKlW-0025KS-9M; Wed, 02 Jun 2021 06:54:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 14b895fd-ad3b-4db4-8bd1-36518816df4c
+X-Inumbo-ID: e58446d6-9e03-4f7a-a64f-71458a14aaab
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=SnRF2RasuO3TzWzCcWD7psRmahwH4O2DjzNGyzgJCxM=; b=RfiXqx1buYxjqGM6Ru6s2uXbtK
-	szP8Lp35KdwoBLpRViL7iCBQHBOTXZ4Qu5LJOvN43OaaHCTJwbYuBSl2SqXNEe3Ty441iVm62zV/q
-	FK7bqtRTYnR/sNzxWhxA2AWxTTSYR0R47li/OgrbNqJ/z/C247XNi+vyVCBUJz2HWLNRhHDg9jROf
-	W37wVhanz0woIFa4DI1Hiypd6xGuMEzMDW+t6oSvgQDur5ioE4KQTAUXWM04CshX1rW4l4k5bAsYt
-	fMWsLaqDTkxSQegnpPyUc9dgQ8DJelIKHSJsddjUREuKapJzcCJM+AP8gSr/w6bRFlEnBsoDVPXvd
-	WWIbvGOQ==;
+	bh=9pvQ9WWixoN79V+IFrwZ0yGtfnJdYnRvQElOajEUx4E=; b=gnk1MFf6oC2iDvM0lQExGF55IT
+	Fu4WEOCNNJ9mVEtVcIDrtrwvLS92XEx/Y9jJNPlMZzP3mxVH717a4VCLxOLSslRLKspq6OAA9D5yw
+	EQDkVL09aPuAvCsSUDM3ZFzSxHOeCU6gBkEfhYQCCehrU9uW68j9GkCyo7Ds0V43zhcXAh05TNWGS
+	LhXZW/q9HT26Y7QKqOeqywIxRBtkOI49AYNNeXwG3akyX15CxDIe0h/fq/1eJkZhMao+G/fiRrulm
+	dyrb+u0WyEaL8vr4wMg0Ys8BKcowBJnF+Zn2V2osWkSUWM27u+JhH6YkPr+2yh9LuvxLx7wgsnTfO
+	l9Bduvjw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 01/30] blk-mq: factor out a blk_mq_alloc_sq_tag_set helper
-Date: Wed,  2 Jun 2021 09:53:16 +0300
-Message-Id: <20210602065345.355274-2-hch@lst.de>
+Subject: [PATCH 04/30] virtio-blk: use blk_mq_alloc_disk
+Date: Wed,  2 Jun 2021 09:53:19 +0300
+Message-Id: <20210602065345.355274-5-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -105,84 +105,87 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Factour out a helper to initialize a simple single hw queue tag_set from
-blk_mq_init_sq_queue.  This will allow to phase out blk_mq_init_sq_queue
-in favor of a more symmetric and general API.
+Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
+allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/blk-mq.c         | 32 ++++++++++++++++++--------------
- include/linux/blk-mq.h |  3 +++
- 2 files changed, 21 insertions(+), 14 deletions(-)
+ drivers/block/virtio_blk.c | 26 +++++++-------------------
+ 1 file changed, 7 insertions(+), 19 deletions(-)
 
-diff --git a/block/blk-mq.c b/block/blk-mq.c
-index f11d4018ce2e..eaacfa963a73 100644
---- a/block/blk-mq.c
-+++ b/block/blk-mq.c
-@@ -3152,24 +3152,12 @@ struct request_queue *blk_mq_init_sq_queue(struct blk_mq_tag_set *set,
- 	struct request_queue *q;
- 	int ret;
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index b9fa3ef5b57c..e4bd3b1fc3c2 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -749,13 +749,6 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 	if (err)
+ 		goto out_free_vblk;
  
--	memset(set, 0, sizeof(*set));
--	set->ops = ops;
--	set->nr_hw_queues = 1;
--	set->nr_maps = 1;
--	set->queue_depth = queue_depth;
--	set->numa_node = NUMA_NO_NODE;
--	set->flags = set_flags;
--
--	ret = blk_mq_alloc_tag_set(set);
-+	ret = blk_mq_alloc_sq_tag_set(set, ops, queue_depth, set_flags);
- 	if (ret)
- 		return ERR_PTR(ret);
--
- 	q = blk_mq_init_queue(set);
--	if (IS_ERR(q)) {
-+	if (IS_ERR(q))
- 		blk_mq_free_tag_set(set);
--		return q;
+-	/* FIXME: How many partitions?  How long is a piece of string? */
+-	vblk->disk = alloc_disk(1 << PART_BITS);
+-	if (!vblk->disk) {
+-		err = -ENOMEM;
+-		goto out_free_vq;
 -	}
 -
- 	return q;
- }
- EXPORT_SYMBOL(blk_mq_init_sq_queue);
-@@ -3589,6 +3577,22 @@ int blk_mq_alloc_tag_set(struct blk_mq_tag_set *set)
- }
- EXPORT_SYMBOL(blk_mq_alloc_tag_set);
+ 	/* Default queue sizing is to fill the ring. */
+ 	if (likely(!virtblk_queue_depth)) {
+ 		queue_depth = vblk->vqs[0].vq->num_free;
+@@ -779,21 +772,20 @@ static int virtblk_probe(struct virtio_device *vdev)
  
-+/* allocate and initialize a tagset for a simple single-queue device */
-+int blk_mq_alloc_sq_tag_set(struct blk_mq_tag_set *set,
-+		const struct blk_mq_ops *ops, unsigned int queue_depth,
-+		unsigned int set_flags)
-+{
-+	memset(set, 0, sizeof(*set));
-+	set->ops = ops;
-+	set->nr_hw_queues = 1;
-+	set->nr_maps = 1;
-+	set->queue_depth = queue_depth;
-+	set->numa_node = NUMA_NO_NODE;
-+	set->flags = set_flags;
-+	return blk_mq_alloc_tag_set(set);
-+}
-+EXPORT_SYMBOL_GPL(blk_mq_alloc_sq_tag_set);
-+
- void blk_mq_free_tag_set(struct blk_mq_tag_set *set)
- {
- 	int i, j;
-diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
-index 359486940fa0..bb950fc669ef 100644
---- a/include/linux/blk-mq.h
-+++ b/include/linux/blk-mq.h
-@@ -439,6 +439,9 @@ struct request_queue *blk_mq_init_sq_queue(struct blk_mq_tag_set *set,
- void blk_mq_unregister_dev(struct device *, struct request_queue *);
+ 	err = blk_mq_alloc_tag_set(&vblk->tag_set);
+ 	if (err)
+-		goto out_put_disk;
++		goto out_free_vq;
  
- int blk_mq_alloc_tag_set(struct blk_mq_tag_set *set);
-+int blk_mq_alloc_sq_tag_set(struct blk_mq_tag_set *set,
-+		const struct blk_mq_ops *ops, unsigned int queue_depth,
-+		unsigned int set_flags);
- void blk_mq_free_tag_set(struct blk_mq_tag_set *set);
+-	q = blk_mq_init_queue(&vblk->tag_set);
+-	if (IS_ERR(q)) {
+-		err = -ENOMEM;
++	vblk->disk = blk_mq_alloc_disk(&vblk->tag_set, vblk);
++	if (IS_ERR(vblk->disk)) {
++		err = PTR_ERR(vblk->disk);
+ 		goto out_free_tags;
+ 	}
+-	vblk->disk->queue = q;
+-
+-	q->queuedata = vblk;
++	q = vblk->disk->queue;
  
- void blk_mq_flush_plug_list(struct blk_plug *plug, bool from_schedule);
+ 	virtblk_name_format("vd", index, vblk->disk->disk_name, DISK_NAME_LEN);
+ 
+ 	vblk->disk->major = major;
+ 	vblk->disk->first_minor = index_to_minor(index);
++	vblk->disk->minors = 1 << PART_BITS;
+ 	vblk->disk->private_data = vblk;
+ 	vblk->disk->fops = &virtblk_fops;
+ 	vblk->disk->flags |= GENHD_FL_EXT_DEVT;
+@@ -892,8 +884,6 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 
+ out_free_tags:
+ 	blk_mq_free_tag_set(&vblk->tag_set);
+-out_put_disk:
+-	put_disk(vblk->disk);
+ out_free_vq:
+ 	vdev->config->del_vqs(vdev);
+ 	kfree(vblk->vqs);
+@@ -913,8 +903,7 @@ static void virtblk_remove(struct virtio_device *vdev)
+ 	flush_work(&vblk->config_work);
+ 
+ 	del_gendisk(vblk->disk);
+-	blk_cleanup_queue(vblk->disk->queue);
+-
++	blk_cleanup_disk(vblk->disk);
+ 	blk_mq_free_tag_set(&vblk->tag_set);
+ 
+ 	mutex_lock(&vblk->vdev_mutex);
+@@ -925,7 +914,6 @@ static void virtblk_remove(struct virtio_device *vdev)
+ 	/* Virtqueues are stopped, nothing can use vblk->vdev anymore. */
+ 	vblk->vdev = NULL;
+ 
+-	put_disk(vblk->disk);
+ 	vdev->config->del_vqs(vdev);
+ 	kfree(vblk->vqs);
+ 
 -- 
 2.30.2
 
