@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 084B6C47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 351BEC47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CE49A610CB
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE49A610CB
+	by mail.kernel.org (Postfix) with ESMTPS id E0D316135D
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E0D316135D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135555.251883 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135558.251891 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKue-0002HO-36; Wed, 02 Jun 2021 07:03:36 +0000
+	id 1loKuf-0002Ub-5i; Wed, 02 Jun 2021 07:03:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135555.251883; Wed, 02 Jun 2021 07:03:35 +0000
+Received: by outflank-mailman (output) from mailman id 135558.251891; Wed, 02 Jun 2021 07:03:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKud-00027n-6v; Wed, 02 Jun 2021 07:03:35 +0000
-Received: by outflank-mailman (input) for mailman id 135555;
- Wed, 02 Jun 2021 07:03:31 +0000
+	id 1loKue-0002Pv-Ay; Wed, 02 Jun 2021 07:03:36 +0000
+Received: by outflank-mailman (input) for mailman id 135558;
+ Wed, 02 Jun 2021 07:03:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKpy-0007A2-BZ
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:46 +0000
+ id 1loKpj-0007A2-Az
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:31 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4fb205f2-e459-4e31-b892-046aaed03897;
- Wed, 02 Jun 2021 06:56:32 +0000 (UTC)
+ id 7b141df7-66ac-474d-b20d-54e51929abcb;
+ Wed, 02 Jun 2021 06:56:17 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKnR-0026ec-A8; Wed, 02 Jun 2021 06:56:10 +0000
+ id 1loKnA-0026PT-6J; Wed, 02 Jun 2021 06:55:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4fb205f2-e459-4e31-b892-046aaed03897
+X-Inumbo-ID: 7b141df7-66ac-474d-b20d-54e51929abcb
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=ZrMEf0Ls9F+Osx12fthB6jYFp7YA2RuOfcMRudkR5eo=; b=RmhbmeEgAua7D4yc0CN6m+daMw
-	ggu55W3yOtqsYbnSz5c1dfLFQJ9ncvb9hc3nNvkXY6f0gcSGMOhLStwUwb0UQrJ1aG7h0ZSUng/WX
-	es/ejunr+apwEHWPUWRQDfPQvgeX1hrHlUl4NOb5oItwm7czJQwirbV+FChfRP7dM0qxLnCRqVmgI
-	bA1/+LYF3tWUOd/53KL9zns/VStS5lpZkIiq55Ah7xS6m/8ryTxd0+2JtSdNyv1ovCOilXcKoWuJr
-	8KfLwtubqhZXD6/OkB2mdwrFmz8NTFBmkmZB+9B1+iGvFIgntGiUljL/AChzeEhq1iCnrHX8J/lkd
-	xKgRqjOg==;
+	bh=3eCT5ADUsi1wXGQC5ROk8G/iPsdy5HF5nCZ/CzuEH9g=; b=CHpdvSdDQx2S7VBfw36yFJIOKW
+	u3raTq1dP6Gu10/PJ+IzNfdJsTGDfodiKpWnXSrAPsiiXAil4FixRR4LHQx/r2/2WajLehYqseurF
+	+SXOVenwMIEvShMpPI3TV0igiPSTDc1jus2MS134mkHJE4fSKWXJgTMpWUETOWUQR+sQvpcZNrvGr
+	ImONWbqeM3vG4waS2LyqljTVK2xihrO+4vFy94tUR5AZHm4zAb5VJXdTbeKyJ5b1ZyVapnUITJgc0
+	rAK1o1WbLZZ2lIkx0tqU86DqYL3xaSap2ZyjXquU1Hz/pJyGXKGtlKYDaGKwU57VNJwF/m1NojREe
+	Jk3wMbUQ==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 30/30] z2ram: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:45 +0300
-Message-Id: <20210602065345.355274-31-hch@lst.de>
+Subject: [PATCH 26/30] ubi: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:41 +0300
+Message-Id: <20210602065345.355274-27-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -110,45 +110,131 @@ request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/z2ram.c | 15 ++++-----------
- 1 file changed, 4 insertions(+), 11 deletions(-)
+ drivers/mtd/ubi/block.c | 68 ++++++++++++++++++-----------------------
+ 1 file changed, 29 insertions(+), 39 deletions(-)
 
-diff --git a/drivers/block/z2ram.c b/drivers/block/z2ram.c
-index c1d20818e649..a8968d9e759b 100644
---- a/drivers/block/z2ram.c
-+++ b/drivers/block/z2ram.c
-@@ -323,27 +323,20 @@ static const struct blk_mq_ops z2_mq_ops = {
+diff --git a/drivers/mtd/ubi/block.c b/drivers/mtd/ubi/block.c
+index e1a2ae21dfd3..e003b4b44ffa 100644
+--- a/drivers/mtd/ubi/block.c
++++ b/drivers/mtd/ubi/block.c
+@@ -394,53 +394,46 @@ int ubiblock_create(struct ubi_volume_info *vi)
+ 	dev->vol_id = vi->vol_id;
+ 	dev->leb_size = vi->usable_leb_size;
  
- static int z2ram_register_disk(int minor)
- {
--	struct request_queue *q;
- 	struct gendisk *disk;
++	dev->tag_set.ops = &ubiblock_mq_ops;
++	dev->tag_set.queue_depth = 64;
++	dev->tag_set.numa_node = NUMA_NO_NODE;
++	dev->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
++	dev->tag_set.cmd_size = sizeof(struct ubiblock_pdu);
++	dev->tag_set.driver_data = dev;
++	dev->tag_set.nr_hw_queues = 1;
++
++	ret = blk_mq_alloc_tag_set(&dev->tag_set);
++	if (ret) {
++		dev_err(disk_to_dev(dev->gd), "blk_mq_alloc_tag_set failed");
++		goto out_free_dev;;
++	}
++
++
+ 	/* Initialize the gendisk of this ubiblock device */
+-	gd = alloc_disk(1);
+-	if (!gd) {
+-		pr_err("UBI: block: alloc_disk failed\n");
+-		ret = -ENODEV;
+-		goto out_free_dev;
++	gd = blk_mq_alloc_disk(&dev->tag_set, dev);
++	if (IS_ERR(gd)) {
++		ret = PTR_ERR(gd);
++		goto out_free_tags;
+ 	}
  
--	disk = alloc_disk(1);
--	if (!disk)
--		return -ENOMEM;
+ 	gd->fops = &ubiblock_ops;
+ 	gd->major = ubiblock_major;
++	gd->minors = 1;
+ 	gd->first_minor = idr_alloc(&ubiblock_minor_idr, dev, 0, 0, GFP_KERNEL);
+ 	if (gd->first_minor < 0) {
+ 		dev_err(disk_to_dev(gd),
+ 			"block: dynamic minor allocation failed");
+ 		ret = -ENODEV;
+-		goto out_put_disk;
++		goto out_cleanup_disk;
+ 	}
+ 	gd->private_data = dev;
+ 	sprintf(gd->disk_name, "ubiblock%d_%d", dev->ubi_num, dev->vol_id);
+ 	set_capacity(gd, disk_capacity);
+ 	dev->gd = gd;
+ 
+-	dev->tag_set.ops = &ubiblock_mq_ops;
+-	dev->tag_set.queue_depth = 64;
+-	dev->tag_set.numa_node = NUMA_NO_NODE;
+-	dev->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
+-	dev->tag_set.cmd_size = sizeof(struct ubiblock_pdu);
+-	dev->tag_set.driver_data = dev;
+-	dev->tag_set.nr_hw_queues = 1;
 -
--	q = blk_mq_init_queue(&tag_set);
--	if (IS_ERR(q)) {
--		put_disk(disk);
--		return PTR_ERR(q);
+-	ret = blk_mq_alloc_tag_set(&dev->tag_set);
+-	if (ret) {
+-		dev_err(disk_to_dev(dev->gd), "blk_mq_alloc_tag_set failed");
+-		goto out_remove_minor;
 -	}
-+	disk = blk_mq_alloc_disk(&tag_set, NULL);
-+	if (IS_ERR(disk))
-+		return PTR_ERR(disk);
+-
+-	dev->rq = blk_mq_init_queue(&dev->tag_set);
+-	if (IS_ERR(dev->rq)) {
+-		dev_err(disk_to_dev(gd), "blk_mq_init_queue failed");
+-		ret = PTR_ERR(dev->rq);
+-		goto out_free_tags;
+-	}
++	dev->rq = gd->queue;
+ 	blk_queue_max_segments(dev->rq, UBI_MAX_SG_COUNT);
  
- 	disk->major = Z2RAM_MAJOR;
- 	disk->first_minor = minor;
-+	disk->minors = 1;
- 	disk->fops = &z2_fops;
- 	if (minor)
- 		sprintf(disk->disk_name, "z2ram%d", minor);
- 	else
- 		sprintf(disk->disk_name, "z2ram");
--	disk->queue = q;
+-	dev->rq->queuedata = dev;
+-	dev->gd->queue = dev->rq;
+-
+ 	/*
+ 	 * Create one workqueue per volume (per registered block device).
+ 	 * Rembember workqueues are cheap, they're not threads.
+@@ -448,7 +441,7 @@ int ubiblock_create(struct ubi_volume_info *vi)
+ 	dev->wq = alloc_workqueue("%s", 0, 0, gd->disk_name);
+ 	if (!dev->wq) {
+ 		ret = -ENOMEM;
+-		goto out_free_queue;
++		goto out_remove_minor;
+ 	}
  
- 	z2ram_gendisk[minor] = disk;
- 	add_disk(disk);
+ 	list_add_tail(&dev->list, &ubiblock_devices);
+@@ -460,14 +453,12 @@ int ubiblock_create(struct ubi_volume_info *vi)
+ 	mutex_unlock(&devices_mutex);
+ 	return 0;
+ 
+-out_free_queue:
+-	blk_cleanup_queue(dev->rq);
+-out_free_tags:
+-	blk_mq_free_tag_set(&dev->tag_set);
+ out_remove_minor:
+ 	idr_remove(&ubiblock_minor_idr, gd->first_minor);
+-out_put_disk:
+-	put_disk(dev->gd);
++out_cleanup_disk:
++	blk_cleanup_disk(dev->gd);
++out_free_tags:
++	blk_mq_free_tag_set(&dev->tag_set);
+ out_free_dev:
+ 	kfree(dev);
+ out_unlock:
+@@ -483,11 +474,10 @@ static void ubiblock_cleanup(struct ubiblock *dev)
+ 	/* Flush pending work */
+ 	destroy_workqueue(dev->wq);
+ 	/* Finally destroy the blk queue */
+-	blk_cleanup_queue(dev->rq);
+-	blk_mq_free_tag_set(&dev->tag_set);
+ 	dev_info(disk_to_dev(dev->gd), "released");
++	blk_cleanup_disk(dev->gd);
++	blk_mq_free_tag_set(&dev->tag_set);
+ 	idr_remove(&ubiblock_minor_idr, dev->gd->first_minor);
+-	put_disk(dev->gd);
+ }
+ 
+ int ubiblock_remove(struct ubi_volume_info *vi)
 -- 
 2.30.2
 
