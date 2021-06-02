@@ -5,41 +5,41 @@ X-Spam-Level:
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8025BC47096
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD8AAC47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 510CB6135D
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 510CB6135D
+	by mail.kernel.org (Postfix) with ESMTPS id ABA146135D
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ABA146135D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135530.251793 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135526.251777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuI-0006tP-TE; Wed, 02 Jun 2021 07:03:14 +0000
+	id 1loKuH-0006WT-2P; Wed, 02 Jun 2021 07:03:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135530.251793; Wed, 02 Jun 2021 07:03:14 +0000
+Received: by outflank-mailman (output) from mailman id 135526.251777; Wed, 02 Jun 2021 07:03:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuI-0006re-Nn; Wed, 02 Jun 2021 07:03:14 +0000
-Received: by outflank-mailman (input) for mailman id 135530;
- Wed, 02 Jun 2021 07:03:12 +0000
+	id 1loKuG-0006WM-VB; Wed, 02 Jun 2021 07:03:12 +0000
+Received: by outflank-mailman (input) for mailman id 135526;
+ Wed, 02 Jun 2021 07:03:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKpZ-0007A2-Ai
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:21 +0000
+ id 1loKn4-0007A2-5N
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:55:46 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 369ca6a9-5334-40bf-bedc-c82caf2214f7;
- Wed, 02 Jun 2021 06:56:11 +0000 (UTC)
+ id b1903a0d-270d-4525-9128-57f82aa6401c;
+ Wed, 02 Jun 2021 06:55:05 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKn1-0026HM-J4; Wed, 02 Jun 2021 06:55:44 +0000
+ id 1loKly-0025TX-SP; Wed, 02 Jun 2021 06:54:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 369ca6a9-5334-40bf-bedc-c82caf2214f7
+X-Inumbo-ID: b1903a0d-270d-4525-9128-57f82aa6401c
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=yE8r2l5ezl7YxULOvA5WBGUgnr1EKs2E6TVb/drKQds=; b=r98dDxDiRvwlhNhs3T+1sVCcmx
-	9LSO0JAkx53106Z5FUQCYz3et9mT695nE04/mTWwxr/+e0qSYn8Q1H1hjEWJdvuJc3pumGMIBHyUT
-	t4W4GpkPuUNrdOHpe0KYFnWLvVAzI+WQwBh+pEi7U6I9KnMAFAlHPJRr4BSXUOn39VZTgNc5w2jvT
-	YFMKttfQVUSu/qkAB2YLyqtpsqykpUWPfHXrpKaBY5Lxa/Kceg/Y0XBAcrgpyvG0PgFSkx/IaoPgV
-	NvObxijOnNz7w1Y0/FNOweKAbiF8uEg9oHb82XorMJoTWx9Agt4jviXSvoy73IZqfJrU1acBTcolk
-	E0JQevww==;
+	bh=VKYFJ4i2fp8TEWNMfgNX8wUyWWT+i6aWdBUPvxl8r/8=; b=Kje0bT6cmZTfkyQxEo++Euls2J
+	q9bXO5jBawfI5ZZjRGS03IawDLbrxJhUhzTvnTagkSofonFcJnjtZC0dS+BvJRy6582P7WupPFtDf
+	YeiiT9xlBwIlX3HIpr7KUTIHfDr8j72sUD7rZUU1oNkALcPDkDl0X1EYUDita2YrN3DmOI90nfQUA
+	gBWdA9G+j1xkdZAZ9F+vJTeuzyM+QXgQvwA/7khxUkXj7qUfyZB13p4qh8JGRf1c0Rpcy0rETNuYn
+	ceg4VbVFwo5MAMklt15SLCAQymtkaL4oCoEvsKTQbGlTwFmOXo2sfzTaSyLUMXNv/EYWRrCaCG51D
+	BG4zCUxQ==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 24/30] sx8: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:39 +0300
-Message-Id: <20210602065345.355274-25-hch@lst.de>
+Subject: [PATCH 09/30] mtd_blkdevs: use blk_mq_alloc_disk
+Date: Wed,  2 Jun 2021 09:53:24 +0300
+Message-Id: <20210602065345.355274-10-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -105,68 +105,115 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
-request_queue allocation.
+Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
+allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/sx8.c | 23 +++++++----------------
- 1 file changed, 7 insertions(+), 16 deletions(-)
+ drivers/mtd/mtd_blkdevs.c | 48 ++++++++++++++++++---------------------
+ 1 file changed, 22 insertions(+), 26 deletions(-)
 
-diff --git a/drivers/block/sx8.c b/drivers/block/sx8.c
-index 2cdf2771f8e8..f01f860b0e62 100644
---- a/drivers/block/sx8.c
-+++ b/drivers/block/sx8.c
-@@ -1343,32 +1343,25 @@ static int carm_init_disk(struct carm_host *host, unsigned int port_no)
- {
- 	struct carm_port *port = &host->port[port_no];
- 	struct gendisk *disk;
--	struct request_queue *q;
+diff --git a/drivers/mtd/mtd_blkdevs.c b/drivers/mtd/mtd_blkdevs.c
+index fb8e12d590a1..5dc4c966ea73 100644
+--- a/drivers/mtd/mtd_blkdevs.c
++++ b/drivers/mtd/mtd_blkdevs.c
+@@ -30,11 +30,9 @@ static void blktrans_dev_release(struct kref *kref)
+ 	struct mtd_blktrans_dev *dev =
+ 		container_of(kref, struct mtd_blktrans_dev, ref);
  
- 	port->host = host;
- 	port->port_no = port_no;
+-	dev->disk->private_data = NULL;
+-	blk_cleanup_queue(dev->rq);
++	blk_cleanup_disk(dev->disk);
+ 	blk_mq_free_tag_set(dev->tag_set);
+ 	kfree(dev->tag_set);
+-	put_disk(dev->disk);
+ 	list_del(&dev->list);
+ 	kfree(dev);
+ }
+@@ -354,7 +352,7 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
+ 	if (new->devnum > (MINORMASK >> tr->part_bits) ||
+ 	    (tr->part_bits && new->devnum >= 27 * 26)) {
+ 		mutex_unlock(&blktrans_ref_mutex);
+-		goto error1;
++		return ret;
+ 	}
  
--	disk = alloc_disk(CARM_MINORS_PER_MAJOR);
--	if (!disk)
--		return -ENOMEM;
-+	disk = blk_mq_alloc_disk(&host->tag_set, port);
-+	if (IS_ERR(disk))
-+		return PTR_ERR(disk);
+ 	list_add_tail(&new->list, &tr->devs);
+@@ -366,17 +364,28 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
+ 	if (!tr->writesect)
+ 		new->readonly = 1;
  
- 	port->disk = disk;
- 	sprintf(disk->disk_name, DRV_NAME "/%u",
- 		(unsigned int)host->id * CARM_MAX_PORTS + port_no);
- 	disk->major = host->major;
- 	disk->first_minor = port_no * CARM_MINORS_PER_MAJOR;
-+	disk->minors = CARM_MINORS_PER_MAJOR;
- 	disk->fops = &carm_bd_ops;
- 	disk->private_data = port;
+-	/* Create gendisk */
+ 	ret = -ENOMEM;
+-	gd = alloc_disk(1 << tr->part_bits);
++	new->tag_set = kzalloc(sizeof(*new->tag_set), GFP_KERNEL);
++	if (!new->tag_set)
++		goto out_list_del;
  
--	q = blk_mq_init_queue(&host->tag_set);
--	if (IS_ERR(q))
--		return PTR_ERR(q);
+-	if (!gd)
+-		goto error2;
++	ret = blk_mq_alloc_sq_tag_set(new->tag_set, &mtd_mq_ops, 2,
++			BLK_MQ_F_SHOULD_MERGE | BLK_MQ_F_BLOCKING);
++	if (ret)
++		goto out_kfree_tag_set;
++
++	/* Create gendisk */
++	gd = blk_mq_alloc_disk(new->tag_set, new);
++	if (IS_ERR(gd)) {
++		ret = PTR_ERR(gd);
++		goto out_free_tag_set;
++	}
+ 
+ 	new->disk = gd;
+ 	gd->private_data = new;
+ 	gd->major = tr->major;
+ 	gd->first_minor = (new->devnum) << tr->part_bits;
++	gd->minors = 1 << tr->part_bits;
+ 	gd->fops = &mtd_block_ops;
+ 
+ 	if (tr->part_bits)
+@@ -398,22 +407,9 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
+ 	spin_lock_init(&new->queue_lock);
+ 	INIT_LIST_HEAD(&new->rq_list);
+ 
+-	new->tag_set = kzalloc(sizeof(*new->tag_set), GFP_KERNEL);
+-	if (!new->tag_set)
+-		goto error3;
 -
--	blk_queue_max_segments(q, CARM_MAX_REQ_SG);
--	blk_queue_segment_boundary(q, CARM_SG_BOUNDARY);
+-	new->rq = blk_mq_init_sq_queue(new->tag_set, &mtd_mq_ops, 2,
+-				BLK_MQ_F_SHOULD_MERGE | BLK_MQ_F_BLOCKING);
+-	if (IS_ERR(new->rq)) {
+-		ret = PTR_ERR(new->rq);
+-		new->rq = NULL;
+-		goto error4;
+-	}
 -
--	q->queuedata = port;
--	disk->queue = q;
-+	blk_queue_max_segments(disk->queue, CARM_MAX_REQ_SG);
-+	blk_queue_segment_boundary(disk->queue, CARM_SG_BOUNDARY);
+ 	if (tr->flush)
+ 		blk_queue_write_cache(new->rq, true, false);
+ 
+-	new->rq->queuedata = new;
+ 	blk_queue_logical_block_size(new->rq, tr->blksize);
+ 
+ 	blk_queue_flag_set(QUEUE_FLAG_NONROT, new->rq);
+@@ -437,13 +433,13 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
+ 		WARN_ON(ret);
+ 	}
  	return 0;
+-error4:
++
++out_free_tag_set:
++	blk_mq_free_tag_set(new->tag_set);
++out_kfree_tag_set:
+ 	kfree(new->tag_set);
+-error3:
+-	put_disk(new->disk);
+-error2:
++out_list_del:
+ 	list_del(&new->list);
+-error1:
+ 	return ret;
  }
  
-@@ -1382,9 +1375,7 @@ static void carm_free_disk(struct carm_host *host, unsigned int port_no)
- 
- 	if (disk->flags & GENHD_FL_UP)
- 		del_gendisk(disk);
--	if (disk->queue)
--		blk_cleanup_queue(disk->queue);
--	put_disk(disk);
-+	blk_cleanup_disk(disk);
- }
- 
- static int carm_init_shm(struct carm_host *host)
 -- 
 2.30.2
 
