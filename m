@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEF3EC4708F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E24CBC47092
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 74196610CB
+	by mail.kernel.org (Postfix) with ESMTPS id B4CA5610CB
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 74196610CB
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4CA5610CB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135529.251789 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135531.251799 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuI-0006oY-Ex; Wed, 02 Jun 2021 07:03:14 +0000
+	id 1loKuJ-00070w-Bj; Wed, 02 Jun 2021 07:03:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135529.251789; Wed, 02 Jun 2021 07:03:14 +0000
+Received: by outflank-mailman (output) from mailman id 135531.251799; Wed, 02 Jun 2021 07:03:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuI-0006nu-9R; Wed, 02 Jun 2021 07:03:14 +0000
-Received: by outflank-mailman (input) for mailman id 135529;
+	id 1loKuJ-0006zE-6j; Wed, 02 Jun 2021 07:03:15 +0000
+Received: by outflank-mailman (input) for mailman id 135531;
  Wed, 02 Jun 2021 07:03:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKnT-0007A2-61
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:56:11 +0000
+ id 1loKp5-0007A2-A2
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:51 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d3699b6c-2647-4455-8297-c1370470e73e;
- Wed, 02 Jun 2021 06:55:15 +0000 (UTC)
+ id fbc7e121-7955-4001-835b-a07c6a1cacbe;
+ Wed, 02 Jun 2021 06:55:56 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKmA-0025cC-BJ; Wed, 02 Jun 2021 06:54:50 +0000
+ id 1loKmo-002647-90; Wed, 02 Jun 2021 06:55:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d3699b6c-2647-4455-8297-c1370470e73e
+X-Inumbo-ID: fbc7e121-7955-4001-835b-a07c6a1cacbe
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=5ce2JiRw1Xfew42Ze/lpHvPyVGAKQBeRUdFT9myuT9Y=; b=D3gIVkolzefyEuZRqpxqbTjD1/
-	me+j80WuDmIEDCJoCJJi3EaA6ZCyWCHg/zV//LKDbuT47z7Uv/x4kG2fPmshfH/L7rjbpzOatrjCm
-	ARVjVeFvQjsO3HUvF2D9OqnaTSbbV853xQhgkz8ti5uaY4uAnMmLFziTNlF8DV+PTEuHXC3T5Pive
-	LO7ao7bFh4VNXvbPzkbKc4TXiRq98YZ/TLJxnVtZ5DgjQkmVu3QKesdVOoc5Nq3l6loa9nnM9JqI4
-	k1sn5uw5l5Y+eo2X4wE+smW+Tw3NfDakiaWjXDN2Xlkt/Jo9eltYtyzKb8C/e2tK4DiSGkIBOzcFb
-	t7mn9Egw==;
+	bh=nI/ZQsUq4UAVWWD+XlWiGZNbHY/pEUl6HaoFswHnuQ4=; b=zGlrfHSC/oppIdruF4aRva3o8B
+	wtEFmwSmcFHEhWITeGFtHuY9Wo10P04noPv6NDlI408bgIBJRkVwwSNa+XWLEAJlAJuKZOmEWMLIK
+	ypzvochOmpTNDSw00TOxKnVYokteVrnhgtmSr1j1yBWFdJc27AJBjUNwKpISp0vKiLy2jjLimY0Ek
+	6P9TdCUkFiGBNMeFMPeq+ck3KCV/5OtDAHAEJPXDdOXuVm3Wp8pMIeYa4M2y0KOxO5BAOQxPKiJkk
+	QtHEQ5wWjrHNPSLHnxZaMHUkkPwojUCno1EhOKjx/cVHeiOj1wg20mdo5EoURfDorHUaeAxyeZdGp
+	7/lZ2gHg==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 12/30] swim: use blk_mq_alloc_disk
-Date: Wed,  2 Jun 2021 09:53:27 +0300
-Message-Id: <20210602065345.355274-13-hch@lst.de>
+Subject: [PATCH 21/30] pd: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:36 +0300
+Message-Id: <20210602065345.355274-22-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -105,78 +105,74 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
-allocation.
+Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
+request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/swim.c | 34 ++++++++++++++--------------------
- 1 file changed, 14 insertions(+), 20 deletions(-)
+ drivers/block/paride/pd.c | 30 ++++++++++++------------------
+ 1 file changed, 12 insertions(+), 18 deletions(-)
 
-diff --git a/drivers/block/swim.c b/drivers/block/swim.c
-index 2917b21f48ff..7ccc8d2a41bc 100644
---- a/drivers/block/swim.c
-+++ b/drivers/block/swim.c
-@@ -800,23 +800,20 @@ static int swim_floppy_init(struct swim_priv *swd)
- 	spin_lock_init(&swd->lock);
+diff --git a/drivers/block/paride/pd.c b/drivers/block/paride/pd.c
+index 828a45ffe0e7..3b2b8e872beb 100644
+--- a/drivers/block/paride/pd.c
++++ b/drivers/block/paride/pd.c
+@@ -879,18 +879,6 @@ static void pd_probe_drive(struct pd_unit *disk)
+ {
+ 	struct gendisk *p;
  
- 	for (drive = 0; drive < swd->floppy_count; drive++) {
--		struct request_queue *q;
+-	p = alloc_disk(1 << PD_BITS);
+-	if (!p)
+-		return;
 -
--		swd->unit[drive].disk = alloc_disk(1);
--		if (swd->unit[drive].disk == NULL) {
--			err = -ENOMEM;
-+		err = blk_mq_alloc_sq_tag_set(&swd->unit[drive].tag_set,
-+				&swim_mq_ops, 2, BLK_MQ_F_SHOULD_MERGE);
-+		if (err)
- 			goto exit_put_disks;
--		}
+-	strcpy(p->disk_name, disk->name);
+-	p->fops = &pd_fops;
+-	p->major = major;
+-	p->first_minor = (disk - pd) << PD_BITS;
+-	p->events = DISK_EVENT_MEDIA_CHANGE;
+-	disk->gd = p;
+-	p->private_data = disk;
+-
+ 	memset(&disk->tag_set, 0, sizeof(disk->tag_set));
+ 	disk->tag_set.ops = &pd_mq_ops;
+ 	disk->tag_set.cmd_size = sizeof(struct pd_req);
+@@ -903,14 +891,21 @@ static void pd_probe_drive(struct pd_unit *disk)
+ 	if (blk_mq_alloc_tag_set(&disk->tag_set))
+ 		return;
  
--		q = blk_mq_init_sq_queue(&swd->unit[drive].tag_set, &swim_mq_ops,
--						2, BLK_MQ_F_SHOULD_MERGE);
--		if (IS_ERR(q)) {
--			err = PTR_ERR(q);
-+		swd->unit[drive].disk =
-+			blk_mq_alloc_disk(&swd->unit[drive].tag_set,
-+					  &swd->unit[drive]);
-+		if (IS_ERR(swd->unit[drive].disk)) {
-+			blk_mq_free_tag_set(&swd->unit[drive].tag_set);
-+			err = PTR_ERR(swd->unit[drive].disk);
- 			goto exit_put_disks;
- 		}
- 
--		swd->unit[drive].disk->queue = q;
--		swd->unit[drive].disk->queue->queuedata = &swd->unit[drive];
- 		swd->unit[drive].swd = swd;
+-	p->queue = blk_mq_init_queue(&disk->tag_set);
+-	if (IS_ERR(p->queue)) {
++	p = blk_mq_alloc_disk(&disk->tag_set, disk);
++	if (!p) {
+ 		blk_mq_free_tag_set(&disk->tag_set);
+-		p->queue = NULL;
+ 		return;
  	}
++	disk->gd = p;
++
++	strcpy(p->disk_name, disk->name);
++	p->fops = &pd_fops;
++	p->major = major;
++	p->first_minor = (disk - pd) << PD_BITS;
++	p->minors = 1 << PD_BITS;
++	p->events = DISK_EVENT_MEDIA_CHANGE;
++	p->private_data = disk;
  
-@@ -824,6 +821,7 @@ static int swim_floppy_init(struct swim_priv *swd)
- 		swd->unit[drive].disk->flags = GENHD_FL_REMOVABLE;
- 		swd->unit[drive].disk->major = FLOPPY_MAJOR;
- 		swd->unit[drive].disk->first_minor = drive;
-+		swd->unit[drive].disk->minors = 1;
- 		sprintf(swd->unit[drive].disk->disk_name, "fd%d", drive);
- 		swd->unit[drive].disk->fops = &floppy_fops;
- 		swd->unit[drive].disk->events = DISK_EVENT_MEDIA_CHANGE;
-@@ -839,14 +837,10 @@ static int swim_floppy_init(struct swim_priv *swd)
- 	do {
- 		struct gendisk *disk = swd->unit[drive].disk;
+-	p->queue->queuedata = disk;
+ 	blk_queue_max_hw_sectors(p->queue, cluster);
+ 	blk_queue_bounce_limit(p->queue, BLK_BOUNCE_HIGH);
  
--		if (disk) {
--			if (disk->queue) {
--				blk_cleanup_queue(disk->queue);
--				disk->queue = NULL;
--			}
--			blk_mq_free_tag_set(&swd->unit[drive].tag_set);
--			put_disk(disk);
--		}
-+		if (!disk)
-+			continue;
-+		blk_cleanup_disk(disk);
-+		blk_mq_free_tag_set(&swd->unit[drive].tag_set);
- 	} while (drive--);
- 	return err;
- }
+@@ -1019,9 +1014,8 @@ static void __exit pd_exit(void)
+ 		if (p) {
+ 			disk->gd = NULL;
+ 			del_gendisk(p);
+-			blk_cleanup_queue(p->queue);
+ 			blk_mq_free_tag_set(&disk->tag_set);
+-			put_disk(p);
++			blk_cleanup_disk(p);
+ 			pi_release(disk->pi);
+ 		}
+ 	}
 -- 
 2.30.2
 
