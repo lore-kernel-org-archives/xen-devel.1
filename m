@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 022E3C47092
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8025BC47096
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BABE06135D
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BABE06135D
+	by mail.kernel.org (Postfix) with ESMTPS id 510CB6135D
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 510CB6135D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135523.251763 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135530.251793 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuE-00060A-Oq; Wed, 02 Jun 2021 07:03:10 +0000
+	id 1loKuI-0006tP-TE; Wed, 02 Jun 2021 07:03:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135523.251763; Wed, 02 Jun 2021 07:03:10 +0000
+Received: by outflank-mailman (output) from mailman id 135530.251793; Wed, 02 Jun 2021 07:03:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuE-0005zL-H8; Wed, 02 Jun 2021 07:03:10 +0000
-Received: by outflank-mailman (input) for mailman id 135523;
- Wed, 02 Jun 2021 07:03:08 +0000
+	id 1loKuI-0006re-Nn; Wed, 02 Jun 2021 07:03:14 +0000
+Received: by outflank-mailman (input) for mailman id 135530;
+ Wed, 02 Jun 2021 07:03:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKoR-0007A2-8F
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:11 +0000
+ id 1loKpZ-0007A2-Ai
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:21 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4b06eb1f-aec6-49d4-92ae-0308a6a0f748;
- Wed, 02 Jun 2021 06:55:35 +0000 (UTC)
+ id 369ca6a9-5334-40bf-bedc-c82caf2214f7;
+ Wed, 02 Jun 2021 06:56:11 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKmW-0025pH-8N; Wed, 02 Jun 2021 06:55:12 +0000
+ id 1loKn1-0026HM-J4; Wed, 02 Jun 2021 06:55:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b06eb1f-aec6-49d4-92ae-0308a6a0f748
+X-Inumbo-ID: 369ca6a9-5334-40bf-bedc-c82caf2214f7
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=whkiEYkd/RZIFiccnNyVDQBt5GosCsybR61i2OE/TAs=; b=sGyQUwx4y9mBLuKjtVUp+c2wE9
-	QKndoQI8+lVj5QubiuPxijfodshDbI28HmJC7XZxoK1I3O/xDGWqqWfWHPGGuhE/xYEpYPaljJGG0
-	Fr4gr1lXEhUJVsLAp4MvKyynYGbSyA4OVlnSrYZiKU1gb2XC/QCckw8whfLsI+GKqp2G0C8FEKneP
-	do3Abzx9O1Apmvm5lGswbnuiBjA19TYT3MinqZLYbcCGK2VKfmLyeYtMwiBKm8hatOP3dxWqLa5yK
-	W7GKvYBzqn1hQiPqfJxptmiWvUrY4I54If9aEuYVsVn2eDAvQ6qCfhLBxQm3PYYJuSGatkU1tnAjt
-	EHt0T+HQ==;
+	bh=yE8r2l5ezl7YxULOvA5WBGUgnr1EKs2E6TVb/drKQds=; b=r98dDxDiRvwlhNhs3T+1sVCcmx
+	9LSO0JAkx53106Z5FUQCYz3et9mT695nE04/mTWwxr/+e0qSYn8Q1H1hjEWJdvuJc3pumGMIBHyUT
+	t4W4GpkPuUNrdOHpe0KYFnWLvVAzI+WQwBh+pEi7U6I9KnMAFAlHPJRr4BSXUOn39VZTgNc5w2jvT
+	YFMKttfQVUSu/qkAB2YLyqtpsqykpUWPfHXrpKaBY5Lxa/Kceg/Y0XBAcrgpyvG0PgFSkx/IaoPgV
+	NvObxijOnNz7w1Y0/FNOweKAbiF8uEg9oHb82XorMJoTWx9Agt4jviXSvoy73IZqfJrU1acBTcolk
+	E0JQevww==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 17/30] floppy: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:32 +0300
-Message-Id: <20210602065345.355274-18-hch@lst.de>
+Subject: [PATCH 24/30] sx8: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:39 +0300
+Message-Id: <20210602065345.355274-25-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -110,53 +110,63 @@ request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/floppy.c | 20 +++++---------------
- 1 file changed, 5 insertions(+), 15 deletions(-)
+ drivers/block/sx8.c | 23 +++++++----------------
+ 1 file changed, 7 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/block/floppy.c b/drivers/block/floppy.c
-index 8a9d22207c59..cbed9776f285 100644
---- a/drivers/block/floppy.c
-+++ b/drivers/block/floppy.c
-@@ -4491,23 +4491,15 @@ static bool floppy_available(int drive)
- static int floppy_alloc_disk(unsigned int drive, unsigned int type)
+diff --git a/drivers/block/sx8.c b/drivers/block/sx8.c
+index 2cdf2771f8e8..f01f860b0e62 100644
+--- a/drivers/block/sx8.c
++++ b/drivers/block/sx8.c
+@@ -1343,32 +1343,25 @@ static int carm_init_disk(struct carm_host *host, unsigned int port_no)
  {
+ 	struct carm_port *port = &host->port[port_no];
  	struct gendisk *disk;
--	int err;
--
--	disk = alloc_disk(1);
+-	struct request_queue *q;
+ 
+ 	port->host = host;
+ 	port->port_no = port_no;
+ 
+-	disk = alloc_disk(CARM_MINORS_PER_MAJOR);
 -	if (!disk)
 -		return -ENOMEM;
- 
--	disk->queue = blk_mq_init_queue(&tag_sets[drive]);
--	if (IS_ERR(disk->queue)) {
--		err = PTR_ERR(disk->queue);
--		disk->queue = NULL;
--		put_disk(disk);
--		return err;
--	}
-+	disk = blk_mq_alloc_disk(&tag_sets[drive], NULL);
++	disk = blk_mq_alloc_disk(&host->tag_set, port);
 +	if (IS_ERR(disk))
 +		return PTR_ERR(disk);
  
- 	blk_queue_max_hw_sectors(disk->queue, 64);
- 	disk->major = FLOPPY_MAJOR;
- 	disk->first_minor = TOMINOR(drive) | (type << 2);
-+	disk->minors = 1;
- 	disk->fops = &floppy_fops;
- 	disk->events = DISK_EVENT_MEDIA_CHANGE;
- 	if (type)
-@@ -4727,10 +4719,8 @@ static int __init do_floppy_init(void)
- 		if (!disks[drive][0])
- 			break;
- 		del_timer_sync(&motor_off_timer[drive]);
--		blk_cleanup_queue(disks[drive][0]->queue);
--		disks[drive][0]->queue = NULL;
-+		blk_cleanup_disk(disks[drive][0]);
- 		blk_mq_free_tag_set(&tag_sets[drive]);
--		put_disk(disks[drive][0]);
- 	}
- 	return err;
+ 	port->disk = disk;
+ 	sprintf(disk->disk_name, DRV_NAME "/%u",
+ 		(unsigned int)host->id * CARM_MAX_PORTS + port_no);
+ 	disk->major = host->major;
+ 	disk->first_minor = port_no * CARM_MINORS_PER_MAJOR;
++	disk->minors = CARM_MINORS_PER_MAJOR;
+ 	disk->fops = &carm_bd_ops;
+ 	disk->private_data = port;
+ 
+-	q = blk_mq_init_queue(&host->tag_set);
+-	if (IS_ERR(q))
+-		return PTR_ERR(q);
+-
+-	blk_queue_max_segments(q, CARM_MAX_REQ_SG);
+-	blk_queue_segment_boundary(q, CARM_SG_BOUNDARY);
+-
+-	q->queuedata = port;
+-	disk->queue = q;
++	blk_queue_max_segments(disk->queue, CARM_MAX_REQ_SG);
++	blk_queue_segment_boundary(disk->queue, CARM_SG_BOUNDARY);
+ 	return 0;
  }
+ 
+@@ -1382,9 +1375,7 @@ static void carm_free_disk(struct carm_host *host, unsigned int port_no)
+ 
+ 	if (disk->flags & GENHD_FL_UP)
+ 		del_gendisk(disk);
+-	if (disk->queue)
+-		blk_cleanup_queue(disk->queue);
+-	put_disk(disk);
++	blk_cleanup_disk(disk);
+ }
+ 
+ static int carm_init_shm(struct carm_host *host)
 -- 
 2.30.2
 
