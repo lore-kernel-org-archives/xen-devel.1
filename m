@@ -2,44 +2,53 @@ Return-Path: <SRS0=/WvL=K4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35DB6C4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35D73C47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:11:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 07A4A6135D
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:04:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07A4A6135D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+	by mail.kernel.org (Postfix) with ESMTPS id D4DC0610CB
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:11:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D4DC0610CB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135609.251990 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135648.252009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKv3-0008Bz-VI; Wed, 02 Jun 2021 07:04:01 +0000
+	id 1loL1c-0004Jq-7W; Wed, 02 Jun 2021 07:10:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135609.251990; Wed, 02 Jun 2021 07:04:01 +0000
+Received: by outflank-mailman (output) from mailman id 135648.252009; Wed, 02 Jun 2021 07:10:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKv3-00087F-5D; Wed, 02 Jun 2021 07:04:01 +0000
-Received: by outflank-mailman (input) for mailman id 135609;
- Wed, 02 Jun 2021 07:04:00 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKpP-0007A2-AR
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:11 +0000
-Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 12923a92-1323-40b7-8618-44db0cf76b6d;
- Wed, 02 Jun 2021 06:56:06 +0000 (UTC)
-Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKmx-0026Co-6G; Wed, 02 Jun 2021 06:55:40 +0000
+	id 1loL1c-0004Jj-46; Wed, 02 Jun 2021 07:10:48 +0000
+Received: by outflank-mailman (input) for mailman id 135648;
+ Wed, 02 Jun 2021 07:10:46 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Q/fn=K4=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1loL1a-0004Jb-LL
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 07:10:46 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 38b574fb-e25a-4ffc-8cc7-bb2fe9e2a211;
+ Wed, 02 Jun 2021 07:10:45 +0000 (UTC)
+Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1BB372193C;
+ Wed,  2 Jun 2021 07:10:45 +0000 (UTC)
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id E7BCA118DD;
+ Wed,  2 Jun 2021 07:10:44 +0000 (UTC)
+Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
+ id ihBuN/Qut2AcVwAALh3uQQ
+ (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 07:10:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,148 +60,283 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12923a92-1323-40b7-8618-44db0cf76b6d
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=5mJAZZeO1CtG3mn2Yuq3t9OP/z6HiPXlonifU+Xv8uk=; b=tt3BlzEvyR33jB2X0kDiZ5TSxB
-	csELHSnmlT8T6KUWOPDXdz45J2xQyFQU19xaezbdVZgeUVrTi9u9ZPTPO6fqT1nm0qE2v7SVLycE9
-	/MOWrjDcC/xYy6qBU13Znm79Ch9jRwtBbUtbfzUmR+I9pRspaNFEvyOXmYvNfXgWZsh0TdBvJLp4s
-	/Fr3RVYTz9uY0FffL4ddTLGXqxR4LHnzHncqok0pz2PtYl2ZKi5VfjzMdqvx8SDrYpymOwhWqr6QX
-	Z9xSFfPHVSbsRQooQMBqPIpILAv/Gx+wWjK7rLtRMYAMdC9wtpz/a7ziP04g4HcPFPbwAdib7nnbG
-	Ptr9BkmA==;
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: Justin Sanders <justin@coraid.com>,
-	Denis Efremov <efremov@linux.com>,
-	Josef Bacik <josef@toxicpanda.com>,
-	Tim Waugh <tim@cyberelk.net>,
-	Geoff Levand <geoff@infradead.org>,
-	Ilya Dryomov <idryomov@gmail.com>,
-	"Md. Haris Iqbal" <haris.iqbal@ionos.com>,
-	Jack Wang <jinpu.wang@ionos.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Mike Snitzer <snitzer@redhat.com>,
-	Maxim Levitsky <maximlevitsky@gmail.com>,
-	Alex Dubov <oakad@yahoo.com>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Heiko Carstens <hca@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	dm-devel@redhat.com,
-	linux-block@vger.kernel.org,
-	nbd@other.debian.org,
-	linuxppc-dev@lists.ozlabs.org,
-	ceph-devel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org,
-	linux-mmc@vger.kernel.org,
-	linux-mtd@lists.infradead.org,
-	linux-s390@vger.kernel.org
-Subject: [PATCH 23/30] rnbd: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:38 +0300
-Message-Id: <20210602065345.355274-24-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210602065345.355274-1-hch@lst.de>
-References: <20210602065345.355274-1-hch@lst.de>
+X-Inumbo-ID: 38b574fb-e25a-4ffc-8cc7-bb2fe9e2a211
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1622617845; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=TjiqP1jUYF7noSIyoNCVoo2cMfZMos2Hqwbp8cguD/A=;
+	b=ov647Dg8ErFWpOxffjDEcWpuWN/sXYRYrS+6U+Kg245m61WkwZ9AeVa6Ms1eU3aOIAPp7d
+	9wIGrMqeK7jZtNvM95i2cjlmqQDF95QDHaKy+4Hkqn/y11thKwK8mmRhH0LZpxTSQ2v6gY
+	0exXJWccNepoCdT/xqjcPltQimBQUSo=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1622617845; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=TjiqP1jUYF7noSIyoNCVoo2cMfZMos2Hqwbp8cguD/A=;
+	b=ov647Dg8ErFWpOxffjDEcWpuWN/sXYRYrS+6U+Kg245m61WkwZ9AeVa6Ms1eU3aOIAPp7d
+	9wIGrMqeK7jZtNvM95i2cjlmqQDF95QDHaKy+4Hkqn/y11thKwK8mmRhH0LZpxTSQ2v6gY
+	0exXJWccNepoCdT/xqjcPltQimBQUSo=
+To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <20210601161118.18986-1-olaf@aepfle.de>
+ <20210601161118.18986-9-olaf@aepfle.de>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v20210601 08/38] tools: show migration transfer rate in
+ send_dirty_pages
+Message-ID: <42844bc5-da7e-5f6d-1ce0-1ef9e0f9dea6@suse.com>
+Date: Wed, 2 Jun 2021 09:10:44 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <20210601161118.18986-9-olaf@aepfle.de>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="BrqMiSmemi6ydmvK1ilhFR5iHXrP0A4Bg"
 
-Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
-request_queue allocation.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--BrqMiSmemi6ydmvK1ilhFR5iHXrP0A4Bg
+Content-Type: multipart/mixed; boundary="qCTocIMJRmox1xkeEyqFvBeyqPkP4wbVr";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Message-ID: <42844bc5-da7e-5f6d-1ce0-1ef9e0f9dea6@suse.com>
+Subject: Re: [PATCH v20210601 08/38] tools: show migration transfer rate in
+ send_dirty_pages
+References: <20210601161118.18986-1-olaf@aepfle.de>
+ <20210601161118.18986-9-olaf@aepfle.de>
+In-Reply-To: <20210601161118.18986-9-olaf@aepfle.de>
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- drivers/block/rnbd/rnbd-clt.c | 35 ++++++++---------------------------
- 1 file changed, 8 insertions(+), 27 deletions(-)
+--qCTocIMJRmox1xkeEyqFvBeyqPkP4wbVr
+Content-Type: multipart/mixed;
+ boundary="------------C0C7F94365622C72118C79DD"
+Content-Language: en-US
 
-diff --git a/drivers/block/rnbd/rnbd-clt.c b/drivers/block/rnbd/rnbd-clt.c
-index c604a402cd5c..f4fa45d24c0b 100644
---- a/drivers/block/rnbd/rnbd-clt.c
-+++ b/drivers/block/rnbd/rnbd-clt.c
-@@ -1353,18 +1353,6 @@ static void rnbd_init_mq_hw_queues(struct rnbd_clt_dev *dev)
- 	}
- }
- 
--static int setup_mq_dev(struct rnbd_clt_dev *dev)
--{
--	dev->queue = blk_mq_init_queue(&dev->sess->tag_set);
--	if (IS_ERR(dev->queue)) {
--		rnbd_clt_err(dev, "Initializing multiqueue queue failed, err: %ld\n",
--			      PTR_ERR(dev->queue));
--		return PTR_ERR(dev->queue);
--	}
--	rnbd_init_mq_hw_queues(dev);
--	return 0;
--}
--
- static void setup_request_queue(struct rnbd_clt_dev *dev)
- {
- 	blk_queue_logical_block_size(dev->queue, dev->logical_block_size);
-@@ -1393,13 +1381,13 @@ static void setup_request_queue(struct rnbd_clt_dev *dev)
- 	blk_queue_io_opt(dev->queue, dev->sess->max_io_size);
- 	blk_queue_virt_boundary(dev->queue, SZ_4K - 1);
- 	blk_queue_write_cache(dev->queue, dev->wc, dev->fua);
--	dev->queue->queuedata = dev;
- }
- 
- static void rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
- {
- 	dev->gd->major		= rnbd_client_major;
- 	dev->gd->first_minor	= idx << RNBD_PART_BITS;
-+	dev->gd->minors		= 1 << RNBD_PART_BITS;
- 	dev->gd->fops		= &rnbd_client_ops;
- 	dev->gd->queue		= dev->queue;
- 	dev->gd->private_data	= dev;
-@@ -1426,24 +1414,18 @@ static void rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
- 
- static int rnbd_client_setup_device(struct rnbd_clt_dev *dev)
- {
--	int err, idx = dev->clt_device_id;
-+	int idx = dev->clt_device_id;
- 
- 	dev->size = dev->nsectors * dev->logical_block_size;
- 
--	err = setup_mq_dev(dev);
--	if (err)
--		return err;
-+	dev->gd = blk_mq_alloc_disk(&dev->sess->tag_set, dev);
-+	if (IS_ERR(dev->gd))
-+		return PTR_ERR(dev->gd);
-+	dev->queue = dev->gd->queue;
-+	rnbd_init_mq_hw_queues(dev);
- 
- 	setup_request_queue(dev);
--
--	dev->gd = alloc_disk_node(1 << RNBD_PART_BITS,	NUMA_NO_NODE);
--	if (!dev->gd) {
--		blk_cleanup_queue(dev->queue);
--		return -ENOMEM;
--	}
--
- 	rnbd_clt_setup_gen_disk(dev, idx);
--
- 	return 0;
- }
- 
-@@ -1650,8 +1632,7 @@ struct rnbd_clt_dev *rnbd_clt_map_device(const char *sessname,
- static void destroy_gen_disk(struct rnbd_clt_dev *dev)
- {
- 	del_gendisk(dev->gd);
--	blk_cleanup_queue(dev->queue);
--	put_disk(dev->gd);
-+	blk_cleanup_disk(dev->gd);
- }
- 
- static void destroy_sysfs(struct rnbd_clt_dev *dev,
--- 
-2.30.2
+This is a multi-part message in MIME format.
+--------------C0C7F94365622C72118C79DD
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
+On 01.06.21 18:10, Olaf Hering wrote:
+> Show how fast domU pages are transferred in each iteration.
+>=20
+> The relevant data is how fast the pfns travel, not so much how much
+> protocol overhead exists. So the reported MiB/sec is just for pfns.
+>=20
+> Signed-off-by: Olaf Hering <olaf@aepfle.de>
+> ---
+>   tools/libs/saverestore/common.h |  2 ++
+>   tools/libs/saverestore/save.c   | 47 ++++++++++++++++++++++++++++++++=
++
+>   2 files changed, 49 insertions(+)
+>=20
+> diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/c=
+ommon.h
+> index 50a8479d39..f5fe23caad 100644
+> --- a/tools/libs/saverestore/common.h
+> +++ b/tools/libs/saverestore/common.h
+> @@ -250,6 +250,8 @@ struct xc_sr_context
+>               bool debug;
+>  =20
+>               unsigned long p2m_size;
+> +            size_t pages_sent;
+> +            size_t overhead_sent;
+>  =20
+>               struct precopy_stats stats;
+>  =20
+> diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/sav=
+e.c
+> index bcff2d28f5..760ca04a84 100644
+> --- a/tools/libs/saverestore/save.c
+> +++ b/tools/libs/saverestore/save.c
+> @@ -1,5 +1,6 @@
+>   #include <assert.h>
+>   #include <arpa/inet.h>
+> +#include <time.h>
+>  =20
+>   #include "common.h"
+>  =20
+> @@ -238,6 +239,8 @@ static int write_batch(struct xc_sr_context *ctx)
+>       iov[3].iov_len =3D nr_pfns * sizeof(*rec_pfns);
+>  =20
+>       iovcnt =3D 4;
+> +    ctx->save.pages_sent +=3D nr_pages;
+> +    ctx->save.overhead_sent +=3D sizeof(rec) + sizeof(hdr) + nr_pfns *=20
+sizeof(*rec_pfns);
+>  =20
+>       if ( nr_pages )
+>       {
+> @@ -357,6 +360,43 @@ static int suspend_domain(struct xc_sr_context *ct=
+x)
+>       return 0;
+>   }
+>  =20
+> +static void show_transfer_rate(struct xc_sr_context *ctx, struct times=
+pec *start)
+> +{
+> +    xc_interface *xch =3D ctx->xch;
+> +    struct timespec end =3D {}, diff =3D {};
+> +    size_t ms, MiB_sec =3D ctx->save.pages_sent * PAGE_SIZE;
+
+I'd rather not initialize MiB_sec here ...
+
+> +
+> +    if (!MiB_sec)
+
+=2E.. and test for ctx->save.pages_sent to be non-zero here.
+
+> +        return;
+> +
+> +    if ( clock_gettime(CLOCK_MONOTONIC, &end) )
+> +        PERROR("clock_gettime");
+> +
+> +    if ( (end.tv_nsec - start->tv_nsec) < 0 )
+> +    {
+> +        diff.tv_sec =3D end.tv_sec - start->tv_sec - 1;
+> +        diff.tv_nsec =3D end.tv_nsec - start->tv_nsec + (1000U*1000U*1=
+000U);
+> +    }
+> +    else
+> +    {
+> +        diff.tv_sec =3D end.tv_sec - start->tv_sec;
+> +        diff.tv_nsec =3D end.tv_nsec - start->tv_nsec;
+> +    }
+> +
+> +    ms =3D (diff.tv_nsec / (1000U*1000U));
+> +    if (!ms)
+> +        ms =3D 1;
+
+I'd move this ...
+
+> +    ms +=3D (diff.tv_sec * 1000U);
+
+=2E.. below this.
+
+> +
+> +    MiB_sec *=3D 1000U;
+> +    MiB_sec /=3D ms;
+> +    MiB_sec /=3D 1024U*1024U;
+
+Avoid MiB_sec holding bytes per second for some time and use:
+
+MiB_sec =3D ((ctx->save.pages_sent * PAGE_SIZE * 1000) / ms) /
+           (1024U * 1024U);
+
+
+Juergen
+
+--------------C0C7F94365622C72118C79DD
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------C0C7F94365622C72118C79DD--
+
+--qCTocIMJRmox1xkeEyqFvBeyqPkP4wbVr--
+
+--BrqMiSmemi6ydmvK1ilhFR5iHXrP0A4Bg
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3LvQFAwAAAAAACgkQsN6d1ii/Ey9M
+7Af/WmegSfoqj9LzE0QPJyxfObkyDUezBeB962Fub1lU8+Ra1K/mlMUhKkm5+fYJ17GhFdgvmP+R
+pzJ9bhFUZQCyzQD70vlcSJm9AuLC9cIYFTFQe9ym2Q0cn2nFX/tF3i+YugC7cJBiR65lgkPNVTQs
+IzD8tqrWZxCGKmekJdJ9bDeWzYOJJt2W5KvX1WABi+VgR+4918O08VvVugfLucRVrjv9TY0uc6ww
+3N2+V1ncSV1OeIdgicjQIsuBqRFLCU2+dRC9YGr8INfj6K+JjpqUUiOhCwt7ooeWwSJYb/KJWGLM
+qB4pVIUU6sDwGMsHBofYxTHlvevwdWFKvhPLgEesdg==
+=mb6b
+-----END PGP SIGNATURE-----
+
+--BrqMiSmemi6ydmvK1ilhFR5iHXrP0A4Bg--
 
