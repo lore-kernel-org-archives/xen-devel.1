@@ -2,55 +2,55 @@ Return-Path: <SRS0=/WvL=K4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 721CEC4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4B03C47092
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:19:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2BFC360698
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:18:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BFC360698
+	by mail.kernel.org (Postfix) with ESMTPS id 923CD613B1
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:19:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 923CD613B1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136109.252589 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136112.252600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loSdu-0007IH-OU; Wed, 02 Jun 2021 15:18:50 +0000
+	id 1loSdz-0007vf-3a; Wed, 02 Jun 2021 15:18:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136109.252589; Wed, 02 Jun 2021 15:18:50 +0000
+Received: by outflank-mailman (output) from mailman id 136112.252600; Wed, 02 Jun 2021 15:18:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loSdu-0007Hy-Ji; Wed, 02 Jun 2021 15:18:50 +0000
-Received: by outflank-mailman (input) for mailman id 136109;
- Wed, 02 Jun 2021 15:18:48 +0000
+	id 1loSdy-0007vK-V0; Wed, 02 Jun 2021 15:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 136112;
+ Wed, 02 Jun 2021 15:18:53 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Q/fn=K4=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1loSds-0004jV-HM
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 15:18:48 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ id 1loSdx-0004jV-HS
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 15:18:53 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c8e6fa52-9500-49dc-af38-aa66c03b5315;
- Wed, 02 Jun 2021 15:18:31 +0000 (UTC)
+ id 9afb638b-a057-403f-b890-232ab2c4305f;
+ Wed, 02 Jun 2021 15:18:34 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 39C8A1FE26;
- Wed,  2 Jun 2021 15:18:30 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7C60921C9F;
+ Wed,  2 Jun 2021 15:18:32 +0000 (UTC)
 Received: by imap.suse.de (Postfix, from userid 51)
- id 3019A11CD5; Wed,  2 Jun 2021 16:06:26 +0000 (UTC)
+ id 7712811CC0; Wed,  2 Jun 2021 15:18:23 +0000 (UTC)
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 43A3A11EA9;
- Wed,  2 Jun 2021 13:48:36 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id 2E5C611F32;
+ Wed,  2 Jun 2021 15:10:22 +0000 (UTC)
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id 1948DzSMt2CHUAAALh3uQQ
- (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 13:48:36 +0000
+ id EG3BCF6ft2DJBAAALh3uQQ
+ (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 15:10:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,84 +62,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8e6fa52-9500-49dc-af38-aa66c03b5315
+X-Inumbo-ID: 9afb638b-a057-403f-b890-232ab2c4305f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622647110; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622647112; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=D65dpeEgcvshZPY6JSFiSgrHsN2KCrew/EttgjaOezE=;
-	b=PKZ547hI4tyzNwF5/ioezn+9zgFJ3mwfGKzjRVDZEP9dAuhhSz3DHo8e6g7sUxzsBdBZ6M
-	J5CsPwYNWG9IiGEJww1idvRA7meKbDUMIhNGzK0Fs9t/kqDdUkhozk9K8A4Tn70XKvdOUO
-	iF9LhmcqmQYlNsEa+NRJ80zt0IKG4Pg=
+	bh=ogV5wNk51FdvQJ93nInVRa11ugw7H3eLjSN1UBRHUMg=;
+	b=VZ/sEqCnTKdL3yQUmmuB4fZ+u/h/ufbvpY6nuZiTfUTSbuOef9eHnvN3oSB945kQxwpOMY
+	/oez4nwSDzW0xlpCKpQTK2nZjqb1YwqMRlSKKfjm+kcs/sQADpVjPdw8uZb1wsQl2bByyk
+	2vxbgFXb+Kfw+gA+MYZ3BwbHpLsiqq0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622641716; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622646622; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=D65dpeEgcvshZPY6JSFiSgrHsN2KCrew/EttgjaOezE=;
-	b=Xf1y7LK2U3aNSSkECbjoWl4JwYVFqUOMgq4ms1i7f9s1ny6pqrIlAuD3xLx61gIpsGlyEk
-	52B1smfa05IIFqygydKsM0O93/QUyQmGID1lgOfgLsFhJI/piPLx0R1GZp/KwQVa8CaFX3
-	PlESGLFAhKlmDSYRtIaiSZkR4zgG7g4=
-Subject: Re: [PATCH v20210602 02/38] xl: fix description of migrate --debug
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>
-References: <20210601161118.18986-1-olaf@aepfle.de>
- <20210601161118.18986-3-olaf@aepfle.de>
- <20210602143215.3a0cb971.olaf@aepfle.de>
+	bh=ogV5wNk51FdvQJ93nInVRa11ugw7H3eLjSN1UBRHUMg=;
+	b=QyoJOgo3H2v0w10KYk5gk5pgnq3YUMCC531gS0c+W68PmTGGWEKsUpH2yGYpQ0rwuTPBCT
+	g+YqqQRg5IboZBfzcS6DCwHxe+X5PTfxJeAF7aiLcKAyWnrs3ErHlB+4VFXHPxPruXoLcz
+	Gt3tlA5l6mA/aH7acocE9GubSrzHyng=
+Subject: Re: [PATCH v2 0/6] tools/libs: add missing support of linear
+ p2m_list, cleanup
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <91cf7800-76f9-245d-b0a0-9c0fe3bf1a02@suse.com>
-Date: Wed, 2 Jun 2021 15:48:35 +0200
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Christian Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>
+References: <20210412152236.1975-1-jgross@suse.com>
+ <b79c60e4-7c41-be9a-b0df-e9f9cf71eafa@suse.com>
+ <9cbac4d9-16d8-ff52-eb8f-8375cb88af93@suse.com>
+Message-ID: <b4135462-2eba-f236-679a-c37617808656@suse.com>
+Date: Wed, 2 Jun 2021 17:10:21 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210602143215.3a0cb971.olaf@aepfle.de>
+In-Reply-To: <9cbac4d9-16d8-ff52-eb8f-8375cb88af93@suse.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="wke2dD5zmEQ8GMehUaOe8Sn7Ts71OzDSo"
+ boundary="G73A7fA0HIQOCHlizcXAVyGpJQXGHgTwT"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---wke2dD5zmEQ8GMehUaOe8Sn7Ts71OzDSo
-Content-Type: multipart/mixed; boundary="xPy1LWsPMLA4hsPlCxw6siZ9rz1mrLxHm";
+--G73A7fA0HIQOCHlizcXAVyGpJQXGHgTwT
+Content-Type: multipart/mixed; boundary="4bT5Jfg0Lb5jWuFlmGD0LHlYKz9hMgUx3";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
-To: Olaf Hering <olaf@aepfle.de>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>
-Message-ID: <91cf7800-76f9-245d-b0a0-9c0fe3bf1a02@suse.com>
-Subject: Re: [PATCH v20210602 02/38] xl: fix description of migrate --debug
-References: <20210601161118.18986-1-olaf@aepfle.de>
- <20210601161118.18986-3-olaf@aepfle.de>
- <20210602143215.3a0cb971.olaf@aepfle.de>
-In-Reply-To: <20210602143215.3a0cb971.olaf@aepfle.de>
+ Christian Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>
+Message-ID: <b4135462-2eba-f236-679a-c37617808656@suse.com>
+Subject: Re: [PATCH v2 0/6] tools/libs: add missing support of linear
+ p2m_list, cleanup
+References: <20210412152236.1975-1-jgross@suse.com>
+ <b79c60e4-7c41-be9a-b0df-e9f9cf71eafa@suse.com>
+ <9cbac4d9-16d8-ff52-eb8f-8375cb88af93@suse.com>
+In-Reply-To: <9cbac4d9-16d8-ff52-eb8f-8375cb88af93@suse.com>
 
---xPy1LWsPMLA4hsPlCxw6siZ9rz1mrLxHm
+--4bT5Jfg0Lb5jWuFlmGD0LHlYKz9hMgUx3
 Content-Type: multipart/mixed;
- boundary="------------7C7FED5B6629F9435C906E8B"
+ boundary="------------74EC891718F504DE99235ABB"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------7C7FED5B6629F9435C906E8B
+--------------74EC891718F504DE99235ABB
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 02.06.21 14:32, Olaf Hering wrote:
-> xl migrate --debug used to track every pfn in every batch of pages.
-> But these times are gone. The code in xc_domain_save is the consumer
-> of this knob, but it considers it only for the remus and colo case.
+On 25.05.21 09:32, Juergen Gross wrote:
+> On 12.05.21 08:58, Juergen Gross wrote:
+>> Ping?
 >=20
-> Adjust the help text to tell what --debug does today: Nothing.
->=20
-> Signed-off-by: Olaf Hering <olaf@aepfle.de>
->=20
-> v02:
-> - the option has no effect anymore
+> Now each patch has an Ack by Wei. Could the series be either applied or=
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+> get more comments, please?
+
+And another PING.
+
+Do I need to setup a cron job pinging each day to get a reaction?
 
 
 Juergen
 
---------------7C7FED5B6629F9435C906E8B
+>=20
+>=20
+> Juergen
+>=20
+>>
+>> On 12.04.21 17:22, Juergen Gross wrote:
+>>> There are some corners left which don't support the not so very new
+>>> linear p2m list of pv guests, which has been introduced in Linux kern=
+el
+>>> 3.19 and which is mandatory for non-legacy versions of Xen since kern=
+el
+>>> 4.14.
+>>>
+>>> This series adds support for the linear p2m list where it is missing
+>>> (colo support and "xl dump-core").
+>>>
+>>> In theory it should be possible to merge the p2m list mapping code
+>>> from migration handling and core dump handling, but this needs quite
+>>> some cleanup before this is possible.
+>>>
+>>> The first three patches of this series are fixing real problems, so
+>>> I've put them at the start of this series, especially in order to mak=
+e
+>>> backports easier.
+>>>
+>>> The other three patches are only the first steps of cleanup. The main=
+
+>>> work done here is to concentrate all p2m mapping in libxenguest inste=
+ad
+>>> of having one implementation in each of libxenguest and libxenctrl.
+>>>
+>>> Merging the two implementations should be rather easy, but this will
+>>> require to touch many lines of code, as the migration handling varian=
+t
+>>> seems to be more mature, but it is using the migration stream specifi=
+c
+>>> structures heavily. So I'd like to have some confirmation that my way=
+
+>>> to clean this up is the right one.
+>>>
+>>> My idea would be to add the data needed for p2m mapping to struct
+>>> domain_info_context and replace the related fields in struct
+>>> xc_sr_context with a struct domain_info_context. Modifying the
+>>> interface of xc_core_arch_map_p2m() to take most current parameters
+>>> via struct domain_info_context would then enable migration coding to
+>>> use xc_core_arch_map_p2m() for mapping the p2m. xc_core_arch_map_p2m(=
+)
+>>> should look basically like the current migration p2m mapping code
+>>> afterwards.
+>>>
+>>> Any comments to that plan?
+>>>
+>>> Changes in V2:
+>>> - added missing #include in ocaml stub
+>>>
+>>> Juergen Gross (6):
+>>> =C2=A0=C2=A0 tools/libs/guest: fix max_pfn setting in map_p2m()
+>>> =C2=A0=C2=A0 tools/libs/ctrl: fix xc_core_arch_map_p2m() to support l=
+inear p2m
+>>> =C2=A0=C2=A0=C2=A0=C2=A0 table
+>>> =C2=A0=C2=A0 tools/libs/ctrl: use common p2m mapping code in=20
+>>> xc_domain_resume_any()
+>>> =C2=A0=C2=A0 tools/libs: move xc_resume.c to libxenguest
+>>> =C2=A0=C2=A0 tools/libs: move xc_core* from libxenctrl to libxenguest=
+
+>>> =C2=A0=C2=A0 tools/libs/guest: make some definitions private to libxe=
+nguest
+>>>
+>>> =C2=A0 tools/include/xenctrl.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 |=C2=A0 63 ---
+>>> =C2=A0 tools/include/xenguest.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0 63 +++
+>>> =C2=A0 tools/libs/ctrl/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0=C2=A0 4 -
+>>> =C2=A0 tools/libs/ctrl/xc_core_x86.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 223 ---=
+-------
+>>> =C2=A0 tools/libs/ctrl/xc_domain.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+|=C2=A0=C2=A0 2 -
+>>> =C2=A0 tools/libs/ctrl/xc_private.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=20
+> 43 +-
+>>> =C2=A0 tools/libs/guest/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 |=C2=A0=C2=A0 4 +
+>>> =C2=A0 .../libs/{ctrl/xc_core.c =3D> guest/xg_core.c}=C2=A0 |=C2=A0=C2=
+=A0 7 +-
+>>> =C2=A0 .../libs/{ctrl/xc_core.h =3D> guest/xg_core.h}=C2=A0 |=C2=A0 1=
+5=20
+> +-
+>>> =C2=A0 .../xc_core_arm.c =3D> guest/xg_core_arm.c}=C2=A0=C2=A0=C2=A0=C2=
+=A0 |=C2=A0 31 +-
+>>> =C2=A0 .../xc_core_arm.h =3D> guest/xg_core_arm.h}=C2=A0=C2=A0=C2=A0=C2=
+=A0 |=C2=A0=C2=A0 0
+>>> =C2=A0 tools/libs/guest/xg_core_x86.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 399 +++++++++=
++++++++++
+>>> =C2=A0 .../xc_core_x86.h =3D> guest/xg_core_x86.h}=C2=A0=C2=A0=C2=A0=C2=
+=A0 |=C2=A0=C2=A0 0
+>>> =C2=A0 tools/libs/guest/xg_dom_boot.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 2=20
+
+> +-
+>>> =C2=A0 tools/libs/guest/xg_domain.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=20
+> 19 +-
+>>> =C2=A0 tools/libs/guest/xg_offline_page.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 2 +-
+>>> =C2=A0 tools/libs/guest/xg_private.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1=
+6 +-
+>>> =C2=A0 .../{ctrl/xc_resume.c =3D> guest/xg_resume.c}=C2=A0=C2=A0 |=20
+> 69 +--
+>>> =C2=A0 tools/libs/guest/xg_sr_save_x86_pv.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 2 +-
+>>> =C2=A0 tools/ocaml/libs/xc/xenctrl_stubs.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
+>>> =C2=A0 20 files changed, 545 insertions(+), 420 deletions(-)
+>>> =C2=A0 delete mode 100644 tools/libs/ctrl/xc_core_x86.c
+>>> =C2=A0 rename tools/libs/{ctrl/xc_core.c =3D> guest/xg_core.c} (99%)
+>>> =C2=A0 rename tools/libs/{ctrl/xc_core.h =3D> guest/xg_core.h} (92%)
+>>> =C2=A0 rename tools/libs/{ctrl/xc_core_arm.c =3D> guest/xg_core_arm.c=
+}=20
+> (72%)
+>>> =C2=A0 rename tools/libs/{ctrl/xc_core_arm.h =3D> guest/xg_core_arm.h=
+}=20
+> (100%)
+>>> =C2=A0 create mode 100644 tools/libs/guest/xg_core_x86.c
+>>> =C2=A0 rename tools/libs/{ctrl/xc_core_x86.h =3D> guest/xg_core_x86.h=
+}=20
+> (100%)
+>>> =C2=A0 rename tools/libs/{ctrl/xc_resume.c =3D> guest/xg_resume.c} (8=
+0%)
+>>>
+>>
+>=20
+
+
+--------------74EC891718F504DE99235ABB
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -231,25 +373,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------7C7FED5B6629F9435C906E8B--
+--------------74EC891718F504DE99235ABB--
 
---xPy1LWsPMLA4hsPlCxw6siZ9rz1mrLxHm--
+--4bT5Jfg0Lb5jWuFlmGD0LHlYKz9hMgUx3--
 
---wke2dD5zmEQ8GMehUaOe8Sn7Ts71OzDSo
+--G73A7fA0HIQOCHlizcXAVyGpJQXGHgTwT
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3jDMFAwAAAAAACgkQsN6d1ii/Ey98
-jggAkwsh9HvGSm/pxkKUd2AvYJwv8ig0kFSnNpZMlfQDanEQQuPr4i3rXOgvxQ048FFVJuhRNOFs
-ZldUGM1DDEAbZeYPLKdqVcVsa9pI1EG5Nd3hFVwMMon0RYEu3FpLoCb8ZxivLDYcH2C7rx3kw7I6
-8ZxK4sYmT2/ERm84v2jGtYK+Z5FgFksf2NS6soqbFIw0xl4Q1rSf/wbPWSTU0R9AGorh2TsF5tCD
-s4PLtZdV6YbWRgoUuF/DS3K+cxmNf3i5QXOiQBdPPzZdtUYd5w2uJ3GsrGoF71fIq6t5qEtG+a42
-ZIIh+jcoDB0GeQGqdGJiCdp36xI4CBCjsAb7gSqCQg==
-=97dm
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3n10FAwAAAAAACgkQsN6d1ii/Ey8G
+GAf+JKjxfRkaYjnbbDtpCOwB1g2krduWx/+wnikrCQahwtLdRvQpqgSUwpYDKYoVB41ReEihtEDC
+bW66vSgqQ8jGWr6fug97EeGBnpd771jJAenfPwk7452DWzDkEXPVuBGHbPbbopf+L1vTzdxZ3U30
+LguVhe4jk20HogUKhG+/396h9GdWTkf+we1SvgQ8AAG8YEwJcGS4RS5z3ocGowNHwuPhqoJkZ5nT
+DBcNnkqmccwUQ2uDow6GQAlFaWtG/+2u0e8F5ed2SScdyvhoFYhMRz6xXoxou9+Lmw3obyT4Uglg
+AeBWDia2igTxAUBGpac10TD3VVfF722ueefGcEMPPA==
+=P5rU
 -----END PGP SIGNATURE-----
 
---wke2dD5zmEQ8GMehUaOe8Sn7Ts71OzDSo--
+--G73A7fA0HIQOCHlizcXAVyGpJQXGHgTwT--
 
