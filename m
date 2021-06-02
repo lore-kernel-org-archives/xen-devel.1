@@ -2,46 +2,80 @@ Return-Path: <SRS0=/WvL=K4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89659C47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 12:08:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54C67C4708F
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 12:15:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 49FB761168
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 12:08:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49FB761168
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id DA837613B1
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 12:15:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA837613B1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136015.252385 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136006.252396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loPfF-0004FF-Ks; Wed, 02 Jun 2021 12:08:01 +0000
+	id 1loPmV-0005p8-HE; Wed, 02 Jun 2021 12:15:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136015.252385; Wed, 02 Jun 2021 12:08:01 +0000
+Received: by outflank-mailman (output) from mailman id 136006.252396; Wed, 02 Jun 2021 12:15:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loPfF-0004F8-HN; Wed, 02 Jun 2021 12:08:01 +0000
-Received: by outflank-mailman (input) for mailman id 136015;
- Wed, 02 Jun 2021 12:08:00 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=NSCb=K4=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1loPfE-0004F2-2B
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 12:08:00 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.53])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a1819bee-937b-4368-b4cf-46861176c10b;
- Wed, 02 Jun 2021 12:07:58 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx52C7v4mO
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Wed, 2 Jun 2021 14:07:57 +0200 (CEST)
+	id 1loPmV-0005p1-E1; Wed, 02 Jun 2021 12:15:31 +0000
+Received: by outflank-mailman (input) for mailman id 136006;
+ Wed, 02 Jun 2021 12:03:40 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=gK3V=K4=linux.ibm.com=schnelle@srs-us1.protection.inumbo.net>)
+ id 1loPb2-0003rE-KK
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 12:03:40 +0000
+Received: from mx0b-001b2d01.pphosted.com (unknown [148.163.158.5])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a1c8c13e-2a43-48e3-be4d-962896700a9a;
+ Wed, 02 Jun 2021 12:03:39 +0000 (UTC)
+Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 152C2cPO189409; Wed, 2 Jun 2021 08:03:00 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 38x7kr3h5n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 02 Jun 2021 08:03:00 -0400
+Received: from m0098417.ppops.net (m0098417.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 152C2cNZ189527;
+ Wed, 2 Jun 2021 08:02:59 -0400
+Received: from ppma05fra.de.ibm.com (6c.4a.5195.ip4.static.sl-reverse.com
+ [149.81.74.108])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 38x7kr3h4k-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 02 Jun 2021 08:02:59 -0400
+Received: from pps.filterd (ppma05fra.de.ibm.com [127.0.0.1])
+ by ppma05fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 152BwHfr023191;
+ Wed, 2 Jun 2021 12:02:57 GMT
+Received: from b06cxnps4076.portsmouth.uk.ibm.com
+ (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
+ by ppma05fra.de.ibm.com with ESMTP id 38ud87s9cx-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 02 Jun 2021 12:02:56 +0000
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
+ [9.149.105.59])
+ by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 152C2r4H26280248
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 2 Jun 2021 12:02:53 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id A0364A405F;
+ Wed,  2 Jun 2021 12:02:53 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 479C3A4040;
+ Wed,  2 Jun 2021 12:02:52 +0000 (GMT)
+Received: from sig-9-145-17-43.uk.ibm.com (unknown [9.145.17.43])
+ by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Wed,  2 Jun 2021 12:02:52 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,94 +87,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1819bee-937b-4368-b4cf-46861176c10b
-ARC-Seal: i=1; a=rsa-sha256; t=1622635678; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=pK4Sa+B4ZTK741NZeYuYc9tJkSqR8PmaD9xtNKcF7e6aF3wxkJe/xOMa3gxSE5XOf/
-    tC5ShSUY4q9mGA29JASMnjpnGshhspYp2ugR8b/757K2xZsF6pVtwAa4H/XN1EoopfNL
-    5UKBIuu+Pmop8bfA130e5JWU55WBaUGUsX2NVb8TOrZG2R8w6J3QkOxzLfJk8+X+Ji8X
-    wMjDMT8svei+Sw4fTidGj3d2GFvpqIsOeoFzgu8YTfiBds8fPhWkhzo/IlEQMKTzC0SO
-    y3ZgHP51J2JurbJ3mpwtYxwsS7BKWfO7Uj3Oe3XuUq8v7uqzQqjh6LVG2vEEZmdaK+cN
-    Rstw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1622635678;
-    s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=i2Qo/cH+7ij6lWILG3Gu/FmvWJfTvI+hDMyzpKgGD2Y=;
-    b=nspK6d9WSIR8fcDDGOGxOYsgDDXFrH4CGeSuimQF1khiBhMkvJGs5wB/2eTEeYaqcY
-    8QglgJ+2Hwu1F9A7ZY7z1Reeo6VzGEwMgfE7/mBHkK1zqFMfqUYm05zrSUgjULf6BAGS
-    JIpsmd7PmKds6Nf1Qdb60RTtSsUzzsJqyzzmV3KU++zxGB14noYDDP6E7fX6SJkzuSvw
-    RMDYIrXZlB6BJpoE5rgmF27RwJ2Jn56MjpiXASiOiANDFY3jX/li9uqDmhyXobX/VyWC
-    Hheb9XMSNzm2jtH7Y6dU4ecQtpLuAKjNg8P7ulvEqdqnQ/G2bOdQ3Ztn24ThMrFuh+ki
-    CILQ==
-ARC-Authentication-Results: i=1; strato.com;
-    dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1622635678;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=i2Qo/cH+7ij6lWILG3Gu/FmvWJfTvI+hDMyzpKgGD2Y=;
-    b=Q/NhDuvXjjaVDlrWAyp7FQCoAKOawpapPw6/BDnjXZRcLUYG792c/soYm3P/KbZe9J
-    4Inm53uCmDbUUkLrrIY9BBwwdrwAJmI6fxL9swQdjcLvgVDAhM23bDX/4WCyfNUH8sTG
-    jANBRaBc9SsIiqEJyIRw4zRm7CBsUfri/3zaWLO3TMsBiWHdP9pqibdBTldOCVBIlQqo
-    P6V49uVlG6Q9oL5jfzi+yswskEJicqaYFPFuLDlOpEIb9a08mWle3IBw1OupqNR0uCnP
-    M9lf+wono9k0c/zWfAKmepSflcLoqVcIE0rvEC1pgF4l1LNzLwh76CRmW/UvtC3M2nkC
-    7ZUg==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisF9Wx7WbE3s+BU2kLCYUBd7t4vRd/ulzKn4R+Wk"
-X-RZG-CLASS-ID: mo00
-Date: Wed, 2 Jun 2021 14:07:48 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v20210601 00/38] leftover from 2020
-Message-ID: <20210602140748.462fb0fa.olaf@aepfle.de>
-In-Reply-To: <51055fa2-b57e-c66b-78d1-6f07e0164b5b@suse.com>
-References: <20210601161118.18986-1-olaf@aepfle.de>
-	<24670339-c080-7e47-c2a8-22c22f7a719e@suse.com>
-	<20210602085403.40064aed.olaf@aepfle.de>
-	<51055fa2-b57e-c66b-78d1-6f07e0164b5b@suse.com>
-X-Mailer: Claws Mail 2021.05.24 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
-MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/1=jcedWTaZ0s2Hre36Dc4wT";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+X-Inumbo-ID: a1c8c13e-2a43-48e3-be4d-962896700a9a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : subject :
+ from : to : cc : date : in-reply-to : references : content-type :
+ mime-version : content-transfer-encoding; s=pp1;
+ bh=7wC8Y59HiMIthB9xfz5dL+I0HD65zOwRPB4cvu5JQYY=;
+ b=QRLGyPounpLaRIZgsSUK1LazhFSMWWWVFIpjfvUyvXqdSXI7p94FVQMtSFG3bMtHNL86
+ rLVrJ3SvpT994x2pe7o0yL3iXXDeNBst8Q4A8KEa89vx85ZQSTDkkYsEjLQaMo+eb8VZ
+ +GFr8IfErHwDLNlYl+L0v9/qNIinOxFcyNlMJhpRMjSZcskv/o9bM0Y0jNVwjZETIKG0
+ IXpmjsLB5CkqOhxt84ImzKiTyn/t0QZlZGbbzTco4+M0nPgqtd7mDQbl31t9d+7DOxJc
+ iYhombbX7dZq4eRMaB6F1ITduKcVH4H0X0f5lSV3QvlOH2CDPoe61GoP3QIOjHTOkYh/ DA== 
+Message-ID: <e4891689c7651611020bdf3b4db9895819da345a.camel@linux.ibm.com>
+Subject: Re: [PATCH 27/30] scm_blk: use blk_mq_alloc_disk and
+ blk_cleanup_disk
+From: Niklas Schnelle <schnelle@linux.ibm.com>
+To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
+Cc: Justin Sanders <justin@coraid.com>, Denis Efremov <efremov@linux.com>,
+        Josef Bacik <josef@toxicpanda.com>, Tim Waugh <tim@cyberelk.net>,
+        Geoff
+ Levand <geoff@infradead.org>, Ilya Dryomov <idryomov@gmail.com>,
+        "Md.
+ Haris Iqbal" <haris.iqbal@ionos.com>,
+        Jack Wang <jinpu.wang@ionos.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+        Roger Pau
+ =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+        Mike Snitzer
+ <snitzer@redhat.com>,
+        Maxim Levitsky <maximlevitsky@gmail.com>,
+        Alex Dubov
+ <oakad@yahoo.com>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard
+ Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        Heiko
+ Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+        Christian
+ Borntraeger <borntraeger@de.ibm.com>, dm-devel@redhat.com,
+        linux-block@vger.kernel.org, nbd@other.debian.org,
+        linuxppc-dev@lists.ozlabs.org, ceph-devel@vger.kernel.org,
+        virtualization@lists.linux-foundation.org,
+        xen-devel@lists.xenproject.org, linux-mmc@vger.kernel.org,
+        linux-mtd@lists.infradead.org, linux-s390@vger.kernel.org
+Date: Wed, 02 Jun 2021 14:02:51 +0200
+In-Reply-To: <20210602065345.355274-28-hch@lst.de>
+References: <20210602065345.355274-1-hch@lst.de>
+	 <20210602065345.355274-28-hch@lst.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-16.el8) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: 9Pi9MTQ_S8CJ1ewvOnGa4xYgtn5KH1ib
+X-Proofpoint-ORIG-GUID: -LAzjZA1VGIxMM3aVX5RPubiT3GLOjUz
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391,18.0.761
+ definitions=2021-06-02_06:2021-06-02,2021-06-02 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
+ priorityscore=1501 lowpriorityscore=0 adultscore=0 bulkscore=0
+ mlxlogscore=999 spamscore=0 clxscore=1011 suspectscore=0 phishscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2104190000 definitions=main-2106020078
 
---Sig_/1=jcedWTaZ0s2Hre36Dc4wT
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On Wed, 2021-06-02 at 09:53 +0300, Christoph Hellwig wrote:
+> Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
+> request_queue allocation.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  drivers/s390/block/scm_blk.c | 21 ++++++---------------
+>  1 file changed, 6 insertions(+), 15 deletions(-)
+> 
+> diff --git a/drivers/s390/block/scm_blk.c b/drivers/s390/block/scm_blk.c
+> index a4f6f2e62b1d..88cba6212ee2 100644
+> --- a/drivers/s390/block/scm_blk.c
+> +++ b/drivers/s390/block/scm_blk.c
+> @@ -462,12 +462,12 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+>  	if (ret)
+>  		goto out;
+>  
+> -	rq = blk_mq_init_queue(&bdev->tag_set);
+> -	if (IS_ERR(rq)) {
+> -		ret = PTR_ERR(rq);
+> +	bdev->gendisk = blk_mq_alloc_disk(&bdev->tag_set, scmdev);
+> +	if (IS_ERR(bdev->gendisk)) {
+> +		ret = PTR_ERR(bdev->gendisk);
+>  		goto out_tag;
+>  	}
+> -	bdev->rq = rq;
+> +	rq = bdev->rq = bdev->gendisk->queue;
+>  	nr_max_blk = min(scmdev->nr_max_block,
+>  			 (unsigned int) (PAGE_SIZE / sizeof(struct aidaw)));
+>  
+> @@ -477,17 +477,11 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+>  	blk_queue_flag_set(QUEUE_FLAG_NONROT, rq);
+>  	blk_queue_flag_clear(QUEUE_FLAG_ADD_RANDOM, rq);
+>  
+> -	bdev->gendisk = alloc_disk(SCM_NR_PARTS);
+> -	if (!bdev->gendisk) {
+> -		ret = -ENOMEM;
+> -		goto out_queue;
+> -	}
+> -	rq->queuedata = scmdev;
+>  	bdev->gendisk->private_data = scmdev;
+>  	bdev->gendisk->fops = &scm_blk_devops;
+> -	bdev->gendisk->queue = rq;
+>  	bdev->gendisk->major = scm_major;
+>  	bdev->gendisk->first_minor = devindex * SCM_NR_PARTS;
+> +	bdev->gendisk->minors = SCM_NR_PARTS;
+>  
+>  	len = snprintf(bdev->gendisk->disk_name, DISK_NAME_LEN, "scm");
+>  	if (devindex > 25) {
+> @@ -504,8 +498,6 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+>  	device_add_disk(&scmdev->dev, bdev->gendisk, NULL);
+>  	return 0;
+>  
+> -out_queue:
+> -	blk_cleanup_queue(rq);
+>  out_tag:
+>  	blk_mq_free_tag_set(&bdev->tag_set);
+>  out:
+> @@ -516,9 +508,8 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+>  void scm_blk_dev_cleanup(struct scm_blk_dev *bdev)
+>  {
+>  	del_gendisk(bdev->gendisk);
+> -	blk_cleanup_queue(bdev->gendisk->queue);
+> +	blk_cleanup_disk(bdev->gendisk);
+>  	blk_mq_free_tag_set(&bdev->tag_set);
+> -	put_disk(bdev->gendisk);
+>  }
+>  
+>  void scm_blk_set_available(struct scm_blk_dev *bdev)
 
-Am Wed, 2 Jun 2021 09:00:49 +0200
-schrieb Juergen Gross <jgross@suse.com>:
+Not an expert on SCM or this code but I gave this a quick test and it
+seems to work fine.
 
-> IMO this will make it more probable to get at least parts committed.
-
-It depends all on patch #3, so further split can not be done anymore at thi=
-s point.
+Tested-by: Niklas Schnelle <schnelle@linux.ibm.com>
 
 
-Olaf
 
---Sig_/1=jcedWTaZ0s2Hre36Dc4wT
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmC3dJQACgkQ86SN7mm1
-DoDyPhAAgoeJZQmPRRZj6IrygVH+zTOJ+Sl5IdHk9T01gRhc/POZ6bCN2tlXwIuw
-WXIdmXf4UReYX4NmvHcIz9f5FUYzR5+DVFQaAN08mohn/j7rn3Fvn1FWN73FWPYM
-OX5zNriJ/l7GLmV+xldfnhmVAPIvneNm3vgx1y2DsEJvfUTR6K3Lz6NcRQiH4PJN
-hZpGNBQJMoaM6HPwO3f6r+xDk64AhmIJKx2tMKYfbfe4jfqnwzwS3SwpadjQsDxF
-N72A6lobQqlfJQofa4dFnRvZFgLsC21eJxXnq2RVR35xL4dfPO95y0v6OPtQ69X2
-1+ZhNI6/8A6hqE+tlMN/JziWuh/+agWxitOFAdcy9bjarPECLixAyh5VfvFXQS+t
-29Y29rzayvASJJ0EtrSdeCwTuca56LKPjTyl0CGeeBhBhI/H94AMh4G68ic6w7DD
-wE6cMrR/Nhl705Po9S+0eBVMn/pwLeZHZQYw6lzmZXyBBAVmOGfr9C5ZOEEkHntN
-vLnY5ZK5oUHByrwDJap/Dnm3hUHweqANerIMFa2IQKinmlpZ8n9gJ9Nu+5MrVHQC
-Pi6D9qWvQeujIbtJZwJ0oBVnDyC5x4Y8nWrRzk90/21zk+pZHGLBOE4C0xtEgMJj
-D5uozMdLH8lgK+xlORSRGFyjmYdCmHVTlGDAnQ36bUrchFm82aE=
-=nM1w
------END PGP SIGNATURE-----
-
---Sig_/1=jcedWTaZ0s2Hre36Dc4wT--
 
