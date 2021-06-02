@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E24CBC47092
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C4ECC47093
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B4CA5610CB
+	by mail.kernel.org (Postfix) with ESMTPS id E8DFC6135D
 	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4CA5610CB
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E8DFC6135D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135531.251799 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135533.251807 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuJ-00070w-Bj; Wed, 02 Jun 2021 07:03:15 +0000
+	id 1loKuK-0007AT-1g; Wed, 02 Jun 2021 07:03:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135531.251799; Wed, 02 Jun 2021 07:03:15 +0000
+Received: by outflank-mailman (output) from mailman id 135533.251807; Wed, 02 Jun 2021 07:03:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuJ-0006zE-6j; Wed, 02 Jun 2021 07:03:15 +0000
-Received: by outflank-mailman (input) for mailman id 135531;
- Wed, 02 Jun 2021 07:03:12 +0000
+	id 1loKuJ-00078F-Mz; Wed, 02 Jun 2021 07:03:15 +0000
+Received: by outflank-mailman (input) for mailman id 135533;
+ Wed, 02 Jun 2021 07:03:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKp5-0007A2-A2
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:51 +0000
+ id 1loKpo-0007A2-BA
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:36 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fbc7e121-7955-4001-835b-a07c6a1cacbe;
- Wed, 02 Jun 2021 06:55:56 +0000 (UTC)
+ id 7bcd4f9d-4ff9-4974-b0a8-629787498a7d;
+ Wed, 02 Jun 2021 06:56:20 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKmo-002647-90; Wed, 02 Jun 2021 06:55:31 +0000
+ id 1loKnE-0026TF-Pp; Wed, 02 Jun 2021 06:55:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fbc7e121-7955-4001-835b-a07c6a1cacbe
+X-Inumbo-ID: 7bcd4f9d-4ff9-4974-b0a8-629787498a7d
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=nI/ZQsUq4UAVWWD+XlWiGZNbHY/pEUl6HaoFswHnuQ4=; b=zGlrfHSC/oppIdruF4aRva3o8B
-	wtEFmwSmcFHEhWITeGFtHuY9Wo10P04noPv6NDlI408bgIBJRkVwwSNa+XWLEAJlAJuKZOmEWMLIK
-	ypzvochOmpTNDSw00TOxKnVYokteVrnhgtmSr1j1yBWFdJc27AJBjUNwKpISp0vKiLy2jjLimY0Ek
-	6P9TdCUkFiGBNMeFMPeq+ck3KCV/5OtDAHAEJPXDdOXuVm3Wp8pMIeYa4M2y0KOxO5BAOQxPKiJkk
-	QtHEQ5wWjrHNPSLHnxZaMHUkkPwojUCno1EhOKjx/cVHeiOj1wg20mdo5EoURfDorHUaeAxyeZdGp
-	7/lZ2gHg==;
+	bh=t0ZfpA7/b1tuSB9Qdmm+6Pkt4GtuM/+pFYP7xY239G0=; b=uyZhEjeEW990KkF+Rai7xjxEUV
+	5bWN+uUzqHopzatrtAIE4foiriDdqCyVhGFR6vrU02JeY+SQh7ATWFUZXA3UpyDJcgDYSDLhQXP9V
+	RbuXa4k+DVNm7KNjqg4cbdIBM1Va/6aZbjJtQTnqImkNPJ0qKqmBir0MJFXK6gK5PvPfEwCxj1xmD
+	dJgu840EtdLj1HHThtV37MaOh3u42wXScgCL7y9GVONAhUdX9SrS6vntka8Pn6bww45YDmPKVYARg
+	M/UkenAPSpkgf5JK1kNXiSwoq6fWJ8kR9bHE+sA5X31QgA+XlZSlp6YoKzXnGG50xif3YpnMjuZQG
+	qCj5Hh3A==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 21/30] pd: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:36 +0300
-Message-Id: <20210602065345.355274-22-hch@lst.de>
+Subject: [PATCH 27/30] scm_blk: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:42 +0300
+Message-Id: <20210602065345.355274-28-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -110,69 +110,69 @@ request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/paride/pd.c | 30 ++++++++++++------------------
- 1 file changed, 12 insertions(+), 18 deletions(-)
+ drivers/s390/block/scm_blk.c | 21 ++++++---------------
+ 1 file changed, 6 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/block/paride/pd.c b/drivers/block/paride/pd.c
-index 828a45ffe0e7..3b2b8e872beb 100644
---- a/drivers/block/paride/pd.c
-+++ b/drivers/block/paride/pd.c
-@@ -879,18 +879,6 @@ static void pd_probe_drive(struct pd_unit *disk)
+diff --git a/drivers/s390/block/scm_blk.c b/drivers/s390/block/scm_blk.c
+index a4f6f2e62b1d..88cba6212ee2 100644
+--- a/drivers/s390/block/scm_blk.c
++++ b/drivers/s390/block/scm_blk.c
+@@ -462,12 +462,12 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ 	if (ret)
+ 		goto out;
+ 
+-	rq = blk_mq_init_queue(&bdev->tag_set);
+-	if (IS_ERR(rq)) {
+-		ret = PTR_ERR(rq);
++	bdev->gendisk = blk_mq_alloc_disk(&bdev->tag_set, scmdev);
++	if (IS_ERR(bdev->gendisk)) {
++		ret = PTR_ERR(bdev->gendisk);
+ 		goto out_tag;
+ 	}
+-	bdev->rq = rq;
++	rq = bdev->rq = bdev->gendisk->queue;
+ 	nr_max_blk = min(scmdev->nr_max_block,
+ 			 (unsigned int) (PAGE_SIZE / sizeof(struct aidaw)));
+ 
+@@ -477,17 +477,11 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ 	blk_queue_flag_set(QUEUE_FLAG_NONROT, rq);
+ 	blk_queue_flag_clear(QUEUE_FLAG_ADD_RANDOM, rq);
+ 
+-	bdev->gendisk = alloc_disk(SCM_NR_PARTS);
+-	if (!bdev->gendisk) {
+-		ret = -ENOMEM;
+-		goto out_queue;
+-	}
+-	rq->queuedata = scmdev;
+ 	bdev->gendisk->private_data = scmdev;
+ 	bdev->gendisk->fops = &scm_blk_devops;
+-	bdev->gendisk->queue = rq;
+ 	bdev->gendisk->major = scm_major;
+ 	bdev->gendisk->first_minor = devindex * SCM_NR_PARTS;
++	bdev->gendisk->minors = SCM_NR_PARTS;
+ 
+ 	len = snprintf(bdev->gendisk->disk_name, DISK_NAME_LEN, "scm");
+ 	if (devindex > 25) {
+@@ -504,8 +498,6 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ 	device_add_disk(&scmdev->dev, bdev->gendisk, NULL);
+ 	return 0;
+ 
+-out_queue:
+-	blk_cleanup_queue(rq);
+ out_tag:
+ 	blk_mq_free_tag_set(&bdev->tag_set);
+ out:
+@@ -516,9 +508,8 @@ int scm_blk_dev_setup(struct scm_blk_dev *bdev, struct scm_device *scmdev)
+ void scm_blk_dev_cleanup(struct scm_blk_dev *bdev)
  {
- 	struct gendisk *p;
+ 	del_gendisk(bdev->gendisk);
+-	blk_cleanup_queue(bdev->gendisk->queue);
++	blk_cleanup_disk(bdev->gendisk);
+ 	blk_mq_free_tag_set(&bdev->tag_set);
+-	put_disk(bdev->gendisk);
+ }
  
--	p = alloc_disk(1 << PD_BITS);
--	if (!p)
--		return;
--
--	strcpy(p->disk_name, disk->name);
--	p->fops = &pd_fops;
--	p->major = major;
--	p->first_minor = (disk - pd) << PD_BITS;
--	p->events = DISK_EVENT_MEDIA_CHANGE;
--	disk->gd = p;
--	p->private_data = disk;
--
- 	memset(&disk->tag_set, 0, sizeof(disk->tag_set));
- 	disk->tag_set.ops = &pd_mq_ops;
- 	disk->tag_set.cmd_size = sizeof(struct pd_req);
-@@ -903,14 +891,21 @@ static void pd_probe_drive(struct pd_unit *disk)
- 	if (blk_mq_alloc_tag_set(&disk->tag_set))
- 		return;
- 
--	p->queue = blk_mq_init_queue(&disk->tag_set);
--	if (IS_ERR(p->queue)) {
-+	p = blk_mq_alloc_disk(&disk->tag_set, disk);
-+	if (!p) {
- 		blk_mq_free_tag_set(&disk->tag_set);
--		p->queue = NULL;
- 		return;
- 	}
-+	disk->gd = p;
-+
-+	strcpy(p->disk_name, disk->name);
-+	p->fops = &pd_fops;
-+	p->major = major;
-+	p->first_minor = (disk - pd) << PD_BITS;
-+	p->minors = 1 << PD_BITS;
-+	p->events = DISK_EVENT_MEDIA_CHANGE;
-+	p->private_data = disk;
- 
--	p->queue->queuedata = disk;
- 	blk_queue_max_hw_sectors(p->queue, cluster);
- 	blk_queue_bounce_limit(p->queue, BLK_BOUNCE_HIGH);
- 
-@@ -1019,9 +1014,8 @@ static void __exit pd_exit(void)
- 		if (p) {
- 			disk->gd = NULL;
- 			del_gendisk(p);
--			blk_cleanup_queue(p->queue);
- 			blk_mq_free_tag_set(&disk->tag_set);
--			put_disk(p);
-+			blk_cleanup_disk(p);
- 			pi_release(disk->pi);
- 		}
- 	}
+ void scm_blk_set_available(struct scm_blk_dev *bdev)
 -- 
 2.30.2
 
