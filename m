@@ -2,53 +2,44 @@ Return-Path: <SRS0=/WvL=K4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7821EC47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 022B2C4708F
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2761B61242
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:01:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2761B61242
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id B9FF0610CB
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9FF0610CB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135517.251744 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135522.251756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKs1-0005Ib-Up; Wed, 02 Jun 2021 07:00:53 +0000
+	id 1loKuE-0005wY-Cv; Wed, 02 Jun 2021 07:03:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135517.251744; Wed, 02 Jun 2021 07:00:53 +0000
+Received: by outflank-mailman (output) from mailman id 135522.251756; Wed, 02 Jun 2021 07:03:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKs1-0005IU-Rm; Wed, 02 Jun 2021 07:00:53 +0000
-Received: by outflank-mailman (input) for mailman id 135517;
- Wed, 02 Jun 2021 07:00:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Q/fn=K4=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1loKs0-0005IM-0V
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 07:00:52 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 244085fd-4871-4959-9ff6-5ab815bfa2b1;
- Wed, 02 Jun 2021 07:00:51 +0000 (UTC)
-Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
- (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 993EE21937;
- Wed,  2 Jun 2021 07:00:50 +0000 (UTC)
-Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 7809D118DD;
- Wed,  2 Jun 2021 07:00:50 +0000 (UTC)
-Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id YKk1HKIst2A0UgAALh3uQQ
- (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 07:00:50 +0000
+	id 1loKuE-0005wR-8q; Wed, 02 Jun 2021 07:03:10 +0000
+Received: by outflank-mailman (input) for mailman id 135522;
+ Wed, 02 Jun 2021 07:03:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1loKnJ-0007A2-5p
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:56:01 +0000
+Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 00870660-fed7-4b75-a701-c131b2982eeb;
+ Wed, 02 Jun 2021 06:55:09 +0000 (UTC)
+Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1loKm6-0025Ys-7i; Wed, 02 Jun 2021 06:54:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,190 +51,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 244085fd-4871-4959-9ff6-5ab815bfa2b1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622617250; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Fa3RUNw+SKpVsbmLK+o0PKvms/4JNeoONXmILzCMOfE=;
-	b=gTxVpRZHxGHR83iKqdcL5xgF9im7Dirgal0eAkUfbvMOIMuJz80Z2bzFLcJFObGooIJ70l
-	N0PAB1vnC5JnceOAuJtGo/54yY0h8bxiMvzTyHAFafskgUOQicHlfRVoT3qO8PBI7BQm+h
-	CXwhRybmIwzkvkkgb6+AaaWt4H/DF2A=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622617250; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Fa3RUNw+SKpVsbmLK+o0PKvms/4JNeoONXmILzCMOfE=;
-	b=gTxVpRZHxGHR83iKqdcL5xgF9im7Dirgal0eAkUfbvMOIMuJz80Z2bzFLcJFObGooIJ70l
-	N0PAB1vnC5JnceOAuJtGo/54yY0h8bxiMvzTyHAFafskgUOQicHlfRVoT3qO8PBI7BQm+h
-	CXwhRybmIwzkvkkgb6+AaaWt4H/DF2A=
-Subject: Re: [PATCH v20210601 00/38] leftover from 2020
-To: Olaf Hering <olaf@aepfle.de>
-Cc: xen-devel@lists.xenproject.org
-References: <20210601161118.18986-1-olaf@aepfle.de>
- <24670339-c080-7e47-c2a8-22c22f7a719e@suse.com>
- <20210602085403.40064aed.olaf@aepfle.de>
-From: Juergen Gross <jgross@suse.com>
-Message-ID: <51055fa2-b57e-c66b-78d1-6f07e0164b5b@suse.com>
-Date: Wed, 2 Jun 2021 09:00:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
+X-Inumbo-ID: 00870660-fed7-4b75-a701-c131b2982eeb
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=qi7AU80Oz7hj4K5BUy3Hu3UJMfMiprlsOMq1LlDbVww=; b=wfnn0CGP9teCIUigpA0cLAiCEG
+	XaYeXRoQvQOrEfJFcuxKu18rxlCj9kAVnqYvA6ffbosWHxomIXQsSArr+ftwbguMp5SU3M9/bmk0L
+	bqzQ8XiTRZ6QBfzP4K/UHsKW47GVQnDBFuGf6p23+3crdLQ2ThNz4kvRi6KgNmbzK/nin+yjIgWxz
+	6kQGuIL3DvYz9Jv29HP0rZaCMuA/qvMMWQpgEREhwRn38bXZiX53OXpalBkps4hZhmquoC2R0dNpO
+	luUD0oRku7pr6gfgS8FYvxXuSkXea92js4/YEKQkinqriGTLqiSIzKawm91/GTGJJNVz/av0Gu21E
+	TAsHH4GQ==;
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Cc: Justin Sanders <justin@coraid.com>,
+	Denis Efremov <efremov@linux.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Tim Waugh <tim@cyberelk.net>,
+	Geoff Levand <geoff@infradead.org>,
+	Ilya Dryomov <idryomov@gmail.com>,
+	"Md. Haris Iqbal" <haris.iqbal@ionos.com>,
+	Jack Wang <jinpu.wang@ionos.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Mike Snitzer <snitzer@redhat.com>,
+	Maxim Levitsky <maximlevitsky@gmail.com>,
+	Alex Dubov <oakad@yahoo.com>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>,
+	dm-devel@redhat.com,
+	linux-block@vger.kernel.org,
+	nbd@other.debian.org,
+	linuxppc-dev@lists.ozlabs.org,
+	ceph-devel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	xen-devel@lists.xenproject.org,
+	linux-mmc@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	linux-s390@vger.kernel.org
+Subject: [PATCH 11/30] swim3: use blk_mq_alloc_disk
+Date: Wed,  2 Jun 2021 09:53:26 +0300
+Message-Id: <20210602065345.355274-12-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210602065345.355274-1-hch@lst.de>
+References: <20210602065345.355274-1-hch@lst.de>
 MIME-Version: 1.0
-In-Reply-To: <20210602085403.40064aed.olaf@aepfle.de>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="0R5yR0kmJDthhk6p7sd2UWkPl6r3fhbtk"
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---0R5yR0kmJDthhk6p7sd2UWkPl6r3fhbtk
-Content-Type: multipart/mixed; boundary="B8fhApnKctGNEhD5FJdK2EN2rNrsZclQK";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: xen-devel@lists.xenproject.org
-Message-ID: <51055fa2-b57e-c66b-78d1-6f07e0164b5b@suse.com>
-Subject: Re: [PATCH v20210601 00/38] leftover from 2020
-References: <20210601161118.18986-1-olaf@aepfle.de>
- <24670339-c080-7e47-c2a8-22c22f7a719e@suse.com>
- <20210602085403.40064aed.olaf@aepfle.de>
-In-Reply-To: <20210602085403.40064aed.olaf@aepfle.de>
+Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
+allocation.
 
---B8fhApnKctGNEhD5FJdK2EN2rNrsZclQK
-Content-Type: multipart/mixed;
- boundary="------------E7EB69D824C6B123C0AD1ADA"
-Content-Language: en-US
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/block/swim3.c | 33 ++++++++++++++-------------------
+ 1 file changed, 14 insertions(+), 19 deletions(-)
 
-This is a multi-part message in MIME format.
---------------E7EB69D824C6B123C0AD1ADA
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: quoted-printable
+diff --git a/drivers/block/swim3.c b/drivers/block/swim3.c
+index a515d0c1d2cb..965af0a3e95b 100644
+--- a/drivers/block/swim3.c
++++ b/drivers/block/swim3.c
+@@ -1202,30 +1202,27 @@ static int swim3_attach(struct macio_dev *mdev,
+ 			return rc;
+ 	}
+ 
+-	disk = alloc_disk(1);
+-	if (disk == NULL) {
+-		rc = -ENOMEM;
+-		goto out_unregister;
+-	}
+-
+ 	fs = &floppy_states[floppy_count];
+ 	memset(fs, 0, sizeof(*fs));
+ 
+-	disk->queue = blk_mq_init_sq_queue(&fs->tag_set, &swim3_mq_ops, 2,
+-						BLK_MQ_F_SHOULD_MERGE);
+-	if (IS_ERR(disk->queue)) {
+-		rc = PTR_ERR(disk->queue);
+-		disk->queue = NULL;
+-		goto out_put_disk;
++	rc = blk_mq_alloc_sq_tag_set(&fs->tag_set, &swim3_mq_ops, 2,
++			BLK_MQ_F_SHOULD_MERGE);
++	if (rc)
++		goto out_unregister;
++
++	disk = blk_mq_alloc_disk(&fs->tag_set, fs);
++	if (IS_ERR(disk)) {
++		rc = PTR_ERR(disk);
++		goto out_free_tag_set;
+ 	}
+-	disk->queue->queuedata = fs;
+ 
+ 	rc = swim3_add_device(mdev, floppy_count);
+ 	if (rc)
+-		goto out_cleanup_queue;
++		goto out_cleanup_disk;
+ 
+ 	disk->major = FLOPPY_MAJOR;
+ 	disk->first_minor = floppy_count;
++	disk->minors = 1;
+ 	disk->fops = &floppy_fops;
+ 	disk->private_data = fs;
+ 	disk->events = DISK_EVENT_MEDIA_CHANGE;
+@@ -1237,12 +1234,10 @@ static int swim3_attach(struct macio_dev *mdev,
+ 	disks[floppy_count++] = disk;
+ 	return 0;
+ 
+-out_cleanup_queue:
+-	blk_cleanup_queue(disk->queue);
+-	disk->queue = NULL;
++out_cleanup_disk:
++	blk_cleanup_disk(disk);
++out_free_tag_set:
+ 	blk_mq_free_tag_set(&fs->tag_set);
+-out_put_disk:
+-	put_disk(disk);
+ out_unregister:
+ 	if (floppy_count == 0)
+ 		unregister_blkdev(FLOPPY_MAJOR, "fd");
+-- 
+2.30.2
 
-On 02.06.21 08:54, Olaf Hering wrote:
-> Am Wed, 2 Jun 2021 08:10:21 +0200
-> schrieb Juergen Gross <jgross@suse.com>:
->=20
->> Would it be possible to split this into multiple independent
->> patches/series?
->=20
-> Sure, I can send each individual part that was already sent over and ov=
-er again.
-
-IMO this will make it more probable to get at least parts committed.
-
-
-Juergen
-
---------------E7EB69D824C6B123C0AD1ADA
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: OpenPGP public key
-Content-Disposition: attachment;
- filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
-cWx
-w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
-f8Z
-d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
-9bf
-IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
-G7/
-377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
-3Jv
-c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
-QIe
-AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
-hpw
-dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
-MbD
-1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
-oPH
-Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
-5QL
-+qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
-2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
-QoL
-BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
-Wf0
-teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
-/nu
-AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
-ITT
-d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
-XBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
-80h
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
-AcD
-AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
-FOX
-gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
-jnD
-kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
-N51
-N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
-otu
-fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
-tqS
-EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
-hsD
-BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
-g3O
-ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
-dM7
-wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
-D+j
-LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
-V2x
-AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
-Eaw
-QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
-nHI
-s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
-wgn
-BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
-bVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
-pEd
-IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
-QAB
-wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
-Tbe
-8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
-vJz
-Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
-VGi
-wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
-svi
-uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
-zXs
-ZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------E7EB69D824C6B123C0AD1ADA--
-
---B8fhApnKctGNEhD5FJdK2EN2rNrsZclQK--
-
---0R5yR0kmJDthhk6p7sd2UWkPl6r3fhbtk
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3LKEFAwAAAAAACgkQsN6d1ii/Ey+S
-PAf9Ff/vwymgCqWXpq71uKpWOGKKwso8Mn9TJ7UTOFUSuPWg3FqQWvqj0ozl+2H+ZGXSaKZSaVOh
-WYkCzmQ+T53zTpTjZXNw1fouBu2hC0oyDQKZiwxhDiVxp8EijSVdimO9CtIjkHqIGaPbY2QEIvSR
-rgI3g64ZsYk9aYZxavm1oRGOvvEe7rqllp0Xf+jNo2WhhyS1yb1Q0H7dEQFHZdC/qizTQiDonp1D
-/O9DkOhBY+AHxJdF4285ZDNtZETa9KZPe2bLqPvfkpt5z3dQ7OtPHGb0akAL7JDrrFno2E8GpHSX
-krcAKEfitMMWFC5IC6nkwu2NGSdbwpXchRAGoCJ6fw==
-=F354
------END PGP SIGNATURE-----
-
---0R5yR0kmJDthhk6p7sd2UWkPl6r3fhbtk--
 
