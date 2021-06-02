@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 594D0C4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35DB6C4708F
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:04:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2DDE1610CB
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:04:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2DDE1610CB
+	by mail.kernel.org (Postfix) with ESMTPS id 07A4A6135D
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:04:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07A4A6135D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135605.251981 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135609.251990 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKv2-0007sf-9t; Wed, 02 Jun 2021 07:04:00 +0000
+	id 1loKv3-0008Bz-VI; Wed, 02 Jun 2021 07:04:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135605.251981; Wed, 02 Jun 2021 07:04:00 +0000
+Received: by outflank-mailman (output) from mailman id 135609.251990; Wed, 02 Jun 2021 07:04:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKv1-0007pR-UA; Wed, 02 Jun 2021 07:03:59 +0000
-Received: by outflank-mailman (input) for mailman id 135605;
- Wed, 02 Jun 2021 07:03:58 +0000
+	id 1loKv3-00087F-5D; Wed, 02 Jun 2021 07:04:01 +0000
+Received: by outflank-mailman (input) for mailman id 135609;
+ Wed, 02 Jun 2021 07:04:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKoq-0007A2-9L
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:36 +0000
+ id 1loKpP-0007A2-AR
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:11 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 413141d6-a989-469e-92fd-fbc443d5b624;
- Wed, 02 Jun 2021 06:55:45 +0000 (UTC)
+ id 12923a92-1323-40b7-8618-44db0cf76b6d;
+ Wed, 02 Jun 2021 06:56:06 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKme-0025w6-S0; Wed, 02 Jun 2021 06:55:21 +0000
+ id 1loKmx-0026Co-6G; Wed, 02 Jun 2021 06:55:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 413141d6-a989-469e-92fd-fbc443d5b624
+X-Inumbo-ID: 12923a92-1323-40b7-8618-44db0cf76b6d
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=+VW3u/9XCdDTbtqEZvujMXwGJbXBwfM20yjCH8e5d3E=; b=GwQP6IERGYi9h/w11aM5Gv7Bak
-	KwC96m3PPXGkoyZYwi/kNvLQSakOJo8KyQC+PaSGnzJZtxZtj+EAf1YdIWxyGh1h3/ItGALtuAyht
-	Zb0UCagxGAtcH3yWBInWzJjMPdgOtlr0aVxDJradU0LlW4CU0UoZ9uFlxXZ9MaFs9QpR6rJJqNKpM
-	Lp+TbCyqXP0eixAsJNjUJ38MR0l0b3AJnHt9CihDHSmpFaOitPKX0HSMzdaVcLJGEB+8v4t2ImMr4
-	1mz3v9UKvRtkqRqwAqZX0MDPtIqhunVVCv1zjkY4f5TbIaxRb9R62pOguo/krhQJ2ETMPxpLnqyY0
-	E1fIMYVA==;
+	bh=5mJAZZeO1CtG3mn2Yuq3t9OP/z6HiPXlonifU+Xv8uk=; b=tt3BlzEvyR33jB2X0kDiZ5TSxB
+	csELHSnmlT8T6KUWOPDXdz45J2xQyFQU19xaezbdVZgeUVrTi9u9ZPTPO6fqT1nm0qE2v7SVLycE9
+	/MOWrjDcC/xYy6qBU13Znm79Ch9jRwtBbUtbfzUmR+I9pRspaNFEvyOXmYvNfXgWZsh0TdBvJLp4s
+	/Fr3RVYTz9uY0FffL4ddTLGXqxR4LHnzHncqok0pz2PtYl2ZKi5VfjzMdqvx8SDrYpymOwhWqr6QX
+	Z9xSFfPHVSbsRQooQMBqPIpILAv/Gx+wWjK7rLtRMYAMdC9wtpz/a7ziP04g4HcPFPbwAdib7nnbG
+	Ptr9BkmA==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 19/30] nbd: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:34 +0300
-Message-Id: <20210602065345.355274-20-hch@lst.de>
+Subject: [PATCH 23/30] rnbd: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:38 +0300
+Message-Id: <20210602065345.355274-24-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -110,117 +110,88 @@ request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/nbd.c | 53 ++++++++++++++++++---------------------------
- 1 file changed, 21 insertions(+), 32 deletions(-)
+ drivers/block/rnbd/rnbd-clt.c | 35 ++++++++---------------------------
+ 1 file changed, 8 insertions(+), 27 deletions(-)
 
-diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
-index 45d2c28c8fc8..614d82e7fae4 100644
---- a/drivers/block/nbd.c
-+++ b/drivers/block/nbd.c
-@@ -219,15 +219,11 @@ static const struct device_attribute pid_attr = {
- static void nbd_dev_remove(struct nbd_device *nbd)
- {
- 	struct gendisk *disk = nbd->disk;
--	struct request_queue *q;
- 
- 	if (disk) {
--		q = disk->queue;
- 		del_gendisk(disk);
--		blk_cleanup_queue(q);
- 		blk_mq_free_tag_set(&nbd->tag_set);
--		disk->private_data = NULL;
--		put_disk(disk);
-+		blk_cleanup_disk(disk);
+diff --git a/drivers/block/rnbd/rnbd-clt.c b/drivers/block/rnbd/rnbd-clt.c
+index c604a402cd5c..f4fa45d24c0b 100644
+--- a/drivers/block/rnbd/rnbd-clt.c
++++ b/drivers/block/rnbd/rnbd-clt.c
+@@ -1353,18 +1353,6 @@ static void rnbd_init_mq_hw_queues(struct rnbd_clt_dev *dev)
  	}
+ }
  
- 	/*
-@@ -1646,15 +1642,24 @@ static int nbd_dev_add(int index)
- {
- 	struct nbd_device *nbd;
- 	struct gendisk *disk;
--	struct request_queue *q;
- 	int err = -ENOMEM;
- 
- 	nbd = kzalloc(sizeof(struct nbd_device), GFP_KERNEL);
- 	if (!nbd)
- 		goto out;
- 
--	disk = alloc_disk(1 << part_shift);
--	if (!disk)
-+	nbd->tag_set.ops = &nbd_mq_ops;
-+	nbd->tag_set.nr_hw_queues = 1;
-+	nbd->tag_set.queue_depth = 128;
-+	nbd->tag_set.numa_node = NUMA_NO_NODE;
-+	nbd->tag_set.cmd_size = sizeof(struct nbd_cmd);
-+	nbd->tag_set.flags = BLK_MQ_F_SHOULD_MERGE |
-+		BLK_MQ_F_BLOCKING;
-+	nbd->tag_set.driver_data = nbd;
-+	nbd->destroy_complete = NULL;
-+
-+	err = blk_mq_alloc_tag_set(&nbd->tag_set);
-+	if (err)
- 		goto out_free_nbd;
- 
- 	if (index >= 0) {
-@@ -1668,30 +1673,15 @@ static int nbd_dev_add(int index)
- 			index = err;
- 	}
- 	if (err < 0)
--		goto out_free_disk;
+-static int setup_mq_dev(struct rnbd_clt_dev *dev)
+-{
+-	dev->queue = blk_mq_init_queue(&dev->sess->tag_set);
+-	if (IS_ERR(dev->queue)) {
+-		rnbd_clt_err(dev, "Initializing multiqueue queue failed, err: %ld\n",
+-			      PTR_ERR(dev->queue));
+-		return PTR_ERR(dev->queue);
+-	}
+-	rnbd_init_mq_hw_queues(dev);
+-	return 0;
+-}
 -
-+		goto out_free_tags;
- 	nbd->index = index;
--	nbd->disk = disk;
--	nbd->tag_set.ops = &nbd_mq_ops;
--	nbd->tag_set.nr_hw_queues = 1;
--	nbd->tag_set.queue_depth = 128;
--	nbd->tag_set.numa_node = NUMA_NO_NODE;
--	nbd->tag_set.cmd_size = sizeof(struct nbd_cmd);
--	nbd->tag_set.flags = BLK_MQ_F_SHOULD_MERGE |
--		BLK_MQ_F_BLOCKING;
--	nbd->tag_set.driver_data = nbd;
--	nbd->destroy_complete = NULL;
+ static void setup_request_queue(struct rnbd_clt_dev *dev)
+ {
+ 	blk_queue_logical_block_size(dev->queue, dev->logical_block_size);
+@@ -1393,13 +1381,13 @@ static void setup_request_queue(struct rnbd_clt_dev *dev)
+ 	blk_queue_io_opt(dev->queue, dev->sess->max_io_size);
+ 	blk_queue_virt_boundary(dev->queue, SZ_4K - 1);
+ 	blk_queue_write_cache(dev->queue, dev->wc, dev->fua);
+-	dev->queue->queuedata = dev;
+ }
  
--	err = blk_mq_alloc_tag_set(&nbd->tag_set);
+ static void rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
+ {
+ 	dev->gd->major		= rnbd_client_major;
+ 	dev->gd->first_minor	= idx << RNBD_PART_BITS;
++	dev->gd->minors		= 1 << RNBD_PART_BITS;
+ 	dev->gd->fops		= &rnbd_client_ops;
+ 	dev->gd->queue		= dev->queue;
+ 	dev->gd->private_data	= dev;
+@@ -1426,24 +1414,18 @@ static void rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
+ 
+ static int rnbd_client_setup_device(struct rnbd_clt_dev *dev)
+ {
+-	int err, idx = dev->clt_device_id;
++	int idx = dev->clt_device_id;
+ 
+ 	dev->size = dev->nsectors * dev->logical_block_size;
+ 
+-	err = setup_mq_dev(dev);
 -	if (err)
-+	disk = blk_mq_alloc_disk(&nbd->tag_set, NULL);
-+	if (IS_ERR(disk)) {
-+		err = PTR_ERR(disk);
- 		goto out_free_idr;
+-		return err;
++	dev->gd = blk_mq_alloc_disk(&dev->sess->tag_set, dev);
++	if (IS_ERR(dev->gd))
++		return PTR_ERR(dev->gd);
++	dev->queue = dev->gd->queue;
++	rnbd_init_mq_hw_queues(dev);
+ 
+ 	setup_request_queue(dev);
 -
--	q = blk_mq_init_queue(&nbd->tag_set);
--	if (IS_ERR(q)) {
--		err = PTR_ERR(q);
--		goto out_free_tags;
- 	}
--	disk->queue = q;
-+	nbd->disk = disk;
+-	dev->gd = alloc_disk_node(1 << RNBD_PART_BITS,	NUMA_NO_NODE);
+-	if (!dev->gd) {
+-		blk_cleanup_queue(dev->queue);
+-		return -ENOMEM;
+-	}
+-
+ 	rnbd_clt_setup_gen_disk(dev, idx);
+-
+ 	return 0;
+ }
  
- 	/*
- 	 * Tell the block layer that we are not a rotational device
-@@ -1712,6 +1702,7 @@ static int nbd_dev_add(int index)
- 	INIT_LIST_HEAD(&nbd->list);
- 	disk->major = NBD_MAJOR;
- 	disk->first_minor = index << part_shift;
-+	disk->minors = 1 << part_shift;
- 	disk->fops = &nbd_fops;
- 	disk->private_data = nbd;
- 	sprintf(disk->disk_name, "nbd%d", index);
-@@ -1719,12 +1710,10 @@ static int nbd_dev_add(int index)
- 	nbd_total_devices++;
- 	return index;
+@@ -1650,8 +1632,7 @@ struct rnbd_clt_dev *rnbd_clt_map_device(const char *sessname,
+ static void destroy_gen_disk(struct rnbd_clt_dev *dev)
+ {
+ 	del_gendisk(dev->gd);
+-	blk_cleanup_queue(dev->queue);
+-	put_disk(dev->gd);
++	blk_cleanup_disk(dev->gd);
+ }
  
--out_free_tags:
--	blk_mq_free_tag_set(&nbd->tag_set);
- out_free_idr:
- 	idr_remove(&nbd_index_idr, index);
--out_free_disk:
--	put_disk(disk);
-+out_free_tags:
-+	blk_mq_free_tag_set(&nbd->tag_set);
- out_free_nbd:
- 	kfree(nbd);
- out:
+ static void destroy_sysfs(struct rnbd_clt_dev *dev,
 -- 
 2.30.2
 
