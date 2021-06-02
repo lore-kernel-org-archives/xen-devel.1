@@ -7,50 +7,50 @@ X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4117C4708F
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 853BAC47083
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:18:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 61F7260698
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:18:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61F7260698
+	by mail.kernel.org (Postfix) with ESMTPS id 2297E60698
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 15:18:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2297E60698
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136104.252556 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136106.252578 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loSdk-0005wk-HI; Wed, 02 Jun 2021 15:18:40 +0000
+	id 1loSdp-0006gH-C6; Wed, 02 Jun 2021 15:18:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136104.252556; Wed, 02 Jun 2021 15:18:40 +0000
+Received: by outflank-mailman (output) from mailman id 136106.252578; Wed, 02 Jun 2021 15:18:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loSdk-0005wb-CE; Wed, 02 Jun 2021 15:18:40 +0000
-Received: by outflank-mailman (input) for mailman id 136104;
- Wed, 02 Jun 2021 15:18:38 +0000
+	id 1loSdp-0006g2-6D; Wed, 02 Jun 2021 15:18:45 +0000
+Received: by outflank-mailman (input) for mailman id 136106;
+ Wed, 02 Jun 2021 15:18:43 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Q/fn=K4=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1loSdi-0004jV-H5
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 15:18:38 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ id 1loSdn-0004jV-HC
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 15:18:43 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 57e77543-a98e-4765-ae1d-92787b69ab0b;
+ id 7f77073a-eee0-4f31-be98-e6cf6f5ecfb3;
  Wed, 02 Jun 2021 15:18:30 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0266022B80;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 07B691FE20;
  Wed,  2 Jun 2021 15:18:30 +0000 (UTC)
 Received: by imap.suse.de (Postfix, from userid 51)
- id EFD4111CD4; Wed,  2 Jun 2021 15:28:32 +0000 (UTC)
+ id 035F511CD5; Wed,  2 Jun 2021 15:50:54 +0000 (UTC)
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 05EA211E0C;
- Wed,  2 Jun 2021 12:15:16 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id E032511DFC;
+ Wed,  2 Jun 2021 12:03:40 +0000 (UTC)
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id YyJWAFR2t2C6EwAALh3uQQ
- (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 12:15:16 +0000
+ id SWiENZxzt2AHDAAALh3uQQ
+ (envelope-from <jgross@suse.com>); Wed, 02 Jun 2021 12:03:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,83 +62,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 57e77543-a98e-4765-ae1d-92787b69ab0b
+X-Inumbo-ID: 7f77073a-eee0-4f31-be98-e6cf6f5ecfb3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1622647110; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6fuFG+pb/SOklZdlfuricFlYrFJLmDyOywD8VqgK1JY=;
-	b=cfx7czZ2e5LYQ7WNTMzf7DFnIHiGVWzUUE6Eh5Q67C21IyF/T7pbAHCwzqt1iNf1tDYFrj
-	8iMdk8KaekMujvy2L3QamsfDIa/CS5GwMe7+0rZ6/9+H7Y1OlfuV1wDTNedj1i56BbbiN0
-	0OptgdBJ6vGWRSnFXBBYxGuwMf90eHE=
+	bh=fsA+CO0pdTWaXD1IPZxF+m2NvvG9/Y7f4eYmrV8WLn8=;
+	b=ROtsREE9vWj1kDTfua572Z36z86epfZB0wzcy0mYB9fbTRD3MCDvWb7gooaiIhDuCzM3Qk
+	JYx4kNroGXfTWDiyXdM2N6Y77FM6oBekmFBM3g5NoJtiO9mVZwcXLLxXbh+2q2ffYD5fOI
+	rBHFGeeio5PHgQH26Jsyplp5zirUKyA=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1622636116; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1622635421; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6fuFG+pb/SOklZdlfuricFlYrFJLmDyOywD8VqgK1JY=;
-	b=doUoHipPAYvaz6kmqpRC2ebCq4dp81ntAU4Q2MOs75uZffeWn9kS13V0Q382/jHCeGd7t9
-	J344o33js2hxeZD2m/UVa6LhhcFzndzIhciaDQS0Uf7pSo5OBiUCktlCT83S0XsrVfqDmC
-	QM+2TqIRKlFinkDWGTzy3S3VksqBPT0=
-Subject: Re: [PATCH v20210601 00/38] leftover from 2020
+	bh=fsA+CO0pdTWaXD1IPZxF+m2NvvG9/Y7f4eYmrV8WLn8=;
+	b=tRam7bIMl1s+xsozbAJuVzToFPcbujZe7IxLL3l2Fusa7itQVfvWt0k1xCRmbxFmJAuTYr
+	bCBK+anLYv9l+ubWSQJGTPpqDm+hB6M04F6WrqNBCVXQrQ9nm+NBOp5IhALEqGRLR8vOUP
+	9uebn9/ozPqAKHjDiRBX7k9ZYIpcZhE=
+Subject: Re: [PATCH v20210601 07/38] tools: unify type checking for data pfns
+ in migration stream
 To: Olaf Hering <olaf@aepfle.de>
-Cc: xen-devel@lists.xenproject.org
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>
 References: <20210601161118.18986-1-olaf@aepfle.de>
- <24670339-c080-7e47-c2a8-22c22f7a719e@suse.com>
- <20210602085403.40064aed.olaf@aepfle.de>
- <51055fa2-b57e-c66b-78d1-6f07e0164b5b@suse.com>
- <20210602140748.462fb0fa.olaf@aepfle.de>
+ <20210601161118.18986-8-olaf@aepfle.de>
+ <9045add9-0cd0-7f9d-87ef-26cea15b74cd@suse.com>
+ <20210602132114.6fd9ee87.olaf@aepfle.de>
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <3cc8c472-8a94-337c-e7da-7bf663dcb1c2@suse.com>
-Date: Wed, 2 Jun 2021 14:15:15 +0200
+Message-ID: <1e0a9a6d-b3b3-29e7-43dc-453711e666a7@suse.com>
+Date: Wed, 2 Jun 2021 14:03:40 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210602140748.462fb0fa.olaf@aepfle.de>
+In-Reply-To: <20210602132114.6fd9ee87.olaf@aepfle.de>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="be2L0jh8gcXpQuf70r62M3fjB4y0dprYv"
+ boundary="dFjCT96WT3eFC4HBJXSwkKe0yvyhrGiUC"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---be2L0jh8gcXpQuf70r62M3fjB4y0dprYv
-Content-Type: multipart/mixed; boundary="tHhshKZGOrFHqurAQGbBFp7xP1KX4iY9z";
+--dFjCT96WT3eFC4HBJXSwkKe0yvyhrGiUC
+Content-Type: multipart/mixed; boundary="oMJhaH9V4TKl9jeoLJdBElxCX0Iff4vuM";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
 To: Olaf Hering <olaf@aepfle.de>
-Cc: xen-devel@lists.xenproject.org
-Message-ID: <3cc8c472-8a94-337c-e7da-7bf663dcb1c2@suse.com>
-Subject: Re: [PATCH v20210601 00/38] leftover from 2020
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>
+Message-ID: <1e0a9a6d-b3b3-29e7-43dc-453711e666a7@suse.com>
+Subject: Re: [PATCH v20210601 07/38] tools: unify type checking for data pfns
+ in migration stream
 References: <20210601161118.18986-1-olaf@aepfle.de>
- <24670339-c080-7e47-c2a8-22c22f7a719e@suse.com>
- <20210602085403.40064aed.olaf@aepfle.de>
- <51055fa2-b57e-c66b-78d1-6f07e0164b5b@suse.com>
- <20210602140748.462fb0fa.olaf@aepfle.de>
-In-Reply-To: <20210602140748.462fb0fa.olaf@aepfle.de>
+ <20210601161118.18986-8-olaf@aepfle.de>
+ <9045add9-0cd0-7f9d-87ef-26cea15b74cd@suse.com>
+ <20210602132114.6fd9ee87.olaf@aepfle.de>
+In-Reply-To: <20210602132114.6fd9ee87.olaf@aepfle.de>
 
---tHhshKZGOrFHqurAQGbBFp7xP1KX4iY9z
+--oMJhaH9V4TKl9jeoLJdBElxCX0Iff4vuM
 Content-Type: multipart/mixed;
- boundary="------------473E70176D4C9C093E2F5F98"
+ boundary="------------68A319A14F286A3273C4DF56"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------473E70176D4C9C093E2F5F98
+--------------68A319A14F286A3273C4DF56
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 02.06.21 14:07, Olaf Hering wrote:
-> Am Wed, 2 Jun 2021 09:00:49 +0200
+On 02.06.21 13:21, Olaf Hering wrote:
+> Am Wed, 2 Jun 2021 08:59:13 +0200
 > schrieb Juergen Gross <jgross@suse.com>:
 >=20
->> IMO this will make it more probable to get at least parts committed.
+>> What about XEN_DOMCTL_PFINFO_XALLOC? Is this case impossible here, or
+>> are you changing behavior?
 >=20
-> It depends all on patch #3, so further split can not be done anymore at=20
-this point.
+> I think XEN_DOMCTL_PFINFO_XALLOC is a type that does not exist in pract=
+ice.
 
-I don't see the dependency e.g. in patch 27, 28 and 38.
+Oh, indeed. It was used ages ago by migration code (I could find it
+being used e.g. in Xen 4.2, but not in 4.7). BTW, the use case was
+to not shatter superpages on migration...
+
+> So, no change in behavior.
+
+Maybe XEN_DOMCTL_PFINFO_XALLOC should no longer be supported, i.e.
+a stream containing it should be rejected? This might be a
+worthwhile modification of patch 5.
 
 
 Juergen
 
---------------473E70176D4C9C093E2F5F98
+
+--------------68A319A14F286A3273C4DF56
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -230,25 +242,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------473E70176D4C9C093E2F5F98--
+--------------68A319A14F286A3273C4DF56--
 
---tHhshKZGOrFHqurAQGbBFp7xP1KX4iY9z--
+--oMJhaH9V4TKl9jeoLJdBElxCX0Iff4vuM--
 
---be2L0jh8gcXpQuf70r62M3fjB4y0dprYv
+--dFjCT96WT3eFC4HBJXSwkKe0yvyhrGiUC
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3dlMFAwAAAAAACgkQsN6d1ii/Ey+S
-sgf/c9FoCBrkL/YXloVYmem69GF2Skq3RTerJUG5FQWEbU9kxZVyuFOrEVZ04PGvuZQ7BE4ZIBHR
-E8AfCiSw4TshOEujuB+JKBtCZsNoucuwRSkmEDC0blDmQ/dea1mvOpoBP/+96n2cQM93MLWmR7l6
-fWfYA3azqfAmpuu33kmQMZh8Dvk3o8TXI9xbhqoXts44KC4NXlljgdMVDQKQhjuXWbRaxe0kE8m9
-iCEXIGQpsyQ3yPLa/zo/101XTFIqBMGFYmX1CmrcsJjJnF/sZP6DoRTAYYsSpUGUAsRGPau9Mpaq
-aQz5mQh1fZSqDd5ureNIWT6IYZRPaswQ1IAExlDTew==
-=4eGC
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmC3c5wFAwAAAAAACgkQsN6d1ii/Ey/4
+8Qf+ISXyh2Swo5akl50r7qdrr+YIZFyPWZP7BL/FAqTWWG1OV487Z0hBV8iHYdCrnwpRaUIGOnUG
+3tzQRNxZmZrKNUgXUmif3QsERSJmW/2R46JeTkHritVLKkbU3FLgjIhMegcpgyuSyy9P8/GOa6u1
+RsoZ8glymEcZTvTldKerXWoq7jinAYDRNXaCuyggoIZKsiEL1ygyzYO6+dCFVHWVDQE7eK3iN7uK
+O4eVmYbodZRrkKO6/MhOXxIq9CF/yBdOdFK3NQZ1uz1+4STfB8SKxiWhgKecw9owiEmIFem0MTrq
+VRcxnM88jIsYqFQDIbBfyUFwwWfWcmb617HmsYpSfw==
+=p/jP
 -----END PGP SIGNATURE-----
 
---be2L0jh8gcXpQuf70r62M3fjB4y0dprYv--
+--dFjCT96WT3eFC4HBJXSwkKe0yvyhrGiUC--
 
