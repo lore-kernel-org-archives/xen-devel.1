@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70680C47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75C1FC47092
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 20FFF610CB
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20FFF610CB
+	by mail.kernel.org (Postfix) with ESMTPS id 498D2610CB
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 498D2610CB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135551.251860 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135553.251873 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKua-0001Op-Ny; Wed, 02 Jun 2021 07:03:32 +0000
+	id 1loKuc-0001p3-En; Wed, 02 Jun 2021 07:03:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135551.251860; Wed, 02 Jun 2021 07:03:32 +0000
+Received: by outflank-mailman (output) from mailman id 135553.251873; Wed, 02 Jun 2021 07:03:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKua-0001Mx-2o; Wed, 02 Jun 2021 07:03:32 +0000
-Received: by outflank-mailman (input) for mailman id 135551;
+	id 1loKub-0001k4-Q4; Wed, 02 Jun 2021 07:03:33 +0000
+Received: by outflank-mailman (input) for mailman id 135553;
  Wed, 02 Jun 2021 07:03:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKpe-0007A2-Ar
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:58:26 +0000
+ id 1loKo7-0007A2-7X
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:56:51 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d53a957c-8725-41b8-8647-9d52c1a3d3a3;
- Wed, 02 Jun 2021 06:56:13 +0000 (UTC)
+ id ccbb73db-3b46-42b2-b0b6-505b9c0b6592;
+ Wed, 02 Jun 2021 06:55:30 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKn5-0026La-Sd; Wed, 02 Jun 2021 06:55:48 +0000
+ id 1loKmR-0025lm-Ax; Wed, 02 Jun 2021 06:55:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d53a957c-8725-41b8-8647-9d52c1a3d3a3
+X-Inumbo-ID: ccbb73db-3b46-42b2-b0b6-505b9c0b6592
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Nt6wErfubiqnYVzweXP3z8/rIFCiMtQahAHnZtmIiWQ=; b=hKOfYl8YkpHQsdsCJlgWZugO4N
-	8fA3EUPkn9+TcsNuxwOAiqb3mNj8IytqoaliRlOJGLTV2vKpHMO6rQ1hlUlt0+Mkm+c5R/1hkmkn7
-	oTHREX9ZW78opJHrkSMxB5aCt3NEqpb+8QhNRYh4/wvPcfO1Rb2/ZQR+g2Eo/Q/BlHFp+u+PN1zzV
-	pUp3mo54MUYKztGaP64TzrsyiDi6S2vcUaJtmVAkviIbIqZRFaDYaSgCXtB5+UEr/Ho31XLAOGGlI
-	c+6ImRaQZ98uKF5v5kiT9CbtO1B6knRIsPn1hDSDTVU+kF579t+oYPcuUhzdK5Z+yGE/Xb+qFY58k
-	TDv/4cKQ==;
+	bh=JLPBr5a4Ln5tpVtARufaz5Rx9DFRvnAc8JDCRXj5CBM=; b=FBI391AmGpCGer8nPkf12dCy+o
+	eIEdbU42pvJv3rPD9dFUDNG20907L9ASE2fIQkUHxjUoIi8PgAItnVYsfQZ6hIztO2P1/v5yAnQCY
+	AEIEL8vqjQuYY/yLZNb4GnSP5PvUwFzpizHw+fRWs4gY52j0aZwRyeKYcxL1PkeJAHD+Jt16XML9Y
+	6k/bwePGimCyBX6ZWlmiXus1eyEpeartBYIhWxPwfdF5ffOhB85DbtrRd+aBJwu9lstkJ64aPi30u
+	wP4A8hbv0iVNdk/AGNcCWJHaTuex2I57tAI1/KazjM7mVhow4NChmgEaGqXE5WnMhD7z0Peh8k1rH
+	SZflGEZA==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 25/30] xen-blkfront: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:40 +0300
-Message-Id: <20210602065345.355274-26-hch@lst.de>
+Subject: [PATCH 16/30] aoe: use blk_mq_alloc_disk and blk_cleanup_disk
+Date: Wed,  2 Jun 2021 09:53:31 +0300
+Message-Id: <20210602065345.355274-17-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -110,152 +110,117 @@ request_queue allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/xen-blkfront.c | 96 +++++++++++++++---------------------
- 1 file changed, 39 insertions(+), 57 deletions(-)
+ drivers/block/aoe/aoeblk.c | 33 ++++++++++++---------------------
+ drivers/block/aoe/aoedev.c |  3 +--
+ 2 files changed, 13 insertions(+), 23 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index f2c1aedcdf5a..8d49f8fa98bb 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -968,48 +968,6 @@ static void blkif_set_queue_limits(struct blkfront_info *info)
- 	blk_queue_dma_alignment(rq, 511);
- }
+diff --git a/drivers/block/aoe/aoeblk.c b/drivers/block/aoe/aoeblk.c
+index c34e71b0c4a9..06b360f7123a 100644
+--- a/drivers/block/aoe/aoeblk.c
++++ b/drivers/block/aoe/aoeblk.c
+@@ -338,14 +338,13 @@ static const struct blk_mq_ops aoeblk_mq_ops = {
+ 	.queue_rq	= aoeblk_queue_rq,
+ };
  
--static int xlvbd_init_blk_queue(struct gendisk *gd, u16 sector_size,
--				unsigned int physical_sector_size)
--{
--	struct request_queue *rq;
--	struct blkfront_info *info = gd->private_data;
--
--	memset(&info->tag_set, 0, sizeof(info->tag_set));
--	info->tag_set.ops = &blkfront_mq_ops;
--	info->tag_set.nr_hw_queues = info->nr_rings;
--	if (HAS_EXTRA_REQ && info->max_indirect_segments == 0) {
--		/*
--		 * When indirect descriptior is not supported, the I/O request
--		 * will be split between multiple request in the ring.
--		 * To avoid problems when sending the request, divide by
--		 * 2 the depth of the queue.
--		 */
--		info->tag_set.queue_depth =  BLK_RING_SIZE(info) / 2;
--	} else
--		info->tag_set.queue_depth = BLK_RING_SIZE(info);
--	info->tag_set.numa_node = NUMA_NO_NODE;
--	info->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
--	info->tag_set.cmd_size = sizeof(struct blkif_req);
--	info->tag_set.driver_data = info;
--
--	if (blk_mq_alloc_tag_set(&info->tag_set))
--		return -EINVAL;
--	rq = blk_mq_init_queue(&info->tag_set);
--	if (IS_ERR(rq)) {
--		blk_mq_free_tag_set(&info->tag_set);
--		return PTR_ERR(rq);
--	}
--
--	rq->queuedata = info;
--	info->rq = gd->queue = rq;
--	info->gd = gd;
--	info->sector_size = sector_size;
--	info->physical_sector_size = physical_sector_size;
--	blkif_set_queue_limits(info);
--
--	return 0;
--}
--
- static const char *flush_info(struct blkfront_info *info)
+-/* alloc_disk and add_disk can sleep */
++/* blk_mq_alloc_disk and add_disk can sleep */
+ void
+ aoeblk_gdalloc(void *vp)
  {
- 	if (info->feature_flush && info->feature_fua)
-@@ -1146,12 +1104,36 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
+ 	struct aoedev *d = vp;
+ 	struct gendisk *gd;
+ 	mempool_t *mp;
+-	struct request_queue *q;
+ 	struct blk_mq_tag_set *set;
+ 	ulong flags;
+ 	int late = 0;
+@@ -362,19 +361,12 @@ aoeblk_gdalloc(void *vp)
+ 	if (late)
+ 		return;
  
- 	err = xlbd_reserve_minors(minor, nr_minors);
- 	if (err)
--		goto out;
-+		return err;
- 	err = -ENODEV;
- 
--	gd = alloc_disk(nr_minors);
--	if (gd == NULL)
--		goto release;
-+	memset(&info->tag_set, 0, sizeof(info->tag_set));
-+	info->tag_set.ops = &blkfront_mq_ops;
-+	info->tag_set.nr_hw_queues = info->nr_rings;
-+	if (HAS_EXTRA_REQ && info->max_indirect_segments == 0) {
-+		/*
-+		 * When indirect descriptior is not supported, the I/O request
-+		 * will be split between multiple request in the ring.
-+		 * To avoid problems when sending the request, divide by
-+		 * 2 the depth of the queue.
-+		 */
-+		info->tag_set.queue_depth =  BLK_RING_SIZE(info) / 2;
-+	} else
-+		info->tag_set.queue_depth = BLK_RING_SIZE(info);
-+	info->tag_set.numa_node = NUMA_NO_NODE;
-+	info->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
-+	info->tag_set.cmd_size = sizeof(struct blkif_req);
-+	info->tag_set.driver_data = info;
-+
-+	err = blk_mq_alloc_tag_set(&info->tag_set);
-+	if (err)
-+		goto out_release_minors;
-+
-+	gd = blk_mq_alloc_disk(&info->tag_set, info);
-+	if (IS_ERR(gd)) {
-+		err = PTR_ERR(gd);
-+		goto out_free_tag_set;
-+	}
- 
- 	strcpy(gd->disk_name, DEV_NAME);
- 	ptr = encode_disk_name(gd->disk_name + sizeof(DEV_NAME) - 1, offset);
-@@ -1164,14 +1146,16 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
- 
- 	gd->major = XENVBD_MAJOR;
- 	gd->first_minor = minor;
-+	gd->minors = nr_minors;
- 	gd->fops = &xlvbd_block_fops;
- 	gd->private_data = info;
- 	set_capacity(gd, capacity);
- 
--	if (xlvbd_init_blk_queue(gd, sector_size, physical_sector_size)) {
--		del_gendisk(gd);
--		goto release;
+-	gd = alloc_disk(AOE_PARTITIONS);
+-	if (gd == NULL) {
+-		pr_err("aoe: cannot allocate disk structure for %ld.%d\n",
+-			d->aoemajor, d->aoeminor);
+-		goto err;
 -	}
-+	info->rq = gd->queue;
-+	info->gd = gd;
-+	info->sector_size = sector_size;
-+	info->physical_sector_size = physical_sector_size;
-+	blkif_set_queue_limits(info);
- 
- 	xlvbd_flush(info);
- 
-@@ -1186,9 +1170,10 @@ static int xlvbd_alloc_gendisk(blkif_sector_t capacity,
- 
- 	return 0;
- 
-- release:
-+out_free_tag_set:
-+	blk_mq_free_tag_set(&info->tag_set);
-+out_release_minors:
- 	xlbd_release_minors(minor, nr_minors);
-- out:
- 	return err;
- }
- 
-@@ -1217,12 +1202,9 @@ static void xlvbd_release_gendisk(struct blkfront_info *info)
- 	nr_minors = info->gd->minors;
- 	xlbd_release_minors(minor, nr_minors);
- 
--	blk_cleanup_queue(info->rq);
--	blk_mq_free_tag_set(&info->tag_set);
--	info->rq = NULL;
 -
--	put_disk(info->gd);
-+	blk_cleanup_disk(info->gd);
- 	info->gd = NULL;
-+	blk_mq_free_tag_set(&info->tag_set);
- }
+ 	mp = mempool_create(MIN_BUFS, mempool_alloc_slab, mempool_free_slab,
+ 		buf_pool_cache);
+ 	if (mp == NULL) {
+ 		printk(KERN_ERR "aoe: cannot allocate bufpool for %ld.%d\n",
+ 			d->aoemajor, d->aoeminor);
+-		goto err_disk;
++		goto err;
+ 	}
  
- /* Already hold rinfo->ring_lock. */
+ 	set = &d->tag_set;
+@@ -391,12 +383,11 @@ aoeblk_gdalloc(void *vp)
+ 		goto err_mempool;
+ 	}
+ 
+-	q = blk_mq_init_queue(set);
+-	if (IS_ERR(q)) {
++	gd = blk_mq_alloc_disk(set, d);
++	if (IS_ERR(gd)) {
+ 		pr_err("aoe: cannot allocate block queue for %ld.%d\n",
+ 			d->aoemajor, d->aoeminor);
+-		blk_mq_free_tag_set(set);
+-		goto err_mempool;
++		goto err_tagset;
+ 	}
+ 
+ 	spin_lock_irqsave(&d->lock, flags);
+@@ -405,16 +396,16 @@ aoeblk_gdalloc(void *vp)
+ 	WARN_ON(d->flags & DEVFL_TKILL);
+ 	WARN_ON(d->gd);
+ 	WARN_ON(d->flags & DEVFL_UP);
+-	blk_queue_max_hw_sectors(q, BLK_DEF_MAX_SECTORS);
+-	blk_queue_io_opt(q, SZ_2M);
++	blk_queue_max_hw_sectors(gd->queue, BLK_DEF_MAX_SECTORS);
++	blk_queue_io_opt(gd->queue, SZ_2M);
+ 	d->bufpool = mp;
+-	d->blkq = gd->queue = q;
+-	q->queuedata = d;
++	d->blkq = gd->queue;
+ 	d->gd = gd;
+ 	if (aoe_maxsectors)
+-		blk_queue_max_hw_sectors(q, aoe_maxsectors);
++		blk_queue_max_hw_sectors(gd->queue, aoe_maxsectors);
+ 	gd->major = AOE_MAJOR;
+ 	gd->first_minor = d->sysminor;
++	gd->minors = AOE_PARTITIONS;
+ 	gd->fops = &aoe_bdops;
+ 	gd->private_data = d;
+ 	set_capacity(gd, d->ssize);
+@@ -435,10 +426,10 @@ aoeblk_gdalloc(void *vp)
+ 	spin_unlock_irqrestore(&d->lock, flags);
+ 	return;
+ 
++err_tagset:
++	blk_mq_free_tag_set(set);
+ err_mempool:
+ 	mempool_destroy(mp);
+-err_disk:
+-	put_disk(gd);
+ err:
+ 	spin_lock_irqsave(&d->lock, flags);
+ 	d->flags &= ~DEVFL_GD_NOW;
+diff --git a/drivers/block/aoe/aoedev.c b/drivers/block/aoe/aoedev.c
+index e2ea2356da06..c5753c6bfe80 100644
+--- a/drivers/block/aoe/aoedev.c
++++ b/drivers/block/aoe/aoedev.c
+@@ -277,9 +277,8 @@ freedev(struct aoedev *d)
+ 	if (d->gd) {
+ 		aoedisk_rm_debugfs(d);
+ 		del_gendisk(d->gd);
+-		put_disk(d->gd);
++		blk_cleanup_disk(d->gd);
+ 		blk_mq_free_tag_set(&d->tag_set);
+-		blk_cleanup_queue(d->blkq);
+ 	}
+ 	t = d->targets;
+ 	e = t + d->ntargets;
 -- 
 2.30.2
 
