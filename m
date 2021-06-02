@@ -5,41 +5,41 @@ X-Spam-Level:
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB476C47083
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12003C4708F
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC5C9610CB
-	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC5C9610CB
+	by mail.kernel.org (Postfix) with ESMTPS id DAF4D61361
+	for <xen-devel@archiver.kernel.org>; Wed,  2 Jun 2021 07:03:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DAF4D61361
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.135570.251925 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.135576.251937 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKul-0003yr-BW; Wed, 02 Jun 2021 07:03:43 +0000
+	id 1loKup-0004sf-1V; Wed, 02 Jun 2021 07:03:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 135570.251925; Wed, 02 Jun 2021 07:03:43 +0000
+Received: by outflank-mailman (output) from mailman id 135576.251937; Wed, 02 Jun 2021 07:03:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loKuk-0003rw-8V; Wed, 02 Jun 2021 07:03:42 +0000
-Received: by outflank-mailman (input) for mailman id 135570;
- Wed, 02 Jun 2021 07:03:39 +0000
+	id 1loKuo-0004nB-A6; Wed, 02 Jun 2021 07:03:46 +0000
+Received: by outflank-mailman (input) for mailman id 135576;
+ Wed, 02 Jun 2021 07:03:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PwRf=K4=bombadil.srs.infradead.org=batv+e38fb55258da4e18a096+6492+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1loKpA-0007A2-AE
- for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:57:56 +0000
+ id 1loKnx-0007A2-72
+ for xen-devel@lists.xenproject.org; Wed, 02 Jun 2021 06:56:41 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4ab929fe-3993-416b-be05-4c950b1845cf;
- Wed, 02 Jun 2021 06:56:00 +0000 (UTC)
+ id ebf16284-33f8-491e-b768-0337c5832b7c;
+ Wed, 02 Jun 2021 06:55:24 +0000 (UTC)
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKms-00269K-Qr; Wed, 02 Jun 2021 06:55:35 +0000
+ id 1loKmM-0025j3-HR; Wed, 02 Jun 2021 06:55:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ab929fe-3993-416b-be05-4c950b1845cf
+X-Inumbo-ID: ebf16284-33f8-491e-b768-0337c5832b7c
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=KHLITrhMPjuz4XYQlvLuyMQ6jhJjT1OoZPVERAs4yN8=; b=njrsDfxSfC2RA5qwJt2Gy1XMn7
-	HMViANxKgA+mZa9oqtDL6Zln6j6l+rAT4dPLT9bnUbXsnsTaUQ0Zo+tgVqDNvAGXnfDkphiwKMj5x
-	BrmkF9vTV9DOM9uH60akL46TTYkw9d/OlGWdsEyS5dZeuUHVkR/+D5uY8OBMz1zYKkYBE5WpfvDgG
-	ycoy1/m6Ju0fMNbnbjt00eVfjn6eWdVzfPHvduRb/7SIu+tbYbfcP19f/+8wnLJPAKrRAtTgm/q9k
-	vpFwkdSuotCuwgIKk3p5rYt00HK0RgsfLoLRKB1ml/qrcqSSpKjUq4ZUl1lZoAhTbkjqikESCazL2
-	RLfCWW5Q==;
+	bh=yxB3CToEvB1AGII3Fhuj66pLyS4oXdc/Ax4ufYJhDmU=; b=2Ev1PQ3iAXTcAu7Nm/w91IlhBi
+	XlySTC28St0acrPx9XgYMlbiWgHgwnXpAO7fssa+3RO6s6w1gNt/L0bRJxPAncGQ3wVJ/bZBHhsGL
+	uVoo++YnZjLmVwV7/fA+A/a3WTVeZ7Iox3GoTmd7i9BvdmfF+QzgThe8cp3OM151RtbpSjuGYv1qk
+	Z49auwfLnjtdi4znRE+V/2lHNnnW9JmtU9bmCTyqdsOZLGP/YzUu+pzLr8O4OJgs++QcKu78dpSPH
+	xBu4qqzNSfKG6LxxIT8EjfGs2NvFuwBi/8BGzrjd39Z06zSSm1tbNqLwSjr7IrytRt6ttKelR32cD
+	obDFH8eg==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Justin Sanders <justin@coraid.com>,
@@ -95,9 +95,9 @@ Cc: Justin Sanders <justin@coraid.com>,
 	linux-mmc@vger.kernel.org,
 	linux-mtd@lists.infradead.org,
 	linux-s390@vger.kernel.org
-Subject: [PATCH 22/30] rbd: use blk_mq_alloc_disk and blk_cleanup_disk
-Date: Wed,  2 Jun 2021 09:53:37 +0300
-Message-Id: <20210602065345.355274-23-hch@lst.de>
+Subject: [PATCH 15/30] blk-mq: remove blk_mq_init_sq_queue
+Date: Wed,  2 Jun 2021 09:53:30 +0300
+Message-Id: <20210602065345.355274-16-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -105,114 +105,62 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use blk_mq_alloc_disk and blk_cleanup_disk to simplify the gendisk and
-request_queue allocation.
+All users are gone now.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/rbd.c | 52 ++++++++++++++++-----------------------------
- 1 file changed, 18 insertions(+), 34 deletions(-)
+ block/blk-mq.c         | 22 ----------------------
+ include/linux/blk-mq.h |  4 ----
+ 2 files changed, 26 deletions(-)
 
-diff --git a/drivers/block/rbd.c b/drivers/block/rbd.c
-index bbb88eb009e0..531d390902dd 100644
---- a/drivers/block/rbd.c
-+++ b/drivers/block/rbd.c
-@@ -4750,9 +4750,8 @@ static blk_status_t rbd_queue_rq(struct blk_mq_hw_ctx *hctx,
- 
- static void rbd_free_disk(struct rbd_device *rbd_dev)
- {
--	blk_cleanup_queue(rbd_dev->disk->queue);
-+	blk_cleanup_disk(rbd_dev->disk);
- 	blk_mq_free_tag_set(&rbd_dev->tag_set);
--	put_disk(rbd_dev->disk);
- 	rbd_dev->disk = NULL;
+diff --git a/block/blk-mq.c b/block/blk-mq.c
+index 1e6036e6fd66..25e25177c2b1 100644
+--- a/block/blk-mq.c
++++ b/block/blk-mq.c
+@@ -3156,28 +3156,6 @@ struct gendisk *__blk_mq_alloc_disk(struct blk_mq_tag_set *set, void *queuedata)
  }
+ EXPORT_SYMBOL(__blk_mq_alloc_disk);
  
-@@ -4922,22 +4921,6 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
- 	    rbd_dev->layout.object_size * rbd_dev->layout.stripe_count;
- 	int err;
- 
--	/* create gendisk info */
--	disk = alloc_disk(single_major ?
--			  (1 << RBD_SINGLE_MAJOR_PART_SHIFT) :
--			  RBD_MINORS_PER_MAJOR);
--	if (!disk)
--		return -ENOMEM;
+-/*
+- * Helper for setting up a queue with mq ops, given queue depth, and
+- * the passed in mq ops flags.
+- */
+-struct request_queue *blk_mq_init_sq_queue(struct blk_mq_tag_set *set,
+-					   const struct blk_mq_ops *ops,
+-					   unsigned int queue_depth,
+-					   unsigned int set_flags)
+-{
+-	struct request_queue *q;
+-	int ret;
 -
--	snprintf(disk->disk_name, sizeof(disk->disk_name), RBD_DRV_NAME "%d",
--		 rbd_dev->dev_id);
--	disk->major = rbd_dev->major;
--	disk->first_minor = rbd_dev->minor;
--	if (single_major)
--		disk->flags |= GENHD_FL_EXT_DEVT;
--	disk->fops = &rbd_bd_ops;
--	disk->private_data = rbd_dev;
+-	ret = blk_mq_alloc_sq_tag_set(set, ops, queue_depth, set_flags);
+-	if (ret)
+-		return ERR_PTR(ret);
+-	q = blk_mq_init_queue(set);
+-	if (IS_ERR(q))
+-		blk_mq_free_tag_set(set);
+-	return q;
+-}
+-EXPORT_SYMBOL(blk_mq_init_sq_queue);
 -
- 	memset(&rbd_dev->tag_set, 0, sizeof(rbd_dev->tag_set));
- 	rbd_dev->tag_set.ops = &rbd_mq_ops;
- 	rbd_dev->tag_set.queue_depth = rbd_dev->opts->queue_depth;
-@@ -4948,13 +4931,26 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
+ static struct blk_mq_hw_ctx *blk_mq_alloc_and_init_hctx(
+ 		struct blk_mq_tag_set *set, struct request_queue *q,
+ 		int hctx_idx, int node)
+diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
+index f496c6c5b5d2..02a4aab0aeac 100644
+--- a/include/linux/blk-mq.h
++++ b/include/linux/blk-mq.h
+@@ -443,10 +443,6 @@ struct request_queue *blk_mq_init_queue_data(struct blk_mq_tag_set *set,
+ 		void *queuedata);
+ int blk_mq_init_allocated_queue(struct blk_mq_tag_set *set,
+ 		struct request_queue *q);
+-struct request_queue *blk_mq_init_sq_queue(struct blk_mq_tag_set *set,
+-						const struct blk_mq_ops *ops,
+-						unsigned int queue_depth,
+-						unsigned int set_flags);
+ void blk_mq_unregister_dev(struct device *, struct request_queue *);
  
- 	err = blk_mq_alloc_tag_set(&rbd_dev->tag_set);
- 	if (err)
--		goto out_disk;
-+		return err;
- 
--	q = blk_mq_init_queue(&rbd_dev->tag_set);
--	if (IS_ERR(q)) {
--		err = PTR_ERR(q);
-+	disk = blk_mq_alloc_disk(&rbd_dev->tag_set, rbd_dev);
-+	if (IS_ERR(disk)) {
-+		err = PTR_ERR(disk);
- 		goto out_tag_set;
- 	}
-+	q = disk->queue;
-+
-+	snprintf(disk->disk_name, sizeof(disk->disk_name), RBD_DRV_NAME "%d",
-+		 rbd_dev->dev_id);
-+	disk->major = rbd_dev->major;
-+	disk->first_minor = rbd_dev->minor;
-+	if (single_major) {
-+		disk->minors = (1 << RBD_SINGLE_MAJOR_PART_SHIFT);
-+		disk->flags |= GENHD_FL_EXT_DEVT;
-+	} else {
-+		disk->minors = RBD_MINORS_PER_MAJOR;
-+	}
-+	disk->fops = &rbd_bd_ops;
- 
- 	blk_queue_flag_set(QUEUE_FLAG_NONROT, q);
- 	/* QUEUE_FLAG_ADD_RANDOM is off by default for blk-mq */
-@@ -4976,21 +4972,11 @@ static int rbd_init_disk(struct rbd_device *rbd_dev)
- 	if (!ceph_test_opt(rbd_dev->rbd_client->client, NOCRC))
- 		blk_queue_flag_set(QUEUE_FLAG_STABLE_WRITES, q);
- 
--	/*
--	 * disk_release() expects a queue ref from add_disk() and will
--	 * put it.  Hold an extra ref until add_disk() is called.
--	 */
--	WARN_ON(!blk_get_queue(q));
--	disk->queue = q;
--	q->queuedata = rbd_dev;
--
- 	rbd_dev->disk = disk;
- 
- 	return 0;
- out_tag_set:
- 	blk_mq_free_tag_set(&rbd_dev->tag_set);
--out_disk:
--	put_disk(disk);
- 	return err;
- }
- 
-@@ -7088,8 +7074,6 @@ static ssize_t do_rbd_add(struct bus_type *bus,
- 		goto err_out_image_lock;
- 
- 	device_add_disk(&rbd_dev->dev, rbd_dev->disk, NULL);
--	/* see rbd_init_disk() */
--	blk_put_queue(rbd_dev->disk->queue);
- 
- 	spin_lock(&rbd_dev_list_lock);
- 	list_add_tail(&rbd_dev->node, &rbd_dev_list);
+ int blk_mq_alloc_tag_set(struct blk_mq_tag_set *set);
 -- 
 2.30.2
 
