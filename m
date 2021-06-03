@@ -2,43 +2,49 @@ Return-Path: <SRS0=Caab=K5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD5B4C47096
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 15:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 328ECC47098
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 15:37:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A5BFE61042
+	by mail.kernel.org (Postfix) with ESMTPS id EEEC161042
 	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 15:37:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A5BFE61042
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EEEC161042
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136479.253007 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136480.253017 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lopPO-00065k-DA; Thu, 03 Jun 2021 15:37:22 +0000
+	id 1lopPR-0006M6-Kf; Thu, 03 Jun 2021 15:37:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136479.253007; Thu, 03 Jun 2021 15:37:22 +0000
+Received: by outflank-mailman (output) from mailman id 136480.253017; Thu, 03 Jun 2021 15:37:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lopPO-00065d-9P; Thu, 03 Jun 2021 15:37:22 +0000
-Received: by outflank-mailman (input) for mailman id 136479;
- Thu, 03 Jun 2021 15:37:20 +0000
+	id 1lopPR-0006Lz-Hf; Thu, 03 Jun 2021 15:37:25 +0000
+Received: by outflank-mailman (input) for mailman id 136480;
+ Thu, 03 Jun 2021 15:37:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=012H=K5=linaro.org=ulf.hansson@srs-us1.protection.inumbo.net>)
- id 1lopPM-00065X-5Y
- for xen-devel@lists.xenproject.org; Thu, 03 Jun 2021 15:37:20 +0000
-Received: from mail-vs1-xe35.google.com (unknown [2607:f8b0:4864:20::e35])
+ <SRS0=lPzP=K5=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
+ id 1lopPR-00065X-1k
+ for xen-devel@lists.xenproject.org; Thu, 03 Jun 2021 15:37:25 +0000
+Received: from mail-pf1-x42a.google.com (unknown [2607:f8b0:4864:20::42a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7ae02d19-7fa9-4830-b9b5-a1820ce5dbbc;
- Thu, 03 Jun 2021 15:37:19 +0000 (UTC)
-Received: by mail-vs1-xe35.google.com with SMTP id u188so3214264vsu.8
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jun 2021 08:37:19 -0700 (PDT)
+ id e9c50a91-d304-48dd-becb-79553ea5dde0;
+ Thu, 03 Jun 2021 15:37:21 +0000 (UTC)
+Received: by mail-pf1-x42a.google.com with SMTP id h12so2320071pfe.2
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Jun 2021 08:37:21 -0700 (PDT)
+Received: from ?IPv6:2404:f801:0:5:8000::4b1? ([2404:f801:9000:18:efec::4b1])
+ by smtp.gmail.com with ESMTPSA id
+ r10sm3237979pga.48.2021.06.03.08.37.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Jun 2021 08:37:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,130 +56,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ae02d19-7fa9-4830-b9b5-a1820ce5dbbc
+X-Inumbo-ID: e9c50a91-d304-48dd-becb-79553ea5dde0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=+W0QahdA5jm5lLp4qGqziVkevJrOYYIsAeli4hbSoMY=;
-        b=Sczm7Uhat9CAttKCKONsBvTvpdWX5VANaO58Cd0mJFcJ+A28Gj9YspGmhSWIpVtNS9
-         gufvY+CGT5FXDIQfjOQ4ExwQIrmSjUqzpGxTG/ZkK/nXRMIOjYsW6gd0+0ljDlvbLbq6
-         AyHgMcG1V7VrDrAancwHixbwlfPPPcOtQ/Us++pps4NpXbaz33l8+avCCapAkCFya/10
-         FcaqevmvQJz8RurkVjboQlMdJ4KLmCFgJ9aWml7eHxoV4e7eWIKwWiCmbJjrhvsDE5K2
-         PLLnqagHSU8ORkIhfE1C9Sx6ZNkln7FGogf+yyT7tKXsIRL7oAHDTXDC0cZ4GcZV2dc7
-         4ZRQ==
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=BVYx1tfLGUQhuXKxLmm7FvDthvCK68hj9EtKYIRIQHQ=;
+        b=miB2ljSk1RA9tY/uYJGQ9mMwA4UDMc4OP5R2SPNH1XSMN+zppyZP3Jc++5YNxmzOby
+         kALkMRui/3t9gSuqF33Vb3xRJqf9zGMvEy1ThQuUuoC56/3xsrdMaI/j4lWWgNSF2sTJ
+         COY0x0gCbiM503+Xvvp9Nsgl9aAqJhwkWUkCuJddQ5kBPKpL6maIzV4Esr2iyVTK2nDK
+         TGTOiLPti6ZFCSfL7YPGf1T/ifO0Td+1Cseob26JVYcCljKap3dtfQjqMVk0i9iDWAeR
+         pRTkE5bQUe239zrqx8ZeVhOf2I48ijf3+Yv7Odtm6yW32eQYlYwHea3YOPPmHlNYafZU
+         cDkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=+W0QahdA5jm5lLp4qGqziVkevJrOYYIsAeli4hbSoMY=;
-        b=i60Y25ESG5hw+gh+qPIGtLA0x3jd9mdIbrShBa85y77VNfoyXpN00yQHTZ1TlB2x1s
-         FUfYL5HXCb8wmGn++90wwebaF81bnDBK7YlxpfRsNz891CDksl7inOsrYv2W0bGXl9jw
-         ZdyITimHinfUMH5IRUXkQcJ1tO126aZTrBCnQrt/j8SHzVJFW/gkGbBFeqXgi98iZ9jQ
-         UVcSddGUKt1PMJxsDHzv3CegjED7QC92LyeahdsFfpF76P5ZiLD7n37bsKf8hvCl99Zj
-         SeURqbRd+a6ktyhJnTJv9cTGawmonRpqOW1+xjL7UL9CvDmG3F3IIo7LGqGpOBY75pfh
-         eb/w==
-X-Gm-Message-State: AOAM5302cNBaQr/Ok/YOIFIyeVkLAU68IKLEGNXjzizHl/iyr2gg7NcR
-	yco5A85CYfNkocYhVg6G0jZtmtqH7DTcmad47v5djg==
-X-Google-Smtp-Source: ABdhPJzM3LSrPJI4FkB0laodTTeEei+m50SowhpqaGtsNgUdvieHcvbYUQloJUD/a79xzNmd816023E4d1PORKHhPJg=
-X-Received: by 2002:a05:6102:3023:: with SMTP id v3mr756919vsa.19.1622734639015;
- Thu, 03 Jun 2021 08:37:19 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=BVYx1tfLGUQhuXKxLmm7FvDthvCK68hj9EtKYIRIQHQ=;
+        b=FVQDDnQhoEcGS5jH7H+QogpCIu/N5fu5w7Qr4PjTGoWeejWhh5GcST2Q9aVcCBN10L
+         cAco7dWZMjY6I3ay26u8Ii7wn3h7jsmu/N2h/Djf1zKsoky6ss1JIKAkbAub6AzOJqMm
+         nqL3fm0xfiiFDsHw6XW5j/C9y6vC4W8KaVhSSC1EifZ7lqM98D/PwGUVVKN4bvymeZRS
+         TiZ4MCqC+49SG9nELtdBi9Sgvc1lkfsBZvK3wLTww8YNneTvc9YKdnWYCwoHjP4Bkrn9
+         U5wlbidOTbUHcAd6Vh06o46RxC8ibsVMd1sYDB8fOTcg3Z1QPCOoV0F0lOSw1WB/VbSt
+         7pTw==
+X-Gm-Message-State: AOAM532JGl4vTaMRlUAUUBmJPDlDlF7UM1Cu7JZF5sPPBL6qJZcKLKAl
+	v4g5IQaqUcBnZqOD2143X7w=
+X-Google-Smtp-Source: ABdhPJyuSSLvdEikeh+Nq/zhDPHcKBsCeWjVlIXCtWnktcvNT96pyk1AlIWziUacbt3mBXpwaDz9WA==
+X-Received: by 2002:aa7:8755:0:b029:2eb:8c8f:d1f1 with SMTP id g21-20020aa787550000b02902eb8c8fd1f1mr271415pfo.11.1622734640422;
+        Thu, 03 Jun 2021 08:37:20 -0700 (PDT)
+Subject: Re: [RFC PATCH V3 09/11] HV/IOMMU: Enable swiotlb bounce buffer for
+ Isolation VM
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, kys@microsoft.com,
+ haiyangz@microsoft.com, sthemmin@microsoft.com, wei.liu@kernel.org,
+ decui@microsoft.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ x86@kernel.org, hpa@zytor.com, arnd@arndb.de, dave.hansen@linux.intel.com,
+ luto@kernel.org, peterz@infradead.org, akpm@linux-foundation.org,
+ kirill.shutemov@linux.intel.com, rppt@kernel.org, hannes@cmpxchg.org,
+ cai@lca.pw, krish.sadhukhan@oracle.com, saravanand@fb.com,
+ Tianyu.Lan@microsoft.com, konrad.wilk@oracle.com, hch@lst.de,
+ m.szyprowski@samsung.com, robin.murphy@arm.com, jgross@suse.com,
+ sstabellini@kernel.org, joro@8bytes.org, will@kernel.org,
+ xen-devel@lists.xenproject.org, davem@davemloft.net, kuba@kernel.org,
+ jejb@linux.ibm.com, martin.petersen@oracle.com
+Cc: iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-scsi@vger.kernel.org, netdev@vger.kernel.org, vkuznets@redhat.com,
+ thomas.lendacky@amd.com, brijesh.singh@amd.com, sunilmut@microsoft.com
+References: <20210530150628.2063957-1-ltykernel@gmail.com>
+ <20210530150628.2063957-10-ltykernel@gmail.com>
+ <9488c114-81ad-eb67-79c0-5ed319703d3e@oracle.com>
+ <a023ee3f-ce85-b54f-79c3-146926bf3279@gmail.com>
+ <d6714e8b-dcb6-798b-59a4-5bb68f789564@oracle.com>
+From: Tianyu Lan <ltykernel@gmail.com>
+Message-ID: <1cdf4e6e-6499-e209-d499-7ab82992040b@gmail.com>
+Date: Thu, 3 Jun 2021 23:37:06 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.2
 MIME-Version: 1.0
-References: <20210602065345.355274-1-hch@lst.de> <20210602065345.355274-8-hch@lst.de>
-In-Reply-To: <20210602065345.355274-8-hch@lst.de>
-From: Ulf Hansson <ulf.hansson@linaro.org>
-Date: Thu, 3 Jun 2021 17:36:42 +0200
-Message-ID: <CAPDyKFoJssCnHv5tmG4vJJ9m0Zj5HkMEVYvnsjamvyemusZaUg@mail.gmail.com>
-Subject: Re: [PATCH 07/30] ms_block: use blk_mq_alloc_disk
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>, 
-	Denis Efremov <efremov@linux.com>, Josef Bacik <josef@toxicpanda.com>, Tim Waugh <tim@cyberelk.net>, 
-	Geoff Levand <geoff@infradead.org>, Ilya Dryomov <idryomov@gmail.com>, 
-	"Md. Haris Iqbal" <haris.iqbal@ionos.com>, Jack Wang <jinpu.wang@ionos.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Mike Snitzer <snitzer@redhat.com>, Maxim Levitsky <maximlevitsky@gmail.com>, 
-	Alex Dubov <oakad@yahoo.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
-	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Heiko Carstens <hca@linux.ibm.com>, 
-	Vasily Gorbik <gor@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, dm-devel@redhat.com, 
-	linux-block <linux-block@vger.kernel.org>, nbd@other.debian.org, 
-	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, ceph-devel@vger.kernel.org, 
-	virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org, 
-	linux-mmc <linux-mmc@vger.kernel.org>, linux-mtd@lists.infradead.org, 
-	linux-s390@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <d6714e8b-dcb6-798b-59a4-5bb68f789564@oracle.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2 Jun 2021 at 08:54, Christoph Hellwig <hch@lst.de> wrote:
->
-> Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
-> allocation.
->
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+On 6/3/2021 12:02 AM, Boris Ostrovsky wrote:
+> 
+> On 6/2/21 11:01 AM, Tianyu Lan wrote:
+>> Hi Boris:
+>>      Thanks for your review.
+>>
+>> On 6/2/2021 9:16 AM, Boris Ostrovsky wrote:
+>>>
+>>> On 5/30/21 11:06 AM, Tianyu Lan wrote:
+>>>> @@ -91,6 +92,6 @@ int pci_xen_swiotlb_init_late(void)
+>>>>    EXPORT_SYMBOL_GPL(pci_xen_swiotlb_init_late);
+>>>>      IOMMU_INIT_FINISH(2,
+>>>> -          NULL,
+>>>> +          hyperv_swiotlb_detect,
+>>>>              pci_xen_swiotlb_init,
+>>>>              NULL);
+>>>
+>>>
+>>> Could you explain this change?
+>>
+>> Hyper-V allocates its own swiotlb bounce buffer and the default
+>> swiotlb buffer should not be allocated. swiotlb_init() in pci_swiotlb_init() is to allocate default swiotlb buffer.
+>> To achieve this, put hyperv_swiotlb_detect() as the first entry in the iommu_table_entry list. The detect loop in the pci_iommu_alloc() will exit once hyperv_swiotlb_detect() is called in Hyper-V VM and other iommu_table_entry callback will not be called.
+> 
+> 
+> 
+> Right. But pci_xen_swiotlb_detect() will only do something for Xen PV guests, and those guests don't run on hyperV. It's either xen_pv_domain() (i.e. hypervisor_is_type(X86_HYPER_XEN_PV)) or hypervisor_is_type(X86_HYPER_MS_HYPERV) but never both. So I don't think there needs to be a dependency between the two callbacks.
 
-Acked-by: Ulf Hansson <ulf.hansson@linaro.org>
+Yes, the dependency is between hyperv_swiotlb_detect() and
+pci_swiotlb_detect_override()/pci_swiotlb_detect_4gb(). Now
+pci_swiotlb_detect_override() and pci_swiotlb_detect_4gb() depends on
+pci_xen_swiotlb_detect(). To keep dependency between
+hyperv_swiotlb_detect() and pci_swiotlb_detect_override/4gb(), make 
+pci_xen_swiotlb_detect() depends on hyperv_swiotlb_detect() and just to
+keep order in the IOMMU table. Current iommu_table_entry only has one
+depend callback and this is why I put xen depends on hyperv detect function.
 
-Kind regards
-Uffe
-
-
-> ---
->  drivers/memstick/core/ms_block.c | 25 ++++++++++---------------
->  1 file changed, 10 insertions(+), 15 deletions(-)
->
-> diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
-> index 0bacf4268f83..dac258d12aca 100644
-> --- a/drivers/memstick/core/ms_block.c
-> +++ b/drivers/memstick/core/ms_block.c
-> @@ -2110,21 +2110,17 @@ static int msb_init_disk(struct memstick_dev *card)
->         if (msb->disk_id  < 0)
->                 return msb->disk_id;
->
-> -       msb->disk = alloc_disk(0);
-> -       if (!msb->disk) {
-> -               rc = -ENOMEM;
-> +       rc = blk_mq_alloc_sq_tag_set(&msb->tag_set, &msb_mq_ops, 2,
-> +                                    BLK_MQ_F_SHOULD_MERGE);
-> +       if (rc)
->                 goto out_release_id;
-> -       }
->
-> -       msb->queue = blk_mq_init_sq_queue(&msb->tag_set, &msb_mq_ops, 2,
-> -                                               BLK_MQ_F_SHOULD_MERGE);
-> -       if (IS_ERR(msb->queue)) {
-> -               rc = PTR_ERR(msb->queue);
-> -               msb->queue = NULL;
-> -               goto out_put_disk;
-> +       msb->disk = blk_mq_alloc_disk(&msb->tag_set, card);
-> +       if (IS_ERR(msb->disk)) {
-> +               rc = PTR_ERR(msb->disk);
-> +               goto out_free_tag_set;
->         }
-> -
-> -       msb->queue->queuedata = card;
-> +       msb->queue = msb->disk->queue;
->
->         blk_queue_max_hw_sectors(msb->queue, MS_BLOCK_MAX_PAGES);
->         blk_queue_max_segments(msb->queue, MS_BLOCK_MAX_SEGS);
-> @@ -2135,7 +2131,6 @@ static int msb_init_disk(struct memstick_dev *card)
->         sprintf(msb->disk->disk_name, "msblk%d", msb->disk_id);
->         msb->disk->fops = &msb_bdops;
->         msb->disk->private_data = msb;
-> -       msb->disk->queue = msb->queue;
->
->         capacity = msb->pages_in_block * msb->logical_block_count;
->         capacity *= (msb->page_size / 512);
-> @@ -2155,8 +2150,8 @@ static int msb_init_disk(struct memstick_dev *card)
->         dbg("Disk added");
->         return 0;
->
-> -out_put_disk:
-> -       put_disk(msb->disk);
-> +out_free_tag_set:
-> +       blk_mq_free_tag_set(&msb->tag_set);
->  out_release_id:
->         mutex_lock(&msb_disk_lock);
->         idr_remove(&msb_disk_idr, msb->disk_id);
-> --
-> 2.30.2
->
+Thanks.
 
