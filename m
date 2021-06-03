@@ -2,43 +2,44 @@ Return-Path: <SRS0=Caab=K5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9559C47099
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 15:37:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49547C47082
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 16:01:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C85E61042
-	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 15:37:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C85E61042
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6148E613B8
+	for <xen-devel@archiver.kernel.org>; Thu,  3 Jun 2021 16:01:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6148E613B8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=rmail.be
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136481.253029 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136500.253040 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lopPW-0006gX-Tb; Thu, 03 Jun 2021 15:37:30 +0000
+	id 1lopmT-0002Rm-N6; Thu, 03 Jun 2021 16:01:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136481.253029; Thu, 03 Jun 2021 15:37:30 +0000
+Received: by outflank-mailman (output) from mailman id 136500.253040; Thu, 03 Jun 2021 16:01:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lopPW-0006gM-Qc; Thu, 03 Jun 2021 15:37:30 +0000
-Received: by outflank-mailman (input) for mailman id 136481;
- Thu, 03 Jun 2021 15:37:30 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=012H=K5=linaro.org=ulf.hansson@srs-us1.protection.inumbo.net>)
- id 1lopPW-00065X-21
- for xen-devel@lists.xenproject.org; Thu, 03 Jun 2021 15:37:30 +0000
-Received: from mail-ua1-x933.google.com (unknown [2607:f8b0:4864:20::933])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 12a9bbe6-fa12-4fa4-849d-5f39f80d9427;
- Thu, 03 Jun 2021 15:37:23 +0000 (UTC)
-Received: by mail-ua1-x933.google.com with SMTP id l12so3566083uai.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jun 2021 08:37:23 -0700 (PDT)
+	id 1lopmT-0002Rf-Jt; Thu, 03 Jun 2021 16:01:13 +0000
+Received: by outflank-mailman (input) for mailman id 136500;
+ Thu, 03 Jun 2021 16:01:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=inOg=K5=rmail.be=alien@srs-us1.protection.inumbo.net>)
+ id 1lopmS-0002RZ-92
+ for xen-devel@lists.xen.org; Thu, 03 Jun 2021 16:01:12 +0000
+Received: from mail.rmail.be (unknown [85.234.218.189])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 8f0bdedf-8f13-4457-9848-3fca0a8d5009;
+ Thu, 03 Jun 2021 16:01:10 +0000 (UTC)
+Received: from mail.rmail.be (localhost [127.0.0.1])
+ by mail.rmail.be (Postfix) with ESMTP id 9CE5BB14F5A;
+ Thu,  3 Jun 2021 18:01:09 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,134 +51,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12a9bbe6-fa12-4fa4-849d-5f39f80d9427
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=7DKVf+GiS9951bpd4cfEBh88PiRutTQ//wVEud26id8=;
-        b=XGhrfqnzBbfnTVSNkFDv5GHmpnKX09udhfIYlIGvsHf5udWupM3hEeaCuAp1/iGcK2
-         itxazCeDLeGnN0Ew9V7mjQKrXGASjKXLT43xef2dS4qB5N1wZq329ew5d1FZXKKcqiVw
-         6FD/vr0CrXQkvA5Vx5CUZuiBjtgVFz1ZbiUU7kgR3MEWuPhMcO948V0XjU30zv2QSu9a
-         tohz+jrjUWOtrbk55SyLep3Y8Ie2TFo0EIpc+U1g5ZdabSEhCf2ga/7pzz9IJem82LbC
-         xz7dKg0/t3XaDdcBysnSaVg/DwjADlBkyj4crHUSmvNFlYRf/JXspkWoLbMUskTXooPD
-         5/eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=7DKVf+GiS9951bpd4cfEBh88PiRutTQ//wVEud26id8=;
-        b=UJYmgyV+pUzWi9x60Lg0CW2CI0CPL1mQhsejmwHyePUEjvkLsMPfava57X9Ld1la4F
-         MGkHJENRW17/iXiAsx6C2AnSGW/mHKIgopYarUnTTCOmrlkjf+EpSHl4okbsVHvqR1pW
-         tb3wvPdaIOVPb7Cqa/f6MBAugDHle2wBHDPCH+25cBEj0v42vvTq5fEukcSoo+gbar0p
-         7ZcvM7wPW9wQ+CqC/2YVqvj4VUGPQQrx+cpi1DHS7fxJIaKGJdnjurPKk2KyOowu9kaY
-         2wdWb7S1dUKGnrDDrNbjEfyfuVxR6XWdtn3Se29cHr4AfWvBTASfvmM13ZSKBxtK3D+g
-         wvxw==
-X-Gm-Message-State: AOAM533F4JzJT89LO6R78ro5HUni8LDnQqXYmb9klIWHH5l8AYr2yE3n
-	dBRaeNTyC+jS2UVENSaziTbOB2ONM+q/BvHnbWSINw==
-X-Google-Smtp-Source: ABdhPJyc/MDglzj7ZqHuKLnfpO6vVPHNJJJjAhghObYaMjdvGQtxzeGy+jhwPjnJIpGZowWwyMtWi1MuD2fSyYUnfEo=
-X-Received: by 2002:ab0:7c5b:: with SMTP id d27mr407242uaw.15.1622734642855;
- Thu, 03 Jun 2021 08:37:22 -0700 (PDT)
+X-Inumbo-ID: 8f0bdedf-8f13-4457-9848-3fca0a8d5009
 MIME-Version: 1.0
-References: <20210602065345.355274-1-hch@lst.de> <20210602065345.355274-9-hch@lst.de>
-In-Reply-To: <20210602065345.355274-9-hch@lst.de>
-From: Ulf Hansson <ulf.hansson@linaro.org>
-Date: Thu, 3 Jun 2021 17:36:45 +0200
-Message-ID: <CAPDyKFoh6HKx2rHHRXvw--Ou53TR2wLFGrKCDuetigxQ8QbvfQ@mail.gmail.com>
-Subject: Re: [PATCH 08/30] mspro: use blk_mq_alloc_disk
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>, Justin Sanders <justin@coraid.com>, 
-	Denis Efremov <efremov@linux.com>, Josef Bacik <josef@toxicpanda.com>, Tim Waugh <tim@cyberelk.net>, 
-	Geoff Levand <geoff@infradead.org>, Ilya Dryomov <idryomov@gmail.com>, 
-	"Md. Haris Iqbal" <haris.iqbal@ionos.com>, Jack Wang <jinpu.wang@ionos.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Mike Snitzer <snitzer@redhat.com>, Maxim Levitsky <maximlevitsky@gmail.com>, 
-	Alex Dubov <oakad@yahoo.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
-	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Heiko Carstens <hca@linux.ibm.com>, 
-	Vasily Gorbik <gor@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, dm-devel@redhat.com, 
-	linux-block <linux-block@vger.kernel.org>, nbd@other.debian.org, 
-	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, ceph-devel@vger.kernel.org, 
-	virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org, 
-	linux-mmc <linux-mmc@vger.kernel.org>, linux-mtd@lists.infradead.org, 
-	linux-s390@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date: Thu, 03 Jun 2021 18:01:09 +0200
+From: AL13N <alien@rmail.be>
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Jan Beulich <jbeulich@suse.com>
+Subject: Re: pci passthrough issue introduced between 4.14.1 and 4.15.0
+In-Reply-To: <552b4348-1c52-ce6b-9001-a144c7147a7c@suse.com>
+References: <6ccb04f2d93be6089b049df1f94a91dd@mail.rmail.be>
+ <e9a3f7a8-7bf2-4f0a-cc25-d8ce015df1f2@suse.com>
+ <a7c0e9b0cdd8f9e709abc329c7f6239c@mail.rmail.be>
+ <b5ff15fc-ec3b-6b48-3d15-7de29fa5b2aa@suse.com>
+ <175befe0e853565761e51f07b79c49cf@mail.rmail.be>
+ <552b4348-1c52-ce6b-9001-a144c7147a7c@suse.com>
+Message-ID: <0100caba62175123c63f0df4749a8c88@mail.rmail.be>
+X-Sender: alien@rmail.be
+User-Agent: Roundcube Webmail/1.0.9-1.2.mga5
 
-On Wed, 2 Jun 2021 at 08:54, Christoph Hellwig <hch@lst.de> wrote:
->
-> Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
-> allocation.
->
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+Jan Beulich schreef op 2021-06-01 16:53:
+> On 01.06.2021 16:44, AL13N wrote:
+>> This mailing list is the correct place for the toolstack too? right?
+> 
+> Yes.
 
-Acked-by: Ulf Hansson <ulf.hansson@linaro.org>
+So, what's the plan to fix this? is the plan to fix the toolstack? or 
+put your patch in kernel to kinda workaround it?
 
-Kind regards
-Uffe
+Is there a way to make a regression test or unit test or something?
 
+Does anyone have an idea on what patch would cause the regression? that 
+patch that I pointed out, could it be that one, or should i look at a 
+specific file/line? I can't really just test all of the patches and/or 
+combinations. I'm not really at home with the xen code; and my single 
+xen server is production, so i can really only test in weekends...
 
-> ---
->  drivers/memstick/core/mspro_block.c | 26 +++++++++++---------------
->  1 file changed, 11 insertions(+), 15 deletions(-)
->
-> diff --git a/drivers/memstick/core/mspro_block.c b/drivers/memstick/core/mspro_block.c
-> index cf7fe0d58ee7..22778d0e24f5 100644
-> --- a/drivers/memstick/core/mspro_block.c
-> +++ b/drivers/memstick/core/mspro_block.c
-> @@ -1205,21 +1205,17 @@ static int mspro_block_init_disk(struct memstick_dev *card)
->         if (disk_id < 0)
->                 return disk_id;
->
-> -       msb->disk = alloc_disk(1 << MSPRO_BLOCK_PART_SHIFT);
-> -       if (!msb->disk) {
-> -               rc = -ENOMEM;
-> +       rc = blk_mq_alloc_sq_tag_set(&msb->tag_set, &mspro_mq_ops, 2,
-> +                                    BLK_MQ_F_SHOULD_MERGE);
-> +       if (rc)
->                 goto out_release_id;
-> -       }
->
-> -       msb->queue = blk_mq_init_sq_queue(&msb->tag_set, &mspro_mq_ops, 2,
-> -                                               BLK_MQ_F_SHOULD_MERGE);
-> -       if (IS_ERR(msb->queue)) {
-> -               rc = PTR_ERR(msb->queue);
-> -               msb->queue = NULL;
-> -               goto out_put_disk;
-> +       msb->disk = blk_mq_alloc_disk(&msb->tag_set, card);
-> +       if (IS_ERR(msb->disk)) {
-> +               rc = PTR_ERR(msb->disk);
-> +               goto out_free_tag_set;
->         }
-> -
-> -       msb->queue->queuedata = card;
-> +       msb->queue = msb->disk->queue;
->
->         blk_queue_max_hw_sectors(msb->queue, MSPRO_BLOCK_MAX_PAGES);
->         blk_queue_max_segments(msb->queue, MSPRO_BLOCK_MAX_SEGS);
-> @@ -1228,10 +1224,10 @@ static int mspro_block_init_disk(struct memstick_dev *card)
->
->         msb->disk->major = major;
->         msb->disk->first_minor = disk_id << MSPRO_BLOCK_PART_SHIFT;
-> +       msb->disk->minors = 1 << MSPRO_BLOCK_PART_SHIFT;
->         msb->disk->fops = &ms_block_bdops;
->         msb->usage_count = 1;
->         msb->disk->private_data = msb;
-> -       msb->disk->queue = msb->queue;
->
->         sprintf(msb->disk->disk_name, "mspblk%d", disk_id);
->
-> @@ -1247,8 +1243,8 @@ static int mspro_block_init_disk(struct memstick_dev *card)
->         msb->active = 1;
->         return 0;
->
-> -out_put_disk:
-> -       put_disk(msb->disk);
-> +out_free_tag_set:
-> +       blk_mq_free_tag_set(&msb->tag_set);
->  out_release_id:
->         mutex_lock(&mspro_block_disk_lock);
->         idr_remove(&mspro_block_disk_idr, disk_id);
-> --
-> 2.30.2
->
+AL13N
 
