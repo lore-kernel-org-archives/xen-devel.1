@@ -2,49 +2,50 @@ Return-Path: <SRS0=BKM6=K6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C562C47096
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 01:49:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83991C47082
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 01:49:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 14FC4613EA
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 01:49:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14FC4613EA
+	by mail.kernel.org (Postfix) with ESMTPS id 530AE613E9
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 01:49:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 530AE613E9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136618.253223 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136623.253233 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loyx5-00084z-Sn; Fri, 04 Jun 2021 01:48:47 +0000
+	id 1loyxs-0000G6-7k; Fri, 04 Jun 2021 01:49:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136618.253223; Fri, 04 Jun 2021 01:48:47 +0000
+Received: by outflank-mailman (output) from mailman id 136623.253233; Fri, 04 Jun 2021 01:49:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1loyx5-00084r-MP; Fri, 04 Jun 2021 01:48:47 +0000
-Received: by outflank-mailman (input) for mailman id 136618;
- Fri, 04 Jun 2021 01:48:47 +0000
+	id 1loyxs-0000Fz-4M; Fri, 04 Jun 2021 01:49:36 +0000
+Received: by outflank-mailman (input) for mailman id 136623;
+ Fri, 04 Jun 2021 01:49:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sjsn=K6=gmail.com=connojdavis@srs-us1.protection.inumbo.net>)
- id 1loyx4-00084l-Uq
- for xen-devel@lists.xenproject.org; Fri, 04 Jun 2021 01:48:47 +0000
-Received: from mail-oi1-x22e.google.com (unknown [2607:f8b0:4864:20::22e])
+ id 1loyxq-0000Ft-Ue
+ for xen-devel@lists.xenproject.org; Fri, 04 Jun 2021 01:49:34 +0000
+Received: from mail-ot1-x32f.google.com (unknown [2607:f8b0:4864:20::32f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1ffd949a-3513-49ef-b43e-304d0b25fc09;
- Fri, 04 Jun 2021 01:48:45 +0000 (UTC)
-Received: by mail-oi1-x22e.google.com with SMTP id v22so8288757oic.2
- for <xen-devel@lists.xenproject.org>; Thu, 03 Jun 2021 18:48:45 -0700 (PDT)
+ id a52cb18b-cc8d-4560-a140-ab594ebd5ba6;
+ Fri, 04 Jun 2021 01:49:34 +0000 (UTC)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ i14-20020a9d624e0000b029033683c71999so7664916otk.5
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Jun 2021 18:49:34 -0700 (PDT)
 Received: from [192.168.99.80] (142-79-211-230.starry-inc.net.
  [142.79.211.230])
- by smtp.gmail.com with ESMTPSA id n17sm158772oij.57.2021.06.03.18.48.44
+ by smtp.gmail.com with ESMTPSA id i9sm151710oog.17.2021.06.03.18.49.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Jun 2021 18:48:44 -0700 (PDT)
+ Thu, 03 Jun 2021 18:49:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,36 +57,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ffd949a-3513-49ef-b43e-304d0b25fc09
+X-Inumbo-ID: a52cb18b-cc8d-4560-a140-ab594ebd5ba6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=L26ql0Ro1PUVovU7RjnHg95qVz4JfRvv+2ImX6K34AU=;
-        b=HtEHUiipfDLbL5I8D1O+xDDpbAiHrHV0UBlL/Mx430t41OMCkRLlHIAMnwo7Y34StD
-         qpWPyHLDDpvs6ONSCXfExnNoViQA5sznM57+TzNMqw2qhLrPgNAkP/JgnFZAFneh6W0L
-         ooBjMHI6aBvoAX32+aH//eg1/VFAn3i84m48FNkSSy2O5mIouBYdRjiNg7Ez/oCyBhzX
-         9yq9KYUtydyUjn3TvflTNRRcLMUxOx+bs4G/A234MxP8kUEolBbFTpsVx23mVwCJYALL
-         mBCgNV4yWxHUBezCoH9mnVSe+m2/6RrIomvAgbJXZ2YfirdCCZv27Mm2R+W2jZl4sX1h
-         StKQ==
+        bh=cnn1WIVeIkKDuZit5//DlNFEUDGCm+dDJ+Nj7pdKMb4=;
+        b=Gan7PgMouXZ0akfuXQ7Nq5K2gy+hIgs2Ks39ahncwUjCrzIvPEtwsr51Wjr0TkztP+
+         Dd5xt243YLNIhxcp48StqLUak1Cr6rfOjBjbVVUZivi6FNLT/NBBtMH30arVn0ESwHad
+         t9hQXDA1teNuVNg33JVS/6eQhZuKmVqj38EHM7E8nDBHpwmAoMIpGPVFSCt7MsiCydSg
+         p6cuN1YjGOzEJKNZv7fn/AHgpZXucYpivP0bU4QdYtmqmGhoO9vo9qFYTld5/p8sLNya
+         KsRxJoWGzAckzpc8rmPsrO3c+olV0/2m5cy+AfhBm4dMZh18A4r71PP/YN8hLnpdYvLh
+         8vYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-transfer-encoding
          :content-language;
-        bh=L26ql0Ro1PUVovU7RjnHg95qVz4JfRvv+2ImX6K34AU=;
-        b=I5xPu/fOTrU3NxB+uylGKjUelleOmVKZx0EtjLnj1H2IHaY1Ya5RafIQRsJVAQqOKx
-         iJsOLi+jNQXF/SDUHBLb98qSOPtxYvbko8TBTY69Kd+cCkqPBZbns5FkRmfEwjKh3X8n
-         9tiXVYCiONklTPAXshRDeP5SYmDCdxAerS28rZX53/u2wPi0elhj+h6xj34GIon5VD+I
-         PbbSsJGPH4AnXi5fztKhx/+h6wFhbCf55/Gk4Br7UXDaiZB0w29bV+zhrCl0pRv+6GCo
-         yLzaU9csAW0utHSX2vSOai02RgD3APxbIF9a8MGvM8RWFqM4Fe7A0iQDJMlUEHibTEDt
-         uBsQ==
-X-Gm-Message-State: AOAM532Kt6S6FyFWFV7YzFP9Vh4F27q7eeSgFJ5gxAKQGfzAgTv1eDCx
-	47iLgR4BWBm1FBhq3F4BpPw=
-X-Google-Smtp-Source: ABdhPJyMncjHAhuPLorOLl9+EJbJSHa93Bp/Wk42cuGVMrPOMz6MQLxoKFkktUNL3DCRgvbgL6CyqA==
-X-Received: by 2002:a05:6808:15a0:: with SMTP id t32mr9068325oiw.91.1622771325007;
-        Thu, 03 Jun 2021 18:48:45 -0700 (PDT)
-Subject: Re: [PATCH v7 2/2] xen: Add files needed for minimal riscv build
+        bh=cnn1WIVeIkKDuZit5//DlNFEUDGCm+dDJ+Nj7pdKMb4=;
+        b=M4FX9FsP9HPA+5KGqQ7R/wmZ4ao3N9NfldlMFS5FjvVhDTg2AOLBFm4i9PlE9ovj4J
+         MjRPPcjRHtSmiwO2HIaLGV9XfloY4so9GlpnS2h+FdZKQbAZMa7KlstrZbjXSawOqKOi
+         uXRCHQR0yZQ4mDubRerPb8g1bayc5t7A9aT6vfbMqGwSARXLKy+FUTxT9w5ybujg+61U
+         93p5bCCjzJsS0+kC67Vd326Ax0w9+tNG+hOj1v4OJiJqS1Nkm0MhgEkY27eqJmTDedIL
+         C1db9KHH5PTjn71E+dycGiubjWfM4sE6iyfSLaQGaCwW6uP24lfLuSZRVVI3C1UdP2+D
+         iPGw==
+X-Gm-Message-State: AOAM533CW0BPODvCypwWYfRL6Ee53itLlp4EQMnIhR1SStGszXMA7W8+
+	7pSsfw70TIWLGJIVkM7jHqY=
+X-Google-Smtp-Source: ABdhPJygi+Mu0NIWldqRI0E1lCIvefrKFp/C4Mrm2lkkT8OQabChnw7Q/GWU3Vn3FwIWmrQryjKrdg==
+X-Received: by 2002:a9d:7987:: with SMTP id h7mr1820146otm.70.1622771374010;
+        Thu, 03 Jun 2021 18:49:34 -0700 (PDT)
+Subject: Re: [PATCH v7 1/2] xen/char: Default HAS_NS16550 to y only for X86
+ and ARM
 To: Alistair Francis <alistair23@gmail.com>
 Cc: "open list:X86" <xen-devel@lists.xenproject.org>,
  Bobby Eshleman <bobbyeshleman@gmail.com>,
@@ -94,191 +96,32 @@ Cc: "open list:X86" <xen-devel@lists.xenproject.org>,
  Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
 References: <cover.1622676439.git.connojdavis@gmail.com>
- <d4670a35758df878565cf757bbc20e2815618eb5.1622676439.git.connojdavis@gmail.com>
- <CAKmqyKPSTmkufvpAj9A_jK1sRkK+J9DMNUgmKfWchrCB9Hm+oQ@mail.gmail.com>
+ <d2d19b62bd2a570db97f2940e6152bf93dc01632.1622676439.git.connojdavis@gmail.com>
+ <CAKmqyKO0JQVOxfrO0jk_-4eBBZSkcQm1-pMhd2xzXaE55usXWQ@mail.gmail.com>
 From: Connor Davis <connojdavis@gmail.com>
-Message-ID: <0f1548ab-4b80-9dc4-ef16-98146394909b@gmail.com>
-Date: Thu, 3 Jun 2021 19:48:56 -0600
+Message-ID: <4b674135-fb25-689c-dbac-8a8f006e3f58@gmail.com>
+Date: Thu, 3 Jun 2021 19:49:46 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.10.2
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKPSTmkufvpAj9A_jK1sRkK+J9DMNUgmKfWchrCB9Hm+oQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKO0JQVOxfrO0jk_-4eBBZSkcQm1-pMhd2xzXaE55usXWQ@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 6/3/21 5:33 PM, Alistair Francis wrote:
+On 6/3/21 5:27 PM, Alistair Francis wrote:
 > On Thu, Jun 3, 2021 at 9:38 AM Connor Davis <connojdavis@gmail.com> wrote:
->> Add arch-specific makefiles and configs needed to build for
->> riscv. Also add a minimal head.S that is a simple infinite loop.
->> head.o can be built with
->>
->> $ make XEN_TARGET_ARCH=riscv64 SUBSYSTEMS=xen -C xen tiny64_defconfig
->> $ make XEN_TARGET_ARCH=riscv64 SUBSYSTEMS=xen -C xen TARGET=riscv64/head.o
->>
->> No other TARGET is supported at the moment.
+>> Defaulting to yes only for X86 and ARM reduces the requirements
+>> for a minimal build when porting new architectures.
 >>
 >> Signed-off-by: Connor Davis <connojdavis@gmail.com>
->> ---
->> Bob: I moved back to XEN_TARGET_ARCH=riscv64 because supplying
->> just XEN_TARGET_ARCH=riscv causes TARGET_ARCH == TARGET_SUBARCH, and
->> that broke the build after the recent commit b6ecd5c8bc
->> "build: centralize / unify asm-offsets generation". It also deviates
->> from how x86 and arm work now, so I think this change is for the best
->> for now. That commit is also why the PHONY include target is added
->> in the riscv/Makefile.
->> ---
->>   MAINTAINERS                             |  8 +++++
->>   config/riscv64.mk                       |  5 +++
->>   xen/Makefile                            |  8 +++--
->>   xen/arch/riscv/Kconfig                  | 47 +++++++++++++++++++++++++
->>   xen/arch/riscv/Kconfig.debug            |  0
->>   xen/arch/riscv/Makefile                 |  2 ++
->>   xen/arch/riscv/Rules.mk                 |  0
->>   xen/arch/riscv/arch.mk                  | 14 ++++++++
->>   xen/arch/riscv/configs/tiny64_defconfig | 13 +++++++
->>   xen/arch/riscv/riscv64/asm-offsets.c    |  0
->>   xen/arch/riscv/riscv64/head.S           |  6 ++++
->>   xen/include/asm-riscv/config.h          | 47 +++++++++++++++++++++++++
->>   12 files changed, 148 insertions(+), 2 deletions(-)
->>   create mode 100644 config/riscv64.mk
->>   create mode 100644 xen/arch/riscv/Kconfig
->>   create mode 100644 xen/arch/riscv/Kconfig.debug
->>   create mode 100644 xen/arch/riscv/Makefile
->>   create mode 100644 xen/arch/riscv/Rules.mk
->>   create mode 100644 xen/arch/riscv/arch.mk
->>   create mode 100644 xen/arch/riscv/configs/tiny64_defconfig
->>   create mode 100644 xen/arch/riscv/riscv64/asm-offsets.c
->>   create mode 100644 xen/arch/riscv/riscv64/head.S
->>   create mode 100644 xen/include/asm-riscv/config.h
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index d46b08a0d2..956e71220d 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -456,6 +456,14 @@ F: tools/libs/light/libxl_nonetbuffer.c
->>   F:     tools/hotplug/Linux/remus-netbuf-setup
->>   F:     tools/hotplug/Linux/block-drbd-probe
->>
->> +RISCV
->> +M:     Bob Eshleman <bobbyeshleman@gmail.com>
->> +R:     Connor Davis <connojdavis@gmail.com>
->> +S:     Supported
->> +F:     config/riscv64.mk
->> +F:     xen/arch/riscv/
->> +F:     xen/include/asm-riscv/
-> I volunteer to be a maintainer as well, feel free to say no :)
->
-> I did the QEMU RISC-V H extension port and have a pretty good
-> understanding of the RISC-V Hypervisor extension.
-Great! I will add you.
->> +
->>   RTDS SCHEDULER
->>   M:     Dario Faggioli <dfaggioli@suse.com>
->>   M:     Meng Xu <mengxu@cis.upenn.edu>
->> diff --git a/config/riscv64.mk b/config/riscv64.mk
->> new file mode 100644
->> index 0000000000..a5a21e5fa2
->> --- /dev/null
->> +++ b/config/riscv64.mk
->> @@ -0,0 +1,5 @@
->> +CONFIG_RISCV := y
->> +CONFIG_RISCV_64 := y
->> +CONFIG_RISCV_$(XEN_OS) := y
->> +
->> +CONFIG_XEN_INSTALL_SUFFIX :=
->> diff --git a/xen/Makefile b/xen/Makefile
->> index 7ce7692354..89879fad4c 100644
->> --- a/xen/Makefile
->> +++ b/xen/Makefile
->> @@ -26,7 +26,9 @@ MAKEFLAGS += -rR
->>   EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
->>
->>   ARCH=$(XEN_TARGET_ARCH)
->> -SRCARCH=$(shell echo $(ARCH) | sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g')
->> +SRCARCH=$(shell echo $(ARCH) | \
->> +          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
->> +              -e s'/riscv.*/riscv/g')
->>
->>   # Don't break if the build process wasn't called from the top level
->>   # we need XEN_TARGET_ARCH to generate the proper config
->> @@ -35,7 +37,8 @@ include $(XEN_ROOT)/Config.mk
->>   # Set ARCH/SUBARCH appropriately.
->>   export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
->>   export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
->> -                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g')
->> +                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
->> +                                -e s'/riscv.*/riscv/g')
->>
->>   # Allow someone to change their config file
->>   export KCONFIG_CONFIG ?= .config
->> @@ -335,6 +338,7 @@ _clean: delete-unfresh-files
->>          $(MAKE) $(clean) xsm
->>          $(MAKE) $(clean) crypto
->>          $(MAKE) $(clean) arch/arm
->> +       $(MAKE) $(clean) arch/riscv
->>          $(MAKE) $(clean) arch/x86
->>          $(MAKE) $(clean) test
->>          $(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) clean
->> diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
->> new file mode 100644
->> index 0000000000..bd8381c5e0
->> --- /dev/null
->> +++ b/xen/arch/riscv/Kconfig
->> @@ -0,0 +1,47 @@
->> +config RISCV
->> +       def_bool y
->> +
->> +config RISCV_64
->> +       def_bool y
->> +       select 64BIT
->> +
->> +config ARCH_DEFCONFIG
->> +       string
->> +       default "arch/riscv/configs/tiny64_defconfig"
->> +
->> +menu "Architecture Features"
->> +
->> +source "arch/Kconfig"
->> +
->> +endmenu
->> +
->> +menu "ISA Selection"
->> +
->> +choice
->> +       prompt "Base ISA"
->> +       default RISCV_ISA_RV64IMA if RISCV_64
->> +       help
->> +         This selects the base ISA extensions that Xen will target.
->> +
->> +config RISCV_ISA_RV64IMA
->> +       bool "RV64IMA"
->> +       help
->> +         Use the RV64I base ISA, plus the "M" and "A" extensions
->> +         for integer multiply/divide and atomic instructions, respectively.
->> +
->> +endchoice
->> +
->> +config RISCV_ISA_C
->> +       bool "Compressed extension"
->> +       help
->> +         Add "C" to the ISA subsets that the toolchain is allowed to
->> +         emit when building Xen, which results in compressed instructions
->> +         in the Xen binary.
->> +
->> +         If unsure, say N.
-> I would change this to y if you are unsure. I don't expect any
-> hardware to have an MMU (yet along the H extension) and no compressed
-> instruction extension. Linux won't run without the C extension.
-> Otherwise looks good:
->
+>> Acked-by: Jan Beulich <jbeulich@suse.com>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Thanks. I was thinking it may make bring-up easier (at least in assembly
-glue) if C was turned off, but in the end it will probably be easiest to 
-mimic
-linux. I will change to Y.
+>
+> Alistair
+Thanks, added
 
 Connor
 
