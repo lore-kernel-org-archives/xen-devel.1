@@ -7,47 +7,48 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E513C47083
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 06:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E725C4709A
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 06:02:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A8B9661405
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 06:02:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A8B9661405
+	by mail.kernel.org (Postfix) with ESMTPS id B4408613FF
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Jun 2021 06:02:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B4408613FF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.136691.253358 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.136692.253363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lp2ub-0003MI-UF; Fri, 04 Jun 2021 06:02:29 +0000
+	id 1lp2uc-0003QG-Cg; Fri, 04 Jun 2021 06:02:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 136691.253358; Fri, 04 Jun 2021 06:02:29 +0000
+Received: by outflank-mailman (output) from mailman id 136692.253363; Fri, 04 Jun 2021 06:02:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lp2ub-0003M7-Q7; Fri, 04 Jun 2021 06:02:29 +0000
-Received: by outflank-mailman (input) for mailman id 136691;
+	id 1lp2uc-0003Ov-4U; Fri, 04 Jun 2021 06:02:30 +0000
+Received: by outflank-mailman (input) for mailman id 136692;
  Fri, 04 Jun 2021 06:02:28 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=x6aI=K6=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1lp2ua-00029c-CE
+ id 1lp2ua-00029d-Kt
  for xen-devel@lists.xenproject.org; Fri, 04 Jun 2021 06:02:28 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dfc2046a-8261-4160-b6d7-d3a1b537cd64;
- Fri, 04 Jun 2021 06:02:17 +0000 (UTC)
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cfd6595e-b914-4951-a782-26a003d51af0;
+ Fri, 04 Jun 2021 06:02:18 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2375B21A09;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 939601FD47;
  Fri,  4 Jun 2021 06:02:17 +0000 (UTC)
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id DA946118DD;
- Fri,  4 Jun 2021 06:02:16 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id 63E28118DD;
+ Fri,  4 Jun 2021 06:02:17 +0000 (UTC)
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id 6Jg7NOjBuWCyGwAALh3uQQ
- (envelope-from <jgross@suse.com>); Fri, 04 Jun 2021 06:02:16 +0000
+ id ONwuF+nBuWCyGwAALh3uQQ
+ (envelope-from <jgross@suse.com>); Fri, 04 Jun 2021 06:02:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,187 +60,300 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dfc2046a-8261-4160-b6d7-d3a1b537cd64
+X-Inumbo-ID: cfd6595e-b914-4951-a782-26a003d51af0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1622786537; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=isgrr2CDNqvffqwRlBKSl7qzhM9b8t1JhZ+3heZNMCc=;
-	b=sUAmI//60kTaXOn6AY4IceYBFhGxX7lavmSv7qagAijQs3IOOcvv5Nfo+bfH7tUS8HzZSY
-	2tcteC707wNGr67m4I6R2Dywco3AMlboOQZufig/4sI+R5cXm+wk6WMlyxhsAndifNKIyH
-	gi9AXLn8Sn92r/uaqrcb02Y6bYmg+jE=
+	bh=4SWUo43YolLMrmlsJ+DCRZBL/Dp0uw3nhnsJOscj6IQ=;
+	b=oWE0POBUbFMpkvHQHjCvq/oGFyH14joaNMlK3UIR6DoVacZWV0YsPMY9oqFDQkoxt31ggC
+	BxxIszmrgJuMQNvTL9IPn6SYtbCP48RVWEOaf/cVoFDkp7G8EYzLM3XL+THpYwJPT2iaTX
+	RG+sLduwpctq78ul69tXxKcg91xaMt8=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1622786537; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=isgrr2CDNqvffqwRlBKSl7qzhM9b8t1JhZ+3heZNMCc=;
-	b=sUAmI//60kTaXOn6AY4IceYBFhGxX7lavmSv7qagAijQs3IOOcvv5Nfo+bfH7tUS8HzZSY
-	2tcteC707wNGr67m4I6R2Dywco3AMlboOQZufig/4sI+R5cXm+wk6WMlyxhsAndifNKIyH
-	gi9AXLn8Sn92r/uaqrcb02Y6bYmg+jE=
+	bh=4SWUo43YolLMrmlsJ+DCRZBL/Dp0uw3nhnsJOscj6IQ=;
+	b=oWE0POBUbFMpkvHQHjCvq/oGFyH14joaNMlK3UIR6DoVacZWV0YsPMY9oqFDQkoxt31ggC
+	BxxIszmrgJuMQNvTL9IPn6SYtbCP48RVWEOaf/cVoFDkp7G8EYzLM3XL+THpYwJPT2iaTX
+	RG+sLduwpctq78ul69tXxKcg91xaMt8=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	David Scott <dave@recoil.org>
-Subject: [PATCH v2 3/6] tools/libs/ctrl: use common p2m mapping code in xc_domain_resume_any()
-Date: Fri,  4 Jun 2021 08:02:11 +0200
-Message-Id: <20210604060214.14924-4-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 5/6] tools/libs: move xc_core* from libxenctrl to libxenguest
+Date: Fri,  4 Jun 2021 08:02:13 +0200
+Message-Id: <20210604060214.14924-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210604060214.14924-1-jgross@suse.com>
 References: <20210604060214.14924-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of open coding the mapping of the p2m list use the already
-existing xc_core_arch_map_p2m() call, especially as the current code
-does not support guests with the linear p2m map. It should be noted
-that this code is needed for colo/remus only.
+The functionality in xc_core* should be part of libxenguest instead
+of libxenctrl. Users are already either in libxenguest, or in xl.
+There is one single exception: xc_core_arch_auto_translated_physmap()
+is being used by xc_domain_memory_mapping(), which is used by qemu.
+So leave the xc_core_arch_auto_translated_physmap() functionality in
+libxenctrl.
 
-Switching to xc_core_arch_map_p2m() drops the need to bail out for
-bitness of tool stack and guest differing.
+This will make it easier to merge common functionality of xc_core*
+and xg_sr_save*.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Christian Lindig <christian.lindig@citrix.com>
 Acked-by: Wei Liu <wl@xen.org>
 ---
-This might be a backport candidate
-V2:
-- add missing #include in ocaml stub (Andrew Cooper)
----
- tools/libs/ctrl/xc_resume.c         | 66 +++++++++--------------------
- tools/ocaml/libs/xc/xenctrl_stubs.c |  1 +
- 2 files changed, 22 insertions(+), 45 deletions(-)
+ tools/libs/ctrl/Makefile                             |  3 ---
+ tools/libs/ctrl/xc_domain.c                          |  2 --
+ tools/libs/ctrl/xc_private.h                         | 12 ++++++++++++
+ tools/libs/guest/Makefile                            |  3 +++
+ tools/libs/{ctrl/xc_core.c => guest/xg_core.c}       |  2 +-
+ tools/libs/{ctrl/xc_core.h => guest/xg_core.h}       |  5 ++---
+ .../libs/{ctrl/xc_core_arm.c => guest/xg_core_arm.c} |  8 +-------
+ .../libs/{ctrl/xc_core_arm.h => guest/xg_core_arm.h} |  0
+ .../libs/{ctrl/xc_core_x86.c => guest/xg_core_x86.c} |  8 +-------
+ .../libs/{ctrl/xc_core_x86.h => guest/xg_core_x86.h} |  0
+ tools/libs/guest/xg_dom_boot.c                       |  2 +-
+ tools/libs/guest/xg_domain.c                         |  2 +-
+ tools/libs/guest/xg_offline_page.c                   |  2 +-
+ tools/libs/guest/xg_resume.c                         |  2 +-
+ 14 files changed, 24 insertions(+), 27 deletions(-)
+ rename tools/libs/{ctrl/xc_core.c => guest/xg_core.c} (99%)
+ rename tools/libs/{ctrl/xc_core.h => guest/xg_core.h} (97%)
+ rename tools/libs/{ctrl/xc_core_arm.c => guest/xg_core_arm.c} (96%)
+ rename tools/libs/{ctrl/xc_core_arm.h => guest/xg_core_arm.h} (100%)
+ rename tools/libs/{ctrl/xc_core_x86.c => guest/xg_core_x86.c} (99%)
+ rename tools/libs/{ctrl/xc_core_x86.h => guest/xg_core_x86.h} (100%)
 
-diff --git a/tools/libs/ctrl/xc_resume.c b/tools/libs/ctrl/xc_resume.c
-index 94c6c9fb31..e3c8e83aa9 100644
---- a/tools/libs/ctrl/xc_resume.c
-+++ b/tools/libs/ctrl/xc_resume.c
-@@ -20,6 +20,7 @@
+diff --git a/tools/libs/ctrl/Makefile b/tools/libs/ctrl/Makefile
+index fbeb3a3537..519246b0d6 100644
+--- a/tools/libs/ctrl/Makefile
++++ b/tools/libs/ctrl/Makefile
+@@ -2,9 +2,6 @@ XEN_ROOT = $(CURDIR)/../../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+ SRCS-y       += xc_altp2m.c
+-SRCS-y       += xc_core.c
+-SRCS-$(CONFIG_X86) += xc_core_x86.c
+-SRCS-$(CONFIG_ARM) += xc_core_arm.c
+ SRCS-y       += xc_cpupool.c
+ SRCS-y       += xc_domain.c
+ SRCS-y       += xc_evtchn.c
+diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
+index e7cea4a17d..7d118848f1 100644
+--- a/tools/libs/ctrl/xc_domain.c
++++ b/tools/libs/ctrl/xc_domain.c
+@@ -19,8 +19,6 @@
+  * Copyright (c) 2003, K A Fraser.
+  */
+ 
+-#include "xc_private.h"
+-#include "xc_core.h"
+ #include "xc_private.h"
+ #include <xen/memory.h>
+ #include <xen/hvm/hvm_op.h>
+diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
+index 8ebc0b59da..dff0f0289b 100644
+--- a/tools/libs/ctrl/xc_private.h
++++ b/tools/libs/ctrl/xc_private.h
+@@ -467,6 +467,18 @@ void *xc_vm_event_enable(xc_interface *xch, uint32_t domain_id, int param,
+ 
+ int do_dm_op(xc_interface *xch, uint32_t domid, unsigned int nr_bufs, ...);
+ 
++#if defined (__i386__) || defined (__x86_64__)
++static inline int xc_core_arch_auto_translated_physmap(const xc_dominfo_t *info)
++{
++    return info->hvm;
++}
++#elif defined (__arm__) || defined(__aarch64__)
++static inline int xc_core_arch_auto_translated_physmap(const xc_dominfo_t *info)
++{
++    return 1;
++}
++#endif
++
+ #endif /* __XC_PRIVATE_H__ */
+ 
+ /*
+diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
+index 2a2323ff09..2ce92d247e 100644
+--- a/tools/libs/guest/Makefile
++++ b/tools/libs/guest/Makefile
+@@ -24,6 +24,9 @@ SRCS-y += xg_offline_page.c
+ else
+ SRCS-y += xg_nomigrate.c
+ endif
++SRCS-y       += xg_core.c
++SRCS-$(CONFIG_X86) += xg_core_x86.c
++SRCS-$(CONFIG_ARM) += xg_core_arm.c
+ 
+ CFLAGS += -I$(XEN_libxenctrl)
+ 
+diff --git a/tools/libs/ctrl/xc_core.c b/tools/libs/guest/xg_core.c
+similarity index 99%
+rename from tools/libs/ctrl/xc_core.c
+rename to tools/libs/guest/xg_core.c
+index 9576bec5a3..c52f1161c1 100644
+--- a/tools/libs/ctrl/xc_core.c
++++ b/tools/libs/guest/xg_core.c
+@@ -61,7 +61,7 @@
+  */
+ 
+ #include "xc_private.h"
+-#include "xc_core.h"
++#include "xg_core.h"
+ #include <stdlib.h>
+ #include <unistd.h>
+ 
+diff --git a/tools/libs/ctrl/xc_core.h b/tools/libs/guest/xg_core.h
+similarity index 97%
+rename from tools/libs/ctrl/xc_core.h
+rename to tools/libs/guest/xg_core.h
+index 8ea1f93a10..f07584aaa6 100644
+--- a/tools/libs/ctrl/xc_core.h
++++ b/tools/libs/guest/xg_core.h
+@@ -131,7 +131,6 @@ struct xc_core_memory_map {
+     uint64_t    size;
+ };
+ typedef struct xc_core_memory_map xc_core_memory_map_t;
+-int xc_core_arch_auto_translated_physmap(const xc_dominfo_t *info);
+ struct xc_core_arch_context;
+ int xc_core_arch_memory_map_get(xc_interface *xch,
+                                 struct xc_core_arch_context *arch_ctxt,
+@@ -152,9 +151,9 @@ int xc_core_arch_get_scratch_gpfn(xc_interface *xch, uint32_t domid,
+ 
+ 
+ #if defined (__i386__) || defined (__x86_64__)
+-# include "xc_core_x86.h"
++# include "xg_core_x86.h"
+ #elif defined (__arm__) || defined(__aarch64__)
+-# include "xc_core_arm.h"
++# include "xg_core_arm.h"
+ #else
+ # error "unsupported architecture"
+ #endif
+diff --git a/tools/libs/ctrl/xc_core_arm.c b/tools/libs/guest/xg_core_arm.c
+similarity index 96%
+rename from tools/libs/ctrl/xc_core_arm.c
+rename to tools/libs/guest/xg_core_arm.c
+index 93765a565f..aaabd07558 100644
+--- a/tools/libs/ctrl/xc_core_arm.c
++++ b/tools/libs/guest/xg_core_arm.c
+@@ -17,7 +17,7 @@
+  */
+ 
+ #include "xc_private.h"
+-#include "xc_core.h"
++#include "xg_core.h"
+ 
+ #include <xen-tools/libs.h>
+ 
+@@ -31,12 +31,6 @@ xc_core_arch_gpfn_may_present(struct xc_core_arch_context *arch_ctxt,
+     return 0;
+ }
+ 
+-int
+-xc_core_arch_auto_translated_physmap(const xc_dominfo_t *info)
+-{
+-    return 1;
+-}
+-
+ int
+ xc_core_arch_memory_map_get(xc_interface *xch, struct xc_core_arch_context *unused,
+                             xc_dominfo_t *info, shared_info_any_t *live_shinfo,
+diff --git a/tools/libs/ctrl/xc_core_arm.h b/tools/libs/guest/xg_core_arm.h
+similarity index 100%
+rename from tools/libs/ctrl/xc_core_arm.h
+rename to tools/libs/guest/xg_core_arm.h
+diff --git a/tools/libs/ctrl/xc_core_x86.c b/tools/libs/guest/xg_core_x86.c
+similarity index 99%
+rename from tools/libs/ctrl/xc_core_x86.c
+rename to tools/libs/guest/xg_core_x86.c
+index c8f71d4b75..09f5d696ce 100644
+--- a/tools/libs/ctrl/xc_core_x86.c
++++ b/tools/libs/guest/xg_core_x86.c
+@@ -19,7 +19,7 @@
+ 
+ #include <inttypes.h>
+ #include "xc_private.h"
+-#include "xc_core.h"
++#include "xg_core.h"
+ #include <xen/hvm/e820.h>
+ 
+ int
+@@ -33,12 +33,6 @@ xc_core_arch_gpfn_may_present(struct xc_core_arch_context *arch_ctxt,
+     return 1;
+ }
+ 
+-int
+-xc_core_arch_auto_translated_physmap(const xc_dominfo_t *info)
+-{
+-    return info->hvm;
+-}
+-
+ int
+ xc_core_arch_memory_map_get(xc_interface *xch, struct xc_core_arch_context *unused,
+                             xc_dominfo_t *info, shared_info_any_t *live_shinfo,
+diff --git a/tools/libs/ctrl/xc_core_x86.h b/tools/libs/guest/xg_core_x86.h
+similarity index 100%
+rename from tools/libs/ctrl/xc_core_x86.h
+rename to tools/libs/guest/xg_core_x86.h
+diff --git a/tools/libs/guest/xg_dom_boot.c b/tools/libs/guest/xg_dom_boot.c
+index 2a002e7349..dac96b17a5 100644
+--- a/tools/libs/guest/xg_dom_boot.c
++++ b/tools/libs/guest/xg_dom_boot.c
+@@ -31,7 +31,7 @@
+ #include <zlib.h>
+ 
+ #include "xg_private.h"
+-#include "xc_core.h"
++#include "xg_core.h"
+ #include <xen/hvm/params.h>
+ #include <xen/grant_table.h>
+ 
+diff --git a/tools/libs/guest/xg_domain.c b/tools/libs/guest/xg_domain.c
+index dd7db2cbd8..155e337427 100644
+--- a/tools/libs/guest/xg_domain.c
++++ b/tools/libs/guest/xg_domain.c
+@@ -20,7 +20,7 @@
+  */
+ 
+ #include "xg_private.h"
+-#include "xc_core.h"
++#include "xg_core.h"
+ 
+ int xc_unmap_domain_meminfo(xc_interface *xch, struct xc_domain_meminfo *minfo)
+ {
+diff --git a/tools/libs/guest/xg_offline_page.c b/tools/libs/guest/xg_offline_page.c
+index d4722f0e8c..cfe0e2d537 100644
+--- a/tools/libs/guest/xg_offline_page.c
++++ b/tools/libs/guest/xg_offline_page.c
+@@ -25,7 +25,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <sys/time.h>
+-#include <xc_core.h>
++#include <xg_core.h>
+ 
+ #include "xc_private.h"
+ #include "xg_private.h"
+diff --git a/tools/libs/guest/xg_resume.c b/tools/libs/guest/xg_resume.c
+index 3bdefb2eef..d201c1488d 100644
+--- a/tools/libs/guest/xg_resume.c
++++ b/tools/libs/guest/xg_resume.c
+@@ -21,7 +21,7 @@
  #include <xen/foreign/x86_32.h>
  #include <xen/foreign/x86_64.h>
  #include <xen/hvm/params.h>
-+#include "xc_core.h"
+-#include "xc_core.h"
++#include "xg_core.h"
  
  static int modify_returncode(xc_interface *xch, uint32_t domid)
  {
-@@ -137,12 +138,10 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-     struct domain_info_context _dinfo = { .guest_width = 0,
-                                           .p2m_size = 0 };
-     struct domain_info_context *dinfo = &_dinfo;
--    unsigned long mfn;
-+    xen_pfn_t mfn, store_mfn, console_mfn;
-     vcpu_guest_context_any_t ctxt;
--    start_info_t *start_info;
--    shared_info_t *shinfo = NULL;
--    xen_pfn_t *p2m_frame_list_list = NULL;
--    xen_pfn_t *p2m_frame_list = NULL;
-+    start_info_any_t *start_info;
-+    shared_info_any_t *shinfo = NULL;
-     xen_pfn_t *p2m = NULL;
- #endif
- 
-@@ -164,11 +163,6 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-         PERROR("Could not get domain width");
-         return rc;
-     }
--    if ( dinfo->guest_width != sizeof(long) )
--    {
--        ERROR("Cannot resume uncooperative cross-address-size guests");
--        return rc;
--    }
- 
-     /* Map the shared info frame */
-     shinfo = xc_map_foreign_range(xch, domid, PAGE_SIZE,
-@@ -179,34 +173,8 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-         goto out;
-     }
- 
--    dinfo->p2m_size = shinfo->arch.max_pfn;
--
--    p2m_frame_list_list =
--        xc_map_foreign_range(xch, domid, PAGE_SIZE, PROT_READ,
--                             shinfo->arch.pfn_to_mfn_frame_list_list);
--    if ( p2m_frame_list_list == NULL )
--    {
--        ERROR("Couldn't map p2m_frame_list_list");
--        goto out;
--    }
--
--    p2m_frame_list = xc_map_foreign_pages(xch, domid, PROT_READ,
--                                          p2m_frame_list_list,
--                                          P2M_FLL_ENTRIES);
--    if ( p2m_frame_list == NULL )
--    {
--        ERROR("Couldn't map p2m_frame_list");
--        goto out;
--    }
--
--    /* Map all the frames of the pfn->mfn table. For migrate to succeed,
--       the guest must not change which frames are used for this purpose.
--       (its not clear why it would want to change them, and we'll be OK
--       from a safety POV anyhow. */
--    p2m = xc_map_foreign_pages(xch, domid, PROT_READ,
--                               p2m_frame_list,
--                               P2M_FL_ENTRIES);
--    if ( p2m == NULL )
-+    /* Map the p2m list */
-+    if ( xc_core_arch_map_p2m(xch, dinfo, &info, shinfo, &p2m) )
-     {
-         ERROR("Couldn't map p2m table");
-         goto out;
-@@ -228,8 +196,20 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
-         goto out;
-     }
- 
--    start_info->store_mfn        = p2m[start_info->store_mfn];
--    start_info->console.domU.mfn = p2m[start_info->console.domU.mfn];
-+    store_mfn = GET_FIELD(start_info, store_mfn, dinfo->guest_width);
-+    console_mfn = GET_FIELD(start_info, console.domU.mfn, dinfo->guest_width);
-+    if ( dinfo->guest_width == 4 )
-+    {
-+        store_mfn = ((uint32_t *)p2m)[store_mfn];
-+        console_mfn = ((uint32_t *)p2m)[console_mfn];
-+    }
-+    else
-+    {
-+        store_mfn = ((uint64_t *)p2m)[store_mfn];
-+        console_mfn = ((uint64_t *)p2m)[console_mfn];
-+    }
-+    SET_FIELD(start_info, store_mfn, store_mfn, dinfo->guest_width);
-+    SET_FIELD(start_info, console.domU.mfn, console_mfn, dinfo->guest_width);
- 
-     munmap(start_info, PAGE_SIZE);
- #endif /* defined(__i386__) || defined(__x86_64__) */
-@@ -250,11 +230,7 @@ static int xc_domain_resume_any(xc_interface *xch, uint32_t domid)
- out:
- #if defined(__i386__) || defined(__x86_64__)
-     if (p2m)
--        munmap(p2m, P2M_FL_ENTRIES*PAGE_SIZE);
--    if (p2m_frame_list)
--        munmap(p2m_frame_list, P2M_FLL_ENTRIES*PAGE_SIZE);
--    if (p2m_frame_list_list)
--        munmap(p2m_frame_list_list, PAGE_SIZE);
-+        munmap(p2m, dinfo->p2m_frames * PAGE_SIZE);
-     if (shinfo)
-         munmap(shinfo, PAGE_SIZE);
- #endif
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index d05d7bb30e..6e4bc567f5 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -32,6 +32,7 @@
- 
- #define XC_WANT_COMPAT_MAP_FOREIGN_API
- #include <xenctrl.h>
-+#include <xenguest.h>
- #include <xen-tools/libs.h>
- 
- #include "mmap_stubs.h"
 -- 
 2.26.2
 
