@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37ED1C47096
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Jun 2021 10:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54335C47096
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Jun 2021 13:48:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2BF1613EF
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Jun 2021 10:13:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2BF1613EF
+	by mail.kernel.org (Postfix) with ESMTPS id 08D3D613EF
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Jun 2021 13:48:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08D3D613EF
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.137378.254545 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.137400.254583 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lppme-00029b-G0; Sun, 06 Jun 2021 10:13:32 +0000
+	id 1lpt7q-0005ew-9P; Sun, 06 Jun 2021 13:47:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 137378.254545; Sun, 06 Jun 2021 10:13:32 +0000
+Received: by outflank-mailman (output) from mailman id 137400.254583; Sun, 06 Jun 2021 13:47:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lppme-00029U-BQ; Sun, 06 Jun 2021 10:13:32 +0000
-Received: by outflank-mailman (input) for mailman id 137378;
- Sun, 06 Jun 2021 10:13:31 +0000
+	id 1lpt7q-0005eo-3X; Sun, 06 Jun 2021 13:47:38 +0000
+Received: by outflank-mailman (input) for mailman id 137400;
+ Sun, 06 Jun 2021 13:47:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lppmd-00029J-3W; Sun, 06 Jun 2021 10:13:31 +0000
+ id 1lpt7o-0005ee-Sa; Sun, 06 Jun 2021 13:47:36 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lppmc-0006h9-Th; Sun, 06 Jun 2021 10:13:30 +0000
+ id 1lpt7o-0001hA-KK; Sun, 06 Jun 2021 13:47:36 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lppmc-0004Er-NS; Sun, 06 Jun 2021 10:13:30 +0000
+ id 1lpt7o-0006EA-D3; Sun, 06 Jun 2021 13:47:36 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lppmc-0000NT-Mw; Sun, 06 Jun 2021 10:13:30 +0000
+ id 1lpt7o-0001VF-CW; Sun, 06 Jun 2021 13:47:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,16 +58,16 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=dwvYZmRNwzUclLU0YmLamOXXUkZO0gUAwk08EkiNR60=; b=r84sjftbahcLr+yncE2vuL6Tdq
-	Gs1brOFwlZlesaPeMrM9GDx5+aBqrQBOTNl4yphWTXCvlkXUrx/f9z7Ph+JCONGHjXWHXjfek7Z22
-	i2sdE/ppAbkqYRhlO4beuzLUXZE6iORfky15eHJqalPCjkiunWSLE1E2mj+QQIHwb+PA=;
+	bh=FwXnoIwZwfdB+M0DrEQOoOn+6ulzJJ9gG+EPnn5ZtLA=; b=sJ/3sZPchWU/slvyoz5ot18hEA
+	OJGIcU4HMrpDx0gR6RWou35AiMgIeek5hE18kt1zgjeWVDO0Vr+ZO0ytadDECDepBxPKKVddqJB5d
+	gNG1A/XpmHj8gnW0f9Y6Gs7sxENv2nhZ8Kb2L4vuyx0/BBNxF9WOmTDE20GrhjKPonA0=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-162432-mainreport@xen.org>
+Message-ID: <osstest-162441-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 162432: regressions - FAIL
+Subject: [xen-unstable-smoke test] 162441: regressions - FAIL
 X-Osstest-Failures:
     xen-unstable-smoke:test-amd64-amd64-libvirt:guest-saverestore:fail:regression
     xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
@@ -80,12 +80,12 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     xen=5268b2dcf7e5342c8a51ceb4bed3e7740c69f5c1
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 06 Jun 2021 10:13:30 +0000
+Date: Sun, 06 Jun 2021 13:47:36 +0000
 
-flight 162432 xen-unstable-smoke real [real]
-flight 162437 xen-unstable-smoke real-retest [real]
-http://logs.test-lab.xenproject.org/osstest/logs/162432/
-http://logs.test-lab.xenproject.org/osstest/logs/162437/
+flight 162441 xen-unstable-smoke real [real]
+flight 162444 xen-unstable-smoke real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162441/
+http://logs.test-lab.xenproject.org/osstest/logs/162444/
 
 Regressions :-(
 
@@ -106,8 +106,8 @@ baseline version:
  xen                  5268b2dcf7e5342c8a51ceb4bed3e7740c69f5c1
 
 Last test of basis   162327  2021-06-01 16:01:37 Z    4 days
-Failing since        162370  2021-06-04 17:01:35 Z    1 days   11 attempts
-Testing same since   162374  2021-06-04 20:03:35 Z    1 days   10 attempts
+Failing since        162370  2021-06-04 17:01:35 Z    1 days   12 attempts
+Testing same since   162374  2021-06-04 20:03:35 Z    1 days   11 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
