@@ -2,44 +2,52 @@ Return-Path: <SRS0=bsuK=LC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99C4FC47082
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Jun 2021 05:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75ECBC47082
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Jun 2021 05:59:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5DCA660FF4
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Jun 2021 05:39:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5DCA660FF4
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+	by mail.kernel.org (Postfix) with ESMTPS id 27CEA61184
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Jun 2021 05:59:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 27CEA61184
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.138263.255991 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.138273.256027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lqUSI-0007lB-3D; Tue, 08 Jun 2021 05:39:14 +0000
+	id 1lqUlL-00027U-7V; Tue, 08 Jun 2021 05:58:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 138263.255991; Tue, 08 Jun 2021 05:39:14 +0000
+Received: by outflank-mailman (output) from mailman id 138273.256027; Tue, 08 Jun 2021 05:58:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lqUSH-0007l4-Vy; Tue, 08 Jun 2021 05:39:13 +0000
-Received: by outflank-mailman (input) for mailman id 138263;
- Tue, 08 Jun 2021 05:39:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lqUlL-00027L-3J; Tue, 08 Jun 2021 05:58:55 +0000
+Received: by outflank-mailman (input) for mailman id 138273;
+ Tue, 08 Jun 2021 05:58:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=/91U=LC=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1lqUSG-0007ky-85
- for xen-devel@lists.xenproject.org; Tue, 08 Jun 2021 05:39:12 +0000
-Received: from verein.lst.de (unknown [213.95.11.211])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5668ddec-2d9e-43ad-a64e-da14c9cf1d62;
- Tue, 08 Jun 2021 05:39:09 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 2EEDF67373; Tue,  8 Jun 2021 07:39:06 +0200 (CEST)
+ (envelope-from <SRS0=Q7uu=LC=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1lqUlK-0001Yg-2p
+ for xen-devel@lists.xenproject.org; Tue, 08 Jun 2021 05:58:54 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ab4b8d68-4dbf-4443-ae63-7e5e7247d28f;
+ Tue, 08 Jun 2021 05:58:48 +0000 (UTC)
+Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5D71F1FD51;
+ Tue,  8 Jun 2021 05:58:47 +0000 (UTC)
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id 307B5118DD;
+ Tue,  8 Jun 2021 05:58:47 +0000 (UTC)
+Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
+ id AMWyChcHv2AQbAAALh3uQQ
+ (envelope-from <jgross@suse.com>); Tue, 08 Jun 2021 05:58:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,60 +59,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5668ddec-2d9e-43ad-a64e-da14c9cf1d62
-Date: Tue, 8 Jun 2021 07:39:05 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Chaitanya Kulkarni <Chaitanya.Kulkarni@wdc.com>
-Cc: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>,
-	Justin Sanders <justin@coraid.com>,
-	Denis Efremov <efremov@linux.com>,
-	Josef Bacik <josef@toxicpanda.com>, Tim Waugh <tim@cyberelk.net>,
-	Geoff Levand <geoff@infradead.org>,
-	Ilya Dryomov <idryomov@gmail.com>,
-	"Md. Haris Iqbal" <haris.iqbal@ionos.com>,
-	Jack Wang <jinpu.wang@ionos.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-	Mike Snitzer <snitzer@redhat.com>,
-	Maxim Levitsky <maximlevitsky@gmail.com>,
-	Alex Dubov <oakad@yahoo.com>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Heiko Carstens <hca@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	"dm-devel@redhat.com" <dm-devel@redhat.com>,
-	"linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
-	"nbd@other.debian.org" <nbd@other.debian.org>,
-	"linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
-	"ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
-	"virtualization@lists.linux-foundation.org" <virtualization@lists.linux-foundation.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"linux-mmc@vger.kernel.org" <linux-mmc@vger.kernel.org>,
-	"linux-mtd@lists.infradead.org" <linux-mtd@lists.infradead.org>,
-	"linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>
-Subject: Re: [PATCH 20/30] nullb: use blk_mq_alloc_disk
-Message-ID: <20210608053905.GA14183@lst.de>
-References: <20210602065345.355274-1-hch@lst.de> <20210602065345.355274-21-hch@lst.de> <BYAPR04MB4965DDD0F4479F5B492A30D2863C9@BYAPR04MB4965.namprd04.prod.outlook.com>
+X-Inumbo-ID: ab4b8d68-4dbf-4443-ae63-7e5e7247d28f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1623131927; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=yUf0kgQYfvnmKxevqLhHiJSctn5eVI9NLzOeej8C5tg=;
+	b=JKQDlEuS9yvNBnHdV89lkxA+VM4Er1ZUn6rc79KzTdyfBNRTAudmIwkCb9qz73GYaZ1VN2
+	RxiYH4Fe9D0fPb+5C2SFjOR3nJf53T9izV87DbSCTzYPtZ+tGNdajcdBNUlcPkpzK2Tva7
+	7av2EmdgFA/WVAvTy1ejrR+4h0gu1cY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1623131927; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=yUf0kgQYfvnmKxevqLhHiJSctn5eVI9NLzOeej8C5tg=;
+	b=JKQDlEuS9yvNBnHdV89lkxA+VM4Er1ZUn6rc79KzTdyfBNRTAudmIwkCb9qz73GYaZ1VN2
+	RxiYH4Fe9D0fPb+5C2SFjOR3nJf53T9izV87DbSCTzYPtZ+tGNdajcdBNUlcPkpzK2Tva7
+	7av2EmdgFA/WVAvTy1ejrR+4h0gu1cY=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 2/2] tools/xenstore: set open file descriptor limit for xenstored
+Date: Tue,  8 Jun 2021 07:58:39 +0200
+Message-Id: <20210608055839.10313-3-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210608055839.10313-1-jgross@suse.com>
+References: <20210608055839.10313-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <BYAPR04MB4965DDD0F4479F5B492A30D2863C9@BYAPR04MB4965.namprd04.prod.outlook.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jun 03, 2021 at 12:10:09AM +0000, Chaitanya Kulkarni wrote:
-> > diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
-> > index d8e098f1e5b5..74fb2ec63219 100644
-> > --- a/drivers/block/null_blk/main.c
-> > +++ b/drivers/block/null_blk/main.c
-> > @@ -1851,13 +1851,12 @@ static int null_add_dev(struct nullb_device *dev)
-> >  
-> >  		rv = -ENOMEM;
-> 
-> Is above initialization needed ?
+Add a configuration item for the maximum number of domains xenstored
+should support and set the limit of open file descriptors accordingly.
 
-It isn't strictly required any more.
+For HVM domains there are up to 5 socket connections per domain (2 by
+the xl daemon process, and 3 by qemu). So set the ulimit for xenstored
+to 5 * XENSTORED_MAX_DOMAINS + 100 (the "+ 100" is for some headroom,
+like logging, event channel device, etc.).
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V2:
+- set ulimit form launch script (Julien Grall)
+- split off from original patch (Julien Grall)
+---
+ tools/hotplug/Linux/init.d/sysconfig.xencommons.in | 7 +++++++
+ tools/hotplug/Linux/launch-xenstore.in             | 3 +++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/tools/hotplug/Linux/init.d/sysconfig.xencommons.in b/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
+index 00cf7f91d4..516cd97092 100644
+--- a/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
++++ b/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
+@@ -32,6 +32,13 @@
+ # Changing this requires a reboot to take effect.
+ #XENSTORED=@XENSTORED@
+ 
++## Type: integer
++## Default: 32768
++#
++# Select maximum number of domains supported by xenstored.
++# Only evaluated if XENSTORETYPE is "daemon".
++#XENSTORED_MAX_N_DOMAINS=32768
++
+ ## Type: string
+ ## Default: ""
+ #
+diff --git a/tools/hotplug/Linux/launch-xenstore.in b/tools/hotplug/Linux/launch-xenstore.in
+index 3ad71e3d08..89149f98ee 100644
+--- a/tools/hotplug/Linux/launch-xenstore.in
++++ b/tools/hotplug/Linux/launch-xenstore.in
+@@ -54,12 +54,14 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
+ 
+ [ "$XENSTORETYPE" = "daemon" ] && {
+ 	[ -z "$XENSTORED_TRACE" ] || XENSTORED_ARGS="$XENSTORED_ARGS -T @XEN_LOG_DIR@/xenstored-trace.log"
++	[ -z "$XENSTORED_MAX_N_DOMAINS" ] && XENSTORED_MAX_N_DOMAINS=32768
+ 	[ -z "$XENSTORED" ] && XENSTORED=@XENSTORED@
+ 	[ -x "$XENSTORED" ] || {
+ 		echo "No xenstored found"
+ 		exit 1
+ 	}
+ 	rm -f @XEN_RUN_DIR@/xenstored.pid
++	N_FILES=$(($XENSTORED_MAX_N_DOMAINS * 5 + 100))
+ 
+ 	echo -n Starting $XENSTORED...
+ 	$XENSTORED --pid-file @XEN_RUN_DIR@/xenstored.pid $XENSTORED_ARGS
+@@ -67,6 +69,7 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
+ 	systemd-notify --booted 2>/dev/null || timeout_xenstore $XENSTORED || exit 1
+ 	XS_PID=`cat @XEN_RUN_DIR@/xenstored.pid`
+ 	echo -500 >/proc/$XS_PID/oom_score_adj
++	prlimit --pid $XS_PID --nofile=$N_FILES
+ 
+ 	exit 0
+ }
+-- 
+2.26.2
+
 
