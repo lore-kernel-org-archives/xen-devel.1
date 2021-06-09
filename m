@@ -7,54 +7,53 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05C59C47095
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 09:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E184C47095
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 09:28:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A692A6124B
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 09:28:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A692A6124B
+	by mail.kernel.org (Postfix) with ESMTPS id C5D306120F
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 09:28:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C5D306120F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.139086.257288 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.139091.257300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lquVU-0000fa-V3; Wed, 09 Jun 2021 09:28:16 +0000
+	id 1lquW1-0001IR-8J; Wed, 09 Jun 2021 09:28:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 139086.257288; Wed, 09 Jun 2021 09:28:16 +0000
+Received: by outflank-mailman (output) from mailman id 139091.257300; Wed, 09 Jun 2021 09:28:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lquVU-0000fT-Rs; Wed, 09 Jun 2021 09:28:16 +0000
-Received: by outflank-mailman (input) for mailman id 139086;
- Wed, 09 Jun 2021 09:28:15 +0000
+	id 1lquW1-0001II-5C; Wed, 09 Jun 2021 09:28:49 +0000
+Received: by outflank-mailman (input) for mailman id 139091;
+ Wed, 09 Jun 2021 09:28:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jMcQ=LD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lquVT-0000Q5-Ix
- for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 09:28:15 +0000
-Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
+ id 1lquW0-0001Hq-4O
+ for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 09:28:48 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.109.102])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c343e9ff-0e8a-4e9f-b23b-3b508e18ced6;
- Wed, 09 Jun 2021 09:28:09 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05lp2111.outbound.protection.outlook.com [104.47.17.111])
- (Using TLS) by relay.mimecast.com with ESMTP id
- de-mta-40-1qUaJkRgN0yKtsxnkFY_YQ-1; Wed, 09 Jun 2021 11:28:07 +0200
+ id b6efa68c-0834-4d93-98d6-0b6d94b75f3b;
+ Wed, 09 Jun 2021 09:28:47 +0000 (UTC)
+Received: from EUR03-AM5-obe.outbound.protection.outlook.com
+ (mail-am5eur03lp2050.outbound.protection.outlook.com [104.47.8.50]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-29-bvIlS6VoPZi8lL9dURHfSA-1; Wed, 09 Jun 2021 11:28:45 +0200
 Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by VI1PR04MB4845.eurprd04.prod.outlook.com (2603:10a6:803:51::30)
+ by VI1PR0401MB2335.eurprd04.prod.outlook.com (2603:10a6:800:2e::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.21; Wed, 9 Jun
- 2021 09:28:05 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20; Wed, 9 Jun
+ 2021 09:28:44 +0000
 Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
  ([fe80::f06c:6f5d:34d2:1c36]) by VI1PR04MB5600.eurprd04.prod.outlook.com
  ([fe80::f06c:6f5d:34d2:1c36%5]) with mapi id 15.20.4219.022; Wed, 9 Jun 2021
- 09:28:05 +0000
+ 09:28:44 +0000
 Received: from [10.156.60.236] (37.24.206.209) by
- AM4PR0101CA0078.eurprd01.prod.exchangelabs.com (2603:10a6:200:41::46) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20 via Frontend
- Transport; Wed, 9 Jun 2021 09:28:05 +0000
+ PR3P189CA0004.EURP189.PROD.OUTLOOK.COM (2603:10a6:102:52::9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4219.20 via Frontend Transport; Wed, 9 Jun 2021 09:28:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,38 +65,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c343e9ff-0e8a-4e9f-b23b-3b508e18ced6
+X-Inumbo-ID: b6efa68c-0834-4d93-98d6-0b6d94b75f3b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1623230888;
+	t=1623230926;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=mANegH+ahRiJ8qcgWzaWhVXVsUaVgtH5xHgoOdjJtEU=;
-	b=d4vkRo+sAQabZqK6NS1OiuFmLas71JcdTbkDiFVeLDituUsgZmgdZoDQ12EbOx9vUgUQs3
-	/8Vf7TNAr8IwYVFp0cDc4zwNw2lW0FKNCKuDjhXnjzbf/6Cbc90BQrJ5V0kMbxpSXhyDwC
-	9EIyUYpFhqmh3tjUkisv6erx+8AH75Q=
-X-MC-Unique: 1qUaJkRgN0yKtsxnkFY_YQ-1
+	bh=txVdk0hVPwWU6U7vm39WYjxerByLtrHY/Ueo8afMxSA=;
+	b=gYH1iwYocVb6ckhUnMKF8HR0/TCqsX0aoYEOcE4WabtBTdwey4I8RAPjCL3dh+nAN2Hhqf
+	5GJ7CqWLCl+/vAO+bAenKBdOLFvutEe9svevQ5ksvzR1jWaa5zlaUvkjShmM8Fdvru9+Si
+	R+51xps3X1usXjtJvMjkJsX+9EXKzAE=
+X-MC-Unique: bvIlS6VoPZi8lL9dURHfSA-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cWXoUqqU1ASNj3QxKBMfrOmehvEGHmmIWefTp8hInHTtpet7ZWsjr55FiSdpKsWieUFuf9IrmXLGmekNOnxLJAQBwMpmJLe7R6TuYr+D0Whi5pTrvnnUtAeGFvzcr4ss9mEEVnz+Ig5W3RkFdtvGnh84BIUn6sJlUPdw43qCOR/OoL+8Rn+cftXfz3DOoBlIDTzWT2lDmlPKX8DqVYnQTUcvc/THz6hUisxN8SiY/IikfIwDXMgQYHlXAoaR/4Vj4IuL2Z1IuLUSJ1viL6oPh7IkPtSKvyrvhWNO21EN/ix4MODavYFKMnlSToDyTU9f+ympwppBg0uVz7aYG0CnQQ==
+ b=BalcyRP884+twz+aBkZDTFM82Kvyjxi04FtYerzBBokUf/wzgZA6KQCL7f2FOe+zkebvQ2debhJiPA/kQgVM82O+QaNFMQUbHRJ/+uskSJ2M1W/Ig8J/RTTsLIncu75x3tW5YO/sxuhGClm2q+uKAcncPwwe6kIpxVw8+6hqL3doAeeDOwfGYvKcuO+/+vI9jVgi/pihgPjdWe6hb8uJ48crTGskNgyNNeRPekCkh/nsFkbFk9QJaLAC84T95QJgTMA3x7V5SH0c+Z7j9oSArEgC0t+ixabtHB81b2EnUmYbtAg4fwVEGEjHgkXR1cTKbfAIsIzt6e8uEfV+npk8dQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mANegH+ahRiJ8qcgWzaWhVXVsUaVgtH5xHgoOdjJtEU=;
- b=nTgcUPHSxx1aujN/DSE/kSsDGv8qtbo3VxRKkif1L5GRZcKbHlrQrA8/rr1ii9TogTgdXIGqBhGEb6OvRjZdBhXa21H0UE/kGuotTKwHSdxpTPZSwCa6WQNKOpsU29Wc3h6s6uOfJAX+vLlMgKcFTxwhRV9F6NtqPW1U1MmJndh5B7Bfs28r05rXd8+JlqQd0x8C/z7TDFNVRP7oeSQwzvEpX1Rr7/wVCJSgg9Eat9AsbIHVPYuum3TyUEdj2vd/CVWKmIKr1dNkVr/obyHL7yIvLypCff+K4cq33ayoGYJ8MxCyQMmUF2ynCZZV08xYVi5tMRAoJrUg1KBE8cNHww==
+ bh=txVdk0hVPwWU6U7vm39WYjxerByLtrHY/Ueo8afMxSA=;
+ b=MkleqzeUjE2JJiIKTstSyHNy4+I0hczL9XH9MQ6j5jlyIUuGly5BJaaWOXtk30F7p6uiRbhoM5CfrS4a5nt8R50E4IkSNANdGOkFGP6Rbb3xyAPUQ8UyFwkPhAJtm4xmYEvadw5p6JX4tr8e3c6w2NJIjcH/5/P6ZvDd/SsknjGDtHc6eOlX42MDGCtV3tKq2+7rVmoRZiP1b+vW1pipIjBoGjy4AN/Z+HcNweGlj1J4iTuLQ5aBp3VNj+2p+izGclAS+HhRdQLwcaS/nOeGPMeTcfE0DptgtS/A9SCOFZ1pE8BwfmdaIO6M5GgNxwNpDT+NFgHYrHqEJiM/vubhvQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: intel.com; dkim=none (message not signed)
  header.d=none;intel.com; dmarc=none action=none header.from=suse.com;
-Subject: [PATCH 4/9] VT-d: adjust domid map updating when unmapping context
+Subject: [PATCH 5/9] VT-d: clear_fault_bits() should clear all fault bits
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Kevin Tian <kevin.tian@intel.com>
 References: <03285055-47ff-ab10-ae76-0553f28f136d@suse.com>
-Message-ID: <be453d69-dfa8-1f75-b30f-918229c73d02@suse.com>
-Date: Wed, 9 Jun 2021 11:28:03 +0200
+Message-ID: <fbb7664b-d55c-f3ce-01b2-e4e379e3780b@suse.com>
+Date: Wed, 9 Jun 2021 11:28:42 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 In-Reply-To: <03285055-47ff-ab10-ae76-0553f28f136d@suse.com>
@@ -105,166 +104,118 @@ Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [37.24.206.209]
-X-ClientProxiedBy: AM4PR0101CA0078.eurprd01.prod.exchangelabs.com
- (2603:10a6:200:41::46) To VI1PR04MB5600.eurprd04.prod.outlook.com
+X-ClientProxiedBy: PR3P189CA0004.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:102:52::9) To VI1PR04MB5600.eurprd04.prod.outlook.com
  (2603:10a6:803:e7::16)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 862e2902-a531-4e21-16a9-08d92b28e2cd
-X-MS-TrafficTypeDiagnostic: VI1PR04MB4845:
+X-MS-Office365-Filtering-Correlation-Id: 62062e91-acae-4b28-1f80-08d92b28f9e5
+X-MS-TrafficTypeDiagnostic: VI1PR0401MB2335:
 X-Microsoft-Antispam-PRVS:
-	<VI1PR04MB4845AC4BBE792F71DC25110DB3369@VI1PR04MB4845.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+	<VI1PR0401MB2335C8685908C22588889D5EB3369@VI1PR0401MB2335.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1388;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	wJB3rfqD93rkArIx6w47OGzy+pLaykv1quFMUv/tAVTjalCwGmrPSSdt8IWB5ltip+4ysLyLNkb8qSkYDnOzETYKAKSIzxcERHeUumZDUfNre5u5cXoCHfsCM3RhMzKdWLTZLL/H+a/uwok+mzWk0RhgqqyqtCagTmaYJ2a8n3AgS4QHqiAqlwO4llWZHxTAqOo7tB79r2FOB5wYn0U3SffLFc76pvOCj/XeZ/QqtbeZZJzBzZlXGEP+W/sOoYsEq6euMQU/iC9BDx6Zvrrm3GpRFm0e6TabeiU4C5PLTWz8jNm6ic3NqMx/PSfPI3Xj7nOu3FAwZcUTgk/LqnSi/soOSEFlJIchTDa2r3aKZsBzCUu+krrKUwz3KAQY1rn2Urnr5e38LckreKycWWUSUMAOtp4kEsna1vHGsI9iEZIXVCj9pAII1OuMD8zIcNRTg9MLe3q6me67Em8xpXk9tmhy/RYKLVFkVtjjWe7xwOBPbtstw9dmueRf9NeLAsalUsLbEJ6xOH7gn3YOFtiyGXgOS1sTrIq99IeovsiVkY+tRZszBF1fR3PvRg07gGglUlQvTS/rXWdVyRafrN2NAvcJcuafKgWb9gU3FoPRvfsI3K8upnaFJvfNn6QTCwzWq8auHanaaLyblLk3imZsHw==
+	6rMtZJP2nkCTW6Dkar5gUUaKr4vGyp0pIPzA3CxA40dyVW+P0c017KwvOpavyZlC83KqZVKGCcEwW6ER/nGmte7pBXD7xbHVqZldyIJasZuKUjZjKnu/PLyNCoxqTVh6ryoXWQZuuPrKkB/2QbQxUggOHFhxA0H6iGtw4KJY1+MHyO2/kAXpVWUp+Dt/uJECkTCzXtU96c7zkmAHvCJM2E//mBkQTNOTIkjfSZ6FEUJG51vyzrVgqR+Ki+6EUlluAVOgJKbGu7TOGbxEwa8rwYHY+xkIjDuA3Tu9lahcm8AONTBtsh9ZRvJwgn+ewtUMVoINyb22Qokzhe8RW+PzaU9mWB7pIEmfT3+/F7sfg3HrrYo7UzqzQSEaoh/OAuBLa3gIXG5NC4wMc6CzMD1c4XFLZwMvtgIcwSczBCfcmd7begJcZTnvrV3X1izgZ7U1V7Pms9rQXdzJXgTqQ10W6XIS7QavjlGEOTtpiEg4uSSO8FvPpA5a4T3JJZmV2wAo0Kq3b3iWtQZ6LnVTXhc/NHJ5brYG6dL95RuWb3flan3vRs276v+UEIlA1/4Ux61QBgEU/poxopnPNBgfQ1SRxjQudVImW62v6IbHXRGiBEanx+4Y2p5cs6dzvXq2EvBXO4Kiw2tNJsQWLqrnmRhbF5+0oji0V131qgLNU6LnKkVOY0jrVjltUYXRM3aFldS5
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(366004)(396003)(39860400002)(376002)(346002)(316002)(478600001)(86362001)(8676002)(38100700002)(83380400001)(16526019)(26005)(186003)(36756003)(956004)(4326008)(2616005)(8936002)(5660300002)(6486002)(31696002)(6916009)(2906002)(66946007)(54906003)(31686004)(16576012)(66556008)(66476007)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(396003)(376002)(346002)(136003)(39860400002)(6486002)(6916009)(83380400001)(31686004)(478600001)(956004)(2616005)(36756003)(2906002)(8676002)(4326008)(66946007)(8936002)(66476007)(5660300002)(38100700002)(66556008)(86362001)(16576012)(26005)(316002)(16526019)(31696002)(186003)(54906003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData:
-	=?utf-8?B?cUR5T2toMDZxZU9xVEJscW5raW1yUERyZFFSaG9rTFdscXZQYjNjOFI4ZnBa?=
- =?utf-8?B?b2JCN2trNU1KcGlud2Nxd2pmMHNUM3ZCYkdjb0NncXZZQ3lRTFlZeDFuUWMr?=
- =?utf-8?B?YXFWMjZ3MEFwaGVZWWtyZlFPQ3oyMVV0cWNqN2VrQ2FEOTVPRm11ejVHTFgx?=
- =?utf-8?B?ck1JYW9NcS9hdHN1VFdaakdKVytoUExwcjBHb2VCdTB4aXIwVFZjYXFVbGJx?=
- =?utf-8?B?anlLMU9pQXdhSU9QZG15Yzd5YWlmYWFTeWJwZUp6SlVoN002Zi9IT0tXamNO?=
- =?utf-8?B?NHpMbTJkVWtNZUVuMGxqbENHQWZSWHkyVURiM0ppeVRwRkh4UjFmbmpiM0VH?=
- =?utf-8?B?YU9JczZFSHQ5YVFWUnJQSjd5dXZSMkFOc00vdUROUFBhVStKVlFjbGxraWFI?=
- =?utf-8?B?cjlLZ3lJN0lqcVpFQjNta3lLcE1FMFZuVVVVOE9GWnZ0UzB5ZUdPMnZiQXhq?=
- =?utf-8?B?R0JobDVGamQ5cUxGK3ZTUytNOU41dW02OG8xdEZBNjFkbnB3cld3RWpZazRX?=
- =?utf-8?B?ZVh4dlpFZ0JoZXNhNmhrSHBFRnlTc2ZQcXBoTXpDZFdYUndOcDFRZUpOMjVW?=
- =?utf-8?B?R1dnZmZOd0drQ1Y3QnhhdnJOMXhyU2ozcWtsOGFMTEtCdGxUYUhzSlhiRnBL?=
- =?utf-8?B?ZE9iR3NXSDZ0RXBBQXI1eFJkVlFEdmVIcHBYOFVIdEVUeUVZVzZGU3lMK2hr?=
- =?utf-8?B?Q052UHN4dlFOYUplMkZiT3A3R1VySkNmWjUwWlNQUHVmS0NKalI3Tm9lT1Nl?=
- =?utf-8?B?bjdpdDkzbU9kYmt4M05SZFNQN2I4V2lFczN5T1VuVmo1MTAzZzhGYkFoMEtn?=
- =?utf-8?B?bkJOSzBDTlFoaEJNQmV6c2hxMXMxeTNGU0NpVWFITXlLK2tNdkVpUUNVRWFz?=
- =?utf-8?B?NXBqV0pOQStoc3JvVTNwZlVPc3BIOWlEa3RDaTVLQ0h6MEdrMDBTQTkrYTc0?=
- =?utf-8?B?Q1g0VW9vUVh3UHMrb2grMXFkQSswQnc3ZWh4ZEM1dFpLNFJCc0d1bDNUZU4y?=
- =?utf-8?B?S3VwTCtjOTNHQitGbkNHUUg1TmVrVTYwSnpHWTZiakJDRHZuWloyZVh3VU44?=
- =?utf-8?B?L3MwVnI2QTJWNFQ5cFNzZ0hwY1luMzZWQ1dlREpINTV5SnFXd3dBNTZaZ1J2?=
- =?utf-8?B?QnlvdkhHTzQ0aGttK1lnSHpoQldwRE9ySFc2QjFjRW1yN3lEWG5PbHl4dk8v?=
- =?utf-8?B?QU5wRTYyb284UkFoKzNzbVJ4T2dMVm1JRjNSWEFYUXpGQkk1UFE0V21jbmNq?=
- =?utf-8?B?VmhmQ0lodGxSWjdmOFNYMkFYb0NCV2FGaDhHYWh6KzNVb1pUUS9HMXFmUC9S?=
- =?utf-8?B?U1Flb1lTQU02b0tiaERqaHZrYy9Wb1RKZ0J1alExaS9mWUZZZ3VQZ2JPUDdu?=
- =?utf-8?B?N2YrR1pxdEM0bDd0NU1xNHhRTGNNdlk0NGtTUGZqRk9EODFsM2lod1VKaUVU?=
- =?utf-8?B?TFJtRi9aLzYzbWtzNXo5MlRrM0J5VWFuTEhZUElqbS9RMHp3bllMb2p6S1NH?=
- =?utf-8?B?QmpKWWFDa2o0aHEzVENQcEp1aXZkNTZ2cWMvTHNacUNnbHJQd2dTZ1FLUVo2?=
- =?utf-8?B?cXByWDJKRU5aK01CaitmQjhFQ3VhYVoyM2VZWUlxSnppS2RSOStrTmNNNWdV?=
- =?utf-8?B?U01KNUJjZGxTVnU1cFhPRkF0TVJJYTR2SXhPaVZoQTRuVG1iUlZabkZJTWdB?=
- =?utf-8?B?dzF3MkVDMlRTYWpiRG8yT3FrQ1BMOFFSNXhJVVZFZy9teTgwYzVNWHFaKzlz?=
- =?utf-8?Q?azTlMkIayyTESo4HNPWnuO42LshTfYoPq834VES?=
+	=?utf-8?B?c3Qrb1BabEFDQmxuZnd3TXE5UGN2Q2h4azd3RTRIck5mbzhaUFpoUnhnQkpt?=
+ =?utf-8?B?MWFYckVVUHRCbHJoL3RQbWZVa3N3NjNDSm56OFdDVEE5eDhqam9PdXdOb3Ev?=
+ =?utf-8?B?QTRlY2M1eE1Fa2FwVTJLUDBhZmZmMTI1ZUxnV3A4MzJHSDkwbEoxbkV5bVZI?=
+ =?utf-8?B?Y1pRRXhjb25YUEFEQTlLMDhqZjdiLy9xZ0FxSWJDVE5XZm1NWWlSSUxzYURn?=
+ =?utf-8?B?a2FHSXp0N2RxYlhiSXUyVGYyZEl0WnFERnM5a1BIV2Z0QS83Z05JS25PMDlU?=
+ =?utf-8?B?NnMzdVFNL1Nkblc4QWZoWWVuY0tNMU9EbllkYTZpUHk5c3o5YkVLUjZCNlh5?=
+ =?utf-8?B?ZlFkUDJZd3N2M3lMZHFYTklYRXQ3SVBiZWFxRklBQXVjWU96ZktuNmNUT3Ur?=
+ =?utf-8?B?TkFUcVVWSTVZakdmVnFmMVBUS0xjaXBRQ0l3d2lkL2krYjhTNWlFTjBRSGVz?=
+ =?utf-8?B?eEg4ZVg5ektKV0ZtYlpLUndJS2g1ZmJPT0p4RkdpWlBnWDlLb1Y0QWpjallQ?=
+ =?utf-8?B?Q2FJU0xML0hNRjAzT0VsUFg4cFFQQXlMaXU1RFNQbUp4TnBVcVorVEpNWEpF?=
+ =?utf-8?B?aUVKRkNERktNQXZuQlZQYWZTVnNHd1BQS1RTcERQTkJCWE1jV3RKM3Y4WWZR?=
+ =?utf-8?B?ZlFOSEU5NjVEdytoRWNBcGpReTB5Szl4OU5KZndMOTRKN215a1NsSTZqZGox?=
+ =?utf-8?B?UjJZVEQrbUQ3RnZDbGlFdVdXbVQvRGIwQW5kZzBmci9ObExNd1Bod0Z4WDJW?=
+ =?utf-8?B?TG5vZUk0U1NlbDROR2RCZ2FwME5TbTkyaGROUjlrWEJZem4rdjJXNytsMmti?=
+ =?utf-8?B?MDNIZmtzcFRhVEViRHM5ZVhNWW4yWHdqVW56b0pJM0ZaRGdHbXRKVERnMnNJ?=
+ =?utf-8?B?TUVVc3UrZElZbUR4NkJNWWlBY0dtWHB4QmRoWGsyQkhRZEFhdHhhVGRyWnpF?=
+ =?utf-8?B?eG1ENERtWFNKSUJWRmJmTlpKSXNGd1RkRkViRDZXbFphcUpGRHhac2c1Um8r?=
+ =?utf-8?B?WE5iM1JCVjMwM1ljT0VUdk5YaFF0T2xjVDRPMjluU0p3ZU9OdXoyYTlPTHg4?=
+ =?utf-8?B?ZDJZMXVBU0Frdlh4WlMyQ0tVRWNFZGJNbkpBNklDQzkraXFQTnFOQ09XRit4?=
+ =?utf-8?B?SFpBazVBeXRxd3B5VXQ5bUdCTjJMSTZKZWdGTW9IeDBWZDZuU201bW5TSjU5?=
+ =?utf-8?B?cXB3M2tCTXhWbFBzWS8yd1pEVWN4SzBoSzZwY0F4R0QyWlpFdmlwYnFtMCtM?=
+ =?utf-8?B?VC93UTRPaUZaMTlvTGlwaTRMSHJ6YktnZGkyMzcrODZJWGY2RkZDK2pVQUlS?=
+ =?utf-8?B?eVg3Ull3b0lidFRtRUxnYkVrQ29SallIeitMVUhHY04rdzVZMHg2Q1N6M0Nu?=
+ =?utf-8?B?MFZPdmtVNUxkWU1NSUNnTnpYU1E2SXFOd0V3ZmJoenFuLyszRjFuamRpcStt?=
+ =?utf-8?B?RVR1eklFMW9rcmtVdzZiby8yRDhJU0tRYzAvUWxmclRBMzI5OHBmZ3c2SFdl?=
+ =?utf-8?B?dndOS05SVFV4aE1CNFBiaWtDam50ZTQrcUxhdSttc3NweURZUHpqSjFZdDly?=
+ =?utf-8?B?c0xybkRXSHBVSisyWXhqNytLRlA1STQvUE1pOHM0eGt3WEtqK0k3TytENk1J?=
+ =?utf-8?B?TDhScmFQWVBSSnBjRnl1MW10L2FDN2Q4ZFRTWi9keU5pRFNRWklDbkRXRXMw?=
+ =?utf-8?B?dWVRU1gvRHo2Q1hhV1l5MHZjaGRyR1dDWXhISC84UW5KSUVsbGpxZW0zd3cw?=
+ =?utf-8?Q?ogzZYuE+X+1Ro/BuDQgQzdtguDOZ/jHPFWI3ojO?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 862e2902-a531-4e21-16a9-08d92b28e2cd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 62062e91-acae-4b28-1f80-08d92b28f9e5
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2021 09:28:05.5002
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2021 09:28:44.2184
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZSrSppcoRmVLvYDhZT3JZdzcdZdWHRVbO0wNdl3lYgbs1jMd7FwNOGnJqW9vKxzTHFnXG/+RSyHiwTv1u5gS1A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4845
+X-MS-Exchange-CrossTenant-UserPrincipalName: bhsu9ev4SkKUXklHtRkbO91+z63MR0SjE73zBq+wUtS55yaLjUnwapLKbffEGW63c3XOQEzzo9+Q78tNbdPT1w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2335
 
-When an earlier error occurred, cleaning up the domid mapping data is
-wrong, as references likely still exist. The only exception to this is
-when the actual unmapping worked, but some flush failed (supposedly
-impossible after XSA-373). The guest will get crashed in such a case
-though, so add fallback cleanup to domain destruction to cover this
-case. This in turn makes it desirable to silence the dprintk() in
-domain_iommu_domid().
+If there is any way for one fault to be left set in the recording
+registers, there's no reason there couldn't also be multiple ones. If
+PPF set set (being the OR or all F fields), simply loop over the entire
+range of fault recording registers, clearing F everywhere.
 
-Note that no error will be returned anymore when the lookup fails - in
-the common case lookup failure would already have caused
-domain_context_unmap_one() to fail, yet even from a more general
-perspective it doesn't look right to fail domain_context_unmap() in such
-a case when this was the last device, but not when any earlier unmap was
-otherwise successful.
+Since PPF is a r/o bit, also remove it from DMA_FSTS_FAULTS (arguably
+the constant's name is ambiguous as well).
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/drivers/passthrough/vtd/iommu.c
 +++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -80,9 +80,11 @@ static int domain_iommu_domid(struct dom
-         i = find_next_bit(iommu->domid_bitmap, nr_dom, i+1);
-     }
+@@ -2094,13 +2094,23 @@ static int __hwdom_init setup_hwdom_devi
  
--    dprintk(XENLOG_ERR VTDPREFIX,
--            "Cannot get valid iommu domid: domid=%d iommu->index=%d\n",
--            d->domain_id, iommu->index);
-+    if ( !d->is_dying )
-+        dprintk(XENLOG_ERR VTDPREFIX,
-+                "Cannot get valid iommu %u domid: %pd\n",
-+                iommu->index, d);
+ void clear_fault_bits(struct vtd_iommu *iommu)
+ {
+-    u64 val;
+     unsigned long flags;
+ 
+     spin_lock_irqsave(&iommu->register_lock, flags);
+-    val = dmar_readq(iommu->reg, cap_fault_reg_offset(iommu->cap) + 8);
+-    dmar_writeq(iommu->reg, cap_fault_reg_offset(iommu->cap) + 8, val);
 +
-     return -1;
- }
- 
-@@ -147,6 +149,17 @@ static int context_get_domain_id(struct
-     return domid;
- }
- 
-+static void cleanup_domid_map(struct domain *domain, struct vtd_iommu *iommu)
-+{
-+    int iommu_domid = domain_iommu_domid(domain, iommu);
-+
-+    if ( iommu_domid >= 0 )
++    if ( dmar_readl(iommu->reg, DMAR_FSTS_REG) & DMA_FSTS_PPF )
 +    {
-+        clear_bit(iommu_domid, iommu->domid_bitmap);
-+        iommu->domid_map[iommu_domid] = 0;
++        unsigned int reg = cap_fault_reg_offset(iommu->cap);
++        unsigned int end = reg + cap_num_fault_regs(iommu->cap);
++
++        do {
++           dmar_writel(iommu->reg, reg + 12, DMA_FRCD_F);
++           reg += PRIMARY_FAULT_REG_LEN;
++        } while ( reg < end );
 +    }
-+}
 +
- static void sync_cache(const void *addr, unsigned int size)
- {
-     static unsigned long clflush_size = 0;
-@@ -1724,6 +1737,9 @@ static int domain_context_unmap(struct d
-         goto out;
-     }
- 
-+    if ( ret )
-+        goto out;
+     dmar_writel(iommu->reg, DMAR_FSTS_REG, DMA_FSTS_FAULTS);
 +
-     /*
-      * if no other devices under the same iommu owned by this domain,
-      * clear iommu in iommu_bitmap and clear domain_id in domid_bitmp
-@@ -1743,19 +1759,8 @@ static int domain_context_unmap(struct d
- 
-     if ( found == 0 )
-     {
--        int iommu_domid;
--
-         clear_bit(iommu->index, &dom_iommu(domain)->arch.vtd.iommu_bitmap);
--
--        iommu_domid = domain_iommu_domid(domain, iommu);
--        if ( iommu_domid == -1 )
--        {
--            ret = -EINVAL;
--            goto out;
--        }
--
--        clear_bit(iommu_domid, iommu->domid_bitmap);
--        iommu->domid_map[iommu_domid] = 0;
-+        cleanup_domid_map(domain, iommu);
-     }
- 
- out:
-@@ -1775,6 +1780,7 @@ static void iommu_domain_teardown(struct
- {
-     struct domain_iommu *hd = dom_iommu(d);
-     struct mapped_rmrr *mrmrr, *tmp;
-+    const struct acpi_drhd_unit *drhd;
- 
-     if ( list_empty(&acpi_drhd_units) )
-         return;
-@@ -1786,6 +1792,9 @@ static void iommu_domain_teardown(struct
-     }
- 
-     ASSERT(!hd->arch.vtd.pgd_maddr);
-+
-+    for_each_drhd_unit ( drhd )
-+        cleanup_domid_map(d, drhd->iommu);
+     spin_unlock_irqrestore(&iommu->register_lock, flags);
  }
  
- static int __must_check intel_iommu_map_page(struct domain *d, dfn_t dfn,
+--- a/xen/drivers/passthrough/vtd/iommu.h
++++ b/xen/drivers/passthrough/vtd/iommu.h
+@@ -174,9 +174,8 @@
+ #define DMA_FSTS_IQE (1u << 4)
+ #define DMA_FSTS_ICE (1u << 5)
+ #define DMA_FSTS_ITE (1u << 6)
+-#define DMA_FSTS_FAULTS (DMA_FSTS_PFO | DMA_FSTS_PPF | DMA_FSTS_AFO | \
+-                         DMA_FSTS_APF | DMA_FSTS_IQE | DMA_FSTS_ICE | \
+-                         DMA_FSTS_ITE)
++#define DMA_FSTS_FAULTS (DMA_FSTS_PFO | DMA_FSTS_AFO | DMA_FSTS_APF | \
++                         DMA_FSTS_IQE | DMA_FSTS_ICE | DMA_FSTS_ITE)
+ #define dma_fsts_fault_record_index(s) (((s) >> 8) & 0xff)
+ 
+ /* FRCD_REG, 32 bits access */
 
 
