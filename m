@@ -3,58 +3,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F871C48BCF
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 12:52:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38463C48BCF
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 12:55:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D1A260FEF
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 12:52:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D1A260FEF
+	by mail.kernel.org (Postfix) with ESMTPS id D56E1601FC
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 12:55:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D56E1601FC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.139345.257696 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.139353.257708 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lqxgU-0006T1-Kq; Wed, 09 Jun 2021 12:51:50 +0000
+	id 1lqxjz-0007F8-3u; Wed, 09 Jun 2021 12:55:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 139345.257696; Wed, 09 Jun 2021 12:51:50 +0000
+Received: by outflank-mailman (output) from mailman id 139353.257708; Wed, 09 Jun 2021 12:55:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lqxgU-0006Su-H0; Wed, 09 Jun 2021 12:51:50 +0000
-Received: by outflank-mailman (input) for mailman id 139345;
- Wed, 09 Jun 2021 12:51:48 +0000
+	id 1lqxjz-0007F1-0r; Wed, 09 Jun 2021 12:55:27 +0000
+Received: by outflank-mailman (input) for mailman id 139353;
+ Wed, 09 Jun 2021 12:55:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jMcQ=LD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1lqxgS-0006Se-SI
- for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 12:51:48 +0000
+ id 1lqxjx-0007Ev-PT
+ for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 12:55:25 +0000
 Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 90b001fe-08ff-4e79-a8a2-2c7f73e42e44;
- Wed, 09 Jun 2021 12:51:43 +0000 (UTC)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04lp2053.outbound.protection.outlook.com [104.47.13.53]) (Using
+ id 3b69c10c-d5b4-4f42-9906-fa84a30d1c82;
+ Wed, 09 Jun 2021 12:55:24 +0000 (UTC)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04lp2052.outbound.protection.outlook.com [104.47.12.52]) (Using
  TLS) by relay.mimecast.com with ESMTP id
- de-mta-26-C97BAj0hPLGaNsmDosTIgQ-1; Wed, 09 Jun 2021 14:51:41 +0200
+ de-mta-18-L5tsVD-BM6WnaEzkI0BWyw-2; Wed, 09 Jun 2021 14:55:22 +0200
 Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by VE1PR04MB6477.eurprd04.prod.outlook.com (2603:10a6:803:11e::14)
+ by VI1PR0401MB2335.eurprd04.prod.outlook.com (2603:10a6:800:2e::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4195.26; Wed, 9 Jun
- 2021 12:51:39 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20; Wed, 9 Jun
+ 2021 12:55:20 +0000
 Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
  ([fe80::f06c:6f5d:34d2:1c36]) by VI1PR04MB5600.eurprd04.prod.outlook.com
  ([fe80::f06c:6f5d:34d2:1c36%5]) with mapi id 15.20.4219.022; Wed, 9 Jun 2021
- 12:51:39 +0000
+ 12:55:20 +0000
 Received: from [10.156.60.236] (37.24.206.209) by
- PR0P264CA0240.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1e::36) with Microsoft
+ FR0P281CA0010.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:15::15) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4219.21 via Frontend Transport; Wed, 9 Jun 2021 12:51:38 +0000
+ 15.20.4219.10 via Frontend Transport; Wed, 9 Jun 2021 12:55:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,217 +66,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90b001fe-08ff-4e79-a8a2-2c7f73e42e44
+X-Inumbo-ID: 3b69c10c-d5b4-4f42-9906-fa84a30d1c82
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1623243102;
+	t=1623243323;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=c6q+ufWXZpdn/YN3zKqiIiK27ddt9J3hNc6NHQMlJ7I=;
-	b=d+5vjsFdUEbCN3++UkyoDSQExQoH0iavNxsP8lChILqtvt3RDwXW0907GRoGu/4+EH6AC4
-	3epqdmvRVAldsdDjhBFVnQjKLIQFZKCuWbPcdF0CLM6x/XjCJ49Uwt6WV+kSGq1RGq//Rj
-	uB73tytjNDvKqDMDuOP2LKW23SQz56o=
-X-MC-Unique: C97BAj0hPLGaNsmDosTIgQ-1
+	bh=qmHvrMpkte4ytLDshOAZXNuIdB2Pqg6y97Gg+VlDV0o=;
+	b=DYotaHlb4Y0DBJR2kfgXH9HymLF5/3/GLk1nlekTLwuDoBesRYYc+FeRbge/rgbjyTiH8r
+	J4fFkU8fKks7vbrMvxucsSCBzxmnafn09A3HkTTequAplsXbGGvaJl2qHsSQ0lYO7zEpAY
+	Ey2Xy5+w3ZjM4nNBta8m3vN+BHDsAsk=
+X-MC-Unique: L5tsVD-BM6WnaEzkI0BWyw-2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HesYu/kJj36lS+u5Vr/6aOXcpJbrCOR0h0W/W+euBeZTHmlCSiLzUN5u5hQO1pxx4XztkVDA0JBiYUuIaQB1nUHTNGx2CjqJzLevW1nQa2ah5zND5EpNyrX3ooXTcyUBjm9WC9GqNbg5uKxWeYvZ4qxFN5wbx+t1J87K7J+i2WNb0YxtQNimYc+ri8/lWsRmTHfIkzni2zOI6ZHZ1/HGgelCrmlO0xTSSPcHvEv2eOBwbSDPsmDg53RRua4V6ActStHliulRNwNjiR6iERcpR4Ra5KkJ0bo9QD6Lj/EOBBQBsFQkIOtq/sT49wykOMC5x+VFcCnqrY8ip5/qA5JCvg==
+ b=jCBxBi4JoCt3rhBetzur0EySKgMqU5HuXJMzgHP1q7RLKJE8CWC8gOxmdjr0el4WFGHMiu/5wbsD5IM2lVrE4juAzozBAe8/nH9CmRHsjLvC4hQfq86TfRKsYWvigJkOAdeZ/IaJ4aXjuPNrGiM4kC8ogtkHFG4t2EhBTse3/aGugsQB5ejxYRGymF/jJPARRyTcZsher3SSDjinQjiRDpOvlNxjYHTtEoqm3/9RQ0ZZEbEoOQqYzHU7zIbItAMEwP9+LSoJ/hFDy35XpViZm2zeDu3esyphgNFc6z/7uFKba6/Tmki14p72p0TsSspsCIY9thoKUEWULymWborjrw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Qzf0kMRXWXR2yll+48rZM819RBLaEPRggM3EAokXNXc=;
- b=S8W49KlXwDJid7/7l6ES4nUnOA5OogTsU2crqxrY3/+i0ItE/430hVxvgmDsWPOUNFTQ8W2Hup6YUQ4TYiYB2M3JjI64JR9oG+0uXwVe9a6cyT7IJCM6jDXkM6aCn+2rxUHOT/ZMwnpTcS0+IYCGsvfj/e97R6EwFShnU27jOAZ5vrkxJyQmjDGlWkoEGgR4+44nZmjZCa6uVrqXQbSv5SvkX0/7qbkWOB+H35qMH+FQnYputbwgEXhOe9cBZSFuxYTCfIvNgnqKsuqffJKOL/qcssEYYujLDbaXGTB/ElHULs/jLDWMwXtooN6U9APAoY20aW3glo5Uy3uEqlV+3w==
+ bh=Kg6luS9joI3pnts8ELKvhBCYkGIedGlOoUecLoDH3lE=;
+ b=Ax4xIi+FuQkJUYc8sMeuJENOduTP5hk2Qv6FReTAVkYb0DPiA9FVDbCtPRDR+ETsibuJcdWnrDGhSsisIxfoPT6k7hDvJyDwnTt9Ac2xD7Il+XZap2c91UdkaWnW7lYRYm+ZxMOw7oSRj5Ow1kIaz5V4R+6lFOkoHTMOh6yM7a8QBzDp4KSkoLovgd7oiT7SnhqUDiiahTPN9x+zUUuhUH+oiV7kA/wBri5za1MRPsRyB1cILJo2mKpClmWVXnvmt5IozXHTJC3UDvjQvEofw12DuP9mISxmKi9TZp1/p7TJhvnEckv4a9d4arcAqGQfTqP6X2NKpcQ/d3k7HMJo+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
  header.d=none;lists.xenproject.org; dmarc=none action=none
  header.from=suse.com;
-Subject: Re: [PATCH 1/9] AMD/IOMMU: redo awaiting of command completion
+Subject: Re: [PATCH] x86: mark hypercall argument regs clobbering for intended
+ fall-through
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Paul Durrant <paul@xen.org>,
+CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <03285055-47ff-ab10-ae76-0553f28f136d@suse.com>
- <1bb49cce-537e-9fba-80bb-82bf502728d0@suse.com>
- <1fcb1140-b9b4-5c0b-de6c-e14d33937318@citrix.com>
- <e3283632-7621-69b8-5051-ec528c6ad8fc@suse.com>
- <4950c000-2984-a9be-d164-ecb65edffa2a@citrix.com>
+References: <bdbd506a-e6fc-a560-1be7-7424f33d413e@suse.com>
+ <b0675d1f-892a-fde5-133f-65462dd01677@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <0b38a2df-0cb2-d31d-3733-38285614d154@suse.com>
-Date: Wed, 9 Jun 2021 14:51:36 +0200
+Message-ID: <ee3a0434-c4b2-3dcb-bd26-3550b80188c4@suse.com>
+Date: Wed, 9 Jun 2021 14:55:18 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
-In-Reply-To: <4950c000-2984-a9be-d164-ecb65edffa2a@citrix.com>
+In-Reply-To: <b0675d1f-892a-fde5-133f-65462dd01677@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 X-Originating-IP: [37.24.206.209]
-X-ClientProxiedBy: PR0P264CA0240.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:100:1e::36) To VI1PR04MB5600.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0010.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:15::15) To VI1PR04MB5600.eurprd04.prod.outlook.com
  (2603:10a6:803:e7::16)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5c820426-b153-48f2-0676-08d92b4552a3
-X-MS-TrafficTypeDiagnostic: VE1PR04MB6477:
+X-MS-Office365-Filtering-Correlation-Id: b0bb65b0-4131-4bf1-a41a-08d92b45d66e
+X-MS-TrafficTypeDiagnostic: VI1PR0401MB2335:
 X-Microsoft-Antispam-PRVS:
-	<VE1PR04MB6477C16C8345EBBF59E62709B3369@VE1PR04MB6477.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+	<VI1PR0401MB233585AB65D828BA2576DB3FB3369@VI1PR0401MB2335.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	WoNANj4Mj623Ix59gPK8EAIqCnIscvj1ZGZAv404Bi/RWDpNdUeevmwwrXXqcU0wRZrCsTRVKp70W3tnzBOBSsmoOId+vkogq7S7QrKGZF28PF2Yht/B1zq19wJ1/3Sw6FubwcE7BZtl91BGav+hTaS7FGbYuodEDVNBT3U2QH54loNu4I6Wll9ehKpyHw3AxkYT/nPFojTddIgq1FVG4apj9txB7w6USud9IXc3dHp9JMjewVmUVs4oSgJNV4cIeX5iRWiGMnv8sPXWevg/aTEs0hyaIkfjGEC5IZa4ANVAAbclJzj0C02DuNYTn8ZXKJFd51H1YyNvWAwpHrNLpAExRr+ym3pQfgN8wolAESi4ao81XW1Nf6XeHr5SXs9c+HKfkbSIDpPeB3TUHQct6uVNY58kfsixcsL/UsAwfi1HG4JgXDTDb9rNj0SNmfRlkK4h7iFom8LaqxIFI1VaEzuE+NOPsDrPOFYDkv96fmGhqVDmfORVZTmLpcBdMe2h6lcjoC9rpDDPBBH1v1ZOwxh/RJ4AYoFh8aI8cwOJzmKEQLBdVOB8ZVfVfkKn7nVSOoEhTQ1dQUmgxSHoq39ypiHPA6Gp2nCZQx9bbuVA2ic2S0XEIo/JxL4Aee5YWeyIpCUYg19WcE/ZeNFE+SDej0+inRCacgl/GixyrYqVYXCdOMKLY9txe+NsJ5h5isg9
+	ydo/5ZavBOpjy09fHg4JGHlJYy0+yeX/xoWKHIAo2me8jjTBXOpc/2a5iuJ5ANhzZvDvYKvZH7LjtZhWkiVVCxwP7qHL9AxuoaAkjABAMAgAZYx+LbCRBvidQ5aFAlEq7SIlMSblHuE4g+5TdRIsJhZ2rQDvVvZ+aS1AuHmkzrjT69BHjOtS6HdxeCq56ycOqJdiy/Xhbszf10Ma17+i/PimBAt155s9+fqjiC9QQxZpytn7QindlrhkZcD5ONTy7V5I+UOLVyNqXqMRVTn7NRHt0rQTIgUKuA1w59P6c8rdio6ytyCams+IENn6l6sNecDzAA6Aai6vTDoJxMuFdIFyfqXgucou3E1+42+4b5Btw6bC3S4z1ixhrF3AeWBP1VNW6U0zsXPkHmR5YZwZclyYuZvp5jd7O83NXnbQqCAmyx0VUibVBJZGTiwefALw8JUjLqM21GaRBFbOHbb2gvH5zMCoHUw8qiBpZ4y0sCL6MZuaXlABXafIcoEMO/a8Kkb64r4glDKj1iV5X98t0AfET0xof5D5GC8opzsU9izOtIodtoV8OD1KOjyPwOUZTpg3iHcCCyQQTXFUHyi2XEH3ABp81Rc42RNUiHL/ROYFF+oq/QweO1lVilVg1HJ0w5lndvsneK7jkSJ3K8iFsa2lYnfJSPqVZLAvDaxB+KcGjOpnEFQ1Q3b05VEJ0NDu
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(136003)(346002)(39860400002)(396003)(376002)(6486002)(478600001)(956004)(8936002)(36756003)(66556008)(2616005)(8676002)(16576012)(66476007)(2906002)(5660300002)(54906003)(4326008)(53546011)(66946007)(26005)(186003)(31686004)(38100700002)(86362001)(16526019)(31696002)(6916009)(316002)(83380400001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(39860400002)(136003)(346002)(376002)(396003)(366004)(86362001)(316002)(26005)(8936002)(66946007)(16576012)(66556008)(53546011)(5660300002)(38100700002)(66476007)(54906003)(16526019)(31696002)(186003)(2906002)(31686004)(2616005)(956004)(6916009)(6486002)(83380400001)(478600001)(8676002)(4326008)(36756003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData:
-	=?us-ascii?Q?rZaIf+tIkunjH1BJRxDXGAI9Vay2KfgzTJQEkD7zl9cp8Ur4kYoG4Atvy0qZ?=
- =?us-ascii?Q?jFv8gTjlaIl8WqmWwRCUP0lBwGrhDL9xw7XIUoHhbvsQbZcN8/KHOVYtcS/L?=
- =?us-ascii?Q?j5qKJIU2X/UxLhROT2OFQjOvwIAw4eavs9/FYUpGFjeb1PIccZTijCXpvgB2?=
- =?us-ascii?Q?Ap2LtzPp+OE/TmaffjC1sWDdbk75lQxrS8f5LX061pi8p/LnMy/3N8qPxJHq?=
- =?us-ascii?Q?XGMXsq3fM1Y5DhKLiG/q9cYJruo5ponKI/xr3smTdQ70W5K1tLcoS0RvGrVr?=
- =?us-ascii?Q?1cIcrShdbIUq+/KQwnl7qAzSgw0pBbeqxfccDlZ0SpRZW8KS8Oo0XGvGtFjZ?=
- =?us-ascii?Q?cxGmTmI1dL5LhrQnlE9GfAWKRxeaW+c/EBg+lvBJT5O6BRW4PQVyMDgeXDCw?=
- =?us-ascii?Q?IChKcj9K6H0jjpGCc58BJ5aVIxRtgE6AmTdoHiDzTUzeX64+PWtGj7CtPfr5?=
- =?us-ascii?Q?PF5X44Fg2UCt2FiIix6V136C+UPbetM9VKXIztFw8rYuoXH+PgV+wKd8XSbu?=
- =?us-ascii?Q?j41fTE9k9uQH4UglgqGYWXQfVj8QSxfBU7IMbtpa6zPpvxQ13aNFmUsXcKaJ?=
- =?us-ascii?Q?3n2q1dv1SIVPF5biE2GPMTFzVsb7xCMmM7X8EArcOyFlxXht8dgl1EeEd2JL?=
- =?us-ascii?Q?I+E0BoFTAAIyHsbsEtpxvvrnIFOtf2PNsdojymQUAlD9XqRE8WMdEne+3jQc?=
- =?us-ascii?Q?o4FPISS+zpoPqsj/w2G1dIh6xOnJnKUSjJ3paxZ8Hn5Sfx51cq9VLB0J/WBw?=
- =?us-ascii?Q?z78OGHjLY04JDoxc2eZOiWRjmnOswmN0wGH7ILnLyCBLXx3d6lqLRrce88jg?=
- =?us-ascii?Q?Hh/psky0PsUD1IOV4aMvYSRwqZ0AGyp+pXN3RO7FkhZ0SNnXNn6IafoGQgnU?=
- =?us-ascii?Q?w9B89pWMdVpK7ohor1Geu+Ei6qKEGBk9s6pW+8/pVweHmodl9BtA3B8vBNB8?=
- =?us-ascii?Q?9ExTXsPPfvij8j2xeqrKQ7PtWVDGou9HAipevEm1f173QK4ZzVsLi8kD7L1B?=
- =?us-ascii?Q?7+RR32Cwbz1qAgYItP1FY7JReGLKtqZ6PCUH+qZHOp15cobTnmN/ba7PlAhK?=
- =?us-ascii?Q?bLV7Pke1iDVzt4L3n+F/F89+/y/9P9EBL5XbfwEIw1ViZvgV2KslKHKShSQt?=
- =?us-ascii?Q?qziecIykclZyL5fhJHKomw2x4kdYK4x1PMpir4zdiL1kEqFNDIh7D7NFDHEr?=
- =?us-ascii?Q?Vc5mAGmvMa3/XyhW2xTopogq7u5M01OSe5lBVdBfWXF1p9BWBwhU26pM0+hc?=
- =?us-ascii?Q?xUk0EJSrXuFLfdjimgGP7Axbzo6K2RthAdqK7lW1bhvnyZGoVOlJ8cl07aa3?=
- =?us-ascii?Q?mEJWfCW/tx5joDmfM0/UxaTD?=
+	=?us-ascii?Q?7zi0I5vRxElRMnHUZjTMzBjvEK+wi9nhKyqtitjIxZt7WiII0b5uVLLD1MQP?=
+ =?us-ascii?Q?oIGLImsZvpo81TkpYi0NsuiEW2nZHPmmhfJaGHG/TLFs7+fLxReaalX0nPTf?=
+ =?us-ascii?Q?KYKezqXMWkMHpdvQbt1piCTf1W+ImsXF8A5ftfae4YqcnavVo8h1bl4uH0YZ?=
+ =?us-ascii?Q?K72OMVU/HV3dx/K60EapgruLe/Z27TEf4ItDrEgnGeLb94E58mFam4A1U6mv?=
+ =?us-ascii?Q?MIvNvwzY4yfvxvHMPtuVNWTbE0tkOwP8c9rSAKI8JD2wiC7Vtzk/yhRxOn/a?=
+ =?us-ascii?Q?3r7iCHkngAmJMXOhDIFou9FYiK1U28NLCMc2GbfvNUroi7/wCFaQD8MjtQLh?=
+ =?us-ascii?Q?HlF9iRQFpxErbqdHHOjYUFIfPgBcR06fAaWuC6UDrxYyu1t9n4n/KsTx5CT1?=
+ =?us-ascii?Q?OWGIKNC6oorYY3uHX/VEdFjfFt9J9Ru9ZLT18/ID5HMcFiib8eeJriWarZri?=
+ =?us-ascii?Q?WkcihCWR7aBaX4dWnYMB4DKYHHoMe/S2vzCJh8lSrb6tH13oBlK7TNAlg8vS?=
+ =?us-ascii?Q?WHkPQVGetuRi8QJZG/FjCjoQGE/wV8FrD5XAEOuFPX78HHscl8bFXdq44VUY?=
+ =?us-ascii?Q?ekX5BRfisZRJFXRw8J/XaIRT0WvekAzyxXYRe0p+PhQ/YjHi54hlXZGcGLms?=
+ =?us-ascii?Q?j08FDiy1skR+KlJNSHCm6xtkkpnrPKmWp4POonVT16SnbBxVm5NzmEN2H4Mj?=
+ =?us-ascii?Q?NJ4plDvKQUPTXm237zdZKUS0GLeD4wYbU1LO2fpCNBa/XNvkejbRmrAmiXoy?=
+ =?us-ascii?Q?sfmX7aYkTAI+p0+1ZSmT4K5YU+/G2JJrDmktzF+f0EcEQFdzA2Q+3lCvhyCK?=
+ =?us-ascii?Q?eUbDU20mLPMJLa5SkpZOmS6574aslTkkiw8WLPJX+XiMOvrQ3oku0k1wk6yn?=
+ =?us-ascii?Q?TmYoowwVWHpPM8JJT1FV4LBiAv/mVuPg3ueNrd87OVd6xFGJ41S4pMKlY3te?=
+ =?us-ascii?Q?UWWNtSXoD76imM730nVuUERRidVV2VPHXXk08sw4Bvx2iEAzpC7ZeZEK2CNk?=
+ =?us-ascii?Q?RyEXk5bSruzUGQbWuyWj5YXZfwAmNO1rNVGbaLULGqT2k6yk63ebra0M7RtW?=
+ =?us-ascii?Q?ywwo6dUZkakta/T29SNQG/P0uKjYZTlHYxVOrPs9KwB3aHDjhiNPxNb0AsS8?=
+ =?us-ascii?Q?cb8HnFq/8zG2prSOIaJFdDnNag6gAqfJfme26eH2b7JA+qY+KW7YvP9OcG89?=
+ =?us-ascii?Q?jYZXruJMNUHDaGgN+IplZB2DHN3JwfKeSU+XDoiHi6T+K9BJ5rc/nDpX7wiz?=
+ =?us-ascii?Q?RUDU5U89xNUn+NHCcRYNUia8NSH9u5gmDxQyR8o0C7FP08wqpWwb4EBuzLOR?=
+ =?us-ascii?Q?t5VGSR5ZPlpVP9rzq3KBOm6O?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c820426-b153-48f2-0676-08d92b4552a3
+X-MS-Exchange-CrossTenant-Network-Message-Id: b0bb65b0-4131-4bf1-a41a-08d92b45d66e
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2021 12:51:38.9958
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2021 12:55:20.1137
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OJhOwochN+1gQBmXrnCI+cgF2UoE6v2XDFbvoc60yGCPnfb/UeZKdbsalwDhrlstQQOEhbqKmvTyuxMT29gubg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB6477
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9GKdfhjxuK5wI74Cyi/LfIcsGB6+iDUeZFQmkasSs2hg49qnph0Vdv0si/+9KLcGfgmO4AXzGBudN2TwYpkgzg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2335
 
-On 09.06.2021 14:33, Andrew Cooper wrote:
-> On 09/06/2021 13:08, Jan Beulich wrote:
->> On 09.06.2021 12:36, Andrew Cooper wrote:
->>> On 09/06/2021 10:26, Jan Beulich wrote:
->>>> @@ -49,28 +52,31 @@ static void send_iommu_command(struct am
->>>>  static void flush_command_buffer(struct amd_iommu *iommu,
->>>>                                   unsigned int timeout_base)
->>>>  {
->>>> +    static DEFINE_PER_CPU(uint64_t, poll_slot);
->>>> +    uint64_t *this_poll_slot =3D &this_cpu(poll_slot);
->>>> +    paddr_t addr =3D virt_to_maddr(this_poll_slot);
->>>>      uint32_t cmd[4];
->>>>      s_time_t start, timeout;
->>>>      static unsigned int __read_mostly threshold =3D 1;
->>>> =20
->>>> -    /* RW1C 'ComWaitInt' in status register */
->>>> -    writel(IOMMU_STATUS_COMP_WAIT_INT,
->>>> -           iommu->mmio_base + IOMMU_STATUS_MMIO_OFFSET);
->>>> -
->>>> -    /* send an empty COMPLETION_WAIT command to flush command buffer =
-*/
->>>> -    cmd[3] =3D cmd[2] =3D 0;
->>>> -    set_field_in_reg_u32(IOMMU_CMD_COMPLETION_WAIT, 0,
->>>> +    ACCESS_ONCE(*this_poll_slot) =3D CMD_COMPLETION_INIT;
->>>> +
->>>> +    /* send a COMPLETION_WAIT command to flush command buffer */
->>>> +    cmd[0] =3D addr;
->>>> +    set_field_in_reg_u32(IOMMU_CONTROL_ENABLED, cmd[0],
->>>> +                         IOMMU_COMP_WAIT_S_FLAG_MASK,
->>>> +                         IOMMU_COMP_WAIT_S_FLAG_SHIFT, &cmd[0]);
->>> set_field_in_reg_u32() is a disaster of a function - both in terms of
->>> semantics, and code gen - and needs to be purged from the code.
->> Long ago I had an item on my todo list to get this cleaned up. But
->> it never really having made it up high enough, I dropped it at
->> some point, in the hope that we'd manage to get this sorted while
->> re-writing code step by step.
+On 09.06.2021 14:49, Andrew Cooper wrote:
+> On 09/06/2021 11:34, Jan Beulich wrote:
+>> The CIDs below are all for the PV side of things, but also take care of
+>> the HVM side.
 >>
->>> It is a shame we don't have a real struct for objects in the command
->>> buffer, but in lieu of that, this is just
->>>
->>> =C2=A0=C2=A0=C2=A0 cmd[0] =3D addr | IOMMU_COMP_WAIT_S_FLAG_MASK;
->>>
->>> which is the direction that previous cleanup has gone.
->> I don't think I can spot a single instance of such.
+>> Coverity-ID: 1485896, 1485901, 1485906, 1485910, 1485911,=20
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> Let's see whether Coverity actually understands the (relatively) new
+>> pseudo-keyword.
 >=20
-> It's actually the other way around, for the emulation logic (which isn't
-> used in practice).
+> This is exceedingly disappointing.=C2=A0 Coverity used to have the only
+> sensible rule for not causing spurious fallthrough warnings, but this
+> has apparently regressed.
 >=20
-> drivers/passthrough/amd/iommu_guest.c:348
-> =C2=A0=C2=A0=C2=A0 i =3D cmd->data[0] & IOMMU_COMP_WAIT_I_FLAG_MASK;
+> Coverity works on the AST, so ought to be after GCC has interpreted
+> __attribute__((__fallthrough__)) if applicable.
 >=20
->>  Some work was
->> done to introduce (mainly bitfield) structs, but this surely goes
->> too far for the change at hand. I can spot two instances using
->> MASK_INSR(), so I can see two consistent ways of doing what you
->> ask for:
->>
->>     cmd[0] =3D addr | MASK_INSR(IOMMU_CONTROL_ENABLED,
->>                               IOMMU_COMP_WAIT_S_FLAG_MASK);
->>
->> keeping the name as *_MASK (and I'd be open to replace
->> IOMMU_CONTROL_ENABLED by true) or
->>
->>     cmd[0] =3D addr | IOMMU_COMP_WAIT_S_FLAG;
->>
->> i.e. dropping _MASK (but requiring adjustments elsewhere in the
->> code). Please let me know which one you'd prefer.
+> However, I doubt it will work in the fallback case, because #define
+> fallthrough looks dubious.=C2=A0 To trigger the older logic, the /*
+> fallthrough */ comment needs to be the final thing before the next case
+> label, and it isn't with the added semicolon.
 >=20
-> TBH, I'd suggest just using
->=20
-> =C2=A0=C2=A0=C2=A0 cmd[0] =3D addr | IOMMU_COMP_WAIT_S_FLAG_MASK;
->=20
-> for now.=C2=A0 The constant is correct - its just the name which is wonky=
-.=C2=A0
+> Given that this pseudo-keyword is restricted to the SMMU driver for now,
+> we don't actually know if Coverity likes it or not.
 
-But my previous reply was to make clear that I don't agree with
-ORing in a *_MASK into a (to become) live value. *_MASK should be
-used exclusively for masking, not as actual field values. Any
-code violating this should imo be looked at with suspicion, as to
-possibly having used the wrong value altogether.
-
-> This in particular will reduce the code churn for ...
->=20
->>> There are no current users of IOMMU_COMP_WAIT_S_FLAG_SHIFT, and ...
->>>
->>>> +    cmd[1] =3D addr >> 32;
->>>> +    set_field_in_reg_u32(IOMMU_CMD_COMPLETION_WAIT, cmd[1],
->>>>                           IOMMU_CMD_OPCODE_MASK,
->>>>                           IOMMU_CMD_OPCODE_SHIFT, &cmd[1]);
->>>> -    set_field_in_reg_u32(IOMMU_CONTROL_ENABLED, 0,
->>>> -                         IOMMU_COMP_WAIT_I_FLAG_MASK,
->>>> -                         IOMMU_COMP_WAIT_I_FLAG_SHIFT, &cmd[0]);
->>> ... this drops the final use of IOMMU_COMP_WAIT_I_FLAG_SHIFT, so both
->>> should be dropped.
->> Well, I can surely do so, but like this entire request of yours this
->> feels like scope creep - there was no intention here to do any
->> unrelated cleanup. And if I remove _S_ and _I_, then surely _F_
->> wants dropping as well, while IOMMU_COMP_WAIT_ADDR_*_SHIFT have a
->> use each in iommu_guest.c and hence need to stay for now.
->=20
-> ... this, which I'm perfectly happy leaving to a subsequent change.=C2=A0
-> (I'll even do it, if you're too busy right now).
->=20
-> What I am mainly concerned with is not using this opportunity to remove
-> uses of set_field_in_reg_u32().
-
-Well, when I put the patch together I was thinking of two "proper"
-options - keeping the use of set_field_in_reg_u32(), or replacing it
-by (bitfield) struct uses. The latter would be a far larger change,
-and should imo be one on its own (i.e. no functional change) anyway.
-Hence I went the former route. Since you vehemently ask for it, I'll
-go the middle route you suggest, but this only sets us up for re-
-writing this piece of code another time once we introduce proper
-structs.
+When it was introduced, I did specifically ask whether it pleases
+Coverity. I was told it would, and I had no proof to the contrary, so
+I had to accept what I was told. My asking at the time was precisely
+to avoid having to have two forms of annotation on every single
+legitimate / intentional fall-through case.
 
 Jan
 
