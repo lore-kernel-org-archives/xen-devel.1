@@ -2,52 +2,52 @@ Return-Path: <SRS0=5TPE=LD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0498FC49EBD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83426C4BA00
 	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 11:20:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A171961364
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 11:20:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A171961364
+	by mail.kernel.org (Postfix) with ESMTPS id 2D1FB613B8
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 11:20:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D1FB613B8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.139209.257504 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.139207.257480 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lqwFy-0004Ai-TD; Wed, 09 Jun 2021 11:20:22 +0000
+	id 1lqwFx-0003dw-7V; Wed, 09 Jun 2021 11:20:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 139209.257504; Wed, 09 Jun 2021 11:20:22 +0000
+Received: by outflank-mailman (output) from mailman id 139207.257480; Wed, 09 Jun 2021 11:20:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lqwFy-0004Ab-Pl; Wed, 09 Jun 2021 11:20:22 +0000
-Received: by outflank-mailman (input) for mailman id 139209;
- Wed, 09 Jun 2021 11:20:22 +0000
+	id 1lqwFx-0003dp-4E; Wed, 09 Jun 2021 11:20:21 +0000
+Received: by outflank-mailman (input) for mailman id 139207;
+ Wed, 09 Jun 2021 11:20:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FYhx=LD=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
- id 1lqwFy-0003db-87
- for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 11:20:22 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ id 1lqwFv-0003db-4M
+ for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 11:20:19 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 321ebd2a-197a-418a-9d12-bf01fe858eac;
- Wed, 09 Jun 2021 11:20:18 +0000 (UTC)
+ id c94584d9-69f0-4241-9ee9-02f938e33b3c;
+ Wed, 09 Jun 2021 11:20:15 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1EEE2219DE;
- Wed,  9 Jun 2021 11:20:18 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 322EA1FD2A;
+ Wed,  9 Jun 2021 11:20:14 +0000 (UTC)
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 77538118DD;
- Wed,  9 Jun 2021 11:20:17 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id 8991F118DD;
+ Wed,  9 Jun 2021 11:20:13 +0000 (UTC)
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id 4KVTHPGjwGBTUgAALh3uQQ
- (envelope-from <tzimmermann@suse.de>); Wed, 09 Jun 2021 11:20:17 +0000
+ id Pn27IO2jwGBTUgAALh3uQQ
+ (envelope-from <tzimmermann@suse.de>); Wed, 09 Jun 2021 11:20:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,43 +59,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 321ebd2a-197a-418a-9d12-bf01fe858eac
+X-Inumbo-ID: c94584d9-69f0-4241-9ee9-02f938e33b3c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1623237618; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
-	b=Qqr+wxRHDfcailoytXEx2oS2lcd/30JrzOhkpalX061VmVUSrdLwmnhSN0MtbG7SF3Lswx
-	sQnQ8cPp3QB4PF/l8crVWeS09RmiLZkfgwuhMYtcPRnrUahhNxSrscRyW90luzSwv3G0CF
-	7A0GUIi66rqUX0OkNYcpsZIV/8EwyQU=
+	t=1623237614; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=oCiBA5IQR9wf4+Cc+r3nE+xIhszdcMtCPYXz7tk1DUc=;
+	b=fY/lBPn1RzheTsgcxOOcUlu2A6QxXJzVzaZKYGY8dQ/N9dkPZxAh+IzMlWy3Mdw4YcifeB
+	euR+HK45GJ3f0u+/7nmbJqJDLXGEJmIB2cOWMU93FBBin5A1MqrE27Y9jBklc67vNLz8q3
+	MEB05kirgOr7hJDXocRIMCqdq+d45FY=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1623237618;
+	s=susede2_ed25519; t=1623237614;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
-	b=EYZQ1fZ4GiUePdUKfwvu3c7uANqrcaYHVRwXY+xLr2rs0MZBPp9J/4r/U+gB27YIyBmPIF
-	iyt7y2F2VM4VApDw==
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=oCiBA5IQR9wf4+Cc+r3nE+xIhszdcMtCPYXz7tk1DUc=;
+	b=qtPzutLGd6X37XBCAvAZ4AuMX1bEEdUc0wqN5VeNSoa0OrIM4LVgceME8x2WEfyyR258wQ
+	Jhvg0YtWBnitxsBg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1623237618; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
-	b=Qqr+wxRHDfcailoytXEx2oS2lcd/30JrzOhkpalX061VmVUSrdLwmnhSN0MtbG7SF3Lswx
-	sQnQ8cPp3QB4PF/l8crVWeS09RmiLZkfgwuhMYtcPRnrUahhNxSrscRyW90luzSwv3G0CF
-	7A0GUIi66rqUX0OkNYcpsZIV/8EwyQU=
+	t=1623237614; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=oCiBA5IQR9wf4+Cc+r3nE+xIhszdcMtCPYXz7tk1DUc=;
+	b=fY/lBPn1RzheTsgcxOOcUlu2A6QxXJzVzaZKYGY8dQ/N9dkPZxAh+IzMlWy3Mdw4YcifeB
+	euR+HK45GJ3f0u+/7nmbJqJDLXGEJmIB2cOWMU93FBBin5A1MqrE27Y9jBklc67vNLz8q3
+	MEB05kirgOr7hJDXocRIMCqdq+d45FY=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1623237618;
+	s=susede2_ed25519; t=1623237614;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
-	b=EYZQ1fZ4GiUePdUKfwvu3c7uANqrcaYHVRwXY+xLr2rs0MZBPp9J/4r/U+gB27YIyBmPIF
-	iyt7y2F2VM4VApDw==
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=oCiBA5IQR9wf4+Cc+r3nE+xIhszdcMtCPYXz7tk1DUc=;
+	b=qtPzutLGd6X37XBCAvAZ4AuMX1bEEdUc0wqN5VeNSoa0OrIM4LVgceME8x2WEfyyR258wQ
+	Jhvg0YtWBnitxsBg==
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch,
 	mripard@kernel.org,
@@ -134,110 +126,73 @@ Cc: dri-devel@lists.freedesktop.org,
 	linux-media@vger.kernel.org,
 	linaro-mm-sig@lists.linaro.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 6/9] drm/vgem: Implement mmap as GEM object function
-Date: Wed,  9 Jun 2021 13:20:09 +0200
-Message-Id: <20210609112012.10019-7-tzimmermann@suse.de>
+Subject: [PATCH 0/9] drm: Implement gem_prime_mmap with drm_gem_prime_mmap()
+Date: Wed,  9 Jun 2021 13:20:03 +0200
+Message-Id: <20210609112012.10019-1-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210609112012.10019-1-tzimmermann@suse.de>
-References: <20210609112012.10019-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Moving the driver-specific mmap code into a GEM object function allows
-for using DRM helpers for various mmap callbacks.
+Replace all remaining implementations of struct drm_driver.gem_prime_mmap
+with use drm_gem_prime_mmap(). For each affected driver, put the mmap code
+into struct drm_gem_object_funcs.mmap. With the latter change in place,
+create struct file_operations via DEFINE_DRM_GEM_FOPS().
 
-The respective vgem functions are being removed. The file_operations
-structure vgem_driver_fops is now being created by the helper macro
-DEFINE_DRM_GEM_FOPS().
+As next steps, remaining drivers can be converted to use drm_gem_prime_mmap()
+and drm_gem_mmap() (e.g., Tegra). The default mmap code in drm_gem_prime_mmap()
+can be pushed into affected drivers or a helper function. The gem_prime_mmap
+hook can probably be removed at some point.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/vgem/vgem_drv.c | 46 ++++-----------------------------
- 1 file changed, 5 insertions(+), 41 deletions(-)
+Testing is welcome. I don't have all the necessary hardware.
 
-diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_drv.c
-index bf38a7e319d1..df634aa52638 100644
---- a/drivers/gpu/drm/vgem/vgem_drv.c
-+++ b/drivers/gpu/drm/vgem/vgem_drv.c
-@@ -239,32 +239,7 @@ static struct drm_ioctl_desc vgem_ioctls[] = {
- 	DRM_IOCTL_DEF_DRV(VGEM_FENCE_SIGNAL, vgem_fence_signal_ioctl, DRM_RENDER_ALLOW),
- };
- 
--static int vgem_mmap(struct file *filp, struct vm_area_struct *vma)
--{
--	unsigned long flags = vma->vm_flags;
--	int ret;
--
--	ret = drm_gem_mmap(filp, vma);
--	if (ret)
--		return ret;
--
--	/* Keep the WC mmaping set by drm_gem_mmap() but our pages
--	 * are ordinary and not special.
--	 */
--	vma->vm_flags = flags | VM_DONTEXPAND | VM_DONTDUMP;
--	return 0;
--}
--
--static const struct file_operations vgem_driver_fops = {
--	.owner		= THIS_MODULE,
--	.open		= drm_open,
--	.mmap		= vgem_mmap,
--	.poll		= drm_poll,
--	.read		= drm_read,
--	.unlocked_ioctl = drm_ioctl,
--	.compat_ioctl	= drm_compat_ioctl,
--	.release	= drm_release,
--};
-+DEFINE_DRM_GEM_FOPS(vgem_driver_fops);
- 
- static struct page **vgem_pin_pages(struct drm_vgem_gem_object *bo)
- {
-@@ -387,24 +362,12 @@ static void vgem_prime_vunmap(struct drm_gem_object *obj, struct dma_buf_map *ma
- 	vgem_unpin_pages(bo);
- }
- 
--static int vgem_prime_mmap(struct drm_gem_object *obj,
--			   struct vm_area_struct *vma)
-+static int vgem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
- {
--	int ret;
--
--	if (obj->size < vma->vm_end - vma->vm_start)
--		return -EINVAL;
--
--	if (!obj->filp)
--		return -ENODEV;
--
--	ret = call_mmap(obj->filp, vma);
--	if (ret)
--		return ret;
--
- 	vma_set_file(vma, obj->filp);
- 	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
- 	vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
-+	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
- 
- 	return 0;
- }
-@@ -416,6 +379,7 @@ static const struct drm_gem_object_funcs vgem_gem_object_funcs = {
- 	.get_sg_table = vgem_prime_get_sg_table,
- 	.vmap = vgem_prime_vmap,
- 	.vunmap = vgem_prime_vunmap,
-+	.mmap = vgem_prime_mmap,
- 	.vm_ops = &vgem_gem_vm_ops,
- };
- 
-@@ -433,7 +397,7 @@ static const struct drm_driver vgem_driver = {
- 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
- 	.gem_prime_import = vgem_prime_import,
- 	.gem_prime_import_sg_table = vgem_prime_import_sg_table,
--	.gem_prime_mmap = vgem_prime_mmap,
-+	.gem_prime_mmap = drm_gem_prime_mmap,
- 
- 	.name	= DRIVER_NAME,
- 	.desc	= DRIVER_DESC,
--- 
+Thomas Zimmermann (9):
+  drm/etnaviv: Implement mmap as GEM object function
+  drm/exynox: Implement mmap as GEM object function
+  drm/mediatek: Implement mmap as GEM object function
+  drm/msm: Implement mmap as GEM object function
+  drm/qxl: Remove empty qxl_gem_prime_mmap()
+  drm/vgem: Implement mmap as GEM object function
+  drm/xen: Implement mmap as GEM object function
+  drm/rockchip: Implement mmap as GEM object function
+  drm: Update documentation and TODO of gem_prime_mmap hook
+
+ Documentation/gpu/todo.rst                    |  11 --
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c         |  14 +--
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h         |   3 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c         |  18 +--
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |  13 ---
+ drivers/gpu/drm/exynos/exynos_drm_drv.c       |  13 +--
+ drivers/gpu/drm/exynos/exynos_drm_fbdev.c     |  20 +---
+ drivers/gpu/drm/exynos/exynos_drm_gem.c       |  43 ++-----
+ drivers/gpu/drm/exynos/exynos_drm_gem.h       |   5 -
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c        |  13 +--
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c        |  44 ++-----
+ drivers/gpu/drm/mediatek/mtk_drm_gem.h        |   3 -
+ drivers/gpu/drm/msm/msm_drv.c                 |  14 +--
+ drivers/gpu/drm/msm/msm_drv.h                 |   1 -
+ drivers/gpu/drm/msm/msm_fbdev.c               |  10 +-
+ drivers/gpu/drm/msm/msm_gem.c                 |  67 +++++------
+ drivers/gpu/drm/msm/msm_gem.h                 |   3 -
+ drivers/gpu/drm/msm/msm_gem_prime.c           |  11 --
+ drivers/gpu/drm/qxl/qxl_drv.c                 |   1 -
+ drivers/gpu/drm/qxl/qxl_drv.h                 |   2 -
+ drivers/gpu/drm/qxl/qxl_prime.c               |   6 -
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |  13 +--
+ drivers/gpu/drm/rockchip/rockchip_drm_fbdev.c |   3 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |  44 ++-----
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h   |   7 --
+ drivers/gpu/drm/vgem/vgem_drv.c               |  46 +-------
+ drivers/gpu/drm/xen/xen_drm_front.c           |  16 +--
+ drivers/gpu/drm/xen/xen_drm_front_gem.c       | 108 +++++++-----------
+ drivers/gpu/drm/xen/xen_drm_front_gem.h       |   7 --
+ include/drm/drm_drv.h                         |  11 +-
+ 30 files changed, 136 insertions(+), 434 deletions(-)
+
+
+base-commit: 70e4d80795934312a3853a4f4f49445ce6db1271
+prerequisite-patch-id: c2b2f08f0eccc9f5df0c0da49fa1d36267deb11d
+prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
+--
 2.31.1
 
 
