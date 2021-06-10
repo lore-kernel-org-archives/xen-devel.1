@@ -2,49 +2,48 @@ Return-Path: <SRS0=J2zn=LE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B09AC47094
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F581C47094
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:16:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DDE25613D9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:13:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DDE25613D9
+	by mail.kernel.org (Postfix) with ESMTPS id 5B697613D9
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:16:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B697613D9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.139917.258610 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.139923.258621 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lrLRN-0004PN-QI; Thu, 10 Jun 2021 14:13:49 +0000
+	id 1lrLTX-00053y-5Z; Thu, 10 Jun 2021 14:16:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 139917.258610; Thu, 10 Jun 2021 14:13:49 +0000
+Received: by outflank-mailman (output) from mailman id 139923.258621; Thu, 10 Jun 2021 14:16:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lrLRN-0004PG-MU; Thu, 10 Jun 2021 14:13:49 +0000
-Received: by outflank-mailman (input) for mailman id 139917;
- Thu, 10 Jun 2021 14:13:49 +0000
+	id 1lrLTX-00053r-2X; Thu, 10 Jun 2021 14:16:03 +0000
+Received: by outflank-mailman (input) for mailman id 139923;
+ Thu, 10 Jun 2021 14:16:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Cwq8=LE=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1lrLRM-0004P7-Tg
- for xen-devel@lists.xenproject.org; Thu, 10 Jun 2021 14:13:48 +0000
-Received: from mail-pf1-x42d.google.com (unknown [2607:f8b0:4864:20::42d])
+ id 1lrLTV-00053i-No
+ for xen-devel@lists.xenproject.org; Thu, 10 Jun 2021 14:16:01 +0000
+Received: from mail-pg1-x536.google.com (unknown [2607:f8b0:4864:20::536])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 71edec09-84c6-4be8-85ac-946ad95a7d8e;
- Thu, 10 Jun 2021 14:13:48 +0000 (UTC)
-Received: by mail-pf1-x42d.google.com with SMTP id k15so1731675pfp.6
- for <xen-devel@lists.xenproject.org>; Thu, 10 Jun 2021 07:13:48 -0700 (PDT)
+ id b0040e02-451b-4e69-a615-a25f5f320783;
+ Thu, 10 Jun 2021 14:16:01 +0000 (UTC)
+Received: by mail-pg1-x536.google.com with SMTP id e22so22678353pgv.10
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Jun 2021 07:16:01 -0700 (PDT)
 Received: from ?IPv6:2404:f801:0:5:8000::4b1? ([2404:f801:9000:1a:efea::4b1])
  by smtp.gmail.com with ESMTPSA id
- h12sm3035510pgn.54.2021.06.10.07.13.34
+ f6sm2629239pfb.28.2021.06.10.07.15.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Jun 2021 07:13:46 -0700 (PDT)
+ Thu, 10 Jun 2021 07:15:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,36 +55,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 71edec09-84c6-4be8-85ac-946ad95a7d8e
+X-Inumbo-ID: b0040e02-451b-4e69-a615-a25f5f320783
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=uVvPHfIwriaeCqaGS4SWF2JfjGEeCNMTseqgcHKL0PY=;
-        b=ot0iffXK2/znAlvDWUx0DvEHPs9Hu42jQhvk3aHGx+T2NhWFpnwKA1vIkYGIy+cgYb
-         LxEbfgCrbULtFd7nVuJsfQAH+IMqZIL2R35dwiAl9sJZz1GKTswJr7viHRHzd8ec6z9L
-         cpBdHTN6hAjfnZCW/MdapYStRdZ2pSAmS2zSYAlKj+wqby1v1sKfa0Z3IJGU1Q2S8YcP
-         HqfC/opPsY22Z36tiTPSUNG8yLuAg9Bq77HzKuJDM2mT1cANyfp9SOlXy6wpSwett2B6
-         yucBibCk75zJ2NzA/8lMhfuq11vR41IllnpzmIyKLTH/P3wGLWQCIUfWmxQ4zGD/3HTx
-         tacA==
+        bh=Z06P6xfCZfBoLzLGshR2eXD11imPLnqUoouenixaYFw=;
+        b=APiM6yjkYAKij1RjMOo9hW4vLGKN36RaoDPpCZzJkgCIWIc5bNnUPRKfG+5uelh6im
+         ZwmwB/K2y2Z+UnBHFw6Ok84giPqAWtESqJu7RLH3vi1s6Wmdl12YoCN5FEDC7FxVL8S3
+         xBQJ/O0hMPtGsBtUowS8mRCmJHg4qC1j99bvIODTP9XmlSIGPDf9QrQ49kI/Ur72auK8
+         XR3tyDiPInVQQ5Wc5igpAdJ+WpQK2Nh7QdvgHpHFXPPDhb1Z06nj6QGPTXJjDDNCczPn
+         w4fJFgDDWFpzxBgC5Dh+DND5ldxosu/Bv7P7MHz+0qfPe5TrP3iyAg6tpfZqrx3I67eW
+         JLfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=uVvPHfIwriaeCqaGS4SWF2JfjGEeCNMTseqgcHKL0PY=;
-        b=iob7/ic0gVDR6PsMSqFr3mZZqe+mzcYj+nuJzEKn8N3n75udjDk3HLlXGnETA548XQ
-         9LfqRKbvkLYe+SFLMHVphQE6edexwYwjbr4K5+rLg39KF1UfrXfRL8yqkl4hsPXSO8HO
-         /smBhWiqlxAIX8a3ZFBrffH5L6c3yKz4YfTtt9qjkaSf0BjDZM5f3PE8VTt85ZmPStSU
-         h8m9Xfq0ayg9dL3CxP76IXW0HJEugLXWljN3ynim+Mf4urb2TfFymOryarM+tBBZZO6L
-         7WIcv7s6tZVF2uNiQJl7OEYVqXIpNQQLtxa1mwoLSLJqBtDzOsGjMlRlxI/bXtKLQG66
-         wklw==
-X-Gm-Message-State: AOAM531MKnzjyqlPOPHTRVpXcpleiAs4DjjIhi3rnr6q4kxEgExngvJp
-	PFTUGlc87Z1AfmamJEjpgOU=
-X-Google-Smtp-Source: ABdhPJz4FYgWX1XRVYnd1fLznm93BCcmg2/a4wkuQ7x2l90mgEwjIr25Q5mcrDlHBGTMoQXHYCH6CA==
-X-Received: by 2002:a05:6a00:2353:b029:2f2:987a:5da2 with SMTP id j19-20020a056a002353b02902f2987a5da2mr3220673pfj.58.1623334427380;
-        Thu, 10 Jun 2021 07:13:47 -0700 (PDT)
-Subject: Re: [RFC PATCH V3 01/11] x86/HV: Initialize GHCB page in Isolation VM
+        bh=Z06P6xfCZfBoLzLGshR2eXD11imPLnqUoouenixaYFw=;
+        b=CtMxXyLFHIPIiiw7IJp3+thvCn7qW/oEkjUwfM6dTfi6pLAYdvsUdv15Ln1q+T/YGY
+         pi+bTHqdpcFqO4Xrl0HP3Wx54TYymQfV+BRcqAtCpTMkLMBCe/J7OLx94NYYfLCgQR43
+         HZ9SRuP49wnSJbCxZBWvnPXsmOOO9K7P6VWqDFnpeUnCAaIik4ihdeFETgu2kY7wNLrb
+         H/QlOr2eM9gXQjoS/LjSRer/TgI42viSSfIkPWB4YsOdN3Jvb9d2lVVdlCkbkaV3XmFw
+         Pu/ltqgxMaTSWvJEfddc2AhbBR8fTJEisyqqkUYMsU7fdVj3qYojZir6OVTSGTlFSUZl
+         /sSQ==
+X-Gm-Message-State: AOAM530x+QM+7w39BqJ3rb2k9teRPWsAUBVLr+zhvoQgshjcB8prZuXa
+	zmHfir8HU+WbgwS6uz7eZ8I=
+X-Google-Smtp-Source: ABdhPJzmTLyJiMIH7/kQoP6L+VhlUA+7RnmijLx7oWBaXhPdpzGgcAEZV6BSepEVhxfy3ZoxIY2hkg==
+X-Received: by 2002:a63:4e20:: with SMTP id c32mr5182730pgb.104.1623334560354;
+        Thu, 10 Jun 2021 07:16:00 -0700 (PDT)
+Subject: Re: [RFC PATCH V3 04/11] HV: Add Write/Read MSR registers via ghcb
 To: Joerg Roedel <joro@8bytes.org>
 Cc: kys@microsoft.com, haiyangz@microsoft.com, sthemmin@microsoft.com,
  wei.liu@kernel.org, decui@microsoft.com, tglx@linutronix.de,
@@ -104,58 +103,59 @@ Cc: kys@microsoft.com, haiyangz@microsoft.com, sthemmin@microsoft.com,
  linux-scsi@vger.kernel.org, netdev@vger.kernel.org, vkuznets@redhat.com,
  thomas.lendacky@amd.com, brijesh.singh@amd.com, sunilmut@microsoft.com
 References: <20210530150628.2063957-1-ltykernel@gmail.com>
- <20210530150628.2063957-2-ltykernel@gmail.com> <YMC2RSr/J1WYCvtz@8bytes.org>
+ <20210530150628.2063957-5-ltykernel@gmail.com> <YMC4JdtYO+eLDKh5@8bytes.org>
 From: Tianyu Lan <ltykernel@gmail.com>
-Message-ID: <c9a7eaa8-a8b3-3ed3-c52c-7a2cea3c95bc@gmail.com>
-Date: Thu, 10 Jun 2021 22:13:32 +0800
+Message-ID: <bd84a1a1-1dae-1dc0-8175-ed8bf19e705c@gmail.com>
+Date: Thu, 10 Jun 2021 22:15:46 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <YMC2RSr/J1WYCvtz@8bytes.org>
+In-Reply-To: <YMC4JdtYO+eLDKh5@8bytes.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-
-Hi Joerg：
-	Thanks for your review.
+Content-Transfer-Encoding: 7bit
 
 
-On 6/9/2021 8:38 PM, Joerg Roedel wrote:
-> On Sun, May 30, 2021 at 11:06:18AM -0400, Tianyu Lan wrote:
->> From: Tianyu Lan <Tianyu.Lan@microsoft.com>
->>
->> Hyper-V exposes GHCB page via SEV ES GHCB MSR for SNP guest
->> to communicate with hypervisor. Map GHCB page for all
->> cpus to read/write MSR register and submit hvcall request
->> via GHCB.
->>
->> Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
->> ---
->>   arch/x86/hyperv/hv_init.c       | 60 ++++++++++++++++++++++++++++++---
->>   arch/x86/include/asm/mshyperv.h |  2 ++
->>   include/asm-generic/mshyperv.h  |  2 ++
->>   3 files changed, 60 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/x86/hyperv/hv_init.c b/arch/x86/hyperv/hv_init.c
->> index bb0ae4b5c00f..dc74d01cb859 100644
->> --- a/arch/x86/hyperv/hv_init.c
->> +++ b/arch/x86/hyperv/hv_init.c
->> @@ -60,6 +60,9 @@ static int hv_cpu_init(unsigned int cpu)
->>   	struct hv_vp_assist_page **hvp = &hv_vp_assist_page[smp_processor_id()];
->>   	void **input_arg;
->>   	struct page *pg;
->> +	u64 ghcb_gpa;
->> +	void *ghcb_va;
+
+On 6/9/2021 8:46 PM, Joerg Roedel wrote:
+> On Sun, May 30, 2021 at 11:06:21AM -0400, Tianyu Lan wrote:
+>> +void hv_ghcb_msr_write(u64 msr, u64 value)
+>> +{
+>> +	union hv_ghcb *hv_ghcb;
 >> +	void **ghcb_base;
+>> +	unsigned long flags;
+>> +
+>> +	if (!ms_hyperv.ghcb_base)
+>> +		return;
+>> +
+>> +	local_irq_save(flags);
+>> +	ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
+>> +	hv_ghcb = (union hv_ghcb *)*ghcb_base;
+>> +	if (!hv_ghcb) {
+>> +		local_irq_restore(flags);
+>> +		return;
+>> +	}
+>> +
+>> +	memset(hv_ghcb, 0x00, HV_HYP_PAGE_SIZE);
+>> +
+>> +	hv_ghcb->ghcb.protocol_version = 1;
+>> +	hv_ghcb->ghcb.ghcb_usage = 0;
+>> +
+>> +	ghcb_set_sw_exit_code(&hv_ghcb->ghcb, SVM_EXIT_MSR);
+>> +	ghcb_set_rcx(&hv_ghcb->ghcb, msr);
+>> +	ghcb_set_rax(&hv_ghcb->ghcb, lower_32_bits(value));
+>> +	ghcb_set_rdx(&hv_ghcb->ghcb, value >> 32);
+>> +	ghcb_set_sw_exit_info_1(&hv_ghcb->ghcb, 1);
+>> +	ghcb_set_sw_exit_info_2(&hv_ghcb->ghcb, 0);
+>> +
+>> +	VMGEXIT();
 > 
-> Any reason you can't reuse the SEV-ES support code in the Linux kernel?
-> It already has code to setup GHCBs for all vCPUs.
-> 
-> I see that you don't need #VC handling in your SNP VMs because of the
-> paravisor running underneath it, but just re-using the GHCB setup code
-> shouldn't be too hard.
+> This is not safe to use from NMI context. You need at least some
+> checking or WARN_ON/assertion/whatever to catch cases where this is
+> violated. Otherwise it will result in some hard to debug bug reports.
 > 
 
-Thanks for your suggestion. I will have a try to use SEV-ES code.
+Nice catch. Will update in the next version.
 
+Thanks.
 
