@@ -1,44 +1,49 @@
-Return-Path: <SRS0=5TPE=LD=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=J2zn=LE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4EC8C48BCD
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 23:50:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3931C48BCF
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 03:05:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA9DD613EA
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Jun 2021 23:50:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA9DD613EA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6B98C6141D
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 03:05:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B98C6141D
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.139589.258121 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.139602.258149 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lr7y6-0002L3-Q1; Wed, 09 Jun 2021 23:50:42 +0000
+	id 1lrB0V-0000U7-8r; Thu, 10 Jun 2021 03:05:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 139589.258121; Wed, 09 Jun 2021 23:50:42 +0000
+Received: by outflank-mailman (output) from mailman id 139602.258149; Thu, 10 Jun 2021 03:05:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lr7y6-0002Kw-N4; Wed, 09 Jun 2021 23:50:42 +0000
-Received: by outflank-mailman (input) for mailman id 139589;
- Wed, 09 Jun 2021 23:50:41 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1y+9=LD=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1lr7y5-0002Kp-8R
- for xen-devel@lists.xenproject.org; Wed, 09 Jun 2021 23:50:41 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2c65a232-ec1b-4586-a98a-ee313c040ebf;
- Wed, 09 Jun 2021 23:50:40 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A06BE613EA;
- Wed,  9 Jun 2021 23:50:39 +0000 (UTC)
+	id 1lrB0V-0000Tf-1F; Thu, 10 Jun 2021 03:05:23 +0000
+Received: by outflank-mailman (input) for mailman id 139602;
+ Thu, 10 Jun 2021 03:05:21 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrB0T-0000TU-Kf; Thu, 10 Jun 2021 03:05:21 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrB0T-0003zS-C3; Thu, 10 Jun 2021 03:05:21 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrB0T-0008AK-3j; Thu, 10 Jun 2021 03:05:21 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrB0T-00043B-3C; Thu, 10 Jun 2021 03:05:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,55 +55,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2c65a232-ec1b-4586-a98a-ee313c040ebf
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1623282639;
-	bh=yEJO2DI/IKbhJ4+Dt/QgSklrpmtCt/IWx3ftV032t9I=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=PwNh5zRH09/pnEhCt/REsgAGKABBMpS4dcGGnIZWfIcDXCgTjGM+ofXaEdlOEj7q5
-	 0sbqSlvdwqvFbjxxi8fCpoBj7+SA0nK2gH3j0xfOVnNh1U/pIigp21Q+lLZit2ygFC
-	 M5mHn9dNUdA8Ws+6oOVf6MrCOa0+Ce56zeA4bJUwZB4MMb7M9/KaggJ/62Rw/OorvE
-	 fgvXhOwuR1ewdn2WG3sjHD7Sd4yA1IyUc8lX6NZQiGNfYUkko9WYEeFyD1btKg8zdv
-	 i+D2kUj9RLjPEbAgmE/0BAEBYLhIg5RZZB1i2mbE5RUKD/Ly0/t0yVi4RkRylFlHAH
-	 1JiDL6bA4YMDA==
-Date: Wed, 9 Jun 2021 16:50:39 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-cc: Stefano Stabellini <sstabellini@kernel.org>, Volodymyr_Babchuk@epam.com, 
-    xen-devel@lists.xenproject.org, Bertrand.Marquis@arm.com, 
-    Michal.Orzel@arm.com, edgar.iglesias@xilinx.com, 
-    Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: Re: [PATCH] xen/arm32: SPSR_hyp/SPSR
-In-Reply-To: <712da7a7-2c1f-fd24-398d-27966335618a@xen.org>
-Message-ID: <alpine.DEB.2.21.2106091647100.24906@sstabellini-ThinkPad-T480s>
-References: <20210609174324.6621-1-sstabellini@kernel.org> <712da7a7-2c1f-fd24-398d-27966335618a@xen.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=jDQOwS1j92maOsjmqB1TPX5RJe7NtaVctoUHdC6RCWY=; b=FJyuZERgr30EHKbUycx650ddP/
+	30DwwP99VMejq/VWb4q6S+YlkE/0L+lIGuhSLi047Y8dkW9C/b5U2THZzkKjaqtJAqlbGyJqDctbx
+	1Hm6rBUqbx12kViLKYSI7J1IvEt67ETzEVYcDoTFIYMr+ISeZYV/2iyy8jmc0JWyyrxg=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-162584-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [xen-unstable-smoke test] 162584: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:test-armhf-armhf-xl:guest-start/debian.repeat:fail:regression
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=dfcffb128be46a3e413eaa941744536fe53c94b6
+X-Osstest-Versions-That:
+    xen=3e09045991cde360432bc7437103f8f8a6699359
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 10 Jun 2021 03:05:21 +0000
 
-On Wed, 9 Jun 2021, Julien Grall wrote:
-> Hi Stefano,
-> 
-> On 09/06/2021 18:43, Stefano Stabellini wrote:
-> > SPSR_hyp is not meant to be accessed from Hyp mode (EL2); accesses
-> > trigger UNPREDICTABLE behaviour. Xen should read/write SPSR instead.
-> 
-> Please provide a reference to the spec. This helps reviewer and/or future
-> developper to figure out quickly where this comes from.
-> 
-> > 
-> > This fixes booting Xen/arm32 on QEMU.
-> > 
-> > Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-> 
-> With the reference added:
-> 
-> Reviewed-by: Julien Grall <jgrall@amazon.com>
+flight 162584 xen-unstable-smoke real [real]
+flight 162587 xen-unstable-smoke real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162584/
+http://logs.test-lab.xenproject.org/osstest/logs/162587/
 
-Thanks!
+Regressions :-(
 
-I added: ARM DDI 0487D.b page G8-5993 and committed it
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-xl         18 guest-start/debian.repeat fail REGR. vs. 162574
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  dfcffb128be46a3e413eaa941744536fe53c94b6
+baseline version:
+ xen                  3e09045991cde360432bc7437103f8f8a6699359
+
+Last test of basis   162574  2021-06-09 14:00:34 Z    0 days
+Testing same since   162584  2021-06-10 00:00:27 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Stefano Stabellini <stefano.stabellini@xilinx.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          fail    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit dfcffb128be46a3e413eaa941744536fe53c94b6
+Author: Stefano Stabellini <sstabellini@kernel.org>
+Date:   Wed Jun 9 10:37:59 2021 -0700
+
+    xen/arm32: SPSR_hyp/SPSR
+    
+    SPSR_hyp is not meant to be accessed from Hyp mode (EL2); accesses
+    trigger UNPREDICTABLE behaviour. Xen should read/write SPSR instead.
+    See: ARM DDI 0487D.b page G8-5993.
+    
+    This fixes booting Xen/arm32 on QEMU.
+    
+    Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+    Reviewed-by: Julien Grall <jgrall@amazon.com>
+    Reviewed-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+    Tested-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+(qemu changes not included)
 
