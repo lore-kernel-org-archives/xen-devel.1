@@ -2,48 +2,48 @@ Return-Path: <SRS0=J2zn=LE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F581C47094
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:16:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5779C47094
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:18:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5B697613D9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:16:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B697613D9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id B14E4613E9
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Jun 2021 14:18:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B14E4613E9
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.139923.258621 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.139930.258634 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lrLTX-00053y-5Z; Thu, 10 Jun 2021 14:16:03 +0000
+	id 1lrLVH-0005gM-Hx; Thu, 10 Jun 2021 14:17:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 139923.258621; Thu, 10 Jun 2021 14:16:03 +0000
+Received: by outflank-mailman (output) from mailman id 139930.258634; Thu, 10 Jun 2021 14:17:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lrLTX-00053r-2X; Thu, 10 Jun 2021 14:16:03 +0000
-Received: by outflank-mailman (input) for mailman id 139923;
- Thu, 10 Jun 2021 14:16:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Cwq8=LE=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1lrLTV-00053i-No
- for xen-devel@lists.xenproject.org; Thu, 10 Jun 2021 14:16:01 +0000
-Received: from mail-pg1-x536.google.com (unknown [2607:f8b0:4864:20::536])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b0040e02-451b-4e69-a615-a25f5f320783;
- Thu, 10 Jun 2021 14:16:01 +0000 (UTC)
-Received: by mail-pg1-x536.google.com with SMTP id e22so22678353pgv.10
- for <xen-devel@lists.xenproject.org>; Thu, 10 Jun 2021 07:16:01 -0700 (PDT)
-Received: from ?IPv6:2404:f801:0:5:8000::4b1? ([2404:f801:9000:1a:efea::4b1])
- by smtp.gmail.com with ESMTPSA id
- f6sm2629239pfb.28.2021.06.10.07.15.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Jun 2021 07:15:59 -0700 (PDT)
+	id 1lrLVH-0005gF-Es; Thu, 10 Jun 2021 14:17:51 +0000
+Received: by outflank-mailman (input) for mailman id 139930;
+ Thu, 10 Jun 2021 14:17:49 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrLVF-0005g1-QC; Thu, 10 Jun 2021 14:17:49 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrLVF-0008Bp-Lm; Thu, 10 Jun 2021 14:17:49 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrLVF-0005rp-Dc; Thu, 10 Jun 2021 14:17:49 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lrLVF-0004cO-B0; Thu, 10 Jun 2021 14:17:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,107 +55,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0040e02-451b-4e69-a615-a25f5f320783
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=Z06P6xfCZfBoLzLGshR2eXD11imPLnqUoouenixaYFw=;
-        b=APiM6yjkYAKij1RjMOo9hW4vLGKN36RaoDPpCZzJkgCIWIc5bNnUPRKfG+5uelh6im
-         ZwmwB/K2y2Z+UnBHFw6Ok84giPqAWtESqJu7RLH3vi1s6Wmdl12YoCN5FEDC7FxVL8S3
-         xBQJ/O0hMPtGsBtUowS8mRCmJHg4qC1j99bvIODTP9XmlSIGPDf9QrQ49kI/Ur72auK8
-         XR3tyDiPInVQQ5Wc5igpAdJ+WpQK2Nh7QdvgHpHFXPPDhb1Z06nj6QGPTXJjDDNCczPn
-         w4fJFgDDWFpzxBgC5Dh+DND5ldxosu/Bv7P7MHz+0qfPe5TrP3iyAg6tpfZqrx3I67eW
-         JLfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=Z06P6xfCZfBoLzLGshR2eXD11imPLnqUoouenixaYFw=;
-        b=CtMxXyLFHIPIiiw7IJp3+thvCn7qW/oEkjUwfM6dTfi6pLAYdvsUdv15Ln1q+T/YGY
-         pi+bTHqdpcFqO4Xrl0HP3Wx54TYymQfV+BRcqAtCpTMkLMBCe/J7OLx94NYYfLCgQR43
-         HZ9SRuP49wnSJbCxZBWvnPXsmOOO9K7P6VWqDFnpeUnCAaIik4ihdeFETgu2kY7wNLrb
-         H/QlOr2eM9gXQjoS/LjSRer/TgI42viSSfIkPWB4YsOdN3Jvb9d2lVVdlCkbkaV3XmFw
-         Pu/ltqgxMaTSWvJEfddc2AhbBR8fTJEisyqqkUYMsU7fdVj3qYojZir6OVTSGTlFSUZl
-         /sSQ==
-X-Gm-Message-State: AOAM530x+QM+7w39BqJ3rb2k9teRPWsAUBVLr+zhvoQgshjcB8prZuXa
-	zmHfir8HU+WbgwS6uz7eZ8I=
-X-Google-Smtp-Source: ABdhPJzmTLyJiMIH7/kQoP6L+VhlUA+7RnmijLx7oWBaXhPdpzGgcAEZV6BSepEVhxfy3ZoxIY2hkg==
-X-Received: by 2002:a63:4e20:: with SMTP id c32mr5182730pgb.104.1623334560354;
-        Thu, 10 Jun 2021 07:16:00 -0700 (PDT)
-Subject: Re: [RFC PATCH V3 04/11] HV: Add Write/Read MSR registers via ghcb
-To: Joerg Roedel <joro@8bytes.org>
-Cc: kys@microsoft.com, haiyangz@microsoft.com, sthemmin@microsoft.com,
- wei.liu@kernel.org, decui@microsoft.com, tglx@linutronix.de,
- mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
- arnd@arndb.de, dave.hansen@linux.intel.com, luto@kernel.org,
- peterz@infradead.org, akpm@linux-foundation.org,
- kirill.shutemov@linux.intel.com, rppt@kernel.org, hannes@cmpxchg.org,
- cai@lca.pw, krish.sadhukhan@oracle.com, saravanand@fb.com,
- Tianyu.Lan@microsoft.com, konrad.wilk@oracle.com, hch@lst.de,
- m.szyprowski@samsung.com, robin.murphy@arm.com, boris.ostrovsky@oracle.com,
- jgross@suse.com, sstabellini@kernel.org, will@kernel.org,
- xen-devel@lists.xenproject.org, davem@davemloft.net, kuba@kernel.org,
- jejb@linux.ibm.com, martin.petersen@oracle.com,
- iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-scsi@vger.kernel.org, netdev@vger.kernel.org, vkuznets@redhat.com,
- thomas.lendacky@amd.com, brijesh.singh@amd.com, sunilmut@microsoft.com
-References: <20210530150628.2063957-1-ltykernel@gmail.com>
- <20210530150628.2063957-5-ltykernel@gmail.com> <YMC4JdtYO+eLDKh5@8bytes.org>
-From: Tianyu Lan <ltykernel@gmail.com>
-Message-ID: <bd84a1a1-1dae-1dc0-8175-ed8bf19e705c@gmail.com>
-Date: Thu, 10 Jun 2021 22:15:46 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=rpA398pAYPja9XJALLFQyCqzp+8wu4zY6N+hRC1+Bbc=; b=4AiUnnq8JJa0IbQQp755kZlLqH
+	PQo+WFcBPbomknYGrQV5m3tTVevbla15V2+loGvs2qQKi6zSLC9akywhLI4AgHroAYuO3LkRnpo9e
+	jtRqVY79hh3327X9dfRR0/A3ZU2DvFgqv3qvcNBwTaXDiRggWzX04fyM85VAQSA7Z4o8=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-162603-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <YMC4JdtYO+eLDKh5@8bytes.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Subject: [xen-unstable-smoke test] 162603: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:test-armhf-armhf-xl:guest-start/debian.repeat:fail:regression
+    xen-unstable-smoke:test-armhf-armhf-xl:guest-start:fail:heisenbug
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=dfcffb128be46a3e413eaa941744536fe53c94b6
+X-Osstest-Versions-That:
+    xen=3e09045991cde360432bc7437103f8f8a6699359
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 10 Jun 2021 14:17:49 +0000
+
+flight 162603 xen-unstable-smoke real [real]
+flight 162606 xen-unstable-smoke real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162603/
+http://logs.test-lab.xenproject.org/osstest/logs/162606/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-armhf-armhf-xl 18 guest-start/debian.repeat fail in 162597 REGR. vs. 162574
+
+Tests which are failing intermittently (not blocking):
+ test-armhf-armhf-xl          14 guest-start                fail pass in 162597
+
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-xl         15 migrate-support-check fail in 162597 never pass
+ test-armhf-armhf-xl     16 saverestore-support-check fail in 162597 never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  dfcffb128be46a3e413eaa941744536fe53c94b6
+baseline version:
+ xen                  3e09045991cde360432bc7437103f8f8a6699359
+
+Last test of basis   162574  2021-06-09 14:00:34 Z    1 days
+Testing same since   162584  2021-06-10 00:00:27 Z    0 days    4 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Stefano Stabellini <stefano.stabellini@xilinx.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          fail    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-On 6/9/2021 8:46 PM, Joerg Roedel wrote:
-> On Sun, May 30, 2021 at 11:06:21AM -0400, Tianyu Lan wrote:
->> +void hv_ghcb_msr_write(u64 msr, u64 value)
->> +{
->> +	union hv_ghcb *hv_ghcb;
->> +	void **ghcb_base;
->> +	unsigned long flags;
->> +
->> +	if (!ms_hyperv.ghcb_base)
->> +		return;
->> +
->> +	local_irq_save(flags);
->> +	ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
->> +	hv_ghcb = (union hv_ghcb *)*ghcb_base;
->> +	if (!hv_ghcb) {
->> +		local_irq_restore(flags);
->> +		return;
->> +	}
->> +
->> +	memset(hv_ghcb, 0x00, HV_HYP_PAGE_SIZE);
->> +
->> +	hv_ghcb->ghcb.protocol_version = 1;
->> +	hv_ghcb->ghcb.ghcb_usage = 0;
->> +
->> +	ghcb_set_sw_exit_code(&hv_ghcb->ghcb, SVM_EXIT_MSR);
->> +	ghcb_set_rcx(&hv_ghcb->ghcb, msr);
->> +	ghcb_set_rax(&hv_ghcb->ghcb, lower_32_bits(value));
->> +	ghcb_set_rdx(&hv_ghcb->ghcb, value >> 32);
->> +	ghcb_set_sw_exit_info_1(&hv_ghcb->ghcb, 1);
->> +	ghcb_set_sw_exit_info_2(&hv_ghcb->ghcb, 0);
->> +
->> +	VMGEXIT();
-> 
-> This is not safe to use from NMI context. You need at least some
-> checking or WARN_ON/assertion/whatever to catch cases where this is
-> violated. Otherwise it will result in some hard to debug bug reports.
-> 
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Nice catch. Will update in the next version.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-Thanks.
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit dfcffb128be46a3e413eaa941744536fe53c94b6
+Author: Stefano Stabellini <sstabellini@kernel.org>
+Date:   Wed Jun 9 10:37:59 2021 -0700
+
+    xen/arm32: SPSR_hyp/SPSR
+    
+    SPSR_hyp is not meant to be accessed from Hyp mode (EL2); accesses
+    trigger UNPREDICTABLE behaviour. Xen should read/write SPSR instead.
+    See: ARM DDI 0487D.b page G8-5993.
+    
+    This fixes booting Xen/arm32 on QEMU.
+    
+    Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+    Reviewed-by: Julien Grall <jgrall@amazon.com>
+    Reviewed-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+    Tested-by: Edgar E. Iglesias <edgar.iglesias@xilinx.com>
+(qemu changes not included)
 
