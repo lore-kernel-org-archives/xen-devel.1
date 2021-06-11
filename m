@@ -5,44 +5,44 @@ X-Spam-Level:
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A282EC48BD1
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Jun 2021 15:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C042C48BE0
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Jun 2021 15:33:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7432A611AE
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Jun 2021 15:28:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7432A611AE
+	by mail.kernel.org (Postfix) with ESMTPS id AE3CB613F9
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Jun 2021 15:33:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE3CB613F9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.140443.259538 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.140465.259554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lrj5M-0003V8-1r; Fri, 11 Jun 2021 15:28:40 +0000
+	id 1lrj9i-0005Uz-Ts; Fri, 11 Jun 2021 15:33:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 140443.259538; Fri, 11 Jun 2021 15:28:40 +0000
+Received: by outflank-mailman (output) from mailman id 140465.259554; Fri, 11 Jun 2021 15:33:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lrj5L-0003Uu-U6; Fri, 11 Jun 2021 15:28:39 +0000
-Received: by outflank-mailman (input) for mailman id 140443;
- Fri, 11 Jun 2021 15:28:38 +0000
+	id 1lrj9i-0005Uk-OY; Fri, 11 Jun 2021 15:33:10 +0000
+Received: by outflank-mailman (input) for mailman id 140465;
+ Fri, 11 Jun 2021 15:33:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9xgm=LF=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lrj5K-0001UV-K4
- for xen-devel@lists.xenproject.org; Fri, 11 Jun 2021 15:28:38 +0000
-Received: from mail-pg1-x52b.google.com (unknown [2607:f8b0:4864:20::52b])
+ id 1lrj6D-0001UV-Lh
+ for xen-devel@lists.xenproject.org; Fri, 11 Jun 2021 15:29:33 +0000
+Received: from mail-pj1-x1030.google.com (unknown [2607:f8b0:4864:20::1030])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cc6f7187-f193-4ce3-bb8f-39b8d35ecf16;
- Fri, 11 Jun 2021 15:28:25 +0000 (UTC)
-Received: by mail-pg1-x52b.google.com with SMTP id n12so2729693pgs.13
- for <xen-devel@lists.xenproject.org>; Fri, 11 Jun 2021 08:28:25 -0700 (PDT)
+ id 099fc472-430e-4ffa-af91-63eece9c8906;
+ Fri, 11 Jun 2021 15:28:59 +0000 (UTC)
+Received: by mail-pj1-x1030.google.com with SMTP id k5so5895578pjj.1
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Jun 2021 08:28:59 -0700 (PDT)
 Received: from localhost ([2401:fa00:95:205:33c8:8e01:1161:6797])
- by smtp.gmail.com with UTF8SMTPSA id u24sm5764598pfm.156.2021.06.11.08.28.16
+ by smtp.gmail.com with UTF8SMTPSA id z7sm5637671pgr.28.2021.06.11.08.28.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Jun 2021 08:28:23 -0700 (PDT)
+ Fri, 11 Jun 2021 08:28:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,31 +54,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc6f7187-f193-4ce3-bb8f-39b8d35ecf16
+X-Inumbo-ID: 099fc472-430e-4ffa-af91-63eece9c8906
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=bmASqPhRufrL8xgJ1lr0aYPEW2vwCzgwqGTzlcTpKYs=;
-        b=VEX8i0DIIoAo+ElXJJaiZoSDgtnFLF/I1TK84grpmdSi4SdYlXjC9TQ850lntV+P5S
-         831kSO2v3dGqaOBGzqf/letn3Nd8SFR1zZSHZzcvG9QoeKAD5MpmBTmIAKv31z3N4Dib
-         pBY3Kg/UV3b1u2uzwExihRDf6okRk8gDOvA7w=
+        bh=zXV34JP57GpdYi7KETjy6yE9WG6lb3BfY1eExPN5D0k=;
+        b=n/l5cUK61jqQlbzQONnRrSTYUM2heU0XHxLqBLodv+ZACW+eYtMX6UrtLKV+DFbDS4
+         ciYFCzgOAsbkB8Yxzp2dJIy6q04U2SdNzdIuxnanEC3CRC9P9XtiJVSvAilxoKjJrOtm
+         FosJPFUL7qbFgUfC4+wahlbwgRASvGZhQwnMk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=bmASqPhRufrL8xgJ1lr0aYPEW2vwCzgwqGTzlcTpKYs=;
-        b=ENCqtk5zJUMYyJFyORc69nL7Qf6f7/3FH+uGgaDwTaXv2TrasPrXulWuVvBf/0CBIh
-         Ce/FjF2AIObBIzwf9Mxdx0z8blEEAlIt/eYAz6bt2oN1ZoHe0ddev2RvievL0OK19WEz
-         OCNr62X/BBD83ydwqjketdU1bB0ckHiHAwSfiebEhVC5oOJOFjtXZlZ4OiNvU12100qB
-         smmL4K8AGNWOGBJqjUVyCoPd5bhPyZyBHLC4LGOMQHONHsZsh3EhMi+QXelhTcPq/t1N
-         Ew0U3PQxEi75I2BUANHnJ6DMq7qIWIXMbFl0hLIuJ6lKVkg1mj9ptPihJqVX0aHR/IzJ
-         +uJQ==
-X-Gm-Message-State: AOAM532WGfbUlDzDUB/Uca58r5FWzC2tDWOzt6jSUirDS4CGk7+TuPIj
-	t+XQc/BK+6cxyiEpo7EM3+YiVQ==
-X-Google-Smtp-Source: ABdhPJxcN6GQyaDPIchNmU5M9fts7obcNJdbHA864T6brE5WTlPTfm/9dx+UosM5tapLbm55ICy5Kg==
-X-Received: by 2002:a62:7b4c:0:b029:2e9:cec2:e252 with SMTP id w73-20020a627b4c0000b02902e9cec2e252mr8677730pfc.56.1623425304239;
-        Fri, 11 Jun 2021 08:28:24 -0700 (PDT)
+        bh=zXV34JP57GpdYi7KETjy6yE9WG6lb3BfY1eExPN5D0k=;
+        b=pDBoYcjl2UZkIK+oAveBnKJ3nQQIq6jdbT6M+doHoT30gghYcUNSnL8Cbrd0imAp1y
+         GvfVjjpXCqNKsCHI6QjLjxQuiflXa+NjPM9V9PqAxwskmo+Rr0TeuWi5Zr60zeZ4k2qS
+         qVWXNbV49rESbz2NkOQdauGghnDzosCVVgknLFkXffxB4KTAcGkFW5nhqQ9SDp0hMwCk
+         EoJnyyxu0br4kYXf0/YRL39A/fedAM+G2mQw8i1oLOgCvh2DB0cCMZcmc+qjIMFarhjo
+         nBys8zoL6aWmBKeG0XcIuw+55AiNbqBgCwMT4H59Ott5g3UigKGcUDwzmgTc60C/gT5i
+         w/wg==
+X-Gm-Message-State: AOAM530YsxFM0AYYct6maKJ5L+doLxWUspMNMgJf5keV5xz9enUM68wR
+	5cJ/hURR7gMnvorpz/vr+C5C1A==
+X-Google-Smtp-Source: ABdhPJxO4yId/BXBPVPZ3GpkGGg2f5gxH07V1pBB/gWW/cLxB2G3X66ogJG3rkzaS8olzWg6RRH4fw==
+X-Received: by 2002:a17:90a:b10a:: with SMTP id z10mr5159407pjq.226.1623425339045;
+        Fri, 11 Jun 2021 08:28:59 -0700 (PDT)
 From: Claire Chang <tientzu@chromium.org>
 To: Rob Herring <robh+dt@kernel.org>,
 	mpe@ellerman.id.au,
@@ -132,53 +132,129 @@ Cc: benh@kernel.crashing.org,
 	matthew.auld@intel.com,
 	rodrigo.vivi@intel.com,
 	thomas.hellstrom@linux.intel.com
-Subject: [PATCH v9 08/14] swiotlb: Move alloc_size to find_slots
-Date: Fri, 11 Jun 2021 23:26:53 +0800
-Message-Id: <20210611152659.2142983-9-tientzu@chromium.org>
+Subject: [PATCH v9 12/14] dma-direct: Allocate memory from restricted DMA pool if available
+Date: Fri, 11 Jun 2021 23:26:57 +0800
+Message-Id: <20210611152659.2142983-13-tientzu@chromium.org>
 X-Mailer: git-send-email 2.32.0.272.g935e593368-goog
 In-Reply-To: <20210611152659.2142983-1-tientzu@chromium.org>
 References: <20210611152659.2142983-1-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move the maintenance of alloc_size to find_slots for better code
-reusability later.
+The restricted DMA pool is preferred if available.
+
+The restricted DMA pools provide a basic level of protection against the
+DMA overwriting buffer contents at unexpected times. However, to protect
+against general data leakage and system memory corruption, the system
+needs to provide a way to lock down the memory access, e.g., MPU.
+
+Note that since coherent allocation needs remapping, one must set up
+another device coherent pool by shared-dma-pool and use
+dma_alloc_from_dev_coherent instead for atomic coherent allocation.
 
 Signed-off-by: Claire Chang <tientzu@chromium.org>
 ---
- kernel/dma/swiotlb.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ kernel/dma/direct.c | 37 ++++++++++++++++++++++++++++---------
+ 1 file changed, 28 insertions(+), 9 deletions(-)
 
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index e5ccc198d0a7..364c6c822063 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -486,8 +486,11 @@ static int find_slots(struct device *dev, phys_addr_t orig_addr,
- 	return -1;
+diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
+index eb4098323bbc..73fc4c659ba7 100644
+--- a/kernel/dma/direct.c
++++ b/kernel/dma/direct.c
+@@ -78,6 +78,9 @@ static bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
+ static void __dma_direct_free_pages(struct device *dev, struct page *page,
+ 				    size_t size)
+ {
++	if (IS_ENABLED(CONFIG_DMA_RESTRICTED_POOL) &&
++	    swiotlb_free(dev, page, size))
++		return;
+ 	dma_free_contiguous(dev, page, size);
+ }
  
- found:
--	for (i = index; i < index + nslots; i++)
-+	for (i = index; i < index + nslots; i++) {
- 		mem->slots[i].list = 0;
-+		mem->slots[i].alloc_size =
-+			alloc_size - ((i - index) << IO_TLB_SHIFT);
+@@ -92,7 +95,17 @@ static struct page *__dma_direct_alloc_pages(struct device *dev, size_t size,
+ 
+ 	gfp |= dma_direct_optimal_gfp_mask(dev, dev->coherent_dma_mask,
+ 					   &phys_limit);
+-	page = dma_alloc_contiguous(dev, size, gfp);
++	if (IS_ENABLED(CONFIG_DMA_RESTRICTED_POOL)) {
++		page = swiotlb_alloc(dev, size);
++		if (page && !dma_coherent_ok(dev, page_to_phys(page), size)) {
++			__dma_direct_free_pages(dev, page, size);
++			page = NULL;
++		}
++		return page;
 +	}
- 	for (i = index - 1;
- 	     io_tlb_offset(i) != IO_TLB_SEGSIZE - 1 &&
- 	     mem->slots[i].list; i--)
-@@ -542,11 +545,8 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 	 * This is needed when we sync the memory.  Then we sync the buffer if
- 	 * needed.
++
++	if (!page)
++		page = dma_alloc_contiguous(dev, size, gfp);
+ 	if (page && !dma_coherent_ok(dev, page_to_phys(page), size)) {
+ 		dma_free_contiguous(dev, page, size);
+ 		page = NULL;
+@@ -148,7 +161,7 @@ void *dma_direct_alloc(struct device *dev, size_t size,
+ 		gfp |= __GFP_NOWARN;
+ 
+ 	if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
+-	    !force_dma_unencrypted(dev)) {
++	    !force_dma_unencrypted(dev) && !is_dev_swiotlb_force(dev)) {
+ 		page = __dma_direct_alloc_pages(dev, size, gfp & ~__GFP_ZERO);
+ 		if (!page)
+ 			return NULL;
+@@ -161,18 +174,23 @@ void *dma_direct_alloc(struct device *dev, size_t size,
+ 	}
+ 
+ 	if (!IS_ENABLED(CONFIG_ARCH_HAS_DMA_SET_UNCACHED) &&
+-	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
+-	    !dev_is_dma_coherent(dev))
++	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev) &&
++	    !is_dev_swiotlb_force(dev))
+ 		return arch_dma_alloc(dev, size, dma_handle, gfp, attrs);
+ 
+ 	/*
+ 	 * Remapping or decrypting memory may block. If either is required and
+ 	 * we can't block, allocate the memory from the atomic pools.
++	 * If restricted DMA (i.e., is_dev_swiotlb_force) is required, one must
++	 * set up another device coherent pool by shared-dma-pool and use
++	 * dma_alloc_from_dev_coherent instead.
  	 */
--	for (i = 0; i < nr_slots(alloc_size + offset); i++) {
-+	for (i = 0; i < nr_slots(alloc_size + offset); i++)
- 		mem->slots[index + i].orig_addr = slot_addr(orig_addr, i);
--		mem->slots[index + i].alloc_size =
--			alloc_size - (i << IO_TLB_SHIFT);
--	}
- 	tlb_addr = slot_addr(mem->start, index) + offset;
- 	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
- 	    (dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL))
+ 	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
+ 	    !gfpflags_allow_blocking(gfp) &&
+ 	    (force_dma_unencrypted(dev) ||
+-	     (IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev))))
++	     (IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
++	      !dev_is_dma_coherent(dev))) &&
++	    !is_dev_swiotlb_force(dev))
+ 		return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
+ 
+ 	/* we always manually zero the memory once we are done */
+@@ -253,15 +271,15 @@ void dma_direct_free(struct device *dev, size_t size,
+ 	unsigned int page_order = get_order(size);
+ 
+ 	if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
+-	    !force_dma_unencrypted(dev)) {
++	    !force_dma_unencrypted(dev) && !is_dev_swiotlb_force(dev)) {
+ 		/* cpu_addr is a struct page cookie, not a kernel address */
+ 		dma_free_contiguous(dev, cpu_addr, size);
+ 		return;
+ 	}
+ 
+ 	if (!IS_ENABLED(CONFIG_ARCH_HAS_DMA_SET_UNCACHED) &&
+-	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
+-	    !dev_is_dma_coherent(dev)) {
++	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev) &&
++	    !is_dev_swiotlb_force(dev)) {
+ 		arch_dma_free(dev, size, cpu_addr, dma_addr, attrs);
+ 		return;
+ 	}
+@@ -289,7 +307,8 @@ struct page *dma_direct_alloc_pages(struct device *dev, size_t size,
+ 	void *ret;
+ 
+ 	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
+-	    force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp))
++	    force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp) &&
++	    !is_dev_swiotlb_force(dev))
+ 		return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
+ 
+ 	page = __dma_direct_alloc_pages(dev, size, gfp);
 -- 
 2.32.0.272.g935e593368-goog
 
