@@ -2,45 +2,48 @@ Return-Path: <SRS0=X5bA=LI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BC7BC49360
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 09:57:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C47EFC48BE6
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 10:03:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CAB3D61009
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 09:57:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CAB3D61009
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 8BECA610A2
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 10:03:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8BECA610A2
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.141284.261017 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.141291.261033 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lsjLX-00068U-6H; Mon, 14 Jun 2021 09:57:31 +0000
+	id 1lsjQm-0007iy-4w; Mon, 14 Jun 2021 10:02:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 141284.261017; Mon, 14 Jun 2021 09:57:31 +0000
+Received: by outflank-mailman (output) from mailman id 141291.261033; Mon, 14 Jun 2021 10:02:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lsjLX-00068N-0u; Mon, 14 Jun 2021 09:57:31 +0000
-Received: by outflank-mailman (input) for mailman id 141284;
- Mon, 14 Jun 2021 09:57:29 +0000
+	id 1lsjQl-0007gB-VF; Mon, 14 Jun 2021 10:02:55 +0000
+Received: by outflank-mailman (input) for mailman id 141291;
+ Mon, 14 Jun 2021 10:02:54 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lsjLV-00067y-ST
- for xen-devel@lists.xenproject.org; Mon, 14 Jun 2021 09:57:29 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lsjQk-0007bx-Nq; Mon, 14 Jun 2021 10:02:54 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lsjLV-0001NF-MP; Mon, 14 Jun 2021 09:57:29 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lsjLV-0004S8-Ez; Mon, 14 Jun 2021 09:57:29 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lsjQk-0001Z1-GI; Mon, 14 Jun 2021 10:02:54 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1lsjQk-00051g-81; Mon, 14 Jun 2021 10:02:54 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1lsjQk-0003ZW-7O; Mon, 14 Jun 2021 10:02:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,96 +55,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=30YTuEitrkjhxbU9lj+Ns4W/H3DW4PBOizrGuvmuMe0=; b=N7zGe2xX0P50RtQYfsbqhiwpfF
-	//Z9wD9dFz0+ah/L+V28TMQKYS4aHLkzJlpGhHi2ow4xHjx2kazEcsByHxmF/rSpD8CcxQo1vVLdL
-	YHXNr9usRoVuf6nzq7qc9zP+myWPPLAFXEPFxaVF8OtXiIf/hW4bFT0rtxTrwX2QkbZA=;
-Subject: Re: [PATCH] Arm32: avoid .rodata to be marked as executable
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-References: <25f1b0d2-9270-ba42-d110-2bf14e45b7b8@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <5b819c5e-587b-4eec-b873-73892503c3e2@xen.org>
-Date: Mon, 14 Jun 2021 11:57:27 +0200
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=LHNHaDLO8UOUXKmUoJvBrUq3+OUVuzdcA9fKKl0uOmk=; b=mx53fCwJqt+fk72n8KICdWZqPR
+	CgpVdQ363JBNcCPzgwYgQy4Yimv0tKUhdNi9tljXeRZZax7vuj79xsHaLzfoiKCVYUhYI5Fxh5Xu4
+	5AToBB5vxzKgT28tPgQtAH8fB09VQts7CB7lia2O3ZOxqZo8AiEw+0OrCITVhnllj+YQ=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-162792-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <25f1b0d2-9270-ba42-d110-2bf14e45b7b8@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Subject: [ovmf test] 162792: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+X-Osstest-Versions-This:
+    ovmf=b8649cf2a3e673a4a8cb6c255e394b354b771550
+X-Osstest-Versions-That:
+    ovmf=c410ad4da4b7785170d3d42a3ba190c2caac6feb
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 14 Jun 2021 10:02:54 +0000
 
-Hi,
+flight 162792 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162792/
 
-On 11/06/2021 11:19, Jan Beulich wrote:
-> This confuses disassemblers, at the very least. When this data still
-> lived in .init.*, this probably didn't matter much, albeit the
-> "#execinstr" would have been suspicious to me already then. But the
-> latest with their movement to .rodata these attributes should have been
-> dropped.
+Regressions :-(
 
-I don't quite understand why this wasn't really a problem for .init.data 
-but it is a problem for .rodata. Can you expand your thought?
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 162359
+ test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 162359
 
-> 
-> Fixes: 9cbe093b7b84 ("xen/arm: link: Link proc_info_list in .rodata instead of .init.data")
-I don't view this commit as the buggy one. I would prefer if there is no 
-Fixes tag. But if you want one, then it should be the patch that 
-introduced #execinstr.
+version targeted for testing:
+ ovmf                 b8649cf2a3e673a4a8cb6c255e394b354b771550
+baseline version:
+ ovmf                 c410ad4da4b7785170d3d42a3ba190c2caac6feb
 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Last test of basis   162359  2021-06-04 03:40:08 Z   10 days
+Failing since        162368  2021-06-04 15:42:59 Z    9 days   17 attempts
+Testing same since   162583  2021-06-09 23:44:58 Z    4 days   12 attempts
 
-The change below looks good to me. But I don't understand the commit 
-message, so I will wait an answer before acking it.
+------------------------------------------------------------
+People who touched revisions under test:
+  Ard Biesheuvel <ardb@kernel.org>
+  Kaaira Gupta <kaaira7319@gmail.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Leif Lindholm <leif@nuviainc.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Ni, Ray <ray.ni@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <rebecca@nuviainc.com>
 
-> ---
-> The PRINT() macro in head.S is another source of such confusion of code
-> vs data. While in head.o there are mapping symbols guiding disassemblers,
-> these mapping symbols are gone when looking at xen-syms. But I realize
-> adr's reach is too limited to allow for a halfway reasonable approach of
-> moving those strings (e.g. to, at least, have them all together).
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
 
-I have tried it in the past. The solution I have was to differentiate 
-call with MMU on from the one with MMU off. But I considered this wasn't 
-worth the trouble.
 
-> 
-> --- a/xen/arch/arm/arm32/proc-v7.S
-> +++ b/xen/arch/arm/arm32/proc-v7.S
-> @@ -29,7 +29,7 @@ brahma15mp_init:
->           mcr   CP32(r0, ACTLR)
->           mov   pc, lr
->   
-> -        .section ".proc.info", #alloc, #execinstr
-> +        .section ".proc.info", #alloc
->           .type __v7_ca15mp_proc_info, #object
->   __v7_ca15mp_proc_info:
->           .long 0x410FC0F0             /* Cortex-A15 */
-> @@ -38,7 +38,7 @@ __v7_ca15mp_proc_info:
->           .long caxx_processor
->           .size __v7_ca15mp_proc_info, . - __v7_ca15mp_proc_info
->   
-> -        .section ".proc.info", #alloc, #execinstr
-> +        .section ".proc.info", #alloc
->           .type __v7_ca7mp_proc_info, #object
->   __v7_ca7mp_proc_info:
->           .long 0x410FC070             /* Cortex-A7 */
-> @@ -47,7 +47,7 @@ __v7_ca7mp_proc_info:
->           .long caxx_processor
->           .size __v7_ca7mp_proc_info, . - __v7_ca7mp_proc_info
->   
-> -        .section ".proc.info", #alloc, #execinstr
-> +        .section ".proc.info", #alloc
->           .type __v7_brahma15mp_proc_info, #object
->   __v7_brahma15mp_proc_info:
->           .long 0x420F00F0             /* Broadcom Brahma-B15 */
-> 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Cheers,
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
--- 
-Julien Grall
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 1717 lines long.)
 
