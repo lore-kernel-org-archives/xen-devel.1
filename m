@@ -6,38 +6,38 @@ X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1325C48BE8
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 06:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1EA3C48BE8
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 06:28:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 77309613AD
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 06:28:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77309613AD
+	by mail.kernel.org (Postfix) with ESMTPS id AED3A61246
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Jun 2021 06:28:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AED3A61246
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.141196.260898 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.141198.260909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lsg4t-0000Y7-3i; Mon, 14 Jun 2021 06:28:07 +0000
+	id 1lsg59-0000zN-Cs; Mon, 14 Jun 2021 06:28:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 141196.260898; Mon, 14 Jun 2021 06:28:07 +0000
+Received: by outflank-mailman (output) from mailman id 141198.260909; Mon, 14 Jun 2021 06:28:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lsg4t-0000Y0-0Z; Mon, 14 Jun 2021 06:28:07 +0000
-Received: by outflank-mailman (input) for mailman id 141196;
- Mon, 14 Jun 2021 06:28:06 +0000
+	id 1lsg59-0000zE-9q; Mon, 14 Jun 2021 06:28:23 +0000
+Received: by outflank-mailman (input) for mailman id 141198;
+ Mon, 14 Jun 2021 06:28:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aFdS=LI=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1lsg4s-0000Xs-JC
- for xen-devel@lists.xenproject.org; Mon, 14 Jun 2021 06:28:06 +0000
+ id 1lsg57-0000wh-VN
+ for xen-devel@lists.xenproject.org; Mon, 14 Jun 2021 06:28:21 +0000
 Received: from verein.lst.de (unknown [213.95.11.211])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 01f0d984-1e77-48fc-9dbf-4b91536791bd;
- Mon, 14 Jun 2021 06:28:06 +0000 (UTC)
+ id 1d910065-704a-4984-b47a-db12add2a4ca;
+ Mon, 14 Jun 2021 06:28:21 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id DE87267373; Mon, 14 Jun 2021 08:28:01 +0200 (CEST)
+ id 4C6E068AFE; Mon, 14 Jun 2021 08:28:19 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,8 +49,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 01f0d984-1e77-48fc-9dbf-4b91536791bd
-Date: Mon, 14 Jun 2021 08:28:01 +0200
+X-Inumbo-ID: 1d910065-704a-4984-b47a-db12add2a4ca
+Date: Mon, 14 Jun 2021 08:28:18 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Claire Chang <tientzu@chromium.org>
 Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
@@ -88,14 +88,17 @@ Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
 	thomas.hellstrom@linux.intel.com
 Subject: Re: [PATCH v9 11/14] swiotlb: Add restricted DMA alloc/free
  support.
-Message-ID: <20210614062801.GJ28343@lst.de>
-References: <20210611152659.2142983-1-tientzu@chromium.org> <20210611152659.2142983-12-tientzu@chromium.org>
+Message-ID: <20210614062818.GK28343@lst.de>
+References: <20210611152659.2142983-1-tientzu@chromium.org> <20210611152659.2142983-12-tientzu@chromium.org> <20210614062801.GJ28343@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20210611152659.2142983-12-tientzu@chromium.org>
+In-Reply-To: <20210614062801.GJ28343@lst.de>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 
-I think merging this with the next two patches would be a little more
-clear.
+On Mon, Jun 14, 2021 at 08:28:01AM +0200, Christoph Hellwig wrote:
+> I think merging this with the next two patches would be a little more
+> clear.
+
+Sorry, I mean the next patch and the previous one.
 
