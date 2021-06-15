@@ -2,45 +2,48 @@ Return-Path: <SRS0=A7jt=LJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADC03C48BDF
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DE66C48BE8
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:31:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B123601FC
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:31:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B123601FC
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 571C9601FC
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:31:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 571C9601FC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142061.262254 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142067.262270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9AO-0003OW-T4; Tue, 15 Jun 2021 13:31:44 +0000
+	id 1lt9AS-0003j9-J2; Tue, 15 Jun 2021 13:31:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142061.262254; Tue, 15 Jun 2021 13:31:44 +0000
+Received: by outflank-mailman (output) from mailman id 142067.262270; Tue, 15 Jun 2021 13:31:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9AO-0003OP-Q0; Tue, 15 Jun 2021 13:31:44 +0000
-Received: by outflank-mailman (input) for mailman id 142061;
- Tue, 15 Jun 2021 13:31:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lt9AN-0003OJ-T5
- for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:31:43 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lt9AL-0003bn-Hs; Tue, 15 Jun 2021 13:31:41 +0000
-Received: from [54.239.6.184] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1lt9AL-00065V-9R; Tue, 15 Jun 2021 13:31:41 +0000
+	id 1lt9AS-0003iG-9C; Tue, 15 Jun 2021 13:31:48 +0000
+Received: by outflank-mailman (input) for mailman id 142067;
+ Tue, 15 Jun 2021 13:31:46 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=62sT=LJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
+ id 1lt97p-0000bS-Nr
+ for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:29:05 +0000
+Received: from mail-pj1-x1034.google.com (unknown [2607:f8b0:4864:20::1034])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f14f3368-a6d4-4c4f-82e3-4192547ab217;
+ Tue, 15 Jun 2021 13:28:42 +0000 (UTC)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ z3-20020a17090a3983b029016bc232e40bso2207566pjb.4
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:28:42 -0700 (PDT)
+Received: from localhost ([2401:fa00:95:205:1846:5274:e444:139e])
+ by smtp.gmail.com with UTF8SMTPSA id d8sm16002774pfq.198.2021.06.15.06.28.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Jun 2021 06:28:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,52 +55,244 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=xlCqE8Rdy/ipxraYFRkc51wKDzIJqQj3pxs4kIiB+yg=; b=OavsvzG97CH+FSxOHtxP6ftXiA
-	XKLn+PiSFsJA7dwQLB4BYTKlO9PqfpD8OMHkxlsxaa1nSQLu4kAxOTbJo6J4PhT8loisGn9cRFLtt
-	N/9ClsVy5c4XtpYgPRlf5i7EusAIDQolQMLnH6Li+6wAkVx4D9TIuPj+4CPoHwgZg3Ao=;
-Subject: PING Re: [XEN PATCH] libs/foreignmemory: Fix
- osdep_xenforeignmemory_map prototype
-To: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>
-References: <20210601154147.55799-1-anthony.perard@citrix.com>
- <a5d4f4ae-21b9-9798-5501-2c288a70e7b4@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <d80b6904-ff5c-33d6-b0e3-6882fe3e8e89@xen.org>
-Date: Tue, 15 Jun 2021 15:31:38 +0200
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+X-Inumbo-ID: f14f3368-a6d4-4c4f-82e3-4192547ab217
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=r+B+WmWHIHMs91nx15AVM2itHN+i1YzQ775bO9+kHdU=;
+        b=WzvexR7E+ALC8UHpMEnA+Cx3vlr1A1Cr5s3TW1YH4PposTtGKLhFpA/R/qQszzGPqE
+         ordIiKc6mP07Rj60smVk6CJmnBRs8OEvLe0owSLDWKCjVANuxKyE3xs4HLfFTCYWWVik
+         a6KT5EvKiBmg9I5cDjlQBmab8/PKoLLvYg/3Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=r+B+WmWHIHMs91nx15AVM2itHN+i1YzQ775bO9+kHdU=;
+        b=N+VuhTjAUWcldZiiuYUIZCQggpOTkhdXek2vfqdvCHMgLg8YtRyrIBcNusoiSRJu54
+         mWwAOStcGxNJmA+eTR/EhXx+T9ZPHW2pZX1ut96IXdXkAC3zxg0XnaudfZlPOVeRtkOy
+         hwToddxBtxiW+ux7lGqM/T0cfJgK2MaXX6COfphV5H1cyQ/ilYyfGkkSMDUAoziOPZcB
+         3f4TpvztJx31v/UvnGVslWlUQTr8W/9sDyQ9FcDF2cZdqIrX++8xQierxh6j7f6pus02
+         P6IelToOymYkC5pKsYsU54su3FwYPnGFq+QQJJ7Ae8jIP8fGiUNcL74L2qqNm708iHR4
+         ewnw==
+X-Gm-Message-State: AOAM532NqofGkKrkg3NUYC7WNfzxq3mhb2unzkJ2KMJyDlvWZFj07KN4
+	CzaToNoydiAk1/By7Ntd3kPJxg==
+X-Google-Smtp-Source: ABdhPJxXGen/VsbHb/d7x2+yJI3KCk0Nmq9xnzsLjk06QOONO3j9/EsgGWLcwS/xwhPSaKB97/qqqw==
+X-Received: by 2002:a17:90b:19cd:: with SMTP id nm13mr5085576pjb.226.1623763722158;
+        Tue, 15 Jun 2021 06:28:42 -0700 (PDT)
+From: Claire Chang <tientzu@chromium.org>
+To: Rob Herring <robh+dt@kernel.org>,
+	mpe@ellerman.id.au,
+	Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	Frank Rowand <frowand.list@gmail.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: benh@kernel.crashing.org,
+	paulus@samba.org,
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+	sstabellini@kernel.org,
+	Robin Murphy <robin.murphy@arm.com>,
+	grant.likely@arm.com,
+	xypron.glpk@gmx.de,
+	Thierry Reding <treding@nvidia.com>,
+	mingo@kernel.org,
+	bauerman@linux.ibm.com,
+	peterz@infradead.org,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Saravana Kannan <saravanak@google.com>,
+	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+	heikki.krogerus@linux.intel.com,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	linux-devicetree <devicetree@vger.kernel.org>,
+	lkml <linux-kernel@vger.kernel.org>,
+	linuxppc-dev@lists.ozlabs.org,
+	xen-devel@lists.xenproject.org,
+	Nicolas Boichat <drinkcat@chromium.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>,
+	tfiga@chromium.org,
+	bskeggs@redhat.com,
+	bhelgaas@google.com,
+	chris@chris-wilson.co.uk,
+	tientzu@chromium.org,
+	daniel@ffwll.ch,
+	airlied@linux.ie,
+	dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	jani.nikula@linux.intel.com,
+	jxgao@google.com,
+	joonas.lahtinen@linux.intel.com,
+	linux-pci@vger.kernel.org,
+	maarten.lankhorst@linux.intel.com,
+	matthew.auld@intel.com,
+	rodrigo.vivi@intel.com,
+	thomas.hellstrom@linux.intel.com
+Subject: [PATCH v10 09/12] swiotlb: Add restricted DMA pool initialization
+Date: Tue, 15 Jun 2021 21:27:08 +0800
+Message-Id: <20210615132711.553451-10-tientzu@chromium.org>
+X-Mailer: git-send-email 2.32.0.272.g935e593368-goog
+In-Reply-To: <20210615132711.553451-1-tientzu@chromium.org>
+References: <20210615132711.553451-1-tientzu@chromium.org>
 MIME-Version: 1.0
-In-Reply-To: <a5d4f4ae-21b9-9798-5501-2c288a70e7b4@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Ian & Wei,
+Add the initialization function to create restricted DMA pools from
+matching reserved-memory nodes.
 
-On 02/06/2021 10:25, Jan Beulich wrote:
-> On 01.06.2021 17:41, Anthony PERARD wrote:
->> Commit cf8c4d3d13b8 made some preparation to have one day
->> variable-length-array argument, but didn't declare the array in the
->> function prototype the same way as in the function definition. And now
->> GCC 11 complains about it.
->>
->> Fixes: cf8c4d3d13b8 ("tools/libs/foreignmemory: pull array length argument to map forward")
->> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-> 
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Ian - this (or whichever alternative might be chosen to address gcc11's
-> valid complaint) also will want backporting.
+Regardless of swiotlb setting, the restricted DMA pool is preferred if
+available.
 
-I was about to commit this patch and noticed that there is still a 
-missing an ack from the tools maintainers. @Ian, @Wei, can you provide one?
+The restricted DMA pools provide a basic level of protection against the
+DMA overwriting buffer contents at unexpected times. However, to protect
+against general data leakage and system memory corruption, the system
+needs to provide a way to lock down the memory access, e.g., MPU.
 
-Cheers,
+Signed-off-by: Claire Chang <tientzu@chromium.org>
+---
+ include/linux/swiotlb.h |  3 +-
+ kernel/dma/Kconfig      | 14 ++++++++
+ kernel/dma/swiotlb.c    | 78 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 94 insertions(+), 1 deletion(-)
 
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index efcd56e3a16c..e76ac46ffff9 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -73,7 +73,8 @@ extern enum swiotlb_force swiotlb_force;
+  *		range check to see if the memory was in fact allocated by this
+  *		API.
+  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
+- *		@end. This is command line adjustable via setup_io_tlb_npages.
++ *		@end. For default swiotlb, this is command line adjustable via
++ *		setup_io_tlb_npages.
+  * @used:	The number of used IO TLB block.
+  * @list:	The free list describing the number of free entries available
+  *		from each index.
+diff --git a/kernel/dma/Kconfig b/kernel/dma/Kconfig
+index 77b405508743..3e961dc39634 100644
+--- a/kernel/dma/Kconfig
++++ b/kernel/dma/Kconfig
+@@ -80,6 +80,20 @@ config SWIOTLB
+ 	bool
+ 	select NEED_DMA_MAP_STATE
+ 
++config DMA_RESTRICTED_POOL
++	bool "DMA Restricted Pool"
++	depends on OF && OF_RESERVED_MEM
++	select SWIOTLB
++	help
++	  This enables support for restricted DMA pools which provide a level of
++	  DMA memory protection on systems with limited hardware protection
++	  capabilities, such as those lacking an IOMMU.
++
++	  For more information see
++	  <Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt>
++	  and <kernel/dma/swiotlb.c>.
++	  If unsure, say "n".
++
+ #
+ # Should be selected if we can mmap non-coherent mappings to userspace.
+ # The only thing that is really required is a way to set an uncached bit
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 3c01162c400b..ef1ccd63534d 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -39,6 +39,13 @@
+ #ifdef CONFIG_DEBUG_FS
+ #include <linux/debugfs.h>
+ #endif
++#ifdef CONFIG_DMA_RESTRICTED_POOL
++#include <linux/io.h>
++#include <linux/of.h>
++#include <linux/of_fdt.h>
++#include <linux/of_reserved_mem.h>
++#include <linux/slab.h>
++#endif
+ 
+ #include <asm/io.h>
+ #include <asm/dma.h>
+@@ -693,3 +700,74 @@ static int __init swiotlb_create_default_debugfs(void)
+ late_initcall(swiotlb_create_default_debugfs);
+ 
+ #endif
++
++#ifdef CONFIG_DMA_RESTRICTED_POOL
++static int rmem_swiotlb_device_init(struct reserved_mem *rmem,
++				    struct device *dev)
++{
++	struct io_tlb_mem *mem = rmem->priv;
++	unsigned long nslabs = rmem->size >> IO_TLB_SHIFT;
++
++	/*
++	 * Since multiple devices can share the same pool, the private data,
++	 * io_tlb_mem struct, will be initialized by the first device attached
++	 * to it.
++	 */
++	if (!mem) {
++		mem = kzalloc(struct_size(mem, slots, nslabs), GFP_KERNEL);
++		if (!mem)
++			return -ENOMEM;
++
++		swiotlb_init_io_tlb_mem(mem, rmem->base, nslabs, false);
++		mem->force = true;
++		set_memory_decrypted((unsigned long)phys_to_virt(rmem->base),
++				     rmem->size >> PAGE_SHIFT);
++
++		rmem->priv = mem;
++
++		if (IS_ENABLED(CONFIG_DEBUG_FS)) {
++			mem->debugfs =
++				debugfs_create_dir(rmem->name, debugfs_dir);
++			swiotlb_create_debugfs_files(mem);
++		}
++	}
++
++	dev->dma_io_tlb_mem = mem;
++
++	return 0;
++}
++
++static void rmem_swiotlb_device_release(struct reserved_mem *rmem,
++					struct device *dev)
++{
++	dev->dma_io_tlb_mem = io_tlb_default_mem;
++}
++
++static const struct reserved_mem_ops rmem_swiotlb_ops = {
++	.device_init = rmem_swiotlb_device_init,
++	.device_release = rmem_swiotlb_device_release,
++};
++
++static int __init rmem_swiotlb_setup(struct reserved_mem *rmem)
++{
++	unsigned long node = rmem->fdt_node;
++
++	if (of_get_flat_dt_prop(node, "reusable", NULL) ||
++	    of_get_flat_dt_prop(node, "linux,cma-default", NULL) ||
++	    of_get_flat_dt_prop(node, "linux,dma-default", NULL) ||
++	    of_get_flat_dt_prop(node, "no-map", NULL))
++		return -EINVAL;
++
++	if (PageHighMem(pfn_to_page(PHYS_PFN(rmem->base)))) {
++		pr_err("Restricted DMA pool must be accessible within the linear mapping.");
++		return -EINVAL;
++	}
++
++	rmem->ops = &rmem_swiotlb_ops;
++	pr_info("Reserved memory: created restricted DMA pool at %pa, size %ld MiB\n",
++		&rmem->base, (unsigned long)rmem->size / SZ_1M);
++	return 0;
++}
++
++RESERVEDMEM_OF_DECLARE(dma, "restricted-dma-pool", rmem_swiotlb_setup);
++#endif /* CONFIG_DMA_RESTRICTED_POOL */
 -- 
-Julien Grall
+2.32.0.272.g935e593368-goog
+
 
