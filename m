@@ -2,42 +2,42 @@ Return-Path: <SRS0=A7jt=LJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8382C48BE5
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 16:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 621E5C48BDF
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 16:20:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6750A6162E
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 16:20:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6750A6162E
+	by mail.kernel.org (Postfix) with ESMTPS id 1280961444
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 16:20:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1280961444
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142263.262557 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142264.262561 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltBnU-0001JJ-KP; Tue, 15 Jun 2021 16:20:16 +0000
+	id 1ltBnU-0001Nk-TS; Tue, 15 Jun 2021 16:20:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142263.262557; Tue, 15 Jun 2021 16:20:16 +0000
+Received: by outflank-mailman (output) from mailman id 142264.262561; Tue, 15 Jun 2021 16:20:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltBnU-0001IL-G6; Tue, 15 Jun 2021 16:20:16 +0000
-Received: by outflank-mailman (input) for mailman id 142263;
- Tue, 15 Jun 2021 16:20:15 +0000
+	id 1ltBnU-0001Mt-P4; Tue, 15 Jun 2021 16:20:16 +0000
+Received: by outflank-mailman (input) for mailman id 142264;
+ Tue, 15 Jun 2021 16:20:16 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=x6ws=LJ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ltBnT-0001I3-9X
- for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 16:20:15 +0000
+ id 1ltBnU-0001I3-1Q
+ for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 16:20:16 +0000
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fdb62d00-d648-4f72-aed7-cbfa368f4b73;
- Tue, 15 Jun 2021 16:20:14 +0000 (UTC)
+ id 97388bdc-2743-4f93-8aaa-34c51520979e;
+ Tue, 15 Jun 2021 16:20:15 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,120 +49,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fdb62d00-d648-4f72-aed7-cbfa368f4b73
+X-Inumbo-ID: 97388bdc-2743-4f93-8aaa-34c51520979e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1623774013;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=F5Mje3VKXtUyGE4h1vE6y2c0mTHqiWniCE7C39mKUeA=;
-  b=eXB0iBdiIRRaVmyydaENHFqVULnp0b5lGOg2eyDqC8SWkMwhNtddwZsV
-   /aT9WPslym35rNEOaCCEkc4aCUuVMKSUPRCO4IGiPTj17W6AJgqvPlSUZ
-   z8/pnh4rfTu8Gt0pf3J0B5bHP2dQqU0uoO99bnnyNOe+zMZOo5PubFBpA
-   c=;
+  d=citrix.com; s=securemail; t=1623774014;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=AvUFbf3FSMcV+rluVuwGLyq8UftlOj+vpVc2Zx0Ih3c=;
+  b=fG/JNQxiBlnVHxBaYAr10OFENtr0/fogTkbQuzalC5rVQJPHpVa7Til5
+   7DmA/ZIHaP4GqSsDqtLNyillujqrxkiLEMBluGJSo4fcMWk0WmXzPxgAy
+   T2eW66uZfRRLdFPJYdVtRhumPqNblyDwpDUmYWXrNInnnWzY4aISAZi5j
+   k=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 5wWe7+wJYhbgc3ZA/tjz/BPbwzUU6BsTgBZ/ylAsbtojZw81FYJKt4P5MpT0mI7bEJjlxxvS0g
- fmUeWU9OVZzln/mq00OxvASNsVhn2cZY5qawOCsv/Am8v0nepNzkq1Bir5JzdKp5SB0VUlig9n
- TGxDgjBpS0HUjEdd++cp837SOziPflpi1yHIfQ95/sCBWVSZzpP+ETLfWAXLv92peDKxHlEneR
- do8/Y1sAvwhpusB4Zy/ROvqgQ83VnNqje6B4Zh9WzYJd/4Ss/BcVF9M0ggrWJyl2MSVNxbx4Dr
- 6Fw=
+IronPort-SDR: q5xrZZJri4rT2UW6TqANu9YkT7bgIzgR/i3TaOP9zZjx4NWlRnzChVlUfTvKm18qpmxKXuooe9
+ +COybCnVGTXoJL/QcxIOY7AN6QPxVjw5iFOAXei2Cqg7M6h0HRQ79oaHDGmrAv9jPLcDsEGYSS
+ w/X3PjGkvaSWGCZQLhg84drRu7NWNfsQ+NHy/xP5gcpORzEFS1t4+yMq12azvg8kaB5DIiwIqd
+ zLguIR0wfOUZuxoxLPdE36gHfAgJ0z5IJ64BJ8+633Kr3OzGoW6J561QIeU6DpuTx3bpK5FE75
+ K0Y=
 X-SBRS: 5.1
-X-MesageID: 46185786
+X-MesageID: 46185793
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:JTKuIaABeTjyqPrlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
- xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 9dmsNFaeEYY2IUsS+D2njbL+od
+IronPort-HdrOrdr: A9a23:0lTbQq31AEh6IFNLlqwSTAqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
 X-IronPort-AV: E=Sophos;i="5.83,275,1616472000"; 
-   d="scan'208";a="46185786"
+   d="scan'208";a="46185793"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
 	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Jan Beulich <JBeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
 	<jgross@suse.com>
-Subject: [PATCH 0/5] tools/tests: More cleanup for automation improvements
-Date: Tue, 15 Jun 2021 17:19:00 +0100
-Message-ID: <20210615161905.9831-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/5] tests/xenstore: Rework Makefile
+Date: Tue, 15 Jun 2021 17:19:05 +0100
+Message-ID: <20210615161905.9831-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210615161905.9831-1-andrew.cooper3@citrix.com>
+References: <20210615161905.9831-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This series takes us one step closer towards the "autotests" plan for
-simplifying the running of unit and low level system tests.
+In particular, fill in the install/uninstall rules so this test can be
+packaged to be automated sensibly.
 
-With this series in place, all the tests which need running in dom0 have
-working install/uninstall targets, so they can be packaged suitably.
+Rename xs-test to test-xenstore to be consistent with other tests.  Honour
+APPEND_FLAGS too.
 
-Some questions, concerning future changes.
-
-Ian: Presuambly OSSTest is going to complain if I stick a test- prefix on
-depriv-fd-checker?  I've left that test alone for now, as it was the only
-preexisting test with working install runes.
-
-Jan/Roger: x86_emulator and vpci use $(HOSTCC) not $(CC).  While they are unit
-tests, we still potentially want to run them in dom0 rather than the build
-environment - particularly for x86_emulator which is heavily CPUID based and
-wants to run on a wide set of hardware.  Any issues moving them off $(HOSTCC)?
-
-Roger: vhpet isn't even wired into the build system, and seems non-trivial to
-run in the first place.  How should "success" be judged?
-
-Andrew Cooper (5):
-  tools/tests: Drop obsolete mce-test infrastructure
-  tools/tests: Drop run runes
-  tests/resource: Rework Makefile
-  tests/cpu-policy: Rework Makefile
-  tests/xenstore: Rework Makefile
-
- .gitignore                                         |   2 -
- tools/misc/.gitignore                              |   1 +
- tools/misc/Makefile                                |   4 +
- tools/{tests/mce-test/tools => misc}/xen-mceinj.c  |  32 +--
- tools/tests/Makefile                               |   1 -
- tools/tests/cpu-policy/Makefile                    |  33 +--
- tools/tests/mce-test/Makefile                      |  12 -
- tools/tests/mce-test/README                        |  75 ------
- tools/tests/mce-test/cases/srao_llc/dom0/cases.sh  |  73 ------
- tools/tests/mce-test/cases/srao_llc/guest/cases.sh |  94 --------
- tools/tests/mce-test/cases/srao_llc/xen/cases.sh   |  69 ------
- tools/tests/mce-test/cases/srao_mem/dom0/cases.sh  |  73 ------
- tools/tests/mce-test/cases/srao_mem/guest/cases.sh |  94 --------
- tools/tests/mce-test/cases/srao_mem/xen/cases.sh   |  69 ------
- tools/tests/mce-test/cases/ucna_llc/dom0/cases.sh  |  72 ------
- tools/tests/mce-test/cases/ucna_llc/guest/cases.sh |  92 --------
- tools/tests/mce-test/cases/ucna_llc/xen/cases.sh   |  68 ------
- tools/tests/mce-test/config/setup.conf             |  24 --
- tools/tests/mce-test/lib/xen-mceinj-tool.sh        | 260 ---------------------
- tools/tests/mce-test/tools/Makefile                |  24 --
- tools/tests/mce-test/tools/README                  |  24 --
- tools/tests/resource/Makefile                      |  11 +-
- tools/tests/vpci/Makefile                          |   4 -
- tools/tests/x86_emulator/Makefile                  |   4 -
- tools/tests/xenstore/.gitignore                    |   1 +
- tools/tests/xenstore/Makefile                      |  31 ++-
- .../tests/xenstore/{xs-test.c => test-xenstore.c}  |   0
- 27 files changed, 71 insertions(+), 1176 deletions(-)
- rename tools/{tests/mce-test/tools => misc}/xen-mceinj.c (97%)
- delete mode 100644 tools/tests/mce-test/Makefile
- delete mode 100644 tools/tests/mce-test/README
- delete mode 100644 tools/tests/mce-test/cases/srao_llc/dom0/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/srao_llc/guest/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/srao_llc/xen/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/srao_mem/dom0/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/srao_mem/guest/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/srao_mem/xen/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/ucna_llc/dom0/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/ucna_llc/guest/cases.sh
- delete mode 100644 tools/tests/mce-test/cases/ucna_llc/xen/cases.sh
- delete mode 100644 tools/tests/mce-test/config/setup.conf
- delete mode 100644 tools/tests/mce-test/lib/xen-mceinj-tool.sh
- delete mode 100644 tools/tests/mce-test/tools/Makefile
- delete mode 100644 tools/tests/mce-test/tools/README
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Juergen Gross <jgross@suse.com>
+---
+ .gitignore                                         |  1 -
+ tools/tests/xenstore/.gitignore                    |  1 +
+ tools/tests/xenstore/Makefile                      | 31 +++++++++++++++-------
+ .../tests/xenstore/{xs-test.c => test-xenstore.c}  |  0
+ 4 files changed, 23 insertions(+), 10 deletions(-)
  create mode 100644 tools/tests/xenstore/.gitignore
  rename tools/tests/xenstore/{xs-test.c => test-xenstore.c} (100%)
 
+diff --git a/.gitignore b/.gitignore
+index d4b90303b2..8ebb51b6c5 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -275,7 +275,6 @@ tools/tests/x86_emulator/*sse*.[ch]
+ tools/tests/x86_emulator/test_x86_emulator
+ tools/tests/x86_emulator/x86_emulate
+ tools/tests/x86_emulator/xop*.[ch]
+-tools/tests/xenstore/xs-test
+ tools/tests/vpci/list.h
+ tools/tests/vpci/vpci.[hc]
+ tools/tests/vpci/test_vpci
+diff --git a/tools/tests/xenstore/.gitignore b/tools/tests/xenstore/.gitignore
+new file mode 100644
+index 0000000000..4b44f5dd60
+--- /dev/null
++++ b/tools/tests/xenstore/.gitignore
+@@ -0,0 +1 @@
++test-xenstore
+diff --git a/tools/tests/xenstore/Makefile b/tools/tests/xenstore/Makefile
+index a367d88803..3c7b7073fd 100644
+--- a/tools/tests/xenstore/Makefile
++++ b/tools/tests/xenstore/Makefile
+@@ -1,11 +1,7 @@
+ XEN_ROOT=$(CURDIR)/../../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-CFLAGS += -Werror
+-
+-CFLAGS += $(CFLAGS_libxenstore)
+-
+-TARGETS-y := xs-test
++TARGETS-y := test-xenstore
+ TARGETS := $(TARGETS-y)
+ 
+ .PHONY: all
+@@ -16,14 +12,31 @@ build: $(TARGETS)
+ 
+ .PHONY: clean
+ clean:
+-	$(RM) *.o $(TARGETS) *~ $(DEPS_RM)
++	$(RM) -f -- *.o $(TARGETS) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
++	$(RM) -f -- *~
++
++.PHONY: install
++install: all
++	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
++	$(if $(TARGETS),$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC_BIN))
++
++.PHONY: uninstall
++uninstall:
++	$(RM) -f -- $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/,$(TARGETS))
++
++CFLAGS += -Werror
++CFLAGS += $(CFLAGS_libxenstore)
++CFLAGS += $(APPEND_CFLAGS)
++
++LDFLAGS += $(LDLIBS_libxenstore)
++LDFLAGS += $(APPEND_LDFLAGS)
+ 
+-xs-test: xs-test.o Makefile
+-	$(CC) -o $@ $< $(LDFLAGS) $(LDLIBS_libxenstore)
++%.o: Makefile
+ 
+-install uninstall:
++test-xenstore: test-xenstore.o
++	$(CC) -o $@ $< $(LDFLAGS)
+ 
+ -include $(DEPS_INCLUDE)
+diff --git a/tools/tests/xenstore/xs-test.c b/tools/tests/xenstore/test-xenstore.c
+similarity index 100%
+rename from tools/tests/xenstore/xs-test.c
+rename to tools/tests/xenstore/test-xenstore.c
 -- 
 2.11.0
 
