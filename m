@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BFD6C49EA3
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:31:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBBDDC48BDF
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:32:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B367161476
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:31:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B367161476
+	by mail.kernel.org (Postfix) with ESMTPS id 6DA21601FC
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:32:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6DA21601FC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142070.262291 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142074.262314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9AU-0004Lv-DQ; Tue, 15 Jun 2021 13:31:50 +0000
+	id 1lt9AY-00051G-6W; Tue, 15 Jun 2021 13:31:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142070.262291; Tue, 15 Jun 2021 13:31:50 +0000
+Received: by outflank-mailman (output) from mailman id 142074.262314; Tue, 15 Jun 2021 13:31:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9AU-0004K6-6f; Tue, 15 Jun 2021 13:31:50 +0000
-Received: by outflank-mailman (input) for mailman id 142070;
- Tue, 15 Jun 2021 13:31:48 +0000
+	id 1lt9AX-0004zm-Sr; Tue, 15 Jun 2021 13:31:53 +0000
+Received: by outflank-mailman (input) for mailman id 142074;
+ Tue, 15 Jun 2021 13:31:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=62sT=LJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lt97f-0000bS-NV
- for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:28:55 +0000
-Received: from mail-pj1-x102e.google.com (unknown [2607:f8b0:4864:20::102e])
+ id 1lt98Y-0000bS-Pi
+ for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:29:50 +0000
+Received: from mail-pj1-x1031.google.com (unknown [2607:f8b0:4864:20::1031])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e168b282-b877-436d-99ba-e8f4e047ac20;
- Tue, 15 Jun 2021 13:28:25 +0000 (UTC)
-Received: by mail-pj1-x102e.google.com with SMTP id
- s17-20020a17090a8811b029016e89654f93so1813180pjn.1
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:28:25 -0700 (PDT)
+ id 9017cfd7-4910-4b08-ad0c-1b384d7524de;
+ Tue, 15 Jun 2021 13:29:08 +0000 (UTC)
+Received: by mail-pj1-x1031.google.com with SMTP id ei4so11783760pjb.3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:29:08 -0700 (PDT)
 Received: from localhost ([2401:fa00:95:205:1846:5274:e444:139e])
- by smtp.gmail.com with UTF8SMTPSA id b6sm15444521pfv.16.2021.06.15.06.28.17
+ by smtp.gmail.com with UTF8SMTPSA id w27sm16447396pfq.117.2021.06.15.06.29.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jun 2021 06:28:23 -0700 (PDT)
+ Tue, 15 Jun 2021 06:29:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,31 +54,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e168b282-b877-436d-99ba-e8f4e047ac20
+X-Inumbo-ID: 9017cfd7-4910-4b08-ad0c-1b384d7524de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=G2K/m+Zr/C3L9kjElXXnw2MqplvvJistlV9RBDCxxbA=;
-        b=S+0WgFWRpS+XVuyOr6ge+m8GeoamDCl8MImPmxPownLMaRnPddIW/4jWtOzq7baMS4
-         2cYnPw3kqWnOh0beyRy8sCyEGJJQnDgQZsawvLBFKtk8G7k3bIkUl48o16Ce4bkzeIE8
-         42Td6UN7L2/FOv7HufjRoYmlw39AIEDY4BEEo=
+        bh=JTiG8Mo/Nik+wIMq7cgtIy70t0SMnfIMs1UdiPtMcT8=;
+        b=eMMTD49WILvEJwNkbyXll1fUBPjpxlVSOhGaqL9TwmPYonPep8XftjIi5HAggU5srI
+         CLNpua3pQ7CwLVSW3dv0uDNKq24FS4175dYppaWlWO3XqF6T9hZPazFJ1he0aV5H6ErX
+         dgTORgnp7aFTod/O8rpuewIUUw+E6SucoIApk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=G2K/m+Zr/C3L9kjElXXnw2MqplvvJistlV9RBDCxxbA=;
-        b=luJygGixtfdeDh93lhTDWSjgs6YHIykYAx28LYiXM6z48fJT5+ytbiwYZ8KyG3r8Bd
-         y2b6UOcRna0ZEiGjRdRDlDNOq3m26jKDtUsVrrr+u6d8yZfth/6W5wb2RfrZbV5jaXy3
-         9eXqsnWAlfgFupZlVRMyiTRKcArWRA49hC/F7+4HB49MVSLX6Kpfzg+PHZxvMlshuCKp
-         lfzCfXjKM0ydSV+BIzBybthBAn7DeOmufwtIY7PZ9BsHTZKwejedSEifA1aiJbtya3QX
-         He5EK8SIw+PmvItMTHw2o1qXCZO60pRcwCy6OrXeeCcd6mqzAgu1vTXJaI27sXP7+gSu
-         VBKQ==
-X-Gm-Message-State: AOAM5337WjV4RYD2/upgQLgsUrJaDvpFVQgICYC+4VS78rZT4N0O/B18
-	UFPaG0fWSNhsOXWUnbDvtbvgag==
-X-Google-Smtp-Source: ABdhPJzZB1FWHQkznzmBmSBFzh8JRoY7MD6aobVhux7mtkc928qojTPDdCJJ8YwZ2pCQlZ/ERmu5LQ==
-X-Received: by 2002:a17:90a:5b07:: with SMTP id o7mr10771533pji.35.1623763704484;
-        Tue, 15 Jun 2021 06:28:24 -0700 (PDT)
+        bh=JTiG8Mo/Nik+wIMq7cgtIy70t0SMnfIMs1UdiPtMcT8=;
+        b=fYYXZ5sBZGRwdSC05TDzn3+DpWmHHo22pCeW6BmmAR1rtLCKVBnS4HfkV0Bi8HE/zb
+         GrFDv0zfDc15Z6Ie+w/GilwhhEmLszk+gb6b4JwS65Tqc1rIbdbBCFDIXTr/+J3YhrKZ
+         CbDJV5Lsqir6zp5Uk8YH066INAG8HOHs92CMYIBRwrOD/LHnNoCZFT+KTR797ajcrJuR
+         rqHjnC7ghtmP9PglDMmulFu6FnvpPXpdPmB062Z+S31H6x+rgPUQUUBh8Hj3wosZF0Q7
+         bimtbKSJtC0NpW97WQlOG6l9ILjzS/y/oYMas5zir752SwFW3cQ9nOQlUYrWa1g11S9z
+         8IeQ==
+X-Gm-Message-State: AOAM532O9wJEne+Kdm/BEG6mEQUH2YPeKEgSr6NhFy/bWZ+z7ti3f0xV
+	pWPcMcOxNMSSIL4KcJwEbSZkhg==
+X-Google-Smtp-Source: ABdhPJzXEtYDRC2fz4fUhVok40FY/FvrMnNmlVHfb+TKFwVcW+8fDTaQF2I0RwRDZ7J7BoI70NFDeg==
+X-Received: by 2002:a17:902:e289:b029:10c:97e9:2c74 with SMTP id o9-20020a170902e289b029010c97e92c74mr4206776plc.34.1623763748216;
+        Tue, 15 Jun 2021 06:29:08 -0700 (PDT)
 From: Claire Chang <tientzu@chromium.org>
 To: Rob Herring <robh+dt@kernel.org>,
 	mpe@ellerman.id.au,
@@ -133,73 +132,113 @@ Cc: benh@kernel.crashing.org,
 	matthew.auld@intel.com,
 	rodrigo.vivi@intel.com,
 	thomas.hellstrom@linux.intel.com
-Subject: [PATCH v10 07/12] swiotlb: Move alloc_size to swiotlb_find_slots
-Date: Tue, 15 Jun 2021 21:27:06 +0800
-Message-Id: <20210615132711.553451-8-tientzu@chromium.org>
+Subject: [PATCH v10 12/12] of: Add plumbing for restricted DMA pool
+Date: Tue, 15 Jun 2021 21:27:11 +0800
+Message-Id: <20210615132711.553451-13-tientzu@chromium.org>
 X-Mailer: git-send-email 2.32.0.272.g935e593368-goog
 In-Reply-To: <20210615132711.553451-1-tientzu@chromium.org>
 References: <20210615132711.553451-1-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Rename find_slots to swiotlb_find_slots and move the maintenance of
-alloc_size to it for better code reusability later.
+If a device is not behind an IOMMU, we look up the device node and set
+up the restricted DMA when the restricted-dma-pool is presented.
 
 Signed-off-by: Claire Chang <tientzu@chromium.org>
 ---
- kernel/dma/swiotlb.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ drivers/of/address.c    | 33 +++++++++++++++++++++++++++++++++
+ drivers/of/device.c     |  3 +++
+ drivers/of/of_private.h |  6 ++++++
+ 3 files changed, 42 insertions(+)
 
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 5af47a8f68b8..e498f11e150e 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -422,8 +422,8 @@ static unsigned int wrap_index(struct io_tlb_mem *mem, unsigned int index)
-  * Find a suitable number of IO TLB entries size that will fit this request and
-  * allocate a buffer from that IO TLB pool.
-  */
--static int find_slots(struct device *dev, phys_addr_t orig_addr,
--		size_t alloc_size)
-+static int swiotlb_find_slots(struct device *dev, phys_addr_t orig_addr,
-+			      size_t alloc_size)
- {
- 	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
- 	unsigned long boundary_mask = dma_get_seg_boundary(dev);
-@@ -478,8 +478,11 @@ static int find_slots(struct device *dev, phys_addr_t orig_addr,
- 	return -1;
- 
- found:
--	for (i = index; i < index + nslots; i++)
-+	for (i = index; i < index + nslots; i++) {
- 		mem->slots[i].list = 0;
-+		mem->slots[i].alloc_size =
-+			alloc_size - ((i - index) << IO_TLB_SHIFT);
+diff --git a/drivers/of/address.c b/drivers/of/address.c
+index 3b2acca7e363..c8066d95ff0e 100644
+--- a/drivers/of/address.c
++++ b/drivers/of/address.c
+@@ -8,6 +8,7 @@
+ #include <linux/logic_pio.h>
+ #include <linux/module.h>
+ #include <linux/of_address.h>
++#include <linux/of_reserved_mem.h>
+ #include <linux/pci.h>
+ #include <linux/pci_regs.h>
+ #include <linux/sizes.h>
+@@ -1001,6 +1002,38 @@ int of_dma_get_range(struct device_node *np, const struct bus_dma_region **map)
+ 	of_node_put(node);
+ 	return ret;
+ }
++
++int of_dma_set_restricted_buffer(struct device *dev, struct device_node *np)
++{
++	struct device_node *node, *of_node = dev->of_node;
++	int count, i;
++
++	count = of_property_count_elems_of_size(of_node, "memory-region",
++						sizeof(u32));
++	/*
++	 * If dev->of_node doesn't exist or doesn't contain memory-region, try
++	 * the OF node having DMA configuration.
++	 */
++	if (count <= 0) {
++		of_node = np;
++		count = of_property_count_elems_of_size(
++			of_node, "memory-region", sizeof(u32));
 +	}
- 	for (i = index - 1;
- 	     io_tlb_offset(i) != IO_TLB_SEGSIZE - 1 &&
- 	     mem->slots[i].list; i--)
-@@ -520,7 +523,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 		return (phys_addr_t)DMA_MAPPING_ERROR;
- 	}
++
++	for (i = 0; i < count; i++) {
++		node = of_parse_phandle(of_node, "memory-region", i);
++		/*
++		 * There might be multiple memory regions, but only one
++		 * restricted-dma-pool region is allowed.
++		 */
++		if (of_device_is_compatible(node, "restricted-dma-pool") &&
++		    of_device_is_available(node))
++			return of_reserved_mem_device_init_by_idx(dev, of_node,
++								  i);
++	}
++
++	return 0;
++}
+ #endif /* CONFIG_HAS_DMA */
  
--	index = find_slots(dev, orig_addr, alloc_size + offset);
-+	index = swiotlb_find_slots(dev, orig_addr, alloc_size + offset);
- 	if (index == -1) {
- 		if (!(attrs & DMA_ATTR_NO_WARN))
- 			dev_warn_ratelimited(dev,
-@@ -534,11 +537,8 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 	 * This is needed when we sync the memory.  Then we sync the buffer if
- 	 * needed.
- 	 */
--	for (i = 0; i < nr_slots(alloc_size + offset); i++) {
-+	for (i = 0; i < nr_slots(alloc_size + offset); i++)
- 		mem->slots[index + i].orig_addr = slot_addr(orig_addr, i);
--		mem->slots[index + i].alloc_size =
--			alloc_size - (i << IO_TLB_SHIFT);
--	}
- 	tlb_addr = slot_addr(mem->start, index) + offset;
- 	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
- 	    (dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL))
+ /**
+diff --git a/drivers/of/device.c b/drivers/of/device.c
+index c5a9473a5fb1..2defdca418ec 100644
+--- a/drivers/of/device.c
++++ b/drivers/of/device.c
+@@ -165,6 +165,9 @@ int of_dma_configure_id(struct device *dev, struct device_node *np,
+ 
+ 	arch_setup_dma_ops(dev, dma_start, size, iommu, coherent);
+ 
++	if (!iommu)
++		return of_dma_set_restricted_buffer(dev, np);
++
+ 	return 0;
+ }
+ EXPORT_SYMBOL_GPL(of_dma_configure_id);
+diff --git a/drivers/of/of_private.h b/drivers/of/of_private.h
+index 631489f7f8c0..376462798f7e 100644
+--- a/drivers/of/of_private.h
++++ b/drivers/of/of_private.h
+@@ -163,12 +163,18 @@ struct bus_dma_region;
+ #if defined(CONFIG_OF_ADDRESS) && defined(CONFIG_HAS_DMA)
+ int of_dma_get_range(struct device_node *np,
+ 		const struct bus_dma_region **map);
++int of_dma_set_restricted_buffer(struct device *dev, struct device_node *np);
+ #else
+ static inline int of_dma_get_range(struct device_node *np,
+ 		const struct bus_dma_region **map)
+ {
+ 	return -ENODEV;
+ }
++static inline int of_dma_set_restricted_buffer(struct device *dev,
++					       struct device_node *np)
++{
++	return -ENODEV;
++}
+ #endif
+ 
+ void fdt_init_reserved_mem(void);
 -- 
 2.32.0.272.g935e593368-goog
 
