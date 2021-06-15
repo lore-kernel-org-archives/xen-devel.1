@@ -2,51 +2,43 @@ Return-Path: <SRS0=A7jt=LJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 916C3C48BE8
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:39:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75E37C49EA2
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:39:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 614C261477
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:39:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 614C261477
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4831261439
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:39:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4831261439
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142129.262400 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142133.262411 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9HP-0002aB-WC; Tue, 15 Jun 2021 13:38:59 +0000
+	id 1lt9HY-00037I-8X; Tue, 15 Jun 2021 13:39:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142129.262400; Tue, 15 Jun 2021 13:38:59 +0000
+Received: by outflank-mailman (output) from mailman id 142133.262411; Tue, 15 Jun 2021 13:39:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9HP-0002a4-SN; Tue, 15 Jun 2021 13:38:59 +0000
-Received: by outflank-mailman (input) for mailman id 142129;
- Tue, 15 Jun 2021 13:38:58 +0000
+	id 1lt9HY-00037B-4m; Tue, 15 Jun 2021 13:39:08 +0000
+Received: by outflank-mailman (input) for mailman id 142133;
+ Tue, 15 Jun 2021 13:39:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=62sT=LJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lt9HO-0002YN-KC
- for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:38:58 +0000
-Received: from mail-pl1-x62a.google.com (unknown [2607:f8b0:4864:20::62a])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=0zBy=LJ=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1lt9HW-00031k-Ky
+ for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:39:06 +0000
+Received: from verein.lst.de (unknown [213.95.11.211])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3c1adcf2-88d9-43e5-b18b-ae43ba116575;
- Tue, 15 Jun 2021 13:38:57 +0000 (UTC)
-Received: by mail-pl1-x62a.google.com with SMTP id 11so8468032plk.12
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:38:57 -0700 (PDT)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com.
- [209.85.215.173])
- by smtp.gmail.com with ESMTPSA id o1sm15292214pjf.56.2021.06.15.06.38.56
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jun 2021 06:38:56 -0700 (PDT)
-Received: by mail-pg1-f173.google.com with SMTP id g22so6386632pgk.1
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:38:56 -0700 (PDT)
+ id 83cbd895-b7c6-45d5-9be5-8994ff405de2;
+ Tue, 15 Jun 2021 13:39:05 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 3CF0668AFE; Tue, 15 Jun 2021 15:39:03 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,66 +50,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c1adcf2-88d9-43e5-b18b-ae43ba116575
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=UDZeAXhtUGNxVigPWnCAmqvhZ5xmOZkpwoxu/kotpBc=;
-        b=BkGuougKdpvJFSjPDCYcuDM+EfC9+Z6Iw8t63OKFUyvGcy9WEOaTZOyzUjDtlqxxWx
-         b+f6+GiSSKCn4V8zlclen8CemZkaZyLB8FJKB0g3go6na2Mkb6J76IEsPQg2PB5YFP++
-         oJX8/uFYscqhRRWgaBEXbZGZq7TD88YFqCsf4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=UDZeAXhtUGNxVigPWnCAmqvhZ5xmOZkpwoxu/kotpBc=;
-        b=JnWWfxBtLo036nf7cRtgRPT/c2uHL+WXrwClMIYjTnFuRrQgFNbLCLkihDn+2txY7E
-         uMryeR5B5Mczi4xuBJuOcHPkXs5FKerTviGjbKzDicvByNWqcGH97lksDArXe8uZGA0L
-         hh/T6VGtTQNP+XPyBbFtKzS0Ze8H5cWI8B9BHV8LDcMGJtJFwLmiuVP90R7DV5xrM3bx
-         qsljRTG8QJKwiDP0uLN76Zf0COpqUOtsQjo/Hkdj+qpoZ+aCr/Mgqh6IVtXU0ZgjnoiF
-         wXK5yTqwduvjBKZPMjedaXEqZHu6P0bu1Y2ppYp8iBiPY8ZC4SbtfPjY6iTVs+di//FU
-         NbUw==
-X-Gm-Message-State: AOAM532dLB+gT9vxHOve9U0HSPgd2WZVWhnhoSnZDgWxRL9JCat114XI
-	UrqWRU/4f0jSd30aRKrevFz8HSY0rOHoWQ==
-X-Google-Smtp-Source: ABdhPJzREdBjVFcuSEDrKD4wi73XLP8IRPuoOXW1TWztJPM2WUNXdujWw31IKaeHAzIF3hzfWEYeaw==
-X-Received: by 2002:a17:90a:9488:: with SMTP id s8mr13783063pjo.236.1623764336931;
-        Tue, 15 Jun 2021 06:38:56 -0700 (PDT)
-X-Received: by 2002:a05:6e02:219d:: with SMTP id j29mr17936278ila.64.1623763835517;
- Tue, 15 Jun 2021 06:30:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210611152659.2142983-1-tientzu@chromium.org>
-In-Reply-To: <20210611152659.2142983-1-tientzu@chromium.org>
-From: Claire Chang <tientzu@chromium.org>
-Date: Tue, 15 Jun 2021 21:30:24 +0800
-X-Gmail-Original-Message-ID: <CALiNf28fb4rZ0Afun8wAWRYJY4gqc+-vRvDBZT3x2JgSPL_iVQ@mail.gmail.com>
-Message-ID: <CALiNf28fb4rZ0Afun8wAWRYJY4gqc+-vRvDBZT3x2JgSPL_iVQ@mail.gmail.com>
-Subject: Re: [PATCH v9 00/14] Restricted DMA
-To: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>, 
-	Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, 
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com, jgross@suse.com, 
-	Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: benh@kernel.crashing.org, paulus@samba.org, 
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
-	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
-	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
-	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
-	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
-	heikki.krogerus@linux.intel.com, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
-	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
-	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
-	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
-	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>, 
-	Tomasz Figa <tfiga@chromium.org>, bskeggs@redhat.com, 
-	Bjorn Helgaas <bhelgaas@google.com>, chris@chris-wilson.co.uk, 
-	Daniel Vetter <daniel@ffwll.ch>, airlied@linux.ie, dri-devel@lists.freedesktop.org, 
-	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, 
-	Jianxiong Gao <jxgao@google.com>, joonas.lahtinen@linux.intel.com, 
-	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com, 
-	matthew.auld@intel.com, rodrigo.vivi@intel.com, 
+X-Inumbo-ID: 83cbd895-b7c6-45d5-9be5-8994ff405de2
+Date: Tue, 15 Jun 2021 15:39:02 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Claire Chang <tientzu@chromium.org>
+Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
+	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+	Frank Rowand <frowand.list@gmail.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	boris.ostrovsky@oracle.com, jgross@suse.com,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	benh@kernel.crashing.org, paulus@samba.org,
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+	sstabellini@kernel.org, Robin Murphy <robin.murphy@arm.com>,
+	grant.likely@arm.com, xypron.glpk@gmx.de,
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org,
+	bauerman@linux.ibm.com, peterz@infradead.org,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Saravana Kannan <saravanak@google.com>,
+	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+	heikki.krogerus@linux.intel.com,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	linux-devicetree <devicetree@vger.kernel.org>,
+	lkml <linux-kernel@vger.kernel.org>, linuxppc-dev@lists.ozlabs.org,
+	xen-devel@lists.xenproject.org,
+	Nicolas Boichat <drinkcat@chromium.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>, tfiga@chromium.org,
+	bskeggs@redhat.com, bhelgaas@google.com, chris@chris-wilson.co.uk,
+	daniel@ffwll.ch, airlied@linux.ie, dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	jxgao@google.com, joonas.lahtinen@linux.intel.com,
+	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com,
+	matthew.auld@intel.com, rodrigo.vivi@intel.com,
 	thomas.hellstrom@linux.intel.com
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v10 05/12] swiotlb: Update is_swiotlb_active to add a
+ struct device argument
+Message-ID: <20210615133902.GE20389@lst.de>
+References: <20210615132711.553451-1-tientzu@chromium.org> <20210615132711.553451-6-tientzu@chromium.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210615132711.553451-6-tientzu@chromium.org>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-v10 here: https://lore.kernel.org/patchwork/cover/1446882/
+On Tue, Jun 15, 2021 at 09:27:04PM +0800, Claire Chang wrote:
+> Update is_swiotlb_active to add a struct device argument. This will be
+> useful later to allow for different pools.
+> 
+> Signed-off-by: Claire Chang <tientzu@chromium.org>
+
+Looks good,
+
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 
