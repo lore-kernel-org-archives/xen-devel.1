@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63DC7C49EA2
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 274EAC48BDF
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:32:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 19287601FC
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:32:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 19287601FC
+	by mail.kernel.org (Postfix) with ESMTPS id D3E5A61474
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Jun 2021 13:32:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D3E5A61474
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142072.262309 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142076.262331 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9AX-0004wi-M3; Tue, 15 Jun 2021 13:31:53 +0000
+	id 1lt9Ab-0005f3-E0; Tue, 15 Jun 2021 13:31:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142072.262309; Tue, 15 Jun 2021 13:31:53 +0000
+Received: by outflank-mailman (output) from mailman id 142076.262331; Tue, 15 Jun 2021 13:31:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lt9AX-0004wP-H6; Tue, 15 Jun 2021 13:31:53 +0000
-Received: by outflank-mailman (input) for mailman id 142072;
- Tue, 15 Jun 2021 13:31:52 +0000
+	id 1lt9Ab-0005em-A6; Tue, 15 Jun 2021 13:31:57 +0000
+Received: by outflank-mailman (input) for mailman id 142076;
+ Tue, 15 Jun 2021 13:31:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=62sT=LJ=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1lt97k-0000bS-Ni
- for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:29:00 +0000
-Received: from mail-pg1-x52e.google.com (unknown [2607:f8b0:4864:20::52e])
+ id 1lt98O-0000bS-PH
+ for xen-devel@lists.xenproject.org; Tue, 15 Jun 2021 13:29:40 +0000
+Received: from mail-pj1-x102a.google.com (unknown [2607:f8b0:4864:20::102a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 372e2d18-11d2-416e-af8b-075cb120ea65;
- Tue, 15 Jun 2021 13:28:34 +0000 (UTC)
-Received: by mail-pg1-x52e.google.com with SMTP id v7so2696927pgl.2
- for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:28:34 -0700 (PDT)
+ id 3a923bd6-c1a6-4d10-a60f-47eb06fa6abb;
+ Tue, 15 Jun 2021 13:29:00 +0000 (UTC)
+Received: by mail-pj1-x102a.google.com with SMTP id g24so11780066pji.4
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Jun 2021 06:29:00 -0700 (PDT)
 Received: from localhost ([2401:fa00:95:205:1846:5274:e444:139e])
- by smtp.gmail.com with UTF8SMTPSA id g17sm7117013pgh.61.2021.06.15.06.28.25
+ by smtp.gmail.com with UTF8SMTPSA id y205sm15379907pfb.53.2021.06.15.06.28.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Jun 2021 06:28:32 -0700 (PDT)
+ Tue, 15 Jun 2021 06:28:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,31 +54,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 372e2d18-11d2-416e-af8b-075cb120ea65
+X-Inumbo-ID: 3a923bd6-c1a6-4d10-a60f-47eb06fa6abb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Cc+9fFskPok5yanU+KBwhrDF032POUgNIPrJFjWpHUY=;
-        b=UF5JJjf+p8IMYhkYNM8dISjQquNFfkf4iaq0k+iYxP9vTIwxyaJqsigdQrx1iycxm+
-         rc3T9NaAGvNbYtm5GTXK1mA8pEMzIKnRY9iBgjBDFHGR7ylhLUjvmUFcFhLyT/dM51lt
-         TiESxojr4yxy8lbSUjpOEANfg7K8Lf7k8QEBQ=
+        bh=GymVnULBeJ03m5EPo7c7VEX7DSqoBwMT6L2fMWoeeEc=;
+        b=WOU8IVzg+iYvk6N5b67KD5CKh5Wgn355zu5PCMe6mPVyyUQjES9RmEtfXkhuQMaXmA
+         hHjDKIazD9xu9BtywBAgsYVdsMG3DqbHBxwCuAdZqvctaQSD9keTHyqXNfZ2Km99muyW
+         YJc+kW7TLNcpm9kWU0l/wPI+emgUC6NSvuBJc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Cc+9fFskPok5yanU+KBwhrDF032POUgNIPrJFjWpHUY=;
-        b=SbQM+Jmhf3P1pU88QyGQ2roLYsiQ6tDRbLMNTFnAt5iopE7zOeQF3UuL8pSk4nqqF7
-         dZp0V7LnkfjUNkiJ+5ckVIrpXOVSmixtNhf3FO2Nr/4ZcwpkuRKYNwfJZIyMUdBbsEAx
-         6YrCGURKwzVRFTCv1R9dM5W1E2EFoWyp8aQ6A1LSWvKCln2Su28yBXbr/KuwbStn9gNf
-         7acyv2vHZk8mmQkIFXcJYCQUcFIO86cU0tAGsORRhi5ky4TKiTuA/pswOO6sL4Anhv70
-         HTnh44FR7ttDXwBOkHXhH/ohev45nrV3HFIybSiDc46lzJ3QxrbgGJSR7AwYmxBJCjMK
-         ToRQ==
-X-Gm-Message-State: AOAM532rSp+r/pACK6zaaUimJZ9LV10Z2wple2egXA02rZcefDWlBxGm
-	MKAknQk2wEHLcs8NDi3nidD3ZQ==
-X-Google-Smtp-Source: ABdhPJzTf6sN3+RhgHcg3uPiCnP3J9xzXkoCN0kkeRq24lHy9+yaQTUPTjqMetXgaRZFbgh3lWQO0g==
-X-Received: by 2002:a05:6a00:148e:b029:2fb:9761:eb8a with SMTP id v14-20020a056a00148eb02902fb9761eb8amr4420599pfu.48.1623763713478;
-        Tue, 15 Jun 2021 06:28:33 -0700 (PDT)
+        bh=GymVnULBeJ03m5EPo7c7VEX7DSqoBwMT6L2fMWoeeEc=;
+        b=fDFB/OtSWGheeEYv48Cd2meyG0HKuGXoqG6Jyvqb4DitAM7GvL6/84M9Twv6q6FHDB
+         0KIbBcRRDjwa7WIICMcKelt4IKW5kTmcB0o12KwVD1sXOghqtpr+FayYNsygF+TXN2v1
+         ILCXP6OmbTmeLLOOp5hWdHP/cDGh70qpI3j8bhzJQdEHMIdbcGoZn1NOUBaEjOWt4Qj5
+         ZESiy24qkbR/JL/bQr7P2UGpksTVENFQMXJlSmBBgKMr0UfDF4qKJk2LOH1Iaq9NGQxG
+         vmxbzpucLE4yct+6SvmaxSACQneXg5jMQE1ar/z2iI8FPkG/R+CcWMfIbMTr73utVUuN
+         Vhbw==
+X-Gm-Message-State: AOAM53030CDENpt8PNcP+ksgkj1w6m4mWFjbgSodXIyDNxy6vWeKBp/o
+	OrCQytzURfy2OKigXqgBO/fkZg==
+X-Google-Smtp-Source: ABdhPJwFBj2pKeWU+1SEbsBI+u3Jw3SyjbFfiN066dPovK3+ci3+q1oZRASaC88XjKL/ShDd5jcc2w==
+X-Received: by 2002:a17:90a:a116:: with SMTP id s22mr24962655pjp.218.1623763739540;
+        Tue, 15 Jun 2021 06:28:59 -0700 (PDT)
 From: Claire Chang <tientzu@chromium.org>
 To: Rob Herring <robh+dt@kernel.org>,
 	mpe@ellerman.id.au,
@@ -132,82 +132,91 @@ Cc: benh@kernel.crashing.org,
 	matthew.auld@intel.com,
 	rodrigo.vivi@intel.com,
 	thomas.hellstrom@linux.intel.com
-Subject: [PATCH v10 08/12] swiotlb: Refactor swiotlb_tbl_unmap_single
-Date: Tue, 15 Jun 2021 21:27:07 +0800
-Message-Id: <20210615132711.553451-9-tientzu@chromium.org>
+Subject: [PATCH v10 11/12] dt-bindings: of: Add restricted DMA pool
+Date: Tue, 15 Jun 2021 21:27:10 +0800
+Message-Id: <20210615132711.553451-12-tientzu@chromium.org>
 X-Mailer: git-send-email 2.32.0.272.g935e593368-goog
 In-Reply-To: <20210615132711.553451-1-tientzu@chromium.org>
 References: <20210615132711.553451-1-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new function, swiotlb_release_slots, to make the code reusable for
-supporting different bounce buffer pools.
+Introduce the new compatible string, restricted-dma-pool, for restricted
+DMA. One can specify the address and length of the restricted DMA memory
+region by restricted-dma-pool in the reserved-memory node.
 
 Signed-off-by: Claire Chang <tientzu@chromium.org>
 ---
- kernel/dma/swiotlb.c | 35 ++++++++++++++++++++---------------
- 1 file changed, 20 insertions(+), 15 deletions(-)
+ .../reserved-memory/reserved-memory.txt       | 36 +++++++++++++++++--
+ 1 file changed, 33 insertions(+), 3 deletions(-)
 
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index e498f11e150e..3c01162c400b 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -546,27 +546,15 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
- 	return tlb_addr;
- }
+diff --git a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
+index e8d3096d922c..46804f24df05 100644
+--- a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
++++ b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
+@@ -51,6 +51,23 @@ compatible (optional) - standard definition
+           used as a shared pool of DMA buffers for a set of devices. It can
+           be used by an operating system to instantiate the necessary pool
+           management subsystem if necessary.
++        - restricted-dma-pool: This indicates a region of memory meant to be
++          used as a pool of restricted DMA buffers for a set of devices. The
++          memory region would be the only region accessible to those devices.
++          When using this, the no-map and reusable properties must not be set,
++          so the operating system can create a virtual mapping that will be used
++          for synchronization. The main purpose for restricted DMA is to
++          mitigate the lack of DMA access control on systems without an IOMMU,
++          which could result in the DMA accessing the system memory at
++          unexpected times and/or unexpected addresses, possibly leading to data
++          leakage or corruption. The feature on its own provides a basic level
++          of protection against the DMA overwriting buffer contents at
++          unexpected times. However, to protect against general data leakage and
++          system memory corruption, the system needs to provide way to lock down
++          the memory access, e.g., MPU. Note that since coherent allocation
++          needs remapping, one must set up another device coherent pool by
++          shared-dma-pool and use dma_alloc_from_dev_coherent instead for atomic
++          coherent allocation.
+         - vendor specific string in the form <vendor>,[<device>-]<usage>
+ no-map (optional) - empty property
+     - Indicates the operating system must not create a virtual mapping
+@@ -85,10 +102,11 @@ memory-region-names (optional) - a list of names, one for each corresponding
  
--/*
-- * tlb_addr is the physical address of the bounce buffer to unmap.
-- */
--void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
--			      size_t mapping_size, enum dma_data_direction dir,
--			      unsigned long attrs)
-+static void swiotlb_release_slots(struct device *dev, phys_addr_t tlb_addr)
- {
--	struct io_tlb_mem *mem = hwdev->dma_io_tlb_mem;
-+	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
- 	unsigned long flags;
--	unsigned int offset = swiotlb_align_offset(hwdev, tlb_addr);
-+	unsigned int offset = swiotlb_align_offset(dev, tlb_addr);
- 	int index = (tlb_addr - offset - mem->start) >> IO_TLB_SHIFT;
- 	int nslots = nr_slots(mem->slots[index].alloc_size + offset);
- 	int count, i;
+ Example
+ -------
+-This example defines 3 contiguous regions are defined for Linux kernel:
++This example defines 4 contiguous regions for Linux kernel:
+ one default of all device drivers (named linux,cma@72000000 and 64MiB in size),
+-one dedicated to the framebuffer device (named framebuffer@78000000, 8MiB), and
+-one for multimedia processing (named multimedia-memory@77000000, 64MiB).
++one dedicated to the framebuffer device (named framebuffer@78000000, 8MiB),
++one for multimedia processing (named multimedia-memory@77000000, 64MiB), and
++one for restricted dma pool (named restricted_dma_reserved@0x50000000, 64MiB).
  
--	/*
--	 * First, sync the memory before unmapping the entry
--	 */
--	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
--	    (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL))
--		swiotlb_bounce(hwdev, tlb_addr, mapping_size, DMA_FROM_DEVICE);
--
- 	/*
- 	 * Return the buffer to the free list by setting the corresponding
- 	 * entries to indicate the number of contiguous entries available.
-@@ -601,6 +589,23 @@ void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
- 	spin_unlock_irqrestore(&mem->lock, flags);
- }
- 
-+/*
-+ * tlb_addr is the physical address of the bounce buffer to unmap.
-+ */
-+void swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
-+			      size_t mapping_size, enum dma_data_direction dir,
-+			      unsigned long attrs)
-+{
-+	/*
-+	 * First, sync the memory before unmapping the entry
-+	 */
-+	if (!(attrs & DMA_ATTR_SKIP_CPU_SYNC) &&
-+	    (dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL))
-+		swiotlb_bounce(dev, tlb_addr, mapping_size, DMA_FROM_DEVICE);
+ / {
+ 	#address-cells = <1>;
+@@ -120,6 +138,11 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
+ 			compatible = "acme,multimedia-memory";
+ 			reg = <0x77000000 0x4000000>;
+ 		};
 +
-+	swiotlb_release_slots(dev, tlb_addr);
-+}
++		restricted_dma_reserved: restricted_dma_reserved {
++			compatible = "restricted-dma-pool";
++			reg = <0x50000000 0x4000000>;
++		};
+ 	};
+ 
+ 	/* ... */
+@@ -138,4 +161,11 @@ one for multimedia processing (named multimedia-memory@77000000, 64MiB).
+ 		memory-region = <&multimedia_reserved>;
+ 		/* ... */
+ 	};
 +
- void swiotlb_sync_single_for_device(struct device *dev, phys_addr_t tlb_addr,
- 		size_t size, enum dma_data_direction dir)
- {
++	pcie_device: pcie_device@0,0 {
++		reg = <0x83010000 0x0 0x00000000 0x0 0x00100000
++		       0x83010000 0x0 0x00100000 0x0 0x00100000>;
++		memory-region = <&restricted_dma_mem_reserved>;
++		/* ... */
++	};
+ };
 -- 
 2.32.0.272.g935e593368-goog
 
