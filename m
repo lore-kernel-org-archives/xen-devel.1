@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46C83C48BE8
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43103C48BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:52:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFDE56023D
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:52:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFDE56023D
+	by mail.kernel.org (Postfix) with ESMTPS id 0932E6023D
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:52:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0932E6023D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142948.263683 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142949.263699 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltV1X-0002T6-3G; Wed, 16 Jun 2021 12:52:03 +0000
+	id 1ltV1a-0003T6-QC; Wed, 16 Jun 2021 12:52:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142948.263683; Wed, 16 Jun 2021 12:52:02 +0000
+Received: by outflank-mailman (output) from mailman id 142949.263699; Wed, 16 Jun 2021 12:52:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltV1W-0002SG-LF; Wed, 16 Jun 2021 12:52:02 +0000
-Received: by outflank-mailman (input) for mailman id 142948;
- Wed, 16 Jun 2021 12:52:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1ltV1a-0003Sk-JJ; Wed, 16 Jun 2021 12:52:06 +0000
+Received: by outflank-mailman (input) for mailman id 142949;
+ Wed, 16 Jun 2021 12:52:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV1V-0006lZ-0M
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:01 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.171])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a13aee9a-ffdd-4c72-83ef-ec013995368e;
- Wed, 16 Jun 2021 12:51:43 +0000 (UTC)
+ id 1ltV1Z-00075D-82
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:05 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.102])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 440b148c-5a47-47e7-8268-4fec67cd4e3c;
+ Wed, 16 Jun 2021 12:51:48 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpbtly
+ with ESMTPSA id j0415bx5GCpgtmC
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:37 +0200 (CEST)
+ Wed, 16 Jun 2021 14:51:42 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a13aee9a-ffdd-4c72-83ef-ec013995368e
-ARC-Seal: i=1; a=rsa-sha256; t=1623847897; cv=none;
+X-Inumbo-ID: 440b148c-5a47-47e7-8268-4fec67cd4e3c
+ARC-Seal: i=1; a=rsa-sha256; t=1623847903; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=DYoFmxn0Dtbm+VbaZKlDCbmsImsyeyVIbmdVja/WYH7Yh7b3VxzyV+95Rv/od0I/cz
-    yz5v+ihbmp6qtr+klmkkX01fY3hxfjDnHfHy82NnPZkcFtuTgOHOvwxSr3wEgXANEMIL
-    9vano6TGgNPAjgJ6A26sqYCTr+FtzFAaLdLlib64ZsvtD8UJGPZ5jWklAtDkf8CqqWgI
-    NhVoMJ9ZxY4oM2AKtBImnUrA5r8MOYK3gWUZgRHbM/zThMNEN5eklers7DqmTQ8MqZAh
-    LEM+/N/41WuijmQ27TTLid+o5rNMAVqVa5eaTZL/7YYlDv/kPRbLuoJqqRObjVrNsn6d
-    6eWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847897;
+    b=opDqhO4a1Vq4ddVcj+k8tqaWyd7iEl35jDu6mAo2Qt4tu3vXYHrlskuG3lPRYff0ov
+    y443MOvX2wXF0kBESl9kaSX8E/AF7MORqBMUI2k0vhRoSUnqrzB09kJ3F+y7YG7LhZ3o
+    g0frzi7M7n7ZEhoqv3SccUbu1XdjqdvuS9taPrW3zCAJ/c0BXG0XJ7dU8fQq9S5/ZaEl
+    4LJBD/B7XnT8w8kRlGdf3ozpGAu8cLr9nzTxqSFqvO9FKRS5rIQVfdi6WSx7rnqQWVrc
+    RAGbuHfYazO1mmNG8JeWeb+JxeM2AqHnxL/uMXS1CeTRPwaV39GFpFVR6Z4WNNtudfQ6
+    HCnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847903;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=VuUrMSQO4CJqxpoErSuXThYpl5ESMJog6Ej/du7Jhm8=;
-    b=L7BIenlD2gLFJY33mpjNEtwdvigxvmiQu8kcfsKPRIaLNvBAF0MhNd3rn7RaNc4F+S
-    Iwk3Iff43fgyXwqIo3e+JG/9f8eoWGSR1QVY44AiV42Tv9mn2D+AALn/110YsgRbJF/7
-    HUbWydzTUDZQYMWhV86LHLRjJFdriIlXI5/62DRsel2b3g5ALbiohbzX8yDTbZuG0OYo
-    2vjvgVJOSDRCm9nTNlngBefJc0QYwsrXZUPs5wY/HQYYz6WUNXxIkAB/Inb5b/rQkIHS
-    prRgL18wVgHo1pcWpKYV8SrWVdQHa3RA/NZtYgotR/OEIhwa3QJdaTW+ax+2iOFnWcud
-    Bu6g==
+    bh=Nst2DxeDxoQRaBpmHCGwCg/XwLbUQH8n2F7XGaSzYSY=;
+    b=THuKMd0uiY8blfLD/vzBCt8CiQ7ynxcB7hOV8Oxqi8BWA7HBC3wUB7Kl7Z1sdXrzM0
+    DWYoQvThi6ZX0oD/Yhjwi8w9huvWWniZP73zhjlvzG0vcErO9ANjbQyEDm86iZ6LDmtM
+    7ZaI4Aq+d4RowYfo5U8oNd0kOd2i+felN+y7zJWEsXFAYaF+pTUGvRmG8dKdwq3R83Fk
+    Xfs8mErtxq5Jx48BYee3841s/5wrSkzDl2U8Gc8qZ7NxmMdhL5JLXPDxSaqSMahq0Axt
+    kbEBe1sYMKXH6P6gI2PasDzOlx9o3Zv1qMmXHSwHkHR8grFF2cFQworQ6GR8QvAGDvvu
+    mweQ==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847897;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847903;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=VuUrMSQO4CJqxpoErSuXThYpl5ESMJog6Ej/du7Jhm8=;
-    b=fgVuiq6lNo14eMaaSHNN964UZYKMmBml6lOvEjdDo157lZMXSwttn3KdVtF/ybsVr0
-    V/1rNHX9ojTlroR5uczwa5SglFU2HT0cvO3VTN+xnF/kXb7/v3Y86wkExfAhM49LTU44
-    naNCWgKSBgJqtYDjrzEzsPXh7BQnPXNELk2GhIN2qANRGy8XPKq9k/ZlUsPRcwo/WN43
-    HnpOfBzpqr30GsKcBchylGKkbEgiaYju/NEaAGwGZhg4uZorNoAKz0yELULez/AUL/dQ
-    Aa8yILmfNI6g5c4dDmOLKZ3c+S7OQZL7cJpgOAwgErSZoQVwo3IeahqISgUuZWtQ1tGA
-    yZ1w==
+    bh=Nst2DxeDxoQRaBpmHCGwCg/XwLbUQH8n2F7XGaSzYSY=;
+    b=tX+SlobqcYRUw8DVNaMA6Zdbbft4TT8fAIUkIPGgXORmYpajCecrKedu0kgLaOCfds
+    nKCIO6rQo2jOj2NwcV0xTUF08Rh6GKXcGFyYQdP6FgmgNWIsxSulJH2gwjtprAPSCqee
+    ia8rlaZbuMoqapjc6ahFsXkBrKDqgjSnb4snFm0x80hoMN9ptzziYn2KREpVfmoYY/JH
+    HDUa33N6zy4VAaGjArJuY1/BccqjgYIa888jm88kcXm/LaUtpgcVmCeC+l+8BNyGyELp
+    McljlGSAN26T8QNOvwXKPYQDtf/T7URtuTQx0gByye+vSJ9/aSoyeCLlAN0A51UJk5XX
+    +kmA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
@@ -93,158 +94,68 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
+	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210616 09/36] tools: unify type checking for data pfns in migration stream
-Date: Wed, 16 Jun 2021 14:51:02 +0200
-Message-Id: <20210616125129.26563-10-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210616 20/36] tools: restore: move mfns array
+Date: Wed, 16 Jun 2021 14:51:13 +0200
+Message-Id: <20210616125129.26563-21-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
 References: <20210616125129.26563-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce a helper which decides if a given pfn type has data
-for the migration stream.
-
-No change in behavior intended.
+Remove allocation from hotpath, move mfns array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/saverestore/common.h  | 17 ++++++++++++++++
- tools/libs/saverestore/restore.c | 34 +++++---------------------------
- tools/libs/saverestore/save.c    | 14 ++-----------
- 3 files changed, 24 insertions(+), 41 deletions(-)
+ tools/libs/saverestore/common.h  | 2 ++
+ tools/libs/saverestore/restore.c | 5 ++---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index c9cc4206e5..08bbe902b9 100644
+index fe44302eac..54352f5427 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -500,6 +500,23 @@ static inline bool sr_is_known_page_type(xen_pfn_t type)
-     return ret;
- }
+@@ -239,6 +239,8 @@ struct sr_restore_arrays {
+     /* handle_page_data */
+     xen_pfn_t pfns[MAX_BATCH_SIZE];
+     uint32_t types[MAX_BATCH_SIZE];
++    /* process_page_data */
++    xen_pfn_t mfns[MAX_BATCH_SIZE];
+ };
  
-+static inline bool page_type_has_stream_data(uint32_t type)
-+{
-+    bool ret;
-+
-+    switch (type)
-+    {
-+    case XEN_DOMCTL_PFINFO_XTAB:
-+    case XEN_DOMCTL_PFINFO_XALLOC:
-+    case XEN_DOMCTL_PFINFO_BROKEN:
-+        ret = false;
-+        break;
-+    default:
-+        ret = true;
-+        break;
-+    }
-+    return ret;
-+}
- #endif
- /*
-  * Local variables:
+ struct xc_sr_context
 diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index 324b9050e2..70c92eaadc 100644
+index d460a2b2b5..1a7cfbcd47 100644
 --- a/tools/libs/saverestore/restore.c
 +++ b/tools/libs/saverestore/restore.c
-@@ -152,9 +152,8 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+@@ -205,7 +205,7 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+                              xen_pfn_t *pfns, uint32_t *types, void *page_data)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = malloc(count * sizeof(*mfns));
++    xen_pfn_t *mfns = ctx->restore.m->mfns;
+     int *map_errs = malloc(count * sizeof(*map_errs));
+     int rc;
+     void *mapping = NULL, *guest_page = NULL;
+@@ -213,7 +213,7 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         j,          /* j indexes the subset of pfns we decide to map. */
+         nr_pages = 0;
  
-     for ( i = 0; i < count; ++i )
+-    if ( !mfns || !map_errs )
++    if ( !map_errs )
      {
--        if ( (!types || (types &&
--                         (types[i] != XEN_DOMCTL_PFINFO_XTAB &&
--                          types[i] != XEN_DOMCTL_PFINFO_BROKEN))) &&
-+        if ( (!types ||
-+              (types && page_type_has_stream_data(types[i]) == true)) &&
-              !pfn_is_populated(ctx, original_pfns[i]) )
-         {
-             rc = pfn_set_populated(ctx, original_pfns[i]);
-@@ -233,25 +232,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
-     {
-         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+         rc = -1;
+         ERROR("Failed to allocate %zu bytes to process page data",
+@@ -299,7 +299,6 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
+         xenforeignmemory_unmap(xch->fmem, mapping, nr_pages);
  
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_NOTAB:
--
--        case XEN_DOMCTL_PFINFO_L1TAB:
--        case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L2TAB:
--        case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L3TAB:
--        case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L4TAB:
--        case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
-+        if ( page_type_has_stream_data(types[i]) == true )
-             mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
--            break;
--        }
-     }
+     free(map_errs);
+-    free(mfns);
  
-     /* Nothing to do? */
-@@ -271,14 +253,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
- 
-     for ( i = 0, j = 0; i < count; ++i )
-     {
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_XTAB:
--        case XEN_DOMCTL_PFINFO_BROKEN:
--        case XEN_DOMCTL_PFINFO_XALLOC:
--            /* No page data to deal with. */
-+        if ( page_type_has_stream_data(types[i]) == false )
-             continue;
--        }
- 
-         if ( map_errs[j] )
-         {
-@@ -413,7 +389,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-             goto err;
-         }
- 
--        if ( type < XEN_DOMCTL_PFINFO_BROKEN )
-+        if ( page_type_has_stream_data(type) == true )
-             /* NOTAB and all L1 through L4 tables (including pinned) should
-              * have a page worth of data in the record. */
-             pages_of_data++;
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index 6f820ea432..12598bd4e2 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -153,13 +153,8 @@ static int write_batch(struct xc_sr_context *ctx)
-             goto err;
-         }
- 
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_BROKEN:
--        case XEN_DOMCTL_PFINFO_XALLOC:
--        case XEN_DOMCTL_PFINFO_XTAB:
-+        if ( page_type_has_stream_data(types[i]) == false )
-             continue;
--        }
- 
-         mfns[nr_pages++] = mfns[i];
-     }
-@@ -177,13 +172,8 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-         for ( i = 0, p = 0; i < nr_pfns; ++i )
-         {
--            switch ( types[i] )
--            {
--            case XEN_DOMCTL_PFINFO_BROKEN:
--            case XEN_DOMCTL_PFINFO_XALLOC:
--            case XEN_DOMCTL_PFINFO_XTAB:
-+            if ( page_type_has_stream_data(types[i]) == false )
-                 continue;
--            }
- 
-             if ( errors[p] )
-             {
+     return rc;
+ }
 
