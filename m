@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A289C49EA2
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B61DFC49EA3
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3B19B6115C
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B19B6115C
+	by mail.kernel.org (Postfix) with ESMTPS id 7B890610A1
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B890610A1
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143283.264157 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143285.264179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlU-00067G-9A; Wed, 16 Jun 2021 14:43:36 +0000
+	id 1ltWlX-0006kH-1N; Wed, 16 Jun 2021 14:43:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143283.264157; Wed, 16 Jun 2021 14:43:36 +0000
+Received: by outflank-mailman (output) from mailman id 143285.264179; Wed, 16 Jun 2021 14:43:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlU-000673-4X; Wed, 16 Jun 2021 14:43:36 +0000
-Received: by outflank-mailman (input) for mailman id 143283;
- Wed, 16 Jun 2021 14:43:34 +0000
+	id 1ltWlW-0006jk-SR; Wed, 16 Jun 2021 14:43:38 +0000
+Received: by outflank-mailman (input) for mailman id 143285;
+ Wed, 16 Jun 2021 14:43:37 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ltWlS-0005nk-El
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:34 +0000
+ (envelope-from <julien@xen.org>) id 1ltWlV-0006Mk-5F
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:37 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlR-0004DX-Ey; Wed, 16 Jun 2021 14:43:33 +0000
+ id 1ltWlU-0004E6-6M; Wed, 16 Jun 2021 14:43:36 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlR-0007D0-6H; Wed, 16 Jun 2021 14:43:33 +0000
+ id 1ltWlT-0007D0-U4; Wed, 16 Jun 2021 14:43:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=JWVgF6QLGsEmGe+em+lI3NsrndUxxF4I6/J85EZgUFY=; b=h5Gm1UgtjuzByYBGo/uL1qERD
-	AQ6/Ty3bvZNqIFGvz4uzKFSq678gloxDxx0aUTyDcS0wasJkoZU0LMceRM2U/xBk9hxhC1hrvrlYS
-	a2Lxgoy+JUaD6DGl+LXH67uFsAXRmV118MeIXQDj1l/zvOfaxUIqSpS8RETriuWbq2R1I=;
+	 bh=ZvLpylj/UqcYoOOmC8VRLGxCMI8WwLt87nHoKc1byWA=; b=FYK8bYQfTjgnv0czNv4OhkHKe
+	fPm5TAmEg1tQm63lBFvvY2P/mdoDDnRH6FLSvrv05vR38D2NXBtJ4nSrPYxW8I4anfx15txQMWTS5
+	klUweyg5PW5A7yUraRaA0Qjd4mHPIcMDsq2hpu6Xo4882oi6ehJj45LJS4qxkH4Ac/tds=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: raphning@amazon.co.uk,
@@ -67,88 +67,170 @@ Cc: raphning@amazon.co.uk,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH 04/10] tools/xenstored: Limit the number of requests a connection can delay
-Date: Wed, 16 Jun 2021 15:43:18 +0100
-Message-Id: <20210616144324.31652-5-julien@xen.org>
+Subject: [PATCH 06/10] tools/xenstored: Introduce a wrapper for conn->funcs->can_{read, write}
+Date: Wed, 16 Jun 2021 15:43:20 +0100
+Message-Id: <20210616144324.31652-7-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210616144324.31652-1-julien@xen.org>
 References: <20210616144324.31652-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Currently, only liveupdate request can be delayed. The request can only
-be performed by a privileged connection (e.g. dom0). So it is fine to
-have no limits.
+Currently, the callbacks can_read and can_write are called directly. This
+doesn't allow us to add generic check and therefore requires duplication.
 
-In a follow-up patch we will want to delay request for unprivileged
-connection as well. So it is best to apply a limit.
+At the moment, one check that could benefit to be common is whether the
+connection should ignored. The position is slightly different between
+domain and socket because for the latter we want to check the state of
+the file descriptor first.
 
-For now and for simplicity, only a single request can be delayed
-for a given unprivileged connection.
+In follow-up patches, there will be more potential generic checks.
 
-Take the opportunity to tweak the prototype and provide a way to
-bypass the quota check. This would be useful when the function
-is called from the restore code.
+This patch provides wrappers to read/write a connection and move
+the check ->is_ignored after the callback for everyone.
+
+This also requires to replace the direct call to domain_can_read()
+and domain_can_write() with the new wrapper. At the same time,
+both functions can now be static. Note that the implementations need
+to be moved earlier in the file xenstored_domain.c to avoid
+declaring the prototype.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_control.c |  2 +-
- tools/xenstore/xenstored_core.c    | 11 ++++++++++-
- tools/xenstore/xenstored_core.h    |  3 ++-
- 3 files changed, 13 insertions(+), 3 deletions(-)
+ tools/xenstore/xenstored_core.c   | 18 ++++++++++----
+ tools/xenstore/xenstored_domain.c | 40 +++++++++++++------------------
+ tools/xenstore/xenstored_domain.h |  4 ----
+ 3 files changed, 31 insertions(+), 31 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 7acc2d134f9f..1c24d4869eab 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -737,7 +737,7 @@ static const char *lu_start(const void *ctx, struct connection *conn,
- 	lu_status->timeout = to;
- 	lu_status->started_at = time(NULL);
- 
--	errno = delay_request(conn, conn->in, do_lu_start, NULL);
-+	errno = delay_request(conn, conn->in, do_lu_start, NULL, false);
- 
- 	return NULL;
- }
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 41b26d7094c8..51d210828922 100644
+index 51d210828922..2e5760fe4599 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -279,10 +279,19 @@ static void call_delayed(struct connection *conn, struct delayed_request *req)
+@@ -334,6 +334,16 @@ static int destroy_conn(void *_conn)
+ 	return 0;
  }
  
- int delay_request(struct connection *conn, struct buffered_data *in,
--		  bool (*func)(struct delayed_request *), void *data)
-+		  bool (*func)(struct delayed_request *), void *data,
-+		  bool no_quota_check)
- {
- 	struct delayed_request *req;
- 
-+	/*
-+	 * Only allow one request can be delayed for an unprivileged
-+	 * connection.
-+	 */
-+	if (!no_quota_check && domain_is_unprivileged(conn) &&
-+	    !list_empty(&conn->delayed))
-+		return ENOSPC;
++static bool conn_can_read(struct connection *conn)
++{
++	return conn->funcs->can_read(conn) && !conn->is_ignored;
++}
 +
- 	req = talloc(in, struct delayed_request);
- 	if (!req)
- 		return ENOMEM;
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 89ce155e755b..34839b34f6e9 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -213,7 +213,8 @@ char *get_parent(const void *ctx, const char *node);
++static bool conn_can_write(struct connection *conn)
++{
++	return conn->funcs->can_write(conn) && !conn->is_ignored;
++}
++
+ /* This function returns index inside the array if succeed, -1 if fail */
+ static int set_fd(int fd, short events)
+ {
+@@ -396,8 +406,8 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
+ 	list_for_each_entry(conn, &connections, list) {
+ 		if (conn->domain) {
+ 			wrl_check_timeout(conn->domain, now, ptimeout);
+-			if (domain_can_read(conn) ||
+-			    (domain_can_write(conn) &&
++			if (conn_can_read(conn) ||
++			    (conn_can_write(conn) &&
+ 			     !list_empty(&conn->out_list)))
+ 				*ptimeout = 0;
+ 		} else {
+@@ -2325,14 +2335,14 @@ int main(int argc, char *argv[])
+ 			if (&next->list != &connections)
+ 				talloc_increase_ref_count(next);
  
- /* Delay a request. */
- int delay_request(struct connection *conn, struct buffered_data *in,
--		  bool (*func)(struct delayed_request *), void *data);
-+		  bool (*func)(struct delayed_request *), void *data,
-+		  bool no_quota_check);
+-			if (conn->funcs->can_read(conn))
++			if (conn_can_read(conn))
+ 				handle_input(conn);
+ 			if (talloc_free(conn) == 0)
+ 				continue;
  
- /* Tracing infrastructure. */
- void trace_create(const void *data, const char *type);
+ 			talloc_increase_ref_count(conn);
+ 
+-			if (conn->funcs->can_write(conn))
++			if (conn_can_write(conn))
+ 				handle_output(conn);
+ 			if (talloc_free(conn) == 0)
+ 				continue;
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 6d8d29cbe41c..47e9107c144e 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -172,6 +172,23 @@ static int readchn(struct connection *conn, void *data, unsigned int len)
+ 	return len;
+ }
+ 
++static bool domain_can_write(struct connection *conn)
++{
++	struct xenstore_domain_interface *intf = conn->domain->interface;
++
++	return ((intf->rsp_prod - intf->rsp_cons) != XENSTORE_RING_SIZE);
++}
++
++static bool domain_can_read(struct connection *conn)
++{
++	struct xenstore_domain_interface *intf = conn->domain->interface;
++
++	if (domain_is_unprivileged(conn) && conn->domain->wrl_credit < 0)
++		return false;
++
++	return (intf->req_cons != intf->req_prod);
++}
++
+ static const struct interface_funcs domain_funcs = {
+ 	.write = writechn,
+ 	.read = readchn,
+@@ -290,19 +307,6 @@ void handle_event(void)
+ 		barf_perror("Failed to write to event fd");
+ }
+ 
+-bool domain_can_read(struct connection *conn)
+-{
+-	struct xenstore_domain_interface *intf = conn->domain->interface;
+-
+-	if (domain_is_unprivileged(conn) && conn->domain->wrl_credit < 0)
+-		return false;
+-
+-	if (conn->is_ignored)
+-		return false;
+-
+-	return (intf->req_cons != intf->req_prod);
+-}
+-
+ static bool domid_is_unprivileged(unsigned int domid)
+ {
+ 	return domid != 0 && domid != priv_domid;
+@@ -314,16 +318,6 @@ bool domain_is_unprivileged(struct connection *conn)
+ 	       domid_is_unprivileged(conn->domain->domid);
+ }
+ 
+-bool domain_can_write(struct connection *conn)
+-{
+-	struct xenstore_domain_interface *intf = conn->domain->interface;
+-
+-	if (conn->is_ignored)
+-		return false;
+-
+-	return ((intf->rsp_prod - intf->rsp_cons) != XENSTORE_RING_SIZE);
+-}
+-
+ static char *talloc_domain_path(void *context, unsigned int domid)
+ {
+ 	return talloc_asprintf(context, "/local/domain/%u", domid);
+diff --git a/tools/xenstore/xenstored_domain.h b/tools/xenstore/xenstored_domain.h
+index 62ee471ea6aa..1e929b8f8c6f 100644
+--- a/tools/xenstore/xenstored_domain.h
++++ b/tools/xenstore/xenstored_domain.h
+@@ -51,10 +51,6 @@ void domain_deinit(void);
+ /* Returns the implicit path of a connection (only domains have this) */
+ const char *get_implicit_path(const struct connection *conn);
+ 
+-/* Can connection attached to domain read/write. */
+-bool domain_can_read(struct connection *conn);
+-bool domain_can_write(struct connection *conn);
+-
+ bool domain_is_unprivileged(struct connection *conn);
+ 
+ /* Remove node permissions for no longer existing domains. */
 -- 
 2.17.1
 
