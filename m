@@ -2,43 +2,47 @@ Return-Path: <SRS0=hjEX=LK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63A7AC48BE5
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:35:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01900C48BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:38:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2AB6A613CD
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:35:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2AB6A613CD
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+	by mail.kernel.org (Postfix) with ESMTPS id 9E877613CD
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:38:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9E877613CD
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143427.264355 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143436.264366 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltXZe-0006Hn-EO; Wed, 16 Jun 2021 15:35:26 +0000
+	id 1ltXco-000715-TJ; Wed, 16 Jun 2021 15:38:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143427.264355; Wed, 16 Jun 2021 15:35:26 +0000
+Received: by outflank-mailman (output) from mailman id 143436.264366; Wed, 16 Jun 2021 15:38:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltXZe-0006Hg-B8; Wed, 16 Jun 2021 15:35:26 +0000
-Received: by outflank-mailman (input) for mailman id 143427;
- Wed, 16 Jun 2021 15:35:25 +0000
+	id 1ltXco-00070y-QM; Wed, 16 Jun 2021 15:38:42 +0000
+Received: by outflank-mailman (input) for mailman id 143436;
+ Wed, 16 Jun 2021 15:38:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=IKif=LK=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1ltXZd-0006HQ-0Q
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 15:35:25 +0000
-Received: from verein.lst.de (unknown [213.95.11.211])
+ (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1ltXcn-00070s-Ej
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 15:38:41 +0000
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.51])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f3a83026-2ede-4195-9356-24f270d9223d;
- Wed, 16 Jun 2021 15:35:23 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 1777768B05; Wed, 16 Jun 2021 17:35:20 +0200 (CEST)
+ id 02bcbec8-0e21-44d8-8b56-fcd97d9fe283;
+ Wed, 16 Jun 2021 15:38:40 +0000 (UTC)
+Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
+ with ESMTPSA id j0415bx5GFccueh
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 16 Jun 2021 17:38:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +54,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3a83026-2ede-4195-9356-24f270d9223d
-Date: Wed, 16 Jun 2021 17:35:19 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Christoph Hellwig <hch@lst.de>, Roman Skakun <rm.skakun@gmail.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org, iommu@lists.linux-foundation.org,
-	linux-kernel@vger.kernel.org,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
-	Roman Skakun <roman_skakun@epam.com>,
-	Andrii Anisov <andrii_anisov@epam.com>
-Subject: Re: [PATCH 2/2] swiotlb-xen: override common mmap and get_sgtable
- dma ops
-Message-ID: <20210616153519.GA6476@lst.de>
-References: <855a58e2-1e03-4763-cb56-81367b73762c@oracle.com> <20210616114205.38902-1-roman_skakun@epam.com> <20210616114205.38902-2-roman_skakun@epam.com> <2834cdc0-534c-4f07-1901-e468a7713c1f@oracle.com> <20210616142148.GA764@lst.de> <83353b34-2abb-9dfc-bed6-21d500abf49f@oracle.com>
+X-Inumbo-ID: 02bcbec8-0e21-44d8-8b56-fcd97d9fe283
+ARC-Seal: i=1; a=rsa-sha256; t=1623857918; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=rXHzJ8PefZYdVyW2zZc++KIaC/+smyKlvlKRsyM3bj2Zq53opkZ71rRHfVTqU7KCrt
+    KLhgILi9mSubGpan0oGsxMtsm8kf4+r2ocMbhzDt7SRxXCK8eyNHR6y0k6srEiWvXHob
+    k4RxEZbBAcuEBnLEhH9o6YlsE8499CQOx3lnE4s1hMogs2ClwscZ6mrU4XXeJRUMod26
+    ZoRyn2CqjCpmfgHnQHtd2eq3btEOh/c2LCZWDG657jKrtkszIVtgjBVjeLdqR6JiAieu
+    Kh+MOqPSJFj/Lg9zcQnRBCAM0P6jYHij/Gi169jBszYimZvLJqjz5xizDH+B3jumYUcO
+    KSdw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623857918;
+    s=strato-dkim-0002; d=strato.com;
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+    From:Subject:Sender;
+    bh=Yqvfuu9UZegYYzHJL+ypLT9elgylsIYFTThnKpnRGSQ=;
+    b=cD8VGMjkfhjlCL89hB95brrBZEvTVUNJKLA6jXklCQVTQ7x53+Ls2x6JYQdjrS6uik
+    vIq9QWk0tAVXIwDWm+w3t7r9YIXo5UI4jeuYhOypgyNaTZnPrH+yqZcyNx/ncODH3SCG
+    RQ3wcyDpZDYO2v8XrnVmo2iNnEP/6W1DvlO+QV1rI+pMVfuoupdvbaKHyh4xIVeSU+vB
+    dEUDYlVAlwd4WvIDjna0vFUGrn1/YonnHUPWK7mOLe/RNCXUPnqn4OHrnYuCs5+IaU22
+    UMEaNRmLlQhpGNGuiuBu8S1MldBhy5k629GfKnA/fksFhXQo6fEVsNfhoD5PrJCsrK9M
+    G3IQ==
+ARC-Authentication-Results: i=1; strato.com;
+    dkim=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623857918;
+    s=strato-dkim-0002; d=aepfle.de;
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+    From:Subject:Sender;
+    bh=Yqvfuu9UZegYYzHJL+ypLT9elgylsIYFTThnKpnRGSQ=;
+    b=fSoTL3VCFwRlI2o+fKMeOK0du/MGqRZDDbzr0OC4Z/y093/Mn6O3Kozni/G5zYr1vb
+    VzTDqQUJWeTnucvwnGLz2Kto0bt/4eRS+xDdDeEPmY6trew8STXJY2d7mEUMzjTPqAQ4
+    jfnT0I+/+cAu5eqBmFAQbSK+nFdWn0gfSz3gwBSnC/qSMOOTI/0sUnnvpr4Phanxfxjo
+    nms7INPTHQ47Staq0DPqDZuBoESwiph+tlfDklbKPRb+8N0yTcoLuUE2mBbNJD5EFv+u
+    fxysv8Ms0sCAqgjs98MXlG3scFGGJiZzPQQyPLmdhAFcRILfKagrPjXipna4wGHqzG+R
+    CzSw==
+Authentication-Results: strato.com;
+    dkim=none
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisQsVxSIbR7sf0kebs4Z3Zpqv+Sabl5o7CzRq+Ps8Q=="
+X-RZG-CLASS-ID: mo00
+Date: Wed, 16 Jun 2021 17:38:31 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v20210616 00/36] leftover from 2020
+Message-ID: <20210616173831.5e8214bc.olaf@aepfle.de>
+In-Reply-To: <968713af-3c99-3fe3-8378-9d9c3985098e@citrix.com>
+References: <20210616125129.26563-1-olaf@aepfle.de>
+	<968713af-3c99-3fe3-8378-9d9c3985098e@citrix.com>
+X-Mailer: Claws Mail 2021.05.24 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <83353b34-2abb-9dfc-bed6-21d500abf49f@oracle.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Type: multipart/signed; boundary="Sig_/PRMvHEXRp7n8BNSmXZ70aZi";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
 
-On Wed, Jun 16, 2021 at 11:33:50AM -0400, Boris Ostrovsky wrote:
-> Isn't the expectation of virt_to_page() that it only works on non-vmalloc'd addresses? (This is not a rhetorical question, I actually don't know).
+--Sig_/PRMvHEXRp7n8BNSmXZ70aZi
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Yes.  Thus is why I'd suggest to just do the vmalloc_to_page or
-virt_to_page dance in ops_helpers.c and just continue using that.
+Am Wed, 16 Jun 2021 15:50:24 +0100
+schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
+
+> 32bit toolstack build
+
+as in i386?
+How is this used in practice?
+I guess such build should be marked as CONFIG_MIGRATE=3Dn in config/x86_32.=
+mk?
+
+Olaf
+
+--Sig_/PRMvHEXRp7n8BNSmXZ70aZi
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmDKGvcACgkQ86SN7mm1
+DoA8+g//ZAagq6PreHucLtraLk0capVlSKgSR9Xs2LArbtVmP+FmH3bFZhMmLb2o
+IgdTckM+1TvUPEuOKFtFQENiomDAoc8kHjUT+xv6XpaQIPmY7u5qKAz5YQjPznyf
+43pgvs/+7nqzbrL7pdBJWE+B3V4SaqVcThCKXdG94sV7MMFMJHaMw6KB9zRytsI+
+v7CiCa8bRD6zr9FdNKaDWEWJeLZiltWn7kaVx+3Zup/H0Vg65sH5j3yhViHRE+y/
+6JZ0fP7bENxyWwaxpbdVdKmzUDwrKk6pbtNV55tFHA97EDlOQqb1PYSefymNTZcW
+eaD+asQ+a+p7Egyo46M9uwCtRR4dwdJaGkyn4nI20/xMfA3Gx8Mjyc6MhEtiOaKo
+w+ilpH8+x7nJjRA32go8WbQUIT0Hw8x4JEi9/NQxC1v53vEEv1QvR6cYBF2GKJDc
+eD4vanJugL/g/9zXE6L64wGtFwpylscTUtcDCjaaZOHCWuVehBOmEhE0lmPxAbBj
+02wGzSvKsTvv5ifmcJIIyWR8jnXSjMl5tLxl/zPpbLACMQCXS6oHnpEy6hyBGNzo
+s16eLtXUCR0PZ4pp1r4n0iY8iGU6rbIl6IbRnYaiGo9ca5TssbZTijum7hfjU2nq
+az37pf2oSnQXH5bs49XRFcBGinkraEUb9myPM1+43fAuauOs8Z4=
+=HFW+
+-----END PGP SIGNATURE-----
+
+--Sig_/PRMvHEXRp7n8BNSmXZ70aZi--
 
