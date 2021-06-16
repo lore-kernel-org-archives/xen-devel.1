@@ -2,47 +2,46 @@ Return-Path: <SRS0=hjEX=LK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-21.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3ACCC49361
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D0F30C48BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:15:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BC8EB61166
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BC8EB61166
+	by mail.kernel.org (Postfix) with ESMTPS id 472FB61164
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:15:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 472FB61164
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143115.263990 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143211.264011 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVHd-0004Gs-7l; Wed, 16 Jun 2021 13:08:41 +0000
+	id 1ltVNX-0008Io-5a; Wed, 16 Jun 2021 13:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143115.263990; Wed, 16 Jun 2021 13:08:41 +0000
+Received: by outflank-mailman (output) from mailman id 143211.264011; Wed, 16 Jun 2021 13:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVHc-0004Fr-Sd; Wed, 16 Jun 2021 13:08:40 +0000
-Received: by outflank-mailman (input) for mailman id 143115;
- Wed, 16 Jun 2021 13:08:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ltVNX-0008Ih-2L; Wed, 16 Jun 2021 13:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 143211;
+ Wed, 16 Jun 2021 13:14:46 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV1t-00075D-8k
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:25 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fd38271b-afa3-43fb-bb08-840dca73930b;
- Wed, 16 Jun 2021 12:51:50 +0000 (UTC)
+ id 1ltVNW-0008Ib-0S
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 13:14:46 +0000
+Received: from mo4-p04-ob.smtp.rzone.de (unknown [81.169.146.178])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f9836156-07ff-4cd5-bf62-a6d58cf66d39;
+ Wed, 16 Jun 2021 13:14:44 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpjtmM
+ with ESMTPSA id j0415bx5GDEctur
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:45 +0200 (CEST)
+ Wed, 16 Jun 2021 15:14:38 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +53,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd38271b-afa3-43fb-bb08-840dca73930b
-ARC-Seal: i=1; a=rsa-sha256; t=1623847906; cv=none;
+X-Inumbo-ID: f9836156-07ff-4cd5-bf62-a6d58cf66d39
+ARC-Seal: i=1; a=rsa-sha256; t=1623849279; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=Vbs1j7mJbricsA1IIQ8f5z4T87A3bI9ApYAk+bMRpD8bhxcTw5qvgllKCvFNm+WwCw
-    WmOKlZMV9uGIwJg03kHSni+u88xYHW9DMdPtis4Q9gXtaQgY9xbbplBw5+X3BwqZe59w
-    VkvV/xN9uEtJNjE18co5YigmoL1BPFlF2RAQG3NJyHpK7YGEowhl5f93iEbj3MoAGMSJ
-    fOjOPiNLSdVQoKSulFYSp9mWLF8VikPXhZSPTJNK85EmXNOxJnuAMGtBvqiBKRP3Yiqi
-    2P6Irr3/kB0KEnCZZFvnk1cNpKjCQ8q3pxlPwYNHDI4OkxykCWdAo2iMqZ9PE9pcENzd
-    4mOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847906;
+    b=KGsZWre7/Ghq+S+monVzGitmSNTADGrv3qFYc5MWCUctVeQXFOVGSlPItqHHDG7UAc
+    M3+ohYJnFzSL+qZ5qY1kEuv2ip2WXpSFtrjHAxBcAXJHnZwJGJzkSXxrBIgwG9vVgLFp
+    z1qKniM7FN4Rj+EOrZZa+duDhfe2uu0ftcArPcdeeP4xaYROniKuFhbMZRQ+zQiFFKWg
+    MSaA27B/NOJwjBKhf0DR1+7aNdmb0QJ0H+eduTmJQoOQEA0VTqkAmtyGSaW68JpJkbdt
+    JL6PL0OgHz4CgKm/Z9+AXXVB2F5ecY4e6faCDnQwQ8JpYlw34xh/S5Bg2H6UJTSN+pF/
+    5o7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623849279;
     s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
-    From:Subject:Sender;
-    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
-    b=pLJdI34sA4mQh8XdxM4ZJwGOprEg6rp0dENeOEVsTbec9S87BDRDWvSYINYY+MvbSv
-    jwRvEPnnWuNfJ91oRSnr/1zGp3uI5Rt+pvRH4sCJzy/jum3qIETlctAlLXVH3snHFyOQ
-    c7p7qLFz3L5s5dDCal9ApishyyhVgMjir9anBkAKd6XycAnhyKYFI0pKz49WnBtkMyJp
-    nuin+YUvbYR4iKQJgm7+544NQDJnUjZQi7zMlBnwSywmFe87HlGD3gmupMFXdP5NvD6q
-    OaB6rJ2VXaXxYzLF94l0r8EYg/B23qSunWp/+6WQ/Yyj3hmXBzfPIDJPxHw4J8tm2yx+
-    ewtw==
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=jApK5xhguXgItxZ5f/1GTBckGrTPVB37W+HmDgfW5pk=;
+    b=cCPYCTYcfX7Z2A8LOcSroHp5d5Wo3+3RZMXJboBEY4eYSA103uFCsjnu/p6FEZxQ7a
+    0ANB0TtUYG+HZ6c6Ze1mmn+/vo6mWjhXef9EdqQifVhcrWoO8RW/ZkQLgEZuKuD0a6ug
+    5ikwmuB6dnoRsLeHdyHZ3rQW/SvZcUKGNqRdmHD8aH1ID4QpdK0d3zbTn+b8aUXNsQjD
+    ZwdKkoIkfsKc5MXOLxOTXLWOyHzhi0kqQb5YYWDofK2fkDOAYp2bjmOMJ47uD8TaMxYd
+    5+VpdL+429VizPrhuSkU9E91WSSMJ4jResQtb3mJF42lKeLkq+xudK3NkIlSL9MlY1GM
+    wJRA==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847906;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623849279;
     s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
-    From:Subject:Sender;
-    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
-    b=iYOUWSZIPy/UeeZszze/3scZsU10jMdAzh7SXzV8Ou6jDvEfVIfruOS0enhMOI1WnQ
-    +3tTWcJdMz5iKbR4gQX/ZrQXs7uUvDpyQfn5HhXOUyrVtNlIFw7eg7v9mFb5WTRjnWYY
-    Rsmhw6Ao1Uem1OgyRvZbFbUnLyFLaEpOsa/Kjo4dAjd9wifCjt/KjwUDYIsBe2JRI3B/
-    worMaYRqYW/RmV5KgKDJpCLhwCIHibY7FYcAQJJ+bDHxl5etIiPgxK8patbwwzcVvSkV
-    BAckxj5Wghl0WjZwzjtlD0HCAgXTaNsdbGCrlzogg9eLVnq5T9uo1NDS3XfVH6FvW+bo
-    TcLg==
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=jApK5xhguXgItxZ5f/1GTBckGrTPVB37W+HmDgfW5pk=;
+    b=Wqnv0lCQAUfFAcLO3ibwmNP8zalMB8Jj/LPH6kmWMJeVXimGLFHRSsY8Pbf0/XNQbC
+    i7rIzTftAZuZVu+/qejzlsWlzaEi9G9l2ea3E+4X/G/f0kP+XvaJl0+aVrdXyOqOSaQ2
+    Rgyr3xiy7XRomba1KbQu9YagOl5V4ExYvPoGhxshz2V/5apBKiuIjmfHxkZvVGd6o93+
+    Av9XOJO7THaDNdH+nE/qoUHeZSALfhYITsJGdn2tpssuo2jPH5ebEeRtTT3ZBIGpuEKn
+    9j0X9TMxKiJRR8YpSf3f4huFXi1khrxPAPG/MQwUn2of/8+fyqvqi56sHhxpDUROcuGj
+    m9Zw==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
@@ -96,34 +93,38 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210616 27/36] tools: recognize LIBXL_API_VERSION for 4.16
-Date: Wed, 16 Jun 2021 14:51:20 +0200
-Message-Id: <20210616125129.26563-28-olaf@aepfle.de>
+Subject: [PATCH v2] tools: ipxe: update for fixing build with GCC11
+Date: Wed, 16 Jun 2021 15:14:35 +0200
+Message-Id: <20210616131435.27770-1-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
-References: <20210616125129.26563-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is required by upcoming API changes.
+Use a snapshot which includes commit
+f3f568e382a5f19824b3bfc6081cde39eee661e8 ("[crypto] Add
+memory output constraints for big-integer inline assembly"),
+which fixes build with gcc11.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/include/libxl.h | 3 ++-
+ tools/firmware/etherboot/Makefile | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index ae7fe27c1f..29931626a2 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -729,7 +729,8 @@ typedef struct libxl__ctx libxl_ctx;
- #if LIBXL_API_VERSION != 0x040200 && LIBXL_API_VERSION != 0x040300 && \
-     LIBXL_API_VERSION != 0x040400 && LIBXL_API_VERSION != 0x040500 && \
-     LIBXL_API_VERSION != 0x040700 && LIBXL_API_VERSION != 0x040800 && \
--    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400
-+    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400 && \
-+    LIBXL_API_VERSION != 0x041600
- #error Unknown LIBXL_API_VERSION
- #endif
- #endif
+v02:
+- use parent of bf4ccd4265ac to allow build with CentOS 7
+
+diff --git a/tools/firmware/etherboot/Makefile b/tools/firmware/etherboot/Makefile
+index ed9e11305f..4bc3633ba3 100644
+--- a/tools/firmware/etherboot/Makefile
++++ b/tools/firmware/etherboot/Makefile
+@@ -10,7 +10,8 @@ else
+ IPXE_GIT_URL ?= git://git.ipxe.org/ipxe.git
+ endif
+ 
+-IPXE_GIT_TAG := 988d2c13cdf0f0b4140685af35ced70ac5b3283c
++# put an updated tar.gz on xenbits after changes to this variable
++IPXE_GIT_TAG := 3c040ad387099483102708bb1839110bc788cefb
+ 
+ IPXE_TARBALL_URL ?= $(XEN_EXTFILES_URL)/ipxe-git-$(IPXE_GIT_TAG).tar.gz
+ 
 
