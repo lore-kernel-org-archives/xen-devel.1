@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99EDFC49EA4
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29A1FC48BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A1DE611BE
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A1DE611BE
+	by mail.kernel.org (Postfix) with ESMTPS id DEAD761042
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DEAD761042
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143282.264146 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143287.264193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlS-0005o7-P6; Wed, 16 Jun 2021 14:43:34 +0000
+	id 1ltWlZ-00079X-1Y; Wed, 16 Jun 2021 14:43:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143282.264146; Wed, 16 Jun 2021 14:43:34 +0000
+Received: by outflank-mailman (output) from mailman id 143287.264193; Wed, 16 Jun 2021 14:43:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlS-0005nt-Km; Wed, 16 Jun 2021 14:43:34 +0000
-Received: by outflank-mailman (input) for mailman id 143282;
- Wed, 16 Jun 2021 14:43:33 +0000
+	id 1ltWlY-00077z-SE; Wed, 16 Jun 2021 14:43:40 +0000
+Received: by outflank-mailman (input) for mailman id 143287;
+ Wed, 16 Jun 2021 14:43:39 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ltWlR-0005fp-7T
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:33 +0000
+ (envelope-from <julien@xen.org>) id 1ltWlX-0006uw-Mo
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:39 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlQ-0004DK-36; Wed, 16 Jun 2021 14:43:32 +0000
+ id 1ltWlW-0004El-UA; Wed, 16 Jun 2021 14:43:38 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlP-0007D0-QY; Wed, 16 Jun 2021 14:43:32 +0000
+ id 1ltWlW-0007D0-LZ; Wed, 16 Jun 2021 14:43:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=P1+HaOfv4X7DVCks8z7Jhaa8GAvQxlzVkg9j3S037W8=; b=quBzH1JZOnInax6kNzeH3FNAI
-	zbQZXo1G76WpD5d+HcsDZ6AHyMZ6J/2PCCik/5r6a0V2YUPwXGe2Em4vBSutgGFNH8nwsN3SdfjNM
-	7dWkknRc/yifzOYru3RRYEpUxPII6ICpxUPwHd6kYQZwMTHXkuhCBuz0b3D690WnDTrng=;
+	 bh=Jt8gi0XN2RUq5+ySNQqwwiEayVXWhG3OzYqjKkFvJ1s=; b=RooQrwIt8jwfxA3Q7p226Z7KI
+	sS65LowA7JvCVwNRGe5ajhcxHT3ymqNn9jwJGdC2Ir/o2DDWcz/i25+JbG1GldtTzVyh7MbrXa3Q9
+	VuUWvfJdZz2rKoG0kis30MSplQuzUPrrkZkviOqTfqGT0w0EVWD1SIijLdVkDcx2rTSBQ=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: raphning@amazon.co.uk,
@@ -67,197 +67,137 @@ Cc: raphning@amazon.co.uk,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH 03/10] tools/xenstore: Don't assume conn->in points to the LU request
-Date: Wed, 16 Jun 2021 15:43:17 +0100
-Message-Id: <20210616144324.31652-4-julien@xen.org>
+Subject: [PATCH 08/10] tools/xenstored: Extend restore code to handle multiple input buffer
+Date: Wed, 16 Jun 2021 15:43:22 +0100
+Message-Id: <20210616144324.31652-9-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210616144324.31652-1-julien@xen.org>
 References: <20210616144324.31652-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-call_delayed() is currently assuming that conn->in is NULL when
-handling delayed request. However, the connection is not paused.
-Therefore new request can be processed and conn->in may be non-NULL
-if we have only received a partial request.
+Currently, the restore code is considering the stream will contain at
+most one in-flight request per connection. In a follow-up changes, we
+will want to transfer multiple in-flight requests.
 
-Furthermore, as we overwrite conn->in, the current partial request
-will not be transferred. This will result to corrupt the connection.
+The function read_state_buffered() is now extended to restore multiple
+in-flight request. Complete requests will be queued as delayed
+requests, if there a partial request (only the last one can) then it
+will used as the current in-flight request.
 
-Rather than updating conn->in, stash the LU request in lu_status and
-let each callback for delayed request to update conn->in when
-necessary.
+Note that we want to bypass the quota check for delayed requests as
+the new Xenstore may have a lower limit.
 
-To keep a sane interface, the code to write the "OK" response the
-LU request is moved in xenstored_core.c.
+Lastly, there is no need to change the specification as there was
+no restriction on the number of in-flight requests preserved.
 
-Fixes: c5ca1404b4 ("tools/xenstore: add support for delaying execution of a xenstore request")
-Fixes: ed6eebf17d ("tools/xenstore: dump the xenstore state for live update")
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
-----
-
-This is fixing bugs from two separate commits. I couldn't figure out
-how to split in two patches without breaking bisection.
 ---
- tools/xenstore/xenstored_control.c | 41 ++++++++++++++++++++++++++++--
- tools/xenstore/xenstored_control.h |  3 +++
- tools/xenstore/xenstored_core.c    | 17 +++----------
- 3 files changed, 46 insertions(+), 15 deletions(-)
+ tools/xenstore/xenstored_core.c | 56 ++++++++++++++++++++++++++++-----
+ 1 file changed, 48 insertions(+), 8 deletions(-)
 
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index d08a2b961432..7acc2d134f9f 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -50,6 +50,9 @@ struct live_update {
- 	/* For verification the correct connection is acting. */
- 	struct connection *conn;
- 
-+	/* Pointer to the command used to request LU */
-+	struct buffered_data *in;
-+
- #ifdef __MINIOS__
- 	void *kernel;
- 	unsigned int kernel_size;
-@@ -100,6 +103,7 @@ static const char *lu_begin(struct connection *conn)
- 	if (!lu_status)
- 		return "Allocation failure.";
- 	lu_status->conn = conn;
-+	lu_status->in = conn->in;
- 	talloc_set_destructor(lu_status, lu_destroy);
- 
- 	return NULL;
-@@ -110,11 +114,34 @@ struct connection *lu_get_connection(void)
- 	return lu_status ? lu_status->conn : NULL;
- }
- 
-+unsigned int lu_write_response(FILE *fp)
-+{
-+	struct xsd_sockmsg msg;
-+
-+	assert(lu_status);
-+
-+	msg = lu_status->in->hdr.msg;
-+
-+	msg.len = sizeof("OK");
-+	if (fp && fwrite(&msg, sizeof(msg), 1, fp) != 1)
-+		return 0;
-+	if (fp && fwrite("OK", msg.len, 1, fp) != 1)
-+		return 0;
-+
-+	return sizeof(msg) + msg.len;
-+}
-+
- #else
- struct connection *lu_get_connection(void)
- {
- 	return NULL;
- }
-+
-+unsigned int lu_write_response(FILE *fp)
-+{
-+	/* Unsupported */
-+	return 0;
-+}
- #endif
- 
- struct cmd_s {
-@@ -658,6 +685,8 @@ static bool do_lu_start(struct delayed_request *req)
- {
- 	time_t now = time(NULL);
- 	const char *ret;
-+	struct buffered_data *saved_in;
-+	struct connection *conn = lu_status->conn;
- 
- 	if (!lu_check_lu_allowed()) {
- 		if (now < lu_status->started_at + lu_status->timeout)
-@@ -668,8 +697,9 @@ static bool do_lu_start(struct delayed_request *req)
- 		}
- 	}
- 
-+	assert(req->in == lu_status->in);
- 	/* Dump out internal state, including "OK" for live update. */
--	ret = lu_dump_state(req->in, lu_status->conn);
-+	ret = lu_dump_state(req->in, conn);
- 	if (!ret) {
- 		/* Perform the activation of new binary. */
- 		ret = lu_activate_binary(req->in);
-@@ -677,7 +707,14 @@ static bool do_lu_start(struct delayed_request *req)
- 
- 	/* We will reach this point only in case of failure. */
-  out:
--	send_reply(lu_status->conn, XS_CONTROL, ret, strlen(ret) + 1);
-+	/*
-+	 * send_reply() will send the response for conn->in. Save the current
-+	 * conn->in and restore it afterwards.
-+	 */
-+	saved_in = conn->in;
-+	conn->in = req->in;
-+	send_reply(conn, XS_CONTROL, ret, strlen(ret) + 1);
-+	conn->in = saved_in;
- 	talloc_free(lu_status);
- 
- 	return true;
-diff --git a/tools/xenstore/xenstored_control.h b/tools/xenstore/xenstored_control.h
-index 6842b8d88760..27d7f19e4b7f 100644
---- a/tools/xenstore/xenstored_control.h
-+++ b/tools/xenstore/xenstored_control.h
-@@ -20,3 +20,6 @@ int do_control(struct connection *conn, struct buffered_data *in);
- void lu_read_state(void);
- 
- struct connection *lu_get_connection(void);
-+
-+/* Write the "OK" response for the live-update command */
-+unsigned int lu_write_response(FILE *fp);
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 607187361d84..41b26d7094c8 100644
+index a5084a5b173d..5b7ab7f74013 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -272,15 +272,10 @@ static int undelay_request(void *_req)
+@@ -1486,6 +1486,10 @@ static void process_message(struct connection *conn, struct buffered_data *in)
+ 	enum xsd_sockmsg_type type = in->hdr.msg.type;
+ 	int ret;
  
- static void call_delayed(struct connection *conn, struct delayed_request *req)
- {
--	assert(conn->in == NULL);
--	conn->in = req->in;
--
- 	if (req->func(req)) {
- 		undelay_request(req);
- 		talloc_set_destructor(req, NULL);
- 	}
--
--	conn->in = NULL;
++	/* At least send_error() and send_reply() expects conn->in == in */
++	assert(conn->in == in);
++	trace_io(conn, in, 0);
++
+ 	if ((unsigned int)type >= XS_TYPE_COUNT || !wire_funcs[type].func) {
+ 		eprintf("Client unknown operation %i", type);
+ 		send_error(conn, ENOSYS);
+@@ -1515,6 +1519,23 @@ static void process_message(struct connection *conn, struct buffered_data *in)
+ 	conn->transaction = NULL;
  }
  
- int delay_request(struct connection *conn, struct buffered_data *in,
-@@ -2375,7 +2370,7 @@ const char *dump_state_buffered_data(FILE *fp, const struct connection *c,
- 	struct buffered_data *out, *in = c->in;
- 	bool partial = true;
++static bool process_delayed_message(struct delayed_request *req)
++{
++	struct connection *conn = req->data;
++	struct buffered_data *saved_in = conn->in;
++
++	/*
++	 * Part of process_message() expects conn->in to contains the
++	 * processed response. So save the current conn->in and restore it
++	 * afterwards.
++	 */
++	conn->in = req->in;
++	process_message(req->data, req->in);
++	conn->in = saved_in;
++
++	return true;
++}
++
+ static void consider_message(struct connection *conn)
+ {
+ 	if (verbose)
+@@ -1582,7 +1603,6 @@ static void handle_input(struct connection *conn)
+ 	if (in->used != in->hdr.msg.len)
+ 		return;
  
--	if (in && c != lu_get_connection()) {
-+	if (in) {
- 		len = in->inhdr ? in->used : sizeof(in->hdr);
- 		if (fp && fwrite(&in->hdr, len, 1, fp) != 1)
- 			return "Dump read data error";
-@@ -2416,16 +2411,12 @@ const char *dump_state_buffered_data(FILE *fp, const struct connection *c,
+-	trace_io(conn, in, 0);
+ 	consider_message(conn);
+ 	return;
  
- 	/* Add "OK" for live-update command. */
- 	if (c == lu_get_connection()) {
--		struct xsd_sockmsg msg = c->in->hdr.msg;
-+		unsigned int rc = lu_write_response(fp);
+@@ -2611,14 +2631,20 @@ void read_state_buffered_data(const void *ctx, struct connection *conn,
+ 	unsigned int len;
+ 	bool partial = sc->data_resp_len;
  
--		msg.len = sizeof("OK");
--		if (fp && fwrite(&msg, sizeof(msg), 1, fp) != 1)
-+		if (!rc)
- 			return "Dump buffered data error";
--		len += sizeof(msg);
--		if (fp && fwrite("OK", msg.len, 1, fp) != 1)
+-	if (sc->data_in_len) {
++	for (data = sc->data; data < sc->data + sc->data_in_len; data += len) {
+ 		bdata = new_buffer(conn);
+ 		if (!bdata)
+ 			barf("error restoring read data");
+-		if (sc->data_in_len < sizeof(bdata->hdr)) {
++
++		/*
++		 * We don't know yet if there is more than one message
++		 * to process. So the len is the size of the leftover data.
++		 */
++		len = sc->data_in_len - (data - sc->data);
++		if (len < sizeof(bdata->hdr)) {
+ 			bdata->inhdr = true;
+-			memcpy(&bdata->hdr, sc->data, sc->data_in_len);
+-			bdata->used = sc->data_in_len;
++			memcpy(&bdata->hdr, sc->data, len);
++			bdata->used = len;
+ 		} else {
+ 			bdata->inhdr = false;
+ 			memcpy(&bdata->hdr, sc->data, sizeof(bdata->hdr));
+@@ -2629,12 +2655,26 @@ void read_state_buffered_data(const void *ctx, struct connection *conn,
+ 							bdata->hdr.msg.len);
+ 			if (!bdata->buffer)
+ 				barf("Error allocating in buffer");
+-			bdata->used = sc->data_in_len - sizeof(bdata->hdr);
+-			memcpy(bdata->buffer, sc->data + sizeof(bdata->hdr),
++			bdata->used = min_t(unsigned int,
++					    len - sizeof(bdata->hdr),
++					    bdata->hdr.msg.len);
++			memcpy(bdata->buffer, data + sizeof(bdata->hdr),
+ 			       bdata->used);
++			/* Update len to match the size of the message. */
++			len = bdata->used + sizeof(bdata->hdr);
+ 		}
  
--			return "Dump buffered data error";
--		len += msg.len;
-+		len += rc;
+-		conn->in = bdata;
++		/*
++		 * If the message is not complete, then it means this was
++		 * the current processed message. All the other messages
++		 * will be queued to be handled after restoring.
++		 */
++		if (bdata->inhdr || bdata->used != bdata->hdr.msg.len) {
++			assert(conn->in == NULL);
++			conn->in = bdata;
++		} else if (delay_request(conn, bdata, process_delayed_message,
++					 conn, true))
++			barf("Unable to delay the request");
  	}
  
- 	if (sc)
+ 	for (data = sc->data + sc->data_in_len;
 -- 
 2.17.1
 
