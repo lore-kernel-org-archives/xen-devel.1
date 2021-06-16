@@ -2,46 +2,58 @@ Return-Path: <SRS0=hjEX=LK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82411C48BE6
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70D0AC48BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:01:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 257D061075
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:53:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 257D061075
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 15FBE60233
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:01:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 15FBE60233
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143346.264244 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143354.264256 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWue-0004qz-M1; Wed, 16 Jun 2021 14:53:04 +0000
+	id 1ltX2i-0006Lu-LE; Wed, 16 Jun 2021 15:01:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143346.264244; Wed, 16 Jun 2021 14:53:04 +0000
+Received: by outflank-mailman (output) from mailman id 143354.264256; Wed, 16 Jun 2021 15:01:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWue-0004qs-Ip; Wed, 16 Jun 2021 14:53:04 +0000
-Received: by outflank-mailman (input) for mailman id 143346;
- Wed, 16 Jun 2021 14:53:03 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1ltX2i-0006Ln-HS; Wed, 16 Jun 2021 15:01:24 +0000
+Received: by outflank-mailman (input) for mailman id 143354;
+ Wed, 16 Jun 2021 15:01:23 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ltWud-0004qk-Hr
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:53:03 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ltWuc-0004SR-Hr; Wed, 16 Jun 2021 14:53:02 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ltWlZ-0007D0-DF; Wed, 16 Jun 2021 14:43:41 +0000
+ (envelope-from <SRS0=Jola=LK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ltX2h-0006Le-94
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 15:01:23 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.109.102])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ad9bd4ce-de2c-489f-afb1-9ec5cdcc1bb1;
+ Wed, 16 Jun 2021 15:01:21 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2104.outbound.protection.outlook.com [104.47.18.104])
+ (Using TLS) by relay.mimecast.com with ESMTP id
+ de-mta-31-21fd_TuyOIm1h4jd0AZOMA-1; Wed, 16 Jun 2021 17:01:19 +0200
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR04MB6861.eurprd04.prod.outlook.com (2603:10a6:803:13c::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.24; Wed, 16 Jun
+ 2021 15:01:18 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::f06c:6f5d:34d2:1c36]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::f06c:6f5d:34d2:1c36%5]) with mapi id 15.20.4242.019; Wed, 16 Jun 2021
+ 15:01:17 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ PR0P264CA0209.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1f::29) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4242.18 via Frontend Transport; Wed, 16 Jun 2021 15:01:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,204 +65,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=Vb1oaoq7rCyl8ROu/TuBrNZhgyUJCaVoNnm3GNRQzS4=; b=p1H5ZlKe0o33n7Y6Jw6qdCJfi
-	lCvnJmoLm7XvEURSpqGX7ozQUOxBvRPyBKO9y9zdBhJLGULKpSi7TlK5VROa9Jn3s2bnzFBc/F+oX
-	38pKHjDTyjAWlZl4hrqjMKRl+VYTcckleX02VhdzhAB9+2icGQsW8t3Gfw5gvdTER27Iw=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: raphning@amazon.co.uk,
-	doebel@amazon.de,
-	Julien Grall <jgrall@amazon.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH 10/10] tools/xenstored: Delay new transaction while Live-Update is pending
-Date: Wed, 16 Jun 2021 15:43:24 +0100
-Message-Id: <20210616144324.31652-11-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210616144324.31652-1-julien@xen.org>
-References: <20210616144324.31652-1-julien@xen.org>
+X-Inumbo-ID: ad9bd4ce-de2c-489f-afb1-9ec5cdcc1bb1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1623855681;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=yVRTu0CfEeFesjRETUlB3Z+ftIEmd6Fu6G7zHSTMe9w=;
+	b=lW4wtMgAmwRstwNkXvwSqlKM4TiKhiqWq6mb5vEUmio0RIwzMihqardHPkfu46Ob1T36LW
+	umeoOl6Zz4ThFC6i2GxYIY7xd8VrururB7y10NR95hTDPK7onzhOqz1tkEHSbz48odtfyG
+	LtjpVHaLitEMGGGVZrow9yLDaI4aV1M=
+X-MC-Unique: 21fd_TuyOIm1h4jd0AZOMA-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=iXKbNE6I8vjYZ6lLSeuqxy7kB9HAilJdZqGwAWBj+lJmbFE94drAiQt1GpO/XhRwnHn24yyYwtgLd/3yf1nx3dRUg3jphIqyaiEn1jMTG3Bk6xe/akrfPeHyXbWHHFyHStCmz9WY/K00bPKmUiZawfcokfStdbibo7eZF3rywnGqaa1YR/bK1gMvhDXX1kIU/4/HlpnvE+wKRLz+ToAcYg9en7hdZ5afBJY0dQKodBKP6K2lljETwC5StwbMw5LAGyKY9Dn4gRofpt6AcN2FuC4ejfGN4FGZaq3jvbHDyXgNLbRkkT/d5eHWqe2JGft8ZOqabsvrS/1uhTuvieZX4A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3lFacDmEIodEaoxeJPMMmvxpxSTyv01Hwb2O7xxbCpc=;
+ b=XXKxOYVVWlmCe6ODR8ymkc37QGGF/QnfpCQfBk36U82naQ2+ojgPkqNwNQW29VwUj+axRS0F9crbO9o1f2iyUar7STLp8TaiXSYXEAi0Tcq5bcaybbFPC6YEey8Ep7q+SF2Gg3lCBDI9JEgfSVQocE2lQViKwD7A/YEeCKU+a3tBRiXq61EBkQGstAvi8EBO2UcV9TwyIvg9CRCe/yO40VsWyv8xovHti8KA9VDXyeMrFw3kMIblRGm11cimlYECByePXV1JuzXNig5h4rxQDBd5jFmwnmjx7ioZ3m/Bvpwq/p2zWPDAHrrliccqDO3YKEoXVHg+S/6rG1NNMRMb0A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: xenproject.org; dkim=none (message not signed)
+ header.d=none;xenproject.org; dmarc=none action=none header.from=suse.com;
+Subject: Re: [xen-unstable test] 162845: regressions - FAIL
+From: Jan Beulich <jbeulich@suse.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>, xen-devel@lists.xenproject.org,
+ osstest service owner <osstest-admin@xenproject.org>
+References: <osstest-162845-mainreport@xen.org>
+ <8e39ca8f-3202-7d3a-d65d-7087634bd49e@suse.com> <YMoI8YZfOvogwOMY@perard>
+ <f8c4151a-6dac-d87c-ef46-eb35ada07bd9@suse.com>
+Message-ID: <52c8fd06-c60b-2765-b25a-47c28f98427f@suse.com>
+Date: Wed, 16 Jun 2021 17:01:15 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <f8c4151a-6dac-d87c-ef46-eb35ada07bd9@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [37.24.206.209]
+X-ClientProxiedBy: PR0P264CA0209.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:100:1f::29) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c5d45577-52fa-4795-55ec-08d930d79803
+X-MS-TrafficTypeDiagnostic: VI1PR04MB6861:
+X-Microsoft-Antispam-PRVS:
+	<VI1PR04MB686196F34B9D4C3B5A5FAD51B30F9@VI1PR04MB6861.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	rDtQ/YAAm6OZzqnCVIBWpIWZfM7jXg2GhqFUf9Az0BIsSrl52mZryZPbbve8osEd5hsqXbQLs78x9mkNy1XxQgW1TeIhBwm6KEReNuw2roXEYIMFNxl2KcmNvtFm4gy/UPQ4bTznYuDWAQYnBbTuvyJmYuzek6u0s/4YaWt4jA8eO/5pzNHdf9atao2zZjyfOUlbAw9IRfrqRufuieWFlAQMee/rqkJxzpsbt+4dQXqozWpx+R/k+B427QR4OTUo1DXykOhQnFfJFlEr/2xBEAGXzK3cQJsfk/VC1Ulb9a8xcK+/lexBqRMCc6f4YwcVLu1b/wPQ6Nd/KLT4H6Fu+NJtumjJ91FEQC2MrQGRrCVVw7Cgj/T/6dOCelNXo1HZXKgqU3rG5TpAtwrhOK/ugRAsqD9WRcnHirWyUs4Ja8OfPC8gPGTc4UBtKZktOrGa04hA1J+8lwFG+OWyvNlp9i3tL+3iBYKb6fKkSZloCnsrMbrawspxYyktBbpvzVBC6/2PQtPSueWvwS5XVaaVyPAaEReKph3+nH9hHdNKEw4ELLWhyQ+UXGWmKdQfV1Zu2bvLs/nbTMA9j+aObDP+6SVi/JymOChP7SXUPkhqsRp1tRUG5KQ3KPvTU8YAkqpJNqMsnQpFxWevn4U8W25/DRPyxrAFApiO2wQE8iifpwdhnnET1d/wTseBUrEuoqtBkiBHleay6eHDThkO+fldgMcsvPzg3epcnaO8fsgvjKfXoybvAnI0dtl52+KCJC8vQ+A678S06g22gK/DhiwdagCbW5RZTJ109bVbQKWbZBuREQbeJmRbtEuWVj+KyIwZaVfXVaQ70dlNIwZ+vCVt5Q/oGcxogvWtltTM6vaA3wk=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(396003)(366004)(39860400002)(346002)(376002)(136003)(966005)(8936002)(8676002)(31696002)(5660300002)(6916009)(54906003)(36756003)(478600001)(83380400001)(4326008)(53546011)(66574015)(38100700002)(2906002)(6486002)(956004)(66476007)(86362001)(66556008)(16526019)(16576012)(26005)(186003)(2616005)(316002)(31686004)(66946007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?SlvCYzGPbKndFUaQzeGu0m0UQKZHUQoBauVQ4ua+GQUI/juPXSmeHnPQFwf8?=
+ =?us-ascii?Q?HkHLPSDuSDEvNp0JHnbWvwm6QFHdiDTuYKMPjTyXRzkEX6Ca65QJfl+Os2r8?=
+ =?us-ascii?Q?SEsPPg/KFq0DpbFBEtrR31w5VRpPp9eU3vrSuHy54QULoSmx0iKBdf3ec9oZ?=
+ =?us-ascii?Q?YbHbHYjhoLPezi4PuHjg0G+cUINA0rTHp4+A5uOxWGxVwLAiU6I/2ZfbDQwL?=
+ =?us-ascii?Q?osvzN6lBsT9BLQ7mQE6WHpJUXUBVIAoCFLkhRzxp+FMFPzyXGkpMKKqqiKd2?=
+ =?us-ascii?Q?rIpwEnXQFOX+XyQCTfhPorXXMSlpNV6UIT7IpsX39GLCf8bIYbWufWHxRv5Q?=
+ =?us-ascii?Q?TkbFNhHCChydzYaChmWYqQiSSq720HwwNqE14StvKvOQ8jG3GZAHBVN5nboV?=
+ =?us-ascii?Q?1KJJQU9JJipNrHmBVExkpR/FToWC2xjVOZk2EWyVENPQUgJiLbZhOOQpGF3Z?=
+ =?us-ascii?Q?QRWdtMhL2TM1Lu3ziOGdbiIxdw/pTTZsoCVqK/mxBdEoOo3OT/0jjcaoiOtE?=
+ =?us-ascii?Q?wian4kzSZw1p1ez1KUx5SrxO6z0hW1C7FHEDxAt7QHi0qtVdxCwweCzvMrj3?=
+ =?us-ascii?Q?rySDktKvyIYquzhCTsqqrMYqASyeZPn+JRSphuwGgDtJvJYuRfiLqRqoE9Kq?=
+ =?us-ascii?Q?e86OoC+FFFTvvTJ7DZS42qeXEmUOr0Ha2y8+bgJGeAj483d3BJlw4pmoet69?=
+ =?us-ascii?Q?RdhuglAljz/Hdh8xhRh2mMYTPrIVPd2fz9n5qILvKcguIAcN/GEh3uh9YvUe?=
+ =?us-ascii?Q?aB6lWdhs4JppdJF7sB+nGwDTkszr29Y40GuvR+xDq7qEj2izAz0z42FasAUK?=
+ =?us-ascii?Q?8C2wyDchPX0fQ0195/keAQLlV3oc5ZJCU4v/m50cai2QMd5+MCPIW6BaK++l?=
+ =?us-ascii?Q?++pLA0Fi7JzKK2U4m1ZTC8aG5EU7gEk0daNgN1u7NehaRvWQBiR2QyiVkJD5?=
+ =?us-ascii?Q?q8z9VfT62d0bhRQRgpTwyvbjULRlqlUUB3svqful4oUy/PzGlCwFrm0iHl02?=
+ =?us-ascii?Q?cY5OjyqWZR35wiRG6g+AL63phwyDv4RtppZY3LL7dwFzpm8+Szwvz0vgxgwB?=
+ =?us-ascii?Q?n8ZVQseaxftKYQjDi8gs7aTtEHZ54VCWBX+4Uht5y1gcFXUOOv9x2bGTBJ9C?=
+ =?us-ascii?Q?fcAzp1ntJjTZiWiTVqIWiz19qOwAjW7V2g4Ku/NHG1482sYm38YGSz4BQR1b?=
+ =?us-ascii?Q?DPqy/IY/CHOerkdSkBib05WzCTaEJGvQWU+EKQ99HFXLxJZvqBBQCX0yyQrm?=
+ =?us-ascii?Q?8bKuf90xjVUBvz2YG+rfGM08p4Kg5EM6Lzq/J6LHc12AhPCHseLGq0hJBGI4?=
+ =?us-ascii?Q?hEshwUSnqZf6y92rXggmOGNM?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5d45577-52fa-4795-55ec-08d930d79803
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2021 15:01:17.7442
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yslFqtSrRz2/ggtbIQDKbaXStHx+T+wjLiNINhGyluQ5iABP/nqnJEFFZf6lJ2xuy6p8hHzyZl/OV6g39N/tSA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6861
 
-From: Julien Grall <jgrall@amazon.com>
+On 16.06.2021 16:49, Jan Beulich wrote:
+> On 16.06.2021 16:21, Anthony PERARD wrote:
+>> On Wed, Jun 16, 2021 at 09:12:52AM +0200, Jan Beulich wrote:
+>>> On 16.06.2021 08:54, osstest service owner wrote:
+>>>> flight 162845 xen-unstable real [real]
+>>>> flight 162853 xen-unstable real-retest [real]
+>>>> http://logs.test-lab.xenproject.org/osstest/logs/162845/
+>>>> http://logs.test-lab.xenproject.org/osstest/logs/162853/
+>>>>
+>>>> Regressions :-(
+>>>>
+>>>> Tests which did not succeed and are blocking,
+>>>> including tests which could not be run:
+>>>>  test-amd64-amd64-xl-qemuu-ovmf-amd64 15 guest-saverestore fail REGR. =
+vs. 162533
+>>>>  test-amd64-i386-xl-qemuu-ovmf-amd64 15 guest-saverestore fail REGR. v=
+s. 162533
+>>>
+>>> There looks to still be an issue with the ovmf version used. I'm
+>>> puzzled to find this flight reporting
+>>>
+>>> built_revision_ovmf	e1999b264f1f9d7230edf2448f757c73da567832
+>>>
+>>> which isn't what the tree recently was rewound to, but about two
+>>> dozen commits older. I hope one of you has a clue at what is going
+>>> on here.
+>>
+>> So this commit is "master" from https://xenbits.xen.org/git-http/ovmf.gi=
+t
+>> rather than "xen-tested-master" from https://xenbits.xen.org/git-http/os=
+stest/ovmf.git
+>>
+>> master is what xen.git would have cloned. And "xen-tested-master" is the
+>> commit that I was expecting osstest to pick up, but maybe that as been
+>> setup only for stable trees?
+>>
+>> Anyway, after aad7b5c11d51 ("tools/firmware/ovmf: Use OvmfXen platform
+>> file is exist"), it isn't the same OVMF that is been used. We used to
+>> use OvmfX64, but now we are going to use OvmfXen. (Xen support in
+>> OvmfX64 has been removed so can't be used anymore.)
+>>
+>>
+>> So there is maybe an issue with OvmfXen which doesn't need to block
+>> xen-unstable flights.
+>>
+>>
+>> As for the failure, I can think of one thing in that is different,
+>> OvmfXen maps the XENMAPSPACE_shared_info page as high as possible in the
+>> guest physical memory, in order to avoid creating hole the RAM, but a
+>> call to XENMEM_remove_from_physmap is done as well. Could that actually
+>> cause issues with saverestore?
+>=20
+> I don't think it should. But I now notice I should have looked at the
+> logs of these tests:
+>=20
+> xc: info: Saving domain 2, type x86 HVM
+> xc: error: Unable to obtain the guest p2m size (1 =3D Operation not permi=
+tted): Internal error
+> xc: error: Save failed (1 =3D Operation not permitted): Internal error
+>=20
+> which looks suspiciously similar to the issue J=C3=BCrgen's d21121685fac
+> ("tools/libs/guest: fix save and restore of pv domains after 32-bit
+> de-support") took care of, just that here we're dealing with a HVM
+> guest. I'll have to go inspect what exactly the library is doing there,
+> and hence where in Xen the -EPERM may be coming from all of the
+> sudden (and only for OVMF).
 
-At the moment, Live-Update will, by default, not proceed if there are
-in-flight transactions. It is possible force it by passing -F but this
-will break any connection with in-flight transactions.
+The *-amd64-i386-* variant has
 
-There are PV drivers out that may never terminate some transaction. On
-host running such guest, we would need to use -F. Unfortunately, this
-also risks to break well-behaving guests (and even dom0) because
-Live-Update will happen as soon as the timeout is hit.
+xc: info: Saving domain 2, type x86 HVM
+xc: error: Cannot save this big a guest (7 =3D Argument list too long): Int=
+ernal error
 
-Ideally, we would want to preserve transactions but this requires
-some work and a lot of testing to be able to use it in production.
+which to me hints at ...
 
-As a stop gap, we want to limit the damage of -F. This patch will delay
-any transactions that are started after Live-Update has been requested.
+> Of course the behavior you describe above may play into this, since
+> aiui this might lead to an excessively large p2m (depending what
+> exactly you mean with "as high as possible").
 
-If the request cannot be delayed, the connection will be stalled to
-avoid loosing requests.
+.. a connection, but I'm not sure at all. XENMEM_maximum_gpfn returns
+its result as the hypercall return value, so huge values could be a
+problem at least for 32-bit tool stacks.
 
-If the connection has already a pending transaction before Live-Update,
-then new transaction will not be delayed. This is to avoid the connection
-to stall.
+What page number are you mapping the shared info page at in OVMF?
 
-With this stop gap in place, domains with long running transactions will
-still break when using -F, but other domains which starts a transaction
-in the middle of Live-Update will continue to work.
-
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- tools/xenstore/xenstored_control.c | 10 ++++++
- tools/xenstore/xenstored_control.h |  2 ++
- tools/xenstore/xenstored_core.c    | 49 +++++++++++++++++++++++++++++-
- tools/xenstore/xenstored_core.h    |  3 ++
- 4 files changed, 63 insertions(+), 1 deletion(-)
-
-diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
-index 1c24d4869eab..a045f102a420 100644
---- a/tools/xenstore/xenstored_control.c
-+++ b/tools/xenstore/xenstored_control.c
-@@ -131,6 +131,11 @@ unsigned int lu_write_response(FILE *fp)
- 	return sizeof(msg) + msg.len;
- }
- 
-+bool lu_is_pending(void)
-+{
-+	return lu_status != NULL;
-+}
-+
- #else
- struct connection *lu_get_connection(void)
- {
-@@ -142,6 +147,11 @@ unsigned int lu_write_response(FILE *fp)
- 	/* Unsupported */
- 	return 0;
- }
-+
-+bool lu_is_pending(void)
-+{
-+	return false;
-+}
- #endif
- 
- struct cmd_s {
-diff --git a/tools/xenstore/xenstored_control.h b/tools/xenstore/xenstored_control.h
-index 27d7f19e4b7f..98b6fbcea2b1 100644
---- a/tools/xenstore/xenstored_control.h
-+++ b/tools/xenstore/xenstored_control.h
-@@ -23,3 +23,5 @@ struct connection *lu_get_connection(void);
- 
- /* Write the "OK" response for the live-update command */
- unsigned int lu_write_response(FILE *fp);
-+
-+bool lu_is_pending(void);
-diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 9eca58682b51..10b53af76ac5 100644
---- a/tools/xenstore/xenstored_core.c
-+++ b/tools/xenstore/xenstored_core.c
-@@ -338,7 +338,20 @@ static int destroy_conn(void *_conn)
- 
- static bool conn_can_read(struct connection *conn)
- {
--	return conn->funcs->can_read(conn) && !conn->is_ignored;
-+	if (!conn->funcs->can_read(conn))
-+		return false;
-+
-+	if (conn->is_ignored)
-+		return false;
-+
-+	/*
-+	 * For stalled connection, we want to process the pending
-+	 * command as soon as live-update has aborted.
-+	 */
-+	if (conn->is_stalled)
-+		return !lu_is_pending();
-+
-+	return true;
- }
- 
- static bool conn_can_write(struct connection *conn)
-@@ -417,6 +430,12 @@ static void initialize_fds(int *p_sock_pollfd_idx, int *ptimeout)
- 			if (!list_empty(&conn->out_list))
- 				events |= POLLOUT;
- 			conn->pollfd_idx = set_fd(conn->fd, events);
-+			/*
-+			 * For stalled connection, we want to process the
-+			 * pending command as soon as live-update has aborted.
-+			 */
-+			if (conn->is_stalled && !lu_is_pending())
-+				*ptimeout = 0;
- 		}
- 	}
- }
-@@ -1524,6 +1543,9 @@ static bool process_delayed_message(struct delayed_request *req)
- 	struct connection *conn = req->data;
- 	struct buffered_data *saved_in = conn->in;
- 
-+	if (lu_is_pending())
-+		return false;
-+
- 	/*
- 	 * Part of process_message() expects conn->in to contains the
- 	 * processed response. So save the current conn->in and restore it
-@@ -1543,6 +1565,30 @@ static void consider_message(struct connection *conn)
- 			sockmsg_string(conn->in->hdr.msg.type),
- 			conn->in->hdr.msg.len, conn);
- 
-+	conn->is_stalled = false;
-+	/*
-+	 * Currently, Live-Update is not supported if there is active
-+	 * transactions. In order to reduce the number of retry, delay
-+	 * any new request to start a transaction if Live-Update is pending
-+	 * and there are no transactions in-flight.
-+	 *
-+	 * If we can't delay the request, then mark the connection as
-+	 * stalled. This will ignore new requests until Live-Update happened
-+	 * or it was aborted.
-+	 */
-+	if (lu_is_pending() && conn->transaction_started == 0 &&
-+	    conn->in->hdr.msg.type == XS_TRANSACTION_START) {
-+		trace("Delaying transaction start for connection %p req_id %u\n",
-+		      conn, conn->in->hdr.msg.req_id);
-+
-+		if (delay_request(conn, conn->in, process_delayed_message,
-+				  conn, false) != 0) {
-+			trace("Stalling connection %p\n", conn);
-+			conn->is_stalled = true;
-+		}
-+		return;
-+	}
-+
- 	process_message(conn, conn->in);
- 
- 	assert(conn->in == NULL);
-@@ -1629,6 +1675,7 @@ struct connection *new_connection(const struct interface_funcs *funcs)
- 	new->pollfd_idx = -1;
- 	new->funcs = funcs;
- 	new->is_ignored = false;
-+	new->is_stalled = false;
- 	new->transaction_started = 0;
- 	INIT_LIST_HEAD(&new->out_list);
- 	INIT_LIST_HEAD(&new->watches);
-diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index dac517156993..258f6ff38279 100644
---- a/tools/xenstore/xenstored_core.h
-+++ b/tools/xenstore/xenstored_core.h
-@@ -110,6 +110,9 @@ struct connection
- 	/* Is this connection ignored? */
- 	bool is_ignored;
- 
-+	/* Is the connection stalled? */
-+	bool is_stalled;
-+
- 	/* Buffered incoming data. */
- 	struct buffered_data *in;
- 
--- 
-2.17.1
+Jan
 
 
