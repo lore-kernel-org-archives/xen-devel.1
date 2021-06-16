@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41C40C48BE6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A289C49EA2
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 06E1461042
+	by mail.kernel.org (Postfix) with ESMTPS id 3B19B6115C
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06E1461042
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B19B6115C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143284.264163 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143283.264157 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlU-0006Cl-Re; Wed, 16 Jun 2021 14:43:36 +0000
+	id 1ltWlU-00067G-9A; Wed, 16 Jun 2021 14:43:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143284.264163; Wed, 16 Jun 2021 14:43:36 +0000
+Received: by outflank-mailman (output) from mailman id 143283.264157; Wed, 16 Jun 2021 14:43:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlU-0006BQ-IP; Wed, 16 Jun 2021 14:43:36 +0000
-Received: by outflank-mailman (input) for mailman id 143284;
- Wed, 16 Jun 2021 14:43:35 +0000
+	id 1ltWlU-000673-4X; Wed, 16 Jun 2021 14:43:36 +0000
+Received: by outflank-mailman (input) for mailman id 143283;
+ Wed, 16 Jun 2021 14:43:34 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ltWlT-00064H-Qb
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:35 +0000
+ (envelope-from <julien@xen.org>) id 1ltWlS-0005nk-El
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:34 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlS-0004Do-Qy; Wed, 16 Jun 2021 14:43:34 +0000
+ id 1ltWlR-0004DX-Ey; Wed, 16 Jun 2021 14:43:33 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlS-0007D0-IH; Wed, 16 Jun 2021 14:43:34 +0000
+ id 1ltWlR-0007D0-6H; Wed, 16 Jun 2021 14:43:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=fKULMeUXfmVrCVmVDhYu2L9+CZLfHs4b31xT1ty4foo=; b=KXkJfhVMqSRa/+S2GRnCjEDdU
-	HWFmyaOk78Yma8CB6ovb7dkMDNwYuZNUYC8WEO7NDWzue6ckQuGp7+KdibTHe0f8Qfn0fJw0+nshB
-	O8l4YNMeVVboKM1Epm8CzaK1REWCwGrqTDcaCGRLnDiGRWFXZXKfxkP9dKRlsPg8TROGk=;
+	 bh=JWVgF6QLGsEmGe+em+lI3NsrndUxxF4I6/J85EZgUFY=; b=h5Gm1UgtjuzByYBGo/uL1qERD
+	AQ6/Ty3bvZNqIFGvz4uzKFSq678gloxDxx0aUTyDcS0wasJkoZU0LMceRM2U/xBk9hxhC1hrvrlYS
+	a2Lxgoy+JUaD6DGl+LXH67uFsAXRmV118MeIXQDj1l/zvOfaxUIqSpS8RETriuWbq2R1I=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: raphning@amazon.co.uk,
@@ -67,44 +67,88 @@ Cc: raphning@amazon.co.uk,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH 05/10] tools/xenstored: xenstored_core.h should include fcntl.h
-Date: Wed, 16 Jun 2021 15:43:19 +0100
-Message-Id: <20210616144324.31652-6-julien@xen.org>
+Subject: [PATCH 04/10] tools/xenstored: Limit the number of requests a connection can delay
+Date: Wed, 16 Jun 2021 15:43:18 +0100
+Message-Id: <20210616144324.31652-5-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210616144324.31652-1-julien@xen.org>
 References: <20210616144324.31652-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-xenstored_core.h will consider live-udpate is not supported if
-O_CLOEXEC doesn't exist. However, the header doesn't include the one
-defining O_CLOEXEC (i.e. fcntl.h). This means that depending on
-the header included, some source file will think Live-Update is not
-supported.
+Currently, only liveupdate request can be delayed. The request can only
+be performed by a privileged connection (e.g. dom0). So it is fine to
+have no limits.
 
-I am not aware of any issue with the existing. Therefore this is just
-a latent bug so far.
+In a follow-up patch we will want to delay request for unprivileged
+connection as well. So it is best to apply a limit.
 
-Prevent any potential issue by including fcntl.h in xenstored_core.h
+For now and for simplicity, only a single request can be delayed
+for a given unprivileged connection.
 
-Fixes: cd831ee438 ("tools/xenstore: handle CLOEXEC flag for local files and pipes")
+Take the opportunity to tweak the prototype and provide a way to
+bypass the quota check. This would be useful when the function
+is called from the restore code.
+
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.h | 1 +
- 1 file changed, 1 insertion(+)
+ tools/xenstore/xenstored_control.c |  2 +-
+ tools/xenstore/xenstored_core.c    | 11 ++++++++++-
+ tools/xenstore/xenstored_core.h    |  3 ++-
+ 3 files changed, 13 insertions(+), 3 deletions(-)
 
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 7acc2d134f9f..1c24d4869eab 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -737,7 +737,7 @@ static const char *lu_start(const void *ctx, struct connection *conn,
+ 	lu_status->timeout = to;
+ 	lu_status->started_at = time(NULL);
+ 
+-	errno = delay_request(conn, conn->in, do_lu_start, NULL);
++	errno = delay_request(conn, conn->in, do_lu_start, NULL, false);
+ 
+ 	return NULL;
+ }
+diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
+index 41b26d7094c8..51d210828922 100644
+--- a/tools/xenstore/xenstored_core.c
++++ b/tools/xenstore/xenstored_core.c
+@@ -279,10 +279,19 @@ static void call_delayed(struct connection *conn, struct delayed_request *req)
+ }
+ 
+ int delay_request(struct connection *conn, struct buffered_data *in,
+-		  bool (*func)(struct delayed_request *), void *data)
++		  bool (*func)(struct delayed_request *), void *data,
++		  bool no_quota_check)
+ {
+ 	struct delayed_request *req;
+ 
++	/*
++	 * Only allow one request can be delayed for an unprivileged
++	 * connection.
++	 */
++	if (!no_quota_check && domain_is_unprivileged(conn) &&
++	    !list_empty(&conn->delayed))
++		return ENOSPC;
++
+ 	req = talloc(in, struct delayed_request);
+ 	if (!req)
+ 		return ENOMEM;
 diff --git a/tools/xenstore/xenstored_core.h b/tools/xenstore/xenstored_core.h
-index 34839b34f6e9..dac517156993 100644
+index 89ce155e755b..34839b34f6e9 100644
 --- a/tools/xenstore/xenstored_core.h
 +++ b/tools/xenstore/xenstored_core.h
-@@ -24,6 +24,7 @@
+@@ -213,7 +213,8 @@ char *get_parent(const void *ctx, const char *node);
  
- #include <sys/types.h>
- #include <dirent.h>
-+#include <fcntl.h>
- #include <stdbool.h>
- #include <stdint.h>
- #include <errno.h>
+ /* Delay a request. */
+ int delay_request(struct connection *conn, struct buffered_data *in,
+-		  bool (*func)(struct delayed_request *), void *data);
++		  bool (*func)(struct delayed_request *), void *data,
++		  bool no_quota_check);
+ 
+ /* Tracing infrastructure. */
+ void trace_create(const void *data, const char *type);
 -- 
 2.17.1
 
