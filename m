@@ -2,47 +2,46 @@ Return-Path: <SRS0=hjEX=LK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+X-Spam-Status: No, score=-20.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_2 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FD6CC48BE5
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25823C48BE6
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:59:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5A28661166
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:52:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A28661166
+	by mail.kernel.org (Postfix) with ESMTPS id D071061159
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:59:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D071061159
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142961.263764 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142972.263776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltV1p-0006pg-UW; Wed, 16 Jun 2021 12:52:21 +0000
+	id 1ltV8P-0001Tm-Q5; Wed, 16 Jun 2021 12:59:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142961.263764; Wed, 16 Jun 2021 12:52:21 +0000
+Received: by outflank-mailman (output) from mailman id 142972.263776; Wed, 16 Jun 2021 12:59:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltV1p-0006p1-Oa; Wed, 16 Jun 2021 12:52:21 +0000
-Received: by outflank-mailman (input) for mailman id 142961;
- Wed, 16 Jun 2021 12:52:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ltV8P-0001Tf-MC; Wed, 16 Jun 2021 12:59:09 +0000
+Received: by outflank-mailman (input) for mailman id 142972;
+ Wed, 16 Jun 2021 12:59:08 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV1o-00075D-8h
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:20 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.103])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a55ae0b3-93b5-4fad-bf8e-247239aca60e;
- Wed, 16 Jun 2021 12:51:50 +0000 (UTC)
+ id 1ltV8O-0001TZ-Iy
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:59:08 +0000
+Received: from mo4-p04-ob.smtp.rzone.de (unknown [81.169.146.176])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8b2af396-d96c-4737-963e-f6fd63c1ca17;
+ Wed, 16 Jun 2021 12:59:06 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpitmI
+ with ESMTPSA id j0415bx5GCwwtp4
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:44 +0200 (CEST)
+ Wed, 16 Jun 2021 14:58:58 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,110 +53,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a55ae0b3-93b5-4fad-bf8e-247239aca60e
-ARC-Seal: i=1; a=rsa-sha256; t=1623847904; cv=none;
+X-Inumbo-ID: 8b2af396-d96c-4737-963e-f6fd63c1ca17
+ARC-Seal: i=1; a=rsa-sha256; t=1623848339; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=LTxVl9Oyg2idIwCSzLv4XMhSMg50poqnIqEXBORyknOrl2MMSI8beM3alR1r8dAiNq
-    qQfKyOwHUDeig5sb4IxCh8JoJYfeG+8N8odQsng/yKsGvQqpo2ptViKYqtC/Xzo5G5nJ
-    5rPBsCgXIsNDynCFvKqv9xIX/YbMCyuBZAXUeAXhABJPZ52VZOqtKnJLYd26Xzagk5rp
-    GrkRAX8yk5p+ZOQr4/fqYvZmh3EJrfoEquOCGKFDnhps7jrTi+SHpFY/Mr9UDejr2Phi
-    FMgXxfgo4wGBjdWZchBjwZ5wM1pbXDU/YG5JUvfGHbswerXw5v8Y7MkfGRcuvGFgxfNM
-    lVvQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847904;
+    b=mUVmRMntJsGRjZRwHGWeMiQoTiSeKxc+wsihjAkpFMeXty7uVslwQquXyJIHleUFjv
+    B+COnkeLtXZ8MPVaaCJtFAeLRYxfFOaQXD/Edx/GZgiCHUN+gxXvsXSyzbo10KEab+B/
+    kClxNjWYzJCPUbRaWC8re2069a7W6UWQSzO+XwN6H4JV73nt6F+fKWqEYxqOSaoU3XUD
+    ve0JVCAC0D5P6bmRdAPIhMx+BHZ5Y2wxVQxoWzmkgZGQZPZ5kpstE7Odx04q+at/GUEv
+    nd8Ry7Cp8/OVzo9IEY0YIoEBSPmrZEwlCxmN+2N7TaBWMGEfvblo299Pu5AnBgc2UvwK
+    4j8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623848339;
     s=strato-dkim-0002; d=strato.com;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
     From:Subject:Sender;
-    bh=pnLF16VUG8E4Jp5fWe4D439r7jQrrghaZKOdiE+JFI0=;
-    b=t1ElC85hwloXfK5N6nrxainkrTPKhRZHdvPq6dL7JDtPKhDFDmDwz3Jdbpi33IVN+B
-    ZHt7hvT3IcBtT/zhhe7WP2SuBbMhqEkYjShsDFuy8JzXQymbXn5pP14l+PMIOu5Mk8IE
-    L2s4nWXoAO+1H3V/NwRbw3zUSOozMY2Xso2gyVL32e2MECs7C4UG0nRY+j16xh9RYsqD
-    FBhieSIpl/MZciH0KcH3f+lGdZos3fpLTm8jCl4ZGR0ou2t84iSShLXhEjuPhMB+o/Zp
-    2luAbl6KpFxhKQszOy/tZXz4JDtMJXI1HFNEfGOaxS2O1/bf1FPK5g1SEZuI8nkmIAmo
-    9OxA==
+    bh=sOq0vE76oOysPkPAtwQ2V9NTvbVQfVVkGBXRa8pF8jM=;
+    b=mWWdSsHYs9DDQoOtVQbkMDWWrh6z6PQrmr1h2alFm6bxgvETZMbNCjq7sC8LGBsW5S
+    HlyBEdX/STLLF880+YEJRPl2BWvjI1QMVQ3EUTAZPL2gbH20YjlYvUNrOlQn98q9GXcK
+    P/wGAegj9FnOUgResdaRootSSJG0/HMF9b1ukcnNuSfZ5D/mgnqH/yl3l4ztN8YvkeNz
+    7nRNRRrWZDTAAQdU6BOAxBlCxcjvnX2IQZrEao9vpcD2JCcjVBGOlQIoWZbsdwXei3vN
+    tW9Jum8o5Y8ACt4DWsGy6kYGhL97oxt0P1C+W6X1kGVLuBlqaFX6AR0lCggTe4jXPKsl
+    VLEA==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847904;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623848339;
     s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
+    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
     From:Subject:Sender;
-    bh=pnLF16VUG8E4Jp5fWe4D439r7jQrrghaZKOdiE+JFI0=;
-    b=gCyQuUTTqDyZMhlmYIN9tY4A0P4yNzjeUiLbPrNZBns0jWdbQR/4EIAVBkDiKWm6v8
-    +z1bs71Tjm8IgH7dP9k/QuoUljLADS5U+d+ddz8KAqhkIAr2EM0kts06fWJPCuMigebL
-    dSNE1S2V61S9fBxiFSRzcDSVsoE6QLr4/J6pZl25d+Wk9KJFGEUz9seNYkVFqSQ+iPpz
-    4pZ1Ou9KKgvPt2LOwSndsnDCDNLwGLIKhag4y/LYr2TPWBRjBnpOQlI4u+BGiZa+/oXx
-    RWEQH3fboZ+i1pDcrhdc3FyG1dW83flQhyrPENqhh4agYg3xlcQDOQFeIYmKHzDeqpxJ
-    W5Sw==
+    bh=sOq0vE76oOysPkPAtwQ2V9NTvbVQfVVkGBXRa8pF8jM=;
+    b=doUICSDiq2DM4BcvpF/+jFEI467WTKOCNfxeALhiX8hGovATYPevGqEm6ctYt1hFFQ
+    Id3vIahGwZ4aFjvxFAAOPpywWmrWbTZKea4aVmw6XegGNe5DNXud6QfTawWXu4m8j+gl
+    p5cH2bdg+yy9foCjUj6uXrbT4m2flQuLnZrd3Aujb2cR6cNmAN4KkVxqGhbWh+rLN2qp
+    N8nbOQjxU2EdNcvC4/aS+EpMnqMhz9nD1CsQ/cOSb3Z4sZl34JP5PxCLtPtH0EMQnl+j
+    IA/S5FtRgtLUqYcorrCGyP85D8WIqnvvq537Ftp7+/Z0Tqec3sL3UmeHsXBK0C+KRCVG
+    hxEA==
 Authentication-Results: strato.com;
     dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisQsVxSIbR7sf0kebs4Z3Zpqv+Sabl5o7CzRq+Ps8Q=="
 X-RZG-CLASS-ID: mo00
+Date: Wed, 16 Jun 2021 14:58:46 +0200
 From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>,
-	Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210616 23/36] tools: restore: move pfns array in populate_pfns
-Date: Wed, 16 Jun 2021 14:51:16 +0200
-Message-Id: <20210616125129.26563-24-olaf@aepfle.de>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
-References: <20210616125129.26563-1-olaf@aepfle.de>
+To: Michael Brown <mcb30@ipxe.org>, "Bernhard M. Wiedemann"
+ <bwiedemann@suse.de>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ <xen-devel@lists.xenproject.org>, Ian Jackson <iwj@xenproject.org>, Wei Liu
+ <wl@xen.org>
+Subject: Re: [PATCH v1] tools: ipxe: update for fixing build with GCC11
+Message-ID: <20210616145846.305d3ce1.olaf@aepfle.de>
+In-Reply-To: <b78ccdf3-9898-c903-4d9f-4d25bd27182e@citrix.com>
+References: <20210615212613.6270-1-olaf@aepfle.de>
+	<b78ccdf3-9898-c903-4d9f-4d25bd27182e@citrix.com>
+X-Mailer: Claws Mail 2021.05.24 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; boundary="Sig_/wrElCStfx.hA2l3F1hAu_2R";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
 
-Remove allocation from hotpath, move populate_pfns' pfns array into preallocated space.
-Use some prefix to avoid conflict with an array used in handle_page_data.
+--Sig_/wrElCStfx.hA2l3F1hAu_2R
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Reviewed-by: Juergen Gross <jgross@suse.com>
----
- tools/libs/saverestore/common.h  |  1 +
- tools/libs/saverestore/restore.c | 11 +----------
- 2 files changed, 2 insertions(+), 10 deletions(-)
+Please revert bf4ccd4265ac614fbfa38bf168b6eeaf4c17d51e in ipxe.git, CentOS =
+7 apparently fails to handle '-D'.
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 3cfb23861f..379887e149 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -244,6 +244,7 @@ struct sr_restore_arrays {
-     int map_errs[MAX_BATCH_SIZE];
-     /* populate_pfns */
-     xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
-+    xen_pfn_t pp_pfns[MAX_BATCH_SIZE];
- };
- 
- struct xc_sr_context
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index 0c29478ccb..f2234eac55 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -139,17 +139,10 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- {
-     xc_interface *xch = ctx->xch;
-     xen_pfn_t *mfns = ctx->restore.m->pp_mfns,
--        *pfns = malloc(count * sizeof(*pfns));
-+        *pfns = ctx->restore.m->pp_pfns;
-     unsigned int i, nr_pfns = 0;
-     int rc = -1;
- 
--    if ( !pfns )
--    {
--        ERROR("Failed to allocate %zu bytes for populating the physmap",
--              2 * count * sizeof(*mfns));
--        goto err;
--    }
--
-     for ( i = 0; i < count; ++i )
-     {
-         if ( (!types ||
-@@ -190,8 +183,6 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-     rc = 0;
- 
-  err:
--    free(pfns);
--
-     return rc;
- }
- 
+It worked in my testing with SLE12SP5 and SLE15SP3 as a base system.
+
+See below.
+
+
+I guess for xen.git, updating to just bf4ccd4265ac614fbfa38bf168b6eeaf4c17d=
+51e^ will be good enough.
+
+Olaf
+
+Am Wed, 16 Jun 2021 13:33:52 +0100
+schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
+
+> On 15/06/2021 22:26, Olaf Hering wrote:
+> > Use a snapshot which includes commit
+> > f3f568e382a5f19824b3bfc6081cde39eee661e8 ("[crypto] Add
+> > memory output constraints for big-integer inline assembly"),
+> > which fixes build with gcc11.
+> >
+> > Signed-off-by: Olaf Hering <olaf@aepfle.de>
+> > ---
+> >  tools/firmware/etherboot/Makefile | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/tools/firmware/etherboot/Makefile b/tools/firmware/etherbo=
+ot/Makefile
+> > index ed9e11305f..23b3f6ca9d 100644
+> > --- a/tools/firmware/etherboot/Makefile
+> > +++ b/tools/firmware/etherboot/Makefile
+> > @@ -10,7 +10,8 @@ else
+> >  IPXE_GIT_URL ?=3D git://git.ipxe.org/ipxe.git
+> >  endif
+> > =20
+> > -IPXE_GIT_TAG :=3D 988d2c13cdf0f0b4140685af35ced70ac5b3283c
+> > +# put an updated tar.gz on xenbits after changes to this variable
+> > +IPXE_GIT_TAG :=3D bf4ccd4265ac614fbfa38bf168b6eeaf4c17d51e
+>=20
+> CI says no.
+>=20
+> Gitlab CI is currently fairly red because of a clang build fix which
+> hasn't made its way into master yet, but this job:
+>=20
+> =C2=A0 https://gitlab.com/xen-project/patchew/xen/-/jobs/1349871230
+>=20
+> shows a real failure on CentOS 7.
+>=20
+> ...
+> =C2=A0 [VERSION] bin/version.rtl8139.rom.o
+> =C2=A0 [AR] bin/blib.a
+> ar: creating bin/blib.a
+> objcopy: invalid option -- 'D'
+> Usage: objcopy [option(s)] in-file [out-file]
+> ...
+>=20
+> ~Andrew
+
+
+--Sig_/wrElCStfx.hA2l3F1hAu_2R
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmDJ9YYACgkQ86SN7mm1
+DoBPrA/+Ktxxob0B0BOkxe4M/DZb5YAnFq1eEZUfbSgXloG3KhIt6Ozfw4vLiQp4
+FSexyAlMY2vSZr9ws4LKmkRiL090tcf67Y3mRrp6Qnu7ZL3tVehzirqYSrGLnq08
+4V8OFkI5Daxo+Ls4LNLx/ZhPRsB5dk7MhgrB2BlOhK2wkbiXgcXIx1m+fK5PHIUr
+vBk0wDFsh0z68RKfOTDOva2CAscBqBzPzRUBkFid6qsbEj4kHTzVxxk76qkM92iY
+RrNqkLEH0HKKN0Djl1dRa9pp6y8UXxK2cnWbjOTo72oInJ9JBsVjdTMLF7qpjmSx
+XnLD0UzH9+/Hc5Sde9RJ+/38/HknEuLn/HeMDVWGRc2ixRzq0CzDpiMRftu3aBUt
+KEPpZr/DDIuQxWTwm6ush2nVBFSJAn4HhcMkhmcPFdULiWhowqh/aNvAb2ZU+r1+
+ywzXPh0a7hkjxYBRS/QnYNq05hZhKIBJMyOiHIZG1wmPzPx5XCk8BvJ5JTK/FKsC
+J7a5y8Uf18i8zP1WQ0Idom1+PnrOreeJBoEUIbN7V8nRaWywiKy+AFxdsP/1vzTF
+VjS9tTH+dtLd58aGTOR/HXFnALV5fl4v1Tv/oiit2p74Kbfj0KZ0tuhbyye+9Byk
+WLUCmzY+Ymt+UkBY/K+25lQWUBkYF4kkLhKhmXQiLv6Wx2pYOuQ=
+=9a8r
+-----END PGP SIGNATURE-----
+
+--Sig_/wrElCStfx.hA2l3F1hAu_2R--
 
