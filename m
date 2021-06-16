@@ -2,42 +2,45 @@ Return-Path: <SRS0=hjEX=LK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56F48C48BE6
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F904C48BE6
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:20:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 116B461185
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:19:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 116B461185
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id C449B6128B
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 15:20:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C449B6128B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143401.264311 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143406.264321 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltXJh-00026E-5d; Wed, 16 Jun 2021 15:18:57 +0000
+	id 1ltXKx-0003QO-F4; Wed, 16 Jun 2021 15:20:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143401.264311; Wed, 16 Jun 2021 15:18:57 +0000
+Received: by outflank-mailman (output) from mailman id 143406.264321; Wed, 16 Jun 2021 15:20:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltXJh-000267-2F; Wed, 16 Jun 2021 15:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 143401;
- Wed, 16 Jun 2021 15:18:55 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=NJFi=LK=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1ltXJf-00025t-Nu
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 15:18:55 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5b4fa1b8-3a64-4a02-a784-63879ed1aa02;
- Wed, 16 Jun 2021 15:18:54 +0000 (UTC)
+	id 1ltXKx-0003QH-CC; Wed, 16 Jun 2021 15:20:15 +0000
+Received: by outflank-mailman (input) for mailman id 143406;
+ Wed, 16 Jun 2021 15:20:14 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1ltXKw-0003Py-42
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 15:20:14 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1ltXKu-0004wd-Mc; Wed, 16 Jun 2021 15:20:12 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1ltXKu-0001dm-Dz; Wed, 16 Jun 2021 15:20:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,93 +52,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b4fa1b8-3a64-4a02-a784-63879ed1aa02
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1623856734;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=bCyomFsR6dtfqKURitc5WY2glFEaC3FgGkeWvNQe234=;
-  b=EDLy1OH9H5LpG7ef8iZlKRXxm1RFt8olK4eryjujgd98w+PjP7vy0skX
-   /BIEHMkq6nmKMA3G/AQ4uHVbLsTsLdkaSev2exb+G4Ht5WCEgMXrdHva/
-   9gIcoL7ToWP+FUDmtRJRl/khIlbDiI7jZErWs55Wimg4p6VOEBnQl2nby
-   U=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: FrowePqB5Fx01UIm359GYqUJBPVN1GEy+GhVhpEi+jq8WLxZAm/4D4KAkt4T5xTpB6W6+5ec0v
- br7v8eatKp7c1EbBNKgiGblN2ecCGMcuOOuYmVDMfmRWRE8u3yPqo5CvqnGG0iE1yer4Wl1evF
- jADxRYV7sQrwMx+P36HkfrGn7aODhMV/yRwt73CqaL3VYgjd5jvMdQajOlTtW3jb7DoXK/DnB4
- tLSafMbl90TcmqRBIDLVnmir0Qfrh8LYihpTeaReDG7gKIQlS0wKI/H/MX/rng1TRjsuawGswX
- WAo=
-X-SBRS: 5.1
-X-MesageID: 46007795
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:MT5q/qFpBRyI86eYpLqE5seALOsnbusQ8zAXP0AYc31om6uj5q
- eTdZUgpGbJYVkqKRIdcLy7V5VoIkmskaKdg7NhX4tKNTOO0ADDQe1fBOPZslvd8kbFltK1u5
- 0PT0EHMqyUMWRH
-X-IronPort-AV: E=Sophos;i="5.83,278,1616472000"; 
-   d="scan'208";a="46007795"
-From: George Dunlap <george.dunlap@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
-	<ian.jackson@citrix.com>, Wei Liu <wl@xen.org>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, "Paul
- Durrant" <paul@xen.org>, Owen Smith <owen.smith@citrix.com>, "Chandrika
- Srinivasan" <chandrika.srinivasan@citrix.com>, Christian Lindig
-	<christian.lindig@citrix.com>, Konstantina Chremmou
-	<konstantina.chremmou@citrix.com>, Rob Hoes <Rob.Hoes@citrix.com>, "Li Zhang
- (3P)" <Li.Zhang@citrix.com>
-Subject: [PATCH] code-of-conduct.rst: Add Stefano Stabellini as a Conduct Team member
-Date: Wed, 16 Jun 2021 16:18:26 +0100
-Message-ID: <20210616151826.224793-1-george.dunlap@citrix.com>
-X-Mailer: git-send-email 2.30.2
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=2fPoTx6uDZ5idqHNU3a1FlscP88oQauxf4LJ1kncppk=; b=r3HTH4FiJz+nlT00CNnZPTjLfj
+	OyUMIQlNRVryk4xizL4wEFxDwM3gfhFu+Db3xVXZmzzUMtvt8OwjvvmJo1GMQ8////BUJkHwW6BME
+	kX3awF9uEh3Z/GrtH2L66mVGgnmNcWZXeDkTXOkTHYIhY+fL/A8EomtjDjFuEbF8xxZ8=;
+Subject: Re: [PATCH] code-of-conduct.rst: Add Stefano Stabellini as a Conduct
+ Team member
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+ Owen Smith <owen.smith@citrix.com>,
+ Chandrika Srinivasan <chandrika.srinivasan@citrix.com>,
+ Christian Lindig <christian.lindig@citrix.com>,
+ Konstantina Chremmou <konstantina.chremmou@citrix.com>,
+ Rob Hoes <Rob.Hoes@citrix.com>, "Li Zhang (3P)" <Li.Zhang@citrix.com>
+References: <20210616151826.224793-1-george.dunlap@citrix.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <64a77547-a942-7da6-5ab9-478c612e52e9@xen.org>
+Date: Wed, 16 Jun 2021 17:20:08 +0200
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+In-Reply-To: <20210616151826.224793-1-george.dunlap@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-With my upcoming leave, Ian will be the only person actively on the
-Conduct Team.  Stefano has volunteered to join the team, so that there
-are at least two members.
+Hi George,
 
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
----
-Membership of the Conduct Team is a global XenProject decision,
-and so needs a vote of the leadership of all active projects.
+On 16/06/2021 17:18, George Dunlap wrote:
+> With my upcoming leave, Ian will be the only person actively on the
+> Conduct Team.  Stefano has volunteered to join the team, so that there
+> are at least two members.
+> 
+> Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+> ---
+> Membership of the Conduct Team is a global XenProject decision,
+> and so needs a vote of the leadership of all active projects.
+> 
+> Please vote by replying to this email with +2 / +1 / 0 / -1 / -2, in
+> accordance with https://xenproject.org/developers/governance/#project-decisions .
 
-Please vote by replying to this email with +2 / +1 / 0 / -1 / -2, in
-accordance with https://xenproject.org/developers/governance/#project-decisions .
++2
 
-CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
-CC: Owen Smith <owen.smith@citrix.com>
-CC: Chandrika Srinivasan <chandrika.srinivasan@citrix.com>,
-CC: Christian Lindig <christian.lindig@citrix.com>
-CC: Konstantina Chremmou <konstantina.chremmou@citrix.com>
-CC: Rob Hoes <Rob.Hoes@citrix.com>
-CC: "Li Zhang (3P)" <Li.Zhang@citrix.com>
----
- source/code-of-conduct.rst | 1 +
- 1 file changed, 1 insertion(+)
+Acked-by: Julien Grall <julien@xen.org>
 
-diff --git a/source/code-of-conduct.rst b/source/code-of-conduct.rst
-index 4cb33da..963d605 100644
---- a/source/code-of-conduct.rst
-+++ b/source/code-of-conduct.rst
-@@ -81,6 +81,7 @@ sub-project. The current list of Conduct Team members is:
- 
- * George Dunlap <george dot dunlap at citrix dot com>
- * Ian Jackson <ian dot jackson at citrix dot com>
-+* Stefano Stabellini <sstabellini at kernel dot org>
- 
- Conduct Team members are changed by proposing a change to this document,
- posted on all sub-project lists, followed by a formal global vote as outlined
+Cheers,
+
+> 
+> CC: Ian Jackson <ian.jackson@citrix.com>
+> CC: Wei Liu <wl@xen.org>
+> CC: Andrew Cooper <andrew.cooper3@citrix.com>
+> CC: Jan Beulich <jbeulich@suse.com>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Julien Grall <julien@xen.org>
+> CC: Paul Durrant <paul@xen.org>
+> CC: Owen Smith <owen.smith@citrix.com>
+> CC: Chandrika Srinivasan <chandrika.srinivasan@citrix.com>,
+> CC: Christian Lindig <christian.lindig@citrix.com>
+> CC: Konstantina Chremmou <konstantina.chremmou@citrix.com>
+> CC: Rob Hoes <Rob.Hoes@citrix.com>
+> CC: "Li Zhang (3P)" <Li.Zhang@citrix.com>
+> ---
+>   source/code-of-conduct.rst | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/source/code-of-conduct.rst b/source/code-of-conduct.rst
+> index 4cb33da..963d605 100644
+> --- a/source/code-of-conduct.rst
+> +++ b/source/code-of-conduct.rst
+> @@ -81,6 +81,7 @@ sub-project. The current list of Conduct Team members is:
+>   
+>   * George Dunlap <george dot dunlap at citrix dot com>
+>   * Ian Jackson <ian dot jackson at citrix dot com>
+> +* Stefano Stabellini <sstabellini at kernel dot org>
+>   
+>   Conduct Team members are changed by proposing a change to this document,
+>   posted on all sub-project lists, followed by a formal global vote as outlined
+> 
+
 -- 
-2.30.2
-
+Julien Grall
 
