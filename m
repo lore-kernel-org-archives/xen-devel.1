@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D66EC48BE8
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EC9CC48BE6
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6C03B610A1
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6C03B610A1
+	by mail.kernel.org (Postfix) with ESMTPS id 1D2116115C
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 14:43:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D2116115C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143286.264190 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143288.264213 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlY-00072v-Hf; Wed, 16 Jun 2021 14:43:40 +0000
+	id 1ltWlb-0007lT-Q9; Wed, 16 Jun 2021 14:43:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143286.264190; Wed, 16 Jun 2021 14:43:40 +0000
+Received: by outflank-mailman (output) from mailman id 143288.264213; Wed, 16 Jun 2021 14:43:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltWlY-00071R-9W; Wed, 16 Jun 2021 14:43:40 +0000
-Received: by outflank-mailman (input) for mailman id 143286;
- Wed, 16 Jun 2021 14:43:38 +0000
+	id 1ltWlb-0007js-Cb; Wed, 16 Jun 2021 14:43:43 +0000
+Received: by outflank-mailman (input) for mailman id 143288;
+ Wed, 16 Jun 2021 14:43:41 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ltWlW-0006jG-Lk
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:38 +0000
+ (envelope-from <julien@xen.org>) id 1ltWlZ-0007AL-2j
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 14:43:41 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlV-0004EM-II; Wed, 16 Jun 2021 14:43:37 +0000
+ id 1ltWlY-0004F5-9d; Wed, 16 Jun 2021 14:43:40 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ltWlV-0007D0-9n; Wed, 16 Jun 2021 14:43:37 +0000
+ id 1ltWlY-0007D0-1H; Wed, 16 Jun 2021 14:43:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=ntUe4oRZZR/IFXSXsYlm7XZxb7Y2yIuX7QXLhkAF0hE=; b=IDKUeY/nN0OTprDr81ImN5AMo
-	ppaCwTSJm8FAjz1yN1Oo8Xho+UoCUB5Hxqcr0Ow7Vl4VFyAQtyAQaf3r0w2i48mZ+1l/+2WnTN8pe
-	EfoouNnL+UYE25y6EOdvJJKnh+KpSuVQbHnNXJUD3LCaXFXr51N0x84BnFJLFEGA0ELOA=;
+	 bh=xS2Ezk6IKf2znuGkPh4eU4xq2n4H9YnKOyWflMAxdpI=; b=rTI2FWbDmwOU+ZmJRYSDmZq+x
+	Urw587evNvAsBzxoNv4yyEvVa3DN3rzzXLATjbW2U+u0iQ4JPV5cEEapLQLirpv+pdqB1TciCzf+V
+	E9c2zPhuhG61R7p/A2q6dZazkAPyr+HWWffWt1ynbjUBCaNgreQxRPZEiZXHy/DUcVGu8=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: raphning@amazon.co.uk,
@@ -67,43 +67,89 @@ Cc: raphning@amazon.co.uk,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH 07/10] tools/xenstored: delay_request: don't assume conn->in == in
-Date: Wed, 16 Jun 2021 15:43:21 +0100
-Message-Id: <20210616144324.31652-8-julien@xen.org>
+Subject: [PATCH 09/10] tools/xenstored: Dump delayed requests
+Date: Wed, 16 Jun 2021 15:43:23 +0100
+Message-Id: <20210616144324.31652-10-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210616144324.31652-1-julien@xen.org>
 References: <20210616144324.31652-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-delay_request() is currently assuming that the request delayed is
-always conn->in. This is currently correct, but it is a call for
-a latent bug as the function allows the caller to specify any request.
+Currently, only Live-Update request can be delayed. In a follow-up,
+we will want to delay more requests (e.g. transaction start).
+Therefore we want to preserve delayed requests across Live-Update.
 
-To prevent any future surprise, check if the request delayed is the
-current one.
+Delayed requests are just complete "in" buffer. So the code is
+refactored to allow sharing the code to dump "in" buffer.
 
-Fixes: c5ca1404b4 ("tools/xenstore: add support for delaying execution of a xenstore request")
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- tools/xenstore/xenstored_core.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ tools/xenstore/xenstored_core.c | 42 +++++++++++++++++++++++++--------
+ 1 file changed, 32 insertions(+), 10 deletions(-)
 
 diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
-index 2e5760fe4599..a5084a5b173d 100644
+index 5b7ab7f74013..9eca58682b51 100644
 --- a/tools/xenstore/xenstored_core.c
 +++ b/tools/xenstore/xenstored_core.c
-@@ -306,7 +306,9 @@ int delay_request(struct connection *conn, struct buffered_data *in,
- 	delayed_requests++;
- 	list_add(&req->list, &conn->delayed);
- 
--	conn->in = NULL;
-+	/* Unlink the request from conn if this is the current one */
-+	if (conn->in == in)
-+		conn->in = NULL;
- 
- 	return 0;
+@@ -2403,25 +2403,47 @@ const char *dump_state_global(FILE *fp)
+ 	return NULL;
  }
+ 
++static const char *dump_input_buffered_data(FILE *fp,
++					    const struct buffered_data *in,
++					    unsigned int *total_len)
++{
++	unsigned int hlen = in->inhdr ? in->used : sizeof(in->hdr);
++
++	*total_len += hlen;
++	if (fp && fwrite(&in->hdr, hlen, 1, fp) != 1)
++		return "Dump read data error";
++	if (!in->inhdr && in->used) {
++		*total_len += in->used;
++		if (fp && fwrite(in->buffer, in->used, 1, fp) != 1)
++			return "Dump read data error";
++	}
++
++	return NULL;
++}
++
+ /* Called twice: first with fp == NULL to get length, then for writing data. */
+ const char *dump_state_buffered_data(FILE *fp, const struct connection *c,
+ 				     struct xs_state_connection *sc)
+ {
+ 	unsigned int len = 0, used;
+-	struct buffered_data *out, *in = c->in;
++	struct buffered_data *out;
+ 	bool partial = true;
++	struct delayed_request *req;
++	const char *ret;
+ 
+-	if (in) {
+-		len = in->inhdr ? in->used : sizeof(in->hdr);
+-		if (fp && fwrite(&in->hdr, len, 1, fp) != 1)
+-			return "Dump read data error";
+-		if (!in->inhdr && in->used) {
+-			len += in->used;
+-			if (fp && fwrite(in->buffer, in->used, 1, fp) != 1)
+-				return "Dump read data error";
+-		}
++	/* Dump any command that was delayed */
++	list_for_each_entry(req, &c->delayed, list) {
++		if (req->func != process_delayed_message)
++			continue;
++
++		assert(!req->in->inhdr);
++		if ((ret = dump_input_buffered_data(fp, req->in, &len)))
++			return ret;
+ 	}
+ 
++	if (c->in && (ret = dump_input_buffered_data(fp, c->in, &len)))
++		return ret;
++
+ 	if (sc) {
+ 		sc->data_in_len = len;
+ 		sc->data_resp_len = 0;
 -- 
 2.17.1
 
