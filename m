@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FCD6C49EA2
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AFCBC48BE5
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:07:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C66126024A
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:07:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C66126024A
+	by mail.kernel.org (Postfix) with ESMTPS id 275686024A
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:07:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 275686024A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142991.263809 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143004.263820 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVG1-0003fQ-BR; Wed, 16 Jun 2021 13:07:01 +0000
+	id 1ltVGC-0004Lm-LA; Wed, 16 Jun 2021 13:07:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142991.263809; Wed, 16 Jun 2021 13:07:01 +0000
+Received: by outflank-mailman (output) from mailman id 143004.263820; Wed, 16 Jun 2021 13:07:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVG1-0003fF-7Z; Wed, 16 Jun 2021 13:07:01 +0000
-Received: by outflank-mailman (input) for mailman id 142991;
- Wed, 16 Jun 2021 13:07:00 +0000
+	id 1ltVGC-0004Ld-Hf; Wed, 16 Jun 2021 13:07:12 +0000
+Received: by outflank-mailman (input) for mailman id 143004;
+ Wed, 16 Jun 2021 13:07:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV1p-0006lZ-1E
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:21 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.81])
+ id 1ltV2J-0006lZ-2P
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:51 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1f7850ed-248e-4334-9e79-bd485c10ed00;
- Wed, 16 Jun 2021 12:51:45 +0000 (UTC)
+ id 1066a928-1d2a-49f9-b44c-1f3a18eed590;
+ Wed, 16 Jun 2021 12:51:51 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpdtm5
+ with ESMTPSA id j0415bx5GCpjtmL
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:39 +0200 (CEST)
+ Wed, 16 Jun 2021 14:51:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1f7850ed-248e-4334-9e79-bd485c10ed00
-ARC-Seal: i=1; a=rsa-sha256; t=1623847900; cv=none;
+X-Inumbo-ID: 1066a928-1d2a-49f9-b44c-1f3a18eed590
+ARC-Seal: i=1; a=rsa-sha256; t=1623847905; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=jXnxuKXXi9YSOUvEDsqfQ/lU2hM8dPHWhZy85fULVb+ZPaiZ+lpuA9lAo88wEyIQ7X
-    SqoIxwwxav2z+uy+BRdlvTVehdwmPUH7zW9Z0B47ZwVMyaFPIJiLpeEYq8oYVr9Y+J+R
-    UKpIVVoTxy9VjrObf2j9mE7OJV1+mTk3+aj5O81tvzpZrH+GxtvQhXA06cTEXUBZrJfP
-    uGqfrmV4onf5fDnNXXS+n2Gix+snjS+G5/MKkvSoiBWwto7+qeFd1/HPOnNyorIYh/2Q
-    Mo7VfqwgETTUTBQh9FADRR+NH5D1dQwg+9gbsYTQq43ijBiinc3TQNW6mjsD7S/Q7bU5
-    Y2jg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847900;
+    b=bANuIUngkLsBnEZY2I+0vBdL+kR3ZOiAGbA14jWxgDEHBCVpyWfW+yAuoW8rHW1Ez4
+    fh3DD0wY3yoNJcHlGB+NEHaU99w4wtPbY8MCu/tDS0nQGTE3TRjco6g9xmErPuWMFTbD
+    Md8EVmmNEdg3bLfhW8rwOocIF28q5DHxwsALxipzmD4IkN2sHG6exKiiEhLUXDdRkHoA
+    TWuNWfD+zcAVreUHyVOxZkzhlzeCqrKHKrxAt+Zvrxummz3Oy785D8bZ/NF1j8yWXFey
+    szCXCc5WJjS3ShjrdPjH0t/uNX1Ar/bNsRp+XmaXTFsCfddSRbzcDxL/w8kNKyLyq1wN
+    e1Jg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847905;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=SqZyfuP6OhwWmlaC4WpxM23i9gjc0SfkH6LfRu5qTXI=;
-    b=ZhoNi07QQy07VhaFaQT6l33vJ2GGOtub+4UaWcd2qHkgHyqF6oVMrF/d5JS6P0vtYH
-    V5DcIu5wxkZ+exkhZApDDJ+pW8QX9GULXdNtiwwBybAsggfmdn/ALuRtNAGdIR66HWNF
-    tfswfypCnwNjmtF1h23SRCaDjyTAnhnS1Kb0Dca4vh/AlhE0+b9Pc3eNfscTugUctrl8
-    g72PFUTY61N7p2SDAh6AnwQWrkX944K3FioBAZpuJ3B7jxDiemHGzo20SIF/hIj66Gbb
-    MkTx6cO+9awO2ezgU8VBrxQCIqXPq0NFNt7Z7Aq9cxcfIXkTjiG8iU0Bx9rt4lu1RkU5
-    FOKw==
+    bh=XvzNAYL4Bz6FS15Jp93i8O47PVWqmiH8eMe8cuJSWuw=;
+    b=GtJEASD9ixYM8kwE/+pjHDoFO61iRoeMYDGQE7gtB1iAGP3z+P/F/7YErteofWL/2V
+    B3iyQ698+k9IrcOJ5VrOKsd30fgH/qxo1NEPvLPlqM3oPvKnmOVzdHn3gabr+BHmySRd
+    rqGfEhP5eYFtUjBG7HJ+me6ucNS2e8hTyBVTp/9/RaW2CWjTdrPdLPO1DU3+2GWteF8z
+    kRirjomPtwCKL3FO6f+gkLgXPOw5T63Gds/4fg1pQPqANJAHGYXSDE4Dz1NiBNayEaHL
+    ZxhtD1pX88KLyP2lYYsUZqmhRQ9GdaRzhm6vRjTiDx1xb4/v56mcW1ioc2ioXfrT5jvb
+    fDYQ==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847900;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847905;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=SqZyfuP6OhwWmlaC4WpxM23i9gjc0SfkH6LfRu5qTXI=;
-    b=WgvLDIHXTCDnHlevSZ58X7Z9r2oezcfXPemDhnz2t28Br521maZfAbtHKs5lVmssTI
-    SZiiQv0THduwxlXrLR/07iQtBMgI4Cri3E3rbgrxCmgvndBi/esg4hyXQhdFo+v2XSve
-    g3aHDuDOPUzuapJI0Tv81UKB5fBD9OJH1L807eZ+6wZtU5okXhff9U6c0IkM2YI6WHMj
-    YE4Aa8GDPPpwh+VvxjxCGb7WTBXVhQw9u1yQ6BlmQsjbmLCnrrcrn0tXRUbErFbdfdO9
-    FDE6mTEeRhFLsE0uTzSS4HO8jv0EimfRw4t1V9MkgypbiDlf+wLgHJqcky8HmR7XHj6F
-    xgLw==
+    bh=XvzNAYL4Bz6FS15Jp93i8O47PVWqmiH8eMe8cuJSWuw=;
+    b=EXhLBPz/onKs0O5mn7+1kh6DniN7HJd6hIGmA5MmHqQsmZ8tEp9ubhaW9FSyISWoSp
+    gFxMvmLF/lMcVsGZbnCQgGku0AYAEgde1LLnc8lQcOLNgjXl/GB8WcaCvzHDEobu/mfS
+    j2c/Ivbks06pgF2QYlEyiazfcNYzxq5c4rv2ti/AzbaaNC1ufl4ehGV4UY5+CsZIkDSW
+    lXbbQLt/MU1WTDgJvspuAHk7ADM0V45qGnG8g6/KZh9r+jS6oLaJQPb6yVUqfSUJS+l4
+    rWUmEXNz8zwXYNOR0VXzUe/iCRzR1Vai6F81fsA7hh/zj3kiNJ4LhotGoa9CBsXl75El
+    DteA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
@@ -93,77 +93,189 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
-	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210616 14/36] tools: save: move errors array
-Date: Wed, 16 Jun 2021 14:51:07 +0200
-Message-Id: <20210616125129.26563-15-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v20210616 26/36] tools: restore: write data directly into guest
+Date: Wed, 16 Jun 2021 14:51:19 +0200
+Message-Id: <20210616125129.26563-27-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
 References: <20210616125129.26563-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove allocation from hotpath, move errors array into preallocated space.
+Read incoming migration stream directly into the guest memory.
+This avoids the memory allocation and copying, and the resulting
+performance penalty.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/saverestore/common.h | 2 ++
- tools/libs/saverestore/save.c   | 7 ++-----
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ tools/libs/saverestore/common.h  |   1 +
+ tools/libs/saverestore/restore.c | 132 ++++++++++++++++++++++++++++++-
+ 2 files changed, 129 insertions(+), 4 deletions(-)
 
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 1df684acb9..558b5fbf06 100644
+index d479f1a918..5c440f28ec 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -229,6 +229,8 @@ struct sr_save_arrays {
+@@ -243,6 +243,7 @@ struct sr_restore_arrays {
      xen_pfn_t mfns[MAX_BATCH_SIZE];
-     /* write_batch: Types of the batch pfns. */
-     xen_pfn_t types[MAX_BATCH_SIZE];
-+    /* write_batch: Errors from attempting to map the gfns. */
-+    int errors[MAX_BATCH_SIZE];
- };
+     int map_errs[MAX_BATCH_SIZE];
+     void *guest_data[MAX_BATCH_SIZE];
++    struct iovec iov[MAX_BATCH_SIZE];
  
- struct sr_restore_arrays {
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index 0883c1fac0..9ebbf00ce7 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -92,7 +92,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     void *guest_mapping = NULL;
-     void **guest_data = NULL;
-     void **local_pages = NULL;
--    int *errors = NULL, rc = -1;
-+    int *errors = ctx->save.m->errors, rc = -1;
-     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
-     void *page, *orig_page;
-@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     assert(nr_pfns != 0);
- 
--    /* Errors from attempting to map the gfns. */
--    errors = malloc(nr_pfns * sizeof(*errors));
-     /* Pointers to page data to send.  Mapped gfns or local allocations. */
-     guest_data = calloc(nr_pfns, sizeof(*guest_data));
-     /* Pointers to locally allocated pages.  Need freeing. */
-@@ -114,7 +112,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     /* iovec[] for writev(). */
-     iov = malloc((nr_pfns + 4) * sizeof(*iov));
- 
--    if ( !errors || !guest_data || !local_pages || !iov )
-+    if ( !guest_data || !local_pages || !iov )
-     {
-         ERROR("Unable to allocate arrays for a batch of %u pages",
-               nr_pfns);
-@@ -271,7 +269,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     free(iov);
-     free(local_pages);
-     free(guest_data);
--    free(errors);
- 
+     /* populate_pfns */
+     xen_pfn_t pp_mfns[MAX_BATCH_SIZE];
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index 877fd19a9b..d0148606bf 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -392,6 +392,122 @@ err:
      return rc;
  }
+ 
++/*
++ * Handle PAGE_DATA record from the stream.
++ * Given a list of pfns, their types, and a block of page data from the
++ * stream, populate and record their types, map the relevant subset and copy
++ * the data into the guest.
++ */
++static int handle_incoming_page_data(struct xc_sr_context *ctx,
++                                     struct xc_sr_rhdr *rhdr)
++{
++    xc_interface *xch = ctx->xch;
++    struct sr_restore_arrays *m = ctx->restore.m;
++    struct xc_sr_rec_page_data_header *pages = &m->pages;
++    uint64_t *pfn_nums = m->pages.pfn;
++    uint32_t i;
++    int rc, iov_idx;
++
++    rc = handle_static_data_end_v2(ctx);
++    if ( rc )
++        goto err;
++
++    /* First read and verify the header */
++    rc = read_exact(ctx->fd, pages, sizeof(*pages));
++    if ( rc )
++    {
++        PERROR("Could not read rec_pfn header");
++        goto err;
++    }
++
++    if ( verify_rec_page_hdr(ctx, rhdr->length, pages) == false )
++    {
++        rc = -1;
++        goto err;
++    }
++
++    /* Then read and verify the incoming pfn numbers */
++    rc = read_exact(ctx->fd, pfn_nums, sizeof(*pfn_nums) * pages->count);
++    if ( rc )
++    {
++        PERROR("Could not read rec_pfn data");
++        goto err;
++    }
++
++    if ( verify_rec_page_pfns(ctx, rhdr->length, pages) == false )
++    {
++        rc = -1;
++        goto err;
++    }
++
++    /* Finally read and verify the incoming pfn data */
++    rc = map_guest_pages(ctx, pages);
++    if ( rc )
++        goto err;
++
++    /* Prepare read buffers, either guest or throw away memory */
++    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
++    {
++        if ( !m->guest_data[i] )
++            continue;
++
++        m->iov[iov_idx].iov_len = PAGE_SIZE;
++        if ( ctx->restore.verify )
++            m->iov[iov_idx].iov_base = ctx->restore.verify_buf + i * PAGE_SIZE;
++        else
++            m->iov[iov_idx].iov_base = m->guest_data[i];
++        iov_idx++;
++    }
++
++    if ( !iov_idx )
++        goto done;
++
++    rc = readv_exact(ctx->fd, m->iov, iov_idx);
++    if ( rc )
++    {
++        PERROR("read of %d pages failed", iov_idx);
++        goto err;
++    }
++
++    /* Post-processing of pfn data */
++    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
++    {
++        if ( !m->guest_data[i] )
++            continue;
++
++        rc = ctx->restore.ops.localise_page(ctx, m->types[i], m->iov[iov_idx].iov_base);
++        if ( rc )
++        {
++            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
++                  m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
++            goto err;
++
++        }
++
++        if ( ctx->restore.verify )
++        {
++            if ( memcmp(m->guest_data[i], m->iov[iov_idx].iov_base, PAGE_SIZE) )
++            {
++                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
++                      m->pfns[i], m->types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
++            }
++        }
++
++        iov_idx++;
++    }
++
++done:
++    rc = 0;
++
++err:
++    if ( ctx->restore.guest_mapping )
++    {
++        xenforeignmemory_unmap(xch->fmem, ctx->restore.guest_mapping, ctx->restore.nr_mapped_pages);
++        ctx->restore.guest_mapping = NULL;
++    }
++    return rc;
++}
++
+ /*
+  * Handle PAGE_DATA record from an existing buffer
+  * Given a list of pfns, their types, and a block of page data from the
+@@ -773,11 +889,19 @@ static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_s
+     struct xc_sr_record rec;
+     int rc;
+ 
+-    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
+-    if ( rc )
+-        return rc;
++    switch ( rhdr->type )
++    {
++    case REC_TYPE_PAGE_DATA:
++        rc = handle_incoming_page_data(ctx, rhdr);
++        break;
++    default:
++        rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
++        if ( rc == 0 )
++            rc = process_buffered_record(ctx, &rec);;
++        break;
++    }
+ 
+-    return process_buffered_record(ctx, &rec);
++    return rc;
+ }
+ 
+ 
 
