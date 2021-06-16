@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DDE0C48BE6
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A91B0C48BE6
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 191166024A
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 191166024A
+	by mail.kernel.org (Postfix) with ESMTPS id 590BE6024A
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 590BE6024A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143052.263886 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143063.263897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVGq-0007vq-0X; Wed, 16 Jun 2021 13:07:52 +0000
+	id 1ltVH3-0000Fz-9s; Wed, 16 Jun 2021 13:08:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143052.263886; Wed, 16 Jun 2021 13:07:51 +0000
+Received: by outflank-mailman (output) from mailman id 143063.263897; Wed, 16 Jun 2021 13:08:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVGp-0007vg-St; Wed, 16 Jun 2021 13:07:51 +0000
-Received: by outflank-mailman (input) for mailman id 143052;
- Wed, 16 Jun 2021 13:07:50 +0000
+	id 1ltVH3-0000Fp-6J; Wed, 16 Jun 2021 13:08:05 +0000
+Received: by outflank-mailman (input) for mailman id 143063;
+ Wed, 16 Jun 2021 13:08:03 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV2N-00075D-9W
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:55 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.103])
+ id 1ltV2I-00075D-9Y
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:50 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.102])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f2b453df-01fb-4b67-9fad-bdacdf928dd0;
+ id e6b65d89-6720-4ffd-a184-2f781514df3e;
  Wed, 16 Jun 2021 12:51:55 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpltmP
+ with ESMTPSA id j0415bx5GCpotmV
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:47 +0200 (CEST)
+ Wed, 16 Jun 2021 14:51:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f2b453df-01fb-4b67-9fad-bdacdf928dd0
-ARC-Seal: i=1; a=rsa-sha256; t=1623847907; cv=none;
+X-Inumbo-ID: e6b65d89-6720-4ffd-a184-2f781514df3e
+ARC-Seal: i=1; a=rsa-sha256; t=1623847910; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=kIuewaBaUo7N4cc0L8a9lIZxZRuflXX7CS3wZNNzDXoBBAFZK8OgO5Vgn7jTiXKbHu
-    F4D58+c7d5+4Z2ezbhWTlNpJF0l0Y6XER3UScRfd52ggzeIE+iaFltig9uXMSEwCAcUm
-    zbPBypeK9qBKXuvulxrB2zYStI+7hi3uA2tYoQ5QfTX/BfskBO8mc7kv1Z2w23zgb2Y1
-    cPPTPHbnbp/qmYBvkvsBfrD+TNmzrBAiEG212yqlb/i/6Cwm6Sas4wKuMxm7GNEvGXl9
-    HUQJl0tzAtosl9LEExc50fO5k+e/W9OxtBsCo/fv+o2BKnjX3HezgR6+2GZSP2GMRMSh
-    PlWw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847907;
+    b=FBHkTgZXolibcwjpysZzh8M2qH2k+aSKsoY4a7M4Oow0Xs9T0Wm2Haj6mmlIlJy0Kr
+    dDh16bRAqyGU1vzTj7yR6KTbR1apuQAYKJAVc/lS2CqovzKJUO5BGO74TihGU2JH/SAn
+    0Notaabw9CAj4nbXVpSUixRlvcFdE8CvTynRchOxS6LW1Q9v0F5HPs8HFnTzKPx++GAX
+    5i/Y0SdT12lbo6Gg4LKX5i5Np04j26SPb3jqYZNvTjTgND0qTYi6j2q2l7khuhOd67HJ
+    6gi4E8PzZlZLm4wk17b9iQgZgXW6cTr6g6XkshHIE6acYVHMc2b/QLOHHleBNvki+dld
+    JRxg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847910;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=am1tugVzg71doIb/LdiNWtayiDvPFoCjZNyMmciOrqY=;
-    b=GqFb2vbB+Jh89wB/deQ9VqUiTbVkXdOAaLyOfBMuvAOeFlEEJQCYaBIfsFIiYwEo7u
-    KAwSemkL/0AstwiAPeaGhNv9uC7QnrUR1TbD+AmUtD6t3n+2PhejtIvKccKBHRz666sw
-    S5iZKwghbJVzONTNoYPeFWNGcl6778xol3DgrXtn2Rcl38Ob7MYxjSc2RAe1aA6qM5G+
-    mZroe03cbZ1o/sCwIXK11WhYdCpIAftpb+gVYC/+oOWjFGAAlMeEIE6F3KVVyy1zvGTJ
-    aB0b2vU1m8I0huk4P3Nu17YIGc4/4bFOxceFvtKNGMLTp4FN1YDWjfrFB23AJ4h7jV+u
-    HUBQ==
+    bh=b3yBWw7yU2epDTrjSW6D9+v+xfIfJnT+XxyS94GOcl8=;
+    b=H2SI/FxhNxisGvyhqeDCfOM2s2MYMvmWSqLHovX+WYbylzW+XxiEfLT5On1kI+bD3v
+    TL7TTzr+XWcg5KdutNQZAh4R6/x2oWT1XKsYfwYq3FjRNkudN4Tx7/vVvJK2fp/SNQdd
+    mrcIoUA1YZJzecTc/O+4fiqxMOG6oLHzjsOCIrU03HG21nYXYMzumBZfpNhQjG90FcfT
+    Nc+lsDGudDPX0EPkbgpMfHFyFlgY2ay17tAfs21gWR/JKyIZ50yqet+E3vNAOoP3CbKe
+    jPXV9MVdAmPgHOiItbMB+3beqaGSdAQ6UnDJHRlwivJrEMH5zDVgfzJXA0Xca/p8QwIt
+    dj0A==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847907;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847910;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=am1tugVzg71doIb/LdiNWtayiDvPFoCjZNyMmciOrqY=;
-    b=ZyPflmDE/hyYGB/vXZcl7u7B+KonkHuWE4Mfv2YzW2JwqivRJ0Zrfz8oNrJEYVF9xX
-    crKYZV8633x4FUi6IQpDkEKP0/8al9TL6vmmoe5RJgUBirwguDpNMHeEIyhBPTYIP4jC
-    E4ZK+JbnP513hgwumJ504JhFWRvvAJm6fyNyTwbLVicuPejYmqpZFVbjRq5kjUWNLNeg
-    BWTxwa9FWaE7hjzFQVZ5catJMO5nSelGGbvnQW16LaW0+PGZMxyPZNG+10d6tWdGLoP9
-    +oQQ0koGIFuI3mlgF8zRRNRP4gE9jpSyJWV8Sa6GtlX0FOpBVNYH+8CFcBHQu9EbOhCM
-    jpYg==
+    bh=b3yBWw7yU2epDTrjSW6D9+v+xfIfJnT+XxyS94GOcl8=;
+    b=Ln01R/NUGT1zY8Rr1c8rijll3Cl+j/E0G1PEoVLjpe3cDyQ1pIxIZ3rY/1lsOfI7i8
+    PUWanNj6lNj52oXIq53XVA4cAJgTtZXVrT4O8KnaF+EBi9oS0K1wyalqOqiKX1uoCuTG
+    98Xi5sWV8EEWby7BhXjt8LW8pHY75yUmQ3QSVUX7OqHJ5Ha3CDWL/Jb9n/gZ7+SGhMK+
+    RmBxTjuKgmX0IixB+cuLPQVCnPvb2ILoLMzcq0Iy9sT93gm/iJICw9DOSw1wksBsGEiV
+    LAqolLLUwXC+hERsAt5Q7A38e1Mhh6E4cyFUQNze3RASCjO1km6MXqR7Gph9nHcaUCYw
+    9Q9Q==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
@@ -96,101 +96,217 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210616 30/36] tools: add callback to libxl for precopy_policy and precopy_stats_t
-Date: Wed, 16 Jun 2021 14:51:23 +0200
-Message-Id: <20210616125129.26563-31-olaf@aepfle.de>
+Subject: [PATCH v20210616 35/36] tools: use sr_bitmap for populated_pfns
+Date: Wed, 16 Jun 2021 14:51:28 +0200
+Message-Id: <20210616125129.26563-36-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
 References: <20210616125129.26563-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This duplicates simple_precopy_policy. To recap its purpose:
-- do up to 5 iterations of copying dirty domU memory to target,
-  including the initial copying of all domU memory, excluding
-  the final copying while the domU is suspended
-- do fewer iterations in case the domU dirtied less than 50 pages
-
-Take the opportunity to also move xen_pfn_t into qw().
-
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
----
- tools/libs/light/libxl_dom_save.c       | 19 +++++++++++++++++++
- tools/libs/light/libxl_internal.h       |  2 ++
- tools/libs/light/libxl_save_msgs_gen.pl |  3 ++-
- 3 files changed, 23 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
-index 32e3cb5a13..3f3cff0342 100644
---- a/tools/libs/light/libxl_dom_save.c
-+++ b/tools/libs/light/libxl_dom_save.c
-@@ -373,6 +373,24 @@ int libxl__save_emulator_xenstore_data(libxl__domain_save_state *dss,
-     return rc;
- }
+v02:
+- remove xg_ prefix from called functions
+---
+ tools/libs/saverestore/common.h          | 21 +++++++-
+ tools/libs/saverestore/restore.c         | 69 ------------------------
+ tools/libs/saverestore/restore_x86_hvm.c |  9 ++++
+ tools/libs/saverestore/restore_x86_pv.c  |  7 +++
+ 4 files changed, 35 insertions(+), 71 deletions(-)
+
+diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
+index 43aa1a7b86..43a31f9aa5 100644
+--- a/tools/libs/saverestore/common.h
++++ b/tools/libs/saverestore/common.h
+@@ -403,8 +403,7 @@ struct xc_sr_context
+             uint32_t     xenstore_domid,  console_domid;
  
-+static int libxl__domain_save_precopy_policy(precopy_stats_t stats, void *user)
+             /* Bitmap of currently populated PFNs during restore. */
+-            unsigned long *populated_pfns;
+-            xen_pfn_t max_populated_pfn;
++            struct sr_bitmap populated_pfns;
+ 
+             /* Sender has invoked verify mode on the stream. */
+             bool verify;
+@@ -629,6 +628,24 @@ static inline bool page_type_has_stream_data(uint32_t type)
+     }
+     return ret;
+ }
++
++static inline bool pfn_is_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
 +{
-+    libxl__save_helper_state *shs = user;
-+    libxl__domain_save_state *dss = shs->caller_state;
-+    STATE_AO_GC(dss->ao);
-+
-+    LOGD(DEBUG, shs->domid, "iteration %u dirty_count %ld total_written %lu",
-+         stats.iteration, stats.dirty_count, stats.total_written);
-+    if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
-+        goto stop_copy;
-+    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
-+        goto stop_copy;
-+    return XGS_POLICY_CONTINUE_PRECOPY;
-+
-+stop_copy:
-+    return XGS_POLICY_STOP_AND_COPY;
++    return sr_test_bit(pfn, &ctx->restore.populated_pfns);
 +}
 +
- /*----- main code for saving, in order of execution -----*/
++static inline int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
++{
++    xc_interface *xch = ctx->xch;
++
++    if ( sr_set_bit(pfn, &ctx->restore.populated_pfns) == false )
++    {
++        PERROR("Failed to realloc populated_pfns bitmap");
++        errno = ENOMEM;
++        return -1;
++    }
++    return 0;
++}
+ #endif
+ /*
+  * Local variables:
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index d0148606bf..8f7bce2585 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -71,64 +71,6 @@ static int read_headers(struct xc_sr_context *ctx)
+     return 0;
+ }
  
- void libxl__domain_save(libxl__egc *egc, libxl__domain_save_state *dss)
-@@ -430,6 +448,7 @@ void libxl__domain_save(libxl__egc *egc, libxl__domain_save_state *dss)
-         callbacks->suspend = libxl__domain_suspend_callback;
+-/*
+- * Is a pfn populated?
+- */
+-static bool pfn_is_populated(const struct xc_sr_context *ctx, xen_pfn_t pfn)
+-{
+-    if ( pfn > ctx->restore.max_populated_pfn )
+-        return false;
+-    return test_bit(pfn, ctx->restore.populated_pfns);
+-}
+-
+-/*
+- * Set a pfn as populated, expanding the tracking structures if needed. To
+- * avoid realloc()ing too excessively, the size increased to the nearest power
+- * of two large enough to contain the required pfn.
+- */
+-static int pfn_set_populated(struct xc_sr_context *ctx, xen_pfn_t pfn)
+-{
+-    xc_interface *xch = ctx->xch;
+-
+-    if ( pfn > ctx->restore.max_populated_pfn )
+-    {
+-        xen_pfn_t new_max;
+-        size_t old_sz, new_sz;
+-        unsigned long *p;
+-
+-        /* Round up to the nearest power of two larger than pfn, less 1. */
+-        new_max = pfn;
+-        new_max |= new_max >> 1;
+-        new_max |= new_max >> 2;
+-        new_max |= new_max >> 4;
+-        new_max |= new_max >> 8;
+-        new_max |= new_max >> 16;
+-#ifdef __x86_64__
+-        new_max |= new_max >> 32;
+-#endif
+-
+-        old_sz = bitmap_size(ctx->restore.max_populated_pfn + 1);
+-        new_sz = bitmap_size(new_max + 1);
+-        p = realloc(ctx->restore.populated_pfns, new_sz);
+-        if ( !p )
+-        {
+-            ERROR("Failed to realloc populated bitmap");
+-            errno = ENOMEM;
+-            return -1;
+-        }
+-
+-        memset((uint8_t *)p + old_sz, 0x00, new_sz - old_sz);
+-
+-        ctx->restore.populated_pfns    = p;
+-        ctx->restore.max_populated_pfn = new_max;
+-    }
+-
+-    assert(!test_bit(pfn, ctx->restore.populated_pfns));
+-    set_bit(pfn, ctx->restore.populated_pfns);
+-
+-    return 0;
+-}
+-
+ /*
+  * Given a set of pfns, obtain memory from Xen to fill the physmap for the
+  * unpopulated subset.  If types is NULL, no page type checking is performed
+@@ -929,16 +871,6 @@ static int setup(struct xc_sr_context *ctx)
+     if ( rc )
+         goto err;
  
-     callbacks->switch_qemu_logdirty = libxl__domain_suspend_common_switch_qemu_logdirty;
-+    callbacks->precopy_policy = libxl__domain_save_precopy_policy;
+-    ctx->restore.max_populated_pfn = (32 * 1024 / 4) - 1;
+-    ctx->restore.populated_pfns = bitmap_alloc(
+-        ctx->restore.max_populated_pfn + 1);
+-    if ( !ctx->restore.populated_pfns )
+-    {
+-        ERROR("Unable to allocate memory for populated_pfns bitmap");
+-        rc = -1;
+-        goto err;
+-    }
+-
+     ctx->restore.buffered_records = malloc(
+         DEFAULT_BUF_RECORDS * sizeof(struct xc_sr_record));
+     if ( !ctx->restore.buffered_records )
+@@ -977,7 +909,6 @@ static void cleanup(struct xc_sr_context *ctx)
  
-     dss->sws.ao  = dss->ao;
-     dss->sws.dss = dss;
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index 439c654733..57d7e4b4b8 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -125,6 +125,8 @@
- #define DOMID_XS_PATH "domid"
- #define PVSHIM_BASENAME "xen-shim"
- #define PVSHIM_CMDLINE "pv-shim console=xen,pv"
-+#define LIBXL_XGS_POLICY_MAX_ITERATIONS 5
-+#define LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT 50
+     free(ctx->restore.m);
+     free(ctx->restore.buffered_records);
+-    free(ctx->restore.populated_pfns);
  
- /* Size macros. */
- #define __AC(X,Y)   (X##Y)
-diff --git a/tools/libs/light/libxl_save_msgs_gen.pl b/tools/libs/light/libxl_save_msgs_gen.pl
-index f263ee01bb..ab55c81644 100755
---- a/tools/libs/light/libxl_save_msgs_gen.pl
-+++ b/tools/libs/light/libxl_save_msgs_gen.pl
-@@ -23,6 +23,7 @@ our @msgs = (
-                                              STRING doing_what),
-                                             'unsigned long', 'done',
-                                             'unsigned long', 'total'] ],
-+    [ 'scxW',   "precopy_policy", ['precopy_stats_t', 'stats'] ],
-     [ 'srcxA',  "suspend", [] ],
-     [ 'srcxA',  "postcopy", [] ],
-     [ 'srcxA',  "checkpoint", [] ],
-@@ -142,7 +143,7 @@ static void bytes_put(unsigned char *const buf, int *len,
+     if ( ctx->restore.ops.cleanup(ctx) )
+         PERROR("Failed to clean up");
+diff --git a/tools/libs/saverestore/restore_x86_hvm.c b/tools/libs/saverestore/restore_x86_hvm.c
+index bd63bd2818..97e7e0f48c 100644
+--- a/tools/libs/saverestore/restore_x86_hvm.c
++++ b/tools/libs/saverestore/restore_x86_hvm.c
+@@ -136,6 +136,7 @@ static int x86_hvm_localise_page(struct xc_sr_context *ctx,
+ static int x86_hvm_setup(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
++    unsigned long max_pfn;
  
- END
+     if ( ctx->restore.guest_type != DHDR_TYPE_X86_HVM )
+     {
+@@ -161,6 +162,13 @@ static int x86_hvm_setup(struct xc_sr_context *ctx)
+     }
+ #endif
  
--foreach my $simpletype (qw(int uint16_t uint32_t unsigned), 'unsigned long', 'xen_pfn_t') {
-+foreach my $simpletype (qw(int uint16_t uint32_t unsigned precopy_stats_t xen_pfn_t), 'unsigned long') {
-     my $typeid = typeid($simpletype);
-     $out_body{'callout'} .= <<END;
- static int ${typeid}_get(const unsigned char **msg,
++    max_pfn = max(ctx->restore.p2m_size, ctx->dominfo.max_memkb >> (PAGE_SHIFT-10));
++    if ( !sr_bitmap_expand(&ctx->restore.populated_pfns, max_pfn) )
++    {
++        PERROR("Unable to allocate memory for populated_pfns bitmap");
++        return -1;
++    }
++
+     return 0;
+ }
+ 
+@@ -241,6 +249,7 @@ static int x86_hvm_stream_complete(struct xc_sr_context *ctx)
+ 
+ static int x86_hvm_cleanup(struct xc_sr_context *ctx)
+ {
++    sr_bitmap_free(&ctx->restore.populated_pfns);
+     free(ctx->x86.hvm.restore.context.ptr);
+ 
+     free(ctx->x86.restore.cpuid.ptr);
+diff --git a/tools/libs/saverestore/restore_x86_pv.c b/tools/libs/saverestore/restore_x86_pv.c
+index 96608e5231..c73a3cd99f 100644
+--- a/tools/libs/saverestore/restore_x86_pv.c
++++ b/tools/libs/saverestore/restore_x86_pv.c
+@@ -1060,6 +1060,12 @@ static int x86_pv_setup(struct xc_sr_context *ctx)
+     if ( rc )
+         return rc;
+ 
++    if ( !sr_bitmap_expand(&ctx->restore.populated_pfns, 32 * 1024 / 4) )
++    {
++        PERROR("Unable to allocate memory for populated_pfns bitmap");
++        return -1;
++    }
++
+     ctx->x86.pv.restore.nr_vcpus = ctx->dominfo.max_vcpu_id + 1;
+     ctx->x86.pv.restore.vcpus = calloc(sizeof(struct xc_sr_x86_pv_restore_vcpu),
+                                        ctx->x86.pv.restore.nr_vcpus);
+@@ -1153,6 +1159,7 @@ static int x86_pv_stream_complete(struct xc_sr_context *ctx)
+  */
+ static int x86_pv_cleanup(struct xc_sr_context *ctx)
+ {
++    sr_bitmap_free(&ctx->restore.populated_pfns);
+     free(ctx->x86.pv.p2m);
+     free(ctx->x86.pv.p2m_pfns);
+ 
 
