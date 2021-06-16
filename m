@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53AE9C48BE5
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A62F1C48BE6
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:51:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23CBC60FDB
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:51:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23CBC60FDB
+	by mail.kernel.org (Postfix) with ESMTPS id 652076023D
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 12:51:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 652076023D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.142938.263622 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.142939.263627 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltV1H-000881-Ly; Wed, 16 Jun 2021 12:51:47 +0000
+	id 1ltV1I-0008DI-4M; Wed, 16 Jun 2021 12:51:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 142938.263622; Wed, 16 Jun 2021 12:51:47 +0000
+Received: by outflank-mailman (output) from mailman id 142939.263627; Wed, 16 Jun 2021 12:51:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltV1H-00087k-HT; Wed, 16 Jun 2021 12:51:47 +0000
-Received: by outflank-mailman (input) for mailman id 142938;
+	id 1ltV1H-0008BS-T8; Wed, 16 Jun 2021 12:51:47 +0000
+Received: by outflank-mailman (input) for mailman id 142939;
  Wed, 16 Jun 2021 12:51:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV1G-0006lZ-0K
+ id 1ltV1G-00075D-58
  for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:51:46 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.53])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d1943abb-3cfd-4d03-9314-0c71412d5751;
- Wed, 16 Jun 2021 12:51:41 +0000 (UTC)
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.84])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f18633fe-d4db-43d5-bfab-8fd491179c21;
+ Wed, 16 Jun 2021 12:51:45 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpYtlq
+ with ESMTPSA id j0415bx5GCpdtm3
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:34 +0200 (CEST)
+ Wed, 16 Jun 2021 14:51:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +54,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1943abb-3cfd-4d03-9314-0c71412d5751
-ARC-Seal: i=1; a=rsa-sha256; t=1623847894; cv=none;
+X-Inumbo-ID: f18633fe-d4db-43d5-bfab-8fd491179c21
+ARC-Seal: i=1; a=rsa-sha256; t=1623847899; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=soFrmfUzg9UNLI8yVxGJmyKafXyp1k0pP6Tz7C6qrjRjIjjInvmcIq7NDWzoXEpYpa
-    is5J4weSbVdhj+Zv+exqhxzn9JCh70HsxVuioyvtd3/icKwIxal2s1iOhU6IiAqeshN4
-    GE5cuALgLBx29/FjVhUoAtIn17oRmmHc9ygwS581gl/kQ3KK8otGIGOjZeyH+g1lf0Mf
-    wM4lwrrI/6tKseCltsc33Y2MpZNXO/SNS6sdL7AazagYfsUSCfQMy1Rbv4tjcU0Fj6sO
-    o0EsWuYJzd1QLdrcqzgL/jozmedbbylz7MjX5SaezjDDFoHX4XOh3T8nyMx6jn/333eg
-    eoTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847894;
+    b=V9RtZbf8C1wCglPYTnqfkxIgmvIai9m1C0WragE6L8TdkzfjYumF7NNu+mG+JUHAk4
+    QXWqeR2xquVh1uVG/VkbLL2j4nGs57IJ1xwFck5cvPZbKkNO0QvysEfAyIgbwT3l9Y4Z
+    dJZPv4YXeDdDdhJhRIHptkE/HTeegGIfOaSX+wzIjdesa1YWoFjY+3GheapIdaOJJZL0
+    d0Iq+se2UH0Br2RQBI73EsqjeK8WZJGg/sLxcpXGZBYND2PjovgbaIyL8nFcuIU3myOG
+    J/Awj6LCZq5uCLxRdR/PEN+JTAa+MT6t3ZVSe1K7m30vtb4Dd6s2mK+qxTTEHLLFWtsX
+    FDkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847899;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=WwrXv/hX+8hePyd4mOYFfrU0MUgrTtUZ8Gjzx55scrs=;
-    b=CumTvA1YqjZBixzbp99+/N+2MDfv6RVYWAZjCKD6Rf5H1R1lNbsSY6YZObLLUE5Owt
-    32biwzycgSL2YhhRgHJ8y1+pMc2ek0NExN0ijFfLlNqajcTRu1fINPOMMPCoW+4BSuJP
-    GQnDgF9MWrzopCxL4ZfOuCwsZ4DOvxkHlt4PmuNoeOozH4WT/mrIzH2etYic/7of6/Gq
-    TL8WTiBGP0mT6fz/Of+0rZJr2y0W6svOguW22N+B7dYQ/+JjX7kvrgdZTVk/pCGIlaQS
-    cCJkTCU26Y1hbQZEZ3Xe3PF2xycaGsuyLBJ7EJVSBJJXLNkF16Hf/z5ZQE2XTRl0HZU/
-    1cWw==
+    bh=6QhLsTHKnGLq8ej3+19WMGRz5FDjlHYnvJVyc5tVB4g=;
+    b=h0z+eiF/8OC+LqIJRm8ILXtBw7ot3Z8f+f6U6rVifrn5AlWSjCOFCLemkoRi+37BfG
+    698ydSzAHVBHMHx5PWd4EPzAmexuuhyA+6ED2c/HXOIhgSjGOmGmxFWwvhP8eZ/DbLyH
+    BKoVPTcOLU5gDwVUnLjWmnognqBp8a3e7Ds7JRd9laVwwlrTR4xpaMFO8YixXK9tEVX/
+    wXskzK7shBvG+54OXBGB3+85HBLpuJUvd4qTgpZRh0spnhDHbqDNLhnrTAaLZBRzeKRA
+    xZzYc5GwZGdJW/c7Lri9BW/FWfzNBiPG/x7dy5ALMmS4yRC+GpqATtYl3FtaCn0LuiOE
+    qsBQ==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847894;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847899;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=WwrXv/hX+8hePyd4mOYFfrU0MUgrTtUZ8Gjzx55scrs=;
-    b=Hdyru/O388OBCl1cJ0YWnVg/2XeuMH7WAZa6zCOYBj2Y0mqdK1mO+sA1FldUjL2AL0
-    b0snEqEad8XYecbuLL55rwYjFhNs5PeRbVqPttbvjWLEmb7JjURaPEvNMiVFVLuhnDYy
-    kAv6XnK34DIhKUwixo5hwHPBdgrfMA//xNS2j7t+SxN0HEpP1Tlg2TS9g6RJPJAolpxg
-    gzu14toyeV8UqfP8LLUhmnzfvLHgrzSRTvSIYdhpLMhjEHt2il73AVt63UUAQ4GHw8jc
-    Bd28M4cLNrCzsnrkfRKdaoRXblmkSeQ8afmaRpQsF9ZgkaDy6XFOhDfSkIdXEWAw8FRd
-    QY7Q==
+    bh=6QhLsTHKnGLq8ej3+19WMGRz5FDjlHYnvJVyc5tVB4g=;
+    b=olx76e+wLmQTdJGVtYcWr7CZ+zPZc2Px6jO/FrjyPpGQpK3OA4lw2zvWycFRaokYNK
+    3yeJKYqQj6FvNf/EQRtio/ooBjYBBvvwDpVrdp4oUc5uxMaIwbPpUakOmLR90585EF2Y
+    CNIWA29se7WZKhW1tkj63t87JZiGLqWBQm9H9w3/d7h9PqF9IPvNPruSI32xXxqlVpLS
+    ZoymyoBb/ZqTWzGG+F6zsZPsL07md2yjbkxiCkiSTDKYWIUzHG1PwYsmb9ju3gmkeyk8
+    fDNJDQ0YVSqpicsIz70bRRhtDhju+GxQHXSGySp05PoULlFDcZfghtcSP5sCmFUenNPl
+    oTcw==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
@@ -95,57 +96,75 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210616 03/36] xl: fix description of migrate --debug
-Date: Wed, 16 Jun 2021 14:50:56 +0200
-Message-Id: <20210616125129.26563-4-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210616 13/36] tools: save: move types array
+Date: Wed, 16 Jun 2021 14:51:06 +0200
+Message-Id: <20210616125129.26563-14-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
 References: <20210616125129.26563-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-xl migrate --debug used to track every pfn in every batch of pages.
-But these times are gone. The code in xc_domain_save is the consumer
-of this knob, but it considers it only for the remus and colo case.
-
-Adjust the help text to tell what --debug does today: Nothing.
+Remove allocation from hotpath, move types array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 Reviewed-by: Juergen Gross <jgross@suse.com>
-
-v02:
-- the option has no effect anymore
 ---
- docs/man/xl.1.pod.in   | 2 +-
- tools/xl/xl_cmdtable.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ tools/libs/saverestore/common.h | 2 ++
+ tools/libs/saverestore/save.c   | 7 ++-----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index e2176bd696..70a6ebf438 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -481,7 +481,7 @@ domain.
+diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
+index 6129710a3f..1df684acb9 100644
+--- a/tools/libs/saverestore/common.h
++++ b/tools/libs/saverestore/common.h
+@@ -227,6 +227,8 @@ struct sr_save_arrays {
+     xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
+     /* write_batch: Mfns of the batch pfns. */
+     xen_pfn_t mfns[MAX_BATCH_SIZE];
++    /* write_batch: Types of the batch pfns. */
++    xen_pfn_t types[MAX_BATCH_SIZE];
+ };
  
- =item B<--debug>
+ struct sr_restore_arrays {
+diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
+index 6b09784be8..0883c1fac0 100644
+--- a/tools/libs/saverestore/save.c
++++ b/tools/libs/saverestore/save.c
+@@ -88,7 +88,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = ctx->save.m->mfns, *types = NULL;
++    xen_pfn_t *mfns = ctx->save.m->mfns, *types = ctx->save.m->types;
+     void *guest_mapping = NULL;
+     void **guest_data = NULL;
+     void **local_pages = NULL;
+@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
  
--Display huge (!) amount of debug information during the migration process.
-+This option has no effect. It is preserved for compatibility reasons.
+     assert(nr_pfns != 0);
  
- =item B<-p>
+-    /* Types of the batch pfns. */
+-    types = malloc(nr_pfns * sizeof(*types));
+     /* Errors from attempting to map the gfns. */
+     errors = malloc(nr_pfns * sizeof(*errors));
+     /* Pointers to page data to send.  Mapped gfns or local allocations. */
+@@ -116,7 +114,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* iovec[] for writev(). */
+     iov = malloc((nr_pfns + 4) * sizeof(*iov));
  
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 661323d488..ca1dfa3525 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -172,7 +172,7 @@ const struct cmd_spec cmd_table[] = {
-       "                migrate-receive [-d -e]\n"
-       "-e              Do not wait in the background (on <host>) for the death\n"
-       "                of the domain.\n"
--      "--debug         Print huge (!) amount of debug during the migration process.\n"
-+      "--debug         Ignored.\n"
-       "-p              Do not unpause domain after migrating it.\n"
-       "-D              Preserve the domain id"
-     },
+-    if ( !types || !errors || !guest_data || !local_pages || !iov )
++    if ( !errors || !guest_data || !local_pages || !iov )
+     {
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -274,7 +272,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     free(local_pages);
+     free(guest_data);
+     free(errors);
+-    free(types);
+ 
+     return rc;
+ }
 
