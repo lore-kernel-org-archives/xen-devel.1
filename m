@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 239FEC48BE5
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9277C48BE6
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DACD161166
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DACD161166
+	by mail.kernel.org (Postfix) with ESMTPS id 6CBEA6024A
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Jun 2021 13:08:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CBEA6024A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.143103.263963 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.143112.263974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVHT-00034l-MJ; Wed, 16 Jun 2021 13:08:31 +0000
+	id 1ltVHb-0003ox-3R; Wed, 16 Jun 2021 13:08:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 143103.263963; Wed, 16 Jun 2021 13:08:31 +0000
+Received: by outflank-mailman (output) from mailman id 143112.263974; Wed, 16 Jun 2021 13:08:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltVHT-00034c-H8; Wed, 16 Jun 2021 13:08:31 +0000
-Received: by outflank-mailman (input) for mailman id 143103;
- Wed, 16 Jun 2021 13:08:29 +0000
+	id 1ltVHa-0003oT-UN; Wed, 16 Jun 2021 13:08:38 +0000
+Received: by outflank-mailman (input) for mailman id 143112;
+ Wed, 16 Jun 2021 13:08:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=qy3q=LK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1ltV1u-0006lZ-1Q
- for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:52:26 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.80])
+ id 1ltV2s-0006lZ-3z
+ for xen-devel@lists.xenproject.org; Wed, 16 Jun 2021 12:53:26 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1d87af7a-fcd5-438d-ab62-34ee038e5189;
- Wed, 16 Jun 2021 12:51:45 +0000 (UTC)
+ id 836fdc85-aa4f-4342-9e78-cb0882912229;
+ Wed, 16 Jun 2021 12:52:01 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.27.2 AUTH)
- with ESMTPSA id j0415bx5GCpetm6
+ with ESMTPSA id j0415bx5GCpktmN
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Wed, 16 Jun 2021 14:51:40 +0200 (CEST)
+ Wed, 16 Jun 2021 14:51:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,39 +53,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1d87af7a-fcd5-438d-ab62-34ee038e5189
-ARC-Seal: i=1; a=rsa-sha256; t=1623847900; cv=none;
+X-Inumbo-ID: 836fdc85-aa4f-4342-9e78-cb0882912229
+ARC-Seal: i=1; a=rsa-sha256; t=1623847906; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=qqndapM6fq0DVojuSeYOeqUo244Ivu4gAa4rSpcedg8YERJY7/OLOi6XWeyI845Uxs
-    zBNVMAcdUAhMd6qaxhh+NdNE9aHaxpZ/yVg0zLAzoilDVYcabOyCyJ4SY++Z8/y9UQyT
-    loToNlG4zIBEAs24WvEu4K32b/t/1n+2dtiYP/uRptnyEbDXBSBqPsUTXrPnXcoOTsh+
-    7o8BM2E12cQJFOKnv00bClK3RshwRq+wqM/CwNwGh//cxCHz1lUvok+q1DnrKHRFLnbh
-    EYA63dif5twORXHM4K5DTPS3ruswNOpHA3eTc8ef7wDr8f+z5wzkJfRtEuOvhdQwW+A/
-    42yQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847900;
+    b=Bb02/uYdYI3v3QAK8agr/MyAFv/G7Oa2Bx7a+FYVforjXXtyAQMg+Q0iqz0l0bqefP
+    /lnqy5lhD55+fZcRhOp0dKREn/o1okFQfsRHdNGvHo6Lgex5rGsh0Hitb09cXi4IzRJO
+    eeRMtn40kAnmG6bwOc5iikT2XLb4CRET14Etyez4ckvBL28Ila9AT3boSSqe4sarKbSn
+    Nd+ORIevFXOQPL5BCw1T49q8D7nEU03VzXmzFTXScaRFYrPtyDPo8bdMli/IT6l9895w
+    9+mzysccjy+OQQAnFcj8uaftHeC+lfCqZ8q9QzM6hT5iWOvIMvN4JI6CdfGO6XXQieDG
+    XJgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847906;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=XGzxV8H0rtxBrYjtA99frZPaR/R3Z7Ebv988Uk2fYO0=;
-    b=W22pArx+bx+xlzcrGw3A+cdqm96bzRnLx2oAT6Prjp36W5Ol69D4zNnOAYiBX1MMmy
-    eFP93tipOYV9IjoT9DUsifnqz9j7wSRECx17AZWitUD3OMldAzlWRW/+B9ZH4DbO7P3e
-    Na+g+TncdD9xx3yqFin3mtGg1eXeFAmx1Hwl3BOvgdqT7+mAvqNUjXJa7LL4eFoQNzg9
-    Qeq9iqt48s1dEck9LA5s+3NBikUwuO753UDcUCaTJK0XLMRPdsmO1G+HWmMiFo0H5z3K
-    m0Ot/vrEdZ4eFrDFFzmIWm8iR0WHBpNUF2FHxmoaK4Mqg156xJsQ4+6q8JT4KC6XWNfa
-    LiuA==
+    bh=n0d0gwWXlJ/Ban5eVrK506Di/gOt/MD61K+N2RGQBbA=;
+    b=q1UKio5xKBtR+KdxSh2Yno0DYwGIVeXHUBzHinABh6f2lymqVTcENFragEmMOlCYXj
+    CT8T9OMHy8B/f+qQ9SLFQqraQw73s+ycFM47rF1imI6qwXcZYIINA6gVibgn6ZJa0YTl
+    GRJfy3zeRhgAp8TRyjwNWlyV6FPws6FI/dmpk6swQyFWtG7jVEP+YNV8fjuv18tliD/q
+    +c4WZHqo8nCuuq3ZKcmH6FYuH6Mt9dg1h9Yxgn2lrqwE9g0QSdWTQUeS/6ZGqLp4gFgl
+    drSnIlEoYzFUJKjX1cihsbP5M8MGMjuqEdbiGD/5QgAglMNpmXR/2gLwJs0gXXBy3ZTg
+    bCqA==
 ARC-Authentication-Results: i=1; strato.com;
     dkim=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847900;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1623847906;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=XGzxV8H0rtxBrYjtA99frZPaR/R3Z7Ebv988Uk2fYO0=;
-    b=X8IO+QK3/HCFVRHjeCoMJqDkTfz+7zRmaDSFeq5Ll3aHQwW8Bw1dU7zILDykfzwXAP
-    3FK3+F9Ba+uUAXuUc9hcDbQLz3Y5DHR2a6oXhgkN161wz3XXqU6V97ilZt1GbMG2x461
-    qDPeQtbrMnXylsNaBavhbRE+tBlh5GzZA3a7L+QWL8LkrMiF/5wZZmJpK5t+jxfHvNZO
-    u38EflqMHcHDHyJSJMQPlJinDy8aLCiRsPl7hZ4SXQpQEtTzqzpelTvLL91ZcISCF/ho
-    anmnlZHdWGVSD6zTDMJQJkhAtWIqWv/XQuDmpIeiXBr2dpItR5DZNrHYvJV0Uxc+nf5B
-    3e3w==
+    bh=n0d0gwWXlJ/Ban5eVrK506Di/gOt/MD61K+N2RGQBbA=;
+    b=g3wCKnOJqhlu289qUqGeYqy9RDAUEaOV7Yw1QOo/Y/prbvl4AlhGdYNtBPV3koqqxd
+    5uXUaYW0z9j7h1+jH/krk/hO4rvCxVYiFzwKxwXbhRAAbcoYRmAQkOOUF/cv5gWVZv0a
+    rJ4Xw08/2hkOEX43CKJG92FbvATCekbqj7nmJUmroaqWmC5QQaZ7YozFKqEMn4Jz5sDC
+    0QR1DWVHXs+N/Jt1GirmjX2M2jfOZ9ep4bXQrC23hrF/yMEDX1vWKUsLPdZcqxtsClgi
+    GC8WwDpJtzxmk1fhYuH1lUXd32BavjwbFcKhyN0pm6Fxxftep1sLkhdd9zNeivGIKxmB
+    U0OA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5l+Vz7FJgt8+TgOd9sTrMwXjWWExsBKQCrpnqhqg=="
@@ -93,71 +93,164 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
-	Juergen Gross <jgross@suse.com>,
+	Christian Lindig <christian.lindig@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210616 15/36] tools: save: move iov array
-Date: Wed, 16 Jun 2021 14:51:08 +0200
-Message-Id: <20210616125129.26563-16-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	David Scott <dave@recoil.org>
+Subject: [PATCH v20210616 28/36] tools: adjust libxl_domain_suspend to receive a struct props
+Date: Wed, 16 Jun 2021 14:51:21 +0200
+Message-Id: <20210616125129.26563-29-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210616125129.26563-1-olaf@aepfle.de>
 References: <20210616125129.26563-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove allocation from hotpath, move iov array into preallocated space.
+Upcoming changes will pass more knobs down to xc_domain_save.
+Adjust the libxl_domain_suspend API to allow easy adding of additional knobs.
+
+No change in behavior intented.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Reviewed-by: Juergen Gross <jgross@suse.com>
+Acked-by: Christian Lindig <christian.lindig@citrix.com>
 ---
- tools/libs/saverestore/common.h | 2 ++
- tools/libs/saverestore/save.c   | 7 ++-----
- 2 files changed, 4 insertions(+), 5 deletions(-)
+ tools/include/libxl.h                | 26 +++++++++++++++++++++++---
+ tools/libs/light/libxl_domain.c      |  7 ++++---
+ tools/ocaml/libs/xl/xenlight_stubs.c |  3 ++-
+ tools/xl/xl_migrate.c                |  9 ++++++---
+ tools/xl/xl_saverestore.c            |  3 ++-
+ 5 files changed, 37 insertions(+), 11 deletions(-)
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 558b5fbf06..ae87954364 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -231,6 +231,8 @@ struct sr_save_arrays {
-     xen_pfn_t types[MAX_BATCH_SIZE];
-     /* write_batch: Errors from attempting to map the gfns. */
-     int errors[MAX_BATCH_SIZE];
-+    /* write_batch: iovec[] for writev(). */
-+    struct iovec iov[MAX_BATCH_SIZE + 4];
- };
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 29931626a2..9a4d7514ed 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1706,12 +1706,32 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+     libxl_retrieve_domain_configuration_0x041200
+ #endif
  
- struct sr_restore_arrays {
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index 9ebbf00ce7..1a5f3d29ea 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -97,7 +97,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
-     void *page, *orig_page;
-     uint64_t *rec_pfns = NULL;
--    struct iovec *iov = NULL; int iovcnt = 0;
-+    struct iovec *iov = ctx->save.m->iov; int iovcnt = 0;
-     struct xc_sr_rec_page_data_header hdr = { 0 };
-     struct xc_sr_record rec = {
-         .type = REC_TYPE_PAGE_DATA,
-@@ -109,10 +109,8 @@ static int write_batch(struct xc_sr_context *ctx)
-     guest_data = calloc(nr_pfns, sizeof(*guest_data));
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = calloc(nr_pfns, sizeof(*local_pages));
--    /* iovec[] for writev(). */
--    iov = malloc((nr_pfns + 4) * sizeof(*iov));
++/*
++ * LIBXL_HAVE_DOMAIN_SUSPEND_PROPS indicates that the
++ * libxl_domain_suspend_props() function takes a props struct.
++ */
++#define LIBXL_HAVE_DOMAIN_SUSPEND_PROPS 1
++
++typedef struct {
++    uint32_t flags; /* LIBXL_SUSPEND_* */
++} libxl_domain_suspend_props;
++#define LIBXL_SUSPEND_DEBUG 1
++#define LIBXL_SUSPEND_LIVE 2
++
+ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
+-                         int flags, /* LIBXL_SUSPEND_* */
++                         libxl_domain_suspend_props *props,
+                          const libxl_asyncop_how *ao_how)
+                          LIBXL_EXTERNAL_CALLERS_ONLY;
+-#define LIBXL_SUSPEND_DEBUG 1
+-#define LIBXL_SUSPEND_LIVE 2
++#if defined(LIBXL_API_VERSION) && LIBXL_API_VERSION < 0x041600
++static inline int libxl_domain_suspend_0x041500(libxl_ctx *ctx, uint32_t domid,
++                         int fd, int flags, /* LIBXL_SUSPEND_* */
++                         const libxl_asyncop_how *ao_how)
++{
++    libxl_domain_suspend_props props = { .flags = flags, };
++    return libxl_domain_suspend(ctx, domid, fd, &props, ao_how);
++}
++#define libxl_domain_suspend libxl_domain_suspend_0x041500
++#endif
  
--    if ( !guest_data || !local_pages || !iov )
-+    if ( !guest_data || !local_pages )
-     {
-         ERROR("Unable to allocate arrays for a batch of %u pages",
-               nr_pfns);
-@@ -266,7 +264,6 @@ static int write_batch(struct xc_sr_context *ctx)
-         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
-     for ( i = 0; local_pages && i < nr_pfns; ++i )
-         free(local_pages[i]);
--    free(iov);
-     free(local_pages);
-     free(guest_data);
+ /*
+  * Only suspend domain, do not save its state to file, do not destroy it.
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index c00c36c928..5dbd27900f 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -505,7 +505,8 @@ static void domain_suspend_cb(libxl__egc *egc,
  
+ }
+ 
+-int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
++int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
++                         libxl_domain_suspend_props *props,
+                          const libxl_asyncop_how *ao_how)
+ {
+     AO_CREATE(ctx, domid, ao_how);
+@@ -526,8 +527,8 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
+     dss->domid = domid;
+     dss->fd = fd;
+     dss->type = type;
+-    dss->live = flags & LIBXL_SUSPEND_LIVE;
+-    dss->debug = flags & LIBXL_SUSPEND_DEBUG;
++    dss->live = props->flags & LIBXL_SUSPEND_LIVE;
++    dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
+     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
+ 
+     rc = libxl__fd_flags_modify_save(gc, dss->fd,
+diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
+index 352a00134d..eaf7bce35a 100644
+--- a/tools/ocaml/libs/xl/xenlight_stubs.c
++++ b/tools/ocaml/libs/xl/xenlight_stubs.c
+@@ -614,10 +614,11 @@ value stub_libxl_domain_suspend(value ctx, value domid, value fd, value async, v
+ 	int ret;
+ 	uint32_t c_domid = Int_val(domid);
+ 	int c_fd = Int_val(fd);
++    libxl_domain_suspend_props props = {};
+ 	libxl_asyncop_how *ao_how = aohow_val(async);
+ 
+ 	caml_enter_blocking_section();
+-	ret = libxl_domain_suspend(CTX, c_domid, c_fd, 0, ao_how);
++	ret = libxl_domain_suspend(CTX, c_domid, c_fd, &props, ao_how);
+ 	caml_leave_blocking_section();
+ 
+ 	free(ao_how);
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..144890924f 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -186,7 +186,10 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     char *away_domname;
+     char rc_buf;
+     uint8_t *config_data;
+-    int config_len, flags = LIBXL_SUSPEND_LIVE;
++    int config_len;
++    libxl_domain_suspend_props props = {
++        .flags = LIBXL_SUSPEND_LIVE,
++        };
+ 
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+                            &config_data, &config_len);
+@@ -205,8 +208,8 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     xtl_stdiostream_adjust_flags(logger, XTL_STDIOSTREAM_HIDE_PROGRESS, 0);
+ 
+     if (debug)
+-        flags |= LIBXL_SUSPEND_DEBUG;
+-    rc = libxl_domain_suspend(ctx, domid, send_fd, flags, NULL);
++        props.flags |= LIBXL_SUSPEND_DEBUG;
++    rc = libxl_domain_suspend(ctx, domid, send_fd, &props, NULL);
+     if (rc) {
+         fprintf(stderr, "migration sender: libxl_domain_suspend failed"
+                 " (rc=%d)\n", rc);
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..476d4d9a6a 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -130,6 +130,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
+     int fd;
+     uint8_t *config_data;
+     int config_len;
++    libxl_domain_suspend_props props = {};
+ 
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+                            &config_data, &config_len);
+@@ -146,7 +147,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
+ 
+     save_domain_core_writeconfig(fd, filename, config_data, config_len);
+ 
+-    int rc = libxl_domain_suspend(ctx, domid, fd, 0, NULL);
++    int rc = libxl_domain_suspend(ctx, domid, fd, &props, NULL);
+     close(fd);
+ 
+     if (rc < 0) {
 
