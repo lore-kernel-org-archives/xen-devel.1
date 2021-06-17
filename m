@@ -2,47 +2,47 @@ Return-Path: <SRS0=2i39=LL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52A26C2B9F4
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jun 2021 19:40:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5311DC2B9F4
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jun 2021 20:21:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE880610EA
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Jun 2021 19:40:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AE880610EA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eikelenboom.it
+	by mail.kernel.org (Postfix) with ESMTPS id 18000613E9
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Jun 2021 20:21:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18000613E9
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.144141.265375 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.144148.265385 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltxra-0002OM-Rp; Thu, 17 Jun 2021 19:39:42 +0000
+	id 1ltyVO-00078c-UP; Thu, 17 Jun 2021 20:20:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 144141.265375; Thu, 17 Jun 2021 19:39:42 +0000
+Received: by outflank-mailman (output) from mailman id 144148.265385; Thu, 17 Jun 2021 20:20:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ltxra-0002OF-Mi; Thu, 17 Jun 2021 19:39:42 +0000
-Received: by outflank-mailman (input) for mailman id 144141;
- Thu, 17 Jun 2021 19:39:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iG+e=LL=eikelenboom.it=linux@srs-us1.protection.inumbo.net>)
- id 1ltxrY-0002O9-Tf
- for xen-devel@lists.xenproject.org; Thu, 17 Jun 2021 19:39:41 +0000
-Received: from server.eikelenboom.it (unknown [91.121.65.215])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dd1f1167-bd39-4a7d-a6eb-5326e84ce9ec;
- Thu, 17 Jun 2021 19:39:38 +0000 (UTC)
-Received: from 76-24-144-85.ftth.glasoperator.nl ([85.144.24.76]:51066
- helo=[172.16.1.50]) by server.eikelenboom.it with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <linux@eikelenboom.it>)
- id 1ltxw7-0006rg-RX; Thu, 17 Jun 2021 21:44:23 +0200
+	id 1ltyVO-00078V-Ra; Thu, 17 Jun 2021 20:20:50 +0000
+Received: by outflank-mailman (input) for mailman id 144148;
+ Thu, 17 Jun 2021 20:20:49 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ltyVN-00078L-Ti; Thu, 17 Jun 2021 20:20:49 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ltyVN-0000pY-ME; Thu, 17 Jun 2021 20:20:49 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ltyVN-0003dx-CT; Thu, 17 Jun 2021 20:20:49 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1ltyVN-0005I3-Bz; Thu, 17 Jun 2021 20:20:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,138 +54,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd1f1167-bd39-4a7d-a6eb-5326e84ce9ec
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=eikelenboom.it; s=20180706; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:MIME-Version:Date:Message-ID:References:Cc:To:From:Subject:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=Zvi0Ng3xRNySrFis8ePYQIwCfqI+TS0n0phqz3c8npI=; b=Br73dsRjyQ56q3GU3RrX4ST7Y8
-	oIMz7snPlu63+pDbaayGm5uMJ9zB3cSkujAYMe65iqKBCcBVCuYl181yJf2ZLLufTSNNkfPY+O4Bf
-	GRnDgyivVtsHLODmpue38fHrfJOgg3E6ZndjVK6IRiDhKl1IyIGK/FdIUeaDKk54EFB8=;
-Subject: Re: Linux 5.13-rc6 regression to 5.12.x: kernel OOM and panic during
- kernel boot in low memory Xen VM's (256MB assigned memory).
-From: Sander Eikelenboom <linux@eikelenboom.it>
-To: Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Juergen Gross <jgross@suse.com>
-Cc: linux-kernel <linux-kernel@vger.kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <ee8bf04c-6e55-1d9b-7bdb-25e6108e8e1e@eikelenboom.it>
- <CAHk-=wjgg67NMBNG99naEQ1cM0mXBBzdhCJaYFH-kC+mLK+J2g@mail.gmail.com>
- <9108c22e-3521-9e24-6124-7776d947b788@rasmusvillemoes.dk>
- <0b12f27b-1109-b621-c969-10814b2c1c2f@eikelenboom.it>
-Message-ID: <7338064f-10b6-545d-bc6c-843d04aafe28@eikelenboom.it>
-Date: Thu, 17 Jun 2021 21:39:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=m4f164NFHcvrc2bYESCAtr4PHJeCM6YMw/27lvfI0B8=; b=2TfwbB9d4DUraFoRp9g9a0ezan
+	zjmptKxiC0LTgqMRyoHQei8/afo4KbXQK1WfO7Dui+BFdzXTWkEeHm9RRkfyapegVGIaZJso6BPTc
+	Imhl4SRNUrf/kv5SMchIAVhBk1j87tPQAI97UhK8h9IyZgVZ4C1ye4n0TvSIcI5aG7C4=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-162880-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <0b12f27b-1109-b621-c969-10814b2c1c2f@eikelenboom.it>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Subject: [xen-unstable-smoke test] 162880: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=8af4b47f061edf6450f2b0a0a8134fdf1c13b3e5
+X-Osstest-Versions-That:
+    xen=4bcf6433eed3d9cbc00865ec62380a33ca832dac
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 17 Jun 2021 20:20:49 +0000
 
-On 17/06/2021 20:02, Sander Eikelenboom wrote:
-> On 17/06/2021 17:37, Rasmus Villemoes wrote:
->> On 17/06/2021 17.01, Linus Torvalds wrote:
->>> On Thu, Jun 17, 2021 at 2:26 AM Sander Eikelenboom <linux@eikelenboom.it> wrote:
->>>>
->>>> I just tried to upgrade and test the linux kernel going from the 5.12 kernel series to 5.13-rc6 on my homeserver with Xen, but ran in some trouble.
->>>>
->>>> Some VM's boot fine (with more than 256MB memory assigned), but the smaller (memory wise) PVH ones crash during kernel boot due to OOM.
->>>> Booting VM's with 5.12(.9) kernel still works fine, also when dom0 is running 5.13-rc6 (but it has more memory assigned, so that is not unexpected).
->>>
->>> Adding Rasmus to the cc, because this looks kind of like the async
->>> roofs population thing that caused some other oom issues too.
->>
->> Yes, that looks like the same issue.
->>
->>> Rasmus? Original report here:
->>>
->>>      https://lore.kernel.org/lkml/ee8bf04c-6e55-1d9b-7bdb-25e6108e8e1e@eikelenboom.it/
->>>
->>> I do find it odd that we'd be running out of memory so early..
->>
->> Indeed. It would be nice to know if these also reproduce with
->> initramfs_async=0 on the command line.
->>
->> But what is even more curious is that in the other report
->> (https://lore.kernel.org/lkml/20210607144419.GA23706@xsang-OptiPlex-9020/),
->> it seemed to trigger with _more_ memory - though I may be misreading
->> what Oliver was telling me:
->>
->>> please be noted that we use 'vmalloc=512M' for both parent and this
->> commit.
->>> since it's ok on parent but oom on this commit, we want to send this
->> report
->>> to show the potential problem of the commit on some cases.
->>>
->>> we also tested by changing to use 'vmalloc=128M', it will succeed.
->>
->> Those tests were done in a VM with 16G memory, and then he also wrote
->>
->>> we also tried to follow exactly above steps to test on
->>> some local machine (8G memory), but cannot reproduce.
->>
->> Are there some special rules for what memory pools PID1 versus the
->> kworker threads can dip into?
->>
->>
->> Side note: I also had a ppc64 report with different symptoms (the
->> initramfs was corrupted), but that turned out to also reproduce with
->> e7cb072eb98 reverted, so that is likely unrelated. But just FTR that
->> thread is here:
->> https://lore.kernel.org/lkml/CA+QYu4qxf2CYe2gC6EYnOHXPKS-+cEXL=MnUvqRFaN7W1i6ahQ@mail.gmail.com/
->>
->> Rasmus
->>
-> 
-> I choose to first finish the bisection attempt, not so suprising it ends up with:
-> e7cb072eb988e46295512617c39d004f9e1c26f8 is the first bad commit
-> 
-> So at least that link is confirmed.
-> 
-> I also checked out booting with "initramfs_async=0" and now the guest boots with the 5.13-rc6-ish kernel which fails without that.
-> 
-> --
-> Sander
-> 
+flight 162880 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162880/
 
-CC'ed Juergen.
+Failures :-/ but no regressions.
 
-Juergen, do you know how the direct kernel boot works and if that could interfere
-with this commit ?
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-After reading the last part of the commit message e7cb072eb98 namely:
+version targeted for testing:
+ xen                  8af4b47f061edf6450f2b0a0a8134fdf1c13b3e5
+baseline version:
+ xen                  4bcf6433eed3d9cbc00865ec62380a33ca832dac
 
-     Should one of the initcalls done after rootfs_initcall time (i.e., device_
-     and late_ initcalls) need something from the initramfs (say, a kernel
-     module or a firmware blob), it will simply wait for the initramfs
-     unpacking to be done before proceeding, which should in theory make this
-     completely safe.
-     
-     But if some driver pokes around in the filesystem directly and not via one
-     of the official kernel interfaces (i.e.  request_firmware*(),
-     call_usermodehelper*) that theory may not hold - also, I certainly might
-     have missed a spot when sprinkling wait_for_initramfs().  So there is an
-     escape hatch in the form of an initramfs_async= command line parameter.
+Last test of basis   162848  2021-06-15 21:01:36 Z    1 days
+Testing same since   162880  2021-06-17 17:00:36 Z    0 days    1 attempts
 
-It dawned on me I'm using "direct kernel boot" functionality, which lets you boot a guest
-were the kernel and initramfs get copied in from dom0, that works great, but perhaps it
-pokes around as the last part of the commit message warns about ?
+------------------------------------------------------------
+People who touched revisions under test:
+  Roger Pau Monné <roger.pau@citrix.com>
 
-(I think the feature was called "direct kernel boot", what I mean is using the for example:
-     kernel      = '/boot/vmlinuz-5.13.0-rc6-20210617-doflr-mac80211debug+'
-     ramdisk     = '/boot/initrd.img-5.13.0-rc6-20210617-doflr-mac80211debug+'
-     cmdline     = 'root=UUID=2f757320-caca-4215-868d-73a4aacf12aa ro nomodeset xen_blkfront.max_ring_page_order=1 console=hvc0 earlyprintk=xen initramfs_async=0'
-
-options in the xen guest config file to boot the (in this case PVH) guest.
-)
-
---
-Sander
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
 
 
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   4bcf6433ee..8af4b47f06  8af4b47f061edf6450f2b0a0a8134fdf1c13b3e5 -> smoke
 
