@@ -7,43 +7,42 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27A17C48BE5
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Jun 2021 03:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6736FC49EA3
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Jun 2021 03:41:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CFF4F61184
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Jun 2021 03:41:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFF4F61184
+	by mail.kernel.org (Postfix) with ESMTPS id 22A0661184
+	for <xen-devel@archiver.kernel.org>; Sat, 19 Jun 2021 03:41:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22A0661184
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.145026.266864 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.145033.266886 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1luRr1-00014C-1d; Sat, 19 Jun 2021 03:41:07 +0000
+	id 1luRrI-0001yQ-LH; Sat, 19 Jun 2021 03:41:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 145026.266864; Sat, 19 Jun 2021 03:41:07 +0000
+Received: by outflank-mailman (output) from mailman id 145033.266886; Sat, 19 Jun 2021 03:41:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1luRr0-000145-UZ; Sat, 19 Jun 2021 03:41:06 +0000
-Received: by outflank-mailman (input) for mailman id 145026;
- Sat, 19 Jun 2021 03:41:05 +0000
+	id 1luRrI-0001yF-Gt; Sat, 19 Jun 2021 03:41:24 +0000
+Received: by outflank-mailman (input) for mailman id 145033;
+ Sat, 19 Jun 2021 03:41:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Oaj8=LN=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
- id 1luRqz-00013X-1J
- for xen-devel@lists.xenproject.org; Sat, 19 Jun 2021 03:41:05 +0000
-Received: from mail-pj1-x1030.google.com (unknown [2607:f8b0:4864:20::1030])
+ id 1luRrH-0001Ok-D4
+ for xen-devel@lists.xenproject.org; Sat, 19 Jun 2021 03:41:23 +0000
+Received: from mail-pf1-x429.google.com (unknown [2607:f8b0:4864:20::429])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c1ebcd3b-bcac-455e-b3bc-6f813f2e8d5a;
- Sat, 19 Jun 2021 03:41:04 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id
- z3-20020a17090a3983b029016bc232e40bso7029723pjb.4
- for <xen-devel@lists.xenproject.org>; Fri, 18 Jun 2021 20:41:04 -0700 (PDT)
+ id c87204bf-8d78-4697-8b0c-c4888a738812;
+ Sat, 19 Jun 2021 03:41:21 +0000 (UTC)
+Received: by mail-pf1-x429.google.com with SMTP id x73so9202135pfc.8
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Jun 2021 20:41:21 -0700 (PDT)
 Received: from localhost ([2401:fa00:95:205:4a46:e208:29e8:e076])
- by smtp.gmail.com with UTF8SMTPSA id v15sm10722584pgf.26.2021.06.18.20.40.55
+ by smtp.gmail.com with UTF8SMTPSA id w8sm10652886pgf.81.2021.06.18.20.41.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Jun 2021 20:41:02 -0700 (PDT)
+ Fri, 18 Jun 2021 20:41:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,31 +54,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1ebcd3b-bcac-455e-b3bc-6f813f2e8d5a
+X-Inumbo-ID: c87204bf-8d78-4697-8b0c-c4888a738812
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=omy6cCV/mqNeN2Sml+g2G3v+YRTOPwPuj3rsSOaGbf8=;
-        b=I5TZjmCgnGS7QCzs+GcKzND2zopF611oSqEk2ecm02oxJXrYZUgoQDr2D20q350b//
-         QYtNYWxqxTTaqABZudTjO+NdWbPCAL6S986A1o51hT/KC6Y6jv56Aec5CbBEKD54AZvh
-         ONSLv3o8P/DZRDHIEq/KTzFADPEWg4DUzfKuQ=
+        bh=+yhAgwjq5z1dAtXH3bS6halUgnpsXrGer7IGToK2ifg=;
+        b=LUdmghaaazqKba1aLn04PfMlpRzk0BOMm/oE/2uT5oGK/4M/pLpeKNZ/XhE8AOCxT6
+         DdLBVhPVTM8zRaiAVOx71WwL1fVRW31Q+t9OixeH0FKnoqxhnrXmYUW3XL7vbfEoJ9zk
+         yTjNLO8fmwuJgRViIKfsMx70t7sOnNzESCzr0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=omy6cCV/mqNeN2Sml+g2G3v+YRTOPwPuj3rsSOaGbf8=;
-        b=V6UR2zUIWktPsDGIP7o4kkSQ6MEnKCkDBt1tkXatOKuDFp2tTRdRjGdURYngjCZh7Z
-         bhpeL8xVbp5AxXwrnbeYcGuTZqTmB5ObyoKJGDvyccruXz9Z2H5rY3qbmWMJdAsqhJ32
-         zxdFLKb0ixDIUaRx6tdfkuSO5ZCU4OlcoV6rOfRNgfB4m4Dc+xOD4rXHkhY7e6tyTzQG
-         SvLa0I/vuK2mNn4a2O/GIYQVJFpgK2tNphQVVQ8CCChIFgcurgx0qi98bVtsvJdj90zM
-         VSDKoxXrrQFmuvvEZ3IyWtE7r9y2h+k7w+v1oArKCat/jPsDS4uprZAwRKWkOS4bE4br
-         bMbw==
-X-Gm-Message-State: AOAM533OtYtFOj1Jc16fXD2vOEFIMRgr8UXJRXUrAKIbJGBzHbgXPB/n
-	8IcoXg36I2vJvkmXZx0csZgRGg==
-X-Google-Smtp-Source: ABdhPJxyHWTN70AeFSyU8U3sk1NtIzEKCT9EWu4JIVK1vqFXvWavgzlnfDikinONTGDBOm/HI5iFZg==
-X-Received: by 2002:a17:90a:3c8d:: with SMTP id g13mr7572126pjc.229.1624074063342;
-        Fri, 18 Jun 2021 20:41:03 -0700 (PDT)
+        bh=+yhAgwjq5z1dAtXH3bS6halUgnpsXrGer7IGToK2ifg=;
+        b=sAsIhEeJnWeVnfT6HeuCQRTZYsA7iHJvgWYKXw1jpzMRqvYU5dQCMFWm7pjuPzdUE8
+         thJ+FXOPk9fKqLu3Pbdx+up7U8tqfc1YIuin8vgfhOEJuxjFzLPwKLztvSjpT1FwKC7b
+         rKfcUDSLF0VHLwngZ2HHK8Kfoa96j+pf7ItDNLSaJLvHApGW1/iOgrbabk4XQRpY2eVd
+         lR0Lj1HLvA7T8EKky29lKpWRTYjhsJBGctszD7bEqxJsVq+0vEVq1mtCqKq2xlzYjJ9K
+         UsyLKWa9latnUAj5BBekBSobz2ZRNJNT8DqWha80D2WQf/Ztvxmku6rxSGxwdKpfnoTw
+         4qsA==
+X-Gm-Message-State: AOAM531cs5YbFOMw2TGhFpvLy6xsR915q0bLtN3Y1rTuOvemx44BmFeI
+	unEsqrTKxCMYyRg2HdG9qKmpHQ==
+X-Google-Smtp-Source: ABdhPJw3C1XOZjkgf0B8Yi3ZxQ9pW8ObuiE6ObvPA0Nzzbh696ZvPaWqhtVMAuHHTXvq5xv83a5dDQ==
+X-Received: by 2002:a63:1b54:: with SMTP id b20mr12910328pgm.151.1624074080668;
+        Fri, 18 Jun 2021 20:41:20 -0700 (PDT)
 From: Claire Chang <tientzu@chromium.org>
 To: Rob Herring <robh+dt@kernel.org>,
 	mpe@ellerman.id.au,
@@ -134,112 +133,113 @@ Cc: benh@kernel.crashing.org,
 	rodrigo.vivi@intel.com,
 	thomas.hellstrom@linux.intel.com,
 	thomas.lendacky@amd.com
-Subject: [PATCH v14 01/12] swiotlb: Refactor swiotlb init functions
-Date: Sat, 19 Jun 2021 11:40:32 +0800
-Message-Id: <20210619034043.199220-2-tientzu@chromium.org>
+Subject: [PATCH v14 03/12] swiotlb: Set dev->dma_io_tlb_mem to the swiotlb pool used
+Date: Sat, 19 Jun 2021 11:40:34 +0800
+Message-Id: <20210619034043.199220-4-tientzu@chromium.org>
 X-Mailer: git-send-email 2.32.0.288.g62a8d224e6-goog
 In-Reply-To: <20210619034043.199220-1-tientzu@chromium.org>
 References: <20210619034043.199220-1-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new function, swiotlb_init_io_tlb_mem, for the io_tlb_mem struct
-initialization to make the code reusable.
+Always have the pointer to the swiotlb pool used in struct device. This
+could help simplify the code for other pools.
 
 Signed-off-by: Claire Chang <tientzu@chromium.org>
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 Tested-by: Stefano Stabellini <sstabellini@kernel.org>
 Tested-by: Will Deacon <will@kernel.org>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
- kernel/dma/swiotlb.c | 50 ++++++++++++++++++++++----------------------
- 1 file changed, 25 insertions(+), 25 deletions(-)
+ drivers/base/core.c    | 4 ++++
+ include/linux/device.h | 4 ++++
+ kernel/dma/swiotlb.c   | 8 ++++----
+ 3 files changed, 12 insertions(+), 4 deletions(-)
 
+diff --git a/drivers/base/core.c b/drivers/base/core.c
+index f29839382f81..cb3123e3954d 100644
+--- a/drivers/base/core.c
++++ b/drivers/base/core.c
+@@ -27,6 +27,7 @@
+ #include <linux/netdevice.h>
+ #include <linux/sched/signal.h>
+ #include <linux/sched/mm.h>
++#include <linux/swiotlb.h>
+ #include <linux/sysfs.h>
+ #include <linux/dma-map-ops.h> /* for dma_default_coherent */
+ 
+@@ -2736,6 +2737,9 @@ void device_initialize(struct device *dev)
+     defined(CONFIG_ARCH_HAS_SYNC_DMA_FOR_CPU_ALL)
+ 	dev->dma_coherent = dma_default_coherent;
+ #endif
++#ifdef CONFIG_SWIOTLB
++	dev->dma_io_tlb_mem = io_tlb_default_mem;
++#endif
+ }
+ EXPORT_SYMBOL_GPL(device_initialize);
+ 
+diff --git a/include/linux/device.h b/include/linux/device.h
+index ba660731bd25..240d652a0696 100644
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -416,6 +416,7 @@ struct dev_links_info {
+  * @dma_pools:	Dma pools (if dma'ble device).
+  * @dma_mem:	Internal for coherent mem override.
+  * @cma_area:	Contiguous memory area for dma allocations
++ * @dma_io_tlb_mem: Pointer to the swiotlb pool used.  Not for driver use.
+  * @archdata:	For arch-specific additions.
+  * @of_node:	Associated device tree node.
+  * @fwnode:	Associated device node supplied by platform firmware.
+@@ -518,6 +519,9 @@ struct device {
+ #ifdef CONFIG_DMA_CMA
+ 	struct cma *cma_area;		/* contiguous memory area for dma
+ 					   allocations */
++#endif
++#ifdef CONFIG_SWIOTLB
++	struct io_tlb_mem *dma_io_tlb_mem;
+ #endif
+ 	/* arch specific additions */
+ 	struct dev_archdata	archdata;
 diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 52e2ac526757..1f9b2b9e7490 100644
+index ede66df6835b..72a4289faed1 100644
 --- a/kernel/dma/swiotlb.c
 +++ b/kernel/dma/swiotlb.c
-@@ -168,9 +168,28 @@ void __init swiotlb_update_mem_attributes(void)
- 	memset(vaddr, 0, bytes);
- }
- 
--int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
-+static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
-+				    unsigned long nslabs, bool late_alloc)
+@@ -340,7 +340,7 @@ void __init swiotlb_exit(void)
+ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size,
+ 			   enum dma_data_direction dir)
  {
-+	void *vaddr = phys_to_virt(start);
- 	unsigned long bytes = nslabs << IO_TLB_SHIFT, i;
-+
-+	mem->nslabs = nslabs;
-+	mem->start = start;
-+	mem->end = mem->start + bytes;
-+	mem->index = 0;
-+	mem->late_alloc = late_alloc;
-+	spin_lock_init(&mem->lock);
-+	for (i = 0; i < mem->nslabs; i++) {
-+		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
-+		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
-+		mem->slots[i].alloc_size = 0;
-+	}
-+	memset(vaddr, 0, bytes);
-+}
-+
-+int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
-+{
- 	struct io_tlb_mem *mem;
- 	size_t alloc_size;
- 
-@@ -186,16 +205,8 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- 	if (!mem)
- 		panic("%s: Failed to allocate %zu bytes align=0x%lx\n",
- 		      __func__, alloc_size, PAGE_SIZE);
--	mem->nslabs = nslabs;
--	mem->start = __pa(tlb);
--	mem->end = mem->start + bytes;
--	mem->index = 0;
--	spin_lock_init(&mem->lock);
--	for (i = 0; i < mem->nslabs; i++) {
--		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
--		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
--		mem->slots[i].alloc_size = 0;
--	}
-+
-+	swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
- 
- 	io_tlb_default_mem = mem;
- 	if (verbose)
-@@ -282,8 +293,8 @@ swiotlb_late_init_with_default_size(size_t default_size)
- int
- swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
+-	struct io_tlb_mem *mem = io_tlb_default_mem;
++	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+ 	int index = (tlb_addr - mem->start) >> IO_TLB_SHIFT;
+ 	unsigned int offset = (tlb_addr - mem->start) & (IO_TLB_SIZE - 1);
+ 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
+@@ -431,7 +431,7 @@ static unsigned int wrap_index(struct io_tlb_mem *mem, unsigned int index)
+ static int find_slots(struct device *dev, phys_addr_t orig_addr,
+ 		size_t alloc_size)
  {
--	unsigned long bytes = nslabs << IO_TLB_SHIFT, i;
- 	struct io_tlb_mem *mem;
-+	unsigned long bytes = nslabs << IO_TLB_SHIFT;
- 
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -297,20 +308,9 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- 	if (!mem)
- 		return -ENOMEM;
- 
--	mem->nslabs = nslabs;
--	mem->start = virt_to_phys(tlb);
--	mem->end = mem->start + bytes;
--	mem->index = 0;
--	mem->late_alloc = 1;
--	spin_lock_init(&mem->lock);
--	for (i = 0; i < mem->nslabs; i++) {
--		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
--		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
--		mem->slots[i].alloc_size = 0;
--	}
--
-+	memset(mem, 0, sizeof(*mem));
- 	set_memory_decrypted((unsigned long)tlb, bytes >> PAGE_SHIFT);
--	memset(tlb, 0, bytes);
-+	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
- 
- 	io_tlb_default_mem = mem;
- 	swiotlb_print_info();
+-	struct io_tlb_mem *mem = io_tlb_default_mem;
++	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+ 	unsigned long boundary_mask = dma_get_seg_boundary(dev);
+ 	dma_addr_t tbl_dma_addr =
+ 		phys_to_dma_unencrypted(dev, mem->start) & boundary_mask;
+@@ -508,7 +508,7 @@ phys_addr_t swiotlb_tbl_map_single(struct device *dev, phys_addr_t orig_addr,
+ 		size_t mapping_size, size_t alloc_size,
+ 		enum dma_data_direction dir, unsigned long attrs)
+ {
+-	struct io_tlb_mem *mem = io_tlb_default_mem;
++	struct io_tlb_mem *mem = dev->dma_io_tlb_mem;
+ 	unsigned int offset = swiotlb_align_offset(dev, orig_addr);
+ 	unsigned int i;
+ 	int index;
+@@ -559,7 +559,7 @@ void swiotlb_tbl_unmap_single(struct device *hwdev, phys_addr_t tlb_addr,
+ 			      size_t mapping_size, enum dma_data_direction dir,
+ 			      unsigned long attrs)
+ {
+-	struct io_tlb_mem *mem = io_tlb_default_mem;
++	struct io_tlb_mem *mem = hwdev->dma_io_tlb_mem;
+ 	unsigned long flags;
+ 	unsigned int offset = swiotlb_align_offset(hwdev, tlb_addr);
+ 	int index = (tlb_addr - offset - mem->start) >> IO_TLB_SHIFT;
 -- 
 2.32.0.288.g62a8d224e6-goog
 
