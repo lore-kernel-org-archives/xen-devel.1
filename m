@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCBDAC2B9F4
-	for <xen-devel@archiver.kernel.org>; Sun, 20 Jun 2021 00:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A8EDC48BDF
+	for <xen-devel@archiver.kernel.org>; Sun, 20 Jun 2021 06:05:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4DAA261183
-	for <xen-devel@archiver.kernel.org>; Sun, 20 Jun 2021 00:08:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4DAA261183
+	by mail.kernel.org (Postfix) with ESMTPS id AA5DB61042
+	for <xen-devel@archiver.kernel.org>; Sun, 20 Jun 2021 06:05:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA5DB61042
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.145165.267081 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.145177.267104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lul0J-0003Ce-TI; Sun, 20 Jun 2021 00:07:59 +0000
+	id 1luqZp-000129-AY; Sun, 20 Jun 2021 06:05:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 145165.267081; Sun, 20 Jun 2021 00:07:59 +0000
+Received: by outflank-mailman (output) from mailman id 145177.267104; Sun, 20 Jun 2021 06:05:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lul0J-0003CX-Q2; Sun, 20 Jun 2021 00:07:59 +0000
-Received: by outflank-mailman (input) for mailman id 145165;
- Sun, 20 Jun 2021 00:07:58 +0000
+	id 1luqZp-000121-4r; Sun, 20 Jun 2021 06:05:01 +0000
+Received: by outflank-mailman (input) for mailman id 145177;
+ Sun, 20 Jun 2021 06:04:59 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lul0I-0003CN-BE; Sun, 20 Jun 2021 00:07:58 +0000
+ id 1luqZn-00011r-2e; Sun, 20 Jun 2021 06:04:59 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lul0H-0002kW-S2; Sun, 20 Jun 2021 00:07:57 +0000
+ id 1luqZm-0007yd-TW; Sun, 20 Jun 2021 06:04:58 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lul0H-0001wp-IF; Sun, 20 Jun 2021 00:07:57 +0000
+ id 1luqZm-0001Dx-HY; Sun, 20 Jun 2021 06:04:58 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lul0H-0001pJ-Hk; Sun, 20 Jun 2021 00:07:57 +0000
+ id 1luqZm-0003Ny-H1; Sun, 20 Jun 2021 06:04:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,48 +58,64 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=31qRUpCf7+nL20gEzoITmnh1ERknlB1XbPFOK8sFPfI=; b=JpTVn5nZXNNVnLjrUiYdsWNKf/
-	3bmadjEhPZNriouY0Y5DKklqDKv9PMW5owF1lmZsuMHBQgKKqD5fNLWLdwHqtM+q5Ss9Et7BcPSZa
-	D8oc51c8n4syBWG8xFaDidfNboyq1HbcUayFOVGC+B7U9hHbV6HYmuNYS6mEkHllOfsU=;
+	bh=PmgFa5Toz8AQjAznzMZwSBtw30DpQBEj4jYV8kyOsF4=; b=kQMbGYksOaTMhQJSF7CK0OCM6g
+	iYGjDaXAFs7ccY2U9GLroL0kj0WsieZfsUCtwuSjxQRPXyc5NOVs2uKve4YYidBv7RDKRQ3OfIAc1
+	+tT1Tp2AiMuO8HtYpnSiIgCzJUmhiJ10Jq8c/RXczme8D3SxnRgJKm5IcPWHAAkKOELs=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-162900-mainreport@xen.org>
+Message-ID: <osstest-162902-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 162900: trouble: blocked/broken/pass
+Subject: [ovmf test] 162902: trouble: blocked/broken
 X-Osstest-Failures:
+    ovmf:build-amd64:<job status>:broken:regression
+    ovmf:build-amd64-pvops:<job status>:broken:regression
+    ovmf:build-amd64-xsm:<job status>:broken:regression
     ovmf:build-i386:<job status>:broken:regression
     ovmf:build-i386-pvops:<job status>:broken:regression
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:<job status>:broken:regression
-    ovmf:build-i386:host-install(4):broken:regression
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:host-install(5):broken:regression
+    ovmf:build-i386-xsm:<job status>:broken:regression
     ovmf:build-i386-pvops:host-install(4):broken:regression
+    ovmf:build-i386:host-install(4):broken:regression
+    ovmf:build-i386-xsm:host-install(4):broken:regression
+    ovmf:build-amd64:host-install(4):broken:regression
+    ovmf:build-amd64-pvops:host-install(4):broken:regression
+    ovmf:build-amd64-xsm:host-install(4):broken:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
     ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
     ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
 X-Osstest-Versions-This:
     ovmf=a63914d3f603580e5aeceb5edbafe56688210141
 X-Osstest-Versions-That:
     ovmf=c410ad4da4b7785170d3d42a3ba190c2caac6feb
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 20 Jun 2021 00:07:57 +0000
+Date: Sun, 20 Jun 2021 06:04:58 +0000
 
-flight 162900 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/162900/
+flight 162902 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/162902/
 
 Failures and problems with tests :-(
 
 Tests which did not succeed and are blocking,
 including tests which could not be run:
+ build-amd64                     <job status>                 broken
+ build-amd64-pvops               <job status>                 broken
+ build-amd64-xsm                 <job status>                 broken
  build-i386                      <job status>                 broken
  build-i386-pvops                <job status>                 broken
- test-amd64-amd64-xl-qemuu-ovmf-amd64    <job status>                 broken
- build-i386                    4 host-install(4)        broken REGR. vs. 162359
- test-amd64-amd64-xl-qemuu-ovmf-amd64 5 host-install(5) broken REGR. vs. 162359
+ build-i386-xsm                  <job status>                 broken
  build-i386-pvops              4 host-install(4)        broken REGR. vs. 162359
+ build-i386                    4 host-install(4)        broken REGR. vs. 162359
+ build-i386-xsm                4 host-install(4)        broken REGR. vs. 162359
+ build-amd64                   4 host-install(4)        broken REGR. vs. 162359
+ build-amd64-pvops             4 host-install(4)        broken REGR. vs. 162359
+ build-amd64-xsm               4 host-install(4)        broken REGR. vs. 162359
 
 Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
  build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
  test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
 version targeted for testing:
@@ -107,9 +123,9 @@ version targeted for testing:
 baseline version:
  ovmf                 c410ad4da4b7785170d3d42a3ba190c2caac6feb
 
-Last test of basis   162359  2021-06-04 03:40:08 Z   15 days
-Failing since        162368  2021-06-04 15:42:59 Z   15 days   33 attempts
-Testing same since   162900  2021-06-19 07:19:12 Z    0 days    1 attempts
+Last test of basis   162359  2021-06-04 03:40:08 Z   16 days
+Failing since        162368  2021-06-04 15:42:59 Z   15 days   34 attempts
+Testing same since   162900  2021-06-19 07:19:12 Z    0 days    2 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -134,15 +150,15 @@ People who touched revisions under test:
   Zhiguang Liu <zhiguang.liu@intel.com>
 
 jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
+ build-amd64-xsm                                              broken  
+ build-i386-xsm                                               broken  
+ build-amd64                                                  broken  
  build-i386                                                   broken  
- build-amd64-libvirt                                          pass    
+ build-amd64-libvirt                                          blocked 
  build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
+ build-amd64-pvops                                            broken  
  build-i386-pvops                                             broken  
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         broken  
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
  test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
 
 
@@ -161,12 +177,18 @@ Explanation of these reports, and of osstest in general, is at
 Test harness code can be found at
     http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
+broken-job build-amd64 broken
+broken-job build-amd64-pvops broken
+broken-job build-amd64-xsm broken
 broken-job build-i386 broken
 broken-job build-i386-pvops broken
-broken-job test-amd64-amd64-xl-qemuu-ovmf-amd64 broken
-broken-step build-i386 host-install(4)
-broken-step test-amd64-amd64-xl-qemuu-ovmf-amd64 host-install(5)
+broken-job build-i386-xsm broken
 broken-step build-i386-pvops host-install(4)
+broken-step build-i386 host-install(4)
+broken-step build-i386-xsm host-install(4)
+broken-step build-amd64 host-install(4)
+broken-step build-amd64-pvops host-install(4)
+broken-step build-amd64-xsm host-install(4)
 
 Not pushing.
 
