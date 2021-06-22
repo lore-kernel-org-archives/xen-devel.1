@@ -7,44 +7,44 @@ X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83FECC48BDF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D569DC49EA2
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 09:45:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4464461026
+	by mail.kernel.org (Postfix) with ESMTPS id 8451661353
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 09:45:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4464461026
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8451661353
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.145790.268144 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.145793.268150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lvcxr-0002QV-1W; Tue, 22 Jun 2021 09:45:03 +0000
+	id 1lvcxr-0002TX-C5; Tue, 22 Jun 2021 09:45:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 145790.268144; Tue, 22 Jun 2021 09:45:03 +0000
+Received: by outflank-mailman (output) from mailman id 145793.268150; Tue, 22 Jun 2021 09:45:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lvcxq-0002QO-Ul; Tue, 22 Jun 2021 09:45:02 +0000
-Received: by outflank-mailman (input) for mailman id 145790;
- Tue, 22 Jun 2021 09:38:52 +0000
+	id 1lvcxr-0002Sa-5z; Tue, 22 Jun 2021 09:45:03 +0000
+Received: by outflank-mailman (input) for mailman id 145793;
+ Tue, 22 Jun 2021 09:43:27 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vYqY=LQ=intel.com=lingshan.zhu@srs-us1.protection.inumbo.net>)
- id 1lvcrs-0001c3-8g
- for xen-devel@lists.xenproject.org; Tue, 22 Jun 2021 09:38:52 +0000
+ id 1lvcwJ-0002Ou-3X
+ for xen-devel@lists.xenproject.org; Tue, 22 Jun 2021 09:43:27 +0000
 Received: from mga09.intel.com (unknown [134.134.136.24])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dd10bab4-da0c-4e9e-b681-c0e2cc166455;
- Tue, 22 Jun 2021 09:38:48 +0000 (UTC)
+ id 99b49689-23d4-4200-bbf8-82762d7e0451;
+ Tue, 22 Jun 2021 09:43:24 +0000 (UTC)
 Received: from fmsmga005.fm.intel.com ([10.253.24.32])
  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jun 2021 02:38:41 -0700
+ 22 Jun 2021 02:43:23 -0700
 Received: from vmm_a4_icx.sh.intel.com (HELO localhost.localdomain)
  ([10.239.53.245])
  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Jun 2021 02:38:37 -0700
+ 22 Jun 2021 02:43:17 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,19 +56,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd10bab4-da0c-4e9e-b681-c0e2cc166455
-IronPort-SDR: WPCN1YEWpq5MG15nMM/dYxBBowaDGo7G+G0/cusFM3LhlBXHojBu4V4Y5841JRXsnLysxJF7sT
- MbRMQlPKuQuw==
-X-IronPort-AV: E=McAfee;i="6200,9189,10022"; a="206964821"
+X-Inumbo-ID: 99b49689-23d4-4200-bbf8-82762d7e0451
+IronPort-SDR: u9i8JCbWldif/bC6AokQBV/cZ3NR1mmL50esS0L2nvnjMXJUj35kmfday8Vq8N94nPWul15Q3V
+ ywv0f4JAnWzg==
+X-IronPort-AV: E=McAfee;i="6200,9189,10022"; a="206965396"
 X-IronPort-AV: E=Sophos;i="5.83,291,1616482800"; 
-   d="scan'208";a="206964821"
-IronPort-SDR: YjghSkQQhfpqXchU5FmETDRBEKjg++NYbLVqNiZ3bX2P3p3aIdtsxEvlzAZ3khA29zw8feGTq5
- hSRTxjz0q+eg==
+   d="scan'208";a="206965396"
+IronPort-SDR: YT0UXablTbHFjVGOUphLdQZI3IoiFPL8yBc2UqJr8G7mpfASBqseVxlrWsQj5BcIMDyWLT+dx2
+ b78pMKFrVOjA==
 X-IronPort-AV: E=Sophos;i="5.83,291,1616482800"; 
-   d="scan'208";a="641599201"
+   d="scan'208";a="641600114"
 From: Zhu Lingshan <lingshan.zhu@intel.com>
-To: lingshan.zhu@live.com
-Cc: Like Xu <like.xu@linux.intel.com>,
+To: peterz@infradead.org,
+	pbonzini@redhat.com
+Cc: bp@alien8.de,
+	seanjc@google.com,
+	vkuznets@redhat.com,
+	wanpengli@tencent.com,
+	jmattson@google.com,
+	joro@8bytes.org,
+	weijiang.yang@intel.com,
+	kan.liang@linux.intel.com,
+	ak@linux.intel.com,
+	wei.w.wang@intel.com,
+	eranian@google.com,
+	liuxiangdong5@huawei.com,
+	linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	kvm@vger.kernel.org,
+	like.xu.linux@gmail.com,
+	Like Xu <like.xu@linux.intel.com>,
 	Will Deacon <will@kernel.org>,
 	Marc Zyngier <maz@kernel.org>,
 	Guo Ren <guoren@kernel.org>,
@@ -80,14 +97,13 @@ Cc: Like Xu <like.xu@linux.intel.com>,
 	linux-csky@vger.kernel.org,
 	linux-riscv@lists.infradead.org,
 	xen-devel@lists.xenproject.org,
-	Peter Zijlstra <peterz@infradead.org>,
 	Zhu Lingshan <lingshan.zhu@intel.com>
 Subject: [PATCH V7 01/18] perf/core: Use static_call to optimize perf_guest_info_callbacks
-Date: Tue, 22 Jun 2021 17:38:06 +0800
-Message-Id: <20210622093823.8215-2-lingshan.zhu@intel.com>
+Date: Tue, 22 Jun 2021 17:42:49 +0800
+Message-Id: <20210622094306.8336-2-lingshan.zhu@intel.com>
 X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210622093823.8215-1-lingshan.zhu@intel.com>
-References: <20210622093823.8215-1-lingshan.zhu@intel.com>
+In-Reply-To: <20210622094306.8336-1-lingshan.zhu@intel.com>
+References: <20210622094306.8336-1-lingshan.zhu@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
