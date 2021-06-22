@@ -2,45 +2,47 @@ Return-Path: <SRS0=fakL=LQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64F15C2B9F4
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 16:44:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEF66C49EA4
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 16:55:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 296F66128C
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 16:44:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 296F66128C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 91C4A6102A
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 16:55:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 91C4A6102A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ffwll.ch
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.145988.268542 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.145998.268555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lvjVK-0008Ep-4a; Tue, 22 Jun 2021 16:44:02 +0000
+	id 1lvjgW-0001PS-7w; Tue, 22 Jun 2021 16:55:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 145988.268542; Tue, 22 Jun 2021 16:44:02 +0000
+Received: by outflank-mailman (output) from mailman id 145998.268555; Tue, 22 Jun 2021 16:55:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lvjVK-0008Ei-1Y; Tue, 22 Jun 2021 16:44:02 +0000
-Received: by outflank-mailman (input) for mailman id 145988;
- Tue, 22 Jun 2021 16:44:01 +0000
+	id 1lvjgW-0001PL-4t; Tue, 22 Jun 2021 16:55:36 +0000
+Received: by outflank-mailman (input) for mailman id 145998;
+ Tue, 22 Jun 2021 16:55:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p8IA=LQ=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1lvjVJ-00088P-2m
- for xen-devel@lists.xenproject.org; Tue, 22 Jun 2021 16:44:01 +0000
-Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
+ <SRS0=bO1Q=LQ=ffwll.ch=daniel.vetter@srs-us1.protection.inumbo.net>)
+ id 1lvjgT-0001PF-Tl
+ for xen-devel@lists.xenproject.org; Tue, 22 Jun 2021 16:55:34 +0000
+Received: from mail-wr1-x432.google.com (unknown [2a00:1450:4864:20::432])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a53bc060-620b-4270-b905-69a87c3d67ba;
- Tue, 22 Jun 2021 16:43:56 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- o33-20020a05600c5121b02901e360c98c08so460669wms.5
- for <xen-devel@lists.xenproject.org>; Tue, 22 Jun 2021 09:43:56 -0700 (PDT)
+ id 07707264-9625-4264-856a-67d160a0b4b4;
+ Tue, 22 Jun 2021 16:55:32 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id f15so9044290wro.8
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Jun 2021 09:55:32 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id l23sm3632342wmc.5.2021.06.22.09.55.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Jun 2021 09:55:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,125 +54,273 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a53bc060-620b-4270-b905-69a87c3d67ba
+X-Inumbo-ID: 07707264-9625-4264-856a-67d160a0b4b4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=xLHrOk5OVDoI85ryDFnPzSJzc2ejQRiXSH+YDbiqsic=;
-        b=P/u+uaa/ptDfeKpbPc7mua+7ZWJnGEUpntNynLCH2A5RoZ9PIVT5SuERdlCFhvrnU2
-         QWOhDSnd0rY7xwoMCY+lZ+ENcwDmgzmxx8uR/XNViIqgCwuScrwecSYxNheZBxB+Z0GR
-         8/bAilMoaX6KXajBYcTOOG3pPGSdohlZM/dVyQB+EeilZWGo2Ajbkg0LVUft2CIwgNN0
-         mr9Liw9R+FtvE0Rn2Om3JS3Z3vhSZ/ZHONRxmo3jc8JaEfyFhc3ED33RDEgfHPSZcgz0
-         0SQecS1vsHHgOIRd4BnAjk4Guvb9FSWj3GbhMwwOpHvJhSK73r4wRAalxa0Q79+U2mgS
-         q12w==
+        d=ffwll.ch; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=b9Jdr4wtlOOCFldrnFk+zQMEf14dJEiyFw/3fjGC0jA=;
+        b=Df+8Oxx3Gx1nETy5Ci5Z78MEEXbbmKXn04S8kpH8fxaA3WGc7MUpF4hyIdZ4rL7Yr9
+         GFJXVc+kuPYqmtVY6trwYU2hBdMa6rqz2bUh1rvC8BM+79JDQGK97f2T+vvSqzWlrTxc
+         dUnCGNGzWkUB/ubYFJep4xlk9o9DrWfUpEfGU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=xLHrOk5OVDoI85ryDFnPzSJzc2ejQRiXSH+YDbiqsic=;
-        b=hHanrCG5GMK/dlt4OheZFa1usFSCvbO9AVVKKcYGKdJGWdmw3+pDmFqz7x5BS5J6Dh
-         oGJbWKE9hgHoxJWOYe+e5nQGZUg31uGT56Otx7lYqtDEwiO9P7OqSwbYfKR3jXU5YYXp
-         tmrL9dUhoOVgWwhb9lLr2yw+4U/HZQptOVR920GCGKL9pBEXVUeiSOGSA4EbWtkV+y5l
-         kKhxlhfdf3aUJ+2ZfUYee+jCfzrwugTdn7wKvFiFBEcHk+EtV+qnGIe+w0f0SL4Mz9n+
-         r2VlqPSVbfLdbg+cKi7r6OHQDR/Mz8tihQUpK5hWxNbbPwrqbD24tnHvAMXib8jSMnZp
-         7T0Q==
-X-Gm-Message-State: AOAM531uo2kanRybTYXEzbYzkyGUPBqSK3qw+2UPi9fcrZ4xlSjmHbvv
-	XEgvbh5kNJl9crlvS/j+WHfpZdDdUEaof7vC76I=
-X-Google-Smtp-Source: ABdhPJw9jRJxK3pjTQw0gOz0fE2qhZ6h6OXEaVm9yPI77UZXUmt1dD9bLmS7SnPCOWJRumkUC+h8CaW6y5Wv8dyK4eE=
-X-Received: by 2002:a05:600c:224a:: with SMTP id a10mr5576754wmm.154.1624380235589;
- Tue, 22 Jun 2021 09:43:55 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=b9Jdr4wtlOOCFldrnFk+zQMEf14dJEiyFw/3fjGC0jA=;
+        b=ddtdWUkGFpkz5OGGaX5sLNnk6IyBwRJBIiBF2jGLwaPoyeqUmIYR0d8fqlc5EinkAB
+         rYYY74otwqrmquDZEzdyixNHfO1pTHrPjwOpAFJ8Y0DpMquulZAHRzksUqVwOR/RuiX8
+         8vwc5sPtsmoGe1xUQiczEQJDOQPXOj5IsCoX/pGZ/GmEMI42zB7Jy3XsrxHxaOuAix+s
+         Ez9NFnHe23yMPIY9xwFFoeVtVlTZSn0cqhwmkWoFALXHy4qus6KE32Hd6n5d6hrdMU65
+         CODI618BuEle1MSlHIBFFgAqC7SCqsd3aGbQ68/bLR8WcjxdKrGTfjuxP71itTiWmcfD
+         4mrQ==
+X-Gm-Message-State: AOAM532qrzInn9vSRryr0t61qxtZhHZ6Wjq3f80mjIe2gpLPlqW1/nmr
+	jzk/dSlGBEH3PIaS0XklgIHMGA==
+X-Google-Smtp-Source: ABdhPJxRaQeu5zw+01KaYFtztrrwy3gdY+LcwVsX0y3odT09LLdZWhYYMbIKwOWFsIhlqUJAbbR8qw==
+X-Received: by 2002:a05:6000:188:: with SMTP id p8mr6123747wrx.296.1624380931724;
+        Tue, 22 Jun 2021 09:55:31 -0700 (PDT)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+	Daniel Vetter <daniel.vetter@ffwll.ch>,
+	David Lechner <david@lechnology.com>,
+	=?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Daniel Vetter <daniel.vetter@intel.com>,
+	Joel Stanley <joel@jms.id.au>,
+	Andrew Jeffery <andrew@aj.id.au>,
+	Emma Anholt <emma@anholt.net>,
+	Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Sam Ravnborg <sam@ravnborg.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	linux-aspeed@lists.ozlabs.org,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 13/15] drm/tiny: drm_gem_simple_display_pipe_prepare_fb is the default
+Date: Tue, 22 Jun 2021 18:55:09 +0200
+Message-Id: <20210622165511.3169559-14-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.32.0.rc2
+In-Reply-To: <20210622165511.3169559-1-daniel.vetter@ffwll.ch>
+References: <20210622165511.3169559-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-References: <CAHPMNWcQgUEvd7aYiNx1U+wphmuJr_Q8JXWw3mE812uN5hEARQ@mail.gmail.com>
- <CABfawhk4D+30_DX5cwYG-=SthQ=CXLRLL7VeXeVK48Oj0efn2Q@mail.gmail.com> <CAHPMNWd1QFYfbuPdEPZgwKrXE6dhi_X-bqZfPQj4zo4AioL81w@mail.gmail.com>
-In-Reply-To: <CAHPMNWd1QFYfbuPdEPZgwKrXE6dhi_X-bqZfPQj4zo4AioL81w@mail.gmail.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Tue, 22 Jun 2021 12:43:19 -0400
-Message-ID: <CABfawh=W92ioejsZ-zu+WVofw_jfxVLteVieC2Ysfxd3Wrs+Og@mail.gmail.com>
-Subject: Re: Windows 10 Kernel Debugging on Xen
-To: Neil Sikka <neilsikka@gmail.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-I used Xen 4.15 and a pretty new version of Windows 10. It is a bit
-finicky, you have to run the debug commands on the debugee and then
-reboot. When the VM is rebooting the domain ID changes so you have to
-start the serial bridge then. Windbg will attach afterwards. Just make
-sure both VMs have serial=3D'pty' set in their config file.
+Goes through all the drivers and deletes the default hook since it's
+the default now.
 
-Tamas
+Acked-by: David Lechner <david@lechnology.com>
+Acked-by: Noralf Trønnes <noralf@tronnes.org>
+Acked-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Acked-by: Linus Walleij <linus.walleij@linaro.org>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Joel Stanley <joel@jms.id.au>
+Cc: Andrew Jeffery <andrew@aj.id.au>
+Cc: "Noralf Trønnes" <noralf@tronnes.org>
+Cc: Linus Walleij <linus.walleij@linaro.org>
+Cc: Emma Anholt <emma@anholt.net>
+Cc: David Lechner <david@lechnology.com>
+Cc: Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: Maxime Ripard <mripard@kernel.org>
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
+Cc: Sam Ravnborg <sam@ravnborg.org>
+Cc: Alex Deucher <alexander.deucher@amd.com>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: linux-aspeed@lists.ozlabs.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: xen-devel@lists.xenproject.org
+---
+ drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c | 1 -
+ drivers/gpu/drm/gud/gud_drv.c            | 1 -
+ drivers/gpu/drm/mcde/mcde_display.c      | 1 -
+ drivers/gpu/drm/pl111/pl111_display.c    | 1 -
+ drivers/gpu/drm/tiny/hx8357d.c           | 1 -
+ drivers/gpu/drm/tiny/ili9225.c           | 1 -
+ drivers/gpu/drm/tiny/ili9341.c           | 1 -
+ drivers/gpu/drm/tiny/ili9486.c           | 1 -
+ drivers/gpu/drm/tiny/mi0283qt.c          | 1 -
+ drivers/gpu/drm/tiny/repaper.c           | 1 -
+ drivers/gpu/drm/tiny/st7586.c            | 1 -
+ drivers/gpu/drm/tiny/st7735r.c           | 1 -
+ drivers/gpu/drm/tve200/tve200_display.c  | 1 -
+ drivers/gpu/drm/xen/xen_drm_front_kms.c  | 1 -
+ 14 files changed, 14 deletions(-)
 
-On Tue, Jun 22, 2021 at 12:33 PM Neil Sikka <neilsikka@gmail.com> wrote:
->
-> Thanks for the quick response, Tamas. I tried what you said and windbg wa=
-its and the debugee hangs when I click the break button in windbg, but I do=
-n't see any output in windbg. This means that there is SOME communication o=
-ver the serial port that causes the debugee to hang when I click break. Cou=
-ld it be a debugger protocol issue? I also tried the guidance here by runni=
-ng the crlf program:
-> https://www.qubes-os.org/doc/windows-debugging/
-> But windbg waits and the debugee hangs in a similar manner.
->
-> What versions of WIndows and Xen are you using?
->
-> On Tue, Jun 22, 2021 at 12:10 PM Tamas K Lengyel <tamas.k.lengyel@gmail.c=
-om> wrote:
->>
->> I have managed to get windbg working with a serial bridge between two
->> Win10 VMs using the following script:
->> https://github.com/intel/kernel-fuzzer-for-xen-project/blob/master/scrip=
-ts/serial-bridge.sh.
->> The debugee has to enable a couple options so that windbg can attach:
->> https://github.com/intel/kernel-fuzzer-for-xen-project/blob/master/scrip=
-ts/debug.cmd.
->>
->> Tamas
->>
->> On Tue, Jun 22, 2021 at 12:01 PM Neil Sikka <neilsikka@gmail.com> wrote:
->> >
->> > Hello,
->> > Has anyone gotten a Windows10 (Version 1709 of later) kernel debugger =
-attached when running the Windows10 debugger VM and the Windows10 debugee V=
-M on Xen 4.13.0 hypervisor? I am getting a "NIC hardware initialization fai=
-led" error. I tried the suggestions in the discussion here (https://bugzill=
-a.redhat.com/show_bug.cgi?id=3D1947015):
->> > -cpu Skylake-Server-IBRS,ss=3Don,vmx=3Don,hypervisor=3Don,tsc-adjust=
-=3Don,clflushopt=3Don,umip=3Don,pku=3Don,md-clear=3Don,stibp=3Don,arch-capa=
-bilities=3Don,ssbd=3Don,xsaves=3Don,ibpb=3Don,amd-ssbd=3Don, \
->> > skip-l1dfl-vmentry=3Don,mpx=3Doff,hv-time,hv-relaxed,hv-vapic,hv-spinl=
-ocks=3D0x1fff,hv-vendor-id=3DKVMKVMKVM
->> >
->> > note: i had to remove the following 2 arguments due to errors from QEM=
-U:
->> > pschange-mc-no=3Don
->> > hv_vpindex
->> >
->> > Here was the error:
->> > C:\Users\user\Desktop\oldDebuggers\x64>kdnet.exe
->> >
->> > Network debugging is supported on the following NICs:
->> > busparams=3D0.4.0, Intel(R) PRO/1000 MT Network Connection, Plugged in=
-.
->> > The Microsoft hypervisor running this VM does not support KDNET.
->> > Please upgrade to the hypervisor shipped in Windows 8 or WS2012 or lat=
-er.
->> >
->> > KDNET initialization failed.  Status =3D 0xC0000182.
->> > NIC hardware initialization failed.
->> >
->> > I am using an Intel e1000 NIC emulated through QEMU because its suppos=
-edly a supported NIC for Windows kernel NET debugging.
->> >
->> > Thanks in Advance!
->> >
->> > --
->> > My Blog: http://www.neilscomputerblog.blogspot.com/
->> > Twitter: @neilsikka
->
->
->
-> --
-> My Blog: http://www.neilscomputerblog.blogspot.com/
-> Twitter: @neilsikka
+diff --git a/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c b/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c
+index 098f96d4d50d..827e62c1daba 100644
+--- a/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c
++++ b/drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c
+@@ -220,7 +220,6 @@ static const struct drm_simple_display_pipe_funcs aspeed_gfx_funcs = {
+ 	.enable		= aspeed_gfx_pipe_enable,
+ 	.disable	= aspeed_gfx_pipe_disable,
+ 	.update		= aspeed_gfx_pipe_update,
+-	.prepare_fb	= drm_gem_simple_display_pipe_prepare_fb,
+ 	.enable_vblank	= aspeed_gfx_enable_vblank,
+ 	.disable_vblank	= aspeed_gfx_disable_vblank,
+ };
+diff --git a/drivers/gpu/drm/gud/gud_drv.c b/drivers/gpu/drm/gud/gud_drv.c
+index e8b672dc9832..1925df9c0fb7 100644
+--- a/drivers/gpu/drm/gud/gud_drv.c
++++ b/drivers/gpu/drm/gud/gud_drv.c
+@@ -364,7 +364,6 @@ static void gud_debugfs_init(struct drm_minor *minor)
+ static const struct drm_simple_display_pipe_funcs gud_pipe_funcs = {
+ 	.check      = gud_pipe_check,
+ 	.update	    = gud_pipe_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_mode_config_funcs gud_mode_config_funcs = {
+diff --git a/drivers/gpu/drm/mcde/mcde_display.c b/drivers/gpu/drm/mcde/mcde_display.c
+index 4ddc55d58f38..ce12a36e2db4 100644
+--- a/drivers/gpu/drm/mcde/mcde_display.c
++++ b/drivers/gpu/drm/mcde/mcde_display.c
+@@ -1479,7 +1479,6 @@ static struct drm_simple_display_pipe_funcs mcde_display_funcs = {
+ 	.update = mcde_display_update,
+ 	.enable_vblank = mcde_display_enable_vblank,
+ 	.disable_vblank = mcde_display_disable_vblank,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ int mcde_display_init(struct drm_device *drm)
+diff --git a/drivers/gpu/drm/pl111/pl111_display.c b/drivers/gpu/drm/pl111/pl111_display.c
+index 6fd7f13f1aca..b5a8859739a2 100644
+--- a/drivers/gpu/drm/pl111/pl111_display.c
++++ b/drivers/gpu/drm/pl111/pl111_display.c
+@@ -440,7 +440,6 @@ static struct drm_simple_display_pipe_funcs pl111_display_funcs = {
+ 	.enable = pl111_display_enable,
+ 	.disable = pl111_display_disable,
+ 	.update = pl111_display_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static int pl111_clk_div_choose_div(struct clk_hw *hw, unsigned long rate,
+diff --git a/drivers/gpu/drm/tiny/hx8357d.c b/drivers/gpu/drm/tiny/hx8357d.c
+index da5df93450de..9b33c05732aa 100644
+--- a/drivers/gpu/drm/tiny/hx8357d.c
++++ b/drivers/gpu/drm/tiny/hx8357d.c
+@@ -184,7 +184,6 @@ static const struct drm_simple_display_pipe_funcs hx8357d_pipe_funcs = {
+ 	.enable = yx240qv29_enable,
+ 	.disable = mipi_dbi_pipe_disable,
+ 	.update = mipi_dbi_pipe_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_display_mode yx350hv15_mode = {
+diff --git a/drivers/gpu/drm/tiny/ili9225.c b/drivers/gpu/drm/tiny/ili9225.c
+index 69265d8a3beb..976d3209f164 100644
+--- a/drivers/gpu/drm/tiny/ili9225.c
++++ b/drivers/gpu/drm/tiny/ili9225.c
+@@ -328,7 +328,6 @@ static const struct drm_simple_display_pipe_funcs ili9225_pipe_funcs = {
+ 	.enable		= ili9225_pipe_enable,
+ 	.disable	= ili9225_pipe_disable,
+ 	.update		= ili9225_pipe_update,
+-	.prepare_fb	= drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_display_mode ili9225_mode = {
+diff --git a/drivers/gpu/drm/tiny/ili9341.c b/drivers/gpu/drm/tiny/ili9341.c
+index ad9ce7b4f76f..37e0c33399c8 100644
+--- a/drivers/gpu/drm/tiny/ili9341.c
++++ b/drivers/gpu/drm/tiny/ili9341.c
+@@ -140,7 +140,6 @@ static const struct drm_simple_display_pipe_funcs ili9341_pipe_funcs = {
+ 	.enable = yx240qv29_enable,
+ 	.disable = mipi_dbi_pipe_disable,
+ 	.update = mipi_dbi_pipe_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_display_mode yx240qv29_mode = {
+diff --git a/drivers/gpu/drm/tiny/ili9486.c b/drivers/gpu/drm/tiny/ili9486.c
+index 75aa1476c66c..e9a63f4b2993 100644
+--- a/drivers/gpu/drm/tiny/ili9486.c
++++ b/drivers/gpu/drm/tiny/ili9486.c
+@@ -153,7 +153,6 @@ static const struct drm_simple_display_pipe_funcs waveshare_pipe_funcs = {
+ 	.enable = waveshare_enable,
+ 	.disable = mipi_dbi_pipe_disable,
+ 	.update = mipi_dbi_pipe_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_display_mode waveshare_mode = {
+diff --git a/drivers/gpu/drm/tiny/mi0283qt.c b/drivers/gpu/drm/tiny/mi0283qt.c
+index 82fd1ad3413f..023de49e7a8e 100644
+--- a/drivers/gpu/drm/tiny/mi0283qt.c
++++ b/drivers/gpu/drm/tiny/mi0283qt.c
+@@ -144,7 +144,6 @@ static const struct drm_simple_display_pipe_funcs mi0283qt_pipe_funcs = {
+ 	.enable = mi0283qt_enable,
+ 	.disable = mipi_dbi_pipe_disable,
+ 	.update = mipi_dbi_pipe_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_display_mode mi0283qt_mode = {
+diff --git a/drivers/gpu/drm/tiny/repaper.c b/drivers/gpu/drm/tiny/repaper.c
+index 2cee07a2e00b..007d9d59f01c 100644
+--- a/drivers/gpu/drm/tiny/repaper.c
++++ b/drivers/gpu/drm/tiny/repaper.c
+@@ -861,7 +861,6 @@ static const struct drm_simple_display_pipe_funcs repaper_pipe_funcs = {
+ 	.enable = repaper_pipe_enable,
+ 	.disable = repaper_pipe_disable,
+ 	.update = repaper_pipe_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static int repaper_connector_get_modes(struct drm_connector *connector)
+diff --git a/drivers/gpu/drm/tiny/st7586.c b/drivers/gpu/drm/tiny/st7586.c
+index 05db980cc047..1be55bed609a 100644
+--- a/drivers/gpu/drm/tiny/st7586.c
++++ b/drivers/gpu/drm/tiny/st7586.c
+@@ -268,7 +268,6 @@ static const struct drm_simple_display_pipe_funcs st7586_pipe_funcs = {
+ 	.enable		= st7586_pipe_enable,
+ 	.disable	= st7586_pipe_disable,
+ 	.update		= st7586_pipe_update,
+-	.prepare_fb	= drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct drm_display_mode st7586_mode = {
+diff --git a/drivers/gpu/drm/tiny/st7735r.c b/drivers/gpu/drm/tiny/st7735r.c
+index ec9dc817a2cc..122320db5d38 100644
+--- a/drivers/gpu/drm/tiny/st7735r.c
++++ b/drivers/gpu/drm/tiny/st7735r.c
+@@ -136,7 +136,6 @@ static const struct drm_simple_display_pipe_funcs st7735r_pipe_funcs = {
+ 	.enable		= st7735r_pipe_enable,
+ 	.disable	= mipi_dbi_pipe_disable,
+ 	.update		= mipi_dbi_pipe_update,
+-	.prepare_fb	= drm_gem_simple_display_pipe_prepare_fb,
+ };
+ 
+ static const struct st7735r_cfg jd_t18003_t01_cfg = {
+diff --git a/drivers/gpu/drm/tve200/tve200_display.c b/drivers/gpu/drm/tve200/tve200_display.c
+index 50e1fb71869f..17b8c8dd169d 100644
+--- a/drivers/gpu/drm/tve200/tve200_display.c
++++ b/drivers/gpu/drm/tve200/tve200_display.c
+@@ -316,7 +316,6 @@ static const struct drm_simple_display_pipe_funcs tve200_display_funcs = {
+ 	.enable = tve200_display_enable,
+ 	.disable = tve200_display_disable,
+ 	.update = tve200_display_update,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ 	.enable_vblank = tve200_display_enable_vblank,
+ 	.disable_vblank = tve200_display_disable_vblank,
+ };
+diff --git a/drivers/gpu/drm/xen/xen_drm_front_kms.c b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+index 371202ebe900..cfda74490765 100644
+--- a/drivers/gpu/drm/xen/xen_drm_front_kms.c
++++ b/drivers/gpu/drm/xen/xen_drm_front_kms.c
+@@ -302,7 +302,6 @@ static const struct drm_simple_display_pipe_funcs display_funcs = {
+ 	.mode_valid = display_mode_valid,
+ 	.enable = display_enable,
+ 	.disable = display_disable,
+-	.prepare_fb = drm_gem_simple_display_pipe_prepare_fb,
+ 	.check = display_check,
+ 	.update = display_update,
+ };
+-- 
+2.32.0.rc2
+
 
