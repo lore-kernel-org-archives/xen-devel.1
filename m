@@ -2,44 +2,41 @@ Return-Path: <SRS0=fakL=LQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FC36C2B9F4
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 18:12:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F186C2B9F4
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 18:21:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 43D31611CE
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 18:12:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 43D31611CE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id E542261076
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Jun 2021 18:21:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E542261076
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.146017.268593 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.146025.268626 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lvksw-0001bL-J5; Tue, 22 Jun 2021 18:12:30 +0000
+	id 1lvl1q-0003ZC-4s; Tue, 22 Jun 2021 18:21:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 146017.268593; Tue, 22 Jun 2021 18:12:30 +0000
+Received: by outflank-mailman (output) from mailman id 146025.268626; Tue, 22 Jun 2021 18:21:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lvksw-0001bE-Fk; Tue, 22 Jun 2021 18:12:30 +0000
-Received: by outflank-mailman (input) for mailman id 146017;
- Tue, 22 Jun 2021 18:12:29 +0000
+	id 1lvl1q-0003Z5-0x; Tue, 22 Jun 2021 18:21:42 +0000
+Received: by outflank-mailman (input) for mailman id 146025;
+ Tue, 22 Jun 2021 18:21:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p8IA=LQ=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1lvksv-0001b8-8F
- for xen-devel@lists.xenproject.org; Tue, 22 Jun 2021 18:12:29 +0000
-Received: from mail-wr1-x42d.google.com (unknown [2a00:1450:4864:20::42d])
+ <SRS0=ZL//=LQ=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1lvl1p-0002zl-1t
+ for xen-devel@lists.xenproject.org; Tue, 22 Jun 2021 18:21:41 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0db5ea3e-d579-44e5-b77e-958270f9ae8e;
- Tue, 22 Jun 2021 18:12:28 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id a13so2939013wrf.10
- for <xen-devel@lists.xenproject.org>; Tue, 22 Jun 2021 11:12:28 -0700 (PDT)
+ id e7030a2c-e0bb-4f1f-b998-596486f30556;
+ Tue, 22 Jun 2021 18:21:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,150 +48,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0db5ea3e-d579-44e5-b77e-958270f9ae8e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=4PZYCRkIJVGeuNR28a/CBUMBUxrv4oHeXg5/uSnpCrg=;
-        b=D2+8c9jcXg/0XCwyJBexw4loidOxz4r6AJA+WK5VIUeV1eSyr8eywAz/r+uXx0zlGT
-         tr5BdU1NZIo7zrZAWmveJxwmIrOKrS4J9Latoso+zbVCCo5j9bkIgg9SlxA+c5soWzAv
-         arYH7dLkOkROTMRcUGQHffbp+3K1a9y3c+0Tk89hDHfQ0Y0+6RMMmCfufiHC9rG+AzkI
-         AQUPnE9bRagXby88CLgfEqBh6Tyl2sbwUCpcmRmkwR1TigQVko6tSoEpGZ5L6D+Bna1R
-         6uIwVFmGbzYNV492d6CtGJdnLYroawUwdO1b0sCfFYdHUCMSzD0UaqFSpaNXtxc5ifWe
-         0EXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=4PZYCRkIJVGeuNR28a/CBUMBUxrv4oHeXg5/uSnpCrg=;
-        b=p3B/YnKMBQyzeEL+j1a+v74F2VYBZqVcdGl0YonnTMWiaanMPX4odavdO8gepJcg+y
-         ED11ODPFyVNubW+tOTOTHyPc9FPxtjHJkIERIzJclebJ96DsLo1nHnYzxcApZkuX/0ty
-         k/pgiiqlKCU2TMGmF+MGvoxzLazACrnIqbGLegf8AeM2+bCss4YAWCFoT07RezUvyu3y
-         9ef4zoNTMgy54ZC/SrDvAL/GCQPaOfgm5DSXby7sxS2rdZjxVTYegFDykCpyf5tUrltY
-         uryWd1MpiNDL9WNAxw+Q5czP29lZekQo5DfqBL2yhlCk9nhhMXojTdbXY/lnZ21VtJiH
-         AiLA==
-X-Gm-Message-State: AOAM531ccLNx3CeSGL6wwJndSOnVtcLn3tKeEAe/wVnlM2aOtoz3+rtN
-	9VSaHHWv4rsPLdemO5WXSp2eqZeAzqhWtBQdtfE=
-X-Google-Smtp-Source: ABdhPJxwaFkVpPfM+J+Qo41arge1t+mWtoN98JdQq/JPxFHbIDTUshywGFxyxpA+Ca0yygYbCTiGih8PoRyKh4YpAo0=
-X-Received: by 2002:a5d:50ce:: with SMTP id f14mr3539992wrt.259.1624385547416;
- Tue, 22 Jun 2021 11:12:27 -0700 (PDT)
+X-Inumbo-ID: e7030a2c-e0bb-4f1f-b998-596486f30556
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1624386094;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=/W38Qs0N/Kt0Gac/Q7kHnj3/eNBZAqKOdXBUp3mC4Ds=;
+  b=T5jvf/OIzyKMzVrOL37gRBBmwxBj706IDYpeETg9wa3ePMfeId6ljnNY
+   uUIZfRUs7cp27W0Ipl5KuEFiAKSQcW2sficQRFdh4GeCV5QGo9vS1w6Am
+   pjwKsU/QRZiEydA/u1LAWTLmzDBDPpRrPv1i0QrCuRNMpbui77csUcCe3
+   I=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: /4xMhkTIhjDo+FBl+R9uyiEQKfld8a8hmxdUJAiJukp4aXoZCe4GI7NMdoORRk/rRa/uZ3FtRL
+ zyn8Jpq1j6OshxBpbOIkSd4Azfp50S71xIBdCVL9Q7Khfl6tRd9+KuGXxXzspJVW+rzIZmfR2G
+ 6PjX/C3ddjxH4G9xQ3fO0DHvA9x52JQsAccwlIX1GrPudTDcQrO5lZlR4gXPaE7Iw6e+Jt9slV
+ DIYikB/SUpG3t3LHhwP/q4alimHdXDrUh7JHLStuDpK5rip4u8UFFCkNHLlBrSlrcdVNrPn28z
+ BNk=
+X-SBRS: 5.1
+X-MesageID: 46437179
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:tDpkyqmeE9njscldXpEiZmfQTgHpDfORimdD5ihNYBxZY6Wkfp
+ +V7ZEmPE7P+VQssS8b6LO90fG7MADhHZ4c2/hrAV7QZniVhILIFvAn0WKG+VeQfxEWmdQtqp
+ uIH5IOceEYSGIK/foSgzPIVOrIouP3jpxA7N22pxwBIW4FCsEQiHYeNu/YKDwGeOAsP+tCKH
+ Po3Ls6m9PWQwVrUi3UPAh8Y8Hz4/nw0L72ax8PABAqrCOUiymz1bL8Gx+Emj8DTjJm294ZgC
+ 74uj28wp/mn+Cwyxfa2WOWxY9RgsHdxtxKA9HJotQJKw/rlh2jaO1aKuS/VXEO0bmSAWQR4Y
+ PxSiQbTplOArTqDz2ISC7WqlLdOfAVmiDfIBGj8CXeSIfCNUcH4oJ69PZkm13imhsdVQZHof
+ J2Niuixuxq5R+splWL2/HYEx5tjUa6unwkjKoaiGFeS5IXbPtLoZUY5149KuZCIMvW0vFnLA
+ BVNrCd2B+WSyLXU1nJ+m10hNC8VHU6GRmLBkAEp8yOyjBT2HR01VERysATlmoJsMtVcegA28
+ 3UdqBz0L1eRM4faqxwQO8HXMusE2TIBRbBKnibL1jrHLwOf3jNt5n06rMo4/zCQu1L8HLzou
+ WObLp8jx9+R6vDM7zE4HR7yGGDfIzmZ0Wk9ih33ekyhlTTfsujDRG+
+X-IronPort-AV: E=Sophos;i="5.83,292,1616472000"; 
+   d="scan'208";a="46437179"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
+	<jgross@suse.com>
+Subject: [PATCH 2/4] tests/resource: Rework Makefile
+Date: Tue, 22 Jun 2021 19:21:22 +0100
+Message-ID: <20210622182124.11571-3-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20210622182124.11571-1-andrew.cooper3@citrix.com>
+References: <20210622182124.11571-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-References: <CAHPMNWcQgUEvd7aYiNx1U+wphmuJr_Q8JXWw3mE812uN5hEARQ@mail.gmail.com>
- <CABfawhk4D+30_DX5cwYG-=SthQ=CXLRLL7VeXeVK48Oj0efn2Q@mail.gmail.com>
- <CAHPMNWd1QFYfbuPdEPZgwKrXE6dhi_X-bqZfPQj4zo4AioL81w@mail.gmail.com>
- <CABfawh=W92ioejsZ-zu+WVofw_jfxVLteVieC2Ysfxd3Wrs+Og@mail.gmail.com> <CAHPMNWcfz+9zUv7gfwu5V6zPVBHiFc-EZDJ70-4DWHjOtyBOHg@mail.gmail.com>
-In-Reply-To: <CAHPMNWcfz+9zUv7gfwu5V6zPVBHiFc-EZDJ70-4DWHjOtyBOHg@mail.gmail.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Tue, 22 Jun 2021 14:11:51 -0400
-Message-ID: <CABfawhkMb8Pnr6+NxsoaXKCyaBH8Tax8_1ABHjyGGp5j9hOkVA@mail.gmail.com>
-Subject: Re: Windows 10 Kernel Debugging on Xen
-To: Neil Sikka <neilsikka@gmail.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Make sure windbg is already waiting for the connection from the
-debugee by the time Windows starts booting. If you try to attach
-windbg later it won't work. It worked for me but obviously YMMV.
+In particular, fill in the install/uninstall rules so this test can be
+packaged to be automated sensibly.
 
-Tamas
+Make all object files depend on the Makefile, drop redundant -f's for $(RM),
+and use $(TARGET) when appropriate.
 
-On Tue, Jun 22, 2021 at 2:07 PM Neil Sikka <neilsikka@gmail.com> wrote:
->
-> I tried that, but it seems like I'm getting an interrupt storm on the deb=
-ugger VM (CPU spends all its time in the kernel) when I try to attach the d=
-ebugger. This observation furthers my suspicion that there is communication=
-, but there is something wrong with the protocol...
->
-> On Tue, Jun 22, 2021 at 12:43 PM Tamas K Lengyel <tamas.k.lengyel@gmail.c=
-om> wrote:
->>
->> I used Xen 4.15 and a pretty new version of Windows 10. It is a bit
->> finicky, you have to run the debug commands on the debugee and then
->> reboot. When the VM is rebooting the domain ID changes so you have to
->> start the serial bridge then. Windbg will attach afterwards. Just make
->> sure both VMs have serial=3D'pty' set in their config file.
->>
->> Tamas
->>
->> On Tue, Jun 22, 2021 at 12:33 PM Neil Sikka <neilsikka@gmail.com> wrote:
->> >
->> > Thanks for the quick response, Tamas. I tried what you said and windbg=
- waits and the debugee hangs when I click the break button in windbg, but I=
- don't see any output in windbg. This means that there is SOME communicatio=
-n over the serial port that causes the debugee to hang when I click break. =
-Could it be a debugger protocol issue? I also tried the guidance here by ru=
-nning the crlf program:
->> > https://www.qubes-os.org/doc/windows-debugging/
->> > But windbg waits and the debugee hangs in a similar manner.
->> >
->> > What versions of WIndows and Xen are you using?
->> >
->> > On Tue, Jun 22, 2021 at 12:10 PM Tamas K Lengyel <tamas.k.lengyel@gmai=
-l.com> wrote:
->> >>
->> >> I have managed to get windbg working with a serial bridge between two
->> >> Win10 VMs using the following script:
->> >> https://github.com/intel/kernel-fuzzer-for-xen-project/blob/master/sc=
-ripts/serial-bridge.sh.
->> >> The debugee has to enable a couple options so that windbg can attach:
->> >> https://github.com/intel/kernel-fuzzer-for-xen-project/blob/master/sc=
-ripts/debug.cmd.
->> >>
->> >> Tamas
->> >>
->> >> On Tue, Jun 22, 2021 at 12:01 PM Neil Sikka <neilsikka@gmail.com> wro=
-te:
->> >> >
->> >> > Hello,
->> >> > Has anyone gotten a Windows10 (Version 1709 of later) kernel debugg=
-er attached when running the Windows10 debugger VM and the Windows10 debuge=
-e VM on Xen 4.13.0 hypervisor? I am getting a "NIC hardware initialization =
-failed" error. I tried the suggestions in the discussion here (https://bugz=
-illa.redhat.com/show_bug.cgi?id=3D1947015):
->> >> > -cpu Skylake-Server-IBRS,ss=3Don,vmx=3Don,hypervisor=3Don,tsc-adjus=
-t=3Don,clflushopt=3Don,umip=3Don,pku=3Don,md-clear=3Don,stibp=3Don,arch-cap=
-abilities=3Don,ssbd=3Don,xsaves=3Don,ibpb=3Don,amd-ssbd=3Don, \
->> >> > skip-l1dfl-vmentry=3Don,mpx=3Doff,hv-time,hv-relaxed,hv-vapic,hv-sp=
-inlocks=3D0x1fff,hv-vendor-id=3DKVMKVMKVM
->> >> >
->> >> > note: i had to remove the following 2 arguments due to errors from =
-QEMU:
->> >> > pschange-mc-no=3Don
->> >> > hv_vpindex
->> >> >
->> >> > Here was the error:
->> >> > C:\Users\user\Desktop\oldDebuggers\x64>kdnet.exe
->> >> >
->> >> > Network debugging is supported on the following NICs:
->> >> > busparams=3D0.4.0, Intel(R) PRO/1000 MT Network Connection, Plugged=
- in.
->> >> > The Microsoft hypervisor running this VM does not support KDNET.
->> >> > Please upgrade to the hypervisor shipped in Windows 8 or WS2012 or =
-later.
->> >> >
->> >> > KDNET initialization failed.  Status =3D 0xC0000182.
->> >> > NIC hardware initialization failed.
->> >> >
->> >> > I am using an Intel e1000 NIC emulated through QEMU because its sup=
-posedly a supported NIC for Windows kernel NET debugging.
->> >> >
->> >> > Thanks in Advance!
->> >> >
->> >> > --
->> >> > My Blog: http://www.neilscomputerblog.blogspot.com/
->> >> > Twitter: @neilsikka
->> >
->> >
->> >
->> > --
->> > My Blog: http://www.neilscomputerblog.blogspot.com/
->> > Twitter: @neilsikka
->
->
->
-> --
-> My Blog: http://www.neilscomputerblog.blogspot.com/
-> Twitter: @neilsikka
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Juergen Gross <jgross@suse.com>
+
+v2:
+ * Fix typo in commit message
+ * Drop -f's
+ * Use %.o rather than *.o for Make level wildcards
+---
+ tools/tests/resource/Makefile | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/tools/tests/resource/Makefile b/tools/tests/resource/Makefile
+index 4bef482966..1c3aee4ff7 100644
+--- a/tools/tests/resource/Makefile
++++ b/tools/tests/resource/Makefile
+@@ -12,17 +12,20 @@ run: $(TARGET)
+ 
+ .PHONY: clean
+ clean:
+-	$(RM) -f -- *.o $(TARGET) $(DEPS_RM)
++	$(RM) -- *.o $(TARGET) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
+-	$(RM) -f -- *~
++	$(RM) -- *~
+ 
+ .PHONY: install
+ install: all
++	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
++	$(INSTALL_PROG) $(TARGET) $(DESTDIR)$(LIBEXEC_BIN)
+ 
+ .PHONY: uninstall
+ uninstall:
++	$(RM) -- $(DESTDIR)$(LIBEXEC_BIN)/$(TARGET)
+ 
+ CFLAGS += -Werror
+ CFLAGS += $(CFLAGS_xeninclude)
+@@ -34,7 +37,9 @@ LDFLAGS += $(LDLIBS_libxenctrl)
+ LDFLAGS += $(LDLIBS_libxenforeignmemory)
+ LDFLAGS += $(APPEND_LDFLAGS)
+ 
+-test-resource: test-resource.o
++%.o: Makefile
++
++$(TARGET): test-resource.o
+ 	$(CC) -o $@ $< $(LDFLAGS)
+ 
+ -include $(DEPS_INCLUDE)
+-- 
+2.11.0
+
 
