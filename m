@@ -2,50 +2,68 @@ Return-Path: <SRS0=VkMt=LS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8209C49EA5
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 04:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18544C48BDF
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 05:14:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7203C613CE
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 04:06:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7203C613CE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=quicinc.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8D3FC613E1
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 05:14:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D3FC613E1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.146270.269276 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.146366.269298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwGct-00065i-BS; Thu, 24 Jun 2021 04:06:03 +0000
+	id 1lwHgX-0006ST-HB; Thu, 24 Jun 2021 05:13:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 146270.269276; Thu, 24 Jun 2021 04:06:03 +0000
+Received: by outflank-mailman (output) from mailman id 146366.269298; Thu, 24 Jun 2021 05:13:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwGct-00065b-8B; Thu, 24 Jun 2021 04:06:03 +0000
-Received: by outflank-mailman (input) for mailman id 146270;
- Wed, 23 Jun 2021 16:39:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lwHgX-0006SM-E3; Thu, 24 Jun 2021 05:13:53 +0000
+Received: by outflank-mailman (input) for mailman id 146366;
+ Thu, 24 Jun 2021 05:13:51 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8eZS=LR=quicinc.com=quic_qiancai@srs-us1.protection.inumbo.net>)
- id 1lw5ud-0005dK-PO
- for xen-devel@lists.xenproject.org; Wed, 23 Jun 2021 16:39:39 +0000
-Received: from alexa-out-sd-02.qualcomm.com (unknown [199.106.114.39])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 873a946a-2c8d-4b42-b894-0f855dfe5a83;
- Wed, 23 Jun 2021 16:39:38 +0000 (UTC)
-Received: from unknown (HELO ironmsg01-sd.qualcomm.com) ([10.53.140.141])
- by alexa-out-sd-02.qualcomm.com with ESMTP; 23 Jun 2021 09:39:37 -0700
-Received: from nasanexm03e.na.qualcomm.com ([10.85.0.48])
- by ironmsg01-sd.qualcomm.com with ESMTP/TLS/AES256-SHA;
- 23 Jun 2021 09:39:35 -0700
-Received: from [10.38.240.33] (10.80.80.8) by nasanexm03e.na.qualcomm.com
- (10.85.0.48) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Wed, 23 Jun
- 2021 09:39:31 -0700
+ <SRS0=GXyq=LS=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
+ id 1lwHgV-0006SG-EY
+ for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 05:13:51 +0000
+Received: from mga06.intel.com (unknown [134.134.136.31])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3ed8ad76-7e0e-422c-81e7-d97dfaee5401;
+ Thu, 24 Jun 2021 05:13:49 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Jun 2021 22:13:47 -0700
+Received: from fmsmsx604.amr.corp.intel.com ([10.18.126.84])
+ by fmsmga002.fm.intel.com with ESMTP; 23 Jun 2021 22:13:47 -0700
+Received: from fmsmsx605.amr.corp.intel.com (10.18.126.85) by
+ fmsmsx604.amr.corp.intel.com (10.18.126.84) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.4; Wed, 23 Jun 2021 22:13:46 -0700
+Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
+ fmsmsx605.amr.corp.intel.com (10.18.126.85) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2242.4
+ via Frontend Transport; Wed, 23 Jun 2021 22:13:46 -0700
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.102)
+ by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2242.4; Wed, 23 Jun 2021 22:13:44 -0700
+Received: from MWHPR11MB1886.namprd11.prod.outlook.com (2603:10b6:300:110::9)
+ by MWHPR11MB1550.namprd11.prod.outlook.com (2603:10b6:301:b::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.19; Thu, 24 Jun
+ 2021 05:13:43 +0000
+Received: from MWHPR11MB1886.namprd11.prod.outlook.com
+ ([fe80::6597:eb05:c507:c6c1]) by MWHPR11MB1886.namprd11.prod.outlook.com
+ ([fe80::6597:eb05:c507:c6c1%12]) with mapi id 15.20.4242.024; Thu, 24 Jun
+ 2021 05:13:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,276 +75,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 873a946a-2c8d-4b42-b894-0f855dfe5a83
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
-  t=1624466378; x=1656002378;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=bD3fHcpKfJA9p2zej1L/UrxZaxu1AH26pxH4pa5HgfE=;
-  b=J25k+0X2r6bhjLWTDHVsp3IWabanjvu6tre2LozQj1mhkSKwYGVeHX0G
-   R05+kLiSkWZQ4Fhh+6djlOQ4Wyu/OKG/TgJfOlCNBzx4RpLv2vW3g595P
-   qJzQBKCngIf5AvIczu5o2ysOdhjrPow3f1PTT8QFyURZY6YJg01idm8Bx
-   M=;
-X-QCInternal: smtphost
-Subject: Re: [PATCH v14 06/12] swiotlb: Use is_swiotlb_force_bounce for
- swiotlb data bouncing
-To: Claire Chang <tientzu@chromium.org>, Rob Herring <robh+dt@kernel.org>,
-	<mpe@ellerman.id.au>, Joerg Roedel <joro@8bytes.org>, Will Deacon
-	<will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, Konrad Rzeszutek
- Wilk <konrad.wilk@oracle.com>, <boris.ostrovsky@oracle.com>,
-	<jgross@suse.com>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski
-	<m.szyprowski@samsung.com>
-CC: <heikki.krogerus@linux.intel.com>, <thomas.hellstrom@linux.intel.com>,
-	<peterz@infradead.org>, <benh@kernel.crashing.org>,
-	<joonas.lahtinen@linux.intel.com>, <dri-devel@lists.freedesktop.org>,
-	<chris@chris-wilson.co.uk>, <grant.likely@arm.com>, <paulus@samba.org>,
-	<mingo@kernel.org>, <jxgao@google.com>, <sstabellini@kernel.org>, Saravana
- Kannan <saravanak@google.com>, <xypron.glpk@gmx.de>, "Rafael J . Wysocki"
-	<rafael.j.wysocki@intel.com>, Bartosz Golaszewski
-	<bgolaszewski@baylibre.com>, <bskeggs@redhat.com>,
-	<linux-pci@vger.kernel.org>, <xen-devel@lists.xenproject.org>, Thierry Reding
-	<treding@nvidia.com>, <intel-gfx@lists.freedesktop.org>,
-	<matthew.auld@intel.com>, linux-devicetree <devicetree@vger.kernel.org>,
-	<daniel@ffwll.ch>, <airlied@linux.ie>, <maarten.lankhorst@linux.intel.com>,
-	<linuxppc-dev@lists.ozlabs.org>, <jani.nikula@linux.intel.com>, Nicolas
- Boichat <drinkcat@chromium.org>, <rodrigo.vivi@intel.com>,
-	<bhelgaas@google.com>, Dan Williams <dan.j.williams@intel.com>, Andy
- Shevchenko <andriy.shevchenko@linux.intel.com>, Greg KH
-	<gregkh@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>, lkml
-	<linux-kernel@vger.kernel.org>, "list@263.net:IOMMU DRIVERS"
-	<iommu@lists.linux-foundation.org>, Jim Quinlan <james.quinlan@broadcom.com>,
-	<thomas.lendacky@amd.com>, Robin Murphy <robin.murphy@arm.com>,
-	<bauerman@linux.ibm.com>
-References: <20210619034043.199220-1-tientzu@chromium.org>
- <20210619034043.199220-7-tientzu@chromium.org>
-From: Qian Cai <quic_qiancai@quicinc.com>
-Message-ID: <76c3343d-72e5-9df3-8924-5474ee698ef4@quicinc.com>
-Date: Wed, 23 Jun 2021 12:39:29 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210619034043.199220-7-tientzu@chromium.org>
-Content-Type: text/plain; charset="utf-8"
+X-Inumbo-ID: 3ed8ad76-7e0e-422c-81e7-d97dfaee5401
+IronPort-SDR: 8mPYyQ74HM+yL5bewgh6f/7e/56jfgWsT9v99+d44cioUwhCXR6cXsgIl0OvBd/mOfNKbhQlyO
+ lrCkclBvVhHg==
+X-IronPort-AV: E=McAfee;i="6200,9189,10024"; a="268530892"
+X-IronPort-AV: E=Sophos;i="5.83,295,1616482800"; 
+   d="scan'208";a="268530892"
+IronPort-SDR: KWHijnh6cYZqVx2vxuZFQ5q020d5iWIQzVBaHUQ8+Cpoz3te9UMh6KaDi68fdN6ETEPBZCc2Kl
+ iHEEJyJGH0Cg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.83,295,1616482800"; 
+   d="scan'208";a="490982049"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=knCwhuPgN7S6UEZhbm653ztH7VBit88WdBg04Btsnw7odeEARw6Y14Z5st93bMdDUfMKtpZQvUg6s+xa06ODf9ZcEp11cSShbrNsKDFQhLHSzXVXh4nvVA0oOtil8p13PlRY3hV61U5TAFEgZQIP9jxAd8oFy1HrDys79gipt4NU5WjzsjufoqJqWilMDaJd6HvCjOTKPIJLM4Z11M+UA1DufgMHB1xHCkLOyFyldYPKNDGPRYsj1zocwz5nCmCo6HQvVyctacsnk6JYxXzDTOnkGvQg2m+V79yKu/Wm+xMWKLJcpysVTOR2yFrPKD9KgFlQUHcKAr6hxg5SQ0Ciig==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nnibFZVDAsaR0mBMP5cYkF7RspspIk3voJFRu8ArpaA=;
+ b=TS/aznQ16hVF+S1gRFSjkqut6G7VR4OkaoNX81lDbxzok1y96maYa+uDYTBeCeH1eR9QNLd8yRb4we9qlKxvVflyJy4brheAsWc0S0dtkGWL28xdTWr0+6Bv5DJNqtzkDgChGZPgTovwNy3AzlV+do7mMKNmn8/1MswtPs6KXnZKZto1L62on7wUmDdRFrDI/dAXuDxNFH16d+D5+uMNGlZWnW+Rs5Phh/r+VwPCgt6oOKdRRmTYbxG1VXqizCUPfyv10O46WDTKnqL6i8hppr3ZYWGEWxlhCkOAfQZ5Sl4l11XimxYgb54IaK0/qsHi86QgEUPM5p5CZIVn5ydVFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=intel.onmicrosoft.com;
+ s=selector2-intel-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nnibFZVDAsaR0mBMP5cYkF7RspspIk3voJFRu8ArpaA=;
+ b=EIBRfKvnhAtamhO2m2LUXoLpg+5JCxZUyljn/hWTNtkIt/YW564j3a9npdWX8kXACcJ8jB0DfpgBbx7H5JEBjblru+f9/F+vkrO5cYmvEhzvf+bON13R/Jz51cyiEwHifagWZI5smEaM0y+Atpowbx/umsUyp+T7Vi6DQOo6mTs=
+From: "Tian, Kevin" <kevin.tian@intel.com>
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Paul Durrant <paul@xen.org>, "Cooper, Andrew" <andrew.cooper3@citrix.com>
+Subject: RE: [PATCH 3/9] VT-d: undo device mappings upon error
+Thread-Topic: [PATCH 3/9] VT-d: undo device mappings upon error
+Thread-Index: AQHXXRG+XpEHT4VRdkm+LQYGIgowYqsitShQ
+Date: Thu, 24 Jun 2021 05:13:43 +0000
+Message-ID: <MWHPR11MB18866D57EB9E61A2F43D5A8D8C079@MWHPR11MB1886.namprd11.prod.outlook.com>
+References: <03285055-47ff-ab10-ae76-0553f28f136d@suse.com>
+ <d6370703-97e3-2571-5ae3-8a5ec11e9bcd@suse.com>
+In-Reply-To: <d6370703-97e3-2571-5ae3-8a5ec11e9bcd@suse.com>
+Accept-Language: en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanexm03e.na.qualcomm.com (10.85.0.48)
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+dlp-version: 11.5.1.3
+dlp-product: dlpe-windows
+dlp-reaction: no-action
+authentication-results: suse.com; dkim=none (message not signed)
+ header.d=none;suse.com; dmarc=none action=none header.from=intel.com;
+x-originating-ip: [192.198.142.21]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: dad3f66d-37fb-4038-8948-08d936ced611
+x-ms-traffictypediagnostic: MWHPR11MB1550:
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-microsoft-antispam-prvs: <MWHPR11MB1550CE310B4EFDC6461D251E8C079@MWHPR11MB1550.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:4941;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: I0ibXexX4dpMHWo0vhA97SSzhoRoNfvxFTME9UCR6NFWNGt7YbuTexcut+BVvmhLpqauV0C4IzJSy3n/EONEyzwuyqe8in3Ppj9c2iZsR9mO1VVjX2B+y3CYJ9QJj9S/VUycyGSzdHd5Xm5l2ECTG3q7tyLRC8fUDuncGHwGJngu+lHm7zqjMvbJy4T4p8pVgjq6iLWiGKx9f14zSZDRXvspgBP34OBCAchhyjmdQ6RkGqCbjivC//wgaiic4wTOhXsmeMVREm6R8iS0mmOXibMeTBHdlJgohNWCihFo2kIgM+DyVw7W9VSNDw4y8SDtWuldGLW7udCkDl6bcTf070+KVYZYmyh3Ga9hrpy643+zFKepImYpe066dAuIRvc5FyI7PiS2gcvEWDNgkfJrGn26Tiutk7TMRmuLcsVjidpiFeRG10ATbkQbQdkaClqmEz923vuUY+CsSVK9B3HSO93rf0sUvcUnoZSXtgMeEBg030mBh/YaJ3htknbEc1MmfKAB5DljzcMhDKUDkAW6imzrTo7iJKKP7wUKXXp0/CmggSLCerifs80FJEhMmdh973kfqiaKFXP/8VCKgTnDBOyhG6Pc1lJOxsVvx5w1EM7hcp29T8BZ3kT+Hr9rSqnrODIwFNaD0M0IxwOsLVUWlA==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR11MB1886.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(376002)(346002)(366004)(396003)(136003)(39860400002)(83380400001)(38100700002)(55016002)(71200400001)(54906003)(316002)(86362001)(2906002)(110136005)(122000001)(478600001)(9686003)(26005)(7696005)(8676002)(76116006)(52536014)(186003)(8936002)(6506007)(66946007)(64756008)(5660300002)(66476007)(4326008)(66556008)(33656002)(66446008);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?L3VpbnhuSjV4RmlHeEtPelJpbDkvdmFSc2U5M095UWNpdHhwT25lNnJxRXJ4?=
+ =?utf-8?B?eVRuRk4wYm9XSTN4TVVDQjU3dm83THlpQWhGejBvUmRqaDAxTmx0Yms1Y1VD?=
+ =?utf-8?B?K0RFSDN6OUxORGx4VVd4L0pLMHRscGhLdHg0bU9OaTg4MXRieTZ4TG44MGZm?=
+ =?utf-8?B?aUU3cjltR3BrMys0eWhFTXUxdjNuWE9YVHN0ZU9SZFNZb2Z5a252cGh6bzZv?=
+ =?utf-8?B?UGptVWVKbTJhdU1ubko3YlcwQUVrTzc1eVJMNDdSSmNoN1NuMzB5Z3ZESkVF?=
+ =?utf-8?B?ZTl3aW5sM25xUnFHRE1yUGlTYVBvS3l4V2dYN2huMXM1SmF5bnBRT09tNG1q?=
+ =?utf-8?B?TmxxS3NoR1I1MVpaMHprRmlSQTNuNUdNdjBobkJzWVU4M0pWVyt0S2ZoVGUr?=
+ =?utf-8?B?aXl2N1hSSXdVTmRLWjFvaUdOUlBmVFNiY252UWEwMUxXWHdNMWRwZ2NSNlIy?=
+ =?utf-8?B?NFNqenZhSm93NEhSekVseDJhbE1oaThaaUg2WTBycmI2ajVoZVYzTEdKZUdQ?=
+ =?utf-8?B?bVJQUTltTHk5eFhFQi9lNHpYUUVreXpzZ2FsbUJZb3ljS0dtNE9JWkxkcWhh?=
+ =?utf-8?B?cjhESWU2N1dJVEQwL0RMS2s4aWZYcnRZV1pINklXL2xncTQ2N3pvU1lZNElI?=
+ =?utf-8?B?OWMyQTVMNG9TajBSS256ZnpUTUdsUzhrekZkWXV0MnFYKzhXOGl1WGdyaGYz?=
+ =?utf-8?B?U09DN3c1TkxQNE5oR3hIelg5UDRNbmRlSkYwdkxpZ1VoSTNUbCtFTDgycXZP?=
+ =?utf-8?B?TENpRmFIbWFsbHkxYjU3a1h0SFh4VEFHcHI0NHRNeDhPeUJ4VTRWdnJYblEv?=
+ =?utf-8?B?Qk1Xa1RwUnpPaFhkaW5Qc3VDNEZqNHlOOWpWRzhXUnJuRGVtSE9GZ2JYTHY3?=
+ =?utf-8?B?YWE4U2dzUEVpNDkrbFNDbVFsSnd5R1JCQ1l5YUd5dzRtVUt6TUV2TXpNUVZ5?=
+ =?utf-8?B?N2RhMVRPQnQ2eUtLV3NHQ29uSEpnYTkxK0RJaThxMHNEaHdOREhNWWkxT1pu?=
+ =?utf-8?B?a1B4SURuNyttYmpybGQvdWUxdmpIaVExeTcyejdFSUE2eFRoV1g1U0U0U29D?=
+ =?utf-8?B?RnJEN0oyamZrMFRyOGVCMFh1K2FCc3JYK2tCdjNicHR5dVJNQlJ2cFBBU2M0?=
+ =?utf-8?B?Tjd2MlczQk1NNXJDOG1DZVNCN0pxYlcyeG1EU1F4Zk5iK1pXRHNhTENiQWRh?=
+ =?utf-8?B?ZkR0ZEV2cHRXbXA4UzZEbTZRUTZVZDd5YUZnYVA3eFhxKzE4S0hNRHEzWUo2?=
+ =?utf-8?B?ZnpTMVZZeUNNcXdPMDJ0WnZ0anRyZ0w2azJjd3N3LzhGaG5MUEt0M2M5UTQw?=
+ =?utf-8?B?SG4vSTNrTFNHMjhIdDVRZngreU5vOXk5NXZQclc0VC9uRFplMnZRdm5SN3hm?=
+ =?utf-8?B?ZjdFOG5MZE4vZEltdlR5MXJNUTZralYxVjJpWHovd3kyeE03eUVXeWgrSDVz?=
+ =?utf-8?B?VCtxQmduRnRlWFlUWi9pU09PS0UydURVcVBHY1R3dGtmT2hEYko2MDFJbXFl?=
+ =?utf-8?B?aXlkbTVCTG14RFBCa3pWekVxRGsxeFlHZ3FqemthMXZBU2h2MFlsTWlZbkwx?=
+ =?utf-8?B?dER1eWRMY2MrU1d4ZTAwM3pTYXRabUJsRDRPbHo4U2hnejlZU2h5d1FuYVB3?=
+ =?utf-8?B?ZUJhTk5mUEdkeDF2ajdqak1RdVk5QVUvM2wveGxuYzlneE5JaktldTBCeTUv?=
+ =?utf-8?B?LzhpeWx2MVZneFZFRHd2dzlrcFUxWks5bXBCaC9EcjNYVi9XMW9kTVgwN1BF?=
+ =?utf-8?Q?Tn9t9uZxWov6dgIhk1fgIkL/CAzQ4WIbWpLeOSL?=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR11MB1886.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dad3f66d-37fb-4038-8948-08d936ced611
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Jun 2021 05:13:43.1412
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: OeKn3JyRawSSdXgDOoq/CtwVYEaqefOCSIju6WHGxWfrL7MyUg5advlprCzd2n2t/TTcYH2nSYTQ3gMWdroa1A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR11MB1550
+X-OriginatorOrg: intel.com
 
-
-
-On 6/18/2021 11:40 PM, Claire Chang wrote:
-> Propagate the swiotlb_force into io_tlb_default_mem->force_bounce and
-> use it to determine whether to bounce the data or not. This will be
-> useful later to allow for different pools.
-> 
-> Signed-off-by: Claire Chang <tientzu@chromium.org>
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
-> Tested-by: Stefano Stabellini <sstabellini@kernel.org>
-> Tested-by: Will Deacon <will@kernel.org>
-> Acked-by: Stefano Stabellini <sstabellini@kernel.org>
-
-Reverting the rest of the series up to this patch fixed a boot crash with NVMe on today's linux-next.
-
-[   22.286574][    T7] Unable to handle kernel paging request at virtual address dfff80000000000e
-[   22.295225][    T7] Mem abort info:
-[   22.298743][    T7]   ESR = 0x96000004
-[   22.302496][    T7]   EC = 0x25: DABT (current EL), IL = 32 bits
-[   22.308525][    T7]   SET = 0, FnV = 0
-[   22.312274][    T7]   EA = 0, S1PTW = 0
-[   22.316131][    T7]   FSC = 0x04: level 0 translation fault
-[   22.321704][    T7] Data abort info:
-[   22.325278][    T7]   ISV = 0, ISS = 0x00000004
-[   22.329840][    T7]   CM = 0, WnR = 0
-[   22.333503][    T7] [dfff80000000000e] address between user and kernel address ranges
-[   22.338543][  T256] igb 0006:01:00.0: Intel(R) Gigabit Ethernet Network Connection
-[   22.341400][    T7] Internal error: Oops: 96000004 [#1] SMP
-[   22.348915][  T256] igb 0006:01:00.0: eth0: (PCIe:2.5Gb/s:Width x1) 4c:38:d5:09:c8:83
-[   22.354458][    T7] Modules linked in: igb(+) i2c_algo_bit nvme mlx5_core(+) i2c_core nvme_core firmware_class
-[   22.362512][  T256] igb 0006:01:00.0: eth0: PBA No: G69016-004
-[   22.372287][    T7] CPU: 13 PID: 7 Comm: kworker/u64:0 Not tainted 5.13.0-rc7-next-20210623+ #47
-[   22.372293][    T7] Hardware name: MiTAC RAPTOR EV-883832-X3-0001/RAPTOR, BIOS 1.6 06/28/2020
-[   22.372298][    T7] Workqueue: nvme-reset-wq nvme_reset_work [nvme]
-[   22.378145][  T256] igb 0006:01:00.0: Using MSI-X interrupts. 4 rx queue(s), 4 tx queue(s)
-[   22.386901][    T7] 
-[   22.386905][    T7] pstate: 10000005 (nzcV daif -PAN -UAO -TCO BTYPE=--)
-[   22.386910][    T7] pc : dma_direct_map_sg+0x304/0x8f0
-
-is_swiotlb_force_bounce at /usr/src/linux-next/./include/linux/swiotlb.h:119
-(inlined by) dma_direct_map_page at /usr/src/linux-next/kernel/dma/direct.h:90
-(inlined by) dma_direct_map_sg at /usr/src/linux-next/kernel/dma/direct.c:428
-
-[   22.386919][    T7] lr : dma_map_sg_attrs+0x6c/0x118
-[   22.386924][    T7] sp : ffff80001dc8eac0
-[   22.386926][    T7] x29: ffff80001dc8eac0 x28: ffff0000199e70b0 x27: 0000000000000000
-[   22.386935][    T7] x26: ffff000847ee7000 x25: ffff80001158e570 x24: 0000000000000002
-[   22.386943][    T7] x23: dfff800000000000 x22: 0000000000000100 x21: ffff0000199e7460
-[   22.386951][    T7] x20: ffff0000199e7488 x19: 0000000000000001 x18: ffff000010062670
-[   22.386955][  T253] Unable to handle kernel paging request at virtual address dfff80000000000e
-[   22.386958][    T7] x17: ffff8000109f6a90 x16: ffff8000109e1b4c x15: ffff800009303420
-[   22.386965][  T253] Mem abort info:
-[   22.386967][    T7] x14: 0000000000000001 x13: ffff80001158e000
-[   22.386970][  T253]   ESR = 0x96000004
-[   22.386972][    T7]  x12: 1fffe00108fdce01
-[   22.386975][  T253]   EC = 0x25: DABT (current EL), IL = 32 bits
-[   22.386976][    T7] x11: 1fffe00108fdce03 x10: ffff000847ee700c x9 : 0000000000000004
-[   22.386981][  T253]   SET = 0, FnV = 0
-[   22.386983][    T7] 
-[   22.386985][    T7] x8 : ffff700003b91d72
-[   22.386986][  T253]   EA = 0, S1PTW = 0
-[   22.386987][    T7]  x7 : 0000000000000000 x6 : 000000000000000e
-[   22.386990][  T253]   FSC = 0x04: level 0 translation fault
-[   22.386992][    T7] 
-[   22.386994][    T7] x5 : dfff800000000000
-[   22.386995][  T253] Data abort info:
-[   22.386997][    T7]  x4 : 00000008c7ede000
-[   22.386999][  T253]   ISV = 0, ISS = 0x00000004
-[   22.386999][    T7]  x3 : 00000008c7ede000
-[   22.387003][    T7] x2 : 0000000000001000
-[   22.387003][  T253]   CM = 0, WnR = 0
-[   22.387006][    T7]  x1 : 0000000000000000 x0 : 0000000000000071
-[   22.387008][  T253] [dfff80000000000e] address between user and kernel address ranges
-[   22.387011][    T7] 
-[   22.387013][    T7] Call trace:
-[   22.387016][    T7]  dma_direct_map_sg+0x304/0x8f0
-[   22.387022][    T7]  dma_map_sg_attrs+0x6c/0x118
-[   22.387026][    T7]  nvme_map_data+0x2ec/0x21d8 [nvme]
-[   22.387040][    T7]  nvme_queue_rq+0x274/0x3f0 [nvme]
-[   22.387052][    T7]  blk_mq_dispatch_rq_list+0x2ec/0x18a0
-[   22.387060][    T7]  __blk_mq_sched_dispatch_requests+0x2a0/0x3e8
-[   22.387065][    T7]  blk_mq_sched_dispatch_requests+0xa4/0x100
-[   22.387070][    T7]  __blk_mq_run_hw_queue+0x148/0x1d8
-[   22.387075][    T7]  __blk_mq_delay_run_hw_queue+0x3f8/0x730
-[   22.414539][  T269] igb 0006:01:00.0 enP6p1s0: renamed from eth0
-[   22.418957][    T7]  blk_mq_run_hw_queue+0x148/0x248
-[   22.418969][    T7]  blk_mq_sched_insert_request+0x2a4/0x330
-[   22.418975][    T7]  blk_execute_rq_nowait+0xc8/0x118
-[   22.418981][    T7]  blk_execute_rq+0xd4/0x188
-[   22.453203][  T255] udevadm (255) used greatest stack depth: 57408 bytes left
-[   22.456504][    T7]  __nvme_submit_sync_cmd+0x4e0/0x730 [nvme_core]
-[   22.673245][    T7]  nvme_identify_ctrl.isra.0+0x124/0x1e0 [nvme_core]
-[   22.679784][    T7]  nvme_init_identify+0x90/0x1868 [nvme_core]
-[   22.685713][    T7]  nvme_init_ctrl_finish+0x1a8/0xb88 [nvme_core]
-[   22.691903][    T7]  nvme_reset_work+0xe5c/0x2aa4 [nvme]
-[   22.697219][    T7]  process_one_work+0x7e4/0x19a0
-[   22.702005][    T7]  worker_thread+0x334/0xae0
-[   22.706442][    T7]  kthread+0x3bc/0x470
-[   22.710359][    T7]  ret_from_fork+0x10/0x18
-[   22.714627][    T7] Code: f941ef81 9101c420 1200080e d343fc06 (38f768c6) 
-[   22.721407][    T7] ---[ end trace 1f3c4181ae408676 ]---
-[   22.726712][    T7] Kernel panic - not syncing: Oops: Fatal exception
-[   22.733169][    T7] SMP: stopping secondary CPUs
-[   23.765164][    T7] SMP: failed to stop secondary CPUs 13,15
-[   23.770818][    T7] Kernel Offset: disabled
-[   23.774991][    T7] CPU features: 0x00000251,20000846
-[   23.780034][    T7] Memory Limit: none
-[   23.783794][    T7] ---[ end Kernel panic - not syncing: Oops: Fatal exception ]---
-
-> ---
->  drivers/xen/swiotlb-xen.c |  2 +-
->  include/linux/swiotlb.h   | 11 +++++++++++
->  kernel/dma/direct.c       |  2 +-
->  kernel/dma/direct.h       |  2 +-
->  kernel/dma/swiotlb.c      |  4 ++++
->  5 files changed, 18 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-> index 0c6ed09f8513..4730a146fa35 100644
-> --- a/drivers/xen/swiotlb-xen.c
-> +++ b/drivers/xen/swiotlb-xen.c
-> @@ -369,7 +369,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
->  	if (dma_capable(dev, dev_addr, size, true) &&
->  	    !range_straddles_page_boundary(phys, size) &&
->  		!xen_arch_need_swiotlb(dev, phys, dev_addr) &&
-> -		swiotlb_force != SWIOTLB_FORCE)
-> +		!is_swiotlb_force_bounce(dev))
->  		goto done;
->  
->  	/*
-> diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-> index dd1c30a83058..8d8855c77d9a 100644
-> --- a/include/linux/swiotlb.h
-> +++ b/include/linux/swiotlb.h
-> @@ -84,6 +84,7 @@ extern enum swiotlb_force swiotlb_force;
->   *		unmap calls.
->   * @debugfs:	The dentry to debugfs.
->   * @late_alloc:	%true if allocated using the page allocator
-> + * @force_bounce: %true if swiotlb bouncing is forced
->   */
->  struct io_tlb_mem {
->  	phys_addr_t start;
-> @@ -94,6 +95,7 @@ struct io_tlb_mem {
->  	spinlock_t lock;
->  	struct dentry *debugfs;
->  	bool late_alloc;
-> +	bool force_bounce;
->  	struct io_tlb_slot {
->  		phys_addr_t orig_addr;
->  		size_t alloc_size;
-> @@ -109,6 +111,11 @@ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
->  	return mem && paddr >= mem->start && paddr < mem->end;
->  }
->  
-> +static inline bool is_swiotlb_force_bounce(struct device *dev)
-> +{
-> +	return dev->dma_io_tlb_mem->force_bounce;
-> +}
-> +
->  void __init swiotlb_exit(void);
->  unsigned int swiotlb_max_segment(void);
->  size_t swiotlb_max_mapping_size(struct device *dev);
-> @@ -120,6 +127,10 @@ static inline bool is_swiotlb_buffer(struct device *dev, phys_addr_t paddr)
->  {
->  	return false;
->  }
-> +static inline bool is_swiotlb_force_bounce(struct device *dev)
-> +{
-> +	return false;
-> +}
->  static inline void swiotlb_exit(void)
->  {
->  }
-> diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-> index 7a88c34d0867..a92465b4eb12 100644
-> --- a/kernel/dma/direct.c
-> +++ b/kernel/dma/direct.c
-> @@ -496,7 +496,7 @@ size_t dma_direct_max_mapping_size(struct device *dev)
->  {
->  	/* If SWIOTLB is active, use its maximum mapping size */
->  	if (is_swiotlb_active(dev) &&
-> -	    (dma_addressing_limited(dev) || swiotlb_force == SWIOTLB_FORCE))
-> +	    (dma_addressing_limited(dev) || is_swiotlb_force_bounce(dev)))
->  		return swiotlb_max_mapping_size(dev);
->  	return SIZE_MAX;
->  }
-> diff --git a/kernel/dma/direct.h b/kernel/dma/direct.h
-> index 13e9e7158d94..4632b0f4f72e 100644
-> --- a/kernel/dma/direct.h
-> +++ b/kernel/dma/direct.h
-> @@ -87,7 +87,7 @@ static inline dma_addr_t dma_direct_map_page(struct device *dev,
->  	phys_addr_t phys = page_to_phys(page) + offset;
->  	dma_addr_t dma_addr = phys_to_dma(dev, phys);
->  
-> -	if (unlikely(swiotlb_force == SWIOTLB_FORCE))
-> +	if (is_swiotlb_force_bounce(dev))
->  		return swiotlb_map(dev, phys, size, dir, attrs);
->  
->  	if (unlikely(!dma_capable(dev, dma_addr, size, true))) {
-> diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-> index 8a120f42340b..0d294bbf274c 100644
-> --- a/kernel/dma/swiotlb.c
-> +++ b/kernel/dma/swiotlb.c
-> @@ -179,6 +179,10 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
->  	mem->end = mem->start + bytes;
->  	mem->index = 0;
->  	mem->late_alloc = late_alloc;
-> +
-> +	if (swiotlb_force == SWIOTLB_FORCE)
-> +		mem->force_bounce = true;
-> +
->  	spin_lock_init(&mem->lock);
->  	for (i = 0; i < mem->nslabs; i++) {
->  		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
-> 
+PiBGcm9tOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+DQo+IFNlbnQ6IFdlZG5lc2Rh
+eSwgSnVuZSA5LCAyMDIxIDU6MjggUE0NCj4gDQo+IFdoZW4NCj4gIC0gZmx1c2hlcyAoc3VwcG9z
+ZWRseSBub3QgcG9zc2libGUgYW55bW9yZSBhZnRlciBYU0EtMzczKSwNCj4gIC0gc2Vjb25kYXJ5
+IG1hcHBpbmdzIGZvciBsZWdhY3kgUENJIGRldmljZXMgYmVoaW5kIGJyaWRnZXMsDQo+ICAtIHNl
+Y29uZGFyeSBtYXBwaW5ncyBmb3IgY2hpcHNldCBxdWlya3MsIG9yDQo+ICAtIGZpbmRfdXBzdHJl
+YW1fYnJpZGdlKCkgaW52b2NhdGlvbnMNCj4gZmFpbCwgdGhlIHN1Y2Nlc3NmdWxseSBlc3RhYmxp
+c2hlZCBkZXZpY2UgbWFwcGluZ3Mgc2hvdWxkIG5vdCBiZSBsZWZ0DQo+IGFyb3VuZC4NCj4gDQo+
+IEZ1cnRoZXIsIHdoZW4gKHBhcnRzIG9mKSB1bm1hcHBpbmcgZmFpbCwgc2ltcGx5IHJldHVybmlu
+ZyBhbiBlcnJvciBpcw0KPiB0eXBpY2FsbHkgbm90IGVub3VnaC4gQ3Jhc2ggdGhlIGRvbWFpbiBp
+bnN0ZWFkIGluIHN1Y2ggY2FzZXMsIGFycmFuZ2luZw0KPiBmb3IgZG9tYWluIGNsZWFudXAgdG8g
+Y29udGludWUgaW4gYSBiZXN0IGVmZm9ydCBtYW5uZXIgZGVzcGl0ZSBzdWNoDQo+IGZhaWx1cmVz
+Lg0KPiANCj4gRmluYWxseSBtYWtlIGRvbWFpbl9jb250ZXh0X3VubWFwKCkncyBlcnJvciBiZWhh
+dmlvciBjb25zaXN0ZW50IGluIHRoZQ0KPiBsZWdhY3kgUENJIGRldmljZSBjYXNlOiBEb24ndCBi
+YWlsIGZyb20gdGhlIGZ1bmN0aW9uIGluIG9uZSBzcGVjaWFsDQo+IGNhc2UsIGJ1dCBhbHdheXMg
+anVzdCBleGl0IHRoZSBzd2l0Y2ggc3RhdGVtZW50Lg0KPiANCj4gU2lnbmVkLW9mZi1ieTogSmFu
+IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPg0KPiBSZXZpZXdlZC1ieTogUGF1bCBEdXJyYW50
+IDxwYXVsQHhlbi5vcmc+DQoNClJldmlld2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGlu
+dGVsLmNvbT4NCg0KPiANCj4gLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11
+LmMNCj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11LmMNCj4gQEAgLTE0
+NDIsOSArMTQ0MiwxNSBAQCBpbnQgZG9tYWluX2NvbnRleHRfbWFwcGluZ19vbmUoDQo+ICAgICAg
+aWYgKCAhc2VnICYmICFyYyApDQo+ICAgICAgICAgIHJjID0gbWVfd2lmaV9xdWlyayhkb21haW4s
+IGJ1cywgZGV2Zm4sIE1BUF9NRV9QSEFOVE9NX0ZVTkMpOw0KPiANCj4gKyAgICBpZiAoIHJjICkN
+Cj4gKyAgICAgICAgZG9tYWluX2NvbnRleHRfdW5tYXBfb25lKGRvbWFpbiwgaW9tbXUsIGJ1cywg
+ZGV2Zm4pOw0KPiArDQo+ICAgICAgcmV0dXJuIHJjOw0KPiAgfQ0KPiANCj4gK3N0YXRpYyBpbnQg
+ZG9tYWluX2NvbnRleHRfdW5tYXAoc3RydWN0IGRvbWFpbiAqZCwgdWludDhfdCBkZXZmbiwNCj4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHBjaV9kZXYgKnBkZXYpOw0K
+PiArDQo+ICBzdGF0aWMgaW50IGRvbWFpbl9jb250ZXh0X21hcHBpbmcoc3RydWN0IGRvbWFpbiAq
+ZG9tYWluLCB1OCBkZXZmbiwNCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dHJ1Y3QgcGNpX2RldiAqcGRldikNCj4gIHsNCj4gQEAgLTE1MDUsMTYgKzE1MTEsMjEgQEAgc3Rh
+dGljIGludCBkb21haW5fY29udGV4dF9tYXBwaW5nKHN0cnVjdA0KPiAgICAgICAgICBpZiAoIHJl
+dCApDQo+ICAgICAgICAgICAgICBicmVhazsNCj4gDQo+IC0gICAgICAgIGlmICggZmluZF91cHN0
+cmVhbV9icmlkZ2Uoc2VnLCAmYnVzLCAmZGV2Zm4sICZzZWNidXMpIDwgMSApDQo+IC0gICAgICAg
+ICAgICBicmVhazsNCj4gKyAgICAgICAgaWYgKCAocmV0ID0gZmluZF91cHN0cmVhbV9icmlkZ2Uo
+c2VnLCAmYnVzLCAmZGV2Zm4sICZzZWNidXMpKSA8IDEgKQ0KPiArICAgICAgICB7DQo+ICsgICAg
+ICAgICAgICBpZiAoICFyZXQgKQ0KPiArICAgICAgICAgICAgICAgIGJyZWFrOw0KPiArICAgICAg
+ICAgICAgcmV0ID0gLUVOWElPOw0KPiArICAgICAgICB9DQo+IA0KPiAgICAgICAgICAvKg0KPiAg
+ICAgICAgICAgKiBNYXBwaW5nIGEgYnJpZGdlIHNob3VsZCwgaWYgYW55dGhpbmcsIHBhc3MgdGhl
+IHN0cnVjdCBwY2lfZGV2IG9mDQo+ICAgICAgICAgICAqIHRoYXQgYnJpZGdlLiBTaW5jZSBicmlk
+Z2VzIGRvbid0IG5vcm1hbGx5IGdldCBhc3NpZ25lZCB0byBndWVzdHMsDQo+ICAgICAgICAgICAq
+IHRoZWlyIG93bmVyIHdvdWxkIGJlIHRoZSB3cm9uZyBvbmUuIFBhc3MgTlVMTCBpbnN0ZWFkLg0K
+PiAgICAgICAgICAgKi8NCj4gLSAgICAgICAgcmV0ID0gZG9tYWluX2NvbnRleHRfbWFwcGluZ19v
+bmUoZG9tYWluLCBkcmhkLT5pb21tdSwgYnVzLCBkZXZmbiwNCj4gLSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgTlVMTCk7DQo+ICsgICAgICAgIGlmICggcmV0ID49IDAg
+KQ0KPiArICAgICAgICAgICAgcmV0ID0gZG9tYWluX2NvbnRleHRfbWFwcGluZ19vbmUoZG9tYWlu
+LCBkcmhkLT5pb21tdSwgYnVzLA0KPiBkZXZmbiwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIE5VTEwpOw0KPiANCj4gICAgICAgICAgLyoNCj4gICAgICAg
+ICAgICogRGV2aWNlcyBiZWhpbmQgUENJZS10by1QQ0kvUENJeCBicmlkZ2UgbWF5IGdlbmVyYXRl
+IGRpZmZlcmVudA0KPiBAQCAtMTUzMSw2ICsxNTQyLDkgQEAgc3RhdGljIGludCBkb21haW5fY29u
+dGV4dF9tYXBwaW5nKHN0cnVjdA0KPiAgICAgICAgICAgICAgcmV0ID0gZG9tYWluX2NvbnRleHRf
+bWFwcGluZ19vbmUoZG9tYWluLCBkcmhkLT5pb21tdSwgc2VjYnVzLA0KPiAwLA0KPiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTlVMTCk7DQo+IA0KPiArICAg
+ICAgICBpZiAoIHJldCApDQo+ICsgICAgICAgICAgICBkb21haW5fY29udGV4dF91bm1hcChkb21h
+aW4sIGRldmZuLCBwZGV2KTsNCj4gKw0KPiAgICAgICAgICBicmVhazsNCj4gDQo+ICAgICAgZGVm
+YXVsdDoNCj4gQEAgLTE2MDksNiArMTYyMywxOSBAQCBpbnQgZG9tYWluX2NvbnRleHRfdW5tYXBf
+b25lKA0KPiAgICAgIGlmICggIWlvbW11LT5kcmhkLT5zZWdtZW50ICYmICFyYyApDQo+ICAgICAg
+ICAgIHJjID0gbWVfd2lmaV9xdWlyayhkb21haW4sIGJ1cywgZGV2Zm4sIFVOTUFQX01FX1BIQU5U
+T01fRlVOQyk7DQo+IA0KPiArICAgIGlmICggcmMgJiYgIWlzX2hhcmR3YXJlX2RvbWFpbihkb21h
+aW4pICYmIGRvbWFpbiAhPSBkb21faW8gKQ0KPiArICAgIHsNCj4gKyAgICAgICAgaWYgKCBkb21h
+aW4tPmlzX2R5aW5nICkNCj4gKyAgICAgICAgew0KPiArICAgICAgICAgICAgcHJpbnRrKFhFTkxP
+R19FUlIgIiVwZDogZXJyb3IgJWQNCj4gdW5tYXBwaW5nICUwNHg6JTAyeDolMDJ4LiV1XG4iLA0K
+PiArICAgICAgICAgICAgICAgICAgIGRvbWFpbiwgcmMsIGlvbW11LT5kcmhkLT5zZWdtZW50LCBi
+dXMsDQo+ICsgICAgICAgICAgICAgICAgICAgUENJX1NMT1QoZGV2Zm4pLCBQQ0lfRlVOQyhkZXZm
+bikpOw0KPiArICAgICAgICAgICAgcmMgPSAwOyAvKiBNYWtlIHVwcGVyIGxheWVycyBjb250aW51
+ZSBpbiBhIGJlc3QgZWZmb3J0IG1hbm5lci4gKi8NCj4gKyAgICAgICAgfQ0KPiArICAgICAgICBl
+bHNlDQo+ICsgICAgICAgICAgICBkb21haW5fY3Jhc2goZG9tYWluKTsNCj4gKyAgICB9DQo+ICsN
+Cj4gICAgICByZXR1cm4gcmM7DQo+ICB9DQo+IA0KPiBAQCAtMTY2MSwxNyArMTY4OCwyOSBAQCBz
+dGF0aWMgaW50IGRvbWFpbl9jb250ZXh0X3VubWFwKHN0cnVjdCBkDQo+IA0KPiAgICAgICAgICB0
+bXBfYnVzID0gYnVzOw0KPiAgICAgICAgICB0bXBfZGV2Zm4gPSBkZXZmbjsNCj4gLSAgICAgICAg
+aWYgKCBmaW5kX3Vwc3RyZWFtX2JyaWRnZShzZWcsICZ0bXBfYnVzLCAmdG1wX2RldmZuLCAmc2Vj
+YnVzKSA8IDEgKQ0KPiArICAgICAgICBpZiAoIChyZXQgPSBmaW5kX3Vwc3RyZWFtX2JyaWRnZShz
+ZWcsICZ0bXBfYnVzLCAmdG1wX2RldmZuLA0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAmc2VjYnVzKSkgPCAxICkNCj4gKyAgICAgICAgew0KPiArICAgICAgICAg
+ICAgaWYgKCByZXQgKQ0KPiArICAgICAgICAgICAgew0KPiArICAgICAgICAgICAgICAgIHJldCA9
+IC1FTlhJTzsNCj4gKyAgICAgICAgICAgICAgICBpZiAoICFkb21haW4tPmlzX2R5aW5nICYmDQo+
+ICsgICAgICAgICAgICAgICAgICAgICAhaXNfaGFyZHdhcmVfZG9tYWluKGRvbWFpbikgJiYgZG9t
+YWluICE9IGRvbV9pbyApDQo+ICsgICAgICAgICAgICAgICAgew0KPiArICAgICAgICAgICAgICAg
+ICAgICBkb21haW5fY3Jhc2goZG9tYWluKTsNCj4gKyAgICAgICAgICAgICAgICAgICAgLyogTWFr
+ZSB1cHBlciBsYXllcnMgY29udGludWUgaW4gYSBiZXN0IGVmZm9ydCBtYW5uZXIuICovDQo+ICsg
+ICAgICAgICAgICAgICAgICAgIHJldCA9IDA7DQo+ICsgICAgICAgICAgICAgICAgfQ0KPiArICAg
+ICAgICAgICAgfQ0KPiAgICAgICAgICAgICAgYnJlYWs7DQo+ICsgICAgICAgIH0NCj4gDQo+ICAg
+ICAgICAgIC8qIFBDSWUgdG8gUENJL1BDSXggYnJpZGdlICovDQo+ICAgICAgICAgIGlmICggcGRl
+dl90eXBlKHNlZywgdG1wX2J1cywgdG1wX2RldmZuKSA9PQ0KPiBERVZfVFlQRV9QQ0llMlBDSV9C
+UklER0UgKQ0KPiAgICAgICAgICB7DQo+ICAgICAgICAgICAgICByZXQgPSBkb21haW5fY29udGV4
+dF91bm1hcF9vbmUoZG9tYWluLCBpb21tdSwgdG1wX2J1cywNCj4gdG1wX2RldmZuKTsNCj4gLSAg
+ICAgICAgICAgIGlmICggcmV0ICkNCj4gLSAgICAgICAgICAgICAgICByZXR1cm4gcmV0Ow0KPiAt
+DQo+IC0gICAgICAgICAgICByZXQgPSBkb21haW5fY29udGV4dF91bm1hcF9vbmUoZG9tYWluLCBp
+b21tdSwgc2VjYnVzLCAwKTsNCj4gKyAgICAgICAgICAgIGlmICggIXJldCApDQo+ICsgICAgICAg
+ICAgICAgICAgcmV0ID0gZG9tYWluX2NvbnRleHRfdW5tYXBfb25lKGRvbWFpbiwgaW9tbXUsIHNl
+Y2J1cywgMCk7DQo+ICAgICAgICAgIH0NCj4gICAgICAgICAgZWxzZSAvKiBMZWdhY3kgUENJIGJy
+aWRnZSAqLw0KPiAgICAgICAgICAgICAgcmV0ID0gZG9tYWluX2NvbnRleHRfdW5tYXBfb25lKGRv
+bWFpbiwgaW9tbXUsIHRtcF9idXMsDQo+IHRtcF9kZXZmbik7DQoNCg==
 
