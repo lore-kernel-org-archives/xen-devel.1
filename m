@@ -2,45 +2,45 @@ Return-Path: <SRS0=VkMt=LS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BAA1C48BDF
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 08:06:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88937C49EA7
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 08:12:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0309613C7
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 08:06:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0309613C7
+	by mail.kernel.org (Postfix) with ESMTPS id 2DC58613E7
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 08:12:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2DC58613E7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.146466.269496 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.146482.269524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwKNf-0007T1-BS; Thu, 24 Jun 2021 08:06:35 +0000
+	id 1lwKTL-0001QQ-F7; Thu, 24 Jun 2021 08:12:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 146466.269496; Thu, 24 Jun 2021 08:06:35 +0000
+Received: by outflank-mailman (output) from mailman id 146482.269524; Thu, 24 Jun 2021 08:12:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwKNf-0007Ss-8B; Thu, 24 Jun 2021 08:06:35 +0000
-Received: by outflank-mailman (input) for mailman id 146466;
- Thu, 24 Jun 2021 08:06:34 +0000
+	id 1lwKTL-0001QJ-C3; Thu, 24 Jun 2021 08:12:27 +0000
+Received: by outflank-mailman (input) for mailman id 146482;
+ Thu, 24 Jun 2021 08:12:25 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lwKNe-0007Sk-4U
- for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 08:06:34 +0000
+ (envelope-from <julien@xen.org>) id 1lwKTJ-0001Q1-QP
+ for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 08:12:25 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lwKNb-0003ag-60; Thu, 24 Jun 2021 08:06:31 +0000
+ id 1lwKTI-0003h0-Da; Thu, 24 Jun 2021 08:12:24 +0000
 Received: from [54.239.6.182] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lwKNa-0002ua-UC; Thu, 24 Jun 2021 08:06:31 +0000
+ id 1lwKTI-0003U5-4I; Thu, 24 Jun 2021 08:12:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,102 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=pB1YWnCA7A0AOxCkbXSbKy3vf3NtrD1e87JcPsvmZXU=; b=T3SDWVWhValekvLRVr12bZlEmD
-	5u09sN2I+rAyx9rDyXrbVVl4CWWNao3SV90X5qx/YPA9HcEHx1b4PdQtL5fqw6wU5/ar8+eqsKT7A
-	56SjNN6d9dsACdkgNQvWZ5LFho3GAjG1NU85ohTQYAnT1Z+YJyBofZnfmUJbR0aSs+cw=;
-Subject: Re: [PATCH 03/10] tools/xenstore: Don't assume conn->in points to the
- LU request
-To: Luca Fancellu <luca.fancellu@arm.com>
-Cc: xen-devel@lists.xenproject.org, raphning@amazon.co.uk, doebel@amazon.de,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
-References: <20210616144324.31652-1-julien@xen.org>
- <20210616144324.31652-4-julien@xen.org>
- <4316B0AD-5F89-4D04-8996-00836AE3991A@arm.com>
+	bh=/gquh0QLxtElZLGe9Zcszyit3MGZK73YXaXO2qqDKdQ=; b=BtDpAHRbmszwrMgEEt3aBGepBf
+	5YDbunzQWJnsCwADak7gplQPY5NADMHxP5d8cypECRCSOmdw9sEFA2TUfvt7+B+o8ZUbrOiMOsqzt
+	vR0A6PpKnbDuZbwrHwVJEqaLJCClGACm8EaLkwsb6Bf0wehwrSeWZHSJCrqcDTtzRAUM=;
+Subject: Re: [PATCH] tools/xenstored: Don't crash xenstored when Live-Update
+ is cancelled
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: raphning@amazon.co.uk, doebel@amazon.de, Julien GralL
+ <jgrall@amazon.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <20210617173857.6450-1-julien@xen.org>
+ <136d6a10-c93d-accd-fc34-62fbaa4742b0@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <e08f65e9-8d3c-4f50-20d9-312a358417be@xen.org>
-Date: Thu, 24 Jun 2021 10:06:28 +0200
+Message-ID: <325bf694-a30f-558c-ab84-d8a7a1865cc2@xen.org>
+Date: Thu, 24 Jun 2021 10:12:21 +0200
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <4316B0AD-5F89-4D04-8996-00836AE3991A@arm.com>
+In-Reply-To: <136d6a10-c93d-accd-fc34-62fbaa4742b0@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Luca,
+Hi Juergen,
 
-On 21/06/2021 10:55, Luca Fancellu wrote:
->> diff --git a/tools/xenstore/xenstored_control.h b/tools/xenstore/xenstored_control.h
->> index 6842b8d88760..27d7f19e4b7f 100644
->> --- a/tools/xenstore/xenstored_control.h
->> +++ b/tools/xenstore/xenstored_control.h
->> @@ -20,3 +20,6 @@ int do_control(struct connection *conn, struct buffered_data *in);
->> void lu_read_state(void);
+On 22/06/2021 11:23, Juergen Gross wrote:
+> On 17.06.21 19:38, Julien Grall wrote:
+>> From: Julien GralL <jgrall@amazon.com>
 >>
->> struct connection *lu_get_connection(void);
+>> As Live-Update is asynchronous, it is possible to receive a request to
+>> cancel it (either on the same connection or from a different one).
+>>
+>> Currently, this will crash xenstored because do_lu_start() assumes
+>> lu_status will be valid. This is not the case when Live-Update has been
+>> cancelled. This will result to dereference a NULL pointer and
+>> crash Xenstored.
+>>
+>> Rework do_lu_start() to check if lu_status is NULL and return an
+>> error in this case.
+>>
+>> Fixes: af216a99fb ("tools/xenstore: add the basic framework for doing 
+>> the live update")
+>> Signed-off-by: Julien Grall <jgrall@amazon.com>
+>>
+>> ----
+>>
+>> This is currently based on top of:
+>>
+>> https://lore.kernel.org/xen-devel/20210616144324.31652-1-julien@xen.org
+>>
+>> This can be re-ordered if necessary.
+>> ---
+>>   tools/xenstore/xenstored_control.c | 15 +++++++++++++--
+>>   1 file changed, 13 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/tools/xenstore/xenstored_control.c 
+>> b/tools/xenstore/xenstored_control.c
+>> index a045f102a420..37a3d39f20b5 100644
+>> --- a/tools/xenstore/xenstored_control.c
+>> +++ b/tools/xenstore/xenstored_control.c
+>> @@ -696,7 +696,18 @@ static bool do_lu_start(struct delayed_request *req)
+>>       time_t now = time(NULL);
+>>       const char *ret;
+>>       struct buffered_data *saved_in;
+>> -    struct connection *conn = lu_status->conn;
+>> +    struct connection *conn = req->data;
 >> +
->> +/* Write the "OK" response for the live-update command */
->> +unsigned int lu_write_response(FILE *fp);
->> diff --git a/tools/xenstore/xenstored_core.c b/tools/xenstore/xenstored_core.c
->> index 607187361d84..41b26d7094c8 100644
->> --- a/tools/xenstore/xenstored_core.c
->> +++ b/tools/xenstore/xenstored_core.c
->> @@ -272,15 +272,10 @@ static int undelay_request(void *_req)
->>
->> static void call_delayed(struct connection *conn, struct delayed_request *req)
+>> +    /*
+>> +     * Cancellation may have been requested asynchronously. In this
+>> +     * case, lu_status will be NULL.
+>> +     */
+>> +    if (!lu_status) {
+>> +        ret = "Cancellation was requested";
+>> +        conn = req->data;
 > 
-> Here the conn parameter is not needed anymore, or am I missing something?
+> This will set conn to the same value it already has.
 
-The parameter is now unused. I will drop it.
+Ah yes. I will drop this line.
+
+Also, I took the opportunity to replace
+
+} else
+   assert(...)
+
+with just
+
+assert(...)
+
+This should improve a bit the readability. Let me know if you want me to 
+resend the patch for that.
+
+> 
+> 
+> Other than that:
+> 
+> Reviewed-by: Juergen Gross <jgross@suse.com>
+
+Thank you!
 
 Cheers,
 
