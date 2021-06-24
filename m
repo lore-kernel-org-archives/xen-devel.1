@@ -2,45 +2,45 @@ Return-Path: <SRS0=VkMt=LS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96E50C48BDF
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 10:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30583C48BDF
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 10:44:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 638A3613FE
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 10:43:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 638A3613FE
+	by mail.kernel.org (Postfix) with ESMTPS id ED8FA613FD
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 10:44:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED8FA613FD
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.146662.269980 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.146670.270004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwMpQ-0002IL-1o; Thu, 24 Jun 2021 10:43:24 +0000
+	id 1lwMqX-00034Y-Lm; Thu, 24 Jun 2021 10:44:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 146662.269980; Thu, 24 Jun 2021 10:43:24 +0000
+Received: by outflank-mailman (output) from mailman id 146670.270004; Thu, 24 Jun 2021 10:44:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwMpP-0002IE-Uk; Thu, 24 Jun 2021 10:43:23 +0000
-Received: by outflank-mailman (input) for mailman id 146662;
- Thu, 24 Jun 2021 10:43:22 +0000
+	id 1lwMqX-00034R-Gx; Thu, 24 Jun 2021 10:44:33 +0000
+Received: by outflank-mailman (input) for mailman id 146670;
+ Thu, 24 Jun 2021 10:44:31 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lwMpO-0002I8-Pa
- for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 10:43:22 +0000
+ (envelope-from <julien@xen.org>) id 1lwMqV-000342-R4
+ for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 10:44:31 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lwMpK-0006SJ-C4; Thu, 24 Jun 2021 10:43:18 +0000
+ id 1lwMqV-0006U3-1B; Thu, 24 Jun 2021 10:44:31 +0000
 Received: from [54.239.6.182] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lwMpK-0008UQ-3Y; Thu, 24 Jun 2021 10:43:18 +0000
+ id 1lwMqU-0000IY-Qq; Thu, 24 Jun 2021 10:44:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,71 +54,73 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=o1/nsgPR9iJ5Xj/zIhK2HyHOQYdK66thWYsF9hwLSyU=; b=BXOINeH++6cJliMHL9hMn1rptn
-	2iGuKZgTUe5mHCPsR/RgbI1dzY36jOghuWKiKXf7Y6c1cVbXyfhOJ1mfVM9Hwx3lGwkO2QE4JglyN
-	UYrnyKwtFAnNihq9xY+GdrTo71jWEVGaj8hNYF5azh1yoOOvgGTcm3tnvwmR43+Ygbc0=;
-Subject: Re: [PATCH 00/10] tools/xenstored: Bug fixes + Improve Live-Update
-To: xen-devel@lists.xenproject.org
-Cc: raphning@amazon.co.uk, doebel@amazon.de, Julien Grall
- <jgrall@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Juergen Gross <jgross@suse.com>
-References: <20210616144324.31652-1-julien@xen.org>
+	MIME-Version:Date:Message-ID:References:Cc:To:From:Subject;
+	bh=kB/cuO9J71PCSUG1oXEvChtSpefXwEQF0XrHTCKSrpk=; b=1Mvgrb7a6kqClKUsOqSHHHoIAE
+	9WYQvJVDjeRzzhdVIxoE9AN28CSba8yvBKBQjngefySqvstCFZvlN0vqdhfCpy13t2c9JrYcc+FRx
+	dzPhNX+onGw608QAQjmyRuvi2IL5BSYvC6feBcTBQ3ntBhtUrtjHQgOI0ztaUvSACPho=;
+Subject: Re: [PATCH] iommu/arm: ipmmu-vmsa: Add compatible for Renesas R-Car
+ M3-W+ SoC
 From: Julien Grall <julien@xen.org>
-Message-ID: <a3b28a06-92e7-0bd5-0951-2db51a0bee46@xen.org>
-Date: Thu, 24 Jun 2021 12:43:15 +0200
+To: Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <1623698292-7464-1-git-send-email-olekstysh@gmail.com>
+ <36ae57eb-e7ce-8ca9-0f4e-23b9f1b0c0e7@xen.org>
+Message-ID: <f63fe592-6ada-2a0f-1b94-2fd6facfd29e@xen.org>
+Date: Thu, 24 Jun 2021 12:44:28 +0200
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210616144324.31652-1-julien@xen.org>
+In-Reply-To: <36ae57eb-e7ce-8ca9-0f4e-23b9f1b0c0e7@xen.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 Hi,
 
-On 16/06/2021 16:43, Julien Grall wrote:
-> From: Julien Grall <jgrall@amazon.com>
+On 22/06/2021 18:43, Julien Grall wrote:
+> Hi Oleksandr,
 > 
-> Hi all,
+> On 14/06/2021 21:18, Oleksandr Tyshchenko wrote:
+>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>
+>> The "renesas,r8a77961" string identifies M3-W+ (aka M3-W ES3.0)
+>> instead of "renesas,r8a7796" since Linux commit:
+>> "9c9f7891093b02eb64ca4e1c7ab776a4296c058f soc: renesas: Identify R-Car 
+>> M3-W+".
+>> Add new compatible to the Xen driver.
+>>
+>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > 
-> At the moment, Live-Update will, by default, not proceed if there are
-> in-flight transactions. It is possible force it by passing -F but this
-> will break any connection with in-flight transactions.
-> 
-> There are PV drivers out that may never terminate some transaction. On
-> host running such guest, we would need to use -F. Unfortunately, this
-> also risks to break well-behaving guests (and even dom0) because
-> Live-Update will happen as soon as the timeout is hit.
-> 
-> This series aims to allow to Live-Update more safely even when the option
-> -F is used.
-> 
-> The first part of the series contains a few fixes for bug found while
-> testing Live-Update.
+> Acked-by: Julien Grall <jgrall@amazon.com>
+
+Committed.
+
+Cheers,
+
 > 
 > Cheers,
 > 
-> Julien Grall (10):
->    MAINTAINERS: Add myself as reviewers for tools/xenstore
->    tools/xenstored: Introduce lu_get_connection() and use it
->    tools/xenstore: Don't assume conn->in points to the LU request
->    tools/xenstored: Limit the number of requests a connection can delay
->    tools/xenstored: xenstored_core.h should include fcntl.h
->    tools/xenstored: Introduce a wrapper for conn->funcs->can_{read,
->      write}
->    tools/xenstored: delay_request: don't assume conn->in == in
->    tools/xenstored: Extend restore code to handle multiple input buffer
-
-I have committed the first 8 patches.
-
->    tools/xenstored: Dump delayed requests
->    tools/xenstored: Delay new transaction while Live-Update is pending
-
-Cheers,
+>> ---
+>>   xen/drivers/passthrough/arm/ipmmu-vmsa.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c 
+>> b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+>> index 8b8e3a0..1255b0d 100644
+>> --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+>> +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+>> @@ -1316,6 +1316,7 @@ static const struct dt_device_match 
+>> ipmmu_dt_match[] __initconst =
+>>       DT_MATCH_COMPATIBLE("renesas,ipmmu-r8a7795"),
+>>       DT_MATCH_COMPATIBLE("renesas,ipmmu-r8a77965"),
+>>       DT_MATCH_COMPATIBLE("renesas,ipmmu-r8a7796"),
+>> +    DT_MATCH_COMPATIBLE("renesas,ipmmu-r8a77961"),
+>>       { /* sentinel */ },
+>>   };
+>>
+> 
 
 -- 
 Julien Grall
