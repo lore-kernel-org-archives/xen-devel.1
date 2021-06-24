@@ -2,49 +2,48 @@ Return-Path: <SRS0=VkMt=LS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8C0BC49EA5
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 15:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8DC4C49EB7
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 15:56:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0B6760234
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 15:34:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0B6760234
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5EDB061209
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Jun 2021 15:56:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5EDB061209
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.146886.270436 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.146892.270458 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwRNI-0005TU-Nk; Thu, 24 Jun 2021 15:34:40 +0000
+	id 1lwRhm-000849-Mp; Thu, 24 Jun 2021 15:55:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 146886.270436; Thu, 24 Jun 2021 15:34:40 +0000
+Received: by outflank-mailman (output) from mailman id 146892.270458; Thu, 24 Jun 2021 15:55:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwRNI-0005TN-Kq; Thu, 24 Jun 2021 15:34:40 +0000
-Received: by outflank-mailman (input) for mailman id 146886;
- Thu, 24 Jun 2021 15:34:39 +0000
+	id 1lwRhm-000840-IT; Thu, 24 Jun 2021 15:55:50 +0000
+Received: by outflank-mailman (input) for mailman id 146892;
+ Thu, 24 Jun 2021 15:55:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6vq+=LS=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1lwRNG-0005TH-Vq
- for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 15:34:39 +0000
-Received: from mail-wr1-x429.google.com (unknown [2a00:1450:4864:20::429])
+ <SRS0=a5fo=LS=chromium.org=tientzu@srs-us1.protection.inumbo.net>)
+ id 1lwRhl-00083W-2v
+ for xen-devel@lists.xenproject.org; Thu, 24 Jun 2021 15:55:49 +0000
+Received: from mail-pf1-x42e.google.com (unknown [2607:f8b0:4864:20::42e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9dbc0e12-473e-462c-b95d-23d6b43ba86b;
- Thu, 24 Jun 2021 15:34:38 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id a13so7145699wrf.10
- for <xen-devel@lists.xenproject.org>; Thu, 24 Jun 2021 08:34:38 -0700 (PDT)
-Received: from ?IPv6:2a00:23c5:5785:9a01:e5c2:6da2:5433:99b5?
- ([2a00:23c5:5785:9a01:e5c2:6da2:5433:99b5])
- by smtp.gmail.com with ESMTPSA id p187sm3432664wmp.28.2021.06.24.08.34.36
+ id 3bf28517-40d5-4d76-aa28-41823a864d62;
+ Thu, 24 Jun 2021 15:55:48 +0000 (UTC)
+Received: by mail-pf1-x42e.google.com with SMTP id c5so5535501pfv.8
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Jun 2021 08:55:48 -0700 (PDT)
+Received: from localhost ([2401:fa00:95:205:165a:99ec:42d5:d8b])
+ by smtp.gmail.com with UTF8SMTPSA id f12sm3216544pfc.100.2021.06.24.08.55.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Jun 2021 08:34:36 -0700 (PDT)
+ Thu, 24 Jun 2021 08:55:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,120 +55,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9dbc0e12-473e-462c-b95d-23d6b43ba86b
+X-Inumbo-ID: 3bf28517-40d5-4d76-aa28-41823a864d62
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=6kXIpn+CEL9LTQWBFHZphYo5c1xea3b9mMMiHyfB8rg=;
-        b=DrLci0requssIiZEPFJyXyHXuOC490++yMlCI24o+z90Xk8RfEdgpHX5SJPIVWulUt
-         H903Rh8q8zMR0+uHp9qiZ342Zq/25q0TjbXbdB+QMQEZxO/PDsKViHUYLIJkGtoNwqGn
-         GwaoaYtVazU6ycPricgI5mcUwwBdpduhz4XHQEB+CU6YkhPgsJcPR0Dy1CveQqpMMMzw
-         u9azIkMqbdxrIeIBqbh0ZEBxVo8ZTamPYT8gV0h8cTtkLLyq5TVBCMPq+RsCyCTSTeka
-         pjAJnmhqP1F95rIhOyN5iPg7VhFidWaas4kW4hEPtM5IBJIrRxYcc/IrmaadZ6IZJ+Hw
-         QPvQ==
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=YJFR7rMJgjSCjddzLV99+gcsv72cCY4rcuJfLx7ix2M=;
+        b=IZ8zEMilmar/QDVLgl1NDX/TTwxyjXxS5kA1fSnBE6n5IfzENsPcNaND27UjFp5jiN
+         u8HH6B7JIXK5EX6f67y7l9dDoZ++rPB0nrtDbiVwhfF52n//6y1BzEqiBhQhAh+kBIK8
+         UMPl2mPih9xqS2jFSSaq+Fm8SSizc0d0wP3VY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:reply-to:subject:to:cc:references
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=6kXIpn+CEL9LTQWBFHZphYo5c1xea3b9mMMiHyfB8rg=;
-        b=euwf8sShj5q4ZsAdGik4GN1PCuHSGcdZZVPIA7715olpoEIijSyo3NGY5RorIMues5
-         /FJ0DGHFARKQgQKd8WgmKKXKmHHR9/N63WHFQNJ3sCaX1auG5LAg/2Ad0J8sZc6t+Qp1
-         104DiWiyscWFb/JKNNX8z4UU9SUCxkMkJWMYRS9fMc6qNzGr3onv7SGpDcIVlLNOAwg0
-         rSIM9TyDJFPfjz5010KV4IKBbuilTFM6Wi/CCesaA1Ny10aEXxLCrg63iiu9YRbZRk8c
-         Sm6onalvldPTD3FkMRFyWcANgBOt0QYzOSR1RIwqgo/knjF0j2aAgrd2irSRZQk43ZHH
-         KqWw==
-X-Gm-Message-State: AOAM532dm2pbebiSjzY8OyNBPRTSPQYVPHY6TpRo+eHs4KyyJC5X6wRp
-	iEXDh/6nqTeKKYvR4Oni9+s=
-X-Google-Smtp-Source: ABdhPJxTu8t8wSDUGP6dHGJSpOfjktTfnd3RthCV7lbDROIQbNV/i55bhMxxccJv7bpAweQN9TVFqQ==
-X-Received: by 2002:adf:fc8e:: with SMTP id g14mr5090300wrr.411.1624548877232;
-        Thu, 24 Jun 2021 08:34:37 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: Paul Durrant <paul@xen.org>
-Reply-To: paul@xen.org
-Subject: Re: [PATCH 9/9] IOMMU/PCI: don't let domain cleanup continue when
- device de-assignment failed
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <03285055-47ff-ab10-ae76-0553f28f136d@suse.com>
- <1a7b974c-8dee-3422-28fb-4118fe145b4e@suse.com>
-Message-ID: <7c5a4244-8f33-0705-f518-0b4e9a0e7cb4@xen.org>
-Date: Thu, 24 Jun 2021 16:34:35 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=YJFR7rMJgjSCjddzLV99+gcsv72cCY4rcuJfLx7ix2M=;
+        b=eT5hIB2VemRRKa2tisFQNpxyE8brda5Bj2VENk2buUQl3i2tqEWyfm8IFR+/la0gQ1
+         JYpZop3AieY3c2BCsuoe/WZw/awEeQgzOVZF2DzqyC+giKKB4UzvLXHYU+G+4tyZ7Rpo
+         4L1MmtNVKVYQBo95p/euk9zu867aYW3KD/98e+NGMTbayHZZG5P6IVnsZ/xbz3vgNPDf
+         4IgMGXCI9pWX8WoPGq3zMBarH69Mo/cSH/CYiYAx4m7D8uV3ekyW71QqA2l4gjT7TdvK
+         Mhwy8LCq/l0v0OYQ0pqShNck6XnU69cDdjVneTOsfiwifTk6vU71gltYCcvw163fgK6I
+         CJcQ==
+X-Gm-Message-State: AOAM531YJ7I85kkBHCwZ2sJBcyBpephRh0plL6x45pBsSesM2zcuhPW0
+	UpZQaCGpMh2u9Bf2wjqlg6uWrA==
+X-Google-Smtp-Source: ABdhPJz6AmQg2p36DPOtVtB4TSDM/glgE/K0cXRSpLrBRHDSDkrUzfxWqUOOjFBiYq3vGkkuKVesgQ==
+X-Received: by 2002:a63:d908:: with SMTP id r8mr5249237pgg.414.1624550147592;
+        Thu, 24 Jun 2021 08:55:47 -0700 (PDT)
+From: Claire Chang <tientzu@chromium.org>
+To: Rob Herring <robh+dt@kernel.org>,
+	mpe@ellerman.id.au,
+	Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	Frank Rowand <frowand.list@gmail.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: benh@kernel.crashing.org,
+	paulus@samba.org,
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+	sstabellini@kernel.org,
+	Robin Murphy <robin.murphy@arm.com>,
+	grant.likely@arm.com,
+	xypron.glpk@gmx.de,
+	Thierry Reding <treding@nvidia.com>,
+	mingo@kernel.org,
+	bauerman@linux.ibm.com,
+	peterz@infradead.org,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Saravana Kannan <saravanak@google.com>,
+	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+	heikki.krogerus@linux.intel.com,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	linux-devicetree <devicetree@vger.kernel.org>,
+	lkml <linux-kernel@vger.kernel.org>,
+	linuxppc-dev@lists.ozlabs.org,
+	xen-devel@lists.xenproject.org,
+	Nicolas Boichat <drinkcat@chromium.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>,
+	tfiga@chromium.org,
+	bskeggs@redhat.com,
+	bhelgaas@google.com,
+	chris@chris-wilson.co.uk,
+	tientzu@chromium.org,
+	daniel@ffwll.ch,
+	airlied@linux.ie,
+	dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	jani.nikula@linux.intel.com,
+	jxgao@google.com,
+	joonas.lahtinen@linux.intel.com,
+	linux-pci@vger.kernel.org,
+	maarten.lankhorst@linux.intel.com,
+	matthew.auld@intel.com,
+	rodrigo.vivi@intel.com,
+	thomas.hellstrom@linux.intel.com,
+	thomas.lendacky@amd.com,
+	quic_qiancai@quicinc.com
+Subject: [PATCH v15 01/12] swiotlb: Refactor swiotlb init functions
+Date: Thu, 24 Jun 2021 23:55:15 +0800
+Message-Id: <20210624155526.2775863-2-tientzu@chromium.org>
+X-Mailer: git-send-email 2.32.0.288.g62a8d224e6-goog
+In-Reply-To: <20210624155526.2775863-1-tientzu@chromium.org>
+References: <20210624155526.2775863-1-tientzu@chromium.org>
 MIME-Version: 1.0
-In-Reply-To: <1a7b974c-8dee-3422-28fb-4118fe145b4e@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 09/06/2021 10:30, Jan Beulich wrote:
-> Failure here could in principle mean the device may still be issuing DMA
-> requests, which would continue to be translated by the page tables the
-> device entry currently points at. With this we cannot allow the
-> subsequent cleanup step of freeing the page tables to occur, to prevent
-> use-after-free issues. We would need to accept, for the time being, that
-> in such a case the remaining domain resources will all be leaked, and
-> the domain will continue to exist as a zombie.
-> 
-> However, with flushes no longer timing out (and with proper timeout
-> detection for device I/O TLB flushing yet to be implemented), there's no
-> way anymore for failures to occur, except due to bugs elsewhere. Hence
-> the change here is merely a "just in case" one.
-> 
-> In order to continue the loop in spite of an error, we can't use
-> pci_get_pdev_by_domain() anymore. I have no idea why it was used here in
-> the first place, instead of the cheaper list iteration.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Add a new function, swiotlb_init_io_tlb_mem, for the io_tlb_mem struct
+initialization to make the code reusable.
 
-Reviewed-by: Paul Durrant <paul@xen.org>
+Signed-off-by: Claire Chang <tientzu@chromium.org>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Tested-by: Stefano Stabellini <sstabellini@kernel.org>
+Tested-by: Will Deacon <will@kernel.org>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+---
+ kernel/dma/swiotlb.c | 50 ++++++++++++++++++++++----------------------
+ 1 file changed, 25 insertions(+), 25 deletions(-)
 
-> ---
-> A first step beyond this could be to have the backing functions of
-> deassign_device() allow the caller to tell whether the failure was from
-> removing the device from the domain being cleaned up, or from re-setup
-> in wherever the device was supposed to get moved to. In the latter case
-> we could allow domain cleanup to continue. I wonder whether we could
-> simply make those functions return "success" anyway, overriding their
-> returning of an error when ->is_dying is set.
-> 
-> A next step then might be to figure whether there's any "emergency"
-> adjustment that could be done instead of the full-fledged (and failed)
-> de-assign, to allow at least recovering all the memory from the guest.
-> 
-> --- a/xen/drivers/passthrough/pci.c
-> +++ b/xen/drivers/passthrough/pci.c
-> @@ -894,7 +894,7 @@ static int deassign_device(struct domain
->   
->   int pci_release_devices(struct domain *d)
->   {
-> -    struct pci_dev *pdev;
-> +    struct pci_dev *pdev, *tmp;
->       u8 bus, devfn;
->       int ret;
->   
-> @@ -905,15 +905,15 @@ int pci_release_devices(struct domain *d
->           pcidevs_unlock();
->           return ret;
->       }
-> -    while ( (pdev = pci_get_pdev_by_domain(d, -1, -1, -1)) )
-> +    list_for_each_entry_safe ( pdev, tmp, &d->pdev_list, domain_list )
->       {
->           bus = pdev->bus;
->           devfn = pdev->devfn;
-> -        deassign_device(d, pdev->seg, bus, devfn);
-> +        ret = deassign_device(d, pdev->seg, bus, devfn) ?: ret;
->       }
->       pcidevs_unlock();
->   
-> -    return 0;
-> +    return ret;
->   }
->   
->   #define PCI_CLASS_BRIDGE_HOST    0x0600
-> 
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 52e2ac526757..1f9b2b9e7490 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -168,9 +168,28 @@ void __init swiotlb_update_mem_attributes(void)
+ 	memset(vaddr, 0, bytes);
+ }
+ 
+-int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
++static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
++				    unsigned long nslabs, bool late_alloc)
+ {
++	void *vaddr = phys_to_virt(start);
+ 	unsigned long bytes = nslabs << IO_TLB_SHIFT, i;
++
++	mem->nslabs = nslabs;
++	mem->start = start;
++	mem->end = mem->start + bytes;
++	mem->index = 0;
++	mem->late_alloc = late_alloc;
++	spin_lock_init(&mem->lock);
++	for (i = 0; i < mem->nslabs; i++) {
++		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
++		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
++		mem->slots[i].alloc_size = 0;
++	}
++	memset(vaddr, 0, bytes);
++}
++
++int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
++{
+ 	struct io_tlb_mem *mem;
+ 	size_t alloc_size;
+ 
+@@ -186,16 +205,8 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
+ 	if (!mem)
+ 		panic("%s: Failed to allocate %zu bytes align=0x%lx\n",
+ 		      __func__, alloc_size, PAGE_SIZE);
+-	mem->nslabs = nslabs;
+-	mem->start = __pa(tlb);
+-	mem->end = mem->start + bytes;
+-	mem->index = 0;
+-	spin_lock_init(&mem->lock);
+-	for (i = 0; i < mem->nslabs; i++) {
+-		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
+-		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
+-		mem->slots[i].alloc_size = 0;
+-	}
++
++	swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
+ 
+ 	io_tlb_default_mem = mem;
+ 	if (verbose)
+@@ -282,8 +293,8 @@ swiotlb_late_init_with_default_size(size_t default_size)
+ int
+ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
+ {
+-	unsigned long bytes = nslabs << IO_TLB_SHIFT, i;
+ 	struct io_tlb_mem *mem;
++	unsigned long bytes = nslabs << IO_TLB_SHIFT;
+ 
+ 	if (swiotlb_force == SWIOTLB_NO_FORCE)
+ 		return 0;
+@@ -297,20 +308,9 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
+ 	if (!mem)
+ 		return -ENOMEM;
+ 
+-	mem->nslabs = nslabs;
+-	mem->start = virt_to_phys(tlb);
+-	mem->end = mem->start + bytes;
+-	mem->index = 0;
+-	mem->late_alloc = 1;
+-	spin_lock_init(&mem->lock);
+-	for (i = 0; i < mem->nslabs; i++) {
+-		mem->slots[i].list = IO_TLB_SEGSIZE - io_tlb_offset(i);
+-		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
+-		mem->slots[i].alloc_size = 0;
+-	}
+-
++	memset(mem, 0, sizeof(*mem));
+ 	set_memory_decrypted((unsigned long)tlb, bytes >> PAGE_SHIFT);
+-	memset(tlb, 0, bytes);
++	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
+ 
+ 	io_tlb_default_mem = mem;
+ 	swiotlb_print_info();
+-- 
+2.32.0.288.g62a8d224e6-goog
 
 
