@@ -2,47 +2,43 @@ Return-Path: <SRS0=GDwr=LT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E8C5C2B9F4
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 12:19:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35468C2B9F4
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 12:30:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 34E276144D
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 12:19:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34E276144D
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id F2A6061463
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 12:30:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2A6061463
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.147160.271058 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.147167.271079 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwknr-0008Nz-VS; Fri, 25 Jun 2021 12:19:23 +0000
+	id 1lwkyR-00029l-5w; Fri, 25 Jun 2021 12:30:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 147160.271058; Fri, 25 Jun 2021 12:19:23 +0000
+Received: by outflank-mailman (output) from mailman id 147167.271079; Fri, 25 Jun 2021 12:30:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwknr-0008Ns-SK; Fri, 25 Jun 2021 12:19:23 +0000
-Received: by outflank-mailman (input) for mailman id 147160;
- Fri, 25 Jun 2021 12:19:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1lwkyR-00029e-29; Fri, 25 Jun 2021 12:30:19 +0000
+Received: by outflank-mailman (input) for mailman id 147167;
+ Fri, 25 Jun 2021 12:30:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lwknr-0008Ni-CT; Fri, 25 Jun 2021 12:19:23 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lwknr-0001xb-5Z; Fri, 25 Jun 2021 12:19:23 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lwknq-0000mH-V2; Fri, 25 Jun 2021 12:19:23 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lwknq-0000PT-UT; Fri, 25 Jun 2021 12:19:22 +0000
+ (envelope-from <SRS0=xnol=LT=kernel.org=will@srs-us1.protection.inumbo.net>)
+ id 1lwkyQ-00029Y-0m
+ for xen-devel@lists.xenproject.org; Fri, 25 Jun 2021 12:30:18 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 154c3622-c7b3-4074-bca4-e8816fa18135;
+ Fri, 25 Jun 2021 12:30:17 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A4C9361463;
+ Fri, 25 Jun 2021 12:30:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,85 +50,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=sjcBmvQUSe/e36XJ2f6niXUjjAJIiuHroIDlV+O2FIQ=; b=58IydurkoTzW97XLLH2NCh6pND
-	b6/shbomSMpvmc8PPEYwLz2I2v2R59xcHm81x8UBAru0IuntDWbKnnJzdfD9TTuHU5+IiXHPXE7+2
-	YIgybvc6++kZO/E7qe6Yy7suBCPJRVWBt6unsFtgdX1agOp/8hRMREAli0ldy4pQo78Y=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-163033-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 154c3622-c7b3-4074-bca4-e8816fa18135
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1624624216;
+	bh=236dSGX7ExOVPv4h0UeOksGQ8SgYCOQ7aXD3NGK83S0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bCaWwZtC9a0kNjsO191mUbtUcojnviRFMJnXBZ/UQc+wZDgM8hUcreC3qNCEkirNE
+	 bbLWlaMbJfBXlg05V08tS0sV+lbJ6mjPNoN7Y8AT15UfxghYQbA3zVDmQkdENHWUeg
+	 aoWWbni5r3mbAZmV1yWyb6Qtn3Rm3bH4e4imD6DcErBaFTOVYzmckxYQM6wCi00qxL
+	 IKspsHt2W8+A5P7LrhMSB0wLC0J5AtiueFbpUWEKsYqOURtPkRdQJiwA+N05SkMbY0
+	 yNml1K+qGwoAZk+3C0lKdhaf1wsPR1zKe7fVETOXT9FqPpHlh5Z2ca5kWomvg9Dx6c
+	 8Pdmk/dzJ5M/g==
+Date: Fri, 25 Jun 2021 13:30:05 +0100
+From: Will Deacon <will@kernel.org>
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Claire Chang <tientzu@chromium.org>, Rob Herring <robh+dt@kernel.org>,
+	mpe@ellerman.id.au, Joerg Roedel <joro@8bytes.org>,
+	Frank Rowand <frowand.list@gmail.com>, boris.ostrovsky@oracle.com,
+	jgross@suse.com, Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	benh@kernel.crashing.org, paulus@samba.org,
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+	sstabellini@kernel.org, Robin Murphy <robin.murphy@arm.com>,
+	grant.likely@arm.com, xypron.glpk@gmx.de,
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org,
+	bauerman@linux.ibm.com, peterz@infradead.org,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Saravana Kannan <saravanak@google.com>,
+	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+	heikki.krogerus@linux.intel.com,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	linux-devicetree <devicetree@vger.kernel.org>,
+	lkml <linux-kernel@vger.kernel.org>, linuxppc-dev@lists.ozlabs.org,
+	xen-devel@lists.xenproject.org,
+	Nicolas Boichat <drinkcat@chromium.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>, tfiga@chromium.org,
+	bskeggs@redhat.com, bhelgaas@google.com, chris@chris-wilson.co.uk,
+	daniel@ffwll.ch, airlied@linux.ie, dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	jxgao@google.com, joonas.lahtinen@linux.intel.com,
+	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com,
+	matthew.auld@intel.com, rodrigo.vivi@intel.com,
+	thomas.hellstrom@linux.intel.com, thomas.lendacky@amd.com,
+	quic_qiancai@quicinc.com
+Subject: Re: [PATCH v15 00/12] Restricted DMA
+Message-ID: <20210625123004.GA3170@willie-the-truck>
+References: <20210624155526.2775863-1-tientzu@chromium.org>
+ <YNTa1C5uvz+qWryf@char.us.oracle.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 163033: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=8a9b94982b0e0928ad874907f5a5b005944ab7cf
-X-Osstest-Versions-That:
-    xen=e87d8f60fa9b6eaa6a2357545a96e4fff05dbef0
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 25 Jun 2021 12:19:22 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <YNTa1C5uvz+qWryf@char.us.oracle.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-flight 163033 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/163033/
+On Thu, Jun 24, 2021 at 03:19:48PM -0400, Konrad Rzeszutek Wilk wrote:
+> On Thu, Jun 24, 2021 at 11:55:14PM +0800, Claire Chang wrote:
+> > This series implements mitigations for lack of DMA access control on
+> > systems without an IOMMU, which could result in the DMA accessing the
+> > system memory at unexpected times and/or unexpected addresses, possibly
+> > leading to data leakage or corruption.
+> > 
+> > For example, we plan to use the PCI-e bus for Wi-Fi and that PCI-e bus is
+> > not behind an IOMMU. As PCI-e, by design, gives the device full access to
+> > system memory, a vulnerability in the Wi-Fi firmware could easily escalate
+> > to a full system exploit (remote wifi exploits: [1a], [1b] that shows a
+> > full chain of exploits; [2], [3]).
+> > 
+> > To mitigate the security concerns, we introduce restricted DMA. Restricted
+> > DMA utilizes the existing swiotlb to bounce streaming DMA in and out of a
+> > specially allocated region and does memory allocation from the same region.
+> > The feature on its own provides a basic level of protection against the DMA
+> > overwriting buffer contents at unexpected times. However, to protect
+> > against general data leakage and system memory corruption, the system needs
+> > to provide a way to restrict the DMA to a predefined memory region (this is
+> > usually done at firmware level, e.g. MPU in ATF on some ARM platforms [4]).
+> > 
+> > [1a] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_4.html
+> > [1b] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_11.html
+> > [2] https://blade.tencent.com/en/advisories/qualpwn/
+> > [3] https://www.bleepingcomputer.com/news/security/vulnerabilities-found-in-highly-popular-firmware-for-wifi-chips/
+> > [4] https://github.com/ARM-software/arm-trusted-firmware/blob/master/plat/mediatek/mt8183/drivers/emi_mpu/emi_mpu.c#L132
+> > 
+> > v15:
+> > - Apply Will's diff (https://lore.kernel.org/patchwork/patch/1448957/#1647521)
+> >   to fix the crash reported by Qian.
+> > - Add Stefano's Acked-by tag for patch 01/12 from v14
+> 
+> That all should be now be on
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/konrad/swiotlb.git/
+> devel/for-linus-5.14 (and linux-next)
 
-Failures :-/ but no regressions.
+Thanks Konrad!
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  8a9b94982b0e0928ad874907f5a5b005944ab7cf
-baseline version:
- xen                  e87d8f60fa9b6eaa6a2357545a96e4fff05dbef0
-
-Last test of basis   163019  2021-06-24 15:00:27 Z    0 days
-Testing same since   163033  2021-06-25 10:01:25 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Julien Grall <jgrall@amazon.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   e87d8f60fa..8a9b94982b  8a9b94982b0e0928ad874907f5a5b005944ab7cf -> smoke
+Will
 
