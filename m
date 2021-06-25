@@ -2,47 +2,49 @@ Return-Path: <SRS0=GDwr=LT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE7B1C2B9F4
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 14:09:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF861C49EA7
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 14:13:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 84ED361946
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 14:09:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 84ED361946
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id BD77B6194D
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Jun 2021 14:13:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD77B6194D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.147260.271300 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.147265.271317 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwmWM-0003Ok-QU; Fri, 25 Jun 2021 14:09:26 +0000
+	id 1lwmZy-0004o2-E0; Fri, 25 Jun 2021 14:13:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 147260.271300; Fri, 25 Jun 2021 14:09:26 +0000
+Received: by outflank-mailman (output) from mailman id 147265.271317; Fri, 25 Jun 2021 14:13:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lwmWM-0003Od-NO; Fri, 25 Jun 2021 14:09:26 +0000
-Received: by outflank-mailman (input) for mailman id 147260;
- Fri, 25 Jun 2021 14:09:25 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lwmWL-0003OT-FG; Fri, 25 Jun 2021 14:09:25 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lwmWL-00042g-CX; Fri, 25 Jun 2021 14:09:25 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lwmWL-00063K-2a; Fri, 25 Jun 2021 14:09:25 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lwmWL-0007Ku-22; Fri, 25 Jun 2021 14:09:25 +0000
+	id 1lwmZy-0004nv-Aw; Fri, 25 Jun 2021 14:13:10 +0000
+Received: by outflank-mailman (input) for mailman id 147265;
+ Fri, 25 Jun 2021 14:13:09 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=tpuW=LT=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1lwmZx-0004np-2O
+ for xen-devel@lists.xenproject.org; Fri, 25 Jun 2021 14:13:09 +0000
+Received: from mail-wr1-x42c.google.com (unknown [2a00:1450:4864:20::42c])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7ff3ae15-d344-434d-b3ce-931d23368bf2;
+ Fri, 25 Jun 2021 14:13:07 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id e22so10782335wrc.1
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jun 2021 07:13:07 -0700 (PDT)
+Received: from ?IPv6:2a00:23c5:5785:9a01:9da4:f15e:5616:d3e5?
+ ([2a00:23c5:5785:9a01:9da4:f15e:5616:d3e5])
+ by smtp.gmail.com with ESMTPSA id 12sm9532966wme.28.2021.06.25.07.13.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Jun 2021 07:13:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,112 +56,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=iFTNqAL1G5tQc6xBAficCS/V3kbxyfJTT/3xIrSihZ8=; b=Smy48Cftrcda3zQ2N8NOx8uXzZ
-	eGy7M2E2eJQ1J7ULw1Avjl82qo7ba1+NGaelEl1+HDtbmd9QZ1yBriK/b7yDCiHh9lDS+fjQWLeJ9
-	rVLDble2g0hyhpp4a8Q0CMAzOUPJmQLo9mMHF8uLCxmlWpRXdgQtQo1aPecYnirMH+9o=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-163028-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 7ff3ae15-d344-434d-b3ce-931d23368bf2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=kmXKJJsN40CJbASCatuHJEFEeomHLNq1D39cTQAmCAg=;
+        b=Kz+a6gBl+d8RQ87xxzczMNIm7rsS77JeyiNr7tWcK/fwlDxbEfCDdEk0nyb49nm/Eb
+         oZL6FBnQ7598hZS1fu9RwtWwRcL8cdzdCjluN8oXaulSkE7zmOc7RO7wFMmQkXztHzr9
+         tQvfylPHlCYjjZqIm7jCmBm93Ame6w1GQizrQaX2liNbrY0PSJ9FuSoOPzUGYKb6w92x
+         Nf9mFqGV62qvMbsHR58iUqPLml5ihPsfqCAdBaVDqZfV/iOIEjTXUQy3FT78FIGDFjPA
+         /hcl74KFyUvrpDl85O28SrcqQiX3EA/fvuUV0h7LJBalAVnT09gIAJYY5eCjkBacPlUd
+         RmQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:subject:to:cc:references
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=kmXKJJsN40CJbASCatuHJEFEeomHLNq1D39cTQAmCAg=;
+        b=hOUQ5ui5ae33XY5e0+zL2C/8CW1KlQJFBqPvvZHnUaZBmV3qyaNrb3LouHWVahUrkj
+         2ro9YpXFeYg3N+79jTP3f+h4vaNgdwIW9VKHbXHoTj5M8KcADOqB1T13eRH5wkTgK7ZO
+         ogA2V3s0u773rQvNtM9l32qIgUzBu/oFpsorx+9xiFmc+QnXG21DZ+nx2g71WXs089C0
+         gSE4mHOPqjKFho1KCDlxksEpAUT1px6yd++gqietYu8Pd7Ty3cvlkgCLsOctemR1uwXH
+         9D3Zg3Mc8UquGjdeKr8dk0lth2F/jO0jCAsWzx5aijCt43X+50OapU7+rA/qnruXQMfD
+         G5Nw==
+X-Gm-Message-State: AOAM532F5qklxf/IuyF31nY1rm5axvHlxshBJyKyC4MnpV5LRvcOEyy5
+	kpR4r4EzKh5dgFJknjFl6IU=
+X-Google-Smtp-Source: ABdhPJz0aIxUGnGk+VQRQXI33YAaJsw35AG50dIliqYjxP+aIoIa6MgNPIAIGBENb424OlrT5RrxcA==
+X-Received: by 2002:a5d:4b8d:: with SMTP id b13mr11284117wrt.147.1624630386896;
+        Fri, 25 Jun 2021 07:13:06 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Reply-To: paul@xen.org
+Subject: Re: [PATCH v2 2/2] AMD/IOMMU: re-work locking around sending of
+ commands
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <a6e72235-570b-c426-589c-236f37749e1e@suse.com>
+ <80f6365d-4f0d-66b5-b0ab-99dfeb40bd31@suse.com>
+Message-ID: <9c2c4888-3618-1d55-8283-36e95775ff98@xen.org>
+Date: Fri, 25 Jun 2021 15:13:05 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Subject: [ovmf test] 163028: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
-X-Osstest-Versions-This:
-    ovmf=17143c4837393d42c484b42d1789b85b2cff1aaf
-X-Osstest-Versions-That:
-    ovmf=c410ad4da4b7785170d3d42a3ba190c2caac6feb
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 25 Jun 2021 14:09:25 +0000
+In-Reply-To: <80f6365d-4f0d-66b5-b0ab-99dfeb40bd31@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-flight 163028 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/163028/
+On 25/06/2021 13:15, Jan Beulich wrote:
+> It appears unhelpful to me for flush_command_buffer() to block all
+> progress elsewhere for the given IOMMU by holding its lock while waiting
+> for command completion. There's no real need for callers of that
+> function or of send_iommu_command() to hold the lock. Contain all
+> command sending related locking to the latter function.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-i386-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 162359
- test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 162359
-
-version targeted for testing:
- ovmf                 17143c4837393d42c484b42d1789b85b2cff1aaf
-baseline version:
- ovmf                 c410ad4da4b7785170d3d42a3ba190c2caac6feb
-
-Last test of basis   162359  2021-06-04 03:40:08 Z   21 days
-Failing since        162368  2021-06-04 15:42:59 Z   20 days   48 attempts
-Testing same since   163028  2021-06-25 07:30:32 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Agrawal, Sachin <sachin.agrawal@intel.com>
-  Alexandru Elisei <alexandru.elisei@arm.com>
-  Ard Biesheuvel <ardb@kernel.org>
-  Daoxiang Li <daoxiang.li@intel.com>
-  DunTan <dun.tan@intel.com>
-  gaoliming <gaoliming@byosoft.com.cn>
-  Guo Dong <guo.dong@intel.com>
-  Hao A Wu <hao.a.wu@intel.com>
-  Jian J Wang <jian.j.wang@intel.com>
-  Kaaira Gupta <kaaira7319@gmail.com>
-  Ken Lautner <klautner@microsoft.com>
-  Kenneth Lautner <kenlautner3@gmail.com>
-  Kun Qin <kuqin12@gmail.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Leif Lindholm <leif@nuviainc.com>
-  Liming Gao <gaoliming@byosoft.com.cn>
-  Maurice Ma <maurice.ma@intel.com>
-  Ni, Ray <ray.ni@intel.com>
-  Patrick Rudolph <patrick.rudolph@9elements.com>
-  Pierre Gondois <Pierre.Gondois@arm.com>
-  Ray Ni <ray.ni@intel.com>
-  Rebecca Cran <rebecca@bsdio.com>
-  Rebecca Cran <rebecca@nuviainc.com>
-  Sachin Agrawal <sachin.agrawal@intel.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Scottie Kuo <scottie.kuo@intel.com>
-  Sean Brogan <sean.brogan@microsoft.com>
-  Sean Brogan <spbrogan@live.com>
-  Sumana Venur <sumana.venur@intel.com>
-  xueshengfeng <xueshengfeng@byosoft.com.cn>
-  Zhiguang Liu <zhiguang.liu@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 2647 lines long.)
+Reviewed-by: Paul Durrant <paul@xen.org>
 
