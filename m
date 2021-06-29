@@ -2,48 +2,49 @@ Return-Path: <SRS0=dxCq=LX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UPPERCASE_50_75,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B05EC11F68
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97D93C11F6A
 	for <xen-devel@archiver.kernel.org>; Tue, 29 Jun 2021 17:10:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1E6461D72
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Jun 2021 17:10:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1E6461D72
+	by mail.kernel.org (Postfix) with ESMTPS id 5F44A61D72
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Jun 2021 17:10:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5F44A61D72
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148060.273479 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148061.273490 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyHFH-0003pB-O6; Tue, 29 Jun 2021 17:09:59 +0000
+	id 1lyHFK-00047S-30; Tue, 29 Jun 2021 17:10:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148060.273479; Tue, 29 Jun 2021 17:09:59 +0000
+Received: by outflank-mailman (output) from mailman id 148061.273490; Tue, 29 Jun 2021 17:10:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyHFH-0003p4-Kq; Tue, 29 Jun 2021 17:09:59 +0000
-Received: by outflank-mailman (input) for mailman id 148060;
- Tue, 29 Jun 2021 17:09:58 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lyHFJ-00047L-SM; Tue, 29 Jun 2021 17:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 148061;
+ Tue, 29 Jun 2021 17:09:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vrVS=LX=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1lyHFG-0003oo-3C
- for xen-devel@lists.xenproject.org; Tue, 29 Jun 2021 17:09:58 +0000
+ id 1lyHFH-0003pT-RD
+ for xen-devel@lists.xenproject.org; Tue, 29 Jun 2021 17:09:59 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 66099a5a-a1dd-491c-aadc-b30e4cda6bcc;
- Tue, 29 Jun 2021 17:09:56 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id a139ef0a-c618-4222-9b02-19e5a1e0e7f6;
+ Tue, 29 Jun 2021 17:09:59 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 904091FB;
- Tue, 29 Jun 2021 10:09:56 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 07D6C1FB;
+ Tue, 29 Jun 2021 10:09:59 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BF41C3F694;
- Tue, 29 Jun 2021 10:09:55 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C0F5D3F694;
+ Tue, 29 Jun 2021 10:09:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,355 +56,386 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 66099a5a-a1dd-491c-aadc-b30e4cda6bcc
+X-Inumbo-ID: a139ef0a-c618-4222-9b02-19e5a1e0e7f6
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH 1/4] xen/arm: Import ID registers definitions from Linux
-Date: Tue, 29 Jun 2021 18:08:53 +0100
-Message-Id: <432a76f45a783fb74db133b54d4b78bab9241212.1624974370.git.bertrand.marquis@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [RFC PATCH 3/4] xen/arm: Sanitize cpuinfo ID registers fields
+Date: Tue, 29 Jun 2021 18:08:55 +0100
+Message-Id: <b9c86a28df2bddca095ae02511ced09585dce164.1624974370.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1624974370.git.bertrand.marquis@arm.com>
 References: <cover.1624974370.git.bertrand.marquis@arm.com>
 In-Reply-To: <cover.1624974370.git.bertrand.marquis@arm.com>
 References: <cover.1624974370.git.bertrand.marquis@arm.com>
 
-Import some ID registers definitions from Linux sysreg header to have
-required shift definitions for all ID registers fields.
+Define a sanitize_cpu function to be called on secondary cores to
+sanitize the cpuinfo structure from the boot CPU.
 
-Those are required to reuse the cpufeature sanitization system from
-Linux kernel.
+The safest value is taken when possible and the system is marked tainted
+if we encounter values which are incompatible with each other.
+
+Call the sanitize_cpu function on all secondary cores and remove the
+code disabling secondary cores if they are not the same as the boot core
+as we are now able to handle this use case.
+
+This is only supported on arm64 so cpu_sanitize is an empty static
+inline on arm32.
+
+This patch also removes the code imported from Linux that will not be
+used by Xen.
 
 Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/include/asm-arm/arm64/sysregs.h | 312 ++++++++++++++++++++++++++++
- 1 file changed, 312 insertions(+)
+ xen/arch/arm/arm64/cpusanitize.c | 236 ++++++++++++++++++++++++-------
+ xen/arch/arm/smpboot.c           |   5 +-
+ xen/include/asm-arm/cpufeature.h |   9 ++
+ xen/include/xen/lib.h            |   1 +
+ 4 files changed, 199 insertions(+), 52 deletions(-)
 
-diff --git a/xen/include/asm-arm/arm64/sysregs.h b/xen/include/asm-arm/arm64/sysregs.h
-index 077fd95fb7..555f1e08b2 100644
---- a/xen/include/asm-arm/arm64/sysregs.h
-+++ b/xen/include/asm-arm/arm64/sysregs.h
-@@ -85,6 +85,318 @@
- #define ID_DFR1_EL1                 S3_0_C0_C3_5
- #endif
+diff --git a/xen/arch/arm/arm64/cpusanitize.c b/xen/arch/arm/arm64/cpusanitize.c
+index 4cc8378c14..744006ca7c 100644
+--- a/xen/arch/arm/arm64/cpusanitize.c
++++ b/xen/arch/arm/arm64/cpusanitize.c
+@@ -97,10 +97,6 @@ struct arm64_ftr_bits {
+ 		.width = 0,				\
+ 	}
  
-+/* ID registers (imported from arm64/include/asm/sysreg.h in Linux) */
+-static void cpu_enable_cnp(struct arm64_cpu_capabilities const *cap);
+-
+-static bool __system_matches_cap(unsigned int n);
+-
+ /*
+  * NOTE: Any changes to the visibility of features should be kept in
+  * sync with the documentation of the CPU feature register ABI.
+@@ -277,31 +273,6 @@ static const struct arm64_ftr_bits ftr_id_aa64mmfr2[] = {
+ 	ARM64_FTR_END,
+ };
+ 
+-static const struct arm64_ftr_bits ftr_ctr[] = {
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_EXACT, 31, 1, 1), /* RES1 */
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, CTR_DIC_SHIFT, 1, 1),
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, CTR_IDC_SHIFT, 1, 1),
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_HIGHER_OR_ZERO_SAFE, CTR_CWG_SHIFT, 4, 0),
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_HIGHER_OR_ZERO_SAFE, CTR_ERG_SHIFT, 4, 0),
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, CTR_DMINLINE_SHIFT, 4, 1),
+-	/*
+-	 * Linux can handle differing I-cache policies. Userspace JITs will
+-	 * make use of *minLine.
+-	 * If we have differing I-cache policies, report it as the weakest - VIPT.
+-	 */
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_NONSTRICT, FTR_EXACT, CTR_L1IP_SHIFT, 2, ICACHE_POLICY_VIPT),	/* L1Ip */
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, CTR_IMINLINE_SHIFT, 4, 0),
+-	ARM64_FTR_END,
+-};
+-
+-static struct arm64_ftr_override __ro_after_init no_override = { };
+-
+-struct arm64_ftr_reg arm64_ftr_reg_ctrel0 = {
+-	.name		= "SYS_CTR_EL0",
+-	.ftr_bits	= ftr_ctr,
+-	.override	= &no_override,
+-};
+-
+ static const struct arm64_ftr_bits ftr_id_mmfr0[] = {
+ 	S_ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_MMFR0_INNERSHR_SHIFT, 4, 0xf),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_MMFR0_FCSE_SHIFT, 4, 0),
+@@ -335,12 +306,6 @@ static const struct arm64_ftr_bits ftr_mvfr2[] = {
+ 	ARM64_FTR_END,
+ };
+ 
+-static const struct arm64_ftr_bits ftr_dczid[] = {
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_EXACT, DCZID_DZP_SHIFT, 1, 1),
+-	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, DCZID_BS_SHIFT, 4, 0),
+-	ARM64_FTR_END,
+-};
+-
+ static const struct arm64_ftr_bits ftr_id_isar0[] = {
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_ISAR0_DIVIDE_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_ISAR0_DEBUG_SHIFT, 4, 0),
+@@ -454,12 +419,6 @@ static const struct arm64_ftr_bits ftr_id_dfr1[] = {
+ 	ARM64_FTR_END,
+ };
+ 
+-static const struct arm64_ftr_bits ftr_zcr[] = {
+-	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE,
+-		ZCR_ELx_LEN_SHIFT, ZCR_ELx_LEN_SIZE, 0),	/* LEN */
+-	ARM64_FTR_END,
+-};
+-
+ /*
+  * Common ftr bits for a 32bit register with all hidden, strict
+  * attributes, with 4bit feature fields and a default safe value of
+@@ -478,17 +437,192 @@ static const struct arm64_ftr_bits ftr_generic_32bits[] = {
+ 	ARM64_FTR_END,
+ };
+ 
+-/* Table for a single 32bit feature value */
+-static const struct arm64_ftr_bits ftr_single32[] = {
+-	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_EXACT, 0, 32, 0),
+-	ARM64_FTR_END,
+-};
+-
+-static const struct arm64_ftr_bits ftr_raz[] = {
+-	ARM64_FTR_END,
+-};
+-
+ /*
+  * End of imported linux structures
+  */
+ 
++static inline int __attribute_const__
++cpuid_feature_extract_signed_field_width(u64 features, int field, int width)
++{
++    return (s64)(features << (64 - width - field)) >> (64 - width);
++}
 +
-+/* id_aa64isar0 */
-+#define ID_AA64ISAR0_RNDR_SHIFT      60
-+#define ID_AA64ISAR0_TLB_SHIFT       56
-+#define ID_AA64ISAR0_TS_SHIFT        52
-+#define ID_AA64ISAR0_FHM_SHIFT       48
-+#define ID_AA64ISAR0_DP_SHIFT        44
-+#define ID_AA64ISAR0_SM4_SHIFT       40
-+#define ID_AA64ISAR0_SM3_SHIFT       36
-+#define ID_AA64ISAR0_SHA3_SHIFT      32
-+#define ID_AA64ISAR0_RDM_SHIFT       28
-+#define ID_AA64ISAR0_ATOMICS_SHIFT   20
-+#define ID_AA64ISAR0_CRC32_SHIFT     16
-+#define ID_AA64ISAR0_SHA2_SHIFT      12
-+#define ID_AA64ISAR0_SHA1_SHIFT      8
-+#define ID_AA64ISAR0_AES_SHIFT       4
++static inline int __attribute_const__
++cpuid_feature_extract_signed_field(u64 features, int field)
++{
++    return cpuid_feature_extract_signed_field_width(features, field, 4);
++}
 +
-+#define ID_AA64ISAR0_TLB_RANGE_NI    0x0
-+#define ID_AA64ISAR0_TLB_RANGE       0x2
++static inline unsigned int __attribute_const__
++cpuid_feature_extract_unsigned_field_width(u64 features, int field, int width)
++{
++    return (u64)(features << (64 - width - field)) >> (64 - width);
++}
 +
-+/* id_aa64isar1 */
-+#define ID_AA64ISAR1_I8MM_SHIFT      52
-+#define ID_AA64ISAR1_DGH_SHIFT       48
-+#define ID_AA64ISAR1_BF16_SHIFT      44
-+#define ID_AA64ISAR1_SPECRES_SHIFT   40
-+#define ID_AA64ISAR1_SB_SHIFT        36
-+#define ID_AA64ISAR1_FRINTTS_SHIFT   32
-+#define ID_AA64ISAR1_GPI_SHIFT       28
-+#define ID_AA64ISAR1_GPA_SHIFT       24
-+#define ID_AA64ISAR1_LRCPC_SHIFT     20
-+#define ID_AA64ISAR1_FCMA_SHIFT      16
-+#define ID_AA64ISAR1_JSCVT_SHIFT     12
-+#define ID_AA64ISAR1_API_SHIFT       8
-+#define ID_AA64ISAR1_APA_SHIFT       4
-+#define ID_AA64ISAR1_DPB_SHIFT       0
++static inline unsigned int __attribute_const__
++cpuid_feature_extract_unsigned_field(u64 features, int field)
++{
++    return cpuid_feature_extract_unsigned_field_width(features, field, 4);
++}
 +
-+#define ID_AA64ISAR1_APA_NI                     0x0
-+#define ID_AA64ISAR1_APA_ARCHITECTED            0x1
-+#define ID_AA64ISAR1_APA_ARCH_EPAC              0x2
-+#define ID_AA64ISAR1_APA_ARCH_EPAC2             0x3
-+#define ID_AA64ISAR1_APA_ARCH_EPAC2_FPAC        0x4
-+#define ID_AA64ISAR1_APA_ARCH_EPAC2_FPAC_CMB    0x5
-+#define ID_AA64ISAR1_API_NI                     0x0
-+#define ID_AA64ISAR1_API_IMP_DEF                0x1
-+#define ID_AA64ISAR1_API_IMP_DEF_EPAC           0x2
-+#define ID_AA64ISAR1_API_IMP_DEF_EPAC2          0x3
-+#define ID_AA64ISAR1_API_IMP_DEF_EPAC2_FPAC     0x4
-+#define ID_AA64ISAR1_API_IMP_DEF_EPAC2_FPAC_CMB 0x5
-+#define ID_AA64ISAR1_GPA_NI                     0x0
-+#define ID_AA64ISAR1_GPA_ARCHITECTED            0x1
-+#define ID_AA64ISAR1_GPI_NI                     0x0
-+#define ID_AA64ISAR1_GPI_IMP_DEF                0x1
++static inline u64 arm64_ftr_mask(const struct arm64_ftr_bits *ftrp)
++{
++    return (u64)GENMASK(ftrp->shift + ftrp->width - 1, ftrp->shift);
++}
 +
-+/* id_aa64pfr0 */
-+#define ID_AA64PFR0_CSV3_SHIFT       60
-+#define ID_AA64PFR0_CSV2_SHIFT       56
-+#define ID_AA64PFR0_DIT_SHIFT        48
-+#define ID_AA64PFR0_AMU_SHIFT        44
-+#define ID_AA64PFR0_MPAM_SHIFT       40
-+#define ID_AA64PFR0_SEL2_SHIFT       36
-+#define ID_AA64PFR0_SVE_SHIFT        32
-+#define ID_AA64PFR0_RAS_SHIFT        28
-+#define ID_AA64PFR0_GIC_SHIFT        24
-+#define ID_AA64PFR0_ASIMD_SHIFT      20
-+#define ID_AA64PFR0_FP_SHIFT         16
-+#define ID_AA64PFR0_EL3_SHIFT        12
-+#define ID_AA64PFR0_EL2_SHIFT        8
-+#define ID_AA64PFR0_EL1_SHIFT        4
-+#define ID_AA64PFR0_EL0_SHIFT        0
++static inline int __attribute_const__
++cpuid_feature_extract_field_width(u64 features, int field, int width,
++                                  bool sign)
++{
++    return (sign) ?
++        cpuid_feature_extract_signed_field_width(features, field, width) :
++        cpuid_feature_extract_unsigned_field_width(features, field, width);
++}
 +
-+#define ID_AA64PFR0_AMU              0x1
-+#define ID_AA64PFR0_SVE              0x1
-+#define ID_AA64PFR0_RAS_V1           0x1
-+#define ID_AA64PFR0_FP_NI            0xf
-+#define ID_AA64PFR0_FP_SUPPORTED     0x0
-+#define ID_AA64PFR0_ASIMD_NI         0xf
-+#define ID_AA64PFR0_ASIMD_SUPPORTED  0x0
-+#define ID_AA64PFR0_EL1_64BIT_ONLY   0x1
-+#define ID_AA64PFR0_EL1_32BIT_64BIT  0x2
-+#define ID_AA64PFR0_EL0_64BIT_ONLY   0x1
-+#define ID_AA64PFR0_EL0_32BIT_64BIT  0x2
++static inline int __attribute_const__
++cpuid_feature_extract_field(u64 features, int field, bool sign)
++{
++    return cpuid_feature_extract_field_width(features, field, 4, sign);
++}
 +
-+/* id_aa64pfr1 */
-+#define ID_AA64PFR1_MPAMFRAC_SHIFT   16
-+#define ID_AA64PFR1_RASFRAC_SHIFT    12
-+#define ID_AA64PFR1_MTE_SHIFT        8
-+#define ID_AA64PFR1_SSBS_SHIFT       4
-+#define ID_AA64PFR1_BT_SHIFT         0
++static inline s64 arm64_ftr_value(const struct arm64_ftr_bits *ftrp, u64 val)
++{
++    return (s64)cpuid_feature_extract_field_width(val, ftrp->shift,
++                                                  ftrp->width, ftrp->sign);
++}
 +
-+#define ID_AA64PFR1_SSBS_PSTATE_NI    0
-+#define ID_AA64PFR1_SSBS_PSTATE_ONLY  1
-+#define ID_AA64PFR1_SSBS_PSTATE_INSNS 2
-+#define ID_AA64PFR1_BT_BTI            0x1
++static s64 arm64_ftr_safe_value(const struct arm64_ftr_bits *ftrp, s64 new,
++                                s64 cur)
++{
++    s64 ret = 0;
 +
-+#define ID_AA64PFR1_MTE_NI           0x0
-+#define ID_AA64PFR1_MTE_EL0          0x1
-+#define ID_AA64PFR1_MTE              0x2
++    switch ( ftrp->type ) {
++    case FTR_EXACT:
++        ret = ftrp->safe_val;
++        break;
++    case FTR_LOWER_SAFE:
++        ret = new < cur ? new : cur;
++        break;
++    case FTR_HIGHER_OR_ZERO_SAFE:
++        if (!cur || !new)
++            break;
++        fallthrough;
++    case FTR_HIGHER_SAFE:
++        ret = new > cur ? new : cur;
++        break;
++    default:
++        BUG();
++    }
 +
-+/* id_aa64zfr0 */
-+#define ID_AA64ZFR0_F64MM_SHIFT      56
-+#define ID_AA64ZFR0_F32MM_SHIFT      52
-+#define ID_AA64ZFR0_I8MM_SHIFT       44
-+#define ID_AA64ZFR0_SM4_SHIFT        40
-+#define ID_AA64ZFR0_SHA3_SHIFT       32
-+#define ID_AA64ZFR0_BF16_SHIFT       20
-+#define ID_AA64ZFR0_BITPERM_SHIFT    16
-+#define ID_AA64ZFR0_AES_SHIFT        4
-+#define ID_AA64ZFR0_SVEVER_SHIFT     0
++    return ret;
++}
 +
-+#define ID_AA64ZFR0_F64MM            0x1
-+#define ID_AA64ZFR0_F32MM            0x1
-+#define ID_AA64ZFR0_I8MM             0x1
-+#define ID_AA64ZFR0_BF16             0x1
-+#define ID_AA64ZFR0_SM4              0x1
-+#define ID_AA64ZFR0_SHA3             0x1
-+#define ID_AA64ZFR0_BITPERM          0x1
-+#define ID_AA64ZFR0_AES              0x1
-+#define ID_AA64ZFR0_AES_PMULL        0x2
-+#define ID_AA64ZFR0_SVEVER_SVE2      0x1
++static void sanitize_reg(u64 *cur_reg, u64 new_reg, const char *reg_name,
++                        const struct arm64_ftr_bits *ftrp)
++{
++    int taint = 0;
++    u64 old_reg = *cur_reg;
 +
-+/* id_aa64mmfr0 */
-+#define ID_AA64MMFR0_ECV_SHIFT       60
-+#define ID_AA64MMFR0_FGT_SHIFT       56
-+#define ID_AA64MMFR0_EXS_SHIFT       44
-+#define ID_AA64MMFR0_TGRAN4_2_SHIFT  40
-+#define ID_AA64MMFR0_TGRAN64_2_SHIFT 36
-+#define ID_AA64MMFR0_TGRAN16_2_SHIFT 32
-+#define ID_AA64MMFR0_TGRAN4_SHIFT    28
-+#define ID_AA64MMFR0_TGRAN64_SHIFT   24
-+#define ID_AA64MMFR0_TGRAN16_SHIFT   20
-+#define ID_AA64MMFR0_BIGENDEL0_SHIFT 16
-+#define ID_AA64MMFR0_SNSMEM_SHIFT    12
-+#define ID_AA64MMFR0_BIGENDEL_SHIFT  8
-+#define ID_AA64MMFR0_ASID_SHIFT      4
-+#define ID_AA64MMFR0_PARANGE_SHIFT   0
++    for ( ; ftrp->width !=0 ; ftrp++ )
++    {
++        u64 mask;
++        s64 cur_field = arm64_ftr_value(ftrp, *cur_reg);
++        s64 new_field = arm64_ftr_value(ftrp, new_reg);
 +
-+#define ID_AA64MMFR0_TGRAN4_NI         0xf
-+#define ID_AA64MMFR0_TGRAN4_SUPPORTED  0x0
-+#define ID_AA64MMFR0_TGRAN64_NI        0xf
-+#define ID_AA64MMFR0_TGRAN64_SUPPORTED 0x0
-+#define ID_AA64MMFR0_TGRAN16_NI        0x0
-+#define ID_AA64MMFR0_TGRAN16_SUPPORTED 0x1
-+#define ID_AA64MMFR0_PARANGE_48        0x5
-+#define ID_AA64MMFR0_PARANGE_52        0x6
++        if ( cur_field == new_field )
++            continue;
 +
-+/* id_aa64mmfr1 */
-+#define ID_AA64MMFR1_ETS_SHIFT       36
-+#define ID_AA64MMFR1_TWED_SHIFT      32
-+#define ID_AA64MMFR1_XNX_SHIFT       28
-+#define ID_AA64MMFR1_SPECSEI_SHIFT   24
-+#define ID_AA64MMFR1_PAN_SHIFT       20
-+#define ID_AA64MMFR1_LOR_SHIFT       16
-+#define ID_AA64MMFR1_HPD_SHIFT       12
-+#define ID_AA64MMFR1_VHE_SHIFT       8
-+#define ID_AA64MMFR1_VMIDBITS_SHIFT  4
-+#define ID_AA64MMFR1_HADBS_SHIFT     0
++        if ( ftrp->strict )
++            taint = 1;
 +
-+#define ID_AA64MMFR1_VMIDBITS_8      0
-+#define ID_AA64MMFR1_VMIDBITS_16     2
++        mask = arm64_ftr_mask(ftrp);
 +
-+/* id_aa64mmfr2 */
-+#define ID_AA64MMFR2_E0PD_SHIFT      60
-+#define ID_AA64MMFR2_EVT_SHIFT       56
-+#define ID_AA64MMFR2_BBM_SHIFT       52
-+#define ID_AA64MMFR2_TTL_SHIFT       48
-+#define ID_AA64MMFR2_FWB_SHIFT       40
-+#define ID_AA64MMFR2_IDS_SHIFT       36
-+#define ID_AA64MMFR2_AT_SHIFT        32
-+#define ID_AA64MMFR2_ST_SHIFT        28
-+#define ID_AA64MMFR2_NV_SHIFT        24
-+#define ID_AA64MMFR2_CCIDX_SHIFT     20
-+#define ID_AA64MMFR2_LVA_SHIFT       16
-+#define ID_AA64MMFR2_IESB_SHIFT      12
-+#define ID_AA64MMFR2_LSM_SHIFT       8
-+#define ID_AA64MMFR2_UAO_SHIFT       4
-+#define ID_AA64MMFR2_CNP_SHIFT       0
++        *cur_reg &= ~mask;
++        *cur_reg |= (arm64_ftr_safe_value(ftrp, new_field, cur_field)
++                    << ftrp->shift) & mask;
++    }
 +
-+/* id_aa64dfr0 */
-+#define ID_AA64DFR0_DOUBLELOCK_SHIFT 36
-+#define ID_AA64DFR0_PMSVER_SHIFT     32
-+#define ID_AA64DFR0_CTX_CMPS_SHIFT   28
-+#define ID_AA64DFR0_WRPS_SHIFT       20
-+#define ID_AA64DFR0_BRPS_SHIFT       12
-+#define ID_AA64DFR0_PMUVER_SHIFT     8
-+#define ID_AA64DFR0_TRACEVER_SHIFT   4
-+#define ID_AA64DFR0_DEBUGVER_SHIFT   0
++    if ( old_reg != new_reg )
++        printk(XENLOG_DEBUG "SANITY DIF: %s 0x%"PRIx64" -> 0x%"PRIx64"\n",
++               reg_name, old_reg, new_reg);
++    if ( old_reg != *cur_reg )
++        printk(XENLOG_DEBUG "SANITY FIX: %s 0x%"PRIx64" -> 0x%"PRIx64"\n",
++               reg_name, old_reg, *cur_reg);
 +
-+#define ID_AA64DFR0_PMUVER_8_0       0x1
-+#define ID_AA64DFR0_PMUVER_8_1       0x4
-+#define ID_AA64DFR0_PMUVER_8_4       0x5
-+#define ID_AA64DFR0_PMUVER_8_5       0x6
-+#define ID_AA64DFR0_PMUVER_IMP_DEF   0xf
++    if ( taint )
++    {
++        printk(XENLOG_WARNING "SANITY CHECK: Unexpected variation in %s.\n",
++                reg_name);
++        add_taint(TAINT_CPU_OUT_OF_SPEC);
++    }
++}
 +
-+#define ID_DFR0_PERFMON_SHIFT        24
-+
-+#define ID_DFR0_PERFMON_8_1          0x4
-+
-+#define ID_ISAR4_SWP_FRAC_SHIFT        28
-+#define ID_ISAR4_PSR_M_SHIFT           24
-+#define ID_ISAR4_SYNCH_PRIM_FRAC_SHIFT 20
-+#define ID_ISAR4_BARRIER_SHIFT         16
-+#define ID_ISAR4_SMC_SHIFT             12
-+#define ID_ISAR4_WRITEBACK_SHIFT       8
-+#define ID_ISAR4_WITHSHIFTS_SHIFT      4
-+#define ID_ISAR4_UNPRIV_SHIFT          0
-+
-+#define ID_DFR1_MTPMU_SHIFT          0
-+
-+#define ID_ISAR0_DIVIDE_SHIFT        24
-+#define ID_ISAR0_DEBUG_SHIFT         20
-+#define ID_ISAR0_COPROC_SHIFT        16
-+#define ID_ISAR0_CMPBRANCH_SHIFT     12
-+#define ID_ISAR0_BITFIELD_SHIFT      8
-+#define ID_ISAR0_BITCOUNT_SHIFT      4
-+#define ID_ISAR0_SWAP_SHIFT          0
-+
-+#define ID_ISAR5_RDM_SHIFT           24
-+#define ID_ISAR5_CRC32_SHIFT         16
-+#define ID_ISAR5_SHA2_SHIFT          12
-+#define ID_ISAR5_SHA1_SHIFT          8
-+#define ID_ISAR5_AES_SHIFT           4
-+#define ID_ISAR5_SEVL_SHIFT          0
-+
-+#define ID_ISAR6_I8MM_SHIFT          24
-+#define ID_ISAR6_BF16_SHIFT          20
-+#define ID_ISAR6_SPECRES_SHIFT       16
-+#define ID_ISAR6_SB_SHIFT            12
-+#define ID_ISAR6_FHM_SHIFT           8
-+#define ID_ISAR6_DP_SHIFT            4
-+#define ID_ISAR6_JSCVT_SHIFT         0
-+
-+#define ID_MMFR0_INNERSHR_SHIFT      28
-+#define ID_MMFR0_FCSE_SHIFT          24
-+#define ID_MMFR0_AUXREG_SHIFT        20
-+#define ID_MMFR0_TCM_SHIFT           16
-+#define ID_MMFR0_SHARELVL_SHIFT      12
-+#define ID_MMFR0_OUTERSHR_SHIFT      8
-+#define ID_MMFR0_PMSA_SHIFT          4
-+#define ID_MMFR0_VMSA_SHIFT          0
-+
-+#define ID_MMFR4_EVT_SHIFT           28
-+#define ID_MMFR4_CCIDX_SHIFT         24
-+#define ID_MMFR4_LSM_SHIFT           20
-+#define ID_MMFR4_HPDS_SHIFT          16
-+#define ID_MMFR4_CNP_SHIFT           12
-+#define ID_MMFR4_XNX_SHIFT           8
-+#define ID_MMFR4_AC2_SHIFT           4
-+#define ID_MMFR4_SPECSEI_SHIFT       0
-+
-+#define ID_MMFR5_ETS_SHIFT           0
-+
-+#define ID_PFR0_DIT_SHIFT            24
-+#define ID_PFR0_CSV2_SHIFT           16
-+#define ID_PFR0_STATE3_SHIFT         12
-+#define ID_PFR0_STATE2_SHIFT         8
-+#define ID_PFR0_STATE1_SHIFT         4
-+#define ID_PFR0_STATE0_SHIFT         0
-+
-+#define ID_DFR0_PERFMON_SHIFT        24
-+#define ID_DFR0_MPROFDBG_SHIFT       20
-+#define ID_DFR0_MMAPTRC_SHIFT        16
-+#define ID_DFR0_COPTRC_SHIFT         12
-+#define ID_DFR0_MMAPDBG_SHIFT        8
-+#define ID_DFR0_COPSDBG_SHIFT        4
-+#define ID_DFR0_COPDBG_SHIFT         0
-+
-+#define ID_PFR2_SSBS_SHIFT           4
-+#define ID_PFR2_CSV3_SHIFT           0
-+
-+#define MVFR0_FPROUND_SHIFT          28
-+#define MVFR0_FPSHVEC_SHIFT          24
-+#define MVFR0_FPSQRT_SHIFT           20
-+#define MVFR0_FPDIVIDE_SHIFT         16
-+#define MVFR0_FPTRAP_SHIFT           12
-+#define MVFR0_FPDP_SHIFT             8
-+#define MVFR0_FPSP_SHIFT             4
-+#define MVFR0_SIMD_SHIFT             0
-+
-+#define MVFR1_SIMDFMAC_SHIFT         28
-+#define MVFR1_FPHP_SHIFT             24
-+#define MVFR1_SIMDHP_SHIFT           20
-+#define MVFR1_SIMDSP_SHIFT           16
-+#define MVFR1_SIMDINT_SHIFT          12
-+#define MVFR1_SIMDLS_SHIFT           8
-+#define MVFR1_FPDNAN_SHIFT           4
-+#define MVFR1_FPFTZ_SHIFT            0
-+
-+#define ID_PFR1_GIC_SHIFT            28
-+#define ID_PFR1_VIRT_FRAC_SHIFT      24
-+#define ID_PFR1_SEC_FRAC_SHIFT       20
-+#define ID_PFR1_GENTIMER_SHIFT       16
-+#define ID_PFR1_VIRTUALIZATION_SHIFT 12
-+#define ID_PFR1_MPROGMOD_SHIFT       8
-+#define ID_PFR1_SECURITY_SHIFT       4
-+#define ID_PFR1_PROGMOD_SHIFT        0
-+
-+#define MVFR2_FPMISC_SHIFT           4
-+#define MVFR2_SIMDMISC_SHIFT         0
-+
-+#define DCZID_DZP_SHIFT              4
-+#define DCZID_BS_SHIFT               0
 +
 +/*
-+ * The ZCR_ELx_LEN_* definitions intentionally include bits [8:4] which
-+ * are reserved by the SVE architecture for future expansion of the LEN
-+ * field, with compatible semantics.
++ * This function should be called on secondary cores to sanitize the boot cpu
++ * cpuinfo.
 + */
-+#define ZCR_ELx_LEN_SHIFT            0
-+#define ZCR_ELx_LEN_SIZE             9
-+#define ZCR_ELx_LEN_MASK             0x1ff
++void sanitize_cpu(const struct cpuinfo_arm *new)
++{
 +
- /* Access to system registers */
++#define SANITIZE_REG(field, num, reg)  \
++    sanitize_reg(&boot_cpu_data.field.bits[num], new->field.bits[num], \
++                 #reg, ftr_##reg)
++
++#define SANITIZE_ID_REG(field, num, reg)  \
++    sanitize_reg(&boot_cpu_data.field.bits[num], new->field.bits[num], \
++                 #reg, ftr_id_##reg)
++
++#define SANITIZE_GENERIC_REG(field, num, reg)  \
++    sanitize_reg(&boot_cpu_data.field.bits[num], new->field.bits[num], \
++                 #reg, ftr_generic_32bits)
++
++    SANITIZE_ID_REG(pfr64, 0, aa64pfr0);
++    SANITIZE_ID_REG(pfr64, 1, aa64pfr1);
++
++    SANITIZE_ID_REG(dbg64, 0, aa64dfr0);
++
++    /* aux64 x2 */
++
++    SANITIZE_ID_REG(mm64, 0, aa64mmfr0);
++    SANITIZE_ID_REG(mm64, 1, aa64mmfr1);
++    SANITIZE_ID_REG(mm64, 2, aa64mmfr2);
++
++    SANITIZE_ID_REG(isa64, 0, aa64isar0);
++    SANITIZE_ID_REG(isa64, 1, aa64isar1);
++
++    SANITIZE_ID_REG(zfr64, 0, aa64zfr0);
++
++    if ( cpu_feature64_has_el0_32(&boot_cpu_data) )
++    {
++        SANITIZE_ID_REG(pfr32, 0, pfr0);
++        SANITIZE_ID_REG(pfr32, 1, pfr1);
++        SANITIZE_ID_REG(pfr32, 2, pfr2);
++
++        SANITIZE_ID_REG(dbg32, 0, dfr0);
++        SANITIZE_ID_REG(dbg32, 1, dfr1);
++
++        /* aux32 x1 */
++
++        SANITIZE_ID_REG(mm32, 0, mmfr0);
++        SANITIZE_GENERIC_REG(mm32, 1, mmfr1);
++        SANITIZE_GENERIC_REG(mm32, 2, mmfr2);
++        SANITIZE_GENERIC_REG(mm32, 3, mmfr3);
++        SANITIZE_ID_REG(mm32, 4, mmfr4);
++        SANITIZE_ID_REG(mm32, 5, mmfr5);
++
++        SANITIZE_ID_REG(isa32, 0, isar0);
++        SANITIZE_GENERIC_REG(isa32, 1, isar1);
++        SANITIZE_GENERIC_REG(isa32, 2, isar2);
++        SANITIZE_GENERIC_REG(isa32, 3, isar3);
++        SANITIZE_ID_REG(isa32, 4, isar4);
++        SANITIZE_ID_REG(isa32, 5, isar5);
++        SANITIZE_ID_REG(isa32, 6, isar6);
++
++        SANITIZE_GENERIC_REG(mvfr, 0, mvfr0);
++        SANITIZE_GENERIC_REG(mvfr, 1, mvfr1);
++#ifndef MVFR2_MAYBE_UNDEFINED
++        SANITIZE_REG(mvfr, 2, mvfr2);
++#endif
++    }
++}
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index a1ee3146ef..8fdf5e70d3 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -307,12 +307,14 @@ void start_secondary(void)
+     set_processor_id(cpuid);
  
- #define READ_SYSREG32(name) ((uint32_t)READ_SYSREG64(name))
+     identify_cpu(&current_cpu_data);
++    sanitize_cpu(&current_cpu_data);
+     processor_setup();
+ 
+     init_traps();
+ 
++#ifndef CONFIG_ARM_64
+     /*
+-     * Currently Xen assumes the platform has only one kind of CPUs.
++     * Currently Xen assumes the platform has only one kind of CPUs on ARM32.
+      * This assumption does not hold on big.LITTLE platform and may
+      * result to instability and insecure platform (unless cpu affinity
+      * is manually specified for all domains). Better to park them for
+@@ -328,6 +330,7 @@ void start_secondary(void)
+                boot_cpu_data.midr.bits);
+         stop_cpu();
+     }
++#endif
+ 
+     if ( dcache_line_bytes != read_dcache_line_bytes() )
+     {
+diff --git a/xen/include/asm-arm/cpufeature.h b/xen/include/asm-arm/cpufeature.h
+index ba48db3eac..ad34e55cc8 100644
+--- a/xen/include/asm-arm/cpufeature.h
++++ b/xen/include/asm-arm/cpufeature.h
+@@ -330,6 +330,15 @@ extern struct cpuinfo_arm boot_cpu_data;
+ 
+ extern void identify_cpu(struct cpuinfo_arm *);
+ 
++#ifdef CONFIG_ARM_64
++extern void sanitize_cpu(const struct cpuinfo_arm *);
++#else
++static inline void sanitize_cpu(const struct cpuinfo_arm *cpuinfo)
++{
++    /* Not supported on arm32 */
++}
++#endif
++
+ extern struct cpuinfo_arm cpu_data[];
+ #define current_cpu_data cpu_data[smp_processor_id()]
+ 
+diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
+index 1198c7c0b2..c6987973bf 100644
+--- a/xen/include/xen/lib.h
++++ b/xen/include/xen/lib.h
+@@ -192,6 +192,7 @@ uint64_t muldiv64(uint64_t a, uint32_t b, uint32_t c);
+ #define TAINT_ERROR_INJECT              (1u << 2)
+ #define TAINT_HVM_FEP                   (1u << 3)
+ #define TAINT_MACHINE_UNSECURE          (1u << 4)
++#define TAINT_CPU_OUT_OF_SPEC           (1u << 5)
+ extern unsigned int tainted;
+ #define TAINT_STRING_MAX_LEN            20
+ extern char *print_tainted(char *str);
 -- 
 2.17.1
 
