@@ -2,46 +2,47 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4483FC11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B237EC11F67
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:56:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B147F611C2
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:56:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B147F611C2
+	by mail.kernel.org (Postfix) with ESMTPS id 826E7611C2
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:56:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 826E7611C2
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148337.274143 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148338.274154 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytR6-0004Gb-4i; Thu, 01 Jul 2021 09:56:44 +0000
+	id 1lytR9-0004YZ-Gu; Thu, 01 Jul 2021 09:56:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148337.274143; Thu, 01 Jul 2021 09:56:44 +0000
+Received: by outflank-mailman (output) from mailman id 148338.274154; Thu, 01 Jul 2021 09:56:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytR6-0004GU-1Z; Thu, 01 Jul 2021 09:56:44 +0000
-Received: by outflank-mailman (input) for mailman id 148337;
- Thu, 01 Jul 2021 09:56:42 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lytR9-0004YQ-DP; Thu, 01 Jul 2021 09:56:47 +0000
+Received: by outflank-mailman (input) for mailman id 148338;
+ Thu, 01 Jul 2021 09:56:45 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytR4-0004GK-GV
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:56:42 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [81.169.146.216])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cda51e26-ea01-4063-ae86-dd01630ea630;
- Thu, 01 Jul 2021 09:56:40 +0000 (UTC)
+ id 1lytR7-0004XT-T6
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:56:45 +0000
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.50])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 94438a9c-bd82-4226-aad3-be2c35a408c7;
+ Thu, 01 Jul 2021 09:56:45 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619ud5Mb
+ with ESMTPSA id 30791cx619ue5Md
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:39 +0200 (CEST)
+ Thu, 1 Jul 2021 11:56:40 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,141 +54,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cda51e26-ea01-4063-ae86-dd01630ea630
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133399;
+X-Inumbo-ID: 94438a9c-bd82-4226-aad3-be2c35a408c7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133400;
     s=strato-dkim-0002; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=mmOmmVOJVCc+eRhOPZx2VydYF30S3wGYCPZsoZJsYV4=;
-    b=dE6LowpAE0s4/lMlnv5dd2IMkbK1L0V6kqIfDmXjAORSb5CrEGED/BmO+Vq1kSFPtz
-    bsvJiQnPRysqb7szkH5DzQO4aCZjc93Hqi3ck4pwD/cF1MaZTh5BAm20WC7x3nBW4r5c
-    Ybh1hHcRLbBpdwUHg5ZuwY5ba/5irsTf45ygIhtyhk3xwzu3RMdcjEhxbJS1+l2D/tOB
-    rwZTd5Xeh6qj2GAnEv+2z/m0M59U/fVfYUW5FN8kpaCccRhZ4tr1vEQ1ZBMSwJzvdG1a
-    akAvKwpQLWkmo/hg1KKR+FED3ui9hvYLZ7QHO84pTKSkG95W/ipARKJsSbC6C+1Z94i7
-    bVHg==
+    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
+    From:Subject:Sender;
+    bh=DqV9Bza4xh4lmngXwj1J3LSRM3kpJQsPapKBO4Z/YvI=;
+    b=qRRlDNFKwfDufQp5NUYrSrgtwMMfk6ATaFHjiH2amRD/NqCWF8dxxGWit6C8hcwGvg
+    PY3/9ws3knYQO0b3lWTEK/A+csdqAk7ICvmTYNqADEesAA13Ryhnwo+BmJNb5LIzXrPz
+    EKYRdzSJjdYT8BsvqMfD9JPD3+lLP589pKAvCUuKDpgmSUV/JW2P64aAeLvixE6CYdYi
+    U7sPBkFcM9v9OjhSZXzDnc7W70rQIhHTfBrmSVJtviidhqsSSP6FQOLraTibzvWbejf1
+    Lib5d04DrwkNqIB50v5EgtPSt8d69WXfc30eQ2ehB57NnrZlLuZxPxnveDllsQDjy2sY
+    NMbg==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
 X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH v20210701 00/40] leftover from 2020
-Date: Thu,  1 Jul 2021 11:55:55 +0200
-Message-Id: <20210701095635.15648-1-olaf@aepfle.de>
+Cc: Olaf Hering <olaf@aepfle.de>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v20210701 02/40] tools: add API to work with sevaral bits at once
+Date: Thu,  1 Jul 2021 11:55:57 +0200
+Message-Id: <20210701095635.15648-3-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
+References: <20210701095635.15648-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Various unreviewed changes, rebase to f95b7b37cf.
+Introduce new API to test if a fixed number of bits is clear or set,
+and clear or set them all at once.
 
-Olaf Hering (40):
-  hotplug/Linux: fix starting of xenstored with restarting systemd
-  tools: add API to work with sevaral bits at once
-  xl: fix description of migrate --debug
-  tools: use integer division in convert-legacy-stream
-  tools: handle libxl__physmap_info.name properly in convert-legacy-stream
-  tools: fix Python3.4 TypeError in format string
-  tools: create libxensaverestore
-  MAINTAINERS: add myself as saverestore maintainer
-  tools: add readv_exact to libxenctrl
-  tools: add xc_is_known_page_type to libxenctrl
-  tools: use sr_is_known_page_type
-  tools: unify type checking for data pfns in migration stream
-  tools: unify type checking for data pfns in migration stream
-  tools: show migration transfer rate in send_dirty_pages
-  tools: prepare to allocate saverestore arrays once
-  tools: save: move mfns array
-  tools: save: move types array
-  tools: save: move errors array
-  tools: save: move iov array
-  tools: save: move rec_pfns array
-  tools: save: move guest_data array
-  tools: save: move local_pages array
-  tools: restore: move types array
-  tools: restore: move mfns array
-  tools: restore: move map_errs array
-  tools: restore: move mfns array in populate_pfns
-  tools: restore: move pfns array in populate_pfns
-  tools: restore: split record processing
-  tools: restore: split handle_page_data
-  tools: restore: write data directly into guest
-  tools: recognize LIBXL_API_VERSION for 4.16
-  tools: adjust libxl_domain_suspend to receive a struct props
-  tools: change struct precopy_stats to precopy_stats_t
-  tools: add callback to libxl for precopy_policy and precopy_stats_t
-  tools: add --max_iters to libxl_domain_suspend
-  tools: add --min_remaining to libxl_domain_suspend
-  tools: add --abort_if_busy to libxl_domain_suspend
-  tools: add API for expandable bitmaps
-  tools: use xg_sr_bitmap for populated_pfns
-  tools/libxc: use superpages during restore of HVM guest
+The caller has to make sure the input bitnumber is a multiple of BITS_PER_LONG.
 
- .gitignore                                    |   2 +
- MAINTAINERS                                   |   6 +
- docs/man/xl.1.pod.in                          |  22 +-
- tools/hotplug/Linux/init.d/xencommons.in      |   2 +-
- tools/hotplug/Linux/launch-xenstore.in        |  40 +-
- .../Linux/systemd/xenstored.service.in        |   2 +-
- tools/include/libxl.h                         |  32 +-
- tools/include/xenguest.h                      | 186 -----
- tools/include/xensaverestore.h                | 207 ++++++
- tools/libs/Makefile                           |   1 +
- tools/libs/ctrl/xc_bitops.h                   |  28 +
- tools/libs/ctrl/xc_private.c                  |  57 +-
- tools/libs/ctrl/xc_private.h                  |   1 +
- tools/libs/guest/Makefile                     |  11 -
- tools/libs/guest/xg_dom_x86.c                 |   5 -
- tools/libs/guest/xg_offline_page.c            |   1 -
- tools/libs/guest/xg_private.h                 |   5 +
- tools/libs/guest/xg_sr_restore_x86_hvm.c      | 274 --------
- tools/libs/light/Makefile                     |   4 +-
- tools/libs/light/libxl_dom_save.c             |  24 +
- tools/libs/light/libxl_domain.c               |  10 +-
- tools/libs/light/libxl_internal.h             |   7 +
- tools/libs/light/libxl_save_helper.c          |   1 +
- tools/libs/light/libxl_save_msgs_gen.pl       |   5 +-
- tools/libs/light/libxl_stream_write.c         |   9 +-
- tools/libs/light/libxl_types.idl              |   1 +
- tools/libs/saverestore/Makefile               |  38 ++
- .../xg_sr_common.c => saverestore/common.c}   |  75 +-
- .../xg_sr_common.h => saverestore/common.h}   | 271 +++++++-
- .../common_x86.c}                             |   2 +-
- .../common_x86.h}                             |   2 +-
- .../common_x86_pv.c}                          |   2 +-
- .../common_x86_pv.h}                          |   2 +-
- .../nomigrate.c}                              |   2 +-
- .../xg_sr_restore.c => saverestore/restore.c} | 617 +++++++++--------
- tools/libs/saverestore/restore_x86_hvm.c      | 645 ++++++++++++++++++
- .../restore_x86_pv.c}                         |  70 +-
- .../xg_sr_save.c => saverestore/save.c}       | 165 ++---
- .../save_restore.h}                           |   2 -
- .../save_x86_hvm.c}                           |   7 +-
- .../save_x86_pv.c}                            |  33 +-
- .../stream_format.h}                          |   0
- tools/libs/uselibs.mk                         |   4 +-
- tools/ocaml/libs/xl/xenlight_stubs.c          |   3 +-
- tools/python/scripts/convert-legacy-stream    |  24 +-
- tools/xl/xl_cmdtable.c                        |  26 +-
- tools/xl/xl_migrate.c                         |  54 +-
- tools/xl/xl_saverestore.c                     |   3 +-
- 48 files changed, 2037 insertions(+), 953 deletions(-)
- create mode 100644 tools/include/xensaverestore.h
- delete mode 100644 tools/libs/guest/xg_sr_restore_x86_hvm.c
- create mode 100644 tools/libs/saverestore/Makefile
- rename tools/libs/{guest/xg_sr_common.c => saverestore/common.c} (72%)
- rename tools/libs/{guest/xg_sr_common.h => saverestore/common.h} (67%)
- rename tools/libs/{guest/xg_sr_common_x86.c => saverestore/common_x86.c} (99%)
- rename tools/libs/{guest/xg_sr_common_x86.h => saverestore/common_x86.h} (98%)
- rename tools/libs/{guest/xg_sr_common_x86_pv.c => saverestore/common_x86_pv.c} (99%)
- rename tools/libs/{guest/xg_sr_common_x86_pv.h => saverestore/common_x86_pv.h} (98%)
- rename tools/libs/{guest/xg_nomigrate.c => saverestore/nomigrate.c} (98%)
- rename tools/libs/{guest/xg_sr_restore.c => saverestore/restore.c} (66%)
- create mode 100644 tools/libs/saverestore/restore_x86_hvm.c
- rename tools/libs/{guest/xg_sr_restore_x86_pv.c => saverestore/restore_x86_pv.c} (94%)
- rename tools/libs/{guest/xg_sr_save.c => saverestore/save.c} (88%)
- rename tools/libs/{guest/xg_save_restore.h => saverestore/save_restore.h} (98%)
- rename tools/libs/{guest/xg_sr_save_x86_hvm.c => saverestore/save_x86_hvm.c} (96%)
- rename tools/libs/{guest/xg_sr_save_x86_pv.c => saverestore/save_x86_pv.c} (97%)
- rename tools/libs/{guest/xg_sr_stream_format.h => saverestore/stream_format.h} (100%)
+This API avoids the loop over each bit in a known range just to see
+if all of them are either clear or set.
 
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
+
+v02:
+- change return type from int to bool (jgross)
+---
+ tools/libs/ctrl/xc_bitops.h | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/tools/libs/ctrl/xc_bitops.h b/tools/libs/ctrl/xc_bitops.h
+index f0bac4a071..8e8c6efb45 100644
+--- a/tools/libs/ctrl/xc_bitops.h
++++ b/tools/libs/ctrl/xc_bitops.h
+@@ -3,6 +3,7 @@
+ 
+ /* bitmap operations for single threaded access */
+ 
++#include <stdbool.h>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+@@ -77,4 +78,31 @@ static inline void bitmap_or(void *_dst, const void *_other,
+         dst[i] |= other[i];
+ }
+ 
++static inline bool test_bit_long_set(unsigned long nr_base, const void *_addr)
++{
++    const unsigned long *addr = _addr;
++    unsigned long val = addr[nr_base / BITS_PER_LONG];
++
++    return val == ~0;
++}
++
++static inline bool test_bit_long_clear(unsigned long nr_base, const void *_addr)
++{
++    const unsigned long *addr = _addr;
++    unsigned long val = addr[nr_base / BITS_PER_LONG];
++
++    return val == 0;
++}
++
++static inline void clear_bit_long(unsigned long nr_base, void *_addr)
++{
++    unsigned long *addr = _addr;
++    addr[nr_base / BITS_PER_LONG] = 0;
++}
++
++static inline void set_bit_long(unsigned long nr_base, void *_addr)
++{
++    unsigned long *addr = _addr;
++    addr[nr_base / BITS_PER_LONG] = ~0;
++}
+ #endif  /* XC_BITOPS_H */
 
