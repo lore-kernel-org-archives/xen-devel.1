@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27E94C11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D81EC11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EDA65611C2
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDA65611C2
+	by mail.kernel.org (Postfix) with ESMTPS id E4C0961468
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E4C0961468
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148351.274232 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148353.274241 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytRT-0007Zx-Bs; Thu, 01 Jul 2021 09:57:07 +0000
+	id 1lytRU-0007sC-Nc; Thu, 01 Jul 2021 09:57:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148351.274232; Thu, 01 Jul 2021 09:57:07 +0000
+Received: by outflank-mailman (output) from mailman id 148353.274241; Thu, 01 Jul 2021 09:57:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytRT-0007ZV-4z; Thu, 01 Jul 2021 09:57:07 +0000
-Received: by outflank-mailman (input) for mailman id 148351;
- Thu, 01 Jul 2021 09:57:05 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lytRU-0007rS-Gg; Thu, 01 Jul 2021 09:57:08 +0000
+Received: by outflank-mailman (input) for mailman id 148353;
+ Thu, 01 Jul 2021 09:57:07 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytRR-0004XT-S0
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:05 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.170])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0941045a-39ea-4084-bd5e-22ff734b2a6c;
- Thu, 01 Jul 2021 09:56:49 +0000 (UTC)
+ id 1lytRT-0004r4-Fz
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:07 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.81])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 05bcbd22-3dea-4a3b-a0ca-18bda5380d99;
+ Thu, 01 Jul 2021 09:56:54 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619ui5Ms
+ with ESMTPSA id 30791cx619uh5Mn
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:44 +0200 (CEST)
+ Thu, 1 Jul 2021 11:56:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0941045a-39ea-4084-bd5e-22ff734b2a6c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133404;
+X-Inumbo-ID: 05bcbd22-3dea-4a3b-a0ca-18bda5380d99
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133403;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ex4r4d11Mg1k2Zn9qFLItgRI9LdfJn43Y1sVEepvWiU=;
-    b=MINrfXc5iyKU6L0b0y1toSzNvOC3EMNFBf2mAqFKmcHh5kEPrAhRw/niCitYKxPoD3
-    AowdVRraJeFi3mHit3amy7y4SjQAE+dxJG4R3Nq/bPV+R8iXK8btER1ImH6EO9Bqpkkq
-    U1AgaOznJ0o9KcNiU6NNBxp6wu5AcYQoAYCTooDiCKF7U572lWW117vDDYNKpcYQay6h
-    fOVZS8/EYQ1ggUZDguUR8z3Ap0/M80632/OnVF4Jw81Uy6Dh22jVKkh+KhGZjXAEJlZI
-    tTk33dwwugQ4fd9FTNsqK3od7UFonplaU7wAzYOBL9QzoK3RBWRc6z/L8nqKUco8XBCd
-    KzBA==
+    bh=+KbVruLtdIEtwG93Soc7D+UJBCIYv9cMILQskmOXes4=;
+    b=D7SisCzfa2rafDqJS+Cmj1d+KIdVX6sD5wo/ADBI8YzE11YqWd4yX3vfLjVoUlZz7t
+    D+JpnF79BDH8B8kztS+G+l95eXmYfQTfZF5WjWSLWJmH/Q0gfRaDOKbbOikCdMgX4yDG
+    46MaGdrgIep0sk9B/gYuRl/tg0ygFUZuzOUnK/X/4Wgp0fZXtDveil6JgzMfdQtQem8P
+    f+k6PAwPyg+ZJlN1kEJsoWTOzHYhaxQ6SmhcXEFSFMmcPPPPiBLgT58+El2Qb0ZtCU83
+    taMYjCtjJx8tRQQwNAjSvtc/AYJdDlHRikICCtf/mpzPsNc3z5bLy/4Hy0nqF9Bl0+rt
+    kMJQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
@@ -73,59 +72,44 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
-	Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210701 11/40] tools: use sr_is_known_page_type
-Date: Thu,  1 Jul 2021 11:56:06 +0200
-Message-Id: <20210701095635.15648-12-olaf@aepfle.de>
+Subject: [PATCH v20210701 08/40] MAINTAINERS: add myself as saverestore maintainer
+Date: Thu,  1 Jul 2021 11:56:03 +0200
+Message-Id: <20210701095635.15648-9-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
 References: <20210701095635.15648-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Verify pfn type on sending side, also verify incoming batch of pfns.
+I touched it last.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Reviewed-by: Juergen Gross <jgross@suse.com>
-
-v02:
-- use sr_is_known_page_type instead of xc_is_known_page_type
 ---
- tools/libs/saverestore/restore.c | 3 +--
- tools/libs/saverestore/save.c    | 6 ++++++
- 2 files changed, 7 insertions(+), 2 deletions(-)
+ MAINTAINERS | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index be259a1c6b..324b9050e2 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -406,8 +406,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-         }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8a52a03969..36dc634958 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -381,6 +381,12 @@ R:	Juergen Gross <jgross@suse.com>
+ S:	Supported
+ F:	tools/libs/
  
-         type = (pages->pfn[i] & PAGE_DATA_TYPE_MASK) >> 32;
--        if ( ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) >= 5) &&
--             ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) <= 8) )
-+        if ( sr_is_known_page_type(type) == false )
-         {
-             ERROR("Invalid type %#"PRIx32" for pfn %#"PRIpfn" (index %u)",
-                   type, pfn, i);
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index ae3e8797d0..6f820ea432 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -147,6 +147,12 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     for ( i = 0; i < nr_pfns; ++i )
-     {
-+        if ( sr_is_known_page_type(types[i]) == false )
-+        {
-+            ERROR("Wrong type %#"PRIpfn" for pfn %#"PRIpfn, types[i], mfns[i]);
-+            goto err;
-+        }
++LIBSAVERESTORE:
++M:	Olaf Hering <olaf@aepfle.de>
++S:	Supported
++F:	tools/include/xensaverestore.h
++F:	tools/libs/saverestore/
 +
-         switch ( types[i] )
-         {
-         case XEN_DOMCTL_PFINFO_BROKEN:
+ LIBXENLIGHT
+ M:	Ian Jackson <iwj@xenproject.org>
+ M:	Wei Liu <wl@xen.org>
 
