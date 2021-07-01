@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC880C11F67
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C310C11F6A
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9920761468
+	by mail.kernel.org (Postfix) with ESMTPS id 3898361425
 	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9920761468
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3898361425
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148470.274500 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148469.274496 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytWV-00060W-Af; Thu, 01 Jul 2021 10:02:19 +0000
+	id 1lytWU-0005wF-R4; Thu, 01 Jul 2021 10:02:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148470.274500; Thu, 01 Jul 2021 10:02:19 +0000
+Received: by outflank-mailman (output) from mailman id 148469.274496; Thu, 01 Jul 2021 10:02:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytWV-0005zS-3L; Thu, 01 Jul 2021 10:02:19 +0000
-Received: by outflank-mailman (input) for mailman id 148470;
+	id 1lytWU-0005vl-Jx; Thu, 01 Jul 2021 10:02:18 +0000
+Received: by outflank-mailman (input) for mailman id 148469;
  Thu, 01 Jul 2021 10:02:17 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytSt-0004XT-Ur
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:58:35 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.104])
+ id 1lytRv-0004XT-Sy
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:35 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.82])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 54087ce2-f123-4ec4-8ca2-5a6be09f5c48;
- Thu, 01 Jul 2021 09:56:59 +0000 (UTC)
+ id a76f642b-8ab8-4845-afd7-b6e202d99543;
+ Thu, 01 Jul 2021 09:56:52 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619uq5NO
+ with ESMTPSA id 30791cx619uk5N3
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:52 +0200 (CEST)
+ Thu, 1 Jul 2021 11:56:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 54087ce2-f123-4ec4-8ca2-5a6be09f5c48
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133412;
+X-Inumbo-ID: a76f642b-8ab8-4845-afd7-b6e202d99543
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133406;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=VqP0dtxOpIShGdDn4ROCdSzLaQrNr0I+/+0oMjV5WeY=;
-    b=UFGSIIpkg+JgbdLPDmn3OdvsTFfseQqaPhGrvOXbhe/uB5U7dX2bRe6fm82aOAzv6C
-    X0d6/imN+D3oOuuKMXBdKeWkEpIcXH2zsRr0iuK/+RPwVorJRHLCQn/NCfNfwFkmKjIq
-    m//sv8oBnG17YgVmeqv0zoWAipjIk3umKhJF/9feD4DNSmS1UC4n96jFN5hTrC7B7cZj
-    ygPYoz9+fmXWicc9OmC4Bx/uM3xqKXgKPg3C8/5+QFto54nGXpoVs9pA1URADAM2sk9A
-    IbOlPFO0CkBI1lNXrttEXpVjcbBVapWpol4rMcBUOUQwyKpjDxfS1+bq55V9iDPo1DCM
-    M/fQ==
+    bh=KnwsPxLRJB68rPXEArkMW6OSaI/spxXLS3HmgXIKcHw=;
+    b=F9jVJ1N144s3xumrT8kJVbYSY9MfWREIAi4QGQ0tQpX+AHdjKtnEIBCUSYTo8GG9jL
+    RJBHhn5HrnUp5abb3C6hYg4cv2g9tPC6W9JJjWlxGAayaRpmA0+UOC5OvsuTVgjoE+Qg
+    3UqSMgQq5+gXYGmDjTPoRAf46TSFqrMYWtivGdddA4StQEO5e1HUqD5nSzVE2EvZ79Mx
+    MsiulUUErQpT+YKwx/1BCRmrl9FynwGYNWkxSard0VRpDefefTQMy7e7mNSwOKIJYs70
+    qQsuXmTYeeN8b0om/Z9fgO7CFd+QHOVUBo47dj4q7AfhkP+Juw8Ci7u5+yiAZpeNjj82
+    aUuA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
@@ -76,287 +76,74 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210701 28/40] tools: restore: split record processing
-Date: Thu,  1 Jul 2021 11:56:23 +0200
-Message-Id: <20210701095635.15648-29-olaf@aepfle.de>
+Subject: [PATCH v20210701 16/40] tools: save: move mfns array
+Date: Thu,  1 Jul 2021 11:56:11 +0200
+Message-Id: <20210701095635.15648-17-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
 References: <20210701095635.15648-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-handle_page_data must be able to read directly into mapped guest memory.
-This will avoid unneccesary memcpy calls for data which can be consumed verbatim.
-
-Rearrange the code to allow decisions based on the incoming record.
-
-This change is preparation for future changes in handle_page_data,
-no change in behavior is intended.
+Remove allocation from hotpath, move mfns array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/saverestore/common.c  | 33 ++++++++++++---------
- tools/libs/saverestore/common.h  |  4 ++-
- tools/libs/saverestore/restore.c | 49 ++++++++++++++++++++++----------
- tools/libs/saverestore/save.c    |  7 ++++-
- 4 files changed, 63 insertions(+), 30 deletions(-)
+ tools/libs/saverestore/common.h | 2 ++
+ tools/libs/saverestore/save.c   | 7 ++-----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/saverestore/common.c b/tools/libs/saverestore/common.c
-index 77128bc747..7da7fa4e2c 100644
---- a/tools/libs/saverestore/common.c
-+++ b/tools/libs/saverestore/common.c
-@@ -91,26 +91,33 @@ int write_split_record(struct xc_sr_context *ctx, struct xc_sr_record *rec,
-     return -1;
- }
- 
--int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
-+int read_record_header(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr)
- {
-     xc_interface *xch = ctx->xch;
--    struct xc_sr_rhdr rhdr;
--    size_t datasz;
- 
--    if ( read_exact(fd, &rhdr, sizeof(rhdr)) )
-+    if ( read_exact(fd, rhdr, sizeof(*rhdr)) )
-     {
-         PERROR("Failed to read Record Header from stream");
-         return -1;
-     }
- 
--    if ( rhdr.length > REC_LENGTH_MAX )
-+    if ( rhdr->length > REC_LENGTH_MAX )
-     {
--        ERROR("Record (0x%08x, %s) length %#x exceeds max (%#x)", rhdr.type,
--              rec_type_to_str(rhdr.type), rhdr.length, REC_LENGTH_MAX);
-+        ERROR("Record (0x%08x, %s) length %#x exceeds max (%#x)", rhdr->type,
-+              rec_type_to_str(rhdr->type), rhdr->length, REC_LENGTH_MAX);
-         return -1;
-     }
- 
--    datasz = ROUNDUP(rhdr.length, REC_ALIGN_ORDER);
-+    return 0;
-+}
-+
-+int read_record_data(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr,
-+                     struct xc_sr_record *rec)
-+{
-+    xc_interface *xch = ctx->xch;
-+    size_t datasz;
-+
-+    datasz = ROUNDUP(rhdr->length, REC_ALIGN_ORDER);
- 
-     if ( datasz )
-     {
-@@ -119,7 +126,7 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
-         if ( !rec->data )
-         {
-             ERROR("Unable to allocate %zu bytes for record data (0x%08x, %s)",
--                  datasz, rhdr.type, rec_type_to_str(rhdr.type));
-+                  datasz, rhdr->type, rec_type_to_str(rhdr->type));
-             return -1;
-         }
- 
-@@ -128,18 +135,18 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
-             free(rec->data);
-             rec->data = NULL;
-             PERROR("Failed to read %zu bytes of data for record (0x%08x, %s)",
--                   datasz, rhdr.type, rec_type_to_str(rhdr.type));
-+                   datasz, rhdr->type, rec_type_to_str(rhdr->type));
-             return -1;
-         }
-     }
-     else
-         rec->data = NULL;
- 
--    rec->type   = rhdr.type;
--    rec->length = rhdr.length;
-+    rec->type   = rhdr->type;
-+    rec->length = rhdr->length;
- 
-     return 0;
--};
-+}
- 
- static void __attribute__((unused)) build_assertions(void)
- {
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index c319148f8f..580eafacc8 100644
+index 968bb8af13..1415a182d2 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -487,7 +487,9 @@ static inline int write_record(struct xc_sr_context *ctx,
-  *
-  * On failure, the contents of the record structure are undefined.
-  */
--int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec);
-+int read_record_header(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr);
-+int read_record_data(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr,
-+                     struct xc_sr_record *rec);
+@@ -225,6 +225,8 @@ static inline int update_blob(struct xc_sr_blob *blob,
  
- /*
-  * This would ideally be private in restore.c, but is needed by
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index 2a6ccce847..e75380155d 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -471,7 +471,7 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
-     return rc;
- }
+ struct sr_save_arrays {
+     xen_pfn_t batch_pfns[MAX_BATCH_SIZE];
++    /* write_batch: Mfns of the batch pfns. */
++    xen_pfn_t mfns[MAX_BATCH_SIZE];
+ };
  
--static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec);
-+static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_record *rec);
- static int handle_checkpoint(struct xc_sr_context *ctx)
- {
-     xc_interface *xch = ctx->xch;
-@@ -510,7 +510,7 @@ static int handle_checkpoint(struct xc_sr_context *ctx)
- 
-         for ( i = 0; i < ctx->restore.buffered_rec_num; i++ )
-         {
--            rc = process_record(ctx, &ctx->restore.buffered_records[i]);
-+            rc = process_buffered_record(ctx, &ctx->restore.buffered_records[i]);
-             if ( rc )
-                 goto err;
-         }
-@@ -571,10 +571,11 @@ static int handle_checkpoint(struct xc_sr_context *ctx)
-     return rc;
- }
- 
--static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-+static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_rhdr *rhdr)
- {
-     xc_interface *xch = ctx->xch;
-     unsigned int new_alloc_num;
-+    struct xc_sr_record rec;
-     struct xc_sr_record *p;
- 
-     if ( ctx->restore.buffered_rec_num >= ctx->restore.allocated_rec_num )
-@@ -592,8 +593,13 @@ static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-         ctx->restore.allocated_rec_num = new_alloc_num;
-     }
- 
-+    if ( read_record_data(ctx, ctx->fd, rhdr, &rec) )
-+    {
-+        return -1;
-+    }
-+
-     memcpy(&ctx->restore.buffered_records[ctx->restore.buffered_rec_num++],
--           rec, sizeof(*rec));
-+           &rec, sizeof(rec));
- 
-     return 0;
- }
-@@ -624,7 +630,7 @@ int handle_static_data_end(struct xc_sr_context *ctx)
-     return rc;
- }
- 
--static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-+static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
- {
-     xc_interface *xch = ctx->xch;
-     int rc = 0;
-@@ -662,6 +668,19 @@ static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-     return rc;
- }
- 
-+static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_sr_rhdr *rhdr)
-+{
-+    struct xc_sr_record rec;
-+    int rc;
-+
-+    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
-+    if ( rc )
-+        return rc;
-+
-+    return process_buffered_record(ctx, &rec);
-+}
-+
-+
- static int setup(struct xc_sr_context *ctx)
- {
-     xc_interface *xch = ctx->xch;
-@@ -745,7 +764,7 @@ static void cleanup(struct xc_sr_context *ctx)
- static int restore(struct xc_sr_context *ctx)
- {
-     xc_interface *xch = ctx->xch;
--    struct xc_sr_record rec;
-+    struct xc_sr_rhdr rhdr;
-     int rc, saved_rc = 0, saved_errno = 0;
- 
-     IPRINTF("Restoring domain");
-@@ -756,7 +775,7 @@ static int restore(struct xc_sr_context *ctx)
- 
-     do
-     {
--        rc = read_record(ctx, ctx->fd, &rec);
-+        rc = read_record_header(ctx, ctx->fd, &rhdr);
-         if ( rc )
-         {
-             if ( ctx->restore.buffer_all_records )
-@@ -766,25 +785,25 @@ static int restore(struct xc_sr_context *ctx)
-         }
- 
-         if ( ctx->restore.buffer_all_records &&
--             rec.type != REC_TYPE_END &&
--             rec.type != REC_TYPE_CHECKPOINT )
-+             rhdr.type != REC_TYPE_END &&
-+             rhdr.type != REC_TYPE_CHECKPOINT )
-         {
--            rc = buffer_record(ctx, &rec);
-+            rc = buffer_record(ctx, &rhdr);
-             if ( rc )
-                 goto err;
-         }
-         else
-         {
--            rc = process_record(ctx, &rec);
-+            rc = process_incoming_record_header(ctx, &rhdr);
-             if ( rc == RECORD_NOT_PROCESSED )
-             {
--                if ( rec.type & REC_TYPE_OPTIONAL )
-+                if ( rhdr.type & REC_TYPE_OPTIONAL )
-                     DPRINTF("Ignoring optional record %#x (%s)",
--                            rec.type, rec_type_to_str(rec.type));
-+                            rhdr.type, rec_type_to_str(rhdr.type));
-                 else
-                 {
-                     ERROR("Mandatory record %#x (%s) not handled",
--                          rec.type, rec_type_to_str(rec.type));
-+                          rhdr.type, rec_type_to_str(rhdr.type));
-                     rc = -1;
-                     goto err;
-                 }
-@@ -795,7 +814,7 @@ static int restore(struct xc_sr_context *ctx)
-                 goto err;
-         }
- 
--    } while ( rec.type != REC_TYPE_END );
-+    } while ( rhdr.type != REC_TYPE_END );
- 
-  remus_failover:
-     if ( ctx->stream_type == XC_STREAM_COLO )
+ struct sr_restore_arrays {
 diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index fa83648f9a..e486bce96f 100644
+index e29b6e1d66..6b09784be8 100644
 --- a/tools/libs/saverestore/save.c
 +++ b/tools/libs/saverestore/save.c
-@@ -589,6 +589,7 @@ static int send_memory_live(struct xc_sr_context *ctx)
- static int colo_merge_secondary_dirty_bitmap(struct xc_sr_context *ctx)
+@@ -88,7 +88,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
  {
      xc_interface *xch = ctx->xch;
-+    struct xc_sr_rhdr rhdr;
-     struct xc_sr_record rec;
-     uint64_t *pfns = NULL;
-     uint64_t pfn;
-@@ -597,7 +598,11 @@ static int colo_merge_secondary_dirty_bitmap(struct xc_sr_context *ctx)
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->save.dirty_bitmap_hbuf);
+-    xen_pfn_t *mfns = NULL, *types = NULL;
++    xen_pfn_t *mfns = ctx->save.m->mfns, *types = NULL;
+     void *guest_mapping = NULL;
+     void **guest_data = NULL;
+     void **local_pages = NULL;
+@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
  
--    rc = read_record(ctx, ctx->save.recv_fd, &rec);
-+    rc = read_record_header(ctx, ctx->save.recv_fd, &rhdr);
-+    if ( rc )
-+        goto err;
-+
-+    rc = read_record_data(ctx, ctx->save.recv_fd, &rhdr, &rec);
-     if ( rc )
-         goto err;
+     assert(nr_pfns != 0);
  
+-    /* Mfns of the batch pfns. */
+-    mfns = malloc(nr_pfns * sizeof(*mfns));
+     /* Types of the batch pfns. */
+     types = malloc(nr_pfns * sizeof(*types));
+     /* Errors from attempting to map the gfns. */
+@@ -118,7 +116,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* iovec[] for writev(). */
+     iov = malloc((nr_pfns + 4) * sizeof(*iov));
+ 
+-    if ( !mfns || !types || !errors || !guest_data || !local_pages || !iov )
++    if ( !types || !errors || !guest_data || !local_pages || !iov )
+     {
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -277,7 +275,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     free(guest_data);
+     free(errors);
+     free(types);
+-    free(mfns);
+ 
+     return rc;
+ }
 
