@@ -2,43 +2,42 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,NORMAL_HTTP_TO_IP,
-	NUMERIC_HTTP_ADDR,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15585C11F69
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 515C2C11F67
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B145061405
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B145061405
+	by mail.kernel.org (Postfix) with ESMTPS id F186F61406
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F186F61406
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148775.275042 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148782.275064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyxZV-00024m-6j; Thu, 01 Jul 2021 14:21:41 +0000
+	id 1lyxZX-0002cM-4A; Thu, 01 Jul 2021 14:21:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148775.275042; Thu, 01 Jul 2021 14:21:41 +0000
+Received: by outflank-mailman (output) from mailman id 148782.275064; Thu, 01 Jul 2021 14:21:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyxZV-00023H-1Y; Thu, 01 Jul 2021 14:21:41 +0000
-Received: by outflank-mailman (input) for mailman id 148775;
- Thu, 01 Jul 2021 14:21:39 +0000
+	id 1lyxZW-0002aP-Ps; Thu, 01 Jul 2021 14:21:42 +0000
+Received: by outflank-mailman (input) for mailman id 148782;
+ Thu, 01 Jul 2021 14:21:40 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vXwC=LZ=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lyxQZ-0005F9-M3
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 14:12:27 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1lyxQ0-0005F9-LG
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 14:11:52 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 309bf640-da76-11eb-8328-12813bfff9fa;
- Thu, 01 Jul 2021 14:11:12 +0000 (UTC)
+ id 2bdb2267-da76-11eb-8328-12813bfff9fa;
+ Thu, 01 Jul 2021 14:11:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,43 +49,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 309bf640-da76-11eb-8328-12813bfff9fa
+X-Inumbo-ID: 2bdb2267-da76-11eb-8328-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1625148672;
+  d=citrix.com; s=securemail; t=1625148664;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=APF1/u5jPnrWo/5Fqte+sYKklT316xDw+oribOSGvg8=;
-  b=Ge6JnMP34vCiOXZ5Txyu4meDPNMNAynK3t9TiXzuMm2lShhXr17ahCV0
-   EvGodJ6a+OOxrvKi7uBl+5WIxADfht6XdlXfZgo1aw71cUnDL5vTHzlfC
-   9gyQaO3QWP/cu30I9Oxv/6NemNkZoFjZbN853zlsrBeRALg1TbFFQ3Km9
-   k=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: DPse08MoYbUEHN87mCBV8I3seFbD0iRz6VH/LPSxzcuPuQZQjOtYLAmTnXANpYULIIjcgv/Px1
- Sp8OkTpY2yODr15n27DBnTkPKjJAuOP/poJnHJYFkXpneEmop0a2vGCerd0fNZxzJ5Bpr0/OAx
- /bnaBSfuzwAbVrgLqW7FtuEKTszwqufSVO4Oab/tDf/0NSuC5rOa8tT/uHSDaHfSQMsB94SMhP
- 0YHBhgI51ECOkvrmJsOaDm4UH+uUu2VnVFOUd6nz1UJXNGjNJYdjKSrlVdWOtmVuku3Egi8Fay
- vd8=
+  bh=L4z28cvrDDLSI9snpUNcl7132wPxxWZfLbL6aTtX99c=;
+  b=ifqFwcjzosPIACXs41EiqBd9MOlWyHRkIaX06IdoUEehh31yvKh2+58C
+   wEj+XOtP0JgQ/EH5eNf7yVtVlHLoQ79up2CgVX95lgl7eYSMNm39ojmaM
+   y5OCiPOXmhm0hlsHziT+5x5/Xf3XrgtwRaCkKjfVVefpgYSiAeut8p9aj
+   M=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: TtXDA0ONg0zB4imPwD6CLtxyuHHm1I96tSnPRl398FpKbpk7Af2z1y8E2fAHku/RucW6k0kY3P
+ S1rBcaLI/FSNaTMFtuAVQB/EAjHR+qmS1/nA+RJwGPHyYU56m+9Vn7xcbpaUpf2emxv8VRA7Jf
+ tMc4UbIgXOAvigD0AnbxPxP8KDyMAc1IEuq2Yw41MlM1catRC55unN1ikPQXMSlGzB54i1p1a8
+ rtR/5DL6F9vvHOvTYMG/zBucORtPOF1sMcyyHddy/wdX1QI88ZStPqm1/PJbqVO8DRI+g12lBf
+ A04=
 X-SBRS: 5.1
-X-MesageID: 47093441
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 47446882
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:qrnDPqpWRqPpvhTp/nkAj0waV5rveYIsimQD101hICG9Evb0qy
- nOpoV/6faQslwssR4b9uxoVJPvfZq+z+8W3WByB9eftWDd0QPFEGgL1+DfKlbbak7DH4BmtJ
- uJc8JFeafN5VoRt7eG3OFveexQvOVu88qT9JjjJ28Gd3APV0n5hT0JcjpyFCdNNW57LKt8Lr
- WwzOxdqQGtfHwGB/7LfUXsD4D41rv2fIuNW29+OyIa
+IronPort-HdrOrdr: A9a23:vO3cIKx73XAkVg1w2ma1KrPxu+skLtp133Aq2lEZdPULSKKlfp
+ GV88jziyWZtN9IYgBcpTiBUJPwJE80hqQFnbX5XI3SEDUO11HYVb2KgbGSoAEIXheOjNK1tp
+ 0QPJSWaueAdWSS5PySiGLTfrdB/DDEytHSuQ639QY1cegAUdAF0+4NMHf8LqQAfnggOXNWLu
+ v/2uN34x6bPVgHZMWyAXcIG8LZocfQqZ7gaRkaQzY69Qinl1qTmfDHOind+i1bfyJEwL8k/2
+ SAuRf+/L+fv/ayzQKZ/3PP7q5RhMDqxrJ4dY2xY4kuW3XRYzSTFcZcso65zXUISSaUmRIXee
+ z30lQd1gJImjTsly+O0F3QMkLboUkTAjfZuCGlaD3Y0JTErL5RMbsbuWsRSGqp12Mw+N57y6
+ 5FxGSfqt5eCg7Bhj3045zSWwhtjVfcmwtorQc/tQ0XbWIlUs4YkWXfxjIgLL4QWCbhrIw3Gu
+ hnC8/RoP5QbFOBdnjc+m1i2salUHg/FgqPBhFqgL3Z7xFG2HRii0cIzs0WmXkNsJo7Vplf/u
+ zBdqBljqtHQMMaZb90QO0BXcy0AGrQRg+kChPZHb0mLtBwB5vpke+D3FwY3pDYRHU49upEpH
+ 2aaiIpiYcbQTOdNfGz
 X-IronPort-AV: E=Sophos;i="5.83,314,1616472000"; 
-   d="scan'208";a="47093441"
+   d="scan'208";a="47446882"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [XEN PATCH v6 30/31] build: introduce if_changed_deps
-Date: Thu, 1 Jul 2021 15:10:10 +0100
-Message-ID: <20210701141011.785641-31-anthony.perard@citrix.com>
+	<wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ross Lagerwall
+	<ross.lagerwall@citrix.com>
+Subject: [XEN PATCH v6 28/31] build: rework test/livepatch/Makefile
+Date: Thu, 1 Jul 2021 15:10:08 +0100
+Message-ID: <20210701141011.785641-29-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210701141011.785641-1-anthony.perard@citrix.com>
 References: <20210701141011.785641-1-anthony.perard@citrix.com>
@@ -94,659 +100,347 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This macro does compare command line like if_changed, but it also
-rewrite the dependencies generated by $(CC) in order to depend on a
-CONFIG_* as generated by kconfig instead of depending on autoconf.h.
-This allow to make a change in kconfig options and only rebuild the
-object that uses that CONFIG_* option.
+This rework the livepatch/Makefile to make it less repetitive and make
+use of the facilities. All the targets to be built are now listed in
+$(extra-y) which will allow Rules.mk to build them without the need of
+a local target in a future patch.
 
-cmd_and_record isn't needed anymore as it is replace by
-cmd_and_fixdep.
+There are some changes/fixes in this patch:
+- when "xen-syms" is used for a target, it is added to the dependency
+  list of the target, which allow to rebuild the target when xen-syms
+  changes. But if "xen-syms" is missing, make simply fails.
+- modinfo.o wasn't removing it's $@.bin file like the other targets,
+  this is now done.
+- The command to build *.livepatch targets as been fixed to use
+  $(XEN_LDFLAGS) rather than just $(LDFLAGS) which is a fallout from
+  2740d96efdd3 ("xen/build: have the root Makefile generates the
+  CFLAGS")
 
-There's only one .*.d dependency file left which is explicitly
-included as a workound, all the other are been absorb into the .*.cmd
-dependency files via `fixdep`. So including .*.d can be removed from
-the makefile.
+make will findout the dependencies of the *.livepatch files and thus
+what to built by "looking" at the objects listed in the *-objs
+variables. The actual dependencies is generated by the new
+"multi_depend" macro.
 
-This imports fixdep.c and if_changed_deps macro from Linux v5.12.
+"$(targets)" needs to be updated with the objects listed in the
+different *-objs variables to allow make to load the .*.cmd dependency
+files.
+
+This patch copies the macro "multi_depend" from Linux 5.12.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- .gitignore                 |   1 +
- xen/Makefile               |  16 +-
- xen/Rules.mk               |  17 +-
- xen/arch/x86/Makefile      |   8 +-
- xen/scripts/Kbuild.include |  17 +-
- xen/tools/Makefile         |   7 +-
- xen/tools/fixdep.c         | 404 +++++++++++++++++++++++++++++++++++++
- 7 files changed, 441 insertions(+), 29 deletions(-)
- create mode 100644 xen/tools/fixdep.c
+ xen/scripts/Kbuild.include  |   9 ++
+ xen/test/livepatch/Makefile | 213 ++++++++++++++----------------------
+ 2 files changed, 91 insertions(+), 131 deletions(-)
 
-diff --git a/.gitignore b/.gitignore
-index 91ae22ae9216..1c9c8a47aac6 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -341,6 +341,7 @@ xen/include/xen/lib/x86/cpuid-autogen.h
- xen/test/livepatch/config.h
- xen/test/livepatch/expect_config.h
- xen/test/livepatch/*.livepatch
-+xen/tools/fixdep
- xen/tools/kconfig/.tmp_gtkcheck
- xen/tools/kconfig/.tmp_qtcheck
- xen/tools/symbols
-diff --git a/xen/Makefile b/xen/Makefile
-index 71f098cd6374..d8dedca206a1 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -185,6 +185,13 @@ endif
- export root-make-done := y
- endif # root-make-done
- 
-+# ===========================================================================
-+# Rules shared between *config targets and build targets
-+
-+PHONY += tools_fixdep
-+tools_fixdep:
-+	$(MAKE) -C tools fixdep
-+
- # Shorthand for kconfig
- kconfig = -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)"
- 
-@@ -397,7 +404,7 @@ $(TARGET).gz: $(TARGET)
- 	mv $@.new $@
- 
- PHONY += prepare
--prepare:
-+prepare: tools_fixdep
- 	$(MAKE) -C tools
- 	$(MAKE) $(build)=. include/xen/compile.h
- 	[ -e arch/$(TARGET_ARCH)/efi ] && for f in $$(cd common/efi; echo *.[ch]); \
-@@ -476,6 +483,7 @@ include/xen/compile.h: include/xen/compile.h.in .banner FORCE
- 	@cat .banner
- 	$(call filechk,compile.h)
- 
-+-include $(wildcard .asm-offsets.s.d)
- asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
- 	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
- 	$(call move-if-changed,$@.new,$@)
-@@ -542,13 +550,13 @@ _MAP:
- 
- # Avoid those single target rules when Makefile is included by Rules.mk
- ifndef obj
--%.o %.i %.s: %.c FORCE
-+%.o %.i %.s: %.c tools_fixdep FORCE
- 	$(MAKE) $(build)=$(*D) $(*D)/$(@F)
- 
--%.o %.s: %.S FORCE
-+%.o %.s: %.S tools_fixdep FORCE
- 	$(MAKE) $(build)=$(*D) $(*D)/$(@F)
- 
--%/: FORCE
-+%/: tools_fixdep FORCE
- 	$(MAKE) $(build)=$* need-builtin=1
- endif
- 
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 4b3abf0ea880..f2af4a6e0644 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -139,8 +139,8 @@ cpp_flags = $(filter-out -Wa$(comma)%,$(1))
- # Calculation of flags, first the generic flags, then the arch specific flags,
- # and last the flags modified for a target or a directory.
- 
--c_flags = -MMD -MP -MF $(@D)/.$(@F).d $(XEN_CFLAGS)
--a_flags = -MMD -MP -MF $(@D)/.$(@F).d $(XEN_AFLAGS)
-+c_flags = -MMD -MP -MF $(depfile) $(XEN_CFLAGS)
-+a_flags = -MMD -MP -MF $(depfile) $(XEN_AFLAGS)
- 
- include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
- 
-@@ -197,7 +197,7 @@ else
- endif
- 
- define rule_cc_o_c
--    $(call cmd_and_record,cc_o_c)
-+    $(call cmd_and_fixdep,cc_o_c)
-     $(call cmd,objcopy_fix_sym)
- endef
- 
-@@ -208,7 +208,7 @@ quiet_cmd_cc_o_S = CC      $@
- cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
- 
- $(obj)/%.o: $(src)/%.S FORCE
--	$(call if_changed,cc_o_S)
-+	$(call if_changed_dep,cc_o_S)
- 
- 
- quiet_cmd_obj_init_o = INIT_O  $@
-@@ -238,13 +238,13 @@ quiet_cmd_cpp_s_S = CPP     $@
- cmd_cpp_s_S = $(CPP) $(call cpp_flags,$(a_flags)) -MQ $@ -o $@ $<
- 
- $(obj)/%.i: $(src)/%.c FORCE
--	$(call if_changed,cpp_i_c)
-+	$(call if_changed_dep,cpp_i_c)
- 
- $(obj)/%.s: $(src)/%.c FORCE
--	$(call if_changed,cc_s_c)
-+	$(call if_changed_dep,cc_s_c)
- 
- $(obj)/%.s: $(src)/%.S FORCE
--	$(call if_changed,cpp_s_S)
-+	$(call if_changed_dep,cpp_s_S)
- 
- # Linker scripts, .lds.S -> .lds
- quiet_cmd_cpp_lds_S = LDS     $@
-@@ -283,9 +283,6 @@ existing-targets := $(wildcard $(sort $(targets)))
- 
- -include $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
- 
--DEPS:= $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).d)
---include $(DEPS_INCLUDE)
--
- # Declare the contents of the PHONY variable as phony.  We keep that
- # information in a variable so we can use it in if_changed and friends.
- .PHONY: $(PHONY)
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index c5e87f3db35b..bcb140756b98 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -280,7 +280,7 @@ $(BASEDIR)/include/arch-x86/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefil
- 
- $(obj)/efi.lds: AFLAGS-y += -DEFI
- $(obj)/xen.lds $(obj)/efi.lds: $(src)/xen.lds.S FORCE
--	$(call if_changed,cpp_lds_S)
-+	$(call if_changed_dep,cpp_lds_S)
- 
- $(obj)/boot/mkelf32: $(src)/boot/mkelf32.c
- 	$(HOSTCC) $(HOSTCFLAGS) -o $@ $<
-@@ -296,9 +296,3 @@ clean::
- 	rm -f $(BASEDIR)/.xen.efi.[0-9]* efi/*.efi efi/mkreloc
- 	rm -f boot/cmdline.S boot/reloc.S boot/*.lnk boot/*.bin
- 	rm -f note.o
--
--# Suppress loading of DEPS files for internal, temporary target files.  This
--# then also suppresses re-generation of the respective .*.d2 files.
--ifeq ($(filter-out .xen%.o,$(notdir $(MAKECMDGOALS))),)
--DEPS_INCLUDE:=
--endif
 diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
-index 788929cdca38..b56bbc4300f0 100644
+index 5fe13a7c5abd..7cb55b181dcb 100644
 --- a/xen/scripts/Kbuild.include
 +++ b/xen/scripts/Kbuild.include
-@@ -15,8 +15,7 @@ dot-target = $(@D)/.$(@F)
+@@ -199,3 +199,12 @@ why =                                                                        \
  
- ###
- # dependencies
--DEPS = .*.d
--DEPS_INCLUDE = $(addsuffix .d2, $(basename $(wildcard $(DEPS))))
-+depfile = $(dot-target).d
- 
- ###
- # real prerequisites without phony targets
-@@ -129,6 +128,8 @@ cmd = @set -e; $(echo-cmd) $(cmd_$(1))
- ###
- # if_changed      - execute command if any prerequisite is newer than
- #                   target, or command line has changed
-+# if_changed_dep  - as if_changed, but uses fixdep to reveal dependencies
-+#                   including used config symbols
- # if_changed_rule - as if_changed but execute rule instead
- 
- ifneq ($(KBUILD_NOCMDDEP),1)
-@@ -157,15 +158,19 @@ if_changed = $(if $(any-prereq)$(cmd-check),                                 \
-         $(cmd);                                                              \
-         printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd, @:)
- 
-+# Execute the command and also postprocess generated .d dependencies file.
-+if_changed_dep = $(if $(any-prereq)$(cmd-check),$(cmd_and_fixdep),@:)
+ echo-why = $(call escsq, $(strip $(why)))
+ endif
 +
-+cmd_and_fixdep =                                                             \
-+        $(cmd);                                                              \
-+        tools/fixdep $(depfile) $@ '$(make-cmd)' > $(dot-target).cmd;        \
-+        rm -f $(depfile)
-+
- # Usage: $(call if_changed_rule,foo)
- # Will check if $(cmd_foo) or any of the prerequisites changed,
- # and if so will execute $(rule_foo).
- if_changed_rule = $(if $(any-prereq)$(cmd-check),$(rule_$(1)),@:)
- 
--cmd_and_record =                                                             \
--        $(cmd);                                                              \
--        printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd
--
- ###
- # why - tell why a target got built
- #       enabled by make V=2
-diff --git a/xen/tools/Makefile b/xen/tools/Makefile
-index 4e42163f981c..722f3664549d 100644
---- a/xen/tools/Makefile
-+++ b/xen/tools/Makefile
-@@ -2,11 +2,14 @@
- include $(XEN_ROOT)/Config.mk
++# Useful for describing the dependency of composite objects
++# Usage:
++#   $(call multi_depend, multi_used_targets, suffix_to_remove, suffix_to_add)
++define multi_depend
++$(foreach m, $(notdir $1), \
++	$(eval $(obj)/$m: \
++	$(addprefix $(obj)/, $(foreach s, $3, $($(m:%$(strip $2)=%$(s)))))))
++endef
+diff --git a/xen/test/livepatch/Makefile b/xen/test/livepatch/Makefile
+index 148dddb90473..e59245323e92 100644
+--- a/xen/test/livepatch/Makefile
++++ b/xen/test/livepatch/Makefile
+@@ -12,81 +12,29 @@ CODE_ADDR=$(shell nm --defined $(1) | grep $(2) | awk '{print "0x"$$1}')
+ CODE_SZ=$(shell nm --defined -S $(1) | grep $(2) | awk '{ print "0x"$$2}')
  
  .PHONY: default
--default: symbols
-+default: symbols fixdep
+-
+-LIVEPATCH := xen_hello_world.livepatch
+-LIVEPATCH_BYE := xen_bye_world.livepatch
+-LIVEPATCH_REPLACE := xen_replace_world.livepatch
+-LIVEPATCH_NOP := xen_nop.livepatch
+-LIVEPATCH_NO_XEN_BUILDID := xen_no_xen_buildid.livepatch
+-LIVEPATCH_PREPOST_HOOKS := xen_prepost_hooks.livepatch
+-LIVEPATCH_PREPOST_HOOKS_FAIL := xen_prepost_hooks_fail.livepatch
+-LIVEPATCH_ACTION_HOOKS := xen_action_hooks.livepatch
+-LIVEPATCH_ACTION_HOOKS_NOFUNC := xen_action_hooks_nofunc.livepatch
+-LIVEPATCH_ACTION_HOOKS_MARKER:= xen_action_hooks_marker.livepatch
+-LIVEPATCH_ACTION_HOOKS_NOAPPLY:= xen_action_hooks_noapply.livepatch
+-LIVEPATCH_ACTION_HOOKS_NOREVERT:= xen_action_hooks_norevert.livepatch
+-LIVEPATCH_EXPECTATIONS:= xen_expectations.livepatch
+-LIVEPATCH_EXPECTATIONS_FAIL:= xen_expectations_fail.livepatch
+-
+-LIVEPATCHES += $(LIVEPATCH)
+-LIVEPATCHES += $(LIVEPATCH_BYE)
+-LIVEPATCHES += $(LIVEPATCH_REPLACE)
+-LIVEPATCHES += $(LIVEPATCH_NOP)
+-LIVEPATCHES += $(LIVEPATCH_NO_XEN_BUILDID)
+-LIVEPATCHES += $(LIVEPATCH_PREPOST_HOOKS)
+-LIVEPATCHES += $(LIVEPATCH_PREPOST_HOOKS_FAIL)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_NOFUNC)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_MARKER)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_NOAPPLY)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_NOREVERT)
+-LIVEPATCHES += $(LIVEPATCH_EXPECTATIONS)
+-LIVEPATCHES += $(LIVEPATCH_EXPECTATIONS_FAIL)
+-
+-LIVEPATCH_DEBUG_DIR ?= $(DEBUG_DIR)/xen-livepatch
+-
+ build default: livepatch
  
- .PHONY: clean
- clean:
--	rm -f *.o symbols
-+	rm -f *.o symbols fixdep
+-install: livepatch
+-	$(INSTALL_DIR) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
+-	$(INSTALL_DATA) $(LIVEPATCHES) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
+-
+-uninstall:
+-	cd $(DESTDIR)$(LIVEPATCH_DEBUG_DIR) && rm -f $(LIVEPATCHES)
+-
+-.PHONY: clean
+-clean::
+-	rm -f *.o .*.o.d *.livepatch config.h expect_config.h
++extra-y += xen_hello_world.livepatch
++xen_hello_world-objs := xen_hello_world_func.o xen_hello_world.o note.o xen_note.o modinfo.o
++$(obj)/xen_hello_world.o: $(obj)/config.h
  
- symbols: symbols.c
- 	$(HOSTCC) $(HOSTCFLAGS) -o $@ $<
+ #
+ # To compute these values we need the binary files: xen-syms
+ # and xen_hello_world_func.o to be already compiled.
+ #
+-.PHONY: config.h
+-config.h: OLD_CODE_SZ=$(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)
+-config.h: NEW_CODE_SZ=$(call CODE_SZ,$<,xen_hello_world)
+-config.h: MINOR_VERSION_SZ=$(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)
+-config.h: MINOR_VERSION_ADDR=$(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)
+-config.h: xen_hello_world_func.o
++$(obj)/config.h: $(obj)/xen_hello_world_func.o
+ 	(set -e; \
+-	 echo "#define NEW_CODE_SZ $(NEW_CODE_SZ)"; \
+-	 echo "#define MINOR_VERSION_SZ $(MINOR_VERSION_SZ)"; \
+-	 echo "#define MINOR_VERSION_ADDR $(MINOR_VERSION_ADDR)"; \
+-	 echo "#define OLD_CODE_SZ $(OLD_CODE_SZ)") > $@
++	 echo "#define NEW_CODE_SZ $(call CODE_SZ,$<,xen_hello_world)"; \
++	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)"; \
++	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)"; \
++	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)") > $@
+ 
+-xen_hello_world.o: config.h
+-
+-.PHONY: $(LIVEPATCH)
+-$(LIVEPATCH): xen_hello_world_func.o xen_hello_world.o note.o xen_note.o modinfo.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH) $^
+-
+-.PHONY: modinfo.o
+-modinfo.o:
++$(obj)/modinfo.o:
+ 	(set -e; \
+ 	 printf "LIVEPATCH_RULEZ\0") > $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.modinfo,alloc,load,readonly,data,contents -S $@.bin $@
+-	#rm -f $@.bin
++	rm -f $@.bin
+ 
+ #
+ # This target is only accessible if CONFIG_LIVEPATCH is defined, which
+@@ -97,9 +45,8 @@ modinfo.o:
+ # not be built (it is for EFI builds), and that we do not have
+ # the note.o.bin to muck with (as it gets deleted)
+ #
+-.PHONY: note.o
+-note.o:
+-	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $(BASEDIR)/xen-syms $@.bin
++$(obj)/note.o: $(BASEDIR)/xen-syms
++	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
+ 	rm -f $@.bin
+@@ -108,9 +55,8 @@ note.o:
+ # Append .livepatch.xen_depends section
+ # with Xen build-id derived from xen-syms.
+ #
+-.PHONY: xen_note.o
+-xen_note.o:
+-	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $(BASEDIR)/xen-syms $@.bin
++$(obj)/xen_note.o: $(BASEDIR)/xen-syms
++	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.xen_depends,alloc,load,readonly,data,contents -S $@.bin $@
+ 	rm -f $@.bin
+@@ -119,102 +65,107 @@ xen_note.o:
+ # Extract the build-id of the xen_hello_world.livepatch
+ # (which xen_bye_world will depend on).
+ #
+-.PHONY: hello_world_note.o
+-hello_world_note.o: $(LIVEPATCH)
+-	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $(LIVEPATCH) $@.bin
++$(obj)/hello_world_note.o: $(obj)/xen_hello_world.livepatch
++	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
+ 	rm -f $@.bin
+ 
+-xen_bye_world.o: config.h
+ 
+-.PHONY: $(LIVEPATCH_BYE)
+-$(LIVEPATCH_BYE): xen_bye_world_func.o xen_bye_world.o hello_world_note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_BYE) $^
++extra-y += xen_bye_world.livepatch
++xen_bye_world-objs := xen_bye_world_func.o xen_bye_world.o hello_world_note.o xen_note.o
++$(obj)/xen_bye_world.o: $(obj)/config.h
+ 
+-xen_replace_world.o: config.h
+ 
+-.PHONY: $(LIVEPATCH_REPLACE)
+-$(LIVEPATCH_REPLACE): xen_replace_world_func.o xen_replace_world.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_REPLACE) $^
++extra-y += xen_replace_world.livepatch
++xen_replace_world-objs := xen_replace_world_func.o xen_replace_world.o note.o xen_note.o
++$(obj)/xen_replace_world.o: $(obj)/config.h
+ 
+-xen_nop.o: config.h
+ 
+-.PHONY: $(LIVEPATCH_NOP)
+-$(LIVEPATCH_NOP): xen_nop.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_NOP) $^
++extra-y += xen_nop.livepatch
++xen_nop-objs := xen_nop.o note.o xen_note.o
++$(obj)/xen_nop.o: $(obj)/config.h
+ 
+ # This one always fails upon upload, because it deliberately
+ # does not have a .livepatch.xen_depends (xen_note.o) section.
+-xen_no_xen_buildid.o: config.h
+-
+-.PHONY: $(LIVEPATCH_NO_XEN_BUILDID)
+-$(LIVEPATCH_NO_XEN_BUILDID): xen_nop.o note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_NO_XEN_BUILDID) $^
++extra-y += xen_no_xen_buildid.livepatch
++xen_no_xen_buildid-objs := xen_nop.o note.o
+ 
+-xen_prepost_hooks.o: config.h
++$(obj)/xen_prepost_hooks.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_PREPOST_HOOKS)
+-$(LIVEPATCH_PREPOST_HOOKS): xen_prepost_hooks.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_PREPOST_HOOKS) $^
++extra-y += xen_prepost_hooks.livepatch
++xen_prepost_hooks-objs := xen_prepost_hooks.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_prepost_hooks_fail.o: config.h
++$(obj)/xen_prepost_hooks_fail.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_PREPOST_HOOKS_FAIL)
+-$(LIVEPATCH_PREPOST_HOOKS_FAIL): xen_prepost_hooks_fail.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_PREPOST_HOOKS_FAIL) $^
++extra-y += xen_prepost_hooks_fail.livepatch
++xen_prepost_hooks_fail-objs := xen_prepost_hooks_fail.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks.o: config.h
++$(obj)/xen_action_hooks.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS)
+-$(LIVEPATCH_ACTION_HOOKS): xen_action_hooks.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS) $^
++extra-y += xen_action_hooks.livepatch
++xen_action_hooks-objs := xen_action_hooks.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks_nofunc.o: config.h
++$(obj)/xen_action_hooks_nofunc.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_NOFUNC)
+-$(LIVEPATCH_ACTION_HOOKS_NOFUNC): xen_action_hooks_nofunc.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_NOFUNC) $^
++extra-y += xen_action_hooks_nofunc.livepatch
++xen_action_hooks_nofunc-objs := xen_action_hooks_nofunc.o note.o xen_note.o
+ 
+-xen_action_hooks_marker.o: config.h
++$(obj)/xen_action_hooks_marker.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_MARKER)
+-$(LIVEPATCH_ACTION_HOOKS_MARKER): xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_MARKER) $^
++extra-y += xen_action_hooks_marker.livepatch
++xen_action_hooks_marker-objs := xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks_noapply.o: config.h
++$(obj)/xen_action_hooks_noapply.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_NOAPPLY)
+-$(LIVEPATCH_ACTION_HOOKS_NOAPPLY): xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_NOAPPLY) $^
++extra-y += xen_action_hooks_noapply.livepatch
++xen_action_hooks_noapply-objs := xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks_norevert.o: config.h
++$(obj)/xen_action_hooks_norevert.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_NOREVERT)
+-$(LIVEPATCH_ACTION_HOOKS_NOREVERT): xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_NOREVERT) $^
++extra-y += xen_action_hooks_norevert.livepatch
++xen_action_hooks_norevert-objs := xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+ 
+ EXPECT_BYTES_COUNT := 8
+ CODE_GET_EXPECT=$(shell $(OBJDUMP) -d --insn-width=1 $(1) | sed -n -e '/<'$(2)'>:$$/,/^$$/ p' | tail -n +2 | head -n $(EXPECT_BYTES_COUNT) | awk '{$$0=$$2; printf "%s", substr($$0,length-1)}' | sed 's/.\{2\}/0x&,/g' | sed 's/^/{/;s/,$$/}/g')
+-.PHONY: expect_config.h
+-expect_config.h: EXPECT_BYTES=$(call CODE_GET_EXPECT,$(BASEDIR)/xen-syms,xen_extra_version)
+-expect_config.h:
++$(obj)/expect_config.h: $(BASEDIR)/xen-syms
+ 	(set -e; \
+-	 echo "#define EXPECT_BYTES $(EXPECT_BYTES)"; \
++	 echo "#define EXPECT_BYTES $(call CODE_GET_EXPECT,$<,xen_extra_version)"; \
+          echo "#define EXPECT_BYTES_COUNT $(EXPECT_BYTES_COUNT)") > $@
+ 
+-xen_expectations.o: expect_config.h
++$(obj)/xen_expectations.o: $(obj)/expect_config.h
+ 
+-.PHONY: $(LIVEPATCH_EXPECTATIONS)
+-$(LIVEPATCH_EXPECTATIONS): xen_expectations.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_EXPECTATIONS) $^
++extra-y += xen_expectations.livepatch
++xen_expectations-objs := xen_expectations.o xen_hello_world_func.o note.o xen_note.o
+ 
+-.PHONY: $(LIVEPATCH_EXPECTATIONS_FAIL)
+-$(LIVEPATCH_EXPECTATIONS_FAIL): xen_expectations_fail.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_EXPECTATIONS_FAIL) $^
++extra-y += xen_expectations_fail.livepatch
++xen_expectations_fail-objs := xen_expectations_fail.o xen_hello_world_func.o note.o xen_note.o
 +
-+fixdep: fixdep.c
-+	$(HOSTCC) $(HOSTCFLAGS) -o $@ $<
-diff --git a/xen/tools/fixdep.c b/xen/tools/fixdep.c
-new file mode 100644
-index 000000000000..d98540552941
---- /dev/null
-+++ b/xen/tools/fixdep.c
-@@ -0,0 +1,404 @@
-+/*
-+ * "Optimize" a list of dependencies as spit out by gcc -MD
-+ * for the kernel build
-+ * ===========================================================================
-+ *
-+ * Author       Kai Germaschewski
-+ * Copyright    2002 by Kai Germaschewski  <kai.germaschewski@gmx.de>
-+ *
-+ * This software may be used and distributed according to the terms
-+ * of the GNU General Public License, incorporated herein by reference.
-+ *
-+ *
-+ * Introduction:
-+ *
-+ * gcc produces a very nice and correct list of dependencies which
-+ * tells make when to remake a file.
-+ *
-+ * To use this list as-is however has the drawback that virtually
-+ * every file in the kernel includes autoconf.h.
-+ *
-+ * If the user re-runs make *config, autoconf.h will be
-+ * regenerated.  make notices that and will rebuild every file which
-+ * includes autoconf.h, i.e. basically all files. This is extremely
-+ * annoying if the user just changed CONFIG_HIS_DRIVER from n to m.
-+ *
-+ * So we play the same trick that "mkdep" played before. We replace
-+ * the dependency on autoconf.h by a dependency on every config
-+ * option which is mentioned in any of the listed prerequisites.
-+ *
-+ * kconfig populates a tree in include/config/ with an empty file
-+ * for each config symbol and when the configuration is updated
-+ * the files representing changed config options are touched
-+ * which then let make pick up the changes and the files that use
-+ * the config symbols are rebuilt.
-+ *
-+ * So if the user changes his CONFIG_HIS_DRIVER option, only the objects
-+ * which depend on "include/config/his/driver.h" will be rebuilt,
-+ * so most likely only his driver ;-)
-+ *
-+ * The idea above dates, by the way, back to Michael E Chastain, AFAIK.
-+ *
-+ * So to get dependencies right, there are two issues:
-+ * o if any of the files the compiler read changed, we need to rebuild
-+ * o if the command line given to the compile the file changed, we
-+ *   better rebuild as well.
-+ *
-+ * The former is handled by using the -MD output, the later by saving
-+ * the command line used to compile the old object and comparing it
-+ * to the one we would now use.
-+ *
-+ * Again, also this idea is pretty old and has been discussed on
-+ * kbuild-devel a long time ago. I don't have a sensibly working
-+ * internet connection right now, so I rather don't mention names
-+ * without double checking.
-+ *
-+ * This code here has been based partially based on mkdep.c, which
-+ * says the following about its history:
-+ *
-+ *   Copyright abandoned, Michael Chastain, <mailto:mec@shout.net>.
-+ *   This is a C version of syncdep.pl by Werner Almesberger.
-+ *
-+ *
-+ * It is invoked as
-+ *
-+ *   fixdep <depfile> <target> <cmdline>
-+ *
-+ * and will read the dependency file <depfile>
-+ *
-+ * The transformed dependency snipped is written to stdout.
-+ *
-+ * It first generates a line
-+ *
-+ *   cmd_<target> = <cmdline>
-+ *
-+ * and then basically copies the .<target>.d file to stdout, in the
-+ * process filtering out the dependency on autoconf.h and adding
-+ * dependencies on include/config/my/option.h for every
-+ * CONFIG_MY_OPTION encountered in any of the prerequisites.
-+ *
-+ * We don't even try to really parse the header files, but
-+ * merely grep, i.e. if CONFIG_FOO is mentioned in a comment, it will
-+ * be picked up as well. It's not a problem with respect to
-+ * correctness, since that can only give too many dependencies, thus
-+ * we cannot miss a rebuild. Since people tend to not mention totally
-+ * unrelated CONFIG_ options all over the place, it's not an
-+ * efficiency problem either.
-+ *
-+ * (Note: it'd be easy to port over the complete mkdep state machine,
-+ *  but I don't think the added complexity is worth it)
-+ */
 +
-+#include <sys/types.h>
-+#include <sys/stat.h>
-+#include <unistd.h>
-+#include <fcntl.h>
-+#include <string.h>
-+#include <stdarg.h>
-+#include <stdlib.h>
-+#include <stdio.h>
-+#include <ctype.h>
++quiet_cmd_livepatch = LD      $@
++cmd_livepatch = $(LD) $(XEN_LDFLAGS) $(build_id_linker) -r -o $@ $(real-prereqs)
 +
-+static void usage(void)
-+{
-+	fprintf(stderr, "Usage: fixdep <depfile> <target> <cmdline>\n");
-+	exit(1);
-+}
++$(obj)/%.livepatch: FORCE
++	$(call if_changed,livepatch)
 +
-+/*
-+ * In the intended usage of this program, the stdout is redirected to .*.cmd
-+ * files. The return value of printf() and putchar() must be checked to catch
-+ * any error, e.g. "No space left on device".
-+ */
-+static void xprintf(const char *format, ...)
-+{
-+	va_list ap;
-+	int ret;
++$(call multi_depend, $(filter %.livepatch,$(extra-y)), .livepatch, -objs)
++targets += $(sort $(foreach m,$(basename $(notdir $(filter %.livepatch,$(extra-y)))), \
++    $($(m)-objs)))
 +
-+	va_start(ap, format);
-+	ret = vprintf(format, ap);
-+	if (ret < 0) {
-+		perror("fixdep");
-+		exit(1);
-+	}
-+	va_end(ap);
-+}
++LIVEPATCHES := $(filter %.livepatch,$(extra-y))
 +
-+static void xputchar(int c)
-+{
-+	int ret;
++LIVEPATCH_DEBUG_DIR ?= $(DEBUG_DIR)/xen-livepatch
+ 
+ .PHONY: livepatch
+-livepatch: $(LIVEPATCH) $(LIVEPATCH_BYE) $(LIVEPATCH_REPLACE) $(LIVEPATCH_NOP) $(LIVEPATCH_NO_XEN_BUILDID) \
+-           $(LIVEPATCH_PREPOST_HOOKS) $(LIVEPATCH_PREPOST_HOOKS_FAIL) $(LIVEPATCH_ACTION_HOOKS) \
+-           $(LIVEPATCH_ACTION_HOOKS_NOFUNC) $(LIVEPATCH_ACTION_HOOKS_MARKER) $(LIVEPATCH_ACTION_HOOKS_NOAPPLY) \
+-           $(LIVEPATCH_ACTION_HOOKS_NOREVERT) $(LIVEPATCH_EXPECTATIONS) $(LIVEPATCH_EXPECTATIONS_FAIL)
++livepatch: $(LIVEPATCHES)
 +
-+	ret = putchar(c);
-+	if (ret == EOF) {
-+		perror("fixdep");
-+		exit(1);
-+	}
-+}
++install: $(addprefix $(obj)/,$(LIVEPATCHES))
++	$(INSTALL_DIR) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
++	$(INSTALL_DATA) $(addprefix $(obj)/,$(LIVEPATCHES)) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
 +
-+/*
-+ * Print out a dependency path from a symbol name
-+ */
-+static void print_dep(const char *m, int slen, const char *dir)
-+{
-+	int c, prev_c = '/', i;
++uninstall:
++	cd $(DESTDIR)$(LIVEPATCH_DEBUG_DIR) && rm -f $(LIVEPATCHES)
 +
-+	xprintf("    $(wildcard %s/", dir);
-+	for (i = 0; i < slen; i++) {
-+		c = m[i];
-+		if (c == '_')
-+			c = '/';
-+		else
-+			c = tolower(c);
-+		if (c != '/' || prev_c != '/')
-+			xputchar(c);
-+		prev_c = c;
-+	}
-+	xprintf(".h) \\\n");
-+}
-+
-+struct item {
-+	struct item	*next;
-+	unsigned int	len;
-+	unsigned int	hash;
-+	char		name[];
-+};
-+
-+#define HASHSZ 256
-+static struct item *hashtab[HASHSZ];
-+
-+static unsigned int strhash(const char *str, unsigned int sz)
-+{
-+	/* fnv32 hash */
-+	unsigned int i, hash = 2166136261U;
-+
-+	for (i = 0; i < sz; i++)
-+		hash = (hash ^ str[i]) * 0x01000193;
-+	return hash;
-+}
-+
-+/*
-+ * Lookup a value in the configuration string.
-+ */
-+static int is_defined_config(const char *name, int len, unsigned int hash)
-+{
-+	struct item *aux;
-+
-+	for (aux = hashtab[hash % HASHSZ]; aux; aux = aux->next) {
-+		if (aux->hash == hash && aux->len == len &&
-+		    memcmp(aux->name, name, len) == 0)
-+			return 1;
-+	}
-+	return 0;
-+}
-+
-+/*
-+ * Add a new value to the configuration string.
-+ */
-+static void define_config(const char *name, int len, unsigned int hash)
-+{
-+	struct item *aux = malloc(sizeof(*aux) + len);
-+
-+	if (!aux) {
-+		perror("fixdep:malloc");
-+		exit(1);
-+	}
-+	memcpy(aux->name, name, len);
-+	aux->len = len;
-+	aux->hash = hash;
-+	aux->next = hashtab[hash % HASHSZ];
-+	hashtab[hash % HASHSZ] = aux;
-+}
-+
-+/*
-+ * Record the use of a CONFIG_* word.
-+ */
-+static void use_config(const char *m, int slen)
-+{
-+	unsigned int hash = strhash(m, slen);
-+
-+	if (is_defined_config(m, slen, hash))
-+	    return;
-+
-+	define_config(m, slen, hash);
-+	print_dep(m, slen, "include/config");
-+}
-+
-+/* test if s ends in sub */
-+static int str_ends_with(const char *s, int slen, const char *sub)
-+{
-+	int sublen = strlen(sub);
-+
-+	if (sublen > slen)
-+		return 0;
-+
-+	return !memcmp(s + slen - sublen, sub, sublen);
-+}
-+
-+static void parse_config_file(const char *p)
-+{
-+	const char *q, *r;
-+	const char *start = p;
-+
-+	while ((p = strstr(p, "CONFIG_"))) {
-+		if (p > start && (isalnum(p[-1]) || p[-1] == '_')) {
-+			p += 7;
-+			continue;
-+		}
-+		p += 7;
-+		q = p;
-+		while (isalnum(*q) || *q == '_')
-+			q++;
-+		if (str_ends_with(p, q - p, "_MODULE"))
-+			r = q - 7;
-+		else
-+			r = q;
-+		if (r > p)
-+			use_config(p, r - p);
-+		p = q;
-+	}
-+}
-+
-+static void *read_file(const char *filename)
-+{
-+	struct stat st;
-+	int fd;
-+	char *buf;
-+
-+	fd = open(filename, O_RDONLY);
-+	if (fd < 0) {
-+		fprintf(stderr, "fixdep: error opening file: ");
-+		perror(filename);
-+		exit(2);
-+	}
-+	if (fstat(fd, &st) < 0) {
-+		fprintf(stderr, "fixdep: error fstat'ing file: ");
-+		perror(filename);
-+		exit(2);
-+	}
-+	buf = malloc(st.st_size + 1);
-+	if (!buf) {
-+		perror("fixdep: malloc");
-+		exit(2);
-+	}
-+	if (read(fd, buf, st.st_size) != st.st_size) {
-+		perror("fixdep: read");
-+		exit(2);
-+	}
-+	buf[st.st_size] = '\0';
-+	close(fd);
-+
-+	return buf;
-+}
-+
-+/* Ignore certain dependencies */
-+static int is_ignored_file(const char *s, int len)
-+{
-+	return str_ends_with(s, len, "include/generated/autoconf.h") ||
-+	       str_ends_with(s, len, "include/generated/autoksyms.h");
-+}
-+
-+/*
-+ * Important: The below generated source_foo.o and deps_foo.o variable
-+ * assignments are parsed not only by make, but also by the rather simple
-+ * parser in scripts/mod/sumversion.c.
-+ */
-+static void parse_dep_file(char *m, const char *target)
-+{
-+	char *p;
-+	int is_last, is_target;
-+	int saw_any_target = 0;
-+	int is_first_dep = 0;
-+	void *buf;
-+
-+	while (1) {
-+		/* Skip any "white space" */
-+		while (*m == ' ' || *m == '\\' || *m == '\n')
-+			m++;
-+
-+		if (!*m)
-+			break;
-+
-+		/* Find next "white space" */
-+		p = m;
-+		while (*p && *p != ' ' && *p != '\\' && *p != '\n')
-+			p++;
-+		is_last = (*p == '\0');
-+		/* Is the token we found a target name? */
-+		is_target = (*(p-1) == ':');
-+		/* Don't write any target names into the dependency file */
-+		if (is_target) {
-+			/* The /next/ file is the first dependency */
-+			is_first_dep = 1;
-+		} else if (!is_ignored_file(m, p - m)) {
-+			*p = '\0';
-+
-+			/*
-+			 * Do not list the source file as dependency, so that
-+			 * kbuild is not confused if a .c file is rewritten
-+			 * into .S or vice versa. Storing it in source_* is
-+			 * needed for modpost to compute srcversions.
-+			 */
-+			if (is_first_dep) {
-+				/*
-+				 * If processing the concatenation of multiple
-+				 * dependency files, only process the first
-+				 * target name, which will be the original
-+				 * source name, and ignore any other target
-+				 * names, which will be intermediate temporary
-+				 * files.
-+				 */
-+				if (!saw_any_target) {
-+					saw_any_target = 1;
-+					xprintf("source_%s := %s\n\n",
-+						target, m);
-+					xprintf("deps_%s := \\\n", target);
-+				}
-+				is_first_dep = 0;
-+			} else {
-+				xprintf("  %s \\\n", m);
-+			}
-+
-+			buf = read_file(m);
-+			parse_config_file(buf);
-+			free(buf);
-+		}
-+
-+		if (is_last)
-+			break;
-+
-+		/*
-+		 * Start searching for next token immediately after the first
-+		 * "whitespace" character that follows this token.
-+		 */
-+		m = p + 1;
-+	}
-+
-+	if (!saw_any_target) {
-+		fprintf(stderr, "fixdep: parse error; no targets found\n");
-+		exit(1);
-+	}
-+
-+	xprintf("\n%s: $(deps_%s)\n\n", target, target);
-+	xprintf("$(deps_%s):\n", target);
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+	const char *depfile, *target, *cmdline;
-+	void *buf;
-+
-+	if (argc != 4)
-+		usage();
-+
-+	depfile = argv[1];
-+	target = argv[2];
-+	cmdline = argv[3];
-+
-+	xprintf("cmd_%s := %s\n\n", target, cmdline);
-+
-+	buf = read_file(depfile);
-+	parse_dep_file(buf, target);
-+	free(buf);
-+
-+	return 0;
-+}
++.PHONY: clean
++clean::
++	rm -f *.o .*.o.d *.livepatch config.h expect_config.h
 -- 
 Anthony PERARD
 
