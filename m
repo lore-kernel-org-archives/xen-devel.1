@@ -2,46 +2,50 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0BD3C11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:09:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F2E3C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:25:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8AF2F61405
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:09:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8AF2F61405
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 5493C61406
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:25:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5493C61406
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148975.275349 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148981.275370 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lz0BE-0000tM-86; Thu, 01 Jul 2021 17:08:48 +0000
+	id 1lz0Qn-0003MJ-Tq; Thu, 01 Jul 2021 17:24:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148975.275349; Thu, 01 Jul 2021 17:08:48 +0000
+Received: by outflank-mailman (output) from mailman id 148981.275370; Thu, 01 Jul 2021 17:24:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lz0BE-0000t9-4u; Thu, 01 Jul 2021 17:08:48 +0000
-Received: by outflank-mailman (input) for mailman id 148975;
- Thu, 01 Jul 2021 17:08:46 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lz0BC-0000t1-CU
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 17:08:46 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.167])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fde8654e-da8e-11eb-8351-12813bfff9fa;
- Thu, 01 Jul 2021 17:08:45 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx61H8c7rD
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 1 Jul 2021 19:08:38 +0200 (CEST)
+	id 1lz0Qn-0003MC-QT; Thu, 01 Jul 2021 17:24:53 +0000
+Received: by outflank-mailman (input) for mailman id 148981;
+ Thu, 01 Jul 2021 17:24:52 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=30oQ=LZ=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1lz0Qm-00035P-HO
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 17:24:52 +0000
+Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f0c10b64-d8a7-4662-9e9f-01bc1a1ab55f;
+ Thu, 01 Jul 2021 17:24:47 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ a5-20020a7bc1c50000b02901e3bbe0939bso4633198wmj.0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Jul 2021 10:24:47 -0700 (PDT)
+Received: from ?IPv6:2a00:23c5:5785:9a01:dd08:98e8:6495:64d2?
+ ([2a00:23c5:5785:9a01:dd08:98e8:6495:64d2])
+ by smtp.gmail.com with ESMTPSA id o3sm613049wrw.56.2021.07.01.10.24.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Jul 2021 10:24:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,76 +57,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fde8654e-da8e-11eb-8351-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625159318;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=LIhm0s7MYVUQghllSXbu6oUayBlInZOsy10OIdm7s0I=;
-    b=SBrVmwUHsTuXkXkTY5WYeyyCWBhZ0q2qkZ0N5BDgJU+LyTvI3Vp064+97g2hk8UivV
-    8/qu/Yx4VPUElj4Gyw54CjjBt3n9d4W+1GRYqedrWDZuDgBpV/SBIVGX57Eq1Svs9TY7
-    Z0ru3kIjPLgmD23Ua3YsCA7lEZAWcS5msXfbSyGDjKuJOtqoTVCb+z4s5u/EdMyY5xmj
-    gMAa7OUDfl8dn3vur7+rX2CaJBn0Dq5LGOwRVcWDYSM/GN7yvguurUhCN/FKuOZYt7pj
-    47/e1dCNh6Qq8z4iO9sJarz3uLMYA+slNn40QN0cRjf5QQ+/FIgMozs8CUvuC78sCgX1
-    78pg==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisQsBBSIa03sY9BUY2ao0oygRsMfcqA6zjDLeeWXNg=="
-X-RZG-CLASS-ID: mo00
-Date: Thu, 1 Jul 2021 19:08:31 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: <xen-devel@lists.xenproject.org>, Ian Jackson <iwj@xenproject.org>, "Wei
- Liu" <wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v20210701 33/40] tools: change struct precopy_stats to
- precopy_stats_t
-Message-ID: <20210701190831.4bee9632.olaf@aepfle.de>
-In-Reply-To: <YN3xGNq2vkTXqwZv@perard>
-References: <20210701095635.15648-1-olaf@aepfle.de>
-	<20210701095635.15648-34-olaf@aepfle.de>
-	<YN3xGNq2vkTXqwZv@perard>
-X-Mailer: Claws Mail 2021.05.27 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+X-Inumbo-ID: f0c10b64-d8a7-4662-9e9f-01bc1a1ab55f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=bM636ttOBoWSgPMiqkDWtkSD1pigvPw7drXBJk2dQSo=;
+        b=CoYAhA25qZuZPHQ03Z3conMZVB/j7nIxyTpV8KAfawMUJcGMdM2D6rJgltGNtKQtg3
+         Nudzew74AD9NWYs5euIQatfkbrD1P4ZdJjFelHclGcN6HD3itT3LzuUtdyI5or17Oo7M
+         WOUnlUWG/ix7ZxEk5RQEhWxPd3PohJpGrM8dCRCE0kRF9k9+3TIRA2GvzpzEvq8VQDPQ
+         T451NjlwgFDG9QX0dEdb8WYHkyX5VCmgKvqvNrT1Rtao2bMxOwJbCCp5I0fdTnhcaPfT
+         kjBvboXlWxoajNEUbdErN9UHqMlPBQkpBPDF6sD4icsJsGehTGjCNkjZM0M3c+XVFMZJ
+         42MQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:subject:to:cc:references
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=bM636ttOBoWSgPMiqkDWtkSD1pigvPw7drXBJk2dQSo=;
+        b=aVL0R1xjxMBrmyytx5EVVaG3msTUmXci+BHL8FMXRp1BpsSyag6I7XJMVPAlzXazF2
+         9SBIwA8sx2h1qmNX8ooYYW772t4BMvcBGTHGL348xUJOzjdhxfCb8l/sGXoHh5hZT33L
+         D7oksgxvcCyIIn6Zk+VUhxKHxwhudWtyK4jS3eDzEiHDLb5Z7JVrlFx1YHcCnEqhwgrP
+         uYmTNwF5LX7OYiRuW23p1FdD4L0nfhRgtxiSmNsJkxHMwFwjMyahF4I4JWKYDV95aa8Y
+         bHIqEfEBDuTs4+Ex3lC1hbTCirNJjHH2rBIdF1imI/Z0GCibsXMDHFFL/HvggfKlj8tq
+         j1EA==
+X-Gm-Message-State: AOAM530MF92Lcr8CrX23LbXYcS23FvsTvjs2k6zZTnmkGZqvBy4eI7F3
+	LYeT5LKceJ/6A2yk18LRPno=
+X-Google-Smtp-Source: ABdhPJzR73BRmIIfFijATpWTS27jawGoNo9rHaVB8ejaBTxpMp3GuQyBgjKXZ0J3VDzp6rMyNUNe3Q==
+X-Received: by 2002:a05:600c:5112:: with SMTP id o18mr797431wms.15.1625160287101;
+        Thu, 01 Jul 2021 10:24:47 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Reply-To: paul@xen.org
+Subject: Re: [XEN PATCH v6 18/31] xen: move include/asm-* to
+ include/arch-*/asm
+To: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Tamas K Lengyel <tamas@tklengyel.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+ Lukasz Hawrylko <lukasz.hawrylko@linux.intel.com>,
+ Bob Eshleman <bobbyeshleman@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>
+References: <20210701141011.785641-1-anthony.perard@citrix.com>
+ <20210701141011.785641-19-anthony.perard@citrix.com>
+Message-ID: <bf148f2b-8256-0be0-0ad1-91e1f7b05482@xen.org>
+Date: Thu, 1 Jul 2021 18:24:45 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/3dctEgGIi/JgQQnvlhc7Xxj";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+In-Reply-To: <20210701141011.785641-19-anthony.perard@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
---Sig_/3dctEgGIi/JgQQnvlhc7Xxj
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On 01/07/2021 15:09, Anthony PERARD wrote:
+> This avoid the need to create the symbolic link "include/asm".
+> 
+> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Am Thu, 1 Jul 2021 17:45:12 +0100
-schrieb Anthony PERARD <anthony.perard@citrix.com>:
-
-> But can't libxl_save_msgs_gen.pl been able to deal with
-> thing like 'struct precopy_stats' ? It seems to be able to deal with
-> 'unsigned long'.
-
-Yes, this is apparently possible.
-I have to check why I thought it was required to turn this into a typedef.
-Right now I do not see the reason in the code comments.
-
-Olaf
-
---Sig_/3dctEgGIi/JgQQnvlhc7Xxj
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmDd9o8ACgkQ86SN7mm1
-DoBmFw/7BEB4hxB/i2Pgr7FCI7N41L0qjTC5QwSjJhbD3xC5GxULbccTqGUlGlqw
-zrCXcgMLeauNYQ33EUWLU5q7GqlhIvnK0hTpjJAIdw8AWXINTog0CqQIfYTvPGxR
-y0wqdUkePVmAugyMy7/zPm6lYTKTrgbcVLgS5nhuSwNW46DXjXJV2Ox0d33wygo6
-ThV9Gey/IuIB3wtt9dbJoDr1URWaP+pWX9PTQt4/m1bVdEiYWdO9IBbbQXzbZsa4
-xwrgjlplR2uW16CLez4+++T698WkK6nr1wcCqIoNF8Tyx+dZbzdBhNh+qyFofBQ3
-3YyPwlP0Do0bEVw0Kyy7CH19gi2th/RBUlJ3JGsNGYN9ip4hOQR9vDCG+TEA9rNs
-6Z7/NPySd0HPUQZ4SqVxGJAFWeYpxId6rzgUMI++heE6t0Xb9n04Dxa1AD0FoK7B
-nmTX5/2TlmTJGu9e7viVabvplRfaXRWRg14txM2Mqc8JvFXjyWGH6kJFpCA3ArrE
-YolOAuoY8cpXbSQpNIkASx2//Am3XXx1RawZUBsJKrlMcRyhLWohmOt+YAwJEZ8e
-ZcM41hFjabbSZJxFk+87CDjVMP9l/fZa1ITotgIRQ8NhVCpGYEJ1Pt9wVWIH1rOA
-h/KjyFDxkHT7rtEGTGBNBnx4V1XQvfMMp11mGMggbTTBgo04B2U=
-=EGPx
------END PGP SIGNATURE-----
-
---Sig_/3dctEgGIi/JgQQnvlhc7Xxj--
+Acked-by: Paul Durrant <paul@xen.org>
 
