@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B91EDC11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AB17C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 81B8F613FE
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81B8F613FE
+	by mail.kernel.org (Postfix) with ESMTPS id 49FB761406
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:21:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49FB761406
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148759.275027 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148778.275049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyxZS-0001hQ-FV; Thu, 01 Jul 2021 14:21:38 +0000
+	id 1lyxZV-00028B-Q2; Thu, 01 Jul 2021 14:21:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148759.275027; Thu, 01 Jul 2021 14:21:38 +0000
+Received: by outflank-mailman (output) from mailman id 148778.275049; Thu, 01 Jul 2021 14:21:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyxZS-0001hE-As; Thu, 01 Jul 2021 14:21:38 +0000
-Received: by outflank-mailman (input) for mailman id 148759;
- Thu, 01 Jul 2021 14:21:36 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lyxZV-00026g-BJ; Thu, 01 Jul 2021 14:21:41 +0000
+Received: by outflank-mailman (input) for mailman id 148778;
+ Thu, 01 Jul 2021 14:21:40 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vXwC=LZ=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lyxRI-0005F9-Nd
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 14:13:12 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3d926230-da76-11eb-8329-12813bfff9fa;
- Thu, 01 Jul 2021 14:11:34 +0000 (UTC)
+ id 1lyxQT-0005tj-33
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 14:12:21 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a4370ab4-7d26-431f-8643-4db42b9cbd9d;
+ Thu, 01 Jul 2021 14:10:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,42 +48,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3d926230-da76-11eb-8329-12813bfff9fa
+X-Inumbo-ID: a4370ab4-7d26-431f-8643-4db42b9cbd9d
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1625148693;
+  d=citrix.com; s=securemail; t=1625148659;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=/FUmArmLEUIthNAppG6akBLHO3pJX78uJKbRrb4d2EI=;
-  b=P76S3OAdIgeozLRn43x2LzFcy8Ykwb3pT6tREUw+i1f1TRhCXgKi11FT
-   luKAOnUWzXjeZjs2QbBcF45Gxdk/ZSL7b9+Lfw/E6OkUHp8uObbADquIh
-   jx7vDYEbB09TYP9Uu1IyVSWGRHdnwGDDR44OJm47lkvi2ZQvyxW03rukc
-   o=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: D09gFO1M0EXikMGbZhcoxD0O0fKSoGY0TXjcb8GYPlxlc7KacMjEeVYluQbadkrpN2DOgsrbKo
- kL7I5nHQgmOEPSmDh+o9f87QkmVlDS7u0Q0vLW8ZTpt41vNJI9eMyqhzF5PY63z94yrlb+81/z
- +WBED6UtQSVx+LZf/CMufdk+sCJSLL6IUdlieCOvKpBKM/UfDhxp8rGaAYCc1ttHDOouiD/33r
- 6GXm+WARdUc7qI+zzKkwBOiChCl1glM4g44nIXHQ2ppr1+4dASBCq1HcN2Ncz2Bt93f387BIzM
- 5Oo=
+  bh=FW24mf7gQhBpHHcg9GJm9hyluG+ERn9X5WYN2UmMbPk=;
+  b=cbdYfVzPIy5KNJccFmRaz2ouIUyoBrGCGeHeYbXyzxTttZRmy2wp2iKV
+   I6gRqVwE+5oidon18IaiLTgC5r3QmsI7YS6miijS5RtoDH28XeOujqPFq
+   xM/C3VwEBDTzkpPV74Pt+d3hZYHvFKPeEf3e4CEoFSdtj8rQDVbO/8NwL
+   g=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: X0x55L6E6elZNa5DJCSBz8AQs/xTDbH104JZsGk/ivXRryutvpwmKbBMTXXbLDFK4nPOb5IBzZ
+ 0N5u5mvjxwK5S7vfU9LXCRVSlic9OhDTTNnw/iycBej8XIsnoDmq/Ff9iAU6aEOJ55V+0ymsHi
+ TCbaTwrM+aSUTSccuqsEZUvJ1CHW7CvDDyh1RHwTU3KvT1V4SScRuwj87NJu3HuSjBOK3pQrar
+ Z773hjmZAvEW7Q12YELsTT8HyTYIHhhf0A+2/YncVPuxcjkg8aR7xlQXE74+qETDW2FWTC8vEh
+ YmE=
 X-SBRS: 5.1
-X-MesageID: 47755478
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 47384424
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:amjLI675VHwyieoSTwPXwM7XdLJyesId70hD6qhwISY7TiX+rb
- HIoB17726MtN9/YhAdcLy7VZVoBEmsl6KdgrNhWYtKPjOHhILAFugLhuHfKn/bakjDH4ZmpM
- FdmsNFZuEYY2IXsS+D2njaL+od
+IronPort-HdrOrdr: A9a23:RoSt96FZ/cY7VNDdpLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5q
+ aTdZUgpGfJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YYT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.83,314,1616472000"; 
-   d="scan'208";a="47755478"
+   d="scan'208";a="47384424"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
- Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v6 26/31] build: clean common temporary files from root makefile
-Date: Thu, 1 Jul 2021 15:10:06 +0100
-Message-ID: <20210701141011.785641-27-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH v6 22/31] build: fix $(TARGET).efi creation in arch/arm
+Date: Thu, 1 Jul 2021 15:10:02 +0100
+Message-ID: <20210701141011.785641-23-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210701141011.785641-1-anthony.perard@citrix.com>
 References: <20210701141011.785641-1-anthony.perard@citrix.com>
@@ -92,39 +89,28 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
+There is no need to try to guess a relative path to the "xen.efi" file,
+we can simply use $@. Also, there's no need to use `notdir`, make
+already do that work via $(@F).
+
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile               | 1 +
- xen/scripts/Makefile.clean | 2 --
- 2 files changed, 1 insertion(+), 2 deletions(-)
+ xen/arch/arm/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index fd002ecd52d0..6aac68750b4d 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -378,6 +378,7 @@ _clean:
- 	$(MAKE) $(clean) test
- 	$(MAKE) $(kconfig) clean
- 	find . \( -name "*.o" -o -name ".*.d" -o -name ".*.d2" \
-+		-o -name ".*.o.tmp" -o -name "*~" -o -name "core" \
- 		-o -name "*.gcno" -o -name ".*.cmd" -o -name "lib.a" \) -exec rm -f {} \;
- 	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
- 	rm -f asm-offsets.s include/arch-*/asm/asm-offsets.h
-diff --git a/xen/scripts/Makefile.clean b/xen/scripts/Makefile.clean
-index 027c200c0efc..b6df9e861e6e 100644
---- a/xen/scripts/Makefile.clean
-+++ b/xen/scripts/Makefile.clean
-@@ -14,10 +14,8 @@ include Makefile
- subdir-all := $(subdir-y) $(subdir-n) $(subdir-) \
-               $(patsubst %/,%, $(filter %/, $(obj-y) $(obj-n) $(obj-)))
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index cc90d9796e6e..dc1d09c8b429 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -93,7 +93,7 @@ endif
+ $(TARGET): $(TARGET)-syms
+ 	$(OBJCOPY) -O binary -S $< $@
+ ifeq ($(CONFIG_ARM_64),y)
+-	ln -sf $(notdir $@)  ../../$(notdir $@).efi
++	ln -sf $(@F) $@.efi
+ endif
  
--DEPS_RM = $(DEPS) $(DEPS_INCLUDE)
- .PHONY: clean
- clean:: $(subdir-all)
--	rm -f *.o .*.o.tmp *~ core $(DEPS_RM)
- 
- # Descending
- # ---------------------------------------------------------------------------
+ ifeq ($(CONFIG_LTO),y)
 -- 
 Anthony PERARD
 
