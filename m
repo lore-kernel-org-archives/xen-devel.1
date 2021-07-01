@@ -2,43 +2,48 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C932C11F6D
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A84C5C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:26:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 02DC46140E
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:25:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 02DC46140E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 7243061406
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 17:26:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7243061406
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148980.275360 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148987.275383 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lz0Qi-00035c-LX; Thu, 01 Jul 2021 17:24:48 +0000
+	id 1lz0SK-0004Gf-Ae; Thu, 01 Jul 2021 17:26:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148980.275360; Thu, 01 Jul 2021 17:24:48 +0000
+Received: by outflank-mailman (output) from mailman id 148987.275383; Thu, 01 Jul 2021 17:26:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lz0Qi-00035V-Hx; Thu, 01 Jul 2021 17:24:48 +0000
-Received: by outflank-mailman (input) for mailman id 148980;
- Thu, 01 Jul 2021 17:24:47 +0000
+	id 1lz0SK-0004GY-4z; Thu, 01 Jul 2021 17:26:28 +0000
+Received: by outflank-mailman (input) for mailman id 148987;
+ Thu, 01 Jul 2021 17:26:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uD8v=LZ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1lz0Qh-00035P-OC
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 17:24:47 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=YaNF=LZ=gmail.com=bobbyeshleman@srs-us1.protection.inumbo.net>)
+ id 1lz0SJ-0004GD-8w
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 17:26:27 +0000
+Received: from mail-pg1-x536.google.com (unknown [2607:f8b0:4864:20::536])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 37b6940f-3c0c-4c7d-a8fa-60a10fc43cf1;
- Thu, 01 Jul 2021 17:24:47 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 0107661406;
- Thu,  1 Jul 2021 17:24:45 +0000 (UTC)
+ id 5a742286-a903-48e6-a2e0-21818705cd04;
+ Thu, 01 Jul 2021 17:26:26 +0000 (UTC)
+Received: by mail-pg1-x536.google.com with SMTP id d12so6739044pgd.9
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Jul 2021 10:26:26 -0700 (PDT)
+Received: from ?IPv6:2602:4b:a45e:ca01::9? ([2602:4b:a45e:ca01::9])
+ by smtp.gmail.com with ESMTPSA id 195sm582873pfw.133.2021.07.01.10.26.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Jul 2021 10:26:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,269 +55,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 37b6940f-3c0c-4c7d-a8fa-60a10fc43cf1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1625160286;
-	bh=9C0/uCMUMnP6PwBqwBxTxBmKbrPiPpORig3xR+otpIo=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=IumK+bakb+BzvaRbTIy5m7Pe4tOdjTxdUWEDtnrq1aMz8LD55FX+Dcm4/b5qq/ZhF
-	 GxddFJuuRmQIW5u4kGskSa5tfPaiFbeM3MJ8dUtmp1+WTk5PiPiSLNQX7SYr0VdoVW
-	 DBCF3/871//LY+dXsvQ94HRNH0iCDCBJx5vIPUKFSBSXez2VIEZRMRwsdxc5vX20AA
-	 0SFrLwatHHhKN0BBeJf+WB/yi8OdYJM6Q/1WegZ20t4tXo835Wyn3I4CRMxL+0Qncs
-	 OShgkVl+gklNCRXx7RnryhEIDXPdw4I2qAlDqmAKf66BdIJSXzOcmC44XGIrBk3y8B
-	 0XQC+D99s2LUQ==
-Date: Thu, 1 Jul 2021 10:24:45 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Luca Fancellu <luca.fancellu@arm.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    xen-devel@lists.xenproject.org, 
-    Bertrand Marquis <bertrand.marquis@arm.com>, wei.chen@arm.com, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
-    Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-    Wei Liu <wl@xen.org>
-Subject: Re: [PATCH v6 8/9] docs: hypercalls sphinx skeleton for generated
- html
-In-Reply-To: <D2BAA7F7-4396-4EE7-977B-AE300A50589D@arm.com>
-Message-ID: <alpine.DEB.2.21.2107011024220.9437@sstabellini-ThinkPad-T480s>
-References: <20210510084105.17108-1-luca.fancellu@arm.com> <20210510084105.17108-9-luca.fancellu@arm.com> <alpine.DEB.2.21.2106231523210.24906@sstabellini-ThinkPad-T480s> <D2BAA7F7-4396-4EE7-977B-AE300A50589D@arm.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 5a742286-a903-48e6-a2e0-21818705cd04
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=puxaSWmR8dmzghTaq+DldI0mhH3+zGEkF2xlex2SX4Q=;
+        b=UXU9U2NdEUjg94KzE69NDcWVVpTV8Eyi8ROyPNW2c39AtFlt7eXEQadQeHlu56Lsv+
+         SUHAzZA9Jnsm7KaGSmGskyNKdyE4dXockf+63snrMghLbFnnXyJ/483cHpsuF2lr/AOz
+         P77YoSQMz2zKICzPoEIe0lmm5w+iu36g+dI1XjKeCHrMnEKzXmPeRJ30aF0nSbyEDpWV
+         Wqo6PPCyJrA63v6emMUxwO+W4HYBiPMUum3q6JZaFEJ6V6XDlMaIYfmJmIpbcVQUZFRy
+         jiiBDM3hlezav5GP7GdgdTVe3Kcz3yecN2xnLHkr5gXDTqh24nfnhFf9U0QMMcmAdpfC
+         txsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=puxaSWmR8dmzghTaq+DldI0mhH3+zGEkF2xlex2SX4Q=;
+        b=PIXsK6oYWZY4Vm5jeXymfGUFZneDDhnk0sBTOsdQscgla7GbwEFO8ISJOp6jfu/6uu
+         r/HUJAxSM6+aR9kMfhmjPw/duy8u7OmcnXDTmTIpziTLLAqeq+QaNZrIMm326656jhhx
+         ViNnH5eWJPwvbqO3PM0NUvK+K2GdaImMW4JzqEZ+x3VlYDVoBy47689S4+blK1OH9CWJ
+         JTpdh/7R3ZlzjL/H47yMFL9lAvDzM3305QgUCwytYv0IIkasE/MwF6Qd8GCOEA8ogd7G
+         iZxuwkcQeEIO2NQgjoEK2DBP9oF7IgKONTnEFOPXZnxSk7lKhi3OAZtdpLKM00G/OwmW
+         37Rw==
+X-Gm-Message-State: AOAM533yqQ+Zd8Mnb1sR1THaQy7NLwzjgWc2EZ+ut9LNzfKiWYsHz4ZI
+	K1q2OY8DfH4jTAAWPPjHUp0=
+X-Google-Smtp-Source: ABdhPJxphjOfc/JZOSY1gk6URvPa4YBCzTNdtVQUy1Bc7b1e9ZtfVks+RUPKNCuJKNkzxbWvDEqEXQ==
+X-Received: by 2002:aa7:8884:0:b029:307:4e14:14c9 with SMTP id z4-20020aa788840000b02903074e1414c9mr790039pfe.62.1625160385619;
+        Thu, 01 Jul 2021 10:26:25 -0700 (PDT)
+Subject: Re: [XEN PATCH v6 18/31] xen: move include/asm-* to
+ include/arch-*/asm
+To: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Tamas K Lengyel <tamas@tklengyel.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Petre Pircalabu <ppircalabu@bitdefender.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>, Paul Durrant <paul@xen.org>,
+ Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>,
+ Lukasz Hawrylko <lukasz.hawrylko@linux.intel.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>
+References: <20210701141011.785641-1-anthony.perard@citrix.com>
+ <20210701141011.785641-19-anthony.perard@citrix.com>
+From: Bob Eshleman <bobbyeshleman@gmail.com>
+Organization: Vates SAS
+Message-ID: <c25255f5-8b46-7bc1-0627-cc9304fa3c0e@gmail.com>
+Date: Thu, 1 Jul 2021 10:26:22 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <20210701141011.785641-19-anthony.perard@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Thu, 1 Jul 2021, Luca Fancellu wrote:
-> > On 24 Jun 2021, at 00:34, Stefano Stabellini <sstabellini@kernel.org> wrote:
-> > 
-> > On Mon, 10 May 2021, Luca Fancellu wrote:
-> >> Create a skeleton for the documentation about hypercalls
-> >> 
-> >> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-> >> ---
-> >> v6 changes:
-> >> - Now every platform has the same sections in .rst files
-> >> ---
-> >> .gitignore                             |  1 +
-> >> docs/Makefile                          |  4 ++++
-> >> docs/hypercall-interfaces/arm32.rst    | 32 ++++++++++++++++++++++++++
-> >> docs/hypercall-interfaces/arm64.rst    | 32 ++++++++++++++++++++++++++
-> >> docs/hypercall-interfaces/index.rst.in |  7 ++++++
-> >> docs/hypercall-interfaces/x86_64.rst   | 32 ++++++++++++++++++++++++++
-> >> docs/index.rst                         |  8 +++++++
-> >> 7 files changed, 116 insertions(+)
-> >> create mode 100644 docs/hypercall-interfaces/arm32.rst
-> >> create mode 100644 docs/hypercall-interfaces/arm64.rst
-> >> create mode 100644 docs/hypercall-interfaces/index.rst.in
-> >> create mode 100644 docs/hypercall-interfaces/x86_64.rst
-> >> 
-> >> diff --git a/.gitignore b/.gitignore
-> >> index d271e0ce6a..a9aab120ae 100644
-> >> --- a/.gitignore
-> >> +++ b/.gitignore
-> >> @@ -64,6 +64,7 @@ docs/xen.doxyfile
-> >> docs/xen.doxyfile.tmp
-> >> docs/xen-doxygen/doxygen_include.h
-> >> docs/xen-doxygen/doxygen_include.h.tmp
-> >> +docs/hypercall-interfaces/index.rst
-> >> extras/mini-os*
-> >> install/*
-> >> stubdom/*-minios-config.mk
-> >> diff --git a/docs/Makefile b/docs/Makefile
-> >> index 2f784c36ce..b02c3dfb79 100644
-> >> --- a/docs/Makefile
-> >> +++ b/docs/Makefile
-> >> @@ -61,6 +61,9 @@ build: html txt pdf man-pages figs
-> >> sphinx-html: $(DOXY_DEPS) $(DOXY_LIST_SOURCES)
-> >> ifneq ($(SPHINXBUILD),no)
-> >> 	$(DOXYGEN) xen.doxyfile
-> >> +	@echo "Generating hypercall-interfaces/index.rst"
-> >> +	@sed -e "s,@XEN_TARGET_ARCH@,$(XEN_TARGET_ARCH),g" \
-> >> +		hypercall-interfaces/index.rst.in > hypercall-interfaces/index.rst
-> > 
-> 
-> Hi Stefano,
-> 
-> > I take that this means we are going to generate docs only for the
-> > architecture that we are building? So if we build for x86, then the docs
-> > are for x86 (no arm32 and arm64 docs.) Is that right?
-> > 
-> > Is that because Doxygen relies somehow on the compiler to extract data?
-> > I am asking because if Doxygen doesn't rely on the compiler, then it
-> > could probably generate the docs for all architectures in one go?
-> 
-> Doxygen rely on the headers generated from the KConfig system to properly solve
-> the preprocessor step, for that reason here we need that.
-> 
-> It can be improved for sure, but it needs to call a defconfig for each architecture and
-> have separate Doxygen-output folders for each one, then on the rst files you can choose
-> from which arch you want the data.
-> 
-> I think this step can be done in a future serie.
+Hey Anthony,
 
-OK. Maybe add a note about this to one of the commit messages.
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 8a52a03969fe..03a5553116a8 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> -F:	xen/include/asm-arm/
+> +F:	xen/include/arch-arm/
+
+... snip ...
+
+> -F:	xen/include/asm-x86/
+> +F:	xen/include/arch-x86/
 
 
-> > 
-> > 
-> > 
-> >> 	XEN_ROOT=$(realpath $(XEN_ROOT)) $(SPHINXBUILD) -b html . sphinx/html
-> >> else
-> >> 	@echo "Sphinx is not installed; skipping sphinx-html documentation."
-> >> @@ -108,6 +111,7 @@ clean: clean-man-pages
-> >> 	rm -f xen.doxyfile.tmp
-> >> 	rm -f xen-doxygen/doxygen_include.h
-> >> 	rm -f xen-doxygen/doxygen_include.h.tmp
-> >> +	rm -f hypercall-interfaces/index.rst
-> >> 
-> >> .PHONY: distclean
-> >> distclean: clean
-> >> diff --git a/docs/hypercall-interfaces/arm32.rst b/docs/hypercall-interfaces/arm32.rst
-> >> new file mode 100644
-> >> index 0000000000..6762d9fc7c
-> >> --- /dev/null
-> >> +++ b/docs/hypercall-interfaces/arm32.rst
-> >> @@ -0,0 +1,32 @@
-> >> +.. SPDX-License-Identifier: CC-BY-4.0
-> >> +
-> >> +Hypercall Interfaces - arm32
-> >> +============================
-> >> +
-> >> +Starting points
-> >> +---------------
-> >> +.. toctree::
-> >> +   :maxdepth: 2
-> >> +
-> >> +
-> >> +
-> >> +Functions
-> >> +---------
-> >> +
-> >> +
-> >> +Structs
-> >> +-------
-> >> +
-> >> +
-> >> +Enums and sets of #defines
-> >> +--------------------------
-> >> +
-> >> +
-> >> +Typedefs
-> >> +--------
-> >> +
-> >> +
-> >> +Enum values and individual #defines
-> >> +-----------------------------------
-> >> +
-> >> +
-> >> diff --git a/docs/hypercall-interfaces/arm64.rst b/docs/hypercall-interfaces/arm64.rst
-> >> new file mode 100644
-> >> index 0000000000..5e701a2adc
-> >> --- /dev/null
-> >> +++ b/docs/hypercall-interfaces/arm64.rst
-> >> @@ -0,0 +1,32 @@
-> >> +.. SPDX-License-Identifier: CC-BY-4.0
-> >> +
-> >> +Hypercall Interfaces - arm64
-> >> +============================
-> >> +
-> >> +Starting points
-> >> +---------------
-> >> +.. toctree::
-> >> +   :maxdepth: 2
-> >> +
-> >> +
-> >> +
-> >> +Functions
-> >> +---------
-> >> +
-> >> +
-> >> +Structs
-> >> +-------
-> >> +
-> >> +
-> >> +Enums and sets of #defines
-> >> +--------------------------
-> >> +
-> >> +
-> >> +Typedefs
-> >> +--------
-> >> +
-> >> +
-> >> +Enum values and individual #defines
-> >> +-----------------------------------
-> >> +
-> >> +
-> >> diff --git a/docs/hypercall-interfaces/index.rst.in b/docs/hypercall-interfaces/index.rst.in
-> >> new file mode 100644
-> >> index 0000000000..e4dcc5db8d
-> >> --- /dev/null
-> >> +++ b/docs/hypercall-interfaces/index.rst.in
-> >> @@ -0,0 +1,7 @@
-> >> +.. SPDX-License-Identifier: CC-BY-4.0
-> >> +
-> >> +Hypercall Interfaces
-> >> +====================
-> >> +
-> >> +.. toctree::
-> >> +   @XEN_TARGET_ARCH@
-> >> diff --git a/docs/hypercall-interfaces/x86_64.rst b/docs/hypercall-interfaces/x86_64.rst
-> >> new file mode 100644
-> >> index 0000000000..59e948900c
-> >> --- /dev/null
-> >> +++ b/docs/hypercall-interfaces/x86_64.rst
-> >> @@ -0,0 +1,32 @@
-> >> +.. SPDX-License-Identifier: CC-BY-4.0
-> >> +
-> >> +Hypercall Interfaces - x86_64
-> >> +=============================
-> >> +
-> >> +Starting points
-> >> +---------------
-> >> +.. toctree::
-> >> +   :maxdepth: 2
-> >> +
-> >> +
-> >> +
-> >> +Functions
-> >> +---------
-> >> +
-> >> +
-> >> +Structs
-> >> +-------
-> >> +
-> >> +
-> >> +Enums and sets of #defines
-> >> +--------------------------
-> >> +
-> >> +
-> >> +Typedefs
-> >> +--------
-> >> +
-> >> +
-> >> +Enum values and individual #defines
-> >> +-----------------------------------
-> >> +
-> >> +
-> >> diff --git a/docs/index.rst b/docs/index.rst
-> >> index b75487a05d..52226a42d8 100644
-> >> --- a/docs/index.rst
-> >> +++ b/docs/index.rst
-> >> @@ -53,6 +53,14 @@ kind of development environment.
-> >>    hypervisor-guide/index
-> >> 
-> >> 
-> >> +Hypercall Interfaces documentation
-> >> +----------------------------------
-> >> +
-> >> +.. toctree::
-> >> +   :maxdepth: 2
-> >> +
-> >> +   hypercall-interfaces/index
-> >> +
-> >> Miscellanea
-> >> -----------
-> >> 
-> >> -- 
-> >> 2.17.1
-> 
+It looks like riscv will also need the same in its "xen/include/asm-riscv/" F entry.
+
+
+Thanks
+
+-- 
+Bobby Eshleman
+SE at Vates SAS
 
