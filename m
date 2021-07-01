@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6710DC11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CDB3DC11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3CFAD61425
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3CFAD61425
+	by mail.kernel.org (Postfix) with ESMTPS id 904CA61425
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 904CA61425
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148497.274540 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148504.274556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytWl-0000ER-LQ; Thu, 01 Jul 2021 10:02:35 +0000
+	id 1lytWp-0000rP-P2; Thu, 01 Jul 2021 10:02:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148497.274540; Thu, 01 Jul 2021 10:02:35 +0000
+Received: by outflank-mailman (output) from mailman id 148504.274556; Thu, 01 Jul 2021 10:02:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytWl-0000E6-Ga; Thu, 01 Jul 2021 10:02:35 +0000
-Received: by outflank-mailman (input) for mailman id 148497;
- Thu, 01 Jul 2021 10:02:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lytWp-0000qG-Fp; Thu, 01 Jul 2021 10:02:39 +0000
+Received: by outflank-mailman (input) for mailman id 148504;
+ Thu, 01 Jul 2021 10:02:37 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytSH-0004r4-Ht
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:57 +0000
-Received: from mo4-p04-ob.smtp.rzone.de (unknown [85.215.255.123])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0fea3b19-9598-4b0d-8e2a-c7057ee0a005;
- Thu, 01 Jul 2021 09:57:03 +0000 (UTC)
+ id 1lytSA-0004XT-T4
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:50 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 086b66b3-062c-4f5c-b56c-b9cf69dfab2d;
+ Thu, 01 Jul 2021 09:56:54 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619uv5Nj
+ with ESMTPSA id 30791cx619um5N9
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:57 +0200 (CEST)
+ Thu, 1 Jul 2021 11:56:48 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0fea3b19-9598-4b0d-8e2a-c7057ee0a005
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133418;
+X-Inumbo-ID: 086b66b3-062c-4f5c-b56c-b9cf69dfab2d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133408;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=i+CtqX1HY7Q0UrDFSipaIMys+n7R0U7HixGDrxWfeJY=;
-    b=hO+V6Ivo6IqbiuUjPoOD4+qcc8FkwAB9Ci1Ygzs+u7DBYKfrbswow5XDZaZiMnqPDM
-    j4EEfMoB/HMaP2JxuESRHJbw5SNvW8fDAy26jNIE73+Lx5sYncXt2/sYF1wNR9d/Urm0
-    zhq4gle6Hkg946CQEFSV9rt3g7rOukJXm6yTuhRnkLoEajBapO9Qzo0yW8DI45mw8uTu
-    WR5nk4+xYe6xOloLF0VlHUWVhEij2IQrcKhuUApPZ3w/czVD+Wx5J5IbbwD0RRNNn5Uh
-    RTLOSFZowP0fiHcvjCDqKqihtd7EJmo5NeoPgUNim8sP+XpjZM+npzvS3J8LdYWXjEjD
-    Idbw==
+    bh=43SvGtyUka0RJRv5k5wfzNrETGLrxHTj64zykGKQL1Q=;
+    b=Vj7qzvDcXM4w4xzTRvoqwCtgS94+Xdcvmq/iAUm6RQQF+XzTP3l2LkKk8uk2ijxQGR
+    FsglZZU0fiNrVk6j4R2pBm5V6iohYwZo28xkOEdvllPaizwYAOe7OvarbDJiE5K84TPD
+    OPLdIoXnQ8D7j/tPK6b3YCbNHVVFQWSraMoZInJO9lJCT/iIxsZvivkAK4T9aoYiRWyQ
+    kxCXCPt4924Mu89+91b9XLjdMdbTWGxQwYMcm+fMHFmYeLHOOESPpq8kbei2RzNSo9H0
+    T+FH2EnuUm2v0CHLo7qC4yHN/1vnNU2qr9zT/7+ahbg2XliUJk7Z38SsZwAXgsxErdk3
+    JqwA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
@@ -72,155 +73,71 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
+	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210701 38/40] tools: add API for expandable bitmaps
-Date: Thu,  1 Jul 2021 11:56:33 +0200
-Message-Id: <20210701095635.15648-39-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210701 19/40] tools: save: move iov array
+Date: Thu,  1 Jul 2021 11:56:14 +0200
+Message-Id: <20210701095635.15648-20-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
 References: <20210701095635.15648-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since the incoming migration stream lacks info about what the highest pfn
-will be, some data structures can not be allocated upfront.
-
-Add an API for expandable bitmaps, loosely based on pfn_set_populated.
+Remove allocation from hotpath, move iov array into preallocated space.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/saverestore/common.c | 39 +++++++++++++++++++
- tools/libs/saverestore/common.h | 67 +++++++++++++++++++++++++++++++++
- 2 files changed, 106 insertions(+)
+ tools/libs/saverestore/common.h | 2 ++
+ tools/libs/saverestore/save.c   | 7 ++-----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/saverestore/common.c b/tools/libs/saverestore/common.c
-index 7da7fa4e2c..e96173eea2 100644
---- a/tools/libs/saverestore/common.c
-+++ b/tools/libs/saverestore/common.c
-@@ -163,6 +163,45 @@ static void __attribute__((unused)) build_assertions(void)
-     BUILD_BUG_ON(sizeof(struct xc_sr_rec_hvm_params)        != 8);
- }
- 
-+/*
-+ * Expand the tracking structures as needed.
-+ * To avoid realloc()ing too excessively, the size increased to the nearest
-+ * power of two large enough to contain the required number of bits.
-+ */
-+bool _sr_bitmap_expand(struct sr_bitmap *bm, unsigned long bits)
-+{
-+    size_t new_max;
-+    size_t old_sz, new_sz;
-+    void *p;
-+
-+    if (bits <= bm->bits)
-+        return true;
-+
-+    /* Round up to the nearest power of two larger than bit, less 1. */
-+    new_max = bits;
-+    new_max |= new_max >> 1;
-+    new_max |= new_max >> 2;
-+    new_max |= new_max >> 4;
-+    new_max |= new_max >> 8;
-+    new_max |= new_max >> 16;
-+    new_max |= sizeof(unsigned long) > 4 ? new_max >> 32 : 0;
-+
-+    /* Allocate units of unsigned long */
-+    new_max = (new_max + BITS_PER_LONG - 1) & ~(BITS_PER_LONG - 1);
-+
-+    old_sz = bitmap_size(bm->bits);
-+    new_sz = bitmap_size(new_max);
-+    p = realloc(bm->p, new_sz);
-+    if (!p)
-+        return false;
-+
-+    memset(p + old_sz, 0, new_sz - old_sz);
-+    bm->p = p;
-+    bm->bits = new_max;
-+
-+    return true;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index bb7e437291..e6a269c482 100644
+index 25ee8fcb0f..c8a30acf7b 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -30,6 +30,73 @@ const char *rec_type_to_str(uint32_t type);
- struct xc_sr_context;
- struct xc_sr_record;
+@@ -231,6 +231,8 @@ struct sr_save_arrays {
+     xen_pfn_t types[MAX_BATCH_SIZE];
+     /* write_batch: Errors from attempting to map the gfns. */
+     int errors[MAX_BATCH_SIZE];
++    /* write_batch: iovec[] for writev(). */
++    struct iovec iov[MAX_BATCH_SIZE + 4];
+ };
  
-+struct sr_bitmap
-+{
-+    void *p;
-+    unsigned long bits;
-+};
-+
-+extern bool _sr_bitmap_expand(struct sr_bitmap *bm, unsigned long bits);
-+
-+static inline bool sr_bitmap_expand(struct sr_bitmap *bm, unsigned long bits)
-+{
-+    if (bits > bm->bits)
-+        return _sr_bitmap_expand(bm, bits);
-+    return true;
-+}
-+
-+static inline void sr_bitmap_free(struct sr_bitmap *bm)
-+{
-+    free(bm->p);
-+    bm->p = NULL;
-+}
-+
-+static inline bool sr_set_bit(unsigned long bit, struct sr_bitmap *bm)
-+{
-+    if (sr_bitmap_expand(bm, bit) == false)
-+        return false;
-+
-+    set_bit(bit, bm->p);
-+    return true;
-+}
-+
-+static inline bool sr_test_bit(unsigned long bit, struct sr_bitmap *bm)
-+{
-+    if (bit > bm->bits)
-+        return false;
-+    return !!test_bit(bit, bm->p);
-+}
-+
-+static inline void sr_clear_bit(unsigned long bit, struct sr_bitmap *bm)
-+{
-+    if (bit <= bm->bits)
-+        clear_bit(bit, bm->p);
-+}
-+
-+static inline bool sr_test_and_clear_bit(unsigned long bit, struct sr_bitmap *bm)
-+{
-+    if (bit > bm->bits)
-+        return false;
-+    return !!test_and_clear_bit(bit, bm->p);
-+}
-+
-+/* No way to report potential allocation error, bitmap must be expanded prior usage */
-+static inline bool sr_test_and_set_bit(unsigned long bit, struct sr_bitmap *bm)
-+{
-+    if (bit > bm->bits)
-+        return false;
-+    return !!test_and_set_bit(bit, bm->p);
-+}
-+
-+static inline bool sr_set_long_bit(unsigned long base_bit, struct sr_bitmap *bm)
-+{
-+    if (sr_bitmap_expand(bm, base_bit + BITS_PER_LONG) == false)
-+        return false;
-+
-+    set_bit_long(base_bit, bm->p);
-+    return true;
-+}
-+
- /**
-  * Save operations.  To be implemented for each type of guest, for use by the
-  * common save algorithm.
+ struct sr_restore_arrays {
+diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
+index 9ebbf00ce7..1a5f3d29ea 100644
+--- a/tools/libs/saverestore/save.c
++++ b/tools/libs/saverestore/save.c
+@@ -97,7 +97,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+     uint64_t *rec_pfns = NULL;
+-    struct iovec *iov = NULL; int iovcnt = 0;
++    struct iovec *iov = ctx->save.m->iov; int iovcnt = 0;
+     struct xc_sr_rec_page_data_header hdr = { 0 };
+     struct xc_sr_record rec = {
+         .type = REC_TYPE_PAGE_DATA,
+@@ -109,10 +109,8 @@ static int write_batch(struct xc_sr_context *ctx)
+     guest_data = calloc(nr_pfns, sizeof(*guest_data));
+     /* Pointers to locally allocated pages.  Need freeing. */
+     local_pages = calloc(nr_pfns, sizeof(*local_pages));
+-    /* iovec[] for writev(). */
+-    iov = malloc((nr_pfns + 4) * sizeof(*iov));
+ 
+-    if ( !guest_data || !local_pages || !iov )
++    if ( !guest_data || !local_pages )
+     {
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -266,7 +264,6 @@ static int write_batch(struct xc_sr_context *ctx)
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+     for ( i = 0; local_pages && i < nr_pfns; ++i )
+         free(local_pages[i]);
+-    free(iov);
+     free(local_pages);
+     free(guest_data);
+ 
 
