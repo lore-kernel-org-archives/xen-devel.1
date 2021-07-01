@@ -2,47 +2,41 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2C2FC11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 15:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14F60C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 15:53:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A38B961407
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 15:43:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A38B961407
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id BCA546141C
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 15:53:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BCA546141C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148943.275280 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148949.275294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyyqg-0006iB-LB; Thu, 01 Jul 2021 15:43:30 +0000
+	id 1lyyzq-0008Aj-HZ; Thu, 01 Jul 2021 15:52:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148943.275280; Thu, 01 Jul 2021 15:43:30 +0000
+Received: by outflank-mailman (output) from mailman id 148949.275294; Thu, 01 Jul 2021 15:52:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyyqg-0006i4-Gz; Thu, 01 Jul 2021 15:43:30 +0000
-Received: by outflank-mailman (input) for mailman id 148943;
- Thu, 01 Jul 2021 15:43:29 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lyyqf-0006hu-It; Thu, 01 Jul 2021 15:43:29 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lyyqf-0008A0-DI; Thu, 01 Jul 2021 15:43:29 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1lyyqf-0004FY-43; Thu, 01 Jul 2021 15:43:29 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lyyqf-0000dW-3U; Thu, 01 Jul 2021 15:43:29 +0000
+	id 1lyyzq-0008Ac-Eb; Thu, 01 Jul 2021 15:52:58 +0000
+Received: by outflank-mailman (input) for mailman id 148949;
+ Thu, 01 Jul 2021 15:52:56 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=vXwC=LZ=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1lyyzo-0008AW-Oa
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 15:52:56 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a85c2024-3b38-412d-90ee-51c082d3b1f3;
+ Thu, 01 Jul 2021 15:52:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,73 +48,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=8hDzVsvnQdC8oYQ6Ruqk5A0ejVENUULzYfeJB+I0mKE=; b=MeMcp70Nc3dtLEQnWfCus3vz37
-	BrrsF5u5P7SiO8uMlUnMFsi3fbgqCrTS3Y6oDFYgs07IkNdRzIAEnhCHrCT2Fev3U7NMCoexb/R7n
-	pwVps4ECx7Td2CTo5y21XDHRVect0DsaHaS1UedikOCSFMRq/vjvEUY3rlSSXcH24d1M=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-163212-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: a85c2024-3b38-412d-90ee-51c082d3b1f3
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1625154775;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=y1e/4dsezIMJVg+0zwuh7zOhGcr3k456Pu74dnN3TXA=;
+  b=e+AHZWVh+LwlAwwa4M+pHEYe7PyKqzGqjVMQr04nJC8NRCcTo3Lhb+Zp
+   yp/REsdT2aK/Z2NYMmQwH+vgnvPdN4ZhPiwmJABxqpoSefS2HIBNaOCRW
+   lEGlXqwon7KFoluPjV+pzvTZ+Wl/d4ODbEaHFrrGWhW7dWMqwswXW+8SH
+   Y=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: jX2BKWaZ/WBhxDFAMELTQV8xH2CfNJ9KXSV9dZET0cXK1d+bFtMJeTBJKkuKB/5kjeJ75IhsGo
+ tlPU0JKCOQ7pal0SCRwUrliD3GLvoQrxxrSJE9GAVjN2vIS+1/Wr4nrAlkk5LsS2+7l0h2TQEi
+ K1+JN3P4aIV8NYWn32U9/UiyfGcXjJk206IvAlakO4DRHUOilCRGEwKEL57o8C51B6s4iA1DpT
+ WG5evNjBmDL/sdD1RRaHMZqGJydHOtapEw2fiZ3eapakYK0ayqpYryAdpgIXIuMGI/HAkckYHk
+ C88=
+X-SBRS: 5.1
+X-MesageID: 47458429
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:4aWhxa3v25HBFFW0JFs9yAqjBT5yeYIsimQD101hICG9Lfb3qy
+ n+ppsmPEHP5Ar5AEtQ5OxoS5PwPU80lKQFr7X5WI3CYOCIghrQEGgP1/qB/9SkIVyFygc/79
+ YgT0EdMqyJMbESt6+Ti2PUc6dC/DDEytHSuQ639QY3cegAUdAF0+4NMHf8LqQAfnggOXNWLu
+ v42uN34x6bPVgHZMWyAXcIG8LZocfQqZ7gaRkaQzY69Qinl1qTmf7HOind+i1bfyJEwL8k/2
+ SAuRf+/L+fv/ayzQKZ/3PP7q5RhMDqxrJ4dY+xY4kuW3fRYzSTFcBcso65zXcISSaUmRAXee
+ z30lId1gJImirsly+O0EPQMkLboUkTAjfZuCGlaD3Y0JbErXsBerp8bY41SGqp12Mw+N57y6
+ 5FxGSfqt5eCg7Bhj3045zSWwhtjVfcmwtprQc/tQ0WbWIlUs4bkWXfxjIjLL4QWCbhrIw3Gu
+ hnC8/RoP5QbFOBdnjc+m1i2salUHg/FgqPBhFqgL3Y7xFG2HRii0cIzs0WmXkNsJo7Vplf/u
+ zBdqBljqtHQMMaZb90QO0BXcy0AGrQRg+kChPeHb0mLtBPB5vpke+53FwY3pDeRHU49upFpH
+ 2aaiIriYcbQTObNSSh5uw5zizw
+X-IronPort-AV: E=Sophos;i="5.83,314,1616472000"; 
+   d="scan'208";a="47458429"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [XEN PATCH] MAINTAINERS: Updating after change to tools/include/
+Date: Thu, 1 Jul 2021 16:52:32 +0100
+Message-ID: <20210701155232.792978-1-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-Subject: [xtf test] 163212: all pass - PUSHED
-X-Osstest-Versions-This:
-    xtf=cdef9568c1b1f8831f3b8f644073e635d47f0ec4
-X-Osstest-Versions-That:
-    xtf=93b29b886e8665e368598c711279d45b7e5d066c
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 01 Jul 2021 15:43:29 +0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-flight 163212 xtf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/163212/
+The LIBS section doesn't mention the headers associated with the
+libraries, same for LIBXENLIGHT section.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- xtf                  cdef9568c1b1f8831f3b8f644073e635d47f0ec4
-baseline version:
- xtf                  93b29b886e8665e368598c711279d45b7e5d066c
+They aren't any ':' in other section names, so remove it.
 
-Last test of basis   163016  2021-06-24 11:41:21 Z    7 days
-Testing same since   163212  2021-07-01 12:40:06 Z    0 days    1 attempts
+Fixes: 4664034cdc72 ("tools/libs: move official headers to common directory")
+Fixes: f7079d7ef69f ("MAINTAINERS: add myself as tools/libs reviewer")
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ MAINTAINERS | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Pranjal Singh <008pranjalsingh@gmail.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8a52a03969fe..56d16e4328cf 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -374,11 +374,25 @@ F:	xen/include/{kexec,kimage}.h
+ F:	xen/arch/x86/machine_kexec.c
+ F:	xen/arch/x86/x86_64/kexec_reloc.S
+ 
+-LIBS:
++LIBS
+ M:	Ian Jackson <iwj@xenproject.org>
+ M:	Wei Liu <wl@xen.org>
+ R:	Juergen Gross <jgross@suse.com>
+ S:	Supported
++F:	tools/include/libxenvchan.h
++F:	tools/include/xencall.h
++F:	tools/include/xenctrl*.h
++F:	tools/include/xendevicemodel.h
++F:	tools/include/xenevtchn.h
++F:	tools/include/xenforeignmemory.h
++F:	tools/include/xengnttab.h
++F:	tools/include/xenguest.h
++F:	tools/include/xenhypfs.h
++F:	tools/include/xenstat.h
++F:	tools/include/xenstore*.h
++F:	tools/include/xenstore-compat/*.h
++F:	tools/include/xentoolcore*.h
++F:	tools/include/xentoollog.h
+ F:	tools/libs/
+ 
+ LIBXENLIGHT
+@@ -386,6 +400,7 @@ M:	Ian Jackson <iwj@xenproject.org>
+ M:	Wei Liu <wl@xen.org>
+ M:	Anthony PERARD <anthony.perard@citrix.com>
+ S:	Supported
++F:	tools/include/libxl*.h
+ F:	tools/libs/light/
+ F:	tools/libs/util/
+ F:	tools/xl/
+-- 
+Anthony PERARD
 
-jobs:
- build-amd64-xtf                                              pass    
- build-amd64                                                  pass    
- build-amd64-pvops                                            pass    
- test-xtf-amd64-amd64-1                                       pass    
- test-xtf-amd64-amd64-2                                       pass    
- test-xtf-amd64-amd64-3                                       pass    
- test-xtf-amd64-amd64-4                                       pass    
- test-xtf-amd64-amd64-5                                       pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xtf.git
-   93b29b8..cdef956  cdef9568c1b1f8831f3b8f644073e635d47f0ec4 -> xen-tested-master
 
