@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F73CC11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D4FFC11F67
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69531611C2
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69531611C2
+	by mail.kernel.org (Postfix) with ESMTPS id D221661468
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D221661468
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148369.274324 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148371.274341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytRp-0003di-2h; Thu, 01 Jul 2021 09:57:29 +0000
+	id 1lytRs-0004Q7-6I; Thu, 01 Jul 2021 09:57:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148369.274324; Thu, 01 Jul 2021 09:57:28 +0000
+Received: by outflank-mailman (output) from mailman id 148371.274341; Thu, 01 Jul 2021 09:57:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytRo-0003cV-NY; Thu, 01 Jul 2021 09:57:28 +0000
-Received: by outflank-mailman (input) for mailman id 148369;
- Thu, 01 Jul 2021 09:57:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lytRr-0004PF-S8; Thu, 01 Jul 2021 09:57:31 +0000
+Received: by outflank-mailman (input) for mailman id 148371;
+ Thu, 01 Jul 2021 09:57:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytRn-0004r4-H2
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:27 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.102])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7318a437-6aec-4f53-a2a0-10214f3fbcac;
- Thu, 01 Jul 2021 09:56:57 +0000 (UTC)
+ id 1lytRq-0004XT-Sn
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:30 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8e4898ce-ebf0-4c88-89ea-58c01de1f9ad;
+ Thu, 01 Jul 2021 09:56:51 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619un5NE
+ with ESMTPSA id 30791cx619uj5Mv
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:49 +0200 (CEST)
+ Thu, 1 Jul 2021 11:56:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7318a437-6aec-4f53-a2a0-10214f3fbcac
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133409;
+X-Inumbo-ID: 8e4898ce-ebf0-4c88-89ea-58c01de1f9ad
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133405;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=VXXP7tsnRC41xaA88qzwrHhQNrSFmDSbSlav6Il7DHM=;
-    b=nek8SgSXMYp0YyFkVQajq+6uAJthx4pNaB9Z7RNljK3npjfWHTOJMlzeveUeT19Qxh
-    C/fpM2lj2ShtHYL2QqLRL5+Qe7jOSTRRdMFpFspPLIy0nC5Dqcico76IlIqTmOHTTdQ2
-    xKw2M4fnke3Z4OivG0VsFPM9ddzkhn7LgJhb2K5dcjmMm2ExIl+Ul5F5tG6TyxpS2c0M
-    DIZQu4aL5NWfl2XkGcIukLAwSql3alv6ieqLDsyD87t5zbw9uZv3pZbrZHLI2XqEvire
-    GsMFVQpwxh3d02bJrqCatpgwaFVPsd2R9skFSpklyDUoKVBpx4tonUlnlAM7p/JJZjTs
-    Wsfw==
+    bh=GgpmM75SuN6FuifeSB8D7d7fIQ+maSMtt/6dbwwV1Ko=;
+    b=fiU5zy87RwXUPFQisX2pONK2at9yvFQtBp4h+9vdYhCJe+SDgRUQXXk+jxeGclFdqd
+    Ev2LkmLKf+hBiwswf4p6m1UocGilzfNq+eBXul8GlnD3tJWgjyH/+kEmDoWYxezduoTK
+    CgAiWo/H73nDfl4vEdBQL/9mwk1YrznITa/wIbO7lEFxg8M4Y2M2MjirFLgVM5KHavnD
+    o6hXDTKFpCQCA1/rR+MXQhWjIDDh4rJFu8I2L2Yj/mnCcTiDu0OVAI+SlScDm0hgsPM1
+    V0sAhTynfn9HTOUc/kLsT/4Nia9xhWLPZLdRWlwHfM1TNqpUmW8d9jFfjBD7/s7720hk
+    yd6g==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
@@ -72,234 +73,147 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
-	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210701 22/40] tools: save: move local_pages array
-Date: Thu,  1 Jul 2021 11:56:17 +0200
-Message-Id: <20210701095635.15648-23-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v20210701 13/40] tools: unify type checking for data pfns in migration stream
+Date: Thu,  1 Jul 2021 11:56:08 +0200
+Message-Id: <20210701095635.15648-14-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
 References: <20210701095635.15648-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove allocation from hotpath, move local_pages array into preallocated space.
+Introduce a helper which decides if a given pfn type has data
+in the migration stream.
 
-Adjust the code to use the src page as is in case of HVM.
-In case of PV the page may need to be normalised, use a private memory
-area for this purpose.
+No change in behavior intended.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/saverestore/common.h       | 22 ++++++++++---------
- tools/libs/saverestore/save.c         | 25 +++------------------
- tools/libs/saverestore/save_x86_hvm.c |  5 +++--
- tools/libs/saverestore/save_x86_pv.c  | 31 ++++++++++++++++++---------
- 4 files changed, 39 insertions(+), 44 deletions(-)
+ tools/libs/saverestore/common.h  | 18 ++++++++++++++++++
+ tools/libs/saverestore/restore.c | 29 +++--------------------------
+ tools/libs/saverestore/save.c    | 14 ++------------
+ 3 files changed, 23 insertions(+), 38 deletions(-)
 
 diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index c3570e0c9a..8089449011 100644
+index fa242e808d..905b4078f6 100644
 --- a/tools/libs/saverestore/common.h
 +++ b/tools/libs/saverestore/common.h
-@@ -45,16 +45,12 @@ struct xc_sr_save_ops
-      * Optionally transform the contents of a page from being specific to the
-      * sending environment, to being generic for the stream.
-      *
--     * The page of data at the end of 'page' may be a read-only mapping of a
--     * running guest; it must not be modified.  If no transformation is
--     * required, the callee should leave '*pages' untouched.
-+     * The page of data '*src' may be a read-only mapping of a running guest;
-+     * it must not be modified. If no transformation is required, the callee
-+     * should leave '*src' untouched, and return it via '**ptr'.
-      *
--     * If a transformation is required, the callee should allocate themselves
--     * a local page using malloc() and return it via '*page'.
--     *
--     * The caller shall free() '*page' in all cases.  In the case that the
--     * callee encounters an error, it should *NOT* free() the memory it
--     * allocated for '*page'.
-+     * If a transformation is required, the callee should provide the
-+     * transformed page in a private buffer and return it via '**ptr'.
-      *
-      * It is valid to fail with EAGAIN if the transformation is not able to be
-      * completed at this point.  The page shall be retried later.
-@@ -62,7 +58,7 @@ struct xc_sr_save_ops
-      * @returns 0 for success, -1 for failure, with errno appropriately set.
-      */
-     int (*normalise_page)(struct xc_sr_context *ctx, xen_pfn_t type,
--                          void **page);
-+                          void *src, unsigned int idx, void **ptr);
- 
-     /**
-      * Set up local environment to save a domain. (Typically querying
-@@ -385,6 +381,12 @@ struct xc_sr_context
- 
-                 union
-                 {
-+                    struct
-+                    {
-+                        /* Used by write_batch for modified pages. */
-+                        void *normalised_pages;
-+                    } save;
+@@ -517,6 +517,24 @@ static inline bool page_type_to_populate(uint32_t type)
+     }
+     return ret;
+ }
 +
-                     struct
-                     {
-                         /* State machine for the order of received records. */
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index ea04cb1a74..fa83648f9a 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -91,11 +91,10 @@ static int write_batch(struct xc_sr_context *ctx)
-     xen_pfn_t *mfns = ctx->save.m->mfns, *types = ctx->save.m->types;
-     void *guest_mapping = NULL;
-     void **guest_data = ctx->save.m->guest_data;
--    void **local_pages = NULL;
-     int *errors = ctx->save.m->errors, rc = -1;
-     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
--    void *page, *orig_page;
-+    void *src;
-     uint64_t *rec_pfns = ctx->save.m->rec_pfns;
-     struct iovec *iov = ctx->save.m->iov; int iovcnt = 0;
-     struct xc_sr_rec_page_data_header hdr = { 0 };
-@@ -105,16 +104,6 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     assert(nr_pfns != 0);
- 
--    /* Pointers to locally allocated pages.  Need freeing. */
--    local_pages = calloc(nr_pfns, sizeof(*local_pages));
--
--    if ( !local_pages )
--    {
--        ERROR("Unable to allocate arrays for a batch of %u pages",
--              nr_pfns);
--        goto err;
--    }
--
-     for ( i = 0; i < nr_pfns; ++i )
-     {
-         types[i] = mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
-@@ -176,11 +165,8 @@ static int write_batch(struct xc_sr_context *ctx)
-                 goto err;
-             }
- 
--            orig_page = page = guest_mapping + (p * PAGE_SIZE);
--            rc = ctx->save.ops.normalise_page(ctx, types[i], &page);
--
--            if ( orig_page != page )
--                local_pages[i] = page;
-+            src = guest_mapping + (p * PAGE_SIZE);
-+            rc = ctx->save.ops.normalise_page(ctx, types[i], src, i, &guest_data[i]);
- 
-             if ( rc )
-             {
-@@ -195,8 +181,6 @@ static int write_batch(struct xc_sr_context *ctx)
-                 else
-                     goto err;
-             }
--            else
--                guest_data[i] = page;
- 
-             rc = -1;
-             ++p;
-@@ -255,9 +239,6 @@ static int write_batch(struct xc_sr_context *ctx)
-  err:
-     if ( guest_mapping )
-         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
--    for ( i = 0; local_pages && i < nr_pfns; ++i )
--        free(local_pages[i]);
--    free(local_pages);
- 
-     return rc;
- }
-diff --git a/tools/libs/saverestore/save_x86_hvm.c b/tools/libs/saverestore/save_x86_hvm.c
-index 91c2cb99ab..26f49ee267 100644
---- a/tools/libs/saverestore/save_x86_hvm.c
-+++ b/tools/libs/saverestore/save_x86_hvm.c
-@@ -129,9 +129,10 @@ static xen_pfn_t x86_hvm_pfn_to_gfn(const struct xc_sr_context *ctx,
-     return pfn;
- }
- 
--static int x86_hvm_normalise_page(struct xc_sr_context *ctx,
--                                  xen_pfn_t type, void **page)
-+static int x86_hvm_normalise_page(struct xc_sr_context *ctx, xen_pfn_t type,
-+                                  void *src, unsigned int idx, void **ptr)
- {
-+    *ptr = src;
-     return 0;
- }
- 
-diff --git a/tools/libs/saverestore/save_x86_pv.c b/tools/libs/saverestore/save_x86_pv.c
-index 92f77fad0f..159ff59480 100644
---- a/tools/libs/saverestore/save_x86_pv.c
-+++ b/tools/libs/saverestore/save_x86_pv.c
-@@ -999,29 +999,31 @@ static xen_pfn_t x86_pv_pfn_to_gfn(const struct xc_sr_context *ctx,
-  * save_ops function.  Performs pagetable normalisation on appropriate pages.
-  */
- static int x86_pv_normalise_page(struct xc_sr_context *ctx, xen_pfn_t type,
--                                 void **page)
-+                                  void *src, unsigned int idx, void **ptr)
- {
-     xc_interface *xch = ctx->xch;
--    void *local_page;
-     int rc;
-+    void *dst;
- 
-     type &= XEN_DOMCTL_PFINFO_LTABTYPE_MASK;
- 
-     if ( type < XEN_DOMCTL_PFINFO_L1TAB || type > XEN_DOMCTL_PFINFO_L4TAB )
++static inline bool page_type_has_stream_data(uint32_t type)
++{
++    bool ret;
++
++    switch (type)
 +    {
-+        *ptr = src;
-         return 0;
++    case XEN_DOMCTL_PFINFO_BROKEN:
++    case XEN_DOMCTL_PFINFO_XALLOC:
++    case XEN_DOMCTL_PFINFO_XTAB:
++        ret = false;
++        break;
++    default:
++        ret = true;
++        break;
 +    }
- 
--    local_page = malloc(PAGE_SIZE);
--    if ( !local_page )
-+    if ( idx >= MAX_BATCH_SIZE )
++    return ret;
++}
+ #endif
+ /*
+  * Local variables:
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index 477b7527a1..799170c7a1 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -232,25 +232,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
      {
--        ERROR("Unable to allocate scratch page");
--        rc = -1;
--        goto out;
-+        ERROR("idx %u out of range", idx);
-+        errno = ERANGE;
-+        return -1;
+         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
+ 
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_NOTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L1TAB:
+-        case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L2TAB:
+-        case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L3TAB:
+-        case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
+-        case XEN_DOMCTL_PFINFO_L4TAB:
+-        case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
+-
++        if ( page_type_has_stream_data(types[i]) == true )
+             mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
+-            break;
+-        }
      }
  
--    rc = normalise_pagetable(ctx, *page, local_page, type);
--    *page = local_page;
-+    dst = ctx->x86.pv.save.normalised_pages + idx * PAGE_SIZE;
-+    rc = normalise_pagetable(ctx, src, dst, type);
-+    *ptr = dst;
+     /* Nothing to do? */
+@@ -270,14 +253,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
  
-- out:
-     return rc;
- }
+     for ( i = 0, j = 0; i < count; ++i )
+     {
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_XTAB:
+-        case XEN_DOMCTL_PFINFO_BROKEN:
+-        case XEN_DOMCTL_PFINFO_XALLOC:
+-            /* No page data to deal with. */
++        if ( page_type_has_stream_data(types[i]) == false )
+             continue;
+-        }
  
-@@ -1031,8 +1033,16 @@ static int x86_pv_normalise_page(struct xc_sr_context *ctx, xen_pfn_t type,
-  */
- static int x86_pv_setup(struct xc_sr_context *ctx)
- {
-+    xc_interface *xch = ctx->xch;
-     int rc;
+         if ( map_errs[j] )
+         {
+@@ -412,7 +389,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+             goto err;
+         }
  
-+    ctx->x86.pv.save.normalised_pages = malloc(MAX_BATCH_SIZE * PAGE_SIZE);
-+    if ( !ctx->x86.pv.save.normalised_pages )
-+    {
-+        PERROR("Failed to allocate normalised_pages");
-+        return -1;
-+    }
-+
-     rc = x86_pv_domain_info(ctx);
-     if ( rc )
-         return rc;
-@@ -1118,6 +1128,7 @@ static int x86_pv_check_vm_state(struct xc_sr_context *ctx)
+-        if ( type < XEN_DOMCTL_PFINFO_BROKEN )
++        if ( page_type_has_stream_data(type) == true )
+             /* NOTAB and all L1 through L4 tables (including pinned) should
+              * have a page worth of data in the record. */
+             pages_of_data++;
+diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
+index 6f820ea432..12598bd4e2 100644
+--- a/tools/libs/saverestore/save.c
++++ b/tools/libs/saverestore/save.c
+@@ -153,13 +153,8 @@ static int write_batch(struct xc_sr_context *ctx)
+             goto err;
+         }
  
- static int x86_pv_cleanup(struct xc_sr_context *ctx)
- {
-+    free(ctx->x86.pv.save.normalised_pages);
-     free(ctx->x86.pv.p2m_pfns);
+-        switch ( types[i] )
+-        {
+-        case XEN_DOMCTL_PFINFO_BROKEN:
+-        case XEN_DOMCTL_PFINFO_XALLOC:
+-        case XEN_DOMCTL_PFINFO_XTAB:
++        if ( page_type_has_stream_data(types[i]) == false )
+             continue;
+-        }
  
-     if ( ctx->x86.pv.p2m )
+         mfns[nr_pages++] = mfns[i];
+     }
+@@ -177,13 +172,8 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+         for ( i = 0, p = 0; i < nr_pfns; ++i )
+         {
+-            switch ( types[i] )
+-            {
+-            case XEN_DOMCTL_PFINFO_BROKEN:
+-            case XEN_DOMCTL_PFINFO_XALLOC:
+-            case XEN_DOMCTL_PFINFO_XTAB:
++            if ( page_type_has_stream_data(types[i]) == false )
+                 continue;
+-            }
+ 
+             if ( errors[p] )
+             {
 
