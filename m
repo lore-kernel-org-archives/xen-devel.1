@@ -2,42 +2,41 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06A21C11F6E
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:22:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB7C2C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:30:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D10BE613FE
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:22:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D10BE613FE
+	by mail.kernel.org (Postfix) with ESMTPS id 5EE2D6140B
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 14:30:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5EE2D6140B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148824.275159 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148863.275170 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyxZp-0006Gf-3o; Thu, 01 Jul 2021 14:22:01 +0000
+	id 1lyxiA-0002IQ-MA; Thu, 01 Jul 2021 14:30:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148824.275159; Thu, 01 Jul 2021 14:22:00 +0000
+Received: by outflank-mailman (output) from mailman id 148863.275170; Thu, 01 Jul 2021 14:30:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lyxZo-0006F0-IP; Thu, 01 Jul 2021 14:22:00 +0000
-Received: by outflank-mailman (input) for mailman id 148824;
- Thu, 01 Jul 2021 14:21:58 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lyxiA-0002IJ-Hv; Thu, 01 Jul 2021 14:30:38 +0000
+Received: by outflank-mailman (input) for mailman id 148863;
+ Thu, 01 Jul 2021 14:30:38 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vXwC=LZ=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1lyxR3-0005F9-NI
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 14:12:57 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3a858c7a-da76-11eb-8328-12813bfff9fa;
- Thu, 01 Jul 2021 14:11:29 +0000 (UTC)
+ id 1lyxiA-0002ID-74
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 14:30:38 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8620c3ba-85d4-4967-a97b-25e717a56970;
+ Thu, 01 Jul 2021 14:30:37 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,92 +48,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a858c7a-da76-11eb-8328-12813bfff9fa
+X-Inumbo-ID: 8620c3ba-85d4-4967-a97b-25e717a56970
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1625148689;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=OrEgff/HihyncUiqJLBMZO5p+YLhIkvLwk8ijwp7Og0=;
-  b=IUfo/cC9BJbSiM1KYJctmiuzcp9to3pjLOtjRa4ds9PpHv3vFqDyWefd
-   IjctC1G7l8j6oAmARtzjKsdhKfm1V64W+ZW6SN70bhiZ7ryl6zndGM/If
-   U16WeVEpgDuFxwXZqap56dQIclNMKjCb1W+0HqqBTEKaFuZpyuuV9XP5h
-   8=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: NZ/MaMEfgDUzcZbO6KcGdvFFBkHR6NU6p9DlxJ715VT6RLQFJVjuh+XWDqbgfYwIUafNmoXmMD
- s5GWIkHuy3tIdJLKyBUd38fMpUhl7cgGEMYmMn1ljii3q4QxU/+6/kllIcIZR9FVnHja/7ft2S
- XfcCt8A1gjJ8Nr70Y062zL0eqCSZwEGMUzGKj44Pw2bwN9tbGbB6R1QkAwNSNffdD5qSKV8yG1
- +TwvxqSndDA8dZvxdN/pxcne3QiUmMutVWbk5vMssasw8CCES/aRV+71vb0L7eGqP7O0AgEOUj
- ODY=
+  d=citrix.com; s=securemail; t=1625149837;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=8P7vlfIkLcqeQmKRDzO/5KvCw9VoEUvvaKYjxrs4Lwg=;
+  b=HqWMkZ4DwZIO3z2jfbbQCGH8zhWO9uBSQDWntAngR08PQpgD+pA2qrFI
+   i/v/5RaomjdQcQ1e9BJpurJbAY75kiemE6S+ndYh+mvrcfPeZEsW33Gc9
+   ri+a3pk2ohFDQkIv3Zh71VKwKFrfPzvI14DbrJJGtIuRLUG75rWQQ6Q80
+   k=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 0U1C1McnJVqImh+3s74LGBKcPf1DBgdVWaCmAN72OFr7ip3r/fvcZatKZRncr3nBw86BL6sK4Z
+ MXEMr9upMFzYfh673TZttU3Rzq8Cx7WIbOcwBU5MlHu9RBWFws3F7hC4tlZBfSifwOKJBbwCz2
+ J6810PWChACoESqdR7fxf8PUvL5ZyQJZkTOWjCIhHfFKP2wdqu67XumFbzU3nIswprHq5sNxva
+ 7GFqVGyC6ULkLUiD8g1iwFzKrOmSFw9ViPIuEn5+po7BchG13I11D8fgMAF9C4SinVdLhA0nJG
+ Ils=
 X-SBRS: 5.1
-X-MesageID: 47755472
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 47448780
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:CZGT3q1O+8E7RG7SPjPV7gqjBIokLtp133Aq2lEZdPRUGvb3qy
- nIpoV86faUskdoZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
- uIG5IOceEYZmIasS+V2maF+q4bsbu6zJw=
+IronPort-HdrOrdr: A9a23:ojxwZqP58v8aVsBcTjejsMiBIKoaSvp037BK7S1MoNJuEvBw9v
+ re+sjzsCWftN9/Yh4dcLy7VpVoBEmsl6KdgrNhWotKPjOW21dARbsKheffKn/bakjDH4Zmvp
+ uIGJIObOEYY2IasS77ijPIbOrJwrO8gd6VbTG19QYdceloAZsQnzuQEmygYzRLrJEtP+tFKH
+ KbjPA33waISDAsQemQIGIKZOTHr82jruObXfZXbyRXkzVnlFmTmcTHLyQ=
 X-IronPort-AV: E=Sophos;i="5.83,314,1616472000"; 
-   d="scan'208";a="47755472"
+   d="scan'208";a="47448780"
+Date: Thu, 1 Jul 2021 15:30:33 +0100
 From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
- Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v6 19/31] build: rework .banner generation
-Date: Thu, 1 Jul 2021 15:09:59 +0100
-Message-ID: <20210701141011.785641-20-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210701141011.785641-1-anthony.perard@citrix.com>
-References: <20210701141011.785641-1-anthony.perard@citrix.com>
+To: Olaf Hering <olaf@aepfle.de>
+CC: <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>, "Ian
+ Jackson" <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH v20210701 03/40] xl: fix description of migrate --debug
+Message-ID: <YN3RidqHX3fvzAUO@perard>
+References: <20210701095635.15648-1-olaf@aepfle.de>
+ <20210701095635.15648-4-olaf@aepfle.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20210701095635.15648-4-olaf@aepfle.de>
 
-Avoid depending on Makefile but still allow to rebuild the banner when
-$(XEN_FULLVERSION) changes.
+On Thu, Jul 01, 2021 at 11:55:58AM +0200, Olaf Hering wrote:
+> xl migrate --debug used to track every pfn in every batch of pages.
+> But these times are gone. The code in xc_domain_save is the consumer
+> of this knob, but it considers it only for the remus and colo case.
+> 
+> Adjust the help text to tell what --debug does today: Nothing.
+> 
+> Signed-off-by: Olaf Hering <olaf@aepfle.de>
+> Reviewed-by: Juergen Gross <jgross@suse.com>
+> 
+> v02:
+> - the option has no effect anymore
 
-Also add a dependency on tools/xen.flf, even if not expected to
-change.
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- xen/Makefile | 20 +++++++++++++-------
- 1 file changed, 13 insertions(+), 7 deletions(-)
+Thanks,
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 7e3e4c42d77b..267ae77aef7a 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -399,13 +399,19 @@ delete-unfresh-files:
- 		rm -f include/xen/compile.h; \
- 	fi
- 
--.banner: Makefile
--	@if which figlet >/dev/null 2>&1 ; then \
--		echo " Xen $(XEN_FULLVERSION)" | figlet -f tools/xen.flf > $@.tmp; \
--	else \
--		echo " Xen $(XEN_FULLVERSION)" > $@.tmp; \
--	fi
--	@mv -f $@.tmp $@
-+quiet_cmd_banner = BANNER  $@
-+define cmd_banner
-+    if which figlet >/dev/null 2>&1 ; then \
-+	echo " Xen $(XEN_FULLVERSION)" | figlet -f $< > $@.tmp; \
-+    else \
-+	echo " Xen $(XEN_FULLVERSION)" > $@.tmp; \
-+    fi; \
-+    mv -f $@.tmp $@
-+endef
-+
-+.banner: tools/xen.flf FORCE
-+	$(call if_changed,banner)
-+targets += .banner
- 
- # compile.h contains dynamic build info. Rebuilt on every 'make' invocation.
- include/xen/compile.h: include/xen/compile.h.in .banner
 -- 
 Anthony PERARD
-
 
