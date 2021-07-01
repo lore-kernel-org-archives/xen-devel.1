@@ -2,47 +2,58 @@ Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EE44C11F67
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 708C0C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:13:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A92861260
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:02:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A92861260
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 1A39D61483
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 10:13:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A39D61483
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148509.274580 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148574.274595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytWs-0001kx-Vt; Thu, 01 Jul 2021 10:02:43 +0000
+	id 1lythQ-0006HL-FN; Thu, 01 Jul 2021 10:13:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148509.274580; Thu, 01 Jul 2021 10:02:42 +0000
+Received: by outflank-mailman (output) from mailman id 148574.274595; Thu, 01 Jul 2021 10:13:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytWs-0001iZ-Gy; Thu, 01 Jul 2021 10:02:42 +0000
-Received: by outflank-mailman (input) for mailman id 148509;
- Thu, 01 Jul 2021 10:02:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1lythQ-0006HE-BK; Thu, 01 Jul 2021 10:13:36 +0000
+Received: by outflank-mailman (input) for mailman id 148574;
+ Thu, 01 Jul 2021 10:13:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytVZ-0004XT-4H
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 10:01:21 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.100])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ac119f06-72cf-4881-9e7d-d1a78e7b3b1d;
- Thu, 01 Jul 2021 09:58:18 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619us5NW
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:54 +0200 (CEST)
+ (envelope-from <SRS0=zJ+h=LZ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1lythP-0006H8-6F
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 10:13:35 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.109.102])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9fcd3858-5b16-4314-9be1-40ca547d3c6d;
+ Thu, 01 Jul 2021 10:13:34 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2110.outbound.protection.outlook.com [104.47.18.110])
+ (Using TLS) by relay.mimecast.com with ESMTP id
+ de-mta-31-F0waoWd6NVW-5zIx2J01vw-1; Thu, 01 Jul 2021 12:13:27 +0200
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR04MB4381.eurprd04.prod.outlook.com (2603:10a6:803:6d::30)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4287.23; Thu, 1 Jul
+ 2021 10:13:25 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::99d3:99cd:8adf:3eea]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::99d3:99cd:8adf:3eea%5]) with mapi id 15.20.4287.023; Thu, 1 Jul 2021
+ 10:13:25 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ PR3P191CA0003.EURP191.PROD.OUTLOOK.COM (2603:10a6:102:54::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4264.18 via Frontend Transport; Thu, 1 Jul 2021 10:13:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,183 +65,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac119f06-72cf-4881-9e7d-d1a78e7b3b1d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133414;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
-    From:Subject:Sender;
-    bh=n0d0gwWXlJ/Ban5eVrK506Di/gOt/MD61K+N2RGQBbA=;
-    b=Gl58uIDpytNCd08vTi0ztylENVBl+fRtA6BJJFBS4K+oAMI4fOQRThcxhH9ZUenr1p
-    LSGgV3d0plPdsJmtYrjw8IErqZWLZk05W83mq33yvMopOnlMNIgywtuHWkA1KMwkk5NX
-    yllcZGagVS2KO3XT/EARqFZoC16c753PHIjD3vlr7pMx6I9WtNVCUUs4Ps75yCOTF/uu
-    34eLqRIzWxCGH4+2EkcF2cXdzxQdEavqUKZQcZeA0L58nQ2CoMu/NVsYg+ZZ+1SJMEGt
-    IM6PcldeVJJGQx+XoRzBf0Ba9VSNxnbc1IGFRQPAHtxPOuzMD83paaMsrKDQzmKlXmg9
-    KCwA==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
-X-RZG-CLASS-ID: mo00
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org
-Cc: Olaf Hering <olaf@aepfle.de>,
-	Christian Lindig <christian.lindig@citrix.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	David Scott <dave@recoil.org>
-Subject: [PATCH v20210701 32/40] tools: adjust libxl_domain_suspend to receive a struct props
-Date: Thu,  1 Jul 2021 11:56:27 +0200
-Message-Id: <20210701095635.15648-33-olaf@aepfle.de>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
-References: <20210701095635.15648-1-olaf@aepfle.de>
+X-Inumbo-ID: 9fcd3858-5b16-4314-9be1-40ca547d3c6d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1625134411;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JCunioa4EWZjq32fQIVqtUhOCPm1ECOwtCYNIITpjdM=;
+	b=VzWSA3WLrDLvmvLy3Src2Y+MPH7GlY/Xmb+ESWsHr4W7Ui9OLTOzpwYBDc40Fpx8tuT5er
+	brsMw6ttA+/4Oxrk0clxBJD1BaNqX3crQHiUCGTvKjiTeslNM8O0EOir+qAdeev/VbRv/m
+	FnIRi80Nt5FsP6wV/OSE5gFFuzEUmt0=
+X-MC-Unique: F0waoWd6NVW-5zIx2J01vw-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=h9ytCMHPYpi7BNJt6dukBjOsPTmGUL+qSrRSGOZ4ThlwYz4TjIbazNNEnKYaW+NO8A1qoY4+95gLRkNKgMbhWlLMHxT4RGuKPvZSvUbz1cfQ0yO3+D6CxmIRjtMRlShTayjpgdYFu9utMPobnMgmqda6FcCqV2ypN8fm1neJvHMnQbD1bgdhVR9exrop3zYl3XA8/jS3FaoCkffkIkm0P90qub+n7qPJTa7ejwsEL8vPif7t9+Uzvq344fk7ceRWlLgXudhAopO+Jt9pbxOJDCQjPXgU1yD1dOllXkWctbqx07sZifDDdBLwPfVOkdbUVp0nOnQOWeCXVZ1dlA0mAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JCunioa4EWZjq32fQIVqtUhOCPm1ECOwtCYNIITpjdM=;
+ b=K2TDbsRv91wKJQmTHUEPBTujtMGoDy6Ge+jKHiw5koZfiLTkX409ALE386wOkapLzVNPkh/GI4OV5JReN5csQLANhKNvjWSj+KZH3dmmFdA+QZ4R0YVr1dcEc4AEbYmHbjs+evYR5UHVr/tgAvKD1x71MH+UU2t1WuBXgejIzKEennZs2obG5yvuJOUhx8bWEx/9TXTy/rOclOfj5FhSUsqksb414WBDbnDOOuu8ytxwMXDFOOqVh3wqXyN6kWlFB2OFf8EuLyVk0bq1IKGIIPD1oW4bUqDAHqIRE6yi0SnQ2uIrIUCyu4kQJyaylbuWQZCiUIeauRvSWQZsAjJPjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: arm.com; dkim=none (message not signed)
+ header.d=none;arm.com; dmarc=none action=none header.from=suse.com;
+Subject: Re: [PATCH 5/9] xen: introduce assign_pages_nr
+To: Julien Grall <julien@xen.org>
+Cc: Bertrand.Marquis@arm.com, Wei.Chen@arm.com,
+ xen-devel@lists.xenproject.org, sstabellini@kernel.org,
+ Penny Zheng <penny.zheng@arm.com>
+References: <20210607024318.3988467-1-penny.zheng@arm.com>
+ <20210607024318.3988467-6-penny.zheng@arm.com>
+ <41a7389b-630c-6cf4-fa28-7d80cb79176b@suse.com>
+ <e7e89abb-1601-0cdf-71d2-c22af86057c4@xen.org>
+ <dab3331b-f3b9-4318-bf43-9f994c7d1121@suse.com>
+ <b7220a85-6eec-278f-8b1d-d474470406a6@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <fa5f4ba1-c07a-ccbd-6ca3-7e1d6819b5d6@suse.com>
+Date: Thu, 1 Jul 2021 12:13:24 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <b7220a85-6eec-278f-8b1d-d474470406a6@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [37.24.206.209]
+X-ClientProxiedBy: PR3P191CA0003.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:102:54::8) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 5a98f9be-f3f5-41ca-fd4a-08d93c78dcec
+X-MS-TrafficTypeDiagnostic: VI1PR04MB4381:
+X-Microsoft-Antispam-PRVS:
+	<VI1PR04MB43812147E59E2976D4C81B6DB3009@VI1PR04MB4381.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	jjKTi1diZH3eUNBZIioFIzZdsmm2tuv3OXmgAzojGohzv47EmMVLm9kkrWHMaSny7RXnOgpjNd4hxswO71PT/WFY9M0idEC3COAruvi6XPUvmKHtrTp4AP6hMGbrFaAZBsYDP3o5oXel5b86QF5EF4j+oDENjUy3zkROdhl9Fgmqehnqp8Swz8K5nJbOGY834muaTAdfQJwHIEMtFc5KZ8sK0TY9Qv+gUqml0/QCijFpRgWN7eRCC5o9nad5NqvxtdtaO2yvvF9w6IOy3gcOm3/cwRAmYQWMjBlRS1xLSKesP6kHgltTvRvVFQjQQu5fgj4YSYYRhhLrvJAYzZQ4KibMMQ+DJEMiW9xMKZOWEE/zUqFTDRuvNa0dVtIeFblk2aOTEN2qf7OhdoG0ekPMkzW4KuaIJwp0bW10ssAOWANMmjsZ+FEZpoM0Ew9nQG7IoFdbIrXf4GEkzWmMUO6irxB6hIGmtzV4TtDFOh5HYVcHqeAiDKvc7ZeF0PrIjxAdglWqp2ozWL2xTW7jbCQmnqYYDnRBWS3T6iesr4Di+pjLr568zE69BjOmfdJ1uIyu/a6m9MOrVBTDtn5/zuod0cvm4fYMvLjy7wzv7p+yKid/6mZAOeNkhi3f5oNEcCNT6MiY31As8DuwNys/UjZt17zKysq+DK5LTq/XfqY4pJeZXuJLcFhmi8dx9HJm42HF/K2Gl7e0fAfswH5ypI27NTt6UEtQ1uJoX7OJxkzreow=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(136003)(396003)(366004)(39850400004)(346002)(376002)(956004)(5660300002)(86362001)(2616005)(8936002)(6486002)(31696002)(53546011)(6916009)(66946007)(478600001)(83380400001)(38100700002)(26005)(8676002)(66556008)(66476007)(31686004)(186003)(36756003)(316002)(2906002)(16526019)(16576012)(4326008)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?QzR5UWE1VzdOd0k1ZDFzbU9vRlh5UEhjdFBpU1NTUUNNNmpSUTlzcjJJeEcz?=
+ =?utf-8?B?K3ZDRElqYzg4RUVnbDFiMnMyS29kR0dEZEV4Zzk4REJWcmVtd0lTaS9nOVA0?=
+ =?utf-8?B?S2tOd2RzN3RmTUtpUWUvWTRFTjhOMmRpTExkeEgzYXY3S21RWGFwOUVlUWdu?=
+ =?utf-8?B?eFZueUF0UnpKVVhaMWE1bHlFMUZLd2lURno0anNtT29NN05iSk5PVktjditP?=
+ =?utf-8?B?dWlSKzR4R01zaEZnL0U2dXMzZ29KZHRJVUlsdmpYU1dHaGwzb1ZZbWpzYkx3?=
+ =?utf-8?B?Ni9CVTFSdDdQSjl6aHArSU02a3lkWUEwaStKQTRFSEVoQVZtUUxMeUlhbStw?=
+ =?utf-8?B?bmVpVDZzSUUyU0JiK0xJekttcHlaYldyZ25scXNERldQZW9HRXFObHJPUVpZ?=
+ =?utf-8?B?bHExN2FoMG5oTVE2enBQbXg3YnpvcFlyZ0UybTJhdS9lTEVOblBsNVVzemps?=
+ =?utf-8?B?eHNUZENtQVdiK3hlYmRFUWd0cWlEcmhwcElhK0JTRjZlWW95b011amE2dUpF?=
+ =?utf-8?B?MDF5ZllteTdGcEJWWjBwZFYxMU5OWXJNNFlpdDNMSG81eWxkNXQxZlg1TU9y?=
+ =?utf-8?B?dXowVmlxQ3daS0dsWXV2bnFMQURodzZaVlhtV3hsUXlxKzNUcmRadW1ncmxP?=
+ =?utf-8?B?NlBxSXY3Z1NSV1JyUTZ4cFphNStDczVYL1FqY2tuanIrWnZOVk5WTHBPM1dO?=
+ =?utf-8?B?Uk8zOHE0SlUxWjVjNXozeStIM09OczJZZERHQmtxa1Q4ckI4QlEzUW1PTTNl?=
+ =?utf-8?B?RWZoZENFS3NPaGNTTFRxOTVjRFNVcXBUTlhIVWRFeEpnTXU4UWcwZ0xVYUpu?=
+ =?utf-8?B?eGNTdzY1STNrK0tHdytqaTZjTDVnNWMvcnhGMzJtUkNCeHlEN2dHcUliWTE0?=
+ =?utf-8?B?bVJ1RmkyUEU5aytzTW5vYTkzMzZpRlp5bzZiVnBiM0dGUEptOFA3dWlzb1VD?=
+ =?utf-8?B?enZYVVlkU0JiOThRWlFONEZQc3BHTkVZa2lwTlhMV2NVYWdZY2xBWENsS2xR?=
+ =?utf-8?B?d0twSFp3bXNrZUVBUjlCMTFTNjZVNjNJZzBXTTBSaW9YemttVFNJaUcwNWts?=
+ =?utf-8?B?SENiblo3d1g0eTVRMXZLYU1oekkwWXpzbDdSTkJabjhjRWJhVU12Zmoza0po?=
+ =?utf-8?B?SlZKZW0rRUovUDRYV2o4YmZpNTRWWmdJeVhvUW1mZS9kZFpYRXJNbFdpZXJX?=
+ =?utf-8?B?cDdJd3IxT0tKRWFOWHZmdEdISEtyM0xpQ2xRWTF6UGZoUDBiWTZ4ZVdZbFFi?=
+ =?utf-8?B?Wk1hVnBaYWpmcG9ZUWp0ZUkvT1ZiOEZUNHd6T25GNE0vL0FHaXQ2RFhvbkQw?=
+ =?utf-8?B?Mkd6RXVwVVd1Q0RJa2tEVkt3Q0Z2Uit6aDJTUHd2eUN4UXlGSDVqNVJjRDRk?=
+ =?utf-8?B?eDJ2OXRDb3l0bWFLYzFDbGJ6MVo4Qk9HSDl5YkNjbkt3aXpwcUpVV0lFVklB?=
+ =?utf-8?B?NFRMWGhCanNGQXdjaUZ6ME5SaWRBVlpqZHBCemtzVjRXc1BwWUJISGpLUnkv?=
+ =?utf-8?B?SlQ4cW9YSEpTMUJCbE55SUhJeHRvcEJJWlF6bFpvWEMwbS9VVFlqQ3g5RHdX?=
+ =?utf-8?B?KzNhd01udXBLSkRpaVh5K3p6ZHVQMkgvK3ZsaDhTMWhoRlVWdWZvbGcybzhH?=
+ =?utf-8?B?ckFwSDhGc1RzZk54dUJxSXlxRHorRWZWOWQ3eG1jRWd4R0xKNFVJcWFsV20r?=
+ =?utf-8?B?VVMxbkh3a1hYZndPcVlINjBJUWRVeGRMN3htT2JCVzFzNnI4L3FFSWp6ZHpE?=
+ =?utf-8?Q?W36ULVnyOGoOnrEhO+Ca4qIht5hCcq+SNVY9HLQ?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a98f9be-f3f5-41ca-fd4a-08d93c78dcec
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2021 10:13:25.2195
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7mFr0k7tdkUes3HWt21wlYxwNLxXGNbkH0VS3hjvyV7VGzN/kClro73ewJhSZgrETFRX3vE+dzc/xxTLSJL11Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4381
 
-Upcoming changes will pass more knobs down to xc_domain_save.
-Adjust the libxl_domain_suspend API to allow easy adding of additional knobs.
+On 01.07.2021 11:24, Julien Grall wrote:
+> On 01/07/2021 09:26, Jan Beulich wrote:
+>> On 30.06.2021 20:29, Julien Grall wrote:
+>>> On 10/06/2021 10:49, Jan Beulich wrote:
+>>>> On 07.06.2021 04:43, Penny Zheng wrote:
+>>>>> Introduce new interface assign_pages_nr to deal with when page number is
+>>>>> not in a power-of-two, which will save the trouble each time user needs
+>>>>> to split the size in a power of 2 to use assign_pages.
+>>>>
+>>>> First of all I still don't see why in this one special case it is a
+>>>> meaningful burden to do the count-to-order conversion in the caller you
+>>>> mean to add,
+>>>
+>>> This sort of works for one caller. However, I would expect some more
+>>> user in the future (we use it for Live-Update).
+>>>
+>>>> and hence why we really need this new function (to keep it
+>>>> simple, you could even have the caller not break down to arbitrary
+>>>> power-of-2 chunks, but simply iterate over all individual [order-0]
+>>>> pages).
+>>>
+>>> The function assign_pages() will always use 1U << order (and sadly 1 <<
+>>> order). So we would end up to convert the count in multiple order for
+>>> then directly converting back to a number. To me, this sounds rather
+>>> pointless...
+>>>
+>>> There are also a slight benefits to call assign_pages() a single time
+>>> during boot because it will reduce the number of time we need to
+>>> lock/unlock d->page_alloc_lock.
+>>
+>> Well, all of this is why I did add ...
+>>
+>>>> The more that I'm not happy with the chosen name, despite it
+>>>> having been suggested during v1 review. _If_ we needed two functions,
+>>>> imo they ought to be named assign_page() (dealing with a single page of
+>>>> the given order) and assign_pages(). Backporting confusion could be
+>>>> helped by altering the order of parameters, such that the compiler
+>>>> would point out that adjustments at call sites are needed.
+>>
+>> ... this. 
+> 
+> Oh, it wasn't entirely clear whether you were objecting of offering the 
+> possibility to pass a number of pages rather than an order.
 
-No change in behavior intented.
+Easily understood: I indeed we trying to express my preference to stick
+to what we have, but trying to suggest a variant that I think I could
+live with.
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
-Acked-by: Christian Lindig <christian.lindig@citrix.com>
----
- tools/include/libxl.h                | 26 +++++++++++++++++++++++---
- tools/libs/light/libxl_domain.c      |  7 ++++---
- tools/ocaml/libs/xl/xenlight_stubs.c |  3 ++-
- tools/xl/xl_migrate.c                |  9 ++++++---
- tools/xl/xl_saverestore.c            |  3 ++-
- 5 files changed, 37 insertions(+), 11 deletions(-)
+Jan
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 29931626a2..9a4d7514ed 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -1706,12 +1706,32 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
-     libxl_retrieve_domain_configuration_0x041200
- #endif
- 
-+/*
-+ * LIBXL_HAVE_DOMAIN_SUSPEND_PROPS indicates that the
-+ * libxl_domain_suspend_props() function takes a props struct.
-+ */
-+#define LIBXL_HAVE_DOMAIN_SUSPEND_PROPS 1
-+
-+typedef struct {
-+    uint32_t flags; /* LIBXL_SUSPEND_* */
-+} libxl_domain_suspend_props;
-+#define LIBXL_SUSPEND_DEBUG 1
-+#define LIBXL_SUSPEND_LIVE 2
-+
- int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
--                         int flags, /* LIBXL_SUSPEND_* */
-+                         libxl_domain_suspend_props *props,
-                          const libxl_asyncop_how *ao_how)
-                          LIBXL_EXTERNAL_CALLERS_ONLY;
--#define LIBXL_SUSPEND_DEBUG 1
--#define LIBXL_SUSPEND_LIVE 2
-+#if defined(LIBXL_API_VERSION) && LIBXL_API_VERSION < 0x041600
-+static inline int libxl_domain_suspend_0x041500(libxl_ctx *ctx, uint32_t domid,
-+                         int fd, int flags, /* LIBXL_SUSPEND_* */
-+                         const libxl_asyncop_how *ao_how)
-+{
-+    libxl_domain_suspend_props props = { .flags = flags, };
-+    return libxl_domain_suspend(ctx, domid, fd, &props, ao_how);
-+}
-+#define libxl_domain_suspend libxl_domain_suspend_0x041500
-+#endif
- 
- /*
-  * Only suspend domain, do not save its state to file, do not destroy it.
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index c00c36c928..5dbd27900f 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -505,7 +505,8 @@ static void domain_suspend_cb(libxl__egc *egc,
- 
- }
- 
--int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
-+int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
-+                         libxl_domain_suspend_props *props,
-                          const libxl_asyncop_how *ao_how)
- {
-     AO_CREATE(ctx, domid, ao_how);
-@@ -526,8 +527,8 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
-     dss->domid = domid;
-     dss->fd = fd;
-     dss->type = type;
--    dss->live = flags & LIBXL_SUSPEND_LIVE;
--    dss->debug = flags & LIBXL_SUSPEND_DEBUG;
-+    dss->live = props->flags & LIBXL_SUSPEND_LIVE;
-+    dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
-     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
- 
-     rc = libxl__fd_flags_modify_save(gc, dss->fd,
-diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
-index 352a00134d..eaf7bce35a 100644
---- a/tools/ocaml/libs/xl/xenlight_stubs.c
-+++ b/tools/ocaml/libs/xl/xenlight_stubs.c
-@@ -614,10 +614,11 @@ value stub_libxl_domain_suspend(value ctx, value domid, value fd, value async, v
- 	int ret;
- 	uint32_t c_domid = Int_val(domid);
- 	int c_fd = Int_val(fd);
-+    libxl_domain_suspend_props props = {};
- 	libxl_asyncop_how *ao_how = aohow_val(async);
- 
- 	caml_enter_blocking_section();
--	ret = libxl_domain_suspend(CTX, c_domid, c_fd, 0, ao_how);
-+	ret = libxl_domain_suspend(CTX, c_domid, c_fd, &props, ao_how);
- 	caml_leave_blocking_section();
- 
- 	free(ao_how);
-diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
-index b8594f44a5..144890924f 100644
---- a/tools/xl/xl_migrate.c
-+++ b/tools/xl/xl_migrate.c
-@@ -186,7 +186,10 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     char *away_domname;
-     char rc_buf;
-     uint8_t *config_data;
--    int config_len, flags = LIBXL_SUSPEND_LIVE;
-+    int config_len;
-+    libxl_domain_suspend_props props = {
-+        .flags = LIBXL_SUSPEND_LIVE,
-+        };
- 
-     save_domain_core_begin(domid, preserve_domid, override_config_file,
-                            &config_data, &config_len);
-@@ -205,8 +208,8 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     xtl_stdiostream_adjust_flags(logger, XTL_STDIOSTREAM_HIDE_PROGRESS, 0);
- 
-     if (debug)
--        flags |= LIBXL_SUSPEND_DEBUG;
--    rc = libxl_domain_suspend(ctx, domid, send_fd, flags, NULL);
-+        props.flags |= LIBXL_SUSPEND_DEBUG;
-+    rc = libxl_domain_suspend(ctx, domid, send_fd, &props, NULL);
-     if (rc) {
-         fprintf(stderr, "migration sender: libxl_domain_suspend failed"
-                 " (rc=%d)\n", rc);
-diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
-index 953d791d1a..476d4d9a6a 100644
---- a/tools/xl/xl_saverestore.c
-+++ b/tools/xl/xl_saverestore.c
-@@ -130,6 +130,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
-     int fd;
-     uint8_t *config_data;
-     int config_len;
-+    libxl_domain_suspend_props props = {};
- 
-     save_domain_core_begin(domid, preserve_domid, override_config_file,
-                            &config_data, &config_len);
-@@ -146,7 +147,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
- 
-     save_domain_core_writeconfig(fd, filename, config_data, config_len);
- 
--    int rc = libxl_domain_suspend(ctx, domid, fd, 0, NULL);
-+    int rc = libxl_domain_suspend(ctx, domid, fd, &props, NULL);
-     close(fd);
- 
-     if (rc < 0) {
 
