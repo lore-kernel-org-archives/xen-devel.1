@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11D84C11F64
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27E94C11F64
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D51CB611C2
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D51CB611C2
+	by mail.kernel.org (Postfix) with ESMTPS id EDA65611C2
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 09:57:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDA65611C2
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.148348.274221 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.148351.274232 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytRQ-00072E-U8; Thu, 01 Jul 2021 09:57:04 +0000
+	id 1lytRT-0007Zx-Bs; Thu, 01 Jul 2021 09:57:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 148348.274221; Thu, 01 Jul 2021 09:57:04 +0000
+Received: by outflank-mailman (output) from mailman id 148351.274232; Thu, 01 Jul 2021 09:57:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lytRQ-00071t-LN; Thu, 01 Jul 2021 09:57:04 +0000
-Received: by outflank-mailman (input) for mailman id 148348;
- Thu, 01 Jul 2021 09:57:02 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1lytRT-0007ZV-4z; Thu, 01 Jul 2021 09:57:07 +0000
+Received: by outflank-mailman (input) for mailman id 148351;
+ Thu, 01 Jul 2021 09:57:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lvjd=LZ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1lytRO-0004r4-Fp
- for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:02 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.102])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c587559b-37c5-434a-b906-25f3b6bdca35;
- Thu, 01 Jul 2021 09:56:53 +0000 (UTC)
+ id 1lytRR-0004XT-S0
+ for xen-devel@lists.xenproject.org; Thu, 01 Jul 2021 09:57:05 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.170])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0941045a-39ea-4084-bd5e-22ff734b2a6c;
+ Thu, 01 Jul 2021 09:56:49 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx619ul5N8
+ with ESMTPSA id 30791cx619ui5Ms
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Thu, 1 Jul 2021 11:56:47 +0200 (CEST)
+ Thu, 1 Jul 2021 11:56:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c587559b-37c5-434a-b906-25f3b6bdca35
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133408;
+X-Inumbo-ID: 0941045a-39ea-4084-bd5e-22ff734b2a6c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625133404;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=JtFmFI89VrmWr2vsArcScvsm4YNWIztizbLrNUj8v3A=;
-    b=KF+/i2w2jn0OOsptwi4M0yyQC9/LaijzHsOLKpPAEf0C//wVSKbRIk+XVjsQX7aMP5
-    pqFw6zhfu/4rm4fwzY7XBLDKe5PvzWH4M8FtlsYYGhly0yYXTG18oArFTlndqyD+SzzY
-    8ZflkpY0K5epQ2Ns/L1DGVkdHLE/nD1yHWF3SN+6aerEc29EbxuJYB8XtQJyQUbNdfqo
-    wdVfiAXgkTDLT3ucJ3KGWEczM0iB0VgTqX1LXMoGKL4zS1o+SkqUFfiy1FY+piUdnnfn
-    UbS0/7qxmjisfu+6SzRoywgIDRYJ3L+ACrbYCrQfWlGvW/j+EnHRwjtNSNIcF2olHkCQ
-    CSPw==
+    bh=ex4r4d11Mg1k2Zn9qFLItgRI9LdfJn43Y1sVEepvWiU=;
+    b=MINrfXc5iyKU6L0b0y1toSzNvOC3EMNFBf2mAqFKmcHh5kEPrAhRw/niCitYKxPoD3
+    AowdVRraJeFi3mHit3amy7y4SjQAE+dxJG4R3Nq/bPV+R8iXK8btER1ImH6EO9Bqpkkq
+    U1AgaOznJ0o9KcNiU6NNBxp6wu5AcYQoAYCTooDiCKF7U572lWW117vDDYNKpcYQay6h
+    fOVZS8/EYQ1ggUZDguUR8z3Ap0/M80632/OnVF4Jw81Uy6Dh22jVKkh+KhGZjXAEJlZI
+    tTk33dwwugQ4fd9FTNsqK3od7UFonplaU7wAzYOBL9QzoK3RBWRc6z/L8nqKUco8XBCd
+    KzBA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAg5lqlz7EsstGyDcxK3Mbajr+SQKopp1Cb0CyyaZQQ=="
@@ -75,74 +76,56 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210701 18/40] tools: save: move errors array
-Date: Thu,  1 Jul 2021 11:56:13 +0200
-Message-Id: <20210701095635.15648-19-olaf@aepfle.de>
+Subject: [PATCH v20210701 11/40] tools: use sr_is_known_page_type
+Date: Thu,  1 Jul 2021 11:56:06 +0200
+Message-Id: <20210701095635.15648-12-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210701095635.15648-1-olaf@aepfle.de>
 References: <20210701095635.15648-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove allocation from hotpath, move errors array into preallocated space.
+Verify pfn type on sending side, also verify incoming batch of pfns.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 Reviewed-by: Juergen Gross <jgross@suse.com>
----
- tools/libs/saverestore/common.h | 2 ++
- tools/libs/saverestore/save.c   | 7 ++-----
- 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index 5bd2913cb6..25ee8fcb0f 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -229,6 +229,8 @@ struct sr_save_arrays {
-     xen_pfn_t mfns[MAX_BATCH_SIZE];
-     /* write_batch: Types of the batch pfns. */
-     xen_pfn_t types[MAX_BATCH_SIZE];
-+    /* write_batch: Errors from attempting to map the gfns. */
-+    int errors[MAX_BATCH_SIZE];
- };
+v02:
+- use sr_is_known_page_type instead of xc_is_known_page_type
+---
+ tools/libs/saverestore/restore.c | 3 +--
+ tools/libs/saverestore/save.c    | 6 ++++++
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
+index be259a1c6b..324b9050e2 100644
+--- a/tools/libs/saverestore/restore.c
++++ b/tools/libs/saverestore/restore.c
+@@ -406,8 +406,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         }
  
- struct sr_restore_arrays {
+         type = (pages->pfn[i] & PAGE_DATA_TYPE_MASK) >> 32;
+-        if ( ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) >= 5) &&
+-             ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) <= 8) )
++        if ( sr_is_known_page_type(type) == false )
+         {
+             ERROR("Invalid type %#"PRIx32" for pfn %#"PRIpfn" (index %u)",
+                   type, pfn, i);
 diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index 0883c1fac0..9ebbf00ce7 100644
+index ae3e8797d0..6f820ea432 100644
 --- a/tools/libs/saverestore/save.c
 +++ b/tools/libs/saverestore/save.c
-@@ -92,7 +92,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     void *guest_mapping = NULL;
-     void **guest_data = NULL;
-     void **local_pages = NULL;
--    int *errors = NULL, rc = -1;
-+    int *errors = ctx->save.m->errors, rc = -1;
-     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
-     void *page, *orig_page;
-@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
+@@ -147,6 +147,12 @@ static int write_batch(struct xc_sr_context *ctx)
  
-     assert(nr_pfns != 0);
- 
--    /* Errors from attempting to map the gfns. */
--    errors = malloc(nr_pfns * sizeof(*errors));
-     /* Pointers to page data to send.  Mapped gfns or local allocations. */
-     guest_data = calloc(nr_pfns, sizeof(*guest_data));
-     /* Pointers to locally allocated pages.  Need freeing. */
-@@ -114,7 +112,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     /* iovec[] for writev(). */
-     iov = malloc((nr_pfns + 4) * sizeof(*iov));
- 
--    if ( !errors || !guest_data || !local_pages || !iov )
-+    if ( !guest_data || !local_pages || !iov )
+     for ( i = 0; i < nr_pfns; ++i )
      {
-         ERROR("Unable to allocate arrays for a batch of %u pages",
-               nr_pfns);
-@@ -271,7 +269,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     free(iov);
-     free(local_pages);
-     free(guest_data);
--    free(errors);
- 
-     return rc;
- }
++        if ( sr_is_known_page_type(types[i]) == false )
++        {
++            ERROR("Wrong type %#"PRIpfn" for pfn %#"PRIpfn, types[i], mfns[i]);
++            goto err;
++        }
++
+         switch ( types[i] )
+         {
+         case XEN_DOMCTL_PFINFO_BROKEN:
 
