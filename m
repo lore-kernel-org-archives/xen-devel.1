@@ -1,48 +1,49 @@
-Return-Path: <SRS0=zJBp=LZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=Zy1u=L2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDB24C11F67
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 22:12:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BF1FC11F67
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Jul 2021 01:07:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6536161400
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Jul 2021 22:12:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6536161400
+	by mail.kernel.org (Postfix) with ESMTPS id 0E5CE613ED
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Jul 2021 01:07:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E5CE613ED
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.149044.275493 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.149051.275508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lz4ug-0000lq-Bo; Thu, 01 Jul 2021 22:12:02 +0000
+	id 1lz7e9-0002bP-VI; Fri, 02 Jul 2021 01:07:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 149044.275493; Thu, 01 Jul 2021 22:12:02 +0000
+Received: by outflank-mailman (output) from mailman id 149051.275508; Fri, 02 Jul 2021 01:07:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lz4ug-0000lj-8g; Thu, 01 Jul 2021 22:12:02 +0000
-Received: by outflank-mailman (input) for mailman id 149044;
- Thu, 01 Jul 2021 22:12:00 +0000
+	id 1lz7e9-0002bH-P7; Fri, 02 Jul 2021 01:07:09 +0000
+Received: by outflank-mailman (input) for mailman id 149051;
+ Fri, 02 Jul 2021 01:07:09 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lz4ue-0000lZ-SY; Thu, 01 Jul 2021 22:12:00 +0000
+ id 1lz7e9-0002b7-4x; Fri, 02 Jul 2021 01:07:09 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lz4ue-0006jR-IQ; Thu, 01 Jul 2021 22:12:00 +0000
+ id 1lz7e8-0004ao-Tt; Fri, 02 Jul 2021 01:07:08 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1lz4ue-00047i-8k; Thu, 01 Jul 2021 22:12:00 +0000
+ id 1lz7e8-0001Il-Kt; Fri, 02 Jul 2021 01:07:08 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1lz4ue-0004L5-8J; Thu, 01 Jul 2021 22:12:00 +0000
+ id 1lz7e8-00088r-KN; Fri, 02 Jul 2021 01:07:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,28 +58,28 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=YF8sTuGrs37hcmO1B5NjG/UyDSgLfYwUWERAcDZkJ3U=; b=F/CppXG3yPjSpYP0PAk56TG+SM
-	s5Wp6/5nEJ15B3fW9Sxx0APmL3BQbV6yQ/oxyM30WqUtHLyHz/4w3RZdOjeTlROuQDtaA3DDkiWOl
-	Us9zjQh2FJuq8lWOyeYHoZyqvGsy1XPW9q+DbNWWY81fW6lk+UGT4ywGecJp66gRKdt0=;
+	bh=/kHQCQtIatzVct0oByhL8yCJaYtoAb4L1/GaW3l6IUw=; b=5V1RxqaL8HW0MpRFo+zhVHDFOE
+	02wYwNwHNt5172ohR0xA5PRDQahc7vydxZ33pl+vlOwUlAB7+1fKGWaywPFnrCliOQdbZ/Egkia8P
+	M0yzKl8qHV4Jacg0e3BDtKv5gFxtEwS/4x8LPC+tYAPXDjPluUrMS0iZ67/SvPutyE2o=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-163214-mainreport@xen.org>
+Message-ID: <osstest-163216-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 163214: regressions - FAIL
+Subject: [ovmf test] 163216: regressions - FAIL
 X-Osstest-Failures:
     ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
     ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
 X-Osstest-Versions-This:
-    ovmf=8697dc60cc28b2673aed4998fb6b21b9bf54a76d
+    ovmf=fea7901dba72eeac526f3ef12a4ad4c539622373
 X-Osstest-Versions-That:
     ovmf=c410ad4da4b7785170d3d42a3ba190c2caac6feb
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 01 Jul 2021 22:12:00 +0000
+Date: Fri, 02 Jul 2021 01:07:08 +0000
 
-flight 163214 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/163214/
+flight 163216 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/163216/
 
 Regressions :-(
 
@@ -88,13 +89,13 @@ including tests which could not be run:
  test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 162359
 
 version targeted for testing:
- ovmf                 8697dc60cc28b2673aed4998fb6b21b9bf54a76d
+ ovmf                 fea7901dba72eeac526f3ef12a4ad4c539622373
 baseline version:
  ovmf                 c410ad4da4b7785170d3d42a3ba190c2caac6feb
 
 Last test of basis   162359  2021-06-04 03:40:08 Z   27 days
-Failing since        162368  2021-06-04 15:42:59 Z   27 days   70 attempts
-Testing same since   163214  2021-07-01 17:42:29 Z    0 days    1 attempts
+Failing since        162368  2021-06-04 15:42:59 Z   27 days   71 attempts
+Testing same since   163216  2021-07-01 22:42:29 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
@@ -169,5 +170,5 @@ Test harness code can be found at
 
 Not pushing.
 
-(No revision log; it would be 3210 lines long.)
+(No revision log; it would be 3224 lines long.)
 
