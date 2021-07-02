@@ -2,48 +2,41 @@ Return-Path: <SRS0=Zy1u=L2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE0BDC07E95
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Jul 2021 18:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2836DC07E95
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Jul 2021 19:04:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8EC7C6140E
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Jul 2021 18:53:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8EC7C6140E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=m5p.com
+	by mail.kernel.org (Postfix) with ESMTPS id D742A61416
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Jul 2021 19:04:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D742A61416
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.149297.276035 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.149303.276058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lzOHg-00038f-VX; Fri, 02 Jul 2021 18:53:04 +0000
+	id 1lzOSA-0004t2-6n; Fri, 02 Jul 2021 19:03:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 149297.276035; Fri, 02 Jul 2021 18:53:04 +0000
+Received: by outflank-mailman (output) from mailman id 149303.276058; Fri, 02 Jul 2021 19:03:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lzOHg-00038Y-SW; Fri, 02 Jul 2021 18:53:04 +0000
-Received: by outflank-mailman (input) for mailman id 149297;
- Fri, 02 Jul 2021 18:53:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=aFP0=L2=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1lzOHf-00038S-1E
- for xen-devel@lists.xenproject.org; Fri, 02 Jul 2021 18:53:03 +0000
-Received: from mailhost.m5p.com (unknown [74.104.188.4])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b9a71bfe-db66-11eb-83c4-12813bfff9fa;
- Fri, 02 Jul 2021 18:53:01 +0000 (UTC)
-Received: from m5p.com (mailhost.m5p.com [IPv6:2001:470:1f07:15ff:0:0:0:f7])
- by mailhost.m5p.com (8.16.1/8.15.2) with ESMTPS id 162IqlBN003070
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Fri, 2 Jul 2021 14:52:53 -0400 (EDT) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.16.1/8.15.2/Submit) id 162Iqlv7003069;
- Fri, 2 Jul 2021 11:52:47 -0700 (PDT) (envelope-from ehem)
+	id 1lzOSA-0004sv-3n; Fri, 02 Jul 2021 19:03:54 +0000
+Received: by outflank-mailman (input) for mailman id 149303;
+ Fri, 02 Jul 2021 19:03:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=wENR=L2=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1lzOS9-0004b9-01
+ for xen-devel@lists.xenproject.org; Fri, 02 Jul 2021 19:03:53 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ee2ce74b-9f90-4eab-b1ff-80532c0c4121;
+ Fri, 02 Jul 2021 19:03:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,48 +48,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9a71bfe-db66-11eb-83c4-12813bfff9fa
-Date: Fri, 2 Jul 2021 11:52:47 -0700
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: Fabrice Fontaine <fontaine.fabrice@gmail.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] xen/Makefile: drop -Werror
-Message-ID: <YN9gf2vhyH7w7V1X@mattapan.m5p.com>
-References: <20210702170602.890817-1-fontaine.fabrice@gmail.com>
- <b920b793-734a-5f1f-6c4c-0d31ed27d01c@citrix.com>
- <CAPi7W81h=81ztVG6X0kh0+KEn9ryxAwXtK7-BWxonrXLJBZXaw@mail.gmail.com>
+X-Inumbo-ID: ee2ce74b-9f90-4eab-b1ff-80532c0c4121
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1625252631;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=gfmANs3MCnxiFwWReGm72wEovDSLU4AH2fTV/7XxIgU=;
+  b=Lq1K3KAox0l97aU1NuuBVTcFZhdMiX+Ak0kCTntpFADV8kc0+XY1yYA2
+   eejJQejnnxgIdonn/Yc8ABKN6FKS+Ip2a7weU4NoRzxRjXaEs7bXaEp8D
+   pWx7uBPPr7JkjahfXHm6AcT7ibaSYcTBlU3XIkKUKC+Msfy6O9BbDt6sX
+   w=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Y3L9KClQ1ZJnN9B06enohAJUu2Ta2Qkokk56xo83VZvvCU8ypoUZxh3VQZeCVgmIM1GFuuLzV/
+ EWgF2qO8KKmygTzDozzfUR51wsBm+eu6fqwWtSlqaQ3+FkjM3+1izAwHB7ioYUvitAJkULp6G8
+ JOr5OrOh7DaHg47dmDdzyxsQSrGxItvwXNJt6VnW0xz6/kWcdBeojyrl6Di2jil2CN8souhyWr
+ Xt14Q8QwAmTLPErsnxwktX+InRZOCcCUCjm1t7LTIdEQ2ieqBQfqx6a6BzHvyJ93Dzr0JksZ+N
+ Ki4=
+X-SBRS: 5.1
+X-MesageID: 47863089
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:CAGIEql2HENup4MFrxNEeSw2tFXpDfIk3DAbv31ZSRFFG/Fxl6
+ iV/cjztCWE7gr5N0tQ+uxoVJPufZq+z+8T3WByB8bBYOCOggLBR+sOgbcKqweQfxEWndQ86U
+ 4PScZD4aXLfD1Hsfo=
+X-IronPort-AV: E=Sophos;i="5.83,319,1616472000"; 
+   d="scan'208";a="47863089"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Olaf Hering <olaf@aepfle.de>
+Subject: [PATCH] tools/libxenguest: Fix migration's debug option
+Date: Fri, 2 Jul 2021 20:03:42 +0100
+Message-ID: <20210702190342.31319-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPi7W81h=81ztVG6X0kh0+KEn9ryxAwXtK7-BWxonrXLJBZXaw@mail.gmail.com>
+Content-Type: text/plain
 
-On Fri, Jul 02, 2021 at 07:51:55PM +0200, Fabrice Fontaine wrote:
-> 
-> I do agree that setting -Werror is generally perfectly valid for upstream.
-> However, for downstream packager, it is generally seen as an issue as
-> it will always raise unexepected build failures with older, newer, or
-> exotic toolchains, see
-> https://embeddedartistry.com/blog/2017/05/22/werror-is-not-your-friend.
-> It would be good to, at least, have an option to disable -Werror for
-> example through a XEN_DISABLE_WERROR.
+The code has gone through many refactors, but the first refactor was the one
+which broke it by inverting the check with respect to checkpointed streams.
 
-Two people don't make it a majority opinion, but if this was a meeting
-this opinion would get a second.
+Fixes: 7449fb36c6c8 ("migration/save: pass checkpointed_stream from libxl to libxc")
+Reported-by: Olaf Hering <olaf@aepfle.de>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Olaf Hering <olaf@aepfle.de>
 
-I don't know where everyone is on the spectrum, but I also strongly
-dislike -Werror yet do like -Wall and tend to get rid of warnings.
--Werror is good for continuous integration systems, not so great for
-releases or active development.
+`xl migrate --debug` might not be perfect, but this at least brings it back to
+mostly working.
 
--Werror kind of seems like Stack Ranking, good for use during brief
-periods, but poor for long term continuous use.
+I don't think dropping it is a sensible move.  In particular, it is invaluable
+for testing the logdirty infrastructure when migrating a memtest VM.
 
+If anyone has a clever idea to fix the grant problem, then we can.  It is
+after all a debug option, without any specific prescribed behaviour.
+---
+ tools/libs/guest/xg_sr_save.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 2ba7c3200cd5..f0e2bd048d37 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -752,7 +752,7 @@ static int send_domain_memory_live(struct xc_sr_context *ctx)
+     if ( rc )
+         goto out;
+ 
+-    if ( ctx->save.debug && ctx->stream_type != XC_STREAM_PLAIN )
++    if ( ctx->save.debug && ctx->stream_type == XC_STREAM_PLAIN )
+     {
+         rc = verify_frames(ctx);
+         if ( rc )
 -- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
-
+2.11.0
 
 
