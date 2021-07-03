@@ -2,46 +2,46 @@ Return-Path: <SRS0=xflx=L3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44B0FC07E97
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA9EBC07E99
 	for <xen-devel@archiver.kernel.org>; Sat,  3 Jul 2021 17:12:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0B1226193F
-	for <xen-devel@archiver.kernel.org>; Sat,  3 Jul 2021 17:12:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0B1226193F
+	by mail.kernel.org (Postfix) with ESMTPS id 8C36861930
+	for <xen-devel@archiver.kernel.org>; Sat,  3 Jul 2021 17:12:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8C36861930
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.149547.276598 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.149548.276609 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lzjBT-0000YQ-KW; Sat, 03 Jul 2021 17:12:03 +0000
+	id 1lzjBU-0000oa-UO; Sat, 03 Jul 2021 17:12:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 149547.276598; Sat, 03 Jul 2021 17:12:03 +0000
+Received: by outflank-mailman (output) from mailman id 149548.276609; Sat, 03 Jul 2021 17:12:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lzjBT-0000YI-Gt; Sat, 03 Jul 2021 17:12:03 +0000
-Received: by outflank-mailman (input) for mailman id 149547;
- Sat, 03 Jul 2021 17:12:02 +0000
+	id 1lzjBU-0000oT-Pc; Sat, 03 Jul 2021 17:12:04 +0000
+Received: by outflank-mailman (input) for mailman id 149548;
+ Sat, 03 Jul 2021 17:12:03 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lzjBS-0000Y7-9U
- for xen-devel@lists.xenproject.org; Sat, 03 Jul 2021 17:12:02 +0000
+ (envelope-from <julien@xen.org>) id 1lzjBT-0000YD-BV
+ for xen-devel@lists.xenproject.org; Sat, 03 Jul 2021 17:12:03 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lzjBQ-0007bO-Ff; Sat, 03 Jul 2021 17:12:00 +0000
+ id 1lzjBR-0007bT-Ta; Sat, 03 Jul 2021 17:12:01 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lzjBQ-0005vs-5R; Sat, 03 Jul 2021 17:12:00 +0000
+ id 1lzjBR-0005vs-KR; Sat, 03 Jul 2021 17:12:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,10 +54,10 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=vTIblyBJkpB3RsYgL5DJmQYV9pVCyJkl3ZpMr+Zl/bY=; b=qibpoE9J4RlwAnl6LmKai9Kq6R
-	HeBOO/oWwtwGxjM5OEv5/PgsxaIAB1vwYh4BJOjIQQhx5ilym+0MCFFpHmSPinch9Yy23nhrUvKGk
-	70xot3ergBj8VyVDZOoC3ol8DFsTyTBY77Ec4QLIePcq6Lz2npq60s5RNBkxa1BQSzLU=;
+	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	 bh=Mi7EgN/CRi27LYrSm9zQaxJ46g16tr2Wj55yCnIlKA4=; b=I/EuoQBYvNK1bKaRntBYRnGvh
+	FJ43TXmrBKZj4zbksjE7SIxxWCUKk6nfjSWCj0x0iJJ7YgMKjcCmrz8/L0gJwva1bxEltPCOYbypW
+	buNjjooGqQMKG6EXQ6nAueboG2EfwBVx6u/Sn0arGUPWI1///rBxo1zrPXvaKuBnFnhK0=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -67,46 +67,136 @@ Cc: julien@xen.org,
 	Ian Jackson <iwj@xenproject.org>,
 	Jan Beulich <jbeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 0/4] xen/arm: Properly disable M2P on Arm
-Date: Sat,  3 Jul 2021 18:11:48 +0100
-Message-Id: <20210703171152.15874-1-julien@xen.org>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v5 1/4] xen: XENMEM_exchange should only be used/compiled for arch supporting PV guest
+Date: Sat,  3 Jul 2021 18:11:49 +0100
+Message-Id: <20210703171152.15874-2-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210703171152.15874-1-julien@xen.org>
+References: <20210703171152.15874-1-julien@xen.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+XENMEM_exchange can only be used by PV guest but the check is well
+hidden in steal_page(). This is because paging_model_external() will
+return false only for PV domain.
 
-Arm never supported a M2P yet there are some helpers implemented to deal with
-the common code. However, the implementation of mfn_to_gmfn is completely
-bogus.
+To make clearer this is PV only, add a check at the beginning of the
+implementation.
 
-This series aims to properly disable the M2P on Arm.
+In a follow-up patch, mfn_to_gfn() will be completely removed for
+arch not supporting M2P as it is a call for trouble to use it.
+Take the opportunity to compile out the code if CONFIG_PV is not set.
 
-Cheers,
+Ideally, we would want to to move the hypercall implementation in
+arch/x86/pv/mm.c. But this is incredibly tangled.
 
-Julien Grall (4):
-  xen: XENMEM_exchange should only be used/compiled for arch supporting
-    PV guest
-  xen: arm: Stop returning a bogus GFN for the shared info
-  xen: arm: Remove mfn_to_gfn() macro
-  xen/mm: Provide dummy M2P-related helpers when the M2P is not
-    supported
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
- xen/arch/x86/Kconfig         |  1 +
- xen/arch/x86/domain.c        |  9 +++++++++
- xen/common/Kconfig           |  3 +++
- xen/common/domctl.c          | 10 +++++++---
- xen/common/memory.c          | 24 ++++++++++++------------
- xen/include/asm-arm/mm.h     | 12 ------------
- xen/include/asm-x86/domain.h |  3 +++
- xen/include/public/domctl.h  |  6 ++++++
- xen/include/xen/domain.h     |  7 +++++++
- xen/include/xen/mm.h         | 17 +++++++++++++++++
- 10 files changed, 65 insertions(+), 27 deletions(-)
+---
 
+Ideally we would want to move the hypercall implementation in
+arch/x86/pv/mm.c. But this is a bit messy. So for now just #ifdef it.
+
+Changes in v5:
+    - Removed the #ifdef CONFIG_X86 as they are not necessary anymore
+    - Used paging_mode_translate() rather than is_pv_domain()
+    - Reword the commit message to explain why the #ifdef rather than
+      implementing mfn_to_gfn() using a BUG_ON() or moving the code
+      to arch/x86/pv.
+
+Changes in v4:
+    - Patch added
+---
+ xen/common/memory.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index e07bd9a5ea4b..9bc78aae35db 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -522,6 +522,7 @@ static bool propagate_node(unsigned int xmf, unsigned int *memflags)
+ 
+ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+ {
++#ifdef CONFIG_PV
+     struct xen_memory_exchange exch;
+     PAGE_LIST_HEAD(in_chunk_list);
+     PAGE_LIST_HEAD(out_chunk_list);
+@@ -609,6 +610,13 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+         goto fail_early;
+     }
+ 
++    if ( paging_mode_translate(d) )
++    {
++        rc = -EOPNOTSUPP;
++        rcu_unlock_domain(d);
++        goto fail_early;
++    }
++
+     rc = xsm_memory_exchange(XSM_TARGET, d);
+     if ( rc )
+     {
+@@ -648,7 +656,6 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+ 
+             for ( k = 0; k < (1UL << exch.in.extent_order); k++ )
+             {
+-#ifdef CONFIG_X86
+                 p2m_type_t p2mt;
+ 
+                 /* Shared pages cannot be exchanged */
+@@ -659,14 +666,9 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+                     rc = -ENOMEM;
+                     goto fail; 
+                 }
+-#else /* !CONFIG_X86 */
+-                mfn = gfn_to_mfn(d, _gfn(gmfn + k));
+-#endif
+                 if ( unlikely(!mfn_valid(mfn)) )
+                 {
+-#ifdef CONFIG_X86
+                     put_gfn(d, gmfn + k);
+-#endif
+                     rc = -EINVAL;
+                     goto fail;
+                 }
+@@ -676,16 +678,12 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+                 rc = steal_page(d, page, MEMF_no_refcount);
+                 if ( unlikely(rc) )
+                 {
+-#ifdef CONFIG_X86
+                     put_gfn(d, gmfn + k);
+-#endif
+                     goto fail;
+                 }
+ 
+                 page_list_add(page, &in_chunk_list);
+-#ifdef CONFIG_X86
+                 put_gfn(d, gmfn + k);
+-#endif
+             }
+         }
+ 
+@@ -768,8 +766,7 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+             guest_physmap_add_page(d, _gfn(gpfn), mfn,
+                                    exch.out.extent_order);
+ 
+-            if ( !paging_mode_translate(d) &&
+-                 __copy_mfn_to_guest_offset(exch.out.extent_start,
++            if ( __copy_mfn_to_guest_offset(exch.out.extent_start,
+                                             (i << out_chunk_order) + j,
+                                             mfn) )
+                 rc = -EFAULT;
+@@ -815,6 +812,9 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+     if ( __copy_field_to_guest(arg, &exch, nr_exchanged) )
+         rc = -EFAULT;
+     return rc;
++#else /* !CONFIG_PV */
++    return -EOPNOTSUPP;
++#endif
+ }
+ 
+ int xenmem_add_to_physmap(struct domain *d, struct xen_add_to_physmap *xatp,
 -- 
 2.17.1
 
