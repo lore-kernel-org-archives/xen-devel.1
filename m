@@ -2,46 +2,46 @@ Return-Path: <SRS0=xflx=L3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1D0DC07E9B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46BABC47E48
 	for <xen-devel@archiver.kernel.org>; Sat,  3 Jul 2021 17:12:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B726F6192B
-	for <xen-devel@archiver.kernel.org>; Sat,  3 Jul 2021 17:12:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B726F6192B
+	by mail.kernel.org (Postfix) with ESMTPS id 08D0961930
+	for <xen-devel@archiver.kernel.org>; Sat,  3 Jul 2021 17:12:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08D0961930
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.149550.276628 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.149551.276641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lzjBW-0001DT-PM; Sat, 03 Jul 2021 17:12:06 +0000
+	id 1lzjBZ-0001eJ-0U; Sat, 03 Jul 2021 17:12:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 149550.276628; Sat, 03 Jul 2021 17:12:06 +0000
+Received: by outflank-mailman (output) from mailman id 149551.276641; Sat, 03 Jul 2021 17:12:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1lzjBW-0001Ae-H8; Sat, 03 Jul 2021 17:12:06 +0000
-Received: by outflank-mailman (input) for mailman id 149550;
- Sat, 03 Jul 2021 17:12:05 +0000
+	id 1lzjBY-0001e6-SB; Sat, 03 Jul 2021 17:12:08 +0000
+Received: by outflank-mailman (input) for mailman id 149551;
+ Sat, 03 Jul 2021 17:12:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1lzjBV-0000rQ-2j
- for xen-devel@lists.xenproject.org; Sat, 03 Jul 2021 17:12:05 +0000
+ (envelope-from <julien@xen.org>) id 1lzjBX-0001Wu-HV
+ for xen-devel@lists.xenproject.org; Sat, 03 Jul 2021 17:12:07 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lzjBT-0007c2-FM; Sat, 03 Jul 2021 17:12:03 +0000
+ id 1lzjBW-0007ce-5b; Sat, 03 Jul 2021 17:12:06 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1lzjBT-0005vs-6h; Sat, 03 Jul 2021 17:12:03 +0000
+ id 1lzjBV-0005vs-TO; Sat, 03 Jul 2021 17:12:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,9 +55,9 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	 bh=2pkpvyGryxTS4uBplOORxJnDBZlpgWoUp7jdUVlTkUk=; b=PsTwUivc5yu22Oe9pxT9BLzvy
-	k0g6AirkHbuRzdlKfdYTloWhxO6D+Mx9hrsSY0OdqAOQJByi7WjKJAvRVmFYtflr3dt1GM1NNhBWQ
-	g0DUfCflztgPKFN9OGedj1wtuzDkfaS9zl78dzASKACE17rKh08kOZXcKjG6CG6CbSM3k=;
+	 bh=aIWtWhcuPOkNdbKN38vfGnv+lqziWSfdZNPE+Udjlj8=; b=Vf9Vm+yQSPcRJdNGq9MMtxp0c
+	OwQStU5yFNCZGF9m4yO8Pu6lx/vbibpnPWFR9QnVeKuAkEiUFDn6XVxdISUM3N4mXJ4NHvMMt04dy
+	sE4oKpjcoW3XIFTKfFmtGH+k0h9mh0kWm9Zj3Ax4nVGFt6J66u2ZlfhKRuclXqXTypGnc=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -68,198 +68,114 @@ Cc: julien@xen.org,
 	Wei Liu <wl@xen.org>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 2/4] xen: arm: Stop returning a bogus GFN for the shared info
-Date: Sat,  3 Jul 2021 18:11:50 +0100
-Message-Id: <20210703171152.15874-3-julien@xen.org>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v5 4/4] xen/mm: Provide dummy M2P-related helpers when the M2P is not supported
+Date: Sat,  3 Jul 2021 18:11:52 +0100
+Message-Id: <20210703171152.15874-5-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210703171152.15874-1-julien@xen.org>
 References: <20210703171152.15874-1-julien@xen.org>
 
 From: Julien Grall <julien.grall@arm.com>
 
-While Arm never had a M2P, the implementation of mfn_to_gfn() is pretty
-bogus as we directly return the MFN passed in parameter.
+At the moment, Arm is providing a dummy implementation for the M2P
+helpers used in common code. However, they are quite isolated and could
+be used by other architecture in the future. So move the helpers
+necessary for compilation in xen/mm.h and gate them with a new config
+!HAS_M2P. The other M2P related helpers are removed.
 
-The last use of mfn_to_gfn() on Arm is in getdomaininfo(). It looks
-like this is mostly used for mapping the P2M Of PV guest. Furthermore,
-the structure on Arm doesn't seem to contain a lot of useful
-information. Therefore it is unclear whether we want to allow the
-toolstack to map it.
+Take the opportunity to encode that CONFIG_MEM_SHARING requires
+the M2P. It is done in the header rather than the Kconfig because
+the option is not defined in the common Kconfig.
 
-As there is a high change that RISC-V will not implement an M2P,
-provide a new wrapper that will by default return an invalid GFN and
-move the code to find the GFN in an x86 specific helper.
-
-If in the future we want to map the shared info, then we should
-consider to do it using the acquire hypercall.
-
-Note that as INVALID_GFN is unsigned long, we can't return directly
-because the value would differ between 64-bit and 32-bit. Instead,
-a fixed value needs to be introduced.
-
-While the fixed value could be shared with other field storing a
-GFN, we unfortunately use a mix of type (unsigned long, uint64_t)
-for exposing it externally. So to avoid any misuse, it is better to
-define a fixed value for just the shared_info_gfn field.
-
-Signed-off-by Julien Grall <julien.grall@arm.com>
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 
 ---
-    I am not comfortable with introduce a generic invalid GFN fixed
-    value because we don't use a common type. I also didn't get any
-    feedback on whether it would be acceptable to focus on one type.
-
-    So the fixed value has not been changed. I think this is acceptable
-    because this a DOMCTL and therefore not stable. If someone still
-    disagree, then please provide concrete steps how to solve
-    the mixing of type.
+    INVALID_M2P_ENTRY needs to be defined because it is a parameter
+    of set_gpfn_from_mfn(). The alternative would be to not
+    evaluate the parameter 'pfn' (e.g. leave the helper as a macro)
+    however this is a bit risky.
 
     Changes in v5:
-        - This was originally "xen: Introduce HAS_M2P config and use to
-        protect mfn_to_gmfn call".
-        - Rebase to the latest Xen.
-        - Rename the helper to arch_shared_info_gfn()
-        - The default stub now return INVALID_GFN rather than using the
-        M2P
+        - Check that MEM_SHARING is not enabled without the M2P.
 
     Changes in v4:
-        - The IOMMU code doesn't use the M2P anymore, so this can be
-        dropped.
-        - Reword the commit message
-        - Fix rebase conflict
+        - The tags were dropped as the previous version was sent a long
+        time ago.
 
     Changes in v3:
-        - Move the BUG_ON() in domain_shared_info_gfn()
-        - Use a fixed value when the field shared_info_frame is not
-        supported.
-        - Add an ASSERT_UNREACHABLE in iommu_hwdom_init + move printk
-        within the #ifdef.
+        - Add Stefano's reviewed-by
+        - Add George's acked-by
 
     Changes in v2:
-        - Add a warning in public headers
-        - Constify local variable in domain_shared_info_gfn
-        - Invert the naming (_d / d) in domain_shared_info_gfn
-        - Use -EOPNOTSUPP rather than -ENOSYS
-        - Rework how the memory_exchange hypercall is removed from Arm
+        - Patch added
 ---
- xen/arch/x86/domain.c        |  9 +++++++++
- xen/common/Kconfig           |  3 +++
- xen/common/domctl.c          | 10 +++++++---
- xen/include/asm-x86/domain.h |  3 +++
- xen/include/public/domctl.h  |  6 ++++++
- xen/include/xen/domain.h     |  7 +++++++
- 6 files changed, 35 insertions(+), 3 deletions(-)
+ xen/arch/x86/Kconfig     |  1 +
+ xen/include/asm-arm/mm.h | 11 -----------
+ xen/include/xen/mm.h     | 17 +++++++++++++++++
+ 3 files changed, 18 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index ef1812dc1402..b3f216cd6f51 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2553,6 +2553,15 @@ void domain_pause_for_debugger(void)
- #endif
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 9b164db64187..a083d8194680 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -16,6 +16,7 @@ config X86
+ 	select HAS_FAST_MULTIPLY
+ 	select HAS_IOPORTS
+ 	select HAS_KEXEC
++	select HAS_M2P
+ 	select HAS_NS16550
+ 	select HAS_PASSTHROUGH
+ 	select HAS_PCI
+diff --git a/xen/include/asm-arm/mm.h b/xen/include/asm-arm/mm.h
+index 07c24654a0b6..beff43786bda 100644
+--- a/xen/include/asm-arm/mm.h
++++ b/xen/include/asm-arm/mm.h
+@@ -318,17 +318,6 @@ static inline void *page_to_virt(const struct page_info *pg)
+ struct page_info *get_page_from_gva(struct vcpu *v, vaddr_t va,
+                                     unsigned long flags);
+ 
+-/*
+- * Arm does not have an M2P, but common code expects a handful of
+- * M2P-related defines and functions. Provide dummy versions of these.
+- */
+-#define INVALID_M2P_ENTRY        (~0UL)
+-#define SHARED_M2P_ENTRY         (~0UL - 1UL)
+-#define SHARED_M2P(_e)           ((_e) == SHARED_M2P_ENTRY)
+-
+-/* We don't have a M2P on Arm */
+-#define set_gpfn_from_mfn(mfn, pfn) do { (void) (mfn), (void)(pfn); } while (0)
+-
+ /* Arch-specific portion of memory_op hypercall. */
+ long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 667f9dac83a4..b98a1a7f423f 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -612,4 +612,21 @@ static inline void put_page_alloc_ref(struct page_info *page)
+     }
  }
  
-+gfn_t arch_shared_info_gfn(const struct domain *d)
-+{
-+    gfn_t gfn = mfn_to_gfn(d, _mfn(__virt_to_mfn(d->shared_info)));
++/*
++ * Dummy implementation of M2P-related helpers for common code when
++ * the architecture doesn't have an M2P.
++ */
++#ifndef CONFIG_HAS_M2P
 +
-+    BUG_ON(SHARED_M2P(gfn_x(gfn)));
-+
-+    return gfn;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/common/Kconfig b/xen/common/Kconfig
-index 0ddd18e11af3..cd5b89f2f02e 100644
---- a/xen/common/Kconfig
-+++ b/xen/common/Kconfig
-@@ -64,6 +64,9 @@ config MEM_ACCESS
- 	  Framework to configure memory access types for guests and receive
- 	  related events in userspace.
- 
-+config HAS_M2P
-+	bool
-+
- config NEEDS_LIBELF
- 	bool
- 
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 12d6144d2896..834a2183fda1 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -68,6 +68,7 @@ void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *info)
-     u64 cpu_time = 0;
-     int flags = XEN_DOMINF_blocked;
-     struct vcpu_runstate_info runstate;
-+    gfn_t shared_info_frame;
- 
-     info->domain = d->domain_id;
-     info->max_vcpu_id = XEN_INVALID_MAX_VCPU_ID;
-@@ -111,9 +112,12 @@ void getdomaininfo(struct domain *d, struct xen_domctl_getdomaininfo *info)
-     info->outstanding_pages = d->outstanding_pages;
-     info->shr_pages         = atomic_read(&d->shr_pages);
-     info->paged_pages       = atomic_read(&d->paged_pages);
--    info->shared_info_frame =
--        gfn_x(mfn_to_gfn(d, _mfn(virt_to_mfn(d->shared_info))));
--    BUG_ON(SHARED_M2P(info->shared_info_frame));
-+
-+    shared_info_frame = arch_shared_info_gfn(d);
-+    if ( gfn_eq(shared_info_frame, INVALID_GFN) )
-+        info->shared_info_frame = XEN_INVALID_SHARED_INFO_FRAME;
-+    else
-+        info->shared_info_frame = gfn_x(shared_info_frame);
- 
-     info->cpupool = cpupool_get_id(d);
- 
-diff --git a/xen/include/asm-x86/domain.h b/xen/include/asm-x86/domain.h
-index 92d54de0b9a1..912a545c93f6 100644
---- a/xen/include/asm-x86/domain.h
-+++ b/xen/include/asm-x86/domain.h
-@@ -756,6 +756,9 @@ static inline void pv_inject_sw_interrupt(unsigned int vector)
-                       : is_pv_32bit_domain(d) ? PV32_VM_ASSIST_MASK \
-                                               : PV64_VM_ASSIST_MASK)
- 
-+gfn_t arch_shared_info_gfn(const struct domain *d);
-+#define arch_shared_info_gfn arch_shared_info_gfn
-+
- #endif /* __ASM_DOMAIN_H__ */
- 
- /*
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 4dbf107785c3..02a2bfa969ec 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -141,6 +141,12 @@ struct xen_domctl_getdomaininfo {
-     uint64_aligned_t outstanding_pages;
-     uint64_aligned_t shr_pages;
-     uint64_aligned_t paged_pages;
-+#define XEN_INVALID_SHARED_INFO_FRAME (~(uint64_t)0)
-+    /*
-+     * GFN of shared_info struct. Some architectures (e.g Arm) may not
-+     * provide a mappable address in the field. In that case, the field
-+     * will be set to XEN_INVALID_SHARED_INFO_FRAME.
-+     */
-     uint64_aligned_t shared_info_frame; /* GMFN of shared_info struct */
-     uint64_aligned_t cpu_time;
-     uint32_t nr_online_vcpus;    /* Number of VCPUs currently online. */
-diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
-index 1708c369642e..d8044b7936ae 100644
---- a/xen/include/xen/domain.h
-+++ b/xen/include/xen/domain.h
-@@ -133,4 +133,11 @@ static inline void vnuma_destroy(struct vnuma_info *vnuma) { ASSERT(!vnuma); }
- 
- extern bool vmtrace_available;
- 
-+#ifndef arch_shared_info_gfn
-+static inline gfn_t arch_shared_info_gfn(const struct domain *d)
-+{
-+    return INVALID_GFN;
-+}
++#ifdef CONFIG_MEM_SHARING
++# error "Memory sharing depends on the M2P"
 +#endif
 +
- #endif /* __XEN_DOMAIN_H__ */
++#define INVALID_M2P_ENTRY        (~0UL)
++#define SHARED_M2P(_e)           ((void)(_e), false)
++
++static inline void set_gpfn_from_mfn(unsigned long mfn, unsigned long pfn) {}
++
++#endif
++
+ #endif /* __XEN_MM_H__ */
 -- 
 2.17.1
 
