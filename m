@@ -7,44 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF279C07E9E
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 10:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65BB0C07E99
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 10:55:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B09D761159
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 10:55:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B09D761159
+	by mail.kernel.org (Postfix) with ESMTPS id 34EAE6135B
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 10:55:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 34EAE6135B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.150102.277632 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.150103.277636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0MGK-0005j5-Eq; Mon, 05 Jul 2021 10:55:40 +0000
+	id 1m0MGK-0005og-Uh; Mon, 05 Jul 2021 10:55:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 150102.277632; Mon, 05 Jul 2021 10:55:40 +0000
+Received: by outflank-mailman (output) from mailman id 150103.277636; Mon, 05 Jul 2021 10:55:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0MGK-0005ip-BE; Mon, 05 Jul 2021 10:55:40 +0000
-Received: by outflank-mailman (input) for mailman id 150102;
- Mon, 05 Jul 2021 10:55:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m0MGK-0005no-Nd; Mon, 05 Jul 2021 10:55:40 +0000
+Received: by outflank-mailman (input) for mailman id 150103;
+ Mon, 05 Jul 2021 10:55:39 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jU53=L5=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
- id 1m0MGI-0004Tv-BN
- for xen-devel@lists.xenproject.org; Mon, 05 Jul 2021 10:55:38 +0000
+ id 1m0MGJ-0003rB-Cq
+ for xen-devel@lists.xenproject.org; Mon, 05 Jul 2021 10:55:39 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 84a67786-dd7f-11eb-8443-12813bfff9fa;
- Mon, 05 Jul 2021 10:55:32 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id ef3380bf-6247-4c8c-9f9d-87525b803ccc;
+ Mon, 05 Jul 2021 10:55:25 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DFDDA1042;
- Mon,  5 Jul 2021 03:55:31 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2FE7B13D5;
+ Mon,  5 Jul 2021 03:55:25 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.197.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2729F3F5A1;
- Mon,  5 Jul 2021 03:55:29 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 488983F5A1;
+ Mon,  5 Jul 2021 03:55:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,228 +55,379 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84a67786-dd7f-11eb-8443-12813bfff9fa
+X-Inumbo-ID: ef3380bf-6247-4c8c-9f9d-87525b803ccc
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 8/9] docs: hypercalls sphinx skeleton for generated html
-Date: Mon,  5 Jul 2021 11:51:02 +0100
-Message-Id: <20210705105103.14509-9-luca.fancellu@arm.com>
+	Wei Liu <wl@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 5/9] docs: add checks to configure for sphinx and doxygen
+Date: Mon,  5 Jul 2021 11:50:59 +0100
+Message-Id: <20210705105103.14509-6-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210705105103.14509-1-luca.fancellu@arm.com>
 References: <20210705105103.14509-1-luca.fancellu@arm.com>
 
-Create a skeleton for the documentation about hypercalls.
-At this stage the documentation can be created only for one
-architecture at a time.
+Add checks in the configure files to see if the system
+is capable of generating the sphinx html docs using
+doxygen and sphinx-breathe tools.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-v7 changes:
-- modify the commit message
-v6 changes:
-- Now every platform has the same sections in .rst files
----
- .gitignore                             |  1 +
- docs/Makefile                          |  4 ++++
- docs/hypercall-interfaces/arm32.rst    | 32 ++++++++++++++++++++++++++
- docs/hypercall-interfaces/arm64.rst    | 32 ++++++++++++++++++++++++++
- docs/hypercall-interfaces/index.rst.in |  7 ++++++
- docs/hypercall-interfaces/x86_64.rst   | 32 ++++++++++++++++++++++++++
- docs/index.rst                         |  8 +++++++
- 7 files changed, 116 insertions(+)
- create mode 100644 docs/hypercall-interfaces/arm32.rst
- create mode 100644 docs/hypercall-interfaces/arm64.rst
- create mode 100644 docs/hypercall-interfaces/index.rst.in
- create mode 100644 docs/hypercall-interfaces/x86_64.rst
+ config/Docs.mk.in |   2 +
+ docs/configure    | 258 ++++++++++++++++++++++++++++++++++++++++++++++
+ docs/configure.ac |  15 +++
+ 3 files changed, 275 insertions(+)
 
-diff --git a/.gitignore b/.gitignore
-index ef0b0ed101..7543452b66 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -64,6 +64,7 @@ docs/xen.doxyfile
- docs/xen.doxyfile.tmp
- docs/xen-doxygen/doxygen_include.h
- docs/xen-doxygen/doxygen_include.h.tmp
-+docs/hypercall-interfaces/index.rst
- extras/mini-os*
- install/*
- stubdom/*-minios-config.mk
-diff --git a/docs/Makefile b/docs/Makefile
-index c0699a2f1b..870d8f6c9b 100644
---- a/docs/Makefile
-+++ b/docs/Makefile
-@@ -61,6 +61,9 @@ build: html txt pdf man-pages figs
- sphinx-html: $(DOXY_DEPS) $(DOXY_LIST_SOURCES)
- ifneq ($(SPHINXBUILD),no)
- 	$(DOXYGEN) xen.doxyfile
-+	@echo "Generating hypercall-interfaces/index.rst"
-+	@sed -e "s,@XEN_TARGET_ARCH@,$(XEN_TARGET_ARCH),g" \
-+		hypercall-interfaces/index.rst.in > hypercall-interfaces/index.rst
- 	XEN_ROOT=$(realpath $(XEN_ROOT)) DOXYGEN_OUTPUT=$(DOXYGEN_OUTPUT) \
- 		$(SPHINXBUILD) -b html . sphinx/html
- else
-@@ -109,6 +112,7 @@ clean: clean-man-pages
- 	rm -f xen.doxyfile.tmp
- 	rm -f xen-doxygen/doxygen_include.h
- 	rm -f xen-doxygen/doxygen_include.h.tmp
-+	rm -f hypercall-interfaces/index.rst
- 
- .PHONY: distclean
- distclean: clean
-diff --git a/docs/hypercall-interfaces/arm32.rst b/docs/hypercall-interfaces/arm32.rst
-new file mode 100644
-index 0000000000..6762d9fc7c
---- /dev/null
-+++ b/docs/hypercall-interfaces/arm32.rst
-@@ -0,0 +1,32 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Hypercall Interfaces - arm32
-+============================
-+
-+Starting points
-+---------------
-+.. toctree::
-+   :maxdepth: 2
-+
-+
-+
-+Functions
-+---------
-+
-+
-+Structs
-+-------
-+
-+
-+Enums and sets of #defines
-+--------------------------
-+
-+
-+Typedefs
-+--------
-+
-+
-+Enum values and individual #defines
-+-----------------------------------
-+
-+
-diff --git a/docs/hypercall-interfaces/arm64.rst b/docs/hypercall-interfaces/arm64.rst
-new file mode 100644
-index 0000000000..5e701a2adc
---- /dev/null
-+++ b/docs/hypercall-interfaces/arm64.rst
-@@ -0,0 +1,32 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Hypercall Interfaces - arm64
-+============================
-+
-+Starting points
-+---------------
-+.. toctree::
-+   :maxdepth: 2
-+
-+
-+
-+Functions
-+---------
-+
-+
-+Structs
-+-------
-+
-+
-+Enums and sets of #defines
-+--------------------------
-+
-+
-+Typedefs
-+--------
-+
-+
-+Enum values and individual #defines
-+-----------------------------------
-+
-+
-diff --git a/docs/hypercall-interfaces/index.rst.in b/docs/hypercall-interfaces/index.rst.in
-new file mode 100644
-index 0000000000..e4dcc5db8d
---- /dev/null
-+++ b/docs/hypercall-interfaces/index.rst.in
-@@ -0,0 +1,7 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Hypercall Interfaces
-+====================
-+
-+.. toctree::
-+   @XEN_TARGET_ARCH@
-diff --git a/docs/hypercall-interfaces/x86_64.rst b/docs/hypercall-interfaces/x86_64.rst
-new file mode 100644
-index 0000000000..59e948900c
---- /dev/null
-+++ b/docs/hypercall-interfaces/x86_64.rst
-@@ -0,0 +1,32 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Hypercall Interfaces - x86_64
-+=============================
-+
-+Starting points
-+---------------
-+.. toctree::
-+   :maxdepth: 2
-+
-+
-+
-+Functions
-+---------
-+
-+
-+Structs
-+-------
-+
-+
-+Enums and sets of #defines
-+--------------------------
-+
-+
-+Typedefs
-+--------
-+
-+
-+Enum values and individual #defines
-+-----------------------------------
-+
-+
-diff --git a/docs/index.rst b/docs/index.rst
-index b75487a05d..52226a42d8 100644
---- a/docs/index.rst
-+++ b/docs/index.rst
-@@ -53,6 +53,14 @@ kind of development environment.
-    hypervisor-guide/index
+diff --git a/config/Docs.mk.in b/config/Docs.mk.in
+index e76e5cd5ff..dfd4a02838 100644
+--- a/config/Docs.mk.in
++++ b/config/Docs.mk.in
+@@ -7,3 +7,5 @@ POD2HTML            := @POD2HTML@
+ POD2TEXT            := @POD2TEXT@
+ PANDOC              := @PANDOC@
+ PERL                := @PERL@
++SPHINXBUILD         := @SPHINXBUILD@
++DOXYGEN             := @DOXYGEN@
+diff --git a/docs/configure b/docs/configure
+index 569bd4c2ff..0ebf046a79 100755
+--- a/docs/configure
++++ b/docs/configure
+@@ -588,6 +588,8 @@ ac_unique_file="misc/xen-command-line.pandoc"
+ ac_subst_vars='LTLIBOBJS
+ LIBOBJS
+ PERL
++DOXYGEN
++SPHINXBUILD
+ PANDOC
+ POD2TEXT
+ POD2HTML
+@@ -673,6 +675,7 @@ POD2MAN
+ POD2HTML
+ POD2TEXT
+ PANDOC
++DOXYGEN
+ PERL'
  
  
-+Hypercall Interfaces documentation
-+----------------------------------
+@@ -1318,6 +1321,7 @@ Some influential environment variables:
+   POD2HTML    Path to pod2html tool
+   POD2TEXT    Path to pod2text tool
+   PANDOC      Path to pandoc tool
++  DOXYGEN     Path to doxygen tool
+   PERL        Path to Perl parser
+ 
+ Use these variables to override the choices made by `configure' or to help
+@@ -1800,6 +1804,7 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
+ 
+ 
+ 
 +
-+.. toctree::
-+   :maxdepth: 2
+ case "$host_os" in
+ *freebsd*) XENSTORED_KVA=/dev/xen/xenstored ;;
+ *) XENSTORED_KVA=/proc/xen/xsd_kva ;;
+@@ -1812,6 +1817,53 @@ case "$host_os" in
+ esac
+ 
+ 
++# ===========================================================================
++#     https://www.gnu.org/software/autoconf-archive/ax_python_module.html
++# ===========================================================================
++#
++# SYNOPSIS
++#
++#   AX_PYTHON_MODULE(modname[, fatal, python])
++#
++# DESCRIPTION
++#
++#   Checks for Python module.
++#
++#   If fatal is non-empty then absence of a module will trigger an error.
++#   The third parameter can either be "python" for Python 2 or "python3" for
++#   Python 3; defaults to Python 3.
++#
++# LICENSE
++#
++#   Copyright (c) 2008 Andrew Collier
++#
++#   Copying and distribution of this file, with or without modification, are
++#   permitted in any medium without royalty provided the copyright notice
++#   and this notice are preserved. This file is offered as-is, without any
++#   warranty.
 +
-+   hypercall-interfaces/index
++#serial 9
 +
- Miscellanea
- -----------
++# This is what autoupdate's m4 run will expand.  It fires
++# the warning (with _au_warn_XXX), outputs it into the
++# updated configure.ac (with AC_DIAGNOSE), and then outputs
++# the replacement expansion.
++
++
++# This is an auxiliary macro that is also run when
++# autoupdate runs m4.  It simply calls m4_warning, but
++# we need a wrapper so that each warning is emitted only
++# once.  We break the quoting in m4_warning's argument in
++# order to expand this macro's arguments, not AU_DEFUN's.
++
++
++# Finally, this is the expansion that is picked up by
++# autoconf.  It tells the user to run autoupdate, and
++# then outputs the replacement expansion.  We do not care
++# about autoupdate's warning because that contains
++# information on what to do *after* running autoupdate.
++
++
+ 
+ 
+ test "x$prefix" = "xNONE" && prefix=$ac_default_prefix
+@@ -2232,6 +2284,212 @@ $as_echo "$as_me: WARNING: pandoc is not available so some documentation won't b
+ fi
+ 
+ 
++# If sphinx is installed, make sure to have also the dependencies to build
++# Sphinx documentation.
++for ac_prog in sphinx-build
++do
++  # Extract the first word of "$ac_prog", so it can be a program name with args.
++set dummy $ac_prog; ac_word=$2
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
++$as_echo_n "checking for $ac_word... " >&6; }
++if ${ac_cv_prog_SPHINXBUILD+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  if test -n "$SPHINXBUILD"; then
++  ac_cv_prog_SPHINXBUILD="$SPHINXBUILD" # Let the user override the test.
++else
++as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
++for as_dir in $PATH
++do
++  IFS=$as_save_IFS
++  test -z "$as_dir" && as_dir=.
++    for ac_exec_ext in '' $ac_executable_extensions; do
++  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
++    ac_cv_prog_SPHINXBUILD="$ac_prog"
++    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
++    break 2
++  fi
++done
++  done
++IFS=$as_save_IFS
++
++fi
++fi
++SPHINXBUILD=$ac_cv_prog_SPHINXBUILD
++if test -n "$SPHINXBUILD"; then
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $SPHINXBUILD" >&5
++$as_echo "$SPHINXBUILD" >&6; }
++else
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++fi
++
++
++  test -n "$SPHINXBUILD" && break
++done
++test -n "$SPHINXBUILD" || SPHINXBUILD="no"
++
++    if test "x$SPHINXBUILD" = xno; then :
++  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: sphinx-build is not available so sphinx documentation \
++won't be built" >&5
++$as_echo "$as_me: WARNING: sphinx-build is not available so sphinx documentation \
++won't be built" >&2;}
++else
++
++            # Extract the first word of "sphinx-build", so it can be a program name with args.
++set dummy sphinx-build; ac_word=$2
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
++$as_echo_n "checking for $ac_word... " >&6; }
++if ${ac_cv_path_SPHINXBUILD+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  case $SPHINXBUILD in
++  [\\/]* | ?:[\\/]*)
++  ac_cv_path_SPHINXBUILD="$SPHINXBUILD" # Let the user override the test with a path.
++  ;;
++  *)
++  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
++for as_dir in $PATH
++do
++  IFS=$as_save_IFS
++  test -z "$as_dir" && as_dir=.
++    for ac_exec_ext in '' $ac_executable_extensions; do
++  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
++    ac_cv_path_SPHINXBUILD="$as_dir/$ac_word$ac_exec_ext"
++    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
++    break 2
++  fi
++done
++  done
++IFS=$as_save_IFS
++
++  ;;
++esac
++fi
++SPHINXBUILD=$ac_cv_path_SPHINXBUILD
++if test -n "$SPHINXBUILD"; then
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $SPHINXBUILD" >&5
++$as_echo "$SPHINXBUILD" >&6; }
++else
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++fi
++
++
++
++
++    # Extract the first word of "doxygen", so it can be a program name with args.
++set dummy doxygen; ac_word=$2
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
++$as_echo_n "checking for $ac_word... " >&6; }
++if ${ac_cv_path_DOXYGEN+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  case $DOXYGEN in
++  [\\/]* | ?:[\\/]*)
++  ac_cv_path_DOXYGEN="$DOXYGEN" # Let the user override the test with a path.
++  ;;
++  *)
++  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
++for as_dir in $PATH
++do
++  IFS=$as_save_IFS
++  test -z "$as_dir" && as_dir=.
++    for ac_exec_ext in '' $ac_executable_extensions; do
++  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
++    ac_cv_path_DOXYGEN="$as_dir/$ac_word$ac_exec_ext"
++    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
++    break 2
++  fi
++done
++  done
++IFS=$as_save_IFS
++
++  ;;
++esac
++fi
++DOXYGEN=$ac_cv_path_DOXYGEN
++if test -n "$DOXYGEN"; then
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $DOXYGEN" >&5
++$as_echo "$DOXYGEN" >&6; }
++else
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++fi
++
++
++    if ! test -x "$ac_cv_path_DOXYGEN"; then :
++
++        as_fn_error $? "doxygen is needed" "$LINENO" 5
++
++fi
++
++
++    if test -z $PYTHON;
++    then
++        if test -z "";
++        then
++            PYTHON="python3"
++        else
++            PYTHON=""
++        fi
++    fi
++    PYTHON_NAME=`basename $PYTHON`
++    { $as_echo "$as_me:${as_lineno-$LINENO}: checking $PYTHON_NAME module: breathe" >&5
++$as_echo_n "checking $PYTHON_NAME module: breathe... " >&6; }
++    $PYTHON -c "import breathe" 2>/dev/null
++    if test $? -eq 0;
++    then
++        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
++$as_echo "yes" >&6; }
++        eval HAVE_PYMOD_BREATHE=yes
++    else
++        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++        eval HAVE_PYMOD_BREATHE=no
++        #
++        if test -n "yes"
++        then
++            as_fn_error $? "failed to find required module breathe" "$LINENO" 5
++            exit 1
++        fi
++    fi
++
++
++    if test -z $PYTHON;
++    then
++        if test -z "";
++        then
++            PYTHON="python3"
++        else
++            PYTHON=""
++        fi
++    fi
++    PYTHON_NAME=`basename $PYTHON`
++    { $as_echo "$as_me:${as_lineno-$LINENO}: checking $PYTHON_NAME module: sphinx_rtd_theme" >&5
++$as_echo_n "checking $PYTHON_NAME module: sphinx_rtd_theme... " >&6; }
++    $PYTHON -c "import sphinx_rtd_theme" 2>/dev/null
++    if test $? -eq 0;
++    then
++        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
++$as_echo "yes" >&6; }
++        eval HAVE_PYMOD_SPHINX_RTD_THEME=yes
++    else
++        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++        eval HAVE_PYMOD_SPHINX_RTD_THEME=no
++        #
++        if test -n "yes"
++        then
++            as_fn_error $? "failed to find required module sphinx_rtd_theme" "$LINENO" 5
++            exit 1
++        fi
++    fi
++
++
++
++fi
++
+ 
+ # Extract the first word of "perl", so it can be a program name with args.
+ set dummy perl; ac_word=$2
+diff --git a/docs/configure.ac b/docs/configure.ac
+index c2e5edd3b3..a2ff55f30a 100644
+--- a/docs/configure.ac
++++ b/docs/configure.ac
+@@ -20,6 +20,7 @@ m4_include([../m4/docs_tool.m4])
+ m4_include([../m4/path_or_fail.m4])
+ m4_include([../m4/features.m4])
+ m4_include([../m4/paths.m4])
++m4_include([../m4/ax_python_module.m4])
+ 
+ AX_XEN_EXPAND_CONFIG()
+ 
+@@ -29,6 +30,20 @@ AX_DOCS_TOOL_PROG([POD2HTML], [pod2html])
+ AX_DOCS_TOOL_PROG([POD2TEXT], [pod2text])
+ AX_DOCS_TOOL_PROG([PANDOC], [pandoc])
+ 
++# If sphinx is installed, make sure to have also the dependencies to build
++# Sphinx documentation.
++AC_CHECK_PROGS([SPHINXBUILD], [sphinx-build], [no])
++    AS_IF([test "x$SPHINXBUILD" = xno],
++        [AC_MSG_WARN(sphinx-build is not available so sphinx documentation \
++won't be built)],
++        [
++            AC_PATH_PROG([SPHINXBUILD], [sphinx-build])
++            AX_DOCS_TOOL_REQ_PROG([DOXYGEN], [doxygen])
++            AX_PYTHON_MODULE([breathe],[yes])
++            AX_PYTHON_MODULE([sphinx_rtd_theme], [yes])
++        ]
++    )
++
+ AC_ARG_VAR([PERL], [Path to Perl parser])
+ AX_PATH_PROG_OR_FAIL([PERL], [perl])
  
 -- 
 2.17.1
