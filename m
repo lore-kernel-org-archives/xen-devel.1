@@ -2,46 +2,48 @@ Return-Path: <SRS0=1i6W=L5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D66E2C07E99
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 16:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD65AC07E99
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 17:27:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D8AD61964
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 16:57:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D8AD61964
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 675876196C
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 17:27:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 675876196C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.150554.278347 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.150561.278369 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0Rto-0000Of-O8; Mon, 05 Jul 2021 16:56:48 +0000
+	id 1m0SMn-0003qk-BB; Mon, 05 Jul 2021 17:26:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 150554.278347; Mon, 05 Jul 2021 16:56:48 +0000
+Received: by outflank-mailman (output) from mailman id 150561.278369; Mon, 05 Jul 2021 17:26:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0Rto-0000OY-K7; Mon, 05 Jul 2021 16:56:48 +0000
-Received: by outflank-mailman (input) for mailman id 150554;
- Mon, 05 Jul 2021 16:56:48 +0000
+	id 1m0SMn-0003qd-80; Mon, 05 Jul 2021 17:26:45 +0000
+Received: by outflank-mailman (input) for mailman id 150561;
+ Mon, 05 Jul 2021 17:26:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=N9Vt=L5=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m0Rtn-0000OS-V8
- for xen-devel@lists.xenproject.org; Mon, 05 Jul 2021 16:56:48 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [85.215.255.23])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SjzX=L5=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1m0SMl-0003ps-CZ
+ for xen-devel@lists.xenproject.org; Mon, 05 Jul 2021 17:26:43 +0000
+Received: from mail-lf1-x12a.google.com (unknown [2a00:1450:4864:20::12a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 00e83910-cf0f-40df-8119-3c5889dd5ed3;
- Mon, 05 Jul 2021 16:56:46 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx65GuaNMk
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 5 Jul 2021 18:56:36 +0200 (CEST)
+ id 5f2e1ffc-5ace-4d59-96f2-4531e3f29c86;
+ Mon, 05 Jul 2021 17:26:42 +0000 (UTC)
+Received: by mail-lf1-x12a.google.com with SMTP id a18so33585615lfs.10
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Jul 2021 10:26:42 -0700 (PDT)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id b13sm1143729lfo.104.2021.07.05.10.26.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Jul 2021 10:26:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,280 +55,204 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 00e83910-cf0f-40df-8119-3c5889dd5ed3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625504197;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
-    bh=Mg3ZxD/weT27RJx0X7iaS0El9eK7YQOQCRWos8cAcXc=;
-    b=dEzj3Qtvn666vHRbUzM6KBVRBmvb4LZFZslO7nzJiwQTzKmpGBDftAhkL6JizinN1O
-    au8onwDtDsCbF8RS37jF2PJ8yutw3SQ2ewM1TCATLGfE2xtl5k7vuciQt4exjA5BEmpL
-    tqdvNWGjlE5n0q42j0mPMlQeBZ+X0Avrff0RMgneJUqCkdPjlhyxiqSiMF68NvTFEDYP
-    xAd498ZjZXfJH/E586bept3BF9J23hpSwaT9UYE83eYjgi4TscfCOtWn1pS1jpOCMJiR
-    vC8QwZ/W6ArXLARpnVJfj7Pd5zU8NDhiLJQv7aJVJtCLSag9KoLaSXKRhevvcK+HfnA9
-    j1LQ==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgs3rVb2Qcstn6hLmi/A5ONQi+eEunNNoWD5g0T8"
-X-RZG-CLASS-ID: mo00
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Olaf Hering <olaf@aepfle.de>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3] tools: unify page type checking in save/restore
-Date: Mon,  5 Jul 2021 18:56:33 +0200
-Message-Id: <20210705165633.26077-1-olaf@aepfle.de>
-X-Mailer: git-send-email 2.26.2
+X-Inumbo-ID: 5f2e1ffc-5ace-4d59-96f2-4531e3f29c86
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=30pHL+0bsWVhDKjKuKXQtWBdB5MCQSS442KAY8eU9k8=;
+        b=S3XELwdSwBe0ZEeLLizZz9u9gMYx9q9DPKgGtgNOG+ydPzPDxmGjm7iLmgjleUIm3d
+         1CYPAPqnwEJY+Qpm1cnxrHUSkItl4WBHVdpXuW+r8n5NeAlUujl3NqKnqg3eqiDPp2/O
+         1MfFRUOb28TWCFpvvCFPL0ZKz2sirIjRALNLiP0FJR34Jwp6nxBtuLmkI336Y2UvtAn4
+         gu504J/SF0fHiUhOQN0/B4DAtM5vfuS3ORd95zW881rPSFH2mFY0kV5oNoFoesjAikdv
+         vNEc1i6OhXu6jfY2hQ4ayPDq8fC7kfSTFtw+mpkyMOml/0CJg34Zy5crx2yNWwL1hMNr
+         IS4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=30pHL+0bsWVhDKjKuKXQtWBdB5MCQSS442KAY8eU9k8=;
+        b=dt24brq/NCweq1NygL70ZNGaYvBviVc86eIWqgJLTgYzoOQREl0nJd0ywoteX37G6I
+         MXZyVh3akLpQAj+oC72o401AXgVr6XLbXEVwz33W4g2oTB+a+SCyXBoe0+Inb4G/i/LM
+         ZISrWBQ9cG3/a+Ltp5L+Fv6VLoHHXszMW+DV4ngUzCAZUc94OWu7oLgAT++xoI5Ig0tS
+         pnTa14KVuh6Ft0KaJM1y5WLHNrQHeDGtd9vvoDKs3DcCgvOg6YQxR4BGQJqU8JQqanfC
+         KKxbFqCgZgx3fkyoOUoyRloYP5ZRMcum2y65BFyABwo1tgo6/NST43pKv622VG4ucSHK
+         ghcQ==
+X-Gm-Message-State: AOAM531ZPzV1XNhi9sy0i6dkv0dqCVvmeaRESPqb6QVNfzSVP7VZhwVb
+	BsVv3o0e0CMUn/JB8Xs8jCU=
+X-Google-Smtp-Source: ABdhPJyMN06TuL1GS7sqrs+SclXfuNnKvAc4ih3mLWE3CDAqh+l0biduwjPqvko8VtsX486RNr6mNA==
+X-Received: by 2002:ac2:5986:: with SMTP id w6mr11190537lfn.392.1625506001276;
+        Mon, 05 Jul 2021 10:26:41 -0700 (PDT)
+Subject: Re: [PATCH] xen/arm: bootfdt: Always sort memory banks
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <1623699267-9475-1-git-send-email-olekstysh@gmail.com>
+ <47cbf077-8681-7ac4-04e2-f31e1fa4c04f@xen.org>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <fb1526f2-d377-771f-7824-817891d883be@gmail.com>
+Date: Mon, 5 Jul 2021 20:26:40 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <47cbf077-8681-7ac4-04e2-f31e1fa4c04f@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Users of xc_get_pfn_type_batch may want to sanity check the data
-returned by Xen. Add helpers for this purpose:
 
-is_known_page_type verifies the type returned by Xen on the saving
-side, or the incoming type for a page on the restoring side, is known
-by the save/restore code.
+On 30.06.21 11:56, Julien Grall wrote:
+> Hi Oleksandr,
 
-page_type_to_populate decides if a page with the given known type
-needs to be populated on the restoring side.
+Hi Julien
 
-page_type_has_stream_data decides if a page with the given known type
-needs to be send, or if the stream on the restoring side contains a
-data page.
 
-While touching the code, simplify the logic check in populate_pfns.
+Sorry for the late response.
 
-No change in behavior intended.
 
-Signed-off-by: Olaf Hering <olaf@aepfle.de>
+>
+> On 14/06/2021 20:34, Oleksandr Tyshchenko wrote:
+>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>
+>> At the moment, Xen expects the memory banks to be ordered.
+>> Unfortunately, there may be a case when updated by firmware
+>> device tree contains unordered banks. This means Xen will panic
+>> when setting xenheap mappings for the subsequent bank with start
+>> address being less than xenheap_mfn_start (start address of
+>> the first bank).
+>
+> Please clarify in the commit message that the behavior you are 
+> describing is for arm64. For arm32, there is only one heap region.
+>
+> That said, I think the sorting is fine to be done in common code.
 
-v03:
-- fold all three helpers into a single patch
-v02:
-- rename xc_is_known_page_type to sr_is_known_page_type
-- move from ctrl/xc_private.h to saverestore/common.h (jgross)
----
- tools/libs/saverestore/common.h  | 86 ++++++++++++++++++++++++++++++++
- tools/libs/saverestore/restore.c | 38 +++-----------
- tools/libs/saverestore/save.c    | 18 +++----
- 3 files changed, 99 insertions(+), 43 deletions(-)
+ok
 
-compile-tested only
 
-diff --git a/tools/libs/saverestore/common.h b/tools/libs/saverestore/common.h
-index ca2eb47a4f..283d3c7213 100644
---- a/tools/libs/saverestore/common.h
-+++ b/tools/libs/saverestore/common.h
-@@ -467,6 +467,92 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- /* Handle a STATIC_DATA_END record. */
- int handle_static_data_end(struct xc_sr_context *ctx);
- 
-+/* Sanitiy check for types returned by Xen */
-+static inline bool is_known_page_type(uint32_t type)
-+{
-+    switch ( type )
-+    {
-+    case XEN_DOMCTL_PFINFO_NOTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L1TAB:
-+    case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L2TAB:
-+    case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L3TAB:
-+    case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L4TAB:
-+    case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_XTAB:
-+    case XEN_DOMCTL_PFINFO_XALLOC: /* Synthetic type in Xen 4.2 - 4.5 */
-+    case XEN_DOMCTL_PFINFO_BROKEN:
-+        return true;
-+    default:
-+        break;
-+    }
-+    return false;
-+}
-+
-+static inline bool page_type_to_populate(uint32_t type)
-+{
-+    switch ( type )
-+    {
-+    case XEN_DOMCTL_PFINFO_NOTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L1TAB:
-+    case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L2TAB:
-+    case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L3TAB:
-+    case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L4TAB:
-+    case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_XALLOC:
-+        return true;
-+
-+    case XEN_DOMCTL_PFINFO_XTAB:
-+    case XEN_DOMCTL_PFINFO_BROKEN:
-+    default:
-+        break;
-+    }
-+    return false;
-+}
-+
-+static inline bool page_type_has_stream_data(uint32_t type)
-+{
-+    switch ( type )
-+    {
-+    case XEN_DOMCTL_PFINFO_NOTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L1TAB:
-+    case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L2TAB:
-+    case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L3TAB:
-+    case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+
-+    case XEN_DOMCTL_PFINFO_L4TAB:
-+    case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
-+        return true;
-+
-+    case XEN_DOMCTL_PFINFO_XTAB:
-+    case XEN_DOMCTL_PFINFO_BROKEN:
-+    case XEN_DOMCTL_PFINFO_XALLOC:
-+    default:
-+        break;
-+    }
-+
-+    return false;
-+}
- #endif
- /*
-  * Local variables:
-diff --git a/tools/libs/saverestore/restore.c b/tools/libs/saverestore/restore.c
-index be259a1c6b..23ed359e4e 100644
---- a/tools/libs/saverestore/restore.c
-+++ b/tools/libs/saverestore/restore.c
-@@ -152,9 +152,7 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- 
-     for ( i = 0; i < count; ++i )
-     {
--        if ( (!types || (types &&
--                         (types[i] != XEN_DOMCTL_PFINFO_XTAB &&
--                          types[i] != XEN_DOMCTL_PFINFO_BROKEN))) &&
-+        if ( (!types || page_type_to_populate(types[i])) &&
-              !pfn_is_populated(ctx, original_pfns[i]) )
-         {
-             rc = pfn_set_populated(ctx, original_pfns[i]);
-@@ -233,25 +231,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
-     {
-         ctx->restore.ops.set_page_type(ctx, pfns[i], types[i]);
- 
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_NOTAB:
--
--        case XEN_DOMCTL_PFINFO_L1TAB:
--        case XEN_DOMCTL_PFINFO_L1TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L2TAB:
--        case XEN_DOMCTL_PFINFO_L2TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L3TAB:
--        case XEN_DOMCTL_PFINFO_L3TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
--        case XEN_DOMCTL_PFINFO_L4TAB:
--        case XEN_DOMCTL_PFINFO_L4TAB | XEN_DOMCTL_PFINFO_LPINTAB:
--
-+        if ( page_type_has_stream_data(types[i]) )
-             mfns[nr_pages++] = ctx->restore.ops.pfn_to_gfn(ctx, pfns[i]);
--            break;
--        }
-     }
- 
-     /* Nothing to do? */
-@@ -271,14 +252,8 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
- 
-     for ( i = 0, j = 0; i < count; ++i )
-     {
--        switch ( types[i] )
--        {
--        case XEN_DOMCTL_PFINFO_XTAB:
--        case XEN_DOMCTL_PFINFO_BROKEN:
--        case XEN_DOMCTL_PFINFO_XALLOC:
--            /* No page data to deal with. */
-+        if ( !page_type_has_stream_data(types[i]) )
-             continue;
--        }
- 
-         if ( map_errs[j] )
-         {
-@@ -406,15 +381,14 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-         }
- 
-         type = (pages->pfn[i] & PAGE_DATA_TYPE_MASK) >> 32;
--        if ( ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) >= 5) &&
--             ((type >> XEN_DOMCTL_PFINFO_LTAB_SHIFT) <= 8) )
-+        if ( !is_known_page_type(type) )
-         {
--            ERROR("Invalid type %#"PRIx32" for pfn %#"PRIpfn" (index %u)",
-+            ERROR("Unknown type %#"PRIx32" for pfn %#"PRIpfn" (index %u)",
-                   type, pfn, i);
-             goto err;
-         }
- 
--        if ( type < XEN_DOMCTL_PFINFO_BROKEN )
-+        if ( page_type_has_stream_data(type) )
-             /* NOTAB and all L1 through L4 tables (including pinned) should
-              * have a page worth of data in the record. */
-             pages_of_data++;
-diff --git a/tools/libs/saverestore/save.c b/tools/libs/saverestore/save.c
-index 9540c93cde..fe3a7b3994 100644
---- a/tools/libs/saverestore/save.c
-+++ b/tools/libs/saverestore/save.c
-@@ -147,14 +147,15 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     for ( i = 0; i < nr_pfns; ++i )
-     {
--        switch ( types[i] )
-+        if ( !is_known_page_type(types[i]) )
-         {
--        case XEN_DOMCTL_PFINFO_BROKEN:
--        case XEN_DOMCTL_PFINFO_XALLOC:
--        case XEN_DOMCTL_PFINFO_XTAB:
--            continue;
-+            ERROR("Unknown type %#"PRIpfn" for pfn %#"PRIpfn, types[i], mfns[i]);
-+            goto err;
-         }
- 
-+        if ( !page_type_has_stream_data(types[i]) )
-+            continue;
-+
-         mfns[nr_pages++] = mfns[i];
-     }
- 
-@@ -171,13 +172,8 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-         for ( i = 0, p = 0; i < nr_pfns; ++i )
-         {
--            switch ( types[i] )
--            {
--            case XEN_DOMCTL_PFINFO_BROKEN:
--            case XEN_DOMCTL_PFINFO_XALLOC:
--            case XEN_DOMCTL_PFINFO_XTAB:
-+            if ( !page_type_has_stream_data(types[i]) )
-                 continue;
--            }
- 
-             if ( errors[p] )
-             {
+>
+>
+>>
+>> As there is no clear requirment regarding ordering in the device
+>
+> s/requirment/requirement/
+
+ok
+
+
+>
+>> tree, update code to be able to deal with by sorting memory
+>> banks if we have more than one.
+>>
+>> Suggested-by: Julien Grall <jgrall@amazon.com>
+>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>> ---
+>>
+>> The proposed commit fixes the booting Xen on R-Car M3-W+ SoC:
+>>
+>> Starting kernel ...
+>> - UART enabled -
+>> - Boot CPU booting -
+>> - Current EL 00000008 -
+>> - Initialize CPU -
+>> - Turning on paging -
+>> - Zero BSS -
+>> - Ready -
+>> (XEN) Checking for initrd in /chosen
+>> (XEN) Initrd 0000000084000040-0000000085dbc32a
+>> (XEN) RAM: 0000000480000000 - 00000004ffffffff
+>> (XEN) RAM: 0000000048000000 - 00000000bfffffff
+>> (XEN) RAM: 0000000600000000 - 00000006ffffffff
+>>
+>> ...
+>>
+>> (XEN) ****************************************
+>> (XEN) Panic on CPU 0:
+>> (XEN) cannot add xenheap mapping at 48000 below heap start 480000
+>> (XEN) ****************************************
+>> (XEN)
+>> (XEN) Reboot in five seconds...
+>> ---
+>>   xen/arch/arm/bootfdt.c | 22 ++++++++++++++++++++++
+>>   1 file changed, 22 insertions(+)
+>>
+>> diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
+>> index dcff512..3ef63b3 100644
+>> --- a/xen/arch/arm/bootfdt.c
+>> +++ b/xen/arch/arm/bootfdt.c
+>> @@ -13,6 +13,7 @@
+>>   #include <xen/init.h>
+>>   #include <xen/device_tree.h>
+>>   #include <xen/libfdt/libfdt.h>
+>> +#include <xen/sort.h>
+>>   #include <xsm/xsm.h>
+>>   #include <asm/setup.h>
+>>   @@ -395,6 +396,21 @@ static void __init early_print_info(void)
+>>       printk("\n");
+>>   }
+>>   +/* This function assumes that memory regions are not overlapped */
+>> +static int __init cmp_memory_node(const void *key, const void *elem)
+>> +{
+>> +    const struct membank *handler0 = key;
+>> +    const struct membank *handler1 = elem;
+>> +
+>> +    if ( handler0->start < handler1->start )
+>> +        return -1;
+>> +
+>> +    if ( handler0->start >= (handler1->start + handler1->size) )
+>> +        return 1;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>>   /**
+>>    * boot_fdt_info - initialize bootinfo from a DTB
+>>    * @fdt: flattened device tree binary
+>> @@ -412,6 +428,12 @@ size_t __init boot_fdt_info(const void *fdt, 
+>> paddr_t paddr)
+>>       add_boot_module(BOOTMOD_FDT, paddr, fdt_totalsize(fdt), false);
+>>         device_tree_for_each_node((void *)fdt, 0, early_scan_node, 
+>> NULL);
+>> +    if ( bootinfo.mem.nr_banks > 1 )
+>
+> NIT: sort() is already be able to deal with one element array. So this 
+> checks looks a bit pointless.
+
+Agree, will drop.
+
+
+>
+>
+>> +    {
+>> +        /* Some DT may describe unordered banks, sort them in 
+>> ascending order */
+>
+> It would be good to explain in the comment *why* this is necessary. 
+> Some along the line:
+>
+> On Arm64, setup_xenheap_pages() expects to be called with the lowest 
+> bank in memory first. There is no requirement that the DT will provide 
+> the banks sorted in ascending order. So sort them through.
+
+ok
+
+
+>
+>
+>> +        sort(bootinfo.mem.bank, bootinfo.mem.nr_banks, sizeof(struct 
+>> membank),
+>> +             cmp_memory_node, NULL);
+>> +    }
+>>       early_print_info();
+>>         return fdt_totalsize(fdt);
+>>
+>
+> Cheers,
+>
+-- 
+Regards,
+
+Oleksandr Tyshchenko
+
 
