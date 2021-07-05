@@ -2,45 +2,41 @@ Return-Path: <SRS0=1i6W=L5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1872AC07E99
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 19:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECA79C07E99
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 19:10:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BDE96613B1
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 19:07:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDE96613B1
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id A99A26197E
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Jul 2021 19:10:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A99A26197E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.150622.278471 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.150629.278482 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0Tvj-00019x-3I; Mon, 05 Jul 2021 19:06:55 +0000
+	id 1m0TzQ-0002aF-NK; Mon, 05 Jul 2021 19:10:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 150622.278471; Mon, 05 Jul 2021 19:06:55 +0000
+Received: by outflank-mailman (output) from mailman id 150629.278482; Mon, 05 Jul 2021 19:10:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0Tvj-00019q-05; Mon, 05 Jul 2021 19:06:55 +0000
-Received: by outflank-mailman (input) for mailman id 150622;
- Mon, 05 Jul 2021 19:06:53 +0000
+	id 1m0TzQ-0002a8-Ja; Mon, 05 Jul 2021 19:10:44 +0000
+Received: by outflank-mailman (input) for mailman id 150629;
+ Mon, 05 Jul 2021 19:10:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=N9Vt=L5=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m0Tvh-00019k-Gs
- for xen-devel@lists.xenproject.org; Mon, 05 Jul 2021 19:06:53 +0000
-Received: from mo4-p00-ob.smtp.rzone.de (unknown [81.169.146.220])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=+Qt1=L5=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
+ id 1m0TzP-0002a2-PS
+ for xen-devel@lists.xenproject.org; Mon, 05 Jul 2021 19:10:43 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 953bef00-21d0-4b05-aed6-1de50551859f;
- Mon, 05 Jul 2021 19:06:52 +0000 (UTC)
-Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx65J6iNcl
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 5 Jul 2021 21:06:44 +0200 (CEST)
+ id 4ea574e3-8392-4818-a441-850b651e4db7;
+ Mon, 05 Jul 2021 19:10:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,75 +48,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 953bef00-21d0-4b05-aed6-1de50551859f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1625512004;
-    s=strato-dkim-0002; d=aepfle.de;
-    h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
-    From:Subject:Sender;
-    bh=3V0s+CgM00lZP6hSmgj1I+NGcCO1PIACnD28fTuMRE8=;
-    b=MNq0b71+s15MBXSJV63QX6GhsHQD0E321pEuOmV4NR1iQMei9OlkSVUhdEZ5xUn/3C
-    PlUHCCut/TL7KWchEmERWDJWlP9aO27TwpUALIclOw//WLqxgIwawOLrsK20RH2E5fgJ
-    wSqc7YB6FgIssMCMgeBnsFi4JIOkrmUIGcO7FPZMMLSCN3rvGOCk5F5qeQb0MFUC4T5Q
-    ZZC2PakUpf6ONwWzewSs6oYz6FqaO1Xb76A2pWhqzf9wUutajHkw+S8IQdcOwlPlps0L
-    xtC0rj6bZIpUrcRQNFLP4oTExTeiuqMKc2zOBU5OC41CdbJC6jf/lz2Vr79M5OXiM+48
-    hpAg==
-Authentication-Results: strato.com;
-    dkim=none
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QLpd5ylWvMDX3y/OuD5rXVisF+Ax6FOE3sSy9BcWAcR/hQoAs9MGk67vg1baqX"
-X-RZG-CLASS-ID: mo00
-Date: Mon, 5 Jul 2021 21:06:37 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: <xen-devel@lists.xenproject.org>, Ian Jackson <iwj@xenproject.org>, Wei
- Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v20210701 12/40] tools: unify type checking for data
- pfns in migration stream
-Message-ID: <20210705210637.1948b8da.olaf@aepfle.de>
-In-Reply-To: <cafc7026-102d-f569-78a2-9a960e05d8f3@citrix.com>
-References: <20210701095635.15648-1-olaf@aepfle.de>
-	<20210701095635.15648-13-olaf@aepfle.de>
-	<e5f00724-61fe-fed3-35c4-35df837a49c2@citrix.com>
-	<20210705135350.GA31821@aepfle.de>
-	<cafc7026-102d-f569-78a2-9a960e05d8f3@citrix.com>
-X-Mailer: Claws Mail 2021.07.03 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+X-Inumbo-ID: 4ea574e3-8392-4818-a441-850b651e4db7
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1625512242;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=4MTJp3+BUiLfrjjfU0zgrxNxIPZ07dJrFxqFfOLj24U=;
+  b=La2fCLox/IHo3fdprraRMBzyqaEs3WstQVG10oCYeFal1SMRcWxqfO7P
+   S7dHodkeEiVr7O8m2hC+c23bcXaM0GsVh5X1Jcc9M8lr4g0XlJwxloVBF
+   RPicAQckP95gr42r+nbEruThwu/MCadFX7XyxNnHXJBtYzHcmsj0m0YMM
+   I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: BMLIWobxaEocJpqili7zkblWKvGp6h/m6ObylDrILcuHxasMPTSWclBPTWWGI5A0N3UgTD5Ty/
+ 9Zu953rrWuVhbM1s47rT/MIqCsmoCt3+o6YfUhQFfLWB8HRLQ1ycvpe3JuidlzX8pLYLhVwn6r
+ nxqMZbnUNf88Jdn9F7PX8C+KWYV3WONI9Wnlo6h8pS0t6UDMFc+eX/wXLUntzoUvTQnOyKjUEZ
+ K/W9kAhGOYohdJao0k+bIXAXjEjmotXEcZ6NC28lU1VMrS7B9FjY417uSxu8++3wQNjvIFlx4q
+ 0Dk=
+X-SBRS: 5.1
+X-MesageID: 49224525
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:IGQXMaFJKDNqzxVKpLqE/seALOsnbusQ8zAXP0AYc3Jom62j5q
+ eTdZsgtSMc5Ax8ZJhCo6HlBEDjewK+yXcd2+B4Vt3OYOCPghrMEGgI1+rfKlPbdBEWjtQtt5
+ tdTw==
+X-IronPort-AV: E=Sophos;i="5.83,326,1616472000"; 
+   d="scan'208";a="49224525"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+	<marmarek@invisiblethingslab.com>, Olaf Hering <olaf@aepfle.de>, "Juergen
+ Gross" <jgross@suse.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
+	<wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 0/5] tools/migration: Py3 fixes, and page type helpers
+Date: Mon, 5 Jul 2021 20:10:22 +0100
+Message-ID: <20210705191027.15107-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/peiMtHwhJ_sW4AKXCzshXnL";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+Content-Type: text/plain
 
---Sig_/peiMtHwhJ_sW4AKXCzshXnL
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+FAOD, this is what I'm planning to push, unless anyone shouts urgently.
 
-Am Mon, 5 Jul 2021 19:54:21 +0100
-schrieb Andrew Cooper <andrew.cooper3@citrix.com>:
+Olaf Hering (5):
+  tools/python: handle libxl__physmap_info.name properly in convert-legacy-stream
+  tools/python: fix Python3.4 TypeError in format string
+  tools/migration: unify known page type checking
+  tools/migration: unify type checking for data pfns in the VM
+  tools/migration: unify type checking for data pfns in migration stream
 
-> But it is...
+ tools/libs/guest/xg_sr_common.h            | 85 ++++++++++++++++++++++++++++++
+ tools/libs/guest/xg_sr_restore.c           | 38 +++----------
+ tools/libs/guest/xg_sr_save.c              | 18 +++----
+ tools/python/scripts/convert-legacy-stream |  8 +--
+ 4 files changed, 102 insertions(+), 47 deletions(-)
 
-It was not handled in an earlier variant of the patch. Meanwhile the origin=
-al behavior is restored with the current variant.
+-- 
+2.11.0
 
-Olaf
-
---Sig_/peiMtHwhJ_sW4AKXCzshXnL
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAmDjWD0ACgkQ86SN7mm1
-DoC/Dw//RL3tIKKLnsVp38r2L/f2iAGmv5N1CcQ6l8EQpXT3cCW3+idbcQ36lN8i
-V7svUPTtD3HV1TMA8r6VrrIij0xVsGY08VwGL/DFETdi9T1SXwpi2DIOsrM0QNoi
-bT8nWLQy+P4koJqItk7e5O1G7k7hatpS8Nzt4uTvRbBVmGlQs5J0uOzG1XgJwqTB
-icjMPL+cy3TdbgQHCUBcwzgGqu1Fok/4N9vA5SG98H6TyVnKI1Z77gYZruMTCml2
-WIS55ni+Cb9znLg658x8WihS1WgQy9nPHoarAGuga40l85od/G9riV+99Hp8NrqE
-PX0Aw1ueWqV5aCoCjrT0mgrm+ebh0h4AxHH8EACjYoVvD8BFzfGsxuoOW3up+ffU
-kfhIAqrolw0GzvQwEfpujLDQNOy6SkoMSe72zIukKBfxMvUE6Y0BL+JVgSYth+mF
-vI0KoVz80getZqTEGlgJAOdCpZYAvpakrTqLzmPdZj6XBzSKAUUjlCoT0FyE9HTI
-CsEOnyKDEIoi/0fjLCzujtx8df48gHqWMSjYyIy1AKxeJplBSIejzLN9OVVN+ySM
-pz5QqzOyYnuUnNsAv/REsrh6BplG8T80GmNcregQMwtjBfVYfvex7fLqhYGD5DLh
-g8bYVyRl3YVmqkKnc7Y6AKB6+O/2Ncy7NpYr497iou83DFmvUFU=
-=V++G
------END PGP SIGNATURE-----
-
---Sig_/peiMtHwhJ_sW4AKXCzshXnL--
 
