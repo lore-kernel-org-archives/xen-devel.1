@@ -2,42 +2,50 @@ Return-Path: <SRS0=FDQh=L6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E926C11F6A
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 11:24:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFAA3C07E96
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 11:43:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3ADBA61E1A
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 11:24:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3ADBA61E1A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 73AD161F62
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 11:43:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 73AD161F62
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.151119.279325 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.151139.279346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0jB3-0005H1-IM; Tue, 06 Jul 2021 11:23:45 +0000
+	id 1m0jU3-0000Ae-Gl; Tue, 06 Jul 2021 11:43:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 151119.279325; Tue, 06 Jul 2021 11:23:45 +0000
+Received: by outflank-mailman (output) from mailman id 151139.279346; Tue, 06 Jul 2021 11:43:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0jB3-0005Gu-FB; Tue, 06 Jul 2021 11:23:45 +0000
-Received: by outflank-mailman (input) for mailman id 151119;
- Tue, 06 Jul 2021 11:23:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m0jU3-0000AX-Do; Tue, 06 Jul 2021 11:43:23 +0000
+Received: by outflank-mailman (input) for mailman id 151139;
+ Tue, 06 Jul 2021 11:43:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+rBn=L6=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1m0jB1-00050S-ST
- for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 11:23:43 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9e879cf2-de4c-11eb-848b-12813bfff9fa;
- Tue, 06 Jul 2021 11:23:42 +0000 (UTC)
+ <SRS0=Q4CK=L6=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1m0jU2-0000AQ-Bn
+ for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 11:43:22 +0000
+Received: from mail-wm1-x334.google.com (unknown [2a00:1450:4864:20::334])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4fdbce40-64e2-442b-b210-3467cea16f59;
+ Tue, 06 Jul 2021 11:43:21 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ q18-20020a1ce9120000b02901f259f3a250so2036407wmc.2
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Jul 2021 04:43:21 -0700 (PDT)
+Received: from ?IPv6:2a00:23c5:5785:9a01:8ded:51e8:71ae:2d44?
+ ([2a00:23c5:5785:9a01:8ded:51e8:71ae:2d44])
+ by smtp.gmail.com with ESMTPSA id h14sm18478762wro.32.2021.07.06.04.43.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Jul 2021 04:43:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,123 +57,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e879cf2-de4c-11eb-848b-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1625570622;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=mG6RSUJd/P4kPROIxzI66p2WXgDfEpS2fP5XlHKOE1U=;
-  b=BizdhoPSfN2h+IGrDCvyCiV6TLdXC63kSkwLUlggWM169g6BBl3zJZdg
-   RXvYJgxKEXti4cenSsHVEdwUCT0Y4hYII0er7oO88yIwxq0wn1Hm80fUf
-   nXj7+y8xXvV7/rL7bsqCzDIULJvuZI09inuEESmRL9rt096g13HWY+1xf
-   A=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: cJG1nD6OlySdVDO7OU4ZcDYtinLX1HmYx2Sdn+YbdnWe6ytqItuFdPSiiC1oXplhmHHUsfIT+J
- nEQXt27PAMAXSnIyXAPeif3PyZ17bLnm4G+33DbO7HJD7Q7A0z2qEpcOXKH4e6Wj7ejmGIVje0
- FIi3tIrTdS02SeDmwAfPaYbSKXoXHL0OvMBcRue3GIXjRCPWise7o0RgyPEFRHpRyrWyx9xk9S
- 211G5EjGjgm4CotTN3GM+Z0g0ckgFyNr32Ei69yX6Oj1QmVKUpQVusBDavHp2tYxw/KGiFoeQt
- KbY=
-X-SBRS: 5.1
-X-MesageID: 47339752
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:lf5To6jEoRhZK+xUoMKfhC8VmXBQXt4ji2hC6mlwRA09TySZ//
- rOoB17726NtN9/YgBCpTntAsa9qDbnhPpICOoqTM6ftWvdyQmVxehZhOOIqVCNJ8S9zJ876U
- 4JSdkZNDSaNzhHZKjBjjVQa+xQpeW6zA==
-X-IronPort-AV: E=Sophos;i="5.83,328,1616472000"; 
-   d="scan'208";a="47339752"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>,
-	Jan Beulich <JBeulich@suse.com>, Olaf Hering <olaf@aepfle.de>
-Subject: [PATCH 1/2] tools/migration: Fix iovec handling in send_checkpoint_dirty_pfn_list()
-Date: Tue, 6 Jul 2021 12:23:31 +0100
-Message-ID: <20210706112332.31753-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20210706112332.31753-1-andrew.cooper3@citrix.com>
-References: <20210706112332.31753-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: 4fdbce40-64e2-442b-b210-3467cea16f59
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=9RHEiyp7VvAXpOO84jbvH6uqtnFQPgtG9Yetjb51KW8=;
+        b=lmL7IzUhmP1i7fTCBJEno71okFu6k+r4ms2C+GYjKd6c1Ry15VRiTKDC4gxfT1ruaC
+         77wFJLzrRbg2mGhUwInmI780s28W2SGusQFnpArpvHPudU+vy6hk1AsUdIzD9M0pdMgb
+         w2Wk9Pa7bE2zN/vILC3WhZSdfnxn5qUBFVwrv2yYsvpZBExZmviRYoR+ZwVQusG70qyX
+         FltXrhccf8XGF5uqDgs3170vtGnVi4vnRgAKTX83XoTai/+9B51G7mBRAUrjJWijPGk/
+         cjfnAT8AyBkOP28BWM7UajoySCu57VEfKJFv6ABndw463K3MtjG0aALHRkhA1xnU0jMJ
+         ua3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:reply-to:subject:to:cc:references
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=9RHEiyp7VvAXpOO84jbvH6uqtnFQPgtG9Yetjb51KW8=;
+        b=fw1Kttcnnljqn+8idCZi9ifSA51GUr6oc1LgJBd4YZSstn5IUvCnrQ+LLH+Yr1J13Y
+         Jy0ctmVtVm1xJARstcxEvLybISTR9uhqE4D/ehQ+1T9QJ/y1GA3zl4U/9uR2fI9y8itD
+         hJ+yruQh/0y49v0n9xz5c3SRpH22bvttJCNiiQCRoCmC3yaoeMAhiR6IG4Bx55rcullT
+         wopkFgsbWOvo2PQ8mXNhRdXbnN+BbcPCZ7JqiPotpXpVmlpYqoFpr4l+smO6Bv6ySHAR
+         yrQGbtHlvfsqKbTh1MpLrSaGeS5kOUmwUFhWGAfKKWjc6KY3NPJ1Krja4rq5rqI8aLNT
+         j4DQ==
+X-Gm-Message-State: AOAM531qJOQiPsQ3Yj+0WZ3sEXwWz2KnTvDf26ZDTUJAI4hvX7jvXBCE
+	4uv2BSTFSmJesgGkIAYdM5o=
+X-Google-Smtp-Source: ABdhPJzakmYogrVwphx12G12F6mQItH/4WuGAM8/VrSMC/6id7xv88WkBX+l6qeAA1Wg5TtrExgQWA==
+X-Received: by 2002:a7b:c94a:: with SMTP id i10mr19930688wml.59.1625571800878;
+        Tue, 06 Jul 2021 04:43:20 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: Paul Durrant <paul@xen.org>
+Reply-To: paul@xen.org
+Subject: Re: [PATCH v5] IOMMU: make DMA containment of quarantined devices
+ optional
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Kevin Tian <kevin.tian@intel.com>
+References: <e1f30ef7-6631-609d-6948-e9b1f3fa3b37@suse.com>
+Message-ID: <c4293a9b-14f0-2fc5-6e04-988cfef2deda@xen.org>
+Date: Tue, 6 Jul 2021 12:43:19 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <e1f30ef7-6631-609d-6948-e9b1f3fa3b37@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-We shouldn't be using two struct iovec's to write half of 'rec' each, and
-there is no need to malloc() for two struct iovec's at all.
+On 26/05/2021 09:19, Jan Beulich wrote:
+> IOMMU: make DMA containment of quarantined devices optional
+> 
+> Containing still in flight DMA was introduced to work around certain
+> devices / systems hanging hard upon hitting a "not-present" IOMMU fault.
+> Passing through (such) devices (on such systems) is inherently insecure
+> (as guests could easily arrange for IOMMU faults of any kind to occur).
+> Defaulting to a mode where admins may not even become aware of issues
+> with devices can be considered undesirable. Therefore convert this mode
+> of operation to an optional one, not one enabled by default.
+> 
+> This involves resurrecting code commit ea38867831da ("x86 / iommu: set
+> up a scratch page in the quarantine domain") did remove, in a slightly
+> extended and abstracted fashion. Here, instead of reintroducing a pretty
+> pointless use of "goto" in domain_context_unmap(), and instead of making
+> the function (at least temporarily) inconsistent, take the opportunity
+> and replace the other similarly pointless "goto" as well.
+> 
+> In order to key the re-instated bypasses off of there (not) being a root
+> page table this further requires moving the allocate_domain_resources()
+> invocation from reassign_device() to amd_iommu_setup_domain_device() (or
+> else reassign_device() would allocate a root page table anyway); this is
+> benign to the second caller of the latter function.
+> 
+> In VT-d's domain_context_unmap(), instead of adding yet another
+> "goto out" when all that's wanted is a "return", eliminate the "out"
+> label at the same time.
+> 
+> Take the opportunity and also limit the control to builds supporting
+> PCI.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Simplify down to just two - one covering the whole of 'rec', and one covering
-the pfns array.
-
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Ian Jackson <iwj@xenproject.org>
-CC: Wei Liu <wl@xen.org>
-CC: Juergen Gross <jgross@suse.com>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Olaf Hering <olaf@aepfle.de>
----
- tools/libs/guest/xg_sr_restore.c | 25 ++++++-------------------
- 1 file changed, 6 insertions(+), 19 deletions(-)
-
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index aa4113d7f679..07c9e291610b 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -425,11 +425,13 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
-     int rc = -1;
-     unsigned int count, written;
-     uint64_t i, *pfns = NULL;
--    struct iovec *iov = NULL;
-     xc_shadow_op_stats_t stats = { 0, ctx->restore.p2m_size };
-     struct xc_sr_record rec = {
-         .type = REC_TYPE_CHECKPOINT_DIRTY_PFN_LIST,
-     };
-+    struct iovec iov[2] = {
-+        { &rec, sizeof(rec) },
-+    };
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->restore.dirty_bitmap_hbuf);
- 
-@@ -471,26 +473,12 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
-         pfns[written++] = i;
-     }
- 
--    /* iovec[] for writev(). */
--    iov = malloc(3 * sizeof(*iov));
--    if ( !iov )
--    {
--        ERROR("Unable to allocate memory for sending dirty bitmap");
--        goto err;
--    }
--
-     rec.length = count * sizeof(*pfns);
- 
--    iov[0].iov_base = &rec.type;
--    iov[0].iov_len = sizeof(rec.type);
--
--    iov[1].iov_base = &rec.length;
--    iov[1].iov_len = sizeof(rec.length);
--
--    iov[2].iov_base = pfns;
--    iov[2].iov_len = count * sizeof(*pfns);
-+    iov[1].iov_base = pfns;
-+    iov[1].iov_len = rec.length;
- 
--    if ( writev_exact(ctx->restore.send_back_fd, iov, 3) )
-+    if ( writev_exact(ctx->restore.send_back_fd, iov, ARRAY_SIZE(iov)) )
-     {
-         PERROR("Failed to write dirty bitmap to stream");
-         goto err;
-@@ -499,7 +487,6 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
-     rc = 0;
-  err:
-     free(pfns);
--    free(iov);
-     return rc;
- }
- 
--- 
-2.11.0
-
+Reviewed-by: Paul Durrant <paul@xen.org>
 
