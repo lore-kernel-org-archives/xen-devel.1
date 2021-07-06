@@ -2,48 +2,45 @@ Return-Path: <SRS0=FDQh=L6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A903AC07E96
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AE01C07E96
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:31:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6766F608FE
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:29:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6766F608FE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 22461619AC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:31:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22461619AC
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.151001.279116 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.151007.279127 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0iK8-0005Y9-6T; Tue, 06 Jul 2021 10:29:04 +0000
+	id 1m0iMm-0006tN-K8; Tue, 06 Jul 2021 10:31:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 151001.279116; Tue, 06 Jul 2021 10:29:04 +0000
+Received: by outflank-mailman (output) from mailman id 151007.279127; Tue, 06 Jul 2021 10:31:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0iK8-0005Y2-1o; Tue, 06 Jul 2021 10:29:04 +0000
-Received: by outflank-mailman (input) for mailman id 151001;
- Tue, 06 Jul 2021 10:29:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hbbY=L6=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1m0iK6-0005Xw-LF
- for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 10:29:02 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id faaf77c9-de44-11eb-8483-12813bfff9fa;
- Tue, 06 Jul 2021 10:29:01 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A64031FB;
- Tue,  6 Jul 2021 03:29:00 -0700 (PDT)
-Received: from e123311-lin.arm.com (unknown [10.57.8.167])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6BB993F5A1;
- Tue,  6 Jul 2021 03:28:59 -0700 (PDT)
+	id 1m0iMm-0006tG-G3; Tue, 06 Jul 2021 10:31:48 +0000
+Received: by outflank-mailman (input) for mailman id 151007;
+ Tue, 06 Jul 2021 10:31:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1m0iMk-0006tA-So
+ for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 10:31:46 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1m0iMk-0006xj-Nb; Tue, 06 Jul 2021 10:31:46 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1m0iMk-0005i5-HS; Tue, 06 Jul 2021 10:31:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,47 +52,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: faaf77c9-de44-11eb-8483-12813bfff9fa
-From: Michal Orzel <michal.orzel@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	bertrand.marquis@arm.com,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] arm: Fix arch_initialise_vcpu to be unsupported
-Date: Tue,  6 Jul 2021 12:28:53 +0200
-Message-Id: <20210706102853.10251-1-michal.orzel@arm.com>
-X-Mailer: git-send-email 2.29.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=u829M/p7D6gorvRKzHDQ7cVGvaLt5wIJ5XcJbKzPRVM=; b=Fyt+Y2k2Om/QOnebmzFccLEioq
+	NLa4bA2BAnRujJwNtvznNMilddO+nEw6TANpS8nh6eBCRLqSeHd9jG0OzgZhkoL/ftWILhsPCGxX9
+	dY7Ozhsk0JW/3jx9iAIxIGLutoCGMBM1ICp3UqVBPvOeVTunfr5jKTz+VJ5cqFhk27uo=;
+Subject: Re: [PATCH 6/9] xen/arm: introduce alloc_staticmem_pages and
+ alloc_domstatic_pages
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>,
+ Penny Zheng <Penny.Zheng@arm.com>
+References: <20210607024318.3988467-1-penny.zheng@arm.com>
+ <20210607024318.3988467-7-penny.zheng@arm.com>
+ <c31a85c3-89ea-76a4-3b29-a411d419fb59@suse.com>
+ <VE1PR08MB5215E2802F3DE22F1F244023F71B9@VE1PR08MB5215.eurprd08.prod.outlook.com>
+ <caa11a54-acb6-928d-de3a-8e081a7c3d34@suse.com>
+ <c6ab1b8d-1598-f7fc-f717-f58f8e0aba68@xen.org>
+ <ea219d56-ea73-8904-ab47-421bd5c53a9f@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <564b9851-4e3a-b98d-08a8-483c9ed83bb4@xen.org>
+Date: Tue, 6 Jul 2021 11:31:44 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <ea219d56-ea73-8904-ab47-421bd5c53a9f@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Function arch_initialise_vcpu is not reachable as the
-VCPUOP_initialise is an unsupported operation on arm.
-Modify the function by adding ASSERT_UNREACHABLE() and
-returning -EOPNOTSUPP.
+Hi,
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Michal Orzel <michal.orzel@arm.com>
----
- xen/arch/arm/domain.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On 06/07/2021 10:59, Jan Beulich wrote:
+> On 06.07.2021 11:39, Julien Grall wrote:
+>> Hi Jan & Penny,
+>>
+>> On 06/07/2021 07:53, Jan Beulich wrote:
+>>> On 06.07.2021 07:58, Penny Zheng wrote:
+>>>>> From: Jan Beulich <jbeulich@suse.com>
+>>>>> Sent: Thursday, June 10, 2021 6:23 PM
+>>>>>
+>>>>> On 07.06.2021 04:43, Penny Zheng wrote:
+>>>>>> --- a/xen/common/page_alloc.c
+>>>>>> +++ b/xen/common/page_alloc.c
+>>>>>> @@ -1065,6 +1065,75 @@ static struct page_info *alloc_heap_pages(
+>>>>>>        return pg;
+>>>>>>    }
+>>>>>>
+>>>>>> +#ifdef CONFIG_STATIC_ALLOCATION
+>>>>>> +/*
+>>>>>> + * Allocate nr_mfns contiguous pages, starting at #smfn, of static memory.
+>>>>>> + * It is the equivalent of alloc_heap_pages for static memory  */
+>>>>>> +static struct page_info *alloc_staticmem_pages(unsigned long nr_mfns,
+>>>>>> +                                               mfn_t smfn,
+>>>>>> +                                               unsigned int memflags)
+>>>>>> +{
+>>>>>> +    bool need_tlbflush = false;
+>>>>>> +    uint32_t tlbflush_timestamp = 0;
+>>>>>> +    unsigned long i;
+>>>>>> +    struct page_info *pg;
+>>>>>> +
+>>>>>> +    /* For now, it only supports allocating at specified address. */
+>>>>>> +    if ( !mfn_valid(smfn) || !nr_mfns )
+>>>>>> +    {
+>>>>>> +        printk(XENLOG_ERR
+>>>>>> +               "Invalid %lu static memory starting at %"PRI_mfn"\n",
+>>>>>
+>>>>> Reading a log containing e.g. "Invalid 0 static memory starting at ..." I don't
+>>>>> think I would recognize that the "0" is the count of pages.
+>>>>
+>>>> Sure. How about "try to allocate out of range page %"PRI_mfn"\n"?
+>>>
+>>> This still doesn't convey _both_ parts of the if() that would cause
+>>> the log message to be issued.
+>>>
+>>>>>> +               nr_mfns, mfn_x(smfn));
+>>>>>> +        return NULL;
+>>>>>> +    }
+>>>>>> +    pg = mfn_to_page(smfn);
+>>>>>> +
+>>>>>> +    for ( i = 0; i < nr_mfns; i++ )
+>>>>>> +    {
+>>>>>> +        /*
+>>>>>> +         * Reference count must continuously be zero for free pages
+>>>>>> +         * of static memory(PGC_reserved).
+>>>>>> +         */
+>>>>>> +        ASSERT(pg[i].count_info & PGC_reserved);
+>>>>>
+>>>>> What logic elsewhere guarantees that this will hold? ASSERT()s are to verify
+>>>>> that assumptions are met. But I don't think you can sensibly assume the caller
+>>>>> knows the range is reserved (and free), or else you could get away without any
+>>>>> allocation function.
+>>>>
+>>>> The caller shall only call alloc_staticmem_pages when it knows range is reserved,
+>>>> like, alloc_staticmem_pages is only called in the context of alloc_domstatic_pages
+>>>> for now.
+>>>
+>>> If the caller knows the static ranges, this isn't really "allocation".
+>>> I.e. I then question the need for "allocating" in the first place.
+>>
+>> We still need to setup the page so the reference counting works
+>> properly. So can you clarify whether you are objecting on the name? If
+>> yes, do you have a better suggestion?
+> 
+> It's not the name alone but the disconnect between name and actual
+> behavior. Note that here we've started from an ASSERT(), which is
+> reasonable to have if the caller knows where static pages are, but
+> which should be converted to an if() when talking about allocation
+> (i.e. the caller may not have enough knowledge). If it's not really
+> allocation, how about naming it "acquire" or "obtain" (and the
+> config option perhaps STATIC_MEMORY)?
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index c021a03c61..a2aa8b77ad 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -923,7 +923,8 @@ int arch_set_info_guest(
- 
- int arch_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
--    return default_initialise_vcpu(v, arg);
-+    ASSERT_UNREACHABLE();
-+    return -EOPNOTSUPP;
- }
- 
- int arch_vcpu_reset(struct vcpu *v)
+The caller will fetch the information from the Device Tree but it 
+doesn't sanity check it. I think it can be easy to make mistake as the 
+information will be scattered in various node of the DT.
+
+So I think it would be better if we have a check in both prod and debug 
+build to ease the integration.
+
+Regarding the name itself, anyone of the one you suggested are fine with 
+me because to me the difference between them is too subtle to be 
+understood by most of the users.
+
+Cheers,
+
 -- 
-2.29.0
-
+Julien Grall
 
