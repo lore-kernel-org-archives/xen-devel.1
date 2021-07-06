@@ -2,49 +2,49 @@ Return-Path: <SRS0=E0OE=L7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB54CC07E95
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 04:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B7B7C07E9C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 04:03:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9A811608FE
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 04:03:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A811608FE
+	by mail.kernel.org (Postfix) with ESMTPS id D21E260E0C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 04:03:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D21E260E0C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.151608.280623 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.151732.280630 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0yma-0007LJ-6t; Wed, 07 Jul 2021 04:03:32 +0000
+	id 1m0yma-0007PF-Le; Wed, 07 Jul 2021 04:03:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 151608.280623; Wed, 07 Jul 2021 04:03:32 +0000
+Received: by outflank-mailman (output) from mailman id 151732.280630; Wed, 07 Jul 2021 04:03:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0yma-0007L7-3R; Wed, 07 Jul 2021 04:03:32 +0000
-Received: by outflank-mailman (input) for mailman id 151608;
- Tue, 06 Jul 2021 18:08:23 +0000
+	id 1m0yma-0007OB-DP; Wed, 07 Jul 2021 04:03:32 +0000
+Received: by outflank-mailman (input) for mailman id 151732;
+ Tue, 06 Jul 2021 20:43:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Lytm=L6=linaro.org=bjorn.andersson@srs-us1.protection.inumbo.net>)
- id 1m0pUd-0006Be-JG
- for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 18:08:23 +0000
-Received: from mail-ot1-x331.google.com (unknown [2607:f8b0:4864:20::331])
+ id 1m0rug-00086e-0R
+ for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 20:43:26 +0000
+Received: from mail-oo1-xc36.google.com (unknown [2607:f8b0:4864:20::c36])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 08e87094-677b-4ee8-9554-efdf7dd1128e;
- Tue, 06 Jul 2021 18:08:22 +0000 (UTC)
-Received: by mail-ot1-x331.google.com with SMTP id
- f12-20020a056830204cb029048bcf4c6bd9so10394211otp.8
- for <xen-devel@lists.xenproject.org>; Tue, 06 Jul 2021 11:08:22 -0700 (PDT)
+ id fef6214a-9c35-48ae-b0f7-70f294bd6364;
+ Tue, 06 Jul 2021 20:43:24 +0000 (UTC)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ o23-20020a4a2c170000b029025469ad0e4aso2476998ooo.0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Jul 2021 13:43:24 -0700 (PDT)
 Received: from yoga (104-57-184-186.lightspeed.austtx.sbcglobal.net.
  [104.57.184.186])
- by smtp.gmail.com with ESMTPSA id 68sm497113otd.74.2021.07.06.11.08.20
+ by smtp.gmail.com with ESMTPSA id x130sm1332892oix.22.2021.07.06.13.43.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jul 2021 11:08:21 -0700 (PDT)
+ Tue, 06 Jul 2021 13:43:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,114 +56,171 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08e87094-677b-4ee8-9554-efdf7dd1128e
+X-Inumbo-ID: fef6214a-9c35-48ae-b0f7-70f294bd6364
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:in-reply-to;
-        bh=rFh4HQBpaw9ewOD7eKuJ7KI9YAzHhN8tlxJ6LopMKHs=;
-        b=Sz6rE6fIxKghlltcLCE+UXPsQefAUgPvTMscjeRzq2kl6NTGV49umux5xM0XcDuF3f
-         KuSKKfkZ8nSISGEXHz3w1v+CP9bxuRJkim+LBmkXAMBhskBSVWy4R8UYC7L1pwY+g7hz
-         Zg3WKG3mRVhsusU5VFmdXh5UPocqhZf4lahEU95r9tDGNbsVfHF1Q4HkA+YZfm/i81fd
-         v0xNi9dJEaEvf856OdG6fjSc31APYItT+IUiPzbg0w9QbfcYoXqLRo58SwLlUHuXr/Qb
-         gjgu5RAVRwk/bKL57rYJjqGIxVt7qPeDusZUEamQ36NdV7/ZYwdc/uo7wSJkJLcpf0tD
-         jOXA==
+        bh=pxMY07o9eA6SvMdwqfO/Cy/RP18zRy8WHvKUzTEaaNE=;
+        b=cMEULcwqLZ1Wut54PhoGe8eWn9DWOkTBGefRRfl5OdVDl+rs626G5wMaH28cgDjzcy
+         C3SrxS4IBWN9GT87WmK8g47N1LXQplCWDOfx8int0/GS3k/x/nkilLmTHNlFEJRG7MNd
+         XBIkEEXZ1pU0eRvjS1TRSvA1B76ydqAA34SpYmKB2ihzHjiFB86o3rkOkpvBUwbSv3hH
+         SAJ7sWW3535WnApBT/aqgm8mqOlZd3rAIlZ18pf5XSKHOT2S+byWJIp1xZIbcvBH0etl
+         zsjB18jSpkL6JUn2+voD9bKAbUaWuj/V1AbjBFUkZHMHiCqgtvfqmj4sQqDjclnu51kM
+         rRng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to;
-        bh=rFh4HQBpaw9ewOD7eKuJ7KI9YAzHhN8tlxJ6LopMKHs=;
-        b=b1fx3YtImkEU8dMJ+MRkYzXF/ESAdcP+6QzX8TSZfmcU0WDsV2u1gNRgcKvXpPI07f
-         VvsrkMOYXMlPjrkmt+95Pp8tJr6ABAvkvbTwLcs3y2MRDs/w71zhB/9KfzaOLeid/xQM
-         n6OLpfoY1besM9zsXo6nhcpQRCrTHNdjZskqedwvng3o0wJrisMcA7u+tzHvemvtoytL
-         Qbn5rGp2drAmTbFa4cFkWgDHkhQvN1iBxFs4WNbhJOa2TGI8KSIGWKCcMUJrjzSQ91H5
-         V9z9vOBx7svDkCYd4yfIqoKTecsy1tBvPGHGMH7Nx2VLVHbxCQWKq4rV81k5BDLjwO5r
-         bARQ==
-X-Gm-Message-State: AOAM530R31SJ2LpLb/53R9xnTweIB9jBrTfmVHEZT0jWeNe8xjsIrwPV
-	v+vOqHOW9JQISZm6xm7Ubha25Q==
-X-Google-Smtp-Source: ABdhPJwwC8pa+wbm0v5SSaX+DFJoQ7jJmXTjdD3iH0933Y2rw8Y2+zYlxp2w0qjcBNkHXGnjSvRJ6w==
-X-Received: by 2002:a9d:3d3:: with SMTP id f77mr16276146otf.43.1625594902170;
-        Tue, 06 Jul 2021 11:08:22 -0700 (PDT)
-Date: Tue, 6 Jul 2021 13:08:18 -0500
+        bh=pxMY07o9eA6SvMdwqfO/Cy/RP18zRy8WHvKUzTEaaNE=;
+        b=tEHS6tMctvNVwRmeUVSF3z60OHvMvlUcBpigRXZ5gz4/nUaNOXxVgKqlTkprnAXzrK
+         Oz6eQSOfJEnBI5u11XdPuLzS6pnLcnDz9qDjJ1+pGfbORsKY8sXcKo3N08ClcrfRq/K/
+         xr9TL9tik/Uc/V4kAJezFftKvhWChh6p66b7209LwDYzOgWEBBZsK5FVyg4ocaupUwOn
+         0QcnFrmRtsdMYF6LqPPm6vBtmcLVM8nXLaE8RpcgOTECMDhmy3QmkQ8Bn3wbMMMeS2C4
+         JUCEZiTL+SYoHCipZkIMFkMdhdElToRfoi43BLJm4QYr7HTxOOkV4j6ueLcorsCOkNEE
+         6G2g==
+X-Gm-Message-State: AOAM531YTWSYexnIF3y1VaQ26rOuyM5UBc5scNGuk1Ge+M8sysp8EVVA
+	EAMz8sy3EaOHyB+KB0v9tHXpgQ==
+X-Google-Smtp-Source: ABdhPJxDvDPv3ADYsyyhWPVlnzb7CaqMGlOMdSkFiej4dUoXbTCedb2luVlDDH/zGyqw6KpVymfMhg==
+X-Received: by 2002:a4a:d6cc:: with SMTP id j12mr2894172oot.0.1625604204373;
+        Tue, 06 Jul 2021 13:43:24 -0700 (PDT)
+Date: Tue, 6 Jul 2021 15:43:21 -0500
 From: Bjorn Andersson <bjorn.andersson@linaro.org>
 To: Uwe Kleine-K?nig <u.kleine-koenig@pengutronix.de>
-Cc: kernel@pengutronix.de, linux-arm-kernel@lists.infradead.org,
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-acpi@vger.kernel.org,
-	linux-wireless@vger.kernel.org, linux-sunxi@lists.linux.dev,
-	linux-cxl@vger.kernel.org, nvdimm@lists.linux.dev,
-	dmaengine@vger.kernel.org, linux1394-devel@lists.sourceforge.net,
-	linux-fpga@vger.kernel.org, linux-input@vger.kernel.org,
-	linux-hyperv@vger.kernel.org, linux-i2c@vger.kernel.org,
-	linux-i3c@lists.infradead.org,
+Cc: nvdimm@lists.linux.dev, linux-hyperv@vger.kernel.org,
+	kvm@vger.kernel.org, linux-wireless@vger.kernel.org,
+	linux-fpga@vger.kernel.org, linux-pci@vger.kernel.org,
+	alsa-devel@alsa-project.org, linux-cxl@vger.kernel.org,
+	platform-driver-x86@vger.kernel.org, target-devel@vger.kernel.org,
+	linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org,
+	linux1394-devel@lists.sourceforge.net, linux-scsi@vger.kernel.org,
+	linux-staging@lists.linux.dev, linux-acpi@vger.kernel.org,
 	industrypack-devel@lists.sourceforge.net,
-	linux-media@vger.kernel.org, linux-mmc@vger.kernel.org,
-	netdev@vger.kernel.org, linux-ntb@googlegroups.com,
-	linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org, linux-scsi@vger.kernel.org,
-	alsa-devel@alsa-project.org, linux-arm-msm@vger.kernel.org,
-	linux-spi@vger.kernel.org, linux-staging@lists.linux.dev,
-	greybus-dev@lists.linaro.org, target-devel@vger.kernel.org,
-	linux-usb@vger.kernel.org, linux-serial@vger.kernel.org,
-	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org
+	linux-input@vger.kernel.org, xen-devel@lists.xenproject.org,
+	linux-sunxi@lists.linux.dev, linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-serial@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org, greybus-dev@lists.linaro.org,
+	virtualization@lists.linux-foundation.org,
+	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
+	netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+	linux-mmc@vger.kernel.org, linux-mips@vger.kernel.org,
+	linux-spi@vger.kernel.org, kernel@pengutronix.de,
+	dmaengine@vger.kernel.org, linux-ntb@googlegroups.com,
+	linuxppc-dev@lists.ozlabs.org
 Subject: Re: [PATCH v2 4/4] bus: Make remove callback return void
-Message-ID: <YOSb1+yeVeLxiSRc@yoga>
+Message-ID: <YOTAaQ7AnkCvRQaS@yoga>
 References: <20210706154803.1631813-1-u.kleine-koenig@pengutronix.de>
  <20210706154803.1631813-5-u.kleine-koenig@pengutronix.de>
+ <YOSb1+yeVeLxiSRc@yoga>
+ <20210706184323.fudcbsiu4i34dojs@pengutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20210706154803.1631813-5-u.kleine-koenig@pengutronix.de>
+In-Reply-To: <20210706184323.fudcbsiu4i34dojs@pengutronix.de>
 
-On Tue 06 Jul 10:48 CDT 2021, Uwe Kleine-K?nig wrote:
+On Tue 06 Jul 13:43 CDT 2021, Uwe Kleine-K?nig wrote:
 
-> The driver core ignores the return value of this callback because there
-> is only little it can do when a device disappears.
+> Hello Bjorn,
 > 
-> This is the final bit of a long lasting cleanup quest where several
-> buses were converted to also return void from their remove callback.
-> Additionally some resource leaks were fixed that were caused by drivers
-> returning an error code in the expectation that the driver won't go
-> away.
+> On Tue, Jul 06, 2021 at 01:08:18PM -0500, Bjorn Andersson wrote:
+> > On Tue 06 Jul 10:48 CDT 2021, Uwe Kleine-K?nig wrote:
+> > > diff --git a/drivers/rpmsg/rpmsg_core.c b/drivers/rpmsg/rpmsg_core.c
+> > > index c1404d3dae2c..7f6fac618ab2 100644
+> > > --- a/drivers/rpmsg/rpmsg_core.c
+> > > +++ b/drivers/rpmsg/rpmsg_core.c
+> > > @@ -530,7 +530,7 @@ static int rpmsg_dev_probe(struct device *dev)
+> > >  	return err;
+> > >  }
+> > >  
+> > > -static int rpmsg_dev_remove(struct device *dev)
+> > > +static void rpmsg_dev_remove(struct device *dev)
+> > >  {
+> > >  	struct rpmsg_device *rpdev = to_rpmsg_device(dev);
+> > >  	struct rpmsg_driver *rpdrv = to_rpmsg_driver(rpdev->dev.driver);
+> > > @@ -546,8 +546,6 @@ static int rpmsg_dev_remove(struct device *dev)
+> > >  
+> > >  	if (rpdev->ept)
+> > >  		rpmsg_destroy_ept(rpdev->ept);
+> > > -
+> > > -	return err;
+> > 
+> > This leaves err assigned but never used, but I don't mind following up
+> > with a patch cleaning that up after this has landed.
 > 
-> With struct bus_type::remove returning void it's prevented that newly
-> implemented buses return an ignored error code and so don't anticipate
-> wrong expectations for driver authors.
+> Ah, good catch. If I send out a v3 I will fold the following into this
+> patch:
 > 
-
-Thanks for doing this!
-
-Acked-by: Bjorn Andersson <bjorn.andersson@linaro.org> (rpmsg and apr)
-
-[..]
 > diff --git a/drivers/rpmsg/rpmsg_core.c b/drivers/rpmsg/rpmsg_core.c
-> index c1404d3dae2c..7f6fac618ab2 100644
+> index 7f6fac618ab2..9151836190ce 100644
 > --- a/drivers/rpmsg/rpmsg_core.c
 > +++ b/drivers/rpmsg/rpmsg_core.c
-> @@ -530,7 +530,7 @@ static int rpmsg_dev_probe(struct device *dev)
->  	return err;
->  }
->  
-> -static int rpmsg_dev_remove(struct device *dev)
-> +static void rpmsg_dev_remove(struct device *dev)
+> @@ -534,10 +534,9 @@ static void rpmsg_dev_remove(struct device *dev)
 >  {
 >  	struct rpmsg_device *rpdev = to_rpmsg_device(dev);
 >  	struct rpmsg_driver *rpdrv = to_rpmsg_driver(rpdev->dev.driver);
-> @@ -546,8 +546,6 @@ static int rpmsg_dev_remove(struct device *dev)
+> -	int err = 0;
 >  
->  	if (rpdev->ept)
->  		rpmsg_destroy_ept(rpdev->ept);
-> -
-> -	return err;
+>  	if (rpdev->ops->announce_destroy)
+> -		err = rpdev->ops->announce_destroy(rpdev);
+> +		rpdev->ops->announce_destroy(rpdev);
+>  
+>  	if (rpdrv->remove)
+>  		rpdrv->remove(rpdev);
+> 
 
-This leaves err assigned but never used, but I don't mind following up
-with a patch cleaning that up after this has landed.
+Sounds good, feel free to keep my ack on this.
 
+> Maybe .announce_destroy() should then be changed to return void, too?
+> Something like:
+> 
+
+Yes, I saw this opportunity as well. But that will fan out further, so
+let's postpone that until your series has landed and we can follow up
+with such changes through the remoteproc tree.
+
+> diff --git a/drivers/rpmsg/rpmsg_internal.h b/drivers/rpmsg/rpmsg_internal.h
+> index a76c344253bf..d5204756714c 100644
+> --- a/drivers/rpmsg/rpmsg_internal.h
+> +++ b/drivers/rpmsg/rpmsg_internal.h
+> @@ -40,7 +40,7 @@ struct rpmsg_device_ops {
+>  					    struct rpmsg_channel_info chinfo);
+>  
+>  	int (*announce_create)(struct rpmsg_device *ept);
+> -	int (*announce_destroy)(struct rpmsg_device *ept);
+> +	void (*announce_destroy)(struct rpmsg_device *ept);
+>  };
+>  
+>  /**
+> diff --git a/drivers/rpmsg/virtio_rpmsg_bus.c b/drivers/rpmsg/virtio_rpmsg_bus.c
+> index 8e49a3bacfc7..4e05994634f8 100644
+> --- a/drivers/rpmsg/virtio_rpmsg_bus.c
+> +++ b/drivers/rpmsg/virtio_rpmsg_bus.c
+> @@ -340,7 +340,7 @@ static int virtio_rpmsg_announce_create(struct rpmsg_device *rpdev)
+>  	return err;
 >  }
 >  
->  static struct bus_type rpmsg_bus = {
+> -static int virtio_rpmsg_announce_destroy(struct rpmsg_device *rpdev)
+> +static void virtio_rpmsg_announce_destroy(struct rpmsg_device *rpdev)
+>  {
+>  	struct virtio_rpmsg_channel *vch = to_virtio_rpmsg_channel(rpdev);
+>  	struct virtproc_info *vrp = vch->vrp;
+> @@ -360,8 +360,6 @@ static int virtio_rpmsg_announce_destroy(struct rpmsg_device *rpdev)
+>  		if (err)
+>  			dev_err(dev, "failed to announce service %d\n", err);
+>  	}
+> -
+> -	return err;
+>  }
+>  
+>  static const struct rpmsg_device_ops virtio_rpmsg_ops = {
+> 
+> though it's not obvious for me that the last hunk is sensible. (OTOH the
+> return code is ignored anyhow as rpmsg_dev_remove() is the only caller.
+> 
 
-Regards,
+I need to backtrack a little bit more to figure out why we ended up with
+this...
+
+Thanks,
 Bjorn
 
