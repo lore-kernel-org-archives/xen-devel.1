@@ -2,45 +2,43 @@ Return-Path: <SRS0=FDQh=L6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AE01C07E96
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:31:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ACBCC07E96
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:33:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 22461619AC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:31:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22461619AC
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 232C4619AC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Jul 2021 10:33:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 232C4619AC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.151007.279127 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.150995.279143 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0iMm-0006tN-K8; Tue, 06 Jul 2021 10:31:48 +0000
+	id 1m0iOS-0007aS-C2; Tue, 06 Jul 2021 10:33:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 151007.279127; Tue, 06 Jul 2021 10:31:48 +0000
+Received: by outflank-mailman (output) from mailman id 150995.279143; Tue, 06 Jul 2021 10:33:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m0iMm-0006tG-G3; Tue, 06 Jul 2021 10:31:48 +0000
-Received: by outflank-mailman (input) for mailman id 151007;
- Tue, 06 Jul 2021 10:31:46 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1m0iMk-0006tA-So
- for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 10:31:46 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m0iMk-0006xj-Nb; Tue, 06 Jul 2021 10:31:46 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m0iMk-0005i5-HS; Tue, 06 Jul 2021 10:31:46 +0000
+	id 1m0iOS-0007Zo-6r; Tue, 06 Jul 2021 10:33:32 +0000
+Received: by outflank-mailman (input) for mailman id 150995;
+ Tue, 06 Jul 2021 10:22:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=zoFp=L6=kernel.org=broonie@srs-us1.protection.inumbo.net>)
+ id 1m0iDk-0005RS-5n
+ for xen-devel@lists.xenproject.org; Tue, 06 Jul 2021 10:22:28 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 31956acf-56f6-44da-a55f-96844e0fc557;
+ Tue, 06 Jul 2021 10:22:27 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 46675619A2;
+ Tue,  6 Jul 2021 10:22:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,132 +50,293 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=u829M/p7D6gorvRKzHDQ7cVGvaLt5wIJ5XcJbKzPRVM=; b=Fyt+Y2k2Om/QOnebmzFccLEioq
-	NLa4bA2BAnRujJwNtvznNMilddO+nEw6TANpS8nh6eBCRLqSeHd9jG0OzgZhkoL/ftWILhsPCGxX9
-	dY7Ozhsk0JW/3jx9iAIxIGLutoCGMBM1ICp3UqVBPvOeVTunfr5jKTz+VJ5cqFhk27uo=;
-Subject: Re: [PATCH 6/9] xen/arm: introduce alloc_staticmem_pages and
- alloc_domstatic_pages
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>,
- Penny Zheng <Penny.Zheng@arm.com>
-References: <20210607024318.3988467-1-penny.zheng@arm.com>
- <20210607024318.3988467-7-penny.zheng@arm.com>
- <c31a85c3-89ea-76a4-3b29-a411d419fb59@suse.com>
- <VE1PR08MB5215E2802F3DE22F1F244023F71B9@VE1PR08MB5215.eurprd08.prod.outlook.com>
- <caa11a54-acb6-928d-de3a-8e081a7c3d34@suse.com>
- <c6ab1b8d-1598-f7fc-f717-f58f8e0aba68@xen.org>
- <ea219d56-ea73-8904-ab47-421bd5c53a9f@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <564b9851-4e3a-b98d-08a8-483c9ed83bb4@xen.org>
-Date: Tue, 6 Jul 2021 11:31:44 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+X-Inumbo-ID: 31956acf-56f6-44da-a55f-96844e0fc557
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1625566946;
+	bh=CVw0hKyMav3rIRaqV9zNgy7mU4Mw36sPMSvkirDCWbw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Oy+mHp7honxzQyOE+wiK41kmp6JUhn55W2wKSp+Vbq/T3tSaJx6stV0fB6qfwxpuH
+	 TZMucp2PpXSBWZZ8UuwZi0VErfdCkgx9V9lzMcIIVDbwZ6uoJBpnGqRW6TTGOLGPYG
+	 UZlgH6BlJ1UcUXPyUgWEQPmEIm5h5aEhRvJ5dQI9JFByS/LCYVZRwDSup+oN35CuLQ
+	 o6cRp/OvagxKTRqp1mZcWbXtiL+0BErueKp5LxgqFHu+8lCzy/LfC12ocG23wWxgEy
+	 fwSWUWEZxeGd21itz7GPzm0iIksLONvOP0BBIC/IQaAHE+fWWwMn/rZdpJvXYfuX0L
+	 B7JCQob2OHz4A==
+Date: Tue, 6 Jul 2021 11:21:53 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel@pengutronix.de,
+	linux-kernel@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>, Geoff Levand <geoff@infradead.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	Len Brown <lenb@kernel.org>,
+	William Breathitt Gray <vilhelm.gray@gmail.com>,
+	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>,
+	Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Alison Schofield <alison.schofield@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Ira Weiny <ira.weiny@intel.com>,
+	Ben Widawsky <ben.widawsky@intel.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>, Vinod Koul <vkoul@kernel.org>,
+	Stefan Richter <stefanr@s5r6.in-berlin.de>,
+	Sudeep Holla <sudeep.holla@arm.com>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Wu Hao <hao.wu@intel.com>, Tom Rix <trix@redhat.com>,
+	Moritz Fischer <mdf@kernel.org>, Jiri Kosina <jikos@kernel.org>,
+	Benjamin Tissoires <benjamin.tissoires@redhat.com>,
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Wolfram Sang <wsa@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Samuel Iglesias Gonsalvez <siglesias@igalia.com>,
+	Jens Taprogge <jens.taprogge@taprogge.org>,
+	Johannes Thumshirn <morbidrsa@gmail.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Maxim Levitsky <maximlevitsky@gmail.com>,
+	Alex Dubov <oakad@yahoo.com>, Ulf Hansson <ulf.hansson@linaro.org>,
+	Lee Jones <lee.jones@linaro.org>,
+	Tomas Winkler <tomas.winkler@intel.com>,
+	Arnd Bergmann <arnd@arndb.de>, Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
+	Kishon Vijay Abraham I <kishon@ti.com>,
+	Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Dominik Brodowski <linux@dominikbrodowski.net>,
+	Maximilian Luz <luzmaximilian@gmail.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	Mark Gross <mgross@linux.intel.com>,
+	Matt Porter <mporter@kernel.crashing.org>,
+	Alexandre Bounine <alex.bou9@gmail.com>,
+	Ohad Ben-Cohen <ohad@wizery.com>,
+	Bjorn Andersson <bjorn.andersson@linaro.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Thorsten Scherer <t.scherer@eckelmann.de>,
+	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+	Andy Gross <agross@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	Michael Buesch <m@bues.ch>, Sven Van Asbroeck <TheSven73@gmail.com>,
+	Johan Hovold <johan@kernel.org>, Alex Elder <elder@kernel.org>,
+	Andreas Noever <andreas.noever@gmail.com>,
+	Michael Jamet <michael.jamet@intel.com>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Yehezkel Bernat <YehezkelShB@gmail.com>,
+	Rob Herring <robh@kernel.org>, Jiri Slaby <jirislaby@kernel.org>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Kirti Wankhede <kwankhede@nvidia.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Cornelia Huck <cohuck@redhat.com>,
+	Martyn Welch <martyn@welchs.me.uk>,
+	Manohar Vanga <manohar.vanga@gmail.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Marc Zyngier <maz@kernel.org>,
+	Tyrel Datwyler <tyreld@linux.ibm.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Qinglang Miao <miaoqinglang@huawei.com>,
+	Alexey Kardashevskiy <aik@ozlabs.ru>,
+	Kai-Heng Feng <kai.heng.feng@canonical.com>,
+	Joey Pabalan <jpabalanb@gmail.com>,
+	Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Frank Li <lznuaa@gmail.com>,
+	Mike Christie <michael.christie@oracle.com>,
+	Bodo Stroesser <bostroesser@gmail.com>,
+	Hannes Reinecke <hare@suse.de>, David Woodhouse <dwmw@amazon.co.uk>,
+	SeongJae Park <sjpark@amazon.de>, Julien Grall <jgrall@amazon.com>,
+	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	linux-acpi@vger.kernel.org, linux-wireless@vger.kernel.org,
+	linux-sunxi@lists.linux.dev, linux-cxl@vger.kernel.org,
+	nvdimm@lists.linux.dev, dmaengine@vger.kernel.org,
+	linux1394-devel@lists.sourceforge.net, linux-fpga@vger.kernel.org,
+	linux-input@vger.kernel.org, linux-hyperv@vger.kernel.org,
+	linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org,
+	industrypack-devel@lists.sourceforge.net,
+	linux-media@vger.kernel.org, linux-mmc@vger.kernel.org,
+	netdev@vger.kernel.org, linux-ntb@googlegroups.com,
+	linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org, linux-scsi@vger.kernel.org,
+	alsa-devel@alsa-project.org, linux-arm-msm@vger.kernel.org,
+	linux-spi@vger.kernel.org, linux-staging@lists.linux.dev,
+	greybus-dev@lists.linaro.org, target-devel@vger.kernel.org,
+	linux-usb@vger.kernel.org, linux-serial@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] bus: Make remove callback return void
+Message-ID: <20210706102153.GA4529@sirena.org.uk>
+Mail-Followup-To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	kernel@pengutronix.de, linux-kernel@vger.kernel.org,
+	Russell King <linux@armlinux.org.uk>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>, Geoff Levand <geoff@infradead.org>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
+	Len Brown <lenb@kernel.org>,
+	William Breathitt Gray <vilhelm.gray@gmail.com>,
+	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>,
+	Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Alison Schofield <alison.schofield@intel.com>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Ira Weiny <ira.weiny@intel.com>,
+	Ben Widawsky <ben.widawsky@intel.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>, Vinod Koul <vkoul@kernel.org>,
+	Stefan Richter <stefanr@s5r6.in-berlin.de>,
+	Sudeep Holla <sudeep.holla@arm.com>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Wu Hao <hao.wu@intel.com>, Tom Rix <trix@redhat.com>,
+	Moritz Fischer <mdf@kernel.org>, Jiri Kosina <jikos@kernel.org>,
+	Benjamin Tissoires <benjamin.tissoires@redhat.com>,
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Stephen Hemminger <sthemmin@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Wolfram Sang <wsa@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Samuel Iglesias Gonsalvez <siglesias@igalia.com>,
+	Jens Taprogge <jens.taprogge@taprogge.org>,
+	Johannes Thumshirn <morbidrsa@gmail.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Maxim Levitsky <maximlevitsky@gmail.com>,
+	Alex Dubov <oakad@yahoo.com>, Ulf Hansson <ulf.hansson@linaro.org>,
+	Lee Jones <lee.jones@linaro.org>,
+	Tomas Winkler <tomas.winkler@intel.com>,
+	Arnd Bergmann <arnd@arndb.de>, Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
+	Kishon Vijay Abraham I <kishon@ti.com>,
+	Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Dominik Brodowski <linux@dominikbrodowski.net>,
+	Maximilian Luz <luzmaximilian@gmail.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	Mark Gross <mgross@linux.intel.com>,
+	Matt Porter <mporter@kernel.crashing.org>,
+	Alexandre Bounine <alex.bou9@gmail.com>,
+	Ohad Ben-Cohen <ohad@wizery.com>,
+	Bjorn Andersson <bjorn.andersson@linaro.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Thorsten Scherer <t.scherer@eckelmann.de>,
+	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+	Andy Gross <agross@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	Michael Buesch <m@bues.ch>, Sven Van Asbroeck <TheSven73@gmail.com>,
+	Johan Hovold <johan@kernel.org>, Alex Elder <elder@kernel.org>,
+	Andreas Noever <andreas.noever@gmail.com>,
+	Michael Jamet <michael.jamet@intel.com>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Yehezkel Bernat <YehezkelShB@gmail.com>,
+	Rob Herring <robh@kernel.org>, Jiri Slaby <jirislaby@kernel.org>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Kirti Wankhede <kwankhede@nvidia.com>,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Cornelia Huck <cohuck@redhat.com>,
+	Martyn Welch <martyn@welchs.me.uk>,
+	Manohar Vanga <manohar.vanga@gmail.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Marc Zyngier <maz@kernel.org>,
+	Tyrel Datwyler <tyreld@linux.ibm.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Qinglang Miao <miaoqinglang@huawei.com>,
+	Alexey Kardashevskiy <aik@ozlabs.ru>,
+	Kai-Heng Feng <kai.heng.feng@canonical.com>,
+	Joey Pabalan <jpabalanb@gmail.com>,
+	Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Frank Li <lznuaa@gmail.com>,
+	Mike Christie <michael.christie@oracle.com>,
+	Bodo Stroesser <bostroesser@gmail.com>,
+	Hannes Reinecke <hare@suse.de>, David Woodhouse <dwmw@amazon.co.uk>,
+	SeongJae Park <sjpark@amazon.de>, Julien Grall <jgrall@amazon.com>,
+	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	linux-acpi@vger.kernel.org, linux-wireless@vger.kernel.org,
+	linux-sunxi@lists.linux.dev, linux-cxl@vger.kernel.org,
+	nvdimm@lists.linux.dev, dmaengine@vger.kernel.org,
+	linux1394-devel@lists.sourceforge.net, linux-fpga@vger.kernel.org,
+	linux-input@vger.kernel.org, linux-hyperv@vger.kernel.org,
+	linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org,
+	industrypack-devel@lists.sourceforge.net,
+	linux-media@vger.kernel.org, linux-mmc@vger.kernel.org,
+	netdev@vger.kernel.org, linux-ntb@googlegroups.com,
+	linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org, linux-scsi@vger.kernel.org,
+	alsa-devel@alsa-project.org, linux-arm-msm@vger.kernel.org,
+	linux-spi@vger.kernel.org, linux-staging@lists.linux.dev,
+	greybus-dev@lists.linaro.org, target-devel@vger.kernel.org,
+	linux-usb@vger.kernel.org, linux-serial@vger.kernel.org,
+	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
+	xen-devel@lists.xenproject.org
+References: <20210706095037.1425211-1-u.kleine-koenig@pengutronix.de>
 MIME-Version: 1.0
-In-Reply-To: <ea219d56-ea73-8904-ab47-421bd5c53a9f@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="h31gzZEtNLTqOjlF"
+Content-Disposition: inline
+In-Reply-To: <20210706095037.1425211-1-u.kleine-koenig@pengutronix.de>
+X-Cookie: Some restrictions may apply.
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-Hi,
 
-On 06/07/2021 10:59, Jan Beulich wrote:
-> On 06.07.2021 11:39, Julien Grall wrote:
->> Hi Jan & Penny,
->>
->> On 06/07/2021 07:53, Jan Beulich wrote:
->>> On 06.07.2021 07:58, Penny Zheng wrote:
->>>>> From: Jan Beulich <jbeulich@suse.com>
->>>>> Sent: Thursday, June 10, 2021 6:23 PM
->>>>>
->>>>> On 07.06.2021 04:43, Penny Zheng wrote:
->>>>>> --- a/xen/common/page_alloc.c
->>>>>> +++ b/xen/common/page_alloc.c
->>>>>> @@ -1065,6 +1065,75 @@ static struct page_info *alloc_heap_pages(
->>>>>>        return pg;
->>>>>>    }
->>>>>>
->>>>>> +#ifdef CONFIG_STATIC_ALLOCATION
->>>>>> +/*
->>>>>> + * Allocate nr_mfns contiguous pages, starting at #smfn, of static memory.
->>>>>> + * It is the equivalent of alloc_heap_pages for static memory  */
->>>>>> +static struct page_info *alloc_staticmem_pages(unsigned long nr_mfns,
->>>>>> +                                               mfn_t smfn,
->>>>>> +                                               unsigned int memflags)
->>>>>> +{
->>>>>> +    bool need_tlbflush = false;
->>>>>> +    uint32_t tlbflush_timestamp = 0;
->>>>>> +    unsigned long i;
->>>>>> +    struct page_info *pg;
->>>>>> +
->>>>>> +    /* For now, it only supports allocating at specified address. */
->>>>>> +    if ( !mfn_valid(smfn) || !nr_mfns )
->>>>>> +    {
->>>>>> +        printk(XENLOG_ERR
->>>>>> +               "Invalid %lu static memory starting at %"PRI_mfn"\n",
->>>>>
->>>>> Reading a log containing e.g. "Invalid 0 static memory starting at ..." I don't
->>>>> think I would recognize that the "0" is the count of pages.
->>>>
->>>> Sure. How about "try to allocate out of range page %"PRI_mfn"\n"?
->>>
->>> This still doesn't convey _both_ parts of the if() that would cause
->>> the log message to be issued.
->>>
->>>>>> +               nr_mfns, mfn_x(smfn));
->>>>>> +        return NULL;
->>>>>> +    }
->>>>>> +    pg = mfn_to_page(smfn);
->>>>>> +
->>>>>> +    for ( i = 0; i < nr_mfns; i++ )
->>>>>> +    {
->>>>>> +        /*
->>>>>> +         * Reference count must continuously be zero for free pages
->>>>>> +         * of static memory(PGC_reserved).
->>>>>> +         */
->>>>>> +        ASSERT(pg[i].count_info & PGC_reserved);
->>>>>
->>>>> What logic elsewhere guarantees that this will hold? ASSERT()s are to verify
->>>>> that assumptions are met. But I don't think you can sensibly assume the caller
->>>>> knows the range is reserved (and free), or else you could get away without any
->>>>> allocation function.
->>>>
->>>> The caller shall only call alloc_staticmem_pages when it knows range is reserved,
->>>> like, alloc_staticmem_pages is only called in the context of alloc_domstatic_pages
->>>> for now.
->>>
->>> If the caller knows the static ranges, this isn't really "allocation".
->>> I.e. I then question the need for "allocating" in the first place.
->>
->> We still need to setup the page so the reference counting works
->> properly. So can you clarify whether you are objecting on the name? If
->> yes, do you have a better suggestion?
-> 
-> It's not the name alone but the disconnect between name and actual
-> behavior. Note that here we've started from an ASSERT(), which is
-> reasonable to have if the caller knows where static pages are, but
-> which should be converted to an if() when talking about allocation
-> (i.e. the caller may not have enough knowledge). If it's not really
-> allocation, how about naming it "acquire" or "obtain" (and the
-> config option perhaps STATIC_MEMORY)?
+--h31gzZEtNLTqOjlF
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The caller will fetch the information from the Device Tree but it 
-doesn't sanity check it. I think it can be easy to make mistake as the 
-information will be scattered in various node of the DT.
+On Tue, Jul 06, 2021 at 11:50:37AM +0200, Uwe Kleine-K=F6nig wrote:
+> The driver core ignores the return value of this callback because there
+> is only little it can do when a device disappears.
 
-So I think it would be better if we have a check in both prod and debug 
-build to ease the integration.
+Acked-by: Mark Brown <broonie@kernel.org>
 
-Regarding the name itself, anyone of the one you suggested are fine with 
-me because to me the difference between them is too subtle to be 
-understood by most of the users.
+--h31gzZEtNLTqOjlF
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Cheers,
+-----BEGIN PGP SIGNATURE-----
 
--- 
-Julien Grall
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmDkLsEACgkQJNaLcl1U
+h9DTPwf+KbK6BlKGymyR/lS6jHNFzqdjZJtNgnrGCAQPShECrFWEoT+hh+wbGftz
++dyPIG3olrPCj20bdTdirf0mN6fK5b1ws7Y51Pl5kFKWSF9anPqHvugsBWlktrLI
+ZQGpHaOaDBzTO9z+a88du417htx2DY8Y84yObqoGeFEMODdEwf+d7aWTAsAumvEd
+W3tqktVLL+RKuqiM2ppKuMZRdRGwtv8d+Mo44RUmPtQGuj5slIJU22Ew0Nrn/eyI
+xRq4Q2GeqkJQJWsXmJ+C6hMJvgdnisNu+4eaDrkhaY/V36HQFRMl+PUAdt0W1ayI
+ftXC4GrcHhpLlLwnb8FUQzYy+hMN1g==
+=PinY
+-----END PGP SIGNATURE-----
+
+--h31gzZEtNLTqOjlF--
 
