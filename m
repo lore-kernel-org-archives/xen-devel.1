@@ -2,43 +2,48 @@ Return-Path: <SRS0=E0OE=L7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7011BC07E95
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 18:45:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0588DC07E95
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 19:30:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D37161CD1
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 18:45:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D37161CD1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id AF71F61C6D
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 19:30:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF71F61C6D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.152672.282027 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.152683.282058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1CY4-0002Al-Qd; Wed, 07 Jul 2021 18:45:28 +0000
+	id 1m1DFF-00077w-D9; Wed, 07 Jul 2021 19:30:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 152672.282027; Wed, 07 Jul 2021 18:45:28 +0000
+Received: by outflank-mailman (output) from mailman id 152683.282058; Wed, 07 Jul 2021 19:30:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1CY4-0002Ae-NS; Wed, 07 Jul 2021 18:45:28 +0000
-Received: by outflank-mailman (input) for mailman id 152672;
- Wed, 07 Jul 2021 18:45:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m1DFF-00077A-7d; Wed, 07 Jul 2021 19:30:05 +0000
+Received: by outflank-mailman (input) for mailman id 152683;
+ Wed, 07 Jul 2021 19:30:04 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ozWG=L7=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
- id 1m1CY2-0002AS-Ve
- for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 18:45:27 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7e0444e6-df53-11eb-8520-12813bfff9fa;
- Wed, 07 Jul 2021 18:45:25 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPS id 1F74761CCC;
- Wed,  7 Jul 2021 18:45:25 +0000 (UTC)
+ <SRS0=CPPN=L7=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
+ id 1m1DFE-0006wK-6U
+ for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 19:30:04 +0000
+Received: from mail-qt1-x82d.google.com (unknown [2607:f8b0:4864:20::82d])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1f8a3c8c-e5c1-4f4e-bee4-0e4e5e230a2c;
+ Wed, 07 Jul 2021 19:30:03 +0000 (UTC)
+Received: by mail-qt1-x82d.google.com with SMTP id d1so2921225qto.4
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Jul 2021 12:30:03 -0700 (PDT)
+Received: from FED-nrosbr-BE.crux.rad.ainfosec.com
+ (209-217-208-226.northland.net. [209.217.208.226])
+ by smtp.gmail.com with ESMTPSA id x14sm5309510qkm.64.2021.07.07.12.30.01
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 07 Jul 2021 12:30:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,43 +55,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7e0444e6-df53-11eb-8520-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1625683525;
-	bh=kdfpLu1SsHBuIdOzsEkc8SEq6yaCdkgmUWedy83UZdI=;
-	h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
-	b=tacU79ggiYoCmccnpL7d5ZnPbXlKbuqXdL/LE2YfFfvk5zjIbzM1wkTChNmUfkWAA
-	 JtsPKxPckrARc7w1mt/kHjjMB64lSu60OCiCIXrZleXLwUr2C/QdXaHHSbba10Ba/r
-	 lyHpAm7rdbMQ3Blp+YxI0aR0Wje1rGuGMvCjk9JzXTtz49NDtvKapDz3pj1xJ2a5gT
-	 GrvLXGjRlFuwvTDqqVaWd6MDOD+aPe0PGA7AHM+AA1yen4gxOIN5d25M8TnMpbvj2X
-	 nJN0DhVupvd7Mm70s8Ini2XFUvb8aAZM7qgQbX+0n2V2UiXb/CqsmT53uF9XBswbw5
-	 dOoHwq18JJ8Aw==
-Subject: Re: [GIT PULL] xen: branch for v5.14-rc1
-From: pr-tracker-bot@kernel.org
-In-Reply-To: <20210707070139.27901-1-jgross@suse.com>
-References: <20210707070139.27901-1-jgross@suse.com>
-X-PR-Tracked-List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
-X-PR-Tracked-Message-Id: <20210707070139.27901-1-jgross@suse.com>
-X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.14-rc1-tag
-X-PR-Tracked-Commit-Id: 629a5d87e26fe96bcaab44cbb81f5866af6f7008
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: 4ea90317956718e0648e1f87e56530db809a5a04
-Message-Id: <162568352509.3837.16922329777846284070.pr-tracker-bot@kernel.org>
-Date: Wed, 07 Jul 2021 18:45:25 +0000
-To: Juergen Gross <jgross@suse.com>
-Cc: torvalds@linux-foundation.org, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
+X-Inumbo-ID: 1f8a3c8c-e5c1-4f4e-bee4-0e4e5e230a2c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:content-transfer-encoding:in-reply-to;
+        bh=X/zO85YjvOrB7woXveint/YGYqlecHwG0pUi1LLySbw=;
+        b=LRwsg7UjMKEOFGZ1wxkP2mbtz2Xid4zr68SQGOYiFJOGesveDNU881EuqdXkaQlKd4
+         SDTYggjVe8ut6lkBNw1ab7WJ69c+sfuEbmLl7vPVaBPzHc6MuhyzfSUkmgiTI6Hg5kuB
+         yoc7n+aC2/NijWsMyf1Nz1tzJRYB2RGRhK3rEobK0q2a1MdCux3l0ptpSEYnFs5yJ30G
+         QUJulDCr1MQ+T/ZwBxdU3MSnDNp/J2tvQ/prYoCiYsh655pNj60W3wiY5iirNk0qCiMC
+         p3tDUo4CSCMahJjFNHia54bPpjuVbCWE+0ZYk4dyUWCWKJF/E5MQlLqe3l5poiuq7vVE
+         +41A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=X/zO85YjvOrB7woXveint/YGYqlecHwG0pUi1LLySbw=;
+        b=mOehaq4r/+NOK2J+qZPopoY6qNJksQW6Ln6azr4x9E1vPVK8OX0Sb46M7Pg46IteX5
+         SjE18GVB6irL2uZINMGP+uUoXUQzpkWeqkPYyFcjZ6JzrmX1ZflVvco8W/lBqMywOlCw
+         4UgAVrZwWQlz8rT9rNDD34VWz9xEelxI2QD6zVjClVOQ1ZHRpk9HmZnjF1/WvpWT2FvV
+         qjgb1RDuRWsPx35O/XgJ1ei47nLssPQg8pE2WMcHP6qh+ZTqZGVQzlo0jPp08J35eOh8
+         0XUigdmQE1dCwhtwMERIk/Qa44QyDM+0sET9jRuoPxRaZH987Tdq9AdWTIcChlXBDcSi
+         Sc3Q==
+X-Gm-Message-State: AOAM532fNCQhT3EC5+kP+TbOdaoNrY4sJA5DkAOopW95kP2WtIB078Mh
+	4PpkQUmdh+wtmCJ1YYIOiyc=
+X-Google-Smtp-Source: ABdhPJwssPXanCWHpIwA6NtdL6nKYk+/VW75N1Ine48YNrCRjgtvIY7/NHhDqAoztG/d68iNQt5KDw==
+X-Received: by 2002:a05:622a:290:: with SMTP id z16mr18154094qtw.29.1625686203236;
+        Wed, 07 Jul 2021 12:30:03 -0700 (PDT)
+Date: Wed, 7 Jul 2021 15:29:59 -0400
+From: Nick Rosbrook <rosbrookn@gmail.com>
+To: George Dunlap <George.Dunlap@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+	Nick Rosbrook <rosbrookn@ainfosec.com>,
+	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+Subject: Re: [RESEND PATCH 03/12] golang/xenlight: fix string conversion in
+ generated toC functions
+Message-ID: <YOYAtx54IDRWT7O0@FED-nrosbr-BE.crux.rad.ainfosec.com>
+References: <cover.1621887506.git.rosbrookn@ainfosec.com>
+ <06763aceff41167d3d3bbd603f729572c1f55c77.1621887506.git.rosbrookn@ainfosec.com>
+ <6BAF6F60-EC63-41AC-A46E-2045E746C7E1@citrix.com>
+ <YNC6LzVHXCcNfg+E@FED-nrosbr-BE.crux.rad.ainfosec.com>
+ <22BCDDFA-0EDB-466D-B644-54A956C0D84C@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <22BCDDFA-0EDB-466D-B644-54A956C0D84C@citrix.com>
 
-The pull request you sent on Wed,  7 Jul 2021 09:01:39 +0200:
+On Thu, Jul 01, 2021 at 02:09:47PM +0000, George Dunlap wrote:
+> 
+> 
+> > On Jun 21, 2021, at 5:11 PM, Nick Rosbrook <rosbrookn@gmail.com> wrote:
+> > 
+> > On Fri, Jun 18, 2021 at 11:00:26AM +0000, George Dunlap wrote:
+> >> 
+> >> 
+> >>> On May 24, 2021, at 9:36 PM, Nick Rosbrook <rosbrookn@gmail.com> wrote:
+> >>> 
+> >>> In gengotypes.py, the toC functions only set C string fields when
+> >>> the Go strings are non-empty. However, to prevent segfaults in some
+> >>> cases, these fields should always at least be set to nil so that the C
+> >>> memory is zeroed out.
+> >>> 
+> >>> Update gengotypes.py so that the generated code always sets these fields
+> >>> to nil first, and then proceeds to check if the Go string is non-empty.
+> >>> And, commit the new generated code.
+> >>> 
+> >>> Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+> >> 
+> >> So wait — if you do
+> >> 
+> >> var foo C.typename
+> >> 
+> >> Then golang won’t automatically zero out `foo`?
+> >> 
+> >> That seems like a bug really; but assuming this fixes real behavior you’ve encountered:
+> > 
+> > I would have to dig in again to figure out exactly what Go/cgo is doing
+> > here, and whether or not this is a bug. But, the behavior I observed was
+> > that without these nil assignments, I would sometimes get segfaults in
+> > libxl_string_copy. This patch ensures that libxl__str_dup is not called
+> > in the empty string case, thus avoiding the segfault.
+> 
+> I skimmed through the CGo page again when I was looking at this, and didn’t see anything specified about what happens if something is passed to a C function before being used by golang.  If you get a chance, I think it would be good to try to file a ticket with the golang project, pointing out the observed behavior, and asking them to either:
+> 
+> 1. Document that the golang compiler may not initialize a structure before passing it in to a C function
+> 
+> 2. Document that it *will* initialize values to zero, and fix the bug.
+> 
+Sorry for the late reply. But that's a good idea, I can try and come up
+with a reproducible example and open an issue.
 
-> git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.14-rc1-tag
-
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/4ea90317956718e0648e1f87e56530db809a5a04
-
-Thank you!
-
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+Thanks,
+NR
 
