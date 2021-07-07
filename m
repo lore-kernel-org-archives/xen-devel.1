@@ -2,48 +2,49 @@ Return-Path: <SRS0=E0OE=L7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F757C11F73
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40661C11F79
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED58C61CBE
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED58C61CBE
+	by mail.kernel.org (Postfix) with ESMTPS id EBD9D619C6
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBD9D619C6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.152389.281536 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.152391.281558 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m19Zr-0000vt-4r; Wed, 07 Jul 2021 15:35:07 +0000
+	id 1m19a0-0001X4-Jo; Wed, 07 Jul 2021 15:35:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 152389.281536; Wed, 07 Jul 2021 15:35:07 +0000
+Received: by outflank-mailman (output) from mailman id 152391.281558; Wed, 07 Jul 2021 15:35:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m19Zr-0000vm-0Y; Wed, 07 Jul 2021 15:35:07 +0000
-Received: by outflank-mailman (input) for mailman id 152389;
- Wed, 07 Jul 2021 15:35:05 +0000
+	id 1m19a0-0001Wv-GL; Wed, 07 Jul 2021 15:35:16 +0000
+Received: by outflank-mailman (input) for mailman id 152391;
+ Wed, 07 Jul 2021 15:35:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hxnL=L7=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1m19Zp-0000vf-N2
- for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 15:35:05 +0000
-Received: from mail-pf1-x429.google.com (unknown [2607:f8b0:4864:20::429])
+ id 1m19Zz-0000vf-JP
+ for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 15:35:15 +0000
+Received: from mail-pl1-x62d.google.com (unknown [2607:f8b0:4864:20::62d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4102ad92-5a19-4df2-af93-d23427aa261a;
- Wed, 07 Jul 2021 15:35:04 +0000 (UTC)
-Received: by mail-pf1-x429.google.com with SMTP id f20so2521845pfa.1
- for <xen-devel@lists.xenproject.org>; Wed, 07 Jul 2021 08:35:04 -0700 (PDT)
+ id 588f6865-4519-4f38-ad19-5a2091209ffe;
+ Wed, 07 Jul 2021 15:35:09 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id i13so1262380plb.10
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Jul 2021 08:35:09 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:0:6b7f:cf3e:bbf2:d229])
- by smtp.gmail.com with ESMTPSA id y11sm21096877pfo.160.2021.07.07.08.35.02
+ by smtp.gmail.com with ESMTPSA id y11sm21096877pfo.160.2021.07.07.08.35.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jul 2021 08:35:03 -0700 (PDT)
+ Wed, 07 Jul 2021 08:35:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4102ad92-5a19-4df2-af93-d23427aa261a
+X-Inumbo-ID: 588f6865-4519-4f38-ad19-5a2091209ffe
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jkolUPwi5vmrrny8Lv1Ra8OVYttbBuLIiyALxAjfV3U=;
-        b=uMrytKrdPPAXlONXoKnZbDo6E2aSYBoFVoQVDqkbtkCONIx0wfe5zboS/QgKGbqPlK
-         HS7DtVjHbxLaSrJiY3p/LKmA3t54P4RWelPEkaOkO8stQ7CAdvAy7zQxCEhobAKO24Uc
-         yzBRueqU/xom01Q9hKCy71J3KiVnkJ5uKwhY48+BfUMU4AbwU4AHP4T0qES8oolzCvTS
-         TR/u5P+44atse+4WTf8EAqCmkpOdPJMPQcSu8WGo5Hw7d5AOnMUTkIvh5Nho1JiSvb7Y
-         Ull2Bm5sux8+oXfXdMFGsGaeiQSo5wus3T4DkOI5mIPdsA0acl20F6nCBoK1W6wpKLxn
-         8ZDA==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=Wbx/GDjQo5wf+q3MZtzwwUpSNi9ocBIpEvvl5wWSUuY=;
+        b=e7uo+5Ivoc5v4lyVfzL5PJWG8DO2FVVvKVNLIP/JelHKqVQ3+/2ZYpapkBrb8LUFVC
+         7qYGdaZxlntgy7UeV5pBsyBFqfO+9KN/V/vM4nPx2R0eLL9hzQmmf/tE41W+P0WBh1At
+         K1Sp01WjqX2lAHavP/bYmMTQcIFW2bLY9Zr4o1smOkXa1eA2/B3W1FLG5w/rAY9GRB6T
+         gUDQxan/h/L61nWFKR325fMENtL6sQZbbso2hLKeW0W8/J9m3ZedU3U7l3Ps2GvH8BvV
+         0kvRsrTpIaE6ywUD5UHWtgCI4m2WoruEmTg8eGudyANQCG9ZEAxRyVEJzlSzFrr6JYOn
+         VueA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=jkolUPwi5vmrrny8Lv1Ra8OVYttbBuLIiyALxAjfV3U=;
-        b=X+LWZwJg68kQ1WZoKs7M7S01Joja7v5A3mof7uJ8FQ82TjNMyo7Xb2czJ/sCwgYX1M
-         pLL3WKV2DJDHPeJa/JVbLycxmag9FnOqot+snbfjXrp9TFaor+GMaL1OCmbKBetqn8L/
-         FYKJj3A74ogerN4r8dzyhxZ8F04+0N0IzpN7dchV19z2YJHRcKQiTnu932pNDSQ6HMRJ
-         7qIE/Gk86P7YmCiAvDrOeO5N75A5gsgnOysuM1r+mSpmMwiOfjai3o7MXyBDUuPg7s9C
-         GlD0nyV7jpd5OJh5rXg3DKnUZr+CWsqzRsI2p6gBLfZK764R3cBUOYo8BNTom7KyBfOf
-         RUiw==
-X-Gm-Message-State: AOAM5339x2mWZ2C89fBgcndroFiYFfCH/UZaMAzU6Kc7se0CoyvOBSwP
-	AaGq6kkTZo4YJfxYgqTf88c=
-X-Google-Smtp-Source: ABdhPJyD+VDToE/d2GDA5bL79Z5IjrRMQN05lni8aQ82HOiaAKMvr6K+0cHHIUktpTxzsCLuEpzwiw==
-X-Received: by 2002:a62:5547:0:b029:2ec:8f20:4e2 with SMTP id j68-20020a6255470000b02902ec8f2004e2mr26077347pfb.71.1625672103921;
-        Wed, 07 Jul 2021 08:35:03 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=Wbx/GDjQo5wf+q3MZtzwwUpSNi9ocBIpEvvl5wWSUuY=;
+        b=t30NMGyfzfXn/B6YSuugIjinvthwAQAoNAUpr0ppSB3RV6/NuIl0uA9wN/VSXAj94G
+         s6pqo9yG9W5Nb1ys0Hf9zcFZt22LERHytp/Pkx1HUT+dWtFEiF9OO+9ucUhN/GvIn4Hc
+         svL6XZkJS5spXUZMzVz/9irSelNgAEBWOL/auB2xd9Wkfy3NydEhpwfqcIrwp7km/v9O
+         Ex5xSCVT7XAa/cHL8my474Z91r/n4hmix9KBCiUXe/1JnAUMQt7uNzDEX+KQ12W5niNO
+         rd+J0QYHj++sFStdXX74+hkZbJeFSo4+sdiOgWFx4wyz/BVdohXFa1QrK5VcTOe5JXG5
+         ub5w==
+X-Gm-Message-State: AOAM530Q7nD2Fzb+v4F54bqO56U2jwKRhfFbqxEgvAPIJU5w+43aGzfJ
+	vs102fNKkIFxH44hlqx1szk=
+X-Google-Smtp-Source: ABdhPJzZTP+ads7LHHVospaj5MKCgPFde65N1bwnkO2O7gsx4XoJNrVJZzIIqkRlDyplTSDsm44ULQ==
+X-Received: by 2002:a17:902:da85:b029:129:b7a8:6ef8 with SMTP id j5-20020a170902da85b0290129b7a86ef8mr5932578plx.77.1625672108933;
+        Wed, 07 Jul 2021 08:35:08 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -111,22 +112,22 @@ To: kys@microsoft.com,
 	hch@lst.de,
 	m.szyprowski@samsung.com,
 	robin.murphy@arm.com,
-	Tianyu.Lan@microsoft.com,
 	rppt@kernel.org,
-	kirill.shutemov@linux.intel.com,
 	akpm@linux-foundation.org,
+	kirill.shutemov@linux.intel.com,
+	Tianyu.Lan@microsoft.com,
 	thomas.lendacky@amd.com,
 	ardb@kernel.org,
 	nramas@linux.microsoft.com,
 	robh@kernel.org,
 	keescook@chromium.org,
-	martin.b.radev@gmail.com,
-	pgonda@google.com,
-	hannes@cmpxchg.org,
-	krish.sadhukhan@oracle.com,
-	saravanand@fb.com,
-	xen-devel@lists.xenproject.org,
 	rientjes@google.com,
+	pgonda@google.com,
+	martin.b.radev@gmail.com,
+	hannes@cmpxchg.org,
+	saravanand@fb.com,
+	krish.sadhukhan@oracle.com,
+	xen-devel@lists.xenproject.org,
 	tj@kernel.org,
 	michael.h.kelley@microsoft.com
 Cc: iommu@lists.linux-foundation.org,
@@ -138,104 +139,245 @@ Cc: iommu@lists.linux-foundation.org,
 	vkuznets@redhat.com,
 	brijesh.singh@amd.com,
 	anparri@microsoft.com
-Subject: [RFC PATCH V4 00/12] x86/Hyper-V: Add Hyper-V Isolation VM support
-Date: Wed,  7 Jul 2021 11:34:41 -0400
-Message-Id: <20210707153456.3976348-1-ltykernel@gmail.com>
+Subject: [RFC PATCH V4 02/12] x86/HV: Add new hvcall guest address host visibility support
+Date: Wed,  7 Jul 2021 11:34:43 -0400
+Message-Id: <20210707153456.3976348-3-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210707153456.3976348-1-ltykernel@gmail.com>
+References: <20210707153456.3976348-1-ltykernel@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-Hyper-V provides two kinds of Isolation VMs. VBS(Virtualization-based
-security) and AMD SEV-SNP unenlightened Isolation VMs. This patchset
-is to add support for these Isolation VM support in Linux.
+Add new hvcall guest address host visibility support to mark
+memory visible to host. Call it inside set_memory_decrypted
+/encrypted().
 
-The memory of these vms are encrypted and host can't access guest
-memory directly. Hyper-V provides new host visibility hvcall and
-the guest needs to call new hvcall to mark memory visible to host
-before sharing memory with host. For security, all network/storage
-stack memory should not be shared with host and so there is bounce
-buffer requests.
-
-Vmbus channel ring buffer already plays bounce buffer role because
-all data from/to host needs to copy from/to between the ring buffer
-and IO stack memory. So mark vmbus channel ring buffer visible.
-
-There are two exceptions - packets sent by vmbus_sendpacket_
-pagebuffer() and vmbus_sendpacket_mpb_desc(). These packets
-contains IO stack memory address and host will access these memory.
-So add allocation bounce buffer support in vmbus for these packets.
-
-For SNP isolation VM, guest needs to access the shared memory via
-extra address space which is specified by Hyper-V CPUID HYPERV_CPUID_
-ISOLATION_CONFIG. The access physical address of the shared memory
-should be bounce buffer memory GPA plus with shared_gpa_boundary
-reported by CPUID.
-
-Change since v3:
-       - Add interface set_memory_decrypted_map() to decrypt memory and
-         map bounce buffer in extra address space 
-       - Remove swiotlb remap function and store the remap address
-         returned by set_memory_decrypted_map() in swiotlb mem data structure.
-       - Introduce hv_set_mem_enc() to make code more readable in the __set_memory_enc_dec().
-
-Change since v2:
-       - Remove not UIO driver in Isolation VM patch
-       - Use vmap_pfn() to replace ioremap_page_range function in
-       order to avoid exposing symbol ioremap_page_range() and
-       ioremap_page_range()
-       - Call hv set mem host visibility hvcall in set_memory_encrypted/decrypted()
-       - Enable swiotlb force mode instead of adding Hyper-V dma map/unmap hook
-       - Fix code style
-
-Tianyu Lan (12):
-  x86/HV: Initialize shared memory boundary in the Isolation VM.
-  x86/HV: Add new hvcall guest address host visibility support
-  HV: Mark vmbus ring buffer visible to host in Isolation VM
-  HV: Add Write/Read MSR registers via ghcb page
-  HV: Add ghcb hvcall support for SNP VM
-  HV/Vmbus: Add SNP support for VMbus channel initiate message
-  HV/Vmbus: Initialize VMbus ring buffer for Isolation VM
-  x86/Swiotlb/HV: Add Swiotlb bounce buffer remap function for HV IVM
-  HV/IOMMU: Enable swiotlb bounce buffer for Isolation VM
-  HV/Netvsc: Add Isolation VM support for netvsc driver
-  HV/Storvsc: Add Isolation VM support for storvsc driver
-  x86/HV: Not set memory decrypted/encrypted during kexec alloc/free
-    page in IVM
-
+Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
+---
  arch/x86/hyperv/Makefile           |   2 +-
- arch/x86/hyperv/hv_init.c          |  25 +--
- arch/x86/hyperv/ivm.c              | 299 +++++++++++++++++++++++++++++
- arch/x86/include/asm/hyperv-tlfs.h |  18 ++
- arch/x86/include/asm/mshyperv.h    |  84 +++++++-
- arch/x86/include/asm/set_memory.h  |   2 +
- arch/x86/include/asm/sev-es.h      |   4 +
- arch/x86/kernel/cpu/mshyperv.c     |   5 +
- arch/x86/kernel/machine_kexec_64.c |   5 +-
- arch/x86/kernel/sev-es-shared.c    |  21 +-
- arch/x86/mm/pat/set_memory.c       |  34 +++-
- arch/x86/xen/pci-swiotlb-xen.c     |   3 +-
- drivers/hv/Kconfig                 |   1 +
- drivers/hv/channel.c               |  48 ++++-
- drivers/hv/connection.c            |  71 ++++++-
- drivers/hv/hv.c                    | 129 +++++++++----
- drivers/hv/hyperv_vmbus.h          |   3 +
- drivers/hv/ring_buffer.c           |  84 ++++++--
- drivers/hv/vmbus_drv.c             |   3 +
- drivers/iommu/hyperv-iommu.c       |  62 ++++++
- drivers/net/hyperv/hyperv_net.h    |   6 +
- drivers/net/hyperv/netvsc.c        | 144 +++++++++++++-
- drivers/net/hyperv/rndis_filter.c  |   2 +
- drivers/scsi/storvsc_drv.c         |  68 ++++++-
+ arch/x86/hyperv/ivm.c              | 112 +++++++++++++++++++++++++++++
+ arch/x86/include/asm/hyperv-tlfs.h |  18 +++++
+ arch/x86/include/asm/mshyperv.h    |   3 +-
+ arch/x86/mm/pat/set_memory.c       |   6 +-
  include/asm-generic/hyperv-tlfs.h  |   1 +
- include/asm-generic/mshyperv.h     |  53 ++++-
- include/linux/hyperv.h             |  16 ++
- include/linux/swiotlb.h            |   4 +
- kernel/dma/swiotlb.c               |  11 +-
- 29 files changed, 1097 insertions(+), 111 deletions(-)
+ 6 files changed, 139 insertions(+), 3 deletions(-)
  create mode 100644 arch/x86/hyperv/ivm.c
 
+diff --git a/arch/x86/hyperv/Makefile b/arch/x86/hyperv/Makefile
+index 48e2c51464e8..5d2de10809ae 100644
+--- a/arch/x86/hyperv/Makefile
++++ b/arch/x86/hyperv/Makefile
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+-obj-y			:= hv_init.o mmu.o nested.o irqdomain.o
++obj-y			:= hv_init.o mmu.o nested.o irqdomain.o ivm.o
+ obj-$(CONFIG_X86_64)	+= hv_apic.o hv_proc.o
+ 
+ ifdef CONFIG_X86_64
+diff --git a/arch/x86/hyperv/ivm.c b/arch/x86/hyperv/ivm.c
+new file mode 100644
+index 000000000000..24a58795abd8
+--- /dev/null
++++ b/arch/x86/hyperv/ivm.c
+@@ -0,0 +1,112 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Hyper-V Isolation VM interface with paravisor and hypervisor
++ *
++ * Author:
++ *  Tianyu Lan <Tianyu.Lan@microsoft.com>
++ */
++
++#include <linux/hyperv.h>
++#include <linux/types.h>
++#include <linux/bitfield.h>
++#include <linux/slab.h>
++#include <asm/io.h>
++#include <asm/mshyperv.h>
++
++/*
++ * hv_mark_gpa_visibility - Set pages visible to host via hvcall.
++ *
++ * In Isolation VM, all guest memory is encripted from host and guest
++ * needs to set memory visible to host via hvcall before sharing memory
++ * with host.
++ */
++int hv_mark_gpa_visibility(u16 count, const u64 pfn[], u32 visibility)
++{
++	struct hv_gpa_range_for_visibility **input_pcpu, *input;
++	u16 pages_processed;
++	u64 hv_status;
++	unsigned long flags;
++
++	/* no-op if partition isolation is not enabled */
++	if (!hv_is_isolation_supported())
++		return 0;
++
++	if (count > HV_MAX_MODIFY_GPA_REP_COUNT) {
++		pr_err("Hyper-V: GPA count:%d exceeds supported:%lu\n", count,
++			HV_MAX_MODIFY_GPA_REP_COUNT);
++		return -EINVAL;
++	}
++
++	local_irq_save(flags);
++	input_pcpu = (struct hv_gpa_range_for_visibility **)
++			this_cpu_ptr(hyperv_pcpu_input_arg);
++	input = *input_pcpu;
++	if (unlikely(!input)) {
++		local_irq_restore(flags);
++		return -EINVAL;
++	}
++
++	input->partition_id = HV_PARTITION_ID_SELF;
++	input->host_visibility = visibility;
++	input->reserved0 = 0;
++	input->reserved1 = 0;
++	memcpy((void *)input->gpa_page_list, pfn, count * sizeof(*pfn));
++	hv_status = hv_do_rep_hypercall(
++			HVCALL_MODIFY_SPARSE_GPA_PAGE_HOST_VISIBILITY, count,
++			0, input, &pages_processed);
++	local_irq_restore(flags);
++
++	if (!(hv_status & HV_HYPERCALL_RESULT_MASK))
++		return 0;
++
++	return hv_status & HV_HYPERCALL_RESULT_MASK;
++}
++EXPORT_SYMBOL(hv_mark_gpa_visibility);
++
++/*
++ * hv_set_mem_host_visibility - Set specified memory visible to host.
++ *
++ * In Isolation VM, all guest memory is encrypted from host and guest
++ * needs to set memory visible to host via hvcall before sharing memory
++ * with host. This function works as wrap of hv_mark_gpa_visibility()
++ * with memory base and size.
++ */
++static int hv_set_mem_host_visibility(void *kbuffer, size_t size, u32 visibility)
++{
++	int pagecount = size >> HV_HYP_PAGE_SHIFT;
++	u64 *pfn_array;
++	int ret = 0;
++	int i, pfn;
++
++	if (!hv_is_isolation_supported() || !ms_hyperv.ghcb_base)
++		return 0;
++
++	pfn_array = kzalloc(HV_HYP_PAGE_SIZE, GFP_KERNEL);
++	if (!pfn_array)
++		return -ENOMEM;
++
++	for (i = 0, pfn = 0; i < pagecount; i++) {
++		pfn_array[pfn] = virt_to_hvpfn(kbuffer + i * HV_HYP_PAGE_SIZE);
++		pfn++;
++
++		if (pfn == HV_MAX_MODIFY_GPA_REP_COUNT || i == pagecount - 1) {
++			ret |= hv_mark_gpa_visibility(pfn, pfn_array, visibility);
++			pfn = 0;
++
++			if (ret)
++				goto err_free_pfn_array;
++		}
++	}
++
++ err_free_pfn_array:
++	kfree(pfn_array);
++	return ret;
++}
++
++int hv_set_mem_enc(unsigned long addr, int numpages, bool enc)
++{
++	return hv_set_mem_host_visibility((void *)addr,
++			numpages * HV_HYP_PAGE_SIZE,
++			enc ? VMBUS_PAGE_NOT_VISIBLE
++			: VMBUS_PAGE_VISIBLE_READ_WRITE);
++}
+diff --git a/arch/x86/include/asm/hyperv-tlfs.h b/arch/x86/include/asm/hyperv-tlfs.h
+index 606f5cc579b2..68826fbf92ca 100644
+--- a/arch/x86/include/asm/hyperv-tlfs.h
++++ b/arch/x86/include/asm/hyperv-tlfs.h
+@@ -262,6 +262,11 @@ enum hv_isolation_type {
+ #define HV_X64_MSR_TIME_REF_COUNT	HV_REGISTER_TIME_REF_COUNT
+ #define HV_X64_MSR_REFERENCE_TSC	HV_REGISTER_REFERENCE_TSC
+ 
++/* Hyper-V GPA map flags */
++#define	VMBUS_PAGE_NOT_VISIBLE		0
++#define	VMBUS_PAGE_VISIBLE_READ_ONLY	1
++#define	VMBUS_PAGE_VISIBLE_READ_WRITE	3
++
+ /*
+  * Declare the MSR used to setup pages used to communicate with the hypervisor.
+  */
+@@ -561,4 +566,17 @@ enum hv_interrupt_type {
+ 
+ #include <asm-generic/hyperv-tlfs.h>
+ 
++/* All input parameters should be in single page. */
++#define HV_MAX_MODIFY_GPA_REP_COUNT		\
++	((PAGE_SIZE / sizeof(u64)) - 2)
++
++/* HvCallModifySparseGpaPageHostVisibility hypercall */
++struct hv_gpa_range_for_visibility {
++	u64 partition_id;
++	u32 host_visibility:2;
++	u32 reserved0:30;
++	u32 reserved1;
++	u64 gpa_page_list[HV_MAX_MODIFY_GPA_REP_COUNT];
++} __packed;
++
+ #endif
+diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+index aeacca7c4da8..2172493dc881 100644
+--- a/arch/x86/include/asm/mshyperv.h
++++ b/arch/x86/include/asm/mshyperv.h
+@@ -194,7 +194,8 @@ struct irq_domain *hv_create_pci_msi_domain(void);
+ int hv_map_ioapic_interrupt(int ioapic_id, bool level, int vcpu, int vector,
+ 		struct hv_interrupt_entry *entry);
+ int hv_unmap_ioapic_interrupt(int ioapic_id, struct hv_interrupt_entry *entry);
+-
++int hv_mark_gpa_visibility(u16 count, const u64 pfn[], u32 visibility);
++int hv_set_mem_enc(unsigned long addr, int numpages, bool enc);
+ #else /* CONFIG_HYPERV */
+ static inline void hyperv_init(void) {}
+ static inline void hyperv_setup_mmu_ops(void) {}
+diff --git a/arch/x86/mm/pat/set_memory.c b/arch/x86/mm/pat/set_memory.c
+index 156cd235659f..6cc83c57383d 100644
+--- a/arch/x86/mm/pat/set_memory.c
++++ b/arch/x86/mm/pat/set_memory.c
+@@ -29,6 +29,8 @@
+ #include <asm/proto.h>
+ #include <asm/memtype.h>
+ #include <asm/set_memory.h>
++#include <asm/hyperv-tlfs.h>
++#include <asm/mshyperv.h>
+ 
+ #include "../mm_internal.h"
+ 
+@@ -1986,7 +1988,9 @@ static int __set_memory_enc_dec(unsigned long addr, int numpages, bool enc)
+ 	int ret;
+ 
+ 	/* Nothing to do if memory encryption is not active */
+-	if (!mem_encrypt_active())
++	if (hv_is_isolation_supported())
++		return hv_set_mem_enc(addr, numpages, enc);
++	else if (!mem_encrypt_active())
+ 		return 0;
+ 
+ 	/* Should not be working on unaligned addresses */
+diff --git a/include/asm-generic/hyperv-tlfs.h b/include/asm-generic/hyperv-tlfs.h
+index 515c3fb06ab3..8a0219255545 100644
+--- a/include/asm-generic/hyperv-tlfs.h
++++ b/include/asm-generic/hyperv-tlfs.h
+@@ -158,6 +158,7 @@ struct ms_hyperv_tsc_page {
+ #define HVCALL_RETARGET_INTERRUPT		0x007e
+ #define HVCALL_FLUSH_GUEST_PHYSICAL_ADDRESS_SPACE 0x00af
+ #define HVCALL_FLUSH_GUEST_PHYSICAL_ADDRESS_LIST 0x00b0
++#define HVCALL_MODIFY_SPARSE_GPA_PAGE_HOST_VISIBILITY 0x00db
+ 
+ /* Extended hypercalls */
+ #define HV_EXT_CALL_QUERY_CAPABILITIES		0x8001
 -- 
 2.25.1
 
