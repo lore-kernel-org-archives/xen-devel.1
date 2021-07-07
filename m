@@ -2,40 +2,40 @@ Return-Path: <SRS0=E0OE=L7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C87FC07E95
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 16:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 289EFC07E95
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 16:43:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C782B61CCC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 16:42:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C782B61CCC
+	by mail.kernel.org (Postfix) with ESMTPS id EE4C461CCC
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 16:43:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE4C461CCC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.152630.281945 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.152631.281956 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1AdM-000518-OZ; Wed, 07 Jul 2021 16:42:48 +0000
+	id 1m1AdS-0005K9-1k; Wed, 07 Jul 2021 16:42:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 152630.281945; Wed, 07 Jul 2021 16:42:48 +0000
+Received: by outflank-mailman (output) from mailman id 152631.281956; Wed, 07 Jul 2021 16:42:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1AdM-000511-LC; Wed, 07 Jul 2021 16:42:48 +0000
-Received: by outflank-mailman (input) for mailman id 152630;
- Wed, 07 Jul 2021 16:42:47 +0000
+	id 1m1AdR-0005Jk-UM; Wed, 07 Jul 2021 16:42:53 +0000
+Received: by outflank-mailman (input) for mailman id 152631;
+ Wed, 07 Jul 2021 16:42:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DB7Z=L7=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1m1AdL-00050s-Hq
- for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 16:42:47 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1m1AdQ-00050s-Gl
+ for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 16:42:52 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 22b1667f-18e4-4790-a736-5d9d25782186;
+ id e92e19ae-7689-4d7b-9a37-40a289bc10fa;
  Wed, 07 Jul 2021 16:42:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,64 +48,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 22b1667f-18e4-4790-a736-5d9d25782186
+X-Inumbo-ID: e92e19ae-7689-4d7b-9a37-40a289bc10fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1625676166;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=em/dbn601C7FX6AESIr9b+T9YsaP6aH1UAY4t5Cecxg=;
-  b=bBsiixoua899ULxCiaTdf5V60ZKuvu+nqo6dG0cxpR8QgYwXcvnbHHdJ
-   ONawZfTLUaNgn5H+tuLK3bFn08uNJHyPt60rBJNaDWxgrNOXv2XLCIo8k
-   qJ0ayriZT4yLsnyzHXcGVDg/4HcWpkscPn8FdkqDw9v6ouMd+2jowdldV
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 1PNoQvEBMHjM4eDi9YPk5qT80zOk7KTvVTqXCQq6xtqwEpnV0TDysfAeBkRSTsClCF71fnLAnl
- l7mo/CWKCqCYUUgZm2eDLpK0b+zSTTY6neaZhg07P5fpEdxSSvVipBBM6L9Y4H/LFVXwpDvLoJ
- WApRvfdYQGlYxUJLbeyOuOk60DljNrvbaedZzHOGvKe88jF74qj70QtDS83uQo7FeBRtA1VRhJ
- J8SXB5MI0AUMtjyBOwPs6X7V1FX3YCnk3B6h0vqvzf0IRp38ZILkPrXGkkCcqcQ69mJ26vxbEf
- vMA=
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=9bieze8oe0vLOiThGwS2ip9BrjWxM8RHuxHeePgyKcQ=;
+  b=Kz76DANIirRMFc8ZAkXaHY21Q/n+cR81I/uPPCmXAizq4azpPtdYulZa
+   8IhxXkTlj7P5gyaP3tRNqhiNs42OobO2+6IdWn93XZYDYvO+xyvh30c4z
+   91bErclaLJld+Rj7OkQxbkOCzw0Ug/IQH5D7NOdW16b8DGw+Haax7tOtK
+   c=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: D+YyPLM+VAE1LGQ2GgDoi6cCNhUgtu9tronggcAUkg2GZfEyrBgQgVLIbSvjcbaY/6VuaaiE0k
+ wt0hV8dqoWU14ZCDTF0+9m1Y1uxvDNC6Er7cW4csTPvEwoQHMZmh8ja5xJbCfNY8nDzy3V/P/C
+ 72LPYU/QU23j7oW+QnxeSzcQaIUftMMDHF0uBkRdFHlty8PWG9LNtE9WGrIlG7aHfhPh0r5MdX
+ Mg0K/I8jK6zpE7UCo5u4eVKcg9BZWrxPCY6cMRFGy65VJxXDtC2t68/Q5A6pa52OmFyHLFYzEz
+ Lc0=
 X-SBRS: 5.1
-X-MesageID: 49394618
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 47750435
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:jy/6L6vA3j6FLfsw4UrG04nm7skDstV00zEX/kB9WHVpm6yj+v
- xG/c5rsCMc7Qx6ZJhOo7+90cW7L080lqQFg7X5X43DYOCOggLBQL2KhbGI/9SKIVycygcy78
- Zdm6gVMqyLMbB55/yKnTVRxbwbsaW6GKPDv5ag8590JzsaD52Jd21Ce36m+ksdfnggObMJUK
- Cyy+BgvDSadXEefq2AdwI4t7iqnaysqHr+CyR2fiIa1A==
+IronPort-HdrOrdr: A9a23:2S62UaDg8EF4UFDlHelW55DYdb4zR+YMi2TDt3oddfWaSKylfq
+ GV7ZAmPHrP4gr5N0tOpTntAse9qBDnhPtICOsqTNSftWDd0QPFEGgL1+DfKlbbak/DH4BmtJ
+ uJc8JFeaDN5VoRt7eH3OFveexQv+Vu88qT9JnjJ28Gd3AMV0n5hT0JcTpyFCdNNW97LKt8Lr
+ WwzOxdqQGtfHwGB/7LfEXsD4D41qT2fIuNW29/OyIa
 X-IronPort-AV: E=Sophos;i="5.84,220,1620705600"; 
-   d="scan'208";a="49394618"
+   d="scan'208";a="47750435"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Doug Goldstein
 	<cardoe@cardoe.com>
-Subject: [XEN PATCH 0/2] automation: Fix build with new qemu-xen version
-Date: Wed, 7 Jul 2021 17:39:59 +0100
-Message-ID: <20210707164001.894805-1-anthony.perard@citrix.com>
+Subject: [XEN PATCH 2/2] automation: Check if ninja is available before building QEMU
+Date: Wed, 7 Jul 2021 17:40:01 +0100
+Message-ID: <20210707164001.894805-3-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20210707164001.894805-1-anthony.perard@citrix.com>
+References: <20210707164001.894805-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Patch series available in this git branch:
-https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.automation-add-ninja-v1
+ninja is now required to build the latest version of QEMU, some
+container still don't have ninja and attempting to add it breaks the
+build for different reasons, so QEMU will be skip on those containers.
 
-Adding ninja-build pkg when possible.
+Failures:
+- ubuntu/xenial:
+    fatal: ninja version (1.5.1) incompatible with build file ninja_required_version version (1.7.1).
+- debian/unstable-i386: (debian-unstable-32)
+    /build/tools/flask/policy/Makefile.common:115: *** target pattern contains no '%'.  Stop.
+- suse/opensuse-tumbleweed:
+    failed to build iPXE
+- debian/unstable:
+    update of the container fails with:
+        The following packages have unmet dependencies:
+         clang-8 : Depends: libstdc++-8-dev but it is not installable
+                   Depends: libgcc-8-dev but it is not installable
+                   Depends: libobjc-8-dev but it is not installable
+                   Recommends: llvm-8-dev but it is not going to be installed
+                   Recommends: libomp-8-dev but it is not going to be installed
 
-I'll push new containers soon.
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ automation/scripts/build | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Anthony PERARD (2):
-  automation: Adding ninja-build to some docker images
-  automation: Check if ninja is available before building QEMU
-
- automation/build/alpine/3.12.dockerfile        | 1 +
- automation/build/fedora/29.dockerfile          | 9 ++++++---
- automation/build/suse/opensuse-leap.dockerfile | 2 ++
- automation/build/ubuntu/bionic.dockerfile      | 2 ++
- automation/build/ubuntu/focal.dockerfile       | 2 ++
- automation/scripts/build                       | 4 +++-
- 6 files changed, 16 insertions(+), 4 deletions(-)
-
+diff --git a/automation/scripts/build b/automation/scripts/build
+index 46b6903d2922..d8c77e244cda 100755
+--- a/automation/scripts/build
++++ b/automation/scripts/build
+@@ -46,7 +46,9 @@ if ! test -z "$(ldd /bin/ls|grep musl|head -1)"; then
+ fi
+ 
+ # Qemu requires Python 3.5 or later
+-if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); exit(not(res))"; then
++# QEMU requires ninja
++if ! type python3 || python3 -c "import sys; res = sys.version_info < (3, 5); exit(not(res))" \
++        || ! type ninja; then
+     cfgargs+=("--with-system-qemu=/bin/false")
+ fi
+ 
 -- 
 Anthony PERARD
 
