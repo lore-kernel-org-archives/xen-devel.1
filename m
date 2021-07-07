@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86A22C11F82
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 566D5C11F8E
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 244D961CBF
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 244D961CBF
+	by mail.kernel.org (Postfix) with ESMTPS id 1439D61CBE
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Jul 2021 15:35:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1439D61CBE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.152392.281569 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.152395.281591 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m19a6-0001uq-2b; Wed, 07 Jul 2021 15:35:22 +0000
+	id 1m19aF-0002oA-VS; Wed, 07 Jul 2021 15:35:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 152392.281569; Wed, 07 Jul 2021 15:35:22 +0000
+Received: by outflank-mailman (output) from mailman id 152395.281591; Wed, 07 Jul 2021 15:35:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m19a5-0001uh-VX; Wed, 07 Jul 2021 15:35:21 +0000
-Received: by outflank-mailman (input) for mailman id 152392;
- Wed, 07 Jul 2021 15:35:20 +0000
+	id 1m19aF-0002no-Qu; Wed, 07 Jul 2021 15:35:31 +0000
+Received: by outflank-mailman (input) for mailman id 152395;
+ Wed, 07 Jul 2021 15:35:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hxnL=L7=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1m19a4-0000vf-Je
- for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 15:35:20 +0000
-Received: from mail-pj1-x1033.google.com (unknown [2607:f8b0:4864:20::1033])
+ id 1m19aE-0000vf-KA
+ for xen-devel@lists.xenproject.org; Wed, 07 Jul 2021 15:35:30 +0000
+Received: from mail-pg1-x534.google.com (unknown [2607:f8b0:4864:20::534])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 46fcb11a-10f8-4de5-8611-a39a46e83eb4;
- Wed, 07 Jul 2021 15:35:12 +0000 (UTC)
-Received: by mail-pj1-x1033.google.com with SMTP id n11so1776508pjo.1
- for <xen-devel@lists.xenproject.org>; Wed, 07 Jul 2021 08:35:12 -0700 (PDT)
+ id a4a80eb2-0ebb-4ed2-baf2-cc2ed3f5eeaf;
+ Wed, 07 Jul 2021 15:35:18 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id t9so2639011pgn.4
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Jul 2021 08:35:18 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:0:6b7f:cf3e:bbf2:d229])
- by smtp.gmail.com with ESMTPSA id y11sm21096877pfo.160.2021.07.07.08.35.11
+ by smtp.gmail.com with ESMTPSA id y11sm21096877pfo.160.2021.07.07.08.35.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jul 2021 08:35:11 -0700 (PDT)
+ Wed, 07 Jul 2021 08:35:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46fcb11a-10f8-4de5-8611-a39a46e83eb4
+X-Inumbo-ID: a4a80eb2-0ebb-4ed2-baf2-cc2ed3f5eeaf
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=+XJfA3AqCHkXuREWq5JYX1SJ1GS8dmwfVs7cs/uDyzo=;
-        b=bui63f9RbeyQ+PjA944VL6eRYVLBMCTgOcLfL7xQd4MV+TGtlZkSCA8rNshpLHozV7
-         EDzApfYSVdzgDBhHovaSMLT5NdnaVwtG4C1pbdo7Q08juYDuuI3z2tDDwrE3ko8nbycA
-         bmcYDWSgYMR600u1g5+fy2uvqUffuDtVadjxcABOrsUHXRidIjPqqFGjuzQY8ChUFFp7
-         IAXd5yOEalFiSg3IZmkvTq6kg0rbxMFNSKHHbwwuHqkbyN1eHbPo1jJaSMwX8vsUtnyr
-         T2tqSkyBsX9X2+b02CuW2rweA2SgzcxtUt/E0fnHHNmW0W+cmQBpS8190Rui6bzRjt+3
-         C71g==
+        bh=XnnD+WKjmMaIcoxzXQeIqu3OOT9S8jIhhegPGmtXPps=;
+        b=oaL0A1JtN7PBLGoV1YGeMFUgyp9SyUFco9uhf2pPj9nDoTX16X2ZY93jk5mSlH+DsN
+         SvCLYXZI+R7feW0Jx0OMtXNb4f62D1NKXZBhVGBE//ZTEOLu6B147uN+5g6H2xL9diy5
+         ufW4ucIzb9GScnOrnpTdTFdTQX2AYyQODtFUohD33rBRHrIipu1aU1jrbbynVzOeLZPr
+         5hxECBpjjXTRzk23jlBCHvmcAXtPztCNhXumUoIHe4jBxeK8cDgUJZKiMEk8kLBBHCU6
+         7G8klAIhGVfKVULa1RhqCfv0O34Au8CkmaWIXjZAzuWOdrG/V8D3KqnPCDtjK/EdzTix
+         jn7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+XJfA3AqCHkXuREWq5JYX1SJ1GS8dmwfVs7cs/uDyzo=;
-        b=BLIm7qQNddkP73gkkTRr72kKgrzkJ/X6VpKIcaIU44aUloJSiiL18cXu1eyos9xaY4
-         kLdgVe2OnK1Ph07ZsXlvOaqKSauVIbdIeAWkg66ml6CeViptcMua8MkauWsNt7ledGe7
-         HdYFn+TDHjuyFxfMcgMCvuboaw8w0n9L5glgfe+z2eggD8sC7jy7zXvKYX4/+iLQg3qJ
-         f5aTJttijFUtADY9hRDe0VmgYFgrLS874zO0D+9PXUXvmnf+W2XBHxHn8ptLIn+4pkSF
-         cETGFfpUftXVpdn7vPxd8AlrDjeWRSh4A4IGrqn5J9Qnk+oKCL+FGEb9+imEF+3Okr2H
-         4vpA==
-X-Gm-Message-State: AOAM53111Q0RC1+ym6Pttja6cTHOQ4yUM4mEt0jT9u0fWPGQGj4iWI6M
-	e1ELA7Y9SapnuC6uvsD27eo=
-X-Google-Smtp-Source: ABdhPJzfU3YRfZk3nkyd7QDC0TVwR1zYpPvF6PjFltyPDJmrt5nAGFOniT/ucBwrM64vLDEXGYARhg==
-X-Received: by 2002:a17:902:c78a:b029:129:7777:18c6 with SMTP id w10-20020a170902c78ab0290129777718c6mr17383657pla.36.1625672111967;
-        Wed, 07 Jul 2021 08:35:11 -0700 (PDT)
+        bh=XnnD+WKjmMaIcoxzXQeIqu3OOT9S8jIhhegPGmtXPps=;
+        b=HgRWolNmj1kqWJV14o2x/lOJOXLpa+A80M4h4QQp34xZfTZt3jBnuko5E3G0aVrchy
+         7UeNlb8HxVjhKBOCkl2vV+5+RJtmEARHvWuk0iGZ4M4wBfwD3ORPOtrOMyIumFMmrlMt
+         +j9h3IoFwB+2a2W8RkVlLoIfd7W242ipuiUWCoq4bqVKn1kLLC7cj/WQdKPWXaITAONt
+         q/zjdAm7hfV3YM4JpeGaCVOlqDzZhfgWVEP7lTac1VfhgRnUtLFqzWNkElN9GlxGQ/Us
+         hZDKKgziH+wPoBqvRL5JGCKAfzw3h5JJdIAiW3C94rqi/23BWOr0tsgbUz2C7hcLlbpq
+         SJYQ==
+X-Gm-Message-State: AOAM531ZYMSk5X5ip7uFjyTRko3qLb7GTPWl1i1YQp3kni799hbWA0GB
+	sUyze/jzGDM6k3DRClpOae0=
+X-Google-Smtp-Source: ABdhPJxV6H7qeqYvuTG8QtTM4W1lsIpIcrJFKXi7bJYXvWIOKqZZzABLwFM0i62fKflJpqZul4Pglw==
+X-Received: by 2002:a63:3dcb:: with SMTP id k194mr26633987pga.202.1625672118056;
+        Wed, 07 Jul 2021 08:35:18 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -139,9 +139,9 @@ Cc: iommu@lists.linux-foundation.org,
 	vkuznets@redhat.com,
 	brijesh.singh@amd.com,
 	anparri@microsoft.com
-Subject: [RFC PATCH V4 03/12] HV: Mark vmbus ring buffer visible to host in Isolation VM
-Date: Wed,  7 Jul 2021 11:34:44 -0400
-Message-Id: <20210707153456.3976348-4-ltykernel@gmail.com>
+Subject: [RFC PATCH V4 05/12] HV: Add ghcb hvcall support for SNP VM
+Date: Wed,  7 Jul 2021 11:34:46 -0400
+Message-Id: <20210707153456.3976348-6-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210707153456.3976348-1-ltykernel@gmail.com>
 References: <20210707153456.3976348-1-ltykernel@gmail.com>
@@ -150,134 +150,159 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-Mark vmbus ring buffer visible with set_memory_decrypted() when
-establish gpadl handle.
+Hyper-V provides ghcb hvcall to handle VMBus
+HVCALL_SIGNAL_EVENT and HVCALL_POST_MESSAGE
+msg in SNP Isolation VM. Add such support.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- drivers/hv/channel.c   | 38 ++++++++++++++++++++++++++++++++++++--
- include/linux/hyperv.h | 10 ++++++++++
- 2 files changed, 46 insertions(+), 2 deletions(-)
+ arch/x86/hyperv/ivm.c           | 42 +++++++++++++++++++++++++++++++++
+ arch/x86/include/asm/mshyperv.h |  1 +
+ drivers/hv/connection.c         |  6 ++++-
+ drivers/hv/hv.c                 |  8 ++++++-
+ include/asm-generic/mshyperv.h  | 29 +++++++++++++++++++++++
+ 5 files changed, 84 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/hv/channel.c b/drivers/hv/channel.c
-index f3761c73b074..01048bb07082 100644
---- a/drivers/hv/channel.c
-+++ b/drivers/hv/channel.c
-@@ -17,6 +17,7 @@
- #include <linux/hyperv.h>
- #include <linux/uio.h>
- #include <linux/interrupt.h>
-+#include <linux/set_memory.h>
- #include <asm/page.h>
+diff --git a/arch/x86/hyperv/ivm.c b/arch/x86/hyperv/ivm.c
+index c7b54631ca0d..8a6f4e9e3d6c 100644
+--- a/arch/x86/hyperv/ivm.c
++++ b/arch/x86/hyperv/ivm.c
+@@ -15,6 +15,48 @@
+ #include <asm/io.h>
  #include <asm/mshyperv.h>
  
-@@ -465,7 +466,7 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
- 	struct list_head *curr;
- 	u32 next_gpadl_handle;
- 	unsigned long flags;
--	int ret = 0;
-+	int ret = 0, index;
- 
- 	next_gpadl_handle =
- 		(atomic_inc_return(&vmbus_connection.next_gpadl_handle) - 1);
-@@ -474,6 +475,13 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
- 	if (ret)
- 		return ret;
- 
-+	ret = set_memory_decrypted((unsigned long)kbuffer,
-+				   HVPFN_UP(size));
-+	if (ret) {
-+		pr_warn("Failed to set host visibility.\n");
-+		return ret;
++u64 hv_ghcb_hypercall(u64 control, void *input, void *output, u32 input_size)
++{
++	union hv_ghcb *hv_ghcb;
++	void **ghcb_base;
++	unsigned long flags;
++
++	if (!ms_hyperv.ghcb_base)
++		return -EFAULT;
++
++	WARN_ON(in_nmi());
++
++	local_irq_save(flags);
++	ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
++	hv_ghcb = (union hv_ghcb *)*ghcb_base;
++	if (!hv_ghcb) {
++		local_irq_restore(flags);
++		return -EFAULT;
 +	}
 +
- 	init_completion(&msginfo->waitevent);
- 	msginfo->waiting_channel = channel;
++	memset(hv_ghcb, 0x00, HV_HYP_PAGE_SIZE);
++	hv_ghcb->ghcb.protocol_version = 1;
++	hv_ghcb->ghcb.ghcb_usage = 1;
++
++	hv_ghcb->hypercall.outputgpa = (u64)output;
++	hv_ghcb->hypercall.hypercallinput.asuint64 = 0;
++	hv_ghcb->hypercall.hypercallinput.callcode = control;
++
++	if (input_size)
++		memcpy(hv_ghcb->hypercall.hypercalldata, input, input_size);
++
++	VMGEXIT();
++
++	hv_ghcb->ghcb.ghcb_usage = 0xffffffff;
++	memset(hv_ghcb->ghcb.save.valid_bitmap, 0,
++	       sizeof(hv_ghcb->ghcb.save.valid_bitmap));
++
++	local_irq_restore(flags);
++
++	return hv_ghcb->hypercall.hypercalloutput.callstatus;
++}
++EXPORT_SYMBOL_GPL(hv_ghcb_hypercall);
++
+ void hv_ghcb_msr_write(u64 msr, u64 value)
+ {
+ 	union hv_ghcb *hv_ghcb;
+diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+index f9cc3753040a..fe03e3e833ac 100644
+--- a/arch/x86/include/asm/mshyperv.h
++++ b/arch/x86/include/asm/mshyperv.h
+@@ -258,6 +258,7 @@ void hv_sint_rdmsrl_ghcb(u64 msr, u64 *value);
+ void hv_signal_eom_ghcb(void);
+ void hv_ghcb_msr_write(u64 msr, u64 value);
+ void hv_ghcb_msr_read(u64 msr, u64 *value);
++u64 hv_ghcb_hypercall(u64 control, void *input, void *output, u32 input_size);
  
-@@ -539,6 +547,15 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
- 	/* At this point, we received the gpadl created msg */
- 	*gpadl_handle = gpadlmsg->gpadl;
+ #define hv_get_synint_state_ghcb(int_num, val)			\
+ 	hv_sint_rdmsrl_ghcb(HV_X64_MSR_SINT0 + int_num, val)
+diff --git a/drivers/hv/connection.c b/drivers/hv/connection.c
+index 311cd005b3be..186fd4c8acd4 100644
+--- a/drivers/hv/connection.c
++++ b/drivers/hv/connection.c
+@@ -445,6 +445,10 @@ void vmbus_set_event(struct vmbus_channel *channel)
  
-+	if (type == HV_GPADL_BUFFER)
-+		index = 0;
+ 	++channel->sig_events;
+ 
+-	hv_do_fast_hypercall8(HVCALL_SIGNAL_EVENT, channel->sig_event);
++	if (hv_isolation_type_snp())
++		hv_ghcb_hypercall(HVCALL_SIGNAL_EVENT, &channel->sig_event,
++				NULL, sizeof(u64));
 +	else
-+		index = channel->gpadl_range[1].gpadlhandle ? 2 : 1;
-+
-+	channel->gpadl_range[index].size = size;
-+	channel->gpadl_range[index].buffer = kbuffer;
-+	channel->gpadl_range[index].gpadlhandle = *gpadl_handle;
-+
- cleanup:
- 	spin_lock_irqsave(&vmbus_connection.channelmsg_lock, flags);
- 	list_del(&msginfo->msglistentry);
-@@ -549,6 +566,11 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
- 	}
- 
- 	kfree(msginfo);
-+
-+	if (ret)
-+		set_memory_encrypted((unsigned long)kbuffer,
-+				     HVPFN_UP(size));
-+
- 	return ret;
++		hv_do_fast_hypercall8(HVCALL_SIGNAL_EVENT, channel->sig_event);
  }
+ EXPORT_SYMBOL_GPL(vmbus_set_event);
+diff --git a/drivers/hv/hv.c b/drivers/hv/hv.c
+index 59f7173c4d9f..e5c9fc467893 100644
+--- a/drivers/hv/hv.c
++++ b/drivers/hv/hv.c
+@@ -98,7 +98,13 @@ int hv_post_message(union hv_connection_id connection_id,
+ 	aligned_msg->payload_size = payload_size;
+ 	memcpy((void *)aligned_msg->payload, payload, payload_size);
  
-@@ -811,7 +833,7 @@ int vmbus_teardown_gpadl(struct vmbus_channel *channel, u32 gpadl_handle)
- 	struct vmbus_channel_gpadl_teardown *msg;
- 	struct vmbus_channel_msginfo *info;
- 	unsigned long flags;
--	int ret;
-+	int ret, i;
+-	status = hv_do_hypercall(HVCALL_POST_MESSAGE, aligned_msg, NULL);
++	if (hv_isolation_type_snp())
++		status = hv_ghcb_hypercall(HVCALL_POST_MESSAGE,
++				(void *)aligned_msg, NULL,
++				sizeof(struct hv_input_post_message));
++	else
++		status = hv_do_hypercall(HVCALL_POST_MESSAGE,
++				aligned_msg, NULL);
  
- 	info = kzalloc(sizeof(*info) +
- 		       sizeof(struct vmbus_channel_gpadl_teardown), GFP_KERNEL);
-@@ -859,6 +881,18 @@ int vmbus_teardown_gpadl(struct vmbus_channel *channel, u32 gpadl_handle)
- 	spin_unlock_irqrestore(&vmbus_connection.channelmsg_lock, flags);
+ 	/* Preemption must remain disabled until after the hypercall
+ 	 * so some other thread can't get scheduled onto this cpu and
+diff --git a/include/asm-generic/mshyperv.h b/include/asm-generic/mshyperv.h
+index e6d6886faed1..8f6f283fb5b5 100644
+--- a/include/asm-generic/mshyperv.h
++++ b/include/asm-generic/mshyperv.h
+@@ -30,6 +30,35 @@
  
- 	kfree(info);
-+
-+	/* Find gpadl buffer virtual address and size. */
-+	for (i = 0; i < VMBUS_GPADL_RANGE_COUNT; i++)
-+		if (channel->gpadl_range[i].gpadlhandle == gpadl_handle)
-+			break;
-+
-+	if (set_memory_encrypted((unsigned long)channel->gpadl_range[i].buffer,
-+			HVPFN_UP(channel->gpadl_range[i].size)))
-+		pr_warn("Fail to set mem host visibility.\n");
-+
-+	channel->gpadl_range[i].gpadlhandle = 0;
-+
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(vmbus_teardown_gpadl);
-diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
-index 2e859d2f9609..06eccaba10c5 100644
---- a/include/linux/hyperv.h
-+++ b/include/linux/hyperv.h
-@@ -809,6 +809,14 @@ struct vmbus_device {
+ union hv_ghcb {
+ 	struct ghcb ghcb;
++	struct {
++		u64 hypercalldata[509];
++		u64 outputgpa;
++		union {
++			union {
++				struct {
++					u32 callcode        : 16;
++					u32 isfast          : 1;
++					u32 reserved1       : 14;
++					u32 isnested        : 1;
++					u32 countofelements : 12;
++					u32 reserved2       : 4;
++					u32 repstartindex   : 12;
++					u32 reserved3       : 4;
++				};
++				u64 asuint64;
++			} hypercallinput;
++			union {
++				struct {
++					u16 callstatus;
++					u16 reserved1;
++					u32 elementsprocessed : 12;
++					u32 reserved2         : 20;
++				};
++				u64 asunit64;
++			} hypercalloutput;
++		};
++		u64 reserved2;
++	} hypercall;
+ } __packed __aligned(PAGE_SIZE);
  
- #define VMBUS_DEFAULT_MAX_PKT_SIZE 4096
- 
-+struct vmbus_gpadl_range {
-+	u32 gpadlhandle;
-+	u32 size;
-+	void *buffer;
-+};
-+
-+#define VMBUS_GPADL_RANGE_COUNT		3
-+
- struct vmbus_channel {
- 	struct list_head listentry;
- 
-@@ -829,6 +837,8 @@ struct vmbus_channel {
- 	struct completion rescind_event;
- 
- 	u32 ringbuffer_gpadlhandle;
-+	/* GPADL_RING and Send/Receive GPADL_BUFFER. */
-+	struct vmbus_gpadl_range gpadl_range[VMBUS_GPADL_RANGE_COUNT];
- 
- 	/* Allocated memory for ring buffer */
- 	struct page *ringbuffer_page;
+ struct ms_hyperv_info {
 -- 
 2.25.1
 
