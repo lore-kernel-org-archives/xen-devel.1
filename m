@@ -2,43 +2,45 @@ Return-Path: <SRS0=QmZQ=MA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 176FBC07E96
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 16:44:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2F6FC07E96
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 17:31:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D1C2D6142C
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 16:44:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1C2D6142C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6E0DF61879
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 17:31:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E0DF61879
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.153234.283099 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.153242.283116 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1X8c-0000ms-Cq; Thu, 08 Jul 2021 16:44:34 +0000
+	id 1m1XrM-0005Yr-0R; Thu, 08 Jul 2021 17:30:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 153234.283099; Thu, 08 Jul 2021 16:44:34 +0000
+Received: by outflank-mailman (output) from mailman id 153242.283116; Thu, 08 Jul 2021 17:30:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1X8c-0000ml-9q; Thu, 08 Jul 2021 16:44:34 +0000
-Received: by outflank-mailman (input) for mailman id 153234;
- Thu, 08 Jul 2021 16:44:33 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m1XrL-0005Yk-TO; Thu, 08 Jul 2021 17:30:47 +0000
+Received: by outflank-mailman (input) for mailman id 153242;
+ Thu, 08 Jul 2021 17:30:47 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CMl4=MA=kernel.org=will@srs-us1.protection.inumbo.net>)
- id 1m1X8b-0000mf-7Q
- for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 16:44:33 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c4cf171c-e00b-11eb-859d-12813bfff9fa;
- Thu, 08 Jul 2021 16:44:32 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 88F256145A;
- Thu,  8 Jul 2021 16:44:23 +0000 (UTC)
+ (envelope-from <julien@xen.org>) id 1m1XrL-0005Ye-6h
+ for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 17:30:47 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1m1XrJ-0003Fp-7d; Thu, 08 Jul 2021 17:30:45 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1m1XrJ-0008UB-1j; Thu, 08 Jul 2021 17:30:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,115 +52,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4cf171c-e00b-11eb-859d-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1625762671;
-	bh=W3zJ1dUIVfwK2RD5Gb/pjjaY8IvTpKuqVuwPdbuz25M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Sp+30VCoqVzKdRCHxsdjheJ32Al4GyKkdqY67UI3HBglP9/4ElBHuP/C2H/FyWKo7
-	 e/R4/9B3d7vhaPNlh1DPVXpIf7uT6p/REBIACdKpJwJF9GZS42ymRBAxS0kVUi63dX
-	 LFzIygW0HZtu2Ulg0IazOQ0jJMqOOsCWNLsNFVLNWlAdaw+e6puTS7FlMwyfD5gEdI
-	 lFB3Rrin6g2B0nXBBJNO+PUuvd4DpkVlBGoDw/jR5Tje1HakbrKaEjYhMjAxMq0G0/
-	 9JUb/J7ll5Lxx3f7sEDifcv8wjoDYV7KpD0n+YA4MYDlWDIvbopDufBoyo/NtyqWxC
-	 FAtOTP/W4ikEQ==
-Date: Thu, 8 Jul 2021 17:44:19 +0100
-From: Will Deacon <will@kernel.org>
-To: Nathan Chancellor <nathan@kernel.org>
-Cc: Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
-	heikki.krogerus@linux.intel.com, thomas.hellstrom@linux.intel.com,
-	peterz@infradead.org, benh@kernel.crashing.org,
-	joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
-	chris@chris-wilson.co.uk, grant.likely@arm.com, paulus@samba.org,
-	Frank Rowand <frowand.list@gmail.com>, mingo@kernel.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Saravana Kannan <saravanak@google.com>, mpe@ellerman.id.au,
-	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
-	Bartosz Golaszewski <bgolaszewski@baylibre.com>, bskeggs@redhat.com,
-	linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
-	Thierry Reding <treding@nvidia.com>,
-	intel-gfx@lists.freedesktop.org, matthew.auld@intel.com,
-	linux-devicetree <devicetree@vger.kernel.org>,
-	Jianxiong Gao <jxgao@google.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	maarten.lankhorst@linux.intel.com, airlied@linux.ie,
-	Dan Williams <dan.j.williams@intel.com>,
-	linuxppc-dev@lists.ozlabs.org, jani.nikula@linux.intel.com,
-	Rob Herring <robh+dt@kernel.org>, rodrigo.vivi@intel.com,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Claire Chang <tientzu@chromium.org>, boris.ostrovsky@oracle.com,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	jgross@suse.com, Nicolas Boichat <drinkcat@chromium.org>,
-	Greg KH <gregkh@linuxfoundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Qian Cai <quic_qiancai@quicinc.com>,
-	lkml <linux-kernel@vger.kernel.org>,
-	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
-	Jim Quinlan <james.quinlan@broadcom.com>, xypron.glpk@gmx.de,
-	Tom Lendacky <thomas.lendacky@amd.com>, bauerman@linux.ibm.com
-Subject: Re: [PATCH v15 06/12] swiotlb: Use is_swiotlb_force_bounce for
- swiotlb data bouncing
-Message-ID: <20210708164418.GB23598@willie-the-truck>
-References: <0f7bd903-e309-94a0-21d7-f0e8e9546018@arm.com>
- <YN/7xcxt/XGAKceZ@Ryzen-9-3900X.localdomain>
- <20210705190352.GA19461@willie-the-truck>
- <20210706044848.GA13640@lst.de>
- <20210706132422.GA20327@willie-the-truck>
- <a59f771f-3289-62f0-ca50-8f3675d9b166@arm.com>
- <20210706140513.GA26498@lst.de>
- <bb32d5a6-2b34-4524-e171-3e9f5f4d3a94@arm.com>
- <20210706170657.GD20750@willie-the-truck>
- <e1c026c6-22c7-8979-4941-de9cfab3863a@kernel.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=wt0uW65InpZeLYKnZnrc3/xmojAKMLMMwXZYFLOfR6w=; b=mHefa9RF4/19QyBHUQevUKTz0q
+	4R4I2LY4trGSTb+P/prbNAnvkSHbyh8W6mfYsJng472BTF39IHMl1h9qLv1IRuDNW1pbGYY8fVxb7
+	cbLVeSnsqTeJVdsLH3r4tsNhxU6B0cGc7uHmCUHfkDvv2laLkk0xiiX9MvIYABnOF9+0=;
+Subject: Re: [PATCH v4 3/5] tools/libs/foreignmemory: Fix PAGE_SIZE
+ redefinition error
+To: Costin Lupu <costin.lupu@cs.pub.ro>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>
+References: <cover.1623155575.git.costin.lupu@cs.pub.ro>
+ <83beb95e3633b1aca7801fd8592406e2057f9bdc.1623155575.git.costin.lupu@cs.pub.ro>
+From: Julien Grall <julien@xen.org>
+Message-ID: <5fe5e336-6fbd-de40-6ec1-dda674a4d86d@xen.org>
+Date: Thu, 8 Jul 2021 18:30:43 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e1c026c6-22c7-8979-4941-de9cfab3863a@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <83beb95e3633b1aca7801fd8592406e2057f9bdc.1623155575.git.costin.lupu@cs.pub.ro>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 06, 2021 at 12:14:16PM -0700, Nathan Chancellor wrote:
-> On 7/6/2021 10:06 AM, Will Deacon wrote:
-> > On Tue, Jul 06, 2021 at 04:39:11PM +0100, Robin Murphy wrote:
-> > > On 2021-07-06 15:05, Christoph Hellwig wrote:
-> > > > On Tue, Jul 06, 2021 at 03:01:04PM +0100, Robin Murphy wrote:
-> > > > > FWIW I was pondering the question of whether to do something along those
-> > > > > lines or just scrap the default assignment entirely, so since I hadn't got
-> > > > > round to saying that I've gone ahead and hacked up the alternative
-> > > > > (similarly untested) for comparison :)
-> > > > > 
-> > > > > TBH I'm still not sure which one I prefer...
-> > > > 
-> > > > Claire did implement something like your suggestion originally, but
-> > > > I don't really like it as it doesn't scale for adding multiple global
-> > > > pools, e.g. for the 64-bit addressable one for the various encrypted
-> > > > secure guest schemes.
-> > > 
-> > > Ah yes, that had slipped my mind, and it's a fair point indeed. Since we're
-> > > not concerned with a minimal fix for backports anyway I'm more than happy to
-> > > focus on Will's approach. Another thing is that that looks to take us a
-> > > quiet step closer to the possibility of dynamically resizing a SWIOTLB pool,
-> > > which is something that some of the hypervisor protection schemes looking to
-> > > build on top of this series may want to explore at some point.
-> > 
-> > Ok, I'll split that nasty diff I posted up into a reviewable series and we
-> > can take it from there.
+Hi Costin,
+
+On 08/06/2021 13:35, Costin Lupu wrote:
+> If PAGE_SIZE is already defined in the system (e.g. in /usr/include/limits.h
+> header) then gcc will trigger a redefinition error because of -Werror. This
+> patch replaces usage of PAGE_* macros with XC_PAGE_* macros in order to avoid
+> confusion between control domain page granularity (PAGE_* definitions) and
+> guest domain page granularity.
 > 
-> For what it's worth, I attempted to boot Will's diff on top of Konrad's
-> devel/for-linus-5.14 and it did not work; in fact, I got no output on my
-> monitor period, even with earlyprintk=, and I do not think this machine has
-> a serial console.
-
-Looking back at the diff, I completely messed up swiotlb_exit() by mixing up
-physical and virtual addresses.
-
-> Robin's fix does work, it survived ten reboots with no issues getting to X
-> and I do not see the KASAN and slub debug messages anymore but I understand
-> that this is not the preferred solution it seems (although Konrad did want
-> to know if it works).
+> The exception is in osdep_xenforeignmemory_map() where we need the system page
+> size to check whether the PFN array should be allocated with mmap() or with
+> dynamic allocation.
 > 
-> I am happy to test any further patches or follow ups as needed, just keep me
-> on CC.
+> Signed-off-by: Costin Lupu <costin.lupu@cs.pub.ro>
 
-Cheers. Since this isn't 5.14 material any more, I'll CC you on a series
-next week.
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 
-Will
+Cheers,
+
+-- 
+Julien Grall
 
