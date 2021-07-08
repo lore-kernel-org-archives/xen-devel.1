@@ -2,55 +2,55 @@ Return-Path: <SRS0=QmZQ=MA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A67F0C07E99
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB69DC07E9E
 	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6AD8E61418
+	by mail.kernel.org (Postfix) with ESMTPS id 84BD161430
 	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6AD8E61418
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 84BD161430
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.153069.282776 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.153071.282798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1TNl-0005W1-2M; Thu, 08 Jul 2021 12:43:57 +0000
+	id 1m1TNp-00064Y-K2; Thu, 08 Jul 2021 12:44:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 153069.282776; Thu, 08 Jul 2021 12:43:57 +0000
+Received: by outflank-mailman (output) from mailman id 153071.282798; Thu, 08 Jul 2021 12:44:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1TNk-0005Vu-VX; Thu, 08 Jul 2021 12:43:56 +0000
-Received: by outflank-mailman (input) for mailman id 153069;
- Thu, 08 Jul 2021 12:43:55 +0000
+	id 1m1TNp-00064R-Gf; Thu, 08 Jul 2021 12:44:01 +0000
+Received: by outflank-mailman (input) for mailman id 153071;
+ Thu, 08 Jul 2021 12:44:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=pQIU=MA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1m1TNj-0005Vi-Hv
- for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 12:43:55 +0000
+ id 1m1TNo-0005Vi-Gc
+ for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 12:44:00 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 288ec912-d0ef-41c8-a47a-d8fe9ac8a46e;
+ id 2d8c5b08-7436-465e-b966-aadad158685b;
  Thu, 08 Jul 2021 12:43:54 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6F37421910;
- Thu,  8 Jul 2021 12:43:53 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0C3DB2198B;
+ Thu,  8 Jul 2021 12:43:54 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 2FEE912FF6;
+ by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id BC119133FE;
  Thu,  8 Jul 2021 12:43:53 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id QiFxCgnz5mCCYAAAGKfGzw
+ by imap1.suse-dmz.suse.de with ESMTPSA id ADi5LAnz5mCCYAAAGKfGzw
  (envelope-from <jgross@suse.com>); Thu, 08 Jul 2021 12:43:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -63,56 +63,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 288ec912-d0ef-41c8-a47a-d8fe9ac8a46e
+X-Inumbo-ID: 2d8c5b08-7436-465e-b966-aadad158685b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1625748233; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=FPMlgO+Zfo14oN0BcwYJE0QxFqpC+nPj8IpTkd710H4=;
-	b=LtDxVYxw8NSplGmzVQW3iV1asSAQcG2u79ScBvLOfTA9AgcT0W5CJNKY8AWeRfznZYMjT6
-	SJ93ktysNftCsUW3OTocLzu2Uh1Of6+hkDdUxPfzvMSSZ85RwzA6H7WwToYc19I52HWrN1
-	BkIRL0rzWzk+5sk2hSRdeD7Td/wtZzk=
+	t=1625748234; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=P4npa89ZahTLG6OBPNclvRbrcVBcLwXWzLAhBZSh1SY=;
+	b=kQxNjstg82kL4O4ZbGnRoUnxhb1jfiG/cNcdtcWx6GOnVEHDD/BIvDQn1QL50wL2g7eREQ
+	KqL6OG17bCJJPC/EAF6ca9HUJFjNj1LV9M3DbH3D37UtCY2ggjLGBQkostZ7F+AZ7jDqdi
+	6YlCyZaiFi82VevtT4x4ee0iMGO5qiQ=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH v2 0/3] xen: harden blkfront against malicious backends
-Date: Thu,  8 Jul 2021 14:43:42 +0200
-Message-Id: <20210708124345.10173-1-jgross@suse.com>
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Jens Axboe <axboe@kernel.dk>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2 2/3] xen/blkfront: don't take local copy of a request from the ring page
+Date: Thu,  8 Jul 2021 14:43:44 +0200
+Message-Id: <20210708124345.10173-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210708124345.10173-1-jgross@suse.com>
+References: <20210708124345.10173-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Xen backends of para-virtualized devices can live in dom0 kernel, dom0
-user land, or in a driver domain. This means that a backend might
-reside in a less trusted environment than the Xen core components, so
-a backend should not be able to do harm to a Xen guest (it can still
-mess up I/O data, but it shouldn't be able to e.g. crash a guest by
-other means or cause a privilege escalation in the guest).
+In order to avoid a malicious backend being able to influence the local
+copy of a request build the request locally first and then copy it to
+the ring page instead of doing it the other way round as today.
 
-Unfortunately blkfront in the Linux kernel is fully trusting its
-backend. This series is fixing blkfront in this regard.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+V2:
+- init variable to avoid potential compiler warning (Jan Beulich)
+---
+ drivers/block/xen-blkfront.c | 25 +++++++++++++++----------
+ 1 file changed, 15 insertions(+), 10 deletions(-)
 
-It was discussed to handle this as a security problem, but the topic
-was discussed in public before, so it isn't a real secret.
-
-Changes in V2:
-- put blkfront patches into own series
-- some minor comments addressed
-
-Juergen Gross (3):
-  xen/blkfront: read response from backend only once
-  xen/blkfront: don't take local copy of a request from the ring page
-  xen/blkfront: don't trust the backend response data blindly
-
- drivers/block/xen-blkfront.c | 122 +++++++++++++++++++++++------------
- 1 file changed, 80 insertions(+), 42 deletions(-)
-
+diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+index 86356014d35e..80701860870a 100644
+--- a/drivers/block/xen-blkfront.c
++++ b/drivers/block/xen-blkfront.c
+@@ -546,7 +546,7 @@ static unsigned long blkif_ring_get_request(struct blkfront_ring_info *rinfo,
+ 	rinfo->shadow[id].status = REQ_WAITING;
+ 	rinfo->shadow[id].associated_id = NO_ASSOCIATED_ID;
+ 
+-	(*ring_req)->u.rw.id = id;
++	rinfo->shadow[id].req.u.rw.id = id;
+ 
+ 	return id;
+ }
+@@ -554,11 +554,12 @@ static unsigned long blkif_ring_get_request(struct blkfront_ring_info *rinfo,
+ static int blkif_queue_discard_req(struct request *req, struct blkfront_ring_info *rinfo)
+ {
+ 	struct blkfront_info *info = rinfo->dev_info;
+-	struct blkif_request *ring_req;
++	struct blkif_request *ring_req, *final_ring_req;
+ 	unsigned long id;
+ 
+ 	/* Fill out a communications ring structure. */
+-	id = blkif_ring_get_request(rinfo, req, &ring_req);
++	id = blkif_ring_get_request(rinfo, req, &final_ring_req);
++	ring_req = &rinfo->shadow[id].req;
+ 
+ 	ring_req->operation = BLKIF_OP_DISCARD;
+ 	ring_req->u.discard.nr_sectors = blk_rq_sectors(req);
+@@ -569,8 +570,8 @@ static int blkif_queue_discard_req(struct request *req, struct blkfront_ring_inf
+ 	else
+ 		ring_req->u.discard.flag = 0;
+ 
+-	/* Keep a private copy so we can reissue requests when recovering. */
+-	rinfo->shadow[id].req = *ring_req;
++	/* Copy the request to the ring page. */
++	*final_ring_req = *ring_req;
+ 
+ 	return 0;
+ }
+@@ -703,6 +704,7 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
+ {
+ 	struct blkfront_info *info = rinfo->dev_info;
+ 	struct blkif_request *ring_req, *extra_ring_req = NULL;
++	struct blkif_request *final_ring_req, *final_extra_ring_req = NULL;
+ 	unsigned long id, extra_id = NO_ASSOCIATED_ID;
+ 	bool require_extra_req = false;
+ 	int i;
+@@ -747,7 +749,8 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
+ 	}
+ 
+ 	/* Fill out a communications ring structure. */
+-	id = blkif_ring_get_request(rinfo, req, &ring_req);
++	id = blkif_ring_get_request(rinfo, req, &final_ring_req);
++	ring_req = &rinfo->shadow[id].req;
+ 
+ 	num_sg = blk_rq_map_sg(req->q, req, rinfo->shadow[id].sg);
+ 	num_grant = 0;
+@@ -798,7 +801,9 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
+ 		ring_req->u.rw.nr_segments = num_grant;
+ 		if (unlikely(require_extra_req)) {
+ 			extra_id = blkif_ring_get_request(rinfo, req,
+-							  &extra_ring_req);
++							  &final_extra_ring_req);
++			extra_ring_req = &rinfo->shadow[extra_id].req;
++
+ 			/*
+ 			 * Only the first request contains the scatter-gather
+ 			 * list.
+@@ -840,10 +845,10 @@ static int blkif_queue_rw_req(struct request *req, struct blkfront_ring_info *ri
+ 	if (setup.segments)
+ 		kunmap_atomic(setup.segments);
+ 
+-	/* Keep a private copy so we can reissue requests when recovering. */
+-	rinfo->shadow[id].req = *ring_req;
++	/* Copy request(s) to the ring page. */
++	*final_ring_req = *ring_req;
+ 	if (unlikely(require_extra_req))
+-		rinfo->shadow[extra_id].req = *extra_ring_req;
++		*final_extra_ring_req = *extra_ring_req;
+ 
+ 	if (new_persistent_gnts)
+ 		gnttab_free_grant_references(setup.gref_head);
 -- 
 2.26.2
 
