@@ -2,43 +2,41 @@ Return-Path: <SRS0=QmZQ=MA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4741C07E96
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EF3EC07E96
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:52:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 96B2661419
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 96B2661419
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3D3D861456
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:52:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D3D861456
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.153067.282820 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.153097.282830 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1TOJ-0007fX-AU; Thu, 08 Jul 2021 12:44:31 +0000
+	id 1m1TVc-0000zf-BX; Thu, 08 Jul 2021 12:52:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 153067.282820; Thu, 08 Jul 2021 12:44:31 +0000
+Received: by outflank-mailman (output) from mailman id 153097.282830; Thu, 08 Jul 2021 12:52:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1TOJ-0007fQ-6z; Thu, 08 Jul 2021 12:44:31 +0000
-Received: by outflank-mailman (input) for mailman id 153067;
- Thu, 08 Jul 2021 12:41:40 +0000
+	id 1m1TVc-0000zY-8U; Thu, 08 Jul 2021 12:52:04 +0000
+Received: by outflank-mailman (input) for mailman id 153097;
+ Thu, 08 Jul 2021 12:52:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=76hI=MA=linaro.org=ulf.hansson@srs-us1.protection.inumbo.net>)
- id 1m1TLY-0005Sb-Qg
- for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 12:41:40 +0000
-Received: from mail-vs1-xe33.google.com (unknown [2607:f8b0:4864:20::e33])
+ <SRS0=qibP=MA=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
+ id 1m1TVb-0000zS-4G
+ for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 12:52:03 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 323957cb-11fa-4269-8f1c-6e4598220845;
- Thu, 08 Jul 2021 12:41:39 +0000 (UTC)
-Received: by mail-vs1-xe33.google.com with SMTP id m12so3487674vst.8
- for <xen-devel@lists.xenproject.org>; Thu, 08 Jul 2021 05:41:39 -0700 (PDT)
+ id ce103491-a6d6-4733-a750-cd8e4b5f940d;
+ Thu, 08 Jul 2021 12:52:01 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,167 +48,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 323957cb-11fa-4269-8f1c-6e4598220845
+X-Inumbo-ID: ce103491-a6d6-4733-a750-cd8e4b5f940d
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1625748721;
+  h=to:cc:references:from:subject:message-id:date:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=6I+al9BNJnxC2CU82cVxmyQEnKESTV/qboQ+l8LAysM=;
+  b=ZU78NVFcWQ0gRCR2FjURU3aNUXW8Cpka7Hl8qVl0fmLF++hrzFExyneH
+   HDsGAEq8khIGlfHk8pyJi1puekpZl4fNC+pOCQoibKiuW/wlaY21jGOUr
+   qms0B7/HObf2FDl2oSa1oM+GrqxohFcG0QkFTf+UsrDxSuguQ1EaylCZL
+   k=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: zcUNPUOMT7VNHbfjFoyji97OnY5tQW7p3ezGXVPSfpLKYUOyYhQuOtZZdxz0KFJ8OpicrH4cmy
+ 25lBLkL95TZ4BdBt9nM+v3JJ/xrdAIXUs8rnw6CTPLYZY00825jRwOBgn+pNRocHaqvxbJL+SW
+ wbVPDh54d0Ftbf1qp8RQ/BUjnOLV2ZUMiKRD55++5Fcsi9zOc6qJ3/gtB4CsV5pAcs5mMciUF2
+ rCKgtV5knrLsl7FfTl0WtqildpQvOR9TgEo5DawVqAh8Yff4w8V4NaIezeUh6GnXuFEOhNa/9N
+ E3M=
+X-SBRS: 5.1
+X-MesageID: 49470813
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:CNAKfKGOg1OUq1ScpLqFBJHXdLJyesId70hD6qkvc3Nom52j+/
+ xGws536faVslcssHFJo6HkBEDyewKiyXcT2/hsAV7CZniahILMFu9fBOTZskXd8kHFh4lgPO
+ JbAtJD4b7LfChHZKTBkXCF+r8bqbHtmsDY5pat854ud3APV0gJ1XYJNu/xKDwReOApP+taKH
+ PR3Ls9m9L2Ek5nEPhTS0N1E9TrlpnurtbLcBQGDxko5E2nii6p0qfzF1y90g0FWz1C7L8++S
+ yd+jaJqJmLgrWe8FvxxmXT55NZlJ/IzcZCPtWFjowwJi/3ggilSYx9U/mpvSwzosuo9FE2+e
+ O87CsIDoBW0Tf8b2u1qRzi103LyzA18ULvzleenD/KvdH5bChSMbsDuatpNj/ir2YwttB116
+ xGm0iDsYBMMB/GlCPho/DVShBRkFauq3ZKq59Ss5Vma/paVFZtl/1awKsMe61wWx4SqbpXUd
+ WGNfuspsq/KjihHjbkVgAF+q3eYpwxdi32CXTq9PbligS/MRhCvj0lLfck7wM9HaQGOtF5Dt
+ T/Q9FVfY51P7grhIJGda08qJiMeyHwqSylChPaHb2gLtBeB07w
+X-IronPort-AV: E=Sophos;i="5.84,222,1620705600"; 
+   d="scan'208";a="49470813"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Qx14CpCpkIHitHCaWqlZ2GorA4zwrE5SzGUViVb5NKL174c2HEYc9N6uD20FeztSFwu2VC+/NnudjVGF5XHN4U5e8tyXcdz93k3rRT/Rf/pAYN2l716vMwo9Lxn7hVZJfIMVXqN0eOtr7n/92GYwtUOiViVwbYi8PVnzhPspe5lDsjrvPcf11j6vhczh6E5kkY6pLtK4uXtyKQX6Oe5a3IxSVPDG9/s1pCs39XXHeFqAs5llTKBj01+jWVfbMp7WpYoBknyNLjKaW9mzPUhBwN/G9zOWkDoKsMqGguovmIR032m5iq9HRx/okNwUs0K0spDWnDiwLgIumM3KGnlBAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6I+al9BNJnxC2CU82cVxmyQEnKESTV/qboQ+l8LAysM=;
+ b=iqXl/2y7QImThwystxi7EhchNdmaa/baCep3FZJ3gnQNEjpjA1Qd+sHyzNcDlAmvm7GV1j+AuWthHeBwK075Jcgkt4aO1yyWx25J1Q3CAJaX4ks1ytJmH9IRyzeILqiTD97s9zW390rAoyh2w/8PppC9iokfxyW/SOhR07PQPZL90x6+Lyl1LvBGDbWlgEOabPXIYjjR3MrQSA/dR/mi0O0Q4WYAeVD2Wg6u4bqByhR8Ga9I17MlOsrzG/0ghERoeqNVSQ8X/S4x2/tWyFl2Apb2Tz//fYIdH9JYwffomU4+aciT4z3JQbNygE7ZbmO3goxa3jvLRrvTkFxaQTt8qA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=hP9H7HVTE7TFrRNTl1vyqWVVeZcuqXBCZg0bGqclL/A=;
-        b=VetX2Cfr8bdRNaZiWLEm04u6bqZW3l6DI4CAN74JIY7k4z1gUX2WPAhVDnzm350lf2
-         zN9Z12JQmbzlk/BWNUXvjVAbpB66ZXuvK3SPb444QQ5diXQOytBY51L2/oTaoUD9VeXU
-         uFurAnxdtCpnicZBLB0yD9ojUwv6W/qtm1PvBS9AFUFJNPr3tKxeC4wQWDvFkNeWRoRf
-         7SjXn45LyDiaoeLgbbyRwVPp/zZWqO3qYud0+Xn/514eUefuiFS0gjROioJ7tCP2C/ZN
-         ZUSLS7lmtDXFsaxdqMahs7f08oqXmzo9A5DfBGmAWg3PByPV9/9CFdzFbNZ8GtPMsFJE
-         z42g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=hP9H7HVTE7TFrRNTl1vyqWVVeZcuqXBCZg0bGqclL/A=;
-        b=BKQnmr4ba+nfvK+dYbonuLCmZeV7tAbHnNTdVIrGzhngV9/Ul39DXM7UGd9UZNRpDm
-         r7a97r1AmTTg6AQdzaWaxi2Gqu597gszZRJhc7DNs1kXdnIid8JNqN4G1/g3n9MEz/by
-         kYmK1+M+RXWiGyvapWjoQmpsOGtiBkbxF2BY3w9M1Y8zDNTrg26n6mATZrExqAsqJdOT
-         M6GoH4fnkqHSGvIeo5wYMwgdvOGC/PZniC4762higRfgMIiMDDFd/rV/I5hzoqQhZoRn
-         5KC3ivXA7Tmo/PRDsY+xqqrx09JfpB7fYjtPdYkVKpeiVgyNB+U3HLivwDD4tBzwqmYD
-         DOZQ==
-X-Gm-Message-State: AOAM5321k/+ATPf48ri4cgrSQ8gAbnLbHHVYaZFb5PK22zhu8upswA3T
-	BIp6FRyIJJbahy2agirbKp77MJo4hcIicxW6Gc96hg==
-X-Google-Smtp-Source: ABdhPJywz4fR2V+V+6/E9OWxEVi9/b58VFa4IZ2LlJTPpT0B9SRAdSG9PM7u1rPMHG2ZlSabjmUDzfVjnsqdUEe3bFI=
-X-Received: by 2002:a67:8783:: with SMTP id j125mr27888650vsd.42.1625748098931;
- Thu, 08 Jul 2021 05:41:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210706154803.1631813-1-u.kleine-koenig@pengutronix.de> <20210706154803.1631813-5-u.kleine-koenig@pengutronix.de>
-In-Reply-To: <20210706154803.1631813-5-u.kleine-koenig@pengutronix.de>
-From: Ulf Hansson <ulf.hansson@linaro.org>
-Date: Thu, 8 Jul 2021 14:41:02 +0200
-Message-ID: <CAPDyKFo0zuooWAkuR=BcsvcJ2pmSrcEoBhuC8+ne18GQphyPHA@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] bus: Make remove callback return void
-To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Sascha Hauer <kernel@pengutronix.de>, 
-	Cornelia Huck <cohuck@redhat.com>, 
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Russell King <linux@armlinux.org.uk>, 
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Geoff Levand <geoff@infradead.org>, Michael Ellerman <mpe@ellerman.id.au>, 
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Paul Mackerras <paulus@samba.org>, 
-	"Rafael J. Wysocki" <rjw@rjwysocki.net>, Len Brown <lenb@kernel.org>, 
-	William Breathitt Gray <vilhelm.gray@gmail.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, 
-	Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>, 
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Alison Schofield <alison.schofield@intel.com>, 
-	Vishal Verma <vishal.l.verma@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
-	Ben Widawsky <ben.widawsky@intel.com>, Dan Williams <dan.j.williams@intel.com>, 
-	Dave Jiang <dave.jiang@intel.com>, Vinod Koul <vkoul@kernel.org>, 
-	Stefan Richter <stefanr@s5r6.in-berlin.de>, Sudeep Holla <sudeep.holla@arm.com>, 
-	Cristian Marussi <cristian.marussi@arm.com>, Wu Hao <hao.wu@intel.com>, Tom Rix <trix@redhat.com>, 
-	Moritz Fischer <mdf@kernel.org>, Jiri Kosina <jikos@kernel.org>, 
-	Benjamin Tissoires <benjamin.tissoires@redhat.com>, 
-	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, 
-	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
-	Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
-	Dexuan Cui <decui@microsoft.com>, 
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Wolfram Sang <wsa@kernel.org>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
-	Samuel Iglesias Gonsalvez <siglesias@igalia.com>, Jens Taprogge <jens.taprogge@taprogge.org>, 
-	Johannes Thumshirn <morbidrsa@gmail.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Maxim Levitsky <maximlevitsky@gmail.com>, Alex Dubov <oakad@yahoo.com>, 
-	Lee Jones <lee.jones@linaro.org>, Tomas Winkler <tomas.winkler@intel.com>, 
-	Arnd Bergmann <arnd@arndb.de>, Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, 
-	Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>, 
-	Kishon Vijay Abraham I <kishon@ti.com>, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>, 
-	=?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kw@linux.com>, 
-	Bjorn Helgaas <bhelgaas@google.com>, Dominik Brodowski <linux@dominikbrodowski.net>, 
-	Maximilian Luz <luzmaximilian@gmail.com>, Hans de Goede <hdegoede@redhat.com>, 
-	Mark Gross <mgross@linux.intel.com>, Matt Porter <mporter@kernel.crashing.org>, 
-	Alexandre Bounine <alex.bou9@gmail.com>, Ohad Ben-Cohen <ohad@wizery.com>, 
-	Bjorn Andersson <bjorn.andersson@linaro.org>, Mathieu Poirier <mathieu.poirier@linaro.org>, 
-	"Martin K. Petersen" <martin.petersen@oracle.com>, Thorsten Scherer <t.scherer@eckelmann.de>, 
-	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Andy Gross <agross@kernel.org>, 
-	Mark Brown <broonie@kernel.org>, Stephen Boyd <sboyd@kernel.org>, Michael Buesch <m@bues.ch>, 
-	Sven Van Asbroeck <TheSven73@gmail.com>, Johan Hovold <johan@kernel.org>, Alex Elder <elder@kernel.org>, 
-	Andreas Noever <andreas.noever@gmail.com>, Michael Jamet <michael.jamet@intel.com>, 
-	Mika Westerberg <mika.westerberg@linux.intel.com>, Yehezkel Bernat <YehezkelShB@gmail.com>, 
-	Rob Herring <robh@kernel.org>, Jiri Slaby <jirislaby@kernel.org>, 
-	Heikki Krogerus <heikki.krogerus@linux.intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
-	Jason Wang <jasowang@redhat.com>, Kirti Wankhede <kwankhede@nvidia.com>, 
-	Alex Williamson <alex.williamson@redhat.com>, Martyn Welch <martyn@welchs.me.uk>, 
-	Manohar Vanga <manohar.vanga@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Johannes Berg <johannes@sipsolutions.net>, Jaroslav Kysela <perex@perex.cz>, 
-	Takashi Iwai <tiwai@suse.com>, Marc Zyngier <maz@kernel.org>, Tyrel Datwyler <tyreld@linux.ibm.com>, 
-	Vladimir Zapolskiy <vz@mleia.com>, Samuel Holland <samuel@sholland.org>, 
-	Qinglang Miao <miaoqinglang@huawei.com>, Alexey Kardashevskiy <aik@ozlabs.ru>, 
-	Kai-Heng Feng <kai.heng.feng@canonical.com>, Joey Pabalan <jpabalanb@gmail.com>, 
-	=?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
-	Adrian Hunter <adrian.hunter@intel.com>, Frank Li <lznuaa@gmail.com>, 
-	Mike Christie <michael.christie@oracle.com>, Bodo Stroesser <bostroesser@gmail.com>, 
-	Hannes Reinecke <hare@suse.de>, David Woodhouse <dwmw@amazon.co.uk>, SeongJae Park <sjpark@amazon.de>, 
-	Julien Grall <jgrall@amazon.com>, linux-arm-kernel@lists.infradead.org, 
-	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, linux-acpi@vger.kernel.org, 
-	linux-wireless@vger.kernel.org, linux-sunxi@lists.linux.dev, 
-	linux-cxl@vger.kernel.org, nvdimm@lists.linux.dev, dmaengine@vger.kernel.org, 
-	linux1394-devel@lists.sourceforge.net, linux-fpga@vger.kernel.org, 
-	linux-input@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org, 
-	industrypack-devel@lists.sourceforge.net, linux-media@vger.kernel.org, 
-	linux-mmc@vger.kernel.org, netdev@vger.kernel.org, linux-ntb@googlegroups.com, 
-	linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
-	linux-remoteproc@vger.kernel.org, linux-scsi@vger.kernel.org, 
-	alsa-devel@alsa-project.org, linux-arm-msm@vger.kernel.org, 
-	linux-spi@vger.kernel.org, linux-staging@lists.linux.dev, 
-	greybus-dev@lists.linaro.org, target-devel@vger.kernel.org, 
-	linux-usb@vger.kernel.org, linux-serial@vger.kernel.org, 
-	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, Russell King <rmk+kernel@armlinux.org.uk>, 
-	Johannes Thumshirn <jth@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6I+al9BNJnxC2CU82cVxmyQEnKESTV/qboQ+l8LAysM=;
+ b=GWtkjjP+8dMyDJ3MKnJZogm3TyirVSjNh6O72zVvw9Osx0M+VwBRlTpQEojj7MVew8ROhUYrmBjI3Bi7KI040PbsnKipf82RqhmS3qpRNGCb6374be73UgG15ZqLShD3BtnYfOv8W9xSCDFsCeKmzXMjWpZJ4r1qsYqLpsPjCoE=
+To: Olaf Hering <olaf@aepfle.de>
+CC: Anthony PERARD <anthony.perard@citrix.com>,
+	<xen-devel@lists.xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
+References: <20210707164001.894805-1-anthony.perard@citrix.com>
+ <20210707164001.894805-3-anthony.perard@citrix.com>
+ <e775d987-939c-e7dc-077c-fc61a2883f6e@citrix.com>
+ <20210707223551.5462c74e.olaf@aepfle.de>
+ <375823a3-8b49-7aab-ca2a-af219234b5e4@citrix.com>
+ <20210708023224.6c05ff5b.olaf@aepfle.de>
+ <20210708142309.6d093d7e.olaf@aepfle.de>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [XEN PATCH 2/2] automation: Check if ninja is available before
+ building QEMU
+Message-ID: <8878bdd2-fd3e-92c0-624f-cb0ee9deb280@citrix.com>
+Date: Thu, 8 Jul 2021 13:51:49 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <20210708142309.6d093d7e.olaf@aepfle.de>
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
+Content-Language: en-GB
+X-ClientProxiedBy: LO2P265CA0327.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:a4::27) To BYAPR03MB3623.namprd03.prod.outlook.com
+ (2603:10b6:a02:aa::12)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 18c82440-ce09-414c-6927-08d9420f2aa2
+X-MS-TrafficTypeDiagnostic: BY5PR03MB5348:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <BY5PR03MB5348C66E1D21112013150F47BA199@BY5PR03MB5348.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: gfWw8pqGiLUuc8cJyx4PtvUotLJYGoQKrHgOdeiFi80q91uUlgK2AFFAOsd6ZXXIGWHjWhFFIw3J2kUodzhdg3C4ZH5r5xbmKt28jQ8lhQexUmZLsasq+4rpmxuY4L+nGUKnUE4rYvXAJ1y2kJ6RDaeCh7Dt4ulOtxFaNJbIFZyymw81EXDi78tuufS6SJ2UGaM3MygyIrj3WDHINH1K7P7xntTAwQxZaqbv4+Ow189R7pQB0kSSD7cVml2wjOU44sw9atZxATNB2YOPL8jxuW7eNCQsaYw2KUuzNukcKZwu0ISzM4wAXs5jzXYMUeeL28LjrLJPjJ7yEq0mC8rblpBzUmLl9tltpRV5IHJg3geDOZXIpks4Ew2dNbCKX27dMHpdKulGEDQEjwU7eaBy1ez7Ty0EVJKFGUL7iriYDhP0YzlkEXMuCZDzNJ1PYoKudiFI+EPv8bNbzIvgLfNnqQTzDAJc0ITCNBn79ZOF6Z2PP/7+QQEmPW5EtmZiosKWYh+u3d+pf40qVa18bUJ0BrvnpjT6cUF0GaBVp0zRELo3xUu3r+5IL9bs2CG5AOOD/KNEbaGmI3xEt2vj0h9g7C4987dL8lfGL59AHBYjlie2jxqBqk+YV/5WhbSVNzVY3Wi3SqNGo70G1PudQJOURQlxcOcraD3FQ3RooLyawd6EQeXRkJeeLOXF9DlVEHcHSQ0nRXRdkxGNT94zyLoYOlkOSXc/uLfZ40fXqLzsYmQyWhIYBadC4Xbv4avVbWwMc6v6g9d5sG0NMMuuXijgDH5UpKAPJufjztVdmScMf6kDfelaWnDtiBPZnCqzl2HO
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(366004)(136003)(39860400002)(376002)(186003)(6666004)(8936002)(8676002)(26005)(478600001)(86362001)(36756003)(54906003)(38100700002)(6916009)(53546011)(956004)(2616005)(5660300002)(4326008)(16576012)(316002)(83380400001)(66946007)(2906002)(66476007)(66556008)(31696002)(6486002)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?Windows-1252?Q?4NZJff+oZs3fGgw0ecyx+Z3Emf4BE3qg6qvXARvGUPLPD857VENtGbZg?=
+ =?Windows-1252?Q?u1iEMSghiNYiQ7F3wHNYhjYZC4CFXbol8l7jHzZUg9JZoHOrYzgAWvGt?=
+ =?Windows-1252?Q?9/yuqAwuQPB96s1BbvFo/WmqKCqG03MZhmyAO19dN74BR/K8lZH0qA1I?=
+ =?Windows-1252?Q?VKBljGIg6cKr1+phv2JzWtxDo4HKKWa1KsC7oV3kba1zvCGX9Bvx/hA+?=
+ =?Windows-1252?Q?rbMse3lPjMlzy3iVXN47vcS6Nchj//L9g/++BC7NqhGP7T9id7ZNt8rN?=
+ =?Windows-1252?Q?/nvIvfB2u6LsCkaa6YxcSrGhbU93dG5nocbvrtxHXPVBWOjoyuajBi6+?=
+ =?Windows-1252?Q?eA13WNcpS5oN7Xawn4/UnKvu6lmiLnt+AFzkadDx1mfWYGfaaBPY6f4q?=
+ =?Windows-1252?Q?4u4ByPYiu6X+t6E1mqJttuSSzKhGMHE7bKXM5y3/KnIWyDHZXH3muv7R?=
+ =?Windows-1252?Q?RpITH4ZI7SvtIdElXZSc4z5HkBwZu//fzQdwlWrrYe7YNhDfNYZM+e41?=
+ =?Windows-1252?Q?07ExS9exkTC0b9lssxGe8u9odz4EGqYcLB4dQTROmX0Bz6ruNe5k5twn?=
+ =?Windows-1252?Q?cCvZcMakVlsGeCEFdub5w/Grtixqnk8oKU6nW+819EQVcjWWsFl6xrch?=
+ =?Windows-1252?Q?8h6zV0pT/ukp7CRHcohjY/7IBqtUOwqWZwkPVVkFrv0IW8gM8SFUUN8A?=
+ =?Windows-1252?Q?cCQ3JPu7kCkZ9yhdBQSXYB1wrp4IPBy9ymX3BVmGRthnVv2fJbsoZvlk?=
+ =?Windows-1252?Q?bQh6lgQnUWxGA6dNtXiurXm8npFuAJksPWKO8cV7a8rck412fB7L7R0X?=
+ =?Windows-1252?Q?IPJDkvbFFUQKx0VyoYSqTY/dtbTKoODLKOIMp9shGOxANsLJO7XTK6/2?=
+ =?Windows-1252?Q?Nllj22YS8hIrrQpu0+MXIlY4AbVoYUpffGyp7sJZLYW6BjnGDIt68DEQ?=
+ =?Windows-1252?Q?qJWlU1izfQWn16PzccmfbcDvoFzxzI4KlY6U7DH/2gNdonCBPiLj9c3T?=
+ =?Windows-1252?Q?BNmSIlhitZxuRzXjxcgmeAsr1fbRN8OwbtDLQqzF+eaTd8STHDW194ra?=
+ =?Windows-1252?Q?baVMqrTqQpJrSUSEbfwHPCAoVLorlWW0o0XOAiYO4KOM/Jp2JKgzlnao?=
+ =?Windows-1252?Q?kjIeQvqEd1NHjNoYI9aoOMSJbpUW6o8KT8OWtWOOmBLietmpXamXf8Sx?=
+ =?Windows-1252?Q?4+loAkcdOuyVSZMVuPBThvHTpbmX1zGmCXaeb/n/bFGUn/svdmNRGc5Z?=
+ =?Windows-1252?Q?4b8utmnHJ7Niw+/qMdwzEy/f0vM4IHFxLbuyV4W6Ufict5w3KqDEq+cJ?=
+ =?Windows-1252?Q?yyNqF7m2PxWFEpu8R1wCi4OvJ7Qm1WIJA3eMMY9I6zvA5MGEtkc+bO0H?=
+ =?Windows-1252?Q?rY6BjwcldpDj7xqx8pPxagDyhN4EAY0na1WI5DHO6RRlh50ZFI+qBDfq?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18c82440-ce09-414c-6927-08d9420f2aa2
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2021 12:51:55.8124
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wWyFiflE7+Ui5nGjYDav+4kNtV5DEb2UO+ZmpZeH9X/xMiKctFuzfM0TF/S2vvNvohfY57k3APzaCqBvrykyMw22YRTKEMxbSVc3L8sfqSQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5348
+X-OriginatorOrg: citrix.com
 
-On Tue, 6 Jul 2021 at 17:53, Uwe Kleine-K=C3=B6nig
-<u.kleine-koenig@pengutronix.de> wrote:
+On 08/07/2021 13:23, Olaf Hering wrote:
+> Am Thu, 8 Jul 2021 02:32:24 +0200
+> schrieb Olaf Hering <olaf@aepfle.de>:
 >
-> The driver core ignores the return value of this callback because there
-> is only little it can do when a device disappears.
+>> At least for Tumbleweed it is useful information.
+> CPE_NAME=3D"cpe:/o:opensuse:tumbleweed:20190730"
 >
-> This is the final bit of a long lasting cleanup quest where several
-> buses were converted to also return void from their remove callback.
-> Additionally some resource leaks were fixed that were caused by drivers
-> returning an error code in the expectation that the driver won't go
-> away.
+> Two years old for a rolling release.
 >
-> With struct bus_type::remove returning void it's prevented that newly
-> implemented buses return an ignored error code and so don't anticipate
-> wrong expectations for driver authors.
->
-> Acked-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk> (For ARM, Am=
-ba and related parts)
-> Acked-by: Mark Brown <broonie@kernel.org>
-> Acked-by: Chen-Yu Tsai <wens@csie.org> (for drivers/bus/sunxi-rsb.c)
-> Acked-by: Pali Roh=C3=A1r <pali@kernel.org>
-> Acked-by: Mauro Carvalho Chehab <mchehab@kernel.org> (for drivers/media)
-> Acked-by: Hans de Goede <hdegoede@redhat.com> (For drivers/platform)
-> Acked-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
-> Acked-By: Vinod Koul <vkoul@kernel.org>
-> Acked-by: Juergen Gross <jgross@suse.com> (For Xen)
-> Acked-by: Lee Jones <lee.jones@linaro.org> (For drivers/mfd)
-> Acked-by: Johannes Thumshirn <jth@kernel.org> (For drivers/mcb)
-> Acked-by: Johan Hovold <johan@kernel.org>
-> Acked-by: Srinivas Kandagatla <srinivas.kandagatla@linaro.org> (For drive=
-rs/slimbus)
-> Acked-by: Kirti Wankhede <kwankhede@nvidia.com> (For drivers/vfio)
-> Acked-by: Maximilian Luz <luzmaximilian@gmail.com>
-> Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com> (For ulpi and=
- typec)
-> Acked-by: Samuel Iglesias Gons=C3=A1lvez <siglesias@igalia.com> (For ipac=
-k)
-> Reviewed-by: Tom Rix <trix@redhat.com> (For fpga)
-> Acked-by: Geoff Levand <geoff@infradead.org> (For ps3)
-> Signed-off-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@pengutronix.de>
+> Is there any documentation how to refresh the used containers? I think fo=
+r Tumbleweed this should be done every other week.
 
-Acked-by: Ulf Hansson <ulf.hansson@linaro.org> # For MMC
+Automatically rebuilding the containers is still a task on the CI
+working group's todo list.
 
-[...]
+That said, the tumbleweed containers were rebuilt far more recently than
+that, so something is wonky...
 
-Kind regards
-Uffe
+
+In a xen tree, see automation/build/Makefile for details, but tl;dr to
+rebuild:
+
+$ make -C automation/build/ tumbleweed
+
+and to push:
+
+$ docker login registry.gitlab.com/xen-project/xen
+$ make -C automation/build/ tumbleweed PUSH=3D1
+
+Bear in mind that the final line will update the live CI system.=A0 What I
+normally do to test new containers is to give it a test suffix, push to
+the live system, and push a branch to xen.git with the container names
+edited in automation/gitlab-ci/*.yaml.
+
+~Andrew
+
 
