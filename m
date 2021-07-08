@@ -2,56 +2,43 @@ Return-Path: <SRS0=QmZQ=MA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-11.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B0B4C07E96
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4741C07E96
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B217561418
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B217561418
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 96B2661419
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Jul 2021 12:44:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 96B2661419
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.153072.282809 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.153067.282820 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1TNu-0006R1-Vn; Thu, 08 Jul 2021 12:44:06 +0000
+	id 1m1TOJ-0007fX-AU; Thu, 08 Jul 2021 12:44:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 153072.282809; Thu, 08 Jul 2021 12:44:06 +0000
+Received: by outflank-mailman (output) from mailman id 153067.282820; Thu, 08 Jul 2021 12:44:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1TNu-0006Qq-RH; Thu, 08 Jul 2021 12:44:06 +0000
-Received: by outflank-mailman (input) for mailman id 153072;
- Thu, 08 Jul 2021 12:44:05 +0000
+	id 1m1TOJ-0007fQ-6z; Thu, 08 Jul 2021 12:44:31 +0000
+Received: by outflank-mailman (input) for mailman id 153067;
+ Thu, 08 Jul 2021 12:41:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=pQIU=MA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1m1TNt-0005Vi-Gv
- for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 12:44:05 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=76hI=MA=linaro.org=ulf.hansson@srs-us1.protection.inumbo.net>)
+ id 1m1TLY-0005Sb-Qg
+ for xen-devel@lists.xenproject.org; Thu, 08 Jul 2021 12:41:40 +0000
+Received: from mail-vs1-xe33.google.com (unknown [2607:f8b0:4864:20::e33])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 42a12c1b-72d6-410e-91d3-2d6cb7fc8d93;
- Thu, 08 Jul 2021 12:43:54 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id B74A62196E;
- Thu,  8 Jul 2021 12:43:53 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 74C2912FF6;
- Thu,  8 Jul 2021 12:43:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id EARJGwnz5mCCYAAAGKfGzw
- (envelope-from <jgross@suse.com>); Thu, 08 Jul 2021 12:43:53 +0000
+ id 323957cb-11fa-4269-8f1c-6e4598220845;
+ Thu, 08 Jul 2021 12:41:39 +0000 (UTC)
+Received: by mail-vs1-xe33.google.com with SMTP id m12so3487674vst.8
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Jul 2021 05:41:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,153 +50,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42a12c1b-72d6-410e-91d3-2d6cb7fc8d93
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1625748233; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6XFRHPnaBepuoc+g0wkn7qafVkVXfKovIiQKKuCigY0=;
-	b=BXFPPPGLMorJwQJ/GBAcYquuPoBZv0JZuWqXHV8Uakpm4PYoIFYsrVZaXWXbkIe5qsl0d2
-	moJj/mx6I15y4Zg+tYjoRLtiw/NSzyzKZN7QTWu0Wv936j8y3qEQ+YbeEsxVJyIy7y60m9
-	3wbGtStlqlhO9oeX43eCEorvroh4ff4=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 1/3] xen/blkfront: read response from backend only once
-Date: Thu,  8 Jul 2021 14:43:43 +0200
-Message-Id: <20210708124345.10173-2-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210708124345.10173-1-jgross@suse.com>
-References: <20210708124345.10173-1-jgross@suse.com>
+X-Inumbo-ID: 323957cb-11fa-4269-8f1c-6e4598220845
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=hP9H7HVTE7TFrRNTl1vyqWVVeZcuqXBCZg0bGqclL/A=;
+        b=VetX2Cfr8bdRNaZiWLEm04u6bqZW3l6DI4CAN74JIY7k4z1gUX2WPAhVDnzm350lf2
+         zN9Z12JQmbzlk/BWNUXvjVAbpB66ZXuvK3SPb444QQ5diXQOytBY51L2/oTaoUD9VeXU
+         uFurAnxdtCpnicZBLB0yD9ojUwv6W/qtm1PvBS9AFUFJNPr3tKxeC4wQWDvFkNeWRoRf
+         7SjXn45LyDiaoeLgbbyRwVPp/zZWqO3qYud0+Xn/514eUefuiFS0gjROioJ7tCP2C/ZN
+         ZUSLS7lmtDXFsaxdqMahs7f08oqXmzo9A5DfBGmAWg3PByPV9/9CFdzFbNZ8GtPMsFJE
+         z42g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=hP9H7HVTE7TFrRNTl1vyqWVVeZcuqXBCZg0bGqclL/A=;
+        b=BKQnmr4ba+nfvK+dYbonuLCmZeV7tAbHnNTdVIrGzhngV9/Ul39DXM7UGd9UZNRpDm
+         r7a97r1AmTTg6AQdzaWaxi2Gqu597gszZRJhc7DNs1kXdnIid8JNqN4G1/g3n9MEz/by
+         kYmK1+M+RXWiGyvapWjoQmpsOGtiBkbxF2BY3w9M1Y8zDNTrg26n6mATZrExqAsqJdOT
+         M6GoH4fnkqHSGvIeo5wYMwgdvOGC/PZniC4762higRfgMIiMDDFd/rV/I5hzoqQhZoRn
+         5KC3ivXA7Tmo/PRDsY+xqqrx09JfpB7fYjtPdYkVKpeiVgyNB+U3HLivwDD4tBzwqmYD
+         DOZQ==
+X-Gm-Message-State: AOAM5321k/+ATPf48ri4cgrSQ8gAbnLbHHVYaZFb5PK22zhu8upswA3T
+	BIp6FRyIJJbahy2agirbKp77MJo4hcIicxW6Gc96hg==
+X-Google-Smtp-Source: ABdhPJywz4fR2V+V+6/E9OWxEVi9/b58VFa4IZ2LlJTPpT0B9SRAdSG9PM7u1rPMHG2ZlSabjmUDzfVjnsqdUEe3bFI=
+X-Received: by 2002:a67:8783:: with SMTP id j125mr27888650vsd.42.1625748098931;
+ Thu, 08 Jul 2021 05:41:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210706154803.1631813-1-u.kleine-koenig@pengutronix.de> <20210706154803.1631813-5-u.kleine-koenig@pengutronix.de>
+In-Reply-To: <20210706154803.1631813-5-u.kleine-koenig@pengutronix.de>
+From: Ulf Hansson <ulf.hansson@linaro.org>
+Date: Thu, 8 Jul 2021 14:41:02 +0200
+Message-ID: <CAPDyKFo0zuooWAkuR=BcsvcJ2pmSrcEoBhuC8+ne18GQphyPHA@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] bus: Make remove callback return void
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Sascha Hauer <kernel@pengutronix.de>, 
+	Cornelia Huck <cohuck@redhat.com>, 
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Russell King <linux@armlinux.org.uk>, 
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
+	Geoff Levand <geoff@infradead.org>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Paul Mackerras <paulus@samba.org>, 
+	"Rafael J. Wysocki" <rjw@rjwysocki.net>, Len Brown <lenb@kernel.org>, 
+	William Breathitt Gray <vilhelm.gray@gmail.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, 
+	Maxime Ripard <mripard@kernel.org>, Chen-Yu Tsai <wens@csie.org>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Alison Schofield <alison.schofield@intel.com>, 
+	Vishal Verma <vishal.l.verma@intel.com>, Ira Weiny <ira.weiny@intel.com>, 
+	Ben Widawsky <ben.widawsky@intel.com>, Dan Williams <dan.j.williams@intel.com>, 
+	Dave Jiang <dave.jiang@intel.com>, Vinod Koul <vkoul@kernel.org>, 
+	Stefan Richter <stefanr@s5r6.in-berlin.de>, Sudeep Holla <sudeep.holla@arm.com>, 
+	Cristian Marussi <cristian.marussi@arm.com>, Wu Hao <hao.wu@intel.com>, Tom Rix <trix@redhat.com>, 
+	Moritz Fischer <mdf@kernel.org>, Jiri Kosina <jikos@kernel.org>, 
+	Benjamin Tissoires <benjamin.tissoires@redhat.com>, 
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>, 
+	"K. Y. Srinivasan" <kys@microsoft.com>, Haiyang Zhang <haiyangz@microsoft.com>, 
+	Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
+	Dexuan Cui <decui@microsoft.com>, 
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Wolfram Sang <wsa@kernel.org>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+	Samuel Iglesias Gonsalvez <siglesias@igalia.com>, Jens Taprogge <jens.taprogge@taprogge.org>, 
+	Johannes Thumshirn <morbidrsa@gmail.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Maxim Levitsky <maximlevitsky@gmail.com>, Alex Dubov <oakad@yahoo.com>, 
+	Lee Jones <lee.jones@linaro.org>, Tomas Winkler <tomas.winkler@intel.com>, 
+	Arnd Bergmann <arnd@arndb.de>, Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>, 
+	Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>, 
+	Kishon Vijay Abraham I <kishon@ti.com>, Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>, 
+	=?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kw@linux.com>, 
+	Bjorn Helgaas <bhelgaas@google.com>, Dominik Brodowski <linux@dominikbrodowski.net>, 
+	Maximilian Luz <luzmaximilian@gmail.com>, Hans de Goede <hdegoede@redhat.com>, 
+	Mark Gross <mgross@linux.intel.com>, Matt Porter <mporter@kernel.crashing.org>, 
+	Alexandre Bounine <alex.bou9@gmail.com>, Ohad Ben-Cohen <ohad@wizery.com>, 
+	Bjorn Andersson <bjorn.andersson@linaro.org>, Mathieu Poirier <mathieu.poirier@linaro.org>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, Thorsten Scherer <t.scherer@eckelmann.de>, 
+	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Andy Gross <agross@kernel.org>, 
+	Mark Brown <broonie@kernel.org>, Stephen Boyd <sboyd@kernel.org>, Michael Buesch <m@bues.ch>, 
+	Sven Van Asbroeck <TheSven73@gmail.com>, Johan Hovold <johan@kernel.org>, Alex Elder <elder@kernel.org>, 
+	Andreas Noever <andreas.noever@gmail.com>, Michael Jamet <michael.jamet@intel.com>, 
+	Mika Westerberg <mika.westerberg@linux.intel.com>, Yehezkel Bernat <YehezkelShB@gmail.com>, 
+	Rob Herring <robh@kernel.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+	Jason Wang <jasowang@redhat.com>, Kirti Wankhede <kwankhede@nvidia.com>, 
+	Alex Williamson <alex.williamson@redhat.com>, Martyn Welch <martyn@welchs.me.uk>, 
+	Manohar Vanga <manohar.vanga@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Johannes Berg <johannes@sipsolutions.net>, Jaroslav Kysela <perex@perex.cz>, 
+	Takashi Iwai <tiwai@suse.com>, Marc Zyngier <maz@kernel.org>, Tyrel Datwyler <tyreld@linux.ibm.com>, 
+	Vladimir Zapolskiy <vz@mleia.com>, Samuel Holland <samuel@sholland.org>, 
+	Qinglang Miao <miaoqinglang@huawei.com>, Alexey Kardashevskiy <aik@ozlabs.ru>, 
+	Kai-Heng Feng <kai.heng.feng@canonical.com>, Joey Pabalan <jpabalanb@gmail.com>, 
+	=?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
+	Adrian Hunter <adrian.hunter@intel.com>, Frank Li <lznuaa@gmail.com>, 
+	Mike Christie <michael.christie@oracle.com>, Bodo Stroesser <bostroesser@gmail.com>, 
+	Hannes Reinecke <hare@suse.de>, David Woodhouse <dwmw@amazon.co.uk>, SeongJae Park <sjpark@amazon.de>, 
+	Julien Grall <jgrall@amazon.com>, linux-arm-kernel@lists.infradead.org, 
+	linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org, 
+	linuxppc-dev@lists.ozlabs.org, linux-acpi@vger.kernel.org, 
+	linux-wireless@vger.kernel.org, linux-sunxi@lists.linux.dev, 
+	linux-cxl@vger.kernel.org, nvdimm@lists.linux.dev, dmaengine@vger.kernel.org, 
+	linux1394-devel@lists.sourceforge.net, linux-fpga@vger.kernel.org, 
+	linux-input@vger.kernel.org, linux-hyperv@vger.kernel.org, 
+	linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org, 
+	industrypack-devel@lists.sourceforge.net, linux-media@vger.kernel.org, 
+	linux-mmc@vger.kernel.org, netdev@vger.kernel.org, linux-ntb@googlegroups.com, 
+	linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, linux-scsi@vger.kernel.org, 
+	alsa-devel@alsa-project.org, linux-arm-msm@vger.kernel.org, 
+	linux-spi@vger.kernel.org, linux-staging@lists.linux.dev, 
+	greybus-dev@lists.linaro.org, target-devel@vger.kernel.org, 
+	linux-usb@vger.kernel.org, linux-serial@vger.kernel.org, 
+	virtualization@lists.linux-foundation.org, kvm@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, Russell King <rmk+kernel@armlinux.org.uk>, 
+	Johannes Thumshirn <jth@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-In order to avoid problems in case the backend is modifying a response
-on the ring page while the frontend has already seen it, just read the
-response into a local buffer in one go and then operate on that buffer
-only.
+On Tue, 6 Jul 2021 at 17:53, Uwe Kleine-K=C3=B6nig
+<u.kleine-koenig@pengutronix.de> wrote:
+>
+> The driver core ignores the return value of this callback because there
+> is only little it can do when a device disappears.
+>
+> This is the final bit of a long lasting cleanup quest where several
+> buses were converted to also return void from their remove callback.
+> Additionally some resource leaks were fixed that were caused by drivers
+> returning an error code in the expectation that the driver won't go
+> away.
+>
+> With struct bus_type::remove returning void it's prevented that newly
+> implemented buses return an ignored error code and so don't anticipate
+> wrong expectations for driver authors.
+>
+> Acked-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk> (For ARM, Am=
+ba and related parts)
+> Acked-by: Mark Brown <broonie@kernel.org>
+> Acked-by: Chen-Yu Tsai <wens@csie.org> (for drivers/bus/sunxi-rsb.c)
+> Acked-by: Pali Roh=C3=A1r <pali@kernel.org>
+> Acked-by: Mauro Carvalho Chehab <mchehab@kernel.org> (for drivers/media)
+> Acked-by: Hans de Goede <hdegoede@redhat.com> (For drivers/platform)
+> Acked-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
+> Acked-By: Vinod Koul <vkoul@kernel.org>
+> Acked-by: Juergen Gross <jgross@suse.com> (For Xen)
+> Acked-by: Lee Jones <lee.jones@linaro.org> (For drivers/mfd)
+> Acked-by: Johannes Thumshirn <jth@kernel.org> (For drivers/mcb)
+> Acked-by: Johan Hovold <johan@kernel.org>
+> Acked-by: Srinivas Kandagatla <srinivas.kandagatla@linaro.org> (For drive=
+rs/slimbus)
+> Acked-by: Kirti Wankhede <kwankhede@nvidia.com> (For drivers/vfio)
+> Acked-by: Maximilian Luz <luzmaximilian@gmail.com>
+> Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com> (For ulpi and=
+ typec)
+> Acked-by: Samuel Iglesias Gons=C3=A1lvez <siglesias@igalia.com> (For ipac=
+k)
+> Reviewed-by: Tom Rix <trix@redhat.com> (For fpga)
+> Acked-by: Geoff Levand <geoff@infradead.org> (For ps3)
+> Signed-off-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@pengutronix.de>
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
- drivers/block/xen-blkfront.c | 35 ++++++++++++++++++-----------------
- 1 file changed, 18 insertions(+), 17 deletions(-)
+Acked-by: Ulf Hansson <ulf.hansson@linaro.org> # For MMC
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 8d49f8fa98bb..86356014d35e 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -1539,7 +1539,7 @@ static bool blkif_completion(unsigned long *id,
- static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- {
- 	struct request *req;
--	struct blkif_response *bret;
-+	struct blkif_response bret;
- 	RING_IDX i, rp;
- 	unsigned long flags;
- 	struct blkfront_ring_info *rinfo = (struct blkfront_ring_info *)dev_id;
-@@ -1556,8 +1556,9 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 	for (i = rinfo->ring.rsp_cons; i != rp; i++) {
- 		unsigned long id;
- 
--		bret = RING_GET_RESPONSE(&rinfo->ring, i);
--		id   = bret->id;
-+		RING_COPY_RESPONSE(&rinfo->ring, i, &bret);
-+		id = bret.id;
-+
- 		/*
- 		 * The backend has messed up and given us an id that we would
- 		 * never have given to it (we stamp it up to BLK_RING_SIZE -
-@@ -1565,39 +1566,39 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 		 */
- 		if (id >= BLK_RING_SIZE(info)) {
- 			WARN(1, "%s: response to %s has incorrect id (%ld)\n",
--			     info->gd->disk_name, op_name(bret->operation), id);
-+			     info->gd->disk_name, op_name(bret.operation), id);
- 			/* We can't safely get the 'struct request' as
- 			 * the id is busted. */
- 			continue;
- 		}
- 		req  = rinfo->shadow[id].request;
- 
--		if (bret->operation != BLKIF_OP_DISCARD) {
-+		if (bret.operation != BLKIF_OP_DISCARD) {
- 			/*
- 			 * We may need to wait for an extra response if the
- 			 * I/O request is split in 2
- 			 */
--			if (!blkif_completion(&id, rinfo, bret))
-+			if (!blkif_completion(&id, rinfo, &bret))
- 				continue;
- 		}
- 
- 		if (add_id_to_freelist(rinfo, id)) {
- 			WARN(1, "%s: response to %s (id %ld) couldn't be recycled!\n",
--			     info->gd->disk_name, op_name(bret->operation), id);
-+			     info->gd->disk_name, op_name(bret.operation), id);
- 			continue;
- 		}
- 
--		if (bret->status == BLKIF_RSP_OKAY)
-+		if (bret.status == BLKIF_RSP_OKAY)
- 			blkif_req(req)->error = BLK_STS_OK;
- 		else
- 			blkif_req(req)->error = BLK_STS_IOERR;
- 
--		switch (bret->operation) {
-+		switch (bret.operation) {
- 		case BLKIF_OP_DISCARD:
--			if (unlikely(bret->status == BLKIF_RSP_EOPNOTSUPP)) {
-+			if (unlikely(bret.status == BLKIF_RSP_EOPNOTSUPP)) {
- 				struct request_queue *rq = info->rq;
- 				printk(KERN_WARNING "blkfront: %s: %s op failed\n",
--					   info->gd->disk_name, op_name(bret->operation));
-+					   info->gd->disk_name, op_name(bret.operation));
- 				blkif_req(req)->error = BLK_STS_NOTSUPP;
- 				info->feature_discard = 0;
- 				info->feature_secdiscard = 0;
-@@ -1607,15 +1608,15 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 			break;
- 		case BLKIF_OP_FLUSH_DISKCACHE:
- 		case BLKIF_OP_WRITE_BARRIER:
--			if (unlikely(bret->status == BLKIF_RSP_EOPNOTSUPP)) {
-+			if (unlikely(bret.status == BLKIF_RSP_EOPNOTSUPP)) {
- 				printk(KERN_WARNING "blkfront: %s: %s op failed\n",
--				       info->gd->disk_name, op_name(bret->operation));
-+				       info->gd->disk_name, op_name(bret.operation));
- 				blkif_req(req)->error = BLK_STS_NOTSUPP;
- 			}
--			if (unlikely(bret->status == BLKIF_RSP_ERROR &&
-+			if (unlikely(bret.status == BLKIF_RSP_ERROR &&
- 				     rinfo->shadow[id].req.u.rw.nr_segments == 0)) {
- 				printk(KERN_WARNING "blkfront: %s: empty %s op failed\n",
--				       info->gd->disk_name, op_name(bret->operation));
-+				       info->gd->disk_name, op_name(bret.operation));
- 				blkif_req(req)->error = BLK_STS_NOTSUPP;
- 			}
- 			if (unlikely(blkif_req(req)->error)) {
-@@ -1628,9 +1629,9 @@ static irqreturn_t blkif_interrupt(int irq, void *dev_id)
- 			fallthrough;
- 		case BLKIF_OP_READ:
- 		case BLKIF_OP_WRITE:
--			if (unlikely(bret->status != BLKIF_RSP_OKAY))
-+			if (unlikely(bret.status != BLKIF_RSP_OKAY))
- 				dev_dbg(&info->xbdev->dev, "Bad return from blkdev data "
--					"request: %x\n", bret->status);
-+					"request: %x\n", bret.status);
- 
- 			break;
- 		default:
--- 
-2.26.2
+[...]
 
+Kind regards
+Uffe
 
