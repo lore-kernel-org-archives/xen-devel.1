@@ -2,45 +2,47 @@ Return-Path: <SRS0=rPNm=MB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-6.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB0EBC07E99
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Jul 2021 15:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6DCAC07E99
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Jul 2021 16:21:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8E744613B7
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Jul 2021 15:59:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E744613B7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 68767613BE
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Jul 2021 16:21:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 68767613BE
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.153793.284135 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.153801.284151 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1sti-0008K0-24; Fri, 09 Jul 2021 15:58:38 +0000
+	id 1m1tG5-0003YD-11; Fri, 09 Jul 2021 16:21:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 153793.284135; Fri, 09 Jul 2021 15:58:38 +0000
+Received: by outflank-mailman (output) from mailman id 153801.284151; Fri, 09 Jul 2021 16:21:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m1sth-0008Jt-Ug; Fri, 09 Jul 2021 15:58:37 +0000
-Received: by outflank-mailman (input) for mailman id 153793;
- Fri, 09 Jul 2021 15:58:36 +0000
+	id 1m1tG4-0003Y6-UN; Fri, 09 Jul 2021 16:21:44 +0000
+Received: by outflank-mailman (input) for mailman id 153801;
+ Fri, 09 Jul 2021 16:21:43 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1m1stg-0008Jn-7L
- for xen-devel@lists.xenproject.org; Fri, 09 Jul 2021 15:58:36 +0000
+ (envelope-from <iwj@xenproject.org>) id 1m1tG3-0003Xz-NR
+ for xen-devel@lists.xenproject.org; Fri, 09 Jul 2021 16:21:43 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m1stc-0003ma-QU; Fri, 09 Jul 2021 15:58:32 +0000
-Received: from [54.239.6.189] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m1stc-00028j-KU; Fri, 09 Jul 2021 15:58:32 +0000
+ (envelope-from <iwj@xenproject.org>) id 1m1tG3-0004ia-Lq
+ for xen-devel@lists.xenproject.org; Fri, 09 Jul 2021 16:21:43 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1m1tG3-00047j-Kt
+ for xen-devel@lists.xenproject.org; Fri, 09 Jul 2021 16:21:43 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1m1tFy-0004qE-Qj; Fri, 09 Jul 2021 17:21:38 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,92 +54,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=iwMuUrx8wPTxt8aYxEc7wISOn8P8ja4mwUT0aUygz8s=; b=e6WF/vd5gcrkOVtyEsIJbRIgSq
-	JZpOCIx8/+OytpT18hiXvcg+yt2pNZOxtx9HQ7GCQh0ajW8iEocjgzmcIw1K5xLHsw8vsuAGdku0Z
-	9tvkdKb9xkx6MYr5zWPXgxsWWhTIxrKqHl8iHRKmuC20Dj7Lv2kX8tv7eVZAPGOmxDK4=;
-Subject: Re: gitlab merge request -> list patchbomb workflows
-To: Ian Jackson <iwj@xenproject.org>, committers@xenproject.org
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
- Wei Liu <wl@xen.org>
-References: <24808.28606.387467.578829@mariner.uk.xensource.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <8a40ee32-4141-ddc4-4c19-582334f3b245@xen.org>
-Date: Fri, 9 Jul 2021 16:58:30 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=TMVVps2m/IFzp9vbKnm1JGXOUDWAYDSOnyIcy1LdA/8=; b=QeGNzcFVkuKFJhCS1szrZUrnL5
+	FaAeKO7+ixhjHHfNqx1b/c89ctWWJJ5hJ+HlLbh5AHueSGAflIPO6BEB0gIXnK4HqjCAjYqIU1Zm9
+	3QsIDhYjpY4zfBJrpr7hNz8IZsKAAogOE3YuSalLBnxqmjRCPP8QX2U/SxTVX27TYrno=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-In-Reply-To: <24808.28606.387467.578829@mariner.uk.xensource.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Message-ID: <24808.30610.559142.775285@mariner.uk.xensource.com>
+Date: Fri, 9 Jul 2021 17:21:38 +0100
+To: Julien Grall <julien@xen.org>
+Cc: committers@xenproject.org,
+    xen-devel@lists.xenproject.org,
+    Doug Goldstein <cardoe@cardoe.com>,
+    Wei Liu <wl@xen.org>
+Subject: Re: gitlab merge request -> list patchbomb workflows
+In-Reply-To: <8a40ee32-4141-ddc4-4c19-582334f3b245@xen.org>
+References: <24808.28606.387467.578829@mariner.uk.xensource.com>
+	<8a40ee32-4141-ddc4-4c19-582334f3b245@xen.org>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Hi Ian,
+Julien Grall writes ("Re: gitlab merge request -> list patchbomb workflows"):
+> I have recently started to use b4 [1] to fetch patches and collect tags 
+> from the mailing list. I am wondering if the tools could be extended to 
+> also allow a quick look through of the review "state" of each patch?
 
-On 09/07/2021 16:48, Ian Jackson wrote:
-> At Xen Summit we had another discussion about patch submission and
-> review workflows.
-> 
-> We agreed that it would be a nice idea to conduct another experiment
-> with gitlab MRs.  The previous experiment yielded negative results,
-> but we think we might be able to do better.
-> 
-> The shape of the experiment was roughly:
-> 
->   * Some robot would convert a gitlab MR into a patchbomb and email
->     it to the list.  (The From: line would be the MR submitter's
->     gitlab profile email address.)
-> 
->   * Patch review would be done in the usual way by email.  These emails
->     would naturally end up in the MR submitter's mailbox.
-> 
->   * We would initially conduct the experiment with internal submitters,
->     and with short/simple patches.
-> 
-> Open questions that weren't answered at the time include:
-> 
->   * How do we intend to track acked/reviewed status ?  I think
->     patchwork can help with this, but if we keep the series simple
->     perhaps this will be fine.
-> 
->   * If a resubmission was needed, how would a v2 post be triggered ?
->     I don't think we have a good answer to this.  I considered tha
->     following possible ultimate possibilities:
-> 
->       A. when you update the git branch after the v1 posting,
->          the robot marks the MR as draft.  Repost happe ns when
->          you mark the MR as ready for review
-> 
->       B. the robot comments in the gitlab issue, and there is
->          some @robot command to tell it to repost
-> 
->     AFAICT there is no code anywhere that would do either of these.
->     I suggest for now we do (B) manually with a human (probably, me)
->     writing comments in the MR.
-> 
->   * Who if anyone will fold acked-by/reviewed-by into commit messages
-> 
->     We cannot sensibly ask someone using the gitlab MR UI to do this.
->     Also avoiding this manual clerical work was one of the benefits we
->     are hoping to achieve.
-> 
->     I therefore suggest that we don't do this folding at all, and use
->     patchwork's UI to review the status of a series.
+Cool.  That's interesting.  I need to think about it some more, but I
+think this is a possible alternative to using patchwork for the
+analysis task.
 
-I am not entirely sure if this is what you are looking for. However, I 
-thought I would mention it.
+Also, if a robot wanted to post a v2 it could use b4 to fold the acks
+etc. into the repost, without the submitter having to add them to the
+git branch.
 
-I have recently started to use b4 [1] to fetch patches and collect tags 
-from the mailing list. I am wondering if the tools could be extended to 
-also allow a quick look through of the review "state" of each patch?
-
-Cheers,
-
-[1] 
-https://people.kernel.org/monsieuricon/introducing-b4-and-patch-attestation
-
--- 
-Julien Grall
+Ian.
 
