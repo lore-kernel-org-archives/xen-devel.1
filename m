@@ -7,38 +7,39 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 038C4C07E95
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A063C07E96
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AC81361370
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC81361370
+	by mail.kernel.org (Postfix) with ESMTPS id EAB0761370
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EAB0761370
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155540.287146 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155541.287157 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mna-0003fq-5m; Tue, 13 Jul 2021 18:06:26 +0000
+	id 1m3Mnd-00043C-GH; Tue, 13 Jul 2021 18:06:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155540.287146; Tue, 13 Jul 2021 18:06:26 +0000
+Received: by outflank-mailman (output) from mailman id 155541.287157; Tue, 13 Jul 2021 18:06:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mna-0003fd-20; Tue, 13 Jul 2021 18:06:26 +0000
-Received: by outflank-mailman (input) for mailman id 155540;
- Tue, 13 Jul 2021 18:06:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m3Mnd-00042y-CI; Tue, 13 Jul 2021 18:06:29 +0000
+Received: by outflank-mailman (input) for mailman id 155541;
+ Tue, 13 Jul 2021 18:06:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3MnY-0002UL-GA
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:24 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.169])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b220a611-2cbe-434e-8ba0-601220fb6ed2;
- Tue, 13 Jul 2021 18:06:19 +0000 (UTC)
+ id 1m3Mnb-0002kr-TC
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:27 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.171])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 04c70dca-e405-11eb-8793-12813bfff9fa;
+ Tue, 13 Jul 2021 18:06:18 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6DtAn
+ with ESMTPSA id 30791cx6DI6DtAm
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
  Tue, 13 Jul 2021 20:06:13 +0200 (CEST)
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b220a611-2cbe-434e-8ba0-601220fb6ed2
+X-Inumbo-ID: 04c70dca-e405-11eb-8793-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199573;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=Clrkbg11Ho2H2QvphK9GJKKzvhCVY4UGRclGnlEVBNo=;
-    b=ncMC99+8T5s1sxnqRqUJetKk4Ynh023mspDlqYFfw21vrPc9vPmbwd4iNgTktq39zg
-    5P2NX4LhClwagTbO9H2zaxMPd1Aj4d1iv1uDj+GUp3bG2nDEpLuO7WXlhZ9HONA+7DdP
-    KARztatEq/Rc251lD7N2vUB6lTwbWxCg+JvcK5k7v6+x3JdfTZDbPWXB9uKLS1hwYkQn
-    AAIHv0u8p34wWirG59r9QG/zhSYSDeSylI5/JgSfG67PqSWGh5YovuKXOWAMhOft0t1/
-    mpnsFdsKQYHYl9EKkLdKFo50ZmHwk4Wxzs4bQqjd34T/2FRiCemmLCn1I5MelgmGU2FY
-    5NSg==
+    bh=ZZ0YSTyEBhj0g0V+Ydgj4/Yi9sY29bXNxKbK7IWr/j0=;
+    b=or2CNPZebb1mJf1DOfIfMr473GTLnQNrbvFumssG8yG0z+Smm2mRS83ULtrtnP75ZH
+    TgmQuSoPN/BR1OBl7L6WB5GPFXElXHstZ3aK3FFmQzAFqND5XaAN/Vudw7UNcqV0QdNQ
+    BjqonEGOaPVDKgRPoU0rd/Bme3L3sPasN3Z0kSNkraLKqyaBbnyLfnv5Tb0RmAmfUz+i
+    CNDqpIWt8jxdxSEf2Ki3vbMQAp9XQIC5LMQQpTwn1BUYztfAv6n7/uYumOMrf6yzxcgn
+    UfP+eg4KoCg4CeeMLIH2BzV106unOEyMB+IHTnlPsJptLQTf91ZHVfNLCfNOzqqHnW+2
+    gk2w==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -75,127 +76,114 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 06/31] tools: show migration transfer rate in send_dirty_pages
-Date: Tue, 13 Jul 2021 20:05:40 +0200
-Message-Id: <20210713180605.12096-7-olaf@aepfle.de>
+Subject: [PATCH v20210713 05/31] tools: add readv_exact to libxenctrl
+Date: Tue, 13 Jul 2021 20:05:39 +0200
+Message-Id: <20210713180605.12096-6-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Show how fast domU pages are transferred in each iteration.
+Read a batch of iovec's.
 
-The relevant data is how fast the pfns travel, not so much how much
-protocol overhead exists. So the reported MiB/sec is just for pfns.
+Short reads are the common case, finish the trailing iov with read_exact.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
-v02:
-- rearrange MiB_sec calculation (jgross)
+v2:
+- add comment to short-read handling
 ---
- tools/libs/guest/xg_sr_common.h |  2 ++
- tools/libs/guest/xg_sr_save.c   | 46 +++++++++++++++++++++++++++++++++
- 2 files changed, 48 insertions(+)
+ tools/libs/ctrl/xc_private.c | 57 +++++++++++++++++++++++++++++++++++-
+ tools/libs/ctrl/xc_private.h |  1 +
+ 2 files changed, 57 insertions(+), 1 deletion(-)
 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 36d45ef56f..2e70cc6269 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -238,6 +238,8 @@ struct xc_sr_context
-             bool debug;
+diff --git a/tools/libs/ctrl/xc_private.c b/tools/libs/ctrl/xc_private.c
+index c0422662f0..bab9a31a70 100644
+--- a/tools/libs/ctrl/xc_private.c
++++ b/tools/libs/ctrl/xc_private.c
+@@ -698,8 +698,23 @@ int write_exact(int fd, const void *data, size_t size)
  
-             unsigned long p2m_size;
-+            size_t pages_sent;
-+            size_t overhead_sent;
- 
-             struct precopy_stats stats;
- 
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 3fce41b6cf..00b81033a9 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -1,5 +1,6 @@
- #include <assert.h>
- #include <arpa/inet.h>
-+#include <time.h>
- 
- #include "xg_sr_common.h"
- 
-@@ -238,6 +239,8 @@ static int write_batch(struct xc_sr_context *ctx)
-     iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
- 
-     iovcnt = 4;
-+    ctx->save.pages_sent += nr_pages;
-+    ctx->save.overhead_sent += sizeof(rec) + sizeof(hdr) + nr_pfns * sizeof(*rec_pfns);
- 
-     if ( nr_pages )
-     {
-@@ -357,6 +360,42 @@ static int suspend_domain(struct xc_sr_context *ctx)
-     return 0;
- }
- 
-+static void show_transfer_rate(struct xc_sr_context *ctx, struct timespec *start)
+ #if defined(__MINIOS__)
+ /*
+- * MiniOS's libc doesn't know about writev(). Implement it as multiple write()s.
++ * MiniOS's libc doesn't know about readv/writev().
++ * Implement it as multiple read/write()s.
+  */
++int readv_exact(int fd, const struct iovec *iov, int iovcnt)
 +{
-+    xc_interface *xch = ctx->xch;
-+    struct timespec end = {}, diff = {};
-+    size_t ms, MiB_sec;
++    int rc, i;
 +
-+    if (!ctx->save.pages_sent)
-+        return;
-+
-+    if ( clock_gettime(CLOCK_MONOTONIC, &end) )
-+        PERROR("clock_gettime");
-+
-+    if ( (end.tv_nsec - start->tv_nsec) < 0 )
++    for ( i = 0; i < iovcnt; ++i )
 +    {
-+        diff.tv_sec = end.tv_sec - start->tv_sec - 1;
-+        diff.tv_nsec = end.tv_nsec - start->tv_nsec + (1000U*1000U*1000U);
-+    }
-+    else
-+    {
-+        diff.tv_sec = end.tv_sec - start->tv_sec;
-+        diff.tv_nsec = end.tv_nsec - start->tv_nsec;
++        rc = read_exact(fd, iov[i].iov_base, iov[i].iov_len);
++        if ( rc )
++            return rc;
 +    }
 +
-+    ms = (diff.tv_nsec / (1000U*1000U));
-+    ms += (diff.tv_sec * 1000U);
-+    if (!ms)
-+        ms = 1;
-+
-+    MiB_sec = (ctx->save.pages_sent * PAGE_SIZE * 1000U) / ms / (1024U*1024U);
-+
-+    errno = 0;
-+    IPRINTF("%s: %zu bytes + %zu pages in %ld.%09ld sec, %zu MiB/sec", __func__,
-+            ctx->save.overhead_sent, ctx->save.pages_sent,
-+            diff.tv_sec, diff.tv_nsec, MiB_sec);
++    return 0;
 +}
 +
- /*
-  * Send a subset of pages in the guests p2m, according to the dirty bitmap.
-  * Used for each subsequent iteration of the live migration loop.
-@@ -370,9 +409,15 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
-     xen_pfn_t p;
-     unsigned long written;
-     int rc;
-+    struct timespec start = {};
-     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
-                                     &ctx->save.dirty_bitmap_hbuf);
- 
-+    ctx->save.pages_sent = 0;
-+    ctx->save.overhead_sent = 0;
-+    if ( clock_gettime(CLOCK_MONOTONIC, &start) )
-+        PERROR("clock_gettime");
+ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+ {
+     int rc, i;
+@@ -714,6 +729,46 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+     return 0;
+ }
+ #else
++int readv_exact(int fd, const struct iovec *iov, int iovcnt)
++{
++    int rc = 0, idx = 0;
++    ssize_t len;
 +
-     for ( p = 0, written = 0; p < ctx->save.p2m_size; ++p )
-     {
-         if ( !test_bit(p, dirty_bitmap) )
-@@ -396,6 +441,7 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
-     if ( written > entries )
-         DPRINTF("Bitmap contained more entries than expected...");
++    while ( idx < iovcnt )
++    {
++        len = readv(fd, &iov[idx], min(iovcnt - idx, IOV_MAX));
++        if ( len == -1 && errno == EINTR )
++            continue;
++        if ( len <= 0 )
++        {
++            rc = -1;
++            goto out;
++        }
++
++        /* Finish a potential short read in the last iov */
++        while ( len > 0 && idx < iovcnt )
++        {
++            if ( len >= iov[idx].iov_len )
++            {
++                len -= iov[idx].iov_len;
++            }
++            else
++            {
++                void *p = iov[idx].iov_base + len;
++                size_t l = iov[idx].iov_len - len;
++
++                rc = read_exact(fd, p, l);
++                if ( rc )
++                    goto out;
++                len = 0;
++            }
++            idx++;
++        }
++    }
++out:
++    return rc;
++}
++
+ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+ {
+     struct iovec *local_iov = NULL;
+diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
+index 3e299b943f..66086ef19f 100644
+--- a/tools/libs/ctrl/xc_private.h
++++ b/tools/libs/ctrl/xc_private.h
+@@ -410,6 +410,7 @@ int xc_flush_mmu_updates(xc_interface *xch, struct xc_mmu *mmu);
  
-+    show_transfer_rate(ctx, &start);
-     xc_report_progress_step(xch, entries, entries);
+ /* Return 0 on success; -1 on error setting errno. */
+ int read_exact(int fd, void *data, size_t size); /* EOF => -1, errno=0 */
++int readv_exact(int fd, const struct iovec *iov, int iovcnt);
+ int write_exact(int fd, const void *data, size_t size);
+ int writev_exact(int fd, const struct iovec *iov, int iovcnt);
  
-     return ctx->save.ops.check_vm_state(ctx);
 
