@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 228CBC07E95
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D894C07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E01CA6136D
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E01CA6136D
+	by mail.kernel.org (Postfix) with ESMTPS id 496EE6044F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 496EE6044F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155619.287368 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155633.287380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mx9-0000dr-6Z; Tue, 13 Jul 2021 18:16:19 +0000
+	id 1m3MxI-0001IF-H5; Tue, 13 Jul 2021 18:16:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155619.287368; Tue, 13 Jul 2021 18:16:19 +0000
+Received: by outflank-mailman (output) from mailman id 155633.287380; Tue, 13 Jul 2021 18:16:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mx9-0000dN-3F; Tue, 13 Jul 2021 18:16:19 +0000
-Received: by outflank-mailman (input) for mailman id 155619;
- Tue, 13 Jul 2021 18:16:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m3MxI-0001Hy-Da; Tue, 13 Jul 2021 18:16:28 +0000
+Received: by outflank-mailman (input) for mailman id 155633;
+ Tue, 13 Jul 2021 18:16:27 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3MoK-0002kr-Um
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:12 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.100])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 08fbe437-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:25 +0000 (UTC)
+ id 1m3Mob-0002UL-I1
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:29 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4a8a3ea9-6210-4d4a-a421-7fa78117dac6;
+ Tue, 13 Jul 2021 18:06:31 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6JtB1
+ with ESMTPSA id 30791cx6DI6MtB8
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:19 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:22 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08fbe437-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199579;
+X-Inumbo-ID: 4a8a3ea9-6210-4d4a-a421-7fa78117dac6
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199582;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=wFaHjRr5CaNl9QDq6ACoz1L0ZIK5luGgqWXq90MCCnY=;
-    b=iGZkvu+nFDp2Qi9G/qyWxe53jJ5q5rpan1wOShcflsFO4qJkJDt19PiA+mHfcbxnDs
-    4mKieBHWjIJld2E6m1z3zkX0P1f2F/tai4zZufT5ngAXAf8KCRR/cHZxFmJlHu4++E3n
-    dhiiXQ9bwccdaAdpCH/AW8A8S11ZhevYyoLSiGWNYYy2IiNVzs1XCd1Ss2hSPpzp6ru3
-    aBlrRnhBGBHTGRGyQZYB6y4lgxvGrHIWeQ8vFB/tbSC/+Z9kHznU2lnKiy7nk5nVueJc
-    2emK1CkzG69D1aj0YCdSBQ5yNRMH2LZvquqR5o/yQdUmrYekoYi4rgOZvtRGLjVaDbpe
-    1kMA==
+    bh=qvO8GzSJw/Kk2FcJhvVEgMzp+lMjpREiYaCjuaK8qSw=;
+    b=tRRttb8vYOfgsZYnk/bwRjPm3BeTUdiaQl7IH/iqlKEtzSmz+Bn1+jQkHPc0IY+DPn
+    eUIrgIr9sF1AqdAOP2hzxZIBm11miE8FvBL+/wQ2YSPUXbnndr6uUC8tLbSNBUWvLuqr
+    3kPGrTt2IzUTajYkDAYHwTo2Awnuqjsib7P6kiYBV3N5wgXeTY92vG9iK/BHM71rKGW1
+    UQdz/Ovoa87e8vAMjO7Nn+KVjbTtw3v4cj0V3+/tnbSQHspe8vR2g6zNkLFAo9NEdeu1
+    bip6bV7QhBTTNXnmP71pvmwjNNkmkbas+EMTtddKZpXpxBXKyx4WRc88qPDZc+Prf5l7
+    IlFg==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -75,123 +74,171 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 19/31] tools: restore: preallocate populate_pfns mfns array
-Date: Tue, 13 Jul 2021 20:05:53 +0200
-Message-Id: <20210713180605.12096-20-olaf@aepfle.de>
+Subject: [PATCH v20210713 26/31] tools: add --max_iters to libxl_domain_suspend
+Date: Tue, 13 Jul 2021 20:06:00 +0200
+Message-Id: <20210713180605.12096-27-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove repeated allocation from migration loop. There will never be
-more than MAX_BATCH_SIZE pages to process in an incoming batch.
-Allocate the space once.
+Migrating a large, and potentially busy, domU will take more
+time than neccessary due to excessive number of copying iterations.
 
-Use some prefix to avoid conflict with an array used in handle_page_data.
+Allow to host admin to control the number of iterations which
+copy cumulated domU dirty pages to the target host.
+
+The default remains 5, which means one initial iteration to copy the
+entire domU memory, and up to 4 additional iterations to copy dirty
+memory from the still running domU. After the given number of iterations
+the domU is suspended, remaining dirty memory is copied and the domU is
+finally moved to the target host.
+
+This patch adjusts xl(1) and the libxl API.
+External users check LIBXL_HAVE_DOMAIN_SUSPEND_PROPS for the availibility
+of the new .max_iters property.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  |  1 +
- tools/libs/guest/xg_sr_restore.c | 23 ++++++++---------------
- 2 files changed, 9 insertions(+), 15 deletions(-)
+ docs/man/xl.1.pod.in              |  4 ++++
+ tools/include/libxl.h             |  1 +
+ tools/libs/light/libxl_dom_save.c |  2 +-
+ tools/libs/light/libxl_domain.c   |  1 +
+ tools/libs/light/libxl_internal.h |  1 +
+ tools/xl/xl_cmdtable.c            |  3 ++-
+ tools/xl/xl_migrate.c             | 10 +++++++++-
+ 7 files changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index ca44e59382..c6c6a31dc6 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -261,6 +261,7 @@ struct xc_sr_context
-             xen_pfn_t *mfns;
-             int *map_errs;
-             xen_pfn_t *pp_pfns;
-+            xen_pfn_t *pp_mfns;
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index bae557b1de..9b104720d3 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -496,6 +496,10 @@ such that it will be identical on the destination host, unless that
+ configuration is overridden using the B<-C> option. Note that it is not
+ possible to use this option for a 'localhost' migration.
  
-             int send_back_fd;
-             unsigned long p2m_size;
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index caac4bb5fa..2734ef06fd 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -138,17 +138,9 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-                   const xen_pfn_t *original_pfns, const uint32_t *types)
++=item B<--max_iters> I<iterations>
++
++Number of copy iterations before final suspend+move (default: 5)
++
+ =back
+ 
+ =item B<remus> [I<OPTIONS>] I<domain-id> I<host>
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index 9a4d7514ed..bf77da0524 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -1714,6 +1714,7 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+ 
+ typedef struct {
+     uint32_t flags; /* LIBXL_SUSPEND_* */
++    uint32_t max_iters;
+ } libxl_domain_suspend_props;
+ #define LIBXL_SUSPEND_DEBUG 1
+ #define LIBXL_SUSPEND_LIVE 2
+diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
+index 839e061881..106c08a199 100644
+--- a/tools/libs/light/libxl_dom_save.c
++++ b/tools/libs/light/libxl_dom_save.c
+@@ -383,7 +383,7 @@ static int libxl__domain_save_precopy_policy(struct precopy_stats stats, void *u
+          stats.iteration, stats.dirty_count, stats.total_written);
+     if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
+         goto stop_copy;
+-    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
++    if (stats.iteration >= dss->max_iters)
+         goto stop_copy;
+     return XGS_POLICY_CONTINUE_PRECOPY;
+ 
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 5dbd27900f..9f98cd7f2b 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -527,6 +527,7 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
+     dss->domid = domid;
+     dss->fd = fd;
+     dss->type = type;
++    dss->max_iters = props->max_iters ?: LIBXL_XGS_POLICY_MAX_ITERATIONS;
+     dss->live = props->flags & LIBXL_SUSPEND_LIVE;
+     dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
+     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index f7df4ab397..cfb83d80d7 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -3648,6 +3648,7 @@ struct libxl__domain_save_state {
+     int live;
+     int debug;
+     int checkpointed_stream;
++    uint32_t max_iters;
+     const libxl_domain_remus_info *remus;
+     /* private */
+     int rc;
+diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
+index e4f27a3248..678b236d76 100644
+--- a/tools/xl/xl_cmdtable.c
++++ b/tools/xl/xl_cmdtable.c
+@@ -174,7 +174,8 @@ const struct cmd_spec cmd_table[] = {
+       "                of the domain.\n"
+       "--debug         Enable verification mode.\n"
+       "-p              Do not unpause domain after migrating it.\n"
+-      "-D              Preserve the domain id"
++      "-D              Preserve the domain id\n"
++      "--max_iters N   Number of copy iterations before final stop+move"
+     },
+     { "restore",
+       &main_restore, 0, 1,
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index 144890924f..af117d4d56 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -178,6 +178,7 @@ static void migrate_do_preamble(int send_fd, int recv_fd, pid_t child,
+ 
+ static void migrate_domain(uint32_t domid, int preserve_domid,
+                            const char *rune, int debug,
++                           uint32_t max_iters,
+                            const char *override_config_file)
  {
-     xc_interface *xch = ctx->xch;
--    xen_pfn_t *mfns = malloc(count * sizeof(*mfns));
-     unsigned int i, nr_pfns = 0;
-     int rc = -1;
+     pid_t child = -1;
+@@ -189,6 +190,7 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     int config_len;
+     libxl_domain_suspend_props props = {
+         .flags = LIBXL_SUSPEND_LIVE,
++        .max_iters = max_iters,
+         };
  
--    if ( !mfns )
--    {
--        ERROR("Failed to allocate %zu bytes for populating the physmap",
--              2 * count * sizeof(*mfns));
--        goto err;
--    }
--
-     for ( i = 0; i < count; ++i )
-     {
-         if ( (!types || page_type_to_populate(types[i])) &&
-@@ -157,7 +149,7 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-             rc = pfn_set_populated(ctx, original_pfns[i]);
-             if ( rc )
-                 goto err;
--            ctx->restore.pp_pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
-+            ctx->restore.pp_pfns[nr_pfns] = ctx->restore.pp_mfns[nr_pfns] = original_pfns[i];
-             ++nr_pfns;
-         }
-     }
-@@ -165,7 +157,7 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-     if ( nr_pfns )
-     {
-         rc = xc_domain_populate_physmap_exact(
--            xch, ctx->domid, nr_pfns, 0, 0, mfns);
-+            xch, ctx->domid, nr_pfns, 0, 0, ctx->restore.pp_mfns);
-         if ( rc )
-         {
-             PERROR("Failed to populate physmap");
-@@ -174,22 +166,20 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
- 
-         for ( i = 0; i < nr_pfns; ++i )
-         {
--            if ( mfns[i] == INVALID_MFN )
-+            if ( ctx->restore.pp_mfns[i] == INVALID_MFN )
-             {
-                 ERROR("Populate physmap failed for pfn %u", i);
-                 rc = -1;
-                 goto err;
-             }
- 
--            ctx->restore.ops.set_gfn(ctx, ctx->restore.pp_pfns[i], mfns[i]);
-+            ctx->restore.ops.set_gfn(ctx, ctx->restore.pp_pfns[i], ctx->restore.pp_mfns[i]);
-         }
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+@@ -542,8 +544,10 @@ int main_migrate(int argc, char **argv)
+     char *host;
+     int opt, daemonize = 1, monitor = 1, debug = 0, pause_after_migration = 0;
+     int preserve_domid = 0;
++    uint32_t max_iters = 0;
+     static struct option opts[] = {
+         {"debug", 0, 0, 0x100},
++        {"max_iters", 1, 0, 0x101},
+         {"live", 0, 0, 0x200},
+         COMMON_LONG_OPTS
+     };
+@@ -571,6 +575,9 @@ int main_migrate(int argc, char **argv)
+     case 0x100: /* --debug */
+         debug = 1;
+         break;
++    case 0x101: /* --max_iters */
++        max_iters = atoi(optarg);
++        break;
+     case 0x200: /* --live */
+         /* ignored for compatibility with xm */
+         break;
+@@ -605,7 +612,8 @@ int main_migrate(int argc, char **argv)
+                   pause_after_migration ? " -p" : "");
      }
  
-     rc = 0;
- 
-  err:
--    free(mfns);
--
-     return rc;
+-    migrate_domain(domid, preserve_domid, rune, debug, config_filename);
++    migrate_domain(domid, preserve_domid, rune, debug,
++                   max_iters, config_filename);
+     return EXIT_SUCCESS;
  }
  
-@@ -706,8 +696,10 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->restore.mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.mfns));
-     ctx->restore.map_errs = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.map_errs));
-     ctx->restore.pp_pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_pfns));
-+    ctx->restore.pp_mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_mfns));
-     if ( !ctx->restore.pfns || !ctx->restore.types || !ctx->restore.mfns ||
--         !ctx->restore.map_errs || !ctx->restore.pp_pfns )
-+         !ctx->restore.map_errs || !ctx->restore.pp_pfns ||
-+         !ctx->restore.pp_mfns )
-     {
-         ERROR("Unable to allocate memory");
-         rc = -1;
-@@ -744,6 +736,7 @@ static void cleanup(struct xc_sr_context *ctx)
- 
-     free(ctx->restore.buffered_records);
-     free(ctx->restore.populated_pfns);
-+    free(ctx->restore.pp_mfns);
-     free(ctx->restore.pp_pfns);
-     free(ctx->restore.map_errs);
-     free(ctx->restore.mfns);
 
