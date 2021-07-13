@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F37FEC07E95
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B74ADC07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:17:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C0F4A6044F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0F4A6044F
+	by mail.kernel.org (Postfix) with ESMTPS id 782A86044F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:17:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 782A86044F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155639.287402 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155670.287417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3MxN-00023T-73; Tue, 13 Jul 2021 18:16:33 +0000
+	id 1m3Mxz-0003kz-Vp; Tue, 13 Jul 2021 18:17:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155639.287402; Tue, 13 Jul 2021 18:16:33 +0000
+Received: by outflank-mailman (output) from mailman id 155670.287417; Tue, 13 Jul 2021 18:17:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3MxN-00022K-2U; Tue, 13 Jul 2021 18:16:33 +0000
-Received: by outflank-mailman (input) for mailman id 155639;
- Tue, 13 Jul 2021 18:16:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m3Mxz-0003kF-Rf; Tue, 13 Jul 2021 18:17:11 +0000
+Received: by outflank-mailman (input) for mailman id 155670;
+ Tue, 13 Jul 2021 18:17:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3MoC-0002UL-HN
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:04 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2ecee7c7-15e0-4e66-8c9d-84abd882dd66;
- Tue, 13 Jul 2021 18:06:26 +0000 (UTC)
+ id 1m3MoF-0002kr-Ud
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:07 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 08701ffb-e405-11eb-8793-12813bfff9fa;
+ Tue, 13 Jul 2021 18:06:24 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6KtB4
+ with ESMTPSA id 30791cx6DI6ItB0
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:20 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2ecee7c7-15e0-4e66-8c9d-84abd882dd66
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199580;
+X-Inumbo-ID: 08701ffb-e405-11eb-8793-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199579;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=XpbwYZI6TX0rUOJJRsTgz/BUclsrX9blWzzFnveyZbk=;
-    b=VFXG3isBNY/F8rK3W7hVJ+jAumS2jr7OBkfKi/kQyVsjO9MhFxPG8EMZfthuBNd0Ca
-    gbpfcdPvvHMeIQHpGU/CA6KyiBijdWqraaSFTSTv8ilxhYhOW2etctIm7X0rw1bjnYeJ
-    HF7sjJrjjJRZ8yAyP6V7IGOgwGVL225GxXMcRUx9u/o7ebMtgdKiKilfu7ptuaeQzNyw
-    ASF81BzLfIQz43rTpRcVUjR3E1eTo06QJbAI18HBifHDclpJORK7cTmIoMiOq+mlA9QV
-    UEwW+0OEye86Y/oW/Vd1w8Oc/WRKUhE96FpEuQt1THvSdlvDkUfj0+VI24fHNFpIjEct
-    7LnQ==
+    bh=9FxM3Bx9wXja4XqBD1sGOusWUB3Xe2+i7IOocJp1ap0=;
+    b=pmlv471FKO6AMjwr8Z6WkjOjfeDTfhS4g1PsNX7OPQtPlshRqiH1D8t1MyyDwoQY28
+    KvOnByp+tMenERKqJ44CYafWgoXdqW+quP8mocvhZcsZmcM5vo7wj6xa48FdiuBKMD2k
+    svubuN12GRx9hb6T0FYR1RyYj0t9FThxcE8ujtpcF+LMoOL7kyhr22c/25KS2UkmG0C3
+    ihAdX79HLuAIQ3vrzcEWEtTb/H4lEN4AXnjX7PMk5dRFgimqOzTjo2L5TnDh7verjJkE
+    /3+jRvcwtro77LyVxMS1amPehmuTuM0nRIgltngD/ivuO651cAOq2C8J8fRiNsjmDWOT
+    W+9g==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -75,241 +76,100 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 22/31] tools: restore: write data directly into guest
-Date: Tue, 13 Jul 2021 20:05:56 +0200
-Message-Id: <20210713180605.12096-23-olaf@aepfle.de>
+Subject: [PATCH v20210713 18/31] tools: restore: preallocate populate_pfns pfns array
+Date: Tue, 13 Jul 2021 20:05:52 +0200
+Message-Id: <20210713180605.12096-19-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Read incoming migration stream directly into the guest memory.
-This avoids the memory allocation and copying, and the resulting
-performance penalty.
+Remove repeated allocation from migration loop. There will never be
+more than MAX_BATCH_SIZE pages to process in an incoming batch.
+Allocate the space once.
+
+Use some prefix to avoid conflict with an array used in handle_page_data.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  |   3 +
- tools/libs/guest/xg_sr_restore.c | 155 ++++++++++++++++++++++++++++++-
- 2 files changed, 153 insertions(+), 5 deletions(-)
+ tools/libs/guest/xg_sr_common.h  |  1 +
+ tools/libs/guest/xg_sr_restore.c | 14 +++++++-------
+ 2 files changed, 8 insertions(+), 7 deletions(-)
 
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 020b41ea8b..8981c21acd 100644
+index 336be98c93..ca44e59382 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -263,6 +263,8 @@ struct xc_sr_context
-             xen_pfn_t *pp_pfns;
-             xen_pfn_t *pp_mfns;
-             void **guest_data;
-+            struct iovec *iov;
-+            struct xc_sr_rec_page_data_header *pages;
+@@ -260,6 +260,7 @@ struct xc_sr_context
+             uint32_t *types;
+             xen_pfn_t *mfns;
+             int *map_errs;
++            xen_pfn_t *pp_pfns;
  
-             void *guest_mapping;
-             uint32_t nr_mapped_pages;
-@@ -311,6 +313,7 @@ struct xc_sr_context
- 
-             /* Sender has invoked verify mode on the stream. */
-             bool verify;
-+            void *verify_buf;
-         } restore;
-     };
- 
+             int send_back_fd;
+             unsigned long p2m_size;
 diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 777d005fbd..d4012bcffd 100644
+index 866a7c86cd..caac4bb5fa 100644
 --- a/tools/libs/guest/xg_sr_restore.c
 +++ b/tools/libs/guest/xg_sr_restore.c
-@@ -381,6 +381,129 @@ err:
+@@ -138,12 +138,11 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+                   const xen_pfn_t *original_pfns, const uint32_t *types)
+ {
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = malloc(count * sizeof(*mfns)),
+-        *pfns = malloc(count * sizeof(*pfns));
++    xen_pfn_t *mfns = malloc(count * sizeof(*mfns));
+     unsigned int i, nr_pfns = 0;
+     int rc = -1;
+ 
+-    if ( !mfns || !pfns )
++    if ( !mfns )
+     {
+         ERROR("Failed to allocate %zu bytes for populating the physmap",
+               2 * count * sizeof(*mfns));
+@@ -158,7 +157,7 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+             rc = pfn_set_populated(ctx, original_pfns[i]);
+             if ( rc )
+                 goto err;
+-            pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
++            ctx->restore.pp_pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
+             ++nr_pfns;
+         }
+     }
+@@ -182,14 +181,13 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+                 goto err;
+             }
+ 
+-            ctx->restore.ops.set_gfn(ctx, pfns[i], mfns[i]);
++            ctx->restore.ops.set_gfn(ctx, ctx->restore.pp_pfns[i], mfns[i]);
+         }
+     }
+ 
+     rc = 0;
+ 
+  err:
+-    free(pfns);
+     free(mfns);
+ 
      return rc;
- }
- 
-+/*
-+ * Handle PAGE_DATA record from the stream.
-+ * Given a list of pfns, their types, and a block of page data from the
-+ * stream, populate and record their types, map the relevant subset and copy
-+ * the data into the guest.
-+ */
-+static int handle_incoming_page_data(struct xc_sr_context *ctx,
-+                                     struct xc_sr_rhdr *rhdr)
-+{
-+    xc_interface *xch = ctx->xch;
-+    struct xc_sr_rec_page_data_header *pages = ctx->restore.pages;
-+    uint64_t *pfn_nums = &pages->pfn[0];
-+    uint32_t i;
-+    int rc, iov_idx;
-+
-+    rc = handle_static_data_end_v2(ctx);
-+    if ( rc )
-+        goto err;
-+
-+    /* First read and verify the header */
-+    rc = read_exact(ctx->fd, pages, sizeof(*pages));
-+    if ( rc )
-+    {
-+        PERROR("Could not read rec_pfn header");
-+        goto err;
-+    }
-+
-+    if ( !verify_rec_page_hdr(ctx, rhdr->length, pages) )
-+    {
-+        rc = -1;
-+        goto err;
-+    }
-+
-+    /* Then read and verify the incoming pfn numbers */
-+    rc = read_exact(ctx->fd, pfn_nums, sizeof(*pfn_nums) * pages->count);
-+    if ( rc )
-+    {
-+        PERROR("Could not read rec_pfn data");
-+        goto err;
-+    }
-+
-+    if ( !verify_rec_page_pfns(ctx, rhdr->length, pages) )
-+    {
-+        rc = -1;
-+        goto err;
-+    }
-+
-+    /* Finally read and verify the incoming pfn data */
-+    rc = map_guest_pages(ctx, pages);
-+    if ( rc )
-+        goto err;
-+
-+    /* Prepare read buffers, either guest or throw-away memory */
-+    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
-+    {
-+        struct iovec *iov;
-+
-+        if ( !ctx->restore.guest_data[i] )
-+            continue;
-+
-+        iov = &ctx->restore.iov[iov_idx];
-+        iov->iov_len = PAGE_SIZE;
-+        if ( ctx->restore.verify )
-+            iov->iov_base = ctx->restore.verify_buf + (i * PAGE_SIZE);
-+        else
-+            iov->iov_base = ctx->restore.guest_data[i];
-+        iov_idx++;
-+    }
-+
-+    if ( !iov_idx )
-+        goto done;
-+
-+    rc = readv_exact(ctx->fd, ctx->restore.iov, iov_idx);
-+    if ( rc )
-+    {
-+        PERROR("read of %d pages failed", iov_idx);
-+        goto err;
-+    }
-+
-+    /* Post-processing of pfn data */
-+    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
-+    {
-+        void *addr;
-+
-+        if ( !ctx->restore.guest_data[i] )
-+            continue;
-+
-+        addr = ctx->restore.iov[iov_idx].iov_base;
-+        rc = ctx->restore.ops.localise_page(ctx, ctx->restore.types[i], addr);
-+        if ( rc )
-+        {
-+            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
-+                  ctx->restore.pfns[i],
-+                  ctx->restore.types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+            goto err;
-+
-+        }
-+
-+        if ( ctx->restore.verify )
-+        {
-+            if ( memcmp(ctx->restore.guest_data[i], addr, PAGE_SIZE) )
-+            {
-+                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
-+                      ctx->restore.pfns[i],
-+                      ctx->restore.types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
-+            }
-+        }
-+
-+        iov_idx++;
-+    }
-+
-+done:
-+    rc = 0;
-+
-+err:
-+    if ( ctx->restore.guest_mapping )
-+    {
-+        xenforeignmemory_unmap(xch->fmem, ctx->restore.guest_mapping, ctx->restore.nr_mapped_pages);
-+        ctx->restore.guest_mapping = NULL;
-+    }
-+    return rc;
-+}
-+
- /*
-  * Handle PAGE_DATA record from an existing buffer
-  * Given a list of pfns, their types, and a block of page data from the
-@@ -726,6 +849,15 @@ static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_recor
-     case REC_TYPE_VERIFY:
-         DPRINTF("Verify mode enabled");
-         ctx->restore.verify = true;
-+        if ( !ctx->restore.verify_buf )
-+        {
-+            ctx->restore.verify_buf = malloc(MAX_BATCH_SIZE * PAGE_SIZE);
-+            if ( !ctx->restore.verify_buf )
-+            {
-+                PERROR("Unable to allocate verify_buf");
-+                rc = -1;
-+            }
-+        }
-         break;
- 
-     case REC_TYPE_CHECKPOINT:
-@@ -752,11 +884,19 @@ static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_s
-     struct xc_sr_record rec;
-     int rc;
- 
--    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
--    if ( rc )
--        return rc;
-+    switch ( rhdr->type )
-+    {
-+    case REC_TYPE_PAGE_DATA:
-+        rc = handle_incoming_page_data(ctx, rhdr);
-+        break;
-+    default:
-+        rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
-+        if ( rc == 0 )
-+            rc = process_buffered_record(ctx, &rec);;
-+        break;
-+    }
- 
--    return process_buffered_record(ctx, &rec);
-+    return rc;
- }
- 
- 
-@@ -801,9 +941,12 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->restore.pp_pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_pfns));
-     ctx->restore.pp_mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_mfns));
-     ctx->restore.guest_data = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.guest_data));
-+    ctx->restore.iov = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.iov));
-+    ctx->restore.pages = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pages->pfn) + sizeof(*ctx->restore.pages));
+@@ -707,8 +705,9 @@ static int setup(struct xc_sr_context *ctx)
+     ctx->restore.types = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.types));
+     ctx->restore.mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.mfns));
+     ctx->restore.map_errs = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.map_errs));
++    ctx->restore.pp_pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_pfns));
      if ( !ctx->restore.pfns || !ctx->restore.types || !ctx->restore.mfns ||
-          !ctx->restore.map_errs || !ctx->restore.pp_pfns ||
--         !ctx->restore.pp_mfns || !ctx->restore.guest_data )
-+         !ctx->restore.pp_mfns || !ctx->restore.guest_data ||
-+         !ctx->restore.iov || !ctx->restore.pages )
+-         !ctx->restore.map_errs )
++         !ctx->restore.map_errs || !ctx->restore.pp_pfns )
      {
          ERROR("Unable to allocate memory");
          rc = -1;
-@@ -840,6 +983,8 @@ static void cleanup(struct xc_sr_context *ctx)
+@@ -745,6 +744,7 @@ static void cleanup(struct xc_sr_context *ctx)
  
      free(ctx->restore.buffered_records);
      free(ctx->restore.populated_pfns);
-+    free(ctx->restore.pages);
-+    free(ctx->restore.iov);
-     free(ctx->restore.guest_data);
-     free(ctx->restore.pp_mfns);
-     free(ctx->restore.pp_pfns);
++    free(ctx->restore.pp_pfns);
+     free(ctx->restore.map_errs);
+     free(ctx->restore.mfns);
+     free(ctx->restore.types);
 
