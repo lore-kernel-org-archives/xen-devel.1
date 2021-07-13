@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A0EBC07E96
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F37FEC07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 595046136D
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 595046136D
+	by mail.kernel.org (Postfix) with ESMTPS id C0F4A6044F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0F4A6044F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155634.287385 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155639.287402 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3MxI-0001Ld-Vq; Tue, 13 Jul 2021 18:16:28 +0000
+	id 1m3MxN-00023T-73; Tue, 13 Jul 2021 18:16:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155634.287385; Tue, 13 Jul 2021 18:16:28 +0000
+Received: by outflank-mailman (output) from mailman id 155639.287402; Tue, 13 Jul 2021 18:16:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3MxI-0001KS-LR; Tue, 13 Jul 2021 18:16:28 +0000
-Received: by outflank-mailman (input) for mailman id 155634;
- Tue, 13 Jul 2021 18:16:27 +0000
+	id 1m3MxN-00022K-2U; Tue, 13 Jul 2021 18:16:33 +0000
+Received: by outflank-mailman (input) for mailman id 155639;
+ Tue, 13 Jul 2021 18:16:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3MoW-0002UL-Ht
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:24 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.100])
+ id 1m3MoC-0002UL-HN
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:04 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2d529767-36b1-4653-86ed-96c892b17c81;
- Tue, 13 Jul 2021 18:06:30 +0000 (UTC)
+ id 2ecee7c7-15e0-4e66-8c9d-84abd882dd66;
+ Tue, 13 Jul 2021 18:06:26 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6MtB7
+ with ESMTPSA id 30791cx6DI6KtB4
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:22 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:20 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d529767-36b1-4653-86ed-96c892b17c81
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199582;
+X-Inumbo-ID: 2ecee7c7-15e0-4e66-8c9d-84abd882dd66
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199580;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=+k3zEXoyDaXQEiwvjOV10rf+liXTt7laH3C3jd8kr68=;
-    b=FOKUhjofFTsweTT9yIXVCx+FyE+wsZGTUdNwhv7ts3CvDvMsT/m/Ih+OZszMb2BqK0
-    EQY51Er931hHXpHOVSLjw90N6/lzp7qO0VAfzr0sii+XeDjQIMw/KCo8lSPnAyb8xw3S
-    YxBXIrL6EbowucDFcKLrQdjkvvVJCZ7FlIDLTzFOHYeqnsqtgzUj9oA2PT3vKb5ACmcz
-    ou9fBTCDsSsQboq4HVYFioY3KeJo6rta0zyTFF6RJshhXvHry3GKuY9pnJ8Hpe3LWo2m
-    1sOMeDcZzyE7e2i4jcZrDpEHw+me9xJZW9zqoH5MDLK1fPy6N5z9A4k++C0HwceqHP9A
-    iEAw==
+    bh=XpbwYZI6TX0rUOJJRsTgz/BUclsrX9blWzzFnveyZbk=;
+    b=VFXG3isBNY/F8rK3W7hVJ+jAumS2jr7OBkfKi/kQyVsjO9MhFxPG8EMZfthuBNd0Ca
+    gbpfcdPvvHMeIQHpGU/CA6KyiBijdWqraaSFTSTv8ilxhYhOW2etctIm7X0rw1bjnYeJ
+    HF7sjJrjjJRZ8yAyP6V7IGOgwGVL225GxXMcRUx9u/o7ebMtgdKiKilfu7ptuaeQzNyw
+    ASF81BzLfIQz43rTpRcVUjR3E1eTo06QJbAI18HBifHDclpJORK7cTmIoMiOq+mlA9QV
+    UEwW+0OEye86Y/oW/Vd1w8Oc/WRKUhE96FpEuQt1THvSdlvDkUfj0+VI24fHNFpIjEct
+    7LnQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -74,105 +74,242 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 25/31] tools: add callback to libxl for precopy_policy and precopy_stats
-Date: Tue, 13 Jul 2021 20:05:59 +0200
-Message-Id: <20210713180605.12096-26-olaf@aepfle.de>
+Subject: [PATCH v20210713 22/31] tools: restore: write data directly into guest
+Date: Tue, 13 Jul 2021 20:05:56 +0200
+Message-Id: <20210713180605.12096-23-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This duplicates simple_precopy_policy. To recap its purpose:
-- do up to 5 iterations of copying dirty domU memory to target,
-  including the initial copying of all domU memory, excluding
-  the final copying while the domU is suspended
-- do fewer iterations in case the domU dirtied less than 50 pages
-
-Take the opportunity to also move xen_pfn_t into qw().
+Read incoming migration stream directly into the guest memory.
+This avoids the memory allocation and copying, and the resulting
+performance penalty.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
-v02:
-- use plain struct precopy_stats instead of inventing
-  a new precopy_stats_t (anthony)
----
- tools/libs/light/libxl_dom_save.c       | 19 +++++++++++++++++++
- tools/libs/light/libxl_internal.h       |  2 ++
- tools/libs/light/libxl_save_msgs_gen.pl |  3 ++-
- 3 files changed, 23 insertions(+), 1 deletion(-)
+ tools/libs/guest/xg_sr_common.h  |   3 +
+ tools/libs/guest/xg_sr_restore.c | 155 ++++++++++++++++++++++++++++++-
+ 2 files changed, 153 insertions(+), 5 deletions(-)
 
-diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
-index 32e3cb5a13..839e061881 100644
---- a/tools/libs/light/libxl_dom_save.c
-+++ b/tools/libs/light/libxl_dom_save.c
-@@ -373,6 +373,24 @@ int libxl__save_emulator_xenstore_data(libxl__domain_save_state *dss,
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 020b41ea8b..8981c21acd 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -263,6 +263,8 @@ struct xc_sr_context
+             xen_pfn_t *pp_pfns;
+             xen_pfn_t *pp_mfns;
+             void **guest_data;
++            struct iovec *iov;
++            struct xc_sr_rec_page_data_header *pages;
+ 
+             void *guest_mapping;
+             uint32_t nr_mapped_pages;
+@@ -311,6 +313,7 @@ struct xc_sr_context
+ 
+             /* Sender has invoked verify mode on the stream. */
+             bool verify;
++            void *verify_buf;
+         } restore;
+     };
+ 
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index 777d005fbd..d4012bcffd 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -381,6 +381,129 @@ err:
      return rc;
  }
  
-+static int libxl__domain_save_precopy_policy(struct precopy_stats stats, void *user)
++/*
++ * Handle PAGE_DATA record from the stream.
++ * Given a list of pfns, their types, and a block of page data from the
++ * stream, populate and record their types, map the relevant subset and copy
++ * the data into the guest.
++ */
++static int handle_incoming_page_data(struct xc_sr_context *ctx,
++                                     struct xc_sr_rhdr *rhdr)
 +{
-+    libxl__save_helper_state *shs = user;
-+    libxl__domain_save_state *dss = shs->caller_state;
-+    STATE_AO_GC(dss->ao);
++    xc_interface *xch = ctx->xch;
++    struct xc_sr_rec_page_data_header *pages = ctx->restore.pages;
++    uint64_t *pfn_nums = &pages->pfn[0];
++    uint32_t i;
++    int rc, iov_idx;
 +
-+    LOGD(DEBUG, shs->domid, "iteration %u dirty_count %ld total_written %lu",
-+         stats.iteration, stats.dirty_count, stats.total_written);
-+    if (stats.dirty_count >= 0 && stats.dirty_count < LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT)
-+        goto stop_copy;
-+    if (stats.iteration >= LIBXL_XGS_POLICY_MAX_ITERATIONS)
-+        goto stop_copy;
-+    return XGS_POLICY_CONTINUE_PRECOPY;
++    rc = handle_static_data_end_v2(ctx);
++    if ( rc )
++        goto err;
 +
-+stop_copy:
-+    return XGS_POLICY_STOP_AND_COPY;
++    /* First read and verify the header */
++    rc = read_exact(ctx->fd, pages, sizeof(*pages));
++    if ( rc )
++    {
++        PERROR("Could not read rec_pfn header");
++        goto err;
++    }
++
++    if ( !verify_rec_page_hdr(ctx, rhdr->length, pages) )
++    {
++        rc = -1;
++        goto err;
++    }
++
++    /* Then read and verify the incoming pfn numbers */
++    rc = read_exact(ctx->fd, pfn_nums, sizeof(*pfn_nums) * pages->count);
++    if ( rc )
++    {
++        PERROR("Could not read rec_pfn data");
++        goto err;
++    }
++
++    if ( !verify_rec_page_pfns(ctx, rhdr->length, pages) )
++    {
++        rc = -1;
++        goto err;
++    }
++
++    /* Finally read and verify the incoming pfn data */
++    rc = map_guest_pages(ctx, pages);
++    if ( rc )
++        goto err;
++
++    /* Prepare read buffers, either guest or throw-away memory */
++    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
++    {
++        struct iovec *iov;
++
++        if ( !ctx->restore.guest_data[i] )
++            continue;
++
++        iov = &ctx->restore.iov[iov_idx];
++        iov->iov_len = PAGE_SIZE;
++        if ( ctx->restore.verify )
++            iov->iov_base = ctx->restore.verify_buf + (i * PAGE_SIZE);
++        else
++            iov->iov_base = ctx->restore.guest_data[i];
++        iov_idx++;
++    }
++
++    if ( !iov_idx )
++        goto done;
++
++    rc = readv_exact(ctx->fd, ctx->restore.iov, iov_idx);
++    if ( rc )
++    {
++        PERROR("read of %d pages failed", iov_idx);
++        goto err;
++    }
++
++    /* Post-processing of pfn data */
++    for ( i = 0, iov_idx = 0; i < pages->count; i++ )
++    {
++        void *addr;
++
++        if ( !ctx->restore.guest_data[i] )
++            continue;
++
++        addr = ctx->restore.iov[iov_idx].iov_base;
++        rc = ctx->restore.ops.localise_page(ctx, ctx->restore.types[i], addr);
++        if ( rc )
++        {
++            ERROR("Failed to localise pfn %#"PRIpfn" (type %#"PRIx32")",
++                  ctx->restore.pfns[i],
++                  ctx->restore.types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
++            goto err;
++
++        }
++
++        if ( ctx->restore.verify )
++        {
++            if ( memcmp(ctx->restore.guest_data[i], addr, PAGE_SIZE) )
++            {
++                ERROR("verify pfn %#"PRIpfn" failed (type %#"PRIx32")",
++                      ctx->restore.pfns[i],
++                      ctx->restore.types[i] >> XEN_DOMCTL_PFINFO_LTAB_SHIFT);
++            }
++        }
++
++        iov_idx++;
++    }
++
++done:
++    rc = 0;
++
++err:
++    if ( ctx->restore.guest_mapping )
++    {
++        xenforeignmemory_unmap(xch->fmem, ctx->restore.guest_mapping, ctx->restore.nr_mapped_pages);
++        ctx->restore.guest_mapping = NULL;
++    }
++    return rc;
 +}
 +
- /*----- main code for saving, in order of execution -----*/
+ /*
+  * Handle PAGE_DATA record from an existing buffer
+  * Given a list of pfns, their types, and a block of page data from the
+@@ -726,6 +849,15 @@ static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_recor
+     case REC_TYPE_VERIFY:
+         DPRINTF("Verify mode enabled");
+         ctx->restore.verify = true;
++        if ( !ctx->restore.verify_buf )
++        {
++            ctx->restore.verify_buf = malloc(MAX_BATCH_SIZE * PAGE_SIZE);
++            if ( !ctx->restore.verify_buf )
++            {
++                PERROR("Unable to allocate verify_buf");
++                rc = -1;
++            }
++        }
+         break;
  
- void libxl__domain_save(libxl__egc *egc, libxl__domain_save_state *dss)
-@@ -430,6 +448,7 @@ void libxl__domain_save(libxl__egc *egc, libxl__domain_save_state *dss)
-         callbacks->suspend = libxl__domain_suspend_callback;
+     case REC_TYPE_CHECKPOINT:
+@@ -752,11 +884,19 @@ static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_s
+     struct xc_sr_record rec;
+     int rc;
  
-     callbacks->switch_qemu_logdirty = libxl__domain_suspend_common_switch_qemu_logdirty;
-+    callbacks->precopy_policy = libxl__domain_save_precopy_policy;
+-    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
+-    if ( rc )
+-        return rc;
++    switch ( rhdr->type )
++    {
++    case REC_TYPE_PAGE_DATA:
++        rc = handle_incoming_page_data(ctx, rhdr);
++        break;
++    default:
++        rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
++        if ( rc == 0 )
++            rc = process_buffered_record(ctx, &rec);;
++        break;
++    }
  
-     dss->sws.ao  = dss->ao;
-     dss->sws.dss = dss;
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index 0b4671318c..f7df4ab397 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -124,6 +124,8 @@
- #define DOMID_XS_PATH "domid"
- #define PVSHIM_BASENAME "xen-shim"
- #define PVSHIM_CMDLINE "pv-shim console=xen,pv"
-+#define LIBXL_XGS_POLICY_MAX_ITERATIONS 5
-+#define LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT 50
+-    return process_buffered_record(ctx, &rec);
++    return rc;
+ }
  
- /* Size macros. */
- #define __AC(X,Y)   (X##Y)
-diff --git a/tools/libs/light/libxl_save_msgs_gen.pl b/tools/libs/light/libxl_save_msgs_gen.pl
-index 9d425b1dee..b95942ed91 100755
---- a/tools/libs/light/libxl_save_msgs_gen.pl
-+++ b/tools/libs/light/libxl_save_msgs_gen.pl
-@@ -23,6 +23,7 @@ our @msgs = (
-                                              STRING doing_what),
-                                             'unsigned long', 'done',
-                                             'unsigned long', 'total'] ],
-+    [ 'scxW',   "precopy_policy", ['struct precopy_stats', 'stats'] ],
-     [ 'srcxA',  "suspend", [] ],
-     [ 'srcxA',  "postcopy", [] ],
-     [ 'srcxA',  "checkpoint", [] ],
-@@ -142,7 +143,7 @@ static void bytes_put(unsigned char *const buf, int *len,
  
- END
+@@ -801,9 +941,12 @@ static int setup(struct xc_sr_context *ctx)
+     ctx->restore.pp_pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_pfns));
+     ctx->restore.pp_mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_mfns));
+     ctx->restore.guest_data = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.guest_data));
++    ctx->restore.iov = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.iov));
++    ctx->restore.pages = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pages->pfn) + sizeof(*ctx->restore.pages));
+     if ( !ctx->restore.pfns || !ctx->restore.types || !ctx->restore.mfns ||
+          !ctx->restore.map_errs || !ctx->restore.pp_pfns ||
+-         !ctx->restore.pp_mfns || !ctx->restore.guest_data )
++         !ctx->restore.pp_mfns || !ctx->restore.guest_data ||
++         !ctx->restore.iov || !ctx->restore.pages )
+     {
+         ERROR("Unable to allocate memory");
+         rc = -1;
+@@ -840,6 +983,8 @@ static void cleanup(struct xc_sr_context *ctx)
  
--foreach my $simpletype (qw(int uint16_t uint32_t unsigned), 'unsigned long', 'xen_pfn_t') {
-+foreach my $simpletype (qw(int uint16_t uint32_t unsigned xen_pfn_t), 'struct precopy_stats', 'unsigned long') {
-     my $typeid = typeid($simpletype);
-     $out_body{'callout'} .= <<END;
- static int ${typeid}_get(const unsigned char **msg,
+     free(ctx->restore.buffered_records);
+     free(ctx->restore.populated_pfns);
++    free(ctx->restore.pages);
++    free(ctx->restore.iov);
+     free(ctx->restore.guest_data);
+     free(ctx->restore.pp_mfns);
+     free(ctx->restore.pp_pfns);
 
