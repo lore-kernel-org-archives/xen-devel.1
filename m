@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D020C07E95
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 090E3C07E96
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DB1EA61374
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB1EA61374
+	by mail.kernel.org (Postfix) with ESMTPS id C4021613D1
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C4021613D1
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155554.287267 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155556.287275 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mo1-0000eJ-VZ; Tue, 13 Jul 2021 18:06:53 +0000
+	id 1m3Mo3-00017q-Sk; Tue, 13 Jul 2021 18:06:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155554.287267; Tue, 13 Jul 2021 18:06:53 +0000
+Received: by outflank-mailman (output) from mailman id 155556.287275; Tue, 13 Jul 2021 18:06:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mo1-0000cb-Ic; Tue, 13 Jul 2021 18:06:53 +0000
-Received: by outflank-mailman (input) for mailman id 155554;
- Tue, 13 Jul 2021 18:06:53 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m3Mo3-000175-Nt; Tue, 13 Jul 2021 18:06:55 +0000
+Received: by outflank-mailman (input) for mailman id 155556;
+ Tue, 13 Jul 2021 18:06:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3Mo0-0002kr-UC
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:52 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.84])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 06e2c55e-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:21 +0000 (UTC)
+ id 1m3Mo2-0002UL-H5
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:54 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.101])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 21a92166-9a3d-403a-96dc-95dc64418e01;
+ Tue, 13 Jul 2021 18:06:26 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6GtAt
+ with ESMTPSA id 30791cx6DI6JtB2
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:16 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:19 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06e2c55e-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199576;
+X-Inumbo-ID: 21a92166-9a3d-403a-96dc-95dc64418e01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199579;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=OMEAEb7NX4AU8uov75H5dJFOZP1BqztZJlpHGBMjQLg=;
-    b=P2TG24K45DBPU/4N7u49xflxJX+B0lyYYFgOgIBOmGVMdlb0dVr84dZ9mWSph+fTyF
-    mzJEQoShbw4m6PiJ4WwXpmUyL5rDVA4Js8B6BBnBiqGBVoC+eX8h64fQPiFnnzJOJYZD
-    fzIPs+UpX0H1cHBM7qWA9xbB4WQW515+K7T8EGTica5RINupOdTnjkrbGfx4veOtYzmJ
-    uv5BrYrOXfPQbilpjmrWzum/+jXMyyaLXvnjpM0XN26aqnWm3Ep6wpeTE1YvAv5nvgMy
-    FHlIpgYkIUnbvYaA8a0qO8uhP/+2UONtGF6K6HO5cTmhoEax+iaRbrNkSx0R+tLBxy9x
-    0qAw==
+    bh=Fd4Q1B2DPhDxZ+ElDKm1Z9i8GuAzFG2GaIOlaJriZzY=;
+    b=pGHNg93OpQHnVpiCxnMQ9Pw4QQhRBMPvijxM9tSsveV5FJl2EGBWmbmGF4yYDlirbn
+    tn1FDgsNc1FfLeVXG9sEhvVtG/uH7B4pD+rGSDaGx5l4++29llXNoHdGpwNuZ9ljJTTN
+    3HP39YcSzBPOBYlBe6KgUm5eRb/RTjImATr/rmrYjYtQdFmTIntAL/5a0/Lz92KnxLA6
+    MBUL1Mmv5U5F/KVGrIB8Y0tRwGgi8MoU/n+5KvxwTS8PJvX9P5z8H41APDM4grf9dDOy
+    DpdrrAWC9iL4ZEZWhFj6A827uyOvgvhnBZMP4rUF8BHuAi0U2sko5AjJPP+9+6aLdsDn
+    s27w==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -73,137 +72,290 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
+	Juergen Gross <jgross@suse.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 12/31] tools: save: preallocate guest_data array
-Date: Tue, 13 Jul 2021 20:05:46 +0200
-Message-Id: <20210713180605.12096-13-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v20210713 20/31] tools: restore: split record processing
+Date: Tue, 13 Jul 2021 20:05:54 +0200
+Message-Id: <20210713180605.12096-21-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove repeated allocation from migration loop. There will never be
-more than MAX_BATCH_SIZE pages to process in a batch.
-Allocate the space once.
+handle_page_data must be able to read directly into mapped guest memory.
+This will avoid unneccesary memcpy calls for data which can be consumed verbatim.
 
-Because this was allocated with calloc:
-Adjust the loop to clear unused entries as needed.
+Rearrange the code to allow decisions based on the incoming record.
+
+This change is preparation for future changes in handle_page_data,
+no change in behavior is intended.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/libs/guest/xg_sr_common.h |  1 +
- tools/libs/guest/xg_sr_save.c   | 20 +++++++++++---------
- 2 files changed, 12 insertions(+), 9 deletions(-)
+ tools/libs/guest/xg_sr_common.c  | 33 ++++++++++++---------
+ tools/libs/guest/xg_sr_common.h  |  4 ++-
+ tools/libs/guest/xg_sr_restore.c | 49 ++++++++++++++++++++++----------
+ tools/libs/guest/xg_sr_save.c    |  7 ++++-
+ 4 files changed, 63 insertions(+), 30 deletions(-)
 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index b054661897..b90b35e564 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -249,6 +249,7 @@ struct xc_sr_context
-             int *errors;
-             struct iovec *iov;
-             uint64_t *rec_pfns;
-+            void **guest_data;
-             unsigned int nr_batch_pfns;
-             unsigned long *deferred_pages;
-             unsigned long nr_deferred_pages;
-diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 7c417f4a2a..0ab8b7205c 100644
---- a/tools/libs/guest/xg_sr_save.c
-+++ b/tools/libs/guest/xg_sr_save.c
-@@ -89,7 +89,6 @@ static int write_batch(struct xc_sr_context *ctx)
+diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
+index 17567ab133..cabde4ef74 100644
+--- a/tools/libs/guest/xg_sr_common.c
++++ b/tools/libs/guest/xg_sr_common.c
+@@ -91,26 +91,33 @@ int write_split_record(struct xc_sr_context *ctx, struct xc_sr_record *rec,
+     return -1;
+ }
+ 
+-int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
++int read_record_header(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr)
  {
      xc_interface *xch = ctx->xch;
-     void *guest_mapping = NULL;
--    void **guest_data = NULL;
-     void **local_pages = NULL;
-     int rc = -1;
-     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
-@@ -103,12 +102,10 @@ static int write_batch(struct xc_sr_context *ctx)
+-    struct xc_sr_rhdr rhdr;
+-    size_t datasz;
  
-     assert(nr_pfns != 0);
- 
--    /* Pointers to page data to send.  Mapped gfns or local allocations. */
--    guest_data = calloc(nr_pfns, sizeof(*guest_data));
-     /* Pointers to locally allocated pages.  Need freeing. */
-     local_pages = calloc(nr_pfns, sizeof(*local_pages));
- 
--    if ( !guest_data || !local_pages )
-+    if ( !local_pages )
+-    if ( read_exact(fd, &rhdr, sizeof(rhdr)) )
++    if ( read_exact(fd, rhdr, sizeof(*rhdr)) )
      {
-         ERROR("Unable to allocate arrays for a batch of %u pages",
-               nr_pfns);
-@@ -165,7 +162,10 @@ static int write_batch(struct xc_sr_context *ctx)
-         for ( i = 0, p = 0; i < nr_pfns; ++i )
-         {
-             if ( !page_type_has_stream_data(ctx->save.types[i]) )
-+            {
-+                ctx->save.guest_data[i] = NULL;
-                 continue;
-+            }
+         PERROR("Failed to read Record Header from stream");
+         return -1;
+     }
  
-             if ( ctx->save.errors[p] )
-             {
-@@ -183,6 +183,7 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-             if ( rc )
-             {
-+                ctx->save.guest_data[i] = NULL;
-                 if ( rc == -1 && errno == EAGAIN )
-                 {
-                     set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
-@@ -194,7 +195,7 @@ static int write_batch(struct xc_sr_context *ctx)
-                     goto err;
-             }
-             else
--                guest_data[i] = page;
-+                ctx->save.guest_data[i] = page;
- 
-             rc = -1;
-             ++p;
-@@ -232,9 +233,9 @@ static int write_batch(struct xc_sr_context *ctx)
+-    if ( rhdr.length > REC_LENGTH_MAX )
++    if ( rhdr->length > REC_LENGTH_MAX )
      {
-         for ( i = 0; i < nr_pfns; ++i )
-         {
--            if ( guest_data[i] )
-+            if ( ctx->save.guest_data[i] )
-             {
--                ctx->save.iov[iovcnt].iov_base = guest_data[i];
-+                ctx->save.iov[iovcnt].iov_base = ctx->save.guest_data[i];
-                 ctx->save.iov[iovcnt].iov_len = PAGE_SIZE;
-                 iovcnt++;
-                 --nr_pages;
-@@ -258,7 +259,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     for ( i = 0; local_pages && i < nr_pfns; ++i )
-         free(local_pages[i]);
-     free(local_pages);
--    free(guest_data);
+-        ERROR("Record (0x%08x, %s) length %#x exceeds max (%#x)", rhdr.type,
+-              rec_type_to_str(rhdr.type), rhdr.length, REC_LENGTH_MAX);
++        ERROR("Record (0x%08x, %s) length %#x exceeds max (%#x)", rhdr->type,
++              rec_type_to_str(rhdr->type), rhdr->length, REC_LENGTH_MAX);
+         return -1;
+     }
  
+-    datasz = ROUNDUP(rhdr.length, REC_ALIGN_ORDER);
++    return 0;
++}
++
++int read_record_data(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr,
++                     struct xc_sr_record *rec)
++{
++    xc_interface *xch = ctx->xch;
++    size_t datasz;
++
++    datasz = ROUNDUP(rhdr->length, REC_ALIGN_ORDER);
+ 
+     if ( datasz )
+     {
+@@ -119,7 +126,7 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
+         if ( !rec->data )
+         {
+             ERROR("Unable to allocate %zu bytes for record data (0x%08x, %s)",
+-                  datasz, rhdr.type, rec_type_to_str(rhdr.type));
++                  datasz, rhdr->type, rec_type_to_str(rhdr->type));
+             return -1;
+         }
+ 
+@@ -128,18 +135,18 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
+             free(rec->data);
+             rec->data = NULL;
+             PERROR("Failed to read %zu bytes of data for record (0x%08x, %s)",
+-                   datasz, rhdr.type, rec_type_to_str(rhdr.type));
++                   datasz, rhdr->type, rec_type_to_str(rhdr->type));
+             return -1;
+         }
+     }
+     else
+         rec->data = NULL;
+ 
+-    rec->type   = rhdr.type;
+-    rec->length = rhdr.length;
++    rec->type   = rhdr->type;
++    rec->length = rhdr->length;
+ 
+     return 0;
+-};
++}
+ 
+ static void __attribute__((unused)) build_assertions(void)
+ {
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index c6c6a31dc6..077d8f2890 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -458,7 +458,9 @@ static inline int write_record(struct xc_sr_context *ctx,
+  *
+  * On failure, the contents of the record structure are undefined.
+  */
+-int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec);
++int read_record_header(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr);
++int read_record_data(struct xc_sr_context *ctx, int fd, struct xc_sr_rhdr *rhdr,
++                     struct xc_sr_record *rec);
+ 
+ /*
+  * This would ideally be private in restore.c, but is needed by
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index 2734ef06fd..8f6da97d09 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -466,7 +466,7 @@ static int send_checkpoint_dirty_pfn_list(struct xc_sr_context *ctx)
      return rc;
  }
-@@ -837,11 +837,12 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->save.errors = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.errors));
-     ctx->save.iov = malloc((4 + MAX_BATCH_SIZE) * sizeof(*ctx->save.iov));
-     ctx->save.rec_pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.rec_pfns));
-+    ctx->save.guest_data = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.guest_data));
-     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
  
-     if ( !ctx->save.batch_pfns || !ctx->save.mfns || !ctx->save.types ||
-          !ctx->save.errors || !ctx->save.iov || !ctx->save.rec_pfns ||
--         !dirty_bitmap || !ctx->save.deferred_pages )
-+         !ctx->save.guest_data ||!dirty_bitmap || !ctx->save.deferred_pages )
+-static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec);
++static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_record *rec);
+ static int handle_checkpoint(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+@@ -505,7 +505,7 @@ static int handle_checkpoint(struct xc_sr_context *ctx)
+ 
+         for ( i = 0; i < ctx->restore.buffered_rec_num; i++ )
+         {
+-            rc = process_record(ctx, &ctx->restore.buffered_records[i]);
++            rc = process_buffered_record(ctx, &ctx->restore.buffered_records[i]);
+             if ( rc )
+                 goto err;
+         }
+@@ -566,10 +566,11 @@ static int handle_checkpoint(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
+-static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
++static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_rhdr *rhdr)
+ {
+     xc_interface *xch = ctx->xch;
+     unsigned int new_alloc_num;
++    struct xc_sr_record rec;
+     struct xc_sr_record *p;
+ 
+     if ( ctx->restore.buffered_rec_num >= ctx->restore.allocated_rec_num )
+@@ -587,8 +588,13 @@ static int buffer_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         ctx->restore.allocated_rec_num = new_alloc_num;
+     }
+ 
++    if ( read_record_data(ctx, ctx->fd, rhdr, &rec) )
++    {
++        return -1;
++    }
++
+     memcpy(&ctx->restore.buffered_records[ctx->restore.buffered_rec_num++],
+-           rec, sizeof(*rec));
++           &rec, sizeof(rec));
+ 
+     return 0;
+ }
+@@ -619,7 +625,7 @@ int handle_static_data_end(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
+-static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
++static int process_buffered_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+ {
+     xc_interface *xch = ctx->xch;
+     int rc = 0;
+@@ -657,6 +663,19 @@ static int process_record(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+     return rc;
+ }
+ 
++static int process_incoming_record_header(struct xc_sr_context *ctx, struct xc_sr_rhdr *rhdr)
++{
++    struct xc_sr_record rec;
++    int rc;
++
++    rc = read_record_data(ctx, ctx->fd, rhdr, &rec);
++    if ( rc )
++        return rc;
++
++    return process_buffered_record(ctx, &rec);
++}
++
++
+ static int setup(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+@@ -753,7 +772,7 @@ static void cleanup(struct xc_sr_context *ctx)
+ static int restore(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
+-    struct xc_sr_record rec;
++    struct xc_sr_rhdr rhdr;
+     int rc, saved_rc = 0, saved_errno = 0;
+ 
+     IPRINTF("Restoring domain");
+@@ -764,7 +783,7 @@ static int restore(struct xc_sr_context *ctx)
+ 
+     do
      {
-         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
-               " deferred pages");
-@@ -872,6 +873,7 @@ static void cleanup(struct xc_sr_context *ctx)
-     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
-                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
-     free(ctx->save.deferred_pages);
-+    free(ctx->save.guest_data);
-     free(ctx->save.rec_pfns);
-     free(ctx->save.iov);
-     free(ctx->save.errors);
+-        rc = read_record(ctx, ctx->fd, &rec);
++        rc = read_record_header(ctx, ctx->fd, &rhdr);
+         if ( rc )
+         {
+             if ( ctx->restore.buffer_all_records )
+@@ -774,25 +793,25 @@ static int restore(struct xc_sr_context *ctx)
+         }
+ 
+         if ( ctx->restore.buffer_all_records &&
+-             rec.type != REC_TYPE_END &&
+-             rec.type != REC_TYPE_CHECKPOINT )
++             rhdr.type != REC_TYPE_END &&
++             rhdr.type != REC_TYPE_CHECKPOINT )
+         {
+-            rc = buffer_record(ctx, &rec);
++            rc = buffer_record(ctx, &rhdr);
+             if ( rc )
+                 goto err;
+         }
+         else
+         {
+-            rc = process_record(ctx, &rec);
++            rc = process_incoming_record_header(ctx, &rhdr);
+             if ( rc == RECORD_NOT_PROCESSED )
+             {
+-                if ( rec.type & REC_TYPE_OPTIONAL )
++                if ( rhdr.type & REC_TYPE_OPTIONAL )
+                     DPRINTF("Ignoring optional record %#x (%s)",
+-                            rec.type, rec_type_to_str(rec.type));
++                            rhdr.type, rec_type_to_str(rhdr.type));
+                 else
+                 {
+                     ERROR("Mandatory record %#x (%s) not handled",
+-                          rec.type, rec_type_to_str(rec.type));
++                          rhdr.type, rec_type_to_str(rhdr.type));
+                     rc = -1;
+                     goto err;
+                 }
+@@ -803,7 +822,7 @@ static int restore(struct xc_sr_context *ctx)
+                 goto err;
+         }
+ 
+-    } while ( rec.type != REC_TYPE_END );
++    } while ( rhdr.type != REC_TYPE_END );
+ 
+  remus_failover:
+     if ( ctx->stream_type == XC_STREAM_COLO )
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index c74c8d9348..ef8c49f23d 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -591,6 +591,7 @@ static int send_memory_live(struct xc_sr_context *ctx)
+ static int colo_merge_secondary_dirty_bitmap(struct xc_sr_context *ctx)
+ {
+     xc_interface *xch = ctx->xch;
++    struct xc_sr_rhdr rhdr;
+     struct xc_sr_record rec;
+     uint64_t *pfns = NULL;
+     uint64_t pfn;
+@@ -599,7 +600,11 @@ static int colo_merge_secondary_dirty_bitmap(struct xc_sr_context *ctx)
+     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
+                                     &ctx->save.dirty_bitmap_hbuf);
+ 
+-    rc = read_record(ctx, ctx->save.recv_fd, &rec);
++    rc = read_record_header(ctx, ctx->save.recv_fd, &rhdr);
++    if ( rc )
++        goto err;
++
++    rc = read_record_data(ctx, ctx->save.recv_fd, &rhdr, &rec);
+     if ( rc )
+         goto err;
+ 
 
