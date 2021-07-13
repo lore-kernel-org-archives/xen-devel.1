@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 044B7C07E95
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5F48C07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C6D0E61369
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6D0E61369
+	by mail.kernel.org (Postfix) with ESMTPS id 9753861370
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9753861370
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155543.287179 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155544.287190 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mni-0004v0-DV; Tue, 13 Jul 2021 18:06:34 +0000
+	id 1m3Mnk-0005Ja-PS; Tue, 13 Jul 2021 18:06:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155543.287179; Tue, 13 Jul 2021 18:06:34 +0000
+Received: by outflank-mailman (output) from mailman id 155544.287190; Tue, 13 Jul 2021 18:06:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mni-0004up-9A; Tue, 13 Jul 2021 18:06:34 +0000
-Received: by outflank-mailman (input) for mailman id 155543;
- Tue, 13 Jul 2021 18:06:33 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m3Mnk-0005JJ-K8; Tue, 13 Jul 2021 18:06:36 +0000
+Received: by outflank-mailman (input) for mailman id 155544;
+ Tue, 13 Jul 2021 18:06:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3Mng-0002kr-Tc
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:32 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [85.215.255.50])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 05524e76-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:20 +0000 (UTC)
+ id 1m3Mni-0002UL-GY
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:34 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.84])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7b4da61c-8660-40a3-9938-c1ee21a1e524;
+ Tue, 13 Jul 2021 18:06:21 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6CtAl
+ with ESMTPSA id 30791cx6DI6EtAq
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:12 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:14 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05524e76-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199573;
+X-Inumbo-ID: 7b4da61c-8660-40a3-9938-c1ee21a1e524
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199575;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=sGK5MVxjAVkaDlLv2beeaP+qQqyTAMbH073gSSJ9pMg=;
-    b=j9zo2skvObV82f3sAdqJlzNQ2egJfGE23XTdygGlcV6tTMcE1vM/Xa4T1jpmnnbF7U
-    v32DmdcLl7kopNAWu03Z/Q3/vV71CdVanXp+hgD0rFOdpebmPKWvPdh5FZWq+mkoVuzD
-    fftBP6GZQLYXwVy3TEa7IwgO7dMTztdTAUb2jUfh0inFhLG1i3IyksokZ+wUQVdTDpEs
-    wOTVucqVf2NxEX07JQoTW9MhLNkz3qz3B1TJr2RNWfjEgtcUxSc4deKX9H1B0kROP2E+
-    8j7bj3PvTQfBaLvbVIUtQv+OcRLPKTmNDL6EZX6nfZ/lsQtzTQIuKDDAyfJWm51K31Yo
-    l4yg==
+    bh=JHY4TWvZbK0Ujx5K1FzKpVZtdjbItuCiEYMs+LDvHbM=;
+    b=ljQs4jTzCjTxtbdo8sA7N9xF0Frzyd3ti0GAU/YGeaD7VRXzfPhSOkiqaYr2A0oUEi
+    2FmWlhYXYGqpOgyoA+xVhj8VwyraZda50fG1ARqL4PwvAFBcL9o366CrhXst+Wh1fMCA
+    2KyCI+nIy2UERtzUCcbR83PRD8/Z6hP9HZI3SY5+vYNJG+lXVj3c95LxB+pEdx3rdgEE
+    ZIiN80EuBYQ0UjKaR7E+yP5rGq720osynus+Jzlgp8ZRr0lpaKpJ3UsttsWSkW6XD+JR
+    JAjNy9txaZCln6fLDH1BQ5jDWhBBlC5yY1488B9HlueYEMGAI7MMY0yZhytJpLEfSjty
+    VgEg==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -75,58 +74,121 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210713 04/31] xl: fix description of migrate --debug
-Date: Tue, 13 Jul 2021 20:05:38 +0200
-Message-Id: <20210713180605.12096-5-olaf@aepfle.de>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v20210713 09/31] tools: save: preallocate errors array
+Date: Tue, 13 Jul 2021 20:05:43 +0200
+Message-Id: <20210713180605.12096-10-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-xl migrate --debug used to track every pfn in every batch of pages.
-But these times are gone. The code in xc_domain_save is the consumer
-of this knob, now may enable verification mode.
+Remove repeated allocation from migration loop. There will never be
+more than MAX_BATCH_SIZE pages to process in a batch.
+Allocate the space once.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
-v03:
-- adjust to describe what --debug would do when the code which
-  consumes this knob is fixed.
-v02:
-- the option has no effect anymore
----
- docs/man/xl.1.pod.in   | 4 +++-
- tools/xl/xl_cmdtable.c | 2 +-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ tools/libs/guest/xg_sr_common.h |  1 +
+ tools/libs/guest/xg_sr_save.c   | 20 ++++++++++----------
+ 2 files changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index e2176bd696..bae557b1de 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -481,7 +481,9 @@ domain.
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index d80de6e7da..d2b838ed33 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -246,6 +246,7 @@ struct xc_sr_context
+             xen_pfn_t *batch_pfns;
+             xen_pfn_t *mfns;
+             xen_pfn_t *types;
++            int *errors;
+             unsigned int nr_batch_pfns;
+             unsigned long *deferred_pages;
+             unsigned long nr_deferred_pages;
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 29a5fe82f0..5b416fda60 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -91,7 +91,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     void *guest_mapping = NULL;
+     void **guest_data = NULL;
+     void **local_pages = NULL;
+-    int *errors = NULL, rc = -1;
++    int rc = -1;
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+     void *page, *orig_page;
+@@ -104,8 +104,6 @@ static int write_batch(struct xc_sr_context *ctx)
  
- =item B<--debug>
+     assert(nr_pfns != 0);
  
--Display huge (!) amount of debug information during the migration process.
-+This enables verification mode, which will transfer the entire domU memory
-+once more to the receiving host to make sure the content is identical on
-+both sides.
+-    /* Errors from attempting to map the gfns. */
+-    errors = malloc(nr_pfns * sizeof(*errors));
+     /* Pointers to page data to send.  Mapped gfns or local allocations. */
+     guest_data = calloc(nr_pfns, sizeof(*guest_data));
+     /* Pointers to locally allocated pages.  Need freeing. */
+@@ -113,7 +111,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* iovec[] for writev(). */
+     iov = malloc((nr_pfns + 4) * sizeof(*iov));
  
- =item B<-p>
+-    if ( !errors || !guest_data || !local_pages || !iov )
++    if ( !guest_data || !local_pages || !iov )
+     {
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -158,8 +156,8 @@ static int write_batch(struct xc_sr_context *ctx)
  
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 661323d488..e4f27a3248 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -172,7 +172,7 @@ const struct cmd_spec cmd_table[] = {
-       "                migrate-receive [-d -e]\n"
-       "-e              Do not wait in the background (on <host>) for the death\n"
-       "                of the domain.\n"
--      "--debug         Print huge (!) amount of debug during the migration process.\n"
-+      "--debug         Enable verification mode.\n"
-       "-p              Do not unpause domain after migrating it.\n"
-       "-D              Preserve the domain id"
-     },
+     if ( nr_pages > 0 )
+     {
+-        guest_mapping = xenforeignmemory_map(
+-            xch->fmem, ctx->domid, PROT_READ, nr_pages, ctx->save.mfns, errors);
++        guest_mapping = xenforeignmemory_map(xch->fmem, ctx->domid, PROT_READ,
++            nr_pages, ctx->save.mfns, ctx->save.errors);
+         if ( !guest_mapping )
+         {
+             PERROR("Failed to map guest pages");
+@@ -172,10 +170,11 @@ static int write_batch(struct xc_sr_context *ctx)
+             if ( !page_type_has_stream_data(ctx->save.types[i]) )
+                 continue;
+ 
+-            if ( errors[p] )
++            if ( ctx->save.errors[p] )
+             {
+                 ERROR("Mapping of pfn %#"PRIpfn" (mfn %#"PRIpfn") failed %d",
+-                      ctx->save.batch_pfns[i], ctx->save.mfns[p], errors[p]);
++                      ctx->save.batch_pfns[i], ctx->save.mfns[p],
++                      ctx->save.errors[p]);
+                 goto err;
+             }
+ 
+@@ -271,7 +270,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     free(iov);
+     free(local_pages);
+     free(guest_data);
+-    free(errors);
+ 
+     return rc;
+ }
+@@ -847,10 +845,11 @@ static int setup(struct xc_sr_context *ctx)
+                                   sizeof(*ctx->save.batch_pfns));
+     ctx->save.mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.mfns));
+     ctx->save.types = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.types));
++    ctx->save.errors = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.errors));
+     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
+ 
+     if ( !ctx->save.batch_pfns || !ctx->save.mfns || !ctx->save.types ||
+-         !dirty_bitmap || !ctx->save.deferred_pages )
++         !ctx->save.errors || !dirty_bitmap || !ctx->save.deferred_pages )
+     {
+         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
+               " deferred pages");
+@@ -881,6 +880,7 @@ static void cleanup(struct xc_sr_context *ctx)
+     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
+                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
+     free(ctx->save.deferred_pages);
++    free(ctx->save.errors);
+     free(ctx->save.types);
+     free(ctx->save.mfns);
+     free(ctx->save.batch_pfns);
 
