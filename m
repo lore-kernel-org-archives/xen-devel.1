@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC651C07E96
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31638C07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BBB1A61369
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BBB1A61369
+	by mail.kernel.org (Postfix) with ESMTPS id F33A761374
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:07:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F33A761374
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155559.287295 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155563.287311 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mo8-0002Le-WD; Tue, 13 Jul 2021 18:07:01 +0000
+	id 1m3MoC-00039r-FC; Tue, 13 Jul 2021 18:07:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155559.287295; Tue, 13 Jul 2021 18:07:00 +0000
+Received: by outflank-mailman (output) from mailman id 155563.287311; Tue, 13 Jul 2021 18:07:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mo8-0002JA-MT; Tue, 13 Jul 2021 18:07:00 +0000
-Received: by outflank-mailman (input) for mailman id 155559;
- Tue, 13 Jul 2021 18:06:59 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m3MoC-00039O-6v; Tue, 13 Jul 2021 18:07:04 +0000
+Received: by outflank-mailman (input) for mailman id 155563;
+ Tue, 13 Jul 2021 18:07:03 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3Mo7-0002UL-H7
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:59 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.100])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 045a64bf-ada9-407e-9b5b-9982c9b9430b;
- Tue, 13 Jul 2021 18:06:27 +0000 (UTC)
+ id 1m3MoA-0002kr-UQ
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:02 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.170])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 08701ffa-e405-11eb-8793-12813bfff9fa;
+ Tue, 13 Jul 2021 18:06:24 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6LtB5
+ with ESMTPSA id 30791cx6DI6HtAw
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:21 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:17 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 045a64bf-ada9-407e-9b5b-9982c9b9430b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199581;
+X-Inumbo-ID: 08701ffa-e405-11eb-8793-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199577;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=0LMXyjqr5dhJU6Kt86LbarPPbfCTtmro+NAOq1cH7Ts=;
-    b=NbJSr7qRx5y1Mp3a4m25zYbTv6HLGzbHHCVKMN+Gg8MyFXyxcPyht+QXzJ/+z5T6zU
-    Bb8DfaI6GiJI5/jS/wALXD20j2+0sW1hozlazEnDKC+tJnXSWu60yOx9nAfDgI7v6TDX
-    pdbbtJwg/s1xY8Hoj467EEDmaO+Q73184qCKLKrdRo/FK+axgcjLLQRYuiR0xp8noVzt
-    j0vxOn3RAGxzg9QiTI2F7BLA5TAT5FcNwHoHfiGq2xZjVJ65/8fsuQpEnNS3sVLKPPqi
-    8br5s2ILbnfAY5Mv1KpQ+D/xW6fDIChi+WE646SoQluHjj6s3yFXDQU3EDsmrWY1bOZ9
-    M34w==
+    bh=SHDAXXjQ4k5wqGqgpZ5ML0uGXKdasaiKGHiNj6axBrA=;
+    b=USdFIKxpv0yDNCsW+ZdmUnwSYK+mlD+t9QhFMzLQMGv38mnlBbQ4pE6ErpP/pUguwf
+    jbniADxY0RwY0LeHmvos3wlJTmz8oTXwpsb/vkNQFSQtnrSrxoQrSpNNL7OG+feIJbwv
+    y3DzpcZajCgmFPnQiCW+SZvOC1aAPeSTO0okqDdgT7iWIlRneiDpGiGuq5V50PDqlaoo
+    dH79WEABvneFg7XnwSn37PMKR3l/i4QS8u02HQXgjBeARX3qzQYVpUl4N6Z7IDRiK3wP
+    sfiDbeOp2Mplfo+MzMNKIRkE+EeYosRGrbOyX3z/iald+672r+x5xRJyGg3rWcXfIXs6
+    6nig==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -74,35 +75,120 @@ To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v20210713 23/31] tools: recognize LIBXL_API_VERSION for 4.16
-Date: Tue, 13 Jul 2021 20:05:57 +0200
-Message-Id: <20210713180605.12096-24-olaf@aepfle.de>
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v20210713 14/31] tools: restore: preallocate pfns array
+Date: Tue, 13 Jul 2021 20:05:48 +0200
+Message-Id: <20210713180605.12096-15-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is required by upcoming API changes.
+Remove repeated allocation from migration loop. There will never be
+more than MAX_BATCH_SIZE pages to process in an incoming batch.
+Allocate the space once.
+
+Adjust the verification for page count. It must be at least one page,
+but not more than MAX_BATCH_SIZE.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/include/libxl.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ tools/libs/guest/xg_sr_common.h  |  1 +
+ tools/libs/guest/xg_sr_restore.c | 23 +++++++++++++++--------
+ 2 files changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index ae7fe27c1f..29931626a2 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -729,7 +729,8 @@ typedef struct libxl__ctx libxl_ctx;
- #if LIBXL_API_VERSION != 0x040200 && LIBXL_API_VERSION != 0x040300 && \
-     LIBXL_API_VERSION != 0x040400 && LIBXL_API_VERSION != 0x040500 && \
-     LIBXL_API_VERSION != 0x040700 && LIBXL_API_VERSION != 0x040800 && \
--    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400
-+    LIBXL_API_VERSION != 0x041300 && LIBXL_API_VERSION != 0x041400 && \
-+    LIBXL_API_VERSION != 0x041600
- #error Unknown LIBXL_API_VERSION
- #endif
- #endif
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 34d4c15b22..d32b4c46f3 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -256,6 +256,7 @@ struct xc_sr_context
+         {
+             struct xc_sr_restore_ops ops;
+             struct restore_callbacks *callbacks;
++            xen_pfn_t *pfns;
+ 
+             int send_back_fd;
+             unsigned long p2m_size;
+diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
+index aa4113d7f6..e812f65f99 100644
+--- a/tools/libs/guest/xg_sr_restore.c
++++ b/tools/libs/guest/xg_sr_restore.c
+@@ -314,7 +314,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+     unsigned int i, pages_of_data = 0;
+     int rc = -1;
+ 
+-    xen_pfn_t *pfns = NULL, pfn;
++    xen_pfn_t pfn;
+     uint32_t *types = NULL, type;
+ 
+     /*
+@@ -349,9 +349,9 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         goto err;
+     }
+ 
+-    if ( pages->count < 1 )
++    if ( !pages->count || pages->count > MAX_BATCH_SIZE )
+     {
+-        ERROR("Expected at least 1 pfn in PAGE_DATA record");
++        ERROR("Unexpected pfn count %u in PAGE_DATA record", pages->count);
+         goto err;
+     }
+ 
+@@ -362,9 +362,8 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         goto err;
+     }
+ 
+-    pfns = malloc(pages->count * sizeof(*pfns));
+     types = malloc(pages->count * sizeof(*types));
+-    if ( !pfns || !types )
++    if ( !types )
+     {
+         ERROR("Unable to allocate enough memory for %u pfns",
+               pages->count);
+@@ -393,7 +392,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+              * have a page worth of data in the record. */
+             pages_of_data++;
+ 
+-        pfns[i] = pfn;
++        ctx->restore.pfns[i] = pfn;
+         types[i] = type;
+     }
+ 
+@@ -407,11 +406,10 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+         goto err;
+     }
+ 
+-    rc = process_page_data(ctx, pages->count, pfns, types,
++    rc = process_page_data(ctx, pages->count, ctx->restore.pfns, types,
+                            &pages->pfn[pages->count]);
+  err:
+     free(types);
+-    free(pfns);
+ 
+     return rc;
+ }
+@@ -728,6 +726,14 @@ static int setup(struct xc_sr_context *ctx)
+         goto err;
+     }
+ 
++    ctx->restore.pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pfns));
++    if ( !ctx->restore.pfns )
++    {
++        ERROR("Unable to allocate memory");
++        rc = -1;
++        goto err;
++    }
++
+     ctx->restore.buffered_records = malloc(
+         DEFAULT_BUF_RECORDS * sizeof(struct xc_sr_record));
+     if ( !ctx->restore.buffered_records )
+@@ -758,6 +764,7 @@ static void cleanup(struct xc_sr_context *ctx)
+ 
+     free(ctx->restore.buffered_records);
+     free(ctx->restore.populated_pfns);
++    free(ctx->restore.pfns);
+ 
+     if ( ctx->restore.ops.cleanup(ctx) )
+         PERROR("Failed to clean up");
 
