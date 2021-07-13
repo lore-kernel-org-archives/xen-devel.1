@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6D26C07E96
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6994AC07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8E2DF61370
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E2DF61370
+	by mail.kernel.org (Postfix) with ESMTPS id 3485A61369
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3485A61369
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155545.287201 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155546.287212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mnn-0005kW-6b; Tue, 13 Jul 2021 18:06:39 +0000
+	id 1m3Mnp-0006KQ-O6; Tue, 13 Jul 2021 18:06:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155545.287201; Tue, 13 Jul 2021 18:06:39 +0000
+Received: by outflank-mailman (output) from mailman id 155546.287212; Tue, 13 Jul 2021 18:06:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mnn-0005jo-0s; Tue, 13 Jul 2021 18:06:39 +0000
-Received: by outflank-mailman (input) for mailman id 155545;
- Tue, 13 Jul 2021 18:06:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m3Mnp-0006JK-Hq; Tue, 13 Jul 2021 18:06:41 +0000
+Received: by outflank-mailman (input) for mailman id 155546;
+ Tue, 13 Jul 2021 18:06:39 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3Mnl-0002kr-TS
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:37 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [85.215.255.80])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 05524e77-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:20 +0000 (UTC)
+ id 1m3Mnn-0002UL-Gf
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:39 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 2477b7d6-a2ac-427c-997e-ddef9a8e3457;
+ Tue, 13 Jul 2021 18:06:23 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6EtAp
+ with ESMTPSA id 30791cx6DI6GtAu
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:14 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:16 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 05524e77-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199574;
+X-Inumbo-ID: 2477b7d6-a2ac-427c-997e-ddef9a8e3457
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199576;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=LtyVn9iWhbeG3QGf2nqJ2jlqNwljeyLy9bqS6muxnCY=;
-    b=TwKmNEFGrByXOUSKlKyVErjP2hkP9l9R4JHcqbeop4rPR+2Ihe1ItAOP8mHGOSz2zw
-    msCAcjiJ8UYk8Srchu1mPulRWdnpVi2SGwA1pKEFiNnnM6FdYn1ZkSz13UqG4RJJfHvl
-    1yTz1mqfJU69hYPBsujLWN0cCDqCI2bZ4RF9XDQptM84w9+buvB4PuCBfUkSwchaI9Li
-    umqESpwS+me9yWnyMdmQk9qenWTiCWtD8ffiPQuE7ZxE4wsnkgxhG71YVHINCSfT3ES1
-    v3Xe5Stifm8ZMJFPcFUk1NqWHbCrFc4Sc1yNjkmT79ZiNsgxkM98YoniQMOP7kCscPa5
-    n8sw==
+    bh=PTsQYvP6bBBv2G619w4kDBe3knppN9bIh+m3fSDyz7g=;
+    b=labA6MsB39oPGMVWJ22VGeOWY5y7tTfBKBx4UIM2aUQZlpcy9RdUZznD48oXJr59r0
+    OyZu/zfPUIW0DdeKGmOZVUNP9eWyUIUtx1ZMgW4iZg4pgWkKeujB1EF3YS2NHRZHJUOM
+    fxA62Cai41o4FMSSEugvI8eB1FHwvozRY5qEatmTqL9Ci3e16J6xuRD/jXClDQpPHDzT
+    QrlPb3/2mUJrVV9fkFepPsMXn+dLRcZ9gnLru61HaTJQhiZsce8jYIOIHHM8LsYzq1nw
+    QpNCFLjOLXFk84j/rkTUM/H0w9L5GehLvB+4H+m6qDK+RC67FCTfXLojplWANNmJtqwf
+    j6bA==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -76,9 +75,9 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 08/31] tools: save: preallocate types array
-Date: Tue, 13 Jul 2021 20:05:42 +0200
-Message-Id: <20210713180605.12096-9-olaf@aepfle.de>
+Subject: [PATCH v20210713 13/31] tools: save: preallocate local_pages array
+Date: Tue, 13 Jul 2021 20:05:47 +0200
+Message-Id: <20210713180605.12096-14-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
@@ -89,152 +88,220 @@ Remove repeated allocation from migration loop. There will never be
 more than MAX_BATCH_SIZE pages to process in a batch.
 Allocate the space once.
 
+Adjust the code to use the unmodified src page in case of HVM.
+In case of PV the page may need to be normalised, use a private memory
+area for this purpose.
+
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h |  1 +
- tools/libs/guest/xg_sr_save.c   | 28 +++++++++++++---------------
- 2 files changed, 14 insertions(+), 15 deletions(-)
+ tools/libs/guest/xg_sr_common.h       | 22 ++++++++++---------
+ tools/libs/guest/xg_sr_save.c         | 26 ++++------------------
+ tools/libs/guest/xg_sr_save_x86_hvm.c |  5 +++--
+ tools/libs/guest/xg_sr_save_x86_pv.c  | 31 ++++++++++++++++++---------
+ 4 files changed, 40 insertions(+), 44 deletions(-)
 
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index fc403adc64..d80de6e7da 100644
+index b90b35e564..34d4c15b22 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -245,6 +245,7 @@ struct xc_sr_context
+@@ -33,16 +33,12 @@ struct xc_sr_save_ops
+      * Optionally transform the contents of a page from being specific to the
+      * sending environment, to being generic for the stream.
+      *
+-     * The page of data at the end of 'page' may be a read-only mapping of a
+-     * running guest; it must not be modified.  If no transformation is
+-     * required, the callee should leave '*pages' untouched.
++     * The page of data '*src' may be a read-only mapping of a running guest;
++     * it must not be modified. If no transformation is required, the callee
++     * should leave '*src' untouched, and return it via '**ptr'.
+      *
+-     * If a transformation is required, the callee should allocate themselves
+-     * a local page using malloc() and return it via '*page'.
+-     *
+-     * The caller shall free() '*page' in all cases.  In the case that the
+-     * callee encounters an error, it should *NOT* free() the memory it
+-     * allocated for '*page'.
++     * If a transformation is required, the callee should provide the
++     * transformed page in a private buffer and return it via '**ptr'.
+      *
+      * It is valid to fail with EAGAIN if the transformation is not able to be
+      * completed at this point.  The page shall be retried later.
+@@ -50,7 +46,7 @@ struct xc_sr_save_ops
+      * @returns 0 for success, -1 for failure, with errno appropriately set.
+      */
+     int (*normalise_page)(struct xc_sr_context *ctx, xen_pfn_t type,
+-                          void **page);
++                          void *src, unsigned int idx, void **ptr);
  
-             xen_pfn_t *batch_pfns;
-             xen_pfn_t *mfns;
-+            xen_pfn_t *types;
-             unsigned int nr_batch_pfns;
-             unsigned long *deferred_pages;
-             unsigned long nr_deferred_pages;
+     /**
+      * Set up local environment to save a domain. (Typically querying
+@@ -357,6 +353,12 @@ struct xc_sr_context
+ 
+                 union
+                 {
++                    struct
++                    {
++                        /* Used by write_batch for modified pages. */
++                        void *normalised_pages;
++                    } save;
++
+                     struct
+                     {
+                         /* State machine for the order of received records. */
 diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
-index 0abe63a377..29a5fe82f0 100644
+index 0ab8b7205c..c74c8d9348 100644
 --- a/tools/libs/guest/xg_sr_save.c
 +++ b/tools/libs/guest/xg_sr_save.c
-@@ -88,7 +88,6 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
- static int write_batch(struct xc_sr_context *ctx)
+@@ -89,11 +89,10 @@ static int write_batch(struct xc_sr_context *ctx)
  {
      xc_interface *xch = ctx->xch;
--    xen_pfn_t *types = NULL;
      void *guest_mapping = NULL;
-     void **guest_data = NULL;
-     void **local_pages = NULL;
-@@ -105,8 +104,6 @@ static int write_batch(struct xc_sr_context *ctx)
+-    void **local_pages = NULL;
+     int rc = -1;
+     unsigned int i, p, nr_pages = 0, nr_pages_mapped = 0;
+     unsigned int nr_pfns = ctx->save.nr_batch_pfns;
+-    void *page, *orig_page;
++    void *src;
+     int iovcnt = 0;
+     struct xc_sr_rec_page_data_header hdr = { 0 };
+     struct xc_sr_record rec = {
+@@ -102,16 +101,6 @@ static int write_batch(struct xc_sr_context *ctx)
  
      assert(nr_pfns != 0);
  
--    /* Types of the batch pfns. */
--    types = malloc(nr_pfns * sizeof(*types));
-     /* Errors from attempting to map the gfns. */
-     errors = malloc(nr_pfns * sizeof(*errors));
-     /* Pointers to page data to send.  Mapped gfns or local allocations. */
-@@ -116,7 +113,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     /* iovec[] for writev(). */
-     iov = malloc((nr_pfns + 4) * sizeof(*iov));
- 
--    if ( !types || !errors || !guest_data || !local_pages || !iov )
-+    if ( !errors || !guest_data || !local_pages || !iov )
-     {
-         ERROR("Unable to allocate arrays for a batch of %u pages",
-               nr_pfns);
-@@ -125,7 +122,7 @@ static int write_batch(struct xc_sr_context *ctx)
- 
+-    /* Pointers to locally allocated pages.  Need freeing. */
+-    local_pages = calloc(nr_pfns, sizeof(*local_pages));
+-
+-    if ( !local_pages )
+-    {
+-        ERROR("Unable to allocate arrays for a batch of %u pages",
+-              nr_pfns);
+-        goto err;
+-    }
+-
      for ( i = 0; i < nr_pfns; ++i )
      {
--        types[i] = ctx->save.mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
-+        ctx->save.types[i] = ctx->save.mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
-                                                       ctx->save.batch_pfns[i]);
- 
-         /* Likely a ballooned page. */
-@@ -136,7 +133,7 @@ static int write_batch(struct xc_sr_context *ctx)
-         }
-     }
- 
--    rc = xc_get_pfn_type_batch(xch, ctx->domid, nr_pfns, types);
-+    rc = xc_get_pfn_type_batch(xch, ctx->domid, nr_pfns, ctx->save.types);
-     if ( rc )
-     {
-         PERROR("Failed to get types for pfn batch");
-@@ -146,14 +143,14 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-     for ( i = 0; i < nr_pfns; ++i )
-     {
--        if ( !is_known_page_type(types[i]) )
-+        if ( !is_known_page_type(ctx->save.types[i]) )
-         {
-             ERROR("Unknown type %#"PRIpfn" for pfn %#"PRIpfn,
--                  types[i], ctx->save.mfns[i]);
-+                  ctx->save.types[i], ctx->save.mfns[i]);
-             goto err;
-         }
- 
--        if ( !page_type_has_stream_data(types[i]) )
-+        if ( !page_type_has_stream_data(ctx->save.types[i]) )
-             continue;
- 
-         ctx->save.mfns[nr_pages++] = ctx->save.mfns[i];
-@@ -172,7 +169,7 @@ static int write_batch(struct xc_sr_context *ctx)
- 
-         for ( i = 0, p = 0; i < nr_pfns; ++i )
-         {
--            if ( !page_type_has_stream_data(types[i]) )
-+            if ( !page_type_has_stream_data(ctx->save.types[i]) )
-                 continue;
- 
-             if ( errors[p] )
-@@ -183,7 +180,7 @@ static int write_batch(struct xc_sr_context *ctx)
+         ctx->save.types[i] = ctx->save.mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
+@@ -175,11 +164,9 @@ static int write_batch(struct xc_sr_context *ctx)
+                 goto err;
              }
  
-             orig_page = page = guest_mapping + (p * PAGE_SIZE);
--            rc = ctx->save.ops.normalise_page(ctx, types[i], &page);
-+            rc = ctx->save.ops.normalise_page(ctx, ctx->save.types[i], &page);
+-            orig_page = page = guest_mapping + (p * PAGE_SIZE);
+-            rc = ctx->save.ops.normalise_page(ctx, ctx->save.types[i], &page);
+-
+-            if ( orig_page != page )
+-                local_pages[i] = page;
++            src = guest_mapping + (p * PAGE_SIZE);
++            rc = ctx->save.ops.normalise_page(ctx, ctx->save.types[i], src, i,
++                                              &ctx->save.guest_data[i]);
  
-             if ( orig_page != page )
-                 local_pages[i] = page;
-@@ -194,7 +191,7 @@ static int write_batch(struct xc_sr_context *ctx)
-                 {
-                     set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
-                     ++ctx->save.nr_deferred_pages;
--                    types[i] = XEN_DOMCTL_PFINFO_XTAB;
-+                    ctx->save.types[i] = XEN_DOMCTL_PFINFO_XTAB;
-                     --nr_pages;
-                 }
+             if ( rc )
+             {
+@@ -194,8 +181,6 @@ static int write_batch(struct xc_sr_context *ctx)
                  else
-@@ -223,7 +220,7 @@ static int write_batch(struct xc_sr_context *ctx)
-     rec.length += nr_pages * PAGE_SIZE;
+                     goto err;
+             }
+-            else
+-                ctx->save.guest_data[i] = page;
  
-     for ( i = 0; i < nr_pfns; ++i )
--        rec_pfns[i] = ((uint64_t)(types[i]) << 32) | ctx->save.batch_pfns[i];
-+        rec_pfns[i] = ((uint64_t)(ctx->save.types[i]) << 32) | ctx->save.batch_pfns[i];
- 
-     iov[0].iov_base = &rec.type;
-     iov[0].iov_len = sizeof(rec.type);
-@@ -275,7 +272,6 @@ static int write_batch(struct xc_sr_context *ctx)
-     free(local_pages);
-     free(guest_data);
-     free(errors);
--    free(types);
+             rc = -1;
+             ++p;
+@@ -256,9 +241,6 @@ static int write_batch(struct xc_sr_context *ctx)
+  err:
+     if ( guest_mapping )
+         xenforeignmemory_unmap(xch->fmem, guest_mapping, nr_pages_mapped);
+-    for ( i = 0; local_pages && i < nr_pfns; ++i )
+-        free(local_pages[i]);
+-    free(local_pages);
  
      return rc;
  }
-@@ -850,9 +846,10 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
-                                   sizeof(*ctx->save.batch_pfns));
-     ctx->save.mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.mfns));
-+    ctx->save.types = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.types));
-     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
- 
--    if ( !ctx->save.batch_pfns || !ctx->save.mfns ||
-+    if ( !ctx->save.batch_pfns || !ctx->save.mfns || !ctx->save.types ||
-          !dirty_bitmap || !ctx->save.deferred_pages )
-     {
-         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
-@@ -884,6 +881,7 @@ static void cleanup(struct xc_sr_context *ctx)
-     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
-                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
-     free(ctx->save.deferred_pages);
-+    free(ctx->save.types);
-     free(ctx->save.mfns);
-     free(ctx->save.batch_pfns);
+diff --git a/tools/libs/guest/xg_sr_save_x86_hvm.c b/tools/libs/guest/xg_sr_save_x86_hvm.c
+index 1634a7bc43..11232b9f1d 100644
+--- a/tools/libs/guest/xg_sr_save_x86_hvm.c
++++ b/tools/libs/guest/xg_sr_save_x86_hvm.c
+@@ -129,9 +129,10 @@ static xen_pfn_t x86_hvm_pfn_to_gfn(const struct xc_sr_context *ctx,
+     return pfn;
  }
+ 
+-static int x86_hvm_normalise_page(struct xc_sr_context *ctx,
+-                                  xen_pfn_t type, void **page)
++static int x86_hvm_normalise_page(struct xc_sr_context *ctx, xen_pfn_t type,
++                                  void *src, unsigned int idx, void **ptr)
+ {
++    *ptr = src;
+     return 0;
+ }
+ 
+diff --git a/tools/libs/guest/xg_sr_save_x86_pv.c b/tools/libs/guest/xg_sr_save_x86_pv.c
+index 4964f1f7b8..defc044001 100644
+--- a/tools/libs/guest/xg_sr_save_x86_pv.c
++++ b/tools/libs/guest/xg_sr_save_x86_pv.c
+@@ -999,29 +999,31 @@ static xen_pfn_t x86_pv_pfn_to_gfn(const struct xc_sr_context *ctx,
+  * save_ops function.  Performs pagetable normalisation on appropriate pages.
+  */
+ static int x86_pv_normalise_page(struct xc_sr_context *ctx, xen_pfn_t type,
+-                                 void **page)
++                                 void *src, unsigned int idx, void **ptr)
+ {
+     xc_interface *xch = ctx->xch;
+-    void *local_page;
++    void *dst;
+     int rc;
+ 
+     type &= XEN_DOMCTL_PFINFO_LTABTYPE_MASK;
+ 
+     if ( type < XEN_DOMCTL_PFINFO_L1TAB || type > XEN_DOMCTL_PFINFO_L4TAB )
++    {
++        *ptr = src;
+         return 0;
++    }
+ 
+-    local_page = malloc(PAGE_SIZE);
+-    if ( !local_page )
++    if ( idx >= MAX_BATCH_SIZE )
+     {
+-        ERROR("Unable to allocate scratch page");
+-        rc = -1;
+-        goto out;
++        ERROR("idx %u out of range", idx);
++        errno = ERANGE;
++        return -1;
+     }
+ 
+-    rc = normalise_pagetable(ctx, *page, local_page, type);
+-    *page = local_page;
++    dst = ctx->x86.pv.save.normalised_pages + (idx * PAGE_SIZE);
++    rc = normalise_pagetable(ctx, src, dst, type);
++    *ptr = dst;
+ 
+- out:
+     return rc;
+ }
+ 
+@@ -1031,8 +1033,16 @@ static int x86_pv_normalise_page(struct xc_sr_context *ctx, xen_pfn_t type,
+  */
+ static int x86_pv_setup(struct xc_sr_context *ctx)
+ {
++    xc_interface *xch = ctx->xch;
+     int rc;
+ 
++    ctx->x86.pv.save.normalised_pages = malloc(MAX_BATCH_SIZE * PAGE_SIZE);
++    if ( !ctx->x86.pv.save.normalised_pages )
++    {
++        PERROR("Failed to allocate normalised_pages");
++        return -1;
++    }
++
+     rc = x86_pv_domain_info(ctx);
+     if ( rc )
+         return rc;
+@@ -1118,6 +1128,7 @@ static int x86_pv_check_vm_state(struct xc_sr_context *ctx)
+ 
+ static int x86_pv_cleanup(struct xc_sr_context *ctx)
+ {
++    free(ctx->x86.pv.save.normalised_pages);
+     free(ctx->x86.pv.p2m_pfns);
+ 
+     if ( ctx->x86.pv.p2m )
 
