@@ -7,42 +7,41 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDFECC07E96
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 038C4C07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A221061374
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A221061374
+	by mail.kernel.org (Postfix) with ESMTPS id AC81361370
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC81361370
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155537.287112 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155540.287146 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3MnT-0002lQ-Ac; Tue, 13 Jul 2021 18:06:19 +0000
+	id 1m3Mna-0003fq-5m; Tue, 13 Jul 2021 18:06:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155537.287112; Tue, 13 Jul 2021 18:06:19 +0000
+Received: by outflank-mailman (output) from mailman id 155540.287146; Tue, 13 Jul 2021 18:06:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3MnT-0002lJ-7b; Tue, 13 Jul 2021 18:06:19 +0000
-Received: by outflank-mailman (input) for mailman id 155537;
- Tue, 13 Jul 2021 18:06:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m3Mna-0003fd-20; Tue, 13 Jul 2021 18:06:26 +0000
+Received: by outflank-mailman (input) for mailman id 155540;
+ Tue, 13 Jul 2021 18:06:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3MnR-0002kr-UR
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:17 +0000
-Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.167])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 04584618-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:17 +0000 (UTC)
+ id 1m3MnY-0002UL-GA
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:24 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.169])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b220a611-2cbe-434e-8ba0-601220fb6ed2;
+ Tue, 13 Jul 2021 18:06:19 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6BtAi
+ with ESMTPSA id 30791cx6DI6DtAn
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:11 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04584618-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199571;
+X-Inumbo-ID: b220a611-2cbe-434e-8ba0-601220fb6ed2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199573;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=oJEcT6v2n/O5Zj5MH8UEB3htWfj1QTk7O+DK+AM3TXA=;
-    b=PciP9VORIaGFuJ6qCss2A4mnbbOe3K7r8nCJEEeY0df5QeLCvNsAWdxdTi7yOZgbtZ
-    vYBPx1JZAGcofS+BtlzPu5X2ur1W1HxgQZ0cFo3a+AuADZ1TQJigZT8yQhXMSRsiCmr6
-    71Qo0bws7mPRd0nXPxmuYE4I+V6+GZeV0X1E/9t9AxVqxLZUOI8r0JlNMjJJkZ3lTahF
-    2Fd0FU4e5Aq8xoyfH81c+YW10a4Jfw+bPYE8JFpKCqvlkc1CRGSriq1eqECbv6gcn5cF
-    qhfiNK08nJuri8KlYheJWB9LZl66rKRxhnfRPKCFMoJUnYXp7Xk34LjWUvpClDR2ZgsO
-    Nepg==
+    bh=Clrkbg11Ho2H2QvphK9GJKKzvhCVY4UGRclGnlEVBNo=;
+    b=ncMC99+8T5s1sxnqRqUJetKk4Ynh023mspDlqYFfw21vrPc9vPmbwd4iNgTktq39zg
+    5P2NX4LhClwagTbO9H2zaxMPd1Aj4d1iv1uDj+GUp3bG2nDEpLuO7WXlhZ9HONA+7DdP
+    KARztatEq/Rc251lD7N2vUB6lTwbWxCg+JvcK5k7v6+x3JdfTZDbPWXB9uKLS1hwYkQn
+    AAIHv0u8p34wWirG59r9QG/zhSYSDeSylI5/JgSfG67PqSWGh5YovuKXOWAMhOft0t1/
+    mpnsFdsKQYHYl9EKkLdKFo50ZmHwk4Wxzs4bQqjd34T/2FRiCemmLCn1I5MelgmGU2FY
+    5NSg==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -74,87 +73,129 @@ From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v20210713 01/31] tools: fix make rpmball
-Date: Tue, 13 Jul 2021 20:05:35 +0200
-Message-Id: <20210713180605.12096-2-olaf@aepfle.de>
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v20210713 06/31] tools: show migration transfer rate in send_dirty_pages
+Date: Tue, 13 Jul 2021 20:05:40 +0200
+Message-Id: <20210713180605.12096-7-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit 438c5ffa44e99cceb574c0f9946aacacdedd2952 ("rpmball: Adjust to
-new rpm, do not require --force") attempted to handle stricter
-directory permissions in newer distributions.
+Show how fast domU pages are transferred in each iteration.
 
-This introduced a few issues:
-- /boot used to be a constant prior commit
-  6475d700055fa952f7671cee982a23de2f5e4a7c ("use BOOT_DIR as xen.gz
-  install location"), since this commit the location has to be
-  referenced via ${BOOT_DIR}
-- it assumed the prefix and the various configurable paths match the
-  glob pattern /*/*/*
-
-Adjust the code to build a filelist on demand and filter directories
-from an installed filesystem.rpm. This works on a SUSE system, and
-will likely work on a RedHat based system as well.
-
-Take the opportunity to replace the usage of $RPM_BUILD_ROOT with
-%buildroot, and use pushd/popd pairs.
+The relevant data is how fast the pfns travel, not so much how much
+protocol overhead exists. So the reported MiB/sec is just for pfns.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/misc/mkrpm | 33 ++++++++++++++++++++++++---------
- 1 file changed, 24 insertions(+), 9 deletions(-)
+v02:
+- rearrange MiB_sec calculation (jgross)
+---
+ tools/libs/guest/xg_sr_common.h |  2 ++
+ tools/libs/guest/xg_sr_save.c   | 46 +++++++++++++++++++++++++++++++++
+ 2 files changed, 48 insertions(+)
 
-diff --git a/tools/misc/mkrpm b/tools/misc/mkrpm
-index 68819b2d73..b31054444d 100644
---- a/tools/misc/mkrpm
-+++ b/tools/misc/mkrpm
-@@ -50,20 +50,35 @@ uninstall.
- %build
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 36d45ef56f..2e70cc6269 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -238,6 +238,8 @@ struct xc_sr_context
+             bool debug;
  
- %install
--rm -rf \$RPM_BUILD_ROOT
--mkdir -p \$RPM_BUILD_ROOT
--cd %{_xenroot}
--dist/install.sh \$RPM_BUILD_ROOT/
-+rm -rf %{buildroot}
-+mkdir -p %{buildroot}
-+pushd %{_xenroot}
-+dist/install.sh %{buildroot}
+             unsigned long p2m_size;
++            size_t pages_sent;
++            size_t overhead_sent;
+ 
+             struct precopy_stats stats;
+ 
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 3fce41b6cf..00b81033a9 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -1,5 +1,6 @@
+ #include <assert.h>
+ #include <arpa/inet.h>
++#include <time.h>
+ 
+ #include "xg_sr_common.h"
+ 
+@@ -238,6 +239,8 @@ static int write_batch(struct xc_sr_context *ctx)
+     iov[3].iov_len = nr_pfns * sizeof(*rec_pfns);
+ 
+     iovcnt = 4;
++    ctx->save.pages_sent += nr_pages;
++    ctx->save.overhead_sent += sizeof(rec) + sizeof(hdr) + nr_pfns * sizeof(*rec_pfns);
+ 
+     if ( nr_pages )
+     {
+@@ -357,6 +360,42 @@ static int suspend_domain(struct xc_sr_context *ctx)
+     return 0;
+ }
+ 
++static void show_transfer_rate(struct xc_sr_context *ctx, struct timespec *start)
++{
++    xc_interface *xch = ctx->xch;
++    struct timespec end = {}, diff = {};
++    size_t ms, MiB_sec;
 +
-+pushd %{buildroot}
-+popd
-+rm -f dist/filesystem.txt
-+rm -f dist/directories.txt
-+rm -f dist/files.txt
-+find %{buildroot} -type d | sed 's|^%{buildroot}||' | sort > dist/directories.txt
-+find %{buildroot} -type f | sed 's|^%{buildroot}||' | sort > dist/files.txt
-+find %{buildroot} -type l | sed 's|^%{buildroot}||' | sort >> dist/files.txt
-+if rpm -ql filesystem > dist/filesystem.txt
-+then
-+  while read
-+  do
-+    sed -i "s|^\${REPLY}$||" dist/directories.txt
-+  done < dist/filesystem.txt
-+fi
-+sed 's@^@%%dir @' dist/directories.txt >> dist/files.txt
++    if (!ctx->save.pages_sent)
++        return;
++
++    if ( clock_gettime(CLOCK_MONOTONIC, &end) )
++        PERROR("clock_gettime");
++
++    if ( (end.tv_nsec - start->tv_nsec) < 0 )
++    {
++        diff.tv_sec = end.tv_sec - start->tv_sec - 1;
++        diff.tv_nsec = end.tv_nsec - start->tv_nsec + (1000U*1000U*1000U);
++    }
++    else
++    {
++        diff.tv_sec = end.tv_sec - start->tv_sec;
++        diff.tv_nsec = end.tv_nsec - start->tv_nsec;
++    }
++
++    ms = (diff.tv_nsec / (1000U*1000U));
++    ms += (diff.tv_sec * 1000U);
++    if (!ms)
++        ms = 1;
++
++    MiB_sec = (ctx->save.pages_sent * PAGE_SIZE * 1000U) / ms / (1024U*1024U);
++
++    errno = 0;
++    IPRINTF("%s: %zu bytes + %zu pages in %ld.%09ld sec, %zu MiB/sec", __func__,
++            ctx->save.overhead_sent, ctx->save.pages_sent,
++            diff.tv_sec, diff.tv_nsec, MiB_sec);
++}
++
+ /*
+  * Send a subset of pages in the guests p2m, according to the dirty bitmap.
+  * Used for each subsequent iteration of the live migration loop.
+@@ -370,9 +409,15 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
+     xen_pfn_t p;
+     unsigned long written;
+     int rc;
++    struct timespec start = {};
+     DECLARE_HYPERCALL_BUFFER_SHADOW(unsigned long, dirty_bitmap,
+                                     &ctx->save.dirty_bitmap_hbuf);
  
--cd \$RPM_BUILD_ROOT
-+popd
++    ctx->save.pages_sent = 0;
++    ctx->save.overhead_sent = 0;
++    if ( clock_gettime(CLOCK_MONOTONIC, &start) )
++        PERROR("clock_gettime");
++
+     for ( p = 0, written = 0; p < ctx->save.p2m_size; ++p )
+     {
+         if ( !test_bit(p, dirty_bitmap) )
+@@ -396,6 +441,7 @@ static int send_dirty_pages(struct xc_sr_context *ctx,
+     if ( written > entries )
+         DPRINTF("Bitmap contained more entries than expected...");
  
- %clean
--rm -rf \$RPM_BUILD_ROOT
-+rm -rf %{buildroot}
++    show_transfer_rate(ctx, &start);
+     xc_report_progress_step(xch, entries, entries);
  
--%files
-+%files -f %{_xenroot}/dist/files.txt
- %defattr(-,root,root,-)
--/*/*/*
--/boot/*
- 
- %post
- EOF
+     return ctx->save.ops.check_vm_state(ctx);
 
