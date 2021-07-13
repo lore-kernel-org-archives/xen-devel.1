@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B74ADC07E95
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B50C07E96
 	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:17:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 782A86044F
+	by mail.kernel.org (Postfix) with ESMTPS id 91AA76136D
 	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:17:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 782A86044F
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 91AA76136D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155670.287417 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155669.287413 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mxz-0003kz-Vp; Tue, 13 Jul 2021 18:17:11 +0000
+	id 1m3Mxz-0003hg-Mu; Tue, 13 Jul 2021 18:17:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155670.287417; Tue, 13 Jul 2021 18:17:11 +0000
+Received: by outflank-mailman (output) from mailman id 155669.287413; Tue, 13 Jul 2021 18:17:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mxz-0003kF-Rf; Tue, 13 Jul 2021 18:17:11 +0000
-Received: by outflank-mailman (input) for mailman id 155670;
- Tue, 13 Jul 2021 18:17:10 +0000
+	id 1m3Mxz-0003hX-Jg; Tue, 13 Jul 2021 18:17:11 +0000
+Received: by outflank-mailman (input) for mailman id 155669;
+ Tue, 13 Jul 2021 18:17:09 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3MoF-0002kr-Ud
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:07 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.174])
+ id 1m3MoU-0002kr-V7
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:22 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 08701ffb-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:24 +0000 (UTC)
+ id 0bea7630-e405-11eb-8793-12813bfff9fa;
+ Tue, 13 Jul 2021 18:06:29 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6ItB0
+ with ESMTPSA id 30791cx6DI6NtBB
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:18 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:23 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08701ffb-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199579;
+X-Inumbo-ID: 0bea7630-e405-11eb-8793-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199584;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=9FxM3Bx9wXja4XqBD1sGOusWUB3Xe2+i7IOocJp1ap0=;
-    b=pmlv471FKO6AMjwr8Z6WkjOjfeDTfhS4g1PsNX7OPQtPlshRqiH1D8t1MyyDwoQY28
-    KvOnByp+tMenERKqJ44CYafWgoXdqW+quP8mocvhZcsZmcM5vo7wj6xa48FdiuBKMD2k
-    svubuN12GRx9hb6T0FYR1RyYj0t9FThxcE8ujtpcF+LMoOL7kyhr22c/25KS2UkmG0C3
-    ihAdX79HLuAIQ3vrzcEWEtTb/H4lEN4AXnjX7PMk5dRFgimqOzTjo2L5TnDh7verjJkE
-    /3+jRvcwtro77LyVxMS1amPehmuTuM0nRIgltngD/ivuO651cAOq2C8J8fRiNsjmDWOT
-    W+9g==
+    bh=JrGxNpYov5voRDtMV5w4X2CbyE19s8jrygFtsIfZxys=;
+    b=dqjaMd1F8I7hTN9jlHVKhrUl1RimwUM5FkZ/HrMgw2O9/o9nPFeQIRAvTK3NJB2UxS
+    1iQbMgtVB66RRjrQQ/eopanr+m8VLVVBKcnuKfLOwoSvaTYBp3hlQ+cjS+NETGmKjrDX
+    +DOEexmLpBJHCJSy5nd1pJiDetjG8qx5JM9bVmg8sZGICKgkCh5J0s3YGE7awkNK47jb
+    mZqJ68kCoKtUzPPCrWPzAWRFfxwoA3UF3LeeqbGoILqjThjSSILUxEe2Wco34lFijEj/
+    RlSNFtmhun3avVAe0NlYr5yoF8PQRNefs+rwHzSMsbnnpBRnCw8sv0n8b5RsCmBz0Hkj
+    o9LQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -76,100 +76,152 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 18/31] tools: restore: preallocate populate_pfns pfns array
-Date: Tue, 13 Jul 2021 20:05:52 +0200
-Message-Id: <20210713180605.12096-19-olaf@aepfle.de>
+Subject: [PATCH v20210713 29/31] tools: add API for expandable bitmaps
+Date: Tue, 13 Jul 2021 20:06:03 +0200
+Message-Id: <20210713180605.12096-30-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Remove repeated allocation from migration loop. There will never be
-more than MAX_BATCH_SIZE pages to process in an incoming batch.
-Allocate the space once.
+Since the incoming migration stream lacks info about what the highest pfn
+will be, some data structures can not be allocated upfront.
 
-Use some prefix to avoid conflict with an array used in handle_page_data.
+Add an API for expandable bitmaps, loosely based on pfn_set_populated.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
- tools/libs/guest/xg_sr_common.h  |  1 +
- tools/libs/guest/xg_sr_restore.c | 14 +++++++-------
- 2 files changed, 8 insertions(+), 7 deletions(-)
+ tools/libs/guest/xg_sr_common.c | 39 +++++++++++++++++++
+ tools/libs/guest/xg_sr_common.h | 67 +++++++++++++++++++++++++++++++++
+ 2 files changed, 106 insertions(+)
 
+diff --git a/tools/libs/guest/xg_sr_common.c b/tools/libs/guest/xg_sr_common.c
+index cabde4ef74..6d495ba72d 100644
+--- a/tools/libs/guest/xg_sr_common.c
++++ b/tools/libs/guest/xg_sr_common.c
+@@ -163,6 +163,45 @@ static void __attribute__((unused)) build_assertions(void)
+     BUILD_BUG_ON(sizeof(struct xc_sr_rec_hvm_params)        != 8);
+ }
+ 
++/*
++ * Expand the tracking structures as needed.
++ * To avoid realloc()ing too excessively, the size increased to the nearest
++ * power of two large enough to contain the required number of bits.
++ */
++bool _sr_bitmap_expand(struct sr_bitmap *bm, unsigned long bits)
++{
++    size_t new_max;
++    size_t old_sz, new_sz;
++    void *p;
++
++    if (bits <= bm->bits)
++        return true;
++
++    /* Round up to the nearest power of two larger than bit, less 1. */
++    new_max = bits;
++    new_max |= new_max >> 1;
++    new_max |= new_max >> 2;
++    new_max |= new_max >> 4;
++    new_max |= new_max >> 8;
++    new_max |= new_max >> 16;
++    new_max |= sizeof(unsigned long) > 4 ? new_max >> 32 : 0;
++
++    /* Allocate units of unsigned long */
++    new_max = (new_max + BITS_PER_LONG - 1) & ~(BITS_PER_LONG - 1);
++
++    old_sz = bitmap_size(bm->bits);
++    new_sz = bitmap_size(new_max);
++    p = realloc(bm->p, new_sz);
++    if (!p)
++        return false;
++
++    memset(p + old_sz, 0, new_sz - old_sz);
++    bm->p = p;
++    bm->bits = new_max;
++
++    return true;
++}
++
+ /*
+  * Local variables:
+  * mode: C
 diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index 336be98c93..ca44e59382 100644
+index 8981c21acd..686a9614c2 100644
 --- a/tools/libs/guest/xg_sr_common.h
 +++ b/tools/libs/guest/xg_sr_common.h
-@@ -260,6 +260,7 @@ struct xc_sr_context
-             uint32_t *types;
-             xen_pfn_t *mfns;
-             int *map_errs;
-+            xen_pfn_t *pp_pfns;
+@@ -18,6 +18,73 @@ const char *rec_type_to_str(uint32_t type);
+ struct xc_sr_context;
+ struct xc_sr_record;
  
-             int send_back_fd;
-             unsigned long p2m_size;
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 866a7c86cd..caac4bb5fa 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -138,12 +138,11 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-                   const xen_pfn_t *original_pfns, const uint32_t *types)
- {
-     xc_interface *xch = ctx->xch;
--    xen_pfn_t *mfns = malloc(count * sizeof(*mfns)),
--        *pfns = malloc(count * sizeof(*pfns));
-+    xen_pfn_t *mfns = malloc(count * sizeof(*mfns));
-     unsigned int i, nr_pfns = 0;
-     int rc = -1;
- 
--    if ( !mfns || !pfns )
-+    if ( !mfns )
-     {
-         ERROR("Failed to allocate %zu bytes for populating the physmap",
-               2 * count * sizeof(*mfns));
-@@ -158,7 +157,7 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-             rc = pfn_set_populated(ctx, original_pfns[i]);
-             if ( rc )
-                 goto err;
--            pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
-+            ctx->restore.pp_pfns[nr_pfns] = mfns[nr_pfns] = original_pfns[i];
-             ++nr_pfns;
-         }
-     }
-@@ -182,14 +181,13 @@ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
-                 goto err;
-             }
- 
--            ctx->restore.ops.set_gfn(ctx, pfns[i], mfns[i]);
-+            ctx->restore.ops.set_gfn(ctx, ctx->restore.pp_pfns[i], mfns[i]);
-         }
-     }
- 
-     rc = 0;
- 
-  err:
--    free(pfns);
-     free(mfns);
- 
-     return rc;
-@@ -707,8 +705,9 @@ static int setup(struct xc_sr_context *ctx)
-     ctx->restore.types = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.types));
-     ctx->restore.mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.mfns));
-     ctx->restore.map_errs = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.map_errs));
-+    ctx->restore.pp_pfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->restore.pp_pfns));
-     if ( !ctx->restore.pfns || !ctx->restore.types || !ctx->restore.mfns ||
--         !ctx->restore.map_errs )
-+         !ctx->restore.map_errs || !ctx->restore.pp_pfns )
-     {
-         ERROR("Unable to allocate memory");
-         rc = -1;
-@@ -745,6 +744,7 @@ static void cleanup(struct xc_sr_context *ctx)
- 
-     free(ctx->restore.buffered_records);
-     free(ctx->restore.populated_pfns);
-+    free(ctx->restore.pp_pfns);
-     free(ctx->restore.map_errs);
-     free(ctx->restore.mfns);
-     free(ctx->restore.types);
++struct sr_bitmap
++{
++    void *p;
++    unsigned long bits;
++};
++
++extern bool _sr_bitmap_expand(struct sr_bitmap *bm, unsigned long bits);
++
++static inline bool sr_bitmap_expand(struct sr_bitmap *bm, unsigned long bits)
++{
++    if (bits > bm->bits)
++        return _sr_bitmap_expand(bm, bits);
++    return true;
++}
++
++static inline void sr_bitmap_free(struct sr_bitmap *bm)
++{
++    free(bm->p);
++    bm->p = NULL;
++}
++
++static inline bool sr_set_bit(unsigned long bit, struct sr_bitmap *bm)
++{
++    if (sr_bitmap_expand(bm, bit) == false)
++        return false;
++
++    set_bit(bit, bm->p);
++    return true;
++}
++
++static inline bool sr_test_bit(unsigned long bit, struct sr_bitmap *bm)
++{
++    if (bit > bm->bits)
++        return false;
++    return !!test_bit(bit, bm->p);
++}
++
++static inline void sr_clear_bit(unsigned long bit, struct sr_bitmap *bm)
++{
++    if (bit <= bm->bits)
++        clear_bit(bit, bm->p);
++}
++
++static inline bool sr_test_and_clear_bit(unsigned long bit, struct sr_bitmap *bm)
++{
++    if (bit > bm->bits)
++        return false;
++    return !!test_and_clear_bit(bit, bm->p);
++}
++
++/* No way to report potential allocation error, bitmap must be expanded prior usage */
++static inline bool sr_test_and_set_bit(unsigned long bit, struct sr_bitmap *bm)
++{
++    if (bit > bm->bits)
++        return false;
++    return !!test_and_set_bit(bit, bm->p);
++}
++
++static inline bool sr_set_long_bit(unsigned long base_bit, struct sr_bitmap *bm)
++{
++    if (sr_bitmap_expand(bm, base_bit + BITS_PER_LONG) == false)
++        return false;
++
++    set_bit_long(base_bit, bm->p);
++    return true;
++}
++
+ /**
+  * Save operations.  To be implemented for each type of guest, for use by the
+  * common save algorithm.
 
