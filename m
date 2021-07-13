@@ -7,41 +7,42 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22434C11F66
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E402C07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B27656136D
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B27656136D
+	by mail.kernel.org (Postfix) with ESMTPS id 138486044F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:16:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 138486044F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155599.287326 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155611.287344 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mwj-0007Gd-Vj; Tue, 13 Jul 2021 18:15:53 +0000
+	id 1m3Mx0-00087U-DJ; Tue, 13 Jul 2021 18:16:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155599.287326; Tue, 13 Jul 2021 18:15:53 +0000
+Received: by outflank-mailman (output) from mailman id 155611.287344; Tue, 13 Jul 2021 18:16:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mwj-0007GO-Rh; Tue, 13 Jul 2021 18:15:53 +0000
-Received: by outflank-mailman (input) for mailman id 155599;
- Tue, 13 Jul 2021 18:15:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m3Mx0-00087J-9Y; Tue, 13 Jul 2021 18:16:10 +0000
+Received: by outflank-mailman (input) for mailman id 155611;
+ Tue, 13 Jul 2021 18:16:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3Moq-0002UL-Ip
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:44 +0000
-Received: from mo4-p03-ob.smtp.rzone.de (unknown [81.169.146.173])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 09db5836-ef13-4b8c-9624-2d4ead1701d9;
- Tue, 13 Jul 2021 18:06:32 +0000 (UTC)
+ id 1m3MoZ-0002kr-VO
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:07:28 +0000
+Received: from mo4-p03-ob.smtp.rzone.de (unknown [85.215.255.101])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0b687569-e405-11eb-8793-12813bfff9fa;
+ Tue, 13 Jul 2021 18:06:30 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6NtBA
+ with ESMTPSA id 30791cx6DI6LtB6
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
- Tue, 13 Jul 2021 20:06:23 +0200 (CEST)
+ Tue, 13 Jul 2021 20:06:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09db5836-ef13-4b8c-9624-2d4ead1701d9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199583;
+X-Inumbo-ID: 0b687569-e405-11eb-8793-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199581;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=qKsJRazTHUTD2Ybtcf5xNrQhUiwz4suhpfKf90n01qY=;
-    b=MifQ4DoZPVgmf+LZCCmY1rG3HBSr6oI+WcjM6O3Uh7+rtMobbpLmRz4tgFEtwJy2B8
-    f1UE4OWSAFcj2GIJJTzKb8WQEQbjKbzpxYtUXrSDL8cy4VEZIHIURUy75wDNsKMEhUFy
-    9pPHbcqjEaLYEI9xcP8B9FQJGb7zy/p7DGdRtuDThAVaDEqaymCIur+xDRKxXLjOZqCi
-    lNggFMT0jjwOaFYWnQbXlvKYATYv3W6t2Gx2KUQ9Mw4TwpE6keh1reGgdePj6+kzB2M3
-    uNENFYtOClJZD3ULdjIxoN+gL/nRvf8FgJctLAfntwgmNVjcn8Si/0hwJu6TnTwlNCc9
-    TNqw==
+    bh=GjudnVF2IHqXv7qlToU0RRwDe7Jc7WilBXGXYBOzt/s=;
+    b=J/0o1XrmqfrXKI3DihqrrnnSctYBw0s8LXUYPsJXNCmiklD8n8Aj/Tkr0R4D4jSDUV
+    GrrgaaxGbsNqdffLtaKR7ifUph8rxmZYP+Uj8jaa5kbmlkXKnOVvyZn3av5k43Pnt8c8
+    fXFqeX/OZn3fNgBgHji4nMsNg3eh0vMsaAyOgAjpp+wIUh6lgifGly0dOgVhb6AVhTUZ
+    JP9XuOa5pDmYQ7wMZdxTxj64v5X0i6JZgTLG3hkgM8vQJXLXie8u9ZjET5xgn/DA+8RI
+    H6D9QKPeKLSNfyw0WUGTCkie47tzN1+R/N+rVSFdC7RYPXvMmMf5i/I0oyTrspS0yd/Z
+    m6YQ==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -72,267 +73,164 @@ X-RZG-CLASS-ID: mo00
 From: Olaf Hering <olaf@aepfle.de>
 To: xen-devel@lists.xenproject.org
 Cc: Olaf Hering <olaf@aepfle.de>,
+	Christian Lindig <christian.lindig@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 28/31] tools: add --abort_if_busy to libxl_domain_suspend
-Date: Tue, 13 Jul 2021 20:06:02 +0200
-Message-Id: <20210713180605.12096-29-olaf@aepfle.de>
+	Juergen Gross <jgross@suse.com>,
+	David Scott <dave@recoil.org>
+Subject: [PATCH v20210713 24/31] tools: adjust libxl_domain_suspend to receive a struct props
+Date: Tue, 13 Jul 2021 20:05:58 +0200
+Message-Id: <20210713180605.12096-25-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Provide a knob to the host admin to abort the live migration of a
-running domU if the downtime during final transit will be too long
-for the workload within domU.
+Upcoming changes will pass more knobs down to xc_domain_save.
+Adjust the libxl_domain_suspend API to allow easy adding of additional knobs.
 
-Adjust error reporting. Add ERROR_MIGRATION_ABORTED to allow callers of
-libxl_domain_suspend to distinguish between errors and the requested
-constraint.
-
-Adjust precopy_policy to simplify reporting of remaining dirty pages.
-The loop in send_memory_live populates ->dirty_count in a different
-place than ->iteration. Let it proceeed one more time to provide the
-desired information before leaving the loop.
-
-This patch adjusts xl(1) and the libxl API.
-External users check LIBXL_HAVE_DOMAIN_SUSPEND_PROPS for the availibility
-of the new .abort_if_busy property.
+No change in behavior intented.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Acked-by: Christian Lindig <christian.lindig@citrix.com>
 ---
- docs/man/xl.1.pod.in                  |  8 +++++++
- tools/include/libxl.h                 |  1 +
- tools/libs/light/libxl_dom_save.c     |  7 ++++++-
- tools/libs/light/libxl_domain.c       |  1 +
- tools/libs/light/libxl_internal.h     |  2 ++
- tools/libs/light/libxl_stream_write.c |  9 +++++++-
- tools/libs/light/libxl_types.idl      |  1 +
- tools/xl/xl_cmdtable.c                |  6 +++++-
- tools/xl/xl_migrate.c                 | 30 ++++++++++++++++++++-------
- 9 files changed, 55 insertions(+), 10 deletions(-)
+ tools/include/libxl.h                | 26 +++++++++++++++++++++++---
+ tools/libs/light/libxl_domain.c      |  7 ++++---
+ tools/ocaml/libs/xl/xenlight_stubs.c |  3 ++-
+ tools/xl/xl_migrate.c                |  9 ++++++---
+ tools/xl/xl_saverestore.c            |  3 ++-
+ 5 files changed, 37 insertions(+), 11 deletions(-)
 
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index a40f1d4ba0..c49d595f5e 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -508,6 +508,14 @@ low, the guest is suspended and the domU will finally be moved to I<host>.
- This allows the host admin to control for how long the domU will likely
- be suspended during transit.
- 
-+=item B<--abort_if_busy>
-+
-+Abort migration instead of doing final suspend/move/resume if the
-+guest produced more than I<min_remaining> dirty pages during th number
-+of I<max_iters> iterations.
-+This avoids long periods of time where the guest is suspended, which
-+may confuse the workload within domU.
-+
- =back
- 
- =item B<remus> [I<OPTIONS>] I<domain-id> I<host>
 diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 28d70b1078..cc056ed627 100644
+index 29931626a2..9a4d7514ed 100644
 --- a/tools/include/libxl.h
 +++ b/tools/include/libxl.h
-@@ -1719,6 +1719,7 @@ typedef struct {
- } libxl_domain_suspend_props;
- #define LIBXL_SUSPEND_DEBUG 1
- #define LIBXL_SUSPEND_LIVE 2
-+#define LIBXL_SUSPEND_ABORT_IF_BUSY 4
+@@ -1706,12 +1706,32 @@ static inline int libxl_retrieve_domain_configuration_0x041200(
+     libxl_retrieve_domain_configuration_0x041200
+ #endif
  
++/*
++ * LIBXL_HAVE_DOMAIN_SUSPEND_PROPS indicates that the
++ * libxl_domain_suspend_props() function takes a props struct.
++ */
++#define LIBXL_HAVE_DOMAIN_SUSPEND_PROPS 1
++
++typedef struct {
++    uint32_t flags; /* LIBXL_SUSPEND_* */
++} libxl_domain_suspend_props;
++#define LIBXL_SUSPEND_DEBUG 1
++#define LIBXL_SUSPEND_LIVE 2
++
  int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
-                          libxl_domain_suspend_props *props,
-diff --git a/tools/libs/light/libxl_dom_save.c b/tools/libs/light/libxl_dom_save.c
-index 14e197c581..467bbc44f1 100644
---- a/tools/libs/light/libxl_dom_save.c
-+++ b/tools/libs/light/libxl_dom_save.c
-@@ -383,11 +383,16 @@ static int libxl__domain_save_precopy_policy(struct precopy_stats stats, void *u
-          stats.iteration, stats.dirty_count, stats.total_written);
-     if (stats.dirty_count >= 0 && stats.dirty_count < dss->min_remaining)
-         goto stop_copy;
--    if (stats.iteration >= dss->max_iters)
-+    if (stats.dirty_count >= 0 && stats.iteration >= dss->max_iters)
-         goto stop_copy;
-     return XGS_POLICY_CONTINUE_PRECOPY;
+-                         int flags, /* LIBXL_SUSPEND_* */
++                         libxl_domain_suspend_props *props,
+                          const libxl_asyncop_how *ao_how)
+                          LIBXL_EXTERNAL_CALLERS_ONLY;
+-#define LIBXL_SUSPEND_DEBUG 1
+-#define LIBXL_SUSPEND_LIVE 2
++#if defined(LIBXL_API_VERSION) && LIBXL_API_VERSION < 0x041600
++static inline int libxl_domain_suspend_0x041500(libxl_ctx *ctx, uint32_t domid,
++                         int fd, int flags, /* LIBXL_SUSPEND_* */
++                         const libxl_asyncop_how *ao_how)
++{
++    libxl_domain_suspend_props props = { .flags = flags, };
++    return libxl_domain_suspend(ctx, domid, fd, &props, ao_how);
++}
++#define libxl_domain_suspend libxl_domain_suspend_0x041500
++#endif
  
- stop_copy:
-+    if (dss->abort_if_busy)
-+    {
-+        dss->remaining_dirty_pages = stats.dirty_count;
-+        return XGS_POLICY_ABORT;
-+    }
-     return XGS_POLICY_STOP_AND_COPY;
- }
- 
+ /*
+  * Only suspend domain, do not save its state to file, do not destroy it.
 diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index 06ca7a7df6..e4740b063e 100644
+index c00c36c928..5dbd27900f 100644
 --- a/tools/libs/light/libxl_domain.c
 +++ b/tools/libs/light/libxl_domain.c
-@@ -529,6 +529,7 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
-     dss->type = type;
-     dss->max_iters = props->max_iters ?: LIBXL_XGS_POLICY_MAX_ITERATIONS;
-     dss->min_remaining = props->min_remaining ?: LIBXL_XGS_POLICY_TARGET_DIRTY_COUNT;
-+    dss->abort_if_busy = props->flags & LIBXL_SUSPEND_ABORT_IF_BUSY;
-     dss->live = props->flags & LIBXL_SUSPEND_LIVE;
-     dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
-     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index c503fe156c..862976b2b2 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -3647,9 +3647,11 @@ struct libxl__domain_save_state {
-     libxl_domain_type type;
-     int live;
-     int debug;
-+    int abort_if_busy;
-     int checkpointed_stream;
-     uint32_t max_iters;
-     uint32_t min_remaining;
-+    long remaining_dirty_pages;
-     const libxl_domain_remus_info *remus;
-     /* private */
-     int rc;
-diff --git a/tools/libs/light/libxl_stream_write.c b/tools/libs/light/libxl_stream_write.c
-index 634f3240d1..1ab3943f3e 100644
---- a/tools/libs/light/libxl_stream_write.c
-+++ b/tools/libs/light/libxl_stream_write.c
-@@ -344,11 +344,18 @@ void libxl__xc_domain_save_done(libxl__egc *egc, void *dss_void,
-         goto err;
+@@ -505,7 +505,8 @@ static void domain_suspend_cb(libxl__egc *egc,
  
-     if (retval) {
-+        if (dss->remaining_dirty_pages) {
-+            LOGD(NOTICE, dss->domid, "saving domain: aborted,"
-+                 " %ld remaining dirty pages.", dss->remaining_dirty_pages);
-+        } else {
-         LOGEVD(ERROR, errnoval, dss->domid, "saving domain: %s",
-               dss->dsps.guest_responded ?
-               "domain responded to suspend request" :
-               "domain did not respond to suspend request");
--        if (!dss->dsps.guest_responded)
-+        }
-+        if (dss->remaining_dirty_pages)
-+           rc = ERROR_MIGRATION_ABORTED;
-+        else if(!dss->dsps.guest_responded)
-             rc = ERROR_GUEST_TIMEDOUT;
-         else if (dss->rc)
-             rc = dss->rc;
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index f45adddab0..b91769ee10 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -76,6 +76,7 @@ libxl_error = Enumeration("error", [
-     (-30, "QMP_DEVICE_NOT_ACTIVE"), # a device has failed to be become active
-     (-31, "QMP_DEVICE_NOT_FOUND"), # the requested device has not been found
-     (-32, "QEMU_API"), # QEMU's replies don't contains expected members
-+    (-33, "MIGRATION_ABORTED"),
-     ], value_namespace = "")
- 
- libxl_domain_type = Enumeration("domain_type", [
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index e10b580261..b5225a5f1b 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -176,7 +176,11 @@ const struct cmd_spec cmd_table[] = {
-       "-p                Do not unpause domain after migrating it.\n"
-       "-D                Preserve the domain id\n"
-       "--max_iters N     Number of copy iterations before final stop+move\n"
--      "--min_remaining N Number of remaining dirty pages before final stop+move"
-+      "--min_remaining N Number of remaining dirty pages before final stop+move\n"
-+      "--abort_if_busy   Abort migration instead of doing final stop+move,\n"
-+      "                  if the number of dirty pages is higher than <min_remaining>\n"
-+      "                  after <max_iters> iterations. Otherwise the amount of memory\n"
-+      "                  to be transfered would exceed maximum allowed domU downtime."
-     },
-     { "restore",
-       &main_restore, 0, 1,
-diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
-index 14feb2b7ec..f523746e5b 100644
---- a/tools/xl/xl_migrate.c
-+++ b/tools/xl/xl_migrate.c
-@@ -177,7 +177,7 @@ static void migrate_do_preamble(int send_fd, int recv_fd, pid_t child,
  }
  
- static void migrate_domain(uint32_t domid, int preserve_domid,
--                           const char *rune, int debug,
-+                           const char *rune, int debug, int abort_if_busy,
-                            uint32_t max_iters,
-                            uint32_t min_remaining,
-                            const char *override_config_file)
-@@ -213,14 +213,20 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+-int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
++int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd,
++                         libxl_domain_suspend_props *props,
+                          const libxl_asyncop_how *ao_how)
+ {
+     AO_CREATE(ctx, domid, ao_how);
+@@ -526,8 +527,8 @@ int libxl_domain_suspend(libxl_ctx *ctx, uint32_t domid, int fd, int flags,
+     dss->domid = domid;
+     dss->fd = fd;
+     dss->type = type;
+-    dss->live = flags & LIBXL_SUSPEND_LIVE;
+-    dss->debug = flags & LIBXL_SUSPEND_DEBUG;
++    dss->live = props->flags & LIBXL_SUSPEND_LIVE;
++    dss->debug = props->flags & LIBXL_SUSPEND_DEBUG;
+     dss->checkpointed_stream = LIBXL_CHECKPOINTED_STREAM_NONE;
+ 
+     rc = libxl__fd_flags_modify_save(gc, dss->fd,
+diff --git a/tools/ocaml/libs/xl/xenlight_stubs.c b/tools/ocaml/libs/xl/xenlight_stubs.c
+index 45b8af61c7..ea5ee33ce9 100644
+--- a/tools/ocaml/libs/xl/xenlight_stubs.c
++++ b/tools/ocaml/libs/xl/xenlight_stubs.c
+@@ -618,10 +618,11 @@ value stub_libxl_domain_suspend(value ctx, value domid, value fd, value async, v
+ 	int ret;
+ 	uint32_t c_domid = Int_val(domid);
+ 	int c_fd = Int_val(fd);
++	libxl_domain_suspend_props props = {};
+ 	libxl_asyncop_how *ao_how = aohow_val(async);
+ 
+ 	caml_enter_blocking_section();
+-	ret = libxl_domain_suspend(CTX, c_domid, c_fd, 0, ao_how);
++	ret = libxl_domain_suspend(CTX, c_domid, c_fd, &props, ao_how);
+ 	caml_leave_blocking_section();
+ 
+ 	free(ao_how);
+diff --git a/tools/xl/xl_migrate.c b/tools/xl/xl_migrate.c
+index b8594f44a5..144890924f 100644
+--- a/tools/xl/xl_migrate.c
++++ b/tools/xl/xl_migrate.c
+@@ -186,7 +186,10 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     char *away_domname;
+     char rc_buf;
+     uint8_t *config_data;
+-    int config_len, flags = LIBXL_SUSPEND_LIVE;
++    int config_len;
++    libxl_domain_suspend_props props = {
++        .flags = LIBXL_SUSPEND_LIVE,
++        };
+ 
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+                            &config_data, &config_len);
+@@ -205,8 +208,8 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
+     xtl_stdiostream_adjust_flags(logger, XTL_STDIOSTREAM_HIDE_PROGRESS, 0);
  
      if (debug)
-         props.flags |= LIBXL_SUSPEND_DEBUG;
-+    if (abort_if_busy)
-+        props.flags |= LIBXL_SUSPEND_ABORT_IF_BUSY;
-     rc = libxl_domain_suspend(ctx, domid, send_fd, &props, NULL);
+-        flags |= LIBXL_SUSPEND_DEBUG;
+-    rc = libxl_domain_suspend(ctx, domid, send_fd, flags, NULL);
++        props.flags |= LIBXL_SUSPEND_DEBUG;
++    rc = libxl_domain_suspend(ctx, domid, send_fd, &props, NULL);
      if (rc) {
          fprintf(stderr, "migration sender: libxl_domain_suspend failed"
                  " (rc=%d)\n", rc);
--        if (rc == ERROR_GUEST_TIMEDOUT)
--            goto failed_suspend;
--        else
--            goto failed_resume;
-+        switch (rc) {
-+            case ERROR_GUEST_TIMEDOUT:
-+                goto failed_suspend;
-+            case ERROR_MIGRATION_ABORTED:
-+                goto failed_busy;
-+            default:
-+                goto failed_resume;
-+        }
-     }
+diff --git a/tools/xl/xl_saverestore.c b/tools/xl/xl_saverestore.c
+index 953d791d1a..476d4d9a6a 100644
+--- a/tools/xl/xl_saverestore.c
++++ b/tools/xl/xl_saverestore.c
+@@ -130,6 +130,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
+     int fd;
+     uint8_t *config_data;
+     int config_len;
++    libxl_domain_suspend_props props = {};
  
-     //fprintf(stderr, "migration sender: Transfer complete.\n");
-@@ -302,6 +308,12 @@ static void migrate_domain(uint32_t domid, int preserve_domid,
-     fprintf(stderr, "Migration failed, failed to suspend at sender.\n");
-     exit(EXIT_FAILURE);
+     save_domain_core_begin(domid, preserve_domid, override_config_file,
+                            &config_data, &config_len);
+@@ -146,7 +147,7 @@ static int save_domain(uint32_t domid, int preserve_domid,
  
-+ failed_busy:
-+    close(send_fd);
-+    migration_child_report(recv_fd);
-+    fprintf(stderr, "Migration aborted as requested, domain is too busy.\n");
-+    exit(EXIT_FAILURE);
-+
-  failed_resume:
-     close(send_fd);
-     migration_child_report(recv_fd);
-@@ -545,13 +557,14 @@ int main_migrate(int argc, char **argv)
-     char *rune = NULL;
-     char *host;
-     int opt, daemonize = 1, monitor = 1, debug = 0, pause_after_migration = 0;
--    int preserve_domid = 0;
-+    int preserve_domid = 0, abort_if_busy = 0;
-     uint32_t max_iters = 0;
-     uint32_t min_remaining = 0;
-     static struct option opts[] = {
-         {"debug", 0, 0, 0x100},
-         {"max_iters", 1, 0, 0x101},
-         {"min_remaining", 1, 0, 0x102},
-+        {"abort_if_busy", 0, 0, 0x103},
-         {"live", 0, 0, 0x200},
-         COMMON_LONG_OPTS
-     };
-@@ -585,6 +598,9 @@ int main_migrate(int argc, char **argv)
-     case 0x102: /* --min_remaining */
-         min_remaining = atoi(optarg);
-         break;
-+    case 0x103: /* --abort_if_busy */
-+        abort_if_busy = 1;
-+        break;
-     case 0x200: /* --live */
-         /* ignored for compatibility with xm */
-         break;
-@@ -619,7 +635,7 @@ int main_migrate(int argc, char **argv)
-                   pause_after_migration ? " -p" : "");
-     }
+     save_domain_core_writeconfig(fd, filename, config_data, config_len);
  
--    migrate_domain(domid, preserve_domid, rune, debug,
-+    migrate_domain(domid, preserve_domid, rune, debug, abort_if_busy,
-                    max_iters, min_remaining, config_filename);
-     return EXIT_SUCCESS;
- }
+-    int rc = libxl_domain_suspend(ctx, domid, fd, 0, NULL);
++    int rc = libxl_domain_suspend(ctx, domid, fd, &props, NULL);
+     close(fd);
+ 
+     if (rc < 0) {
 
