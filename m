@@ -7,39 +7,38 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A063C07E96
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5395C07E96
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EAB0761370
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EAB0761370
+	by mail.kernel.org (Postfix) with ESMTPS id 689F061369
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Jul 2021 18:06:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 689F061369
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.155541.287157 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.155542.287167 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mnd-00043C-GH; Tue, 13 Jul 2021 18:06:29 +0000
+	id 1m3Mnf-0004Rl-QV; Tue, 13 Jul 2021 18:06:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 155541.287157; Tue, 13 Jul 2021 18:06:29 +0000
+Received: by outflank-mailman (output) from mailman id 155542.287167; Tue, 13 Jul 2021 18:06:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3Mnd-00042y-CI; Tue, 13 Jul 2021 18:06:29 +0000
-Received: by outflank-mailman (input) for mailman id 155541;
- Tue, 13 Jul 2021 18:06:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m3Mnf-0004RT-MM; Tue, 13 Jul 2021 18:06:31 +0000
+Received: by outflank-mailman (input) for mailman id 155542;
+ Tue, 13 Jul 2021 18:06:29 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=W9Py=MF=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1m3Mnb-0002kr-TC
- for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:27 +0000
-Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.171])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 04c70dca-e405-11eb-8793-12813bfff9fa;
- Tue, 13 Jul 2021 18:06:18 +0000 (UTC)
+ id 1m3Mnd-0002UL-GI
+ for xen-devel@lists.xenproject.org; Tue, 13 Jul 2021 18:06:29 +0000
+Received: from mo4-p02-ob.smtp.rzone.de (unknown [81.169.146.170])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d82de438-271f-492e-98e5-d7dd1528d28f;
+ Tue, 13 Jul 2021 18:06:19 +0000 (UTC)
 Received: from sender by smtp.strato.de (RZmta 47.28.1 AUTH)
- with ESMTPSA id 30791cx6DI6DtAm
+ with ESMTPSA id 30791cx6DI6DtAo
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
  (Client did not present a certificate);
  Tue, 13 Jul 2021 20:06:13 +0200 (CEST)
@@ -54,18 +53,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04c70dca-e405-11eb-8793-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199573;
+X-Inumbo-ID: d82de438-271f-492e-98e5-d7dd1528d28f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1626199574;
     s=strato-dkim-0002; d=aepfle.de;
     h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ZZ0YSTyEBhj0g0V+Ydgj4/Yi9sY29bXNxKbK7IWr/j0=;
-    b=or2CNPZebb1mJf1DOfIfMr473GTLnQNrbvFumssG8yG0z+Smm2mRS83ULtrtnP75ZH
-    TgmQuSoPN/BR1OBl7L6WB5GPFXElXHstZ3aK3FFmQzAFqND5XaAN/Vudw7UNcqV0QdNQ
-    BjqonEGOaPVDKgRPoU0rd/Bme3L3sPasN3Z0kSNkraLKqyaBbnyLfnv5Tb0RmAmfUz+i
-    CNDqpIWt8jxdxSEf2Ki3vbMQAp9XQIC5LMQQpTwn1BUYztfAv6n7/uYumOMrf6yzxcgn
-    UfP+eg4KoCg4CeeMLIH2BzV106unOEyMB+IHTnlPsJptLQTf91ZHVfNLCfNOzqqHnW+2
-    gk2w==
+    bh=2FOHALqjtAayiATag1w1tv+uvw3U+jkLCXoGYWrbCds=;
+    b=VO3jOq8wx19i17M6djKvvv/rVPvoCedUnBlNa2YflKQht9tDddIEXbmES7UG+Yr01N
+    OTB/5NSLG+V/an6eErcPVeqqtATRJkX+NgxBqZweHpvzbjcE1ceMWIkqJZvssjYu58j8
+    6QnNMi2bl8Nc6/WDFXKlh64L8jtDLezKsrE5g5rhNKa/mmaN3BvQzcW9rVisOx8n7BZz
+    GvWh+EnRgbstv5CEyCzn8YgnM0aPaJahvGKajWPvkOeEYWRBEZYeeErf7/0D/te9hPF6
+    u0tDjCIDx25bBjCPzyYYMF7W8qr0OXxj7pa/umD/GUjl6EILnS3fITrfEKxJ3MBXxFMB
+    OSZw==
 Authentication-Results: strato.com;
     dkim=none
 X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzpIG0mv9coXAgthqlagRsstpH9XYEN5v9xf7dypFU9ge5p0Oi0V"
@@ -76,114 +75,143 @@ Cc: Olaf Hering <olaf@aepfle.de>,
 	Ian Jackson <iwj@xenproject.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v20210713 05/31] tools: add readv_exact to libxenctrl
-Date: Tue, 13 Jul 2021 20:05:39 +0200
-Message-Id: <20210713180605.12096-6-olaf@aepfle.de>
+Subject: [PATCH v20210713 07/31] tools: save: preallocate mfns array
+Date: Tue, 13 Jul 2021 20:05:41 +0200
+Message-Id: <20210713180605.12096-8-olaf@aepfle.de>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210713180605.12096-1-olaf@aepfle.de>
 References: <20210713180605.12096-1-olaf@aepfle.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Read a batch of iovec's.
-
-Short reads are the common case, finish the trailing iov with read_exact.
+Remove repeated allocation from migration loop. There will never be
+more than MAX_BATCH_SIZE pages to process in a batch, see add_to_batch.
+Allocate the space once.
 
 Signed-off-by: Olaf Hering <olaf@aepfle.de>
 ---
-v2:
-- add comment to short-read handling
----
- tools/libs/ctrl/xc_private.c | 57 +++++++++++++++++++++++++++++++++++-
- tools/libs/ctrl/xc_private.h |  1 +
- 2 files changed, 57 insertions(+), 1 deletion(-)
+ tools/libs/guest/xg_sr_common.h |  1 +
+ tools/libs/guest/xg_sr_save.c   | 25 +++++++++++++------------
+ 2 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/tools/libs/ctrl/xc_private.c b/tools/libs/ctrl/xc_private.c
-index c0422662f0..bab9a31a70 100644
---- a/tools/libs/ctrl/xc_private.c
-+++ b/tools/libs/ctrl/xc_private.c
-@@ -698,8 +698,23 @@ int write_exact(int fd, const void *data, size_t size)
+diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
+index 2e70cc6269..fc403adc64 100644
+--- a/tools/libs/guest/xg_sr_common.h
++++ b/tools/libs/guest/xg_sr_common.h
+@@ -244,6 +244,7 @@ struct xc_sr_context
+             struct precopy_stats stats;
  
- #if defined(__MINIOS__)
- /*
-- * MiniOS's libc doesn't know about writev(). Implement it as multiple write()s.
-+ * MiniOS's libc doesn't know about readv/writev().
-+ * Implement it as multiple read/write()s.
-  */
-+int readv_exact(int fd, const struct iovec *iov, int iovcnt)
-+{
-+    int rc, i;
-+
-+    for ( i = 0; i < iovcnt; ++i )
-+    {
-+        rc = read_exact(fd, iov[i].iov_base, iov[i].iov_len);
-+        if ( rc )
-+            return rc;
-+    }
-+
-+    return 0;
-+}
-+
- int writev_exact(int fd, const struct iovec *iov, int iovcnt)
+             xen_pfn_t *batch_pfns;
++            xen_pfn_t *mfns;
+             unsigned int nr_batch_pfns;
+             unsigned long *deferred_pages;
+             unsigned long nr_deferred_pages;
+diff --git a/tools/libs/guest/xg_sr_save.c b/tools/libs/guest/xg_sr_save.c
+index 00b81033a9..0abe63a377 100644
+--- a/tools/libs/guest/xg_sr_save.c
++++ b/tools/libs/guest/xg_sr_save.c
+@@ -88,7 +88,7 @@ static int write_checkpoint_record(struct xc_sr_context *ctx)
+ static int write_batch(struct xc_sr_context *ctx)
  {
-     int rc, i;
-@@ -714,6 +729,46 @@ int writev_exact(int fd, const struct iovec *iov, int iovcnt)
-     return 0;
+     xc_interface *xch = ctx->xch;
+-    xen_pfn_t *mfns = NULL, *types = NULL;
++    xen_pfn_t *types = NULL;
+     void *guest_mapping = NULL;
+     void **guest_data = NULL;
+     void **local_pages = NULL;
+@@ -105,8 +105,6 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+     assert(nr_pfns != 0);
+ 
+-    /* Mfns of the batch pfns. */
+-    mfns = malloc(nr_pfns * sizeof(*mfns));
+     /* Types of the batch pfns. */
+     types = malloc(nr_pfns * sizeof(*types));
+     /* Errors from attempting to map the gfns. */
+@@ -118,7 +116,7 @@ static int write_batch(struct xc_sr_context *ctx)
+     /* iovec[] for writev(). */
+     iov = malloc((nr_pfns + 4) * sizeof(*iov));
+ 
+-    if ( !mfns || !types || !errors || !guest_data || !local_pages || !iov )
++    if ( !types || !errors || !guest_data || !local_pages || !iov )
+     {
+         ERROR("Unable to allocate arrays for a batch of %u pages",
+               nr_pfns);
+@@ -127,11 +125,11 @@ static int write_batch(struct xc_sr_context *ctx)
+ 
+     for ( i = 0; i < nr_pfns; ++i )
+     {
+-        types[i] = mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
++        types[i] = ctx->save.mfns[i] = ctx->save.ops.pfn_to_gfn(ctx,
+                                                       ctx->save.batch_pfns[i]);
+ 
+         /* Likely a ballooned page. */
+-        if ( mfns[i] == INVALID_MFN )
++        if ( ctx->save.mfns[i] == INVALID_MFN )
+         {
+             set_bit(ctx->save.batch_pfns[i], ctx->save.deferred_pages);
+             ++ctx->save.nr_deferred_pages;
+@@ -150,20 +148,21 @@ static int write_batch(struct xc_sr_context *ctx)
+     {
+         if ( !is_known_page_type(types[i]) )
+         {
+-            ERROR("Unknown type %#"PRIpfn" for pfn %#"PRIpfn, types[i], mfns[i]);
++            ERROR("Unknown type %#"PRIpfn" for pfn %#"PRIpfn,
++                  types[i], ctx->save.mfns[i]);
+             goto err;
+         }
+ 
+         if ( !page_type_has_stream_data(types[i]) )
+             continue;
+ 
+-        mfns[nr_pages++] = mfns[i];
++        ctx->save.mfns[nr_pages++] = ctx->save.mfns[i];
+     }
+ 
+     if ( nr_pages > 0 )
+     {
+         guest_mapping = xenforeignmemory_map(
+-            xch->fmem, ctx->domid, PROT_READ, nr_pages, mfns, errors);
++            xch->fmem, ctx->domid, PROT_READ, nr_pages, ctx->save.mfns, errors);
+         if ( !guest_mapping )
+         {
+             PERROR("Failed to map guest pages");
+@@ -179,7 +178,7 @@ static int write_batch(struct xc_sr_context *ctx)
+             if ( errors[p] )
+             {
+                 ERROR("Mapping of pfn %#"PRIpfn" (mfn %#"PRIpfn") failed %d",
+-                      ctx->save.batch_pfns[i], mfns[p], errors[p]);
++                      ctx->save.batch_pfns[i], ctx->save.mfns[p], errors[p]);
+                 goto err;
+             }
+ 
+@@ -277,7 +276,6 @@ static int write_batch(struct xc_sr_context *ctx)
+     free(guest_data);
+     free(errors);
+     free(types);
+-    free(mfns);
+ 
+     return rc;
  }
- #else
-+int readv_exact(int fd, const struct iovec *iov, int iovcnt)
-+{
-+    int rc = 0, idx = 0;
-+    ssize_t len;
-+
-+    while ( idx < iovcnt )
-+    {
-+        len = readv(fd, &iov[idx], min(iovcnt - idx, IOV_MAX));
-+        if ( len == -1 && errno == EINTR )
-+            continue;
-+        if ( len <= 0 )
-+        {
-+            rc = -1;
-+            goto out;
-+        }
-+
-+        /* Finish a potential short read in the last iov */
-+        while ( len > 0 && idx < iovcnt )
-+        {
-+            if ( len >= iov[idx].iov_len )
-+            {
-+                len -= iov[idx].iov_len;
-+            }
-+            else
-+            {
-+                void *p = iov[idx].iov_base + len;
-+                size_t l = iov[idx].iov_len - len;
-+
-+                rc = read_exact(fd, p, l);
-+                if ( rc )
-+                    goto out;
-+                len = 0;
-+            }
-+            idx++;
-+        }
-+    }
-+out:
-+    return rc;
-+}
-+
- int writev_exact(int fd, const struct iovec *iov, int iovcnt)
- {
-     struct iovec *local_iov = NULL;
-diff --git a/tools/libs/ctrl/xc_private.h b/tools/libs/ctrl/xc_private.h
-index 3e299b943f..66086ef19f 100644
---- a/tools/libs/ctrl/xc_private.h
-+++ b/tools/libs/ctrl/xc_private.h
-@@ -410,6 +410,7 @@ int xc_flush_mmu_updates(xc_interface *xch, struct xc_mmu *mmu);
+@@ -851,9 +849,11 @@ static int setup(struct xc_sr_context *ctx)
+         xch, dirty_bitmap, NRPAGES(bitmap_size(ctx->save.p2m_size)));
+     ctx->save.batch_pfns = malloc(MAX_BATCH_SIZE *
+                                   sizeof(*ctx->save.batch_pfns));
++    ctx->save.mfns = malloc(MAX_BATCH_SIZE * sizeof(*ctx->save.mfns));
+     ctx->save.deferred_pages = bitmap_alloc(ctx->save.p2m_size);
  
- /* Return 0 on success; -1 on error setting errno. */
- int read_exact(int fd, void *data, size_t size); /* EOF => -1, errno=0 */
-+int readv_exact(int fd, const struct iovec *iov, int iovcnt);
- int write_exact(int fd, const void *data, size_t size);
- int writev_exact(int fd, const struct iovec *iov, int iovcnt);
+-    if ( !ctx->save.batch_pfns || !dirty_bitmap || !ctx->save.deferred_pages )
++    if ( !ctx->save.batch_pfns || !ctx->save.mfns ||
++         !dirty_bitmap || !ctx->save.deferred_pages )
+     {
+         ERROR("Unable to allocate memory for dirty bitmaps, batch pfns and"
+               " deferred pages");
+@@ -884,6 +884,7 @@ static void cleanup(struct xc_sr_context *ctx)
+     xc_hypercall_buffer_free_pages(xch, dirty_bitmap,
+                                    NRPAGES(bitmap_size(ctx->save.p2m_size)));
+     free(ctx->save.deferred_pages);
++    free(ctx->save.mfns);
+     free(ctx->save.batch_pfns);
+ }
  
 
