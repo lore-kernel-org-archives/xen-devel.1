@@ -2,47 +2,48 @@ Return-Path: <SRS0=2EqH=MG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93083C47E48
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 20:38:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CFE2C12002
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 20:38:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 51FB1613A9
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 20:38:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51FB1613A9
+	by mail.kernel.org (Postfix) with ESMTPS id 3DA2161362
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 20:38:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DA2161362
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.156211.288247 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.156214.288280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3ldy-0008RG-8s; Wed, 14 Jul 2021 20:38:10 +0000
+	id 1m3leE-0000xN-BF; Wed, 14 Jul 2021 20:38:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 156211.288247; Wed, 14 Jul 2021 20:38:10 +0000
+Received: by outflank-mailman (output) from mailman id 156214.288280; Wed, 14 Jul 2021 20:38:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3ldy-0008R9-5g; Wed, 14 Jul 2021 20:38:10 +0000
-Received: by outflank-mailman (input) for mailman id 156211;
- Wed, 14 Jul 2021 20:38:08 +0000
+	id 1m3leE-0000xE-6T; Wed, 14 Jul 2021 20:38:26 +0000
+Received: by outflank-mailman (input) for mailman id 156214;
+ Wed, 14 Jul 2021 20:38:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kxbS=MG=gmail.com=bobby.eshleman@srs-us1.protection.inumbo.net>)
- id 1m3ldw-0008R3-ES
- for xen-devel@lists.xenproject.org; Wed, 14 Jul 2021 20:38:08 +0000
-Received: from mail-pj1-x1033.google.com (unknown [2607:f8b0:4864:20::1033])
+ id 1m3leC-0000KG-On
+ for xen-devel@lists.xenproject.org; Wed, 14 Jul 2021 20:38:24 +0000
+Received: from mail-pl1-x633.google.com (unknown [2607:f8b0:4864:20::633])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 575e2b66-9645-42dc-abe3-f8229d8b3b29;
- Wed, 14 Jul 2021 20:38:07 +0000 (UTC)
-Received: by mail-pj1-x1033.google.com with SMTP id cu14so2389933pjb.0
- for <xen-devel@lists.xenproject.org>; Wed, 14 Jul 2021 13:38:07 -0700 (PDT)
+ id 67347e58-726d-41d7-ba9b-936580e7fb8a;
+ Wed, 14 Jul 2021 20:38:22 +0000 (UTC)
+Received: by mail-pl1-x633.google.com with SMTP id o8so2042539plg.11
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Jul 2021 13:38:22 -0700 (PDT)
 Received: from localhost.localdomain ([2601:1c2:4c02:4c00::1])
- by smtp.gmail.com with ESMTPSA id b17sm1785084pfm.54.2021.07.14.13.38.05
+ by smtp.gmail.com with ESMTPSA id b17sm1785084pfm.54.2021.07.14.13.38.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jul 2021 13:38:05 -0700 (PDT)
+ Wed, 14 Jul 2021 13:38:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,34 +54,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 575e2b66-9645-42dc-abe3-f8229d8b3b29
+X-Inumbo-ID: 67347e58-726d-41d7-ba9b-936580e7fb8a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=sender:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=eXcmPYRmIZRKai4yvtuLaU2ooiqorDKfUQfup3P5Zt4=;
-        b=Sx4ofn3BsRNqQBpJ2nDg9fTrutZKk0CwtgNd79WCd/1koyMUyoq+HYtahHHYEQQenA
-         1imXWXjGuM/vMd4JiSb468D1fB7WoNfPQVStakW3yPMQbwZop5aVbAG/6x3g/VNZmi2h
-         JMAZ0e25Xs1VtzBJbJiGqTqxRO5KnTjCbAkb/M4+pZ+xAo8hRBxY0z5B44ywtg0UKbZe
-         Nc6fMKwo4KI+ZaN314XXjghIBdTFEB4ZRCNCwmrQlU9t7/5f9YzkAWOHYh4AjYR7aS+b
-         Vi64pEUVM0RqTby9if0BAF+vI01zmQj7G8J+4nvIh1QQR91+MfHup4/TWH4lZjcqz8na
-         GK/w==
+        h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=c0nnBaD2pL0VkhpqTi/GSsyBm9vArGbyMPY2G5OiRPc=;
+        b=V0YuUm4F5ZL//dA3LzDvyZzAgn0zfz3TOvIZvz8EOy0xECuQfna58kZb7W9q79D8m/
+         QQvfTsv5f4oy09CL9OFX/pUbFJbiS0JPyrpDm7ZIeOFc03tHvhjacqFZunxegQvJxVmB
+         WQjnhr+AimvtwCNveWncXAvBNLSsKtDkjJ56zwl0vuvSGoYQrCmPm9wuHR1fL+NYEj+k
+         OpgaqU9/snWSMnshvmWgeE5ypPSI9jkydw2wwSuMUUznPcgYgj2MoD4ZKhctTpCGP0jk
+         p4NIcQufdZw5qXPYg8CR2IgQePeonSEjetU8WVuTMLEv5jcUtVzVpN42Wb0Q9/fjtijA
+         G2oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-         :mime-version:content-transfer-encoding;
-        bh=eXcmPYRmIZRKai4yvtuLaU2ooiqorDKfUQfup3P5Zt4=;
-        b=EmDXFdTZu9Oc/0zBQKyzCvEenwxWnfQLuCo/MndNA3aiE0V8dYRKRZnbJyitKIjUWe
-         QWzFMwoDdux7FAsSrji0ld2Rg/OzahbXZ+lVBB77xHXejhykXATXd0AUBxrfgrhgaYuD
-         H/xkRzlj0eZYljHQ20DVbizV7Lh4HaLwy0JtnOZTk4IFk1mVaq0fLfaKVLbGxDCwlXV7
-         molaxvyyA+oepxMJeUUazeYTu5ShmHuqfskT85MT311BoYdyY5nbGXB2gJlgYmZ8WeMV
-         c++UlybEs+PLy8Y/TVb8mOVEgFJfBfr4bI6toggRfzNUin2zXN5VwTpAGYsIxtWUZVbx
-         GhVA==
-X-Gm-Message-State: AOAM533ZLWJTCS49CQwrCjBqJTPYZA+CnBlG/uU4F8VIiu0CXCrft9AG
-	r2TDHCXNrWRNpXvMZeD6Ha/z+cve5UtbsyzK
-X-Google-Smtp-Source: ABdhPJwoG2TovbVlMxzfxRY6/Ca8T2EZEP7yktYl5Aj24XP0eW14eOrl/rmJNgSSgzOvHSpVEoq+PA==
-X-Received: by 2002:a17:90a:7489:: with SMTP id p9mr5559384pjk.101.1626295086392;
-        Wed, 14 Jul 2021 13:38:06 -0700 (PDT)
+         :in-reply-to:references:mime-version:content-transfer-encoding;
+        bh=c0nnBaD2pL0VkhpqTi/GSsyBm9vArGbyMPY2G5OiRPc=;
+        b=ulxZEDi+J2Qsw+fpsb0cZEHB+rTzSpBmoU0wnOq0wmb153sL4S2Aubjpcot6h9u/2x
+         XBb+CPPr9giOGeNqZ8P286RdRzDbMHt//kYsAtuMfbocoBCfZCctldIfBda3Qj4xlOsW
+         7V+n3j5Aw7d9KA84zSEit5lM26QgVsXv1WzO/XdpGBshW8C3m5zc5B3F0atnx8k4mhKQ
+         9r9qLiTgUOXZ1fD9YBqoXpuSbyUNAuvb1A5sqLDiR/g0zEHU3meB2bLTANoD8eBDMKs2
+         2LTu3QRUIzpNIQnPuwJghkAsw32Lv3FZJYAtKkVfh5iJ0zMfutW1BeHOHfOtXuYVOxdq
+         Hr0A==
+X-Gm-Message-State: AOAM533zfnUwsjtxivp/XOB5sP4E9mPe6hnIZyBxueaRLsqZ9iFLqkJv
+	9vc5ymaJeeVL22JR/JCWHyriWk9h9SDaIlHU
+X-Google-Smtp-Source: ABdhPJxSyAq9fc8Va4SaiyXmdltT4t2CxbaMnDmVNqIFS4vO/qscXSfsjUf2o5jXGqG2XTrLJ49R0A==
+X-Received: by 2002:a17:90b:d8f:: with SMTP id bg15mr5377047pjb.152.1626295101821;
+        Wed, 14 Jul 2021 13:38:21 -0700 (PDT)
 Sender: Bobby Eshleman <bobbyeshleman@gmail.com>
 From: Bobby Eshleman <bobby.eshleman@gmail.com>
 To: xen-devel@lists.xenproject.org
@@ -97,62 +98,130 @@ Cc: Bobby Eshleman <bobby.eshleman@gmail.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Jun Nakajima <jun.nakajima@intel.com>,
 	Kevin Tian <kevin.tian@intel.com>
-Subject: [PATCH v2 0/4] Remove unconditional arch dependency on asm/debugger.h 
-Date: Wed, 14 Jul 2021 13:37:43 -0700
-Message-Id: <cover.1626286772.git.bobby.eshleman@gmail.com>
+Subject: [PATCH v2 3/4] x86/debug: move debugger_trap_entry into debugger.c not inlined
+Date: Wed, 14 Jul 2021 13:37:46 -0700
+Message-Id: <a7af5b3fd6d297b2659433060d6f1e2fc6bfdb86.1626286772.git.bobby.eshleman@gmail.com>
 X-Mailer: git-send-email 2.30.0
+In-Reply-To: <cover.1626286772.git.bobby.eshleman@gmail.com>
+References: <cover.1626286772.git.bobby.eshleman@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently, any architecture wishing to use common/ is likely
-to be required to implement the functions found in "asm/debugger.h".
-Some architectures, however, do not have an actual use for these
-functions and so are forced to implement stubs.  This patch does the
-following:
+The function debugger_trap_entry() is somewhat large for an inlined
+function.  This commit moves debugger_trap_entry() into debugger.c and
+makes it not inlined.
 
-* Supplies common stubs if !CONFIG_CRASH_DEBUG for any architecture,
-  removing the need for all new architectures to have "asm/debugger.h".
-* Moves parts of the x86 implementation to "arch/x86/debugger.c".
-* Removes the ARM calls to its stubs.
-* Centralizes non-inlined x86 code conditionally compiled by CONFIG_CRASH_DEBUG
-  into arch/x86/debugger.c, which is now conditionally built for
-  CONFIG_CRASH_DEBUG via Kbuild (i.e., obj-$(CONFIG_CRASH_DEBUG)).
-* Tries to improve the x86 implementation by not inlining large
-  functions (but preserving inlining for those that seemed "small").
+Signed-off-by: Bobby Eshleman <bobby.eshleman@gmail.com>
+---
 
-Bobby Eshleman (4):
-  arm/traps: remove debugger_trap_fatal() calls
-  build: use common stubs for debugger_trap_* functions if
-    !CONFIG_CRASH_DEBUG
-  x86/debug: move debugger_trap_entry into debugger.c not inlined
-  x86/debug: move domain_pause_for_debugger to debugger.c
+Changes in v2:
+- Move obj-$(CONFIG_CRASH_DEBUG) += debugger.o to be in alphabetical
+  order
+- Constify cpu_user_regs *regs and struct vcpu *v in
+  debugger_trap_entry()
 
- xen/arch/arm/traps.c            |  8 +--
- xen/arch/x86/Makefile           |  1 +
- xen/arch/x86/debug.c            |  2 +-
- xen/arch/x86/debugger.c         | 53 ++++++++++++++++++++
- xen/arch/x86/domain.c           | 15 +-----
- xen/arch/x86/domctl.c           |  2 +-
- xen/arch/x86/gdbstub.c          |  4 +-
- xen/arch/x86/hvm/svm/svm.c      |  2 +-
- xen/arch/x86/hvm/vmx/realmode.c |  2 +-
- xen/arch/x86/hvm/vmx/vmx.c      |  2 +-
- xen/arch/x86/nmi.c              |  2 +-
- xen/arch/x86/traps.c            |  2 +-
- xen/arch/x86/x86_64/gdbstub.c   |  3 +-
- xen/common/domain.c             |  2 +-
- xen/common/gdbstub.c            |  3 +-
- xen/common/keyhandler.c         |  2 +-
- xen/common/shutdown.c           |  2 +-
- xen/drivers/char/console.c      |  2 +-
- xen/include/asm-arm/debugger.h  | 15 ------
- xen/include/asm-x86/debugger.h  | 86 ++++++---------------------------
- xen/include/xen/debugger.h      | 69 ++++++++++++++++++++++++++
- 21 files changed, 157 insertions(+), 122 deletions(-)
+ xen/arch/x86/Makefile          |  1 +
+ xen/arch/x86/debugger.c        | 41 ++++++++++++++++++++++++++++++++++
+ xen/include/asm-x86/debugger.h | 26 ++-------------------
+ 3 files changed, 44 insertions(+), 24 deletions(-)
  create mode 100644 xen/arch/x86/debugger.c
- delete mode 100644 xen/include/asm-arm/debugger.h
- create mode 100644 xen/include/xen/debugger.h
 
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 2ec883456e..c5c9f37570 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -21,6 +21,7 @@ obj-$(CONFIG_PV) += compat.o
+ obj-$(CONFIG_PV32) += x86_64/compat.o
+ obj-$(CONFIG_KEXEC) += crash.o
+ obj-$(CONFIG_GDBSX) += debug.o
++obj-$(CONFIG_CRASH_DEBUG) += debugger.o
+ obj-y += delay.o
+ obj-y += desc.o
+ obj-bin-y += dmi_scan.init.o
+diff --git a/xen/arch/x86/debugger.c b/xen/arch/x86/debugger.c
+new file mode 100644
+index 0000000000..985c1275b4
+--- /dev/null
++++ b/xen/arch/x86/debugger.c
+@@ -0,0 +1,41 @@
++/******************************************************************************
++ * x86 crash debug hooks
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include <asm/debugger.h>
++#include <xen/domain.h>
++#include <xen/event.h>
++#include <xen/sched.h>
++
++bool debugger_trap_entry(
++    unsigned int vector, const struct cpu_user_regs *regs)
++{
++    /*
++     * This function is called before any checks are made.  Amongst other
++     * things, be aware that during early boot, current is not a safe pointer
++     * to follow.
++     */
++    const struct vcpu *v = current;
++
++    if ( vector != TRAP_int3 && vector != TRAP_debug )
++        return false;
++
++    if ( guest_mode(regs) && guest_kernel_mode(v, regs) &&
++         v->domain->debugger_attached  )
++    {
++        if ( vector != TRAP_debug ) /* domain pause is good enough */
++            current->arch.gdbsx_vcpu_event = vector;
++        domain_pause_for_debugger();
++        return true;
++    }
++
++    return false;
++}
+diff --git a/xen/include/asm-x86/debugger.h b/xen/include/asm-x86/debugger.h
+index c856c1b795..75e35c7902 100644
+--- a/xen/include/asm-x86/debugger.h
++++ b/xen/include/asm-x86/debugger.h
+@@ -31,30 +31,8 @@ static inline bool debugger_trap_fatal(
+ /* Int3 is a trivial way to gather cpu_user_regs context. */
+ #define debugger_trap_immediate() __asm__ __volatile__ ( "int3" );
+ 
+-static inline bool debugger_trap_entry(
+-    unsigned int vector, struct cpu_user_regs *regs)
+-{
+-    /*
+-     * This function is called before any checks are made.  Amongst other
+-     * things, be aware that during early boot, current is not a safe pointer
+-     * to follow.
+-     */
+-    struct vcpu *v = current;
+-
+-    if ( vector != TRAP_int3 && vector != TRAP_debug )
+-        return false;
+-
+-    if ( guest_mode(regs) && guest_kernel_mode(v, regs) &&
+-         v->domain->debugger_attached  )
+-    {
+-        if ( vector != TRAP_debug ) /* domain pause is good enough */
+-            current->arch.gdbsx_vcpu_event = vector;
+-        domain_pause_for_debugger();
+-        return true;
+-    }
+-
+-    return false;
+-}
++bool debugger_trap_entry(
++    unsigned int vector, const struct cpu_user_regs *regs);
+ 
+ #ifdef CONFIG_GDBSX
+ unsigned int dbg_rw_mem(unsigned long gva, XEN_GUEST_HANDLE_PARAM(void) buf,
 -- 
 2.30.0
 
