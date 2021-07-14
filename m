@@ -2,45 +2,48 @@ Return-Path: <SRS0=2EqH=MG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65510C12002
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 19:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D81EC12002
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 20:38:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 21181613E2
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 19:43:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 21181613E2
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 13763613A9
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Jul 2021 20:38:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13763613A9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.156198.288227 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.156212.288258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3kmo-0002Bg-Q1; Wed, 14 Jul 2021 19:43:14 +0000
+	id 1m3le9-0000L8-Ht; Wed, 14 Jul 2021 20:38:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 156198.288227; Wed, 14 Jul 2021 19:43:14 +0000
+Received: by outflank-mailman (output) from mailman id 156212.288258; Wed, 14 Jul 2021 20:38:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m3kmo-0002BZ-Mq; Wed, 14 Jul 2021 19:43:14 +0000
-Received: by outflank-mailman (input) for mailman id 156198;
- Wed, 14 Jul 2021 19:43:13 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1m3kmn-0002BR-Nj
- for xen-devel@lists.xenproject.org; Wed, 14 Jul 2021 19:43:13 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m3kml-0004G9-3y; Wed, 14 Jul 2021 19:43:11 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m3kmk-0003O5-Tx; Wed, 14 Jul 2021 19:43:11 +0000
+	id 1m3le9-0000Kv-E9; Wed, 14 Jul 2021 20:38:21 +0000
+Received: by outflank-mailman (input) for mailman id 156212;
+ Wed, 14 Jul 2021 20:38:19 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=kxbS=MG=gmail.com=bobby.eshleman@srs-us1.protection.inumbo.net>)
+ id 1m3le7-0000KG-Pc
+ for xen-devel@lists.xenproject.org; Wed, 14 Jul 2021 20:38:19 +0000
+Received: from mail-pf1-x431.google.com (unknown [2607:f8b0:4864:20::431])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a66d8a53-11d2-43d1-a186-ab0271001d25;
+ Wed, 14 Jul 2021 20:38:19 +0000 (UTC)
+Received: by mail-pf1-x431.google.com with SMTP id o201so3101865pfd.1
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Jul 2021 13:38:19 -0700 (PDT)
+Received: from localhost.localdomain ([2601:1c2:4c02:4c00::1])
+ by smtp.gmail.com with ESMTPSA id b17sm1785084pfm.54.2021.07.14.13.38.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Jul 2021 13:38:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,100 +54,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=A7sJazuRwFikAxaPX2Thh0UgcHfGngxkrskJnNE3+qE=; b=4w9TCu0e+y4r11rE1qFGePTTtz
-	dCkjHntToVExhteCDmOftPitwRpi/g3Pl2VALPxqTAEg1yXzxrxdQkpmB80pNy4M4juYEdylcwpiE
-	FzBFM+zLyrsHwYc5XWRdTnBuTMcsTwbq0y8YyMiaEpLtAYCzV5mt6foEK8RZJXtPncH4=;
-Subject: Re: [PATCH] SUPPORT.md: add Dom0less as Supported
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com,
- george.dunlap@citrix.com, jbeulich@suse.com, iwj@xenproject.org, wl@xen.org
-References: <alpine.DEB.2.21.2107131734170.23286@sstabellini-ThinkPad-T480s>
- <47749630-ff78-e00f-63c0-8ff71a6a04c9@xen.org>
- <alpine.DEB.2.21.2107141224550.23286@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <f443ca4f-a942-7765-a8c0-072d2844a0d9@xen.org>
-Date: Wed, 14 Jul 2021 20:43:08 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.11.0
+X-Inumbo-ID: a66d8a53-11d2-43d1-a186-ab0271001d25
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=PVjxJO7r4tEQ5KrqJV2fLuS45xkhLqACA4SCEsFghwg=;
+        b=LOzr0TSGpoY/uDxpvLTKhA2FZnlCEorEMej+Oifny9CBnjufEhEYllm4eg+dfxST8x
+         YM/2ZHAEkYxfSCkAlcGW1AsVxX0tnYzLaFGvS4r8BZCr9iBdNFZlbCMnTs797vu6Kvek
+         rG3ThorDLN1LaQvMIRxw/xBV2rRQNmEWsFE/1Y9A+7CbLrjzvc2Rjmmt0jmScjyoDRQp
+         B8pVoJ+y0h81ncvpkr5eLx2SdVGn1dHdgjZVh1GUtwLHSKXJMncET/NM2xvg+r+UrZfa
+         8FM41IFcwsJEUlXcbo0TiSclE+ySJS0QSMBoCpHg+GY/u3QrhE8Pg5pR4otSJECPJuy4
+         YMPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+         :in-reply-to:references:mime-version:content-transfer-encoding;
+        bh=PVjxJO7r4tEQ5KrqJV2fLuS45xkhLqACA4SCEsFghwg=;
+        b=YCmNE/QE6crt7u+Z32YgyOyJYsVZBSvkSmXuk/DA9FoFYK+03Shyysi2C8g7d01cUE
+         MWBmxCbkDWj3GtzlR1vJStNSyfe8FUAoTrRbVtXOpfSBDOnvaiS/bhnarSns8m1S1+6r
+         dhAGZ8VLRBXUgV+0wN4GoAkuGdCCaAQfLeQwi6jzWUOiLIwYQfEu9Lam4WoXOA4IP0g+
+         VMiZlTPd0lURoH9qKxfDykLlhPp9uk2BzEjA2XACeODRXGhmfpxMjroGjfe8cIC06nKi
+         dE5cc5NsfwRKwPCJPX1UKKr93xK1iqwuLYyyNBsbp8zJ7axi7h7V9+9c2LWuOMUszlg9
+         sElQ==
+X-Gm-Message-State: AOAM533PMwRgEwAkU8ap/fBuoH9nut7/4prM/QkAKgSywiLlhh1Iiw2c
+	MtZ6hnXSGxoroJipU0vlsOsAs//Zz9XDyqDA
+X-Google-Smtp-Source: ABdhPJwrIpd7894157L04ZpBVIBPvvAbUKvKVDl93xih+9WvPToauUvvW8+k0RdKIk0ByMnQGyf7kA==
+X-Received: by 2002:a62:1697:0:b029:326:7ec1:a9e9 with SMTP id 145-20020a6216970000b02903267ec1a9e9mr116882pfw.14.1626295098137;
+        Wed, 14 Jul 2021 13:38:18 -0700 (PDT)
+Sender: Bobby Eshleman <bobbyeshleman@gmail.com>
+From: Bobby Eshleman <bobby.eshleman@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Bobby Eshleman <bobby.eshleman@gmail.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jun Nakajima <jun.nakajima@intel.com>,
+	Kevin Tian <kevin.tian@intel.com>
+Subject: [PATCH v2 1/4] arm/traps: remove debugger_trap_fatal() calls
+Date: Wed, 14 Jul 2021 13:37:44 -0700
+Message-Id: <2de1e8493e08722b5444d1293c5af299c76bf891.1626286772.git.bobby.eshleman@gmail.com>
+X-Mailer: git-send-email 2.30.0
+In-Reply-To: <cover.1626286772.git.bobby.eshleman@gmail.com>
+References: <cover.1626286772.git.bobby.eshleman@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2107141224550.23286@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Stefano,
+ARM doesn't actually use debugger_trap_* anything, and is stubbed out.
 
-On 14/07/2021 20:28, Stefano Stabellini wrote:
-> On Wed, 14 Jul 2021, Julien Grall wrote:
->> Hi Stefano,
->>
->> On 14/07/2021 01:39, Stefano Stabellini wrote:
->>> Add Dom0less to SUPPORT.md to clarify its support status. The feature is
->>> mature enough and small enough to make it security supported.
->>>
->>> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
->>>
->>> diff --git a/SUPPORT.md b/SUPPORT.md
->>> index 317392d8f3..c777f3da72 100644
->>> --- a/SUPPORT.md
->>> +++ b/SUPPORT.md
->>> @@ -832,6 +832,12 @@ OVMF firmware implements the UEFI boot protocol.
->>>          Status, qemu-xen: Supported
->>>    +## Dom0less
->>> +
->>> +Guest creation from the hypervisor at boot without Dom0 intervention.
->>> +
->>> +    Status, ARM: Supported
->>> +
->>
->> After XSA-372, we will not scrubbed memory assigned to dom0less DomU when
->> bootscrub=on.
-> 
-> Do you mean *before* XSA-372, right?
+Simply remove the calls. This also renders TRAP_invalid_op unused in
+any common code, so remove that definition too.
 
-No, I really meant *after* XSA-372.
+Signed-off-by: Bobby Eshleman <bobby.eshleman@gmail.com>
+---
+ xen/arch/arm/traps.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-> I thought the XSA-372 patches take
-> care of the problem?
-
-It didn't. We have an open question for the bootscrub=on one. From the 
-commit message of patch #1:
-
-         2) The memory allocated for a domU will not be scrubbed anymore 
-when an
-         admin select bootscrub=on. This is not something we advertised, 
-but if
-         this is a concern we can introduce either force scrub for all 
-domUs or
-         a per-domain flag in the DT. The behavior for bootscrub=off and
-         bootscrub=idle (default) has not changed.
-
->  >
->> Do we want to exclude this combination or mention that XSAs will
->> not be issued if the domU can read secret from unscrubbed memory?
-> 
-> I could say that if bootscrub=off then we won't issue XSAs for domUs reading
-> secrets from unscrubbed memory. But it is kind of obvious anyway? I am
-> happy to add it if you think it is good to clarify.
-
-Right, it is pretty clear that bootscrub=off will not scrub the memory 
-and the "problem" would not be specific to dom0less.
-
-The one I asked to clarify is bootscrub=on because one may think the 
-memory is scrubbed for dom0less domU for all the cases but bootscrub=off.
-
-IIRC when we discussed about it on security@xen.org, we suggested that 
-it would be fine to rely on the bootloader to scrub it. But I think this 
-needs to be written down rather waiting for it to be re-discovered.
-
-The other solution is to fix it properly.
-
-Cheers,
-
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 4ccb6e7d18..dd09d2a4a9 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1266,10 +1266,6 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
+ 
+     case BUGFRAME_bug:
+         printk("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
+-
+-        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
+-            return 0;
+-
+         show_execution_state(regs);
+         panic("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
+ 
+@@ -1281,8 +1277,6 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
+ 
+         printk("Assertion '%s' failed at %s%s:%d\n",
+                predicate, prefix, filename, lineno);
+-        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
+-            return 0;
+         show_execution_state(regs);
+         panic("Assertion '%s' failed at %s%s:%d\n",
+               predicate, prefix, filename, lineno);
 -- 
-Julien Grall
+2.30.0
+
 
