@@ -2,50 +2,47 @@ Return-Path: <SRS0=F++z=MH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51FBEC07E96
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:53:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B42A9C07E96
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:56:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 17C0A6128D
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:53:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17C0A6128D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=armlinux.org.uk
+	by mail.kernel.org (Postfix) with ESMTPS id 75F1D613E9
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:56:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 75F1D613E9
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.156793.289386 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.156812.289397 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m44c2-0002IU-Kh; Thu, 15 Jul 2021 16:53:26 +0000
+	id 1m44eo-00032o-1i; Thu, 15 Jul 2021 16:56:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 156793.289386; Thu, 15 Jul 2021 16:53:26 +0000
+Received: by outflank-mailman (output) from mailman id 156812.289397; Thu, 15 Jul 2021 16:56:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m44c2-0002IN-Gd; Thu, 15 Jul 2021 16:53:26 +0000
-Received: by outflank-mailman (input) for mailman id 156793;
- Thu, 15 Jul 2021 16:53:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m44en-00032Y-Uz; Thu, 15 Jul 2021 16:56:17 +0000
+Received: by outflank-mailman (input) for mailman id 156812;
+ Thu, 15 Jul 2021 16:56:16 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=tkDB=MH=armlinux.org.uk=linux+xen-devel=lists.xenproject.org@srs-us1.protection.inumbo.net>)
- id 1m44c0-0002IH-En
- for xen-devel@lists.xenproject.org; Thu, 15 Jul 2021 16:53:25 +0000
-Received: from pandora.armlinux.org.uk (unknown
- [2001:4d48:ad52:32c8:5054:ff:fe00:142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 319dd089-c00e-46dc-a1ee-e0eb4d0a1950;
- Thu, 15 Jul 2021 16:53:22 +0000 (UTC)
-Received: from shell.armlinux.org.uk
- ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:46188)
- by pandora.armlinux.org.uk with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <linux@armlinux.org.uk>)
- id 1m44bq-00015M-DY; Thu, 15 Jul 2021 17:53:14 +0100
-Received: from linux by shell.armlinux.org.uk with local (Exim 4.92)
- (envelope-from <linux@shell.armlinux.org.uk>)
- id 1m44bl-0002LK-Cz; Thu, 15 Jul 2021 17:53:09 +0100
+ <SRS0=AIv0=MH=deltatee.com=logang@srs-us1.protection.inumbo.net>)
+ id 1m44em-00031r-Bv
+ for xen-devel@lists.xenproject.org; Thu, 15 Jul 2021 16:56:16 +0000
+Received: from ale.deltatee.com (unknown [204.191.154.188])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9121f54c-e58d-11eb-890b-12813bfff9fa;
+ Thu, 15 Jul 2021 16:56:15 +0000 (UTC)
+Received: from s0106a84e3fe8c3f3.cg.shawcable.net ([24.64.144.200]
+ helo=[192.168.0.10])
+ by ale.deltatee.com with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <logang@deltatee.com>)
+ id 1m44eg-0002EB-Nd; Thu, 15 Jul 2021 10:56:11 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,79 +53,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 319dd089-c00e-46dc-a1ee-e0eb4d0a1950
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 9121f54c-e58d-11eb-890b-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	 bh=SHLau5Ake9xcwQGIQtYxnHJNJDrvOEPwwI40kAVcRog=; b=U8UTMSyF6jF6T0gR2j3D29bvs
-	eItdcAl8yoYyPm0BOaqxfp0KAqwYLm3tCNGL3UOXkwf2YVG3YLDETqIWI2+TSILpWhKSi+ZfIepQo
-	lLen0o6KgjL85hkzakJ1QZk21sjlzGaASbY+nCfE7vBnPME0Mzb+H5RRmAZ+ZNIKuXcRPERLyqXtq
-	VdtZCLk1naymemWuZBuS7BxTMY7tagmEv9JEUS6/HzNAPZKSxBYrlmfrzjhaGexuK2It2kZa4r1/A
-	CGDiaLgNp8Hmc8kCrs/WvG5KWvG0MHFhzYQbO2P7Gy0lVzLUmA2kl6R0xkg6NYiRgFN4tL0/sUnPU
-	SpUuGxGOA==;
-Date: Thu, 15 Jul 2021 17:53:09 +0100
-From: "Russell King (Oracle)" <linux@armlinux.org.uk>
-To: Logan Gunthorpe <logang@deltatee.com>
+	d=deltatee.com; s=20200525; h=Subject:In-Reply-To:MIME-Version:Date:
+	Message-ID:From:References:Cc:To:content-disposition;
+	bh=zhc7pzLmZmjUsLXsFnMXewKeUUfUybMjLBdEKzxTgWI=; b=a4eD7Hw2j62J4jmrqG3qM9ka82
+	5k5K5mLQB+hZHZqXGBpC8vAokNP0Ip4On3I09UBGqNxaWIRq2dmyriwR06pgFKl9jIT5xqRBf9vsD
+	YwuOCb9uZhKtsGIHsKDWUmojgkYI2/2LwIaMUocRxIEBx7IUQ/6yxeiqqZGnSG4a85UbkDOZqICEa
+	lG9jcrA6QbuiJkY03RA7uB1x8xSEwzPTD/kmMZHa3L73KtXI/2a8MW52t16HXK3n1ZJYijnMXJyfP
+	O/wyAVK1kdSyrErsaIIRyaT5BgNIbq1xTAmZfgnfhUHzVRbyGsOS/vCEnIuD/1MU7ahfhlv+CI82Y
+	BmE/J6uw==;
+To: "Russell King (Oracle)" <linux@armlinux.org.uk>
 Cc: linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-ia64@vger.kernel.org,
-	linux-mips@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-s390@vger.kernel.org, sparclinux@vger.kernel.org,
-	iommu@lists.linux-foundation.org, linux-parisc@vger.kernel.org,
-	xen-devel@lists.xenproject.org, Christoph Hellwig <hch@lst.de>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Stephen Bates <sbates@raithlin.com>,
-	Martin Oliveira <martin.oliveira@eideticom.com>
-Subject: Re: [PATCH v1 00/16] .map_sg() error cleanup
-Message-ID: <20210715165309.GO22278@shell.armlinux.org.uk>
+ linux-arm-kernel@lists.infradead.org, linux-ia64@vger.kernel.org,
+ linux-mips@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-s390@vger.kernel.org, sparclinux@vger.kernel.org,
+ iommu@lists.linux-foundation.org, linux-parisc@vger.kernel.org,
+ xen-devel@lists.xenproject.org, Christoph Hellwig <hch@lst.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>, Stephen Bates <sbates@raithlin.com>,
+ Martin Oliveira <martin.oliveira@eideticom.com>
 References: <20210715164544.6827-1-logang@deltatee.com>
+ <20210715165309.GO22278@shell.armlinux.org.uk>
+From: Logan Gunthorpe <logang@deltatee.com>
+Message-ID: <aa33d2bf-8324-5647-b800-3a2e3e774e80@deltatee.com>
+Date: Thu, 15 Jul 2021 10:56:09 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210715164544.6827-1-logang@deltatee.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Sender: Russell King (Oracle) <linux@armlinux.org.uk>
+In-Reply-To: <20210715165309.GO22278@shell.armlinux.org.uk>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-CA
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 24.64.144.200
+X-SA-Exim-Rcpt-To: martin.oliveira@eideticom.com, sbates@raithlin.com, robin.murphy@arm.com, m.szyprowski@samsung.com, hch@lst.de, xen-devel@lists.xenproject.org, linux-parisc@vger.kernel.org, iommu@lists.linux-foundation.org, sparclinux@vger.kernel.org, linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, linux-mips@vger.kernel.org, linux-ia64@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org, linux@armlinux.org.uk
+X-SA-Exim-Mail-From: logang@deltatee.com
+Subject: Re: [PATCH v1 00/16] .map_sg() error cleanup
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
-On Thu, Jul 15, 2021 at 10:45:28AM -0600, Logan Gunthorpe wrote:
-> Hi,
+
+
+
+On 2021-07-15 10:53 a.m., Russell King (Oracle) wrote:
+> On Thu, Jul 15, 2021 at 10:45:28AM -0600, Logan Gunthorpe wrote:
+>> Hi,
+>>
+>> This series is spun out and expanded from my work to add P2PDMA support
+>> to DMA map operations[1].
+>>
+>> The P2PDMA work requires distinguishing different error conditions in
+>> a map_sg operation. dma_map_sgtable() already allows for returning an
+>> error code (where as dma_map_sg() is only allowed to return zero)
+>> however, it currently only returns -EINVAL when a .map_sg() call returns
+>> zero.
+>>
+>> This series cleans up all .map_sg() implementations to return appropriate
+>> error codes. After the cleanup, dma_map_sg() will still return zero,
+>> however dma_map_sgtable() will pass the error code from the .map_sg()
+>> call. Thanks go to Martn Oliveira for doing a lot of the cleanup of the
+>> obscure implementations.
+>>
+>> The patch set is based off of v5.14-rc1 and a git repo can be found
+>> here:
 > 
-> This series is spun out and expanded from my work to add P2PDMA support
-> to DMA map operations[1].
-> 
-> The P2PDMA work requires distinguishing different error conditions in
-> a map_sg operation. dma_map_sgtable() already allows for returning an
-> error code (where as dma_map_sg() is only allowed to return zero)
-> however, it currently only returns -EINVAL when a .map_sg() call returns
-> zero.
-> 
-> This series cleans up all .map_sg() implementations to return appropriate
-> error codes. After the cleanup, dma_map_sg() will still return zero,
-> however dma_map_sgtable() will pass the error code from the .map_sg()
-> call. Thanks go to Martn Oliveira for doing a lot of the cleanup of the
-> obscure implementations.
-> 
-> The patch set is based off of v5.14-rc1 and a git repo can be found
-> here:
+> Have all the callers for dma_map_sg() been updated to check for error
+> codes? If not, isn't that a pre-requisit to this patch set?
 
-Have all the callers for dma_map_sg() been updated to check for error
-codes? If not, isn't that a pre-requisit to this patch set?
+No. Perhaps I wasn't clear enough: This series is changing only
+impelemntations of .map_sg(). It does *not* change the return code of
+dma_map_sg(). dma_map_sg() will continue to return zero on error for the
+foreseeable future. The dma_map_sgtable() call already allows returning
+error codes and it will pass the new error code through. This is what
+will be used in the P2PDMA work.
 
-From what I see in Linus' current tree, we still have cases today
-where the return value of dma_map_sg() is compared with zero to
-detect failure, so I think that needs fixing before we start changing
-the dma_map_sg() implementation to return negative numbers.
-
-I also notice that there are various places that don't check the
-return value - and returning a negative number instead of zero may
-well cause random other bits to be set in fields.
-
-So, I think there's a fair amount of work to do in all the drivers
-before this change can be considered.
-
--- 
-RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
-FTTP is here! 40Mbps down 10Mbps up. Decent connectivity at last!
+Logan
 
