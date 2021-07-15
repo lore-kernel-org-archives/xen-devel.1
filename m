@@ -7,43 +7,44 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2037BC47E57
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10AF1C47E5C
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:46:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E04BC61285
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:46:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E04BC61285
+	by mail.kernel.org (Postfix) with ESMTPS id D55CE611AC
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Jul 2021 16:46:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D55CE611AC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.156731.289276 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.156732.289280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m44VJ-0001z7-4Q; Thu, 15 Jul 2021 16:46:29 +0000
+	id 1m44VJ-000234-Mq; Thu, 15 Jul 2021 16:46:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 156731.289276; Thu, 15 Jul 2021 16:46:29 +0000
+Received: by outflank-mailman (output) from mailman id 156732.289280; Thu, 15 Jul 2021 16:46:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m44VJ-0001yy-0D; Thu, 15 Jul 2021 16:46:29 +0000
-Received: by outflank-mailman (input) for mailman id 156731;
+	id 1m44VJ-000229-Az; Thu, 15 Jul 2021 16:46:29 +0000
+Received: by outflank-mailman (input) for mailman id 156732;
  Thu, 15 Jul 2021 16:46:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ycjv=MH=deltatee.com=gunthorp@srs-us1.protection.inumbo.net>)
- id 1m44VH-0008SR-D3
+ id 1m44VH-0008SS-OA
  for xen-devel@lists.xenproject.org; Thu, 15 Jul 2021 16:46:27 +0000
 Received: from ale.deltatee.com (unknown [204.191.154.188])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 35c9d403-0800-4730-8d26-e6c6feab9909;
- Thu, 15 Jul 2021 16:46:11 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 29e21944-e58c-11eb-8909-12813bfff9fa;
+ Thu, 15 Jul 2021 16:46:12 +0000 (UTC)
 Received: from cgy1-donard.priv.deltatee.com ([172.16.1.31])
  by ale.deltatee.com with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <gunthorp@deltatee.com>)
- id 1m44Ut-0001yb-T5; Thu, 15 Jul 2021 10:46:04 -0600
+ id 1m44Ux-0001yd-5T; Thu, 15 Jul 2021 10:46:07 -0600
 Received: from gunthorp by cgy1-donard.priv.deltatee.com with local (Exim 4.92)
  (envelope-from <gunthorp@deltatee.com>)
- id 1m44Up-0001no-O1; Thu, 15 Jul 2021 10:45:59 -0600
+ id 1m44Up-0001nc-2A; Thu, 15 Jul 2021 10:45:59 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,16 +56,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 35c9d403-0800-4730-8d26-e6c6feab9909
+X-Inumbo-ID: 29e21944-e58c-11eb-8909-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=deltatee.com; s=20200525; h=Subject:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:Cc:To:From:content-disposition;
-	bh=5q5HrJN5z01eX+XAG2EfKItHnqLG5Bo1fOvwGUnV4O4=; b=oVKqj1qxGhVN9ixr6TLSsC4ZBO
-	UTD1MZ1POYG3KI27eIMLMFxYbxzslShIpA6YWVrJkGi8+wWJ/wcVjvI1+Jf302nsbpn08IP0HnrjG
-	oh9pK+zmvzVkSIE1LmiCYRQEMg/n7BKDDFN1GhirqNtUZZY85nV7dWg7yr93fsfot42jaRm2mqSn+
-	wA3i/zh7pUzR0TP8bgsZsoHOwBQn2dWZ41mvNoesxsAdL31ytt8u53ohsynd3SOTknscoWtbi7kQX
-	eUTXIk0RVW11sAtm1oHi0qiO2SdAZ7zV+zvHAQY6D/M0Zv5t6bRmqKI4wJIkqLx4KZbsVyYpCrClV
-	/+yGg5Kg==;
+	bh=bP1/zbeT2pa523Na4lBPwCxSPdXLF6EA3VaIa9YAxC8=; b=sJmCUNWZOQ6d70ImKoRR27n6b+
+	E39yZfan4G4WzG9wL3lTV+KlnqhMrasNQXRGkyUszUPJHEArPHAPGcY2sWj8PnuG0ob2OZYn24jC7
+	YzDiIbJWkFENBGhhXfYDKBWmDzziXvoGGD0YC4LoB3rHM/84eqGdF03tY+VbGdbA+bbu0DCVP2Cxc
+	hKSRIDKA15ormrTIGaKN2Qh1cWztWNAY4KnoKZpsuBiMg7vQCgkGb3S96H4k4EX9Lqx5kiNItXR5P
+	ezHvRasL53lzmbQQWsT5h7UaFNR4HwdymkezbQ3oQKfE7WBbAYMV2rFas0+V4ja/N2XRd12MEZauy
+	2zUp+pNw==;
 From: Logan Gunthorpe <logang@deltatee.com>
 To: linux-kernel@vger.kernel.org,
 	linux-alpha@vger.kernel.org,
@@ -82,18 +83,21 @@ Cc: Christoph Hellwig <hch@lst.de>,
 	Robin Murphy <robin.murphy@arm.com>,
 	Stephen Bates <sbates@raithlin.com>,
 	Martin Oliveira <martin.oliveira@eideticom.com>,
-	Logan Gunthorpe <logang@deltatee.com>
-Date: Thu, 15 Jul 2021 10:45:43 -0600
-Message-Id: <20210715164544.6827-16-logang@deltatee.com>
+	Logan Gunthorpe <logang@deltatee.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Niklas Schnelle <schnelle@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>
+Date: Thu, 15 Jul 2021 10:45:39 -0600
+Message-Id: <20210715164544.6827-12-logang@deltatee.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210715164544.6827-1-logang@deltatee.com>
 References: <20210715164544.6827-1-logang@deltatee.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 172.16.1.31
-X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com
+X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, davem@davemloft.net, schnelle@linux.ibm.com, mpe@ellerman.id.au
 X-SA-Exim-Mail-From: gunthorp@deltatee.com
-Subject: [PATCH v1 15/16] dma-mapping: return error code from dma_dummy_map_sg()
+Subject: [PATCH v1 11/16] sparc/iommu: return error codes from .map_sg() ops
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
@@ -101,28 +105,78 @@ From: Martin Oliveira <martin.oliveira@eideticom.com>
 
 The .map_sg() op now expects an error code instead of zero on failure.
 
-The only errno to return is -ENODEV in the case when DMA is not
-supported.
+Returning an errno from __sbus_iommu_map_sg() results in
+sbus_iommu_map_sg_gflush() and sbus_iommu_map_sg_pflush() returning an
+errno, as those functions are wrappers around __sbus_iommu_map_sg().
 
 Signed-off-by: Martin Oliveira <martin.oliveira@eideticom.com>
 Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Niklas Schnelle <schnelle@linux.ibm.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
 ---
- kernel/dma/dummy.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/sparc/kernel/iommu.c     | 4 ++--
+ arch/sparc/kernel/pci_sun4v.c | 4 ++--
+ arch/sparc/mm/iommu.c         | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/kernel/dma/dummy.c b/kernel/dma/dummy.c
-index eacd4c5b10bf..ae9abebed0c4 100644
---- a/kernel/dma/dummy.c
-+++ b/kernel/dma/dummy.c
-@@ -22,7 +22,7 @@ static int dma_dummy_map_sg(struct device *dev, struct scatterlist *sgl,
- 		int nelems, enum dma_data_direction dir,
- 		unsigned long attrs)
- {
+diff --git a/arch/sparc/kernel/iommu.c b/arch/sparc/kernel/iommu.c
+index a034f571d869..0589acd34201 100644
+--- a/arch/sparc/kernel/iommu.c
++++ b/arch/sparc/kernel/iommu.c
+@@ -448,7 +448,7 @@ static int dma_4u_map_sg(struct device *dev, struct scatterlist *sglist,
+ 	iommu = dev->archdata.iommu;
+ 	strbuf = dev->archdata.stc;
+ 	if (nelems == 0 || !iommu)
+-		return 0;
++		return -EINVAL;
+ 
+ 	spin_lock_irqsave(&iommu->lock, flags);
+ 
+@@ -580,7 +580,7 @@ static int dma_4u_map_sg(struct device *dev, struct scatterlist *sglist,
+ 	}
+ 	spin_unlock_irqrestore(&iommu->lock, flags);
+ 
 -	return 0;
-+	return -ENODEV;
++	return -EINVAL;
  }
  
- static int dma_dummy_supported(struct device *hwdev, u64 mask)
+ /* If contexts are being used, they are the same in all of the mappings
+diff --git a/arch/sparc/kernel/pci_sun4v.c b/arch/sparc/kernel/pci_sun4v.c
+index 9de57e88f7a1..d90e80fa5705 100644
+--- a/arch/sparc/kernel/pci_sun4v.c
++++ b/arch/sparc/kernel/pci_sun4v.c
+@@ -486,7 +486,7 @@ static int dma_4v_map_sg(struct device *dev, struct scatterlist *sglist,
+ 
+ 	iommu = dev->archdata.iommu;
+ 	if (nelems == 0 || !iommu)
+-		return 0;
++		return -EINVAL;
+ 	atu = iommu->atu;
+ 
+ 	prot = HV_PCI_MAP_ATTR_READ;
+@@ -619,7 +619,7 @@ static int dma_4v_map_sg(struct device *dev, struct scatterlist *sglist,
+ 	}
+ 	local_irq_restore(flags);
+ 
+-	return 0;
++	return -EINVAL;
+ }
+ 
+ static void dma_4v_unmap_sg(struct device *dev, struct scatterlist *sglist,
+diff --git a/arch/sparc/mm/iommu.c b/arch/sparc/mm/iommu.c
+index 0c0342e5b10d..01ffcedd159c 100644
+--- a/arch/sparc/mm/iommu.c
++++ b/arch/sparc/mm/iommu.c
+@@ -256,7 +256,7 @@ static int __sbus_iommu_map_sg(struct device *dev, struct scatterlist *sgl,
+ 		sg->dma_address =__sbus_iommu_map_page(dev, sg_page(sg),
+ 				sg->offset, sg->length, per_page_flush);
+ 		if (sg->dma_address == DMA_MAPPING_ERROR)
+-			return 0;
++			return -EINVAL;
+ 		sg->dma_length = sg->length;
+ 	}
+ 
 -- 
 2.20.1
 
