@@ -2,43 +2,47 @@ Return-Path: <SRS0=ej9i=MM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45EFFC07E9B
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jul 2021 13:54:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9A48C07E95
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jul 2021 14:31:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 00C186113A
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Jul 2021 13:54:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00C186113A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
+	by mail.kernel.org (Postfix) with ESMTPS id 843D460FF3
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Jul 2021 14:31:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 843D460FF3
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.158781.292112 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.158787.292124 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m5qCs-0003Eq-AH; Tue, 20 Jul 2021 13:54:46 +0000
+	id 1m5qmC-0007p2-4C; Tue, 20 Jul 2021 14:31:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 158781.292112; Tue, 20 Jul 2021 13:54:46 +0000
+Received: by outflank-mailman (output) from mailman id 158787.292124; Tue, 20 Jul 2021 14:31:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m5qCs-0003Ej-6e; Tue, 20 Jul 2021 13:54:46 +0000
-Received: by outflank-mailman (input) for mailman id 158781;
- Tue, 20 Jul 2021 13:54:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1m5qmC-0007ov-0x; Tue, 20 Jul 2021 14:31:16 +0000
+Received: by outflank-mailman (input) for mailman id 158787;
+ Tue, 20 Jul 2021 14:31:15 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CKIv=MM=lst.de=hch@srs-us1.protection.inumbo.net>)
- id 1m5qCr-0003Ed-1P
- for xen-devel@lists.xenproject.org; Tue, 20 Jul 2021 13:54:45 +0000
-Received: from verein.lst.de (unknown [213.95.11.211])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 08742c82-e962-11eb-8b7e-12813bfff9fa;
- Tue, 20 Jul 2021 13:54:42 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id C76616736F; Tue, 20 Jul 2021 15:54:37 +0200 (CEST)
+ (envelope-from <iwj@xenproject.org>) id 1m5qmB-0007op-52
+ for xen-devel@lists.xenproject.org; Tue, 20 Jul 2021 14:31:15 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1m5qmB-00031A-0v
+ for xen-devel@lists.xenproject.org; Tue, 20 Jul 2021 14:31:15 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1m5qmA-0004Yv-WE
+ for xen-devel@lists.xenproject.org; Tue, 20 Jul 2021 14:31:15 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1m5qm7-0006tc-Fd; Tue, 20 Jul 2021 15:31:11 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,123 +54,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08742c82-e962-11eb-8b7e-12813bfff9fa
-Date: Tue, 20 Jul 2021 15:54:37 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Tianyu Lan <ltykernel@gmail.com>
-Cc: kys@microsoft.com, haiyangz@microsoft.com, sthemmin@microsoft.com,
-	wei.liu@kernel.org, decui@microsoft.com, tglx@linutronix.de,
-	mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-	dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
-	konrad.wilk@oracle.com, boris.ostrovsky@oracle.com, jgross@suse.com,
-	sstabellini@kernel.org, joro@8bytes.org, will@kernel.org,
-	davem@davemloft.net, kuba@kernel.org, jejb@linux.ibm.com,
-	martin.petersen@oracle.com, arnd@arndb.de, hch@lst.de,
-	m.szyprowski@samsung.com, robin.murphy@arm.com,
-	kirill.shutemov@linux.intel.com, akpm@linux-foundation.org,
-	rppt@kernel.org, Tianyu.Lan@microsoft.com, thomas.lendacky@amd.com,
-	ardb@kernel.org, robh@kernel.org, nramas@linux.microsoft.com,
-	pgonda@google.com, martin.b.radev@gmail.com, david@redhat.com,
-	krish.sadhukhan@oracle.com, saravanand@fb.com,
-	xen-devel@lists.xenproject.org, keescook@chromium.org,
-	rientjes@google.com, hannes@cmpxchg.org,
-	michael.h.kelley@microsoft.com, iommu@lists.linux-foundation.org,
-	linux-arch@vger.kernel.org, linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org,
-	netdev@vger.kernel.org, vkuznets@redhat.com, brijesh.singh@amd.com,
-	anparri@microsoft.com
-Subject: Re: [Resend RFC PATCH V4 09/13] x86/Swiotlb/HV: Add Swiotlb bounce
- buffer remap function for HV IVM
-Message-ID: <20210720135437.GA13554@lst.de>
-References: <20210707154629.3977369-1-ltykernel@gmail.com> <20210707154629.3977369-10-ltykernel@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=itsl3tw4c0k8e4bYlqKlUq4Q9TFznUbGFGE2t0XieAQ=; b=5AeDjmIs6KctYWosOFjHx9SSZT
+	p60WmDpPoL8aePK0GoqdrBFxGEfajhPUest+Ng9G48AtEYsY8hLnbuNcUO3Z/eBJaZQTiIc2Nmo05
+	+J4/TPN6H53KJlHMoCuj0sU6mNirbemzCQQXYrUBV4jZmyG14h5hdjoEj89Klz5Yp3XY=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210707154629.3977369-10-ltykernel@gmail.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Content-Transfer-Encoding: 7bit
+Message-ID: <24822.56879.260780.652184@mariner.uk.xensource.com>
+Date: Tue, 20 Jul 2021 15:31:11 +0100
+To: Jason Andryuk <jandryuk@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+    jgross@suse.com,
+    Ian Jackson <iwj@xenproject.org>,
+    Wei Liu <wl@xen.org>,
+    Jan Beulich <jbeulich@suse.com>,
+    Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] tests/xs: Check asprintf result
+In-Reply-To: <20210718135633.28675-1-jandryuk@gmail.com>
+References: <20210718135633.28675-1-jandryuk@gmail.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
+Jason Andryuk writes ("[PATCH] tests/xs: Check asprintf result"):
+> Compiling xs-test.c on Ubuntu 21.04 fails with:
 
-Please split the swiotlb changes into a separate patch from the
-consumer.
+Thanks.  However, your patch doesn't apply to staging; the files have
+been reorganised AFAICT.  Also, I think
 
->  }
-> +
-> +/*
-> + * hv_map_memory - map memory to extra space in the AMD SEV-SNP Isolation VM.
-> + */
-> +unsigned long hv_map_memory(unsigned long addr, unsigned long size)
-> +{
-> +	unsigned long *pfns = kcalloc(size / HV_HYP_PAGE_SIZE,
-> +				      sizeof(unsigned long),
-> +		       GFP_KERNEL);
-> +	unsigned long vaddr;
-> +	int i;
-> +
-> +	if (!pfns)
-> +		return (unsigned long)NULL;
-> +
-> +	for (i = 0; i < size / HV_HYP_PAGE_SIZE; i++)
-> +		pfns[i] = virt_to_hvpfn((void *)addr + i * HV_HYP_PAGE_SIZE) +
-> +			(ms_hyperv.shared_gpa_boundary >> HV_HYP_PAGE_SHIFT);
-> +
-> +	vaddr = (unsigned long)vmap_pfn(pfns, size / HV_HYP_PAGE_SIZE,
-> +					PAGE_KERNEL_IO);
-> +	kfree(pfns);
-> +
-> +	return vaddr;
+  93c9edbef51b31056f93a37a778326c90a83158c
+  tests/xenstore: Rework Makefile
 
-This seems to miss a 'select VMAP_PFN'.  But more importantly I don't
-think this actually works.  Various DMA APIs do expect a struct page
-backing, so how is this going to work with say dma_mmap_attrs or
-dma_get_sgtable_attrs?
+fixed this (with slightly different style, and despite not mentioning
+this change in the commit message)
 
-> +static unsigned long __map_memory(unsigned long addr, unsigned long size)
-> +{
-> +	if (hv_is_isolation_supported())
-> +		return hv_map_memory(addr, size);
-> +
-> +	return addr;
-> +}
-> +
-> +static void __unmap_memory(unsigned long addr)
-> +{
-> +	if (hv_is_isolation_supported())
-> +		hv_unmap_memory(addr);
-> +}
-> +
-> +unsigned long set_memory_decrypted_map(unsigned long addr, unsigned long size)
-> +{
-> +	if (__set_memory_enc_dec(addr, size / PAGE_SIZE, false))
-> +		return (unsigned long)NULL;
-> +
-> +	return __map_memory(addr, size);
-> +}
-> +
-> +int set_memory_encrypted_unmap(unsigned long addr, unsigned long size)
-> +{
-> +	__unmap_memory(addr);
-> +	return __set_memory_enc_dec(addr, size / PAGE_SIZE, true);
-> +}
-
-Why this obsfucation into all kinds of strange helpers?  Also I think
-we want an ops vectors (or alternative calls) instead of the random
-if checks here.
-
-> + * @vstart:	The virtual start address of the swiotlb memory pool. The swiotlb
-> + *		memory pool may be remapped in the memory encrypted case and store
-
-Normall we'd call this vaddr or cpu_addr.
-
-> -	set_memory_decrypted((unsigned long)vaddr, bytes >> PAGE_SHIFT);
-> -	memset(vaddr, 0, bytes);
-> +	mem->vstart = (void *)set_memory_decrypted_map((unsigned long)vaddr, bytes);
-
-Please always pass kernel virtual addresses as pointers.
-
-And I think these APIs might need better names, e.g.
-
-arch_dma_map_decrypted and arch_dma_unmap_decrypted.
-
-Also these will need fallback versions for non-x86 architectures that
-currently use memory encryption.
+Ian.
 
