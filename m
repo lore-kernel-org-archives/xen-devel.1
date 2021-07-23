@@ -2,48 +2,44 @@ Return-Path: <SRS0=8S6Q=MP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A2C9C4338F
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A906BC4338F
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 20:10:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F52860EFD
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:57:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2F52860EFD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1CEC160E0C
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 20:10:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1CEC160E0C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=strugglers.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.160319.294787 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.160361.294823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zQI-00007z-8i; Fri, 23 Jul 2021 17:57:22 +0000
+	id 1m71VA-0001IX-Mq; Fri, 23 Jul 2021 20:10:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 160319.294787; Fri, 23 Jul 2021 17:57:22 +0000
+Received: by outflank-mailman (output) from mailman id 160361.294823; Fri, 23 Jul 2021 20:10:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zQI-00007r-4e; Fri, 23 Jul 2021 17:57:22 +0000
-Received: by outflank-mailman (input) for mailman id 160319;
- Fri, 23 Jul 2021 17:57:20 +0000
+	id 1m71VA-0001IQ-Jf; Fri, 23 Jul 2021 20:10:32 +0000
+Received: by outflank-mailman (input) for mailman id 160361;
+ Fri, 23 Jul 2021 20:10:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uLib=MP=deltatee.com=gunthorp@srs-us1.protection.inumbo.net>)
- id 1m6zKU-0003J8-UM
- for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:51:22 +0000
-Received: from ale.deltatee.com (unknown [204.191.154.188])
+ <SRS0=aJz+=MP=strugglers.net=andy@srs-us1.protection.inumbo.net>)
+ id 1m71V9-0001IK-Eq
+ for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 20:10:31 +0000
+Received: from mail.bitfolk.com (unknown [2001:ba8:1f1:f019::25])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d66c684f-40b3-41f4-940d-4289b5416733;
- Fri, 23 Jul 2021 17:50:38 +0000 (UTC)
-Received: from cgy1-donard.priv.deltatee.com ([172.16.1.31])
- by ale.deltatee.com with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <gunthorp@deltatee.com>)
- id 1m6zJh-0005Lh-OW; Fri, 23 Jul 2021 11:50:35 -0600
-Received: from gunthorp by cgy1-donard.priv.deltatee.com with local (Exim 4.92)
- (envelope-from <gunthorp@deltatee.com>)
- id 1m6zJL-0005qn-8Z; Fri, 23 Jul 2021 11:50:11 -0600
+ id db8b56d9-b767-4622-9ac6-d189d159ac17;
+ Fri, 23 Jul 2021 20:10:29 +0000 (UTC)
+Received: from andy by mail.bitfolk.com with local (Exim 4.89)
+ (envelope-from <andy@strugglers.net>)
+ id 1m71V6-0007Pg-Ol; Fri, 23 Jul 2021 20:10:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,144 +51,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d66c684f-40b3-41f4-940d-4289b5416733
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=deltatee.com; s=20200525; h=Subject:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Cc:To:From:content-disposition;
-	bh=n2R1GNZpiJpIvqPgMoFv818LmwSs1yl8HL/LWwKcvVk=; b=Rv/rTZtj3T1nEGLn1WGczPTaen
-	2yIufVhmqXEZZQcWeZrPYXkIZtElB2JS3S+Q2Jjuo2MBlfeXs7yylXfYoMcUAcGExpeIfOU75HSjV
-	pf7krDbOQH/tSfJN+fElu+VVJqlRFYdQPNJiF4+WCLcG0tiI0p4KERH+zeiKfztGqnCd+UNf++PoZ
-	S8Exa3ad1UXddK3LqWr51Nf2fnLQV9b9+P4kG2ztV24ryTmwUQZ6I3WFEb6dIVLrutgq/2XpovvLE
-	NXxAW1CxwmNOHEATVHgyt4MfJmMX9ybHuGwzx/Byb9TN3fvIxw5nslKmWzVyMwIsgD+iRJFYM5syd
-	AWnM6Zjg==;
-From: Logan Gunthorpe <logang@deltatee.com>
-To: linux-kernel@vger.kernel.org,
-	linux-alpha@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-ia64@vger.kernel.org,
-	linux-mips@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-s390@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	iommu@lists.linux-foundation.org,
-	linux-parisc@vger.kernel.org,
-	xen-devel@lists.xenproject.org
-Cc: Christoph Hellwig <hch@lst.de>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Stephen Bates <sbates@raithlin.com>,
-	Martin Oliveira <martin.oliveira@eideticom.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Date: Fri, 23 Jul 2021 11:49:53 -0600
-Message-Id: <20210723175008.22410-7-logang@deltatee.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20210723175008.22410-1-logang@deltatee.com>
-References: <20210723175008.22410-1-logang@deltatee.com>
+X-Inumbo-ID: db8b56d9-b767-4622-9ac6-d189d159ac17
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=bitfolk.com
+	; s=alpha; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=AYmPYs1e1VdqVi+JuPhqXLKGZO4lkLoNj8vtW6NLVvA=; b=JBqSnnH4Z2n3BA2E2dC0PvwQWb
+	ysBKXqqTt8wFzKfjZulEikVvCcqPxlREmtXuGLdPDcOXPC8kkMEknVIMPG4ulh7z/3QtvdwV34Pd5
+	YzKcEgwsxSulXGVSA+PyaUU1NdCq9UnBCy6BZao2b21eayKXc4ATIeJVWLPf9DsiLdhSCx+z9KzXR
+	pEley/l6kKnYOgC4rFRp/WrSxtEmb0scNew0X+m3uYq3GsCflja1deem5OXYklXovN2eOYokdz5QW
+	k/2gQCC8eL2M4GLlD1n0UKWPH3Yjj7m7MKC3EEGcOqd+RsXhcLzHLxaAvHM4/s3B6788HZCEc9e7C
+	ie6acA7A==;
+Date: Fri, 23 Jul 2021 20:10:28 +0000
+From: Andy Smith <andy@strugglers.net>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org
+Subject: Re: 5.10.40 dom0 kernel - nvme: Invalid SGL for payload:131072
+ nents:13
+Message-ID: <20210723201028.tzmz65biwelruvqb@bitfolk.com>
+References: <20210720223239.fqbwj3escedolaqa@bitfolk.com>
+ <c3d7f7c7-0231-dba2-344f-e2e3588e0cab@suse.com>
+ <20210721141942.tnxyfpt7qttzjooo@bitfolk.com>
+ <acc3c000-3d62-d91d-3ad7-0e0b460f4b0f@suse.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 172.16.1.31
-X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, linux@armlinux.org.uk, tsbogend@alpha.franken.de
-X-SA-Exim-Mail-From: gunthorp@deltatee.com
-Subject: [PATCH v2 06/21] ARM/dma-mapping: return error code from .map_sg() ops
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
+In-Reply-To: <acc3c000-3d62-d91d-3ad7-0e0b460f4b0f@suse.com>
+OpenPGP: id=BF15490B; url=http://strugglers.net/~andy/pubkey.asc
+X-URL: http://strugglers.net/wiki/User:Andy
+User-Agent: NeoMutt/20170113 (1.7.2)
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: andy@strugglers.net
+X-SA-Exim-Scanned: No (on mail.bitfolk.com); SAEximRunCond expanded to false
 
-From: Martin Oliveira <martin.oliveira@eideticom.com>
+Hi Jan,
 
-The .map_sg() op now expects an error code instead of zero on failure.
-In the case of a DMA_MAPPING_ERROR, -EIO is returned. Otherwise,
--ENOMEM or -EINVAL is returned depending on the error from
-__map_sg_chunk().
+On Wed, Jul 21, 2021 at 04:49:26PM +0200, Jan Beulich wrote:
+> On 21.07.2021 16:19, Andy Smith wrote:
+> > I understand that below 4GiB memory use of swiotlb is disabled so
+> > all the time previously this was not used, and now is. Perhaps the
+> > bug is in there?
+> > 
+> > I was told that the only simple way on a Xen dom0 to disable use of
+> > swiotlb would be to set the memory below 4GiB again, so I might try
+> > that.
+> 
+> I have no idea where you take this 4GiB aspect from. What the kernel
+> considers "below 4GiB" in its view of the world may be at a much
+> higher address in system address space. And the mere amount of
+> memory doesn't matter here at all.
 
-Signed-off-by: Martin Oliveira <martin.oliveira@eideticom.com>
-Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
-Cc: Russell King <linux@armlinux.org.uk>
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
----
- arch/arm/mm/dma-mapping.c | 25 ++++++++++++++++---------
- 1 file changed, 16 insertions(+), 9 deletions(-)
+Ah, I was taking that from:
 
-diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
-index c4b8df2ad328..113b9cb3701b 100644
---- a/arch/arm/mm/dma-mapping.c
-+++ b/arch/arm/mm/dma-mapping.c
-@@ -980,7 +980,7 @@ int arm_dma_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- {
- 	const struct dma_map_ops *ops = get_dma_ops(dev);
- 	struct scatterlist *s;
--	int i, j;
-+	int i, j, ret;
- 
- 	for_each_sg(sg, s, nents, i) {
- #ifdef CONFIG_NEED_SG_DMA_LENGTH
-@@ -988,15 +988,17 @@ int arm_dma_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- #endif
- 		s->dma_address = ops->map_page(dev, sg_page(s), s->offset,
- 						s->length, dir, attrs);
--		if (dma_mapping_error(dev, s->dma_address))
-+		if (dma_mapping_error(dev, s->dma_address)) {
-+			ret = -EIO;
- 			goto bad_mapping;
-+		}
- 	}
- 	return nents;
- 
-  bad_mapping:
- 	for_each_sg(sg, s, i, j)
- 		ops->unmap_page(dev, sg_dma_address(s), sg_dma_len(s), dir, attrs);
--	return 0;
-+	return ret;
- }
- 
- /**
-@@ -1622,7 +1624,7 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 		     bool is_coherent)
- {
- 	struct scatterlist *s = sg, *dma = sg, *start = sg;
--	int i, count = 0;
-+	int i, count = 0, ret;
- 	unsigned int offset = s->offset;
- 	unsigned int size = s->offset + s->length;
- 	unsigned int max = dma_get_max_seg_size(dev);
-@@ -1634,8 +1636,10 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 		s->dma_length = 0;
- 
- 		if (s->offset || (size & ~PAGE_MASK) || size + s->length > max) {
--			if (__map_sg_chunk(dev, start, size, &dma->dma_address,
--			    dir, attrs, is_coherent) < 0)
-+			ret = __map_sg_chunk(dev, start, size,
-+					     &dma->dma_address, dir, attrs,
-+					     is_coherent);
-+			if (ret < 0)
- 				goto bad_mapping;
- 
- 			dma->dma_address += offset;
-@@ -1648,8 +1652,9 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 		}
- 		size += s->length;
- 	}
--	if (__map_sg_chunk(dev, start, size, &dma->dma_address, dir, attrs,
--		is_coherent) < 0)
-+	ret = __map_sg_chunk(dev, start, size, &dma->dma_address, dir, attrs,
-+			     is_coherent);
-+	if (ret < 0)
- 		goto bad_mapping;
- 
- 	dma->dma_address += offset;
-@@ -1660,7 +1665,9 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- bad_mapping:
- 	for_each_sg(sg, s, count, i)
- 		__iommu_remove_mapping(dev, sg_dma_address(s), sg_dma_len(s));
--	return 0;
-+	if (ret == -ENOMEM)
-+		return ret;
-+	return -EINVAL;
- }
- 
- /**
--- 
-2.20.1
+    https://elixir.bootlin.com/linux/v5.10.40/source/arch/x86/kernel/pci-swiotlb.c#L41
 
+…which I had found while looking around how to disable use of
+swiotlb. But I think I'm probably confused - should I only be
+looking at arch/x86/xen/pci-swiotlb-xen.c in the case of a PV domain
+like dom0?
+
+I have not been able to reproduce the problem by giving a test
+system with identical hardware more RAM and getting fio in a guest
+to do random reads with a blocksize between 4kiB and 4MiB.
+
+Perhaps it is highly workload dependent then. In some ways it's a
+pity that I do not get call traces for the later occurrences as then
+I could see if it's always the same 62.xvda-0 process (and thus same
+guest) triggering it.
+
+It's happened three more times since my previous email, but these
+have been up to 46 hours apart. These were all reads, so MD just
+satisfied the read from the other device without kicking the nvme
+device out.
+
+Hmm, I have the sector offset in the MD device so maybe I can
+convert that into a logical volume to know if a particular guest is
+provoking it…
+
+If anyone happens to have any suggestions as to what kind of IO might
+provoke this at all so I could maybe get fio to reproduce it, please
+do let me know.
+
+Thanks,
+Andy
 
