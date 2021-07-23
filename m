@@ -7,43 +7,44 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 932A0C43214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7E5CC19F2E
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:50:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4499C60C51
+	by mail.kernel.org (Postfix) with ESMTPS id 8A14660F12
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:50:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4499C60C51
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8A14660F12
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.160203.294571 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.160204.294575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zJi-0004WO-MQ; Fri, 23 Jul 2021 17:50:34 +0000
+	id 1m6zJj-0004aF-5h; Fri, 23 Jul 2021 17:50:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 160203.294571; Fri, 23 Jul 2021 17:50:34 +0000
+Received: by outflank-mailman (output) from mailman id 160204.294575; Fri, 23 Jul 2021 17:50:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zJi-0004W9-HS; Fri, 23 Jul 2021 17:50:34 +0000
-Received: by outflank-mailman (input) for mailman id 160203;
- Fri, 23 Jul 2021 17:50:32 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m6zJi-0004Zf-UH; Fri, 23 Jul 2021 17:50:34 +0000
+Received: by outflank-mailman (input) for mailman id 160204;
+ Fri, 23 Jul 2021 17:50:33 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uLib=MP=deltatee.com=gunthorp@srs-us1.protection.inumbo.net>)
- id 1m6zJg-0003J8-Sm
- for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:50:32 +0000
+ id 1m6zJh-0003JD-Be
+ for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:50:33 +0000
 Received: from ale.deltatee.com (unknown [204.191.154.188])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 67f8c4e8-df47-4574-b03d-9651906e6ab5;
- Fri, 23 Jul 2021 17:50:24 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 73139cb6-ebde-11eb-9468-12813bfff9fa;
+ Fri, 23 Jul 2021 17:50:21 +0000 (UTC)
 Received: from cgy1-donard.priv.deltatee.com ([172.16.1.31])
  by ale.deltatee.com with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <gunthorp@deltatee.com>)
- id 1m6zJU-0005Li-Af; Fri, 23 Jul 2021 11:50:21 -0600
+ id 1m6zJN-0005Lh-Sm; Fri, 23 Jul 2021 11:50:15 -0600
 Received: from gunthorp by cgy1-donard.priv.deltatee.com with local (Exim 4.92)
  (envelope-from <gunthorp@deltatee.com>)
- id 1m6zJN-0005rN-4i; Fri, 23 Jul 2021 11:50:13 -0600
+ id 1m6zJK-0005qY-JE; Fri, 23 Jul 2021 11:50:10 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,16 +56,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67f8c4e8-df47-4574-b03d-9651906e6ab5
+X-Inumbo-ID: 73139cb6-ebde-11eb-9468-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=deltatee.com; s=20200525; h=Subject:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:Cc:To:From:content-disposition;
-	bh=bxYuYkexdgjCkkzv9UnzPxUCVLmS0/r9pZcrAxTBVsI=; b=tU4RGTXputVtGqHoSX1hnwO6vq
-	EjlpGIj5k+GghlZ7jikEiPIT8qkgX60V5/or7/Cy6I2MiCFEcYbQlZ2TOf6GsPCGRd7YGvg3pL9pv
-	Q4ipjd9t6Z2880WyeStUvUbi+V3OBorxPgG7ZTdjSgHc9imUxASFJTZ5xOXWqB1UHC4Ricck7IV1n
-	8BRiVBsxku33wBiGbzLNbgllz3J+3LALeLkPreaFk2qRuRTVfIx4RMU57mLsLS1oPtTpXFlmWHI4k
-	CmFBSb173r8jKtju9kVtybiTh0dyGGcWpvXnUdHLUvxRNxukM75x6B7+fp2YIGz8Mwqlkqw8nHl7C
-	1fL1Du7Q==;
+	bh=3dDdw3ixNeKNwcOz2MGNHAL8x40zomtWAxb+xrMDPos=; b=Pe5X2FhCP8WEWFNeo5ont9ytdE
+	MS7FdpRR4PN5QRSDgWfkkvTNpLVh+ZUDb5dqumfMyUrn3XUtm/Ryv5Gm91Nutblnuvp/feCHledFV
+	cXmOdAlEXogSC6eKb3gDD2vgi0vXlKBvKXLRc7wnk7Qi4ADaj7ysaouoM5wmrx8cHRag5qgW8820L
+	6UyAqkfT99tEBiMFgEmOyboD1TuFYavmVPOi8FbbNJFyhSg5nO9ReYQOXFhavVTktEB1pDpgyX17d
+	XRc71xw8FSZWuvkg6zfFvrgVCm3LA3vggs+kjkGJQFz9AmLCHgqZb6DhGgEVAW/Lt+virkNJKrBKG
+	NMjiC+Hg==;
 From: Logan Gunthorpe <logang@deltatee.com>
 To: linux-kernel@vger.kernel.org,
 	linux-alpha@vger.kernel.org,
@@ -82,110 +83,233 @@ Cc: Christoph Hellwig <hch@lst.de>,
 	Robin Murphy <robin.murphy@arm.com>,
 	Stephen Bates <sbates@raithlin.com>,
 	Martin Oliveira <martin.oliveira@eideticom.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Niklas Schnelle <schnelle@linux.ibm.com>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Michael Ellerman <mpe@ellerman.id.au>
-Date: Fri, 23 Jul 2021 11:50:05 -0600
-Message-Id: <20210723175008.22410-19-logang@deltatee.com>
+	Logan Gunthorpe <logang@deltatee.com>
+Date: Fri, 23 Jul 2021 11:49:48 -0600
+Message-Id: <20210723175008.22410-2-logang@deltatee.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210723175008.22410-1-logang@deltatee.com>
 References: <20210723175008.22410-1-logang@deltatee.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 172.16.1.31
-X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, schnelle@linux.ibm.com, tsbogend@alpha.franken.de, mpe@ellerman.id.au
+X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com
 X-SA-Exim-Mail-From: gunthorp@deltatee.com
-Subject: [PATCH v2 18/21] x86/amd_gart: return error code from gart_map_sg()
+Subject: [PATCH v2 01/21] dma-mapping: Allow map_sg() ops to return negative error codes
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
-From: Martin Oliveira <martin.oliveira@eideticom.com>
+Allow dma_map_sgtable() to pass errors from the map_sg() ops. This
+will be required for returning appropriate error codes when mapping
+P2PDMA memory.
 
-The .map_sg() op now expects an error code instead of zero on failure.
+Introduce __dma_map_sg_attrs() which will return the raw error code
+from the map_sg operation (whether it be negative or zero). Then add a
+dma_map_sg_attrs() wrapper to convert any negative errors to zero to
+satisfy the existing calling convention.
 
-So make __dma_map_cont() return a valid errno (which is then propagated
-to gart_map_sg() via dma_map_cont()) and return it in case of failure.
+dma_map_sgtable() defines three error codes that .map_sg implementations
+are allowed to return: -EINVAL, -ENOMEM and -EIO. The latter of which
+is a generic return for cases that are passing DMA_MAPPING_ERROR
+through.
 
-Also, return -EINVAL in case of invalid nents.
+dma_map_sgtable() will convert a zero error return for old map_sg() ops
+into a -EIO return and return any negative errors as reported.
 
-Signed-off-by: Martin Oliveira <martin.oliveira@eideticom.com>
+This allows map_sg implementations to start returning multiple
+negative error codes. Legacy map_sg implementations can continue
+to return zero until they are all converted.
+
 Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: "H. Peter Anvin" <hpa@zytor.com>
-Cc: Niklas Schnelle <schnelle@linux.ibm.com>
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
 ---
- arch/x86/kernel/amd_gart_64.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ include/linux/dma-map-ops.h |  5 ++-
+ include/linux/dma-mapping.h | 35 +++------------
+ kernel/dma/mapping.c        | 85 +++++++++++++++++++++++++++++++++----
+ 3 files changed, 87 insertions(+), 38 deletions(-)
 
-diff --git a/arch/x86/kernel/amd_gart_64.c b/arch/x86/kernel/amd_gart_64.c
-index 9ac696487b13..46aea9a4f26b 100644
---- a/arch/x86/kernel/amd_gart_64.c
-+++ b/arch/x86/kernel/amd_gart_64.c
-@@ -331,7 +331,7 @@ static int __dma_map_cont(struct device *dev, struct scatterlist *start,
- 	int i;
- 
- 	if (iommu_start == -1)
--		return -1;
-+		return -ENOMEM;
- 
- 	for_each_sg(start, s, nelems, i) {
- 		unsigned long pages, addr;
-@@ -380,13 +380,13 @@ static int gart_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 		       enum dma_data_direction dir, unsigned long attrs)
+diff --git a/include/linux/dma-map-ops.h b/include/linux/dma-map-ops.h
+index 0d53a96a3d64..2f842498c448 100644
+--- a/include/linux/dma-map-ops.h
++++ b/include/linux/dma-map-ops.h
+@@ -41,8 +41,9 @@ struct dma_map_ops {
+ 			size_t size, enum dma_data_direction dir,
+ 			unsigned long attrs);
+ 	/*
+-	 * map_sg returns 0 on error and a value > 0 on success.
+-	 * It should never return a value < 0.
++	 * map_sg should return a negative error code on error. See
++	 * dma_map_sgtable() for a list of appropriate error codes
++	 * and their meanings.
+ 	 */
+ 	int (*map_sg)(struct device *dev, struct scatterlist *sg, int nents,
+ 			enum dma_data_direction dir, unsigned long attrs);
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index 183e7103a66d..daa1e360f0ee 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -110,6 +110,8 @@ int dma_map_sg_attrs(struct device *dev, struct scatterlist *sg, int nents,
+ void dma_unmap_sg_attrs(struct device *dev, struct scatterlist *sg,
+ 				      int nents, enum dma_data_direction dir,
+ 				      unsigned long attrs);
++int dma_map_sgtable(struct device *dev, struct sg_table *sgt,
++		enum dma_data_direction dir, unsigned long attrs);
+ dma_addr_t dma_map_resource(struct device *dev, phys_addr_t phys_addr,
+ 		size_t size, enum dma_data_direction dir, unsigned long attrs);
+ void dma_unmap_resource(struct device *dev, dma_addr_t addr, size_t size,
+@@ -174,6 +176,11 @@ static inline void dma_unmap_sg_attrs(struct device *dev,
+ 		unsigned long attrs)
  {
- 	struct scatterlist *s, *ps, *start_sg, *sgmap;
--	int need = 0, nextneed, i, out, start;
-+	int need = 0, nextneed, i, out, start, ret;
- 	unsigned long pages = 0;
- 	unsigned int seg_size;
- 	unsigned int max_seg_size;
- 
- 	if (nents == 0)
--		return 0;
-+		return -EINVAL;
- 
- 	out		= 0;
- 	start		= 0;
-@@ -414,8 +414,9 @@ static int gart_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 			if (!iommu_merge || !nextneed || !need || s->offset ||
- 			    (s->length + seg_size > max_seg_size) ||
- 			    (ps->offset + ps->length) % PAGE_SIZE) {
--				if (dma_map_cont(dev, start_sg, i - start,
--						 sgmap, pages, need) < 0)
-+				ret = dma_map_cont(dev, start_sg, i - start,
-+						   sgmap, pages, need);
-+				if (ret < 0)
- 					goto error;
- 				out++;
- 
-@@ -432,7 +433,8 @@ static int gart_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 		pages += iommu_num_pages(s->offset, s->length, PAGE_SIZE);
- 		ps = s;
- 	}
--	if (dma_map_cont(dev, start_sg, i - start, sgmap, pages, need) < 0)
-+	ret = dma_map_cont(dev, start_sg, i - start, sgmap, pages, need);
-+	if (ret < 0)
- 		goto error;
- 	out++;
- 	flush_gart();
-@@ -458,7 +460,7 @@ static int gart_map_sg(struct device *dev, struct scatterlist *sg, int nents,
- 	iommu_full(dev, pages << PAGE_SHIFT, dir);
- 	for_each_sg(sg, s, nents, i)
- 		s->dma_address = DMA_MAPPING_ERROR;
--	return 0;
-+	return ret;
+ }
++static inline int dma_map_sgtable(struct device *dev, struct sg_table *sgt,
++		enum dma_data_direction dir, unsigned long attrs)
++{
++	return -EOPNOTSUPP;
++}
+ static inline dma_addr_t dma_map_resource(struct device *dev,
+ 		phys_addr_t phys_addr, size_t size, enum dma_data_direction dir,
+ 		unsigned long attrs)
+@@ -343,34 +350,6 @@ static inline void dma_sync_single_range_for_device(struct device *dev,
+ 	return dma_sync_single_for_device(dev, addr + offset, size, dir);
  }
  
- /* allocate and map a coherent mapping */
+-/**
+- * dma_map_sgtable - Map the given buffer for DMA
+- * @dev:	The device for which to perform the DMA operation
+- * @sgt:	The sg_table object describing the buffer
+- * @dir:	DMA direction
+- * @attrs:	Optional DMA attributes for the map operation
+- *
+- * Maps a buffer described by a scatterlist stored in the given sg_table
+- * object for the @dir DMA operation by the @dev device. After success the
+- * ownership for the buffer is transferred to the DMA domain.  One has to
+- * call dma_sync_sgtable_for_cpu() or dma_unmap_sgtable() to move the
+- * ownership of the buffer back to the CPU domain before touching the
+- * buffer by the CPU.
+- *
+- * Returns 0 on success or -EINVAL on error during mapping the buffer.
+- */
+-static inline int dma_map_sgtable(struct device *dev, struct sg_table *sgt,
+-		enum dma_data_direction dir, unsigned long attrs)
+-{
+-	int nents;
+-
+-	nents = dma_map_sg_attrs(dev, sgt->sgl, sgt->orig_nents, dir, attrs);
+-	if (nents <= 0)
+-		return -EINVAL;
+-	sgt->nents = nents;
+-	return 0;
+-}
+-
+ /**
+  * dma_unmap_sgtable - Unmap the given buffer for DMA
+  * @dev:	The device for which to perform the DMA operation
+diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
+index 2b06a809d0b9..b8dc8b1cb402 100644
+--- a/kernel/dma/mapping.c
++++ b/kernel/dma/mapping.c
+@@ -177,12 +177,8 @@ void dma_unmap_page_attrs(struct device *dev, dma_addr_t addr, size_t size,
+ }
+ EXPORT_SYMBOL(dma_unmap_page_attrs);
+ 
+-/*
+- * dma_maps_sg_attrs returns 0 on error and > 0 on success.
+- * It should never return a value < 0.
+- */
+-int dma_map_sg_attrs(struct device *dev, struct scatterlist *sg, int nents,
+-		enum dma_data_direction dir, unsigned long attrs)
++static int __dma_map_sg_attrs(struct device *dev, struct scatterlist *sg,
++	 int nents, enum dma_data_direction dir, unsigned long attrs)
+ {
+ 	const struct dma_map_ops *ops = get_dma_ops(dev);
+ 	int ents;
+@@ -197,13 +193,86 @@ int dma_map_sg_attrs(struct device *dev, struct scatterlist *sg, int nents,
+ 		ents = dma_direct_map_sg(dev, sg, nents, dir, attrs);
+ 	else
+ 		ents = ops->map_sg(dev, sg, nents, dir, attrs);
+-	BUG_ON(ents < 0);
+-	debug_dma_map_sg(dev, sg, nents, ents, dir);
++
++	if (ents > 0)
++		debug_dma_map_sg(dev, sg, nents, ents, dir);
+ 
+ 	return ents;
+ }
++
++/**
++ * dma_map_sg_attrs - Map the given buffer for DMA
++ * @dev:	The device for which to perform the DMA operation
++ * @sg:	The sg_table object describing the buffer
++ * @dir:	DMA direction
++ * @attrs:	Optional DMA attributes for the map operation
++ *
++ * Maps a buffer described by a scatterlist passed in the sg argument with
++ * nents segments for the @dir DMA operation by the @dev device.
++ *
++ * Returns the number of mapped entries (which can be less than nents)
++ * on success. Zero is returned for any error.
++ *
++ * dma_unmap_sg_attrs() should be used to unmap the buffer with the
++ * original sg and original nents (not the value returned by this funciton).
++ */
++int dma_map_sg_attrs(struct device *dev, struct scatterlist *sg,
++		    int nents, enum dma_data_direction dir, unsigned long attrs)
++{
++	int ret;
++
++	ret = __dma_map_sg_attrs(dev, sg, nents, dir, attrs);
++	if (ret < 0)
++		ret = 0;
++
++	return ret;
++}
+ EXPORT_SYMBOL(dma_map_sg_attrs);
+ 
++/**
++ * dma_map_sgtable - Map the given buffer for DMA
++ * @dev:	The device for which to perform the DMA operation
++ * @sgt:	The sg_table object describing the buffer
++ * @dir:	DMA direction
++ * @attrs:	Optional DMA attributes for the map operation
++ *
++ * Maps a buffer described by a scatterlist stored in the given sg_table
++ * object for the @dir DMA operation by the @dev device. After success, the
++ * ownership for the buffer is transferred to the DMA domain.  One has to
++ * call dma_sync_sgtable_for_cpu() or dma_unmap_sgtable() to move the
++ * ownership of the buffer back to the CPU domain before touching the
++ * buffer by the CPU.
++ *
++ * Returns 0 on success or a negative error code on error. The following
++ * error codes are supported with the given meaning:
++ *
++ *   -EINVAL - An invalid argument, unaligned access or other error
++ *	       in usage. Will not succeed if retried.
++ *   -ENOMEM - Insufficient resources (like memory or IOVA space) to
++ *	       complete the mapping. Should succeed if retried later.
++ *   -EIO    - Legacy error code with an unknown meaning. eg. this is
++ *	       returned if a lower level call returned DMA_MAPPING_ERROR.
++ */
++int dma_map_sgtable(struct device *dev, struct sg_table *sgt,
++		    enum dma_data_direction dir, unsigned long attrs)
++{
++	int nents;
++
++	nents = __dma_map_sg_attrs(dev, sgt->sgl, sgt->orig_nents, dir, attrs);
++	if (nents == 0)
++		return -EIO;
++	else if (nents < 0) {
++		if (WARN_ON_ONCE(nents != -EINVAL && nents != -ENOMEM &&
++				 nents != -EIO))
++			return -EIO;
++		return nents;
++	}
++
++	sgt->nents = nents;
++	return 0;
++}
++EXPORT_SYMBOL_GPL(dma_map_sgtable);
++
+ void dma_unmap_sg_attrs(struct device *dev, struct scatterlist *sg,
+ 				      int nents, enum dma_data_direction dir,
+ 				      unsigned long attrs)
 -- 
 2.20.1
 
