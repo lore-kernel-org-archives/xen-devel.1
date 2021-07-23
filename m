@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E22EEC4338F
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A2C9C4338F
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:57:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ACC3F60F02
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:57:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org ACC3F60F02
+	by mail.kernel.org (Postfix) with ESMTPS id 2F52860EFD
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:57:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2F52860EFD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.160314.294775 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.160319.294787 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zQ8-0007zO-Ua; Fri, 23 Jul 2021 17:57:12 +0000
+	id 1m6zQI-00007z-8i; Fri, 23 Jul 2021 17:57:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 160314.294775; Fri, 23 Jul 2021 17:57:12 +0000
+Received: by outflank-mailman (output) from mailman id 160319.294787; Fri, 23 Jul 2021 17:57:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zQ8-0007zD-R3; Fri, 23 Jul 2021 17:57:12 +0000
-Received: by outflank-mailman (input) for mailman id 160314;
- Fri, 23 Jul 2021 17:57:11 +0000
+	id 1m6zQI-00007r-4e; Fri, 23 Jul 2021 17:57:22 +0000
+Received: by outflank-mailman (input) for mailman id 160319;
+ Fri, 23 Jul 2021 17:57:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=uLib=MP=deltatee.com=gunthorp@srs-us1.protection.inumbo.net>)
- id 1m6zKe-0003J8-Uf
- for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:51:32 +0000
+ id 1m6zKU-0003J8-UM
+ for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:51:22 +0000
 Received: from ale.deltatee.com (unknown [204.191.154.188])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e6d6b895-7137-4d89-bce2-cf47d2ac9a9b;
- Fri, 23 Jul 2021 17:50:40 +0000 (UTC)
+ id d66c684f-40b3-41f4-940d-4289b5416733;
+ Fri, 23 Jul 2021 17:50:38 +0000 (UTC)
 Received: from cgy1-donard.priv.deltatee.com ([172.16.1.31])
  by ale.deltatee.com with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <gunthorp@deltatee.com>)
- id 1m6zJj-0005Li-J2; Fri, 23 Jul 2021 11:50:36 -0600
+ id 1m6zJh-0005Lh-OW; Fri, 23 Jul 2021 11:50:35 -0600
 Received: from gunthorp by cgy1-donard.priv.deltatee.com with local (Exim 4.92)
  (envelope-from <gunthorp@deltatee.com>)
- id 1m6zJL-0005qk-5K; Fri, 23 Jul 2021 11:50:11 -0600
+ id 1m6zJL-0005qn-8Z; Fri, 23 Jul 2021 11:50:11 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,16 +55,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6d6b895-7137-4d89-bce2-cf47d2ac9a9b
+X-Inumbo-ID: d66c684f-40b3-41f4-940d-4289b5416733
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=deltatee.com; s=20200525; h=Subject:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:Cc:To:From:content-disposition;
-	bh=3+NKDp2q/0zHzVVwq3INd+w6NURPV4dE2hTg9/0ITMI=; b=p5v2Ta39J/FMFArdqmG9hSG4dJ
-	GVRjnEedIhEO1h1r5PxFM08gIBm2nd5NToaIWZ7khZNaAntYnBCZUWT0JxZdoSW9l1fdwLGQfi0X3
-	lbubJp9G7o8oDw/JDXbE/idqJCA1fHd/koaMSZyJUWEIAXuMnTNHuyqeQmpH1vtLOBamcAC/zV6XL
-	5FI4jeQ2Z+mEOnsWyzTxTyD6b5+Udusu7tJ0clJtv+ZswVDDZVA5y4XKO2x7PSA1AXTf4tKdtp/JU
-	4AxOqYl9AObVsclV8wS/PiUkaSSPgigS2efnAtBdAJWeCeYgFhDY5hULZaNiPuGhFkfmEfLJZJnwf
-	1AX9mNhw==;
+	bh=n2R1GNZpiJpIvqPgMoFv818LmwSs1yl8HL/LWwKcvVk=; b=Rv/rTZtj3T1nEGLn1WGczPTaen
+	2yIufVhmqXEZZQcWeZrPYXkIZtElB2JS3S+Q2Jjuo2MBlfeXs7yylXfYoMcUAcGExpeIfOU75HSjV
+	pf7krDbOQH/tSfJN+fElu+VVJqlRFYdQPNJiF4+WCLcG0tiI0p4KERH+zeiKfztGqnCd+UNf++PoZ
+	S8Exa3ad1UXddK3LqWr51Nf2fnLQV9b9+P4kG2ztV24ryTmwUQZ6I3WFEb6dIVLrutgq/2XpovvLE
+	NXxAW1CxwmNOHEATVHgyt4MfJmMX9ybHuGwzx/Byb9TN3fvIxw5nslKmWzVyMwIsgD+iRJFYM5syd
+	AWnM6Zjg==;
 From: Logan Gunthorpe <logang@deltatee.com>
 To: linux-kernel@vger.kernel.org,
 	linux-alpha@vger.kernel.org,
@@ -83,78 +83,115 @@ Cc: Christoph Hellwig <hch@lst.de>,
 	Stephen Bates <sbates@raithlin.com>,
 	Martin Oliveira <martin.oliveira@eideticom.com>,
 	Logan Gunthorpe <logang@deltatee.com>,
-	Richard Henderson <rth@twiddle.net>,
-	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-	Matt Turner <mattst88@gmail.com>
-Date: Fri, 23 Jul 2021 11:49:52 -0600
-Message-Id: <20210723175008.22410-6-logang@deltatee.com>
+	Russell King <linux@armlinux.org.uk>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Date: Fri, 23 Jul 2021 11:49:53 -0600
+Message-Id: <20210723175008.22410-7-logang@deltatee.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210723175008.22410-1-logang@deltatee.com>
 References: <20210723175008.22410-1-logang@deltatee.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 172.16.1.31
-X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com
+X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, linux@armlinux.org.uk, tsbogend@alpha.franken.de
 X-SA-Exim-Mail-From: gunthorp@deltatee.com
-Subject: [PATCH v2 05/21] alpha: return error code from alpha_pci_map_sg()
+Subject: [PATCH v2 06/21] ARM/dma-mapping: return error code from .map_sg() ops
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
 From: Martin Oliveira <martin.oliveira@eideticom.com>
 
 The .map_sg() op now expects an error code instead of zero on failure.
-
-pci_map_single_1() can fail for different reasons, but since the only
-supported type of error return is DMA_MAPPING_ERROR, we coalesce those
-errors into EIO.
-
-ENOMEM is returned when no page tables can be allocated.
+In the case of a DMA_MAPPING_ERROR, -EIO is returned. Otherwise,
+-ENOMEM or -EINVAL is returned depending on the error from
+__map_sg_chunk().
 
 Signed-off-by: Martin Oliveira <martin.oliveira@eideticom.com>
 Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
-Cc: Richard Henderson <rth@twiddle.net>
-Cc: Ivan Kokshaysky <ink@jurassic.park.msu.ru>
-Cc: Matt Turner <mattst88@gmail.com>
+Cc: Russell King <linux@armlinux.org.uk>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 ---
- arch/alpha/kernel/pci_iommu.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ arch/arm/mm/dma-mapping.c | 25 ++++++++++++++++---------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
 
-diff --git a/arch/alpha/kernel/pci_iommu.c b/arch/alpha/kernel/pci_iommu.c
-index 35d7b3096d6e..21f9ac101324 100644
---- a/arch/alpha/kernel/pci_iommu.c
-+++ b/arch/alpha/kernel/pci_iommu.c
-@@ -649,7 +649,9 @@ static int alpha_pci_map_sg(struct device *dev, struct scatterlist *sg,
- 		sg->dma_address
- 		  = pci_map_single_1(pdev, SG_ENT_VIRT_ADDRESS(sg),
- 				     sg->length, dac_allowed);
--		return sg->dma_address != DMA_MAPPING_ERROR;
-+		if (sg->dma_address == DMA_MAPPING_ERROR)
-+			return -EIO;
-+		return 1;
+diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
+index c4b8df2ad328..113b9cb3701b 100644
+--- a/arch/arm/mm/dma-mapping.c
++++ b/arch/arm/mm/dma-mapping.c
+@@ -980,7 +980,7 @@ int arm_dma_map_sg(struct device *dev, struct scatterlist *sg, int nents,
+ {
+ 	const struct dma_map_ops *ops = get_dma_ops(dev);
+ 	struct scatterlist *s;
+-	int i, j;
++	int i, j, ret;
+ 
+ 	for_each_sg(sg, s, nents, i) {
+ #ifdef CONFIG_NEED_SG_DMA_LENGTH
+@@ -988,15 +988,17 @@ int arm_dma_map_sg(struct device *dev, struct scatterlist *sg, int nents,
+ #endif
+ 		s->dma_address = ops->map_page(dev, sg_page(s), s->offset,
+ 						s->length, dir, attrs);
+-		if (dma_mapping_error(dev, s->dma_address))
++		if (dma_mapping_error(dev, s->dma_address)) {
++			ret = -EIO;
+ 			goto bad_mapping;
++		}
  	}
+ 	return nents;
  
- 	start = sg;
-@@ -685,8 +687,10 @@ static int alpha_pci_map_sg(struct device *dev, struct scatterlist *sg,
- 	if (out < end)
- 		out->dma_length = 0;
- 
--	if (out - start == 0)
-+	if (out - start == 0) {
- 		printk(KERN_WARNING "pci_map_sg failed: no entries?\n");
-+		return -ENOMEM;
-+	}
- 	DBGA("pci_map_sg: %ld entries\n", out - start);
- 
- 	return out - start;
-@@ -699,7 +703,7 @@ static int alpha_pci_map_sg(struct device *dev, struct scatterlist *sg,
- 	   entries.  Unmap them now.  */
- 	if (out > start)
- 		pci_unmap_sg(pdev, start, out - start, dir);
+  bad_mapping:
+ 	for_each_sg(sg, s, i, j)
+ 		ops->unmap_page(dev, sg_dma_address(s), sg_dma_len(s), dir, attrs);
 -	return 0;
-+	return -ENOMEM;
++	return ret;
  }
  
- /* Unmap a set of streaming mode DMA translations.  Again, cpu read
+ /**
+@@ -1622,7 +1624,7 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
+ 		     bool is_coherent)
+ {
+ 	struct scatterlist *s = sg, *dma = sg, *start = sg;
+-	int i, count = 0;
++	int i, count = 0, ret;
+ 	unsigned int offset = s->offset;
+ 	unsigned int size = s->offset + s->length;
+ 	unsigned int max = dma_get_max_seg_size(dev);
+@@ -1634,8 +1636,10 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
+ 		s->dma_length = 0;
+ 
+ 		if (s->offset || (size & ~PAGE_MASK) || size + s->length > max) {
+-			if (__map_sg_chunk(dev, start, size, &dma->dma_address,
+-			    dir, attrs, is_coherent) < 0)
++			ret = __map_sg_chunk(dev, start, size,
++					     &dma->dma_address, dir, attrs,
++					     is_coherent);
++			if (ret < 0)
+ 				goto bad_mapping;
+ 
+ 			dma->dma_address += offset;
+@@ -1648,8 +1652,9 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
+ 		}
+ 		size += s->length;
+ 	}
+-	if (__map_sg_chunk(dev, start, size, &dma->dma_address, dir, attrs,
+-		is_coherent) < 0)
++	ret = __map_sg_chunk(dev, start, size, &dma->dma_address, dir, attrs,
++			     is_coherent);
++	if (ret < 0)
+ 		goto bad_mapping;
+ 
+ 	dma->dma_address += offset;
+@@ -1660,7 +1665,9 @@ static int __iommu_map_sg(struct device *dev, struct scatterlist *sg, int nents,
+ bad_mapping:
+ 	for_each_sg(sg, s, count, i)
+ 		__iommu_remove_mapping(dev, sg_dma_address(s), sg_dma_len(s));
+-	return 0;
++	if (ret == -ENOMEM)
++		return ret;
++	return -EINVAL;
+ }
+ 
+ /**
 -- 
 2.20.1
 
