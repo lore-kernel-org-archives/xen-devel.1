@@ -2,45 +2,49 @@ Return-Path: <SRS0=8S6Q=MP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.5 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4074EC432BE
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:54:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24EF6C4338F
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:56:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EB34C60C51
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:54:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EB34C60C51
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id E0C7660C51
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Jul 2021 17:56:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E0C7660C51
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.160251.294715 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.160258.294727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zNO-0004mF-7f; Fri, 23 Jul 2021 17:54:22 +0000
+	id 1m6zOs-0005R4-JA; Fri, 23 Jul 2021 17:55:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 160251.294715; Fri, 23 Jul 2021 17:54:22 +0000
+Received: by outflank-mailman (output) from mailman id 160258.294727; Fri, 23 Jul 2021 17:55:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m6zNO-0004m8-4G; Fri, 23 Jul 2021 17:54:22 +0000
-Received: by outflank-mailman (input) for mailman id 160251;
- Fri, 23 Jul 2021 17:54:21 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1m6zNN-0004m2-4D
- for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:54:21 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m6zNM-0008Sz-RL; Fri, 23 Jul 2021 17:54:20 +0000
-Received: from [54.239.6.189] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1m6zNM-0003pb-Lc; Fri, 23 Jul 2021 17:54:20 +0000
+	id 1m6zOs-0005Qx-Fl; Fri, 23 Jul 2021 17:55:54 +0000
+Received: by outflank-mailman (input) for mailman id 160258;
+ Fri, 23 Jul 2021 17:55:53 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=uLib=MP=deltatee.com=gunthorp@srs-us1.protection.inumbo.net>)
+ id 1m6zKL-0003JD-Cr
+ for xen-devel@lists.xenproject.org; Fri, 23 Jul 2021 17:51:13 +0000
+Received: from ale.deltatee.com (unknown [204.191.154.188])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7a61c379-ebde-11eb-9468-12813bfff9fa;
+ Fri, 23 Jul 2021 17:50:35 +0000 (UTC)
+Received: from cgy1-donard.priv.deltatee.com ([172.16.1.31])
+ by ale.deltatee.com with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <gunthorp@deltatee.com>)
+ id 1m6zJe-0005Li-5A; Fri, 23 Jul 2021 11:50:31 -0600
+Received: from gunthorp by cgy1-donard.priv.deltatee.com with local (Exim 4.92)
+ (envelope-from <gunthorp@deltatee.com>)
+ id 1m6zJM-0005r2-0e; Fri, 23 Jul 2021 11:50:12 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,164 +56,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=Aee0lenOcdkZAtKJP8Lp++0mVarfWjRZJkgL0hS+n5c=; b=eieleU7gn+i8yaNprCNRz122ld
-	aOrtRWEPC4x5bDHe/Vrb9bO5oI3r0Q4XZn2vBHnAN9BQWU8O9/c/IZED/jk/Dw5IPW79UPV8r7Rny
-	217t6utOWx+qt6WdnulDN3kk5ZU2DUuqfIsI6WXJK/qs9J5oAqqeU+NoS4bxetWLLveo=;
-Subject: Re: [arm] Dom0 hangs after enable KROBE_EVENTS and/or UPROBE_EVENTS
- in kernel config
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrii Anisov <Andrii_Anisov@epam.com>
-References: <PA4PR03MB7136DEB7183936907DFE145AE3E39@PA4PR03MB7136.eurprd03.prod.outlook.com>
- <PA4PR03MB713685E6A8004ED13814B05AE3E39@PA4PR03MB7136.eurprd03.prod.outlook.com>
- <PA4PR03MB71367B7662A1D3E4E234F6C0E3E39@PA4PR03MB7136.eurprd03.prod.outlook.com>
- <a02d4291-e48e-28cc-52da-6b9c998b2d0a@xen.org>
- <PA4PR03MB7136452DF9961BC283718F4BE3E39@PA4PR03MB7136.eurprd03.prod.outlook.com>
- <8ce6f5fe-ccb6-d463-a39e-50fd82816b86@xen.org>
- <PA4PR03MB7136D3B811F820FC8A5AFF95E3E39@PA4PR03MB7136.eurprd03.prod.outlook.com>
- <alpine.DEB.2.21.2107211850540.14204@sstabellini-ThinkPad-T480s>
- <7c3453ed-181f-a166-f16c-43a33bcc529c@xen.org>
- <alpine.DEB.2.21.2107221437120.10122@sstabellini-ThinkPad-T480s>
- <88c43f6c-9d76-1cab-93f5-ddecc76b487f@xen.org>
- <alpine.DEB.2.21.2107230928460.10122@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <206a7bc1-4093-d3f5-a54f-8466be06695c@xen.org>
-Date: Fri, 23 Jul 2021 18:54:18 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.12.0
+X-Inumbo-ID: 7a61c379-ebde-11eb-9468-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=deltatee.com; s=20200525; h=Subject:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Cc:To:From:content-disposition;
+	bh=OuJXER8TMWR954py7rg3mrCeDrxT4LjuVdKtzQZh6Zs=; b=VZIFNWIUoksYSuIPKO5F+BKDMW
+	Dz/a1KEPRyGo26cwuIdeXHT4dKD9VP1PKuhNPdp3I+hm+TlxEfSoQUiJE30/x7kdL6uUd6o3CJsB5
+	xPZ+/Lx68xcGKHV5UlYVDyawUrujcwyjqEX0T+qPlsOuC3ErRY/c/7KVW/EICp3gIO/DCrQYr+W0w
+	HgdWUyAhbYLn47KaBKMV/m+ymoVBD9FwfVWFZSyO3eOYF9xUquor5DI5Cb/WzUJ0cqEREJl2x8tfY
+	3hnmz0IlHu+FbWJbelRPwn+3O8tbkq7FTWZVo1hQD0Bp5XyLUodycAhAggyNro0H4M1lucZqx9/vw
+	qXFJPM+g==;
+From: Logan Gunthorpe <logang@deltatee.com>
+To: linux-kernel@vger.kernel.org,
+	linux-alpha@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-ia64@vger.kernel.org,
+	linux-mips@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-s390@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	iommu@lists.linux-foundation.org,
+	linux-parisc@vger.kernel.org,
+	xen-devel@lists.xenproject.org
+Cc: Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Stephen Bates <sbates@raithlin.com>,
+	Martin Oliveira <martin.oliveira@eideticom.com>,
+	Logan Gunthorpe <logang@deltatee.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Geoff Levand <geoff@infradead.org>
+Date: Fri, 23 Jul 2021 11:49:58 -0600
+Message-Id: <20210723175008.22410-12-logang@deltatee.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210723175008.22410-1-logang@deltatee.com>
+References: <20210723175008.22410-1-logang@deltatee.com>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2107230928460.10122@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 172.16.1.31
+X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, mpe@ellerman.id.au, benh@kernel.crashing.org, paulus@samba.org, geoff@infradead.org
+X-SA-Exim-Mail-From: gunthorp@deltatee.com
+Subject: [PATCH v2 11/21] powerpc/iommu: don't set failed sg dma_address to DMA_MAPPING_ERROR
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
-Hi Stefano,
+Setting the ->dma_address to DMA_MAPPING_ERROR is not part of
+the ->map_sg calling convention, so remove it.
 
-On 23/07/2021 17:42, Stefano Stabellini wrote:
-> On Fri, 23 Jul 2021, Julien Grall wrote:
->> On 22/07/2021 22:39, Stefano Stabellini wrote:
->>> On Thu, 22 Jul 2021, Julien Grall wrote:
->>>>> You can go and edit 76085aff29f585139a37a10ea0a7daa63f70872c to change
->>>>> from 4K to any multiple of 4K, e.g. 8K, 12K, 16K, 20K. They should all
->>>>> work the same.
->>>>>
->>>>> Looking at the boot logs on pastebin I noticed that Xen is not loaded at
->>>>> a 2MB aligned address. I recommend you change Xen loading address to
->>>>> 0x500200000. And the kernel loading address to 0x500400000.
->>>>
->>>> I am curious to know why you recommend to load at 2MB aligned address. The
->>>> Image protocol doesn't require to load a 2MB aligned address. In fact, we
->>>> add
->>>> issue on Juno because the bootloader would load Xen at a 4KB address. UEFI
->>>> will also load at a 4KB align address.
->>>
->>> It is from empirical evidence :-)
->>
->> Right...
->>
->>> I cannot tell you the exact reason but I saw "strange" problems in the
->>> past that went away after choosing a 2MB alignment. So we settled for
->>> using 2MB in ImageBuilder and we haven't seen any more issues.
->>
->> It would have been good to report such issue back then so it could have been
->> analyzed and possibly fixed.
->>
->>> However, it could have been anything: a bug in U-Boot not relevant
->>> anymore, a bug in Linux, etc. I don't know for sure.
->>
->> This is the worrying part. We have a potential bug that no one knows why it
->> happened. Can this be reproduced?
-> 
-> I managed to reproduce the problem. I switched ImageBuilder to use 4K
-> alignment (just by changing the variable "offset" at the top of
-> scripts/uboot-script-gen).
+Link: https://lore.kernel.org/linux-mips/20210716063241.GC13345@lst.de/
+Suggested-by: Christoph Hellwig <hch@lst.de>
+Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Cc: Paul Mackerras <paulus@samba.org>
+Cc: Geoff Levand <geoff@infradead.org>
+---
+ arch/powerpc/kernel/iommu.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-Thank you for reproducing it!
-
-> It generated a boot.source file like this:
-> 
-> tftpb 0xC01000 2021.1/xen
-> tftpb 0xCEA000 2021.1/xen-Image-5.10
-> tftpb 0x18D1000 2021.1/initrd.cpio
-> tftpb 0x1A55000 2021.1/xen.dtb
-> [trimmed because the rest is not too relevant]
-> 
-> 
-> These are the sizes:
-> 
-> 12479370 Jul  21 19:02 xen-Image-5.10
-> 40577    Jul  21 18:25 xen.dtb
-> 950280   Jul  19 16:58 xen
-> 1586176  Jun  4  17:14 initrd.cpio
-> 
-> 
-> I did the calculations by hand and there are no overlaps. This is the
-> output from u-boot and boot log failure: https://pastebin.com/rbTBPn5g
-
-FWIW, I just gave a try on the foundation model with bootwrapper. My 
-default setup load Xen and the kernel at the following:
-
-(XEN) MODULE[0]: 0000000088200000 - 000000008835a8f8 Xen
-(XEN) MODULE[1]: 0000000088000000 - 000000008800167f Device Tree
-(XEN) MODULE[2]: 0000000080080000 - 0000000081e7ca00 Kernel
-(XEN)  RESVD[0]: 0000000080000000 - 0000000080010000
-
-Xen is 2MB aligned, but the kernel not. I couldn't see any failure.
-
-I have also tried to load Xen at different address (this time not 2MB 
-aligned) and still couldn't spot any issue:
-
-(XEN) MODULE[0]: 0000000088201000 - 000000008835b8f8 Xen
-(XEN) MODULE[1]: 0000000088000000 - 000000008800167f Device Tree
-(XEN) MODULE[2]: 0000000080081000 - 0000000081e7da00 Kernel
-(XEN)  RESVD[0]: 0000000080000000 - 0000000080010000
-
-So this looks something specific to your setup. Looking at the log:
-
- > (XEN) Latest ChangeSet: Tue Apr 13 10:59:05 2021 -0700 git:f44b1a6ede
-
-I couldn't find this commit in the tree. What baseline are you using? 
- From my side, I tested with 3a98c1a4cec1.
-
- > (XEN) ****************************************
- > (XEN) Panic on CPU 0:
- > (XEN) invalid compressed format (err=1)
- > (XEN) ****************************************
-
-This implies Xen think the kernel module was a GZIP image and Xen is 
-trying to decompress it. However, from your e-mail above the name of the 
-kernel module is xen-Image-5.10 which implies this is not a compressed 
-image.
-
-Can you confirm what is the format of xen-Image-5.10?
-
-> 
-> Using 2MB works. I tried 1MB for curiosity and got a different
-> error: https://pastebin.com/UHFUHyxN
-
- > (XEN) pg[0] MFN 00f50 c=0x180000000000000 o=4 v=0x7ffff t=0
- > (XEN) Xen BUG at page_alloc.c:1425
-
-This looks like two ranges has overlapped each other. Above, you 
-confirmed there was no overlap, was it for both 4KB and 1MB alignment?
-
-> 
-> Do you think it is worth investigating further?
-
-Definitely, I have got a setup where 4KB aligned (but not 2MB aligned) 
-works. This is a hint that something odd is happening on your setup and 
-I would like to understand what.
-
-I have a Xilinx board at home (I haven't used it recently though), so I 
-am happy to help debugging it. Alternatively, do you know if it 
-reproduces on the Xilinx QEMU?
-
-Cheers,
-
+diff --git a/arch/powerpc/kernel/iommu.c b/arch/powerpc/kernel/iommu.c
+index a8ec4fe42817..30b7736f0896 100644
+--- a/arch/powerpc/kernel/iommu.c
++++ b/arch/powerpc/kernel/iommu.c
+@@ -575,7 +575,6 @@ int ppc_iommu_map_sg(struct device *dev, struct iommu_table *tbl,
+ 	 */
+ 	if (outcount < incount) {
+ 		outs = sg_next(outs);
+-		outs->dma_address = DMA_MAPPING_ERROR;
+ 		outs->dma_length = 0;
+ 	}
+ 
+@@ -593,7 +592,6 @@ int ppc_iommu_map_sg(struct device *dev, struct iommu_table *tbl,
+ 			npages = iommu_num_pages(s->dma_address, s->dma_length,
+ 						 IOMMU_PAGE_SIZE(tbl));
+ 			__iommu_free(tbl, vaddr, npages);
+-			s->dma_address = DMA_MAPPING_ERROR;
+ 			s->dma_length = 0;
+ 		}
+ 		if (s == outs)
 -- 
-Julien Grall
+2.20.1
+
 
