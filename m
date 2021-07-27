@@ -2,47 +2,47 @@ Return-Path: <SRS0=Zr9Q=MT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2A5CC4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Jul 2021 13:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47E9FC432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Jul 2021 13:30:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6DBCD61A60
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Jul 2021 13:27:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6DBCD61A60
+	by mail.kernel.org (Postfix) with ESMTPS id 170E061A80
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Jul 2021 13:30:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 170E061A80
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.161183.295959 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.161190.295971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m8N7O-0006rh-VP; Tue, 27 Jul 2021 13:27:34 +0000
+	id 1m8N9v-0008EG-EG; Tue, 27 Jul 2021 13:30:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 161183.295959; Tue, 27 Jul 2021 13:27:34 +0000
+Received: by outflank-mailman (output) from mailman id 161190.295971; Tue, 27 Jul 2021 13:30:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m8N7O-0006ra-SP; Tue, 27 Jul 2021 13:27:34 +0000
-Received: by outflank-mailman (input) for mailman id 161183;
- Tue, 27 Jul 2021 13:27:33 +0000
+	id 1m8N9v-0008E9-BF; Tue, 27 Jul 2021 13:30:11 +0000
+Received: by outflank-mailman (input) for mailman id 161190;
+ Tue, 27 Jul 2021 13:30:10 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1m8N7N-0006rQ-NX
- for xen-devel@lists.xenproject.org; Tue, 27 Jul 2021 13:27:33 +0000
+ (envelope-from <iwj@xenproject.org>) id 1m8N9u-0008E3-51
+ for xen-devel@lists.xenproject.org; Tue, 27 Jul 2021 13:30:10 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1m8N7N-00064J-4O
- for xen-devel@lists.xenproject.org; Tue, 27 Jul 2021 13:27:33 +0000
+ (envelope-from <iwj@xenproject.org>) id 1m8N9u-000682-49
+ for xen-devel@lists.xenproject.org; Tue, 27 Jul 2021 13:30:10 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1m8N7N-0007lH-3V
- for xen-devel@lists.xenproject.org; Tue, 27 Jul 2021 13:27:33 +0000
+ (envelope-from <iwj@xenproject.org>) id 1m8N9u-0007xZ-3Q
+ for xen-devel@lists.xenproject.org; Tue, 27 Jul 2021 13:30:10 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1m8N7I-0002YO-GN; Tue, 27 Jul 2021 14:27:28 +0100
+ id 1m8N9p-0002ZW-H4; Tue, 27 Jul 2021 14:30:05 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,42 +57,64 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=Qh308XA4oQeCTo6wf1iuCob/cAw84HNdX6QGqkAgNAM=; b=XV6YhTTOBLAL48vbZj2n374xEI
-	V25ZXIsonhKgQXt0subrqHqLagTvHIE9x6PcsBFJvkCfyEsIrdC+CVsHHWDZcYQ659PGtcsTjS+X8
-	UlvfBuzImCX6vWfuavWHtZo3fgDSB6gT3iS8Q910FgCBbuGYBzv4pc1Iq3K5epUYugRs=;
+	bh=d8C0ZlsJ9NWx1TZfi3koiNLXlaW2f/feWGO/stqtA78=; b=P1gsqcF8V5G4mLTCq0MJ0/klwG
+	vAMvaDPYLgFq59y+4xjijn0tPX7fIzIKU2Okj6x3xfOUeZRWdKzTGG8xy/W1v8FDvrcSyHKNS7k9Q
+	z++5Cv7MyE4YrfKvNTzEUed0x8d0CpBpqPZNNZkXP/DnxeDt144noffQ2kXUHS5/g52g=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24832.2496.323844.216236@mariner.uk.xensource.com>
-Date: Tue, 27 Jul 2021 14:27:28 +0100
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: Alan Robinson <Alan.Robinson@fujitsu.com>,
+Message-ID: <24832.2653.349970.515704@mariner.uk.xensource.com>
+Date: Tue, 27 Jul 2021 14:30:05 +0100
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Scott Davis <scottwd@gmail.com>,
     <xen-devel@lists.xenproject.org>,
-    "Wei  Liu" <wl@xen.org>,
-    Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] tools/libxl: add missing blank in message
-In-Reply-To: <YP/dW2trNx1camFQ@perard>
-References: <20210727074703.19865-1-Alan.Robinson@fujitsu.com>
-	<YP/dW2trNx1camFQ@perard>
+    Scott Davis <scott.davis@starlab.io>,
+    Wei Liu <wl@xen.org>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Nick Rosbrook <rosbrookn@ainfosec.com>,
+    Anthony PERARD <anthony.perard@citrix.com>,
+    Juergen  Gross <jgross@suse.com>,
+    Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+    "Daniel P .  Smith" <dpsmith@apertussolutions.com>
+Subject: Re: [XEN PATCH] tools/xl: Add device_model_stubdomain_init_seclabel
+ option to xl.cfg
+In-Reply-To: <dfc8bc88-ccab-bc6b-704d-c8ef95182311@citrix.com>
+References: <8ee22fab0731347dd7f998c5f336eac804785c28.1627014699.git.scott.davis@starlab.io>
+	<dfc8bc88-ccab-bc6b-704d-c8ef95182311@citrix.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Anthony PERARD writes ("Re: [PATCH v2] tools/libxl: add missing blank in message"):
-> On Tue, Jul 27, 2021 at 09:47:03AM +0200, Alan Robinson wrote:
-> > Add missing blank giving "an emulation" instead of "anemulation"
-> > while making the text a single source line.
-> > 
-> > Signed-off-by: Alan Robinson <alan.robinson@fujitsu.com>
-> > ---
-> > 
-> > Changed since v1:
-> >   * text as as single line, requested by Juergen
-> > 
+Andrew Cooper writes ("Re: [XEN PATCH] tools/xl: Add device_model_stubdomain_init_seclabel option to xl.cfg"):
+> On 23/07/2021 05:47, Scott Davis wrote:
+...
+> >          ret = libxl_flask_context_to_sid(ctx, s, strlen(s),
+> >                                           &d_config->b_info.device_model_ssidref);
+> > +        if (ret) {
+> > +            if (errno == ENOSYS) {
+> > +                LOGD(WARN, domid,
+> > +                     "XSM Disabled: device_model_stubdomain_init_seclabel not supported");
+> > +                ret = 0;
 > 
-> Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+> Surely this wants to be a hard error?
+> 
+> Not specifying a label is one thing, but specifying a label and having
+> it not take effect because code was compiled out of the hypervisor
+> sounds like a security hole.
+> 
+> I see this is a pattern copied from elsewhere, but it seems very short
+> signed.
 
-Oh, didn't spot this in my earlier reply.  Thanks everyone, I will
-dequeue the previous one and queue this instead.
+I wonder if this is to try to make it possible to boot a system whose
+config specifies XSM labels but with XSM disabled.
 
+Marek, or someone, can you advise ?
+
+My initial thoughts are to agree with Andrew that ignoring this error
+seems to me to be a bad plan, but maybe there is a good reason.
+
+If we do want to improve this, maybe we need to update all the
+corresponding call sites.
+
+Thanks,
 Ian.
 
