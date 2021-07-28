@@ -2,48 +2,49 @@ Return-Path: <SRS0=WCSt=MU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E335DC4320E
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Jul 2021 14:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DE2DC43214
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Jul 2021 14:53:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 87B536101C
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Jul 2021 14:53:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 87B536101C
+	by mail.kernel.org (Postfix) with ESMTPS id D76776101B
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Jul 2021 14:53:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D76776101B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.161582.296574 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.161588.296622 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m8kvk-0002WD-4f; Wed, 28 Jul 2021 14:53:08 +0000
+	id 1m8kw2-0003t1-EV; Wed, 28 Jul 2021 14:53:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 161582.296574; Wed, 28 Jul 2021 14:53:08 +0000
+Received: by outflank-mailman (output) from mailman id 161588.296622; Wed, 28 Jul 2021 14:53:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m8kvk-0002W6-0j; Wed, 28 Jul 2021 14:53:08 +0000
-Received: by outflank-mailman (input) for mailman id 161582;
- Wed, 28 Jul 2021 14:53:06 +0000
+	id 1m8kw2-0003sq-Ap; Wed, 28 Jul 2021 14:53:26 +0000
+Received: by outflank-mailman (input) for mailman id 161588;
+ Wed, 28 Jul 2021 14:53:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=si+Y=MU=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1m8kvh-0002W0-Un
- for xen-devel@lists.xenproject.org; Wed, 28 Jul 2021 14:53:06 +0000
-Received: from mail-pj1-x102b.google.com (unknown [2607:f8b0:4864:20::102b])
+ id 1m8kw1-0002W0-P8
+ for xen-devel@lists.xenproject.org; Wed, 28 Jul 2021 14:53:25 +0000
+Received: from mail-pl1-x62a.google.com (unknown [2607:f8b0:4864:20::62a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0f995a1b-686a-4ead-afdc-1b88bd9879ba;
- Wed, 28 Jul 2021 14:53:04 +0000 (UTC)
-Received: by mail-pj1-x102b.google.com with SMTP id m1so5540766pjv.2
- for <xen-devel@lists.xenproject.org>; Wed, 28 Jul 2021 07:53:04 -0700 (PDT)
+ id 1221c58a-84a1-44a0-913d-d0033ac9bb2a;
+ Wed, 28 Jul 2021 14:53:17 +0000 (UTC)
+Received: by mail-pl1-x62a.google.com with SMTP id q2so2966678plr.11
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Jul 2021 07:53:17 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:0:3823:141e:6d51:f0ad])
- by smtp.gmail.com with ESMTPSA id n134sm277558pfd.89.2021.07.28.07.53.02
+ by smtp.gmail.com with ESMTPSA id n134sm277558pfd.89.2021.07.28.07.53.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Jul 2021 07:53:03 -0700 (PDT)
+ Wed, 28 Jul 2021 07:53:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f995a1b-686a-4ead-afdc-1b88bd9879ba
+X-Inumbo-ID: 1221c58a-84a1-44a0-913d-d0033ac9bb2a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Dw5WYuI9KVHFCJFCuZejwMnhkTgwwA05j2VLkdgyjhM=;
-        b=p8qM8rC90F/SM+apT/EKASeB6fk585n2JEbifixZyOxlq6Ktg1+eiu4rOMbpMYscY4
-         JDfzCVUj9P+r/SbSk8+43y67Xs+hltMLq0r8e1vxWdiJYA32QLDKYaF7utDPLO8dLfdF
-         l4v8OvMGbDTrSVvXSTCaVk15GCPLEQmwD09MewR60DSKGnLNjv+/+EnweU32/41Fs86F
-         0L1ZWMlpQppSV+tmLg7d76sQrzEVzXrxEo4o6XYH2JXSmSe4szqvA/msBGK3U2Gnbyyg
-         uh7t8h18JFBAPOUiE8jKhEBQHww4hFERe9e7SJLCaJq3eu3vAeflxbBbkXxSHBhPLqqJ
-         zymQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=+XJfA3AqCHkXuREWq5JYX1SJ1GS8dmwfVs7cs/uDyzo=;
+        b=JTfxH2MI6lr3vhghm+bYn1lDtWC6S40YgGpd2n5ZBE0WXJ57nPRp/vMeCnq6SmO90h
+         UPiRb39uM4iMAgW0slMgb6ATsLC4Z0lW9pf+AZc7pl5WJGMDawbbzgXKBt1Z+GuOXtly
+         9TYhzeKXWg55tjzDSrNqnVlbyUVgZ1VhgspLUJ3MDp7VmLIaFpFkVzlACYJoXgx4h9W9
+         y5VivpznJ4FNs2S4rqNSmRUG+RlcTHOQjC6dLg1qrzPm0TcGvPf/VqvCVComHCJhCA2P
+         7AXzP0K57z4DE458hjOtv6x4NMiUz3iK84iyApsE6NxjF0AupgOoBJTCCu7r53H4pSie
+         WfpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Dw5WYuI9KVHFCJFCuZejwMnhkTgwwA05j2VLkdgyjhM=;
-        b=JflEA4dUuIIm/7VQrbNJzzUsHWH5grLnl9sho9cLJpqtmbR7zyy/lDtUJmb/W4ecUd
-         0EKINDerIgvnADX3Buw827SJpWco1+zL/z138IKe7OZitJohHtFeLxtk/UJx66dUrCde
-         AoguXa/pq7ocUWQ98tJSQJKmHnuLrlbcYNldnAw6Cwk7+7CDe3h/RkDmBj4kflc6esOo
-         y/AWmR2pPDSFAgOtZfqD34iUt2yu7XrxNDBdWINYYve1TMoBT+Rck7UPWKzzlJI88E0N
-         BXyjUM9E+/2JZM/D1oroROoUsRpyX0WWAjz0KiRmYcy6nXVpFXS79fw1RwHJnHuTfS4l
-         htLA==
-X-Gm-Message-State: AOAM5322XVrJf90S8bgWpkTwDYq9watNn6V0lFLa0qeWt04SO8AtdALO
-	/hKCfMxNxYWMWmBuZdN6J8o=
-X-Google-Smtp-Source: ABdhPJyvKNqJV0d7lhBz81EV8gx+LUMnHngVQwyGZ1LUs86TzJ1AZOB/8lE8YF+OwPlhBwTvVwzTSQ==
-X-Received: by 2002:a62:798e:0:b029:327:6d4a:c4db with SMTP id u136-20020a62798e0000b02903276d4ac4dbmr203576pfc.50.1627483984118;
-        Wed, 28 Jul 2021 07:53:04 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=+XJfA3AqCHkXuREWq5JYX1SJ1GS8dmwfVs7cs/uDyzo=;
+        b=GQiN3wbkiDDRL4G7/YmIIdyY4veaczrDS8I4DTDbCWdgsvJDeh3pr7um+KNUL8mm4G
+         zju7WnWuLMDSDzGgtWzp1tFoUoVOAPe8+HoCXyOeqt/97C7xStJ+Wx7GQSnYZ1bjeyaB
+         iiyY1jicYH8bizBlXLYukKYRRGVkGvCGTw/5e5TQBIw1Wd6hyAm5YSniZCORxMoi22Ql
+         +a2PuIqlK4mlAD6TkuTxUfr+Mxj5SNgo6bsPIxFaSgHD1iRwAgbQJoRDMvxsUSIoK9N8
+         To6h3C9xClwOVfueRgQmxCiXV8Gpd/znJkWfvIlZwPsnuVoFqTi+XyckV8w1AwJ+/3GJ
+         N2TA==
+X-Gm-Message-State: AOAM532PgkrEoK81roj8QYnhE5fjHAiXhOtQJSpQs+HSxdeqL0vXFmzg
+	ySYtMS8kidbv2qmfwGrEfc8=
+X-Google-Smtp-Source: ABdhPJz4j/vsLQnZny1GE3WB7JJRgcpBrn921B99u5//TBJ+oOZxL5FLeGsOUc3yuQEVykF8bbeFJQ==
+X-Received: by 2002:a65:654c:: with SMTP id a12mr224730pgw.118.1627483996980;
+        Wed, 28 Jul 2021 07:53:16 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -138,112 +139,145 @@ Cc: iommu@lists.linux-foundation.org,
 	netdev@vger.kernel.org,
 	vkuznets@redhat.com,
 	anparri@microsoft.com
-Subject: [PATCH 00/13] x86/Hyper-V: Add Hyper-V Isolation VM support
-Date: Wed, 28 Jul 2021 10:52:15 -0400
-Message-Id: <20210728145232.285861-1-ltykernel@gmail.com>
+Subject: [PATCH 04/13] HV: Mark vmbus ring buffer visible to host in Isolation VM
+Date: Wed, 28 Jul 2021 10:52:19 -0400
+Message-Id: <20210728145232.285861-5-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210728145232.285861-1-ltykernel@gmail.com>
+References: <20210728145232.285861-1-ltykernel@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
+Mark vmbus ring buffer visible with set_memory_decrypted() when
+establish gpadl handle.
 
-Hyper-V provides two kinds of Isolation VMs. VBS(Virtualization-based
-security) and AMD SEV-SNP unenlightened Isolation VMs. This patchset
-is to add support for these Isolation VM support in Linux.
+Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
+---
+ drivers/hv/channel.c   | 38 ++++++++++++++++++++++++++++++++++++--
+ include/linux/hyperv.h | 10 ++++++++++
+ 2 files changed, 46 insertions(+), 2 deletions(-)
 
-The memory of these vms are encrypted and host can't access guest
-memory directly. Hyper-V provides new host visibility hvcall and
-the guest needs to call new hvcall to mark memory visible to host
-before sharing memory with host. For security, all network/storage
-stack memory should not be shared with host and so there is bounce
-buffer requests.
-
-Vmbus channel ring buffer already plays bounce buffer role because
-all data from/to host needs to copy from/to between the ring buffer
-and IO stack memory. So mark vmbus channel ring buffer visible.
-
-There are two exceptions - packets sent by vmbus_sendpacket_
-pagebuffer() and vmbus_sendpacket_mpb_desc(). These packets
-contains IO stack memory address and host will access these memory.
-So add allocation bounce buffer support in vmbus for these packets.
-
-For SNP isolation VM, guest needs to access the shared memory via
-extra address space which is specified by Hyper-V CPUID HYPERV_CPUID_
-ISOLATION_CONFIG. The access physical address of the shared memory
-should be bounce buffer memory GPA plus with shared_gpa_boundary
-reported by CPUID.
-
-Change sicne RFC V4:
-       - Introduce dma map decrypted function to remap bounce buffer
-       	 and provide dma map decrypted ops for platform to hook callback.	 
-       - Split swiotlb and dma map decrypted change into two patches
-       - Replace vstart with vaddr in swiotlb changes.
-
-Change since RFC v3:
-       - Add interface set_memory_decrypted_map() to decrypt memory and
-         map bounce buffer in extra address space 
-       - Remove swiotlb remap function and store the remap address
-         returned by set_memory_decrypted_map() in swiotlb mem data structure.
-       - Introduce hv_set_mem_enc() to make code more readable in the __set_memory_enc_dec().
-
-Change since RFC v2:
-       - Remove not UIO driver in Isolation VM patch
-       - Use vmap_pfn() to replace ioremap_page_range function in
-       order to avoid exposing symbol ioremap_page_range() and
-       ioremap_page_range()
-       - Call hv set mem host visibility hvcall in set_memory_encrypted/decrypted()
-       - Enable swiotlb force mode instead of adding Hyper-V dma map/unmap hook
-       - Fix code style
-
-
-Tianyu Lan (13):
-  x86/HV: Initialize GHCB page in Isolation VM
-  x86/HV: Initialize shared memory boundary in the Isolation VM.
-  x86/HV: Add new hvcall guest address host visibility support
-  HV: Mark vmbus ring buffer visible to host in Isolation VM
-  HV: Add Write/Read MSR registers via ghcb page
-  HV: Add ghcb hvcall support for SNP VM
-  HV/Vmbus: Add SNP support for VMbus channel initiate message
-  HV/Vmbus: Initialize VMbus ring buffer for Isolation VM
-  DMA: Add dma_map_decrypted/dma_unmap_encrypted() function
-  x86/Swiotlb: Add Swiotlb bounce buffer remap function for HV IVM
-  HV/IOMMU: Enable swiotlb bounce buffer for Isolation VM
-  HV/Netvsc: Add Isolation VM support for netvsc driver
-  HV/Storvsc: Add Isolation VM support for storvsc driver
-
- arch/x86/hyperv/Makefile           |   2 +-
- arch/x86/hyperv/hv_init.c          |  87 +++++++--
- arch/x86/hyperv/ivm.c              | 296 +++++++++++++++++++++++++++++
- arch/x86/include/asm/hyperv-tlfs.h |  18 ++
- arch/x86/include/asm/mshyperv.h    |  86 ++++++++-
- arch/x86/include/asm/sev.h         |   4 +
- arch/x86/kernel/cpu/mshyperv.c     |   5 +
- arch/x86/kernel/sev-shared.c       |  21 +-
- arch/x86/mm/pat/set_memory.c       |   6 +-
- arch/x86/xen/pci-swiotlb-xen.c     |   3 +-
- drivers/hv/Kconfig                 |   1 +
- drivers/hv/channel.c               |  48 ++++-
- drivers/hv/connection.c            |  71 ++++++-
- drivers/hv/hv.c                    | 129 +++++++++----
- drivers/hv/hyperv_vmbus.h          |   3 +
- drivers/hv/ring_buffer.c           |  84 ++++++--
- drivers/hv/vmbus_drv.c             |   3 +
- drivers/iommu/hyperv-iommu.c       |  65 +++++++
- drivers/net/hyperv/hyperv_net.h    |   6 +
- drivers/net/hyperv/netvsc.c        | 144 +++++++++++++-
- drivers/net/hyperv/rndis_filter.c  |   2 +
- drivers/scsi/storvsc_drv.c         |  68 ++++++-
- include/asm-generic/hyperv-tlfs.h  |   1 +
- include/asm-generic/mshyperv.h     |  53 +++++-
- include/linux/dma-map-ops.h        |   9 +
- include/linux/hyperv.h             |  16 ++
- include/linux/swiotlb.h            |   4 +
- kernel/dma/mapping.c               |  22 +++
- kernel/dma/swiotlb.c               |  11 +-
- 29 files changed, 1166 insertions(+), 102 deletions(-)
- create mode 100644 arch/x86/hyperv/ivm.c
-
+diff --git a/drivers/hv/channel.c b/drivers/hv/channel.c
+index f3761c73b074..01048bb07082 100644
+--- a/drivers/hv/channel.c
++++ b/drivers/hv/channel.c
+@@ -17,6 +17,7 @@
+ #include <linux/hyperv.h>
+ #include <linux/uio.h>
+ #include <linux/interrupt.h>
++#include <linux/set_memory.h>
+ #include <asm/page.h>
+ #include <asm/mshyperv.h>
+ 
+@@ -465,7 +466,7 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
+ 	struct list_head *curr;
+ 	u32 next_gpadl_handle;
+ 	unsigned long flags;
+-	int ret = 0;
++	int ret = 0, index;
+ 
+ 	next_gpadl_handle =
+ 		(atomic_inc_return(&vmbus_connection.next_gpadl_handle) - 1);
+@@ -474,6 +475,13 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
+ 	if (ret)
+ 		return ret;
+ 
++	ret = set_memory_decrypted((unsigned long)kbuffer,
++				   HVPFN_UP(size));
++	if (ret) {
++		pr_warn("Failed to set host visibility.\n");
++		return ret;
++	}
++
+ 	init_completion(&msginfo->waitevent);
+ 	msginfo->waiting_channel = channel;
+ 
+@@ -539,6 +547,15 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
+ 	/* At this point, we received the gpadl created msg */
+ 	*gpadl_handle = gpadlmsg->gpadl;
+ 
++	if (type == HV_GPADL_BUFFER)
++		index = 0;
++	else
++		index = channel->gpadl_range[1].gpadlhandle ? 2 : 1;
++
++	channel->gpadl_range[index].size = size;
++	channel->gpadl_range[index].buffer = kbuffer;
++	channel->gpadl_range[index].gpadlhandle = *gpadl_handle;
++
+ cleanup:
+ 	spin_lock_irqsave(&vmbus_connection.channelmsg_lock, flags);
+ 	list_del(&msginfo->msglistentry);
+@@ -549,6 +566,11 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
+ 	}
+ 
+ 	kfree(msginfo);
++
++	if (ret)
++		set_memory_encrypted((unsigned long)kbuffer,
++				     HVPFN_UP(size));
++
+ 	return ret;
+ }
+ 
+@@ -811,7 +833,7 @@ int vmbus_teardown_gpadl(struct vmbus_channel *channel, u32 gpadl_handle)
+ 	struct vmbus_channel_gpadl_teardown *msg;
+ 	struct vmbus_channel_msginfo *info;
+ 	unsigned long flags;
+-	int ret;
++	int ret, i;
+ 
+ 	info = kzalloc(sizeof(*info) +
+ 		       sizeof(struct vmbus_channel_gpadl_teardown), GFP_KERNEL);
+@@ -859,6 +881,18 @@ int vmbus_teardown_gpadl(struct vmbus_channel *channel, u32 gpadl_handle)
+ 	spin_unlock_irqrestore(&vmbus_connection.channelmsg_lock, flags);
+ 
+ 	kfree(info);
++
++	/* Find gpadl buffer virtual address and size. */
++	for (i = 0; i < VMBUS_GPADL_RANGE_COUNT; i++)
++		if (channel->gpadl_range[i].gpadlhandle == gpadl_handle)
++			break;
++
++	if (set_memory_encrypted((unsigned long)channel->gpadl_range[i].buffer,
++			HVPFN_UP(channel->gpadl_range[i].size)))
++		pr_warn("Fail to set mem host visibility.\n");
++
++	channel->gpadl_range[i].gpadlhandle = 0;
++
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(vmbus_teardown_gpadl);
+diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
+index 2e859d2f9609..06eccaba10c5 100644
+--- a/include/linux/hyperv.h
++++ b/include/linux/hyperv.h
+@@ -809,6 +809,14 @@ struct vmbus_device {
+ 
+ #define VMBUS_DEFAULT_MAX_PKT_SIZE 4096
+ 
++struct vmbus_gpadl_range {
++	u32 gpadlhandle;
++	u32 size;
++	void *buffer;
++};
++
++#define VMBUS_GPADL_RANGE_COUNT		3
++
+ struct vmbus_channel {
+ 	struct list_head listentry;
+ 
+@@ -829,6 +837,8 @@ struct vmbus_channel {
+ 	struct completion rescind_event;
+ 
+ 	u32 ringbuffer_gpadlhandle;
++	/* GPADL_RING and Send/Receive GPADL_BUFFER. */
++	struct vmbus_gpadl_range gpadl_range[VMBUS_GPADL_RANGE_COUNT];
+ 
+ 	/* Allocated memory for ring buffer */
+ 	struct page *ringbuffer_page;
 -- 
 2.25.1
 
