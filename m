@@ -5,45 +5,46 @@ X-Spam-Level:
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4747BC25AEA
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 20:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEBD9C43216
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 20:16:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16B9261042
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 20:16:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 16B9261042
+	by mail.kernel.org (Postfix) with ESMTPS id 8996F60F42
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 20:16:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8996F60F42
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=deltatee.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.162057.297427 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.162051.297409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m9CSB-0002d2-8U; Thu, 29 Jul 2021 20:16:27 +0000
+	id 1m9CS7-0001c0-0q; Thu, 29 Jul 2021 20:16:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 162057.297427; Thu, 29 Jul 2021 20:16:27 +0000
+Received: by outflank-mailman (output) from mailman id 162051.297409; Thu, 29 Jul 2021 20:16:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m9CSB-0002cg-2w; Thu, 29 Jul 2021 20:16:27 +0000
-Received: by outflank-mailman (input) for mailman id 162057;
- Thu, 29 Jul 2021 20:16:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m9CS6-0001b6-KI; Thu, 29 Jul 2021 20:16:22 +0000
+Received: by outflank-mailman (input) for mailman id 162051;
+ Thu, 29 Jul 2021 20:16:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yd/7=MV=deltatee.com=gunthorp@srs-us1.protection.inumbo.net>)
- id 1m9CS9-0005pZ-4r
- for xen-devel@lists.xenproject.org; Thu, 29 Jul 2021 20:16:25 +0000
+ id 1m9CS5-0005tB-Ew
+ for xen-devel@lists.xenproject.org; Thu, 29 Jul 2021 20:16:21 +0000
 Received: from ale.deltatee.com (unknown [204.191.154.188])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 810a0170-2a37-4797-8958-f143fb346775;
- Thu, 29 Jul 2021 20:15:58 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ca4a36e6-f0a9-11eb-986b-12813bfff9fa;
+ Thu, 29 Jul 2021 20:16:00 +0000 (UTC)
 Received: from cgy1-donard.priv.deltatee.com ([172.16.1.31])
  by ale.deltatee.com with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.92) (envelope-from <gunthorp@deltatee.com>)
- id 1m9CRd-0008VM-3g; Thu, 29 Jul 2021 14:15:54 -0600
+ id 1m9CRf-0008VO-Uv; Thu, 29 Jul 2021 14:15:56 -0600
 Received: from gunthorp by cgy1-donard.priv.deltatee.com with local (Exim 4.92)
  (envelope-from <gunthorp@deltatee.com>)
- id 1m9CRV-0001UB-QR; Thu, 29 Jul 2021 14:15:45 -0600
+ id 1m9CRV-0001Tz-5J; Thu, 29 Jul 2021 14:15:45 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,16 +56,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 810a0170-2a37-4797-8958-f143fb346775
+X-Inumbo-ID: ca4a36e6-f0a9-11eb-986b-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=deltatee.com; s=20200525; h=Subject:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:Cc:To:From:content-disposition;
-	bh=fB/z94v+Zqx6MpbGppBoixHLzAQycdh8k5f4rRFmrO0=; b=Q/yOit+wzn0WTLkgHijTX4TkhO
-	8+eoLaiFE1mafvZ/q4c2J8dgiHrEu7XfRLxOMtaCE2yip7zxl1sE/WyHaFGuCUlAsojHu3Yn1olhc
-	F6lgtyAVdYp7At6SrmssFkRyMNq/7Y8eEHEoLDTW3SL2JS9ATF53ewVI4ZZgHkeKeWzP92SM7FH34
-	eTt7FT+3sGYlOVErWUL9BBZ81w65udV5r7T9L+Bim7OvBQFE+Z+0NIEO7fp0Dm/dAqjBx6Z8qCOHg
-	eaGZJCGwxHsUZUd8FtgHTl3bnmB6UbQ2wz20VgRmFykYHYTmvncDFTw4bL71o7DIitalfyY4Hk8F1
-	0BLcIVQA==;
+	bh=wMwfB+QVxoWPoNbugW7oseZQ2FEaT6sisUumX/+txWI=; b=ID/pq4C2aTQp2oDNVLghKs/nGq
+	/MY9zdoBCMMHh3c6T8MI3nnmvuQUSVCPLIfeepLGK/XGDLYHuElnVIv6Ocren27qwsmRloi4lA+k2
+	jUcV8AabILTLu9D+RA2F7MkSwG5Ubtk18ez7B6ZLKOLIi15PTQt0AW//JuASu5bJBrfxoubREfwb4
+	rkH6cVX/Fb8WXCP7sWran6zWw0+yy0j3rZnkl5dse4GfPUQvjKpOJdAzSOnscdDZg/XYmOpir/Dz+
+	rl+LrmmUPA5AvuG0H48DCHNFEeG+t1CHY5QhUZBIg4JK21d2e2IZnjFfVArCF81YGjKAKWB52iX16
+	QcWfwO7g==;
 From: Logan Gunthorpe <logang@deltatee.com>
 To: linux-kernel@vger.kernel.org,
 	linux-alpha@vger.kernel.org,
@@ -83,62 +84,88 @@ Cc: Christoph Hellwig <hch@lst.de>,
 	Stephen Bates <sbates@raithlin.com>,
 	Martin Oliveira <martin.oliveira@eideticom.com>,
 	Logan Gunthorpe <logang@deltatee.com>,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	Helge Deller <deller@gmx.de>
-Date: Thu, 29 Jul 2021 14:15:34 -0600
-Message-Id: <20210729201539.5602-17-logang@deltatee.com>
+	Niklas Schnelle <schnelle@linux.ibm.com>,
+	Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@de.ibm.com>
+Date: Thu, 29 Jul 2021 14:15:30 -0600
+Message-Id: <20210729201539.5602-13-logang@deltatee.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20210729201539.5602-1-logang@deltatee.com>
 References: <20210729201539.5602-1-logang@deltatee.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 172.16.1.31
-X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, James.Bottomley@HansenPartnership.com, deller@gmx.de
+X-SA-Exim-Rcpt-To: linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, iommu@lists.linux-foundation.org, linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org, linux-ia64@vger.kernel.org, linux-mips@vger.kernel.org, linux-s390@vger.kernel.org, sparclinux@vger.kernel.org, linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org, hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com, sbates@raithlin.com, martin.oliveira@eideticom.com, logang@deltatee.com, schnelle@linux.ibm.com, gerald.schaefer@linux.ibm.com, hca@linux.ibm.com, gor@linux.ibm.com, borntraeger@de.ibm.com
 X-SA-Exim-Mail-From: gunthorp@deltatee.com
-Subject: [PATCH v3 16/21] parisc: return error code from .map_sg() ops
+Subject: [PATCH v3 12/21] s390/pci: return error code from s390_dma_map_sg()
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
 
 From: Martin Oliveira <martin.oliveira@eideticom.com>
 
 The .map_sg() op now expects an error code instead of zero on failure.
-Return -EINVAL if the ioc cannot be obtained.
+
+So propagate the error from __s390_dma_map_sg() up. __s390_dma_map_sg()
+returns either -ENOMEM on allocation failure or -EINVAL which is
+the same as what's expected by dma_map_sgtable().
 
 Signed-off-by: Martin Oliveira <martin.oliveira@eideticom.com>
 Signed-off-by: Logan Gunthorpe <logang@deltatee.com>
-Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
-Cc: Helge Deller <deller@gmx.de>
+Acked-by: Niklas Schnelle <schnelle@linux.ibm.com>
+Cc: Gerald Schaefer <gerald.schaefer@linux.ibm.com>
+Cc: Heiko Carstens <hca@linux.ibm.com>
+Cc: Vasily Gorbik <gor@linux.ibm.com>
+Cc: Christian Borntraeger <borntraeger@de.ibm.com>
 ---
- drivers/parisc/ccio-dma.c  | 2 +-
- drivers/parisc/sba_iommu.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/s390/pci/pci_dma.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/parisc/ccio-dma.c b/drivers/parisc/ccio-dma.c
-index b5f9ee81a46c..452e72b7bd01 100644
---- a/drivers/parisc/ccio-dma.c
-+++ b/drivers/parisc/ccio-dma.c
-@@ -918,7 +918,7 @@ ccio_map_sg(struct device *dev, struct scatterlist *sglist, int nents,
- 	BUG_ON(!dev);
- 	ioc = GET_IOC(dev);
- 	if (!ioc)
--		return 0;
-+		return -EINVAL;
- 	
- 	DBG_RUN_SG("%s() START %d entries\n", __func__, nents);
+diff --git a/arch/s390/pci/pci_dma.c b/arch/s390/pci/pci_dma.c
+index ebc9a49523aa..c78b02012764 100644
+--- a/arch/s390/pci/pci_dma.c
++++ b/arch/s390/pci/pci_dma.c
+@@ -487,7 +487,7 @@ static int s390_dma_map_sg(struct device *dev, struct scatterlist *sg,
+ 	unsigned int max = dma_get_max_seg_size(dev);
+ 	unsigned int size = s->offset + s->length;
+ 	unsigned int offset = s->offset;
+-	int count = 0, i;
++	int count = 0, i, ret;
  
-diff --git a/drivers/parisc/sba_iommu.c b/drivers/parisc/sba_iommu.c
-index dce4cdf786cd..e60690d38d67 100644
---- a/drivers/parisc/sba_iommu.c
-+++ b/drivers/parisc/sba_iommu.c
-@@ -947,7 +947,7 @@ sba_map_sg(struct device *dev, struct scatterlist *sglist, int nents,
+ 	for (i = 1; i < nr_elements; i++) {
+ 		s = sg_next(s);
+@@ -497,8 +497,9 @@ static int s390_dma_map_sg(struct device *dev, struct scatterlist *sg,
  
- 	ioc = GET_IOC(dev);
- 	if (!ioc)
--		return 0;
-+		return -EINVAL;
+ 		if (s->offset || (size & ~PAGE_MASK) ||
+ 		    size + s->length > max) {
+-			if (__s390_dma_map_sg(dev, start, size,
+-					      &dma->dma_address, dir))
++			ret = __s390_dma_map_sg(dev, start, size,
++						&dma->dma_address, dir);
++			if (ret)
+ 				goto unmap;
  
- 	/* Fast path single entry scatterlists. */
- 	if (nents == 1) {
+ 			dma->dma_address += offset;
+@@ -511,7 +512,8 @@ static int s390_dma_map_sg(struct device *dev, struct scatterlist *sg,
+ 		}
+ 		size += s->length;
+ 	}
+-	if (__s390_dma_map_sg(dev, start, size, &dma->dma_address, dir))
++	ret = __s390_dma_map_sg(dev, start, size, &dma->dma_address, dir);
++	if (ret)
+ 		goto unmap;
+ 
+ 	dma->dma_address += offset;
+@@ -523,7 +525,7 @@ static int s390_dma_map_sg(struct device *dev, struct scatterlist *sg,
+ 		s390_dma_unmap_pages(dev, sg_dma_address(s), sg_dma_len(s),
+ 				     dir, attrs);
+ 
+-	return 0;
++	return ret;
+ }
+ 
+ static void s390_dma_unmap_sg(struct device *dev, struct scatterlist *sg,
 -- 
 2.20.1
 
