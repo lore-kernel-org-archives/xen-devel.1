@@ -2,48 +2,47 @@ Return-Path: <SRS0=/1jQ=MV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-15.4 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BB10C4338F
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 06:27:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56B21C4338F
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 09:34:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1479861042
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 06:27:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1479861042
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id F29C561052
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Jul 2021 09:34:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org F29C561052
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.161836.296992 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.161855.297025 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m8zVt-000832-1X; Thu, 29 Jul 2021 06:27:25 +0000
+	id 1m92R0-00088J-9I; Thu, 29 Jul 2021 09:34:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 161836.296992; Thu, 29 Jul 2021 06:27:25 +0000
+Received: by outflank-mailman (output) from mailman id 161855.297025; Thu, 29 Jul 2021 09:34:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m8zVs-00082v-Uj; Thu, 29 Jul 2021 06:27:24 +0000
-Received: by outflank-mailman (input) for mailman id 161836;
- Thu, 29 Jul 2021 06:27:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1m8zVr-00082V-3h; Thu, 29 Jul 2021 06:27:23 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1m8zVq-0000K4-T9; Thu, 29 Jul 2021 06:27:22 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1m8zVq-000363-Ku; Thu, 29 Jul 2021 06:27:22 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1m8zVq-00089f-KJ; Thu, 29 Jul 2021 06:27:22 +0000
+	id 1m92R0-00088C-5v; Thu, 29 Jul 2021 09:34:34 +0000
+Received: by outflank-mailman (input) for mailman id 161855;
+ Thu, 29 Jul 2021 09:34:33 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=wMqg=MV=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
+ id 1m92Qz-00087m-6n
+ for xen-devel@lists.xenproject.org; Thu, 29 Jul 2021 09:34:33 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 5c09e1f5-2ae8-4ebd-8d72-1d884e906c4a;
+ Thu, 29 Jul 2021 09:34:30 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 176281FB;
+ Thu, 29 Jul 2021 02:34:30 -0700 (PDT)
+Received: from [10.57.11.94] (unknown [10.57.11.94])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EA5073F73D;
+ Thu, 29 Jul 2021 02:34:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,76 +54,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=mXHzp2Aoy9anWEGFwnq2piW41MfpGwZEFOJN9BwM3x0=; b=JGVzl+LwGmXIGohftGYW251tKe
-	ssEAIFpmD0E+l5THXDx+JfvGU36Mvv0fr3TBFnMzbaGdSE1q7vqylHyp8hsY2xuuhAW79SAfrz5Iq
-	a0IKTdGXp74iuELTFa/D8aVPlTvJDzWiGuKuOt1tvGMISfmHEhN7om9P6O715ifxXNi0=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-164028-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 5c09e1f5-2ae8-4ebd-8d72-1d884e906c4a
+Subject: Re: [RFC PATCH] xen/arm: Replace vreg_emulate_{sysreg/cp}32 with
+ vreg_emulate_{sysreg/cp}
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, bertrand.marquis@arm.com
+References: <20210727095010.11103-1-michal.orzel@arm.com>
+ <57e5bc75-052a-1530-e983-4e52d1527861@xen.org>
+From: Michal Orzel <michal.orzel@arm.com>
+Message-ID: <fb35b5b6-96b7-7677-5ad0-9b2cd00dcca6@arm.com>
+Date: Thu, 29 Jul 2021 11:34:24 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Subject: [ovmf test] 164028: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=dc485c556d5f5db21debe8de3a45a7564aacbe24
-X-Osstest-Versions-That:
-    ovmf=ab796d3e2ab41bde3a0bdd932cdcd09fd641e00c
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 29 Jul 2021 06:27:22 +0000
+In-Reply-To: <57e5bc75-052a-1530-e983-4e52d1527861@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-flight 164028 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/164028/
+Hi Julien,
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 dc485c556d5f5db21debe8de3a45a7564aacbe24
-baseline version:
- ovmf                 ab796d3e2ab41bde3a0bdd932cdcd09fd641e00c
-
-Last test of basis   164025  2021-07-28 16:42:25 Z    0 days
-Testing same since   164028  2021-07-29 01:40:11 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Ard Biesheuvel <ardb+tianocore@kernel.org>
-  Brijesh Singh <brijesh.singh@amd.com>
-  Brijesh Singh via groups.io <brijesh.singh=amd.com@groups.io>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   ab796d3e2a..dc485c556d  dc485c556d5f5db21debe8de3a45a7564aacbe24 -> xen-tested-master
+On 28.07.2021 16:59, Julien Grall wrote:
+> Hi Michal,
+> 
+> On 27/07/2021 10:50, Michal Orzel wrote:
+>> According to ARMv8A architecture, AArch64 registers
+>> are 64bit wide even though in many cases the upper
+>> 32bit is reserved. Therefore there is no need for
+>> function vreg_emulate_sysreg32 on arm64.
+>>
+>> Ideally on arm64 there should be only one function
+>> vreg_emulate_sysreg(using register_t) or
+>> vreg_emulate_sysreg64(using uint64_t) but in the Xen code
+>> there is a lot of functions passed both to the
+>> vreg_emulate_cp* and vreg_emulate_sysreg*.
+>> This would require to duplicate them which is not
+>> a good solution.
+> 
+> I think you can drop vreg_emulate_sysreg64() completely. On arm64, register_t is an alias to uint64_t so you could interchangeably use the type in the callback.
+> 
+Yes, you are right.
+> For arm32, we would still need to keep vreg_emulate_cp64.
+> 
+>>
+>> The easiest/minimal solution to fix this issue is
+>> to replace vreg_emulate_{sysreg/cp}32 with
+>> vreg_emulate_{sysreg/cp}. The modifed functions
+>> are now taking function pointer:
+>> -typedef bool (*vreg_reg_fn_t)(struct cpu_user_regs *regs,
+>>                                register_t *r, bool read);
+>> instead of:
+>> -typedef bool (*vreg_reg32_fn_t)(struct cpu_user_regs *regs,
+>>                                  uint32_t *r, bool read);
+>>
+>> This change allows to properly use 64bit registers on arm64
+>> and in case of 32bit guest the cast is done by the hardware
+>> due to the 32bit registers being the lower part of 64bit ones.
+> 
+> The HW doesn't do any cast. From the Arm Arm (D1.19.1 in ARM DDI 0487F.c):
+> 
+> "Any modifications made to AArch32 System registers affects only those parts of those AArch64 registers that are
+> mapped to the AArch32 System registers. Bits[63:32] of AArch64 registers, where they are not mapped to AArch32
+> registers, are unchanged by AArch32 state execution."
+> 
+> The registers can be set by:
+>   * The toolstack (via XEN_DOMCTL_set_vcpucontext). We rely on the top bits to always be 0. Ideally, we should 0 it in vcpu_regs_user_to_hyp() just for safety.
+>   * The PSCI CPU ON call: They should always be 0.
+> 
+> For the rest of Xen, we expect that the top 32-bit will either be untouched or never be changed.
+> 
+>>
+>> Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+>> ---
+>> The reason for this change is to clean up the mess related to types.
+>> This patch achieves that but it does not reduce the code size.
+>> I'm not sure whether we want such change hence it is pushed as RFC.
+>> ---
+>>   xen/arch/arm/vcpreg.c      | 16 +++++++++++-----
+>>   xen/arch/arm/vtimer.c      | 18 +++++++++---------
+>>   xen/include/asm-arm/vreg.h | 14 +++++++-------
+>>   3 files changed, 27 insertions(+), 21 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
+>> index e3ce56d875..376a1ceee2 100644
+>> --- a/xen/arch/arm/vcpreg.c
+>> +++ b/xen/arch/arm/vcpreg.c
+>> @@ -57,9 +57,12 @@
+>>   #define WRITE_SYSREG_SZ(sz, val, sysreg...)  WRITE_SYSREG##sz(val, sysreg)
+>>   #endif
+>>   +#define type32_t register_t
+>> +#define type64_t uint64_t
+> 
+> Please use typedef rather than define for type. Also, please add a comment explaining why type32_t is defined as register_t.
+> 
+>> +
+>>   /* The name is passed from the upper macro to workaround macro expansion. */
+>>   #define TVM_REG(sz, func, reg...)                                           \
+>> -static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
+>> +static bool func(struct cpu_user_regs *regs, type##sz##_t *r, bool read)    \
+>>   {                                                                           \
+>>       struct vcpu *v = current;                                               \
+>>       bool cache_enabled = vcpu_has_cache_enabled(v);                         \
+>> @@ -83,7 +86,7 @@ static bool func(struct cpu_user_regs *regs, uint##sz##_t *r, bool read)    \
+>>     #else /* CONFIG_ARM_64 */
+>>   #define TVM_REG32_COMBINED(lowreg, hireg, xreg)                             \
+>> -static bool vreg_emulate_##xreg(struct cpu_user_regs *regs, uint32_t *r,    \
+>> +static bool vreg_emulate_##xreg(struct cpu_user_regs *regs, register_t *r,  \
+>>                                   bool read, bool hi)                         \
+>>   {                                                                           \
+>>       struct vcpu *v = current;                                               \
+>> @@ -108,13 +111,13 @@ static bool vreg_emulate_##xreg(struct cpu_user_regs *regs, uint32_t *r,    \
+>>       return true;                                                            \
+>>   }                                                                           \
+>>                                                                               \
+>> -static bool vreg_emulate_##lowreg(struct cpu_user_regs *regs, uint32_t *r,  \
+>> +static bool vreg_emulate_##lowreg(struct cpu_user_regs *regs, register_t *r,\
+>>                                     bool read)                                \
+>>   {                                                                           \
+>>       return vreg_emulate_##xreg(regs, r, read, false);                       \
+>>   }                                                                           \
+>>                                                                               \
+>> -static bool vreg_emulate_##hireg(struct cpu_user_regs *regs, uint32_t *r,   \
+>> +static bool vreg_emulate_##hireg(struct cpu_user_regs *regs, register_t *r, \
+>>                                    bool read)                                 \
+>>   {                                                                           \
+>>       return vreg_emulate_##xreg(regs, r, read, true);                        \
+>> @@ -154,13 +157,16 @@ TVM_REG32_COMBINED(MAIR0, MAIR1, MAIR_EL1)
+>>   TVM_REG32_COMBINED(AMAIR0, AMAIR1, AMAIR_EL1)
+>>   TVM_REG32(CONTEXTIDR, CONTEXTIDR_EL1)
+>>   +#define VREG_EMULATE_CP32(regs, hsr, fn)  vreg_emulate_cp(regs, hsr, fn)
+>> +#define VREG_EMULATE_CP64(regs, hsr, fn)  vreg_emulate_cp64(regs, hsr, fn)
+>> +
+>>   /* Macro to generate easily case for co-processor emulation. */
+>>   #define GENERATE_CASE(reg, sz)                                      \
+>>       case HSR_CPREG##sz(reg):                                        \
+>>       {                                                               \
+>>           bool res;                                                   \
+>>                                                                       \
+>> -        res = vreg_emulate_cp##sz(regs, hsr, vreg_emulate_##reg);   \
+>> +        res = VREG_EMULATE_CP##sz(regs, hsr, vreg_emulate_##reg);   \
+>>           ASSERT(res);                                                \
+>>           break;                                                      \
+>>       }
+>> diff --git a/xen/arch/arm/vtimer.c b/xen/arch/arm/vtimer.c
+>> index 167fc6127a..17b5649a05 100644
+>> --- a/xen/arch/arm/vtimer.c
+>> +++ b/xen/arch/arm/vtimer.c
+>> @@ -162,7 +162,7 @@ void virt_timer_restore(struct vcpu *v)
+>>       WRITE_SYSREG(v->arch.virt_timer.ctl, CNTV_CTL_EL0);
+>>   }
+>>   -static bool vtimer_cntp_ctl(struct cpu_user_regs *regs, uint32_t *r, bool read)
+>> +static bool vtimer_cntp_ctl(struct cpu_user_regs *regs, register_t *r, bool read)
+>>   {
+>>       struct vcpu *v = current;
+>>       s_time_t expires;
+>> @@ -176,7 +176,7 @@ static bool vtimer_cntp_ctl(struct cpu_user_regs *regs, uint32_t *r, bool read)
+>>       }
+>>       else
+>>       {
+>> -        uint32_t ctl = *r & ~CNTx_CTL_PENDING;
+>> +        register_t ctl = *r & ~CNTx_CTL_PENDING;
+> You will still end up to mask the top 32-bit because CTx_CTL_PENDING is an unsigned 32-bit. I think we should not touch them top 32-bit at all so CNTx_CTL_PENDING (and probably CNT_x_CTL_ENABLE) should be defined as 1UL << X.
+>
+Ok I will not modify the timer functions apart from changing the argument's type.
+I will modify CNTx_CTL_PENDING and CNT_x_CTL_ENABLE to be ul.
+>>           if ( ctl & CNTx_CTL_ENABLE )
+>>               ctl |= v->arch.phys_timer.ctl & CNTx_CTL_PENDING;
+>>           v->arch.phys_timer.ctl = ctl;
+>> @@ -197,7 +197,7 @@ static bool vtimer_cntp_ctl(struct cpu_user_regs *regs, uint32_t *r, bool read)
+>>       return true;
+>>   }
+>>   -static bool vtimer_cntp_tval(struct cpu_user_regs *regs, uint32_t *r,
+>> +static bool vtimer_cntp_tval(struct cpu_user_regs *regs, register_t *r,
+>>                                bool read)
+>>   {
+>>       struct vcpu *v = current;
+>> @@ -211,11 +211,11 @@ static bool vtimer_cntp_tval(struct cpu_user_regs *regs, uint32_t *r,
+>>         if ( read )
+>>       {
+>> -        *r = (uint32_t)((v->arch.phys_timer.cval - cntpct) & 0xffffffffull);
+>> +        *r = (register_t)((v->arch.phys_timer.cval - cntpct) & 0xffffffffull);
+> 
+> This is computing the TimerVal is held in the first 32-bit of the registers. So I think this should stick to (uint32_t) here.
+> 
+>>       }
+>>       else
+>>       {
+>> -        v->arch.phys_timer.cval = cntpct + (uint64_t)(int32_t)*r;
+>> +        v->arch.phys_timer.cval = cntpct + (uint64_t)(register_t)*r;
+> 
+> This is not quite the same as before. We were using the first 32-bit as a signed value. Now, you are using the full register as a unsigned value.
+> 
+>>           if ( v->arch.phys_timer.ctl & CNTx_CTL_ENABLE )
+>>           {
+>>               v->arch.phys_timer.ctl &= ~CNTx_CTL_PENDING;
+>> @@ -274,10 +274,10 @@ static bool vtimer_emulate_cp32(struct cpu_user_regs *regs, union hsr hsr)
+>>       switch ( hsr.bits & HSR_CP32_REGS_MASK )
+>>       {
+>>       case HSR_CPREG32(CNTP_CTL):
+>> -        return vreg_emulate_cp32(regs, hsr, vtimer_cntp_ctl);
+>> +        return vreg_emulate_cp(regs, hsr, vtimer_cntp_ctl);
+>>         case HSR_CPREG32(CNTP_TVAL):
+>> -        return vreg_emulate_cp32(regs, hsr, vtimer_cntp_tval);
+>> +        return vreg_emulate_cp(regs, hsr, vtimer_cntp_tval);
+>>         default:
+>>           return false;
+>> @@ -316,9 +316,9 @@ static bool vtimer_emulate_sysreg(struct cpu_user_regs *regs, union hsr hsr)
+>>       switch ( hsr.bits & HSR_SYSREG_REGS_MASK )
+>>       {
+>>       case HSR_SYSREG_CNTP_CTL_EL0:
+>> -        return vreg_emulate_sysreg32(regs, hsr, vtimer_cntp_ctl);
+>> +        return vreg_emulate_sysreg(regs, hsr, vtimer_cntp_ctl);
+>>       case HSR_SYSREG_CNTP_TVAL_EL0:
+>> -        return vreg_emulate_sysreg32(regs, hsr, vtimer_cntp_tval);
+>> +        return vreg_emulate_sysreg(regs, hsr, vtimer_cntp_tval);
+>>       case HSR_SYSREG_CNTP_CVAL_EL0:
+>>           return vreg_emulate_sysreg64(regs, hsr, vtimer_cntp_cval);
+>>   diff --git a/xen/include/asm-arm/vreg.h b/xen/include/asm-arm/vreg.h
+>> index 1253753833..cef55aabea 100644
+>> --- a/xen/include/asm-arm/vreg.h
+>> +++ b/xen/include/asm-arm/vreg.h
+>> @@ -4,13 +4,13 @@
+>>   #ifndef __ASM_ARM_VREG__
+>>   #define __ASM_ARM_VREG__
+>>   -typedef bool (*vreg_reg32_fn_t)(struct cpu_user_regs *regs, uint32_t *r,
+>> +typedef bool (*vreg_reg_fn_t)(struct cpu_user_regs *regs, register_t *r,
+>>                                      bool read);
+>>   typedef bool (*vreg_reg64_fn_t)(struct cpu_user_regs *regs, uint64_t *r,
+>>                                      bool read);
+>>   -static inline bool vreg_emulate_cp32(struct cpu_user_regs *regs, union hsr hsr,
+>> -                                     vreg_reg32_fn_t fn)
+>> +static inline bool vreg_emulate_cp(struct cpu_user_regs *regs, union hsr hsr,
+>> +                                     vreg_reg_fn_t fn)
+> 
+> The new name will add some confusion because now we have vreg_emulate_cp() (for 32-bit access) and vreg_emulate_c64() (for 64-bit access).
+> 
+> So I would rather keep the current naming.
+> 
+We can do like that:
+-on arm32 there will be vreg_emulate_cp32 with register_t and vreg_emulate_cp64.
+-on arm64 there will be only vreg_emulate_sysreg with register_t.
+Does it sound ok or do you want to drop this change completely?
+If it is ok I will push v2 without RFC tag. 
+>>   {
+>>       struct hsr_cp32 cp32 = hsr.cp32;
+>>       /*
+>> @@ -18,7 +18,7 @@ static inline bool vreg_emulate_cp32(struct cpu_user_regs *regs, union hsr hsr,
+>>        * implementation error in the emulation (such as not correctly
+>>        * setting r).
+>>        */
+>> -    uint32_t r = 0;
+>> +    register_t r = 0;
+>>       bool ret;
+>>         if ( !cp32.read )
+>> @@ -64,11 +64,11 @@ static inline bool vreg_emulate_cp64(struct cpu_user_regs *regs, union hsr hsr,
+>>   }
+>>     #ifdef CONFIG_ARM_64
+>> -static inline bool vreg_emulate_sysreg32(struct cpu_user_regs *regs, union hsr hsr,
+>> -                                         vreg_reg32_fn_t fn)
+>> +static inline bool vreg_emulate_sysreg(struct cpu_user_regs *regs, union hsr hsr,
+>> +                                         vreg_reg_fn_t fn)
+>>   {
+>>       struct hsr_sysreg sysreg = hsr.sysreg;
+>> -    uint32_t r = 0;
+>> +    register_t r = 0;
+>>       bool ret;
+>>         if ( !sysreg.read )
+>>
+> 
+> Cheers,
+> 
 
