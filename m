@@ -2,56 +2,47 @@ Return-Path: <SRS0=i/8b=MW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FAE5C4320E
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Jul 2021 12:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 497B7C4338F
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Jul 2021 12:29:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E049F6103B
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Jul 2021 12:27:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E049F6103B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 12EA361042
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Jul 2021 12:29:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 12EA361042
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.162516.298014 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.162537.298051 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m9RbS-0004Pl-AG; Fri, 30 Jul 2021 12:27:02 +0000
+	id 1m9Rdt-0006FH-BJ; Fri, 30 Jul 2021 12:29:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 162516.298014; Fri, 30 Jul 2021 12:27:02 +0000
+Received: by outflank-mailman (output) from mailman id 162537.298051; Fri, 30 Jul 2021 12:29:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1m9RbS-0004Pe-7F; Fri, 30 Jul 2021 12:27:02 +0000
-Received: by outflank-mailman (input) for mailman id 162516;
- Fri, 30 Jul 2021 12:27:00 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1m9Rdt-0006FA-7I; Fri, 30 Jul 2021 12:29:33 +0000
+Received: by outflank-mailman (input) for mailman id 162537;
+ Fri, 30 Jul 2021 12:29:31 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=MkAV=MW=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1m9RbQ-0004PS-A6
- for xen-devel@lists.xenproject.org; Fri, 30 Jul 2021 12:27:00 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2157da37-5f3a-42a3-a71f-ebcc43af65db;
- Fri, 30 Jul 2021 12:26:59 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9DC05222E3;
- Fri, 30 Jul 2021 12:26:58 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 701DC137FD;
- Fri, 30 Jul 2021 12:26:58 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id wK0nGhLwA2FOVgAAGKfGzw
- (envelope-from <jgross@suse.com>); Fri, 30 Jul 2021 12:26:58 +0000
+ (envelope-from <iwj@xenproject.org>) id 1m9Rdr-0006Et-QP
+ for xen-devel@lists.xenproject.org; Fri, 30 Jul 2021 12:29:31 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1m9Rdr-0002sD-Ot
+ for xen-devel@lists.xenproject.org; Fri, 30 Jul 2021 12:29:31 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1m9Rdr-0003tX-Nv
+ for xen-devel@lists.xenproject.org; Fri, 30 Jul 2021 12:29:31 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1m9Rdn-000649-3N; Fri, 30 Jul 2021 13:29:27 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,99 +54,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2157da37-5f3a-42a3-a71f-ebcc43af65db
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1627648018; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=STW5H69fSsC13fe3Jx/wYhcL86JL/EDIbDX/LWOUm7g=;
-	b=Sz7QOrKjl7GYHTYcZ1GmQTkGmt99HIvgUfohUD9TlfBIkxgx9KB5kdVhoqRtssHmGyh72X
-	EMZs87M8SsE3MQ4i4nmW34ipSHm1QzWHbpOEFAyfMVxTodG2rxJupGKsdSrVlHB2c16Ne8
-	0Qcipzn0ZUowchx3AWS+OojHVkhkFcA=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 1/2] tools/xenstore: set oom score for xenstore daemon on Linux
-Date: Fri, 30 Jul 2021 14:26:42 +0200
-Message-Id: <20210730122643.2043-2-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210730122643.2043-1-jgross@suse.com>
-References: <20210730122643.2043-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=wOEIBWg82PBgSQJAoaCRwCgbaQ7dfZ6sa50uzvvEC2I=; b=V+L1m3Q5qmma9l6i/Xh6t2nQV9
+	+gokR6vO9TG9IUV4MKFvg4B7p5Xe2DFGd/0InFL+5Bv+taB99OlDZIVQvrVma5PpiqdeHdoreorGa
+	k52UYV8qWNbhxT8fU9RT3a30o2plv78qE2Qc+LdY7iL5ViaGrbhekoUf+I/xY5TsOxA4=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 8bit
+Message-ID: <24835.61606.911288.447053@mariner.uk.xensource.com>
+Date: Fri, 30 Jul 2021 13:29:26 +0100
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Jane Malalane <jane.malalane@citrix.com>,
+    Xen-devel <xen-devel@lists.xenproject.org>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Jan Beulich <jbeulich@suse.com>,
+    Julien Grall <julien@xen.org>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] xen/lib: Fix strcmp() and strncmp()
+In-Reply-To: <f5ef0640-4975-1306-0a40-d3fd7cbf52d3@citrix.com>
+References: <20210727184715.17699-1-jane.malalane@citrix.com>
+	<f5ef0640-4975-1306-0a40-d3fd7cbf52d3@citrix.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Xenstored is absolutely mandatory for a Xen host and it can't be
-restarted, so being killed by OOM-killer in case of memory shortage is
-to be avoided.
+Andrew Cooper writes ("Re: [PATCH] xen/lib: Fix strcmp() and strncmp()"):
+> On 27/07/2021 19:47, Jane Malalane wrote:
+> > -	register signed char __res;
+> > +	unsigned char *csu = (unsigned char *)cs;
+> > +	unsigned char *ctu = (unsigned char *)ct;
+> 
+> So there was actually one final thing, but it is holiday season, hence
+> the lack of replies from others.
 
-Set /proc/$pid/oom_score_adj (if available) per default to -500 (this
-translates to 50% of dom0 memory size) in order to allow xenstored to
-use large amounts of memory without being killed.
+Oh.
 
-The percentage of dom0 memory above which the oom killer is allowed to
-kill xenstored can be set via XENSTORED_OOM_MEM_THRESHOLD in
-xencommons.
+> We should not be casting away const-ness on the pointers, because that
+> is undefined behaviour and compilers are starting to warn about it. 
 
-Make sure the pid file isn't a left-over from a previous run delete it
-before starting xenstored.
+I don't think casting away const is UB.  Perhaps you (and perhaps
+others) are seeing this in 6.3.2.3(2):
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- set oom score from launch script (Julien Grall)
-- split off open file descriptor limit setting (Julien Grall)
-V3:
-- make oom killer threshold configurable (Julien Grall)
----
- tools/hotplug/Linux/init.d/sysconfig.xencommons.in | 7 +++++++
- tools/hotplug/Linux/launch-xenstore.in             | 6 ++++++
- 2 files changed, 13 insertions(+)
+ | For any qualifier q, a pointer to a non-q-qualified type may be
+ | converted to a pointer to the q-qualified version of the type; the
+ | values stored in the original and converted pointers shall compare
+ | equal.p
 
-diff --git a/tools/hotplug/Linux/init.d/sysconfig.xencommons.in b/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
-index 00cf7f91d4..5ad4fe0818 100644
---- a/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
-+++ b/tools/hotplug/Linux/init.d/sysconfig.xencommons.in
-@@ -48,6 +48,13 @@ XENSTORED_ARGS=
- # Only evaluated if XENSTORETYPE is "daemon".
- #XENSTORED_TRACE=[yes|on|1]
- 
-+## Type: integer
-+## Default: 50
-+#
-+# Percentage of dom0 memory size the xenstore daemon can use before the
-+# OOM killer is allowed to kill it.
-+#XENSTORED_OOM_MEM_THRESHOLD=50
-+
- ## Type: string
- ## Default: @LIBEXEC@/boot/xenstore-stubdom.gz
- #
-diff --git a/tools/hotplug/Linux/launch-xenstore.in b/tools/hotplug/Linux/launch-xenstore.in
-index 019f9d6f4d..1747c96065 100644
---- a/tools/hotplug/Linux/launch-xenstore.in
-+++ b/tools/hotplug/Linux/launch-xenstore.in
-@@ -59,11 +59,17 @@ test -f @CONFIG_DIR@/@CONFIG_LEAF_DIR@/xencommons && . @CONFIG_DIR@/@CONFIG_LEAF
- 		echo "No xenstored found"
- 		exit 1
- 	}
-+	[ -z "$XENSTORED_OOM_MEM_THRESHOLD" ] || XENSTORED_OOM_MEM_THRESHOLD=50
-+	XS_OOM_SCORE=-$(($XENSTORED_OOM_MEM_THRESHOLD * 10))
-+
-+	rm -f @XEN_RUN_DIR@/xenstored.pid
- 
- 	echo -n Starting $XENSTORED...
- 	$XENSTORED --pid-file @XEN_RUN_DIR@/xenstored.pid $XENSTORED_ARGS
- 
- 	systemd-notify --booted 2>/dev/null || timeout_xenstore $XENSTORED || exit 1
-+	XS_PID=`cat @XEN_RUN_DIR@/xenstored.pid`
-+	echo $XS_OOM_SCORE >/proc/$XS_PID/oom_score_adj
- 
- 	exit 0
- }
--- 
-2.26.2
+This does indeed define the meaning of *adding* qualifiers to a
+pointer type but not define the meaning of removing them.  But that
+whole paragraph is almost redundant, because in 6.3.2.3(7):
 
+ | A pointer to an object or incomplete type may be converted to a
+ | pointer to a different object or incomplete type. If the resulting
+ | pointer is not correctly aligned57) for the pointed-to type, the
+ | behavior is undefined. Otherwise, when converted back again, the
+ | result shall compare equal to the original pointer.
+
+This defines the meaning of conversions of pointers to object types
+(like char*) regardless of the qualifiers.
+
+I read that as "a pointer to an object type or to an incomplete type".
+But the precise reading doesn't matter because these pointers are
+actually to objects.
+
+There's also this in 6.7.3(5):
+
+ | If an attempt is made to modify an object defined with a
+ | const-qualified type through use of an lvalue with
+ | non-const-qualified type, the behavior is undefined.  made to refer
+ | to an object defined with a volatile-qualified type through
+
+But there is no attempt to modify.  (Also this paragraph doesn't apply
+because characters in string literals have type char, not type const
+char, but 6.4.6(6) directly prohibits modification of characters in
+string literals.)
+
+6.2.7(2) says
+
+ | All declarations that refer to the same object or function shall
+ | have compatible type; otherwise, the behavior is undefined.
+
+but I don't think these pointers variables are declarations of the
+chars pointed to.
+
+> Therefore, we want something like:
+> 
+> const unsigned char *csu = (const unsigned char *)cs;
+
+Having said all thst, I agree that that not casting away const would
+be better (especially if it generates compiler warnings).
+
+I pushed it already.  If thios is UB we should revert it but as I say
+I think it isn't, so we can wait for a followup.
+
+Thanks,
+Ian.
 
