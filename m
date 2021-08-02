@@ -1,48 +1,49 @@
-Return-Path: <SRS0=eL/c=MY=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=XnGw=MZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81599C4338F
-	for <xen-devel@archiver.kernel.org>; Sun,  1 Aug 2021 22:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F489C4338F
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Aug 2021 03:58:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F07F61075
-	for <xen-devel@archiver.kernel.org>; Sun,  1 Aug 2021 22:27:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0F07F61075
+	by mail.kernel.org (Postfix) with ESMTPS id 1EED86054F
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Aug 2021 03:58:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1EED86054F
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.162885.298551 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.162895.298566 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mAJvc-0006e3-7I; Sun, 01 Aug 2021 22:27:28 +0000
+	id 1mAP5L-0002Sc-07; Mon, 02 Aug 2021 03:57:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 162885.298551; Sun, 01 Aug 2021 22:27:28 +0000
+Received: by outflank-mailman (output) from mailman id 162895.298566; Mon, 02 Aug 2021 03:57:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mAJvc-0006dw-3z; Sun, 01 Aug 2021 22:27:28 +0000
-Received: by outflank-mailman (input) for mailman id 162885;
- Sun, 01 Aug 2021 22:27:26 +0000
+	id 1mAP5K-0002SV-Rv; Mon, 02 Aug 2021 03:57:50 +0000
+Received: by outflank-mailman (input) for mailman id 162895;
+ Mon, 02 Aug 2021 03:57:49 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1mAJva-0006dk-EV; Sun, 01 Aug 2021 22:27:26 +0000
+ id 1mAP5I-0002SL-Vq; Mon, 02 Aug 2021 03:57:48 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1mAJva-0000Q3-13; Sun, 01 Aug 2021 22:27:26 +0000
+ id 1mAP5I-0006jD-JO; Mon, 02 Aug 2021 03:57:48 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1mAJvZ-0006pG-Kh; Sun, 01 Aug 2021 22:27:25 +0000
+ id 1mAP5I-0001cp-4E; Mon, 02 Aug 2021 03:57:48 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mAJvZ-0004TI-K7; Sun, 01 Aug 2021 22:27:25 +0000
+ id 1mAP5I-0003qT-3d; Mon, 02 Aug 2021 03:57:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,16 +58,16 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=pUaFxLKmRooaqRzXx1veQBas3Xizz/TFzrQcOu4w05A=; b=TfnEI0L5kP68lbrsfxnPhZYlGZ
-	reOTBW+gC/CqrD5hQjnKhzHuP3rl+1zNQG4jhwx3sfobs/bVLFyapzIsHHghpwo7NqR1iApPOfCoU
-	M9S4htE35Ni1vhF1UFRMztuL7f6PxNjJi8+fy7Pz49sofIFNc3ad6flxgFYWG2o/gzuo=;
+	bh=rbRT5A10znOs7PK7tiKq/lC2H0EnCDfV3GaJk8mEM4Y=; b=Tqs80MCs99wjwAKrsMflEL/gAb
+	byB2OM/ndKZnjFPhRcHDOvLPDmB4iwZef0EHKHYfvTnb/rsRC9kFKQgR7BtiUcAycYUD1tZO4D3mz
+	ee+pqQArfPjSbjvu4SeTxFpko++kJNj4rwwvZpdXxoCbouOnQZ7b07sS/75Ocn3A9FY8=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-164074-mainreport@xen.org>
+Message-ID: <osstest-164076-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [linux-linus test] 164074: regressions - FAIL
+Subject: [linux-linus test] 164076: regressions - FAIL
 X-Osstest-Failures:
     linux-linus:test-amd64-i386-xl-xsm:xen-install:fail:regression
     linux-linus:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:xen-install:fail:regression
@@ -104,13 +105,10 @@ X-Osstest-Failures:
     linux-linus:test-arm64-arm64-xl-xsm:debian-fixup:fail:regression
     linux-linus:test-arm64-arm64-xl:debian-fixup:fail:regression
     linux-linus:test-amd64-amd64-amd64-pvgrub:guest-stop:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit1:debian-fixup:fail:regression
     linux-linus:test-amd64-amd64-i386-pvgrub:guest-stop:fail:regression
     linux-linus:test-arm64-arm64-libvirt-xsm:debian-fixup:fail:regression
-    linux-linus:test-arm64-arm64-xl-credit1:guest-start:fail:regression
-    linux-linus:test-arm64-arm64-xl-credit2:debian-fixup:fail:heisenbug
-    linux-linus:test-amd64-amd64-xl-xsm:guest-start/debian.repeat:fail:heisenbug
-    linux-linus:test-amd64-amd64-qemuu-freebsd11-amd64:guest-start/freebsd.repeat:fail:heisenbug
-    linux-linus:test-arm64-arm64-xl-credit1:debian-fixup:fail:heisenbug
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:leak-check/check:fail:regression
     linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
     linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
     linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
@@ -145,14 +143,14 @@ X-Osstest-Failures:
     linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
     linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
 X-Osstest-Versions-This:
-    linux=f3438b4c4e692b49b7dc2bab864d20381024be16
+    linux=d4affd6b6e81443ec8d00de0306ca61911e81441
 X-Osstest-Versions-That:
     linux=deacdb3e3979979016fcd0ffd518c320a62ad166
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 01 Aug 2021 22:27:25 +0000
+Date: Mon, 02 Aug 2021 03:57:48 +0000
 
-flight 164074 linux-linus real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/164074/
+flight 164076 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/164076/
 
 Regressions :-(
 
@@ -194,15 +192,10 @@ including tests which could not be run:
  test-arm64-arm64-xl-xsm      13 debian-fixup             fail REGR. vs. 152332
  test-arm64-arm64-xl          13 debian-fixup             fail REGR. vs. 152332
  test-amd64-amd64-amd64-pvgrub 20 guest-stop              fail REGR. vs. 152332
+ test-arm64-arm64-xl-credit1  13 debian-fixup             fail REGR. vs. 152332
  test-amd64-amd64-i386-pvgrub 20 guest-stop               fail REGR. vs. 152332
  test-arm64-arm64-libvirt-xsm 13 debian-fixup             fail REGR. vs. 152332
- test-arm64-arm64-xl-credit1  14 guest-start    fail in 164071 REGR. vs. 152332
-
-Tests which are failing intermittently (not blocking):
- test-arm64-arm64-xl-credit2  13 debian-fixup     fail in 164071 pass in 164074
- test-amd64-amd64-xl-xsm 22 guest-start/debian.repeat fail in 164071 pass in 164074
- test-amd64-amd64-qemuu-freebsd11-amd64 21 guest-start/freebsd.repeat fail in 164071 pass in 164074
- test-arm64-arm64-xl-credit1  13 debian-fixup               fail pass in 164071
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 21 leak-check/check fail REGR. vs. 152332
 
 Tests which did not succeed, but are not blocking:
  test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 152332
@@ -240,13 +233,13 @@ Tests which did not succeed, but are not blocking:
  test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
 
 version targeted for testing:
- linux                f3438b4c4e692b49b7dc2bab864d20381024be16
+ linux                d4affd6b6e81443ec8d00de0306ca61911e81441
 baseline version:
  linux                deacdb3e3979979016fcd0ffd518c320a62ad166
 
 Last test of basis   152332  2020-07-31 19:41:23 Z  366 days
-Failing since        152366  2020-08-01 20:49:34 Z  365 days  632 attempts
-Testing same since   164068  2021-08-01 00:40:45 Z    0 days    3 attempts
+Failing since        152366  2020-08-01 20:49:34 Z  365 days  633 attempts
+Testing same since   164076  2021-08-01 22:40:45 Z    0 days    1 attempts
 
 ------------------------------------------------------------
 6750 people touched revisions under test,
@@ -274,7 +267,7 @@ jobs:
  test-armhf-armhf-xl                                          pass    
  test-amd64-i386-xl                                           fail    
  test-amd64-coresched-i386-xl                                 fail    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           fail    
  test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            fail    
  test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
  test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         fail    
@@ -377,5 +370,5 @@ Test harness code can be found at
 
 Not pushing.
 
-(No revision log; it would be 1993906 lines long.)
+(No revision log; it would be 1994798 lines long.)
 
