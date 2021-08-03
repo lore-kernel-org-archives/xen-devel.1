@@ -6,45 +6,45 @@ X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02CB1C4338F
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Aug 2021 14:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21261C4338F
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Aug 2021 14:39:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C626B60F58
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Aug 2021 14:38:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C626B60F58
+	by mail.kernel.org (Postfix) with ESMTPS id E062D60F58
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Aug 2021 14:39:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E062D60F58
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.163541.299559 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.163550.299576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mAvYD-0005aA-OO; Tue, 03 Aug 2021 14:37:49 +0000
+	id 1mAvZr-0006Ft-4y; Tue, 03 Aug 2021 14:39:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 163541.299559; Tue, 03 Aug 2021 14:37:49 +0000
+Received: by outflank-mailman (output) from mailman id 163550.299576; Tue, 03 Aug 2021 14:39:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mAvYD-0005a3-L1; Tue, 03 Aug 2021 14:37:49 +0000
-Received: by outflank-mailman (input) for mailman id 163541;
- Tue, 03 Aug 2021 14:37:48 +0000
+	id 1mAvZr-0006Fm-1j; Tue, 03 Aug 2021 14:39:31 +0000
+Received: by outflank-mailman (input) for mailman id 163550;
+ Tue, 03 Aug 2021 14:39:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=A+UO=M2=intel.com=andriy.shevchenko@srs-us1.protection.inumbo.net>)
- id 1mAvYC-0005Zx-Ib
- for xen-devel@lists.xenproject.org; Tue, 03 Aug 2021 14:37:48 +0000
-Received: from mga12.intel.com (unknown [192.55.52.136])
+ id 1mAvZp-0006FI-Nr
+ for xen-devel@lists.xenproject.org; Tue, 03 Aug 2021 14:39:29 +0000
+Received: from mga03.intel.com (unknown [134.134.136.65])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 18e933ea-34b3-46c2-9299-29f62193b3eb;
- Tue, 03 Aug 2021 14:37:45 +0000 (UTC)
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Aug 2021 07:37:44 -0700
+ id 87827722-3ed8-4ede-9289-2f34ae253f87;
+ Tue, 03 Aug 2021 14:39:23 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Aug 2021 07:39:23 -0700
 Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Aug 2021 07:37:29 -0700
+ by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Aug 2021 07:39:07 -0700
 Received: from andy by smile with local (Exim 4.94.2)
  (envelope-from <andriy.shevchenko@intel.com>)
- id 1mAvXk-004lSc-2p; Tue, 03 Aug 2021 17:37:20 +0300
+ id 1mAvZJ-004lU3-S4; Tue, 03 Aug 2021 17:38:57 +0300
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,13 +56,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18e933ea-34b3-46c2-9299-29f62193b3eb
-X-IronPort-AV: E=McAfee;i="6200,9189,10065"; a="193296744"
+X-Inumbo-ID: 87827722-3ed8-4ede-9289-2f34ae253f87
+X-IronPort-AV: E=McAfee;i="6200,9189,10065"; a="213739129"
 X-IronPort-AV: E=Sophos;i="5.84,291,1620716400"; 
-   d="scan'208";a="193296744"
+   d="scan'208";a="213739129"
 X-IronPort-AV: E=Sophos;i="5.84,291,1620716400"; 
-   d="scan'208";a="479533435"
-Date: Tue, 3 Aug 2021 17:37:20 +0300
+   d="scan'208";a="419683121"
+Date: Tue, 3 Aug 2021 17:38:57 +0300
 From: Andy Shevchenko <andriy.shevchenko@intel.com>
 To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>
 Cc: Bjorn Helgaas <bhelgaas@google.com>, kernel@pengutronix.de,
@@ -112,32 +112,30 @@ Cc: Bjorn Helgaas <bhelgaas@google.com>, kernel@pengutronix.de,
 	MPT-FusionLinux.pdl@broadcom.com, linux-scsi@vger.kernel.org,
 	netdev@vger.kernel.org, oss-drivers@corigine.com,
 	xen-devel@lists.xenproject.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH v2 4/6] PCI: Provide wrapper to access a pci_dev's bound
- driver
-Message-ID: <YQlUoGYP6c/eWgJO@smile.fi.intel.com>
+Subject: Re: [PATCH v2 5/6] PCI: Adapt all code locations to not use struct
+ pci_dev::driver directly
+Message-ID: <YQlVAcOGDrDO8500@smile.fi.intel.com>
 References: <20210803100150.1543597-1-u.kleine-koenig@pengutronix.de>
- <20210803100150.1543597-5-u.kleine-koenig@pengutronix.de>
+ <20210803100150.1543597-6-u.kleine-koenig@pengutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20210803100150.1543597-5-u.kleine-koenig@pengutronix.de>
+In-Reply-To: <20210803100150.1543597-6-u.kleine-koenig@pengutronix.de>
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 
-On Tue, Aug 03, 2021 at 12:01:48PM +0200, Uwe Kleine-König wrote:
-> Which driver a device is bound to is available twice: In struct
-> pci_dev::dev->driver and in struct pci_dev::driver. To get rid of the
-> duplication introduce a wrapper to access struct pci_dev's driver
-> member. Once all users are converted the wrapper can be changed to
-> calculate the driver using pci_dev::dev->driver.
+On Tue, Aug 03, 2021 at 12:01:49PM +0200, Uwe Kleine-König wrote:
+> This prepares removing the driver member of struct pci_dev which holds the
+> same information than struct pci_dev::dev->driver.
 
 ...
 
->  #define	to_pci_driver(drv) container_of(drv, struct pci_driver, driver)
-> +#define pci_driver_of_dev(pdev) ((pdev)->driver)
+> +	struct pci_driver *pdrv;
 
-Seems like above is (mis)using TAB instead of space after #define. Not sure if
-it's good to have them different.
+Missed blank line here and everywhere else. I don't remember if it's a
+checkpatch who complains on this.
+
+> +	return (pdev && (pdrv = pci_driver_of_dev(pdev))) ? pdrv->name : "<null>";
 
 -- 
 With Best Regards,
