@@ -2,46 +2,49 @@ Return-Path: <SRS0=ylDS=M3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4F30C4338F
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1280C4320E
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:45:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D3BB60F35
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:19:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7D3BB60F35
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 7123160720
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:45:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7123160720
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.163831.299967 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.163841.299992 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mBLTh-0002OR-Ja; Wed, 04 Aug 2021 18:18:53 +0000
+	id 1mBLtR-0005fD-3h; Wed, 04 Aug 2021 18:45:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 163831.299967; Wed, 04 Aug 2021 18:18:53 +0000
+Received: by outflank-mailman (output) from mailman id 163841.299992; Wed, 04 Aug 2021 18:45:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mBLTh-0002OK-Gb; Wed, 04 Aug 2021 18:18:53 +0000
-Received: by outflank-mailman (input) for mailman id 163831;
- Wed, 04 Aug 2021 18:18:52 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mBLTg-0002OE-AD
- for xen-devel@lists.xenproject.org; Wed, 04 Aug 2021 18:18:52 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mBLTe-0005IR-8e; Wed, 04 Aug 2021 18:18:50 +0000
-Received: from 54-240-197-231.amazon.com ([54.240.197.231]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mBLTe-0000Bx-19; Wed, 04 Aug 2021 18:18:50 +0000
+	id 1mBLtQ-0005f6-VU; Wed, 04 Aug 2021 18:45:28 +0000
+Received: by outflank-mailman (input) for mailman id 163841;
+ Wed, 04 Aug 2021 18:45:27 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=q0vd=M3=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
+ id 1mBLtO-0005Nn-VR
+ for xen-devel@lists.xenproject.org; Wed, 04 Aug 2021 18:45:26 +0000
+Received: from mail-pl1-x632.google.com (unknown [2607:f8b0:4864:20::632])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3b914027-e55b-4e38-9cc9-0fbbc44331ea;
+ Wed, 04 Aug 2021 18:45:25 +0000 (UTC)
+Received: by mail-pl1-x632.google.com with SMTP id e21so4017403pla.5
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Aug 2021 11:45:25 -0700 (PDT)
+Received: from ubuntu-Virtual-Machine.corp.microsoft.com
+ ([2001:4898:80e8:f:1947:6842:b8a8:6f83])
+ by smtp.gmail.com with ESMTPSA id f5sm3325647pjo.23.2021.08.04.11.45.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Aug 2021 11:45:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,93 +56,271 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=U1kAyWoeFNwOnLZK80ADglulvtgVacQljSkDREd6xPU=; b=obizEWZR6akkadzT8IngjHCW/C
-	GNMU+3TXkyd9Lf7n5PRMIRucsfWi4skTc6PIewiGjOQYu9JB8q9v1ufR7dtLJzOtjUxBWnMYiI4WY
-	HkLAqhP28VjQ/wIhrMstOfOLHv601KU2a01WdqJFcRjHj/1vuIA3+BPmcbUQKU1DIHp8=;
-Subject: Re: [PATCH] do not p2m_invalidate_root when iommu_use_hap_pt
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, Volodymyr_Babchuk@epam.com,
- Bertrand.Marquis@arm.com
-References: <alpine.DEB.2.21.2108031419500.19737@sstabellini-ThinkPad-T480s>
- <ff5e9e5a-287d-127c-1d39-57c31564e9b3@xen.org>
- <alpine.DEB.2.21.2108031702430.19737@sstabellini-ThinkPad-T480s>
- <a2a99173-c566-c492-310c-003490cdba5f@xen.org>
- <alpine.DEB.2.21.2108041032330.9768@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <93888b4c-adb8-c40d-24a4-1d7b635a3cb5@xen.org>
-Date: Wed, 4 Aug 2021 19:18:48 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.12.0
+X-Inumbo-ID: 3b914027-e55b-4e38-9cc9-0fbbc44331ea
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=16MIt3xRzq/Zx0dmD6hI15XzjkHnToTpj7JUeIAYuSg=;
+        b=qx9k361hixuu7vEJlAYAIRsMePCmgeK/DhwsNEvxQFfzDUOviqgil7rKlP+V59UP1g
+         vW5s8zR6WMyYtPTGhbFqT9FSAkHchjTTZ8yGdIMMgB2LGQyL3YGKrz2dtj5m0JAcI4lM
+         9Fcmz1pfQlpZ+omrROcr8PQOFpZ1VuEM3/KrpopZStnQZTTLQ02gkaFErGcIQsBOdHq+
+         V/1slqmlUQQ+jRa5hm7b6t0qD/jJ5PyfxWDK7Bfx8n7g0Ws7AYFnkHxKAYpTVGhsSjNG
+         j8ObTaWTRy9tSlPxH9SibT8PN0ummg1mWfuX3+oI8dn8wS3YNgwAbKKKfEWAmmK6rHuE
+         MNYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=16MIt3xRzq/Zx0dmD6hI15XzjkHnToTpj7JUeIAYuSg=;
+        b=tkbXpGjkK5nMwiKQOR94U6Xd5pOehEVennQcm0PT7cGj02UPpPqgRstpNc7afJXlV2
+         hBrY58ZwFbTA9SQUkkSBaGp2Y9dsfxnfxm7Z5L+l5jqtzezcAaSta2A2TaJ2nBbq0eiS
+         4VUBN2fBMjJXZLdBZVbdsvHGmAg3lodM3qXyU8o7iB75kYWcgLJkijBGPjCMFaxTz4hl
+         Cd85GNXmCzgZ6i2PZdd5azxIbpMo+YA0oMFfsgsckUEbIAkzeYjGoh40ai9hRhl0pafT
+         X9YpdNE6nHfaz7/NchkMhuGhCyJZ6tqIa0f5uMeVhSawJnKD1roc4A5IK49JCC+eG4gT
+         6ATQ==
+X-Gm-Message-State: AOAM533qibawnByoLgkr9VGFBTyeq1xGJURANcKcK5mUIyfgl6XTh0e5
+	zGdB7CFr5SGI7mA339sa3p8=
+X-Google-Smtp-Source: ABdhPJxr5lz2qokE5HoLK9xS958oeBy4GhDfWQ5F/+NNMXvPzchMdWddll5aY2rUd7FNZMXCVqOStw==
+X-Received: by 2002:a05:6a00:2309:b029:332:5157:e9a6 with SMTP id h9-20020a056a002309b02903325157e9a6mr1065100pfh.78.1628102724567;
+        Wed, 04 Aug 2021 11:45:24 -0700 (PDT)
+From: Tianyu Lan <ltykernel@gmail.com>
+To: kys@microsoft.com,
+	haiyangz@microsoft.com,
+	sthemmin@microsoft.com,
+	wei.liu@kernel.org,
+	decui@microsoft.com,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	x86@kernel.org,
+	hpa@zytor.com,
+	dave.hansen@linux.intel.com,
+	luto@kernel.org,
+	peterz@infradead.org,
+	konrad.wilk@oracle.com,
+	boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	sstabellini@kernel.org,
+	joro@8bytes.org,
+	will@kernel.org,
+	davem@davemloft.net,
+	kuba@kernel.org,
+	jejb@linux.ibm.com,
+	martin.petersen@oracle.com,
+	arnd@arndb.de,
+	hch@lst.de,
+	m.szyprowski@samsung.com,
+	robin.murphy@arm.com,
+	Tianyu.Lan@microsoft.com,
+	rppt@kernel.org,
+	kirill.shutemov@linux.intel.com,
+	akpm@linux-foundation.org,
+	brijesh.singh@amd.com,
+	thomas.lendacky@amd.com,
+	pgonda@google.com,
+	david@redhat.com,
+	krish.sadhukhan@oracle.com,
+	saravanand@fb.com,
+	aneesh.kumar@linux.ibm.com,
+	xen-devel@lists.xenproject.org,
+	martin.b.radev@gmail.com,
+	ardb@kernel.org,
+	rientjes@google.com,
+	tj@kernel.org,
+	keescook@chromium.org,
+	michael.h.kelley@microsoft.com
+Cc: iommu@lists.linux-foundation.org,
+	linux-arch@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	netdev@vger.kernel.org,
+	vkuznets@redhat.com,
+	parri.andrea@gmail.com
+Subject: [PATCH V2 01/14] x86/HV: Initialize GHCB page in Isolation VM
+Date: Wed,  4 Aug 2021 14:44:57 -0400
+Message-Id: <20210804184513.512888-2-ltykernel@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210804184513.512888-1-ltykernel@gmail.com>
+References: <20210804184513.512888-1-ltykernel@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2108041032330.9768@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Stefano,
+From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-On 04/08/2021 18:41, Stefano Stabellini wrote:
-> On Wed, 4 Aug 2021, Julien Grall wrote:
->> Hi Stefano,
->>
->> On 04/08/2021 01:08, Stefano Stabellini wrote:
->>>>> diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
->>>>> index caf17174b8..125a9281fc 100644
->>>>> --- a/xen/arch/arm/arm64/vsysreg.c
->>>>> +++ b/xen/arch/arm/arm64/vsysreg.c
->>>>> @@ -105,6 +105,13 @@ void do_sysreg(struct cpu_user_regs *regs,
->>>>>         case HSR_SYSREG_DCISW:
->>>>>         case HSR_SYSREG_DCCSW:
->>>>>         case HSR_SYSREG_DCCISW:
->>>>> +        if ( iommu_use_hap_pt(current->domain) )
->>>>> +        {
->>>>> +            gdprintk(XENLOG_ERR,
->>>>> +                     "d%u uses set/way cache flushes with the IOMMU on.
->>>>> It
->>>>> cannot work. Replace set/way instructions with dc [ci]vac and retry.
->>>>> Injecting exception into the guest now.\n",
->>>>
->>>> This line would be far too long to print on the serial. I think you want
->>>> to
->>>> add a few newline here.
->>>
->>> Fair enough but I'll try to keep most info on the same line because
->>> otherwise with a dom0less boot it can get confusing. I suggest:
->>
->> I am not quite too sure to understand why it would get confusing with
->> dom0less. Can you give an example?
-> 
-> I was doing tests with the error messages before implementing the undef
-> exception injection. This is the output of a regular domU (not
-> dom0less): https://pastebin.com/Wytg660j
-> 
-> The entire message in this test should be:
-> 
-> (XEN) d1v0 uses set/way cache flushes with the IOMMU on. It cannot work.
-> (XEN) Replace them with dc [ci]vac and retry.
-> 
-> But actually the first line gets eaten, so we only see:
-> 
-> (XEN) Replace them with dc [ci]vac and retry.
-> 
-> several times at the bottom of the logs.
+Hyper-V exposes GHCB page via SEV ES GHCB MSR for SNP guest
+to communicate with hypervisor. Map GHCB page for all
+cpus to read/write MSR register and submit hvcall request
+via GHCB.
 
-That's most likely because you are hitting the ratelimit. However, 
-writing a 80+ line is almost the wrong way to go. This making a lot more 
-difficult to serial the console output...
+Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
+---
+ arch/x86/hyperv/hv_init.c       | 69 +++++++++++++++++++++++++++++++--
+ arch/x86/include/asm/mshyperv.h |  2 +
+ include/asm-generic/mshyperv.h  |  2 +
+ 3 files changed, 69 insertions(+), 4 deletions(-)
 
-Looking at the output, I think you can shorten to:
-
-"The cache should be flushed by VA rather than by set/way."
-
-At least this would make clear that using them even without the IOMMU is 
-a bad idea for performance reason.
-
-Cheers,
-
+diff --git a/arch/x86/hyperv/hv_init.c b/arch/x86/hyperv/hv_init.c
+index 4a643a85d570..247df301491f 100644
+--- a/arch/x86/hyperv/hv_init.c
++++ b/arch/x86/hyperv/hv_init.c
+@@ -20,6 +20,7 @@
+ #include <linux/kexec.h>
+ #include <linux/version.h>
+ #include <linux/vmalloc.h>
++#include <linux/io.h>
+ #include <linux/mm.h>
+ #include <linux/hyperv.h>
+ #include <linux/slab.h>
+@@ -42,6 +43,31 @@ static void *hv_hypercall_pg_saved;
+ struct hv_vp_assist_page **hv_vp_assist_page;
+ EXPORT_SYMBOL_GPL(hv_vp_assist_page);
+ 
++static int hyperv_init_ghcb(void)
++{
++	u64 ghcb_gpa;
++	void *ghcb_va;
++	void **ghcb_base;
++
++	if (!ms_hyperv.ghcb_base)
++		return -EINVAL;
++
++	/*
++	 * GHCB page is allocated by paravisor. The address
++	 * returned by MSR_AMD64_SEV_ES_GHCB is above shared
++	 * ghcb boundary and map it here.
++	 */
++	rdmsrl(MSR_AMD64_SEV_ES_GHCB, ghcb_gpa);
++	ghcb_va = memremap(ghcb_gpa, HV_HYP_PAGE_SIZE, MEMREMAP_WB);
++	if (!ghcb_va)
++		return -ENOMEM;
++
++	ghcb_base = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
++	*ghcb_base = ghcb_va;
++
++	return 0;
++}
++
+ static int hv_cpu_init(unsigned int cpu)
+ {
+ 	struct hv_vp_assist_page **hvp = &hv_vp_assist_page[smp_processor_id()];
+@@ -75,6 +101,8 @@ static int hv_cpu_init(unsigned int cpu)
+ 		wrmsrl(HV_X64_MSR_VP_ASSIST_PAGE, val);
+ 	}
+ 
++	hyperv_init_ghcb();
++
+ 	return 0;
+ }
+ 
+@@ -167,6 +195,14 @@ static int hv_cpu_die(unsigned int cpu)
+ {
+ 	struct hv_reenlightenment_control re_ctrl;
+ 	unsigned int new_cpu;
++	void **ghcb_va = NULL;
++
++	if (ms_hyperv.ghcb_base) {
++		ghcb_va = (void **)this_cpu_ptr(ms_hyperv.ghcb_base);
++		if (*ghcb_va)
++			memunmap(*ghcb_va);
++		*ghcb_va = NULL;
++	}
+ 
+ 	hv_common_cpu_die(cpu);
+ 
+@@ -340,9 +376,22 @@ void __init hyperv_init(void)
+ 			VMALLOC_END, GFP_KERNEL, PAGE_KERNEL_ROX,
+ 			VM_FLUSH_RESET_PERMS, NUMA_NO_NODE,
+ 			__builtin_return_address(0));
+-	if (hv_hypercall_pg == NULL) {
+-		wrmsrl(HV_X64_MSR_GUEST_OS_ID, 0);
+-		goto remove_cpuhp_state;
++	if (hv_hypercall_pg == NULL)
++		goto clean_guest_os_id;
++
++	if (hv_isolation_type_snp()) {
++		ms_hyperv.ghcb_base = alloc_percpu(void *);
++		if (!ms_hyperv.ghcb_base)
++			goto clean_guest_os_id;
++
++		if (hyperv_init_ghcb()) {
++			free_percpu(ms_hyperv.ghcb_base);
++			ms_hyperv.ghcb_base = NULL;
++			goto clean_guest_os_id;
++		}
++
++		/* Hyper-V requires to write guest os id via ghcb in SNP IVM. */
++		hv_ghcb_msr_write(HV_X64_MSR_GUEST_OS_ID, guest_id);
+ 	}
+ 
+ 	rdmsrl(HV_X64_MSR_HYPERCALL, hypercall_msr.as_uint64);
+@@ -403,7 +452,8 @@ void __init hyperv_init(void)
+ 	hv_query_ext_cap(0);
+ 	return;
+ 
+-remove_cpuhp_state:
++clean_guest_os_id:
++	wrmsrl(HV_X64_MSR_GUEST_OS_ID, 0);
+ 	cpuhp_remove_state(cpuhp);
+ free_vp_assist_page:
+ 	kfree(hv_vp_assist_page);
+@@ -431,6 +481,9 @@ void hyperv_cleanup(void)
+ 	 */
+ 	hv_hypercall_pg = NULL;
+ 
++	if (ms_hyperv.ghcb_base)
++		free_percpu(ms_hyperv.ghcb_base);
++
+ 	/* Reset the hypercall page */
+ 	hypercall_msr.as_uint64 = 0;
+ 	wrmsrl(HV_X64_MSR_HYPERCALL, hypercall_msr.as_uint64);
+@@ -506,3 +559,11 @@ bool hv_is_isolation_supported(void)
+ {
+ 	return hv_get_isolation_type() != HV_ISOLATION_TYPE_NONE;
+ }
++
++DEFINE_STATIC_KEY_FALSE(isolation_type_snp);
++
++bool hv_isolation_type_snp(void)
++{
++	return static_branch_unlikely(&isolation_type_snp);
++}
++EXPORT_SYMBOL_GPL(hv_isolation_type_snp);
+diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
+index adccbc209169..6627cfd2bfba 100644
+--- a/arch/x86/include/asm/mshyperv.h
++++ b/arch/x86/include/asm/mshyperv.h
+@@ -11,6 +11,8 @@
+ #include <asm/paravirt.h>
+ #include <asm/mshyperv.h>
+ 
++DECLARE_STATIC_KEY_FALSE(isolation_type_snp);
++
+ typedef int (*hyperv_fill_flush_list_func)(
+ 		struct hv_guest_mapping_flush_list *flush,
+ 		void *data);
+diff --git a/include/asm-generic/mshyperv.h b/include/asm-generic/mshyperv.h
+index c1ab6a6e72b5..4269f3174e58 100644
+--- a/include/asm-generic/mshyperv.h
++++ b/include/asm-generic/mshyperv.h
+@@ -36,6 +36,7 @@ struct ms_hyperv_info {
+ 	u32 max_lp_index;
+ 	u32 isolation_config_a;
+ 	u32 isolation_config_b;
++	void  __percpu **ghcb_base;
+ };
+ extern struct ms_hyperv_info ms_hyperv;
+ 
+@@ -237,6 +238,7 @@ bool hv_is_hyperv_initialized(void);
+ bool hv_is_hibernation_supported(void);
+ enum hv_isolation_type hv_get_isolation_type(void);
+ bool hv_is_isolation_supported(void);
++bool hv_isolation_type_snp(void);
+ void hyperv_cleanup(void);
+ bool hv_query_ext_cap(u64 cap_query);
+ #else /* CONFIG_HYPERV */
 -- 
-Julien Grall
+2.25.1
+
 
