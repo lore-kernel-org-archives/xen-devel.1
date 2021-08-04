@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD7AAC4338F
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 517FCC432BE
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:56:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7A5A460525
+	by mail.kernel.org (Postfix) with ESMTPS id 0003060E09
 	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:56:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7A5A460525
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0003060E09
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.163897.300088 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.163901.300099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mBM3U-0003SW-Ur; Wed, 04 Aug 2021 18:55:52 +0000
+	id 1mBM3a-0003kL-4m; Wed, 04 Aug 2021 18:55:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 163897.300088; Wed, 04 Aug 2021 18:55:52 +0000
+Received: by outflank-mailman (output) from mailman id 163901.300099; Wed, 04 Aug 2021 18:55:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mBM3U-0003SP-QL; Wed, 04 Aug 2021 18:55:52 +0000
-Received: by outflank-mailman (input) for mailman id 163897;
- Wed, 04 Aug 2021 18:55:51 +0000
+	id 1mBM3a-0003kE-1l; Wed, 04 Aug 2021 18:55:58 +0000
+Received: by outflank-mailman (input) for mailman id 163901;
+ Wed, 04 Aug 2021 18:55:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=q0vd=M3=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1mBLuI-0005Nn-1K
- for xen-devel@lists.xenproject.org; Wed, 04 Aug 2021 18:46:22 +0000
-Received: from mail-pj1-x1035.google.com (unknown [2607:f8b0:4864:20::1035])
+ id 1mBLum-0005Nn-2N
+ for xen-devel@lists.xenproject.org; Wed, 04 Aug 2021 18:46:52 +0000
+Received: from mail-pj1-x102f.google.com (unknown [2607:f8b0:4864:20::102f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 92117abd-d986-4c80-a5e4-f2b03b5cf0b4;
- Wed, 04 Aug 2021 18:45:47 +0000 (UTC)
-Received: by mail-pj1-x1035.google.com with SMTP id l19so4406326pjz.0
- for <xen-devel@lists.xenproject.org>; Wed, 04 Aug 2021 11:45:47 -0700 (PDT)
+ id af55b08c-165e-49fd-aead-d7b77574f750;
+ Wed, 04 Aug 2021 18:45:58 +0000 (UTC)
+Received: by mail-pj1-x102f.google.com with SMTP id mt6so4363003pjb.1
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Aug 2021 11:45:58 -0700 (PDT)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:f:1947:6842:b8a8:6f83])
- by smtp.gmail.com with ESMTPSA id f5sm3325647pjo.23.2021.08.04.11.45.45
+ by smtp.gmail.com with ESMTPSA id f5sm3325647pjo.23.2021.08.04.11.45.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Aug 2021 11:45:46 -0700 (PDT)
+ Wed, 04 Aug 2021 11:45:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92117abd-d986-4c80-a5e4-f2b03b5cf0b4
+X-Inumbo-ID: af55b08c-165e-49fd-aead-d7b77574f750
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=X/FF6IBH0iDucy7fFb53vXAVZJZGw+kDZnNdV+cRcX4=;
-        b=nbfSc3WWTmlyhJWBau6jlhMtetGCpWCMIMIt6dnUfkuMu4BYLdh/LGCyzU2IAB+H/R
-         5DlfUB34I1HtalUYR0dWkXNEbfqYIfDcJPW9CGPUl7lgRMc+SkCTRxtBoBX+iH5g1IJz
-         JfXT4DiEzigmUnD/oJm8GTIidzjWEQbgD3ANS4b/8vlU/mo1rBMJMn0shnYuXDuarjDz
-         OiHchOI6rdLJ/Kl1u/kbD6SW02EJ7vf6K8usO4VwWtaH7PvwjxMiCqoL8heS4oMTkQUO
-         8Rr4YPXj7xmREGXtO5SzoI+QcTEhISbE5uqksbkpHkW6Nv3ZKehaiVVucBEeoOp+nibW
-         z6+g==
+        bh=29igml5xJQT7NZ/zHELD608zwBtMw+CBZNUu6aD3TXw=;
+        b=YYV/m/LMm9LueSaFvS1QqjEzusaN78zRUrtnhZOuMU1heWUA9GqVjn0EIfdioy78dO
+         pqyQr1mh3jD0fZRJ227Vtm1Yr/MBIZJfqPV9t2r5oVj/djtM4H34a0d2hv9nWJlmMMMc
+         C0ZzKol4Vgsz/Q9xqcn/U6GmtuToaeHJ1NsP9ZfEz7Fm5ahWkDMW7GGoANygL8DZ1y+9
+         uQ94GlUlEs4n5qTeavI4gSb/EIbS1zykqnrzZoZRj6oHARuYcWdHel7RiRpwWfqTur7t
+         +RFWBknyfar4zEtojp765cEWGfOex77YKgaagkx/IKKYP556Mlmva4L/VpYkV17KUMj1
+         QvGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=X/FF6IBH0iDucy7fFb53vXAVZJZGw+kDZnNdV+cRcX4=;
-        b=qBDHptmdhT/t7j+jqhLAgiXIIsvaKwUK87mdwStEdfb078cFa0D1eY+oHgws+hI8WF
-         0VIVskkYbzy4V18QfiPRtzCDNmDESFnsyTZYvQNlQshCYjWPYRrtyAKZWKhSCGb9bRVc
-         aIQdw9CrgHjME0zDpfiOMuPPiExjId1cmVtDdZMCDSkFcJwNXtQjPbA4EkkTOGtVBDa8
-         NLNA3p+8/n38qbjFhNqd0yNO2g9dR997gd3peDMqanOc7Sp/OpY36NLXRF0EeyoGFkej
-         2nB5HpUrQneg2BpDrRekGt1qeLtD+Zb2QuPR4h0doqhs6+5/KLOdrh+3qRABtgCKzCPs
-         cJ5Q==
-X-Gm-Message-State: AOAM532/Zd2fctpd8Fq67r2Fb+S2OyWUlTuKmx82b19pNHoxpnxJ+lNf
-	WaUEEM46cD7CQXmCwZ86Xp0=
-X-Google-Smtp-Source: ABdhPJyijHhiHC6ZPRqEWrxy/BZ8YZr4h+pTK5pZlYtlGaCrTdCCEixqAygkAVFceUDUgDiXmk86bg==
-X-Received: by 2002:a65:63cf:: with SMTP id n15mr525280pgv.392.1628102746706;
-        Wed, 04 Aug 2021 11:45:46 -0700 (PDT)
+        bh=29igml5xJQT7NZ/zHELD608zwBtMw+CBZNUu6aD3TXw=;
+        b=IhXAAiF2fz8jCPVe6dnvBUCcjAj2GtNXjGiypmxd3zXcJfuKTRucNbnv2Tf2Msbzho
+         QSS/NIVph0zia9mSc08qsU/VX5V1emNZI+QCHofBZ9zqgR8hKEO2posetHZcdssv5FKZ
+         eb4+JFKtaXUlJMM4jF/DoUfoXX6iew8dk/v5OGRdDqvJJ1cdYP6Ls8KuZpG8u4zCWcOM
+         X8k/rSpta/LsDxQUnTz7Irb29nXu/jBmpd3NO36Zhf57B4nLzDwUIN8xXUiAsqsQL9gG
+         vadzLV2/UOomTZ11QORWITkt6r3k35BwFE8g9X56BB12ue96xgVyOi1VVL72wjVnw7Kg
+         +5rQ==
+X-Gm-Message-State: AOAM531Sia9SSvsZoXmvzdm5ePpR6FAi3Z4H92z++E8w2+6WM2+MoDRI
+	SQGYORhhEYYxPiGqzfH8fqI=
+X-Google-Smtp-Source: ABdhPJys+uUC+8R4d08qbIFnIv7LBHGpTM/c9FmBOlVHRSO99KZWQKeZJC0uWF82I4cQhSNYNbC05Q==
+X-Received: by 2002:a17:902:8b83:b029:12c:cbce:a52f with SMTP id ay3-20020a1709028b83b029012ccbcea52fmr546876plb.9.1628102758109;
+        Wed, 04 Aug 2021 11:45:58 -0700 (PDT)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: kys@microsoft.com,
 	haiyangz@microsoft.com,
@@ -138,9 +138,9 @@ Cc: iommu@lists.linux-foundation.org,
 	netdev@vger.kernel.org,
 	vkuznets@redhat.com,
 	parri.andrea@gmail.com
-Subject: [PATCH V2 09/14] HV/Vmbus: Initialize VMbus ring buffer for Isolation VM
-Date: Wed,  4 Aug 2021 14:45:05 -0400
-Message-Id: <20210804184513.512888-10-ltykernel@gmail.com>
+Subject: [PATCH V2 14/14] HV/Storvsc: Add Isolation VM support for storvsc driver
+Date: Wed,  4 Aug 2021 14:45:10 -0400
+Message-Id: <20210804184513.512888-15-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210804184513.512888-1-ltykernel@gmail.com>
 References: <20210804184513.512888-1-ltykernel@gmail.com>
@@ -149,189 +149,160 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-VMbus ring buffer are shared with host and it's need to
-be accessed via extra address space of Isolation VM with
-SNP support. This patch is to map the ring buffer
-address in extra address space via ioremap(). HV host
-visibility hvcall smears data in the ring buffer and
-so reset the ring buffer memory to zero after calling
-visibility hvcall.
+In Isolation VM, all shared memory with host needs to mark visible
+to host via hvcall. vmbus_establish_gpadl() has already done it for
+storvsc rx/tx ring buffer. The page buffer used by vmbus_sendpacket_
+mpb_desc() still need to handle. Use DMA API to map/umap these
+memory during sending/receiving packet and Hyper-V DMA ops callback
+will use swiotlb function to allocate bounce buffer and copy data
+from/to bounce buffer.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- drivers/hv/Kconfig        |  1 +
- drivers/hv/channel.c      | 10 +++++
- drivers/hv/hyperv_vmbus.h |  2 +
- drivers/hv/ring_buffer.c  | 84 ++++++++++++++++++++++++++++++---------
- 4 files changed, 79 insertions(+), 18 deletions(-)
+ drivers/scsi/storvsc_drv.c | 68 +++++++++++++++++++++++++++++++++++---
+ 1 file changed, 63 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/hv/Kconfig b/drivers/hv/Kconfig
-index 66c794d92391..a8386998be40 100644
---- a/drivers/hv/Kconfig
-+++ b/drivers/hv/Kconfig
-@@ -7,6 +7,7 @@ config HYPERV
- 	depends on X86 && ACPI && X86_LOCAL_APIC && HYPERVISOR_GUEST
- 	select PARAVIRT
- 	select X86_HV_CALLBACK_VECTOR
-+	select VMAP_PFN
- 	help
- 	  Select this option to run Linux as a Hyper-V client operating
- 	  system.
-diff --git a/drivers/hv/channel.c b/drivers/hv/channel.c
-index 4c4717c26240..60ef881a700c 100644
---- a/drivers/hv/channel.c
-+++ b/drivers/hv/channel.c
-@@ -712,6 +712,16 @@ static int __vmbus_open(struct vmbus_channel *newchannel,
- 	if (err)
- 		goto error_clean_ring;
- 
-+	err = hv_ringbuffer_post_init(&newchannel->outbound,
-+				      page, send_pages);
-+	if (err)
-+		goto error_free_gpadl;
-+
-+	err = hv_ringbuffer_post_init(&newchannel->inbound,
-+				      &page[send_pages], recv_pages);
-+	if (err)
-+		goto error_free_gpadl;
-+
- 	/* Create and init the channel open message */
- 	open_info = kzalloc(sizeof(*open_info) +
- 			   sizeof(struct vmbus_channel_open_channel),
-diff --git a/drivers/hv/hyperv_vmbus.h b/drivers/hv/hyperv_vmbus.h
-index 40bc0eff6665..15cd23a561f3 100644
---- a/drivers/hv/hyperv_vmbus.h
-+++ b/drivers/hv/hyperv_vmbus.h
-@@ -172,6 +172,8 @@ extern int hv_synic_cleanup(unsigned int cpu);
- /* Interface */
- 
- void hv_ringbuffer_pre_init(struct vmbus_channel *channel);
-+int hv_ringbuffer_post_init(struct hv_ring_buffer_info *ring_info,
-+		struct page *pages, u32 page_cnt);
- 
- int hv_ringbuffer_init(struct hv_ring_buffer_info *ring_info,
- 		       struct page *pages, u32 pagecnt, u32 max_pkt_size);
-diff --git a/drivers/hv/ring_buffer.c b/drivers/hv/ring_buffer.c
-index 2aee356840a2..d4f93fca1108 100644
---- a/drivers/hv/ring_buffer.c
-+++ b/drivers/hv/ring_buffer.c
-@@ -17,6 +17,8 @@
- #include <linux/vmalloc.h>
- #include <linux/slab.h>
- #include <linux/prefetch.h>
+diff --git a/drivers/scsi/storvsc_drv.c b/drivers/scsi/storvsc_drv.c
+index 328bb961c281..78320719bdd8 100644
+--- a/drivers/scsi/storvsc_drv.c
++++ b/drivers/scsi/storvsc_drv.c
+@@ -21,6 +21,8 @@
+ #include <linux/device.h>
+ #include <linux/hyperv.h>
+ #include <linux/blkdev.h>
 +#include <linux/io.h>
-+#include <asm/mshyperv.h>
++#include <linux/dma-mapping.h>
+ #include <scsi/scsi.h>
+ #include <scsi/scsi_cmnd.h>
+ #include <scsi/scsi_host.h>
+@@ -427,6 +429,8 @@ struct storvsc_cmd_request {
+ 	u32 payload_sz;
  
- #include "hyperv_vmbus.h"
+ 	struct vstor_packet vstor_packet;
++	u32 hvpg_count;
++	struct hv_dma_range *dma_range;
+ };
  
-@@ -179,43 +181,89 @@ void hv_ringbuffer_pre_init(struct vmbus_channel *channel)
- 	mutex_init(&channel->outbound.ring_buffer_mutex);
+ 
+@@ -509,6 +513,14 @@ struct storvsc_scan_work {
+ 	u8 tgt_id;
+ };
+ 
++#define storvsc_dma_map(dev, page, offset, size, dir) \
++	dma_map_page(dev, page, offset, size, dir)
++
++#define storvsc_dma_unmap(dev, dma_range, dir)		\
++		dma_unmap_page(dev, dma_range.dma,	\
++			       dma_range.mapping_size,	\
++			       dir ? DMA_FROM_DEVICE : DMA_TO_DEVICE)
++
+ static void storvsc_device_scan(struct work_struct *work)
+ {
+ 	struct storvsc_scan_work *wrk;
+@@ -1260,6 +1272,7 @@ static void storvsc_on_channel_callback(void *context)
+ 	struct hv_device *device;
+ 	struct storvsc_device *stor_device;
+ 	struct Scsi_Host *shost;
++	int i;
+ 
+ 	if (channel->primary_channel != NULL)
+ 		device = channel->primary_channel->device_obj;
+@@ -1314,6 +1327,15 @@ static void storvsc_on_channel_callback(void *context)
+ 				request = (struct storvsc_cmd_request *)scsi_cmd_priv(scmnd);
+ 			}
+ 
++			if (request->dma_range) {
++				for (i = 0; i < request->hvpg_count; i++)
++					storvsc_dma_unmap(&device->device,
++						request->dma_range[i],
++						request->vstor_packet.vm_srb.data_in == READ_TYPE);
++
++				kfree(request->dma_range);
++			}
++
+ 			storvsc_on_receive(stor_device, packet, request);
+ 			continue;
+ 		}
+@@ -1810,7 +1832,9 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 		unsigned int hvpgoff, hvpfns_to_add;
+ 		unsigned long offset_in_hvpg = offset_in_hvpage(sgl->offset);
+ 		unsigned int hvpg_count = HVPFN_UP(offset_in_hvpg + length);
++		dma_addr_t dma;
+ 		u64 hvpfn;
++		u32 size;
+ 
+ 		if (hvpg_count > MAX_PAGE_BUFFER_COUNT) {
+ 
+@@ -1824,6 +1848,13 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 		payload->range.len = length;
+ 		payload->range.offset = offset_in_hvpg;
+ 
++		cmd_request->dma_range = kcalloc(hvpg_count,
++				 sizeof(*cmd_request->dma_range),
++				 GFP_ATOMIC);
++		if (!cmd_request->dma_range) {
++			ret = -ENOMEM;
++			goto free_payload;
++		}
+ 
+ 		for (i = 0; sgl != NULL; sgl = sg_next(sgl)) {
+ 			/*
+@@ -1847,9 +1878,29 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 			 * last sgl should be reached at the same time that
+ 			 * the PFN array is filled.
+ 			 */
+-			while (hvpfns_to_add--)
+-				payload->range.pfn_array[i++] =	hvpfn++;
++			while (hvpfns_to_add--) {
++				size = min(HV_HYP_PAGE_SIZE - offset_in_hvpg,
++					   (unsigned long)length);
++				dma = storvsc_dma_map(&dev->device, pfn_to_page(hvpfn++),
++						      offset_in_hvpg, size,
++						      scmnd->sc_data_direction);
++				if (dma_mapping_error(&dev->device, dma)) {
++					ret = -ENOMEM;
++					goto free_dma_range;
++				}
++
++				if (offset_in_hvpg) {
++					payload->range.offset = dma & ~HV_HYP_PAGE_MASK;
++					offset_in_hvpg = 0;
++				}
++
++				cmd_request->dma_range[i].dma = dma;
++				cmd_request->dma_range[i].mapping_size = size;
++				payload->range.pfn_array[i++] = dma >> HV_HYP_PAGE_SHIFT;
++				length -= size;
++			}
+ 		}
++		cmd_request->hvpg_count = hvpg_count;
+ 	}
+ 
+ 	cmd_request->payload = payload;
+@@ -1860,13 +1911,20 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 	put_cpu();
+ 
+ 	if (ret == -EAGAIN) {
+-		if (payload_sz > sizeof(cmd_request->mpb))
+-			kfree(payload);
+ 		/* no more space */
+-		return SCSI_MLQUEUE_DEVICE_BUSY;
++		ret = SCSI_MLQUEUE_DEVICE_BUSY;
++		goto free_dma_range;
+ 	}
+ 
+ 	return 0;
++
++free_dma_range:
++	kfree(cmd_request->dma_range);
++
++free_payload:
++	if (payload_sz > sizeof(cmd_request->mpb))
++		kfree(payload);
++	return ret;
  }
  
--/* Initialize the ring buffer. */
--int hv_ringbuffer_init(struct hv_ring_buffer_info *ring_info,
--		       struct page *pages, u32 page_cnt, u32 max_pkt_size)
-+int hv_ringbuffer_post_init(struct hv_ring_buffer_info *ring_info,
-+		       struct page *pages, u32 page_cnt)
- {
-+	u64 physic_addr = page_to_pfn(pages) << PAGE_SHIFT;
-+	unsigned long *pfns_wraparound;
-+	void *vaddr;
- 	int i;
--	struct page **pages_wraparound;
- 
--	BUILD_BUG_ON((sizeof(struct hv_ring_buffer) != PAGE_SIZE));
-+	if (!hv_isolation_type_snp())
-+		return 0;
-+
-+	physic_addr += ms_hyperv.shared_gpa_boundary;
- 
- 	/*
- 	 * First page holds struct hv_ring_buffer, do wraparound mapping for
- 	 * the rest.
- 	 */
--	pages_wraparound = kcalloc(page_cnt * 2 - 1, sizeof(struct page *),
-+	pfns_wraparound = kcalloc(page_cnt * 2 - 1, sizeof(unsigned long),
- 				   GFP_KERNEL);
--	if (!pages_wraparound)
-+	if (!pfns_wraparound)
- 		return -ENOMEM;
- 
--	pages_wraparound[0] = pages;
-+	pfns_wraparound[0] = physic_addr >> PAGE_SHIFT;
- 	for (i = 0; i < 2 * (page_cnt - 1); i++)
--		pages_wraparound[i + 1] = &pages[i % (page_cnt - 1) + 1];
--
--	ring_info->ring_buffer = (struct hv_ring_buffer *)
--		vmap(pages_wraparound, page_cnt * 2 - 1, VM_MAP, PAGE_KERNEL);
--
--	kfree(pages_wraparound);
-+		pfns_wraparound[i + 1] = (physic_addr >> PAGE_SHIFT) +
-+			i % (page_cnt - 1) + 1;
- 
--
--	if (!ring_info->ring_buffer)
-+	vaddr = vmap_pfn(pfns_wraparound, page_cnt * 2 - 1, PAGE_KERNEL_IO);
-+	kfree(pfns_wraparound);
-+	if (!vaddr)
- 		return -ENOMEM;
- 
--	ring_info->ring_buffer->read_index =
--		ring_info->ring_buffer->write_index = 0;
-+	/* Clean memory after setting host visibility. */
-+	memset((void *)vaddr, 0x00, page_cnt * PAGE_SIZE);
-+
-+	ring_info->ring_buffer = (struct hv_ring_buffer *)vaddr;
-+	ring_info->ring_buffer->read_index = 0;
-+	ring_info->ring_buffer->write_index = 0;
- 
- 	/* Set the feature bit for enabling flow control. */
- 	ring_info->ring_buffer->feature_bits.value = 1;
- 
-+	return 0;
-+}
-+
-+/* Initialize the ring buffer. */
-+int hv_ringbuffer_init(struct hv_ring_buffer_info *ring_info,
-+		       struct page *pages, u32 page_cnt, u32 max_pkt_size)
-+{
-+	int i;
-+	struct page **pages_wraparound;
-+
-+	BUILD_BUG_ON((sizeof(struct hv_ring_buffer) != PAGE_SIZE));
-+
-+	if (!hv_isolation_type_snp()) {
-+		/*
-+		 * First page holds struct hv_ring_buffer, do wraparound mapping for
-+		 * the rest.
-+		 */
-+		pages_wraparound = kcalloc(page_cnt * 2 - 1, sizeof(struct page *),
-+					   GFP_KERNEL);
-+		if (!pages_wraparound)
-+			return -ENOMEM;
-+
-+		pages_wraparound[0] = pages;
-+		for (i = 0; i < 2 * (page_cnt - 1); i++)
-+			pages_wraparound[i + 1] = &pages[i % (page_cnt - 1) + 1];
-+
-+		ring_info->ring_buffer = (struct hv_ring_buffer *)
-+			vmap(pages_wraparound, page_cnt * 2 - 1, VM_MAP, PAGE_KERNEL);
-+
-+		kfree(pages_wraparound);
-+
-+		if (!ring_info->ring_buffer)
-+			return -ENOMEM;
-+
-+		ring_info->ring_buffer->read_index =
-+			ring_info->ring_buffer->write_index = 0;
-+
-+		/* Set the feature bit for enabling flow control. */
-+		ring_info->ring_buffer->feature_bits.value = 1;
-+	}
-+
- 	ring_info->ring_size = page_cnt << PAGE_SHIFT;
- 	ring_info->ring_size_div10_reciprocal =
- 		reciprocal_value(ring_info->ring_size / 10);
+ static struct scsi_host_template scsi_driver = {
 -- 
 2.25.1
 
