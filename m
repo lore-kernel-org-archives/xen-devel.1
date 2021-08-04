@@ -2,50 +2,47 @@ Return-Path: <SRS0=ylDS=M3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-4.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 307CFC4338F
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:56:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9A6DC4338F
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 19:19:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D923961002
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 18:56:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D923961002
+	by mail.kernel.org (Postfix) with ESMTPS id 6613560F58
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Aug 2021 19:19:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6613560F58
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.163938.300148 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.163984.300160 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mBM3t-0005SR-Nf; Wed, 04 Aug 2021 18:56:17 +0000
+	id 1mBMPm-0000ZS-Hd; Wed, 04 Aug 2021 19:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 163938.300148; Wed, 04 Aug 2021 18:56:17 +0000
+Received: by outflank-mailman (output) from mailman id 163984.300160; Wed, 04 Aug 2021 19:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mBM3t-0005SA-FQ; Wed, 04 Aug 2021 18:56:17 +0000
-Received: by outflank-mailman (input) for mailman id 163938;
- Wed, 04 Aug 2021 18:56:17 +0000
+	id 1mBMPm-0000ZL-EH; Wed, 04 Aug 2021 19:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 163984;
+ Wed, 04 Aug 2021 19:18:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=q0vd=M3=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1mBLuS-0005Nn-1a
- for xen-devel@lists.xenproject.org; Wed, 04 Aug 2021 18:46:32 +0000
-Received: from mail-pj1-x1030.google.com (unknown [2607:f8b0:4864:20::1030])
+ <SRS0=v2HM=M3=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1mBMPl-0000ZD-Cm
+ for xen-devel@lists.xenproject.org; Wed, 04 Aug 2021 19:18:53 +0000
+Received: from mail-lj1-x229.google.com (unknown [2a00:1450:4864:20::229])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 991cd931-70cf-4796-a433-b53b0043c021;
- Wed, 04 Aug 2021 18:45:51 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id
- o44-20020a17090a0a2fb0290176ca3e5a2fso4890414pjo.1
- for <xen-devel@lists.xenproject.org>; Wed, 04 Aug 2021 11:45:51 -0700 (PDT)
-Received: from ubuntu-Virtual-Machine.corp.microsoft.com
- ([2001:4898:80e8:f:1947:6842:b8a8:6f83])
- by smtp.gmail.com with ESMTPSA id f5sm3325647pjo.23.2021.08.04.11.45.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Aug 2021 11:45:50 -0700 (PDT)
+ id 8ad15ec5-788a-4b77-a6f3-aefe965975dd;
+ Wed, 04 Aug 2021 19:18:52 +0000 (UTC)
+Received: by mail-lj1-x229.google.com with SMTP id x9so1839518ljj.2
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Aug 2021 12:18:52 -0700 (PDT)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id t30sm224980ljo.124.2021.08.04.12.18.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Aug 2021 12:18:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,233 +54,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 991cd931-70cf-4796-a433-b53b0043c021
+X-Inumbo-ID: 8ad15ec5-788a-4b77-a6f3-aefe965975dd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=keWJNY0TOKB46dPy1a/lrsXD5LLzekP9Z6jv0dmU95k=;
-        b=OKNw+imaxI+fKOKyGJdfYZ5km1N/ZyKxdiMPvCbxRTQzEagGFnMNZ8hCxP6Sj6xn6j
-         8KbLWhyMRHkQmMVFkye9sBUZlXjhh8UqKho3pmGuplw+iTiugnihtsIGME3R3XrfAG5H
-         FUgexFeXQrB9IQ2fqvPylT91eErThlRo25/1oPqWdSkxozsc8oI1ihmsEk/Ll5Dw0u1F
-         o6jbVB+vn7AlYYHpPVq8eT2rTTaXqchZYuA3nRXRGf97kY6Tz+EWKFVGvvYBWNa7kfKD
-         T6RcaK5jNA10IOxgxVIhxweeyuzwX4C5MVdXqqUYHM3fNjpeE6BJft1kYkIJHBAYMQIh
-         l45Q==
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=/U30BlgpbARkoUUN/4dr64eDUPin30IaR78x8FCP+/o=;
+        b=Zy5vRju14EHQBEwlRWrlarKexLhDyySw5VoTd0ryQAit81CiMT4VMfDir7hVwAxdYs
+         pE92l+1uf3QwchjX3NyBmhIE3SmZV4mHY7tuNeeToBzg6BR/ukvj0cWhlIKkH4AzPyw4
+         Zl3gohBrjWlbvlGOh5CdmfJIekVqfSxCVboJF7tGPsrHx8r3AVv+G6nyXt9h9757vhs0
+         QNwowatA3Siyn9I9xotb2ZoJyaGDFYKGq3bNwW37SsepJKC5b1RXza4gVYgtim+6cwYE
+         37g/pKh6FlEiHsckwcklhg5okeqYbJmSYKowCSwQMlXDuPtACgcrGziGEZ06xDN2pZ3x
+         V9Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=keWJNY0TOKB46dPy1a/lrsXD5LLzekP9Z6jv0dmU95k=;
-        b=JBZj4uBPGPYiSz+KExXqtjU/jPDWllE5gbh1IlbtKEcXFy406zkthHix/vLljQmCoa
-         9ajB+gicCnPEGz+X0XkCJI9OLB411XrPsYYIv52I7HpCPBXac+PDg3Jb9cCTvNrMixc7
-         b+jib931u0e5b72k0nQfVn+YUACM1DDzSs15T7e32sFwudg5XKGXI2JLRQ8OzJPEkSZ7
-         eJD8Fp0zLY0A2Ej2EWwjujB263Ac50s10ZyTdk+S4tnO3N8x+ZHcautmuQGBcMDiLuCe
-         /DdpOFNwWcy3slCU6PvSsubOtdXGnOeSKUzmsn/jwmj/NaWyUNbiviiViZJtp7h96pJp
-         loVA==
-X-Gm-Message-State: AOAM532hYwviExYQHKAavw7msJlK9LWRzy1/td9ONS2E7ZoPl4yVtucp
-	l3hmU62EsyUlwIV2rKGp+gM=
-X-Google-Smtp-Source: ABdhPJwys0uU3bab3cbhhZkGrABiePfZp0CgNlBTq2zsAkdo8ijSiGByWQDUWb34Oh21nzInCwt3JA==
-X-Received: by 2002:a17:902:c94f:b029:12c:dd57:c580 with SMTP id i15-20020a170902c94fb029012cdd57c580mr554023pla.42.1628102751128;
-        Wed, 04 Aug 2021 11:45:51 -0700 (PDT)
-From: Tianyu Lan <ltykernel@gmail.com>
-To: kys@microsoft.com,
-	haiyangz@microsoft.com,
-	sthemmin@microsoft.com,
-	wei.liu@kernel.org,
-	decui@microsoft.com,
-	tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	x86@kernel.org,
-	hpa@zytor.com,
-	dave.hansen@linux.intel.com,
-	luto@kernel.org,
-	peterz@infradead.org,
-	konrad.wilk@oracle.com,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	joro@8bytes.org,
-	will@kernel.org,
-	davem@davemloft.net,
-	kuba@kernel.org,
-	jejb@linux.ibm.com,
-	martin.petersen@oracle.com,
-	arnd@arndb.de,
-	hch@lst.de,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com,
-	Tianyu.Lan@microsoft.com,
-	rppt@kernel.org,
-	kirill.shutemov@linux.intel.com,
-	akpm@linux-foundation.org,
-	brijesh.singh@amd.com,
-	thomas.lendacky@amd.com,
-	pgonda@google.com,
-	david@redhat.com,
-	krish.sadhukhan@oracle.com,
-	saravanand@fb.com,
-	aneesh.kumar@linux.ibm.com,
-	xen-devel@lists.xenproject.org,
-	martin.b.radev@gmail.com,
-	ardb@kernel.org,
-	rientjes@google.com,
-	tj@kernel.org,
-	keescook@chromium.org,
-	michael.h.kelley@microsoft.com
-Cc: iommu@lists.linux-foundation.org,
-	linux-arch@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	netdev@vger.kernel.org,
-	vkuznets@redhat.com,
-	parri.andrea@gmail.com
-Subject: [PATCH V2 11/14] x86/Swiotlb: Add Swiotlb bounce buffer remap function for HV IVM
-Date: Wed,  4 Aug 2021 14:45:07 -0400
-Message-Id: <20210804184513.512888-12-ltykernel@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210804184513.512888-1-ltykernel@gmail.com>
-References: <20210804184513.512888-1-ltykernel@gmail.com>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=/U30BlgpbARkoUUN/4dr64eDUPin30IaR78x8FCP+/o=;
+        b=f3rt+ruaezwEDTeKYzSTgGXbXWsHcQ7+q5i9IZuGRSXlERIkE7nE8o/DRJvsx+9kQb
+         /d3Pco+q1Kv7Db3uDBhmvXvZ7dMmxQmOGsdP131bZwx9Yn8m00nJoL0EyHk7ohaatcoo
+         FFEFE2ZXdm3E70GlQreG4x63fSYdAcsiTXsHoTO+049IE+TV44XmeSkVw0u5C31bghuT
+         pj7bc9vb3utTguLSwSVlhvLcSRN0hzHNqEOXZOScot6wg6sIAN1Dec0IxPNtS+Ao8vxk
+         JzFVKqH96V2TzVA6UxbteS43hT9dtrvsBiTemyecyNVrTickv2ou52Mt6F9z4o28iGwA
+         QUbA==
+X-Gm-Message-State: AOAM531M62ALaSupSjbWphkFa1kbbDzNALJbBqhKZQ8TJePs22VdnKPN
+	NbTIPMBUFVpbeqAd4g4030o=
+X-Google-Smtp-Source: ABdhPJyOq4sBf6N7kKsPdYsSKao/hHQOatfQ5qtkAMQWEHRmb1Z6nbJ8VPBv1Ii4Am/nugMdSxiQ7A==
+X-Received: by 2002:a2e:581a:: with SMTP id m26mr561589ljb.401.1628104731429;
+        Wed, 04 Aug 2021 12:18:51 -0700 (PDT)
+Subject: Re: [RFC PATCH] xen/memory: Introduce a hypercall to provide
+ unallocated space
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org,
+ Julien Grall <julien@xen.org>
+References: <1627489110-25633-1-git-send-email-olekstysh@gmail.com>
+ <80fafc01-f063-d6e5-1c08-7ad64550310c@citrix.com>
+ <e8db3021-78a5-e040-a70b-62ca5b500149@xen.org>
+ <4de5ed21-379e-b618-44c8-924d88b1a519@citrix.com>
+ <bbc7f597-5249-20a0-cac9-13f594268299@xen.org>
+ <6a633f4e-13e0-4a2b-cf6e-35ef90ae977c@gmail.com>
+ <7d79a197-a126-2eed-3198-c20e63c1eece@suse.com>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <090ffc19-92fd-5ef9-99d5-affcfdc28ad2@gmail.com>
+Date: Wed, 4 Aug 2021 22:18:49 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <7d79a197-a126-2eed-3198-c20e63c1eece@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-In Isolation VM with AMD SEV, bounce buffer needs to be accessed via
-extra address space which is above shared_gpa_boundary
-(E.G 39 bit address line) reported by Hyper-V CPUID ISOLATION_CONFIG.
-The access physical address will be original physical address +
-shared_gpa_boundary. The shared_gpa_boundary in the AMD SEV SNP
-spec is called virtual top of memory(vTOM). Memory addresses below
-vTOM are automatically treated as private while memory above
-vTOM is treated as shared.
+On 03.08.21 15:53, Jan Beulich wrote:
 
-Use dma_map_decrypted() in the swiotlb code, store remap address returned
-and use the remap address to copy data from/to swiotlb bounce buffer.
+Hi, Jan
 
-Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
----
-Change since v1:
-       * Make swiotlb_init_io_tlb_mem() return error code and return
-         error when dma_map_decrypted() fails.
+Thank you for the input.
 
-Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
----
- include/linux/swiotlb.h |  4 ++++
- kernel/dma/swiotlb.c    | 32 ++++++++++++++++++++++++--------
- 2 files changed, 28 insertions(+), 8 deletions(-)
+> On 30.07.2021 18:13, Oleksandr wrote:
+>> Well, if new hypercall and, what is more, "the querying hypervisor at
+>> runtime to find unused space" model itself is not welcome, I am ok,
+>> let's try to create a working system,
+>> may we please find a common ground to move this forward (at least on Arm
+>> for now, the foreign mapping is the most important question).
+>>
+>> I got the proposed idea in general, but I haven't connected all dots
+>> yet, some points need clarification.
+>>
+>> 1. The safe range must be defined/allocated in advance and must remain
+>> const during the runtime. The safe range must be chosen by the toolstack.
+>> [For the initial implementation we can start with some large value
+>> (128GB) as discussed above]
+>>
+>> Questions:
+>>
+>> - Do we need to inform Xen about that range (via domain_create
+>> hypercall, etc)?
+>> - What will be in charge of guaranteeing the safety of that range at
+>> runtime (reject new mapping requests with possible overlaps, etc), Xen,
+>> toolstack or both?
+> Well, what other entity than Xen could enforce this? (By implication,
+> the answer to the earlier question can imo only be "yes", unless it's
+> Xen itself to establish the region.)
 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index f507e3eacbea..584560ecaa8e 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -72,6 +72,9 @@ extern enum swiotlb_force swiotlb_force;
-  * @end:	The end address of the swiotlb memory pool. Used to do a quick
-  *		range check to see if the memory was in fact allocated by this
-  *		API.
-+ * @vaddr:	The vaddr of the swiotlb memory pool. The swiotlb
-+ *		memory pool may be remapped in the memory encrypted case and store
-+ *		virtual address for bounce buffer operation.
-  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
-  *		@end. For default swiotlb, this is command line adjustable via
-  *		setup_io_tlb_npages.
-@@ -89,6 +92,7 @@ extern enum swiotlb_force swiotlb_force;
- struct io_tlb_mem {
- 	phys_addr_t start;
- 	phys_addr_t end;
-+	void *vaddr;
- 	unsigned long nslabs;
- 	unsigned long used;
- 	unsigned int index;
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 1fa81c096c1d..29b6d888ef3b 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -176,7 +176,7 @@ void __init swiotlb_update_mem_attributes(void)
- 	memset(vaddr, 0, bytes);
- }
- 
--static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
-+static int swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 				    unsigned long nslabs, bool late_alloc)
- {
- 	void *vaddr = phys_to_virt(start);
-@@ -194,14 +194,21 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 		mem->slots[i].alloc_size = 0;
- 	}
- 
--	set_memory_decrypted((unsigned long)vaddr, bytes >> PAGE_SHIFT);
--	memset(vaddr, 0, bytes);
-+	mem->vaddr = dma_map_decrypted(vaddr, bytes);
-+	if (!mem->vaddr) {
-+		pr_err("Failed to decrypt memory.\n");
-+		return -ENOMEM;
-+	}
-+
-+	memset(mem->vaddr, 0, bytes);
-+	return 0;
- }
- 
- int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- {
- 	struct io_tlb_mem *mem;
- 	size_t alloc_size;
-+	int ret;
- 
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -216,7 +223,11 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- 		panic("%s: Failed to allocate %zu bytes align=0x%lx\n",
- 		      __func__, alloc_size, PAGE_SIZE);
- 
--	swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
-+	ret = swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
-+	if (ret) {
-+		memblock_free(__pa(mem), alloc_size);
-+		return ret;
-+	}
- 
- 	io_tlb_default_mem = mem;
- 	if (verbose)
-@@ -304,6 +315,8 @@ int
- swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- {
- 	struct io_tlb_mem *mem;
-+	int size = get_order(struct_size(mem, slots, nslabs));
-+	int ret;
- 
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -312,12 +325,15 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- 	if (WARN_ON_ONCE(io_tlb_default_mem))
- 		return -ENOMEM;
- 
--	mem = (void *)__get_free_pages(GFP_KERNEL,
--		get_order(struct_size(mem, slots, nslabs)));
-+	mem = (void *)__get_free_pages(GFP_KERNEL, size);
- 	if (!mem)
- 		return -ENOMEM;
- 
--	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
-+	ret = swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
-+	if (ret) {
-+		free_pages((unsigned long)mem, size);
-+		return ret;
-+	}
- 
- 	io_tlb_default_mem = mem;
- 	swiotlb_print_info();
-@@ -360,7 +376,7 @@ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size
- 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
- 	size_t alloc_size = mem->slots[index].alloc_size;
- 	unsigned long pfn = PFN_DOWN(orig_addr);
--	unsigned char *vaddr = phys_to_virt(tlb_addr);
-+	unsigned char *vaddr = mem->vaddr + tlb_addr - mem->start;
- 	unsigned int tlb_offset;
- 
- 	if (orig_addr == INVALID_PHYS_ADDR)
+Indeed, agree.
+
+
+>
+>> - Where that range should be located in guest address space, should that
+>> range be the same for all domains (how GUEST_GNTTAB_BASE(SIZE) for example)
+>> or it should be calculated based on actual guest_ram_base(size) for a
+>> particular domain?
+> The default size may well be fixed or amount-of-memory-dependent, but
+> I think there will need to be a way to enlarge the region for guests
+> with particular needs.
+Well, but why we couldn't just make a large chunk by default which would
+satisfy all guests, as it was mentioned earlier in this thread "as it 
+doesn't consume resource when not being used"
+to avoid an extra configuration option, etc?
+
+
+>
+>> - What about a safe range the Dom0 can use itself? Xen should choose it
+>> for Dom0 the same way how toolstack chooses it for other domains, correct?
+>>
+>> 2. The safe range must be provided to domain using the firmware table.
+>> [We can start with the DTB and leave ACPI unimplemented for now,
+>> assuming we will be able to solve open questions as discussed above]
+>>
+>> Questions:
+>>
+>> - Do we need distinguish between foreign and grant mappings at the
+>> domain side at all? Can the same safe range be used for all types of
+>> mapping?
+> Like Stefano I don't think so.
+
+Agree.
+
 -- 
-2.25.1
+Regards,
+
+Oleksandr Tyshchenko
 
 
