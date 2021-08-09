@@ -2,50 +2,43 @@ Return-Path: <SRS0=iN5S=NA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1080C4338F
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Aug 2021 18:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8922CC4338F
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Aug 2021 18:14:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 89FFA610EA
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Aug 2021 18:02:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 89FFA610EA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 27F5061004
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Aug 2021 18:14:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 27F5061004
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.165184.301899 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.165194.301910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mD9bC-0000XM-Ov; Mon, 09 Aug 2021 18:02:06 +0000
+	id 1mD9n4-0002JI-UJ; Mon, 09 Aug 2021 18:14:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 165184.301899; Mon, 09 Aug 2021 18:02:06 +0000
+Received: by outflank-mailman (output) from mailman id 165194.301910; Mon, 09 Aug 2021 18:14:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mD9bC-0000X4-Lh; Mon, 09 Aug 2021 18:02:06 +0000
-Received: by outflank-mailman (input) for mailman id 165184;
- Mon, 09 Aug 2021 18:02:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mD9n4-0002JB-R4; Mon, 09 Aug 2021 18:14:22 +0000
+Received: by outflank-mailman (input) for mailman id 165194;
+ Mon, 09 Aug 2021 18:14:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JD4O=NA=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1mD9Wc-0000Aq-2s
- for xen-devel@lists.xenproject.org; Mon, 09 Aug 2021 17:57:22 +0000
-Received: from mail-pj1-x1034.google.com (unknown [2607:f8b0:4864:20::1034])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 61c73651-940a-44e3-a734-02fbc5509dc4;
- Mon, 09 Aug 2021 17:56:51 +0000 (UTC)
-Received: by mail-pj1-x1034.google.com with SMTP id
- mq2-20020a17090b3802b0290178911d298bso1170878pjb.1
- for <xen-devel@lists.xenproject.org>; Mon, 09 Aug 2021 10:56:51 -0700 (PDT)
-Received: from ubuntu-Virtual-Machine.corp.microsoft.com
- ([2001:4898:80e8:2:106e:6ed1:5da1:2ac4])
- by smtp.gmail.com with ESMTPSA id x14sm20589708pfa.127.2021.08.09.10.56.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Aug 2021 10:56:50 -0700 (PDT)
+ <SRS0=I97U=NA=kernel.org=helgaas@srs-us1.protection.inumbo.net>)
+ id 1mD9n3-0002J5-Pk
+ for xen-devel@lists.xenproject.org; Mon, 09 Aug 2021 18:14:21 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9dea4158-f93d-11eb-9f2c-12813bfff9fa;
+ Mon, 09 Aug 2021 18:14:20 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5978561002;
+ Mon,  9 Aug 2021 18:14:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,346 +50,223 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61c73651-940a-44e3-a734-02fbc5509dc4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=wE1oyJvMZrxsK10mJTBwWYCUb1GB6i5zG9Yu/v/zgdM=;
-        b=AR4iP5ZYBtCq95LlWtYYCyS910itq7pZDn/QCC4MRpb0ABoxb3+fdeU/8WwTtjQf5T
-         wt6+yYw0C62DDMzkEhJ9TDNdHBUTRApK+U+iZJFsySVBxYlvJdujXMreaUZpdeFbAf4U
-         vcTLAkPbqvTQqsnFJFAZNUdAmNtsbeiS2AvHxvoHY2vX7tqjY8VLvRu69UVWkdW6uPQm
-         r6s0/vu2Yk4blkUZaI2VpcM4gDNFSYqRbOR/JAU6+351oCLyhaCizCEZRRrgZUN6m1Z1
-         2B1uH9soEdbo/8BjQeOdRlT9ADfhGl+oSC9LxDUyE/wPt7X/V+eJurB8URppuSrIeyYy
-         4zIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=wE1oyJvMZrxsK10mJTBwWYCUb1GB6i5zG9Yu/v/zgdM=;
-        b=GSrq0crIaOrf6EhRiPjbpBcw4pxIJR8q0U01PwoFkl9/3I9z58bREgGbqG4hlnj9t3
-         XWpdb6iEY8gGyNqBrYqOlNvxAloHuh2dvfqDA/q7MhP2qnhW52cXpEcy9OqnxxMNrXh8
-         WI9k+u4rWniWnyjBucVuhjOdeOYnJM4a6HG8qRNLOXh7Gxv0fSUrHXpLXr6Ee85qiSMC
-         9TTxgDjh/70S1cR4BPf3xifTqisJim/xKE2LA0xJkQnuMggHyYfsogkqL65fbtbEXpyq
-         47YNLi/kqdawmJJjhHL6+2FckKxHy8kj//xmh3AH0OLIlKDZMa00mYsKh3AKprN1zl0m
-         y0ng==
-X-Gm-Message-State: AOAM533nu561n1f5ey+UO/fBIbEfMElTy9OwSrRbqfxdVaO9NSDVYczZ
-	eP5P2aTRuNBO5macYhVrH7E=
-X-Google-Smtp-Source: ABdhPJy2FZfXH3NbVL2EBYwcf8LiETMKocZ9CFOcqjbqCapsAKuw9uzjOCEJ0P+M1z5RyBMo3xqDGw==
-X-Received: by 2002:aa7:838a:0:b029:3b7:31a5:649c with SMTP id u10-20020aa7838a0000b02903b731a5649cmr19142980pfm.44.1628531811197;
-        Mon, 09 Aug 2021 10:56:51 -0700 (PDT)
-From: Tianyu Lan <ltykernel@gmail.com>
-To: kys@microsoft.com,
-	haiyangz@microsoft.com,
-	sthemmin@microsoft.com,
-	wei.liu@kernel.org,
-	decui@microsoft.com,
-	tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	x86@kernel.org,
-	hpa@zytor.com,
-	dave.hansen@linux.intel.com,
-	luto@kernel.org,
-	peterz@infradead.org,
-	konrad.wilk@oracle.com,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	joro@8bytes.org,
-	will@kernel.org,
-	davem@davemloft.net,
-	kuba@kernel.org,
-	jejb@linux.ibm.com,
-	martin.petersen@oracle.com,
-	arnd@arndb.de,
-	hch@lst.de,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com,
-	thomas.lendacky@amd.com,
-	brijesh.singh@amd.com,
-	ardb@kernel.org,
-	Tianyu.Lan@microsoft.com,
-	pgonda@google.com,
-	martin.b.radev@gmail.com,
-	akpm@linux-foundation.org,
-	kirill.shutemov@linux.intel.com,
-	rppt@kernel.org,
-	sfr@canb.auug.org.au,
-	saravanand@fb.com,
-	krish.sadhukhan@oracle.com,
-	aneesh.kumar@linux.ibm.com,
-	xen-devel@lists.xenproject.org,
-	rientjes@google.com,
-	hannes@cmpxchg.org,
-	tj@kernel.org,
-	michael.h.kelley@microsoft.com
-Cc: iommu@lists.linux-foundation.org,
-	linux-arch@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	netdev@vger.kernel.org,
-	vkuznets@redhat.com,
-	parri.andrea@gmail.com,
-	dave.hansen@intel.com
-Subject: [PATCH V3 11/13] HV/IOMMU: Enable swiotlb bounce buffer for Isolation VM
-Date: Mon,  9 Aug 2021 13:56:15 -0400
-Message-Id: <20210809175620.720923-12-ltykernel@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210809175620.720923-1-ltykernel@gmail.com>
-References: <20210809175620.720923-1-ltykernel@gmail.com>
+X-Inumbo-ID: 9dea4158-f93d-11eb-9f2c-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1628532859;
+	bh=qXeJ0P/U8JvDxO9kR9G0/0wx57hQ6JjYEoFVv0vPQv8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:From;
+	b=WW6aFqzA3dvX3Ze6M+eftHp7JaBZzCklo9aY7tR1PQm8w/hnkzEnuCle4tCjoZiSe
+	 nT6rKeORsoNdjHgHs9BqQjZRVKkrC6rxN1uu2Ygmc41jcEEm8UEVPbXxSnQ6K0Wfj8
+	 qSINXH8XorzrEZOa15qbiDu7ItPII0bkSjch0lXkcnkoO4HSU1QbFOtyKkGI+wZYNN
+	 0+0+St5OBLuFlSt+oW4UklxyjCkK/jpDv/4IACdl9gU6SOxr0i2z8LDiCotUp5Fcfn
+	 PGIel408/Vk6fQxN4caUeDLV9ODEWUpMqiy48I+zaYWawQn9qjAcLm5+IUrHSYXRZm
+	 w1DE8HFaMxc8g==
+Date: Mon, 9 Aug 2021 13:14:18 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>
+Cc: Mark Rutland <mark.rutland@arm.com>,
+	Giovanni Cabiddu <giovanni.cabiddu@intel.com>,
+	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>,
+	Peter Zijlstra <peterz@infradead.org>, linux-pci@vger.kernel.org,
+	Alexander Duyck <alexanderduyck@fb.com>,
+	Russell Currey <ruscur@russell.cc>, x86@kernel.org,
+	oss-drivers@corigine.com, netdev@vger.kernel.org,
+	Paul Mackerras <paulus@samba.org>, "H. Peter Anvin" <hpa@zytor.com>,
+	Jiri Olsa <jolsa@redhat.com>, Thomas Gleixner <tglx@linutronix.de>,
+	Taras Chornyi <tchornyi@marvell.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	linux-scsi@vger.kernel.org, Michael Ellerman <mpe@ellerman.id.au>,
+	Sathya Prakash <sathya.prakash@broadcom.com>, qat-linux@intel.com,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Yisen Zhuang <yisen.zhuang@huawei.com>,
+	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
+	Fiona Trahe <fiona.trahe@intel.com>,
+	Oliver O'Halloran <oohall@gmail.com>,
+	Andrew Donnellan <ajd@linux.ibm.com>,
+	Mathias Nyman <mathias.nyman@intel.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Ido Schimmel <idosch@nvidia.com>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Frederic Barrat <fbarrat@linux.ibm.com>,
+	Borislav Petkov <bp@alien8.de>, Michael Buesch <m@bues.ch>,
+	Jiri Pirko <jiri@nvidia.com>, Bjorn Helgaas <bhelgaas@google.com>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Andy Shevchenko <andriy.shevchenko@intel.com>,
+	Juergen Gross <jgross@suse.com>,
+	Salil Mehta <salil.mehta@huawei.com>,
+	Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
+	xen-devel@lists.xenproject.org, Vadym Kochan <vkochan@marvell.com>,
+	MPT-FusionLinux.pdl@broadcom.com, linux-usb@vger.kernel.org,
+	linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	Zhou Wang <wangzhou1@hisilicon.com>, Arnd Bergmann <arnd@arndb.de>,
+	linux-crypto@vger.kernel.org, kernel@pengutronix.de,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Simon Horman <simon.horman@corigine.com>,
+	Wojciech Ziemba <wojciech.ziemba@intel.com>,
+	linuxppc-dev@lists.ozlabs.org,
+	"David S. Miller" <davem@davemloft.net>
+Subject: Re: [PATCH v2 0/6] PCI: Drop duplicated tracking of a pci_dev's
+ bound driver
+Message-ID: <20210809181418.GA2168343@bjorn-Precision-5520>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210807092645.52kn4ustyjudztvl@pengutronix.de>
 
-From: Tianyu Lan <Tianyu.Lan@microsoft.com>
+On Sat, Aug 07, 2021 at 11:26:45AM +0200, Uwe Kleine-König wrote:
+> On Fri, Aug 06, 2021 at 04:24:52PM -0500, Bjorn Helgaas wrote:
+> > On Fri, Aug 06, 2021 at 08:46:23AM +0200, Uwe Kleine-König wrote:
+> > > On Thu, Aug 05, 2021 at 06:42:34PM -0500, Bjorn Helgaas wrote:
+> > 
+> > > > I looked at all the bus_type.probe() methods, it looks like pci_dev is
+> > > > not the only offender here.  At least the following also have a driver
+> > > > pointer in the device struct:
+> > > > 
+> > > >   parisc_device.driver
+> > > >   acpi_device.driver
+> > > >   dio_dev.driver
+> > > >   hid_device.driver
+> > > >   pci_dev.driver
+> > > >   pnp_dev.driver
+> > > >   rio_dev.driver
+> > > >   zorro_dev.driver
+> > > 
+> > > Right, when I converted zorro_dev it was pointed out that the code was
+> > > copied from pci and the latter has the same construct. :-)
+> > > See
+> > > https://lore.kernel.org/r/20210730191035.1455248-5-u.kleine-koenig@pengutronix.de
+> > > for the patch, I don't find where pci was pointed out, maybe it was on
+> > > irc only.
+> > 
+> > Oh, thanks!  I looked to see if you'd done something similar
+> > elsewhere, but I missed this one.
+> > 
+> > > > Looking through the places that care about pci_dev.driver (the ones
+> > > > updated by patch 5/6), many of them are ... a little dubious to begin
+> > > > with.  A few need the "struct pci_error_handlers *err_handler"
+> > > > pointer, so that's probably legitimate.  But many just need a name,
+> > > > and should probably be using dev_driver_string() instead.
+> > > 
+> > > Yeah, I considered adding a function to get the driver name from a
+> > > pci_dev and a function to get the error handlers. Maybe it's an idea to
+> > > introduce these two and then use to_pci_driver(pdev->dev.driver) for the
+> > > few remaining users? Maybe doing that on top of my current series makes
+> > > sense to have a clean switch from pdev->driver to pdev->dev.driver?!
+> > 
+> > I'd propose using dev_driver_string() for these places:
+> > 
+> >   eeh_driver_name() (could change callers to use dev_driver_string())
+> >   bcma_host_pci_probe()
+> >   qm_alloc_uacce()
+> >   hns3_get_drvinfo()
+> >   prestera_pci_probe()
+> >   mlxsw_pci_probe()
+> >   nfp_get_drvinfo()
+> >   ssb_pcihost_probe()
+> 
+> So the idea is:
+> 
+> 	PCI: Simplify pci_device_remove()
+> 	PCI: Drop useless check from pci_device_probe()
+> 	xen/pci: Drop some checks that are always true
+> 
+> are kept as is as preparation. (Do you want to take them from this v2,
+> or should I include them again in v3?)
 
-Hyper-V Isolation VM requires bounce buffer support to copy
-data from/to encrypted memory and so enable swiotlb force
-mode to use swiotlb bounce buffer for DMA transaction.
+Easiest if you include them until we merge the series.
 
-In Isolation VM with AMD SEV, the bounce buffer needs to be
-accessed via extra address space which is above shared_gpa_boundary
-(E.G 39 bit address line) reported by Hyper-V CPUID ISOLATION_CONFIG.
-The access physical address will be original physical address +
-shared_gpa_boundary. The shared_gpa_boundary in the AMD SEV SNP
-spec is called virtual top of memory(vTOM). Memory addresses below
-vTOM are automatically treated as private while memory above
-vTOM is treated as shared.
+> Then convert the list of functions above to use dev_driver_string() in a
+> 4th patch.
+> 
+> > The use in mpt_device_driver_register() looks unnecessary: it's only
+> > to get a struct pci_device_id *, which is passed to ->probe()
+> > functions that don't need it.
+> 
+> This is patch #5.
+> 
+> > The use in adf_enable_aer() looks wrong: it sets the err_handler
+> > pointer in one of the adf_driver structs.  I think those structs
+> > should be basically immutable, and the drivers that call
+> > adf_enable_aer() from their .probe() methods should set
+> > ".err_handler = &adf_err_handler" in their static adf_driver
+> > definitions instead.
+> 
+> I don't understand that one without some research, probably this yields
+> at least one patch.
 
-Swiotlb bounce buffer code calls dma_map_decrypted()
-to mark bounce buffer visible to host and map it in extra
-address space. Populate dma memory decrypted ops with hv
-map/unmap function.
+Yeah, it's a little messy because you'd have to make adf_err_handler
+non-static and add an extern for it.  Sample below.
 
-Hyper-V initalizes swiotlb bounce buffer and default swiotlb
-needs to be disabled. pci_swiotlb_detect_override() and
-pci_swiotlb_detect_4gb() enable the default one. To override
-the setting, hyperv_swiotlb_detect() needs to run before
-these detect functions which depends on the pci_xen_swiotlb_
-init(). Make pci_xen_swiotlb_init() depends on the hyperv_swiotlb
-_detect() to keep the order.
+> > I think that basically leaves these:
+> > 
+> >   uncore_pci_probe()     # .id_table, custom driver "registration"
+> >   match_id()             # .id_table, arch/x86/kernel/probe_roms.c
+> >   xhci_pci_quirks()      # .id_table
+> >   pci_error_handlers()   # roll-your-own AER handling, drivers/misc/cxl/guest.c
+> > 
+> > I think it would be fine to use to_pci_driver(pdev->dev.driver) for
+> > these few.
+> 
+> Converting these will be patch 7 then and patch 8 can then drop the
+> duplicated handling.
+> 
+> Sounds reasonable?
 
-The map function vmap_pfn() can't work in the early place
-hyperv_iommu_swiotlb_init() and so initialize swiotlb bounce
-buffer in the hyperv_iommu_swiotlb_later_init().
+Sounds good to me.  Thanks for working on this!
 
-Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
----
- arch/x86/hyperv/ivm.c           | 28 ++++++++++++++
- arch/x86/include/asm/mshyperv.h |  2 +
- arch/x86/xen/pci-swiotlb-xen.c  |  3 +-
- drivers/hv/vmbus_drv.c          |  3 ++
- drivers/iommu/hyperv-iommu.c    | 65 +++++++++++++++++++++++++++++++++
- include/linux/hyperv.h          |  1 +
- 6 files changed, 101 insertions(+), 1 deletion(-)
+Bjorn
 
-diff --git a/arch/x86/hyperv/ivm.c b/arch/x86/hyperv/ivm.c
-index c13ec5560d73..0f05e4d6fc62 100644
---- a/arch/x86/hyperv/ivm.c
-+++ b/arch/x86/hyperv/ivm.c
-@@ -265,3 +265,31 @@ int hv_set_mem_host_visibility(unsigned long addr, int numpages, bool visible)
- 
- 	return __hv_set_mem_host_visibility((void *)addr, numpages, visibility);
- }
-+
-+/*
-+ * hv_map_memory - map memory to extra space in the AMD SEV-SNP Isolation VM.
-+ */
-+void *hv_map_memory(void *addr, unsigned long size)
-+{
-+	unsigned long *pfns = kcalloc(size / HV_HYP_PAGE_SIZE,
-+				      sizeof(unsigned long), GFP_KERNEL);
-+	void *vaddr;
-+	int i;
-+
-+	if (!pfns)
-+		return NULL;
-+
-+	for (i = 0; i < size / HV_HYP_PAGE_SIZE; i++)
-+		pfns[i] = virt_to_hvpfn(addr + i * HV_HYP_PAGE_SIZE) +
-+			(ms_hyperv.shared_gpa_boundary >> HV_HYP_PAGE_SHIFT);
-+
-+	vaddr = vmap_pfn(pfns, size / HV_HYP_PAGE_SIZE,	PAGE_KERNEL_IO);
-+	kfree(pfns);
-+
-+	return vaddr;
-+}
-+
-+void hv_unmap_memory(void *addr)
-+{
-+	vunmap(addr);
-+}
-diff --git a/arch/x86/include/asm/mshyperv.h b/arch/x86/include/asm/mshyperv.h
-index a30c60f189a3..b247739f57ac 100644
---- a/arch/x86/include/asm/mshyperv.h
-+++ b/arch/x86/include/asm/mshyperv.h
-@@ -250,6 +250,8 @@ int hv_unmap_ioapic_interrupt(int ioapic_id, struct hv_interrupt_entry *entry);
- int hv_mark_gpa_visibility(u16 count, const u64 pfn[],
- 			   enum hv_mem_host_visibility visibility);
- int hv_set_mem_host_visibility(unsigned long addr, int numpages, bool visible);
-+void *hv_map_memory(void *addr, unsigned long size);
-+void hv_unmap_memory(void *addr);
- void hv_sint_wrmsrl_ghcb(u64 msr, u64 value);
- void hv_sint_rdmsrl_ghcb(u64 msr, u64 *value);
- void hv_signal_eom_ghcb(void);
-diff --git a/arch/x86/xen/pci-swiotlb-xen.c b/arch/x86/xen/pci-swiotlb-xen.c
-index 54f9aa7e8457..43bd031aa332 100644
---- a/arch/x86/xen/pci-swiotlb-xen.c
-+++ b/arch/x86/xen/pci-swiotlb-xen.c
-@@ -4,6 +4,7 @@
- 
- #include <linux/dma-map-ops.h>
- #include <linux/pci.h>
-+#include <linux/hyperv.h>
- #include <xen/swiotlb-xen.h>
- 
- #include <asm/xen/hypervisor.h>
-@@ -91,6 +92,6 @@ int pci_xen_swiotlb_init_late(void)
- EXPORT_SYMBOL_GPL(pci_xen_swiotlb_init_late);
- 
- IOMMU_INIT_FINISH(pci_xen_swiotlb_detect,
--		  NULL,
-+		  hyperv_swiotlb_detect,
- 		  pci_xen_swiotlb_init,
- 		  NULL);
-diff --git a/drivers/hv/vmbus_drv.c b/drivers/hv/vmbus_drv.c
-index 57bbbaa4e8f7..f068e22a5636 100644
---- a/drivers/hv/vmbus_drv.c
-+++ b/drivers/hv/vmbus_drv.c
-@@ -23,6 +23,7 @@
- #include <linux/cpu.h>
- #include <linux/sched/task_stack.h>
- 
-+#include <linux/dma-map-ops.h>
- #include <linux/delay.h>
- #include <linux/notifier.h>
- #include <linux/panic_notifier.h>
-@@ -2081,6 +2082,7 @@ struct hv_device *vmbus_device_create(const guid_t *type,
- 	return child_device_obj;
- }
- 
-+static u64 vmbus_dma_mask = DMA_BIT_MASK(64);
- /*
-  * vmbus_device_register - Register the child device
-  */
-@@ -2121,6 +2123,7 @@ int vmbus_device_register(struct hv_device *child_device_obj)
- 	}
- 	hv_debug_add_dev_dir(child_device_obj);
- 
-+	child_device_obj->device.dma_mask = &vmbus_dma_mask;
- 	return 0;
- 
- err_kset_unregister:
-diff --git a/drivers/iommu/hyperv-iommu.c b/drivers/iommu/hyperv-iommu.c
-index e285a220c913..01e874b3b43a 100644
---- a/drivers/iommu/hyperv-iommu.c
-+++ b/drivers/iommu/hyperv-iommu.c
-@@ -13,14 +13,22 @@
- #include <linux/irq.h>
- #include <linux/iommu.h>
- #include <linux/module.h>
-+#include <linux/hyperv.h>
-+#include <linux/io.h>
- 
- #include <asm/apic.h>
- #include <asm/cpu.h>
- #include <asm/hw_irq.h>
- #include <asm/io_apic.h>
-+#include <asm/iommu.h>
-+#include <asm/iommu_table.h>
- #include <asm/irq_remapping.h>
- #include <asm/hypervisor.h>
- #include <asm/mshyperv.h>
-+#include <asm/swiotlb.h>
-+#include <linux/dma-map-ops.h>
-+#include <linux/dma-direct.h>
-+#include <linux/set_memory.h>
- 
- #include "irq_remapping.h"
- 
-@@ -36,6 +44,9 @@
- static cpumask_t ioapic_max_cpumask = { CPU_BITS_NONE };
- static struct irq_domain *ioapic_ir_domain;
- 
-+static unsigned long hyperv_io_tlb_size;
-+static void *hyperv_io_tlb_start;
-+
- static int hyperv_ir_set_affinity(struct irq_data *data,
- 		const struct cpumask *mask, bool force)
- {
-@@ -337,4 +348,58 @@ static const struct irq_domain_ops hyperv_root_ir_domain_ops = {
- 	.free = hyperv_root_irq_remapping_free,
+
+diff --git a/drivers/crypto/qat/qat_4xxx/adf_drv.c b/drivers/crypto/qat/qat_4xxx/adf_drv.c
+index a8805c815d16..75e6c5540523 100644
+--- a/drivers/crypto/qat/qat_4xxx/adf_drv.c
++++ b/drivers/crypto/qat/qat_4xxx/adf_drv.c
+@@ -310,6 +310,7 @@ static struct pci_driver adf_driver = {
+ 	.probe = adf_probe,
+ 	.remove = adf_remove,
+ 	.sriov_configure = adf_sriov_configure,
++	.err_handler = adf_err_handler,
  };
  
-+void __init hyperv_iommu_swiotlb_init(void)
-+{
-+	unsigned long bytes;
-+
-+	/*
-+	 * Allocate Hyper-V swiotlb bounce buffer at early place
-+	 * to reserve large contiguous memory.
-+	 */
-+	hyperv_io_tlb_size = 256 * 1024 * 1024;
-+	hyperv_io_tlb_start =
-+			memblock_alloc_low(
-+				  PAGE_ALIGN(hyperv_io_tlb_size),
-+				  HV_HYP_PAGE_SIZE);
-+
-+	if (!hyperv_io_tlb_start) {
-+		pr_warn("Fail to allocate Hyper-V swiotlb buffer.\n");
-+		return;
-+	}
-+}
-+
-+int __init hyperv_swiotlb_detect(void)
-+{
-+	if (hypervisor_is_type(X86_HYPER_MS_HYPERV)
-+	    && hv_is_isolation_supported()) {
-+		/*
-+		 * Enable swiotlb force mode in Isolation VM to
-+		 * use swiotlb bounce buffer for dma transaction.
-+		 */
-+		swiotlb_force = SWIOTLB_FORCE;
-+
-+		dma_memory_generic_decrypted_ops.map = hv_map_memory;
-+		dma_memory_generic_decrypted_ops.unmap = hv_unmap_memory;
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+void __init hyperv_iommu_swiotlb_later_init(void)
-+{
-+	/*
-+	 * Swiotlb bounce buffer needs to be mapped in extra address
-+	 * space. Map function doesn't work in the early place and so
-+	 * call swiotlb_late_init_with_tbl() here.
-+	 */
-+	if (swiotlb_late_init_with_tbl(hyperv_io_tlb_start,
-+				       hyperv_io_tlb_size >> IO_TLB_SHIFT))
-+		panic("Fail to initialize hyperv swiotlb.\n");
-+}
-+
-+IOMMU_INIT_FINISH(hyperv_swiotlb_detect,
-+		  NULL, hyperv_iommu_swiotlb_init,
-+		  hyperv_iommu_swiotlb_later_init);
-+
- #endif
-diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
-index 90b542597143..83fa567ad594 100644
---- a/include/linux/hyperv.h
-+++ b/include/linux/hyperv.h
-@@ -1744,6 +1744,7 @@ int hyperv_write_cfg_blk(struct pci_dev *dev, void *buf, unsigned int len,
- int hyperv_reg_block_invalidate(struct pci_dev *dev, void *context,
- 				void (*block_invalidate)(void *context,
- 							 u64 block_mask));
-+int __init hyperv_swiotlb_detect(void);
+ module_pci_driver(adf_driver);
+diff --git a/drivers/crypto/qat/qat_common/adf_aer.c b/drivers/crypto/qat/qat_common/adf_aer.c
+index d2ae293d0df6..701c3c5f8b9b 100644
+--- a/drivers/crypto/qat/qat_common/adf_aer.c
++++ b/drivers/crypto/qat/qat_common/adf_aer.c
+@@ -166,7 +166,7 @@ static void adf_resume(struct pci_dev *pdev)
+ 	dev_info(&pdev->dev, "Device is up and running\n");
+ }
  
- struct hyperv_pci_block_ops {
- 	int (*read_block)(struct pci_dev *dev, void *buf, unsigned int buf_len,
--- 
-2.25.1
-
+-static const struct pci_error_handlers adf_err_handler = {
++const struct pci_error_handlers adf_err_handler = {
+ 	.error_detected = adf_error_detected,
+ 	.slot_reset = adf_slot_reset,
+ 	.resume = adf_resume,
+@@ -187,7 +187,6 @@ int adf_enable_aer(struct adf_accel_dev *accel_dev)
+ 	struct pci_dev *pdev = accel_to_pci_dev(accel_dev);
+ 	struct pci_driver *pdrv = pdev->driver;
+ 
+-	pdrv->err_handler = &adf_err_handler;
+ 	pci_enable_pcie_error_reporting(pdev);
+ 	return 0;
+ }
+diff --git a/drivers/crypto/qat/qat_common/adf_common_drv.h b/drivers/crypto/qat/qat_common/adf_common_drv.h
+index c61476553728..98a29e0b8769 100644
+--- a/drivers/crypto/qat/qat_common/adf_common_drv.h
++++ b/drivers/crypto/qat/qat_common/adf_common_drv.h
+@@ -95,6 +95,7 @@ void adf_ae_fw_release(struct adf_accel_dev *accel_dev);
+ int adf_ae_start(struct adf_accel_dev *accel_dev);
+ int adf_ae_stop(struct adf_accel_dev *accel_dev);
+ 
++extern const struct pci_error_handlers adf_err_handler;
+ int adf_enable_aer(struct adf_accel_dev *accel_dev);
+ void adf_disable_aer(struct adf_accel_dev *accel_dev);
+ void adf_reset_sbr(struct adf_accel_dev *accel_dev);
 
