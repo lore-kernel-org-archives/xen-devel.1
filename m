@@ -2,41 +2,42 @@ Return-Path: <SRS0=qmCX=NB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 355A6C4320E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 333A4C4320A
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Aug 2021 17:48:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F00B56140F
+	by mail.kernel.org (Postfix) with ESMTPS id F00F061411
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Aug 2021 17:48:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org F00B56140F
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org F00F061411
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.165455.302341 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.165456.302352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDVr9-0002XE-L9; Tue, 10 Aug 2021 17:48:03 +0000
+	id 1mDVrE-0002oM-TD; Tue, 10 Aug 2021 17:48:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 165455.302341; Tue, 10 Aug 2021 17:48:03 +0000
+Received: by outflank-mailman (output) from mailman id 165456.302352; Tue, 10 Aug 2021 17:48:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDVr9-0002X7-IA; Tue, 10 Aug 2021 17:48:03 +0000
-Received: by outflank-mailman (input) for mailman id 165455;
- Tue, 10 Aug 2021 17:48:02 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mDVrE-0002oD-Ph; Tue, 10 Aug 2021 17:48:08 +0000
+Received: by outflank-mailman (input) for mailman id 165456;
+ Tue, 10 Aug 2021 17:48:07 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3edG=NB=citrix.com=Kevin.Stefanov@srs-us1.protection.inumbo.net>)
- id 1mDVr8-0002X1-9D
- for xen-devel@lists.xenproject.org; Tue, 10 Aug 2021 17:48:02 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 599d35eb-2660-4bf4-ac98-52f515effa75;
- Tue, 10 Aug 2021 17:48:01 +0000 (UTC)
+ id 1mDVrD-0002nf-Lt
+ for xen-devel@lists.xenproject.org; Tue, 10 Aug 2021 17:48:07 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 1dee9bf4-fa03-11eb-9fe8-12813bfff9fa;
+ Tue, 10 Aug 2021 17:48:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,57 +49,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 599d35eb-2660-4bf4-ac98-52f515effa75
+X-Inumbo-ID: 1dee9bf4-fa03-11eb-9fe8-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1628617681;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=0rn3nBCe7LlrF0vPYBhJ4OV4Kp7m83GflFizSNI1m+8=;
-  b=PzZPJWLNNGw4LDLCpsP09Vl5Jgmv+Ni35sYewyRtjZZ2UW5ail8/n+ow
-   NaIgLA8e2pFfnnN4PHX4eHZeIMu7zWLgrHrhhGVKVzzapEi3OS+Cr3i3p
-   xy6aJ0IBVYfpR0QMhinWXPmKnDZzqmnmFR7t66Al01WjZnI3W4urC0hCv
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: wvnxhbkraKZBXsC/LI4H8dzrJpClozEBVPjRwqP08s0f2IOfkPqch/kw6xalU0WqR3vnW2yLO7
- Gw5x1IRevCMmlUhAOtiJgwBoceTlfEoqXYcQrjcD0NkDy3NLa2bhg4qV01qi6RswBsyYtaVcqF
- 3VPoKZ2sIIh3HKNMCnKyZ7Thb+5HFdws1N3fk3XexPjCvMRaXJnr2OVqvJi2UvDDTlKB5CHgKh
- vVHnPS+eum0A4uFcY2VYZK6EJ+xRM3coBQFNowU9iJ6ws2LXtdoqBw/eu+kjY/its2bwKEa2VU
- B4eJU5sVH/eU+c+lPSaDzMn2
+  d=citrix.com; s=securemail; t=1628617686;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Asef4CShufBTIlaP0RTU0oOP4w0Yf/it6Q71w/xhv/Q=;
+  b=a7j1QcvR8SlrrmFVjSVLQ9BA9xEhO41e0B2oVVIRpVQZ2aQeYQ3kUl5a
+   E+9OKqjt1vJAPO3yOH+u7H0TKQJ/HJHh8cCu83Z2DwYwzIhTmbnNzg6RQ
+   B3Cw8LdO6yTViKpIdKG+j4/TJCI1v9XwTpcj9xtLp2VZWfwZwkpGFPdmx
+   8=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: vbKjvOztIZYo3BhL1sTVMoT2jCjrNTlicI1KycVgdZp3WVJxuACQA6jI7l/Vsfrn0FEUjypKSt
+ LSf1CCqTixdXG0UftzKVL/Obg3+ThOi1TvRGR5euAjvtpxM+3Cx/gcejfA/DXCMiXXc7lOSHEe
+ qLPamh1NtJy1GQ7txE1pQd92Qyhv6HvCelDZuXxNoudasyxXjS0fFEdFHid7r2shu2+3kIh8wr
+ q1cZrkaBH5z8MnpBYrDySt7qCAcKxOGHsy9xEjWEEeobkxA24C3f9g97/9MDOtL1YiVD587+0i
+ WzvnmyYXA8up6Wu0T07fuynN
 X-SBRS: 5.1
-X-MesageID: 51845604
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 50128459
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:HfET/K6HFQL8Q+UUHwPXwDLXdLJyesId70hD6qkQc3FomwKj9/
- xG/c5rsSMc7Qx6ZJhOo7+90cW7L080lqQFhLX5X43SPzUO0VHARO1fBOPZqAEIcBeOlNK1u5
- 0AT0B/YueAcGSTj6zBkXWF+wBL+qj5zEiq792usUuEVWtRGsZdB58SMHfhLqVxLjM2Y6YRJd
- 6nyedsgSGvQngTZtTTPAh+YwCSz+e77a4PeHQ9dmYa1DU=
+IronPort-HdrOrdr: A9a23:YRZEEatbhrbO8Odkcc5PIm7x7skC3IMji2hC6mlwRA09TyXGra
+ 2TdaUgvyMc1gx7ZJh5o6H5BEDyewKmyXcV2/hdAV7GZmXbUQSTXeVfBOfZogEIXheOj9K1tp
+ 0QP5SWaueAamSS5PySiGbXLz9j+qjgzEnCv5a8854Zd3AOV0gW1XYaNu/0KC1LbTgDIaB8OI
+ uX58JBqTblU28QdN6HCn4MWPWGj8HXlbr9CCR2SSIP2U2rt3eF+bT6Gx+X0lM1SDVU24ov9m
+ DDjkjQ+rijifem0RXRvlWjrqi+2eGRiuerNvb8yPT9GQ+czzpAo74RH4FqiQpF491HLmxa1+
+ Uk7S1QefiboEmhBF1d6SGdpjUIlgxepEMKgGXo/UfLsIj3Qik3BNFGgp8cehzF61A4tNU5y6
+ 5T2XmF3qAnRC8osR6NkOQgbSsa4HZcYEBS4dI7njhaS88TebVRpYsQ8AdcF4oBBjvz7MQiHP
+ N1BM/R6f5KeRfCBkqp9VVH0ZipRDA+Dx2GSk8Ntoic1CVXhmlwyw8dyNYElnkN+ZohQ91P5v
+ jCMK5viLZSJ/VmJZ5VFaMEW4+6G2bNSRXDPCabJknmDrgOPzbXp5v+8NwOlZWXkVwzve4Pcb
+ H6IRllXEIJCjzT4Py1re92G0r2MRqAtBzWu7Bjzok8vKHgT7z2NiDGQEwykqKb0oYiPvE=
 X-IronPort-AV: E=Sophos;i="5.84,310,1620705600"; 
-   d="scan'208";a="51845604"
+   d="scan'208";a="50128459"
 From: Kevin Stefanov <kevin.stefanov@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Kevin Stefanov <kevin.stefanov@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>, Kevin Tian <kevin.tian@intel.com>
-Subject: [PATCH 0/2] xen: Remove use of TRUE/FALSE
-Date: Tue, 10 Aug 2021 18:47:35 +0100
-Message-ID: <20210810174737.56297-1-kevin.stefanov@citrix.com>
+CC: Kevin Stefanov <kevin.stefanov@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>
+Subject: [PATCH 1/2] xen/kexec: Remove use of TRUE/FALSE
+Date: Tue, 10 Aug 2021 18:47:36 +0100
+Message-ID: <20210810174737.56297-2-kevin.stefanov@citrix.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210810174737.56297-1-kevin.stefanov@citrix.com>
+References: <20210810174737.56297-1-kevin.stefanov@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Kevin Stefanov (2):
-  xen/kexec: Remove use of TRUE/FALSE
-  x86/ioapic: Remove use of TRUE/FALSE
+Whilst fixing this, also changed bool_t to bool.
 
- xen/arch/x86/io_apic.c              | 12 ++++++------
- xen/common/kexec.c                  |  6 +++---
- xen/drivers/passthrough/vtd/utils.c |  2 +-
- xen/include/xen/kexec.h             |  2 +-
- 4 files changed, 11 insertions(+), 11 deletions(-)
-
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Kevin Stefanov <kevin.stefanov@citrix.com>
+---
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+ xen/common/kexec.c      | 6 +++---
+ xen/include/xen/kexec.h | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+diff --git a/xen/common/kexec.c b/xen/common/kexec.c
+index ebeee6405a..938cbb8005 100644
+--- a/xen/common/kexec.c
++++ b/xen/common/kexec.c
+@@ -35,7 +35,7 @@
+ #include <compat/kexec.h>
+ #endif
+ 
+-bool_t kexecing = FALSE;
++bool kexecing;
+ 
+ /* Memory regions to store the per cpu register state etc. on a crash. */
+ typedef struct { Elf_Note * start; size_t size; } crash_note_range_t;
+@@ -383,7 +383,7 @@ void kexec_crash(enum crash_reason reason)
+     if ( !test_bit(KEXEC_IMAGE_CRASH_BASE + pos, &kexec_flags) )
+         return;
+ 
+-    kexecing = TRUE;
++    kexecing = true;
+ 
+     if ( kexec_common_shutdown() != 0 )
+         return;
+@@ -399,7 +399,7 @@ static long kexec_reboot(void *_image)
+ {
+     struct kexec_image *image = _image;
+ 
+-    kexecing = TRUE;
++    kexecing = true;
+ 
+     kexec_common_shutdown();
+     machine_reboot_kexec(image);
+diff --git a/xen/include/xen/kexec.h b/xen/include/xen/kexec.h
+index 9f7a912e97..02dc889334 100644
+--- a/xen/include/xen/kexec.h
++++ b/xen/include/xen/kexec.h
+@@ -17,7 +17,7 @@ typedef struct xen_kexec_reserve {
+ extern xen_kexec_reserve_t kexec_crash_area;
+ extern paddr_t kexec_crash_area_limit;
+ 
+-extern bool_t kexecing;
++extern bool kexecing;
+ 
+ void set_kexec_crash_area_size(u64 system_ram);
+ 
 -- 
 2.25.1
 
