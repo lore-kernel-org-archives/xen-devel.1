@@ -2,54 +2,41 @@ Return-Path: <SRS0=AjmS=NC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E488AC4338F
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 08:08:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CB7DC4338F
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 08:17:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9326160F41
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 08:08:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9326160F41
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by mail.kernel.org (Postfix) with ESMTPS id DDE3160F38
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 08:17:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DDE3160F38
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.165551.302515 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.165558.302526 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDjHg-00081D-18; Wed, 11 Aug 2021 08:08:20 +0000
+	id 1mDjQG-00017W-T1; Wed, 11 Aug 2021 08:17:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 165551.302515; Wed, 11 Aug 2021 08:08:20 +0000
+Received: by outflank-mailman (output) from mailman id 165558.302526; Wed, 11 Aug 2021 08:17:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDjHf-000816-UC; Wed, 11 Aug 2021 08:08:19 +0000
-Received: by outflank-mailman (input) for mailman id 165551;
- Wed, 11 Aug 2021 08:08:18 +0000
+	id 1mDjQG-00017P-Q0; Wed, 11 Aug 2021 08:17:12 +0000
+Received: by outflank-mailman (input) for mailman id 165558;
+ Wed, 11 Aug 2021 08:17:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lxcx=NC=pengutronix.de=ukl@srs-us1.protection.inumbo.net>)
- id 1mDjHe-00080W-AE
- for xen-devel@lists.xenproject.org; Wed, 11 Aug 2021 08:08:18 +0000
-Received: from metis.ext.pengutronix.de (unknown
- [2001:67c:670:201:290:27ff:fe1d:cc33])
+ <SRS0=fxqi=NC=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
+ id 1mDjQE-00017I-Um
+ for xen-devel@lists.xenproject.org; Wed, 11 Aug 2021 08:17:11 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9d868230-429c-4c20-aa89-da3dbddfaf88;
- Wed, 11 Aug 2021 08:08:12 +0000 (UTC)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1mDjGA-0000yl-5I; Wed, 11 Aug 2021 10:06:46 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1mDjG4-0000O2-Lw; Wed, 11 Aug 2021 10:06:40 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1mDjG4-0002vI-Id; Wed, 11 Aug 2021 10:06:40 +0200
+ id 49b876f1-98a6-47ec-b264-3c2a8fa97b82;
+ Wed, 11 Aug 2021 08:17:09 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,168 +48,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d868230-429c-4c20-aa89-da3dbddfaf88
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <uwe@kleine-koenig.org>,
-	linux-pci@vger.kernel.org,
-	kernel@pengutronix.de,
-	Alexander Duyck <alexanderduyck@fb.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Andrew Donnellan <ajd@linux.ibm.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Fiona Trahe <fiona.trahe@intel.com>,
-	Frederic Barrat <fbarrat@linux.ibm.com>,
-	Giovanni Cabiddu <giovanni.cabiddu@intel.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Ido Schimmel <idosch@nvidia.com>,
-	Ingo Molnar <mingo@redhat.com>,
-	Jack Xu <jack.xu@intel.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Jesse Brandeburg <jesse.brandeburg@intel.com>,
-	Jiri Olsa <jolsa@redhat.com>,
-	Jiri Pirko <jiri@nvidia.com>,
-	Juergen Gross <jgross@suse.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Marco Chiappero <marco.chiappero@intel.com>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Mathias Nyman <mathias.nyman@intel.com>,
-	Michael Buesch <m@bues.ch>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Namhyung Kim <namhyung@kernel.org>,
-	"Oliver O'Halloran" <oohall@gmail.com>,
-	Paul Mackerras <paulus@samba.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	=?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>,
-	Russell Currey <ruscur@russell.cc>,
-	Salil Mehta <salil.mehta@huawei.com>,
-	Sathya Prakash <sathya.prakash@broadcom.com>,
-	Simon Horman <simon.horman@corigine.com>,
-	Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
-	Taras Chornyi <tchornyi@marvell.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Tomaszx Kowalik <tomaszx.kowalik@intel.com>,
-	Vadym Kochan <vkochan@marvell.com>,
-	Wojciech Ziemba <wojciech.ziemba@intel.com>,
-	Yisen Zhuang <yisen.zhuang@huawei.com>,
-	Zhou Wang <wangzhou1@hisilicon.com>,
-	linux-crypto@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-perf-users@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-scsi@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	MPT-FusionLinux.pdl@broadcom.com,
-	netdev@vger.kernel.org,
-	oss-drivers@corigine.com,
-	qat-linux@intel.com,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 0/8] PCI: Drop duplicated tracking of a pci_dev's bound driver
-Date: Wed, 11 Aug 2021 10:06:29 +0200
-Message-Id: <20210811080637.2596434-1-u.kleine-koenig@pengutronix.de>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: 49b876f1-98a6-47ec-b264-3c2a8fa97b82
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1628669829;
+  h=subject:to:cc:references:from:message-id:date:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=aiMplrk+BqetM3E2zsjnR+pGPmUnWCbXCMBV2jqz1TM=;
+  b=Cz7P6r2+xs2uu8Ya+wGL3R55JPrOXBf59mQjhbtQpGrVa7l8OtGOHu3N
+   wIMslBHeZmHCOrDhA0TejA3C0b+GkKTmAibCYJ3qP4KcKc2K10Eo1xJG4
+   jFZGi6HPT09JeIKHbJcR1veBPr7CO6wF4BzT7nFzswPhqLk5oZ6H37O2h
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: Lk3BTADuc9PmmOJB0yWrThC4hlE0s7R/jN3a6Lpc8Jxgr7X4kOQeNfwtm7/M0LchFd+L+RdZTl
+ zfPrZRta8QIcOmufYVIT2By+1mOf6XX2cGLO6+jJgcQqJUrvW5J1szYTgF/k7mjK/NDiA2ZyZ3
+ bcHXNlE68c4xzI70ftYTjc+tWaEKwLeDuZwtPO1YrMkEPNWImDWsfX5BJzNDtAVaU3dM6gQZAt
+ fieTdFH2wQG/wrQHKM9x3KdsJr6zwTMp7W8C3fjesxOvWyelUlORuAbPOgyYeJSYp2/N1ox1Wf
+ KXfS2PzV3Tx42EZ4xkaeSfyD
+X-SBRS: 5.1
+X-MesageID: 51893910
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:/Ark66gA9Xk1MQfK/ar9I9ZCP3BQX1p13DAbv31ZSRFFG/FwyP
+ rBoB1L73DJYWgqNE3I+erhBEGBKUmskqKdkrNhQ4tKOzOWx1dATbsSkbcKpgeAJ8SQzJ8n6U
+ 4NSdkGNDS0NykGsS+Y2njKLz9D+qj+zEnAv463pB0BPGIaCdAU0+46MHf8LqQffng3OXNTLu
+ v42iMonUvFRZ1aVLXAOpFTNNKz1uEj2aiWLyIuNloC0k2jnDmo4Ln1H1yx2QofaSpGxfMH/X
+ LemwL0y62/u7XjoyWsl1P73tBzop/M29FDDMuDhow8LSjtsB+hYMBEV6eZtD44jemz4BIBkc
+ XKoT0nI8NvgkmhP12dkF/I4U3NwTwu43jtxRuxhmbim9XwQHYAB89IletiA1bkwntlmOs5/L
+ NA3mqfuZYSJwjHhj7B69/BUAwvvlaooFI5+NRjykB3YM87Uvt8vIYf9ERaHNMrByTh8r0qF+
+ FoEYX1+OtWS1WHdHrU11MfguBEZk5DWStuf3Jy/PB8i1Nt7SlEJgojtY8id047hdYAo8Iu3Z
+ WdDkwA/4s+PPP/bspGda08qIWMezfwqb+lChPaHb3dLtBxB5v6ke+93FwE3pDfRHU29upFpH
+ 3gaiIViYdgQTOgNSWxtKc7uiwlBl/NBwjQ9g==
+X-IronPort-AV: E=Sophos;i="5.84,311,1620705600"; 
+   d="scan'208";a="51893910"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Y/P1+ux9mHVOLxMeDOBsoV9v4M6Cu8m/Pp+GYkISx1X7C+3GS1YexiZG4qKFytNTxZVvlG79xLiuCQeA+tPqE1zPAtWJb4rdUcH8bFAM9lX735gBgdTBwHSpF8/nITLPjXrfgXTCPjGyfhhzVBRKIaL0kWjnXi2BiGyZrT5YYBy2AUdmmUv28nUJ01OfOiSaiTpcMkn2IT9Prsv0FHRLVTQp80Gr7Xdwt4kR87w2UEJIk7Thy8fhzPvBH5oXar/PsNU/0M6UXupIEfKbUpGoXllml4NSJGD4lO2xFSmTEwW67JZ5/7gFuY0gDQC1011U7wsyBBMtoORA6dOQZJQFiw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zI+Si/T6HhGUwGvoenX/9+kXhOBmrCtLoip7oz1VJhQ=;
+ b=ZYKSHkzZ8aeHzVYLva5P450Y5bT7mTXHSIA1fDQVJKN1AR/mNSBQl7YfHRfBEmmzgnzZ8sSTBjD5Im6M2HtO0KoAavODEmffoZei6gJ8e++mfb7JcCeh2f49ktJ9byqoTk/pVHoCO3+1NPtBiGL+KT+0mvsRKQpfNs1QruReery0HLDTGP+Qf635cggZ34AR7ZY9+7jY+kpw8MBGwcsyZS+AAlQtsjL/jywv59STDqj010zTfrBHouzvpfmZGdd/PXpegsmHnwM/FQW/PUHv1C+IvHSPcCFeM6q4OIUcElA2YB/kyGiUvj4Q2tcChbg3w/Z+E/0n5znpAM1gQmteZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zI+Si/T6HhGUwGvoenX/9+kXhOBmrCtLoip7oz1VJhQ=;
+ b=HoB3XChtjno2iRi+f4uNslMSGfN7QWf3NGwKNFjLdKDLufCJEq1P0Kail6aNdaPdDtjGp+hEh5KYfX5ZUmGLlJpGrjhnstJ64Q3OZjeSBSHXPDZTeGZnIyYMPueVyzgWptZrxLPiKDEeqat5IXQgpesKuiZF8k9xHtglTxudk2U=
+Subject: Re: [PATCH 1/2] xen/kexec: Remove use of TRUE/FALSE
+To: Jan Beulich <jbeulich@suse.com>, Kevin Stefanov
+	<kevin.stefanov@citrix.com>
+CC: Xen-devel <xen-devel@lists.xenproject.org>
+References: <20210810174737.56297-1-kevin.stefanov@citrix.com>
+ <20210810174737.56297-2-kevin.stefanov@citrix.com>
+ <7117c3db-76d1-5550-c34f-c16e95c0e73f@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <44223c86-2674-22a3-a055-1ea47ffc619f@citrix.com>
+Date: Wed, 11 Aug 2021 09:16:45 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
+In-Reply-To: <7117c3db-76d1-5550-c34f-c16e95c0e73f@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: LO2P265CA0392.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:f::20) To BYAPR03MB3623.namprd03.prod.outlook.com
+ (2603:10b6:a02:aa::12)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: f4ae3ae1-92ae-409e-e4a6-08d95ca05f31
+X-MS-TrafficTypeDiagnostic: SJ0PR03MB5504:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <SJ0PR03MB5504805C924BCEC599915AA9BAF89@SJ0PR03MB5504.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 79pvWhBh0wDLPuvSzZeKTQCMPKE5lt2jqgWpJisq+dqoJ265tw92gvs7JD5z5SmqW51OmESi3IrvpkeBQltD1jCT7DWiE478GGivVAOyOrKVo/GAfI10THkX+9pkRFuQOojE7giLaj2hCtSlb24VXoibQmMK4wGAFJaEd7AXxRjEr84tY+Y8l9RsEobSGNbcsnXjbFbTVQIicG4/XpSWbKxzB9dtZWETRer0LFDIoYAQBGilSLJnqPgJsMFFsYP0bmGHH9YDszWItAttdnjWAY1WXS1/F0ErlNAtQFgiTT8WGkLdLJzE60en+ChO8tmivHroZ33RiBKLz9C9qb+MfWT+lAFgbqx7OQIVXl6KmGmue34xyMMurMcRs2iJdkd1nW3N/GVR9dMFNYFSSaRi3lAm7wvpC2JRQ2jYks7/ovrG+fwh9smB9xR940MYsIWjuMJ1KJ1S4WnTDZYLIPw8ETjqAMq6P4gMPS1azar1qXrxN1OobIip90ZPE0Ina/WQGnEmZXKnW0SZFuWLypb3Tl12ccslheN74xL2IqTEV4EtNnpTakjnyq6l6KoOQuQfbvVpTLk2ZVbxlW27dCCa/b3YriNA/kJfZDsWmjKD4xm5I0geF5p659hIP/G2AIpc9kiaV/ckcTsZxAY/uXEAEa1g5PPLq8f7HFURFm5VvGitnUGPv8By/UPwww3CZZ+IBk5PyMiE77GWzqRk0H9ARAZ7jcho3EcGyaNWiyWntys=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(396003)(366004)(39850400004)(376002)(136003)(66946007)(66556008)(26005)(66476007)(31696002)(8936002)(8676002)(31686004)(186003)(6486002)(6666004)(38100700002)(478600001)(956004)(86362001)(6636002)(2906002)(2616005)(83380400001)(4744005)(36756003)(316002)(5660300002)(53546011)(110136005)(4326008)(16576012)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YnlSM1dZRXdKcUtMVXBDZlJaWEl2ckJsS2ZiNTR5NkRBSk1vTTBDeTltYk1h?=
+ =?utf-8?B?cnhwSUd4UVNtZURUWFB4MFNFMHp3VnF5ZEsvZWFPbk5TYzB0ZitUN1dUV2dD?=
+ =?utf-8?B?bXE4S0prRTBsSTlYYldvT2RORnFaNXZGc2wrM2p1UGZSQlIySlpVRit4RjQy?=
+ =?utf-8?B?NXljY3YzWGhuLzlrSjYvMDhNMjlycmJ6RkRBdm9obXZHUSsyVjE1L25vUmRJ?=
+ =?utf-8?B?R1BZY3pCeFVxcElTQ2krL0dibHdiMWNua2o0OG96Vy9NK3lWL0QyblhxUzhO?=
+ =?utf-8?B?OEJQOFdYRkM1dDNYRndvSVhjdkZEUjRjam5rUEhYUWQyOVFMbTRFa1QzbEl6?=
+ =?utf-8?B?ejNMMWVIR29nVTBLdkZOVnlzRDU5YlZ1T2tTODBPMFpIMVVXcDVBUWNjZVV5?=
+ =?utf-8?B?bmFIaVdURnc4QWhRVG9xZzMybGFnelcvZ2VuSmJqSWxRMHB1R3NNdm1Yc04w?=
+ =?utf-8?B?L2RpVytrZEtObU5zZVoxMlovOTlZU0xuSzhxaXZBemxrRU5oaFVFSnVxc3No?=
+ =?utf-8?B?VW9Xc2xVS09uZEdKN1JBOU5nTmdYUWRvcWpubVpWWExGV0RMbUYrWEIxQTRo?=
+ =?utf-8?B?cXdKQkRkQktjaGZLUEtpbERlMkVGL2VZd0xDQTJidk5IUnNWczlBZ1lhdS9m?=
+ =?utf-8?B?Y1Y4ZW5oZ3BjY2plbHJ1YmpUOG1pb2hOQllpWkhPR3ErbkpVbGxMWTZ3enBZ?=
+ =?utf-8?B?a1BQeEJOZStodG1BNXVnckdBUFJXWEJGazVNdU9OOXpKaWxoeXZMU2piUXBO?=
+ =?utf-8?B?eEtuVTFZRE1MdllPS3FnYkh4MzlpVkgrZ2Ewc2d6Y1AxYVQ2SFoyYmdDa3BB?=
+ =?utf-8?B?RFloVlVSa1NwSC95MUxvdXU4RGN0MnFQSVM3eGJIWit4VCtmamRrZElrYUgy?=
+ =?utf-8?B?RW00N05hZDhOZ0pET0NZSGRVL0NpMkx3WlROTGVGem80MWdJNjBIQnNIY0dP?=
+ =?utf-8?B?V1I3TkNCcHZjMFlSOERLZWZBRWltWlZvUVNWbUg5OTRXUEdDREErRzBQRXht?=
+ =?utf-8?B?TVBjU0gxWnZMQkVWN0l6OWVNY2tJUFJYR1BkTkNET0pCNVZUVExEdWpyNENC?=
+ =?utf-8?B?UFdDWUZjc3JHcUtTd2Y4UGd3Y2Y4S1k0OWU3bXU0ZG5UQW1ZUW1DdjZCL1ZY?=
+ =?utf-8?B?N1NJMzc0WEdrYUpjakZ1cHBrM25nZkRucXNoMVlVKzdDdHl2UE9xeWw4YThV?=
+ =?utf-8?B?a2ZHUjUydGkwMTlKTUU5V1FzY1VPUXRZT2lJczVtUEU2Q3ZUZWloajBjblpD?=
+ =?utf-8?B?N3F5aXdYWGZodW93cWV1d0FRT2F0bTVGTzdFMUc3a1VMZC9YVnM3OG80c1F4?=
+ =?utf-8?B?RC96cEh1Q0NBeWVmbkduS3lMNWxJVmg3Mm1KNUhQTjd3Z09CdVhaZmxjQVdi?=
+ =?utf-8?B?bm9tVWcxU09oUHFQZmJKTk5LWTNnT1AvK2s2QXQvQ1Z0MWJKQUJqbEpUTGJv?=
+ =?utf-8?B?akdZbEI0Z1l2dUlreHNSWFdBMmxhRExvQ0tkSlJPTFJvQUkzNDBseTl5V1dq?=
+ =?utf-8?B?bXloNGl2MXhQenpxN0llVmhBeGJnQnl1VjlCdUcweTVwVTJyWG55NnBIcWY1?=
+ =?utf-8?B?ZyswY2xBNDBQbCtHeXNjV0lzMmFmNjBIaXJsTy9hQWk3TEsrMDR3YkpEVnRp?=
+ =?utf-8?B?dkJXUmZiTnJjMk5pd0huaWdnRUU4WVZlL2J3blhLY3k3UThjWWczM3BnbVlz?=
+ =?utf-8?B?cHVmdHYrTFNLc3lZZTd3cDlKcUhoOVhnUXlVcU9HU282aFFNZVlmSUM3L093?=
+ =?utf-8?Q?SLZfwVJ8563cgzPlD7GQdVHNR79bSPRODUD4EDw?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: f4ae3ae1-92ae-409e-e4a6-08d95ca05f31
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2021 08:16:51.3192
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rYacipTP0ZjsnhQfby1f/uJPTJuE4DXYgqilOdHEJ9mBR+/E0B5+j/V3Smu7v+r1ZCAruQn5X0Q5WRElPPNaONnEwNouaN0rBwB4VYKvliQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5504
+X-OriginatorOrg: citrix.com
 
-From: Uwe Kleine-König <uwe@kleine-koenig.org>
+On 11/08/2021 07:08, Jan Beulich wrote:
+> On 10.08.2021 19:47, Kevin Stefanov wrote:
+>> --- a/xen/common/kexec.c
+>> +++ b/xen/common/kexec.c
+>> @@ -35,7 +35,7 @@
+>>  #include <compat/kexec.h>
+>>  #endif
+>>  
+>> -bool_t kexecing = FALSE;
+>> +bool kexecing;
+> While not overly important for either of the two present readers,
+> I nevertheless wonder whether at this occasion the variable
+> couldn't also become __read_mostly. Andrew, thoughts?
 
-Hello,
+Yeah - forgot that.
 
-Today the following is always true for a struct pci_dev *pdev:
+>
+>> --- a/xen/include/xen/kexec.h
+>> +++ b/xen/include/xen/kexec.h
+>> @@ -17,7 +17,7 @@ typedef struct xen_kexec_reserve {
+>>  extern xen_kexec_reserve_t kexec_crash_area;
+>>  extern paddr_t kexec_crash_area_limit;
+>>  
+>> -extern bool_t kexecing;
+>> +extern bool kexecing;
+> Later in this file there's also a #define of this identifier, which
+> imo then wants to also change from expanding to 0 to using "false".
 
-	pdev->driver ==
-		pdev->dev.driver ? to_pci_driver(pdev->dev.driver) : NULL
+Sounds good too.
 
-This series is about getting rid of struct pci_dev::driver. The first
-three patches are unmodified compared to v2 (apart from an added
-Reviewed-by tag) and are just minor cleanups.
-
-Patch #4 replaces all usages of pci_dev::driver->name by
-dev_driver_string().
-
-Patch #5 simplifies struct mpt_pci_driver by dropping an unused
-parameter from a function callback. The calculation of this parameter
-made use of struct pci_dev::driver.
-
-Patch #6 simplifies adf_enable_aer() and moves one assignment done in
-that function to the initializer of the respective static data.
-
-Patch #7 then modifies all remaining users of struct pci_dev::driver to
-use to_pci_driver(pdev->dev.driver) instead and finally patch #8 gets
-rid of the driver member.
-
-Note this series is only build tested.
-
-Theoretically patches #4 and #7 could be split by subsystem, there are
-no dependencies, but I'd prefer that all patches go in together via the
-pci tree to simplify the procedure. If you don't agree please speak up.
-
-Best regards
-Uwe
-
-Uwe Kleine-König (8):
-  PCI: Simplify pci_device_remove()
-  PCI: Drop useless check from pci_device_probe()
-  xen/pci: Drop some checks that are always true
-  PCI: replace pci_dev::driver usage that gets the driver name
-  scsi: message: fusion: Remove unused parameter of mpt_pci driver's
-    probe()
-  crypto: qat - simplify adf_enable_aer()
-  PCI: Replace pci_dev::driver usage by pci_dev::dev.driver
-  PCI: Drop duplicated tracking of a pci_dev's bound driver
-
- arch/powerpc/include/asm/ppc-pci.h            |  7 ++-
- arch/powerpc/kernel/eeh_driver.c              | 10 +--
- arch/x86/events/intel/uncore.c                |  2 +-
- arch/x86/kernel/probe_roms.c                  |  2 +-
- drivers/bcma/host_pci.c                       |  7 ++-
- drivers/crypto/hisilicon/qm.c                 |  2 +-
- drivers/crypto/qat/qat_4xxx/adf_drv.c         |  7 +--
- drivers/crypto/qat/qat_c3xxx/adf_drv.c        |  7 +--
- drivers/crypto/qat/qat_c62x/adf_drv.c         |  7 +--
- drivers/crypto/qat/qat_common/adf_aer.c       | 10 +--
- .../crypto/qat/qat_common/adf_common_drv.h    |  2 +-
- drivers/crypto/qat/qat_dh895xcc/adf_drv.c     |  7 +--
- drivers/message/fusion/mptbase.c              |  7 +--
- drivers/message/fusion/mptbase.h              |  2 +-
- drivers/message/fusion/mptctl.c               |  4 +-
- drivers/message/fusion/mptlan.c               |  2 +-
- drivers/misc/cxl/guest.c                      | 24 ++++---
- drivers/misc/cxl/pci.c                        | 30 +++++----
- .../ethernet/hisilicon/hns3/hns3_ethtool.c    |  2 +-
- .../ethernet/marvell/prestera/prestera_pci.c  |  2 +-
- drivers/net/ethernet/mellanox/mlxsw/pci.c     |  2 +-
- .../ethernet/netronome/nfp/nfp_net_ethtool.c  |  2 +-
- drivers/pci/iov.c                             | 25 +++++---
- drivers/pci/pci-driver.c                      | 45 ++++++-------
- drivers/pci/pci.c                             |  4 +-
- drivers/pci/pcie/err.c                        | 36 ++++++-----
- drivers/pci/xen-pcifront.c                    | 63 +++++++++----------
- drivers/ssb/pcihost_wrapper.c                 |  8 ++-
- drivers/usb/host/xhci-pci.c                   |  2 +-
- include/linux/pci.h                           |  1 -
- 30 files changed, 164 insertions(+), 167 deletions(-)
-
-base-commit: 2734d6c1b1a089fb593ef6a23d4b70903526fe0c
--- 
-2.30.2
-
+~Andrew
 
