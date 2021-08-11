@@ -2,88 +2,45 @@ Return-Path: <SRS0=AjmS=NC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34B3AC4338F
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 10:26:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D8DDC4338F
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 10:30:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DBF2B60EB2
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 10:26:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DBF2B60EB2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id D94D560F41
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 10:30:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D94D560F41
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.165667.302766 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.165684.302776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDlQn-0007Hf-12; Wed, 11 Aug 2021 10:25:53 +0000
+	id 1mDlVL-0001MF-M6; Wed, 11 Aug 2021 10:30:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 165667.302766; Wed, 11 Aug 2021 10:25:52 +0000
+Received: by outflank-mailman (output) from mailman id 165684.302776; Wed, 11 Aug 2021 10:30:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDlQm-0007HU-TY; Wed, 11 Aug 2021 10:25:52 +0000
-Received: by outflank-mailman (input) for mailman id 165667;
- Wed, 11 Aug 2021 10:25:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mDlVL-0001M8-J6; Wed, 11 Aug 2021 10:30:35 +0000
+Received: by outflank-mailman (input) for mailman id 165684;
+ Wed, 11 Aug 2021 10:30:34 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=9qiF=NC=arm.com=Wei.Chen@srs-us1.protection.inumbo.net>)
- id 1mDlQl-0002Qj-FY
- for xen-devel@lists.xenproject.org; Wed, 11 Aug 2021 10:25:51 +0000
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com (unknown
- [40.107.1.61]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 761e8696-fa8e-11eb-a052-12813bfff9fa;
- Wed, 11 Aug 2021 10:25:34 +0000 (UTC)
-Received: from PR3P195CA0013.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:b6::18)
- by AM5PR0802MB2417.eurprd08.prod.outlook.com (2603:10a6:203:9c::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4394.21; Wed, 11 Aug
- 2021 10:25:33 +0000
-Received: from VE1EUR03FT054.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:102:b6:cafe::b8) by PR3P195CA0013.outlook.office365.com
- (2603:10a6:102:b6::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.15 via Frontend
- Transport; Wed, 11 Aug 2021 10:25:32 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT054.mail.protection.outlook.com (10.152.19.64) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4415.16 via Frontend Transport; Wed, 11 Aug 2021 10:25:32 +0000
-Received: ("Tessian outbound d9f41274f41a:v101");
- Wed, 11 Aug 2021 10:25:32 +0000
-Received: from f06cc1c132ec.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 818B36B5-F871-4F84-A4B3-FA7113A418E4.1; 
- Wed, 11 Aug 2021 10:25:26 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id f06cc1c132ec.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Wed, 11 Aug 2021 10:25:26 +0000
-Received: from DB9PR06CA0026.eurprd06.prod.outlook.com (2603:10a6:10:1db::31)
- by VE1PR08MB4656.eurprd08.prod.outlook.com (2603:10a6:802:a8::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.14; Wed, 11 Aug
- 2021 10:25:23 +0000
-Received: from DB5EUR03FT012.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:1db:cafe::66) by DB9PR06CA0026.outlook.office365.com
- (2603:10a6:10:1db::31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.15 via Frontend
- Transport; Wed, 11 Aug 2021 10:25:23 +0000
-Received: from nebula.arm.com (40.67.248.234) by
- DB5EUR03FT012.mail.protection.outlook.com (10.152.20.161) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4415.16 via Frontend Transport; Wed, 11 Aug 2021 10:25:23 +0000
-Received: from AZ-NEU-EX03.Arm.com (10.251.24.31) by AZ-NEU-EX04.Arm.com
- (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.14; Wed, 11 Aug
- 2021 10:25:13 +0000
-Received: from ais-wip-ds.shanghai.arm.com (10.169.190.87) by mail.arm.com
- (10.251.24.31) with Microsoft SMTP Server id 15.1.2308.14 via Frontend
- Transport; Wed, 11 Aug 2021 10:25:11 +0000
+ (envelope-from <julien@xen.org>) id 1mDlVK-0001M2-9N
+ for xen-devel@lists.xenproject.org; Wed, 11 Aug 2021 10:30:34 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mDlVJ-0003IG-9k; Wed, 11 Aug 2021 10:30:33 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mDlVJ-0002hp-3A; Wed, 11 Aug 2021 10:30:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -95,127 +52,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 761e8696-fa8e-11eb-a052-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7SbFnreLB3IizsJ3DjqNZm/eCO7EB4EsDPVZsBU4wsY=;
- b=YmvlLPcmkIyGG31nDBHMyKSwhBbeQwaqQBaG6SS8N9IGIewfTaLd0/RHLBeXdiQGO1TfoVZWU42x77dOy/lRgtnzCHfKH8XjXIZNgSq4uycFJZyZFKdmZxi2MgDigpuqdhClyhsQqM8nhkwpgkXe3LWst+XqcUX519W2/CuLBSU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 5a0fe43bf5988e56
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RQ+RBwdFlSVVVPpbdZqHDCmKFycjWqM6DyzKsBZXTF/tagjQPs4zwMqzZO8/s94jgvKLSli7/qi2xwdmQMOScaIKStTl0FUKAMw+izz3YWH/RWkB4Uc7oUTU8yHcPZbXYx5CnXT2joxUhPbhauzrNVl9lp0xH5zrabI4jHEURqiMGURTo9Hhv8Ra9mjKejDGYQxc1opcAn0ph3dMf6MaKxcgHMa29zo+5rGdf8zSu3xvV4WnKjmcwMXabjrWwnIc5QXOogAi5DQ9ShXLvb2QODpgEt73nee+HlWLS4mJinEM9RjDHy+hl2N4duOA6OSq4IoAnL2ObyXKpwLfg8izcg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7SbFnreLB3IizsJ3DjqNZm/eCO7EB4EsDPVZsBU4wsY=;
- b=H3EfLvwR6tkPFcBj1XiqLTVOTG4YXFn+ErTmePLpuBi/ix9PEd1JGvyPC1ynOfi2omX0k73bp5/dvIaGdAs2wAe5X7CtTVKg32xBYQq6t066+H5KbuOTRfx1z9tedGAl/AzeZ5uq0gwkvUFY53CdJJz/aK0m06wNEccSqoI81d9AKIRp2jy0gtvEi/fiT0sm6MxX6WGMIJeHh14L/gbtbo2xD0Kj9DBg8abtzHiJ5D68cBJMmm8PpfkgE+FnHZb8EOtWGrvN1X+FTK1XSMSP3N8vA+fES+dQzByiNggdIwcUAM68FsTOmPk76588mL200iJ15Q1vEOHNQmXWA7MbFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7SbFnreLB3IizsJ3DjqNZm/eCO7EB4EsDPVZsBU4wsY=;
- b=YmvlLPcmkIyGG31nDBHMyKSwhBbeQwaqQBaG6SS8N9IGIewfTaLd0/RHLBeXdiQGO1TfoVZWU42x77dOy/lRgtnzCHfKH8XjXIZNgSq4uycFJZyZFKdmZxi2MgDigpuqdhClyhsQqM8nhkwpgkXe3LWst+XqcUX519W2/CuLBSU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=pass action=none
- header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 40.67.248.234 as permitted sender) receiver=protection.outlook.com;
- client-ip=40.67.248.234; helo=nebula.arm.com;
-From: Wei Chen <wei.chen@arm.com>
-To: <wei.chen@arm.com>, <xen-devel@lists.xenproject.org>,
-	<sstabellini@kernel.org>, <julien@xen.org>, <jbeulich@suse.com>
-CC: <Bertrand.Marquis@arm.com>
-Subject: [XEN RFC PATCH 17/40] xen/arm: Introduce DEVICE_TREE_NUMA Kconfig for arm64
-Date: Wed, 11 Aug 2021 18:24:00 +0800
-Message-ID: <20210811102423.28908-18-wei.chen@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210811102423.28908-1-wei.chen@arm.com>
-References: <20210811102423.28908-1-wei.chen@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=doX3rW6A7vyFUVbwpJR4jR128Hja/+6PxiGKxV8dehg=; b=Xj/saa4SV2Jd1OhiPMeqhGmw+W
+	rcOwHYqLD++cnQJjaO2Nc9lkMxXJp75UGj1jakvkIDLXWMBKztIX/TDU4koi76QLx5EQ4TOAv2r85
+	CHzZMMrtpxwbqwR42B1RMSLyGB4UbjW/UD4osielmf6pR6q5d5DqzxP+EBUYNuk8st9s=;
+Subject: Re: Disable swiotlb for Dom0
+To: Roman Skakun <Roman_Skakun@epam.com>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>
+Cc: Bertrand Marquis <bertrand.marquis@arm.com>,
+ Andrii Anisov <Andrii_Anisov@epam.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+ Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Roman Skakun <rm.skakun@gmail.com>, Jan Beulich <jbeulich@suse.com>
+References: <AM7PR03MB6593B4461B99297C8650CF1C85F79@AM7PR03MB6593.eurprd03.prod.outlook.com>
+ <060b5741-922c-115c-7e8c-97d8aa5f46f4@xen.org>
+ <AM7PR03MB65932619505158E3930D8E8785F89@AM7PR03MB6593.eurprd03.prod.outlook.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <d616081a-8c60-dcda-ac54-58c5be0c21ce@xen.org>
+Date: Wed, 11 Aug 2021 11:30:30 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
+In-Reply-To: <AM7PR03MB65932619505158E3930D8E8785F89@AM7PR03MB6593.eurprd03.prod.outlook.com>
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1793903a-3972-476f-19f5-08d95cb259b3
-X-MS-TrafficTypeDiagnostic: VE1PR08MB4656:|AM5PR0802MB2417:
-X-Microsoft-Antispam-PRVS:
-	<AM5PR0802MB2417404226897D98498069199EF89@AM5PR0802MB2417.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Oob-TLC-OOBClassifiers: OLM:6790;OLM:6790;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- SGYAQWt69RrMhW52qM1XE2li1PgonbUUsOvDHGBWzwVSsOktKRHXEzY+3eTP92mRZVHJbAGsrC3JCo+NhQggm5E/RP8Igyx3drygBS4mixytqIR6qbqxmn06SyjLd7PgrXnnEth9WUNivPmkDC3kY0PU9mdjw9MG9VdWB50LC+Vf/srSgXxPo3OlWcV02k1TWfRKXnvod2vNhITyQQHoVflcDJWcwOPS5nVo3vFh+X9+LCjdRqayfzSdzaFrztDRJppR0JoC0eLulHrh7Po7pR80bCYdpwLCmGlOmcSITpfQSvndowLcshyORYemL9hkbOBvCgtBMmHIU9+vCXAELXy9J2d4RS6mwzt/LavSSm4eVNZlZZkZEzdCz/TT/mcx2LBZwPmlWu0bJIX5NOcptTSYp5QZ76Gk/TPxZQAOXjUu/bVWrCOnDG0JMF37zuXc3f1QBo8d5jivMlP8Lu5f81S7ko8WX8KpiyNCVytAR+0O1DXhT46jKL7Izm5XXwUmAQ1YdelTm+l5Z9c3Eun5WWT5O4rrS91yBBDAJhwNH7J5bqwId8UOpVX8DHu8TrJ3mZEym9uYK454PTy2G7ym3a+Q6cZ6cUvN+icWSlUZE3e/W3q57wpCuSyskvyCLcHa49wNDrk+8GybTZGFiJc71pEi5b+7fXr9i38W8lb6z89CkJYFR3SO+WwxjibXxKfjPMnXAYgcJHsOAjHrywoLDq/6AR5Wnz5RhlCFzDMXqgheNCZlZGt+sCpVqpZZ0u0+7bJ6kVM8g2udTBT0XA/Nldj/xvEVghgm2ZWTRPgZL3w=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(39860400002)(396003)(136003)(376002)(346002)(46966006)(36840700001)(7696005)(8936002)(44832011)(8676002)(70586007)(70206006)(47076005)(336012)(82310400003)(83380400001)(356005)(6666004)(86362001)(34070700002)(186003)(316002)(36756003)(26005)(478600001)(81166007)(36860700001)(2906002)(2616005)(5660300002)(1076003)(4326008)(426003)(82740400003)(4744005)(110136005)(36900700001)(2101003);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB4656
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- VE1EUR03FT054.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	ca383ecd-c552-4858-cbc6-08d95cb253de
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	JApGZ+xvMc3gm3muVEsoVlySeRxwGdISNcB3i+8aIq3//dn8Qi/GAOhxo9hilyy+oYAr0fP6krRFbsOhgjbu2lkghXF91tiJetig/2H1Kb9/XGjNq7+gQMkngOXG6rxn4USZZbQOkpwDY9DXdPnxAKith0TrdULkKgC4ZbcvfVhe9yon005rcL/maLNcQJfH+TRF7yteYZrEZRnzPKMdO4muq9iXRSvdDoPl863t9Fr4lZYRwHo3bKJmpuU0EtOfEB//FynqNS4JkyiGxT69ByGC48DEAqxZreacLuYQwuJbSA7AmwppguWIpCa9REJyy+KshtJRoDDI/hf9bMGmwiB5jYAhpLr12+lKkfQM16jWLYtozlYgkiCpLRUuxCGpGhW08vGXNOixMfL+kHE3SnbLT2zW4hfIsmiRiOUybcZzSwESnWpkO1HLqBuDvpJAJGVX6u2jsJ/KEMFkH0AydB8FWd1MDAOPS6BPuFUXMZVR6tqJc8oAdKJdtiISCBs6H2QAIJSpes5vkyFXDbD9YuELcnVltkBng+T6nAwCEqn7lJL2Q8wzBgvAUUURy+KCHq0pdd2lz53ULUJGcFPqGuBVMw97a6JDpcIBmJKmIdslVeqSLaZpwlYpKyUJcdLTA8YqG7uT39HThik0cTivaBKeYUlK5KlO+Y93TOTizArX39S/4Qye72ec9+BVyn/5MB5etV8b84hNWPKbz6kuMQ1txBiZJsSHq/NH0vZVxk0=
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(346002)(396003)(136003)(39850400004)(376002)(46966006)(36840700001)(36860700001)(70206006)(47076005)(8676002)(336012)(70586007)(186003)(4326008)(2906002)(2616005)(478600001)(426003)(81166007)(6666004)(8936002)(44832011)(36756003)(86362001)(7696005)(83380400001)(5660300002)(1076003)(82310400003)(110136005)(4744005)(316002)(82740400003)(26005)(2101003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2021 10:25:32.6910
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1793903a-3972-476f-19f5-08d95cb259b3
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	VE1EUR03FT054.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0802MB2417
 
-We need a Kconfig option to distinguish with ACPI based
-NUMA. So we introduce the new Kconfig option:
-DEVICE_TREE_NUMA in this patch for Arm64.
 
-Signed-off-by: Wei Chen <wei.chen@arm.com>
----
- xen/arch/arm/Kconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index ecfa6822e4..678cc98ea3 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -33,6 +33,16 @@ config ACPI
- 	  Advanced Configuration and Power Interface (ACPI) support for Xen is
- 	  an alternative to device tree on ARM64.
- 
-+config DEVICE_TREE_NUMA
-+	bool "NUMA (Non-Uniform Memory Access) Support (UNSUPPORTED)" if UNSUPPORTED
-+	depends on ARM_64
-+	select NUMA
-+	---help---
-+
-+	  Non-Uniform Memory Access (NUMA) is a computer memory design used in
-+	  multiprocessing, where the memory access time depends on the memory
-+	  location relative to the processor.
-+
- config GICV3
- 	bool "GICv3 driver"
- 	depends on ARM_64 && !NEW_VGIC
+On 11/08/2021 09:49, Roman Skakun wrote:
+> Hi, Julien!
+
+Hi Roman,
+
+>> > I have observed your patch here:
+>> >https://urldefense.com/v3/__https://patchwork.kernel.org/project/xen-devel/patch/alpine.DEB.2.21.2102161333090.3234@sstabellini-ThinkPad->>T480s/__;!!GF_29dbcQIUBPA!kH5gzG1mxcIgDqMu2cVjTD3ggN9LiPN4OVinOnqrhLQrNr-mRb72udp2B5XBqZlW$ <https://urldefense.com/v3/__https://patchwork.kernel.org/project/xen-devel/patch/alpine.DEB.2.21.2102161333090.3234@sstabellini-ThinkPad->T480s/__;!!GF_29dbcQIUBPA!kH5gzG1mxcIgDqMu2cVjTD3ggN9LiPN4OVinOnqrhLQrNr-mRb72udp2B5XBqZlW$>[patchwork[.]kernel[.]org]
+>> >
+>> > And I collided with the same issue, when Dom0 device trying to use
+>> > swiotlb fops for devices which are controlled by IOMMU.
+>>
+>>The issue Stefano reported was when the dom0 is not direct mapped.
+>>However...
+> 
+> I applied these patches:
+> https://github.com/torvalds/linux/commit/f5079a9a2a31607a2343e544e9182ce35b030578 
+> <https://github.com/torvalds/linux/commit/f5079a9a2a31607a2343e544e9182ce35b030578>
+> https://github.com/xen-project/xen/commit/d66bf122c0ab79063a607d6cf68edf5e91d17d5e 
+> <https://github.com/xen-project/xen/commit/d66bf122c0ab79063a607d6cf68edf5e91d17d5e>
+> to check this more pragmatically.
+> 
+> Also, I added the log in xen_swiotlb_detect() and can see that swiotlb 
+> still used (other devices within dom0 used too), when dom0 is direct mapped:
+> 
+> [    1.870363] xen_swiotlb_detect() dev: rcar-fcp, 
+> XENFEAT_direct_mapped, use swiotlb
+> [    1.878352] xen_swiotlb_detect() dev: rcar-fcp, 
+> XENFEAT_direct_mapped, use swiotlb
+> [    1.886309] xen_swiotlb_detect() dev: rcar-fcp, 
+> XENFEAT_direct_mapped, use swiotlb
+> 
+> This means, that all devices are using swiotlb-xen DMA fops.
+> By the way, before applying this patches, dom0 always used swiotlb-xen 
+> fops for initial domain by design.
+
+This is expected because your domain is direct mapped.
+
+> 
+> 
+>> Any reason to not use  the stable branch for 5.10? I don't know whether
+>> your issue will be  fixed there, but the stable branch usually contains a
+>> lot of bug fixes (including  security one). So it is a good idea to use
+>> it over the first release  of a kernel version.
+> 
+> Yes, sure, current BSP release based on 5.10 kernel:
+> https://github.com/xen-troops/linux/tree/v5.10/rcar-5.0.0.rc4-xt0.1 
+> <https://github.com/xen-troops/linux/tree/v5.10/rcar-5.0.0.rc4-xt0.1>
+> based on https://github.com/renesas-rcar/linux-bsp 
+> <https://github.com/renesas-rcar/linux-bsp/tree/v5.10.41/rcar-5.1.0.rc2>
+> BTW, I specified the wrong kernel URL in the previous massage, sorry.
+> 
+>> > Issue caused in xen_swiotlb_map_page():
+>> > ```
+>> > dev: rcar-fcp, cap: 0, dma_mask: ffffffff, page: fffffe00180c7400, 
+> page_to_phys: 64b1d0000,
+>> > xen_phys_to_dma(phys): 64b1d0000
+>> > ```
+>>
+>>I can't seem to find this printk in Linux 5.10. Did you add it yourself?
+> 
+> Yes, it's my own log.
+
+Ok. Would you be able to provide more information on where the dom0 
+memory is allocated and the list of host RAM?
+
+> 
+> 
+>>This line suggests that the SWIOTLB tried to bounce the DMA buffer. In
+>>general, the use of the bounce buffer should be rare. So I would suggest
+>>to find out why this is used.
+>>
+>>Looking at the code, this suggests that one of the following check is false:
+>>
+>>/*
+>>        * If the address happens to be in the device's DMA window,
+>>* we can safely return the device addr and not worry about bounce
+>>* buffering it.
+>>*/
+>>if (dma_capable(dev, dev_addr, size, true) &&
+>>!range_straddles_page_boundary(phys, size) &&
+>>!xen_arch_need_swiotlb(dev, phys, dev_addr) &&
+>>swiotlb_force != SWIOTLB_FORCE)
+>>goto done;
+> 
+> I checked this earlier and saw that dma_capable(dev, dev_addr, size, 
+> true)returns false as expected because
+> we got dev_addr equals 64b1d0000 and according to this expression under 
+> dma_capable():
+> 
+> ```
+> dma_addr_t end = dev_addr + size - 1;
+> return end <= min_not_zero(*dev->dma_mask, dev->bus_dma_limit);
+> ```
+> As result, DMA mask more than 32bit.
+>> Let me start with that I agree we should disable swiotlb when we know
+>> the device is protected. However, from what you describe, it sounds like
+>> the same issue would appear if the IOMMU was disabled.
+> 
+> Yes, it looks like a potential issue. This means that swiotlb should be 
+> worked correctly, when it's needed, agreed.
+> But this is also potential improvement, and I presented this idea to 
+> discuss and create some patches.
+
+You might be able to remove the Xen swiotlb but I am not sure you will 
+be able to remove the swiotlb completely if you have a device that only 
+supports 32-bit DMA.
+
+> 
+>> Therefore, I think we should first find out why Linux wants to bounce
+>> the DMA buffer.
+> 
+> We retrieved dev_addr(64b1d0000) + size > 32bit mask, but fcp driver 
+> wants to use only 32 bit boundary address, but that's consequence.
+
+Ok. So your device is only capable to do a 32-bit DMA. Is that correct?
+
+> I think, the main reason of using bounce buffer is MFN address, not DMA 
+> phys address.
+
+I don't understand this sentence. Can you clarify it?
+
+Cheers,
+
 -- 
-2.25.1
-
+Julien Grall
 
