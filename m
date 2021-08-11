@@ -2,48 +2,54 @@ Return-Path: <SRS0=AjmS=NC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDF2DC4338F
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 06:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB5C4C4338F
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 08:07:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8409060FA0
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 06:45:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8409060FA0
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3697A60E52
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Aug 2021 08:07:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3697A60E52
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.165530.302490 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.165544.302504 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDhyn-0007mh-12; Wed, 11 Aug 2021 06:44:45 +0000
+	id 1mDjGv-0007Pj-Jw; Wed, 11 Aug 2021 08:07:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 165530.302490; Wed, 11 Aug 2021 06:44:44 +0000
+Received: by outflank-mailman (output) from mailman id 165544.302504; Wed, 11 Aug 2021 08:07:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mDhym-0007ma-U8; Wed, 11 Aug 2021 06:44:44 +0000
-Received: by outflank-mailman (input) for mailman id 165530;
- Wed, 11 Aug 2021 06:44:43 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mDhyl-0007mQ-6c; Wed, 11 Aug 2021 06:44:43 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mDhyk-0007Ar-UX; Wed, 11 Aug 2021 06:44:42 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mDhyk-0007I7-LF; Wed, 11 Aug 2021 06:44:42 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mDhyk-0008Fl-Km; Wed, 11 Aug 2021 06:44:42 +0000
+	id 1mDjGv-0007Pc-GB; Wed, 11 Aug 2021 08:07:33 +0000
+Received: by outflank-mailman (input) for mailman id 165544;
+ Wed, 11 Aug 2021 08:07:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=lxcx=NC=pengutronix.de=ukl@srs-us1.protection.inumbo.net>)
+ id 1mDjGu-0007PW-LC
+ for xen-devel@lists.xenproject.org; Wed, 11 Aug 2021 08:07:32 +0000
+Received: from metis.ext.pengutronix.de (unknown
+ [2001:67c:670:201:290:27ff:fe1d:cc33])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 271a0b5b-3937-4b93-9b4b-357c1d9bd684;
+ Wed, 11 Aug 2021 08:07:28 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mDjG9-00011O-T0; Wed, 11 Aug 2021 10:06:45 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mDjG7-0000Oh-6a; Wed, 11 Aug 2021 10:06:43 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mDjG6-0002xm-45; Wed, 11 Aug 2021 10:06:42 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,318 +61,601 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=vAaNlnNkLCGH3avACP/E2i1scXT4h62nozCeFNgxOWk=; b=P/W4rF7CjyMnphdXPcbwC3QN8b
-	pbPOpQFf/TjrtvHkpM02j0PzLfzkvVlYLm7NJneJ/gvPgPvER6T9R/Ejsqr+XfQ5oisMQwRjmCdGP
-	YVMeV2TNxDKQklT3Swba+4N7y3Cizv/qJy71KgNXltDREal1RNQqt4V45NnntJU6knYQ=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-164153-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 271a0b5b-3937-4b93-9b4b-357c1d9bd684
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-pci@vger.kernel.org,
+	kernel@pengutronix.de,
+	Russell Currey <ruscur@russell.cc>,
+	"Oliver O'Halloran" <oohall@gmail.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jiri Olsa <jolsa@redhat.com>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Borislav Petkov <bp@alien8.de>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Frederic Barrat <fbarrat@linux.ibm.com>,
+	Andrew Donnellan <ajd@linux.ibm.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Mathias Nyman <mathias.nyman@intel.com>,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-perf-users@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-usb@vger.kernel.org
+Subject: [PATCH v3 7/8] PCI: Replace pci_dev::driver usage by pci_dev::dev.driver
+Date: Wed, 11 Aug 2021 10:06:36 +0200
+Message-Id: <20210811080637.2596434-8-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210811080637.2596434-1-u.kleine-koenig@pengutronix.de>
+References: <20210811080637.2596434-1-u.kleine-koenig@pengutronix.de>
 MIME-Version: 1.0
-Subject: [linux-linus test] 164153: regressions - FAIL
-X-Osstest-Failures:
-    linux-linus:test-amd64-i386-xl-xsm:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-ws16-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow:xen-install:fail:regression
-    linux-linus:test-amd64-i386-qemut-rhel6hvm-intel:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemut-debianhvm-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-examine:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-i386-xsm:xen-install:fail:regression
-    linux-linus:test-amd64-i386-libvirt:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-coresched-i386-xl:xen-install:fail:regression
-    linux-linus:test-amd64-i386-qemut-rhel6hvm-amd:xen-install:fail:regression
-    linux-linus:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:xen-install:fail:regression
-    linux-linus:test-amd64-i386-qemuu-rhel6hvm-amd:xen-install:fail:regression
-    linux-linus:test-amd64-i386-pair:xen-install/src_host:fail:regression
-    linux-linus:test-amd64-i386-pair:xen-install/dst_host:fail:regression
-    linux-linus:test-amd64-i386-qemuu-rhel6hvm-intel:xen-install:fail:regression
-    linux-linus:test-amd64-i386-libvirt-xsm:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemut-ws16-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-raw:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemut-debianhvm-i386-xsm:xen-install:fail:regression
-    linux-linus:test-amd64-i386-freebsd10-i386:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-shadow:xen-install:fail:regression
-    linux-linus:test-amd64-i386-freebsd10-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-pvshim:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-ovmf-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemuu-win7-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm:xen-install:fail:regression
-    linux-linus:test-amd64-i386-xl-qemut-win7-amd64:xen-install:fail:regression
-    linux-linus:test-amd64-i386-libvirt-pair:xen-install/src_host:fail:regression
-    linux-linus:test-amd64-i386-libvirt-pair:xen-install/dst_host:fail:regression
-    linux-linus:test-arm64-arm64-xl-thunderx:debian-fixup:fail:regression
-    linux-linus:test-arm64-arm64-xl-xsm:debian-fixup:fail:regression
-    linux-linus:test-amd64-amd64-amd64-pvgrub:guest-stop:fail:regression
-    linux-linus:test-arm64-arm64-xl-credit1:debian-fixup:fail:regression
-    linux-linus:test-arm64-arm64-libvirt-xsm:debian-fixup:fail:regression
-    linux-linus:test-arm64-arm64-xl:debian-fixup:fail:regression
-    linux-linus:test-amd64-amd64-i386-pvgrub:guest-stop:fail:regression
-    linux-linus:test-arm64-arm64-xl-credit2:debian-fixup:fail:regression
-    linux-linus:test-amd64-amd64-libvirt-pair:guest-migrate/dst_host/src_host/debian.repeat:fail:regression
-    linux-linus:test-amd64-amd64-examine:memdisk-try-append:fail:regression
-    linux-linus:test-armhf-armhf-libvirt:guest-start:fail:regression
-    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    linux=9e723c5380c6e14fb91a8b6950563d040674afdb
-X-Osstest-Versions-That:
-    linux=deacdb3e3979979016fcd0ffd518c320a62ad166
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 11 Aug 2021 06:44:42 +0000
+Content-Type: text/plain; charset=UTF-8
+X-Patch-Hashes: v=1; h=sha256; i=/pZgVMb346xYWFyKXoYzQiwqLbFb4Qw5wqFIqjkKa+4=; m=0G8/SXHswYJ0aMsEyhttCGsbupOmDh11YSmXAfBLC/g=; p=a46fbLinfK8a3W9uIu7pvjs1j80Bm+t4HF7FjxOH4Fs=; g=3486e7f334e5ecea79c3e711454a7b4382954cdf
+X-Patch-Sig: m=pgp; i=u.kleine-koenig@pengutronix.de; s=0x0D2511F322BFAB1C1580266BE2DCDD9132669BD6; b=iQEzBAABCgAdFiEEfnIqFpAYrP8+dKQLwfwUeK3K7AkFAmEThQAACgkQwfwUeK3K7AnG4wf9EOw uD4GJ5KczIbdSntUukLqtZJGj1lNwon7Ysf3tUI0tkecaV979Aysql4q7zxfmOj/GOlrGq9bz2pI6 k/hJGfYIBa1MWBTxShFZioKz/9N6Sj5HGiTYjI34iuG0WMAPAfwpmQ0kceFYvBUrtmOYth6LxUzZF ivd8AZj2IqjE28XL9QCQVRW11XWp78IS+3Bq0x8XsI2YzegCI5QwqChLj74/PDwZ0Tw7CeBubs+Bz 6oNohczBGGInupwANC3COXaw2rpxMw5Y8aaKx5ExRsbn74sStyankDpeQfKE7ncGd7mcNLfbNyW7j nMFp7IFoORxWbPHSnjVZ4cume8BsabQ==
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
 
-flight 164153 linux-linus real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/164153/
+struct pci_dev::driver contains (apart from a constant offset) the same
+data as struct pci_dev::dev->driver. Replace all remaining users of the
+former pointer by the latter to allow removing the former.
 
-Regressions :-(
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+---
+ arch/powerpc/kernel/eeh_driver.c | 10 ++++-----
+ arch/x86/events/intel/uncore.c   |  2 +-
+ arch/x86/kernel/probe_roms.c     |  2 +-
+ drivers/misc/cxl/guest.c         | 24 ++++++++++++---------
+ drivers/misc/cxl/pci.c           | 30 ++++++++++++++++----------
+ drivers/pci/iov.c                | 25 ++++++++++++++--------
+ drivers/pci/pci-driver.c         | 25 +++++++++++-----------
+ drivers/pci/pci.c                |  4 ++--
+ drivers/pci/pcie/err.c           | 36 ++++++++++++++++++--------------
+ drivers/pci/xen-pcifront.c       |  4 ++--
+ drivers/usb/host/xhci-pci.c      |  2 +-
+ 11 files changed, 93 insertions(+), 71 deletions(-)
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-i386-xl-xsm        7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 7 xen-install fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-ws16-amd64  7 xen-install       fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow 7 xen-install fail REGR. vs. 152332
- test-amd64-i386-qemut-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
- test-amd64-i386-xl-qemut-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
- test-amd64-i386-examine       6 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
- test-amd64-i386-libvirt       7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
- test-amd64-coresched-i386-xl  7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-qemut-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
- test-amd64-i386-qemuu-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
- test-amd64-i386-pair         10 xen-install/src_host     fail REGR. vs. 152332
- test-amd64-i386-pair         11 xen-install/dst_host     fail REGR. vs. 152332
- test-amd64-i386-qemuu-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
- test-amd64-i386-libvirt-xsm   7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl            7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl-qemut-ws16-amd64  7 xen-install       fail REGR. vs. 152332
- test-amd64-i386-xl-raw        7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl-qemut-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
- test-amd64-i386-freebsd10-i386  7 xen-install            fail REGR. vs. 152332
- test-amd64-i386-xl-shadow     7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-freebsd10-amd64  7 xen-install           fail REGR. vs. 152332
- test-amd64-i386-xl-pvshim     7 xen-install              fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-ovmf-amd64  7 xen-install       fail REGR. vs. 152332
- test-amd64-i386-xl-qemuu-win7-amd64  7 xen-install       fail REGR. vs. 152332
- test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
- test-amd64-i386-xl-qemut-win7-amd64  7 xen-install       fail REGR. vs. 152332
- test-amd64-i386-libvirt-pair 10 xen-install/src_host     fail REGR. vs. 152332
- test-amd64-i386-libvirt-pair 11 xen-install/dst_host     fail REGR. vs. 152332
- test-arm64-arm64-xl-thunderx 13 debian-fixup             fail REGR. vs. 152332
- test-arm64-arm64-xl-xsm      13 debian-fixup             fail REGR. vs. 152332
- test-amd64-amd64-amd64-pvgrub 20 guest-stop              fail REGR. vs. 152332
- test-arm64-arm64-xl-credit1  13 debian-fixup             fail REGR. vs. 152332
- test-arm64-arm64-libvirt-xsm 13 debian-fixup             fail REGR. vs. 152332
- test-arm64-arm64-xl          13 debian-fixup             fail REGR. vs. 152332
- test-amd64-amd64-i386-pvgrub 20 guest-stop               fail REGR. vs. 152332
- test-arm64-arm64-xl-credit2  13 debian-fixup             fail REGR. vs. 152332
- test-amd64-amd64-libvirt-pair 28 guest-migrate/dst_host/src_host/debian.repeat fail REGR. vs. 152332
- test-amd64-amd64-examine      4 memdisk-try-append       fail REGR. vs. 152332
- test-armhf-armhf-libvirt     14 guest-start              fail REGR. vs. 152332
+diff --git a/arch/powerpc/kernel/eeh_driver.c b/arch/powerpc/kernel/eeh_driver.c
+index 3eff6a4888e7..350dab18e137 100644
+--- a/arch/powerpc/kernel/eeh_driver.c
++++ b/arch/powerpc/kernel/eeh_driver.c
+@@ -104,13 +104,13 @@ static bool eeh_edev_actionable(struct eeh_dev *edev)
+  */
+ static inline struct pci_driver *eeh_pcid_get(struct pci_dev *pdev)
+ {
+-	if (!pdev || !pdev->driver)
++	if (!pdev || !pdev->dev.driver)
+ 		return NULL;
+ 
+-	if (!try_module_get(pdev->driver->driver.owner))
++	if (!try_module_get(pdev->dev.driver->owner))
+ 		return NULL;
+ 
+-	return pdev->driver;
++	return to_pci_driver(pdev->dev.driver);
+ }
+ 
+ /**
+@@ -122,10 +122,10 @@ static inline struct pci_driver *eeh_pcid_get(struct pci_dev *pdev)
+  */
+ static inline void eeh_pcid_put(struct pci_dev *pdev)
+ {
+-	if (!pdev || !pdev->driver)
++	if (!pdev || !pdev->dev.driver)
+ 		return;
+ 
+-	module_put(pdev->driver->driver.owner);
++	module_put(pdev->dev.driver->owner);
+ }
+ 
+ /**
+diff --git a/arch/x86/events/intel/uncore.c b/arch/x86/events/intel/uncore.c
+index 9bf4dbbc26e2..2df95a483692 100644
+--- a/arch/x86/events/intel/uncore.c
++++ b/arch/x86/events/intel/uncore.c
+@@ -1176,7 +1176,7 @@ static int uncore_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id
+ 	 * PCI slot and func to indicate the uncore box.
+ 	 */
+ 	if (id->driver_data & ~0xffff) {
+-		struct pci_driver *pci_drv = pdev->driver;
++		struct pci_driver *pci_drv = to_pci_driver(pdev->dev.driver);
+ 
+ 		pmu = uncore_pci_find_dev_pmu(pdev, pci_drv->id_table);
+ 		if (pmu == NULL)
+diff --git a/arch/x86/kernel/probe_roms.c b/arch/x86/kernel/probe_roms.c
+index 9e1def3744f2..36e84d904260 100644
+--- a/arch/x86/kernel/probe_roms.c
++++ b/arch/x86/kernel/probe_roms.c
+@@ -80,7 +80,7 @@ static struct resource video_rom_resource = {
+  */
+ static bool match_id(struct pci_dev *pdev, unsigned short vendor, unsigned short device)
+ {
+-	struct pci_driver *drv = pdev->driver;
++	struct pci_driver *drv = to_pci_driver(pdev->dev.driver);
+ 	const struct pci_device_id *id;
+ 
+ 	if (pdev->vendor == vendor && pdev->device == device)
+diff --git a/drivers/misc/cxl/guest.c b/drivers/misc/cxl/guest.c
+index 186308f1f8eb..d997c9c3ebb5 100644
+--- a/drivers/misc/cxl/guest.c
++++ b/drivers/misc/cxl/guest.c
+@@ -25,28 +25,32 @@ static void pci_error_handlers(struct cxl_afu *afu,
+ 		return;
+ 
+ 	list_for_each_entry(afu_dev, &afu->phb->bus->devices, bus_list) {
+-		if (!afu_dev->driver)
++		struct pci_driver *afu_drv;
++
++		if (!afu_dev->dev.driver)
+ 			continue;
+ 
++		afu_drv = to_pci_driver(afu_dev->dev.driver);
++
+ 		switch (bus_error_event) {
+ 		case CXL_ERROR_DETECTED_EVENT:
+ 			afu_dev->error_state = state;
+ 
+-			if (afu_dev->driver->err_handler &&
+-			    afu_dev->driver->err_handler->error_detected)
+-				afu_dev->driver->err_handler->error_detected(afu_dev, state);
++			if (afu_drv->err_handler &&
++			    afu_drv->err_handler->error_detected)
++				afu_drv->err_handler->error_detected(afu_dev, state);
+ 		break;
+ 		case CXL_SLOT_RESET_EVENT:
+ 			afu_dev->error_state = state;
+ 
+-			if (afu_dev->driver->err_handler &&
+-			    afu_dev->driver->err_handler->slot_reset)
+-				afu_dev->driver->err_handler->slot_reset(afu_dev);
++			if (afu_drv->err_handler &&
++			    afu_drv->err_handler->slot_reset)
++				afu_drv->err_handler->slot_reset(afu_dev);
+ 		break;
+ 		case CXL_RESUME_EVENT:
+-			if (afu_dev->driver->err_handler &&
+-			    afu_dev->driver->err_handler->resume)
+-				afu_dev->driver->err_handler->resume(afu_dev);
++			if (afu_drv->err_handler &&
++			    afu_drv->err_handler->resume)
++				afu_drv->err_handler->resume(afu_dev);
+ 		break;
+ 		}
+ 	}
+diff --git a/drivers/misc/cxl/pci.c b/drivers/misc/cxl/pci.c
+index 2ba899f5659f..7e7545d01e27 100644
+--- a/drivers/misc/cxl/pci.c
++++ b/drivers/misc/cxl/pci.c
+@@ -1805,14 +1805,16 @@ static pci_ers_result_t cxl_vphb_error_detected(struct cxl_afu *afu,
+ 		return result;
+ 
+ 	list_for_each_entry(afu_dev, &afu->phb->bus->devices, bus_list) {
+-		if (!afu_dev->driver)
++		struct pci_driver *afu_drv;
++		if (!afu_dev->dev.driver)
+ 			continue;
+ 
++		afu_drv = to_pci_driver(afu_dev->dev.driver);
++
+ 		afu_dev->error_state = state;
+ 
+-		if (afu_dev->driver->err_handler)
+-			afu_result = afu_dev->driver->err_handler->error_detected(afu_dev,
+-										  state);
++		if (afu_drv->err_handler)
++			afu_result = afu_drv->err_handler->error_detected(afu_dev, state);
+ 		/* Disconnect trumps all, NONE trumps NEED_RESET */
+ 		if (afu_result == PCI_ERS_RESULT_DISCONNECT)
+ 			result = PCI_ERS_RESULT_DISCONNECT;
+@@ -2003,6 +2005,8 @@ static pci_ers_result_t cxl_pci_slot_reset(struct pci_dev *pdev)
+ 			continue;
+ 
+ 		list_for_each_entry(afu_dev, &afu->phb->bus->devices, bus_list) {
++			struct pci_driver *afu_drv;
++
+ 			/* Reset the device context.
+ 			 * TODO: make this less disruptive
+ 			 */
+@@ -2028,12 +2032,14 @@ static pci_ers_result_t cxl_pci_slot_reset(struct pci_dev *pdev)
+ 			 * shouldn't start new work until we call
+ 			 * their resume function.
+ 			 */
+-			if (!afu_dev->driver)
++			if (!afu_dev->dev.driver)
+ 				continue;
+ 
+-			if (afu_dev->driver->err_handler &&
+-			    afu_dev->driver->err_handler->slot_reset)
+-				afu_result = afu_dev->driver->err_handler->slot_reset(afu_dev);
++			afu_drv = to_pci_driver(afu_dev->dev.driver);
++
++			if (afu_drv->err_handler &&
++			    afu_drv->err_handler->slot_reset)
++				afu_result = afu_drv->err_handler->slot_reset(afu_dev);
+ 
+ 			if (afu_result == PCI_ERS_RESULT_DISCONNECT)
+ 				result = PCI_ERS_RESULT_DISCONNECT;
+@@ -2074,9 +2080,11 @@ static void cxl_pci_resume(struct pci_dev *pdev)
+ 			continue;
+ 
+ 		list_for_each_entry(afu_dev, &afu->phb->bus->devices, bus_list) {
+-			if (afu_dev->driver && afu_dev->driver->err_handler &&
+-			    afu_dev->driver->err_handler->resume)
+-				afu_dev->driver->err_handler->resume(afu_dev);
++			struct pci_driver *afu_drv;
++			if (afu_dev->dev.driver &&
++			    (afu_drv = to_pci_driver(afu_dev->dev.driver))->err_handler &&
++			    afu_drv->err_handler->resume)
++				afu_drv->err_handler->resume(afu_dev);
+ 		}
+ 	}
+ 	spin_unlock(&adapter->afu_list_lock);
+diff --git a/drivers/pci/iov.c b/drivers/pci/iov.c
+index dafdc652fcd0..f94660927544 100644
+--- a/drivers/pci/iov.c
++++ b/drivers/pci/iov.c
+@@ -164,13 +164,15 @@ static ssize_t sriov_vf_total_msix_show(struct device *dev,
+ 					char *buf)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev);
++	struct pci_driver *pdrv;
+ 	u32 vf_total_msix = 0;
+ 
+ 	device_lock(dev);
+-	if (!pdev->driver || !pdev->driver->sriov_get_vf_total_msix)
++	pdrv = to_pci_driver(dev->driver);
++	if (!pdrv || !pdrv->sriov_get_vf_total_msix)
+ 		goto unlock;
+ 
+-	vf_total_msix = pdev->driver->sriov_get_vf_total_msix(pdev);
++	vf_total_msix = pdrv->sriov_get_vf_total_msix(pdev);
+ unlock:
+ 	device_unlock(dev);
+ 	return sysfs_emit(buf, "%u\n", vf_total_msix);
+@@ -183,6 +185,7 @@ static ssize_t sriov_vf_msix_count_store(struct device *dev,
+ {
+ 	struct pci_dev *vf_dev = to_pci_dev(dev);
+ 	struct pci_dev *pdev = pci_physfn(vf_dev);
++	struct pci_driver *pdrv;
+ 	int val, ret;
+ 
+ 	ret = kstrtoint(buf, 0, &val);
+@@ -193,13 +196,14 @@ static ssize_t sriov_vf_msix_count_store(struct device *dev,
+ 		return -EINVAL;
+ 
+ 	device_lock(&pdev->dev);
+-	if (!pdev->driver || !pdev->driver->sriov_set_msix_vec_count) {
++	pdrv = to_pci_driver(pdev->dev.driver);
++	if (!pdrv || !pdrv->sriov_set_msix_vec_count) {
+ 		ret = -EOPNOTSUPP;
+ 		goto err_pdev;
+ 	}
+ 
+ 	device_lock(&vf_dev->dev);
+-	if (vf_dev->driver) {
++	if (vf_dev->dev.driver) {
+ 		/*
+ 		 * A driver is already attached to this VF and has configured
+ 		 * itself based on the current MSI-X vector count. Changing
+@@ -209,7 +213,7 @@ static ssize_t sriov_vf_msix_count_store(struct device *dev,
+ 		goto err_dev;
+ 	}
+ 
+-	ret = pdev->driver->sriov_set_msix_vec_count(vf_dev, val);
++	ret = pdrv->sriov_set_msix_vec_count(vf_dev, val);
+ 
+ err_dev:
+ 	device_unlock(&vf_dev->dev);
+@@ -376,6 +380,7 @@ static ssize_t sriov_numvfs_store(struct device *dev,
+ 				  const char *buf, size_t count)
+ {
+ 	struct pci_dev *pdev = to_pci_dev(dev);
++	struct pci_driver *pdrv;
+ 	int ret;
+ 	u16 num_vfs;
+ 
+@@ -392,14 +397,16 @@ static ssize_t sriov_numvfs_store(struct device *dev,
+ 		goto exit;
+ 
+ 	/* is PF driver loaded */
+-	if (!pdev->driver) {
++	if (!pdev->dev.driver) {
+ 		pci_info(pdev, "no driver bound to device; cannot configure SR-IOV\n");
+ 		ret = -ENOENT;
+ 		goto exit;
+ 	}
+ 
++	pdrv = to_pci_driver(pdev->dev.driver);
++
+ 	/* is PF driver loaded w/callback */
+-	if (!pdev->driver->sriov_configure) {
++	if (!pdrv->sriov_configure) {
+ 		pci_info(pdev, "driver does not support SR-IOV configuration via sysfs\n");
+ 		ret = -ENOENT;
+ 		goto exit;
+@@ -407,7 +414,7 @@ static ssize_t sriov_numvfs_store(struct device *dev,
+ 
+ 	if (num_vfs == 0) {
+ 		/* disable VFs */
+-		ret = pdev->driver->sriov_configure(pdev, 0);
++		ret = pdrv->sriov_configure(pdev, 0);
+ 		goto exit;
+ 	}
+ 
+@@ -419,7 +426,7 @@ static ssize_t sriov_numvfs_store(struct device *dev,
+ 		goto exit;
+ 	}
+ 
+-	ret = pdev->driver->sriov_configure(pdev, num_vfs);
++	ret = pdrv->sriov_configure(pdev, num_vfs);
+ 	if (ret < 0)
+ 		goto exit;
+ 
+diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
+index 7dff574bb2fa..e4bab9d0d6d8 100644
+--- a/drivers/pci/pci-driver.c
++++ b/drivers/pci/pci-driver.c
+@@ -443,7 +443,7 @@ static int pci_device_probe(struct device *dev)
+ static int pci_device_remove(struct device *dev)
+ {
+ 	struct pci_dev *pci_dev = to_pci_dev(dev);
+-	struct pci_driver *drv = pci_dev->driver;
++	struct pci_driver *drv = to_pci_driver(pci_dev->dev.driver);
+ 
+ 	if (drv->remove) {
+ 		pm_runtime_get_sync(dev);
+@@ -480,7 +480,7 @@ static int pci_device_remove(struct device *dev)
+ static void pci_device_shutdown(struct device *dev)
+ {
+ 	struct pci_dev *pci_dev = to_pci_dev(dev);
+-	struct pci_driver *drv = pci_dev->driver;
++	struct pci_driver *drv = to_pci_driver(pci_dev->dev.driver);
+ 
+ 	pm_runtime_resume(dev);
+ 
+@@ -576,7 +576,7 @@ static int pci_pm_reenable_device(struct pci_dev *pci_dev)
+ static int pci_legacy_suspend(struct device *dev, pm_message_t state)
+ {
+ 	struct pci_dev *pci_dev = to_pci_dev(dev);
+-	struct pci_driver *drv = pci_dev->driver;
++	struct pci_driver *drv = to_pci_driver(dev->driver);
+ 
+ 	if (drv && drv->suspend) {
+ 		pci_power_t prev = pci_dev->current_state;
+@@ -617,7 +617,7 @@ static int pci_legacy_suspend_late(struct device *dev, pm_message_t state)
+ static int pci_legacy_resume(struct device *dev)
+ {
+ 	struct pci_dev *pci_dev = to_pci_dev(dev);
+-	struct pci_driver *drv = pci_dev->driver;
++	struct pci_driver *drv = to_pci_driver(pci_dev->dev.driver);
+ 
+ 	pci_fixup_device(pci_fixup_resume, pci_dev);
+ 
+@@ -636,7 +636,7 @@ static void pci_pm_default_suspend(struct pci_dev *pci_dev)
+ 
+ static bool pci_has_legacy_pm_support(struct pci_dev *pci_dev)
+ {
+-	struct pci_driver *drv = pci_dev->driver;
++	struct pci_driver *drv = to_pci_driver(pci_dev->dev.driver);
+ 	bool ret = drv && (drv->suspend || drv->resume);
+ 
+ 	/*
+@@ -1229,11 +1229,11 @@ static int pci_pm_runtime_suspend(struct device *dev)
+ 	int error;
+ 
+ 	/*
+-	 * If pci_dev->driver is not set (unbound), we leave the device in D0,
++	 * If pci_dev->dev.driver is not set (unbound), we leave the device in D0,
+ 	 * but it may go to D3cold when the bridge above it runtime suspends.
+ 	 * Save its config space in case that happens.
+ 	 */
+-	if (!pci_dev->driver) {
++	if (!pci_dev->dev.driver) {
+ 		pci_save_state(pci_dev);
+ 		return 0;
+ 	}
+@@ -1290,7 +1290,7 @@ static int pci_pm_runtime_resume(struct device *dev)
+ 	 */
+ 	pci_restore_standard_config(pci_dev);
+ 
+-	if (!pci_dev->driver)
++	if (!dev->driver)
+ 		return 0;
+ 
+ 	pci_fixup_device(pci_fixup_resume_early, pci_dev);
+@@ -1309,14 +1309,13 @@ static int pci_pm_runtime_resume(struct device *dev)
+ 
+ static int pci_pm_runtime_idle(struct device *dev)
+ {
+-	struct pci_dev *pci_dev = to_pci_dev(dev);
+ 	const struct dev_pm_ops *pm = dev->driver ? dev->driver->pm : NULL;
+ 
+ 	/*
+-	 * If pci_dev->driver is not set (unbound), the device should
++	 * If dev->driver is not set (unbound), the device should
+ 	 * always remain in D0 regardless of the runtime PM status
+ 	 */
+-	if (!pci_dev->driver)
++	if (!dev->driver)
+ 		return 0;
+ 
+ 	if (!pm)
+@@ -1423,8 +1422,8 @@ static struct pci_driver pci_compat_driver = {
+  */
+ struct pci_driver *pci_dev_driver(const struct pci_dev *dev)
+ {
+-	if (dev->driver)
+-		return dev->driver;
++	if (dev->dev.driver)
++		return to_pci_driver(dev->dev.driver);
+ 	else {
+ 		int i;
+ 		for (i = 0; i <= PCI_ROM_RESOURCE; i++)
+diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+index aacf575c15cf..e21218a16098 100644
+--- a/drivers/pci/pci.c
++++ b/drivers/pci/pci.c
+@@ -5070,7 +5070,7 @@ EXPORT_SYMBOL_GPL(pci_dev_unlock);
+ static void pci_dev_save_and_disable(struct pci_dev *dev)
+ {
+ 	const struct pci_error_handlers *err_handler =
+-			dev->driver ? dev->driver->err_handler : NULL;
++			dev->dev.driver ? to_pci_driver(dev->dev.driver)->err_handler : NULL;
+ 
+ 	/*
+ 	 * dev->driver->err_handler->reset_prepare() is protected against
+@@ -5101,7 +5101,7 @@ static void pci_dev_save_and_disable(struct pci_dev *dev)
+ static void pci_dev_restore(struct pci_dev *dev)
+ {
+ 	const struct pci_error_handlers *err_handler =
+-			dev->driver ? dev->driver->err_handler : NULL;
++			dev->dev.driver ? to_pci_driver(dev->dev.driver)->err_handler : NULL;
+ 
+ 	pci_restore_state(dev);
+ 
+diff --git a/drivers/pci/pcie/err.c b/drivers/pci/pcie/err.c
+index b576aa890c76..b314b54f7821 100644
+--- a/drivers/pci/pcie/err.c
++++ b/drivers/pci/pcie/err.c
+@@ -49,14 +49,15 @@ static int report_error_detected(struct pci_dev *dev,
+ 				 pci_channel_state_t state,
+ 				 enum pci_ers_result *result)
+ {
++	struct pci_driver *pdrv;
+ 	pci_ers_result_t vote;
+ 	const struct pci_error_handlers *err_handler;
+ 
+ 	device_lock(&dev->dev);
+ 	if (!pci_dev_set_io_state(dev, state) ||
+-		!dev->driver ||
+-		!dev->driver->err_handler ||
+-		!dev->driver->err_handler->error_detected) {
++		!dev->dev.driver ||
++		!(pdrv = to_pci_driver(dev->dev.driver))->err_handler ||
++		!pdrv->err_handler->error_detected) {
+ 		/*
+ 		 * If any device in the subtree does not have an error_detected
+ 		 * callback, PCI_ERS_RESULT_NO_AER_DRIVER prevents subsequent
+@@ -70,7 +71,7 @@ static int report_error_detected(struct pci_dev *dev,
+ 			vote = PCI_ERS_RESULT_NONE;
+ 		}
+ 	} else {
+-		err_handler = dev->driver->err_handler;
++		err_handler = pdrv->err_handler;
+ 		vote = err_handler->error_detected(dev, state);
+ 	}
+ 	pci_uevent_ers(dev, vote);
+@@ -92,15 +93,16 @@ static int report_normal_detected(struct pci_dev *dev, void *data)
+ static int report_mmio_enabled(struct pci_dev *dev, void *data)
+ {
+ 	pci_ers_result_t vote, *result = data;
++	struct pci_driver *pdrv;
+ 	const struct pci_error_handlers *err_handler;
+ 
+ 	device_lock(&dev->dev);
+-	if (!dev->driver ||
+-		!dev->driver->err_handler ||
+-		!dev->driver->err_handler->mmio_enabled)
++	if (!dev->dev.driver ||
++		!(pdrv = to_pci_driver(dev->dev.driver))->err_handler ||
++		!pdrv->err_handler->mmio_enabled)
+ 		goto out;
+ 
+-	err_handler = dev->driver->err_handler;
++	err_handler = pdrv->err_handler;
+ 	vote = err_handler->mmio_enabled(dev);
+ 	*result = merge_result(*result, vote);
+ out:
+@@ -112,14 +114,15 @@ static int report_slot_reset(struct pci_dev *dev, void *data)
+ {
+ 	pci_ers_result_t vote, *result = data;
+ 	const struct pci_error_handlers *err_handler;
++	struct pci_driver *pdrv;
+ 
+ 	device_lock(&dev->dev);
+-	if (!dev->driver ||
+-		!dev->driver->err_handler ||
+-		!dev->driver->err_handler->slot_reset)
++	if (!dev->dev.driver ||
++		!(pdrv = to_pci_driver(dev->dev.driver))->err_handler ||
++		!pdrv->err_handler->slot_reset)
+ 		goto out;
+ 
+-	err_handler = dev->driver->err_handler;
++	err_handler = pdrv->err_handler;
+ 	vote = err_handler->slot_reset(dev);
+ 	*result = merge_result(*result, vote);
+ out:
+@@ -130,15 +133,16 @@ static int report_slot_reset(struct pci_dev *dev, void *data)
+ static int report_resume(struct pci_dev *dev, void *data)
+ {
+ 	const struct pci_error_handlers *err_handler;
++	struct pci_driver *pdrv;
+ 
+ 	device_lock(&dev->dev);
+ 	if (!pci_dev_set_io_state(dev, pci_channel_io_normal) ||
+-		!dev->driver ||
+-		!dev->driver->err_handler ||
+-		!dev->driver->err_handler->resume)
++		!dev->dev.driver ||
++		!(pdrv = to_pci_driver(dev->dev.driver))->err_handler ||
++		!pdrv->err_handler->resume)
+ 		goto out;
+ 
+-	err_handler = dev->driver->err_handler;
++	err_handler = pdrv->err_handler;
+ 	err_handler->resume(dev);
+ out:
+ 	pci_uevent_ers(dev, PCI_ERS_RESULT_RECOVERED);
+diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
+index 3c648e6cb8f8..2b2126dbc39b 100644
+--- a/drivers/pci/xen-pcifront.c
++++ b/drivers/pci/xen-pcifront.c
+@@ -598,12 +598,12 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 	result = PCI_ERS_RESULT_NONE;
+ 
+ 	pcidev = pci_get_domain_bus_and_slot(domain, bus, devfn);
+-	if (!pcidev || !pcidev->driver) {
++	if (!pcidev || !pcidev->dev.driver) {
+ 		dev_err(&pdev->xdev->dev, "device or AER driver is NULL\n");
+ 		pci_dev_put(pcidev);
+ 		return result;
+ 	}
+-	pdrv = pcidev->driver;
++	pdrv = to_pci_driver(pcidev->dev.driver);
+ 
+ 	if (pdrv->err_handler && pdrv->err_handler->error_detected) {
+ 		pci_dbg(pcidev, "trying to call AER service\n");
+diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
+index 18c2bbddf080..3ead2127967f 100644
+--- a/drivers/usb/host/xhci-pci.c
++++ b/drivers/usb/host/xhci-pci.c
+@@ -103,7 +103,7 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+ 	struct xhci_driver_data         *driver_data;
+ 	const struct pci_device_id      *id;
+ 
+-	id = pci_match_id(pdev->driver->id_table, pdev);
++	id = pci_match_id(to_pci_driver(pdev->dev.driver)->id_table, pdev);
+ 
+ 	if (id && id->driver_data) {
+ 		driver_data = (struct xhci_driver_data *)id->driver_data;
+-- 
+2.30.2
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 152332
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 152332
- test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 152332
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 152332
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 152332
- test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 152332
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-seattle  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-seattle  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
- test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
- test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
- test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
-
-version targeted for testing:
- linux                9e723c5380c6e14fb91a8b6950563d040674afdb
-baseline version:
- linux                deacdb3e3979979016fcd0ffd518c320a62ad166
-
-Last test of basis   152332  2020-07-31 19:41:23 Z  375 days
-Failing since        152366  2020-08-01 20:49:34 Z  374 days  658 attempts
-Testing same since   164153  2021-08-10 22:12:01 Z    0 days    1 attempts
-
-------------------------------------------------------------
-6781 people touched revisions under test,
-not listing them all
-
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
- test-arm64-arm64-xl                                          fail    
- test-armhf-armhf-xl                                          pass    
- test-amd64-i386-xl                                           fail    
- test-amd64-coresched-i386-xl                                 fail    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            fail    
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
- test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         fail    
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemut-debianhvm-i386-xsm                  fail    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  fail    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 fail    
- test-amd64-i386-libvirt-xsm                                  fail    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      fail    
- test-amd64-i386-xl-xsm                                       fail    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                pass    
- test-amd64-i386-qemut-rhel6hvm-amd                           fail    
- test-amd64-i386-qemuu-rhel6hvm-amd                           fail    
- test-amd64-amd64-dom0pvh-xl-amd                              pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemut-debianhvm-amd64                     fail    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64                     fail    
- test-amd64-i386-freebsd10-amd64                              fail    
- test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
- test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
- test-amd64-amd64-xl-qemut-win7-amd64                         fail    
- test-amd64-i386-xl-qemut-win7-amd64                          fail    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-i386-xl-qemuu-win7-amd64                          fail    
- test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
- test-amd64-i386-xl-qemut-ws16-amd64                          fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-xl-credit1                                  pass    
- test-arm64-arm64-xl-credit1                                  fail    
- test-armhf-armhf-xl-credit1                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  fail    
- test-armhf-armhf-xl-credit2                                  pass    
- test-armhf-armhf-xl-cubietruck                               pass    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         fail    
- test-amd64-amd64-examine                                     pass    
- test-arm64-arm64-examine                                     pass    
- test-armhf-armhf-examine                                     pass    
- test-amd64-i386-examine                                      fail    
- test-amd64-i386-freebsd10-i386                               fail    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              pass    
- test-amd64-i386-qemut-rhel6hvm-intel                         fail    
- test-amd64-i386-qemuu-rhel6hvm-intel                         fail    
- test-amd64-amd64-dom0pvh-xl-intel                            pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     fail    
- test-amd64-i386-libvirt                                      fail    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-i386-pair                                         fail    
- test-amd64-amd64-libvirt-pair                                fail    
- test-amd64-i386-libvirt-pair                                 fail    
- test-amd64-amd64-amd64-pvgrub                                fail    
- test-amd64-amd64-i386-pvgrub                                 fail    
- test-amd64-amd64-xl-pvshim                                   pass    
- test-amd64-i386-xl-pvshim                                    fail    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-xl-qcow2                                    pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-i386-xl-raw                                       fail    
- test-amd64-amd64-xl-rtds                                     pass    
- test-armhf-armhf-xl-rtds                                     pass    
- test-arm64-arm64-xl-seattle                                  pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              fail    
- test-amd64-amd64-xl-shadow                                   pass    
- test-amd64-i386-xl-shadow                                    fail    
- test-arm64-arm64-xl-thunderx                                 fail    
- test-amd64-amd64-libvirt-vhd                                 pass    
- test-armhf-armhf-xl-vhd                                      pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 2003430 lines long.)
 
