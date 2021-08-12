@@ -2,48 +2,41 @@ Return-Path: <SRS0=NCXs=ND=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D7F9C4338F
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 11:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E666C4338F
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 11:49:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BAB6660E9B
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 11:34:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BAB6660E9B
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id EA45860FC4
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 11:49:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EA45860FC4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.166258.303583 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.166264.303598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mE8yS-0004cr-64; Thu, 12 Aug 2021 11:34:12 +0000
+	id 1mE9D0-00067q-Hr; Thu, 12 Aug 2021 11:49:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 166258.303583; Thu, 12 Aug 2021 11:34:12 +0000
+Received: by outflank-mailman (output) from mailman id 166264.303598; Thu, 12 Aug 2021 11:49:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mE8yS-0004ck-3D; Thu, 12 Aug 2021 11:34:12 +0000
-Received: by outflank-mailman (input) for mailman id 166258;
- Thu, 12 Aug 2021 11:34:10 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mE8yQ-0004ca-Ev; Thu, 12 Aug 2021 11:34:10 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mE8yQ-0004Uj-5J; Thu, 12 Aug 2021 11:34:10 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mE8yP-00006P-Rz; Thu, 12 Aug 2021 11:34:09 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mE8yP-0007lt-RR; Thu, 12 Aug 2021 11:34:09 +0000
+	id 1mE9D0-00067j-E0; Thu, 12 Aug 2021 11:49:14 +0000
+Received: by outflank-mailman (input) for mailman id 166264;
+ Thu, 12 Aug 2021 11:49:13 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EyNM=ND=citrix.com=Jane.Malalane@srs-us1.protection.inumbo.net>)
+ id 1mE9Cz-00067d-6l
+ for xen-devel@lists.xenproject.org; Thu, 12 Aug 2021 11:49:13 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e7f33599-53e2-4d6c-9d50-45a9279917f1;
+ Thu, 12 Aug 2021 11:49:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,74 +48,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=5JmQen2XlT+o3rT9Enzrst/Jo7jgxP2vPCfNR0zswnI=; b=wZVLWTmbfy1tl1RYfOoz+pXFg7
-	oiDbi/8rmGwHuqisq80VgOI8KF0toe/dn0ViTBnVrd0rPJZePl8fYKlNbklGgUKa4fcvi8oLHY6Gz
-	6FBer1FxeHJt4JLGKDOXZxUfV+bB18va5S6PjkgLyIlUZt990bxiLyqlc17G16hVzrX4=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-164166-mainreport@xen.org>
+X-Inumbo-ID: e7f33599-53e2-4d6c-9d50-45a9279917f1
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1628768951;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=CL3znfpWELLv4litjeLtI8c/M9lffSXcm1hEov0YUxw=;
+  b=PW5I+1Q79QPnu8c5lCFBCNk5RC0B4uXQmSbC93UZxtdOSKCcB4xDHFb3
+   +C6PviVYz/k7HFcCxmNUv5ch0LtgVCoGqcYptSWeBQnr+rqfiKGvYkavF
+   JLY7Cn/XJUF7jfGRj1RjFLrAqn36gQzdGf//dZGvENLpqgTK25K2q/145
+   A=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: R27mI2Eir9g7r4EgxXd8icAcU6DDlliLE5l86UHKaeY+w/LCTcNnPaTAgqlMvPZ2pvvg/L+jtX
+ RzzMkb89c4tcFalCDJ03rvJebHGqsO01leWKSsmzcBzoxDbnWeBLPZLnqZBGK3De1eEvgqh6CP
+ UwjVoPRh1wYcV6daVGVsfhjt7CRvLXktlSKGS9mvTaQN+yfz5MZotcQdi8ev0vRGmdn+IP8i5P
+ sFAvU/TrzfgjpEl3CZH3kSCfmVrfeO2rXhaxbrf9fjW0ptpT6P4f4bFqg43Wze7HIE0bSTsDli
+ QnZxwkXEZCeaw0iovqt/kmBS
+X-SBRS: 5.1
+X-MesageID: 50296498
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+IronPort-HdrOrdr: A9a23:LGD9Gq0TjgIuHByJ3XsUyAqjBLwkLtp133Aq2lEZdPRUGvb4qy
+ nIpoV86faUskd3ZJhOo6HiBEDtexzhHP1OkO0s1NWZLWvbUQKTRekIh+aP/9SJIVyGygc378
+ ddmsZFZuEYdWIK6PrH3A==
+X-IronPort-AV: E=Sophos;i="5.84,315,1620705600"; 
+   d="scan'208";a="50296498"
+From: Jane Malalane <jane.malalane@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Jane Malalane <jane.malalane@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH] x86/pv: Provide more helpful error when CONFIG_PV32 is absent
+Date: Thu, 12 Aug 2021 12:48:57 +0100
+Message-ID: <20210812114857.20971-1-jane.malalane@citrix.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [ovmf test] 164166: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=ac826886c98524e918753419c039d8b44198943f
-X-Osstest-Versions-That:
-    ovmf=a776bbabd9e8f370feb089cdc016324b1d6a37c7
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 12 Aug 2021 11:34:09 +0000
 
-flight 164166 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/164166/
+Currently, when booting a 32bit dom0 kernel, the message isn't very
+helpful:
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 ac826886c98524e918753419c039d8b44198943f
-baseline version:
- ovmf                 a776bbabd9e8f370feb089cdc016324b1d6a37c7
+  (XEN)  Xen  kernel: 64-bit, lsb
+  (XEN)  Dom0 kernel: 32-bit, PAE, lsb, paddr 0x100000 -> 0x112000
+  (XEN) Mismatch between Xen and DOM0 kernel
+  (XEN)
+  (XEN) ****************************************
+  (XEN) Panic on CPU 0:
+  (XEN) Could not construct domain 0
+  (XEN) ****************************************
 
-Last test of basis   164160  2021-08-11 14:41:07 Z    0 days
-Testing same since   164166  2021-08-12 08:41:16 Z    0 days    1 attempts
+With this adjustment, it now looks like this:
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Wenyi Xie <xiewenyi2@huawei.com>
+  (XEN)  Xen  kernel: 64-bit, lsb
+  (XEN) Found 32-bit PV kernel, but CONFIG_PV32 missing
+  (XEN)
+  (XEN) ****************************************
+  (XEN) Panic on CPU 0:
+  (XEN) Could not construct domain 0
+  (XEN) ****************************************
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Jane Malalane <jane.malalane@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: "Roger Pau Monné" <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ xen/arch/x86/pv/dom0_build.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index af47615b22..80e6c6e35b 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -362,9 +362,9 @@ int __init dom0_construct_pv(struct domain *d,
+     compatible = false;
+     machine = elf_uval(&elf, elf.ehdr, e_machine);
+ 
+-#ifdef CONFIG_PV32
+     if ( elf_32bit(&elf) )
+     {
++#ifdef CONFIG_PV32
+         if ( parms.pae == XEN_PAE_BIMODAL )
+             parms.pae = XEN_PAE_EXTCR3;
+         if ( parms.pae && machine == EM_386 )
+@@ -377,8 +377,12 @@ int __init dom0_construct_pv(struct domain *d,
+ 
+             compatible = true;
+         }
+-    }
++#else
++        printk("Found 32-bit PV kernel, but CONFIG_PV32 missing\n");
++        rc = -ENODEV;
++        goto out;
+ #endif
++    }
+ 
+     compat = is_pv_32bit_domain(d);
+ 
+-- 
+2.11.0
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   a776bbabd9..ac826886c9  ac826886c98524e918753419c039d8b44198943f -> xen-tested-master
 
