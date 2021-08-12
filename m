@@ -2,49 +2,49 @@ Return-Path: <SRS0=NCXs=ND=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB783C4338F
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 14:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E38C8C4320E
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 14:22:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 54E7B60EFE
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 14:22:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 54E7B60EFE
+	by mail.kernel.org (Postfix) with ESMTPS id 7C20A6104F
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Aug 2021 14:22:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7C20A6104F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.166456.303789 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.166458.303811 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mEBbR-0002QF-Fp; Thu, 12 Aug 2021 14:22:37 +0000
+	id 1mEBbb-00031H-7F; Thu, 12 Aug 2021 14:22:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 166456.303789; Thu, 12 Aug 2021 14:22:37 +0000
+Received: by outflank-mailman (output) from mailman id 166458.303811; Thu, 12 Aug 2021 14:22:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mEBbR-0002Q8-BR; Thu, 12 Aug 2021 14:22:37 +0000
-Received: by outflank-mailman (input) for mailman id 166456;
- Thu, 12 Aug 2021 14:22:36 +0000
+	id 1mEBbb-00031A-1i; Thu, 12 Aug 2021 14:22:47 +0000
+Received: by outflank-mailman (input) for mailman id 166458;
+ Thu, 12 Aug 2021 14:22:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tERp=ND=gmail.com=vicooodin@srs-us1.protection.inumbo.net>)
- id 1mEBbQ-0002Q2-10
- for xen-devel@lists.xenproject.org; Thu, 12 Aug 2021 14:22:36 +0000
-Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
+ id 1mEBbZ-0002Q2-Ur
+ for xen-devel@lists.xenproject.org; Thu, 12 Aug 2021 14:22:45 +0000
+Received: from mail-lf1-x135.google.com (unknown [2a00:1450:4864:20::135])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b9471ba9-25a8-4c68-b704-9c1c40272e21;
- Thu, 12 Aug 2021 14:22:34 +0000 (UTC)
-Received: by mail-lf1-x12d.google.com with SMTP id z20so13830068lfd.2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Aug 2021 07:22:34 -0700 (PDT)
+ id dbfc7067-d493-430c-82db-cee0258dc3e7;
+ Thu, 12 Aug 2021 14:22:37 +0000 (UTC)
+Received: by mail-lf1-x135.google.com with SMTP id z20so13830266lfd.2
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Aug 2021 07:22:37 -0700 (PDT)
 Received: from localhost.localdomain (host-176-36-213-80.b024.la.net.ua.
  [176.36.213.80])
- by smtp.gmail.com with ESMTPSA id s16sm329678ljj.48.2021.08.12.07.22.30
+ by smtp.gmail.com with ESMTPSA id s16sm329678ljj.48.2021.08.12.07.22.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Aug 2021 07:22:31 -0700 (PDT)
+ Thu, 12 Aug 2021 07:22:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,34 +56,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9471ba9-25a8-4c68-b704-9c1c40272e21
+X-Inumbo-ID: dbfc7067-d493-430c-82db-cee0258dc3e7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3nTkbFC6VPgkXI+Td1poqg1KtjwvUzhEe3OsoddMAzY=;
-        b=BpIJkeUxQlTpymrA8Ji3pS5j71Be13pmrSvMSSoHnFjKAN9a/kMl06n2MusdQQ/Uuh
-         ElpydyABMe8SxQRt8V2aAbAVxJSsZIfttngO7UVDflCQ4fNNWOgMfMsrUcvdXoeRI23z
-         GqUzZ2vsbaZPuDNhjEN8VNokT82rgtTo9bpF/FdL9pAqOpCWDWfMPhedcGBsI+xufdPE
-         ErMRrimhbXBDjh/dn/Ps6qpOFLQg22PGUZ2Lx9oAy+yzLSl8sB9DRt48Fy3z+f2GC2+3
-         jZCzvklY+w9dVP8AZI7H3KAme4bmZdOLOsrx1MvhZciZLxHPaWllMG9onMzY7xaR5ydH
-         ifkw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=JdPxHs8pmc5umX+oWUld/sGpQUemWUwM1K9E4JXG7Fw=;
+        b=e4/bORrc7EIG5RcPhOR2s5nYwwOjF3V/SZY0Pg4tvMA7pSAB/dgfAngE1qul2z5JGV
+         l43BDLzGd9wkdFllMqtAxBQxN7mtB72DpdJKWQji34l+QDFP/2iOTtA9cnKqIOjTam7j
+         g/QxwV6EDe7rlE3tWs2ZLABjyoOKFDI8FbDDpc6OhsoCaMujRpZtaF6d5XbZYMZk/1/A
+         LcRD+qKwg5lv3sOsC/MotURnrWJ6b62soupvU+fIZE629cO63DXHiZkjPoQ3Xx9p6UqY
+         4NAUs1bSRpegeQRGYKoTIqSEsUHARVWHLk7QXjZv/GJpHOB9lNuUlMmnKXEHJLTcKJR0
+         /FYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3nTkbFC6VPgkXI+Td1poqg1KtjwvUzhEe3OsoddMAzY=;
-        b=IyNLdEKeI2KJblpSqjGmxtJq3DCa63SVPZHmda4347N5f/ukobIafNVawhH/ffIVeb
-         +bdt5Ek0Qr1nK0hc1dr8PQ2r/vjNQEuOxP7TXlg+6d8uXsMXd+Mh3SC+aMl7bT3gFJBB
-         dokEDwYXpehhPxJPREKkWuWrwQeF66fKYITaIpFnQYh3kOEm7WSl4IrlrCqQTufVZbk8
-         kbmhPGQoFm35Aa6nnwRy6sraPtmK5fWkslixzE2oXPMfzLiWwgwe7VDnYK6qTN8YLA6v
-         FB9xYC0wAlJUpsO+aOVZif1VvJlBax1G2xkasIN5X80QnOLVFyA/KhC9m/XXAN3DZFyg
-         4Fgw==
-X-Gm-Message-State: AOAM531B1W9PPtbItJi85FHDngQQu1LRrZlVUwIL+Ay0s3Bgvnd2mySB
-	AHIyazNu+//X6GL7j+Z9FdvTR1KyrTGRbw==
-X-Google-Smtp-Source: ABdhPJwbyQOtyTaf17yHanepFukJRlB84Q+/57rn4oN5onVZJyTm8Y0Ryy9EDW/+riLXgk1QfUO9fA==
-X-Received: by 2002:a19:4349:: with SMTP id m9mr2730964lfj.404.1628778152116;
-        Thu, 12 Aug 2021 07:22:32 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=JdPxHs8pmc5umX+oWUld/sGpQUemWUwM1K9E4JXG7Fw=;
+        b=QhVxrrQYzMOCKlYKdnjO2HhTGz9oPcEAaz1JbbiARHqy0zvMC5aYNQHzqwI87Vydwy
+         DS0sZ8rsKiSNmzVST2NCXwObbi7BA78ubXWA6PxvdD3FYrTFgsFzHc7z+v5VEWITKozp
+         jmzYA7EpvkPinC9dGLap58afQqNEJcRV6QBJRR6ZCO0tLW/5L2nP56cMbs9QDkGNMO4+
+         nbKELU5jINT9RU310xKXBUA9sFrUAflNZ3VM3hsEB7HCboH5h17tgROyXqE/BmflBJhv
+         mBzRpMEHma+NAlMW7dBCzqQJbqAmtxLXBes+eF/WF85BPBVVPjxQ0Wzvhei0eJZpygAr
+         mQJw==
+X-Gm-Message-State: AOAM531xbKXJkGLyavOCPuIqFwzPgB0IiIY1BzLjvAwWbLJWttTQ3KxE
+	yYSHBLL/owsmA0KxH9XOeMKlFbqjond+zg==
+X-Google-Smtp-Source: ABdhPJxP/uirSlE99zuR7nj0wlbr6O8tgDNBgu5mFUKVrxO12qW4mXOBZ2wrFGq31IKhpRu89hwanQ==
+X-Received: by 2002:ac2:53a8:: with SMTP id j8mr2940005lfh.477.1628778154463;
+        Thu, 12 Aug 2021 07:22:34 -0700 (PDT)
 From: Anastasiia Lukianenko <vicooodin@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: oleksandr_tyshchenko@epam.com,
@@ -97,120 +96,262 @@ Cc: oleksandr_tyshchenko@epam.com,
 	andr2000@gmail.com,
 	vicooodin@gmail.com,
 	Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>
-Subject: [PATCH 0/9] Add xl PCI daemon (server for libxl PCI) 
-Date: Thu, 12 Aug 2021 17:22:21 +0300
-Message-Id: <20210812142230.19353-1-vicooodin@gmail.com>
+Subject: [PATCH 2/9] tools/libs/light: Add functions for handling PCI messages in JSON format
+Date: Thu, 12 Aug 2021 17:22:23 +0300
+Message-Id: <20210812142230.19353-3-vicooodin@gmail.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210812142230.19353-1-vicooodin@gmail.com>
+References: <20210812142230.19353-1-vicooodin@gmail.com>
 
 From: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>
 
-This work introduces xl PCI daemon that acts as a server for the client
-in the libxl PCI. The toolstack in Dom0 accesses sysfs to get information
-about PCI devices and in case of Hardware Domain that sysfs lives in
-Hardware Domain, so Dom0 can't read that information directly anymore.
-For that reason we introduce a "proxy" which directs requests from Dom0 to
-the domain which owns PCI devices, being it Dom0 itself or any other domain,
-e.g. Hardware Domain. xl PCI daemon is based on vchan-node2 tool and uses
-the libxenvchan library for messaging transport.
+These functions allow to process the received message from PCI server and
+to generate a reply in JSON format for the client.
 
-It was verified that this model works both remotely (in different domains)
-and locally (within one domain) as requested by Xen community [1]. The
-server processes the requests that come from the client. For better
-interoperability between guest OSes, e.g. Linux vs FreeBSD, the path in the
-request is not a direct sysfs entry as seen in Dom0, but instead it is a
-key-word defined in the protocol. For now libxl PCI refers to sysfs in the
-following functions, therefore such a subset was implemented in xl PCI
-daemon commands handling:
-* ‘ls’ - the server receives "dir_id" as a parameter. Xl pcid server
-  transmits information about devices assigned to the PCI driver by sending
-  a reply with the remote directory listing. Client cannot pass the sysfs
-  path, as it is not the same on different operating systems. Therefore,
-  for example, we pass parameter "pciback_driver" and on the server side
-  we refer to "/sys/bus/pci/drivers/pciback" if Linux is used);
-* ‘write’- the server receives the file name and value as parameters where
-  and what to write;
-* ‘read_hex’ - xl PCI daemon returns hex value read from the given path;
-* ‘exists’ - check if path exists;
-* ‘read_resources’ - returns an array of PCI device resources (start, end,
-   flags) read from given path;
-* ‘unbind’ - unbinds PCI device;
-* ‘reset’ - resets PCI device.
-
-Requests and responses are formed in the form of a json which is already
-used by libxenlight (xl). The commands are aimed at preventing the libxl
-PCI from reading / writing from / to the local sysfs directly. To do this,
-the libxl PCI itself was changed, vchan and pcid support was added to
-libxl - instead of working with the read and write functions from / to the
-sysfs, functionality was added to send requests to the server, then receive
-and process the response.
-
-Libxl vchan is used as transport between libxl and the server side. Libxl
-vchan adds support for JSON messages processing. Libxl pcid functions allow
-to process the received message from PCI server and to generate a reply in
-JSON format for the client. The pcid functions in the libxl allow the use
-of internal libxl structures and functions, so there is no code duplications
-on server side.
-
-The issue of simultaneous access of several processes to the channel is not
-resolved as well. For example, the commands “xl pci-assignable-list” and
-“xl pci-assignable-add” will be sent at the same time. Due to the fact that
-there is only one channel, the processing of two requests will cause
-undefined behavior on the server side. In the future, it is necessary to
-take into account cases when from different domains there can be several
-requests from a client at the same time or from the same but xl commands are
-executed concurrently.
-
-[1] - https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg84452.html
-
-Regards,
-Anastasiia
-
-Anastasiia Lukianenko (9):
-  tools/libs/light: Add vchan support to libxl
-  tools/libs/light: Add functions for handling PCI messages in JSON
-    format
-  tools/xl: Add pcid daemon to xl
-  tools/libs/light: Add "ls" command processing to xl pcid daemon and
-    libxl PCI
-  tools/libs/light: Add "write" command to xl pcid and libxl PCI
-  tools/libs/light: Add "read" command to xl pcid and libxl PCI
-  tools/libs/light: Make Libxl PCI get values from xl pcid instead of
-    libxl side
-  tools/libs/light: Add "unbind" and "read resources" commands to libxl
-    PCI and xl pcid
-  tools/libs/light: Add "reset" and "remove" PCI dev commands to xl pcid
-    daemon and libxl PCI
-
- tools/configure                           |   5 +-
- tools/helpers/Makefile                    |   4 +-
- tools/hotplug/FreeBSD/rc.d/xlpcid.in      |  75 +++
- tools/hotplug/Linux/init.d/xlpcid.in      |  76 +++
- tools/hotplug/NetBSD/rc.d/xlpcid.in       |  75 +++
- tools/include/pcid.h                      |  73 +++
- tools/libs/light/Makefile                 |   8 +-
- tools/libs/light/libxl_pci.c              | 566 ++++++++++++++--------
- tools/libs/light/libxl_pcid.c             | 527 ++++++++++++++++++++
+Signed-off-by: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>
+---
+ tools/include/pcid.h                      |  49 ++++++++
+ tools/libs/light/Makefile                 |   1 +
+ tools/libs/light/libxl_pcid.c             | 134 ++++++++++++++++++++++
  tools/libs/light/libxl_types.idl          |   1 +
  tools/libs/light/libxl_types_internal.idl |   6 +
- tools/libs/light/libxl_vchan.c            | 359 ++++++++++++++
- tools/libs/light/libxl_vchan.h            |  81 ++++
- tools/xl/Makefile                         |   5 +-
- tools/xl/xl.h                             |   1 +
- tools/xl/xl_cmdtable.c                    |   7 +
- tools/xl/xl_pcid.c                        |  79 +++
- 17 files changed, 1727 insertions(+), 221 deletions(-)
- create mode 100644 tools/hotplug/FreeBSD/rc.d/xlpcid.in
- create mode 100644 tools/hotplug/Linux/init.d/xlpcid.in
- create mode 100644 tools/hotplug/NetBSD/rc.d/xlpcid.in
+ 5 files changed, 191 insertions(+)
  create mode 100644 tools/include/pcid.h
  create mode 100644 tools/libs/light/libxl_pcid.c
- create mode 100644 tools/libs/light/libxl_vchan.c
- create mode 100644 tools/libs/light/libxl_vchan.h
- create mode 100644 tools/xl/xl_pcid.c
 
+diff --git a/tools/include/pcid.h b/tools/include/pcid.h
+new file mode 100644
+index 0000000000..59a7aad64a
+--- /dev/null
++++ b/tools/include/pcid.h
+@@ -0,0 +1,49 @@
++/*
++    Common definitions for Xen PCI client-server protocol.
++    Copyright (C) 2021 EPAM Systems Inc.
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Lesser General Public
++    License as published by the Free Software Foundation; either
++    version 2.1 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Lesser General Public License for more details.
++
++    You should have received a copy of the GNU Lesser General Public
++    License along with this library; If not, see <http://www.gnu.org/licenses/>.
++*/
++
++#ifndef PCID_H
++#define PCID_H
++
++#define PCID_XS_DIR             "/local/domain/"
++#define PCID_XS_PATH            "/data/pcid-vchan"
++
++#define PCI_RECEIVE_BUFFER_SIZE 4096
++#define PCI_MAX_SIZE_RX_BUF     MB(1)
++
++#define PCID_MSG_FIELD_ID        "id"
++#define PCID_MSG_FIELD_ARGS      "arguments"
++
++#define PCID_PCIBACK_DRIVER      "pciback_driver"
++
++#if defined(__linux__)
++#define SYSFS_PCIBACK_DRIVER   "/sys/bus/pci/drivers/pciback"
++#endif
++
++int libxl_pcid_process(libxl_ctx *ctx);
++
++#endif /* PCID_H */
++
++/*
++ * Local variables:
++ *  mode: C
++ *  c-file-style: "linux"
++ *  indent-tabs-mode: t
++ *  c-basic-offset: 8
++ *  tab-width: 8
++ * End:
++ */
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index f5d34b3371..40e3a7d7ce 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -76,6 +76,7 @@ SRCS-y += libxl.c
+ SRCS-y += libxl_create.c
+ SRCS-y += libxl_dm.c
+ SRCS-y += libxl_pci.c
++SRCS-y += libxl_pcid.c
+ SRCS-y += libxl_vchan.c
+ SRCS-y += libxl_dom.c
+ SRCS-y += libxl_exec.c
+diff --git a/tools/libs/light/libxl_pcid.c b/tools/libs/light/libxl_pcid.c
+new file mode 100644
+index 0000000000..6317c77a3c
+--- /dev/null
++++ b/tools/libs/light/libxl_pcid.c
+@@ -0,0 +1,134 @@
++/*
++    Utils for xl pcid daemon
++
++    Copyright (C) 2021 EPAM Systems Inc.
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Lesser General Public
++    License as published by the Free Software Foundation; either
++    version 2.1 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Lesser General Public License for more details.
++
++    You should have received a copy of the GNU Lesser General Public
++    License along with this library; If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define _GNU_SOURCE  // required for strchrnul()
++
++#include "libxl_osdeps.h" /* must come before any other headers */
++
++#include "libxl_internal.h"
++#include "libxl_vchan.h"
++
++#include <libxl_utils.h>
++#include <libxlutil.h>
++
++#include <pcid.h>
++#include <xenstore.h>
++
++#include <libxl.h>
++#include <libxl_json.h>
++#include <dirent.h>
++
++#define DOM0_ID 0
++
++static int pcid_handle_message(libxl__gc *gc, const libxl__json_object *request,
++                               libxl__json_object **result)
++{
++    const libxl__json_object *command_obj;
++    char *command_name;
++
++    command_obj = libxl__json_map_get(VCHAN_MSG_EXECUTE, request, JSON_ANY);
++    if (!command_obj) {
++        LOGE(ERROR, "Execution command not found\n");
++        return ERROR_FAIL;
++    }
++    command_name = command_obj->u.string;
++
++    return 0;
++}
++
++static char *pcid_prepare_reply(libxl__gc *gc, const char *cmd,
++                                libxl__json_object *result, int id)
++{
++    yajl_gen hand = NULL;
++    /* memory for 'buf' is owned by 'hand' */
++    const unsigned char *buf;
++    libxl_yajl_length len;
++    yajl_gen_status s;
++    char *ret = NULL;
++    int rc;
++
++    hand = libxl_yajl_gen_alloc(NULL);
++    if (!hand) {
++        LOGE(ERROR, "Error with hand allocation\n");
++        goto out;
++    }
++
++#if HAVE_YAJL_V2
++    /* Disable beautify for data */
++    yajl_gen_config(hand, yajl_gen_beautify, 0);
++#endif
++
++    yajl_gen_map_open(hand);
++    if ( !result )
++        libxl__yajl_gen_asciiz(hand, VCHAN_MSG_ERROR);
++    else {
++        libxl__yajl_gen_asciiz(hand, VCHAN_MSG_RETURN);
++        rc = libxl__json_object_to_yajl_gen(gc, hand, result);
++        if (rc)
++            goto get_buf_fail;
++    }
++    libxl__yajl_gen_asciiz(hand, PCID_MSG_FIELD_ID);
++    yajl_gen_integer(hand, id);
++    yajl_gen_map_close(hand);
++
++    s = yajl_gen_get_buf(hand, &buf, &len);
++    if (s != yajl_gen_status_ok) {
++        goto get_buf_fail;
++    }
++
++    ret = libxl__sprintf(gc, "%*.*s" END_OF_MESSAGE, (int)len, (int)len, buf);
++
++get_buf_fail:
++    yajl_gen_free(hand);
++out:
++
++    return ret;
++}
++
++int libxl_pcid_process(libxl_ctx *ctx)
++{
++    GC_INIT(ctx);
++    struct vchan_info *vchan;
++    char *xs_path;
++    int ret = 0;
++
++    vchan = libxl__zalloc(gc, sizeof(*vchan));
++    xs_path = GCSPRINTF(PCID_XS_DIR"%d"PCID_XS_PATH, DOM0_ID);
++
++    vchan->state = vchan_get_instance(gc, DOM0_ID, xs_path, VCHAN_SERVER);
++    if (!(vchan->state)) {
++        ret = -1;
++        goto out;
++    }
++
++    vchan->handle_msg = pcid_handle_message;
++    vchan->prepare_cmd = pcid_prepare_reply;
++    vchan->receive_buf_size = PCI_RECEIVE_BUFFER_SIZE;
++    vchan->max_buf_size = PCI_MAX_SIZE_RX_BUF;
++
++    while (true) {
++        ret = vchan_process_command(gc, vchan);
++        if (ret < 0)
++            break;
++    }
++
++out:
++    GC_FREE;
++    return ret;
++}
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 395165d801..d89c3ac1eb 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -76,6 +76,7 @@ libxl_error = Enumeration("error", [
+     (-30, "QMP_DEVICE_NOT_ACTIVE"), # a device has failed to be become active
+     (-31, "QMP_DEVICE_NOT_FOUND"), # the requested device has not been found
+     (-32, "QEMU_API"), # QEMU's replies don't contains expected members
++    (-33, "PROTOCOL_ERROR_PCID"),
+     ], value_namespace = "")
+ 
+ libxl_domain_type = Enumeration("domain_type", [
+diff --git a/tools/libs/light/libxl_types_internal.idl b/tools/libs/light/libxl_types_internal.idl
+index d66da13764..b9cee64d41 100644
+--- a/tools/libs/light/libxl_types_internal.idl
++++ b/tools/libs/light/libxl_types_internal.idl
+@@ -58,3 +58,9 @@ libxl__device_action = Enumeration("device_action", [
+     (1, "ADD"),
+     (2, "REMOVE"),
+     ])
++
++libxl__pcid_message_type = Enumeration("pcid_message_type", [
++    (1, "return"),
++    (2, "error"),
++    (3, "invalid"),
++    ])
 -- 
 2.17.1
 
