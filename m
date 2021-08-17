@@ -2,56 +2,55 @@ Return-Path: <SRS0=kHjl=NI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9468CC4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Aug 2021 09:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74E74C432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Aug 2021 09:55:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 559CF60F38
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Aug 2021 09:55:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 559CF60F38
+	by mail.kernel.org (Postfix) with ESMTPS id 3DBE2601FA
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Aug 2021 09:55:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3DBE2601FA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.167684.306102 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.167685.306106 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mFvoW-0007MW-PI; Tue, 17 Aug 2021 09:55:20 +0000
+	id 1mFvoX-0007Q1-0P; Tue, 17 Aug 2021 09:55:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 167684.306102; Tue, 17 Aug 2021 09:55:20 +0000
+Received: by outflank-mailman (output) from mailman id 167685.306106; Tue, 17 Aug 2021 09:55:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mFvoW-0007MP-Lb; Tue, 17 Aug 2021 09:55:20 +0000
-Received: by outflank-mailman (input) for mailman id 167684;
- Tue, 17 Aug 2021 09:55:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mFvoW-0007P1-TE; Tue, 17 Aug 2021 09:55:20 +0000
+Received: by outflank-mailman (input) for mailman id 167685;
+ Tue, 17 Aug 2021 09:55:20 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=OoW9=NI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mFvoV-0007HZ-Pw
- for xen-devel@lists.xenproject.org; Tue, 17 Aug 2021 09:55:19 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 370c78c0-ff41-11eb-a498-12813bfff9fa;
+ id 1mFvoV-0007Ha-Vk
+ for xen-devel@lists.xenproject.org; Tue, 17 Aug 2021 09:55:20 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id cc6e5109-a177-46dc-a90c-ea52122590ff;
  Tue, 17 Aug 2021 09:55:13 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 499E421ECD;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B6B801FF2C;
  Tue, 17 Aug 2021 09:55:12 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 10D8F13318;
+ by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 87BC413318;
  Tue, 17 Aug 2021 09:55:12 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id r6adAoCHG2FEDwAAGKfGzw
+ by imap1.suse-dmz.suse.de with ESMTPSA id sMCmH4CHG2FEDwAAGKfGzw
  (envelope-from <jgross@suse.com>); Tue, 17 Aug 2021 09:55:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -64,42 +63,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 370c78c0-ff41-11eb-a498-12813bfff9fa
+X-Inumbo-ID: cc6e5109-a177-46dc-a90c-ea52122590ff
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1629194112; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=9AWfd4PjJv9MY/T21Yeryt5HQZJaCzl6pn5VQ/We+pA=;
-	b=YbcY86CRFfJq7cur/mmqjqgmHn2aY6iWDi4qD2fa59mDd9X07tRbNV276Spo27OkIb3sAR
-	qmE0Hh0xHlQig7P6zZjISPQpmZQ1/fSKj7m9+UH1f7/XbNx2Bmv8YehV4KE6RCPNQ1X87d
-	Y1S+9q9CgDK7umzCHABadVGsxDR4jfU=
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6C/kYgeCHpbmW4aQY5wUhjgZzqJkvYkEyqUXd4wWzEM=;
+	b=igvi9mJDRgK1cbndd4mDIjnvgEhYsOX4p+oW4RPNh9dShzPROZgiHXE8ZdmCU2LEu4KX+/
+	9wsBiSuZUrDjQi8wk2z8j92kBhsuhkez5CwmKlbUBYouV1vTKI/Mg8MIaR0uR5G9PqnyA4
+	T7dqfBuXC0kNSS/L+cwCA1lU84l1Fh4=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 0/2] mini-os: config related cleanups
-Date: Tue, 17 Aug 2021 11:54:57 +0200
-Message-Id: <20210817095459.27671-1-jgross@suse.com>
+Subject: [PATCH 2/2] mini-os: move test functions under CONFIG_TEST
+Date: Tue, 17 Aug 2021 11:54:59 +0200
+Message-Id: <20210817095459.27671-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210817095459.27671-1-jgross@suse.com>
+References: <20210817095459.27671-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-While writing patch 2 I stumbled over CONFIG_TEST having no effect at
-the C source level, so I added patch 1 to avoid further similar
-problems.
+There is no need to have the xenbus test support functions always
+included in Mini-OS. Move them inside #ifdef CONFIG_TEST.
 
-The additionally fixed CONFIG_XC issue wasn't triggered in any known
-case, probably as FTYPE_XC hasn't been used in our code base.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xenbus/xenbus.c | 32 +++++++++++++++++---------------
+ 1 file changed, 17 insertions(+), 15 deletions(-)
 
-Juergen Gross (2):
-  mini-os: make config handling more generic
-  mini-os: move test functions under CONFIG_TEST
-
- Config.mk       | 66 +++++++++++++++++++++----------------------------
- xenbus/xenbus.c | 32 +++++++++++++-----------
- 2 files changed, 45 insertions(+), 53 deletions(-)
-
+diff --git a/xenbus/xenbus.c b/xenbus/xenbus.c
+index fdb0934..11427ba 100644
+--- a/xenbus/xenbus.c
++++ b/xenbus/xenbus.c
+@@ -573,21 +573,6 @@ static char *errmsg(struct xsd_sockmsg *rep)
+     return res;
+ }
+ 
+-/* Send a debug message to xenbus.  Can block. */
+-static void xenbus_debug_msg(const char *msg)
+-{
+-    int len = strlen(msg);
+-    struct write_req req[] = {
+-        { "print", sizeof("print") },
+-        { msg, len },
+-        { "", 1 }};
+-    struct xsd_sockmsg *reply;
+-
+-    reply = xenbus_msg_reply(XS_DEBUG, 0, req, ARRAY_SIZE(req));
+-    printk("Got a reply, type %d, id %d, len %d.\n",
+-            reply->type, reply->req_id, reply->len);
+-}
+-
+ /* List the contents of a directory.  Returns a malloc()ed array of
+    pointers to malloc()ed strings.  The array is NULL terminated.  May
+    block. */
+@@ -882,6 +867,22 @@ domid_t xenbus_get_self_id(void)
+     return ret;
+ }
+ 
++#ifdef CONFIG_TEST
++/* Send a debug message to xenbus.  Can block. */
++static void xenbus_debug_msg(const char *msg)
++{
++    int len = strlen(msg);
++    struct write_req req[] = {
++        { "print", sizeof("print") },
++        { msg, len },
++        { "", 1 }};
++    struct xsd_sockmsg *reply;
++
++    reply = xenbus_msg_reply(XS_DEBUG, 0, req, ARRAY_SIZE(req));
++    printk("Got a reply, type %d, id %d, len %d.\n",
++            reply->type, reply->req_id, reply->len);
++}
++
+ static void do_ls_test(const char *pre)
+ {
+     char **dirs, *msg;
+@@ -968,6 +969,7 @@ void test_xenbus(void)
+     do_read_test("device/vif/0/flibble");
+     printk("(Should have said ENOENT)\n");
+ }
++#endif /* CONFIG_TEST */
+ 
+ /*
+  * Local variables:
 -- 
 2.26.2
 
