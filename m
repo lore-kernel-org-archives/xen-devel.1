@@ -2,48 +2,47 @@ Return-Path: <SRS0=jJV9=NJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20362C4338F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E640C4320A
 	for <xen-devel@archiver.kernel.org>; Wed, 18 Aug 2021 20:30:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D7E92610D2
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Aug 2021 20:30:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D7E92610D2
+	by mail.kernel.org (Postfix) with ESMTPS id 242AE610D2
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Aug 2021 20:30:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 242AE610D2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.168317.307328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.168318.307339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mGSCH-0007Hw-OS; Wed, 18 Aug 2021 20:30:01 +0000
+	id 1mGSCM-0008At-0v; Wed, 18 Aug 2021 20:30:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 168317.307328; Wed, 18 Aug 2021 20:30:01 +0000
+Received: by outflank-mailman (output) from mailman id 168318.307339; Wed, 18 Aug 2021 20:30:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mGSCH-0007Hn-LC; Wed, 18 Aug 2021 20:30:01 +0000
-Received: by outflank-mailman (input) for mailman id 168317;
- Wed, 18 Aug 2021 20:29:59 +0000
+	id 1mGSCL-0008AF-T6; Wed, 18 Aug 2021 20:30:05 +0000
+Received: by outflank-mailman (input) for mailman id 168318;
+ Wed, 18 Aug 2021 20:30:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ydNC=NJ=gmail.com=bobby.eshleman@srs-us1.protection.inumbo.net>)
- id 1mGSCF-000714-NG
- for xen-devel@lists.xenproject.org; Wed, 18 Aug 2021 20:29:59 +0000
-Received: from mail-pl1-x633.google.com (unknown [2607:f8b0:4864:20::633])
+ id 1mGSCK-000714-NK
+ for xen-devel@lists.xenproject.org; Wed, 18 Aug 2021 20:30:04 +0000
+Received: from mail-pj1-x102f.google.com (unknown [2607:f8b0:4864:20::102f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5cd00804-05e6-4fea-bf0e-1e3d6a630f84;
+ id 5c334995-aa2b-41b0-b629-96c1f8662ac2;
  Wed, 18 Aug 2021 20:29:53 +0000 (UTC)
-Received: by mail-pl1-x633.google.com with SMTP id c17so2587564plz.2
- for <xen-devel@lists.xenproject.org>; Wed, 18 Aug 2021 13:29:49 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id nt11so3443944pjb.2
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Aug 2021 13:29:52 -0700 (PDT)
 Received: from localhost.localdomain ([2601:1c2:4c02:4c00::1])
- by smtp.gmail.com with ESMTPSA id h25sm663775pfo.68.2021.08.18.13.29.47
+ by smtp.gmail.com with ESMTPSA id h25sm663775pfo.68.2021.08.18.13.29.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Aug 2021 13:29:47 -0700 (PDT)
+ Wed, 18 Aug 2021 13:29:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,34 +53,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 5cd00804-05e6-4fea-bf0e-1e3d6a630f84
+X-Inumbo-ID: 5c334995-aa2b-41b0-b629-96c1f8662ac2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=ymbhtWJDlmnuoU0qSCptZumb6o8HnxQbmRZItmihOOU=;
-        b=YKl9qr55piVM4v/UfO59fMR1wKRC2574LTWQNfSd0FVrL5nHh2bww1/I4V9aaHQ9cz
-         KAd5HFzP5L4Dxy2z+xuudCCzeuW0RlCd/cqm7ze7zVCdRWUAp85G+CG1WWgLFxwwtxQS
-         rbVym4zvigZQf+66xocGuApPV0F8WHaCnOhPkO8J1OvtmgahtqSMpjs9km4JEX6c/TvQ
-         MebjS242u3bnJSG7uNbYzhEIkeT8OnIRPR5ha0ERS0ygDzyB4DFKsvWo0Z+O6VQjKbHd
-         471tzl/JVoe5wnVyrSHit6NKR9EB0PgF0eukJwkgPf9PTYYK2uZ6xwnBzCIIWZKqbohJ
-         vurA==
+        bh=6A7J2MNGpc3g2fahO1l/wGJcP/R6g3oAioBf+kBOMlo=;
+        b=TIaHwSm0XnhYahj8GaB1Xwb09vEeyiF8cMGpgaPI5pCENrwZv15NKVYeS5yrbfe/g3
+         pao03g4UH6b01s6p3XCAduhPgjhXecwCQ3SkRjP+EeOFcYcRpNdQ/Pkfx74DNotveVYI
+         szrEhUvnEHkFp6ws+5fO92c3b2JBsw3lRKtbjqEzvU3/jWHzpMKgJ/F+S4+H/Dm2nJoH
+         P86R1ZvNKCv/qs2JmTx+DyXcPU0k2QEDueq3oKkCz061UHHKBSYirO669Qwng+zYAksI
+         l2fRks4b5UWuYQXHOqHCnenQC1/tETW82eDTBbU3nS7D4iZnhQHsbwaZTO5kLL0uZhFT
+         QONw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
          :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=ymbhtWJDlmnuoU0qSCptZumb6o8HnxQbmRZItmihOOU=;
-        b=RXl7A+w3zv4HYSYu8IXM4o5aLDhyUJNn8c5MhY5f8KKf/yok42zVlY9okh8/g8kE8r
-         hYloOWLvWBxkkRdUZWiXx0WBxYu76s0vmGnAapRh8jTwSIYN4XNZ25xHpSlN4/XzdnzU
-         XRCtsNcapQPcRmKHP0W1sgsfvLP875+/lqKukBolTAusiUW0gm+CIxP7KcZg5WKs5eEY
-         pqayeEbKC5NoxWNux9NUImF9yyZOArIeMVykdZm1I73Y2PXb2OF+FjnaTCLikAFHzHwY
-         x+0Fprq9/F6j4fKDMU8dkUYe7dWe2Q8FVhp92E0eXIFMSwznTDLxtqtcUZAjcgP82Icg
-         zSig==
-X-Gm-Message-State: AOAM5328Fvm+WvdxLzd4lVg3xnnujavDz5gnIBwjqdnqLYs3/Q1IhMV1
-	WqLXOnK7+i6hNy8O56+sOWQASCmDAfLHrhRs
-X-Google-Smtp-Source: ABdhPJwg4IupZNg4wmzTylST1vPnBXDYpAFAsWlOW3tjWfPe3sReJbOfM6NM7rjPmc4Xs5AxlpgpQw==
-X-Received: by 2002:a17:902:7441:b029:12d:6476:d8f with SMTP id e1-20020a1709027441b029012d64760d8fmr8903237plt.28.1629318588212;
-        Wed, 18 Aug 2021 13:29:48 -0700 (PDT)
+        bh=6A7J2MNGpc3g2fahO1l/wGJcP/R6g3oAioBf+kBOMlo=;
+        b=ekw2aHuqY5jFhrzzgjz8c2eu9leAT8p1+sX9HCh9j32zsPPi4Hr62XtQkO4Kue9OAO
+         vYwiW2maNu0eBCDR1I1GlaFhx8ZXohM5/XZaIGa08RCBXPpA45X/HXDOTrulCbb2xRFt
+         d6KBaCrBGfYcItMBV98QabMP7gFB1I7sloLxNHEzDLwqFjrEN3bnE4Lr3NrJyYKS6k95
+         v2+Phe0kWLOovA/kqKWDQMHbabG4E22pKnPefaLAoo231r3o+FsmNidsEuJWuRxtCqXI
+         oj8js0h8itVn5QklQEq1KMwhDUnXD0hHW8u9ctpixAxo2NmmSa7mH6EyHMHVrVP/0g3v
+         diuw==
+X-Gm-Message-State: AOAM530r16Vo9cftkSx2+ufRZ359Lp/rVGDiQICoBC7fH0t4Z/IaEC/a
+	dyfzu7bJapFubvMVqPsbDpOdLoK4QQ/C/mqF
+X-Google-Smtp-Source: ABdhPJzwVN4slvHZh/0lxPIPp6llJx7b+APPSfqEQ/liaQQZ3i+8umorV432PQ3DU6l7BbvSO70Zmg==
+X-Received: by 2002:a17:902:da8f:b0:12d:a688:83b7 with SMTP id j15-20020a170902da8f00b0012da68883b7mr8688450plx.56.1629318591638;
+        Wed, 18 Aug 2021 13:29:51 -0700 (PDT)
 Sender: Bobby Eshleman <bobbyeshleman@gmail.com>
 From: Bobby Eshleman <bobby.eshleman@gmail.com>
 To: xen-devel@lists.xenproject.org
@@ -98,56 +97,70 @@ Cc: Bobby Eshleman <bobby.eshleman@gmail.com>,
 	Kevin Tian <kevin.tian@intel.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>
-Subject: [PATCH v3 1/6] arm/traps: remove debugger_trap_fatal() calls
-Date: Wed, 18 Aug 2021 13:29:02 -0700
-Message-Id: <4c4f45280547564b2c16fd9ca09443314b8f3b6e.1629315873.git.bobby.eshleman@gmail.com>
+Subject: [PATCH v3 4/6] x86/gdbsx: expand dbg_rw_mem() inline
+Date: Wed, 18 Aug 2021 13:29:05 -0700
+Message-Id: <7833b4a327212ff0fc816d17f91fa09291d6afc2.1629315873.git.bobby.eshleman@gmail.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <cover.1629315873.git.bobby.eshleman@gmail.com>
 References: <cover.1629315873.git.bobby.eshleman@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-ARM doesn't actually use debugger_trap_* anything, and is stubbed out.
-
-This commit simply removes the unneeded calls.
-
-Signed-off-by: Bobby Eshleman <bobby.eshleman@gmail.com>
+Because dbg_rw_mem() has only a single call site, this commit
+expands it inline.
 ---
- xen/arch/arm/traps.c | 7 -------
- 1 file changed, 7 deletions(-)
+ xen/arch/x86/gdbsx.c | 32 +++++++++++---------------------
+ 1 file changed, 11 insertions(+), 21 deletions(-)
 
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 4ccb6e7d18..889650ba63 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -41,7 +41,6 @@
- #include <asm/acpi.h>
- #include <asm/cpuerrata.h>
- #include <asm/cpufeature.h>
--#include <asm/debugger.h>
- #include <asm/event.h>
- #include <asm/hsr.h>
- #include <asm/mmio.h>
-@@ -1266,10 +1265,6 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
+diff --git a/xen/arch/x86/gdbsx.c b/xen/arch/x86/gdbsx.c
+index adea0f017b..4cb8e042f9 100644
+--- a/xen/arch/x86/gdbsx.c
++++ b/xen/arch/x86/gdbsx.c
+@@ -151,33 +151,23 @@ static unsigned int dbg_rw_guest_mem(struct domain *dp, unsigned long addr,
+     return len;
+ }
  
-     case BUGFRAME_bug:
-         printk("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
+-/*
+- * addr is guest addr
+- * buf is debugger buffer.
+- * if toaddr, then addr = buf (write to addr), else buf = addr (rd from guest)
+- * pgd3: value of init_mm.pgd[3] in guest. see above.
+- * Returns: number of bytes remaining to be copied.
+- */
+-static unsigned int dbg_rw_mem(unsigned long gva, XEN_GUEST_HANDLE_PARAM(void) buf,
+-                        unsigned int len, domid_t domid, bool toaddr,
+-                        uint64_t pgd3)
++int gdbsx_guest_mem_io(domid_t domid, struct xen_domctl_gdbsx_memio *iop)
+ {
+     struct domain *d = rcu_lock_domain_by_id(domid);
+ 
+-    if ( d )
++    if ( d && !d->is_dying )
+     {
+-        if ( !d->is_dying )
+-            len = dbg_rw_guest_mem(d, gva, buf, len, toaddr, pgd3);
+-        rcu_unlock_domain(d);
++        iop->remain = dbg_rw_guest_mem(
++                d, iop->gva, guest_handle_from_ptr(iop->uva, void),
++                iop->len, domid, iop->pgd3val);
++    }
++    else
++    {
++        iop->remain = iop->len;
+     }
+ 
+-    return len;
+-}
 -
--        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
--            return 0;
--
-         show_execution_state(regs);
-         panic("Xen BUG at %s%s:%d\n", prefix, filename, lineno);
+-int gdbsx_guest_mem_io(domid_t domid, struct xen_domctl_gdbsx_memio *iop)
+-{
+-    iop->remain = dbg_rw_mem(iop->gva, guest_handle_from_ptr(iop->uva, void),
+-                             iop->len, domid, iop->gwr, iop->pgd3val);
++    if ( d )
++        rcu_unlock_domain(d);
  
-@@ -1281,8 +1276,6 @@ int do_bug_frame(const struct cpu_user_regs *regs, vaddr_t pc)
- 
-         printk("Assertion '%s' failed at %s%s:%d\n",
-                predicate, prefix, filename, lineno);
--        if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
--            return 0;
-         show_execution_state(regs);
-         panic("Assertion '%s' failed at %s%s:%d\n",
-               predicate, prefix, filename, lineno);
+     return iop->remain ? -EFAULT : 0;
+ }
 -- 
 2.32.0
 
