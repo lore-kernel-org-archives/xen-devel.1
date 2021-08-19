@@ -8,43 +8,43 @@ X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D26F8C4338F
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 18:52:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3364BC4338F
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 18:54:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 94B3E6109E
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 18:52:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 94B3E6109E
+	by mail.kernel.org (Postfix) with ESMTPS id EE0DD610A0
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 18:54:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EE0DD610A0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.169099.308884 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.169103.308895 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mGn9c-0005EM-Ck; Thu, 19 Aug 2021 18:52:40 +0000
+	id 1mGnBg-0005r9-O6; Thu, 19 Aug 2021 18:54:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 169099.308884; Thu, 19 Aug 2021 18:52:40 +0000
+Received: by outflank-mailman (output) from mailman id 169103.308895; Thu, 19 Aug 2021 18:54:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mGn9c-0005EF-8J; Thu, 19 Aug 2021 18:52:40 +0000
-Received: by outflank-mailman (input) for mailman id 169099;
- Thu, 19 Aug 2021 18:52:39 +0000
+	id 1mGnBg-0005r2-L4; Thu, 19 Aug 2021 18:54:48 +0000
+Received: by outflank-mailman (input) for mailman id 169103;
+ Thu, 19 Aug 2021 18:54:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hQ7n=NK=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1mGn9b-0005E9-0v
- for xen-devel@lists.xenproject.org; Thu, 19 Aug 2021 18:52:39 +0000
-Received: from mail-wr1-x42f.google.com (unknown [2a00:1450:4864:20::42f])
+ id 1mGnBf-0005qg-Va
+ for xen-devel@lists.xenproject.org; Thu, 19 Aug 2021 18:54:48 +0000
+Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e55e4df1-9f39-49bb-841c-b609eef813a7;
- Thu, 19 Aug 2021 18:52:38 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id q10so10556196wro.2
- for <xen-devel@lists.xenproject.org>; Thu, 19 Aug 2021 11:52:38 -0700 (PDT)
+ id 8102c11f-a44c-4f35-8c6a-6bed057912ee;
+ Thu, 19 Aug 2021 18:54:47 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id k29so10530626wrd.7
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Aug 2021 11:54:47 -0700 (PDT)
 Received: from ?IPv6:2a00:23c5:5785:9a01:ad9a:ab78:5748:a7ec?
  ([2a00:23c5:5785:9a01:ad9a:ab78:5748:a7ec])
- by smtp.gmail.com with ESMTPSA id p12sm2869167wmq.44.2021.08.19.11.52.36
+ by smtp.gmail.com with ESMTPSA id z6sm3266243wmp.1.2021.08.19.11.54.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Aug 2021 11:52:37 -0700 (PDT)
+ Thu, 19 Aug 2021 11:54:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,60 +56,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e55e4df1-9f39-49bb-841c-b609eef813a7
+X-Inumbo-ID: 8102c11f-a44c-4f35-8c6a-6bed057912ee
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:reply-to:subject:to:cc:references:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=Lr+dEammPH1071muYMd9h71zEsYB8zMaCj5NdNt/Jgw=;
-        b=FyqecJOV3o6BdAand/SLWNYs5XpzXkTRl9/tvkhVAEjic+iGuHL7YO22NiQvhaGUqt
-         Cz4ZchkPo+9roWMQZFAnTZwgNpmj8nxc3jSMOgmV03xodPqGGHrHjB8smO7uIJxAqn3I
-         EL7Tj48b6KsIJr/ip9cMTB6aqJSaU3QMEVKid1WMNHSHNUq82OIWNi49Zx7fnpFdcfzF
-         7kTVOpEMOvi3QkYi+4Lfxhnnqt8BApWlu2j0U2j0hQKOpYtgyRDlWmI4ss2VDbhtsBSS
-         lQTswtvRKk1eKHSsbJ/mYCV6fW15dvmkbeT4Pf8j1s65SnLlm1SKeeFyKydeI/Ahy9qb
-         niow==
+        bh=mvULkYvqm6BI1lVy/Zt820NeNShyQCV7ZeA2HFgF+3o=;
+        b=S/6Appc5aEvoL/jAol38cWxwuTVzV429CnIgyqoEWZsR2bCU0+AkCblgXcM9d9al8R
+         mAeYxy2O3GhEImb60TVurBA8iidf8ldl8i8nVCQiNBGYfbeFEyjEaoiLTlO2IPcudc3x
+         AGYmKLVG+ytm1ZEUrFJDMhMM0OtdmeJfDjr5re66VwY36Umbh5BDtqwoDRgDhr+wwKN7
+         kkrT7aAiUfYd+sSu6q2ii8NqbtRokQM02tzTdScIyt5HhR61NIhbti919qhSw6osU9sy
+         U8fE+v4TkgwpbqJwglGqap5LsdvlmofKF+O10/DSYtywoF0c/FrLi01QFHnoelsURC4q
+         aPkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:reply-to:subject:to:cc:references
          :message-id:date:user-agent:mime-version:in-reply-to
          :content-language:content-transfer-encoding;
-        bh=Lr+dEammPH1071muYMd9h71zEsYB8zMaCj5NdNt/Jgw=;
-        b=UT5iaH7QfbpG81gk601jtMN4x6IKeeUQ/BgO3Da6IC/VkXLII8O8lR55IL8VCe6Pr5
-         L7gI1POA6IjtfG/LDI+1Ie2YxqNVIxdO3rOZX5AerFkdzXlypPXWkbCEGoHbq/EkeDmr
-         m59azPWHluZL9sNlFoM5p0HuN+DobbmI7q4Q/KVoIoRVN4chPbe4hFG8PxjjZQycTeQQ
-         oqgbbas9j89ShZalLjXnPLQULplXftrccAYRYotyTnwv8FK/xvZjiLSj6JueiKi4HyNm
-         uDv4KKZdkzjMBRWiWF99rastAxMhU6ni5RMjYF5SuLzzz7MZalGXorrmj976L7/bNyvk
-         STZg==
-X-Gm-Message-State: AOAM532xJNQQNndVfe2P5ozAYt6u7D3csfjqJzhpIEl2CJoRNtMFNqLE
-	R36QS4tUVIytSk2AH2rJrdc=
-X-Google-Smtp-Source: ABdhPJx9Ifm0dAnUIJhmMCRE2KiBpcN4zDlVBpjmoq4aoYQyHYUkBgoa/gEU08AL2mjEU0R4gQnmcw==
-X-Received: by 2002:adf:e107:: with SMTP id t7mr5550712wrz.165.1629399157501;
-        Thu, 19 Aug 2021 11:52:37 -0700 (PDT)
+        bh=mvULkYvqm6BI1lVy/Zt820NeNShyQCV7ZeA2HFgF+3o=;
+        b=XXafi/234LZgzre9fjlVAjBHQaFGre5QcxK3bDZuSAjRM5BxxFb5bCKBb52cXTxlZR
+         WG6i6dlhCwJHjKLpsLabTCBahyGFt6rVKLvVR7phmCbX3GuNKDooQwA8rEOzz/fO9yq7
+         TpccWqbhISZiNo6CPnsj2EVW3+OgRLjQWbmiTQ8yKwE885zZt0Z4RIQXglVsxbXAt5Gc
+         jdU0bsKvEyja5sMw8NU5ELvo0RaIDIH2B8A5/BmT7D87gX0ZpfD99c2kgz6JMdJ6D1OS
+         /0TqUcOJAwa7rTiCR0plngD5uNWruSjaNXgRG4WTqHfvINXZJQKGrfnxrl+FRfHt4JzP
+         2hHg==
+X-Gm-Message-State: AOAM531wQA2GDIUQThxdSyn0RKCuOi13b3NrBI/Ig1ne2r/nChy7YPzL
+	OlAhssOdBYzoY0fmt24Hcuo=
+X-Google-Smtp-Source: ABdhPJzaMkSORURVkePNNVbW1LdvqyixfqoaTu8x8cE75xIPJjkeagpFg9ycDcs25fLnu3mcnnjYtw==
+X-Received: by 2002:adf:df0c:: with SMTP id y12mr5531533wrl.155.1629399286429;
+        Thu, 19 Aug 2021 11:54:46 -0700 (PDT)
 From: Paul Durrant <xadimgnik@gmail.com>
 X-Google-Original-From: Paul Durrant <paul@xen.org>
 Reply-To: paul@xen.org
-Subject: Re: [PATCH] VT-d: fix caching mode IOTLB flushing
+Subject: Re: [PATCH] AMD/IOMMU: don't increase perms when splitting superpage
 To: Jan Beulich <jbeulich@suse.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Kevin Tian <kevin.tian@intel.com>
-References: <8b873e30-c1d1-3174-9e67-506887deedcc@suse.com>
-Message-ID: <e4ff3535-e96e-0e65-1cc8-60cc75402186@xen.org>
-Date: Thu, 19 Aug 2021 19:52:36 +0100
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <f642d06e-77cc-7c45-0e1e-9cf694712d42@suse.com>
+Message-ID: <b7b75bdb-981f-cf15-8593-3ff417ca7b7b@xen.org>
+Date: Thu, 19 Aug 2021 19:54:45 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <8b873e30-c1d1-3174-9e67-506887deedcc@suse.com>
+In-Reply-To: <f642d06e-77cc-7c45-0e1e-9cf694712d42@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 19/08/2021 09:05, Jan Beulich wrote:
-> While for context cache entry flushing use of did 0 is indeed correct
-> (after all upon reading the context entry the IOMMU wouldn't know any
-> domain ID if the entry is not present, and hence a surrogate one needs
-> to be used), for IOTLB entries the normal domain ID (from the [present]
-> context entry) gets used. See sub-section "IOTLB" of section "Address
-> Translation Caches" in the VT-d spec.
+On 19/08/2021 09:04, Jan Beulich wrote:
+> The old (super)page's permissions ought to be propagated, rather than
+> blindly allowing both reads and writes.
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
