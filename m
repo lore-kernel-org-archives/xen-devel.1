@@ -2,50 +2,44 @@ Return-Path: <SRS0=TguT=NK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 598C0C432BE
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 09:59:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF518C4338F
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 10:02:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2553261158
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 09:59:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2553261158
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6B48261139
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Aug 2021 10:02:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6B48261139
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=lst.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.168489.307623 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.168494.307635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mGepU-0004fZ-M1; Thu, 19 Aug 2021 09:59:20 +0000
+	id 1mGesC-00066d-2L; Thu, 19 Aug 2021 10:02:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 168489.307623; Thu, 19 Aug 2021 09:59:20 +0000
+Received: by outflank-mailman (output) from mailman id 168494.307635; Thu, 19 Aug 2021 10:02:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mGepU-0004fS-Ir; Thu, 19 Aug 2021 09:59:20 +0000
-Received: by outflank-mailman (input) for mailman id 168489;
- Thu, 19 Aug 2021 09:59:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZM9U=NK=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1mGepS-0004fM-TL
- for xen-devel@lists.xenproject.org; Thu, 19 Aug 2021 09:59:18 +0000
-Received: from mail-pj1-x1035.google.com (unknown [2607:f8b0:4864:20::1035])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b97f455f-909c-44c5-be40-10289af22179;
- Thu, 19 Aug 2021 09:59:18 +0000 (UTC)
-Received: by mail-pj1-x1035.google.com with SMTP id
- cp15-20020a17090afb8fb029017891959dcbso10954588pjb.2
- for <xen-devel@lists.xenproject.org>; Thu, 19 Aug 2021 02:59:18 -0700 (PDT)
-Received: from ?IPv6:2404:f801:0:5:8000::50b? ([2404:f801:9000:18:efec::50b])
- by smtp.gmail.com with ESMTPSA id
- p24sm2697989pff.161.2021.08.19.02.59.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Aug 2021 02:59:16 -0700 (PDT)
+	id 1mGesB-00066W-Us; Thu, 19 Aug 2021 10:02:07 +0000
+Received: by outflank-mailman (input) for mailman id 168494;
+ Thu, 19 Aug 2021 10:02:06 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=qlai=NK=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1mGesA-00066O-8F
+ for xen-devel@lists.xenproject.org; Thu, 19 Aug 2021 10:02:06 +0000
+Received: from verein.lst.de (unknown [213.95.11.211])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8173e0bc-00d4-11ec-a5d9-12813bfff9fa;
+ Thu, 19 Aug 2021 10:02:05 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 7AB826736F; Thu, 19 Aug 2021 12:02:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,110 +51,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b97f455f-909c-44c5-be40-10289af22179
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=DtRnMoZnz8ASe+6YEYHxKI9ebqeYiuiGyG8rZ+bU7W8=;
-        b=e343ePw9FQBl3OmT4CjV4LRITbC1d6hYo+qRgo8O4g8DDiM0SXgUjKDzINrKBOdPuD
-         16no3rFQBxZjEOjFpmVKbvGS3ZfHA34iGMzVP0GUuGwXxQcavGar4tq9NUO4BYQKL/fr
-         +IcuileX2Ofw9lJAzZQDVNiSgg1ae4c7il80Ygl7Z/hArsq9NmfC57xbUCxKi+8x3zUf
-         +2HPq01a+R9VEwnfGBnJGrLBlpiAjunOOPLv4ZoA/DAFfCnCqMOcoGxM88wGuVAJptCS
-         RhIs91rvHPz+nEa9mRAXOsXqj+K3ODhUvtqP1kKQfDBVLC2qUMGw6g7AIb4+VxGalL4b
-         xg/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=DtRnMoZnz8ASe+6YEYHxKI9ebqeYiuiGyG8rZ+bU7W8=;
-        b=Nh7a2lzH74Ff5eGwU8gH4VJs2Or90c65DUAl1zkzJizg2gF/VXWAq1vGrW5w/tIM0Q
-         cJQPU4Gv8k1vVcZPTlf3W9N/NaRstjnGCXByi+d56FWdByXFYoWNg/kesMe4VhXaQb5q
-         VidZdkE68mAVL4IsqcwwO0T3rpcr4UH+n3Zqv+I60MrH0Oz4s6j3iCE4/xH3YLbitJbU
-         fo1RTQa6gUeM2hrlAFY0kK5wd3nnViYf8cEsLL5bDmakco9AsIpSlUrN4rH+oyzs1uCL
-         0cMMYi7F3JM9n6cUhU3h4H4wvSX5aqemtZYO0v54/yI012iaQ8av9ca5wLXTorCM87P3
-         b3YQ==
-X-Gm-Message-State: AOAM531V80yTT2uxvE5ehEbYUYqUsCR//P5NVOhPV4W3zoKmx142Jroo
-	sJjCfP9htRwy7zxNXLxjto4=
-X-Google-Smtp-Source: ABdhPJxqSXdosZ9pc3k976d6RTkMk29F0RsgVn3Hn0/Mju7aILj/ApNHDMVBQRT0TOZLXDLJbYbMUw==
-X-Received: by 2002:a17:90a:8905:: with SMTP id u5mr13892030pjn.95.1629367157291;
-        Thu, 19 Aug 2021 02:59:17 -0700 (PDT)
+X-Inumbo-ID: 8173e0bc-00d4-11ec-a5d9-12813bfff9fa
+Date: Thu, 19 Aug 2021 12:02:00 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Tianyu Lan <ltykernel@gmail.com>
+Cc: Christoph Hellwig <hch@lst.de>, kys@microsoft.com,
+	haiyangz@microsoft.com, sthemmin@microsoft.com, wei.liu@kernel.org,
+	decui@microsoft.com, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, x86@kernel.org, hpa@zytor.com,
+	dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
+	konrad.wilk@oracle.com, boris.ostrovsky@oracle.com, jgross@suse.com,
+	sstabellini@kernel.org, joro@8bytes.org, will@kernel.org,
+	davem@davemloft.net, kuba@kernel.org, jejb@linux.ibm.com,
+	martin.petersen@oracle.com, arnd@arndb.de, m.szyprowski@samsung.com,
+	robin.murphy@arm.com, thomas.lendacky@amd.com,
+	brijesh.singh@amd.com, ardb@kernel.org, Tianyu.Lan@microsoft.com,
+	pgonda@google.com, martin.b.radev@gmail.com,
+	akpm@linux-foundation.org, kirill.shutemov@linux.intel.com,
+	rppt@kernel.org, sfr@canb.auug.org.au, saravanand@fb.com,
+	krish.sadhukhan@oracle.com, aneesh.kumar@linux.ibm.com,
+	xen-devel@lists.xenproject.org, rientjes@google.com,
+	hannes@cmpxchg.org, tj@kernel.org, michael.h.kelley@microsoft.com,
+	iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
+	linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-scsi@vger.kernel.org, netdev@vger.kernel.org,
+	vkuznets@redhat.com, parri.andrea@gmail.com, dave.hansen@intel.com
 Subject: Re: [PATCH V3 10/13] x86/Swiotlb: Add Swiotlb bounce buffer remap
  function for HV IVM
-To: Christoph Hellwig <hch@lst.de>
-Cc: kys@microsoft.com, haiyangz@microsoft.com, sthemmin@microsoft.com,
- wei.liu@kernel.org, decui@microsoft.com, tglx@linutronix.de,
- mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
- dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
- konrad.wilk@oracle.com, boris.ostrovsky@oracle.com, jgross@suse.com,
- sstabellini@kernel.org, joro@8bytes.org, will@kernel.org,
- davem@davemloft.net, kuba@kernel.org, jejb@linux.ibm.com,
- martin.petersen@oracle.com, arnd@arndb.de, m.szyprowski@samsung.com,
- robin.murphy@arm.com, thomas.lendacky@amd.com, brijesh.singh@amd.com,
- ardb@kernel.org, Tianyu.Lan@microsoft.com, pgonda@google.com,
- martin.b.radev@gmail.com, akpm@linux-foundation.org,
- kirill.shutemov@linux.intel.com, rppt@kernel.org, sfr@canb.auug.org.au,
- saravanand@fb.com, krish.sadhukhan@oracle.com, aneesh.kumar@linux.ibm.com,
- xen-devel@lists.xenproject.org, rientjes@google.com, hannes@cmpxchg.org,
- tj@kernel.org, michael.h.kelley@microsoft.com,
- iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-scsi@vger.kernel.org, netdev@vger.kernel.org, vkuznets@redhat.com,
- parri.andrea@gmail.com, dave.hansen@intel.com
-References: <20210809175620.720923-1-ltykernel@gmail.com>
- <20210809175620.720923-11-ltykernel@gmail.com>
- <20210812122741.GC19050@lst.de>
- <d18ae061-6fc2-e69e-fc2c-2e1a1114c4b4@gmail.com>
- <890e5e21-714a-2db6-f68a-6211a69bebb9@gmail.com>
- <20210819084951.GA10461@lst.de>
-From: Tianyu Lan <ltykernel@gmail.com>
-Message-ID: <1c5ae861-2c35-2ef5-e764-db45bbcb88a9@gmail.com>
-Date: Thu, 19 Aug 2021 17:59:02 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Message-ID: <20210819100200.GA16908@lst.de>
+References: <20210809175620.720923-1-ltykernel@gmail.com> <20210809175620.720923-11-ltykernel@gmail.com> <20210812122741.GC19050@lst.de> <d18ae061-6fc2-e69e-fc2c-2e1a1114c4b4@gmail.com> <890e5e21-714a-2db6-f68a-6211a69bebb9@gmail.com> <20210819084951.GA10461@lst.de> <1c5ae861-2c35-2ef5-e764-db45bbcb88a9@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210819084951.GA10461@lst.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1c5ae861-2c35-2ef5-e764-db45bbcb88a9@gmail.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
+On Thu, Aug 19, 2021 at 05:59:02PM +0800, Tianyu Lan wrote:
+>
+>
+> On 8/19/2021 4:49 PM, Christoph Hellwig wrote:
+>> On Mon, Aug 16, 2021 at 10:50:26PM +0800, Tianyu Lan wrote:
+>>> Hi Christoph:
+>>>        Sorry to bother you.Please double check with these two patches
+>>> " [PATCH V3 10/13] x86/Swiotlb: Add Swiotlb bounce buffer remap function
+>>> for HV IVM" and "[PATCH V3 09/13] DMA: Add dma_map_decrypted/dma_
+>>> unmap_encrypted() function".
+>>
+>> Do you have a git tree somewhere to look at the whole tree?
+>
+> Yes, here is my github link for these two patches.
+>
+> https://github.com/lantianyu/linux/commit/462f7e4e44644fe7e182f7a5fb043a75acb90ee5
+>
+> https://github.com/lantianyu/linux/commit/c8de236bf4366d39e8b98e5a091c39df29b03e0b
 
-
-On 8/19/2021 4:49 PM, Christoph Hellwig wrote:
-> On Mon, Aug 16, 2021 at 10:50:26PM +0800, Tianyu Lan wrote:
->> Hi Christoph:
->>        Sorry to bother you.Please double check with these two patches
->> " [PATCH V3 10/13] x86/Swiotlb: Add Swiotlb bounce buffer remap function
->> for HV IVM" and "[PATCH V3 09/13] DMA: Add dma_map_decrypted/dma_
->> unmap_encrypted() function".
-> 
-> Do you have a git tree somewhere to look at the whole tree?
-
-Yes, here is my github link for these two patches.
-
-https://github.com/lantianyu/linux/commit/462f7e4e44644fe7e182f7a5fb043a75acb90ee5
-
-https://github.com/lantianyu/linux/commit/c8de236bf4366d39e8b98e5a091c39df29b03e0b
-
-> 
->>        The swiotlb bounce buffer in the isolation VM are allocated in the
->> low end memory and these memory has struct page backing. All dma address
->> returned by swiotlb/DMA API are low end memory and this is as same as what
->> happen in the traditional VM.
-> 
-> Indeed.
-> 
->>        The API dma_map_decrypted() introduced in the patch 9 is to map the
->> bounce buffer in the extra space and these memory in the low end space are
->> used as DMA memory in the driver. Do you prefer these APIs
->> still in the set_memory.c? I move the API to dma/mapping.c due to the
->> suggested name arch_dma_map_decrypted() in the previous mail
->> (https://lore.kernel.org/netdev/20210720135437.GA13554@lst.de/).
-> 
-> Well, what would help is a clear description of the semantics.
-> 
-
-Yes, I will improve description.
+Which branch is this?
 
 
