@@ -2,45 +2,45 @@ Return-Path: <SRS0=DgKf=NL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4306BC4338F
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Aug 2021 11:29:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B909AC4338F
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Aug 2021 11:37:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1208660F5E
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Aug 2021 11:29:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1208660F5E
+	by mail.kernel.org (Postfix) with ESMTPS id 7A24961053
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Aug 2021 11:37:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7A24961053
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.169443.309525 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.169449.309536 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mH2hi-0001df-6e; Fri, 20 Aug 2021 11:28:54 +0000
+	id 1mH2q4-0003HR-0F; Fri, 20 Aug 2021 11:37:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 169443.309525; Fri, 20 Aug 2021 11:28:54 +0000
+Received: by outflank-mailman (output) from mailman id 169449.309536; Fri, 20 Aug 2021 11:37:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mH2hi-0001dY-3W; Fri, 20 Aug 2021 11:28:54 +0000
-Received: by outflank-mailman (input) for mailman id 169443;
- Fri, 20 Aug 2021 11:28:52 +0000
+	id 1mH2q3-0003HK-Sy; Fri, 20 Aug 2021 11:37:31 +0000
+Received: by outflank-mailman (input) for mailman id 169449;
+ Fri, 20 Aug 2021 11:37:30 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mH2hg-0001dS-JJ
- for xen-devel@lists.xenproject.org; Fri, 20 Aug 2021 11:28:52 +0000
+ (envelope-from <julien@xen.org>) id 1mH2q2-0003HE-JC
+ for xen-devel@lists.xenproject.org; Fri, 20 Aug 2021 11:37:30 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1mH2hg-0000ec-AH; Fri, 20 Aug 2021 11:28:52 +0000
-Received: from [54.239.6.178] (helo=a483e7b01a66.ant.amazon.com)
+ id 1mH2q1-0000o7-IO; Fri, 20 Aug 2021 11:37:29 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1mH2hg-0007E9-4W; Fri, 20 Aug 2021 11:28:52 +0000
+ id 1mH2q1-0008F5-Cj; Fri, 20 Aug 2021 11:37:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,145 +55,87 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=FmHYeanjJaz1BIVHvS12jEYNuY36ZBm44NOpDlbAIqI=; b=4cckuUcHL4RpLYNsNQvN/phcQ+
-	EVFAGiaVyyJcaL76aYR8TkwJtlXRcFDbUxCu/pKSp4esAxWNZgq6hmT8O9PTFQsbOFE8QDm5um0EP
-	QWPQrmRntA56cqR0E8QkBy4LkZQRroMVPdCq1z7ZJFzCXQB3m/MclOSxImGYDsF1wf1Y=;
-Subject: Re: [XEN RFC PATCH 17/40] xen/arm: Introduce DEVICE_TREE_NUMA Kconfig
- for arm64
-To: Wei Chen <Wei.Chen@arm.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>
-Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>
-References: <20210811102423.28908-1-wei.chen@arm.com>
- <20210811102423.28908-18-wei.chen@arm.com>
- <1fbcb8a6-67b6-e2d6-6524-cfce7a8a6557@xen.org>
- <DB9PR08MB68571FFA0E971E3A60C588EA9EC19@DB9PR08MB6857.eurprd08.prod.outlook.com>
- <fe477382-c078-9647-49f8-ef40a9e20b50@xen.org>
- <DB9PR08MB6857E4371D0E31C65E952C0E9EC19@DB9PR08MB6857.eurprd08.prod.outlook.com>
+	bh=YHiAFsyL75OWyuvIvgYr5cJmSnEUh/HX4HxdDz8iA2A=; b=cgagBSZ8Gq+VtkQTUlCRjLA/fQ
+	FwFhreClSWCJuzV8+Bl6g+ISKMji7ueRLe0yBesor0JG/EqaKIz4ODbGr7iHgNR6xjIb+e0tmz8Jg
+	39VVgK5yzd+gvB5xRWYPB9fP7lw/fOy1f0iVki/vkAzZX4n5YU46FLYly8dcCIKXdg6I=;
+Subject: Re: [PATCH v1 02/14] xen/pci: solve compilation error on ARM with
+ HAS_PCI enabled
+To: Rahul Singh <Rahul.Singh@arm.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1629366665.git.rahul.singh@arm.com>
+ <c6009c327eaed66206fa093732ab6672530acd27.1629366665.git.rahul.singh@arm.com>
+ <a0d06e37-ec02-9968-01d7-907176c7c9b3@xen.org>
+ <7F8FC9A8-5580-4517-BF8C-640BCE778D02@arm.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <00d536c1-311c-3f66-c0d2-6bdcc5f1d794@xen.org>
-Date: Fri, 20 Aug 2021 12:28:50 +0100
+Message-ID: <1abfb3cb-993d-3389-c627-6b8cf40457a4@xen.org>
+Date: Fri, 20 Aug 2021 12:37:27 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <DB9PR08MB6857E4371D0E31C65E952C0E9EC19@DB9PR08MB6857.eurprd08.prod.outlook.com>
+In-Reply-To: <7F8FC9A8-5580-4517-BF8C-640BCE778D02@arm.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
+Hi Rahul,
 
+On 20/08/2021 11:30, Rahul Singh wrote:
+>> Please add a comment explaining why this just returns 0.
+> 
+> Here is the comment that I will add in next version.
+> /*
+>   * Return 0 as on ARM there is no pci physical irqs that required cleanup.
+>   */
 
-On 20/08/2021 11:49, Wei Chen wrote:
-> Hi Julien,
+In this context, PIRQ means an interrupts that was routed to the guest 
+and could be mapped to an event channel. We have no such concept on Arm 
+(see allocate_pirq_struct()).
 
-Hi Wei,
+So I would write "PIRQ event channels are not supported on Arm, so 
+nothing to do".
 
 > 
->> -----Original Message-----
->> From: Julien Grall <julien@xen.org>
->> Sent: 2021年8月20日 16:41
->> To: Wei Chen <Wei.Chen@arm.com>; xen-devel@lists.xenproject.org;
->> sstabellini@kernel.org; jbeulich@suse.com
->> Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>
->> Subject: Re: [XEN RFC PATCH 17/40] xen/arm: Introduce DEVICE_TREE_NUMA
->> Kconfig for arm64
 >>
->> On 20/08/2021 03:30, Wei Chen wrote:
->>> Hi Julien,
+>>> +
+>>> +/*
+>>> + * Local variables:
+>>> + * mode: C
+>>> + * c-file-style: "BSD"
+>>> + * c-basic-offset: 4
+>>> + * tab-width: 4
+>>> + * indent-tabs-mode: nil
+>>> + * End:
+>>> + */
+>>> diff --git a/xen/drivers/passthrough/arm/iommu.c b/xen/drivers/passthrough/arm/iommu.c
+>>> index db3b07a571..fdec1c5547 100644
+>>> --- a/xen/drivers/passthrough/arm/iommu.c
+>>> +++ b/xen/drivers/passthrough/arm/iommu.c
+>>> @@ -135,3 +135,8 @@ void arch_iommu_domain_destroy(struct domain *d)
+>>>   void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+>>>   {
+>>>   }
+>>> +
+>>> +bool arch_iommu_use_permitted(const struct domain *d)
+>>> +{
+>>> +    return true;
+>>> +}
 >>
->> Hi Wei,
->>
->>>> -----Original Message-----
->>>> From: Julien Grall <julien@xen.org>
->>>> Sent: 2021年8月19日 21:38
->>>> To: Wei Chen <Wei.Chen@arm.com>; xen-devel@lists.xenproject.org;
->>>> sstabellini@kernel.org; jbeulich@suse.com
->>>> Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>
->>>> Subject: Re: [XEN RFC PATCH 17/40] xen/arm: Introduce DEVICE_TREE_NUMA
->>>> Kconfig for arm64
->>>>
->>>> Hi,
->>>>
->>>> On 11/08/2021 11:24, Wei Chen wrote:
->>>>> We need a Kconfig option to distinguish with ACPI based
->>>>> NUMA. So we introduce the new Kconfig option:
->>>>> DEVICE_TREE_NUMA in this patch for Arm64.
->>>>>
->>>>> Signed-off-by: Wei Chen <wei.chen@arm.com>
->>>>> ---
->>>>>     xen/arch/arm/Kconfig | 10 ++++++++++
->>>>>     1 file changed, 10 insertions(+)
->>>>>
->>>>> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
->>>>> index ecfa6822e4..678cc98ea3 100644
->>>>> --- a/xen/arch/arm/Kconfig
->>>>> +++ b/xen/arch/arm/Kconfig
->>>>> @@ -33,6 +33,16 @@ config ACPI
->>>>>     	  Advanced Configuration and Power Interface (ACPI) support
->> for Xen
->>>> is
->>>>>     	  an alternative to device tree on ARM64.
->>>>>
->>>>> +config DEVICE_TREE_NUMA
->>>>
->>>> The name suggests that NUMA should only be enabled for Device-Tree...
->>>> But the description looks generic.
->>>>
->>>> However, I think the user should only have the choice to say whether
->>>> they want NUMA to be enabled or not. We should not give them the choice
->>>> to enable/disable the parsing for DT/ACPI.
->>>>
->>>> So we should have a generic config that will then select DT (and ACPI
->> in
->>>> the future).
->>>>
->>>
->>> How about we select DT_NUMA default on Arm64. And DT_NUMA select NUMA
->>> like what we have done in patch#6 in x86? And remove the description?
->> I would rather not make NUMA supported by default on Arm64. Instead, we
->> should go throught the same process as other new features and gate it
->> behind UNSUPPORTED until it is mature enough.
->>
+>> Please add a comment explaining why returning true is always fine.
 > 
-> Ok. I agree with this.
+> Here is the comment that I will add in next version:
 > 
->>>
->>> If we make generic NUMA as a selectable option, and depends on
->>> NUMA to select DT or ACPI NUMA. It seems to be quite different from
->>> the existing logic?
->>
->> I am a bit confused. You added just logic to select NUMA from ACPI,
->> right? So are you talking about a different logic?
->>
-> 
-> No, I didn't want a different one. I thought you wanted it that way.
-> Obviously, I mis-understanded your comments.
-> 
-> Can I understand your previous comments like following:
-> 1. We should have a generic config that will then select DT and ACPI:
->     Because we already have CONFIG_NUMA in common layer. So we need to
->     add another one for Arm like CONFIG_ARM_NUMA?
+> /*
+>   * Return true as iommu use is always permitted if mem-sharing,
+>   * mem-paging, or log-dirty functionality is not enabled.
+>   */
+How about writing "Unlike x86, Arm doesn't support mem-sharing, 
+mem-paging and log-dirty (yet). So there is no restriction to use the 
+IOMMU".
 
-I think so.
-
->     And in this option, we can select CONFIG_DEVICE_TREE_NUMA
->     automatically if device tree is enabled. If CONFIG_ACPI
->     is enabled, we will select CONFIG_ACPI_NUMA too (in the
->     future)
->     In Xen code, DT_NUMA and ACPI_NUMA code can co-exist, Xen
-
-Distributions should not have to build a different Xen for DT and ACPI. 
-So it is more they *must* co-exist.
-
->     will check the system ACPI support status to decide to use
->     DT_NUMA or ACPI_NUMA?
-
-Yes. A user should only have to say "I want to use NUMA". This is Xen to 
-figure out whether we need to compile the support for DT and/or ACPI.
-
-Once we have support for APCI, it doesn't make a lot of sense for the 
-users to say "I want to compile with DT and ACPI but I only want NUMA 
-when using DT".
+This would make clear why you are mentioning mem-sharing, mem-paging & co.
 
 Cheers,
 
