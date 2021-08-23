@@ -2,43 +2,45 @@ Return-Path: <SRS0=o/hf=NO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D118DC4338F
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Aug 2021 17:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E85DC4338F
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Aug 2021 17:54:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 78F2F604DB
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Aug 2021 17:53:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 78F2F604DB
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 46BEF604DB
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Aug 2021 17:54:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 46BEF604DB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170562.311383 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170568.311394 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIE8B-0002SD-1a; Mon, 23 Aug 2021 17:53:07 +0000
+	id 1mIE9T-000325-Cv; Mon, 23 Aug 2021 17:54:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170562.311383; Mon, 23 Aug 2021 17:53:07 +0000
+Received: by outflank-mailman (output) from mailman id 170568.311394; Mon, 23 Aug 2021 17:54:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIE8A-0002S6-Us; Mon, 23 Aug 2021 17:53:06 +0000
-Received: by outflank-mailman (input) for mailman id 170562;
- Mon, 23 Aug 2021 17:53:06 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mIE9T-00031y-9z; Mon, 23 Aug 2021 17:54:27 +0000
+Received: by outflank-mailman (input) for mailman id 170568;
+ Mon, 23 Aug 2021 17:54:26 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0Yzi=NO=gmail.com=scottwd@srs-us1.protection.inumbo.net>)
- id 1mIE8A-0002S0-7d
- for xen-devel@lists.xenproject.org; Mon, 23 Aug 2021 17:53:06 +0000
-Received: from mail-ed1-x532.google.com (unknown [2a00:1450:4864:20::532])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 69215f32-e037-488b-8a4f-c296706e673e;
- Mon, 23 Aug 2021 17:53:04 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id cn28so27442717edb.6
- for <xen-devel@lists.xenproject.org>; Mon, 23 Aug 2021 10:53:04 -0700 (PDT)
+ (envelope-from <julien@xen.org>) id 1mIE9S-00031q-CW
+ for xen-devel@lists.xenproject.org; Mon, 23 Aug 2021 17:54:26 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mIE9R-0008VD-HE; Mon, 23 Aug 2021 17:54:25 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mIE9R-0000qX-B4; Mon, 23 Aug 2021 17:54:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,136 +52,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 69215f32-e037-488b-8a4f-c296706e673e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ZvMwkb+36TfrfpAI3Yg8Ts4UzSPrqDR905z3KcDc3ak=;
-        b=ZtJ9TllUHdX7z2LHmldUj3zro8VFUh1BBYNeR66x6lYx/ckPMYTfX04b5BMqFmN+Id
-         bJTB4idCFj54jqqMOKgJgMBASBe1iVu3HDEPFU1y0ZZeeaE467utbKrwEnoLHm99dH/w
-         swPm+MmaoD+IgwPOnFsVnTxlBaqvTaVB4872YwJYQlWfsLxX6ciE9CXWUcca1UCoGiwg
-         m4qsxbTxESc+2HzlvajCRoR5DBES2nE9Ek4VxXNueVTe4cLFu/I+mwepB5wqnctP9nz8
-         PCDHrskF2QkQvGjE63SFtZCvaxG7xo33N5xNpxGHKyGcxkWhdTFOmWEJuJvzEVpD2Ha/
-         V0yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ZvMwkb+36TfrfpAI3Yg8Ts4UzSPrqDR905z3KcDc3ak=;
-        b=iZMskkVcdEg9wb/p+p8v4qIkfIGm+UbaqBZPjlob7LyNQOkvYK+TMjQfizkAeT/DR9
-         ItI65nv7ZvOp/Pl5reiCf5qUTnra3E0gNQmiWOpMtl5l75+f3AZlJfKVjasnfX18Xx0u
-         5wcMSs619JSgXSrT2iERNSP6PhZ3+6AMJw3q1kAz6h6cRy9UuhOczes2aEpAQvV072CZ
-         VDCZTWjAqHZRRiHuoHohdjPHAXZCzPIABWWlqkKXKodph4vgkqGTllpB9WW6JIEw9NBg
-         SKKw5PFCrUTwBA8OpIErj8KKvT7Ji8pgD0phlRt4rDD2qCoOUs0UqLsoDdWzijtHG9YS
-         q0Lw==
-X-Gm-Message-State: AOAM532baxzWEAAVv+uNhKcX6w6ltCDBQ1m8uznRwwFMockB6SH5d5Hw
-	tl3eyj6mjfF6i7yj9+QdE4GD3NwJNpI1M54puD0=
-X-Google-Smtp-Source: ABdhPJwxhbt6fQnLXCdSRjM4WDL6Rq4VJmBX7RZ80erJ9Erc21mo5voBJPcysx2x0EMpZJv4YFgfdcn79VwxXUm0BsM=
-X-Received: by 2002:a05:6402:205:: with SMTP id t5mr14694441edv.81.1629741183542;
- Mon, 23 Aug 2021 10:53:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=O06dRWBbO4b6yN+EtUVjNvTlsNpspPTofeRcxSNCFWE=; b=fc0Xe8ZPEmNLazj6z0c1VmlDDR
+	PbpBVv5ig7umNK7LGelOAR5rTzr2XrrBO4hY/UsgU65s+94Np/o+CsmMWF41DNLrqgg8eqV50J7nE
+	3s37mUEZjmNHPJ5czhCibMyIOX88SXjWyNrCfLZ+6cUZrSazDjPy2qephQshDOPZTyy8=;
+Subject: Re: [XEN RFC PATCH 09/40] xen/x86: Move numa_add_cpu_node to common
+To: Wei Chen <wei.chen@arm.com>, xen-devel@lists.xenproject.org,
+ sstabellini@kernel.org, jbeulich@suse.com
+Cc: Bertrand.Marquis@arm.com
+References: <20210811102423.28908-1-wei.chen@arm.com>
+ <20210811102423.28908-10-wei.chen@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <b867041b-0b36-c197-a54a-28cb58075c94@xen.org>
+Date: Mon, 23 Aug 2021 18:54:23 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <edb72ed62c7c1154d5ed282e57e1750b6d79fa15.1627672412.git.scott.davis@starlab.io>
- <CAKf6xpuAzbz-PP-k3oNGo-3_iXWhjBF=nm4zdDb16UqB8ov_Og@mail.gmail.com>
-In-Reply-To: <CAKf6xpuAzbz-PP-k3oNGo-3_iXWhjBF=nm4zdDb16UqB8ov_Og@mail.gmail.com>
-From: Scott Davis <scottwd@gmail.com>
-Date: Mon, 23 Aug 2021 13:52:52 -0400
-Message-ID: <CAHi-UFLV0fGgBZLGzvs_PtPcYRanGiCQRZpYhGP=nZz22V1BDA@mail.gmail.com>
-Subject: Re: [PATCH v2] tools/xl: Add device_model_stubdomain_init_seclabel
- option to xl.cfg
-To: Jason Andryuk <jandryuk@gmail.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Scott Davis <scott.davis@starlab.io>, 
-	Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, 
-	George Dunlap <george.dunlap@citrix.com>, Nick Rosbrook <rosbrookn@ainfosec.com>, 
-	Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, 
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>, "Daniel P . Smith" <dpsmith@apertussolutions.com>, 
-	=?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20210811102423.28908-10-wei.chen@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Thanks for the review, Jason!
+Hi Wei,
 
-On Tue, Aug 17, 2021 at 9:15 PM Jason Andryuk <jandryuk@gmail.com> wrote:
->> The implementation mirrors that of the 'seclabel' and 'init_seclabel'
->> options for user domains. When all used in concert, this enables the
->
-> Drop all -> "When used in concert"?
+On 11/08/2021 11:23, Wei Chen wrote:
+> This function will be reused by Arm later, so we move it
+> from arch/x86 to common. But we keep cpu_to_node and
+> node_to_cpumask to x86 header file. Because cpu_to_node and
+> node_to_cpumask have different implementation for x86 and Arm.
+> We will move them to common header file when we change the Arm
+> implementation in later patches.
 
-Ack for v3.
+AFAICT, the Arm helpers are gated by !CONFIG_NUMA and the ones in common 
+code will be gated by CONFIG_NUMA. So I am not quite too understand why 
+they can't be moved now. Can you clarify it?
 
->> - changed all security label lookup failures due to FLASK being disabled
->>   from warnings to hard errors based on mailing list discussion
->
-> I think this should be a separate patch before this one, since it is
-> distinct from adding device_model_stubdomain_init_seclabel.
+Cheers,
 
-Ack for v3.
-
->> - added discussion of relabel point to commit message
->
-> I was hoping for more people's thoughts on this. I'm just going to
-> write down my thoughts on this to get them out there.
->
-> The non-stubdom case is very straightforward:
-> <-init-><-relabel-><-unpause-><-exec->
->
-> Relabeling before unpause is a nice delineation point. Since the
-> guest hasn't run, it can't be mid-operation when the relabel happens.
->
-> The stubdom case as implemented by the patch is this:
-> Guest:
-> <---------init------------->|<-relabel-><-unpause-><-exec->
-> Stubdom:                    |
-> <-init--><-unpause-><-exec->|<-relabel-><-exec->
->
-> Here the stubdom runs for some time and then gets relabeled.
->
-> The alternative would be to relabel the stubdom before unpause and
-> then relabel the guest:
-> Guest:
-> <----------init---------------------->|<-relabel-><-unpause-><-exec->
-> Stubdom:                              |
-> <-init-><-relabel-><-unpause-><-exec--|--exec->
->
-> Here relabel then unpause is maintained for both guest and stubdom.
->
-> Relabeling the *running* stubdom gives me pause. We don't have any
-> synchronization with the stubdom's & QEMU's state. QEMU wrote
-> "running" to indicate it was up, but that doesn't say anything about
-> the rest of the kernel. From the other side, the stubdom and QEMU
-> running and having the guest label change could be surprising.
->
-> Scott, you are using this, so I may be imagining concerns that don't
-> exist. And you did mention your approach gives the PCI assignment
-> only to the stubdom init label, which could be a nice feature. It's
-> just the lack of clear delineation for the stubdom that makes me
-> wonder about it.
->
-> Having said that, for your approach, I think the code looks good.
-
-As you said, there are advantages to both approaches. Relabeling the
-stubdom before its launch would eliminate potential race conditions
-between stubdom init and the run-time relabeling, which could cause
-sporadic failures in any init steps that can fail to complete before
-the relabel. On the other hand, waiting to relabel allows any
-(dom0 -> stubdom) privileges that are required only for stubdom init,
-particularly device passthrough setup, to be dropped from the run-time
-label. (stubdom/dom0 -> domU) privileges are of less concern, since
-they can be dropped by relabeling of the guest regardless.
-
-At this point I can neither rule out synchronization issues with the late
-relabeling approach nor quantify the benefits, as the policy I've been
-using to verify this is fairly maximal in terms of run-time privileges.
-I do intend to spend some time experimenting and shrinking it down in
-the near future, though. Before that experimentation, I'll add a second
-stubdom relabel point just before the stubdom is unpaused, along with a
-config boolean to select which relabel point is used. That should allow
-me to determine how much security benefit we'd be getting from the
-later relabeling, and may be how things should go in upstream so that
-users have a choice of approach.
-
-In the meantime, input from any other devs is certainly welcome.
-
-Good day,
-    Scott
+-- 
+Julien Grall
 
