@@ -7,36 +7,37 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 725B4C432BE
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7D19C4338F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2973561245
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2973561245
+	by mail.kernel.org (Postfix) with ESMTPS id 788B761245
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 788B761245
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.171056.312328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.171059.312342 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUC6-0006dY-SH; Tue, 24 Aug 2021 11:02:14 +0000
+	id 1mIUCA-0007Lv-7a; Tue, 24 Aug 2021 11:02:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 171056.312328; Tue, 24 Aug 2021 11:02:14 +0000
+Received: by outflank-mailman (output) from mailman id 171059.312342; Tue, 24 Aug 2021 11:02:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUC6-0006Zh-C8; Tue, 24 Aug 2021 11:02:14 +0000
-Received: by outflank-mailman (input) for mailman id 171056;
- Tue, 24 Aug 2021 11:02:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mIUC9-0007H7-J7; Tue, 24 Aug 2021 11:02:17 +0000
+Received: by outflank-mailman (input) for mailman id 171059;
+ Tue, 24 Aug 2021 11:02:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU2M-0001EC-AW
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:52:10 +0000
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id be739491-6fcf-47d3-924a-58cc87201d46;
- Tue, 24 Aug 2021 10:51:20 +0000 (UTC)
+ id 1mIU3U-0003Ux-DN
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:53:20 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4f03605a-04c9-11ec-a8c5-12813bfff9fa;
+ Tue, 24 Aug 2021 10:52:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,43 +49,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: be739491-6fcf-47d3-924a-58cc87201d46
+X-Inumbo-ID: 4f03605a-04c9-11ec-a8c5-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802280;
+  d=citrix.com; s=securemail; t=1629802320;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=4K2WW2uFAO71Mw1Ci7VJHE6S1kjO2hGHCWlQ2ukScjo=;
-  b=J4+2uQcfeNnESq08hNFzKzc9bNcencyAOCxfIsX1f1am37l1iZuwzqYI
-   pB+7HDAl7vqCdCPB3v7gndIwe19psAJ11FHO7jCZHvop6wAmtZ2zRtVwW
-   yKj13FCCvGH8asyMqyip3hwjOErg4PCzcnhy9Nu5krmnbaW0F5tmCvkUT
-   8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: BECysvkXl+SLk8oroUW9xH1BtvgHaX6XgzpAPVRXqScfK3SmFuUXzOvEh6lVKYxFJx33tY3Lr4
- YKv6mcxpS5X9hPlkLTqzOHUKZTT5jmJVkVY8RLzP3jIumyBcOnYxwh4BBk6Zu03KitEislh6zD
- 0n37lx45qoyQ4/oDOIAqSCGqF0IOAf4S/3k8b7Vw9ca7KR/Z0EzPt6trrndppci/OXCZOlCNEO
- Mpau9Nl+dPaTtOpYemAeUtF+xsmlNPrFTjm582FCYshN2W2p38rPxizgw1kuRPCWa/xTyJJscC
- G8oWNjC521hlbYsfSTPpjnxj
+  bh=tyXShWdhRptLb0PMlNJcfYjoy4z6ZbWALAV+zNWtrDI=;
+  b=DH5w8fCyFAo+oBF+wcK04t+GG0PnDPNc2cdyvGoTlmXibC9STvWf4aG+
+   UFO26C0Ar7I8K6iGDKrcYT72Vd/qWEh1pg0PBf2dMVuBZ3UcTBjroGoJU
+   HsMXPQm4ZKQqjVTv6ag3nh6SE6fIkUmm1shZ6/vYIMQnahdBVUJ1pzj3x
+   A=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: sEc01VfBThFuO0UAc+f5BJqKMOvCxA9LTQ87LdcF7g50tphwRarlTPCiWZ1HcBxnyTmFe73lbw
+ fbu8ctAU6HoPp1m8lOmZUzzcIIQgUjPP85BEa/hgCB2zQPT4UiSL0inzxV98AeftDeoM5iwaLl
+ TKuPtyhB3ZPNWGGjlF6CjrFH0UEmlNmScZJ6H1G4UAjMbSNmfHLXUMO1LX82MiEjIxMuVCAdjw
+ w+uivzNnqTczGGbjxfhF+Rk/1RhljFd7sNbCzvUaFEsl7FBj3/zrACiT8B3ybdyqYnGkf7zIeg
+ LbMTc2di2S1emxf2P08r9Pci
 X-SBRS: 5.1
-X-MesageID: 50772186
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 52875488
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:MlMACa+0nqzPz1J3W4luk+AiI+orL9Y04lQ7vn2ZKSY5TiVXra
- CTdZUgpHvJYVMqMk3I9uruBEDtex3hHP1OkOws1NWZLWrbUQKTRekP0WKL+Vbd8kbFh4xgPM
- lbEpSXCLfLfCVHZcSR2njFLz73quP3j5xBho3lvglQpRkBUdAG0+/gYDzraXGfQmN9dPwEPa
- vZ3OVrjRy6d08aa8yqb0N1JdQq97Xw5evbiQdtPW9e1DWz
+IronPort-HdrOrdr: A9a23:7axdtKmgzsAdnoH/tQq8Zi3QYDjpDfOQimdD5ihNYBxZY6Wkfp
+ +V8cjzhCWftN9OYhodcIi7Sc+9qXO1z/5ICPoqTM6ftWjdySCVxe5ZnO/fKlHbdREWldQtn5
+ uIEZIOb+EYZGIS5aqU3ODSKadC/DDzytHMuQ6o9QYOcegFUcBdxjY8LjzePlx9RQFAC5Z8Po
+ Gb/NB7qz2pfmlSRtinB1EeNtKz6+HjpdbDW1orFhQn4A6BgXeD87jhCSWV2R8YTndm3aoiy2
+ 7YiAb0j5/T/M1TiyWsmVM73a4m2OcJ+eEzR/BkTfJlaAkEvzzYJbiJnYfy+Qzd7tvfrGrC2+
+ O82yvId/4DkE85OFvF7CcFkjOQqgoG+jvsz0SVjmDkptG8TDUmC9BZjYYcaRfB7VE81esMpp
+ 6j8ljpw6a/Nymw6xgVJuK4Ji1Chw6xuz4vgOQTh3tQXc8Xb6JQt5UW+AdQHI0bFCz35Yg7GK
+ 02ZfusrMp+YBefdTTUr2NvyNujUjA6GQqHWFELvoiQ3yJNlH50wkMEzIgUn2sG9pg6V55Yjt
+ 60e5hAhfVLVIsbfKh9DOAOTY++DXHMWwvFNCaILVHuBMg8SgfwQl7MkccIDcSRCeI1JbcJ6e
+ j8uWJjxB0PkhjVeLCzNbVwg2/waXT4RjLw180b/IR9ttTHNcrWDRE=
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="50772186"
+   d="scan'208";a="52875488"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v7 16/51] build: generate "include/xen/compile.h" with if_changed
-Date: Tue, 24 Aug 2021 11:50:03 +0100
-Message-ID: <20210824105038.1257926-17-anthony.perard@citrix.com>
+	<wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ross Lagerwall
+	<ross.lagerwall@citrix.com>
+Subject: [XEN PATCH v7 25/51] build: rework test/livepatch/Makefile
+Date: Tue, 24 Aug 2021 11:50:12 +0100
+Message-ID: <20210824105038.1257926-26-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -92,124 +100,347 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This will avoid regenerating "compile.h" if the content hasn't changed.
+This rework the livepatch/Makefile to make it less repetitive and make
+use of the facilities. All the targets to be built are now listed in
+$(extra-y) which will allow Rules.mk to build them without the need of
+a local target in a future patch.
 
-As it's currently the case, the file isn't regenerated during `sudo
-make install` if it exist and does belong to a different user, thus we
-can remove the target "delete-unfresh-files". Target "$(TARGET)" still
-need a phony dependency, so add "FORCE".
+There are some changes/fixes in this patch:
+- when "xen-syms" is used for a target, it is added to the dependency
+  list of the target, which allow to rebuild the target when xen-syms
+  changes. But if "xen-syms" is missing, make simply fails.
+- modinfo.o wasn't removing it's $@.bin file like the other targets,
+  this is now done.
+- The command to build *.livepatch targets as been fixed to use
+  $(XEN_LDFLAGS) rather than just $(LDFLAGS) which is a fallout from
+  2740d96efdd3 ("xen/build: have the root Makefile generates the
+  CFLAGS")
 
-Use "$(dot-target).tmp" as temporary file as this is already cover by
-".*.tmp" partern in ".gitconfig".
+make will findout the dependencies of the *.livepatch files and thus
+what to built by "looking" at the objects listed in the *-objs
+variables. The actual dependencies is generated by the new
+"multi_depend" macro.
+
+"$(targets)" needs to be updated with the objects listed in the
+different *-objs variables to allow make to load the .*.cmd dependency
+files.
+
+This patch copies the macro "multi_depend" from Linux 5.12.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+ xen/scripts/Kbuild.include  |   9 ++
+ xen/test/livepatch/Makefile | 213 ++++++++++++++----------------------
+ 2 files changed, 91 insertions(+), 131 deletions(-)
 
-Notes:
-    v7:
-    - Use $(if_changed,) instead of importing a new macro from Linux
-      (filechk).
-    - use $(dot-target).tmp as temporary file, that way is hiden, and
-      already cover by .gitignore via ".*.tmp". (filechk was doing the same)
-    - update .gitignore.
-
- .gitignore   |  1 -
- xen/Makefile | 34 +++++++++++++++++-----------------
- 2 files changed, 17 insertions(+), 18 deletions(-)
-
-diff --git a/.gitignore b/.gitignore
-index bc964663d25c..59a22d1685e2 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -332,7 +332,6 @@ xen/include/compat/*
- xen/include/config/
- xen/include/generated/
- xen/include/public/public
--xen/include/xen/*.new
- xen/include/xen/acm_policy.h
- xen/include/xen/compile.h
- xen/include/xen/lib/x86/cpuid-autogen.h
-diff --git a/xen/Makefile b/xen/Makefile
-index da1b8ddb97ff..b408d35b4af0 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -351,7 +351,7 @@ _debug:
- 	$(OBJDUMP) -D -S $(TARGET)-syms > $(TARGET).s
+diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
+index 83c7e1457baa..563b323f0501 100644
+--- a/xen/scripts/Kbuild.include
++++ b/xen/scripts/Kbuild.include
+@@ -151,3 +151,12 @@ why =                                                                        \
  
- .PHONY: _clean
--_clean: delete-unfresh-files
-+_clean:
- 	$(MAKE) -C tools clean
- 	$(MAKE) $(clean) include
- 	$(MAKE) $(clean) common
-@@ -368,7 +368,7 @@ _clean: delete-unfresh-files
- 		-o -name "*.gcno" -o -name ".*.cmd" -o -name "lib.a" \) -exec rm -f {} \;
- 	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
- 	rm -f asm-offsets.s arch/*/include/asm/asm-offsets.h
--	rm -f .banner
-+	rm -f .banner include/xen/compile.h
- 
- .PHONY: _distclean
- _distclean: clean
-@@ -378,7 +378,7 @@ $(TARGET).gz: $(TARGET)
- 	gzip -n -f -9 < $< > $@.new
- 	mv $@.new $@
- 
--$(TARGET): delete-unfresh-files
-+$(TARGET): FORCE
- 	$(MAKE) -C tools
- 	$(MAKE) -f $(BASEDIR)/Rules.mk include/xen/compile.h
- 	[ -e arch/$(TARGET_ARCH)/efi ] && for f in $$(cd common/efi; echo *.[ch]); \
-@@ -391,14 +391,6 @@ $(TARGET): delete-unfresh-files
- 	$(MAKE) -f $(BASEDIR)/Rules.mk arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
- 	$(MAKE) -f $(BASEDIR)/Rules.mk -C arch/$(TARGET_ARCH) $@
- 
--# drivers/char/console.o contains static banner/compile info. Blow it away.
--# Don't refresh these files during e.g., 'sudo make install'
--.PHONY: delete-unfresh-files
--delete-unfresh-files:
--	@if [ ! -r include/xen/compile.h -o -O include/xen/compile.h ]; then \
--		rm -f include/xen/compile.h; \
--	fi
--
- quiet_cmd_banner = BANNER  $@
- define cmd_banner
-     if which figlet >/dev/null 2>&1 ; then \
-@@ -413,9 +405,11 @@ endef
- 	$(call if_changed,banner)
- targets += .banner
- 
--# compile.h contains dynamic build info. Rebuilt on every 'make' invocation.
--include/xen/compile.h: include/xen/compile.h.in .banner
--	@sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
-+# Don't refresh this files during e.g., 'sudo make install'
-+quiet_cmd_compile.h = UPD     $@
-+define cmd_compile.h
-+    if [ ! -r $@ -o -O $@ ]; then \
-+	sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
- 	    -e 's/@@time@@/$(XEN_BUILD_TIME)/g' \
- 	    -e 's/@@whoami@@/$(XEN_WHOAMI)/g' \
- 	    -e 's/@@domain@@/$(XEN_DOMAIN)/g' \
-@@ -425,10 +419,16 @@ include/xen/compile.h: include/xen/compile.h.in .banner
- 	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
- 	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
- 	    -e 's!@@changeset@@!$(shell tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
--	    < include/xen/compile.h.in > $@.new
-+	    < $< > $(dot-target).tmp; \
-+	sed -rf tools/process-banner.sed < .banner >> $(dot-target).tmp; \
-+	mv -f $(dot-target).tmp $@; \
-+    fi
-+endef
+ echo-why = $(call escsq, $(strip $(why)))
+ endif
 +
-+include/xen/compile.h: include/xen/compile.h.in .banner FORCE
- 	@cat .banner
--	@sed -rf tools/process-banner.sed < .banner >> $@.new
--	@mv -f $@.new $@
-+	$(call if_changed,compile.h)
-+targets += include/xen/compile.h
++# Useful for describing the dependency of composite objects
++# Usage:
++#   $(call multi_depend, multi_used_targets, suffix_to_remove, suffix_to_add)
++define multi_depend
++$(foreach m, $(notdir $1), \
++	$(eval $(obj)/$m: \
++	$(addprefix $(obj)/, $(foreach s, $3, $($(m:%$(strip $2)=%$(s)))))))
++endef
+diff --git a/xen/test/livepatch/Makefile b/xen/test/livepatch/Makefile
+index 148dddb90473..e59245323e92 100644
+--- a/xen/test/livepatch/Makefile
++++ b/xen/test/livepatch/Makefile
+@@ -12,81 +12,29 @@ CODE_ADDR=$(shell nm --defined $(1) | grep $(2) | awk '{print "0x"$$1}')
+ CODE_SZ=$(shell nm --defined -S $(1) | grep $(2) | awk '{ print "0x"$$2}')
  
- asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
- 	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
+ .PHONY: default
+-
+-LIVEPATCH := xen_hello_world.livepatch
+-LIVEPATCH_BYE := xen_bye_world.livepatch
+-LIVEPATCH_REPLACE := xen_replace_world.livepatch
+-LIVEPATCH_NOP := xen_nop.livepatch
+-LIVEPATCH_NO_XEN_BUILDID := xen_no_xen_buildid.livepatch
+-LIVEPATCH_PREPOST_HOOKS := xen_prepost_hooks.livepatch
+-LIVEPATCH_PREPOST_HOOKS_FAIL := xen_prepost_hooks_fail.livepatch
+-LIVEPATCH_ACTION_HOOKS := xen_action_hooks.livepatch
+-LIVEPATCH_ACTION_HOOKS_NOFUNC := xen_action_hooks_nofunc.livepatch
+-LIVEPATCH_ACTION_HOOKS_MARKER:= xen_action_hooks_marker.livepatch
+-LIVEPATCH_ACTION_HOOKS_NOAPPLY:= xen_action_hooks_noapply.livepatch
+-LIVEPATCH_ACTION_HOOKS_NOREVERT:= xen_action_hooks_norevert.livepatch
+-LIVEPATCH_EXPECTATIONS:= xen_expectations.livepatch
+-LIVEPATCH_EXPECTATIONS_FAIL:= xen_expectations_fail.livepatch
+-
+-LIVEPATCHES += $(LIVEPATCH)
+-LIVEPATCHES += $(LIVEPATCH_BYE)
+-LIVEPATCHES += $(LIVEPATCH_REPLACE)
+-LIVEPATCHES += $(LIVEPATCH_NOP)
+-LIVEPATCHES += $(LIVEPATCH_NO_XEN_BUILDID)
+-LIVEPATCHES += $(LIVEPATCH_PREPOST_HOOKS)
+-LIVEPATCHES += $(LIVEPATCH_PREPOST_HOOKS_FAIL)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_NOFUNC)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_MARKER)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_NOAPPLY)
+-LIVEPATCHES += $(LIVEPATCH_ACTION_HOOKS_NOREVERT)
+-LIVEPATCHES += $(LIVEPATCH_EXPECTATIONS)
+-LIVEPATCHES += $(LIVEPATCH_EXPECTATIONS_FAIL)
+-
+-LIVEPATCH_DEBUG_DIR ?= $(DEBUG_DIR)/xen-livepatch
+-
+ build default: livepatch
+ 
+-install: livepatch
+-	$(INSTALL_DIR) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
+-	$(INSTALL_DATA) $(LIVEPATCHES) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
+-
+-uninstall:
+-	cd $(DESTDIR)$(LIVEPATCH_DEBUG_DIR) && rm -f $(LIVEPATCHES)
+-
+-.PHONY: clean
+-clean::
+-	rm -f *.o .*.o.d *.livepatch config.h expect_config.h
++extra-y += xen_hello_world.livepatch
++xen_hello_world-objs := xen_hello_world_func.o xen_hello_world.o note.o xen_note.o modinfo.o
++$(obj)/xen_hello_world.o: $(obj)/config.h
+ 
+ #
+ # To compute these values we need the binary files: xen-syms
+ # and xen_hello_world_func.o to be already compiled.
+ #
+-.PHONY: config.h
+-config.h: OLD_CODE_SZ=$(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)
+-config.h: NEW_CODE_SZ=$(call CODE_SZ,$<,xen_hello_world)
+-config.h: MINOR_VERSION_SZ=$(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)
+-config.h: MINOR_VERSION_ADDR=$(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)
+-config.h: xen_hello_world_func.o
++$(obj)/config.h: $(obj)/xen_hello_world_func.o
+ 	(set -e; \
+-	 echo "#define NEW_CODE_SZ $(NEW_CODE_SZ)"; \
+-	 echo "#define MINOR_VERSION_SZ $(MINOR_VERSION_SZ)"; \
+-	 echo "#define MINOR_VERSION_ADDR $(MINOR_VERSION_ADDR)"; \
+-	 echo "#define OLD_CODE_SZ $(OLD_CODE_SZ)") > $@
++	 echo "#define NEW_CODE_SZ $(call CODE_SZ,$<,xen_hello_world)"; \
++	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)"; \
++	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)"; \
++	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)") > $@
+ 
+-xen_hello_world.o: config.h
+-
+-.PHONY: $(LIVEPATCH)
+-$(LIVEPATCH): xen_hello_world_func.o xen_hello_world.o note.o xen_note.o modinfo.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH) $^
+-
+-.PHONY: modinfo.o
+-modinfo.o:
++$(obj)/modinfo.o:
+ 	(set -e; \
+ 	 printf "LIVEPATCH_RULEZ\0") > $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.modinfo,alloc,load,readonly,data,contents -S $@.bin $@
+-	#rm -f $@.bin
++	rm -f $@.bin
+ 
+ #
+ # This target is only accessible if CONFIG_LIVEPATCH is defined, which
+@@ -97,9 +45,8 @@ modinfo.o:
+ # not be built (it is for EFI builds), and that we do not have
+ # the note.o.bin to muck with (as it gets deleted)
+ #
+-.PHONY: note.o
+-note.o:
+-	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $(BASEDIR)/xen-syms $@.bin
++$(obj)/note.o: $(BASEDIR)/xen-syms
++	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
+ 	rm -f $@.bin
+@@ -108,9 +55,8 @@ note.o:
+ # Append .livepatch.xen_depends section
+ # with Xen build-id derived from xen-syms.
+ #
+-.PHONY: xen_note.o
+-xen_note.o:
+-	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $(BASEDIR)/xen-syms $@.bin
++$(obj)/xen_note.o: $(BASEDIR)/xen-syms
++	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.xen_depends,alloc,load,readonly,data,contents -S $@.bin $@
+ 	rm -f $@.bin
+@@ -119,102 +65,107 @@ xen_note.o:
+ # Extract the build-id of the xen_hello_world.livepatch
+ # (which xen_bye_world will depend on).
+ #
+-.PHONY: hello_world_note.o
+-hello_world_note.o: $(LIVEPATCH)
+-	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $(LIVEPATCH) $@.bin
++$(obj)/hello_world_note.o: $(obj)/xen_hello_world.livepatch
++	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
+ 	rm -f $@.bin
+ 
+-xen_bye_world.o: config.h
+ 
+-.PHONY: $(LIVEPATCH_BYE)
+-$(LIVEPATCH_BYE): xen_bye_world_func.o xen_bye_world.o hello_world_note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_BYE) $^
++extra-y += xen_bye_world.livepatch
++xen_bye_world-objs := xen_bye_world_func.o xen_bye_world.o hello_world_note.o xen_note.o
++$(obj)/xen_bye_world.o: $(obj)/config.h
+ 
+-xen_replace_world.o: config.h
+ 
+-.PHONY: $(LIVEPATCH_REPLACE)
+-$(LIVEPATCH_REPLACE): xen_replace_world_func.o xen_replace_world.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_REPLACE) $^
++extra-y += xen_replace_world.livepatch
++xen_replace_world-objs := xen_replace_world_func.o xen_replace_world.o note.o xen_note.o
++$(obj)/xen_replace_world.o: $(obj)/config.h
+ 
+-xen_nop.o: config.h
+ 
+-.PHONY: $(LIVEPATCH_NOP)
+-$(LIVEPATCH_NOP): xen_nop.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_NOP) $^
++extra-y += xen_nop.livepatch
++xen_nop-objs := xen_nop.o note.o xen_note.o
++$(obj)/xen_nop.o: $(obj)/config.h
+ 
+ # This one always fails upon upload, because it deliberately
+ # does not have a .livepatch.xen_depends (xen_note.o) section.
+-xen_no_xen_buildid.o: config.h
+-
+-.PHONY: $(LIVEPATCH_NO_XEN_BUILDID)
+-$(LIVEPATCH_NO_XEN_BUILDID): xen_nop.o note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_NO_XEN_BUILDID) $^
++extra-y += xen_no_xen_buildid.livepatch
++xen_no_xen_buildid-objs := xen_nop.o note.o
+ 
+-xen_prepost_hooks.o: config.h
++$(obj)/xen_prepost_hooks.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_PREPOST_HOOKS)
+-$(LIVEPATCH_PREPOST_HOOKS): xen_prepost_hooks.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_PREPOST_HOOKS) $^
++extra-y += xen_prepost_hooks.livepatch
++xen_prepost_hooks-objs := xen_prepost_hooks.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_prepost_hooks_fail.o: config.h
++$(obj)/xen_prepost_hooks_fail.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_PREPOST_HOOKS_FAIL)
+-$(LIVEPATCH_PREPOST_HOOKS_FAIL): xen_prepost_hooks_fail.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_PREPOST_HOOKS_FAIL) $^
++extra-y += xen_prepost_hooks_fail.livepatch
++xen_prepost_hooks_fail-objs := xen_prepost_hooks_fail.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks.o: config.h
++$(obj)/xen_action_hooks.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS)
+-$(LIVEPATCH_ACTION_HOOKS): xen_action_hooks.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS) $^
++extra-y += xen_action_hooks.livepatch
++xen_action_hooks-objs := xen_action_hooks.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks_nofunc.o: config.h
++$(obj)/xen_action_hooks_nofunc.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_NOFUNC)
+-$(LIVEPATCH_ACTION_HOOKS_NOFUNC): xen_action_hooks_nofunc.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_NOFUNC) $^
++extra-y += xen_action_hooks_nofunc.livepatch
++xen_action_hooks_nofunc-objs := xen_action_hooks_nofunc.o note.o xen_note.o
+ 
+-xen_action_hooks_marker.o: config.h
++$(obj)/xen_action_hooks_marker.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_MARKER)
+-$(LIVEPATCH_ACTION_HOOKS_MARKER): xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_MARKER) $^
++extra-y += xen_action_hooks_marker.livepatch
++xen_action_hooks_marker-objs := xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks_noapply.o: config.h
++$(obj)/xen_action_hooks_noapply.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_NOAPPLY)
+-$(LIVEPATCH_ACTION_HOOKS_NOAPPLY): xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_NOAPPLY) $^
++extra-y += xen_action_hooks_noapply.livepatch
++xen_action_hooks_noapply-objs := xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+ 
+-xen_action_hooks_norevert.o: config.h
++$(obj)/xen_action_hooks_norevert.o: $(obj)/config.h
+ 
+-.PHONY: $(LIVEPATCH_ACTION_HOOKS_NOREVERT)
+-$(LIVEPATCH_ACTION_HOOKS_NOREVERT): xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_ACTION_HOOKS_NOREVERT) $^
++extra-y += xen_action_hooks_norevert.livepatch
++xen_action_hooks_norevert-objs := xen_action_hooks_marker.o xen_hello_world_func.o note.o xen_note.o
+ 
+ EXPECT_BYTES_COUNT := 8
+ CODE_GET_EXPECT=$(shell $(OBJDUMP) -d --insn-width=1 $(1) | sed -n -e '/<'$(2)'>:$$/,/^$$/ p' | tail -n +2 | head -n $(EXPECT_BYTES_COUNT) | awk '{$$0=$$2; printf "%s", substr($$0,length-1)}' | sed 's/.\{2\}/0x&,/g' | sed 's/^/{/;s/,$$/}/g')
+-.PHONY: expect_config.h
+-expect_config.h: EXPECT_BYTES=$(call CODE_GET_EXPECT,$(BASEDIR)/xen-syms,xen_extra_version)
+-expect_config.h:
++$(obj)/expect_config.h: $(BASEDIR)/xen-syms
+ 	(set -e; \
+-	 echo "#define EXPECT_BYTES $(EXPECT_BYTES)"; \
++	 echo "#define EXPECT_BYTES $(call CODE_GET_EXPECT,$<,xen_extra_version)"; \
+          echo "#define EXPECT_BYTES_COUNT $(EXPECT_BYTES_COUNT)") > $@
+ 
+-xen_expectations.o: expect_config.h
++$(obj)/xen_expectations.o: $(obj)/expect_config.h
+ 
+-.PHONY: $(LIVEPATCH_EXPECTATIONS)
+-$(LIVEPATCH_EXPECTATIONS): xen_expectations.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_EXPECTATIONS) $^
++extra-y += xen_expectations.livepatch
++xen_expectations-objs := xen_expectations.o xen_hello_world_func.o note.o xen_note.o
+ 
+-.PHONY: $(LIVEPATCH_EXPECTATIONS_FAIL)
+-$(LIVEPATCH_EXPECTATIONS_FAIL): xen_expectations_fail.o xen_hello_world_func.o note.o xen_note.o
+-	$(LD) $(LDFLAGS) $(build_id_linker) -r -o $(LIVEPATCH_EXPECTATIONS_FAIL) $^
++extra-y += xen_expectations_fail.livepatch
++xen_expectations_fail-objs := xen_expectations_fail.o xen_hello_world_func.o note.o xen_note.o
++
++
++quiet_cmd_livepatch = LD      $@
++cmd_livepatch = $(LD) $(XEN_LDFLAGS) $(build_id_linker) -r -o $@ $(real-prereqs)
++
++$(obj)/%.livepatch: FORCE
++	$(call if_changed,livepatch)
++
++$(call multi_depend, $(filter %.livepatch,$(extra-y)), .livepatch, -objs)
++targets += $(sort $(foreach m,$(basename $(notdir $(filter %.livepatch,$(extra-y)))), \
++    $($(m)-objs)))
++
++LIVEPATCHES := $(filter %.livepatch,$(extra-y))
++
++LIVEPATCH_DEBUG_DIR ?= $(DEBUG_DIR)/xen-livepatch
+ 
+ .PHONY: livepatch
+-livepatch: $(LIVEPATCH) $(LIVEPATCH_BYE) $(LIVEPATCH_REPLACE) $(LIVEPATCH_NOP) $(LIVEPATCH_NO_XEN_BUILDID) \
+-           $(LIVEPATCH_PREPOST_HOOKS) $(LIVEPATCH_PREPOST_HOOKS_FAIL) $(LIVEPATCH_ACTION_HOOKS) \
+-           $(LIVEPATCH_ACTION_HOOKS_NOFUNC) $(LIVEPATCH_ACTION_HOOKS_MARKER) $(LIVEPATCH_ACTION_HOOKS_NOAPPLY) \
+-           $(LIVEPATCH_ACTION_HOOKS_NOREVERT) $(LIVEPATCH_EXPECTATIONS) $(LIVEPATCH_EXPECTATIONS_FAIL)
++livepatch: $(LIVEPATCHES)
++
++install: $(addprefix $(obj)/,$(LIVEPATCHES))
++	$(INSTALL_DIR) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
++	$(INSTALL_DATA) $(addprefix $(obj)/,$(LIVEPATCHES)) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
++
++uninstall:
++	cd $(DESTDIR)$(LIVEPATCH_DEBUG_DIR) && rm -f $(LIVEPATCHES)
++
++.PHONY: clean
++clean::
++	rm -f *.o .*.o.d *.livepatch config.h expect_config.h
 -- 
 Anthony PERARD
 
