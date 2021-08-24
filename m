@@ -2,58 +2,49 @@ Return-Path: <SRS0=P/U6=NP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53F86C432BE
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 14:25:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C98EFC4320A
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 14:26:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED8186125F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 14:25:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org ED8186125F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 82AE161163
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 14:26:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 82AE161163
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.171494.312942 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.171502.312957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIXMt-000319-16; Tue, 24 Aug 2021 14:25:35 +0000
+	id 1mIXNN-0003is-Nc; Tue, 24 Aug 2021 14:26:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 171494.312942; Tue, 24 Aug 2021 14:25:34 +0000
+Received: by outflank-mailman (output) from mailman id 171502.312957; Tue, 24 Aug 2021 14:26:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIXMs-000312-U2; Tue, 24 Aug 2021 14:25:34 +0000
-Received: by outflank-mailman (input) for mailman id 171494;
- Tue, 24 Aug 2021 14:25:33 +0000
+	id 1mIXNN-0003i1-Jk; Tue, 24 Aug 2021 14:26:05 +0000
+Received: by outflank-mailman (input) for mailman id 171502;
+ Tue, 24 Aug 2021 14:26:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mvQ+=NP=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1mIXMq-00030k-U7
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 14:25:32 +0000
-Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
+ (envelope-from <SRS0=0IqF=NP=gmail.com=groeck7@srs-us1.protection.inumbo.net>)
+ id 1mIXNM-0003f3-K6
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 14:26:04 +0000
+Received: from mail-ot1-x32d.google.com (unknown [2607:f8b0:4864:20::32d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2274580d-4eb8-4872-bcc8-3c8d78b2167d;
- Tue, 24 Aug 2021 14:25:31 +0000 (UTC)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01lp2055.outbound.protection.outlook.com [104.47.2.55]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- de-mta-24-epLFINjSNF6m8OekhTxV_g-1; Tue, 24 Aug 2021 16:25:29 +0200
-Received: from AM0PR04MB5587.eurprd04.prod.outlook.com (2603:10a6:208:125::12)
- by AM0PR0402MB3460.eurprd04.prod.outlook.com (2603:10a6:208:20::28)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4436.21; Tue, 24 Aug
- 2021 14:25:27 +0000
-Received: from AM0PR04MB5587.eurprd04.prod.outlook.com
- ([fe80::4822:460f:7561:33bf]) by AM0PR04MB5587.eurprd04.prod.outlook.com
- ([fe80::4822:460f:7561:33bf%5]) with mapi id 15.20.4436.025; Tue, 24 Aug 2021
- 14:25:27 +0000
-Received: from [10.156.60.236] (37.24.206.209) by
- AM3PR07CA0065.eurprd07.prod.outlook.com (2603:10a6:207:4::23) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4457.6 via Frontend Transport; Tue, 24 Aug 2021 14:25:27 +0000
+ id 813e0be0-0e3a-4ff3-9168-e1e79698eff2;
+ Tue, 24 Aug 2021 14:26:03 +0000 (UTC)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ v33-20020a0568300921b0290517cd06302dso46480809ott.13
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Aug 2021 07:26:03 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+ by smtp.gmail.com with ESMTPSA id
+ w23sm4515362otk.56.2021.08.24.07.26.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Aug 2021 07:26:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,282 +55,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2274580d-4eb8-4872-bcc8-3c8d78b2167d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1629815130;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QygqEhY4mmo9TOg67f6s3oZ006SBh1mhC+tlKcEXnA4=;
-	b=CHNkMP+76+QhCQiHXyJ6TLnRF9YpFG5wG93SoWy5M40VD1bk4NuuOZgHiS5soYxvoMYCOB
-	Bfg846yMQPjar5iUOXSaUXWpVtG+LEuukmHSR3BwdL0m20mpIa1AWCd+V81evVPazqlX6B
-	ZJxT8yfa2GBKzBU+hqAk1+HsbI5ATeE=
-X-MC-Unique: epLFINjSNF6m8OekhTxV_g-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AlwCMw+/YdzlKGSAFgaasrt4WO+xlG66IkUvTYbOECrM5MYWasU3JfW1U5f8uZU/1FpPKe5RkwT+Ws/oq76+rnrYtN9i3SGJXRRheIWFrqne3hUc0VR1FOHMVsJB58H/0OaP3NzSbhhd+1F3FV4t805BkFNaqIhBL7vEWZXigD8JKsJ6X/uaX+mOcdwFtFTrcLqgiYvfcyeO1LBmpP64IChSMSKu/XdOe0CSbWng3cFQs5h6l8PBG69pZCYxB4iQG4L48hKIJ+JH9UYkHBqahIXEy1eUAdcmlEiW/CCUHGrowDJN3FUqwN8QLeolni3++Ah9Fa0knaOI5CKy6gs0AQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QygqEhY4mmo9TOg67f6s3oZ006SBh1mhC+tlKcEXnA4=;
- b=TxGsDcaJlKYqYva1ClhuWkopMwhIvQ4m9o/c2SDRNNgCDodp4U2DP3xUs/sCuWeDP1fLjIP8wNHwbQ5oqO3h4gtKb9fps1zNLj16+4nrMD5TnwYmwzZbb5bj2Qdd/6aEJ3zs44PYtK2wiHMMyubKgZh/jhQGW5eseOOY4mE2cNWDnyj8bxiTkxjK+4/tINC/qY8EwvN4eGzmVjCIXceIcEo1+qF8FTdtWmBqF+W24vdNLpqduHTTCCG5StVAFytj0Cy9FnraE3jyIryWrXPiuZiwMK47Nsah30L+nvzdE5yjt5F5cv0ScMKqKG0g2iXR5aoo+dynmU4nji8pmZYTzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: xen.org; dkim=none (message not signed)
- header.d=none;xen.org; dmarc=none action=none header.from=suse.com;
-Subject: [PATCH 13/17] AMD/IOMMU: allow use of superpage mappings
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>
-References: <d955d9a3-33f6-f228-d007-a844ed918168@suse.com>
-Message-ID: <ecdf0636-0428-de38-8d6d-fad10c962d5a@suse.com>
-Date: Tue, 24 Aug 2021 16:25:26 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
-In-Reply-To: <d955d9a3-33f6-f228-d007-a844ed918168@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM3PR07CA0065.eurprd07.prod.outlook.com
- (2603:10a6:207:4::23) To AM0PR04MB5587.eurprd04.prod.outlook.com
- (2603:10a6:208:125::12)
+X-Inumbo-ID: 813e0be0-0e3a-4ff3-9168-e1e79698eff2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=cLmu7zgJaXKzK4Rf3xZy8rbXQ8G9iiiCS2AqbbVSdr4=;
+        b=W/vnTArXnkUTeAWPhVsCsNx9G1AaqqjMh7JGGCeKMkNnaOWP3sAbf+15/nLoCNmR3g
+         q5YdGS8A1cXpAtJlYg19EzxhKY4ftiJkULVtdpcPrc3JdAsQuBkyHELZ+nm35chlenyd
+         B1EUk7sT/qRPK4Ufw9SGcQJoAGqm8fBuCmyUjLn+ofRgVfuPflWOJHcCCZEENzbQUeyQ
+         VmavwAVWpqeeI9XEBe9u66mgOWxsXHJm3RTYGIcz6konO25IcoN22AqYojFn8mbqHxKg
+         qRzCfRvKs4A+5DaC8fRnZWJa7UOCRmoYWPgWVuJeEHetkAAVaEkEKj7Ut9tMesrOQeKz
+         uFVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=cLmu7zgJaXKzK4Rf3xZy8rbXQ8G9iiiCS2AqbbVSdr4=;
+        b=CXA3YslSPy9sFH3LISTdltwjeeSpbFVk00MPHvt+euLEq+cSu8NYP12NDbU7+ZJwby
+         e9utrsyKPHP2MLx3XDceWOO3gXudGi0sF01r1/hVNcYo9sl7/pSzx55E19Lt+EiopDrx
+         QgsVuEyFokkl4LK9RsYY+74/JxM+HMOjWmF1s1JDlnW12X1rKOgF99JHlHQf+PvHeqcJ
+         1q7fe6wCgcewdZmLLOfo4T7LI3qdDEZ67pR9PIjgiyfbbYHAWlaFi/VMYEsnA5w+9Vf9
+         2jTEarlJtwVCSdcnRQgNf+aWh4opaXNUMW3CQ7OWWZFEFO3Dv34xUz0DGJEDTXrgot/m
+         xfOw==
+X-Gm-Message-State: AOAM530/nE2SM/1ElrEaPq6BbpOLClOxLXiqA7A5Kqz7yti3eIFKQUOG
+	86Yjg9Sgb+EWA5lO58pk8OU=
+X-Google-Smtp-Source: ABdhPJwwcoIM6BcsOG2f+J3p/MRlA0Dk0tp13V1qbyu4iB7WMMjh+hei/xpqfoPCtwiA6Z7Inf6E6w==
+X-Received: by 2002:a54:4513:: with SMTP id l19mr3045512oil.143.1629815163193;
+        Tue, 24 Aug 2021 07:26:03 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Tue, 24 Aug 2021 07:26:01 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Claire Chang <tientzu@chromium.org>
+Cc: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
+	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+	Frank Rowand <frowand.list@gmail.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	boris.ostrovsky@oracle.com, jgross@suse.com,
+	Christoph Hellwig <hch@lst.de>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	benh@kernel.crashing.org, paulus@samba.org,
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
+	sstabellini@kernel.org, Robin Murphy <robin.murphy@arm.com>,
+	grant.likely@arm.com, xypron.glpk@gmx.de,
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org,
+	bauerman@linux.ibm.com, peterz@infradead.org,
+	Greg KH <gregkh@linuxfoundation.org>,
+	Saravana Kannan <saravanak@google.com>,
+	"Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+	heikki.krogerus@linux.intel.com,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	linux-devicetree <devicetree@vger.kernel.org>,
+	lkml <linux-kernel@vger.kernel.org>, linuxppc-dev@lists.ozlabs.org,
+	xen-devel@lists.xenproject.org,
+	Nicolas Boichat <drinkcat@chromium.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>, tfiga@chromium.org,
+	bskeggs@redhat.com, bhelgaas@google.com, chris@chris-wilson.co.uk,
+	daniel@ffwll.ch, airlied@linux.ie, dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com,
+	jxgao@google.com, joonas.lahtinen@linux.intel.com,
+	linux-pci@vger.kernel.org, maarten.lankhorst@linux.intel.com,
+	matthew.auld@intel.com, rodrigo.vivi@intel.com,
+	thomas.hellstrom@linux.intel.com, thomas.lendacky@amd.com,
+	quic_qiancai@quicinc.com
+Subject: Re: [PATCH v15 10/12] swiotlb: Add restricted DMA pool initialization
+Message-ID: <20210824142601.GA3393158@roeck-us.net>
+References: <20210624155526.2775863-1-tientzu@chromium.org>
+ <20210624155526.2775863-11-tientzu@chromium.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d904bc00-2a40-4773-8cf8-08d9670b04ef
-X-MS-TrafficTypeDiagnostic: AM0PR0402MB3460:
-X-Microsoft-Antispam-PRVS:
-	<AM0PR0402MB34602A5A565EA803985B560EB3C59@AM0PR0402MB3460.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	FoTy/ZgJOHw6UfIuxgwieCTWeC0+C0bguwonBHfY7hqlQufEZJfL059dIuBCH/9tHlG6vbKe3z35uahE2fYgThehKvS1JrdjzEXymNel4+mIfxop25mp7uUKWquwktlWhv1k6WfI6z0CEhf/r+0e75nTnypQzlVtOEJWp/PSrOlx5pfbjXbsZMS8VDLln0PNwTwXLTuTjNGwJlSKVfqRBvROhm7f9S0UJqZRJJDakO2+R2AY3ZZHGi9dJqWswbDDFzjazqA1hHbY0A+VjxzTXLhHO/CP+2+E5sRO0cGcqGccQHOSW13P5pyHsnMPNORgfBtXCcyBWEatUjTKoszCAG3aSD+nhyqsVuWqBfhmnpmx1Oj5rNjRkfMTq+QbxKIh3ZIB9IpSWWrTEmFeEERERlpIB3iNh2fybUixTAfJxfBnIgCNion1+DxaU6K1V5wpPVxWwUEfxX/ZdKnH7FhA69T3JuwsEX9G5W0FKC/SBEZK3oXc4ZfSDmUZCBXm4RroAaoE1YOXqSdPP5ld5BQgr/lDkbandgloEmkcYxWLd/L9heQZszB3Ol8lm+mS2yIRj4pHyohkdUEK22Poe42Ilixlyr+ZgqfJqg932krhTBEh+3mUISlbptPLjXC/tLDGhhM/eZRwTM9YiWNCx+/klmf/7TfinfFkU9uEQpjK8nuZC/zaddEtGA6Id2GvX1SGwMHJ05ts1lKbg9BhVZ9lY666LLnQpEVM3ftU38A1K7g=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR04MB5587.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(346002)(376002)(39860400002)(136003)(396003)(366004)(54906003)(66946007)(16576012)(316002)(26005)(6486002)(83380400001)(66556008)(66476007)(6916009)(8676002)(478600001)(2906002)(8936002)(956004)(2616005)(4326008)(5660300002)(31696002)(86362001)(36756003)(31686004)(38100700002)(186003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MURrSzZmcnNrbUViYzdoYmRyTE90M2oxRUR1N2VPUlBlOVU2TTlkSmdzNXpB?=
- =?utf-8?B?VnBIbmhFS2tRL3BJRFh2ZVJKdS8vcXlJRUNNY2xHMURIOGhBU2NkOEVJL0V4?=
- =?utf-8?B?YUJxMlZoVU8rS3VwTm1pMXArVHBiTmVWK0ZBLzVzMGVaVFY2T3M4WTIrNXZT?=
- =?utf-8?B?dzhFN1VNclhrVzBoMGtiREI1aW41QTYxY3MvMVlhdzBFWXJQNDRoU3dWbisv?=
- =?utf-8?B?b0dnT3JHUUUvaXdnb1ZHQmcyVFRRUDdwVmR6aGx0OGxSUXQzNWdlUFpGeW1h?=
- =?utf-8?B?cHpqWWxIbzRpQ1M4YVRCTklXeSt4ekdwN0ZzVVhIUEdyT0Y2MDQ0NTlpOXZT?=
- =?utf-8?B?MnhzVmRuZHc1aGZwVzVhbVVjRG5DdlZhelFCTTlhenFFc1NMYmNOODM0V2g2?=
- =?utf-8?B?UXFCUmIzSy9wY3JUMlMyeldvNmI2NWw0djA4bXphd3g5YVAyTWZ2YmFleHZv?=
- =?utf-8?B?bXlWbjdZUzluVlk5d1VaU1JZV2Z6dFJLOUZlM1RSTXpJejJBT3E2TmN5eWxX?=
- =?utf-8?B?clRRRmZKeS9PTEdvMUI5SlRzYzRWNEt2cXU0V0NBenk5WHBEcEtrbmxRVnZL?=
- =?utf-8?B?bVk4dUJ3VGw3SGQwS214Q3NpdnhobkIyM3lHemhsbExQNjZwaUFFVUxUT3kx?=
- =?utf-8?B?MjZJRmxUUjdJR0I3WjZaT094cThFRWo3bWFpSHAzMjAvQWY5NnlQMU9mM3hR?=
- =?utf-8?B?SjlkdU1yTmNjOEFKNjIxdFJ5NWpVOW1ESnFGcUtCam1sYnI2RWtOUHdsbnFv?=
- =?utf-8?B?bHNWa3gvQnVFNWdJYUVpaS9rMlFEc0FMNE9NdUxnaG0xNlEyNmNpQ0NxYTFK?=
- =?utf-8?B?VXAyTWNwZENSaHdDbi92d2JaY3J5WTNmYTVyRmt0RFR2WENpYmsyR3FkYXZi?=
- =?utf-8?B?ZWN5bnowQWRqNWxxUVhOOUphVlZrNGJ5UkxPdE9uNWJpZC83d0JQTDRDcnVl?=
- =?utf-8?B?b3dQcmJwLyt2U1NOaGhUcTlJajNaay9TNVYyaTRtc0VHVHZvMWRSVmp1UDNw?=
- =?utf-8?B?Q1dpRkRvSUJBTHJ2ZUFWZ2JQUndTbHBHOU4vWEVTYVozZXVhYm1iQUVTMTlQ?=
- =?utf-8?B?V2w1bDUxcDlsTlQ1WFNyY3JmVHVtTXF1QWt3cEdpdWZMSWFPY2kzaXpGbytY?=
- =?utf-8?B?Uk1jSlN5cDRWUllxTERHdWZ3VGxpbjBYaVdyV0VOWXFDZGt1SnBJMnBZeXl1?=
- =?utf-8?B?cTc2b1RobWtQUlZGVUQ4UThMejNKQTh6czJiRDBuL1VabSttRkgrTDA4TXRL?=
- =?utf-8?B?amxPQ1JUL2o1d3d1ODhWTS9ySkNwVWs4cVZYM3VJdFYvUzZFZkhtamRabStq?=
- =?utf-8?B?S005RXJza29VaUNXWnExL0RFTlhyRm5za3Jpd1YrQmhkWGNoSWdnU1FTek8w?=
- =?utf-8?B?Z2R3d2g5c1FtVEN2NEtqMjF1NUhONTRyZDFiUUNVUVpxeUcvL21JakgvbFlu?=
- =?utf-8?B?T2lIQW0yeHA3ZGkrZXY4dy9TazE2TEpsdFQ3MjdGcHpmOWFUWjVNZzZ4aFlx?=
- =?utf-8?B?U0FVM3E1b2d6dXh6UXBWT1Z3dG9JUy9RZEtOaVlEd3RmNElvY1k1cWRnTEl2?=
- =?utf-8?B?bHRCaS9oYUJ5YkVZWWZ4SDYvNjdhUWpocHNMbFRtSkhtbDFYa2dpQW1WaVVw?=
- =?utf-8?B?SWRRYmJwRTJ0Uko1U1IvT3F1eTUyM1lrVlQwZXYvZ05jZERleXZhQU95bytl?=
- =?utf-8?B?Vmh1TktRQmY2MGtudVcvUElveDZXSWlBTzF0cHBJSnE5ZVNDZnhjV01nZHVa?=
- =?utf-8?Q?cq4g48Q9u0wyR7E87+t6oHndtUFnTSSZFDizix5?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d904bc00-2a40-4773-8cf8-08d9670b04ef
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5587.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2021 14:25:27.5614
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z8bv04kRuKRTnDWja1J7ozkx7whbf8AA9vuSAI85lLv6TDQXyzw7+5lsi4H+2oUCgO5d+C0Hc1CdKlqffa2Xpw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0402MB3460
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210624155526.2775863-11-tientzu@chromium.org>
 
-No separate feature flags exist which would control availability of
-these; the only restriction is HATS (establishing the maximum number of
-page table levels in general), and even that has a lower bound of 4.
-Thus we can unconditionally announce 2M, 1G, and 512G mappings. (Via
-non-default page sizes the implementation in principle permits arbitrary
-size mappings, but these require multiple identical leaf PTEs to be
-written, which isn't all that different from having to write multiple
-consecutive PTEs with increasing frame numbers. IMO that's therefore
-beneficial only on hardware where suitable TLBs exist; I'm unaware of
-such hardware.)
+Hi Claire,
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-I'm not fully sure about allowing 512G mappings: The scheduling-for-
-freeing of intermediate page tables can take quite a while when
-replacing a tree of 4k mappings by a single 512G one. Plus (or otoh)
-there's no present code path via which 512G chunks of memory could be
-allocated (and hence mapped) anyway.
+On Thu, Jun 24, 2021 at 11:55:24PM +0800, Claire Chang wrote:
+> Add the initialization function to create restricted DMA pools from
+> matching reserved-memory nodes.
+> 
+> Regardless of swiotlb setting, the restricted DMA pool is preferred if
+> available.
+> 
+> The restricted DMA pools provide a basic level of protection against the
+> DMA overwriting buffer contents at unexpected times. However, to protect
+> against general data leakage and system memory corruption, the system
+> needs to provide a way to lock down the memory access, e.g., MPU.
+> 
+> Signed-off-by: Claire Chang <tientzu@chromium.org>
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> Tested-by: Stefano Stabellini <sstabellini@kernel.org>
+> Tested-by: Will Deacon <will@kernel.org>
+> ---
+>  include/linux/swiotlb.h |  3 +-
+>  kernel/dma/Kconfig      | 14 ++++++++
+>  kernel/dma/swiotlb.c    | 76 +++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 92 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+> index 3b9454d1e498..39284ff2a6cd 100644
+> --- a/include/linux/swiotlb.h
+> +++ b/include/linux/swiotlb.h
+> @@ -73,7 +73,8 @@ extern enum swiotlb_force swiotlb_force;
+>   *		range check to see if the memory was in fact allocated by this
+>   *		API.
+>   * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
+> - *		@end. This is command line adjustable via setup_io_tlb_npages.
+> + *		@end. For default swiotlb, this is command line adjustable via
+> + *		setup_io_tlb_npages.
+>   * @used:	The number of used IO TLB block.
+>   * @list:	The free list describing the number of free entries available
+>   *		from each index.
+> diff --git a/kernel/dma/Kconfig b/kernel/dma/Kconfig
+> index 77b405508743..3e961dc39634 100644
+> --- a/kernel/dma/Kconfig
+> +++ b/kernel/dma/Kconfig
+> @@ -80,6 +80,20 @@ config SWIOTLB
+>  	bool
+>  	select NEED_DMA_MAP_STATE
+>  
+> +config DMA_RESTRICTED_POOL
+> +	bool "DMA Restricted Pool"
+> +	depends on OF && OF_RESERVED_MEM
+> +	select SWIOTLB
 
---- a/xen/drivers/passthrough/amd/iommu_map.c
-+++ b/xen/drivers/passthrough/amd/iommu_map.c
-@@ -32,12 +32,13 @@ static unsigned int pfn_to_pde_idx(unsig
- }
- 
- static union amd_iommu_pte clear_iommu_pte_present(unsigned long l1_mfn,
--                                                   unsigned long dfn)
-+                                                   unsigned long dfn,
-+                                                   unsigned int level)
- {
-     union amd_iommu_pte *table, *pte, old;
- 
-     table = map_domain_page(_mfn(l1_mfn));
--    pte = &table[pfn_to_pde_idx(dfn, 1)];
-+    pte = &table[pfn_to_pde_idx(dfn, level)];
-     old = *pte;
- 
-     write_atomic(&pte->raw, 0);
-@@ -288,10 +289,31 @@ static int iommu_pde_from_dfn(struct dom
-     return 0;
- }
- 
-+static void queue_free_pt(struct domain *d, mfn_t mfn, unsigned int next_level)
-+{
-+    if ( next_level > 1 )
-+    {
-+        union amd_iommu_pte *pt = map_domain_page(mfn);
-+        unsigned int i;
-+
-+        for ( i = 0; i < PTE_PER_TABLE_SIZE; ++i )
-+            if ( pt[i].pr && pt[i].next_level )
-+            {
-+                ASSERT(pt[i].next_level < next_level);
-+                queue_free_pt(d, _mfn(pt[i].mfn), pt[i].next_level);
-+            }
-+
-+        unmap_domain_page(pt);
-+    }
-+
-+    iommu_queue_free_pgtable(d, mfn_to_page(mfn));
-+}
-+
- int amd_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
-                        unsigned int flags, unsigned int *flush_flags)
- {
-     struct domain_iommu *hd = dom_iommu(d);
-+    unsigned int level = (IOMMUF_order(flags) / PTE_PER_TABLE_SHIFT) + 1;
-     int rc;
-     unsigned long pt_mfn = 0;
-     union amd_iommu_pte old;
-@@ -320,7 +342,7 @@ int amd_iommu_map_page(struct domain *d,
-         return rc;
-     }
- 
--    if ( iommu_pde_from_dfn(d, dfn_x(dfn), 1, &pt_mfn, flush_flags, true) ||
-+    if ( iommu_pde_from_dfn(d, dfn_x(dfn), level, &pt_mfn, flush_flags, true) ||
-          !pt_mfn )
-     {
-         spin_unlock(&hd->arch.mapping_lock);
-@@ -330,8 +352,8 @@ int amd_iommu_map_page(struct domain *d,
-         return -EFAULT;
-     }
- 
--    /* Install 4k mapping */
--    old = set_iommu_pte_present(pt_mfn, dfn_x(dfn), mfn_x(mfn), 1,
-+    /* Install mapping */
-+    old = set_iommu_pte_present(pt_mfn, dfn_x(dfn), mfn_x(mfn), level,
-                                 (flags & IOMMUF_writable),
-                                 (flags & IOMMUF_readable));
- 
-@@ -339,8 +361,13 @@ int amd_iommu_map_page(struct domain *d,
- 
-     *flush_flags |= IOMMU_FLUSHF_added;
-     if ( old.pr )
-+    {
-         *flush_flags |= IOMMU_FLUSHF_modified;
- 
-+        if ( level > 1 && old.next_level )
-+            queue_free_pt(d, _mfn(old.mfn), old.next_level);
-+    }
-+
-     return 0;
- }
- 
-@@ -349,6 +376,7 @@ int amd_iommu_unmap_page(struct domain *
- {
-     unsigned long pt_mfn = 0;
-     struct domain_iommu *hd = dom_iommu(d);
-+    unsigned int level = (order / PTE_PER_TABLE_SHIFT) + 1;
-     union amd_iommu_pte old = {};
- 
-     spin_lock(&hd->arch.mapping_lock);
-@@ -359,7 +387,7 @@ int amd_iommu_unmap_page(struct domain *
-         return 0;
-     }
- 
--    if ( iommu_pde_from_dfn(d, dfn_x(dfn), 1, &pt_mfn, flush_flags, false) )
-+    if ( iommu_pde_from_dfn(d, dfn_x(dfn), level, &pt_mfn, flush_flags, false) )
-     {
-         spin_unlock(&hd->arch.mapping_lock);
-         AMD_IOMMU_DEBUG("Invalid IO pagetable entry dfn = %"PRI_dfn"\n",
-@@ -371,14 +399,19 @@ int amd_iommu_unmap_page(struct domain *
-     if ( pt_mfn )
-     {
-         /* Mark PTE as 'page not present'. */
--        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn));
-+        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level);
-     }
- 
-     spin_unlock(&hd->arch.mapping_lock);
- 
-     if ( old.pr )
-+    {
-         *flush_flags |= IOMMU_FLUSHF_modified;
- 
-+        if ( level > 1 && old.next_level )
-+            queue_free_pt(d, _mfn(old.mfn), old.next_level);
-+    }
-+
-     return 0;
- }
- 
---- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-+++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-@@ -584,7 +584,7 @@ static void amd_dump_page_tables(struct
- }
- 
- static const struct iommu_ops __initconstrel _iommu_ops = {
--    .page_sizes = PAGE_SIZE_4K,
-+    .page_sizes = PAGE_SIZE_4K | PAGE_SIZE_2M | PAGE_SIZE_1G | PAGE_SIZE_512G,
-     .init = amd_iommu_domain_init,
-     .hwdom_init = amd_iommu_hwdom_init,
-     .quarantine_init = amd_iommu_quarantine_init,
---- a/xen/include/xen/page-defs.h
-+++ b/xen/include/xen/page-defs.h
-@@ -21,4 +21,19 @@
- #define PAGE_MASK_64K               PAGE_MASK_GRAN(64K)
- #define PAGE_ALIGN_64K(addr)        PAGE_ALIGN_GRAN(64K, addr)
- 
-+#define PAGE_SHIFT_2M               21
-+#define PAGE_SIZE_2M                PAGE_SIZE_GRAN(2M)
-+#define PAGE_MASK_2M                PAGE_MASK_GRAN(2M)
-+#define PAGE_ALIGN_2M(addr)         PAGE_ALIGN_GRAN(2M, addr)
-+
-+#define PAGE_SHIFT_1G               30
-+#define PAGE_SIZE_1G                PAGE_SIZE_GRAN(1G)
-+#define PAGE_MASK_1G                PAGE_MASK_GRAN(1G)
-+#define PAGE_ALIGN_1G(addr)         PAGE_ALIGN_GRAN(1G, addr)
-+
-+#define PAGE_SHIFT_512G             39
-+#define PAGE_SIZE_512G              PAGE_SIZE_GRAN(512G)
-+#define PAGE_MASK_512G              PAGE_MASK_GRAN(512G)
-+#define PAGE_ALIGN_512G(addr)       PAGE_ALIGN_GRAN(512G, addr)
-+
- #endif /* __XEN_PAGE_DEFS_H__ */
+This makes SWIOTLB user configurable, which in turn results in
 
+mips64-linux-ld: arch/mips/kernel/setup.o: in function `arch_mem_init':
+setup.c:(.init.text+0x19c8): undefined reference to `plat_swiotlb_setup'
+make[1]: *** [Makefile:1280: vmlinux] Error 1
+
+when building mips:allmodconfig.
+
+Should this possibly be "depends on SWIOTLB" ?
+
+Thanks,
+Guenter
 
