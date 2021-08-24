@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B56B6C4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B77C9C4338F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 695D161247
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 695D161247
+	by mail.kernel.org (Postfix) with ESMTPS id 6DCCF61214
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6DCCF61214
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170965.312102 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170974.312122 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBJ-0004IW-Nn; Tue, 24 Aug 2021 11:01:25 +0000
+	id 1mIUBP-000587-Mc; Tue, 24 Aug 2021 11:01:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170965.312102; Tue, 24 Aug 2021 11:01:25 +0000
+Received: by outflank-mailman (output) from mailman id 170974.312122; Tue, 24 Aug 2021 11:01:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBJ-0004Hn-CK; Tue, 24 Aug 2021 11:01:25 +0000
-Received: by outflank-mailman (input) for mailman id 170965;
- Tue, 24 Aug 2021 11:01:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mIUBP-00057G-Ez; Tue, 24 Aug 2021 11:01:31 +0000
+Received: by outflank-mailman (input) for mailman id 170974;
+ Tue, 24 Aug 2021 11:01:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU2l-0003Ux-BE
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:52:35 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 48f60f1e-04c9-11ec-a8c5-12813bfff9fa;
- Tue, 24 Aug 2021 10:51:50 +0000 (UTC)
+ id 1mIU2R-0001EC-Ah
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:52:15 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fdf2d3ba-4e2a-49c7-b534-17960bb9caa3;
+ Tue, 24 Aug 2021 10:51:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,49 +48,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48f60f1e-04c9-11ec-a8c5-12813bfff9fa
+X-Inumbo-ID: fdf2d3ba-4e2a-49c7-b534-17960bb9caa3
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802310;
+  d=citrix.com; s=securemail; t=1629802282;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=8C0xAdMUUfkJ37y514dbn4rwdZzvKCfmub6TXPDdPqE=;
-  b=KxTPTE6Qb92z08PH3mjjNxD8A3R2uLtqGnmM/A+vs4LTXPXuxY5SKxCk
-   yzBm0bwT+F1HqaarS1R6vD8qzczTS+uN+EF17c0D2NrvT16KZFfASjnRW
-   oHgDVEWNIL6Y8tGSear9M+hQF7rzuRwT2HawEM0R5M5750lR/qUHgW2iD
-   A=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: zhf6Rgnp4MiaqAvZY4qkAEIxayiu1O1ZkOs98h5T3MxWkHVVJibf2yaDAmq61XI4aS5B/O77tZ
- 8VwP2spuwcTQUEK0q8cryluO9rt0AalnF+SCmqHtTi8XteYZ4SVYKEg0qOI2RRJcrd0zb7gZA3
- sLHZk48w1/+iuA71aChzUAexRoUsonu8+SOZK0BMrYgSsY4jN6B5Ocxe1pQfZs7eMSFlhaKJGy
- /k8/WOMWs/YNKweZlU1A4A8NG6/z+EPPkiINZBLE/ved/MVzShwaAR7ynAX5MREJcgweKxWhaZ
- jGuVdTMgNrEbqWcgb9SzV3++
+  bh=R0ELoo+7nNz0sid1BROwVq9XSwu7Jmvu/Gqb1wk09qU=;
+  b=gzxVU9cridmz+ubVLYa7jwbY2CJzK/hlHcqJCOICUXX1qb619b4zYvmg
+   H9pV8hFcK8tU0BKtBy+DspbWpt20tnPZeaE3bdqsDTI5NA1erQAmJ7N09
+   Ftzalq2kFOPYnH6f4SC46LaU0e1/zzfLzBi9jo6mxgwxn82JLDeG8U37H
+   M=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: PQ3LFFBQZQNFDhB5zYo3jISxm/h2RT0bxuS357LbZxPJrtZRLBAvvwrTdHwO7tqjdA6HubXp/Q
+ RwT9WMvDo6hFcsV0GZFOoqmjTosx3Mjl/I9l5IRYCdueIqL3s4DMAXSIUNydxNWvKOmt7BGDAn
+ L6ZAPOi8Lz7xm0i2b3PVLf6ms+pMp2umBYrZ3AwL9zVNwWp4RTybSN0ivCbs5xEnHSvXNnAEx0
+ PhSZXQrnQc9SHtw6k4Zkvh1cnCGvlGtAWvnF8v1vJ78OaAL1LRv0vZ2GNap1haVuMMrjBDmFe8
+ ePnF4ypTCJhm4jS0IQrDqNUN
 X-SBRS: 5.1
-X-MesageID: 51540928
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 51153557
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:utxec6q07c76T4TACoUzwh8aV5uZL9V00zEX/kB9WHVpm5Oj+v
- xGzc5w6farsl0ssSkb6Ku90KnpewK+yXcH2/hqAV7CZnirhILMFu1fBOTZslrd8kHFl9K1kJ
- 0QC5SWa+eAQmSS7/yKhjVQeuxIqLbozEnrv5am854Hd3AJV0gU1XYcNu/tKDwSeOApP/oEPa
- vZwvACiyureHwRYMj+LGICRfL/q9rCk4+jSQIaBjY8gTP+zA+A2frfKVy1zx0eWzRAzfMJ6m
- 7eiTH04a2lrrWS1gLc7WnO9J5b8eGRiuerRfb8yfT9GA+czzpAV74RH4FqewpF591H3Wxa0u
- UkZS1QefibpUmhJ11d6iGdpjUImAxel0MKj2Xoz0cL6PaJOw4SGo5Pg5lUfQDe7FdltNZg0L
- hT12bcrJZPCwjc9R6Nr+Qg+Csa5XZcjEBS59L7tUYvGLf2qYUh37A37QdQCtMNDSj64IcoHK
- 1nC9zd/u9fdRefY2rCtmdizdSwVjBrdy32CHQqq4iQyXxbjXp5x0wXyIgWmWoB7os0T91B6/
- 7fOqplmblSRosdbL57Bu0GXcyrY1a9Ci7kISaXOxDqBasHM3XCp9r+56g0/vijfNgSwJ47iP
- 36ISRlXK4JCjbT4Oi1rdB2Gzz2MRSAtAXWu7RjDsJCy8PBrZLQQF2+dGw=
+IronPort-HdrOrdr: A9a23:gy42IKGGoyHBd1HspLqFWpHXdLJyesId70hD6qkvc3Fom52j/f
+ xGws5x6fatskdrZJkh8erwW5VoMkmsj6KdgLNhcYtKOTOLhILGFvAE0WKP+Vzd8mjFh5ZgPM
+ RbAudD4b/LfD5HZK/BiWHWferIguP3iZxA7t2urUuFODsaD52ImD0JbzpzfHcXeCB2Qb4CUL
+ aM7MtOoDStPV4NaN6gO3UDV+/f4/XWiZPPe3c9dl8awTjLqQntxK/xEhCe0BtbeShI260e/W
+ /MlBG8zrm/ssu81gTX2wbontRrcZrau5h+7f63+40owwbX+0KVjUNaKvq/VQUO0aOSAZAR4Z
+ /xSlkbTp1OAjjqDxyISFPWqnXdOXAVmjHfIBaj8ATeiN28SzQgB8Vbg4VFNhPf9ko7pdl5lL
+ lGxmSDqvNsfFv9dYvGlqv1vjxR5zyJSEAZ4KcuZr1kIPkjQa4UqZZa8FJeEZ8GEi6/4Ic7EP
+ N2BMWZ4PpNa1uVY33Qo2EqmbWXLz4ONwbDRlJHtt2e0jBQknw8x0wExNYHlnNF8J4mUZFL6+
+ nNL6wtnrBTSc0da757GY46MICKI32IRQiJPHOZIFzhGq1CM3XRq4Tv6LFw/+2ucIxg9upEpH
+ 0AaiItiYcWQTOiNSSj5uw7zvn9ehTJYd228LAh23FQgMyNeIbW
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="51540928"
+   d="scan'208";a="51153557"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
- Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Doug Goldstein <cardoe@cardoe.com>
-Subject: [XEN PATCH v7 30/51] build: hook kconfig into xen build system
-Date: Tue, 24 Aug 2021 11:50:17 +0100
-Message-ID: <20210824105038.1257926-31-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [XEN PATCH v7 17/51] build: set XEN_BUILD_EFI earlier
+Date: Tue, 24 Aug 2021 11:50:04 +0100
+Message-ID: <20210824105038.1257926-18-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -99,337 +97,145 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Now that xen's build system is very close to Linux's ones, we can hook
-"Makefile.host" into Xen's build system, and we can build Kconfig with
-that.
+We are going to need the variable XEN_BUILD_EFI earlier.
+
+But a side effect of calculating the value of $(XEN_BUILD_EFI) is to
+also to generate "efi/check.o" which is used for further checks.
+Thus the whole chain that check for EFI support is moved to
+"arch.mk".
+
+Some other changes are made to avoid too much duplication:
+    - $(efi-check-o): Used to avoid repeating "efi/check.*". We don't
+      set it to the path to the source as it would be wrong as soon
+      as we support out-of-tree build.
+    - $(LD_PE_check_cmd): As it is called twice, with an updated
+      $(EFI_LDFLAGS).
+
+$(nr-fixups) is renamed to $(efi-check-relocs) as the former might be
+a bit too generic.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile                                 |  34 ++++--
- xen/Rules.mk                                 |  13 ++-
- xen/scripts/Kbuild.include                   |  31 ++++++
- xen/scripts/Makefile.clean                   |   9 ++
- xen/{tools/kconfig => scripts}/Makefile.host |   3 +
- xen/tools/kconfig/Makefile.kconfig           | 106 -------------------
- 6 files changed, 78 insertions(+), 118 deletions(-)
- rename xen/{tools/kconfig => scripts}/Makefile.host (98%)
- delete mode 100644 xen/tools/kconfig/Makefile.kconfig
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 1b5517b02a8c..0da08bc39930 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -33,6 +33,7 @@ ARCH=$(XEN_TARGET_ARCH)
- SRCARCH=$(shell echo $(ARCH) | \
-           sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-               -e s'/riscv.*/riscv/g')
-+export ARCH SRCARCH
+Notes:
+    v7:
+    - Do the whole check for EFI support in arch.mk. So efi/check.o is
+      produce there and used there, and produce efi/check.efi and use it there.
+      Thus avoid the need to repeat the test done for XEN_BUILD_EFI.
+
+ xen/arch/x86/Makefile | 36 ++----------------------------------
+ xen/arch/x86/arch.mk  | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 44 insertions(+), 34 deletions(-)
+
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 5e1d38d6cd5b..dfcbd01bb4ed 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -123,41 +123,7 @@ $(TARGET): $(TARGET)-syms $(efi-y) boot/mkelf32
+ 	mv $(TMP) $(TARGET)
  
- # Don't break if the build process wasn't called from the top level
- # we need XEN_TARGET_ARCH to generate the proper config
-@@ -156,6 +157,13 @@ ifneq ($(filter %config,$(MAKECMDGOALS)),)
-     config-build := y
+ ifneq ($(efi-y),)
+-
+-# Check if the compiler supports the MS ABI.
+-export XEN_BUILD_EFI := $(shell $(CC) $(XEN_CFLAGS) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
+ CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
+-
+-# Check if the linker supports PE.
+-EFI_LDFLAGS = $(patsubst -m%,-mi386pep,$(XEN_LDFLAGS)) --subsystem=10
+-XEN_BUILD_PE := $(if $(XEN_BUILD_EFI),$(call ld-option,$(EFI_LDFLAGS) --image-base=0x100000000 -o efi/check.efi efi/check.o))
+-# If the above failed, it may be merely because of the linker not dealing well
+-# with debug info. Try again with stripping it.
+-ifeq ($(CONFIG_DEBUG_INFO)-$(XEN_BUILD_PE),y-n)
+-EFI_LDFLAGS += --strip-debug
+-XEN_BUILD_PE := $(call ld-option,$(EFI_LDFLAGS) --image-base=0x100000000 -o efi/check.efi efi/check.o)
+-endif
+-
+-ifeq ($(XEN_BUILD_PE),y)
+-
+-# Check if the linker produces fixups in PE by default
+-nr-fixups := $(shell $(OBJDUMP) -p efi/check.efi | grep '^[[:blank:]]*reloc[[:blank:]]*[0-9][[:blank:]].*DIR64$$' | wc -l)
+-ifeq ($(nr-fixups),2)
+-MKRELOC := :
+-relocs-dummy :=
+-else
+-MKRELOC := efi/mkreloc
+-relocs-dummy := efi/relocs-dummy.o
+-# If the linker produced fixups but not precisely two of them, we need to
+-# disable it doing so.  But if it didn't produce any fixups, it also wouldn't
+-# recognize the option.
+-ifneq ($(nr-fixups),0)
+-EFI_LDFLAGS += --disable-reloc-section
+-endif
+-endif
+-
+-endif # $(XEN_BUILD_PE)
+-
+ endif # $(efi-y)
+ 
+ ALL_OBJS := $(BASEDIR)/arch/x86/boot/built_in.o $(BASEDIR)/arch/x86/efi/built_in.o $(ALL_OBJS)
+@@ -218,8 +184,10 @@ endif
+ 
+ $(TARGET).efi: VIRT_BASE = 0x$(shell $(NM) efi/relocs-dummy.o | sed -n 's, A VIRT_START$$,,p')
+ ifeq ($(MKRELOC),:)
++relocs-dummy :=
+ $(TARGET).efi: ALT_BASE :=
+ else
++relocs-dummy := efi/relocs-dummy.o
+ $(TARGET).efi: ALT_BASE = 0x$(shell $(NM) efi/relocs-dummy.o | sed -n 's, A ALT_START$$,,p')
  endif
  
-+export CONFIG_SHELL := $(SHELL)
-+export YACC = $(if $(BISON),$(BISON),bison)
-+export LEX = $(if $(FLEX),$(FLEX),flex)
+diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
+index eea320e618b9..98dd41d32118 100644
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -60,5 +60,47 @@ ifeq ($(CONFIG_UBSAN),y)
+ $(call cc-option-add,CFLAGS_UBSAN,CC,-fno-sanitize=alignment)
+ endif
+ 
++ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
 +
-+# Default file for 'make defconfig'.
-+export KBUILD_DEFCONFIG := $(ARCH)_defconfig
++efi-check-o = arch/x86/efi/check.o
 +
- # CLANG_FLAGS needs to be calculated before calling Kconfig
- ifneq ($(shell $(CC) --version 2>&1 | head -n 1 | grep clang),)
- CLANG_FLAGS :=
-@@ -194,22 +202,19 @@ PHONY += tools_fixdep
- tools_fixdep:
- 	$(MAKE) -C tools fixdep
- 
--# Shorthand for kconfig
--kconfig = -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)"
--
- ifeq ($(config-build),y)
- # ===========================================================================
- # *config targets only - make sure prerequisites are updated, and descend
- # in tools/kconfig to make the *config target
- 
--config: FORCE
--	$(MAKE) $(kconfig) $@
-+config: tools_fixdep FORCE
-+	$(Q)$(MAKE) $(build)=tools/kconfig $@
- 
- # Config.mk tries to include .config file, don't try to remake it
- %/.config: ;
- 
--%config: FORCE
--	$(MAKE) $(kconfig) $@
-+%config: tools_fixdep FORCE
-+	$(Q)$(MAKE) $(build)=tools/kconfig $@
- 
- else # !config-build
- 
-@@ -219,9 +224,15 @@ ifeq ($(need-config),y)
- # changes are detected.
- -include include/config/auto.conf.cmd
- 
-+# This allows make to build fixdep before invoking defconfig. We can't use
-+# "tools_fixdep" which is a .PHONY target and would force make to call
-+# "defconfig" again to update $(KCONFIG_CONFIG).
-+tools/fixdep:
-+	$(MAKE) -C tools fixdep
++# Check if the compiler supports the MS ABI.
++XEN_BUILD_EFI := $(call if-success,$(CC) $(CFLAGS) -c $(efi-check-o:.o=.c) -o $(efi-check-o),y)
 +
- # Allow people to just run `make` as before and not force them to configure
--$(KCONFIG_CONFIG):
--	$(MAKE) $(kconfig) defconfig
-+$(KCONFIG_CONFIG): tools/fixdep
-+	$(Q)$(MAKE) $(build)=tools/kconfig defconfig
- 
- # The actual configuration files used during the build are stored in
- # include/generated/ and include/config/. Update them if .config is newer than
-@@ -230,7 +241,7 @@ $(KCONFIG_CONFIG):
- # This exploits the 'multi-target pattern rule' trick.
- # The syncconfig should be executed only once to make all the targets.
- include/config/%.conf include/config/%.conf.cmd: $(KCONFIG_CONFIG)
--	$(MAKE) $(kconfig) syncconfig
-+	$(Q)$(MAKE) $(build)=tools/kconfig syncconfig
- 
- ifeq ($(CONFIG_DEBUG),y)
- CFLAGS += -O1
-@@ -391,9 +402,10 @@ _clean:
- 	$(MAKE) $(clean) arch/riscv
- 	$(MAKE) $(clean) arch/x86
- 	$(MAKE) $(clean) test
--	$(MAKE) $(kconfig) clean
-+	$(MAKE) $(clean) tools/kconfig
- 	find . \( -name "*.o" -o -name ".*.d" -o -name ".*.d2" \
- 		-o -name ".*.o.tmp" -o -name "*~" -o -name "core" \
-+		-o -name '*.lex.c' -o -name '*.tab.[ch]' \
- 		-o -name "*.gcno" -o -name ".*.cmd" -o -name "lib.a" \) -exec rm -f {} \;
- 	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
- 	rm -f asm-offsets.s arch/*/include/asm/asm-offsets.h
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index f1043a78a332..760ccff0e8f1 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -94,6 +94,13 @@ subdir-y        := $(addprefix $(obj)/,$(subdir-y))
- nocov-y         := $(addprefix $(obj)/,$(nocov-y))
- noubsan-y       := $(addprefix $(obj)/,$(noubsan-y))
- 
-+# Do not include hostprogs rules unless needed.
-+# $(sort ...) is used here to remove duplicated words and excessive spaces.
-+hostprogs-y := $(sort $(hostprogs-y))
-+ifneq ($(hostprogs-y),)
-+include scripts/Makefile.host
++# Check if the linker supports PE.
++EFI_LDFLAGS := $(patsubst -m%,-mi386pep,$(LDFLAGS)) --subsystem=10
++LD_PE_check_cmd = $(call ld-option,$(EFI_LDFLAGS) --image-base=0x100000000 -o $(efi-check-o:.o=.efi) $(efi-check-o))
++XEN_BUILD_PE := $(LD_PE_check_cmd)
++
++# If the above failed, it may be merely because of the linker not dealing well
++# with debug info. Try again with stripping it.
++ifeq ($(CONFIG_DEBUG_INFO)-$(XEN_BUILD_PE),y-n)
++EFI_LDFLAGS += --strip-debug
++XEN_BUILD_PE := $(LD_PE_check_cmd)
 +endif
 +
- # subdir-builtin may contain duplications. Use $(sort ...)
- subdir-builtin := $(sort $(filter %/built_in.o, $(obj-y)))
- 
-@@ -272,7 +279,11 @@ intermediate_targets = $(foreach sfx, $(2), \
- 				$(patsubst %$(strip $(1)),%$(sfx), \
- 					$(filter %$(strip $(1)), $(targets))))
- # %.init.o <- %.o
--targets += $(call intermediate_targets, .init.o, .o)
-+# %.lex.o <- %.lex.c <- %.l
-+# %.tab.o <- %.tab.[ch] <- %.y
-+targets += $(call intermediate_targets, .init.o, .o) \
-+	   $(call intermediate_targets, .lex.o, .lex.c) \
-+	   $(call intermediate_targets, .tab.o, .tab.c .tab.h)
- 
- # Build
- # ---------------------------------------------------------------------------
-diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
-index aa3a8a1bd9e7..3e436639da1c 100644
---- a/xen/scripts/Kbuild.include
-+++ b/xen/scripts/Kbuild.include
-@@ -25,6 +25,37 @@ real-prereqs = $(filter-out $(PHONY), $^)
- # Escape single quote for use in echo statements
- escsq = $(subst $(squote),'\$(squote)',$1)
- 
-+###
-+# Easy method for doing a status message
-+       kecho := :
-+ quiet_kecho := echo
-+silent_kecho := :
-+kecho := $($(quiet)kecho)
++ifeq ($(XEN_BUILD_PE),y)
 +
-+###
-+# filechk is used to check if the content of a generated file is updated.
-+# Sample usage:
-+#
-+# filechk_sample = echo $(KERNELRELEASE)
-+# version.h: FORCE
-+#	$(call filechk,sample)
-+#
-+# The rule defined shall write to stdout the content of the new file.
-+# The existing file will be compared with the new one.
-+# - If no file exist it is created
-+# - If the content differ the new file is used
-+# - If they are equal no change, and no timestamp update
-+define filechk
-+	$(Q)set -e;						\
-+	mkdir -p $(dir $@);					\
-+	trap "rm -f $(dot-target).tmp" EXIT;			\
-+	{ $(filechk_$(1)); } > $(dot-target).tmp;		\
-+	if [ ! -r $@ ] || ! cmp -s $@ $(dot-target).tmp; then	\
-+		$(kecho) '  UPD     $@';			\
-+		mv -f $(dot-target).tmp $@;			\
-+	fi
-+endef
++# Check if the linker produces fixups in PE by default
++efi-check-relocs := $(shell $(OBJDUMP) -p $(efi-check-o:.o=.efi) | grep '^[[:blank:]]*reloc[[:blank:]]*[0-9][[:blank:]].*DIR64$$' | wc -l)
 +
- # as-insn: Check whether assembler supports an instruction.
- # Usage: cflags-y += $(call as-insn,CC FLAGS,"insn",option-yes,option-no)
- as-insn = $(if $(shell echo 'void _(void) { asm volatile ( $(2) ); }' \
-diff --git a/xen/scripts/Makefile.clean b/xen/scripts/Makefile.clean
-index 36b7e7e92f93..156d6307cf83 100644
---- a/xen/scripts/Makefile.clean
-+++ b/xen/scripts/Makefile.clean
-@@ -17,8 +17,17 @@ include $(src)/Makefile
- subdir-all := $(subdir-y) $(subdir-n) $(subdir-) \
-               $(patsubst %/,%, $(filter %/, $(obj-y) $(obj-n) $(obj-)))
- 
-+__clean-files := \
-+    $(clean-files) $(hostprogs-y) $(hostprogs-)
-+
-+__clean-files := $(wildcard $(__clean-files))
-+
- .PHONY: clean
- clean:: $(subdir-all)
-+ifneq ($(strip $(__clean-files)),)
-+	rm -rf $(__clean-files)
++ifeq ($(efi-check-relocs),2)
++MKRELOC := :
++else
++MKRELOC := efi/mkreloc
++# If the linker produced fixups but not precisely two of them, we need to
++# disable it doing so.  But if it didn't produce any fixups, it also wouldn't
++# recognize the option.
++ifneq ($(efi-check-relocs),0)
++EFI_LDFLAGS += --disable-reloc-section
 +endif
-+	@:
- 
- # Descending
- # ---------------------------------------------------------------------------
-diff --git a/xen/tools/kconfig/Makefile.host b/xen/scripts/Makefile.host
-similarity index 98%
-rename from xen/tools/kconfig/Makefile.host
-rename to xen/scripts/Makefile.host
-index 4c51c95d40f4..61c7bff7a9bb 100644
---- a/xen/tools/kconfig/Makefile.host
-+++ b/xen/scripts/Makefile.host
-@@ -1,5 +1,8 @@
- # SPDX-License-Identifier: GPL-2.0
- 
-+# target with $(obj)/ and its suffix stripped
-+target-stem = $(basename $(patsubst $(obj)/%,%,$@))
++endif
 +
- # LEX
- # ---------------------------------------------------------------------------
- quiet_cmd_flex = LEX     $@
-diff --git a/xen/tools/kconfig/Makefile.kconfig b/xen/tools/kconfig/Makefile.kconfig
-deleted file mode 100644
-index 799321ec4d07..000000000000
---- a/xen/tools/kconfig/Makefile.kconfig
-+++ /dev/null
-@@ -1,106 +0,0 @@
--# xen/tools/kconfig
--
--# default rule to do nothing
--all:
--
--# Xen doesn't have a silent build flag
--quiet :=
--Q :=
--kecho := :
--
--# eventually you'll want to do out of tree builds
--srctree := $(BASEDIR)
--objtree := $(srctree)
--src := tools/kconfig
--obj := $(src)
--
--# handle functions (most of these lifted from different Linux makefiles
--dot-target = $(dir $@).$(notdir $@)
--depfile = $(subst $(comma),,$(dot-target).d)
--basetarget = $(basename $(notdir $@))
--# target with $(obj)/ and its suffix stripped
--target-stem = $(basename $(patsubst $(obj)/%,%,$@))
--cmd = $(cmd_$(1))
--if_changed = $(cmd_$(1))
--if_changed_dep = $(cmd_$(1))
--
--###
--# filechk is used to check if the content of a generated file is updated.
--# Sample usage:
--#
--# filechk_sample = echo $(KERNELRELEASE)
--# version.h: FORCE
--#	$(call filechk,sample)
--#
--# The rule defined shall write to stdout the content of the new file.
--# The existing file will be compared with the new one.
--# - If no file exist it is created
--# - If the content differ the new file is used
--# - If they are equal no change, and no timestamp update
--# - stdin is piped in from the first prerequisite ($<) so one has
--#   to specify a valid file as first prerequisite (often the kbuild file)
--define filechk
--	$(Q)set -e;				\
--	mkdir -p $(dir $@);			\
--	{ $(filechk_$(1)); } > $@.tmp;		\
--	if [ -r $@ ] && cmp -s $@ $@.tmp; then	\
--		rm -f $@.tmp;			\
--	else					\
--		$(kecho) '  UPD     $@';	\
--		mv -f $@.tmp $@;		\
--	fi
--endef
--
--define multi_depend
--$(foreach m, $(notdir $1), \
--	$(eval $(obj)/$m: \
--	$(addprefix $(obj)/, $(foreach s, $3, $($(m:%$(strip $2)=%$(s)))))))
--endef
--
--# Set our default defconfig file
--KBUILD_DEFCONFIG := $(ARCH)_defconfig
--
--# provide our shell
--CONFIG_SHELL := $(SHELL)
--
--# provide the host compiler
--HOSTCC ?= gcc
--HOSTCXX ?= g++
--YACC = $(if $(BISON),$(BISON),bison)
--LEX = $(if $(FLEX),$(FLEX),flex)
--
--# force target
--PHONY += FORCE
--
--FORCE:
--
--# include the original Makefile and Makefile.host from Linux
--include $(src)/Makefile
--include $(src)/Makefile.host
--
--# Add intermediate targets:
--# When building objects with specific suffix patterns, add intermediate
--# targets that the final targets are derived from.
--intermediate_targets = $(foreach sfx, $(2), \
--				$(patsubst %$(strip $(1)),%$(sfx), \
--					$(filter %$(strip $(1)), $(targets))))
--
--# %.lex.o <- %.lex.c <- %.l
--# %.tab.o <- %.tab.[ch] <- %.y
--targets += $(call intermediate_targets, .lex.o, .lex.c) \
--	   $(call intermediate_targets, .tab.o, .tab.c .tab.h)
--
--# clean up rule
--clean-deps = $(foreach f,$(host-cobjs) $(host-cxxobjs),$(dir $f).$(notdir $f).d)
--clean-shipped = $(patsubst %_shipped,%,$(wildcard $(obj)/*_shipped))
--
--clean:
--	rm -rf $(clean-files)
--	rm -rf $(clean-deps)
--	rm -rf $(host-csingle) $(host-cmulti) $(host-cxxmulti) $(host-cobjs) $(host-cxxobjs)
--	rm -rf $(clean-shipped)
--
--$(obj)/zconf%: $(src)/zconf%_shipped
--	cp -f $< $@
--
--.PHONY: $(PHONY)
++endif # $(XEN_BUILD_PE)
++
++export XEN_BUILD_EFI XEN_BUILD_PE MKRELOC
++export EFI_LDFLAGS
++endif
++
+ # Set up the assembler include path properly for older toolchains.
+ CFLAGS += -Wa,-I$(BASEDIR)/include
 -- 
 Anthony PERARD
 
