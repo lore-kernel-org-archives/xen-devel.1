@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 414B3C4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4444C4338F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0DA5561214
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0DA5561214
+	by mail.kernel.org (Postfix) with ESMTPS id B85EF61357
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B85EF61357
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.171062.312350 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.171077.312377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUCD-0007uR-3H; Tue, 24 Aug 2021 11:02:21 +0000
+	id 1mIUCJ-00019Q-Mf; Tue, 24 Aug 2021 11:02:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 171062.312350; Tue, 24 Aug 2021 11:02:20 +0000
+Received: by outflank-mailman (output) from mailman id 171077.312377; Tue, 24 Aug 2021 11:02:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUCC-0007qM-4b; Tue, 24 Aug 2021 11:02:20 +0000
-Received: by outflank-mailman (input) for mailman id 171062;
- Tue, 24 Aug 2021 11:02:16 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mIUCJ-00017t-8Z; Tue, 24 Aug 2021 11:02:27 +0000
+Received: by outflank-mailman (input) for mailman id 171077;
+ Tue, 24 Aug 2021 11:02:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU3A-0003Ux-CM
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:53:00 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4d36b5c4-04c9-11ec-a8c5-12813bfff9fa;
- Tue, 24 Aug 2021 10:51:57 +0000 (UTC)
+ id 1mIU3j-0001EC-Da
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:53:35 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7f3296c2-4a59-43ad-a4bf-4b8d046730d0;
+ Tue, 24 Aug 2021 10:52:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,49 +48,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d36b5c4-04c9-11ec-a8c5-12813bfff9fa
+X-Inumbo-ID: 7f3296c2-4a59-43ad-a4bf-4b8d046730d0
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802317;
+  d=citrix.com; s=securemail; t=1629802319;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=wW/BDoTYIi98jKK4f0OOhTS6gPpff2lS/nVP1UXR2wY=;
-  b=fszwGlOZic1uPlXrJDOPWt6x8pI0BGZ1J9bzPmMwSqoQ1S+MznHvrxUs
-   /9YTetgfk3pkbqfY3MezOLr63tZIsgjD0rvZQ8wa3cLnYEfvRt/0J1VhF
-   iol8ts86quTMqciq3NahCrQT1HC4Gyw/ovnxsgJgeqfRqXV9ZDyncd8xd
-   E=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: fQymMyhSu6fMPDLolqe1YislaJOwI/EgZchlmVuY6Wab/TP+cnxpPJ2lRwPtaOBxoeMo1YhjQl
- yvuGcnihz3OFywptmMXWTSgtQQWvU0sn+G14v9vtXhkNw/CoNEpkXdJwaPfEVpoRsoA9cfQOF/
- p7UAM7beDTDoygLjF16d3gE4Omom/WlX+9I99xkJ6w+x54C5UkwwX8jsenSf2nhKkeWjuiPRJS
- ojb5KM0x609N6kta08fvjC6t7rhYKJESVMouXPcsSQPeXyzZ/odDswHCqv5luGVpYi+0mBX8ft
- eS0fvyKbm5no6djwagup9CF2
+  bh=LKnefkuuFQC10LfXqSSu32yIG5VWHpcMy+rZtD5GY5M=;
+  b=eEwAx4v1ZGiEb9pm3DxVtA7a2E1oZ8sqvm2mzMCSepGZemJFmbtgMBJ3
+   z7DTIjO1zeAchluBKQWHemO/LMAEuiWT5ioFr3nQgCNX/0mQgl1rc0xyN
+   R6AZPFPqofLkj/9fpQ4iX6fkkhcpn+sS7on+ZDdGhVO59SaSU//gMVFoR
+   k=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: hrtj/xVk7OBG1Xzg12jeuHsxK9i1d5xzj3+P6ioyBFUBqzTemmlde9WUQb/eFXhjQg5X06y0bi
+ EopKUQOBhRor8ZclJLs2ZDvzs9lRpYUZESt5X01z7CmkcA+x3FjsrVjVU/205gsp4hkRzfftiN
+ vlLgZ5rZ6n93g2ZKjj/bdGT03NxwNMXZjRxajznNJUurdaaq/LXFae1s0N1TpTryUST9fexErr
+ 2Spxps7QL9qKca6knT1ZTJV+YjSLC86S8XKOGqVPtsMWi9yg9gdHy7jFMxWiXHfkdD7UkL9Kvs
+ d7nWuQSPQimzGQRPzPOP5EmC
 X-SBRS: 5.1
-X-MesageID: 51540934
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 52875493
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:VsPt26EnnaZvrrPUpLqFVJHXdLJyesId70hD6qkvc3Fom52j/f
- xGws5x6fatskd2ZJkh8erhBEDyewKkyXcV2/hbAV7MZniDhILFFu9fBOjZsnfd8k/Fh4lgPM
- 5bGsATZ+EYZmIK7voSlTPIdurIt+P3kpxA692+815dCSVRL41w5QZwDQiWVmdsQhNdOJY/HJ
- 2AouJaujuJYx0sH4iGL0hAe9KGi8zAlZrgbxJDLQUg8hOygTSh76O/OwSE3y0ZTyhEzd4ZgC
- f4ek3Cl+ueWsOAu1/hPlzontdrcRzau5l+7fm3+4kow/PX+0OVjcpaKvm/VXsO0ZmSAR4R4a
- LxSlEbTolOAjrqDxuIiAqo1A/63Dk07Xj+jVeenHv4uMT8ACk3EsxbmOtiA23kAmcbzaVBOZ
- hwrhWkXltsfGL9tTW448KNWwBhl0Kyr3ZnmekPj2ZHWY9bbLNKt4QQ8E5cDZ9FRUvBmcgaOf
- grCNuZ6OddcFucYXyctm5zwMa0VnB2GhudWEANtsGczjATlnFkyEkTwtAZgx47hdsAYogB4/
- 6BPrVjlblIQMNTZaVhBP0ZSc/yEWDJSQKkChPmHb0mLtB0B5vpke+I3FwY3pDXRHU49upApH
- 2aaiIkiYcbQTOQNeSemIZM7g3ABH6gWDiF8LAv26RE
+IronPort-HdrOrdr: A9a23:poDF1q2GPhQGKok5wq2zgwqjBLQkLtp133Aq2lEZdPRUGvb2qy
+ nIpoV96faUskdpZJhOo7G90cW7LE80sKQFg7X5Xo3SODUO2lHJEGgK1+KLqFfd8m/Fh4tgPM
+ 9bAs5D4bbLY2SS4/yX3ODBKadC/OW6
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="51540934"
+   d="scan'208";a="52875493"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v7 34/51] build: start building the tools with the main makefiles
-Date: Tue, 24 Aug 2021 11:50:21 +0100
-Message-ID: <20210824105038.1257926-35-anthony.perard@citrix.com>
+	<wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN PATCH v7 28/51] build: rename __LINKER__ to LINKER_SCRIPT
+Date: Tue, 24 Aug 2021 11:50:15 +0100
+Message-ID: <20210824105038.1257926-29-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -99,76 +91,42 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This will make out-of-tree build easier.
+For two reasons: this macro is used to generate a "linker script" and
+is not by the linker, and name starting with an underscore '_' are
+supposed to be reserved, so better avoid them when not needed.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile       |  8 ++++----
- xen/tools/Makefile | 17 ++---------------
- 2 files changed, 6 insertions(+), 19 deletions(-)
+ xen/Rules.mk                      | 2 +-
+ xen/arch/arm/include/asm/config.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 0da08bc39930..8381ffd5d168 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -200,7 +200,7 @@ endif # root-make-done
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index 9b8415160649..a62c761be8d1 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -257,7 +257,7 @@ $(obj)/%.s: $(src)/%.S FORCE
  
- PHONY += tools_fixdep
- tools_fixdep:
--	$(MAKE) -C tools fixdep
-+	$(MAKE) $(build)=tools tools/fixdep
+ # Linker scripts, .lds.S -> .lds
+ quiet_cmd_cpp_lds_S = LDS     $@
+-cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -D__LINKER__ -MQ $@ -o $@ $<
++cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -DLINKER_SCRIPT -MQ $@ -o $@ $<
  
- ifeq ($(config-build),y)
- # ===========================================================================
-@@ -228,7 +228,7 @@ ifeq ($(need-config),y)
- # "tools_fixdep" which is a .PHONY target and would force make to call
- # "defconfig" again to update $(KCONFIG_CONFIG).
- tools/fixdep:
--	$(MAKE) -C tools fixdep
-+	$(MAKE) $(build)=tools tools/fixdep
+ targets := $(filter-out $(PHONY), $(targets))
  
- # Allow people to just run `make` as before and not force them to configure
- $(KCONFIG_CONFIG): tools/fixdep
-@@ -391,7 +391,7 @@ _debug:
+diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
+index c7b77912013e..2aced0bc3b8b 100644
+--- a/xen/arch/arm/include/asm/config.h
++++ b/xen/arch/arm/include/asm/config.h
+@@ -191,7 +191,7 @@ extern unsigned long frametable_virt_end;
+ #define watchdog_disable() ((void)0)
+ #define watchdog_enable()  ((void)0)
  
- .PHONY: _clean
- _clean:
--	$(MAKE) -C tools clean
-+	$(MAKE) $(clean) tools
- 	$(MAKE) $(clean) include
- 	$(MAKE) $(clean) common
- 	$(MAKE) $(clean) drivers
-@@ -420,7 +420,7 @@ $(TARGET).gz: $(TARGET)
- 	mv $@.new $@
- 
- $(TARGET): tools_fixdep FORCE
--	$(MAKE) -C tools
-+	$(MAKE) $(build)=tools
- 	$(MAKE) $(build)=. include/xen/compile.h
- 	[ -e arch/$(TARGET_ARCH)/efi ] && for f in $$(cd common/efi; echo *.[ch]); \
- 		do test -r arch/$(TARGET_ARCH)/efi/$$f || \
-diff --git a/xen/tools/Makefile b/xen/tools/Makefile
-index 722f3664549d..a5078b7cb8de 100644
---- a/xen/tools/Makefile
-+++ b/xen/tools/Makefile
-@@ -1,15 +1,2 @@
--
--include $(XEN_ROOT)/Config.mk
--
--.PHONY: default
--default: symbols fixdep
--
--.PHONY: clean
--clean:
--	rm -f *.o symbols fixdep
--
--symbols: symbols.c
--	$(HOSTCC) $(HOSTCFLAGS) -o $@ $<
--
--fixdep: fixdep.c
--	$(HOSTCC) $(HOSTCFLAGS) -o $@ $<
-+hostprogs-always-y += symbols
-+hostprogs-always-y += fixdep
+-#if defined(__ASSEMBLY__) && !defined(__LINKER__)
++#if defined(__ASSEMBLY__) && !defined(LINKER_SCRIPT)
+ #include <asm/asm_defns.h>
+ #include <asm/macros.h>
+ #endif
 -- 
 Anthony PERARD
 
