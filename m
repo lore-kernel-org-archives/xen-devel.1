@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29FF0C4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7FC5C432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D9BE461214
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D9BE461214
+	by mail.kernel.org (Postfix) with ESMTPS id 792EC61214
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 792EC61214
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170977.312136 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170980.312154 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBR-0005QF-AC; Tue, 24 Aug 2021 11:01:33 +0000
+	id 1mIUBT-0005uA-BM; Tue, 24 Aug 2021 11:01:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170977.312136; Tue, 24 Aug 2021 11:01:33 +0000
+Received: by outflank-mailman (output) from mailman id 170980.312154; Tue, 24 Aug 2021 11:01:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBQ-0005Lm-Ne; Tue, 24 Aug 2021 11:01:32 +0000
-Received: by outflank-mailman (input) for mailman id 170977;
- Tue, 24 Aug 2021 11:01:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mIUBS-0005pv-KW; Tue, 24 Aug 2021 11:01:34 +0000
+Received: by outflank-mailman (input) for mailman id 170980;
+ Tue, 24 Aug 2021 11:01:31 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU3y-0003Ux-Dz
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:53:50 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 58312edd-04c9-11ec-a8c6-12813bfff9fa;
- Tue, 24 Aug 2021 10:52:16 +0000 (UTC)
+ id 1mIU4D-0001EC-Eg
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:54:05 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 793aa3ad-c75d-43fc-bf1c-091d2a3119cc;
+ Tue, 24 Aug 2021 10:52:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,39 +48,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 58312edd-04c9-11ec-a8c6-12813bfff9fa
+X-Inumbo-ID: 793aa3ad-c75d-43fc-bf1c-091d2a3119cc
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802336;
+  d=citrix.com; s=securemail; t=1629802324;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=JD+7VO3K52HwJz8EfkgwAVmchIJrhqCdmlKnQtk1bE0=;
-  b=EII+9uvLpfXGVicNq9z0JoHN5jV2UbmDKoS25kz5i5YFxWuneOaEIWff
-   jm7f0icPRg+q+fQst03VM6cXYYRYf/AZ283B8kdf5EQ+/SraUQkuEakSl
-   c+oqogak6HEifq8ecwzQrQpVSOqBrdlN3/zmhnskT5kYl9AJIKEGG0K/h
-   o=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 7t/CwgoykC3EH/Ms9CYPanVVarqk2ub3S2sjL78gsjcXbCZTQnBvoJADlt7wG2u/yoZsxm2Dgs
- a/TWTiTPaWQXWe1K0C/5b1P9syRlSuSoVzxQP+MzkNvAg7gRUb2OobBrrgjpie6OUbY9SDH6QI
- hVqxwz6Z+1P0Xu2nJSRB7W4Ki84FS42LQPOp8eZNKyNz/ZZPidOruYETSDDiyuIhRqwjwsdbMq
- 9l6AAhMWsm9qHN7B4/kAArQXlELjEyb4R5kkogwiTnvylk272FOE22hsNfwGRl2iXQxejg1+7s
- pqTxR4SpagLwQN08/p8i97oY
+  bh=peF07yApvAmonymrFonEMIY5XQyw9u/7Zv4cwXrx8fA=;
+  b=MwK8I3rgEKS+PCXeyQzZ1o/FI/ibhhackQPeM+dRr5B7BsaKPBlVQbaz
+   bp1WSWzfnCCfCJXue1WLPkfWrjnuYqMh7tNJ9Hkb+fZvzVxPgYC5/qNVw
+   6flfbLSlGKhhxsj1d5USd6gE8fbWy1o/SqRq6Y4UWHON8iqb/IgN8aSJ2
+   I=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Xw9/UdIF15GytftMnKccpbXrN2UvK+wtd3B4MB07ib0vmF7VM7ZKWNUOfqbXSWfaMkR5hZxOgO
+ LMEE4ZkeJyvRKPpbDRxKZ+Eiwx8Fh1S1RfYZSkc0rFZ0Q1SidII7PtUn8NCAEIGgi+TuXzVNvE
+ n9Db8dtSEGrPofU7WR0jNKNdywEOhldxEWZ+qZj8pYmuaf+iNHHOHptLyL6R9uClNmNpAeS5I6
+ QW21FSOQuByifAQHWQTgkVE7LXGQuA5PTrb01xrXsXK4UDPfi0n+2Cw+nhbtvTN03YbLhKTyE7
+ 06NkqoXf07oFpZwVI292/PMf
 X-SBRS: 5.1
-X-MesageID: 51540947
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 51130789
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:NXnpRKOKZDr4oMBcT33155DYdb4zR+YMi2TDiHoddfUFSKalfp
- 6V98jzjSWE7gr4WBkb+exoS5PwOE80lKQFqrX5Uo3SODUO1FHHEGgA1/qp/9SDIVyYygc178
- 4JH8dD4bbLfDtHZLPBkWyF+qEbsbu6Gc6T5Nv2/jNId0VHeqtg5wB2BkKwCUttXjRLApI/Cd
- 61+tdHjyDIQwVaUu2LQl0+G8TTrdzCk5zrJTQcAQQ81QWIhTS0rJbnDhmj2AsEWT8n+8ZszY
- GFqX222kyQiYD69vbu7R6R032Qoqqi9jJ3Pr3MtiHSEESotu/nXvUkZ1TIhkFMnAjm0idQrD
- CLmWZsAy070QKqQkil5RTqwAXuyzAo9jvrzkKZm2LqpYjjSCs9ENcpv/MuTvL10TtVgDhH6t
- M944tZjesnMTrQ2CDmo9TYXRBjkUS55XIkjO4IlnRaFY8TcqVYo4AT9F5cVM5oJlOz1Kk3VO
- 11SM3M7vdfdl2XK3jfo2l02dSpGnA+BA2PTEQOstGclzJWgHd6xU0Fw9F3pAZIyLstD51fo+
- jUOKVhk79DCscQcKJmHe8EBdC6D2TcKCi8RV564W6XZp3vHki91aIfzI9FmN1CSaZ4v6fawq
- 6xLW+wnVRCBH7GGImU2oFX/lTXXGCwNA6duv1j2w==
+IronPort-HdrOrdr: A9a23:wc/1sK2kOGZMf4gILori8QqjBQ5yeYIsimQD101hICG9Lfb0qy
+ n+pp4mPEHP4wr5AEtQ/+xpOMG7IU80hqQFmLX5XI3SFzUO11HYSL2KgbGN/9SCIVy1ygc+79
+ YGT0EWMrSZYTdHZK3BkWqF+qMbsby6GdeT9IXjJhlWLD1CWuVF1UNUGwybGkp5SE1tHpwiDq
+ eR4cJBun6JZWkXRt7TPAhIY8Hz4/nw0L72ax8PABAqrCOUiymz1bL8Gx+Emj8DTjJ0x6s4+2
+ StqX232kzjiYD09vbv7R6S031koqqj9jKFPr3PtiEhEESstu9vXvUlZ1TNhkFwnAjl0idTrD
+ CFmWZaAy000QKdQoj9m2qW5yDwlDkp8HPs0lmenD/qptH4XiszD45biZteaQax0TtXgDhQ6t
+ M+44uijeshMfoAplWN2/HYExVx0kakq3srluAey3RZTIsFcbdU6YgS5llcHpsMFD/zrNlPKp
+ gnMOjMoPJNNV+KZXHQuWdihNSqQ3QoBx+DBkwPoNac3TRalG1wi0EY2MsclHEd849VcegM28
+ 3UdqBz0L1eRM4faqxwQO8HXMusE2TIBQnBNWqDSG6XYZ3v+0i92aIfxY9Fmt1CVKZ4sKfaqa
+ 6xI2+w71RCBn4GIff+o6Fj41TXRnmhUXD31sRTjqIJyoHBeA==
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="51540947"
+   d="scan'208";a="51130789"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
@@ -93,9 +92,9 @@ CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
  Rzeszutek Wilk" <konrad.wilk@oracle.com>, Ross Lagerwall
 	<ross.lagerwall@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, "Daniel
  P. Smith" <dpsmith@apertussolutions.com>
-Subject: [XEN PATCH v7 43/51] build: replace $(BASEDIR) by $(objtree)
-Date: Tue, 24 Aug 2021 11:50:30 +0100
-Message-ID: <20210824105038.1257926-44-anthony.perard@citrix.com>
+Subject: [XEN PATCH v7 37/51] build: clean-up "clean" rules of duplication
+Date: Tue, 24 Aug 2021 11:50:24 +0100
+Message-ID: <20210824105038.1257926-38-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -103,264 +102,76 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-We need to differentiate between source files and generated/built
-files. We will be replacing $(BASEDIR) by $(objtree) for files that
-are generated, and $(abs_objtree) in cases where an absolute path is
-necessary.
-
-The "clean" target is still changing to the subdir been cleaned, to
-remove file in the root we need to use $(abs_objtree).
+All those files to be removed are already done in the main Makefile,
+either by the "find" command or directly (for $(TARGET).efi).
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile                |  5 +++++
- xen/Rules.mk                |  2 +-
- xen/arch/arm/Makefile       | 12 ++++++------
- xen/arch/x86/Makefile       | 34 +++++++++++++++++-----------------
- xen/common/Makefile         |  2 +-
- xen/test/livepatch/Makefile | 12 ++++++------
- xen/xsm/flask/Makefile      |  2 +-
- 7 files changed, 37 insertions(+), 32 deletions(-)
+ xen/Makefile                | 2 +-
+ xen/arch/arm/Makefile       | 1 -
+ xen/arch/x86/Makefile       | 5 ++---
+ xen/test/livepatch/Makefile | 2 +-
+ xen/xsm/flask/Makefile      | 2 +-
+ 5 files changed, 5 insertions(+), 7 deletions(-)
 
 diff --git a/xen/Makefile b/xen/Makefile
-index 4c1dd9ce2ea1..36a64118007b 100644
+index 28854d6cb29f..950bee10ba38 100644
 --- a/xen/Makefile
 +++ b/xen/Makefile
-@@ -135,6 +135,11 @@ endif
- 
- export quiet Q KBUILD_VERBOSE
- 
-+abs_objtree := $(CURDIR)
-+abs_srctree := $(CURDIR)
-+
-+export abs_srctree abs_objtree
-+
- # To make sure we do not include .config for any of the *config targets
- # catch them early, and hand them over to tools/kconfig/Makefile
- 
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 6877fcc2d6d8..fae6b8918019 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -8,7 +8,7 @@ src := $(obj)
- PHONY := __build
- __build:
- 
---include $(BASEDIR)/include/config/auto.conf
-+-include $(objtree)/include/config/auto.conf
- 
- include $(XEN_ROOT)/Config.mk
+@@ -410,7 +410,7 @@ _clean:
+ 		-o -name ".*.o.tmp" -o -name "*~" -o -name "core" \
+ 		-o -name '*.lex.c' -o -name '*.tab.[ch]' \
+ 		-o -name "*.gcno" -o -name ".*.cmd" -o -name "lib.a" \) -exec rm -f {} \;
+-	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
++	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map
+ 	rm -f asm-offsets.s arch/*/include/asm/asm-offsets.h
+ 	rm -f .banner include/xen/compile.h
  
 diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index e6eff291c5e5..774648d6296e 100644
+index a3204d22d17b..e6eff291c5e5 100644
 --- a/xen/arch/arm/Makefile
 +++ b/xen/arch/arm/Makefile
-@@ -88,21 +88,21 @@ ifeq ($(CONFIG_ARM_64),y)
- 	ln -sf $(@F) $@.efi
- endif
- 
--$(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
-+$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
--	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
-+	    $(objtree)/common/symbols-dummy.o -o $(@D)/.$(@F).0
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
--		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
-+		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
- 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
- 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
--		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
-+		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
- 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
- 	    $(@D)/.$(@F).1.o -o $@
- 	$(NM) -pa --format=sysv $(@D)/$(@F) \
--		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort \
-+		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
- 		>$(@D)/$(@F).map
- 	rm -f $(@D)/.$(@F).[0-9]*
- 
-@@ -117,4 +117,4 @@ $(obj)/dtb.o: $(patsubst "%",%,$(CONFIG_DTB_FILE))
- .PHONY: clean
+@@ -118,4 +118,3 @@ $(obj)/dtb.o: $(patsubst "%",%,$(CONFIG_DTB_FILE))
  clean::
  	rm -f $(obj)/xen.lds
--	rm -f $(BASEDIR)/.xen-syms.[0-9]*
-+	rm -f $(abs_objtree)/.xen-syms.[0-9]*
+ 	rm -f $(BASEDIR)/.xen-syms.[0-9]*
+-	rm -f $(TARGET).efi
 diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index 4ea8ade7202c..85c44c69ff5a 100644
+index 1ef2536ece26..8d789d25a3ff 100644
 --- a/xen/arch/x86/Makefile
 +++ b/xen/arch/x86/Makefile
-@@ -92,8 +92,8 @@ ifneq ($(CONFIG_HVM),y)
- $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
- endif
+@@ -261,9 +261,8 @@ $(obj)/efi/mkreloc: $(src)/efi/mkreloc.c
  
--efi-y := $(shell if [ ! -r $(BASEDIR)/include/xen/compile.h -o \
--                      -O $(BASEDIR)/include/xen/compile.h ]; then \
-+efi-y := $(shell if [ ! -r $(objtree)/include/xen/compile.h -o \
-+                      -O $(objtree)/include/xen/compile.h ]; then \
-                          echo '$(TARGET).efi'; fi) \
-          $(space)
- efi-$(CONFIG_PV_SHIM_EXCLUSIVE) :=
-@@ -133,23 +133,23 @@ ifneq ($(efi-y),)
- CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
- endif # $(efi-y)
- 
--$(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
-+$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
--	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
-+	    $(objtree)/common/symbols-dummy.o -o $(@D)/.$(@F).0
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
--		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort \
-+		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
- 		>$(@D)/.$(@F).0.S
- 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
- 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
--		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
-+		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
- 		>$(@D)/.$(@F).1.S
- 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
- 	    $(@D)/.$(@F).1.o -o $@
- 	$(NM) -pa --format=sysv $(@D)/$(@F) \
--		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort \
-+		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
- 		>$(@D)/$(@F).map
- 	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
- 
-@@ -199,28 +199,28 @@ note_file_option ?= $(note_file)
- 
- ifeq ($(XEN_BUILD_PE),y)
- extra-y += efi.lds
--$(TARGET).efi: $(BASEDIR)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
-+$(TARGET).efi: $(objtree)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
- ifeq ($(CONFIG_DEBUG_INFO),y)
- 	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),echo,:) "Will strip debug info from $(@F)"
- endif
- 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
- 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< $(relocs-dummy) \
--	                $(BASEDIR)/common/symbols-dummy.o $(note_file_option) -o $(@D)/.$(@F).$(base).0 &&) :
-+	                $(objtree)/common/symbols-dummy.o $(note_file_option) -o $(@D)/.$(@F).$(base).0 &&) :
- 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).0) >$(@D)/.$(@F).0r.S
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).0 \
--		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
-+		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
- 	$(MAKE) $(build)=$(@D) .$(@F).0r.o .$(@F).0s.o
- 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
- 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< \
- 	                $(@D)/.$(@F).0r.o $(@D)/.$(@F).0s.o $(note_file_option) -o $(@D)/.$(@F).$(base).1 &&) :
- 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).1) >$(@D)/.$(@F).1r.S
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).1 \
--		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
-+		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
- 	$(MAKE) $(build)=$(@D) .$(@F).1r.o .$(@F).1s.o
- 	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds -N $< \
- 	                $(@D)/.$(@F).1r.o $(@D)/.$(@F).1s.o $(note_file_option) -o $@
- 	$(NM) -pa --format=sysv $(@D)/$(@F) \
--		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
-+		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
- 	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
- else
- $(TARGET).efi: FORCE
-@@ -232,11 +232,11 @@ endif
- $(obj)/efi/buildid.o $(obj)/efi/relocs-dummy.o: ;
- 
- .PHONY: include
--include: $(BASEDIR)/arch/x86/include/asm/asm-macros.h
-+include: $(objtree)/arch/x86/include/asm/asm-macros.h
- 
- $(obj)/asm-macros.i: CFLAGS-y += -D__ASSEMBLY__ -P
- 
--$(BASEDIR)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefile
-+$(objtree)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefile
- 	$(call filechk,asm-macros.h)
- 
- define filechk_asm-macros.h
-@@ -260,7 +260,7 @@ $(obj)/xen.lds $(obj)/efi.lds: $(src)/xen.lds.S FORCE
  .PHONY: clean
  clean::
- 	rm -f *.lds
--	rm -f asm-macros.i $(BASEDIR)/arch/x86/include/asm/asm-macros.*
--	rm -f $(BASEDIR)/.xen-syms.[0-9]* $(BASEDIR)/.xen.elf32
--	rm -f $(BASEDIR)/.xen.efi.[0-9]* efi/*.efi
-+	rm -f asm-macros.i $(abs_objtree)/arch/x86/include/asm/asm-macros.*
-+	rm -f $(abs_objtree)/.xen-syms.[0-9]* $(abs_objtree)/.xen.elf32
-+	rm -f $(abs_objtree)/.xen.efi.[0-9]* efi/*.efi
+-	rm -f *.lds boot/*.o boot/*~ boot/core boot/mkelf32
++	rm -f *.lds boot/mkelf32
+ 	rm -f asm-macros.i $(BASEDIR)/arch/x86/include/asm/asm-macros.*
+-	rm -f $(BASEDIR)/.xen-syms.[0-9]* boot/.*.d $(BASEDIR)/.xen.elf32
++	rm -f $(BASEDIR)/.xen-syms.[0-9]* $(BASEDIR)/.xen.elf32
+ 	rm -f $(BASEDIR)/.xen.efi.[0-9]* efi/*.efi efi/mkreloc
  	rm -f boot/cmdline.S boot/reloc.S boot/*.lnk boot/*.bin
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index ca839118e4d1..8771c2775efb 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -74,7 +74,7 @@ obj-$(CONFIG_UBSAN) += ubsan/
- obj-$(CONFIG_NEEDS_LIBELF) += libelf/
- obj-$(CONFIG_HAS_DEVICE_TREE) += libfdt/
- 
--CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(BASEDIR)/)$(KCONFIG_CONFIG)
-+CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(objtree)/)$(KCONFIG_CONFIG)
- $(obj)/config.gz: $(CONF_FILE)
- 	gzip -n -c $< >$@
- 
+-	rm -f note.o
 diff --git a/xen/test/livepatch/Makefile b/xen/test/livepatch/Makefile
-index dee5fd78c188..008e89fc9a47 100644
+index 52ee58a08c5f..dee5fd78c188 100644
 --- a/xen/test/livepatch/Makefile
 +++ b/xen/test/livepatch/Makefile
-@@ -22,9 +22,9 @@ $(obj)/xen_hello_world.o: $(obj)/config.h
- $(obj)/config.h: $(obj)/xen_hello_world_func.o
- 	(set -e; \
- 	 echo "#define NEW_CODE_SZ $(call CODE_SZ,$<,xen_hello_world)"; \
--	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)"; \
--	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)"; \
--	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)") > $@
-+	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(objtree)/xen-syms,xen_minor_version)"; \
-+	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(objtree)/xen-syms,xen_minor_version)"; \
-+	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(objtree)/xen-syms,xen_extra_version)") > $@
+@@ -162,4 +162,4 @@ uninstall:
  
- $(obj)/modinfo.o:
- 	(set -e; \
-@@ -42,7 +42,7 @@ $(obj)/modinfo.o:
- # not be built (it is for EFI builds), and that we do not have
- # the note.o.bin to muck with (as it gets deleted)
- #
--$(obj)/note.o: $(BASEDIR)/xen-syms
-+$(obj)/note.o: $(objtree)/xen-syms
- 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
- 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
- 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
-@@ -52,7 +52,7 @@ $(obj)/note.o: $(BASEDIR)/xen-syms
- # Append .livepatch.xen_depends section
- # with Xen build-id derived from xen-syms.
- #
--$(obj)/xen_note.o: $(BASEDIR)/xen-syms
-+$(obj)/xen_note.o: $(objtree)/xen-syms
- 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
- 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
- 		   --rename-section=.data=.livepatch.xen_depends,alloc,load,readonly,data,contents -S $@.bin $@
-@@ -125,7 +125,7 @@ xen_action_hooks_norevert-objs := xen_action_hooks_marker.o xen_hello_world_func
- 
- EXPECT_BYTES_COUNT := 8
- CODE_GET_EXPECT=$(shell $(OBJDUMP) -d --insn-width=1 $(1) | sed -n -e '/<'$(2)'>:$$/,/^$$/ p' | tail -n +2 | head -n $(EXPECT_BYTES_COUNT) | awk '{$$0=$$2; printf "%s", substr($$0,length-1)}' | sed 's/.\{2\}/0x&,/g' | sed 's/^/{/;s/,$$/}/g')
--$(obj)/expect_config.h: $(BASEDIR)/xen-syms
-+$(obj)/expect_config.h: $(objtree)/xen-syms
- 	(set -e; \
- 	 echo "#define EXPECT_BYTES $(call CODE_GET_EXPECT,$<,xen_extra_version)"; \
-          echo "#define EXPECT_BYTES_COUNT $(EXPECT_BYTES_COUNT)") > $@
+ .PHONY: clean
+ clean::
+-	rm -f *.o .*.o.d *.livepatch config.h expect_config.h
++	rm -f *.livepatch config.h expect_config.h
 diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
-index 8d18c7d4ae6f..bff36aa97918 100644
+index 57190ff6c8ad..8d18c7d4ae6f 100644
 --- a/xen/xsm/flask/Makefile
 +++ b/xen/xsm/flask/Makefile
-@@ -40,7 +40,7 @@ $(obj)/flask-policy.S: $(BASEDIR)/tools/binfile FORCE
- 	$(call if_changed,binfile,$(obj)/policy.bin xsm_flask_init_policy)
- targets += flask-policy.S
+@@ -49,4 +49,4 @@ $(obj)/policy.bin: FORCE
  
--FLASK_BUILD_DIR := $(BASEDIR)/$(obj)
-+FLASK_BUILD_DIR := $(abs_objtree)/$(obj)
- POLICY_SRC := $(FLASK_BUILD_DIR)/xenpolicy-$(XEN_FULLVERSION)
- 
- $(obj)/policy.bin: FORCE
+ .PHONY: clean
+ clean::
+-	rm -f $(ALL_H_FILES) *.o $(DEPS_RM) policy.* $(POLICY_SRC) flask-policy.S
++	rm -f $(ALL_H_FILES) policy.* $(POLICY_SRC) flask-policy.S
 -- 
 Anthony PERARD
 
