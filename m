@@ -5,52 +5,53 @@ X-Spam-Level:
 X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C686BC43214
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0122C4320A
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 709A0611CB
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 709A0611CB
+	by mail.kernel.org (Postfix) with ESMTPS id 5182861262
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5182861262
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170855.311823 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170856.311834 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mITfG-0003IY-6S; Tue, 24 Aug 2021 10:28:18 +0000
+	id 1mITfJ-0003bt-Fc; Tue, 24 Aug 2021 10:28:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170855.311823; Tue, 24 Aug 2021 10:28:18 +0000
+Received: by outflank-mailman (output) from mailman id 170856.311834; Tue, 24 Aug 2021 10:28:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mITfG-0003IN-1I; Tue, 24 Aug 2021 10:28:18 +0000
-Received: by outflank-mailman (input) for mailman id 170855;
- Tue, 24 Aug 2021 10:28:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mITfJ-0003bh-BL; Tue, 24 Aug 2021 10:28:21 +0000
+Received: by outflank-mailman (input) for mailman id 170856;
+ Tue, 24 Aug 2021 10:28:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=3Uw6=NP=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mITfE-00031l-4Y
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:28:16 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 44d69b1b-7280-4e2d-a16d-190dcef9212e;
+ id 1mITfI-00031f-7P
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:28:20 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fcdf2e9c-04c5-11ec-a8c4-12813bfff9fa;
  Tue, 24 Aug 2021 10:28:14 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id EF470220AC;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id A1B482004F;
  Tue, 24 Aug 2021 10:28:13 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id AAFBB136DD;
+ by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 57BEF136DD;
  Tue, 24 Aug 2021 10:28:13 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id 6BJGKL3JJGG8DwAAGKfGzw
+ by imap1.suse-dmz.suse.de with ESMTPSA id SPvuE73JJGG8DwAAGKfGzw
  (envelope-from <jgross@suse.com>); Tue, 24 Aug 2021 10:28:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -63,16 +64,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 44d69b1b-7280-4e2d-a16d-190dcef9212e
+X-Inumbo-ID: fcdf2e9c-04c5-11ec-a8c4-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1629800893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xzRnNXEpYNK6Fr5aUl3tWJGBJDdvhYuHIaqCmKzznYU=;
-	b=Q+8gdbEVImSGds7mmPaM4UehS+aTvl6Jy+7iX7DxXXhxkZgPpS4IOcdZd25ZzMRAmjW9kb
-	n32wpEB0gsPm6SzdwQNp6wxpOyyxsoznmynuAgqxBufivgjhWLcd+aRn5E+MizuAVJZgcV
-	QPa5WwxRjK/QKCMDzUCCm08y/G8KCEU=
+	bh=IbajY+E/j5QwN8ylzKx9q6TBPEhkc8yuc65ahR0PtvI=;
+	b=mtDdJM9krc0OORygAchXMQ1LUti7fTdnE0i5Bpye5LlNYakl02v56oaP3Wr3xyP9+Rr+gZ
+	HYespA8yyUahVvKBf97VhQx96d+Ic56qZ/wmmuRcW28YMSIMSD76oguqKSoZxcM4pQD4B8
+	2+uI+Ll40TQO7J+fbs6O3W9G6E+VGtc=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	netdev@vger.kernel.org,
@@ -81,220 +82,144 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH v2 2/4] xen/netfront: don't read data from request on the ring page
-Date: Tue, 24 Aug 2021 12:28:07 +0200
-Message-Id: <20210824102809.26370-3-jgross@suse.com>
+	Jakub Kicinski <kuba@kernel.org>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2 1/4] xen/netfront: read response from backend only once
+Date: Tue, 24 Aug 2021 12:28:06 +0200
+Message-Id: <20210824102809.26370-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210824102809.26370-1-jgross@suse.com>
 References: <20210824102809.26370-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In order to avoid a malicious backend being able to influence the local
-processing of a request build the request locally first and then copy
-it to the ring page. Any reading from the request influencing the
-processing in the frontend needs to be done on the local instance.
+In order to avoid problems in case the backend is modifying a response
+on the ring page while the frontend has already seen it, just read the
+response into a local buffer in one go and then operate on that buffer
+only.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 V2:
-- drop local tx variable (Jan Beulich)
-- fix oversight of reading value from ring page (Jan Beulich)
+- use direct structure assignment instead of memcpy() (Jan Beulich)
 ---
- drivers/net/xen-netfront.c | 86 +++++++++++++++++++-------------------
- 1 file changed, 42 insertions(+), 44 deletions(-)
+ drivers/net/xen-netfront.c | 38 +++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
 
 diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index 003cdf2ffc92..714fe9d2c534 100644
+index 44275908d61a..003cdf2ffc92 100644
 --- a/drivers/net/xen-netfront.c
 +++ b/drivers/net/xen-netfront.c
-@@ -435,7 +435,8 @@ struct xennet_gnttab_make_txreq {
- 	struct netfront_queue *queue;
- 	struct sk_buff *skb;
- 	struct page *page;
--	struct xen_netif_tx_request *tx; /* Last request */
-+	struct xen_netif_tx_request *tx;      /* Last request on ring page */
-+	struct xen_netif_tx_request tx_local; /* Last request local copy*/
- 	unsigned int size;
- };
+@@ -399,13 +399,13 @@ static void xennet_tx_buf_gc(struct netfront_queue *queue)
+ 		rmb(); /* Ensure we see responses up to 'rp'. */
  
-@@ -463,30 +464,27 @@ static void xennet_tx_setup_grant(unsigned long gfn, unsigned int offset,
- 	queue->grant_tx_page[id] = page;
- 	queue->grant_tx_ref[id] = ref;
+ 		for (cons = queue->tx.rsp_cons; cons != prod; cons++) {
+-			struct xen_netif_tx_response *txrsp;
++			struct xen_netif_tx_response txrsp;
  
--	tx->id = id;
--	tx->gref = ref;
--	tx->offset = offset;
--	tx->size = len;
--	tx->flags = 0;
-+	info->tx_local.id = id;
-+	info->tx_local.gref = ref;
-+	info->tx_local.offset = offset;
-+	info->tx_local.size = len;
-+	info->tx_local.flags = 0;
-+
-+	*tx = info->tx_local;
+-			txrsp = RING_GET_RESPONSE(&queue->tx, cons);
+-			if (txrsp->status == XEN_NETIF_RSP_NULL)
++			RING_COPY_RESPONSE(&queue->tx, cons, &txrsp);
++			if (txrsp.status == XEN_NETIF_RSP_NULL)
+ 				continue;
  
- 	info->tx = tx;
--	info->size += tx->size;
-+	info->size += info->tx_local.size;
- }
+-			id  = txrsp->id;
++			id  = txrsp.id;
+ 			skb = queue->tx_skbs[id].skb;
+ 			if (unlikely(gnttab_query_foreign_access(
+ 				queue->grant_tx_ref[id]) != 0)) {
+@@ -814,7 +814,7 @@ static int xennet_get_extras(struct netfront_queue *queue,
+ 			     RING_IDX rp)
  
- static struct xen_netif_tx_request *xennet_make_first_txreq(
--	struct netfront_queue *queue, struct sk_buff *skb,
--	struct page *page, unsigned int offset, unsigned int len)
-+	struct xennet_gnttab_make_txreq *info,
-+	unsigned int offset, unsigned int len)
  {
--	struct xennet_gnttab_make_txreq info = {
--		.queue = queue,
--		.skb = skb,
--		.page = page,
--		.size = 0,
--	};
-+	info->size = 0;
+-	struct xen_netif_extra_info *extra;
++	struct xen_netif_extra_info extra;
+ 	struct device *dev = &queue->info->netdev->dev;
+ 	RING_IDX cons = queue->rx.rsp_cons;
+ 	int err = 0;
+@@ -830,24 +830,22 @@ static int xennet_get_extras(struct netfront_queue *queue,
+ 			break;
+ 		}
  
--	gnttab_for_one_grant(page, offset, len, xennet_tx_setup_grant, &info);
-+	gnttab_for_one_grant(info->page, offset, len, xennet_tx_setup_grant, info);
+-		extra = (struct xen_netif_extra_info *)
+-			RING_GET_RESPONSE(&queue->rx, ++cons);
++		RING_COPY_RESPONSE(&queue->rx, ++cons, &extra);
  
--	return info.tx;
-+	return info->tx;
- }
+-		if (unlikely(!extra->type ||
+-			     extra->type >= XEN_NETIF_EXTRA_TYPE_MAX)) {
++		if (unlikely(!extra.type ||
++			     extra.type >= XEN_NETIF_EXTRA_TYPE_MAX)) {
+ 			if (net_ratelimit())
+ 				dev_warn(dev, "Invalid extra type: %d\n",
+-					extra->type);
++					 extra.type);
+ 			err = -EINVAL;
+ 		} else {
+-			memcpy(&extras[extra->type - 1], extra,
+-			       sizeof(*extra));
++			extras[extra.type - 1] = extra;
+ 		}
  
- static void xennet_make_one_txreq(unsigned long gfn, unsigned int offset,
-@@ -499,35 +497,27 @@ static void xennet_make_one_txreq(unsigned long gfn, unsigned int offset,
- 	xennet_tx_setup_grant(gfn, offset, len, data);
- }
+ 		skb = xennet_get_rx_skb(queue, cons);
+ 		ref = xennet_get_rx_ref(queue, cons);
+ 		xennet_move_rx_slot(queue, skb, ref);
+-	} while (extra->flags & XEN_NETIF_EXTRA_FLAG_MORE);
++	} while (extra.flags & XEN_NETIF_EXTRA_FLAG_MORE);
  
--static struct xen_netif_tx_request *xennet_make_txreqs(
--	struct netfront_queue *queue, struct xen_netif_tx_request *tx,
--	struct sk_buff *skb, struct page *page,
-+static void xennet_make_txreqs(
-+	struct xennet_gnttab_make_txreq *info,
-+	struct page *page,
- 	unsigned int offset, unsigned int len)
+ 	queue->rx.rsp_cons = cons;
+ 	return err;
+@@ -905,7 +903,7 @@ static int xennet_get_responses(struct netfront_queue *queue,
+ 				struct sk_buff_head *list,
+ 				bool *need_xdp_flush)
  {
--	struct xennet_gnttab_make_txreq info = {
--		.queue = queue,
--		.skb = skb,
--		.tx = tx,
--	};
--
- 	/* Skip unused frames from start of page */
- 	page += offset >> PAGE_SHIFT;
- 	offset &= ~PAGE_MASK;
+-	struct xen_netif_rx_response *rx = &rinfo->rx;
++	struct xen_netif_rx_response *rx = &rinfo->rx, rx_local;
+ 	int max = XEN_NETIF_NR_SLOTS_MIN + (rx->status <= RX_COPY_THRESHOLD);
+ 	RING_IDX cons = queue->rx.rsp_cons;
+ 	struct sk_buff *skb = xennet_get_rx_skb(queue, cons);
+@@ -989,7 +987,8 @@ static int xennet_get_responses(struct netfront_queue *queue,
+ 			break;
+ 		}
  
- 	while (len) {
--		info.page = page;
--		info.size = 0;
-+		info->page = page;
-+		info->size = 0;
- 
- 		gnttab_foreach_grant_in_range(page, offset, len,
- 					      xennet_make_one_txreq,
--					      &info);
-+					      info);
- 
- 		page++;
- 		offset = 0;
--		len -= info.size;
-+		len -= info->size;
- 	}
--
--	return info.tx;
- }
- 
- /*
-@@ -580,10 +570,14 @@ static int xennet_xdp_xmit_one(struct net_device *dev,
- {
- 	struct netfront_info *np = netdev_priv(dev);
- 	struct netfront_stats *tx_stats = this_cpu_ptr(np->tx_stats);
-+	struct xennet_gnttab_make_txreq info = {
-+		.queue = queue,
-+		.skb = NULL,
-+		.page = virt_to_page(xdpf->data),
-+	};
- 	int notify;
- 
--	xennet_make_first_txreq(queue, NULL,
--				virt_to_page(xdpf->data),
-+	xennet_make_first_txreq(&info,
- 				offset_in_page(xdpf->data),
- 				xdpf->len);
- 
-@@ -638,7 +632,7 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
- {
- 	struct netfront_info *np = netdev_priv(dev);
- 	struct netfront_stats *tx_stats = this_cpu_ptr(np->tx_stats);
--	struct xen_netif_tx_request *tx, *first_tx;
-+	struct xen_netif_tx_request *first_tx;
- 	unsigned int i;
- 	int notify;
- 	int slots;
-@@ -647,6 +641,7 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
- 	unsigned int len;
- 	unsigned long flags;
- 	struct netfront_queue *queue = NULL;
-+	struct xennet_gnttab_make_txreq info = { };
- 	unsigned int num_queues = dev->real_num_tx_queues;
- 	u16 queue_index;
+-		rx = RING_GET_RESPONSE(&queue->rx, cons + slots);
++		RING_COPY_RESPONSE(&queue->rx, cons + slots, &rx_local);
++		rx = &rx_local;
+ 		skb = xennet_get_rx_skb(queue, cons + slots);
+ 		ref = xennet_get_rx_ref(queue, cons + slots);
+ 		slots++;
+@@ -1044,10 +1043,11 @@ static int xennet_fill_frags(struct netfront_queue *queue,
  	struct sk_buff *nskb;
-@@ -704,21 +699,24 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
- 	}
  
- 	/* First request for the linear area. */
--	first_tx = tx = xennet_make_first_txreq(queue, skb,
--						page, offset, len);
--	offset += tx->size;
-+	info.queue = queue;
-+	info.skb = skb;
-+	info.page = page;
-+	first_tx = xennet_make_first_txreq(&info, offset, len);
-+	offset += info.tx_local.size;
- 	if (offset == PAGE_SIZE) {
- 		page++;
- 		offset = 0;
- 	}
--	len -= tx->size;
-+	len -= info.tx_local.size;
+ 	while ((nskb = __skb_dequeue(list))) {
+-		struct xen_netif_rx_response *rx =
+-			RING_GET_RESPONSE(&queue->rx, ++cons);
++		struct xen_netif_rx_response rx;
+ 		skb_frag_t *nfrag = &skb_shinfo(nskb)->frags[0];
  
- 	if (skb->ip_summed == CHECKSUM_PARTIAL)
- 		/* local packet? */
--		tx->flags |= XEN_NETTXF_csum_blank | XEN_NETTXF_data_validated;
-+		first_tx->flags |= XEN_NETTXF_csum_blank |
-+				   XEN_NETTXF_data_validated;
- 	else if (skb->ip_summed == CHECKSUM_UNNECESSARY)
- 		/* remote but checksummed. */
--		tx->flags |= XEN_NETTXF_data_validated;
-+		first_tx->flags |= XEN_NETTXF_data_validated;
++		RING_COPY_RESPONSE(&queue->rx, ++cons, &rx);
++
+ 		if (skb_shinfo(skb)->nr_frags == MAX_SKB_FRAGS) {
+ 			unsigned int pull_to = NETFRONT_SKB_CB(skb)->pull_to;
  
- 	/* Optional extra info after the first request. */
- 	if (skb_shinfo(skb)->gso_size) {
-@@ -727,7 +725,7 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
- 		gso = (struct xen_netif_extra_info *)
- 			RING_GET_REQUEST(&queue->tx, queue->tx.req_prod_pvt++);
+@@ -1062,7 +1062,7 @@ static int xennet_fill_frags(struct netfront_queue *queue,
  
--		tx->flags |= XEN_NETTXF_extra_info;
-+		first_tx->flags |= XEN_NETTXF_extra_info;
+ 		skb_add_rx_frag(skb, skb_shinfo(skb)->nr_frags,
+ 				skb_frag_page(nfrag),
+-				rx->offset, rx->status, PAGE_SIZE);
++				rx.offset, rx.status, PAGE_SIZE);
  
- 		gso->u.gso.size = skb_shinfo(skb)->gso_size;
- 		gso->u.gso.type = (skb_shinfo(skb)->gso_type & SKB_GSO_TCPV6) ?
-@@ -741,12 +739,12 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
- 	}
+ 		skb_shinfo(nskb)->nr_frags = 0;
+ 		kfree_skb(nskb);
+@@ -1161,7 +1161,7 @@ static int xennet_poll(struct napi_struct *napi, int budget)
+ 	i = queue->rx.rsp_cons;
+ 	work_done = 0;
+ 	while ((i != rp) && (work_done < budget)) {
+-		memcpy(rx, RING_GET_RESPONSE(&queue->rx, i), sizeof(*rx));
++		RING_COPY_RESPONSE(&queue->rx, i, rx);
+ 		memset(extras, 0, sizeof(rinfo.extras));
  
- 	/* Requests for the rest of the linear area. */
--	tx = xennet_make_txreqs(queue, tx, skb, page, offset, len);
-+	xennet_make_txreqs(&info, page, offset, len);
- 
- 	/* Requests for all the frags. */
- 	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
- 		skb_frag_t *frag = &skb_shinfo(skb)->frags[i];
--		tx = xennet_make_txreqs(queue, tx, skb, skb_frag_page(frag),
-+		xennet_make_txreqs(&info, skb_frag_page(frag),
- 					skb_frag_off(frag),
- 					skb_frag_size(frag));
- 	}
+ 		err = xennet_get_responses(queue, &rinfo, rp, &tmpq,
 -- 
 2.26.2
 
