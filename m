@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4444C4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3260CC432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B85EF61357
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B85EF61357
+	by mail.kernel.org (Postfix) with ESMTPS id 05CC06135F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:02:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 05CC06135F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.171077.312377 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.171076.312372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUCJ-00019Q-Mf; Tue, 24 Aug 2021 11:02:27 +0000
+	id 1mIUCI-00013w-Tp; Tue, 24 Aug 2021 11:02:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 171077.312377; Tue, 24 Aug 2021 11:02:27 +0000
+Received: by outflank-mailman (output) from mailman id 171076.312372; Tue, 24 Aug 2021 11:02:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUCJ-00017t-8Z; Tue, 24 Aug 2021 11:02:27 +0000
-Received: by outflank-mailman (input) for mailman id 171077;
+	id 1mIUCI-00013g-PU; Tue, 24 Aug 2021 11:02:26 +0000
+Received: by outflank-mailman (input) for mailman id 171076;
  Tue, 24 Aug 2021 11:02:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU3j-0001EC-Da
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:53:35 +0000
+ id 1mIU4c-0001EC-FE
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:54:30 +0000
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7f3296c2-4a59-43ad-a4bf-4b8d046730d0;
- Tue, 24 Aug 2021 10:52:00 +0000 (UTC)
+ id 7ab1cb7c-51bc-48ca-a536-68a6494dc77a;
+ Tue, 24 Aug 2021 10:52:28 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,42 +48,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f3296c2-4a59-43ad-a4bf-4b8d046730d0
+X-Inumbo-ID: 7ab1cb7c-51bc-48ca-a536-68a6494dc77a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802319;
+  d=citrix.com; s=securemail; t=1629802347;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=LKnefkuuFQC10LfXqSSu32yIG5VWHpcMy+rZtD5GY5M=;
-  b=eEwAx4v1ZGiEb9pm3DxVtA7a2E1oZ8sqvm2mzMCSepGZemJFmbtgMBJ3
-   z7DTIjO1zeAchluBKQWHemO/LMAEuiWT5ioFr3nQgCNX/0mQgl1rc0xyN
-   R6AZPFPqofLkj/9fpQ4iX6fkkhcpn+sS7on+ZDdGhVO59SaSU//gMVFoR
-   k=;
+  bh=QuqoIfeDw8eF+DGgSYO4xUOtOIqvl/XeL88YQx7aEos=;
+  b=S4V6X66ZAg8Jn0XYmLQeVsIDGVXLCm45J9GTtuwJNE7QSgQm3aY0EYHO
+   N7UI9mGpbSrgaDDQ4x8jK6OkC1X1C20OvnlcBw1Le8YhOYkhJMn1KbXrr
+   9rFnun0+cuM1rDmKKFkxG0+80lmMRM57DMI19vk9M1+w9jCAk/rp8XQSh
+   0=;
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: hrtj/xVk7OBG1Xzg12jeuHsxK9i1d5xzj3+P6ioyBFUBqzTemmlde9WUQb/eFXhjQg5X06y0bi
- EopKUQOBhRor8ZclJLs2ZDvzs9lRpYUZESt5X01z7CmkcA+x3FjsrVjVU/205gsp4hkRzfftiN
- vlLgZ5rZ6n93g2ZKjj/bdGT03NxwNMXZjRxajznNJUurdaaq/LXFae1s0N1TpTryUST9fexErr
- 2Spxps7QL9qKca6knT1ZTJV+YjSLC86S8XKOGqVPtsMWi9yg9gdHy7jFMxWiXHfkdD7UkL9Kvs
- d7nWuQSPQimzGQRPzPOP5EmC
+IronPort-SDR: vYYem8iODwV1MlhRS+TqWRAqy7e5fGxR41KiW/A6v4dHTHPmI7SD8+APb7NnHFGdhoek1K0fEF
+ Vu4Q3Kf739eG61IZ1r/sYCvW3TmO0NXdgy/qnM/P6VNV8AnJshCTJGgeoZcHTcGj1h6a5aTqv2
+ hAwNu95mBU488IIdQHP8MWVB4rQmuyikb0wyj1TfHBqAZKZ2m0p8YvPm21oKx36p9qEosX9iUS
+ WadE4v6unyh0O8vr9src63Ipfz6HD3YfQfXiwCXTvVT2Gq+BpB51T/QnLrTf/7uzYppIAMqbOT
+ Vtk992vpXswjk5JH3JQMIYvI
 X-SBRS: 5.1
-X-MesageID: 52875493
+X-MesageID: 52875527
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:poDF1q2GPhQGKok5wq2zgwqjBLQkLtp133Aq2lEZdPRUGvb2qy
- nIpoV96faUskdpZJhOo7G90cW7LE80sKQFg7X5Xo3SODUO2lHJEGgK1+KLqFfd8m/Fh4tgPM
- 9bAs5D4bbLY2SS4/yX3ODBKadC/OW6
+IronPort-HdrOrdr: A9a23:+8AyFKAxgx6APQrlHelW55DYdb4zR+YMi2TDt3oddfWaSKylfq
+ GV7ZAmPHrP4gr5N0tOpTntAse9qBDnhPtICOsqTNSftWDd0QPFEGgL1+DfKlbbak/DH4BmtJ
+ uJc8JFeaDN5VoRt7eH3OFveexQv+Vu88qT9JnjJ28Gd3AMV0n5hT0JcTpyFCdNNW97LKt8Lr
+ WwzOxdqQGtfHwGB/7LfEXsD4D41qT2fIuNW29/OyIa
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="52875493"
+   d="scan'208";a="52875527"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [XEN PATCH v7 28/51] build: rename __LINKER__ to LINKER_SCRIPT
-Date: Tue, 24 Aug 2021 11:50:15 +0100
-Message-ID: <20210824105038.1257926-29-anthony.perard@citrix.com>
+	<wl@xen.org>
+Subject: [XEN PATCH v7 48/51] build: Rework "headers*.chk" prerequisite in include/
+Date: Tue, 24 Aug 2021 11:50:35 +0100
+Message-ID: <20210824105038.1257926-49-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -91,42 +92,50 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-For two reasons: this macro is used to generate a "linker script" and
-is not by the linker, and name starting with an underscore '_' are
-supposed to be reserved, so better avoid them when not needed.
+Listing public headers when out-of-tree build are involved becomes
+more annoying where every path to every headers needs to start with
+"$(srctree)/$(src)", or $(wildcard ) will not work. This means more
+repetition.
+
+This patch attempt to reduce the amount of duplication and make better
+use of make's meta programming capability. The filters are now listed
+in a variable and don't have to repeat the path to the headers files
+as this is added later as needed.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Rules.mk                      | 2 +-
- xen/arch/arm/include/asm/config.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ xen/include/Makefile | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 9b8415160649..a62c761be8d1 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -257,7 +257,7 @@ $(obj)/%.s: $(src)/%.S FORCE
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index c3172f6636be..4e64a31ecab3 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -78,10 +78,21 @@ ifeq ($(XEN_TARGET_ARCH),$(XEN_COMPILE_ARCH))
  
- # Linker scripts, .lds.S -> .lds
- quiet_cmd_cpp_lds_S = LDS     $@
--cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -D__LINKER__ -MQ $@ -o $@ $<
-+cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -DLINKER_SCRIPT -MQ $@ -o $@ $<
+ all: $(obj)/headers.chk $(obj)/headers99.chk $(obj)/headers++.chk
  
- targets := $(filter-out $(PHONY), $(targets))
+-PUBLIC_HEADERS := $(filter-out $(src)/public/arch-% $(src)/public/dom0_ops.h, $(wildcard $(src)/public/*.h $(src)/public/*/*.h))
++hdrs-path := $(srctree)/$(src)/public
  
-diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
-index c7b77912013e..2aced0bc3b8b 100644
---- a/xen/arch/arm/include/asm/config.h
-+++ b/xen/arch/arm/include/asm/config.h
-@@ -191,7 +191,7 @@ extern unsigned long frametable_virt_end;
- #define watchdog_disable() ((void)0)
- #define watchdog_enable()  ((void)0)
+-PUBLIC_C99_HEADERS := $(src)/public/io/9pfs.h $(src)/public/io/pvcalls.h
+-PUBLIC_ANSI_HEADERS := $(filter-out $(src)/public/%ctl.h $(src)/public/xsm/% $(src)/public/%hvm/save.h $(PUBLIC_C99_HEADERS), $(PUBLIC_HEADERS))
++list-headers = $(wildcard $1/*.h $1/*/*.h)
++filter-headers = $(filter-out $(addprefix $(hdrs-path)/,$($1-filter)), $($1))
++
++c99-headers := io/9pfs.h io/pvcalls.h
++public-headers := $(call list-headers,$(hdrs-path))
++ansi-headers := $(public-headers)
++
++public-headers-filter := dom0_ops.h arch-%
++ansi-headers-filter := %ctl.h xsm/% %hvm/save.h $(public-headers-filter) $(c99-headers)
++
++PUBLIC_HEADERS := $(call filter-headers,public-headers)
++PUBLIC_ANSI_HEADERS := $(call filter-headers,ansi-headers)
++PUBLIC_C99_HEADERS := $(addprefix $(hdrs-path)/, $(c99-headers))
  
--#if defined(__ASSEMBLY__) && !defined(__LINKER__)
-+#if defined(__ASSEMBLY__) && !defined(LINKER_SCRIPT)
- #include <asm/asm_defns.h>
- #include <asm/macros.h>
- #endif
+ $(src)/public/io/9pfs.h-prereq := string
+ $(src)/public/io/pvcalls.h-prereq := string
 -- 
 Anthony PERARD
 
