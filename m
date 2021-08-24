@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A861C4320A
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29FF0C4338F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C8B9061247
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C8B9061247
+	by mail.kernel.org (Postfix) with ESMTPS id D9BE461214
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D9BE461214
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170972.312119 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170977.312136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBP-00054m-9M; Tue, 24 Aug 2021 11:01:31 +0000
+	id 1mIUBR-0005QF-AC; Tue, 24 Aug 2021 11:01:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170972.312119; Tue, 24 Aug 2021 11:01:31 +0000
+Received: by outflank-mailman (output) from mailman id 170977.312136; Tue, 24 Aug 2021 11:01:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBP-000543-3t; Tue, 24 Aug 2021 11:01:31 +0000
-Received: by outflank-mailman (input) for mailman id 170972;
+	id 1mIUBQ-0005Lm-Ne; Tue, 24 Aug 2021 11:01:32 +0000
+Received: by outflank-mailman (input) for mailman id 170977;
  Tue, 24 Aug 2021 11:01:30 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU4D-0003Ux-ER
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:54:05 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ id 1mIU3y-0003Ux-Dz
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:53:50 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 61415b14-04c9-11ec-a8c6-12813bfff9fa;
- Tue, 24 Aug 2021 10:52:31 +0000 (UTC)
+ id 58312edd-04c9-11ec-a8c6-12813bfff9fa;
+ Tue, 24 Aug 2021 10:52:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,39 +49,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61415b14-04c9-11ec-a8c6-12813bfff9fa
+X-Inumbo-ID: 58312edd-04c9-11ec-a8c6-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802351;
+  d=citrix.com; s=securemail; t=1629802336;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qIhqeksXTsJld6lhwEnOa5nx/YE0BWnrn6VUwRvVnk4=;
-  b=ZjW+KAJIsmAOAxLmt0dtP4h/vj0SuNM4Hf7gsC8Y3uXRXxYZFIru1glF
-   pA8sG2b81dsbNAhF8AeIZrj9spF4Zs6AbzMnEKAdewcIeHNKJIzL8BCTd
-   p9TRnfHUeuVT9aNyoVfkF44UaE5K0Bz81JSkjliahAVNq8OrrzTNGE5HS
-   M=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: fHKQ0ZvUS7+lvVLYCyJjtkAi7/fyG2TviMf6NFjK1fY3NxLxTYJ9vOMsccwVlqKUYR95fSAt/h
- u2sKMJjEM7m3wSxrRKfJB/Frc/Y3tKV4+UCRkeTTbHxOh1Ppl2cSk5JBuQBSIiyOmSM5i9uIdy
- PBuO7ZRS0UzZRbXUNNtGZD5YbHJZ+p4mQh7fJ53ndDADfeUKMkoHFVwFwhiJbPh7s8iU6xKi3m
- CSgDeAvSYOHDhpJ9B4JX2vh/hVYnyWHq6i6q1Wng6mVoJyLaptAGUbh8k8W44mu5oXadkuyujm
- K2RZsu/NdXoZzqfgEqHjGiIu
+  bh=JD+7VO3K52HwJz8EfkgwAVmchIJrhqCdmlKnQtk1bE0=;
+  b=EII+9uvLpfXGVicNq9z0JoHN5jV2UbmDKoS25kz5i5YFxWuneOaEIWff
+   jm7f0icPRg+q+fQst03VM6cXYYRYf/AZ283B8kdf5EQ+/SraUQkuEakSl
+   c+oqogak6HEifq8ecwzQrQpVSOqBrdlN3/zmhnskT5kYl9AJIKEGG0K/h
+   o=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 7t/CwgoykC3EH/Ms9CYPanVVarqk2ub3S2sjL78gsjcXbCZTQnBvoJADlt7wG2u/yoZsxm2Dgs
+ a/TWTiTPaWQXWe1K0C/5b1P9syRlSuSoVzxQP+MzkNvAg7gRUb2OobBrrgjpie6OUbY9SDH6QI
+ hVqxwz6Z+1P0Xu2nJSRB7W4Ki84FS42LQPOp8eZNKyNz/ZZPidOruYETSDDiyuIhRqwjwsdbMq
+ 9l6AAhMWsm9qHN7B4/kAArQXlELjEyb4R5kkogwiTnvylk272FOE22hsNfwGRl2iXQxejg1+7s
+ pqTxR4SpagLwQN08/p8i97oY
 X-SBRS: 5.1
-X-MesageID: 51130805
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 51540947
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:KQ+fb68kV0JJoj8PmLZuk+Fkdb1zdoMgy1knxilNoENuH/Bwxv
- rFoB1E73TJYW4qKRcdcdDpAsm9qADnhOdICOgqTPyftWbdyQ+Vxe1Zg7cKoAeQUREWlNQtsp
- uIGpIWYLGeMbEQt7eY3ODMKadE/DDxytHLuQ6x9RZQZDAvT5slwxZyCw6dHEEzbhJBH4AFGJ
- 2V4dcCjya8eFwMB/7LSkUtbqzmnZnmhZjmaRkJC1oM8w+Vlw6l77b8DlyxwgoeaTVS2r0vmF
- K13DARp5/T/c1T+CWsl1M73K4m2+cJDeEzRvBkv/JlawkETDzYIbiJFYfy+Azd69vfkGrC2O
- O82CvIef4Dpk85N1vF2yfFyk3u1i0j5GTlzkLdiXz/odbhTDZ/EMZZg5lFGyGpnXbIkesMpJ
- 6j5VjpwKa/zCmw7RjV9pzNTVVnh0C0qX0tnaoaiGFeS5IXbPtUoZYE9E1YHZ8cFGaigbpXWN
- VGHYXZ/rJbYFmaZ3fWsi1mx8GtRG06GlODTlIZssKY3jBKlDRyzlcexsYYgnAcnahNAqVs9q
- DBKOBlhbtORsgZYeZ0A/oAW9K+DijXTRfFIAupUCHa/WE8SgDwQrvMkcsIDc2RCeA1JaoJ6e
- f8uQljxBMPkmrVeLKz9YwO6RbQXWn4RijpxqhlluhEhoE=
+IronPort-HdrOrdr: A9a23:NXnpRKOKZDr4oMBcT33155DYdb4zR+YMi2TDiHoddfUFSKalfp
+ 6V98jzjSWE7gr4WBkb+exoS5PwOE80lKQFqrX5Uo3SODUO1FHHEGgA1/qp/9SDIVyYygc178
+ 4JH8dD4bbLfDtHZLPBkWyF+qEbsbu6Gc6T5Nv2/jNId0VHeqtg5wB2BkKwCUttXjRLApI/Cd
+ 61+tdHjyDIQwVaUu2LQl0+G8TTrdzCk5zrJTQcAQQ81QWIhTS0rJbnDhmj2AsEWT8n+8ZszY
+ GFqX222kyQiYD69vbu7R6R032Qoqqi9jJ3Pr3MtiHSEESotu/nXvUkZ1TIhkFMnAjm0idQrD
+ CLmWZsAy070QKqQkil5RTqwAXuyzAo9jvrzkKZm2LqpYjjSCs9ENcpv/MuTvL10TtVgDhH6t
+ M944tZjesnMTrQ2CDmo9TYXRBjkUS55XIkjO4IlnRaFY8TcqVYo4AT9F5cVM5oJlOz1Kk3VO
+ 11SM3M7vdfdl2XK3jfo2l02dSpGnA+BA2PTEQOstGclzJWgHd6xU0Fw9F3pAZIyLstD51fo+
+ jUOKVhk79DCscQcKJmHe8EBdC6D2TcKCi8RV564W6XZp3vHki91aIfzI9FmN1CSaZ4v6fawq
+ 6xLW+wnVRCBH7GGImU2oFX/lTXXGCwNA6duv1j2w==
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="51130805"
+   d="scan'208";a="51540947"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
@@ -93,9 +93,9 @@ CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
  Rzeszutek Wilk" <konrad.wilk@oracle.com>, Ross Lagerwall
 	<ross.lagerwall@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, "Daniel
  P. Smith" <dpsmith@apertussolutions.com>
-Subject: [XEN PATCH v7 49/51] build: adding out-of-tree support to the xen build
-Date: Tue, 24 Aug 2021 11:50:36 +0100
-Message-ID: <20210824105038.1257926-50-anthony.perard@citrix.com>
+Subject: [XEN PATCH v7 43/51] build: replace $(BASEDIR) by $(objtree)
+Date: Tue, 24 Aug 2021 11:50:30 +0100
+Message-ID: <20210824105038.1257926-44-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -103,500 +103,264 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This implement out-of-tree support, there's two ways to create an
-out-of-tree build tree (after that, `make` in that new directory
-works):
-    make O=build
-    mkdir build; cd build; make -f ../Makefile
-also works with an absolute path for both.
+We need to differentiate between source files and generated/built
+files. We will be replacing $(BASEDIR) by $(objtree) for files that
+are generated, and $(abs_objtree) in cases where an absolute path is
+necessary.
 
-This implementation only works if the source tree is clean, as we use
-VPATH.
-
-This patch copies most new code with handling out-of-tree build from
-Linux v5.12.
+The "clean" target is still changing to the subdir been cleaned, to
+remove file in the root we need to use $(abs_objtree).
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile                | 173 +++++++++++++++++++++++++++++-------
- xen/Rules.mk                |  11 ++-
- xen/arch/arm/efi/Makefile   |   3 +
- xen/arch/x86/arch.mk        |   3 +
- xen/arch/x86/boot/Makefile  |   5 +-
- xen/arch/x86/efi/Makefile   |   3 +
- xen/include/Makefile        |   9 +-
- xen/scripts/mkmakefile      |  17 ++++
- xen/test/livepatch/Makefile |   2 +
- xen/xsm/flask/Makefile      |   3 +
- xen/xsm/flask/ss/Makefile   |   3 +
- 11 files changed, 194 insertions(+), 38 deletions(-)
- create mode 100755 xen/scripts/mkmakefile
+ xen/Makefile                |  5 +++++
+ xen/Rules.mk                |  2 +-
+ xen/arch/arm/Makefile       | 12 ++++++------
+ xen/arch/x86/Makefile       | 34 +++++++++++++++++-----------------
+ xen/common/Makefile         |  2 +-
+ xen/test/livepatch/Makefile | 12 ++++++------
+ xen/xsm/flask/Makefile      |  2 +-
+ 7 files changed, 37 insertions(+), 32 deletions(-)
 
 diff --git a/xen/Makefile b/xen/Makefile
-index 67ced3e92689..d27c213c3aa9 100644
+index 4c1dd9ce2ea1..36a64118007b 100644
 --- a/xen/Makefile
 +++ b/xen/Makefile
-@@ -1,3 +1,7 @@
-+# $(lastword,) for GNU Make older than 0.81
-+lastword = $(word $(words $(1)),$(1))
-+this-makefile := $(call lastword,$(MAKEFILE_LIST))
-+
- # This is the correct place to edit the build version.
- # All other places this is stored (eg. compile.h) should be autogenerated.
- export XEN_VERSION       = 4
-@@ -17,33 +21,18 @@ export XEN_BUILD_HOST	?= $(shell hostname)
- PYTHON_INTERPRETER	:= $(word 1,$(shell which python3 python python2 2>/dev/null) python)
- export PYTHON		?= $(PYTHON_INTERPRETER)
- 
--export XEN_ROOT := $(CURDIR)/..
-+$(if $(filter __%, $(MAKECMDGOALS)), \
-+	$(error targets prefixed with '__' are only for internal use))
- 
--srctree := .
--objtree := .
--export srctree objtree
-+# That's our default target when none is given on the command line
-+PHONY := __all
-+__all:
- 
- # Do not use make's built-in rules and variables
- MAKEFLAGS += -rR
- 
- EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
- 
--ARCH=$(XEN_TARGET_ARCH)
--SRCARCH=$(shell echo $(ARCH) | \
--          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
--              -e s'/riscv.*/riscv/g')
--export ARCH SRCARCH
--
--# Don't break if the build process wasn't called from the top level
--# we need XEN_TARGET_ARCH to generate the proper config
--include $(XEN_ROOT)/Config.mk
--
--# Set ARCH/SUBARCH appropriately.
--export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
--export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
--                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
--                                -e s'/riscv.*/riscv/g')
--
- # Allow someone to change their config file
- export KCONFIG_CONFIG ?= .config
- 
-@@ -51,14 +40,9 @@ export CC CXX LD
- 
- export TARGET := xen
- 
--.PHONY: default
--default: build
--
- .PHONY: dist
- dist: install
- 
--include scripts/Kbuild.include
--
- ifneq ($(root-make-done),y)
- # section to run before calling Rules.mk, but only once.
- 
-@@ -130,14 +114,93 @@ endif
- 
- ifneq ($(findstring s,$(filter-out --%,$(MAKEFLAGS))),)
-     quiet := silent_
-+    KBUILD_VERBOSE = 0
- endif
+@@ -135,6 +135,11 @@ endif
  
  export quiet Q KBUILD_VERBOSE
  
-+# $(realpath,) for GNU Make older than 0.81
-+realpath = $(wildcard $(foreach file,$(1),$(shell cd -P $(dir $(file)) && echo "$$PWD/$(notdir $(file))")))
++abs_objtree := $(CURDIR)
++abs_srctree := $(CURDIR)
 +
-+ifeq ("$(origin O)", "command line")
-+  KBUILD_OUTPUT := $(O)
-+endif
++export abs_srctree abs_objtree
 +
-+ifneq ($(KBUILD_OUTPUT),)
-+# Make's built-in functions such as $(abspath ...), $(realpath ...) cannot
-+# expand a shell special character '~'. We use a somewhat tedious way here.
-+abs_objtree := $(shell mkdir -p $(KBUILD_OUTPUT) && cd $(KBUILD_OUTPUT) && pwd)
-+$(if $(abs_objtree),, \
-+     $(error failed to create output directory "$(KBUILD_OUTPUT)"))
-+
-+# $(realpath ...) resolves symlinks
-+abs_objtree := $(call realpath,$(abs_objtree))
-+else
- abs_objtree := $(CURDIR)
--abs_srctree := $(CURDIR)
-+endif
-+
-+ifeq ($(abs_objtree),$(CURDIR))
-+# Suppress "Entering directory ..." unless we are changing the work directory.
-+MAKEFLAGS += --no-print-directory
-+else
-+need-sub-make := 1
-+endif
-+
-+abs_srctree := $(call realpath,$(dir $(this-makefile)))
-+
-+ifneq ($(words $(subst :, ,$(abs_srctree))), 1)
-+$(error source directory cannot contain spaces or colons)
-+endif
-+
-+ifneq ($(abs_srctree),$(abs_objtree))
-+# Look for make include files relative to root of kernel src
-+#
-+# This does not become effective immediately because MAKEFLAGS is re-parsed
-+# once after the Makefile is read. We need to invoke sub-make.
-+MAKEFLAGS += --include-dir=$(abs_srctree)
-+need-sub-make := 1
-+endif
- 
- export abs_srctree abs_objtree
-+export root-make-done := y
-+
-+ifeq ($(need-sub-make),1)
-+
-+PHONY += $(MAKECMDGOALS) __sub-make
-+
-+$(filter-out $(this-makefile), $(MAKECMDGOALS)) __all: __sub-make
-+	@:
-+
-+# Invoke a second make in the output directory, passing relevant variables
-+__sub-make:
-+	$(Q)$(MAKE) -C $(abs_objtree) -f $(abs_srctree)/Makefile $(MAKECMDGOALS)
-+
-+endif # need-sub-make
-+endif # root-make-done
-+
-+# We process the rest of the Makefile if this is the final invocation of make
-+ifeq ($(need-sub-make),)
-+
-+ifeq ($(abs_srctree),$(abs_objtree))
-+        # building in the source tree
-+        srctree := .
-+	building_out_of_srctree :=
-+else
-+        ifeq ($(abs_srctree)/,$(dir $(abs_objtree)))
-+                # building in a subdirectory of the source tree
-+                srctree := ..
-+        else
-+                srctree := $(abs_srctree)
-+        endif
-+	building_out_of_srctree := 1
-+endif
-+
-+objtree		:= .
-+VPATH		:= $(srctree)
-+
-+export building_out_of_srctree srctree objtree VPATH
-+
-+export XEN_ROOT := $(abs_srctree)/..
- 
  # To make sure we do not include .config for any of the *config targets
  # catch them early, and hand them over to tools/kconfig/Makefile
-@@ -161,6 +224,24 @@ ifneq ($(filter %config,$(MAKECMDGOALS)),)
-     config-build := y
- endif
  
-+include scripts/Kbuild.include
-+
-+ARCH=$(XEN_TARGET_ARCH)
-+SRCARCH=$(shell echo $(ARCH) | \
-+          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-+              -e s'/riscv.*/riscv/g')
-+export ARCH SRCARCH
-+
-+# Don't break if the build process wasn't called from the top level
-+# we need XEN_TARGET_ARCH to generate the proper config
-+include $(XEN_ROOT)/Config.mk
-+
-+# Set ARCH/SUBARCH appropriately.
-+export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
-+export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
-+                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-+                                -e s'/riscv.*/riscv/g')
-+
- export CONFIG_SHELL := $(SHELL)
- export YACC = $(if $(BISON),$(BISON),bison)
- export LEX = $(if $(FLEX),$(FLEX),flex)
-@@ -196,9 +277,6 @@ CFLAGS += $(CLANG_FLAGS)
- export CLANG_FLAGS
- endif
- 
--export root-make-done := y
--endif # root-make-done
--
- # ===========================================================================
- # Rules shared between *config targets and build targets
- 
-@@ -206,18 +284,42 @@ PHONY += tools_fixdep
- tools_fixdep:
- 	$(MAKE) $(build)=tools tools/fixdep
- 
-+PHONY += outputmakefile
-+# Before starting out-of-tree build, make sure the source tree is clean.
-+# outputmakefile generates a Makefile in the output directory, if using a
-+# separate output directory. This allows convenient use of make in the
-+# output directory.
-+# At the same time when output Makefile generated, generate .gitignore to
-+# ignore whole output directory
-+outputmakefile:
-+ifdef building_out_of_srctree
-+	$(Q)if [ -f $(srctree)/.config -o \
-+		 -d $(srctree)/include/config -o \
-+		 -d $(srctree)/include/generated ]; then \
-+		echo >&2 "***"; \
-+		echo >&2 "*** The source tree is not clean, please run 'make$(if $(findstring command line, $(origin XEN_TARGET_ARCH)), XEN_TARGET_ARCH=$(XEN_TARGET_ARCH)) distclean'"; \
-+		echo >&2 "*** in $(abs_srctree)";\
-+		echo >&2 "***"; \
-+		false; \
-+	fi
-+	$(Q)ln -fsn $(srctree) source
-+	$(Q)$(SHELL) $(srctree)/scripts/mkmakefile $(srctree)
-+	$(Q)test -e .gitignore || \
-+	{ echo "# this is build directory, ignore it"; echo "*"; } > .gitignore
-+endif
-+
- ifeq ($(config-build),y)
- # ===========================================================================
- # *config targets only - make sure prerequisites are updated, and descend
- # in tools/kconfig to make the *config target
- 
--config: tools_fixdep FORCE
-+config: tools_fixdep outputmakefile FORCE
- 	$(Q)$(MAKE) $(build)=tools/kconfig $@
- 
- # Config.mk tries to include .config file, don't try to remake it
- %/.config: ;
- 
--%config: tools_fixdep FORCE
-+%config: tools_fixdep outputmakefile FORCE
- 	$(Q)$(MAKE) $(build)=tools/kconfig $@
- 
- else # !config-build
-@@ -299,6 +401,10 @@ endif
- 
- CFLAGS += -I$(srctree)/include
- CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
-+ifdef building_out_of_srctree
-+    CFLAGS += -I$(objtree)/include
-+    CFLAGS += -I$(objtree)/arch/$(TARGET_ARCH)/include
-+endif
- 
- # Note that link order matters!
- ALL_OBJS-y                := common/built_in.o
-@@ -323,6 +429,8 @@ export CFLAGS_UBSAN
- 
- endif # need-config
- 
-+__all: build
-+
- main-targets := build install uninstall clean distclean MAP
- .PHONY: $(main-targets)
- ifneq ($(XEN_TARGET_ARCH),x86_32)
-@@ -426,7 +534,7 @@ $(TARGET).gz: $(TARGET)
- 	gzip -n -f -9 < $< > $@.new
- 	mv $@.new $@
- 
--$(TARGET): tools_fixdep FORCE
-+$(TARGET): tools_fixdep outputmakefile FORCE
- 	$(MAKE) $(build)=tools
- 	$(MAKE) $(build)=. include/xen/compile.h
- 	$(MAKE) $(build)=include all
-@@ -492,6 +600,7 @@ cloc:
- 	find . -name '*.o.cmd' -exec awk '/^source_/{print $$3;}' {} + | cloc --list-file=-
- 
- endif #config-build
-+endif # need-sub-make
- 
- PHONY += FORCE
- FORCE:
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index cb8b35ceb596..6c97f539330a 100644
+index 6877fcc2d6d8..fae6b8918019 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -38,7 +38,7 @@ SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
-                          $(foreach r,rel rel.ro,data.$(r).local)
+@@ -8,7 +8,7 @@ src := $(obj)
+ PHONY := __build
+ __build:
  
- # The filename build.mk has precedence over Makefile
--mk-dir := $(src)
-+mk-dir := $(srctree)/$(src)
- include $(if $(wildcard $(mk-dir)/build.mk),$(mk-dir)/build.mk,$(mk-dir)/Makefile)
+--include $(BASEDIR)/include/config/auto.conf
++-include $(objtree)/include/config/auto.conf
  
- # Linking
-@@ -330,6 +330,15 @@ existing-targets := $(wildcard $(sort $(targets)))
+ include $(XEN_ROOT)/Config.mk
  
- -include $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
- 
-+# Create directories for object files if they do not exist
-+obj-dirs := $(sort $(patsubst %/,%, $(dir $(targets))))
-+# If targets exist, their directories apparently exist. Skip mkdir.
-+existing-dirs := $(sort $(patsubst %/,%, $(dir $(existing-targets))))
-+obj-dirs := $(strip $(filter-out $(existing-dirs), $(obj-dirs)))
-+ifneq ($(obj-dirs),)
-+$(shell mkdir -p $(obj-dirs))
-+endif
-+
- # Declare the contents of the PHONY variable as phony.  We keep that
- # information in a variable so we can use it in if_changed and friends.
- .PHONY: $(PHONY)
-diff --git a/xen/arch/arm/efi/Makefile b/xen/arch/arm/efi/Makefile
-index 36e15ac280cd..b985043f8c80 100644
---- a/xen/arch/arm/efi/Makefile
-+++ b/xen/arch/arm/efi/Makefile
-@@ -1,5 +1,8 @@
- CFLAGS-y += -fshort-wchar
- CFLAGS-y += -I$(srctree)/common/efi
-+ifdef building_out_of_srctree
-+CFLAGS-y += -I$(srctree)/$(src)
-+endif
- 
- obj-y += boot.init.o pe.init.o ebmalloc.o runtime.o
- obj-$(CONFIG_ACPI) +=  efi-dom0.init.o
-diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
-index f0dc6820f85c..963926b37d9d 100644
---- a/xen/arch/x86/arch.mk
-+++ b/xen/arch/x86/arch.mk
-@@ -62,6 +62,9 @@ ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
- 
- efi-check-o = arch/x86/efi/check.o
- 
-+# Create the directory for out-of-tree build
-+$(shell mkdir -p $(dir $(efi-check-o)))
-+
- # Check if the compiler supports the MS ABI.
- XEN_BUILD_EFI := $(call if-success,$(CC) $(CFLAGS) -c $(srctree)/$(efi-check-o:.o=.c) -o $(efi-check-o),y)
- 
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index c2385e69332d..3909db51b1fd 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -7,6 +7,9 @@ targets += $(head-objs:.S=.o)
- 
- head-objs := $(addprefix $(obj)/, $(head-objs))
- 
-+ifdef building_out_of_srctree
-+$(obj)/head.o: CFLAGS-y += -I$(obj)
-+endif
- $(obj)/head.o: $(head-objs)
- 
- LDFLAGS_DIRECT_OpenBSD = _obsd
-@@ -22,7 +25,7 @@ $(call cc-option-add,CFLAGS_x86_32,CC,-Wno-unused-but-set-variable)
- $(call cc-option-add,CFLAGS_x86_32,CC,-Wno-unused-local-typedefs)
- $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
- CFLAGS_x86_32 += -Werror -fno-builtin -g0 -msoft-float
--CFLAGS_x86_32 += -I$(srctree)/include
-+CFLAGS_x86_32 += -I$(srctree)/include $(if $(building_out_of_srctree), -I$(objtree)/include)
- 
- # override for 32bit binaries
- $(head-objs:.S=.o): CFLAGS-stack-boundary :=
-diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
-index da05935a9348..a716f3fac9cf 100644
---- a/xen/arch/x86/efi/Makefile
-+++ b/xen/arch/x86/efi/Makefile
-@@ -1,5 +1,8 @@
- CFLAGS-y += -fshort-wchar
- CFLAGS-y += -I$(srctree)/common/efi
-+ifdef building_out_of_srctree
-+CFLAGS-y += -I$(srctree)/$(src)
-+endif
- 
- quiet_cmd_objcopy_o_ihex = OBJCOPY $@
- cmd_objcopy_o_ihex = $(OBJCOPY) -I ihex -O binary $< $@
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index 4e64a31ecab3..2cd779a4108c 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -110,7 +110,7 @@ $(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(src)/Makefile
- 	$(foreach i, $(filter %.h,$^),                                        \
- 	    echo "#include "\"$(i)\"                                          \
- 	    | $(CC) -x c -std=c99 -Wall -Werror                               \
--	      -include stdint.h $(foreach j, $($(i)-prereq), -include $(j).h) \
-+	      -include stdint.h $(foreach j, $($(patsubst $(srctree)/%,%,$i)-prereq), -include $(j).h) \
- 	      -S -o /dev/null -                                               \
- 	    || exit $$?; echo $(i) >> $@.new;)
- 	mv $@.new $@
-@@ -124,8 +124,8 @@ $(obj)/headers++.chk: $(PUBLIC_HEADERS) $(src)/Makefile
- 	$(foreach i, $(filter %.h,$^),                                        \
- 	    echo "#include "\"$(i)\"                                          \
- 	    | $(CXX) -x c++ -std=gnu++98 -Wall -Werror -D__XEN_TOOLS__        \
--	      -include stdint.h -include $(src)/public/xen.h                  \
--	      $(foreach j, $($(i)-prereq), -include c$(j)) -S -o /dev/null -  \
-+	      -include stdint.h -include $(srctree)/$(src)/public/xen.h       \
-+	      $(foreach j, $($(patsubst $(srctree)/%,%,$i)-prereq), -include c$(j)) -S -o /dev/null -  \
- 	    || exit $$?; echo $(i) >> $@.new;)
- 	mv $@.new $@
- 
-@@ -134,7 +134,8 @@ endif
- ifeq ($(XEN_TARGET_ARCH),x86_64)
- .PHONY: lib-x86-all
- lib-x86-all:
--	$(MAKE) -C $(obj)/xen/lib/x86 all
-+	@mkdir -p $(obj)/xen/lib/x86
-+	$(MAKE) -C $(obj)/xen/lib/x86 -f $(abs_srctree)/$(src)/xen/lib/x86/Makefile VPATH=$(srctree) all
- 
- all: lib-x86-all
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index e6eff291c5e5..774648d6296e 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -88,21 +88,21 @@ ifeq ($(CONFIG_ARM_64),y)
+ 	ln -sf $(@F) $@.efi
  endif
-diff --git a/xen/scripts/mkmakefile b/xen/scripts/mkmakefile
-new file mode 100755
-index 000000000000..1cb174751429
---- /dev/null
-+++ b/xen/scripts/mkmakefile
-@@ -0,0 +1,17 @@
-+#!/bin/sh
-+# SPDX-License-Identifier: GPL-2.0
-+# Generates a small Makefile used in the root of the output
-+# directory, to allow make to be started from there.
-+# The Makefile also allow for more convinient build of external modules
-+
-+# Usage
-+# $1 - Kernel src directory
-+
-+if [ "${quiet}" != "silent_" ]; then
-+	echo "  GEN     Makefile"
-+fi
-+
-+cat << EOF > Makefile
-+# Automatically generated by $0: don't edit
-+include $1/Makefile
-+EOF
+ 
+-$(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
++$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
+-	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
++	    $(objtree)/common/symbols-dummy.o -o $(@D)/.$(@F).0
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
+ 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
+ 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
+ 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+ 	    $(@D)/.$(@F).1.o -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+-		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort \
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		>$(@D)/$(@F).map
+ 	rm -f $(@D)/.$(@F).[0-9]*
+ 
+@@ -117,4 +117,4 @@ $(obj)/dtb.o: $(patsubst "%",%,$(CONFIG_DTB_FILE))
+ .PHONY: clean
+ clean::
+ 	rm -f $(obj)/xen.lds
+-	rm -f $(BASEDIR)/.xen-syms.[0-9]*
++	rm -f $(abs_objtree)/.xen-syms.[0-9]*
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 4ea8ade7202c..85c44c69ff5a 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -92,8 +92,8 @@ ifneq ($(CONFIG_HVM),y)
+ $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
+ endif
+ 
+-efi-y := $(shell if [ ! -r $(BASEDIR)/include/xen/compile.h -o \
+-                      -O $(BASEDIR)/include/xen/compile.h ]; then \
++efi-y := $(shell if [ ! -r $(objtree)/include/xen/compile.h -o \
++                      -O $(objtree)/include/xen/compile.h ]; then \
+                          echo '$(TARGET).efi'; fi) \
+          $(space)
+ efi-$(CONFIG_PV_SHIM_EXCLUSIVE) :=
+@@ -133,23 +133,23 @@ ifneq ($(efi-y),)
+ CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
+ endif # $(efi-y)
+ 
+-$(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
++$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+-	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
++	    $(objtree)/common/symbols-dummy.o -o $(@D)/.$(@F).0
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
+ 		>$(@D)/.$(@F).0.S
+ 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+ 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
+ 		>$(@D)/.$(@F).1.S
+ 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+ 	    $(@D)/.$(@F).1.o -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+-		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort \
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		>$(@D)/$(@F).map
+ 	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
+ 
+@@ -199,28 +199,28 @@ note_file_option ?= $(note_file)
+ 
+ ifeq ($(XEN_BUILD_PE),y)
+ extra-y += efi.lds
+-$(TARGET).efi: $(BASEDIR)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
++$(TARGET).efi: $(objtree)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
+ ifeq ($(CONFIG_DEBUG_INFO),y)
+ 	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),echo,:) "Will strip debug info from $(@F)"
+ endif
+ 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
+ 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< $(relocs-dummy) \
+-	                $(BASEDIR)/common/symbols-dummy.o $(note_file_option) -o $(@D)/.$(@F).$(base).0 &&) :
++	                $(objtree)/common/symbols-dummy.o $(note_file_option) -o $(@D)/.$(@F).$(base).0 &&) :
+ 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).0) >$(@D)/.$(@F).0r.S
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).0 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
+ 	$(MAKE) $(build)=$(@D) .$(@F).0r.o .$(@F).0s.o
+ 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
+ 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< \
+ 	                $(@D)/.$(@F).0r.o $(@D)/.$(@F).0s.o $(note_file_option) -o $(@D)/.$(@F).$(base).1 &&) :
+ 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).1) >$(@D)/.$(@F).1r.S
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).1 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
+ 	$(MAKE) $(build)=$(@D) .$(@F).1r.o .$(@F).1s.o
+ 	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds -N $< \
+ 	                $(@D)/.$(@F).1r.o $(@D)/.$(@F).1s.o $(note_file_option) -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+-		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
+ 	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
+ else
+ $(TARGET).efi: FORCE
+@@ -232,11 +232,11 @@ endif
+ $(obj)/efi/buildid.o $(obj)/efi/relocs-dummy.o: ;
+ 
+ .PHONY: include
+-include: $(BASEDIR)/arch/x86/include/asm/asm-macros.h
++include: $(objtree)/arch/x86/include/asm/asm-macros.h
+ 
+ $(obj)/asm-macros.i: CFLAGS-y += -D__ASSEMBLY__ -P
+ 
+-$(BASEDIR)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefile
++$(objtree)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefile
+ 	$(call filechk,asm-macros.h)
+ 
+ define filechk_asm-macros.h
+@@ -260,7 +260,7 @@ $(obj)/xen.lds $(obj)/efi.lds: $(src)/xen.lds.S FORCE
+ .PHONY: clean
+ clean::
+ 	rm -f *.lds
+-	rm -f asm-macros.i $(BASEDIR)/arch/x86/include/asm/asm-macros.*
+-	rm -f $(BASEDIR)/.xen-syms.[0-9]* $(BASEDIR)/.xen.elf32
+-	rm -f $(BASEDIR)/.xen.efi.[0-9]* efi/*.efi
++	rm -f asm-macros.i $(abs_objtree)/arch/x86/include/asm/asm-macros.*
++	rm -f $(abs_objtree)/.xen-syms.[0-9]* $(abs_objtree)/.xen.elf32
++	rm -f $(abs_objtree)/.xen.efi.[0-9]* efi/*.efi
+ 	rm -f boot/cmdline.S boot/reloc.S boot/*.lnk boot/*.bin
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index ca839118e4d1..8771c2775efb 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -74,7 +74,7 @@ obj-$(CONFIG_UBSAN) += ubsan/
+ obj-$(CONFIG_NEEDS_LIBELF) += libelf/
+ obj-$(CONFIG_HAS_DEVICE_TREE) += libfdt/
+ 
+-CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(BASEDIR)/)$(KCONFIG_CONFIG)
++CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(objtree)/)$(KCONFIG_CONFIG)
+ $(obj)/config.gz: $(CONF_FILE)
+ 	gzip -n -c $< >$@
+ 
 diff --git a/xen/test/livepatch/Makefile b/xen/test/livepatch/Makefile
-index 5807a559b42a..51f93f6ba61f 100644
+index dee5fd78c188..008e89fc9a47 100644
 --- a/xen/test/livepatch/Makefile
 +++ b/xen/test/livepatch/Makefile
-@@ -11,6 +11,8 @@ endif
- CODE_ADDR=$(shell nm --defined $(1) | grep $(2) | awk '{print "0x"$$1}')
- CODE_SZ=$(shell nm --defined -S $(1) | grep $(2) | awk '{ print "0x"$$2}')
+@@ -22,9 +22,9 @@ $(obj)/xen_hello_world.o: $(obj)/config.h
+ $(obj)/config.h: $(obj)/xen_hello_world_func.o
+ 	(set -e; \
+ 	 echo "#define NEW_CODE_SZ $(call CODE_SZ,$<,xen_hello_world)"; \
+-	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)"; \
+-	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)"; \
+-	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)") > $@
++	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(objtree)/xen-syms,xen_minor_version)"; \
++	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(objtree)/xen-syms,xen_minor_version)"; \
++	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(objtree)/xen-syms,xen_extra_version)") > $@
  
-+CFLAGS-y += -I$(obj)
-+
- extra-y += xen_hello_world.livepatch
- xen_hello_world-objs := xen_hello_world_func.o xen_hello_world.o note.o xen_note.o modinfo.o
- $(obj)/xen_hello_world.o: $(obj)/config.h
+ $(obj)/modinfo.o:
+ 	(set -e; \
+@@ -42,7 +42,7 @@ $(obj)/modinfo.o:
+ # not be built (it is for EFI builds), and that we do not have
+ # the note.o.bin to muck with (as it gets deleted)
+ #
+-$(obj)/note.o: $(BASEDIR)/xen-syms
++$(obj)/note.o: $(objtree)/xen-syms
+ 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
+@@ -52,7 +52,7 @@ $(obj)/note.o: $(BASEDIR)/xen-syms
+ # Append .livepatch.xen_depends section
+ # with Xen build-id derived from xen-syms.
+ #
+-$(obj)/xen_note.o: $(BASEDIR)/xen-syms
++$(obj)/xen_note.o: $(objtree)/xen-syms
+ 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.xen_depends,alloc,load,readonly,data,contents -S $@.bin $@
+@@ -125,7 +125,7 @@ xen_action_hooks_norevert-objs := xen_action_hooks_marker.o xen_hello_world_func
+ 
+ EXPECT_BYTES_COUNT := 8
+ CODE_GET_EXPECT=$(shell $(OBJDUMP) -d --insn-width=1 $(1) | sed -n -e '/<'$(2)'>:$$/,/^$$/ p' | tail -n +2 | head -n $(EXPECT_BYTES_COUNT) | awk '{$$0=$$2; printf "%s", substr($$0,length-1)}' | sed 's/.\{2\}/0x&,/g' | sed 's/^/{/;s/,$$/}/g')
+-$(obj)/expect_config.h: $(BASEDIR)/xen-syms
++$(obj)/expect_config.h: $(objtree)/xen-syms
+ 	(set -e; \
+ 	 echo "#define EXPECT_BYTES $(call CODE_GET_EXPECT,$<,xen_extra_version)"; \
+          echo "#define EXPECT_BYTES_COUNT $(EXPECT_BYTES_COUNT)") > $@
 diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
-index d655cf8d1974..2c6febc54bf6 100644
+index 8d18c7d4ae6f..bff36aa97918 100644
 --- a/xen/xsm/flask/Makefile
 +++ b/xen/xsm/flask/Makefile
-@@ -5,6 +5,9 @@ obj-y += flask_op.o
- obj-y += ss/
+@@ -40,7 +40,7 @@ $(obj)/flask-policy.S: $(BASEDIR)/tools/binfile FORCE
+ 	$(call if_changed,binfile,$(obj)/policy.bin xsm_flask_init_policy)
+ targets += flask-policy.S
  
- CFLAGS-y += -I$(obj)/include
-+ifdef building_out_of_srctree
-+    CFLAGS-y += -I$(srctree)/$(src)/include
-+endif
+-FLASK_BUILD_DIR := $(BASEDIR)/$(obj)
++FLASK_BUILD_DIR := $(abs_objtree)/$(obj)
+ POLICY_SRC := $(FLASK_BUILD_DIR)/xenpolicy-$(XEN_FULLVERSION)
  
- AWK = awk
- 
-diff --git a/xen/xsm/flask/ss/Makefile b/xen/xsm/flask/ss/Makefile
-index aba1339f3808..c50d67320ed3 100644
---- a/xen/xsm/flask/ss/Makefile
-+++ b/xen/xsm/flask/ss/Makefile
-@@ -9,3 +9,6 @@ obj-y += conditional.o
- obj-y += mls.o
- 
- CFLAGS-y += -I$(srctree)/xsm/flask/include
-+ifdef building_out_of_srctree
-+    CFLAGS-y += -I$(objtree)/xsm/flask/include
-+endif
+ $(obj)/policy.bin: FORCE
 -- 
 Anthony PERARD
 
