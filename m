@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E46CEC4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D318C432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AE34461051
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AE34461051
+	by mail.kernel.org (Postfix) with ESMTPS id 362C26115A
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 362C26115A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170959.312057 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170957.312053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUAy-0002j7-4C; Tue, 24 Aug 2021 11:01:04 +0000
+	id 1mIUAx-0002gH-RQ; Tue, 24 Aug 2021 11:01:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170959.312057; Tue, 24 Aug 2021 11:01:04 +0000
+Received: by outflank-mailman (output) from mailman id 170957.312053; Tue, 24 Aug 2021 11:01:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUAy-0002i9-08; Tue, 24 Aug 2021 11:01:04 +0000
-Received: by outflank-mailman (input) for mailman id 170959;
+	id 1mIUAx-0002gA-OB; Tue, 24 Aug 2021 11:01:03 +0000
+Received: by outflank-mailman (input) for mailman id 170957;
  Tue, 24 Aug 2021 11:01:02 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU2W-0001EC-Aq
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:52:20 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1mIU22-0001EC-9b
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:51:50 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 930ad33d-b515-4fe2-b6d7-25f038806064;
- Tue, 24 Aug 2021 10:51:23 +0000 (UTC)
+ id 3bd6516f-f5e4-492b-9635-845939c011e7;
+ Tue, 24 Aug 2021 10:51:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,40 +48,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 930ad33d-b515-4fe2-b6d7-25f038806064
+X-Inumbo-ID: 3bd6516f-f5e4-492b-9635-845939c011e7
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802283;
+  d=citrix.com; s=securemail; t=1629802269;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=FW24mf7gQhBpHHcg9GJm9hyluG+ERn9X5WYN2UmMbPk=;
-  b=Z8r2AQdRi+/NjWbISrBzb8qehjOIyKDNS9p5iaj8V6DqJuOC0jRxm75g
-   oNnbyo5uAXyLbBOKGUvUSy3E7tImlzPtpGN0aque1S2kKf6soeSVhwLzU
-   Cl/CermTQzEzMY/UA5q9kzKjXrZOxyxFX5sVH2tqrgUIYTfB9qmjHw/vO
+  bh=WypzVU9rf23sGm2Av46eWBR2S9nY0Xuo8OA2HzrRil0=;
+  b=AAUTZgulXbDcDEFnl7sWjm8ot5/+lNi6z4Z3Yl1HWvzcTWym4JBEjbBV
+   AWaEgPJ1tq1WwJKOVcvdST6iYUDO8+18H6/Mg2mWraQfADfTFG5Uu/ARj
+   AWX4WajI+SXUw7faracDBxn8sYD1dnd2b6pTU3A955Uh6YRFPR/iAMszJ
    A=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: x5Me5gMX8yanwNrzDTYwNTAHf2ybo9F+pMvILih7HdtcE7pw9zqLMUWBWkPRp+4fXIYG5AGyht
- QM8xPEpFuqJAEd6MFcfXfodn9F14gtJh/WkpAz6qOmYDc4jOkd3Kj72eEM6FvSKEosX0UlpJAj
- jnm03gXfEIVmGqQfUOh7To5T9SJFBOhVnJyRzD8v7M/Oc7RHR353I7WmX/6vHhMCQ6zt8EX3SC
- T3R/DUcIftFHPMZVSO2D+R2qMZy6n+Q+W3a7nTj+YCdlkDwPK+E/hLkW/pkIGWpX3z46JC9BH+
- nXq20fkEqjRTWEmSqKWHzMur
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: V5zkhaFj1GJEZ9xLAqK6GdzDCUgaGdMHnS8SzdSXpa8yMjZncY8XGpF+D4eYZRL1gZ9CwaJRof
+ H1UWmZOa221YArykhQGZPUzSgZAGHr1ZuBM2hnnxe2yj1kG694XykysdPrwQ4gmz8RC7kImmbP
+ +KwgegsLA1Fi8GD+p2nX7pgeSBmdXYap3Y+LwD+nTcVjpk6XMVzCSMfT2vfc5SxEmelyBXkvcZ
+ SDQWNcApf8ecc4rk+0lp4he5s+7Db0/kiXf22NPBA1gtIESleU/AitiZN2R0QuYvmp3I4hmTtZ
+ nfTnSDA3/F1KE1NCpVVGbXKh
 X-SBRS: 5.1
-X-MesageID: 52875464
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 51153535
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:R4R896rLEWB0taI4l5WiHM0aV5oTeYIsimQD101hICG8cqSj+f
- xG+85rsyMc6QxhIE3I9urhBEDtex/hHNtOkOws1NSZLW7bUQmTXeJfBOLZqlWKcUDDH6xmpM
- NdmsBFeaTN5DNB7PoSjjPWLz9Z+qjkzJyV
+IronPort-HdrOrdr: A9a23:fCnLzqFyzFcUXqC5pLqEEseALOsnbusQ8zAXPiBKJCC9vPb5qy
+ nOpoV+6faQslwssR4b9uxoVJPvfZq+z+8R3WByB8bAYOCOggLBQL2KhbGI/9SKIVydygcy78
+ Zdm6gVMqyMMbB55/yKnDVRxbwbsaa6GKPDv5ah8590JzsaDJ2Jd21Ce32m+ksdfnghObMJUK
+ Cyy+BgvDSadXEefq2AdwM4t7iqnayzqHr+CyR2fyIa1A==
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="52875464"
+   d="scan'208";a="51153535"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [XEN PATCH v7 18/51] build: fix $(TARGET).efi creation in arch/arm
-Date: Tue, 24 Aug 2021 11:50:05 +0100
-Message-ID: <20210824105038.1257926-19-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
+ Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+Subject: [XEN PATCH v7 13/51] build: convert binfile use to if_changed
+Date: Tue, 24 Aug 2021 11:50:00 +0100
+Message-ID: <20210824105038.1257926-14-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -89,28 +93,71 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-There is no need to try to guess a relative path to the "xen.efi" file,
-we can simply use $@. Also, there's no need to use `notdir`, make
-already do that work via $(@F).
+This will allow to detect command line changes and allow to regenerate
+the file in that case.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/arch/arm/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index cc90d9796e6e..dc1d09c8b429 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -93,7 +93,7 @@ endif
- $(TARGET): $(TARGET)-syms
- 	$(OBJCOPY) -O binary -S $< $@
- ifeq ($(CONFIG_ARM_64),y)
--	ln -sf $(notdir $@)  ../../$(notdir $@).efi
-+	ln -sf $(@F) $@.efi
- endif
+Notes:
+    v7:
+    - define $(cmd_binfile) in Rules.mk so we can use the same one in both
+      common/ and xsm/flask/
+
+ xen/Rules.mk           | 5 +++++
+ xen/common/Makefile    | 5 +++--
+ xen/xsm/flask/Makefile | 6 ++++--
+ 3 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index c313486ce0f6..f449669475bd 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -57,6 +57,11 @@ cmd_ar = rm -f $@; $(AR) cr $@ $(real-prereqs)
+ quiet_cmd_objcopy = OBJCOPY $@
+ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
  
- ifeq ($(CONFIG_LTO),y)
++# binfile
++# use e.g. $(call if_changed,binfile,binary-file varname)
++quiet_cmd_binfile = BINFILE $@
++cmd_binfile = $(SHELL) $(BASEDIR)/tools/binfile $(BINFILE_FLAGS) $@ $(2)
++
+ define gendep
+     ifneq ($(1),$(subst /,:,$(1)))
+         DEPS += $(dir $(1)).$(notdir $(1)).d
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 54de70d42278..141d7d40d3dc 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -80,8 +80,9 @@ config.gz: $(CONF_FILE)
+ 
+ config_data.o: config.gz
+ 
+-config_data.S: $(BASEDIR)/tools/binfile
+-	$(SHELL) $(BASEDIR)/tools/binfile $@ config.gz xen_config_data
++config_data.S: $(BASEDIR)/tools/binfile FORCE
++	$(call if_changed,binfile,config.gz xen_config_data)
++targets += config_data.S
+ 
+ clean::
+ 	rm -f config_data.S config.gz 2>/dev/null
+diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
+index 637159ad8276..f4d4038c01bd 100644
+--- a/xen/xsm/flask/Makefile
++++ b/xen/xsm/flask/Makefile
+@@ -35,8 +35,10 @@ $(subst include/,%/,$(AV_H_FILES)): $(AV_H_DEPEND) $(mkaccess) FORCE
+ obj-bin-$(CONFIG_XSM_FLASK_POLICY) += flask-policy.o
+ flask-policy.o: policy.bin
+ 
+-flask-policy.S: $(BASEDIR)/tools/binfile
+-	$(SHELL) $(BASEDIR)/tools/binfile -i $@ policy.bin xsm_flask_init_policy
++flask-policy.S: BINFILE_FLAGS := -i
++flask-policy.S: $(BASEDIR)/tools/binfile FORCE
++	$(call if_changed,binfile,policy.bin xsm_flask_init_policy)
++targets += flask-policy.S
+ 
+ FLASK_BUILD_DIR := $(CURDIR)
+ POLICY_SRC := $(FLASK_BUILD_DIR)/xenpolicy-$(XEN_FULLVERSION)
 -- 
 Anthony PERARD
 
