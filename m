@@ -7,52 +7,51 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0122C4320A
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11159C432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5182861262
+	by mail.kernel.org (Postfix) with ESMTPS id B5F2D6124B
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 10:28:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5182861262
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B5F2D6124B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170856.311834 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170857.311845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mITfJ-0003bt-Fc; Tue, 24 Aug 2021 10:28:21 +0000
+	id 1mITfK-0003uT-Tt; Tue, 24 Aug 2021 10:28:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170856.311834; Tue, 24 Aug 2021 10:28:21 +0000
+Received: by outflank-mailman (output) from mailman id 170857.311845; Tue, 24 Aug 2021 10:28:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mITfJ-0003bh-BL; Tue, 24 Aug 2021 10:28:21 +0000
-Received: by outflank-mailman (input) for mailman id 170856;
- Tue, 24 Aug 2021 10:28:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mITfK-0003uG-Q8; Tue, 24 Aug 2021 10:28:22 +0000
+Received: by outflank-mailman (input) for mailman id 170857;
+ Tue, 24 Aug 2021 10:28:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=3Uw6=NP=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mITfI-00031f-7P
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:28:20 +0000
+ id 1mITfJ-00031l-3a
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:28:21 +0000
 Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fcdf2e9c-04c5-11ec-a8c4-12813bfff9fa;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 74f56f79-319b-4012-a878-2fb3c7833876;
+ Tue, 24 Aug 2021 10:28:15 +0000 (UTC)
+Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 969A920051;
  Tue, 24 Aug 2021 10:28:14 +0000 (UTC)
 Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id A1B482004F;
- Tue, 24 Aug 2021 10:28:13 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 57BEF136DD;
- Tue, 24 Aug 2021 10:28:13 +0000 (UTC)
+ by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 52545136DD;
+ Tue, 24 Aug 2021 10:28:14 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id SPvuE73JJGG8DwAAGKfGzw
- (envelope-from <jgross@suse.com>); Tue, 24 Aug 2021 10:28:13 +0000
+ by imap1.suse-dmz.suse.de with ESMTPSA id yDeiEr7JJGG8DwAAGKfGzw
+ (envelope-from <jgross@suse.com>); Tue, 24 Aug 2021 10:28:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,16 +63,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fcdf2e9c-04c5-11ec-a8c4-12813bfff9fa
+X-Inumbo-ID: 74f56f79-319b-4012-a878-2fb3c7833876
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1629800893; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1629800894; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=IbajY+E/j5QwN8ylzKx9q6TBPEhkc8yuc65ahR0PtvI=;
-	b=mtDdJM9krc0OORygAchXMQ1LUti7fTdnE0i5Bpye5LlNYakl02v56oaP3Wr3xyP9+Rr+gZ
-	HYespA8yyUahVvKBf97VhQx96d+Ic56qZ/wmmuRcW28YMSIMSD76oguqKSoZxcM4pQD4B8
-	2+uI+Ll40TQO7J+fbs6O3W9G6E+VGtc=
+	bh=nfhixkZoKYt7ltZuGvoMSJv4YyU9Ov7I0dmOxqpdsKE=;
+	b=DcR+51AtjNOu/RurWnkc4/qcw2RfDI2dJrDj/kJHKxCouGLQNJhFK50ZaZBZasJVpbTU7Q
+	iqFhF5ojLAljx7+nVh/UOfGJnk12i3tue4uY5AJkjdNeDxN1IDCzpRXe0jh3onS3kfaPuX
+	sIsCN8m06Dkp46Gon3fUJYQTn0DLNLo=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	netdev@vger.kernel.org,
@@ -82,144 +81,276 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 1/4] xen/netfront: read response from backend only once
-Date: Tue, 24 Aug 2021 12:28:06 +0200
-Message-Id: <20210824102809.26370-2-jgross@suse.com>
+	Jakub Kicinski <kuba@kernel.org>
+Subject: [PATCH v2 4/4] xen/netfront: don't trust the backend response data blindly
+Date: Tue, 24 Aug 2021 12:28:09 +0200
+Message-Id: <20210824102809.26370-5-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210824102809.26370-1-jgross@suse.com>
 References: <20210824102809.26370-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In order to avoid problems in case the backend is modifying a response
-on the ring page while the frontend has already seen it, just read the
-response into a local buffer in one go and then operate on that buffer
-only.
+Today netfront will trust the backend to send only sane response data.
+In order to avoid privilege escalations or crashes in case of malicious
+backends verify the data to be within expected limits. Especially make
+sure that the response always references an outstanding request.
+
+Note that only the tx queue needs special id handling, as for the rx
+queue the id is equal to the index in the ring page.
+
+Introduce a new indicator for the device whether it is broken and let
+the device stop working when it is set. Set this indicator in case the
+backend sets any weird data.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 V2:
-- use direct structure assignment instead of memcpy() (Jan Beulich)
+- set the pending flag only just before sending the request (Jan Beulich)
+- reset broken indicator during connect (Jan Beulich)
 ---
- drivers/net/xen-netfront.c | 38 +++++++++++++++++++-------------------
- 1 file changed, 19 insertions(+), 19 deletions(-)
+ drivers/net/xen-netfront.c | 89 +++++++++++++++++++++++++++++++++++---
+ 1 file changed, 84 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index 44275908d61a..003cdf2ffc92 100644
+index 956e1266bd1a..e31b98403f31 100644
 --- a/drivers/net/xen-netfront.c
 +++ b/drivers/net/xen-netfront.c
-@@ -399,13 +399,13 @@ static void xennet_tx_buf_gc(struct netfront_queue *queue)
+@@ -131,10 +131,12 @@ struct netfront_queue {
+ 	struct sk_buff *tx_skbs[NET_TX_RING_SIZE];
+ 	unsigned short tx_link[NET_TX_RING_SIZE];
+ #define TX_LINK_NONE 0xffff
++#define TX_PENDING   0xfffe
+ 	grant_ref_t gref_tx_head;
+ 	grant_ref_t grant_tx_ref[NET_TX_RING_SIZE];
+ 	struct page *grant_tx_page[NET_TX_RING_SIZE];
+ 	unsigned tx_skb_freelist;
++	unsigned int tx_pend_queue;
+ 
+ 	spinlock_t   rx_lock ____cacheline_aligned_in_smp;
+ 	struct xen_netif_rx_front_ring rx;
+@@ -167,6 +169,9 @@ struct netfront_info {
+ 	bool netback_has_xdp_headroom;
+ 	bool netfront_xdp_enabled;
+ 
++	/* Is device behaving sane? */
++	bool broken;
++
+ 	atomic_t rx_gso_checksum_fixup;
+ };
+ 
+@@ -349,7 +354,7 @@ static int xennet_open(struct net_device *dev)
+ 	unsigned int i = 0;
+ 	struct netfront_queue *queue = NULL;
+ 
+-	if (!np->queues)
++	if (!np->queues || np->broken)
+ 		return -ENODEV;
+ 
+ 	for (i = 0; i < num_queues; ++i) {
+@@ -377,11 +382,17 @@ static void xennet_tx_buf_gc(struct netfront_queue *queue)
+ 	unsigned short id;
+ 	struct sk_buff *skb;
+ 	bool more_to_do;
++	const struct device *dev = &queue->info->netdev->dev;
+ 
+ 	BUG_ON(!netif_carrier_ok(queue->info->netdev));
+ 
+ 	do {
+ 		prod = queue->tx.sring->rsp_prod;
++		if (RING_RESPONSE_PROD_OVERFLOW(&queue->tx, prod)) {
++			dev_alert(dev, "Illegal number of responses %u\n",
++				  prod - queue->tx.rsp_cons);
++			goto err;
++		}
  		rmb(); /* Ensure we see responses up to 'rp'. */
  
  		for (cons = queue->tx.rsp_cons; cons != prod; cons++) {
--			struct xen_netif_tx_response *txrsp;
-+			struct xen_netif_tx_response txrsp;
- 
--			txrsp = RING_GET_RESPONSE(&queue->tx, cons);
--			if (txrsp->status == XEN_NETIF_RSP_NULL)
-+			RING_COPY_RESPONSE(&queue->tx, cons, &txrsp);
-+			if (txrsp.status == XEN_NETIF_RSP_NULL)
+@@ -391,14 +402,27 @@ static void xennet_tx_buf_gc(struct netfront_queue *queue)
+ 			if (txrsp.status == XEN_NETIF_RSP_NULL)
  				continue;
  
--			id  = txrsp->id;
-+			id  = txrsp.id;
- 			skb = queue->tx_skbs[id].skb;
+-			id  = txrsp.id;
++			id = txrsp.id;
++			if (id >= RING_SIZE(&queue->tx)) {
++				dev_alert(dev,
++					  "Response has incorrect id (%u)\n",
++					  id);
++				goto err;
++			}
++			if (queue->tx_link[id] != TX_PENDING) {
++				dev_alert(dev,
++					  "Response for inactive request\n");
++				goto err;
++			}
++
++			queue->tx_link[id] = TX_LINK_NONE;
+ 			skb = queue->tx_skbs[id];
+ 			queue->tx_skbs[id] = NULL;
  			if (unlikely(gnttab_query_foreign_access(
  				queue->grant_tx_ref[id]) != 0)) {
-@@ -814,7 +814,7 @@ static int xennet_get_extras(struct netfront_queue *queue,
- 			     RING_IDX rp)
+-				pr_alert("%s: warning -- grant still in use by backend domain\n",
+-					 __func__);
+-				BUG();
++				dev_alert(dev,
++					  "Grant still in use by backend domain\n");
++				goto err;
+ 			}
+ 			gnttab_end_foreign_access_ref(
+ 				queue->grant_tx_ref[id], GNTMAP_readonly);
+@@ -416,6 +440,12 @@ static void xennet_tx_buf_gc(struct netfront_queue *queue)
+ 	} while (more_to_do);
  
- {
--	struct xen_netif_extra_info *extra;
-+	struct xen_netif_extra_info extra;
- 	struct device *dev = &queue->info->netdev->dev;
- 	RING_IDX cons = queue->rx.rsp_cons;
- 	int err = 0;
-@@ -830,24 +830,22 @@ static int xennet_get_extras(struct netfront_queue *queue,
- 			break;
- 		}
- 
--		extra = (struct xen_netif_extra_info *)
--			RING_GET_RESPONSE(&queue->rx, ++cons);
-+		RING_COPY_RESPONSE(&queue->rx, ++cons, &extra);
- 
--		if (unlikely(!extra->type ||
--			     extra->type >= XEN_NETIF_EXTRA_TYPE_MAX)) {
-+		if (unlikely(!extra.type ||
-+			     extra.type >= XEN_NETIF_EXTRA_TYPE_MAX)) {
- 			if (net_ratelimit())
- 				dev_warn(dev, "Invalid extra type: %d\n",
--					extra->type);
-+					 extra.type);
- 			err = -EINVAL;
- 		} else {
--			memcpy(&extras[extra->type - 1], extra,
--			       sizeof(*extra));
-+			extras[extra.type - 1] = extra;
- 		}
- 
- 		skb = xennet_get_rx_skb(queue, cons);
- 		ref = xennet_get_rx_ref(queue, cons);
- 		xennet_move_rx_slot(queue, skb, ref);
--	} while (extra->flags & XEN_NETIF_EXTRA_FLAG_MORE);
-+	} while (extra.flags & XEN_NETIF_EXTRA_FLAG_MORE);
- 
- 	queue->rx.rsp_cons = cons;
- 	return err;
-@@ -905,7 +903,7 @@ static int xennet_get_responses(struct netfront_queue *queue,
- 				struct sk_buff_head *list,
- 				bool *need_xdp_flush)
- {
--	struct xen_netif_rx_response *rx = &rinfo->rx;
-+	struct xen_netif_rx_response *rx = &rinfo->rx, rx_local;
- 	int max = XEN_NETIF_NR_SLOTS_MIN + (rx->status <= RX_COPY_THRESHOLD);
- 	RING_IDX cons = queue->rx.rsp_cons;
- 	struct sk_buff *skb = xennet_get_rx_skb(queue, cons);
-@@ -989,7 +987,8 @@ static int xennet_get_responses(struct netfront_queue *queue,
- 			break;
- 		}
- 
--		rx = RING_GET_RESPONSE(&queue->rx, cons + slots);
-+		RING_COPY_RESPONSE(&queue->rx, cons + slots, &rx_local);
-+		rx = &rx_local;
- 		skb = xennet_get_rx_skb(queue, cons + slots);
- 		ref = xennet_get_rx_ref(queue, cons + slots);
- 		slots++;
-@@ -1044,10 +1043,11 @@ static int xennet_fill_frags(struct netfront_queue *queue,
- 	struct sk_buff *nskb;
- 
- 	while ((nskb = __skb_dequeue(list))) {
--		struct xen_netif_rx_response *rx =
--			RING_GET_RESPONSE(&queue->rx, ++cons);
-+		struct xen_netif_rx_response rx;
- 		skb_frag_t *nfrag = &skb_shinfo(nskb)->frags[0];
- 
-+		RING_COPY_RESPONSE(&queue->rx, ++cons, &rx);
+ 	xennet_maybe_wake_tx(queue);
 +
- 		if (skb_shinfo(skb)->nr_frags == MAX_SKB_FRAGS) {
- 			unsigned int pull_to = NETFRONT_SKB_CB(skb)->pull_to;
++	return;
++
++ err:
++	queue->info->broken = true;
++	dev_alert(dev, "Disabled for further use\n");
+ }
  
-@@ -1062,7 +1062,7 @@ static int xennet_fill_frags(struct netfront_queue *queue,
+ struct xennet_gnttab_make_txreq {
+@@ -459,6 +489,12 @@ static void xennet_tx_setup_grant(unsigned long gfn, unsigned int offset,
  
- 		skb_add_rx_frag(skb, skb_shinfo(skb)->nr_frags,
- 				skb_frag_page(nfrag),
--				rx->offset, rx->status, PAGE_SIZE);
-+				rx.offset, rx.status, PAGE_SIZE);
+ 	*tx = info->tx_local;
  
- 		skb_shinfo(nskb)->nr_frags = 0;
- 		kfree_skb(nskb);
-@@ -1161,7 +1161,7 @@ static int xennet_poll(struct napi_struct *napi, int budget)
++	/*
++	 * Put the request in the pending queue, it will be set to be pending
++	 * when the producer index is about to be raised.
++	 */
++	add_id_to_list(&queue->tx_pend_queue, queue->tx_link, id);
++
+ 	info->tx = tx;
+ 	info->size += info->tx_local.size;
+ }
+@@ -551,6 +587,15 @@ static u16 xennet_select_queue(struct net_device *dev, struct sk_buff *skb,
+ 	return queue_idx;
+ }
+ 
++static void xennet_mark_tx_pending(struct netfront_queue *queue)
++{
++	unsigned int i;
++
++	while ((i = get_id_from_list(&queue->tx_pend_queue, queue->tx_link)) !=
++	       TX_LINK_NONE)
++		queue->tx_link[i] = TX_PENDING;
++}
++
+ static int xennet_xdp_xmit_one(struct net_device *dev,
+ 			       struct netfront_queue *queue,
+ 			       struct xdp_frame *xdpf)
+@@ -568,6 +613,8 @@ static int xennet_xdp_xmit_one(struct net_device *dev,
+ 				offset_in_page(xdpf->data),
+ 				xdpf->len);
+ 
++	xennet_mark_tx_pending(queue);
++
+ 	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&queue->tx, notify);
+ 	if (notify)
+ 		notify_remote_via_irq(queue->tx_irq);
+@@ -592,6 +639,8 @@ static int xennet_xdp_xmit(struct net_device *dev, int n,
+ 	int nxmit = 0;
+ 	int i;
+ 
++	if (unlikely(np->broken))
++		return -ENODEV;
+ 	if (unlikely(flags & ~XDP_XMIT_FLAGS_MASK))
+ 		return -EINVAL;
+ 
+@@ -636,6 +685,8 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
+ 	/* Drop the packet if no queues are set up */
+ 	if (num_queues < 1)
+ 		goto drop;
++	if (unlikely(np->broken))
++		goto drop;
+ 	/* Determine which queue to transmit this SKB on */
+ 	queue_index = skb_get_queue_mapping(skb);
+ 	queue = &np->queues[queue_index];
+@@ -742,6 +793,8 @@ static netdev_tx_t xennet_start_xmit(struct sk_buff *skb, struct net_device *dev
+ 	/* timestamp packet in software */
+ 	skb_tx_timestamp(skb);
+ 
++	xennet_mark_tx_pending(queue);
++
+ 	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&queue->tx, notify);
+ 	if (notify)
+ 		notify_remote_via_irq(queue->tx_irq);
+@@ -1141,6 +1194,13 @@ static int xennet_poll(struct napi_struct *napi, int budget)
+ 	skb_queue_head_init(&tmpq);
+ 
+ 	rp = queue->rx.sring->rsp_prod;
++	if (RING_RESPONSE_PROD_OVERFLOW(&queue->rx, rp)) {
++		dev_alert(&dev->dev, "Illegal number of responses %u\n",
++			  rp - queue->rx.rsp_cons);
++		queue->info->broken = true;
++		spin_unlock(&queue->rx_lock);
++		return 0;
++	}
+ 	rmb(); /* Ensure we see queued responses up to 'rp'. */
+ 
  	i = queue->rx.rsp_cons;
- 	work_done = 0;
- 	while ((i != rp) && (work_done < budget)) {
--		memcpy(rx, RING_GET_RESPONSE(&queue->rx, i), sizeof(*rx));
-+		RING_COPY_RESPONSE(&queue->rx, i, rx);
- 		memset(extras, 0, sizeof(rinfo.extras));
+@@ -1362,6 +1422,9 @@ static irqreturn_t xennet_tx_interrupt(int irq, void *dev_id)
+ 	struct netfront_queue *queue = dev_id;
+ 	unsigned long flags;
  
- 		err = xennet_get_responses(queue, &rinfo, rp, &tmpq,
++	if (queue->info->broken)
++		return IRQ_HANDLED;
++
+ 	spin_lock_irqsave(&queue->tx_lock, flags);
+ 	xennet_tx_buf_gc(queue);
+ 	spin_unlock_irqrestore(&queue->tx_lock, flags);
+@@ -1374,6 +1437,9 @@ static irqreturn_t xennet_rx_interrupt(int irq, void *dev_id)
+ 	struct netfront_queue *queue = dev_id;
+ 	struct net_device *dev = queue->info->netdev;
+ 
++	if (queue->info->broken)
++		return IRQ_HANDLED;
++
+ 	if (likely(netif_carrier_ok(dev) &&
+ 		   RING_HAS_UNCONSUMED_RESPONSES(&queue->rx)))
+ 		napi_schedule(&queue->napi);
+@@ -1395,6 +1461,10 @@ static void xennet_poll_controller(struct net_device *dev)
+ 	struct netfront_info *info = netdev_priv(dev);
+ 	unsigned int num_queues = dev->real_num_tx_queues;
+ 	unsigned int i;
++
++	if (info->broken)
++		return;
++
+ 	for (i = 0; i < num_queues; ++i)
+ 		xennet_interrupt(0, &info->queues[i]);
+ }
+@@ -1466,6 +1536,11 @@ static int xennet_xdp_set(struct net_device *dev, struct bpf_prog *prog,
+ 
+ static int xennet_xdp(struct net_device *dev, struct netdev_bpf *xdp)
+ {
++	struct netfront_info *np = netdev_priv(dev);
++
++	if (np->broken)
++		return -ENODEV;
++
+ 	switch (xdp->command) {
+ 	case XDP_SETUP_PROG:
+ 		return xennet_xdp_set(dev, xdp->prog, xdp->extack);
+@@ -1841,6 +1916,7 @@ static int xennet_init_queue(struct netfront_queue *queue)
+ 
+ 	/* Initialise tx_skb_freelist as a free chain containing every entry. */
+ 	queue->tx_skb_freelist = 0;
++	queue->tx_pend_queue = TX_LINK_NONE;
+ 	for (i = 0; i < NET_TX_RING_SIZE; i++) {
+ 		queue->tx_link[i] = i + 1;
+ 		queue->grant_tx_ref[i] = GRANT_INVALID_REF;
+@@ -2115,6 +2191,9 @@ static int talk_to_netback(struct xenbus_device *dev,
+ 	if (info->queues)
+ 		xennet_destroy_queues(info);
+ 
++	/* For the case of a reconnect reset the "broken" indicator. */
++	info->broken = false;
++
+ 	err = xennet_create_queues(info, &num_queues);
+ 	if (err < 0) {
+ 		xenbus_dev_fatal(dev, err, "creating queues");
 -- 
 2.26.2
 
