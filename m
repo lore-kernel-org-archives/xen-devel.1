@@ -7,37 +7,36 @@ X-Spam-Status: No, score=-19.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E185AC4338F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70B06C432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 925896135F
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 925896135F
+	by mail.kernel.org (Postfix) with ESMTPS id 3C1A661360
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Aug 2021 11:01:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3C1A661360
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.170984.312166 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.170991.312196 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBV-0006PM-DW; Tue, 24 Aug 2021 11:01:37 +0000
+	id 1mIUBa-0007ol-SB; Tue, 24 Aug 2021 11:01:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 170984.312166; Tue, 24 Aug 2021 11:01:37 +0000
+Received: by outflank-mailman (output) from mailman id 170991.312196; Tue, 24 Aug 2021 11:01:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mIUBU-0006Jd-Io; Tue, 24 Aug 2021 11:01:36 +0000
-Received: by outflank-mailman (input) for mailman id 170984;
- Tue, 24 Aug 2021 11:01:32 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mIUBa-0007o7-J5; Tue, 24 Aug 2021 11:01:42 +0000
+Received: by outflank-mailman (input) for mailman id 170991;
+ Tue, 24 Aug 2021 11:01:40 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MxNM=NP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mIU4I-0003Ux-EX
- for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:54:10 +0000
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 62114c5c-04c9-11ec-a8c6-12813bfff9fa;
- Tue, 24 Aug 2021 10:52:32 +0000 (UTC)
+ id 1mIU4X-0001EC-F8
+ for xen-devel@lists.xenproject.org; Tue, 24 Aug 2021 10:54:25 +0000
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b4d2f649-f41e-4578-908e-2618cdba78ae;
+ Tue, 24 Aug 2021 10:52:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,32 +48,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 62114c5c-04c9-11ec-a8c6-12813bfff9fa
+X-Inumbo-ID: b4d2f649-f41e-4578-908e-2618cdba78ae
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1629802352;
+  d=citrix.com; s=securemail; t=1629802340;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=F/M2/vq6KWl0VqsyNOoDat2OseP4JIu38Fm2gzKcBlQ=;
-  b=U3QYDburFTqe6KbFy+HVkOn65kkw4XoFWbBNxCzDsfIQcGiBgXQKUT7q
-   yYgf4Kq3mxO5OwuNm/a0RojM/aW6JrMQ3tZVTj1AHiopSJrOmvivWnUlP
-   Iwjx1ptKlL14y0IqfpIiz0PPr1jxw9gRZ4b+eCTTVe3KNSxiLzrwxb98o
-   4=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 4jsNkiXImDfIJLLZOZGWIqMVlMjMO+QFBJMHH+BC9qi49EwwtiuItf0s49pDPfznhjdk6JHjce
- 3LUwotgP/JhkFXeBfHadoRrNp7M4KiCBWL1VkYooALtdr9cj1kTmhGEY6lNKvgYThaBFWmNgst
- zEQjxLGBIuYR8+TXC5OitDX1vJhDNkAooXAmz9ApP9lWiOJZyiFHyUYj0O2QvDHjk3XY8GIAZl
- 4n9B6IY1oSOkGkdR3zmlcZeY3nRXcCG8d3Y6TIn1u7YOVy2zmk6MofpzgZKwcWTUxZD+bSv6LD
- qL0Jzh/1WMby5042szX1/Q3e
+  bh=FDnqHMoR0cH4CGhhkHf9+wr9hwq4IdoBCZrIirFvi5I=;
+  b=W0x7J9SkHZWsKgTk3bS5eDzQs9sGJaAMc3iL/yOyZspWlK5t1X8apZBn
+   unLtOF9YfrfLgiycGm5rIQMic2H60CfSozaxz7EY1Vt4oBGzy2DxPq89S
+   x8ZiitSOMi9+D0iyImLFbzFDhXoadjVqQZWZyOshFmtu0zQSAfZ+jTXLN
+   c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Ubg3qgVyfvbrTwyewNxqT5RGvwVUhQ2qV4dJWl/Nl5iTvb9pIMdQIJtrQXJZp51z3g4ThjDVL1
+ OR70pnT0QUZs6EqIq/km1xyqD6emaboy9jQaZCaaaO36qX9RlSMYLi39c0aQJ5WHV1cL3hcGxe
+ altK5+1Pv5WfioqPTvVe5nUVr6tLC3azohMGif8p3bLgO5Fxaoq4Z7Q24kjSESatBCi4vBI2bV
+ VrO5jxU6vvJ5pDkr5ccm4BiVEthMH6S6JSltusS62EDW3IwslkdqPNQCoSLjZYz3VdrPanBDVA
+ ahZwzoYtVsmMVnO7fh8U0jD+
 X-SBRS: 5.1
-X-MesageID: 51153615
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 51166413
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:tKSuF65bio8NpUvPrAPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HJoB17726NtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QCpSWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-HdrOrdr: A9a23:SaWcj6NZFIw1HsBcT33155DYdb4zR+YMi2TDiHoddfUFSKalfp
+ 6V98jzjSWE7gr4WBkb+exoS5PwOE80lKQFqrX5Uo3SODUO1FHHEGgA1/qp/9SDIVyYygc178
+ 4JH8dD4bbLfDtHZLPBkWyF+qEbsbu6Gc6T5Nv2/jNId0VHeqtg5wB2BkKwCUttXjRLApI/Cd
+ 61+tdHjyDIQwVaUu2LQl0+G8TTrdzCk5zrJTQcAQQ81QWIhTS0rJbnDhmj2AsEWT8n+8ZszY
+ GFqX222kyQiYD69vbu7R6R032Qoqqi9jJ3Pr3MtiHSEESotu/nXvUkZ1TIhkFMnAjm0idQrD
+ CLmWZsAy070QKqQkil5RTqwAXuyzAo9jvrzkKZm2LqpYjjSCs9ENcpv/MuTvL10TtVgDhH6t
+ M944tZjesnMTrQ2CDmo9TYXRBjkUS55XIkjO4IlnRaFY8TcqVYo4AT9F5cVM5oJlOz1Kk3VO
+ 11SM3M7vdfdl2XK3jfo2l02dSpGnA+BA2PTEQOstGclzJWgHd6xU0Fw9F3pAZIyLstD51fo+
+ jUOKVhk79DCscQcKJmHe8EBdC6D2TcKCi8RV564W6XZp3vHki91aIfzI9FmN1CSaZ4v6fawq
+ 6xLW+wnVRCBH7GGImU2oFX/lTXXGCwNA6duv1j2w==
 X-IronPort-AV: E=Sophos;i="5.84,347,1620705600"; 
-   d="scan'208";a="51153615"
+   d="scan'208";a="51166413"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
@@ -82,9 +88,9 @@ CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
 	<wl@xen.org>
-Subject: [XEN PATCH v7 50/51] build: specify source tree in include/ for prerequisite
-Date: Tue, 24 Aug 2021 11:50:37 +0100
-Message-ID: <20210824105038.1257926-51-anthony.perard@citrix.com>
+Subject: [XEN PATCH v7 45/51] build: rework cloc recipe
+Date: Tue, 24 Aug 2021 11:50:32 +0100
+Message-ID: <20210824105038.1257926-46-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210824105038.1257926-1-anthony.perard@citrix.com>
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
@@ -92,89 +98,45 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-When doing an out-of-tree build, and thus setting VPATH,
-GNU Make 0.81 on Ubuntu Trusty complains about Circular dependency of
-include/Makefile and include/xlat.lst and drop them. The build fails
-later due to headers malformed.
+After folowing patches, the recipe doesn't work anymore.
+    - build: build everything from the root dir, use obj=$subdir
+    - build: introduce if_changed_deps
+
+First patch mean that $(names) already have $(path), and the second
+one, the .*.d files are replaced by .*.cmd files which are much
+simpler to parse here.
+
+Also replace the makefile programming by a much simpler shell command.
+
+This doesn't check anymore if the source file exist, but that can be
+fixed by running `make clean`, and probably doesn't impact the
+calculation. `cloc` just complain that some files don't exist.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/include/Makefile | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ xen/Makefile | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index 2cd779a4108c..b94cfea74660 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -42,19 +42,19 @@ endif
- .PHONY: all
- all: $(addprefix $(obj)/,$(headers-y))
+diff --git a/xen/Makefile b/xen/Makefile
+index 36a64118007b..b09584e33f9c 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -490,14 +490,7 @@ _MAP:
  
--$(obj)/compat/%.h: $(obj)/compat/%.i $(src)/Makefile $(srctree)/tools/compat-build-header.py
-+$(obj)/compat/%.h: $(obj)/compat/%.i $(srctree)/$(src)/Makefile $(srctree)/tools/compat-build-header.py
- 	$(PYTHON) $(srctree)/tools/compat-build-header.py <$< $(patsubst $(obj)/%,%,$@) >>$@.new; \
- 	mv -f $@.new $@
+ .PHONY: cloc
+ cloc:
+-	$(eval tmpfile := $(shell mktemp))
+-	$(foreach f, $(shell find $(BASEDIR) -name *.o.d), \
+-		$(eval path := $(dir $(f))) \
+-		$(eval names := $(shell grep -o "[a-zA-Z0-9_/-]*\.[cS]" $(f))) \
+-		$(foreach sf, $(names), \
+-			$(shell if test -f $(path)/$(sf) ; then echo $(path)/$(sf) >> $(tmpfile); fi;)))
+-	cloc --list-file=$(tmpfile)
+-	rm $(tmpfile)
++	find . -name '*.o.cmd' -exec awk '/^source_/{print $$3;}' {} + | cloc --list-file=-
  
--$(obj)/compat/%.i: $(obj)/compat/%.c $(src)/Makefile
-+$(obj)/compat/%.i: $(obj)/compat/%.c $(srctree)/$(src)/Makefile
- 	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(XEN_CFLAGS)) $(cppflags-y) -o $@ $<
+ endif #config-build
  
--$(obj)/compat/%.c: $(src)/public/%.h $(src)/xlat.lst $(src)/Makefile $(srctree)/tools/compat-build-source.py
-+$(obj)/compat/%.c: $(src)/public/%.h $(srctree)/$(src)/xlat.lst $(srctree)/$(src)/Makefile $(srctree)/tools/compat-build-source.py
- 	mkdir -p $(@D)
- 	$(PYTHON) $(srctree)/tools/compat-build-source.py $(srctree)/$(src)/xlat.lst <$< >$@.new
- 	mv -f $@.new $@
- 
--$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/get-fields.sh $(src)/Makefile
-+$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/get-fields.sh $(srctree)/$(src)/Makefile
- 	export PYTHON=$(PYTHON); \
- 	while read what name; do \
- 		$(SHELL) $(srctree)/tools/get-fields.sh "$$what" compat_$$name $< || exit $$?; \
-@@ -62,7 +62,7 @@ $(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/
- 	mv -f $@.new $@
- 
- .PRECIOUS: $(obj)/compat/.xlat/%.lst
--$(obj)/compat/.xlat/%.lst: $(src)/xlat.lst $(src)/Makefile
-+$(obj)/compat/.xlat/%.lst: $(srctree)/$(src)/xlat.lst $(srctree)/$(src)/Makefile
- 	mkdir -p $(@D)
- 	grep -v '^[[:blank:]]*#' $< | sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,[[:blank:]]+$*\.h[[:blank:]]*$$,,p' >$@.new
- 	$(call move-if-changed,$@.new,$@)
-@@ -70,7 +70,7 @@ $(obj)/compat/.xlat/%.lst: $(src)/xlat.lst $(src)/Makefile
- xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(srctree)/$(src)/xlat.lst | uniq)
- xlat-y := $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
- 
--$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/auto.conf $(src)/Makefile
-+$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/auto.conf $(srctree)/$(src)/Makefile
- 	cat $(filter %.h,$^) >$@.new
- 	mv -f $@.new $@
- 
-@@ -97,7 +97,7 @@ PUBLIC_C99_HEADERS := $(addprefix $(hdrs-path)/, $(c99-headers))
- $(src)/public/io/9pfs.h-prereq := string
- $(src)/public/io/pvcalls.h-prereq := string
- 
--$(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(src)/Makefile
-+$(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(srctree)/$(src)/Makefile
- 	for i in $(filter %.h,$^); do \
- 	    $(CC) -x c -ansi -Wall -Werror -include stdint.h \
- 	          -S -o /dev/null $$i || exit 1; \
-@@ -105,7 +105,7 @@ $(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(src)/Makefile
- 	done >$@.new
- 	mv $@.new $@
- 
--$(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(src)/Makefile
-+$(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(srctree)/$(src)/Makefile
- 	rm -f $@.new
- 	$(foreach i, $(filter %.h,$^),                                        \
- 	    echo "#include "\"$(i)\"                                          \
-@@ -115,7 +115,7 @@ $(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(src)/Makefile
- 	    || exit $$?; echo $(i) >> $@.new;)
- 	mv $@.new $@
- 
--$(obj)/headers++.chk: $(PUBLIC_HEADERS) $(src)/Makefile
-+$(obj)/headers++.chk: $(PUBLIC_HEADERS) $(srctree)/$(src)/Makefile
- 	rm -f $@.new
- 	if ! $(CXX) -v >/dev/null 2>&1; then                                  \
- 	    touch $@.new;                                                     \
 -- 
 Anthony PERARD
 
