@@ -2,43 +2,47 @@ Return-Path: <SRS0=IFNi=NS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-4.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F2BEC25AEC
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 20:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33C47C432BE
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 20:35:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E1A8B60F6C
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 20:12:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E1A8B60F6C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id BAF8A60FD8
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 20:35:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BAF8A60FD8
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.173955.317395 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.174019.317459 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJiDF-0000r2-La; Fri, 27 Aug 2021 20:12:29 +0000
+	id 1mJiYn-0000bI-2m; Fri, 27 Aug 2021 20:34:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 173955.317395; Fri, 27 Aug 2021 20:12:29 +0000
+Received: by outflank-mailman (output) from mailman id 174019.317459; Fri, 27 Aug 2021 20:34:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJiDF-0000nT-34; Fri, 27 Aug 2021 20:12:29 +0000
-Received: by outflank-mailman (input) for mailman id 173955;
- Fri, 27 Aug 2021 19:19:09 +0000
+	id 1mJiYm-0000bB-Un; Fri, 27 Aug 2021 20:34:44 +0000
+Received: by outflank-mailman (input) for mailman id 174019;
+ Fri, 27 Aug 2021 20:34:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=8NxO=NS=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
- id 1mJhNd-0001H3-Bl
- for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 19:19:09 +0000
-Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
+ <SRS0=u0mk=NS=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1mJiYm-0000b5-B2
+ for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 20:34:44 +0000
+Received: from mail-lf1-x136.google.com (unknown [2a00:1450:4864:20::136])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 97cf3ac1-5949-4c81-b867-15b982ac45e8;
- Fri, 27 Aug 2021 19:18:23 +0000 (UTC)
-Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1mJhMg-00D5Aq-W4; Fri, 27 Aug 2021 19:18:11 +0000
+ id c49fe0b7-ae3d-4464-be01-5f3c64d55405;
+ Fri, 27 Aug 2021 20:34:43 +0000 (UTC)
+Received: by mail-lf1-x136.google.com with SMTP id c8so4263436lfi.3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Aug 2021 13:34:42 -0700 (PDT)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id u3sm773100lju.107.2021.08.27.13.34.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Aug 2021 13:34:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,96 +53,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 97cf3ac1-5949-4c81-b867-15b982ac45e8
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=vzfFGe77MiDtDAcsNEd4FFV6XUqpkLp7v2/+XiGswys=; b=isst7bA45MsJEBHCIhkJx6Kczq
-	YrMi78bLRt5qELgdWgY6H9Mgp+37YNSRQsfgXi4VM1MADrofBM9ydqTVaHxK/Mb9PPst7iuahgypW
-	86DjV+a3MdG1nqOFP2e9R/7/LoExU5RNSDgYWGFgZgOsn7cQGQmZmFVdsFt4b04RdjQi64HPxJC2Y
-	TblDGK95B8LHVKYy5XjvUnNc7qRElN1IbsJ8V/4QSvZhz1Hefy4ZsPtYLUyEbJYVsV0jlytxSkfZi
-	zdJLho+9svAaFsXC7A1pCEYiKEfCX1LVke+8CZuMNuC9thfpCFfwoMaHUOqgBZMY2OR0ZgHbFRARA
-	7BULMVAA==;
-From: Luis Chamberlain <mcgrof@kernel.org>
-To: axboe@kernel.dk,
-	colyli@suse.de,
-	kent.overstreet@gmail.com,
-	kbusch@kernel.org,
-	sagi@grimberg.me,
-	vishal.l.verma@intel.com,
-	dan.j.williams@intel.com,
-	dave.jiang@intel.com,
-	ira.weiny@intel.com,
-	konrad.wilk@oracle.com,
-	roger.pau@citrix.com,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	minchan@kernel.org,
-	ngupta@vflare.org,
-	senozhatsky@chromium.org
-Cc: xen-devel@lists.xenproject.org,
-	nvdimm@lists.linux.dev,
-	linux-nvme@lists.infradead.org,
-	linux-bcache@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 01/10] block/brd: add error handling support for add_disk()
-Date: Fri, 27 Aug 2021 12:18:00 -0700
-Message-Id: <20210827191809.3118103-2-mcgrof@kernel.org>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210827191809.3118103-1-mcgrof@kernel.org>
-References: <20210827191809.3118103-1-mcgrof@kernel.org>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: c49fe0b7-ae3d-4464-be01-5f3c64d55405
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=GR1VzIgI95C7s5Zv9cazg0liNSpLP3B2iPo5pLuIroU=;
+        b=veEVVCOJY+GKb6lNkdiXPgjrnDxjcRDj6PgfYHXUkzdgw01M81ZrpaH1k9b8kEhXgz
+         B4rLqze2g/IFroZ1pwE9XvmvJ+l2WHCBH/8uoBHyk+jSuO/gU+lIq0C2RjWgwb2qyBRc
+         s232LOynhbZTCUUypi+fpqp8BKAZwXZ9pk2flU9Uvgl+vRa7c4r+vTBGAO5aRWc8SJmM
+         sCvx4C+jVBXQDOXj2wEZcNDsRF6WmRBiEp0aN3tM+pgkr9hpz25Lvq2QuPugakjOEzWP
+         dNAvE5KVjIZcBYTUqYSBOVMKqV8Sgbz/IqC41PJpLwOBhRa6IUwAmCD1eTtric/y0vIP
+         hhGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=GR1VzIgI95C7s5Zv9cazg0liNSpLP3B2iPo5pLuIroU=;
+        b=SJz6aT5/msvG5xpc+cw9gYKfvI843pz6eIe8p6jZS/CB5CYMM4SRNcdr2IOcBySnto
+         HV074D9KFtPYgGHs4uZBK+C/L7143cWu5YLDlE43SJuv4XGNL1mVuDKAJ6bxhYdH3NQB
+         iXXTqvRP1nFLXmepAPznqFx7eRx86ZqZWG5grAkV4rLd832P2OZK2OZy5Qi1mhUbpzuC
+         u3O3LhI7J7GZU3QoNbnPMt+y0G6MRzglMBYr59N8zSN8Eo4+ZgWmw4NcwNluxMKdMGe6
+         a9nz2DADz2iCQ477bZicJV2M9up0KTLt7rtZT6Y3wp6qBy2Ph2S4NAkQtzQuJ+GXFIAi
+         k9mw==
+X-Gm-Message-State: AOAM530OBCmhIW3/sKJdFzdlOZIIM5FAbw/Bei8AdD4TObZFfxqBxZiz
+	mLyT6+OhdMyNChb3cmfInRc=
+X-Google-Smtp-Source: ABdhPJytf/Vko32+7asLHaC5dXR9RoijSvb1oyh8EGC4vsBsPZlKPH873/l+2PnGK74Ouf65kFERjA==
+X-Received: by 2002:a19:c794:: with SMTP id x142mr8162813lff.134.1630096481847;
+        Fri, 27 Aug 2021 13:34:41 -0700 (PDT)
+Subject: Re: [RFC PATCH] xen/memory: Introduce a hypercall to provide
+ unallocated space
+To: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>
+References: <1627489110-25633-1-git-send-email-olekstysh@gmail.com>
+ <e8db3021-78a5-e040-a70b-62ca5b500149@xen.org>
+ <4de5ed21-379e-b618-44c8-924d88b1a519@citrix.com>
+ <bbc7f597-5249-20a0-cac9-13f594268299@xen.org>
+ <6a633f4e-13e0-4a2b-cf6e-35ef90ae977c@gmail.com>
+ <alpine.DEB.2.21.2107301630510.10122@sstabellini-ThinkPad-T480s>
+ <f6b2e6c6-bf58-960f-4a09-f05ebcf1f566@gmail.com>
+ <5643d414-0b76-74a4-2c37-c7a99338d547@gmail.com>
+ <c83378af-4d3b-9256-0e0d-f88c43c6de2f@xen.org>
+ <alpine.DEB.2.21.2108051720210.18743@sstabellini-ThinkPad-T480s>
+ <6596ad08-8398-64dd-ef62-cd7bc6f7333e@gmail.com>
+ <bc576a23-d107-c67d-8dca-62691e5eea1a@xen.org>
+ <1d0ea55d-2e5a-daa7-9c60-c7a1c4b48fa1@gmail.com>
+ <6947db7a-44d3-eb5f-c93e-1c1b88c62f29@xen.org>
+ <736c38b3-0dfa-ccbf-6a6a-6da871f8aca0@gmail.com>
+ <4f5be55d-062b-06d2-1e41-bac3ade0cc3a@xen.org>
+ <f046eaba-d073-7fbb-4f4d-405f34d8ee9c@gmail.com>
+ <e136dc8e-de64-56fa-8353-300b947db3aa@xen.org>
+ <92268dd6-04b7-38e9-86d4-949702971f4b@xen.org>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <610c474b-9590-2f52-b61e-ab4bb0fc1ec9@gmail.com>
+Date: Fri, 27 Aug 2021 23:34:40 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Luis Chamberlain <mcgrof@infradead.org>
+In-Reply-To: <92268dd6-04b7-38e9-86d4-949702971f4b@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-We never checked for errors on add_disk() as this function
-returned void. Now that this is fixed, use the shiny new
-error handling.
 
-Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
----
- drivers/block/brd.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+On 17.08.21 20:54, Julien Grall wrote:
 
-diff --git a/drivers/block/brd.c b/drivers/block/brd.c
-index 58ec167aa018..c2bf4946f4e3 100644
---- a/drivers/block/brd.c
-+++ b/drivers/block/brd.c
-@@ -372,6 +372,7 @@ static int brd_alloc(int i)
- 	struct brd_device *brd;
- 	struct gendisk *disk;
- 	char buf[DISK_NAME_LEN];
-+	int err = -ENOMEM;
- 
- 	brd = kzalloc(sizeof(*brd), GFP_KERNEL);
- 	if (!brd)
-@@ -410,14 +411,19 @@ static int brd_alloc(int i)
- 	/* Tell the block layer that this is not a rotational device */
- 	blk_queue_flag_set(QUEUE_FLAG_NONROT, disk->queue);
- 	blk_queue_flag_clear(QUEUE_FLAG_ADD_RANDOM, disk->queue);
--	add_disk(disk);
-+	err = add_disk(disk);
-+	if (err)
-+		goto out_cleanup_disk;
-+
- 	list_add_tail(&brd->brd_list, &brd_devices);
- 
- 	return 0;
- 
-+out_cleanup_disk:
-+	blk_cleanup_disk(disk);
- out_free_dev:
- 	kfree(brd);
--	return -ENOMEM;
-+	return err;
- }
- 
- static void brd_probe(dev_t dev)
+Hi Julien
+
+
+> On 17/08/2021 18:53, Julien Grall wrote:
+>> Hi Oleksandr,
+>>
+>> On 10/08/2021 18:03, Oleksandr wrote:
+>>>
+>>> On 10.08.21 19:28, Julien Grall wrote:
+>>>
+>>> Hi Julien.
+>>>
+>>>>
+>>>>
+>>>> On 09/08/2021 22:18, Oleksandr wrote:
+>>>>>
+>>>>> On 09.08.21 23:45, Julien Grall wrote:
+>>>>>
+>>>>>
+>>>>> Hi Julien
+>>>>
+>>>>
+>>>> Hi Oleksandr,
+>>>>
+>>>>>> On 09/08/2021 19:24, Oleksandr wrote:
+>>>>>>>
+>>>>>>> On 09.08.21 18:42, Julien Grall wrote:
+>>>>>>> 1. If IOMMU is enabled for Dom0 -> provide holes found in Host 
+>>>>>>> DT as safe ranges
+>>>>>>>
+>>>>>>> I would take into the account holes >= 1MB.
+>>>>>>
+>>>>>> May I ask why 1MB?
+>>>>>
+>>>>> Nothing special, just thinking to not bother with small regions 
+>>>>> which would not be too useful overall, but could bloat resulting 
+>>>>> reg property.
+>>>>>
+>>>>> Anyway, I would be ok with any sizes.
+>>>>
+>>>> I was more interesting with the reasoning behind your choice rather 
+>>>> than saying we want more.
+>>>>
+>>>> I agree that we may want to skip smaller region. I am guess that an 
+>>>> high number of small regions will also increase the bookeeping in 
+>>>> Linux.
+>>>>
+>>>> But I would probably suggest to align the safe region to a 2MB 
+>>>> (superpage for 4KB page granularity) just because the backend (or 
+>>>> even Xen) may be able to do some optimization there.
+>>>
+>>> OK, agree regarding the alignment. But, what about the size? I 
+>>> assume, it should be a multiple of 2MB.
+>>
+>> I would say yes. In the documentation for the guest, I would just 
+>> write "64KB" to give us some flexibility to reduce the alignment/size 
+>> if we encounter platform where we can meet those limits (hopefully 
+>> there is none...).
+>
+> Whoops, I meant cannot rather than can.
+
+ok, makes sense, thank you for the clarification.
+
+
+
+>
+> Cheers,
+>
 -- 
-2.30.2
+Regards,
+
+Oleksandr Tyshchenko
 
 
