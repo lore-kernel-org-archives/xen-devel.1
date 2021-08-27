@@ -2,48 +2,43 @@ Return-Path: <SRS0=IFNi=NS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2349C432BE
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 06:53:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59858C432BE
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 06:59:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A32C160C51
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 06:53:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A32C160C51
+	by mail.kernel.org (Postfix) with ESMTPS id 0FAF060FC4
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 06:59:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0FAF060FC4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.173408.316421 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.173420.316432 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJVje-0003kw-KZ; Fri, 27 Aug 2021 06:53:06 +0000
+	id 1mJVpX-0004jO-C3; Fri, 27 Aug 2021 06:59:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 173408.316421; Fri, 27 Aug 2021 06:53:06 +0000
+Received: by outflank-mailman (output) from mailman id 173420.316432; Fri, 27 Aug 2021 06:59:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJVje-0003kn-HT; Fri, 27 Aug 2021 06:53:06 +0000
-Received: by outflank-mailman (input) for mailman id 173408;
- Fri, 27 Aug 2021 06:53:05 +0000
+	id 1mJVpX-0004jH-8r; Fri, 27 Aug 2021 06:59:11 +0000
+Received: by outflank-mailman (input) for mailman id 173420;
+ Fri, 27 Aug 2021 06:59:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qCIF=NS=gmail.com=like.xu.linux@srs-us1.protection.inumbo.net>)
- id 1mJVjd-0003kG-Om
- for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 06:53:05 +0000
-Received: from mail-pg1-x530.google.com (unknown [2607:f8b0:4864:20::530])
+ <SRS0=XGXj=NS=gmail.com=andy.shevchenko@srs-us1.protection.inumbo.net>)
+ id 1mJVpW-0004jB-B6
+ for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 06:59:10 +0000
+Received: from mail-pl1-x630.google.com (unknown [2607:f8b0:4864:20::630])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f39799d7-7143-4f5d-a846-15615f59ec5a;
- Fri, 27 Aug 2021 06:53:04 +0000 (UTC)
-Received: by mail-pg1-x530.google.com with SMTP id x4so5248684pgh.1
- for <xen-devel@lists.xenproject.org>; Thu, 26 Aug 2021 23:53:04 -0700 (PDT)
-Received: from Likes-MacBook-Pro.local ([103.7.29.32])
- by smtp.gmail.com with ESMTPSA id t42sm4859131pfg.30.2021.08.26.23.52.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Aug 2021 23:53:03 -0700 (PDT)
+ id 67b75533-d9b3-456b-bd26-4782028bb4b4;
+ Fri, 27 Aug 2021 06:59:09 +0000 (UTC)
+Received: by mail-pl1-x630.google.com with SMTP id j2so3372332pll.1
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Aug 2021 23:59:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,237 +50,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f39799d7-7143-4f5d-a846-15615f59ec5a
+X-Inumbo-ID: 67b75533-d9b3-456b-bd26-4782028bb4b4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=to:cc:references:from:organization:subject:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=ZbPR4yx/IOajSeOQV0WqfM0PbBdXTweT1rKYfi28feY=;
-        b=payY2kqnM27b9m01D/1+bYK3zs1eXQlgI4vTVEDItXKdcEjenbudsQUK12OYHhZIDJ
-         JOxvUmjXzUwKZpNU30p0IGGgmqvvdzbBsUOvU6kO6AytKPjJv1t5M9UKqUnNynMo3O1t
-         897hTF8t6qJ401enQ56rSSevNHfVbvTWJ2uDO8+oBxCl+aL8EvHPdnXfXPhKa2JAH0Rb
-         GaP8DF5aX4LiaeW5F4pLVTPqSSEmBhqL2SFViKXjLv/WCXH2zl9+/EBUAncYatI1OJYW
-         ut5gRVObXIQd3ImgY4BCEWE/FMTk8GjNsLYaORrSs8vtqDHmAJVY+p5cShEKs9U0gvIh
-         z52A==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=Rqn+GrCddwb17438Eb7/acjTBeKWly1ebyK4GCadnFc=;
+        b=Ahob/aCaoxGGmBX3uT/2Oo+coR/T1tys8xgPUYlJZHQ+79x1W7tMhNYHihEb3g00Pw
+         m+dgL0BLb9DG6XuqQrGIlpqK11vUr+Y2ytYHZ7LdTBFa1tFBJE3STgSjF41FypNGQroh
+         EB33JFOQSvpQcvOA/KVG6FqtXl7O0+BT+q4qQg5vtIojCX29E2kJoRY1MRvb3ovAgDbp
+         aFXAm0ssP0g7n3TLr2XOHHUaLQbsPjFKeMCjJaff6OnyliY0dDUUm9ACwqxN5BizOny5
+         6o6R1k1p3THp4VGKPD1gPgbF9N5SJmHFccehHvyHptaqGZoYeq1bOsTJYfzYeYbXFcTi
+         n8+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:cc:references:from:organization:subject
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=ZbPR4yx/IOajSeOQV0WqfM0PbBdXTweT1rKYfi28feY=;
-        b=rd7w4fcSl6MczTCPn85VrHgTJ0T7Fx7OeFm1lks2vK7YrUK/2MPLQHynQ+lHpZJn8A
-         dKBeMkDtFQU3rrFXQF2NNkB7zX30i1uyRkOb9AHFMtWT/OchiPixxtaA3Wcm5c8jeyXm
-         CaxtFb0M0Pbpcye+DrZp9EhEKRsgSb6bf8rjXDU0xZyf7f0RpT35B02FvtvNs7Uj+Ava
-         wP8UBouCOAQzT2k5fHbLDpe4C1ee5fvFHUqcU14UOQi9HNRjd/3Dmr7DfvLFIrBIlsI9
-         0VjegOa0yE1bQS30xiMhO3QOsOm7ADtNPr33AtYtWL1vIRsgcIJdMG0DR4/m+RkY6Ya4
-         MlVw==
-X-Gm-Message-State: AOAM530a7+yWqRUPNjHR5jMPYbbSIYtnmC7eoikX8jyWQKocpW0NwTan
-	f758jQbeSUkiTmdo+HGGp3A=
-X-Google-Smtp-Source: ABdhPJyIg5x8cr9cVb6zAj5cRL9RFwMN1nC8hYox93WeTM79htakFUO0AJVU1P54gIrOby01KizKhw==
-X-Received: by 2002:a63:b1a:: with SMTP id 26mr6567924pgl.12.1630047183274;
-        Thu, 26 Aug 2021 23:53:03 -0700 (PDT)
-To: Sean Christopherson <seanjc@google.com>,
- Peter Zijlstra <peterz@infradead.org>
-Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@redhat.com>, Namhyung Kim <namhyung@kernel.org>,
- James Morse <james.morse@arm.com>,
- Alexandru Elisei <alexandru.elisei@arm.com>,
- Suzuki K Poulose <suzuki.poulose@arm.com>, "H. Peter Anvin" <hpa@zytor.com>,
- Vitaly Kuznetsov <vkuznets@redhat.com>, Wanpeng Li <wanpengli@tencent.com>,
- Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, kvmarm@lists.cs.columbia.edu,
- linux-csky@vger.kernel.org, linux-riscv@lists.infradead.org,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- Artem Kashkanov <artem.kashkanov@intel.com>,
- Zhu Lingshan <lingshan.zhu@intel.com>, Will Deacon <will@kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, Peter Zijlstra <peterz@infradead.org>,
- Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>,
- Catalin Marinas <catalin.marinas@arm.com>, Marc Zyngier <maz@kernel.org>,
- Guo Ren <guoren@kernel.org>, Nick Hu <nickhu@andestech.com>,
- Greentime Hu <green.hu@gmail.com>, Vincent Chen <deanbo422@gmail.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
- Thomas Gleixner <tglx@linutronix.de>, Borislav Petkov <bp@alien8.de>,
- x86@kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
- <jgross@suse.com>, Josh Poimboeuf <jpoimboe@redhat.com>,
- Jason Baron <jbaron@akamai.com>, Steven Rostedt <rostedt@goodmis.org>,
- Ard Biesheuvel <ardb@kernel.org>
-References: <20210827005718.585190-1-seanjc@google.com>
-From: Like Xu <like.xu.linux@gmail.com>
-Organization: Tencent
-Subject: Re: [PATCH 00/15] perf: KVM: Fix, optimize, and clean up callbacks
-Message-ID: <fd3dcd6c-b3d5-4453-93fb-b46d0595534e@gmail.com>
-Date: Fri, 27 Aug 2021 14:52:25 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.13.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=Rqn+GrCddwb17438Eb7/acjTBeKWly1ebyK4GCadnFc=;
+        b=hYQwIjIptUTJCothOTZnQSjlW3yZQN+sO4ErY9wkwBTrWFZkFwB819E1QsSIdUSIco
+         b7oTM84TLzZ77jM0nJKhxEfPURkqVTY+MpzPV8GaDlMuOVo0qdRnvyIzAA8dP8ttHCHU
+         +x8gqpZumGZD3nxbN7gBPZ2iP+uQt/QnOyE/uvpvd+E9bTTCUmYgnYuKer/1oYCPAgaJ
+         zxyoWXvyjGYYrowfyPi5pZZPn6ueUloRdFm7mMtq8CBLBd+oh2FbhJAAtCT9nOaApTZd
+         wYePulw9zONMJLAyO6SW1KKKnYdR1LLNoAu4Ay7fJPtgK1iRJdqMSVDkrityxwY86W+5
+         CdnQ==
+X-Gm-Message-State: AOAM533aeeXn0wY2EireELSG2Jk4WhbCBPhrRVoJWE5sTqNXZ+rnnd/u
+	EYw92fHkpOk6lcyoBMBjkvPp5KMyzKqTYrvzUTw=
+X-Google-Smtp-Source: ABdhPJzbMPfKsiNwRsmJ6wf35o+bM3Vsllxj/xaKs1Zg3gEKi2+LtrBilr6TwQqyx2Jk+YbMtx83ULLwDM5rxvcqh8o=
+X-Received: by 2002:a17:902:bb81:b0:12d:a7ec:3d85 with SMTP id
+ m1-20020a170902bb8100b0012da7ec3d85mr7349833pls.17.1630047548297; Thu, 26 Aug
+ 2021 23:59:08 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210827005718.585190-1-seanjc@google.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <20210624155526.2775863-1-tientzu@chromium.org> <20210624155526.2775863-11-tientzu@chromium.org>
+In-Reply-To: <20210624155526.2775863-11-tientzu@chromium.org>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Fri, 27 Aug 2021 09:58:32 +0300
+Message-ID: <CAHp75VfVhVGFEQGeUKajrUKmkx_et_KakDDgroC2BrMMhd62yg@mail.gmail.com>
+Subject: Re: [PATCH v15 10/12] swiotlb: Add restricted DMA pool initialization
+To: Claire Chang <tientzu@chromium.org>
+Cc: Rob Herring <robh+dt@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+	Juergen Gross <jgross@suse.com>, Christoph Hellwig <hch@lst.de>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, benh@kernel.crashing.org, paulus@samba.org, 
+	"list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, sstabellini@kernel.org, 
+	Robin Murphy <robin.murphy@arm.com>, grant.likely@arm.com, xypron.glpk@gmx.de, 
+	Thierry Reding <treding@nvidia.com>, mingo@kernel.org, bauerman@linux.ibm.com, 
+	peterz@infradead.org, Greg KH <gregkh@linuxfoundation.org>, 
+	Saravana Kannan <saravanak@google.com>, "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>, 
+	heikki.krogerus@linux.intel.com, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Randy Dunlap <rdunlap@infradead.org>, 
+	Dan Williams <dan.j.williams@intel.com>, Bartosz Golaszewski <bgolaszewski@baylibre.com>, 
+	linux-devicetree <devicetree@vger.kernel.org>, lkml <linux-kernel@vger.kernel.org>, 
+	linuxppc-dev@lists.ozlabs.org, xen-devel@lists.xenproject.org, 
+	Nicolas Boichat <drinkcat@chromium.org>, Jim Quinlan <james.quinlan@broadcom.com>, tfiga@chromium.org, 
+	bskeggs@redhat.com, bhelgaas@google.com, chris@chris-wilson.co.uk, 
+	daniel@ffwll.ch, airlied@linux.ie, dri-devel@lists.freedesktop.org, 
+	intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, 
+	jxgao@google.com, joonas.lahtinen@linux.intel.com, linux-pci@vger.kernel.org, 
+	maarten.lankhorst@linux.intel.com, matthew.auld@intel.com, 
+	rodrigo.vivi@intel.com, thomas.hellstrom@linux.intel.com, 
+	thomas.lendacky@amd.com, quic_qiancai@quicinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-+ STATIC BRANCH/CALL friends.
+On Thu, Jun 24, 2021 at 6:59 PM Claire Chang <tientzu@chromium.org> wrote:
+>
+> Add the initialization function to create restricted DMA pools from
+> matching reserved-memory nodes.
+>
+> Regardless of swiotlb setting, the restricted DMA pool is preferred if
+> available.
+>
+> The restricted DMA pools provide a basic level of protection against the
+> DMA overwriting buffer contents at unexpected times. However, to protect
+> against general data leakage and system memory corruption, the system
+> needs to provide a way to lock down the memory access, e.g., MPU.
 
-On 27/8/2021 8:57 am, Sean Christopherson wrote:
-> This started out as a small series[1] to fix a KVM bug related to Intel PT
-> interrupt handling and snowballed horribly.
-> 
-> The main problem being addressed is that the perf_guest_cbs are shared by
-> all CPUs, can be nullified by KVM during module unload, and are not
-> protected against concurrent access from NMI context.
 
-Shouldn't this be a generic issue of the static_call() usage ?
 
-At the beginning, we set up the static entry assuming perf_guest_cbs != NULL:
 
-	if (perf_guest_cbs && perf_guest_cbs->handle_intel_pt_intr) {
-		static_call_update(x86_guest_handle_intel_pt_intr,
-				   perf_guest_cbs->handle_intel_pt_intr);
-	}
 
-and then we unset the perf_guest_cbs and do the static function call like this:
+> +static int rmem_swiotlb_device_init(struct reserved_mem *rmem,
+> +                                   struct device *dev)
+> +{
+> +       struct io_tlb_mem *mem =3D rmem->priv;
+> +       unsigned long nslabs =3D rmem->size >> IO_TLB_SHIFT;
+> +
+> +       /*
+> +        * Since multiple devices can share the same pool, the private da=
+ta,
+> +        * io_tlb_mem struct, will be initialized by the first device att=
+ached
+> +        * to it.
+> +        */
 
-DECLARE_STATIC_CALL(x86_guest_handle_intel_pt_intr, 
-*(perf_guest_cbs->handle_intel_pt_intr));
-static int handle_pmi_common(struct pt_regs *regs, u64 status)
-{
-		...
-		if (!static_call(x86_guest_handle_intel_pt_intr)())
-			intel_pt_interrupt();
-		...
-}
+> +       if (!mem) {
 
-Can we make static_call() back to the original "(void *)&__static_call_return0" 
-in this case ?
+Can it be rather
 
-> 
-> The bug has escaped notice because all dereferences of perf_guest_cbs
-> follow the same "perf_guest_cbs && perf_guest_cbs->is_in_guest()" pattern,
-> and AFAICT the compiler never reloads perf_guest_cbs in this sequence.
-> The compiler does reload perf_guest_cbs for any future dereferences, but
-> the ->is_in_guest() guard all but guarantees the PMI handler will win the
-> race, e.g. to nullify perf_guest_cbs, KVM has to completely exit the guest
-> and teardown down all VMs before it can be unloaded.
-> 
-> But with help, e.g. READ_ONCE(perf_guest_cbs), unloading kvm_intel can
-> trigger a NULL pointer derference (see below).  Manual intervention aside,
-> the bug is a bit of a time bomb, e.g. my patch 3 from the original PT
-> handling series would have omitted the ->is_in_guest() guard.
-> 
-> This series fixes the problem by making the callbacks per-CPU, and
-> registering/unregistering the callbacks only with preemption disabled
-> (except for the Xen case, which doesn't unregister).
-> 
-> This approach also allows for several nice cleanups in this series.
-> KVM x86 and arm64 can share callbacks, KVM x86 drops its somewhat
-> redundant current_vcpu, and the retpoline that is currently hit when KVM
-> is loaded (due to always checking ->is_in_guest()) goes away (it's still
-> there when running as Xen Dom0).
-> 
-> Changing to per-CPU callbacks also provides a good excuse to excise
-> copy+paste code from architectures that can't possibly have guest
-> callbacks.
-> 
-> This series conflicts horribly with a proposed patch[2] to use static
-> calls for perf_guest_cbs.  But that patch is broken as it completely
-> fails to handle unregister, and it's not clear to me whether or not
-> it can correctly handle unregister without fixing the underlying race
-> (I don't know enough about the code patching for static calls).
-> 
-> This tweak
-> 
-> diff --git a/arch/x86/events/core.c b/arch/x86/events/core.c
-> index 1eb45139fcc6..202e5ad97f82 100644
-> --- a/arch/x86/events/core.c
-> +++ b/arch/x86/events/core.c
-> @@ -2954,7 +2954,7 @@ unsigned long perf_misc_flags(struct pt_regs *regs)
->   {
->          int misc = 0;
-> 
-> -       if (perf_guest_cbs && perf_guest_cbs->is_in_guest()) {
-> +       if (READ_ONCE(perf_guest_cbs) && READ_ONCE(perf_guest_cbs)->is_in_guest()) {
->                  if (perf_guest_cbs->is_user_mode())
->                          misc |= PERF_RECORD_MISC_GUEST_USER;
->                  else
-> 
-> while spamming module load/unload leads to:
-> 
->    BUG: kernel NULL pointer dereference, address: 0000000000000000
->    #PF: supervisor read access in kernel mode
->    #PF: error_code(0x0000) - not-present page
->    PGD 0 P4D 0
->    Oops: 0000 [#1] PREEMPT SMP
->    CPU: 6 PID: 1825 Comm: stress Not tainted 5.14.0-rc2+ #459
->    Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 0.0.0 02/06/2015
->    RIP: 0010:perf_misc_flags+0x1c/0x70
->    Call Trace:
->     perf_prepare_sample+0x53/0x6b0
->     perf_event_output_forward+0x67/0x160
->     __perf_event_overflow+0x52/0xf0
->     handle_pmi_common+0x207/0x300
->     intel_pmu_handle_irq+0xcf/0x410
->     perf_event_nmi_handler+0x28/0x50
->     nmi_handle+0xc7/0x260
->     default_do_nmi+0x6b/0x170
->     exc_nmi+0x103/0x130
->     asm_exc_nmi+0x76/0xbf
-> 
-> [1] https://lkml.kernel.org/r/20210823193709.55886-1-seanjc@google.com
-> [2] https://lkml.kernel.org/r/20210806133802.3528-2-lingshan.zhu@intel.com
-> 
-> Sean Christopherson (15):
->    KVM: x86: Register perf callbacks after calling vendor's
->      hardware_setup()
->    KVM: x86: Register Processor Trace interrupt hook iff PT enabled in
->      guest
->    perf: Stop pretending that perf can handle multiple guest callbacks
->    perf: Force architectures to opt-in to guest callbacks
->    perf: Track guest callbacks on a per-CPU basis
->    KVM: x86: Register perf callbacks only when actively handling
->      interrupt
->    KVM: Use dedicated flag to track if KVM is handling an NMI from guest
->    KVM: x86: Drop current_vcpu in favor of kvm_running_vcpu
->    KVM: arm64: Register/unregister perf callbacks at vcpu load/put
->    KVM: Move x86's perf guest info callbacks to generic KVM
->    KVM: x86: Move Intel Processor Trace interrupt handler to vmx.c
->    KVM: arm64: Convert to the generic perf callbacks
->    KVM: arm64: Drop perf.c and fold its tiny bit of code into pmu.c
->    perf: Disallow bulk unregistering of guest callbacks and do cleanup
->    perf: KVM: Indicate "in guest" via NULL ->is_in_guest callback
-> 
->   arch/arm/kernel/perf_callchain.c   | 28 ++------------
->   arch/arm64/Kconfig                 |  1 +
->   arch/arm64/include/asm/kvm_host.h  |  8 +++-
->   arch/arm64/kernel/perf_callchain.c | 18 ++++++---
->   arch/arm64/kvm/Makefile            |  2 +-
->   arch/arm64/kvm/arm.c               | 13 ++++++-
->   arch/arm64/kvm/perf.c              | 62 ------------------------------
->   arch/arm64/kvm/pmu.c               |  8 ++++
->   arch/csky/kernel/perf_callchain.c  | 10 -----
->   arch/nds32/kernel/perf_event_cpu.c | 29 ++------------
->   arch/riscv/kernel/perf_callchain.c | 10 -----
->   arch/x86/Kconfig                   |  1 +
->   arch/x86/events/core.c             | 17 +++++---
->   arch/x86/events/intel/core.c       |  7 ++--
->   arch/x86/include/asm/kvm_host.h    |  4 +-
->   arch/x86/kvm/pmu.c                 |  2 +-
->   arch/x86/kvm/pmu.h                 |  1 +
->   arch/x86/kvm/svm/svm.c             |  2 +-
->   arch/x86/kvm/vmx/vmx.c             | 25 ++++++++++--
->   arch/x86/kvm/x86.c                 | 54 +++-----------------------
->   arch/x86/kvm/x86.h                 | 12 +++---
->   arch/x86/xen/pmu.c                 |  2 +-
->   include/kvm/arm_pmu.h              |  1 +
->   include/linux/kvm_host.h           | 12 ++++++
->   include/linux/perf_event.h         | 33 ++++++++++++----
->   init/Kconfig                       |  3 ++
->   kernel/events/core.c               | 28 ++++++++------
->   virt/kvm/kvm_main.c                | 42 ++++++++++++++++++++
->   28 files changed, 204 insertions(+), 231 deletions(-)
->   delete mode 100644 arch/arm64/kvm/perf.c
-> 
+if (mem)
+  goto out_assign;
+
+or so?
+
+> +               mem =3D kzalloc(struct_size(mem, slots, nslabs), GFP_KERN=
+EL);
+> +               if (!mem)
+> +                       return -ENOMEM;
+> +
+> +               set_memory_decrypted((unsigned long)phys_to_virt(rmem->ba=
+se),
+> +                                    rmem->size >> PAGE_SHIFT);
+
+Below you are using a macro from pfn.h, but not here, I think it's PFN_DOWN=
+().
+
+> +               swiotlb_init_io_tlb_mem(mem, rmem->base, nslabs, false);
+> +               mem->force_bounce =3D true;
+> +               mem->for_alloc =3D true;
+> +
+> +               rmem->priv =3D mem;
+> +
+> +               if (IS_ENABLED(CONFIG_DEBUG_FS)) {
+> +                       mem->debugfs =3D
+> +                               debugfs_create_dir(rmem->name, debugfs_di=
+r);
+> +                       swiotlb_create_debugfs_files(mem);
+> +               }
+> +       }
+> +
+> +       dev->dma_io_tlb_mem =3D mem;
+> +
+> +       return 0;
+> +}
+> +
+> +static void rmem_swiotlb_device_release(struct reserved_mem *rmem,
+> +                                       struct device *dev)
+> +{
+> +       dev->dma_io_tlb_mem =3D io_tlb_default_mem;
+> +}
+> +
+> +static const struct reserved_mem_ops rmem_swiotlb_ops =3D {
+> +       .device_init =3D rmem_swiotlb_device_init,
+> +       .device_release =3D rmem_swiotlb_device_release,
+> +};
+> +
+> +static int __init rmem_swiotlb_setup(struct reserved_mem *rmem)
+> +{
+> +       unsigned long node =3D rmem->fdt_node;
+> +
+> +       if (of_get_flat_dt_prop(node, "reusable", NULL) ||
+> +           of_get_flat_dt_prop(node, "linux,cma-default", NULL) ||
+> +           of_get_flat_dt_prop(node, "linux,dma-default", NULL) ||
+> +           of_get_flat_dt_prop(node, "no-map", NULL))
+> +               return -EINVAL;
+> +
+> +       if (PageHighMem(pfn_to_page(PHYS_PFN(rmem->base)))) {
+> +               pr_err("Restricted DMA pool must be accessible within the=
+ linear mapping.");
+> +               return -EINVAL;
+> +       }
+> +
+> +       rmem->ops =3D &rmem_swiotlb_ops;
+> +       pr_info("Reserved memory: created restricted DMA pool at %pa, siz=
+e %ld MiB\n",
+> +               &rmem->base, (unsigned long)rmem->size / SZ_1M);
+
+Oh l=C3=A0 l=C3=A0, besides explicit casting that I believe can be avoided,=
+ %ld
+!=3D unsigned long. Can you check the printk-formats.rst document?
+
+> +       return 0;
+> +}
+> +
+> +RESERVEDMEM_OF_DECLARE(dma, "restricted-dma-pool", rmem_swiotlb_setup);
+>  #endif /* CONFIG_DMA_RESTRICTED_POOL */
+
+--=20
+With Best Regards,
+Andy Shevchenko
 
