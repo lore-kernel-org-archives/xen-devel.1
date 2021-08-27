@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-17.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A05F2C25AE9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC6B1C25AEB
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 20:12:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6B58060F92
+	by mail.kernel.org (Postfix) with ESMTPS id AFD4360F92
 	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 20:12:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6B58060F92
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AFD4360F92
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.173953.317389 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.173949.317368 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJiDF-0000b7-0i; Fri, 27 Aug 2021 20:12:29 +0000
+	id 1mJiDD-0000DL-Gb; Fri, 27 Aug 2021 20:12:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 173953.317389; Fri, 27 Aug 2021 20:12:28 +0000
+Received: by outflank-mailman (output) from mailman id 173949.317368; Fri, 27 Aug 2021 20:12:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJiDE-0000W6-CY; Fri, 27 Aug 2021 20:12:28 +0000
-Received: by outflank-mailman (input) for mailman id 173953;
- Fri, 27 Aug 2021 19:19:04 +0000
+	id 1mJiDD-0000AE-9A; Fri, 27 Aug 2021 20:12:27 +0000
+Received: by outflank-mailman (input) for mailman id 173949;
+ Fri, 27 Aug 2021 19:18:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=8NxO=NS=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
- id 1mJhNY-0001H3-BU
- for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 19:19:04 +0000
+ id 1mJhNO-0001H3-BB
+ for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 19:18:54 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 47423aed-dd4b-4224-a5b5-04d9bb0ba2d8;
+ id db4f7f30-1be1-407b-9704-aa92b7b28dd8;
  Fri, 27 Aug 2021 19:18:23 +0000 (UTC)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1mJhMh-00D5BC-FT; Fri, 27 Aug 2021 19:18:11 +0000
+ (Red Hat Linux)) id 1mJhMh-00D5B6-CX; Fri, 27 Aug 2021 19:18:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,17 +49,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 47423aed-dd4b-4224-a5b5-04d9bb0ba2d8
+X-Inumbo-ID: db4f7f30-1be1-407b-9704-aa92b7b28dd8
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=KzwjtOOfTw3O+GVEV4PWsbl44+6kR5dP++6Kf9jn+mM=; b=22AEbFZXnUBijnmWHGiRM2ca1G
-	I7DdRw6q+h1AAkzSSsriWrRm6rwQttirydRWTxP+Dc9ypWHGLmyBkFTpVBbwVVN07dFqnD9aBeiW1
-	oTj47B/RZJlwgZTa3Mvy0Z2HINQE1ANIR5vX3wgFRLERYG89rawNAiCgeBr3FqDrB/czdQF1B6XIp
-	Y+XgiGc3NadMhe8cZIBRxzuCtj3wgELhBZsQklN3du2PKCibgxt1CkHiHjYKl0SXXjZCp3PdmSI0U
-	D1Oum0CpCf1bGZ/OZm1TiyGZOKJOMo0Bl8dluQpmwqyy42PlPzUePzImhvPpzLv9ZMVomsm/80u0z
-	pidRqVQg==;
+	bh=hsYRy5mW2eSZFEqOw8JTWcpX/S1jq2Dljgzx3k3VBB0=; b=ag2MWG9JRPRl7v1Wm4knifBuDH
+	x/k7sA6IMtBfImriQpfdYn9OfQrmhh704BYOZ1efraWf6MvZLkuIu8ui3RaFGt2h0JGEnJbE/mzGG
+	UMpYztDhF4uGbNZV/BKzqSXSAymUMxJHuUsN0AeDORBz3rq0NtTKCdwuHZFTV3ylWbjUQPELSZJnJ
+	Uv8SvIfFCz+zqm8iSInPS4MX23d9OwRSOPydfEoraAzMapqy1iXSYJRU/ysyMRbUQvaeuY0q2kbAF
+	WsvxN6a8SYo3ajPRyxlChb/HXfw9y48GMnLlBgH5jr3PXLLMmtQlkt0jpuLPPGCKR46h3vY8cdWgw
+	KUC5BgwQ==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: axboe@kernel.dk,
 	colyli@suse.de,
@@ -85,9 +85,9 @@ Cc: xen-devel@lists.xenproject.org,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 09/10] xen-blkfront: add error handling support for add_disk()
-Date: Fri, 27 Aug 2021 12:18:08 -0700
-Message-Id: <20210827191809.3118103-10-mcgrof@kernel.org>
+Subject: [PATCH 07/10] nvdimm/blk: avoid calling del_gendisk() on early failures
+Date: Fri, 27 Aug 2021 12:18:06 -0700
+Message-Id: <20210827191809.3118103-8-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210827191809.3118103-1-mcgrof@kernel.org>
 References: <20210827191809.3118103-1-mcgrof@kernel.org>
@@ -95,41 +95,65 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Luis Chamberlain <mcgrof@infradead.org>
 
-We never checked for errors on device_add_disk() as this function
-returned void. Now that this is fixed, use the shiny new error
-handling. The function xlvbd_alloc_gendisk() typically does the
-unwinding on error on allocating the disk and creating the tag,
-but since all that error handling was stuffed inside
-xlvbd_alloc_gendisk() we must repeat the tag free'ing as well.
+If nd_integrity_init() fails we'd get del_gendisk() called,
+but that's not correct as we should only call that if we're
+done with device_add_disk(). Fix this by providing unwinding
+prior to the devm call being registered and moving the devm
+registration to the very end.
 
-We set the info->rq to NULL to ensure blkif_free() doesn't crash
-on blk_mq_stop_hw_queues() on device_add_disk() error as the queue
-will be long gone by then.
+This should fix calling del_gendisk() if nd_integrity_init()
+fails. I only spotted this issue through code inspection. It
+does not fix any real world bug.
 
 Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 ---
- drivers/block/xen-blkfront.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/nvdimm/blk.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 715bfa8aca7f..9fe28af5f6d9 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -2343,7 +2343,13 @@ static void blkfront_connect(struct blkfront_info *info)
- 	for_each_rinfo(info, rinfo, i)
- 		kick_pending_request_queues(rinfo);
+diff --git a/drivers/nvdimm/blk.c b/drivers/nvdimm/blk.c
+index 088d3dd6f6fa..591fa1f86f1e 100644
+--- a/drivers/nvdimm/blk.c
++++ b/drivers/nvdimm/blk.c
+@@ -240,6 +240,7 @@ static int nsblk_attach_disk(struct nd_namespace_blk *nsblk)
+ 	resource_size_t available_disk_size;
+ 	struct gendisk *disk;
+ 	u64 internal_nlba;
++	int rc;
  
--	device_add_disk(&info->xbdev->dev, info->gd, NULL);
-+	err = device_add_disk(&info->xbdev->dev, info->gd, NULL);
-+	if (err) {
-+		blk_cleanup_disk(info->gd);
-+		blk_mq_free_tag_set(&info->tag_set);
-+		info->rq = NULL;
-+		goto fail;
-+	}
+ 	internal_nlba = div_u64(nsblk->size, nsblk_internal_lbasize(nsblk));
+ 	available_disk_size = internal_nlba * nsblk_sector_size(nsblk);
+@@ -256,20 +257,26 @@ static int nsblk_attach_disk(struct nd_namespace_blk *nsblk)
+ 	blk_queue_logical_block_size(disk->queue, nsblk_sector_size(nsblk));
+ 	blk_queue_flag_set(QUEUE_FLAG_NONROT, disk->queue);
  
- 	info->is_ready = 1;
- 	return;
+-	if (devm_add_action_or_reset(dev, nd_blk_release_disk, disk))
+-		return -ENOMEM;
+-
+ 	if (nsblk_meta_size(nsblk)) {
+-		int rc = nd_integrity_init(disk, nsblk_meta_size(nsblk));
++		rc = nd_integrity_init(disk, nsblk_meta_size(nsblk));
+ 
+ 		if (rc)
+-			return rc;
++			goto out_before_devm_err;
+ 	}
+ 
+ 	set_capacity(disk, available_disk_size >> SECTOR_SHIFT);
+ 	device_add_disk(dev, disk, NULL);
++
++	/* nd_blk_release_disk() is called if this fails */
++	if (devm_add_action_or_reset(dev, nd_blk_release_disk, disk))
++		return -ENOMEM;
++
+ 	nvdimm_check_and_set_ro(disk);
+ 	return 0;
++
++out_before_devm_err:
++	blk_cleanup_disk(disk);
++	return rc;
+ }
+ 
+ static int nd_blk_probe(struct device *dev)
 -- 
 2.30.2
 
