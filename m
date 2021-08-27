@@ -2,49 +2,43 @@ Return-Path: <SRS0=IFNi=NS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-16.5 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F1F1C432BE
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 17:32:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D802DC432BE
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 17:41:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C4D3360F44
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 17:32:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C4D3360F44
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id A08A660F44
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 17:41:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A08A660F44
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.173881.317258 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.173896.317268 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJfij-0002wp-BO; Fri, 27 Aug 2021 17:32:49 +0000
+	id 1mJfqv-0004jw-3i; Fri, 27 Aug 2021 17:41:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 173881.317258; Fri, 27 Aug 2021 17:32:49 +0000
+Received: by outflank-mailman (output) from mailman id 173896.317268; Fri, 27 Aug 2021 17:41:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJfij-0002wc-5H; Fri, 27 Aug 2021 17:32:49 +0000
-Received: by outflank-mailman (input) for mailman id 173881;
- Fri, 27 Aug 2021 17:32:48 +0000
+	id 1mJfqu-0004jp-WF; Fri, 27 Aug 2021 17:41:17 +0000
+Received: by outflank-mailman (input) for mailman id 173896;
+ Fri, 27 Aug 2021 17:41:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=brRM=NS=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
- id 1mJfYS-00016Q-O9
- for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 17:22:12 +0000
-Received: from mail-pf1-x433.google.com (unknown [2607:f8b0:4864:20::433])
+ <SRS0=j5dR=NS=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
+ id 1mJfqt-0004ji-3E
+ for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 17:41:15 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id edb059b1-e70d-4bf6-86cd-f17be81a1a9b;
- Fri, 27 Aug 2021 17:21:47 +0000 (UTC)
-Received: by mail-pf1-x433.google.com with SMTP id 2so6226282pfo.8
- for <xen-devel@lists.xenproject.org>; Fri, 27 Aug 2021 10:21:47 -0700 (PDT)
-Received: from ubuntu-Virtual-Machine.corp.microsoft.com
- ([2001:4898:80e8:36:ef50:8fcd:44d1:eb17])
- by smtp.gmail.com with ESMTPSA id f5sm7155015pjo.23.2021.08.27.10.21.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Aug 2021 10:21:46 -0700 (PDT)
+ id 362195fe-84df-489b-89a4-f879d2b61eb3;
+ Fri, 27 Aug 2021 17:41:14 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4AF44600D4;
+ Fri, 27 Aug 2021 17:41:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,233 +50,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: edb059b1-e70d-4bf6-86cd-f17be81a1a9b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=6MHi30R96t1tpcfv0VvlaJ3ckWN83uvRHnkjJOo1l30=;
-        b=MOcte0DoDafRZO8ZtX2XcPp/LXoS4Y8Uc+1YFSueU47Od7ILMltiJ+jU/PD2Bem9A6
-         egV3QwhmmbWOrrE4pRxAPThWOWuRWBYL/V8suAXt/TOwDWJD5Txw1Ztj7UcKPNgn7b3S
-         64Dl/WlPUEwgmW/EQJOhf0kinfHFaEga3IVGbbzchLUVdnE4z7oulTK6s2gwUajS0jMO
-         XCFXLk3TKwWljw55q7xE/CphXl0QiV/ldYVD2VzyXCnfh4Wlnba38D0RScL2guLBekg5
-         uuxnrzN988dSfELcvZBQj1oVLuif1sO8N9ozD7WDA31KjxT6WFD2rY7fqC29VP5ApsxF
-         E/Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6MHi30R96t1tpcfv0VvlaJ3ckWN83uvRHnkjJOo1l30=;
-        b=AO141Q/+eow6HhHivpoaNi/tjy5RJ0S6gC7BacdPsJbqdPExI0KUr+fX7PIxq4YegO
-         TSJiUMYjpK8k6oNxrXZ3oqF4IwnF9APN6X9LG/U+2fwd1l4jcw8inlsz8fOb8dFNv/Ck
-         VFcT3SbxCsrnHDJ1UZNrX7Ew0xy7cG13oIX+QOhJ39QLNwTbocEBenxn3iT7M6S7Zh7r
-         MN3cpjCirY6SpzZ0pwaPkJjZ2bLA4W7N+1lsQNh6ISPKnuq3OFCOOgWRIpdTGWRIz3Rq
-         D0UY8ncKJi/YWAqCumPO4TP7TcmRNlrGHUQM8/OXStD34zs61cACkfiPBOFBwxfhmKEw
-         AxsA==
-X-Gm-Message-State: AOAM530J8J89diZQi5L6MH/ywcEZhbW91FFlMtEcHdYHy3VdBdFV1ksD
-	Tc3uAlTXuqCc0hoJsneN110=
-X-Google-Smtp-Source: ABdhPJzQcZQUCwo3EVIginZLbkS0j6tpa+TKdpTpirJZ9GqPVodAIhLCJiwv8MK3x0NUITnBw1JqCw==
-X-Received: by 2002:a63:534f:: with SMTP id t15mr8821683pgl.392.1630084906877;
-        Fri, 27 Aug 2021 10:21:46 -0700 (PDT)
-From: Tianyu Lan <ltykernel@gmail.com>
-To: kys@microsoft.com,
-	haiyangz@microsoft.com,
-	sthemmin@microsoft.com,
-	wei.liu@kernel.org,
-	decui@microsoft.com,
-	catalin.marinas@arm.com,
-	will@kernel.org,
-	tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	x86@kernel.org,
-	hpa@zytor.com,
-	dave.hansen@linux.intel.com,
-	luto@kernel.org,
-	peterz@infradead.org,
-	konrad.wilk@oracle.com,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	joro@8bytes.org,
-	davem@davemloft.net,
-	kuba@kernel.org,
-	jejb@linux.ibm.com,
-	martin.petersen@oracle.com,
-	gregkh@linuxfoundation.org,
-	arnd@arndb.de,
-	hch@lst.de,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com,
-	brijesh.singh@amd.com,
-	thomas.lendacky@amd.com,
-	Tianyu.Lan@microsoft.com,
-	pgonda@google.com,
-	martin.b.radev@gmail.com,
-	akpm@linux-foundation.org,
-	kirill.shutemov@linux.intel.com,
-	rppt@kernel.org,
-	hannes@cmpxchg.org,
-	aneesh.kumar@linux.ibm.com,
-	krish.sadhukhan@oracle.com,
-	saravanand@fb.com,
+X-Inumbo-ID: 362195fe-84df-489b-89a4-f879d2b61eb3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1630086073;
+	bh=DgYmO5lLiHXNPE+bTt0kpJLEduGmJ62HuY9b2S4IhUQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=v5CFy4Y53ir/ekEqVrb37yJbS7N+GnhiX8a5ZHkAkLqCFMO+1hlQLEMIYoOQg78lQ
+	 BE0uo/vHpfBxnyaR1kBG5sGR4fAWwgEKlv5Kw30ypy6hcugZI89kTJRWxmKPE0vFHA
+	 aVk8PgyzjF1S9xogR6CSjmPtpDC0A1llmdWuC6mA=
+Date: Fri, 27 Aug 2021 19:41:05 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Tianyu Lan <ltykernel@gmail.com>
+Cc: kys@microsoft.com, haiyangz@microsoft.com, sthemmin@microsoft.com,
+	wei.liu@kernel.org, decui@microsoft.com, catalin.marinas@arm.com,
+	will@kernel.org, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+	x86@kernel.org, hpa@zytor.com, dave.hansen@linux.intel.com,
+	luto@kernel.org, peterz@infradead.org, konrad.wilk@oracle.com,
+	boris.ostrovsky@oracle.com, jgross@suse.com, sstabellini@kernel.org,
+	joro@8bytes.org, davem@davemloft.net, kuba@kernel.org,
+	jejb@linux.ibm.com, martin.petersen@oracle.com, arnd@arndb.de,
+	hch@lst.de, m.szyprowski@samsung.com, robin.murphy@arm.com,
+	brijesh.singh@amd.com, thomas.lendacky@amd.com,
+	Tianyu.Lan@microsoft.com, pgonda@google.com,
+	martin.b.radev@gmail.com, akpm@linux-foundation.org,
+	kirill.shutemov@linux.intel.com, rppt@kernel.org,
+	hannes@cmpxchg.org, aneesh.kumar@linux.ibm.com,
+	krish.sadhukhan@oracle.com, saravanand@fb.com,
 	linux-arm-kernel@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	rientjes@google.com,
-	ardb@kernel.org,
-	michael.h.kelley@microsoft.com
-Cc: iommu@lists.linux-foundation.org,
-	linux-arch@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	netdev@vger.kernel.org,
-	vkuznets@redhat.com,
-	parri.andrea@gmail.com,
-	dave.hansen@intel.com
-Subject: [PATCH V4 10/13] x86/Swiotlb: Add Swiotlb bounce buffer remap function for HV IVM
-Date: Fri, 27 Aug 2021 13:21:08 -0400
-Message-Id: <20210827172114.414281-11-ltykernel@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210827172114.414281-1-ltykernel@gmail.com>
+	xen-devel@lists.xenproject.org, rientjes@google.com,
+	ardb@kernel.org, michael.h.kelley@microsoft.com,
+	iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
+	linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-scsi@vger.kernel.org, netdev@vger.kernel.org,
+	vkuznets@redhat.com, parri.andrea@gmail.com, dave.hansen@intel.com
+Subject: Re: [PATCH V4 04/13] hyperv: Mark vmbus ring buffer visible to host
+ in Isolation VM
+Message-ID: <YSkjsapeNj+2j//o@kroah.com>
 References: <20210827172114.414281-1-ltykernel@gmail.com>
+ <20210827172114.414281-5-ltykernel@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210827172114.414281-5-ltykernel@gmail.com>
 
-From: Tianyu Lan <Tianyu.Lan@microsoft.com>
+On Fri, Aug 27, 2021 at 01:21:02PM -0400, Tianyu Lan wrote:
+> From: Tianyu Lan <Tianyu.Lan@microsoft.com>
+> 
+> Mark vmbus ring buffer visible with set_memory_decrypted() when
+> establish gpadl handle.
+> 
+> Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
+> ---
+> Change since v3:
+>        * Change vmbus_teardown_gpadl() parameter and put gpadl handle,
+>        buffer and buffer size in the struct vmbus_gpadl.
+> ---
+>  drivers/hv/channel.c            | 36 ++++++++++++++++++++++++++++-----
+>  drivers/net/hyperv/hyperv_net.h |  1 +
+>  drivers/net/hyperv/netvsc.c     | 16 +++++++++++----
+>  drivers/uio/uio_hv_generic.c    | 14 +++++++++++--
+>  include/linux/hyperv.h          |  8 +++++++-
+>  5 files changed, 63 insertions(+), 12 deletions(-)
+> 
+> diff --git a/drivers/hv/channel.c b/drivers/hv/channel.c
+> index f3761c73b074..82650beb3af0 100644
+> --- a/drivers/hv/channel.c
+> +++ b/drivers/hv/channel.c
+> @@ -17,6 +17,7 @@
+>  #include <linux/hyperv.h>
+>  #include <linux/uio.h>
+>  #include <linux/interrupt.h>
+> +#include <linux/set_memory.h>
+>  #include <asm/page.h>
+>  #include <asm/mshyperv.h>
+>  
+> @@ -474,6 +475,13 @@ static int __vmbus_establish_gpadl(struct vmbus_channel *channel,
+>  	if (ret)
+>  		return ret;
+>  
+> +	ret = set_memory_decrypted((unsigned long)kbuffer,
+> +				   HVPFN_UP(size));
+> +	if (ret) {
+> +		pr_warn("Failed to set host visibility for new GPADL %d.\n", ret);
 
-In Isolation VM with AMD SEV, bounce buffer needs to be accessed via
-extra address space which is above shared_gpa_boundary
-(E.G 39 bit address line) reported by Hyper-V CPUID ISOLATION_CONFIG.
-The access physical address will be original physical address +
-shared_gpa_boundary. The shared_gpa_boundary in the AMD SEV SNP
-spec is called virtual top of memory(vTOM). Memory addresses below
-vTOM are automatically treated as private while memory above
-vTOM is treated as shared.
+dev_warn()?  You have access to a struct device, why not use it?
 
-Use dma_map_decrypted() in the swiotlb code, store remap address returned
-and use the remap address to copy data from/to swiotlb bounce buffer.
+same for all other instances here.
 
-Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
----
-Change since v1:
-       * Make swiotlb_init_io_tlb_mem() return error code and return
-         error when dma_map_decrypted() fails.
----
- include/linux/swiotlb.h |  4 ++++
- kernel/dma/swiotlb.c    | 32 ++++++++++++++++++++++++--------
- 2 files changed, 28 insertions(+), 8 deletions(-)
+thanks,
 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index f507e3eacbea..584560ecaa8e 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -72,6 +72,9 @@ extern enum swiotlb_force swiotlb_force;
-  * @end:	The end address of the swiotlb memory pool. Used to do a quick
-  *		range check to see if the memory was in fact allocated by this
-  *		API.
-+ * @vaddr:	The vaddr of the swiotlb memory pool. The swiotlb
-+ *		memory pool may be remapped in the memory encrypted case and store
-+ *		virtual address for bounce buffer operation.
-  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
-  *		@end. For default swiotlb, this is command line adjustable via
-  *		setup_io_tlb_npages.
-@@ -89,6 +92,7 @@ extern enum swiotlb_force swiotlb_force;
- struct io_tlb_mem {
- 	phys_addr_t start;
- 	phys_addr_t end;
-+	void *vaddr;
- 	unsigned long nslabs;
- 	unsigned long used;
- 	unsigned int index;
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 1fa81c096c1d..29b6d888ef3b 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -176,7 +176,7 @@ void __init swiotlb_update_mem_attributes(void)
- 	memset(vaddr, 0, bytes);
- }
- 
--static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
-+static int swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 				    unsigned long nslabs, bool late_alloc)
- {
- 	void *vaddr = phys_to_virt(start);
-@@ -194,14 +194,21 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 		mem->slots[i].alloc_size = 0;
- 	}
- 
--	set_memory_decrypted((unsigned long)vaddr, bytes >> PAGE_SHIFT);
--	memset(vaddr, 0, bytes);
-+	mem->vaddr = dma_map_decrypted(vaddr, bytes);
-+	if (!mem->vaddr) {
-+		pr_err("Failed to decrypt memory.\n");
-+		return -ENOMEM;
-+	}
-+
-+	memset(mem->vaddr, 0, bytes);
-+	return 0;
- }
- 
- int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- {
- 	struct io_tlb_mem *mem;
- 	size_t alloc_size;
-+	int ret;
- 
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -216,7 +223,11 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- 		panic("%s: Failed to allocate %zu bytes align=0x%lx\n",
- 		      __func__, alloc_size, PAGE_SIZE);
- 
--	swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
-+	ret = swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
-+	if (ret) {
-+		memblock_free(__pa(mem), alloc_size);
-+		return ret;
-+	}
- 
- 	io_tlb_default_mem = mem;
- 	if (verbose)
-@@ -304,6 +315,8 @@ int
- swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- {
- 	struct io_tlb_mem *mem;
-+	int size = get_order(struct_size(mem, slots, nslabs));
-+	int ret;
- 
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -312,12 +325,15 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- 	if (WARN_ON_ONCE(io_tlb_default_mem))
- 		return -ENOMEM;
- 
--	mem = (void *)__get_free_pages(GFP_KERNEL,
--		get_order(struct_size(mem, slots, nslabs)));
-+	mem = (void *)__get_free_pages(GFP_KERNEL, size);
- 	if (!mem)
- 		return -ENOMEM;
- 
--	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
-+	ret = swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
-+	if (ret) {
-+		free_pages((unsigned long)mem, size);
-+		return ret;
-+	}
- 
- 	io_tlb_default_mem = mem;
- 	swiotlb_print_info();
-@@ -360,7 +376,7 @@ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size
- 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
- 	size_t alloc_size = mem->slots[index].alloc_size;
- 	unsigned long pfn = PFN_DOWN(orig_addr);
--	unsigned char *vaddr = phys_to_virt(tlb_addr);
-+	unsigned char *vaddr = mem->vaddr + tlb_addr - mem->start;
- 	unsigned int tlb_offset;
- 
- 	if (orig_addr == INVALID_PHYS_ADDR)
--- 
-2.25.1
-
+greg k-h
 
