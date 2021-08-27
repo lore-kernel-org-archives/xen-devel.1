@@ -2,45 +2,45 @@ Return-Path: <SRS0=IFNi=NS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE21BC432BE
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 10:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24BEDC432BE
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 10:59:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D27160FE6
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 10:55:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7D27160FE6
+	by mail.kernel.org (Postfix) with ESMTPS id C9A07604AC
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Aug 2021 10:59:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C9A07604AC
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.173596.316710 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.173601.316720 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJZW0-0003pm-UV; Fri, 27 Aug 2021 10:55:16 +0000
+	id 1mJZZj-0004U8-Cg; Fri, 27 Aug 2021 10:59:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 173596.316710; Fri, 27 Aug 2021 10:55:16 +0000
+Received: by outflank-mailman (output) from mailman id 173601.316720; Fri, 27 Aug 2021 10:59:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mJZW0-0003pf-RK; Fri, 27 Aug 2021 10:55:16 +0000
-Received: by outflank-mailman (input) for mailman id 173596;
- Fri, 27 Aug 2021 10:55:15 +0000
+	id 1mJZZj-0004U1-9l; Fri, 27 Aug 2021 10:59:07 +0000
+Received: by outflank-mailman (input) for mailman id 173601;
+ Fri, 27 Aug 2021 10:59:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mJZVz-0003pZ-IG
- for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 10:55:15 +0000
+ (envelope-from <julien@xen.org>) id 1mJZZi-0004Tv-4D
+ for xen-devel@lists.xenproject.org; Fri, 27 Aug 2021 10:59:06 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1mJZVz-0003Sv-Ex; Fri, 27 Aug 2021 10:55:15 +0000
+ id 1mJZZh-0003Ve-SI; Fri, 27 Aug 2021 10:59:05 +0000
 Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1mJZVz-00049h-8x; Fri, 27 Aug 2021 10:55:15 +0000
+ id 1mJZZh-0004e5-Mm; Fri, 27 Aug 2021 10:59:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,124 +55,62 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=/6mNQFThN8qkN/4ukXCGNlJn7SIkBUUxkcpVQmLfH8A=; b=Xxm+BsR6OZfLRa3kcOGeO2VwLs
-	0de50S+h1Tpg0FB1ERhx8yccaHeIdeqzbxNNWeNq6CiLcDu74enpDFf7yYDA1FJ+xBn9zfh/RCy+2
-	6ZpyiF+YYPTPaeW8hhN13xNEPFJLJg5Iy+cmoK6861CznLwHhOltO34Mc4CL4whna86E=;
+	bh=Ll/rWdzg5ABp7NtlTyw52ZmZH3MXCM/pWVUes3OrIl8=; b=VClcG7yK/eLohYoeiMkJw83Rqo
+	hdAGtZKCcBtWRbCtR7e8yUGsOpldV0fJRCp3FN1mLv/DazY3Hesr7TeqvS72hyIK1a1EAtK7VIiqh
+	pv2mA1u/f6KuO8+jrNGk21hYiD8jJhApvmMuvsQ3FnVIo/9qA0wY3d+2rFB9aPsqxknM=;
 Subject: Re: HVM guest only bring up a single vCPU
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>
 References: <a1724918-94bf-748f-5c4b-5a3ec176368f@xen.org>
- <781aeba6-5e77-9995-cf58-9dc6fd443ad8@citrix.com>
- <3b2e6fce-98a2-c18f-7068-9ca990b0b95e@suse.com>
- <62ca5392-3d85-0883-8020-287072358cef@xen.org>
- <e72b385e-238a-5ae9-332e-2d21b59ac09c@suse.com>
+ <dc1e3e1f-f7b1-6f73-3a16-804496952df5@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <eae6e3c6-64fc-3468-e4b4-f35c31dbd8e3@xen.org>
-Date: Fri, 27 Aug 2021 11:55:13 +0100
+Message-ID: <309b2457-2881-3240-e3a5-3a5a9ea558bf@xen.org>
+Date: Fri, 27 Aug 2021 11:59:04 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <e72b385e-238a-5ae9-332e-2d21b59ac09c@suse.com>
+In-Reply-To: <dc1e3e1f-f7b1-6f73-3a16-804496952df5@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 Hi Jan,
 
-On 27/08/2021 11:52, Jan Beulich wrote:
-> On 27.08.2021 12:35, Julien Grall wrote:
->> Hi Jan,
->>
->> On 27/08/2021 07:28, Jan Beulich wrote:
->>> On 27.08.2021 01:42, Andrew Cooper wrote:
->>>> On 26/08/2021 22:00, Julien Grall wrote:
->>>>> Hi Andrew,
->>>>>
->>>>> While doing more testing today, I noticed that only one vCPU would be
->>>>> brought up with HVM guest with Xen 4.16 on my setup (QEMU):
->>>>>
->>>>> [    1.122180]
->>>>> ================================================================================
->>>>> [    1.122180] UBSAN: shift-out-of-bounds in
->>>>> oss/linux/arch/x86/kernel/apic/apic.c:2362:13
->>>>> [    1.122180] shift exponent -1 is negative
->>>>> [    1.122180] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 5.14.0-rc7+ #304
->>>>> [    1.122180] Hardware name: Xen HVM domU, BIOS 4.16-unstable 06/07/2021
->>>>> [    1.122180] Call Trace:
->>>>> [    1.122180]  dump_stack_lvl+0x56/0x6c
->>>>> [    1.122180]  ubsan_epilogue+0x5/0x50
->>>>> [    1.122180]  __ubsan_handle_shift_out_of_bounds+0xfa/0x140
->>>>> [    1.122180]  ? cgroup_kill_write+0x4d/0x150
->>>>> [    1.122180]  ? cpu_up+0x6e/0x100
->>>>> [    1.122180]  ? _raw_spin_unlock_irqrestore+0x30/0x50
->>>>> [    1.122180]  ? rcu_read_lock_held_common+0xe/0x40
->>>>> [    1.122180]  ? irq_shutdown_and_deactivate+0x11/0x30
->>>>> [    1.122180]  ? lock_release+0xc7/0x2a0
->>>>> [    1.122180]  ? apic_id_is_primary_thread+0x56/0x60
->>>>> [    1.122180]  apic_id_is_primary_thread+0x56/0x60
->>>>> [    1.122180]  cpu_up+0xbd/0x100
->>>>> [    1.122180]  bringup_nonboot_cpus+0x4f/0x60
->>>>> [    1.122180]  smp_init+0x26/0x74
->>>>> [    1.122180]  kernel_init_freeable+0x183/0x32d
->>>>> [    1.122180]  ? _raw_spin_unlock_irq+0x24/0x40
->>>>> [    1.122180]  ? rest_init+0x330/0x330
->>>>> [    1.122180]  kernel_init+0x17/0x140
->>>>> [    1.122180]  ? rest_init+0x330/0x330
->>>>> [    1.122180]  ret_from_fork+0x22/0x30
->>>>> [    1.122244]
->>>>> ================================================================================
->>>>> [    1.123176] installing Xen timer for CPU 1
->>>>> [    1.123369] x86: Booting SMP configuration:
->>>>> [    1.123409] .... node  #0, CPUs:      #1
->>>>> [    1.154400] Callback from call_rcu_tasks_trace() invoked.
->>>>> [    1.154491] smp: Brought up 1 node, 1 CPU
->>>>> [    1.154526] smpboot: Max logical packages: 2
->>>>> [    1.154570] smpboot: Total of 1 processors activated (5999.99
->>>>> BogoMIPS)
->>>>>
->>>>> I have tried a PV guest (same setup) and the kernel could bring up all
->>>>> the vCPUs.
->>>>>
->>>>> Digging down, Linux will set smp_num_siblings to 0 (via
->>>>> detect_ht_early()) and as a result will skip all the CPUs. The value
->>>>> is retrieve from a CPUID leaf. So it sounds like we don't set the
->>>>> leaft correctly.
->>>>>
->>>>> FWIW, I have also tried on Xen 4.11 and could spot the same issue.
->>>>> Does this ring any bell to you?
->>>>
->>>> The CPUID data we give to guests is generally nonsense when it comes to
->>>> topology.  By any chance does the hardware you're booting this on not
->>>> have hyperthreading enabled/active to begin with?
->>>
->>> Well, I'd put the question slightly differently: What CPUID data does
->>> qemu supply to Xen here? I could easily see us making an assumption
->>> somewhere that is met by all hardware but is theoretically wrong to
->>> make and not met by qemu, which then leads to further issues with what
->>> we expose to our guest.
->> I have pasted the output from cpuid on a baremetal Linux here:
+On 27/08/2021 10:26, Jan Beulich wrote:
+> On 26.08.2021 23:00, Julien Grall wrote:
+>> Digging down, Linux will set smp_num_siblings to 0 (via
+>> detect_ht_early()) and as a result will skip all the CPUs. The value is
+>> retrieve from a CPUID leaf. So it sounds like we don't set the leaft
+>> correctly.
 > 
-> "baremetal" still meaning it was running on qemu, not itself baremetal?
+> Xen leaves leaf 1 EBX[23:16] untouched from what the tool stack
+> passes. The tool stack doubles the value coming from hardware
+> (or qemu in your case), unless the result would overflow. Hence
+> it would look to me as if the value coming from qemu has got to
+> be zero. Which is perfectly fine if HTT is off, just that
+> libxenguest isn't prepared for this. 
+> Could you see whether the
+> patch below helps (making our hack even hackier)?
 
-Correct.
+It helps. The Linux HVM domain is now able to bring up all the CPUs.
 
 > 
->> https://pastebin.com/WvaXiXuL
+> Jan
 > 
->     miscellaneous (1/ebx):
->        process local APIC physical ID = 0x0 (0)
->        maximum IDs for CPUs in pkg    = 0x0 (0)
->        CLFLUSH line size              = 0x8 (8)
->        brand index                    = 0x0 (0)
+> libxenguest/x86: ensure CPUID[1].EBX[32:16] is non-zero for HVM
 > 
-> As suspected the field is zero, and hence will remain zero after
-> multiplying by 2. I suppose the patch sent earlier should then get you
-> further.
+> We unconditionally set HTT, so merely doubling the value read from
+> hardware isn't going to be correct if that value is zero.
+> 
+> Reported-by: Julien Grall <julien@xen.org>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-I am about to try your patch. I will let you know the results.
+Feel free to add my tested-by for the patch.
 
 Cheers,
+
+[1] https://pastebin.com/WvaXiXuL
 
 -- 
 Julien Grall
