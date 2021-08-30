@@ -1,49 +1,49 @@
-Return-Path: <SRS0=a73Z=NU=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=CErm=NV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-5.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABAE8C432BE
-	for <xen-devel@archiver.kernel.org>; Sun, 29 Aug 2021 20:29:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65206C432BE
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Aug 2021 00:02:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5D9A160F44
-	for <xen-devel@archiver.kernel.org>; Sun, 29 Aug 2021 20:29:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5D9A160F44
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1F18760F12
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Aug 2021 00:02:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1F18760F12
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.174801.318645 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.174821.318673 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mKRQ7-0005Ju-Dc; Sun, 29 Aug 2021 20:28:47 +0000
+	id 1mKUkp-00033u-Lf; Mon, 30 Aug 2021 00:02:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 174801.318645; Sun, 29 Aug 2021 20:28:47 +0000
+Received: by outflank-mailman (output) from mailman id 174821.318673; Mon, 30 Aug 2021 00:02:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mKRQ7-0005Jn-9s; Sun, 29 Aug 2021 20:28:47 +0000
-Received: by outflank-mailman (input) for mailman id 174801;
- Sun, 29 Aug 2021 20:28:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K/AL=NU=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1mKRQ5-0005Jh-Pn
- for xen-devel@lists.xenproject.org; Sun, 29 Aug 2021 20:28:45 +0000
-Received: from mail-lf1-x12e.google.com (unknown [2a00:1450:4864:20::12e])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6e031e5c-bfc6-417d-a325-acb49ea9a2fc;
- Sun, 29 Aug 2021 20:28:44 +0000 (UTC)
-Received: by mail-lf1-x12e.google.com with SMTP id p38so27090327lfa.0
- for <xen-devel@lists.xenproject.org>; Sun, 29 Aug 2021 13:28:44 -0700 (PDT)
-Received: from [192.168.1.7] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id z7sm1199020lft.302.2021.08.29.13.28.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 29 Aug 2021 13:28:43 -0700 (PDT)
+	id 1mKUkp-00033n-Il; Mon, 30 Aug 2021 00:02:23 +0000
+Received: by outflank-mailman (input) for mailman id 174821;
+ Mon, 30 Aug 2021 00:02:21 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKUkn-00033d-Pv; Mon, 30 Aug 2021 00:02:21 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKUkn-0001eJ-Ja; Mon, 30 Aug 2021 00:02:21 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKUkn-0000Kl-BV; Mon, 30 Aug 2021 00:02:21 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKUkn-0004Sq-Aw; Mon, 30 Aug 2021 00:02:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,142 +55,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e031e5c-bfc6-417d-a325-acb49ea9a2fc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=TiKbtZCv4v4SvEda4pOsu0rPlUdNNxg+UWnLpLhaMM4=;
-        b=RIPXMygp0YEPellSN06PjVPxgLZ/1BqXPO5T0DDt4vLi4GuSgJLxdhaYKCGmaJda8N
-         jJ92jKczXZ2Wedhmbt4U8SgIyZshIeE2iiNGEwP6KP6JlgsGiXDQPQsU8viCuDlA3kOa
-         eWn0wvTuhs2UPN4bG9JjPtNF/FPUQDTDTTiq9y/M4hpMhFYXpFb5RMVaB5Mee2cIe7+S
-         sW7c5VznprntJRUKT5cR2U2uoHqDFYCberhO8wlDCJ9MtvQ0GPWwMP7iasXPLDAezEKj
-         hHtjtms3V+JxiuNG1sPifA3i1Utu+8u/arjz02C6++wW9D8CzgPL6EsDSLbek63MEUzx
-         PSyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=TiKbtZCv4v4SvEda4pOsu0rPlUdNNxg+UWnLpLhaMM4=;
-        b=bm7OssqIjy8PqJq/3v37cCzsllAbH9DZ24eskZEMv6BH48rv/x+GWnurY9Yl6hr8ir
-         ddTswMgERY6EtTqVLw2v7SzcMQP4ZQc5fh25VjKky2SwE2c2HnsPpJAoBpIF7p2Jz2lf
-         AzSMnVdxcitw1sUJKYSNdBAQr95G+6nhjPVsvnCNlW14wbeGf8bU/jep9lNiTBIeIQcn
-         gYfLftvx15a+5voUQwyOl7s+mNaSIna1iqt84lzsX4uhaDY7rFYU6EaTO2rUCn+cq08J
-         8yJsjhZw8zioRFylwSQSGYS7i756A9CdBCjrrgTiM4Fey/3KcB5R/PdcwZIuXta+vFqW
-         azFw==
-X-Gm-Message-State: AOAM530xvjllgC/DAkiBAsndy2nuTR2jPwft0hsY69Md43rcvjtRqH/W
-	AjXphqHuUUtXcJyaA6e3kXaeOvfZNas=
-X-Google-Smtp-Source: ABdhPJz81DRk4JAEMeTX8fZU2j8tg8uRKTWvuoz2rlbFIHq8YNLCEF6t/1YggrMcCz7QV5YhyNSCgg==
-X-Received: by 2002:a05:6512:10cc:: with SMTP id k12mr14287337lfg.410.1630268923530;
-        Sun, 29 Aug 2021 13:28:43 -0700 (PDT)
-Subject: Re: [RFC PATCH] xen: Introduce arch specific field to
- XEN_SYSCTL_physinfo
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <1628897304-20793-1-git-send-email-olekstysh@gmail.com>
- <908e2d59-41f0-3bad-6030-b2889d9c5cc2@suse.com>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <8c622f4f-1931-3e2c-4f6e-9b832e8e435e@gmail.com>
-Date: Sun, 29 Aug 2021 23:28:42 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=HL+n9mD4A7QmDu6DC5+ercjYB4yEgBpIChG1eS0g0Ps=; b=sVcKO1xKIOMcIHwExxEY96S/hD
+	INg1E2rKddD63y0Wjyobmf9Fyxntp62Qn49tgAwMvlbJ0hM1VbaevfiMSjbRvTdFLT+nD4CsKe+yF
+	crKXURka4GDJ3iLlo4l9k4o0FEyPqe/glB/Hb7j+LP4ZzmnFzB/1Gb7fAHF3KhZeTLxM=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-164556-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-In-Reply-To: <908e2d59-41f0-3bad-6030-b2889d9c5cc2@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Subject: [ovmf test] 164556: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=a82bad9730178a1e3a67c9bfc83412b87a8ad734
+X-Osstest-Versions-That:
+    ovmf=82f7e315d612399f65a3bedd3b2c0364b43b6929
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 30 Aug 2021 00:02:21 +0000
+
+flight 164556 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/164556/
+
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 a82bad9730178a1e3a67c9bfc83412b87a8ad734
+baseline version:
+ ovmf                 82f7e315d612399f65a3bedd3b2c0364b43b6929
+
+Last test of basis   164513  2021-08-27 08:41:23 Z    2 days
+Testing same since   164556  2021-08-28 19:27:14 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Ard Biesheuvel <ardb@kernel.org>
+  Brijesh Singh <brijesh.singh@amd.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Marc Zyngier <maz@kernel.org>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
 
-On 16.08.21 10:33, Jan Beulich wrote:
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Hi Jan
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Sorry for the late response.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-> On 14.08.2021 01:28, Oleksandr Tyshchenko wrote:
->> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>
->> We need to pass info about maximum supported address space size
->> to the toolstack on Arm in order to properly calculate the base
->> and size of the safe range for the guest. Use p2m_ipa_bits variable
->> which purpose is to hold the bit size of IPAs in P2M tables.
-> What is "the safe range"?
-
-It is unallocated (unused) address space which could be safely used by 
-domain for foreign/grant mappings on Arm, I will update description.
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
->
->> --- a/xen/include/public/arch-arm.h
->> +++ b/xen/include/public/arch-arm.h
->> @@ -332,6 +332,11 @@ struct xen_arch_domainconfig {
->>        */
->>       uint32_t clock_frequency;
->>   };
->> +
->> +struct arch_physinfo {
->> +    /* Holds the bit size of IPAs in p2m tables. */
->> +    uint32_t p2m_ipa_bits;
->> +};
->>   #endif /* __XEN__ || __XEN_TOOLS__ */
->>   
->>   struct arch_vcpu_info {
->> --- a/xen/include/public/arch-x86/xen.h
->> +++ b/xen/include/public/arch-x86/xen.h
->> @@ -346,6 +346,8 @@ typedef struct xen_msr_entry {
->>   } xen_msr_entry_t;
->>   DEFINE_XEN_GUEST_HANDLE(xen_msr_entry_t);
->>   
->> +struct arch_physinfo {
->> +};
->>   #endif /* !__ASSEMBLY__ */
-> While the term "p2m_ipa_bits" surely isn't arch-agnostic, I wonder
-> whether the expressed information is (the x86 equivalent being
-> hap_paddr_bits, at a guess), and hence whether this really ought
-> to live in an arch-specific sub-struct.
+Pushing revision :
 
-Well, on Arm we calculate the number of the IPA bits based on the number 
-of PA bits when setting Stage 2 address translation.
-I might mistake, but what we currently have on Arm is "ipa_bits == 
-pa_bits". So, this means that information we need at the toolstack side 
-isn't really arch-specific and
-we could probably avoid introducing arch-specific sub-struct by suitable 
-renaming the field (pa_bits, paddr_bits, whatever).
-
-We could even name the field as hap_paddr_bits. Although, I don't know 
-whether the hap_* is purely x86-ism, but I see there are several 
-mentions in the common code (hap_pt_share, use_hap_pt, etc). Any 
-suggestions?
-
-
-> If indeed so, please name
-> the struct in a name space clean way, i.e. add xen_ as prefix.
-
-ok
-
-
->
-> Also please retain a blank line before the #endif. I wonder whether
-> on Arm you wouldn't want to add one at this occasion.
-
-ok
-
-
->
-> Jan
->
--- 
-Regards,
-
-Oleksandr Tyshchenko
-
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   82f7e315d6..a82bad9730  a82bad9730178a1e3a67c9bfc83412b87a8ad734 -> xen-tested-master
 
