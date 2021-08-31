@@ -2,44 +2,47 @@ Return-Path: <SRS0=eVLD=NW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 814D5C432BE
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Aug 2021 01:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 099B5C432BE
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Aug 2021 02:55:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A8666101B
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Aug 2021 01:53:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3A8666101B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id B554660FE8
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Aug 2021 02:55:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B554660FE8
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.175424.319608 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.175431.319620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mKsxn-00022n-0B; Tue, 31 Aug 2021 01:53:23 +0000
+	id 1mKtvb-0000Yp-Lv; Tue, 31 Aug 2021 02:55:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 175424.319608; Tue, 31 Aug 2021 01:53:22 +0000
+Received: by outflank-mailman (output) from mailman id 175431.319620; Tue, 31 Aug 2021 02:55:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mKsxm-00022g-TR; Tue, 31 Aug 2021 01:53:22 +0000
-Received: by outflank-mailman (input) for mailman id 175424;
- Tue, 31 Aug 2021 01:53:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QH02=NW=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mKsxm-00022Y-5o
- for xen-devel@lists.xenproject.org; Tue, 31 Aug 2021 01:53:22 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3816d568-09fe-11ec-acb4-12813bfff9fa;
- Tue, 31 Aug 2021 01:53:21 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 58F2460724;
- Tue, 31 Aug 2021 01:53:20 +0000 (UTC)
+	id 1mKtvb-0000Yi-Ij; Tue, 31 Aug 2021 02:55:11 +0000
+Received: by outflank-mailman (input) for mailman id 175431;
+ Tue, 31 Aug 2021 02:55:10 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKtva-0000YY-HT; Tue, 31 Aug 2021 02:55:10 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKtva-000351-B2; Tue, 31 Aug 2021 02:55:10 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKtva-0003e9-14; Tue, 31 Aug 2021 02:55:10 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mKtvZ-000772-UZ; Tue, 31 Aug 2021 02:55:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,108 +54,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3816d568-09fe-11ec-acb4-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1630374800;
-	bh=m2Q/n6eTrNbY+hQWA8G97Hw942APQq9RCmw+JK0zAV4=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=L4UJvU4bZA5BPfeSxPaUbgRkkFjiKONlPB1jg2656mPbBYOTOX0sVO74gemWVwuQz
-	 Gmrt0aH/yrhP23e3Z8HVCwlDonbLnEDjagKUIztfHF3omQNC+m1Qrhxvrp5MoT3TNJ
-	 qoK2zA8GoaBvyDzAZukEMR9fhyY0xcvMkQ8szP+8ba/pYugofkfMpR4tmgYNwHrrI8
-	 7QB1UDLF1nTMhQUE/o93pdb/aDmfnxO0QJIQjrmaM+n5oi3NsIm1tAHjtB5/MxHIo0
-	 4yX+2St4DkPsy9Ectuk1VrGdTdJyswc84UhZMpExNywjklFNUpe4fZeFdkvleG4KNe
-	 1BWWkgDS4wQlA==
-Date: Mon, 30 Aug 2021 18:53:19 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Wei Chen <wei.chen@arm.com>
-cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, julien@xen.org, 
-    jbeulich@suse.com, Bertrand.Marquis@arm.com
-Subject: Re: [XEN RFC PATCH 39/40] xen/x86: move numa_setup to common to
- support NUMA switch in command line
-In-Reply-To: <20210811102423.28908-40-wei.chen@arm.com>
-Message-ID: <alpine.DEB.2.21.2108301852380.17851@sstabellini-ThinkPad-T480s>
-References: <20210811102423.28908-1-wei.chen@arm.com> <20210811102423.28908-40-wei.chen@arm.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=lv8eWUCqXXL+qR1v4lHmOlmlsOw8lBSpuEPI74g1KfY=; b=gJM+VZiv0032f/Wme+lI5u2E6c
+	YwbPkwsR++yckBvC79RLITfYV294KQpNQ2CHDQx34/qq2gm+RTVBrNRYjdElpSV2sf85kDS92YzLs
+	pcjw8gKOQH4SbT9OvQjgP6h/fFCBbZszDWjBbPgBY65Q2nAPLLzgHBbxWuJ2gmYf8Ivg=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-164630-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [ovmf test] 164630: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=77d5fa80246e8784f89e109ff9dadfeb7089ff85
+X-Osstest-Versions-That:
+    ovmf=a82bad9730178a1e3a67c9bfc83412b87a8ad734
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 31 Aug 2021 02:55:09 +0000
 
-On Wed, 11 Aug 2021, Wei Chen wrote:
-> Xen x86 has created a command line parameter "numa" as NUMA switch for
-> user to turn on/off NUMA. As device tree based NUMA has been enabled
-> for Arm, this parameter can be reused by Arm. So in this patch, we move
-> this parameter to common.
-> 
-> Signed-off-by: Wei Chen <wei.chen@arm.com>
-> ---
->  xen/arch/x86/numa.c    | 34 ----------------------------------
->  xen/common/numa.c      | 35 ++++++++++++++++++++++++++++++++++-
->  xen/include/xen/numa.h |  1 -
->  3 files changed, 34 insertions(+), 36 deletions(-)
-> 
-> diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
-> index 8b43be4aa7..380d8ed6fd 100644
-> --- a/xen/arch/x86/numa.c
-> +++ b/xen/arch/x86/numa.c
-> @@ -11,7 +11,6 @@
->  #include <xen/nodemask.h>
->  #include <xen/numa.h>
->  #include <xen/keyhandler.h>
-> -#include <xen/param.h>
->  #include <xen/time.h>
->  #include <xen/smp.h>
->  #include <xen/pfn.h>
-> @@ -19,9 +18,6 @@
->  #include <xen/sched.h>
->  #include <xen/softirq.h>
->  
-> -static int numa_setup(const char *s);
-> -custom_param("numa", numa_setup);
-> -
->  #ifndef Dprintk
->  #define Dprintk(x...)
->  #endif
-> @@ -50,35 +46,6 @@ void numa_set_node(int cpu, nodeid_t node)
->      cpu_to_node[cpu] = node;
->  }
->  
-> -/* [numa=off] */
-> -static __init int numa_setup(const char *opt)
-> -{
-> -    if ( !strncmp(opt,"off",3) )
-> -        numa_off = true;
-> -    else if ( !strncmp(opt,"on",2) )
-> -        numa_off = false;
-> -#ifdef CONFIG_NUMA_EMU
-> -    else if ( !strncmp(opt, "fake=", 5) )
-> -    {
-> -        numa_off = false;
-> -        numa_fake = simple_strtoul(opt+5,NULL,0);
-> -        if ( numa_fake >= MAX_NUMNODES )
-> -            numa_fake = MAX_NUMNODES;
-> -    }
-> -#endif
-> -#ifdef CONFIG_ACPI_NUMA
-> -    else if ( !strncmp(opt,"noacpi",6) )
-> -    {
-> -        numa_off = false;
-> -        acpi_numa = -1;
-> -    }
-> -#endif
-> -    else
-> -        return -EINVAL;
-> -
-> -    return 0;
-> -} 
-> -
->  /*
->   * Setup early cpu_to_node.
->   *
-> @@ -287,4 +254,3 @@ static __init int register_numa_trigger(void)
->      return 0;
->  }
->  __initcall(register_numa_trigger);
-> -
+flight 164630 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/164630/
 
-spurious change
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 77d5fa80246e8784f89e109ff9dadfeb7089ff85
+baseline version:
+ ovmf                 a82bad9730178a1e3a67c9bfc83412b87a8ad734
+
+Last test of basis   164556  2021-08-28 19:27:14 Z    2 days
+Testing same since   164630  2021-08-30 01:10:45 Z    1 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Gerd Hoffmann <kraxel@redhat.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   a82bad9730..77d5fa8024  77d5fa80246e8784f89e109ff9dadfeb7089ff85 -> xen-tested-master
 
