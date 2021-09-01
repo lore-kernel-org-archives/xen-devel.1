@@ -2,45 +2,51 @@ Return-Path: <SRS0=KClV=NX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 234F4C00143
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 08:57:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95AECC4320E
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 08:59:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD9606103D
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 08:57:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DD9606103D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 5AC9E60C3E
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 08:59:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5AC9E60C3E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.176127.320576 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.176133.320586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLM3S-0008C0-57; Wed, 01 Sep 2021 08:57:10 +0000
+	id 1mLM5k-0000Nc-IA; Wed, 01 Sep 2021 08:59:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 176127.320576; Wed, 01 Sep 2021 08:57:10 +0000
+Received: by outflank-mailman (output) from mailman id 176133.320586; Wed, 01 Sep 2021 08:59:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLM3S-0008Bs-1x; Wed, 01 Sep 2021 08:57:10 +0000
-Received: by outflank-mailman (input) for mailman id 176127;
- Wed, 01 Sep 2021 08:57:08 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mLM3Q-0008B1-Qz
- for xen-devel@lists.xenproject.org; Wed, 01 Sep 2021 08:57:08 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mLM3Q-0006Nv-JV; Wed, 01 Sep 2021 08:57:08 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mLM3Q-0002oP-Dk; Wed, 01 Sep 2021 08:57:08 +0000
+	id 1mLM5k-0000NV-FD; Wed, 01 Sep 2021 08:59:32 +0000
+Received: by outflank-mailman (input) for mailman id 176133;
+ Wed, 01 Sep 2021 08:59:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=qyqW=NX=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
+ id 1mLM5i-0000NG-KF
+ for xen-devel@lists.xenproject.org; Wed, 01 Sep 2021 08:59:30 +0000
+Received: from mail-wm1-x32c.google.com (unknown [2a00:1450:4864:20::32c])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4befbfe0-02cf-4f58-ae92-cc2125c322fc;
+ Wed, 01 Sep 2021 08:59:29 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ u15-20020a05600c19cf00b002f6445b8f55so1012152wmq.0
+ for <xen-devel@lists.xenproject.org>; Wed, 01 Sep 2021 01:59:29 -0700 (PDT)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id q11sm4990687wmc.41.2021.09.01.01.59.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Sep 2021 01:59:27 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id E26A91FF96;
+ Wed,  1 Sep 2021 09:59:26 +0100 (BST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,145 +58,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=2woEMNGAqbi5v4Yljw72/vRg6uMvPADMrGXsyYLrLmw=; b=J9cM7gqPONS5y8YD0FxhRvcIPi
-	g0BV1hy5ajvTmAV8hx3an+GHQCZ+6De3d2cnAvR3axjZeZwxGWyvMaXWvN9a7zpUs5VwXJscYUC63
-	6S+nSyUe76tBDSXtlEgEVitWQnWZnK7rTRExmZrjtTlMZNQzxvusI/cKumZRDSlYHNns=;
-Subject: Re: [PATCH v5 1/7] xen/arm: introduce new helper
- device_tree_get_meminfo
-To: Penny Zheng <penny.zheng@arm.com>, xen-devel@lists.xenproject.org,
- sstabellini@kernel.org
-Cc: Bertrand.Marquis@arm.com, Wei.Chen@arm.com, nd@arm.com
-References: <20210824095045.2281500-1-penny.zheng@arm.com>
- <20210824095045.2281500-2-penny.zheng@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <06395a17-24fb-35d5-8332-a6ca42dbc183@xen.org>
-Date: Wed, 1 Sep 2021 09:57:06 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.13.0
+X-Inumbo-ID: 4befbfe0-02cf-4f58-ae92-cc2125c322fc
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=references:user-agent:from:to:cc:subject:date:in-reply-to
+         :message-id:mime-version:content-transfer-encoding;
+        bh=4vx7Zbm8CuixWNdewxmOaS8u+QseNO7OTa6aQNrm0kI=;
+        b=Dn56lMmrX0vlpkgbNgHhqRiO345nhCfgtmp3bXAdFY+1uszjRzJj3wC+21HEB3EUDi
+         CbcMUWUe3+SjAPdtvjLenZP/vubL3FhqjPm5Dvcs01tds9PIkDgTal7dX5qrLBPnfoPA
+         bh45l88MiLik/bdk8Fk6pEI2Xn1GqsV8X88IFUxQiiumqrwhDwpAO9fuBmPKmejsy8UU
+         3i4UdlvkfACw/gz3uEvM8Ipw+vYnbMMkM3IM/oCTYU3YTtOijHfCgJe0LvunsEVeUchE
+         cE2yp4J+6JAg4F6pN4F7APMOL7eBwaV5A/58njHTalQSj5MFZEdP5revZmdYmHRouKhk
+         MPLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
+         :in-reply-to:message-id:mime-version:content-transfer-encoding;
+        bh=4vx7Zbm8CuixWNdewxmOaS8u+QseNO7OTa6aQNrm0kI=;
+        b=NPbvgMkRZmSNcVhbh6p/H/Wq+LvA6KjOWSu+8UGtp0tQM0beWpslObKmYG83SqZm3n
+         /vHB4ZGgn3LS4RKp5isa2eIhgpcvXlgvlWsJqfHP4ppSyIMGqRzieSSxKPdqrcpCcWAX
+         B3k0Xr1vGnZZOMhlN1jG8txj2V8KWfgzrqmPYy4TR62mb8+fuebzoCFmZ+jNHnyai59H
+         G+4isKQPFGBPjBm7jyxLNugJAAniu2u1Ey+v7nIxGpWQLUNy4VC40bylgYN7q6+Z/0Pa
+         NsnwUhpNmjsg+kEbWFJgCnydeE0rECikRxdSnLoKLa3XzcCMDKdT/nhUsDz81w6X7SOT
+         pcZw==
+X-Gm-Message-State: AOAM530MIKCoA1GJm5Af54q6AsB/n2pluN9zXrm6Febakv7v0+n1C4Y2
+	0YeYrmXgTEQHrw/Y31VzpAhuiw==
+X-Google-Smtp-Source: ABdhPJy1JDP7j3J1vzC7astXeHHHohtbMvmxOm+XGvKbN37GI/QmPrNdycwQml/nktVwrMmQ0N4VcA==
+X-Received: by 2002:a1c:f314:: with SMTP id q20mr8677397wmq.154.1630486768626;
+        Wed, 01 Sep 2021 01:59:28 -0700 (PDT)
+References: <87v94ldrqq.fsf@linaro.org>
+ <alpine.DEB.2.21.2108041055390.9768@sstabellini-ThinkPad-T480s>
+ <0100017b33e585a5-06d4248e-b1a7-485e-800c-7ead89e5f916-000000@email.amazonses.com>
+ <CAHFG_=WKjJ1riKtaWC8jm13shc3RtVsNNqd3j9WD9Fq0NeRS2Q@mail.gmail.com>
+ <20210813051038.GA77540@laputa>
+User-agent: mu4e 1.7.0; emacs 28.0.50
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: Fran??ois Ozog <francois.ozog@linaro.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, paul@xen.org, Stratos Mailing List
+ <stratos-dev@op-lists.linaro.org>, virtio-dev@lists.oasis-open.org, Jan
+ Kiszka <jan.kiszka@siemens.com>, Arnd Bergmann <arnd.bergmann@linaro.org>,
+ jgross@suse.com, julien@xen.org, Carl van Schaik
+ <cvanscha@qti.qualcomm.com>, Bertrand.Marquis@arm.com,
+ stefanha@redhat.com, Artem_Mygaiev@epam.com, xen-devel@lists.xen.org,
+ olekstysh@gmail.com, Oleksandr_Tyshchenko@epam.com,
+ xen-devel@lists.xenproject.org
+Subject: Re: [Stratos-dev] Enabling hypervisor agnosticism for VirtIO backends
+Date: Wed, 01 Sep 2021 09:57:45 +0100
+In-reply-to: <20210813051038.GA77540@laputa>
+Message-ID: <87eea8hdsh.fsf@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20210824095045.2281500-2-penny.zheng@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Penny,
 
-On 24/08/2021 10:50, Penny Zheng wrote:
-> A few functions iterate over the device tree property to get memory info,
-> like "reg" or the later "xen,static-mem", so this commit creates a new helper
-> device_tree_get_meminfo to extract the common codes.
+AKASHI Takahiro <takahiro.akashi@linaro.org> writes:
 
-The commit message needs to be updated as the patch has been reshuffled.
+> Hi Fran=C3=A7ois,
+>
+> On Thu, Aug 12, 2021 at 09:55:52AM +0200, Fran??ois Ozog wrote:
+>> I top post as I find it difficult to identify where to make the comments.
+>
+> Thank you for the posting.=20
+> I think that we should first discuss more about the goal/requirements/
+> practical use cases for the framework.
+>
+>> 1) BE acceleration
+>> Network and storage backends may actually be executed in SmartNICs. As
+>> virtio 1.1 is hardware friendly, there may be SmartNICs with virtio 1.1 =
+PCI
+>> VFs. Is it a valid use case for the generic BE framework to be used in t=
+his
+>> context?
+>> DPDK is used in some BE to significantly accelerate switching. DPDK is a=
+lso
+>> used sometimes in guests. In that case, there are no event injection but
+>> just high performance memory scheme. Is this considered as a use case?
+>
+> I'm not quite familiar with DPDK but it seems to be heavily reliant
+> on not only virtqueues but also kvm/linux features/functionality, say,
+> according to [1].
+> I'm afraid that DPDK is not suitable for primary (at least, initial)
+> target use.
+> # In my proposal, virtio-proxy, I have in mind the assumption that we wou=
+ld
+> # create BE VM as a baremetal application on RTOS (and/or unikernel.)
+>
+> But as far as virtqueue is concerned, I think we can discuss in general
+> technical details as Alex suggested, including:
+> - sharing or mapping memory regions for data payload
+> - efficient notification mechanism
+>
+> [1] https://www.redhat.com/en/blog/journey-vhost-users-realm
+>
+>> 2) Virtio as OS HAL
+>> Panasonic CTO has been calling for a virtio based HAL and based on the
+>> teachings of Google GKI, an internal HAL seem inevitable in the long ter=
+m.
+>> Virtio is then a contender to Google promoted Android HAL. Could the
+>> framework be used in that context?
+>
+> In this case, where will the implementation of "HAL" reside?
+> I don't think the portability of "HAL" code (as a set of virtio BEs)
+> is a requirement here.
 
-> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
-> ---
->   xen/arch/arm/bootfdt.c | 68 ++++++++++++++++++++++++------------------
->   1 file changed, 39 insertions(+), 29 deletions(-)
-> 
-> diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-> index 476e32e0f5..8c81be3379 100644
-> --- a/xen/arch/arm/bootfdt.c
-> +++ b/xen/arch/arm/bootfdt.c
-> @@ -63,6 +63,44 @@ void __init device_tree_get_reg(const __be32 **cell, u32 address_cells,
->       *size = dt_next_cell(size_cells, cell);
->   }
->   
-> +static int __init device_tree_get_meminfo(const void *fdt, int node,
-> +                                          const char *prop_name,
-> +                                          u32 address_cells, u32 size_cells,
-> +                                          void *data)
-> +{
-> +    const struct fdt_property *prop;
-> +    unsigned int i, banks;
-> +    const __be32 *cell;
-> +    u32 reg_cells = address_cells + size_cells;
-> +    paddr_t start, size;
-> +    struct meminfo *mem = data;
-> +
-> +    prop = fdt_get_property(fdt, node, prop_name, NULL);
-> +    if ( !prop )
-> +        return -ENOENT;
-> +
-> +    cell = (const __be32 *)prop->data;
-> +    banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof (u32));
-> +
-> +    for ( i = 0; i < banks && mem->nr_banks < NR_MEM_BANKS; i++ )
-> +    {
-> +        device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
-> +        /* Some DT may describe empty bank, ignore them */
-> +        if ( !size )
-> +            continue;
-> +        mem->bank[mem->nr_banks].start = start;
-> +        mem->bank[mem->nr_banks].size = size;
-> +        mem->nr_banks++;
-> +    }
-> +
-> +    if ( i < banks )
-> +    {
-> +        printk("Warning: Max number of supported memory regions reached.\n");
-> +        return -ENOSPC;
-> +    }
-> +    return 0;
-> +}
-> +
->   u32 __init device_tree_get_u32(const void *fdt, int node,
->                                  const char *prop_name, u32 dflt)
->   {
-> @@ -139,14 +177,6 @@ static int __init process_memory_node(const void *fdt, int node,
->                                         u32 address_cells, u32 size_cells,
->                                         void *data)
->   {
-> -    const struct fdt_property *prop;
-> -    int i;
-> -    int banks;
-> -    const __be32 *cell;
-> -    paddr_t start, size;
-> -    u32 reg_cells = address_cells + size_cells;
-> -    struct meminfo *mem = data;
-> -
->       if ( address_cells < 1 || size_cells < 1 )
+When I hear people referring to VirtIO HALs I'm thinking mainly of
+VirtIO FE's living in a Linux kernel. There are certainly more devices
+that can get added but the commonality on the guest side I think is
+pretty much a solved problem (modulo Linux-ism's creeping into the
+virtio spec).
 
-This check will be the same for "xen,static-mem". So can it be moved to 
-device_tree_get_meminfo()?
-
->       {
->           printk("fdt: node `%s': invalid #address-cells or #size-cells",
-> @@ -154,27 +184,7 @@ static int __init process_memory_node(const void *fdt, int node,
->           return -EINVAL;
->       }
->   
-> -    prop = fdt_get_property(fdt, node, "reg", NULL);
-> -    if ( !prop )
-> -        return -ENOENT;
-> -
-> -    cell = (const __be32 *)prop->data;
-> -    banks = fdt32_to_cpu(prop->len) / (reg_cells * sizeof (u32));
-> -
-> -    for ( i = 0; i < banks && mem->nr_banks < NR_MEM_BANKS; i++ )
-> -    {
-> -        device_tree_get_reg(&cell, address_cells, size_cells, &start, &size);
-> -        /* Some DT may describe empty bank, ignore them */
-> -        if ( !size )
-> -            continue;
-> -        mem->bank[mem->nr_banks].start = start;
-> -        mem->bank[mem->nr_banks].size = size;
-> -        mem->nr_banks++;
-> -    }
-> -
-> -    if ( i < banks )
-> -        return -ENOSPC;
-> -    return 0;
-> +    return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells, data);
->   }
->   
->   static int __init process_reserved_memory_node(const void *fdt, int node,
-> 
-
-Cheers,
-
--- 
-Julien Grall
+--=20
+Alex Benn=C3=A9e
 
