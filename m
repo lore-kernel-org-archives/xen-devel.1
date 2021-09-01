@@ -2,50 +2,43 @@ Return-Path: <SRS0=KClV=NX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63DE5C4320A
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 13:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3734C432BE
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 13:22:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 124FE600D4
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 13:20:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 124FE600D4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by mail.kernel.org (Postfix) with ESMTPS id B404160FD7
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 13:22:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B404160FD7
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.176394.320985 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.176400.320995 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLQAZ-0005dc-JT; Wed, 01 Sep 2021 13:20:47 +0000
+	id 1mLQCE-0006Tl-VB; Wed, 01 Sep 2021 13:22:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 176394.320985; Wed, 01 Sep 2021 13:20:47 +0000
+Received: by outflank-mailman (output) from mailman id 176400.320995; Wed, 01 Sep 2021 13:22:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLQAZ-0005dV-Ga; Wed, 01 Sep 2021 13:20:47 +0000
-Received: by outflank-mailman (input) for mailman id 176394;
- Wed, 01 Sep 2021 13:20:45 +0000
+	id 1mLQCE-0006Te-SE; Wed, 01 Sep 2021 13:22:30 +0000
+Received: by outflank-mailman (input) for mailman id 176400;
+ Wed, 01 Sep 2021 13:22:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qyqW=NX=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1mLQAX-0005dN-Rx
- for xen-devel@lists.xen.org; Wed, 01 Sep 2021 13:20:45 +0000
-Received: from mail-wr1-x429.google.com (unknown [2a00:1450:4864:20::429])
+ <SRS0=gczT=NX=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1mLQCD-0006TY-LR
+ for xen-devel@lists.xen.org; Wed, 01 Sep 2021 13:22:29 +0000
+Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b5b09572-24bc-452d-87bf-2c25f69caa2f;
- Wed, 01 Sep 2021 13:20:44 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id u9so4458220wrg.8
- for <xen-devel@lists.xen.org>; Wed, 01 Sep 2021 06:20:44 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id h11sm25481339wrx.9.2021.09.01.06.20.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Sep 2021 06:20:43 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 6C4D31FF96;
- Wed,  1 Sep 2021 14:20:42 +0100 (BST)
+ id cf2850d5-6dd5-40f8-bffe-1da694fcf464;
+ Wed, 01 Sep 2021 13:22:28 +0000 (UTC)
+Received: by mail-lf1-x12d.google.com with SMTP id t19so4487310lfe.13;
+ Wed, 01 Sep 2021 06:22:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,130 +50,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b5b09572-24bc-452d-87bf-2c25f69caa2f
+X-Inumbo-ID: cf2850d5-6dd5-40f8-bffe-1da694fcf464
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=references:user-agent:from:to:cc:subject:date:in-reply-to
-         :message-id:mime-version:content-transfer-encoding;
-        bh=y/0tGsa7zxs1Lge6n3O6ldiXuhSjzQntOAObjxG3wD8=;
-        b=gAnfhwBM6t2sfmWr0LXDnlOXCmfqqkhQvg8PKhZg0mwsVmibDpiyA0ycZRCaPZM/o9
-         jWOSV+puCL7VGYR9cJuMUCQlMqfLPQlGiUk4SK9A0wFvpOSsKIHMhHZqu/KF8pArEMJ6
-         /K2zuth1vsa6Noddrq4zuOPYXKJkZ2Q9hgUfk2iqtVSf3BP0pVK0BmuZpJghk56qVwZA
-         KVVzErNnIv1DqO8RRtIGGKsQZL1U0Fo/GZjHHXlX/1c8vF2xbQQ2E4gI1nVjtDGHg3K0
-         gW/ehRFVFcBd1onW2djYp7qR7jy11EXMYIKqt/C/T3/bAZglF4+LSDewaVtD3Rnk96w+
-         C7Jg==
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=jaFQ1dJz/0jVDnUJDux1CudavpmIQDH+qRgNmOHy2kw=;
+        b=V08N3wY0tEFQVk3cnI/b65MC6y/NleF6UKnkKSF4FljmBjrUCVrMazguZLA7LdjAmT
+         +ukjleA/aXsaghg8GdsMYuAgm5c+MPEAreIaSQmdzDGpoYxtukbwGOq6AUzSQwEpTY7+
+         AeRpjO4diPCC57slSCKz6Up8XUfN5G55R75Z0ghi/XJHYQzGmDGp0k5rosewss7I0J/f
+         I3lzZ16I+iwkRH8e8zHzRSxcJ5rmOUhqIQSEZfM6y6/Rh5VlbXhlnuTgeV0C1Ud4mU1N
+         SF3wfplIkh8EJ7NydDk2HhzRMfGvJ4zuckdXpFbwpiK3mBrr//Kfse12BEWAhzVvi6fQ
+         5kXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
-         :in-reply-to:message-id:mime-version:content-transfer-encoding;
-        bh=y/0tGsa7zxs1Lge6n3O6ldiXuhSjzQntOAObjxG3wD8=;
-        b=Nb5mqR5TsAz+SC1PjkXWUrHYg7+RYIk2PofavxzZZ1W9z7k7DyBIdtI9aTlSci0TB7
-         w8t1qSFHcHfg0Wd9Tq2jcnOy2Xz7IfFH9r3JetnYwMqHRDb66kjuPrhcnXtx/UfZhD7h
-         8gAyvV9hCMoX2x67efoVVNilx6cTOonqBF1BdCC8cCRUhScHRYES2nZ9crHt9aSwxhFP
-         91HZB7plrUKY4oQH24/CRhOQ7Rl8aOF+DQGtd/kO+kup8bxHyUMNKwiCkjyu7+7ChprY
-         QvlrizXqekLy6BCTjxcC8uGmcJoSt+1MftQlVXdLmf92RYVE+iN/U1OrrayTL7T0gh3c
-         tMrA==
-X-Gm-Message-State: AOAM5316lkUVkwVO/rO9hvknS0Y5pkVZv6uNUiUh6Yw9tgWnf+gODKmJ
-	pTvSvzZ9GexVS8CvljiORcLmVA==
-X-Google-Smtp-Source: ABdhPJxCevrGYCx7XFVJhI0D2nblAkpnQCi5PGoMrSDHbafJqS3oT1ctZ1duD7JVNhkkNRwTAvhNgg==
-X-Received: by 2002:adf:b7cd:: with SMTP id t13mr17597181wre.63.1630502444042;
-        Wed, 01 Sep 2021 06:20:44 -0700 (PDT)
-References: <87v94ldrqq.fsf@linaro.org>
- <alpine.DEB.2.21.2108041055390.9768@sstabellini-ThinkPad-T480s>
- <YRuSPT9075NuWRYS@stefanha-x1.localdomain>
-User-agent: mu4e 1.7.0; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Stratos Mailing List
- <stratos-dev@op-lists.linaro.org>, virtio-dev@lists.oasis-open.org, Arnd
- Bergmann <arnd.bergmann@linaro.org>, Viresh Kumar
- <viresh.kumar@linaro.org>, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Stefano Stabellini <stefano.stabellini@xilinx.com>, Jan Kiszka
- <jan.kiszka@siemens.com>, Carl van Schaik <cvanscha@qti.qualcomm.com>,
- pratikp@quicinc.com, Srivatsa Vaddagiri <vatsa@codeaurora.org>,
- Jean-Philippe Brucker <jean-philippe@linaro.org>, Mathieu Poirier
- <mathieu.poirier@linaro.org>, Wei.Chen@arm.com, olekstysh@gmail.com,
- Oleksandr_Tyshchenko@epam.com, Bertrand.Marquis@arm.com,
- Artem_Mygaiev@epam.com, julien@xen.org, jgross@suse.com, paul@xen.org,
- xen-devel@lists.xen.org, Elena Afanasova <eafanasova@gmail.com>
-Subject: Re: Enabling hypervisor agnosticism for VirtIO backends
-Date: Wed, 01 Sep 2021 13:53:34 +0100
-In-reply-to: <YRuSPT9075NuWRYS@stefanha-x1.localdomain>
-Message-ID: <875yvkh1p1.fsf@linaro.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=jaFQ1dJz/0jVDnUJDux1CudavpmIQDH+qRgNmOHy2kw=;
+        b=JrpFxVaBMe8DrcL/LAJ8shCaXJ4Ue23W3hoyGVRIfapRy/ZvbNVLLlSjeZSgktxEDL
+         Vh2Sp7eI/S1m6J+aOzTPhK/OjKSQv0DUsS8VLE/ER2OXJb5e7DrDEUAfcWFKgCUWBIJ9
+         s/Kla6Em+S3TDU16XXV5I2ZSffiv70n7ZR6GPpIqH7YWe4QeKI1cBHkGYPUgPG9WhT98
+         qUpcueZVT0jFl0KmEqCN6AjuV272lFqDw+t4pBkERk2Z1dpyDJJF6Upf9ouXhwuLQxhT
+         NxWj42tEw9w3UQ1iaCguh0upNstAu2iIOjf088UvzbfhRVoDPW5yNR+VLsjcSeD6swWs
+         81Xg==
+X-Gm-Message-State: AOAM531FlJMmjORy+uaUxkviFED/ekdPu42SfqE9CgrRoMpouTj6ERDZ
+	+BbtjZgMJBUCUdkKkArhpvZNhTj6cG5Ld3/jo3Y=
+X-Google-Smtp-Source: ABdhPJzjhjRenLVlNS1HJ0Z1WF422vUK6cSHDYkcons243OdgRRX3wOE4F63Tq0W2CKrBteyFQ6T9OAR2SBTJbX1W8Y=
+X-Received: by 2002:ac2:5d4a:: with SMTP id w10mr26376733lfd.529.1630502546778;
+ Wed, 01 Sep 2021 06:22:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <E1mLMZy-0006TJ-Rw@xenbits.xenproject.org>
+In-Reply-To: <E1mLMZy-0006TJ-Rw@xenbits.xenproject.org>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Wed, 1 Sep 2021 09:22:14 -0400
+Message-ID: <CAKf6xpsAz7oPX+PdZokm+BAqreqL8rnrAd9UYvdz=F0M-bcMUQ@mail.gmail.com>
+Subject: Re: Xen Security Advisory 378 v3 (CVE-2021-28694,CVE-2021-28695,CVE-2021-28696)
+ - IOMMU page mapping issues on x86
+To: "Xen.org security team" <security@xen.org>
+Cc: xen-announce@lists.xen.org, xen-devel@lists.xen.org, 
+	xen-users@lists.xen.org, oss-security@lists.openwall.com, 
+	"Xen.org security team" <security-team-members@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 
-
-Stefan Hajnoczi <stefanha@redhat.com> writes:
-
-> [[PGP Signed Part:Undecided]]
-> On Wed, Aug 04, 2021 at 12:20:01PM -0700, Stefano Stabellini wrote:
->> > Could we consider the kernel internally converting IOREQ messages from
->> > the Xen hypervisor to eventfd events? Would this scale with other kern=
-el
->> > hypercall interfaces?
->> >=20
->> > So any thoughts on what directions are worth experimenting with?
->>=20=20
->> One option we should consider is for each backend to connect to Xen via
->> the IOREQ interface. We could generalize the IOREQ interface and make it
->> hypervisor agnostic. The interface is really trivial and easy to add.
->> The only Xen-specific part is the notification mechanism, which is an
->> event channel. If we replaced the event channel with something else the
->> interface would be generic. See:
->> https://gitlab.com/xen-project/xen/-/blob/staging/xen/include/public/hvm=
-/ioreq.h#L52
+On Wed, Sep 1, 2021 at 5:34 AM Xen.org security team <security@xen.org> wrote:
 >
-> There have been experiments with something kind of similar in KVM
-> recently (see struct ioregionfd_cmd):
-> https://lore.kernel.org/kvm/dad3d025bcf15ece11d9df0ff685e8ab0a4f2edd.1613=
-828727.git.eafanasova@gmail.com/
-
-Reading the cover letter was very useful in showing how this provides a
-separate channel for signalling IO events to userspace instead of using
-the normal type-2 vmexit type event. I wonder how deeply tied the
-userspace facing side of this is to KVM? Could it provide a common FD
-type interface to IOREQ?
-
-As I understand IOREQ this is currently a direct communication between
-userspace and the hypervisor using the existing Xen message bus. My
-worry would be that by adding knowledge of what the underlying
-hypervisor is we'd end up with excess complexity in the kernel. For one
-thing we certainly wouldn't want an API version dependency on the kernel
-to understand which version of the Xen hypervisor it was running on.
-
->> There is also another problem. IOREQ is probably not be the only
->> interface needed. Have a look at
->> https://marc.info/?l=3Dxen-devel&m=3D162373754705233&w=3D2. Don't we als=
-o need
->> an interface for the backend to inject interrupts into the frontend? And
->> if the backend requires dynamic memory mappings of frontend pages, then
->> we would also need an interface to map/unmap domU pages.
->>=20
->> These interfaces are a lot more problematic than IOREQ: IOREQ is tiny
->> and self-contained. It is easy to add anywhere. A new interface to
->> inject interrupts or map pages is more difficult to manage because it
->> would require changes scattered across the various emulators.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA256
 >
-> Something like ioreq is indeed necessary to implement arbitrary devices,
-> but if you are willing to restrict yourself to VIRTIO then other
-> interfaces are possible too because the VIRTIO device model is different
-> from the general purpose x86 PIO/MMIO that Xen's ioreq seems to
-> support.
-
-It's true our focus is just VirtIO which does support alternative
-transport options however most implementations seem to be targeting
-virtio-mmio for it's relative simplicity and understood semantics
-(modulo a desire for MSI to reduce round trip latency handling
-signalling).
-
+>  Xen Security Advisory CVE-2021-28694,CVE-2021-28695,CVE-2021-28696 / XSA-378
+>                                    version 3
 >
-> Stefan
+>                    IOMMU page mapping issues on x86
 >
-> [[End of PGP Signed Part]]
+> UPDATES IN VERSION 3
+> ====================
+>
+> Warn about dom0=pvh breakage in Resolution section.
+>
+> ISSUE DESCRIPTION
+> =================
+>
+> Both AMD and Intel allow ACPI tables to specify regions of memory
+> which should be left untranslated, which typically means these
+> addresses should pass the translation phase unaltered.  While these
+> are typically device specific ACPI properties, they can also be
+> specified to apply to a range of devices, or even all devices.
+>
+> On all systems with such regions Xen failed to prevent guests from
+> undoing/replacing such mappings (CVE-2021-28694).
 
+Hi,
 
---=20
-Alex Benn=C3=A9e
+Is there a way to identify if a system's ACPI tables have untranslated
+regions?  Does it show up in xen or linux dmesg or can it be
+identified in sysfs?
+
+Thanks,
+Jason
 
