@@ -2,42 +2,45 @@ Return-Path: <SRS0=KClV=NX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34386C4320E
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 12:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF1B9C432BE
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 12:56:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD23060041
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 12:48:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DD23060041
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id A85C960E98
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Sep 2021 12:56:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A85C960E98
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.176359.320921 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.176367.320938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLPei-00071s-OJ; Wed, 01 Sep 2021 12:47:52 +0000
+	id 1mLPmB-0000Ca-Jt; Wed, 01 Sep 2021 12:55:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 176359.320921; Wed, 01 Sep 2021 12:47:52 +0000
+Received: by outflank-mailman (output) from mailman id 176367.320938; Wed, 01 Sep 2021 12:55:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLPei-00071l-KP; Wed, 01 Sep 2021 12:47:52 +0000
-Received: by outflank-mailman (input) for mailman id 176359;
- Wed, 01 Sep 2021 12:47:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rqR/=NX=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mLPeh-00071f-Cq
- for xen-devel@lists.xenproject.org; Wed, 01 Sep 2021 12:47:51 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d08a981e-0b22-11ec-add6-12813bfff9fa;
- Wed, 01 Sep 2021 12:47:50 +0000 (UTC)
+	id 1mLPmB-0000CT-G3; Wed, 01 Sep 2021 12:55:35 +0000
+Received: by outflank-mailman (input) for mailman id 176367;
+ Wed, 01 Sep 2021 12:55:34 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1mLPmA-0000CN-I3
+ for xen-devel@lists.xenproject.org; Wed, 01 Sep 2021 12:55:34 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mLPm6-0002Dm-PT; Wed, 01 Sep 2021 12:55:30 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mLPm6-0007By-Hy; Wed, 01 Sep 2021 12:55:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,230 +52,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d08a981e-0b22-11ec-add6-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1630500470;
-  h=to:cc:references:from:subject:message-id:date:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=h6mJzdTcFw3IRJ6Tvbd87qhOMqz7nqvNglic+QwxbPI=;
-  b=HhFzni5QH6luLYn1LAsYA3fNdt0OUyoJbJTThbazXXe3kHMhCcVd8HOU
-   kSQrQ7iKSZC691bAXz+foqvG1F136S3rGvciTB1SSXSPk5e1lURmzfU2S
-   dvd98sLQSeNhUTT7QivUBRh94j8qJC2v/GD85as5kgmJ2t1odseqpJtG9
-   A=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-IronPort-SDR: yt6rC4h0IVg9WGAgQqBw+QI6Vyb4RHsSc6ZlVB+K0T/55JP6s6qj35S9ggo30I++PdE4fBkTFr
- UD2cYkH3DbnCECHRq9hRLxSqhqw+WvMyxBId3EmoXf/QlWSfIQkbJJtt2CefiqLayQ01zWdrDS
- zFst2jTkHAdQslKjesrQKNk2uN2UOdPy9OTTpBTkWHGX5BKcVDD8p5dlO5nr6X5mi/6OZ4Hpzb
- shOmxOSp/r0AIyJffE4nRU/dzjSRC59fxXjoSzZliKPubAs1ivOp3/cjr3Ggb0M+vIzTDqgg1r
- 7sHXvMP44Xpog+lgvMoVYiW3
-X-SBRS: 5.1
-X-MesageID: 52179159
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:O+qdP6yIvAOamiwdUOZ5KrPxouskLtp133Aq2lEZdPULSKOlfp
- GV8MjziyWYtN9wYhAdcdDpAtjkfZquz+8L3WB3B8bfYOCGghrUEGgG1+XfKlLbalXDH4JmpM
- Bdmu1FeafN5DtB/LbHCWuDYq8dKbC8mcjC74eurAYecegpUdAF0+4QMHfrLqQcfnghOXNWLu
- v/2iMKnUvaRZxBBf7LeEXtEtKz6OHjpdbDW1orFhQn4A6BgXeB76P7KQGR2lM7XylUybkv3G
- DZm0ihj5/T8s2T+1v57Sv+/p5WkNzuxp9qA9GNsNEcLnHJhhyzbIpsdrWetHQeof2p6nwtjN
- 7Qyi1Qcfhb2jf0RCWYsBHt0w7v3HIH7GLj80aRhT/ZrcnwVFsBeoB8rLMcViGcx1srvdl63q
- 4O9XmerYBrARTJmzm4z8TUVjlx/3DE40YKoKo2tThyQIEeYLheocg050VOCqoNGyr89cQODP
- RuNsfB//xbGGnqLEwxhlMfhOBEY05DWStvGiM5y4qoOnlt7TBEJnIjtYkidixqzuNld3EsjN
- 60QZiBl9l1P4QrhOxGdb88qWbeMB26ffv2ChPnHb3QLtBOB5v8ke+D3FwL3pDcRHUp9up+pH
- 2TaiIViYYNE3ieQPFmmqc7qSzwfA==
-X-IronPort-AV: E=Sophos;i="5.84,369,1620705600"; 
-   d="scan'208";a="52179159"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VehwfQI3Yr0WBQFibVvQEaG1LPfYEzpwEhoCcelziCNpSFcZGwoKLwYteeQkacAKGDWgtfOK5zV9bLWt2hmH4pYbuYcAVycf0a3j2EmD0OuBzrORMcUZkgx/pISnC2J+UwR8FUnB0AuGMNU7T6Srknurfflt6SX3E/6ZXE9teW7eZAVI8h4G9jO4RJHZeYwtUAlDHf5YDgoXJIRFC1D52CMJ8lkHc0w5GjD4ftcy9k0yO10w+ySnYaVnVN+ZUjAIXjh5gigw0q0tcZH2TeNpmVlvdy9rJ+jUoGYDav2nJZ5F+7Y/jthRBBUXsjrBpPmJo+cT2r8hEbc6bIAQODioQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tjDlw24xjL9N6LfcvdiORpfx0u28EjiV6lJoNjLfxq8=;
- b=W6o4kmppL91QG6I9Dz2uK6zVgiKL6PoXwcTmI8ViPCXT8oqW7ZoRwbIszzKSyCJj3o5ahfZCYDW+KkogUb9yWBRl1MXl0U6LVDQ4WonTHpz0GELWlCZgW30Pkk4A09ZhYZIflrLCgt2VTT7eSUfUGqJY0Z82qGqKS1KOctzpFPkhRAU9t/M/TUtPzIJRKTTE5qpNtkNgDmS7iD4RZKvWKaaxEl/lnBCV3vET1yKdWoo0aPqelgfuLKcmF29IETbYwEiAcbjL3k5t1yLaB5lMuekqc6RGGTOg4AH1mDBLrCoTUcr/SM55v2LKxlnwwZK3+Y9YbkqyWwpoKrl1rbkflw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tjDlw24xjL9N6LfcvdiORpfx0u28EjiV6lJoNjLfxq8=;
- b=d2uV98ZJ6Z8VgmoEuRoyExqVWaap36SQRaTIjQ9tF0Gkrob6LU4Hu5wQEijsKAMpyyYUh6C9D8SGe9I64bXxNl+JAhz9O1pjUHYCNOPLCvOTyYRqB8Ej6ofng8kUryW3ldVOMp/MjukUhZjFQNtMl7htzT+IYPwJfMV4kvUwIEc=
-To: Jan Beulich <jbeulich@suse.com>
-CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
-	<roger.pau@citrix.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-References: <aae19abb-e88b-8bf8-6f1d-502ac6645d6b@suse.com>
- <93ecc397-1293-69b1-e70d-3c5f9317229a@suse.com>
- <ad1e33b5-d729-2680-7f9f-aa875c2d9cfa@citrix.com>
- <f684e203-9967-8653-d59f-ad11f5070aef@suse.com>
- <7f56c625-eee6-31c4-2d6f-bd7334867d83@citrix.com>
- <5d69d4c0-7a04-c3da-f971-616363c6d63d@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/4] x86/P2M: relax guarding of MMIO entries
-Message-ID: <62cb78c9-f4fd-76e7-225d-bc575f10850f@citrix.com>
-Date: Wed, 1 Sep 2021 13:47:40 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
-In-Reply-To: <5d69d4c0-7a04-c3da-f971-616363c6d63d@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-GB
-X-ClientProxiedBy: LO4P123CA0357.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:18d::20) To BYAPR03MB3623.namprd03.prod.outlook.com
- (2603:10b6:a02:aa::12)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=2jdGvkMeJGwBMQ7U7T6XK/oCun6VmqB1B0FRR7GMfzI=; b=dtAyaE/e4bARK5hKVTA1wVYfVO
+	l3n2kZkw2WaHB57QZzLrXIrWn+uwBcorCRlr6Xb6sR7Av3cLGZIWSGpiAsXiqTpDiXv9aPHoWMkwE
+	wzL5m0nuyYYXTHozaFytCXDtHsJ9lcKQ8jYKmgJiSO0ds/E0LgDGM6djJmak31SKh+w4=;
+Subject: Re: [PATCH] xen/arm: Introduce pmu_access parameter
+To: Michal Orzel <michal.orzel@arm.com>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, bertrand.marquis@arm.com
+References: <20210901124308.31573-1-michal.orzel@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <599515f0-4b8a-3a71-caea-b17ec27c9123@xen.org>
+Date: Wed, 1 Sep 2021 13:55:28 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.13.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5405d40e-c282-4aea-83a2-08d96d46b2f6
-X-MS-TrafficTypeDiagnostic: BY5PR03MB4997:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BY5PR03MB4997C5380E8A31D76A8BC46EBACD9@BY5PR03MB4997.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: X8wG6yt5GYJNe95xxdetZ5DX+ZM7eoFiskJ9wiN7pW9/XFXmy9OxE6Uv3SjDET2d3AgfzzrjFzvsPpu7scxilLctrBjixUbclWOxlb9NKnXuOfRrMmZncSTewoa1h8xZadXhTjzOqvs/q21x/QdFUnpstanfV4aRhtIDHX0IYS1tn+hErZMY4s+UEFOdTJ9qlI68TJWKcwV/dWHFIXZpQZrmBkxSvIswK2FrF1k+IYjGgVkgyCCpy8VOMIMRTy+3wL/MeatLgQSPftlxZ9rNaTIzHB8qcA1DixE6u+OHXgei6TTyPQ671dKzNNZ2lLKEU4sxCmI5g01oGSDqJiyrwLtUhX9msdT+eBP1hmUvhYrgBNjRGgsGkPrNvjjoKvKOWdg4GsEyuajifesNcZIIafR09lB9dUoWKdA4KOTGuSwC4utqz8hypczeotCj47U1xsr2M3AuhGCn8nPgHPHuZpxc3mD3+nQAJuc2btJ1qAtlahCjgk7l4pTzt2t49st2htuj4GfWYW8mZ+u0eSc7Jbn8Pnya+TITdmNVTJm1ub3lqR4dQUU8mBuN+Na2LhW5ddgousfyyJZoQ7Qv24XzPsBLL3OQD8oD1IaO7QWR19Mqrrx+DC4y5gSlW94QfD4tz2PN38gSD8OOT0BirhA2kJJDwkjiQZuu+MbPYDQwKmPDoOqNdysOHvTRLUodaEVh5XcwfrNJCDa4W1tGmJurhaAs6PQ2D4/rt/wnREwmYko=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(396003)(39860400002)(366004)(346002)(136003)(956004)(86362001)(66476007)(66556008)(2616005)(16576012)(31696002)(66946007)(26005)(5660300002)(54906003)(36756003)(2906002)(478600001)(6666004)(316002)(8676002)(186003)(55236004)(4326008)(31686004)(53546011)(6486002)(6916009)(38100700002)(83380400001)(8936002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RkxJbGNGUUFYYzcyTUZnSDNGb092WXNva3pYR1FlYXo4RVQ4V3dKSVJRaklv?=
- =?utf-8?B?VDJrVmlsOEo0WDhVamYzNXAwOFoxUmY4TytWdlpGQzEvYkIvUnZCaHBWeXRi?=
- =?utf-8?B?aFdLT3o1ck5yWjBDeE1xZEZ5WU5iN2sxcGVPVzNHZmpDZGFLQUpFMkhQQ2hx?=
- =?utf-8?B?OUNKTWNnK2RPdzV2VDJkc2piQitvNXBOdWFKTWtaSzdidll2VkgyZXFyZVQx?=
- =?utf-8?B?VkVXZ1RXTHpqdS9ZL2E5MTdiWndkRkJaRlBadm1ITGtsbzhVQXBQd3pCcGRP?=
- =?utf-8?B?SjcxcFVGUHd2am9Sek5TZmU3M3NBM3VKZ3lUd05ONy9IUkdWVlV4dlFoZnQr?=
- =?utf-8?B?aWJLTFdtK0JENWR6VG8rdGJmRHQ1ZkxWcFlEdzFPSC9FYjdoMENXMk9uZFl2?=
- =?utf-8?B?akppQ2VVYWYzdUVndDZ3elBlSkZpOFhoSUE0Y25SbFVtUEUvVDd6R0NzUDhV?=
- =?utf-8?B?d3haUGJ0QkRob2RYaVNqQmhuYXM2ZkRXbktUbmt0Ry9PcEgwem9ZUTlqRGNu?=
- =?utf-8?B?WlB0a3dpelkvclRVMTlsSUtNOUhUYzg0ZGRDNzRsUGdPSnIwMkdNMVR4VGdq?=
- =?utf-8?B?TjJiRGlpRytzV2RmVTFWdVFJU0FXYmtWUUs2bTdtbGF3QVBSU1JDTGVJdVNq?=
- =?utf-8?B?R2ZSYXM3VVE2QjNkU2lTNFVyZy8yUG9ONlZpaVNxb3JLaU1rY0NxZXNzb09j?=
- =?utf-8?B?eCs0TTFiUzRKSWh4N09vNTJTVmRUUU9FNS9HNlNoK2wzamNQNWF4N0dydm13?=
- =?utf-8?B?ajE0K0o4SzBxRWVFRFhCY2xsd0xiVElaWVF0VlRIY0RPektLaHVoV09VWkJO?=
- =?utf-8?B?WFJ1eUFQSzRaZG9ZZzVZbFB1QllFNUpPMlgwcXRvUWE4TGdWMkRoejFpVHlr?=
- =?utf-8?B?QlB2cjZwdnJkbHlPMW0zMWxibnBRc0xhdnU1YXo4VFVWMVNGL1E5eTBuOHY4?=
- =?utf-8?B?WC9ZOFNsbkJxM2lld2MxSHJudEZ4cGRmcGVrOTYxNjBwUzBVaUFLMEh4cnR4?=
- =?utf-8?B?RW5RTDZ3OWVBMlBQNkpyaHlnS1UyK29pUUlGNnNrNThIUUhRYk5TdUpDUFc5?=
- =?utf-8?B?YWV5VW1GeU9MaWo2b3VtM3FKcWxjZ29zSFpESG9JejZ5cGUxZlQ3U2JsM2tW?=
- =?utf-8?B?eVdOZzNRM1JINDdjd3l3cEJMYzI4b3plcmJnYXpvQ0hKRUwzL1JmbjUwcVBE?=
- =?utf-8?B?WkowRHNRY0lCNnVNeUVMR3RPV3QxeldWakxwYW11ZC9lbWFhTGRPazlFS0R0?=
- =?utf-8?B?L3llZ3I4MGhENjhkVWRFOUlZK3N5MjZ0VVhRb0c1TXE2dmpvdTJPWStLcFdH?=
- =?utf-8?B?RTJKOHRHYTZSOVBtK0w5cVhsY2x0dnJWSmR3QUFEcFBZcExObWpMRkpsS0dD?=
- =?utf-8?B?UW1zUTJadzVrcUROOWFlWE1LTElqRy84MjZiVi9udzM4eHAyamVoMXdRVDBz?=
- =?utf-8?B?SklCcGowMnBLWVZ1TkcvNW5qejNENUEzTWFSRHRsZzhZblJ1QTBuK216cm5q?=
- =?utf-8?B?TTNiR1NRR1gzQ2k2VlRocGc0OUVEaGhGSUorSVQ5M2pITU9wUm5mTkFsdHdj?=
- =?utf-8?B?eXhQdys0cVRVMEdtdlMrdEtPemY5bE1iZ0phS3VadElERXhJcGNqT2RwQ1Rj?=
- =?utf-8?B?eGU3YW12blNHSXNDVHVacUZHNm54NkdDUFR0WUQzZTBHQU5VcWQ2SWxMOWtW?=
- =?utf-8?B?ekgwOUorT1R2MDdKMGsydzlzempPZmQ2NmYxb3plNE9UUmJYMEdiZVJJTjZj?=
- =?utf-8?Q?92sogwZlfbxijYlchVOFquK31v7toqtdoKHlx0G?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5405d40e-c282-4aea-83a2-08d96d46b2f6
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2021 12:47:46.8553
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CF3Rl+KfsU6yvVA4Spcl/1DnmOGEn9Fw3gEwZWwv0KhXHL2xnfYG9N7ddWfRcZapweD8K3eO23tlwMUr6EUoJDPhEFMeeaB1pO+jvM3gwDI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB4997
-X-OriginatorOrg: citrix.com
+In-Reply-To: <20210901124308.31573-1-michal.orzel@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On 31/08/2021 16:38, Jan Beulich wrote:
-> On 31.08.2021 17:25, Andrew Cooper wrote:
->> On 31/08/2021 14:26, Jan Beulich wrote:
->>> On 31.08.2021 15:16, Andrew Cooper wrote:
->>>> On 30/08/2021 14:02, Jan Beulich wrote:
->>>>> Further permit "access" to differ in the "executable" attribute. Whil=
-e
->>>>> ideally only ROM regions would get mapped with X set, getting there i=
-s
->>>>> quite a bit of work. Therefore, as a temporary measure, permit X to
->>>>> vary. For Dom0 the more permissive of the types will be used, while f=
-or
->>>>> DomU it'll be the more restrictive one.
->>>> Split behaviour between dom0 and domU based on types alone cannot
->>>> possibly be correct.
->>> True, but what do you do.
->>>
->>>> DomU's need to execute ROMs too, and this looks like will malfunction =
-if
->>>> a ROM ends up in the region that HVMLoader relocated RAM from.
->>>>
->>>> As this is a temporary bodge emergency bugfix, don't try to be clever =
--
->>>> just take the latest access.
->>> And how do we know that that's what is going to work?
->> Because it's the pre-existing behaviour.
-> Valid point. But for the DomU case there simply has not been any
-> pre-existing behavior. Hence my desire to be restrictive initially
-> there.
+Hi,
 
-But you're conflating a feature (under question anyway, because I gave
-you an example where I expect this will collide in a regular domU
-already), with an emergency bugfix to unbreak staging caused by an
-unexpected interaction in a security hotfix.
+On 01/09/2021 13:43, Michal Orzel wrote:
+> Introduce new Xen command line parameter called "pmu_access".
+> The default value is "trap": Xen traps PMU accesses.
+> In case of setting pmu_access to "native", Xen does not trap
+> PMU accesses allowing all the guests to access PMU registers.
+> However, guests cannot make use of PMU overflow interrupts as
+> PMU uses PPI which Xen cannot route to guests.
+> 
+> This option is only intended for development and testing purposes.
+> Do not use this in production system.
+I am afraid your option is not safe even in development system as a vCPU 
+may move between pCPUs.
 
-At an absolute minimum, this patch needs splitting in two to separate
-the bugfix from the proposed feature.
+However, even if we restricted the use to pinned vCPU *and* dedicated 
+pCPU, I am not convinced that exposing an half backed PMU (the overflow 
+interrupt would not work) to the guest is the right solution. This 
+likely means the guest OS would need to be modified and therefore the 
+usage of this option is fairly limited.
 
->>>  We should
->>> strictly accumulate for Dom0. And what we do for DomU is moot for
->>> the moment, until PCI passthrough becomes a thing for PVH. Hence
->>> I've opted to be restrictive there - I'd rather see things break
->>> (and getting adjusted) when this future work actually gets carried
->>> out, than leave things permissive for no-one to notice that it's
->>> too permissive, leading to an XSA.
->> Restricting execute permissions is something unique to virt.=C2=A0 It do=
-esn't
->> exist in a non-virtualised system, as I and D side reads are
->> indistinguishable outside of the core.
->>
->> Furthermore, it is inexpressible on some systems/configurations.
->>
->> Introspection is the only technology which should be restricting execute
->> permissions in the p2m, and only when it takes responsibility for
->> dealing with the fallout.
-> IOW are you saying that the calls to set_identity_p2m_entry()
-> (pre-dating XSA-378) were wrong to use p2m_access_rw?
+So I think the first steps are:
+   1) Make the PPI work. There was some attempt in the past for it on 
+xen-devel. You could have a look.
+   2) Provide PMU bindings
 
-Yes.
+With that in place, we can discuss how to expose the PMU even if it is 
+unsafe in some conditions.
 
->  Because that's
-> what's getting the way here.
+> 
+> Signed-off-by: Michal Orzel <michal.orzel@arm.com> > ---
+>   docs/misc/xen-command-line.pandoc | 18 +++++++++++++++++
+>   xen/arch/arm/traps.c              | 33 ++++++++++++++++++++++++++++++-
+>   2 files changed, 50 insertions(+), 1 deletion(-)
+> 
+> diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+> index b175645fde..03637a9f6d 100644
+> --- a/docs/misc/xen-command-line.pandoc
+> +++ b/docs/misc/xen-command-line.pandoc
+> @@ -1813,6 +1813,24 @@ paging controls access to usermode addresses.
+>   ### ple_window (Intel)
+>   > `= <integer>`
+>   
+> +### pmu_access (arm)
+> +> `= trap | native`
+> +
+> +> Default: `trap`
+> +
+> +Controls for accessing Performance Monitor Unit (PMU).
+> +
+> +By default Xen traps Performance Monitor accesses.
+> +When setting pmu_access to `native`, Xen does not trap PMU accesses allowing
+> +the guests to access PMU registers. This option is intended to aid monitoring
+> +and measuring the performance. Setting pmu_access to `native` allows
+> +all the guests to access PMU, however, there is no mechanism for forwarding
+> +PMU overflow interrupt requests.
+> +
+> +*Warning*
+> +This option is only intended for development and testing purposes.
+> +Do not use this in production system.
+> +
+>   ### psr (Intel)
+>   > `= List of ( cmt:<boolean> | rmid_max:<integer> | cat:<boolean> | cos_max:<integer> | cdp:<boolean> )`
+>   
+> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+> index 219ab3c3fb..d30e78b4d6 100644
+> --- a/xen/arch/arm/traps.c
+> +++ b/xen/arch/arm/traps.c
+> @@ -34,6 +34,7 @@
+>   #include <xen/symbols.h>
+>   #include <xen/version.h>
+>   #include <xen/virtual_region.h>
+> +#include <xen/warning.h>
+>   
+>   #include <public/sched.h>
+>   #include <public/xen.h>
+> @@ -77,12 +78,19 @@ static int debug_stack_lines = 40;
+>   #define stack_words_per_line 4
+>   #endif
+>   
+> +static const char __initconst warning_pmu_access[] =
+> +    "WARNING: PMU ACCESSES ARE NOW ENABLED\n"
+> +    "This option is intended to aid monitoring and measuring\n"
+> +    "the performance by allowing the guests to access PMU registers.\n"
+> +    "It has implications on the security of the system.\n"
+> +    "Please *DO NOT* use this in production.\n";
+> +
+>   integer_param("debug_stack_lines", debug_stack_lines);
+>   
+>   static enum {
+>   	TRAP,
+>   	NATIVE,
+> -} vwfi;
+> +} vwfi, pmu_access;
+>   
+>   static int __init parse_vwfi(const char *s)
+>   {
+> @@ -95,6 +103,29 @@ static int __init parse_vwfi(const char *s)
+>   }
+>   custom_param("vwfi", parse_vwfi);
+>   
+> +static int __init parse_pmu_access(const char *s)
+> +{
+> +    if ( !strcmp(s, "native") )
+> +        pmu_access = NATIVE;
+> +    else
+> +        pmu_access = TRAP;
+> +
+> +    return 0;
+> +}
+> +custom_param("pmu_access", parse_pmu_access);
+> +
+> +static int __init update_pmu_access(void)
+> +{
+> +    if ( pmu_access == NATIVE )
+> +    {
+> +        WRITE_SYSREG(READ_SYSREG(MDCR_EL2) &~ (HDCR_TPM|HDCR_TPMCR), MDCR_EL2);
+> +        warning_add(warning_pmu_access);
+> +    }
+> +
+> +    return 0;
+> +}
+> +__initcall(update_pmu_access);
+> +
+>   register_t get_default_hcr_flags(void)
+>   {
+>       return  (HCR_PTW|HCR_BSU_INNER|HCR_AMO|HCR_IMO|HCR_FMO|HCR_VM|
+> 
 
-On a real machine, you really can write some executable code into an
-E820 reserved region and jump to it.=C2=A0 You can also execute code from
-real BARs is you happen to know that they are prefetchable (or you're a
-glutton for UC reads...)
+Cheers,
 
-And there is the WPBT ACPI table which exists specifically to let
-firmware inject drivers/applications into a windows environment, and may
-come out of the SPI ROM in the first place.
-
-
-Is it sensible to execute an E820 reserved region, or unmarked BAR?=C2=A0
-Probably not.
-
-Should it work, because that's how real hardware behaves?=C2=A0 Absolutely.
-
-Any restrictions beyond that want handling by some kind of introspection
-agent which has a policy of what to do with legal-but-dodgy-looking actions=
-.
-
-> Plus, as a side note, then we don't even have e.g. IOMMUF_executable.
-
-Just as I vs D side reads are indistinguishable outside of the CPU core,
-the same is in principle true for PCI devices which execute code (e.g.
-GPU shaders).=C2=A0 Reads on the bus are just reads.
-
-That said, the latest SIOV spec does appear to include the ER (Execution
-Request) bit for use with PASSID/Shared-Virtual-Memory, which interacts
-with the EPT-X/ia32-NX bits, and goes as far as having SMEP/SMAP bits in
-the IOMMU configuration.=C2=A0 I'm not sure if this is in released hardware
-yet, but it's clearly on the horizon.=C2=A0 I can't spot any execute relate=
-d
-controls in the AMD IOMMU spec, although it does have user/supervisor
-for PASSID/SVM.
-
-~Andrew
-
+-- 
+Julien Grall
 
