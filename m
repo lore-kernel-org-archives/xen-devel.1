@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B613FC8302D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C02D3C8302F
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:25:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 89E9B6139D
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:16:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 89E9B6139D
+	by mail.kernel.org (Postfix) with ESMTPS id 83D0361391
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:16:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 83D0361391
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177410.322810 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177443.322887 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpNb-0001P0-Om; Thu, 02 Sep 2021 16:15:55 +0000
+	id 1mLpOP-0005I1-7V; Thu, 02 Sep 2021 16:16:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177410.322810; Thu, 02 Sep 2021 16:15:55 +0000
+Received: by outflank-mailman (output) from mailman id 177443.322887; Thu, 02 Sep 2021 16:16:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpNb-0001On-Kk; Thu, 02 Sep 2021 16:15:55 +0000
-Received: by outflank-mailman (input) for mailman id 177410;
- Thu, 02 Sep 2021 16:15:54 +0000
+	id 1mLpOP-0005Hp-3p; Thu, 02 Sep 2021 16:16:45 +0000
+Received: by outflank-mailman (input) for mailman id 177443;
+ Thu, 02 Sep 2021 16:16:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1mLpNa-0001O1-ER
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:15:54 +0000
-Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
+ id 1mLpON-00029c-PD
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:16:43 +0000
+Received: from mail-wr1-x42f.google.com (unknown [2a00:1450:4864:20::42f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 23b39658-0c63-477d-af8b-3222810181c7;
- Thu, 02 Sep 2021 16:15:53 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id z4so3826952wrr.6
- for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:15:53 -0700 (PDT)
+ id fa103d0b-92f2-4ae1-af99-c49ba28658ee;
+ Thu, 02 Sep 2021 16:16:35 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id t15so3835941wrg.7
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:16:35 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- j17sm2187403wrh.67.2021.09.02.09.15.50
+ d9sm2161496wrm.21.2021.09.02.09.16.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:15:52 -0700 (PDT)
+ Thu, 02 Sep 2021 09:16:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,34 +54,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 23b39658-0c63-477d-af8b-3222810181c7
+X-Inumbo-ID: fa103d0b-92f2-4ae1-af99-c49ba28658ee
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=/9vCQQZfSaTpKBQMegFXjFo179Y+24zi0HZDvs7SgMU=;
-        b=nvF/c2Wc4Z15cqg2fwhp1NDrfdcdFXpuAmJa1KWBtzQQ/EXWFrb73xtrx8OZfbtAYH
-         +ID89t8hrTCsxgu2Z9TktIv56PS86hvs5RilCbo/0PLhtchmK7Btfa7sZb3B2zUVbiHv
-         /HU6lzJWGffGyztr061l6mMVTzRO0XEqa1r0BVkwLvpIuHEZFGdUMQyYCTDsiXNgmkvC
-         mzGCP4B8dDeCO3p+Tu6JIdorMuA2pmQP2RRlgrSmz9a3spLyNyj6mRRUHHOVQRLc9UFi
-         tO8C8CpGWtVF4XqV+ujfpe9fj5HRkBRHkHwyv6P8VevMMXH157Vbk0qwXp550NWCjx06
-         CBMQ==
+        bh=eXa1glKBQAZuhiqfHx9McrLJH+6vsqw3g1Zly0CLLW4=;
+        b=ae0rJedtnyFXXpMPGaAYczb7D2gf5sAIBD78JSrM21inhCc6oobXicz8ZrAZbwKo+u
+         LWgigyv/HdAEIiac6GDnYpFFEaYaskd9kEYeEtmG6nZ6xqWdpNpJ01xQm8qn97nDsycD
+         JxK3rpivyOqG1ZF86VDCnWe7LDsUSWz4wzcJ/hvTp90Ehm2lEwn32lLuy6xZI/8yyuGo
+         D3grkzcyRTx5k7pQjKg/3FGCaby6/Z3ejv2o7bs/xAAYUcfve3y2UqEM+TGGHH5UOrhG
+         CAAu0Bd2wdhdwYLKumOwKFsEqKQ4OFbQ7TMnB4Cn4EM6ysG1/AHT1p0+QcU+g0Nj2W20
+         hOjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
          :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=/9vCQQZfSaTpKBQMegFXjFo179Y+24zi0HZDvs7SgMU=;
-        b=WL3BQx8x1N6N3//lKXNlq44llQPFA0y0sZtxbi1fmBnxXbUDjLIEgJINkdGIkSwOwX
-         3kjySHcaFGGzF8WA/XcdJD0LdyfYFoMQgX1Ysn7IkUwk9/MXQxGf3gDMR6m3e4qUCm4t
-         V5cVeV4WwY4zplXWk503JP05jSo1F6bCe/LEVS7GFn+ibUK5uVug5XqHzZvYtCaAHryt
-         nA9taw61VwhQwkSNP6CxwquPmCOFd9DQnohy+gjzHL+HOzox1hjzspTsF/wF0jUjNXQJ
-         Gy46xURJvwYxfCrErFBZkPQuYQHYTTi7O7GI77ayGenfNAzruqMFd9FnyTv142SsgMyk
-         REOQ==
-X-Gm-Message-State: AOAM533DWCk/Kz9hxbV9Zt/ADqILugl7KLDKz+/gK44zXFXWnYzj3ltP
-	48d6crHEjBiKdzK2Ms1AThU=
-X-Google-Smtp-Source: ABdhPJxxdNDVWzqPqP9AvO+fc8KPo1qKTWTpE1Z3SovcisiYMadm8391Ql4b1VZQyA/+Rjg0YRdLPg==
-X-Received: by 2002:a05:6000:186:: with SMTP id p6mr4881125wrx.210.1630599352772;
-        Thu, 02 Sep 2021 09:15:52 -0700 (PDT)
+        bh=eXa1glKBQAZuhiqfHx9McrLJH+6vsqw3g1Zly0CLLW4=;
+        b=jSlQ1lsubY4x8SnJQDWwEF1V/B3FiYRvCN/mPIfLJ0Phs3uhXdgL+JgMnK9C2CvY1y
+         eOTBH+MxWVhBcz9Cm5aRQSmG1wx2xoEjxK9INOwlfTY3fC4ye7KC3fZBql/7gWt+Iaj9
+         CR7UbXvorQ85//uOPiLlnx4m7yzXDxrpJDXmMY2v+K+suKC1QX591YKxUfhEaZHQj2oV
+         xsYtT7g1MO+Wbv190oSxck92ZR0JFepUG71NeJb5rqsHiZHpoYYwKi6v7mU1qI/UsWFY
+         RGA7qPGk1XaeYlee0xlivr1dazl3lhDVmweGHsOSIe6Cs3Ra9vrOQVJDhd7YGrAFJKfL
+         aVhg==
+X-Gm-Message-State: AOAM533PQCdY3sgmPxI+SXvBB/iPUafMfqP4MK33eVyAE4qsKFIcfD70
+	8TozFj0F/mpPuDAU0qANeQU=
+X-Google-Smtp-Source: ABdhPJzKZc/XQ+fV0m19x1zrzrTnVXlm9/5kK9IV3yDSnB/JNoam4AlRGKu+3WZKYWOwLNVhMsbvNg==
+X-Received: by 2002:a05:6000:10:: with SMTP id h16mr4754013wrx.24.1630599394935;
+        Thu, 02 Sep 2021 09:16:34 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
@@ -133,9 +133,9 @@ Cc: Bin Meng <bin.meng@windriver.com>,
 	Stafford Horne <shorne@gmail.com>,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	kvm@vger.kernel.org
-Subject: [PATCH v3 01/30] accel/tcg: Restrict cpu_handle_halt() to sysemu
-Date: Thu,  2 Sep 2021 18:15:14 +0200
-Message-Id: <20210902161543.417092-2-f4bug@amsat.org>
+Subject: [PATCH v3 08/30] target/alpha: Restrict has_work() handler to sysemu and TCG
+Date: Thu,  2 Sep 2021 18:15:21 +0200
+Message-Id: <20210902161543.417092-9-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
@@ -143,74 +143,49 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Commit 372579427a5 ("tcg: enable thread-per-vCPU") added the following
-comment describing EXCP_HALTED in qemu_tcg_cpu_thread_fn():
-
-    case EXCP_HALTED:
-         /* during start-up the vCPU is reset and the thread is
-          * kicked several times. If we don't ensure we go back
-          * to sleep in the halted state we won't cleanly
-          * start-up when the vCPU is enabled.
-          *
-          * cpu->halted should ensure we sleep in wait_io_event
-          */
-         g_assert(cpu->halted);
-         break;
-
-qemu_wait_io_event() is sysemu-specific, so we can restrict the
-cpu_handle_halt() call in cpu_exec() to system emulation.
+Restrict has_work() to TCG sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- accel/tcg/cpu-exec.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ target/alpha/cpu.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 7a6dd9049f0..6b61262b151 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -586,10 +586,11 @@ static inline void tb_add_jump(TranslationBlock *tb, int n,
-     return;
+diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+index 93e16a2ffb4..32cf5a2ea9f 100644
+--- a/target/alpha/cpu.c
++++ b/target/alpha/cpu.c
+@@ -33,6 +33,7 @@ static void alpha_cpu_set_pc(CPUState *cs, vaddr value)
+     cpu->env.pc = value;
  }
  
-+#ifndef CONFIG_USER_ONLY
- static inline bool cpu_handle_halt(CPUState *cpu)
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+ static bool alpha_cpu_has_work(CPUState *cs)
  {
-     if (cpu->halted) {
--#if defined(TARGET_I386) && !defined(CONFIG_USER_ONLY)
-+#if defined(TARGET_I386)
-         if (cpu->interrupt_request & CPU_INTERRUPT_POLL) {
-             X86CPU *x86_cpu = X86_CPU(cpu);
-             qemu_mutex_lock_iothread();
-@@ -597,7 +598,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
-             cpu_reset_interrupt(cpu, CPU_INTERRUPT_POLL);
-             qemu_mutex_unlock_iothread();
-         }
--#endif
-+#endif /* TARGET_I386 */
-         if (!cpu_has_work(cpu)) {
-             return true;
-         }
-@@ -607,6 +608,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
- 
-     return false;
+     /* Here we are checking to see if the CPU should wake up from HALT.
+@@ -47,6 +48,7 @@ static bool alpha_cpu_has_work(CPUState *cs)
+                                     | CPU_INTERRUPT_SMP
+                                     | CPU_INTERRUPT_MCHK);
  }
-+#endif /* !CONFIG_USER_ONLY */
++#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
  
- static inline void cpu_handle_debug_exception(CPUState *cpu)
+ static void alpha_cpu_disas_set_info(CPUState *cpu, disassemble_info *info)
  {
-@@ -865,9 +867,11 @@ int cpu_exec(CPUState *cpu)
-     /* replay_interrupt may need current_cpu */
-     current_cpu = cpu;
+@@ -221,6 +223,7 @@ static const struct TCGCPUOps alpha_tcg_ops = {
+     .tlb_fill = alpha_cpu_tlb_fill,
  
-+#ifndef CONFIG_USER_ONLY
-     if (cpu_handle_halt(cpu)) {
-         return EXCP_HALTED;
-     }
-+#endif
+ #ifndef CONFIG_USER_ONLY
++    .has_work = alpha_cpu_has_work,
+     .cpu_exec_interrupt = alpha_cpu_exec_interrupt,
+     .do_interrupt = alpha_cpu_do_interrupt,
+     .do_transaction_failed = alpha_cpu_do_transaction_failed,
+@@ -238,7 +241,6 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
+                                     &acc->parent_realize);
  
-     rcu_read_lock();
- 
+     cc->class_by_name = alpha_cpu_class_by_name;
+-    cc->has_work = alpha_cpu_has_work;
+     cc->dump_state = alpha_cpu_dump_state;
+     cc->set_pc = alpha_cpu_set_pc;
+     cc->gdb_read_register = alpha_cpu_gdb_read_register;
 -- 
 2.31.1
 
