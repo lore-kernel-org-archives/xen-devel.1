@@ -2,47 +2,47 @@ Return-Path: <SRS0=MtyD=NY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2D21C83028
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 17:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46F8BC83026
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 17:18:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A005F61074
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 17:12:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A005F61074
+	by mail.kernel.org (Postfix) with ESMTPS id 0006460FE6
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 17:18:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0006460FE6
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177593.323124 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177599.323135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLqFf-0008PQ-HE; Thu, 02 Sep 2021 17:11:47 +0000
+	id 1mLqLb-0000fi-6b; Thu, 02 Sep 2021 17:17:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177593.323124; Thu, 02 Sep 2021 17:11:47 +0000
+Received: by outflank-mailman (output) from mailman id 177599.323135; Thu, 02 Sep 2021 17:17:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLqFf-0008PJ-E7; Thu, 02 Sep 2021 17:11:47 +0000
-Received: by outflank-mailman (input) for mailman id 177593;
- Thu, 02 Sep 2021 17:11:46 +0000
+	id 1mLqLb-0000fb-3Q; Thu, 02 Sep 2021 17:17:55 +0000
+Received: by outflank-mailman (input) for mailman id 177599;
+ Thu, 02 Sep 2021 17:17:54 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mLqFe-0008PD-SV
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 17:11:46 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mLqLa-0000fV-8G
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 17:17:54 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mLqFe-0001Mu-Rg
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 17:11:46 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mLqLa-0001T6-6O
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 17:17:54 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mLqFe-0000MA-Qq
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 17:11:46 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mLqLa-0000rf-5N
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 17:17:54 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1mLqFT-0003Zb-3Q; Thu, 02 Sep 2021 18:11:35 +0100
+ id 1mLqLP-0003au-9j; Thu, 02 Sep 2021 18:17:43 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,15 +57,15 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=GeXJrQDQtclWxuJyi9dryyESGh+JES5AlryXjtCzhwo=; b=fVot05xTOOmNdteLjWY4uKKlm0
-	8/Z6R/YFBUpdHdO18Cqd0KgA3lT12aevbOHftQsqJnw1PumWNigvx5ArAOzInL2u7UjFKNnZWG5Jf
-	uAXlw004OWjPvZ4I1hLLjPwu6+d6bLLVKhI9QLfz4yPYVXTfmz5droqlPBcoGzPponUY=;
+	bh=umiEI7GI1ws1A9D4DUyhTQcphKTnzeVma7/jDhfL17Y=; b=u62kLIS/FgD59gVZ9daqK4fLPc
+	XSgGpBGAF3SlzgA8WBEwl9yndpiFnBtpfw4nwNDnq8uPvlFWppzPYSeKoMqRHGUj7D8yRcn+j4oO2
+	3aHlx4hFMP0TigC2PKqcQSb5JcQ1HdooYxMUpEocyn/+yZTDsdDzHPMwUvPnyACrFcYo=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
-Message-ID: <24881.1478.795535.377133@mariner.uk.xensource.com>
-Date: Thu, 2 Sep 2021 18:11:34 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <24881.1846.830472.226170@mariner.uk.xensource.com>
+Date: Thu, 2 Sep 2021 18:17:42 +0100
 To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
     Wei Liu <wl@xen.org>,
@@ -73,53 +73,28 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
     Juergen Gross <jgross@suse.com>,
     George Dunlap <george.dunlap@citrix.com>,
     "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH 03/12] libxenguest: short-circuit "all-dirty" handling
-In-Reply-To: <f85ee373-b497-549b-242f-0dd9eda1b4cd@suse.com>
+Subject: Re: [PATCH 04/12] libxenguest: avoid allocating unused deferred-pages
+ bitmap
+In-Reply-To: <3aea7472-6c1d-f786-db5f-ead60eb03240@suse.com>
 References: <912fa390-f9e9-198a-9aee-39fdb9a28fcc@suse.com>
-	<55875a26-7f1d-a6d9-9384-b03b3b2cb86d@suse.com>
-	<60be051f-7751-f15d-ae4d-2c7e9af82693@citrix.com>
-	<f85ee373-b497-549b-242f-0dd9eda1b4cd@suse.com>
+	<61ff4f26-a9cc-d123-98a0-be6c23f21e9b@suse.com>
+	<44825600-c27b-34ac-01b2-1ffb5e0bf0be@citrix.com>
+	<3aea7472-6c1d-f786-db5f-ead60eb03240@suse.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Jan Beulich writes ("Re: [PATCH 03/12] libxenguest: short-circuit "all-dirty" handling"):
-> On 25.06.2021 19:02, Andrew Cooper wrote:
-> > Single all-dirty runs are a debugging technique only.  All production
-> > cases are live, and you don't want to fail midway through because a
-> > late, large, memory allocation failed.
-> 
-> I'm afraid I don't understand: I don't move _when_ the allocation
-> occurs; I only suppress the allocation (altogether) when the allocated
-> memory remains unused.
+Jan Beulich writes ("Re: [PATCH 04/12] libxenguest: avoid allocating unused deferred-pages bitmap"):
+> [stuff]
 
-Thanks for this reply, Jan.  I hope it is satisfactory to Andrew; if
-not, I hope Andrew will be able to explain.
+I have read this conversation several times and it is not clear to me
+whether Andrew was saying Jan's patch is bad, or the existing code is
+bad.
 
-I am going to give this a provisional
+I'm hesitant to give an ack for an optimisation without understanding
+what the implications might be.  Andrew, can you explain what will go
+wrong if we take Jan's patch ?
 
-Acked-by: Ian Jackson <iwj@xenproject.org>
-
-I may of course withdraw that ack if it is explained to me that this
-is patch is wrong.
-
-> >> +        : (void *)-1L;
-> > 
-> > This is a pointer loaded with a timebomb, which doesn't trigger NULL
-> > pointer checks, and for which {set,clear}_bit(dirty_bitmap, large_pfn)
-> > won't fault and will instead corrupt random areas of the address space.
-> 
-> Yeah, this isn't very nice, and gets done away with again in a later
-> patch. I'd prefer to keep it like it is (assuming the later change
-> will also go in), but if really deemed necessary I can move that code
-> re-arrangement here, such that the use of (void *)-1L wouldn't be
-> necessary anymore. (You may have noticed that all I did this for is
-> to be able to pass the !dirty_bitmap later in the function, and that
-> I deliberately only update the local variable, not the hbuf, making
-> pretty certain that this pointer isn't going to be de-referenced.)
-
-I agree that this -1L is very unpleasant.
-
-I'm not going to say that you need to restructure your series, but
-please make sure you don't commit this patch without the fix.
+(I amk not really familiar with this area of the code.  If necessary I
+could go and read it to form my own opinion.)
 
 Thanks,
 Ian.
