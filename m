@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E77AC83036
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8080DC83037
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:30:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BCA8461A2C
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:21:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BCA8461A2C
+	by mail.kernel.org (Postfix) with ESMTPS id 0016561A05
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:21:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0016561A05
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177513.323008 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177494.322985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpTG-0004lg-5b; Thu, 02 Sep 2021 16:21:46 +0000
+	id 1mLpSx-00034U-IY; Thu, 02 Sep 2021 16:21:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177513.323008; Thu, 02 Sep 2021 16:21:46 +0000
+Received: by outflank-mailman (output) from mailman id 177494.322985; Thu, 02 Sep 2021 16:21:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpTG-0004lW-2J; Thu, 02 Sep 2021 16:21:46 +0000
-Received: by outflank-mailman (input) for mailman id 177513;
- Thu, 02 Sep 2021 16:21:44 +0000
+	id 1mLpSx-000341-EA; Thu, 02 Sep 2021 16:21:27 +0000
+Received: by outflank-mailman (input) for mailman id 177494;
+ Thu, 02 Sep 2021 16:21:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1mLpOc-00029c-PS
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:16:58 +0000
-Received: from mail-wm1-x334.google.com (unknown [2a00:1450:4864:20::334])
+ id 1mLpP1-00029c-QJ
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:17:23 +0000
+Received: from mail-wm1-x32e.google.com (unknown [2a00:1450:4864:20::32e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3adcf5b9-68b6-4973-9aaf-67106bde2e85;
- Thu, 02 Sep 2021 16:16:48 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id
- v20-20020a1cf714000000b002e71f4d2026so1424714wmh.1
- for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:16:48 -0700 (PDT)
+ id 14cb6007-aed5-4a5e-98fd-b0c52838a1a8;
+ Thu, 02 Sep 2021 16:17:16 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ k20-20020a05600c0b5400b002e87ad6956eso1751511wmr.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:17:16 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- y24sm2479386wma.9.2021.09.02.09.16.44
+ c3sm2410025wrd.34.2021.09.02.09.17.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:16:46 -0700 (PDT)
+ Thu, 02 Sep 2021 09:17:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 3adcf5b9-68b6-4973-9aaf-67106bde2e85
+X-Inumbo-ID: 14cb6007-aed5-4a5e-98fd-b0c52838a1a8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=1uiIX4B4XnBDTSuiPfQ6TXqVM80IFaG7yss59sugPek=;
-        b=KqzWIKJ7D2fRmpGndmFmFNuwslKTxikjGxDMGA2xsPlBUegPAHynuzDusdrr5XjA+x
-         UCJbwBQeZPJQtXG0Xtu7RxwzPdlThK6RVv2DMQ/DDE16jxbu2MLTQ+EKf6s/CZXPXeN6
-         nzJIGn8UESvClj1N6xIA9j+rSpvqLJiMXVoYewPiMa355LZW9o2GW/afajWJc0/NEar0
-         Q8DpjYGYUJuF0UC+706nFPlDCV62j7IN2KHM9wzg02+ZUE7+nf9cE7ogevav/S8CwMh4
-         Jx4C3Bwaygo71B9Uga55OA34fqh3F6hfjdQCFZRtq0AWQ50+fnYTHxBfr074WpLdgF+1
-         YThQ==
+        bh=k2G3IfvTSVM9dAo9x5r9x/QXUgni24b97nAmsANOOiA=;
+        b=M+D+zo4/zdtMjYh01av69Zx4I3VwXPivjqKNQQ+G3Cy3iOhT3mTPvnPzXtpAFBC7IC
+         bwDY97okiaHzzYZk/Nr+HJhmQWDbqsmtfcbNHfDxcB+wW5LVOcMLHk2ke6LUzT0b2vAG
+         YqHMZm6pCnZF4sDmb5j0t8leoEPE4luIBbr+2Y/AHejZSaAIPRgw6F1l+RvTfdeQZQ/w
+         KmEHFk+ys6eIeCl+10CsGxJv2WVk1ePshB2QpZEYQ9Rs3vY5QE1eYEOqT+aIoXIw8PR9
+         WNsdSSeclnt9XXMY/k06ObG6uMJqiNqm40/pEaPsmniXZMMe5CRy4fWye4vqLWV5kU8p
+         n7eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
          :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=1uiIX4B4XnBDTSuiPfQ6TXqVM80IFaG7yss59sugPek=;
-        b=OcR6OYbN3d3+2/g4T4hIfhIUOPuSgrlIYkvMrSCCKVcwHrOzkhyTj27/29v92exeyX
-         7JPELEhrW92u2JkyyYxEM+0T2A74FrU0I6kwO2v9goJHE4rl8EijW/t/W80Gz8+5ffe5
-         XL/6yRk1dxlLX8JjN6Hx2z3MVNokbW2k64OTHcgMfPOWhpGvBvjuTOOTEX+RJH0WRYER
-         gFrToV5q5PaGzh7O7eQ6O/M8sjhff6HLSeyLgHLgDjajIsfVPS4/uGqZQu+6Jt8qfK0E
-         b4L8hjAofmc4J7d5ie3NpV5R5y+1fFb4sG+0JxUDgGhwIVcqmWrP8HqKjIwYdf+HJ5ep
-         K7vw==
-X-Gm-Message-State: AOAM530wdLK2ToSAzMr/x8CGIs4lvGpJNhADcJQV71/gfrit0Y9X73os
-	IgPLuecZ3K8CHNnkONAn/jA=
-X-Google-Smtp-Source: ABdhPJw3pSsMq4kZKK4hbVaJZjnjyoQFK4vJQiZ4XHFwYg2jDsiLD33cM2YA1HEu8cnvL7L44Mu7XQ==
-X-Received: by 2002:a1c:44c5:: with SMTP id r188mr4089427wma.9.1630599407288;
-        Thu, 02 Sep 2021 09:16:47 -0700 (PDT)
+        bh=k2G3IfvTSVM9dAo9x5r9x/QXUgni24b97nAmsANOOiA=;
+        b=ijz/wdJlkLFKFaCvoEFxFooZHM2zLtUxuCHt2lROYqeORIhVonBTd0qcajoXv50lM3
+         jjcWcOHFS0R+zWlKbEbHRL0AWX1qFpv+4grQOf4XbUhxOShOKFbaQuhspQQXHuTeJj8M
+         8SNqDdgc1il6EOYehLaRkRQwy3hWGiorW3czkmcWqbq9EaIzKHggkMRYPH2BQ9xC7uh/
+         8RxWx1Dc0B/0KGCNa9XKupfsInZwwKQpiftJ30Ia8qzjjMcRuwVXhr/phs2okAf2755L
+         jht8aAvSUjK2Qc+DkCubPL3x486Ph0DF4Er+7QzlT/FfaL7GsoIwt2wg8myWJnusj9aw
+         f47Q==
+X-Gm-Message-State: AOAM532utN0xyz6zq8QpT4AxXGsVsge9gIXOU2amkqBHs5sglX8X6GR5
+	5yqVyn16JULC7FKbKC2wuvA=
+X-Google-Smtp-Source: ABdhPJxFmnMfDsCiejdGeBE1y8KakVIkNHc7YRKHEHHLvGEXylx3fbGc1JSSwIBZyxQGjwxS5CvgPg==
+X-Received: by 2002:a05:600c:1d27:: with SMTP id l39mr3986130wms.146.1630599431932;
+        Thu, 02 Sep 2021 09:17:11 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
@@ -134,9 +134,9 @@ Cc: Bin Meng <bin.meng@windriver.com>,
 	Stafford Horne <shorne@gmail.com>,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	kvm@vger.kernel.org
-Subject: [PATCH v3 10/30] target/avr: Restrict has_work() handler to sysemu and TCG
-Date: Thu,  2 Sep 2021 18:15:23 +0200
-Message-Id: <20210902161543.417092-11-f4bug@amsat.org>
+Subject: [PATCH v3 14/30] target/i386: Restrict has_work() handler to sysemu and TCG
+Date: Thu,  2 Sep 2021 18:15:27 +0200
+Message-Id: <20210902161543.417092-15-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
@@ -148,45 +148,67 @@ Restrict has_work() to TCG sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/avr/cpu.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ target/i386/cpu.c         | 6 ------
+ target/i386/tcg/tcg-cpu.c | 8 +++++++-
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index e9fa54c9777..6267cc6d530 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -32,6 +32,7 @@ static void avr_cpu_set_pc(CPUState *cs, vaddr value)
-     cpu->env.pc_w = value / 2; /* internally PC points to words */
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 04f59043804..b7417d29f44 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -6548,11 +6548,6 @@ int x86_cpu_pending_interrupt(CPUState *cs, int interrupt_request)
+     return 0;
  }
  
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- static bool avr_cpu_has_work(CPUState *cs)
+-static bool x86_cpu_has_work(CPUState *cs)
+-{
+-    return x86_cpu_pending_interrupt(cs, cs->interrupt_request) != 0;
+-}
+-
+ static void x86_disas_set_info(CPUState *cs, disassemble_info *info)
  {
-     AVRCPU *cpu = AVR_CPU(cs);
-@@ -40,6 +41,7 @@ static bool avr_cpu_has_work(CPUState *cs)
-     return (cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_RESET))
-             && cpu_interrupts_enabled(env);
- }
-+#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+     X86CPU *cpu = X86_CPU(cs);
+@@ -6757,7 +6752,6 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
  
- static void avr_cpu_synchronize_from_tb(CPUState *cs,
-                                         const TranslationBlock *tb)
-@@ -198,6 +200,7 @@ static const struct TCGCPUOps avr_tcg_ops = {
-     .tlb_fill = avr_cpu_tlb_fill,
+     cc->class_by_name = x86_cpu_class_by_name;
+     cc->parse_features = x86_cpu_parse_featurestr;
+-    cc->has_work = x86_cpu_has_work;
+     cc->dump_state = x86_cpu_dump_state;
+     cc->set_pc = x86_cpu_set_pc;
+     cc->gdb_read_register = x86_cpu_gdb_read_register;
+diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
+index fd86daf93d2..6cde53603ba 100644
+--- a/target/i386/tcg/tcg-cpu.c
++++ b/target/i386/tcg/tcg-cpu.c
+@@ -55,6 +55,11 @@ static void x86_cpu_synchronize_from_tb(CPUState *cs,
+ }
  
  #ifndef CONFIG_USER_ONLY
-+    .has_work = avr_cpu_has_work,
-     .cpu_exec_interrupt = avr_cpu_exec_interrupt,
-     .do_interrupt = avr_cpu_do_interrupt,
- #endif /* !CONFIG_USER_ONLY */
-@@ -214,7 +217,6 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
++static bool x86_cpu_has_work(CPUState *cs)
++{
++    return x86_cpu_pending_interrupt(cs, cs->interrupt_request) != 0;
++}
++
+ static bool x86_debug_check_breakpoint(CPUState *cs)
+ {
+     X86CPU *cpu = X86_CPU(cs);
+@@ -63,7 +68,7 @@ static bool x86_debug_check_breakpoint(CPUState *cs)
+     /* RF disables all architectural breakpoints. */
+     return !(env->eflags & RF_MASK);
+ }
+-#endif
++#endif /* CONFIG_USER_ONLY */
  
-     cc->class_by_name = avr_cpu_class_by_name;
+ #include "hw/core/tcg-cpu-ops.h"
  
--    cc->has_work = avr_cpu_has_work;
-     cc->dump_state = avr_cpu_dump_state;
-     cc->set_pc = avr_cpu_set_pc;
-     cc->memory_rw_debug = avr_cpu_memory_rw_debug;
+@@ -76,6 +81,7 @@ static const struct TCGCPUOps x86_tcg_ops = {
+ #ifdef CONFIG_USER_ONLY
+     .fake_user_exception = x86_cpu_do_interrupt,
+ #else
++    .has_work = x86_cpu_has_work,
+     .do_interrupt = x86_cpu_do_interrupt,
+     .cpu_exec_interrupt = x86_cpu_exec_interrupt,
+     .debug_excp_handler = breakpoint_handler,
 -- 
 2.31.1
 
