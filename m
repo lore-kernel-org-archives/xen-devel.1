@@ -2,66 +2,67 @@ Return-Path: <SRS0=MtyD=NY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FB2CC19F35
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23EBFC43216
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 023AC61008
+	by mail.kernel.org (Postfix) with ESMTPS id B1EB260FC0
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 023AC61008
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B1EB260FC0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=xilinx.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.176908.322068 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.176912.322080 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLgYp-0004dP-Tp; Thu, 02 Sep 2021 06:50:55 +0000
+	id 1mLgYq-0004la-JG; Thu, 02 Sep 2021 06:50:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 176908.322068; Thu, 02 Sep 2021 06:50:55 +0000
+Received: by outflank-mailman (output) from mailman id 176912.322080; Thu, 02 Sep 2021 06:50:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLgYp-0004dI-Qn; Thu, 02 Sep 2021 06:50:55 +0000
-Received: by outflank-mailman (input) for mailman id 176908;
- Thu, 02 Sep 2021 06:06:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mLgYq-0004l5-DG; Thu, 02 Sep 2021 06:50:56 +0000
+Received: by outflank-mailman (input) for mailman id 176912;
+ Thu, 02 Sep 2021 06:07:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=393g=NY=xilinx.com=fnuv@srs-us1.protection.inumbo.net>)
- id 1mLfro-0004YX-UW
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 06:06:29 +0000
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com (unknown
- [40.107.95.82]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 30620bd6-43c4-461f-960f-858df19fd544;
- Thu, 02 Sep 2021 06:06:27 +0000 (UTC)
-Received: from SN1PR12CA0061.namprd12.prod.outlook.com (2603:10b6:802:20::32)
- by MWHPR02MB2302.namprd02.prod.outlook.com (2603:10b6:300:5b::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.17; Thu, 2 Sep
- 2021 06:06:25 +0000
-Received: from SN1NAM02FT0022.eop-nam02.prod.protection.outlook.com
- (2603:10b6:802:20:cafe::27) by SN1PR12CA0061.outlook.office365.com
- (2603:10b6:802:20::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.19 via Frontend
- Transport; Thu, 2 Sep 2021 06:06:25 +0000
-Received: from xsj-pvapexch02.xlnx.xilinx.com (149.199.62.198) by
- SN1NAM02FT0022.mail.protection.outlook.com (10.97.5.0) with Microsoft SMTP
+ id 1mLfsO-0004aE-Nu
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 06:07:04 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (unknown
+ [40.107.236.63]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fd80c276-0bb3-11ec-ae3e-12813bfff9fa;
+ Thu, 02 Sep 2021 06:07:02 +0000 (UTC)
+Received: from DM3PR12CA0089.namprd12.prod.outlook.com (2603:10b6:0:57::33) by
+ BN7PR02MB4211.namprd02.prod.outlook.com (2603:10b6:406:fc::23) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4457.23; Thu, 2 Sep 2021 06:06:59 +0000
+Received: from DM3NAM02FT042.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:0:57:cafe::58) by DM3PR12CA0089.outlook.office365.com
+ (2603:10b6:0:57::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.17 via Frontend
+ Transport; Thu, 2 Sep 2021 06:06:59 +0000
+Received: from xsj-pvapexch01.xlnx.xilinx.com (149.199.62.198) by
+ DM3NAM02FT042.mail.protection.outlook.com (10.13.4.213) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4478.19 via Frontend Transport; Thu, 2 Sep 2021 06:06:25 +0000
+ 15.20.4478.19 via Frontend Transport; Thu, 2 Sep 2021 06:06:58 +0000
 Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
- xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server
+ xsj-pvapexch01.xlnx.xilinx.com (172.19.86.40) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Wed, 1 Sep 2021 23:06:24 -0700
+ 15.1.2176.14; Wed, 1 Sep 2021 23:06:56 -0700
 Received: from smtp.xilinx.com (172.19.127.96) by
  xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Wed, 1 Sep 2021 23:06:24 -0700
+ 15.1.2176.14 via Frontend Transport; Wed, 1 Sep 2021 23:06:56 -0700
 Received: from [172.19.2.115] (port=56596 helo=xsjfnuv50.xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <fnu.vikram@xilinx.com>)
- id 1mLfrk-000F6q-6e; Wed, 01 Sep 2021 23:06:24 -0700
+ id 1mLfsG-000F6q-6V; Wed, 01 Sep 2021 23:06:56 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,14 +74,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30620bd6-43c4-461f-960f-858df19fd544
+X-Inumbo-ID: fd80c276-0bb3-11ec-ae3e-12813bfff9fa
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WdCUJjGX/U02no8M7aGRhNE8QGABZTwSibiGs5cryOzgLs/kXrwATPn3lxBnVgWbHy4YnkhNmJ9vi/Gw3iu1IsoRYZsyeYb88ks0uKzBAt1lo4InLlE3PJeyS2EoVae1ANmls8Zw0c8vlLwW21sCyoAjk5QpKoPbJ7NpssUqWSeT+BNHCIYOnkutkulJmrGnlcLle5auY29SvpQryqRjEYhbwOgARKEKhcE8xG9NVZ/sjY+TvlgqaOLmPjK305sXho5T3N9JJ1SCKGn+biqwgrlph9Gad4tiTM+0yi7X8whS1V2tRbZXfBEod8YrgMbjlzP1QN3WXH1wHDXh5RrymQ==
+ b=R6Vc4VFGnNuCCjRMR92oBl1bAZff2gHkQsaMvWJXlyY7ssCfoaZvdezkRw+D+7ISyeq/qMDSjl7kbYmvkJzBkz9SdCRIJwyPEe/NjbMCZ9veKiS1a5mJYM2wkeS/RdoA+Hapri/rlW/dwjOYfbA7Q1aNIsJi82YWAflviuIxk2K4r0XAaR/ECDp/MxCXtPNHwOphzdcG8lj60/Ir862yHzu+nj3KRU+LT8AsbDpS3dBRcV/2gE0Vw3mg3Lms/odAE2WpZBOpPpjfpFIjRY6HbXHOLoF2ry7/Nl6Eolf/EC3+iEwf1FXuoc5oqxHiO+NAtj/9lRmp2l0nRbp7Y+CH0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ubn0KOlNn2bGNNG4KibjKy56O3QZHfvA/XdfMZxo38c=;
- b=eHfV1Jun6/Y9BR7EOwH5D65neWPrYr2/plZLf6dfkn8VqY9EqaoI7UpYieURbUNWeKPnBfKWYuOwZY4t+wwKPEvWXy6lhh/xI8Wl17RjSoe4fEBR5FM56EhY7EvBfuufa9FfbqzYFlSbtZNMxir3XTXNjC4nkynMFnbfhgK2hIGB9LwFIVB5Bzo+Ufwukdy4vZIZaTrWvtd4DdaLkUJXFEbfVzwr8dHbaqS2w+aNJaxglqldaTOy6LsFEZYFhv4w+Hoh8Hg3v56hsn+gDX8Gtpp/zO30yh4uYPV0RwrK8K5Un5P4eO6etcL/8PT9tIwGdWyhgvMgb7pwqeJ2e2KOOQ==
+ bh=FBIDlGqTHEriiyE7H+BVFfcsrCknmNO0E31FG6ZulT4=;
+ b=Sun1v8s7rdBMypKl7wq30b8gHJPwCCBjAd+LZIlTy5RKSVCuQ+JFQUIrpkfuO3iPgIKo06YrM7jJcPj6d+htlJ5SBc8kZ4l9awvjC5pJy7PWXsQzPDiwIJS3CPH3h7BRc7FnaIDyA/ioFmpXjRIDCL68LDNSE/xzeq1fwhyxLf1q5rLqT/8DR2U57jvH2ZBl+RkXaFPK6vxPToe/YimCwGOBmc/hQYvwFQgc+BO+/LViin+qP14BwoDINaaBOfeUOuwlDJddA/WK+bNzaD5IGBpuXUCu9+VFwADGytv7ARragyJwe0gb7GxbyyCT0aDt1geqC2C/NwMo+70THM5xPQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -88,137 +89,955 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ubn0KOlNn2bGNNG4KibjKy56O3QZHfvA/XdfMZxo38c=;
- b=cGnM3y0zqxRiK5jg0p2ffdAPvgKnhADdF8GbGtARgl8WKKjA5b1Nvccpg3yY0Ty8kTzwMcKLzL54YEKWMFGUg0jstqk18gDp+9VhG4s9Bd3qDSC3+XfB08KqT5yXIbY/R16nXbSi73MjN8sZpcIFaVYWtW9Rqsh2yqwU+5X7A1I=
+ bh=FBIDlGqTHEriiyE7H+BVFfcsrCknmNO0E31FG6ZulT4=;
+ b=FLUVpOfTD/W41h3mRIDt6XCQPHQ/wBHdw8Bikj2+6WL57PbHWKTUgLJ0gE0kEgvb3ankE03JYrvY2bsnHXLb5TTv0dYxcGvRPbOa/v1jI/zZneHcpAM+rFK5HCWkhfPQX54SPftiqiT0jO6BbNS3PpGYAC6o71QPgXc6+kOZuMU=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
  smtp.mailfrom=xilinx.com; lists.xenproject.org; dkim=none (message not
  signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
  header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
  149.199.62.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.62.198; helo=xsj-pvapexch02.xlnx.xilinx.com;
+ client-ip=149.199.62.198; helo=xsj-pvapexch01.xlnx.xilinx.com;
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <julien@xen.org>, Vikram Garhwal
-	<fnu.vikram@xilinx.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Jan
- Beulich <jbeulich@suse.com>, Paul Durrant <paul@xen.org>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Ian
- Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
-	<jgross@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [XEN][RFC PATCH 00/13] Add Support for dynamic Programming
-Date: Wed, 1 Sep 2021 23:05:50 -0700
-Message-ID: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
+	<fnu.vikram@xilinx.com>
+Subject: [XEN][RFC PATCH 03/13] libfdt: import fdt_overlay from Linux
+Date: Wed, 1 Sep 2021 23:05:53 -0700
+Message-ID: <1630562763-390068-4-git-send-email-fnu.vikram@xilinx.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
+References: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c9207777-2281-4bf2-ad36-08d96dd7cba0
-X-MS-TrafficTypeDiagnostic: MWHPR02MB2302:
+X-MS-Office365-Filtering-Correlation-Id: 89b30686-b128-471c-dc4a-08d96dd7df9f
+X-MS-TrafficTypeDiagnostic: BN7PR02MB4211:
 X-Microsoft-Antispam-PRVS:
-	<MWHPR02MB23023F8AF9FFCE0FECC07EF9BCCE9@MWHPR02MB2302.namprd02.prod.outlook.com>
+	<BN7PR02MB4211B8938F72DEDCCA422090BCCE9@BN7PR02MB4211.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Oob-TLC-OOBClassifiers: OLM:130;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	w5KHpqXz4mYyBcpsuTSzM1/Vs0D8q4a4ugCmQ4Zt5HjOK7r74D79y6at2F9MD4tBfQgGX5ah0FsXMIfbtFaQf2g75IyayA3OF4DQNNikPdermzCZqejLTtU1UOrQzGksKF7yxZNfw4d1+xH0YgZ77lVwm7CxgJ8hpL8qQDVHQye58WByKUYwueqlUUBKcWieni8oGElTYoqFD5vxl3F/5FX4vhHm4DtrJ/WQc0rgp5HSCmTxWBqLE4qGH0gU4OZxqIIi8RIxSRHOeuL7mtJtVFD+d7mV4RkmFpCvIS99PIu5z8I2Es/kbkbBz59vf/ie8JP1KH+C2XYsSJinyPcUjQR/JiHqPunqWQatusp9ytnuhwXEixL4VmrUndUsZE60LQRZ5PgBv0rihWIEyc1bzZ3ZXcR+yA69aGJ2kuzOIdkJgN/pSZv5PhpshX9HL9TNDEJYq++8iTkHijXnbKlsXMSZ7cUtyXsr6H8T+5Bg4VQSNdc4yW2wnBLyT2rSDrx1GvHEVKKg81b4g3NGSGYergvwLsWJAPkk1w813t8xFRuqIenU7CEJfI0f0zMs4sxgP6GAuy2OY3YRIkvUMVFHc3APFX4qVdO/wTCOUSn7yDMPBpeGETqRIT1kcGAv5qyF5Ygigf7nci+HRCbg9+2dE8I/fHmgmw6oZjBHHSlvoxBWHNXiTqNJTSsoTlWlmqA6Vkn7PyCrR7ZF25zXvQCgdcPnZ+4RJ+MRtbKO+ankrak=
+	yjqvN7lSYivxzQcNipLCYLIXc4ae1BOoYUmYeHnmYIX8DTF6TSc1F/EjcJYyBj0RClsoXswFmP1pYPOntxMIa/Hf38w7L2LRjfd2YgMKITmooPwKbBANrmeAuC0fkkRDfcfVwwbQvDcXxUTsj965VFj/Q2uqV81ebBusq/wlnH9iL0WjRpyGzDBhwriBTlENWG0K5/o5C3p/q6OKvCSn/euwvLHrcuTeO8WN8zruf2HbHEUqAEJvVmerEGAJ5Qv0z/TbdVRWZk/fZ9aybpC7SoXTUeZo4+VpqC79c14An8H1XdVyphz3f0uhjdBezhfsuQ+nyqd1YiftQQfhtaf3N9BIWJVoZfnwid0IshabO6fhIhhPDdr5dcnF8rr7DB13AJz3fasHb3l2+msrHuU1piCpLfe+Z3uEhCK0TfEmAuucqXUDPet+OUf19iAlx2lgDlF4oAtThVTbj4k8V/yDUOUmxsA88S+WMwxTqKJEyJcJDF4x/6SRG/gdHPNIr/PTmSDoeubHZw2q6jbIz4Qo/ADLGEFxyMyJVgMw6cv42042qrUvMuMNaKZhVYR3ElLt/FPUX7lhiiFYMXkjuOjfpGtp/6/GvTIpbNCBo7zfeDx98cB2lLvbSDu9z57yFzfWocbGA5/sP2Pjxw+lradx5EOpTiXWEZabxIYujNTRt2mKwALw27u1neemjh8bKWA9E62myncgQcz75B9GOfuoc1mpn+DgoKdKIZrBYp6LA84=
 X-Forefront-Antispam-Report:
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(136003)(376002)(39860400002)(396003)(346002)(46966006)(36840700001)(82310400003)(4326008)(2616005)(426003)(2906002)(356005)(186003)(82740400003)(8676002)(36860700001)(6666004)(36756003)(70586007)(70206006)(83380400001)(7636003)(478600001)(336012)(5660300002)(7696005)(47076005)(36906005)(54906003)(7416002)(316002)(9786002)(26005)(8936002)(6916009)(102446001);DIR:OUT;SFP:1101;
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(83380400001)(2906002)(426003)(186003)(82310400003)(54906003)(508600001)(7636003)(6916009)(7696005)(30864003)(70206006)(5660300002)(316002)(47076005)(36906005)(36860700001)(9786002)(8676002)(2616005)(70586007)(336012)(4326008)(8936002)(356005)(6666004)(26005)(36756003)(107886003)(102446001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 06:06:25.0547
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 06:06:58.5918
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c9207777-2281-4bf2-ad36-08d96dd7cba0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89b30686-b128-471c-dc4a-08d96dd7df9f
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch02.xlnx.xilinx.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch01.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1NAM02FT0022.eop-nam02.prod.protection.outlook.com
+	DM3NAM02FT042.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR02MB2302
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR02MB4211
 
-Hi,
-This RFC patch series is for introducing dynamic programming i.e. add/remove the
-devices during run time. Using "xl fpga-add" a device can be added with dtbo.
+Xen is missing fdt overlay functionalities. FDT overlay is required for changing
+the device tree nodes during run-time.
 
-fdt_overlay.c file is taken from Linux and other existing fdt files are modified
-to accommodate the fdt_overlay. The changes w.r.t. existing fdt are kept minimal
-i.e. only the required library file/functions from Linux fdt are pulled in.
+fdt_overlay.c file is copied from Linux tree's following patch:
+commit: 6e9c9686d826564f44c93cdd6f111b1c0a9dc224
+scripts/dtc: Update to upstream version v1.6.0-31-gcbca977ea121
 
-For adding a node using dynamic programming:
-    1. flatten device tree overlay node will be added to a fdt
-    2. Updated fdt will be unflattened to a new dt_host_new
-    3. Extract the newly added node information from dt_host_new
-    4. Add the added node under correct parent in original dt_host.
-    3. Map interrupt and iomem region as required.
-
-For removing a node:
-    1. Find the node with given path.
-    2. Check if the node is used by any of dom0 or domus. Removes the node
-only when it's not used by any domain.
-    3. Removes IRQ permissions and MMIO access.
-    5. Find the node in dt_host and delete the device node entry from dt_host.
-    6. Free the overlay_tracker entry which means free dt_host_new also(created
-in adding node step).
-
-fpga-add and fpga-del are probably not the best names for these commands. This
-was done initially for xilinx FPGA programmable logic block dynamic programming.
-I am okay with replacing fpga-add and fpga-del with better names if there are
-any suggestions.
-
-Regards,
-Vikram
-
-Vikram Garhwal (13):
-  device tree: Remove __init from function type
-  libfdt: Keep fdt functions after init.
-  libfdt: import fdt_overlay from Linux
-  libfdt: Copy required libfdt functions from Linux
-  libfdt: Change overlay_get_target() type
-  device tree: Add dt_print_node_names()
-  device tree: Add _dt_find_node_by_path() to find nodes in device tree
-  xen/iommu: Introduce iommu_remove_dt_devices function
-  xen/arm: Implement device tree node removal functionalities
-  xen/arm: Implement device tree node addition functionalities
-  tools/libs/ctrl: Implement new xc interfaces for fpga-add and fpga-del
-  tools/libs/light: Implement new libxl functions for fpga-add and
-    fpga-del
-  tools/xl: Add new xl commands fpga-add and fpga-del
-
- tools/include/libxl.h                 |   5 +
- tools/include/xenctrl.h               |   4 +
- tools/libs/ctrl/Makefile              |   1 +
- tools/libs/ctrl/xc_fpga.c             |  82 ++++
- tools/libs/light/Makefile             |   1 +
- tools/libs/light/libxl_fpga.c         |  73 +++
- tools/xl/xl.h                         |   2 +
- tools/xl/xl_cmdtable.c                |  12 +
- tools/xl/xl_vmcontrol.c               |  51 ++
- xen/arch/arm/Makefile                 |   2 +-
- xen/arch/arm/domain_build.c           |  15 +-
- xen/arch/arm/domctl.c                 | 445 +++++++++++++++++
- xen/common/device_tree.c              | 143 +++++-
- xen/common/libfdt/Makefile            |   1 -
- xen/common/libfdt/Makefile.libfdt     |   2 +-
- xen/common/libfdt/fdt.c               |  35 ++
- xen/common/libfdt/fdt_overlay.c       | 884 ++++++++++++++++++++++++++++++++++
- xen/common/libfdt/fdt_ro.c            |  52 +-
- xen/common/libfdt/fdt_rw.c            |  81 +++-
- xen/common/libfdt/fdt_wip.c           |  20 +
- xen/common/libfdt/libfdt_internal.h   | 130 +++++
- xen/drivers/passthrough/arm/smmu.c    |  53 ++
- xen/drivers/passthrough/device_tree.c |  30 ++
- xen/include/asm-arm/domain_build.h    |  10 +
- xen/include/public/domctl.h           |  16 +
- xen/include/xen/device_tree.h         |  21 +
- xen/include/xen/iommu.h               |   2 +
- xen/include/xen/libfdt/libfdt.h       | 232 ++++++++-
- 28 files changed, 2363 insertions(+), 42 deletions(-)
- create mode 100644 tools/libs/ctrl/xc_fpga.c
- create mode 100644 tools/libs/light/libxl_fpga.c
+Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
+---
+ xen/common/libfdt/fdt_overlay.c | 882 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 882 insertions(+)
  create mode 100644 xen/common/libfdt/fdt_overlay.c
 
+diff --git a/xen/common/libfdt/fdt_overlay.c b/xen/common/libfdt/fdt_overlay.c
+new file mode 100644
+index 0000000..d217e79
+--- /dev/null
++++ b/xen/common/libfdt/fdt_overlay.c
+@@ -0,0 +1,882 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
++/*
++ * libfdt - Flat Device Tree manipulation
++ * Copyright (C) 2016 Free Electrons
++ * Copyright (C) 2016 NextThing Co.
++ */
++#include "libfdt_env.h"
++
++#include <fdt.h>
++#include <libfdt.h>
++
++#include "libfdt_internal.h"
++
++/**
++ * overlay_get_target_phandle - retrieves the target phandle of a fragment
++ * @fdto: pointer to the device tree overlay blob
++ * @fragment: node offset of the fragment in the overlay
++ *
++ * overlay_get_target_phandle() retrieves the target phandle of an
++ * overlay fragment when that fragment uses a phandle (target
++ * property) instead of a path (target-path property).
++ *
++ * returns:
++ *      the phandle pointed by the target property
++ *      0, if the phandle was not found
++ *	-1, if the phandle was malformed
++ */
++static uint32_t overlay_get_target_phandle(const void *fdto, int fragment)
++{
++	const fdt32_t *val;
++	int len;
++
++	val = fdt_getprop(fdto, fragment, "target", &len);
++	if (!val)
++		return 0;
++
++	if ((len != sizeof(*val)) || (fdt32_to_cpu(*val) == (uint32_t)-1))
++		return (uint32_t)-1;
++
++	return fdt32_to_cpu(*val);
++}
++
++/**
++ * overlay_get_target - retrieves the offset of a fragment's target
++ * @fdt: Base device tree blob
++ * @fdto: Device tree overlay blob
++ * @fragment: node offset of the fragment in the overlay
++ * @pathp: pointer which receives the path of the target (or NULL)
++ *
++ * overlay_get_target() retrieves the target offset in the base
++ * device tree of a fragment, no matter how the actual targeting is
++ * done (through a phandle or a path)
++ *
++ * returns:
++ *      the targeted node offset in the base device tree
++ *      Negative error code on error
++ */
++static int overlay_get_target(const void *fdt, const void *fdto,
++			      int fragment, char const **pathp)
++{
++	uint32_t phandle;
++	const char *path = NULL;
++	int path_len = 0, ret;
++
++	/* Try first to do a phandle based lookup */
++	phandle = overlay_get_target_phandle(fdto, fragment);
++	if (phandle == (uint32_t)-1)
++		return -FDT_ERR_BADPHANDLE;
++
++	/* no phandle, try path */
++	if (!phandle) {
++		/* And then a path based lookup */
++		path = fdt_getprop(fdto, fragment, "target-path", &path_len);
++		if (path)
++			ret = fdt_path_offset(fdt, path);
++		else
++			ret = path_len;
++	} else
++		ret = fdt_node_offset_by_phandle(fdt, phandle);
++
++	/*
++	* If we haven't found either a target or a
++	* target-path property in a node that contains a
++	* __overlay__ subnode (we wouldn't be called
++	* otherwise), consider it a improperly written
++	* overlay
++	*/
++	if (ret < 0 && path_len == -FDT_ERR_NOTFOUND)
++		ret = -FDT_ERR_BADOVERLAY;
++
++	/* return on error */
++	if (ret < 0)
++		return ret;
++
++	/* return pointer to path (if available) */
++	if (pathp)
++		*pathp = path ? path : NULL;
++
++	return ret;
++}
++
++/**
++ * overlay_phandle_add_offset - Increases a phandle by an offset
++ * @fdt: Base device tree blob
++ * @node: Device tree overlay blob
++ * @name: Name of the property to modify (phandle or linux,phandle)
++ * @delta: offset to apply
++ *
++ * overlay_phandle_add_offset() increments a node phandle by a given
++ * offset.
++ *
++ * returns:
++ *      0 on success.
++ *      Negative error code on error
++ */
++static int overlay_phandle_add_offset(void *fdt, int node,
++				      const char *name, uint32_t delta)
++{
++	const fdt32_t *val;
++	uint32_t adj_val;
++	int len;
++
++	val = fdt_getprop(fdt, node, name, &len);
++	if (!val)
++		return len;
++
++	if (len != sizeof(*val))
++		return -FDT_ERR_BADPHANDLE;
++
++	adj_val = fdt32_to_cpu(*val);
++	if ((adj_val + delta) < adj_val)
++		return -FDT_ERR_NOPHANDLES;
++
++	adj_val += delta;
++	if (adj_val == (uint32_t)-1)
++		return -FDT_ERR_NOPHANDLES;
++
++	return fdt_setprop_inplace_u32(fdt, node, name, adj_val);
++}
++
++/**
++ * overlay_adjust_node_phandles - Offsets the phandles of a node
++ * @fdto: Device tree overlay blob
++ * @node: Offset of the node we want to adjust
++ * @delta: Offset to shift the phandles of
++ *
++ * overlay_adjust_node_phandles() adds a constant to all the phandles
++ * of a given node. This is mainly use as part of the overlay
++ * application process, when we want to update all the overlay
++ * phandles to not conflict with the overlays of the base device tree.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_adjust_node_phandles(void *fdto, int node,
++					uint32_t delta)
++{
++	int child;
++	int ret;
++
++	ret = overlay_phandle_add_offset(fdto, node, "phandle", delta);
++	if (ret && ret != -FDT_ERR_NOTFOUND)
++		return ret;
++
++	ret = overlay_phandle_add_offset(fdto, node, "linux,phandle", delta);
++	if (ret && ret != -FDT_ERR_NOTFOUND)
++		return ret;
++
++	fdt_for_each_subnode(child, fdto, node) {
++		ret = overlay_adjust_node_phandles(fdto, child, delta);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++/**
++ * overlay_adjust_local_phandles - Adjust the phandles of a whole overlay
++ * @fdto: Device tree overlay blob
++ * @delta: Offset to shift the phandles of
++ *
++ * overlay_adjust_local_phandles() adds a constant to all the
++ * phandles of an overlay. This is mainly use as part of the overlay
++ * application process, when we want to update all the overlay
++ * phandles to not conflict with the overlays of the base device tree.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_adjust_local_phandles(void *fdto, uint32_t delta)
++{
++	/*
++	 * Start adjusting the phandles from the overlay root
++	 */
++	return overlay_adjust_node_phandles(fdto, 0, delta);
++}
++
++/**
++ * overlay_update_local_node_references - Adjust the overlay references
++ * @fdto: Device tree overlay blob
++ * @tree_node: Node offset of the node to operate on
++ * @fixup_node: Node offset of the matching local fixups node
++ * @delta: Offset to shift the phandles of
++ *
++ * overlay_update_local_nodes_references() update the phandles
++ * pointing to a node within the device tree overlay by adding a
++ * constant delta.
++ *
++ * This is mainly used as part of a device tree application process,
++ * where you want the device tree overlays phandles to not conflict
++ * with the ones from the base device tree before merging them.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_update_local_node_references(void *fdto,
++						int tree_node,
++						int fixup_node,
++						uint32_t delta)
++{
++	int fixup_prop;
++	int fixup_child;
++	int ret;
++
++	fdt_for_each_property_offset(fixup_prop, fdto, fixup_node) {
++		const fdt32_t *fixup_val;
++		const char *tree_val;
++		const char *name;
++		int fixup_len;
++		int tree_len;
++		int i;
++
++		fixup_val = fdt_getprop_by_offset(fdto, fixup_prop,
++						  &name, &fixup_len);
++		if (!fixup_val)
++			return fixup_len;
++
++		if (fixup_len % sizeof(uint32_t))
++			return -FDT_ERR_BADOVERLAY;
++		fixup_len /= sizeof(uint32_t);
++
++		tree_val = fdt_getprop(fdto, tree_node, name, &tree_len);
++		if (!tree_val) {
++			if (tree_len == -FDT_ERR_NOTFOUND)
++				return -FDT_ERR_BADOVERLAY;
++
++			return tree_len;
++		}
++
++		for (i = 0; i < fixup_len; i++) {
++			fdt32_t adj_val;
++			uint32_t poffset;
++
++			poffset = fdt32_to_cpu(fixup_val[i]);
++
++			/*
++			 * phandles to fixup can be unaligned.
++			 *
++			 * Use a memcpy for the architectures that do
++			 * not support unaligned accesses.
++			 */
++			memcpy(&adj_val, tree_val + poffset, sizeof(adj_val));
++
++			adj_val = cpu_to_fdt32(fdt32_to_cpu(adj_val) + delta);
++
++			ret = fdt_setprop_inplace_namelen_partial(fdto,
++								  tree_node,
++								  name,
++								  strlen(name),
++								  poffset,
++								  &adj_val,
++								  sizeof(adj_val));
++			if (ret == -FDT_ERR_NOSPACE)
++				return -FDT_ERR_BADOVERLAY;
++
++			if (ret)
++				return ret;
++		}
++	}
++
++	fdt_for_each_subnode(fixup_child, fdto, fixup_node) {
++		const char *fixup_child_name = fdt_get_name(fdto, fixup_child,
++							    NULL);
++		int tree_child;
++
++		tree_child = fdt_subnode_offset(fdto, tree_node,
++						fixup_child_name);
++		if (tree_child == -FDT_ERR_NOTFOUND)
++			return -FDT_ERR_BADOVERLAY;
++		if (tree_child < 0)
++			return tree_child;
++
++		ret = overlay_update_local_node_references(fdto,
++							   tree_child,
++							   fixup_child,
++							   delta);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++/**
++ * overlay_update_local_references - Adjust the overlay references
++ * @fdto: Device tree overlay blob
++ * @delta: Offset to shift the phandles of
++ *
++ * overlay_update_local_references() update all the phandles pointing
++ * to a node within the device tree overlay by adding a constant
++ * delta to not conflict with the base overlay.
++ *
++ * This is mainly used as part of a device tree application process,
++ * where you want the device tree overlays phandles to not conflict
++ * with the ones from the base device tree before merging them.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_update_local_references(void *fdto, uint32_t delta)
++{
++	int fixups;
++
++	fixups = fdt_path_offset(fdto, "/__local_fixups__");
++	if (fixups < 0) {
++		/* There's no local phandles to adjust, bail out */
++		if (fixups == -FDT_ERR_NOTFOUND)
++			return 0;
++
++		return fixups;
++	}
++
++	/*
++	 * Update our local references from the root of the tree
++	 */
++	return overlay_update_local_node_references(fdto, 0, fixups,
++						    delta);
++}
++
++/**
++ * overlay_fixup_one_phandle - Set an overlay phandle to the base one
++ * @fdt: Base Device Tree blob
++ * @fdto: Device tree overlay blob
++ * @symbols_off: Node offset of the symbols node in the base device tree
++ * @path: Path to a node holding a phandle in the overlay
++ * @path_len: number of path characters to consider
++ * @name: Name of the property holding the phandle reference in the overlay
++ * @name_len: number of name characters to consider
++ * @poffset: Offset within the overlay property where the phandle is stored
++ * @label: Label of the node referenced by the phandle
++ *
++ * overlay_fixup_one_phandle() resolves an overlay phandle pointing to
++ * a node in the base device tree.
++ *
++ * This is part of the device tree overlay application process, when
++ * you want all the phandles in the overlay to point to the actual
++ * base dt nodes.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_fixup_one_phandle(void *fdt, void *fdto,
++				     int symbols_off,
++				     const char *path, uint32_t path_len,
++				     const char *name, uint32_t name_len,
++				     int poffset, const char *label)
++{
++	const char *symbol_path;
++	uint32_t phandle;
++	fdt32_t phandle_prop;
++	int symbol_off, fixup_off;
++	int prop_len;
++
++	if (symbols_off < 0)
++		return symbols_off;
++
++	symbol_path = fdt_getprop(fdt, symbols_off, label,
++				  &prop_len);
++	if (!symbol_path)
++		return prop_len;
++
++	symbol_off = fdt_path_offset(fdt, symbol_path);
++	if (symbol_off < 0)
++		return symbol_off;
++
++	phandle = fdt_get_phandle(fdt, symbol_off);
++	if (!phandle)
++		return -FDT_ERR_NOTFOUND;
++
++	fixup_off = fdt_path_offset_namelen(fdto, path, path_len);
++	if (fixup_off == -FDT_ERR_NOTFOUND)
++		return -FDT_ERR_BADOVERLAY;
++	if (fixup_off < 0)
++		return fixup_off;
++
++	phandle_prop = cpu_to_fdt32(phandle);
++	return fdt_setprop_inplace_namelen_partial(fdto, fixup_off,
++						   name, name_len, poffset,
++						   &phandle_prop,
++						   sizeof(phandle_prop));
++};
++
++/**
++ * overlay_fixup_phandle - Set an overlay phandle to the base one
++ * @fdt: Base Device Tree blob
++ * @fdto: Device tree overlay blob
++ * @symbols_off: Node offset of the symbols node in the base device tree
++ * @property: Property offset in the overlay holding the list of fixups
++ *
++ * overlay_fixup_phandle() resolves all the overlay phandles pointed
++ * to in a __fixups__ property, and updates them to match the phandles
++ * in use in the base device tree.
++ *
++ * This is part of the device tree overlay application process, when
++ * you want all the phandles in the overlay to point to the actual
++ * base dt nodes.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_fixup_phandle(void *fdt, void *fdto, int symbols_off,
++				 int property)
++{
++	const char *value;
++	const char *label;
++	int len;
++
++	value = fdt_getprop_by_offset(fdto, property,
++				      &label, &len);
++	if (!value) {
++		if (len == -FDT_ERR_NOTFOUND)
++			return -FDT_ERR_INTERNAL;
++
++		return len;
++	}
++
++	do {
++		const char *path, *name, *fixup_end;
++		const char *fixup_str = value;
++		uint32_t path_len, name_len;
++		uint32_t fixup_len;
++		char *sep, *endptr;
++		int poffset, ret;
++
++		fixup_end = memchr(value, '\0', len);
++		if (!fixup_end)
++			return -FDT_ERR_BADOVERLAY;
++		fixup_len = fixup_end - fixup_str;
++
++		len -= fixup_len + 1;
++		value += fixup_len + 1;
++
++		path = fixup_str;
++		sep = memchr(fixup_str, ':', fixup_len);
++		if (!sep || *sep != ':')
++			return -FDT_ERR_BADOVERLAY;
++
++		path_len = sep - path;
++		if (path_len == (fixup_len - 1))
++			return -FDT_ERR_BADOVERLAY;
++
++		fixup_len -= path_len + 1;
++		name = sep + 1;
++		sep = memchr(name, ':', fixup_len);
++		if (!sep || *sep != ':')
++			return -FDT_ERR_BADOVERLAY;
++
++		name_len = sep - name;
++		if (!name_len)
++			return -FDT_ERR_BADOVERLAY;
++
++		poffset = strtoul(sep + 1, &endptr, 10);
++		if ((*endptr != '\0') || (endptr <= (sep + 1)))
++			return -FDT_ERR_BADOVERLAY;
++
++		ret = overlay_fixup_one_phandle(fdt, fdto, symbols_off,
++						path, path_len, name, name_len,
++						poffset, label);
++		if (ret)
++			return ret;
++	} while (len > 0);
++
++	return 0;
++}
++
++/**
++ * overlay_fixup_phandles - Resolve the overlay phandles to the base
++ *                          device tree
++ * @fdt: Base Device Tree blob
++ * @fdto: Device tree overlay blob
++ *
++ * overlay_fixup_phandles() resolves all the overlay phandles pointing
++ * to nodes in the base device tree.
++ *
++ * This is one of the steps of the device tree overlay application
++ * process, when you want all the phandles in the overlay to point to
++ * the actual base dt nodes.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_fixup_phandles(void *fdt, void *fdto)
++{
++	int fixups_off, symbols_off;
++	int property;
++
++	/* We can have overlays without any fixups */
++	fixups_off = fdt_path_offset(fdto, "/__fixups__");
++	if (fixups_off == -FDT_ERR_NOTFOUND)
++		return 0; /* nothing to do */
++	if (fixups_off < 0)
++		return fixups_off;
++
++	/* And base DTs without symbols */
++	symbols_off = fdt_path_offset(fdt, "/__symbols__");
++	if ((symbols_off < 0 && (symbols_off != -FDT_ERR_NOTFOUND)))
++		return symbols_off;
++
++	fdt_for_each_property_offset(property, fdto, fixups_off) {
++		int ret;
++
++		ret = overlay_fixup_phandle(fdt, fdto, symbols_off, property);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++/**
++ * overlay_apply_node - Merges a node into the base device tree
++ * @fdt: Base Device Tree blob
++ * @target: Node offset in the base device tree to apply the fragment to
++ * @fdto: Device tree overlay blob
++ * @node: Node offset in the overlay holding the changes to merge
++ *
++ * overlay_apply_node() merges a node into a target base device tree
++ * node pointed.
++ *
++ * This is part of the final step in the device tree overlay
++ * application process, when all the phandles have been adjusted and
++ * resolved and you just have to merge overlay into the base device
++ * tree.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_apply_node(void *fdt, int target,
++			      void *fdto, int node)
++{
++	int property;
++	int subnode;
++
++	fdt_for_each_property_offset(property, fdto, node) {
++		const char *name;
++		const void *prop;
++		int prop_len;
++		int ret;
++
++		prop = fdt_getprop_by_offset(fdto, property, &name,
++					     &prop_len);
++		if (prop_len == -FDT_ERR_NOTFOUND)
++			return -FDT_ERR_INTERNAL;
++		if (prop_len < 0)
++			return prop_len;
++
++		ret = fdt_setprop(fdt, target, name, prop, prop_len);
++		if (ret)
++			return ret;
++	}
++
++	fdt_for_each_subnode(subnode, fdto, node) {
++		const char *name = fdt_get_name(fdto, subnode, NULL);
++		int nnode;
++		int ret;
++
++		nnode = fdt_add_subnode(fdt, target, name);
++		if (nnode == -FDT_ERR_EXISTS) {
++			nnode = fdt_subnode_offset(fdt, target, name);
++			if (nnode == -FDT_ERR_NOTFOUND)
++				return -FDT_ERR_INTERNAL;
++		}
++
++		if (nnode < 0)
++			return nnode;
++
++		ret = overlay_apply_node(fdt, nnode, fdto, subnode);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++/**
++ * overlay_merge - Merge an overlay into its base device tree
++ * @fdt: Base Device Tree blob
++ * @fdto: Device tree overlay blob
++ *
++ * overlay_merge() merges an overlay into its base device tree.
++ *
++ * This is the next to last step in the device tree overlay application
++ * process, when all the phandles have been adjusted and resolved and
++ * you just have to merge overlay into the base device tree.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_merge(void *fdt, void *fdto)
++{
++	int fragment;
++
++	fdt_for_each_subnode(fragment, fdto, 0) {
++		int overlay;
++		int target;
++		int ret;
++
++		/*
++		 * Each fragments will have an __overlay__ node. If
++		 * they don't, it's not supposed to be merged
++		 */
++		overlay = fdt_subnode_offset(fdto, fragment, "__overlay__");
++		if (overlay == -FDT_ERR_NOTFOUND)
++			continue;
++
++		if (overlay < 0)
++			return overlay;
++
++		target = overlay_get_target(fdt, fdto, fragment, NULL);
++		if (target < 0)
++			return target;
++
++		ret = overlay_apply_node(fdt, target, fdto, overlay);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int get_path_len(const void *fdt, int nodeoffset)
++{
++	int len = 0, namelen;
++	const char *name;
++
++	FDT_RO_PROBE(fdt);
++
++	for (;;) {
++		name = fdt_get_name(fdt, nodeoffset, &namelen);
++		if (!name)
++			return namelen;
++
++		/* root? we're done */
++		if (namelen == 0)
++			break;
++
++		nodeoffset = fdt_parent_offset(fdt, nodeoffset);
++		if (nodeoffset < 0)
++			return nodeoffset;
++		len += namelen + 1;
++	}
++
++	/* in case of root pretend it's "/" */
++	if (len == 0)
++		len++;
++	return len;
++}
++
++/**
++ * overlay_symbol_update - Update the symbols of base tree after a merge
++ * @fdt: Base Device Tree blob
++ * @fdto: Device tree overlay blob
++ *
++ * overlay_symbol_update() updates the symbols of the base tree with the
++ * symbols of the applied overlay
++ *
++ * This is the last step in the device tree overlay application
++ * process, allowing the reference of overlay symbols by subsequent
++ * overlay operations.
++ *
++ * returns:
++ *      0 on success
++ *      Negative error code on failure
++ */
++static int overlay_symbol_update(void *fdt, void *fdto)
++{
++	int root_sym, ov_sym, prop, path_len, fragment, target;
++	int len, frag_name_len, ret, rel_path_len;
++	const char *s, *e;
++	const char *path;
++	const char *name;
++	const char *frag_name;
++	const char *rel_path;
++	const char *target_path;
++	char *buf;
++	void *p;
++
++	ov_sym = fdt_subnode_offset(fdto, 0, "__symbols__");
++
++	/* if no overlay symbols exist no problem */
++	if (ov_sym < 0)
++		return 0;
++
++	root_sym = fdt_subnode_offset(fdt, 0, "__symbols__");
++
++	/* it no root symbols exist we should create them */
++	if (root_sym == -FDT_ERR_NOTFOUND)
++		root_sym = fdt_add_subnode(fdt, 0, "__symbols__");
++
++	/* any error is fatal now */
++	if (root_sym < 0)
++		return root_sym;
++
++	/* iterate over each overlay symbol */
++	fdt_for_each_property_offset(prop, fdto, ov_sym) {
++		path = fdt_getprop_by_offset(fdto, prop, &name, &path_len);
++		if (!path)
++			return path_len;
++
++		/* verify it's a string property (terminated by a single \0) */
++		if (path_len < 1 || memchr(path, '\0', path_len) != &path[path_len - 1])
++			return -FDT_ERR_BADVALUE;
++
++		/* keep end marker to avoid strlen() */
++		e = path + path_len;
++
++		if (*path != '/')
++			return -FDT_ERR_BADVALUE;
++
++		/* get fragment name first */
++		s = strchr(path + 1, '/');
++		if (!s) {
++			/* Symbol refers to something that won't end
++			 * up in the target tree */
++			continue;
++		}
++
++		frag_name = path + 1;
++		frag_name_len = s - path - 1;
++
++		/* verify format; safe since "s" lies in \0 terminated prop */
++		len = sizeof("/__overlay__/") - 1;
++		if ((e - s) > len && (memcmp(s, "/__overlay__/", len) == 0)) {
++			/* /<fragment-name>/__overlay__/<relative-subnode-path> */
++			rel_path = s + len;
++			rel_path_len = e - rel_path - 1;
++		} else if ((e - s) == len
++			   && (memcmp(s, "/__overlay__", len - 1) == 0)) {
++			/* /<fragment-name>/__overlay__ */
++			rel_path = "";
++			rel_path_len = 0;
++		} else {
++			/* Symbol refers to something that won't end
++			 * up in the target tree */
++			continue;
++		}
++
++		/* find the fragment index in which the symbol lies */
++		ret = fdt_subnode_offset_namelen(fdto, 0, frag_name,
++					       frag_name_len);
++		/* not found? */
++		if (ret < 0)
++			return -FDT_ERR_BADOVERLAY;
++		fragment = ret;
++
++		/* an __overlay__ subnode must exist */
++		ret = fdt_subnode_offset(fdto, fragment, "__overlay__");
++		if (ret < 0)
++			return -FDT_ERR_BADOVERLAY;
++
++		/* get the target of the fragment */
++		ret = overlay_get_target(fdt, fdto, fragment, &target_path);
++		if (ret < 0)
++			return ret;
++		target = ret;
++
++		/* if we have a target path use */
++		if (!target_path) {
++			ret = get_path_len(fdt, target);
++			if (ret < 0)
++				return ret;
++			len = ret;
++		} else {
++			len = strlen(target_path);
++		}
++
++		ret = fdt_setprop_placeholder(fdt, root_sym, name,
++				len + (len > 1) + rel_path_len + 1, &p);
++		if (ret < 0)
++			return ret;
++
++		if (!target_path) {
++			/* again in case setprop_placeholder changed it */
++			ret = overlay_get_target(fdt, fdto, fragment, &target_path);
++			if (ret < 0)
++				return ret;
++			target = ret;
++		}
++
++		buf = p;
++		if (len > 1) { /* target is not root */
++			if (!target_path) {
++				ret = fdt_get_path(fdt, target, buf, len + 1);
++				if (ret < 0)
++					return ret;
++			} else
++				memcpy(buf, target_path, len + 1);
++
++		} else
++			len--;
++
++		buf[len] = '/';
++		memcpy(buf + len + 1, rel_path, rel_path_len);
++		buf[len + 1 + rel_path_len] = '\0';
++	}
++
++	return 0;
++}
++
++int fdt_overlay_apply(void *fdt, void *fdto)
++{
++	uint32_t delta;
++	int ret;
++
++	FDT_RO_PROBE(fdt);
++	FDT_RO_PROBE(fdto);
++
++	ret = fdt_find_max_phandle(fdt, &delta);
++	if (ret)
++		goto err;
++
++	ret = overlay_adjust_local_phandles(fdto, delta);
++	if (ret)
++		goto err;
++
++	ret = overlay_update_local_references(fdto, delta);
++	if (ret)
++		goto err;
++
++	ret = overlay_fixup_phandles(fdt, fdto);
++	if (ret)
++		goto err;
++
++	ret = overlay_merge(fdt, fdto);
++	if (ret)
++		goto err;
++
++	ret = overlay_symbol_update(fdt, fdto);
++	if (ret)
++		goto err;
++
++	/*
++	 * The overlay has been damaged, erase its magic.
++	 */
++	fdt_set_magic(fdto, ~0);
++
++	return 0;
++
++err:
++	/*
++	 * The overlay might have been damaged, erase its magic.
++	 */
++	fdt_set_magic(fdto, ~0);
++
++	/*
++	 * The base device tree might have been damaged, erase its
++	 * magic.
++	 */
++	fdt_set_magic(fdt, ~0);
++
++	return ret;
++}
 -- 
 2.7.4
 
