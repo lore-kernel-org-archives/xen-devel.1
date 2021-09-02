@@ -2,51 +2,48 @@ Return-Path: <SRS0=MtyD=NY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56CEEC432BE
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 15:58:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B613FC8302D
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:25:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E351A610A1
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 15:58:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E351A610A1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=microsoft.com
+	by mail.kernel.org (Postfix) with ESMTPS id 89E9B6139D
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:16:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 89E9B6139D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177393.322771 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177410.322810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLp5x-0005mw-Hk; Thu, 02 Sep 2021 15:57:41 +0000
+	id 1mLpNb-0001P0-Om; Thu, 02 Sep 2021 16:15:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177393.322771; Thu, 02 Sep 2021 15:57:41 +0000
+Received: by outflank-mailman (output) from mailman id 177410.322810; Thu, 02 Sep 2021 16:15:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLp5x-0005mp-Dd; Thu, 02 Sep 2021 15:57:41 +0000
-Received: by outflank-mailman (input) for mailman id 177393;
- Thu, 02 Sep 2021 15:57:39 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mLpNb-0001On-Kk; Thu, 02 Sep 2021 16:15:55 +0000
+Received: by outflank-mailman (input) for mailman id 177410;
+ Thu, 02 Sep 2021 16:15:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9uwi=NY=microsoft.com=mikelley@srs-us1.protection.inumbo.net>)
- id 1mLp5v-0005mj-Fa
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 15:57:39 +0000
-Received: from outbound.mail.eo.outlook.com (unknown [40.93.3.5])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7cbaedda-0c06-11ec-ae82-12813bfff9fa;
- Thu, 02 Sep 2021 15:57:34 +0000 (UTC)
-Received: from MWHPR21MB1593.namprd21.prod.outlook.com (2603:10b6:301:7c::11)
- by MWHPR2101MB0729.namprd21.prod.outlook.com (2603:10b6:301:76::39)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.1; Thu, 2 Sep
- 2021 15:57:25 +0000
-Received: from MWHPR21MB1593.namprd21.prod.outlook.com
- ([fe80::3c8b:6387:cd5:7d86]) by MWHPR21MB1593.namprd21.prod.outlook.com
- ([fe80::3c8b:6387:cd5:7d86%8]) with mapi id 15.20.4478.014; Thu, 2 Sep 2021
- 15:57:25 +0000
+ <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
+ id 1mLpNa-0001O1-ER
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:15:54 +0000
+Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 23b39658-0c63-477d-af8b-3222810181c7;
+ Thu, 02 Sep 2021 16:15:53 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id z4so3826952wrr.6
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:15:53 -0700 (PDT)
+Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
+ by smtp.gmail.com with ESMTPSA id
+ j17sm2187403wrh.67.2021.09.02.09.15.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Sep 2021 09:15:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,233 +54,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7cbaedda-0c06-11ec-ae82-12813bfff9fa
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KCAiBFS/0mCgB2qMN5U9gBLvp1U2Cyy92ELkvrC9T80fD4TYG+I/WxS/YPZIKOugn6fTW6Pj1TpRJhi8gbS00Rafsetoy/2Lc/w1ZJMpyW4OumOJrPFbLXen/VOsuYhCh/DUAxmh2ciewoPS3lF5hgJT1D3ot0TXIrZAhfvxqNONTMHKG31ePfmhU8tpvYJfR565aOA5fy6W4F6zaITNPWME2dsxbWFvzFV9oBHuH0cTJtCUSQmDwr29IfWXJb5vplgKPkmMDOvTJUwhljbHlUTQbz1jKcxZhiVsSFojaRwLF9nkpec0Hk8QT0b08MjR9jMcUDbOTp1M1SVh0RIoDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=HuvGa1HIbj6xCIKr0VB/aMjA6tx/V75cyR5Rtnz4Cmo=;
- b=hX6PpM7beSSZeEmz9DUmaJ9pJyIkwjNdkTKfArPGom7dxrRA1MWEz+4y9+uxPH1xQ/w55bLGHYhFSX8eB7yLOh/u5NoGkyzrihATJth2kpIKd7wgGTrnYPm6XhYWHW3R6dG3+Bczq1WxwxsNMIT2fj8jVNsiYSXTsKBZU4KP0yZJ3/ZNPiweFdkQnQC1sa9fA/hrNf2LbPnbT74N1UwNPm2bPx2k1XgOUhJNsEbGH08/G2BFUfnfJsqUguv0tdXM5VWeaiCWbg/Y4tu0r0A28CTIR+MgpTwTUVZejfrljk9hc+LJMCKPO8t5vcxRvLaT/ZWJ4bBJAyk0vmd44Vs00Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microsoft.com; dmarc=pass action=none
- header.from=microsoft.com; dkim=pass header.d=microsoft.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HuvGa1HIbj6xCIKr0VB/aMjA6tx/V75cyR5Rtnz4Cmo=;
- b=BhPPiDHloa926sA3o5SBOABnbTxqZIOEXuJsLh4eYXVBnNr3+we4lcCH70qJWJ0JCTR7n6Zfsr/aBchdBEGRJnifOfVKLZFJwmT3UcPf2WTgCWs7k+jTugtAj/FRWa6bLqb+AbqkWGkRbtrf1n477usdwrbmPsPiBl92NdaCHys=
-From: Michael Kelley <mikelley@microsoft.com>
-To: Christoph Hellwig <hch@lst.de>
-CC: Tianyu Lan <ltykernel@gmail.com>, KY Srinivasan <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>, Stephen Hemminger
-	<sthemmin@microsoft.com>, "wei.liu@kernel.org" <wei.liu@kernel.org>, Dexuan
- Cui <decui@microsoft.com>, "catalin.marinas@arm.com"
-	<catalin.marinas@arm.com>, "will@kernel.org" <will@kernel.org>,
-	"tglx@linutronix.de" <tglx@linutronix.de>, "mingo@redhat.com"
-	<mingo@redhat.com>, "bp@alien8.de" <bp@alien8.de>, "x86@kernel.org"
-	<x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
-	"dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-	"luto@kernel.org" <luto@kernel.org>, "peterz@infradead.org"
-	<peterz@infradead.org>, "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>,
-	"boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "jgross@suse.com"
-	<jgross@suse.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>,
-	"joro@8bytes.org" <joro@8bytes.org>, "davem@davemloft.net"
-	<davem@davemloft.net>, "kuba@kernel.org" <kuba@kernel.org>,
-	"jejb@linux.ibm.com" <jejb@linux.ibm.com>, "martin.petersen@oracle.com"
-	<martin.petersen@oracle.com>, "gregkh@linuxfoundation.org"
-	<gregkh@linuxfoundation.org>, "arnd@arndb.de" <arnd@arndb.de>,
-	"m.szyprowski@samsung.com" <m.szyprowski@samsung.com>, "robin.murphy@arm.com"
-	<robin.murphy@arm.com>, "brijesh.singh@amd.com" <brijesh.singh@amd.com>,
-	"thomas.lendacky@amd.com" <thomas.lendacky@amd.com>, Tianyu Lan
-	<Tianyu.Lan@microsoft.com>, "pgonda@google.com" <pgonda@google.com>,
-	"martin.b.radev@gmail.com" <martin.b.radev@gmail.com>,
-	"akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-	"kirill.shutemov@linux.intel.com" <kirill.shutemov@linux.intel.com>,
-	"rppt@kernel.org" <rppt@kernel.org>, "hannes@cmpxchg.org"
-	<hannes@cmpxchg.org>, "aneesh.kumar@linux.ibm.com"
-	<aneesh.kumar@linux.ibm.com>, "krish.sadhukhan@oracle.com"
-	<krish.sadhukhan@oracle.com>, "saravanand@fb.com" <saravanand@fb.com>,
-	"linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, "rientjes@google.com"
-	<rientjes@google.com>, "ardb@kernel.org" <ardb@kernel.org>,
-	"iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
-	"linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
-	"linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
-	"netdev@vger.kernel.org" <netdev@vger.kernel.org>, vkuznets
-	<vkuznets@redhat.com>, "parri.andrea@gmail.com" <parri.andrea@gmail.com>,
-	"dave.hansen@intel.com" <dave.hansen@intel.com>
-Subject: RE: [PATCH V4 00/13] x86/Hyper-V: Add Hyper-V Isolation VM support
-Thread-Topic: [PATCH V4 00/13] x86/Hyper-V: Add Hyper-V Isolation VM support
-Thread-Index: AQHXm2f20hs45o24pkmChnbOnB/NPKuL9ngAgAHkV3CAAo9WgIAAfS2g
-Date: Thu, 2 Sep 2021 15:57:24 +0000
-Message-ID:
- <MWHPR21MB1593060DCFD854FDA14604D3D7CE9@MWHPR21MB1593.namprd21.prod.outlook.com>
-References: <20210827172114.414281-1-ltykernel@gmail.com>
- <20210830120036.GA22005@lst.de>
- <MWHPR21MB15933503E7C324167CB4132CD7CC9@MWHPR21MB1593.namprd21.prod.outlook.com>
- <20210902075939.GB14986@lst.de>
-In-Reply-To: <20210902075939.GB14986@lst.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-msip_labels:
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ActionId=341860f6-2dd3-4e6b-aaea-e3d22051d2db;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ContentBits=0;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Enabled=true;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Method=Standard;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Name=Internal;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SetDate=2021-09-02T15:27:40Z;MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SiteId=72f988bf-86f1-41af-91ab-2d7cd011db47;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microsoft.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 29e260fb-9419-416f-e7a1-08d96e2a5b72
-x-ms-traffictypediagnostic: MWHPR2101MB0729:
-x-ms-exchange-transport-forked: True
-x-ld-processed: 72f988bf-86f1-41af-91ab-2d7cd011db47,ExtAddr
-x-microsoft-antispam-prvs:
- <MWHPR2101MB072932751EF6DA0A12A9586DD7CE9@MWHPR2101MB0729.namprd21.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info:
- mrF4oMoXJSuRKL/XGzpZTJvFlKLDUPlBxhocIR348p9dCVr/qB/aSYqavDNWBtQhLYznx6PnBdzPIzuEu8muiihXZRDhc0FVPy5XsTO+p1l7SRkCY+mB0m63qcViFQhmw+6PAzn/E7FipdBaK4AhK5ZQ3dQVtrVE8aPoT4EO1UxWSIixV2cMtArTkpfY/t9Ek37zSyD3LzpQU26GYD7Z54ukfHYYdrSGOtxlDa3/caqm176zYfa21Mm8pcy2zPWa6iAASleD2A19TwfTcmBZRQ8q4SXTcT8o5UbAqeE9OsPy4IBrj4Yx7dfUaDLRdS9lySLGdIKsrcCFQ82KN3/11kJJWQ7GgQr3nl5JYk+5jezIGWSnvD3m+J4xMfPdwdjoBRtFfOnKx35p66gL60qd6WZIftZKspfKOGvaopwP+aBRbYXZIPcS6xvyhimqjR/CIWZZSgZhzSz3ho0/hNZP5IRZyGWU0TUhfzTo779XK5VIkzkHOi/I+wQKABXNOnIAzz4gYMyxGSA8wI4/XXSBH34OTNsHPQ3ufEXjWuwlXD5QLQ66kzcINxj7ivfCDzFL97r6bid/nlSlwuWg7B98nE8K4phLCDpmtLPECZZSRqt2XA4p99Vv24InBJBv5lGKFyTQOnTCY92zkMs3Fybe5w8Kl5GpNBPwECoMT2ofOdySGAqFHos0OzDlHss5FJ/cbS2KYfWc3Lw0lww1z+fA4A==
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR21MB1593.namprd21.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(508600001)(9686003)(86362001)(10290500003)(8990500004)(76116006)(26005)(66556008)(33656002)(186003)(55016002)(6916009)(38070700005)(122000001)(54906003)(82960400001)(71200400001)(82950400001)(66476007)(64756008)(316002)(66446008)(4326008)(66946007)(38100700002)(7696005)(7406005)(2906002)(7366002)(5660300002)(8936002)(6506007)(7416002)(52536014)(8676002)(83380400001);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?us-ascii?Q?txgEKNhptKnTZhKRFxE9zXxPdblEEya4z3HY9Y9W+T8Go+v0NzILZI6Antk2?=
- =?us-ascii?Q?0AjU8L6C4+Pdz9J9yNTP3+W6bvhC6KHsZFFftpbRs8qBExE4XF1rEyej6XB6?=
- =?us-ascii?Q?TF3LP39SbQevIVDByyzHpIGKh0wRn8kGGWsI8RmMHR7duippFZbzzS+u5Omz?=
- =?us-ascii?Q?a7UpgUKenDyv008SIWttlg1AxbeKp8XDdLs02JClXg/lX55zviivWx25oqLq?=
- =?us-ascii?Q?h7wlY28mwkatvnzabVvfb+joZ2jgbo4wT4HBae10bX9QJJ2tD3+afv2tXXuE?=
- =?us-ascii?Q?ZJCBsAw09QlZVcG5X7AlVJP/Z54ztWI7perLhH243k87s00vfSlT6LYscL9r?=
- =?us-ascii?Q?rc1Nfq3Va8ZBovRoxJrhyMpY9TjA4zYDGKStDrQ0kTEcdGms2WHd1od6G1IW?=
- =?us-ascii?Q?5eRQoPhVcgWECYRILtl0370PKfMyQ01/zxJ5rOtXMqxuOzo959qRirNoWTbL?=
- =?us-ascii?Q?CvaUsKCwb81UHtb8QTr5BjfFG9tck0NsyXaB3NbaGN2zgMpZtkqZrKnmsM91?=
- =?us-ascii?Q?11vggvJNKD4erPN+76nEVLmrNJh7mGpPOfx9xWMwuY/nLbovZtZrAWsJ4i/I?=
- =?us-ascii?Q?uIJE1RTX1B8Ws09qDeD4AhxVR++baJjCDtKVcCxJd7GzbUR4UKxetYyHnoyW?=
- =?us-ascii?Q?+YZXn93BjZpK7W+yn8YuX5vlWh0gO1CUOqu9z8nIEJn4PNxo2q7pj9mYbElG?=
- =?us-ascii?Q?NGJeuXowqYgtxlBeiYiBdXUc1JNo5kpAXE/IEB8iSm8fuF5rE+h+LM1hpI0X?=
- =?us-ascii?Q?n5Cl5zan+tlWbr1vS9ZLyGUvgFUz8Oku3XCvIUybVz/m9cGbExAnrC0xzM/r?=
- =?us-ascii?Q?cpR3HBgNuJCQcEBBWv5tXPKrwBdeNwRvHsWwpT56Cjurg8BzAK9bLLXITIp6?=
- =?us-ascii?Q?KfBprR6CCu0wXbPU6GXdFSOI3R5V5ULB+jlscT8gBDf5vCAx+PlkQ2LLuc8u?=
- =?us-ascii?Q?gBiCPsLGalJ8FdBPXg7MpCUr51oGQI8SKyWqIkih++ORzKKulnjiNv2L2lO2?=
- =?us-ascii?Q?FMxdWIvmKSgHezvGgLE7QHJIBmFZvqW3mwOOLxKRJqSIEagN9abdW+cq0gCR?=
- =?us-ascii?Q?96OMxcP+W0DAtNyS8xUGJZnV5NIoh9fegO4HEWPwT3TRHRfoXI02MnKCLulT?=
- =?us-ascii?Q?kFe2v/kRAS82Ap2d+DHv9bjTGE/7UoPoxzd2rDZaFQ1rsfKFo5qWlXnjvcHd?=
- =?us-ascii?Q?nwqm4i88XU1RnK0+YolCKjff+k3PVg0Bk/Z4lvADn0xx80ridOQj2QBEFHyF?=
- =?us-ascii?Q?aiy4NeMdes3ZbGoZn69+7RlIE9s7Oe4NVOZnzbyJ52agJQbDEAWM5lA5osLb?=
- =?us-ascii?Q?uVjlCOUPx2PqzbxSIQG8WKYA?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 23b39658-0c63-477d-af8b-3222810181c7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=/9vCQQZfSaTpKBQMegFXjFo179Y+24zi0HZDvs7SgMU=;
+        b=nvF/c2Wc4Z15cqg2fwhp1NDrfdcdFXpuAmJa1KWBtzQQ/EXWFrb73xtrx8OZfbtAYH
+         +ID89t8hrTCsxgu2Z9TktIv56PS86hvs5RilCbo/0PLhtchmK7Btfa7sZb3B2zUVbiHv
+         /HU6lzJWGffGyztr061l6mMVTzRO0XEqa1r0BVkwLvpIuHEZFGdUMQyYCTDsiXNgmkvC
+         mzGCP4B8dDeCO3p+Tu6JIdorMuA2pmQP2RRlgrSmz9a3spLyNyj6mRRUHHOVQRLc9UFi
+         tO8C8CpGWtVF4XqV+ujfpe9fj5HRkBRHkHwyv6P8VevMMXH157Vbk0qwXp550NWCjx06
+         CBMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+         :in-reply-to:references:mime-version:content-transfer-encoding;
+        bh=/9vCQQZfSaTpKBQMegFXjFo179Y+24zi0HZDvs7SgMU=;
+        b=WL3BQx8x1N6N3//lKXNlq44llQPFA0y0sZtxbi1fmBnxXbUDjLIEgJINkdGIkSwOwX
+         3kjySHcaFGGzF8WA/XcdJD0LdyfYFoMQgX1Ysn7IkUwk9/MXQxGf3gDMR6m3e4qUCm4t
+         V5cVeV4WwY4zplXWk503JP05jSo1F6bCe/LEVS7GFn+ibUK5uVug5XqHzZvYtCaAHryt
+         nA9taw61VwhQwkSNP6CxwquPmCOFd9DQnohy+gjzHL+HOzox1hjzspTsF/wF0jUjNXQJ
+         Gy46xURJvwYxfCrErFBZkPQuYQHYTTi7O7GI77ayGenfNAzruqMFd9FnyTv142SsgMyk
+         REOQ==
+X-Gm-Message-State: AOAM533DWCk/Kz9hxbV9Zt/ADqILugl7KLDKz+/gK44zXFXWnYzj3ltP
+	48d6crHEjBiKdzK2Ms1AThU=
+X-Google-Smtp-Source: ABdhPJxxdNDVWzqPqP9AvO+fc8KPo1qKTWTpE1Z3SovcisiYMadm8391Ql4b1VZQyA/+Rjg0YRdLPg==
+X-Received: by 2002:a05:6000:186:: with SMTP id p6mr4881125wrx.210.1630599352772;
+        Thu, 02 Sep 2021 09:15:52 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+To: qemu-devel@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>,
+	Eduardo Habkost <ehabkost@redhat.com>,
+	Greg Kurz <groug@kaod.org>,
+	haxm-team@intel.com,
+	Kamil Rytarowski <kamil@netbsd.org>,
+	qemu-ppc@nongnu.org,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	Michael Rolnik <mrolnik@gmail.com>,
+	qemu-riscv@nongnu.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Thomas Huth <thuth@redhat.com>,
+	David Hildenbrand <david@redhat.com>,
+	Chris Wulff <crwulff@gmail.com>,
+	Laurent Vivier <lvivier@redhat.com>,
+	Cameron Esfahani <dirty@apple.com>,
+	Sunil Muthuswamy <sunilmut@microsoft.com>,
+	Max Filippov <jcmvbkbc@gmail.com>,
+	Taylor Simpson <tsimpson@quicinc.com>,
+	qemu-s390x@nongnu.org,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Artyom Tarasenko <atar4qemu@gmail.com>,
+	Aurelien Jarno <aurelien@aurel32.net>,
+	Paul Durrant <paul@xen.org>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	David Gibson <david@gibson.dropbear.id.au>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Roman Bolshakov <r.bolshakov@yadro.com>,
+	Laurent Vivier <laurent@vivier.eu>,
+	Cornelia Huck <cohuck@redhat.com>,
+	qemu-arm@nongnu.org,
+	Wenchao Wang <wenchao.wang@intel.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+	xen-devel@lists.xenproject.org,
+	Marek Vasut <marex@denx.de>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+	Colin Xu <colin.xu@intel.com>,
+	Claudio Fontana <cfontana@suse.de>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Stafford Horne <shorne@gmail.com>,
+	Reinoud Zandijk <reinoud@netbsd.org>,
+	kvm@vger.kernel.org
+Subject: [PATCH v3 01/30] accel/tcg: Restrict cpu_handle_halt() to sysemu
+Date: Thu,  2 Sep 2021 18:15:14 +0200
+Message-Id: <20210902161543.417092-2-f4bug@amsat.org>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
+References: <20210902161543.417092-1-f4bug@amsat.org>
 MIME-Version: 1.0
-X-OriginatorOrg: microsoft.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR21MB1593.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29e260fb-9419-416f-e7a1-08d96e2a5b72
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Sep 2021 15:57:24.8646
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: afQic2r0Oqvq+TKsAMcY2JuSksSLHirOl2XxJoYethj2b0nNTqDhmPNgN8NTmSHtCHvfeYm6BzmB8XhsRqMeI40O8olSiY1StN/gd4EMzMM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR2101MB0729
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Christoph Hellwig <hch@lst.de> Sent: Thursday, September 2, 2021 1:00=
- AM
->=20
-> On Tue, Aug 31, 2021 at 05:16:19PM +0000, Michael Kelley wrote:
-> > As a quick overview, I think there are four places where the
-> > shared_gpa_boundary must be applied to adjust the guest physical
-> > address that is used.  Each requires mapping a corresponding
-> > virtual address range.  Here are the four places:
-> >
-> > 1)  The so-called "monitor pages" that are a core communication
-> > mechanism between the guest and Hyper-V.  These are two single
-> > pages, and the mapping is handled by calling memremap() for
-> > each of the two pages.  See Patch 7 of Tianyu's series.
->=20
-> Ah, interesting.
->=20
-> > 3)  The network driver send and receive buffers.  vmap_phys_range()
-> > should work here.
->=20
-> Actually it won't.  The problem with these buffers is that they are
-> physically non-contiguous allocations. =20
+Commit 372579427a5 ("tcg: enable thread-per-vCPU") added the following
+comment describing EXCP_HALTED in qemu_tcg_cpu_thread_fn():
 
-Indeed you are right.  These buffers are allocated with vzalloc().
+    case EXCP_HALTED:
+         /* during start-up the vCPU is reset and the thread is
+          * kicked several times. If we don't ensure we go back
+          * to sleep in the halted state we won't cleanly
+          * start-up when the vCPU is enabled.
+          *
+          * cpu->halted should ensure we sleep in wait_io_event
+          */
+         g_assert(cpu->halted);
+         break;
 
-> We really have two sensible options:
->=20
->  1) use vmap_pfn as in the current series.  But in that case I think
->     we should get rid of the other mapping created by vmalloc.  I
->     though a bit about finding a way to apply the offset in vmalloc
->     itself, but I think it would be too invasive to the normal fast
->     path.  So the other sub-option would be to allocate the pages
->     manually (maybe even using high order allocations to reduce TLB
->     pressure) and then remap them
+qemu_wait_io_event() is sysemu-specific, so we can restrict the
+cpu_handle_halt() call in cpu_exec() to system emulation.
 
-What's the benefit of getting rid of the other mapping created by
-vmalloc if it isn't referenced?  Just page table space?  The default sizes
-are a 16 Meg receive buffer and a 1 Meg send buffer for each VMbus
-channel used by netvsc, and usually the max number of channels
-is 8.  So there's 128 Meg of virtual space to be saved on the receive
-buffers,  which could be worth it.
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ accel/tcg/cpu-exec.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-Allocating the pages manually is also an option, but we have to
-be careful about high order allocations.  While typically these buffers
-are allocated during system boot, these synthetic NICs can be hot
-added and removed while the VM is running.   The channel count
-can also be changed while the VM is running.  So multiple 16 Meg
-receive buffer allocations may need to be done after the system has
-been running a long time.
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index 7a6dd9049f0..6b61262b151 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -586,10 +586,11 @@ static inline void tb_add_jump(TranslationBlock *tb, int n,
+     return;
+ }
+ 
++#ifndef CONFIG_USER_ONLY
+ static inline bool cpu_handle_halt(CPUState *cpu)
+ {
+     if (cpu->halted) {
+-#if defined(TARGET_I386) && !defined(CONFIG_USER_ONLY)
++#if defined(TARGET_I386)
+         if (cpu->interrupt_request & CPU_INTERRUPT_POLL) {
+             X86CPU *x86_cpu = X86_CPU(cpu);
+             qemu_mutex_lock_iothread();
+@@ -597,7 +598,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
+             cpu_reset_interrupt(cpu, CPU_INTERRUPT_POLL);
+             qemu_mutex_unlock_iothread();
+         }
+-#endif
++#endif /* TARGET_I386 */
+         if (!cpu_has_work(cpu)) {
+             return true;
+         }
+@@ -607,6 +608,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
+ 
+     return false;
+ }
++#endif /* !CONFIG_USER_ONLY */
+ 
+ static inline void cpu_handle_debug_exception(CPUState *cpu)
+ {
+@@ -865,9 +867,11 @@ int cpu_exec(CPUState *cpu)
+     /* replay_interrupt may need current_cpu */
+     current_cpu = cpu;
+ 
++#ifndef CONFIG_USER_ONLY
+     if (cpu_handle_halt(cpu)) {
+         return EXCP_HALTED;
+     }
++#endif
+ 
+     rcu_read_lock();
+ 
+-- 
+2.31.1
 
->  2) do away with the contiguous kernel mapping entirely.  This means
->     the simple memcpy calls become loops over kmap_local_pfn.  As
->     I just found out for the send side that would be pretty easy,
->     but the receive side would be more work.  We'd also need to check
->     the performance implications.
-
-Doing away with the contiguous kernel mapping entirely seems like
-it would result in fairly messy code to access the buffer.  What's the
-benefit of doing away with the mapping?  I'm not an expert on the
-netvsc driver, but decoding the incoming packets is already fraught
-with complexities because of the nature of the protocol with Hyper-V.
-The contiguous kernel mapping at least keeps the basics sane.
-
->=20
-> > 4) The swiotlb memory used for bounce buffers.  vmap_phys_range()
-> > should work here as well.
->=20
-> Or memremap if it works for 1.
->=20
-> > Case #2 above does unusual mapping.  The ring buffer consists of a ring
-> > buffer header page, followed by one or more pages that are the actual
-> > ring buffer.  The pages making up the actual ring buffer are mapped
-> > twice in succession.  For example, if the ring buffer has 4 pages
-> > (one header page and three ring buffer pages), the contiguous
-> > virtual mapping must cover these seven pages:  0, 1, 2, 3, 1, 2, 3.
-> > The duplicate contiguous mapping allows the code that is reading
-> > or writing the actual ring buffer to not be concerned about wrap-around
-> > because writing off the end of the ring buffer is automatically
-> > wrapped-around by the mapping.  The amount of data read or
-> > written in one batch never exceeds the size of the ring buffer, and
-> > after a batch is read or written, the read or write indices are adjuste=
-d
-> > to put them back into the range of the first mapping of the actual
-> > ring buffer pages.  So there's method to the madness, and the
-> > technique works pretty well.  But this kind of mapping is not
-> > amenable to using vmap_phys_range().
->=20
-> Hmm.  Can you point me to where this is mapped?  Especially for the
-> classic non-isolated case where no vmap/vmalloc mapping is involved
-> at all?
-
-The existing code is in hv_ringbuffer_init() in drivers/hv/ring_buffer.c.
-The code hasn't changed in a while, so any recent upstream code tree
-is valid to look at.  The memory pages are typically allocated
-in vmbus_alloc_ring() in drivers/hv/channel.c.
-
-Michael
 
