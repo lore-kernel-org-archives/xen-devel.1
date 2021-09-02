@@ -7,43 +7,44 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88D24C87FC6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E78CC87FC9
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:30:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 55355619FA
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:21:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 55355619FA
+	by mail.kernel.org (Postfix) with ESMTPS id 6528961A4E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:22:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6528961A4E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177485.322953 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177522.323051 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpSe-0001le-Dr; Thu, 02 Sep 2021 16:21:08 +0000
+	id 1mLpTN-0006EG-Uq; Thu, 02 Sep 2021 16:21:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177485.322953; Thu, 02 Sep 2021 16:21:08 +0000
+Received: by outflank-mailman (output) from mailman id 177522.323051; Thu, 02 Sep 2021 16:21:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpSe-0001lX-9k; Thu, 02 Sep 2021 16:21:08 +0000
-Received: by outflank-mailman (input) for mailman id 177485;
- Thu, 02 Sep 2021 16:21:06 +0000
+	id 1mLpTN-0006Di-QM; Thu, 02 Sep 2021 16:21:53 +0000
+Received: by outflank-mailman (input) for mailman id 177522;
+ Thu, 02 Sep 2021 16:21:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1mLpPf-00029c-Rf
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:18:03 +0000
-Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
+ id 1mLpPQ-00029c-RL
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:17:48 +0000
+Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f94f3479-ee5e-4e24-8010-a4d3fd425a0c;
- Thu, 02 Sep 2021 16:18:01 +0000 (UTC)
-Received: by mail-wr1-x431.google.com with SMTP id q11so3831715wrr.9
- for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:18:01 -0700 (PDT)
+ id 35337728-37d5-4f15-99e8-bf5d5c0bc7c4;
+ Thu, 02 Sep 2021 16:17:42 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ k20-20020a05600c0b5400b002e87ad6956eso1752432wmr.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:17:42 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- c3sm2411819wrd.34.2021.09.02.09.17.58
+ b10sm2396452wrt.43.2021.09.02.09.17.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:17:59 -0700 (PDT)
+ Thu, 02 Sep 2021 09:17:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: f94f3479-ee5e-4e24-8010-a4d3fd425a0c
+X-Inumbo-ID: 35337728-37d5-4f15-99e8-bf5d5c0bc7c4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=MUUy/NWyVU2hg662wvWPJPkcXsVUh4rWx1BGsDTs1tA=;
-        b=kEnHldIRSmSDQxyQdugw1Vx8L7xguo0M9caEjgWu9MaZq6gyOqkCAuD92VRjnuFYVu
-         AFC1pCBYhs9ACTTeUQoUMMput3Qpo+G6rdKTIhD095mZXQogsq0uWanMgwmK05q4B113
-         wHEl+rU0Lu5ECIbKPzs4FN4XtzXbG2tlJtl+zohx+CtLscNoURzNPXzDuLlX3udxNyRV
-         ISqkEHEFnJiqPltUmbvOkyQ8UgtyH8boBBAz3eZMg7gCSDPvog7KSraXXpPQ+P/Y1jP/
-         dnFgk5Q12dkH0yO8X+tMaBzTnLA6tV2u5dL5oZQj7YYuUZIHbs6Fs72PHNz4exx0IHfr
-         tXUA==
+        bh=zZDEgfpsGMQvs/Uf9L14U8iNfhU1RYAtDHEnPo7PYYM=;
+        b=GULtcfLvxCYjpD88B1lNFiQq0+Fx5WhxaqykU8SQ2CHcFSQ46Oe+PaWfXkceFQ4mZo
+         9SVUhNZ9o3T9wPipJYMj4yipSNtMQdK9k6FheUrkcj3bklOdIm+96woKK1z756yLjsg/
+         MhcJnDjB6bDPTEVYbHN4OuhakMfbQHLPwIuQo7fhJI4LnxL+hhUixbbozhsjDk51Ju96
+         gEVW+K7GtzvK1ZSbUGOUZzNQwoBSJHeiBUhu/bkunqvaYTW0krBKCnLFihT41xPY7/te
+         UIojuKoYb6sy0krnR6uivIpg05XXUq83++TFLX9QNOJMrVv7jBEaRQx/6ic9TCOEtLyT
+         HNGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
          :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=MUUy/NWyVU2hg662wvWPJPkcXsVUh4rWx1BGsDTs1tA=;
-        b=LIuKnwEoVAx1nRgbaqjpxz2bR35k1JfN12ITN+9b2bZueszhmsZTZStouMzM0tMHH9
-         47uuqJnF/oMEKIXpdhuMSHZTHydvxYDZruUSHPMxmDpjUDy15GBXZbZOtm8XkNw2YelO
-         1mx+1Jyrwve1GbjPp3YHBi1fEwLHDIA/D/WLaQHuv40X7JgKQbd/hCPxUc2XGxvMUsOb
-         H8cqqaG3GkLzx1bZ7fhwcwz5G/8LF3PTb8Ka9QF+gTx8PDKk+t/PdcTYNvWCSmEyXiuK
-         1bnUd0LpeIRAkEGWkrH0LIBoqRLCrRrAa5v0Nkt+ThuAR6KhM88aSn2GlWVTRij7CvYe
-         B/KA==
-X-Gm-Message-State: AOAM530PjsfqhLXoEMxioICsu5vnCS9gy3YJxrzCqg1ToA+KtwkRDr8G
-	24Qxbs5uIfXpdOfVYip+6/U=
-X-Google-Smtp-Source: ABdhPJwaDZNhw8vo3XF1wL5OY+S/6RqfQvS7pZENs96vrPKDQEeSMVgbBjU4oik0CYAZjXMqLcm/Gg==
-X-Received: by 2002:a5d:6cca:: with SMTP id c10mr4738535wrc.224.1630599480361;
-        Thu, 02 Sep 2021 09:18:00 -0700 (PDT)
+        bh=zZDEgfpsGMQvs/Uf9L14U8iNfhU1RYAtDHEnPo7PYYM=;
+        b=s/ZlfdL2kPbg27cSacwE2l9+XTd6UgsmCFwLHqX5ZQEBOyLQZ/ih5yVl8LVtOJPBgY
+         pHw6FDTkAyjPcQeCQcbneLIoxnPrTBswd8JJCWURFMLaFpQKDMlyE4lH6g9okWwlhge1
+         PK/9qqBIjHm70UUj8XTCI0Tll+XqFWPHLUonS2d2vGfK9Jh9GR0V6OhPtHSnc2kVYGk4
+         ouke6U000KZXsX9cDfD4101o8PlkaBRky+ahJZHOdB53WctZWPGLQIMJHADQtoVqPV0L
+         ZC8iZdviq7Rhk1FxI+1BduhFztCxVXKGcWBeN8Nm7JcxgMieyL4ENl0N0dLivNDXWFjV
+         oS9A==
+X-Gm-Message-State: AOAM532+81vKHQ8Y6U/8zPktKodLsiFSkERZsoIO4SC4OfAr9ikDjtKG
+	oJlLu2QMYb9U2hSSP+Eps1s=
+X-Google-Smtp-Source: ABdhPJyVfC2B9mnkyBEM+dhp2QSoSDx2mJAJ4q0c4MKaFScZUxxMUDRDRaRsAykGgf3YQuNS/WTfdA==
+X-Received: by 2002:a05:600c:3641:: with SMTP id y1mr3991806wmq.181.1630599461974;
+        Thu, 02 Sep 2021 09:17:41 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
@@ -133,9 +134,9 @@ Cc: Bin Meng <bin.meng@windriver.com>,
 	Stafford Horne <shorne@gmail.com>,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	kvm@vger.kernel.org
-Subject: [PATCH v3 21/30] target/ppc: Introduce PowerPCCPUClass::has_work()
-Date: Thu,  2 Sep 2021 18:15:34 +0200
-Message-Id: <20210902161543.417092-22-f4bug@amsat.org>
+Subject: [PATCH v3 18/30] target/nios2: Restrict has_work() handler to sysemu and TCG
+Date: Thu,  2 Sep 2021 18:15:31 +0200
+Message-Id: <20210902161543.417092-19-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
@@ -143,200 +144,46 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Each POWER cpu has its own has_work() implementation. Instead of
-overloading CPUClass on each PowerPCCPUClass init, register the
-generic ppc_cpu_has_work() handler, and have it call the POWER
-specific has_work().
+Restrict has_work() to TCG sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/ppc/cpu-qom.h  |  3 +++
- target/ppc/cpu_init.c | 26 ++++++++++++++++++--------
- 2 files changed, 21 insertions(+), 8 deletions(-)
+ target/nios2/cpu.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
-index 5800fa324e8..ff2bafcde6f 100644
---- a/target/ppc/cpu-qom.h
-+++ b/target/ppc/cpu-qom.h
-@@ -189,6 +189,9 @@ struct PowerPCCPUClass {
-     int bfd_mach;
-     uint32_t l1_dcache_size, l1_icache_size;
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index 947bb09bc1e..f1f976bdad7 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -34,10 +34,12 @@ static void nios2_cpu_set_pc(CPUState *cs, vaddr value)
+     env->regs[R_PC] = value;
+ }
+ 
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+ static bool nios2_cpu_has_work(CPUState *cs)
+ {
+     return cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_NMI);
+ }
++#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+ 
+ static void nios2_cpu_reset(DeviceState *dev)
+ {
+@@ -223,6 +225,7 @@ static const struct TCGCPUOps nios2_tcg_ops = {
+     .tlb_fill = nios2_cpu_tlb_fill,
+ 
  #ifndef CONFIG_USER_ONLY
-+#ifdef CONFIG_TCG
-+    bool (*has_work)(CPUState *cpu);
-+#endif /* CONFIG_TCG */
-     unsigned int gdb_num_sprs;
-     const char *gdb_spr_xml;
- #endif
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index e2e721c2b81..bbad16cc1ec 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7583,6 +7583,7 @@ static bool ppc_pvr_match_power7(PowerPCCPUClass *pcc, uint32_t pvr)
-     return false;
- }
++    .has_work = nios2_cpu_has_work,
+     .cpu_exec_interrupt = nios2_cpu_exec_interrupt,
+     .do_interrupt = nios2_cpu_do_interrupt,
+     .do_unaligned_access = nios2_cpu_do_unaligned_access,
+@@ -241,7 +244,6 @@ static void nios2_cpu_class_init(ObjectClass *oc, void *data)
+     device_class_set_parent_reset(dc, nios2_cpu_reset, &ncc->parent_reset);
  
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- static bool cpu_has_work_POWER7(CPUState *cs)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-@@ -7616,12 +7617,12 @@ static bool cpu_has_work_POWER7(CPUState *cs)
-         return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
- }
-+#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
- 
- POWERPC_FAMILY(POWER7)(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-     PowerPCCPUClass *pcc = POWERPC_CPU_CLASS(oc);
--    CPUClass *cc = CPU_CLASS(oc);
- 
-     dc->fw_name = "PowerPC,POWER7";
-     dc->desc = "POWER7";
-@@ -7630,7 +7631,6 @@ POWERPC_FAMILY(POWER7)(ObjectClass *oc, void *data)
-     pcc->pcr_supported = PCR_COMPAT_2_06 | PCR_COMPAT_2_05;
-     pcc->init_proc = init_proc_POWER7;
-     pcc->check_pow = check_pow_nocheck;
--    cc->has_work = cpu_has_work_POWER7;
-     pcc->insns_flags = PPC_INSNS_BASE | PPC_ISEL | PPC_STRING | PPC_MFTB |
-                        PPC_FLOAT | PPC_FLOAT_FSEL | PPC_FLOAT_FRES |
-                        PPC_FLOAT_FSQRT | PPC_FLOAT_FRSQRTE |
-@@ -7673,6 +7673,7 @@ POWERPC_FAMILY(POWER7)(ObjectClass *oc, void *data)
-     pcc->lpcr_pm = LPCR_P7_PECE0 | LPCR_P7_PECE1 | LPCR_P7_PECE2;
-     pcc->mmu_model = POWERPC_MMU_2_06;
- #if defined(CONFIG_SOFTMMU)
-+    pcc->has_work = cpu_has_work_POWER7;
-     pcc->hash64_opts = &ppc_hash64_opts_POWER7;
-     pcc->lrg_decr_bits = 32;
- #endif
-@@ -7743,6 +7744,7 @@ static bool ppc_pvr_match_power8(PowerPCCPUClass *pcc, uint32_t pvr)
-     return false;
- }
- 
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- static bool cpu_has_work_POWER8(CPUState *cs)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-@@ -7784,12 +7786,12 @@ static bool cpu_has_work_POWER8(CPUState *cs)
-         return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
- }
-+#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
- 
- POWERPC_FAMILY(POWER8)(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-     PowerPCCPUClass *pcc = POWERPC_CPU_CLASS(oc);
--    CPUClass *cc = CPU_CLASS(oc);
- 
-     dc->fw_name = "PowerPC,POWER8";
-     dc->desc = "POWER8";
-@@ -7798,7 +7800,6 @@ POWERPC_FAMILY(POWER8)(ObjectClass *oc, void *data)
-     pcc->pcr_supported = PCR_COMPAT_2_07 | PCR_COMPAT_2_06 | PCR_COMPAT_2_05;
-     pcc->init_proc = init_proc_POWER8;
-     pcc->check_pow = check_pow_nocheck;
--    cc->has_work = cpu_has_work_POWER8;
-     pcc->insns_flags = PPC_INSNS_BASE | PPC_ISEL | PPC_STRING | PPC_MFTB |
-                        PPC_FLOAT | PPC_FLOAT_FSEL | PPC_FLOAT_FRES |
-                        PPC_FLOAT_FSQRT | PPC_FLOAT_FRSQRTE |
-@@ -7848,6 +7849,7 @@ POWERPC_FAMILY(POWER8)(ObjectClass *oc, void *data)
-                    LPCR_P8_PECE3 | LPCR_P8_PECE4;
-     pcc->mmu_model = POWERPC_MMU_2_07;
- #if defined(CONFIG_SOFTMMU)
-+    pcc->has_work = cpu_has_work_POWER8;
-     pcc->hash64_opts = &ppc_hash64_opts_POWER7;
-     pcc->lrg_decr_bits = 32;
-     pcc->n_host_threads = 8;
-@@ -7941,6 +7943,7 @@ static bool ppc_pvr_match_power9(PowerPCCPUClass *pcc, uint32_t pvr)
-     return false;
- }
- 
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- static bool cpu_has_work_POWER9(CPUState *cs)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-@@ -7998,12 +8001,12 @@ static bool cpu_has_work_POWER9(CPUState *cs)
-         return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
- }
-+#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
- 
- POWERPC_FAMILY(POWER9)(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-     PowerPCCPUClass *pcc = POWERPC_CPU_CLASS(oc);
--    CPUClass *cc = CPU_CLASS(oc);
- 
-     dc->fw_name = "PowerPC,POWER9";
-     dc->desc = "POWER9";
-@@ -8013,7 +8016,6 @@ POWERPC_FAMILY(POWER9)(ObjectClass *oc, void *data)
-                          PCR_COMPAT_2_05;
-     pcc->init_proc = init_proc_POWER9;
-     pcc->check_pow = check_pow_nocheck;
--    cc->has_work = cpu_has_work_POWER9;
-     pcc->insns_flags = PPC_INSNS_BASE | PPC_ISEL | PPC_STRING | PPC_MFTB |
-                        PPC_FLOAT | PPC_FLOAT_FSEL | PPC_FLOAT_FRES |
-                        PPC_FLOAT_FSQRT | PPC_FLOAT_FRSQRTE |
-@@ -8062,6 +8064,7 @@ POWERPC_FAMILY(POWER9)(ObjectClass *oc, void *data)
-     pcc->lpcr_pm = LPCR_PDEE | LPCR_HDEE | LPCR_EEE | LPCR_DEE | LPCR_OEE;
-     pcc->mmu_model = POWERPC_MMU_3_00;
- #if defined(CONFIG_SOFTMMU)
-+    pcc->has_work = cpu_has_work_POWER9;
-     /* segment page size remain the same */
-     pcc->hash64_opts = &ppc_hash64_opts_POWER7;
-     pcc->radix_page_info = &POWER9_radix_page_info;
-@@ -8150,6 +8153,7 @@ static bool ppc_pvr_match_power10(PowerPCCPUClass *pcc, uint32_t pvr)
-     return false;
- }
- 
-+#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- static bool cpu_has_work_POWER10(CPUState *cs)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-@@ -8207,12 +8211,12 @@ static bool cpu_has_work_POWER10(CPUState *cs)
-         return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
- }
-+#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
- 
- POWERPC_FAMILY(POWER10)(ObjectClass *oc, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(oc);
-     PowerPCCPUClass *pcc = POWERPC_CPU_CLASS(oc);
--    CPUClass *cc = CPU_CLASS(oc);
- 
-     dc->fw_name = "PowerPC,POWER10";
-     dc->desc = "POWER10";
-@@ -8223,7 +8227,6 @@ POWERPC_FAMILY(POWER10)(ObjectClass *oc, void *data)
-                          PCR_COMPAT_2_06 | PCR_COMPAT_2_05;
-     pcc->init_proc = init_proc_POWER10;
-     pcc->check_pow = check_pow_nocheck;
--    cc->has_work = cpu_has_work_POWER10;
-     pcc->insns_flags = PPC_INSNS_BASE | PPC_ISEL | PPC_STRING | PPC_MFTB |
-                        PPC_FLOAT | PPC_FLOAT_FSEL | PPC_FLOAT_FRES |
-                        PPC_FLOAT_FSQRT | PPC_FLOAT_FRSQRTE |
-@@ -8275,6 +8278,7 @@ POWERPC_FAMILY(POWER10)(ObjectClass *oc, void *data)
-     pcc->lpcr_pm = LPCR_PDEE | LPCR_HDEE | LPCR_EEE | LPCR_DEE | LPCR_OEE;
-     pcc->mmu_model = POWERPC_MMU_3_00;
- #if defined(CONFIG_SOFTMMU)
-+    pcc->has_work = cpu_has_work_POWER10;
-     /* segment page size remain the same */
-     pcc->hash64_opts = &ppc_hash64_opts_POWER7;
-     pcc->radix_page_info = &POWER10_radix_page_info;
-@@ -8796,6 +8800,12 @@ static bool ppc_cpu_has_work(CPUState *cs)
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
- 
-+    if (cs->halted) {
-+        PowerPCCPUClass *pcc = POWERPC_CPU_GET_CLASS(cpu);
-+
-+        return pcc->has_work(cs);
-+    }
-+
-     return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
- }
- #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+     cc->class_by_name = nios2_cpu_class_by_name;
+-    cc->has_work = nios2_cpu_has_work;
+     cc->dump_state = nios2_cpu_dump_state;
+     cc->set_pc = nios2_cpu_set_pc;
+     cc->disas_set_info = nios2_cpu_disas_set_info;
 -- 
 2.31.1
 
