@@ -2,47 +2,47 @@ Return-Path: <SRS0=MtyD=NY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18D1EC676A8
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C4DAC83028
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:58:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D17A061026
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:41:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D17A061026
+	by mail.kernel.org (Postfix) with ESMTPS id 00DB861051
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:58:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 00DB861051
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177572.323085 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177579.323095 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpll-00039F-Hx; Thu, 02 Sep 2021 16:40:53 +0000
+	id 1mLq2J-0005CL-Vx; Thu, 02 Sep 2021 16:57:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177572.323085; Thu, 02 Sep 2021 16:40:53 +0000
+Received: by outflank-mailman (output) from mailman id 177579.323095; Thu, 02 Sep 2021 16:57:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpll-000398-Dt; Thu, 02 Sep 2021 16:40:53 +0000
-Received: by outflank-mailman (input) for mailman id 177572;
- Thu, 02 Sep 2021 16:40:52 +0000
+	id 1mLq2J-0005CE-T3; Thu, 02 Sep 2021 16:57:59 +0000
+Received: by outflank-mailman (input) for mailman id 177579;
+ Thu, 02 Sep 2021 16:57:58 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mLplk-000392-M4
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:40:52 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mLq2I-0005C6-Me
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:57:58 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mLplk-0000fj-LF
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:40:52 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mLq2I-00015Y-Ku
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:57:58 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mLplk-00019p-KT
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:40:52 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mLq2I-00076K-Jq
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:57:58 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1mLplf-0003Tl-VM; Thu, 02 Sep 2021 17:40:47 +0100
+ id 1mLq27-0003Vy-UT; Thu, 02 Sep 2021 17:57:47 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,55 +57,83 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=GYDi4db046fx5JmmXElXDDtxBBBEsA4Th0cEYvzm6zg=; b=2LvnozFAb3yNbpSa4d5bY76QSt
-	aKwgZG8n3+bo1Pb0Pusn2VsSSFiPRSTHekGmznA6JKDKyd9z9KlRCFdmoAZh6yc+YghF9/0kc61tc
-	uF+RjQOXzouELYRA9waRq5MPmpqFVYl3tnyU8W7y6jh38UREyGtev43sF0Steb7HyYpw=;
+	bh=VQ/pDRqduhH2wpfMLbgaHgM/4ZpTVM/+CEGro1GEMXk=; b=IB5fOPYC0qJdZkqXx8UfY1j0yU
+	aXGHWedIpnm+dgMlrCkTqpOa1R4Wwi1mg0l1ZsB4HNXKdie85Zommd03YJgtweWsONI+XQiucADZI
+	ZCK+KiF9lwpCFCNYee6QGBtJpBZREeY3/8AjuqAxQRZBQxQfggK4sLIfLojIZRQr0054=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24880.65167.715236.551394@mariner.uk.xensource.com>
-Date: Thu, 2 Sep 2021 17:40:47 +0100
-To: Juergen Gross <jgross@suse.com>
-Cc: Jan Beulich <jbeulich@suse.com>,
-    "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-    Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] tools: ROUNDUP() related adjustments
-In-Reply-To: <c1b59a02-cce2-b18d-6c2a-4e7057b0a0ed@suse.com>
-References: <c5d84f5a-0350-f197-b98a-07512ac0dd91@suse.com>
-	<c1b59a02-cce2-b18d-6c2a-4e7057b0a0ed@suse.com>
+Message-ID: <24881.651.565806.53730@mariner.uk.xensource.com>
+Date: Thu, 2 Sep 2021 17:57:47 +0100
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    Wei Liu <wl@xen.org>,
+    Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
+    George Dunlap <george.dunlap@citrix.com>,
+    "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v2 03/13] libxenguest: deal with log-dirty op stats
+ overflow
+In-Reply-To: <6d8b3104-f7e6-494c-30e1-1c06419fbfb0@suse.com>
+References: <0bebfe8c-6897-dc8b-7fe0-9127d4996eb8@suse.com>
+	<668ef720-389f-4cf1-608e-64aca4f7c73d@suse.com>
+	<f69e5a2b-cd8c-3534-ab7b-427fb1fc1cdc@suse.com>
+	<f0e9c8ad-dfa2-77ac-b3db-02cba59e843c@suse.com>
+	<347edc1f-a104-1bc3-0cb2-2cfffcb6214a@suse.com>
+	<a9fbd7c1-1675-50ae-6106-8a8625643930@suse.com>
+	<6d8b3104-f7e6-494c-30e1-1c06419fbfb0@suse.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Juergen Gross writes ("Re: [PATCH] tools: ROUNDUP() related adjustments"):
-> On 10.08.21 12:03, Jan Beulich wrote:
-> > For one xc_private.h needlessly repeats xen-tools/libs.h's definition.
-> > 
-> > And then there are two suspicious uses (resulting from the inconsistency
-> > with the respective 2nd parameter of DIV_ROUNDUP()): While the one in
-> > tools/console/daemon/io.c - as per the code comment - intentionally uses
-> > 8 as the second argument (meaning to align to a multiple of 256), the
-> > one in alloc_magic_pages_hvm() pretty certainly does not: There the goal
-> > is to align to a uint64_t boundary, for the following module struct to
-> > end up aligned.
+Jan Beulich writes ("Re: [PATCH v2 03/13] libxenguest: deal with log-dirty op stats overflow"):
+> And - just to make it very explicit - even if I went this route to
+> address a controversial point, I'd still like to understand the
+> reason for the original objection - if only for my own education.
 
-This is really quite unpleasnt, to my mind.  ROUNDUP taking a bit
-length is bad enough, but the magic knowledge about alignment is
-really poor too.  It may not be right on all future architectures,
-although I think your changae is correct on all the ones we support
-(or which people are working on).
+I agree with this position.
 
-So IOW I think your change is correct and warranted, but I really
-dislike the code here.
+I have reread the discussions with this patch title in the Subject
+line.  I am still unclear on the precise nature of Andrew's objection.
 
-Therefore:
+All I could find was this from Andrew:
 
-Acked-by: Ian Jackson <iwj@xenproject.org>
+  >      ctx->save.stats = (struct precopy_stats){
+  > -        .dirty_count = ctx->save.p2m_size,
+  > +        .dirty_count = -1,
 
-> > Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Reviewed-by: Juergen Gross <jgross@suse.com>
+  This is an external interface, and I'm not sure it will tolerate finding
+  more than p2m_size allegedly dirty.
 
-Thanks for the review!
+and then the later comment by Andrew:
+
+  I've already explained why [various things]
+
+Unfortunately that message did not contain any links to these previous
+explanations.  Andrew, where were they ?  If we are not to go round
+in circles, we need to write these things down and then refer to them
+when relevant.
+
+We had a conversation on irc today.  I found today's IRC conversation
+rather unsatisfactory.  I gleaned from Andrew's comments that this he
+was saying this callback is used by something in Citrix's product to
+do with nVidia migration.  Obviously we do not wish to break a
+downstream.  But this interface is badly documented and clear
+explanations are lacking.
+
+While I recognise Andrew's expertise in this area, I think that as
+tools maintainer I need to go with the information I have.
+The overflow issue is real and Jan has proposed a fix.
+
+Andrew: do you have time to engage with Jan here on these API
+questions ?  If not, does anyone else have enough familiarity with
+Citrix's use of this API to engage in a proper discussion about how
+the overflow problem can be addressed ?
+
+If effort is not available for this, that is of course fine.  But as
+an Open Source project we need to be able to move forwsrd with the
+available input and contributions.  So if no-one is able to explain
+how this rather poor API is to be used, and help develop a solution to
+the overflow problem, I should probably ack Jan's patch here.
 
 Ian.
 
