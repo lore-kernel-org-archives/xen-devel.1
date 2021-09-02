@@ -7,62 +7,61 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C76AC43214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DEFDC19F3A
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B13CF60C3E
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B13CF60C3E
+	by mail.kernel.org (Postfix) with ESMTPS id 43AB560C3E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 43AB560C3E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=xilinx.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.176913.322087 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.176917.322095 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLgYr-0004t7-0L; Thu, 02 Sep 2021 06:50:57 +0000
+	id 1mLgYr-00051E-Bb; Thu, 02 Sep 2021 06:50:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 176913.322087; Thu, 02 Sep 2021 06:50:56 +0000
+Received: by outflank-mailman (output) from mailman id 176917.322095; Thu, 02 Sep 2021 06:50:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLgYq-0004qA-Mm; Thu, 02 Sep 2021 06:50:56 +0000
-Received: by outflank-mailman (input) for mailman id 176913;
- Thu, 02 Sep 2021 06:07:05 +0000
+	id 1mLgYr-0004z1-2e; Thu, 02 Sep 2021 06:50:57 +0000
+Received: by outflank-mailman (input) for mailman id 176917;
+ Thu, 02 Sep 2021 06:07:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=393g=NY=xilinx.com=fnuv@srs-us1.protection.inumbo.net>)
- id 1mLfsP-0004aK-62
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 06:07:05 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (unknown
- [2a01:111:f400:7ea9::620])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8dbdcee9-9b09-417a-9938-75d68b68fcde;
- Thu, 02 Sep 2021 06:07:04 +0000 (UTC)
-Received: from SN6PR08CA0015.namprd08.prod.outlook.com (2603:10b6:805:66::28)
- by DM6PR02MB5963.namprd02.prod.outlook.com (2603:10b6:5:150::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.17; Thu, 2 Sep
- 2021 06:07:01 +0000
-Received: from SN1NAM02FT0033.eop-nam02.prod.protection.outlook.com
- (2603:10b6:805:66:cafe::27) by SN6PR08CA0015.outlook.office365.com
- (2603:10b6:805:66::28) with Microsoft SMTP Server (version=TLS1_2,
+ id 1mLfsU-0004aK-4w
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 06:07:10 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (unknown
+ [40.107.223.42]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6b740e9e-d45e-48aa-a9e2-50634644e3d4;
+ Thu, 02 Sep 2021 06:07:07 +0000 (UTC)
+Received: from DM3PR12CA0077.namprd12.prod.outlook.com (2603:10b6:0:57::21) by
+ SN1PR02MB3678.namprd02.prod.outlook.com (2603:10b6:802:24::15) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4478.17; Thu, 2 Sep 2021 06:07:05 +0000
+Received: from DM3NAM02FT042.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:0:57:cafe::6f) by DM3PR12CA0077.outlook.office365.com
+ (2603:10b6:0:57::21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.19 via Frontend
- Transport; Thu, 2 Sep 2021 06:07:01 +0000
-Received: from xsj-pvapexch02.xlnx.xilinx.com (149.199.62.198) by
- SN1NAM02FT0033.mail.protection.outlook.com (10.97.5.40) with Microsoft SMTP
+ Transport; Thu, 2 Sep 2021 06:07:05 +0000
+Received: from xsj-pvapexch01.xlnx.xilinx.com (149.199.62.198) by
+ DM3NAM02FT042.mail.protection.outlook.com (10.13.4.213) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4478.19 via Frontend Transport; Thu, 2 Sep 2021 06:07:00 +0000
+ 15.20.4478.19 via Frontend Transport; Thu, 2 Sep 2021 06:07:04 +0000
 Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
- xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server
+ xsj-pvapexch01.xlnx.xilinx.com (172.19.86.40) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Wed, 1 Sep 2021 23:06:53 -0700
+ 15.1.2176.14; Wed, 1 Sep 2021 23:07:03 -0700
 Received: from smtp.xilinx.com (172.19.127.96) by
  xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Wed, 1 Sep 2021 23:06:53 -0700
+ 15.1.2176.14 via Frontend Transport; Wed, 1 Sep 2021 23:07:03 -0700
 Received: from [172.19.2.115] (port=56596 helo=xsjfnuv50.xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <fnu.vikram@xilinx.com>)
- id 1mLfsD-000F6q-LT; Wed, 01 Sep 2021 23:06:53 -0700
+ id 1mLfsN-000F6q-2G; Wed, 01 Sep 2021 23:07:03 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,13 +73,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8dbdcee9-9b09-417a-9938-75d68b68fcde
+X-Inumbo-ID: 6b740e9e-d45e-48aa-a9e2-50634644e3d4
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kjYN5gRN41ONS/9py890LcpPZatY8XZoRIXzL4G1r2Fv+MDCZ6TA1BJpViPe9TMa95LQq249H/uWXqzYGBca1ndVn8vRQslgXx68qicKNWOFYiB9gclZjFvJu+2s+eOkpDIKc8cZfRjaiz3KGHNZmHag77JSio/RziVaNqnUrxpVUgCiGVdbvjBvFdT9iIyDPEhdfCzZtmWNj8otE0U/t3MEHxHLHjuyGo/lLTvAFZ6vTDAOp1+nfWbzCUUeo7jzEgqAX0C15cEec9fEUtmmJobhXxkDaJVI+U7jqv7tIgC99xpi+fW5dBEZtVZkT/jIJRSbw+HqxBuXCvxU6QbglA==
+ b=Rl4T92K7Fut2IIfUEKMpAEcvU69Hlgw4vqQXXLOgTc3QCZhwAtKznHM+TT77SjKpL+8iKTZV2if0Bq/ogNoqrBwsnX7T+oOrGxG1rbCro0PrhpjawwTpzdeBpYxyF8pFoSA8bhG6RNxLmNgcHcJqhwUOHtpXYTE5d7BEcp/IB/yk86gbUorlTmdYZOlojDET28UlZT690kpdDD3VfYUij/LnPcb8jzDYxm0DRKGaLQ+7rAt4fbjbDLdxSer+q2udMdkxk2XMxpKZ3MBC96zMq02TYTMLr+lB8uCgdSpxM/OMIzc6Gr/KGn2/sYQdAt/r7Cx334uckbIt9vi7ng5kpg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=ZeeTflOXr2fLy1zXz1tSECVgWqlU5geTYJsntNlox3s=;
- b=OF+IgvEhO5Y5P+PZkSDmLjnOguHEuvAr7js1bLekz+GPSoYqZS4ZvstfYo+XHHrB2pSiX9z9pgRmuw3UBl8w9n5tZ9rINAG1Md+0QpyQBh64B+rdbFxcmD3j1Ata26vC9AOzbNI7XeBEGcQeliqMrX6qYB/FCgzv3luuvIbfLy4kfnC1jAUcwtw/H5w9jcnbeIllWoQDN0PPiHWt+afr/AWdfz5el+im+AEc0ZraXq9vafa6zLhGWOmysMMFRFHsZkvMl6XMZqFqJiAMFp7bfpLAJwLSZ/1+qIMJCNZnEPQEJNJVGZ/KSfkfO9g7Y1gMWyXNYu+Z6DKy74qMI0QoQA==
+ bh=98AtMQVzaAHOwKKFvylID8GyFmwvLo9S59QnYCd+rzM=;
+ b=G5j+giD11VwxA/+WjkeuVgz1IKhyT5QrsNZcBBg+HfzHOPGvK/TD4n7zzgbwieSfiw4kuHNN9SSUShmjvL3fFvF/XTkyFEh77acor6VGTtm+4yrkk9YtndmWIsmziVD+9N0h2HJBuY+blFa+BaC+pRWxKsXIqLopX95qgKk18I30pa0cVtKvhdm9TJRtFqr0KO3pWnGFshhN+8GaNrCrygYYZ3vzjyJVHUu/+i3ToFA5NZCr2QPw75PVVdPZpmBrGCZbFdh3Cxr6vb7zaM4pFOlh67bWMwgl9hjzGVGvELRG7XKcoh2R3/F0r7t6A26MW0VFDRWh6yIborcIqxESXQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -88,22 +87,22 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZeeTflOXr2fLy1zXz1tSECVgWqlU5geTYJsntNlox3s=;
- b=eo4dZRj8Dg/W/uPTz4yYReeQwF2MlpnkcUwpSlWoSbdvtIdY2FQoM9GT3vHowOSGar5hcJNf8m1nxWchrO/Ih7Pf1LJr5rlO6WyVJEwxpox5N5MDDGe5B54r9T7YSKdrE3dHCwNwZS3CbXh0REORFjjw7Uy2jflkVIeDcko72PU=
+ bh=98AtMQVzaAHOwKKFvylID8GyFmwvLo9S59QnYCd+rzM=;
+ b=fEWmNfRVw1Iw8SEg1ZJOVObVMv/9iTTh6owNYcdnonI8ZYPCJGVNVTb8SUJJmGVD8VH+egahPgwdubShCsrwZwyHUKeYy87EnMpegIxRJW4PJxce9p3oQh06ta2cXK5iJUM+w4SRa5AFroCrtqfEIv2zBOn67BqTh1F8aoAkQkE=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
  smtp.mailfrom=xilinx.com; lists.xenproject.org; dkim=none (message not
  signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
  header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
  149.199.62.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.62.198; helo=xsj-pvapexch02.xlnx.xilinx.com;
+ client-ip=149.199.62.198; helo=xsj-pvapexch01.xlnx.xilinx.com;
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <julien@xen.org>, Vikram Garhwal
 	<fnu.vikram@xilinx.com>
-Subject: [XEN][RFC PATCH 02/13] libfdt: Keep fdt functions after init.
-Date: Wed, 1 Sep 2021 23:05:52 -0700
-Message-ID: <1630562763-390068-3-git-send-email-fnu.vikram@xilinx.com>
+Subject: [XEN][RFC PATCH 05/13] libfdt: Change overlay_get_target() type
+Date: Wed, 1 Sep 2021 23:05:55 -0700
+Message-ID: <1630562763-390068-6-git-send-email-fnu.vikram@xilinx.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
 References: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
@@ -111,52 +110,63 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2b4bb6bb-5988-4c66-fc7d-08d96dd7e0bc
-X-MS-TrafficTypeDiagnostic: DM6PR02MB5963:
+X-MS-Office365-Filtering-Correlation-Id: 0f9a09cc-64e5-4749-23cf-08d96dd7e370
+X-MS-TrafficTypeDiagnostic: SN1PR02MB3678:
 X-Microsoft-Antispam-PRVS:
-	<DM6PR02MB59637A67F32DDF00E76BD589BCCE9@DM6PR02MB5963.namprd02.prod.outlook.com>
+	<SN1PR02MB3678E7AD48A1587026BC4B29BCCE9@SN1PR02MB3678.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:162;
+X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	BMAij+jdIAVuLQQq++CAx7Fjpjid4kCxlOJKB2jkx8H22EVbZIYETpXZY/UCpQf/T2eT7XXOTWRRjj8OF2mjIeVhcDSjAXf2TXVcDU2nWjOBSl4tDRrZQfm6q7mAIxfBzj4zFCy4zmpKJfisMkJPsQPL4MIAs8c04MIszjuOfyeCALzoSLlpUy5gGw88m6lLR0wgiuFFNGj42Cpfe8kB98CAheKbvbTFYNIrTE84nFqeftyoDOzR02CYdRR+ddYaf5EfOoOMRHrsgOSSBoORg2sF67apzaLYJ1tpCb/Z8xO3Bnomk3rNqcVkcqCvV78T0bKwskjGuJutelYrTPIdUohIe1FdNCeGsKrHwCeEDTM9fveL5mYqHR+eur7B0iqImCEreEFDz/uS9/x74uzGUeAZ3dgTnCNq0XPc5WiBEYXSQeIIBNFxZxuD9uy/yvp+bLCeVvjsTcZUvWRq9BO4CTj2yISC+0KAdAa5Xun7PlWMHnbRje3B2iLunyjgLwI+4CuVXa4lSAArDotueBp0wsy4sUia65pDcBvPZkeqQP1jA5ymA5daNrjsvW7Npq61RMRGUWVeDyX5hjatss6JDfroF2Kp4jXwhlI3xmMB0FJxCwulIZWvQo/dx8oEssY92/wNy1h8FraBUd7oO9qDIRGsoxCrhJ6x84O5jAlATBkOmsXWEOqwihkB1J+aJLRSAdVZISWikNhQ5mj+tO7dhxHgvVbObyCnivnsMsMeIYo=
+	Ckx58VpUs6M3WyHg9+f3TqPbipbP2X8Vt1GQIVqSNAERsgzKnshwp3cxb9Nns37n+s5ns0VbNIB544kPvP5jy0tLHvh7SMNMggeLtvftBKBZBqEEL5SJ1yi/CKgXDuQjuzekuB5+fr+LKGPVnlNhcBmRU+bl7V69dfXqFUkzjXp6ic0Znws3VNTV3NYqcXatPYo4s472WDu/hQXjofqak6d22e/tgeFGX4el0eIRH9Z8+pADwfxVXpkrXQpCQfWN47nPcFQrIKTN+ItqgIHv7VSpvr7cNvns4K7tPEXVAVZbIlvLO+6QEv+4qsSZdQ0IWrW53dOZuxPBTNGOulf/EoITBmfrO7n7nC42oqCU8HCFwCiqEjI8r25ATcrhSvAG69J6Ro9sOfLlueIHT+8BoFWHaHR4yjbC+F+8DzwQefiGtc1bhE9a9X0ysfRYHDxzY2qNzyUyf+PBvut6oMDmfQZndm5O5UaijpHnCzB0lXwW0fMJpUCQzedaNBHmHypWBwhYibwKLQbVbfdYS93wbc+iNOfWJeTmX8533vx+SRAz1bLSlbLCMiQmYjyZCAydXqcrK+ckVgopGap6iDzd7kwuBW3Mlu8RWa1cnsXeYmBXsiJKDdl+/gdKBYoqT9cHy3NYUUAUBsZfSJgcTCFg5JCtdgKL2f1PBl6vrsJmSnrvH9/Yrhwjxke23jXA6uUY/evD5iFC2yvEpoT/aHEF4c1sSn7IAYVKKzyvtNZsb0A=
 X-Forefront-Antispam-Report:
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(346002)(396003)(39860400002)(376002)(136003)(46966006)(36840700001)(4326008)(356005)(70586007)(336012)(107886003)(426003)(478600001)(82310400003)(70206006)(36860700001)(6916009)(2616005)(47076005)(186003)(7636003)(26005)(83380400001)(82740400003)(5660300002)(9786002)(54906003)(7696005)(8936002)(36756003)(2906002)(8676002)(36906005)(316002)(4744005)(102446001);DIR:OUT;SFP:1101;
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(376002)(396003)(346002)(136003)(39860400002)(46966006)(36840700001)(82310400003)(47076005)(36756003)(70586007)(2616005)(336012)(6666004)(426003)(186003)(26005)(478600001)(2906002)(83380400001)(8936002)(316002)(70206006)(9786002)(8676002)(7696005)(5660300002)(36906005)(82740400003)(7636003)(356005)(54906003)(36860700001)(4326008)(107886003)(6916009)(102446001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 06:07:00.4714
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 06:07:04.9759
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b4bb6bb-5988-4c66-fc7d-08d96dd7e0bc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f9a09cc-64e5-4749-23cf-08d96dd7e370
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch02.xlnx.xilinx.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch01.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1NAM02FT0033.eop-nam02.prod.protection.outlook.com
+	DM3NAM02FT042.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR02MB5963
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN1PR02MB3678
 
-Keep libfdt library functionalities after boot of hw_domain. This is done to
-access fdt library function which are required for adding device tree overlay
-nodes for dynamic programming of nodes.
+Remove static function type from overlay_get_target().
 
 Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
 ---
- xen/common/libfdt/Makefile | 1 -
- 1 file changed, 1 deletion(-)
+ xen/common/libfdt/fdt_overlay.c | 2 +-
+ xen/include/xen/libfdt/libfdt.h | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/libfdt/Makefile b/xen/common/libfdt/Makefile
-index 6bd207c..8002f8c 100644
---- a/xen/common/libfdt/Makefile
-+++ b/xen/common/libfdt/Makefile
-@@ -1,7 +1,6 @@
- include Makefile.libfdt
+diff --git a/xen/common/libfdt/fdt_overlay.c b/xen/common/libfdt/fdt_overlay.c
+index 15a8cdb..1ffb669 100644
+--- a/xen/common/libfdt/fdt_overlay.c
++++ b/xen/common/libfdt/fdt_overlay.c
+@@ -56,7 +56,7 @@ static uint32_t overlay_get_target_phandle(const void *fdto, int fragment)
+  *      the targeted node offset in the base device tree
+  *      Negative error code on error
+  */
+-static int overlay_get_target(const void *fdt, const void *fdto,
++int overlay_get_target(const void *fdt, const void *fdto,
+ 			      int fragment, char const **pathp)
+ {
+ 	uint32_t phandle;
+diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
+index b6c8b67..e1cc6f2 100644
+--- a/xen/include/xen/libfdt/libfdt.h
++++ b/xen/include/xen/libfdt/libfdt.h
+@@ -1737,4 +1737,6 @@ int fdt_overlay_apply(void *fdt, void *fdto);
  
- SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
--OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
+ const char *fdt_strerror(int errval);
  
- obj-y += libfdt.o
- nocov-y += libfdt.o
++int overlay_get_target(const void *fdt, const void *fdto, int fragment,
++                       char const **pathp);
+ #endif /* _LIBFDT_H */
 -- 
 2.7.4
 
