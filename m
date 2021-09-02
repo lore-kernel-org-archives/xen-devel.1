@@ -2,66 +2,66 @@ Return-Path: <SRS0=MtyD=NY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DEFDC19F3A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FB2CC19F35
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 43AB560C3E
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 43AB560C3E
+	by mail.kernel.org (Postfix) with ESMTPS id 023AC61008
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 06:51:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 023AC61008
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=xilinx.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.176917.322095 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.176908.322068 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLgYr-00051E-Bb; Thu, 02 Sep 2021 06:50:57 +0000
+	id 1mLgYp-0004dP-Tp; Thu, 02 Sep 2021 06:50:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 176917.322095; Thu, 02 Sep 2021 06:50:57 +0000
+Received: by outflank-mailman (output) from mailman id 176908.322068; Thu, 02 Sep 2021 06:50:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLgYr-0004z1-2e; Thu, 02 Sep 2021 06:50:57 +0000
-Received: by outflank-mailman (input) for mailman id 176917;
- Thu, 02 Sep 2021 06:07:10 +0000
+	id 1mLgYp-0004dI-Qn; Thu, 02 Sep 2021 06:50:55 +0000
+Received: by outflank-mailman (input) for mailman id 176908;
+ Thu, 02 Sep 2021 06:06:29 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=393g=NY=xilinx.com=fnuv@srs-us1.protection.inumbo.net>)
- id 1mLfsU-0004aK-4w
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 06:07:10 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (unknown
- [40.107.223.42]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6b740e9e-d45e-48aa-a9e2-50634644e3d4;
- Thu, 02 Sep 2021 06:07:07 +0000 (UTC)
-Received: from DM3PR12CA0077.namprd12.prod.outlook.com (2603:10b6:0:57::21) by
- SN1PR02MB3678.namprd02.prod.outlook.com (2603:10b6:802:24::15) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4478.17; Thu, 2 Sep 2021 06:07:05 +0000
-Received: from DM3NAM02FT042.eop-nam02.prod.protection.outlook.com
- (2603:10b6:0:57:cafe::6f) by DM3PR12CA0077.outlook.office365.com
- (2603:10b6:0:57::21) with Microsoft SMTP Server (version=TLS1_2,
+ id 1mLfro-0004YX-UW
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 06:06:29 +0000
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com (unknown
+ [40.107.95.82]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 30620bd6-43c4-461f-960f-858df19fd544;
+ Thu, 02 Sep 2021 06:06:27 +0000 (UTC)
+Received: from SN1PR12CA0061.namprd12.prod.outlook.com (2603:10b6:802:20::32)
+ by MWHPR02MB2302.namprd02.prod.outlook.com (2603:10b6:300:5b::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.17; Thu, 2 Sep
+ 2021 06:06:25 +0000
+Received: from SN1NAM02FT0022.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:802:20:cafe::27) by SN1PR12CA0061.outlook.office365.com
+ (2603:10b6:802:20::32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.19 via Frontend
- Transport; Thu, 2 Sep 2021 06:07:05 +0000
-Received: from xsj-pvapexch01.xlnx.xilinx.com (149.199.62.198) by
- DM3NAM02FT042.mail.protection.outlook.com (10.13.4.213) with Microsoft SMTP
+ Transport; Thu, 2 Sep 2021 06:06:25 +0000
+Received: from xsj-pvapexch02.xlnx.xilinx.com (149.199.62.198) by
+ SN1NAM02FT0022.mail.protection.outlook.com (10.97.5.0) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4478.19 via Frontend Transport; Thu, 2 Sep 2021 06:07:04 +0000
+ 15.20.4478.19 via Frontend Transport; Thu, 2 Sep 2021 06:06:25 +0000
 Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
- xsj-pvapexch01.xlnx.xilinx.com (172.19.86.40) with Microsoft SMTP Server
+ xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Wed, 1 Sep 2021 23:07:03 -0700
+ 15.1.2176.14; Wed, 1 Sep 2021 23:06:24 -0700
 Received: from smtp.xilinx.com (172.19.127.96) by
  xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Wed, 1 Sep 2021 23:07:03 -0700
+ 15.1.2176.14 via Frontend Transport; Wed, 1 Sep 2021 23:06:24 -0700
 Received: from [172.19.2.115] (port=56596 helo=xsjfnuv50.xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <fnu.vikram@xilinx.com>)
- id 1mLfsN-000F6q-2G; Wed, 01 Sep 2021 23:07:03 -0700
+ id 1mLfrk-000F6q-6e; Wed, 01 Sep 2021 23:06:24 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,13 +73,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b740e9e-d45e-48aa-a9e2-50634644e3d4
+X-Inumbo-ID: 30620bd6-43c4-461f-960f-858df19fd544
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Rl4T92K7Fut2IIfUEKMpAEcvU69Hlgw4vqQXXLOgTc3QCZhwAtKznHM+TT77SjKpL+8iKTZV2if0Bq/ogNoqrBwsnX7T+oOrGxG1rbCro0PrhpjawwTpzdeBpYxyF8pFoSA8bhG6RNxLmNgcHcJqhwUOHtpXYTE5d7BEcp/IB/yk86gbUorlTmdYZOlojDET28UlZT690kpdDD3VfYUij/LnPcb8jzDYxm0DRKGaLQ+7rAt4fbjbDLdxSer+q2udMdkxk2XMxpKZ3MBC96zMq02TYTMLr+lB8uCgdSpxM/OMIzc6Gr/KGn2/sYQdAt/r7Cx334uckbIt9vi7ng5kpg==
+ b=WdCUJjGX/U02no8M7aGRhNE8QGABZTwSibiGs5cryOzgLs/kXrwATPn3lxBnVgWbHy4YnkhNmJ9vi/Gw3iu1IsoRYZsyeYb88ks0uKzBAt1lo4InLlE3PJeyS2EoVae1ANmls8Zw0c8vlLwW21sCyoAjk5QpKoPbJ7NpssUqWSeT+BNHCIYOnkutkulJmrGnlcLle5auY29SvpQryqRjEYhbwOgARKEKhcE8xG9NVZ/sjY+TvlgqaOLmPjK305sXho5T3N9JJ1SCKGn+biqwgrlph9Gad4tiTM+0yi7X8whS1V2tRbZXfBEod8YrgMbjlzP1QN3WXH1wHDXh5RrymQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=98AtMQVzaAHOwKKFvylID8GyFmwvLo9S59QnYCd+rzM=;
- b=G5j+giD11VwxA/+WjkeuVgz1IKhyT5QrsNZcBBg+HfzHOPGvK/TD4n7zzgbwieSfiw4kuHNN9SSUShmjvL3fFvF/XTkyFEh77acor6VGTtm+4yrkk9YtndmWIsmziVD+9N0h2HJBuY+blFa+BaC+pRWxKsXIqLopX95qgKk18I30pa0cVtKvhdm9TJRtFqr0KO3pWnGFshhN+8GaNrCrygYYZ3vzjyJVHUu/+i3ToFA5NZCr2QPw75PVVdPZpmBrGCZbFdh3Cxr6vb7zaM4pFOlh67bWMwgl9hjzGVGvELRG7XKcoh2R3/F0r7t6A26MW0VFDRWh6yIborcIqxESXQ==
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ubn0KOlNn2bGNNG4KibjKy56O3QZHfvA/XdfMZxo38c=;
+ b=eHfV1Jun6/Y9BR7EOwH5D65neWPrYr2/plZLf6dfkn8VqY9EqaoI7UpYieURbUNWeKPnBfKWYuOwZY4t+wwKPEvWXy6lhh/xI8Wl17RjSoe4fEBR5FM56EhY7EvBfuufa9FfbqzYFlSbtZNMxir3XTXNjC4nkynMFnbfhgK2hIGB9LwFIVB5Bzo+Ufwukdy4vZIZaTrWvtd4DdaLkUJXFEbfVzwr8dHbaqS2w+aNJaxglqldaTOy6LsFEZYFhv4w+Hoh8Hg3v56hsn+gDX8Gtpp/zO30yh4uYPV0RwrK8K5Un5P4eO6etcL/8PT9tIwGdWyhgvMgb7pwqeJ2e2KOOQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -87,86 +88,137 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=98AtMQVzaAHOwKKFvylID8GyFmwvLo9S59QnYCd+rzM=;
- b=fEWmNfRVw1Iw8SEg1ZJOVObVMv/9iTTh6owNYcdnonI8ZYPCJGVNVTb8SUJJmGVD8VH+egahPgwdubShCsrwZwyHUKeYy87EnMpegIxRJW4PJxce9p3oQh06ta2cXK5iJUM+w4SRa5AFroCrtqfEIv2zBOn67BqTh1F8aoAkQkE=
+ bh=Ubn0KOlNn2bGNNG4KibjKy56O3QZHfvA/XdfMZxo38c=;
+ b=cGnM3y0zqxRiK5jg0p2ffdAPvgKnhADdF8GbGtARgl8WKKjA5b1Nvccpg3yY0Ty8kTzwMcKLzL54YEKWMFGUg0jstqk18gDp+9VhG4s9Bd3qDSC3+XfB08KqT5yXIbY/R16nXbSi73MjN8sZpcIFaVYWtW9Rqsh2yqwU+5X7A1I=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
  smtp.mailfrom=xilinx.com; lists.xenproject.org; dkim=none (message not
  signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
  header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
  149.199.62.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.62.198; helo=xsj-pvapexch01.xlnx.xilinx.com;
+ client-ip=149.199.62.198; helo=xsj-pvapexch02.xlnx.xilinx.com;
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <julien@xen.org>, Vikram Garhwal
-	<fnu.vikram@xilinx.com>
-Subject: [XEN][RFC PATCH 05/13] libfdt: Change overlay_get_target() type
-Date: Wed, 1 Sep 2021 23:05:55 -0700
-Message-ID: <1630562763-390068-6-git-send-email-fnu.vikram@xilinx.com>
+	<fnu.vikram@xilinx.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Jan
+ Beulich <jbeulich@suse.com>, Paul Durrant <paul@xen.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Ian
+ Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [XEN][RFC PATCH 00/13] Add Support for dynamic Programming
+Date: Wed, 1 Sep 2021 23:05:50 -0700
+Message-ID: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
-References: <1630562763-390068-1-git-send-email-fnu.vikram@xilinx.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0f9a09cc-64e5-4749-23cf-08d96dd7e370
-X-MS-TrafficTypeDiagnostic: SN1PR02MB3678:
+X-MS-Office365-Filtering-Correlation-Id: c9207777-2281-4bf2-ad36-08d96dd7cba0
+X-MS-TrafficTypeDiagnostic: MWHPR02MB2302:
 X-Microsoft-Antispam-PRVS:
-	<SN1PR02MB3678E7AD48A1587026BC4B29BCCE9@SN1PR02MB3678.namprd02.prod.outlook.com>
+	<MWHPR02MB23023F8AF9FFCE0FECC07EF9BCCE9@MWHPR02MB2302.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	Ckx58VpUs6M3WyHg9+f3TqPbipbP2X8Vt1GQIVqSNAERsgzKnshwp3cxb9Nns37n+s5ns0VbNIB544kPvP5jy0tLHvh7SMNMggeLtvftBKBZBqEEL5SJ1yi/CKgXDuQjuzekuB5+fr+LKGPVnlNhcBmRU+bl7V69dfXqFUkzjXp6ic0Znws3VNTV3NYqcXatPYo4s472WDu/hQXjofqak6d22e/tgeFGX4el0eIRH9Z8+pADwfxVXpkrXQpCQfWN47nPcFQrIKTN+ItqgIHv7VSpvr7cNvns4K7tPEXVAVZbIlvLO+6QEv+4qsSZdQ0IWrW53dOZuxPBTNGOulf/EoITBmfrO7n7nC42oqCU8HCFwCiqEjI8r25ATcrhSvAG69J6Ro9sOfLlueIHT+8BoFWHaHR4yjbC+F+8DzwQefiGtc1bhE9a9X0ysfRYHDxzY2qNzyUyf+PBvut6oMDmfQZndm5O5UaijpHnCzB0lXwW0fMJpUCQzedaNBHmHypWBwhYibwKLQbVbfdYS93wbc+iNOfWJeTmX8533vx+SRAz1bLSlbLCMiQmYjyZCAydXqcrK+ckVgopGap6iDzd7kwuBW3Mlu8RWa1cnsXeYmBXsiJKDdl+/gdKBYoqT9cHy3NYUUAUBsZfSJgcTCFg5JCtdgKL2f1PBl6vrsJmSnrvH9/Yrhwjxke23jXA6uUY/evD5iFC2yvEpoT/aHEF4c1sSn7IAYVKKzyvtNZsb0A=
+	w5KHpqXz4mYyBcpsuTSzM1/Vs0D8q4a4ugCmQ4Zt5HjOK7r74D79y6at2F9MD4tBfQgGX5ah0FsXMIfbtFaQf2g75IyayA3OF4DQNNikPdermzCZqejLTtU1UOrQzGksKF7yxZNfw4d1+xH0YgZ77lVwm7CxgJ8hpL8qQDVHQye58WByKUYwueqlUUBKcWieni8oGElTYoqFD5vxl3F/5FX4vhHm4DtrJ/WQc0rgp5HSCmTxWBqLE4qGH0gU4OZxqIIi8RIxSRHOeuL7mtJtVFD+d7mV4RkmFpCvIS99PIu5z8I2Es/kbkbBz59vf/ie8JP1KH+C2XYsSJinyPcUjQR/JiHqPunqWQatusp9ytnuhwXEixL4VmrUndUsZE60LQRZ5PgBv0rihWIEyc1bzZ3ZXcR+yA69aGJ2kuzOIdkJgN/pSZv5PhpshX9HL9TNDEJYq++8iTkHijXnbKlsXMSZ7cUtyXsr6H8T+5Bg4VQSNdc4yW2wnBLyT2rSDrx1GvHEVKKg81b4g3NGSGYergvwLsWJAPkk1w813t8xFRuqIenU7CEJfI0f0zMs4sxgP6GAuy2OY3YRIkvUMVFHc3APFX4qVdO/wTCOUSn7yDMPBpeGETqRIT1kcGAv5qyF5Ygigf7nci+HRCbg9+2dE8I/fHmgmw6oZjBHHSlvoxBWHNXiTqNJTSsoTlWlmqA6Vkn7PyCrR7ZF25zXvQCgdcPnZ+4RJ+MRtbKO+ankrak=
 X-Forefront-Antispam-Report:
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(376002)(396003)(346002)(136003)(39860400002)(46966006)(36840700001)(82310400003)(47076005)(36756003)(70586007)(2616005)(336012)(6666004)(426003)(186003)(26005)(478600001)(2906002)(83380400001)(8936002)(316002)(70206006)(9786002)(8676002)(7696005)(5660300002)(36906005)(82740400003)(7636003)(356005)(54906003)(36860700001)(4326008)(107886003)(6916009)(102446001);DIR:OUT;SFP:1101;
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(4636009)(136003)(376002)(39860400002)(396003)(346002)(46966006)(36840700001)(82310400003)(4326008)(2616005)(426003)(2906002)(356005)(186003)(82740400003)(8676002)(36860700001)(6666004)(36756003)(70586007)(70206006)(83380400001)(7636003)(478600001)(336012)(5660300002)(7696005)(47076005)(36906005)(54906003)(7416002)(316002)(9786002)(26005)(8936002)(6916009)(102446001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 06:07:04.9759
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2021 06:06:25.0547
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f9a09cc-64e5-4749-23cf-08d96dd7e370
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9207777-2281-4bf2-ad36-08d96dd7cba0
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch01.xlnx.xilinx.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch02.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DM3NAM02FT042.eop-nam02.prod.protection.outlook.com
+	SN1NAM02FT0022.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN1PR02MB3678
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR02MB2302
 
-Remove static function type from overlay_get_target().
+Hi,
+This RFC patch series is for introducing dynamic programming i.e. add/remove the
+devices during run time. Using "xl fpga-add" a device can be added with dtbo.
 
-Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
----
- xen/common/libfdt/fdt_overlay.c | 2 +-
- xen/include/xen/libfdt/libfdt.h | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+fdt_overlay.c file is taken from Linux and other existing fdt files are modified
+to accommodate the fdt_overlay. The changes w.r.t. existing fdt are kept minimal
+i.e. only the required library file/functions from Linux fdt are pulled in.
 
-diff --git a/xen/common/libfdt/fdt_overlay.c b/xen/common/libfdt/fdt_overlay.c
-index 15a8cdb..1ffb669 100644
---- a/xen/common/libfdt/fdt_overlay.c
-+++ b/xen/common/libfdt/fdt_overlay.c
-@@ -56,7 +56,7 @@ static uint32_t overlay_get_target_phandle(const void *fdto, int fragment)
-  *      the targeted node offset in the base device tree
-  *      Negative error code on error
-  */
--static int overlay_get_target(const void *fdt, const void *fdto,
-+int overlay_get_target(const void *fdt, const void *fdto,
- 			      int fragment, char const **pathp)
- {
- 	uint32_t phandle;
-diff --git a/xen/include/xen/libfdt/libfdt.h b/xen/include/xen/libfdt/libfdt.h
-index b6c8b67..e1cc6f2 100644
---- a/xen/include/xen/libfdt/libfdt.h
-+++ b/xen/include/xen/libfdt/libfdt.h
-@@ -1737,4 +1737,6 @@ int fdt_overlay_apply(void *fdt, void *fdto);
- 
- const char *fdt_strerror(int errval);
- 
-+int overlay_get_target(const void *fdt, const void *fdto, int fragment,
-+                       char const **pathp);
- #endif /* _LIBFDT_H */
+For adding a node using dynamic programming:
+    1. flatten device tree overlay node will be added to a fdt
+    2. Updated fdt will be unflattened to a new dt_host_new
+    3. Extract the newly added node information from dt_host_new
+    4. Add the added node under correct parent in original dt_host.
+    3. Map interrupt and iomem region as required.
+
+For removing a node:
+    1. Find the node with given path.
+    2. Check if the node is used by any of dom0 or domus. Removes the node
+only when it's not used by any domain.
+    3. Removes IRQ permissions and MMIO access.
+    5. Find the node in dt_host and delete the device node entry from dt_host.
+    6. Free the overlay_tracker entry which means free dt_host_new also(created
+in adding node step).
+
+fpga-add and fpga-del are probably not the best names for these commands. This
+was done initially for xilinx FPGA programmable logic block dynamic programming.
+I am okay with replacing fpga-add and fpga-del with better names if there are
+any suggestions.
+
+Regards,
+Vikram
+
+Vikram Garhwal (13):
+  device tree: Remove __init from function type
+  libfdt: Keep fdt functions after init.
+  libfdt: import fdt_overlay from Linux
+  libfdt: Copy required libfdt functions from Linux
+  libfdt: Change overlay_get_target() type
+  device tree: Add dt_print_node_names()
+  device tree: Add _dt_find_node_by_path() to find nodes in device tree
+  xen/iommu: Introduce iommu_remove_dt_devices function
+  xen/arm: Implement device tree node removal functionalities
+  xen/arm: Implement device tree node addition functionalities
+  tools/libs/ctrl: Implement new xc interfaces for fpga-add and fpga-del
+  tools/libs/light: Implement new libxl functions for fpga-add and
+    fpga-del
+  tools/xl: Add new xl commands fpga-add and fpga-del
+
+ tools/include/libxl.h                 |   5 +
+ tools/include/xenctrl.h               |   4 +
+ tools/libs/ctrl/Makefile              |   1 +
+ tools/libs/ctrl/xc_fpga.c             |  82 ++++
+ tools/libs/light/Makefile             |   1 +
+ tools/libs/light/libxl_fpga.c         |  73 +++
+ tools/xl/xl.h                         |   2 +
+ tools/xl/xl_cmdtable.c                |  12 +
+ tools/xl/xl_vmcontrol.c               |  51 ++
+ xen/arch/arm/Makefile                 |   2 +-
+ xen/arch/arm/domain_build.c           |  15 +-
+ xen/arch/arm/domctl.c                 | 445 +++++++++++++++++
+ xen/common/device_tree.c              | 143 +++++-
+ xen/common/libfdt/Makefile            |   1 -
+ xen/common/libfdt/Makefile.libfdt     |   2 +-
+ xen/common/libfdt/fdt.c               |  35 ++
+ xen/common/libfdt/fdt_overlay.c       | 884 ++++++++++++++++++++++++++++++++++
+ xen/common/libfdt/fdt_ro.c            |  52 +-
+ xen/common/libfdt/fdt_rw.c            |  81 +++-
+ xen/common/libfdt/fdt_wip.c           |  20 +
+ xen/common/libfdt/libfdt_internal.h   | 130 +++++
+ xen/drivers/passthrough/arm/smmu.c    |  53 ++
+ xen/drivers/passthrough/device_tree.c |  30 ++
+ xen/include/asm-arm/domain_build.h    |  10 +
+ xen/include/public/domctl.h           |  16 +
+ xen/include/xen/device_tree.h         |  21 +
+ xen/include/xen/iommu.h               |   2 +
+ xen/include/xen/libfdt/libfdt.h       | 232 ++++++++-
+ 28 files changed, 2363 insertions(+), 42 deletions(-)
+ create mode 100644 tools/libs/ctrl/xc_fpga.c
+ create mode 100644 tools/libs/light/libxl_fpga.c
+ create mode 100644 xen/common/libfdt/fdt_overlay.c
+
 -- 
 2.7.4
 
