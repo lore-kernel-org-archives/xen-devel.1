@@ -2,48 +2,48 @@ Return-Path: <SRS0=MtyD=NY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D638DC8303F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0139C83038
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:25:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BF74361158
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:15:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BF74361158
+	by mail.kernel.org (Postfix) with ESMTPS id 25252613CF
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:16:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 25252613CF
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177409.322798 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177417.322843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpNW-00015z-Fu; Thu, 02 Sep 2021 16:15:50 +0000
+	id 1mLpNu-0002n1-Qp; Thu, 02 Sep 2021 16:16:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177409.322798; Thu, 02 Sep 2021 16:15:50 +0000
+Received: by outflank-mailman (output) from mailman id 177417.322843; Thu, 02 Sep 2021 16:16:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpNW-00015s-CW; Thu, 02 Sep 2021 16:15:50 +0000
-Received: by outflank-mailman (input) for mailman id 177409;
- Thu, 02 Sep 2021 16:15:48 +0000
+	id 1mLpNu-0002mu-LZ; Thu, 02 Sep 2021 16:16:14 +0000
+Received: by outflank-mailman (input) for mailman id 177417;
+ Thu, 02 Sep 2021 16:16:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1mLpNU-00015i-QN
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:15:48 +0000
-Received: from mail-wr1-x432.google.com (unknown [2a00:1450:4864:20::432])
+ id 1mLpNt-00029c-Nz
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:16:13 +0000
+Received: from mail-wr1-x429.google.com (unknown [2a00:1450:4864:20::429])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d0586f74-3c3b-45c3-9d4d-5e8b10b51373;
- Thu, 02 Sep 2021 16:15:47 +0000 (UTC)
-Received: by mail-wr1-x432.google.com with SMTP id b10so3884094wru.0
- for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:15:47 -0700 (PDT)
+ id f5586672-609a-4718-a2be-f5eaf5608fba;
+ Thu, 02 Sep 2021 16:16:11 +0000 (UTC)
+Received: by mail-wr1-x429.google.com with SMTP id n5so3803786wro.12
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:16:11 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- j18sm2355853wrd.56.2021.09.02.09.15.44
+ l1sm2293844wrb.15.2021.09.02.09.16.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:15:45 -0700 (PDT)
+ Thu, 02 Sep 2021 09:16:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,34 +54,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: d0586f74-3c3b-45c3-9d4d-5e8b10b51373
+X-Inumbo-ID: f5586672-609a-4718-a2be-f5eaf5608fba
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=sender:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Cx9tmtcMe/yqb/L4FxX6s6fgCGjzmE2xzXTNn5n4WRY=;
-        b=mcdkcgUkPmIymlgoHwDrJpvE9KHw9dvSG2MlkuM7+LMu3zkIYpqtCeCGgcISYDoKCb
-         8696YyJt2CPh12bbX7QpwDA8IAMyJN7taR/RiiyUq4y4j+fSACZ5oqQ08yGPg+QlMR0S
-         hitbbr51iTLrvFSzYtCDWEBhD9WU3oObbn7IgCnxkcpgU8/Bpb/PRbBi6oyJFhSCPB/4
-         T4eJ4wL0xOuOcg0FizPKZv0AhuncICKZC1qKdxIbn5OpaC/dbV050AWnqohvIXKAkBb9
-         MuFoocUeCUvdcKKf//7Z32DJC9YmwC2EKSjtLp0AMfq+R5Wwnd7FM6PpEyUZ4hvUxjzc
-         2tig==
+        h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=P0fp1qqpF59XMbIIHxComfWKKQIg8VIlTwHVvhBN59A=;
+        b=G8+gv7/l02p+3pIOfkKqyIa3SJNJqqucn0S8o/siAkKaxmFM5RO224iTEbB1+wTzyT
+         yH9VCpxFWBr0t0GXhQxQRUuO0CaUa3ZzEf3celJhLqjAbDckl1E6mqaq2dCEttikPZRW
+         NTgh0ED5VO3rDtoACT4pDd4RK9nfKb9VvyIT09l58j9YQUutJPWiW1YUvmfRQD6MaciO
+         hgQld4iTpFhaM+A7V2MEdU+/ZRnuTgXC5fBFAjpnxBcFkFzPQ9ZRGDj/1+tmyCyow8jw
+         rBfrG9A0yoltXZKggfPRhQMqdG2T5CPTN8x3VdAjvEoK7uauTkkWkCFDPZbLzkrywDXE
+         DO1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-         :mime-version:content-transfer-encoding;
-        bh=Cx9tmtcMe/yqb/L4FxX6s6fgCGjzmE2xzXTNn5n4WRY=;
-        b=OwocEGUbclqWd/677oejQXsrZXjgc5UQ+9J8GvdslFFo/Vtv6tLZ6c5NUFLE3+hImw
-         ckHmp67mWdqSqLEibxLjf5CCDhO51d08PAkBKWlodtkcCQ0GB2mSPb48nuneKm6vORtt
-         Exhc/64bLOIUgZWlHbwUJNQsQoyHXCnD1uvGCHm6i1fR7kwPPq8D/UXNvw6WDySyzofL
-         NMpBhkoZBmXZKK4KrRw2QcfygjvXixEKdshDkMhzMNhVs2fxd5Imgku2XtmrB+zN+DY5
-         pnKZnG+GpDtQNF6GUT/uoQUiB7gMfj4sYO/5Lju21+VN7uQHq5gDkuNGGNa9514YvSLl
-         MF9A==
-X-Gm-Message-State: AOAM532VeWCOR6jst8TMpFBX3Crt5lC8mlUjGzbELNXKEFX7FDceZgT+
-	vAv9dya/i53k0ZwTNDlAuiY=
-X-Google-Smtp-Source: ABdhPJwMW19l1RT5uyseQGoPrvV+9UXH/fieGpgiPEuYOlcUopWj6VFIU2AjhhvSZ8tr8ff4GeIa0w==
-X-Received: by 2002:adf:8144:: with SMTP id 62mr4741623wrm.144.1630599347027;
-        Thu, 02 Sep 2021 09:15:47 -0700 (PDT)
+         :in-reply-to:references:mime-version:content-transfer-encoding;
+        bh=P0fp1qqpF59XMbIIHxComfWKKQIg8VIlTwHVvhBN59A=;
+        b=YfdnRZzuD/d1mvZa5Pw6Ez9HDlUz25GZZwQ6iY9ELsuSSEjPrTq3K3aLH4ylk4YNFf
+         XAsnyJiw6fVLmTxBHI1u262nKJP5mSZ8fE9tvQUZ4ww3aGgcndnghHZ0J0jQpelINN8P
+         cU2PROrYMrxr/tMYDV/NLL7d5Qj+7WrBUkq8xPYqKxGEJCQGRMWQcd14sARcAGB/3TkS
+         keSuD/Ui6puLg2O8T2Yk8v2H4g08jA26HisroQl+kB5tRecU3//yKNYNLbUZeQQLBAwS
+         9QJNM+zGvoR1W6VJgG3ofMc8gJAmMjv3r/JlxgPN1v4+GPT/84+dt4jk24SrobK4pDgU
+         yjXQ==
+X-Gm-Message-State: AOAM532osXSa/szmX+gyIMbs0u/RvSaOQlrc+mvqq3+jcnWv9bV95F1Z
+	d5QxbobzSFO4viKllEcdgC4=
+X-Google-Smtp-Source: ABdhPJxqYVZz8Vtdq+1rVuHAugWlbrJscT37rU3tWfkU/lcfKzRuzJ6gBh5u/Yi5SNrMElUTWFem6A==
+X-Received: by 2002:adf:d191:: with SMTP id v17mr4847443wrc.345.1630599370860;
+        Thu, 02 Sep 2021 09:16:10 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
@@ -133,98 +133,56 @@ Cc: Bin Meng <bin.meng@windriver.com>,
 	Stafford Horne <shorne@gmail.com>,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	kvm@vger.kernel.org
-Subject: [PATCH v3 00/30] accel: Move has_work() from SysemuCPUOps to AccelOpsClass
-Date: Thu,  2 Sep 2021 18:15:13 +0200
-Message-Id: <20210902161543.417092-1-f4bug@amsat.org>
+Subject: [PATCH v3 04/30] sysemu: Introduce AccelOpsClass::has_work()
+Date: Thu,  2 Sep 2021 18:15:17 +0200
+Message-Id: <20210902161543.417092-5-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
+References: <20210902161543.417092-1-f4bug@amsat.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,=0D
-=0D
-CPU has_work() is a per-accelerator handler. This series=0D
-- explicit the KVM / WHPX implementations=0D
-- moves TCG implementations in AccelOpsClass=0D
-- explicit missing implementations (returning 'false').=0D
-=0D
-Since v2:=0D
-- Full rewrite, no more RFC.=0D
-=0D
-Supersedes: <20210304222323.1954755-1-f4bug@amsat.org>=0D
-"cpu: Move CPUClass::has_work() to TCGCPUOps"=0D
-=0D
-Philippe Mathieu-Daud=C3=A9 (30):=0D
-  accel/tcg: Restrict cpu_handle_halt() to sysemu=0D
-  hw/core: Restrict cpu_has_work() to sysemu=0D
-  hw/core: Un-inline cpu_has_work()=0D
-  sysemu: Introduce AccelOpsClass::has_work()=0D
-  accel/kvm: Implement AccelOpsClass::has_work()=0D
-  accel/whpx: Implement AccelOpsClass::has_work()=0D
-  accel/tcg: Implement AccelOpsClass::has_work() as stub=0D
-  target/alpha: Restrict has_work() handler to sysemu and TCG=0D
-  target/arm: Restrict has_work() handler to sysemu and TCG=0D
-  target/avr: Restrict has_work() handler to sysemu and TCG=0D
-  target/cris: Restrict has_work() handler to sysemu and TCG=0D
-  target/hexagon: Remove unused has_work() handler=0D
-  target/hppa: Restrict has_work() handler to sysemu and TCG=0D
-  target/i386: Restrict has_work() handler to sysemu and TCG=0D
-  target/m68k: Restrict has_work() handler to sysemu and TCG=0D
-  target/microblaze: Restrict has_work() handler to sysemu and TCG=0D
-  target/mips: Restrict has_work() handler to sysemu and TCG=0D
-  target/nios2: Restrict has_work() handler to sysemu and TCG=0D
-  target/openrisc: Restrict has_work() handler to sysemu and TCG=0D
-  target/ppc: Restrict has_work() handler to sysemu and TCG=0D
-  target/ppc: Introduce PowerPCCPUClass::has_work()=0D
-  target/ppc: Simplify has_work() handlers=0D
-  target/riscv: Restrict has_work() handler to sysemu and TCG=0D
-  target/rx: Restrict has_work() handler to sysemu and TCG=0D
-  target/s390x: Restrict has_work() handler to sysemu and TCG=0D
-  target/sh4: Restrict has_work() handler to sysemu and TCG=0D
-  target/sparc: Restrict has_work() handler to sysemu and TCG=0D
-  target/tricore: Restrict has_work() handler to sysemu and TCG=0D
-  target/xtensa: Restrict has_work() handler to sysemu and TCG=0D
-  accel: Add missing AccelOpsClass::has_work() and drop SysemuCPUOps one=0D
-=0D
- include/hw/core/cpu.h             |  28 +--=0D
- include/hw/core/tcg-cpu-ops.h     |   4 +=0D
- include/sysemu/accel-ops.h        |   5 +=0D
- target/ppc/cpu-qom.h              |   3 +=0D
- accel/hvf/hvf-accel-ops.c         |   6 +=0D
- accel/kvm/kvm-accel-ops.c         |   6 +=0D
- accel/qtest/qtest.c               |   6 +=0D
- accel/tcg/cpu-exec.c              |   8 +-=0D
- accel/tcg/tcg-accel-ops.c         |  12 ++=0D
- accel/xen/xen-all.c               |   6 +=0D
- hw/core/cpu-common.c              |   6 -=0D
- softmmu/cpus.c                    |  10 +-=0D
- target/alpha/cpu.c                |   4 +-=0D
- target/arm/cpu.c                  |   7 +-=0D
- target/avr/cpu.c                  |   4 +-=0D
- target/cris/cpu.c                 |   4 +-=0D
- target/hexagon/cpu.c              |   6 -=0D
- target/hppa/cpu.c                 |   4 +-=0D
- target/i386/cpu.c                 |   6 -=0D
- target/i386/hax/hax-accel-ops.c   |   6 +=0D
- target/i386/nvmm/nvmm-accel-ops.c |   6 +=0D
- target/i386/tcg/tcg-cpu.c         |   8 +-=0D
- target/i386/whpx/whpx-accel-ops.c |   6 +=0D
- target/m68k/cpu.c                 |   4 +-=0D
- target/microblaze/cpu.c           |  10 +-=0D
- target/mips/cpu.c                 |   4 +-=0D
- target/nios2/cpu.c                |   4 +-=0D
- target/openrisc/cpu.c             |   4 +-=0D
- target/ppc/cpu_init.c             | 324 +++++++++++++++---------------=0D
- target/riscv/cpu.c                |   8 +-=0D
- target/rx/cpu.c                   |   4 +-=0D
- target/s390x/cpu.c                |   4 +-=0D
- target/sh4/cpu.c                  |   7 +-=0D
- target/sparc/cpu.c                |   4 +-=0D
- target/tricore/cpu.c              |   6 +-=0D
- target/xtensa/cpu.c               |  16 +-=0D
- 36 files changed, 321 insertions(+), 239 deletions(-)=0D
-=0D
--- =0D
-2.31.1=0D
-=0D
+Introduce an accelerator-specific has_work() handler.
+Eventually call it from cpu_has_work().
+
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ include/sysemu/accel-ops.h | 5 +++++
+ softmmu/cpus.c             | 3 +++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
+index 032f6979d76..de83f095f20 100644
+--- a/include/sysemu/accel-ops.h
++++ b/include/sysemu/accel-ops.h
+@@ -31,6 +31,11 @@ struct AccelOpsClass {
+     void (*create_vcpu_thread)(CPUState *cpu); /* MANDATORY NON-NULL */
+     void (*kick_vcpu_thread)(CPUState *cpu);
+ 
++    /**
++     * @has_work: Callback for checking if there is work to do.
++     */
++    bool (*has_work)(CPUState *cpu);
++
+     void (*synchronize_post_reset)(CPUState *cpu);
+     void (*synchronize_post_init)(CPUState *cpu);
+     void (*synchronize_state)(CPUState *cpu);
+diff --git a/softmmu/cpus.c b/softmmu/cpus.c
+index 7e2cb2c571b..2a61dfd6287 100644
+--- a/softmmu/cpus.c
++++ b/softmmu/cpus.c
+@@ -255,6 +255,9 @@ bool cpu_has_work(CPUState *cpu)
+ {
+     CPUClass *cc = CPU_GET_CLASS(cpu);
+ 
++    if (cpus_accel->has_work) {
++        return cpus_accel->has_work(cpu);
++    }
+     g_assert(cc->has_work);
+     return cc->has_work(cpu);
+ }
+-- 
+2.31.1
+
 
