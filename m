@@ -7,43 +7,44 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 652C2C83035
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E77AC83036
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:30:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8EEA261A09
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:21:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8EEA261A09
+	by mail.kernel.org (Postfix) with ESMTPS id BCA8461A2C
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:21:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BCA8461A2C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177492.322975 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177513.323008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpSw-0002lE-7h; Thu, 02 Sep 2021 16:21:26 +0000
+	id 1mLpTG-0004lg-5b; Thu, 02 Sep 2021 16:21:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177492.322975; Thu, 02 Sep 2021 16:21:26 +0000
+Received: by outflank-mailman (output) from mailman id 177513.323008; Thu, 02 Sep 2021 16:21:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpSw-0002kp-30; Thu, 02 Sep 2021 16:21:26 +0000
-Received: by outflank-mailman (input) for mailman id 177492;
- Thu, 02 Sep 2021 16:21:24 +0000
+	id 1mLpTG-0004lW-2J; Thu, 02 Sep 2021 16:21:46 +0000
+Received: by outflank-mailman (input) for mailman id 177513;
+ Thu, 02 Sep 2021 16:21:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1mLpPV-00029c-RN
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:17:53 +0000
-Received: from mail-wr1-x436.google.com (unknown [2a00:1450:4864:20::436])
+ id 1mLpOc-00029c-PS
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:16:58 +0000
+Received: from mail-wm1-x334.google.com (unknown [2a00:1450:4864:20::334])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 23c4919f-d8ba-48eb-ada9-6b5f71fd8ae6;
- Thu, 02 Sep 2021 16:17:49 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id u16so3843166wrn.5
- for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:17:49 -0700 (PDT)
+ id 3adcf5b9-68b6-4973-9aaf-67106bde2e85;
+ Thu, 02 Sep 2021 16:16:48 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ v20-20020a1cf714000000b002e71f4d2026so1424714wmh.1
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:16:48 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- s15sm2202811wrb.22.2021.09.02.09.17.45
+ y24sm2479386wma.9.2021.09.02.09.16.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:17:47 -0700 (PDT)
+ Thu, 02 Sep 2021 09:16:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 23c4919f-d8ba-48eb-ada9-6b5f71fd8ae6
+X-Inumbo-ID: 3adcf5b9-68b6-4973-9aaf-67106bde2e85
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=wiJyFwIKRQWjRkbu8SvGMr1PDMKMIYamMV7C3BB8oe8=;
-        b=qAtoFIb8zeHmLJ+DXBMGpAdnbrphpEAfuI7XHEPw8NBmRW9/+WQnP+AZelTqnIhAyE
-         XWWklQ0ZgUaW+TjGyBKgrmT5Awe/DhMqWt5iYbHcpZayB/1OpJXxLIVgIBvvvx9tbfbe
-         MhBhX16/hQ/XQpM8/t7IWpZx8Wn0h5lsCbsMip4ljj1E3unFy90cJy4UzhkEFnhbknkU
-         T8DR04fw7m7nWgaHWphfTdeObgKvp0ylXJqEGEN6mGrqmeM1GzS3/abyks0gzOofcGN7
-         UjU06l66Hvh9mNoLvBN0ewV7GlShfdvdFlG07p47BqES4xriMHGxYVH/Zf/4POrSSA9s
-         8XQA==
+        bh=1uiIX4B4XnBDTSuiPfQ6TXqVM80IFaG7yss59sugPek=;
+        b=KqzWIKJ7D2fRmpGndmFmFNuwslKTxikjGxDMGA2xsPlBUegPAHynuzDusdrr5XjA+x
+         UCJbwBQeZPJQtXG0Xtu7RxwzPdlThK6RVv2DMQ/DDE16jxbu2MLTQ+EKf6s/CZXPXeN6
+         nzJIGn8UESvClj1N6xIA9j+rSpvqLJiMXVoYewPiMa355LZW9o2GW/afajWJc0/NEar0
+         Q8DpjYGYUJuF0UC+706nFPlDCV62j7IN2KHM9wzg02+ZUE7+nf9cE7ogevav/S8CwMh4
+         Jx4C3Bwaygo71B9Uga55OA34fqh3F6hfjdQCFZRtq0AWQ50+fnYTHxBfr074WpLdgF+1
+         YThQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
          :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=wiJyFwIKRQWjRkbu8SvGMr1PDMKMIYamMV7C3BB8oe8=;
-        b=TSgR5ffHhrhHIIW0U9o2qek/e8pXK11HMEHIRuYc4W2x67SZpZ2yWAfSR3x/RK4kZq
-         EVglVcPm2RoTDG8nPxBCmtJAQ97MxJ0p2Uu/h3CDwC2bB/CkKMQScN+ZZFpyANFQOrG0
-         mv3xejdE1URVO+giLkNaLVPKYAn1wgg8D4pHv7afsN62HFb6fX8bpXfOc/5PWe00NX9y
-         hGFFTF90NUaPC51XgEmGSYp85kZ/0y4pwjTRZFELtka6PbEgZWq538KBwHL61KvgQ2gg
-         gRV47F8SbBmIAGZLbzICiSEfX0orQ4QB03b15ddOa91yLSPWFkbQ4TUby14jmO1moxZj
-         KcDw==
-X-Gm-Message-State: AOAM533KiT6UL0hOmhezx0HibwF6YCmjW75ODLsITZNb/MlSL8JUWDys
-	2M9R03qcdJ4CUI/gmgzQeiw=
-X-Google-Smtp-Source: ABdhPJzK4QdOoxXsApVtGRumuSNyT10qkKd9QeSHbbUEQ3zItVBoCovI95FuxXm2STsnpfXGUzb9Vg==
-X-Received: by 2002:a5d:4ed0:: with SMTP id s16mr4776030wrv.71.1630599468354;
-        Thu, 02 Sep 2021 09:17:48 -0700 (PDT)
+        bh=1uiIX4B4XnBDTSuiPfQ6TXqVM80IFaG7yss59sugPek=;
+        b=OcR6OYbN3d3+2/g4T4hIfhIUOPuSgrlIYkvMrSCCKVcwHrOzkhyTj27/29v92exeyX
+         7JPELEhrW92u2JkyyYxEM+0T2A74FrU0I6kwO2v9goJHE4rl8EijW/t/W80Gz8+5ffe5
+         XL/6yRk1dxlLX8JjN6Hx2z3MVNokbW2k64OTHcgMfPOWhpGvBvjuTOOTEX+RJH0WRYER
+         gFrToV5q5PaGzh7O7eQ6O/M8sjhff6HLSeyLgHLgDjajIsfVPS4/uGqZQu+6Jt8qfK0E
+         b4L8hjAofmc4J7d5ie3NpV5R5y+1fFb4sG+0JxUDgGhwIVcqmWrP8HqKjIwYdf+HJ5ep
+         K7vw==
+X-Gm-Message-State: AOAM530wdLK2ToSAzMr/x8CGIs4lvGpJNhADcJQV71/gfrit0Y9X73os
+	IgPLuecZ3K8CHNnkONAn/jA=
+X-Google-Smtp-Source: ABdhPJw3pSsMq4kZKK4hbVaJZjnjyoQFK4vJQiZ4XHFwYg2jDsiLD33cM2YA1HEu8cnvL7L44Mu7XQ==
+X-Received: by 2002:a1c:44c5:: with SMTP id r188mr4089427wma.9.1630599407288;
+        Thu, 02 Sep 2021 09:16:47 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
@@ -133,9 +134,9 @@ Cc: Bin Meng <bin.meng@windriver.com>,
 	Stafford Horne <shorne@gmail.com>,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	kvm@vger.kernel.org
-Subject: [PATCH v3 19/30] target/openrisc: Restrict has_work() handler to sysemu and TCG
-Date: Thu,  2 Sep 2021 18:15:32 +0200
-Message-Id: <20210902161543.417092-20-f4bug@amsat.org>
+Subject: [PATCH v3 10/30] target/avr: Restrict has_work() handler to sysemu and TCG
+Date: Thu,  2 Sep 2021 18:15:23 +0200
+Message-Id: <20210902161543.417092-11-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
@@ -147,43 +148,45 @@ Restrict has_work() to TCG sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/openrisc/cpu.c | 4 +++-
+ target/avr/cpu.c | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
-index 27cb04152f9..6544b549f12 100644
---- a/target/openrisc/cpu.c
-+++ b/target/openrisc/cpu.c
-@@ -30,11 +30,13 @@ static void openrisc_cpu_set_pc(CPUState *cs, vaddr value)
-     cpu->env.dflag = 0;
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index e9fa54c9777..6267cc6d530 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -32,6 +32,7 @@ static void avr_cpu_set_pc(CPUState *cs, vaddr value)
+     cpu->env.pc_w = value / 2; /* internally PC points to words */
  }
  
 +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
- static bool openrisc_cpu_has_work(CPUState *cs)
+ static bool avr_cpu_has_work(CPUState *cs)
  {
-     return cs->interrupt_request & (CPU_INTERRUPT_HARD |
-                                     CPU_INTERRUPT_TIMER);
+     AVRCPU *cpu = AVR_CPU(cs);
+@@ -40,6 +41,7 @@ static bool avr_cpu_has_work(CPUState *cs)
+     return (cs->interrupt_request & (CPU_INTERRUPT_HARD | CPU_INTERRUPT_RESET))
+             && cpu_interrupts_enabled(env);
  }
 +#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
  
- static void openrisc_disas_set_info(CPUState *cpu, disassemble_info *info)
- {
-@@ -189,6 +191,7 @@ static const struct TCGCPUOps openrisc_tcg_ops = {
-     .tlb_fill = openrisc_cpu_tlb_fill,
+ static void avr_cpu_synchronize_from_tb(CPUState *cs,
+                                         const TranslationBlock *tb)
+@@ -198,6 +200,7 @@ static const struct TCGCPUOps avr_tcg_ops = {
+     .tlb_fill = avr_cpu_tlb_fill,
  
  #ifndef CONFIG_USER_ONLY
-+    .has_work = openrisc_cpu_has_work,
-     .cpu_exec_interrupt = openrisc_cpu_exec_interrupt,
-     .do_interrupt = openrisc_cpu_do_interrupt,
++    .has_work = avr_cpu_has_work,
+     .cpu_exec_interrupt = avr_cpu_exec_interrupt,
+     .do_interrupt = avr_cpu_do_interrupt,
  #endif /* !CONFIG_USER_ONLY */
-@@ -205,7 +208,6 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
-     device_class_set_parent_reset(dc, openrisc_cpu_reset, &occ->parent_reset);
+@@ -214,7 +217,6 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
  
-     cc->class_by_name = openrisc_cpu_class_by_name;
--    cc->has_work = openrisc_cpu_has_work;
-     cc->dump_state = openrisc_cpu_dump_state;
-     cc->set_pc = openrisc_cpu_set_pc;
-     cc->gdb_read_register = openrisc_cpu_gdb_read_register;
+     cc->class_by_name = avr_cpu_class_by_name;
+ 
+-    cc->has_work = avr_cpu_has_work;
+     cc->dump_state = avr_cpu_dump_state;
+     cc->set_pc = avr_cpu_set_pc;
+     cc->memory_rw_debug = avr_cpu_memory_rw_debug;
 -- 
 2.31.1
 
