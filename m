@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03F13C87FE1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01C22C87FDC
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:25:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5CCE8613C8
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:16:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5CCE8613C8
+	by mail.kernel.org (Postfix) with ESMTPS id 3963161529
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Sep 2021 16:18:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3963161529
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177430.322865 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177462.322909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpO9-00041h-Gt; Thu, 02 Sep 2021 16:16:29 +0000
+	id 1mLpPn-0007BT-Vq; Thu, 02 Sep 2021 16:18:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177430.322865; Thu, 02 Sep 2021 16:16:29 +0000
+Received: by outflank-mailman (output) from mailman id 177462.322909; Thu, 02 Sep 2021 16:18:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mLpO9-00041V-DA; Thu, 02 Sep 2021 16:16:29 +0000
-Received: by outflank-mailman (input) for mailman id 177430;
- Thu, 02 Sep 2021 16:16:28 +0000
+	id 1mLpPn-0007BM-Qm; Thu, 02 Sep 2021 16:18:11 +0000
+Received: by outflank-mailman (input) for mailman id 177462;
+ Thu, 02 Sep 2021 16:18:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=c9UA=NY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1mLpO8-00029c-OZ
- for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:16:28 +0000
-Received: from mail-wr1-x431.google.com (unknown [2a00:1450:4864:20::431])
+ id 1mLpPm-0007B4-Cu
+ for xen-devel@lists.xenproject.org; Thu, 02 Sep 2021 16:18:10 +0000
+Received: from mail-wm1-x32b.google.com (unknown [2a00:1450:4864:20::32b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d531d647-1b43-46ab-911b-29dfb596f7ed;
- Thu, 02 Sep 2021 16:16:23 +0000 (UTC)
-Received: by mail-wr1-x431.google.com with SMTP id q14so3833090wrp.3
- for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:16:23 -0700 (PDT)
+ id 01f06e99-8be3-4465-a2f9-a2b4690f76ce;
+ Thu, 02 Sep 2021 16:18:08 +0000 (UTC)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ m25-20020a7bcb99000000b002e751bcb5dbso1735750wmi.5
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Sep 2021 09:18:08 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- k37sm1787439wms.18.2021.09.02.09.16.20
+ k14sm2234887wri.46.2021.09.02.09.18.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:16:22 -0700 (PDT)
+ Thu, 02 Sep 2021 09:18:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: d531d647-1b43-46ab-911b-29dfb596f7ed
+X-Inumbo-ID: 01f06e99-8be3-4465-a2f9-a2b4690f76ce
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=TscxpaThIFwXh/P1Ycdn5GNQgbZxc3kDvlQfbrdl29A=;
-        b=qoOL8i+0Y9KqXMdm9wOQ3u/uPCdX/SQlDbKgluqhkScnDC2t1qHTT+2MTI//DWFAUT
-         NEejCit7VB+NanpfXq6Qc1DSyRxFphKWmmaSUCPbUNDcmTFSjm/7IHDyWLstRl23/liL
-         PZvnmlnErsZ1z8G7bMly2o0U/t5YGH3JGm4ZynAQjU//ks9rQoD8imqPSgj5ddgnhNdE
-         jy4fS/nmBse8JHRRQZwgmcXXvfWbpfY46jYzcfi3LWel1xENjZOe87hdj9MZ//4GUVRq
-         cQn36iCUZBXsphDCe0vsC3FLk68GDc7pyonHjq+49CjqDRjeD5GGI1ltJX+qXIdflDGH
-         EuIA==
+        bh=UWFl0S8+QJmSRfKpaWNU58d5jvI099dEW79c4Eds8Co=;
+        b=qyX0fbK8beMEiA2sBSgl3PW3ky5dGcSVCBtTwKFMLbBLTDoVjxKFiSsk0jDC/pFJh8
+         EQJ9wt19ZKu7z9D2NO2X1GBhffNKLdpe3QtarXXg5bKru7SgrpNFq7ykSau/rj7BWEMU
+         1lB3fKoh6dEiYxH/wEudtnGa9nyEo7DeltzASvLMnmAUaT41c/G+J+JRbl3ezoYTAza1
+         Y+ETvUqkI+1eP+JhGzMn2Azr7F5hdjAx5ZUxT+4ueBQ0CSz4Bd282avi1jucNAchPVMA
+         9SsBqrFRz0Y5wm79SMIMZa6Daop/L/LafP8vvrGNOlI29+ElFdjMqyjQo9hpcEC0Ade/
+         GupA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
          :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=TscxpaThIFwXh/P1Ycdn5GNQgbZxc3kDvlQfbrdl29A=;
-        b=tEbKgKab5rC8PlryeZZ8NVtEze8MqmVaH0z+m003ejx8V66VSyqRNZGD/SWmx7W4ls
-         okxHtY0MNJlrPWTVUb6pKD5ojuzQCU9K8zsk6fv6JPJx0KOQD+efccbo3+Fe3UKNZdpb
-         Xqzc+2O1mWmwQBQpv+V/il1JUUowVM83GGr+bjEJg7TVW7gO13JreeNBlQAdfq/IMISM
-         stwo48fJgaMd91R8NewgH+SAOXuBID4HlSzEw+uMoYXR05fmvrAKxN17EmS8GvTvyhex
-         WszFqLqWs71w9tWoitTRrtVT63FhlXghdimkhhMXKebAYm6mCqlpVRaxQxlC66qXn6g0
-         17nQ==
-X-Gm-Message-State: AOAM530gfrH6gWl+jDDehOFXRwPTJoQRX+8692+MxadW1Bm7cQUgt7ui
-	oGK8PyEs36sxl7vRAb/XKFo=
-X-Google-Smtp-Source: ABdhPJwGGBwl9Y1sjN8okEHWYycyYyvr2xi+NUWJxoO5KxfkCZlVjxWvfmucwDATrcvJW3+aRgOqDw==
-X-Received: by 2002:adf:b741:: with SMTP id n1mr4708081wre.354.1630599382926;
-        Thu, 02 Sep 2021 09:16:22 -0700 (PDT)
+        bh=UWFl0S8+QJmSRfKpaWNU58d5jvI099dEW79c4Eds8Co=;
+        b=qbYB+lHC3517KpzJLBT9MQiKuA4rWUW6Hviyi6tjq3zJ0kJqIV+Ngv9mZCgu9tyj7F
+         faqEg4t7jBJcez6elKSA2n+GqJRlPk0fSy0vZI0EPuBk2vj3fUXRSgLjsE6180FpoU+W
+         aZ/cqMLQWnM44zi32wC46EXZ67bytLm64mExhPw4CL8DhtOavQ1RuRg3O7phsHwAhi+g
+         NUM2WW5A4QR3ojjFua2+pdmkfCosdGNS7CjPZpEV8dSMBTNsYX0XAAo6o/N6fXHxXD1Q
+         nYCOsitfvSh1PaWGaQanJeNxziCMOvqKkhU6STNlbDz8DpmMX86AhRN4K/smuSpoqXhH
+         RX7w==
+X-Gm-Message-State: AOAM531pyzbwVShzwoh8XUduIFc/Q+p73tE0GjlwpSBVkc0qPHYnFv0D
+	rZ6U6DvmgMRGU0hBaXXIkHk=
+X-Google-Smtp-Source: ABdhPJxiiVaTYWvAG9DN++m79S0TQSTDr2C/1kQW8ctmk5/+oYLKUYcjyiQjFsrDz4LSrxOSg3eaUA==
+X-Received: by 2002:a1c:202:: with SMTP id 2mr3928971wmc.122.1630599486805;
+        Thu, 02 Sep 2021 09:18:06 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
@@ -133,9 +134,9 @@ Cc: Bin Meng <bin.meng@windriver.com>,
 	Stafford Horne <shorne@gmail.com>,
 	Reinoud Zandijk <reinoud@netbsd.org>,
 	kvm@vger.kernel.org
-Subject: [PATCH v3 06/30] accel/whpx: Implement AccelOpsClass::has_work()
-Date: Thu,  2 Sep 2021 18:15:19 +0200
-Message-Id: <20210902161543.417092-7-f4bug@amsat.org>
+Subject: [PATCH v3 22/30] target/ppc: Simplify has_work() handlers
+Date: Thu,  2 Sep 2021 18:15:35 +0200
+Message-Id: <20210902161543.417092-23-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
@@ -143,62 +144,350 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Implement WHPX has_work() handler in AccelOpsClass and
-remove it from cpu_thread_is_idle() since cpu_has_work()
-is already called.
+The common ppc_cpu_has_work() handler already checks for cs->halted,
+so we can simplify all callees.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- softmmu/cpus.c                    | 4 +---
- target/i386/whpx/whpx-accel-ops.c | 6 ++++++
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ target/ppc/cpu_init.c | 294 ++++++++++++++++++++----------------------
+ 1 file changed, 138 insertions(+), 156 deletions(-)
 
-diff --git a/softmmu/cpus.c b/softmmu/cpus.c
-index 3db7bd4eb4d..6bce52ce561 100644
---- a/softmmu/cpus.c
-+++ b/softmmu/cpus.c
-@@ -41,7 +41,6 @@
- #include "sysemu/replay.h"
- #include "sysemu/runstate.h"
- #include "sysemu/cpu-timers.h"
--#include "sysemu/whpx.h"
- #include "hw/boards.h"
- #include "hw/hw.h"
- #include "trace.h"
-@@ -89,8 +88,7 @@ bool cpu_thread_is_idle(CPUState *cpu)
-     if (cpu_is_stopped(cpu)) {
-         return true;
-     }
--    if (!cpu->halted || cpu_has_work(cpu) ||
--        whpx_apic_in_platform()) {
-+    if (!cpu->halted || cpu_has_work(cpu)) {
+diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+index bbad16cc1ec..c8ec47d58fa 100644
+--- a/target/ppc/cpu_init.c
++++ b/target/ppc/cpu_init.c
+@@ -7589,33 +7589,29 @@ static bool cpu_has_work_POWER7(CPUState *cs)
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     CPUPPCState *env = &cpu->env;
+ 
+-    if (cs->halted) {
+-        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+-            return false;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P7_PECE0)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P7_PECE1)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
+-            return true;
+-        }
+-        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
+-            return true;
+-        }
++    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
          return false;
+-    } else {
+-        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
      }
-     return true;
-diff --git a/target/i386/whpx/whpx-accel-ops.c b/target/i386/whpx/whpx-accel-ops.c
-index 6bc47c53098..1f9c6d52c27 100644
---- a/target/i386/whpx/whpx-accel-ops.c
-+++ b/target/i386/whpx/whpx-accel-ops.c
-@@ -83,6 +83,11 @@ static void whpx_kick_vcpu_thread(CPUState *cpu)
-     }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
++        (env->spr[SPR_LPCR] & LPCR_P7_PECE0)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
++        (env->spr[SPR_LPCR] & LPCR_P7_PECE1)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
++        (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
++        (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
++        return true;
++    }
++    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
++        return true;
++    }
++    return false;
  }
+ #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
  
-+static bool whpx_cpu_has_work(CPUState *cpu)
-+{
-+    return whpx_apic_in_platform();
-+}
-+
- static void whpx_accel_ops_class_init(ObjectClass *oc, void *data)
+@@ -7750,41 +7746,37 @@ static bool cpu_has_work_POWER8(CPUState *cs)
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     CPUPPCState *env = &cpu->env;
+ 
+-    if (cs->halted) {
+-        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+-            return false;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P8_PECE2)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P8_PECE3)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P8_PECE0)) {
+-            return true;
+-        }
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
+-            (env->spr[SPR_LPCR] & LPCR_P8_PECE1)) {
+-            return true;
+-        }
+-        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
+-            return true;
+-        }
++    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+         return false;
+-    } else {
+-        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
+     }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
++        (env->spr[SPR_LPCR] & LPCR_P8_PECE2)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
++        (env->spr[SPR_LPCR] & LPCR_P8_PECE3)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
++        (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
++        (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
++        (env->spr[SPR_LPCR] & LPCR_P8_PECE0)) {
++        return true;
++    }
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
++        (env->spr[SPR_LPCR] & LPCR_P8_PECE1)) {
++        return true;
++    }
++    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
++        return true;
++    }
++    return false;
+ }
+ #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+ 
+@@ -7948,58 +7940,53 @@ static bool cpu_has_work_POWER9(CPUState *cs)
  {
-     AccelOpsClass *ops = ACCEL_OPS_CLASS(oc);
-@@ -94,6 +99,7 @@ static void whpx_accel_ops_class_init(ObjectClass *oc, void *data)
-     ops->synchronize_post_init = whpx_cpu_synchronize_post_init;
-     ops->synchronize_state = whpx_cpu_synchronize_state;
-     ops->synchronize_pre_loadvm = whpx_cpu_synchronize_pre_loadvm;
-+    ops->has_work = whpx_cpu_has_work;
- }
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     CPUPPCState *env = &cpu->env;
++    uint64_t psscr = env->spr[SPR_PSSCR];
  
- static const TypeInfo whpx_accel_ops_type = {
+-    if (cs->halted) {
+-        uint64_t psscr = env->spr[SPR_PSSCR];
+-
+-        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+-            return false;
+-        }
+-
+-        /* If EC is clear, just return true on any pending interrupt */
+-        if (!(psscr & PSSCR_EC)) {
+-            return true;
+-        }
+-        /* External Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
+-            (env->spr[SPR_LPCR] & LPCR_EEE)) {
+-            bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
+-            if (heic == 0 || !msr_hv || msr_pr) {
+-                return true;
+-            }
+-        }
+-        /* Decrementer Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
+-            (env->spr[SPR_LPCR] & LPCR_DEE)) {
+-            return true;
+-        }
+-        /* Machine Check or Hypervisor Maintenance Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
+-            1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
+-            return true;
+-        }
+-        /* Privileged Doorbell Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
+-            (env->spr[SPR_LPCR] & LPCR_PDEE)) {
+-            return true;
+-        }
+-        /* Hypervisor Doorbell Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
+-            (env->spr[SPR_LPCR] & LPCR_HDEE)) {
+-            return true;
+-        }
+-        /* Hypervisor virtualization exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
+-            (env->spr[SPR_LPCR] & LPCR_HVEE)) {
+-            return true;
+-        }
+-        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
+-            return true;
+-        }
++    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+         return false;
+-    } else {
+-        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
+     }
++
++    /* If EC is clear, just return true on any pending interrupt */
++    if (!(psscr & PSSCR_EC)) {
++        return true;
++    }
++    /* External Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
++        (env->spr[SPR_LPCR] & LPCR_EEE)) {
++        bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
++        if (heic == 0 || !msr_hv || msr_pr) {
++            return true;
++        }
++    }
++    /* Decrementer Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
++        (env->spr[SPR_LPCR] & LPCR_DEE)) {
++        return true;
++    }
++    /* Machine Check or Hypervisor Maintenance Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
++        1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
++        return true;
++    }
++    /* Privileged Doorbell Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
++        (env->spr[SPR_LPCR] & LPCR_PDEE)) {
++        return true;
++    }
++    /* Hypervisor Doorbell Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
++        (env->spr[SPR_LPCR] & LPCR_HDEE)) {
++        return true;
++    }
++    /* Hypervisor virtualization exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
++        (env->spr[SPR_LPCR] & LPCR_HVEE)) {
++        return true;
++    }
++    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
++        return true;
++    }
++    return false;
+ }
+ #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+ 
+@@ -8158,58 +8145,53 @@ static bool cpu_has_work_POWER10(CPUState *cs)
+ {
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+     CPUPPCState *env = &cpu->env;
++    uint64_t psscr = env->spr[SPR_PSSCR];
+ 
+-    if (cs->halted) {
+-        uint64_t psscr = env->spr[SPR_PSSCR];
+-
+-        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+-            return false;
+-        }
+-
+-        /* If EC is clear, just return true on any pending interrupt */
+-        if (!(psscr & PSSCR_EC)) {
+-            return true;
+-        }
+-        /* External Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
+-            (env->spr[SPR_LPCR] & LPCR_EEE)) {
+-            bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
+-            if (heic == 0 || !msr_hv || msr_pr) {
+-                return true;
+-            }
+-        }
+-        /* Decrementer Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
+-            (env->spr[SPR_LPCR] & LPCR_DEE)) {
+-            return true;
+-        }
+-        /* Machine Check or Hypervisor Maintenance Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
+-            1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
+-            return true;
+-        }
+-        /* Privileged Doorbell Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
+-            (env->spr[SPR_LPCR] & LPCR_PDEE)) {
+-            return true;
+-        }
+-        /* Hypervisor Doorbell Exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
+-            (env->spr[SPR_LPCR] & LPCR_HDEE)) {
+-            return true;
+-        }
+-        /* Hypervisor virtualization exception */
+-        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
+-            (env->spr[SPR_LPCR] & LPCR_HVEE)) {
+-            return true;
+-        }
+-        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
+-            return true;
+-        }
++    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
+         return false;
+-    } else {
+-        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
+     }
++
++    /* If EC is clear, just return true on any pending interrupt */
++    if (!(psscr & PSSCR_EC)) {
++        return true;
++    }
++    /* External Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
++        (env->spr[SPR_LPCR] & LPCR_EEE)) {
++        bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
++        if (heic == 0 || !msr_hv || msr_pr) {
++            return true;
++        }
++    }
++    /* Decrementer Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
++        (env->spr[SPR_LPCR] & LPCR_DEE)) {
++        return true;
++    }
++    /* Machine Check or Hypervisor Maintenance Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
++        1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
++        return true;
++    }
++    /* Privileged Doorbell Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
++        (env->spr[SPR_LPCR] & LPCR_PDEE)) {
++        return true;
++    }
++    /* Hypervisor Doorbell Exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
++        (env->spr[SPR_LPCR] & LPCR_HDEE)) {
++        return true;
++    }
++    /* Hypervisor virtualization exception */
++    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
++        (env->spr[SPR_LPCR] & LPCR_HVEE)) {
++        return true;
++    }
++    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
++        return true;
++    }
++    return false;
+ }
+ #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+ 
 -- 
 2.31.1
 
