@@ -2,50 +2,49 @@ Return-Path: <SRS0=Dhlx=NZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37700C433EF
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 09:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91288C433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 10:08:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DAE1160698
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 09:39:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DAE1160698
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4FC316108E
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 10:08:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4FC316108E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177962.323764 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177970.323786 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mM5ey-0000Dn-35; Fri, 03 Sep 2021 09:38:56 +0000
+	id 1mM67m-0004U7-QR; Fri, 03 Sep 2021 10:08:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177962.323764; Fri, 03 Sep 2021 09:38:56 +0000
+Received: by outflank-mailman (output) from mailman id 177970.323786; Fri, 03 Sep 2021 10:08:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mM5ex-0000Dg-Uc; Fri, 03 Sep 2021 09:38:55 +0000
-Received: by outflank-mailman (input) for mailman id 177962;
- Fri, 03 Sep 2021 09:38:54 +0000
+	id 1mM67m-0004U0-My; Fri, 03 Sep 2021 10:08:42 +0000
+Received: by outflank-mailman (input) for mailman id 177970;
+ Fri, 03 Sep 2021 10:08:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iCYc=NZ=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1mM5ew-0000DV-JS
- for xen-devel@lists.xen.org; Fri, 03 Sep 2021 09:38:54 +0000
-Received: from mail-wr1-x429.google.com (unknown [2a00:1450:4864:20::429])
+ <SRS0=93bQ=NZ=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1mM67l-0004Cr-9V
+ for xen-devel@lists.xenproject.org; Fri, 03 Sep 2021 10:08:41 +0000
+Received: from mail-ej1-x62d.google.com (unknown [2a00:1450:4864:20::62d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b0ad83b8-e1a1-4018-b8eb-222b928869fe;
- Fri, 03 Sep 2021 09:38:52 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id q14so7320267wrp.3
- for <xen-devel@lists.xen.org>; Fri, 03 Sep 2021 02:38:52 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id g143sm3863966wme.16.2021.09.03.02.38.50
+ id a207c60b-2f84-4a2e-8c87-e4da339ca8fd;
+ Fri, 03 Sep 2021 10:08:36 +0000 (UTC)
+Received: by mail-ej1-x62d.google.com with SMTP id mf2so10990326ejb.9
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Sep 2021 03:08:36 -0700 (PDT)
+Received: from a2klaptop.epam.com (host-176-36-245-220.b024.la.net.ua.
+ [176.36.245.220])
+ by smtp.gmail.com with ESMTPSA id p5sm2427187eju.30.2021.09.03.03.08.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Sep 2021 02:38:50 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id D1CFC1FF96;
- Fri,  3 Sep 2021 10:38:49 +0100 (BST)
+ Fri, 03 Sep 2021 03:08:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,153 +56,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b0ad83b8-e1a1-4018-b8eb-222b928869fe
+X-Inumbo-ID: a207c60b-2f84-4a2e-8c87-e4da339ca8fd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=references:user-agent:from:to:cc:subject:date:in-reply-to
-         :message-id:mime-version:content-transfer-encoding;
-        bh=eglj5ZpXfutr/eGVG8JtkghmoUPw+XxKGQoeUjdoPlo=;
-        b=oYPdVmnHy4majCVmnTP+1CNbmbzW79nSLoTQ13OnPEJvgKek/h2Gi7AnN9hoFNGDJ+
-         9oRio4Ppmw1h+mbh1Gaf7tAb7az0AGMNUsV10jA5po4tKmjRAm17aMCgxJjfccEn2hp3
-         3Tsue8DDRoaE+1qJyZMoPdN9RpbX7ZKGM29rOcRYIGOR40wndTr9e6Mj0sippnBAKLA1
-         hXmu02EkfOzX4jKVD7Aha6jbZIMl/QYGJtjJmORg59pL5uN+MV/fqh55driLyzThWsdi
-         yfVj7UNlDTtg+5btsSE4yRhA6yb0Q4jY73uiT/bo+KloDFU/IePiG4YYh62qRBQUG/Ou
-         njiA==
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=ZadtWS/HmdzZ6ZB6hMvTOb7/437UPtLCPee6STSCqfE=;
+        b=YhHIT73vy+PVxx26h1vPYEo5XBj3ro3OZ8ijz9+VhFJjzLOVDwpyT4NP5euCOnWr6F
+         sXNIdIdwveV+4JJNloPws1E3n6Qi3ChdN9OgIrXxwDb3quCHFdbymal/0yvXMNj9eLKy
+         rpvYV/4QQUS3mNCN08ose74UFLipgvvzzaThClvTPt6m8yytTwArmYRLrDbwUdlCjlwa
+         Us4A/LRhlNmNfGnBUb+ygPZcwZ46eX0hpKznDPYPRaQBm59/7pFQJhV/aYIUkAeTNmGW
+         YCjjIQo1QPg+2ZCq+OnF2tXhNd9qFuj+CzZ8qJS8zb8SFxw36Od7qiX+H7XIm3NLw3Pg
+         JKjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
-         :in-reply-to:message-id:mime-version:content-transfer-encoding;
-        bh=eglj5ZpXfutr/eGVG8JtkghmoUPw+XxKGQoeUjdoPlo=;
-        b=E1EMoo2bCvxxNlYLMh6KH+mziJhtd07q9Jt00KFQj5dyL2uz6eU2sYuifG0qQGkFes
-         QkQssVnoEtl63hk+RvxJeNi2H/UwPzfbQwidLKUGjqzEu6ZJh2AHi2cvEoguQ67qLpVy
-         Gtgjq93vg6ph3HGlVIkL0Q3yONBjBqtoafW6y4C/kz2F6C6oP37NPyRtp5wU/9bZilkL
-         ySgC7Z+7LRIAOZL4ujnDODyWXRAnBvZQ2KjlrIifXsMY9OpShU/LEesRfdS4xLKBDQh0
-         DmDRcWzNmT9QqYdYD1M6ILo5eIm8vNgQ7Iyt0KeE6BA3yGhKQeArmO6DfRKAcuNFMrRW
-         9F7g==
-X-Gm-Message-State: AOAM532Mn0+OK+1BaOhRB1597jN4K7IgYaQZK7xSicnIScJ/O752duPt
-	tVJ4DcFO5RbClQ+btCXafJtLRQ==
-X-Google-Smtp-Source: ABdhPJx6NdsYfccjIXK3bpXfNCSBcf1+do70OI6kBYhG6UJu6Ret7BmqXZyyO/01ILiNCDYEWnYxTw==
-X-Received: by 2002:adf:eb02:: with SMTP id s2mr3012989wrn.294.1630661931736;
-        Fri, 03 Sep 2021 02:38:51 -0700 (PDT)
-References: <87v94ldrqq.fsf@linaro.org>
- <alpine.DEB.2.21.2108041055390.9768@sstabellini-ThinkPad-T480s>
- <YRuSPT9075NuWRYS@stefanha-x1.localdomain> <875yvkh1p1.fsf@linaro.org>
- <20210903080609.GD47953@laputa>
-User-agent: mu4e 1.7.0; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Stratos Mailing List
- <stratos-dev@op-lists.linaro.org>, virtio-dev@lists.oasis-open.org, Arnd
- Bergmann <arnd.bergmann@linaro.org>, Viresh Kumar
- <viresh.kumar@linaro.org>, Stefano Stabellini
- <stefano.stabellini@xilinx.com>, Jan Kiszka <jan.kiszka@siemens.com>, Carl
- van Schaik <cvanscha@qti.qualcomm.com>, pratikp@quicinc.com, Srivatsa
- Vaddagiri <vatsa@codeaurora.org>, Jean-Philippe Brucker
- <jean-philippe@linaro.org>, Mathieu Poirier <mathieu.poirier@linaro.org>,
- Wei.Chen@arm.com, olekstysh@gmail.com, Oleksandr_Tyshchenko@epam.com,
- Bertrand.Marquis@arm.com, Artem_Mygaiev@epam.com, julien@xen.org,
- jgross@suse.com, paul@xen.org, xen-devel@lists.xen.org, Elena Afanasova
- <eafanasova@gmail.com>
-Subject: Re: Enabling hypervisor agnosticism for VirtIO backends
-Date: Fri, 03 Sep 2021 10:28:06 +0100
-In-reply-to: <20210903080609.GD47953@laputa>
-Message-ID: <87czpqq9qu.fsf@linaro.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=ZadtWS/HmdzZ6ZB6hMvTOb7/437UPtLCPee6STSCqfE=;
+        b=Uey5oSbYIwQXHH9NMZKn+7cI48afypAEdjXa55LJy1A+9R4MKMFUl49TIEpRjNybEB
+         13dtLALW21QIbsUBSq6WP1+gdfH3xLAKEV91ac/4OTv8HAiIpIg8TdXFNfcVyUP3iJic
+         L63ds6uBWA3us0EY5o13sTUHj2DhQ0aZYPqDrylJqHO5A2cvntCJr+jYVCxcxs1fBnsy
+         pTIUve6hfQIyPMNxP46vNTsYQZ4SixRVfuft2/YPEa1Oxsmt6rVFFIPIa2Uc6zeB+9/K
+         +q0ig0nEPa2PYN6/vNRpqE/7Abwmo5hbDgrAZCYolMxnVPxLoPDHE+0V1sl8Adn15pkn
+         QV1Q==
+X-Gm-Message-State: AOAM532yciggjHHlrkznHx4PQ140XKp6WbKSxiBfvBZDLj0Rv2g3sSnQ
+	o7Nccq1vwXUrcAfJJz9Gr//naxT4rws=
+X-Google-Smtp-Source: ABdhPJwgZPoQj1ss4jKZJbBH8b+YlK07Jv0KEwHZKKBxDLUyLP9WFuc8uyLUXAIwk7Pj5zBg8EBp3Q==
+X-Received: by 2002:a17:907:362:: with SMTP id rs2mr3352436ejb.17.1630663715405;
+        Fri, 03 Sep 2021 03:08:35 -0700 (PDT)
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: julien@xen.org,
+	sstabellini@kernel.org,
+	oleksandr_tyshchenko@epam.com,
+	volodymyr_babchuk@epam.com,
+	Artem_Mygaiev@epam.com,
+	roger.pau@citrix.com,
+	jbeulich@suse.com,
+	bertrand.marquis@arm.com,
+	rahul.singh@arm.com,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Subject: [PATCH 1/9] vpci: Make vpci registers removal a dedicated function
+Date: Fri,  3 Sep 2021 13:08:23 +0300
+Message-Id: <20210903100831.177748-2-andr2000@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210903100831.177748-1-andr2000@gmail.com>
+References: <20210903100831.177748-1-andr2000@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-AKASHI Takahiro <takahiro.akashi@linaro.org> writes:
+This is in preparation for dynamic assignment of the vpci register
+handlers depending on the domain: hwdom or guest.
 
-> Alex,
->
-> On Wed, Sep 01, 2021 at 01:53:34PM +0100, Alex Benn??e wrote:
->>=20
->> Stefan Hajnoczi <stefanha@redhat.com> writes:
->>=20
->> > [[PGP Signed Part:Undecided]]
->> > On Wed, Aug 04, 2021 at 12:20:01PM -0700, Stefano Stabellini wrote:
->> >> > Could we consider the kernel internally converting IOREQ messages f=
-rom
->> >> > the Xen hypervisor to eventfd events? Would this scale with other k=
-ernel
->> >> > hypercall interfaces?
->> >> >=20
->> >> > So any thoughts on what directions are worth experimenting with?
->> >>=20=20
->> >> One option we should consider is for each backend to connect to Xen v=
-ia
->> >> the IOREQ interface. We could generalize the IOREQ interface and make=
- it
->> >> hypervisor agnostic. The interface is really trivial and easy to add.
->> >> The only Xen-specific part is the notification mechanism, which is an
->> >> event channel. If we replaced the event channel with something else t=
-he
->> >> interface would be generic. See:
->> >> https://gitlab.com/xen-project/xen/-/blob/staging/xen/include/public/=
-hvm/ioreq.h#L52
->> >
->> > There have been experiments with something kind of similar in KVM
->> > recently (see struct ioregionfd_cmd):
->> > https://lore.kernel.org/kvm/dad3d025bcf15ece11d9df0ff685e8ab0a4f2edd.1=
-613828727.git.eafanasova@gmail.com/
->>=20
->> Reading the cover letter was very useful in showing how this provides a
->> separate channel for signalling IO events to userspace instead of using
->> the normal type-2 vmexit type event. I wonder how deeply tied the
->> userspace facing side of this is to KVM? Could it provide a common FD
->> type interface to IOREQ?
->
-> Why do you stick to a "FD" type interface?
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+---
+ xen/drivers/vpci/vpci.c | 7 ++++++-
+ xen/include/xen/vpci.h  | 2 ++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-I mean most user space interfaces on POSIX start with a file descriptor
-and the usual read/write semantics or a series of ioctls.
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index cbd1bac7fc33..b05530f2a6b0 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -35,7 +35,7 @@ extern vpci_register_init_t *const __start_vpci_array[];
+ extern vpci_register_init_t *const __end_vpci_array[];
+ #define NUM_VPCI_INIT (__end_vpci_array - __start_vpci_array)
+ 
+-void vpci_remove_device(struct pci_dev *pdev)
++void vpci_remove_device_registers(struct pci_dev *pdev)
+ {
+     spin_lock(&pdev->vpci->lock);
+     while ( !list_empty(&pdev->vpci->handlers) )
+@@ -48,6 +48,11 @@ void vpci_remove_device(struct pci_dev *pdev)
+         xfree(r);
+     }
+     spin_unlock(&pdev->vpci->lock);
++}
++
++void vpci_remove_device(struct pci_dev *pdev)
++{
++    vpci_remove_device_registers(pdev);
+     xfree(pdev->vpci->msix);
+     xfree(pdev->vpci->msi);
+     xfree(pdev->vpci);
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 9f5b5d52e159..b861f438cc78 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -28,6 +28,8 @@ int __must_check vpci_add_handlers(struct pci_dev *dev);
+ 
+ /* Remove all handlers and free vpci related structures. */
+ void vpci_remove_device(struct pci_dev *pdev);
++/* Remove all handlers for the device given. */
++void vpci_remove_device_registers(struct pci_dev *pdev);
+ 
+ /* Add/remove a register handler. */
+ int __must_check vpci_add_register(struct vpci *vpci,
+-- 
+2.25.1
 
->> As I understand IOREQ this is currently a direct communication between
->> userspace and the hypervisor using the existing Xen message bus. My
->
-> With IOREQ server, IO event occurrences are notified to BE via Xen's event
-> channel, while the actual contexts of IO events (see struct ioreq in iore=
-q.h)
-> are put in a queue on a single shared memory page which is to be assigned
-> beforehand with xenforeignmemory_map_resource hypervisor call.
-
-If we abstracted the IOREQ via the kernel interface you would probably
-just want to put the ioreq structure on a queue rather than expose the
-shared page to userspace.=20
-
->> worry would be that by adding knowledge of what the underlying
->> hypervisor is we'd end up with excess complexity in the kernel. For one
->> thing we certainly wouldn't want an API version dependency on the kernel
->> to understand which version of the Xen hypervisor it was running on.
->
-> That's exactly what virtio-proxy in my proposal[1] does; All the hypervis=
-or-
-> specific details of IO event handlings are contained in virtio-proxy
-> and virtio BE will communicate with virtio-proxy through a virtqueue
-> (yes, virtio-proxy is seen as yet another virtio device on BE) and will
-> get IO event-related *RPC* callbacks, either MMIO read or write, from
-> virtio-proxy.
->
-> See page 8 (protocol flow) and 10 (interfaces) in [1].
-
-There are two areas of concern with the proxy approach at the moment.
-The first is how the bootstrap of the virtio-proxy channel happens and
-the second is how many context switches are involved in a transaction.
-Of course with all things there is a trade off. Things involving the
-very tightest latency would probably opt for a bare metal backend which
-I think would imply hypervisor knowledge in the backend binary.
-
->
-> If kvm's ioregionfd can fit into this protocol, virtio-proxy for kvm
-> will hopefully be implemented using ioregionfd.
->
-> -Takahiro Akashi
->
-> [1] https://op-lists.linaro.org/pipermail/stratos-dev/2021-August/000548.=
-html
-
---=20
-Alex Benn=C3=A9e
 
