@@ -2,43 +2,45 @@ Return-Path: <SRS0=Dhlx=NZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,
+	DATE_IN_FUTURE_03_06,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B32F9C433F5
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 13:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48702C433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 15:07:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7502060E77
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 13:53:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7502060E77
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0AF9E60EC0
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 15:07:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0AF9E60EC0
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.178110.323983 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.178120.323994 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mM9cn-000650-As; Fri, 03 Sep 2021 13:52:57 +0000
+	id 1mMAm8-0005l6-P3; Fri, 03 Sep 2021 15:06:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 178110.323983; Fri, 03 Sep 2021 13:52:57 +0000
+Received: by outflank-mailman (output) from mailman id 178120.323994; Fri, 03 Sep 2021 15:06:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mM9cn-00064t-60; Fri, 03 Sep 2021 13:52:57 +0000
-Received: by outflank-mailman (input) for mailman id 178110;
- Fri, 03 Sep 2021 13:52:56 +0000
+	id 1mMAm8-0005kz-LT; Fri, 03 Sep 2021 15:06:40 +0000
+Received: by outflank-mailman (input) for mailman id 178120;
+ Fri, 03 Sep 2021 15:06:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kbJo=NZ=linuxfoundation.org=aweltz@srs-us1.protection.inumbo.net>)
- id 1mM9cm-00064n-8H
- for xen-devel@lists.xenproject.org; Fri, 03 Sep 2021 13:52:56 +0000
-Received: from mail-il1-x131.google.com (unknown [2607:f8b0:4864:20::131])
+ <SRS0=yFRs=NZ=apertussolutions.com=dpsmith@srs-us1.protection.inumbo.net>)
+ id 1mMAm7-0005kt-Nt
+ for xen-devel@lists.xenproject.org; Fri, 03 Sep 2021 15:06:39 +0000
+Received: from sender4-of-o51.zoho.com (unknown [136.143.188.51])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c665ad12-4d74-43bb-9d32-d5cdc038559c;
- Fri, 03 Sep 2021 13:52:55 +0000 (UTC)
-Received: by mail-il1-x131.google.com with SMTP id h29so5288303ila.2
- for <xen-devel@lists.xenproject.org>; Fri, 03 Sep 2021 06:52:55 -0700 (PDT)
+ id c2c0082e-686b-4760-b90e-0f7fdcb53c2d;
+ Fri, 03 Sep 2021 15:06:38 +0000 (UTC)
+Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
+ [72.81.132.2]) by mx.zohomail.com
+ with SMTPS id 1630681592656284.14797840719837;
+ Fri, 3 Sep 2021 08:06:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,106 +52,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c665ad12-4d74-43bb-9d32-d5cdc038559c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=mime-version:from:date:message-id:subject:to:cc;
-        bh=LcflHDuWnt22drIHcdo3+GFGrkeK5QWOt9ac+oMd6kE=;
-        b=eXkEl7Rm2aiiik4kPHuU4F1OnGGRqiaujgiCkqGXG0cpstYFYWa8wiKzdF0RReoPFJ
-         8D9vFRc1d2VIkVdGREBEq3UOxb/qRHAhDVT94fPuqr1Q+3f2R6fQ8yy+KR+NxRQFtBme
-         a3toHvO3iNa4cOQf0GChUAxiu3HF9IFfcwHhU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-        bh=LcflHDuWnt22drIHcdo3+GFGrkeK5QWOt9ac+oMd6kE=;
-        b=tK/UOLulv7akLzkTJoQusSNUlKQl/DaoI2tS75dXzOWa09tYJ/Q50uoZiBroxWvfTL
-         IQUY9faZ1pB/AmmsA5aNz6aw5uqli1j1g03EGwdrR+qwYFWyzwpFJ2Z+6GvnFt3XIM8/
-         7oUN1asr+CP0HPqOrnzwt07Q6iNOEMUFOfyfW85PYx/QcrGv3wF2YCf9XRHPUqq0F+OT
-         9Cg2jgDsDIZRP9w42dNHCUF+4vBFAwlFrtfcwzLlJ8k2BBdMhUnSsy+5klcraHg6RfRm
-         ZFZhfDK86CtRgUnkcedxKtEJDKKGBQo0fmu9yCT8Dtnv6/BEwFjtZiuWvNQ+E1pd4+l9
-         Taww==
-X-Gm-Message-State: AOAM531MFjGaPic4U7v+PpPlcFYmoRwDDixrh3ErG6ui6GEvVlCbuWdT
-	wDUJ2tbgHXTw5CgRDd6jUiYwBKPDDtFSn64UQq13MQ==
-X-Google-Smtp-Source: ABdhPJx3adAS9hhK6cug5GLkwtGb1nPGLwRZ3S7Xjvj3gZC2aZvuo61R2uUSFjXy5lPujr2imEgnPUxbp5R9ru3PLIU=
-X-Received: by 2002:a05:6e02:1353:: with SMTP id k19mr2671451ilr.157.1630677174665;
- Fri, 03 Sep 2021 06:52:54 -0700 (PDT)
+X-Inumbo-ID: c2c0082e-686b-4760-b90e-0f7fdcb53c2d
+ARC-Seal: i=1; a=rsa-sha256; t=1630681596; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=E2oZLva+iHX9+Zc88gM7a7iGmT8mb9EStMMvtU73/v3qRt+V+muRRXZw12qB5H+sNR+05kxZU1rfEd8iEAFhHsJggDyk7PTTFHm/28TIKSEONkZELEVtZ9A+3qHlyjiUvpuqBomYG4ZgaiArsUYBelM6VcAciOvKIGEmv2Z15Nk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1630681596; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
+	bh=DY8SumKHy69+y3Ky8ZXpZgjykeZw2efDQnmXyQdCT7I=; 
+	b=KzC69ufgi3jJTaSVSrXTOevHYq2d/Sx2ojmKZ3PsXiBsmc5bDjT4GCk6lxtL9j14ALyZ2KhQ9GEpYFsqy2cunu2hT/Zl56eTVasu/I0jIAJW6zHxQwacDJlEEv9lsFczrSfgHqowhzSpCyAH2EoLFR74cMWGpHl8T8xDioQ+ehs=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1630681596;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=DY8SumKHy69+y3Ky8ZXpZgjykeZw2efDQnmXyQdCT7I=;
+	b=csHVsu2HGGmCXToKfqdM5cZAqNkSdhU0AnJAka7lU2tQX30O9p4ZE5KcnwUzhTfH
+	/yNdQaj8UePYzjJ57chw/dbmLNY1IaRGOxBOtpoUcDilRvIOvW5ccyH2HOj6LNRF6bk
+	zAmhlLuo01z5G+TRTQuitv1iSvRV/YzP7DG4QdeA=
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+To: xen-devel@lists.xenproject.org
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v4 00/11] xsm: refactoring xsm hooks
+Date: Fri,  3 Sep 2021 15:06:18 -0400
+Message-Id: <20210903190629.11917-1-dpsmith@apertussolutions.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-From: Ashley Weltz <aweltz@linuxfoundation.org>
-Date: Fri, 3 Sep 2021 09:52:43 -0400
-Message-ID: <CADT4066k7HR=Bpcg1U0jT+w2Zt5u_4ApHXTZuAo-i3g-Z79mpQ@mail.gmail.com>
-Subject: Call for agenda items for September 7th Community Call @ 1500 UTC
-To: amit@infradead.org, andrew.cooper3@citrix.com, Artem_Mygaiev@epam.com, 
-	ash.j.wilding@gmail.com, ben@exotanium.io, bobby.eshleman@gmail.com, 
-	brendank310@gmail.com, brian.woods@xilinx.com, cardoe@cardoe.com, 
-	christopher.w.clark@gmail.com, Corey Minyard <cminyard@mvista.com>, 
-	daniel.kiper@oracle.com, deepthi.m@ltts.com, dpsmith@apertussolutions.com, 
-	dwmw@amazon.co.uk, edgar.iglesias@xilinx.com, Ian.Jackson@citrix.com, 
-	insurgo@riseup.net, intel-xen@intel.com, Jarvis.Roach@dornerworks.com, 
-	Jeff.Kubascik@dornerworks.com, jgross@suse.com, john.ji@intel.com, 
-	julien@xen.org, kevin.pearson@ortmanconsulting.com, Matt.Spencer@arm.com, 
-	=?UTF-8?Q?Mirela_Simonovi=C4=87?= <mirela.simonovic@aggios.com>, 
-	oleksandr_andrushchenko@epam.com, oleksandr_tyshchenko@epam.com, 
-	olivier.lambert@vates.fr, pdurrant@amazon.com, persaur@gmail.com, 
-	piotr.krol@3mdeb.com, Rahul.Singh@arm.com, rianquinn@gmail.com, 
-	rob.townley@gmail.com, robin.randhawa@arm.com, roger.pau@citrix.com, 
-	scottwd@gmail.com, sergey.dyasli@citrix.com, sstabellini@kernel.org, 
-	Stewart.Hildebrand@dornerworks.com, tamas.k.lengyel@gmail.com, 
-	varadgautam@gmail.com, volodymyr_babchuk@epam.com, wl@xen.org
-Cc: xen-devel@lists.xenproject.org
-Content-Type: multipart/alternative; boundary="000000000000bd5c6605cb179deb"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
---000000000000bd5c6605cb179deb
-Content-Type: text/plain; charset="UTF-8"
+Based on feedback from 2021 Xen Developers Summit the xsm-roles RFC patch set
+is being split into two separate patch sets. This is the first patch set and is
+focused purely on the clean up and refactoring of the XSM hooks.
 
-Hi everyone,
+This patch set refactors the xsm_ops wrapper hooks to use the alternative_call
+infrastructure. Then proceeds to move and realign the headers to simplify the
+unnecessarily complicated header inclusions, remove the facad of being able to
+enable/disable XSM, and simplify the XSM hooks down to a single interface and
+implementation. The remainder of the changes are clean up and removing no
+longer necessary abstractions.
 
-Our next meeting is this upcoming Tuesday at 1500 UTC.
+v2:
+ - restructured the patches, breaking them up as needed
+ - incorporate Andrew Cooper's alternative call common code
+ - change XSM module registration, removing register_xsm
+ - incoporate KConfig recommendations
+ - reworded commit messages
+ - incorporate macro expansion recommendations
+ - misc clean-up fallout from recommendations
 
-The proposed agenda is in
-https://cryptpad.fr/pad/#/2/pad/edit/PXjRK6mJfWbUxSNW0Qt8xOqT/. Please add
-or edit any items to this agenda. Alternatively, please feel free to email
-me directly with agenda items.
+v3:
+ - renamed struct xsm_operations to struct xsm_ops
+ - flask and silo ops structs made __initconst
+ - fixed misplacement of __init on flask/silo_init
+ - lots of coding style alignment
+ - further clean up from FLASK_DISABLE removal
+ - addressed commit message comments
+ - removed missed guard around alternative-call include
+ - reworked approach to XSM hooks, merging the two interfaces instead of
+   dropping one
 
-Please put your name beside any items if you edit the document.
+v4:
+- make __alt_call_maybe_initdata resolve to __read_mostly when
+  CONFIG_ALTERNATIVE_CALL is not set
+- removed the masking of void with xsm_op_t
+- moved all the coding style conformity to an early commit
+- fixed declaration on real and stub declarations in xsm.h
+- corrected to __initconstrel
+- made the xsm_ops global __read_mostly
+- adjusted blank lines in xsm_ops struct to provide consistent grouping
+- moved extern references to built in policy to where they are used
+- Added back in the #ifdef CONFIG_XSM into struct evtchn
+- split the patch removing the duplicate interface up further
 
-We will plan to start the meeting 5 minutes past the hour.
+Andrew Cooper (1):
+  xen: Implement xen/alternative-call.h for use in common code
 
-* If you want to be CC'ed please add or remove yourself from the
-sign-up-sheet at
-https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/
+Daniel P. Smith (10):
+  xsm: remove the ability to disable flask
+  xsm: drop dubious xsm_op_t type
+  xsm: apply coding style
+  xsm: refactor xsm_ops handling
+  xsm: convert xsm_ops hook calls to alternative call
+  xsm: decouple xsm header inclusion selection
+  xsm: drop generic event channel labeling exclusion
+  silo: remove circular xsm hook call
+  kconfig: update xsm config to reflect reality
+  xsm: remove alternate xsm hook interface
 
-Again, please let me know if you have any questions. See you on Tuesday!
-
-Cheers,
-Ashley
+ xen/arch/x86/Kconfig               |   1 +
+ xen/common/Kconfig                 |  52 +-
+ xen/include/public/xsm/flask_op.h  |   2 +-
+ xen/include/xen/alternative-call.h |  63 +++
+ xen/include/xen/hypercall.h        |   4 +-
+ xen/include/xen/sched.h            |   4 +-
+ xen/include/xsm/dummy.h            | 774 ---------------------------
+ xen/include/xsm/xsm-core.h         | 273 ++++++++++
+ xen/include/xsm/xsm.h              | 804 +++++++++++++----------------
+ xen/xsm/Makefile                   |   4 +-
+ xen/xsm/dummy.c                    |   7 +-
+ xen/xsm/dummy.h                    | 739 ++++++++++++++++++++++++++
+ xen/xsm/flask/flask_op.c           |  32 +-
+ xen/xsm/flask/hooks.c              |  16 +-
+ xen/xsm/silo.c                     |  25 +-
+ xen/xsm/xsm_core.c                 |  94 ++--
+ 16 files changed, 1535 insertions(+), 1359 deletions(-)
+ create mode 100644 xen/include/xen/alternative-call.h
+ delete mode 100644 xen/include/xsm/dummy.h
+ create mode 100644 xen/include/xsm/xsm-core.h
+ create mode 100644 xen/xsm/dummy.h
 
 -- 
-Ashley Weltz, Project Coordinator
-The Linux Foundation
-aweltz@linuxfoundation.org
+2.20.1
 
---000000000000bd5c6605cb179deb
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi everyone,</div><div><br></div><div>Our next meetin=
-g is this upcoming Tuesday at 1500 UTC.=C2=A0</div><div><br></div><div>The =
-proposed agenda is in=C2=A0<a href=3D"https://cryptpad.fr/pad/#/2/pad/edit/=
-PXjRK6mJfWbUxSNW0Qt8xOqT/">https://cryptpad.fr/pad/#/2/pad/edit/PXjRK6mJfWb=
-UxSNW0Qt8xOqT/</a>. Please add or edit any items to this agenda. Alternativ=
-ely, please feel free to email me directly with agenda items.=C2=A0</div><d=
-iv><br>Please put your name beside any items if you edit the document.<br><=
-br>We will plan to start the meeting 5 minutes past the hour.=C2=A0<br><br>=
-* If you want to be CC&#39;ed please add or remove yourself from the sign-u=
-p-sheet at=C2=A0<a href=3D"https://cryptpad.fr/pad/#/2/pad/edit/D9vGzihPxxA=
-Oe6RFPz0sRCf+/" rel=3D"noreferrer" target=3D"_blank">https://cryptpad.fr/pa=
-d/#/2/pad/edit/D9vGzihPxxAOe6RFPz0sRCf+/</a></div><div><br></div><div>Again=
-, please let me know if you have any questions. See you on Tuesday!</div><d=
-iv><br></div><div>Cheers,</div><div>Ashley</div><div><br></div>-- <br><div =
-dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><d=
-iv dir=3D"ltr">Ashley Weltz, Project Coordinator=C2=A0<div>The Linux Founda=
-tion</div><div><a href=3D"mailto:aweltz@linuxfoundation.org" target=3D"_bla=
-nk">aweltz@linuxfoundation.org</a></div></div></div></div>
-
---000000000000bd5c6605cb179deb--
 
