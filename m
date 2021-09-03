@@ -2,56 +2,44 @@ Return-Path: <SRS0=Dhlx=NZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0DA8C4332F
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 08:49:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96BF2C433F5
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 08:56:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6CDB260FDA
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 08:49:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6CDB260FDA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5720260E77
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Sep 2021 08:56:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5720260E77
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.177911.323676 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.177928.323709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mM4tL-0006nU-EZ; Fri, 03 Sep 2021 08:49:43 +0000
+	id 1mM4zz-0001D7-MY; Fri, 03 Sep 2021 08:56:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 177911.323676; Fri, 03 Sep 2021 08:49:43 +0000
+Received: by outflank-mailman (output) from mailman id 177928.323709; Fri, 03 Sep 2021 08:56:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mM4tL-0006nN-BR; Fri, 03 Sep 2021 08:49:43 +0000
-Received: by outflank-mailman (input) for mailman id 177911;
- Fri, 03 Sep 2021 08:49:42 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=FOYs=NZ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mM4tK-0006nA-39
- for xen-devel@lists.xenproject.org; Fri, 03 Sep 2021 08:49:42 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5dadf295-4f13-42fd-b413-aa9abfb9d364;
- Fri, 03 Sep 2021 08:49:40 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0FD5122663;
- Fri,  3 Sep 2021 08:49:40 +0000 (UTC)
-Received: from imap1.suse-dmz.suse.de (imap1.suse-dmz.suse.de [192.168.254.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap1.suse-dmz.suse.de (Postfix) with ESMTPS id 6EBBF1374A;
- Fri,  3 Sep 2021 08:49:39 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap1.suse-dmz.suse.de with ESMTPSA id YQ4TGaPhMWFjdAAAGKfGzw
- (envelope-from <jgross@suse.com>); Fri, 03 Sep 2021 08:49:39 +0000
+	id 1mM4zz-0001D0-JQ; Fri, 03 Sep 2021 08:56:35 +0000
+Received: by outflank-mailman (input) for mailman id 177928;
+ Fri, 03 Sep 2021 08:56:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=KfKZ=NZ=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
+ id 1mM4zy-0001Cu-43
+ for xen-devel@lists.xenproject.org; Fri, 03 Sep 2021 08:56:34 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d610c1c8-0c94-11ec-aefe-12813bfff9fa;
+ Fri, 03 Sep 2021 08:56:33 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id F1B3161051;
+ Fri,  3 Sep 2021 08:56:31 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,62 +51,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5dadf295-4f13-42fd-b413-aa9abfb9d364
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1630658980; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=Etfp5KRM0ihxlz1Fzg+3n+yV+gWrXCILk5YBRRiJ4ec=;
-	b=g/xCu4uUEeLNVhfh4hdAtjtyZDkPPqU9rW19W5JYaL63cE3RPFwRsK8D5oSo5RKnUyhZef
-	oRJKvg5r8mEK1qPZy47OOCWYT8N3Ja1dGzT5F+tieQLSPZ2csfGh8mApFEuhAiWEv2KpMv
-	5oLIfL7iry/5ho/b6+Y9oBZRKXdYVLY=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	linux-pm@vger.kernel.org,
+X-Inumbo-ID: d610c1c8-0c94-11ec-aefe-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1630659392;
+	bh=SsjjbztlEwoQ2/FB20kOEWlK/4U11FZMfaPIS5UzwPA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HIACXt/YT6pWCqM1ZXgIK14DP/a+8b2wZJAtH533JTB7bHiNh5hQjPgWr4l844+Hp
+	 fsqjfJdlFyq4d5jAQMavIFBifH1me5UlrWLbbRy3fBUFxN2leYC9fYTFblIYrARotV
+	 Weq2nXrRWULvKRmXB2e4DIi5A9/LS26+/JVxSY+U=
+Date: Fri, 3 Sep 2021 10:56:29 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, linux-pm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	x86@kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
 	"Rafael J. Wysocki" <rjw@rjwysocki.net>,
-	Len Brown <len.brown@intel.com>,
-	Pavel Machek <pavel@ucw.cz>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	stable@vger.kernel.org,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>
-Subject: [PATCH 0/2] xen: fix illegal rtc device usage of pv guests
-Date: Fri,  3 Sep 2021 10:49:35 +0200
-Message-Id: <20210903084937.19392-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+	Len Brown <len.brown@intel.com>, Pavel Machek <pavel@ucw.cz>,
+	"Rafael J. Wysocki" <rafael@kernel.org>, stable@vger.kernel.org
+Subject: Re: [PATCH 1/2] PM: base: power: don't try to use non-existing RTC
+ for storing data
+Message-ID: <YTHjPbklWVDVaBfK@kroah.com>
+References: <20210903084937.19392-1-jgross@suse.com>
+ <20210903084937.19392-2-jgross@suse.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210903084937.19392-2-jgross@suse.com>
 
-A recent change in mc146818_get_time() resulted in WARN splats when
-booting a Xen PV guest.
+On Fri, Sep 03, 2021 at 10:49:36AM +0200, Juergen Gross wrote:
+> In there is no legacy RTC device, don't try to use it for storing trace
+> data across suspend/resume.
+> 
+> Cc: <stable@vger.kernel.org>
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+>  drivers/base/power/trace.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+> 
+> diff --git a/drivers/base/power/trace.c b/drivers/base/power/trace.c
+> index a97f33d0c59f..b7c80849455c 100644
+> --- a/drivers/base/power/trace.c
+> +++ b/drivers/base/power/trace.c
+> @@ -13,6 +13,7 @@
+>  #include <linux/export.h>
+>  #include <linux/rtc.h>
+>  #include <linux/suspend.h>
+> +#include <linux/init.h>
+>  
+>  #include <linux/mc146818rtc.h>
+>  
+> @@ -165,6 +166,9 @@ void generate_pm_trace(const void *tracedata, unsigned int user)
+>  	const char *file = *(const char **)(tracedata + 2);
+>  	unsigned int user_hash_value, file_hash_value;
+>  
+> +	if (!x86_platform.legacy.rtc)
+> +		return 0;
 
-The main reason is that there is a code path resulting in accessing a
-RTC device which is not present, which has been made obvious by a
-call of WARN() in this case.
+Why does the driver core code here care about a platform/arch-specific
+thing at all?  Did you just break all other arches?
 
-This small series is fixing this issue by:
+thanks,
 
-- avoiding the RTC device access from drivers/base/power/trace.c in
-  cast there is no legacy RTC device available
-- resetting the availability flag of a legacy RTC device for Xen PV
-  guests
-
-Juergen Gross (2):
-  PM: base: power: don't try to use non-existing RTC for storing data
-  xen: reset legacy rtc flag for PV domU
-
- arch/x86/xen/enlighten_pv.c |  7 +++++++
- drivers/base/power/trace.c  | 10 ++++++++++
- 2 files changed, 17 insertions(+)
-
--- 
-2.26.2
-
+greg k-h
 
