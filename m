@@ -2,49 +2,45 @@ Return-Path: <SRS0=XIDt=N4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-4.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50972C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Sep 2021 08:00:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF192C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Sep 2021 08:11:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 103A260F14
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Sep 2021 08:00:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 103A260F14
+	by mail.kernel.org (Postfix) with ESMTPS id 8559C61039
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Sep 2021 08:11:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8559C61039
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.179413.325696 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.179443.325708 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mN9YV-0006Sj-Pv; Mon, 06 Sep 2021 08:00:39 +0000
+	id 1mN9jG-0008KG-Qy; Mon, 06 Sep 2021 08:11:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 179413.325696; Mon, 06 Sep 2021 08:00:39 +0000
+Received: by outflank-mailman (output) from mailman id 179443.325708; Mon, 06 Sep 2021 08:11:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mN9YV-0006Sc-MJ; Mon, 06 Sep 2021 08:00:39 +0000
-Received: by outflank-mailman (input) for mailman id 179413;
- Mon, 06 Sep 2021 07:55:25 +0000
+	id 1mN9jG-0008K9-N8; Mon, 06 Sep 2021 08:11:46 +0000
+Received: by outflank-mailman (input) for mailman id 179443;
+ Mon, 06 Sep 2021 08:11:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tq2V=N4=gmail.com=long870912@srs-us1.protection.inumbo.net>)
- id 1mN9TR-0003rK-3Z
- for xen-devel@lists.xenproject.org; Mon, 06 Sep 2021 07:55:25 +0000
-Received: from mail-pj1-x102b.google.com (unknown [2607:f8b0:4864:20::102b])
+ id 1mN9jF-0008K3-Lj
+ for xen-devel@lists.xenproject.org; Mon, 06 Sep 2021 08:11:45 +0000
+Received: from mail-ot1-x329.google.com (unknown [2607:f8b0:4864:20::329])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 038a7c4b-e7d3-4c03-98ac-9450a760c7b3;
- Mon, 06 Sep 2021 07:55:24 +0000 (UTC)
-Received: by mail-pj1-x102b.google.com with SMTP id
- mj9-20020a17090b368900b001965618d019so3770772pjb.4
- for <xen-devel@lists.xenproject.org>; Mon, 06 Sep 2021 00:55:24 -0700 (PDT)
-Received: from localhost.localdomain ([111.207.172.18])
- by smtp.gmail.com with ESMTPSA id u10sm6789616pfn.147.2021.09.06.00.55.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Sep 2021 00:55:22 -0700 (PDT)
+ id 1060a139-3710-4982-bfd4-ad1603b2a747;
+ Mon, 06 Sep 2021 08:11:44 +0000 (UTC)
+Received: by mail-ot1-x329.google.com with SMTP id
+ i8-20020a056830402800b0051afc3e373aso7884094ots.5
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Sep 2021 01:11:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,130 +52,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 038a7c4b-e7d3-4c03-98ac-9450a760c7b3
+X-Inumbo-ID: 1060a139-3710-4982-bfd4-ad1603b2a747
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2Xf56OLSp+hppzWvWhEGSXjWhxDg/ErT9f349mtnYmE=;
-        b=Tj/b5umNNUQO9OTj3KVUsNndVD9R/+79WMav7vc/xEFnF8t6aarL8lMZq2aqHDGjCK
-         ccCjcuxmO+xSG+V1DpEK/wSnmGUtxvRS7In/KdYAdecRoFxbTVPjHkMJhX1og+8YJtaC
-         OLziIHDZfUChb6k7TVrMezl5ZwtSGzqPzoYTQg4s2nYvNQyXISHO0HeOxBs6f8ad4BLt
-         zQIqvCluOoylVSb2kc/zCJtLB4aF9PnF1gOhDpZ+nCqm2OsEIGsvyInV7GyNTUgoO+X1
-         h1701OZ+VbZSUDUHA7PgUN50uYWh65fuh9owuw2BMzW/e2BF0BOAevtd8BEoSCpMPMaW
-         f9mA==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Jqw0MwknMj1RijM4alevMH+POuK2y8El0iNuvJ4Z7sI=;
+        b=fAULSwf4Pj+E1UknxqjuJ/OdTFuiM7YxgvSqmyiVuhepLdtk8HrH3yeP++ilsATvZQ
+         5uUedwNnU2hl/Gmjit3Ykk/Y3BCHR93wDqaLZ7QJCWw0rAmnccIhKnwv5CdxzmyYq8eS
+         SPKhucRIXtC7Kxli/P/k2eIB8OMVbsEmbEphr3fpvHiAKzPHKETrIG6q5URdo2VIVtXg
+         DWJVQF9BPsQUYDkq//AiIh5sQWLLCqnK+8b1wogRQKfZZ/8dCu6bipeYSjhCz/DtiBFR
+         O59TGtBnYwHvt1PEMtpSZ4fag3sx9r3sJwVlPWzfNthiZ/dNYL4F4HfPEshQFDJcFpVR
+         zsgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2Xf56OLSp+hppzWvWhEGSXjWhxDg/ErT9f349mtnYmE=;
-        b=q+YEqNrje2pq+4BM0nsVB3W8OnKZux099mFCHWIrVmglO7mDvJNJBolSn8dVIMy0ME
-         41RdbsdOpCW77n0/MQH9Um5qXCQ+gyghn/FxnMVV9EK/mdknDq8DW6jEiIHRtZdauEq4
-         y3ws8SDyENJnCIGI79SLtLLZD19lf8//M+NJej8Er7/9jL7QrPxCyRJK6xrPuHJ94tC1
-         2tO7bnWofFQkWb7eMtgW9UXsWfg47SIIJNC1J1t1gc2UAsku37LIz9y/YyHSQO9gO46E
-         BG1pq+SdZOmykjjeCcaKPL2TO8UYuPZG/ue6W/gxBqi01bbiDFk6kouBFJIKB3yQzmO5
-         JZSw==
-X-Gm-Message-State: AOAM530Z9oTg09pKxbVCiaL3s1GZzqEAL1OmpIRyWBj9Vp/ZuX6rPJOZ
-	P8HZgRyIf/GL0RaxGze3jPg=
-X-Google-Smtp-Source: ABdhPJxd0pw9THgbbgqH1OA2JXyGSDCt9tbjRnSLlddXY9HZasP9LDEct/XwtdvVy+oXt3MppnsVUg==
-X-Received: by 2002:a17:902:a503:b029:12b:2429:385e with SMTP id s3-20020a170902a503b029012b2429385emr9853168plq.64.1630914923382;
-        Mon, 06 Sep 2021 00:55:23 -0700 (PDT)
-From: zhaoxiao <long870912@gmail.com>
-To: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	x86@kernel.org
-Cc: hpa@zytor.com,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	boris.ostrovsky@oracle.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	zhaoxiao <long870912@gmail.com>
-Subject: [PATCH] x86: xen: platform-pci-unplug: use pr_err() and pr_warn() instead of raw printk()
-Date: Mon,  6 Sep 2021 15:55:16 +0800
-Message-Id: <20210906075516.15066-1-long870912@gmail.com>
-X-Mailer: git-send-email 2.20.1
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Jqw0MwknMj1RijM4alevMH+POuK2y8El0iNuvJ4Z7sI=;
+        b=iliIaYAvbLuHpIS2crv9LTzUuT0M3Ie1IayG7m+CaDwOXgv4/Hr/dfnwSKpGH3RqQp
+         EwXwKtgXQ6e0qelQX498ifCc1g5FE+W5IxE+9AqIBt1mh+47rcGu6BweFI1JsbZPUUaZ
+         oIb8HFx87dXfR910+LfTyilURNS+EAZP9NQfmScakMUlC3+0vnvmc984Qurp4Lc8753d
+         KuxFQLDRrVfvhXvy/N3W4YU/DL7kitippxDnNm163kgpJOmcKFXAWpp4yyrJfe0ru/2t
+         tmKGF6U4bJvI3DnSWbdRufWTTxcEHFlVH9Y6UysLFvvHSFpvkVRoqUNJIK3kUGV/hml+
+         2Usw==
+X-Gm-Message-State: AOAM533z5KL7dsQzF22UoCwEwFOXn2lVO3PNHAIp0HB2AfSrg2SclZZ/
+	VQFZf+Ak96M28Vsa5VaJmPwDLDim+eCkyKWFNyg=
+X-Google-Smtp-Source: ABdhPJz++uZDYjY85Lmv2nL7XDUdCXXJBPnGtWjT5ffovBGzVwDowugFqSssiyb2f7K0TOpCH2pam3qeCpee4wMP704=
+X-Received: by 2002:a9d:6e0d:: with SMTP id e13mr9580893otr.304.1630915904431;
+ Mon, 06 Sep 2021 01:11:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210906075516.15066-1-long870912@gmail.com> <af68f9f5-3b6e-162f-5624-e398b744a268@suse.com>
+In-Reply-To: <af68f9f5-3b6e-162f-5624-e398b744a268@suse.com>
+From: xiao zhao <long870912@gmail.com>
+Date: Mon, 6 Sep 2021 16:11:33 +0800
+Message-ID: <CAMw=WFQn7Zh_iJxt+KKqDjHr7HAkA9T0e9VF6N5nNvvfOpN7Ng@mail.gmail.com>
+Subject: Re: [PATCH] x86: xen: platform-pci-unplug: use pr_err() and pr_warn()
+ instead of raw printk()
+To: Juergen Gross <jgross@suse.com>
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, x86@kernel.org, 
+	hpa@zytor.com, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, 
+	boris.ostrovsky@oracle.com, sstabellini@kernel.org
+Content-Type: multipart/alternative; boundary="00000000000024674305cb4f335e"
 
-Since we have the nice helpers pr_err() and pr_warn(), use them instead
-of raw printk().
+--00000000000024674305cb4f335e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: zhaoxiao <long870912@gmail.com>
----
- arch/x86/xen/platform-pci-unplug.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+Sorry, I don't know the patch has already been applied through the Xen
+tree. Thanks.
 
-diff --git a/arch/x86/xen/platform-pci-unplug.c b/arch/x86/xen/platform-pci-unplug.c
-index 96d7f7d39cb9..6586eaf59c00 100644
---- a/arch/x86/xen/platform-pci-unplug.c
-+++ b/arch/x86/xen/platform-pci-unplug.c
-@@ -19,6 +19,8 @@
- #define XEN_PLATFORM_ERR_PROTOCOL -2
- #define XEN_PLATFORM_ERR_BLACKLIST -3
- 
-+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
-+
- /* store the value of xen_emul_unplug after the unplug is done */
- static int xen_platform_pci_unplug;
- static int xen_emul_unplug;
-@@ -30,13 +32,13 @@ static int check_platform_magic(void)
- 
- 	magic = inw(XEN_IOPORT_MAGIC);
- 	if (magic != XEN_IOPORT_MAGIC_VAL) {
--		printk(KERN_ERR "Xen Platform PCI: unrecognised magic value\n");
-+		pr_err("Xen Platform PCI: unrecognised magic value\n");
- 		return XEN_PLATFORM_ERR_MAGIC;
- 	}
- 
- 	protocol = inb(XEN_IOPORT_PROTOVER);
- 
--	printk(KERN_DEBUG "Xen Platform PCI: I/O protocol version %d\n",
-+	pr_debug("Xen Platform PCI: I/O protocol version %d\n",
- 			protocol);
- 
- 	switch (protocol) {
-@@ -44,12 +46,12 @@ static int check_platform_magic(void)
- 		outw(XEN_IOPORT_LINUX_PRODNUM, XEN_IOPORT_PRODNUM);
- 		outl(XEN_IOPORT_LINUX_DRVVER, XEN_IOPORT_DRVVER);
- 		if (inw(XEN_IOPORT_MAGIC) != XEN_IOPORT_MAGIC_VAL) {
--			printk(KERN_ERR "Xen Platform: blacklisted by host\n");
-+			pr_err("Xen Platform: blacklisted by host\n");
- 			return XEN_PLATFORM_ERR_BLACKLIST;
- 		}
- 		break;
- 	default:
--		printk(KERN_WARNING "Xen Platform PCI: unknown I/O protocol version\n");
-+		pr_warn("Xen Platform PCI: unknown I/O protocol version\n");
- 		return XEN_PLATFORM_ERR_PROTOCOL;
- 	}
- 
-@@ -155,12 +157,12 @@ void xen_unplug_emulated_devices(void)
- 	 * been compiled for this kernel (modules or built-in are both OK). */
- 	if (!xen_emul_unplug) {
- 		if (xen_must_unplug_nics()) {
--			printk(KERN_INFO "Netfront and the Xen platform PCI driver have "
-+			pr_info("Netfront and the Xen platform PCI driver have "
- 					"been compiled for this kernel: unplug emulated NICs.\n");
- 			xen_emul_unplug |= XEN_UNPLUG_ALL_NICS;
- 		}
- 		if (xen_must_unplug_disks()) {
--			printk(KERN_INFO "Blkfront and the Xen platform PCI driver have "
-+			pr_info("Blkfront and the Xen platform PCI driver have "
- 					"been compiled for this kernel: unplug emulated disks.\n"
- 					"You might have to change the root device\n"
- 					"from /dev/hd[a-d] to /dev/xvd[a-d]\n"
-@@ -200,7 +202,7 @@ static int __init parse_xen_emul_unplug(char *arg)
- 		else if (!strncmp(p, "never", l))
- 			xen_emul_unplug |= XEN_UNPLUG_NEVER;
- 		else
--			printk(KERN_WARNING "unrecognised option '%s' "
-+			pr_warn("unrecognised option '%s' "
- 				 "in parameter 'xen_emul_unplug'\n", p);
- 	}
- 	return 0;
--- 
-2.20.1
+Juergen Gross <jgross@suse.com> =E4=BA=8E2021=E5=B9=B49=E6=9C=886=E6=97=A5=
+=E5=91=A8=E4=B8=80 =E4=B8=8B=E5=8D=883:58=E5=86=99=E9=81=93=EF=BC=9A
 
+> On 06.09.21 09:55, zhaoxiao wrote:
+> > Since we have the nice helpers pr_err() and pr_warn(), use them instead
+> > of raw printk().
+> >
+> > Signed-off-by: zhaoxiao <long870912@gmail.com>
+>
+> Any reason you are sending this patch again? It has already been applied
+> through the Xen tree.
+>
+>
+> Juergen
+>
+
+--00000000000024674305cb4f335e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Sorry, I don&#39;t know the patch=C2=A0has already been ap=
+plied through the Xen tree. Thanks.</div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">Juergen Gross &lt;<a href=3D"mailto:jgro=
+ss@suse.com">jgross@suse.com</a>&gt; =E4=BA=8E2021=E5=B9=B49=E6=9C=886=E6=
+=97=A5=E5=91=A8=E4=B8=80 =E4=B8=8B=E5=8D=883:58=E5=86=99=E9=81=93=EF=BC=9A<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 06.09.21 09:5=
+5, zhaoxiao wrote:<br>
+&gt; Since we have the nice helpers pr_err() and pr_warn(), use them instea=
+d<br>
+&gt; of raw printk().<br>
+&gt; <br>
+&gt; Signed-off-by: zhaoxiao &lt;<a href=3D"mailto:long870912@gmail.com" ta=
+rget=3D"_blank">long870912@gmail.com</a>&gt;<br>
+<br>
+Any reason you are sending this patch again? It has already been applied<br=
+>
+through the Xen tree.<br>
+<br>
+<br>
+Juergen<br>
+</blockquote></div>
+
+--00000000000024674305cb4f335e--
 
