@@ -2,46 +2,46 @@ Return-Path: <SRS0=Y5lV=N5=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4AD5C433F5
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Sep 2021 13:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06D24C4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Sep 2021 14:02:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7A37E61103
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Sep 2021 13:54:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7A37E61103
+	by mail.kernel.org (Postfix) with ESMTPS id 7E72A61131
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Sep 2021 14:02:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7E72A61131
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.181082.328067 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.181090.328079 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNbYU-0008Az-O3; Tue, 07 Sep 2021 13:54:30 +0000
+	id 1mNbgN-0001ek-Mz; Tue, 07 Sep 2021 14:02:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 181082.328067; Tue, 07 Sep 2021 13:54:30 +0000
+Received: by outflank-mailman (output) from mailman id 181090.328079; Tue, 07 Sep 2021 14:02:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNbYU-0008As-Kg; Tue, 07 Sep 2021 13:54:30 +0000
-Received: by outflank-mailman (input) for mailman id 181082;
- Tue, 07 Sep 2021 13:54:29 +0000
+	id 1mNbgN-0001ed-Jg; Tue, 07 Sep 2021 14:02:39 +0000
+Received: by outflank-mailman (input) for mailman id 181090;
+ Tue, 07 Sep 2021 14:02:37 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=WTX3=N5=apertussolutions.com=dpsmith@srs-us1.protection.inumbo.net>)
- id 1mNbYT-0008Am-EY
- for xen-devel@lists.xenproject.org; Tue, 07 Sep 2021 13:54:29 +0000
+ id 1mNbgL-0001eX-JK
+ for xen-devel@lists.xenproject.org; Tue, 07 Sep 2021 14:02:37 +0000
 Received: from sender4-of-o51.zoho.com (unknown [136.143.188.51])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1df3285e-0fe3-11ec-b0f4-12813bfff9fa;
- Tue, 07 Sep 2021 13:54:28 +0000 (UTC)
+ id 4021a5a9-0fe4-11ec-b0f5-12813bfff9fa;
+ Tue, 07 Sep 2021 14:02:36 +0000 (UTC)
 Received: from [10.10.1.146] (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1631022862921821.2351718715845;
- Tue, 7 Sep 2021 06:54:22 -0700 (PDT)
+ with SMTPS id 1631023350916797.7635160563889;
+ Tue, 7 Sep 2021 07:02:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,191 +53,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1df3285e-0fe3-11ec-b0f4-12813bfff9fa
-ARC-Seal: i=1; a=rsa-sha256; t=1631022866; cv=none; 
+X-Inumbo-ID: 4021a5a9-0fe4-11ec-b0f5-12813bfff9fa
+ARC-Seal: i=1; a=rsa-sha256; t=1631023353; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=V+msD7NyuKPbikIqyuZrQjlfG9rqnXRv+UdGyKeDJcplSHc4nfcPrXg9YnrP0zSY3xG1ALWZkkjuJu6mWHMqR8KTILHXpePtu4CG8Mw80Gkj0H0egAzg8pIzD7WkJSo50PihBB7va5WTgceXaBw1ZKq0j44hb57xabUKLD014zI=
+	b=guLKaRb7pEXs6IvRpXDUHthw78iVpWi9KMcWoCdAQtd0K27y9wSn2xwU+YtwYdaJYxegxbBaGtEuE8maOgIb9eF+CYzrKH5tF8czrIV74mNx7vYAiBl7rmLhES6XFlJuqRJHifsPcPFIK+PPrpb1WT4OequkCIf/oQvq/OpnJk0=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1631022866; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=a0yjKN4vFjwtQ5VFXF1O0n7vkyNeAOlsxBb/XzZzYrU=; 
-	b=nwnrI5t0OWMYHJN3XD5wL4rfsmMKdxs8901CSG/lgUnqfsGJPj2J7PnTa8YjPg3UU8IFd2W5lfs7/b2HVbP5eac1J2k/M3aSGoV4Wb4JNDbhsrnlUQKqO8BX/Uxx/Z5K2JhgDknLXFeZNFMBL526sv3QXu6voz81mZbd8KMrDfQ=
+	t=1631023353; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=9gom1ql8ae5NoV/h/dFHGpp6IOjAPFwXRoaCwPNyKHY=; 
+	b=Ryir5TWDAdMIW6Hed3D6Tto3pPa2caSMeEuNlyhUgH/sUpM9RZnIAMUmY3e9DZbFTpYk6acRzQN5gWNJe0LgnIvlBmQO9bbmdj+w160fyFnbIrGaqflU9Mc9DMCF4/w8FG5TABY3/rnBRdLCAkwX1OqjeYkgrWuix3ycbjRMxA4=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1631022866;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1631023353;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=a0yjKN4vFjwtQ5VFXF1O0n7vkyNeAOlsxBb/XzZzYrU=;
-	b=Ak7OYVa89Vm+TLZuIxxkztPYzwSakyThdNyxbE+XkDO9LW/NPGk/V5BgKQUrvK6c
-	JHm5FYxP6YBQfeXW7+s/EQBLHFwoX8/IbziLo1XYXi0hR4gPIwa8uOO9VVqg+5HNtta
-	n4qd8D62m6pmfBnBIuuCAQC24CFhwPjQeMbddEnw=
-Subject: Re: [PATCH v4 07/11] xsm: decouple xsm header inclusion selection
+	bh=9gom1ql8ae5NoV/h/dFHGpp6IOjAPFwXRoaCwPNyKHY=;
+	b=SEcyi00ox7hQx1Q6b539rpNUYrC+0QIR9R324xlHYNdvffgW7J0Wdc3UYXptjHlh
+	fhGe+Jx8+rpkcptvj+N3vm/wCbf9kqkxo4+xz3zzuJNmLKBn5ZkBBFr6KBnteuW99Gj
+	cWGu0dD26swHy4U0OnKa2aLoAlLbkBpyx2zZ006c=
+Subject: Re: [PATCH v4 09/11] silo: remove circular xsm hook call
 To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
 Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
 References: <20210903190629.11917-1-dpsmith@apertussolutions.com>
- <20210903190629.11917-8-dpsmith@apertussolutions.com>
- <17155620-d091-3205-6af0-65e19dfa1bfb@citrix.com>
+ <20210903190629.11917-10-dpsmith@apertussolutions.com>
+ <d415ab82-ca83-98e8-0b07-0e093a1fa7e1@citrix.com>
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Message-ID: <786e7f2c-67ce-ee44-bf98-d94772f44921@apertussolutions.com>
-Date: Tue, 7 Sep 2021 09:52:39 -0400
+Message-ID: <997db7f6-266d-b488-4024-37d9adeb4ceb@apertussolutions.com>
+Date: Tue, 7 Sep 2021 10:00:47 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <17155620-d091-3205-6af0-65e19dfa1bfb@citrix.com>
+In-Reply-To: <d415ab82-ca83-98e8-0b07-0e093a1fa7e1@citrix.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-On 9/6/21 2:47 PM, Andrew Cooper wrote:
+On 9/6/21 2:55 PM, Andrew Cooper wrote:
 > On 03/09/2021 20:06, Daniel P. Smith wrote:
->> diff --git a/xen/include/xsm/xsm-core.h b/xen/include/xsm/xsm-core.h
->> new file mode 100644
->> index 0000000000..4555e111dc
->> --- /dev/null
->> +++ b/xen/include/xsm/xsm-core.h
->> @@ -0,0 +1,274 @@
->> +/*
->> + *  This file contains the XSM hook definitions for Xen.
->> + *
->> + *  This work is based on the LSM implementation in Linux 2.6.13.4.
->> + *
->> + *  Author:  George Coker, <gscoker@alpha.ncsc.mil>
->> + *
->> + *  Contributors: Michael LeMay, <mdlemay@epoch.ncsc.mil>
->> + *
->> + *  This program is free software; you can redistribute it and/or modify
->> + *  it under the terms of the GNU General Public License version 2,
->> + *  as published by the Free Software Foundation.
->> + */
->> +
->> +#ifndef __XSM_CORE_H__
->> +#define __XSM_CORE_H__
->> +
->> +#include <xen/sched.h>
->> +#include <xen/multiboot.h>
->> +
->> +/* policy magic number (defined by XSM_MAGIC) */
->> +typedef uint32_t xsm_magic_t;
->> +
->> +#ifdef CONFIG_XSM_FLASK
->> +#define XSM_MAGIC 0xf97cff8c
->> +#else
->> +#define XSM_MAGIC 0x0
->> +#endif
+>> SILO implements a few XSM hooks to extended the decision logic beyond
+>> what is defined in the dummy/default policy. For each of the hooks, it
+>> falls back to the dummy/default policy. The fall back is done a slight
+>> round-about way.
 > 
-> Eww.  I know you're only moving code, but this construct is broken
-> (right from XSM's introduction in c/s d046f361dc937), and creates a
-> fairly-severe bug.
-> 
-> It causes xsm_multiboot_policy_init() to malfunction and accept a module
-> which starts with 4 zeroes, rather than the flask magic number.  The one
-> caller is suitably guarded so this is only a latent bug right now, but I
-> don't think we could credibly security support the code without this
-> being fixed.  (Again - fine to add to the todo list.  I know there's
-> loads to do)
-
-I cannot in good conscience leave a clearly latent bug. Let me see if 
-can work a safer means to handling policy module loading.
-
->> +
->> +/* These annotations are used by callers and in dummy.h to document the
->> + * default actions of XSM hooks. They should be compiled out otherwise.
->> + */
-> 
-> For the coding style patch, this should be
-> 
-> /*
->   * These ...
+> "done in a slightly" ?
 
 Ack.
 
->> +#ifdef CONFIG_XSM
->> +
->> +#ifdef CONFIG_MULTIBOOT
->> +int xsm_multiboot_init(unsigned long *module_map,
->> +                       const multiboot_info_t *mbi);
->> +int xsm_multiboot_policy_init(unsigned long *module_map,
->> +                              const multiboot_info_t *mbi,
->> +                              void **policy_buffer,
->> +                              size_t *policy_size);
->> +#endif
->> +
->> +#ifdef CONFIG_HAS_DEVICE_TREE
->> +/*
->> + * Initialize XSM
->> + *
->> + * On success, return 1 if using SILO mode else 0.
->> + */
->> +int xsm_dt_init(void);
->> +int xsm_dt_policy_init(void **policy_buffer, size_t *policy_size);
->> +bool has_xsm_magic(paddr_t);
->> +#endif
->> +
->> +#ifdef CONFIG_XSM_FLASK
->> +const struct xsm_ops *flask_init(const void *policy_buffer,
->> +                                 size_t policy_size);
->> +#else
->> +static inline const struct xsm_ops *flask_init(const void *policy_buffer,
->> +                                               size_t policy_size)
->> +{
->> +    return NULL;
->> +}
->> +#endif
->> +
->> +#ifdef CONFIG_XSM_SILO
->> +const struct xsm_ops *silo_init(void);
->> +#else
->> +static const inline struct xsm_ops *silo_init(void)
->> +{
->> +    return NULL;
->> +}
->> +#endif
->> +
->> +#else /* CONFIG_XSM */
->> +
->> +#ifdef CONFIG_MULTIBOOT
->> +static inline int xsm_multiboot_init(unsigned long *module_map,
->> +                                     const multiboot_info_t *mbi)
->> +{
->> +    return 0;
->> +}
->> +#endif
->> +
->> +#ifdef CONFIG_HAS_DEVICE_TREE
->> +static inline int xsm_dt_init(void)
->> +{
->> +    return 0;
->> +}
->> +
->> +static inline bool has_xsm_magic(paddr_t start)
->> +{
->> +    return false;
->> +}
->> +#endif /* CONFIG_HAS_DEVICE_TREE */
+>>   This commit makes the direct call to the default policy's
+>> logic, xsm_default_action().
+>>
+>> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+>> ---
+>>   xen/xsm/silo.c | 15 ++++++++-------
+>>   1 file changed, 8 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/xen/xsm/silo.c b/xen/xsm/silo.c
+>> index 6db793f35c..56a330a831 100644
+>> --- a/xen/xsm/silo.c
+>> +++ b/xen/xsm/silo.c
+>> @@ -17,6 +17,7 @@
+>>    * You should have received a copy of the GNU General Public License along with
+>>    * this program; If not, see <http://www.gnu.org/licenses/>.
+>>    */
+>> +#include <xsm/xsm-core.h>
+>>   #include <xsm/dummy.h>
+>>   
+>>   /*
+>> @@ -43,7 +44,7 @@ static int silo_evtchn_unbound(struct domain *d1, struct evtchn *chn,
+>>       else
+>>       {
+>>           if ( silo_mode_dom_check(d1, d2) )
+>> -            rc = xsm_evtchn_unbound(d1, chn, id2);
+>> +            rc = xsm_default_action(XSM_TARGET, current->domain, d1);
+>>           rcu_unlock_domain(d2);
+>>       }
+>>   
+>> @@ -54,7 +55,7 @@ static int silo_evtchn_interdomain(struct domain *d1, struct evtchn *chan1,
+>>                                      struct domain *d2, struct evtchn *chan2)
+>>   {
+>>       if ( silo_mode_dom_check(d1, d2) )
+>> -        return xsm_evtchn_interdomain(d1, chan1, d2, chan2);
+>> +        return xsm_default_action(XSM_HOOK, d1, d2);
+>>       return -EPERM;
+>>   }
+>>   
+>> @@ -62,21 +63,21 @@ static int silo_grant_mapref(struct domain *d1, struct domain *d2,
+>>                                uint32_t flags)
+>>   {
+>>       if ( silo_mode_dom_check(d1, d2) )
+>> -        return xsm_grant_mapref(d1, d2, flags);
+>> +        return xsm_default_action(XSM_HOOK, d1, d2);
+>>       return -EPERM;
+>>   }
+>>   
+>>   static int silo_grant_transfer(struct domain *d1, struct domain *d2)
+>>   {
+>>       if ( silo_mode_dom_check(d1, d2) )
+>> -        return xsm_grant_transfer(d1, d2);
+>> +        return xsm_default_action(XSM_HOOK, d1, d2);
+>>       return -EPERM;
+>>   }
+>>   
+>>   static int silo_grant_copy(struct domain *d1, struct domain *d2)
+>>   {
+>>       if ( silo_mode_dom_check(d1, d2) )
+>> -        return xsm_grant_copy(d1, d2);
+>> +        return xsm_default_action(XSM_HOOK, d1, d2);
+>>       return -EPERM;
+>>   }
+>>   
+>> @@ -86,14 +87,14 @@ static int silo_argo_register_single_source(const struct domain *d1,
+>>                                               const struct domain *d2)
+>>   {
+>>       if ( silo_mode_dom_check(d1, d2) )
+>> -        return xsm_argo_register_single_source(d1, d2);
+>> +        return 0;
+>>       return -EPERM;
+>>   }
+>>   
+>>   static int silo_argo_send(const struct domain *d1, const struct domain *d2)
+>>   {
+>>       if ( silo_mode_dom_check(d1, d2) )
+>> -        return xsm_argo_send(d1, d2);
+>> +        return 0;
 > 
-> Shouldn't this be an #ifndef CONFIG_HAS_DEVICE_TREE ?
+> Shouldn't these be XSM_HOOK too?  Or should all other XSM_HOOK's be
+> short-circuted to 0?
 > 
-> And the answer is no because of the #else /* CONFIG_XSM */ higher up,
-> but it is incredibly deceptive to read.
-> 
-> 
-> I think this logic would be far easier to follow as:
-> 
-> #if IS_ENABLED(CONFIG_XSM) && IS_ENABLED(CONFIG_MULTIBOOT)
-> ...
-> #else
-> ...
-> #endif
-> 
-> etc.
-> 
-> rather than having two separate #ifdef CONFIG_MULTIBOOT blocks doing
-> opposite things due to the position of intermixed #ifdef CONFIG_XSM.
+> The asymmetry here seems weird.
 
-Ack.
+It makes more sense when you follow the approach, which was to duplicate 
+the body of the dummy hook instead of making a call to the hook which 
+would then call the function pointer to the dummy hook. The definition 
+for the argo dummy hooks is to return 0. In the future these other calls 
+may well have XSM_HOOk replaced with the proper role expected. Since all 
+argo checks just return 0, this reflects there is no logic rules in 
+xsm_default_action to determine argo accesses. Of course this is on my 
+list todo and when the dummy hook is fixed, these would be synchronized.
+With that said, converting over to XSM_HOOK does provide the equivalent 
+and would provide consistency within the context of this file. Basically 
+a long winded way of saying, ack.
 
-v/r
+v/r,
 dps
+
+
 
