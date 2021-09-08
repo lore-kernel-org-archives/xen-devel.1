@@ -2,43 +2,46 @@ Return-Path: <SRS0=c7Nm=N6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-7.0 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4680CC433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 07:10:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD630C433F5
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 07:15:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F3DC61154
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 07:10:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0F3DC61154
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3001B61154
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 07:15:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3001B61154
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eikelenboom.it
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.181514.328666 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.181526.328676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNrj4-0000ga-WD; Wed, 08 Sep 2021 07:10:30 +0000
+	id 1mNro5-0001d2-Mq; Wed, 08 Sep 2021 07:15:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 181514.328666; Wed, 08 Sep 2021 07:10:30 +0000
+Received: by outflank-mailman (output) from mailman id 181526.328676; Wed, 08 Sep 2021 07:15:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNrj4-0000gT-TH; Wed, 08 Sep 2021 07:10:30 +0000
-Received: by outflank-mailman (input) for mailman id 181514;
- Wed, 08 Sep 2021 07:10:30 +0000
+	id 1mNro5-0001cv-Js; Wed, 08 Sep 2021 07:15:41 +0000
+Received: by outflank-mailman (input) for mailman id 181526;
+ Wed, 08 Sep 2021 07:15:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EHX5=N6=casper.srs.infradead.org=BATV+2e9f3f7219a4df6f1e93+6590+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1mNrj4-0000gN-8d
- for xen-devel@lists.xenproject.org; Wed, 08 Sep 2021 07:10:30 +0000
-Received: from casper.infradead.org (unknown [2001:8b0:10b:1236::1])
+ <SRS0=bk/O=N6=eikelenboom.it=linux@srs-us1.protection.inumbo.net>)
+ id 1mNro4-0001cp-0O
+ for xen-devel@lists.xenproject.org; Wed, 08 Sep 2021 07:15:40 +0000
+Received: from server.eikelenboom.it (unknown [91.121.65.215])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0e2bd219-9118-4494-9a0d-590a504c9997;
- Wed, 08 Sep 2021 07:10:29 +0000 (UTC)
-Received: from hch by casper.infradead.org with local (Exim 4.94.2 #2 (Red Hat
- Linux)) id 1mNrha-008aj6-H4; Wed, 08 Sep 2021 07:09:14 +0000
+ id 5270bb18-20b0-4a0e-84d0-487559756e76;
+ Wed, 08 Sep 2021 07:15:37 +0000 (UTC)
+Received: from 76-24-144-85.ftth.glasoperator.nl ([85.144.24.76]:59650
+ helo=[172.16.1.50]) by server.eikelenboom.it with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <linux@eikelenboom.it>)
+ id 1mNrnq-0003D7-Vf; Wed, 08 Sep 2021 09:15:27 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,44 +53,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e2bd219-9118-4494-9a0d-590a504c9997
+X-Inumbo-ID: 5270bb18-20b0-4a0e-84d0-487559756e76
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=BIE/LIdFO8jY5B6XQFOTWQMi8dbTNeZ9iRgAJzUQFJU=; b=sj3hwvVEXJG7RXFgHJKiWrl2DW
-	PSMKQHTTMqu0a23Z7httVaAjEPT4AM/xssoAfAMFxEVJ6rBlvytzg+s4FehCm7M2Zxirf64YczMY7
-	12aopbnZx89CwC6n3lwGa5O0523gUpp+NyNoIRD2nC/aGJ3FvqwZHevdybiDOFcOFgaGILaXKVRNe
-	Guo/1qOs4FIXJKtxXEZwQhH4ONEiYUG6xp7qxMxYlUPnI8paKE4dBt5vDzj/NFUNVslm6Yp2u200T
-	CuTrCqt17eJo9fP2yxyZHTHqo9QXfN+KhClS4uoWVTEBVxSLfZlemZN6pP2UsIeLh8g8G0WXBkRNM
-	kRaojG4w==;
-Date: Wed, 8 Sep 2021 08:08:58 +0100
-From: Christoph Hellwig <hch@infradead.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	lkml <linux-kernel@vger.kernel.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH 11/12] xen/pci-swiotlb: reduce visibility of symbols
-Message-ID: <YThhih963WfY/3/W@infradead.org>
-References: <588b3e6d-2682-160c-468e-44ca4867a570@suse.com>
- <75591cef-95e8-c694-fd11-283800499e4e@suse.com>
+	d=eikelenboom.it; s=20180706; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:MIME-Version:Date:Message-ID:References:To:From:Subject:Sender:
+	Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=bqLBZYZf+OGSwmIWDrkm11xoKqUhXHfSvj8/ddCAhHY=; b=f+l7brMEK28eKiSLveWpl+GucP
+	KwotBj40F1WcwLc34Kyaj+9/tr19Gu+v1hWtzJpIpA9ffFj9P+fivlaGcF4cBrxIndrefuz2FvspB
+	ZOI5n0APGJAAfHPLkTij9pEJJ+zUHLgJWGv+kLPG8VjzCrmqFoP9nYikM7eSRR/RfBos=;
+Subject: Re: xen-unstable linux-5.14: 1 of 2 multicall(s) failed: cpu 0
+From: Sander Eikelenboom <linux@eikelenboom.it>
+To: Juergen Gross <jgross@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <9c36205e-cc37-ed9a-3408-0cccc4a83115@eikelenboom.it>
+ <955da8ce-40f2-32c5-ee78-6801ce18afe5@suse.com>
+ <b0854555-01fd-cbd8-6e6a-c793109b2972@eikelenboom.it>
+Message-ID: <f38766b1-9b6b-e301-93e4-12f3cce618b0@eikelenboom.it>
+Date: Wed, 8 Sep 2021 09:15:36 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <75591cef-95e8-c694-fd11-283800499e4e@suse.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <b0854555-01fd-cbd8-6e6a-c793109b2972@eikelenboom.it>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: nl-NL
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 07, 2021 at 02:11:14PM +0200, Jan Beulich wrote:
-> xen_swiotlb and pci_xen_swiotlb_init() are only used within the file
-> defining them, so make them static and remove the stubs. Otoh
-> pci_xen_swiotlb_detect() has a use (as function pointer) from the main
-> pci-swiotlb.c file - convert its stub to a #define to NULL.
+On 07/09/2021 21:52, Sander Eikelenboom wrote:
+> On 07/09/2021 15:53, Juergen Gross wrote:
+>> On 06.09.21 23:35, Sander Eikelenboom wrote:
+>>> L.S.,
+>>>
+>>> On my AMD box running:
+>>>        xen-unstable changeset: Fri Sep 3 15:10:43 2021 +0200 git:2d4978ead4
+>>>        linux kernel: 5.14.1
+>>>
+>>> With this setup I'm encountering some issues in dom0, see below.
+>>
+>> Could you test whether the attached patch (only compile tested)
+>> fixes the issue for you?
+>>
+>>
+>> Juergen
+>>
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Sure, running it now.
+> Since I haven't got a clear trigger, will report tomorrow if the logs stay clean :)
+> 
+> Thanks so far !
+> 
+> --
+> Sander
+> 
+> 
 
-Looks good,
+Hi Juergen,
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+So far so good, it survived the night without issues.
+So I think you can add a Tested-By.
+
+Thanks for the swift fix !
+
+--
+Sander
 
