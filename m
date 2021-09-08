@@ -7,87 +7,83 @@ X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02778C433F5
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 09:55:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8262FC433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 09:55:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9BBCF61154
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 09:54:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9BBCF61154
+	by mail.kernel.org (Postfix) with ESMTPS id 3262060EFE
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 09:55:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3262060EFE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.181628.328900 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.181634.328911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNuI6-0004Zm-JX; Wed, 08 Sep 2021 09:54:50 +0000
+	id 1mNuIA-000597-2V; Wed, 08 Sep 2021 09:54:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 181628.328900; Wed, 08 Sep 2021 09:54:50 +0000
+Received: by outflank-mailman (output) from mailman id 181634.328911; Wed, 08 Sep 2021 09:54:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNuI6-0004Z9-Eq; Wed, 08 Sep 2021 09:54:50 +0000
-Received: by outflank-mailman (input) for mailman id 181628;
- Wed, 08 Sep 2021 09:54:48 +0000
+	id 1mNuI9-00058c-RH; Wed, 08 Sep 2021 09:54:53 +0000
+Received: by outflank-mailman (input) for mailman id 181634;
+ Wed, 08 Sep 2021 09:54:53 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=SEYe=N6=arm.com=Penny.Zheng@srs-us1.protection.inumbo.net>)
- id 1mNuI4-0001EI-4h
- for xen-devel@lists.xenproject.org; Wed, 08 Sep 2021 09:54:48 +0000
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (unknown
- [40.107.8.44]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c4067fc8-108a-11ec-b148-12813bfff9fa;
- Wed, 08 Sep 2021 09:54:32 +0000 (UTC)
-Received: from DBBPR09CA0022.eurprd09.prod.outlook.com (2603:10a6:10:c0::34)
- by DBAPR08MB5717.eurprd08.prod.outlook.com (2603:10a6:10:1ae::23) with
+ id 1mNuI9-0001EI-4v
+ for xen-devel@lists.xenproject.org; Wed, 08 Sep 2021 09:54:53 +0000
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com (unknown
+ [40.107.4.77]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c32e3227-108a-11ec-b148-12813bfff9fa;
+ Wed, 08 Sep 2021 09:54:33 +0000 (UTC)
+Received: from AM7PR02CA0003.eurprd02.prod.outlook.com (2603:10a6:20b:100::13)
+ by HE1PR0802MB2507.eurprd08.prod.outlook.com (2603:10a6:3:e1::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.21; Wed, 8 Sep
- 2021 09:54:29 +0000
-Received: from DB5EUR03FT045.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:c0:cafe::ee) by DBBPR09CA0022.outlook.office365.com
- (2603:10a6:10:c0::34) with Microsoft SMTP Server (version=TLS1_2,
+ 2021 09:54:28 +0000
+Received: from AM5EUR03FT050.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:100:cafe::35) by AM7PR02CA0003.outlook.office365.com
+ (2603:10a6:20b:100::13) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.14 via Frontend
- Transport; Wed, 8 Sep 2021 09:54:29 +0000
+ Transport; Wed, 8 Sep 2021 09:54:28 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT045.mail.protection.outlook.com (10.152.21.164) with
+ AM5EUR03FT050.mail.protection.outlook.com (10.152.17.47) with
  Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4478.19 via Frontend Transport; Wed, 8 Sep 2021 09:54:29 +0000
-Received: ("Tessian outbound b48d04bf8afd:v105");
- Wed, 08 Sep 2021 09:54:29 +0000
-Received: from 0a083f3b0cee.1
+ 15.20.4478.19 via Frontend Transport; Wed, 8 Sep 2021 09:54:26 +0000
+Received: ("Tessian outbound 7a08471b1ef6:v105");
+ Wed, 08 Sep 2021 09:54:26 +0000
+Received: from 74c9ed8f84e5.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 9541EF8D-BDB2-4C5C-B993-98BB700987A7.1; 
- Wed, 08 Sep 2021 09:54:08 +0000
-Received: from EUR03-DB5-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 0a083f3b0cee.1
+ 308EF0D1-ED56-442B-A907-3A37F47D11CC.1; 
+ Wed, 08 Sep 2021 09:54:20 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 74c9ed8f84e5.1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Wed, 08 Sep 2021 09:54:08 +0000
-Received: from DU2PR04CA0019.eurprd04.prod.outlook.com (2603:10a6:10:3b::24)
- by VI1PR08MB2814.eurprd08.prod.outlook.com (2603:10a6:802:1f::29) with
+ Wed, 08 Sep 2021 09:54:20 +0000
+Received: from PR0P264CA0172.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1c::16)
+ by VI1PR0801MB1662.eurprd08.prod.outlook.com (2603:10a6:800:52::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.22; Wed, 8 Sep
- 2021 09:54:06 +0000
-Received: from DB5EUR03FT054.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:3b:cafe::b8) by DU2PR04CA0019.outlook.office365.com
- (2603:10a6:10:3b::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4478.19 via Frontend
- Transport; Wed, 8 Sep 2021 09:54:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.14; Wed, 8 Sep
+ 2021 09:54:16 +0000
+Received: from VE1EUR03FT041.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:100:1c:cafe::60) by PR0P264CA0172.outlook.office365.com
+ (2603:10a6:100:1c::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.14 via Frontend
+ Transport; Wed, 8 Sep 2021 09:54:16 +0000
 Received: from nebula.arm.com (40.67.248.234) by
- DB5EUR03FT054.mail.protection.outlook.com (10.152.20.248) with Microsoft SMTP
+ VE1EUR03FT041.mail.protection.outlook.com (10.152.19.163) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4478.19 via Frontend Transport; Wed, 8 Sep 2021 09:54:06 +0000
-Received: from AZ-NEU-EX01.Emea.Arm.com (10.251.26.4) by AZ-NEU-EX03.Arm.com
- (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.14; Wed, 8 Sep
- 2021 09:54:11 +0000
-Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX01.Emea.Arm.com
- (10.251.26.4) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Wed, 8
- Sep 2021 09:54:04 +0000
+ 15.20.4478.19 via Frontend Transport; Wed, 8 Sep 2021 09:54:16 +0000
+Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX04.Arm.com
+ (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.14; Wed, 8 Sep
+ 2021 09:54:17 +0000
 Received: from penny.shanghai.arm.com (10.169.190.66) by mail.arm.com
  (10.251.24.32) with Microsoft SMTP Server id 15.1.2308.14 via Frontend
- Transport; Wed, 8 Sep 2021 09:54:08 +0000
+ Transport; Wed, 8 Sep 2021 09:54:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -99,28 +95,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c4067fc8-108a-11ec-b148-12813bfff9fa
+X-Inumbo-ID: c32e3227-108a-11ec-b148-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MXkdwEjVyQ82/D1j1eSxQZQfJtE5JUO8wUvXNctlD2M=;
- b=jVs9JpcbPL22+ynUZG+fFCTyljcDWMetWM2ISdh4k8/+bhThLAQkxVZPJDB1XHOFI5j6nFG03l/T4bOyv5xx3PpMKLKJ3cL9bBRVytLcw7mn3spvuJEpxlGN5Ef/a9pRWOy0bSBo6Y6/aJRse1gyQyFxyqom0QVM6AGewRGlSyg=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ bh=GZ922YnGKts8gghHRklqg+V1lm7yq6BNVhkDhoqkHMI=;
+ b=oZaIAM+gZAQkg+BJPFVHM36wkQ/p/jcSkuM7oLy3d9SyhjNzPgoHCje0/gEfQQEixz0Ut0Kfhfvm+R2nIgSRDDT62rf08YcIkBuhueU0cPko15zhqOJPsyWRUa1E8+Ui0MHBp9G25VFtUDeMIa2bdzNsWhji6vf1QOeBy2MK3xM=
+X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
+ 63.35.35.123) smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass
+ (signature was verified) header.d=armh.onmicrosoft.com;lists.xenproject.org;
+ dmarc=temperror action=none header.from=arm.com;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+ lookup of arm.com: DNS Timeout)
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 8f4fa1b2d57f1ca3
+X-CR-MTA-CID: 3a3057876d07db5c
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Zas51da3cn0wrB+jPtbEhng/oTJ5BGF73p0uZSLmSekv3DJv0LSZca7XA8LXyWL79GI7l6Sa9Ixg289KyhipO5k2UmK3k7IpVqjn3QoR5wAN6XuppM9ZkzDXJkTBjaNnCsSrmYjg6Dr8EITYHLurqupr844BBzImDOqy8PvrnsHlobqNL1RGXsjyfT2Up2QD0HZTJ8V5S36bRZHyNI2tKyYd2kjPAMSLpC9YuU1o5EMrL+SZxzUlM/PO8wohVrU7C3Lb+DHRvA8XkkZ3atZH24rqVlKCug8/AtC1AeQgbTi4ePJGs9CSxibezV00pFKLwW45AL2p4wzVC7dn7ZO4KA==
+ b=R1UHluNxa+R6hIjroPCKQEv618n0gJrKd/ItShm0P+PdD4MeCghE9u90DATF9G2gLWmnoTObK+BvZasCqoIcqWSk6EAIbWYMm7OMCSSArlN+GsJGom6hNpxRrWMC+vBhlqvZYCYgk6GxKUN45tBhyrSOBQwJ4zjNCqcNtw0wZ3VUSbEMO48PpBKeijnZ+i/KQGR2Se7Mmj89SLADwfIuGGMan2JQTB2q/K4yRwJhA4yEyVPpXKliB7NiOrMWy43C5Gw9YU8QtyFPCd0V/Hs/SWxN2TPiwRYv87wqGYmQ0gX7piW8IYtifTmAIJx8Xa82I5A94dtqeEFtFH7hjP2PHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=MXkdwEjVyQ82/D1j1eSxQZQfJtE5JUO8wUvXNctlD2M=;
- b=VODPylCXW9DRdpWek+PUtrzAicCTB/ZR0jOGe3By8rltTkEGwh4uIergf3dURf+zThfWiNjEjit8RA1ZUG/GGvocTp1hGfNsYMvJyGDfPD/CCpI/RN5vqukhsHhdMj1VtEEaf0OEvM2Kh3rG7HBZyXWzG18DVnLaU3wSOu2pA+tHSMNMpp/WWTLbl+BJCYyulpSZCUo+ac0PFZO1tw89XSLnRI+CI4Op7rCVy4xjqh8rHRILH8vMx34YOpKB2GHyFxEbRv6tW/eM40N9BZGcUeU5C3ZcHzjizQ86mtDNSJ6HsNbV68uAFK3cHhisWKSzSj+ql051s70vUMKNXSSepw==
+ bh=GZ922YnGKts8gghHRklqg+V1lm7yq6BNVhkDhoqkHMI=;
+ b=MB0KTYSaheV22jOk2JpsTHfILbwu0HG4f+6q62WBzM0bkKdPsj1JXmPZAFaVJnw6Sq08NuYgJtCGPeCJbEy8aqv/xfzGCI6ehbCKGrFe43/l+UBTNzDqGCpQZHFh7Oi7EWK12oqlRoGmX8X7vtq349Hvenb7jXppLD5QKaCWTN0mBOIzX59uM0E6rm9d4bYEtACYZwVLZlEUhQwXF6OcltcomOOh6Glw5gz8mE/8atGoXQemSCGFpmrWpRekUuwOLF0vWKq0tKvPxjwTrBkN9KxrJaf1D1OG/XE7RGGfNcf2aoaPbGkdPG31k2S7nrZfa/2Jshv/Ohdg0c5hbpDc4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -128,8 +123,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MXkdwEjVyQ82/D1j1eSxQZQfJtE5JUO8wUvXNctlD2M=;
- b=jVs9JpcbPL22+ynUZG+fFCTyljcDWMetWM2ISdh4k8/+bhThLAQkxVZPJDB1XHOFI5j6nFG03l/T4bOyv5xx3PpMKLKJ3cL9bBRVytLcw7mn3spvuJEpxlGN5Ef/a9pRWOy0bSBo6Y6/aJRse1gyQyFxyqom0QVM6AGewRGlSyg=
+ bh=GZ922YnGKts8gghHRklqg+V1lm7yq6BNVhkDhoqkHMI=;
+ b=oZaIAM+gZAQkg+BJPFVHM36wkQ/p/jcSkuM7oLy3d9SyhjNzPgoHCje0/gEfQQEixz0Ut0Kfhfvm+R2nIgSRDDT62rf08YcIkBuhueU0cPko15zhqOJPsyWRUa1E8+Ui0MHBp9G25VFtUDeMIa2bdzNsWhji6vf1QOeBy2MK3xM=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
  smtp.mailfrom=arm.com; lists.xenproject.org; dkim=none (message not signed)
  header.d=none;lists.xenproject.org; dmarc=pass action=none
@@ -141,9 +136,9 @@ From: Penny Zheng <penny.zheng@arm.com>
 To: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
 	<julien@xen.org>
 CC: <Bertrand.Marquis@arm.com>, <Wei.Chen@arm.com>, <jbeulich@suse.com>
-Subject: [PATCH v6 2/7] xen/arm: introduce domain on Static Allocation
-Date: Wed, 8 Sep 2021 09:52:43 +0000
-Message-ID: <20210908095248.545981-3-penny.zheng@arm.com>
+Subject: [PATCH v6 5/7] xen: re-define assign_pages and introduce a new function assign_page
+Date: Wed, 8 Sep 2021 09:52:46 +0000
+Message-ID: <20210908095248.545981-6-penny.zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210908095248.545981-1-penny.zheng@arm.com>
 References: <20210908095248.545981-1-penny.zheng@arm.com>
@@ -152,206 +147,202 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 14296cbc-908d-4340-a8a5-08d972aea66a
-X-MS-TrafficTypeDiagnostic: VI1PR08MB2814:|DBAPR08MB5717:
+X-MS-Office365-Filtering-Correlation-Id: 0467dcbc-9d1c-46db-730d-08d972aea527
+X-MS-TrafficTypeDiagnostic: VI1PR0801MB1662:|HE1PR0802MB2507:
 X-Microsoft-Antispam-PRVS:
-	<DBAPR08MB57173A9728FC9D35EE2B3E5DF7D49@DBAPR08MB5717.eurprd08.prod.outlook.com>
+	<HE1PR0802MB25073865A11DAF94B89B0693F7D49@HE1PR0802MB2507.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 NoDisclaimer: true
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;OLM:8882;
+X-MS-Oob-TLC-OOBClassifiers: OLM:288;OLM:288;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- LuIu0+pxr56YjVQdUDpyJ+gR2ldmA70kBn2fBEG8oVQJFLdkO/Ul42sid/6FWDHmUtq9gB8w/C2X5evd3wkF141bNGz56MwVH5FsWrH4RO6gD2yvVOxij7+St3XMlUsMY1PRv3VIKPFuqnIgb/ozHdVsH0Yp+/QXn+ikny5wRYCwJjBunpBGS+8wKdnh5gbAzXneE2HsA4VnfHdpMnirLZi+RjbYwCvAaovMCZ4vf9qD3Egl7qS8eMgp+g2AQDW8sKzEDBwVFxBZMijVJUMsLEjM1qiI6RctvfAELYmeN+zamsb2KYTjbnWiT1mgtqmB9fsgm/dFU5zkI0RAkqy1lBczrGvs7RXn8/JiG6CaBX7esACf+OlFeoCJgom04NCXc9ePcyP/pRsYrh3ms3BSeciAl8qox4k0n2WN9V5PTShOuecDIT+Kly0gL0lRUeXOW1DjxJC1PEQ0KDRYe34pVtdALrscJWQLFa7+xWcLvuUqgLxVSD10d3qivcj5NipjEZI/0aKmHh7EKCXk+vtfc3BzSJbXKgX7ZD4xhp8gAUfThRe5R+LZrKo7wXyqS4t2h1VfBZOgFBa8lZAkLZXV2v0YU6HHxEmqctjkRASVxkauRznlMPIEELJCqcrmrj13mR0fyiiC31XS1icdZYkIdMfMtLPbKiyNC4ejuG6Q3VoVPP08ORAHqy+f0p/E9BfUMaTqlBMDcBN+26YdDFeD3ikoR0+6JuPTLKTmkpYPLvo=
+ uFgXCUUMY1VZxuDKCZ7RPJldeqgtMKzm8TK/lpz8Yu1v/Kb/+lgI6z81WLrkfDJTGjwAHrxgYNjIFlLgKynw6B9t7w/zjBRFFCxSd8LdnFhNPHKoO69gOIEpndt1w2GPYD5ri9F0+dxm0pR8O4nQrBY9n64RpWmYPvqee6dL0xy1IpjK+xcL/OFcaTE+1XxEHVQFAIr0JvQarhhtCSEPUDtRlGtn2G+2AutencUc7qnDkRIChKWlvKC+T90jQhHmP7SZ27qcvBCz7uCciNlyEjRy7bfs5mRbFoUCZNxVhvT1/NRfZdHE3jnR+illQZ41I+JthmZvDZweiyDDkOvoVr56zeo/u2rVP0wtvgLSL1Nn3dqRxO3yEN42jR5wxN6O+CKQJMxG0pKmu2YYF9F84YIXxPPmxmPgX8gw1aNTHqyKOnHzvkPz6/L/V/CZt/rNWj7L4WuYzsCD0aEEC+60RGcri6JtiKn7rQcDFPifq1DyyrVf0YXSaJKxeeNX+G3TBhGDZioWxulPwAj9GzZ7rivaMewFZFKVlmf8EtXY6o1fL9mYGmzLie0aO+PxU4ELgp6pQlUb0OfCkK3LL1ioo5HVgkL7xAIID8G1yFJi0GBimIM0GwKQcR1N8QqqKyfgTAVR1SgC7Hp3kTCNQByLzO7JtiqcpcWBOUvi+fVVhcxuLEfUh1ADYZpZnwJatqEGtx3Xt7Ix1TMLRDOuNAoFHMX/3jF5dIDbJmX2voWPy3k=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(396003)(346002)(136003)(376002)(39860400002)(36840700001)(46966006)(1076003)(82740400003)(6666004)(83380400001)(2906002)(36756003)(110136005)(5660300002)(86362001)(54906003)(7696005)(82310400003)(44832011)(4326008)(478600001)(47076005)(186003)(36860700001)(81166007)(8936002)(70206006)(356005)(70586007)(336012)(26005)(8676002)(2616005)(316002)(426003)(36900700001);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB2814
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(39860400002)(136003)(376002)(346002)(396003)(36840700001)(46966006)(2906002)(1076003)(44832011)(82740400003)(356005)(2616005)(54906003)(83380400001)(26005)(81166007)(70206006)(82310400003)(8936002)(7696005)(5660300002)(70586007)(110136005)(4326008)(36860700001)(86362001)(47076005)(316002)(186003)(426003)(6666004)(336012)(36756003)(478600001)(8676002)(36900700001);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0801MB1662
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT045.eop-EUR03.prod.protection.outlook.com
+ AM5EUR03FT050.eop-EUR03.prod.protection.outlook.com
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	ca927daa-0fb8-49a1-4a09-08d972ae98bb
+	0a3a3f3c-2d03-4abb-3fa9-08d972ae9ef2
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	PeQjW98bbKWCZUD1BXubt1SIO2xgvOs+wnBCilTNnJNJmSN5HtEqwHQWR0l0hxf1tmG1EJZ1xr71Z4F2vxxCbeN4QopyIovKq8b4PeVZiv29fdbKdWDaTS1+uFNzxA29Wvt8BUMgXpBSY5m00SrSacSSQzq2NaWTeO6bsqGAjMHIYmeDgTP86UA2ymW4pwYvdXXASDwHbg44kTia43lZPK1CpAScjmZqid4mVPqMrsOzU9SUEf7YVUwV9uteLu9w51bzNhji57Naoy2HDVt6zm1lVILYkbfU4cO+EZiMd/NE/IRoh1EbFtYRdhFwkSBL4KvQbPUBG1o8nqMw6EMgrda//8hz97RncAmfg8p3y6yXUyKxOyl88XBEYk35dBsgPv3LXlhmftkdZlOd/AVKKrKmvZbwe9MBHrMUN80HpGHGkoDkzYQ6W82TKx5KOjGuzvQ+kcZSmsOoVsUv35A0+I4PLvJMPkk4aMgA04uMfjCF5KjvdJQUC08a5YXB1KU49ueldg+IbXstcq1yl4Xq5tcU9pRj+9Pyxtj2khf5bkWgTlHVuHNTJ1bnzasz1N99JbqzQUA1ZGtRpC9pef3X1tmI/GDAPSUXLYSg/BejjClF2baK5CNR5aWrQzFxEU2BfbHB+rluZ+PFgaZR8k5d8GzrLXAi3/pBxM6Aaiyar8MgxgLwbJ5j4ZCNG90bAiq9y9sn1vfO2nTUgzkZaNW9MA==
+	bfdLnWz4F/l5rOi4ojEeHFBdQMWWDHcVK2Kc+aKrLBzcWM5ooI9jOSCPRYVAn8VqdjKlkH0U45M6/yI+ERxZ5b6pwHV6XOdgXJD6tkcU3rbjClQ3MPltJTxJs2V0bLrO/4nPT9ec5L/NeHWz+DWPzrt8fDctZCaSlHG0sdkvdVZl3nzvQrkDjgti53lHwnUQpuFySeMpRlete10tn8YyAQ6dSKvZCttyZjyWPQfDqTZN3Lgraol3jVVfbxQna6eJIJ4tqMIY7/PYxR6rR8O50lPxs0eS/M6aMaBbp3JrrknuSN5oZAe4C1uj2jiCgs7LOVGYh5G+EysFhPha1I3AhHL24lEclbHbTuPU6f7/69xIh1miuTo0APE7R0qpvWeXLMg4/wHhYCFxlFsSgXo+aIlML0HEYRo8V4MCUPFH95ROMNA5wvo79NJmn+7DGxlVCwCvIqTHQj5dcU7l9b1ueoX2BYutD7qTE+rArBFh04I5b4zeI5JE4jQYVxsXhm64xcTESwBhLb2YhA3SSLANKyO9KcHvyx4gfUdOGAAOyqaQ13eApvIyTUcHFHG2sMSCiUWLp/ovI/piwXO55miBKuq+p7EzlV5Y6kjAGKqn285j5I/tCJepIkJVxq4v7Nc5WtFM+en5vsLT/81JJ3fyqsgb3lSavtwiAzHIzlGKJOr3ORSQFZc99FaLfDCaV1dxBOr3V8+sK9ihBkL1BtIncQ==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(136003)(396003)(39860400002)(376002)(346002)(46966006)(36840700001)(36860700001)(426003)(81166007)(107886003)(186003)(36756003)(478600001)(5660300002)(316002)(86362001)(336012)(82310400003)(8676002)(70206006)(54906003)(70586007)(26005)(1076003)(82740400003)(110136005)(2616005)(47076005)(2906002)(6666004)(44832011)(7696005)(8936002)(4326008)(83380400001);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(39860400002)(136003)(376002)(346002)(396003)(46966006)(36840700001)(316002)(47076005)(2616005)(63370400001)(478600001)(70586007)(26005)(54906003)(2906002)(110136005)(4326008)(36860700001)(1076003)(82740400003)(5660300002)(44832011)(107886003)(82310400003)(6666004)(36756003)(186003)(81166007)(83380400001)(86362001)(426003)(63350400001)(336012)(8936002)(7696005)(8676002)(70206006);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2021 09:54:29.1439
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2021 09:54:26.9728
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14296cbc-908d-4340-a8a5-08d972aea66a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0467dcbc-9d1c-46db-730d-08d972aea527
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT045.eop-EUR03.prod.protection.outlook.com
+	AM5EUR03FT050.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR08MB5717
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0802MB2507
 
-Static Allocation refers to system or sub-system(domains) for which memory
-areas are pre-defined by configuration using physical address ranges.
-
-Those pre-defined memory, -- Static Memory, as parts of RAM reserved in the
-beginning, shall never go to heap allocator or boot allocator for any use.
-
-Memory can be statically allocated to a domain using the property "xen,static-
-mem" defined in the domain configuration. The number of cells for the address
-and the size must be defined using respectively the properties
-"#xen,static-mem-address-cells" and "#xen,static-mem-size-cells".
-
-The property 'memory' is still needed and should match the amount of memory
-given to the guest. Currently, it either comes from static memory or lets Xen
-allocate from heap. *Mixing* is not supported.
-
-The static memory will be mapped in the guest at the usual guest memory
-addresses (GUEST_RAM0_BASE, GUEST_RAM1_BASE) defined by
-xen/include/public/arch-arm.h.
-
-This patch introduces this new `xen,static-mem` feature, and also documents
-and parses this new attribute at boot time.
-
-This patch also introduces a new field "bool xen_domain" in "struct membank"
-to tell whether the memory bank is reserved as the whole hardware resource,
-or bind to a xen domain node, through "xen,static-mem"
+In order to deal with the trouble of count-to-order conversion when page number
+is not in a power-of-two, this commit re-define assign_pages for nr pages and
+introduces a new helper assign_page for original page with a single order.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 ---
- docs/misc/arm/device-tree/booting.txt | 42 +++++++++++++++++++++++++++
- xen/arch/arm/bootfdt.c                | 30 +++++++++++++++++--
- xen/include/asm-arm/setup.h           |  1 +
- 3 files changed, 71 insertions(+), 2 deletions(-)
+ xen/arch/x86/pv/dom0_build.c |  2 +-
+ xen/common/grant_table.c     |  2 +-
+ xen/common/memory.c          |  6 +++---
+ xen/common/page_alloc.c      | 21 +++++++++++++--------
+ xen/include/xen/mm.h         |  6 ++++++
+ 5 files changed, 24 insertions(+), 13 deletions(-)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 5243bc7fd3..44cd9e1a9a 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -268,3 +268,45 @@ The DTB fragment is loaded at 0xc000000 in the example above. It should
- follow the convention explained in docs/misc/arm/passthrough.txt. The
- DTB fragment will be added to the guest device tree, so that the guest
- kernel will be able to discover the device.
-+
-+
-+Static Allocation
-+=============
-+
-+Static Allocation refers to system or sub-system(domains) for which memory
-+areas are pre-defined by configuration using physical address ranges.
-+
-+Memory can be statically allocated to a domain using the property "xen,static-
-+mem" defined in the domain configuration. The number of cells for the address
-+and the size must be defined using respectively the properties
-+"#xen,static-mem-address-cells" and "#xen,static-mem-size-cells".
-+
-+The property 'memory' is still needed and should match the amount of memory
-+given to the guest. Currently, it either comes from static memory or lets Xen
-+allocate from heap. *Mixing* is not supported.
-+
-+The static memory will be mapped in the guest at the usual guest memory
-+addresses (GUEST_RAM0_BASE, GUEST_RAM1_BASE) defined by
-+xen/include/public/arch-arm.h.
-+
-+Below is an example on how to specify the static memory region in the
-+device-tree:
-+
-+    / {
-+        chosen {
-+            domU1 {
-+                compatible = "xen,domain";
-+                #address-cells = <0x2>;
-+                #size-cells = <0x2>;
-+                cpus = <2>;
-+                memory = <0x0 0x80000>;
-+                #xen,static-mem-address-cells = <0x1>;
-+                #xen,static-mem-size-cells = <0x1>;
-+                xen,static-mem = <0x30000000 0x20000000>;
-+                ...
-+            };
-+        };
-+    };
-+
-+This will reserve a 512MB region starting at the host physical address
-+0x30000000 to be exclusively used by DomU1.
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index b01badda3e..afaa0e249b 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -66,7 +66,7 @@ void __init device_tree_get_reg(const __be32 **cell, u32 address_cells,
- static int __init device_tree_get_meminfo(const void *fdt, int node,
-                                           const char *prop_name,
-                                           u32 address_cells, u32 size_cells,
--                                          void *data)
-+                                          void *data, bool xen_domain)
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index d7f9e04b28..7787cc8fca 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -568,7 +568,7 @@ int __init dom0_construct_pv(struct domain *d,
+         else
+         {
+             while ( count-- )
+-                if ( assign_pages(d, mfn_to_page(_mfn(mfn++)), 0, 0) )
++                if ( assign_pages(d, mfn_to_page(_mfn(mfn++)), 1, 0) )
+                     BUG();
+         }
+         initrd->mod_end = 0;
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index ee61603a97..50f5f83023 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -2358,7 +2358,7 @@ gnttab_transfer(
+          * is respected and speculative execution is blocked accordingly
+          */
+         if ( unlikely(!evaluate_nospec(okay)) ||
+-            unlikely(assign_pages(e, page, 0, MEMF_no_refcount)) )
++            unlikely(assign_pages(e, page, 1, MEMF_no_refcount)) )
+         {
+             bool drop_dom_ref;
+ 
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index 74babb0bd7..9cef8790ff 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -728,8 +728,8 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+         /* Assign each output page to the domain. */
+         for ( j = 0; (page = page_list_remove_head(&out_chunk_list)); ++j )
+         {
+-            if ( assign_pages(d, page, exch.out.extent_order,
+-                              MEMF_no_refcount) )
++            if ( assign_page(page, exch.out.extent_order, d,
++                             MEMF_no_refcount) )
+             {
+                 unsigned long dec_count;
+                 bool_t drop_dom_ref;
+@@ -797,7 +797,7 @@ static long memory_exchange(XEN_GUEST_HANDLE_PARAM(xen_memory_exchange_t) arg)
+      * cleared PGC_allocated.
+      */
+     while ( (page = page_list_remove_head(&in_chunk_list)) )
+-        if ( assign_pages(d, page, 0, MEMF_no_refcount) )
++        if ( assign_pages(d, page, 1, MEMF_no_refcount) )
+         {
+             BUG_ON(!d->is_dying);
+             free_domheap_page(page);
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index ba7adc80db..bb19bb10ff 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -2261,7 +2261,7 @@ void init_domheap_pages(paddr_t ps, paddr_t pe)
+ int assign_pages(
+     struct domain *d,
+     struct page_info *pg,
+-    unsigned int order,
++    unsigned long nr,
+     unsigned int memflags)
  {
-     const struct fdt_property *prop;
-     unsigned int i, banks;
-@@ -97,6 +97,7 @@ static int __init device_tree_get_meminfo(const void *fdt, int node,
-             continue;
-         mem->bank[mem->nr_banks].start = start;
-         mem->bank[mem->nr_banks].size = size;
-+        mem->bank[mem->nr_banks].xen_domain = xen_domain;
-         mem->nr_banks++;
+     int rc = 0;
+@@ -2281,7 +2281,7 @@ int assign_pages(
+     {
+         unsigned int extra_pages = 0;
+ 
+-        for ( i = 0; i < (1ul << order); i++ )
++        for ( i = 0; i < nr; i++ )
+         {
+             ASSERT(!(pg[i].count_info & ~PGC_extra));
+             if ( pg[i].count_info & PGC_extra )
+@@ -2290,18 +2290,18 @@ int assign_pages(
+ 
+         ASSERT(!extra_pages ||
+                ((memflags & MEMF_no_refcount) &&
+-                extra_pages == 1u << order));
++                extra_pages == nr));
+     }
+ #endif
+ 
+     if ( pg[0].count_info & PGC_extra )
+     {
+-        d->extra_pages += 1u << order;
++        d->extra_pages += nr;
+         memflags &= ~MEMF_no_refcount;
+     }
+     else if ( !(memflags & MEMF_no_refcount) )
+     {
+-        unsigned int tot_pages = domain_tot_pages(d) + (1 << order);
++        unsigned int tot_pages = domain_tot_pages(d) + nr;
+ 
+         if ( unlikely(tot_pages > d->max_pages) )
+         {
+@@ -2313,10 +2313,10 @@ int assign_pages(
      }
  
-@@ -185,7 +186,8 @@ static int __init process_memory_node(const void *fdt, int node,
-                                       u32 address_cells, u32 size_cells,
-                                       void *data)
- {
--    return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells, data);
-+    return device_tree_get_meminfo(fdt, node, "reg", address_cells, size_cells,
-+                                   data, false);
+     if ( !(memflags & MEMF_no_refcount) &&
+-         unlikely(domain_adjust_tot_pages(d, 1 << order) == (1 << order)) )
++         unlikely(domain_adjust_tot_pages(d, nr) == nr) )
+         get_knownalive_domain(d);
+ 
+-    for ( i = 0; i < (1 << order); i++ )
++    for ( i = 0; i < nr; i++ )
+     {
+         ASSERT(page_get_owner(&pg[i]) == NULL);
+         page_set_owner(&pg[i], d);
+@@ -2331,6 +2331,11 @@ int assign_pages(
+     return rc;
  }
  
- static int __init process_reserved_memory_node(const void *fdt, int node,
-@@ -339,6 +341,28 @@ static void __init process_chosen_node(const void *fdt, int node,
-     add_boot_module(BOOTMOD_RAMDISK, start, end-start, false);
- }
- 
-+static int __init process_domain_node(const void *fdt, int node,
-+                                      const char *name,
-+                                      u32 address_cells, u32 size_cells)
++int assign_page(struct page_info *pg, unsigned int order, struct domain *d,
++                unsigned int memflags)
 +{
-+    const struct fdt_property *prop;
-+
-+    printk("Checking for \"xen,static-mem\" in domain node\n");
-+
-+    prop = fdt_get_property(fdt, node, "xen,static-mem", NULL);
-+    if ( !prop )
-+        /* No "xen,static-mem" present. */
-+        return 0;
-+
-+    address_cells = device_tree_get_u32(fdt, node,
-+                                        "#xen,static-mem-address-cells", 0);
-+    size_cells = device_tree_get_u32(fdt, node,
-+                                     "#xen,static-mem-size-cells", 0);
-+
-+    return device_tree_get_meminfo(fdt, node, "xen,static-mem", address_cells,
-+                                   size_cells, &bootinfo.reserved_mem, true);
++    return assign_pages(d, pg, 1UL << order, memflags);
 +}
+ 
+ struct page_info *alloc_domheap_pages(
+     struct domain *d, unsigned int order, unsigned int memflags)
+@@ -2373,7 +2378,7 @@ struct page_info *alloc_domheap_pages(
+                 pg[i].count_info = PGC_extra;
+             }
+         }
+-        if ( assign_pages(d, pg, order, memflags) )
++        if ( assign_page(pg, order, d, memflags) )
+         {
+             free_heap_pages(pg, order, memflags & MEMF_no_scrub);
+             return NULL;
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 8e8fb5a615..a74e93eba8 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -133,8 +133,14 @@ void heap_init_late(void);
+ 
+ int assign_pages(
+     struct domain *d,
++    struct page_info *pg,
++    unsigned long nr,
++    unsigned int memflags);
 +
- static int __init early_scan_node(const void *fdt,
-                                   int node, const char *name, int depth,
-                                   u32 address_cells, u32 size_cells,
-@@ -357,6 +381,8 @@ static int __init early_scan_node(const void *fdt,
-         process_multiboot_node(fdt, node, name, address_cells, size_cells);
-     else if ( depth == 1 && device_tree_node_matches(fdt, node, "chosen") )
-         process_chosen_node(fdt, node, name, address_cells, size_cells);
-+    else if ( depth == 2 && device_tree_node_compatible(fdt, node, "xen,domain") )
-+        rc = process_domain_node(fdt, node, name, address_cells, size_cells);
++int assign_page(
+     struct page_info *pg,
+     unsigned int order,
++    struct domain *d,
+     unsigned int memflags);
  
-     if ( rc < 0 )
-         printk("fdt: node `%s': parsing failed\n", name);
-diff --git a/xen/include/asm-arm/setup.h b/xen/include/asm-arm/setup.h
-index c4b6af6029..95da0b7ab9 100644
---- a/xen/include/asm-arm/setup.h
-+++ b/xen/include/asm-arm/setup.h
-@@ -24,6 +24,7 @@ typedef enum {
- struct membank {
-     paddr_t start;
-     paddr_t size;
-+    bool xen_domain; /* whether the memory bank is bound to a Xen domain. */
- };
- 
- struct meminfo {
+ /* Dump info to serial console */
 -- 
 2.25.1
 
