@@ -2,44 +2,47 @@ Return-Path: <SRS0=c7Nm=N6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4131AC433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 01:09:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDD80C433F5
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 04:03:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E97E861139
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 01:09:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E97E861139
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 46F39610C8
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Sep 2021 04:03:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 46F39610C8
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.181419.328509 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.181428.328520 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNm5b-0003wJ-7s; Wed, 08 Sep 2021 01:09:23 +0000
+	id 1mNonL-0006ep-2F; Wed, 08 Sep 2021 04:02:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 181419.328509; Wed, 08 Sep 2021 01:09:23 +0000
+Received: by outflank-mailman (output) from mailman id 181428.328520; Wed, 08 Sep 2021 04:02:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mNm5b-0003wC-4j; Wed, 08 Sep 2021 01:09:23 +0000
-Received: by outflank-mailman (input) for mailman id 181419;
- Wed, 08 Sep 2021 01:09:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IK88=N6=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mNm5Z-0003w6-VT
- for xen-devel@lists.xenproject.org; Wed, 08 Sep 2021 01:09:21 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 65802e8e-1041-11ec-b138-12813bfff9fa;
- Wed, 08 Sep 2021 01:09:20 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 84E906113B;
- Wed,  8 Sep 2021 01:09:19 +0000 (UTC)
+	id 1mNonK-0006ei-U1; Wed, 08 Sep 2021 04:02:42 +0000
+Received: by outflank-mailman (input) for mailman id 181428;
+ Wed, 08 Sep 2021 04:02:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mNonJ-0006eY-P4; Wed, 08 Sep 2021 04:02:41 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mNonJ-0002lK-K6; Wed, 08 Sep 2021 04:02:41 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mNonJ-0005vE-6X; Wed, 08 Sep 2021 04:02:41 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mNonJ-0003do-5j; Wed, 08 Sep 2021 04:02:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,253 +54,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65802e8e-1041-11ec-b138-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1631063360;
-	bh=pGXBU6C0v1ImgWBSjk60VtuyKReuk2qQAlQteZR1lUo=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=CJHu7UaR1Kr3UbMYACb0j3DTxNpyeGwKxPfmfXL2LssgXd/P3ZlKM5ZvndqceczU1
-	 nAXypYKoIyvI8PEUdOpKtZceQGicsw7jAYx8GVvvoTPiflgO/OliLcQn1UexFwoEoh
-	 XxCnObIK7BYhvhBA53pbBOaJJN4E0ztqmglRF8xpFl7i01AFI1tTmyF1pGzU4nSbtY
-	 rxwONC465Pvz5sNTUcSp7DujBW01nckbkYz9Pda0J2C+HNyVySH4hSET04PJWrrToc
-	 huWctUAvQwKvrwrgPjGntWqag7YZJeb+E2LwXEKr64iz27fjXKmuLoOXc/RKhkm9fG
-	 5eqOGeEB1YIUA==
-Date: Tue, 7 Sep 2021 18:09:18 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-cc: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org, 
-    Bertrand Marquis <bertrand.marquis@arm.com>, wei.chen@arm.com, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
-    Jan Beulich <jbeulich@suse.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: Re: [RFC PATCH] xen/design: Add design for EFI dom0less system
- start
-In-Reply-To: <1efbd9a8-232b-b267-fa8e-7f5f1af7cfed@xen.org>
-Message-ID: <alpine.DEB.2.21.2109071750262.14059@sstabellini-ThinkPad-T480s>
-References: <20210907065228.21794-1-luca.fancellu@arm.com> <4bab7902-0268-5705-5462-fcd7571d7492@xen.org> <7BD59287-75ED-4D4F-B892-F6B04583A986@arm.com> <1efbd9a8-232b-b267-fa8e-7f5f1af7cfed@xen.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=31yRpftZznTCZf6mr6Q6bH05CMy10lku+SaZLPWF7OI=; b=4ZG8erYYquhmBgiCaibvBoSuXi
+	TjlTypTQeZSkUDCNdf9DyAmT/qGL2elhXesvvt4f2XD1qOkqnGsTfA+sulU0zRG9/4qjK8SvZPVtM
+	xPfm3N67HP/Rbh1gKQFvQD7anQ0IcJVzSnYxNjPKL3DZ72jzxWl9CpNC0MHl5z1b+m3A=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-164876-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-792418537-1631062279=:14059"
-Content-ID: <alpine.DEB.2.21.2109071752210.14059@sstabellini-ThinkPad-T480s>
+Subject: [linux-linus test] 164876: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-amd64-i386-xl-qemut-debianhvm-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemuu-rhel6hvm-intel:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-ws16-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemut-rhel6hvm-intel:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow:xen-install:fail:regression
+    linux-linus:test-amd64-i386-examine:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-i386-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-debianhvm-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-ws16-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemuu-rhel6hvm-amd:xen-install:fail:regression
+    linux-linus:test-amd64-i386-qemut-rhel6hvm-amd:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl:xen-install:fail:regression
+    linux-linus:test-amd64-i386-pair:xen-install/src_host:fail:regression
+    linux-linus:test-amd64-i386-pair:xen-install/dst_host:fail:regression
+    linux-linus:test-amd64-i386-xl-raw:xen-install:fail:regression
+    linux-linus:test-amd64-i386-freebsd10-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-debianhvm-i386-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-pvshim:xen-install:fail:regression
+    linux-linus:test-amd64-i386-freebsd10-i386:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-shadow:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-win7-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-ovmf-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemuu-win7-amd64:xen-install:fail:regression
+    linux-linus:test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm:xen-install:fail:regression
+    linux-linus:test-amd64-i386-libvirt-pair:xen-install/src_host:fail:regression
+    linux-linus:test-amd64-i386-libvirt-pair:xen-install/dst_host:fail:regression
+    linux-linus:test-amd64-coresched-i386-xl:xen-install:fail:regression
+    linux-linus:test-arm64-arm64-xl-seattle:xen-boot:fail:regression
+    linux-linus:test-arm64-arm64-xl-thunderx:debian-fixup:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit1:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-xsm:debian-fixup:fail:regression
+    linux-linus:test-arm64-arm64-xl:debian-fixup:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit2:debian-fixup:fail:regression
+    linux-linus:test-arm64-arm64-xl-xsm:debian-fixup:fail:regression
+    linux-linus:test-arm64-arm64-examine:reboot:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=4b93c544e90e2b28326182d31ee008eb80e02074
+X-Osstest-Versions-That:
+    linux=deacdb3e3979979016fcd0ffd518c320a62ad166
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 08 Sep 2021 04:02:41 +0000
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+flight 164876 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/164876/
 
---8323329-792418537-1631062279=:14059
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.21.2109071752211.14059@sstabellini-ThinkPad-T480s>
+Regressions :-(
 
-On Tue, 7 Sep 2021, Julien Grall wrote:
-> On 07/09/2021 12:51, Luca Fancellu wrote:
-> > > On 7 Sep 2021, at 10:35, Julien Grall <julien@xen.org> wrote:
-> > > 
-> > > Hi Luca,
-> > > 
-> > > On 07/09/2021 07:52, Luca Fancellu wrote:
-> > > > Add a design describing a proposal to improve the EFI
-> > > > configuration file, adding keywords to describe domU
-> > > > guests and allowing to start a dom0less system.
-> > > > Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-> > > > ---
-> > > >   docs/designs/efi-arm-dom0less.md | 105 +++++++++++++++++++++++++++++++
-> > > >   1 file changed, 105 insertions(+)
-> > > >   create mode 100644 docs/designs/efi-arm-dom0less.md
-> > > > diff --git a/docs/designs/efi-arm-dom0less.md
-> > > > b/docs/designs/efi-arm-dom0less.md
-> > > > new file mode 100644
-> > > > index 0000000000..8d8fa2243f
-> > > > --- /dev/null
-> > > > +++ b/docs/designs/efi-arm-dom0less.md
-> > > > @@ -0,0 +1,105 @@
-> > > > +# Xen EFI configuration file
-> > > > +
-> > > > +The current configuration file used by Xen when it is started as an EFI
-> > > > +application is considering only the dom0 guest and doesn't have any
-> > > > +property to describe and load in memory domU guests.
-> > > 
-> > >  From my understanding, the problem is less about properties (we already
-> > > have them in the Device-Tree) but more about where are the binaries
-> > > located in memory as we don't know in advance.
-> > 
-> > Hi Julien,
-> Hi Luca,
-> 
-> > I think I used the wrong word there, I meant “keyword” instead of “property”
-> > because I was referring about the
-> > lack of keywords to describe a domu guest in the Xen EFI configuration file.
-> > 
-> > I agree with you that on systems with static allocation, the kernel and
-> > ramdisk binaries must be at certain locations
-> > that are out of control when we use the EFI boot services, the thing we can
-> > do is provide a keyword to specify the
-> > addresses and then use the CopyMem() function to relocate the kernel/ramdisk
-> > in the address we want.
-> 
-> I wasn't specifically referring to static allocation here, sorry if this
-> wasn't clear. I was pointing out that most of the information you create in
-> the xen.cfg is going to be similar to what we already provide in the
-> Device-Tree.
-> 
-> My main concern is everytime we add a new feature in Dom0less, a developer
-> would need to write code for the DT and UEFI. This will increase the code size
-> and maintenance.
-> 
-> The same can be said for the admin as if they want to switch from plain U-boot
-> to UEFI, they would also need to fully rewrite the bindings.
-> 
-> AFAICT, most of the information provided in the Device-Tree are usable even
-> when using UEFI. So I would prefer if we try to re-use what's existing. This
-> is what my proposal below was about.
-> 
-> > 
-> > > 
-> > > So I would like to propose something that build on top of the Device-Tree
-> > > work we did. Note this is early thoughts.
-> > > 
-> > > The problematic nodes in the DT are:
-> > > 
-> > >         module@0x4a000000 {
-> > >             compatible = "multiboot,kernel", "multiboot,module";
-> > >             reg = <0x0 0x4a000000 0xffffff>;
-> > >             bootargs = "console=ttyAMA0 init=/bin/sh";
-> > >         };
-> > > 
-> > >         module@0x4b000000 {
-> > >             compatible = "multiboot,ramdisk", "multiboot,module";
-> > >             reg = <0x0 0x4b000000 0xffffff>;
-> > >         };
-> > > 
-> > > In particular the property "reg" cannot be known in advance because the
-> > > UEFI stub will be responsible to load the binaries in memory.
-> > 
-> > Yes that’s true, the UEFI stub is using from the UEFI boot service the
-> > AllocatePages function that is giving back an address out of our control,
-> > then using another function the binary is read from the disk and copied at
-> > that address, finally the UEFI stub is writing the node in the device tree
-> > that
-> > will be used by Xen later.
-> 
-> I am not sure to follow. Are you saying the UEFI stub will create the dom0less
-> node in the DT based on the xen.cfg?
-> 
-> > 
-> > > 
-> > > What we could do is providing a list of binaries to load and associate a
-> > > key for each of them. Something like:
-> > > 
-> > > binary=<binary> <key>
-> > > binary=<binary2> <key2>
-> > > ....
-> > > 
-> > > We can then replace the property "reg" with a new property "uefi,key" that
-> > > will contain the name of the binary.
-> > > 
-> > > What do you think?
-> > 
-> > Here I’m lost, because I don’t understand what we are going to do with the
-> > name of the binary.
-> 
-> <binaryX> would be used by the UEFI stub to load the binary in memory. Each
-> binary will have a <keyX> which helps to refer them in the Device-Tree. To
-> give a concrete example, let say we have two dom0less domains:
->   - DomA: 2 vCPUs, 128MB
->   - DomB: 3 vCPUs, 512MB
-> 
-> DomA and DomB will be using the same kernel but a different ramdisk. xen.cfg,
-> would look like:
-> 
-> [global]
-> default=section1
-> 
-> [section1]
-> options=console=vga,com1 com1=57600 loglvl=all noreboot
-> kernel=vmlinuz-3.0.31-0.4-xen [domain 0 command line options]
-> ramdisk=initrd-3.0.31-0.4-xen
-> xsm=<filename>
-> dtb=devtree.dtb
-> binary=vmlinuz-guest domu-kernel
-> binary=ramdisk-domA.img domA-ramdisk
-> binary=ramdisk-domB.img domB-ramdisk
-> 
-> The chosen node in the DT would look like:
-> 
-> chosen {
->     domU1 {
->         compatible = "xen,domain";
->         #address-cells = <0x2>;
->         #size-cells = <0x1>;
->         memory = <0 0x8000000>;
->         cpus = <2>;
-> 
->         module@1 {
->             compatible = "multiboot,kernel", "multiboot,module";
->             uefi,binary = "domu-kernel";
->             bootargs = "console=ttyAMA0 init=/bin/sh";
->         };
-> 
->         module@2 {
->             compatible = "multiboot,ramdisk", "multiboot,module";
->             uefi,binary = "domA-ramdisk";
->         };
->     };
-> 
->     domU2 {
->         compatible = "xen,domain";
->         #address-cells = <0x3>;
->         #size-cells = <0x1>;
->         memory = <0 0x20000000>;
->         cpus = <3>;
-> 
->         module@1 {
->             compatible = "multiboot,kernel", "multiboot,module";
->             uefi,binary = "domu-kernel";
->             bootargs = "console=ttyAMA0 init=/bin/sh";
->         };
-> 
->         module@2 {
->             compatible = "multiboot,ramdisk", "multiboot,module";
->             uefi,binary = "domA-ramdisk";
->         };
->     };
-> };
-> 
-> With this approach, the change is quite minimal to move between an classic
-> U-boot boot and EFI boot.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-i386-xl-qemut-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
+ test-amd64-i386-xl-xsm        7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-qemuu-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-ws16-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-qemut-rhel6hvm-intel  7 xen-install      fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-examine       6 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-libvirt       7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-libvirt-xsm   7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-debianhvm-amd64  7 xen-install  fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-ws16-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-qemuu-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
+ test-amd64-i386-qemut-rhel6hvm-amd  7 xen-install        fail REGR. vs. 152332
+ test-amd64-i386-xl            7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-pair         10 xen-install/src_host     fail REGR. vs. 152332
+ test-amd64-i386-pair         11 xen-install/dst_host     fail REGR. vs. 152332
+ test-amd64-i386-xl-raw        7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-freebsd10-amd64  7 xen-install           fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-xl-pvshim     7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-freebsd10-i386  7 xen-install            fail REGR. vs. 152332
+ test-amd64-i386-xl-shadow     7 xen-install              fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-win7-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-ovmf-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemuu-win7-amd64  7 xen-install       fail REGR. vs. 152332
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm 7 xen-install fail REGR. vs. 152332
+ test-amd64-i386-libvirt-pair 10 xen-install/src_host     fail REGR. vs. 152332
+ test-amd64-i386-libvirt-pair 11 xen-install/dst_host     fail REGR. vs. 152332
+ test-amd64-coresched-i386-xl  7 xen-install              fail REGR. vs. 152332
+ test-arm64-arm64-xl-seattle   8 xen-boot                 fail REGR. vs. 152332
+ test-arm64-arm64-xl-thunderx 13 debian-fixup             fail REGR. vs. 152332
+ test-arm64-arm64-xl-credit1  14 guest-start              fail REGR. vs. 152332
+ test-arm64-arm64-libvirt-xsm 13 debian-fixup             fail REGR. vs. 152332
+ test-arm64-arm64-xl          13 debian-fixup             fail REGR. vs. 152332
+ test-arm64-arm64-xl-credit2  13 debian-fixup             fail REGR. vs. 152332
+ test-arm64-arm64-xl-xsm      13 debian-fixup             fail REGR. vs. 152332
+ test-arm64-arm64-examine      8 reboot                   fail REGR. vs. 152332
 
-Great idea! I think it is good to try to reuse Device Tree, and using it
-as configuration is well aligned with other projects too (e.g.  Zephyr).
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 152332
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 152332
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 152332
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 152332
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 152332
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 152332
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
 
+version targeted for testing:
+ linux                4b93c544e90e2b28326182d31ee008eb80e02074
+baseline version:
+ linux                deacdb3e3979979016fcd0ffd518c320a62ad166
 
-There are a few options for the bindings. These are some ideas.
+Last test of basis   152332  2020-07-31 19:41:23 Z  403 days
+Failing since        152366  2020-08-01 20:49:34 Z  402 days  700 attempts
+Testing same since   164865  2021-09-06 21:40:45 Z    1 days    3 attempts
 
-If we are just going to specify a filename and a reference with the
-"binary" key=value pair, then we could get rid of it entirely and just
-write the filename directly in device tree:
+------------------------------------------------------------
+7221 people touched revisions under test,
+not listing them all
 
-    domU1 {
-        compatible = "xen,domain";
-        #address-cells = <0x2>;
-        #size-cells = <0x1>;
-        memory = <0 0x8000000>;
-        cpus = <2>;
-
-        module@1 {
-            compatible = "multiboot,kernel", "multiboot,module";
-            uefi,binary = "vmlinuz-guest";
-            bootargs = "console=ttyAMA0 init=/bin/sh";
-        };
-    };
-
-Then we don't even need the binary key=value pair, and especially the
-device tree becomes "self contained" as in we don't need to resolve the
-reference to "binary=value ref" to understand it.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          fail    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-i386-xl                                           fail    
+ test-amd64-coresched-i386-xl                                 fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            fail    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-i386-xl-qemut-stubdom-debianhvm-amd64-xsm         fail    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemut-debianhvm-i386-xsm                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  fail    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 fail    
+ test-amd64-i386-libvirt-xsm                                  fail    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-i386-xl-xsm                                       fail    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-i386-qemut-rhel6hvm-amd                           fail    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           fail    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemut-debianhvm-amd64                     fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     fail    
+ test-amd64-i386-freebsd10-amd64                              fail    
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          fail    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-i386-xl-qemut-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemut-ws16-amd64                          fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  fail    
+ test-armhf-armhf-xl-credit1                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  fail    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         fail    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     fail    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-i386-examine                                      fail    
+ test-amd64-i386-freebsd10-i386                               fail    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-i386-qemut-rhel6hvm-intel                         fail    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         fail    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-i386-libvirt                                      fail    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         fail    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 fail    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-i386-xl-pvshim                                    fail    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-i386-xl-raw                                       fail    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-arm64-arm64-xl-seattle                                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              fail    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-amd64-i386-xl-shadow                                    fail    
+ test-arm64-arm64-xl-thunderx                                 fail    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
 
-(Also worth noting as inspiration the HyperLaunch binding that is using
-the "mb-index" property as index in the multiboot module chain. Not
-directly applicable, but interesting.)
---8323329-792418537-1631062279=:14059--
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 2221825 lines long.)
 
