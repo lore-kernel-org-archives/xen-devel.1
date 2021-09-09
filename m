@@ -2,46 +2,59 @@ Return-Path: <SRS0=yIgx=N7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-24.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+X-Spam-Status: No, score=-2.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01FD9C433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 13:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 182C7C433F5
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 14:26:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B01186124E
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 13:59:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B01186124E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id AC1A261131
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 14:26:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AC1A261131
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.183278.331356 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.183292.331377 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOKaV-0000ot-3I; Thu, 09 Sep 2021 13:59:35 +0000
+	id 1mOKzn-0005Ss-CL; Thu, 09 Sep 2021 14:25:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 183278.331356; Thu, 09 Sep 2021 13:59:35 +0000
+Received: by outflank-mailman (output) from mailman id 183292.331377; Thu, 09 Sep 2021 14:25:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOKaU-0000om-Vn; Thu, 09 Sep 2021 13:59:34 +0000
-Received: by outflank-mailman (input) for mailman id 183278;
- Thu, 09 Sep 2021 13:59:33 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mOKaT-0000og-OI
- for xen-devel@lists.xenproject.org; Thu, 09 Sep 2021 13:59:33 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mOKaQ-0007C6-11; Thu, 09 Sep 2021 13:59:30 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mOKaP-0003oh-QS; Thu, 09 Sep 2021 13:59:29 +0000
+	id 1mOKzn-0005Sl-9S; Thu, 09 Sep 2021 14:25:43 +0000
+Received: by outflank-mailman (input) for mailman id 183292;
+ Thu, 09 Sep 2021 14:25:42 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=s+U0=N7=epam.com=prvs=9886b5da0c=roman_skakun@srs-us1.protection.inumbo.net>)
+ id 1mOKzm-0005Sf-CE
+ for xen-devel@lists.xenproject.org; Thu, 09 Sep 2021 14:25:42 +0000
+Received: from mx0b-0039f301.pphosted.com (unknown [148.163.137.242])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cf24765e-1179-11ec-b1bc-12813bfff9fa;
+ Thu, 09 Sep 2021 14:25:40 +0000 (UTC)
+Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 189E3jUb022402; 
+ Thu, 9 Sep 2021 14:25:38 GMT
+Received: from eur05-am6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2107.outbound.protection.outlook.com [104.47.18.107])
+ by mx0b-0039f301.pphosted.com with ESMTP id 3aykpp064p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 09 Sep 2021 14:25:38 +0000
+Received: from AM7PR03MB6593.eurprd03.prod.outlook.com (2603:10a6:20b:1b4::10)
+ by AM6PR03MB5959.eurprd03.prod.outlook.com (2603:10a6:20b:e2::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.16; Thu, 9 Sep
+ 2021 14:25:29 +0000
+Received: from AM7PR03MB6593.eurprd03.prod.outlook.com
+ ([fe80::7863:ae83:98b2:59d6]) by AM7PR03MB6593.eurprd03.prod.outlook.com
+ ([fe80::7863:ae83:98b2:59d6%9]) with mapi id 15.20.4500.016; Thu, 9 Sep 2021
+ 14:25:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,256 +66,359 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=DISAgcwJ9G17JAtLAr0zj7opL0G1q7kbwPhmCq4fhPA=; b=1KcMhlmPt/UPDXlUEiA8EZocoa
-	LICM6sBrUOhsww+zsA84pVWqD5H/7SWjcqBLPgBlHxyeKocJTCC3h9TuNMMr1XbA9bVG9MrupS52h
-	JeNRdivHu9lX5bUsCyuam3oOP2BD06o5vgG4Z8wBK5bdCX3UeGOnuUa1/7fH6vFzfOT8=;
-Subject: Re: [PATCH v1 12/14] arm/libxl: Emulated PCI device tree node in
- libxl
-To: Rahul Singh <Rahul.Singh@arm.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>, Ian Jackson
- <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1629366665.git.rahul.singh@arm.com>
- <31e48fe4b219ebaf5f1d9f3f7ca9b433caadc5b2.1629366665.git.rahul.singh@arm.com>
- <c0ea2f05-bf0a-a8b0-a811-d899516c26ba@xen.org>
- <664B0578-B440-4229-8D6B-7B98857E75BF@arm.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <3e192581-4167-c9aa-2c32-ff0338e9b800@xen.org>
-Date: Thu, 9 Sep 2021 14:59:27 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.14.0
+X-Inumbo-ID: cf24765e-1179-11ec-b1bc-12813bfff9fa
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=m4GfDRmBZTUUX/ShchjpqnNtE/NY9eEmSUMhSLLmFVCXDW0KYtG6EtCLe4aytdgkNFJe22/GnDkfjuILn6/oBPrlJe+58PYyPiANXi9MLzEAux/cbkWCDOeni1tkHj/RW23qPCAp0wubbpwDy2mSSX8nbcnEieY94VP8OTPZrrON+DjOqOV4Jf0bnF1whdFCU1QQjbHKeIBBLpeVvY6LSTMs0j4CHDRUA6wboxCWKafqT6oeNsoB6LfS4fY60DfKAQ69UcvvQeYs4yM124TduZZCd8BRsZCKO1IYzjY5Hd+c3D768sQ27xcOUtqbg75628wD47hmixNY/nXIP46/2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=xM/+i8ftZh3y1yhrEYlxwAFDr8KH9cXmU7SVWDfOIHs=;
+ b=ZjUPboLOhNzmEf1pSUHBS5L/+05zbHj98DfnPjdo/i4Sb+yF0weSB2x+82s0ik1bX1v4bsRF3UwDhD0tf3BicYP/6NCHnOnWnGwqmXBbSLJ0a2CBtnNmmsA7y0EhV0obECO12SM9kbTLxNKlALBYDe5EwBno0G1fQESzL4O4q+xUekB3Dw1V8weT6i367so1dXg7x0kandaPyJRdr2LMfD331KMfO8S465aPepWt2TRJMt6oIFTRMbN7fGfJB6/0xBy+ng20BV0ct7SqdwFJzrOhTbAIKgJH6WrLGYeVz4KF939GJpnl6Tg39XoZkDtIuwOTg2j87chmI8yDIDBFCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xM/+i8ftZh3y1yhrEYlxwAFDr8KH9cXmU7SVWDfOIHs=;
+ b=Sdt66G1UeCaaE3m4iegWM6ArTz9pE1HJTxymg7gLnjcjsQxQHL7pmX5015bPSu/P9LsJ++FXX62UZD8UCQOpClQ0bcJC6eqXHW0+BuWjXzBqxL9/wW12pXqpMHAx1h68Fw8WKDpmvl3lyHzCRyWQPZ7s9js1pjQDq7iLJLBHL0f5Jn/cVm2bjlPZG04FX4kvJ/LrRZpCTciolviAo+RcMPWcZLIaCEmGxOzoKGlaHmL2cXn1tQZbJrxQjSZgQyE+9iD47O1pUKphcf+3lVqAzpbLqCHYQONq/esGifEFV4ZwxfFDjWvdMPf+0wtr35ApYXV3lyx1jPPLx9nWRdGh3Q==
+From: Roman Skakun <Roman_Skakun@epam.com>
+To: Julien Grall <julien@xen.org>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+        Bertrand Marquis <bertrand.marquis@arm.com>,
+        Andrii Anisov
+	<Andrii_Anisov@epam.com>,
+        Roman Skakun <rm.skakun@gmail.com>,
+        Oleksandr
+ Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+        Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: Re: Disable IOMMU in Dom0
+Thread-Topic: Disable IOMMU in Dom0
+Thread-Index: AQHXnnd7IVjUu+L6S0mPq9naNxJ1FauOJ3YAgADDGouAAA7qgIAMwIiG
+Date: Thu, 9 Sep 2021 14:25:29 +0000
+Message-ID: 
+ <AM7PR03MB6593E7F0C691F98E07B8141C85D59@AM7PR03MB6593.eurprd03.prod.outlook.com>
+References: 
+ <AM7PR03MB65936E5D0B25567D1B2FAECA85CC9@AM7PR03MB6593.eurprd03.prod.outlook.com>
+ <alpine.DEB.2.21.2108311444310.18862@sstabellini-ThinkPad-T480s>
+ <AM7PR03MB659358C0EBA9D71AEEF7A60885CD9@AM7PR03MB6593.eurprd03.prod.outlook.com>
+ <179e4b7f-38d9-991d-3f99-64a74559986d@xen.org>
+In-Reply-To: <179e4b7f-38d9-991d-3f99-64a74559986d@xen.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+suggested_attachment_session_id: 6f9836ef-1bd8-a00e-77c2-5b5617176f83
+authentication-results: xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: c48b36da-45f1-4dbf-0594-08d9739dacc1
+x-ms-traffictypediagnostic: AM6PR03MB5959:
+x-ms-exchange-transport-forked: True
+x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
+x-microsoft-antispam-prvs: 
+ <AM6PR03MB59594CD885E01F3CED5A585B85D59@AM6PR03MB5959.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ MXXnr1cilkOPE8wLHkxfjjNVa4tRfq037O3wzDqCl9bS3oSHFZ7KjbZ0lk/rYy+m4/WOnVuaBuqBFnvzgDhiFlqFylRLh/DqBmurpSoayZUz8xodbV2GYCbJEYR1klyuqsRwcDb1hEVZMddMvav2YE+yDnOLG3feZTzqz31vItWY6Y47MXG8vKme7gOD4eAUtC3pKiu9jhRyrgY6QboEr3hNUtEA/Dbn0TPC5/pG4JVzgrdnN5KjsIht0NSRO0b3aABIyQsa0WowKVDZd4vOzaPT3gWzWHMWIxRcfyr/2CHoK0F+e1zA5Uq2wYnIUG5DUfIgLKxgJ3M1H2Pa/maO8ouTcuhyKqT0ALrK63ZsqMXuhOpFB+2YwYgk81vPiaADGLTKdCzX0Km8z8fWoTjGGgjWv9wxj8BheLHurfDzNz/fQMqondPC1V9QMROIYGWT8sWnepFxd2C4RvbN3iltUwcoO+u4i9hIsWurpc8MnV0vMHesdyJSl7YRwPDw91b+HdFI44P+ylrps2R9VU86op9SO1gCMAiQ/A/L1Of6Zqz9ElpsPx7mzl3xSxEqrF/tW49HHsNmOdJfuTaDADxSIj7Yu2DPc2utpTV6p/0gpzClKjOeGsityiy3BZro6zW1XjuTI3cKvloBoScPJUW1o1NLlcyBeVT/VS6Umu90XaN96Oq1Gdh2UKNvmDL1tVO8+esgPGqqJs/wsYBriLhscHXfegI/n2UreNAGZa3M80xv+FBn3YzRzSElWtnDBOCpq4JauImCWy0e6czBMBIIcbh76dJVexJ1qirCO1y5GldVycdPee2Jdv3wZfNIfu2oJIaANAn9hg1q+3WraZxmGQ==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM7PR03MB6593.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(136003)(366004)(396003)(346002)(39850400004)(376002)(8676002)(2906002)(6916009)(76116006)(91956017)(26005)(19627405001)(6506007)(53546011)(54906003)(71200400001)(55236004)(9686003)(52536014)(66446008)(5660300002)(66556008)(66476007)(7696005)(316002)(64756008)(66946007)(83380400001)(4326008)(33656002)(55016002)(166002)(38100700002)(122000001)(38070700005)(18265965003)(478600001)(966005)(86362001)(8936002)(186003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?svjwp2paua5f8TtHscZRxfjoXKW2XOQtJCdO+nODgwf2L+4thqZwh15he0vr?=
+ =?us-ascii?Q?GFdDMi3ffuF8zP2IFDa/xIhWouz993AhgIjdExVLjN4+67klc8jbDYpDDWgJ?=
+ =?us-ascii?Q?nQAI45xsgyMqqTR0vB6Yzq4wiZf9DRUVucaR8bajhOdujJ6gUn2Fq09WiYGN?=
+ =?us-ascii?Q?nHdsGKLCOE3BiohCmSl8yLsREb2mEqwuCxmk4qKXOknk6F0IS24n5v8p780l?=
+ =?us-ascii?Q?AAWyJCiK+pStbVhxrklae1b85J9kXoWJ9FNptaufPeYjgMkAOD9OLOl5B+EY?=
+ =?us-ascii?Q?LqSE2ricOOPqu3ZYa+iiNoHVQKBmn5rVf5WDcRYBiYs6wijKc7VUePYOHoiM?=
+ =?us-ascii?Q?Y5oupko1ef8sYxgilDYd9EBCyV7ea5SEDNcBRE73kDjMoa3vPevIZf6t8GgZ?=
+ =?us-ascii?Q?wQMj6LB7xfTUNZSYOcNb/rQUcinZrIgzUZwEHHJCfoYlFecPXJhmZBC3yCAw?=
+ =?us-ascii?Q?vmQETfBJ0Z1zooIWDGCWp7p/n8XVWlHX9AeQ8WGgVaNMjLODZH1TMuRzhVZ0?=
+ =?us-ascii?Q?bHCB/Y9b9rqjO9mA0R0R5xdwi360hT7D7idal9yjlcd9G18IiFGuC6cBjNbw?=
+ =?us-ascii?Q?L2B0nHsd6o7521GggCA2WdIuSNJGPhmHcvWgkoSapj7ZVGrvLXVrBuVBnK1J?=
+ =?us-ascii?Q?+KB4r4rgrnygLzNq+d5H7t6Jf+Io65GPIxH/IEw9SlhqClv9oeqPpADVxuJQ?=
+ =?us-ascii?Q?rwQVDkDHOBhSBMilZPoR3psDdVC2jqoxHOGoxxcIUFOqfgNeFsWEaa5sTKpN?=
+ =?us-ascii?Q?WBtT+R8GvM2pys17veTIOASvXVeUnljU6c27MVCcpXO+67ZhC4mOanTuGihN?=
+ =?us-ascii?Q?/swqVsFiIbPQqkCcailxf90jkQo8rrIaHxJtGZHpF+WTZiinBFf1oNdUlf3/?=
+ =?us-ascii?Q?jdXJ1why4S5e922CIiJqiFyLxOB49XltNKOE8HoqzqFFzeRZM3kSz1zoJVyY?=
+ =?us-ascii?Q?JsCIAY7UWMtVp1s6dCZb0hs+npDxC96cLu0zJZAILD07tmNXsU/O/Zlw4M7n?=
+ =?us-ascii?Q?TczeKIajVFU1CJ6MBHiXv3mB+38WmgCGHsC2dwcBnOgjpMe+CnXRpBCq6h3G?=
+ =?us-ascii?Q?hz+spYy4WXL7UhuTLy/fC5xM1a0ukJflRz9n6B2jtTwLr86f+L8uDP6plLR4?=
+ =?us-ascii?Q?p73OfBa7ZCrfU95EfUqUXaLPd6+ukXYfxC8DCluhzhj1nFPrIbcO/gZJppBA?=
+ =?us-ascii?Q?CjblRrSWeJItZKRAfJjePleMUjk8uzhxVP0UqIMrTqx/lMKAQDJSfPuJ8EHs?=
+ =?us-ascii?Q?bFzvEdgj+W13zRM0exrrP+1yuhwcEjXjNAQhxbWGv9cCQi0QeOFACzt/d+nk?=
+ =?us-ascii?Q?xps=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_AM7PR03MB6593E7F0C691F98E07B8141C85D59AM7PR03MB6593eurp_"
 MIME-Version: 1.0
-In-Reply-To: <664B0578-B440-4229-8D6B-7B98857E75BF@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM7PR03MB6593.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c48b36da-45f1-4dbf-0594-08d9739dacc1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Sep 2021 14:25:29.4239
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: RRmEW+UpTEDAnDaBbT/Wo8IOE+zUnJtVj4qITsqX4FqwM/9DMCs1ka/swWMC8g05XMGi2HdQq2gmuJyvCzqGvQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR03MB5959
+X-Proofpoint-ORIG-GUID: BJZqtw0DytT34faNTsqi_o4Ai6Un9IWa
+X-Proofpoint-GUID: BJZqtw0DytT34faNTsqi_o4Ai6Un9IWa
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
+ definitions=2021-09-09_05,2021-09-09_01,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0
+ priorityscore=1501 bulkscore=0 mlxscore=0 clxscore=1011 phishscore=0
+ malwarescore=0 adultscore=0 mlxlogscore=569 suspectscore=0 impostorscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2109030001 definitions=main-2109090088
 
+--_000_AM7PR03MB6593E7F0C691F98E07B8141C85D59AM7PR03MB6593eurp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
+Hi Julien,
 
-On 20/08/2021 17:03, Rahul Singh wrote:
-> Hi Julien,
+Thanks for the clarification!
 
-Hi Rahul,
+I aim towards to prepare implementation for upstream to disable SWIOTLB for=
+ IOMMU-protected devices in Dom0.
+To provide this functionality need to add additional binding for each prote=
+cted device in device-tree.
+After this step, I will also prepare the patch to make ensure that ballooni=
+ng code prepares all allocations below 4GB.
 
->> On 19 Aug 2021, at 2:00 pm, Julien Grall <julien@xen.org> wrote:
->>
->> Hi Rahul,
->>
->> On 19/08/2021 13:02, Rahul Singh wrote:
->>> libxl will create an emulated PCI device tree node in the device tree to
->>> enable the guest OS to discover the virtual PCI during guest boot.
->>> Emulated PCI device tree node will only be created when there is any
->>> device assigned to guest.
->>> A new area has been reserved in the arm guest physical map at
->>> which the VPCI bus is declared in the device tree (reg and ranges
->>> parameters of the node).
->>> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
->>> ---
->>>   tools/libs/light/libxl_arm.c          | 109 ++++++++++++++++++++++++++
->>>   tools/libs/light/libxl_types.idl      |   1 +
->>>   tools/xl/xl_parse.c                   |   2 +
->>>   xen/include/public/arch-arm.h         |  11 +++
->>>   xen/include/public/device_tree_defs.h |   1 +
->>>   5 files changed, 124 insertions(+)
->>> diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
->>> index e3140a6e00..a091e97e76 100644
->>> --- a/tools/libs/light/libxl_arm.c
->>> +++ b/tools/libs/light/libxl_arm.c
->>> @@ -269,6 +269,58 @@ static int fdt_property_regs(libxl__gc *gc, void *fdt,
->>>       return fdt_property(fdt, "reg", regs, sizeof(regs));
->>>   }
->>>   +static int fdt_property_values(libxl__gc *gc, void *fdt,
->>> +        const char *name, unsigned num_cells, ...)
->>> +{
->>> +    uint32_t prop[num_cells];
->>> +    be32 *cells = &prop[0];
->>> +    int i;
->>> +    va_list ap;
->>> +    uint32_t arg;
->>> +
->>> +    va_start(ap, num_cells);
->>> +    for (i = 0 ; i < num_cells; i++) {
->>> +        arg = va_arg(ap, uint32_t);
->>> +        set_cell(&cells, 1, arg);
->>> +    }
->>> +    va_end(ap);
->>> +
->>> +    return fdt_property(fdt, name, prop, sizeof(prop));
->>> +}
->>> +
->>> +static int fdt_property_vpci_ranges(libxl__gc *gc, void *fdt,
->>> +                                    unsigned addr_cells,
->>> +                                    unsigned size_cells,
->>> +                                    unsigned num_regs, ...)
->>> +{
->>> +    uint32_t regs[num_regs*((addr_cells*2)+size_cells+1)];
->>> +    be32 *cells = &regs[0];
->>> +    int i;
->>> +    va_list ap;
->>> +    uint64_t arg;
->>> +
->>> +    va_start(ap, num_regs);
->>> +    for (i = 0 ; i < num_regs; i++) {
->>> +        /* Set the memory bit field */
->>> +        arg = va_arg(ap, uint64_t);
->>> +        set_cell(&cells, 1, arg);
->>> +
->>> +        /* Set the vpci bus address */
->>> +        arg = addr_cells ? va_arg(ap, uint64_t) : 0;
->>> +        set_cell(&cells, addr_cells , arg);
->>> +
->>> +        /* Set the cpu bus address where vpci address is mapped */
->>> +        set_cell(&cells, addr_cells, arg);
->>> +
->>> +        /* Set the vpci size requested */
->>> +        arg = size_cells ? va_arg(ap, uint64_t) : 0;
->>> +        set_cell(&cells, size_cells,arg);
->>> +    }
->>> +    va_end(ap);
->>> +
->>> +    return fdt_property(fdt, "ranges", regs, sizeof(regs));
->>> +}
->>> +
->>>   static int make_root_properties(libxl__gc *gc,
->>>                                   const libxl_version_info *vers,
->>>                                   void *fdt)
->>> @@ -668,6 +720,57 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
->>>       return 0;
->>>   }
->>>   +static int make_vpci_node(libxl__gc *gc, void *fdt,
->>> +        const struct arch_info *ainfo,
->>> +        struct xc_dom_image *dom)
->>> +{
->>> +    int res;
->>> +    const uint64_t vpci_ecam_base = GUEST_VPCI_ECAM_BASE;
->>> +    const uint64_t vpci_ecam_size = GUEST_VPCI_ECAM_SIZE;
->>> +    const char *name = GCSPRINTF("pcie@%"PRIx64, vpci_ecam_base);
->>> +
->>> +    res = fdt_begin_node(fdt, name);
->>> +    if (res) return res;
->>> +
->>> +    res = fdt_property_compat(gc, fdt, 1, "pci-host-ecam-generic");
->>> +    if (res) return res;
->>> +
->>> +    res = fdt_property_string(fdt, "device_type", "pci");
->>> +    if (res) return res;
->>> +
->>> +    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
->>> +            GUEST_ROOT_SIZE_CELLS, 1, vpci_ecam_base, vpci_ecam_size);
->>> +    if (res) return res;
->>> +
->>> +    res = fdt_property_values(gc, fdt, "bus-range", 2, 0,17);
->>
->> AFAICT, the "bus-range" is optional. Can you explain why we need it?
-> 
-> We need it to implement the function pci_ecam_map_bus().
+We are going to prepare this functionality only for device-tree based syste=
+m configurations.
+We don't have resources to support ACPI configuration.
 
-Ok. Then why next question is what does the 17 mean? Is it tie to how we
-implement the vPCI in Xen or the region we reserved?
+Would you be ok with upstreaming only device-tree configuration?
 
-[...]
+Cheers,
+Roman
+________________________________
+From: Julien Grall <julien@xen.org>
+Sent: Wednesday, September 1, 2021 1:22 PM
+To: Roman Skakun <Roman_Skakun@epam.com>; Stefano Stabellini <sstabellini@k=
+ernel.org>
+Cc: xen-devel@lists.xenproject.org <xen-devel@lists.xenproject.org>; Bertra=
+nd Marquis <bertrand.marquis@arm.com>; Andrii Anisov <Andrii_Anisov@epam.co=
+m>; Roman Skakun <rm.skakun@gmail.com>; Oleksandr Tyshchenko <Oleksandr_Tys=
+hchenko@epam.com>
+Subject: Re: Disable IOMMU in Dom0
 
->>
->>> +
->>>       if (b_info->type != LIBXL_DOMAIN_TYPE_PV)
->>>           return;
->>>   diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
->>> index 3f9fff653a..78b1ddf0b8 100644
->>> --- a/tools/libs/light/libxl_types.idl
->>> +++ b/tools/libs/light/libxl_types.idl
->>> @@ -644,6 +644,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
->>>         ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
->>>                                  ("vuart", libxl_vuart_type),
->>> +                               ("vpci", libxl_defbool),
->>
->> Any new addition in the structure should be accompanied with a LIBXL_HAVE_* in the libxl.h header.
-> 
-> OK.
->>
->>>                                 ])),
->>>       ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
->>>                                 ])),
->>> diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
->>> index 17dddb4cd5..ffafbeffb4 100644
->>> --- a/tools/xl/xl_parse.c
->>> +++ b/tools/xl/xl_parse.c
->>> @@ -1497,6 +1497,8 @@ void parse_config_data(const char *config_source,
->>>           }
->>>           if (d_config->num_pcidevs && c_info->type == LIBXL_DOMAIN_TYPE_PV)
->>>               libxl_defbool_set(&b_info->u.pv.e820_host, true);
->>> +        if (d_config->num_pcidevs)
->>> +            libxl_defbool_set(&b_info->arch_arm.vpci, true);
->>>       }
->>>         if (!xlu_cfg_get_list (config, "dtdev", &dtdevs, 0, 0)) {
->>> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
->>> index 0a9749e768..01d13e669e 100644
->>> --- a/xen/include/public/arch-arm.h
->>> +++ b/xen/include/public/arch-arm.h
->>> @@ -426,6 +426,17 @@ typedef uint64_t xen_callback_t;
->>>   #define GUEST_VPCI_ECAM_BASE    xen_mk_ullong(0x10000000)
->>>   #define GUEST_VPCI_ECAM_SIZE    xen_mk_ullong(0x10000000)
->>>   +/* PCI-PCIe memory space types */
->>> +#define GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM xen_mk_ullong(0x42000000)
->>> +#define GUEST_VPCI_ADDR_TYPE_MEM          xen_mk_ullong(0x02000000)
->>
->> What the size of those regions?
-> 
-> Non Prefetch Memory: Size 64 MB start at 512 MB
-> Prefetch Memory: Size 128 GB start at 36 GB
->>
->>> +
->>> +/* Guest PCI-PCIe memory space where config space and BAR will be available.*/
->>> +#define GUEST_VPCI_PREFETCH_MEM_ADDR  xen_mk_ullong(0x900000000)
->>> +#define GUEST_VPCI_MEM_ADDR           xen_mk_ullong(0x20000000)
->> So far the memory layout defines the address in ascending order. So please add that after GUEST_RAM_BANK_BASES_*.
-> 
-> Ok.
->>
->> However, if I am not mistaken that base address you provide will clash with RAM bank 1. It also seem to be pretty high which means that this will not work for 32-bit domain or on CPUs that don't allow offer large IPA bits.
-> 
-> Yes I also checked that now that it is having clash with RAM bank 1.
-> There is unused space is guest memory that we can use for Non Prefetch Memory as per below guest memory map.
-> https://gitlab.com/xen-project/fusa/fusa-docs/-/blob/master/high-level/guest-memory-layout-arm.rst
-> 
-> Proposed value:
-> Non Prefetch Memory: Size 64 MB start at 0x22001000
-> Prefetch Memory: Size 4 GB start at 4 GB.
+Hi Roman
 
-The base address looks fine to me. However, the sizes are much smaller 
-to what you initially suggested. Would you be able to clarify why the 
-smaller sizes are fine?
+On 01/09/2021 10:59, Roman Skakun wrote:
+>> If you have a setup  where Dom0 is not 1:1 mapped (which is not currentl=
+y
+>> possible with upstream  Xen but it is possible with cache coloring) and
+>> uses the IOMMU to make  device DMA work like regular DomUs, then passing
+>> XENFEAT_not_direct_mapped  to Linux would make it work. Without
+>> XENFEAT_not_direct_mapped,  Linux would try to use swiotlb-xen which has
+>> code that relies on  Linux being 1:1 mapped to work properly.
+>
+> I'm using 1:1 Dom0.
+> According to your patch series, xen-swiotlb fops will be applied for all
+> devices
+> because XENFEAT_direct_mapped is active, as shown here:
+> https://urldefense.com/v3/__https://elixir.bootlin.com/linux/v5.14/source=
+/arch/arm64/mm/dma-mapping.c*L56__;Iw!!GF_29dbcQIUBPA!i7I0DxCbP4ibLDwzRkeFk=
+gRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_Iv_mvn3O$ [elixir[.]bootlin[.]com]
+> <https://urldefense.com/v3/__https://elixir.bootlin.com/linux/v5.14/sourc=
+e/arch/arm64/mm/dma-mapping.c*L56__;Iw!!GF_29dbcQIUBPA!i7I0DxCbP4ibLDwzRkeF=
+kgRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_Iv_mvn3O$ [elixir[.]bootlin[.]com]>
+>
+> I agreed, that xen-swiotlb should work correctly, but in my case, I
+> retrieved MFN here:
+> https://urldefense.com/v3/__https://elixir.bootlin.com/linux/v5.14/source=
+/drivers/xen/swiotlb-xen.c*L366__;Iw!!GF_29dbcQIUBPA!i7I0DxCbP4ibLDwzRkeFkg=
+RQbKh-fVD9McLqabG1TzZs9smOVBeowPS_IgZgXPjC$ [elixir[.]bootlin[.]com]
+> <https://urldefense.com/v3/__https://elixir.bootlin.com/linux/v5.14/sourc=
+e/drivers/xen/swiotlb-xen.c*L366__;Iw!!GF_29dbcQIUBPA!i7I0DxCbP4ibLDwzRkeFk=
+gRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_IgZgXPjC$ [elixir[.]bootlin[.]com]>
+> which is greater than 32bit and xen-swiotlb tries to use bounce buffer
+> as expected.
+> It can lead to decrease a performance because I have a long buffer ~4MB.
+>
+> I thought, that we can disable swiotlb fops for devices which are
+> controlled by IOMMU.
 
-> 
->>
->> I think we need to start making the guest layout more dynamic. The VPCI memory space would have to go right after the end of the RAM allocated for a given guest.
->>
->>> +
->>> +#define GUEST_VPCI_PREFETCH_MEM_SIZE      xen_mk_ullong(0x2000000000)
->>> +#define GUEST_VPCI_MEM_SIZE               xen_mk_ullong(0x04000000)
->>
->> It would be better if the size for each region is defined right after each base.
-> OK.
-> 
->>
->> Also, how did you decide the size of each region?
-> 
-> I thought 64 MB will be sufficient. I think it should be based on number of devices we can assign to the guest.
+Yes you can disable swiotlb for devices which are controlled by the
+IOMMU. But this will not make your problem disappear, it simply hides
+until it bites you in a more subttle way.
 
-We don't have to get the size right now. What I am more interested is to 
-have a trace about how those values were decided (even if it just saying 
-random). This will help to make any decision if in the future we need to 
-resize (in particular downsize) the regions.
+ From what you wrote, you have a 32-bit DMA capable. So you always need
+to have an address below 4GB. For foreign mapping, there is no guarantee
+the Guest Physical Address will actually be below 4GB.
+
+Today, the ballooning code only ask Linux to steal *a* RAM page for
+mapping the foreign page. This may or may not be below 4GB depending on
+how you assigned the RAM to dom0 (IIRC you had some RAM above 4GB).
+
+But that's the current behavior. One of your work colleague is looking
+at avoid to steal RAM page to avoid exhausting the memory. So foreign
+mapping may end up to be a lot higher in memory.
+
+IOW, you will need to be able to bounce the DMA buffer for your device.
+If you want to avoid bouncing, the proper way would be to rework the
+ballonning code so pages are allocated below 4GB.
 
 Cheers,
 
--- 
+--
 Julien Grall
+
+--_000_AM7PR03MB6593E7F0C691F98E07B8141C85D59AM7PR03MB6593eurp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Calibri, Arial, Helvetica, sans-serif; font-size=
+: 12pt; color: rgb(0, 0, 0);">
+</div>
+<div style=3D"box-sizing:border-box;font-family:&quot;Segoe UI&quot;, syste=
+m-ui, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, sans-serif=
+;font-size:14px">
+<span style=3D"font-size:12pt"></span>Hi Julien,
+<div><br>
+</div>
+<div>Thanks for the clarification!</div>
+<div><br>
+</div>
+<div>I aim towards to prepare implementation for upstream to disable SWIOTL=
+B for IOMMU-protected devices in Dom0.</div>
+<div>To provide this functionality need to add additional binding for each =
+protected device in device-tree.</div>
+<div>After this step, I will also prepare the patch to make ensure that bal=
+looning code prepares all allocations below 4GB.</div>
+<div><br>
+We are going to prepare this functionality only for device-tree based syste=
+m configurations.</div>
+<div>We don't have resources to support ACPI configuration.</div>
+<div><br>
+</div>
+<div>Would you be ok with upstreaming only device-tree configuration?</div>
+<div><br>
+</div>
+<div>Cheers,</div>
+Roman
+<div style=3D"font-size:12pt"></div>
+</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Julien Grall &lt;juli=
+en@xen.org&gt;<br>
+<b>Sent:</b> Wednesday, September 1, 2021 1:22 PM<br>
+<b>To:</b> Roman Skakun &lt;Roman_Skakun@epam.com&gt;; Stefano Stabellini &=
+lt;sstabellini@kernel.org&gt;<br>
+<b>Cc:</b> xen-devel@lists.xenproject.org &lt;xen-devel@lists.xenproject.or=
+g&gt;; Bertrand Marquis &lt;bertrand.marquis@arm.com&gt;; Andrii Anisov &lt=
+;Andrii_Anisov@epam.com&gt;; Roman Skakun &lt;rm.skakun@gmail.com&gt;; Olek=
+sandr Tyshchenko &lt;Oleksandr_Tyshchenko@epam.com&gt;<br>
+<b>Subject:</b> Re: Disable IOMMU in Dom0</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
+">
+<div class=3D"PlainText">Hi Roman<br>
+<br>
+On 01/09/2021 10:59, Roman Skakun wrote:<br>
+&gt;&gt; If you have a setup&nbsp; where Dom0 is not 1:1 mapped (which is n=
+ot currently<br>
+&gt;&gt; possible with upstream&nbsp; Xen but it is possible with cache col=
+oring) and<br>
+&gt;&gt; uses the IOMMU to make&nbsp; device DMA work like regular DomUs, t=
+hen passing<br>
+&gt;&gt; XENFEAT_not_direct_mapped&nbsp; to Linux would make it work. Witho=
+ut<br>
+&gt;&gt; XENFEAT_not_direct_mapped,&nbsp; Linux would try to use swiotlb-xe=
+n which has<br>
+&gt;&gt; code that relies on&nbsp; Linux being 1:1 mapped to work properly.=
+<br>
+&gt; <br>
+&gt; I'm using 1:1 Dom0.<br>
+&gt; According to your patch series, xen-swiotlb fops will be applied for a=
+ll <br>
+&gt; devices<br>
+&gt; because XENFEAT_direct_mapped is active, as shown here:<br>
+&gt; <a href=3D"https://urldefense.com/v3/__https://elixir.bootlin.com/linu=
+x/v5.14/source/arch/arm64/mm/dma-mapping.c*L56__;Iw!!GF_29dbcQIUBPA!i7I0DxC=
+bP4ibLDwzRkeFkgRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_Iv_mvn3O$">
+https://urldefense.com/v3/__https://elixir.bootlin.com/linux/v5.14/source/a=
+rch/arm64/mm/dma-mapping.c*L56__;Iw!!GF_29dbcQIUBPA!i7I0DxCbP4ibLDwzRkeFkgR=
+QbKh-fVD9McLqabG1TzZs9smOVBeowPS_Iv_mvn3O$</a> [elixir[.]bootlin[.]com]
+<br>
+&gt; &lt;<a href=3D""></a>https://urldefense.com/v3/__https://elixir.bootli=
+n.com/linux/v5.14/source/arch/arm64/mm/dma-mapping.c*L56__;Iw!!GF_29dbcQIUB=
+PA!i7I0DxCbP4ibLDwzRkeFkgRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_Iv_mvn3O$ [elixi=
+r[.]bootlin[.]com]&gt;<br>
+&gt; <br>
+&gt; I agreed, that xen-swiotlb should work correctly, but in my case, I <b=
+r>
+&gt; retrieved MFN here:<br>
+&gt; <a href=3D"https://urldefense.com/v3/__https://elixir.bootlin.com/linu=
+x/v5.14/source/drivers/xen/swiotlb-xen.c*L366__;Iw!!GF_29dbcQIUBPA!i7I0DxCb=
+P4ibLDwzRkeFkgRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_IgZgXPjC$">
+https://urldefense.com/v3/__https://elixir.bootlin.com/linux/v5.14/source/d=
+rivers/xen/swiotlb-xen.c*L366__;Iw!!GF_29dbcQIUBPA!i7I0DxCbP4ibLDwzRkeFkgRQ=
+bKh-fVD9McLqabG1TzZs9smOVBeowPS_IgZgXPjC$</a> [elixir[.]bootlin[.]com]
+<br>
+&gt; &lt;<a href=3D""></a>https://urldefense.com/v3/__https://elixir.bootli=
+n.com/linux/v5.14/source/drivers/xen/swiotlb-xen.c*L366__;Iw!!GF_29dbcQIUBP=
+A!i7I0DxCbP4ibLDwzRkeFkgRQbKh-fVD9McLqabG1TzZs9smOVBeowPS_IgZgXPjC$ [elixir=
+[.]bootlin[.]com]&gt;<br>
+&gt; which is greater than 32bit and xen-swiotlb tries to use bounce buffer=
+ <br>
+&gt; as expected.<br>
+&gt; It can lead to decrease a performance because I have a long buffer ~4M=
+B.<br>
+&gt; <br>
+&gt; I thought, that we can disable swiotlb fops for devices which are <br>
+&gt; controlled by IOMMU.<br>
+<br>
+Yes you can disable swiotlb for devices which are controlled by the <br>
+IOMMU. But this will not make your problem disappear, it simply hides <br>
+until it bites you in a more subttle way.<br>
+<br>
+&nbsp;From what you wrote, you have a 32-bit DMA capable. So you always nee=
+d <br>
+to have an address below 4GB. For foreign mapping, there is no guarantee <b=
+r>
+the Guest Physical Address will actually be below 4GB.<br>
+<br>
+Today, the ballooning code only ask Linux to steal *a* RAM page for <br>
+mapping the foreign page. This may or may not be below 4GB depending on <br=
+>
+how you assigned the RAM to dom0 (IIRC you had some RAM above 4GB).<br>
+<br>
+But that's the current behavior. One of your work colleague is looking <br>
+at avoid to steal RAM page to avoid exhausting the memory. So foreign <br>
+mapping may end up to be a lot higher in memory.<br>
+<br>
+IOW, you will need to be able to bounce the DMA buffer for your device. <br=
+>
+If you want to avoid bouncing, the proper way would be to rework the <br>
+ballonning code so pages are allocated below 4GB.<br>
+<br>
+Cheers,<br>
+<br>
+-- <br>
+Julien Grall<br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_AM7PR03MB6593E7F0C691F98E07B8141C85D59AM7PR03MB6593eurp_--
 
