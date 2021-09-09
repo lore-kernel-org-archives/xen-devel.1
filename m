@@ -2,42 +2,42 @@ Return-Path: <SRS0=yIgx=N7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEED3C433F5
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 16:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 540DEC433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 16:35:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B4CE561051
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 16:35:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B4CE561051
+	by mail.kernel.org (Postfix) with ESMTPS id 1705961051
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 16:35:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1705961051
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.183371.331501 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.183373.331523 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mON0v-0000zb-Kp; Thu, 09 Sep 2021 16:35:01 +0000
+	id 1mON11-0001YY-7P; Thu, 09 Sep 2021 16:35:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 183371.331501; Thu, 09 Sep 2021 16:35:01 +0000
+Received: by outflank-mailman (output) from mailman id 183373.331523; Thu, 09 Sep 2021 16:35:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mON0v-0000zU-H8; Thu, 09 Sep 2021 16:35:01 +0000
-Received: by outflank-mailman (input) for mailman id 183371;
- Thu, 09 Sep 2021 16:35:00 +0000
+	id 1mON11-0001YR-3G; Thu, 09 Sep 2021 16:35:07 +0000
+Received: by outflank-mailman (input) for mailman id 183373;
+ Thu, 09 Sep 2021 16:35:05 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5xa6=N7=citrix.com=Kevin.Stefanov@srs-us1.protection.inumbo.net>)
- id 1mON0u-0000zH-H3
- for xen-devel@lists.xenproject.org; Thu, 09 Sep 2021 16:35:00 +0000
+ id 1mON0z-0000zH-AQ
+ for xen-devel@lists.xenproject.org; Thu, 09 Sep 2021 16:35:05 +0000
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id df86ced6-118b-11ec-b1cb-12813bfff9fa;
- Thu, 09 Sep 2021 16:34:59 +0000 (UTC)
+ id e0509478-118b-11ec-b1cb-12813bfff9fa;
+ Thu, 09 Sep 2021 16:35:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,66 +49,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: df86ced6-118b-11ec-b1cb-12813bfff9fa
+X-Inumbo-ID: e0509478-118b-11ec-b1cb-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1631205299;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=jxIDQkKsTXbVItmungXARfHQlLf5LNa97ZaMET1EAnQ=;
-  b=ZCrBLm8z12plVurr4U8G2n7uOJ3cMUOnEBwcaAr+h68gZRA5eQqexpxj
-   3nDkLnnlE4F8oEVf9/QLZGtKxxo+DjRCqXx7O/0bG2K7PWhQIwk8+AZS0
-   r98J6K6qYb6m+qYXyewrYY9jKwfDiWa2UkVB+PVK9L/AjvOIUrcYNgbB3
-   s=;
+  d=citrix.com; s=securemail; t=1631205300;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=05ujbDwCHYeB1etSWskRRxGCGEOzl35sXRnTpQwyYyQ=;
+  b=cH07yqkzdQwzzNUANa+GYhsu01sNhjU0VydsHYHzi3h2lMFlqvDI3k2A
+   nsuNzoVRf4fKZnqtzNDdDnxYWAx1t+6N5Mf2sKqTRRe+9N2f3z9j8UYL1
+   K+IHV4cXSM0N7e0nYff82ZksjU7gI1l2ULYxcAumk/Kxi3Qpub9PRsat+
+   8=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: WRHW/DJUzgC1I3mxF5Mnk71MyY7xV/GezfWw7jSVLQfqpPVLk98vwMu/+9UeTR66QByRZxFURa
- mcnGydFCkFtmgv/FmiyzxYU0GW/vxBr9SNODtNz3eqQnUeWqHBYNpqg++VJyT6cgjc/zcwc9a8
- FA/4WVMQWztCNxmRaAxaD8A3jTEYNfQY1XVhV5emTuu4NAkJ3IHkssikGBIZCAVQ8xB5kQfcqo
- VNzreqtZ8oHjLjWOuQN7hhuADOivkJtdTsSTs/QtlD0cvBqXRt1hM3Pkh9URbD1NVwQwF0c3uf
- RnylTMDmFGvX4f76lKUzoMod
+IronPort-SDR: XVrzfeg/RpgzLA8csCHC+Mc3NGz0xP5HCaQGB9gx1e3k6S9orcQfSFmA0+ddQ1jZv1hQpKl7Lt
+ TAx3JpmSlonEk2KEpz5CfKpHdOs22WSLO4F3HgPjwjfKG8+jNgACYVqVHP0zksNEuZc4kNvkJ7
+ c4rVsOFS01/8Y66KPMfohKkfFtx5CJHo2W2gn7WeNoG/4R+ERdHnRZfVY/+207j7R89HZ8W3Fj
+ gHReyXDEGgvC7jQjXf6rtm3IPMMNE87lh3IIPJy3/QqJcyyskQ6/aC8C/dYAjMA8HGUDye4z8A
+ tsQ4oQ/2Q3tv69Jp0U1HmxZS
 X-SBRS: 5.1
-X-MesageID: 51975736
+X-MesageID: 51975738
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-HdrOrdr: A9a23:7yYLK6NXAmB0ScBcTjejsMiBIKoaSvp037BK7S1MoNJuEvBw9v
- re+sjzsCWftN9/Yh4dcLy7VpVoBEmsl6KdgrNhWotKPjOW21dARbsKheffKn/bakjDH4Zmvp
- uIGJIObOEYY2IasS77ijPIbOrJwrO8gd6VbTG19QYdceloAZsQnzuQEmygYzRLrJEtP+tFKH
- KbjPA33waISDAsQemQIGIKZOTHr82jruObXfZXbyRXkzVnlFmTmcTHLyQ=
+IronPort-HdrOrdr: A9a23:GiRqhKzLr91ncqQjwy5MKrPw2r1zdoMgy1knxilNoHxuH/BwWf
+ rPoB17726TtN91YhsdcL+7V5VoLUmzyXcx2/hyAV7AZniAhILLFvAA0WKK+VSJdxEWtNQtsJ
+ uIG5IUNDSaNykfsS+V2miF+9ZL+qj5zEir792usUuEm2tRGtBdBwQSMHfqLqVvLjM2fKbQjP
+ Cnl7d6TzzLQwVuUu2LQkMrcsLkvNPxmJfvcXc9dmIaAFnnt0LS1FbieSLopCsjbw==
 X-IronPort-AV: E=Sophos;i="5.85,280,1624334400"; 
-   d="scan'208";a="51975736"
+   d="scan'208";a="51975738"
 From: Kevin Stefanov <kevin.stefanov@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Kevin Stefanov <kevin.stefanov@citrix.com>, Ian Jackson
-	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>
-Subject: [PATCH 0/3] Fix alignment of FACS in guests
-Date: Thu, 9 Sep 2021 17:34:38 +0100
-Message-ID: <20210909163441.44418-1-kevin.stefanov@citrix.com>
+CC: Kevin Stefanov <kevin.stefanov@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH 2/3] tools/libxl: Correctly aligned buffer for ACPI tables
+Date: Thu, 9 Sep 2021 17:34:40 +0100
+Message-ID: <20210909163441.44418-3-kevin.stefanov@citrix.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210909163441.44418-1-kevin.stefanov@citrix.com>
+References: <20210909163441.44418-1-kevin.stefanov@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-When booting Xen as a PVH guest, it currently complains:
+The pointer resulting from libxl__malloc() has no explicit alignment.
+As an implementation detail, it has 16-byte alignment.
 
-  (XEN) ACPI: SLEEP INFO: pm1x_cnt[1:b004,1:0], pm1x_evt[1:b000,1:0]
-  (XEN) ACPI: FACS is not 64-byte aligned: 0xfc001010
-  (XEN) ACPI: wakeup_vec[fc00101c], vec_size[20]
-  (XEN) ACPI: Local APIC address 0xfee00000
+When this buffer is used by libacpi aligning ACPI tables to greater
+than 16 does not work correctly.  This causes the FACS to not be
+64-byte aligned when the ACPI tables are copied into guest memory.
 
-This is caused by several bugs in the toolstack whilst writing ACPI
-tables.
+Align the ACPI tables buffer to a page, to match the alignment
+inside guest memory. The buffer is already one page too large,
+presumably intended for this purpose originally.
 
-Kevin Stefanov (3):
-  tools/libacpi: Use 64-byte alignment for FACS
-  tools/libxl: Correctly aligned buffer for ACPI tables
-  tools/libxl: Only allocate 64 bytes for RSDP
+Fixes: 14c0d328da2b ("libxl/acpi: Build ACPI tables for HVMlite guests")
+Signed-off-by: Kevin Stefanov <kevin.stefanov@citrix.com>
+---
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>
+CC: Wei Liu <wl@xen.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/libs/light/libxl_x86_acpi.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- tools/libacpi/build.c             | 2 +-
- tools/libs/light/libxl_x86_acpi.c | 3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
-
+diff --git a/tools/libs/light/libxl_x86_acpi.c b/tools/libs/light/libxl_x86_acpi.c
+index 3eca1c7a9f..0a82e7cacd 100644
+--- a/tools/libs/light/libxl_x86_acpi.c
++++ b/tools/libs/light/libxl_x86_acpi.c
+@@ -193,6 +193,7 @@ int libxl__dom_load_acpi(libxl__gc *gc,
+      * Set up allocator memory.
+      * Start next to acpi_info page to avoid fracturing e820.
+      */
++    acpi_pages = (void *)ROUNDUP((unsigned long)acpi_pages, libxl_ctxt.page_shift);
+     libxl_ctxt.alloc_base_paddr = ACPI_INFO_PHYSICAL_ADDRESS +
+         libxl_ctxt.page_size;
+     libxl_ctxt.alloc_base_vaddr = libxl_ctxt.alloc_currp =
 -- 
 2.25.1
 
