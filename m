@@ -7,38 +7,38 @@ X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AACBCC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 00:20:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFE72C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 00:21:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67E916023D
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 00:20:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 67E916023D
+	by mail.kernel.org (Postfix) with ESMTPS id A906360F6C
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 00:21:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A906360F6C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.183763.332077 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.183770.332088 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOUH3-0006Ye-Pi; Fri, 10 Sep 2021 00:20:09 +0000
+	id 1mOUIU-0007Pj-4c; Fri, 10 Sep 2021 00:21:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 183763.332077; Fri, 10 Sep 2021 00:20:09 +0000
+Received: by outflank-mailman (output) from mailman id 183770.332088; Fri, 10 Sep 2021 00:21:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOUH3-0006YX-Mg; Fri, 10 Sep 2021 00:20:09 +0000
-Received: by outflank-mailman (input) for mailman id 183763;
- Fri, 10 Sep 2021 00:20:09 +0000
+	id 1mOUIU-0007Pc-1c; Fri, 10 Sep 2021 00:21:38 +0000
+Received: by outflank-mailman (input) for mailman id 183770;
+ Fri, 10 Sep 2021 00:21:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1So/=OA=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1mOUH3-0006YR-06
- for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 00:20:09 +0000
+ id 1mOUIS-0007PU-L6
+ for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 00:21:36 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 84d9b3e1-c335-46fb-a16b-40da901459d2;
- Fri, 10 Sep 2021 00:20:08 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1C9E96023D;
- Fri, 10 Sep 2021 00:20:07 +0000 (UTC)
+ id a3b1c97d-a4c6-4169-b5f8-282d0232db61;
+ Fri, 10 Sep 2021 00:21:36 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id C4B52604DC;
+ Fri, 10 Sep 2021 00:21:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,29 +50,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 84d9b3e1-c335-46fb-a16b-40da901459d2
+X-Inumbo-ID: a3b1c97d-a4c6-4169-b5f8-282d0232db61
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1631233207;
+	s=k20201202; t=1631233295;
 	bh=L1NascCO+RqV2EXe7WgTVOgru+3jDwh0a4LVdwaZR/I=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=l05YtZEfvVFThD13KAlYDT9vch5IiHqQgo5ekDYHAAyZTJpeN2mX3amqS3vQM2dYL
-	 8/+dZf3v1Kppe5voLzSR5kjcnrlgfa5xJNUD7vhVHXlKs+bfZGInzFblBHKD7rMvXH
-	 HAIQmtbLQF0vZD6q/9u9onfMwSgc8NU/GR1G5LiBy6Sgz1JzYKqpZqdyfDmKN+fbyx
-	 luVvS0+vMQSLbK5yV9BOBQ15tNFu65LmkGAlrPTVlVDm4q1nlJdjQ9HK86Eum8Di0Y
-	 IYHIW/OXj32oRnCrvLz4SsmwWyRD7VCsKZh2apHqUI2q8XaJrN6G97CHBkklmwqGtk
-	 /d+f3cBDrjasw==
+	b=le8JpYTYX7fEO1b8fyXgaZSfOYm6pv+I74B3y145J2LTwFcvJQboMg4FdHCHlf8Sz
+	 JX9OL+DQspZpvs3RuwBiXaJmZZImio38QXGbzvmP2FiXGO+RiuhgKWiyrdqvZntCcp
+	 atXYYbcl7myrM22wfHZyFTMXm9P5BRuaPdheLtSAWydprnGMz++gdJ8iXQK+E82a97
+	 JRWspK+h4nPQz9ABH+QX5C86kkTwDqnCFtPF4YQHTqgeJb/utqMec3RUbAy3ruy38W
+	 WgrfdVVxOLUjzKubIS+3fCBt7+nVRfP32LR6h8HDHJCCVvP5cx3idVqgp4FP/wTGKV
+	 FKjN8jVTKd4Ig==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.13 76/88] xen: remove stray preempt_disable() from PV AP startup code
-Date: Thu,  9 Sep 2021 20:18:08 -0400
-Message-Id: <20210910001820.174272-76-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.10 49/53] xen: remove stray preempt_disable() from PV AP startup code
+Date: Thu,  9 Sep 2021 20:20:24 -0400
+Message-Id: <20210910002028.175174-49-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210910001820.174272-1-sashal@kernel.org>
-References: <20210910001820.174272-1-sashal@kernel.org>
+In-Reply-To: <20210910002028.175174-1-sashal@kernel.org>
+References: <20210910002028.175174-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
