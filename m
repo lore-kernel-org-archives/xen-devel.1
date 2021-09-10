@@ -2,56 +2,45 @@ Return-Path: <SRS0=iZSu=OA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0174C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 04:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A286C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 04:48:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4B0F96113A
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 04:45:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4B0F96113A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2C5F16113A
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 04:48:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2C5F16113A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.183932.332336 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.183834.332347 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOYP1-00066Z-Fp; Fri, 10 Sep 2021 04:44:39 +0000
+	id 1mOYSw-0006l0-Uf; Fri, 10 Sep 2021 04:48:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 183932.332336; Fri, 10 Sep 2021 04:44:39 +0000
+Received: by outflank-mailman (output) from mailman id 183834.332347; Fri, 10 Sep 2021 04:48:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOYP1-00066S-Bp; Fri, 10 Sep 2021 04:44:39 +0000
-Received: by outflank-mailman (input) for mailman id 183932;
- Fri, 10 Sep 2021 04:44:38 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mOYSw-0006kt-RK; Fri, 10 Sep 2021 04:48:42 +0000
+Received: by outflank-mailman (input) for mailman id 183834;
+ Fri, 10 Sep 2021 02:25:08 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dvCC=OA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mOYOz-00066M-Ul
- for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 04:44:37 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c494b8d3-6bb9-46d3-82e0-3b4fa6b2a295;
- Fri, 10 Sep 2021 04:44:36 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 08AED1FE3D;
- Fri, 10 Sep 2021 04:44:36 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D815013BB2;
- Fri, 10 Sep 2021 04:44:35 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id le9DM7PiOmE4eAAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 10 Sep 2021 04:44:35 +0000
+ (envelope-from <SRS0=T0+8=OA=iscas.ac.cn=vulab@srs-us1.protection.inumbo.net>)
+ id 1mOWE0-0007yA-65
+ for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 02:25:08 +0000
+Received: from cstnet.cn (unknown [159.226.251.23])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 4eaadc92-11de-11ec-b208-12813bfff9fa;
+ Fri, 10 Sep 2021 02:25:05 +0000 (UTC)
+Received: from localhost.localdomain (unknown [124.16.141.243])
+ by APP-03 (Coremail) with SMTP id rQCowADHz3v7wTphEPUJAA--.10149S2;
+ Fri, 10 Sep 2021 10:25:00 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,182 +52,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c494b8d3-6bb9-46d3-82e0-3b4fa6b2a295
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1631249076; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gDHnr6rSrqz9WZGMFBuEgXHRVpjqKevg2d5p7wUIXic=;
-	b=YrOoe8H1VnhcP7MWfmWDicjO2rcuT2iLS+i15YpPCJIxWpuJbw6fl5L8eetbd/Imsoe4eR
-	FMa0v1YAT5hpReF1roDHDG9mGtO6ddjdYFodxZt3R8/UffWbNazdrxMI76mEUK8Hk80VDP
-	9U2mUwsOu1UZgLgO8dOEJZLOuDOej9w=
-Subject: Re: [OSSTEST PATCH 4/4] mfi-common: Drop Linux dom0 i386 tests for
- newer Linux branches
-To: Ian Jackson <iwj@xenproject.org>, xen-devel@lists.xenproject.org
-References: <20210909164703.19426-1-iwj@xenproject.org>
- <20210909164703.19426-4-iwj@xenproject.org>
-From: Juergen Gross <jgross@suse.com>
-Message-ID: <32619ebe-5967-4c1e-78ea-cc3e517d14ae@suse.com>
-Date: Fri, 10 Sep 2021 06:44:35 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
-MIME-Version: 1.0
-In-Reply-To: <20210909164703.19426-4-iwj@xenproject.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="NzGroIA1Re0ObjdRqVTG2qoqMbIDhaR84"
+X-Inumbo-ID: 4eaadc92-11de-11ec-b208-12813bfff9fa
+From: Xu Wang <vulab@iscas.ac.cn>
+To: konrad.wilk@oracle.com,
+	roger.pau@citrix.com,
+	axboe@kernel.dk,
+	xen-devel@lists.xenproject.org
+Cc: linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] xen-blkback: Remove needless request_queue NULL pointer check
+Date: Fri, 10 Sep 2021 02:24:57 +0000
+Message-Id: <20210910022457.22963-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+X-CM-TRANSID:rQCowADHz3v7wTphEPUJAA--.10149S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrZw43Kry8uw1rGFy7WryrtFb_yoWfJwb_Wr
+	1UZrsrXr1kurn0934DCFsay340ya48ZF1SkFn2q3ySq34UAF1av39Fvrn5Gw47X3yUKr90
+	kFyUGF17tr48AjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbc8YjsxI4VWDJwAYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I
+	6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM2
+	8CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0
+	cI8IcVCY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwV
+	C2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVAC
+	Y4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVW8Jr
+	0_Cr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY02Avz4vE14v_Gr1l
+	42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
+	WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAK
+	I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
+	4UMIIF0xvE42xK8VAvwI8IcIk0rVW3JVWrJr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAI
+	cVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxU7M5lUUUUU
+X-Originating-IP: [124.16.141.243]
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiCwgAA1z4kZv+wwAAsT
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---NzGroIA1Re0ObjdRqVTG2qoqMbIDhaR84
-Content-Type: multipart/mixed; boundary="Fs0diPdXcDv82H41xA5aU7wjavJVjJ47O";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Ian Jackson <iwj@xenproject.org>, xen-devel@lists.xenproject.org
-Message-ID: <32619ebe-5967-4c1e-78ea-cc3e517d14ae@suse.com>
-Subject: Re: [OSSTEST PATCH 4/4] mfi-common: Drop Linux dom0 i386 tests for
- newer Linux branches
-References: <20210909164703.19426-1-iwj@xenproject.org>
- <20210909164703.19426-4-iwj@xenproject.org>
-In-Reply-To: <20210909164703.19426-4-iwj@xenproject.org>
+The request_queue pointer returned from bdev_get_queue() shall
+never be NULL, so the null check is unnecessary, just remove it.
 
---Fs0diPdXcDv82H41xA5aU7wjavJVjJ47O
-Content-Type: multipart/mixed;
- boundary="------------687478118A328316FDA25142"
-Content-Language: en-US
+Signed-off-by: Xu Wang <vulab@iscas.ac.cn>
+---
+ drivers/block/xen-blkback/xenbus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This is a multi-part message in MIME format.
---------------687478118A328316FDA25142
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+diff --git a/drivers/block/xen-blkback/xenbus.c b/drivers/block/xen-blkback/xenbus.c
+index 33eba3df4dd9..f05132b9ddbf 100644
+--- a/drivers/block/xen-blkback/xenbus.c
++++ b/drivers/block/xen-blkback/xenbus.c
+@@ -516,7 +516,7 @@ static int xen_vbd_create(struct xen_blkif *blkif, blkif_vdev_t handle,
+ 		vbd->type |= VDISK_REMOVABLE;
+ 
+ 	q = bdev_get_queue(bdev);
+-	if (q && test_bit(QUEUE_FLAG_WC, &q->queue_flags))
++	if test_bit(QUEUE_FLAG_WC, &q->queue_flags)
+ 		vbd->flush_support = true;
+ 
+ 	if (q && blk_queue_secure_erase(q))
+-- 
+2.17.1
 
-On 09.09.21 18:47, Ian Jackson wrote:
-> This makes radical changes to the test ste for the linux-linus and
-> linux-next branches.
->=20
-> Mostly, tests are dropped but some 64-bit dom0 tests are added to
-> replace them.
->=20
-> Requested-by: Juergen Gross <jgross@suse.com>
-> Signed-off-by: Ian Jackson <iwj@xenproject.org>
-
-Thanks!
-
-Reviewed-by: Juergen Gross <jgross@suse.com>
-
-
-Juergen
-
---------------687478118A328316FDA25142
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: OpenPGP public key
-Content-Disposition: attachment;
- filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
-cWx
-w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
-f8Z
-d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
-9bf
-IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
-G7/
-377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
-3Jv
-c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
-QIe
-AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
-hpw
-dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
-MbD
-1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
-oPH
-Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
-5QL
-+qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
-2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
-QoL
-BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
-Wf0
-teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
-/nu
-AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
-ITT
-d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
-XBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
-80h
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
-AcD
-AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
-FOX
-gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
-jnD
-kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
-N51
-N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
-otu
-fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
-tqS
-EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
-hsD
-BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
-g3O
-ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
-dM7
-wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
-D+j
-LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
-V2x
-AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
-Eaw
-QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
-nHI
-s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
-wgn
-BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
-bVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
-pEd
-IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
-QAB
-wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
-Tbe
-8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
-vJz
-Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
-VGi
-wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
-svi
-uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
-zXs
-ZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------687478118A328316FDA25142--
-
---Fs0diPdXcDv82H41xA5aU7wjavJVjJ47O--
-
---NzGroIA1Re0ObjdRqVTG2qoqMbIDhaR84
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmE64rMFAwAAAAAACgkQsN6d1ii/Ey9x
-6gf+OuvV7ognuFHN0e2iMVFRk6D/oJKn8eYBdeX/1WQLMC2TX1ttpqnKwJHUhMVqGPadTPWfo9e9
-7hZQWchIqDCDUSwGRVS064pUCXly+IG1pJ5ZtSvExVN8tXua+3QYWaTt7xqupsyl3JcGlfSriF9R
-bkasW0kjRZvbewbasNxX9+U2ocRR8SsgMuprBKHcz6v+dOzmZ6n7HHbTVbAogIv8SAdy4A3eBBZk
-G7jleVLvjduDyGfzf9GlUTmaRTW43sTd1nCFL8NQIXGMKgDq4vZAKjhXyx6PyCYkSqgI+SuuSinY
-yQF5y581NgeLQNjGOfzM3HLnul89ppHCpcsmLQts7Q==
-=DaCC
------END PGP SIGNATURE-----
-
---NzGroIA1Re0ObjdRqVTG2qoqMbIDhaR84--
 
