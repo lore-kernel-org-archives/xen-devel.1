@@ -1,44 +1,45 @@
-Return-Path: <SRS0=yIgx=N7=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=iZSu=OA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CD8BC433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 23:48:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4E7FC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 00:18:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CD3B761101
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Sep 2021 23:48:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CD3B761101
+	by mail.kernel.org (Postfix) with ESMTPS id 722DC61101
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 00:18:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 722DC61101
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.183738.332049 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.183756.332066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOTmY-0000ar-RQ; Thu, 09 Sep 2021 23:48:38 +0000
+	id 1mOUEx-0005FK-DU; Fri, 10 Sep 2021 00:17:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 183738.332049; Thu, 09 Sep 2021 23:48:38 +0000
+Received: by outflank-mailman (output) from mailman id 183756.332066; Fri, 10 Sep 2021 00:17:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOTmY-0000ak-OQ; Thu, 09 Sep 2021 23:48:38 +0000
-Received: by outflank-mailman (input) for mailman id 183738;
- Thu, 09 Sep 2021 23:48:37 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ArGz=N7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mOTmX-0000ae-Fj
- for xen-devel@lists.xenproject.org; Thu, 09 Sep 2021 23:48:37 +0000
+	id 1mOUEx-0005FD-9n; Fri, 10 Sep 2021 00:17:59 +0000
+Received: by outflank-mailman (input) for mailman id 183756;
+ Fri, 10 Sep 2021 00:17:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=1So/=OA=kernel.org=sashal@srs-us1.protection.inumbo.net>)
+ id 1mOUEw-0005F7-Lv
+ for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 00:17:58 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9fc6ea4d-cb9c-4236-9527-01c4e7821c4d;
- Thu, 09 Sep 2021 23:48:36 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9ACED610E9;
- Thu,  9 Sep 2021 23:48:35 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8c60b5f0-11cc-11ec-b204-12813bfff9fa;
+ Fri, 10 Sep 2021 00:17:57 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D4099611BF;
+ Fri, 10 Sep 2021 00:17:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,88 +51,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9fc6ea4d-cb9c-4236-9527-01c4e7821c4d
+X-Inumbo-ID: 8c60b5f0-11cc-11ec-b204-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1631231316;
-	bh=MjL8P5PlE4SMfGNTO/XyrbFDqheeCO80UsiIherSWho=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=Wy5sH2NwjHmMGfDuQkVfv4Lec6vWtLvClUcXIrdgiDTpnFxe5ePS3Yyish+gRyCD1
-	 YXbOZuQakwrdYvUacOzl2ycjCirpHhGoj9Ra6cM4Zvv1FHIRLoby99aiaaNsFB/wqS
-	 +KSJz/pcNoLyto4KmQeXz0NA1WJqsw2+fm9Z24rXR+Wqs5m7n9xtquc3pcbo0pUC45
-	 HVOgCfPxJWDtxtpbiBiH4g1GPiEwn0QSyxjn9mtsMnVhfCMvHuK0WbRUOImyoo7fsF
-	 PvtEiCGynRuhT2bC0uI3sSzmz45rOollwOPw5vx08d9M3K0FdK6wfzeQjOxlCl5ztE
-	 26apMdpaJLD6w==
-Date: Thu, 9 Sep 2021 16:48:35 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Rahul Singh <rahul.singh@arm.com>
-cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
-    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v1 09/14] xen/arm: Add cmdline boot option "pci=on"
-In-Reply-To: <e279636ea47b7d06056c2f70e76900b8d0b30ee9.1629366665.git.rahul.singh@arm.com>
-Message-ID: <alpine.DEB.2.21.2109091646060.10523@sstabellini-ThinkPad-T480s>
-References: <cover.1629366665.git.rahul.singh@arm.com> <e279636ea47b7d06056c2f70e76900b8d0b30ee9.1629366665.git.rahul.singh@arm.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+	s=k20201202; t=1631233076;
+	bh=L1NascCO+RqV2EXe7WgTVOgru+3jDwh0a4LVdwaZR/I=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=arFFHtckENB/uaxPUEVv7ZUYqMWFts/MhT7jppWwPMHuIbxB74zrMtB87W0Ghq9ft
+	 ioBgf5/NtxpeX0JpCEJwCqr0B2oHqC8G+0qV1px9BWYrX9qjx+/uvO+5wA/1PKoEEt
+	 Jfy9T0Ur7fqA+1Z3lDyM49Hwi5epZNQDckSf7SzW1ofg2qfqzHw/Ts2V1TwXhkrHcN
+	 SkHx/4itK+7zPdE0VP2Qx/4Mu0tNhyef9H6LzL6+EfMiKrJe+VdtaHeUHbjxJdfi8f
+	 v1vjyiRG8+mijL7rP7ClsUnnapzz+yItaqq6zqAdZu0iWK37SWqkiLPl45BTwMHg4L
+	 ENRKxc5nK3AZQ==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Sasha Levin <sashal@kernel.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH AUTOSEL 5.14 85/99] xen: remove stray preempt_disable() from PV AP startup code
+Date: Thu,  9 Sep 2021 20:15:44 -0400
+Message-Id: <20210910001558.173296-85-sashal@kernel.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210910001558.173296-1-sashal@kernel.org>
+References: <20210910001558.173296-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 
-On Thu, 19 Aug 2021, Rahul Singh wrote:
-> Add cmdline boot option "pci=on" to enable/disable the PCI init during
-> boot.
-> 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> ---
->  xen/arch/arm/pci/pci.c | 30 ++++++++++++++++++++++++++++++
->  1 file changed, 30 insertions(+)
-> 
-> diff --git a/xen/arch/arm/pci/pci.c b/xen/arch/arm/pci/pci.c
-> index d1c9cf997d..dc63bbc2a2 100644
-> --- a/xen/arch/arm/pci/pci.c
-> +++ b/xen/arch/arm/pci/pci.c
-> @@ -62,8 +62,38 @@ static void __init acpi_pci_init(void)
->  static inline void __init acpi_pci_init(void) { }
->  #endif
->  
-> +static bool __initdata param_pci_enable;
-> +
-> +static int __init parse_pci_param(const char *arg)
-> +{
-> +    if ( !arg )
-> +    {
-> +        param_pci_enable = false;
-> +        return 0;
-> +    }
-> +
-> +    switch ( parse_bool(arg, NULL) )
-> +    {
-> +    case 0:
-> +        param_pci_enable = false;
-> +        return 0;
-> +    case 1:
-> +        param_pci_enable = true;
-> +        return 0;
-> +    }
-> +
-> +    return -EINVAL;
-> +}
-> +custom_param("pci", parse_pci_param);
+From: Juergen Gross <jgross@suse.com>
 
-Consider using boolean_param instead. It supports "on".
+[ Upstream commit 58e636039b512697554b579c2bb23774061877f5 ]
 
+In cpu_bringup() there is a call of preempt_disable() without a paired
+preempt_enable(). This is not needed as interrupts are off initially.
+Additionally this will result in early boot messages like:
 
->  static int __init pci_init(void)
->  {
-> +    /*
-> +     * Enable PCI when has been enabled explicitly (pci=on)
-> +     */
-> +    if ( !param_pci_enable)
-> +        return 0;
-> +
->      if ( acpi_disabled )
->          dt_pci_init();
->      else
-> -- 
-> 2.17.1
-> 
+BUG: scheduling while atomic: swapper/1/0/0x00000002
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Link: https://lore.kernel.org/r/20210825113158.11716-1-jgross@suse.com
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ arch/x86/xen/smp_pv.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/x86/xen/smp_pv.c b/arch/x86/xen/smp_pv.c
+index c2ac319f11a4..96afadf9878e 100644
+--- a/arch/x86/xen/smp_pv.c
++++ b/arch/x86/xen/smp_pv.c
+@@ -64,7 +64,6 @@ static void cpu_bringup(void)
+ 	cr4_init();
+ 	cpu_init();
+ 	touch_softlockup_watchdog();
+-	preempt_disable();
+ 
+ 	/* PVH runs in ring 0 and allows us to do native syscalls. Yay! */
+ 	if (!xen_feature(XENFEAT_supervisor_mode_kernel)) {
+-- 
+2.30.2
+
 
